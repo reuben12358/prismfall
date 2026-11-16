@@ -47,6 +47,7 @@ FieldEffects.register(:SNOWY_MOUNTAIN, (lambda do
         :message => "The deep snow soothed {1}'s burn!" }
     ],
     :weather       => { :extend => { :Hail => 3 } },
+    :weather_as    => [{ :moves => [:AURORAVEIL], :as => :Hail }],
     :transitions   => [
       { :weather => [:Sun, :HarshSun], :to => :MOUNTAIN, :message => "The sun melted the snow from the slopes!" },
       { :moves => [:HEATWAVE, :ERUPTION, :LAVAPLUME, :FIREPLEDGE, :BLASTBURN, :MAGMASTORM, :INFERNO,

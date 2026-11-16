@@ -56,7 +56,7 @@ FieldEffects.register(:CORROSIVE_MIRE, {
   :transitions   => [
     { :terrain => [:Misty], :to => :WATER_SURFACE,
       :message => "The fairy mist purified the mire into clear water!" },
-    { :moves => [:PURIFY], :to => :WATER_SURFACE, :uses => 2,
+    { :moves => [:PURIFY], :even_if_failed => true, :to => :WATER_SURFACE, :uses => 2,
       :progress_message => "The sludge grows clearer... ({1} more)",
       :message => "The mire was purified into clear water!" },
     { :types => [:FIRE], :category => :damaging, :to => :WASTELAND, :uses => 2,

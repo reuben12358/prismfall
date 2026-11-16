@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
-# Builds dist/Prismfall_DevKit.zip — an overlay you copy into an Essentials v21.1 project.
+# Builds dist/Prismfall_DevKit.zip — an overlay you copy into an Essentials v21.1 + EBDX project.
+# Layout mirrors a project root: Plugins/, PBS/, Data/ can be copied straight in (nothing overwrites stock files).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist/Prismfall_DevKit"
-rm -rf "$ROOT/dist" && mkdir -p "$OUT/Plugins" "$OUT/PBS" "$OUT/Design" "$OUT/Story" "$OUT/Docs" "$OUT/Tools"
+rm -rf "$ROOT/dist" && mkdir -p "$OUT"/{Plugins,PBS,Data,Design,Story,Docs,Tools/mapgen}
 
-# Plugins (folder names are the plugin names)
+# Plugins: ours + the generated maps runtime/installer plugin(s)
 cp -r "$ROOT/plugins/." "$OUT/Plugins/"
+[[ -d "$ROOT/maps_out/Plugins" ]] && cp -r "$ROOT/maps_out/Plugins/." "$OUT/Plugins/"
+find "$OUT/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 
-# PBS: shipped as suffixed files so stock PBS stays untouched (v21.1 merges PBS/<base>_<suffix>.txt)
+# PBS: suffixed files so stock PBS stays untouched (v21.1 merges PBS/<base>_<suffix>.txt)
 declare -A PBS_MAP=(
   [trainer_types.txt]=trainer_types_prismfall.txt
   [trainers.txt]=trainers_prismfall.txt
@@ -18,19 +21,31 @@ declare -A PBS_MAP=(
 for src in "${!PBS_MAP[@]}"; do
   [[ -f "$ROOT/pbs/$src" ]] && cp "$ROOT/pbs/$src" "$OUT/PBS/${PBS_MAP[$src]}"
 done
-# Any other PBS additions keep their names
 for f in "$ROOT"/pbs/*.txt; do
   b="$(basename "$f")"; [[ -n "${PBS_MAP[$b]:-}" ]] && continue; cp "$f" "$OUT/PBS/$b"
 done
+[[ -d "$ROOT/maps_out/PBS" ]] && cp "$ROOT"/maps_out/PBS/*.txt "$OUT/PBS/"
 
+# Data: generated maps + the MapInfos entry list (merged in-game; we never ship MapInfos.rxdata)
+cp "$ROOT"/maps_out/Data/Map*.rxdata "$OUT/Data/" 2>/dev/null || true
+[[ -f "$ROOT/maps_out/Data/mapinfos_prismfall.txt" ]] && cp "$ROOT/maps_out/Data/mapinfos_prismfall.txt" "$OUT/Data/"
+
+# Docs
 cp "$ROOT"/design/*.md "$OUT/Design/" 2>/dev/null || true
+cp "$ROOT"/design/*.json "$OUT/Design/" 2>/dev/null || true
 cp "$ROOT"/story/*.md  "$OUT/Story/"  2>/dev/null || true
 cp "$ROOT"/docs/*.md   "$OUT/Docs/"   2>/dev/null || true
-find "$ROOT/tools" -maxdepth 1 -type f ! -name package.sh -exec cp {} "$OUT/Tools/" \;
+mkdir -p "$OUT/Docs/map_previews" && cp "$ROOT"/maps_out/previews/*.png "$OUT/Docs/map_previews/" 2>/dev/null || true
 [[ -f "$ROOT/README.md" ]] && cp "$ROOT/README.md" "$OUT/README.md"
 
-# Strip editor/OS junk, then zip
-find "$OUT" -name '.DS_Store' -delete
+# Tools: validators + standalone map tooling (merge tool needs rmarshal.py + rpg.py beside it)
+find "$ROOT/tools" -maxdepth 1 -type f ! -name package.sh -exec cp {} "$OUT/Tools/" \;
+for f in merge_mapinfos.py rmarshal.py rpg.py build.py; do
+  [[ -f "$ROOT/mapgen/$f" ]] && cp "$ROOT/mapgen/$f" "$OUT/Tools/mapgen/"
+done
+[[ -d "$ROOT/mapgen/specs" ]] && cp -r "$ROOT/mapgen/specs" "$OUT/Tools/mapgen/"
+
+find "$OUT" \( -name '.DS_Store' -o -name '*.pyc' \) -delete
 (cd "$ROOT/dist" && zip -qr Prismfall_DevKit.zip Prismfall_DevKit)
 echo "Built $ROOT/dist/Prismfall_DevKit.zip"
 (cd "$ROOT/dist" && unzip -l Prismfall_DevKit.zip | tail -1)

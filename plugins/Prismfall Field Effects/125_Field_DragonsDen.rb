@@ -34,6 +34,7 @@ FieldEffects.register(:DRAGONS_DEN, {
     { :moves => [:DRAGONBREATH], :add => :FIRE, :message => "{1} breathed searing dragonfire!" }
   ],
   :accuracy_mods => [{ :moves => [:DRAGONRUSH], :mult => 1.25 }],
+  :fixed_damage_mods => [{ :moves => [:DRAGONRAGE], :set => 140, :message => "The ancient wyrms lent {1} their rage!" }],
   :on_entry      => [
     { :battlers => { :abilities => [:FLASHFIRE] }, :effects => [:flash_fire], :also_on_change => true },
     { :battlers => { :abilities => [:DRAGONSMAW] }, :stats => { :ATTACK => 1 },
@@ -60,6 +61,8 @@ FieldEffects.register(:DRAGONS_DEN, {
       :intro_message => "Wyrmfire surges through the lair! The den is awake!",
       :description   => "Awakened: Dragon x2, Fire x1.5, Ice halved; the scorching floor burns grounded non-Dragons.",
       :type_mods     => { :DRAGON => 2.0, :FIRE => 1.5, :ICE => 0.5 },
+      :fixed_damage_mods => [{ :moves => [:DRAGONRAGE], :set => 200,
+                               :message => "The awakened wyrms poured their fury into {1}!" }],
       :type_messages => { :DRAGON => "The awakened wyrms roared as one!",
                           :FIRE   => "Wyrmfire engulfed the attack!",
                           :ICE    => "The wyrmfire melted the ice away..." },

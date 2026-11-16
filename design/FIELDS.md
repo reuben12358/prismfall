@@ -78,7 +78,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 - On entry: Merciless / Corrosion / Poison Touch → +1 Attack.
 - End of turn: Poison types heal 1/16; grounded Steel types corrode for 1/16; other grounded non-Poison Pokémon have a 10% chance to be poisoned.
 - **Fire ignites the fumes**: every damaging Fire move causes an explosion hitting all non-Fire Pokémon for 1/8 HP.
-- ⟳ Misty Terrain, or Purify ×2 → **Water Surface** (purified). 2 damaging Fire moves → **Wasteland**.
+- ⟳ Misty Terrain, or Purify ×2 (counts even if it fails) → **Water Surface** (purified). 2 damaging Fire moves → **Wasteland**.
 - Synthetic Seed: poisons the holder but gives +1 Attack and +1 Sp. Atk (great with Guts, Poison Heal, Toxic Boost).
 - Nature Power: Acid Spray · Camouflage: Poison.
 
@@ -107,7 +107,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 ## Flower Garden — Gym 9 (Grass), Verdance (Elowen)
 *Tiny buds dot the garden beds.*
 The garden has **5 growth stages** (the arena's starting stage depends on the gym puzzle).
-- **Grows +1 stage**: Growth, Rototiller, Flower Shield, Ingrain, Water Sport, Aromatherapy, Floral Healing, Life Dew, Grass Pledge, Water Pledge; Sun or Rain starting; Grassy Terrain starting; every 2 damaging Grass moves.
+- **Grows +1 stage**: Growth, Rototiller, Flower Shield, Ingrain, Water Sport, Aromatherapy, Floral Healing, Life Dew, Grass Pledge, Water Pledge (these count even if they fail); Sun or Rain starting; Grassy Terrain starting; every 2 damaging Grass moves.
 - **Shrinks −1 stage**: any damaging Fire move (stages 1–4); non-Grass slicing moves (Slash, X-Scissor, Night Slash, Air Slash…); Hail starting.
 - ⟳ At stage 5, 2 damaging Fire moves burn it down → **Ashen Waste**.
 - Grassy Terrain lasts 3 turns longer at every stage.
@@ -131,8 +131,9 @@ The garden has **5 growth stages** (the arena's starting stage depends on the gy
 - ↑ Ice ×1.5. Skating: Rapid Spin, Rollout, Ice Ball ×1.5; Triple Axel, Ice Spinner, Spin Out ×1.3.
 - **Sliding**: grounded Pokémon using Quick Attack, Extreme Speed, Aqua Jet, Accelerock, Feint, Mach Punch, Bullet Punch, Jet Punch, First Impression or Shadow Sneak gain +1 Speed.
 - Icy Wind / Glaciate drop Speed one extra stage. Slush Rush ×1.5 Speed without hail; Ice Body heals 1/16 per turn without hail.
-- ✕ Dig (the ice is too thick). Hail lasts 3 turns longer. Grassy Terrain can't form.
+- ✕ Dig (the ice is too thick). Hail lasts 3 turns longer. Aurora Veil works without hail. Grassy Terrain can't form.
 - ⟳ **Cracking the ice**: 3 hits from any mix of damaging Fire moves, Earthquake, Magnitude, Bulldoze, Fissure, Stomping Tantrum, High Horsepower, Headlong Rush, Heavy Slam or Body Press → **Water Surface**. Sun starting → **Water Surface** (melted).
+- Damaging Ice moves refreeze the ice: each one undoes one crack.
 - Elemental Seed: +1 Defense, +1 Speed.
 - Nature Power: Ice Beam · Camouflage: Ice.
 
@@ -178,7 +179,7 @@ The garden has **5 growth stages** (the arena's starting stage depends on the gy
 - Will-O-Wisp has 100% accuracy. Ghost moves' own secondary effects are ×1.5 as likely. Scary Face also drops Attack.
 - On entry: Cursed Body / Perish Body / Wandering Spirit / Mummy → +1 Sp. Def.
 - End of turn: sleeping non-Ghost Pokémon lose 1/16 HP.
-- ⟳ 3 uses of Sacred Fire / Sacred Sword / Judgment / Purify / Heal Bell / Dazzling Gleam / Light of Ruin → **Consecrated** (below).
+- ⟳ 3 uses of Sacred Fire / Sacred Sword / Judgment / Purify / Heal Bell / Dazzling Gleam / Light of Ruin (they count even if they fail or miss) → **Consecrated** (below).
 - ⟳ Topsy-Turvy, or 2 uses of Boomburst / Shadow Force / Hyperspace Fury / Hyperspace Hole → **Inverse Field** (the glass shatters).
 - Magical Seed: +1 Sp. Def and the holder becomes part Ghost type.
 - Nature Power: Shadow Ball · Camouflage: Ghost.
@@ -231,6 +232,7 @@ The garden has **5 growth stages** (the arena's starting stage depends on the gy
 *Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.*
 - ↑ Dragon ×1.5, Fire ×1.3. ↓ Ice ×0.8.
 - ↑ Pay Day ×2 (the hoard); Make It Rain, Dragon Breath ×1.5; Bone Club, Bone Rush, Bonemerang, Shadow Bone, Lava Plume, Magma Storm ×1.3. Dragon Breath also hits as Fire.
+- Dragon Rage deals 140 HP (200 in Wyrmfire).
 - Dragon Rush ×1.25 accuracy.
 - On entry: Flash Fire activates; Dragon's Maw → +1 Attack.
 - End of turn: frozen Pokémon thaw. Hail can't form; Sun lasts 2 turns longer; Grassy Terrain burns away.
@@ -272,7 +274,7 @@ The garden has **5 growth stages** (the arena's starting stage depends on the gy
 - Ice-type Pokémon take less from physical attacks (×1.5 Defense, as in snow).
 - Blizzard never misses. Snow Cloak ×1.25 evasion and Slush Rush ×2 Speed without hail; Ice Body heals 1/16 each turn.
 - On entry: Wind Rider → +1 Attack; Wind Power → charged. End of turn: the deep snow cures grounded Pokémon's burns.
-- Hail lasts 3 turns longer.
+- Hail lasts 3 turns longer. Aurora Veil works without hail.
 - ⟳ Sun, or 2 uses of Heat Wave / Eruption / Lava Plume / Fire Pledge / Blast Burn / Magma Storm / Inferno / Overheat / Searing Shot / Blue Flare / Fusion Flare / Mind Blown → **Mountain**.
 - Telluric Seed: +1 Defense and Defense Curl (pair it with Ice Ball or Rollout).
 - Nature Power: Avalanche · Camouflage: Ice.
@@ -320,7 +322,7 @@ The garden has **5 growth stages** (the arena's starting stage depends on the gy
 - Hazards turn vicious: Stealth Rock also hits with an **Imprint shard** of a random type (1/16 HP, scaled by that type); Toxic Spikes also corrode grounded Pokémon for 1/16 HP (Poison-scaled). Heavy-Duty Boots protect.
 - **Acid rain:** while it rains, Pokémon that aren't Poison or Steel lose 1/16 HP each turn (Overcoat protects). Poisoned Poison Heal users heal 1/16 more.
 - Sandstorm lasts 3 turns longer.
-- ⟳ Grassy Terrain → **Flower Garden** (life returns). 2 uses of Purify → **no field**. (A burning Corrosive Mire becomes the Wasteland.)
+- ⟳ Grassy Terrain → **Flower Garden** (life returns). 2 uses of Purify (even if it fails) → **no field**. (A burning Corrosive Mire becomes the Wasteland.)
 - Telluric Seed: +1 Attack and +1 Sp. Atk, but badly poisons the holder (great on Poison types and Poison Heal).
 - Nature Power: Gunk Shot · Camouflage: Poison.
 

@@ -41,10 +41,11 @@ FieldEffects.register(:FROZEN_LAKE, {
       :heal => 1/16r, :message => "{1} drew strength from the ice." }
   ],
   :weather       => { :extend => { :Hail => 3 } },
+  :weather_as    => [{ :moves => [:AURORAVEIL], :as => :Hail }],
   :terrain       => { :block => [:Grassy], :block_message => "Nothing can take root on solid ice!" },
   :transitions   => [
     # One shared "crack meter": fire melts, quakes and heavy bodies split the ice
-    { :condition => proc { |battle, user, target, move, type|
+    { :id => :crack, :condition => proc { |battle, user, target, move, type|
         (type == :FIRE && move.damagingMove?) ||
           [:EARTHQUAKE, :MAGNITUDE, :BULLDOZE, :FISSURE, :STOMPINGTANTRUM, :HIGHHORSEPOWER,
            :HEAVYSLAM, :BODYPRESS, :HEADLONGRUSH].include?(move.id)
@@ -52,6 +53,9 @@ FieldEffects.register(:FROZEN_LAKE, {
       :to => :WATER_SURFACE, :uses => 3,
       :progress_message => "The lake ice groaned and cracked! ({1} more)",
       :message => "The ice gave way! The battle plunged into the freezing lake!" },
+    # Ice attacks refreeze the cracks (rewinds the crack meter by one)
+    { :types => [:ICE], :category => :damaging, :rewind => :crack,
+      :message => "The cold sealed the cracks in the ice!" },
     { :weather => [:Sun, :HarshSun], :to => :WATER_SURFACE,
       :message => "The sunlight melted the lake ice into open water!" }
   ],

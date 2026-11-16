@@ -13,7 +13,7 @@ FieldEffects.register(:FLOWER_GARDEN, (lambda do
       rules.push(
         { :moves => [:GROWTH, :ROTOTILLER, :FLOWERSHIELD, :INGRAIN, :WATERSPORT, :AROMATHERAPY,
                      :FLORALHEALING, :LIFEDEW, :GRASSPLEDGE, :WATERPLEDGE],
-          :stage_delta => 1, :message => grow_message },
+          :even_if_failed => true, :stage_delta => 1, :message => grow_message },
         { :weather => [:Sun, :HarshSun, :Rain, :HeavyRain], :stage_delta => 1, :message => grow_message },
         { :terrain => [:Grassy], :stage_delta => 1, :message => grow_message },
         { :types => [:GRASS], :category => :damaging, :uses => 2, :stage_delta => 1,

@@ -60,7 +60,7 @@ FieldEffects.register(:WASTELAND, (lambda do
     :transitions   => [
       { :terrain => [:Grassy], :to => :FLOWER_GARDEN,
         :message => "Life took root in the blighted soil! Buds push up through the slag!" },
-      { :moves => [:PURIFY], :to => :NONE, :uses => 2,
+      { :moves => [:PURIFY], :even_if_failed => true, :to => :NONE, :uses => 2,
         :progress_message => "The blight is lifting... ({1} more)",
         :message => "The blight lifted, and the land could breathe again." }
     ],

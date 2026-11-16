@@ -62,7 +62,7 @@ FieldEffects.register(:HOLLOW_CATHEDRAL, {
       :progress_message => "Cracks spider across the stained glass... ({1} more)",
       :message => "The mirrored glass shattered! The Kingdom Behind the Glass pours through!" },
     { :moves => [:SACREDFIRE, :SACREDSWORD, :JUDGMENT, :PURIFY, :HEALBELL, :DAZZLINGGLEAM, :LIGHTOFRUIN],
-      :stage => 2, :uses => 3,
+      :even_if_failed => true, :stage => 2, :uses => 3,
       :progress_message => "The cathedral bell stirs... ({1} more)",
       :message => "The bell tolled! Holy light fills the nave and the spirits fall silent." }
   ],
