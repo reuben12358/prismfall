@@ -50,7 +50,7 @@ events:
     pages:
       - graphic: {sprite: Object boulder}
         commands:
-          - if: "pf_choice(:CH2_TAMSIN)"
+          - if: "pf_choice(:ch2_tamsin)"
             then:
               - "You raise Granny Loom's shuttle. The crystal silk parts around it like water."
               - {selfswitch: [A, true]}

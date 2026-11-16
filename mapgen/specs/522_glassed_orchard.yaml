@@ -53,7 +53,7 @@ events:
               - ["Juno: ...Right. Right. Larch said never. I'll wait. Be careful!"]
               - - {script: "Prismfall.checkpoint(false)"}
                 - "You take Juno's hand and step through. Her fingers go cold. Then hard. Then they chime."
-                - {script: "Prismfall.game_over(:GO_BLEED_TIDE)"}
+                - {script: "Prismfall.game_over(:GO_ORCHARD)"}
           - {selfswitch: [A, true]}
       - cond: {self: A}
   - {<<: *veil, name: Bleed Veil 2, at: [5, 20]}

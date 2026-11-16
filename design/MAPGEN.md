@@ -71,16 +71,11 @@ The stock intro's controls tutorial is not reproduced.
   - Story IDs also used now: S111 CH4_K2_DONE, S112 CH4_TEO_MET, V114 KESTREL_STAGE (set to 1 after K2).
 - The base project's System.rxdata defines 100 switches and 100 variables. Raise the maximum in Database → System to see names for the higher IDs.
 
-**Keys the narrative spec must register / confirm** (used by events via `pf_choose` and `Prismfall.game_over`):
-- `:PRO_FELLOWSHIP` → :accept / :decline / :silent (with `pf_standing_add(:MERIDIAN, 1)` and $1000, or `pf_bond_add(:VOSS, 1)`)
-- `:CH2_TAMSIN` → :help_confess / :expose (MERIDIAN −1, ACCORD +1) / :keep_secret (MERIDIAN +1)
-- `:CH3_JUNO_TALK` → :told (JUNO +1) / :deflect / :silent
-- `:CH4_KESTREL_MOURNER` → :kind (KESTREL +1) / :blunt (KESTREL −1) / :silent
-- `:CH4_TEO` → :report (MERIDIAN +1) / :keep_secret (HOLLOW +1) / :confront. Marisol has no Bond ID in Core yet, so her
-  bond deltas aren't applied. Register `:MARISOL` if Narrative wants them.
-- Game overs: GO-01 "Homeward" uses `:GO_LAST_FERRY`, GO-02 "Two in the Orchard" uses `:GO_BLEED_TIDE` (Core's registered
-  IDs). GO-03 "Curtain Call" uses **`:GO_CURTAIN_CALL` (not registered yet; Core warns but still runs it)**. Rename both
-  sides together if Narrative picks other IDs.
+**Narrative keys** follow design/NARRATIVE_KEYS.md and use the canonical lowercase choice keys:
+`:pro_fellowship`, `:ch2_tamsin`, `:ch3_juno_talk`, `:ch4_kestrel_mourner`, `:ch4_teo`.
+- Events call only `pf_choose(key, value)`. Core's CHOICE_EFFECTS applies the bond and standing deltas, so maps make no
+  `pf_bond_add` / `pf_standing_add` calls. The Fellowship $1000 stipend is still given by the event.
+- Game overs: `:GO_HOMEWARD` (Edda), `:GO_ORCHARD` (Veil), `:GO_CURTAIN_CALL` (Thistledown).
 
 ## 2b. New tilesets (tileset-agnostic pipeline)
 - **Register a tileset:** `python3 -I mapgen/import_tileset.py mapgen/tilesets/<name>.yaml [--palette-skeleton]`. The

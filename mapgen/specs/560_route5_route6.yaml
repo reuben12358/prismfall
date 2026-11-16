@@ -140,9 +140,9 @@ events:
               - choices: ["(Kind) Do you think the Mourner is your mother?", "(Blunt) The Mourner sounds just like her, doesn't she?", "(Say nothing)"]
                 cancel: 0
                 branches:
-                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :kind)\npf_bond_add(:KESTREL, 1)"}, "Kestrel: Don't. Just - don't. ...Thanks for asking quiet, I guess."]
-                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :blunt)\npf_bond_add(:KESTREL, -1)"}, "He shoves past you without a word."]
-                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :silent)"}, "Kestrel: ...She'd never wear a mask. She hated masks."]
+                  - [{script: "pf_choose(:ch4_kestrel_mourner, :kind)"}, "Kestrel: Don't. Just - don't. ...Thanks for asking quiet, I guess."]
+                  - [{script: "pf_choose(:ch4_kestrel_mourner, :blunt)"}, "He shoves past you without a word."]
+                  - [{script: "pf_choose(:ch4_kestrel_mourner, :silent)"}, "Kestrel: ...She'd never wear a mask. She hated masks."]
               - {switch: [CH4_K2_DONE, true]}
               - {var: [KESTREL_STAGE, 1]}
               - {selfswitch: [A, true]}

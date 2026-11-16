@@ -1,6 +1,21 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
-## >>> REVISION 4 (user feedback, 2026-11-15 21:11) — supersedes everything below where they conflict <<<
+## >>> REVISION 5 (user feedback, 2026-11-15 21:21) — supersedes everything below where they conflict <<<
+1. **Festival opponents must be characters the player has met in the story.** Every Festival entrant who can be the player's
+   opponent (all draw pools and exhibitions) must have ≥2 meaningful prior story encounters and be introduced by Act IV at the latest.
+   No new characters introduced at the Festival "for plot reasons". The Rev-4 foreign entrants (Isaura, Drey, Mireille, Thorne)
+   are REMOVED unless the story team weaves one in as a genuine recurring character from early acts; their narrative functions
+   move to established characters. (Ruin-only figures must be met earlier on the Ruin Route.)
+2. **Art style: Gen 4 or Gen 5 (DPPt/HGSS/BW) only. No Gen 3 tiles or Gen 3 palette anywhere** (the stock Essentials FRLG/RSE
+   "Outside" look is banned). Maps must not use generic tree walls as filler: borders and backgrounds come from what the place IS
+   (cliffs, sea, city walls, rooftops, mountains, ruins, canals, forest canopy appropriate to the biome).
+3. **Authentic places at real scale.** A kingdom seat is a castle city (think King's Landing as a Pokémon game would draw it):
+   curtain walls and gatehouses, districts, a keep or palace on high ground, harbours, markets, cathedrals, slums, multi-screen
+   city maps and grand interiors (throne room, great hall, galleries), never a small house. Same for Zenith (towering tech city),
+   Nadir (vertical undercity), Ashkaar (volcanic dragon-citadel), Isenmar (frozen sea fortress-ports), Ossaria (desert/canyon
+   cities and tombs), Antumbra (mirror-world palace), Crownhaven (the Accord's capital and Festival arena).
+
+## >>> REVISION 4 (user feedback, 2026-11-15 21:11) — superseded by Revision 5 where they conflict <<<
 **Sister-game cameos are OUT of the Festival.** The Festival of Champions (bracket, exhibitions, draw pools) uses
 **original characters only**: Wardens, rivals, Valen and his successor candidates, faction figures (Mourner/Rowan, Meridian's
 champions, etc.), and new ORIGINAL foreign entrants if needed. The Reborn/Rejuvenation/Desolation cameos (Lin, Amaria, Shelly,

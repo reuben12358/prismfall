@@ -88,9 +88,9 @@ events:
               - choices: ["Report Teo to Meridian", "Keep Marisol's secret", "Confront her privately"]
                 cancel: 0
                 branches:
-                  - [{script: "pf_choose(:CH4_TEO, :report)\npf_standing_add(:MERIDIAN, 1)"}, "Marisol Reyes: ...Do what you have to."]
-                  - [{script: "pf_choose(:CH4_TEO, :keep_secret)\npf_standing_add(:HOLLOW, 1)"}, "Marisol Reyes: I owe you. I won't forget it."]
-                  - [{script: "pf_choose(:CH4_TEO, :confront)"}, "Marisol Reyes: He's my brother! He's - he's nineteen and furious and he's RIGHT about the river!"]
+                  - [{script: "pf_choose(:ch4_teo, :report)"}, "Marisol Reyes: ...Do what you have to."]
+                  - [{script: "pf_choose(:ch4_teo, :keep_secret)"}, "Marisol Reyes: I owe you. I won't forget it."]
+                  - [{script: "pf_choose(:ch4_teo, :confront)"}, "Marisol Reyes: He's my brother! He's - he's nineteen and furious and he's RIGHT about the river!"]
               - {switch: [CH4_TEO_MET, true]}
               - {selfswitch: [A, true]}
       - cond: {self: A}

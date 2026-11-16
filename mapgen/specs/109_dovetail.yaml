@@ -82,11 +82,11 @@ events:
           - choices: ["Accept the Fellowship", "Politely decline", "Say nothing"]
             cancel: 0
             branches:
-              - [{script: "pf_choose(:PRO_FELLOWSHIP, :accept)\npf_standing_add(:MERIDIAN, 1)\n$player.money += 1000"},
+              - [{script: "pf_choose(:pro_fellowship, :accept)\n$player.money += 1000"},
                  "Aurelian Voss: Good. Velmora needs people who say yes to things.", "You received a Fellowship stipend of $1000!"]
-              - [{script: "pf_choose(:PRO_FELLOWSHIP, :decline)\npf_bond_add(:VOSS, 1)"},
+              - [{script: "pf_choose(:pro_fellowship, :decline)"},
                  "Aurelian Voss: Independent. Good."]
-              - [{script: "pf_choose(:PRO_FELLOWSHIP, :silent)"},
+              - [{script: "pf_choose(:pro_fellowship, :silent)"},
                  "He smiles, and leaves the card on the rail anyway."]
           - "A long horn. The lights of Ferrow's Landing slide out of the fog."
           - {switch: [PRO_FERRY_DONE, true]}
