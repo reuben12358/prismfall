@@ -22,7 +22,21 @@ TILESET_NAMES = {'Outside': 1, 'Interior general': 3, 'Inside': 3, 'Poke Centre 
 FACING = {'down': 2, 'left': 4, 'right': 6, 'up': 8}
 
 
-FLAGS = yaml.safe_load(open(os.path.join(HERE, 'flags.yaml')))
+def load_flags():
+    """Story IDs from design/FLAGS.md (| S101 | NAME | ...), gym puzzle IDs from mapgen/flags.yaml."""
+    f = yaml.safe_load(open(os.path.join(HERE, 'flags.yaml')))
+    md = os.path.join(ROOT, 'design', 'FLAGS.md')
+    if os.path.exists(md):
+        for line in open(md, encoding='utf-8'):
+            m = re.match(r'\|\s*([SV])(\d+)\s*\|\s*([A-Z][A-Z0-9_]+)\s*\|', line)
+            if m:
+                kind = 'switches' if m.group(1) == 'S' else 'variables'
+                f[kind][m.group(3)] = int(m.group(2))
+    return f
+
+
+import re
+FLAGS = load_flags()
 
 
 def flag(v, kind):
@@ -254,7 +268,7 @@ def resolve_target(e, ctx, mid, door):
             m, x, y, d = ctx.exits[link]
             return {'map': m, 'x': x, 'y': y, 'dir': d}
     else:      # interior exit -> stand on the exterior door (door event animates the step out)
-        if link in ctx.doors:
+        if link in ctx.doors and ctx.doors[link][0] != mid:
             m, x, y = ctx.doors[link]
             return {'map': m, 'x': x, 'y': y, 'dir': 'retain'}
     ctx.warn(mid, 'unresolved link %r at %s (warp points to itself)' % (link, e.get('at')))
@@ -427,8 +441,11 @@ def main():
         for ev in m.events.values():
             for pg in ev.pages:
                 for c in pg.list:
-                    if c.code in (111, 355, 655) and 'TrainerBattle.start(' in str(c.parameters[-1]):
-                        need.add((s['id'], str(c.parameters[-1]).split('TrainerBattle.start(')[1].split(')')[0]))
+                    txt = str(c.parameters[-1]) if c.code in (111, 355, 655) else ''
+                    for key in ('TrainerBattle.start(', 'Prismfall.rival_battle(', 'Prismfall.gym_battle('):
+                        if key in txt:
+                            arg = txt.split(key)[1].rsplit(')', 1)[0]
+                            need.add((s['id'], arg if key == 'TrainerBattle.start(' else key + arg + ')'))
     with open(os.path.join(OUT, 'trainers_needed.txt'), 'w') as f:
         f.write('# map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)\n')
         for mid, a in sorted(need):

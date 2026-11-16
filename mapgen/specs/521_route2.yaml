@@ -45,13 +45,13 @@ events:
     pages:
       - graphic: {sprite: trainer_COOLTRAINER_M, dir: down}
         commands: ["Accord guard: Quarantine cordon. Nobody goes into the orchard - not since it turned to glass."]
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         through: true
   - type: event
     name: Accord guard (aside)
     at: [53, 7]
     pages:
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         graphic: {sprite: trainer_COOLTRAINER_M, dir: left}
         commands: ["Accord guard: The Professor vouched for you. Don't touch the Veil. Don't touch anything."]
   - {type: warp, name: To the Glassed Orchard, at: [52, 2], link: R2_ORCHARD, arrive: [52, 3, down]}

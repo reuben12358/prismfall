@@ -5743,6 +5743,529 @@ Pokemon = TSAREENA,86
     IV = 20
     EV = 0
 #===============================================================================
+# ROUTE & GYM TRAINERS (stock trainer types; map ids from maps_out/trainers_needed.txt)
+#===============================================================================
+# Map 520 Route 1
+#-------------------------------
+[YOUNGSTER,Pip]
+LoseText = Aw, my squad lost!
+Pokemon = LILLIPUP,4
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 8
+Pokemon = SKWOVET,5
+    Ability = CHEEKPOUCH
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Pip,100]
+LoseText = Aw, my squad lost!
+Pokemon = LILLIPUP,5
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 20
+Pokemon = SKWOVET,6
+    Ability = CHEEKPOUCH
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Pip,200]
+LoseText = Aw, my squad lost!
+Pokemon = LILLIPUP,3
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SKWOVET,4
+    Ability = CHEEKPOUCH
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 520 Route 1
+#-------------------------------
+[LASS,Wren]
+LoseText = My birdies! Oh, well done.
+Pokemon = PIKIPEK,4
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FLETCHLING,5
+    Ability = BIGPECKS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[LASS,Wren,100]
+LoseText = My birdies! Oh, well done.
+Pokemon = PIKIPEK,5
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FLETCHLING,6
+    Ability = BIGPECKS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[LASS,Wren,200]
+LoseText = My birdies! Oh, well done.
+Pokemon = PIKIPEK,3
+    Ability = KEENEYE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FLETCHLING,4
+    Ability = BIGPECKS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 521 Route 2
+#-------------------------------
+[BUGCATCHER,Dell]
+LoseText = My Metapod was supposed to evolve this time...
+Pokemon = CATERPIE,6
+    Ability = SHIELDDUST
+    Nature = HARDY
+    IV = 8
+Pokemon = METAPOD,7
+    Ability = SHEDSKIN
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Dell,100]
+LoseText = My Metapod was supposed to evolve this time...
+Pokemon = CATERPIE,7
+    Ability = SHIELDDUST
+    Nature = HARDY
+    IV = 20
+Pokemon = METAPOD,8
+    Ability = SHEDSKIN
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Dell,200]
+LoseText = My Metapod was supposed to evolve this time...
+Pokemon = CATERPIE,5
+    Ability = SHIELDDUST
+    Nature = HARDY
+    IV = 0
+    EV = 0
+Pokemon = METAPOD,6
+    Ability = SHEDSKIN
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 521 Route 2
+#-------------------------------
+[CAMPER,Joss]
+LoseText = Guess I'll go camp somewhere quieter.
+Pokemon = ZIGZAGOON,6
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 8
+Pokemon = SHINX,7
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CAMPER,Joss,100]
+LoseText = Guess I'll go camp somewhere quieter.
+Pokemon = ZIGZAGOON,7
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 20
+Pokemon = SHINX,8
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CAMPER,Joss,200]
+LoseText = Guess I'll go camp somewhere quieter.
+Pokemon = ZIGZAGOON,5
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SHINX,6
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 521 Route 2
+#-------------------------------
+[PICNICKER,Mae]
+LoseText = You can have a sandwich anyway!
+Pokemon = FIDOUGH,7
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 8
+Pokemon = SMOLIV,7
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PICNICKER,Mae,100]
+LoseText = You can have a sandwich anyway!
+Pokemon = FIDOUGH,8
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 20
+Pokemon = SMOLIV,8
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PICNICKER,Mae,200]
+LoseText = You can have a sandwich anyway!
+Pokemon = FIDOUGH,6
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = SMOLIV,6
+    Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 524 Gossamer Wood
+#-------------------------------
+[AROMALADY,Petra]
+LoseText = What a lovely, fierce scent you have.
+Pokemon = CUTIEFLY,8
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 8
+Pokemon = PETILIL,9
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 8
+Pokemon = BUDEW,9
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[AROMALADY,Petra,100]
+LoseText = What a lovely, fierce scent you have.
+Pokemon = CUTIEFLY,9
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 20
+Pokemon = PETILIL,10
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 20
+Pokemon = BUDEW,10
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[AROMALADY,Petra,200]
+LoseText = What a lovely, fierce scent you have.
+Pokemon = CUTIEFLY,7
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = PETILIL,8
+    Ability = OWNTEMPO
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BUDEW,8
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 524 Gossamer Wood
+#-------------------------------
+[BUGCATCHER,Reed]
+LoseText = The wood's full of better bugs than mine, huh.
+Pokemon = BLIPBUG,8
+    Ability = SWARM
+    Nature = MODEST
+    IV = 8
+Pokemon = GRUBBIN,9
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Reed,100]
+LoseText = The wood's full of better bugs than mine, huh.
+Pokemon = BLIPBUG,9
+    Ability = SWARM
+    Nature = MODEST
+    IV = 20
+Pokemon = GRUBBIN,10
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Reed,200]
+LoseText = The wood's full of better bugs than mine, huh.
+Pokemon = BLIPBUG,7
+    Ability = SWARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = GRUBBIN,8
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 524 Gossamer Wood
+#-------------------------------
+[BUGCATCHER,Tobin]
+LoseText = Careful in the webs past here!
+Pokemon = SPINARAK,9
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+Pokemon = VENONAT,10
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Tobin,100]
+LoseText = Careful in the webs past here!
+Pokemon = SPINARAK,10
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+Pokemon = VENONAT,11
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Tobin,200]
+LoseText = Careful in the webs past here!
+Pokemon = SPINARAK,8
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = VENONAT,9
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 524 Gossamer Wood
+#-------------------------------
+[CAMPER,Bram]
+LoseText = Lost to a tourist. Don't tell anyone.
+Pokemon = SEEDOT,8
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SHROOMISH,9
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SIZZLIPEDE,10
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[CAMPER,Bram,100]
+LoseText = Lost to a tourist. Don't tell anyone.
+Pokemon = SEEDOT,9
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SHROOMISH,10
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SIZZLIPEDE,11
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[CAMPER,Bram,200]
+LoseText = Lost to a tourist. Don't tell anyone.
+Pokemon = SEEDOT,7
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SHROOMISH,8
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SIZZLIPEDE,9
+    Ability = FLASHFIRE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 131 Loomhouse Gym - Weaving Hall
+#-------------------------------
+[BUGCATCHER,Milo]
+LoseText = Warden Tamsin's going to tie you in knots!
+Pokemon = SPEWPA,11
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 8
+Pokemon = KRICKETUNE,12
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Milo,100]
+LoseText = Warden Tamsin's going to tie you in knots!
+Pokemon = SPEWPA,12
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 20
+Pokemon = KRICKETUNE,13
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Milo,200]
+LoseText = Warden Tamsin's going to tie you in knots!
+Pokemon = SPEWPA,10
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = KRICKETUNE,11
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 131 Loomhouse Gym - Weaving Hall
+#-------------------------------
+[LASS,Fern]
+LoseText = Ah, you slipped right through my threads.
+Pokemon = CUTIEFLY,11
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 8
+Pokemon = SEWADDLE,12
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LASS,Fern,100]
+LoseText = Ah, you slipped right through my threads.
+Pokemon = CUTIEFLY,12
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 20
+Pokemon = SEWADDLE,13
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LASS,Fern,200]
+LoseText = Ah, you slipped right through my threads.
+Pokemon = CUTIEFLY,10
+    Ability = SHIELDDUST
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SEWADDLE,11
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 132 Loomhouse Gym - Canopy Lofts
+#-------------------------------
+[BUGCATCHER,Hollis]
+LoseText = My spiders never lose in the lofts... usually.
+Pokemon = TAROUNTULA,12
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SPINARAK,12
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Hollis,100]
+LoseText = My spiders never lose in the lofts... usually.
+Pokemon = TAROUNTULA,13
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SPINARAK,13
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Hollis,200]
+LoseText = My spiders never lose in the lofts... usually.
+Pokemon = TAROUNTULA,11
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SPINARAK,11
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 132 Loomhouse Gym - Canopy Lofts
+#-------------------------------
+[POKEMONRANGER_M,Ash]
+LoseText = You read the forest well. The Warden's above.
+Pokemon = DOTTLER,12
+    Ability = SWARM
+    Nature = MODEST
+    IV = 8
+Pokemon = BEAUTIFLY,13
+    Ability = SWARM
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_M,Ash,100]
+LoseText = You read the forest well. The Warden's above.
+Pokemon = DOTTLER,13
+    Ability = SWARM
+    Nature = MODEST
+    IV = 20
+Pokemon = BEAUTIFLY,14
+    Ability = SWARM
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_M,Ash,200]
+LoseText = You read the forest well. The Warden's above.
+Pokemon = DOTTLER,11
+    Ability = SWARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BEAUTIFLY,12
+    Ability = SWARM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 990 Prismfall Test Arena (dummy; overrides base [YOUNGSTER,Ben])
+#-------------------------------
+[YOUNGSTER,Ben]
+LoseText = Testing, testing... you win!
+Pokemon = SNORLAX,50
+    Moves = TACKLE,DEFENSECURL,REST,SNORE
+    Ability = THICKFAT
+    Nature = HARDY
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Ben,100]
+LoseText = Testing, testing... you win!
+Pokemon = SNORLAX,50
+    Moves = TACKLE,DEFENSECURL,REST,SNORE
+    Ability = THICKFAT
+    Nature = HARDY
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Ben,200]
+LoseText = Testing, testing... you win!
+Pokemon = SNORLAX,49
+    Moves = TACKLE,DEFENSECURL,REST,SNORE
+    Ability = THICKFAT
+    Nature = HARDY
+    IV = 0
+    EV = 0
+#===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================
 #-------------------------------

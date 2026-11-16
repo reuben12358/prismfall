@@ -5,7 +5,7 @@ import os
 import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-V_A, V_B, V_C = 305, 306, 307           # heddle variables (gym 1 block 305-309)
+V_A, V_B, V_C = 305, 306, 307           # = flags.yaml GYM1_A/B/C           # heddle variables (gym 1 block 305-309)
 S_ALPHA, S_BETA, S_GAMMA = 305, 306, 307  # cord switches for the Canopy Lofts
 FIELD_RULE = 'setBattleRule("field", :SILKWOOD)'
 
@@ -140,21 +140,21 @@ def main():
            'The badge settles into the case - and the case hums, faintly, as if something inside woke up.',
            {'script': 'pbReceiveItem(:TM89)'},
            'Tamsin: That\'s U-turn. Hit, then get out. ...I wish I were better at the second part.',
-           {'var': ['STORY', 9]}, {'selfswitch': ['A', True]}]
+           {'selfswitch': ['A', True]}]
     confess = [
         "Tamsin: Can I... tell you something? Not as a Warden. Just as me.",
         "Tamsin: Briarwick is bankrupt. I signed the Lattice contract. Alone. Nobody else knows.",
         "Tamsin: And the Glasswood grows fastest along the Lattice line. Thistle was right.",
         {'choices': ['Tell the village yourself', 'Tell them at the meeting', 'Keep it secret'], 'cancel': 0, 'branches': [
-            [{'script': 'pf_choose(:CH2_TAMSIN, :helped)'},
+            [{'script': 'pf_choose(:CH2_TAMSIN, :help_confess)'},
              "Tamsin: ...Myself. Yes. It should be me. Thank you for not making it easy."],
-            [{'script': 'pf_choose(:CH2_TAMSIN, :exposed)\npf_standing_add(:MERIDIAN, -1)\npf_standing_add(:ACCORD, 1)'},
+            [{'script': 'pf_choose(:CH2_TAMSIN, :expose)\npf_standing_add(:MERIDIAN, -1)\npf_standing_add(:ACCORD, 1)'},
              "Tamsin: You'd tell them? ...Then I suppose I can't hide behind the loom any more."],
-            [{'script': 'pf_choose(:CH2_TAMSIN, :kept)\npf_standing_add(:MERIDIAN, 1)'},
+            [{'script': 'pf_choose(:CH2_TAMSIN, :keep_secret)\npf_standing_add(:MERIDIAN, 1)'},
              "Tamsin: You'd keep it? I... thank you. I'll find a way to fix this. I will."]]},
         "Tamsin: The Glasswood's heart is Cocoonfall Hollow, west of here past Route 3. I can't cross a Veil. You can.",
         "Tamsin: Take Granny's shuttle. For luck.",
-        {'var': ['STORY', 10]}, {'selfswitch': ['B', True]}]
+        {'selfswitch': ['B', True]}]
     docs.append({'id': 133, 'name': 'Loomhouse Gym - The Spindle', 'parent': 130, 'template': 'arena',
                  'drop_template_events': ['Champion', 'Door', 'Entrance'], 'bgm': 'Gym', 'field': 'SILKWOOD',
                  'metadata': {'MapPosition': [0, 12, 22]},

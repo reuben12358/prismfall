@@ -36,8 +36,11 @@ events:
           - "A ship's horn sounds. You stand at the rail with one bag and your mother's letter."
           - "Captain Edda Morrow: Don't lean on my rail like that, sprog - you'll - huh."
           - "Captain Edda Morrow: ...Never mind. Mind the gap when we dock."
-          - {var: [STORY, 1]}
-      - cond: {var: [STORY, 1]}
+          - {switch: [LARCH_AT_TIDEWATCH, true]}
+          - {var: [STORY_ACT, 0]}
+          - {var: [STORY_CHAPTER, 0]}
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
   - {type: npc, name: Captain Edda, at: [10, 4], sprite: trainer_SAILOR, dir: down,
      text: "Captain Edda Morrow: Last crossing I'll ever make. Thirty years on this strait. Mind the rail, sprog."}
   - {type: npc, name: Deckhand, at: [6, 9], sprite: trainer_SAILOR, dir: right, move: random,
@@ -59,19 +62,19 @@ events:
           - choices: ["Accept the Fellowship", "Politely decline", "Say nothing"]
             cancel: 0
             branches:
-              - [{script: "pf_choose(:PRO_FELLOWSHIP, :accepted)\npf_standing_add(:MERIDIAN, 1)\n$player.money += 1000"},
+              - [{script: "pf_choose(:PRO_FELLOWSHIP, :accept)\npf_standing_add(:MERIDIAN, 1)\n$player.money += 1000"},
                  "Aurelian Voss: Good. Velmora needs people who say yes to things.", "You received a Fellowship stipend of $1000!"]
-              - [{script: "pf_choose(:PRO_FELLOWSHIP, :declined)\npf_bond_add(:VOSS, 1)"},
+              - [{script: "pf_choose(:PRO_FELLOWSHIP, :decline)\npf_bond_add(:VOSS, 1)"},
                  "Aurelian Voss: Independent. Good."]
               - [{script: "pf_choose(:PRO_FELLOWSHIP, :silent)"},
                  "He smiles, and leaves the card on the rail anyway."]
           - "A long horn. The lights of Ferrow's Landing slide out of the fog."
-          - {var: [STORY, 2]}
+          - {switch: [PRO_FERRY_DONE, true]}
           - {tone: [-255, -255, -255, 0, 20]}
           - {wait: 20}
           - {transfer: {map: 100, x: 19, y: 28, dir: up}}
           - {tone: [0, 0, 0, 0, 20]}
-      - cond: {var: [STORY, 2]}
+      - cond: {switch: PRO_FERRY_DONE}
   - {type: warp, name: Cabin hatch, at: [15, 7], link: DOVE_CABIN, arrive: [15, 8, down], se: Door exit}
 ---
 id: 110

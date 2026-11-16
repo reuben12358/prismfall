@@ -1142,9 +1142,6 @@ events:
       - The badge settles into the case - and the case hums, faintly, as if something inside woke up.
       - script: pbReceiveItem(:TM89)
       - 'Tamsin: That''s U-turn. Hit, then get out. ...I wish I were better at the second part.'
-      - var:
-        - STORY
-        - 9
       - selfswitch:
         - A
         - true
@@ -1163,23 +1160,20 @@ events:
       - Keep it secret
       cancel: 0
       branches:
-      - - script: pf_choose(:CH2_TAMSIN, :helped)
+      - - script: pf_choose(:CH2_TAMSIN, :help_confess)
         - 'Tamsin: ...Myself. Yes. It should be me. Thank you for not making it easy.'
-      - - script: 'pf_choose(:CH2_TAMSIN, :exposed)
+      - - script: 'pf_choose(:CH2_TAMSIN, :expose)
 
             pf_standing_add(:MERIDIAN, -1)
 
             pf_standing_add(:ACCORD, 1)'
         - 'Tamsin: You''d tell them? ...Then I suppose I can''t hide behind the loom any more.'
-      - - script: 'pf_choose(:CH2_TAMSIN, :kept)
+      - - script: 'pf_choose(:CH2_TAMSIN, :keep_secret)
 
             pf_standing_add(:MERIDIAN, 1)'
         - 'Tamsin: You''d keep it? I... thank you. I''ll find a way to fix this. I will.'
     - 'Tamsin: The Glasswood''s heart is Cocoonfall Hollow, west of here past Route 3. I can''t cross a Veil. You can.'
     - 'Tamsin: Take Granny''s shuttle. For luck.'
-    - var:
-      - STORY
-      - 10
     - selfswitch:
       - B
       - true

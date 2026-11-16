@@ -1,0 +1,119 @@
+# Gossamer Deepwood (map 525, :SILKWOOD): optional pond area behind the Cut tree (needs Badge 1).
+id: 525
+name: Gossamer Deepwood
+palette: outside
+bgm: Route 3
+parent: 524
+field: SILKWOOD
+metadata: {ShowArea: true, MapPosition: [0, 13, 23], BattleBack: forest}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT..TT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT..TT
+  TTTTTT,,,,........................TT
+  TTTTTT,,,,........................TT
+  TTTTTT,,,,......................TTTT
+  TTTTTT,,,,......................TTTT
+  TTTTTT,,,,TTTTTTTTTTTTTTTTTT....TTTT
+  TTTTTT,,,,TTTTTTTTTTTTTTTTTT....TTTT
+  TTTTTT,,,,,,,,..................TTTT
+  TTTTTT,,,,,,,,..................TTTT
+  TTTTTT....,,,,~~~~~~~~~~........TTTT
+  TTTTTT....,,,,~~~~~~~~~~........TTTT
+  TTTTTT........~~~~~~~~~~........TTTT
+  TTTTTT........~~~~~~~~~~........TTTT
+  ..............~~~~~~~~~~........TTTT
+  ..............~~~~~~~~~~........TTTT
+  ..............~~~~~~~~~~........TTTT
+  ..............~~~~~~~~~~........TTTT
+  TTTTTT..........................TTTT
+  TTTTTT..........................TTTT
+  TTTTTT..........................TTTT
+  TTTTTT..........................TTTT
+  TTTTTT....TTTTTTTTTTTTTT,,,,,,,,TTTT
+  TTTTTT....TTTTTTTTTTTTTT,,,,,,,,TTTT
+  TTTTTT....TTTTTTTTTTTTTT,,,,,,,,TTTT
+  TTTTTT....TTTTTTTTTTTTTT,,,,,,,,TTTT
+  TTTTTT..................,,,,,,,,TTTT
+  TTTTTT..................,,,,,,,,TTTT
+  TTTTTT..................,,,,,,,,TTTT
+  TTTTTT..................,,,,,,,,TTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+events:
+  - {type: warp, name: To Gossamer Wood, at: [0, 18], link: WOOD_DEEP, arrive: [1, 18, right]}
+  - {type: trainer, at: [20, 6], sight: 4, dir: left, sprite: trainer_BUGCATCHER, trainer: [BUGCATCHER, Linden],
+     intro: "Deepwood's my secret spot! How'd you get past the big tree?", after: "The pond glows at night. Don't tell anyone."}
+  - {type: trainer, at: [28, 30], sight: 4, dir: up, sprite: trainer_POKEMONRANGER_F, trainer: [POKEMONRANGER_F, Sorrel],
+     intro: "Rangers patrol here since the silk went strange. Let's see your team.", after: "Leave the webs as you found them, please."}
+  - {type: item, at: [33, 2], item: SILVERPOWDER}
+  - {type: item, at: [11, 30], item: GREATBALL}
+---
+# Cocoonfall Hollow (map 548, :BLEED): heart of the Glasswood; the Glass Matriarch boss. Story: 04_ACT_I.md Ch2.
+id: 548
+name: Cocoonfall Hollow
+palette: outside
+bgm: Route 3
+parent: 540
+field: BLEED
+metadata: {ShowArea: true, MapPosition: [0, 11, 22], BattleBack: forest}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TT....TTTTTTTTTTTTTTTTTTTT....TT
+  TT....TTTTTTTTTTTTTTTTTTTT....TT
+  TT............................TT
+  TT............................TT
+  TTTT..TT....********....TT..TTTT
+  TTTT..TT....********....TT..TTTT
+  TTTT........********........TTTT
+  TTTT........********........TTTT
+  TTTT..TT....********....TT..TTTT
+  TTTT..TT....********....TT..TTTT
+  TTTT........................TTTT
+  TTTT........................TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTT....,,,,,,,,,,,,,,,,....TTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+  TTTTTTTTTTTTTT....TTTTTTTTTTTTTT
+events:
+  - {type: warp, name: To Route 3, at: [16, 27], link: R3_COCOON, arrive: [16, 26, up]}
+  - type: event
+    name: Glass Matriarch
+    at: [16, 8]
+    pages:
+      - graphic: {sprite: Pokemon 05, dir: down}
+        commands:
+          - "At the Bleed's heart, a giant glassed Galvantula has woven a nest of crystal silk."
+          - "It turns toward you, every glass hair singing."
+          - script: |
+              setBattleRule("field", :BLEED)
+              setBattleRule("cannotRun")
+              if defined?(EliteBattle) && EliteBattle.respond_to?(:bossBattle)
+                EliteBattle.bossBattle(:GALVANTULA, 16, 1, false, { :bossboost => { :HP => 3.0, :DEFENSE => 1.2, :SPECIAL_DEFENSE => 1.2 } })
+              else
+                WildBattle.start(:GALVANTULA, 16)
+              end
+          - "The Matriarch folds its legs. The ringing of the nest softens - the glass creeping out from the Hollow stops, for now."
+          - "Around you, the nest's Pokémon fall quiet. Calm."
+          - {switch: [CH2_MATRIARCH_DONE, true]}
+          - {switch: [GLOAMING_DISGUISED_CELESTINE, true]}
+          - {var: [BRIARWICK_GLASSWOOD, 1]}
+          - {var: [STORY_CHAPTER, 3]}
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
+  - {type: npc, name: Cocooned house, at: [4, 3], sprite: "", text: "A cottage wrapped whole in crystal silk. Something inside is breathing slowly."}
+  - {type: item, at: [28, 2], item: TM81}

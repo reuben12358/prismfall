@@ -41,7 +41,7 @@ events:
     name: Bleed Veil
     at: [4, 20]
     pages:
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         trigger: touch
         commands:
           - "The air ahead shimmers like heat over glass. The Bleed Veil."
@@ -63,23 +63,24 @@ events:
     name: Juno
     at: [3, 22]
     pages:
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         graphic: {sprite: trainer_RIVAL2, dir: up}
         commands: ["Juno: I'll be right here. Right at the edge. Shout if anything glows at you."]
-      - cond: {var: [STORY, 6]}
+      - cond: {switch: CH1_ORCHARD_DONE}
         graphic: {sprite: trainer_RIVAL2, dir: up}
         commands: ["Juno: You walked through the Bleed like it was fog. Nobody does that. NOBODY."]
   - type: event
     name: Glassed Wurmple
     at: [16, 10]
     pages:
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         graphic: {sprite: Pokemon 03, dir: down}
         commands:
           - "A Wurmple swarm leader thrashes in the glass grass, its skin half-crystal, ringing like a bell."
           - "You step closer. It stops. It... calms."
           - "The glassy ringing fades to a hum, then to nothing."
-          - {story: 6}
+          - {switch: [CH1_ORCHARD_DONE, true]}
+          - {var: [STORY_CHAPTER, 2]}
           - {selfswitch: [A, true]}
       - cond: {self: A}
   - type: event
@@ -111,7 +112,7 @@ events:
     name: Professor Larch
     at: [7, 22]
     pages:
-      - cond: {var: [STORY, 6]}
+      - cond: {switch: CH1_ORCHARD_DONE}
         graphic: {sprite: trainer_PROFESSOR, dir: up}
         commands:
           - "Professor Larch writes something in her notebook. Very quietly:"

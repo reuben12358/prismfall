@@ -1,0 +1,168 @@
+# Route 3 (540) and Route 4 (541). Source: design/maps.json + story/04_ACT_I.md Chapter 3.
+# Deviation: maps.json pairs 540's WEST edge with 541's NORTH edge (not a legal Essentials pair); here Route 4's
+# north edge joins Route 3's SOUTH edge at x=2-9 (west of the river). Thistledown Manor (546) and Brinecut Mine (544)
+# are not built yet: their entrances are signs.
+id: 540
+name: Route 3
+palette: outside
+bgm: Route 3
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 11, 22], BattleBack: field}
+connections:
+  - {dir: E, offset: 10, to: 120, to_offset: 14}
+  - {dir: S, offset: 2, to: 541, to_offset: 2}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TT......TTTT....TTTT................TT......TT................TT
+  TT......TTTT....TTTT................TT......TT................TT
+  TT......TTTT....TTTT................TT......TT..........TT....TT
+  TT......TTTT....TTTT................TT......TT..........TT....TT
+  TT......TTTT....TTTT..**************....__..,,,,,,,,,,........TT
+  TT......TTTT____TTTT..**************....__..,,,,,,,,,,........TT
+  TT....,,,,,,____......**************....__..,,,,,,,,,,........TT
+  TT....,,,,,,____......**************....__..,,,,,,,,,,........TT
+  TT....,,,,,,____......**************....__..,,,,,,,,,,..........
+  ________________________________________________________________
+  ________________________________________________________________
+  TT..____,,,,,,,,..............__................TTTTTT..........
+  TT..____..........TTTT....TT..__....TTTT........TT..............
+  TT..____..........TTTT....TT..__....TTTT........TT..............
+  TT..____..........TTTT........__....TTTT........................
+  TT..____..........TTTT........__....TTTT......................TT
+  TT..____......................__..............................TT
+  TT..____......................__..............................TT
+  TT..____....~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TT..____....~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TT..____..~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TT..____..~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TT..____..~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TT..____..~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ....____..~~TTTTTTTTTTTTTTTT......TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  ....____..~~TTTTTTTTTTTTTTTT......TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+events:
+  - {type: warp, name: To Cocoonfall Hollow, at: [14, 3], link: R3_COCOON, arrive: [14, 4, down]}
+  - type: event
+    name: Crystal silk
+    at: [14, 5]
+    pages:
+      - graphic: {sprite: Object boulder}
+        commands:
+          - if: "pf_choice(:CH2_TAMSIN)"
+            then:
+              - "You raise Granny Loom's shuttle. The crystal silk parts around it like water."
+              - {selfswitch: [A, true]}
+            else: ["Crystal silk seals the copse. It rings faintly when you touch it. (The Warden might know a way through.)"]
+      - cond: {self: A}
+        through: true
+  - {type: sign, at: [40, 6], text: "THISTLEDOWN MANOR\nClosed until further notice. [TODO map 546]"}
+  - {type: sign, at: [51, 15], post: false, name: Mine mouth, text: "A rockfall seals the Brinecut Mine shaft. [TODO map 544]"}
+  - {type: sign, at: [58, 13], text: "ROUTE 3\nE: Briarwick - S: Route 4 to Saltmere"}
+  - {type: trainer, at: [18, 10], sight: 4, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Bryony],
+     intro: "Meadow picnic! Battle before the sandwiches, not after!", after: "The river's lovely from the bridge."}
+  - {type: trainer, at: [34, 18], sight: 4, dir: left, sprite: trainer_FISHERMAN, trainer: [FISHERMAN, Hale],
+     intro: "You scared the fish! Now you owe me a battle.", after: "Nothing bites since the Glasswood started glowing."}
+  - {type: trainer, at: [48, 10], sight: 4, dir: down, sprite: trainer_TWINS, trainer: [TWINS, Bel & Bea],
+     intro: "Twins: We battle together! Always together!", after: "Twins: Saltmere's south. They do plays there!"}
+  - {type: trainer, at: [58, 8], sight: 4, dir: down, sprite: trainer_YOUNGSTER, trainer: [YOUNGSTER, Corin],
+     intro: "Briarwick badge? Prove it!", after: "Tamsin's tough, huh? She's nicer than she looks."}
+  - {type: item, at: [60, 3], item: SUPERPOTION}
+  - {type: item, at: [2, 4], item: POKEBALL}
+  - {type: item, at: [31, 26], item: GREATBALL}
+  - {type: berry, at: [26, 4], berry: CHERIBERRY}
+---
+id: 541
+name: Route 4
+palette: outside
+bgm: Route 2
+parent: 0
+field: BEACH
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 11, 24], BattleBack: field}
+connections:
+  - {dir: S, offset: 12, to: 140, to_offset: 20}
+map: |
+  TT..____..TTTTTTTTTTTTTTTTTTTT
+  TT..____..TTTTTTTTTTTTTTTTTTTT
+  TT..____..................TTTT
+  TT..____..................TTTT
+  TT..____..................TTTT
+  TT..____..................TTTT
+  TT..____..................TTTT
+  TT..____..................TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..____..........,,,,,,,,TTTT
+  TT..________..............TTTT
+  TT..________..............TTTT
+  TT..________..............TTTT
+  TT..________..............TTTT
+  TT..~~~~~~==~~~~~~~~TTTT..TTTT
+  TT..~~~~~~==~~~~~~~~TTTT..TTTT
+  TT..~~~~~~==~~~~~~~~TTTT..TTTT
+  TT..~~~~~~==~~~~~~~~TTTT..TTTT
+  TT..~~~~~~==~~~~~~~~......TTTT
+  TT..~~~~~~==~~~~~~~~......TTTT
+  TT..~~~~~~==~~~~~~~~......TTTT
+  TT..~~~~~~==~~~~~~~~......TTTT
+  TT..~~~~~~==~~~~~~~~..TTTTTTTT
+  TT..~~~~~~==~~~~~~~~..TTTTTTTT
+  TT..~~~~~~==~~~~~~~~..TTTTTTTT
+  TT..~~~~~~==~~~~~~~~..TTTTTTTT
+  TT........__..............TTTT
+  TT........__..............TTTT
+  TT........__..TTTT........TTTT
+  TT........__..TTTT........TTTT
+  TT..,,,,,,__,,TTTT........TTTT
+  TT..,,,,,,__,,TTTT........TTTT
+  TT..,,,,,,__,,............TTTT
+  TT..,,,,,,__,,............TTTT
+  TT#####,,,__,,......TTTT..TTTT
+  TT#####,,,__,,......TTTT..TTTT
+  TT#####...__........TTTT..TTTT
+  TT#####...__........TTTT..TTTT
+  TT#####...________........TTTT
+  TT........________........TTTT
+  ______________________________
+  ______________________________
+  ~~~~~~~~~~~~______~~~~~~~~~~~~
+  ~~~~~~~~~~~~______~~~~~~~~~~~~
+  ~~~~~~~~~~~~______~~~~~~~~~~~~
+  ~~~~~~~~~~~~______~~~~~~~~~~~~
+stamps:
+  - {stamp: house_red, at: [2, 40], link: R4_REST, name: Rest house door}
+events:
+  - {type: sign, at: [25, 24], post: false, name: Chalk cliff, text: "A crack in the chalk cliff. Brinecut Mine's back door - rubble blocks it. [TODO map 544]"}
+  - {type: trainer, at: [11, 28], sight: 4, dir: up, sprite: trainer_SAILOR, trainer: [SAILOR, Morrow],
+     intro: "Boardwalk's narrow, landlubber! Battle or swim!", after: "Saltmere's just south. Mind the salt-pans."}
+  - {type: trainer, at: [20, 46], sight: 4, dir: left, sprite: trainer_TUBER_F, trainer: [TUBER_F, Pip],
+     intro: "The beach is mine today!", after: "The sea's warm here. Warmer than it should be?"}
+  - {type: trainer, at: [24, 22], sight: 4, dir: left, sprite: trainer_HIKER, trainer: [HIKER, Dunstan],
+     intro: "Chalk and salt, salt and chalk! Let's rumble!", after: "The mine's been shut since the rockfall."}
+  - {type: trainer, at: [8, 10], sight: 4, dir: left, sprite: trainer_CAMPER, trainer: [CAMPER, Ned],
+     intro: "Camping by the marsh! The mosquitoes are Pokémon here.", after: "Watch your step on the boardwalk."}
+  - {type: item, at: [24, 4], item: REPEL}
+  - {type: item, at: [2, 46], item: SEAINCENSE}
+---
+id: 542
+name: Marsh Rest House
+parent: 541
+template: house2
+exit_link: R4_REST
+drop_template_events: [Kurt]
+bgm: Route 2
+metadata: {MapPosition: [0, 11, 24]}
+events:
+  - name: Rest house keeper
+    type: npc
+    at: [7, 4]
+    sprite: NPC 28
+    commands:
+      - "Keeper: Long walk from Briarwick? Sit. Rest."
+      - {heal: true}
+      - {me: Pkmn healing}
+      - "Your Pokémon were fully restored."

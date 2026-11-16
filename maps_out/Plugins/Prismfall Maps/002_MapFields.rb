@@ -4,6 +4,14 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Gym - Weaving Hall
   FieldEffects::MAP_FIELDS[132] = :SILKWOOD   # Loomhouse Gym - Canopy Lofts
   FieldEffects::MAP_FIELDS[133] = :SILKWOOD   # Loomhouse Gym - The Spindle
+  FieldEffects::MAP_FIELDS[150] = :GRAND_STAGE   # Pell Playhouse - Foyer
+  FieldEffects::MAP_FIELDS[151] = :GRAND_STAGE   # Pell Playhouse - Revolving Stage
+  FieldEffects::MAP_FIELDS[152] = :GRAND_STAGE   # Pell Playhouse - Fly Loft
+  FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse - Dressing Rooms
+  FieldEffects::MAP_FIELDS[154] = :GRAND_STAGE   # Pell Playhouse - The Grand Stage
   FieldEffects::MAP_FIELDS[522] = :BLEED   # The Glassed Orchard
   FieldEffects::MAP_FIELDS[524] = :SILKWOOD   # Gossamer Wood
+  FieldEffects::MAP_FIELDS[525] = :SILKWOOD   # Gossamer Deepwood
+  FieldEffects::MAP_FIELDS[541] = :BEACH   # Route 4
+  FieldEffects::MAP_FIELDS[548] = :BLEED   # Cocoonfall Hollow
 end

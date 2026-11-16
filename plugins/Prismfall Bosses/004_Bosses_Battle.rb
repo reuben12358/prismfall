@@ -14,7 +14,7 @@ module Prismfall
       amt_i = amt.round
       ds    = battler.damageState
       from_move = !anim && !any_anim && ds && ds.hpLost == amt_i   # pbInflictHPDamage
-      if st.pending   # bar already depleted: absorb everything until it resolves
+      if st.pending || (st.defeated && st.end_decision && battler.hp > 0)   # depleted: absorb until it resolves
         st.overflow += [amt_i, 0].max
         if from_move
           ds.totalHPLost -= ds.hpLost
@@ -68,10 +68,7 @@ module Prismfall
         battle.instance_variable_set(:@prismfall_bosses_balls, battle.disablePokeBalls) if !battle.instance_variable_defined?(:@prismfall_bosses_balls)
         update_ball_rule(battle, st)
       end
-      interval = resolve(st.data[:prism_interval])
-      if interval.is_a?(Integer) && (pr = prism_state(battle))
-        pr[:interval] = interval
-      end
+      apply_prism_interval(battle)
       Array(resolve(st.data[:intro])).each { |m| battle.pbDisplay(text(m, battler.pbThis)) }
       EventHandlers.trigger(:prismfall_boss_entered, battle, battler, st.id)
     end

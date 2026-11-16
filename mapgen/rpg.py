@@ -198,9 +198,6 @@ def compile_cmds(items, indent=0, ctx=None):
             sid, on = v; sid = _f(sid, 'switches'); out.append(ev_cmd(121, indent, [int(sid), int(sid), 0 if on else 1]))
         elif k == 'var':
             vid, val = v; vid = _f(vid, 'variables'); out.append(ev_cmd(122, indent, [int(vid), int(vid), 0, 0, int(val)]))
-        elif k == 'story':   # advance the main-quest stage, never move it backwards
-            vid = _f('STORY', 'variables')
-            out.append(ev_cmd(355, indent, ['pbSet(%d, %d) if pbGet(%d) < %d' % (vid, int(v), vid, int(v))]))
         elif k == 'selfswitch':
             ch, on = v; out.append(ev_cmd(123, indent, [ch, 0 if on else 1]))
         elif k == 'transfer':

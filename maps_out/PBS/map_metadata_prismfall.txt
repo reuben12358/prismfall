@@ -100,6 +100,54 @@ MapPosition = 0,12,22
 Name = Loomhouse Gym - The Spindle
 MapPosition = 0,12,22
 #-------------------------------
+[140]   # Saltmere
+Name = Saltmere
+Outdoor = true
+ShowArea = true
+MapPosition = 0,10,25
+BattleBack = field
+#-------------------------------
+[141]   # Saltmere Pokémon Center
+Name = Saltmere Pokémon Center
+HealingSpot = 140,12,25
+MapPosition = 0,10,25
+#-------------------------------
+[142]   # Saltmere Mart
+Name = Saltmere Mart
+MapPosition = 0,10,25
+#-------------------------------
+[143]   # Saltmere Harbour Office
+Name = Saltmere Harbour Office
+MapPosition = 0,10,25
+#-------------------------------
+[144]   # Saltwife's House
+Name = Saltwife's House
+MapPosition = 0,10,25
+#-------------------------------
+[145]   # Pageant Hall
+Name = Pageant Hall
+MapPosition = 0,10,25
+#-------------------------------
+[150]   # Pell Playhouse - Foyer
+Name = Pell Playhouse - Foyer
+MapPosition = 0,10,25
+#-------------------------------
+[151]   # Pell Playhouse - Revolving Stage
+Name = Pell Playhouse - Revolving Stage
+MapPosition = 0,10,25
+#-------------------------------
+[152]   # Pell Playhouse - Fly Loft
+Name = Pell Playhouse - Fly Loft
+MapPosition = 0,10,25
+#-------------------------------
+[153]   # Pell Playhouse - Dressing Rooms
+Name = Pell Playhouse - Dressing Rooms
+MapPosition = 0,10,25
+#-------------------------------
+[154]   # Pell Playhouse - The Grand Stage
+Name = Pell Playhouse - The Grand Stage
+MapPosition = 0,10,25
+#-------------------------------
 [520]   # Route 1
 Name = Route 1
 Outdoor = true
@@ -125,6 +173,36 @@ Name = Gossamer Wood
 ShowArea = true
 MapPosition = 0,13,23
 BattleBack = forest
+#-------------------------------
+[525]   # Gossamer Deepwood
+Name = Gossamer Deepwood
+ShowArea = true
+MapPosition = 0,13,23
+BattleBack = forest
+#-------------------------------
+[548]   # Cocoonfall Hollow
+Name = Cocoonfall Hollow
+ShowArea = true
+MapPosition = 0,11,22
+BattleBack = forest
+#-------------------------------
+[540]   # Route 3
+Name = Route 3
+Outdoor = true
+ShowArea = true
+MapPosition = 0,11,22
+BattleBack = field
+#-------------------------------
+[541]   # Route 4
+Name = Route 4
+Outdoor = true
+ShowArea = true
+MapPosition = 0,11,24
+BattleBack = field
+#-------------------------------
+[542]   # Marsh Rest House
+Name = Marsh Rest House
+MapPosition = 0,11,24
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

@@ -39,9 +39,10 @@ events:
     name: Professor Larch
     at: [6, 3]
     pages:
-      - graphic: {sprite: trainer_PROFESSOR, dir: down}
+      - cond: {switch: LARCH_AT_TIDEWATCH}
+        graphic: {sprite: trainer_PROFESSOR, dir: down}
         commands: ["Professor Larch: Customs first, child. Meridian gets cross if anyone skips the queue."]
-      - cond: {var: [STORY, 3]}
+      - cond: {switch: LARCH_AT_TIDEWATCH, switch2: PRO_SCANNED_NULL}
         graphic: {sprite: trainer_PROFESSOR, dir: down}
         commands:
           - "You hand over your mother's letter. Professor Imelda Larch reads it, and sets it down very carefully."
@@ -49,7 +50,7 @@ events:
           - "Professor Larch: Your mother was the bravest coward I ever knew. Drink. It's disgusting."
           - "She doesn't explain."
           - "Professor Larch: The Wayfarer Sanctuary keeps partners for people who arrive with nothing. Choose one from the table."
-      - cond: {var: [STORY, 4]}
+      - cond: {switch: LARCH_AT_TIDEWATCH, switch2: CH1_STARTER_GOT}
         graphic: {sprite: trainer_PROFESSOR, dir: down}
         commands: ["Professor Larch: Look after that one. And mind Kestrel - he bites, but only when he's frightened."]
   - type: event
@@ -60,7 +61,7 @@ events:
         commands:
           - "Juno: You're the one off the last ferry! I'm Juno - the Professor's assistant. Mostly I water things."
           - "Juno: We're going to be friends, I can tell. I have a nose for it."
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
   - &starter
     type: event
     name: Starter table
@@ -68,7 +69,7 @@ events:
     pages:
       - graphic: {sprite: Object ball}
         commands: ["Three Poké Balls rest on a velvet tray. Better wait for the Professor."]
-      - cond: {var: [STORY, 3]}
+      - cond: {switch: PRO_SCANNED_NULL}
         graphic: {sprite: Object ball}
         commands:
           - script: |
@@ -81,10 +82,10 @@ events:
                 s = pbMessage(_INTL("Choose your partner!"), names + [_INTL("Back")], 3)
                 if s >= 0 && s < 3 && pbAddPokemon(lines[s][0], 5)
                   Prismfall.record_starter($player.party[-1], gen: gen, slot: s)
-                  pbSet(@@STORY, 4)
+                  $game_switches[@@CH1_STARTER_GOT] = true
                 end
               end
-          - if: "pbGet(@@STORY) >= 4"
+          - if: "$game_switches[@@CH1_STARTER_GOT]"
             then:
               - "Juno bounces in, kerchief askew, seed packets everywhere."
               - script: |
@@ -96,7 +97,7 @@ events:
                   pbMessage(_INTL("Kestrel: I'll have {1}. Fair fights are for people who can afford to lose.", sp))
               - "Professor Larch lets him take it, with a look that says she has history with this family."
               - "Kestrel: See you outside, tourist."
-      - cond: {var: [STORY, 4]}
+      - cond: {switch: CH1_STARTER_GOT}
         commands: ["The tray is empty now."]
   - {<<: *starter, name: Starter ball L, at: [8, 4]}
   - {<<: *starter, name: Starter ball R, at: [10, 4]}
@@ -104,7 +105,7 @@ events:
     name: Rowan Ashby
     at: [3, 9]
     pages:
-      - cond: {var: [STORY, 5]}
+      - cond: {switch: CH1_K1_DONE}
         graphic: {sprite: trainer_POKEMONRANGER_M, dir: right}
         commands:
           - "Rowan Ashby: Juno's uncle - Rowan. Grass Warden, when Verdance lets me out. I'm down for seed stock."

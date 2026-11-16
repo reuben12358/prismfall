@@ -20,10 +20,26 @@
 131	130	Loomhouse Gym - Weaving Hall
 132	130	Loomhouse Gym - Canopy Lofts
 133	130	Loomhouse Gym - The Spindle
+140	0	Saltmere
+141	140	Saltmere Pokémon Center
+142	140	Saltmere Mart
+143	140	Saltmere Harbour Office
+144	140	Saltwife's House
+145	140	Pageant Hall
+150	140	Pell Playhouse - Foyer
+151	150	Pell Playhouse - Revolving Stage
+152	150	Pell Playhouse - Fly Loft
+153	150	Pell Playhouse - Dressing Rooms
+154	150	Pell Playhouse - The Grand Stage
 520	0	Route 1
 521	0	Route 2
 522	521	The Glassed Orchard
 523	521	Hale Farmhouse
 524	0	Gossamer Wood
+525	524	Gossamer Deepwood
 526	524	Woodward's Hut
+540	0	Route 3
+541	0	Route 4
+542	541	Marsh Rest House
+548	540	Cocoonfall Hollow
 990	0	Prismfall Test Arena

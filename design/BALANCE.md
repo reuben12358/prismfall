@@ -131,6 +131,14 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
     Flygon (Scarf), Kommo-o (Clangorous Soul + Throat Spray), Goodra *(−C)*, Haxorus, Dragapult, ace **Salamence "Dreamwing"**
     (**Hard Mega Salamence**, Aerilate Double-Edge). Answer: Fairy + Ice (Ice is halved here: bring Fairy + Steel).
 
+## 4b. Route and gym trainers (stock trainer types)
+
+Built from the Map Builder's events (`maps_out/Data/*.rxdata` / `trainers_needed.txt`). Rules: no bag items, level-up
+movesets (always level-legal), IV 8 Standard / 20 Hard / 0 + EV 0 Casual, Casual −1 level, Hard +1 level.
+Levels: Route 1 4–5 · Route 2 6–7 · Gossamer Wood 8–10 · Loomhouse Gym 11–13; species from `encounters.txt` for that map,
+leaning Bug/Grass/Normal/Fairy (Elowen). `[YOUNGSTER,Ben]` (map 990 test dummy, Snorlax Lv 50) collides with the base
+project's sample Ben — ours normally compiles later and wins, but packaging should drop the base sample trainers.
+
 ## 5. Rivals (Prismfall Core swaps the Gen 1 starter; ability slot is kept, so `AbilityIndex = 2` = hidden ability)
 
 Starter written per slot: **Kestrel** (advantage) slot 0→Charmander line, 1→Squirtle, 2→Bulbasaur; **Juno** (weak to
@@ -243,4 +251,16 @@ in the validator, so they need no row.
 
 ## Status of Festival choice-variant teams and cameos
 
-(Updated at hand-off.)
+- **Cameos: done** for all 10 in CAMEOS.md (Lin, Amaria, Shelly, Alexandra, Venam, Shiv, Garret, Melia, Titania, Nova).
+  Versions per cameo: `0` exhibition (ace 92–96: Lin 96, Nova 96, Alexandra 95, Shiv/Garret/Titania 94, Amaria/Shelly/
+  Venam 93, Melia 92), `1` R16 (90), `2` QF (92), `3` SF/Final-tier (94), `9` post-game (100); each +100/+200.
+  Core's placeholder `FESTIVAL_CAMEO_1..7` must be repointed to these IDs/names.
+  Special cases: Lin's Togekiss knows Oblivion Wing (allowlisted); Garret's Mega Lucario is canon so his Standard team
+  also carries `MEGARING`; Amaria's "Deliverance" is shortened to **"Deliverer"** (10-char nickname limit); Venam's
+  "Venam's Kiss" is stood in by Poison Jab (swap in a custom move if the move team adds one); Shiv's Ambipom "Aipom"
+  needs its "absurd HP" from a Core hook (suggest ×2 max HP for `FESTIVAL_SHIV` party slot 6, like EBDX `:bossboost`) —
+  PBS can only give it 252 HP EVs; Shelly's exhibition should be started as a double battle (her set is doubles-ready).
+- **Choice-driven variants (`story/10_CHOICES_ENDINGS.md`): not built yet** — the file did not exist at hand-off. The
+  default path (J4, Lin QF, K8, Valen, Voss) is complete. Variants like "Kestrel (Fallen)" should reuse the rival scheme
+  with new battle numbers (e.g. K9x = Fallen, K10x = hijack tag partner) and Valen's successor / alternate hijackers get
+  their own `[TYPE,Name,v]` + 100/200.

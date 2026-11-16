@@ -22,6 +22,7 @@ module Prismfall
           next if !st || !st.pending
           (st.pending == :break) ? break_bar(battle, b, st) : run_defeat(battle, b, st, st.pending_defeat)
         end
+        apply_prism_interval(battle)
         sync_prism_followers(battle) if battle.instance_variable_get(:@prismfall_prism_dirty) && battle.decision == 0
       ensure
         battle.instance_variable_set(:@prismfall_bosses_busy, false)
@@ -29,7 +30,6 @@ module Prismfall
     end
 
     def self.effect_list(value)
-      value = value.call if value.is_a?(Proc) && value.arity == 0
       value = resolve(value)
       return [] if value.nil?
       return value.is_a?(Array) ? value.compact : [value]
@@ -182,7 +182,7 @@ module Prismfall
 
     def self.set_moves(battle, b, list)
       list = Array(list).compact.first(Pokemon::MAX_MOVES)
-      return if list.empty? || (b.effects[PBEffects::Transform] rescue false)
+      return if list.empty? || b.effects[PBEffects::Transform] == true
       return if b.moves.map { |m| m && m.id } == list
       pkmn = b.pokemon
       pkmn.forget_all_moves
@@ -255,17 +255,14 @@ module Prismfall
       end
       party = battle.pbParty(boss.index)
       if battle.respond_to?(:pbGenerateAllyBattler)   # EBDX Renovation SOS helper (wild battles)
-        count = party.length
+        before = battle.battlers.map { |x| x && x.pokemon }
         battle.pbGenerateAllyBattler(spec[:species], level)
-        pkmn = party[count]
-        return if !pkmn
-        dress_ally(pkmn, spec)
-        b = battle.battlers.find { |x| x && x.pokemon.equal?(pkmn) }
-        if b
-          b.pbInitPokemon(pkmn, b.pokemonIndex)
-          battle.scene.pbRefreshOne(b.index) if battle.scene.respond_to?(:pbRefreshOne)
-        end
-        battle.pbDisplay(text(spec[:message], boss.pbThis, pkmn.name)) if spec[:message]
+        b = battle.battlers.find { |x| x && x.pokemon && !x.opposes?(boss.index) && before.none? { |p| p.equal?(x.pokemon) } }
+        return if !b
+        dress_ally(b.pokemon, spec)
+        b.pbInitPokemon(b.pokemon, b.pokemonIndex)
+        battle.scene.pbRefreshOne(b.index) if battle.scene.respond_to?(:pbRefreshOne)
+        battle.pbDisplay(text(spec[:message], boss.pbThis(true), b.pokemon.name)) if spec[:message]
         return
       end
       # Vanilla: only into an existing, fainted slot on the boss's side.
@@ -279,7 +276,7 @@ module Prismfall
       party.push(pkmn)
       battle.pbPartyOrder(boss.index).push(party.length - 1)
       battle.pbRecallAndReplace(slot.index, party.length - 1, true)
-      battle.pbDisplay(text(spec[:message] || "{2} came to {1}'s aid!", boss.pbThis, pkmn.name))
+      battle.pbDisplay(text(spec[:message] || "{2} came to {1}'s aid!", boss.pbThis(true), pkmn.name))
       battle.pbOnBattlerEnteringBattle(slot.index)
     end
 
@@ -305,6 +302,19 @@ module Prismfall
       return (st.is_a?(Hash)) ? st[:prism] : nil
     end
 
+    # :prism_interval => n sets the arena's (writable) rounds-per-turn once it exists.
+    def self.apply_prism_interval(battle)
+      return if battle.instance_variable_get(:@prismfall_prism_interval_done)
+      pr = prism_state(battle)
+      return if !pr
+      boss_battlers(battle).each do |b|
+        n = resolve(state_for(b).data[:prism_interval])
+        next if !n.is_a?(Integer)
+        pr[:interval] = n
+        battle.instance_variable_set(:@prismfall_prism_interval_done, true)
+      end
+    end
+
     # Turns the Plates now through the arena's own announced :turn.
     def self.prism_turn(battle)
       pr = prism_state(battle)
@@ -326,8 +336,10 @@ module Prismfall
         next if !fp.is_a?(Hash)
         if fp[:form] != false
           f = form_for_type(b.species, type)
-          b.pbChangeForm(f, text(fp[:form_message] || "{1} took on the {2} type!", b.pbThis,
-                                 GameData::Type.get(type).name)) if f && f != b.form
+          if f && f != b.form
+            change_form(b, state_for(b), f, text(fp[:form_message] || "{1} took on the {2} type!", b.pbThis,
+                                                 GameData::Type.get(type).name))
+          end
         end
         sets = resolve(fp[:movesets])
         set_moves(battle, b, sets[type] || sets[:default]) if sets.is_a?(Hash) && (sets[type] || sets[:default])

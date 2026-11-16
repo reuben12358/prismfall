@@ -61,10 +61,43 @@ tiles:
 events:
   - {type: warp, name: To Gossamer Wood, at: [22, 39], link: WOOD_BRIAR, arrive: [22, 38, up]}
   - {type: sign, at: [24, 9], post: false, name: Gym sign, text: "BRIARWICK LOOMHOUSE GYM\nWarden: Tamsin Loom - The Weaver of Webs"}
-  - {type: sign, at: [20, 17], text: "BRIARWICK\nThe town in the old trees."}
+  - {type: sign, at: [20, 17], text: "BRIARWICK\nWhere the looms never stop."}
+  - {type: sign, at: [24, 26], name: Loyal Three shrine,
+     text: "A shrine to the Loyal Three, \"who drove the Gossamer Ogre from the wood.\" Carved ogre masks hang from the eaves."}
+  - {type: sign, at: [18, 26], name: Festival poster,
+     text: "A Festival of Champions poster. The Crown is drawn with a tiny chip missing from its stone."}
+  - {type: npc, name: Masked child, at: [17, 28], sprite: NPC 07, move: random,
+     text: "Child: The old mural in the chapel shows the Crown all whole. Mum says the Crown got hurt once."}
+  - type: event
+    name: Pallbearer Thistle
+    at: [39, 15]
+    pages:
+      - graphic: {sprite: trainer_BURGLAR, dir: left}
+        commands:
+          - "A masked figure is cutting Meridian's orange survey flags, one by one."
+          - "Thistle: You'll stop me? Lowmarsh had looms too, once."
+          - if: 'TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")'
+            then:
+              - "Thistle: ...Ask your Warden what she signed."
+              - "The Hollow pallbearer slips away between the trees."
+              - {switch: [CH2_THISTLE_DONE, true]}
+              - {selfswitch: [A, true]}
+      - cond: {self: A}
+  - {type: sign, at: [40, 17], name: Lattice pylon,
+     text: "A half-built Meridian Lattice pylon. Orange survey flags march east from it, toward the Glasswood."}
+  - type: event
+    name: Old woman at the shrine
+    at: [25, 27]
+    pages:
+      - cond: {switch: GLOAMING_DISGUISED_CELESTINE}
+        graphic: {sprite: NPC 28, dir: up}
+        commands:
+          - "An old woman sings softly to the shrine:"
+          - "\"Three loyal hounds and an ogre so bold - but who was the thief, when the story was told?\""
+          - "She doesn't turn around."
   - {type: npc, name: Gym guide, at: [21, 11], sprite: NPC 01, dir: down,
-     text: "[TODO story] The Loomhouse is all silk and string. Fire-types cut through it - if you can find one."}
+     text: "The Loomhouse is all silk and string. Threads that hold only when twisted together - that's the Warden's whole puzzle."}
   - {type: npc, name: Meridian liaison, at: [24, 18], sprite: trainer_GENTLEMAN, dir: left,
-     text: "[TODO story] Meridian has... arrangements with the Warden. Nothing you need concern yourself with."}
+     text: "Meridian liaison: Meridian has... arrangements with the Warden. The Lattice will save these groves. Eventually."}
   - {type: npc, name: Dyer, at: [6, 20], sprite: NPC 12, dir: left, move: random,
-     text: "[TODO story] The stream runs blue on dyeing days. Silk from the Loomhouse, colour from the creek."}
+     text: "Dyer: The silk-moths are dying. Fewer cocoons every week, and the Glasswood creeps closer along those flags."}

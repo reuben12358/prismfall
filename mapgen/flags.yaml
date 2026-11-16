@@ -1,15 +1,19 @@
-# Symbolic Game Switch / Variable IDs used by map specs (write the NAME in specs; build.py substitutes the ID).
-# Story block 101-300 belongs to the story team's FLAGS.md: these are the Map Builder's proposals - renumber here only.
+# Gym puzzle Switch / Variable IDs (block 301-400, gym n = 300+5n ... 300+5n+4; GYM_PUZZLES.md).
+# Story IDs (101-300) are read straight from design/FLAGS.md by build.py - write their NAMES in specs.
 variables:
-  STORY: 101          # main-quest stage, see design/MAPGEN.md "Story stages"
-  GYM1_A: 305         # Gym 1 heddles (GYM_PUZZLES.md block 300+5n)
+  GYM1_A: 305         # Weaving Hall heddles A/B/C (0-2)
   GYM1_B: 306
   GYM1_C: 307
-  GYM2_STAGE: 310     # Gym 2 revolving stage position
+  GYM2_SCENE: 310     # Revolving Stage set (0 bare, 1 Shipwreck, 2 Forest, 3 Throne)
+  GYM2_ACTS: 311      # acts performed in Script order (0-3)
+  GYM2_SPOT1: 312     # Fly Loft spotlight aims (0 Hero, 1 King, 2 Beast)
+  GYM2_SPOT2: 313
+  GYM2_SPOT3: 314
 switches:
-  GYM1_ALPHA: 305     # Gym 1 Canopy Lofts cords
+  GYM1_ALPHA: 305     # Canopy Lofts cords
   GYM1_BETA: 306
   GYM1_GAMMA: 307
-  GYM2_SPOT: 310      # Gym 2 spotlight / curtain switches
-  GYM2_CURTAIN: 311
-  GYM2_TRAP: 312
+  GYM2_LADDER: 310    # wing ladder to the Fly Loft unlocked
+  GYM2_MASK: 311      # Comedy door chosen: corridor exit open
+  GYM2_TRAP: 312      # every light upon the Beast: trapdoor open
+  GYM2_SPOTS_SET: 313 # Fly Loft spotlights initialised to (Hero, King, King)

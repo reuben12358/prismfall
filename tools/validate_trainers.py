@@ -195,6 +195,12 @@ class RefData:
             self.items[iid] = {"flags": set(flags), "name": sec.get("Name", [iid])[0]}
         for tid in parse_sections(os.path.join(r, "trainer_types.txt")):
             self.ref_trainer_types.add(tid)
+        self.ref_trainers = set()
+        for key in parse_sections(os.path.join(r, "trainers.txt")):
+            parts = [x.strip() for x in key.split(",")]
+            if len(parts) >= 2:
+                ver = int(parts[2]) if len(parts) > 2 and parts[2].isdigit() else 0
+                self.ref_trainers.add((parts[0], parts[1], ver))
 
     @staticmethod
     def _species_entry(sp, form, sec, base=None):
@@ -496,7 +502,7 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
                     if lvl > mon.level and not allowed:
                         rep.warn(where, "%s learns %s only by level-up at L%d (> L%d)"
                                  % (data["name"], m, lvl, mon.level))
-    else:
+    elif t.ttype not in ref.ref_trainer_types:   # stock route trainers may use level-up movesets
         rep.warn(where, "no Moves given (will use level-up moveset)")
     # ability
     if "Ability" in mon.props:
@@ -676,8 +682,8 @@ def validate(args):
         seen[t.key] = t.line
         if t.ttype not in all_types:
             rep.err(where, "unknown trainer type %s" % t.ttype)
-        elif t.ttype not in types:
-            rep.warn(where, "trainer type %s only exists in reference PBS" % t.ttype)
+        if t.key in ref.ref_trainers:
+            rep.warn(where, "also defined in the base trainers.txt; ours usually wins (trainers_prismfall.txt sorts after it) but Dir.glob order is not guaranteed - rename or drop the base entry to be safe")
         if not t.mons:
             rep.err(where, "no Pokemon")
         if len(t.mons) > 6:
