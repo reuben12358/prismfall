@@ -159,7 +159,7 @@ def build_285():
                 if c.g[yy][xx] == '.' and not c.taken[yy][xx]: c.g[yy][xx] = 'h'; c.taken[yy][xx] = True
     c.edge_props(['t_lamp', 't_lamp', 't_bench', 't_barrel'], 14, 'cgb', 1)
     c.inlay(0, 0, W - 1, H - 1, 'c', [3916], 0.08)
-    c.greenfill(0.26, 3)
+    c.greenfill(0.14, 3)
     c.sea_rocks(3)
     c.events = E
     c.warp_line([(48, 21)], 286, [(16, 22)], 'up')

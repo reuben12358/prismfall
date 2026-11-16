@@ -140,10 +140,22 @@ The stock intro's controls tutorial is not reproduced.
 - **Verdance** (`layouts/verdance_city.py`): 280 Market Terraces 104x88, 285 Briar Hall Upper Court 84x64, 286 Great
   Hall 33x25 and 287 Throne Room 27x27 (interiors built from the castle kit with `room()`). Placeholder events only.
 - `walk_ignore:` (default wall, tower, keep) keeps unreachable parapet walks out of the cut-off warning.
-- **Open items:** Verdance 281/282/295 interiors (three unresolved doors), 283/284/289/294/296 districts, no column,
-  chandelier or stained-glass art, 540/560 still declare stale connection offsets to 140 (140's own win), the Act I
-  maps other than Saltmere are still on the stock tilesets, and all five city exteriors fail parts of the rubric
-  (numbers print at build time).
+- **Fix round (organic plans).** Layouts no longer use bands and rectangular quarters. `citykit` gained `hills` (noise-edged
+  height blobs), `notch` (a straight step for a stairway), `front_place` / `frontage` (houses packed along the north side of
+  every street), `backfill` (second rank), `greenfill` (leftover land becomes tree masses and beds), `edge_props`, `snap`
+  (seat an event on the nearest street cell) and a **symmetry guard**: `write()` aborts when more than 40% of plan cells equal
+  their mirror image (interiors pass `mirror_max=1.0`). Houses only front streets from the north, so a lane needs 7 clear
+  rows above it; that spacing is why lanes sit where they do.
+- Roofs: `textract.py` and `wextract.py` move the top 60% of each building's rows to layer 3 where it was empty, and
+  `k_castle` puts the walk-behind south parapet on layer 3 (as Prizca Castle does). Rendering and passability are unchanged.
+- Timber variants: `compose_tileset.py` appends slate and moss recolours of the Sheridan sheet; stamps `w_*_s`, `w_*_m`.
+- Saltmere warps now: harbour stairs 140 (56-61, 71) <-> 146 (42-47, 3); Players' Gate 140 (87, 42-45) <-> 147 (0, 36-39).
+  HealingSpot 140 (28, 30). Verdance: palace arch 280 (71, 9) <-> 285 south gate (22-27, 63); keep arch 285 (48, 21) -> 286.
+- Interiors added: 281 / 282 (stock Poké Center and Mart templates, placeholders), 295 Cathedral (castle-kit room).
+  `yards_ok: true` in a spec silences the cut-off-tiles warning for enclosed back gardens (events are still checked).
+- **Open items:** 146 fails the mirror number (20.2 against 15) because 40% of it is open sea, which the rubric exempts;
+  no column, chandelier, stained-glass, fountain, well or statue art; 283/284/289/294/296 districts not built; 540/560 still
+  declare stale connection offsets to 140 (140's own win); Act I maps other than Saltmere are still on stock tilesets.
 
 ## 3. Regenerating
 ```
