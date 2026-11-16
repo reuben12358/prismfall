@@ -15,7 +15,7 @@ stamps:
   fanclub:      {map: 23, rect: [23, 15, 5, 5], door: [1, 3]}
   condo:        {map: 7,  rect: [20, 24, 5, 5], door: [2, 4]}
   institute:    {map: 7,  rect: [32, 25, 7, 4], door: [3, 3]}
-  daycare:      {map: 23, rect: [26, 7, 5, 4], door: [2, 3]}
+  daycare:      {map: 23, rect: [26, 7, 6, 4], door: [2, 3]}
   mailbox:      {map: 2,  rect: [6, 6, 1, 2]}
   stall_a:      {map: 23, rect: [10, 18, 6, 4]}
   stall_b:      {map: 23, rect: [9, 24, 7, 4]}
@@ -29,3 +29,6 @@ templates:
   arena:      {map: 37, rect: auto}
   bigroom:    {map: 3,  rect: auto}
   harbour:    {map: 71, rect: auto}
+  cave1:      {map: 49, rect: auto}
+  cave2:      {map: 50, rect: auto}
+  icecave:    {map: 34, rect: auto}

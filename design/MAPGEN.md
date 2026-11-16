@@ -13,22 +13,33 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 | 524–526 | Gossamer Wood, Deepwood, Woodward's Hut (:SILKWOOD) | Silk-wall loop, Cut tree to Deepwood |
 | 120–125 | Briarwick and interiors | Thistle at the pylon (HOLLOW_THISTLE, S106), Loyal Three shrine, poster, Celestine (S170) |
 | 130–133 | Loomhouse Gym (Gym 1) | Heddle planks, spool ziplines, then `Prismfall.gym_battle(1)` → `award_badge(1)`. Tamsin's confession and the `CH2_TAMSIN` choice |
-| 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch via `EliteBattle.bossBattle` (S107, V105=1, V102=3) |
+| 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
+| 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Route 3's mine mouth with Route 4's back door. Salt miner gives TM98 after Badge 2 |
+| 546–547 | Thistledown Manor + Attic (haunted house) | DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
 | 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
 | 150–154 | Pell Playhouse (Gym 2, :GRAND_STAGE) | Revolving-stage wheel (scene order, actor battles, CUT), fly-loft spotlights with coupled rigging, Comedy door. Dorian double battle → Badge 2, TM42, Eevee "Understudy" (S110) |
 | 990 | Prismfall Test Arena | One NPC per SPINE field: wild or trainer test battle with `setBattleRule("field", :ID)` |
 
-**New game hookup:** in the base project's intro map (Map001), change its final Transfer Player to **map 109, (8,6)**.
-That keeps Essentials' name and gender setup. 109's intro autorun then starts the prologue.
+**New game start:** `Plugins/Prismfall Maps/004_NewGameStart.rb` sets `PrismfallMaps::PRISMFALL_START = [109, 8, 6]`
+(nil = use RMXP's Player Starting Position). It alias-chains `Game.start_new` to override `$data_system.start_map_id/x/y`
+in memory, so no RMXP edit is needed. The stock intro map is skipped, so the Dovetail intro does its jobs:
+- appearance choice (`pbChangePlayer(1/2)`)
+- name, entered as Edda's passenger manifest (`pbTrainerName` with a confirm loop)
+- running shoes and `Prismfall.choose_difficulty`
+Later scenes hand out the rest: Larch gives the Pokédex with the starter, and Wenna Hale gives the Pokégear.
+The stock intro's controls tutorial is not reproduced.
 
 ## 2. Installing into your project (Windows, RPG Maker XP)
 1. **Close RPG Maker XP.** It rewrites `MapInfos.rxdata` when it saves.
 2. Copy `maps_out/Data/Map*.rxdata` and `maps_out/Data/mapinfos_prismfall.txt` into your project's `Data/`.
    Copy `maps_out/PBS/map_metadata_prismfall.txt` and `map_connections_prismfall.txt` into `PBS/`. v21.1 merges `<base>_<suffix>.txt` files.
 3. Copy the runtime plugin `maps_out/Plugins/Prismfall Maps/` into `Plugins/`. It holds:
+   - `003_StoryBosses.rb`, **generated** from `mapgen/bosses.yaml`: story boss definitions for the Prismfall Bosses plugin.
    - `002_MapFields.rb`, **generated** by build.py from the specs' `field:` entries. It fills `FieldEffects::MAP_FIELDS`
      (guarded with `if defined?(FieldEffects)`), so map → field defaults ship with the maps and nobody edits Field Effects by hand.
    - The Debug installer action from step 4.
+   - Its `meta.txt` says `Optional = Prismfall Field Effects,1.0.0`, so it loads after Field Effects. Essentials **ignores
+     Optional lines without a version** (PluginManager: "Optional dependencies must have a version given").
 4. Register the maps in `Data/MapInfos.rxdata` with **either** method:
    - **In-game (recommended, uses the game's own Marshal):** with the plugin installed,
      Start the game in Debug mode and run **Debug → Files → Install Prismfall maps**. The plugin backs up `MapInfos.rxdata` once,
@@ -60,7 +71,8 @@ That keeps Essentials' name and gender setup. 109's intro autorun then starts th
 - `:CH2_TAMSIN` → :help_confess / :expose (MERIDIAN −1, ACCORD +1) / :keep_secret (MERIDIAN +1)
 - `:CH3_JUNO_TALK` → :told (JUNO +1) / :deflect / :silent
 - Game overs: GO-01 "Homeward" uses `:GO_LAST_FERRY`, GO-02 "Two in the Orchard" uses `:GO_BLEED_TIDE` (Core's registered
-  IDs). Rename both sides together if Narrative picks other IDs.
+  IDs). GO-03 "Curtain Call" uses **`:GO_CURTAIN_CALL` (not registered yet; Core warns but still runs it)**. Rename both
+  sides together if Narrative picks other IDs.
 
 ## 3. Regenerating
 ```
@@ -69,7 +81,8 @@ python3 -I build.py            # all specs  -> maps_out/ (runs gen_*.py spec gen
 python3 -I build.py 100 520    # only some maps (links are still resolved against all specs)
 python3 -I build.py --grid     # previews with a coordinate grid (yellow = every 5 tiles)
 ```
-`build.py` checks itself as it goes. It reads every written map back, warns about unresolved door links, transfers to maps that
+`build.py` checks itself as it goes. It also warns when an event has no walkable neighbour, using Essentials'
+`playerPassable?` rules (Neutral tag ignored, bridge tiles ignored off-bridge). It reads every written map back, warns about unresolved door links, transfers to maps that
 aren't built yet or that land off-map, 1-tile-thin paths and snapped trees, and it writes `trainers_needed.txt`.
 Extra checks:
 ```
@@ -150,6 +163,7 @@ Doors from stamps get the lowest event IDs on a map, so their arrival autorun ru
 - `{switch: [id, on]}`, `{var: [id, value]}`, `{selfswitch: [A, on]}`, `{transfer: {map, x, y, dir}}`.
 - `{se: name}`, `{me: name}`, `{wait: n}`, `{heal: true}`, `{tone: [r, g, b, gray, frames]}`.
 - `{move: {who: -1|0|id, route: ['up', 'wait 2', {jump: [dx, dy]}, 'through_on', ...]}}`.
+- `{boss: {id: GLASS_MATRIARCH, species: GALVANTULA, level: 16, field: BLEED}}` → story boss (see §6).
 - `{comment: ...}`, `{raw: [code, params]}`.
 Door/warp `link` keys pair an exterior door with an interior `exit`. The builder computes both directions: you arrive one tile
 above the mat facing up, and leave onto the door tile, where the door animates you out.
@@ -170,14 +184,18 @@ above the mat facing up, and leave onto the door tile, where the door animates y
   rock-gym theme of the Gyms tileset, with no silk/web art; there is no ship sprite, so the Customs Hall template's moored ship
   stands in for the Dovetail. Real art needs custom tiles.
 - No cliffs or mountains yet. Outdoor barriers are trees, water, fences and ledges. The Lighthouse is a condo stamp.
-- Not built yet: 544/545 Brinecut Mine (Caves tileset, needs a palette), 546/547 Thistledown Manor (Mansion tileset), and
-  Route 5 onward (Ebbmouth, Lumen). Their entrances are signs, and Saltmere's west edge is closed with trees.
+- Not built yet: Route 5 onward (560/561, Gullcry Caves 564/565, The Rehearsal 568, Ebbmouth 160–166, Tidelock Gym 170–174,
+  then Routes 7–8 and Lumen City with the Act I finale). Saltmere's west edge is closed with trees until 560 exists.
+  Gym 3's water-level variant rooms (171–173) need a water palette for the Gyms tileset, or the Outside sea tiles.
+- Manor and mine use other tilesets' templates (Interior general, Caves) instead of a Mansion palette: [TODO art].
 - Deviation from maps.json: Route 4's north edge joins Route 3's **south** edge at x=2–9. maps.json paired 540-west with
   541-north, which isn't a legal Essentials edge pair.
 - Story items without item data (Meridian badge case, Fellowship card, Gilded King page, Granny Loom's shuttle) are text
   only. Add key items, then swap the text for `pbReceiveItem`.
-- The Glass Matriarch uses EBDX `bossBattle` (HP×3) and falls back to `WildBattle`. Switch to the Prismfall Bosses
-  plugin's API when it exists.
+- Story bosses: `mapgen/bosses.yaml` → generated `Plugins/Prismfall Maps/003_StoryBosses.rb`, which calls
+  `Prismfall::Bosses.register(:ID, {...})` behind `if defined?(Prismfall::Bosses)`. Events use the DSL command
+  `{boss: {id, species, level, field}}`. That runs `Prismfall::Bosses.wild_battle(:ID)`, or a plain `WildBattle` with the same
+  species, level, field and cannotRun when the plugin is absent. So far: `:GLASS_MATRIARCH` (Galvantula, 2/3/3 bars, :BLEED).
 - Dialogue is placeholder `[TODO story]` text, except gym mechanics from GYM_PUZZLES.md.
 - Trainers in `trainers_needed.txt` (route and gym trainers, Test Arena `YOUNGSTER Ben`, a base PBS trainer) must exist in PBS.
 - RMXP can only test variable conditions with ">=", so each plank uses two pages (show at ≥k, hide at ≥k+1).

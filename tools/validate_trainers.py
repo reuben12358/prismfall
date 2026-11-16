@@ -10,6 +10,10 @@ Usage:
   python3 tools/validate_trainers.py                 # validate, exit 1 on errors
   python3 tools/validate_trainers.py --summary       # also print every team
   python3 tools/validate_trainers.py --strict        # warnings count as errors
+  python3 tools/validate_trainers.py --maps maps_out/Data
+                                                     # also check every trainer that map
+                                                     # events reference exists (raw string
+                                                     # scan of Map*.rxdata, no Marshal load)
   python3 tools/validate_trainers.py --learnset SPECIES[,FORM] [LEVEL]
                                                      # show every legal move
 
@@ -502,7 +506,8 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
                     if lvl > mon.level and not allowed:
                         rep.warn(where, "%s learns %s only by level-up at L%d (> L%d)"
                                  % (data["name"], m, lvl, mon.level))
-    elif t.ttype not in ref.ref_trainer_types:   # stock route trainers may use level-up movesets
+    elif t.ttype not in ref.ref_trainer_types and not re.search(r"_(GRUNT|AGENT)(_[MF])?$", t.ttype):
+        # stock route trainers and generic grunts may use level-up movesets
         rep.warn(where, "no Moves given (will use level-up moveset)")
     # ability
     if "Ability" in mon.props:
@@ -721,6 +726,42 @@ def validate(args):
     return rep, trainers, ref, types
 
 
+def check_maps(maps_dir, trainers, rep):
+    """Scans Map*.rxdata event script strings (bytes only, never deserialized) for
+    TrainerBattle.start(:TYPE, "Name"[, v]), [:TYPE, "Name"] arrays and
+    Prismfall.rival_battle(:TYPE, "Name", N)."""
+    keys = {t.key for t in trainers}
+    names = {(t.ttype, t.name) for t in trainers}
+    pat_start = re.compile(rb'TrainerBattle\.start\(([^)]{0,200})\)')
+    pat_pair = re.compile(rb':([A-Z][A-Z0-9_]+), *"([^"]+)"(?:, *(\d+))?')
+    pat_arr = re.compile(rb'\[:([A-Z][A-Z0-9_]+), *"([^"]+)"\]')
+    pat_rival = re.compile(rb'rival_battle\(:([A-Z][A-Z0-9_]+), *"([^"]+)", *(\d+)')
+    n = 0
+    for fn in sorted(os.listdir(maps_dir)):
+        if not re.match(r"Map\d+\.rxdata$", fn):
+            continue
+        data = open(os.path.join(maps_dir, fn), "rb").read()
+        found = []
+        for m in pat_start.finditer(data):
+            for p in pat_pair.finditer(m.group(1)):
+                found.append((p.group(1).decode(), p.group(2).decode("utf-8", "replace"),
+                              int(p.group(3)) if p.group(3) else 0))
+        for p in pat_arr.finditer(data):
+            found.append((p.group(1).decode(), p.group(2).decode("utf-8", "replace"), 0))
+        for p in pat_rival.finditer(data):
+            for slot in (0, 1, 2):
+                found.append((p.group(1).decode(), p.group(2).decode("utf-8", "replace"),
+                              int(p.group(3)) * 10 + slot))
+        for k in sorted(set(found)):
+            n += 1
+            if k not in keys:
+                if k[2] == 0 and (k[0], k[1]) in names:
+                    rep.warn(fn, "event uses %s,%s with no version 0" % k[:2])
+                else:
+                    rep.err(fn, "event battles [%s,%s,%d] which is not in trainers.txt" % k)
+    return n
+
+
 def print_summary(trainers, ref):
     for t in trainers:
         print("%s  (%d mons) items=%s" % (t.label(), len(t.mons), ",".join(t.items) or "-"))
@@ -764,12 +805,15 @@ def main():
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--quiet-warnings", action="store_true")
     ap.add_argument("--learnset", nargs="+", metavar=("SPECIES[,FORM]", "LEVEL"))
+    ap.add_argument("--maps", metavar="DIR", help="folder of Map*.rxdata to cross-check")
     args = ap.parse_args()
     if args.learnset:
         ref = RefData(args.ref)
         lvl = int(args.learnset[1]) if len(args.learnset) > 1 else MAX_LEVEL
         return show_learnset(ref, args.learnset[0], lvl)
     rep, trainers, ref, types = validate(args)
+    if args.maps:
+        print("Map trainer references checked: %d" % check_maps(args.maps, trainers, rep))
     if args.summary:
         print_summary(trainers, ref)
     gens = sorted({d["generation"] for d in ref.species.values() if d["form"] == 0})

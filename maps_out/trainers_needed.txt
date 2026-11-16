@@ -32,4 +32,8 @@
 541	:HIKER, "Dunstan"
 541	:SAILOR, "Morrow"
 541	:TUBER_F, "Pip"
+544	:BLACKBELT, "Taro"
+544	:HIKER, "Bram"
+545	:HIKER, "Gorse"
+546	:CHANNELER, "Mireille"
 990	:YOUNGSTER, "Ben"

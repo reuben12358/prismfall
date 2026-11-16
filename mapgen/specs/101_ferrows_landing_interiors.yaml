@@ -97,6 +97,9 @@ events:
                   pbMessage(_INTL("Kestrel: I'll have {1}. Fair fights are for people who can afford to lose.", sp))
               - "Professor Larch lets him take it, with a look that says she has history with this family."
               - "Kestrel: See you outside, tourist."
+              - "Professor Larch: And this. A Pokédex. Your mother would have wanted you to look at things properly."
+              - {script: "$player.has_pokedex = true"}
+              - "\\PN received a Pokédex!"
       - cond: {switch: CH1_STARTER_GOT}
         commands: ["The tray is empty now."]
   - {<<: *starter, name: Starter ball L, at: [8, 4]}
@@ -168,7 +171,7 @@ tile_edits:
   - [1, 9, 2, 1271]
   - [2, 8, 1, 2, 2, 0]
 events:
-  - {type: warp, at: [9, 2], to: {map: 105, x: 8, y: 3, dir: down}, se: Door exit}
+  - {type: warp, at: [8, 2], to: {map: 105, x: 8, y: 3, dir: down}, se: Door exit}
   - type: event
     name: Hesper Vane
     at: [4, 4]

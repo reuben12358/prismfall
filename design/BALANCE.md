@@ -38,9 +38,9 @@ The level cap (Core) means grinding past the cap is impossible, so Standard diff
 | Gym | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Cap / ace | 15 | 19 | 23 | 27 | 31 | 35 | 39 | 43 | 47 | 51 | 55 | 59 | 63 | 67 | 71 | 75 | 80 | 85 |
-| Std size | 3 | 3 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
-| Hard size | 4 | 4 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
-| Casual size | 2 | 2 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
+| Std size | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+| Hard size | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+| Casual size | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 
 Rival max levels (Standard; Hard same top, others +1): K1 6 · J1 17 · K2 21 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
 K7 79. Festival aces (coordinator, SPINE Rev 3): R16 **90** · QF **92** · SF **94** · Final **96** · Hijack **100** · Arceus **100**;
@@ -75,7 +75,8 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
    Silkwood makes Electroweb/String Shot never miss and String Shot −2 Spe, Fury Cutter ×1.2 (cutting) + Bug ×1.5,
    Swarm always on, Bug types heal 1/16. The plan is speed control → Swadloon outlasts. Answer: Fire ×1.3 and 3 Fire moves
    burn the field to Ashen Waste; Flying is ×0.8 here, so bring Fire.
-2. **Dorian — Grand Stage (19).** Chatot *(−C)*, Ambipom (Technician Dual Chop/Swift), **+Hard** Loudred, ace **Kecleon**
+2. **Dorian — Grand Stage (19), DOUBLE battle** (hence one extra mon at every difficulty: 4 / 5 / 3). Chatot, Ambipom
+   (Technician Dual Chop/Swift; Hard Fake Out), Loudred *(−C)* (Hard spread Hyper Voice), **+Hard** Furfrou, ace **Kecleon**
    (Color Change = costume change; Hard: Protean + Fake Out ×1.5). Sound ×1.5 + Normal ×1.5 make Chatter/Uproar/Echoed Voice
    the threats; Sing gets ×1.3 accuracy (Hard Chatot drops Sing for Taunt). Answer: Fighting, Soundproof, and no weather.
 3. **Marisol — Water Surface (23).** Pelipper (Drizzle; rain +3 turns on this field), Lanturn *(−C)*, **+Hard** Araquanid,
@@ -135,9 +136,14 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 
 Built from the Map Builder's events (`maps_out/Data/*.rxdata` / `trainers_needed.txt`). Rules: no bag items, level-up
 movesets (always level-legal), IV 8 Standard / 20 Hard / 0 + EV 0 Casual, Casual −1 level, Hard +1 level.
-Levels: Route 1 4–5 · Route 2 6–7 · Gossamer Wood 8–10 · Loomhouse Gym 11–13; species from `encounters.txt` for that map,
+Levels: Route 1 4–5 · Route 2 6–7 · Gossamer Wood 8–10 · Loomhouse Gym 11–13 · Deepwood 11–12 · Route 3 12–14 ·
+Route 4 14–16 · Pell Playhouse actors 15–18 · Pageant Hall grunts 16–17; species from `encounters.txt` for that map,
 leaning Bug/Grass/Normal/Fairy (Elowen). `[YOUNGSTER,Ben]` (map 990 test dummy, Snorlax Lv 50) collides with the base
 project's sample Ben — ours normally compiles later and wins, but packaging should drop the base sample trainers.
+**Generic villains** (`HOLLOW_GRUNT_M/F`, `MERIDIAN_AGENT_M/F`, name "Grunt"/"Agent"): version = encounter number
+(0 = Saltmere Pageant Hall tag battle, then 1, 2, ... in story order; < 100), +100/+200 as usual. Map events must pass
+the version. Named admins (Thistle v0 = Briarwick, Lv 13–15) use 0, 1, 2 ... per rematch.
+Re-check map references any time with `python3 -I tools/validate_trainers.py --maps maps_out/Data`.
 
 ## 5. Rivals (Prismfall Core swaps the Gen 1 starter; ability slot is kept, so `AbilityIndex = 2` = hidden ability)
 

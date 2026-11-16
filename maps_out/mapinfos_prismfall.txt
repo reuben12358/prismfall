@@ -1,4 +1,4 @@
-# id<TAB>parent_id<TAB>name   (consumed by mapgen/merge_mapinfos.py and the Prismfall Map Installer plugin)
+# id<TAB>parent_id<TAB>name   (consumed by mapgen/merge_mapinfos.py and the Prismfall Maps plugin)
 100	0	Ferrow's Landing
 101	100	Ferrow's Landing Pokémon Center
 102	100	Ferrow's Landing Mart
@@ -41,5 +41,9 @@
 540	0	Route 3
 541	0	Route 4
 542	541	Marsh Rest House
+544	540	Brinecut Mine 1F
+545	544	Brinecut Mine B1F
+546	540	Thistledown Manor
+547	546	Thistledown Manor - Attic
 548	540	Cocoonfall Hollow
 990	0	Prismfall Test Arena

@@ -11,7 +11,7 @@
   and ending IDs are UPPERCASE. Unset choice = `nil` (Core treats `nil` as 0 in `< >`, and `choice(:x) != :y` is true when unset).
 - **Condition strings** use Core's safe subset exactly (§9 of SYSTEMS.md): `bond(:ID) standing(:F) resonance resonance_band choice(:K)
   made(:K) chose(:K, :V) ruin_route ruin_unlocked gameovers_found eliminated(:ID) festival_stage …`, `&& || !`, `== != >= <= > <`, `+ -`.
-- **Effects strings** (§3) are space-separated tokens `ID+n` / `ID-n`: a Bond ID, a faction ID, or `RES` for Resonance. Bond and
+- **Effects strings** (§4.2) are space-separated tokens `ID+n` / `ID-n`: a Bond ID, a faction ID, or `RES` for Resonance. Bond and
   faction IDs never collide, so a token is unambiguous. Events may apply them by hand today (`pf_bond_add` …).
 
 **[CORE+] requests** (each is a few lines; all are referenced below):
@@ -21,9 +21,9 @@
 3. **`drawn(:STAGE)`** → the entrant ID locked for a Festival stage (`state[:draws][stage]`), `nil` if not drawn yet.
 4. **`:effects` on CHOICES** (optional): `pf_choose(key, value)` applies `CHOICE_EFFECTS[key][value]` once, with the
    "X will remember that." toast only when a Bond changes tier. Lets events stop hand-applying deltas.
-5. **Festival draw extensions** (§8): `:vacates => :ENTRANT` on a candidate (the displaced default takes that entrant's seed; that
+5. **Festival draw extensions** (§6): `:vacates => :ENTRANT` on a candidate (the displaced default takes that entrant's seed; that
    entrant leaves and counts as `eliminated`), and `:live => true` on a stage (seed the default at `Festival.start`, resolve the
-   candidate list when the stage's battle starts, like Hijack). Plus `EXHIBITION_EXTRAS` (§8.5) and `ARCEUS_VARIANTS` (§8.6).
+   candidate list when the stage's battle starts, like Hijack). Plus `EXHIBITION_EXTRAS` (§6.5) and `ARCEUS_VARIANTS` (§6.6).
 
 ---
 
@@ -81,7 +81,7 @@ Titania drawn at `<= -3`; Ruin "war" Arceus and the main-route Unmake option at 
 
 ---
 
-## 4. Choices (46 keys; ★ = MAJOR branch decision)
+## 4. Choices (48 keys; MAJOR branch decisions are marked in each description)
 
 `:once => true` for all of them (a decision can't be re-made). "Gate" = when the prompt is offered (events check it); a value that
 is a game-over trigger is not a stored value (the GO fires instead). Values marked *(only if …)* are hidden otherwise.
@@ -255,7 +255,7 @@ DERIVED_FLAGS = {
   :KESTREL_FALLEN           => "choice(:ch18_kestrel_ring) != :give_now && choice(:ch15_kestrel) != :she_chose && (bond(:KESTREL) <= -4 || (bond(:KESTREL) <= 1 && (choice(:ch15_kestrel) == :sorry || standing(:MERIDIAN) >= 5)))",
   :KESTREL_REDEEMED         => "!flag(:KESTREL_FALLEN)",
   :KESTREL_LOST             => "flag(:KESTREL_FALLEN) && choice(:ch21_reach_kestrel) == :let_go",
-  :KESTREL_YSOLDE_RECONCILED=> "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 5 && bond(:YSOLDE) >= 4",
+  :KESTREL_YSOLDE_RECONCILED => "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 5 && bond(:YSOLDE) >= 4",
   :KESTREL_BEARS            => "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 8",
   :SIGRUN_BEARS             => "!flag(:KESTREL_BEARS) && bond(:SIGRUN) >= 6",
   :KESTREL_ACCEPTED_SEAT    => "flag(:KESTREL_YSOLDE_RECONCILED) && !flag(:KESTREL_LOST) && !(choice(:ch21_final) == :borrowed && flag(:KESTREL_BEARS))",
@@ -318,3 +318,362 @@ TALLIES = {
 }
 ```
 `tally(:CONSENT) >= 12` is the Good-ending threshold. `ENGINE_CALIBRATED` is evaluated when the True Finale starts (all inputs are known by then).
+
+---
+
+## 6. Festival draw (replaces the sample DRAWS in `015_Festival_Draw.rb`)
+
+### 6.1 Entrant additions / changes
+```ruby
+ENTRANTS.merge!({
+  :MARISOL        => { :display => "Marisol",  :trainer_type => :LEADER_MARISOL, :name => "Marisol", :version => 90, :rating => 86, :level_hint => 90 },
+  :ANJA           => { :display => "Anja",     :trainer_type => :LEADER_ANJA,    :name => "Anja",    :version => 90, :rating => 86, :level_hint => 90 },
+  :ROWAN          => { :display => "The Gardener", :trainer_type => :LEADER_ROWAN, :name => "Rowan", :version => 90, :rating => 88, :level_hint => 90 },
+  :KESTREL_FALLEN => { :display => "Kestrel",  :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
+  :BRANN          => { :display => "Brann",    :trainer_type => :LEADER_BRANN,   :name => "Brann",   :version => 96, :rating => 90, :level_hint => 96 },
+  :VALEN_RUIN     => { :display => "Valen",    :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
+  :QUENT          => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT, :name => "Percival", :version => 99, :rating => 97, :level_hint => 100 },
+  :THEODRIC       => { :display => "Theodric", :trainer_type => :GILDED_THEODRIC, :name => "Theodric", :version => 0, :rating => 99, :level_hint => 100 },
+  :MORWEN         => { :display => "Morwen",   :trainer_type => :ECHO_MORWEN,    :name => "Morwen",  :version => 90, :exhibition => true, :rating => 0, :level_hint => 90 }
+})
+# Retire the samples :SUCCESSOR and :MOURNER. :JUNO gets :exhibition => true (rival versions 40-42).
+# :MELIA, :TITANIA, :NOVA, :ALEXANDRA, :GARRET already exist; their QF draws pass :version => 2.
+```
+
+### 6.2 Draw lists (first match wins; the stage default is the appended fallback)
+```ruby
+DRAWS = {
+  :R16 => [   # default :JUNO (J4)
+    { :opponent => :MARISOL, :condition => "!ruin_route && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2", :vacates => :KAITO },
+    { :opponent => :ANJA,    :condition => "!ruin_route && flag(:ANJA_EXPOSED)", :vacates => :ODESSA },
+    { :opponent => :ROWAN,   :condition => "!ruin_route && flag(:ROWAN_ALIVE) && choice(:ch13_rowan_testimony) == :mercy && standing(:HOLLOW) >= 4" }
+  ],
+  :QF => [    # default :LIN (v2)
+    { :opponent => :NOVA,      :condition => "ruin_route",                                    :version => 2, :vacates => :SHIV },
+    { :opponent => :TITANIA,   :condition => "resonance <= -3",                               :version => 2, :vacates => :AMARIA },
+    { :opponent => :ALEXANDRA, :condition => "choice(:ch19_oath) == :keep",                   :version => 2 },
+    { :opponent => :GARRET,    :condition => "flag(:KESTREL_FALLEN)",                         :version => 2 },
+    { :opponent => :MELIA,     :condition => "tally(:WARM_BONDS) >= 5 && resonance >= 2",     :version => 2, :vacates => :VENAM }
+  ],
+  :SF => [    # default :KESTREL (K8, 80-82); on the Ruin Route the same team with Ruin dialogue
+    { :opponent => :KESTREL_FALLEN, :condition => "!ruin_route && flag(:KESTREL_FALLEN)" }
+  ],
+  :FINAL => [ # default :VALEN. Stage flag :live => true (drawn when the Final starts, Day 7)
+    { :opponent => :VALEN_RUIN, :condition => "ruin_route" },
+    { :opponent => :SIGRUN,     :condition => "flag(:VALEN_COLLAPSED) && bond(:SIGRUN) >= 5", :version => 96 },
+    { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
+  ],
+  :HIJACK => [ # default :VOSS (drawn live, as now)
+    { :opponent => :THEODRIC, :condition => "ruin_route" },
+    { :opponent => :QUENT,    :condition => "flag(:VOSS_DISCREDITED)" }
+  ]
+}
+```
+**Why FINAL must be live:** Valen's collapse reads Day 5 events (the audience, Little Owl). A live Final keeps Valen seeded and in the
+bracket all week; on Day 7 the stand-in takes his Final slot without reseating anyone (Valen watches from a stretcher, then holds the Ring).
+
+### 6.3 `:vacates` semantics [CORE+]
+When an **unseeded** candidate C with `:vacates => V` is drawn for a bracket stage whose default is D:
+C takes D's seat (as today), **D moves into V's seed instead of leaving**, and V leaves the bracket (`eliminated(V)` is true, and V's
+exhibition, if flagged, opens from Day 3). Validation: V must be seeded, must not be any stage's default or candidate, and no two
+candidates may vacate the same V. Seeded candidates (Alexandra, Garret) keep today's swap behaviour; variants (`:person`) keep the twin-seat rule.
+
+### 6.4 Displacement answers (the coordinator's question)
+
+| Drawn | Displaced default | Where the default goes | Who leaves, and the story reason | If `:vacates` isn't built |
+|---|---|---|---|---|
+| R16 Marisol | Juno | Kaito's seed (R16 vs Garret; she loses, exhibition Day 3) | **Kaito** yields his invitation to Marisol's **Right of Grievance** ("A fist is a promise. Hers came first."). He still holds the arena gate in the hijack. | Juno yields to the Grievance herself: absent from the bracket, present as Verdance's Warden, Juno exhibition offered. |
+| R16 Anja | Juno | Odessa's seed (R16 vs Valen; she loses) | **Odessa** gives Anja her place ("She's got a drowned city to answer for. I've only got mail."), and spends the week rigging evacuation skiffs. Her hijack airlift is unchanged. | as above |
+| R16 Rowan | Juno | **absent from the bracket by design** | Juno gives "the Gardener" her own invitation (her blessing *is* the condition: tribunal mercy + Hollow trust). She watches from the Wardens' box; Venam's garden-court scene still plays; Juno's "Garden Match" exhibition is offered. | same |
+| QF Titania | Lin | Amaria's seed (R16 vs Sigrun) | **Amaria** withdraws; Titania fights in her place to keep the darkening PC away from her. Amaria still voices Maren's lament. | Lin withdraws: "i came to warn somebody. looks like somebody else got the job." Lin exhibition (v2). |
+| QF Melia | Lin | Venam's seed (R16 vs Shelly) | **Venam** hands Melia her invitation ("you're better at the talking part"). She stays for her Juno/Rowan testimony; Venam exhibition from Day 3. | as above |
+| QF Nova (Ruin) | Lin | Shiv's seed (R16 vs Kestrel; she loses to him) | **Shiv** walked Nova through the dream in his place ("She paid more for the ticket than I did."). | Lin refuses to play "someone who wants to break a god", and watches. |
+| QF Alexandra / Garret | Lin | swaps into the drawn cameo's seed | nobody leaves | — |
+| SF Kestrel (Fallen) | — | variant: same seed | — | — |
+| FINAL Sigrun / Brann (live stand-in) | Valen (collapsed after his SF win) | stays in the bracket record; watches the Final from a stretcher | — | — |
+| FINAL Valen (Last Tuning), Ruin | — | variant: same seed | — | — |
+
+NPC results: no new SCRIPTED_WINNERS are required. Drawn path opponents already win until they meet the player; everything else simulates.
+
+### 6.5 Exhibitions that vary [CORE+ `EXHIBITION_EXTRAS`]
+Ruin Route: every exhibition is closed ("the champions won't play the Renegade") except the Eevee Octave, which the event handles.
+```ruby
+EXHIBITION_EXTRAS = [   # offered in addition to eliminated cameos; all require !ruin_route
+  { :entrant => :JUNO,    :condition => "!ruin_route && drawn(:R16) != :JUNO", :from_day => 3 },                             # "Garden Match", J4 team
+  { :entrant => :MARISOL, :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },  # Ebb Guild match, Teo cheering
+  { :entrant => :LIN,     :condition => "!ruin_route && drawn(:QF) != :LIN", :version => 2, :from_day => 5 },
+  { :entrant => :MELIA,   :condition => "!ruin_route && drawn(:QF) != :MELIA", :version => 2, :from_day => 3 },
+  { :entrant => :TITANIA, :condition => "!ruin_route && drawn(:QF) != :TITANIA", :version => 2, :from_day => 3 },
+  { :entrant => :MORWEN,  :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }  # Night of Masques: Ysolde calls the echo
+]
+```
+
+### 6.6 True Finale variants [CORE+ `ARCEUS_VARIANTS`, read by Prismfall Bosses]
+Bars = locks. Default bar *k* (1–6) holds the Plates of gyms 3k−2..3k; between bars those three Wardens' release (or refusal) beats play.
+Each Warden in the coming bar whose `WARDEN_CONSENT` is false makes it a **forced lock**: Arceus starts that bar with +1 to every stat stage per refusal.
+```ruby
+ARCEUS_VARIANTS = [
+  { :id => :ARCEUS_JUDGMENT,      :condition => "ruin_route",                  :bars => 7, :player_side => 2 },  # Ruin: Giratina-Origin partner; bar 7 on :INVERSE
+  { :id => :ARCEUS_GILDED,        :condition => "flag(:ENGINE_CALIBRATED)",    :bars => 6 },  # bar 6 refills 3x, then scripted binding -> END_GILDED_CHAIN
+  { :id => :ARCEUS_WAR,           :condition => "resonance <= -6",             :bars => 7 },  # the shard eats types: no release beats, every lock forced
+  { :id => :ARCEUS_MISCALIBRATED, :condition => "flag(:TELEMETRY_SABOTAGED)",  :bars => 5 },  # bar 5 covers gyms 13-18; Larch: "It's reaching for a shard that isn't where it thinks!"
+  { :id => :ARCEUS_BOUND,         :condition => nil,                           :bars => 6 }
+]
+# HARMONY_BUFF (resonance >= 6): at every bar break the PC's active Pokemon recovers 25% HP and its stat drops are cleared.
+```
+
+---
+
+## 7. Festival trainer teams the trainer agent must build (complete list)
+
+Version = the Standard base; Core adds +100 (Hard) / +200 (Casual) when those exist. Rival entries are ×3 (one per starter slot,
+Gen 1 starter line, swapped by Core). Festival-only Warden/NPC teams use **version = ace level** (90/96/99) so they never collide with
+story versions. "Planned" = already in the trainer agent's queue; **NEW** = added by this spec.
+
+| # | Stage | Entrant | `[TYPE, Name, Version]` | Ace lv | Status | Notes |
+|---|---|---|---|---|---|---|
+| 1 | R16 | Juno (J4, default) | `[RIVAL_JUNO, Juno, 40/41/42]` | 90 | planned | also the "Garden Match" exhibition |
+| 2 | R16 | Marisol (Grievance) | `[LEADER_MARISOL, Marisol, 90]` | 90 | **NEW** | also the Ebb Guild exhibition; Gyarados ace, rain + `:WATER_SURFACE` core |
+| 3 | R16 | Anja (exposed) | `[LEADER_ANJA, Anja, 90]` | 90 | **NEW** | Mamoswine; "Ice remembers." |
+| 4 | R16 | Rowan, "the Gardener" | `[LEADER_ROWAN, Rowan, 90]` | 90 | **NEW** | Warden-era Grass team + Trevenant; replaces Core's sample v50 |
+| 5 | QF | Lin (default) | `[FESTIVAL_LIN, Lin, 2]` | 92 | planned | also exhibition if not drawn |
+| 6 | QF | Alexandra | `[FESTIVAL_ALEXANDRA, Alexandra, 2]` | 92 | **NEW** | v1 (R16/exhibition) stays planned |
+| 7 | QF | Garret | `[FESTIVAL_GARRET, Garret, 2]` | 92 | **NEW** | v1 stays planned |
+| 8 | QF | Titania | `[FESTIVAL_TITANIA, Titania, 2]` | 92 | **NEW** | Core sample said v3; use 2. Also her exhibition |
+| 9 | QF | Melia | `[FESTIVAL_MELIA, Melia, 2]` | 92 | **NEW** | Core sample said v1; use 2. Also her exhibition |
+| 10 | QF (Ruin) | Nova | `[FESTIVAL_NOVA, Nova, 2]` | 92 | **NEW** | Gothitelle |
+| 11 | SF | Kestrel (Redeemed, K8, default) | `[RIVAL_KESTREL, Kestrel, 80/81/82]` | 94 | planned | Ruin Route reuses it with Ruin dialogue |
+| 12 | SF | Kestrel (Fallen) | `[RIVAL_KESTREL, Kestrel, 90/91/92]` | 94 | **NEW** | `rival_battle 9`; Gauntlet-fused, no tear-off; field-control battle script |
+| 13 | Final | Valen (default) | `[CHAMPION_VALEN, Valen, 0]` | 96 | planned | Zygarde |
+| 14 | Final | Sigrun, Sovereign-designate | `[LEADER_SIGRUN, Sigrun, 96]` | 96 | **NEW** | Salamence; stand-in for a collapsed Valen |
+| 15 | Final | Brann (stand-in) | `[LEADER_BRANN, Brann, 96]` | 96 | **NEW** | Coalossal; "He asked me to. Last thing he asked." |
+| 16 | Final (Ruin) | Valen, the Last Tuning | `[CHAMPION_VALEN, Valen, 1]` | 96 | **NEW** | fights to stop the Unmaking; Zygarde Complete from bar 1 |
+| 17 | Hijack | Voss (default) | `[MERIDIAN_VOSS, Aurelian, 0]` | 100 | planned | Silvally (field-following) |
+| 18 | Hijack | Dr. Quent | `[MERIDIAN_QUENT, Percival, 99]` | 100 | **NEW** | Voss's Silvally team in Quent's hands, plus his Psychic/Steel core |
+| 19 | Hijack (Ruin) | Theodric, the Gilded Reflection | `[GILDED_THEODRIC, Theodric, 0]` | 100 | **NEW** | new trainer type; Golurk, Aegislash, Regigigas reflection, Groudon/Kyogre echoes |
+| 20 | Exhibition | Morwen's Echo | `[ECHO_MORWEN, Morwen, 90]` | 90 | **NEW** | new trainer type; Mismagius-less (it's Kestrel's now): Chandelure, Gengar, Spiritomb, Dusknoir |
+| B1–B5 | True Finale | Arceus | boss configs `ARCEUS_BOUND` (planned), `_MISCALIBRATED`, `_WAR`, `_GILDED`, `_JUDGMENT` | 100 | 4 **NEW** | Prismfall Bosses; §6.6 |
+
+Cameo exhibitions keep CAMEOS.md's v1 teams (planned). Total **new Festival teams: 15** (+4 Arceus boss configs).
+
+**Non-Festival teams this spec adds** (story battles):
+
+| `[TYPE, Name, Version]` | Where | Why |
+|---|---|---|
+| `[RIVAL_JUNO, Juno, 70/71/72]` | Ch21 tag-battle partner | replaces Kestrel when `KESTREL_FALLEN` |
+| `[MERIDIAN_KROLL, Sabine, 21]` + `[MERIDIAN_MARCHETTI, Helene, 21]` + `[MERIDIAN_QUENT, Percival, 21]` | Ch21 tag foes | pairs: Quent + Kroll (default), Marchetti + Quent (Marchetti not turned); if Quent is the hijacker: Marchetti + Kroll, or Kroll + `[MERIDIAN_DIRECTORATE, Captain, 21]` when Marchetti is turned |
+| `[LEADER_MAGNUS, Magnus, 1]`, `[LEADER_NYX, Nyx, 1]`, `[LEADER_CELESTINE, Celestine, 1]`, `[LEADER_SIGRUN, Sigrun, 1]` | Ruin Route Gyms 15–18 | Ruin versions (harder, different leads; see 10_CHOICES_ENDINGS §5) |
+| `[REFLECTION, ???, 0]` | Ruin R1 | generated at battle start from `$player.party` (same species/levels/moves, mirrored nature); the PBS team is only a fallback |
+| boss config `GIRATINA_ORIGIN_TRIAL` | Ruin R1 | Giratina tests the Renegade on `:INVERSE` |
+
+## 8. Story-battle variants in the finale (not Festival stages)
+
+- **Tag battle partner:** Kestrel if `flag(:KESTREL_REDEEMED)`, else Juno.
+- **Tag foes:** see the table above.
+- **Fallen Kestrel in the hijack** is **not** a stage opponent (the draw forbids fighting a person twice). Voss harnesses him into the Engine as a
+  proxy conduit; between Voss's bars 2 and 3 the event offers `:ch21_reach_kestrel`. `:reach`/`:burn` break the conduit (Voss loses his bar-3
+  regeneration); `:let_go` sets `KESTREL_LOST` (he burns out as the Engine fires).
+- **`VOSS_FEIGNED`:** the hijack opens with Voss's Silvally at −1 to all stats for 3 turns ("You were *close*. You let me get close."). Same team.
+- **`VOSS_ACCEPTED`:** at the hijack, Voss offers his hand (`:ch21_hand`). `:take` skips the hijack battle and the True Finale and triggers
+  `END_CONCORD_DAWN`. `:refuse` plays the hijack normally, with the line "You promised."
+
+---
+
+## 9. Game overs (23 canonical + 2 Ruin-only)
+
+Ledger unlock = all 23 canonical found (`:ruin_exempt => true` entries don't count). The story lead's GO-20 "Encore" is **cut** (it overlaps
+GO_INTO_THE_LINE and needed four conditions). Two are **new**: `GO_WEATHER` (the one "battle you were told to flee") and `GO_STAY_OUT`.
+```ruby
+LEDGER_SHOW_HINTS = false   # the 'ledgerhints' password, or any seen ending, turns hints on (see §14)
+GAME_OVERS = {
+  # Act I
+  :GO_HOMEWARD         => { :title => "Homeward",           :hint => "Prologue. Edda asks twice.",
+                            :epitaph => "You went home. The lights went out one by one, and you watched them from the other shore." },
+  :GO_ORCHARD          => { :title => "Two in the Orchard", :hint => "Ch1. Some hands shouldn't be held through a Veil.",
+                            :epitaph => "She trusted you. That was the whole problem." },
+  :GO_CURTAIN_CALL     => { :title => "Curtain Call",       :hint => "Ch3. The butler mouths a word.",
+                            :epitaph => "Your notices were excellent. The run has not closed. It never will." },
+  :GO_LIVE_WIRE        => { :title => "Live Wire",          :hint => "Ch5. Rook shouts about hands.",
+                            :epitaph => "Even you weren't made to hold lightning bare." },
+  # Act II
+  :GO_SINKFIELD        => { :title => "Sinkfield",          :hint => "Ch6. Walk the bones, never the sand.",
+                            :epitaph => "The desert kept you. Somewhere else." },
+  :GO_SWEET_TOOTH      => { :title => "Sweet Tooth",        :hint => "Ch7. The third offer is the sweetest.",
+                            :epitaph => "You were so happy. You never wondered why again." },
+  :GO_LET_THEM_LISTEN  => { :title => "Let Them Listen",    :hint => "Ch8. A Hammer offers you the last word.",
+                            :epitaph => "They listened. There was no one left to tell." },
+  :GO_PULL_THE_NAIL    => { :title => "Pull the Nail",      :hint => "Ch9. Only the Hollow's friends are asked.",
+                            :epitaph => "You pulled the nail. The whole house came down." },
+  # Act III
+  :GO_LOYAL            => { :title => "Loyal",              :hint => "Ch10. Side with the heroes of the pageant.",
+                            :epitaph => "You believed the story everyone told. So did the people who wrote it." },
+  :GO_WEATHER          => { :title => "Weather",            :hint => "Ch11. When the lake breathes, run.",
+                            :epitaph => "You tried to fight the sea. The sea didn't notice. In spring, Rimeholt carved your name on the ice wall, and the thaw took that too." },
+  :GO_THIN_ICE         => { :title => "Thin Ice",           :hint => "Ch11. Ice remembers every weight.",
+                            :epitaph => "You went back for the proof. The lake kept it, and you." },
+  :GO_FINE_PRINT       => { :title => "Read the Fine Print", :hint => "Interlude III. Calla glances at a drawer.",
+                            :epitaph => "Kestrel Vane was reported missing the next morning. Meridian offered a reward." },
+  :GO_LOOKING_BACK     => { :title => "Looking Back",       :hint => "Ch13. Dask's one rule.",
+                            :epitaph => "You looked back. Now you're the reflection, and something else is wearing your face to the Festival." },
+  # Act IV
+  :GO_WILLING          => { :title => "Willing",            :hint => "Ch14. Never, ever let them examine you.",
+                            :epitaph => "The exam was painless, as promised. You've been asleep since. Meridian sends flowers." },
+  :GO_ECHO             => { :title => "Echo",               :hint => "Ch15. Echoes are a door that opens one way.",
+                            :epitaph => "You stayed for the song. Gravenmoor has one more echo now. It sings harmony." },
+  :GO_OVERTIME         => { :title => "Overtime",           :hint => "Ch16. We go when the whistle goes.",
+                            :epitaph => "You stayed past the whistle. Strade Works issued a statement about an industrial accident." },
+  :GO_INTO_THE_LINE    => { :title => "Into the Line",      :hint => "Ch17. Don't make them choose.",
+                            :epitaph => "They didn't choose. The bullet did. Meridian called it a tragic accident, and meant it." },
+  :GO_THE_THRONE       => { :title => "The Throne",         :hint => "Ch17. Don't touch anything gold.",
+                            :epitaph => "You fit perfectly. That was the problem the Gilders were trying to solve." },
+  # Act V
+  :GO_FAIR_BARGAIN     => { :title => "Fair Bargain",       :hint => "Ch18. Ask what it costs before you say yes.",
+                            :epitaph => "The price was your name. You are very happy now, as a lantern-moth, and you will glow at every dusk." },
+  :GO_STAY_OUT         => { :title => "Somebody Else's Story", :hint => "Ch18. Do what Kestrel asks.",
+                            :epitaph => "You did what everyone had told you since the ferry. The Engine took Kestrel instead. He lasted eleven minutes. Velmora lasted a week." },
+  :GO_LIARS_PYRE       => { :title => "Liar's Pyre",        :hint => "Ch19. Say true or say nothing.",
+                            :epitaph => "Ashkaar burns liars. It is the oldest law, and the dragons remember it even when men forget." },
+  :GO_EARLY_CROWN      => { :title => "Early Crown",        :hint => "Ch20. Don't let him hand you anything tonight.",
+                            :epitaph => "The Crown was whole for one second. Then it was Meridian's." },
+  :GO_HIS_HAND         => { :title => "His Hand",           :hint => "Ch21. Not chained, not bought.",
+                            :epitaph => "It didn't hurt. That was the cruelest part." },
+  # Ruin Route only (not needed for the unlock)
+  :GO_R_SWEET_DREAMS   => { :title => "Sweet Dreams",       :hint => "Ruin. Nova's kindness.", :ruin_exempt => true,
+                            :epitaph => "Nova kept her promise. Nobody in Velmora ever had to wake up again." },
+  :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
+                            :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
+}
+```
+
+## 10. Game-over triggers and checkpoints
+
+Call `Prismfall.checkpoint` at the listed point (a real save, placed **before** the trigger's event page), then `Prismfall.game_over(:ID)`
+on the trigger. Every trigger is a deliberate player choice with at least one confirm or repeated prompt; none fire from a cumulative stat alone.
+
+| ID | Ch | Type | Trigger | Foreshadowing (must be on screen first) | Checkpoint |
+|---|---|---|---|---|---|
+| GO_HOMEWARD | P | defy / joke | tell Edda you want to go back; confirm at her 2nd "Last chance, sprog" | Edda asks twice | after the badge-case scene |
+| GO_ORCHARD | 1 | defy | "Pull me through?" → Yes | Larch: "Never take a tinted person past a Veil"; Juno's burning line | Glassed Orchard entrance |
+| GO_CURTAIN_CALL | 3 | joke | accept "join the company forever" | butler-ghost mouths *don't* | Thistledown attic stairs |
+| GO_LIVE_WIRE | 5 | defy | "Grab the cracked Plate and run" (Electivire interlude prompt) | the Mourner's smoking glove; Rook: "Don't touch it with your hands!" | Plate Vault door |
+| GO_SINKFIELD | 6 | defy | step off the fossil path for the glint (after Sahar's 3 warnings) | sinking sandal; Field Notes | Sinkfield entrance |
+| GO_SWEET_TOOTH | 7 | defy / joke | accept Sweetrot the 3rd time | Wenlow's warning after the 1st | Mirefen Pokémon Center (before the 3rd vendor) |
+| GO_LET_THEM_LISTEN | 8 | betrayal | take the Hammer's detonator | Field Notes on Shatters; the Lowlight's glass | caldera floor (before CH8_CALDERA) |
+| GO_PULL_THE_NAIL | 9 | betrayal (offered only if `standing(:HOLLOW) >= 4`) | agree to plant Sable's charge | Wick's Ch7 line; Sable's broadcast | Ironreach shafts |
+| GO_LOYAL | 10 | choice | `:ch10_ogre` → "Stand with the Three" | Celestine's rhyme; the Mourner's Ch3 line; poison collars | Bride Grove gate |
+| GO_WEATHER | 11 | fight-when-told-to-flee (NEW) | when the lake breathes: "Fight it now" vs "Get to the towers"; scripted unwinnable Kyogre lv 80 | Anja: "That's not a Pokémon, that's weather. *Towers!*" | start of the Thaw |
+| GO_THIN_ICE | 11 | defy / failed escape | go back for the Lattice data core | Anja's line; the cracking-tile gym tutorial | start of the Thaw (same save) |
+| GO_FINE_PRINT | 12 | defy (Interlude III, as Kestrel) | open Voss's desk drawer | Calla's glance | interlude start |
+| GO_LOOKING_BACK | 13 | defy | "Look back?" → Yes on the Threshold | Dask's rule ×2, signpost in mirror-writing | Mirror Mere |
+| GO_WILLING | 14 | capture | accept Quent's "painless" removal | Larch: "Never, ever let them examine you." | before the raid |
+| GO_ECHO | 15 | defy | "Stay and listen?" ×3 | Ysolde's warning; translucent hand on the 2nd | Hollow Cathedral nave |
+| GO_OVERTIME | 16 | timed (klaxon 3) | keep copying blueprints past the whistle | Rook ×2: "no heroics" | core-chamber door |
+| GO_INTO_THE_LINE | 17 | defy | "Step between them?" → Yes | Nyx's courier ×2 | Underveil barricade |
+| GO_THE_THRONE | 17 | capture | "Sit on the Gilded King's throne?" → Yes | Sahar: "Don't touch anything gold"; open-hand armrests | Sun Court antechamber |
+| GO_FAIR_BARGAIN | 18 | joke / defy | accept the moth-stall bargain without asking the price | Celestine on arrival | Gloaming market gate |
+| GO_STAY_OUT | 18 | choice-based (NEW) | after K7: "Stay out of Crownhaven?" → Yes → "He's already walking away. Let him go?" → Yes | Celestine ("It says *walker*"), Sigrun's summons, Larch's letter all say it must be the PC | after K7 |
+| GO_LIARS_PYRE | 19 | defy | the hidden 5th oath "Whatever you want to hear." (always offered; no lie-tracking needed) | gate-guard: "say true or say nothing"; the brazier oath | Rift heart |
+| GO_EARLY_CROWN | 20 | betrayal (Valen's) | accept the crown tonight | Ilsa: "Don't let him hand you anything tonight." | Sanctum door |
+| GO_HIS_HAND | 21 | betrayal | take Voss's hand (any path without `VOSS_ACCEPTED`) | Lin's warning, K7 speech, Celestine | before the Coronation |
+| GO_R_SWEET_DREAMS | R6 | Ruin | accept Nova's dream | Nova's own pitch | Ruin QF |
+| GO_R_KNEEL | R7 | Ruin | kneel to Theodric | Voss kneels first; Giratina's warning | before the Ruin hijack |
+
+## 11. Ruin Route keys
+
+- **Unlock:** `ruin_unlocked` (Core: all non-exempt game overs in the Ledger).
+- **In-story trigger:** Ch15, immediately after the Giratina boss in the Reverse Depths. Only if `ruin_unlocked`, a pane of the Depths shows
+  Juno calling the PC's name (the GO_LOOKING_BACK image). Prompt `:ch15_look_back`. `:yes` → `Prismfall.start_ruin_route` (sets `ruin_route`),
+  resonance set to `min(resonance, -6)`, warp to R1. `:no` → main story continues; the prompt never returns on this save.
+- **Route chapters:** R1–R7 (10_CHOICES_ENDINGS §5). All main-route Act IV–V choice prompts after Ch15 are skipped on the Ruin Route except
+  `:ch16_magnus`, `:ch17_nyx`, `:ch18_kestrel_ring` and `:ch19_oath`, whose Ruin variants use the same keys.
+- **Choices:** `:ruin_voss`, `:ruin_walk`. Game overs: `GO_R_SWEET_DREAMS`, `GO_R_KNEEL` (exempt).
+- **Gyms 15–18** use version 1 of each leader (see §7). Badges are still awarded with `Prismfall.award_badge(n)` (caps unchanged); the badge
+  art swaps to the black "Reflection" set when `ruin_route`.
+
+---
+
+## 12. Endings (1 good, 1 bad, 6 grey, 2 ruin)
+
+```ruby
+ENDINGS = {
+  :END_HOMECOMING       => { :name => "Homecoming",             :kind => :good, :credits => true },
+  :END_GILDED_CHAIN     => { :name => "The Gilded Chain",       :kind => :bad,  :credits => true },
+  :END_UNFINISHED       => { :name => "Homecoming, Unfinished", :kind => :grey, :credits => true },
+  :END_EMPTY_LIGHTHOUSE => { :name => "The Empty Lighthouse",   :kind => :grey, :credits => true },   # NEW
+  :END_LONG_VIGIL       => { :name => "The Long Vigil",         :kind => :grey, :credits => true },
+  :END_BORROWED_CROWN   => { :name => "The Borrowed Crown",     :kind => :grey, :credits => true },
+  :END_HOLLOW_SPRING    => { :name => "The Hollow Spring",      :kind => :grey, :credits => true },
+  :END_CONCORD_DAWN     => { :name => "Concord Dawn",           :kind => :grey, :credits => true },
+  :END_UNMAKING         => { :name => "The Unmaking",           :kind => :ruin, :credits => true },
+  :END_REFLECTION       => { :name => "The One Who Came Back",  :kind => :ruin, :credits => true }    # NEW, secret
+}
+ENDING_RULES = [
+  [:END_REFLECTION,       "ruin_route && choice(:ruin_walk) == :reflection"],
+  [:END_UNMAKING,         "ruin_route"],
+  [:END_CONCORD_DAWN,     "choice(:ch21_hand) == :take || choice(:ch21_final) == :concord"],
+  [:END_GILDED_CHAIN,     "flag(:ENGINE_CALIBRATED)"],
+  [:END_HOLLOW_SPRING,    "choice(:ch21_final) == :unmake"],
+  [:END_BORROWED_CROWN,   "choice(:ch21_final) == :borrowed"],
+  [:END_LONG_VIGIL,       "choice(:ch21_final) == :keep"],
+  [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2)"],
+  [:END_EMPTY_LIGHTHOUSE, "choice(:ch21_final) == :return && flag(:KESTREL_LOST)"],
+  [:END_HOMECOMING,       "choice(:ch21_final) == :return"]
+]
+DEFAULT_ENDING = :END_UNFINISHED   # unreachable in play; a safe fallback for debug jumps
+```
+Call sites: `END_CONCORD_DAWN` right after `:ch21_hand == :take`; `END_GILDED_CHAIN` when the `ARCEUS_GILDED` fight's scripted binding plays;
+every other ending after `:ch21_final` (main) or `:ruin_walk` (Ruin). Each is `Prismfall.trigger_ending` with no ID.
+
+**Post-game state** (Core writes FLAGS.md S263–S269 from the ending; `narrative[:postgame]` = the ending ID):
+
+| Ending | S263 HOMECOMING_WORLD | S264 VIGIL_WORLD | S265 RUIN_WORLD | S266 Spire | S267 Gauntlet | S268 Distortion | S269 Concord Zero | Post-game? |
+|---|---|---|---|---|---|---|---|---|
+| HOMECOMING | ✓ | | | ✓ | ✓ | ✓ | ✓ | full |
+| UNFINISHED | ✓ (refusing cities use Bleed-scar states) | | | ✓ | ✓ (refusers absent) | ✓ | ✓ | full |
+| EMPTY_LIGHTHOUSE | ✓ | | | ✓ | ✓ | ✓ | ✓ | full (Kestrel absent; Hesper's lighthouse scene) |
+| LONG_VIGIL | | ✓ | | ✓ | ✓ | ✓ | | full (the PC is Sovereign) |
+| BORROWED_CROWN | | ✓ | | ✓ | ✓ (bearer absent) | ✓ | | full |
+| HOLLOW_SPRING | | | | ✓ | ✓ | | | partial: no legendary rematches except Ogerpon/Loyal Three |
+| CONCORD_DAWN | | | | ✓ | | | ✓ | partial: Spire only; the Wardens are pensioned off |
+| GILDED_CHAIN | | | | | | | | none: credits → title (Ledger records it) |
+| UNMAKING | | | ✓ | ✓ | ✓ | ✓ | | full (Antumbra mirrors open) |
+| REFLECTION | | | ✓ | ✓ | ✓ | ✓ | | full, played as the Reflection |
+
+## 13. Renames and changes vs the FLAGS.md crosswalk
+
+| Crosswalk | Final | Why |
+|---|---|---|
+| `CH*_…` / `PRO_…` uppercase keys | same names, lowercase symbols (`:ch9_teo_sable`) | Core's choice keys are lowercase symbols |
+| `CH13_REMEMBER` values `show / scared / not_yet` | unchanged | — |
+| `CH19_OATH :ruin` | gated on `resonance <= -2` | needs a rule |
+| `CH21_FINAL` | unchanged values; availability via `UNMAKE_OPEN`, `CONCORD_OPEN`, `BORROWED_OPEN` | — |
+| outcome-only `ZEKROM_FREED` | `:ch16_zekrom => :freed` + `flag(:ZEKROM_FREED)` | Core stores choices only |
+| outcome-only `CORVIN_FREED` | `:sq_doctors_cell` + flag | same |
+| outcome-only `ILSA_RECONCILED` | `:sq_little_owl` + flag | same |
+| outcome-only `DOMINAR_SWAYED` | `:ch19_dominar` + flag | same |
+| outcome-only `ENVOY_PERSUADED` | `:ch20_envoy` + flag | same |
+| outcome-only `PC_SPARED_VOSS` | `:ch21_spare_voss` + flag | same |
+| outcome-only `KESTREL_ACCEPTED_SEAT`, `KESTREL_YSOLDE_RECONCILED`, `TAMSIN_PUBLIC_CONFESSION` | derived flags only | computed from Bonds/choices |
+| `VOSS_FEIGNED`, `VOSS_ACCEPTED`, `TEO_SAVED`, `IRONREACH_EVIDENCE`, `ANJA_EXPOSED`, `KAITO_TESTIFIED`, `TELEMETRY_SABOTAGED`, `MAGNUS_EXPOSED`, `MAGNUS_KEPT_FAITH`, `NYX_BARGAIN_TAKEN`, `OGERPON_TRUSTED`, `MARCHETTI_TURNED` | derived flags of the same name | — |
+| GO-01 … GO-22 | `GO_<NAME>` IDs in §9 | descriptive IDs; GO-20 Encore cut |
+| (new) | `:ch2_matriarch`, `:ch11_strike`, `:ch13_fault`, `:ch20_calla`, `:ch21_hand`, `:ch21_reach_kestrel`, `:ch15_look_back`, `:ruin_voss`, `:ruin_walk`, `GO_WEATHER`, `GO_STAY_OUT`, `END_EMPTY_LIGHTHOUSE`, `END_REFLECTION` | see 10_CHOICES_ENDINGS |
+| Core samples `:MOURNER` bond, `:SUCCESSOR`, `:MOURNER` entrant, `LEADER_ROWAN v50`, `KESTREL_FALLEN` conditions, all sample CHOICES/GAME_OVERS/ENDINGS | retired / replaced | — |
+
+## 14. Password additions (append to `Passwords::TABLE`)
+
+| Word | ID | Effect |
+|---|---|---|
+| `ledgerhints` | :LEDGER_HINTS | the Ledger shows `:hint` for unfound game overs (also on automatically after any ending is seen) |
+| `nomercy` | :NO_MERCY | `Prismfall.checkpoint` does nothing: a story game over sends you to your last *manual* save |
+| `openbook` | :OPEN_BOOK | the Ties page shows numbers next to tiers (accessibility / theorycrafting) |
+| `colorless` | :COLORLESS | Resonance deltas are halved (rounded toward 0): Harmony and Ruin are both harder to reach |
+| `secondferry` | :SECOND_FERRY | only accepted if the Ledger has an ending: New Game+ carryover (10_CHOICES_ENDINGS §7.5) |
+
+## 15. Validation checklist (for a Core debug command)
+
+1. Every `choice(:k)`, `chose(:k, :v)`, `made(:k)` in any condition names a key in CHOICES, and `:v` is in its `:values`.
+2. Every `flag()` / `tally()` name exists; no flag cycle.
+3. Every Bond / faction ID in CHOICE_EFFECTS exists.
+4. DRAWS: persons disjoint across stages (Core already checks); every `:vacates` target seeded, not a candidate anywhere, used once.
+5. ENDING_RULES: the last main-route rule `choice(:ch21_final) == :return` plus the Concord/Gilded/other `:ch21_final` rules cover every value of `:ch21_final`.
+6. `WARDEN_CONSENT.size == 18`.

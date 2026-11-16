@@ -115,8 +115,20 @@ events:
         commands:
           - "Coll Hale: You're the Larch kid? Eat this. You're too thin."
           - "He hands you a bramble tart. It's still warm."
-  - {type: npc, name: Wenna Hale, at: [25, 11], sprite: NPC 11, dir: down,
-     text: "Wenna Hale: Juno's at the Station with the Professor. Tell her to come home for supper. She won't."}
+  - type: event
+    name: Wenna Hale
+    at: [25, 11]
+    pages:
+      - graphic: {sprite: NPC 11, dir: down}
+        commands:
+          - "Wenna Hale: Juno's at the Station with the Professor. Tell her to come home for supper. She won't."
+          - "Wenna Hale: Here - Juno's old Pokégear. She upgraded. You'll want a map and a phone in this place."
+          - {script: "$player.has_pokegear = true"}
+          - "\\PN received a Pokégear!"
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
+        graphic: {sprite: NPC 11, dir: down}
+        commands: ["Wenna Hale: Juno's at the Station with the Professor. Tell her to come home for supper. She won't."]
   - {type: npc, name: Skipping children, at: [13, 13], sprite: NPC 07, move: random,
      text: "One for the weaver, two for the stage,\nthree for the river that won't turn its page,\nfour for the lantern, five for the dune...!"}
   - type: event

@@ -1,0 +1,20 @@
+# Story bosses used by map events. build.py writes them into maps_out/Plugins/Prismfall Maps/003_StoryBosses.rb as
+# Prismfall::Bosses.register(:ID, {...}) calls (guarded: only when the Prismfall Bosses plugin is installed).
+# Events start them with the DSL command {boss: {id: ID, species: X, level: N, field: F}}: Prismfall::Bosses.wild_battle(:ID),
+# falling back to a plain WildBattle (same species/level/field, cannotRun) when the plugin is absent.
+# Each entry's `ruby` is the body of the definition Hash (keys per design/BOSSES.md section 2).
+GLASS_MATRIARCH:
+  map: 548
+  ruby: |
+    :species    => :GALVANTULA,
+    :level      => { :CASUAL => 15, :STANDARD => 16, :HARD => 18, :default => 16 },
+    :nickname   => "Glass Matriarch",
+    :bars       => { :CASUAL => 2, :STANDARD => 3, :HARD => 3, :default => 3 },
+    :stat_mults => { :HP => 1.1, :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 },
+    :field      => :BLEED,
+    :intro      => "The Glass Matriarch rises from its nest, every crystal hair ringing!",
+    :breaks     => {
+      1 => { :message => "{1}'s crystal silk shatters... and regrows thicker!", :stats => { :DEFENSE => 1 } },
+      2 => { :message => "{1} pulls the Bleed into its nest!", :cure_status => true, :stats => { :SPEED => 1 } }
+    },
+    :on_defeat  => { :message => "{1} folds its legs. The ringing of the nest softens.", :result => :calmed }

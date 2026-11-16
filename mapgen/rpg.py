@@ -198,6 +198,14 @@ def compile_cmds(items, indent=0, ctx=None):
             sid, on = v; sid = _f(sid, 'switches'); out.append(ev_cmd(121, indent, [int(sid), int(sid), 0 if on else 1]))
         elif k == 'var':
             vid, val = v; vid = _f(vid, 'variables'); out.append(ev_cmd(122, indent, [int(vid), int(vid), 0, 0, int(val)]))
+        elif k == 'boss':   # Prismfall Bosses wild boss, plain WildBattle fallback
+            rules = ''.join('  setBattleRule("field", :%s)\n' % v['field'] for _ in [0] if v.get('field'))
+            script = ('if defined?(Prismfall::Bosses) && Prismfall::Bosses.exists?(:%s)\n'
+                      '  Prismfall::Bosses.wild_battle(:%s)\n'
+                      'else\n%s  setBattleRule("cannotRun")\n  WildBattle.start(:%s, %d)\nend'
+                      % (v['id'], v['id'], rules, v['species'], int(v['level'])))
+            for i, l in enumerate(script.split('\n')):
+                out.append(ev_cmd(355 if i == 0 else 655, indent, [l]))
         elif k == 'selfswitch':
             ch, on = v; out.append(ev_cmd(123, indent, [ch, 0 if on else 1]))
         elif k == 'transfer':

@@ -1,0 +1,173 @@
+# Brinecut Mine (544 1F, 545 B1F, :CAVE): chalk-and-salt mine linking Route 3 and Route 4.
+# Built on the base project's Rock Cave templates (data/templates/cave1/cave2); the salt lake is [TODO art].
+id: 544
+name: Brinecut Mine 1F
+parent: 540
+template: cave1
+drop_template_events: [Exit south, Exit right, Ladder, Hole, NPC, StrengthBoulder, Boulder position checks, Sign,
+                       Dungeon ladder, Dungeon sign, Tile puzzles, EV016]
+bgm: Cave
+field: CAVE
+metadata: {Name: Brinecut Mine, MapPosition: [0, 11, 23], BattleBack: cave1}
+events:
+  - {type: warp, name: To Route 4, at: [18, 22], link: R4_MINE, arrive: [18, 21, up], se: Door exit}
+  - {type: warp, name: To Route 3, at: [24, 9], link: R3_MINE, arrive: [24, 10, down], se: Door exit}
+  - {type: warp, name: Ladder down, at: [10, 12], to: {map: 545, x: 11, y: 12, dir: right}, se: Door exit}
+  - {type: trainer, at: [14, 12], sight: 4, dir: right, sprite: trainer_HIKER, trainer: [HIKER, Bram],
+     intro: "Salt in the walls, salt in my boots! Let's go!", after: "The B1F salt lake glows at night. Pretty, but don't drink it."}
+  - {type: trainer, at: [20, 7], sight: 4, dir: down, sprite: trainer_BLACKBELT, trainer: [BLACKBELT, Taro],
+     intro: "I train by punching chalk. Want to see?", after: "Chalk wins. Usually."}
+  - type: event
+    name: Salt miner
+    at: [9, 11]
+    pages:
+      - graphic: {sprite: trainer_HIKER, dir: right}
+        commands:
+          - "Salt miner: Brinecut's been worked since before the Prismfall. Rockfalls every spring now, though."
+          - if: "Prismfall.has_badge?(2)"
+            then:
+              - "Salt miner: Two badges? Then you can handle this. Smash what's in your way."
+              - {script: "pbReceiveItem(:TM98)"}
+              - {selfswitch: [A, true]}
+            else: ["Salt miner: Come back with Dorian's badge and I'll teach you how we clear rubble."]
+      - cond: {self: A}
+        graphic: {sprite: trainer_HIKER, dir: right}
+        commands: ["Salt miner: Rock Smash. Use it on the cracked boulders - sometimes there's something inside."]
+  - {type: item, at: [19, 20], item: ESCAPEROPE}
+  - {type: item, at: [12, 7], item: HARDSTONE, hidden: true}
+---
+id: 545
+name: Brinecut Mine B1F
+parent: 544
+template: cave2
+drop_template_events: [Ladder, StrengthBoulder, Sign, NPC]
+bgm: Cave
+field: CAVE
+metadata: {Name: Brinecut Mine, MapPosition: [0, 11, 23], BattleBack: cave1}
+events:
+  - {type: warp, name: Ladder up, at: [10, 12], to: {map: 544, x: 10, y: 13, dir: down}, se: Door exit}
+  - {type: trainer, at: [16, 13], sight: 4, dir: left, sprite: trainer_HIKER, trainer: [HIKER, Gorse],
+     intro: "Down here the salt sings. You hear it?", after: "Old miners say the singing started three hundred years ago."}
+  - {type: item, at: [20, 14], item: OLDAMBER}
+  - {type: item, at: [1, 15], item: NUGGET, hidden: true}
+  - {type: sign, at: [12, 7], post: false, name: Salt lake, text: "A still salt lake glimmers in the dark. [TODO art: salt lake]"}
+---
+# Thistledown Manor (546) + Attic (547): the comic haunted house (story/04_ACT_I.md Ch3 optional set piece).
+# Built on the base project's big-house / small-house templates with DarkMap (light circle) for the haunting.
+id: 546
+name: Thistledown Manor
+parent: 540
+template: bigroom
+exit_link: R3_MANOR
+drop_template_events: [Stairs up, Stairs down, PC, EV005, "Trainer, Visual Editor, Terrain Tags", "Debug, badges, screenshots",
+                       Pokédex, Mom, Warp tile 1, Warp tile 2, Choices NPC, Text formatting NPC, Pokémon-checking NPC,
+                       Roaming Pokémon, Item, EV017, Trainer(1)]
+bgm: Cave
+metadata: {DarkMap: true, MapPosition: [0, 12, 21]}
+events:
+  - {type: warp, name: Stairs up, at: [10, 2], link: MANOR_UP, arrive: [10, 3, down], se: Door exit}
+  - {type: sign, at: [28, 2], post: false, name: Cellar stairs, text: "The cellar stairs end in a painted wall. Very theatrical."}
+  - &scene
+    type: event
+    name: Scene 1
+    at: [7, 4]
+    pages:
+      - graphic: {sprite: NPC 25, dir: down, opacity: 160}
+        commands:
+          - "A ghostly actor in a ruff glares at you. \"You're late! Scene one - the battlements! Your line?\""
+          - choices: ["\"Who's there?\"", "\"Is this a Poké Ball I see before me?\"", "\"Line?\""]
+            cancel: 0
+            branches:
+              - ["\"...Perfect. PERFECT.\" The ghost wipes away a spectral tear.", {selfswitch: [A, true]}]
+              - ["\"WRONG PLAY!\" The ghost's Pokémon lunges out of the dark!", {script: "WildBattle.start(:GASTLY, 13)"}]
+              - ["\"LINE?! Off with them!\"", {script: "WildBattle.start(:GASTLY, 13)"}]
+      - cond: {self: A}
+        commands: ["Only a cold spot where the actor stood."]
+  - <<: *scene
+    name: Scene 2
+    at: [20, 4]
+    pages:
+      - graphic: {sprite: NPC 28, dir: down}
+        commands:
+          - "A ghostly queen sweeps toward you. \"Scene two! The closet! What do you say to your mother?\""
+          - choices: ["\"I must be cruel only to be kind.\"", "\"Mother, I've caught a Magikarp.\"", "*bow silently*"]
+            cancel: 0
+            branches:
+              - ["\"Exquisite.\" She fades, delighted.", {selfswitch: [A, true]}]
+              - ["\"HOW DARE YOU.\"", {script: "WildBattle.start(:MISDREAVUS, 13)"}]
+              - ["\"A mime? In MY production?\"", {script: "WildBattle.start(:MISDREAVUS, 13)"}]
+      - cond: {self: A}
+        commands: ["A faint scent of greasepaint lingers."]
+  - <<: *scene
+    name: Scene 3
+    at: [25, 6]
+    pages:
+      - graphic: {sprite: NPC 03, dir: left}
+        commands:
+          - "A ghostly gravedigger holds up a Poké Ball like a skull. \"Scene three! The graveyard! Well?\""
+          - choices: ["\"Alas, poor Voltorb!\"", "\"Is it... empty?\"", "\"I'll take it.\""]
+            cancel: 0
+            branches:
+              - ["\"Alas indeed!\" He bows, cackling, and is gone.", {selfswitch: [A, true]}]
+              - ["\"EMPTY?!\"", {script: "WildBattle.start(:DUSKULL, 13)"}]
+              - ["\"Props are NOT for keeping!\"", {script: "WildBattle.start(:DUSKULL, 13)"}]
+      - cond: {self: A}
+        commands: ["Freshly turned earth on a parlour rug."]
+  - type: event
+    name: Lady Thistledown
+    at: [2, 6]
+    pages:
+      - graphic: {sprite: NPC 28, dir: down, opacity: 180}
+        commands:
+          - if: '$game_map.events.values.select { |e| e.name[/^Scene \d/] }.all? { |e| $game_self_switches[[@map_id, e.id, "A"]] }'
+            then:
+              - "Lady Thistledown: Darling. DARLING. Three scenes, three triumphs. The company has not had an understudy like you in a century."
+              - "Behind her, the butler-ghost mouths one word at you: don't."
+              - "Lady Thistledown: Stay for the second act. Join the Thistledown Players... forever."
+              - choices: ["Bow out gracefully", "Join the company"]
+                cancel: 1
+                branches:
+                  - - "Lady Thistledown: ...A pity. Then take your bouquet. Every star needs one."
+                    - {script: "pbReceiveItem(:SPELLTAG)"}
+                    - "A small candle-flame drifts out of the footlights and follows you."
+                    - {script: "pbAddPokemon(:LITWICK, 14)"}
+                    - {switch: [THISTLEDOWN_CLEARED, true]}
+                    - {selfswitch: [A, true]}
+                  - - {script: "Prismfall.game_over(:GO_CURTAIN_CALL)"}
+            else: ["Lady Thistledown: Places, everyone! Places! ...You. You're the new understudy? Learn your scenes."]
+      - cond: {self: A}
+        commands: ["The parlour is quiet. On the mantel, a playbill: THE THISTLEDOWN PLAYERS - FINAL SEASON."]
+  - type: event
+    name: Ghost girl
+    at: [5, 6]
+    pages:
+      - graphic: {sprite: NPC 07, dir: down, opacity: 140}
+        commands:
+          - "A little girl in an old-fashioned dress: \"Mama says the play never ends. Is that true?\""
+          - "When you blink, she's gone."
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
+  - {type: trainer, at: [22, 7], sight: 4, dir: left, sprite: trainer_CHANNELER, trainer: [CHANNELER, Mireille],
+     intro: "The spirits asked me to audition you!", after: "They say you have presence. Ghostly presence."}
+  - {type: item, at: [26, 4], item: CLEANSETAG}
+---
+id: 547
+name: Thistledown Manor - Attic
+parent: 546
+template: house2
+drop_template_events: [Kurt, Exit]
+bgm: Cave
+metadata: {DarkMap: true, MapPosition: [0, 12, 21]}
+events:
+  - {type: warp, name: Stairs down, at: [6, 8], link: MANOR_UP, arrive: [6, 7, up], se: Door exit}
+  - type: event
+    name: Greavard
+    at: [5, 3]
+    pages:
+      - graphic: {sprite: Object boulder}
+        commands:
+          - "Something under a dust sheet wags its tail."
+          - {script: "WildBattle.start(:GREAVARD, 16)"}
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
+  - {type: item, at: [8, 6], item: SPELLTAG}

@@ -8,16 +8,18 @@ palette: outside
 bgm: Route 3
 parent: 0
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 11, 22], BattleBack: field}
+stamps:
+  - {stamp: condo, at: [38, 1], link: R3_MANOR, name: Manor door}
 connections:
   - {dir: E, offset: 10, to: 120, to_offset: 14}
   - {dir: S, offset: 2, to: 541, to_offset: 2}
 map: |
   TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TT......TTTT....TTTT................TT......TT................TT
-  TT......TTTT....TTTT................TT......TT................TT
-  TT......TTTT....TTTT................TT......TT..........TT....TT
-  TT......TTTT....TTTT................TT......TT..........TT....TT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT#######TTTTTTTTTTTTTTTTTTTT
+  TT......TTTT....TTTT................T#######TT................TT
+  TT......TTTT....TTTT................T#######TT................TT
+  TT......TTTT....TTTT................T#######TT..........TT....TT
+  TT......TTTT....TTTT................T#######TT..........TT....TT
   TT......TTTT....TTTT..**************....__..,,,,,,,,,,........TT
   TT......TTTT____TTTT..**************....__..,,,,,,,,,,........TT
   TT....,,,,,,____......**************....__..,,,,,,,,,,........TT
@@ -55,8 +57,8 @@ events:
             else: ["Crystal silk seals the copse. It rings faintly when you touch it. (The Warden might know a way through.)"]
       - cond: {self: A}
         through: true
-  - {type: sign, at: [40, 6], text: "THISTLEDOWN MANOR\nClosed until further notice. [TODO map 546]"}
-  - {type: sign, at: [51, 15], post: false, name: Mine mouth, text: "A rockfall seals the Brinecut Mine shaft. [TODO map 544]"}
+  - {type: sign, at: [42, 7], text: "THISTLEDOWN MANOR\nHome of the Thistledown Players. Closed since AF 211."}
+  - {type: warp, name: Mine mouth, at: [51, 15], link: R3_MINE, arrive: [51, 16, down], se: Door exit}
   - {type: sign, at: [58, 13], text: "ROUTE 3\nE: Briarwick - S: Route 4 to Saltmere"}
   - {type: trainer, at: [18, 10], sight: 4, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Bryony],
      intro: "Meadow picnic! Battle before the sandwiches, not after!", after: "The river's lovely from the bridge."}
@@ -136,7 +138,7 @@ map: |
 stamps:
   - {stamp: house_red, at: [2, 40], link: R4_REST, name: Rest house door}
 events:
-  - {type: sign, at: [25, 24], post: false, name: Chalk cliff, text: "A crack in the chalk cliff. Brinecut Mine's back door - rubble blocks it. [TODO map 544]"}
+  - {type: warp, name: Mine back door, at: [25, 24], link: R4_MINE, arrive: [24, 24, left], se: Door exit}
   - {type: trainer, at: [11, 28], sight: 4, dir: up, sprite: trainer_SAILOR, trainer: [SAILOR, Morrow],
      intro: "Boardwalk's narrow, landlubber! Battle or swim!", after: "Saltmere's just south. Mind the salt-pans."}
   - {type: trainer, at: [20, 46], sight: 4, dir: left, sprite: trainer_TUBER_F, trainer: [TUBER_F, Pip],

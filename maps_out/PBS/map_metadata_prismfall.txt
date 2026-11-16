@@ -204,5 +204,25 @@ BattleBack = field
 Name = Marsh Rest House
 MapPosition = 0,11,24
 #-------------------------------
+[544]   # Brinecut Mine 1F
+Name = Brinecut Mine
+MapPosition = 0,11,23
+BattleBack = cave1
+#-------------------------------
+[545]   # Brinecut Mine B1F
+Name = Brinecut Mine
+MapPosition = 0,11,23
+BattleBack = cave1
+#-------------------------------
+[546]   # Thistledown Manor
+Name = Thistledown Manor
+DarkMap = true
+MapPosition = 0,12,21
+#-------------------------------
+[547]   # Thistledown Manor - Attic
+Name = Thistledown Manor - Attic
+DarkMap = true
+MapPosition = 0,12,21
+#-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

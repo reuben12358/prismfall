@@ -99,14 +99,7 @@ events:
         commands:
           - "At the Bleed's heart, a giant glassed Galvantula has woven a nest of crystal silk."
           - "It turns toward you, every glass hair singing."
-          - script: |
-              setBattleRule("field", :BLEED)
-              setBattleRule("cannotRun")
-              if defined?(EliteBattle) && EliteBattle.respond_to?(:bossBattle)
-                EliteBattle.bossBattle(:GALVANTULA, 16, 1, false, { :bossboost => { :HP => 3.0, :DEFENSE => 1.2, :SPECIAL_DEFENSE => 1.2 } })
-              else
-                WildBattle.start(:GALVANTULA, 16)
-              end
+          - {boss: {id: GLASS_MATRIARCH, species: GALVANTULA, level: 16, field: BLEED}}
           - "The Matriarch folds its legs. The ringing of the nest softens - the glass creeping out from the Hollow stops, for now."
           - "Around you, the nest's Pokémon fall quiet. Calm."
           - {switch: [CH2_MATRIARCH_DONE, true]}

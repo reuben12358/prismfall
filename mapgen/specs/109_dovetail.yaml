@@ -29,13 +29,33 @@ events:
     pages:
       - trigger: autorun
         commands:
-          - {tone: [-40, -55, -20, 40, 0]}
+          - {tone: [-255, -255, -255, 0, 0]}
+          - "A ship's horn, somewhere in the dark."
           - "Spring, AF 300. The Concert of Regions has sealed the borders of Velmora."
           - "This is the final civilian crossing."
-          - {script: "Prismfall.choose_difficulty"}
-          - "A ship's horn sounds. You stand at the rail with one bag and your mother's letter."
+          - "The cabin lamp flickers on. In the black porthole glass, a reflection looks back at you."
+          - choices: ["That's me. (Style A)", "That's me. (Style B)"]
+            cancel: 0
+            branches:
+              - [{script: "pbChangePlayer(1)"}]
+              - [{script: "pbChangePlayer(2)"}]
+          - {tone: [-40, -55, -20, 40, 30]}
+          - {wait: 30}
+          - "Up on deck, the dusk is cold and salt-bright. You stand at the rail with one bag and your mother's letter."
           - "Captain Edda Morrow: Don't lean on my rail like that, sprog - you'll - huh."
-          - "Captain Edda Morrow: ...Never mind. Mind the gap when we dock."
+          - "She stares a beat too long."
+          - "Captain Edda Morrow: ...Never mind. Name for the manifest? Last crossing. I'm not losing anybody off my books."
+          - {label: Manifest name}
+          - {script: "pbTrainerName"}
+          - "Captain Edda Morrow: \\PN. That right?"
+          - choices: ["That's right", "No, let me spell it"]
+            cancel: 0
+            branches:
+              - []
+              - [{jump_label: Manifest name}]
+          - "Captain Edda Morrow: \\PN it is. Mind the gap when we dock."
+          - {script: "$player.has_running_shoes = true"}
+          - {script: "Prismfall.choose_difficulty"}
           - {switch: [LARCH_AT_TIDEWATCH, true]}
           - {var: [STORY_ACT, 0]}
           - {var: [STORY_CHAPTER, 0]}

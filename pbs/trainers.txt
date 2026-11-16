@@ -99,6 +99,12 @@ Pokemon = AMBIPOM,18
     Item = SILKSCARF
     Nature = JOLLY
     IV = 12
+Pokemon = LOUDRED,18
+    Moves = ECHOEDVOICE,BITE,HOWL,UPROAR
+    Ability = SCRAPPY
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 12
 Pokemon = KECLEON,19
     Moves = SHADOWSNEAK,PSYBEAM,THIEF,FEINT
     Ability = COLORCHANGE
@@ -123,13 +129,20 @@ Pokemon = AMBIPOM,19
     Nature = JOLLY
     IV = 31
     EV = 4,252,0,252,0,0
-Pokemon = LOUDRED,18
-    Moves = ECHOEDVOICE,BITE,HOWL,UPROAR
+Pokemon = LOUDRED,19
+    Moves = HYPERVOICE,BITE,UPROAR,PROTECT
     Ability = SCRAPPY
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 31
     EV = 4,0,0,252,252,0
+Pokemon = FURFROU,18
+    Moves = HEADBUTT,BABYDOLLEYES,SNARL,UTURN
+    Ability = FURCOAT
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 252,4,252,0,0,0
 Pokemon = KECLEON,19
     Moves = FAKEOUT,SHADOWSNEAK,KNOCKOFF,ROCKTOMB
     Ability = PROTEAN
@@ -140,6 +153,13 @@ Pokemon = KECLEON,19
 #-------------------------------
 [LEADER_DORIAN,Dorian,200]
 LoseText = Bravo! Bravissimo! The audience is yours tonight!
+Pokemon = CHATOT,15
+    Moves = CHATTER,ROUND,PECK,GROWL
+    Ability = BIGPECKS
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 4
+    EV = 0
 Pokemon = AMBIPOM,16
     Moves = DUALCHOP,SWIFT,ASTONISH,TICKLE
     Ability = TECHNICIAN
@@ -6239,6 +6259,902 @@ Pokemon = BEAUTIFLY,12
     Nature = MODEST
     IV = 0
     EV = 0
+# Map 525 Gossamer Deepwood
+#-------------------------------
+[BUGCATCHER,Linden]
+LoseText = The deepwood bugs are tougher than mine...
+Pokemon = NINCADA,11
+    Ability = COMPOUNDEYES
+    Nature = ADAMANT
+    IV = 8
+Pokemon = LEDYBA,11
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 8
+Pokemon = RELLOR,12
+    Ability = COMPOUNDEYES
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Linden,100]
+LoseText = The deepwood bugs are tougher than mine...
+Pokemon = NINCADA,12
+    Ability = COMPOUNDEYES
+    Nature = ADAMANT
+    IV = 20
+Pokemon = LEDYBA,12
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 20
+Pokemon = RELLOR,13
+    Ability = COMPOUNDEYES
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Linden,200]
+LoseText = The deepwood bugs are tougher than mine...
+Pokemon = NINCADA,10
+    Ability = COMPOUNDEYES
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = LEDYBA,10
+    Ability = SWARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = RELLOR,11
+    Ability = COMPOUNDEYES
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 525 Gossamer Deepwood
+#-------------------------------
+[POKEMONRANGER_F,Sorrel]
+LoseText = Mind the glass trees. They're spreading.
+Pokemon = DEERLING,11
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 8
+Pokemon = SKIDDO,12
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_F,Sorrel,100]
+LoseText = Mind the glass trees. They're spreading.
+Pokemon = DEERLING,12
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 20
+Pokemon = SKIDDO,13
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_F,Sorrel,200]
+LoseText = Mind the glass trees. They're spreading.
+Pokemon = DEERLING,10
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SKIDDO,11
+    Ability = SAPSIPPER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 540 Route 3
+#-------------------------------
+[FISHERMAN,Hale]
+LoseText = Reeled in a loss. Happens.
+Pokemon = MAGIKARP,12
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 8
+Pokemon = GOLDEEN,13
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TYMPOLE,13
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[FISHERMAN,Hale,100]
+LoseText = Reeled in a loss. Happens.
+Pokemon = MAGIKARP,13
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 20
+Pokemon = GOLDEEN,14
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TYMPOLE,14
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[FISHERMAN,Hale,200]
+LoseText = Reeled in a loss. Happens.
+Pokemon = MAGIKARP,11
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 0
+    EV = 0
+Pokemon = GOLDEEN,12
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TYMPOLE,12
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 540 Route 3
+#-------------------------------
+[PICNICKER,Bryony]
+LoseText = My flowers wilted! Oh well, picnic time.
+Pokemon = FLABEBE,12
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 8
+Pokemon = COTTONEE,13
+    Ability = PRANKSTER
+    Nature = BOLD
+    IV = 8
+Pokemon = SUNKERN,13
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PICNICKER,Bryony,100]
+LoseText = My flowers wilted! Oh well, picnic time.
+Pokemon = FLABEBE,13
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 20
+Pokemon = COTTONEE,14
+    Ability = PRANKSTER
+    Nature = BOLD
+    IV = 20
+Pokemon = SUNKERN,14
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PICNICKER,Bryony,200]
+LoseText = My flowers wilted! Oh well, picnic time.
+Pokemon = FLABEBE,11
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = COTTONEE,12
+    Ability = PRANKSTER
+    Nature = BOLD
+    IV = 0
+    EV = 0
+Pokemon = SUNKERN,12
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 540 Route 3 (double battle)
+#-------------------------------
+[TWINS,Bel & Bea]
+LoseText = Bel: We lost! Bea: Together, though!
+Pokemon = MANKEY,13
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 8
+Pokemon = PANCHAM,13
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[TWINS,Bel & Bea,100]
+LoseText = Bel: We lost! Bea: Together, though!
+Pokemon = MANKEY,14
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 20
+Pokemon = PANCHAM,14
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[TWINS,Bel & Bea,200]
+LoseText = Bel: We lost! Bea: Together, though!
+Pokemon = MANKEY,12
+    Ability = VITALSPIRIT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = PANCHAM,12
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 540 Route 3
+#-------------------------------
+[YOUNGSTER,Corin]
+LoseText = My team's the coolest! ...Was.
+Pokemon = SENTRET,12
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 8
+Pokemon = BIDOOF,13
+    Ability = SIMPLE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = DODUO,14
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Corin,100]
+LoseText = My team's the coolest! ...Was.
+Pokemon = SENTRET,13
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 20
+Pokemon = BIDOOF,14
+    Ability = SIMPLE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = DODUO,15
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Corin,200]
+LoseText = My team's the coolest! ...Was.
+Pokemon = SENTRET,11
+    Ability = RUNAWAY
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = BIDOOF,12
+    Ability = SIMPLE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = DODUO,13
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 541 Route 4
+#-------------------------------
+[CAMPER,Ned]
+LoseText = Sand in my tent AND I lost. Great day.
+Pokemon = BUNNELBY,14
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[CAMPER,Ned,100]
+LoseText = Sand in my tent AND I lost. Great day.
+Pokemon = BUNNELBY,15
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[CAMPER,Ned,200]
+LoseText = Sand in my tent AND I lost. Great day.
+Pokemon = BUNNELBY,13
+    Ability = CHEEKPOUCH
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NACLI,14
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 541 Route 4
+#-------------------------------
+[HIKER,Dunstan]
+LoseText = Ho! Solid as Brinecut stone, you are.
+Pokemon = DWEBBLE,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 8
+Pokemon = CRABRAWLER,16
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Dunstan,100]
+LoseText = Ho! Solid as Brinecut stone, you are.
+Pokemon = DWEBBLE,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 20
+Pokemon = CRABRAWLER,16
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Dunstan,200]
+LoseText = Ho! Solid as Brinecut stone, you are.
+Pokemon = DWEBBLE,14
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NACLI,14
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+Pokemon = CRABRAWLER,15
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 541 Route 4
+#-------------------------------
+[SAILOR,Morrow]
+LoseText = Blow me down! The Dovetail crew'll hear of this.
+Pokemon = FINNEON,15
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 8
+Pokemon = REMORAID,15
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 8
+Pokemon = CRABRAWLER,15
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SAILOR,Morrow,100]
+LoseText = Blow me down! The Dovetail crew'll hear of this.
+Pokemon = FINNEON,15
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 20
+Pokemon = REMORAID,15
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 20
+Pokemon = CRABRAWLER,15
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SAILOR,Morrow,200]
+LoseText = Blow me down! The Dovetail crew'll hear of this.
+Pokemon = FINNEON,14
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = REMORAID,14
+    Ability = HUSTLE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CRABRAWLER,14
+    Ability = IRONFIST
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 541 Route 4
+#-------------------------------
+[TUBER_F,Pip]
+LoseText = Waaah! My floaty popped!
+Pokemon = SURSKIT,14
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 8
+Pokemon = MINCCINO,15
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[TUBER_F,Pip,100]
+LoseText = Waaah! My floaty popped!
+Pokemon = SURSKIT,15
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 20
+Pokemon = MINCCINO,15
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[TUBER_F,Pip,200]
+LoseText = Waaah! My floaty popped!
+Pokemon = SURSKIT,13
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = MINCCINO,14
+    Ability = CUTECHARM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 151 Pell Playhouse - Revolving Stage
+#-------------------------------
+[JUGGLER,Florian]
+LoseText = Dropped every pin! Bravo, though.
+Pokemon = MINCCINO,15
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 8
+Pokemon = SPINDA,16
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[JUGGLER,Florian,100]
+LoseText = Dropped every pin! Bravo, though.
+Pokemon = MINCCINO,15
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 20
+Pokemon = SPINDA,16
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[JUGGLER,Florian,200]
+LoseText = Dropped every pin! Bravo, though.
+Pokemon = MINCCINO,14
+    Ability = TECHNICIAN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SPINDA,15
+    Ability = OWNTEMPO
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 151 Pell Playhouse - Revolving Stage
+#-------------------------------
+[BEAUTY,Rosalind]
+LoseText = The spotlight suits you better, darling.
+Pokemon = SKITTY,16
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 8
+Pokemon = FLABEBE,16
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BEAUTY,Rosalind,100]
+LoseText = The spotlight suits you better, darling.
+Pokemon = SKITTY,16
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 20
+Pokemon = FLABEBE,16
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BEAUTY,Rosalind,200]
+LoseText = The spotlight suits you better, darling.
+Pokemon = SKITTY,15
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = FLABEBE,15
+    Ability = FLOWERVEIL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 151 Pell Playhouse - Revolving Stage
+#-------------------------------
+[JUGGLER,Ambrose]
+LoseText = An encore? No? Fair.
+Pokemon = AIPOM,16
+    Ability = SKILLLINK
+    Nature = JOLLY
+    IV = 8
+Pokemon = HERDIER,17
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[JUGGLER,Ambrose,100]
+LoseText = An encore? No? Fair.
+Pokemon = AIPOM,16
+    Ability = SKILLLINK
+    Nature = JOLLY
+    IV = 20
+Pokemon = HERDIER,17
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[JUGGLER,Ambrose,200]
+LoseText = An encore? No? Fair.
+Pokemon = AIPOM,15
+    Ability = SKILLLINK
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = HERDIER,16
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 152 Pell Playhouse - Fly Loft
+#-------------------------------
+[GENTLEMAN,Reginald]
+LoseText = Splendid form. Dorian will be delighted.
+Pokemon = HERDIER,17
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = FURFROU,17
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Reginald,100]
+LoseText = Splendid form. Dorian will be delighted.
+Pokemon = HERDIER,17
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = FURFROU,17
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Reginald,200]
+LoseText = Splendid form. Dorian will be delighted.
+Pokemon = HERDIER,16
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = FURFROU,16
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 153 Pell Playhouse - Dressing Rooms
+#-------------------------------
+[JUGGLER,Pierrot]
+LoseText = ...(Pierrot mimes a dramatic faint.)
+Pokemon = AIPOM,17
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 8
+Pokemon = SPINDA,17
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[JUGGLER,Pierrot,100]
+LoseText = ...(Pierrot mimes a dramatic faint.)
+Pokemon = AIPOM,17
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 20
+Pokemon = SPINDA,17
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[JUGGLER,Pierrot,200]
+LoseText = ...(Pierrot mimes a dramatic faint.)
+Pokemon = AIPOM,16
+    Ability = PICKUP
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SPINDA,16
+    Ability = TANGLEDFEET
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 153 Pell Playhouse - Dressing Rooms
+#-------------------------------
+[LADY,Odette]
+LoseText = My costume is ruined. Worth it.
+Pokemon = BUNEARY,17
+    Ability = LIMBER
+    Nature = JOLLY
+    IV = 8
+Pokemon = FURFROU,18
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[LADY,Odette,100]
+LoseText = My costume is ruined. Worth it.
+Pokemon = BUNEARY,17
+    Ability = LIMBER
+    Nature = JOLLY
+    IV = 20
+Pokemon = FURFROU,18
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[LADY,Odette,200]
+LoseText = My costume is ruined. Worth it.
+Pokemon = BUNEARY,16
+    Ability = LIMBER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = FURFROU,17
+    Ability = FURCOAT
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 145 Pageant Hall (tag battle with HOLLOW_GRUNT_F)
+#-------------------------------
+[HOLLOW_GRUNT_M,Grunt]
+LoseText = Let the land grieve... ugh, not today.
+Pokemon = NICKIT,16
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 8
+Pokemon = FOONGUS,17
+    Ability = EFFECTSPORE
+    Nature = RELAXED
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_M,Grunt,100]
+LoseText = Let the land grieve... ugh, not today.
+Pokemon = NICKIT,17
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 20
+Pokemon = FOONGUS,18
+    Ability = EFFECTSPORE
+    Nature = RELAXED
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_M,Grunt,200]
+LoseText = Let the land grieve... ugh, not today.
+Pokemon = NICKIT,15
+    Ability = UNBURDEN
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = FOONGUS,16
+    Ability = EFFECTSPORE
+    Nature = RELAXED
+    IV = 0
+    EV = 0
+# Map 145 Pageant Hall (tag battle with HOLLOW_GRUNT_M)
+#-------------------------------
+[HOLLOW_GRUNT_F,Grunt]
+LoseText = The Plates are poison. You'll see.
+Pokemon = PHANTUMP,16
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = MORELULL,17
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[HOLLOW_GRUNT_F,Grunt,100]
+LoseText = The Plates are poison. You'll see.
+Pokemon = PHANTUMP,17
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = MORELULL,18
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[HOLLOW_GRUNT_F,Grunt,200]
+LoseText = The Plates are poison. You'll see.
+Pokemon = PHANTUMP,15
+    Ability = NATURALCURE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = MORELULL,16
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 544 Brinecut Mine 1F
+#-------------------------------
+[BLACKBELT,Taro]
+LoseText = Hah! My fists need more salt-mine training.
+Pokemon = MACHOP,15
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = TIMBURR,16
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BLACKBELT,Taro,100]
+LoseText = Hah! My fists need more salt-mine training.
+Pokemon = MACHOP,15
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = TIMBURR,16
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BLACKBELT,Taro,200]
+LoseText = Hah! My fists need more salt-mine training.
+Pokemon = MACHOP,14
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = TIMBURR,15
+    Ability = GUTS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 544 Brinecut Mine 1F
+#-------------------------------
+[HIKER,Bram]
+LoseText = Tunnels go on forever. So does losing, apparently.
+Pokemon = GEODUDE,14
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = ROGGENROLA,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[HIKER,Bram,100]
+LoseText = Tunnels go on forever. So does losing, apparently.
+Pokemon = GEODUDE,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = ROGGENROLA,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NACLI,15
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[HIKER,Bram,200]
+LoseText = Tunnels go on forever. So does losing, apparently.
+Pokemon = GEODUDE,13
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = ROGGENROLA,14
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NACLI,14
+    Ability = PURIFYINGSALT
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 545 Brinecut Mine B1F
+#-------------------------------
+[HIKER,Gorse]
+LoseText = Deep enough down here to hear the sea. Well fought.
+Pokemon = ARON,16
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NOSEPASS,17
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[HIKER,Gorse,100]
+LoseText = Deep enough down here to hear the sea. Well fought.
+Pokemon = ARON,16
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NOSEPASS,17
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[HIKER,Gorse,200]
+LoseText = Deep enough down here to hear the sea. Well fought.
+Pokemon = ARON,15
+    Ability = STURDY
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NOSEPASS,16
+    Ability = STURDY
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 546 Thistledown Manor
+#-------------------------------
+[CHANNELER,Mireille]
+LoseText = The Players say... you were adequate. High praise.
+Pokemon = GASTLY,14
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 8
+Pokemon = SHUPPET,14
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SINISTEA,15
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[CHANNELER,Mireille,100]
+LoseText = The Players say... you were adequate. High praise.
+Pokemon = GASTLY,15
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 20
+Pokemon = SHUPPET,15
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SINISTEA,15
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[CHANNELER,Mireille,200]
+LoseText = The Players say... you were adequate. High praise.
+Pokemon = GASTLY,13
+    Ability = LEVITATE
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = SHUPPET,13
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SINISTEA,14
+    Ability = WEAKARMOR
+    Nature = MODEST
+    IV = 0
+    EV = 0
 # Map 990 Prismfall Test Arena (dummy; overrides base [YOUNGSTER,Ben])
 #-------------------------------
 [YOUNGSTER,Ben]
@@ -6264,6 +7180,77 @@ Pokemon = SNORLAX,49
     Ability = THICKFAT
     Nature = HARDY
     IV = 0
+    EV = 0
+#===============================================================================
+# VILLAIN ADMINS
+#===============================================================================
+# Map 120 Briarwick - first admin battle (Act I)
+#-------------------------------
+[HOLLOW_THISTLE,Thistle]
+Items = SUPERPOTION
+LoseText = Lowmarsh is glass now. Remember that when you sleep.
+Pokemon = MORELULL,13
+    Moves = MEGADRAIN,CONFUSERAY,INGRAIN,ASTONISH
+    Ability = EFFECTSPORE
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 12
+Pokemon = FOONGUS,14
+    Moves = MEGADRAIN,STUNSPORE,GROWTH,ASTONISH
+    Ability = EFFECTSPORE
+    Item = ORANBERRY
+    Nature = RELAXED
+    IV = 12
+Pokemon = PHANTUMP,15
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY
+    Ability = NATURALCURE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 12
+#-------------------------------
+[HOLLOW_THISTLE,Thistle,100]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = Lowmarsh is glass now. Remember that when you sleep.
+Pokemon = MORELULL,14
+    Moves = MEGADRAIN,CONFUSERAY,LEECHSEED,DAZZLINGGLEAM
+    Ability = EFFECTSPORE
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = FOONGUS,15
+    Moves = MEGADRAIN,STUNSPORE,VENOSHOCK,GROWTH
+    Ability = REGENERATOR
+    Item = ORANBERRY
+    Nature = RELAXED
+    IV = 31
+    EV = 252,0,252,0,0,4
+Pokemon = PHANTUMP,15
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP
+    Ability = HARVEST
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[HOLLOW_THISTLE,Thistle,200]
+LoseText = Lowmarsh is glass now. Remember that when you sleep.
+Pokemon = MORELULL,11
+    Moves = ABSORB,CONFUSERAY,ASTONISH
+    Ability = EFFECTSPORE
+    Item = ORANBERRY
+    Nature = MODEST
+    IV = 4
+    EV = 0
+Pokemon = PHANTUMP,13
+    Name = Lowmarsh
+    Moves = BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY
+    Ability = NATURALCURE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 4
     EV = 0
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack

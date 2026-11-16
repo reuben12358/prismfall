@@ -13,5 +13,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[524] = :SILKWOOD   # Gossamer Wood
   FieldEffects::MAP_FIELDS[525] = :SILKWOOD   # Gossamer Deepwood
   FieldEffects::MAP_FIELDS[541] = :BEACH   # Route 4
+  FieldEffects::MAP_FIELDS[544] = :CAVE   # Brinecut Mine 1F
+  FieldEffects::MAP_FIELDS[545] = :CAVE   # Brinecut Mine B1F
   FieldEffects::MAP_FIELDS[548] = :BLEED   # Cocoonfall Hollow
 end

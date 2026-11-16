@@ -47,8 +47,8 @@ map: |
   TT~~~.......TTTTTT...::..#####....TTTTTT..TT
   TT~~~................::::::::.............TT
   TT~~~................::::::::.............TT
-  TT~~~TTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTT
-  TT~~~TTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTT
+  TT~~~TTTTTTTTTTTTTTT.::.TTTTTTTTTTTTTTTTTTTT
+  TT~~~TTTTTTTTTTTTTTT.::.TTTTTTTTTTTTTTTTTTTT
 stamps:
   - {stamp: gym,        at: [19, 4],  link: BW_GYM,    name: Gym door}
   - {stamp: pokecenter, at: [8, 22],  link: BW_PC,     name: Poke Center door}
