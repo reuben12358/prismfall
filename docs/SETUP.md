@@ -21,18 +21,55 @@ Essentials runs on its own engine (mkxp-z). You only need RPG Maker XP (RMXP) to
 
 You don't need the RTP: Essentials ships every graphic it uses.
 
-## 2. Get the base project (recommended)
+## 2. Get the base project
 
-Use **Manurocker95's _Pokemon-Essentials-21-With-Unofficial-EBDX_**. It's a full v21.1 project with everything
-pre-installed. Eevee Expo's download button for the EBDX port ([resource 1338](https://eeveeexpo.com/resources/1338/))
-redirects to this repo.
+Both options are full v21.1 projects with everything pre-installed. Our plugins work with either: the bridge and
+Core were checked against both codebases.
+
+### Option A (recommended): ChromeValiant's *Open-Source EBDX Renovation Project*
+
+This is a fork of option B's repo ([Eevee Expo resource 1831](https://eeveeexpo.com/resources/1831/), whose download redirects here).
+It ships with the v21 frame-rate fix already applied, rebuilt animation timing, animated Gen 1–9 sprites,
+Gen 9 Pack 3.3.8, mouse support, SOS/HP-threshold scripting and built-in terrain visuals.
+
+```
+git clone https://github.com/ChromeValiant/Pokemon-Essentials-21-With-Unofficial-EBDX Prismfall
+cd Prismfall
+git checkout 452d27ca     # the commit we checked (2026-10-25); remove this line to take newer commits
+```
+
+| Component | Version (from each `meta.txt`) |
+|---|---|
+| Essentials + v21.1 Hotfixes | 21.1 / 1.0.9 |
+| **Elite Battle: DX** (plugin Name unchanged) | **4.0** |
+| Luka's Scripting Utilities | 3.3.2 |
+| Generation 9 Pack | 3.3.8 |
+| Also included | EBDX Stat Boost Overlay 1.3, Easy Mouse System 2.0, Pokémon World Tournament |
+
+Caveats:
+- It's young: v4.0 came out Oct 2026 and it has no tagged releases.
+- GitHub issues are disabled; bug reports go to the [Eevee Expo thread](https://eeveeexpo.com/threads/9239/).
+- The author is on hiatus until after Thanksgiving 2026.
+- Open reports there:
+  - Mouse quirks
+  - Hidden Power
+  - PC box sprite centering
+  - Camera drift after trainer wins
+  - A debug "advanced wild battle" error
+  - A Route 1 sample-NPC IV error inherited from the base port
+- If something breaks for you, use option B.
+
+### Option B (fallback): Manurocker95's *Pokemon-Essentials-21-With-Unofficial-EBDX*
+
+Eevee Expo's download button for the EBDX port ([resource 1338](https://eeveeexpo.com/resources/1338/)) redirects to this repo.
+It's the original port that option A forks; last updated Sep 2024.
 
 ```
 git clone https://github.com/Manurocker95/Pokemon-Essentials-21-With-Unofficial-EBDX Prismfall
 ```
 (Or use GitHub's **Code → Download ZIP** / the latest release's Source.zip, then unzip it to a short path such as `C:\Games\Prismfall`.)
 
-What's inside, read from each plugin's `meta.txt` in the repo:
+What's inside option B, read from each plugin's `meta.txt` in the repo:
 
 | Component | Version | Plugin Name (for Requires lines) |
 |---|---|---|

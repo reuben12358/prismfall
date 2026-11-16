@@ -70,8 +70,8 @@
 
 ### Aurelian Voss — CEO of Meridian Concord (`MERIDIAN_VOSS`; final battle ~lv 98 on `:PRISM_ARENA`)
 - **Age 47.** Tall and silver at the temples. Bespoke charcoal suit with a single gold pin of Meridian's sunburst. He never raises his voice. Warm handshake, perfect memory for names. He drinks tea from a chipped company mug he's had since he was a linesman.
-- **Public story:** Born in Halden's Reach, a Bleed-adjacent Undercity mining town, to a poor branch of a Lumen founding house that lost its Council seat generations ago. He started as a Lattice linesman and built Meridian into the company that "lit Velmora". He won his family's seat back and now **chairs the Lumen Council**, which makes him the city-state's head of government. He still visits job sites in person. Topside loves him, and the Undercity remembers he was once one of them, which is the only reason they tolerate him at all.
-- **True story:** The last heir of **House Aurel**, the line of the Gilded King. ("Aurelian" is a family name that hides in plain sight.) His family survived 300 years under the name Voss and helped found Lumen in AF 118, deliberately *on top of* drowned Aurelia. They passed down fragments of the Gilders' science and one belief: *the god owes us.* In AF 290, as Meridian's head of research, he installed the "monitoring array" in the Crownhaven Basilica, which drew on the converged Plates and cracked the Crown. He watched the Glassfall and understood what he was looking at: the power of eighteen Plates in one place.
+- **Public story:** Born in Halden's Reach, a Bleed-adjacent Nadir mining town, to a poor branch of a Zenith founding house that lost its Council seat generations ago. He started as a Lattice linesman and built Meridian into the company that "lit Velmora". He won his family's seat back and now **chairs the Zenith Council**, which makes him the city-state's head of government. He still visits job sites in person. Topside loves him, and Nadir remembers he was once one of them, which is the only reason they tolerate him at all.
+- **True story:** The last heir of **House Aurel**, the line of the Gilded King. ("Aurelian" is a family name that hides in plain sight.) His family survived 300 years under the name Voss and helped found Zenith in AF 118, deliberately *on top of* drowned Aurelia. They passed down fragments of the Gilders' science and one belief: *the god owes us.* In AF 290, as Meridian's head of research, he installed the "monitoring array" in the Crownhaven Basilica, which drew on the converged Plates and cracked the Crown. He watched the Glassfall and understood what he was looking at: the power of eighteen Plates in one place.
 - **Philosophy:** "Gods are absentee landlords. Arceus dropped its furniture on our heads three hundred years ago and never came back to collect it. Every generation since has paid the rent in blood. I'm not trying to become a god. I'm trying to make sure we never need one again."
 - **Voice:**
   - *(Prologue, ferry)* "First crossing? Take the badge case — Meridian makes them for the League anyway. Call it a welcome gift from a fellow traveler. No, I insist. Somebody should be kind to you on a day like this."
@@ -161,12 +161,12 @@ Format: look/age · personality · voice · motivation · secret · plot role ·
 - **Voice:** "Saltmere is the only city in Velmora where nothing is a miracle, darling. So we *built* our own." / "Every pageant is a lie. The trick is choosing which lie to tell." / *(Act V)* "Tonight, for one night only, the truth. Lights, please."
 - **Motivation:** Keep the stage alive in a city with nothing else.
 - **Secret:** As the Accord's Pageant-Master he stages the official *Pageant of the Prismfall* and knows it's propaganda. He owns the last copy of **"The Gilded King"**, a banned play by Ansel Crewe, a playwright executed in AF 52, that tells the true story.
-- **Plot role:** The Mourner hijacks his pageant (Ch3). He slips the PC the play's prologue page, which is the first written clue. Saltmere is the Sylvan Crown's free port, chartered to answer to no king, and Dorian guards that charter jealously against Queen Maelis's tax-collectors.
-- **Arc:** In Act III the Sylvan Crown shuts his Lantern Theatre at Meridian's request for a satire about Meridian. His troupe also gives the PC the gift Eevee "Understudy" in Ch3. On the Festival's Night of Masques (Act V) he stages "The Gilded King" in Crownhaven in front of Voss, which turns public opinion. He is starstruck by the otherworldly champions and talks Amaria (see CAMEOS.md) into voicing Princess Maren's lament.
+- **Plot role:** The Mourner hijacks his pageant (Ch3). He slips the PC the play's prologue page, which is the first written clue. Saltmere is Elowen's free port, chartered to answer to no king, and Dorian guards that charter jealously against Queen Maelis's tax-collectors.
+- **Arc:** In Act III Elowen's crown shuts his Lantern Theatre at Meridian's request for a satire about Meridian. His troupe also gives the PC the gift Eevee "Understudy" in Ch3. On the Festival's Night of Masques (Act V) he stages "The Gilded King" in Crownhaven in front of Voss, which turns public opinion. He is starstruck by the otherworldly champions and talks Amaria (see CAMEOS.md) into voicing Princess Maren's lament.
 - **Ace:** **Kecleon** (the quick-change artist; Color Change is a costume change); also **Ambipom**, **Chatot** (the voice), **Furfrou**, and later **Exploud**.
 
 ### 3. Marisol Reyes — Water — Ebbmouth — `LEADER_MARISOL` — `:WATER_SURFACE`
-- **34.** Broad-shouldered dockworker in rolled sleeves and a union pin, with a laugh like a foghorn. Ebbmouth is Glaciem's southern port and the only city whose Warden is **elected** (by the Ebb Guild). The Guild has fought Thane Eirik's harbor taxes for a generation.
+- **34.** Broad-shouldered dockworker in rolled sleeves and a union pin, with a laugh like a foghorn. Ebbmouth is Isenmar's southern port and the only city whose Warden is **elected** (by the Ebb Guild). The Guild has fought Thane Eirik's harbor taxes for a generation.
 - **Personality:** Brash, warm and profane ("tides take it"). She would die for her crews.
 - **Voice:** "The Ebb runs both ways. Always has. Lately it can't decide." / "Meridian pays my people. Meridian's killing my river. Pick one, kid, I dare you." / *(Ch9 or Ch13, if Teo died)* "He was nineteen. *Nineteen.* Tell me again how the Hollow are the monsters."
 - **Motivation:** Jobs versus the river: she needs both.
@@ -189,14 +189,14 @@ Format: look/age · personality · voice · motivation · secret · plot role ·
 - **58.** Archaeologist-Warden in a sand-colored keffiyeh and wire spectacles. She has a dry cough from forty years in the dunes.
 - **Personality:** Measured and patient. A teacher at heart, with very dry humor.
 - **Voice:** "The desert keeps everything. It just doesn't keep it where you left it." / "I buried the truth once because I was told to. The sand dug it up. I'd rather not argue with sand twice."
-- **Motivation:** Duneholt's aquifer is collapsing under Meridian's deep drills, which the Dunelands' **Prince-Elector Idris Kassan** licensed without asking her. She also runs the **Dig Lab**, the game's fossil-revival service.
+- **Motivation:** Duneholt's aquifer is collapsing under Meridian's deep drills, which Ossaria's **Prince-Elector Idris Kassan** licensed without asking her. She also runs the **Dig Lab**, the game's fossil-revival service.
 - **Secret:** In AF 281 she uncovered the **Aurel murals** beneath the Old Caravanserai, reported them to Valen, and sealed them on his order.
 - **Plot role:** First concrete Prismfall clue. She gives the PC the **Duneholt Rubbing** (key item).
 - **Arc:** Confesses after the gym. In Act IV she leads the expedition into the Drowned Crown (Ch17). In Act V she testifies before the Accord Council.
 - **Ace:** **Claydol** (an ancient effigy, the archaeologist's partner); also **Hippowdon**, **Krookodile**, **Sandaconda**.
 
 ### 6. Corvin Mott — Poison — Mirefen — `LEADER_CORVIN` — `:CORROSIVE_MIRE`
-- **41.** Gaunt, in a long oilcloth coat and a plague-doctor half-mask he wears "for the smell, mostly". He runs the Mirefen Infirmary in the Undercity's runoff marsh, where Lumen's Lattice slag drains into the Toxic Plate's mire. His apprentice **Wenlow** (17) is cheerful, clumsy and doomed: Wenlow is killed in the Sump Purge (Ch16), and the player can't prevent it.
+- **41.** Gaunt, in a long oilcloth coat and a plague-doctor half-mask he wears "for the smell, mostly". He runs the Mirefen Infirmary in Nadir's runoff marsh, where Zenith's Lattice slag drains into the Toxic Plate's mire. His apprentice **Wenlow** (17) is cheerful, clumsy and doomed: Wenlow is killed in the Sump Purge (Ch16), and the player can't prevent it.
 - **Personality:** Sardonic, morbid and wickedly funny, and he hasn't slept properly since AF 288.
 - **Voice:** "Everything's poison, dear. Dose makes the cure." / "I've a ward of forty patients slowly turning into garden furniture. Forgive me if I don't stand for the Sovereign's anthem." / *(battle)* "Don't worry. I'm a doctor. I know exactly how much this hurts."
 - **Motivation:** Keep his Fixing patients alive.
@@ -211,12 +211,12 @@ Format: look/age · personality · voice · motivation · secret · plot role ·
 - **Voice:** "Some things you forge to last. Some things you forge to *break* right — that's the harder craft." / "Valen and I nearly killed each other in the Festival of '80. Best day of my life." / *(Act IV)* "Aye. I reset the Crown's stone myself after the Fracture. It was smaller than it should've been. I never asked where the rest went."
 - **Motivation:** Protect his friend and his forge.
 - **Secret:** He is **"the Sovereign's Hand"**, the one Warden who knows about the Tuning and that Valen is dying.
-- **Plot role:** The Caldera Crisis (Ch8). He is a commoner in a feudal kingdom: the Ember Dominion's Dragon-Lord, **Dominar Hrothgar Ashfall**, treats Cindervault's forges as his armory and demands the **Light Stone** (Reshiram) that Brann's guild has kept for centuries. Brann refuses. He confirms the truth about the Tuning when confronted in Act IV.
+- **Plot role:** The Caldera Crisis (Ch8). He is a commoner in a feudal kingdom: Ashkaar's Dragon-Lord, **Dominar Hrothgar Ashfall**, treats Cindervault's forges as his armory and demands the **Light Stone** (Reshiram) that Brann's guild has kept for centuries. Brann refuses. He confirms the truth about the Tuning when confronted in Act IV.
 - **Arc:** He stands guard beside Valen through the Festival. After Valen dies, he forges the memorial from the Crown's broken setting.
 - **Ace:** **Coalossal** (a walking forge); also **Arcanine** (loyalty), **Magmortar**, **Camerupt**.
 
 ### 8. Kaito Ren — Fighting — Ironreach — `LEADER_KAITO` — `:COLOSSEUM`
-- **39.** Ex-Wardguard captain, close-cropped hair, a burn scar along his jaw, training wraps always on. Ironreach is the Undercity's pit-fighting quarter, carved into the old Aurel-era mine shafts. Its Warden is whoever wins the **Iron Trial**, and he has held the seat for nine years. He is the only ex-Accord soldier the Undercity trusts.
+- **39.** Ex-Wardguard captain, close-cropped hair, a burn scar along his jaw, training wraps always on. Ironreach is Nadir's pit-fighting quarter, carved into the old Aurel-era mine shafts. Its Warden is whoever wins the **Iron Trial**, and he has held the seat for nine years. He is the only ex-Accord soldier Nadir trusts.
 - **Personality:** Disciplined and laconic. He speaks in short declarative sentences and is fiercely honest about everything except one thing.
 - **Voice:** "Stand up. Again." / "A fist is a promise. Don't make one you won't keep." / *(Act III, testimony)* "Marrowgate. Fifteen years ago. My orders. My unit. I sealed the gate. They were still knocking."
 - **Motivation:** Atone.
@@ -232,14 +232,14 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **46.** Ice-fisher matriarch with a Mamoswine-hide coat, rime in her eyebrows, and a pipe she never lights indoors.
 - **Personality:** Blunt and pragmatic, with a sense of humor so dry it squeaks. She is contemptuous of southerners who moralize from warm houses.
 - **Voice:** "You want me to choose between my principles and my grandchildren's toes? Easy choice. Toes." / "Ice remembers. Every crack. Every weight. You walk on my lake, it knows your name by spring." / *(after the Thaw)* "I read the numbers. I *read* them. And I signed anyway, because the heaters were warm."
-- **Motivation:** Rimeholt's people survive an endless winter. Meridian's heat keeps children alive. She is the younger sister of **Thane Eirik Sorrel**, Glaciem's ruler, who signed the kingdom-wide heat contract. She signed Rimeholt's Lattice out of loyalty to him as much as to her people.
+- **Motivation:** Rimeholt's people survive an endless winter. Meridian's heat keeps children alive. She is the younger sister of **Thane Eirik Sorrel**, Isenmar's ruler, who signed the kingdom-wide heat contract. She signed Rimeholt's Lattice out of loyalty to him as much as to her people.
 - **Secret:** She knew the Lattice readings showed the lake cracking and suppressed them.
 - **Plot role:** The leading pro-Meridian Warden in Act III's political split.
 - **Arc:** **The Thaw** (Ch11): the Lattice overdraws and the lake breaks, and part of the city sinks (`:FROZEN_LAKE` → `:WATER_SURFACE`). She breaks with Meridian publicly (or the PC exposes her, `ANJA_EXPOSED`). In Act IV she leads Rimeholt's refugees south. In Act V she casts the deciding Conclave vote to strip Meridian of Festival security. The vote fails anyway, because Hollis has bought enough Wardens.
 - **Ace:** **Mamoswine** (matriarch of the herd); also **Avalugg**, **Walrein**, **Weavile**.
 
 ### 11. Odessa Gale — Flying — Skyreach — `LEADER_ODESSA` — `:STORMFRONT`
-- **27.** Aviator goggles, scarf, a scar through one eyebrow, and a laugh carried off by the wind. Captain of **the Gale Post**, the airship-and-wing courier guild based in Skyreach, Lumen's airship spire. Its mail runs through the permanent storm wall, the Stormfront, to every kingdom and the outer islands.
+- **27.** Aviator goggles, scarf, a scar through one eyebrow, and a laugh carried off by the wind. Captain of **the Gale Post**, the airship-and-wing courier guild based in Skyreach, Zenith's airship spire. Its mail runs through the permanent storm wall, the Stormfront, to every kingdom and the outer islands.
 - **Personality:** Irreverent, quick, flirtatious, reckless and brave. She hates rules she didn't write.
 - **Voice:** "Skyreach's got one law: the wind doesn't care. Everything else is negotiable." / "I've flown letters through three storms and a Bleed. You want me to hand them to Meridian because a clerk said 'please'?" / *(battle)* "Hold onto something. No, really."
 - **Motivation:** Keep the post flying, and keep people *free*.
@@ -294,8 +294,8 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Voice:** "Underveil isn't on the Accord's maps, sweetheart. That's the *point* of Underveil." / "Everything has a price. Yours just went up." / *(Ch17)* "Oh. Oh, darling. You're the missing piece."
 - **Motivation:** Survive, profit, and keep a promise her family made 300 years ago that she has privately decided is stupid.
 - **Secret:** Her house descends from Princess Maren's guard. They are the **Keepers of the Drowned Truth** and have always known the real Prismfall. She **sold Voss the location of the Gilded Chain's remains** two years ago.
-- **Plot role:** Gym 16. Underveil is the Undercity's heart, built in the upper towers of drowned Aurelia beneath Lumen. Lumen claims sovereignty, but the Undercity has no recognized government, so Nyx is its de facto queen and the Sump Barons pay her tithes. She guides the PC into drowned Aurelia.
-- **Arc:** Offers the PC a bargain: their secret for the Engine schematics (`NYX_BARGAIN_TAKEN`). After the Sump Purge she declares the Undercity independent of Lumen (Ch17). In Act V she cuts Meridian's comms during the hijack. She is a Festival entrant (R16 vs Lin, see CAMEOS.md).
+- **Plot role:** Gym 16. Underveil is Nadir's heart, built in the upper towers of drowned Aurelia beneath Zenith. Zenith claims sovereignty, but Nadir has no recognized government, so Nyx is its de facto queen and the Sump Barons pay her tithes. She guides the PC into drowned Aurelia.
+- **Arc:** Offers the PC a bargain: their secret for the Engine schematics (`NYX_BARGAIN_TAKEN`). After the Sump Purge she declares Nadir independent of Zenith (Ch17). In Act V she cuts Meridian's comms during the hijack. She is a Festival entrant (R16 vs Lin, see CAMEOS.md).
 - **Ace:** **Zoroark** (illusion); also **Honchkrow**, **Grimmsnarl**, **Weavile**.
 
 ### 17. Celestine Aubade — Fairy — Gloaming — `LEADER_CELESTINE` — `:FAIRY_TALE`
@@ -310,13 +310,13 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Ace:** **Togekiss** (it appears where there is peace, so it's waiting for one); also **Mimikyu**, **Sylveon**, **Alcremie**.
 
 ### 18. Sigrun Ashfall — Dragon — Wyrmrest — `LEADER_SIGRUN` — `:DRAGONS_DEN`
-- **29.** Tall, with a burn-scarred left cheek and neck, a braided crown of red hair and dragonhide armor. She is the strongest Warden and **Valen's protégé**. She is also the **Dominar's daughter**. She renounced her claim to the Ember throne to take the Warden's oath, and her father has never forgiven her or the Accord.
+- **29.** Tall, with a burn-scarred left cheek and neck, a braided crown of red hair and dragonhide armor. She is the strongest Warden and **Valen's protégé**. She is also the **Dominar's daughter**. She renounced her claim to the Ashkaar throne to take the Warden's oath, and her father has never forgiven her or the Accord.
 - **Personality:** Fierce, proud, blunt and honorable. She has no patience for lies, which makes her guilt unbearable.
 - **Voice:** "Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed." / "He trained me to be his successor. Then he told me I'd never survive the Crown, and I was *relieved*. Do you understand? Relieved. And then he went looking for *you*."
 - **Motivation:** Honor, and atonement for her relief.
 - **Secret:** She knows Valen's plan for the PC, and she let it happen because it meant the Crown wouldn't be hers.
 - **Plot role:** Gym 18 makes the PC prove they choose the Festival with full knowledge. She refuses to give the badge until the PC says aloud what they intend.
-- **Arc:** In Ch19 she defies her father, whose legions are poised to march on Lumen, by keeping Wyrmrest's pass open to the PC. Reshiram wakes for the PC's spoken truth during her trial. At the Festival she beats Amaria and Venam (CAMEOS.md). She loses the semifinal to Valen after entering to win the Crown herself and spare the PC. In the hijack, her dragons hold the sky over Crownhaven against Meridian's airships, and if `DOMINAR_SWAYED`, her father's legions fly with her.
+- **Arc:** In Ch19 she defies her father, whose legions are poised to march on Zenith, by keeping Wyrmrest's pass open to the PC. Reshiram wakes for the PC's spoken truth during her trial. At the Festival she beats Amaria and Venam (CAMEOS.md). She loses the semifinal to Valen after entering to win the Crown herself and spare the PC. In the hijack, her dragons hold the sky over Crownhaven against Meridian's airships, and if `DOMINAR_SWAYED`, her father's legions fly with her.
 - **Ace:** **Salamence** (it dreamed of wings until it grew them); also **Haxorus**, **Flygon**, **Kommo-o**.
 
 ---
@@ -327,7 +327,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Teo Reyes** (19): Marisol's brother and Ebbmouth Hollow cell leader (`HOLLOW_TEO`). Idealistic, angry and funny. His survival at Ironreach is a player choice. If he lives, he becomes the Lantern Hollow's youngest organizer.
 - **Mara Thistlewood "Thistle"** (40): Hollow Pallbearer (`HOLLOW_THISTLE`), a former Briarwick weaver whose village of Lowmarsh was Fixed. The PC's first admin battle. Fierce and grieving. She is captured at Lumen and returns in Act IV on the PC's side.
 - **Sable / Sabine Kroll** (35): the Hollow's "Hammer" (`HOLLOW_SABLE`, later `MERIDIAN_KROLL`), secretly a Meridian Special Accounts operative. Cold, cheerful and professional. She caused the Lumen Shatter and the Ironreach attack. Exposed in Ch13 and fought again in Act V.
-- **Dr. Percival Ashe** (44): Meridian Head of R&D and lead on the Arbiter Project (`MERIDIAN_ASHE`). Larch's former protégé. Giggly, brilliant and morally weightless. Fought in Ch8, Ch16 and the Festival tag battle. Post-game villain hook.
+- **Dr. Percival Quent** (44): Meridian Head of R&D and lead on the Arbiter Project (`MERIDIAN_QUENT`). Larch's former protégé. Giggly, brilliant and morally weightless. Fought in Ch8, Ch16 and the Festival tag battle. Post-game villain hook.
 - **Director Helene Marchetti** (50): Meridian Security Directorate, the Mandate's enforcer (`MERIDIAN_MARCHETTI`). Ex-Wardguard. Cold, loyal and competent, with no illusions. Fought in Ch12, Ch14 and the Festival tag battle. If `MARCHETTI_TURNED` (the PC shows her Kroll's file), she stands down in the hijack.
 - **Chancellor Ambrose Hollis** (61): the Accord's chief administrator, a smooth bureaucrat who is quietly on Meridian's payroll. He passes the Mandate and gives Meridian Festival security. He is arrested in the epilogue.
 - **Elin Ashby** (Fixed, AF 288): Rowan's wife and Juno's aunt, the **Bride Tree** in Verdance's Heartgarden. She wakes in Homecoming.
@@ -337,16 +337,23 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Hierophant Maud Ellery** (68): head of the Prism Choir, which performs the Tuning. A true believer who learns in Act V that the hymn she sings is half of a song.
 - **Pip Ore** (14): Bastian's granddaughter and his ears. A fast-talking lamp-runner who guides the PC through the deep seams.
 
-## CAMEO CHAMPIONS (`FESTIVAL_<NAME>`)
+## KINGDOM RULERS & POLITICAL FIGURES
 
-Each gets a personal scene during Festival week. Eliminated champions become optional exhibition battles (see 08_ACT_V).
-- **Cynthia** (QF opponent): the mythology scholar. Sinnoh's tablets speak of the Original One and its plates. She senses the PC's shard mid-battle: "Your Pokémon fight like they're standing on holy ground. All of it, at once." Afterward she shares Sinnoh's line "*it returns to those who return what was given*", the key outside confirmation of the Return.
-- **Steven Stone:** fascinated by Bleed crystal and the Stone Plate. He bonds with Bastian, and his geological readings independently confirm Larch's data.
-- **Lance:** drawn to Wyrmrest's dragons. Respects Sigrun. Notices first that Kestrel's Pokémon "are being driven by something that isn't him" (QF loss to Kestrel).
-- **Alder:** an old friend and rival of Valen from their twenties. He sees the crystal under the glove and spends Festival week trying to get Valen to *talk*.
-- **Diantha:** an actress. Dorian worships her, and she joins his Night of Masques as the voice of Princess Maren.
-- **Leon:** the showman. Kestrel upsets him in R16 using the gauntlet. Leon is gracious and suspicious, and his exhibition match is pure joy.
-- **Geeta:** the Concert of Regions' envoy, deciding whether the quarantine becomes **Severance**, meaning permanent abandonment. The coldest political player in the week. She can be persuaded (`GEETA_PERSUADED`), which affects the epilogue's international outcome. *(Balance note: her canon team is Gen 9. Substitute Gen 1–8 species or add a Gen 9 pack.)*
+The Wardens answer to the Accord, but their cities sit inside kingdoms whose rulers resent that. Each ruler wants something from the Plates in their land.
+- **Queen Maelis Thorne of Elowen** (82): an ancient, fairy-tale-cunning monarch who holds court in Verdance's Briar Hall. Her doctrine is "the Plates are the Crown's by right of soil." She claims the Meadow Plate when Rowan falls (Ch10) and later signs a "Forest Compact" with Meridian. Her heir **Prince Caedmon** (34) is a smiling modernizer and quietly Meridian's man. Maelis outlives her usefulness to him in Act V.
+- **Archseer Imre Dask and the Veiled Synod of Antumbra**: Antumbra's rulers are a theocratic council of seers (Lucent) and lantern-priests (Gravenmoor) who mediate with Giratina. Dask (60s, two different-colored eyes, speaks in mirrored sentences) fears the Bleed is thinning the Glass. He opens the Veil Gate for the Festival only if the Accord promises to seal it again, a promise Voss intends to break.
+- **Thane Eirik Sorrel of Isenmar** (52): Anja's older brother. Practical and proud, he is drowning in debt to Meridian for heat. He declares martial law after the Thaw (Ch11) and sends Isenmar's refugees south into Elowen, which causes a border crisis.
+- **Dominar Hrothgar Ashfall of Ashkaar** (64): Dragon-Lord and Sigrun's father. A warlord-king who believes "dragons bow to no Accord." He threatens war on Zenith after the Cindervault caldera crisis (Ch8) and masses legions at Wyrmrest in Act V. He can be swayed (`DOMINAR_SWAYED`) to fly for Crownhaven instead of against Zenith.
+- **Prince-Elector Idris Kassan of Ossaria** (45): elected for life by the caravan houses. Charming and venal, he sells Meridian drilling and mining rights (Duneholt's aquifer, Cragholm's seams) and pays the Bone Sands' fossil-hunters to look the other way.
+- **The Zenith Council**: Zenith's governing council of founding houses, chaired by **Voss**. Notables include **Councillor Renata Sallow** (old-money airship house, Voss's rival, who becomes a reluctant ally in Act IV) and **Magnus Strade** (Cogsworth).
+- **The Sump Barons of Nadir**: the chem-lords and pit-bosses who actually run the City Below, chief among them **Mother Gutter** (an ancient sludge-baron with a Muk the size of a cart). They pay tithes to Nyx, hate Zenith, and are the Hollow's best recruiters' best customers.
+- **Envoy Delphine Okoro of the Concert of Regions**: the neighboring realms across the strait. She attends the Festival to decide whether the quarantine lifts or becomes **Severance**, meaning permanent abandonment. She can be persuaded (`ENVOY_PERSUADED`), which affects the epilogue's international outcome.
+- **Chancellor Ambrose Hollis**: see above. He is the hinge between the kingdoms' grievances and Meridian's money.
+- **Vesper Lindqvist** (24): leader of **the Eevee Octave**, eight Glassfall orphans raised by the Prism Choir, each beside a different Imprint. She runs the Festival-week Eeveelution gauntlet. Gentle and devout, and a little in love with the idea of the Festival.
+
+## VISITING CHAMPIONS
+
+Velmora has always invited the champions of *other worlds* through Antumbra's Veil Gate. The sister-fangame cameo roster (Reborn, Rejuvenation, Desolation), their in-universe reasons and the headline Quarterfinal pick are in **`design/CAMEOS.md`**. The Festival bracket is choice-driven (SPINE Rev. 3, `story/10_CHOICES_ENDINGS.md`). Matchups named in this file are the **default draw**.
 
 ## HISTORICAL FIGURES
 

@@ -1,6 +1,7 @@
 # Prismfall Field Effects — DSL & API Reference (v1.0)
 
-Plugin: `plugins/Prismfall Field Effects/` (Essentials v21.1). Core engine = files `001_`–`0xx_`.
+Plugin: `plugins/Prismfall Field Effects/` (Essentials v21.1). Core engine = files `001_`–`009_` (009 = Field Notes
+encyclopedia: records each field the player battles on in save data `:prismfall_field_notes`; pause-menu entry "Field Notes").
 **Each field lives in its own file `1xx_Field_<Name>.rb` that only calls `FieldEffects.register`.**
 Never edit the core files to add a field. Validate with `ruby tools/validate_fields.rb` (must print 0 errors).
 
@@ -113,7 +114,8 @@ Example: `:user => { :types => [:BUG], :grounded => true }`.
 | `:name` | String | **required** |
 | `:backdrop` | String | **required**. Also used as vanilla battleback if `Graphics/Battlebacks/<backdrop>_bg` exists |
 | `:intro_message` | String | **required**. Shown at battle start and after a change with no message |
-| `:description` | String | optional one-liner |
+| `:description` | String | optional one-liner (shown in Field Notes, the in-game field encyclopedia) |
+| `:notes` | [String] | optional Field Notes bullet lines; if omitted they are generated from the definition |
 | `:nature_power` | move ID | Nature Power becomes this move (a built-in terrain still takes precedence) |
 | `:camouflage` | type ID | Camouflage makes the user this type |
 | `:secret_power` | Integer | Secret Power's effect code: 0/1 paralyze, 2 sleep, 3 Sp.Atk−1, 4/6/12 Speed−1, 5 Atk−1, 7/11/13 flinch, 8 Acc−1, 9 freeze, 10 burn, 14 Def−1 |

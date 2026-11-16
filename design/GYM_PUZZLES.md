@@ -108,7 +108,7 @@ Gym trainers sit at **cap −4 … cap −1**. Classes are stock Essentials unle
 **Idea:** Corvin is a chemist-physician with gallows wit, and he runs a ward for the Fixing sick. The puzzle is reagent mixing.
 - **231 Vat Room:** three valves (Red, Blue, Yellow; S335–S337) feed a central vat. Its colour (V335) is the mix of any two open valves: purple, green or orange. Opening three makes brown and triggers a fume reset. **Sludge doors** in 232 each dissolve only for one colour (door events check V335 when you return with a filled flask item flag).
 - **232 Sludge Gallery:** a toxic floor. Each step on sludge adds 1 to a filter counter (V336). At 12 steps: "Your mask filter is spent!" and you're reset to the gallery start. Filter refills (step resets) sit in 3 alcoves. Three coloured doors in sequence: green, purple, orange, so you go back to the vat twice.
-- **Trainers (5):** Scientist ×2, Burglar *(Undercity scavenger)* ×2, Nurse-themed Aroma Lady ×1 (31–34). Corvin: single. TM84 Poison Jab.
+- **Trainers (5):** Scientist ×2, Burglar *(Nadir scavenger)* ×2, Nurse-themed Aroma Lady ×1 (31–34). Corvin: single. TM84 Poison Jab.
 
 ## Gym 7 — Cindervault (250–253) · Brann Holloway (Fire, :VOLCANIC, cap 39)
 **Idea:** Brann is a gruff foundry-master who secretly fears the caldera tap. The puzzle is minecart rails and magma timing.

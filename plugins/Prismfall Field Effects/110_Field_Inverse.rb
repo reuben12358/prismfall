@@ -1,5 +1,5 @@
 #===============================================================================
-# INVERSE - Umbra, the Reverse Kingdom (recurring). Giratina's mirrored realm,
+# INVERSE - Antumbra, the Kingdom Behind the Glass (recurring). Giratina's mirrored realm,
 # where the type chart itself is turned upside down.
 #===============================================================================
 FieldEffects.register(:INVERSE, {

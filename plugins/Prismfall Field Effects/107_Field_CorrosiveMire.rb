@@ -1,5 +1,5 @@
 #===============================================================================
-# CORROSIVE_MIRE - Gym 6 (Poison), Mirefen. Toxic runoff pooled beneath Lumen.
+# CORROSIVE_MIRE - Gym 6 (Poison), Mirefen. Toxic runoff pooled in Nadir, the City Below.
 #===============================================================================
 FieldEffects.register(:CORROSIVE_MIRE, {
   :name          => "Corrosive Mire",
@@ -37,7 +37,7 @@ FieldEffects.register(:CORROSIVE_MIRE, {
     { :battlers => { :types => [:POISON] }, :heal => 1/16r, :message => "The mire nourished {1}." },
     { :battlers => { :grounded => true, :types => [:STEEL], :not_types => [:POISON] }, :damage => 1/16r,
       :message => "The mire is corroding {1}'s metal!" },
-    { :battlers => { :grounded => true, :not_types => [:POISON, :STEEL] }, :chance => 20,
+    { :battlers => { :grounded => true, :not_types => [:POISON, :STEEL] }, :chance => 10,   # gym 6 tuning (was 20)
       :status => :POISON, :message => "{1} was poisoned by the corrosive mire!" }
   ],
   :hooks         => {

@@ -6,14 +6,19 @@
   "Edge connections: 'span' is the open stretch of this map's edge; 'to_span' the matching stretch on the target map (write map_connections accordingly).",
   "field = default FieldEffects::MAP_FIELDS entry (null = :NONE). segment = badges held when the map first becomes reachable (drives level caps).",
   "detail:'outline' maps (Acts II-V) list only what is fixed so far; full specs follow act by act.",
-  "tileset names = files in Graphics/Tilesets of the base project. bgm names = Audio/BGM placeholders."
+  "tileset names = files in Graphics/Tilesets of the base project. bgm names = Audio/BGM placeholders.",
+  "states: alternate looks of one map keyed by Core story state (act number, choice keys from story/10_CHOICES_ENDINGS.md, ruin_route). Build them as event pages / overlay events on the SAME map unless 'replaced_by' names another map ID. Encounter changes use $PokemonGlobal.encounter_version: 0 default, 1 Bleed-spread (Act IV+), 2 Ruin Route, 3 postgame.",
+  "branch_only maps exist only on one story branch; ruin_route maps only on the secret Ruin Route (IDs 960-979).",
+  "Outline city exteriors do not list doors yet; links C<id>_PC / C<id>_MART are reserved for them."
  ],
  "id_scheme": {
   "100-479": "cities: block = 100 + 20*city_index (Ferrow's Landing=0, Briarwick=1 ... Wyrmrest=18); +0 exterior, +1 PC, +2 Mart, +3..+9 interiors, +10..+19 gym",
   "480-519": "Crownhaven",
   "520-899": "overworld segments: block = 520 + 20*s (s = badges held, 0-18); +0..+3 routes, +4..+7 dungeons, +8..+9 Bleed zone, +10..+17 interiors/rest houses, +18..+19 optional",
   "900-949": "postgame",
-  "950-989": "overflow (big-city districts)",
+  "950-959": "overflow (big-city districts)",
+  "960-979": "Ruin Route only",
+  "980-989": "interludes (play as other characters)",
   "990-999": "dev/test"
  },
  "maps": [
@@ -21,7 +26,7 @@
    "id": 100,
    "name": "Ferrow's Landing",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "town",
    "size": [
     40,
@@ -146,7 +151,7 @@
       20,
       4
      ],
-     "text": "Ferrow's Landing - Last harbour of the Sylvan Crown"
+     "text": "Ferrow's Landing - Last harbour of Elowen, the Evergreen Crown"
     },
     {
      "type": "tree_border",
@@ -154,7 +159,7 @@
       0,
       0
      ],
-     "note": "Sylvan forest edge along W and N borders except north exit"
+     "note": "Elowen forest edge along W and N borders except north exit"
     },
     {
      "type": "npc",
@@ -227,7 +232,7 @@
    "id": 101,
    "name": "Ferrow's Landing Pokémon Center",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -284,7 +289,7 @@
    "id": 102,
    "name": "Ferrow's Landing Mart",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -327,7 +332,7 @@
    "id": 103,
    "name": "Larch Research Station",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     17,
@@ -399,7 +404,7 @@
    "id": 104,
    "name": "Tidewater Inn",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     13,
@@ -443,7 +448,7 @@
    "id": 105,
    "name": "Ferrow Lighthouse 1F",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -497,7 +502,7 @@
    "id": 106,
    "name": "Ferrow Lighthouse Lamp Room",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     9,
@@ -541,7 +546,7 @@
    "id": 107,
    "name": "Dockmaster's House",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -586,7 +591,7 @@
    "id": 108,
    "name": "Quarantine Customs Hall",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     19,
@@ -630,7 +635,7 @@
    "id": 109,
    "name": "The Dovetail - Deck",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     30,
@@ -688,7 +693,7 @@
    "id": 110,
    "name": "The Dovetail - Cabin",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -731,7 +736,7 @@
    "id": 120,
    "name": "Briarwick",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "town",
    "size": [
     44,
@@ -887,13 +892,28 @@
      ],
      "says": "dye vats flavour"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "bleed_spread",
+     "when": "act>=3",
+     "change": "silk cocoons on 2 western trees (overlay events); Cocoonfall Hollow boundary moves to town edge; 3 NPCs relocated"
+    },
+    {
+     "id": "heartfall",
+     "when": "act>=5",
+     "change": "half the town cocooned; Loomhouse sealed unless Tamsin redeemed (choice key)"
+    }
    ]
   },
   {
    "id": 121,
    "name": "Briarwick Pokémon Center",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -950,7 +970,7 @@
    "id": 122,
    "name": "Briarwick Mart",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -995,7 +1015,7 @@
    "id": 123,
    "name": "Weavers' Guildhall",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -1040,7 +1060,7 @@
    "id": 124,
    "name": "Treetop House",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -1068,7 +1088,7 @@
       3,
       3
      ],
-     "says": "gives a Sylvan folktale (Ogerpon foreshadow)"
+     "says": "gives a Elowen folktale (Ogerpon foreshadow)"
     }
    ]
   },
@@ -1076,7 +1096,7 @@
    "id": 125,
    "name": "Cutter's House",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -1112,7 +1132,7 @@
    "id": 130,
    "name": "Loomhouse Gym - Foyer",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     15,
@@ -1165,7 +1185,7 @@
    "id": 131,
    "name": "Loomhouse Gym - Weaving Hall",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     25,
@@ -1317,7 +1337,7 @@
    "id": 132,
    "name": "Loomhouse Gym - Canopy Lofts",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     25,
@@ -1417,7 +1437,7 @@
    "id": 133,
    "name": "Loomhouse Gym - The Spindle",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     15,
@@ -1462,7 +1482,7 @@
    "id": 140,
    "name": "Saltmere",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "town",
    "size": [
     48,
@@ -1480,7 +1500,7 @@
      25
     ]
    },
-   "layout": "Free port of the Sylvan Crown on a salt lagoon. Market square centre; harbour south; the Pell Playhouse (gym) is a grand theatre on the square's north side. Salt-pans glitter to the west.",
+   "layout": "Free port of Elowen on a salt lagoon. Market square centre; harbour south; the Pell Playhouse (gym) is a grand theatre on the square's north side. Salt-pans glitter to the west.",
    "connections": [
     {
      "type": "edge",
@@ -1611,13 +1631,28 @@
      ],
      "says": "Grand Stage lore"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "mandate",
+     "when": "after Lumen Shatter",
+     "change": "Meridian checkpoint at the north edge; market half empty"
+    },
+    {
+     "id": "hollow_riot",
+     "when": "choice: sided with Hollow in Saltmere",
+     "change": "burnt stalls, Hollow graffiti, extra Hollow NPCs"
+    }
    ]
   },
   {
    "id": 141,
    "name": "Saltmere Pokémon Center",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -1674,7 +1709,7 @@
    "id": 142,
    "name": "Saltmere Mart",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -1723,7 +1758,7 @@
    "id": 143,
    "name": "Saltmere Harbour Office",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -1759,7 +1794,7 @@
    "id": 144,
    "name": "Saltwife's House",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -1795,7 +1830,7 @@
    "id": 145,
    "name": "Pageant Hall",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     21,
@@ -1842,7 +1877,7 @@
    "id": 150,
    "name": "Pell Playhouse - Foyer",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     19,
@@ -1896,7 +1931,7 @@
    "id": 151,
    "name": "Pell Playhouse - Revolving Stage",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     25,
@@ -2002,7 +2037,7 @@
    "id": 152,
    "name": "Pell Playhouse - Fly Loft",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     25,
@@ -2077,7 +2112,7 @@
    "id": 153,
    "name": "Pell Playhouse - Dressing Rooms",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     27,
@@ -2157,7 +2192,7 @@
    "id": 154,
    "name": "Pell Playhouse - The Grand Stage",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     21,
@@ -2206,7 +2241,7 @@
    "id": 160,
    "name": "Ebbmouth",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "town",
    "size": [
     46,
@@ -2224,7 +2259,7 @@
      18
     ]
    },
-   "layout": "Glaciem's southern port where the River Ebb meets the sea; the Water Imprint makes the river flow seaward by day and inland by night (current tiles flip with day/night). Stilt houses, canals with footbridges. Tidelock Gym = stone lock-house on the river (east).",
+   "layout": "Isenmar's southern port where the River Ebb meets the sea; the Water Imprint makes the river flow seaward by day and inland by night (current tiles flip with day/night). Stilt houses, canals with footbridges. Tidelock Gym = stone lock-house on the river (east).",
    "connections": [
     {
      "type": "edge",
@@ -2348,13 +2383,23 @@
      ],
      "says": "story: Hollow cell hint"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "thaw",
+     "when": "act>=3",
+     "change": "river current events stop flipping (Imprint failing); flooded canal tiles"
+    }
    ]
   },
   {
    "id": 161,
    "name": "Ebbmouth Pokémon Center",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     15,
@@ -2411,7 +2456,7 @@
    "id": 162,
    "name": "Ebbmouth Mart",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     12,
@@ -2458,7 +2503,7 @@
    "id": 163,
    "name": "Anglers' Guild",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     15,
@@ -2503,7 +2548,7 @@
    "id": 164,
    "name": "Reyes House",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     13,
@@ -2556,7 +2601,7 @@
    "id": 165,
    "name": "Net-mender's House",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     11,
@@ -2601,7 +2646,7 @@
    "id": 166,
    "name": "Reyes Cellar (Hollow cell)",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     17,
@@ -2665,7 +2710,7 @@
    "id": 170,
    "name": "Tidelock Gym - Lock Hall",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     17,
@@ -2711,7 +2756,7 @@
    "id": 171,
    "name": "Tidelock Gym - Basins (Low Water)",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     29,
@@ -2830,7 +2875,7 @@
    "id": 172,
    "name": "Tidelock Gym - Basins (Mid Water)",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     29,
@@ -2953,7 +2998,7 @@
    "id": 173,
    "name": "Tidelock Gym - Basins (High Water)",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     29,
@@ -3085,7 +3130,7 @@
    "id": 174,
    "name": "Tidelock Gym - Warden's Pool",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     19,
@@ -3133,7 +3178,7 @@
    "id": 180,
    "name": "Lumen City - Concourse",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "town",
    "size": [
     64,
@@ -3301,13 +3346,28 @@
      ],
      "says": "Neon Grid lore"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "mandate",
+     "when": "act>=2",
+     "change": "Meridian security NPCs, curfew sign, closed tram"
+    },
+    {
+     "id": "martial_law",
+     "when": "act>=4",
+     "change": "barricades at the plaza; Meridian Tower doors locked"
+    }
    ]
   },
   {
    "id": 181,
    "name": "Lumen City - Lowlight",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "town",
    "size": [
     40,
@@ -3363,13 +3423,23 @@
      ],
      "hidden": true
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "shattered",
+     "when": "story: Lumen Shatter (end Act I)",
+     "replaced_by": 608
+    }
    ]
   },
   {
    "id": 182,
    "name": "Lumen City Pokémon Center",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     15,
@@ -3426,7 +3496,7 @@
    "id": 183,
    "name": "Lumen Arcade Dept. Store 1F",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     21,
@@ -3483,7 +3553,7 @@
    "id": 184,
    "name": "Lumen Arcade Dept. Store 2F",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     21,
@@ -3539,7 +3609,7 @@
    "id": 185,
    "name": "Meridian Tower Lobby",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     25,
@@ -3592,7 +3662,7 @@
    "id": 186,
    "name": "Meridian Tower - Gala Hall",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     27,
@@ -3637,7 +3707,7 @@
    "id": 187,
    "name": "Glide Cycle Shop",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     13,
@@ -3673,7 +3743,7 @@
    "id": 188,
    "name": "Lumen Fossil Lab",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     15,
@@ -3709,7 +3779,7 @@
    "id": 189,
    "name": "Lumen Apartment",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     11,
@@ -3745,7 +3815,7 @@
    "id": 190,
    "name": "Circuit Gym - Switchroom",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     17,
@@ -3790,7 +3860,7 @@
    "id": 191,
    "name": "Circuit Gym - Breadboard Hall",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     27,
@@ -3884,7 +3954,7 @@
    "id": 192,
    "name": "Circuit Gym - Blackout Grid",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     27,
@@ -3988,7 +4058,7 @@
    "id": 193,
    "name": "Circuit Gym - Core",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     19,
@@ -4025,7 +4095,7 @@
    "id": 200,
    "name": "Duneholt",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "town",
    "size": [
     48,
@@ -4053,7 +4123,7 @@
    "id": 201,
    "name": "Duneholt Pokémon Center",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "interior",
    "size": [
     15,
@@ -4110,7 +4180,7 @@
    "id": 202,
    "name": "Duneholt Mart",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "interior",
    "size": [
     12,
@@ -4149,7 +4219,7 @@
    "id": 210,
    "name": "Duneholt Gym - Entrance",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     21,
@@ -4171,7 +4241,7 @@
    "id": 211,
    "name": "Duneholt Gym - Puzzle Room 1",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     29,
@@ -4193,7 +4263,7 @@
    "id": 212,
    "name": "Duneholt Gym - Puzzle Room 2",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     29,
@@ -4215,7 +4285,7 @@
    "id": 213,
    "name": "Duneholt Gym - Warden Arena",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     21,
@@ -4237,7 +4307,7 @@
    "id": 220,
    "name": "Mirefen",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "town",
    "size": [
     44,
@@ -4265,7 +4335,7 @@
    "id": 221,
    "name": "Mirefen Pokémon Center",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     15,
@@ -4322,7 +4392,7 @@
    "id": 222,
    "name": "Mirefen Mart",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     12,
@@ -4361,7 +4431,7 @@
    "id": 230,
    "name": "Mirefen Gym - Entrance",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -4383,7 +4453,7 @@
    "id": 231,
    "name": "Mirefen Gym - Puzzle Room 1",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -4405,7 +4475,7 @@
    "id": 232,
    "name": "Mirefen Gym - Puzzle Room 2",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -4427,7 +4497,7 @@
    "id": 233,
    "name": "Mirefen Gym - Warden Arena",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -4449,7 +4519,7 @@
    "id": 240,
    "name": "Cindervault",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "town",
    "size": [
     46,
@@ -4477,7 +4547,7 @@
    "id": 241,
    "name": "Cindervault Pokémon Center",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "interior",
    "size": [
     15,
@@ -4534,7 +4604,7 @@
    "id": 242,
    "name": "Cindervault Mart",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "interior",
    "size": [
     12,
@@ -4573,7 +4643,7 @@
    "id": 250,
    "name": "Cindervault Gym - Entrance",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     21,
@@ -4595,7 +4665,7 @@
    "id": 251,
    "name": "Cindervault Gym - Puzzle Room 1",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     29,
@@ -4617,7 +4687,7 @@
    "id": 252,
    "name": "Cindervault Gym - Puzzle Room 2",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     29,
@@ -4639,7 +4709,7 @@
    "id": 253,
    "name": "Cindervault Gym - Warden Arena",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     21,
@@ -4661,7 +4731,7 @@
    "id": 260,
    "name": "Ironreach",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "town",
    "size": [
     44,
@@ -4689,7 +4759,7 @@
    "id": 261,
    "name": "Ironreach Pokémon Center",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     15,
@@ -4746,7 +4816,7 @@
    "id": 262,
    "name": "Ironreach Mart",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     12,
@@ -4785,7 +4855,7 @@
    "id": 270,
    "name": "Ironreach Gym - Entrance",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -4807,7 +4877,7 @@
    "id": 271,
    "name": "Ironreach Gym - Puzzle Room 1",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -4829,7 +4899,7 @@
    "id": 272,
    "name": "Ironreach Gym - Puzzle Room 2",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -4851,7 +4921,7 @@
    "id": 273,
    "name": "Ironreach Gym - Puzzle Room 3",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -4873,7 +4943,7 @@
    "id": 274,
    "name": "Ironreach Gym - Warden Arena",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -4895,7 +4965,7 @@
    "id": 280,
    "name": "Verdance",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "town",
    "size": [
     50,
@@ -4923,7 +4993,7 @@
    "id": 281,
    "name": "Verdance Pokémon Center",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -4980,7 +5050,7 @@
    "id": 282,
    "name": "Verdance Mart",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -5019,7 +5089,7 @@
    "id": 290,
    "name": "Verdance Gym - Entrance",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     21,
@@ -5041,7 +5111,7 @@
    "id": 291,
    "name": "Verdance Gym - Puzzle Room 1",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     29,
@@ -5063,7 +5133,7 @@
    "id": 292,
    "name": "Verdance Gym - Puzzle Room 2",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     29,
@@ -5085,7 +5155,7 @@
    "id": 293,
    "name": "Verdance Gym - Warden Arena",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     21,
@@ -5107,7 +5177,7 @@
    "id": 300,
    "name": "Rimeholt",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "town",
    "size": [
     46,
@@ -5135,7 +5205,7 @@
    "id": 301,
    "name": "Rimeholt Pokémon Center",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     15,
@@ -5192,7 +5262,7 @@
    "id": 302,
    "name": "Rimeholt Mart",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "interior",
    "size": [
     12,
@@ -5231,7 +5301,7 @@
    "id": 310,
    "name": "Rimeholt Gym - Entrance",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     21,
@@ -5253,7 +5323,7 @@
    "id": 311,
    "name": "Rimeholt Gym - Puzzle Room 1",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     29,
@@ -5275,7 +5345,7 @@
    "id": 312,
    "name": "Rimeholt Gym - Puzzle Room 2",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     29,
@@ -5297,7 +5367,7 @@
    "id": 313,
    "name": "Rimeholt Gym - Warden Arena",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "gym",
    "size": [
     21,
@@ -5319,7 +5389,7 @@
    "id": 320,
    "name": "Skyreach",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "town",
    "size": [
     40,
@@ -5347,7 +5417,7 @@
    "id": 321,
    "name": "Skyreach Pokémon Center",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     15,
@@ -5404,7 +5474,7 @@
    "id": 322,
    "name": "Skyreach Mart",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     12,
@@ -5443,7 +5513,7 @@
    "id": 330,
    "name": "Skyreach Gym - Entrance",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     21,
@@ -5465,7 +5535,7 @@
    "id": 331,
    "name": "Skyreach Gym - Puzzle Room 1",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     29,
@@ -5487,7 +5557,7 @@
    "id": 332,
    "name": "Skyreach Gym - Puzzle Room 2",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     29,
@@ -5509,7 +5579,7 @@
    "id": 333,
    "name": "Skyreach Gym - Warden Arena",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     21,
@@ -5531,7 +5601,7 @@
    "id": 340,
    "name": "Lucent",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "town",
    "size": [
     46,
@@ -5559,7 +5629,7 @@
    "id": 341,
    "name": "Lucent Pokémon Center",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "interior",
    "size": [
     15,
@@ -5616,7 +5686,7 @@
    "id": 342,
    "name": "Lucent Mart",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "interior",
    "size": [
     12,
@@ -5655,7 +5725,7 @@
    "id": 350,
    "name": "Lucent Gym - Entrance",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     21,
@@ -5677,7 +5747,7 @@
    "id": 351,
    "name": "Lucent Gym - Puzzle Room 1",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -5699,7 +5769,7 @@
    "id": 352,
    "name": "Lucent Gym - Puzzle Room 2",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -5721,7 +5791,7 @@
    "id": 353,
    "name": "Lucent Gym - Puzzle Room 3",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -5743,7 +5813,7 @@
    "id": 354,
    "name": "Lucent Gym - Warden Arena",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     21,
@@ -5765,7 +5835,7 @@
    "id": 360,
    "name": "Cragholm",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "town",
    "size": [
     46,
@@ -5793,7 +5863,7 @@
    "id": 361,
    "name": "Cragholm Pokémon Center",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "interior",
    "size": [
     15,
@@ -5850,7 +5920,7 @@
    "id": 362,
    "name": "Cragholm Mart",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "interior",
    "size": [
     12,
@@ -5889,7 +5959,7 @@
    "id": 370,
    "name": "Cragholm Gym - Entrance",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     21,
@@ -5911,7 +5981,7 @@
    "id": 371,
    "name": "Cragholm Gym - Puzzle Room 1",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     29,
@@ -5933,7 +6003,7 @@
    "id": 372,
    "name": "Cragholm Gym - Puzzle Room 2",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     29,
@@ -5955,7 +6025,7 @@
    "id": 373,
    "name": "Cragholm Gym - Warden Arena",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "gym",
    "size": [
     21,
@@ -5977,7 +6047,7 @@
    "id": 380,
    "name": "Gravenmoor",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "town",
    "size": [
     46,
@@ -6005,7 +6075,7 @@
    "id": 381,
    "name": "Gravenmoor Pokémon Center",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "interior",
    "size": [
     15,
@@ -6062,7 +6132,7 @@
    "id": 382,
    "name": "Gravenmoor Mart",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "interior",
    "size": [
     12,
@@ -6101,7 +6171,7 @@
    "id": 390,
    "name": "Gravenmoor Gym - Entrance",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     21,
@@ -6123,7 +6193,7 @@
    "id": 391,
    "name": "Gravenmoor Gym - Puzzle Room 1",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -6145,7 +6215,7 @@
    "id": 392,
    "name": "Gravenmoor Gym - Puzzle Room 2",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -6167,7 +6237,7 @@
    "id": 393,
    "name": "Gravenmoor Gym - Puzzle Room 3",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     29,
@@ -6189,7 +6259,7 @@
    "id": 394,
    "name": "Gravenmoor Gym - Warden Arena",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "gym",
    "size": [
     21,
@@ -6211,7 +6281,7 @@
    "id": 400,
    "name": "Cogsworth",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "town",
    "size": [
     52,
@@ -6239,7 +6309,7 @@
    "id": 401,
    "name": "Cogsworth Pokémon Center",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     15,
@@ -6296,7 +6366,7 @@
    "id": 402,
    "name": "Cogsworth Mart",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     12,
@@ -6335,7 +6405,7 @@
    "id": 410,
    "name": "Cogsworth Gym - Entrance",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     21,
@@ -6357,7 +6427,7 @@
    "id": 411,
    "name": "Cogsworth Gym - Puzzle Room 1",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     29,
@@ -6379,7 +6449,7 @@
    "id": 412,
    "name": "Cogsworth Gym - Puzzle Room 2",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     29,
@@ -6401,7 +6471,7 @@
    "id": 413,
    "name": "Cogsworth Gym - Warden Arena",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "gym",
    "size": [
     21,
@@ -6423,7 +6493,7 @@
    "id": 420,
    "name": "Underveil",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "town",
    "size": [
     50,
@@ -6451,7 +6521,7 @@
    "id": 421,
    "name": "Underveil Pokémon Center",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     15,
@@ -6508,7 +6578,7 @@
    "id": 422,
    "name": "Underveil Mart",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "interior",
    "size": [
     12,
@@ -6547,7 +6617,7 @@
    "id": 430,
    "name": "Underveil Gym - Entrance",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -6569,7 +6639,7 @@
    "id": 431,
    "name": "Underveil Gym - Puzzle Room 1",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -6591,7 +6661,7 @@
    "id": 432,
    "name": "Underveil Gym - Puzzle Room 2",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     29,
@@ -6613,7 +6683,7 @@
    "id": 433,
    "name": "Underveil Gym - Warden Arena",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "gym",
    "size": [
     21,
@@ -6635,7 +6705,7 @@
    "id": 440,
    "name": "Gloaming",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "town",
    "size": [
     48,
@@ -6663,7 +6733,7 @@
    "id": 441,
    "name": "Gloaming Pokémon Center",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     15,
@@ -6720,7 +6790,7 @@
    "id": 442,
    "name": "Gloaming Mart",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -6759,7 +6829,7 @@
    "id": 450,
    "name": "Gloaming Gym - Entrance",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     21,
@@ -6781,7 +6851,7 @@
    "id": 451,
    "name": "Gloaming Gym - Puzzle Room 1",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     29,
@@ -6803,7 +6873,7 @@
    "id": 452,
    "name": "Gloaming Gym - Puzzle Room 2",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     29,
@@ -6825,7 +6895,7 @@
    "id": 453,
    "name": "Gloaming Gym - Puzzle Room 3",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     29,
@@ -6847,7 +6917,7 @@
    "id": 454,
    "name": "Gloaming Gym - Warden Arena",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "gym",
    "size": [
     21,
@@ -6869,7 +6939,7 @@
    "id": 460,
    "name": "Wyrmrest",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "town",
    "size": [
     46,
@@ -6897,7 +6967,7 @@
    "id": 461,
    "name": "Wyrmrest Pokémon Center",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "interior",
    "size": [
     15,
@@ -6954,7 +7024,7 @@
    "id": 462,
    "name": "Wyrmrest Mart",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "interior",
    "size": [
     12,
@@ -6993,7 +7063,7 @@
    "id": 470,
    "name": "Wyrmrest Gym - Entrance",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     21,
@@ -7015,7 +7085,7 @@
    "id": 471,
    "name": "Wyrmrest Gym - Puzzle Room 1",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     29,
@@ -7037,7 +7107,7 @@
    "id": 472,
    "name": "Wyrmrest Gym - Puzzle Room 2",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     29,
@@ -7059,7 +7129,7 @@
    "id": 473,
    "name": "Wyrmrest Gym - Puzzle Room 3",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     29,
@@ -7081,7 +7151,7 @@
    "id": 474,
    "name": "Wyrmrest Gym - Warden Arena",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "gym",
    "size": [
     21,
@@ -7236,7 +7306,7 @@
    "id": 520,
    "name": "Route 1",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     26,
@@ -7390,7 +7460,7 @@
    "id": 521,
    "name": "Route 2",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     60,
@@ -7565,13 +7635,23 @@
      ],
      "berry": "PECHABERRY"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "bleed_spread",
+     "when": "act>=4",
+     "change": "Glassed Orchard cordon removed: glass trees spread across the NE fields (crystal tree events become active); encounter version 1"
+    }
    ]
   },
   {
    "id": 522,
    "name": "The Glassed Orchard",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "bleed_zone",
    "size": [
     30,
@@ -7642,13 +7722,23 @@
      "hidden": false,
      "note": "Bleed Shard #1 (collectible key item proposed in WORLD.md)"
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "ruin",
+     "when": "ruin_route",
+     "change": "PC can 'drink' the Bleed: Ruin Route opening scene; orchard fully crystal"
+    }
    ]
   },
   {
    "id": 523,
    "name": "Hale Farmhouse",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -7693,7 +7783,7 @@
    "id": 524,
    "name": "Gossamer Wood",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     48,
@@ -7900,13 +7990,23 @@
      ],
      "hidden": true
     }
+   ],
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "bleed_spread",
+     "when": "act>=3",
+     "change": "silk walls thicken (2 alternate paths close, Heartwood path opens via 703); encounter version 1"
+    }
    ]
   },
   {
    "id": 525,
    "name": "Gossamer Deepwood",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     36,
@@ -8028,7 +8128,7 @@
    "id": 526,
    "name": "Woodward's Hut",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -8064,7 +8164,7 @@
    "id": 540,
    "name": "Route 3",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     64,
@@ -8287,7 +8387,7 @@
    "id": 541,
    "name": "Route 4",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     30,
@@ -8478,7 +8578,7 @@
    "id": 542,
    "name": "Marsh Rest House",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     11,
@@ -8514,7 +8614,7 @@
    "id": 544,
    "name": "Brinecut Mine 1F",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     40,
@@ -8636,7 +8736,7 @@
    "id": 545,
    "name": "Brinecut Mine B1F",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     34,
@@ -8712,7 +8812,7 @@
    "id": 546,
    "name": "Thistledown Manor",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     30,
@@ -8800,7 +8900,7 @@
    "id": 547,
    "name": "Thistledown Manor - Attic",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "interior",
    "size": [
     12,
@@ -8846,7 +8946,7 @@
    "id": 548,
    "name": "Cocoonfall Hollow",
    "act": 1,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "bleed_zone",
    "size": [
     32,
@@ -8919,7 +9019,7 @@
    "id": 560,
    "name": "Route 5",
    "act": 1,
-   "kingdom": "Borderland (Sylvan Crown/Glaciem)",
+   "kingdom": "Borderland (Elowen/Isenmar)",
    "kind": "route",
    "size": [
     64,
@@ -9089,7 +9189,7 @@
    "id": 561,
    "name": "Route 6",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "route",
    "size": [
     30,
@@ -9281,7 +9381,7 @@
    "id": 564,
    "name": "Gullcry Caves 1F",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "dungeon",
    "size": [
     40,
@@ -9399,7 +9499,7 @@
    "id": 565,
    "name": "Gullcry Caves B1F",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "dungeon",
    "size": [
     32,
@@ -9473,7 +9573,7 @@
    "id": 568,
    "name": "The Rehearsal",
    "act": 1,
-   "kingdom": "Bleed (Saltmere Normal Imprint)",
+   "kingdom": "Elowen",
    "kind": "bleed_zone",
    "size": [
     34,
@@ -9540,13 +9640,14 @@
      "hidden": false,
      "note": "Bleed Shard #3"
     }
-   ]
+   ],
+   "bleed_of": "Saltmere Normal Imprint"
   },
   {
    "id": 580,
    "name": "Route 7",
    "act": 1,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "route",
    "size": [
     52,
@@ -9719,7 +9820,7 @@
    "id": 581,
    "name": "Route 8",
    "act": 1,
-   "kingdom": "Borderland (Glaciem/Lumen)",
+   "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "route",
    "size": [
     32,
@@ -9880,7 +9981,7 @@
    "id": 582,
    "name": "Lumen South Gate",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "interior",
    "size": [
     13,
@@ -9925,7 +10026,7 @@
    "id": 584,
    "name": "Voltaic Sluiceworks",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     40,
@@ -10034,7 +10135,7 @@
    "id": 585,
    "name": "Sluiceworks Turbine Hall",
    "act": 1,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     30,
@@ -10084,7 +10185,7 @@
    "id": 588,
    "name": "Ebb Hollow",
    "act": 1,
-   "kingdom": "Bleed (Ebbmouth Water Imprint)",
+   "kingdom": "Isenmar",
    "kind": "bleed_zone",
    "size": [
     34,
@@ -10151,13 +10252,14 @@
      "hidden": false,
      "note": "Bleed Shard #4"
     }
-   ]
+   ],
+   "bleed_of": "Ebbmouth Water Imprint"
   },
   {
    "id": 600,
    "name": "Route 9",
    "act": 2,
-   "kingdom": "Borderland (Lumen/Dunelands)",
+   "kingdom": "Borderland (Zenith/Ossaria)",
    "kind": "route",
    "size": [
     60,
@@ -10179,7 +10281,7 @@
    "id": 601,
    "name": "Route 10",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "route",
    "size": [
     30,
@@ -10201,7 +10303,7 @@
    "id": 604,
    "name": "Static Tunnels",
    "act": 2,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     44,
@@ -10223,7 +10325,7 @@
    "id": 605,
    "name": "Static Tunnels Depths",
    "act": 2,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     36,
@@ -10245,7 +10347,7 @@
    "id": 608,
    "name": "The Lowlight (Shattered)",
    "act": 2,
-   "kingdom": "Bleed (Lumen Electric Imprint)",
+   "kingdom": "Zenith",
    "kind": "bleed_zone",
    "size": [
     40,
@@ -10261,13 +10363,14 @@
    ],
    "key_features": [
     "post-Shatter Lowlight; 12 Fixed in glass; story"
-   ]
+   ],
+   "bleed_of": "Lumen Electric Imprint"
   },
   {
    "id": 620,
    "name": "Route 11",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "route",
    "size": [
     64,
@@ -10289,7 +10392,7 @@
    "id": 621,
    "name": "Route 12",
    "act": 2,
-   "kingdom": "Borderland (Dunelands/Undercity)",
+   "kingdom": "Borderland (Ossaria/Nadir)",
    "kind": "route",
    "size": [
     40,
@@ -10311,7 +10414,7 @@
    "id": 624,
    "name": "Ossuary of Dunes",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     44,
@@ -10333,7 +10436,7 @@
    "id": 625,
    "name": "Ossuary of Dunes - Script Vault",
    "act": 2,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     34,
@@ -10355,7 +10458,7 @@
    "id": 628,
    "name": "Sinkfield",
    "act": 2,
-   "kingdom": "Bleed (Duneholt Ground Imprint)",
+   "kingdom": "Ossaria",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -10371,13 +10474,14 @@
    ],
    "key_features": [
     "liquefying farmland; optional"
-   ]
+   ],
+   "bleed_of": "Duneholt Ground Imprint"
   },
   {
    "id": 640,
    "name": "Route 13",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "route",
    "size": [
     56,
@@ -10399,7 +10503,7 @@
    "id": 641,
    "name": "Route 14 - Lake Sallow",
    "act": 2,
-   "kingdom": "Borderland (Undercity/Ember Dominion)",
+   "kingdom": "Borderland (Nadir/Ashkaar)",
    "kind": "route",
    "size": [
     50,
@@ -10421,7 +10525,7 @@
    "id": 644,
    "name": "Miasma Caverns",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     42,
@@ -10443,7 +10547,7 @@
    "id": 645,
    "name": "Miasma Caverns B1F",
    "act": 2,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     36,
@@ -10465,7 +10569,7 @@
    "id": 648,
    "name": "The Weeping Fen",
    "act": 2,
-   "kingdom": "Bleed (Mirefen Poison Imprint)",
+   "kingdom": "Nadir",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -10481,7 +10585,8 @@
    ],
    "key_features": [
     "near the Fixing ward"
-   ]
+   ],
+   "bleed_of": "Mirefen Poison Imprint"
   },
   {
    "id": 658,
@@ -10509,7 +10614,7 @@
    "id": 660,
    "name": "Route 15",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "route",
    "size": [
     32,
@@ -10531,7 +10636,7 @@
    "id": 661,
    "name": "Route 16 - The Ironway",
    "act": 2,
-   "kingdom": "Borderland (Ember Dominion/Undercity)",
+   "kingdom": "Borderland (Ashkaar/Nadir)",
    "kind": "route",
    "size": [
     60,
@@ -10553,7 +10658,7 @@
    "id": 664,
    "name": "Mt. Cinder 1F",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "dungeon",
    "size": [
     44,
@@ -10573,7 +10678,7 @@
    "id": 665,
    "name": "Mt. Cinder 2F",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "dungeon",
    "size": [
     40,
@@ -10593,7 +10698,7 @@
    "id": 666,
    "name": "Mt. Cinder Caldera",
    "act": 2,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "dungeon",
    "size": [
     40,
@@ -10615,7 +10720,7 @@
    "id": 668,
    "name": "Emberfall",
    "act": 2,
-   "kingdom": "Bleed (Cindervault Fire Imprint)",
+   "kingdom": "Ashkaar",
    "kind": "bleed_zone",
    "size": [
     34,
@@ -10631,13 +10736,14 @@
    ],
    "key_features": [
     "village burning cold"
-   ]
+   ],
+   "bleed_of": "Cindervault Fire Imprint"
   },
   {
    "id": 680,
    "name": "Route 17 - The Lift Road",
    "act": 3,
-   "kingdom": "Borderland (Undercity/Sylvan Crown)",
+   "kingdom": "Borderland (Nadir/Elowen)",
    "kind": "route",
    "size": [
     30,
@@ -10659,7 +10765,7 @@
    "id": 681,
    "name": "Route 18 - Prism Falls",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     56,
@@ -10681,7 +10787,7 @@
    "id": 682,
    "name": "The Royal Chase",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     56,
@@ -10703,7 +10809,7 @@
    "id": 684,
    "name": "Grudgestone Quarry",
    "act": 3,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     44,
@@ -10725,7 +10831,7 @@
    "id": 685,
    "name": "Grudgestone Quarry B1F",
    "act": 3,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     36,
@@ -10745,7 +10851,7 @@
    "id": 688,
    "name": "Echo Coliseum",
    "act": 3,
-   "kingdom": "Bleed (Ironreach Fighting Imprint)",
+   "kingdom": "Nadir",
    "kind": "bleed_zone",
    "size": [
     34,
@@ -10761,13 +10867,54 @@
    ],
    "key_features": [
     "site of Sable's Conclave attack"
+   ],
+   "bleed_of": "Ironreach Fighting Imprint"
+  },
+  {
+   "id": 698,
+   "name": "Hollow Sanctuary",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "dungeon",
+   "size": [
+    34,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Cave",
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "branch_only": true,
+   "key_features": [
+    "branch: Standing Hollow high (Act III) - Hollow hideout under the Royal Chase"
+   ]
+  },
+  {
+   "id": 699,
+   "name": "Meridian Black Site",
+   "act": 3,
+   "kingdom": "Nadir",
+   "kind": "dungeon",
+   "size": [
+    34,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Cave",
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "branch_only": true,
+   "key_features": [
+    "branch: Standing Meridian high (Act III) - Meridian lab in Grudgestone; Type: Null gift line"
    ]
   },
   {
    "id": 700,
    "name": "Route 19",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     60,
@@ -10789,7 +10936,7 @@
    "id": 701,
    "name": "Route 20",
    "act": 3,
-   "kingdom": "Borderland (Sylvan Crown/Glaciem)",
+   "kingdom": "Borderland (Elowen/Isenmar)",
    "kind": "route",
    "size": [
     32,
@@ -10811,7 +10958,7 @@
    "id": 703,
    "name": "Gossamer Heartwood",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "dungeon",
    "size": [
     40,
@@ -10833,7 +10980,7 @@
    "id": 704,
    "name": "Frostfang Pass",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "dungeon",
    "size": [
     44,
@@ -10855,7 +11002,7 @@
    "id": 705,
    "name": "Frostfang Pass 2F",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "dungeon",
    "size": [
     38,
@@ -10877,7 +11024,7 @@
    "id": 708,
    "name": "The Bride Grove",
    "act": 3,
-   "kingdom": "Bleed (Verdance Grass Imprint)",
+   "kingdom": "Elowen",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -10893,13 +11040,14 @@
    ],
    "key_features": [
     "Elin's Bride Tree"
-   ]
+   ],
+   "bleed_of": "Verdance Grass Imprint"
   },
   {
    "id": 720,
    "name": "Route 21",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "route",
    "size": [
     60,
@@ -10921,7 +11069,7 @@
    "id": 721,
    "name": "Route 22",
    "act": 3,
-   "kingdom": "Borderland (Glaciem/Lumen)",
+   "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "route",
    "size": [
     32,
@@ -10943,7 +11091,7 @@
    "id": 723,
    "name": "Ebbmouth Sea Grotto",
    "act": 3,
-   "kingdom": "Glaciem",
+   "kingdom": "Isenmar",
    "kind": "dungeon",
    "size": [
     36,
@@ -10965,7 +11113,7 @@
    "id": 724,
    "name": "Cloudstair - Lower",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     30,
@@ -10987,7 +11135,7 @@
    "id": 725,
    "name": "Cloudstair - Inner",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     36,
@@ -11007,7 +11155,7 @@
    "id": 726,
    "name": "Cloudstair - Summit",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     30,
@@ -11027,7 +11175,7 @@
    "id": 728,
    "name": "Stillwater",
    "act": 3,
-   "kingdom": "Bleed (Rimeholt Ice Imprint)",
+   "kingdom": "Isenmar",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11043,13 +11191,14 @@
    ],
    "key_features": [
     "town frozen mid-moment"
-   ]
+   ],
+   "bleed_of": "Rimeholt Ice Imprint"
   },
   {
    "id": 740,
    "name": "Route 23",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "route",
    "size": [
     60,
@@ -11071,7 +11220,7 @@
    "id": 741,
    "name": "Route 24",
    "act": 3,
-   "kingdom": "Borderland (Lumen/Sylvan Crown)",
+   "kingdom": "Borderland (Zenith/Elowen)",
    "kind": "route",
    "size": [
     32,
@@ -11093,7 +11242,7 @@
    "id": 742,
    "name": "Mirror Mere",
    "act": 3,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     36,
@@ -11108,14 +11257,14 @@
     "see WORLD.md"
    ],
    "key_features": [
-    "Sylvan lake whose reflection is the Umbra gate"
+    "Elowen lake whose reflection is the gate to Antumbra"
    ]
   },
   {
    "id": 743,
-   "name": "Umbra Threshold",
+   "name": "Antumbra Threshold",
    "act": 3,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "dungeon",
    "size": [
     40,
@@ -11137,7 +11286,7 @@
    "id": 744,
    "name": "Stormwatch Spire 1F",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     30,
@@ -11157,7 +11306,7 @@
    "id": 745,
    "name": "Stormwatch Spire 2F",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     30,
@@ -11177,7 +11326,7 @@
    "id": 746,
    "name": "Stormwatch Spire Roof",
    "act": 3,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "dungeon",
    "size": [
     26,
@@ -11197,7 +11346,7 @@
    "id": 748,
    "name": "The Shattered Sky",
    "act": 3,
-   "kingdom": "Bleed (Skyreach Flying Imprint)",
+   "kingdom": "Zenith",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11213,13 +11362,14 @@
    ],
    "key_features": [
     "floating islands"
-   ]
+   ],
+   "bleed_of": "Skyreach Flying Imprint"
   },
   {
    "id": 760,
    "name": "Route 25",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "route",
    "size": [
     56,
@@ -11241,7 +11391,7 @@
    "id": 761,
    "name": "Route 26",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "route",
    "size": [
     32,
@@ -11263,7 +11413,7 @@
    "id": 764,
    "name": "Geode Hollow",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     44,
@@ -11283,7 +11433,7 @@
    "id": 765,
    "name": "Geode Hollow B1F",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     36,
@@ -11303,7 +11453,7 @@
    "id": 768,
    "name": "The Dreaming Quarter",
    "act": 4,
-   "kingdom": "Bleed (Lucent Psychic Imprint)",
+   "kingdom": "Antumbra",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11317,13 +11467,14 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "bleed_of": "Lucent Psychic Imprint"
   },
   {
    "id": 780,
    "name": "Route 27",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "route",
    "size": [
     60,
@@ -11345,7 +11496,7 @@
    "id": 781,
    "name": "Route 28",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "route",
    "size": [
     32,
@@ -11367,7 +11518,7 @@
    "id": 783,
    "name": "Duneholt Undersands",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     40,
@@ -11389,7 +11540,7 @@
    "id": 784,
    "name": "Darkglass Mine",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     44,
@@ -11409,7 +11560,7 @@
    "id": 785,
    "name": "Darkglass Mine B1F",
    "act": 4,
-   "kingdom": "Dunelands",
+   "kingdom": "Ossaria",
    "kind": "dungeon",
    "size": [
     36,
@@ -11429,7 +11580,7 @@
    "id": 788,
    "name": "Stonesleep",
    "act": 4,
-   "kingdom": "Bleed (Cragholm Rock Imprint)",
+   "kingdom": "Ossaria",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11445,13 +11596,14 @@
    ],
    "key_features": [
     "petrified village; fossils awaken"
-   ]
+   ],
+   "bleed_of": "Cragholm Rock Imprint"
   },
   {
    "id": 800,
    "name": "Route 29",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "route",
    "size": [
     60,
@@ -11473,7 +11625,7 @@
    "id": 801,
    "name": "Route 30",
    "act": 4,
-   "kingdom": "Borderland (Umbra/Lumen)",
+   "kingdom": "Borderland (Antumbra/Zenith)",
    "kind": "route",
    "size": [
     32,
@@ -11495,7 +11647,7 @@
    "id": 804,
    "name": "Barrow of the Wardens",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "dungeon",
    "size": [
     42,
@@ -11515,7 +11667,7 @@
    "id": 805,
    "name": "Barrow Sanctum",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "dungeon",
    "size": [
     34,
@@ -11535,7 +11687,7 @@
    "id": 806,
    "name": "Giratina's Reverse Depths",
    "act": 4,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "dungeon",
    "size": [
     40,
@@ -11550,14 +11702,14 @@
     "see WORLD.md"
    ],
    "key_features": [
-    "Umbra legendary arc (Giratina boss); story-gated"
+    "Antumbra legendary arc (Giratina boss); story-gated"
    ]
   },
   {
    "id": 808,
    "name": "The Hush",
    "act": 4,
-   "kingdom": "Bleed (Gravenmoor Ghost Imprint)",
+   "kingdom": "Antumbra",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11571,13 +11723,14 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "bleed_of": "Gravenmoor Ghost Imprint"
   },
   {
    "id": 820,
    "name": "Route 31",
    "act": 4,
-   "kingdom": "Lumen",
+   "kingdom": "Zenith",
    "kind": "route",
    "size": [
     60,
@@ -11599,7 +11752,7 @@
    "id": 821,
    "name": "Route 32",
    "act": 4,
-   "kingdom": "Borderland (Lumen/Undercity)",
+   "kingdom": "Borderland (Zenith/Nadir)",
    "kind": "route",
    "size": [
     50,
@@ -11621,7 +11774,7 @@
    "id": 822,
    "name": "Route 32 Seabed",
    "act": 4,
-   "kingdom": "Borderland (Lumen/Undercity)",
+   "kingdom": "Borderland (Zenith/Nadir)",
    "kind": "dungeon",
    "size": [
     50,
@@ -11643,7 +11796,7 @@
    "id": 824,
    "name": "Aurelia - Drowned Spires",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     44,
@@ -11665,7 +11818,7 @@
    "id": 825,
    "name": "Aurelia - Air Halls",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     40,
@@ -11685,7 +11838,7 @@
    "id": 826,
    "name": "Aurelia - Gilded Throne Vault",
    "act": 4,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     30,
@@ -11707,7 +11860,7 @@
    "id": 828,
    "name": "Ironbloom",
    "act": 4,
-   "kingdom": "Bleed (Cogsworth Steel Imprint)",
+   "kingdom": "Zenith",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11721,13 +11874,34 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "bleed_of": "Cogsworth Steel Imprint"
+  },
+  {
+   "id": 838,
+   "name": "Accord Archive",
+   "act": 4,
+   "kingdom": "Crownhaven",
+   "kind": "interior",
+   "size": [
+    34,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Cave",
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "branch_only": true,
+   "key_features": [
+    "branch: Standing Accord high (Act IV) - sealed archive reached from Aurelia"
+   ]
   },
   {
    "id": 840,
    "name": "Route 33",
    "act": 5,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "route",
    "size": [
     56,
@@ -11749,7 +11923,7 @@
    "id": 841,
    "name": "Route 34 - Gloamwood Verge",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     32,
@@ -11771,7 +11945,7 @@
    "id": 844,
    "name": "Lightless Deep",
    "act": 5,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     44,
@@ -11791,7 +11965,7 @@
    "id": 845,
    "name": "Lightless Deep B1F",
    "act": 5,
-   "kingdom": "Undercity",
+   "kingdom": "Nadir",
    "kind": "dungeon",
    "size": [
     36,
@@ -11813,7 +11987,7 @@
    "id": 848,
    "name": "The Inverted Ward",
    "act": 5,
-   "kingdom": "Bleed (Underveil Dark Imprint)",
+   "kingdom": "Nadir",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11827,13 +12001,14 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "bleed_of": "Underveil Dark Imprint"
   },
   {
    "id": 860,
    "name": "Route 35 - Gloamwood",
    "act": 5,
-   "kingdom": "Sylvan Crown",
+   "kingdom": "Elowen",
    "kind": "route",
    "size": [
     60,
@@ -11853,7 +12028,7 @@
    "id": 861,
    "name": "Route 36",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "route",
    "size": [
     32,
@@ -11875,7 +12050,7 @@
    "id": 864,
    "name": "Wyrmscar Rift",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "dungeon",
    "size": [
     44,
@@ -11895,7 +12070,7 @@
    "id": 865,
    "name": "Wyrmscar Depths",
    "act": 5,
-   "kingdom": "Ember Dominion",
+   "kingdom": "Ashkaar",
    "kind": "dungeon",
    "size": [
     36,
@@ -11917,7 +12092,7 @@
    "id": 868,
    "name": "The Rainbow Scar",
    "act": 5,
-   "kingdom": "Bleed (Gloaming Fairy Imprint)",
+   "kingdom": "Elowen",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -11931,7 +12106,8 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "bleed_of": "Gloaming Fairy Imprint"
   },
   {
    "id": 880,
@@ -12019,7 +12195,7 @@
    "id": 888,
    "name": "The Glassfall Scar",
    "act": 5,
-   "kingdom": "Bleed (all Imprints)",
+   "kingdom": "Crownhaven",
    "kind": "bleed_zone",
    "size": [
     36,
@@ -12035,7 +12211,8 @@
    ],
    "key_features": [
     "AF 290 Glassfall site"
-   ]
+   ],
+   "bleed_of": "all Imprints"
   },
   {
    "id": 900,
@@ -12102,9 +12279,9 @@
   },
   {
    "id": 910,
-   "name": "Umbra - Distortion Core",
+   "name": "Antumbra - Distortion Core",
    "act": 6,
-   "kingdom": "Umbra",
+   "kingdom": "Antumbra",
    "kind": "dungeon",
    "size": [
     40,
@@ -12120,6 +12297,86 @@
    ],
    "key_features": [],
    "postgame": true
+  },
+  {
+   "id": 960,
+   "name": "The Ledger Hall",
+   "act": 6,
+   "kingdom": "Ruin Route",
+   "kind": "interior",
+   "size": [
+    30,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Radio - Lullaby",
+   "field": "BLEED",
+   "segment": null,
+   "detail": "outline",
+   "ruin_route": true,
+   "key_features": [
+    "Ruin Route hub: a mirror-archive where game-over epitaphs are written; reached from any Bleed Veil once the Ruin Route unlocks"
+   ]
+  },
+  {
+   "id": 961,
+   "name": "Glassed Orchard - Ruin",
+   "act": 6,
+   "kingdom": "Ruin Route",
+   "kind": "bleed_zone",
+   "size": [
+    30,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Radio - Lullaby",
+   "field": "BLEED",
+   "segment": null,
+   "detail": "outline",
+   "ruin_route": true,
+   "key_features": [
+    "Ruin Route version of 522 at full intensity"
+   ]
+  },
+  {
+   "id": 962,
+   "name": "Aurelia - Gilded Chain Foundry",
+   "act": 6,
+   "kingdom": "Ruin Route",
+   "kind": "dungeon",
+   "size": [
+    30,
+    30
+   ],
+   "tileset": "Ruins interior",
+   "bgm": "Radio - Lullaby",
+   "field": "BLEED",
+   "segment": null,
+   "detail": "outline",
+   "ruin_route": true,
+   "key_features": [
+    "Ruin Route: where the Gilded Chain is re-forged (player-led)"
+   ]
+  },
+  {
+   "id": 963,
+   "name": "Crownhaven - Ruined Crown",
+   "act": 6,
+   "kingdom": "Ruin Route",
+   "kind": "town",
+   "size": [
+    30,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": "Radio - Lullaby",
+   "field": "BLEED",
+   "segment": null,
+   "detail": "outline",
+   "ruin_route": true,
+   "key_features": [
+    "Ruin Route ending area"
+   ]
   }
  ]
 }

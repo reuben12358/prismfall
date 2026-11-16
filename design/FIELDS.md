@@ -5,6 +5,8 @@ Built-in terrains (Electric/Grassy/Misty/Psychic) stack on top of a field unless
 **Seeds**: Elemental, Magical, Telluric and Synthetic Seeds activate once when their holder enters a field that reacts to
 them (or when the field appears mid-battle), then are used up.
 
+In-game, **Field Notes** (pause menu) records every field you battle on and shows a summary; unseen fields read "???".
+
 Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 
 ---
@@ -13,7 +15,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 - ↑ Bug ×1.5, Fire ×1.3 (the silk burns), Grass ×1.2. Swarm is always active.
 - ↑ Electroweb, Struggle Bug ×1.5; Lunge, Leech Life, Pounce, Attack Order ×1.3. Cutting moves (Cut, Fury Cutter, X-Scissor, Slash, Night Slash, Leaf Blade, Sacred Sword, Air Slash, Psycho Cut, Cross Poison) ×1.2.
 - ↓ Flying moves from non-Bug users ×0.8 (snagged in webs).
-- Grounded non-Bug Pokémon lose 1 Speed on entry (Heavy-Duty Boots avoid it).
+- Grounded non-Bug Pokémon lose 1 Speed the first time they enter the battle (Heavy-Duty Boots avoid it).
 - Bug contact moves: 20% to lower Speed. Bug moves' own secondary effects are twice as likely.
 - String Shot / Electroweb / Sticky Web never miss; String Shot & Silk Trap lower Speed one extra stage; Defend Order gives +1 Def more. Powder moves ×1.2 accuracy; Compound Eyes ×1.1 more.
 - Bug types recover 1/16 HP each turn. Grassy Terrain lasts 3 turns longer.
@@ -57,7 +59,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 - Elemental Seed: +1 Defense and Aqua Ring.
 - Nature Power: Water Pulse · Camouflage: Water.
 
-## Neon Grid — Gym 4 (Electric), Lumen City
+## Neon Grid — Gym 4 (Electric), Lumen City (Zenith)
 *Neon circuitry hums beneath your feet!*
 - ↑ Electric ×1.5, Steel ×1.2. Pulse moves ×1.5. Light moves (Dazzling Gleam, Flash Cannon, Light of Ruin, Prismatic Laser, Photon Geyser, Luster Purge, Mirror Shot, Signal Beam, Techno Blast) ×1.3.
 - ↑ Rising Voltage ×1.5; Discharge, Parabolic Charge ×1.3.
@@ -86,7 +88,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 - ↑ Acid, Acid Spray, Smog ×2; Clear Smog, Mud Bomb, Mud Shot, Mud-Slap ×1.5; Sludge Wave ×1.3. Mud moves and Muddy Water also hit as Poison.
 - Gunk Shot ×1.25 accuracy, Smog / Poison Gas ×1.4. Damaging Water moves: 20% to poison.
 - On entry: Merciless / Corrosion / Poison Touch → +1 Attack.
-- End of turn: Poison types heal 1/16; grounded Steel types corrode for 1/16; other grounded non-Poison Pokémon have a 20% chance to be poisoned.
+- End of turn: Poison types heal 1/16; grounded Steel types corrode for 1/16; other grounded non-Poison Pokémon have a 10% chance to be poisoned.
 - **Fire ignites the fumes**: every damaging Fire move causes an explosion hitting all non-Fire Pokémon for 1/8 HP.
 - ⟳ Misty Terrain, or Purify ×2 → **Water Surface** (purified). 2 damaging Fire moves → **Wasteland**.
 - Synthetic Seed: poisons the holder but gives +1 Attack and +1 Sp. Atk (great with Guts, Poison Heal, Toxic Boost).
@@ -116,7 +118,7 @@ Legend: ↑ boosted, ↓ weakened, ✕ fails, ⟳ transforms into another field.
 - Telluric Seed: +1 Defense and +1 evasion.
 - Nature Power: Scorching Sands · Camouflage: Ground.
 
-## Inverse Field — Umbra, the Reverse Kingdom
+## Inverse Field — Antumbra, the Kingdom Behind the Glass
 *The world turns inside out... Type matchups are reversed!*
 - **Inverse type chart**: immunities and resistances become weaknesses (2×); weaknesses become resistances (0.5×). Airborne Pokémon still dodge Ground moves.
 - ↑ Ghost, Psychic, Dark ×1.2. Shadow Force, Mirror Shot ×1.5; Phantom Force, Foul Play ×1.3; Psyshock ×1.2.

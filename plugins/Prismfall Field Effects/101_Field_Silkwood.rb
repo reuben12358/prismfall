@@ -43,7 +43,16 @@ FieldEffects.register(:SILKWOOD, {
       :message => "The swarm reinforced {1}!" }
   ],
   :on_entry => [
-    { :battlers => { :grounded => true, :not_types => [:BUG], :not_items => [:HEAVYDUTYBOOTS] },
+    # Gym 1 tuning: each Pokémon is caught by the webs only the FIRST time it enters this battle.
+    { :battlers => { :grounded => true, :not_types => [:BUG], :not_items => [:HEAVYDUTYBOOTS],
+                     :condition => proc { |battle, battler|
+                       seen = battle.instance_variable_get(:@pf_silkwood_webbed) ||
+                              battle.instance_variable_set(:@pf_silkwood_webbed, {})
+                       key = battler.pokemon ? battler.pokemon.personalID : nil
+                       next false if key.nil? || seen[[battler.index & 1, key]]
+                       seen[[battler.index & 1, key]] = true
+                       next true
+                     } },
       :stats => { :SPEED => -1 }, :message => "{1} blundered into a sticky web!" }
   ],
   :end_of_round => [

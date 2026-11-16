@@ -12,3 +12,9 @@
    `BattleSceneRoom#reconfigure` / `Battle::Scene#loadBackdrop` are unchanged (the bridge depends on both).
 3. **Boss battles (rev. 2 §4):** EBDX's boss module gives stat boosts/immunities only — no multi-bar HP. Rejuvenation-
    style multi-bar bosses need custom code (Core).
+
+## From: World & level design lead — 2026-11-15
+1. **Gym puzzle state needs RMXP switches/variables.** Requesting the block **301–400** (gym n uses 300+5n … 300+5n+4; Gym 1 = 305–309 … Gym 18 = 390–394) for FLAGS.md. It sits outside the story's 101–300 range. (Core's "systems use save data, not switches" rule can't apply to event-built puzzles.)
+2. **Aurelia location.** Revision 2 put the Undercity/Nadir beneath Lumen (north-central). WORLD.md therefore places drowned Aurelia under Underveil on the **north** coast below Zenith's cliffs. 00_OVERVIEW says the Fault drains the **south** coast. Story team: please pick one (World is easy to flip).
+3. **Rock Climb** has no `Settings::BADGE_FOR_*` constant or field handler in v21. Core needs to add `BADGE_FOR_ROCKCLIMB = 10` plus a cliff-event helper (WORLD.md §4).
+4. **Boss battles:** see the Tech lead's note #3. GYM_PUZZLES marks Ilsa/Celestine "multi-bar boss style (Hard)". That needs Core's custom multi-bar code.

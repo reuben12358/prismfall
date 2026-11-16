@@ -307,6 +307,7 @@ def check_definition(where, defn, all_ids, stage = false)
     end
     case kind
     when :string  then check_string(w, v)
+    when :string_list then list(v).each { |x| check_string(w, x) }
     when :move    then check_ids(w, v, MOVES, "move")
     when :type    then check_ids(w, v, TYPES, "type")
     when :integer then check_int(w, v, 0, 14)

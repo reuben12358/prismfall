@@ -100,6 +100,7 @@ module FieldEffects
     :backdrop          => :string,      # required
     :intro_message     => :string,      # required
     :description       => :string,
+    :notes             => :string_list, # Field Notes lines (else auto-generated)
     :nature_power      => :move,
     :camouflage        => :type,
     :secret_power      => :integer,
