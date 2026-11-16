@@ -1133,13 +1133,18 @@ events:
       sprite: trainer_LASS
       dir: down
     commands:
-    - '[TODO story] Tamsin: Every thread has to line up. Show me yours.'
-    - script: setBattleRule("field", :SILKWOOD)
-    - if: TrainerBattle.start(:LEADER_TAMSIN, "Tamsin")
+    - 'Tamsin: Every thread has to line up. You made it through the loom, so... so now it''s me.'
+    - 'Tamsin: Granny Loom wove this room. Don''t you dare tear it.'
+    - if: Prismfall.gym_battle(1)
       then:
-      - '[TODO story] Tamsin: The pattern holds... you earned this.'
+      - 'Tamsin: ...It held. You held. Granny Loom would have liked you.'
       - script: Prismfall.award_badge(1)
+      - The badge settles into the case - and the case hums, faintly, as if something inside woke up.
       - script: pbReceiveItem(:TM89)
+      - 'Tamsin: That''s U-turn. Hit, then get out. ...I wish I were better at the second part.'
+      - var:
+        - STORY
+        - 9
       - selfswitch:
         - A
         - true
@@ -1149,4 +1154,39 @@ events:
       sprite: trainer_LASS
       dir: down
     commands:
-    - '[TODO story] Tamsin: The Cutter in town owes me a favour. Tell him I sent you.'
+    - 'Tamsin: Can I... tell you something? Not as a Warden. Just as me.'
+    - 'Tamsin: Briarwick is bankrupt. I signed the Lattice contract. Alone. Nobody else knows.'
+    - 'Tamsin: And the Glasswood grows fastest along the Lattice line. Thistle was right.'
+    - choices:
+      - Tell the village yourself
+      - Tell them at the meeting
+      - Keep it secret
+      cancel: 0
+      branches:
+      - - script: pf_choose(:CH2_TAMSIN, :helped)
+        - 'Tamsin: ...Myself. Yes. It should be me. Thank you for not making it easy.'
+      - - script: 'pf_choose(:CH2_TAMSIN, :exposed)
+
+            pf_standing_add(:MERIDIAN, -1)
+
+            pf_standing_add(:ACCORD, 1)'
+        - 'Tamsin: You''d tell them? ...Then I suppose I can''t hide behind the loom any more.'
+      - - script: 'pf_choose(:CH2_TAMSIN, :kept)
+
+            pf_standing_add(:MERIDIAN, 1)'
+        - 'Tamsin: You''d keep it? I... thank you. I''ll find a way to fix this. I will.'
+    - 'Tamsin: The Glasswood''s heart is Cocoonfall Hollow, west of here past Route 3. I can''t cross a Veil. You can.'
+    - 'Tamsin: Take Granny''s shuttle. For luck.'
+    - var:
+      - STORY
+      - 10
+    - selfswitch:
+      - B
+      - true
+  - cond:
+      self: B
+    graphic:
+      sprite: trainer_LASS
+      dir: down
+    commands:
+    - 'Tamsin: The Cutter in town owes me a favour. Tell him I sent you.'

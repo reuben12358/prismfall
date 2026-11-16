@@ -30,7 +30,7 @@ The road out of Underveil runs down, not up: below the drained Sump into the **L
 - **Celestine** (in her true form; the PC met her disguised in Ch2) dissolves the checkpoint with one sentence the Thornguard captain can't argue with, because she can't lie and everyone knows it: "If you stop this child, the forest will remember your name, and it will say it wrong forever."
 
 ### Gym 17 (`:FAIRY_TALE`), a double battle: "the knight and the dragon"
-Thematic note: *the arena is a storybook. Choose your role (knight, dragon or thief), and the story's rules change who's strong.* Celestine: "Once upon a time — which is the only time there ever is, here —" Her ace is **Togekiss**.
+Thematic note: *the arena is a storybook. Choose your role (knight, dragon or thief), and the story's rules change who's strong.* Celestine: "Once upon a time — which is the only time there ever is, here —" Her ace is **Sylveon**.
 
 ### The Hymn of Return
 In the dusk-chapel at the Great Tree's roots, Celestine gives the PC the **complete Hymn of Return**, sung for them by the Gloaming choir. If the PC received Wick's verse (Ch10) or Maren's page (Archive branch), the last verse visibly *completes* in the Key Item.

@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Map Installer (debug only)
+# Prismfall Maps - runtime support for the generated maps (debug installer action)
 # Adds "Install Prismfall maps" to Debug menu > Files. Reads Data/mapinfos_prismfall.txt
 # (id<TAB>parent_id<TAB>name, written by mapgen/build.py) and merges those entries into the
 # project's own Data/MapInfos.rxdata using the game's Marshal. Existing entries are never
@@ -61,8 +61,8 @@ module PrismfallMapInstaller
     msg += "\n" + _INTL("Collisions skipped: {1}", collisions.length) if collisions.length > 0
     msg += "\n" + _INTL("Missing map files: {1}", missing_files.length) if missing_files.length > 0
     pbMessage(msg)
-    collisions.each { |c| echoln("[Prismfall Map Installer] ID collision: " + c) }
-    missing_files.each { |m| echoln(sprintf("[Prismfall Map Installer] Data/Map%03d.rxdata missing", m)) }
+    collisions.each { |c| echoln("[Prismfall Maps] ID collision: " + c) }
+    missing_files.each { |m| echoln(sprintf("[Prismfall Maps] Data/Map%03d.rxdata missing", m)) }
   end
 end
 

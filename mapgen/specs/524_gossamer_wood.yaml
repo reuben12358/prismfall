@@ -28,10 +28,10 @@ map: |
   TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
   TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
   TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
-  TTTTTT...............#####....................TT
-  TTTTTT...............#####....................TT
-  TTTTTT...............#####....................TT
-  TTTTTT...............#####....................TT
+  TTTTTT...............#####......................
+  TTTTTT...............#####......................
+  TTTTTT...............#####......................
+  TTTTTT...............#####......................
   TTTTTT....TTTTTT.....#####......TTTTTTTTTTTTTTTT
   TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
   TTTTTT....TTTTTT................,,,,,,....TTTTTT
@@ -62,7 +62,7 @@ events:
   - {type: warp, name: To Briarwick, at: [24, 0], link: WOOD_BRIAR, arrive: [24, 1, down]}
   - {type: warp, name: To Route 2, at: [24, 47], link: R2_WOOD, arrive: [24, 46, up]}
   - {type: cut_tree, at: [45, 22]}
-  - {type: sign, at: [43, 23], text: "[TODO map] Beyond the tree: Gossamer Deepwood (map 525, not built yet)."}
+  - {type: warp, name: To Deepwood, at: [47, 22], link: WOOD_DEEP, arrive: [46, 22, left]}
   - {type: sign, at: [23, 17], post: false, name: Silk wall, text: "Thick silk blocks the trail. Maybe there's a way around."}
   - {type: npc, name: Kestrel, at: [24, 4], sprite: trainer_RIVAL1, dir: down,
      text: "[TODO story] Kestrel: Briarwick's just ahead. Try not to get lost in the webs."}

@@ -1,0 +1,199 @@
+# FLAGS — Story Game Switches & Variables Registry (101–300)
+
+> Owner: Story lead. Range per SPINE: **Switches 101–300, Variables 101–300 = story.** Gym puzzles use **301–400** (World lead). Core state is never stored here.
+> **What goes here:** *event/world state*, meaning things map events need on page conditions (a map's look, an NPC's presence, a scene already played).
+> **What does NOT go here:** player **choices, Bonds, Standing, Resonance, game overs and endings**. Those live in Core save data (`Prismfall.state.narrative`, SYSTEMS.md §8) under keys owned by `design/NARRATIVE_KEYS.md`. Events read them with `pf_choice(:key)`, `pf_bond(:ID)`, `pf_cond("…")`. Never mirror a choice into a switch by hand. If a mirror is ever needed for an event page, add it in the "Core-written mirrors" block below, written by Core only.
+> Naming: `S###` switch, `V###` variable. "Set by" is where the story sets it. Reserved gaps are deliberate, so append inside each block.
+
+## Variables (V101–V140 used, V141–V300 reserved)
+
+| ID | Name | Values / meaning | Set by |
+|---|---|---|---|
+| V101 | STORY_ACT | 0 = Prologue, 1–5 = Act, 6 = post-game | Act title cards |
+| V102 | STORY_CHAPTER | 0 = Prologue, 1–21 = chapter, 22 = epilogue, 23 = post-game | Chapter openers |
+| V103 | FESTIVAL_DAY | 0–7 (Ch20–21 scene day; Core's `festival_stage` tracks the bracket separately) | Crownhaven day transitions |
+| V104 | LOWLIGHT_STATE | 0 = intact, 1 = Shattered (608 replaces 181), 2 = spreading (Act IV), 3 = healed (Homecoming) | Ch5, Act IV opener, ending |
+| V105 | BRIARWICK_GLASSWOOD | 0 = edge, 1 = receded (Matriarch beaten), 2 = at the looms (Act IV), 3 = gone | Ch2, Act IV, ending |
+| V106 | VERDANCE_BLOOM | 0 = normal, 1 = runaway (Ch10 arrival), 2 = tamed (Juno confirmed), 3 = autumn (Homecoming) | Ch10, ending |
+| V107 | RIMEHOLT_STATE | 0 = frozen, 1 = Thaw (lower town sunk), 2 = rebuilding (epilogue) | Ch11, epilogue |
+| V108 | EBB_STATE | 0 = two-way, 1 = stuttering, 2 = stopped (Ch4 night), 3 = restored (Ebbmouth Strike) | Ch4, Ch11 transit |
+| V109 | DUNEHOLT_WELL | 0 = sinking, 1 = dry (Act IV), 2 = refilling (Groudon calmed) | Ch6, Ch14 transit |
+| V110 | CINDERVAULT_STATE | 0 = normal, 1 = ashen (vented), 2 = overdrawn (dampers) | Ch8 (per choice result) |
+| V111 | NADIR_STATE | 0 = normal, 1 = Mandate checkpoints, 2 = Purge, 3 = independent | Ch9, Ch16, Ch17 |
+| V112 | GLOAMING_DUSK | 0 = local, 1 = spreading south (Act V), 2 = night sky (Homecoming) | Act V opener, ending |
+| V113 | ROWAN_STATUS | 0 = free (Warden), 1 = Meridian custody, 2 = tribunal, 3 = escaped / Lantern Hollow, 4 = at the Festival, 5 = reunited with Elin | Ch9, Ch13, Ch14, Ch20, ending |
+| V114 | KESTREL_STAGE | 0 = intro, 1 = hunting the Mourner, 2 = Meridian-sponsored, 3 = post-Gravenmoor, 4 = Festival entrant, 5 = resolved | K1–K8 aftermaths |
+| V115 | LARCH_STATUS | 0 = Tidewatch, 1 = in Skyreach, 2 = fugitive (Cragholm), 3 = at the Festival | Ch12, Ch14, Ch20 |
+| V116 | VALEN_STATUS | 0 = Sovereign, 1 = dying (post-ceremony), 2 = dead | Ch20, Ch21 |
+| V117 | ENGINE_WEAKPOINTS | 0–6 count (telemetry sabotaged, Zekrom freed, governor, grid cut, comms, schematics) for staging lines. Endings read Core keys, not this | Recomputed by Core helper before Ch21 (story mirror) |
+| V118 | WARDENS_RELEASED | 0–18 during the Arceus battle staging (Core owns consent logic) | Ch21 battle script |
+| V119 | INTERLUDE_ACTIVE | 0 = none, 1 = Kestrel "Lamplight", 2 = Rowan "Bride Tree", 3 = Kestrel "Dead Letters", 4 = Wenlow "Clear Air", 5 = Valen "The Last Night" | Interlude start/end (party swap scripts read it) |
+| V120 | UNDERSTUDY_FORM | 0 = Eevee, 1–8 = Eeveelution (for Vesper's line) | Evolution hook / Ch20 |
+| V121 | ZYGARDE_CELLS_STORY | Story-placed cells collected (side quest) | Cell events |
+| V122–V140 | (reserved: per-chapter scene step counters, one per chapter as needed) | | |
+
+## Switches: progression milestones (S101–S160)
+
+| ID | Name | Meaning |
+|---|---|---|
+| S101 | PRO_FERRY_DONE | Prologue deck scene finished |
+| S102 | PRO_SCANNED_NULL | Dock scan played (customs gate NPC changes) |
+| S103 | CH1_STARTER_GOT | Starter received |
+| S104 | CH1_K1_DONE | K1 fought |
+| S105 | CH1_ORCHARD_DONE | Glassed Orchard tutorial cleared |
+| S106 | CH2_THISTLE_DONE | Thistle admin battle |
+| S107 | CH2_MATRIARCH_DONE | Glass Matriarch boss cleared |
+| S108 | CH3_PAGEANT_DONE | Mourner's Saltmere pageant scene |
+| S109 | CH3_J1_DONE | J1 |
+| S110 | CH3_UNDERSTUDY_GOT | Gift Eevee received |
+| S111 | CH4_K2_DONE | K2 |
+| S112 | CH4_TEO_MET | Teo admin battle |
+| S113 | CH5_GALA_DONE | Gala and raid finished |
+| S114 | CH5_SHATTER | Lowlight Shattered (see V104) |
+| S115 | CH5_MANDATE | Mandate granted (Directorate checkpoint NPCs appear realm-wide) |
+| S116 | CH6_OSSUARY_DONE | Unown ruins / murals |
+| S117 | CH6_K3_DONE | K3 |
+| S118 | CH7_J2_DONE | J2 |
+| S119 | CH7_WICK_DONE | Wick met (battle or talk) |
+| S120 | CH8_CALDERA_DONE | Caldera Crisis resolved (V110 holds the result) |
+| S121 | CH8_WAR_DRUMS | Ashkaar closed the eastern passes (Ashkaar NPC dialogue swaps) |
+| S122 | CH9_K4_DONE | K4 (Ironreach Open final) |
+| S123 | CH9_CONCLAVE_DONE | Conclave attack finished |
+| S124 | CH9_MOURNER_UNMASKED | Rowan unmasked (realm-wide NPC gossip swaps) |
+| S125 | CH10_JUNO_WARDEN | Juno confirmed. Verdance gym open as J3 |
+| S126 | CH10_ROYAL_CHASE_OPEN | Royal Chase (Safari) opened |
+| S127 | CH10_LOYAL_THREE_DONE | Bride Grove boss sequence cleared |
+| S128 | CH11_THAW | The Thaw happened |
+| S129 | CH11_KYOGRE_DONE | Kyogre boss cleared |
+| S130 | CH11_EBB_STRIKE | Ebbmouth Strike scene played |
+| S131 | CH12_LARCH_PAPERS | Broadcast happened (NPCs reference it) |
+| S132 | CH12_GALE_RAID | Gale Post raided |
+| S133 | CH12_K5_DONE | K5 |
+| S134 | CH13_ANTUMBRA_ENTERED | Crossed the Glass |
+| S135 | CH13_MINDSCAPE_DONE | Mindscape scene played |
+| S136 | CH13_TRIBUNAL_DONE | Tribunal finished |
+| S137 | CH13_FAULT | **The Fault.** North coast drained, encounter version 1 from Act IV |
+| S138 | CH14_TELEMETRY_SCENE | Larch dismantled the badge case |
+| S139 | CH14_RAID_DONE | Cragholm raid finished |
+| S140 | CH14_GROUDON_DONE | Groudon boss cleared |
+| S141 | CH15_ECHO_DONE | Cathedral AF 290 echo played |
+| S142 | CH15_K6_DONE | K6 |
+| S143 | CH15_GIRATINA_DONE | Reverse Depths boss cleared |
+| S144 | CH16_BLUEPRINTS_GOT | Arbiter Blueprints obtained |
+| S145 | CH16_ZEKROM_DONE | Zekrom freed (story event; Core key `ZEKROM_FREED` is authoritative) |
+| S146 | CH16_PURGE_BEGUN | Sump Purge underway (Nadir maps → Purge state) |
+| S147 | CH17_AURELIA_DONE | Sun Court sequence finished |
+| S148 | CH17_SHARD_NAMED | The PC knows what they carry (dialogue swaps everywhere) |
+| S149 | CH17_NADIR_INDEPENDENT | Nadir independence proclaimed |
+| S150 | CH18_PECHARUNT_DONE | Lightless Deep boss cleared (Sweetrot vendors wake) |
+| S151 | CH18_HYMN_GOT | Full Hymn received |
+| S152 | CH18_K7_DONE | K7 |
+| S153 | CH19_OATH_SPOKEN | Sigrun's trial oath given |
+| S154 | CH19_RESHIRAM_DONE | Reshiram boss cleared |
+| S155 | CH20_VEIL_GATE_OPEN | Champions arrived (cameo NPCs appear in Crownhaven) |
+| S156 | CH20_CEREMONY_DONE | Opening ceremony and vision |
+| S157 | CH20_MASQUES_DONE | Night of Masques played |
+| S158 | CH20_AUDIENCE_DONE | Valen's audience played |
+| S159 | CH21_FINALE_DONE | Arceus battle finished. Ending sequence running |
+| S160 | POSTGAME | Post-game unlocked (Spire, Warden's Gauntlet, Distortion Core) |
+
+## Switches: world/NPC presence and side content (S161–S220)
+
+| ID | Name | Meaning |
+|---|---|---|
+| S161 | LARCH_AT_TIDEWATCH | Larch NPC present at Ferrow's Landing (off after Ch12) |
+| S162 | EDDA_SMUGGLER | Edda's smuggler boat available (from Ch5 aftermath) |
+| S163 | HESPER_WARM | Hesper sends care packages (after Ch15) |
+| S164 | DEX_SHRINE | Lowlight shrine event (Act II on) |
+| S165 | THORNGUARD_HEARTGARDEN | Thornguard occupy the Heartgarden (Ch10, before confirmation) |
+| S166 | THORNGUARD_GLOAMING | Thornguard checkpoint at Gloamwood Verge (Act V, cleared by Celestine) |
+| S167 | DOMINAR_LEGIONS | Ashkaar legions camp at Wyrmrest |
+| S168 | ISENMAR_MARTIAL_LAW | Isenmar refugee NPCs in Elowen and Cragholm |
+| S169 | LANTERN_THEATRE_SHUT | Saltmere theatre closed (Act III–IV) |
+| S170 | GLOAMING_DISGUISED_CELESTINE | Ch2 old-woman NPC at the Loyal Three shrine (off after Ch2) |
+| S171 | HOLLOW_SANCTUARY_OPEN | Branch map 698 entrance visible (set when Core's Standing check passes at Ch10 start) |
+| S172 | BLACK_SITE_OPEN | Branch map 699 entrance visible |
+| S173 | ACCORD_ARCHIVE_OPEN | Branch map 838 entrance visible |
+| S174 | DOCTORS_CELL_QUEST | "The Doctor's Cell" side quest active (Ch11–13) |
+| S175 | LITTLE_OWL_QUEST | Ilsa's "Little Owl" quest active (Ch13–20) |
+| S176 | THISTLEDOWN_CLEARED | Haunted manor completed |
+| S177 | EEVEE_OCTAVE_DONE | Eeveelution gauntlet cleared |
+| S178 | VANE_HALL_DONE | Vane Hall sequence completed |
+| S179 | WENLOW_ALIVE | On until Interlude IV ends (Mirefen NPC page) |
+| S180 | TYPE_NULL_GIFT | Black Site Type: Null received |
+| S181–S220 | (reserved: per-Warden post-gym side-arc steps, two per Warden = 36, plus 4 spare) | |
+
+## Switches: Core-written mirrors (S221–S260), events read-only
+
+Core writes these from NARRATIVE_KEYS only if an event page condition needs one. The story team adds a row on request, and Narrative Systems confirms the key.
+
+| ID | Mirrors | Why an event needs it |
+|---|---|---|
+| S221 | Teo alive (`TEO_SAVED`) | Teo NPC pages in Ebbmouth / Lantern Hollow / Festival |
+| S222 | Corvin freed (`CORVIN_FREED`) | Corvin vs Wenlow at Cragholm hospital |
+| S223 | Ogerpon trusted (`OGERPON_TRUSTED`) | Ogerpon follower / Festival presence |
+| S224 | Marchetti turned (`MARCHETTI_TURNED`) | Hijack staging |
+| S225 | Magnus kept faith (`MAGNUS_KEPT_FAITH`) | Magnus NPC location in Act V |
+| S226 | Dominar swayed (`DOMINAR_SWAYED`) | Legion NPCs at Crownhaven vs gone |
+| S227 | Ilsa reconciled (`ILSA_RECONCILED`) | Sanctum door scene |
+| S228 | Kestrel redeemed (Narrative Systems' Kestrel state) | SF/hijack staging |
+| S229–S260 | (reserved) | |
+
+## Switches: endings and post-game (S261–S300)
+
+| ID | Name | Meaning |
+|---|---|---|
+| S261 | ENDING_PLAYING | Ending sequence active (blocks menus) |
+| S262 | EPILOGUE_DONE | Epilogue slides finished. Post-game map states apply |
+| S263 | PG_HOMECOMING_WORLD | Post-game world uses Homecoming map states (fields fading, the Fixed awake). Set from Core's ending ID |
+| S264 | PG_VIGIL_WORLD | Post-game uses Long Vigil / Borrowed Crown map states |
+| S265 | PG_RUIN_WORLD | Ruin Route aftermath states |
+| S266 | PG_SPIRE_OPEN | Concordance Spire (Battle Tower) open |
+| S267 | PG_GAUNTLET_OPEN | Warden's Gauntlet open |
+| S268 | PG_DISTORTION_OPEN | Distortion Core (910) open |
+| S269 | PG_CONCORD_ZERO | Quent's post-game arc started |
+| S270–S300 | (reserved) | |
+
+---
+
+## Proposed narrative keys (crosswalk for NARRATIVE_KEYS.md)
+
+These are the choice and outcome keys used in story files 04–08. **Narrative Systems owns the final names, values and effects.** Rename freely, but tell the story lead so the act files can be updated.
+
+| Key | Chapter | Values (suggested) |
+|---|---|---|
+| PRO_FELLOWSHIP | P | accept / decline / silent |
+| CH2_TAMSIN | 2 | expose / help_confess / keep_secret |
+| CH3_JUNO_TALK | 3 | told / deflect / silent |
+| CH4_KESTREL_MOURNER | 4 | kind / blunt / silent |
+| CH4_TEO | 4 | report / keep_secret / confront |
+| CH5_LOWLIGHT_TESTIMONY | 5 | mourner / someone_else / unknown |
+| CH6_DRILLSITE | 6 | hollow / directorate / sanctuary |
+| CH6_KESTREL_RUMOR | 6 | encourage / warn / silent |
+| CH7_LEDGER | 7 | name_him / reassure / ask_corvin |
+| CH8_CALDERA | 8 | vent / dampers / shutdown |
+| CH8_LIGHTSTONE | 8 | hearthguild / wyrmrest / dominar |
+| CH9_TEO_SABLE | 9 | save_teo (→ TEO_SAVED) / chase_sable (→ IRONREACH_EVIDENCE) |
+| CH9_ROWAN_WORDS | 9 | why / look_after / silent |
+| CH10_OGRE | 10 | ogre (→ OGERPON_TRUSTED) / three (GO) / hesitate |
+| CH10_SUCCESSION_STANCE | 10 | accord / kingdoms / nobody |
+| CH11_ANJA | 11 | expose (→ ANJA_EXPOSED) / let_confess |
+| CH12_LETTER | 12 | keep / send / burn |
+| CH13_REMEMBER | 13 | show / scared / not_yet |
+| CH13_KAITO | 13 | encourage (→ KAITO_TESTIFIED) / spare |
+| CH13_ROWAN_TESTIMONY | 13 | condemn / mercy / refuse |
+| CH14_TELEMETRY | 14 | destroy / sabotage (→ TELEMETRY_SABOTAGED) / leave |
+| CH14_MARCHETTI | 14 | show_evidence (→ MARCHETTI_TURNED eligible) / none |
+| CH15_KESTREL | 15 | sorry / she_chose / resolve |
+| CH16_ROOK | 16 | leak_now / hold |
+| CH16_MAGNUS | 16 | expose (→ MAGNUS_EXPOSED) / conscience (→ MAGNUS_KEPT_FAITH) |
+| CH17_NYX | 17 | trade (→ NYX_BARGAIN_TAKEN) / refuse |
+| CH17_VOSS_OFFER | 17 | refuse / feign (→ VOSS_FEIGNED) / accept (→ VOSS_ACCEPTED) |
+| CH18_KESTREL_RING | 18 | give_now / keep |
+| CH19_OATH | 19 | return / keep / open / ruin |
+| CH20_AUDIENCE | 20 | return / keep / refuse |
+| CH21_CROWN | 21 | kneel / stand / step_back |
+| CH21_FINAL | 21 | return / keep / unmake / concord / borrowed |
+| Outcome-only keys | various | ZEKROM_FREED, CORVIN_FREED, ILSA_RECONCILED, DOMINAR_SWAYED, ENVOY_PERSUADED, PC_SPARED_VOSS, KESTREL_ACCEPTED_SEAT, KESTREL_YSOLDE_RECONCILED, TAMSIN_PUBLIC_CONFESSION |
+
+**Proposed game overs** (titles and triggers in 04–08): GO-01 Homeward · 02 Two in the Orchard · 03 Curtain Call · 04 Live Wire · 05 Sinkfield · 06 Sweet Tooth · 07 Let Them Listen · 08 Pull the Nail · 09 Loyal · 10 Thin Ice · 11 Read the Fine Print (Kestrel interlude) · 12 Looking Back · 13 Willing · 14 Echo · 15 Overtime · 16 Into the Line · 17 The Throne · 18 Fair Bargain · 19 Liar's Pyre · 20 Encore (optional) · 21 Early Crown · 22 His Hand. That is 22 candidates. Narrative Systems picks the canonical set (≥12) and the IDs.

@@ -11,7 +11,7 @@ classes:
               inner_nw: 406, inner_ne: 405, inner_sw: 398, inner_se: 397}
   sand:      {kind: blob, layer: 0, min_width: 1, center: 546, N: 538, S: 554, W: 545, E: 547, NW: 537, NE: 539, SW: 553, SE: 555,
               inner_nw: 558, inner_ne: 556, inner_sw: 542, inner_se: 540}
-  sea:       {kind: autotile, layer: 0, id: 48, same: [sea, deep, pier, harbour]}  # terrain tag 7 (surf)
+  sea:       {kind: autotile, layer: 0, id: 48, same: [sea, deep, pier, harbour, deck, rail]}  # terrain tag 7 (surf)
   deep:      {kind: autotile, layer: 0, id: 144}                     # Sea deep, terrain tag 5
   shore:     {kind: autotile, layer: 0, id: 192}                     # Sand shore, terrain tag 3
   flowers:   {kind: autotile, layer: 0, id: 240}                     # animated red flowers
@@ -19,6 +19,9 @@ classes:
               vtop: 1663, vmid: 1664, vbottom: 1705, corner_tl: 1658}
   ledge:     {kind: hline, layer: 1, left: 1194, mid: 1212, right: 1198, single: 1212}   # jump south
   pier:      {kind: pier, layer: 1, under: sea, top: [1589, 1590, 1591], body: [1597, 1598, 1599]}
+  deck:      {kind: pier, layer: 1, under: sea, top: [1597, 1598, 1599], body: [1597, 1598, 1599], include: [rail]}
+  rail:      {kind: hline, layer: 2, left: 1680, mid: 1681, right: 1682, single: 1681,
+              vtop: 1663, vmid: 1664, vbottom: 1705}          # ship railing over deck planks
   harbour:   {kind: ground_as, as: sea}      # water cells under a harbour stamp
   building:  {kind: ground}                  # footprint marker for stamps
 tiles:
@@ -39,4 +42,6 @@ glyphs:
   'L': ledge
   '=': pier
   'h': harbour
+  'd': deck
+  'r': rail
 stamps: [pokecenter, mart, house_red, house_red2, lab, house_blue_a, house_blue_b, fanclub, mailbox, gym, harbour_pier]

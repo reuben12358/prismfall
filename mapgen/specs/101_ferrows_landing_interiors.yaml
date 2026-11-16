@@ -26,24 +26,50 @@ events:
 ---
 id: 103
 name: Larch Research Station
+display_name: Tidewatch Station
 parent: 100
 template: lab
 exit_link: FL_LAB
 drop_template_events: [Professor, "Turn back, size(3,1)", Grass ball, Fire ball, Water ball, Controlling event,
                        Wall sign left, Wall sign right, Pokédex, Dex access]
 bgm: Lab
-metadata: {MapPosition: [0, 14, 26]}
+metadata: {Name: Tidewatch Station, MapPosition: [0, 14, 26]}
 events:
-  - {type: npc, name: Professor Larch, at: [6, 3], sprite: trainer_PROFESSOR, dir: down,
-     text: "[TODO story] Larch: The scanner said NULL? Fascinating. Pick a partner from the table - any region's."}
-  - {type: npc, name: Juno, at: [4, 5], sprite: trainer_RIVAL2, dir: right,
-     text: "[TODO story] Juno: You're the one off the last ferry! I'm Juno. We're going to be friends, I can tell."}
+  - type: event
+    name: Professor Larch
+    at: [6, 3]
+    pages:
+      - graphic: {sprite: trainer_PROFESSOR, dir: down}
+        commands: ["Professor Larch: Customs first, child. Meridian gets cross if anyone skips the queue."]
+      - cond: {var: [STORY, 3]}
+        graphic: {sprite: trainer_PROFESSOR, dir: down}
+        commands:
+          - "You hand over your mother's letter. Professor Imelda Larch reads it, and sets it down very carefully."
+          - "She pours two cups of kelp tea."
+          - "Professor Larch: Your mother was the bravest coward I ever knew. Drink. It's disgusting."
+          - "She doesn't explain."
+          - "Professor Larch: The Wayfarer Sanctuary keeps partners for people who arrive with nothing. Choose one from the table."
+      - cond: {var: [STORY, 4]}
+        graphic: {sprite: trainer_PROFESSOR, dir: down}
+        commands: ["Professor Larch: Look after that one. And mind Kestrel - he bites, but only when he's frightened."]
+  - type: event
+    name: Juno
+    at: [4, 5]
+    pages:
+      - graphic: {sprite: trainer_RIVAL2, dir: right}
+        commands:
+          - "Juno: You're the one off the last ferry! I'm Juno - the Professor's assistant. Mostly I water things."
+          - "Juno: We're going to be friends, I can tell. I have a nose for it."
+      - cond: {var: [STORY, 5]}
   - &starter
     type: event
     name: Starter table
     at: [9, 4]
     pages:
       - graphic: {sprite: Object ball}
+        commands: ["Three Poké Balls rest on a velvet tray. Better wait for the Professor."]
+      - cond: {var: [STORY, 3]}
+        graphic: {sprite: Object ball}
         commands:
           - script: |
               gens = (1..9).to_a
@@ -55,14 +81,38 @@ events:
                 s = pbMessage(_INTL("Choose your partner!"), names + [_INTL("Back")], 3)
                 if s >= 0 && s < 3 && pbAddPokemon(lines[s][0], 5)
                   Prismfall.record_starter($player.party[-1], gen: gen, slot: s)
-                  pbSetSelfSwitch(@event_id, "A", true)
+                  pbSet(@@STORY, 4)
                 end
               end
-      - cond: {self: A}
-        commands: ["The table is empty now."]
+          - if: "pbGet(@@STORY) >= 4"
+            then:
+              - "Juno bounces in, kerchief askew, seed packets everywhere."
+              - script: |
+                  sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:JUNO)).name
+                  pbMessage(_INTL("Juno: Ooh, I'll take {1}! It was looking at me. Also, underdogs.", sp))
+              - "A door bangs. A boy with hay in his hair drops down from the loft."
+              - script: |
+                  sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:KESTREL)).name
+                  pbMessage(_INTL("Kestrel: I'll have {1}. Fair fights are for people who can afford to lose.", sp))
+              - "Professor Larch lets him take it, with a look that says she has history with this family."
+              - "Kestrel: See you outside, tourist."
+      - cond: {var: [STORY, 4]}
+        commands: ["The tray is empty now."]
   - {<<: *starter, name: Starter ball L, at: [8, 4]}
   - {<<: *starter, name: Starter ball R, at: [10, 4]}
-  - {type: sign, at: [11, 6], post: false, name: Imprint scanner, text: "[TODO art] An Imprint scanner hums quietly. Its display reads: NULL."}
+  - type: event
+    name: Rowan Ashby
+    at: [3, 9]
+    pages:
+      - cond: {var: [STORY, 5]}
+        graphic: {sprite: trainer_POKEMONRANGER_M, dir: right}
+        commands:
+          - "Rowan Ashby: Juno's uncle - Rowan. Grass Warden, when Verdance lets me out. I'm down for seed stock."
+          - "He shows you a sickly Phantump curled in his coat."
+          - "Rowan Ashby: Found it in the Glasswood past Briarwick. Sitting in a tree that had turned to glass, crying."
+          - "Rowan Ashby: Everything that grows must be allowed to die. That's not sad. That's what makes room."
+          - "Rowan Ashby: ...She'd have liked you. My wife, I mean."
+  - {type: sign, at: [11, 6], post: false, name: Imprint scanner, text: "An Imprint scanner hums quietly. Its last reading: NULL."}
 ---
 id: 104
 name: Tidewater Inn
@@ -103,7 +153,7 @@ tile_edits:   # stairs up (Interior general tiles 1256/1257 over 1264/1265) in t
 events:
   - {type: warp, at: [8, 2], link: LIGHT_UP, to: {map: 106, x: 8, y: 3, dir: down}, se: Door exit, arrive: [8, 3, down]}
   - {type: npc, name: Keeper, at: [3, 5], sprite: NPC 25, dir: down,
-     text: "[TODO story] The lamp hasn't been lit since the Accord closed the strait. Kestrel's been up top all morning."}
+     text: "The lamp hasn't been lit since the Concert closed the strait. Old Hesper still climbs up there every night."}
 ---
 id: 106
 name: Ferrow Lighthouse Lamp Room
@@ -118,8 +168,15 @@ tile_edits:
   - [2, 8, 1, 2, 2, 0]
 events:
   - {type: warp, at: [9, 2], to: {map: 105, x: 8, y: 3, dir: down}, se: Door exit}
-  - {type: npc, name: Kestrel, at: [4, 4], sprite: trainer_RIVAL1, dir: up,
-     text: "[TODO story] K1 - Kestrel's intro battle (lv 6) happens here: TrainerBattle.start(:RIVAL_KESTREL, \"Kestrel\", 10 + slot)."}
+  - type: event
+    name: Hesper Vane
+    at: [4, 4]
+    pages:
+      - graphic: {sprite: NPC 28, dir: up}
+        commands:
+          - "Hesper Vane: KESTREL! If you're sleeping in Larch's loft again, don't bother coming home!"
+          - "The old woman turns, sees you, and drops her lamp-rag."
+          - "Hesper Vane: ...You'd better go. Before I say something foolish."
 ---
 id: 107
 name: Dockmaster's House

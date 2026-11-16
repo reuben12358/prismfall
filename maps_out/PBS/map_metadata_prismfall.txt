@@ -17,7 +17,7 @@ Name = Ferrow's Landing Mart
 MapPosition = 0,14,26
 #-------------------------------
 [103]   # Larch Research Station
-Name = Larch Research Station
+Name = Tidewatch Station
 MapPosition = 0,14,26
 #-------------------------------
 [104]   # Tidewater Inn
@@ -39,6 +39,14 @@ MapPosition = 0,14,26
 [108]   # Quarantine Customs Hall
 Name = Quarantine Customs Hall
 MapPosition = 0,14,26
+#-------------------------------
+[109]   # The Dovetail - Deck
+Name = The Dovetail
+MapPosition = 0,14,27
+#-------------------------------
+[110]   # The Dovetail - Cabin
+Name = The Dovetail
+MapPosition = 0,14,27
 #-------------------------------
 [120]   # Briarwick
 Name = Briarwick
@@ -104,6 +112,12 @@ Name = Route 2
 Outdoor = true
 ShowArea = true
 MapPosition = 0,14,23
+BattleBack = field
+#-------------------------------
+[522]   # The Glassed Orchard
+Name = The Glassed Orchard
+ShowArea = true
+MapPosition = 0,15,22
 BattleBack = field
 #-------------------------------
 [524]   # Gossamer Wood

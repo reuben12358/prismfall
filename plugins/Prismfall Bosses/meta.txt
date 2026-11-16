@@ -1,0 +1,7 @@
+Name       = Prismfall Bosses
+Version    = 1.0.0
+Essentials = 21.1
+Requires   = Prismfall Core
+Optional   = Elite Battle: DX,1.4.7
+Optional   = Prismfall Field Effects,1.0.0
+Credits    = Prismfall dev team

@@ -1,0 +1,88 @@
+# PROLOGUE - The Dovetail (maps 109-110). Story: story/04_ACT_I.md "PROLOGUE - The Last Ferry".
+# The base project's intro map (player name/gender) should end by transferring to map 109 (8,6) - see MAPGEN.md.
+# The deck is drawn with Outside pier planks + rail fences over the sea ([TODO art] a real ship deck).
+id: 109
+name: The Dovetail - Deck
+palette: outside
+bgm: Islands
+parent: 100
+metadata: {Name: The Dovetail, MapPosition: [0, 14, 27]}
+map: |
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~rrrrrrrrrrrrrrrrrrrrrr~~~~~
+  ~~~rdddddddddddddddddddddrr~~~
+  ~~~rdddddddddddddddddddddddrr~
+  ~~~rddddddddddddddddddddddddd~
+  ~~~rddddddddddddddddddddddddd~
+  ~~~rddddddddddddddddddddddddd~
+  ~~~rddddddddddddddddddddddddd~
+  ~~~rdddddddddddddddddddddddrr~
+  ~~~rdddddddddddddddddddddrr~~~
+  ~~~rrrrrrrrrrrrrrrrrrrrrr~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+events:
+  - type: event
+    name: Prologue intro
+    at: [1, 1]
+    pages:
+      - trigger: autorun
+        commands:
+          - {tone: [-40, -55, -20, 40, 0]}
+          - "Spring, AF 300. The Concert of Regions has sealed the borders of Velmora."
+          - "This is the final civilian crossing."
+          - {script: "Prismfall.choose_difficulty"}
+          - "A ship's horn sounds. You stand at the rail with one bag and your mother's letter."
+          - "Captain Edda Morrow: Don't lean on my rail like that, sprog - you'll - huh."
+          - "Captain Edda Morrow: ...Never mind. Mind the gap when we dock."
+          - {var: [STORY, 1]}
+      - cond: {var: [STORY, 1]}
+  - {type: npc, name: Captain Edda, at: [10, 4], sprite: trainer_SAILOR, dir: down,
+     text: "Captain Edda Morrow: Last crossing I'll ever make. Thirty years on this strait. Mind the rail, sprog."}
+  - {type: npc, name: Deckhand, at: [6, 9], sprite: trainer_SAILOR, dir: right, move: random,
+     text: "When I was a lad you could only see the Imprints on a clear night.\nNow you see 'em through fog."}
+  - {type: sign, at: [24, 7], post: false, name: Horizon,
+     text: "On the horizon, eighteen colored glows sit low over the sea."}
+  - type: event
+    name: Aurelian Voss
+    at: [20, 6]
+    pages:
+      - graphic: {sprite: trainer_GENTLEMAN, dir: left}
+        commands:
+          - "A man in a plain coat leans on the rail, holding a chipped Meridian mug."
+          - "Man: First crossing? Everyone gets quiet when they see the lights."
+          - "Aurelian Voss: Aurelian. I've just come from the Concert summit - I begged them to keep Velmora's trade open. They didn't listen."
+          - "Aurelian Voss: Here. We make these for the League anyway. Call it a welcome from a fellow traveler."
+          - "You received a Meridian badge case!"
+          - "Aurelian Voss: And a Meridian Fellowship card - a small stipend, a discount at any Mart. No strings."
+          - choices: ["Accept the Fellowship", "Politely decline", "Say nothing"]
+            cancel: 0
+            branches:
+              - [{script: "pf_choose(:PRO_FELLOWSHIP, :accepted)\npf_standing_add(:MERIDIAN, 1)\n$player.money += 1000"},
+                 "Aurelian Voss: Good. Velmora needs people who say yes to things.", "You received a Fellowship stipend of $1000!"]
+              - [{script: "pf_choose(:PRO_FELLOWSHIP, :declined)\npf_bond_add(:VOSS, 1)"},
+                 "Aurelian Voss: Independent. Good."]
+              - [{script: "pf_choose(:PRO_FELLOWSHIP, :silent)"},
+                 "He smiles, and leaves the card on the rail anyway."]
+          - "A long horn. The lights of Ferrow's Landing slide out of the fog."
+          - {var: [STORY, 2]}
+          - {tone: [-255, -255, -255, 0, 20]}
+          - {wait: 20}
+          - {transfer: {map: 100, x: 19, y: 28, dir: up}}
+          - {tone: [0, 0, 0, 0, 20]}
+      - cond: {var: [STORY, 2]}
+  - {type: warp, name: Cabin hatch, at: [15, 7], link: DOVE_CABIN, arrive: [15, 8, down], se: Door exit}
+---
+id: 110
+name: The Dovetail - Cabin
+parent: 109
+template: house2
+drop_template_events: [Kurt, Exit]
+bgm: Islands
+metadata: {Name: The Dovetail, MapPosition: [0, 14, 27]}
+events:
+  - {type: warp, name: Up to deck, at: [6, 8], link: DOVE_CABIN, arrive: [6, 7, up], se: Door exit}
+  - {type: sign, at: [5, 3], post: false, name: Ines's letter,
+     text: "Your mother's letter. Her handwriting slants when she's frightened. [TODO story: Ines's letter text]"}
+  - {type: sign, at: [3, 3], post: false, name: Bunk, text: "Your bunk. You haven't slept since the crossing began."}

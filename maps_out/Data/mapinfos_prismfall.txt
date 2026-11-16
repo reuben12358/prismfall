@@ -8,6 +8,8 @@
 106	105	Ferrow Lighthouse Lamp Room
 107	100	Dockmaster's House
 108	100	Quarantine Customs Hall
+109	100	The Dovetail - Deck
+110	109	The Dovetail - Cabin
 120	0	Briarwick
 121	120	Briarwick Pokémon Center
 122	120	Briarwick Mart
@@ -20,6 +22,7 @@
 133	130	Loomhouse Gym - The Spindle
 520	0	Route 1
 521	0	Route 2
+522	521	The Glassed Orchard
 523	521	Hale Farmhouse
 524	0	Gossamer Wood
 526	524	Woodward's Hut

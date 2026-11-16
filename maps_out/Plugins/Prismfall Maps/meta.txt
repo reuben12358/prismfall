@@ -1,0 +1,6 @@
+Name       = Prismfall Maps
+Version    = 1.1.0
+Essentials = 21.1
+Optional   = Prismfall Field Effects
+Optional   = Prismfall Core
+Credits    = Prismfall dev team

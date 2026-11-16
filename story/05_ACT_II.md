@@ -130,7 +130,7 @@
 
 **Location:** R15, **R16 Ironway** (`:MOUNTAIN`), **Ironreach** (Nadir, `:COLOSSEUM`), the **Iron Pit**, the Conclave galleries, the old Aurel mine shafts.
 
-**Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier the Undercity trusts.
+**Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier Nadir trusts.
 - **The Conclave.** Sovereign Valen has called a rare **Accord Conclave** here, the first held in Nadir in a century, to vote on extending the Mandate realm-wide. Every available Warden is present.
   - **Introductions/reunions:** Tamsin, Dorian, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and Odessa's Gale Post courier (who delivers **Fly**).
   - Chancellor Hollis presides.

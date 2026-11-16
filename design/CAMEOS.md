@@ -79,7 +79,7 @@ The Festival bracket is choice-driven (Rev. 3). The "default draw" below is the 
 - ✔ **Source:** Veronica "Venam" Vasile, 17, a Punk Girl and Aevium's **Poison** Gym Leader (Poison Heart Badge). ✔ She leads East Gearen's teen trainers out of the **Abandoned Sewers**. ✔ Her **ace is Seviper**, and ✔ her signature move is **Venam's Kiss**, a Poison move super-effective against Steel. ✔ Loud, spunky and welcoming. ✔ She was **petrified** and restored by the Spring of Rejuvenation, and came back less sure of herself.
 - **Why she's here:** Her invitation came addressed to "the Gym Leader of the sewers". It was meant for someone else, and she came anyway. Nadir feels like home within five minutes.
 - **Velmora hooks (important):** Venam is the **only person in Velmora who has been turned to stone and come back.** She tells Juno and Rowan: *"I could hear everything. Everyone who sat with me. Talk to your aunt. She's listening."* This is the outside confirmation that the Fixed still dream, which sets up Xerneas's role in the Good ending.
-- **Voice:** "Your Undercity's got better graffiti than mine and worse air. Respect."
+- **Voice:** "Your City Below's got better graffiti than mine and worse air. Respect."
 - **Team spirit:** Punk Poison. **Ace: Seviper** (custom "Venam's Kiss" if the move team wants it, otherwise a high-power Poison move).
 - **Default draw:** R16 vs Shelly (wins), QF vs Sigrun (loses). Exhibition from Day 5.
 

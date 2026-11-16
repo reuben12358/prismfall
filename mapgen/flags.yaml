@@ -1,0 +1,15 @@
+# Symbolic Game Switch / Variable IDs used by map specs (write the NAME in specs; build.py substitutes the ID).
+# Story block 101-300 belongs to the story team's FLAGS.md: these are the Map Builder's proposals - renumber here only.
+variables:
+  STORY: 101          # main-quest stage, see design/MAPGEN.md "Story stages"
+  GYM1_A: 305         # Gym 1 heddles (GYM_PUZZLES.md block 300+5n)
+  GYM1_B: 306
+  GYM1_C: 307
+  GYM2_STAGE: 310     # Gym 2 revolving stage position
+switches:
+  GYM1_ALPHA: 305     # Gym 1 Canopy Lofts cords
+  GYM1_BETA: 306
+  GYM1_GAMMA: 307
+  GYM2_SPOT: 310      # Gym 2 spotlight / curtain switches
+  GYM2_CURTAIN: 311
+  GYM2_TRAP: 312

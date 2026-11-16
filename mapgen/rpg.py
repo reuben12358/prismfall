@@ -125,6 +125,26 @@ def push_move(lst, who, cmds, indent, wait=True, repeat=False, skippable=True):
 
 
 # --------------------------------------------------------------------------- command DSL
+FLAGMAP = None   # set by build.py: callable(value, kind) -> int
+
+
+def _f(v, kind):
+    return FLAGMAP(v, kind) if FLAGMAP else v
+
+
+import re as _re
+
+
+def subst(text):
+    """@@NAME in scripts/conditions -> the switch/variable id from flags.yaml (variables first)."""
+    def rep(m):
+        try:
+            return str(_f(m.group(1), 'variables'))
+        except ValueError:
+            return str(_f(m.group(1), 'switches'))
+    return _re.sub(r'@@([A-Z][A-Z0-9_]*)', rep, text)
+
+
 def compile_cmds(items, indent=0, ctx=None):
     """items: list of DSL commands -> list of EventCommand (without the final 0)."""
     out = []
@@ -134,13 +154,13 @@ def compile_cmds(items, indent=0, ctx=None):
         if not isinstance(it, dict):
             raise ValueError('bad command %r' % (it,))
         if 'if' in it or 'if_switch' in it or 'if_self' in it or 'if_var' in it:
-            if 'if' in it: params = [12, it['if']]
+            if 'if' in it: params = [12, subst(it['if'])]
             elif 'if_switch' in it:
-                sid, on = it['if_switch']; params = [0, int(sid), 0 if on else 1]
+                sid, on = it['if_switch']; sid = _f(sid, 'switches'); params = [0, int(sid), 0 if on else 1]
             elif 'if_self' in it:
                 ch, on = it['if_self']; params = [2, ch, 0 if on else 1]
             else:
-                vid, val = it['if_var'][:2]; op = it['if_var'][2] if len(it['if_var']) > 2 else 1  # 1 = >=
+                vid, val = it['if_var'][:2]; vid = _f(vid, 'variables'); op = it['if_var'][2] if len(it['if_var']) > 2 else 1  # 1 = >=
                 params = [1, int(vid), 0, int(val), op]
             out.append(ev_cmd(111, indent, params))
             out += compile_cmds(it.get('then', []), indent + 1, ctx)
@@ -168,16 +188,19 @@ def compile_cmds(items, indent=0, ctx=None):
             for i, l in enumerate(lines):
                 out.append(ev_cmd(101 if i == 0 else 401, indent, [l]))
         elif k == 'script':
-            lines = [l.rstrip() for l in str(v).rstrip().split('\n') if l.strip()]
+            lines = [l.rstrip() for l in subst(str(v)).rstrip().split('\n') if l.strip()]
             for i, l in enumerate(lines):
                 out.append(ev_cmd(355 if i == 0 else 655, indent, [l]))
         elif k == 'comment':
             for i, l in enumerate(str(v).split('\n')):
                 out.append(ev_cmd(108 if i == 0 else 408, indent, [l]))
         elif k == 'switch':
-            sid, on = v; out.append(ev_cmd(121, indent, [int(sid), int(sid), 0 if on else 1]))
+            sid, on = v; sid = _f(sid, 'switches'); out.append(ev_cmd(121, indent, [int(sid), int(sid), 0 if on else 1]))
         elif k == 'var':
-            vid, val = v; out.append(ev_cmd(122, indent, [int(vid), int(vid), 0, 0, int(val)]))
+            vid, val = v; vid = _f(vid, 'variables'); out.append(ev_cmd(122, indent, [int(vid), int(vid), 0, 0, int(val)]))
+        elif k == 'story':   # advance the main-quest stage, never move it backwards
+            vid = _f('STORY', 'variables')
+            out.append(ev_cmd(355, indent, ['pbSet(%d, %d) if pbGet(%d) < %d' % (vid, int(v), vid, int(v))]))
         elif k == 'selfswitch':
             ch, on = v; out.append(ev_cmd(123, indent, [ch, 0 if on else 1]))
         elif k == 'transfer':

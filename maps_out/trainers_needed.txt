@@ -1,11 +1,4 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-131	:BUGCATCHER, "Milo"
-131	:LASS, "Fern"
-132	:BUGCATCHER, "Hollis"
-132	:POKEMONRANGER_M, "Ash"
-133	:LEADER_TAMSIN, "Tamsin"
-520	:LASS, "Wren"
-520	:YOUNGSTER, "Pip"
 521	:BUGCATCHER, "Dell"
 521	:CAMPER, "Joss"
 521	:PICNICKER, "Mae"
@@ -13,4 +6,3 @@
 524	:BUGCATCHER, "Reed"
 524	:BUGCATCHER, "Tobin"
 524	:CAMPER, "Bram"
-990	:YOUNGSTER, "Ben"

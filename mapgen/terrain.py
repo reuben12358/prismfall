@@ -136,11 +136,13 @@ class Painter:
             self.layers[z, y, x] = c['id'] + autotile_shape(same, x, y)
 
     def k_pier(self, n, c, own, same):
+        if c.get('include'):
+            own = own | self.mask(c['include'])
         under = self.p['classes'][c['under']]
         z = c.get('layer', 1)
         for y, x in np.argwhere(own):
             if under['kind'] == 'autotile':
-                sm = self.mask([c['under'], n] + under.get('same', []))
+                sm = self.mask([c['under'], n] + under.get('same', []) + c.get('include', []))
                 self.layers[0, y, x] = under['id'] + autotile_shape(sm, x, y)
             b = nbits(own, x, y)
             col = 0 if not b & 64 else (2 if not b & 4 else 1)

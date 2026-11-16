@@ -39,8 +39,22 @@ stamps:
   - {stamp: house_red, at: [29, 2], link: R2_FARM, name: Farmhouse door}
 events:
   - {type: warp, name: To Gossamer Wood, at: [0, 12], link: R2_WOOD, arrive: [1, 12, right]}
-  - {type: npc, name: Accord guard, at: [52, 6], sprite: trainer_COOLTRAINER_M, dir: down,
-     text: "[TODO story] Quarantine cordon. Nobody goes into the orchard - not since it turned to glass."}
+  - type: event
+    name: Accord guard
+    at: [52, 6]
+    pages:
+      - graphic: {sprite: trainer_COOLTRAINER_M, dir: down}
+        commands: ["Accord guard: Quarantine cordon. Nobody goes into the orchard - not since it turned to glass."]
+      - cond: {var: [STORY, 5]}
+        through: true
+  - type: event
+    name: Accord guard (aside)
+    at: [53, 7]
+    pages:
+      - cond: {var: [STORY, 5]}
+        graphic: {sprite: trainer_COOLTRAINER_M, dir: left}
+        commands: ["Accord guard: The Professor vouched for you. Don't touch the Veil. Don't touch anything."]
+  - {type: warp, name: To the Glassed Orchard, at: [52, 2], link: R2_ORCHARD, arrive: [52, 3, down]}
   - {type: sign, at: [41, 13], text: "ROUTE 2\nW: Gossamer Wood - S: Route 1"}
   - {type: trainer, at: [16, 9], sight: 3, dir: down, sprite: trainer_BUGCATCHER, trainer: [BUGCATCHER, Dell],
      intro: "[TODO story] The orchard bugs are huge this year!", after: "[TODO story] Something in the trees makes them grow."}

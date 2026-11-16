@@ -152,7 +152,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
   - **Appeal to his conscience** (`MAGNUS_KEPT_FAITH`): "Will you let it take a child?" He says nothing. He winds his watch. In the finale, he disables the Engine's **safety governor**, which weakens Voss's binding: "No machine I have built will kill a child."
 
 **The Sump Purge begins.** That night, every screen in Zenith shows **"Operation Clear Air."**
-- Since the Fault drained the Sump and exposed Aurelia, Meridian claims the Undercity's lower districts are "lawless": Sweetrot gangs and Hollow terror cells. The **Directorate descends into Nadir**.
+- Since the Fault drained the Sump and exposed Aurelia, Meridian claims Nadir's lower districts are "lawless": Sweetrot gangs and Hollow terror cells. The **Directorate descends into Nadir**.
 - Topside watches it like weather. A Cogsworth worker beside the PC, quietly: "My mum lives down there."
 
 **INTERLUDE IV — "Clear Air"** (playable as **Wenlow**, Corvin's apprentice).
@@ -179,7 +179,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 **Arrival: Nadir, third visit (aftermath of the Purge).**
 - Underveil is a city of lanterns in the upper towers of drowned Aurelia, in permanent night under the Dread Plate. This morning it is smoke, broken lanterns and Directorate barricades.
 - **Dozens are dead.** Nadir's fighters have pushed the Directorate back to the lifts. Mother Gutter's Muk holds one barricade, and Lantern Hollow volunteers hold another.
-- **GO-16 "Into the Line" (proposed).** Trigger: at a barricade, a Directorate line advances on unarmed Undercity protestors. The PC is offered "Step between them?" Nyx's courier warns the PC twice, "Not you. You're the one thing they want alive. Don't make them choose." *Epitaph: "They didn't choose. The bullet did. Meridian called it a tragic accident, and meant it."*
+- **GO-16 "Into the Line" (proposed).** Trigger: at a barricade, a Directorate line advances on unarmed Nadir protestors. The PC is offered "Step between them?" Nyx's courier warns the PC twice, "Not you. You're the one thing they want alive. Don't make them choose." *Epitaph: "They didn't choose. The bullet did. Meridian called it a tragic accident, and meant it."*
 
 **Nyx Calloway.**
 - Silk, smoke, a crescent-moon earring. She receives the PC in the **Moon Market** among sellers of secrets.

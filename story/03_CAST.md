@@ -85,7 +85,7 @@
 
 ### Valen Corrigan — Sovereign of the Accord (`CHAMPION_VALEN`; Festival final ~lv 96)
 - **Age 58.** Broad-shouldered, close-cropped white hair, a soldier's posture. He wears white Sovereign's robes and **always one grey glove on his left hand**. Under it, the arm is crystal to the shoulder.
-- **History:** Won the AF 270 Festival at 28 and defended it in AF 280 (against Brann) and AF 290. He was briefly married to Lucent scholar Maud Marr. Their daughter **Ilsa** took her mother's name after he chose the Seat over them.
+- **History:** Won the AF 270 Festival at 28 and defended it in AF 280 (against Brann) and AF 290. He was briefly married to Lucent scholar Edith Marr. Their daughter **Ilsa** took her mother's name after he chose the Seat over them.
 - **What he knows:** Everything. The Tuning. The Crown. The depleting shard. The Quiet Towns sealed off the maps. Meridian's hand in AF 290 he only suspects, because he never let himself investigate. He scapegoated Morwen Vane so the world wouldn't learn the ceremony could fail, and has spent ten years searching for "the child". Since the Fracture, every Tuning has cost him far more. He will not survive another.
 - **Personality:** Grave, gentle, exhausted, and capable of terrible decisions made calmly. He loves Velmora the way a man loves a house he's holding up with his back. He doesn't defend his lies; he explains them.
 - **Voice:**
@@ -307,7 +307,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Plot role:** Gym 17 and K7. Gives the PC the Hymn.
 - **Legendary tie:** Gloaming's Great Tree holds the Pixie Plate in its roots. The Ogre's masks in Elowen's folklore (Ogerpon) were carved from its fallen bark. Celestine is the one person who has always told the true version of the Ogre story, in rhyme, to anyone who'd listen.
 - **Arc:** At the Festival she is an entrant (R16 vs Alexandra, see CAMEOS.md). In the finale she sings the Hymn as the chains break. In Homecoming, her dusk ends with her Imprint. She sees her first full night sky in sixty years and ages gracefully in the epilogue.
-- **Ace:** **Togekiss** (it appears where there is peace, so it's waiting for one); also **Mimikyu**, **Sylveon**, **Alcremie**.
+- **Ace:** **Sylveon** (ribbons that read intent: a creature of bonds for a woman bound by oaths); also **Mimikyu**, **Togekiss**, **Alcremie**.
 
 ### 18. Sigrun Ashfall — Dragon — Wyrmrest — `LEADER_SIGRUN` — `:DRAGONS_DEN`
 - **29.** Tall, with a burn-scarred left cheek and neck, a braided crown of red hair and dragonhide armor. She is the strongest Warden and **Valen's protégé**. She is also the **Dominar's daughter**. She renounced her claim to the Ashkaar throne to take the Warden's oath, and her father has never forgiven her or the Accord.
