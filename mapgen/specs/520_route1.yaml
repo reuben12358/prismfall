@@ -1,0 +1,70 @@
+# Route 1 (map 520): coastal heath north of Ferrow's Landing. Source: design/maps.json id 520.
+id: 520
+name: Route 1
+palette: outside
+bgm: Route 1
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 24], BattleBack: field}
+connections:
+  - {dir: S, offset: 10, to: 100, to_offset: 17}
+  - {dir: N, offset: 11, to: 521, to_offset: 44}
+map: |
+  TTTTTTTTTT..____..TTTT~~~~
+  TTTTTTTTTT..____..TTTT~~~~
+  TT..........____......~~~~
+  TT..........____......~~~~
+  TT..........____..TTTT~~~~
+  TT..........____..TTTT~~~~
+  TT..,,,,,,,.____..TTTT~~~~
+  TT..,,,,,,,.____..TTTT~~~~
+  TT..,,,,________......~~~~
+  TT..,,,,________......~~~~
+  TT..,,,,__,...........~~~~
+  TT......__............~~~~
+  TTTT....__....TTTT....~~~~
+  TTTT....__....TTTT....~~~~
+  TT......__....TTTT....~~~~
+  TT,,,,..__....TTTT....~~~~
+  TT,,,,..__............~~~~
+  TT,,,,..__............~~~~
+  TT,,,,..__....,,,,,,,,~~~~
+  TT,,,,..__....,,,,,,,,~~~~
+  TT,,,,..____________,,~~~~
+  TT......____________,,~~~~
+  TT............,,,,__,,~~~~
+  TT................__..~~~~
+  TTLLLLLLLLLLLLLLLL__..~~~~
+  TT................__..~~~~
+  TT..TT....TTTT....__..~~~~
+  TT..TT....TTTT....__..~~~~
+  TT........TTTT....__TT~~~~
+  TT........TTTT....__TT~~~~
+  TT.,,,,,,,,.......__TT~~~~
+  TT.,,,,,,,,.......__TT~~~~
+  TT.,,,,,,,,.......__..~~~~
+  TT.,,,,,,,,.......__..~~~~
+  TT.,,,,,,,,.________..~~~~
+  TT.,,,,,,,,.________..~~~~
+  TT..........____......~~~~
+  TT..........____......~~~~
+  TTTTTTTT....____......~~~~
+  TTTTTTTT....____......~~~~
+  TTTTTTTT....____,,,,..TTTT
+  TTTTTTTT....____,,,,..TTTT
+  TT..........____,,,,..TTTT
+  TT..........____,,,,..TTTT
+  TT..........____......TTTT
+  TT..........____......TTTT
+  TTTTTTTT....____..TTTTTTTT
+  TTTTTTTT....____..TTTTTTTT
+events:
+  - {type: sign, at: [11, 44], text: "ROUTE 1\nFerrow's Landing - Hale Orchards"}
+  - {type: npc, name: Juno, at: [12, 40], sprite: trainer_RIVAL2, dir: down,
+     text: "[TODO story] Juno: Let me show you how catching works! Weaken it first, then throw a Poké Ball."}
+  - {type: trainer, at: [15, 28], sight: 4, dir: right, sprite: trainer_YOUNGSTER, trainer: [YOUNGSTER, Pip],
+     intro: "[TODO story] Hey! You're new. Battle me!", after: "[TODO story] The heath's full of Pokémon if you look in the gorse."}
+  - {type: trainer, at: [11, 13], sight: 4, dir: left, sprite: trainer_LASS, trainer: [LASS, Wren],
+     intro: "[TODO story] Off the ferry? Show me what you've got!", after: "[TODO story] You're strong. Juno said you would be."}
+  - {type: item, at: [20, 9], item: POTION}
+  - {type: item, at: [2, 3], item: POKEBALL}
+  - {type: berry, at: [20, 35], berry: ORANBERRY}

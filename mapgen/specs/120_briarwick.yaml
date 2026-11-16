@@ -1,0 +1,70 @@
+# Briarwick (map 120): Elowen forest town, home of the Loomhouse Gym (Gym 1, Bug, Warden Tamsin Loom).
+# Source: design/maps.json id 120. Giant hollow trees / rope bridges are approximated with tree clumps ([TODO art]).
+id: 120
+name: Briarwick
+palette: outside
+bgm: Lerucean Town
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 12, 22], BattleBack: field}
+connections:
+  - {dir: W, offset: 14, to: 540, to_offset: 10}
+map: |
+  TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TT~~~.....TTTT................TTTTTT......TT
+  TT~~~.....TTTT................TTTTTT......TT
+  TT~~~.....TTTT.....#######....TTTTTT......TT
+  TT~~~.....TTTT.....#######....TTTTTT......TT
+  TT~~~.....TTTT.....#######..........TTTT..TT
+  TT~~~.....TTTT.....#######..........TTTT..TT
+  TT~~~..............#######..........TTTT..TT
+  TT~~~............::::::::::.........TTTT..TT
+  TT~~~............::::::::::......#####....TT
+  TT~~~#######.........::..........#####....TT
+  TT~~~#######.....**..::...**.....#####....TT
+  TT~~~#######.....**..::...**.....#####....TT
+  ..~~~#######.........::..........#####....TT
+  ::===:::::::::::::::::::::::::::::::::::..TT
+  ::===:::::::::::::::::::::::::::::::::::..TT
+  ..~~~................::...................TT
+  ..~~~.........TTTT...::.....TTTT..........TT
+  ..~~~.........TTTT...::.....TTTT..........TT
+  ..~~~.........TTTT...::.....TTTT..........TT
+  TT~~~.........TTTT...::.....TTTT..........TT
+  TT~~~...#####........::...................TT
+  TT~~~...#####........::.......####........TT
+  TT~~~.**#####**......::.....**####........TT
+  TT~~~.**#####**......::.....**####.**.....TT
+  TT~~~...#####........::.......####.**.....TT
+  TT~~~...::::::::::::::::::::::::::........TT
+  TT~~~...::::::::::::::::::::::::::........TT
+  TT~~~................::...................TT
+  TT~~~.TTTT..TTTTTT...::...........TTTTTT..TT
+  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
+  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
+  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
+  TT~~~.......TTTTTT...::..#####....TTTTTT..TT
+  TT~~~.......TTTTTT...::..#####....TTTTTT..TT
+  TT~~~................::::::::.............TT
+  TT~~~................::::::::.............TT
+  TT~~~TTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTT
+  TT~~~TTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTT
+stamps:
+  - {stamp: gym,        at: [19, 4],  link: BW_GYM,    name: Gym door}
+  - {stamp: pokecenter, at: [8, 22],  link: BW_PC,     name: Poke Center door}
+  - {stamp: mart,       at: [30, 23], link: BW_MART,   name: Mart door}
+  - {stamp: institute,  at: [5, 11],  link: BW_GUILD,  name: Guildhall door}
+  - {stamp: house_red,  at: [33, 10], link: BW_HOUSE1, name: Treetop House door}
+  - {stamp: house_red2, at: [25, 31], link: BW_HOUSE2, name: Cutter's House door}
+tiles:
+  - {tile: gym_sign, at: [24, 9]}
+events:
+  - {type: warp, name: To Gossamer Wood, at: [22, 39], link: WOOD_BRIAR, to: {map: 524, x: 24, y: 1, dir: down}}
+  - {type: sign, at: [24, 9], post: false, name: Gym sign, text: "BRIARWICK LOOMHOUSE GYM\nWarden: Tamsin Loom - The Weaver of Webs"}
+  - {type: sign, at: [20, 17], text: "BRIARWICK\nThe town in the old trees."}
+  - {type: npc, name: Gym guide, at: [21, 11], sprite: NPC 01, dir: down,
+     text: "[TODO story] The Loomhouse is all silk and string. Fire-types cut through it - if you can find one."}
+  - {type: npc, name: Meridian liaison, at: [24, 18], sprite: trainer_GENTLEMAN, dir: left,
+     text: "[TODO story] Meridian has... arrangements with the Warden. Nothing you need concern yourself with."}
+  - {type: npc, name: Dyer, at: [6, 20], sprite: NPC 12, dir: left, move: random,
+     text: "[TODO story] The stream runs blue on dyeing days. Silk from the Loomhouse, colour from the creek."}

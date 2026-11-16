@@ -8,4 +8,6 @@
 106	105	Ferrow Lighthouse Lamp Room
 107	100	Dockmaster's House
 108	100	Quarantine Customs Hall
+120	0	Briarwick
+520	0	Route 1
 990	0	Prismfall Test Arena

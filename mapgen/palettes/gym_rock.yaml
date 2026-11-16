@@ -1,0 +1,17 @@
+# Palette for tileset 14 "Gyms" (Graphics/Tilesets/Gyms interior.png), rock-gym theme (rows 0-11, as in sample Map010).
+tileset: 14
+ground: {base: 442}
+classes:
+  floor:  {kind: ground}
+  plank:  {kind: tile, layer: 0, tile: 452}          # wooden floor (passable)
+  void:   {kind: tile, layer: 0, tile: 384}          # black drop (impassable)
+  rock:   {kind: tile, layer: 0, tile: 436}          # boulder (impassable)
+  wall:   {kind: wall, face_low: 418, face_high: 410, side_l: 408, side_r: 414, solid: 384, shadow: 427,
+           not_floor: [void, rock]}
+tiles: {}
+glyphs:
+  '.': floor
+  '_': plank
+  'v': void
+  'o': rock
+  '#': wall

@@ -40,5 +40,19 @@ MapPosition = 0,14,26
 Name = Quarantine Customs Hall
 MapPosition = 0,14,26
 #-------------------------------
+[120]   # Briarwick
+Name = Briarwick
+Outdoor = true
+ShowArea = true
+MapPosition = 0,12,22
+BattleBack = field
+#-------------------------------
+[520]   # Route 1
+Name = Route 1
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,24
+BattleBack = field
+#-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

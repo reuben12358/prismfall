@@ -107,7 +107,7 @@ class Painter:
         def members(n):
             c = classes[n]
             return [n] + [a for a, t in alias.items() if t == n] + c.get('same', [])
-        order = ['tile', 'blob', 'autotile', 'pier', 'hline', 'tree2x2']
+        order = ['tile', 'blob', 'autotile', 'pier', 'hline', 'tree2x2', 'wall']
         for kind in order:
             for n, c in classes.items():
                 if c['kind'] != kind:
@@ -162,6 +162,26 @@ class Painter:
             elif l: t = c['right']
             else: t = c['single']
             self.layers[z, y, x] = t
+
+    def k_wall(self, n, c, own, same):
+        """Interior walls: faces above floor, side edges, black elsewhere. Floor directly under a wall gets 'shadow'."""
+        H, W = own.shape
+        walk = ~self.mask([n] + c.get('not_floor', []))
+        L = self.layers
+        isw = lambda x, y: (not (0 <= x < W and 0 <= y < H)) or own[y, x]
+        isf = lambda x, y: 0 <= x < W and 0 <= y < H and walk[y, x]
+        for y, x in np.argwhere(own):
+            if isf(x, y + 1): t = c['face_low']
+            elif isw(x, y + 1) and isf(x, y + 2): t = c['face_high']
+            elif isf(x + 1, y) or isf(x + 1, y + 1): t = c['side_l']
+            elif isf(x - 1, y) or isf(x - 1, y + 1): t = c['side_r']
+            else: t = c['solid']
+            L[0, y, x] = t
+        sh = c.get('shadow')
+        if sh:
+            for y, x in np.argwhere(walk):
+                if y > 0 and own[y - 1, x] and self.cls[y, x] == c.get('shadow_on', 'floor'):
+                    L[0, y, x] = sh
 
     def k_tree2x2(self, n, c, own, same):
         H, W = own.shape

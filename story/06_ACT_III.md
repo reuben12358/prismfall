@@ -1,0 +1,210 @@
+# Story Bible 06: Act III — Fault Lines (Ch10–13, Gyms 9–12)
+
+> **Tone:** Desolation begins. Political fracture, kingdoms arming, a city sinking, a mentor framed, a rival curdling. The PC is now *known*, and everyone wants something. Each chapter ends worse than it began.
+> Conventions as in 04. Map names per WORLD.md (segments 8–11).
+
+**Act-opening state:** the Mandate is realm-wide. Directorate checkpoints stand at every kingdom border, and Meridian scanners at every Pokémon Center door now flag the PC's NULL reading with a polite "**Fellowship Priority Guest**" banner. Even being watched is courteous.
+
+---
+
+## CHAPTER 10 — "The Seat That Blooms" (R17 Lift Road → R18 Prism Falls → Verdance, Gym 9; J3)
+
+**Location:**
+- **R17 Lift Road** (the great freight-lift from Nadir up to the plateau) and **R18 Prism Falls** (`:RAINBOW`).
+- **Grudgestone Quarry**, **Echo Coliseum** (688, `:BLEED`: Ironreach's attack replaying as ghost-sound).
+- **Verdance** (Elowen's royal seat, `:FLOWER_GARDEN`), **Briar Hall**, the **Heartgarden**, the **Bride Grove** (708), the **Royal Chase** (Safari-style reserve).
+- **Branch maps by Standing:** 698 **Hollow Sanctuary** (high Hollow) or 699 **Meridian Black Site** (high Meridian).
+
+**Branch scene on the Lift Road:**
+- **High Hollow Standing:** Brother Wick's runner leads the PC to the **Hollow Sanctuary** in Grudgestone Quarry. The leaderless faithful are in hiding. Wick teaches the **missing verse of the Hymn** early (Key Item fragment), and Thistle asks the PC to carry a letter to Rowan's jailers.
+- **High Meridian Standing:** Calla Wren invites the PC to tour the **Meridian Black Site**, "a Fellowship privilege". It holds **Project NULL**: a Type: Null in a containment cradle that reacts to the PC exactly the way the badge case does. Quent: "It's *modeled* on something. We're not allowed to say what." The PC can leave with the Type: Null (Bond event). It's an unsettling gift.
+- **Neither:** a short scene of refugees climbing the Lift Road from Nadir with everything they own.
+
+**Arrival: Elowen, second visit (escalation).**
+- Verdance is **drowning in flowers**. The Meadow Plate has no Warden, and its Imprint has burst its banks. Roses grow through cobbles, vines pull down gutters, and pollen hangs so thick the Pokémon Center hands out masks. It is beautiful and horrifying.
+- Under the bloom, the soil is **grey**. Nothing rots.
+- **Three claimants for the Meadow Plate:**
+  1. **Queen Maelis** has sent her **Thornguard** to occupy the Heartgarden: "the Plate lies on Crown soil."
+  2. **Meridian** offers "temporary custody for public safety". Prince Caedmon smiles beside the Meridian delegate.
+  3. **Rowan's sealed Warden's testament**, opened by Valen, names **Juno Hale** heir.
+- **Valen** presides from the Heartgarden steps. Juno is terrified. "I didn't want this seat. I wanted *him* in it."
+- **Tamsin** has come up from Briarwick to stand with Juno, the first small-town Warden to join what the press is calling the **Greenward**.
+  - If `CH2_TAMSIN` was "keep secret", Thistle's cell appears to heckle Tamsin ("You *knew*"), and the PC must defuse it.
+
+**The Bride Tree.**
+- In the Heartgarden stands the **Bride Tree**, a flowering tree in a woman's shape, arms raised, in permanent blossom. Juno tells the PC the truth: it's her Aunt Elin, Fixed in AF 288. Rowan watered her every dawn.
+- **Venam's Festival line pays this off later.** For now, Juno: "Sometimes I think she's listening. Isn't that stupid?"
+
+**Juno's Warden trial (set piece).** A Warden is confirmed when the Plate *accepts* them. Juno must walk to the Meadow Plate at the Bride Tree's roots, in the **Bride Grove** (708). The grove is choked with bloom and Bleed-adjacent, so the PC must clear the way inside the Veil, then guide Juno along the one safe path.
+- **Ogerpon:** in the Grove the PC meets the "**Gossamer Ogre**", Ogerpon in its mask. It has been **guarding the Bride Tree** since AF 288, which is why nothing ever got close enough to harm Elin.
+- **Boss battle, "The Loyal Three"** (multi-bar, a triple-boss sequence). **Okidogi, Munkidori and Fezandipiti** come for the Plate. Their collars glow with poison (Sweetrot-pink), and they're thralls of something in the Lightless Deep. (Pecharunt seed. Their eyes are the same blissful blank as Corvin's addicts.)
+- **CHOICE `CH10_OGRE`:** the Three present themselves as the heroes of the shrine story, and the Ogre roars at the PC.
+  - **Stand with the Ogre** (`OGERPON_TRUSTED`): Ogerpon fights alongside the PC in the boss sequence as a partner-battle ally. It later joins Juno, and it appears at the Festival.
+  - **Stand with the Three:** the "official story" choice. See GO-09.
+  - **Hesitate:** the Ogre fights alone, the battle is harder, and Ogerpon leaves the Grove afterward, distrustful.
+- **GO-09 "Loyal" (proposed).** Trigger: side with the Loyal Three. Foreshadowing: Celestine's Ch2 rhyme ("who was the thief"), the Mourner's Ch3 line ("ask why the Loyal Three wore poison on their collars"), and the poison collars themselves. The Three seize the Meadow Plate and their poison runs into the Bride Tree's roots. *Epitaph: "You believed the story everyone told. So did the people who wrote it."*
+
+**Gym 9: J3** (`:FLOWER_GARDEN`, 5 growth stages). Thematic note: *a garden you grow during the fight; the stages rise with Juno's confidence.* Juno, newly confirmed, with pollen in her hair:
+> *"I didn't want this seat. I wanted him in it. But the city's drowning in flowers and nobody else is coming, so. Hi. I'm the Warden of Verdance. Please don't go easy on me — I'll cry either way."*
+
+Her ace is **Tsareena**. If `CH7_LEDGER` was "said his name", her mid-battle line is "You knew before me. You *knew*." Otherwise it's "He *lied* to me. Every summer."
+
+**Aftermath and revelation.**
+- **Juno's first act as Warden:** she refuses Meridian's Lattice and orders the Thornguard out of the Heartgarden in front of the Queen. The Queen is coldly amused: "Little gardener. We'll see how long you bloom."
+- **Queen Maelis** throws open the **Royal Chase** (Safari-style reserve) to the public "as a gift to the people in troubled times" (PR, but it's a fun area). Here, in her private garden, she speaks to the PC and is shrewder than she looks: "Every Sovereign since Maren has died tired. Did you know? I've buried four. Ask yourself why the Accord needs a *new* champion so badly this year."
+- **CHOICE `CH10_SUCCESSION_STANCE`** (asked by the press on the Heartgarden steps): "Should the Plates belong to the kingdoms, the Accord or Meridian?" Answer **Wardens/Accord**, **the kingdoms** or **nobody**. This is the first explicit "nobody" option, and it sets a key the Return path checks.
+
+**Cliffhanger:** Juno, alone that night, writes a letter: "Dear Uncle Rowan." She can't finish it. The pages she throws away bloom where they land.
+
+---
+
+## CHAPTER 11 — "The Thaw" (R19 → R20 → Frostfang Pass → Rimeholt, Gym 10; Kyogre)
+
+**Location:** R19, R20 (`:SNOWY_MOUNTAIN`), **Gossamer Heartwood** (Silkwood revisit), **Frostfang Pass**, **Rimeholt** (Isenmar, `:FROZEN_LAKE`), **Lake Rime**.
+
+**Travel:** **Juno travels with the PC.** She is lobbying the northern Wardens for the Greenward and is nervous about it. She practices speeches on the PC's Pokémon.
+
+**Arrival: Isenmar, second visit (escalation).** Rimeholt is timber and whalebone on the ice of Lake Rime, part of the frozen sea. Sled-roads, fishing huts and breath-smoke. **Meridian heat-towers** keep the city alive, and the ice under them is grey and thin. Fishers' holes near the towers don't refreeze. Old men sing the **Sleeping Whale** song more often than usual.
+- Warden **Anja Sorrel** is blunt, pragmatic and loyal to her brother, the **Thane**, who signed the kingdom's heat contract. She tells Juno to her face that southern idealists can keep their principles: "You want me to choose between my principles and my grandchildren's toes? Easy choice. Toes."
+
+**Gym 10 (`:FROZEN_LAKE`).** Thematic note: *ice that remembers every weight; crack the wrong tile and the field changes.* Her ace is **Mamoswine**. After the battle, the Rimeholt ice-climbers give **Rock Climb** and the ice-fisher gives the **Super Rod**.
+
+**The Thaw (set piece).**
+1. At night, the heat-towers overdraw. The PC and Juno see the readings on a technician's console: red and climbing.
+2. **The ice breaks.** A quarter of Rimeholt's lower town starts to sink. The field transitions `:FROZEN_LAKE` → `:WATER_SURFACE` mid-battle.
+3. **Partner battle: PC + Juno vs Directorate officers** trying to "secure the Lattice" while people drown.
+4. Then the lake *breathes*. Under the broken ice, something vast and blue opens an eye.
+5. **Boss battle: Kyogre** (multi-bar). It wakes in **Primal rain** that floods the lower town further.
+   - The PC fights it on breaking ice. Mid-fight, the shard **resonates**, and on a Harmony lean the boss's final bar "calms" instead of being knocked out.
+   - Kyogre recognizes the PC: the Field Notes entry later says *"it looked at me as if I were very small and very familiar"*.
+   - It sinks back to sleep, but the sea is no longer fully frozen.
+6. **GO-10 "Thin Ice" (proposed).** Trigger: mid-Thaw, a Meridian technician begs the PC to retrieve the Lattice's data core ("It's proof! It'll prove who's to blame!"). The PC goes back for it. Foreshadowing: Anja's "Ice remembers every weight", and the cracking-tile tutorial in her gym. *Epitaph: "You went back for the proof. The lake kept it, and you."*
+
+**Aftermath and revelation.**
+- **Anja** stands on a fishing hut's roof in the rain, watching her city sink: "I read the numbers. I *read* them. And I signed anyway, because the heaters were warm."
+- **CHOICE `CH11_ANJA`:**
+  - **Expose her** to the Thane's court with the console readings (`ANJA_EXPOSED`). Anja is stripped of her honors, though Wardens can't be removed by kings. Her Bond drops, Accord Standing goes up, and Meridian is blamed loudly.
+  - **Let her confess herself** before the court. Her Bond goes way up and she becomes a key Act V swing vote.
+  - Either way, **Anja breaks with Meridian publicly.**
+- **Thane Eirik** declares **martial law** and evacuates the lower town south into Elowen, which causes a border crisis with Queen Maelis's Thornguard.
+- Juno, wet through and shaking: "That's what Uncle Rowan meant. Isn't it. The flowers. The heaters. It's all the same thing."
+
+**Transit (segment 10): Ebbmouth, Isenmar second visit.** R21/R22 and the **Ebbmouth Sea Grotto** (revisit) pass back through Ebbmouth:
+- **The Ebbmouth Strike.** Marisol leads the Ebb Guild in cutting Meridian's tidal Lattice with dockworkers' saws. The Ebb runs both ways again for the first time in a year, and the whole city cheers on the quay.
+- **If `TEO_SAVED`:** Teo is there with glassed fingers, organizing.
+- **If not:** Teo's photograph is nailed to the strike's banner pole, and Marisol delivers the "He was nineteen" line here instead.
+- Optional battle: Marisol and the PC vs strikebreakers (a tag battle).
+
+**Cliffhanger:** **Cloudstair** (Rock Climb) and **Stillwater** (728, a Bleed zone where a waterfall hangs frozen in mid-fall without being ice). On the climb, a Gale Post airship passes overhead, trailing a banner from Skyreach: **"LARCH SPEAKS TONIGHT."**
+
+---
+
+## CHAPTER 12 — "Dead Letters" (Cloudstair → Skyreach, Gym 11; K5; the Larch Papers)
+
+**Location:** **Skyreach** (Zenith's airship spire, `:STORMFRONT`), the **Gale Post** sorting halls, the **dead-letter archive**, **Stormwatch Spire** (the relay crown).
+
+**Arrival: Zenith, second visit (escalation).**
+- Skyreach is a vertical city of docking masts and skybridges climbing into the **Stormfront**, the Sky Plate's permanent storm wall. It now has a **Mandate curfew**: searchlights from 9pm, and Directorate airships patrolling the masts.
+- Larch is here, hiding in plain sight in the **Gale Post** sorting halls as a guest of Warden **Odessa Gale** (goggles, scarf, irreverence). Odessa: "Skyreach's got one law: the wind doesn't care. Everything else is negotiable."
+- A **black dragon** is glimpsed in the Stormfront's lightning by airship crews: "**the Stormfront Wyrm**." (Zekrom seed. Larch, softly: "That's impossible. That's the shape of the Spire's core.")
+
+**Gym 11 (`:STORMFRONT`), a double battle.** Thematic note: *wind lanes that redirect moves and Pokémon between rounds.* Odessa: "Hold onto something. No, really." Her ace is **Corviknight**. The sky-river guides give **Waterfall**.
+
+**The Larch Papers.**
+- At midnight, Larch broadcasts from **Stormwatch Spire** through the Gale Post's relays to every screen in Velmora. Her original AF 292 report shows **Lattice extraction accelerating the Bleed**: tide data, Rimeholt's ice, Cindervault's caldera, Lumen's cracked Plate.
+- "I designed the Lattice. I was wrong. I'm telling you now because nobody else will."
+- It's electric, and the realm *hears* it.
+
+**The raid.**
+1. Within the hour, **Director Marchetti's** Directorate storms the Gale Post.
+2. A bomb tears through Stormwatch's relay mast, and the broadcast dies mid-sentence. Meridian's news cycle has the story by dawn: "Hollow sympathizer Larch bombs Skyreach relay."
+3. The bomb was **Kroll's** (Special Accounts). The PC finds a Splitter casing in the wreckage identical to Lumen's (Key Item **Splitter Casing**, useful in Ch13).
+4. **Meridian admin battle: Marchetti** (`MERIDIAN_MARCHETTI`) on the sorting-hall catwalks. She's cold and professional: "You're not under arrest. You're under *protection*. Learn the difference before it's taught to you."
+5. Odessa gets Larch out on a Gale Post skiff through the Stormfront, to Cragholm ("I've got friends who live underground").
+6. The PC's **Meridian Fellowship** is cancelled that night, which they learn from a Mart clerk's apologetic terminal ping: *"Fellowship status: SUSPENDED."*
+
+**K5: the dead letters.**
+- In the chaos, **Kestrel** breaks into Odessa's **dead-letter archive**, the undeliverable mail of a decade. He now wears **Meridian's sponsor jacket and a Resonance Gauntlet** on his left hand. Voss has promised him "the full AF 290 file" in exchange for one bundle of letters.
+- The PC catches him among the shelves (**K5**). The Gauntlet makes his Pokémon hit unnaturally hard: field effects surge whenever he attacks (visual tell only).
+- After the battle he flees with the bundle. One letter falls. The PC reads it:
+  > *"I. — You must not let the child come back. Not for my sake, not for anything. If Valen learns what lodged in that little chest, he will put a crown on it. Keep wilting, love. Keep them small and safe and far. I'll carry the name. — M."*
+- **CHOICE `CH12_LETTER`:**
+  - **Keep the letter:** the PC holds it, and it becomes leverage or a gift in Ch15.
+  - **Send it to Kestrel** via the Gale Post: Kestrel Bond up, and K6's opening line changes ("You sent me a *letter*. Hers.").
+  - **Burn it:** Resonance shifts toward Ruin, and Ysolde later says, "So you chose not to know. That's a choice too."
+
+**INTERLUDE III — "Dead Letters"** (playable as **Kestrel**).
+- Meridian Spire, Voss's office in the small hours. Kestrel hands over the bundle.
+- Voss is kind, attentive and paternal. He makes Kestrel tea in a chipped mug. He gives Kestrel a **folder** marked AF 290, and it's real, mostly: it proves Valen scapegoated Morwen. It omits Meridian's array entirely.
+- The player can walk the office: a photo of young linesman Voss, a model of the new **Prism Arena**, and a gold sunburst pin on the desk shaped exactly like a *lock*.
+- Voss's line: "Your mother was destroyed by a man who thinks he's holding up the sky. I'd like to help you take the sky off him." Kestrel signs the **Festival sponsorship contract**.
+- **GO-11 "Read the Fine Print" (proposed).** Interlude-only, Kestrel's game over. Trigger: Kestrel opens Voss's private desk drawer when Voss steps out (he's warned once by Calla's glance). Inside is a file on the PC titled **UNIMPRINTED-01: KEYSTONE**. Voss returns: "Ah." *Epitaph: "Kestrel Vane was reported missing the next morning. Meridian offered a reward."*
+
+**Cliffhanger:** On R23, leaving Skyreach, the PC sees their reflection in a puddle move a half-second *late*.
+
+---
+
+## CHAPTER 13 — "Behind the Glass" (R23 → R24 → Mirror Mere → Antumbra Threshold → Lucent, Gym 12; the tribunal; the Fault)
+
+**Location:**
+- R23 (`:STORMFRONT`), R24, **Mirror Mere** (742).
+- **Antumbra Threshold** (743, `:INVERSE`), **Lucent** (Antumbra, `:MINDSCAPE`), the **Lucent Athenaeum**.
+- **Stormwatch Spire** (optional revisit), **Shattered Sky** (748).
+
+**Crossing the Glass: Antumbra, first visit.**
+- At **Mirror Mere**, Archseer **Imre Dask** of the Veiled Synod meets the PC. He has two different-colored eyes and speaks in mirrored sentences: "Welcome, behind. Behind, welcome." He grants passage because Ilsa sent for the PC.
+- His one rule: ***never look back through the Glass once you've crossed.***
+- **GO-12 "Looking Back" (proposed).** Trigger: on the Threshold, the Mere shows Juno calling the PC's name from the other side, and the PC turns. (A prompt: "Look back? Yes/No.") Foreshadowing: Dask's rule, stated twice and written on a Threshold signpost in mirror-writing. *Epitaph: "You looked back. Now you're the reflection, and something else is wearing your face to the Festival."*
+- The **Antumbra Threshold** is `:INVERSE`. Rivers run uphill, shadows fall toward lamps, type matchups flip, and wild Ghost, Psychic and Dark Pokémon are everywhere.
+- Every reflection the PC passes contains **a shadow with six black wings**, watching (Giratina seed).
+
+**Arrival.** Lucent exists twice: the living city of white colonnades, and its **upside-down reflection in the sky** where the Mind Plate lives. The **Athenaeum** is the Accord's archive and court.
+- Provost **Ilsa Marr** wears earmuffs against other people's thoughts. "You're thinking very loudly. Please stop."
+- She hosts **Rowan's tribunal** here. The Accord insisted on its own court, and the transfer from Meridian custody is a political fight Valen won narrowly.
+
+**Gym 12 (`:MINDSCAPE`).** Thematic note: *the arena reshapes itself to the challenger's memories.* Her ace is **Hatterene**.
+
+**The Mindscape (set piece; the PC speaks).** After the badge, Ilsa offers what she's been dreading: "Someone sealed a memory in you. Not you. A Ghost-type did, a long time ago. I can open it. I won't enjoy it."
+- The PC enters the Mindscape: a dream-version of **Lower Crownhaven, AF 290**, all bells and Festival banners.
+- The PC's **five-year-old self** stands holding a Choir ribbon. **This is the first authored PC dialogue.**
+  > **Child:** "Mum's singing. Do you want to see the light? It's going to hurt."
+  > **PC (CHOICE `CH13_REMEMBER`):** **"Show me."** / **"I'm scared too."** / **"...Not yet."**
+- **"Show me" or "I'm scared too":** the fragmented memory plays.
+  - **Ines** singing in the Choir.
+  - The Crown blazing on a white-robed man (Valen).
+  - Strange brass machines behind the Choir loft, with Meridian sunburst plates.
+  - A *crack*. Light. Pain in the child's chest.
+  - A woman in a black Ghost Warden's veil (Morwen) throwing herself over the child.
+  - A man's voice: "*Find the child.*"
+  - Then darkness, and the shape of a Mismagius closing the memory like a curtain.
+- **"Not yet":** Ilsa respects it. The memory plays in Ch15 instead, in the Cathedral echo, harder.
+- Ilsa, afterward, white-faced: "The man in white was my father." She has known for eleven years. "The truth is a weapon. I've kept it sheathed. Don't mistake that for mercy." (This seeds her "Little Owl" sidequest.)
+
+**The tribunal (set piece).** In the Athenaeum's Glass Court, Valen presides. Wardens attend, and the kings' observers sit in their gallery. **Rowan** is gaunt from Meridian custody, with his right hand still Bleed-burned in a lightning pattern.
+
+1. **Rowan's statement:** "I wanted to pull the nails. I was wrong about how. I was not wrong about why."
+2. **Kaito's testimony.**
+   - **CHOICE `CH13_KAITO`:** before the session, Kaito asks the PC whether he should speak about **Marrowgate**. Encourage him (`KAITO_TESTIFIED`) or tell him it isn't his burden.
+   - If he testifies:
+     > *"Marrowgate. Fifteen years ago. My orders. My unit. I sealed the gate. They were still knocking."*
+   - The Glass Court goes silent. Valen doesn't deny it. The Accord's moral authority cracks, and the kings' gallery erupts.
+3. **The PC's testimony.**
+   - **CHOICE `CH13_ROWAN_TESTIMONY`:** **Condemn** (Rowan is sentenced to the Pale Gaol, Juno's Bond drops, Accord Standing rises) / **Plead for mercy** (Rowan's Bond and Hollow Standing rise; he gets a lesser sentence, house arrest in Verdance under Juno, which he never serves because of the Fault) / **Refuse to testify** (neutral; Juno never asks why).
+4. **Sable exposed.**
+   - **With `IRONREACH_EVIDENCE`** (and/or the Skyreach Splitter Casing): the PC presents the comm-device. Ilsa reads the court's minds, confirms it, and *speaks it aloud*: **"Sable is Sabine Kroll. Meridian Special Accounts."** Uproar. Kroll, in disguise in the gallery, attacks. **Admin battle: Kroll** (`MERIDIAN_KROLL`), now fighting openly as Meridian.
+   - **Without the evidence:** Ilsa reads it privately and tells only the PC. Kroll stays hidden. The public learns in Act IV, through Rook's leak, and believes it less.
+5. Voss's response on every screen within the hour: "If any Meridian contractor acted outside the law, they acted alone. I've ordered a full inquiry." His approval ratings *rise*.
+
+**The Fault.**
+1. That night, across the realm, the ground moves.
+2. Under Cogsworth, Meridian test-fires the **Arbiter Engine's** first core. It is built around the **Dark Stone** and draws on all eighteen Plates at once.
+3. A tremor runs through every Imprint. The Bleed leaps forward everywhere, and from Act IV on all early maps use encounter version 1 (Bleed-spread).
+4. On the **north coast**, the sea pulls back from Zenith's cliffs overnight. The **Sump drains**, and the spires of **drowned Aurelia** stand naked under Underveil for the first time in three hundred years.
+5. In the Athenaeum, the Glass Court's windows shatter.
+6. **Rowan escapes** in the chaos, helped by Wick's people, and the Accord guard look the other way. Before he goes, he finds the PC in the broken court: "*Ask the Drowned Crown.* It's awake now. So are you."
+
+**Shattered Sky** (748, `:BLEED`, optional): the reflected Lucent in the sky has cracked. Pieces of the upside-down city hang between earth and sky. The PC can walk among them and find the first **Zygarde Core** (Zygarde Cell quest hook).
+
+**Cliffhanger:** Ilsa finds the PC at dawn on the Athenaeum steps, among the shattered glass. She hands over a sealed envelope. "Father's Secret Articles. The parts the Accord doesn't teach. Don't read them yet. Go and find Bastian Ore first. He was *there*." Behind her, in every broken pane of glass, six black wings fold and unfold.
+
+**END OF ACT III.** Title card: *IV — The Drowned Crown.*

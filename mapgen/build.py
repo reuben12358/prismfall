@@ -179,6 +179,12 @@ def pages_from(e, ctx, mid):
         script = 'pbPokemonMart([\n' + ''.join('  :%s,\n' % i for i in items[:-1]) + '  :%s\n])' % items[-1]
         cmds = [{'text': e.get('greeting', 'Welcome! How may I serve you?')}] if e.get('greeting') else []
         return [G.page(gfx=gfx(), cmds=G.compile_cmds(cmds + [{'script': script}]))]
+    if t == 'berry':   # same as the base project's berry plants (Map005)
+        b = e['berry']
+        return [G.page(gfx=G.graphic('berrytree_' + b, 8), walk_anime=False, step_anime=True, dir_fix=True,
+                       cmds=G.compile_cmds([{'script': 'pbPickBerry(:%s, %d)' % (b, e.get('count', 2))}])),
+                G.page(cond=G.condition(self_sw='A'), walk_anime=False, step_anime=True,
+                       cmds=G.compile_cmds([{'script': 'pbBerryPlant'}]))]
     if t == 'pc':
         return [G.page(cmds=G.compile_cmds([{'script': 'pbPokeCenterPC'}]))]
     if t == 'event':
@@ -256,6 +262,8 @@ def default_name(e):
         return 'Trainer(%d)' % e.get('sight', 4)
     if t == 'item':
         return 'HiddenItem' if e.get('hidden') else 'Item'
+    if t == 'berry':
+        return 'BerryPlant'
     return {'exit': 'Exit', 'door': 'Door', 'warp': 'Warp', 'sign': 'Sign', 'pc': 'PC', 'mart': 'Mart'}.get(t, t.capitalize())
 
 
