@@ -345,8 +345,8 @@ module Prismfall
       :GO_HIS_HAND         => { :title => "His Hand",           :hint => "Ch21. Not chained, not bought.",
                                 :epitaph => "It didn't hurt. That was the cruelest part." },
       # Ruin Route only (not needed for the unlock)
-      :GO_R_SWEET_DREAMS   => { :title => "Sweet Dreams",       :hint => "Ruin. Nova's kindness.", :ruin_exempt => true,
-                                :epitaph => "Nova kept her promise. Nobody in Velmora ever had to wake up again." },
+      :GO_R_WELCOME_BEHIND => { :title => "Welcome, Behind",   :hint => "Ruin. The Archseer's kindness.", :ruin_exempt => true,
+                            :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
       :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
                                 :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
     }
