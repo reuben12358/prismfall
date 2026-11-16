@@ -19,4 +19,8 @@
 132	130	Loomhouse Gym - Canopy Lofts
 133	130	Loomhouse Gym - The Spindle
 520	0	Route 1
+521	0	Route 2
+523	521	Hale Farmhouse
+524	0	Gossamer Wood
+526	524	Woodward's Hut
 990	0	Prismfall Test Arena

@@ -206,6 +206,12 @@ def check_rule(where, key, rule, all_ids)
     when :weather                       then check_enum(w, v, FieldEffects::WEATHERS - [:None], "weather")
     when :terrain                       then check_enum(w, v, FieldEffects::TERRAINS - [:None], "terrain")
     when :uses, :turns                  then check_int(w, v, 1)
+    when :as                            then check_enum(w, v, FieldEffects::WEATHERS - [:None], "weather")
+    when :id                            then err(w, "transition :id must be a Symbol") if !v.is_a?(Symbol)
+    when :rewind
+      ok = v.is_a?(Symbol) || (v.is_a?(Array) && v.all? { |x| x.is_a?(Symbol) }) ||
+           (v.is_a?(Hash) && v.all? { |x, n| x.is_a?(Symbol) && n.is_a?(Integer) && n > 0 })
+      err(w, ":rewind must be a transition :id, a list of ids or { id => n }") if !ok
     when :stage                         then check_int(w, v, 1)
     when :stage_delta                   then check_int(w, v)
     when :to
@@ -223,7 +229,7 @@ def check_rule(where, key, rule, all_ids)
     when :set
       case key
       when :effectiveness_mods then err(w, "must be a number >= 0") if !v.is_a?(Numeric) || v < 0
-      when :accuracy_mods      then check_int(w, v, 1, 100)
+      when :fixed_damage_mods  then check_int(w, v, 1)
       else                          check_int(w, v, 1, 100)
       end
     end
@@ -240,11 +246,15 @@ def check_rule(where, key, rule, all_ids)
   when :speed_mods   then err(where, "speed rule needs :mult") if !rule[:mult]
   when :effectiveness_mods
     err(where, "effectiveness rule needs :set or :mult") if !rule.key?(:set) && !rule[:mult]
+  when :fixed_damage_mods
+    err(where, "fixed damage rule needs :set or :mult") if !rule[:set] && !rule[:mult]
+  when :weather_as
+    err(where, "weather_as rule needs :as") if !rule[:as]
   when :move_stat_boosts
     err(where, "needs :user_stats or :target_stats") if !rule[:user_stats] && !rule[:target_stats]
   when :transitions
-    if !rule.key?(:to) && !rule[:stage] && !rule[:stage_delta]
-      err(where, "transition needs :to, :stage or :stage_delta")
+    if !rule.key?(:to) && !rule[:stage] && !rule[:stage_delta] && !rule[:rewind]
+      err(where, "transition needs :to, :stage, :stage_delta or :rewind")
     end
     triggers = [:weather, :terrain, :turns, :check].count { |t| rule.key?(t) }
     move_keys = (rule.keys & FieldEffects::MOVE_MATCH_KEYS)
@@ -375,6 +385,15 @@ def check_definition(where, defn, all_ids, stage = false)
         next
       end
       rules.each_with_index { |rule, i| check_rule("#{w}[#{i}]", k, rule, all_ids) }
+      if k == :transitions
+        tids = rules.map { |r| r.is_a?(Hash) ? r[:id] : nil }.compact
+        tids.select { |t| tids.count(t) > 1 }.uniq.each { |t| err(w, "duplicate transition :id :#{t}") }
+        rules.each_with_index do |r, i|
+          next if !r.is_a?(Hash) || !r[:rewind]
+          refs = r[:rewind].is_a?(Hash) ? r[:rewind].keys : list(r[:rewind])
+          refs.each { |t| err("#{w}[#{i}][:rewind]", "no transition with :id :#{t} in this list") if !tids.include?(t) }
+        end
+      end
     end
   end
 end

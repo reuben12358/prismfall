@@ -59,7 +59,7 @@ stamps:
 tiles:
   - {tile: gym_sign, at: [24, 9]}
 events:
-  - {type: warp, name: To Gossamer Wood, at: [22, 39], link: WOOD_BRIAR, to: {map: 524, x: 24, y: 1, dir: down}}
+  - {type: warp, name: To Gossamer Wood, at: [22, 39], link: WOOD_BRIAR, arrive: [22, 38, up]}
   - {type: sign, at: [24, 9], post: false, name: Gym sign, text: "BRIARWICK LOOMHOUSE GYM\nWarden: Tamsin Loom - The Weaver of Webs"}
   - {type: sign, at: [20, 17], text: "BRIARWICK\nThe town in the old trees."}
   - {type: npc, name: Gym guide, at: [21, 11], sprite: NPC 01, dir: down,

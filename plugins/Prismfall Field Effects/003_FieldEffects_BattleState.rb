@@ -203,9 +203,10 @@ class Battle
 
   # Sets the field before the battle starts (no messages, no events).
   # Used by the battle rule; story code should use setBattleRule("field", :ID).
-  def fe_set_initial_field(new_id)
+  def fe_set_initial_field(new_id, stage = 1)
     @field_effect = FieldEffects.normalize_id(new_id)
     FieldEffects.reset_state(self)
+    @fe_state[:stage] = stage.to_i.clamp(1, FieldEffects.max_stage(@field_effect))
   end
 
   def field_stage
@@ -276,8 +277,12 @@ end
 class Game_Temp
   alias prismfall_fe_add_battle_rule add_battle_rule
   def add_battle_rule(rule, var = nil)
-    if rule.to_s.downcase == "field"
+    case rule.to_s.downcase
+    when "field"
       self.battle_rules["field"] = FieldEffects.normalize_id(var)
+      return
+    when "fieldstage"
+      self.battle_rules["fieldStage"] = [var.to_i, 1].max
       return
     end
     prismfall_fe_add_battle_rule(rule, var)
@@ -297,9 +302,9 @@ def setBattleRule(*args)
   while i < args.length
     arg = args[i]
     key = (arg.is_a?(String) || arg.is_a?(Symbol)) ? arg.to_s.downcase : nil
-    if key == "field"
+    if key == "field" || key == "fieldstage"
       raise _INTL("Argument {1} expected a variable after it but didn't have one.", arg) if i + 1 >= args.length
-      $game_temp.add_battle_rule("field", args[i + 1])
+      $game_temp.add_battle_rule(key, args[i + 1])
       i += 2
       next
     end
@@ -326,19 +331,29 @@ end
 
 module FieldEffects
   # Decides the field for a battle being prepared: explicit rule > map default.
+  # MAP_FIELDS values: :ID or [:ID, starting_stage]. setBattleRule("fieldStage", n)
+  # overrides the starting stage either way.
   def self.apply_battle_rule(battle)
     return if !battle.respond_to?(:fe_set_initial_field)
     rules = $game_temp.battle_rules
     id = nil
+    stage = 1
     if rules.key?("field")
       id = rules["field"]
     elsif $game_map && MAP_FIELDS[$game_map.map_id]
-      id = self.normalize_id(MAP_FIELDS[$game_map.map_id])
+      entry = MAP_FIELDS[$game_map.map_id]
+      if entry.is_a?(Array)
+        id = self.normalize_id(entry[0])
+        stage = entry[1] || 1
+      else
+        id = self.normalize_id(entry)
+      end
     end
     return if id.nil? || id == NONE
-    battle.fe_set_initial_field(id)
+    stage = rules["fieldStage"] if rules["fieldStage"]
+    battle.fe_set_initial_field(id, stage)
     # Silently drop overworld weather/terrain the field doesn't allow
-    defn = self.definition_for(id)
+    defn = self.definition_for(id, battle.field_stage)
     if defn && defn[:weather] && defn[:weather][:block]&.include?(battle.field.weather)
       battle.field.defaultWeather  = :None
       battle.field.weather         = :None
@@ -351,7 +366,7 @@ module FieldEffects
     end
     # Non-EBDX fallback: use the field's battle background if its graphic
     # exists and no explicit backdrop rule was given.
-    backdrop = self.definition_for(id)&.[](:backdrop)
+    backdrop = defn&.[](:backdrop)
     if backdrop && rules["backdrop"].nil? && battle.respond_to?(:backdrop=) &&
        pbResolveBitmap(sprintf("Graphics/Battlebacks/%s_bg", backdrop))
       battle.backdrop = backdrop

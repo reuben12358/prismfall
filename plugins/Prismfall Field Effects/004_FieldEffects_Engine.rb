@@ -555,6 +555,13 @@ module FieldEffects
   # Returns true if the field (or stage) changed.
   def self.count_transition(battle, rule, idx)
     st = self.raw_state(battle)
+    if rule[:rewind]
+      rewound = self.rewind_transitions(battle, rule[:rewind])
+      if !rule.key?(:to) && !rule[:stage] && !rule[:stage_delta]   # Rewind-only rule
+        battle.pbDisplay(self.format(rule[:message])) if rewound && rule[:message]
+        return false
+      end
+    end
     uses = [rule[:uses] || 1, 1].max
     st[:counters][idx] = (st[:counters][idx] || 0) + 1
     if st[:counters][idx] >= uses
@@ -565,6 +572,28 @@ module FieldEffects
       battle.pbDisplay(self.format(rule[:progress_message], (uses - st[:counters][idx]).to_s))
     end
     return false
+  end
+
+  # Lowers the progress of other transitions (by :id). Returns true if any moved.
+  def self.rewind_transitions(battle, spec)
+    st = self.raw_state(battle)
+    list = self.transitions(battle)
+    ret = false
+    spec.each do |tid, n|
+      idx = list.index { |r| r[:id] == tid }
+      next if !idx || !st[:counters][idx] || st[:counters][idx] <= 0
+      st[:counters][idx] = [st[:counters][idx] - n.to_i, 0].max
+      ret = true
+    end
+    return ret
+  end
+
+  # Read-only progress of a transition (by :id): [count, uses] or nil.
+  def self.transition_progress(battle, tid)
+    list = self.transitions(battle)
+    idx = list.index { |r| r[:id] == tid }
+    return nil if !idx
+    return [self.raw_state(battle)[:counters][idx] || 0, [list[idx][:uses] || 1, 1].max]
   end
 
   def self.perform_transition(battle, rule)
@@ -616,6 +645,77 @@ module FieldEffects
         return if self.count_transition(battle, rule, i)
       end
     end
+  end
+
+  # A move that failed before its hits (pbMoveFailed?, :move_fails, "no
+  # target"...): only :even_if_failed transitions can count it.
+  def self.failed_move_transitions(battle, user, move)
+    return if !self.active?(battle) || !move
+    self.check_move_transitions(battle, user, [], move)
+  end
+
+  #=============================================================================
+  # Fixed-damage moves (Dragon Rage, Seismic Toss, Super Fang...)
+  #=============================================================================
+  def self.modify_fixed_damage(battle, user, target, move, damage, ai = false)
+    return damage if damage <= 0
+    self.rules(battle, :fixed_damage_mods).each do |rule|
+      next if !self.move_matches?(rule, battle, user, target, move, move.calcType || move.type)
+      damage = rule[:set] if rule[:set]
+      damage = [(damage * rule[:mult]).round, 1].max if rule[:mult]
+      self.show_once(battle, user, move, rule[:message], user.pbThis, move.name) if !ai && rule[:message]
+    end
+    return damage
+  end
+
+  #=============================================================================
+  # Weather-gated moves (:weather_as): the user's move sees this weather
+  #=============================================================================
+  def self.weather_as_for(battle, user, move)
+    return nil if !self.active?(battle) || !move
+    rules = self.rules(battle, :weather_as)
+    return nil if rules.empty?
+    type = move.type
+    rules.each do |rule|
+      return rule[:as] if self.move_matches?(rule, battle, user, nil, move, type)
+    end
+    return nil
+  end
+
+  # Runs the block with battler seeing `weather` (when no weather is active).
+  def self.with_weather_as(battler, weather)
+    return yield if !weather || !battler
+    old = battler.instance_variable_get(:@fe_weather_as)
+    battler.instance_variable_set(:@fe_weather_as, weather)
+    begin
+      return yield
+    ensure
+      battler.instance_variable_set(:@fe_weather_as, old)
+    end
+  end
+
+  #=============================================================================
+  # Public read API for borrowing fields (:BLEED, :PRISM_ARENA)
+  #=============================================================================
+  def self.borrowed_fields(battle)
+    st = self.raw_state(battle)
+    return (st) ? st[:borrowed].dup : []
+  end
+
+  def self.borrowed_field(battle)
+    return self.borrowed_fields(battle).first
+  end
+
+  # PRISM_ARENA's public state (the field keeps it in FieldEffects.state(battle)[:prism]).
+  # Returns a frozen summary Hash, or nil when PRISM_ARENA isn't the current field.
+  def self.prism_state(battle)
+    pr = self.state(battle)[:prism]
+    return nil if !pr.is_a?(Hash)
+    return {
+      :field       => pr[:field],      :type       => pr[:type],      :plate       => pr[:plate],
+      :next_field  => pr[:next_field], :next_type  => pr[:next_type], :next_plate  => pr[:next_plate],
+      :rounds_left => pr[:rounds_left], :rotation  => pr[:rotation],  :interval    => pr[:interval]
+    }.freeze
   end
 
   #=============================================================================

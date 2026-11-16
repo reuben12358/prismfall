@@ -109,6 +109,19 @@ class Battle::Move
 end
 
 #===============================================================================
+# Fixed-damage moves skip pbCalcDamageMultipliers: :fixed_damage_mods
+#===============================================================================
+class Battle::Move::FixedDamageMove < Battle::Move
+  alias prismfall_fe_pbCalcDamage pbCalcDamage
+  def pbCalcDamage(user, target, numTargets = 1)
+    prismfall_fe_pbCalcDamage(user, target, numTargets)
+    return if !FieldEffects.active?(@battle)
+    target.damageState.calcDamage = FieldEffects.modify_fixed_damage(@battle, user, target, self,
+                                                                     target.damageState.calcDamage)
+  end
+end
+
+#===============================================================================
 # Nature Power / Camouflage / Secret Power read the field (a built-in terrain,
 # if present, still takes precedence).
 #===============================================================================

@@ -120,6 +120,9 @@ module FieldEffects
     return rule if !rule.is_a?(Hash)
     r = rule.dup
     RULE_ARRAY_KEYS.each { |k| r[k] = Array(r[k]).freeze if r.key?(k) }
+    if r.key?(:rewind) && !r[:rewind].is_a?(Hash)
+      r[:rewind] = Array(r[:rewind]).map { |tid| [tid, 1] }.to_h.freeze
+    end
     [:user, :target, :battlers].each do |k|
       next if !r[k].is_a?(Hash)
       m = r[k].dup

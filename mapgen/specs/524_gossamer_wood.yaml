@@ -1,0 +1,80 @@
+# Gossamer Wood (map 524): forest maze between Route 2 (S) and Briarwick (N). Field :SILKWOOD.
+# Source: design/maps.json id 524. Silk-web walls are drawn as fences ([TODO art]).
+id: 524
+name: Gossamer Wood
+palette: outside
+bgm: Route 3
+parent: 0
+field: SILKWOOD
+metadata: {ShowArea: true, MapPosition: [0, 13, 23], BattleBack: forest}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT........................TT
+  TTTTTTTTTTTTTTTTTTTTTT........................TT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTT....TT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTT....TT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....,,,,,,,,,,,,....TTTTTTTTTTTTTTTTTTTTTT
+  TT..TT....TTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TT..TT....TTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTTTTffffffffffffTTTTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
+  TTTTTT...............#####....................TT
+  TTTTTT...............#####....................TT
+  TTTTTT...............#####....................TT
+  TTTTTT...............#####....................TT
+  TTTTTT....TTTTTT.....#####......TTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTT................TTTTTTTTTTTTTTTT
+  TTTTTT....TTTTTT................,,,,,,....TTTTTT
+  TTTTTT....TTTTTT................,,,,,,....TTTTTT
+  TTTTTT....TTTTTT................,,,,,,....TTTTTT
+  TTTTTT....TTTTTT................,,,,,,....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT....TTTTTTTTTTTT....TTTTTTTTTTTT....TTTTTT
+  TTTTTT........................,,,,,,,,,,..TTTTTT
+  TTTTTT........................,,,,,,,,,,..TTTTTT
+  TTTTTT,,,,,,,,,,..............,,,,,,,,,,..TTTTTT
+  TTTTTT,,,,,,,,,,..............,,,,,,,,,,..TTTTTT
+  TTTTTT,,,,,,,,,,..........TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT,,,,,,,,,,..........TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT,,,,,,,,,,..........TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT,,,,,,,,,,..........TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTTTTTTTTTTTT
+stamps:
+  - {stamp: house_red2, at: [21, 20], link: WOOD_HUT, name: Woodward's Hut door}
+events:
+  - {type: warp, name: To Briarwick, at: [24, 0], link: WOOD_BRIAR, arrive: [24, 1, down]}
+  - {type: warp, name: To Route 2, at: [24, 47], link: R2_WOOD, arrive: [24, 46, up]}
+  - {type: cut_tree, at: [45, 22]}
+  - {type: sign, at: [43, 23], text: "[TODO map] Beyond the tree: Gossamer Deepwood (map 525, not built yet)."}
+  - {type: sign, at: [23, 17], post: false, name: Silk wall, text: "Thick silk blocks the trail. Maybe there's a way around."}
+  - {type: npc, name: Kestrel, at: [24, 4], sprite: trainer_RIVAL1, dir: down,
+     text: "[TODO story] Kestrel: Briarwick's just ahead. Try not to get lost in the webs."}
+  - {type: trainer, at: [9, 30], sight: 3, dir: right, sprite: trainer_BUGCATCHER, trainer: [BUGCATCHER, Tobin],
+     intro: "[TODO story] My bugs love the silk here!", after: "[TODO story] The webs move at night. I swear it."}
+  - {type: trainer, at: [39, 31], sight: 3, dir: left, sprite: trainer_BUGCATCHER, trainer: [BUGCATCHER, Reed],
+     intro: "[TODO story] You walked right into my web!", after: "[TODO story] Tamsin catches bugs bigger than me."}
+  - {type: trainer, at: [12, 11], sight: 3, dir: down, sprite: trainer_AROMALADY, trainer: [AROMALADY, Petra],
+     intro: "[TODO story] Smell that? Night-blooming gossamer.", after: "[TODO story] It's lovely here. Mostly."}
+  - {type: trainer, at: [9, 21], sight: 4, dir: right, sprite: trainer_CAMPER, trainer: [CAMPER, Bram],
+     intro: "[TODO story] Camping in Gossamer? Battle first, questions later!", after: "[TODO story] Watch for the silk walls."}
+  - {type: item, at: [40, 38], item: POTION}
+  - {type: item, at: [2, 14], item: REPEL}
+  - {type: item, at: [44, 4], item: TM19}
+  - {type: item, at: [31, 27], item: ETHER}

@@ -30,6 +30,7 @@ class Ctx:
         self.doors = {}   # link -> (map, x, y)   exterior door tiles
         self.exits = {}   # link -> (map, x, y)   interior exit mats
         self.warnings = []
+        self.warp_ends = {}  # link -> [(map, x, y, dir)] arrival spots of two-way warps
 
     def palette(self, name):
         if name not in self.palettes:
@@ -139,6 +140,9 @@ def prepare(spec, ctx):
         if e['type'] == 'exit':
             arr = e.get('arrive', [e['at'][0], e['at'][1] - 1, 'up'])
             ctx.exits[e['link']] = (mid, arr[0], arr[1], arr[2] if len(arr) > 2 else 'up')
+        if e['type'] == 'warp' and 'link' in e and 'arrive' in e and 'to' not in e:
+            a = e['arrive']
+            ctx.warp_ends.setdefault(e['link'], []).append((mid, a[0], a[1], a[2] if len(a) > 2 else 'retain'))
         if e['type'] == 'warp' and 'link' in e and 'arrive' in e:
             ctx.doors.setdefault(e['link'], (mid, e['arrive'][0], e['arrive'][1]))
         if e['type'] == 'warp' and 'link' in e:
@@ -187,6 +191,10 @@ def pages_from(e, ctx, mid):
                        cmds=G.compile_cmds([{'script': 'pbPickBerry(:%s, %d)' % (b, e.get('count', 2))}])),
                 G.page(cond=G.condition(self_sw='A'), walk_anime=False, step_anime=True,
                        cmds=G.compile_cmds([{'script': 'pbBerryPlant'}]))]
+    if t == 'cut_tree':
+        l = [G.ev_cmd(111, 0, [12, 'pbCut']), G.ev_cmd(355, 1, ['pbSmashEvent(get_self)']), G.ev_cmd(0, 1),
+             G.ev_cmd(412, 0)]
+        return [G.page(gfx=G.graphic('Object tree 1'), cmds=l)]
     if t == 'pc':
         return [G.page(cmds=G.compile_cmds([{'script': 'pbPokeCenterPC'}]))]
     if t == 'event':
@@ -216,6 +224,11 @@ def resolve_target(e, ctx, mid, door):
         to.setdefault('dir', 'up' if door else 'retain')
         return to
     link = e.get('link')
+    if e.get('type') == 'warp' and link in ctx.warp_ends:
+        other = [w for w in ctx.warp_ends[link] if w[0] != mid]
+        if other:
+            m, x, y, d = other[0]
+            return {'map': m, 'x': x, 'y': y, 'dir': d}
     if door:   # exterior door -> arrive 1 tile above the interior exit mat (or the exit's 'arrive' spot)
         if link in ctx.exits:
             m, x, y, d = ctx.exits[link]
@@ -266,6 +279,8 @@ def default_name(e):
         return 'HiddenItem' if e.get('hidden') else 'Item'
     if t == 'berry':
         return 'BerryPlant'
+    if t == 'cut_tree':
+        return 'CutTree'
     return {'exit': 'Exit', 'door': 'Door', 'warp': 'Warp', 'sign': 'Sign', 'pc': 'PC', 'mart': 'Mart'}.get(t, t.capitalize())
 
 
@@ -283,6 +298,9 @@ def metadata_block(spec):
     return '\n'.join(lines)
 
 
+_SEEN_CONN = set()
+
+
 def connection_lines(spec, built):
     out = []
     for c in spec.get('connections', []):
@@ -290,6 +308,10 @@ def connection_lines(spec, built):
             continue
         d = c['dir'][0].upper()
         opp = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}[d]
+        key = tuple(sorted([(spec['id'], d), (c['to'], opp)]))
+        if key in _SEEN_CONN:
+            continue
+        _SEEN_CONN.add(key)
         out.append('# %s (%d) - %s (%d)' % (spec['name'], spec['id'], built[c['to']], c['to']))
         out.append('%d,%s,%d,%d,%s,%d' % (spec['id'], d, c.get('offset', 0), c['to'], opp, c.get('to_offset', 0)))
     return out
@@ -297,6 +319,10 @@ def connection_lines(spec, built):
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    # spec generators (gen_*.py) write some specs (test arena, gym puzzles): run them first
+    import importlib
+    for g in sorted(glob.glob(os.path.join(HERE, 'gen_*.py'))):
+        importlib.import_module(os.path.basename(g)[:-3]).main()
     files = sorted(glob.glob(os.path.join(HERE, 'specs', '*.yaml')))
     ctx = Ctx()
     specs = []
@@ -383,7 +409,7 @@ def main():
 
 
 def slug(n):
-    return ''.join(c if c.isalnum() else '_' for c in n).strip('_')[:40]
+    return ''.join(c if (c.isascii() and c.isalnum()) else '_' for c in n).strip('_')[:40]
 
 
 if __name__ == '__main__':

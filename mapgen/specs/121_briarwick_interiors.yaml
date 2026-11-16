@@ -72,3 +72,27 @@ events:
       - cond: {self: A}
         graphic: {sprite: trainer_HIKER, dir: down}
         commands: ["[TODO story] Cut clears small trees. Mind the old ones."]
+---
+id: 526
+name: Woodward's Hut
+parent: 524
+template: house2
+exit_link: WOOD_HUT
+drop_template_events: [Kurt]
+bgm: Route 3
+metadata: {MapPosition: [0, 13, 23]}
+events:
+  - {type: npc, name: Woodward, at: [7, 4], sprite: trainer_HIKER, dir: down,
+     text: "[TODO story] Rest by the fire. The wood's been restless since the glass came to the orchard."}
+---
+id: 523
+name: Hale Farmhouse
+parent: 521
+template: house
+exit_link: R2_FARM
+drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
+bgm: Route 2
+metadata: {MapPosition: [0, 14, 23]}
+events:
+  - {type: npc, name: Farmer Hale, at: [5, 4], sprite: NPC 25, dir: down,
+     text: "[TODO story] Juno's dad here. Headbutt the apple trees and see what falls out! (Headbutt tutor TODO)"}

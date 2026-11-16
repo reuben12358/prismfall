@@ -1,0 +1,53 @@
+# Route 2 (map 521): orchard country E-W. Source: design/maps.json id 521.
+# The Glassed Orchard (522, Bleed zone) behind the NE cordon is not built yet: an Accord guard blocks the gap.
+id: 521
+name: Route 2
+palette: outside
+bgm: Route 2
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 23], BattleBack: field}
+connections:
+  - {dir: S, offset: 42, to: 520, to_offset: 12}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTT..............TTTTTTTT...#####..TTTTTTTT..**********TTTT
+  TTTT..............TTTTTTTT...#####..TTTTTTTT..**********TTTT
+  TTTT.........................#####............**********TTTT
+  TTTT.........................#####............**********TTTT
+  TTTT..............TTTTTTTT...#####..TTTTTT....ffffff..ffTTTT
+  TTTT..............TTTTTTTT....__....TTTTTT..............TTTT
+  TTTT..........................__........................TTTT
+  TTTT..........................__........................TTTT
+  ..............................__........................TTTT
+  ________________________________________________________TTTT
+  ________________________________________________________TTTT
+  ..........................................____..........TTTT
+  TTTT....,,,,,,,,,,..,,,,,,................____..TTTT....TTTT
+  TTTT....,,,,,,,,,,..,,,,,,..........,,,,,,____..TTTT....TTTT
+  TTTTTTTT,,,,,,,,,,..,,,,,,..........,,,,,,____..TTTT....TTTT
+  TTTTTTTT,,,,,,,,,,..,,,,,,..........,,,,,,____..TTTT....TTTT
+  TTTTTTTT,,,,,,,,,,..................,,,,,,____..TTTT....TTTT
+  TTTTTTTT,,,,,,,,,,..................,,,,,,____..TTTT....TTTT
+  TTTT......TTTTTTTT..TTTTTTTTTTTT....,,,,,,____..........TTTT
+  TTTT......TTTTTTTT..TTTTTTTTTTTT..........____..........TTTT
+  TTTT......................................____..........TTTT
+  TTTT......................................____..........TTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT____....TTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT____....TTTTTTTTTT
+stamps:
+  - {stamp: house_red, at: [29, 2], link: R2_FARM, name: Farmhouse door}
+events:
+  - {type: warp, name: To Gossamer Wood, at: [0, 12], link: R2_WOOD, arrive: [1, 12, right]}
+  - {type: npc, name: Accord guard, at: [52, 6], sprite: trainer_COOLTRAINER_M, dir: down,
+     text: "[TODO story] Quarantine cordon. Nobody goes into the orchard - not since it turned to glass."}
+  - {type: sign, at: [41, 13], text: "ROUTE 2\nW: Gossamer Wood - S: Route 1"}
+  - {type: trainer, at: [16, 9], sight: 3, dir: down, sprite: trainer_BUGCATCHER, trainer: [BUGCATCHER, Dell],
+     intro: "[TODO story] The orchard bugs are huge this year!", after: "[TODO story] Something in the trees makes them grow."}
+  - {type: trainer, at: [40, 9], sight: 3, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Mae],
+     intro: "[TODO story] Apple picking can wait - battle!", after: "[TODO story] Want an apple? ...Kidding, they're all glass."}
+  - {type: trainer, at: [26, 17], sight: 4, dir: up, sprite: trainer_CAMPER, trainer: [CAMPER, Joss],
+     intro: "[TODO story] Hey! Trainers have to battle when their eyes meet!", after: "[TODO story] Gossamer Wood's west of here."}
+  - {type: item, at: [54, 22], item: ANTIDOTE}
+  - {type: item, at: [5, 4], item: POKEBALL}
+  - {type: berry, at: [33, 10], berry: PECHABERRY}

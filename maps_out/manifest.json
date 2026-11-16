@@ -20,12 +20,17 @@
   132,
   133,
   520,
+  521,
+  523,
+  524,
+  526,
   990
  ],
  "fields": {
   "130": "SILKWOOD",
   "131": "SILKWOOD",
   "132": "SILKWOOD",
-  "133": "SILKWOOD"
+  "133": "SILKWOOD",
+  "524": "SILKWOOD"
  }
 }

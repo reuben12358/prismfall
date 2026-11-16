@@ -68,6 +68,14 @@ MapPosition = 0,12,22
 Name = Cutter's House
 MapPosition = 0,12,22
 #-------------------------------
+[526]   # Woodward's Hut
+Name = Woodward's Hut
+MapPosition = 0,13,23
+#-------------------------------
+[523]   # Hale Farmhouse
+Name = Hale Farmhouse
+MapPosition = 0,14,23
+#-------------------------------
 [130]   # Loomhouse Gym - Foyer
 Name = Loomhouse Gym - Foyer
 MapPosition = 0,12,22
@@ -90,6 +98,19 @@ Outdoor = true
 ShowArea = true
 MapPosition = 0,14,24
 BattleBack = field
+#-------------------------------
+[521]   # Route 2
+Name = Route 2
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,23
+BattleBack = field
+#-------------------------------
+[524]   # Gossamer Wood
+Name = Gossamer Wood
+ShowArea = true
+MapPosition = 0,13,23
+BattleBack = forest
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

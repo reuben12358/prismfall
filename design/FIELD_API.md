@@ -14,7 +14,8 @@ File numbers already used: 101–111. Pick a free number ≥ 112 for new fields 
 | What | How |
 |---|---|
 | Set field for next battle | `setBattleRule("field", :VOLCANIC)` (Symbol or String; `"none"` = no field, overrides map default) |
-| Default field per map | `FieldEffects::MAP_FIELDS[map_id] = :FIELD_ID` (plain Hash; add entries from any plugin that loads after this one) |
+| Default field per map | `FieldEffects::MAP_FIELDS[map_id] = :FIELD_ID` or `[:FIELD_ID, stage]` (plain Hash; add entries from any plugin that loads after this one) |
+| Starting stage | `setBattleRule("fieldStage", 3)` (overrides the MAP_FIELDS stage; default 1) |
 | Current field in battle | `battle.field_effect` → Symbol, `:NONE` if none |
 | Change field mid-battle | `battle.change_field(:NEW_ID, "message")` → true if changed. `message` nil ⇒ new field's `:intro_message` is shown; `""` ⇒ nothing shown |
 | Change event | every change calls `FieldEffects.notify_change(battle, old_id, new_id)` → `EventHandlers.trigger(:prismfall_field_changed, battle, old_id, new_id)` |
@@ -39,9 +40,18 @@ FieldEffects.stage(battle) / battle.field_stage
 battle.set_field_stage(n, "message")       # see §7
 FieldEffects.state(battle)                 # scratch Hash for your procs; cleared on field change
 FieldEffects.rotate_borrowed(battle)       # force a :borrow rotation now
+FieldEffects.borrowed_fields(battle)       # [ids] currently borrowed (:BLEED/:PRISM_ARENA); borrowed_field = first or nil
+FieldEffects.prism_state(battle)           # frozen { :field, :type, :plate, :next_field, :next_type, :next_plate,
+                                           #   :rounds_left, :rotation, :interval } while PRISM_ARENA is active, else nil
+FieldEffects.transition_progress(battle, :id)  # [count, uses] of a transition with that :id
 ```
 Field definitions' messages are plain strings; the engine runs them through `_INTL` with arguments at display time.
 **Do not call `_INTL` in field files.**
+
+> **Plugin scope warning.** Essentials evals every plugin file into the same `TOPLEVEL_BINDING`, so a top-level
+> local variable (`blades = [...]`) or `def` in a field file is visible to — and can collide with — every later file.
+> Put helpers inside the call: `FieldEffects.register(:ID, (lambda do; helpers...; { ...definition... }; end).call)`
+> (see `113_Field_FlowerGarden.rb`, `130_Field_Cave.rb`). Never define top-level locals, methods or constants.
 
 ---------------------------------------------------------------------------------------------------
 ## 2. Minimal field
@@ -156,6 +166,8 @@ Messages appear once per move use (not per target/hit), just before the attack a
 | `:priority_mods` **[M]** | `:add => Integer` | priority bracket change (target-less rule) |
 | `:crit_mods` **[M]** | `:add => Integer` (crit stages), `:always => true` | Battle Armor/Lucky Chant still apply |
 | `:effect_chance_mods` **[M]** | `:set => Integer` or `:mult => Float` | changes the chance of the move's OWN secondary effect (e.g. Scald burn 30→50). Moves without one are unaffected |
+| `:fixed_damage_mods` **[M]** | `:set => Integer` (HP) or `:mult => Float`, optional `:message` | fixed-damage moves (Dragon Rage, Sonic Boom, Seismic Toss, Night Shade, Super Fang, Counter, Endeavor, OHKO…) ignore every other damage key; use this. e.g. `{ :moves => [:DRAGONRAGE], :set => 140 }`. AI-aware |
+| `:weather_as` **[M]** | `:as => WEATHER` | the matching move's user sees that weather (only while no real weather is up) for the whole move use, e.g. `{ :moves => [:AURORAVEIL], :as => :Hail }`. Affects the user's own weather checks only (the move's failure check, its user-side effects); the AI knows |
 
 ### 4.5 Added effects & stat boosts on use
 `:added_effects` **[M]** — extra secondary effects rolled **per hit per target** after damage
@@ -249,7 +261,7 @@ List of rules; each has a **trigger**, a **target**, and optionally `:message` a
 
 | Trigger | Keys | Fires when |
 |---|---|---|
-| move | any move matcher keys **[M]** (target matcher = first target) | a matching move is used and doesn't fail (`:even_if_failed => true` to count failures; two-turn moves count on the charging turn) |
+| move | any move matcher keys **[M]** (target matcher = first target) | a matching move is used and doesn't fail (`:even_if_failed => true` also counts failures — including moves that fail before hitting, e.g. "But it failed!" or a field's `:move_fails`; two-turn moves count on the charging turn) |
 | weather | `:weather => [ids]` | that weather starts |
 | terrain | `:terrain => [ids]` | that terrain starts |
 | timer | `:turns => n` | at end of round once the field has lasted n rounds |
@@ -261,6 +273,10 @@ List of rules; each has a **trigger**, a **target**, and optionally `:message` a
 | `:stage => n` / `:stage_delta => ±n` | change the current field's stage (§7) instead |
 
 `:uses => n` — needs n triggers (counted per transition, reset when the field/stage changes).
+`:id => :sym` + `:rewind => :sym | [:a, :b] | { :sym => n }` — a rule with `:rewind` lowers the named transitions'
+progress (min 0) when it triggers. A rule with `:rewind` and no `:to`/`:stage` only rewinds; its `:message` shows when
+progress actually went down. e.g. Frozen Lake: `{ :id => :crack, :types => [:FIRE], :uses => 3, :to => :WATER_SURFACE }`,
+`{ :types => [:ICE], :category => :damaging, :rewind => :crack, :message => "The ice refroze!" }`.
 `:progress_message` — shown on triggers that don't complete it; `{1}` = remaining uses.
 `:message` — shown on change (`nil` ⇒ the new field's intro); **no placeholders** in transition messages.
 Only the first completed transition per event fires.
@@ -320,7 +336,7 @@ FieldEffects.register(:FLOWER_GARDEN, {
              :message => "The Bleed shudders... echoes of {1} seep in!" }   # {1} = borrowed names
 ```
 Borrowed fields contribute their **effect** keys only: type/move/damage/effectiveness/inverse/type changes/extra types/
-accuracy/priority/crit/added effects/effect chances/stat boosts/move fails/end_of_round/on_entry/speed/negated
+accuracy/priority/crit/added effects/effect chances/fixed damage/weather_as/stat boosts/move fails/end_of_round/on_entry/speed/negated
 abilities/weather/terrain and hooks except `on_start`/`on_end`. **Not** borrowed: identity, transitions, seed, stages,
 borrow. Fields that themselves have `:borrow` are never borrowed. Pool `:all` automatically includes fields added
 later. Borrowed `on_entry` rules with `:also_on_change` hit active battlers when borrowed.

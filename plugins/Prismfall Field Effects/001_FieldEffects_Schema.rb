@@ -77,6 +77,8 @@ module FieldEffects
     :added_effects      => MOVE_MATCH_KEYS + [:chance, :apply_to, :status, :confuse, :flinch,
                                               :stats, :message, :proc],
     :effect_chance_mods => MOVE_MATCH_KEYS + [:set, :mult],
+    :fixed_damage_mods  => MOVE_MATCH_KEYS + [:set, :mult, :message],
+    :weather_as         => MOVE_MATCH_KEYS + [:as],
     :move_stat_boosts   => MOVE_MATCH_KEYS + [:user_stats, :target_stats, :message],
     :move_fails         => MOVE_MATCH_KEYS + [:message],
     :end_of_round       => BATTLER_EFFECT_KEYS,
@@ -84,7 +86,7 @@ module FieldEffects
     :speed_mods         => [:battlers, :mult],
     :transitions        => MOVE_MATCH_KEYS + [:to, :stage, :stage_delta, :message, :uses,
                                               :progress_message, :weather, :terrain, :turns,
-                                              :check, :even_if_failed],
+                                              :check, :even_if_failed, :id, :rewind],
     :seed               => BATTLER_EFFECT_KEYS + [:item]
   }.freeze
 
@@ -123,7 +125,7 @@ module FieldEffects
   BORROWABLE_KEYS = [:type_mods, :move_mods, :type_messages, :move_messages, :damage_mods,
                      :effectiveness_mods, :inverse, :type_changes, :extra_types,
                      :accuracy_mods, :priority_mods, :crit_mods, :added_effects,
-                     :effect_chance_mods, :move_stat_boosts, :move_fails, :end_of_round,
+                     :effect_chance_mods, :fixed_damage_mods, :weather_as, :move_stat_boosts, :move_fails, :end_of_round,
                      :on_entry, :speed_mods, :negated_abilities, :weather, :terrain,
                      :hooks].freeze
   # Hooks a borrowing field copies (lifecycle hooks on_start/on_end are NOT copied).

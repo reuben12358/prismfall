@@ -7,7 +7,7 @@ parent: 0
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 24], BattleBack: field}
 connections:
   - {dir: S, offset: 10, to: 100, to_offset: 17}
-  - {dir: N, offset: 11, to: 521, to_offset: 44}
+  - {dir: N, offset: 12, to: 521, to_offset: 42}
 map: |
   TTTTTTTTTT..____..TTTT~~~~
   TTTTTTTTTT..____..TTTT~~~~

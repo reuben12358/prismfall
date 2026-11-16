@@ -6,9 +6,28 @@ class Battle::Battler
   # New move use (message de-duplication)
   #-----------------------------------------------------------------------------
   alias prismfall_fe_pbUseMove pbUseMove
+  # Also: :weather_as for the move's whole use, and :even_if_failed
+  # transitions for moves that fail before their hits (pbMoveFailed? etc.).
   def pbUseMove(choice, specialUsage = false)
     FieldEffects.begin_move_use(@battle)
-    prismfall_fe_pbUseMove(choice, specialUsage)
+    outer_done = @fe_after_move_done
+    @fe_after_move_done = false
+    weather = FieldEffects.weather_as_for(@battle, self, choice[2])
+    FieldEffects.with_weather_as(self, weather) { prismfall_fe_pbUseMove(choice, specialUsage) }
+    mv = choice[2]
+    if !@fe_after_move_done && @lastMoveFailed && mv && @lastMoveUsed == mv.id
+      FieldEffects.failed_move_transitions(@battle, self, mv)
+    end
+  ensure
+    @fe_after_move_done = outer_done
+  end
+
+  # Weather a :weather_as rule lends to this battler's current move.
+  alias prismfall_fe_effectiveWeather effectiveWeather
+  def effectiveWeather
+    ret = prismfall_fe_effectiveWeather
+    return @fe_weather_as if @fe_weather_as && ret == :None
+    return ret
   end
 
   #-----------------------------------------------------------------------------
@@ -26,6 +45,9 @@ class Battle::Battler
     @battle.pbDisplay(_INTL("{1} used {2}!", pbThis, mv.name))
     @battle.pbDisplay(FieldEffects.format(msg, pbThis, mv.name))
     @lastMoveFailed = true
+    mv.calcType = mv.pbCalcType(self)
+    @fe_after_move_done = true
+    FieldEffects.failed_move_transitions(@battle, self, mv)
     return false
   end
 
@@ -45,6 +67,7 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   alias prismfall_fe_pbEffectsAfterMove pbEffectsAfterMove
   def pbEffectsAfterMove(user, targets, move, numHits)
+    @fe_after_move_done = true
     FieldEffects.after_move(@battle, user, targets, move, numHits)
     prismfall_fe_pbEffectsAfterMove(user, targets, move, numHits)
   end

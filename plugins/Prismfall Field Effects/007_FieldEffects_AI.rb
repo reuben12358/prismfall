@@ -11,9 +11,11 @@ class Battle::AI::AIMove
   alias prismfall_fe_rough_damage rough_damage
   def rough_damage
     ret = prismfall_fe_rough_damage
-    return ret if ret <= 0 || @move.is_a?(Battle::Move::FixedDamageMove)
     battle = @ai.battle
-    return ret if !FieldEffects.active?(battle) || !@ai.trainer.medium_skill?
+    return ret if ret <= 0 || !FieldEffects.active?(battle) || !@ai.trainer.medium_skill?
+    if @move.is_a?(Battle::Move::FixedDamageMove)
+      return FieldEffects.modify_fixed_damage(battle, @ai.user.battler, @ai.target.battler, @move, ret, true)
+    end
     mult = FieldEffects.damage_multiplier(battle, @ai.user.battler, @ai.target.battler,
                                           @move, rough_type)
     return ret if mult == 1.0
@@ -108,9 +110,18 @@ end
 
 class Battle::AI
   # Moves the field makes fail, and weather/terrain moves the field blocks.
+  # :weather_as moves (e.g. Aurora Veil without hail) are judged with that weather.
+  alias prismfall_fe_pbGetMoveScore pbGetMoveScore
+  def pbGetMoveScore(targets = nil)
+    weather = FieldEffects.weather_as_for(@battle, @user.battler, @move.move)
+    return FieldEffects.with_weather_as(@user.battler, weather) { prismfall_fe_pbGetMoveScore(targets) }
+  end
+
   alias prismfall_fe_pbPredictMoveFailure pbPredictMoveFailure
   def pbPredictMoveFailure
-    return true if prismfall_fe_pbPredictMoveFailure
+    weather = FieldEffects.weather_as_for(@battle, @user.battler, @move.move)
+    failed = FieldEffects.with_weather_as(@user.battler, weather) { prismfall_fe_pbPredictMoveFailure }
+    return true if failed
     return false if !FieldEffects.active?(@battle)
     return true if FieldEffects.move_failure_message(@battle, @user.battler, @move.move)
     weather = FieldEffects::AI_WEATHER_MOVES[@move.function_code]
