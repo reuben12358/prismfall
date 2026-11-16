@@ -47,8 +47,18 @@ module Prismfall
       PBDebug.log("[Prismfall Bosses] #{msg}") if defined?(PBDebug)
     end
 
+    # {1}.. placeholders; a battler name starting with "The " is lower-cased when
+    # it lands mid-sentence ("A cable around the wild Zekrom snapped!").
     def self.text(str, *args)
-      return _INTL(str.to_s, *args)
+      ret = _INTL(str.to_s)
+      return ret.gsub(/\{(\d+)\}/) do
+        idx = $1.to_i - 1
+        next $~[0] if idx < 0 || idx >= args.length
+        val = args[idx].to_s
+        before = $~.pre_match
+        mid_sentence = !before.strip.empty? && before !~ /[.!?…]\s*\z/
+        (mid_sentence && val.start_with?("The ")) ? "the " + val[4..] : val
+      end
     end
 
     def self.difficulty

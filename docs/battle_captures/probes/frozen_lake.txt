@@ -1,0 +1,260 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for FROZEN_LAKE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+FROZEN_LAKE probe: boosted move ICEBEAM (on field)
+==================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Ice Beam!
+  The frozen lake chilled the attack!
+    HP Snorlax (foe): 461 -> 411 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 411/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FROZEN_LAKE probe: boosted move ICEBEAM (baseline, no field)
+============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Ice Beam!
+    HP Snorlax (foe): 461 -> 428 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 428/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FROZEN_LAKE probe: transition [stage 1: condition proc x3 -> WATER_SURFACE] using FLAMETHROWER, FLAMETHROWER, FLAMETHROWER
+==========================================================================================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 396 / 461
+  The lake ice groaned and cracked! (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 396 -> 326 / 461
+  The lake ice groaned and cracked! (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 326/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 326 -> 256 / 461
+## FIELD CHANGE: FROZEN_LAKE -> WATER_SURFACE
+  The ice gave way! The battle plunged into the freezing lake!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 256/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 256/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+FROZEN_LAKE probe: transition [stage 1: types ICE, category damaging rewinds {:crack=>1}] using FLAMETHROWER, ICEBEAM
+=====================================================================================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 428 / 461
+  The lake ice groaned and cracked! (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 428/461]
+  Mew used Ice Beam!
+  The frozen lake chilled the attack!
+    HP Snorlax (foe): 428 -> 375 / 461
+  The cold sealed the cracks in the ice!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 375/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 375/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FROZEN_LAKE probe: transition [stage 1: weather Sun/HarshSun -> WATER_SURFACE] using SUNNYDAY
+=============================================================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD CHANGE: FROZEN_LAKE -> WATER_SURFACE
+  The sunlight melted the lake ice into open water!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FROZEN_LAKE probe: Elemental Seed held on entry
+===============================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+    (anim: UseItem)
+  Mew's Elemental Seed encased it in a skin of frost!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Mew's Speed rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FROZEN_LAKE probe: end-of-round rule 1: heal on {:abilities=>[:ICEBODY]} +condition [subject Florges]
+=====================================================================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [ICEBODY]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges drew strength from the ice.
+    HP Florges (player): 148 -> 167 / 297
+
+--- Turn 2 ---
+  [Florges 167/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges drew strength from the ice.
+    HP Florges (player): 167 -> 186 / 297
+
+--- Turn 3 ---
+  [Florges 186/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

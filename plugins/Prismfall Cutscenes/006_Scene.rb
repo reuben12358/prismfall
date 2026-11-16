@@ -385,7 +385,14 @@ module Prismfall
 
       # A proc returning a world point; follows actors, fixed otherwise.
       def anchor(spec)
-        return proc { point(spec) } if (spec.is_a?(Symbol) && @actors[spec]) || spec.is_a?(Hash)
+        if (spec.is_a?(Symbol) && @actors[spec]) || spec.is_a?(Hash)
+          last = point(spec)
+          return proc do      # keeps the last position if the actor leaves the stage
+            id = (spec.is_a?(Hash)) ? spec[:actor] : spec
+            last = point(spec) if @actors[id]
+            last
+          end
+        end
         fixed = point(spec)
         return proc { fixed }
       end
@@ -445,6 +452,14 @@ module Prismfall
         act.dispose if act
         att = @attached.delete(a[:id])
         att.dispose if att
+        nil
+      end
+
+      def op_clear_actors(_a, _dur)
+        @attached.each_value(&:dispose)
+        @attached.clear
+        @actors.each_value(&:dispose)
+        @actors.clear
         nil
       end
 

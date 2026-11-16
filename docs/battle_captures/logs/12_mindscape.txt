@@ -1,0 +1,181 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
+================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  You are challenged by Warden Ilsa!
+  Warden Ilsa sent out Bronzong!
+    >> sent out (foe): Bronzong Lv.57 @MENTALHERB [LEVITATE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.59 @MAGICALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+    (anim: UseItem)
+  Garchomp's Magical Seed flooded its mind with thoughts!
+    (anim: Confusion)
+  Garchomp became confused!
+    (anim: StatUp)
+  Garchomp's Special Attack rose sharply!
+
+--- Turn 1 ---
+  [Garchomp 214/214 | Bronzong 171/171]
+    (anim: Confusion)
+  Garchomp is confused!
+  Garchomp used Fire Fang!
+    HP Bronzong (foe): 171 -> 113 / 171
+  It's super effective!
+  The opposing Bronzong used Stealth Rock!
+  Pointed stones float in the air around your team!
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 214/214 | Bronzong 113/171]
+    (anim: Confusion)
+  Garchomp is confused!
+    HP Garchomp (player): 214 -> 186 / 214
+  It hurt itself in its confusion!
+  The opposing Bronzong used Trick Room!
+  The opposing Bronzong twisted the dimensions!
+  The Mindscape folded the dimensions in on themselves!
+  (end of round)
+
+--- Turn 3 ---
+  [Garchomp 186/214 | Bronzong 113/171]
+  The opposing Bronzong used Extrasensory!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 186 -> 77 / 214
+    (anim: Confusion)
+  Garchomp is confused!
+  Garchomp used Fire Fang!
+    HP Bronzong (foe): 113 -> 50 / 171
+  It's super effective!
+  (end of round)
+
+--- Turn 4 ---
+  [Garchomp 77/214 | Bronzong 50/171]
+  The opposing Bronzong used Extrasensory!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 77 -> 0 / 214
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Just a little more! Hang in there, Magnezone!
+    >> sent out (player): Magnezone Lv.59 [MAGNETPULL]
+    HP Magnezone (player): 169 -> 158 / 169
+  Pointed stones dug into Magnezone!
+
+--- Turn 5 ---
+  [Magnezone 158/169 | Bronzong 50/171]
+  The opposing Bronzong used Extrasensory!
+  The Mindscape amplified the thought!
+    HP Magnezone (player): 158 -> 109 / 169
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Bronzong (foe): 50 -> 0 / 171
+  The opposing Bronzong fainted!
+    xx fainted: Bronzong (foe)
+  Magnezone is at the level cap (Lv. 59) and can't gain Exp. Points.
+  (end of round)
+  Warden Ilsa is about to send out Reuniclus. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Reuniclus!
+    >> sent out (foe): Reuniclus Lv.58 @LIFEORB [MAGICGUARD]
+
+--- Turn 6 ---
+  [Magnezone 109/169 | Reuniclus 224/224]
+  The opposing Reuniclus used Focus Blast!
+  The opposing Reuniclus's attack missed!
+  Magnezone used Flash Cannon!
+    HP Reuniclus (foe): 224 -> 141 / 224
+  (end of round)
+
+--- Turn 7 ---
+  [Magnezone 109/169 | Reuniclus 141/224]
+  The opposing Reuniclus used Focus Blast!
+    HP Magnezone (player): 109 -> 0 / 169
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.59 [ILLUMINATE]
+    HP Starmie (player): 158 -> 138 / 158
+  Pointed stones dug into Starmie!
+
+--- Turn 8 ---
+  [Starmie 138/158 | Reuniclus 141/224]
+  The opposing Reuniclus used Shadow Ball!
+    HP Starmie (player): 138 -> 0 / 158
+  It's super effective!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  The twisted dimensions returned to normal!
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.59 [STEADFAST]
+    HP Lucario (player): 169 -> 164 / 169
+  Pointed stones dug into Lucario!
+
+--- Turn 9 ---
+  [Lucario 164/169 | Reuniclus 141/224]
+  Lucario used Flash Cannon!
+    HP Reuniclus (foe): 141 -> 73 / 224
+  The opposing Reuniclus used Psychic!
+  The Mindscape amplified the thought!
+    HP Lucario (player): 164 -> 0 / 169
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  Just a little more! Hang in there, Togekiss!
+    >> sent out (player): Togekiss Lv.59 [SERENEGRACE]
+    HP Togekiss (player): 187 -> 140 / 187
+  Pointed stones dug into Togekiss!
+
+--- Turn 10 ---
+  [Togekiss 140/187 | Reuniclus 73/224]
+  Togekiss used Air Slash!
+    HP Reuniclus (foe): 73 -> 10 / 224
+  The opposing Reuniclus used Psychic!
+  The Mindscape amplified the thought!
+    HP Togekiss (player): 140 -> 0 / 187
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  (end of round)
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.59 [BLAZE]
+    HP Charizard (player): 179 -> 89 / 179
+  Pointed stones dug into Charizard!
+
+--- Turn 11 ---
+  [Charizard 89/179 | Reuniclus 10/224]
+  Warden Ilsa used a Full Restore.
+    HP Reuniclus (foe): 10 -> 224 / 224
+  The opposing Reuniclus's HP was restored.
+  Charizard used Air Slash!
+    HP Reuniclus (foe): 224 -> 167 / 224
+  (end of round)
+
+--- Turn 12 ---
+  [Charizard 89/179 | Reuniclus 167/224]
+  Charizard used Air Slash!
+    HP Reuniclus (foe): 167 -> 106 / 224
+  The opposing Reuniclus flinched and couldn't move!
+  (end of round)
+
+--- Turn 13 ---
+  [Charizard 89/179 | Reuniclus 106/224]
+  Charizard used Air Slash!
+    HP Reuniclus (foe): 106 -> 45 / 224
+  The opposing Reuniclus used Psychic!
+  The Mindscape amplified the thought!
+    HP Charizard (player): 89 -> 0 / 179
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Ilsa!
+  You gave $1,244 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 12 turn(s)

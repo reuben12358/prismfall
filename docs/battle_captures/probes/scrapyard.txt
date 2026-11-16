@@ -1,0 +1,149 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for SCRAPYARD: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+SCRAPYARD probe: boosted move FLASHCANNON (on field)
+====================================================
+
+--- Battle start ---
+  field: SCRAPYARD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SCRAPYARD
+  Jagged scrap and leaking chemicals litter the ground...
+    HP Mew (player): 341 -> 320 / 341
+  Mew was cut by jagged scrap!
+    HP Snorlax (foe): 461 -> 432 / 461
+  The wild Snorlax was cut by jagged scrap!
+
+--- Turn 1 ---
+  [Mew 320/341 | Snorlax 432/461]
+  Mew used Flash Cannon!
+    HP Snorlax (foe): 432 -> 361 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 320/341 | Snorlax 361/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SCRAPYARD probe: boosted move FLASHCANNON (baseline, no field)
+==============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash Cannon!
+    HP Snorlax (foe): 461 -> 402 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 402/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SCRAPYARD probe: Synthetic Seed held on entry
+=============================================
+
+--- Battle start ---
+  field: SCRAPYARD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SCRAPYARD
+  Jagged scrap and leaking chemicals litter the ground...
+    HP Mew (player): 170 -> 149 / 341
+  Mew was cut by jagged scrap!
+    (anim: UseItem)
+  Mew's Synthetic Seed bolted scrap armor onto it!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Mew's Special Defense rose!
+  Mew's Speed fell!
+    HP Snorlax (foe): 461 -> 432 / 461
+  The wild Snorlax was cut by jagged scrap!
+
+--- Turn 1 ---
+  [Mew 149/341 | Snorlax 432/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 149/341 | Snorlax 432/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SCRAPYARD probe: end-of-round rule 1: damage on {:types=>[:STEEL]} +condition [subject Klinklang, after RAINDANCE]
+==================================================================================================================
+
+--- Battle start ---
+  field: SCRAPYARD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Klinklang!
+    >> sent out (player): Klinklang Lv.100 [MINUS]
+## FIELD CHANGE: NONE -> SCRAPYARD
+  Jagged scrap and leaking chemicals litter the ground...
+    HP Klinklang (player): 130 -> 122 / 261
+  Klinklang was cut by jagged scrap!
+    HP Snorlax (foe): 230 -> 201 / 461
+  The wild Snorlax was cut by jagged scrap!
+
+--- Turn 1 ---
+  [Klinklang 122/261 | Snorlax 201/461]
+  Klinklang used Rain Dance!
+  It started to rain!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Klinklang (player): 122 -> 106 / 261
+  Klinklang is rusting in the rain!
+
+--- Turn 2 ---
+  [Klinklang 106/261 | Snorlax 201/461]
+  Klinklang used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Klinklang (player): 106 -> 90 / 261
+  Klinklang is rusting in the rain!
+
+--- Turn 3 ---
+  [Klinklang 90/261 | Snorlax 201/461]
+  Klinklang used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Klinklang (player): 90 -> 74 / 261
+  Klinklang is rusting in the rain!
+
+--- Turn 4 ---
+  [Klinklang 74/261 | Snorlax 201/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)

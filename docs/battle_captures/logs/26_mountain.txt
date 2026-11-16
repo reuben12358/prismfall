@@ -1,0 +1,100 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
+===========================================================
+
+--- Battle start ---
+  field: MOUNTAIN | weather: None | terrain: None
+  You are challenged by Black Belt Taro!
+  Black Belt Taro sent out Machop!
+    >> sent out (foe): Machop Lv.15 [GUTS]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.16 @ELEMENTALSEED [INTIMIDATE]
+## FIELD CHANGE: NONE -> MOUNTAIN
+  The wind howls across the mountain ridge!
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Machop's Attack fell!
+    (anim: UseItem)
+  Growlithe's Elemental Seed caught the mountain wind!
+    (anim: StatUp)
+  Growlithe's Speed rose!
+  The Tailwind blew from behind your team!
+
+--- Turn 1 ---
+  [Growlithe 48/48 | Machop 47/47]
+  Growlithe used Bite!
+    HP Machop (foe): 47 -> 40 / 47
+  It's not very effective...
+  The opposing Machop flinched and couldn't move!
+  (end of round)
+
+--- Turn 2 ---
+  [Growlithe 48/48 | Machop 40/47]
+  Growlithe used Bite!
+    HP Machop (foe): 40 -> 33 / 47
+  It's not very effective...
+  The opposing Machop used Focus Energy!
+  The opposing Machop is getting pumped!
+  (end of round)
+
+--- Turn 3 ---
+  [Growlithe 48/48 | Machop 33/47]
+  Growlithe used Ember!
+    HP Machop (foe): 33 -> 12 / 47
+  The opposing Machop used Leer!
+    (anim: StatDown)
+  Growlithe's Defense fell!
+  (end of round)
+
+--- Turn 4 ---
+  [Growlithe 48/48 | Machop 12/47]
+  Growlithe used Flame Wheel!
+    HP Machop (foe): 12 -> 0 / 47
+  The opposing Machop fainted!
+    xx fainted: Machop (foe)
+  Growlithe got 173 Exp. Points!
+  (end of round)
+  Your team's Tailwind petered out!
+  Black Belt Taro is about to send out Timburr. Will you switch your Pokémon?  [auto: No]
+  Black Belt Taro sent out Timburr!
+    >> sent out (foe): Timburr Lv.16 [GUTS]
+
+--- Turn 5 ---
+  [Growlithe 48/48 | Timburr 52/52]
+  Growlithe used Ember!
+    HP Timburr (foe): 52 -> 33 / 52
+  The opposing Timburr used Rock Throw!
+  Boulders tumbled down the mountainside!
+    HP Growlithe (player): 48 -> 0 / 48
+  It's super effective!
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
+  (end of round)
+  Go for it, Machop!
+    >> sent out (player): Machop Lv.16 [GUTS]
+
+--- Turn 6 ---
+  [Machop 53/53 | Timburr 33/52]
+  The opposing Timburr used Rock Throw!
+  The opposing Timburr's attack missed!
+  Machop used Revenge!
+    HP Timburr (foe): 33 -> 12 / 52
+  (end of round)
+
+--- Turn 7 ---
+  [Machop 53/53 | Timburr 12/52]
+  The opposing Timburr used Low Kick!
+    HP Machop (player): 53 -> 40 / 53
+  Machop used Revenge!
+    HP Timburr (foe): 12 -> 0 / 52
+  The opposing Timburr fainted!
+    xx fainted: Timburr (foe)
+  Machop got 196 Exp. Points!
+  You defeated Black Belt Taro!
+  Hah! My fists need more salt-mine training.
+  You got $512 for winning!
+  battle result code: 1
+  
+RESULT: player won after 6 turn(s)

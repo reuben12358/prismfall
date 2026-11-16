@@ -1,0 +1,338 @@
+# Prismfall Cutscenes - self-test suite (run through harness.ruby_stub).
+require "tmpdir"
+require "fileutils"
+$fails = []
+$checks = 0
+def check(name, cond, detail = nil)
+  $checks += 1
+  return if cond
+  $fails.push("#{name}#{detail ? " (#{detail})" : ''}")
+  puts "  FAIL #{name} #{detail}"
+end
+def section(name); puts "== #{name}"; end
+CS = nil
+
+# Core's real Festival data (MATCH_RULES) is used when it loads standalone.
+begin
+  load File.join(GAME_DIR, "plugins/Prismfall Core/008_Festival_Data.rb")
+  load File.join(GAME_DIR, "plugins/Prismfall Core/015_Festival_Draw.rb")
+rescue StandardError, ScriptError => e
+  puts "(Core Festival files only partly loadable standalone: #{e.class}; MATCH_RULES #{defined?(Prismfall::Festival::MATCH_RULES) ? "available" : "missing"})"
+end
+load_plugin
+C = Prismfall::Cutscene
+C.raise_errors = true
+
+section "meta + load"
+meta = File.read(File.join(PLUGIN_DIR, "meta.txt"))
+check "meta name", meta =~ /^Name\s*=\s*Prismfall Cutscenes$/
+check "meta version", meta =~ /^Version\s*=\s*1\.0\.0$/
+check "meta essentials", meta =~ /^Essentials\s*=\s*21\.1$/
+check "meta optional core", meta =~ /^Optional\s*=\s*Prismfall Core,1\.0\.0$/
+check "selftest files are not plugin scripts", Dir[File.join(PLUGIN_DIR, "selftest", "*")].none? { |f| f.sub(PLUGIN_DIR, "").include?(".rb") }
+check "scenes registered", [:WAR_CLIMAX, :WAR_CLIMAX_DEMO].all? { |i| C.exists?(i) }
+
+section "authoring errors are caught at define time"
+err = (C.define(:BAD1) { move :ghost, to: [0, 0] } rescue $!)
+check "unknown actor", err.is_a?(ArgumentError), err.inspect
+err = (C.define(:BAD2) { teleport :x } rescue $!)
+check "unknown command", err.is_a?(NoMethodError), err.class
+err = (C.define(:BAD3) { actor :a, species: :PIKACHU; beam_clash a: :a, b: :a, winner: :nobody } rescue $!)
+check "bad clash winner", err.is_a?(ArgumentError)
+
+section "timing model"
+d = C.build { actor :a, species: :PIKACHU; move :a, by: [10, 0], duration: 2; text "hi", duration: 1.5; together { wait 1; text "x", duration: 3 }; wait 0.5 }
+check "tweens do not block, showpieces do", (d.length - 6.0).abs < 1e-6, d.length
+d = C.build { actor :a, species: :PIKACHU; move :a, by: [1, 0], duration: 2, wait: true; text "a", duration: 1, wait: false; at(10) { text "late", duration: 1 } }
+check "wait: overrides + at()", (d.length - 11.0).abs < 1e-6, d.length
+
+warm = run_scene(:WAR_CLIMAX_DEMO)   # fills the placeholder caches
+section "example scenes at several frame rates (no assets)"
+base_len = { :WAR_CLIMAX_DEMO => C.build(:WAR_CLIMAX_DEMO).length, :HL => C.play_sample_highlight(play: false).length }
+[[20, {}], [40, {}], [60, {}], [144, {}], [40, { :jitter => true }], [60, { :hitch => true }]].each do |fps, extra|
+  $opt[:fps] = fps.to_f
+  $opt[:jitter] = extra[:jitter]
+  $opt[:hitch] = extra[:hitch]
+  r = run_scene(:WAR_CLIMAX_DEMO)
+  want = base_len[:WAR_CLIMAX_DEMO] + 0.3      # + fade back to the map
+  # lag spikes are clamped to MAX_DT: the scene runs long instead of dropping content
+  timed = (extra[:hitch]) ? r[:seconds] >= want - 0.8 : (r[:seconds] - want).abs < 0.8
+  check "war demo @#{fps}#{extra.keys.join}", r[:ok] && r[:leaks].empty? && timed, r.inspect + " want #{want.round(2)}"
+  r = run_scene(proc { C.play_sample_highlight })
+  want = base_len[:HL] + 0.3
+  timed = (extra[:hitch]) ? r[:seconds] >= want - 0.8 : (r[:seconds] - want).abs < 0.8
+  check "highlight @#{fps}#{extra.keys.join}", r[:ok] && r[:leaks].empty? && timed, r.inspect
+end
+$opt[:fps] = 40.0
+$opt[:jitter] = $opt[:hitch] = nil
+puts "  war demo length #{base_len[:WAR_CLIMAX_DEMO].round(1)} s, sample highlight #{base_len[:HL].round(1)} s"
+
+section "war climax variants"
+[[:A, true], [:A2, true], [:B, true], [:C, true], [:A, false], [:B, false]].each do |v, legends|
+  r = run_scene(:WAR_CLIMAX, variant: v, legends: legends)
+  check "WAR_CLIMAX #{v} legends=#{legends}", r[:ok] && r[:leaks].empty?, r.inspect
+  cues = $audio.select { |a| a[0] == :bgm }.map { |a| a[1] }
+  check "audio order #{v}", cues == ["War - Battlefield", "War - Beam Clash", "War - Aftermath"], cues.inspect
+  check "bgm restored #{v}", $audio.first == [:memorize] && $audio.include?([:restore])
+end
+check "clash result recorded", [:fizzle, :both].include?(C.result(:clash_winner)), C.result(:clash_winner).inspect
+
+section "with real EBDX assets"
+$opt[:assets] = true
+r = run_scene(:WAR_CLIMAX, variant: :A)
+r2 = run_scene(:WAR_CLIMAX, variant: :A)
+check "war with assets", r[:ok] && r2[:leaks].empty?, r2.inspect
+puts "  fill_rects per frame: max #{r2[:max_fills]}, mean #{r2[:avg_fills]}"
+r = run_scene(proc { C.play_sample_highlight })
+check "highlight with assets", r[:ok] && r[:leaks].empty?, r.inspect
+$opt[:assets] = false
+
+section "missing audio is silent"
+$opt[:audio] = false
+r = run_scene(proc { C.play_sample_highlight })
+check "no audio files", r[:ok] && $audio.none? { |a| [:bgm, :se, :me].include?(a[0]) }, $audio.first(3).inspect
+$opt[:audio] = nil
+
+section "skip (hold BACK)"
+$input_press = proc { |b| b == Input::BACK && $clock > 3.0 }
+r = run_scene(:WAR_CLIMAX_DEMO)
+$input_press = nil
+check "skipped early", r[:ok] == false && C.skipped? && r[:seconds] < 5.5 && r[:leaks].empty?, r.inspect
+C.define(:NOSKIP, skippable: false) { background :color, color: [0, 0, 0]; wait 2 }
+$input_press = proc { |b| true }
+r = run_scene(:NOSKIP)
+$input_press = nil
+check "skippable: false", r[:ok] == true && r[:seconds] > 2.0, r.inspect
+
+section "mash-driven clash"
+C.define(:MASH) do
+  background :sea
+  actor :l, species: :SQUIRTLE, at: [90, 300], flip: true
+  actor :r, species: :CHARMANDER, at: [420, 300]
+  beam_clash a: :l, b: :r, duration: 4, winner: :mash, curve: [[0, 0.5], [1, 0.4]], player: :a
+end
+r = run_scene(:MASH)
+check "no mashing loses", r[:ok] && C.result(:clash_winner) == :b, C.result(:clash_winner).inspect
+n = 0
+$input_trigger = proc { |b| b == Input::USE && ((n += 1) % 4 == 0) }
+r = run_scene(:MASH)
+$input_trigger = nil
+check "mashing wins", r[:ok] && C.result(:clash_winner) == :a, C.result(:clash_winner).inspect
+[:a, :b, :both, :fizzle].each do |w|
+  C.define(:"W_#{w}") do
+    background :battlefield, palette: :scorched
+    actor :l, species: :SQUIRTLE, at: [90, 300], flip: true
+    actor :r, species: :CHARMANDER, at: [420, 260]
+    beam_clash a: { from: :l, color: :water }, b: { from: :r, color: [255, 80, 40] }, duration: 3, winner: w
+  end
+  r = run_scene(:"W_#{w}")
+  check "clash winner #{w}", r[:ok] && C.result(:clash_winner) == w && r[:leaks].empty?, r.inspect
+end
+
+section "every primitive in one scene"
+C.define(:KITCHEN_SINK) do
+  background :sky, palette: :night
+  background :gradient, colors: [[0, 0, 0], [40, 40, 80]], y: 100, height: 60, parallax: 0.2
+  background :mountains, snow: true
+  background :sea, palette: :storm
+  background :battlefield, palette: :snow, horizon: 300
+  background :arena, tint: :grass
+  background :fleet, x: 40
+  background :fortress, x: 300, glow: [255, 200, 80]
+  background image: "Graphics/Missing/nope"
+  actor :p, species: :PIKACHU, at: [100, 300], back: true, shiny: true, scale: 2, silhouette: true
+  actor :t, trainer: :LEADER_ANJA, at: [200, 300], tint: [255, 0, 0, 90]
+  actor :c, charset: "NPC 01", at: [300, 300], dir: :left, walk: true
+  actor :i, icon: :EEVEE, at: [360, 300]
+  actor :pl, player: true, at: [400, 300]
+  actor :pr, prop: :banner, at: [440, 300]
+  actor :img, image: "Graphics/Missing/nope", at: [480, 300]
+  army :x, count: 7, color: [90, 200, 90]
+  army :y, icons: [:ZUBAT], count: 5, area: [300, 250, 150, 40], facing: :left
+  letterbox true
+  together do
+    move :p, to: :t, duration: 1, arc: 30, ease: :out_bounce
+    scale :t, to: 2, duration: 1
+    rotate :c, by: 360, duration: 1
+    fade :i, to: 0, duration: 1
+    tint :pl, color: :fire, amount: 255, duration: 1
+    pan to: :t, zoom: 1.5, duration: 1
+    tone to: [40, 0, -40, 80], duration: 1
+    shake power: 8, duration: 1
+    flash color: [255, 0, 0], duration: 1
+    march :x, by: [60, 0], duration: 1
+    overlay :burning, level: 1.0, duration: 1
+    overlay :freezing, level: 1.0, duration: 1
+    hp_bar :p, value: 0.1, duration: 1
+    dome at: :t, radius: 200, duration: 1
+    wait 1
+  end
+  [:embers, :snow, :rain, :debris, :sparks, :smoke, :steam, :ice_shards, :petals, :motes].each do |k|
+    emit k, rate: 40, duration: 0.5
+    emit k, at: :p, rate: 40, duration: 0.5, layer: :back, id: :"e_#{k}"
+    burst k, at: [256, 200], count: 8, color: :dragon
+  end
+  overlay :freezing, level: 0.2, duration: 0.3
+  flip :p; face :c, :up; hop :p; tremble :t; hit :p, dir: 1
+  zoom to: 1.0, duration: 0.3
+  lunge :p, toward: :t
+  charge_up at: :p, color: :electric
+  beam from: :p, to: :y, color: :electric
+  beam from: [10, 10], to: [500, 370], color: :ghost, duration: 0.6
+  beam from: [256, 40], to: [250, 370], color: :grass, duration: 0.6
+  impact at: :t, color: :fire, shake: 4
+  ring at: [256, 300], radius: 120
+  volley from: :x, to: :y, kind: :arrow, count: 9, casualties: 0.5, shake: true
+  volley from: [0, 0, 100, 10], to: :t, kind: :ice, duration: 0.8
+  clash_armies :x, :y, duration: 2
+  army_tint :x, color: :bleed
+  army_fall :y, fraction: 1.0
+  rout :x, duration: 0.5
+  text "Top", position: :top, duration: 0.6
+  text "A long centred caption that has to wrap over more than one line to fit the screen width.", position: :center, duration: 0.8
+  say "Speaker", "Line.", duration: 0.8
+  title "TITLE", sub: "sub", duration: 0.8
+  vs_card a: { name: "A", trainer: :LEADER_ANJA, team: [:EEVEE, :PIKACHU] }, b: { name: "B", trainer: :X }, duration: 1.2
+  bgm "Some BGM"; bgs "Rain"; se "x"; me "y"; cry :PIKACHU; bgm_fade 0.2; bgs_fade 0.2
+  cut at: [100, 100], zoom: 2
+  camera at: :p, zoom: 1
+  dome hole_at: :p, hole: 30, duration: 0.2
+  dome off: true
+  stop_emit :e_snow
+  stop_emit
+  faint :p
+  remove :t
+  clear_backgrounds
+  clear_actors
+  call { |scene| scene.results[:called] = true }
+  fade_out duration: 0.2
+  fade_in duration: 0.2
+  letterbox false
+end
+[false, true].each do |assets|
+  $opt[:assets] = assets
+  r = run_scene(:KITCHEN_SINK)
+  r = run_scene(:KITCHEN_SINK)
+  check "kitchen sink assets=#{assets}", r[:ok] && r[:leaks].empty? && C.result(:called), r.inspect
+end
+$opt[:assets] = false
+
+section "a broken scene never softlocks"
+C.define(:BROKEN) { background :sea; wait 0.5; call { |_s| raise "boom" }; wait 1 }
+C.raise_errors = false
+before = $live.dup
+ok = C.play(:BROKEN)
+check "error -> false, cleaned up", ok == false && $live == before && !C.playing?, [$live, before].inspect
+C.raise_errors = true
+
+section "Core's match_highlight call (positional hashes + MATCH_RULES rows)"
+info = proc { |id| { :id => id, :name => id.to_s.capitalize, :trainer_type => :"LEADER_#{id}" } }
+rules = (defined?(Prismfall::Festival::MATCH_RULES)) ? Prismfall::Festival::MATCH_RULES : nil
+puts "  using #{rules ? "Core's #{rules.length} MATCH_RULES" : 'built-in sample rows (Core data not loadable standalone)'}"
+rules ||= [{ :pair => [:ANJA, :BRANN], :winner => :ANJA, :moments => [[:BRANN, :COALOSSAL, :send_out, "a"], [:ANJA, :MAMOSWINE, :beam_clash, "b"], [:BRANN, :COALOSSAL, :faint, "c"]] }]
+events = []
+rules.each_with_index do |rule, i|
+  a, b = rule[:pair]
+  d = C.match_highlight(info.call(a), info.call(b), info.call(rule[:winner]), rule[:moments], play: false)
+  events.concat(rule[:moments].map { |m| m[2] })
+  check "rule #{i} #{a} v #{b} length 15-30s", d.is_a?(C::Definition) && d.length >= 15.0 && d.length <= 30.0, d.length.round(1)
+  next if i % 3 != 0
+  r = run_scene(proc { C.match_highlight(info.call(a), info.call(b), info.call(rule[:winner]), rule[:moments]) })
+  check "rule #{i} plays", r[:ok] && r[:leaks].empty?, r.inspect
+end
+puts "  events covered by Core data: #{events.uniq.join(' ')}"
+all = C::Highlight::EVENTS - [:exchange, :clutch, :walk_off]
+rows = all.map { |e| [:ANJA, :MAMOSWINE, e, "Caption for #{e}."] }
+all.each_slice(3).each_with_index do |evs, i|
+  r = run_scene(proc { C.match_highlight(info.call(:ANJA), info.call(:BRANN), info.call(:BRANN), evs.map { |e| [(e == :faint) ? :ANJA : :BRANN, :ARCANINE, e, "Caption #{e}"] }) })
+  check "event templates #{evs.join('/')}", r[:ok] && r[:leaks].empty?, r.inspect
+end
+d = C.match_highlight(info.call(:ANJA), info.call(:BRANN), info.call(:BRANN), rows, play: false)
+check "too many moments trimmed to <= 30s", d.length <= 30.0, d.length
+section "keyword / template forms"
+[[:opening, :super_effective, :final_blow, :walk_off], [:clutch, :beam_clash], nil, [:final_blow]].each do |m|
+  r = run_scene(proc { C.match_highlight([:LEADER_TAMSIN, "Tamsin", 0], { :name => "Nobody", :team => [:GARCHOMP, :MILOTIC] }, winner: :b, moments: m) })
+  d = C.match_highlight([:LEADER_TAMSIN, "Tamsin", 0], { :name => "Nobody", :team => [:GARCHOMP, :MILOTIC] }, winner: :b, moments: m, play: false)
+  check "templates #{m.inspect}", r[:ok] && r[:leaks].empty? && d.length.between?(15.0, 30.0), [r, d.length].inspect
+end
+t = C::Highlight.trainer_info([:LEADER_TAMSIN, "Tamsin", 0])
+check "team read from pbs/trainers.txt", t[:team].first == :JOLTIK, t[:team].inspect
+$messages = []
+check "offer hook asks first", C.offer_festival_highlight(info.call(:ANJA), info.call(:BRANN), :ANJA) == true && $messages.include?("Watch the highlights?")
+
+section "portrait speech bubbles"
+P = Prismfall::Portrait
+$game_map.events = { 1 => EventStub.new("Martin", 200, 220), 2 => EventStub.new("Sign", 400, 120), 3 => EventStub.new("Edge", 500, 20), 4 => EventStub.new("Far", 2000, 900) }
+text, spec = P.extract("\\pf[MARTIN,crying]MARTIN: Waaah!")
+check "tag parsed", text == "MARTIN: Waaah!" && spec == { :id => :MARTIN, :expression => :crying, :emotes => nil, :event => nil }, [text, spec].inspect
+text, spec = P.extract("[portrait: Martin, Smug] Obviously.")
+check "story tag parsed", text == "Obviously." && spec[:id] == :MARTIN && spec[:expression] == :smug, [text, spec].inspect
+text, spec = P.extract("\\PF[martin, shocked, sweat+exclaim, 3]Hi")
+check "emotes + event", spec[:emotes] == [:sweat, :exclaim] && spec[:event] == 3, spec.inspect
+check "no tag untouched", P.extract("Plain \\c[2]text") == ["Plain \\c[2]text", nil]
+seen = []
+P.singleton_class.send(:alias_method, :open_real, :open)
+P.define_singleton_method(:open) { |sp, win = nil| b = open_real(sp, win); seen.push(b); b }
+before = $live.dup
+$shown = []
+pbMessage("\\pf[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!")
+b = seen.last
+check "bubble opened, text cleaned, closed", b && $shown.last == "MARTIN: I LEFT THE OVEN ON!" && P.current.nil? && $live == before, [$shown.last, $live, before].inspect
+check "anchored above the named event", b && (b.center[0] - 200).abs <= 2 && b.center[1] < 180, b && b.center.inspect
+check "silhouette fallback + face emotes", b && b.art_kind == :silhouette && b.emotes == [:sweat, :tears], b && [b.art_kind, b.emotes].inspect
+$shown = []
+pbMessage("Just text.")
+check "plain message passes through", $shown.last == "Just text." && seen.length == 1
+pf_say(:NOBODY, :deadpan, "Hm.")
+# event 2 stands near the top edge, so the bubble sits beside it instead of over it
+check "pf_say falls back to the running event", $shown.last == "Nobody: Hm." && (seen.last.center[0] - 400).abs.between?(60, 110), [$shown.last, seen.last.center].inspect
+pf_say(:MARTIN, :panic, "Edge!", event: 3, emote: [:question, :anger], name: false)
+c = seen.last.center
+check "clamped on screen, emote override", $shown.last == "Edge!" && c[0] <= 512 - 54 && c[1] >= 54 && seen.last.emotes == [:question, :anger], [c, seen.last.emotes].inspect
+pf_say(:MARTIN, :happy, "Off-screen speaker", event: 4)
+check "off-screen speaker -> above the box", seen.last.center[1] < $msg_y && seen.last.center[0] < 120, seen.last.center.inspect
+$msg_y = 0
+pf_say(:PLAYER, :sad, "Top box")
+check "message box at top", seen.last.center[1] > 96, seen.last.center.inspect
+$msg_y = 288
+$game_player = Struct.new(:character_name, :screen_x, :screen_y).new("x", 256, 192)
+P::EXPRESSIONS.each_key { |e| pf_say(:PLAYER, e, "x", emote: P::EMOTES) }
+P::EXPRESSIONS.each_key { |e| pf_say(:MARTIN, e, "x") }
+pf_say(:MARTIN, :not_an_expression, "x", emote: :not_an_emote)
+check "all expressions x all emotes, no leaks", $live == before && seen.length == 26, [seen.length, $live].inspect
+$opt[:assets] = true
+P.register(:MARTIN, name: "Martin", trainer: :LEADER_MARTIN, color: [200, 60, 60])
+pf_say(:MARTIN, :angry, "With a trainer sprite.")
+check "trainer-sprite head crop", seen.last.art_kind == :sprite && $shown.last.start_with?("Martin: "), seen.last.art_kind
+tmp = Dir.mktmpdir("pf_portraits")
+FileUtils.mkdir_p(File.join(tmp, "Graphics/Portraits"))
+system("convert", "-size", "96x96", "xc:orange", File.join(tmp, "Graphics/Portraits/MARTIN_crying.png"))
+system("convert", "-size", "48x48", "xc:teal", File.join(tmp, "Graphics/Portraits/MARTIN.png"))
+Object.send(:remove_const, :ASSET_DIR)
+ASSET_DIR = tmp
+pf_say(:MARTIN, :crying, "x")
+k1 = [seen.last.art_kind, seen.last.emotes]
+pf_say(:MARTIN, :smug, "x")
+k2 = seen.last.art_kind
+check "NAME_expression.png then NAME.png", k1 == [:expression, [:sweat]] && k2 == :base, [k1, k2].inspect
+FileUtils.rm_rf(tmp)
+$opt[:assets] = false
+check "portraits leave nothing behind", $live == before, [$live, before].inspect
+
+section "debug menu"
+h = MenuHandlers::HANDLERS[:debug_menu] || {}
+ids = [:prismfall_cutscenes_menu, :prismfall_cutscenes_war, :prismfall_cutscenes_war_demo, :prismfall_cutscenes_highlight,
+       :prismfall_cutscenes_highlight_auto, :prismfall_cutscenes_any, :prismfall_cutscenes_portraits]
+check "entries registered", ids.all? { |i| h[i] && h[i]["name"] && h[i]["parent"] }, (ids - h.keys).inspect
+$msg_frames = 2
+$menu_choice = 1
+ids[1..-1].each do |i|
+  $menu_choice = (i == :prismfall_cutscenes_any) ? C.ids.index(:NOSKIP) : 1
+  r = (h[i]["effect"].call; true) rescue $!
+  check "debug effect #{i}", r == true, r.inspect
+end
+
+puts
+puts "#{$checks} checks, #{$fails.length} failed. Frames simulated: #{$stats[:frames]}, fill_rects: #{$stats[:fill]}, sprites: #{$stats[:sprites]}, bitmaps: #{$stats[:bitmaps]}"
+puts "Live objects at exit: #{$live.inspect} (bitmaps = cached placeholder charsets)"
+exit(($fails.empty?) ? 0 : 1)

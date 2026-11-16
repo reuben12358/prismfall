@@ -129,6 +129,22 @@ MapPosition = 0,10,25
 Name = Pageant Hall
 MapPosition = 0,10,25
 #-------------------------------
+[146]   # Saltmere - Harbour & Breakwater
+Name = Saltmere Harbour
+Outdoor = true
+ShowArea = true
+MapPosition = 0,10,25
+BattleBack = field
+Weather = Rain,10
+#-------------------------------
+[147]   # Saltmere - Old Town
+Name = Saltmere Old Town
+Outdoor = true
+ShowArea = true
+MapPosition = 0,10,25
+BattleBack = field
+Weather = Rain,10
+#-------------------------------
 [150]   # Pell Playhouse - Foyer
 Name = Pell Playhouse - Foyer
 MapPosition = 0,10,25

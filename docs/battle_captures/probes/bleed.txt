@@ -1,0 +1,185 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for BLEED: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+BLEED probe: boosted move through a borrowed field
+==================================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Mindscape tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:MINDSCAPE] (was [])
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Psychic!
+  The Mindscape amplified the thought!
+    HP Milotic (foe): 331 -> 198 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 198/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BLEED probe: baseline (no field) for PSYCHIC
+============================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Psychic!
+    HP Milotic (foe): 331 -> 242 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 242/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BLEED probe: Magical Seed held on entry
+=======================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Mindscape tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:MINDSCAPE] (was [])
+    (anim: UseItem)
+    (anim: StatUp)
+  Mew's Defense rose sharply!
+  Mew's Magical Seed drank from the Bleed!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BLEED probe: Synthetic Seed held on entry
+=========================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Mindscape tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:MINDSCAPE] (was [])
+    (anim: UseItem)
+  Mew's Synthetic Seed insulated it against the Bleed!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Mew's Special Defense rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Attack fell!
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Special Defense rose!
+  The wild Snorlax's Defense fell!
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BLEED probe: end-of-round rule 1: proc on {} [subject Florges]
+==============================================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Silkwood tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:SILKWOOD] (was [])
+  Florges blundered into a sticky web!
+    (anim: StatDown)
+  Florges's Speed fell!
+  The wild Snorlax blundered into a sticky web!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Florges's power!
+    (anim: StatUp)
+  Florges's Attack rose!
+  Florges's Defense fell!
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Attack rose!
+  The wild Snorlax's Defense fell!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Florges's power!
+    (anim: StatUp)
+  Florges's Attack rose!
+  Florges's Defense fell!
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Attack rose!
+  The wild Snorlax's Defense fell!
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

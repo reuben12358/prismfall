@@ -1,0 +1,248 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for SNOWY_MOUNTAIN: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+SNOWY_MOUNTAIN probe: boosted move ICEBEAM (on field)
+=====================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Ice Beam!
+  The frigid peak sharpened the cold!
+    HP Snorlax (foe): 461 -> 411 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 411/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SNOWY_MOUNTAIN probe: boosted move ICEBEAM (baseline, no field)
+===============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Ice Beam!
+    HP Snorlax (foe): 461 -> 428 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 428/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SNOWY_MOUNTAIN probe: transition [stage 1: weather Sun/HarshSun -> MOUNTAIN] using SUNNYDAY
+===========================================================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD CHANGE: SNOWY_MOUNTAIN -> MOUNTAIN
+  The sun melted the snow from the slopes!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+SNOWY_MOUNTAIN probe: transition [stage 1: moves HEATWAVE/ERUPTION/LAVAPLUME... x2 -> MOUNTAIN] using HEATWAVE, HEATWAVE
+========================================================================================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Heat Wave!
+  The bitter cold dulled the flames...
+  The freezing gale howled behind Heat Wave!
+    HP Snorlax (foe): 461 -> 427 / 461
+  The snow is melting... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 427/461]
+  Mew used Heat Wave!
+  The bitter cold dulled the flames...
+  The freezing gale howled behind Heat Wave!
+    HP Snorlax (foe): 427 -> 391 / 461
+## FIELD CHANGE: SNOWY_MOUNTAIN -> MOUNTAIN
+  The snow melted away, baring the rocky slopes!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 391/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 391/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+SNOWY_MOUNTAIN probe: Telluric Seed held on entry
+=================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+    (anim: UseItem)
+  Mew's Telluric Seed packed it in a shell of snow!
+    (anim: StatUp)
+  Mew's Defense rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SNOWY_MOUNTAIN probe: end-of-round rule 1: heal on {:abilities=>[:ICEBODY]} [subject Florges]
+=============================================================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [ICEBODY]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges absorbed the falling snow.
+    HP Florges (player): 148 -> 167 / 297
+
+--- Turn 2 ---
+  [Florges 167/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges absorbed the falling snow.
+    HP Florges (player): 167 -> 186 / 297
+
+--- Turn 3 ---
+  [Florges 186/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+SNOWY_MOUNTAIN probe: end-of-round rule 2: cure_status on {:grounded=>true, :status=>[:BURN]} [subject Florges]
+===============================================================================================================
+
+--- Battle start ---
+  field: SNOWY_MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
+  A blizzard rages over the snowbound peak!
+
+--- Turn 1 ---
+  [Florges 148/297 BURN | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Burn)
+    HP Florges (player): 148 -> 130 / 297
+  Florges was hurt by its burn!
+  The deep snow soothed Florges's burn!
+  Florges's burn was healed.
+
+--- Turn 2 ---
+  [Florges 130/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Florges 130/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

@@ -1,0 +1,279 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for WASTELAND: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+WASTELAND probe: boosted move SLUDGEBOMB (on field)
+===================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Bomb!
+  Toxic slag bubbled up from the ground!
+    HP Snorlax (foe): 461 -> 382 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 382/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WASTELAND probe: boosted move SLUDGEBOMB (baseline, no field)
+=============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Bomb!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WASTELAND probe: transition [stage 1: terrain Grassy -> FLOWER_GARDEN] using GRASSYTERRAIN
+==========================================================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD CHANGE: WASTELAND -> FLOWER_GARDEN
+  Life took root in the blighted soil! Buds push up through the slag!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WASTELAND probe: transition [stage 1: moves PURIFY x2 -> NONE] using PURIFY, PURIFY
+===================================================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Purify!
+  Mew's HP is full!
+  The blight is lifting... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Purify!
+  Mew's HP is full!
+## FIELD CHANGE: WASTELAND -> NONE
+  The blight lifted, and the land could breathe again.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+WASTELAND probe: Telluric Seed held on entry
+============================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+    (anim: UseItem)
+    (anim: Toxic)
+  Mew's Telluric Seed drew power from the tainted ground!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+
+--- Turn 1 ---
+  [Mew 170/341 POISON | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Toxic)
+    HP Mew (player): 170 -> 149 / 341
+  Mew was hurt by poison!
+
+--- Turn 2 ---
+  [Mew 149/341 POISON | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WASTELAND probe: end-of-round rule 1: damage on {:not_types=>[:POISON, :STEEL], :not_abilities=>[:OVERCOAT]} +condition [subject Snorlax, after RAINDANCE]
+==========================================================================================================================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+
+--- Turn 1 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Rain Dance!
+  It started to rain!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Snorlax (foe): 230 -> 201 / 461
+  The acid rain burned the wild Snorlax!
+    HP Snorlax (player): 230 -> 201 / 461
+  The acid rain burned Snorlax!
+
+--- Turn 2 ---
+  [Snorlax 201/461 | Snorlax 201/461]
+  Snorlax used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Snorlax (player): 201 -> 172 / 461
+  The acid rain burned Snorlax!
+    HP Snorlax (foe): 201 -> 172 / 461
+  The acid rain burned the wild Snorlax!
+
+--- Turn 3 ---
+  [Snorlax 172/461 | Snorlax 172/461]
+  Snorlax used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    HP Snorlax (player): 172 -> 143 / 461
+  The acid rain burned Snorlax!
+    HP Snorlax (foe): 172 -> 143 / 461
+  The acid rain burned the wild Snorlax!
+
+--- Turn 4 ---
+  [Snorlax 143/461 | Snorlax 143/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+WASTELAND probe: end-of-round rule 2: heal on {:abilities=>[:POISONHEAL], :status=>[:POISON]} [subject Florges]
+===============================================================================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [POISONHEAL]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+
+--- Turn 1 ---
+  [Florges 148/297 POISON | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Poison)
+    [ability: Florges (player)'s Poison Heal]
+    HP Florges (player): 148 -> 185 / 297
+  Florges's HP was restored.
+  Florges thrived on the toxic wastes.
+    HP Florges (player): 185 -> 204 / 297
+
+--- Turn 2 ---
+  [Florges 204/297 POISON | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Poison)
+    [ability: Florges (player)'s Poison Heal]
+    HP Florges (player): 204 -> 241 / 297
+  Florges's HP was restored.
+  Florges thrived on the toxic wastes.
+    HP Florges (player): 241 -> 260 / 297
+
+--- Turn 3 ---
+  [Florges 260/297 POISON | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

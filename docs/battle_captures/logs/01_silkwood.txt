@@ -1,0 +1,84 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
+===============================================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  You are challenged by Warden Tamsin!
+  Warden Tamsin sent out Joltik!
+    >> sent out (foe): Joltik Lv.13 @ORANBERRY [COMPOUNDEYES]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.15 @TELLURICSEED [INTIMIDATE]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+  Growlithe blundered into a sticky web!
+    (anim: StatDown)
+  Growlithe's Speed fell!
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Joltik's Attack fell!
+    (anim: UseItem)
+  Growlithe's Telluric Seed sprouted silk-threaded roots!
+    (anim: StatUp)
+  Growlithe's Defense rose!
+
+--- Turn 1 ---
+  [Growlithe 46/46 | Joltik 38/38]
+  The opposing Joltik used Absorb!
+    HP Growlithe (player): 46 -> 44 / 46
+  It's not very effective...
+  Growlithe had its energy drained!
+  Growlithe used Flame Wheel!
+  The flames raced along the silk!
+    HP Joltik (foe): 38 -> 0 / 38
+  It's super effective!
+  The opposing Joltik fainted!
+    xx fainted: Joltik (foe)
+  Embers smoulder in the silk... (2 more)
+  Growlithe is at the level cap (Lv. 15) and can't gain Exp. Points.
+  (end of round)
+    HP Growlithe (player): 44 -> 46 / 46
+  Growlithe absorbed nutrients with its roots!
+  Warden Tamsin is about to send out Surskit. Will you switch your Pokémon?  [auto: No]
+  Warden Tamsin sent out Surskit!
+    >> sent out (foe): Surskit Lv.13 @ORANBERRY [SWIFTSWIM]
+
+--- Turn 2 ---
+  [Growlithe 46/46 | Surskit 35/35]
+  The opposing Surskit used Sweet Scent!
+    (anim: StatDown)
+  Growlithe's evasiveness harshly fell!
+  Growlithe used Flame Wheel!
+  The flames raced along the silk!
+    HP Surskit (foe): 35 -> 0 / 35
+  A critical hit!
+  The opposing Surskit fainted!
+    xx fainted: Surskit (foe)
+  Embers smoulder in the silk... (1 more)
+  (end of round)
+  Warden Tamsin is about to send out Bobbin. Will you switch your Pokémon?  [auto: No]
+  Warden Tamsin sent out Bobbin!
+    >> sent out (foe): Bobbin Lv.15 @EVIOLITE [OVERCOAT]
+
+--- Turn 3 ---
+  [Growlithe 46/46 | Bobbin 44/44]
+  The opposing Bobbin used Bug Bite!
+  The Silkwood hums with chittering life!
+    HP Growlithe (player): 46 -> 37 / 46
+  It's not very effective...
+  Growlithe used Flame Wheel!
+  The flames raced along the silk!
+    HP Bobbin (foe): 44 -> 0 / 44
+  It's super effective!
+  The opposing Bobbin fainted!
+    xx fainted: Bobbin (foe)
+## FIELD CHANGE: SILKWOOD -> ASHEN_WASTE
+  The webs went up in flames! The Silkwood burned down to ash!
+  You defeated Warden Tamsin!
+  Oh! You've unpicked every stitch. Well sewn, challenger.
+  You got $1,500 for winning!
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)

@@ -448,7 +448,10 @@ module FieldEffects
     # Bespoke
     if rule[:proc]
       res = self.safe_call(rule[:proc], battle, battler)
-      did = true if res
+      if res
+        announce.call   # a proc-only rule still shows its :message (e.g. BLEED's Magical Seed)
+        did = true
+      end
     end
     return did
   end

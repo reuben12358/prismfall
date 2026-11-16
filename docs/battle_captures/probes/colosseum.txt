@@ -1,0 +1,81 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for COLOSSEUM: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+COLOSSEUM probe: boosted move AURASPHERE (on field)
+===================================================
+
+--- Battle start ---
+  field: COLOSSEUM | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd roars as the fighters enter the pit!
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Aura Sphere!
+    HP Milotic (foe): 331 -> 268 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 268/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+COLOSSEUM probe: boosted move AURASPHERE (baseline, no field)
+=============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Aura Sphere!
+    HP Milotic (foe): 331 -> 278 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 278/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+COLOSSEUM probe: Telluric Seed held on entry
+============================================
+
+--- Battle start ---
+  field: COLOSSEUM | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd roars as the fighters enter the pit!
+    (anim: UseItem)
+  Mew's Telluric Seed fired it up to the roar of the crowd!
+    (anim: StatUp)
+  Mew's Attack rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

@@ -1,0 +1,81 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Cave [CAVE] - Camper Liam vs challenger (Lv.11)
+===============================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  You are challenged by Camper Liam!
+  Camper Liam sent out Diglett!
+    >> sent out (foe): Diglett Lv.10 [SANDVEIL]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.11 @TELLURICSEED [INTIMIDATE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Diglett's Attack fell!
+    (anim: UseItem)
+  Growlithe's Telluric Seed shook stones loose from the ceiling!
+    (anim: StatUp)
+  Growlithe's Defense rose!
+  Pointed stones float in the air around the opposing team!
+
+--- Turn 1 ---
+  [Growlithe 36/36 | Diglett 22/22]
+  Growlithe used Flame Wheel!
+    HP Diglett (foe): 22 -> 0 / 22
+  The opposing Diglett fainted!
+    xx fainted: Diglett (foe)
+  Growlithe got 98 Exp. Points!
+  (end of round)
+  Camper Liam is about to send out Bonsly. Will you switch your Pokémon?  [auto: No]
+  Camper Liam sent out Bonsly!
+    >> sent out (foe): Bonsly Lv.11 [STURDY]
+    HP Bonsly (foe): 32 -> 28 / 32
+  Pointed stones dug into The opposing Bonsly!
+    HP Bonsly (foe): 28 -> 24 / 32
+  Loose rocks rained down on the opposing Bonsly!
+
+--- Turn 2 ---
+  [Growlithe 36/36 | Bonsly 24/32]
+  Growlithe used Bite!
+    HP Bonsly (foe): 24 -> 16 / 32
+  The opposing Bonsly used Rock Throw!
+  The cavern rumbled!
+    HP Growlithe (player): 36 -> 14 / 36
+  It's super effective!
+  (end of round)
+
+--- Turn 3 ---
+  [Growlithe 14/36 | Bonsly 16/32]
+  Growlithe used Ember!
+    HP Bonsly (foe): 16 -> 10 / 32
+  It's not very effective...
+  The opposing Bonsly used Copycat!
+  The opposing Bonsly used Ember!
+    HP Growlithe (player): 14 -> 12 / 36
+  It's not very effective...
+  (end of round)
+
+--- Turn 4 ---
+  [Growlithe 12/36 | Bonsly 10/32]
+  Growlithe used Bite!
+    HP Bonsly (foe): 10 -> 3 / 32
+  The opposing Bonsly flinched and couldn't move!
+  (end of round)
+
+--- Turn 5 ---
+  [Growlithe 12/36 | Bonsly 3/32]
+  Growlithe used Bite!
+    HP Bonsly (foe): 3 -> 0 / 32
+  The opposing Bonsly fainted!
+    xx fainted: Bonsly (foe)
+  Growlithe got 128 Exp. Points!
+  You defeated Camper Liam!
+  A very good battle, indeed!
+  You got $176 for winning!
+  battle result code: 1
+  
+RESULT: player won after 4 turn(s)

@@ -1,0 +1,265 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Desert [DESERT] - Gym 5 Warden Sahar vs challenger (Lv.31)
+==========================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  You are challenged by Warden Sahar!
+  Warden Sahar sent out Hippopotas!
+    >> sent out (foe): Hippopotas Lv.29 @SMOOTHROCK [SANDSTREAM]
+  Go! Magmar!
+    >> sent out (player): Magmar Lv.31 @TELLURICSEED [FLAMEBODY]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    (anim: UseItem)
+  Magmar's Telluric Seed encased it in hardened sand!
+    (anim: StatUp)
+  Magmar's Defense rose!
+  Magmar's Special Defense rose!
+  Magmar's Speed fell!
+    [ability: Hippopotas (foe)'s Sand Stream]
+    (anim: Sandstorm)
+  A sandstorm brewed!
+
+--- Turn 1 ---
+  [Magmar 90/90 | Hippopotas 86/86]
+  Magmar used Lava Plume!
+    HP Hippopotas (foe): 86 -> 4 / 86
+  The opposing Hippopotas used Stealth Rock!
+  Pointed stones float in the air around your team!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Magmar is buffeted by the sandstorm!
+    HP Magmar (player): 90 -> 85 / 90
+
+--- Turn 2 ---
+  [Magmar 85/90 | Hippopotas 4/86]
+  Warden Sahar used a Super Potion.
+    HP Hippopotas (foe): 4 -> 64 / 86
+  The opposing Hippopotas's HP was restored.
+  Magmar used Lava Plume!
+    HP Hippopotas (foe): 64 -> 0 / 86
+  The opposing Hippopotas fainted!
+    xx fainted: Hippopotas (foe)
+  Magmar is at the level cap (Lv. 31) and can't gain Exp. Points.
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Magmar is buffeted by the sandstorm!
+    HP Magmar (player): 85 -> 80 / 90
+  Warden Sahar is about to send out Krokorok. Will you switch your Pokémon?  [auto: No]
+  Warden Sahar sent out Krokorok!
+    >> sent out (foe): Krokorok Lv.30 @EVIOLITE [MOXIE]
+
+--- Turn 3 ---
+  [Magmar 80/90 | Krokorok 84/84]
+  The opposing Krokorok used Sand Tomb!
+  The shifting sands surged!
+  The sands swallowed the foe whole!
+    HP Magmar (player): 80 -> 25 / 90
+  It's super effective!
+  Magmar got sand in its eyes!
+    (anim: StatDown)
+  Magmar's accuracy fell!
+  Magmar became trapped by Sand Tomb!
+  Magmar used Lava Plume!
+    HP Krokorok (foe): 84 -> 32 / 84
+    (anim: Burn)
+  The opposing Krokorok was burned!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Magmar is buffeted by the sandstorm!
+    HP Magmar (player): 25 -> 20 / 90
+    (anim: Burn)
+    HP Krokorok (foe): 32 -> 27 / 84
+  The opposing Krokorok was hurt by its burn!
+    (anim: SandTomb)
+    HP Magmar (player): 20 -> 9 / 90
+  Magmar is hurt by Sand Tomb!
+
+--- Turn 4 ---
+  [Magmar 9/90 | Krokorok 27/84 BURN]
+  The opposing Krokorok used Crunch!
+    HP Magmar (player): 9 -> 0 / 90
+  Magmar fainted!
+    xx fainted: Magmar (player)
+    [ability: Krokorok (foe)'s Moxie]
+    (anim: StatUp)
+  The opposing Krokorok's Attack rose!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+    (anim: Burn)
+    HP Krokorok (foe): 27 -> 22 / 84
+  The opposing Krokorok was hurt by its burn!
+  Just a little more! Hang in there, Vaporeon!
+    >> sent out (player): Vaporeon Lv.31 [WATERABSORB]
+    HP Vaporeon (player): 131 -> 115 / 131
+  Pointed stones dug into Vaporeon!
+
+--- Turn 5 ---
+  [Vaporeon 115/131 | Krokorok 22/84 BURN]
+  The opposing Krokorok used Sand Tomb!
+  The shifting sands surged!
+  The sands swallowed the foe whole!
+    HP Vaporeon (player): 115 -> 86 / 131
+  Vaporeon became trapped by Sand Tomb!
+  Vaporeon used Aurora Beam!
+    HP Krokorok (foe): 22 -> 0 / 84
+  It's super effective!
+  The opposing Krokorok fainted!
+    xx fainted: Krokorok (foe)
+  Vaporeon is at the level cap (Lv. 31) and can't gain Exp. Points.
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Vaporeon is buffeted by the sandstorm!
+    HP Vaporeon (player): 86 -> 78 / 131
+  Warden Sahar is about to send out Sandaconda. Will you switch your Pokémon?  [auto: No]
+  Warden Sahar sent out Sandaconda!
+    >> sent out (foe): Sandaconda Lv.30 @SITRUSBERRY [SANDSPIT]
+
+--- Turn 6 ---
+  [Vaporeon 78/131 | Sandaconda 91/91]
+  The opposing Sandaconda used Bulldoze!
+  The shifting sands surged!
+    HP Vaporeon (player): 78 -> 34 / 131
+    (anim: StatDown)
+  Vaporeon's Speed fell!
+  Vaporeon used Scald!
+  The desert heat evaporated some of the water...
+    HP Sandaconda (foe): 91 -> 19 / 91
+  It's super effective!
+    (anim: EatBerry)
+    HP Sandaconda (foe): 19 -> 41 / 91
+  The opposing Sandaconda restored its health using its Sitrus Berry!
+    (anim: Burn)
+  The opposing Sandaconda was burned!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Vaporeon is buffeted by the sandstorm!
+    HP Vaporeon (player): 34 -> 26 / 131
+    (anim: Burn)
+    HP Sandaconda (foe): 41 -> 36 / 91
+  The opposing Sandaconda was hurt by its burn!
+
+--- Turn 7 ---
+  [Vaporeon 26/131 | Sandaconda 36/91 BURN]
+  The opposing Sandaconda used Bulldoze!
+  The shifting sands surged!
+    HP Vaporeon (player): 26 -> 2 / 131
+  Vaporeon got sand in its eyes!
+    (anim: StatDown)
+  Vaporeon's accuracy fell!
+    (anim: StatDown)
+  Vaporeon's Speed fell!
+  Vaporeon used Scald!
+  The desert heat evaporated some of the water...
+    HP Sandaconda (foe): 36 -> 0 / 91
+  It's super effective!
+  The opposing Sandaconda fainted!
+    xx fainted: Sandaconda (foe)
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Vaporeon is buffeted by the sandstorm!
+    HP Vaporeon (player): 2 -> 0 / 131
+  Vaporeon fainted!
+    xx fainted: Vaporeon (player)
+  You're in charge, Graveler!
+    >> sent out (player): Graveler Lv.31 [STURDY]
+  Warden Sahar sent out Effigy!
+    >> sent out (foe): Effigy Lv.31 @SOFTSAND [LEVITATE]
+    HP Graveler (player): 84 -> 79 / 84
+  Pointed stones dug into Graveler!
+
+--- Turn 8 ---
+  [Graveler 79/84 | Effigy 87/87]
+  The opposing Effigy used Earth Power!
+  The shifting sands surged!
+    HP Graveler (player): 79 -> 0 / 84
+  It's super effective!
+  Graveler fainted!
+    xx fainted: Graveler (player)
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  You're in charge, Pidgeot!
+    >> sent out (player): Pidgeot Lv.31 [KEENEYE]
+    HP Pidgeot (player): 102 -> 76 / 102
+  Pointed stones dug into Pidgeot!
+
+--- Turn 9 ---
+  [Pidgeot 76/102 | Effigy 87/87]
+  Pidgeot used Air Slash!
+    HP Effigy (foe): 87 -> 67 / 87
+  The opposing Effigy used Rock Tomb!
+    HP Pidgeot (player): 76 -> 46 / 102
+  It's super effective!
+    (anim: StatDown)
+  Pidgeot's Speed fell!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Pidgeot is buffeted by the sandstorm!
+    HP Pidgeot (player): 46 -> 40 / 102
+
+--- Turn 10 ---
+  [Pidgeot 40/102 | Effigy 67/87]
+  The opposing Effigy used Extrasensory!
+    HP Pidgeot (player): 40 -> 4 / 102
+  Pidgeot used U-turn!
+    HP Effigy (foe): 67 -> 36 / 87
+  It's super effective!
+  Pidgeot went back to Tester!
+    << recalled: Pidgeot (player)
+  Just a little more! Hang in there, Ampharos!
+    >> sent out (player): Ampharos Lv.31 [STATIC]
+    HP Ampharos (player): 106 -> 93 / 106
+  Pointed stones dug into Ampharos!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Ampharos is buffeted by the sandstorm!
+    HP Ampharos (player): 93 -> 87 / 106
+
+--- Turn 11 ---
+  [Ampharos 87/106 | Effigy 36/87]
+  The opposing Effigy used Earth Power!
+  The shifting sands surged!
+    HP Ampharos (player): 87 -> 0 / 106
+  It's super effective!
+  Ampharos fainted!
+    xx fainted: Ampharos (player)
+  (end of round)
+  The sandstorm subsided.
+  Just a little more! Hang in there, Hariyama!
+    >> sent out (player): Hariyama Lv.31 [THICKFAT]
+    HP Hariyama (player): 139 -> 130 / 139
+  Pointed stones dug into Hariyama!
+
+--- Turn 12 ---
+  [Hariyama 130/139 | Effigy 36/87]
+  The opposing Effigy used Extrasensory!
+    HP Hariyama (player): 130 -> 51 / 139
+  It's super effective!
+  Hariyama used Knock Off!
+    HP Effigy (foe): 36 -> 0 / 87
+  A critical hit!
+  It's super effective!
+  The opposing Effigy fainted!
+    xx fainted: Effigy (foe)
+  The opposing Effigy dropped its Soft Sand!
+  Pidgeot is at the level cap (Lv. 31) and can't gain Exp. Points.
+  Hariyama is at the level cap (Lv. 31) and can't gain Exp. Points.
+  You defeated Warden Sahar!
+  The sand remembers everything. It will remember you, too.
+  You got $3,100 for winning!
+  battle result code: 1
+  
+RESULT: player won after 11 turn(s)

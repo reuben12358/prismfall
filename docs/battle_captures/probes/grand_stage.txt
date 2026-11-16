@@ -1,0 +1,82 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for GRAND_STAGE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+GRAND_STAGE probe: boosted move SWIFT (on field)
+================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Swift!
+  The crowd roared for Mew!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+GRAND_STAGE probe: boosted move SWIFT (baseline, no field)
+==========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Swift!
+    HP Snorlax (foe): 461 -> 416 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 416/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+GRAND_STAGE probe: Magical Seed held on entry
+=============================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+    (anim: UseItem)
+  Mew's Magical Seed cast a spotlight on it!
+    (anim: StatUp)
+  Mew's Speed rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

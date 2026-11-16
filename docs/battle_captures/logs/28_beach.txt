@@ -1,0 +1,56 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Beach [BEACH] - Picnicker Susie vs challenger (Lv.18)
+=====================================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  You are challenged by Picnicker Susie!
+  Picnicker Susie sent out Meowth!
+    >> sent out (foe): Meowth Lv.18 [PICKUP]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.18 @TELLURICSEED [FLASHFIRE]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+    (anim: UseItem)
+  Growlithe's Telluric Seed buried it in cool, wet sand!
+    (anim: StatUp)
+  Growlithe's Defense rose!
+
+--- Turn 1 ---
+  [Growlithe 53/53 | Meowth 45/45]
+  The opposing Meowth used Bite!
+    HP Growlithe (player): 53 -> 46 / 53
+  Growlithe used Flame Wheel!
+    HP Meowth (foe): 45 -> 19 / 45
+  (end of round)
+    HP Growlithe (player): 46 -> 49 / 53
+  Aqua Ring restored Growlithe's HP!
+    [ability: Meowth (foe)'s Pickup]
+  The opposing Meowth found one Telluric Seed!
+
+--- Turn 2 ---
+  [Growlithe 49/53 | Meowth 19/45]
+  The opposing Meowth used Bite!
+    HP Growlithe (player): 49 -> 43 / 53
+  Growlithe flinched and couldn't move!
+  (end of round)
+    HP Growlithe (player): 43 -> 46 / 53
+  Aqua Ring restored Growlithe's HP!
+
+--- Turn 3 ---
+  [Growlithe 46/53 | Meowth 19/45]
+  The opposing Meowth used Scratch!
+    HP Growlithe (player): 46 -> 39 / 53
+  Growlithe used Flame Wheel!
+    HP Meowth (foe): 19 -> 0 / 45
+  The opposing Meowth fainted!
+    xx fainted: Meowth (foe)
+  Growlithe got 209 Exp. Points!
+  You defeated Picnicker Susie!
+  Defeated! Oh my!
+  You got $288 for winning!
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)

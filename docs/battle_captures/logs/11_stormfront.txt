@@ -1,0 +1,227 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
+====================================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  You are challenged by Warden Odessa!
+  Warden Odessa sent out Pelipper!
+    >> sent out (foe): Pelipper Lv.53 @DAMPROCK [DRIZZLE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.55 @ELEMENTALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+    (anim: UseItem)
+  Garchomp's Elemental Seed crackled with storm energy!
+    (anim: StatUp)
+  Garchomp's Speed rose!
+    [ability: Pelipper (foe)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+
+--- Turn 1 ---
+  [Garchomp 200/200 | Pelipper 151/151]
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 151 -> 142 / 151
+  It's not very effective...
+  The opposing Pelipper used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Garchomp (player): 200 -> 81 / 200
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Garchomp 81/200 | Pelipper 142/151]
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 142 -> 133 / 151
+  It's not very effective...
+    (anim: Burn)
+  The opposing Pelipper was burned!
+  The opposing Pelipper used Scald!
+    HP Garchomp (player): 81 -> 0 / 200
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Burn)
+    HP Pelipper (foe): 133 -> 124 / 151
+  The opposing Pelipper was hurt by its burn!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.55 [STURDY]
+
+--- Turn 3 ---
+  [Magnezone 159/159 | Pelipper 124/151 BURN]
+  The opposing Pelipper used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Magnezone (player): 159 -> 129 / 159
+  It's not very effective...
+    (anim: Confusion)
+  Magnezone became confused!
+    (anim: Confusion)
+  Magnezone is confused!
+    HP Magnezone (player): 129 -> 115 / 159
+  It hurt itself in its confusion!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Burn)
+    HP Pelipper (foe): 124 -> 115 / 151
+  The opposing Pelipper was hurt by its burn!
+
+--- Turn 4 ---
+  [Magnezone 115/159 | Pelipper 115/151 BURN]
+  The opposing Pelipper used Scald!
+    HP Magnezone (player): 115 -> 18 / 159
+    (anim: Confusion)
+  Magnezone is confused!
+  Magnezone used Thunderbolt!
+  The storm supercharged the attack!
+    HP Pelipper (foe): 115 -> 0 / 151
+  It's super effective!
+  The opposing Pelipper fainted!
+    xx fainted: Pelipper (foe)
+  Magnezone is at the level cap (Lv. 55) and can't gain Exp. Points.
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Warden Odessa is about to send out Noivern. Will you switch your Pokémon?  [auto: No]
+  Warden Odessa sent out Noivern!
+    >> sent out (foe): Noivern Lv.54 @LIFEORB [INFILTRATOR]
+
+--- Turn 5 ---
+  [Magnezone 18/159 | Noivern 181/181]
+  The opposing Noivern used Flamethrower!
+    HP Magnezone (player): 18 -> 0 / 159
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+    HP Noivern (foe): 181 -> 163 / 181
+  The opposing Noivern lost some of its HP!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.55 [NATURALCURE]
+
+--- Turn 6 ---
+  [Starmie 148/148 | Noivern 163/181]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Starmie (player): 148 -> 0 / 148
+  Starmie fainted!
+    xx fainted: Starmie (player)
+    HP Noivern (foe): 163 -> 145 / 181
+  The opposing Noivern lost some of its HP!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.55 [HUSTLE]
+
+--- Turn 7 ---
+  [Togekiss 175/175 | Noivern 145/181]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Togekiss (player): 175 -> 48 / 175
+    (anim: Confusion)
+  Togekiss became confused!
+    HP Noivern (foe): 145 -> 127 / 181
+  The opposing Noivern lost some of its HP!
+    (anim: Confusion)
+  Togekiss is confused!
+  Togekiss used Air Slash!
+    HP Noivern (foe): 127 -> 50 / 181
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 8 ---
+  [Togekiss 48/175 | Noivern 50/181]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Togekiss (player): 48 -> 0 / 175
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+    HP Noivern (foe): 50 -> 32 / 181
+  The opposing Noivern lost some of its HP!
+  (end of round)
+  The rain stopped.
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.55 [BLAZE]
+
+--- Turn 9 ---
+  [Charizard 167/167 | Noivern 32/181]
+  Warden Odessa used a Full Restore.
+    HP Noivern (foe): 32 -> 181 / 181
+  The opposing Noivern's HP was restored.
+  Charizard used Flamethrower!
+    HP Noivern (foe): 181 -> 147 / 181
+  It's not very effective...
+    (anim: Burn)
+  The opposing Noivern was burned!
+  (end of round)
+    (anim: Burn)
+    HP Noivern (foe): 147 -> 136 / 181
+  The opposing Noivern was hurt by its burn!
+
+--- Turn 10 ---
+  [Charizard 167/167 | Noivern 136/181 BURN]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Charizard (player): 167 -> 4 / 167
+    (anim: Confusion)
+  Charizard became confused!
+    HP Noivern (foe): 136 -> 118 / 181
+  The opposing Noivern lost some of its HP!
+    (anim: Confusion)
+  Charizard is confused!
+  Charizard used Air Slash!
+    HP Noivern (foe): 118 -> 47 / 181
+  (end of round)
+    (anim: Burn)
+    HP Noivern (foe): 47 -> 36 / 181
+  The opposing Noivern was hurt by its burn!
+
+--- Turn 11 ---
+  [Charizard 4/167 | Noivern 36/181 BURN]
+  Warden Odessa used a Full Restore.
+    HP Noivern (foe): 36 -> 181 / 181
+  The opposing Noivern's HP was restored.
+    (anim: Confusion)
+  Charizard is confused!
+  Charizard used Air Slash!
+    HP Noivern (foe): 181 -> 106 / 181
+  (end of round)
+
+--- Turn 12 ---
+  [Charizard 4/167 | Noivern 106/181]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Charizard (player): 4 -> 0 / 167
+  Charizard fainted!
+    xx fainted: Charizard (player)
+    HP Noivern (foe): 106 -> 88 / 181
+  The opposing Noivern lost some of its HP!
+  (end of round)
+  Just a little more! Hang in there, Lucario!
+    >> sent out (player): Lucario Lv.55 [STEADFAST]
+
+--- Turn 13 ---
+  [Lucario 159/159 | Noivern 88/181]
+  The opposing Noivern used Hurricane!
+  The gale whipped Hurricane into a frenzy!
+    HP Lucario (player): 159 -> 0 / 159
+  Lucario fainted!
+    xx fainted: Lucario (player)
+    HP Noivern (foe): 88 -> 70 / 181
+  The opposing Noivern lost some of its HP!
+  You have no more Pokémon that can fight!
+  You lost against Warden Odessa!
+  You gave $6,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 12 turn(s)

@@ -203,9 +203,21 @@ module FieldEffects
   # Formats a definition message with _INTL ({1}, {2}... substitution).
   def self.format(text, *args)
     return nil if text.nil?
-    return _INTL(text, *args) if defined?(_INTL)
-    ret = text.dup
-    args.each_with_index { |a, i| ret.gsub!("{#{i + 1}}", a.to_s) }
-    return ret
+    ret = (defined?(_INTL)) ? _INTL(text) : text.dup   # translate first, then fill the placeholders
+    return self.fill_placeholders(ret, args)
+  end
+
+  # Replaces {1}, {2}... A battler name that starts with "The " ("The wild X",
+  # "The opposing X") is lower-cased when its placeholder is not at the start of
+  # a sentence, so "Lightning struck {1}!" reads "...struck the opposing X!".
+  def self.fill_placeholders(text, args)
+    return text.gsub(/\{(\d+)\}/) do
+      idx = $1.to_i - 1
+      next $~[0] if idx < 0 || idx >= args.length
+      str = args[idx].to_s
+      before = $~.pre_match
+      mid_sentence = !before.strip.empty? && before !~ /[.!?…]\s*\z/
+      (mid_sentence && str.start_with?("The ")) ? "the " + str[4..] : str
+    end
   end
 end

@@ -1,0 +1,75 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Ashen Waste [ASHEN_WASTE] - Hiker Ford vs challenger (Lv.19)
+============================================================
+
+--- Battle start ---
+  field: ASHEN_WASTE | weather: None | terrain: None
+  You are challenged by Hiker Ford!
+  Hiker Ford sent out Machop!
+    >> sent out (foe): Machop Lv.19 [GUTS]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.19 @TELLURICSEED [FLASHFIRE]
+## FIELD CHANGE: NONE -> ASHEN_WASTE
+  Grey ash drifts over the cooled crust...
+    (anim: UseItem)
+  Growlithe's Telluric Seed cloaked it in ash!
+    (anim: StatUp)
+  Growlithe's Defense rose!
+  Growlithe's evasiveness rose!
+
+--- Turn 1 ---
+  [Growlithe 55/55 | Machop 58/58]
+  Growlithe used Ember!
+  The ash smothered the flames...
+    HP Machop (foe): 58 -> 42 / 58
+  The opposing Machop used Focus Energy!
+  The opposing Machop is getting pumped!
+  (end of round)
+    HP Machop (foe): 42 -> 38 / 58
+  The opposing Machop is choking on the ash!
+
+--- Turn 2 ---
+  [Growlithe 55/55 | Machop 38/58]
+  Growlithe used Bite!
+    HP Machop (foe): 38 -> 31 / 58
+  It's not very effective...
+  The opposing Machop used Knock Off!
+    HP Growlithe (player): 55 -> 43 / 55
+  (end of round)
+    HP Machop (foe): 31 -> 27 / 58
+  The opposing Machop is choking on the ash!
+
+--- Turn 3 ---
+  [Growlithe 43/55 | Machop 27/58]
+  Growlithe used Ember!
+  The ash smothered the flames...
+    HP Machop (foe): 27 -> 9 / 58
+  The opposing Machop used Revenge!
+    HP Growlithe (player): 43 -> 0 / 55
+  A critical hit!
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
+  (end of round)
+    HP Machop (foe): 9 -> 5 / 58
+  The opposing Machop is choking on the ash!
+  Your opponent's weak! Get 'em, Staravia!
+    >> sent out (player): Staravia Lv.19 [INTIMIDATE]
+    [ability: Staravia (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Machop's Attack fell!
+
+--- Turn 4 ---
+  [Staravia 55/55 | Machop 5/58]
+  Staravia used Quick Attack!
+    HP Machop (foe): 5 -> 0 / 58
+  The opposing Machop fainted!
+    xx fainted: Machop (foe)
+  Staravia got 232 Exp. Points!
+  You defeated Hiker Ford!
+  You're too good for me!
+  You got $608 for winning!
+  battle result code: 1
+  
+RESULT: player won after 3 turn(s)

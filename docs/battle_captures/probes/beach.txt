@@ -1,0 +1,256 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for BEACH: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+BEACH probe: boosted move WATERPULSE (on field)
+===============================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 461 -> 408 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 408/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BEACH probe: boosted move WATERPULSE (baseline, no field)
+=========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 461 -> 416 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 416/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BEACH probe: transition [stage 1: weather HeavyRain -> WATER_SURFACE] using SPLASH
+==================================================================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [PRIMORDIALSEA]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+    [ability: Mew (player)'s Primordial Sea]
+    (anim: HeavyRain)
+  A heavy rain began to fall!
+## FIELD CHANGE: BEACH -> WATER_SURFACE
+  The downpour flooded the beach!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATER_SURFACE] using SURF, SURF, SURF
+=================================================================================================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Surf!
+    HP Snorlax (foe): 461 -> 384 / 461
+  The tide is rising... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 384/461]
+  Mew used Surf!
+    HP Snorlax (foe): 384 -> 302 / 461
+  The tide is rising... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 302/461]
+  Mew used Surf!
+    HP Snorlax (foe): 302 -> 223 / 461
+## FIELD CHANGE: BEACH -> WATER_SURFACE
+  The tide rolled in and swallowed the beach!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 223/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 223/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+BEACH probe: Telluric Seed held on entry
+========================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+    (anim: UseItem)
+  Mew's Telluric Seed buried it in cool, wet sand!
+    (anim: StatUp)
+  Mew's Defense rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 170 -> 191 / 341
+  Aqua Ring restored Mew's HP!
+
+--- Turn 2 ---
+  [Mew 191/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+BEACH probe: end-of-round rule 1: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]} [subject Florges]
+==================================================================================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [WATERABSORB]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges soaked up the sea spray.
+    HP Florges (player): 148 -> 167 / 297
+
+--- Turn 2 ---
+  [Florges 167/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges soaked up the sea spray.
+    HP Florges (player): 167 -> 186 / 297
+
+--- Turn 3 ---
+  [Florges 186/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+BEACH probe: end-of-round rule 2: cure_status on {:abilities=>[:HYDRATION]} [subject Florges]
+=============================================================================================
+
+--- Battle start ---
+  field: BEACH | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [HYDRATION]
+## FIELD CHANGE: NONE -> BEACH
+  Waves lap at the sandy shore...
+
+--- Turn 1 ---
+  [Florges 148/297 BURN | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Burn)
+    HP Florges (player): 148 -> 130 / 297
+  Florges was hurt by its burn!
+  Florges's burn was healed.
+
+--- Turn 2 ---
+  [Florges 130/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Florges 130/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

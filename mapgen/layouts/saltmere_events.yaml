@@ -1,0 +1,119 @@
+- type: sign
+  at:
+  - 35
+  - 18
+  name: Playhouse sign
+  text: 'THE PELL PLAYHOUSE - SALTMERE GYM
+
+    Warden: Dorian Pell. Tonight: The Gilded King.'
+- type: sign
+  at:
+  - 43
+  - 4
+  text: 'SALTMERE
+
+    The free port of the Evergreen Crown.'
+- type: npc
+  name: Busker
+  at:
+  - 27
+  - 21
+  sprite: NPC 08
+  dir: down
+  move: random
+  text: 'Busker: Saltmere''s Plate makes everything ordinary - no Bleed, no miracles. So we make our own, on stage!'
+- type: npc
+  name: Caramel seller
+  at:
+  - 24
+  - 34
+  sprite: NPC 11
+  dir: down
+  text: Salt-caramel! Fresh salt-caramel! Pageant tonight - the Loyal Three companion piece!
+- type: sign
+  at:
+  - 55
+  - 45
+  text: The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed.
+- type: event
+  name: Juno J1
+  at:
+  - 36
+  - 22
+  pages:
+  - cond:
+      switch: CH2_MATRIARCH_DONE
+    graphic:
+      sprite: trainer_RIVAL2
+      dir: down
+    commands:
+    - 'Juno: There you are! I came down by cart with Dad''s seed-sacks. Spar with me? Just for fun!'
+    - if: 'Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)'
+      then:
+      - 'Juno: Ha! You''re getting scary-good.'
+      else:
+      - 'Juno: I won? I WON! ...Sorry. Again tomorrow?'
+    - heal: true
+    - You sit on the breakwater with Juno, sharing a paper bag of salt-caramel.
+    - 'Juno: Can I ask? At the orchard. The Veil. How did you do that?'
+    - choices:
+      - Tell her about the NULL scan
+      - Deflect
+      - Say nothing
+      cancel: 0
+      branches:
+      - - script: pf_choose(:ch3_juno_talk, :told)
+        - 'Juno: NULL? ...Okay. That stays between us. Pinkie swear. I mean it.'
+      - - script: pf_choose(:ch3_juno_talk, :deflect)
+        - 'Juno: Fine, keep your secrets. More caramel for me.'
+      - - script: pf_choose(:ch3_juno_talk, :silent)
+        - 'Juno: ...That''s okay. You don''t have to.'
+    - switch:
+      - CH3_J1_DONE
+      - true
+  - cond:
+      switch: CH3_J1_DONE
+    graphic:
+      sprite: trainer_RIVAL2
+      dir: down
+    commands:
+    - 'Juno: Same breakwater, same caramel, next time. Deal?'
+- type: npc
+  name: Eevee breeder
+  at:
+  - 29
+  - 45
+  sprite: NPC 25
+  dir: down
+  text: 'Breeder: Dorian''s troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage.'
+- type: event
+  name: Kestrel
+  at:
+  - 53
+  - 18
+  pages:
+  - cond:
+      switch: CH3_PAGEANT_DONE
+    graphic:
+      sprite: trainer_RIVAL1
+      dir: left
+    commands:
+    - Kestrel is outside the Hall, white-faced.
+    - 'Kestrel: That voice. The way she talks... no. NO.'
+    - He runs.
+    - selfswitch:
+      - A
+      - true
+  - cond:
+      self: A
+- type: event
+  name: Royal notice
+  at:
+  - 47
+  - 18
+  pages:
+  - cond:
+      switch: CH3_PAGEANT_DONE
+    commands:
+    - 'A royal notice: Queen Maelis "notes with grief" the Hollow outrage in her free port, "where the Crown''s protection was refused."'
+    - Someone - Dorian, by the velvet thread - has torn it half down.

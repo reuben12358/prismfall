@@ -1,0 +1,147 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
+==========================================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  Oh! A wild Arceus appeared!
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.100 [SANDVEIL]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+  The eighteen Plates blaze as one... Arceus descends upon Crownhaven!
+
+--- Turn 1 ---
+  [Garchomp 357/357 | Arceus 382/382]
+  The wild Arceus used Calm Mind!
+    (anim: StatUp)
+  The wild Arceus's Special Attack rose!
+  The wild Arceus's Special Defense rose!
+  Garchomp used Fire Fang!
+    HP Arceus (foe): 382 -> 341 / 382
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 357/357 | Arceus 341/382]
+  The wild Arceus used Focus Blast!
+  The wild Arceus's attack missed!
+  Garchomp used Stone Edge!
+    HP Arceus (foe): 341 -> 273 / 382
+  (end of round)
+  The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field!
+
+--- Turn 3 ---
+  [Garchomp 357/357 | Arceus 273/382]
+  The wild Arceus used Focus Blast!
+    HP Garchomp (player): 357 -> 63 / 357
+    (anim: StatDown)
+  Garchomp's Special Defense fell!
+  Garchomp used Stone Edge!
+    HP Arceus (foe): 273 -> 204 / 382
+  (end of round)
+  The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:VOLCANIC] (was [])
+  The wild Arceus's Multitype resonated with the Flame Plate! It became the Fire type!
+  The wild Arceus took on the Fire type!
+
+--- Turn 4 ---
+  [Garchomp 63/357 | Arceus 204/382]
+  The wild Arceus used Judgment!
+  The magma roared!
+    HP Garchomp (player): 63 -> 0 / 357
+  It's not very effective...
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Use next Pokémon?  [auto: Yes]
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.100 [INNERFOCUS]
+
+--- Turn 5 ---
+  [Lucario 281/281 | Arceus 204/382]
+  Lucario used Extreme Speed!
+    HP Arceus (foe): 204 -> 130 / 382
+  A critical hit!
+  The wild Arceus used Earth Power!
+  Magma erupted from below!
+    HP Lucario (player): 281 -> 0 / 281
+  It's super effective!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
+  Use next Pokémon?  [auto: Yes]
+  Just a little more! Hang in there, Charizard!
+    >> sent out (player): Charizard Lv.100 [BLAZE]
+
+--- Turn 6 ---
+  [Charizard 297/297 | Arceus 130/382]
+  The wild Arceus used Judgment!
+  The magma roared!
+    HP Charizard (player): 297 -> 10 / 297
+  It's not very effective...
+  Charizard used Flamethrower!
+  The magma roared!
+    HP Arceus (foe): 130 -> 38 / 382
+  It's not very effective...
+  (end of round)
+  The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
+  The wild Arceus's Multitype resonated with the Splash Plate! It became the Water type!
+  The wild Arceus took on the Water type!
+
+--- Turn 7 ---
+  [Charizard 10/297 | Arceus 38/382]
+  The wild Arceus used Ice Beam!
+    HP Charizard (player): 10 -> 0 / 297
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+  Use next Pokémon?  [auto: Yes]
+  Your opponent's weak! Get 'em, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
+
+--- Turn 8 ---
+  [Magnezone 281/281 | Arceus 38/382]
+  The wild Arceus used Judgment!
+  The waves amplified the attack!
+    HP Magnezone (player): 281 -> 0 / 281
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+  The Meadow Plate begins to glow... After the next turn, the arena becomes the Flower Garden!
+  Use next Pokémon?  [auto: Yes]
+  Your opponent's weak! Get 'em, Starmie!
+    >> sent out (player): Starmie Lv.100 [ILLUMINATE]
+
+--- Turn 9 ---
+  [Starmie 261/261 | Arceus 38/382]
+  The wild Arceus used Thunderbolt!
+  Thunderbolt struck a dissonant chord with the ascendant Plate!
+  The current raced across the water!
+    HP Starmie (player): 261 -> 0 / 261
+  It's super effective!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  The Plates turn! The Meadow Plate blazes, and the arena becomes the Flower Garden!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FLOWER_GARDEN] (was [:WATER_SURFACE])
+  The wild Arceus's Multitype resonated with the Meadow Plate! It became the Grass type!
+  The wild Arceus took on the Grass type!
+  Use next Pokémon?  [auto: Yes]
+  Your opponent's weak! Get 'em, Togekiss!
+    >> sent out (player): Togekiss Lv.100 [SERENEGRACE]
+
+--- Turn 10 ---
+  [Togekiss 311/311 | Arceus 38/382]
+  The wild Arceus used Sludge Bomb!
+    HP Togekiss (player): 311 -> 0 / 311
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  You have no more Pokémon that can fight!
+  battle result code: 2
+  
+RESULT: player lost after 9 turn(s)

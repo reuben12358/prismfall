@@ -133,6 +133,7 @@ module Prismfall
       end
 
       def remove(id, **o);  add(:remove, o.merge(:id => ref(id)), 0.0); end
+      def clear_actors;     add(:clear_actors, {}); end   # ids may be declared again afterwards
       def move(id, **o);    tween(:move, id, o, 0.6); end
       def scale(id, **o);   tween(:scale, id, o, 0.4); end
       def rotate(id, **o);  tween(:rotate, id, o, 0.4); end

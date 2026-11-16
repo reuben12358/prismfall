@@ -36,3 +36,23 @@ stamps:
   t_barrel:      {map: 187, rect: [61, 8, 1, 2]}
   t_barrel2:     {map: 187, rect: [62, 7, 1, 2]}
   t_trellis:     {map: 187, rect: [19, 25, 2, 3]}
+  # --- city pass (free-port / castle-city kit) ---
+  h_green:    {map: 187, rect: [63, 6, 5, 5]}
+  h_gable_o:  {map: 187, rect: [68, 6, 4, 5]}
+  h_flat_o:   {map: 187, rect: [72, 7, 4, 5]}
+  h_green2:   {map: 187, rect: [76, 7, 4, 5]}
+  h_olive:    {map: 187, rect: [55, 9, 4, 5]}
+  h_slant_o:  {map: 187, rect: [59, 9, 4, 5]}
+  h_big_o:    {map: 187, rect: [50, 11, 5, 5]}
+  h_chim_o:   {map: 187, rect: [53, 19, 4, 5]}
+  h_red:      {map: 187, rect: [65, 18, 4, 5]}
+  h_black:    {map: 187, rect: [69, 17, 4, 6]}
+  h_teal:     {map: 187, rect: [60, 25, 5, 6]}
+  h_blue:     {map: 187, rect: [60, 34, 5, 6]}
+  h_olive2:   {map: 187, rect: [65, 34, 4, 5]}
+  h_dome:     {map: 155, rect: [30, 2, 9, 9]}
+  h_manor:    {map: 56, rect: [26, 17, 11, 6]}
+  h_cabin:    {map: 25, rect: [32, 23, 7, 6]}
+  h_long_g:   {map: 11, rect: [22, 12, 5, 5]}
+  t_cart:     {map: 188, rect: [15, 22, 7, 4]}
+  t_board:    {map: 187, rect: [67, 10, 1, 2]}

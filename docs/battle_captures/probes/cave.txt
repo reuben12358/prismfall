@@ -1,0 +1,164 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for CAVE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+CAVE probe: boosted move POWERGEM (on field)
+============================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Power Gem!
+  The cavern rumbled!
+    HP Snorlax (foe): 461 -> 374 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 374/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+CAVE probe: boosted move POWERGEM (baseline, no field)
+======================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Power Gem!
+    HP Snorlax (foe): 461 -> 402 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 402/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+CAVE probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage 2] using EARTHQUAKE
+====================================================================================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 461 -> 351 / 461
+## FIELD STAGE: CAVE is now stage 2
+  The cave shook violently! Cracks spread across the ceiling...
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 351/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 351/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CAVE probe: transition [stage 2: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage 1] using EARTHQUAKE
+====================================================================================================
+
+--- Battle start ---
+  field: CAVE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  Cracks run across the cave ceiling...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 461 -> 351 / 461
+  The cracked ceiling gave way! Rocks rained down!
+    HP Mew (player): 341 -> 298 / 341
+  Mew was struck by falling rocks!
+    HP Snorlax (foe): 351 -> 293 / 461
+  The wild Snorlax was struck by falling rocks!
+## FIELD STAGE: CAVE is now stage 1
+  The dust slowly settles over the rubble.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 298/341 | Snorlax 293/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 298/341 | Snorlax 293/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CAVE probe: Telluric Seed held on entry
+=======================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+    (anim: UseItem)
+  Mew's Telluric Seed shook stones loose from the ceiling!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Pointed stones float in the air around the opposing team!
+    HP Snorlax (foe): 461 -> 403 / 461
+  Pointed stones dug into The wild Snorlax!
+    HP Snorlax (foe): 403 -> 345 / 461
+  Loose rocks rained down on the wild Snorlax!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 345/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 345/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

@@ -1,0 +1,378 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+BOSS Hard-mode Warden Ilsa (ace is a 2-bar boss) on MINDSCAPE vs over-levelled Lv.100 party
+===========================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  You are challenged by Warden Ilsa!
+  Warden Ilsa sent out Bronzong!
+    >> sent out (foe): Bronzong Lv.58 @MENTALHERB [LEVITATE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.100 [SANDVEIL]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Garchomp 357/357 | Bronzong 200/200]
+  Garchomp used Fire Fang!
+    HP Bronzong (foe): 200 -> 63 / 200
+  It's super effective!
+  The opposing Bronzong used Psychic!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 357 -> 304 / 357
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 304/357 | Bronzong 63/200]
+    HP Garchomp (player): 304 -> 258 / 357
+  Garchomp won't obey! It hurt itself in its confusion!
+  The opposing Bronzong used Trick Room!
+  The opposing Bronzong twisted the dimensions!
+  The Mindscape folded the dimensions in on themselves!
+  (end of round)
+
+--- Turn 3 ---
+  [Garchomp 258/357 | Bronzong 63/200]
+  The opposing Bronzong used Gyro Ball!
+    HP Garchomp (player): 258 -> 200 / 357
+  Garchomp ignored orders!
+  Garchomp used Earthquake!
+    [ability: Bronzong (foe)'s Levitate]
+  The opposing Bronzong avoided the attack!
+  (end of round)
+
+--- Turn 4 ---
+  [Garchomp 200/357 | Bronzong 63/200]
+  Warden Ilsa used a Full Restore.
+    HP Bronzong (foe): 63 -> 200 / 200
+  The opposing Bronzong's HP was restored.
+  Garchomp ignored orders!
+  Garchomp used Stone Edge!
+    HP Bronzong (foe): 200 -> 141 / 200
+  It's not very effective...
+  (end of round)
+
+--- Turn 5 ---
+  [Garchomp 200/357 | Bronzong 141/200]
+  The opposing Bronzong used Psychic!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 200 -> 141 / 357
+  Garchomp pretended not to notice!
+  (end of round)
+
+--- Turn 6 ---
+  [Garchomp 141/357 | Bronzong 141/200]
+  The opposing Bronzong used Psychic!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 141 -> 84 / 357
+  Garchomp used Fire Fang!
+    HP Bronzong (foe): 141 -> 1 / 200
+  It's super effective!
+  (end of round)
+
+--- Turn 7 ---
+  [Garchomp 84/357 | Bronzong 1/200]
+  Warden Ilsa used a Full Restore.
+    HP Bronzong (foe): 1 -> 200 / 200
+  The opposing Bronzong's HP was restored.
+  Garchomp is loafing around!
+  (end of round)
+
+--- Turn 8 ---
+  [Garchomp 84/357 | Bronzong 200/200]
+  The opposing Bronzong used Psychic!
+  The Mindscape amplified the thought!
+    HP Garchomp (player): 84 -> 33 / 357
+    (anim: Sleep)
+  Garchomp began to nap!
+  (end of round)
+  The twisted dimensions returned to normal!
+  Garchomp is stirring in its dream...
+
+--- Turn 9 ---
+  [Garchomp 33/357 SLEEP | Bronzong 200/200]
+  Garchomp woke up!
+  Garchomp ignored orders!
+  Garchomp used Dragon Claw!
+    HP Bronzong (foe): 200 -> 134 / 200
+  It's not very effective...
+  The opposing Bronzong used Gyro Ball!
+    HP Garchomp (player): 33 -> 0 / 357
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.100 [BLAZE]
+
+--- Turn 10 ---
+  [Charizard 297/297 | Bronzong 134/200]
+  Charizard used Flamethrower!
+    HP Bronzong (foe): 134 -> 0 / 200
+  A critical hit!
+  It's super effective!
+  The opposing Bronzong fainted!
+    xx fainted: Bronzong (foe)
+  Charizard is at the level cap (Lv. 59) and can't gain Exp. Points.
+  (end of round)
+  Warden Ilsa is about to send out Gothitelle. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Gothitelle!
+    >> sent out (foe): Gothitelle Lv.59 @LEFTOVERS [SHADOWTAG]
+
+--- Turn 11 ---
+  [Charizard 297/297 | Gothitelle 207/207]
+  Charizard used Air Slash!
+    HP Gothitelle (foe): 207 -> 70 / 207
+  The opposing Gothitelle used Trick Room!
+  The opposing Gothitelle twisted the dimensions!
+  The Mindscape folded the dimensions in on themselves!
+  (end of round)
+    (anim: UseItem)
+    HP Gothitelle (foe): 70 -> 82 / 207
+  The opposing Gothitelle restored a little HP using its Leftovers!
+
+--- Turn 12 ---
+  [Charizard 297/297 | Gothitelle 82/207]
+  Warden Ilsa used a Full Restore.
+    HP Gothitelle (foe): 82 -> 207 / 207
+  The opposing Gothitelle's HP was restored.
+  Charizard used Earthquake!
+    HP Gothitelle (foe): 207 -> 91 / 207
+  (end of round)
+    (anim: UseItem)
+    HP Gothitelle (foe): 91 -> 103 / 207
+  The opposing Gothitelle restored a little HP using its Leftovers!
+
+--- Turn 13 ---
+  [Charizard 297/297 | Gothitelle 103/207]
+  The opposing Gothitelle used Psychic!
+  The Mindscape amplified the thought!
+    HP Charizard (player): 297 -> 203 / 297
+    (anim: StatDown)
+  Charizard's Special Defense fell!
+  Charizard is loafing around!
+  (end of round)
+    (anim: UseItem)
+    HP Gothitelle (foe): 103 -> 115 / 207
+  The opposing Gothitelle restored a little HP using its Leftovers!
+
+--- Turn 14 ---
+  [Charizard 203/297 | Gothitelle 115/207]
+  The opposing Gothitelle used Psychic!
+  The Mindscape amplified the thought!
+    HP Charizard (player): 203 -> 68 / 297
+  Charizard used Flamethrower!
+    HP Gothitelle (foe): 115 -> 0 / 207
+  The opposing Gothitelle fainted!
+    xx fainted: Gothitelle (foe)
+  (end of round)
+  Warden Ilsa is about to send out Musharna. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Musharna!
+    >> sent out (foe): Musharna Lv.58 @LEFTOVERS [FOREWARN]
+  The opposing Musharna foresaw the danger in the dream!
+    (anim: StatUp)
+  The opposing Musharna's Special Defense rose!
+
+--- Turn 15 ---
+  [Charizard 68/297 | Musharna 257/257]
+  The opposing Musharna used Psychic!
+  The Mindscape amplified the thought!
+    HP Charizard (player): 68 -> 0 / 297
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+  You're in charge, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
+
+--- Turn 16 ---
+  [Magnezone 281/281 | Musharna 257/257]
+  The opposing Musharna used Psychic!
+  The Mindscape amplified the thought!
+    HP Magnezone (player): 281 -> 239 / 281
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Musharna (foe): 257 -> 95 / 257
+    (anim: Paralysis)
+  The opposing Musharna is paralyzed! It may be unable to move!
+  (end of round)
+    (anim: UseItem)
+    HP Musharna (foe): 95 -> 111 / 257
+  The opposing Musharna restored a little HP using its Leftovers!
+
+--- Turn 17 ---
+  [Magnezone 239/281 | Musharna 111/257 PARALYSIS]
+  The opposing Musharna used Psychic!
+  The Mindscape amplified the thought!
+    HP Magnezone (player): 239 -> 191 / 281
+  It's not very effective...
+  Magnezone ignored orders!
+  Magnezone used Thunderbolt!
+    HP Musharna (foe): 111 -> 0 / 257
+  The opposing Musharna fainted!
+    xx fainted: Musharna (foe)
+  Magnezone is at the level cap (Lv. 59) and can't gain Exp. Points.
+  (end of round)
+  The twisted dimensions returned to normal!
+  Warden Ilsa is about to send out Reuniclus. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Reuniclus!
+    >> sent out (foe): Reuniclus Lv.59 @LIFEORB [MAGICGUARD]
+
+--- Turn 18 ---
+  [Magnezone 191/281 | Reuniclus 254/254]
+    (anim: Sleep)
+  Magnezone began to nap!
+  The opposing Reuniclus used Psychic!
+  The Mindscape amplified the thought!
+    HP Magnezone (player): 191 -> 126 / 281
+  It's not very effective...
+  (end of round)
+  Magnezone is stirring in its dream...
+
+--- Turn 19 ---
+  [Magnezone 126/281 SLEEP | Reuniclus 254/254]
+    (anim: Sleep)
+  Magnezone is fast asleep.
+  The opposing Reuniclus used Focus Blast!
+    HP Magnezone (player): 126 -> 0 / 281
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+  You're in charge, Togekiss!
+    >> sent out (player): Togekiss Lv.100 [HUSTLE]
+
+--- Turn 20 ---
+  [Togekiss 311/311 | Reuniclus 254/254]
+  Togekiss used Air Slash!
+    HP Reuniclus (foe): 254 -> 46 / 254
+  The opposing Reuniclus used Psychic!
+  The Mindscape amplified the thought!
+    HP Togekiss (player): 311 -> 202 / 311
+  (end of round)
+
+--- Turn 21 ---
+  [Togekiss 202/311 | Reuniclus 46/254]
+  Togekiss used Air Slash!
+    HP Reuniclus (foe): 46 -> 0 / 254
+  The opposing Reuniclus fainted!
+    xx fainted: Reuniclus (foe)
+  Togekiss is at the level cap (Lv. 59) and can't gain Exp. Points.
+  (end of round)
+  Warden Ilsa is about to send out Espeon. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Espeon!
+    >> sent out (foe): Espeon Lv.59 @LIFEORB [MAGICBOUNCE]
+
+--- Turn 22 ---
+  [Togekiss 202/311 | Espeon 164/164]
+  The opposing Espeon used Calm Mind!
+    (anim: StatUp)
+  The opposing Espeon's Special Attack rose!
+  The opposing Espeon's Special Defense rose!
+  Togekiss ignored orders!
+  Togekiss used Aura Sphere!
+    HP Espeon (foe): 164 -> 124 / 164
+  It's not very effective...
+  (end of round)
+
+--- Turn 23 ---
+  [Togekiss 202/311 | Espeon 124/164]
+  The opposing Espeon used Psychic!
+  The Mindscape amplified the thought!
+    HP Togekiss (player): 202 -> 55 / 311
+    HP Espeon (foe): 124 -> 108 / 164
+  The opposing Espeon lost some of its HP!
+  Togekiss used Dazzling Gleam!
+    HP Espeon (foe): 108 -> 0 / 164
+  The opposing Espeon fainted!
+    xx fainted: Espeon (foe)
+  (end of round)
+  Warden Ilsa is about to send out Hush. Will you switch your Pokémon?  [auto: No]
+  Warden Ilsa sent out Hush!
+    >> sent out (foe): Hush Lv.59 @LIFEORB [MAGICBOUNCE]
+
+--- Turn 24 ---
+  [Togekiss 55/311 | Hush 191/191]
+  Togekiss turned away!
+  The opposing Hush used Mystical Fire!
+    HP Togekiss (player): 55 -> 0 / 311
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+    HP Hush (foe): 191 -> 172 / 191
+  The opposing Hush lost some of its HP!
+  (end of round)
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.100 [ILLUMINATE]
+
+--- Turn 25 ---
+  [Starmie 261/261 | Hush 172/191]
+  Starmie ignored orders!
+  Starmie used Thunderbolt!
+    HP Hush (foe): 172 -> 58 / 191
+  The opposing Hush used Calm Mind!
+    (anim: StatUp)
+  The opposing Hush's Special Attack rose!
+  The opposing Hush's Special Defense rose!
+  (end of round)
+
+--- Turn 26 ---
+  [Starmie 261/261 | Hush 58/191]
+  Starmie used Surf!
+    HP Hush (foe): 58 -> 1 / 191
+  The opposing Hush's Warden sigil flared!
+    HP Hush (foe): 1 -> 191 / 191
+  The opposing Hush refuses to fall! Its Warden's resolve restores it!
+    (anim: StatUp)
+  The opposing Hush's Defense rose!
+    (anim: StatUp)
+  The opposing Hush's Special Defense rose!
+## BOSS BAR BROKEN: WARDEN_ACE_2BAR bar 1 depleted, 1 bar(s) left (Hush HP 191/191, field MINDSCAPE)
+  The opposing Hush used Psychic!
+  The Mindscape amplified the thought!
+    HP Starmie (player): 261 -> 146 / 261
+  It's not very effective...
+    HP Hush (foe): 191 -> 172 / 191
+  The opposing Hush lost some of its HP!
+  (end of round)
+
+--- Turn 27 ---
+  [Starmie 146/261 | Hush 172/191]
+  Starmie used Psychic!
+  The Mindscape amplified the thought!
+    HP Hush (foe): 172 -> 109 / 191
+  It's not very effective...
+  The opposing Hush used Psychic!
+  The Mindscape amplified the thought!
+    HP Starmie (player): 146 -> 36 / 261
+  It's not very effective...
+    HP Hush (foe): 109 -> 90 / 191
+  The opposing Hush lost some of its HP!
+  (end of round)
+
+--- Turn 28 ---
+  [Starmie 36/261 | Hush 90/191]
+  Starmie is loafing around!
+  The opposing Hush used Dazzling Gleam!
+    HP Starmie (player): 36 -> 0 / 261
+  Starmie fainted!
+    xx fainted: Starmie (player)
+    HP Hush (foe): 90 -> 71 / 191
+  The opposing Hush lost some of its HP!
+  (end of round)
+  Just a little more! Hang in there, Lucario!
+    >> sent out (player): Lucario Lv.100 [STEADFAST]
+
+--- Turn 29 ---
+  [Lucario 281/281 | Hush 71/191]
+  Lucario used Flash Cannon!
+    HP Hush (foe): 71 -> 0 / 191
+  It's super effective!
+  The opposing Hush fainted!
+    xx fainted: Hush (foe)
+  Lucario is at the level cap (Lv. 59) and can't gain Exp. Points.
+  You defeated Warden Ilsa!
+  ...Quiet, for once. Your thoughts were very loud. I liked them.
+  You got $5,900 for winning!
+  battle result code: 1
+  
+RESULT: player won after 28 turn(s)

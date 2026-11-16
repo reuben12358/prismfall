@@ -1,0 +1,576 @@
+# Saltmere - Old Town (147). WRITTEN BY layouts/saltmere_city.py.
+id: 147
+name: Saltmere - Old Town
+palette: city
+bgm: Lerucean Town
+parent: 140
+rubric: true
+tone: [12, 4, -18, 0]
+metadata:
+  Name: Saltmere Old Town
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 10, 25]
+  BattleBack: field
+  Weather: [Rain, 10]
+map: |
+  KKKKWWWWWWWWWWWWWWWWKKKKWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWKKKKWWWWWWWWWWWWWWWWKKKK
+  KKKKWWWWWWWWWWWWWWWWKKKKWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWKKKKWWWWWWWWWWWWWWWWKKKK
+  KKKKFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFKKKK
+  GGGGFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGG
+  GGGGFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGG
+  GGGG................GGGG................................T.......GGGG................GGGG
+  GGGG................GGGG.hhh.TTT....###############....TTT......GGGG...hh........#..GGGG
+  WW.....hhhh..............hhhTTTTT...###############...TTThh..hh...#....hh..#.....#....WW
+  WW.....hhhh....##.....hh....TTT##...###############...TTThh..hh...#..#.....#..........WW
+  WW.............##.....hh....TTT##...###############...TTThh..hh......#................WW
+  WW...........................TT#....###############....TTT............................WW
+  WW......oooooooooooooo.........#....###############.....TT.......oooooooooooooooooooo.WW
+  WW.ooooooooooooooooooooooooooo......###############......oooooooooooooooooooooooooooo.WW
+  WW.oooooooooooooo....ooooooooooooo..###############..oooooooooooooo.......ooooooooooo.WW
+  WW......#...oo............#..ooooo..###############..ooooooooo............ooo...#.ooo.WW
+  WW......#...oo............#.........###############.......#.#.............oo...##.....WW
+  WW....##T#..oo...##.hhhhT#TT##..hh..###############.......#TT###########..oo...#T..##.WW
+  WW....##T#T.oo...##ThhhhT#TT##..hh..###############......TTTT###########..ooo.TTTTT##.WW
+  WW....TTTTT.oo......T#TTTTTT....hh..###############.......TTT###########..oooTTTTTT...WW
+  WW..####TTT.oo.......#..............###############....#################..ooo.T####...WW
+  WW..####....oo....hh...#............###############....#################..ooo..####...WW
+  WW..####....oo.##.hh...#.#.hhh......###############....#################..ooo..####...WW
+  WW..####....oo.##........#.hhh....ccccccccccccccccccc..#################..ooo..####...WW
+  WW..####..#.oo....................ccccccccccccccccccc..#################..ooo..####...WW
+  WW..####..#.oo.....CCCCCCCCCCCCCCCccccccccccccccccccc..#################..oo...####...WW
+  WW..........oo..CCCCCCCCCCCCCCCCCCCCCCCcccccccccccccc................CCCC.oo..CCCCCCCCWW
+  WW.CCCCCCCCCoo#CCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCcccc............CCCCCCCCCoo#CCCCCCCCCWW
+  WWCCCCCCCCCC###CCCCC...........TTCCCCCCCkkkkkkCCC...CCCCCCCCCCCCCCCCCCCCCC###CCCCCCCCCWW
+  WWCCCCCCCCCC###CC.............TT##T...CCkkkkkkCCCCCCCCCCCCCCCCCCCCCCCC..CC###CC..TTT..WW
+  WWCC####.TTT###..##########....T##......kkkkkk#.CCCCCCCCCCCCCCCCCC#####...###..####TT.WW
+  KKK.####.TTTkkk.cccccccccccccc..........kkkkkk#.CCCCC.TTTT.cccccccccccccc.kkk..####T..WW
+  KKK.####.TTTkkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkk..####.#.WW
+  KKK.####..#.kkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkk..####.#.WW
+  GGG.####..#.kkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb#cccccccccccccc.kkk..####...WW
+  GGG.####....kkk.ccccccccccccccbbbbccccccccccccccccccccbbbb#cccccccccccccc.kkk..###kkk.WW
+  GGG.........kkk.ccccccccccccccbbbbccccccccccccccccccccbbbb#cccccccccccccc.kkkkkkkkkkk.WW
+  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccbbbbbbbbbbbbbbbbccbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.WW
+  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccbbbbbbbbbbbbbbbbccbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.WW
+  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccccccccccccccccccccbbkkkkkkkkkkkkkkkkkkkkkk..#.....WW
+  kkkkkkkkkkkkkkkkkkkoookkkkkkkkbbbbccccccccccccccccccccbbbb...##.#oo.kkkkkkk###..#.....WW
+  KKK.#########.....#ooo...#....bbbbbbbbbbbbbbbbbbbbbbbbbbbb...##.#oo..#########..#.....WW
+  KKK.#########.....#ooo...#...#bbbbbbbbbbbbbbbbbbbbbbbbbbbb##....#oo..#########........WW
+  KKK.#############..ooo..TTTTT#bbbbbbbbbbbbkkkbbbbbbbbbbbbb##TTTTToo..###############..WW
+  GGG.#############..ooo.#TTTTT#............kkk......#......#TTTTTToo..###############..WW
+  GGG.#############..ooo.#TTTTT........##...kkk......#........TTTTooo..###############..WW
+  GGG.#############..ooo.....#...hh....##...kkk..#.......hh..hhh..ooo..###############..WW
+  WW..#############..ooo.....#...hh.........kkk..#.......hh..hhh..oo...###############..WW
+  WW..#############..ooo....#########.......kkk..........hh.......oo...###############..WW
+  WW.................ooo....#kkkkkkkkkkkkkkkkkk...................ookkkkkkkkkkkkk.kkkkk.WW
+  WW..#kkkkkkkkkkkkkkoookkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkookkkkkkkkkkkkkkkkkkk.WW
+  WW..#kkkkkkkkkkkkkkoookkkkkk#######.kkkkkkkkkkkkkkkkkkkkkkkkkkkkookkkk.######kkkkkkkk.WW
+  WW..#####kkkkkkkkkkkkkk...#########......#kkk......kkkkkkkkkkkkkkkk....###########....WW
+  WW..###############.######################kkk..######..###kkk#########.###########....WW
+  WW..###############.#####################kkkk..######TT####.##########.###########....WW
+  WW..###############.#####################kkkk.#######TT####.##########.###########.#..WW
+  WW..###############.#####################kkkk.#######TT####.##########.###########.#..WW
+  WW..###############.#####################kkkk.#######..####.##########.###########...KKK
+  WW..###############.#####################kkkk..######..####.##########.###########...KKK
+  KKK.............oooooooooooooooooooooooooooooooo......................oooooooooooooooKKK
+  KKKooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooGGG
+  KKKooooooooooooooooooooo....ooooooooooo..oooooooooooooooooooooooooooooooooTTToooooo..GGG
+  GGG.......TTTTTTTTTTTTT.CCCCCCCCCCC.........TTTTTTTTTTTTTTCCCCCCCCCCCCCCCCCCCTTTT....GGG
+  GGGCC.......TCCCCCCCCCCCC~~~~~C~~~CCCCCCCCCCCCCTTTTTTT.CCCC~~~~~~~~~~~~~~~~~CCCCC....GGG
+  GGG~CCCCCCCCCC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCCCCCCC~~~~~~~~~~~~~~~~~~~~~~~~CCCCC.FF
+  GGG~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCFF
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+heights: |
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222211111111111112222222222222222222222222222222222222222222222222222222
+  2222222222222222211111111111111111111122222222222222222222222222222222112222222111111111
+  2222111111111111111111111111111111111111111111112222222222222222221111111111111111111111
+  1111111111111111111111111111111111111111111111112222211111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111000001000111111111111111111111111100000000000000000111111111111
+  0000111111111100000000000000000000000000000000111111111100000000000000000000000011111111
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000001111
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+stamps:
+- stamp: t_stairs
+  at: [40, 26]
+- stamp: t_stairs
+  at: [43, 26]
+- stamp: t_stairs
+  at: [12, 26]
+- stamp: t_stairs
+  at: [74, 26]
+- stamp: t_hall
+  at: [36, 6]
+  link: SM_GYM
+  name: Playhouse door
+  door: [7, 15]
+- stamp: t_cart
+  at: [31, 32]
+- stamp: t_bench
+  at: [50, 35]
+- stamp: t_bench
+  at: [36, 38]
+- stamp: t_bench
+  at: [50, 38]
+- stamp: t_bench
+  at: [15, 8]
+- stamp: t_bench
+  at: [31, 8]
+- stamp: t_barrel
+  at: [31, 10]
+- stamp: t_barrel2
+  at: [81, 6]
+- stamp: t_barrel2
+  at: [69, 8]
+- stamp: t_barrel
+  at: [75, 7]
+- stamp: t_barrel
+  at: [66, 7]
+- stamp: w_cot
+  at: [4, 19]
+- stamp: t_board
+  at: [10, 23]
+- stamp: t_barrel
+  at: [21, 18]
+- stamp: t_bench
+  at: [17, 16]
+- stamp: t_barrel
+  at: [23, 20]
+- stamp: w_house
+  at: [55, 19]
+- stamp: w_manor_b
+  at: [61, 16]
+- stamp: w_cot
+  at: [79, 19]
+- stamp: t_bench
+  at: [83, 16]
+- stamp: w_cot
+  at: [4, 29]
+- stamp: t_board
+  at: [10, 32]
+- stamp: t_stall
+  at: [17, 29]
+- stamp: t_townhouse
+  at: [22, 29]
+- stamp: t_barrel
+  at: [28, 33]
+- stamp: t_stall
+  at: [66, 29]
+- stamp: t_bench
+  at: [60, 32]
+- stamp: w_cot
+  at: [79, 29]
+- stamp: t_board
+  at: [84, 31]
+- stamp: w_ell_b
+  at: [4, 37]
+- stamp: w_cot
+  at: [13, 42]
+- stamp: t_barrel2
+  at: [27, 45]
+- stamp: t_barrel
+  at: [47, 45]
+- stamp: w_ell_b
+  at: [69, 37]
+- stamp: w_house
+  at: [78, 42]
+- stamp: w_manor_b
+  at: [4, 49]
+- stamp: w_cot
+  at: [15, 52]
+- stamp: w_house
+  at: [20, 52]
+- stamp: w_ell_b
+  at: [26, 47]
+- stamp: w_house
+  at: [35, 52]
+- stamp: w_house
+  at: [47, 52]
+- stamp: w_cot
+  at: [55, 52]
+- stamp: w_house
+  at: [60, 52]
+- stamp: w_cot
+  at: [66, 52]
+- stamp: w_manor_b
+  at: [71, 49]
+- stamp: t_barrel2
+  at: [83, 54]
+- stamp: t_barrel
+  at: [32, 39]
+- stamp: t_barrel
+  at: [31, 36]
+- stamp: t_barrel
+  at: [39, 31]
+- stamp: t_barrel2
+  at: [49, 31]
+- stamp: t_barrel
+  at: [40, 40]
+- stamp: t_rock
+  at: [28, 16]
+- stamp: t_barrel2
+  at: [58, 15]
+- stamp: t_trellis
+  at: [6, 16]
+- stamp: t_barrel
+  at: [51, 43]
+- stamp: t_trellis
+  at: [32, 28]
+- stamp: t_barrel2
+  at: [25, 21]
+- stamp: t_trellis
+  at: [61, 39]
+- stamp: t_barrel
+  at: [25, 40]
+- stamp: t_barrel
+  at: [59, 41]
+- stamp: t_barrel
+  at: [23, 43]
+- stamp: t_barrel
+  at: [79, 15]
+- stamp: t_trellis
+  at: [15, 21]
+- stamp: t_barrel
+  at: [9, 16]
+- stamp: t_barrel2
+  at: [25, 16]
+- stamp: t_rock
+  at: [37, 44]
+- stamp: t_lamp
+  at: [51, 24]
+- stamp: t_lamp
+  at: [46, 29]
+- stamp: t_lamp
+  at: [29, 33]
+- stamp: t_lamp
+  at: [58, 33]
+- stamp: t_lamp
+  at: [29, 41]
+- stamp: t_lamp
+  at: [58, 41]
+- stamp: t_lamp
+  at: [18, 39]
+- stamp: t_lamp
+  at: [64, 39]
+- stamp: t_lamp
+  at: [80, 38]
+- stamp: t_lamp
+  at: [41, 50]
+- stamp: t_lamp
+  at: [46, 54]
+- stamp: t_lamp
+  at: [8, 13]
+- stamp: t_lamp
+  at: [26, 13]
+- stamp: t_lamp
+  at: [60, 13]
+- stamp: t_lamp
+  at: [80, 13]
+tiles:
+- tile: 3859
+  at: [38, 32]
+  layer: 0
+- tile: 3859
+  at: [41, 32]
+  layer: 0
+- tile: 3859
+  at: [54, 41]
+  layer: 0
+- tile: 3916
+  at: [42, 23]
+  layer: 0
+- tile: 3916
+  at: [44, 23]
+  layer: 0
+- tile: 3916
+  at: [47, 23]
+  layer: 0
+- tile: 3916
+  at: [46, 24]
+  layer: 0
+- tile: 3916
+  at: [42, 25]
+  layer: 0
+- tile: 3916
+  at: [44, 25]
+  layer: 0
+- tile: 3916
+  at: [52, 38]
+  layer: 0
+- tile: 1554
+  at: [5, 69]
+  layer: 2
+- tile: 1562
+  at: [5, 70]
+  layer: 2
+- tile: 1555
+  at: [82, 68]
+  layer: 2
+- tile: 1563
+  at: [82, 69]
+  layer: 2
+- tile: 1554
+  at: [9, 66]
+  layer: 2
+- tile: 1562
+  at: [9, 67]
+  layer: 2
+- tile: 1552
+  at: [74, 67]
+  layer: 2
+- tile: 1553
+  at: [75, 67]
+  layer: 2
+- tile: 1560
+  at: [74, 68]
+  layer: 2
+- tile: 1561
+  at: [75, 68]
+  layer: 2
+- tile: 1554
+  at: [53, 65]
+  layer: 2
+- tile: 1562
+  at: [53, 66]
+  layer: 2
+- tile: 1552
+  at: [70, 63]
+  layer: 2
+- tile: 1553
+  at: [71, 63]
+  layer: 2
+- tile: 1560
+  at: [70, 64]
+  layer: 2
+- tile: 1561
+  at: [71, 64]
+  layer: 2
+- tile: 1552
+  at: [32, 66]
+  layer: 2
+- tile: 1553
+  at: [33, 66]
+  layer: 2
+- tile: 1560
+  at: [32, 67]
+  layer: 2
+- tile: 1561
+  at: [33, 67]
+  layer: 2
+- tile: 1554
+  at: [62, 69]
+  layer: 2
+- tile: 1562
+  at: [62, 70]
+  layer: 2
+- tile: 1555
+  at: [35, 66]
+  layer: 2
+- tile: 1563
+  at: [35, 67]
+  layer: 2
+- tile: 1554
+  at: [27, 67]
+  layer: 2
+- tile: 1562
+  at: [27, 68]
+  layer: 2
+- tile: 1552
+  at: [80, 65]
+  layer: 2
+- tile: 1553
+  at: [81, 65]
+  layer: 2
+- tile: 1560
+  at: [80, 66]
+  layer: 2
+- tile: 1561
+  at: [81, 66]
+  layer: 2
+- tile: 1552
+  at: [57, 66]
+  layer: 2
+- tile: 1553
+  at: [58, 66]
+  layer: 2
+- tile: 1560
+  at: [57, 67]
+  layer: 2
+- tile: 1561
+  at: [58, 67]
+  layer: 2
+- tile: 1554
+  at: [17, 68]
+  layer: 2
+- tile: 1562
+  at: [17, 69]
+  layer: 2
+- tile: 1554
+  at: [61, 64]
+  layer: 2
+- tile: 1562
+  at: [61, 65]
+  layer: 2
+- tile: 1555
+  at: [1, 66]
+  layer: 2
+- tile: 1563
+  at: [1, 67]
+  layer: 2
+- tile: 1555
+  at: [45, 65]
+  layer: 2
+- tile: 1563
+  at: [45, 66]
+  layer: 2
+- tile: 1554
+  at: [51, 68]
+  layer: 2
+- tile: 1562
+  at: [51, 69]
+  layer: 2
+- tile: 1555
+  at: [41, 68]
+  layer: 2
+- tile: 1563
+  at: [41, 69]
+  layer: 2
+- tile: 1555
+  at: [14, 65]
+  layer: 2
+- tile: 1563
+  at: [14, 66]
+  layer: 2
+- tile: 1554
+  at: [85, 69]
+  layer: 2
+- tile: 1562
+  at: [85, 70]
+  layer: 2
+- tile: 1555
+  at: [13, 68]
+  layer: 2
+- tile: 1563
+  at: [13, 69]
+  layer: 2
+- tile: 1554
+  at: [38, 67]
+  layer: 2
+- tile: 1562
+  at: [38, 68]
+  layer: 2
+tileblocks:
+- tile: 3554
+  size: [2, 2]
+  at: [55, 32]
+  layer: 1
+- tile: 3536
+  size: [2, 1]
+  at: [55, 34]
+  layer: 1
+events:
+- type: sign
+  at: [40, 23]
+  name: Playhouse sign
+  text: 'THE PELL PLAYHOUSE - SALTMERE GYM
+
+    Warden: Dorian Pell. Tonight: The Gilded King.'
+- type: sign
+  at: [4, 41]
+  text: 'PLAYERS'' GATE
+
+    West: Saltmere market and the harbour stairs.'
+- type: npc
+  name: Costumier
+  at: [22, 37]
+  sprite: NPC 12
+  dir: down
+  text: 'Costumier: Every mask in the Pageant is stitched on this lane. Even the ones nobody ordered. [TODO story]'
+- type: npc
+  name: Street player
+  at: [44, 37]
+  sprite: NPC 08
+  dir: down
+  move: random
+  text: 'Street player: A stage is anywhere two people stop to look. Dorian taught us that. [TODO story]'
+- type: warp
+  at: [0, 36]
+  to: {map: 140, x: 86, y: 42, dir: retain}
+- type: warp
+  at: [0, 37]
+  to: {map: 140, x: 86, y: 43, dir: retain}
+- type: warp
+  at: [0, 38]
+  to: {map: 140, x: 86, y: 44, dir: retain}
+- type: warp
+  at: [0, 39]
+  to: {map: 140, x: 86, y: 45, dir: retain}

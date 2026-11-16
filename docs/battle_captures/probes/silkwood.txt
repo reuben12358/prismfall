@@ -1,0 +1,210 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for SILKWOOD: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+SILKWOOD probe: boosted move BUGBUZZ (on field)
+===============================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+  Mew blundered into a sticky web!
+    (anim: StatDown)
+  Mew's Speed fell!
+  The wild Snorlax blundered into a sticky web!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Bug Buzz!
+  The Silkwood hums with chittering life!
+    HP Snorlax (foe): 461 -> 362 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 362/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SILKWOOD probe: boosted move BUGBUZZ (baseline, no field)
+=========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Bug Buzz!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SILKWOOD probe: transition [stage 1: types FIRE, category damaging x3 -> ASHEN_WASTE] using FLAMETHROWER, FLAMETHROWER, FLAMETHROWER
+====================================================================================================================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+  Mew blundered into a sticky web!
+    (anim: StatDown)
+  Mew's Speed fell!
+  The wild Snorlax blundered into a sticky web!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+  The flames raced along the silk!
+    HP Snorlax (foe): 461 -> 377 / 461
+  Embers smoulder in the silk... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 377/461]
+  Mew used Flamethrower!
+  The flames raced along the silk!
+    HP Snorlax (foe): 377 -> 287 / 461
+  Embers smoulder in the silk... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 287/461]
+  Mew used Flamethrower!
+  The flames raced along the silk!
+    HP Snorlax (foe): 287 -> 197 / 461
+## FIELD CHANGE: SILKWOOD -> ASHEN_WASTE
+  The webs went up in flames! The Silkwood burned down to ash!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 341 -> 320 / 341
+  Mew is choking on the ash!
+    HP Snorlax (foe): 197 -> 168 / 461
+  The wild Snorlax is choking on the ash!
+
+--- Turn 4 ---
+  [Mew 320/341 | Snorlax 168/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 320 -> 299 / 341
+  Mew is choking on the ash!
+    HP Snorlax (foe): 168 -> 139 / 461
+  The wild Snorlax is choking on the ash!
+
+--- Turn 5 ---
+  [Mew 299/341 | Snorlax 139/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+SILKWOOD probe: Telluric Seed held on entry
+===========================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+  Mew blundered into a sticky web!
+    (anim: StatDown)
+  Mew's Speed fell!
+    (anim: UseItem)
+  Mew's Telluric Seed sprouted silk-threaded roots!
+    (anim: StatUp)
+  Mew's Defense rose!
+  The wild Snorlax blundered into a sticky web!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 170 -> 191 / 341
+  Mew absorbed nutrients with its roots!
+
+--- Turn 2 ---
+  [Mew 191/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+SILKWOOD probe: end-of-round rule 1: heal on {:types=>[:BUG]} [subject Pinsir]
+==============================================================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Pinsir!
+    >> sent out (player): Pinsir Lv.100 [MOLDBREAKER]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+    [ability: Pinsir (player)'s Mold Breaker]
+  Pinsir breaks the mold!
+  The wild Snorlax blundered into a sticky web!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Pinsir 135/271 | Snorlax 230/461]
+  Pinsir used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Pinsir fed on the forest's nectar.
+    HP Pinsir (player): 135 -> 152 / 271
+
+--- Turn 2 ---
+  [Pinsir 152/271 | Snorlax 230/461]
+  Pinsir used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Pinsir fed on the forest's nectar.
+    HP Pinsir (player): 152 -> 169 / 271
+
+--- Turn 3 ---
+  [Pinsir 169/271 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

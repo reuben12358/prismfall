@@ -1,0 +1,99 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+BOSS Zekrom (ZEKROM_ENGINE, 3 bars, FACTORY -> SCRAPYARD) vs over-levelled Lv.100 party
+=======================================================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Zekrom appeared!
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.100 [SANDVEIL]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+  Zekrom strains against the golden cables of the Engine core!
+    [ability: Zekrom (foe)'s Teravolt]
+  The wild Zekrom is radiating a bursting aura!
+
+--- Turn 1 ---
+  [Garchomp 357/357 | Zekrom 249/249]
+  Garchomp used Dragon Claw!
+    HP Zekrom (foe): 249 -> 1 / 249
+  It's super effective!
+  A containment cable around the wild Zekrom snapped!
+    HP Zekrom (foe): 1 -> 249 / 249
+  The wild Zekrom roars as the Engine's grip weakens!
+    (anim: StatUp)
+  The wild Zekrom's Attack rose!
+## BOSS BAR BROKEN: ZEKROM_ENGINE bar 1 depleted, 2 bar(s) left (Zekrom HP 249/249, field FACTORY)
+  The wild Zekrom used Hone Claws!
+    (anim: StatUp)
+  The wild Zekrom's Attack rose!
+  The wild Zekrom's accuracy rose!
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 357/357 | Zekrom 249/249]
+  Garchomp used Dragon Claw!
+    HP Zekrom (foe): 249 -> 1 / 249
+  It's super effective!
+  A containment cable around the wild Zekrom snapped!
+    HP Zekrom (foe): 1 -> 249 / 249
+  The wild Zekrom roars as the Engine's grip weakens!
+    (anim: StatUp)
+  The wild Zekrom's Attack rose!
+  The wild Zekrom learned Bolt Strike!
+## FIELD CHANGE: FACTORY -> SCRAPYARD
+  The Engine core buckles! The foundry floor collapses into scrap!
+## BOSS BAR BROKEN: ZEKROM_ENGINE bar 2 depleted, 1 bar(s) left (Zekrom HP 249/249, field SCRAPYARD)
+  The wild Zekrom used Dragon Claw!
+    HP Garchomp (player): 357 -> 0 / 357
+  It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Togekiss!
+    >> sent out (player): Togekiss Lv.100 [SERENEGRACE]
+
+--- Turn 3 ---
+  [Togekiss 311/311 | Zekrom 249/249]
+  The wild Zekrom used Bolt Strike!
+    HP Togekiss (player): 311 -> 0 / 311
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  (end of round)
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Lucario!
+    >> sent out (player): Lucario Lv.100 [STEADFAST]
+    HP Lucario (player): 281 -> 272 / 281
+  Lucario was cut by jagged scrap!
+
+--- Turn 4 ---
+  [Lucario 272/281 | Zekrom 249/249]
+  Lucario used Aura Sphere!
+    HP Zekrom (foe): 249 -> 104 / 249
+  The wild Zekrom used Bolt Strike!
+    HP Lucario (player): 272 -> 0 / 281
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  Use next Pokémon?  [auto: Yes]
+  Just a little more! Hang in there, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [STURDY]
+    HP Magnezone (player): 281 -> 277 / 281
+  Magnezone was cut by jagged scrap!
+
+--- Turn 5 ---
+  [Magnezone 277/281 | Zekrom 104/249]
+  The wild Zekrom used Bolt Strike!
+    HP Magnezone (player): 277 -> 109 / 281
+  It's not very effective...
+  Magnezone used Tri Attack!
+    HP Zekrom (foe): 104 -> 1 / 249
+  The last cable tore loose!
+  The wild Zekrom broke free of the Engine core and burst through the roof!
+  battle result code: 1
+  
+RESULT: player won after 4 turn(s)

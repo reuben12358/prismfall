@@ -1,0 +1,248 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
+==============================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  You are challenged by Warden Magnus!
+  Warden Magnus sent out Ferrothorn!
+    >> sent out (foe): Ferrothorn Lv.69 @ROCKYHELMET [IRONBARBS]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.71 @SYNTHETICSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+    (anim: UseItem)
+  Garchomp's Synthetic Seed oiled its joints like factory machinery!
+    (anim: StatUp)
+  Garchomp's Attack rose!
+  Garchomp's Speed rose!
+
+--- Turn 1 ---
+  [Garchomp 256/256 | Ferrothorn 214/214]
+  Garchomp used Fire Fang!
+  The crucibles flared white-hot!
+    HP Ferrothorn (foe): 214 -> 0 / 214
+  It's super effective!
+    [ability: Ferrothorn (foe)'s Iron Barbs]
+    HP Garchomp (player): 256 -> 224 / 256
+  Garchomp is hurt!
+    HP Garchomp (player): 224 -> 182 / 256
+  Garchomp was hurt by the Rocky Helmet!
+  The opposing Ferrothorn fainted!
+    xx fainted: Ferrothorn (foe)
+  Garchomp is at the level cap (Lv. 71) and can't gain Exp. Points.
+  (end of round)
+  Warden Magnus is about to send out Kingambit. Will you switch your Pokémon?  [auto: No]
+  Warden Magnus sent out Kingambit!
+    >> sent out (foe): Kingambit Lv.70 @BLACKGLASSES [DEFIANT]
+
+--- Turn 2 ---
+  [Garchomp 182/256 | Kingambit 254/254]
+  Garchomp used Fire Fang!
+  Garchomp's attack missed!
+  The opposing Kingambit used Swords Dance!
+    (anim: StatUp)
+  The opposing Kingambit's Attack rose sharply!
+  (end of round)
+
+--- Turn 3 ---
+  [Garchomp 182/256 | Kingambit 254/254]
+  Garchomp used Fire Fang!
+  The crucibles flared white-hot!
+    HP Kingambit (foe): 254 -> 124 / 254
+  It's super effective!
+    (anim: Burn)
+  The opposing Kingambit was burned!
+  The opposing Kingambit used Iron Head!
+  The foundry's machinery roared!
+    HP Garchomp (player): 182 -> 23 / 256
+  (end of round)
+    (anim: Burn)
+    HP Kingambit (foe): 124 -> 109 / 254
+  The opposing Kingambit was hurt by its burn!
+
+--- Turn 4 ---
+  [Garchomp 23/256 | Kingambit 109/254 BURN]
+  Garchomp used Earthquake!
+    HP Kingambit (foe): 109 -> 0 / 254
+  It's super effective!
+  The opposing Kingambit fainted!
+    xx fainted: Kingambit (foe)
+  The gantries groan and buckle... (2 more)
+  (end of round)
+  Warden Magnus is about to send out Scizor. Will you switch your Pokémon?  [auto: No]
+  Warden Magnus sent out Scizor!
+    >> sent out (foe): Scizor Lv.70 @METALCOAT [TECHNICIAN]
+
+--- Turn 5 ---
+  [Garchomp 23/256 | Scizor 212/212]
+  The opposing Scizor used Bullet Punch!
+  The foundry's machinery roared!
+    HP Garchomp (player): 23 -> 0 / 256
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  You're in charge, Charizard!
+    >> sent out (player): Charizard Lv.71 [BLAZE]
+
+--- Turn 6 ---
+  [Charizard 213/213 | Scizor 212/212]
+  Charizard used Flamethrower!
+  The crucibles flared white-hot!
+    HP Scizor (foe): 212 -> 0 / 212
+  It's super effective!
+  The opposing Scizor fainted!
+    xx fainted: Scizor (foe)
+  Charizard is at the level cap (Lv. 71) and can't gain Exp. Points.
+  (end of round)
+  Warden Magnus is about to send out Excadrill. Will you switch your Pokémon?  [auto: No]
+  Warden Magnus sent out Excadrill!
+    >> sent out (foe): Excadrill Lv.69 @LIFEORB [SANDRUSH]
+
+--- Turn 7 ---
+  [Charizard 213/213 | Excadrill 264/264]
+  Charizard used Flamethrower!
+  The crucibles flared white-hot!
+    HP Excadrill (foe): 264 -> 0 / 264
+  It's super effective!
+  The opposing Excadrill fainted!
+    xx fainted: Excadrill (foe)
+  (end of round)
+  Warden Magnus is about to send out Mark One. Will you switch your Pokémon?  [auto: No]
+  Warden Magnus sent out Mark One!
+    >> sent out (foe): Mark One Lv.70 @SITRUSBERRY [CLEARBODY]
+
+--- Turn 8 ---
+  [Charizard 213/213 | Mark One 198/198]
+  Charizard used Flamethrower!
+  The crucibles flared white-hot!
+    HP Mark One (foe): 198 -> 4 / 198
+  It's super effective!
+    (anim: EatBerry)
+    HP Mark One (foe): 4 -> 53 / 198
+  The opposing Mark One restored its health using its Sitrus Berry!
+  The opposing Mark One used Shift Gear!
+    (anim: StatUp)
+  The opposing Mark One's Speed rose sharply!
+  The opposing Mark One's Attack rose!
+  The factory's gears meshed with the opposing Mark One's!
+    (anim: StatUp)
+  The opposing Mark One's Defense rose!
+  (end of round)
+
+--- Turn 9 ---
+  [Charizard 213/213 | Mark One 53/198]
+  The opposing Mark One used Gear Grind!
+  The foundry's machinery roared!
+  The factory gears ground together!
+    HP Charizard (player): 213 -> 61 / 213
+  A critical hit!
+    HP Charizard (player): 61 -> 0 / 213
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  It's not very effective...
+  Hit 2 times!
+  (end of round)
+  Just a little more! Hang in there, Lucario!
+    >> sent out (player): Lucario Lv.71 [INNERFOCUS]
+
+--- Turn 10 ---
+  [Lucario 202/202 | Mark One 53/198]
+  The opposing Mark One used Gear Grind!
+  The foundry's machinery roared!
+  The factory gears ground together!
+    HP Lucario (player): 202 -> 99 / 202
+    HP Lucario (player): 99 -> 0 / 202
+  A critical hit!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  It's not very effective...
+  Hit 2 times!
+  (end of round)
+  Just a little more! Hang in there, Starmie!
+    >> sent out (player): Starmie Lv.71 [ILLUMINATE]
+
+--- Turn 11 ---
+  [Starmie 188/188 | Mark One 53/198]
+  The opposing Mark One used Gear Grind!
+  The foundry's machinery roared!
+  The factory gears ground together!
+    HP Starmie (player): 188 -> 99 / 188
+    HP Starmie (player): 99 -> 0 / 188
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  It's not very effective...
+  Hit 2 times!
+  (end of round)
+  Just a little more! Hang in there, Togekiss!
+    >> sent out (player): Togekiss Lv.71 [SERENEGRACE]
+
+--- Turn 12 ---
+  [Togekiss 223/223 | Mark One 53/198]
+  Warden Magnus used a Full Restore.
+    HP Mark One (foe): 53 -> 198 / 198
+  The opposing Mark One's HP was restored.
+  Togekiss used Flamethrower!
+  The crucibles flared white-hot!
+    HP Mark One (foe): 198 -> 44 / 198
+  It's super effective!
+  (end of round)
+
+--- Turn 13 ---
+  [Togekiss 223/223 | Mark One 44/198]
+  Warden Magnus used a Full Restore.
+    HP Mark One (foe): 44 -> 198 / 198
+  The opposing Mark One's HP was restored.
+  Togekiss used Flamethrower!
+  The crucibles flared white-hot!
+    HP Mark One (foe): 198 -> 44 / 198
+  It's super effective!
+  (end of round)
+
+--- Turn 14 ---
+  [Togekiss 223/223 | Mark One 44/198]
+  The opposing Mark One used Gear Grind!
+  The foundry's machinery roared!
+  The factory gears ground together!
+    HP Togekiss (player): 223 -> 0 / 223
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  It's super effective!
+  Hit 1 time!
+  (end of round)
+  Your opponent's weak! Get 'em, Magnezone!
+    >> sent out (player): Magnezone Lv.71 [MAGNETPULL]
+
+--- Turn 15 ---
+  [Magnezone 202/202 | Mark One 44/198]
+  The opposing Mark One used Gear Grind!
+  The foundry's machinery roared!
+  The factory gears ground together!
+    HP Magnezone (player): 202 -> 167 / 202
+    HP Magnezone (player): 167 -> 128 / 202
+  It's not very effective...
+  Hit 2 times!
+  Magnezone used Thunderbolt!
+    HP Mark One (foe): 44 -> 0 / 198
+  The opposing Mark One fainted!
+    xx fainted: Mark One (foe)
+  Magnezone is at the level cap (Lv. 71) and can't gain Exp. Points.
+  (end of round)
+  Warden Magnus sent out Engine!
+    >> sent out (foe): Engine Lv.71 @ASSAULTVEST [CLEARBODY]
+
+--- Turn 16 ---
+  [Magnezone 128/202 | Engine 229/229]
+  The opposing Engine used Earthquake!
+    HP Magnezone (player): 128 -> 0 / 202
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  The gantries groan and buckle... (1 more)
+  You have no more Pokémon that can fight!
+  You lost against Warden Magnus!
+  battle result code: 2
+  
+RESULT: player lost after 15 turn(s)

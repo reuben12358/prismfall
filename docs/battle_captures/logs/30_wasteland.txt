@@ -1,0 +1,238 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
+====================================================================
+
+--- Battle start ---
+  field: WASTELAND | weather: None | terrain: None
+  You are challenged by Meridian CEO Aurelian!
+  Meridian CEO Aurelian sent out Klinklang!
+    >> sent out (foe): Klinklang Lv.96 @SITRUSBERRY [CLEARBODY]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.100 @TELLURICSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> WASTELAND
+  Poisoned slag and dead trees stretch to a jaundiced horizon...
+    (anim: UseItem)
+    (anim: Toxic)
+  Garchomp's Telluric Seed drew power from the tainted ground!
+    (anim: StatUp)
+  Garchomp's Attack rose!
+  Garchomp's Special Attack rose!
+
+--- Turn 1 ---
+  [Garchomp 357/357 POISON | Klinklang 271/271]
+  The opposing Klinklang used Substitute!
+    HP Klinklang (foe): 271 -> 204 / 271
+  The opposing Klinklang put in a substitute!
+  Garchomp turned away!
+  (end of round)
+    (anim: Toxic)
+    HP Garchomp (player): 357 -> 335 / 357
+  Garchomp was hurt by poison!
+
+--- Turn 2 ---
+  [Garchomp 335/357 POISON | Klinklang 204/271]
+  The opposing Klinklang used Shift Gear!
+    (anim: StatUp)
+  The opposing Klinklang's Speed rose sharply!
+  The opposing Klinklang's Attack rose!
+    HP Garchomp (player): 335 -> 267 / 357
+  Garchomp won't obey! It hurt itself in its confusion!
+  (end of round)
+    (anim: Toxic)
+    HP Garchomp (player): 267 -> 223 / 357
+  Garchomp was hurt by poison!
+
+--- Turn 3 ---
+  [Garchomp 223/357 POISON | Klinklang 204/271]
+  The opposing Klinklang used Gear Grind!
+    HP Garchomp (player): 223 -> 127 / 357
+    HP Garchomp (player): 127 -> 26 / 357
+  Hit 2 times!
+  Garchomp turned away!
+  (end of round)
+    (anim: Toxic)
+    HP Garchomp (player): 26 -> 0 / 357
+  Garchomp was hurt by poison!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.100 [STEADFAST]
+
+--- Turn 4 ---
+  [Lucario 281/281 | Klinklang 204/271]
+  The opposing Klinklang used Gear Grind!
+  The opposing Klinklang's attack missed!
+  Lucario used Aura Sphere!
+  The substitute took damage for the opposing Klinklang!
+  It's super effective!
+  The opposing Klinklang's substitute faded!
+  (end of round)
+
+--- Turn 5 ---
+  [Lucario 281/281 | Klinklang 204/271]
+  The opposing Klinklang used Substitute!
+    HP Klinklang (foe): 204 -> 137 / 271
+  The opposing Klinklang put in a substitute!
+  Lucario used Aura Sphere!
+  The substitute took damage for the opposing Klinklang!
+  It's super effective!
+  The opposing Klinklang's substitute faded!
+  (end of round)
+
+--- Turn 6 ---
+  [Lucario 281/281 | Klinklang 137/271]
+  The opposing Klinklang used Gear Grind!
+    HP Lucario (player): 281 -> 226 / 281
+    HP Lucario (player): 226 -> 170 / 281
+  It's not very effective...
+  Hit 2 times!
+  Lucario used Aura Sphere!
+    HP Klinklang (foe): 137 -> 0 / 271
+  It's super effective!
+  The opposing Klinklang fainted!
+    xx fainted: Klinklang (foe)
+  Lucario is at the level cap (Lv. 90) and can't gain Exp. Points.
+  (end of round)
+  Meridian CEO Aurelian is about to send out Gilder. Will you switch your Pokémon?  [auto: No]
+  Meridian CEO Aurelian sent out Gilder!
+    >> sent out (foe): Gilder Lv.97 @LIFEORB [NOGUARD]
+
+--- Turn 7 ---
+  [Lucario 170/281 | Gilder 330/330]
+  Lucario turned away!
+  The opposing Gilder used Dynamic Punch!
+    HP Lucario (player): 170 -> 0 / 281
+  It's super effective!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+    HP Gilder (foe): 330 -> 297 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.100 [NATURALCURE]
+
+--- Turn 8 ---
+  [Starmie 261/261 | Gilder 297/330]
+  Starmie won't obey!
+  The opposing Gilder used Dynamic Punch!
+    HP Starmie (player): 261 -> 190 / 261
+  It's not very effective...
+    (anim: Confusion)
+  Starmie became confused!
+    HP Gilder (foe): 297 -> 264 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+
+--- Turn 9 ---
+  [Starmie 190/261 | Gilder 264/330]
+    (anim: Confusion)
+  Starmie is confused!
+  Starmie used Ice Beam!
+    HP Gilder (foe): 264 -> 109 / 330
+  It's super effective!
+  The opposing Gilder used Earthquake!
+    HP Starmie (player): 190 -> 0 / 261
+  Starmie fainted!
+    xx fainted: Starmie (player)
+    HP Gilder (foe): 109 -> 76 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.100 [BLAZE]
+
+--- Turn 10 ---
+  [Charizard 297/297 | Gilder 76/330]
+  Meridian CEO Aurelian used a Full Restore.
+    HP Gilder (foe): 76 -> 330 / 330
+  The opposing Gilder's HP was restored.
+  Charizard used Flamethrower!
+    HP Gilder (foe): 330 -> 207 / 330
+  (end of round)
+
+--- Turn 11 ---
+  [Charizard 297/297 | Gilder 207/330]
+  Charizard used Flamethrower!
+    HP Gilder (foe): 207 -> 77 / 330
+  The opposing Gilder used Stone Edge!
+    HP Charizard (player): 297 -> 0 / 297
+  It's super effective!
+  Charizard fainted!
+    xx fainted: Charizard (player)
+    HP Gilder (foe): 77 -> 44 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+  Your opponent's weak! Get 'em, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [STURDY]
+
+--- Turn 12 ---
+  [Magnezone 281/281 | Gilder 44/330]
+  Meridian CEO Aurelian used a Full Restore.
+    HP Gilder (foe): 44 -> 330 / 330
+  The opposing Gilder's HP was restored.
+  Magnezone ignored orders!
+  Magnezone used Volt Switch!
+  It doesn't affect the opposing Gilder...
+  (end of round)
+
+--- Turn 13 ---
+  [Magnezone 281/281 | Gilder 330/330]
+  The opposing Gilder used Dynamic Punch!
+    HP Magnezone (player): 281 -> 39 / 281
+  It's super effective!
+    (anim: Confusion)
+  Magnezone became confused!
+    HP Gilder (foe): 330 -> 297 / 330
+  The opposing Gilder lost some of its HP!
+    (anim: Confusion)
+  Magnezone is confused!
+    HP Magnezone (player): 39 -> 15 / 281
+  It hurt itself in its confusion!
+  (end of round)
+
+--- Turn 14 ---
+  [Magnezone 15/281 | Gilder 297/330]
+  The opposing Gilder used Stone Edge!
+    HP Magnezone (player): 15 -> 0 / 281
+  It's not very effective...
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+    HP Gilder (foe): 297 -> 264 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.100 [HUSTLE]
+
+--- Turn 15 ---
+  [Togekiss 311/311 | Gilder 264/330]
+  Togekiss turned away!
+  The opposing Gilder used Dynamic Punch!
+    HP Togekiss (player): 311 -> 274 / 311
+  It's not very effective...
+    (anim: Confusion)
+  Togekiss became confused!
+    HP Gilder (foe): 264 -> 231 / 330
+  The opposing Gilder lost some of its HP!
+  (end of round)
+
+--- Turn 16 ---
+  [Togekiss 274/311 | Gilder 231/330]
+  Togekiss ignored orders!
+    (anim: Confusion)
+  Togekiss is confused!
+    HP Togekiss (player): 274 -> 242 / 311
+  It hurt itself in its confusion!
+  The opposing Gilder used Stone Edge!
+    HP Togekiss (player): 242 -> 0 / 311
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+    HP Gilder (foe): 231 -> 198 / 330
+  The opposing Gilder lost some of its HP!
+  You have no more Pokémon that can fight!
+  You lost against Meridian CEO Aurelian!
+  You gave $4,806 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 15 turn(s)

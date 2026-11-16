@@ -1,0 +1,355 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
+================================================================================
+
+--- Battle start ---
+  field: HOLLOW_CATHEDRAL | weather: None | terrain: None
+  You are challenged by Warden Ysolde!
+  Warden Ysolde sent out Sableye!
+    >> sent out (foe): Sableye Lv.65 @LEFTOVERS [PRANKSTER]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.67 @MAGICALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> HOLLOW_CATHEDRAL
+  Candles gutter in the ruined nave... Restless spirits stir in the gloom.
+    (anim: UseItem)
+  Garchomp's Magical Seed let a wandering spirit possess it!
+    (anim: StatUp)
+  Garchomp's Special Defense rose!
+  Garchomp became part Ghost type!
+
+--- Turn 1 ---
+  [Garchomp 242/242 | Sableye 171/171]
+  The opposing Sableye used Will-O-Wisp!
+    (anim: Burn)
+  Garchomp was burned!
+  Garchomp used Fire Fang!
+  The flames burned with an eerie ghostfire!
+    HP Sableye (foe): 171 -> 135 / 171
+  A critical hit!
+  (end of round)
+    (anim: UseItem)
+    HP Sableye (foe): 135 -> 145 / 171
+  The opposing Sableye restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Garchomp (player): 242 -> 227 / 242
+  Garchomp was hurt by its burn!
+
+--- Turn 2 ---
+  [Garchomp 227/242 BURN | Sableye 145/171]
+  Garchomp used Fire Fang!
+  The flames burned with an eerie ghostfire!
+    HP Sableye (foe): 145 -> 120 / 171
+  The opposing Sableye used Foul Play!
+    HP Garchomp (player): 227 -> 35 / 242
+  It's super effective!
+  (end of round)
+    (anim: UseItem)
+    HP Sableye (foe): 120 -> 130 / 171
+  The opposing Sableye restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Garchomp (player): 35 -> 20 / 242
+  Garchomp was hurt by its burn!
+
+--- Turn 3 ---
+  [Garchomp 20/242 BURN | Sableye 130/171]
+  Good job, Garchomp! Come back!
+    << recalled: Garchomp (player)
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.67 [SERENEGRACE]
+  The opposing Sableye used Shadow Sneak!
+  The restless spirits howled!
+    HP Togekiss (player): 211 -> 168 / 211
+  (end of round)
+    (anim: UseItem)
+    HP Sableye (foe): 130 -> 140 / 171
+  The opposing Sableye restored a little HP using its Leftovers!
+
+--- Turn 4 ---
+  [Togekiss 168/211 | Sableye 140/171]
+  The opposing Sableye used Will-O-Wisp!
+    (anim: Burn)
+  Togekiss was burned!
+  Togekiss used Dazzling Gleam!
+  Light streamed through the stained glass!
+    HP Sableye (foe): 140 -> 0 / 171
+  It's super effective!
+  The opposing Sableye fainted!
+    xx fainted: Sableye (foe)
+  The cathedral bell stirs... (2 more)
+  Garchomp is at the level cap (Lv. 67) and can't gain Exp. Points.
+  Togekiss is at the level cap (Lv. 67) and can't gain Exp. Points.
+  (end of round)
+    (anim: Burn)
+    HP Togekiss (player): 168 -> 155 / 211
+  Togekiss was hurt by its burn!
+  Warden Ysolde is about to send out Gengar. Will you switch your Pokémon?  [auto: No]
+  Warden Ysolde sent out Gengar!
+    >> sent out (foe): Gengar Lv.66 @LIFEORB [CURSEDBODY]
+  The opposing Gengar is at home among the restless dead.
+    (anim: StatUp)
+  The opposing Gengar's Special Defense rose!
+
+--- Turn 5 ---
+  [Togekiss 155/211 BURN | Gengar 187/187]
+  The opposing Gengar used Sludge Bomb!
+    HP Togekiss (player): 155 -> 0 / 211
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+    HP Gengar (foe): 187 -> 169 / 187
+  The opposing Gengar lost some of its HP!
+  (end of round)
+  Go for it, Garchomp!
+    >> sent out (player): Garchomp Lv.67 [SANDVEIL]
+
+--- Turn 6 ---
+  [Garchomp 20/242 BURN | Gengar 169/187]
+  Good job, Garchomp! Come back!
+    << recalled: Garchomp (player)
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.67 [ILLUMINATE]
+  The opposing Gengar used Shadow Ball!
+  The restless spirits howled!
+    HP Starmie (player): 178 -> 0 / 178
+  It's super effective!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+    HP Gengar (foe): 169 -> 151 / 187
+  The opposing Gengar lost some of its HP!
+  (end of round)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.67 [BLAZE]
+
+--- Turn 7 ---
+  [Charizard 202/202 | Gengar 151/187]
+  The opposing Gengar used Sludge Bomb!
+    HP Charizard (player): 202 -> 55 / 202
+    HP Gengar (foe): 151 -> 133 / 187
+  The opposing Gengar lost some of its HP!
+  Charizard used Flamethrower!
+  The flames burned with an eerie ghostfire!
+    HP Gengar (foe): 133 -> 0 / 187
+  It's super effective!
+  The opposing Gengar fainted!
+    xx fainted: Gengar (foe)
+  Charizard is at the level cap (Lv. 67) and can't gain Exp. Points.
+  (end of round)
+  Warden Ysolde is about to send out Dusknoir. Will you switch your Pokémon?  [auto: No]
+  Warden Ysolde sent out Dusknoir!
+    >> sent out (foe): Dusknoir Lv.66 @LEFTOVERS [PRESSURE]
+    [ability: Dusknoir (foe)'s Pressure]
+  The opposing Dusknoir is exerting its pressure!
+
+--- Turn 8 ---
+  [Charizard 55/202 | Dusknoir 167/167]
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Charizard (player): 55 -> 0 / 202
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+  You're in charge, Garchomp!
+    >> sent out (player): Garchomp Lv.67 [SANDVEIL]
+
+--- Turn 9 ---
+  [Garchomp 20/242 BURN | Dusknoir 167/167]
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Garchomp (player): 20 -> 0 / 242
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  You're in charge, Magnezone!
+    >> sent out (player): Magnezone Lv.67 [STURDY]
+
+--- Turn 10 ---
+  [Magnezone 191/191 | Dusknoir 167/167]
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 167 -> 124 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Magnezone (player): 191 -> 173 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 124 -> 134 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 11 ---
+  [Magnezone 173/191 | Dusknoir 134/167]
+  Magnezone used Flash Cannon!
+    HP Dusknoir (foe): 134 -> 77 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Magnezone (player): 173 -> 154 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 77 -> 87 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 12 ---
+  [Magnezone 154/191 | Dusknoir 87/167]
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 87 -> 47 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Magnezone (player): 154 -> 136 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 47 -> 57 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 13 ---
+  [Magnezone 136/191 | Dusknoir 57/167]
+  Magnezone used Flash Cannon!
+    HP Dusknoir (foe): 57 -> 2 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Magnezone (player): 136 -> 117 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 2 -> 12 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 14 ---
+  [Magnezone 117/191 | Dusknoir 12/167]
+  Warden Ysolde used a Full Restore.
+    HP Dusknoir (foe): 12 -> 167 / 167
+  The opposing Dusknoir's HP was restored.
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 167 -> 124 / 167
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 124 -> 134 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 15 ---
+  [Magnezone 117/191 | Dusknoir 134/167]
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 134 -> 97 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Magnezone (player): 117 -> 99 / 191
+  It's not very effective...
+    (anim: Frozen)
+  Magnezone was frozen solid!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 97 -> 107 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 16 ---
+  [Magnezone 99/191 FROZEN | Dusknoir 107/167]
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Magnezone (player): 99 -> 56 / 191
+    (anim: Frozen)
+  Magnezone is frozen solid!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 107 -> 117 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 17 ---
+  [Magnezone 56/191 FROZEN | Dusknoir 117/167]
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Magnezone (player): 56 -> 11 / 191
+    (anim: Frozen)
+  Magnezone is frozen solid!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 117 -> 127 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 18 ---
+  [Magnezone 11/191 FROZEN | Dusknoir 127/167]
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Magnezone (player): 11 -> 0 / 191
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 127 -> 137 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.67 [INNERFOCUS]
+
+--- Turn 19 ---
+  [Lucario 191/191 | Dusknoir 137/167]
+  Lucario used Flash Cannon!
+    HP Dusknoir (foe): 137 -> 61 / 167
+  A critical hit!
+  The opposing Dusknoir used Ice Punch!
+    HP Lucario (player): 191 -> 152 / 191
+  A critical hit!
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 61 -> 71 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 20 ---
+  [Lucario 152/191 | Dusknoir 71/167]
+  Lucario used Flash Cannon!
+    HP Dusknoir (foe): 71 -> 21 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Lucario (player): 152 -> 123 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 21 -> 31 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 21 ---
+  [Lucario 123/191 | Dusknoir 31/167]
+  Warden Ysolde used a Full Restore.
+    HP Dusknoir (foe): 31 -> 167 / 167
+  The opposing Dusknoir's HP was restored.
+  Lucario used Flash Cannon!
+    HP Dusknoir (foe): 167 -> 116 / 167
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 116 -> 126 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 22 ---
+  [Lucario 123/191 | Dusknoir 126/167]
+  Lucario used Flash Cannon!
+    HP Dusknoir (foe): 126 -> 74 / 167
+  The opposing Dusknoir used Ice Punch!
+    HP Lucario (player): 123 -> 94 / 191
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 74 -> 84 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 23 ---
+  [Lucario 94/191 | Dusknoir 84/167]
+  Lucario used Extreme Speed!
+    HP Dusknoir (foe): 84 -> 50 / 167
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Lucario (player): 94 -> 30 / 191
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 50 -> 60 / 167
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 24 ---
+  [Lucario 30/191 | Dusknoir 60/167]
+  Lucario used Extreme Speed!
+    HP Dusknoir (foe): 60 -> 27 / 167
+  The opposing Dusknoir used Shadow Sneak!
+  The restless spirits howled!
+    HP Lucario (player): 30 -> 0 / 191
+  A critical hit!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Ysolde!
+  battle result code: 2
+  
+RESULT: player lost after 23 turn(s)

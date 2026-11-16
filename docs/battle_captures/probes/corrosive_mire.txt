@@ -1,0 +1,347 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for CORROSIVE_MIRE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+CORROSIVE_MIRE probe: boosted move SLUDGEBOMB (on field)
+========================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Bomb!
+  The toxic sludge bubbled up!
+    HP Snorlax (foe): 461 -> 362 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 362/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+CORROSIVE_MIRE probe: boosted move SLUDGEBOMB (baseline, no field)
+==================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Bomb!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+CORROSIVE_MIRE probe: transition [stage 1: terrain Misty -> WATER_SURFACE] using MISTYTERRAIN
+=============================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Misty Terrain!
+    (anim: MistyTerrain)
+  Mist swirled about the battlefield!
+## FIELD CHANGE: CORROSIVE_MIRE -> WATER_SURFACE
+  The fairy mist purified the mire into clear water!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: MistyTerrain)
+  Mist is swirling about the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: MistyTerrain)
+  Mist is swirling about the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CORROSIVE_MIRE probe: transition [stage 1: moves PURIFY x2 -> WATER_SURFACE] using PURIFY, PURIFY
+=================================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Purify!
+  Mew's HP is full!
+  The sludge grows clearer... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Purify!
+  Mew's HP is full!
+## FIELD CHANGE: CORROSIVE_MIRE -> WATER_SURFACE
+  The mire was purified into clear water!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+CORROSIVE_MIRE probe: transition [stage 1: types FIRE, category damaging x2 -> WASTELAND] using FLAMETHROWER, FLAMETHROWER
+==========================================================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 396 / 461
+  The toxic fumes ignited in an explosion!
+    HP Mew (player): 341 -> 299 / 341
+  Mew was caught in the blast!
+    HP Snorlax (foe): 396 -> 339 / 461
+  The wild Snorlax was caught in the blast!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 299/341 | Snorlax 339/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 339 -> 273 / 461
+  The toxic fumes ignited in an explosion!
+    HP Mew (player): 299 -> 257 / 341
+  Mew was caught in the blast!
+    HP Snorlax (foe): 273 -> 216 / 461
+  The wild Snorlax was caught in the blast!
+## FIELD CHANGE: CORROSIVE_MIRE -> WASTELAND
+  The flames consumed the mire, leaving a blasted wasteland!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 257/341 | Snorlax 216/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 257/341 | Snorlax 216/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+CORROSIVE_MIRE probe: Synthetic Seed held on entry
+==================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+    (anim: UseItem)
+    (anim: Poison)
+  Mew's Synthetic Seed filled it with corrosive vigor!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+
+--- Turn 1 ---
+  [Mew 170/341 POISON | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Poison)
+    HP Mew (player): 170 -> 128 / 341
+  Mew was hurt by poison!
+
+--- Turn 2 ---
+  [Mew 128/341 POISON | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+CORROSIVE_MIRE probe: end-of-round rule 1: heal on {:types=>[:POISON]} [subject Muk]
+====================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Muk!
+    >> sent out (player): Muk Lv.100 [STICKYHOLD]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Muk 175/351 | Snorlax 230/461]
+  Muk used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The mire nourished Muk.
+    HP Muk (player): 175 -> 197 / 351
+
+--- Turn 2 ---
+  [Muk 197/351 | Snorlax 230/461]
+  Muk used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The mire nourished Muk.
+    HP Muk (player): 197 -> 219 / 351
+
+--- Turn 3 ---
+  [Muk 219/351 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CORROSIVE_MIRE probe: end-of-round rule 2: damage on {:grounded=>true, :types=>[:STEEL], :not_types=>[:POISON]} [subject Klinklang]
+===================================================================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Klinklang!
+    >> sent out (player): Klinklang Lv.100 [MINUS]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Klinklang 130/261 | Snorlax 230/461]
+  Klinklang used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Klinklang (player): 130 -> 114 / 261
+  The mire is corroding Klinklang's metal!
+
+--- Turn 2 ---
+  [Klinklang 114/261 | Snorlax 230/461]
+  Klinklang used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Klinklang (player): 114 -> 98 / 261
+  The mire is corroding Klinklang's metal!
+
+--- Turn 3 ---
+  [Klinklang 98/261 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CORROSIVE_MIRE probe: end-of-round rule 3: status on {:grounded=>true, :not_types=>[:POISON, :STEEL]} [subject Snorlax]
+=======================================================================================================================
+
+--- Battle start ---
+  field: CORROSIVE_MIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+## FIELD CHANGE: NONE -> CORROSIVE_MIRE
+  Toxic sludge bubbles underfoot... the air reeks of corrosion.
+
+--- Turn 1 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Poison)
+  The wild Snorlax was poisoned by the corrosive mire!
+    (anim: Poison)
+  Snorlax was poisoned by the corrosive mire!
+
+--- Turn 2 ---
+  [Snorlax 230/461 POISON | Snorlax 230/461 POISON]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Poison)
+    HP Snorlax (foe): 230 -> 173 / 461
+  The wild Snorlax was hurt by poison!
+    (anim: Poison)
+    HP Snorlax (player): 230 -> 173 / 461
+  Snorlax was hurt by poison!
+
+--- Turn 3 ---
+  [Snorlax 173/461 POISON | Snorlax 173/461 POISON]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

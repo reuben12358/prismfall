@@ -1,0 +1,264 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for PRISM_ARENA: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+PRISM_ARENA probe: boosted move TRIATTACK (on field)
+====================================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Tri Attack!
+    HP Snorlax (foe): 461 -> 385 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 385/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+PRISM_ARENA probe: boosted move TRIATTACK (baseline, no field)
+==============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Tri Attack!
+    HP Snorlax (foe): 461 -> 402 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 402/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+PRISM_ARENA probe: Magical Seed held on entry
+=============================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+    (anim: UseItem)
+  Mew's Magical Seed refracted the light of the Plates!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+PRISM_ARENA probe: end-of-round rule 1: heal on {} +condition [subject Snorlax, after SPLASH]
+=============================================================================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 @FLAMEPLATE [IMMUNITY]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+
+--- Turn 1 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  Snorlax used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field!
+
+--- Turn 3 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  Snorlax used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:VOLCANIC] (was [])
+
+--- Turn 4 ---
+  [Snorlax 230/461 | Snorlax 230/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Snorlax's Plate resonated with the arena!
+    HP Snorlax (player): 230 -> 259 / 461
+    HP Snorlax (foe): 230 -> 201 / 461
+  The wild Snorlax was scorched by the magma!
+    HP Snorlax (player): 259 -> 230 / 461
+  Snorlax was scorched by the magma!
+
+--- Turn 5 ---
+  [Snorlax 230/461 | Snorlax 201/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Snorlax's Plate resonated with the arena!
+    HP Snorlax (player): 230 -> 259 / 461
+    HP Snorlax (foe): 201 -> 172 / 461
+  The wild Snorlax was scorched by the magma!
+    HP Snorlax (player): 259 -> 230 / 461
+  Snorlax was scorched by the magma!
+  The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
+
+--- Turn 6 ---
+  [Snorlax 230/461 | Snorlax 172/461]
+  The wild Snorlax used Splash!
+  But nothing happened!
+  Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Snorlax's Plate resonated with the arena!
+    HP Snorlax (player): 230 -> 259 / 461
+    HP Snorlax (foe): 172 -> 143 / 461
+  The wild Snorlax was scorched by the magma!
+    HP Snorlax (player): 259 -> 230 / 461
+  Snorlax was scorched by the magma!
+  The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
+
+--- Turn 7 ---
+  [Snorlax 230/461 | Snorlax 143/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 6 turn(s)
+
+
+PRISM_ARENA probe: :end_of_round hook over 7 rounds
+===================================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field!
+
+--- Turn 3 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:VOLCANIC] (was [])
+
+--- Turn 4 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 170 -> 149 / 341
+  Mew was scorched by the magma!
+    HP Snorlax (foe): 230 -> 201 / 461
+  The wild Snorlax was scorched by the magma!
+
+--- Turn 5 ---
+  [Mew 149/341 | Snorlax 201/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 149 -> 128 / 341
+  Mew was scorched by the magma!
+    HP Snorlax (foe): 201 -> 172 / 461
+  The wild Snorlax was scorched by the magma!
+  The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
+
+--- Turn 6 ---
+  [Mew 128/341 | Snorlax 172/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 128 -> 107 / 341
+  Mew was scorched by the magma!
+    HP Snorlax (foe): 172 -> 143 / 461
+  The wild Snorlax was scorched by the magma!
+  The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
+
+--- Turn 7 ---
+  [Mew 107/341 | Snorlax 143/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 107/341 | Snorlax 143/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 7 turn(s)

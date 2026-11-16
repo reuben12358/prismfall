@@ -54,9 +54,10 @@ G.FLAGMAP = flag
 class Ctx:
     def __init__(self):
         self.stamps = json.load(open(os.path.join(HERE, 'data', 'stamps.json')))
-        tp = os.path.join(HERE, 'data', 'stamps_t.json')
-        if os.path.exists(tp):
-            self.stamps.update(json.load(open(tp)))
+        for fn in ('stamps_t.json', 'stamps_w.json'):
+            tp = os.path.join(HERE, 'data', fn)
+            if os.path.exists(tp):
+                self.stamps.update(json.load(open(tp)))
         self.palettes = {}
         self.specs = {}
         self.doors = {}   # link -> (map, x, y)   exterior door tiles
@@ -403,6 +404,9 @@ def walk_check(spec, ctx, m):
         if not any(0 <= e.x + dx < W and 0 <= e.y + dy < H and seen[e.y + dy, e.x + dx]
                    for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0))):
             ctx.warn(spec['id'], 'event "%s" at %d,%d cannot be reached on foot from the first door/warp' % (e.name, e.x, e.y))
+    ign = spec.get('walk_ignore', ['wall', 'tower', 'keep'])   # parapet walks are scenery unless stairs reach them
+    if spec.get('_painter') is not None:
+        ok = ok & ~spec['_painter'].mask([c for c in ign if c in set(spec['_painter'].cls.reshape(-1))])
     stranded = int((ok & ~seen).sum())
     if stranded > ok.sum() * 0.05 and '--walkmap' in sys.argv:
         for y in range(H):

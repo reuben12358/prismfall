@@ -1,0 +1,14 @@
+# Stamps mined from the Rejuvenation v13.5 sheets shipped in the Where-Love-Lies-Overhaul repo (ref/art/wll).
+# rows = source-sheet rows kept (building bodies, roofs, doors, windows, vines); everything else in the rect is dropped.
+groups:
+  sheridan: {sheet: sheridan, rows: [[2, 3], [14, 22], [118, 136], [197, 203]], rows0: [[118, 136]]}
+stamps:
+  w_longhouse: {map: 26, rect: [46, 25, 11, 7]}
+  w_cot:       {map: 30, rect: [15, 26, 4, 6]}
+  w_ell_a:     {map: 30, rect: [13, 39, 10, 11]}
+  w_manor_a:   {map: 38, rect: [15, 6, 9, 9]}
+  w_flat:      {map: 38, rect: [46, 9, 7, 4]}
+  w_manor_b:   {map: 38, rect: [46, 23, 11, 9]}
+  w_ell_b:     {map: 38, rect: [34, 41, 9, 11]}
+  w_house:     {map: 38, rect: [50, 41, 6, 6]}
+  w_station:   {map: 38, rect: [0, 32, 14, 6]}

@@ -1,0 +1,148 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for NEW_MOON: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+NEW_MOON probe: boosted move DARKPULSE (on field)
+=================================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dark Pulse!
+  The darkness of the new moon deepened!
+    HP Snorlax (foe): 461 -> 374 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 374/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+NEW_MOON probe: boosted move DARKPULSE (baseline, no field)
+===========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dark Pulse!
+    HP Snorlax (foe): 461 -> 402 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 402/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+NEW_MOON probe: transition [stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 -> NONE] using FLASH, FLASH, FLASH
+================================================================================================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  The sudden flash was blinding in the dark!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  Light pierces the darkness... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  The sudden flash was blinding in the dark!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  Light pierces the darkness... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  The sudden flash was blinding in the dark!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+## FIELD CHANGE: NEW_MOON -> NONE
+  Light floods the Underveil! The lamps of Nadir flicker back to life.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+NEW_MOON probe: Magical Seed held on entry
+==========================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+    (anim: UseItem)
+  Mew's Magical Seed sharpened its night vision!
+    (anim: StatUp)
+  Mew's accuracy rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

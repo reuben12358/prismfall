@@ -26,6 +26,8 @@
 143	140	Saltmere Harbour Office
 144	140	Saltwife's House
 145	140	Pageant Hall
+146	140	Saltmere - Harbour & Breakwater
+147	140	Saltmere - Old Town
 150	140	Pell Playhouse - Foyer
 151	150	Pell Playhouse - Revolving Stage
 152	150	Pell Playhouse - Fly Loft

@@ -1,0 +1,135 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
+============================================================================
+
+--- Battle start ---
+  field: DARK_CRYSTAL | weather: None | terrain: None
+  You are challenged by Hollow Keeper Teo!
+  Hollow Keeper Teo sent out Carvanha!
+    >> sent out (foe): Carvanha Lv.19 @ORANBERRY [ROUGHSKIN]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.21 @MAGICALSEED [INTIMIDATE]
+## FIELD CHANGE: NONE -> DARK_CRYSTAL
+  Darkness fills the cavern. The crystals have gone black...
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Carvanha's Attack fell!
+    (anim: UseItem)
+  Growlithe's Magical Seed drank in the darkness!
+    (anim: StatUp)
+  Growlithe's Attack rose!
+  Growlithe's Special Attack rose!
+
+--- Turn 1 ---
+  [Growlithe 60/60 | Carvanha 49/49]
+  The opposing Carvanha used Poison Fang!
+    HP Growlithe (player): 60 -> 51 / 60
+    (anim: Toxic)
+  Growlithe was badly poisoned!
+  Growlithe used Ember!
+    HP Carvanha (foe): 49 -> 27 / 49
+  It's not very effective...
+  (end of round)
+    (anim: Toxic)
+    HP Growlithe (player): 51 -> 48 / 60
+  Growlithe was hurt by poison!
+
+--- Turn 2 ---
+  [Growlithe 48/60 POISON | Carvanha 27/49]
+  The opposing Carvanha used Bite!
+  The darkness gave the attack teeth!
+    HP Growlithe (player): 48 -> 0 / 60
+  A critical hit!
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
+  (end of round)
+  Go for it, Machop!
+    >> sent out (player): Machop Lv.21 [NOGUARD]
+
+--- Turn 3 ---
+  [Machop 66/66 | Carvanha 27/49]
+  The opposing Carvanha used Poison Fang!
+    HP Machop (player): 66 -> 58 / 66
+  Machop used Knock Off!
+  The darkness gave the attack teeth!
+    HP Carvanha (foe): 27 -> 0 / 49
+  It's not very effective...
+    [ability: Carvanha (foe)'s Rough Skin]
+    HP Machop (player): 58 -> 50 / 66
+  Machop is hurt!
+  The opposing Carvanha fainted!
+    xx fainted: Carvanha (foe)
+  The opposing Carvanha dropped its Oran Berry!
+  Machop got 209 Exp. Points!
+  (end of round)
+  Hollow Keeper Teo is about to send out Arrokuda. Will you switch your Pokémon?  [auto: No]
+  Hollow Keeper Teo sent out Arrokuda!
+    >> sent out (foe): Arrokuda Lv.20 @ORANBERRY [SWIFTSWIM]
+
+--- Turn 4 ---
+  [Machop 50/66 | Arrokuda 50/50]
+  The opposing Arrokuda used Bite!
+  The darkness gave the attack teeth!
+    HP Machop (player): 50 -> 40 / 66
+  It's not very effective...
+  Machop flinched and couldn't move!
+  (end of round)
+
+--- Turn 5 ---
+  [Machop 40/66 | Arrokuda 50/50]
+  The opposing Arrokuda used Bite!
+  The darkness gave the attack teeth!
+    HP Machop (player): 40 -> 30 / 66
+  It's not very effective...
+  Machop used Knock Off!
+  The darkness gave the attack teeth!
+    HP Arrokuda (foe): 50 -> 0 / 50
+  The opposing Arrokuda fainted!
+    xx fainted: Arrokuda (foe)
+  The opposing Arrokuda dropped its Oran Berry!
+  Machop got 214 Exp. Points!
+  (end of round)
+  Hollow Keeper Teo is about to send out Snapper. Will you switch your Pokémon?  [auto: No]
+  Hollow Keeper Teo sent out Snapper!
+    >> sent out (foe): Snapper Lv.21 @SITRUSBERRY [STRONGJAW]
+
+--- Turn 6 ---
+  [Machop 30/66 | Snapper 55/55]
+  The opposing Snapper used Bite!
+  The darkness gave the attack teeth!
+    HP Machop (player): 30 -> 15 / 66
+  It's not very effective...
+  Machop flinched and couldn't move!
+  (end of round)
+
+--- Turn 7 ---
+  [Machop 15/66 | Snapper 55/55]
+  The opposing Snapper used Headbutt!
+    HP Machop (player): 15 -> 0 / 66
+  Machop fainted!
+    xx fainted: Machop (player)
+  (end of round)
+  You're in charge, Mareep!
+    >> sent out (player): Mareep Lv.21 [STATIC]
+
+--- Turn 8 ---
+  [Mareep 60/60 | Snapper 55/55]
+  The opposing Snapper used Bite!
+  The darkness gave the attack teeth!
+    HP Mareep (player): 60 -> 4 / 60
+  A critical hit!
+  Mareep used Thunder Shock!
+    HP Snapper (foe): 55 -> 0 / 55
+  A critical hit!
+  It's super effective!
+  The opposing Snapper fainted!
+    xx fainted: Snapper (foe)
+  Mareep got 240 Exp. Points!
+  You defeated Hollow Keeper Teo!
+  Tell my sister— no. Don't tell her anything.
+  You got $1,680 for winning!
+  battle result code: 1
+  
+RESULT: player won after 7 turn(s)

@@ -143,6 +143,13 @@ class Sprite < HeadlessObject
   def flash(*_a); end
   def width; @src_rect.width; end
   def height; @src_rect.height; end
+  # Real accessors (engine code aliases these).
+  { :x => 0, :y => 0, :z => 0, :ox => 0, :oy => 0, :zoom_x => 1.0, :zoom_y => 1.0, :angle => 0,
+    :mirror => false, :opacity => 255, :blend_type => 0, :bush_depth => 0, :bush_opacity => 128,
+    :wave_amp => 0, :wave_length => 180, :wave_speed => 360, :wave_phase => 0.0 }.each do |attr, dflt|
+    define_method(attr) { v = instance_variable_get("@#{attr}"); v.nil? ? dflt : v }
+    define_method("#{attr}=") { |v| instance_variable_set("@#{attr}", v) }
+  end
 end
 
 class Plane < Sprite; end

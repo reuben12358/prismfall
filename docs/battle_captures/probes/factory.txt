@@ -1,0 +1,199 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for FACTORY: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+FACTORY probe: boosted move FLASHCANNON (on field)
+==================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash Cannon!
+  The foundry's machinery roared!
+    HP Snorlax (foe): 461 -> 374 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 374/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FACTORY probe: boosted move FLASHCANNON (baseline, no field)
+============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash Cannon!
+    HP Snorlax (foe): 461 -> 402 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 402/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FACTORY probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION... -> SCRAPYARD] using EXPLOSION
+================================================================================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Explosion!
+    HP Snorlax (foe): 461 -> 106 / 461
+    HP Mew (player): 341 -> 0 / 341
+  Mew fainted!
+    xx fainted: Mew (player)
+## FIELD CHANGE: FACTORY -> SCRAPYARD
+  The blast tore the foundry apart! Only scrap remains.
+  You have no more Pokémon that can fight!
+  battle result code: 2
+  
+RESULT: player lost after 0 turn(s)
+
+
+FACTORY probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> SCRAPYARD] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
+====================================================================================================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 461 -> 351 / 461
+  The gantries groan and buckle... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 351/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 351 -> 235 / 461
+  The gantries groan and buckle... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 235/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 235 -> 122 / 461
+## FIELD CHANGE: FACTORY -> SCRAPYARD
+  The catwalks came crashing down! The foundry is reduced to scrap.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 122/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 122/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+FACTORY probe: Synthetic Seed held on entry
+===========================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+    (anim: UseItem)
+  Mew's Synthetic Seed oiled its joints like factory machinery!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Speed rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FACTORY probe: end-of-round rule 1: cure_status on {:status=>[:FROZEN]} [subject Florges]
+=========================================================================================
+
+--- Battle start ---
+  field: FACTORY | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+## FIELD CHANGE: NONE -> FACTORY
+  Gears grind and molten steel pours... The foundry roars to life!
+
+--- Turn 1 ---
+  [Florges 148/297 FROZEN | Snorlax 230/461]
+    (anim: Frozen)
+  Florges is frozen solid!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The crucibles' heat thawed Florges out!
+  Florges thawed out!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

@@ -1,0 +1,350 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Water Surface [WATER_SURFACE] - Gym 3 Warden Marisol vs challenger (Lv.23)
+==========================================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  You are challenged by Warden Marisol!
+  Warden Marisol sent out Pelipper!
+    >> sent out (foe): Pelipper Lv.21 @DAMPROCK [DRIZZLE]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.23 @ELEMENTALSEED [INTIMIDATE]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+    [ability: Pelipper (foe)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Pelipper's Attack fell!
+    (anim: UseItem)
+  Growlithe's Elemental Seed wrapped it in a veil of seawater!
+    (anim: StatUp)
+  Growlithe's Speed rose!
+
+--- Turn 1 ---
+  [Growlithe 65/65 | Pelipper 60/60]
+  Growlithe used Flame Wheel!
+  The water doused the flames...
+    HP Pelipper (foe): 60 -> 58 / 60
+  It's not very effective...
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Growlithe (player): 65 -> 0 / 65
+  It's super effective!
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Go for it, Mareep!
+    >> sent out (player): Mareep Lv.23 [STATIC]
+
+--- Turn 2 ---
+  [Mareep 65/65 | Pelipper 58/60]
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Mareep (player): 65 -> 0 / 65
+  Mareep fainted!
+    xx fainted: Mareep (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Go for it, Lombre!
+    >> sent out (player): Lombre Lv.23 [RAINDISH]
+
+--- Turn 3 ---
+  [Lombre 67/67 | Pelipper 58/60]
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 67 -> 55 / 67
+  It's not very effective...
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Pelipper (foe): 58 -> 34 / 60
+  It's not very effective...
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 55 -> 59 / 67
+  Lombre's HP was restored.
+
+--- Turn 4 ---
+  [Lombre 59/67 | Pelipper 34/60]
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 59 -> 47 / 67
+  It's not very effective...
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Pelipper (foe): 34 -> 7 / 60
+  It's not very effective...
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 47 -> 51 / 67
+  Lombre's HP was restored.
+
+--- Turn 5 ---
+  [Lombre 51/67 | Pelipper 7/60]
+  Warden Marisol used a Super Potion.
+    HP Pelipper (foe): 7 -> 60 / 60
+  The opposing Pelipper's HP was restored.
+  Lombre used Mega Drain!
+    HP Pelipper (foe): 60 -> 45 / 60
+  The opposing Pelipper had its energy drained!
+    HP Lombre (player): 51 -> 59 / 67
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 59 -> 63 / 67
+  Lombre's HP was restored.
+
+--- Turn 6 ---
+  [Lombre 63/67 | Pelipper 45/60]
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 63 -> 50 / 67
+  It's not very effective...
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Pelipper (foe): 45 -> 20 / 60
+  It's not very effective...
+    (anim: StatDown)
+  The opposing Pelipper's Speed fell!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 50 -> 54 / 67
+  Lombre's HP was restored.
+
+--- Turn 7 ---
+  [Lombre 54/67 | Pelipper 20/60]
+  Warden Marisol used a Super Potion.
+    HP Pelipper (foe): 20 -> 60 / 60
+  The opposing Pelipper's HP was restored.
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Pelipper (foe): 60 -> 37 / 60
+  It's not very effective...
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 54 -> 58 / 67
+  Lombre's HP was restored.
+
+--- Turn 8 ---
+  [Lombre 58/67 | Pelipper 37/60]
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Pelipper (foe): 37 -> 1 / 60
+  A critical hit!
+  It's not very effective...
+  The opposing Pelipper used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 58 -> 47 / 67
+  It's not very effective...
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 47 -> 51 / 67
+  Lombre's HP was restored.
+
+--- Turn 9 ---
+  [Lombre 51/67 | Pelipper 1/60]
+  Lombre used Mega Drain!
+    HP Pelipper (foe): 1 -> 0 / 60
+  The opposing Pelipper fainted!
+    xx fainted: Pelipper (foe)
+  The opposing Pelipper had its energy drained!
+    HP Lombre (player): 51 -> 52 / 67
+  Lombre is at the level cap (Lv. 23) and can't gain Exp. Points.
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 52 -> 56 / 67
+  Lombre's HP was restored.
+  Warden Marisol is about to send out Floatzel. Will you switch your Pokémon?  [auto: No]
+  Warden Marisol sent out Floatzel!
+    >> sent out (foe): Floatzel Lv.22 @MYSTICWATER [SWIFTSWIM]
+
+--- Turn 10 ---
+  [Lombre 56/67 | Floatzel 73/73]
+  The opposing Floatzel used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 56 -> 44 / 67
+  It's not very effective...
+  Lombre used Mega Drain!
+    HP Floatzel (foe): 73 -> 35 / 73
+  It's super effective!
+  The opposing Floatzel had its energy drained!
+    HP Lombre (player): 44 -> 63 / 67
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    [ability: Lombre (player)'s Rain Dish]
+    HP Lombre (player): 63 -> 67 / 67
+  Lombre's HP was restored.
+
+--- Turn 11 ---
+  [Lombre 67/67 | Floatzel 35/73]
+  The opposing Floatzel used Water Pulse!
+  The waves amplified the attack!
+    HP Lombre (player): 67 -> 56 / 67
+  It's not very effective...
+    (anim: Confusion)
+  Lombre became confused!
+    (anim: Confusion)
+  Lombre is confused!
+  Lombre used Mega Drain!
+    HP Floatzel (foe): 35 -> 0 / 73
+  It's super effective!
+  The opposing Floatzel fainted!
+    xx fainted: Floatzel (foe)
+  The opposing Floatzel had its energy drained!
+    HP Lombre (player): 56 -> 67 / 67
+  (end of round)
+  The rain stopped.
+  Warden Marisol is about to send out Lanturn. Will you switch your Pokémon?  [auto: No]
+  Warden Marisol sent out Lanturn!
+    >> sent out (foe): Lanturn Lv.22 @ORANBERRY [VOLTABSORB]
+
+--- Turn 12 ---
+  [Lombre 67/67 | Lanturn 91/91]
+  The opposing Lanturn used Spark!
+  The current raced across the water!
+    HP Lombre (player): 67 -> 43 / 67
+    (anim: Confusion)
+  Lombre is confused!
+  Lombre used Bubble Beam!
+  The waves amplified the attack!
+    HP Lanturn (foe): 91 -> 75 / 91
+  It's not very effective...
+  (end of round)
+
+--- Turn 13 ---
+  [Lombre 43/67 | Lanturn 75/91]
+  The opposing Lanturn used Spark!
+  The current raced across the water!
+    HP Lombre (player): 43 -> 19 / 67
+    (anim: Confusion)
+  Lombre is confused!
+    HP Lombre (player): 19 -> 9 / 67
+  It hurt itself in its confusion!
+  (end of round)
+
+--- Turn 14 ---
+  [Lombre 9/67 | Lanturn 75/91]
+  The opposing Lanturn used Spark!
+  The current raced across the water!
+    HP Lombre (player): 9 -> 0 / 67
+  Lombre fainted!
+    xx fainted: Lombre (player)
+  (end of round)
+  Go for it, Machop!
+    >> sent out (player): Machop Lv.23 [GUTS]
+
+--- Turn 15 ---
+  [Machop 72/72 | Lanturn 75/91]
+  The opposing Lanturn used Confuse Ray!
+    (anim: Confusion)
+  Machop became confused!
+    (anim: Confusion)
+  Machop is confused!
+    HP Machop (player): 72 -> 58 / 72
+  It hurt itself in its confusion!
+  (end of round)
+
+--- Turn 16 ---
+  [Machop 58/72 | Lanturn 75/91]
+  The opposing Lanturn used Bubble Beam!
+  The waves amplified the attack!
+    HP Machop (player): 58 -> 8 / 72
+    (anim: Confusion)
+  Machop is confused!
+  Machop used Revenge!
+    HP Lanturn (foe): 75 -> 23 / 91
+    (anim: EatBerry)
+    HP Lanturn (foe): 23 -> 33 / 91
+  The opposing Lanturn restored a little HP using its Oran Berry!
+  (end of round)
+
+--- Turn 17 ---
+  [Machop 8/72 | Lanturn 33/91]
+  The opposing Lanturn used Spark!
+  The current raced across the water!
+    HP Machop (player): 8 -> 0 / 72
+  Machop fainted!
+    xx fainted: Machop (player)
+  (end of round)
+  Just a little more! Hang in there, Roggenrola!
+    >> sent out (player): Roggenrola Lv.23 [STURDY]
+
+--- Turn 18 ---
+  [Roggenrola 65/65 | Lanturn 33/91]
+  The opposing Lanturn used Bubble Beam!
+  The waves amplified the attack!
+    HP Roggenrola (player): 65 -> 1 / 65
+  It's super effective!
+  Roggenrola was swept up by the current!
+    (anim: StatDown)
+  Roggenrola's Speed fell!
+    [ability: Roggenrola (player)'s Sturdy]
+  Roggenrola endured the hit!
+  Roggenrola used Smack Down!
+    HP Lanturn (foe): 33 -> 9 / 91
+  (end of round)
+
+--- Turn 19 ---
+  [Roggenrola 1/65 | Lanturn 9/91]
+  The opposing Lanturn used Spark!
+  The current raced across the water!
+    HP Roggenrola (player): 1 -> 0 / 65
+  Roggenrola fainted!
+    xx fainted: Roggenrola (player)
+  (end of round)
+  Your opponent's weak! Get 'em, Staravia!
+    >> sent out (player): Staravia Lv.23 [INTIMIDATE]
+    [ability: Staravia (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Lanturn's Attack fell!
+
+--- Turn 20 ---
+  [Staravia 65/65 | Lanturn 9/91]
+  Staravia used Aerial Ace!
+    HP Lanturn (foe): 9 -> 0 / 91
+  It's not very effective...
+  The opposing Lanturn fainted!
+    xx fainted: Lanturn (foe)
+  Staravia is at the level cap (Lv. 23) and can't gain Exp. Points.
+  (end of round)
+  Warden Marisol sent out Lucky!
+    >> sent out (foe): Lucky Lv.23 @SITRUSBERRY [INTIMIDATE]
+    [ability: Lucky (foe)'s Intimidate]
+    (anim: StatDown)
+  Staravia's Attack fell!
+
+--- Turn 21 ---
+  [Staravia 65/65 | Lucky 81/81]
+  Staravia used Quick Attack!
+    HP Lucky (foe): 81 -> 72 / 81
+  The opposing Lucky used Waterfall!
+  The waves amplified the attack!
+    HP Staravia (player): 65 -> 0 / 65
+  Staravia fainted!
+    xx fainted: Staravia (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Marisol!
+  You gave $552 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 20 turn(s)

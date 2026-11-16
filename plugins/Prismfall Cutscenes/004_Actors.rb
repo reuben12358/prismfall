@@ -174,6 +174,10 @@ module Prismfall
         return @charsets[key]
       end
 
+      def placeholder_cache_size
+        return (@charsets || {}).count { |_, d| !d.bitmap.disposed? }
+      end
+
       def placeholder_icon(pal)
         b = Bitmap.new(64, 32)
         dark = Color.new(24, 24, 32)

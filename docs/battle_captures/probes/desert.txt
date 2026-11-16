@@ -1,0 +1,160 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for DESERT: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+DESERT probe: boosted move EARTHPOWER (on field)
+================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earth Power!
+  The shifting sands surged!
+    HP Snorlax (foe): 461 -> 382 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 382/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DESERT probe: boosted move EARTHPOWER (baseline, no field)
+==========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earth Power!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DESERT probe: Telluric Seed held on entry
+=========================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    (anim: UseItem)
+  Mew's Telluric Seed encased it in hardened sand!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Mew's Special Defense rose!
+  Mew's Speed fell!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DESERT probe: end-of-round rule 1: damage on {:abilities=>[:DRYSKIN, :SOLARPOWER]} [subject Florges]
+====================================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [DRYSKIN]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Florges (player): 148 -> 111 / 297
+  The scorching sun beat down on Florges!
+
+--- Turn 2 ---
+  [Florges 111/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Florges (player): 111 -> 74 / 297
+  The scorching sun beat down on Florges!
+
+--- Turn 3 ---
+  [Florges 74/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+DESERT probe: end-of-round rule 2: damage on {:types=>[:ICE]} [subject Glalie]
+==============================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Glalie!
+    >> sent out (player): Glalie Lv.100 [ICEBODY]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+
+--- Turn 1 ---
+  [Glalie 150/301 | Snorlax 230/461]
+  Glalie used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Glalie (player): 150 -> 131 / 301
+  Glalie is wilting in the desert heat!
+
+--- Turn 2 ---
+  [Glalie 131/301 | Snorlax 230/461]
+  Glalie used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Glalie (player): 131 -> 112 / 301
+  Glalie is wilting in the desert heat!
+
+--- Turn 3 ---
+  [Glalie 112/301 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

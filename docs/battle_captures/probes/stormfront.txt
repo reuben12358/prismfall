@@ -1,0 +1,293 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for STORMFRONT: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+STORMFRONT probe: boosted move AIRSLASH (on field)
+==================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Air Slash!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+STORMFRONT probe: boosted move AIRSLASH (baseline, no field)
+============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Air Slash!
+    HP Snorlax (foe): 461 -> 405 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 405/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+STORMFRONT probe: Elemental Seed held on entry
+==============================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+    (anim: UseItem)
+  Mew's Elemental Seed crackled with storm energy!
+    (anim: StatUp)
+  Mew's Speed rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+STORMFRONT probe: end-of-round rule 1: damage on {:grounded=>false, :not_abilities=>[:LIGHTNINGROD, :VOLTABSORB, :MOTORDRIVE]} +condition [subject Tornadus, after RAINDANCE]
+=============================================================================================================================================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Tornadus!
+    >> sent out (player): Tornadus Lv.100 [PRANKSTER]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+
+--- Turn 1 ---
+  [Tornadus 149/299 | Snorlax 230/461]
+  Tornadus used Rain Dance!
+  It started to rain!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Paralysis)
+    HP Tornadus (player): 149 -> 74 / 299
+  Lightning struck Tornadus!
+
+--- Turn 2 ---
+  [Tornadus 74/299 | Snorlax 230/461]
+  Tornadus used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Paralysis)
+    HP Tornadus (player): 74 -> 0 / 299
+  Lightning struck Tornadus!
+  Tornadus fainted!
+    xx fainted: Tornadus (player)
+  You have no more Pokémon that can fight!
+  battle result code: 2
+  
+RESULT: player lost after 1 turn(s)
+
+
+STORMFRONT probe: end-of-round rule 2: stats on {:abilities=>[:LIGHTNINGROD]} +condition [subject Florges, after RAINDANCE]
+===========================================================================================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [LIGHTNINGROD]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Rain Dance!
+  It started to rain!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Special Attack rose!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Special Attack rose!
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Special Attack rose!
+
+--- Turn 4 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+STORMFRONT probe: end-of-round rule 3: stats on {:abilities=>[:MOTORDRIVE]} +condition [subject Florges, after RAINDANCE]
+=========================================================================================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [MOTORDRIVE]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Rain Dance!
+  It started to rain!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Speed rose!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Speed rose!
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    (anim: StatUp)
+  Florges's Speed rose!
+
+--- Turn 4 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+STORMFRONT probe: end-of-round rule 4: heal on {:abilities=>[:VOLTABSORB]} +condition [subject Florges, after RAINDANCE]
+========================================================================================================================
+
+--- Battle start ---
+  field: STORMFRONT | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [VOLTABSORB]
+## FIELD CHANGE: NONE -> STORMFRONT
+  Gale-force winds howl across the airship deck!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Rain Dance!
+  It started to rain!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    HP Florges (player): 148 -> 185 / 297
+
+--- Turn 2 ---
+  [Florges 185/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    HP Florges (player): 185 -> 222 / 297
+
+--- Turn 3 ---
+  [Florges 222/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Florges drew a lightning bolt!
+    HP Florges (player): 222 -> 259 / 297
+
+--- Turn 4 ---
+  [Florges 259/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)

@@ -1,0 +1,168 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
+================================================================
+
+--- Battle start ---
+  field: COLOSSEUM | weather: None | terrain: None
+  You are challenged by Warden Kaito!
+  Warden Kaito sent out Hawlucha!
+    >> sent out (foe): Hawlucha Lv.41 @SITRUSBERRY [UNBURDEN]
+  Go! Magmar!
+    >> sent out (player): Magmar Lv.43 @TELLURICSEED [FLAMEBODY]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd roars as the fighters enter the pit!
+    (anim: UseItem)
+  Magmar's Telluric Seed fired it up to the roar of the crowd!
+    (anim: StatUp)
+  Magmar's Attack rose!
+
+--- Turn 1 ---
+  [Magmar 122/122 | Hawlucha 130/130]
+  The opposing Hawlucha used Swords Dance!
+    (anim: StatUp)
+  The opposing Hawlucha's Attack rose sharply!
+  Magmar used Thunder Punch!
+    HP Hawlucha (foe): 130 -> 0 / 130
+  A critical hit!
+  It's super effective!
+  The opposing Hawlucha fainted!
+    xx fainted: Hawlucha (foe)
+  The crowd went wild for Magmar!
+    (anim: StatUp)
+  Magmar's Attack rose!
+  Magmar is at the level cap (Lv. 43) and can't gain Exp. Points.
+  (end of round)
+  Warden Kaito is about to send out Machamp. Will you switch your Pokémon?  [auto: No]
+  Warden Kaito sent out Machamp!
+    >> sent out (foe): Machamp Lv.42 @SITRUSBERRY [NOGUARD]
+
+--- Turn 2 ---
+  [Magmar 122/122 | Machamp 143/143]
+  Magmar used Fire Punch!
+    HP Machamp (foe): 143 -> 36 / 143
+    (anim: EatBerry)
+    HP Machamp (foe): 36 -> 71 / 143
+  The opposing Machamp restored its health using its Sitrus Berry!
+  The opposing Machamp used Dynamic Punch!
+    HP Magmar (player): 122 -> 0 / 122
+  Magmar fainted!
+    xx fainted: Magmar (player)
+  The crowd went wild for the opposing Machamp!
+    (anim: StatUp)
+  The opposing Machamp's Attack rose!
+  (end of round)
+  Go for it, Pidgeot!
+    >> sent out (player): Pidgeot Lv.43 [KEENEYE]
+
+--- Turn 3 ---
+  [Pidgeot 137/137 | Machamp 71/143]
+  Pidgeot used Air Slash!
+    HP Machamp (foe): 71 -> 0 / 143
+  It's super effective!
+  The opposing Machamp fainted!
+    xx fainted: Machamp (foe)
+  The crowd went wild for Pidgeot!
+    (anim: StatUp)
+  Pidgeot's Special Attack rose!
+  Pidgeot is at the level cap (Lv. 43) and can't gain Exp. Points.
+  (end of round)
+  Warden Kaito is about to send out Conkeldurr. Will you switch your Pokémon?  [auto: No]
+  Warden Kaito sent out Conkeldurr!
+    >> sent out (foe): Conkeldurr Lv.42 @FLAMEORB [GUTS]
+
+--- Turn 4 ---
+  [Pidgeot 137/137 | Conkeldurr 156/156]
+  Pidgeot used Air Slash!
+    HP Conkeldurr (foe): 156 -> 30 / 156
+  It's super effective!
+  The opposing Conkeldurr flinched and couldn't move!
+  (end of round)
+    (anim: Burn)
+  The opposing Conkeldurr was burned by the Flame Orb!
+
+--- Turn 5 ---
+  [Pidgeot 137/137 | Conkeldurr 30/156 BURN]
+  Warden Kaito used a Hyper Potion.
+    HP Conkeldurr (foe): 30 -> 150 / 156
+  The opposing Conkeldurr's HP was restored.
+  Pidgeot used Air Slash!
+    HP Conkeldurr (foe): 150 -> 18 / 156
+  It's super effective!
+  (end of round)
+    (anim: Burn)
+    HP Conkeldurr (foe): 18 -> 9 / 156
+  The opposing Conkeldurr was hurt by its burn!
+
+--- Turn 6 ---
+  [Pidgeot 137/137 | Conkeldurr 9/156 BURN]
+  Warden Kaito used a Hyper Potion.
+    HP Conkeldurr (foe): 9 -> 129 / 156
+  The opposing Conkeldurr's HP was restored.
+  Pidgeot used Air Slash!
+    HP Conkeldurr (foe): 129 -> 0 / 156
+  It's super effective!
+  The opposing Conkeldurr fainted!
+    xx fainted: Conkeldurr (foe)
+  The crowd went wild for Pidgeot!
+    (anim: StatUp)
+  Pidgeot's Special Attack rose!
+  (end of round)
+  Warden Kaito is about to send out Hitmontop. Will you switch your Pokémon?  [auto: No]
+  Warden Kaito sent out Hitmontop!
+    >> sent out (foe): Hitmontop Lv.42 @ASSAULTVEST [INTIMIDATE]
+    [ability: Hitmontop (foe)'s Intimidate]
+    (anim: StatDown)
+  Pidgeot's Attack fell!
+
+--- Turn 7 ---
+  [Pidgeot 137/137 | Hitmontop 110/110]
+  Pidgeot used Air Slash!
+    HP Hitmontop (foe): 110 -> 29 / 110
+  It's super effective!
+  The opposing Hitmontop flinched and couldn't move!
+  (end of round)
+
+--- Turn 8 ---
+  [Pidgeot 137/137 | Hitmontop 29/110]
+  Pidgeot used Air Slash!
+    HP Hitmontop (foe): 29 -> 0 / 110
+  It's super effective!
+  The opposing Hitmontop fainted!
+    xx fainted: Hitmontop (foe)
+  The crowd went wild for Pidgeot!
+    (anim: StatUp)
+  Pidgeot's Special Attack rose!
+  (end of round)
+  Warden Kaito is about to send out Memory. Will you switch your Pokémon?  [auto: No]
+  Warden Kaito sent out Memory!
+    >> sent out (foe): Memory Lv.43 @LIFEORB [INNERFOCUS]
+
+--- Turn 9 ---
+  [Pidgeot 137/137 | Memory 130/130]
+  Pidgeot used Air Slash!
+    HP Memory (foe): 130 -> 39 / 130
+  The opposing Memory used Flash Cannon!
+  The crowd rallied behind the opposing Memory!
+    HP Pidgeot (player): 137 -> 29 / 137
+    HP Memory (foe): 39 -> 26 / 130
+  The opposing Memory lost some of its HP!
+  (end of round)
+
+--- Turn 10 ---
+  [Pidgeot 29/137 | Memory 26/130]
+  Pidgeot used Air Slash!
+  The crowd rallied behind Pidgeot!
+    HP Memory (foe): 26 -> 0 / 130
+  The opposing Memory fainted!
+    xx fainted: Memory (foe)
+  The crowd went wild for Pidgeot!
+    (anim: StatUp)
+  Pidgeot's Special Attack rose!
+  You defeated Warden Kaito!
+  ...Good. Your Pokémon fight like they remember why.
+  You got $4,300 for winning!
+  battle result code: 1
+  
+RESULT: player won after 9 turn(s)

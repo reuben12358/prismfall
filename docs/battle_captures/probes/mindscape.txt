@@ -1,0 +1,224 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for MINDSCAPE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+MINDSCAPE probe: boosted move PSYCHIC (on field)
+================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Psychic!
+  The Mindscape amplified the thought!
+    HP Snorlax (foe): 461 -> 313 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 313/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MINDSCAPE probe: boosted move PSYCHIC (baseline, no field)
+==========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Psychic!
+    HP Snorlax (foe): 461 -> 362 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 362/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MINDSCAPE probe: transition [stage 1: flags Sound, category damaging x3 -> NONE] using OVERDRIVE, OVERDRIVE, OVERDRIVE
+======================================================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 461 -> 392 / 461
+  The dreamscape trembles at the noise... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 392/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 392 -> 319 / 461
+  The dreamscape trembles at the noise... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 319/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 319 -> 248 / 461
+## FIELD CHANGE: MINDSCAPE -> NONE
+  The noise jolted everyone awake! The Mindscape collapsed.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 248/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 248/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+MINDSCAPE probe: transition [stage 1: moves TOPSYTURVY -> INVERSE] using GROWL, TOPSYTURVY
+==========================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growl!
+    (anim: StatDown)
+  The wild Snorlax's Attack fell!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Topsy-Turvy!
+  The wild Snorlax's stats were reversed!
+## FIELD CHANGE: MINDSCAPE -> INVERSE
+  The Mindscape turned inside out, into the world behind the glass!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MINDSCAPE probe: Magical Seed held on entry
+===========================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+    (anim: UseItem)
+  Mew's Magical Seed flooded its mind with thoughts!
+    (anim: Confusion)
+  Mew became confused!
+    (anim: StatUp)
+  Mew's Special Attack rose sharply!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+    (anim: Confusion)
+  Mew is confused!
+    HP Mew (player): 170 -> 135 / 341
+  It hurt itself in its confusion!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 135/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MINDSCAPE probe: end-of-round rule 1: proc on {:status=>[:SLEEP]} [subject Florges]
+===================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Florges 148/297 SLEEP | Snorlax 230/461]
+    (anim: Sleep)
+  Florges is fast asleep.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges is stirring in its dream...
+
+--- Turn 2 ---
+  [Florges 148/297 SLEEP | Snorlax 230/461]
+  Florges woke up!
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

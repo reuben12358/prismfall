@@ -1,0 +1,84 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for INVERSE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+INVERSE probe: boosted move SHADOWBALL (on field)
+=================================================
+
+--- Battle start ---
+  field: INVERSE | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> INVERSE
+  The world turns inside out... Type matchups are reversed!
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Shadow Ball!
+  The Reverse World answers Mew's call!
+    HP Milotic (foe): 331 -> 268 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 268/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+INVERSE probe: boosted move SHADOWBALL (baseline, no field)
+===========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Shadow Ball!
+    HP Milotic (foe): 331 -> 278 / 331
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 278/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+INVERSE probe: Magical Seed held on entry
+=========================================
+
+--- Battle start ---
+  field: INVERSE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> INVERSE
+  The world turns inside out... Type matchups are reversed!
+    (anim: UseItem)
+  Mew's Magical Seed turned its world upside down!
+    (anim: StatDown)
+  Mew's Speed harshly fell!
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

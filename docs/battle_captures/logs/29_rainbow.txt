@@ -1,0 +1,254 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Rainbow [RAINBOW] - Gym Leader Amaria vs challenger (Lv.78)
+===========================================================
+
+--- Battle start ---
+  field: RAINBOW | weather: None | terrain: None
+  You are challenged by Gym Leader Amaria!
+  Gym Leader Amaria sent out Indiana!
+    >> sent out (foe): Indiana Lv.76 @LIFEORB [SWIFTSWIM]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.78 @MAGICALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> RAINBOW
+  A brilliant rainbow arcs over the battlefield!
+    (anim: UseItem)
+  Garchomp's Magical Seed shimmered in every color!
+    (anim: StatUp)
+  Garchomp's Special Attack rose!
+  Garchomp's Special Defense rose!
+
+--- Turn 1 ---
+  [Garchomp 280/280 | Indiana 247/247]
+  Garchomp used Fire Fang!
+    HP Indiana (foe): 247 -> 188 / 247
+  The opposing Indiana used Ice Beam!
+    HP Garchomp (player): 280 -> 63 / 280
+  It's super effective!
+    HP Indiana (foe): 188 -> 164 / 247
+  The opposing Indiana lost some of its HP!
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 63/280 | Indiana 164/247]
+  Garchomp used Fire Fang!
+    HP Indiana (foe): 164 -> 96 / 247
+    (anim: Burn)
+  The opposing Indiana was burned!
+  The opposing Indiana used Ice Beam!
+    HP Garchomp (player): 63 -> 0 / 280
+  It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+    HP Indiana (foe): 96 -> 72 / 247
+  The opposing Indiana lost some of its HP!
+  (end of round)
+    (anim: Burn)
+    HP Indiana (foe): 72 -> 57 / 247
+  The opposing Indiana was hurt by its burn!
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.78 [STEADFAST]
+
+--- Turn 3 ---
+  [Lucario 221/221 | Indiana 57/247 BURN]
+  Gym Leader Amaria used a Full Restore.
+    HP Indiana (foe): 57 -> 247 / 247
+  The opposing Indiana's HP was restored.
+  Lucario used Extreme Speed!
+  The rainbow's light poured into the attack!
+    HP Indiana (foe): 247 -> 151 / 247
+  (end of round)
+
+--- Turn 4 ---
+  [Lucario 221/221 | Indiana 151/247]
+  Lucario used Flash Cannon!
+    HP Indiana (foe): 151 -> 108 / 247
+  It's not very effective...
+  The opposing Indiana used Ice Beam!
+    HP Lucario (player): 221 -> 172 / 221
+  It's not very effective...
+    HP Indiana (foe): 108 -> 84 / 247
+  The opposing Indiana lost some of its HP!
+  (end of round)
+
+--- Turn 5 ---
+  [Lucario 172/221 | Indiana 84/247]
+  Lucario used Aura Sphere!
+    HP Indiana (foe): 84 -> 6 / 247
+  The opposing Indiana used Hydro Pump!
+  The opposing Indiana's attack missed!
+  (end of round)
+
+--- Turn 6 ---
+  [Lucario 172/221 | Indiana 6/247]
+  Gym Leader Amaria used a Full Restore.
+    HP Indiana (foe): 6 -> 247 / 247
+  The opposing Indiana's HP was restored.
+  Lucario used Close Combat!
+    HP Indiana (foe): 247 -> 107 / 247
+    (anim: StatDown)
+  Lucario's Defense fell!
+  Lucario's Special Defense fell!
+  (end of round)
+
+--- Turn 7 ---
+  [Lucario 172/221 | Indiana 107/247]
+  Lucario used Close Combat!
+    HP Indiana (foe): 107 -> 0 / 247
+    (anim: StatDown)
+  Lucario's Defense fell!
+  Lucario's Special Defense fell!
+  The opposing Indiana fainted!
+    xx fainted: Indiana (foe)
+  Lucario got 3538 Exp. Points!
+  (end of round)
+  Gym Leader Amaria is about to send out Atlantica. Will you switch your Pokémon?  [auto: No]
+  Gym Leader Amaria sent out Atlantica!
+    >> sent out (foe): Atlantica Lv.77 @DAMPROCK [SWIFTSWIM]
+
+--- Turn 8 ---
+  [Lucario 172/221 | Atlantica 242/242]
+  The opposing Atlantica used Hydro Pump!
+    HP Lucario (player): 172 -> 0 / 221
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  You're in charge, Starmie!
+    >> sent out (player): Starmie Lv.78 [NATURALCURE]
+
+--- Turn 9 ---
+  [Starmie 205/205 | Atlantica 242/242]
+  Starmie used Psychic!
+    HP Atlantica (foe): 242 -> 155 / 242
+  The opposing Atlantica used Ice Beam!
+    HP Starmie (player): 205 -> 168 / 205
+  It's not very effective...
+  (end of round)
+
+--- Turn 10 ---
+  [Starmie 168/205 | Atlantica 155/242]
+  Starmie used Thunderbolt!
+    HP Atlantica (foe): 155 -> 104 / 242
+  The opposing Atlantica used Ice Beam!
+    HP Starmie (player): 168 -> 135 / 205
+  It's not very effective...
+  (end of round)
+
+--- Turn 11 ---
+  [Starmie 135/205 | Atlantica 104/242]
+  Starmie used Ice Beam!
+    HP Atlantica (foe): 104 -> 46 / 242
+  The opposing Atlantica used Draco Meteor!
+    HP Starmie (player): 135 -> 0 / 205
+    (anim: StatDown)
+  The opposing Atlantica's Special Attack harshly fell!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  Your opponent's weak! Get 'em, Togekiss!
+    >> sent out (player): Togekiss Lv.78 [HUSTLE]
+
+--- Turn 12 ---
+  [Togekiss 244/244 | Atlantica 46/242]
+  The opposing Atlantica used Ice Beam!
+    HP Togekiss (player): 244 -> 186 / 244
+  It's super effective!
+  Togekiss used Air Slash!
+    HP Atlantica (foe): 46 -> 0 / 242
+  The opposing Atlantica fainted!
+    xx fainted: Atlantica (foe)
+  Togekiss got 4096 Exp. Points!
+  (end of round)
+  Gym Leader Amaria is about to send out Milotic. Will you switch your Pokémon?  [auto: No]
+  Gym Leader Amaria sent out Milotic!
+    >> sent out (foe): Milotic Lv.76 @FLAMEORB [MARVELSCALE]
+
+--- Turn 13 ---
+  [Togekiss 186/244 | Milotic 269/269]
+  The opposing Milotic used Scald!
+    HP Togekiss (player): 186 -> 115 / 244
+    (anim: Burn)
+  Togekiss was burned!
+  Togekiss used Dazzling Gleam!
+    HP Milotic (foe): 269 -> 159 / 269
+  (end of round)
+    (anim: Burn)
+    HP Togekiss (player): 115 -> 100 / 244
+  Togekiss was hurt by its burn!
+    (anim: Burn)
+  The opposing Milotic was burned by the Flame Orb!
+
+--- Turn 14 ---
+  [Togekiss 100/244 BURN | Milotic 159/269 BURN]
+  The opposing Milotic used Ice Beam!
+    HP Togekiss (player): 100 -> 0 / 244
+  It's super effective!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  (end of round)
+    (anim: Burn)
+    HP Milotic (foe): 159 -> 143 / 269
+  The opposing Milotic was hurt by its burn!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.78 [MAGNETPULL]
+
+--- Turn 15 ---
+  [Magnezone 221/221 | Milotic 143/269 BURN]
+  The opposing Milotic used Scald!
+    HP Magnezone (player): 221 -> 86 / 221
+  A critical hit!
+    (anim: Burn)
+  Magnezone was burned!
+  Magnezone used Volt Switch!
+    HP Milotic (foe): 143 -> 12 / 269
+  It's super effective!
+  Magnezone went back to Tester!
+    << recalled: Magnezone (player)
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.78 [BLAZE]
+  (end of round)
+    (anim: Burn)
+    HP Milotic (foe): 12 -> 0 / 269
+  The opposing Milotic was hurt by its burn!
+  The opposing Milotic fainted!
+    xx fainted: Milotic (foe)
+  Magnezone got 2786 Exp. Points!
+  Charizard got 2786 Exp. Points!
+  Gym Leader Amaria is about to send out Deliverer. Will you switch your Pokémon?  [auto: No]
+  Gym Leader Amaria sent out Deliverer!
+    >> sent out (foe): Deliverer Lv.78 @LEFTOVERS [SHELLARMOR]
+
+--- Turn 16 ---
+  [Charizard 233/233 | Deliverer 331/331]
+  Charizard used Flamethrower!
+    HP Deliverer (foe): 331 -> 240 / 331
+    (anim: Burn)
+  The opposing Deliverer was burned!
+  The opposing Deliverer used Sparkling Aria!
+    HP Charizard (player): 233 -> 0 / 233
+  It's super effective!
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+    (anim: UseItem)
+    HP Deliverer (foe): 240 -> 260 / 331
+  The opposing Deliverer restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Deliverer (foe): 260 -> 240 / 331
+  The opposing Deliverer was hurt by its burn!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.78 [MAGNETPULL]
+
+--- Turn 17 ---
+  [Magnezone 86/221 BURN | Deliverer 240/331 BURN]
+  The opposing Deliverer used Hydro Pump!
+    HP Magnezone (player): 86 -> 0 / 221
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  You have no more Pokémon that can fight!
+  You lost against Gym Leader Amaria!
+  You gave $9,360 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 16 turn(s)

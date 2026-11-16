@@ -2,6 +2,8 @@
 module PrismfallMaps
   MAP_TONES = {
     140 => [10, 4, -14, 0],   # Saltmere
+    146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
+    147 => [12, 4, -18, 0],   # Saltmere - Old Town
   }
 
   def self.apply_map_tone

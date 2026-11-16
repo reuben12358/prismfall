@@ -1,0 +1,87 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+BOSS Kyogre (KYOGRE_ISENMAR, 3 bars, FROZEN_LAKE -> WATER_SURFACE) vs over-levelled Lv.100 party
+================================================================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  Oh! A wild Kyogre appeared!
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.100 [SANDVEIL]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+  The frozen sea heaves... Kyogre has awoken beneath the ice!
+    [ability: Kyogre (foe)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+
+--- Turn 1 ---
+  [Garchomp 357/357 | Kyogre 226/226]
+  Garchomp used Earthquake!
+    HP Kyogre (foe): 226 -> 1 / 226
+  The lake ice groaned and cracked! (2 more)
+  The wild Kyogre's shield shattered!
+    HP Kyogre (foe): 1 -> 226 / 226
+  Kyogre thrashes, and the ice beneath it splinters!
+  The wild Kyogre learned Water Spout!
+    (anim: StatUp)
+  The wild Kyogre's Special Attack rose!
+## FIELD CHANGE: FROZEN_LAKE -> WATER_SURFACE
+  The frozen lake cracked apart into open water!
+## BOSS BAR BROKEN: KYOGRE_ISENMAR bar 1 depleted, 2 bar(s) left (Kyogre HP 226/226, field WATER_SURFACE)
+  The wild Kyogre used Ice Beam!
+    HP Garchomp (player): 357 -> 45 / 357
+  It's super effective!
+  Ice spreads across the water... (2 more)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Garchomp 45/357 | Kyogre 226/226]
+  Garchomp used Dragon Claw!
+    HP Kyogre (foe): 226 -> 1 / 226
+  The wild Kyogre's shield shattered!
+    HP Kyogre (foe): 1 -> 226 / 226
+  The Icicle Plate's hold on the sea shatters!
+  The shard in your pocket hums in time with the waves...
+    (anim: PrimalKyogre)
+    (anim: PrimalKyogre2)
+  The wild Kyogre's Primal Reversion! It reverted to its primal form!
+    [ability: Kyogre (foe)'s Primordial Sea]
+    (anim: HeavyRain)
+  A heavy rain began to fall!
+## BOSS BAR BROKEN: KYOGRE_ISENMAR bar 2 depleted, 1 bar(s) left (Kyogre HP 226/226, field WATER_SURFACE)
+  The wild Kyogre used Ice Beam!
+    HP Garchomp (player): 45 -> 0 / 357
+  It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  Ice spreads across the water... (1 more)
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [STURDY]
+
+--- Turn 3 ---
+  [Magnezone 281/281 | Kyogre 226/226]
+  The wild Kyogre used Origin Pulse!
+  The waves amplified the attack!
+    HP Magnezone (player): 281 -> 1 / 281
+    [ability: Magnezone (player)'s Sturdy]
+  Magnezone endured the hit!
+  Magnezone used Thunderbolt!
+  The current raced across the water!
+    HP Kyogre (foe): 226 -> 0 / 226
+  It's super effective!
+  The wild Kyogre sank back beneath the waves...
+  The wild Kyogre fainted!
+    xx fainted: Kyogre (foe)
+  The heavy rain has lifted!
+  Magnezone is at the level cap (Lv. 100) and can't gain Exp. Points.
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)

@@ -1,0 +1,148 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Underwater [UNDERWATER] - Fisherman Andrew vs challenger (Lv.18)
+================================================================
+
+--- Battle start ---
+  field: UNDERWATER | weather: None | terrain: None
+  You are challenged by Fisherman Andrew!
+  Fisherman Andrew sent out Magikarp!
+    >> sent out (foe): Magikarp Lv.14 [SWIFTSWIM]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.18 @ELEMENTALSEED [FLASHFIRE]
+## FIELD CHANGE: NONE -> UNDERWATER
+  Blue silence presses in from every side... The battle is underwater!
+    (anim: UseItem)
+  Growlithe's Elemental Seed released a bubble of air around it!
+    (anim: StatUp)
+  Growlithe's Defense rose!
+
+--- Turn 1 ---
+  [Growlithe 53/53 | Magikarp 31/31]
+  The opposing Magikarp used Splash!
+  But nothing happened!
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 31 -> 21 / 31
+  (end of round)
+    HP Growlithe (player): 53 -> 46 / 53
+  Growlithe is struggling for air!
+
+--- Turn 2 ---
+  [Growlithe 46/53 | Magikarp 21/31]
+  The opposing Magikarp used Splash!
+  But nothing happened!
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 21 -> 12 / 31
+  (end of round)
+    HP Growlithe (player): 46 -> 49 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 49 -> 42 / 53
+  Growlithe is struggling for air!
+
+--- Turn 3 ---
+  [Growlithe 42/53 | Magikarp 12/31]
+  Fisherman Andrew withdrew Magikarp!
+    << recalled: Magikarp (foe)
+  Fisherman Andrew sent out Magikarp!
+    >> sent out (foe): Magikarp Lv.18 [SWIFTSWIM]
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 37 -> 28 / 37
+  (end of round)
+    HP Growlithe (player): 42 -> 45 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 45 -> 38 / 53
+  Growlithe is struggling for air!
+
+--- Turn 4 ---
+  [Growlithe 38/53 | Magikarp 28/37]
+  The opposing Magikarp used Tackle!
+    HP Growlithe (player): 38 -> 35 / 53
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 28 -> 19 / 37
+  (end of round)
+    HP Growlithe (player): 35 -> 38 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 38 -> 31 / 53
+  Growlithe is struggling for air!
+
+--- Turn 5 ---
+  [Growlithe 31/53 | Magikarp 19/37]
+  The opposing Magikarp used Tackle!
+    HP Growlithe (player): 31 -> 27 / 53
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 19 -> 10 / 37
+  (end of round)
+    HP Growlithe (player): 27 -> 30 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 30 -> 23 / 53
+  Growlithe is struggling for air!
+
+--- Turn 6 ---
+  [Growlithe 23/53 | Magikarp 10/37]
+  The opposing Magikarp used Tackle!
+    HP Growlithe (player): 23 -> 19 / 53
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 10 -> 2 / 37
+  (end of round)
+    HP Growlithe (player): 19 -> 22 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 22 -> 15 / 53
+  Growlithe is struggling for air!
+
+--- Turn 7 ---
+  [Growlithe 15/53 | Magikarp 2/37]
+  The opposing Magikarp used Tackle!
+    HP Growlithe (player): 15 -> 11 / 53
+  Growlithe used Bite!
+  The water's resistance slowed Growlithe's attack!
+    HP Magikarp (foe): 2 -> 0 / 37
+  The opposing Magikarp fainted!
+    xx fainted: Magikarp (foe)
+  Growlithe got 145 Exp. Points!
+  (end of round)
+    HP Growlithe (player): 11 -> 14 / 53
+  Aqua Ring restored Growlithe's HP!
+    HP Growlithe (player): 14 -> 7 / 53
+  Growlithe is struggling for air!
+  Fisherman Andrew is about to send out Magikarp. Will you switch your Pokémon?  [auto: No]
+  Fisherman Andrew sent out Magikarp!
+    >> sent out (foe): Magikarp Lv.14 [SWIFTSWIM]
+
+--- Turn 8 ---
+  [Growlithe 7/53 | Magikarp 12/31]
+  Good job, Growlithe! Come back!
+    << recalled: Growlithe (player)
+  Just a little more! Hang in there, Mareep!
+    >> sent out (player): Mareep Lv.18 [STATIC]
+  The opposing Magikarp used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mareep (player): 53 -> 50 / 53
+  Mareep is struggling for air!
+
+--- Turn 9 ---
+  [Mareep 50/53 | Magikarp 12/31]
+  The opposing Magikarp used Splash!
+  But nothing happened!
+  Mareep used Charge Beam!
+    HP Magikarp (foe): 12 -> 0 / 31
+  It's super effective!
+  The opposing Magikarp fainted!
+    xx fainted: Magikarp (foe)
+    (anim: StatUp)
+  Mareep's Special Attack rose!
+  Growlithe got 88 Exp. Points!
+  Mareep got 88 Exp. Points!
+  You defeated Fisherman Andrew!
+  Washed out!
+  You got $576 for winning!
+  battle result code: 1
+  
+RESULT: player won after 8 turn(s)

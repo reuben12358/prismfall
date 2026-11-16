@@ -1,0 +1,370 @@
+# Prismfall Cutscenes: authoring guide (SPINE Rev 6 + 7)
+
+Plugin: `plugins/Prismfall Cutscenes/` (v1.0.0, Essentials 21.1, optional dependency on Prismfall Core).
+It provides three things:
+
+1. **Pixel cutscenes** written as data in a small Ruby DSL and played full-screen (`Prismfall::Cutscene.play(:ID)`).
+2. **Festival match highlights**, built automatically from two trainers and a list of key moments.
+3. **Portrait speech bubbles** for overworld dialogue (`pf_say`, or a `\pf[...]` tag in Show Text).
+
+Everything works with zero custom art: backgrounds, beams, particles and emotes are drawn by code, and any missing
+sprite or portrait is replaced by a code-drawn placeholder. All sound cues are silent when their file is missing.
+
+| File | Contents |
+|---|---|
+| `001_Config.rb` | Tunables, effect palettes, audio cue table |
+| `002_Util.rb` | Easing, colours, pixel drawing (`Pix`), audio wrapper |
+| `003_DSL.rb` | `Cutscene.define / build / play`, the DSL (`Builder`) |
+| `004_Actors.rb` | Sprite loading and placeholders (`Gfx`), `Actor` |
+| `005_Backdrops.rb` | Procedural and image backgrounds |
+| `006_Scene.rb` | The player: camera, layers, timeline, skip, core commands |
+| `007_Particles.rb` | Particles, burning/freezing overlays, dome |
+| `008_Beams.rb` | Charge-up, beam, impact, **beam clash** |
+| `009_Armies.rb` | Crowds, marching, army clash, volleys |
+| `010_Text.rb` | Captions, speaker lines, title card, VS card, HP bars |
+| `011_Highlights.rb` | `match_highlight` |
+| `012_Scenes_War.rb` | `:WAR_CLIMAX` (story/13_CUTSCENES.md WAR-1) and `:WAR_CLIMAX_DEMO` |
+| `013_Portraits.rb` | Portrait speech bubbles and the message hook |
+| `014_Debug.rb` | Debug menu: "Prismfall Cutscenes..." |
+| `selftest/` | Offline test harness (not loaded by the game; see section 9) |
+
+---
+
+## 1. Calling it from events
+
+```
+Script: Prismfall::Cutscene.play(:WAR_CLIMAX)
+Script: pbCutscene(:MY_SCENE)                         # short form
+Script: pbCutscene(:WAR_CLIMAX, variant: :B)          # scene variables
+Conditional Branch > Script: pbCutscene(:MY_SCENE)    # true = watched to the end, false = skipped
+```
+
+- The scene fades in from black, plays, fades out, and the map fades back. The map BGM is memorised and restored
+  if the scene played its own BGM (`restore_bgm: false` on `define` turns that off).
+- **Skip:** hold Back (X/Esc) for 0.7 s. `define(:ID, skippable: false)` disables it. For "skippable after the first
+  viewing", gate it in the event with a switch and call a non-skippable copy the first time.
+- After a scene: `Prismfall::Cutscene.skipped?`, and `Prismfall::Cutscene.result(:clash_winner)` (`:a`, `:b`, `:both`
+  or `:fizzle`) when it contained a beam clash.
+- A scene that raises an error is logged and ended (returns false) instead of freezing the event. In Debug with
+  `$DEBUG` set, the error is raised so you see it.
+
+## 2. Writing a scene
+
+Put scenes in any plugin script that loads after this one (or in `012_Scenes_War.rb` style files here).
+
+```ruby
+Prismfall::Cutscene.define(:MY_SCENE) do
+  background :sky, palette: :dusk
+  background :sea, palette: :burning
+  letterbox true, duration: 0
+  actor :kyogre,   species: :KYOGRE,   at: [96, 310], flip: true
+  actor :reshiram, species: :RESHIRAM, at: [420, 290]
+  emit :embers, rate: 20
+  text "The strait burned for three days."
+  together do
+    charge_up at: :kyogre,   color: :water
+    charge_up at: :reshiram, color: :fire
+  end
+  beam_clash a: { from: :kyogre, color: :water }, b: { from: :reshiram, color: :fire },
+             duration: 7, winner: :both
+  say "Sigrun", "Father. Enough."
+  fade_out
+end
+```
+
+**Coordinates** are screen pixels in a 512x384 world; the camera starts centred on `[256, 192]`. The world can be
+wider than the screen (procedural backgrounds tile sideways), so armies can stand at x = -300 or 800 and the camera
+pans to them. Actors are anchored at their feet (bottom centre).
+
+**Timing model.** A time cursor runs through the block.
+
+| Kind | Commands | Cursor |
+|---|---|---|
+| Showpieces | `text say title vs_card charge_up beam beam_clash volley clash_armies lunge faint fade_out fade_in` | The next command starts when they end |
+| Tweens | `move scale rotate fade tint hop tremble hit hp_bar pan zoom shake flash tone letterbox march rout overlay dome army_tint army_fall impact ring clash_mod` | Start at the cursor and do not move it |
+| Instant | `background actor remove camera cut flip face emit stop_emit burst army bgm bgs se me cry call` | No time |
+
+- `wait: true` makes a tween block; `wait: false` runs a showpiece in the background.
+- `wait 1.5` moves the cursor. `together { ... }` starts everything inside at the same time and continues when the
+  longest ends (`wait` inside it staggers). `sequence { ... }` is a normal run nested inside `together`.
+  `at(12.0) { ... }` places commands at an absolute time; `now` is the cursor.
+- The scene's length is the end of its last command. Timing is real seconds and does not depend on frame rate.
+
+**Variables and variants.** `var(:name, default)` reads a variable passed to `play`/`build`. Ordinary Ruby (`if`,
+`case`, loops, local variables) works inside the block. `define(:ID, vars: proc { {...} })` supplies defaults at play
+time (the war climax reads Core's flags this way). `include_scene(:OTHER, key: value)` inlines another scene.
+
+**Mistakes are caught when the game loads:** using an actor or army before declaring it raises `ArgumentError`
+naming the scene, and a misspelt command raises `NoMethodError`.
+
+## 3. Command reference
+
+Common options on tweens: `duration:` (seconds), `ease:` (`:linear :in :out :in_out :in_cubic :out_cubic :sine
+:out_back :out_bounce :steps`).
+A **point** is `[x, y]`, an actor id (its mouth), an army id (a random soldier), `[x, y, w, h]` (random inside), or
+`{ actor: :id, part: :feet | :center | :top | :mouth, offset: [dx, dy] }`.
+
+### Backgrounds (each call adds layers, back to front)
+| Command | Options |
+|---|---|
+| `background :sky` | `palette: :day :dawn :dusk :night :burning :storm :snow`, `clouds: false/count`, `stars:`, `sun: [x, y]` |
+| `background :sea` | `palette: :day :night :burning :storm :black`, `horizon: 200` (animated glints) |
+| `background :ice` | `palette: :day :dawn :ember :night :glass`, `plates: true` (black-water channels), `cracks:` |
+| `background :battlefield` | `palette: :grass :scorched :snow :sand :stone`, `craters:` |
+| `background :mountains` | `color:`, `y:` (base line), `height:`, `snow: true` (parallax 0.3) |
+| `background :arena` | `colors: [left, right]` crowd tints, `tint:` floor tint |
+| `background :fleet` / `:fortress` | `x:`, `y:` (ground line), `width:`, `color:`, `count:` / `towers:`, `glow:` |
+| `background :gradient` | `colors: [[r,g,b], ...]`, `y:`, `height:` |
+| `background :color` / `background image: "Graphics/..."` | `color:` / `tile:`, `px:` (zoom), `x:`, `y:` |
+
+All take `parallax:` (0 = fixed to the screen, 1 = moves with the camera), `scroll:` (px/s), `opacity:`, `seed:`.
+`clear_backgrounds` removes them.
+
+### Actors
+`actor :id, <source>, at: [x, y], scale: 1, flip: false, opacity: 255, z:, mouth: [dx, dy]`
+
+| Source | Notes |
+|---|---|
+| `species: :KYOGRE` | Battler sprite; `back: true`, `shiny: true`, `form:`, `gender:`. EBDX strips animate |
+| `trainer: :LEADER_ANJA` | Trainer front sprite |
+| `charset: "NPC 01"` or `charset: :LEADER_ANJA` | Overworld charset; `dir: :down/:left/:right/:up`, `walk: true`, `color:` for the placeholder |
+| `player: true` | The player's current charset |
+| `icon: :EEVEE` | Pokémon icon |
+| `image: "Graphics/Pictures/x"` | Any picture |
+| `prop: :ship / :banner / :stone / :tripod` | Small code-drawn props, `color:` |
+
+`silhouette: true` (or a colour) fills the sprite with one colour; `tint: [r, g, b, amount]` blends towards one.
+Declaring an id again replaces that actor. Sprites up to 128 px tall are treated as native-resolution and shown at 2x.
+
+| Command | Options |
+|---|---|
+| `move :id` | `to:` point or actor / `by: [dx, dy]`, `arc:` (hop height), `walk: true` |
+| `scale` / `rotate` / `fade` | `to:` (rotate also `by:` degrees; fade 0–255) |
+| `tint :id` | `color:`, `amount:` 0–255 (255 = silhouette) |
+| `flip :id` / `face :id, :left` | |
+| `hop` / `tremble` | `height:`, `times:` / `power:` |
+| `lunge :id` | `toward:`, `distance:`, `hit: false` (miss), `color:` (attack, hits the target at the far point) |
+| `hit :id` / `faint :id` | White flash + knock-back (`dir:`, `power:`) / sink and fade |
+| `hp_bar :id` | `value:` 0–1, `show: false` |
+| `remove :id` / `clear_actors` | |
+
+### Camera and screen
+| Command | Options |
+|---|---|
+| `camera` | `at:`, `zoom:` (instant) |
+| `cut` | Same, behind a two-frame black blink (a hard cut) |
+| `pan` | `to:` / `by:`, `zoom:` |
+| `zoom` | `to:` (keep it >= 1; zooming out shows layer edges) |
+| `shake` | `power:` px, `decay: false` |
+| `flash` | `color:`, `power:` 0–255 |
+| `tone` | `to: [r, g, b, gray]` (tints the world, not text) |
+| `fade_out` / `fade_in` | To and from black |
+| `letterbox true/false` | `height: 32` |
+
+### Particles and overlays
+- `emit :embers / :snow / :rain / :debris / :sparks / :smoke / :steam / :ice_shards / :petals / :motes`, with
+  `at:` / `from:` / `area:` (none of them = whole-screen weather), `rate:`, `duration:`, `color:`, `id:`,
+  `layer: :back`, `speed:`, `angle:`, `spread:`. `stop_emit :id` (or all with no id).
+- `burst kind, at:, count:, color:`
+- `overlay :burning, level: 0..1` (flames from the bottom edge) / `overlay :freezing, level: 0..1` (frost from the edges)
+- `dome at:, radius:, duration:` grows a scanline dome; `dome hole_at: :actor, hole: 54` opens a clear circle;
+  `dome off: true`.
+
+### Beams
+| Command | Options |
+|---|---|
+| `charge_up` | `at:`, `color:`, `size:` |
+| `beam` | `from:`, `to:`, `color:`, `width: 8`, `travel:`, `impact: false`, `hit: false`, `shake:` |
+| `impact` / `ring` | `at:`, `color:`, `size:` / `radius:`, `squash:`, `layer: :front` |
+| `beam_clash` | see below |
+
+`color:` is a palette name (`:fire :blueflare :water :ice :dragon :electric :grass :psychic :dark :ghost :fairy
+:steel :poison :ground :rock :fighting :bug :flying :light :white :bleed :steam :smoke`) or one `[r, g, b]` (a
+four-colour ramp is derived).
+
+```ruby
+beam_clash a: { from: :kyogre, color: :water, width: 10 },   # or just a: :kyogre
+           b: { from: :reshiram, color: :fire },
+           duration: 7, winner: :a,        # :a, :b, :both (detonation), :fizzle (gutters out), :mash
+           curve: :a_rallies,              # or [[0, 0.5], [0.5, 0.3], [1, 0.6]]
+           mash: true, player: :a,         # button mashing pushes the clash point
+           launch: 0.45, resolve: 1.5, ball: 9, shake: 4, strobe: true, id: :clash
+```
+- The clash position runs from 0 (at `a`) to 1 (at `b`); high means `a` is winning. `curve:` is the scripted
+  struggle (time 0–1 over the struggle phase). Presets: `:even :a_rallies :b_rallies :a_dominates :b_dominates
+  :left_right_hold`.
+- With `mash: true` each press of Use pushes the point for `player:`; with `winner: :mash` the side ahead when the
+  struggle ends wins. Read it with `Prismfall::Cutscene.result(:clash_winner)`.
+- Run a long clash under several shots with `wait: false`, and change it with `clash_mod :clash, white: 1.0,
+  intensity: 0.4, shake: 2, strobe: false, duration: 2` (`white` bleaches both beams).
+
+### Armies
+| Command | Options |
+|---|---|
+| `army :id` | `icons: [species]` / `charset:` (file or trainer type) / `color:` (code-drawn soldiers), `count:`, `rows:`, `area: [x, y, w, h]`, `facing: :left/:right`, `scale:` |
+| `march :id` | `by: [dx, dy]` |
+| `clash_armies :a, :b` | `casualties: 0.3`, `gap:` |
+| `volley` | `from:`, `to:`, `kind: :fire :ice :water :arrow :rock :dragon :electric`, `count:`, `arc:`, `casualties:` |
+| `rout :id` / `army_fall :id` / `army_tint :id` | `by:` / `fraction:` / `color:`, `amount:` |
+
+### Text and audio
+- `text "Caption"` (`position: :bottom/:top/:center`, `duration:`), `say "Name", "Line"` (typed out),
+  `title "BIG", sub: "small"`. Text is timed (default from its length) and never waits for a button.
+- `bgm "name"`, `bgs`, `se`, `me`, `cry :SPECIES`, `bgm_fade 1.0`, `bgs_fade`. A symbol looks the cue up in
+  `AUDIO` in `001_Config.rb`, which lists the design/AUDIO.md name first and stock stand-ins after it:
+  `:beam_charge :beam_fire :beam_clash :beam_break :crowd_cheer :crowd_gasp :bgm_war_field :bgm_war_clash
+  :bgm_war_after :bgs_war :bgs_rain :bgm_highlight :me_hl_start :me_hl_hit :me_hl_result`.
+- `call { |scene| ... }` runs Ruby against the live scene (`always: true` also runs it when the scene is skipped,
+  e.g. to set a switch).
+
+## 4. The war climax
+
+`:WAR_CLIMAX` follows story/13_CUTSCENES.md WAR-1 shot by shot (about 63 s; the storyboard's 95 s was a suggestion).
+Isenmar and Kyogre are on the left, Ashkaar and Reshiram on the right.
+
+| Variable | Values | Default source |
+|---|---|---|
+| `variant:` | `:A` WAR_STOPPED, `:A2` WAR_BOTH_BROKEN, `:B` WAR_ASHKAAR_WON, `:C` WAR_ISENMAR_WON | `Prismfall::Narrative.flag(...)`; `:A` without Core |
+| `legends:` | `false` = the Wardens' aces fight instead | false when `choice(:war_legend) == :neither` |
+| `water_legend:` / `fire_legend:` | placeholder species (`:KYOGRE` / `:RESHIRAM`) | story team can swap |
+| `water_mon:` / `fire_mon:` | aces when `legends: false` (`:MAMOSWINE` / `:SALAMENCE`) | |
+| `starter_charset:` | charset for the starter in shot 9A | `"Followers/EEVEE"` |
+
+Event: `Script: pbCutscene(:WAR_CLIMAX)`. `:WAR_CLIMAX_DEMO` is the same scene fixed to variant `:A2`.
+Audio follows design/AUDIO.md: `War - Battlefield` → 0.5 s fade → `War - Beam Clash` on the clash frame → silence
+at the break → `War - Aftermath`.
+
+Differences from the storyboard, all because of engine limits:
+- Shot 4's split screen is one wide shot with both charge-ups (there is no split-screen primitive).
+- "Heat-haze shader" and per-half screen tints are a whole-screen tone.
+- Shots 9B/9C use a Salamence battler / a code-drawn ship as the mount.
+- Shot 14's ridge is the same backdrop far to the side. A dedicated backdrop image would be better.
+- **To confirm with the story team:** I read "`:war_legend` kept the legendaries away" as the `:neither` choice.
+
+## 5. Festival highlights
+
+```ruby
+Prismfall::Cutscene.match_highlight(a, b, winner, moments)
+```
+This is exactly what Core calls (`015_Festival_Draw.rb`, `Festival.play_highlight`, after its own "Watch the
+highlights?" prompt): `a`, `b`, `winner` are `{ :id, :name, :trainer_type }` and `moments` is the `MATCH_RULES` list
+of `[actor_id, species, event, caption]`. **No Core change is needed.** It never raises `ArgumentError`; on any
+internal error it logs and returns false.
+
+| Event | What plays |
+|---|---|
+| `:send_out` | The Pokémon appears with its cry; its trainer hops |
+| `:attack` | Lunge and hit, HP drops |
+| `:beam` | Charge-up and beam in the Pokémon's type colour |
+| `:beam_clash` | Both charge, beams lock, the row's actor wins the clash |
+| `:dodge` | The foe lunges and misses |
+| `:faint` | The row's Pokémon is hit and faints |
+| `:switch` | Recall and send out the named species |
+| `:field_shift` | Rings, tone shift and motes in the type colour |
+| `:taunt` | Trainer hops, the foe trembles |
+| `:forfeit` | The Pokémon is recalled |
+| `:finish` | Charged beam, the foe faints |
+
+Other accepted forms:
+```ruby
+match_highlight(a, b, winner: :a, moments: [:opening, :super_effective, :final_blow, :walk_off])
+match_highlight([:LEADER_TAMSIN, "Tamsin", 0], { name: "Rook", team: [:ROTOM, :TOXTRICITY] }, winner: :b)
+```
+- `a`/`b`: the hash (optional `:team`, `:version`, `:pbs_name`), a Festival entrant id, or `[type, name, version]`.
+- Template moments: `:opening :super_effective :clutch :beam_clash :final_blow :walk_off`; `nil` picks four.
+- `tint:` tints the arena floor (the active field); `play: false` returns the scene without playing it.
+- Result: VS card (trainer sprites, names, team icons), 2–4 moments, result card. Length is always 15–30 s
+  (extra moments are dropped, a short reel holds the result card longer).
+- Teams come from trainers PBS, through Core's `Festival.entrant`/`resolve_trainer` when Core is loaded; species
+  named in the moments are added. An unknown trainer just gets the moments' species.
+- `offer_festival_highlight(a, b, winner, moments)` asks first; use it only from events, Core already asks.
+- The four fully storyboarded highlights (FH-1 to FH-4) currently play through this generic renderer using their
+  `MATCH_RULES` rows. Their bespoke shots (Gauntlet glow, crowd reactions, illusion break) are not hand-authored yet.
+
+## 6. Portrait speech bubbles (Rev 7)
+
+```
+Script:     pf_say(:MARTIN, :crying, "I LEFT THE OVEN ON!")
+Show Text:  \pf[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!
+Show Text:  \pf[MARTIN,shocked,sweat+exclaim]MARTIN: WHAT.      (third field: emotes)
+Show Text:  \pf[MARTIN,angry,,12]MARTIN: You.                   (fourth field: event id or name)
+Show Text:  [portrait: MARTIN, crying] MARTIN: ...              (the story bible's tag; same effect)
+```
+- The tag is removed and the rest goes to the normal message box, so every other control code still works. It is
+  handled by an alias around `pbMessageDisplay`, so it works in Show Text, `pbMessage` and choices.
+- `pf_say` adds "Name: " for you (`name: false` to drop it, `name: "???"` to override) and takes `emote:`
+  (one or a list) and `event:`.
+- **Who the tail points at:** the event given in the tag; else an event on the map whose name is the id
+  (or the one registered); `PLAYER` is the player; else the event running the text. If the speaker is off-screen,
+  the bubble sits at the left above the box with the tail pointing at the box.
+- The bubble pops in with a bounce, follows the speaker, stays above (or below) the message box, and closes with it.
+
+| Expressions | `neutral happy smug angry crying shocked deadpan panic sad blush` |
+|---|---|
+| Emotes | `sweat shock anger sparkle gloom question exclaim tears blush dots` |
+
+Each expression has a backdrop colour, default emotes and (for angry/crying/panic) a shake. Face overlays (tears,
+gloom lines, blush marks) are only drawn when there is no art for that expression, so they do not double up on a
+drawn crying face.
+
+Optional per-character setup, anywhere after the plugin loads:
+```ruby
+Prismfall::Portrait.register(:MARTIN, name: "Martin", trainer: :LEADER_MARTIN, event: "Martin",
+                             color: [200, 60, 60], crop: [40, 6, 48])
+```
+
+### Portrait art spec
+- Folder `Graphics/Portraits/`. Files `NAME_expression.png` (e.g. `MARTIN_crying.png`), plus `NAME.png` as the
+  fallback for expressions without their own file. `NAME` is the id in capitals.
+- **96x96 px**, drawn as pixel art at 2x (so effectively 48x48 art pixels doubled) to match the bubble. A 48x48 file
+  also works and is doubled. Other square sizes are scaled to 96.
+- The engine masks the image to a circle of diameter 96: keep the face inside the centre ~80 px and fill the corners
+  with anything. Transparent backgrounds show the expression's backdrop colour; opaque ones cover it.
+- Draw the face big: forehead to chin should fill most of the circle. Exaggerate (that is the joke).
+- Do not draw sweat drops, shock lines and so on into the file; the engine animates them outside the ring.
+- Load order: `NAME_expression.png` → `NAME.png` → round crop of the trainer front sprite's head (trainer type
+  from `register`, else `NAME`, `LEADER_NAME`, `RIVAL_NAME`, `CHAMPION_NAME`) → silhouette with the initial.
+
+## 7. Limitations
+
+- Not run in the real engine yet (no mkxp-z here). It is tested against strict fakes and a software renderer
+  (section 9). First thing to check in game: beam-clash frame rate on a weak machine; if needed lower `FX_FPS` or
+  raise `BEAM_CHUNK` in `001_Config.rb`.
+- Pixel-grid rules: FX are drawn at half resolution and shown at 2x, in four colours per effect, at 30 FX frames per
+  second. Sprites snap to even pixels at zoom 1. Camera zoom other than 1 or 2 and `rotate` break the grid by nature.
+- No split screen, no shaders, no per-region tints. Sprite rotation is used only for fallen soldiers.
+- Zooming out below 1 shows layer edges. Shakes above about 16 px can show the bottom edge of ground layers.
+- Text is timed, with no button prompt, so that scenes keep a fixed length. Captions are not routed through the
+  message system, so `\c[]`-style codes do not work inside cutscene text.
+- Battler mouths are guessed (58% of the sprite height). Set `mouth: [dx, dy]` per actor for beams that must leave
+  from the right spot (dx is for the unflipped sprite).
+- Highlights pick beam colours from the Pokémon's first type, not from the move named in the caption.
+- Portrait bubbles: one at a time; they need the speaker's event for the tail; they are not shown in battle.
+- The scene does not update the map underneath (it is covered).
+
+## 8. Optional art that would improve it
+
+| Art | Where | Gain |
+|---|---|---|
+| Portraits | `Graphics/Portraits/NAME_expression.png` | The biggest win for Rev 7 comedy; see the spec above |
+| Soldier charsets | `Graphics/Characters/trainer_ASHKAAR_SOLDIER.png`, `trainer_ISENMAR_SOLDIER.png`, `..._OFFICER` | Replaces the block-figure armies and rulers |
+| Character charsets | `trainer_LEADER_SIGRUN`, `trainer_LEADER_ANJA`, `trainer_MERIDIAN_QUENT`, `trainer_MERIDIAN_AGENT` | Shots 13–14 |
+| Trainer front sprites | `Graphics/Trainers/LEADER_*.png` etc. | VS cards and highlight trainers |
+| War backdrops | 512x384 (or wider) pictures: Shattered Ice at dawn, Skaldfast walls, Cinder Cape Warfort, the ridge | `background image:` instead of procedural layers |
+| Temple-Arena backdrop | 512x384 picture | Highlights (`background image:` in `Highlight.build`) |
+| Sled-ship, banner, Light Stone, tripod sprites | any PNG, used with `actor :x, image:` | Replaces the code-drawn props |
+| Audio | names in design/AUDIO.md (`Beam charge`, `Beam clash`, `Beam break`, `Crowd cheer`, `Crowd gasp`, `War - *`, `Festival highlight *`) | Until then stock/EBDX stand-ins play, or silence |
+
+## 9. Self-test
+
+```
+ruby "plugins/Prismfall Cutscenes/selftest/harness.ruby_stub"
+ruby "plugins/Prismfall Cutscenes/selftest/harness.ruby_stub" --render WAR_CLIMAX --at 19,25,36 --out /tmp/frames --assets variant=A
+```
+The files are named without `.rb` on purpose: PluginManager loads every file whose path contains `.rb`.
+The harness fakes Sprite/Bitmap/Viewport/Graphics/Input strictly (integer pixel coordinates, no use after dispose,
+no leaked sprites or viewports), reads teams from `pbs/trainers.txt` and Core's real `MATCH_RULES`, and with
+`--render` composites frames to PNG (needs ImageMagick; `--assets` uses the EBDX base project's sprites, path in
+`PF_ASSETS`). The suite covers both example scenes at 20/40/60/144 FPS and with jitter and lag spikes, all war
+variants, every DSL command, skipping, mash clashes, Core's `match_highlight` call for all 12 rules, the portrait
+tag forms, every expression and emote, the art fallback chain, and the Debug menu entries.

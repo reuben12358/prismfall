@@ -1,0 +1,914 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for FLOWER_GARDEN: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+FLOWER_GARDEN probe: boosted move ENERGYBALL (on field)
+=======================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 461 -> 388 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 388/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FLOWER_GARDEN probe: boosted move ENERGYBALL (baseline, no field)
+=================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: moves GROWTH/ROTOTILLER/FLOWERSHIELD... -> stage +1] using GROWTH
+===========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: weather Sun/HarshSun/Rain/HeavyRain -> stage +1] using SUNNYDAY
+=========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: terrain Grassy -> stage +1] using GRASSYTERRAIN
+=========================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: types GRASS, category damaging x2 -> stage +1] using ENERGYBALL, ENERGYBALL
+=====================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 461 -> 390 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 390/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 390 -> 314 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 314/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 314/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: types FIRE, category damaging -> stage -1] using FLAMETHROWER
+=======================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 396 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The flames scorched the garden!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 396/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: flags Slicing, category damaging -> stage -1] using AQUACUTTER
+========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Aqua Cutter!
+    HP Snorlax (foe): 461 -> 384 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The garden was cut back!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 384/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 384/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: weather Hail -> stage -1] using HAIL
+==============================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Hail!
+  It started to snow!
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The frost withered the garden!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Hail)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Hail)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 2: moves GROWTH/ROTOTILLER/FLOWERSHIELD... -> stage +1] using GROWTH
+===========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 3
+  The garden burst into bloom!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 2: weather Sun/HarshSun/Rain/HeavyRain -> stage +1] using SUNNYDAY
+=========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD STAGE: FLOWER_GARDEN is now stage 3
+  The garden burst into bloom!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 2: terrain Grassy -> stage +1] using GRASSYTERRAIN
+=========================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD STAGE: FLOWER_GARDEN is now stage 3
+  The garden burst into bloom!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 2: types GRASS, category damaging x2 -> stage +1] using ENERGYBALL, ENERGYBALL
+=====================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 461 -> 384 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 384/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 384 -> 301 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 3
+  The garden burst into bloom!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 301/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 301/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 3: moves GROWTH/ROTOTILLER/FLOWERSHIELD... -> stage +1] using GROWTH
+===========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Flowers bloom across the garden!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+  The blossoms fed Mew's growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 4
+  The garden is in full flower!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 3: weather Sun/HarshSun/Rain/HeavyRain -> stage +1] using SUNNYDAY
+=========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Flowers bloom across the garden!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD STAGE: FLOWER_GARDEN is now stage 4
+  The garden is in full flower!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 3: terrain Grassy -> stage +1] using GRASSYTERRAIN
+=========================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Flowers bloom across the garden!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD STAGE: FLOWER_GARDEN is now stage 4
+  The garden is in full flower!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 3: types GRASS, category damaging x2 -> stage +1] using ENERGYBALL, ENERGYBALL
+=====================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Flowers bloom across the garden!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+  The blooming garden empowered the attack!
+    HP Snorlax (foe): 461 -> 377 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 377/461]
+  Mew used Energy Ball!
+  The blooming garden empowered the attack!
+    HP Snorlax (foe): 377 -> 287 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 4
+  The garden is in full flower!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 287/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 287/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 4: moves GROWTH/ROTOTILLER/FLOWERSHIELD... -> stage +1] using GROWTH
+===========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 4) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  The garden is in full flower!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+  The blossoms fed Mew's growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 5
+  The garden overflowed into a riot of blossoms!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 4: weather Sun/HarshSun/Rain/HeavyRain -> stage +1] using SUNNYDAY
+=========================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 4) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  The garden is in full flower!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD STAGE: FLOWER_GARDEN is now stage 5
+  The garden overflowed into a riot of blossoms!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 4: terrain Grassy -> stage +1] using GRASSYTERRAIN
+=========================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 4) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  The garden is in full flower!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD STAGE: FLOWER_GARDEN is now stage 5
+  The garden overflowed into a riot of blossoms!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 4: types GRASS, category damaging x2 -> stage +1] using ENERGYBALL, ENERGYBALL
+=====================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 4) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  The garden is in full flower!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+  The flowering garden empowered the attack!
+    HP Snorlax (foe): 461 -> 365 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 365/461]
+  Mew used Energy Ball!
+  The flowering garden empowered the attack!
+    HP Snorlax (foe): 365 -> 261 / 461
+## FIELD STAGE: FLOWER_GARDEN is now stage 5
+  The garden overflowed into a riot of blossoms!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 261/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 261/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 5: types FIRE, category damaging x2 -> ASHEN_WASTE] using FLAMETHROWER, FLAMETHROWER
+===========================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 5) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  The garden is an overgrown riot of colour!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+  The overgrowth went up like tinder!
+    HP Snorlax (foe): 461 -> 365 / 461
+  The overgrowth is catching fire! (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 365/461]
+  Mew used Flamethrower!
+  The overgrowth went up like tinder!
+    HP Snorlax (foe): 365 -> 261 / 461
+## FIELD CHANGE: FLOWER_GARDEN -> ASHEN_WASTE
+  The garden went up in flames! Only ash remains...
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 341 -> 320 / 341
+  Mew is choking on the ash!
+    HP Snorlax (foe): 261 -> 232 / 461
+  The wild Snorlax is choking on the ash!
+
+--- Turn 3 ---
+  [Mew 320/341 | Snorlax 232/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 320 -> 299 / 341
+  Mew is choking on the ash!
+    HP Snorlax (foe): 232 -> 203 / 461
+  The wild Snorlax is choking on the ash!
+
+--- Turn 4 ---
+  [Mew 299/341 | Snorlax 203/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+FLOWER_GARDEN probe: Telluric Seed held on entry
+================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Tiny buds dot the garden beds.
+    (anim: UseItem)
+  Mew's Telluric Seed took root in the garden!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  The seed made the garden grow!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 170 -> 191 / 341
+  Mew absorbed nutrients with its roots!
+
+--- Turn 2 ---
+  [Mew 191/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)

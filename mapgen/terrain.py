@@ -148,8 +148,8 @@ class Painter:
         def members(n):
             c = classes[n]
             return [n] + [a for a, t in alias.items() if t == n] + c.get('same', [])
-        order = ['blob', 'learned', 'autotile', 'sea', 'pier', 'tpier', 'hline', 'tree2x2', 'wall', 'cliffband',
-                 'cliffline', 'tile', 'forest']
+        order = ['tile', 'blob', 'learned', 'autotile', 'sea', 'pier', 'tpier', 'hline', 'tree2x2', 'wall', 'cliffband',
+                 'cliffline', 'forest', 'castle', 'castleface', 'cstairs']
         for kind in order:
             for n, c in classes.items():
                 if c['kind'] != kind:
@@ -215,6 +215,51 @@ class Painter:
             L[1, y, x] = t
             if oth.get(0) == c['rock'] or (n_ and e_ and s_ and w_):
                 L[0, y, x] = c['rock']
+
+    # ------------------------------------------------------------------ castle kit (Tectonic Outside rows 442-457)
+    def k_castle(self, n, c, own, same):
+        """Wall-walk / tower top: parapet rim on layer 1 (blob with inner corners, open centre) over a paved floor."""
+        L = self.layers
+        for y, x in np.argwhere(own):
+            L[0, y, x] = c['floor']
+            L[1, y, x] = blob_tile(c['rim'], nbits(own, x, y))
+            L[2, y, x] = 0
+
+    def k_castleface(self, n, c, own, same):
+        """South-facing wall face under a parapet: left/mid/right columns, a base course on the last row, buttresses
+        every `buttress` columns and arrow slits / windows on the plain stretches (deterministic noise)."""
+        H, W = own.shape; L = self.layers
+        at = lambda x, y: 0 <= x < W and 0 <= y < H and own[y, x]
+        bt = c.get('buttress', 6); seed = c.get('seed', 5)
+        for y, x in np.argwhere(own):
+            l, r, d, u = at(x - 1, y), at(x + 1, y), at(x, y + 1), at(x, y - 1)
+            col = 0 if not l else (2 if not r else 1)
+            top = y
+            while at(x, top - 1): top -= 1
+            bot = y
+            while at(x, bot + 1): bot += 1
+            hgt = bot - top + 1
+            t = (c['base'] if not d else c['face'])[col]
+            if col == 1 and hgt >= 2:
+                if bt and x % bt == c.get('phase', 2) and at(x - 2, y) and at(x + 2, y):
+                    t = c['pillar'][0] if y == top else (c['pillar'][2] if not d else c['pillar'][1])
+                elif d and y == top + (hgt - 1) // 2 and x % bt in ((c.get('phase', 2) + 2) % bt, (c.get('phase', 2) + 4) % bt) \
+                        and vnoise(x, top, seed, 2.0) > 0.35:
+                    t = c['slit']
+                elif hgt >= 4 and x % bt == (c.get('phase', 2) + 3) % bt and y in (top, top + 1) and 'window' in c:
+                    t = c['window'][y - top]
+            L[1, y, x] = t
+            L[2, y, x] = 0
+
+    def k_cstairs(self, n, c, own, same):
+        """Castle stairs climbing a wall face (3 columns: stringers and treads; rows top/mid/bottom)."""
+        H, W = own.shape; L = self.layers
+        at = lambda x, y: 0 <= x < W and 0 <= y < H and own[y, x]
+        for y, x in np.argwhere(own):
+            col = 0 if not at(x - 1, y) else (2 if not at(x + 1, y) else 1)
+            row = 0 if not at(x, y - 1) else (2 if not at(x, y + 1) else 1)
+            L[1, y, x] = c['rows'][row][col]; L[2, y, x] = 0
+            L[0, y, x] = c.get('floor', L[0, y, x])
 
     def k_forest(self, n, c, own, same):
         """Mixed forest: 2-wide, 3-tall trees (canopy on layer 2) in staggered rows 2 apart, species picked in

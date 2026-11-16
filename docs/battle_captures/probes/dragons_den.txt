@@ -1,0 +1,311 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for DRAGONS_DEN: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+DRAGONS_DEN probe: boosted move DRAGONPULSE (on field)
+======================================================
+
+--- Battle start ---
+  field: DRAGONS_DEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dragon Pulse!
+  The ancient wyrms roared in answer!
+    HP Snorlax (foe): 461 -> 367 / 461
+  The wyrm statues' eyes begin to glow... (3 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 367/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DRAGONS_DEN probe: boosted move DRAGONPULSE (baseline, no field)
+================================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dragon Pulse!
+    HP Snorlax (foe): 461 -> 399 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 399/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DRAGONS_DEN probe: transition [stage 1: types WATER/ICE, category damaging x3 -> CAVE] using WATERPULSE, WATERPULSE, WATERPULSE
+===============================================================================================================================
+
+--- Battle start ---
+  field: DRAGONS_DEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 461 -> 417 / 461
+  Steam hisses from the cooling magma... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 417/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 417 -> 370 / 461
+  Steam hisses from the cooling magma... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 370/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 370 -> 323 / 461
+## FIELD CHANGE: DRAGONS_DEN -> CAVE
+  The magma cooled to stone... The den falls cold and silent.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 323/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 323/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+DRAGONS_DEN probe: transition [stage 1: types DRAGON, category damaging x4 -> stage 2] using DRAGONPULSE, DRAGONPULSE, DRAGONPULSE, DRAGONPULSE
+===============================================================================================================================================
+
+--- Battle start ---
+  field: DRAGONS_DEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dragon Pulse!
+  The ancient wyrms roared in answer!
+    HP Snorlax (foe): 461 -> 369 / 461
+  The wyrm statues' eyes begin to glow... (3 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 369/461]
+  Mew used Dragon Pulse!
+  The ancient wyrms roared in answer!
+    HP Snorlax (foe): 369 -> 272 / 461
+  The wyrm statues' eyes begin to glow... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 272/461]
+  Mew used Dragon Pulse!
+  The ancient wyrms roared in answer!
+    HP Snorlax (foe): 272 -> 178 / 461
+  The wyrm statues' eyes begin to glow... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 178/461]
+  Mew used Dragon Pulse!
+  The ancient wyrms roared in answer!
+    HP Snorlax (foe): 178 -> 88 / 461
+## FIELD STAGE: DRAGONS_DEN is now stage 2
+  The den has awoken! Wyrmfire surges through the lair!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 341 -> 320 / 341
+  Mew was scorched by the wyrmfire!
+    HP Snorlax (foe): 88 -> 59 / 461
+  The wild Snorlax was scorched by the wyrmfire!
+
+--- Turn 5 ---
+  [Mew 320/341 | Snorlax 59/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 320 -> 299 / 341
+  Mew was scorched by the wyrmfire!
+    HP Snorlax (foe): 59 -> 30 / 461
+  The wild Snorlax was scorched by the wyrmfire!
+
+--- Turn 6 ---
+  [Mew 299/341 | Snorlax 30/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 5 turn(s)
+
+
+DRAGONS_DEN probe: transition [stage 2: types WATER/ICE, category damaging x3 -> CAVE] using WATERPULSE, WATERPULSE, WATERPULSE
+===============================================================================================================================
+
+--- Battle start ---
+  field: DRAGONS_DEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Wyrmfire surges through the lair! The den is awake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 461 -> 417 / 461
+  Steam hisses from the cooling magma... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 341 -> 320 / 341
+  Mew was scorched by the wyrmfire!
+    HP Snorlax (foe): 417 -> 388 / 461
+  The wild Snorlax was scorched by the wyrmfire!
+
+--- Turn 2 ---
+  [Mew 320/341 | Snorlax 388/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 388 -> 341 / 461
+  Steam hisses from the cooling magma... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 320 -> 299 / 341
+  Mew was scorched by the wyrmfire!
+    HP Snorlax (foe): 341 -> 312 / 461
+  The wild Snorlax was scorched by the wyrmfire!
+
+--- Turn 3 ---
+  [Mew 299/341 | Snorlax 312/461]
+  Mew used Water Pulse!
+    HP Snorlax (foe): 312 -> 265 / 461
+## FIELD CHANGE: DRAGONS_DEN -> CAVE
+  The wyrmfire was quenched! The den falls cold and silent.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 299/341 | Snorlax 265/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 299/341 | Snorlax 265/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+DRAGONS_DEN probe: Elemental Seed held on entry
+===============================================
+
+--- Battle start ---
+  field: DRAGONS_DEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+    (anim: UseItem)
+  Mew's Elemental Seed kindled dragonfire within it!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Speed rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+DRAGONS_DEN probe: end-of-round rule 1: cure_status on {:status=>[:FROZEN]} [subject Florges]
+=============================================================================================
+
+--- Battle start ---
+  field: DRAGONS_DEN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+## FIELD CHANGE: NONE -> DRAGONS_DEN
+  Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.
+
+--- Turn 1 ---
+  [Florges 148/297 FROZEN | Snorlax 230/461]
+    (anim: Frozen)
+  Florges is frozen solid!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The den's heat thawed Florges out!
+  Florges thawed out!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

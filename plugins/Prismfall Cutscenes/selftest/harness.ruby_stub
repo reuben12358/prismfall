@@ -88,6 +88,23 @@ class Bitmap
     v = c.pack
     (y0...y1).each { |yy| @px.fill(v, (yy * @width) + x0, x1 - x0) }
   end
+  def stretch_blt(dest, src, r, opacity = 255)
+    alive!; src.alive!
+    raise TypeError, "stretch_blt" if !dest.is_a?(Rect) || !r.is_a?(Rect)
+    raise ArgumentError, "stretch_blt source out of range #{[r.x, r.y, r.width, r.height].inspect} of #{src.width}x#{src.height}" if r.x < 0 || r.y < 0 || r.x + r.width > src.width || r.y + r.height > src.height || r.width <= 0
+    $stats[:blt] += 1
+    return if !@px || !src.px
+    dest.height.times do |j|
+      sy = r.y + (j * r.height / dest.height); dy = dest.y + j
+      next if dy < 0 || dy >= @height
+      dest.width.times do |i|
+        dx = dest.x + i
+        next if dx < 0 || dx >= @width
+        p = src.px[(sy * src.width) + r.x + (i * r.width / dest.width)]
+        @px[(dy * @width) + dx] = p if (p & 255) > 0
+      end
+    end
+  end
   def blt(x, y, src, r, opacity = 255)
     alive!; src.alive!
     raise TypeError, "blt" if !x.is_a?(Integer) || !y.is_a?(Integer) || !r.is_a?(Rect)
@@ -233,7 +250,28 @@ def pbSEPlay(n, v = nil, p = nil);  $audio.push([:se, n, v]); end
 def pbMEPlay(n, v = nil, p = nil);  $audio.push([:me, n, v]); end
 def pbBGMFade(s = 0.0); $audio.push([:bgm_fade, s]); end
 def pbBGSFade(s = 0.0); $audio.push([:bgs_fade, s]); end
-def pbMessage(msg, *rest); ($messages ||= []).push(msg); 0; end
+MsgWindowStub = Struct.new(:y, :height, :viewport, :z)
+$msg_y = 288
+# Stand-in for the core pbMessageDisplay: records the text and runs a short frame loop.
+def pbMessageDisplay(msgwindow, message, letterbyletter = true, commandProc = nil)
+  ($shown ||= []).push(message)
+  ($msg_frames || 24).times do
+    Graphics.update
+    Input.update
+    yield if block_given?
+  end
+  nil
+end
+def pbMessage(msg, commands = nil, cancel = 0, *rest, &block)
+  ($messages ||= []).push(msg)
+  pbMessageDisplay(MsgWindowStub.new($msg_y, 96, nil, 0), msg, &block)
+  ($menu_choice || 0)
+end
+EventStub = Struct.new(:name, :screen_x, :screen_y)
+class MapStub; attr_accessor :events; def initialize; @events = {}; end; end
+class InterpStub; def get_self; $game_map.events[2]; end; end
+$game_map = MapStub.new
+def pbMapInterpreter; $interp ||= InterpStub.new; end
 def pbConfirmMessage(msg); ($messages ||= []).push(msg); true; end
 def pbUpdateSceneMap; end
 module FileTest
@@ -396,9 +434,11 @@ def run_scene(id, vars = {})
   $fill_log = []
   $audio = []
   before = $live.dup
+  cache0 = Prismfall::Cutscene::Gfx.placeholder_cache_size
   t0 = $clock
   Prismfall::Cutscene.raise_errors = true
   ok = id.is_a?(Proc) ? id.call : Prismfall::Cutscene.play(id, **vars)
+  before[:bitmap] += Prismfall::Cutscene::Gfx.placeholder_cache_size - cache0   # shared placeholder sheets are cached on purpose
   leaks = $live.map { |k, v| [k, v - before[k]] }.reject { |_, v| v == 0 }
   { :ok => ok, :seconds => ($clock - t0).round(2), :max_fills => $max_fills,
     :avg_fills => ($fill_log.empty? ? 0 : $fill_log.sum / $fill_log.length), :leaks => leaks }
@@ -414,7 +454,7 @@ if __FILE__ == $0
     $opt[:render] = true
     $opt[:fps] = 30.0
     vars = {}
-    args.each { |a| vars[$1.to_sym] = ($2 =~ /\A\d+\z/ ? $2.to_i : $2.to_sym) if a =~ /\A(\w+)=(\w+)\z/ }
+    args.each { |a| m = a.match(/\A(\w+)=(\w+)\z/); vars[m[1].to_sym] = (m[2] =~ /\A\d+\z/ ? m[2].to_i : m[2].to_sym) if m }
     load_plugin
     pending = times.sort
     require "fileutils"

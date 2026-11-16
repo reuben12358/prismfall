@@ -1,0 +1,413 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
+=================================================================
+
+--- Battle start ---
+  field: PRISM_ARENA | weather: None | terrain: None
+  You are challenged by Sovereign Valen!
+  Sovereign Valen sent out Bronzong!
+    >> sent out (foe): Bronzong Lv.92 @LEFTOVERS [LEVITATE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.96 @MAGICALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> PRISM_ARENA
+  The eighteen Plates blaze in a ring above Crownhaven's arena!
+    (anim: UseItem)
+  Garchomp's Magical Seed refracted the light of the Plates!
+    (anim: StatUp)
+  Garchomp's Special Attack rose!
+  Garchomp's Special Defense rose!
+
+--- Turn 1 ---
+  [Garchomp 343/343 | Bronzong 273/273]
+  Garchomp ignored orders!
+  Garchomp used Earthquake!
+    [ability: Bronzong (foe)'s Levitate]
+  The opposing Bronzong avoided the attack!
+  The opposing Bronzong used Stealth Rock!
+  Pointed stones float in the air around your team!
+  (end of round)
+
+--- Turn 2 ---
+  [Garchomp 343/343 | Bronzong 273/273]
+  Garchomp used Fire Fang!
+    HP Bronzong (foe): 273 -> 171 / 273
+  It's super effective!
+    (anim: Burn)
+  The opposing Bronzong was burned!
+  The opposing Bronzong used Trick Room!
+  The opposing Bronzong twisted the dimensions!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 171 -> 188 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Bronzong (foe): 188 -> 171 / 273
+  The opposing Bronzong was hurt by its burn!
+  The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field!
+
+--- Turn 3 ---
+  [Garchomp 343/343 | Bronzong 171/273 BURN]
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 343 -> 280 / 343
+  Garchomp is loafing around!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 171 -> 188 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Bronzong (foe): 188 -> 171 / 273
+  The opposing Bronzong was hurt by its burn!
+  The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:VOLCANIC] (was [])
+
+--- Turn 4 ---
+  [Garchomp 280/343 | Bronzong 171/273 BURN]
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 280 -> 219 / 343
+  Garchomp won't obey!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 171 -> 188 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Bronzong (foe): 188 -> 171 / 273
+  The opposing Bronzong was hurt by its burn!
+    HP Garchomp (player): 219 -> 208 / 343
+  Garchomp was scorched by the magma!
+
+--- Turn 5 ---
+  [Garchomp 208/343 | Bronzong 171/273 BURN]
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 208 -> 142 / 343
+  Garchomp used Fire Fang!
+  The magma roared!
+    HP Bronzong (foe): 171 -> 38 / 273
+  It's super effective!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 38 -> 55 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Bronzong (foe): 55 -> 38 / 273
+  The opposing Bronzong was hurt by its burn!
+    HP Garchomp (player): 142 -> 131 / 343
+  Garchomp was scorched by the magma!
+  The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
+
+--- Turn 6 ---
+  [Garchomp 131/343 | Bronzong 38/273 BURN]
+  Sovereign Valen used a Full Restore.
+    HP Bronzong (foe): 38 -> 273 / 273
+  The opposing Bronzong's HP was restored.
+  Garchomp used Stone Edge!
+  The rocks were superheated by the magma!
+    HP Bronzong (foe): 273 -> 196 / 273
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 196 -> 213 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The twisted dimensions returned to normal!
+    HP Garchomp (player): 131 -> 120 / 343
+  Garchomp was scorched by the magma!
+  The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
+
+--- Turn 7 ---
+  [Garchomp 120/343 | Bronzong 213/273]
+  Garchomp used Fire Fang!
+  The water doused the flames...
+    HP Bronzong (foe): 213 -> 167 / 273
+  It's super effective!
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 120 -> 59 / 343
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 167 -> 184 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+
+--- Turn 8 ---
+  [Garchomp 59/343 | Bronzong 184/273]
+  Garchomp ignored orders!
+  Garchomp used Dragon Claw!
+    HP Bronzong (foe): 184 -> 140 / 273
+  It's not very effective...
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 59 -> 0 / 343
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 140 -> 157 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Meadow Plate begins to glow... After the next turn, the arena becomes the Flower Garden!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.96 [STURDY]
+    HP Magnezone (player): 270 -> 253 / 270
+  Pointed stones dug into Magnezone!
+
+--- Turn 9 ---
+  [Magnezone 253/270 | Bronzong 157/273]
+  Magnezone ignored orders!
+  Magnezone used Volt Switch!
+    HP Bronzong (foe): 157 -> 24 / 273
+  A critical hit!
+  Magnezone went back to Tester!
+    << recalled: Magnezone (player)
+  Your opponent's weak! Get 'em, Starmie!
+    >> sent out (player): Starmie Lv.96 [NATURALCURE]
+    HP Starmie (player): 250 -> 219 / 250
+  Pointed stones dug into Starmie!
+  The opposing Bronzong used Trick Room!
+  The opposing Bronzong twisted the dimensions!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 24 -> 41 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Plates turn! The Meadow Plate blazes, and the arena becomes the Flower Garden!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FLOWER_GARDEN] (was [:WATER_SURFACE])
+
+--- Turn 10 ---
+  [Starmie 219/250 | Bronzong 41/273]
+  Sovereign Valen used a Full Restore.
+    HP Bronzong (foe): 41 -> 273 / 273
+  The opposing Bronzong's HP was restored.
+  Starmie ignored orders!
+  Starmie used Ice Beam!
+    HP Bronzong (foe): 273 -> 241 / 273
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 241 -> 258 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+
+--- Turn 11 ---
+  [Starmie 219/250 | Bronzong 258/273]
+  The opposing Bronzong used Psychic!
+    HP Starmie (player): 219 -> 174 / 250
+  It's not very effective...
+  Starmie used Thunderbolt!
+    HP Bronzong (foe): 258 -> 201 / 273
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 201 -> 218 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Zap Plate begins to glow... After the next turn, the arena becomes the Neon Grid!
+
+--- Turn 12 ---
+  [Starmie 174/250 | Bronzong 218/273]
+  The opposing Bronzong used Psychic!
+    HP Starmie (player): 174 -> 127 / 250
+  It's not very effective...
+    (anim: StatDown)
+  Starmie's Special Defense fell!
+  Starmie pretended not to notice!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 218 -> 235 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Plates turn! The Zap Plate blazes, and the arena becomes the Neon Grid!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:NEON_GRID] (was [:FLOWER_GARDEN])
+
+--- Turn 13 ---
+  [Starmie 127/250 | Bronzong 235/273]
+  The opposing Bronzong used Gyro Ball!
+  The charged metal crackled with electricity!
+    HP Starmie (player): 127 -> 32 / 250
+  Starmie turned away!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 235 -> 252 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The twisted dimensions returned to normal!
+    (anim: Paralysis)
+  Starmie was jolted by a stray current!
+
+--- Turn 14 ---
+  [Starmie 32/250 PARALYSIS | Bronzong 252/273]
+  Starmie ignored orders!
+    (anim: Paralysis)
+  Starmie is paralyzed! It can't move!
+  The opposing Bronzong used Psychic!
+    HP Starmie (player): 32 -> 0 / 250
+  It's not very effective...
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 252 -> 269 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Icicle Plate begins to glow... After the next turn, the arena becomes the Frozen Lake!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.96 [STURDY]
+    HP Magnezone (player): 253 -> 236 / 270
+  Pointed stones dug into Magnezone!
+
+--- Turn 15 ---
+  [Magnezone 236/270 | Bronzong 269/273]
+  Magnezone ignored orders!
+  Magnezone used Flash Cannon!
+  The charged metal crackled with electricity!
+  The neon light intensified Flash Cannon!
+    HP Bronzong (foe): 269 -> 192 / 273
+  It's not very effective...
+  The opposing Bronzong used Psychic!
+    HP Magnezone (player): 236 -> 189 / 270
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 192 -> 209 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Plates turn! The Icicle Plate blazes, and the arena becomes the Frozen Lake!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FROZEN_LAKE] (was [:NEON_GRID])
+
+--- Turn 16 ---
+  [Magnezone 189/270 | Bronzong 209/273]
+  Magnezone ignored orders!
+  Magnezone used Flash Cannon!
+    HP Bronzong (foe): 209 -> 158 / 273
+  It's not very effective...
+  The opposing Bronzong used Trick Room!
+  The opposing Bronzong twisted the dimensions!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 158 -> 175 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+
+--- Turn 17 ---
+  [Magnezone 189/270 | Bronzong 175/273]
+  The opposing Bronzong used Psychic!
+    HP Magnezone (player): 189 -> 145 / 270
+  It's not very effective...
+  Magnezone ignored orders!
+  Magnezone used Flash Cannon!
+    HP Bronzong (foe): 175 -> 124 / 273
+  It's not very effective...
+    (anim: StatDown)
+  The opposing Bronzong's Special Defense fell!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 124 -> 141 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Fist Plate begins to glow... After the next turn, the arena becomes the Colosseum!
+
+--- Turn 18 ---
+  [Magnezone 145/270 | Bronzong 141/273]
+  The opposing Bronzong used Gyro Ball!
+    HP Magnezone (player): 145 -> 136 / 270
+  It's not very effective...
+  Magnezone turned away!
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 141 -> 158 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+  The Plates turn! The Fist Plate blazes, and the arena becomes the Colosseum!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:COLOSSEUM] (was [:FROZEN_LAKE])
+
+--- Turn 19 ---
+  [Magnezone 136/270 | Bronzong 158/273]
+  The opposing Bronzong used Gyro Ball!
+    HP Magnezone (player): 136 -> 127 / 270
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Bronzong (foe): 158 -> 7 / 273
+  (end of round)
+    (anim: UseItem)
+    HP Bronzong (foe): 7 -> 24 / 273
+  The opposing Bronzong restored a little HP using its Leftovers!
+
+--- Turn 20 ---
+  [Magnezone 127/270 | Bronzong 24/273]
+  Magnezone ignored orders!
+  Magnezone used Tri Attack!
+    HP Bronzong (foe): 24 -> 0 / 273
+  It's not very effective...
+  The opposing Bronzong fainted!
+    xx fainted: Bronzong (foe)
+  The crowd went wild for Magnezone!
+    (anim: StatUp)
+  Magnezone's Special Attack rose!
+  Magnezone is at the level cap (Lv. 90) and can't gain Exp. Points.
+  (end of round)
+  The twisted dimensions returned to normal!
+  The Earth Plate begins to glow... After the next turn, the arena becomes the Desert!
+  Sovereign Valen is about to send out Gallade. Will you switch your Pokémon?  [auto: No]
+  Sovereign Valen sent out Gallade!
+    >> sent out (foe): Gallade Lv.94 @LIFEORB [JUSTIFIED]
+
+--- Turn 21 ---
+  [Magnezone 127/270 | Gallade 280/280]
+  The opposing Gallade used Swords Dance!
+    (anim: StatUp)
+  The opposing Gallade's Attack rose sharply!
+  Magnezone used Thunderbolt!
+    HP Gallade (foe): 280 -> 116 / 280
+  (end of round)
+  The Plates turn! The Earth Plate blazes, and the arena becomes the Desert!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:DESERT] (was [:COLOSSEUM])
+
+--- Turn 22 ---
+  [Magnezone 127/270 | Gallade 116/280]
+  The opposing Gallade used Close Combat!
+    HP Magnezone (player): 127 -> 0 / 270
+  It's super effective!
+    (anim: StatDown)
+  The opposing Gallade's Defense fell!
+  The opposing Gallade's Special Defense fell!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+    HP Gallade (foe): 116 -> 88 / 280
+  The opposing Gallade lost some of its HP!
+  (end of round)
+  Just a little more! Hang in there, Togekiss!
+    >> sent out (player): Togekiss Lv.96 [HUSTLE]
+    HP Togekiss (player): 298 -> 223 / 298
+  Pointed stones dug into Togekiss!
+
+--- Turn 23 ---
+  [Togekiss 223/298 | Gallade 88/280]
+  The opposing Gallade used Psycho Cut!
+    HP Togekiss (player): 223 -> 0 / 298
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+    HP Gallade (foe): 88 -> 60 / 280
+  The opposing Gallade lost some of its HP!
+  (end of round)
+  The Toxic Plate begins to glow... After the next turn, the arena becomes the Corrosive Mire!
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.96 [INNERFOCUS]
+    HP Lucario (player): 270 -> 262 / 270
+  Pointed stones dug into Lucario!
+
+--- Turn 24 ---
+  [Lucario 262/270 | Gallade 60/280]
+  The opposing Gallade used Psycho Cut!
+    HP Lucario (player): 262 -> 0 / 270
+  Lucario fainted!
+    xx fainted: Lucario (player)
+    HP Gallade (foe): 60 -> 32 / 280
+  The opposing Gallade lost some of its HP!
+  (end of round)
+  The Plates turn! The Toxic Plate blazes, and the arena becomes the Corrosive Mire!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:CORROSIVE_MIRE] (was [:DESERT])
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.96 [BLAZE]
+    HP Charizard (player): 285 -> 142 / 285
+  Pointed stones dug into Charizard!
+
+--- Turn 25 ---
+  [Charizard 142/285 | Gallade 32/280]
+  Charizard pretended not to notice!
+  The opposing Gallade used Close Combat!
+    HP Charizard (player): 142 -> 0 / 285
+  It's not very effective...
+  Charizard fainted!
+    xx fainted: Charizard (player)
+    HP Gallade (foe): 32 -> 4 / 280
+  The opposing Gallade lost some of its HP!
+  You have no more Pokémon that can fight!
+  You lost against Sovereign Valen!
+  battle result code: 2
+  
+RESULT: player lost after 24 turn(s)

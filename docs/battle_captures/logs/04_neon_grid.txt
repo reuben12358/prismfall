@@ -1,0 +1,234 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Neon Grid [NEON_GRID] - Gym 4 Warden Rook vs challenger (Lv.27)
+===============================================================
+
+--- Battle start ---
+  field: NEON_GRID | weather: None | terrain: None
+  You are challenged by Warden Rook!
+  Warden Rook sent out Luxio!
+    >> sent out (foe): Luxio Lv.25 @MAGNET [INTIMIDATE]
+  Go! Magmar!
+    >> sent out (player): Magmar Lv.27 @SYNTHETICSEED [FLAMEBODY]
+## FIELD CHANGE: NONE -> NEON_GRID
+  Neon circuitry hums beneath your feet!
+    (anim: UseItem)
+  Magmar's Synthetic Seed magnetized it above the grid!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
+    [ability: Luxio (foe)'s Intimidate]
+    (anim: StatDown)
+  Magmar's Attack fell!
+
+--- Turn 1 ---
+  [Magmar 80/80 | Luxio 71/71]
+  Magmar used Lava Plume!
+    HP Luxio (foe): 71 -> 1 / 71
+    (anim: Burn)
+  The opposing Luxio was burned!
+  The opposing Luxio used Spark!
+  The neon grid surged!
+    HP Magmar (player): 80 -> 53 / 80
+  (end of round)
+    (anim: Burn)
+    HP Luxio (foe): 1 -> 0 / 71
+  The opposing Luxio was hurt by its burn!
+  The opposing Luxio fainted!
+    xx fainted: Luxio (foe)
+  Magmar is at the level cap (Lv. 27) and can't gain Exp. Points.
+  Warden Rook is about to send out Toxtricity. Will you switch your Pokémon?  [auto: No]
+  Warden Rook sent out Toxtricity!
+    >> sent out (foe): Toxtricity Lv.26 @ORANBERRY [PUNKROCK]
+
+--- Turn 2 ---
+  [Magmar 53/80 | Toxtricity 82/82]
+  Magmar used Lava Plume!
+    HP Toxtricity (foe): 82 -> 23 / 82
+    (anim: EatBerry)
+    HP Toxtricity (foe): 23 -> 33 / 82
+  The opposing Toxtricity restored a little HP using its Oran Berry!
+  The opposing Toxtricity used Spark!
+  The neon grid surged!
+    HP Magmar (player): 53 -> 10 / 80
+  (end of round)
+
+--- Turn 3 ---
+  [Magmar 10/80 | Toxtricity 33/82]
+  Warden Rook used a Super Potion.
+    HP Toxtricity (foe): 33 -> 82 / 82
+  The opposing Toxtricity's HP was restored.
+  Magmar used Fire Punch!
+    HP Toxtricity (foe): 82 -> 58 / 82
+  (end of round)
+
+--- Turn 4 ---
+  [Magmar 10/80 | Toxtricity 58/82]
+  Magmar used Lava Plume!
+    HP Toxtricity (foe): 58 -> 0 / 82
+  The opposing Toxtricity fainted!
+    xx fainted: Toxtricity (foe)
+  (end of round)
+  Warden Rook is about to send out Electabuzz. Will you switch your Pokémon?  [auto: No]
+  Warden Rook sent out Electabuzz!
+    >> sent out (foe): Electabuzz Lv.25 @EVIOLITE [STATIC]
+
+--- Turn 5 ---
+  [Magmar 10/80 | Electabuzz 74/74]
+  The opposing Electabuzz used Quick Attack!
+    HP Magmar (player): 10 -> 0 / 80
+  Magmar fainted!
+    xx fainted: Magmar (player)
+  (end of round)
+  You're in charge, Graveler!
+    >> sent out (player): Graveler Lv.27 [STURDY]
+
+--- Turn 6 ---
+  [Graveler 75/75 | Electabuzz 74/74]
+  The opposing Electabuzz used Screech!
+    (anim: StatDown)
+  Graveler's Defense harshly fell!
+  Graveler used Bulldoze!
+    HP Electabuzz (foe): 74 -> 26 / 74
+  It's super effective!
+    (anim: StatDown)
+  The opposing Electabuzz's Speed fell!
+  The grid flickers and sparks... (1 more)
+  (end of round)
+
+--- Turn 7 ---
+  [Graveler 75/75 | Electabuzz 26/74]
+  The opposing Electabuzz used Low Sweep!
+    HP Graveler (player): 75 -> 30 / 75
+  It's super effective!
+    (anim: StatDown)
+  Graveler's Speed fell!
+  Graveler used Fire Punch!
+    HP Electabuzz (foe): 26 -> 5 / 74
+    [ability: Electabuzz (foe)'s Static]
+    (anim: Paralysis)
+  Graveler is paralyzed! It may be unable to move!
+  (end of round)
+
+--- Turn 8 ---
+  [Graveler 30/75 PARALYSIS | Electabuzz 5/74]
+  Warden Rook used a Super Potion.
+    HP Electabuzz (foe): 5 -> 65 / 74
+  The opposing Electabuzz's HP was restored.
+  Graveler used Fire Punch!
+    HP Electabuzz (foe): 65 -> 46 / 74
+    (anim: Burn)
+  The opposing Electabuzz was burned!
+  (end of round)
+    (anim: Burn)
+    HP Electabuzz (foe): 46 -> 42 / 74
+  The opposing Electabuzz was hurt by its burn!
+
+--- Turn 9 ---
+  [Graveler 30/75 PARALYSIS | Electabuzz 42/74 BURN]
+  The opposing Electabuzz used Low Sweep!
+    HP Graveler (player): 30 -> 7 / 75
+  It's super effective!
+    (anim: StatDown)
+  Graveler's Speed fell!
+  Graveler used Bulldoze!
+    HP Electabuzz (foe): 42 -> 0 / 74
+  It's super effective!
+  The opposing Electabuzz fainted!
+    xx fainted: Electabuzz (foe)
+## FIELD CHANGE: NEON_GRID -> NONE
+  The grid shorted out! The neon lights went dark.
+  Graveler is at the level cap (Lv. 27) and can't gain Exp. Points.
+  (end of round)
+  Warden Rook is about to send out Camera. Will you switch your Pokémon?  [auto: No]
+  Warden Rook sent out Camera!
+    >> sent out (foe): Camera Lv.27 @SITRUSBERRY [LEVITATE]
+
+--- Turn 10 ---
+  [Graveler 7/75 PARALYSIS | Camera 71/71]
+  Good job, Graveler! Come back!
+    << recalled: Graveler (player)
+  You're in charge, Ampharos!
+    >> sent out (player): Ampharos Lv.27 [STATIC]
+  The opposing Camera used Hex!
+    HP Ampharos (player): 93 -> 75 / 93
+  (end of round)
+
+--- Turn 11 ---
+  [Ampharos 75/93 | Camera 71/71]
+  The opposing Camera used Hex!
+    HP Ampharos (player): 75 -> 54 / 93
+  Ampharos used Signal Beam!
+    HP Camera (foe): 71 -> 53 / 71
+  (end of round)
+
+--- Turn 12 ---
+  [Ampharos 54/93 | Camera 53/71]
+  The opposing Camera used Hydro Pump!
+  The opposing Camera's attack missed!
+  Ampharos used Signal Beam!
+    HP Camera (foe): 53 -> 35 / 71
+    (anim: EatBerry)
+    HP Camera (foe): 35 -> 52 / 71
+  The opposing Camera restored its health using its Sitrus Berry!
+  (end of round)
+
+--- Turn 13 ---
+  [Ampharos 54/93 | Camera 52/71]
+  The opposing Camera used Hydro Pump!
+    HP Ampharos (player): 54 -> 5 / 93
+  Ampharos used Signal Beam!
+    HP Camera (foe): 52 -> 31 / 71
+    (anim: Confusion)
+  The opposing Camera became confused!
+  (end of round)
+
+--- Turn 14 ---
+  [Ampharos 5/93 | Camera 31/71]
+  Good job, Ampharos! Come back!
+    << recalled: Ampharos (player)
+  Just a little more! Hang in there, Vaporeon!
+    >> sent out (player): Vaporeon Lv.27 [WATERABSORB]
+    (anim: Confusion)
+  The opposing Camera is confused!
+    HP Camera (foe): 31 -> 24 / 71
+  It hurt itself in its confusion!
+  (end of round)
+
+--- Turn 15 ---
+  [Vaporeon 115/115 | Camera 24/71]
+  The opposing Camera snapped out of its confusion.
+  The opposing Camera used Thunder Wave!
+    (anim: Paralysis)
+  Vaporeon is paralyzed! It may be unable to move!
+    (anim: Paralysis)
+  Vaporeon is paralyzed! It can't move!
+  (end of round)
+
+--- Turn 16 ---
+  [Vaporeon 115/115 PARALYSIS | Camera 24/71]
+  The opposing Camera used Shock Wave!
+    HP Vaporeon (player): 115 -> 67 / 115
+  It's super effective!
+  Vaporeon used Shadow Ball!
+    HP Camera (foe): 24 -> 6 / 71
+  (end of round)
+
+--- Turn 17 ---
+  [Vaporeon 67/115 PARALYSIS | Camera 6/71]
+  The opposing Camera used Shock Wave!
+    HP Vaporeon (player): 67 -> 17 / 115
+  It's super effective!
+  Vaporeon used Scald!
+    HP Camera (foe): 6 -> 0 / 71
+  It's not very effective...
+  The opposing Camera fainted!
+    xx fainted: Camera (foe)
+  Ampharos is at the level cap (Lv. 27) and can't gain Exp. Points.
+  Vaporeon is at the level cap (Lv. 27) and can't gain Exp. Points.
+  You defeated Warden Rook!
+  Cut! ...Okay, okay, that's going in the highlight reel. You earned it.
+  You got $2,700 for winning!
+  battle result code: 1
+  
+RESULT: player won after 16 turn(s)

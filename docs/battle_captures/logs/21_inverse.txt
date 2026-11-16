@@ -1,0 +1,366 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Inverse Field [INVERSE] - Echo of the Ghost Warden Morwen vs challenger (Lv.90)
+===============================================================================
+
+--- Battle start ---
+  field: INVERSE | weather: None | terrain: None
+  You are challenged by Echo of the Ghost Warden Morwen!
+  Echo of the Ghost Warden Morwen sent out Spiritomb!
+    >> sent out (foe): Spiritomb Lv.86 @LEFTOVERS [INFILTRATOR]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.90 @MAGICALSEED [SANDVEIL]
+## FIELD CHANGE: NONE -> INVERSE
+  The world turns inside out... Type matchups are reversed!
+    (anim: UseItem)
+  Garchomp's Magical Seed turned its world upside down!
+    (anim: StatDown)
+  Garchomp's Speed harshly fell!
+  Garchomp's Attack rose!
+  Garchomp's Special Attack rose!
+
+--- Turn 1 ---
+  [Garchomp 322/322 | Spiritomb 226/226]
+  The opposing Spiritomb used Will-O-Wisp!
+    (anim: Burn)
+  Garchomp was burned!
+  Garchomp used Fire Fang!
+    HP Spiritomb (foe): 226 -> 186 / 226
+    (anim: Burn)
+  The opposing Spiritomb was burned!
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 186 -> 200 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Spiritomb (foe): 200 -> 186 / 226
+  The opposing Spiritomb was hurt by its burn!
+    (anim: Burn)
+    HP Garchomp (player): 322 -> 302 / 322
+  Garchomp was hurt by its burn!
+
+--- Turn 2 ---
+  [Garchomp 302/322 BURN | Spiritomb 186/226 BURN]
+  The opposing Spiritomb used Pain Split!
+    HP Spiritomb (foe): 186 -> 226 / 226
+    HP Garchomp (player): 302 -> 244 / 322
+  The battlers shared their pain!
+  Garchomp used Earthquake!
+    HP Spiritomb (foe): 226 -> 135 / 226
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 135 -> 149 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Spiritomb (foe): 149 -> 135 / 226
+  The opposing Spiritomb was hurt by its burn!
+    (anim: Burn)
+    HP Garchomp (player): 244 -> 224 / 322
+  Garchomp was hurt by its burn!
+
+--- Turn 3 ---
+  [Garchomp 224/322 BURN | Spiritomb 135/226 BURN]
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Garchomp (player): 224 -> 88 / 322
+  Garchomp used Dragon Claw!
+    HP Spiritomb (foe): 135 -> 67 / 226
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 67 -> 81 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Spiritomb (foe): 81 -> 67 / 226
+  The opposing Spiritomb was hurt by its burn!
+    (anim: Burn)
+    HP Garchomp (player): 88 -> 68 / 322
+  Garchomp was hurt by its burn!
+
+--- Turn 4 ---
+  [Garchomp 68/322 BURN | Spiritomb 67/226 BURN]
+  Echo of the Ghost Warden Morwen used a Full Restore.
+    HP Spiritomb (foe): 67 -> 226 / 226
+  The opposing Spiritomb's HP was restored.
+  Garchomp used Earthquake!
+    HP Spiritomb (foe): 226 -> 135 / 226
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 135 -> 149 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+    (anim: Burn)
+    HP Garchomp (player): 68 -> 48 / 322
+  Garchomp was hurt by its burn!
+
+--- Turn 5 ---
+  [Garchomp 48/322 BURN | Spiritomb 149/226]
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Garchomp (player): 48 -> 0 / 322
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 149 -> 163 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+
+--- Turn 6 ---
+  [Togekiss 280/280 | Spiritomb 163/226]
+  Togekiss used Flamethrower!
+    HP Spiritomb (foe): 163 -> 101 / 226
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Togekiss (player): 280 -> 108 / 280
+  It's super effective!
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 101 -> 115 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+
+--- Turn 7 ---
+  [Togekiss 108/280 | Spiritomb 115/226]
+  OK, Togekiss! Come back!
+    << recalled: Togekiss (player)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.90 [BLAZE]
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Charizard (player): 268 -> 104 / 268
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 115 -> 129 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+
+--- Turn 8 ---
+  [Charizard 104/268 | Spiritomb 129/226]
+  Charizard used Flamethrower!
+    HP Spiritomb (foe): 129 -> 48 / 226
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Charizard (player): 104 -> 0 / 268
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 48 -> 62 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+  Just a little more! Hang in there, Togekiss!
+    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+
+--- Turn 9 ---
+  [Togekiss 108/280 | Spiritomb 62/226]
+  OK, Togekiss! Come back!
+    << recalled: Togekiss (player)
+  Just a little more! Hang in there, Magnezone!
+    >> sent out (player): Magnezone Lv.90 [STURDY]
+  The opposing Spiritomb used Foul Play!
+  The opposing Spiritomb turned the foe's strength against it!
+    HP Magnezone (player): 253 -> 155 / 253
+  (end of round)
+    (anim: UseItem)
+    HP Spiritomb (foe): 62 -> 76 / 226
+  The opposing Spiritomb restored a little HP using its Leftovers!
+
+--- Turn 10 ---
+  [Magnezone 155/253 | Spiritomb 76/226]
+  Magnezone used Tri Attack!
+    HP Spiritomb (foe): 76 -> 0 / 226
+  It's super effective!
+  The opposing Spiritomb fainted!
+    xx fainted: Spiritomb (foe)
+  Togekiss is at the level cap (Lv. 90) and can't gain Exp. Points.
+  Magnezone is at the level cap (Lv. 90) and can't gain Exp. Points.
+  (end of round)
+  Echo of the Ghost Warden Morwen is about to send out Dusknoir. Will you switch your Pokémon?  [auto: No]
+  Echo of the Ghost Warden Morwen sent out Dusknoir!
+    >> sent out (foe): Dusknoir Lv.87 @LEFTOVERS [FRISK]
+
+--- Turn 11 ---
+  [Magnezone 155/253 | Dusknoir 220/220]
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 220 -> 107 / 220
+  It's super effective!
+    (anim: Frozen)
+  The opposing Dusknoir was frozen solid!
+    (anim: Frozen)
+  The opposing Dusknoir is frozen solid!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 107 -> 120 / 220
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 12 ---
+  [Magnezone 155/253 | Dusknoir 120/220 FROZEN]
+  Magnezone used Thunderbolt!
+    HP Dusknoir (foe): 120 -> 28 / 220
+    (anim: Frozen)
+  The opposing Dusknoir is frozen solid!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 28 -> 41 / 220
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 13 ---
+  [Magnezone 155/253 | Dusknoir 41/220 FROZEN]
+  Echo of the Ghost Warden Morwen used a Full Restore.
+    HP Dusknoir (foe): 41 -> 220 / 220
+  The opposing Dusknoir's HP was restored.
+  Magnezone used Flash Cannon!
+    HP Dusknoir (foe): 220 -> 136 / 220
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 136 -> 149 / 220
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 14 ---
+  [Magnezone 155/253 | Dusknoir 149/220]
+  Magnezone used Flash Cannon!
+    HP Dusknoir (foe): 149 -> 63 / 220
+  The opposing Dusknoir used Trick Room!
+  The opposing Dusknoir twisted the dimensions!
+  The Reverse World twisted the dimensions even further!
+  (end of round)
+    (anim: UseItem)
+    HP Dusknoir (foe): 63 -> 76 / 220
+  The opposing Dusknoir restored a little HP using its Leftovers!
+
+--- Turn 15 ---
+  [Magnezone 155/253 | Dusknoir 76/220]
+  The opposing Dusknoir used Shadow Sneak!
+  The Reverse World answers the opposing Dusknoir's call!
+    HP Magnezone (player): 155 -> 104 / 253
+  Magnezone used Tri Attack!
+    HP Dusknoir (foe): 76 -> 0 / 220
+  It's super effective!
+  The opposing Dusknoir fainted!
+    xx fainted: Dusknoir (foe)
+  (end of round)
+  Echo of the Ghost Warden Morwen is about to send out Gengar. Will you switch your Pokémon?  [auto: No]
+  Echo of the Ghost Warden Morwen sent out Gengar!
+    >> sent out (foe): Gengar Lv.89 @LIFEORB [CURSEDBODY]
+
+--- Turn 16 ---
+  [Magnezone 104/253 | Gengar 252/252]
+  Magnezone used Thunderbolt!
+    HP Gengar (foe): 252 -> 125 / 252
+    [ability: Gengar (foe)'s Cursed Body]
+  Magnezone's Thunderbolt was disabled!
+  The opposing Gengar used Shadow Ball!
+  The Reverse World answers the opposing Gengar's call!
+    HP Magnezone (player): 104 -> 0 / 253
+  A critical hit!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+    HP Gengar (foe): 125 -> 100 / 252
+  The opposing Gengar lost some of its HP!
+  (end of round)
+  Just a little more! Hang in there, Starmie!
+    >> sent out (player): Starmie Lv.90 [NATURALCURE]
+
+--- Turn 17 ---
+  [Starmie 235/235 | Gengar 100/252]
+  Starmie used Ice Beam!
+    HP Gengar (foe): 100 -> 22 / 252
+  The opposing Gengar used Sludge Bomb!
+    HP Starmie (player): 235 -> 42 / 235
+    (anim: Poison)
+  Starmie was poisoned!
+    HP Gengar (foe): 22 -> 0 / 252
+  The opposing Gengar lost some of its HP!
+  The opposing Gengar fainted!
+    xx fainted: Gengar (foe)
+  Starmie is at the level cap (Lv. 90) and can't gain Exp. Points.
+  (end of round)
+    (anim: Poison)
+    HP Starmie (player): 42 -> 13 / 235
+  Starmie was hurt by poison!
+  Echo of the Ghost Warden Morwen is about to send out Jellicent. Will you switch your Pokémon?  [auto: No]
+  Echo of the Ghost Warden Morwen sent out Jellicent!
+    >> sent out (foe): Jellicent Lv.88 @LEFTOVERS [CURSEDBODY]
+
+--- Turn 18 ---
+  [Starmie 13/235 POISON | Jellicent 319/319]
+  Good job, Starmie! Come back!
+    << recalled: Starmie (player)
+  You're in charge, Togekiss!
+    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+  The opposing Jellicent used Scald!
+    HP Togekiss (player): 108 -> 10 / 280
+  A critical hit!
+  (end of round)
+
+--- Turn 19 ---
+  [Togekiss 10/280 | Jellicent 319/319]
+  The opposing Jellicent used Scald!
+    HP Togekiss (player): 10 -> 0 / 280
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  (end of round)
+  You're in charge, Starmie!
+    >> sent out (player): Starmie Lv.90 [NATURALCURE]
+
+--- Turn 20 ---
+  [Starmie 13/235 | Jellicent 319/319]
+  The opposing Jellicent used Scald!
+    HP Starmie (player): 13 -> 0 / 235
+  It's super effective!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  You're in charge, Lucario!
+    >> sent out (player): Lucario Lv.90 [INNERFOCUS]
+
+--- Turn 21 ---
+  [Lucario 253/253 | Jellicent 319/319]
+  The opposing Jellicent used Scald!
+    HP Lucario (player): 253 -> 150 / 253
+  Lucario used Flash Cannon!
+    HP Jellicent (foe): 319 -> 143 / 319
+  It's super effective!
+    [ability: Jellicent (foe)'s Cursed Body]
+  Lucario's Flash Cannon was disabled!
+  (end of round)
+    (anim: UseItem)
+    HP Jellicent (foe): 143 -> 162 / 319
+  The opposing Jellicent restored a little HP using its Leftovers!
+  The twisted dimensions returned to normal!
+
+--- Turn 22 ---
+  [Lucario 150/253 | Jellicent 162/319]
+  Lucario used Close Combat!
+    HP Jellicent (foe): 162 -> 0 / 319
+  It's super effective!
+    (anim: StatDown)
+  Lucario's Defense fell!
+  Lucario's Special Defense fell!
+  The opposing Jellicent fainted!
+    xx fainted: Jellicent (foe)
+  Lucario is at the level cap (Lv. 90) and can't gain Exp. Points.
+  (end of round)
+  Echo of the Ghost Warden Morwen sent out Houndstone!
+    >> sent out (foe): Houndstone Lv.88 @LIFEORB [SANDRUSH]
+
+--- Turn 23 ---
+  [Lucario 150/253 | Houndstone 270/270]
+  Lucario used Close Combat!
+    HP Houndstone (foe): 270 -> 22 / 270
+  It's super effective!
+    (anim: StatDown)
+  Lucario's Defense fell!
+  Lucario's Special Defense fell!
+  The opposing Houndstone used Play Rough!
+    HP Lucario (player): 150 -> 0 / 253
+  Lucario fainted!
+    xx fainted: Lucario (player)
+    HP Houndstone (foe): 22 -> 0 / 270
+  The opposing Houndstone lost some of its HP!
+  The opposing Houndstone fainted!
+    xx fainted: Houndstone (foe)
+  You have no more Pokémon that can fight!
+  You lost against Echo of the Ghost Warden Morwen!
+  You gave $1,184 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 22 turn(s)
