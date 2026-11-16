@@ -1,0 +1,200 @@
+# Briar Hall - Throne Room (287). WRITTEN BY layouts/verdance_city.py.
+id: 287
+name: Briar Hall - Throne Room
+palette: city
+bgm: Natural Park
+parent: 285
+tone: [8, 4, -10, 0]
+metadata:
+  Name: Briar Hall
+  Outdoor: false
+  MapPosition: [0, 14, 12]
+map: |
+  xxxxxxxxxxxxxxxxxxxxxxxxxxx
+  xQQQQQQQQQQQQQQQQQQQQQQQQQx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xRRRRRRRRRRRRRRRRRRRRRRRRRx
+  xWgggggggcccccccccgggggggWx
+  xWgggggggcccccccccgggggggWx
+  xWgggggggcccccccccgggggggWx
+  xWgggggggcccccccccgggggggWx
+  xWgggggggggpppppgggggggggWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgccccccggpppppggccccccgWx
+  xWgggggggggpppppgggggggggWx
+  xWgggggggggpppppgggggggggWx
+  xWWWWWWWWWWWpppWWWWWWWWWWWx
+  xxxxxxxxxxxxxxxxxxxxxxxxxxx
+heights: |
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+  000000000000000000000000000
+stamps:
+- stamp: t_bench
+  at: [4, 14]
+- stamp: t_bench
+  at: [4, 17]
+- stamp: t_bench
+  at: [4, 20]
+- stamp: t_bench
+  at: [6, 14]
+- stamp: t_bench
+  at: [6, 17]
+- stamp: t_bench
+  at: [6, 20]
+- stamp: t_bench
+  at: [19, 14]
+- stamp: t_bench
+  at: [19, 17]
+- stamp: t_bench
+  at: [19, 20]
+- stamp: t_bench
+  at: [21, 14]
+- stamp: t_bench
+  at: [21, 17]
+- stamp: t_bench
+  at: [21, 20]
+tiles:
+- tile: 14400
+  at: [12, 7]
+  layer: 1
+- tile: 14401
+  at: [13, 7]
+  layer: 1
+- tile: 14408
+  at: [12, 8]
+  layer: 1
+- tile: 14409
+  at: [13, 8]
+  layer: 1
+- tile: 14416
+  at: [12, 9]
+  layer: 1
+- tile: 14417
+  at: [13, 9]
+  layer: 1
+- tile: 914
+  at: [9, 11]
+  layer: 1
+- tile: 914
+  at: [9, 16]
+  layer: 1
+- tile: 914
+  at: [9, 21]
+  layer: 1
+- tile: 914
+  at: [17, 11]
+  layer: 1
+- tile: 914
+  at: [17, 16]
+  layer: 1
+- tile: 914
+  at: [17, 21]
+  layer: 1
+- tile: 14384
+  at: [4, 3]
+  layer: 2
+- tile: 14392
+  at: [4, 4]
+  layer: 2
+- tile: 14384
+  at: [7, 3]
+  layer: 2
+- tile: 14392
+  at: [7, 4]
+  layer: 2
+- tile: 14384
+  at: [10, 3]
+  layer: 2
+- tile: 14392
+  at: [10, 4]
+  layer: 2
+- tile: 14384
+  at: [16, 3]
+  layer: 2
+- tile: 14392
+  at: [16, 4]
+  layer: 2
+- tile: 14384
+  at: [19, 3]
+  layer: 2
+- tile: 14392
+  at: [19, 4]
+  layer: 2
+- tile: 14384
+  at: [22, 3]
+  layer: 2
+- tile: 14392
+  at: [22, 4]
+  layer: 2
+- tile: 3916
+  at: [19, 16]
+  layer: 0
+- tile: 3916
+  at: [4, 19]
+  layer: 0
+tileblocks: []
+events:
+- type: npc
+  name: Queen Maelis
+  at: [14, 10]
+  sprite: NPC 25
+  dir: down
+  text: 'Queen Maelis: You stand before the Thorn Throne of Elowen. [TODO story: court audience, Festival delegation]'
+- type: npc
+  name: Thorn Guard
+  at: [10, 13]
+  sprite: NPC 07
+  dir: right
+  text: 'Thorn Guard: ...'
+- type: npc
+  name: Thorn Guard
+  at: [16, 13]
+  sprite: NPC 07
+  dir: left
+  text: 'Thorn Guard: ...'
+- type: warp
+  at: [12, 25]
+  to: {map: 286, x: 16, y: 8, dir: down}
+- type: warp
+  at: [13, 25]
+  to: {map: 286, x: 16, y: 8, dir: down}
+- type: warp
+  at: [14, 25]
+  to: {map: 286, x: 16, y: 8, dir: down}

@@ -113,7 +113,37 @@ The stock intro's controls tutorial is not reproduced.
   - Weather stays in `metadata`.
 - Layout scripts (`layouts/saltmere.py`) build the height map, cliff lines, curving variable-width paths (`path()`),
   noise-edged blobs and the stamp list, then write them into the spec.
-- Only Saltmere (140) uses this so far. Every other map is still on the banned stock tilesets and must be redone.
+- The pilot layout `layouts/saltmere.py` is superseded by `layouts/saltmere_city.py` (§2d); do not run it.
+
+## 2d. City pass: composite tileset 33, castle kit, city layouts (Saltmere, Verdance)
+- **Tileset 33 "Prismfall City"** (`compose_tileset.py`): Tectonic's Outside sheet with ids unchanged, then the whole
+  Rejuvenation `Sheridan_2` (offset 8616) and `GearenCity Real` (offset 10384) sheets, then a small custom sheet
+  (offset 14384: realm banners 1x2, throne 2x3 from `ref/art/custom`). Offsets are in `data/compose_offsets.json`.
+  Autotiles are Tectonic's (the Rejuvenation repo lacks its own). Appended terrain tags are zeroed. Re-run after
+  `import_tileset.py tilesets/tectonic_outside.yaml`; install with `merge_tilesets.py`.
+- **Stamps:** `tcatalog.py` makes a contact sheet of every building in a set of reference maps (connected components),
+  `textract.yaml` gained the `h_*` houses, `wextract.py` / `wextract.yaml` mine the Sheridan timber houses (`w_*`) into
+  `data/stamps_w.json` with ids remapped onto tileset 33. Not used: `h_olive`, `h_slant_o`, `h_flat_o`, `h_cabin`
+  (their rects carry bits of neighbours).
+- **Palette `city`** (`palettes/city.yaml`): everything in `tectonic` plus
+  `k` cobble 2273, `g` flagstones 3910, `h` white-flower bed (autotile 240), `x` interior void, and the castle kit:
+  `W`/`K`/`Q` parapet tops (wall, tower, keep; each joins only itself), `F`/`G`/`R` their south faces (buttresses, arrow
+  slits, windows on faces 4+ rows tall), `S` castle stairs. Scatter is clumped (large patches, 7% singles).
+- **`layouts/citykit.py`:** `City` grid with `wall_h`, `wall_v`, `tower`, `gate_arch`, `cliffs`, `stairs`,
+  `quarter` (kerbed pad, packed house rows, beds, shrubs, clutter), `house_row`, `pits` (street trees), `groves`,
+  `trees`, `inlay` (drain tiles 3859 / 3916), `sea_rocks`, `warp_line`, `write`.
+- **Saltmere** (`layouts/saltmere_city.py`, 3 maps of 88x72): 140 Promenade & Market, 146 Harbour & Breakwater,
+  147 Old Town. Story events of the pilot are in `layouts/saltmere_events.yaml` and are re-seated by name. 140 keeps
+  its Route 4 (N, offset 44) and Route 5 (W, offset 32) connections. Districts are joined by touch warps: harbour
+  stairs 140 (48-53, 71) <-> 146 (42-47, 3), Players' Gate 140 (87, 42-45) <-> 147 (0, 36-39). Doors: PC, Mart,
+  Pageant Hall, Saltwife on 140; Harbour Office on 146; Playhouse on 147. HealingSpot is 140 (19, 30).
+- **Verdance** (`layouts/verdance_city.py`): 280 Market Terraces 104x88, 285 Briar Hall Upper Court 84x64, 286 Great
+  Hall 33x25 and 287 Throne Room 27x27 (interiors built from the castle kit with `room()`). Placeholder events only.
+- `walk_ignore:` (default wall, tower, keep) keeps unreachable parapet walks out of the cut-off warning.
+- **Open items:** Verdance 281/282/295 interiors (three unresolved doors), 283/284/289/294/296 districts, no column,
+  chandelier or stained-glass art, 540/560 still declare stale connection offsets to 140 (140's own win), the Act I
+  maps other than Saltmere are still on the stock tilesets, and all five city exteriors fail parts of the rubric
+  (numbers print at build time).
 
 ## 3. Regenerating
 ```

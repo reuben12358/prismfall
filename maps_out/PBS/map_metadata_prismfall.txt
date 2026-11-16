@@ -214,6 +214,30 @@ MapPosition = 0,8,20
 Name = Tidelock Gym - Warden's Pool
 MapPosition = 0,8,20
 #-------------------------------
+[280]   # Verdance - Market Terraces
+Name = Verdance
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,12
+BattleBack = field
+#-------------------------------
+[285]   # Briar Hall - Upper Court
+Name = Briar Hall
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,12
+BattleBack = field
+#-------------------------------
+[286]   # Briar Hall - Great Hall
+Name = Briar Hall
+Outdoor = false
+MapPosition = 0,14,12
+#-------------------------------
+[287]   # Briar Hall - Throne Room
+Name = Briar Hall
+Outdoor = false
+MapPosition = 0,14,12
+#-------------------------------
 [520]   # Route 1
 Name = Route 1
 Outdoor = true

@@ -22,6 +22,8 @@ classes:
   cliff:    {kind: cliffline, table: cliff, west: 2608, east: 2610, rock: 2609}
   fence:    {kind: learned, table: fence, layer: 2}
   flowerbed: {kind: autotile, id: 240, layer: 1}              # white-flower bed (Prizca planters)
+  void:     {kind: tile, tile: 0, layer: 0}                    # black surround of interior maps
+  flag:     {kind: tile, tile: 3910, layer: 0}                 # pale castle flagstones
   cobble:   {kind: tile, tile: 2273, layer: 0}                 # lilac-grey street setts (Prizca streets)
   wall:     {kind: castle, floor: 3910, rim: &rim {NW: 3920, N: 3921, NE: 3922, W: 3928, E: 3930, SW: 3936, S: 3937, SE: 3938,
              inner_nw: 3923, inner_ne: 3924, inner_sw: 3931, inner_se: 3932, center: 0}}
@@ -63,6 +65,8 @@ glyphs:
   'f': fence
   'T': forest
   'k': cobble
+  'x': void
+  'g': flag
   'h': flowerbed
   'W': wall
   'F': wallface

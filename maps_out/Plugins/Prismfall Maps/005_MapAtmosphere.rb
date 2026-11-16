@@ -4,6 +4,10 @@ module PrismfallMaps
     140 => [10, 4, -14, 0],   # Saltmere
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
+    280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
+    285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
+    286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
+    287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
   }
 
   def self.apply_map_tone

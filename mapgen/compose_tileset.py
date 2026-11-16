@@ -34,6 +34,12 @@ def main():
         p = [int(x) for x in t.passages.data.reshape(-1)][384:384 + n]; q = [int(x) for x in t.priorities.data.reshape(-1)][384:384 + n]
         pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n
         ims.append(im)
+    # custom Prismfall pieces (ref/art/custom, Art Director prototypes): realm banners (1x2 each, 8 across) and a throne (2x3)
+    cu = Image.new('RGBA', (256, 160), (0, 0, 0, 0))
+    cu.paste(Image.open('/home/claude/ref/art/custom/banners_1x2_x8.png').convert('RGBA'), (0, 0))
+    cu.paste(Image.open('/home/claude/ref/art/custom/throne_2x3_crownhaven.png').convert('RGBA'), (0, 64))
+    offs['custom'] = {'offset': len(pas), 'tiles': 40, 'src_tilesets': []}
+    pas += [15] * 40; pri += [0] * 40; tag += [0] * 40; ims.append(cu)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height
