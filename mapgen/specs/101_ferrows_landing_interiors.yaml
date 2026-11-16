@@ -1,0 +1,148 @@
+# Ferrow's Landing interiors (maps 101-108). Interiors are built from templates mined from the base
+# project's sample maps (data/templates/*.json) plus our own events. Exit mats link back to the town's doors.
+id: 101
+name: Ferrow's Landing Pokémon Center
+parent: 100
+template: pokecenter          # nurse, healing balls, PC and Town Map events come from the template
+exit_link: FL_PC
+drop_template_events: [Bill]
+bgm: Poke Center
+metadata: {HealingSpot: [100, 8, 16], MapPosition: [0, 14, 26]}
+events:
+  - {type: npc, name: Local, at: [12, 6], sprite: NPC 05, dir: left,
+     text: "[TODO story] Nurse Ilse has run this Center since before the quarantine. She knows everyone's Pokémon by name."}
+---
+id: 102
+name: Ferrow's Landing Mart
+parent: 100
+template: mart                # template 'Mart' clerk keeps Essentials' badge-scaled stock
+exit_link: FL_MART
+drop_template_events: [Questionnaire, Deliveryman]
+bgm: Poke Mart
+metadata: {MapPosition: [0, 14, 26]}
+events:
+  - {type: npc, name: Shopper, at: [7, 6], sprite: NPC 11, dir: up,
+     text: "[TODO story] Supplies come in by ferry. Or they did, before the quarantine."}
+---
+id: 103
+name: Larch Research Station
+parent: 100
+template: lab
+exit_link: FL_LAB
+drop_template_events: [Professor, "Turn back, size(3,1)", Grass ball, Fire ball, Water ball, Controlling event,
+                       Wall sign left, Wall sign right, Pokédex, Dex access]
+bgm: Lab
+metadata: {MapPosition: [0, 14, 26]}
+events:
+  - {type: npc, name: Professor Larch, at: [6, 3], sprite: trainer_PROFESSOR, dir: down,
+     text: "[TODO story] Larch: The scanner said NULL? Fascinating. Pick a partner from the table - any region's."}
+  - {type: npc, name: Juno, at: [4, 5], sprite: trainer_RIVAL2, dir: right,
+     text: "[TODO story] Juno: You're the one off the last ferry! I'm Juno. We're going to be friends, I can tell."}
+  - &starter
+    type: event
+    name: Starter table
+    at: [9, 4]
+    pages:
+      - graphic: {sprite: Object ball}
+        commands:
+          - script: |
+              gens = (1..9).to_a
+              g = pbMessage(_INTL("Which region's partners?"), gens.map { |n| _INTL("Generation {1}", n) }, -1)
+              if g >= 0
+                gen = gens[g]
+                lines = (0..2).map { |s| Prismfall::Rival.line(gen, s) }
+                names = lines.map { |l| GameData::Species.get(l[0]).name }
+                s = pbMessage(_INTL("Choose your partner!"), names + [_INTL("Back")], 3)
+                if s >= 0 && s < 3 && pbAddPokemon(lines[s][0], 5)
+                  Prismfall.record_starter($player.party[-1], gen: gen, slot: s)
+                  pbSetSelfSwitch(@event_id, "A", true)
+                end
+              end
+      - cond: {self: A}
+        commands: ["The table is empty now."]
+  - {<<: *starter, name: Starter ball L, at: [8, 4]}
+  - {<<: *starter, name: Starter ball R, at: [10, 4]}
+  - {type: sign, at: [11, 6], post: false, name: Imprint scanner, text: "[TODO art] An Imprint scanner hums quietly. Its display reads: NULL."}
+---
+id: 104
+name: Tidewater Inn
+parent: 100
+template: house
+exit_link: FL_INN
+drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
+bgm: Lappet Town
+metadata: {MapPosition: [0, 14, 26]}
+events:
+  - name: Innkeeper
+    type: npc
+    at: [5, 4]
+    sprite: NPC 28
+    commands:
+      - "[TODO story] Welcome to the Tidewater. Rest a while? It's on the house for ferry folk."
+      - choices: ["Rest", "No thanks"]
+        cancel: 2
+        branches:
+          - [{tone: [-255, -255, -255, 0, 20]}, {wait: 20}, {heal: true}, {me: Pkmn healing}, {wait: 40},
+             {tone: [0, 0, 0, 0, 20]}, "Your Pokémon are fully rested."]
+          - ["Come back any time."]
+---
+id: 105
+name: Ferrow Lighthouse 1F
+parent: 100
+template: house2
+exit_link: FL_LIGHT
+drop_template_events: [Kurt]
+bgm: Lappet Town
+metadata: {MapPosition: [0, 14, 26]}
+tile_edits:   # stairs up (Interior general tiles 1256/1257 over 1264/1265) in the top-right corner
+  - [1, 8, 1, 1256]
+  - [1, 9, 1, 1257]
+  - [1, 8, 2, 1264]
+  - [1, 9, 2, 1265]
+  - [2, 8, 1, 2, 2, 0]
+events:
+  - {type: warp, at: [8, 2], link: LIGHT_UP, to: {map: 106, x: 8, y: 3, dir: down}, se: Door exit, arrive: [8, 3, down]}
+  - {type: npc, name: Keeper, at: [3, 5], sprite: NPC 25, dir: down,
+     text: "[TODO story] The lamp hasn't been lit since the Accord closed the strait. Kestrel's been up top all morning."}
+---
+id: 106
+name: Ferrow Lighthouse Lamp Room
+parent: 105
+template: house2
+drop_template_events: [Kurt, Exit]
+bgm: Lappet Town
+metadata: {MapPosition: [0, 14, 26]}
+tile_edits:
+  - [1, 8, 2, 1270]
+  - [1, 9, 2, 1271]
+  - [2, 8, 1, 2, 2, 0]
+events:
+  - {type: warp, at: [9, 2], to: {map: 105, x: 8, y: 3, dir: down}, se: Door exit}
+  - {type: npc, name: Kestrel, at: [4, 4], sprite: trainer_RIVAL1, dir: up,
+     text: "[TODO story] K1 - Kestrel's intro battle (lv 6) happens here: TrainerBattle.start(:RIVAL_KESTREL, \"Kestrel\", 10 + slot)."}
+---
+id: 107
+name: Dockmaster's House
+parent: 100
+template: house2
+exit_link: FL_DOCK
+drop_template_events: [Kurt]
+bgm: Lappet Town
+metadata: {MapPosition: [0, 14, 26]}
+events:
+  - {type: npc, name: Dockmaster, at: [7, 4], sprite: trainer_SAILOR, dir: down,
+     text: "[TODO story] Every manifest stamped, every crate scanned. Meridian's orders, not mine."}
+---
+id: 108
+name: Quarantine Customs Hall
+parent: 100
+template: harbour             # moored ship tiles double as the Dovetail at its berth
+drop_template_events: [Sailor, Aurora Ticket NPC, Old Sea Map NPC, Door]
+bgm: Lappet Town
+metadata: {MapPosition: [0, 14, 26]}
+events:
+  - {type: exit, at: [8, 2], link: FL_CUSTOMS, arrive: [8, 3, down]}
+  - {type: npc, name: Customs officer, at: [6, 5], sprite: trainer_SAILOR, dir: down,
+     text: "[TODO story] Meridian Concord customs. Hold still for the Imprint scan... that's odd."}
+  - {type: npc, name: Meridian tech, at: [10, 5], sprite: trainer_SCIENTIST, dir: down,
+     text: "[TODO story] The scanner's calibrated. If it says NULL, you are NULL."}

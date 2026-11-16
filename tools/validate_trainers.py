@@ -109,7 +109,8 @@ SINGLE_BOSSES = [  # (type, name, min ace level, max ace level) - Standard/Hard
 ]
 # Every FESTIVAL_<NAME> cameo type that has trainer data must have 0/100/200 and an
 # ace in this range (Standard/Hard).
-CAMEO_LEVELS = (92, 96)   # headline Quarterfinal cameo: ace 92
+CAMEO_LEVELS = (92, 96)   # exhibition (version 0)
+CAMEO_STAGE_ACE = {1: 90, 2: 92, 3: 94, 9: 100}
 DIFF_NAMES = {0: "Standard", 1: "Hard", 2: "Casual"}
 
 
@@ -398,9 +399,15 @@ def load_allowlist(balance_path):
             cells = [c.strip().strip("`") for c in line.strip().strip("|").split("|")]
             if len(cells) >= 3 and "," in cells[0] and not cells[0].startswith("-"):
                 tparts = [p.strip() for p in cells[0].split(",")]
-                if len(tparts) == 3 and tparts[2].isdigit():
-                    allow.add((tparts[0], tparts[1], int(tparts[2]), cells[1], cells[2]))
+                if len(tparts) == 3 and (tparts[2].isdigit() or tparts[2] == "*"):
+                    ver = int(tparts[2]) if tparts[2].isdigit() else "*"
+                    allow.add((tparts[0], tparts[1], ver, cells[1], cells[2]))
     return allow
+
+
+def is_allowed(allow, t, species, what):
+    return ((t.ttype, t.name, t.version, species, what) in allow or
+            (t.ttype, t.name, "*", species, what) in allow)
 
 
 # --- validation ---------------------------------------------------------------------
@@ -473,7 +480,7 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
                 rep.err(where, "unknown move %s" % m)
                 continue
             src = ref.learn_sources(mon.species, form, m)
-            allowed = (t.ttype, t.name, t.version, mon.species, m) in allow
+            allowed = is_allowed(allow, t, mon.species, m)
             # Rotom's appliance forms are always taught their signature move by the
             # form handler (Data/Scripts/014_Pokemon/001_Pokemon-related/001_FormHandlers.rb).
             if mon.species == "ROTOM" and ROTOM_FORM_MOVES.get(form) == m:
@@ -499,7 +506,7 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
         else:
             legal = set(data["abilities"]) | set(data["hidden"])
             # Megas: ability legal on the base form is fine (it changes on Mega Evolution)
-            if ab not in legal and not (t.ttype, t.name, t.version, mon.species, ab) in allow:
+            if ab not in legal and not is_allowed(allow, t, mon.species, ab):
                 rep.err(where, "%s cannot have ability %s (has %s)"
                         % (data["name"], ab, "/".join(sorted(legal))))
     if "AbilityIndex" in mon.props:
@@ -623,14 +630,24 @@ def validate_scheme(trainers, types, rep):
             top = max(m.level for m in t.mons)
             if d != 2 and not (lo <= top <= hi):
                 rep.warn(t.label(), "ace level %d outside expected %d-%d" % (top, lo, hi))
+    # Cameos (design/CAMEOS.md): v0 exhibition (ace 92-96), v1 R16 (90), v2 QF (92),
+    # v3 SF/Final-tier (94), v9 post-game (100); every base needs +100/+200.
     cameo_names = sorted({(t.ttype, t.name) for t in trainers if t.ttype.startswith("FESTIVAL_")})
     for tt, nm in cameo_names:
-        for d in (0, 1, 2):
-            t = need((tt, nm, 100 * d), "(cameo %s)" % DIFF_NAMES[d])
-            if t and d != 2:
+        if tt not in types:
+            rep.err("scheme", "trainer type %s missing from trainer_types.txt" % tt)
+        bases = sorted({t.version % 100 for t in trainers if (t.ttype, t.name) == (tt, nm)})
+        if 0 not in bases:
+            rep.err("scheme", "cameo %s,%s has no exhibition version 0" % (tt, nm))
+        for b in bases:
+            for d in (0, 1, 2):
+                t = need((tt, nm, b + 100 * d), "(cameo %s)" % DIFF_NAMES[d])
+                if not t or d == 2:
+                    continue
                 top = max(m.level for m in t.mons)
-                if not (CAMEO_LEVELS[0] <= top <= CAMEO_LEVELS[1]):
-                    rep.warn(t.label(), "cameo ace level %d outside %d-%d" % (top, CAMEO_LEVELS[0], CAMEO_LEVELS[1]))
+                lo, hi = CAMEO_LEVELS if b == 0 else (CAMEO_STAGE_ACE.get(b, 0),) * 2
+                if not (lo <= top <= hi):
+                    rep.warn(t.label(), "cameo ace level %d outside %d-%d" % (top, lo, hi))
     # Every trainer: variants of any version must have a base
     for t in trainers:
         if t.version >= 100:
@@ -691,7 +708,8 @@ def validate(args):
                     used.add((t.ttype, t.name, t.version, mon.species, m))
             if "Ability" in mon.props:
                 used.add((t.ttype, t.name, t.version, mon.species, mon.props["Ability"][0]))
-    for a in sorted(allow - used):
+    used |= {(a[0], a[1], "*", a[3], a[4]) for a in used}
+    for a in sorted(allow - used, key=str):
         rep.warn("BALANCE.md allowlist", "entry not used by any trainer: %s" % (a,))
     validate_scheme(trainers, types, rep)
     return rep, trainers, ref, types

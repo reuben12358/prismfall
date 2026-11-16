@@ -1,7 +1,7 @@
 # Prismfall — Curated Resources (Essentials v21.1 + EBDX 1.4.7.1)
 
 **How to read this list**
-- **Verdict** is compatibility with our stack: Essentials v21.1, v21.1 Hotfixes, Manurocker95's EBDX port 1.4.7.1, and the Prismfall plugins.
+- **Verdict** is compatibility with our stack: Essentials v21.1, v21.1 Hotfixes, EBDX (the Renovation Project 4.0 recommended, or Manurocker95's port 1.4.7.1), and the Prismfall plugins.
   - ✅ = works with that stack: either confirmed by the resource's own page or by the base repo, or it never touches the battle scene.
   - ⚠ = plausible but **not verified**, or needs extra work.
   - ❌ = known incompatible.
@@ -19,7 +19,7 @@
 |---|---|---|
 | **Bundled EBDX battlers** (in the base repo) | Animated BW sprites for **Gen 1–5 (#001–649)**, about 55 Gen 6 species, and 35 Gigantamax forms. Gen 7–9 fall back to static sprites in `Graphics/Pokemon/`. | ✅ |
 | [Generation 9 Resource Pack](https://eeveeexpo.com/resources/1101/) (Caruban) v3.3.8, Oct 2026 | Gen 9 species/moves/PBS plus **static** resized Gen 1–9 battlers (front 192 px, back 288 px). The repo bundles v3.2.5. | ✅ as bundled. ⚠ If you upgrade, re-check its Hotfixes requirement and EBDX metrics. |
-| [Open-Source EBDX Renovation Project](https://eeveeexpo.com/resources/1831/) (ChromeValiant) v4.0, Oct 2026 | Fork of *this exact port* (rebuilt on NikDie's EBDX). Adds **animated Gen 1–9 sprites incl. Megas**, a 60-FPS cap, frame-rate/lag fixes, the trainer hotfix off by default, SOS allies and HP thresholds. | ⚠ It *replaces* our EBDX and is the strongest upgrade path. Before switching, check that its `meta.txt` Name is still `Elite Battle: DX` (our bridge `Requires` it) and that `BattleSceneRoom#reconfigure` / `Battle::Scene#loadBackdrop` still exist. DBK is not compatible with it (author's answer in its thread). |
+| [Open-Source EBDX Renovation Project](https://eeveeexpo.com/resources/1831/) (ChromeValiant) v4.0, Oct 2026 ([GitHub](https://github.com/ChromeValiant/Pokemon-Essentials-21-With-Unofficial-EBDX), checked at commit `452d27ca`) | Fork of Manurocker95's port, rebuilt on NikDie's EBDX. Animated Gen 1–9 sprites incl. Megas, 60-FPS mkxp config, lag fixes, Gen 9 Pack 3.3.8, SOS allies, HP thresholds, terrain visuals. | ✅ **Recommended base** (SETUP.md option A). Checked: plugin Name is still `Elite Battle: DX`, and the room/scene APIs the bridge uses are unchanged. Caveats: young (no tagged releases, GitHub issues off, author on hiatus); keep option B as the fallback. |
 | [Ghasty_001's animated sprites](https://eeveeexpo.com/resources/1774/) ([GitHub](https://github.com/Ghasty001/Animated_sprites_by_Ghasty001)) | Hand-picked species as **GIFs**, free with credit. | ✅ after converting each GIF to a horizontal strip (EzGif "stack horizontally" or Aseprite). |
 | [EBS Gen 6 + Gen 7 animated sprites](https://eeveeexpo.com/resources/291/) (Sturdy Ghost, 2019) | #650–807, "EBS-compatible png". | ⚠ EBS is EBDX's predecessor. The strip format is probably the same, but this is unverified. |
 | [Animated Pokemon System](https://eeveeexpo.com/resources/1544/) (Lucidious89) v1.1.3 | Animated Gen 1–9 sheets, shinies, icons. | ❌ as a plugin (it's a **DBK add-on**). Its sprite sheets may be reusable as EBDX strips, but the sheet layout isn't confirmed. |
@@ -32,7 +32,7 @@
 | **Bundled EBDX coded animations** | 386 move + 34 common animations in `[002] Animation Code`. | ✅ |
 | [EBDX move & common animation pack](https://eeveeexpo.com/resources/1230/) (NikDie) v1.0.0, Dec 2024 | About 95% of the PBS move list plus Shadow moves. Merge its Graphics/Audio/Plugins folders; back up custom animations first, since it overwrites. | ✅ Made for EBDX. The port page credits NikDie and reports it works well. |
 | [Ball Burst animations](https://eeveeexpo.com/resources/909/) (lichen) | Burst effects for newer Poké Balls. | ⚠ Referenced by the Renovation Project; not checked against 1.4.7.1. |
-| [EBDX Stat Change Overlay](https://eeveeexpo.com/resources/941/) | Stat-change overlay. | ⚠ The Renovation Project "restored compatibility", which suggests the plain port needs a patch. |
+| [EBDX Stat Change Overlay](https://eeveeexpo.com/resources/941/) | Stat-change overlay. | ✅ Bundled in option A (as `EBDX Stat Boost Overlay` 1.3). ⚠ With option B it likely needs a patch. |
 | Vanilla animation editor fallbacks | EBDX Config: `CUSTOM_MOVE_ANIM = true` uses Essentials' editor animations for moves without coded ones. | ✅ |
 
 ## 3. BW-style UI
@@ -86,7 +86,7 @@ Essentials plays `.ogg` (with loop points), `.mid` and `.wav`.
 | [Modular UI Scenes](https://eeveeexpo.com/resources/1325/) / [Enhanced Pokemon UI](https://eeveeexpo.com/resources/1387/) (Lucidious89) | 2.0.9 / 1.0.6 | ⚠ | Not DBK add-ons; they touch Summary/Party/Storage screens only. Untested with EBDX. |
 | [Deluxe Battle Kit](https://eeveeexpo.com/resources/1470/) (Lucidious89) and **every DBK add-on** (Animated Pokemon System, Enhanced Battle UI, Terastallization, Dynamax, Z-Power, Raid Battles, Wonder Launcher...) | — | ❌ | The author: *"I specifically made this plugin incompatible with EBDX"* ([thread](https://eeveeexpo.com/threads/7778/page-2)). Our Field Effects plugin, EBDX's boss-battle module and its scripted battles cover the same ground. |
 | ZUD (Z-Moves/Dynamax) | — | ❌ | The EBDX port's page says it never will be compatible. |
-| [Open-Source EBDX Renovation Project](https://eeveeexpo.com/resources/1831/) | 4.0 | ⚠ | A replacement for our EBDX, not an add-on (see §1). |
+| [Open-Source EBDX Renovation Project](https://eeveeexpo.com/resources/1831/) | 4.0 | ✅ | Recommended base project. It replaces Manurocker95's 1.4.7.1 rather than being an add-on. Bridge and Core were checked against its code. DBK still incompatible (author). |
 
 **Built into EBDX already** (check these before writing our own):
 - Boss battles (`Battle Mechanics/Boss Battles.rb` + `Boss Immunities.rb`, configured in `PBS/EBDX/rules.txt`).

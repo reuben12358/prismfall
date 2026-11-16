@@ -8614,7 +8614,7 @@
    "id": 544,
    "name": "Brinecut Mine 1F",
    "act": 1,
-   "kingdom": "Elowen",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "dungeon",
    "size": [
     40,
@@ -8736,7 +8736,7 @@
    "id": 545,
    "name": "Brinecut Mine B1F",
    "act": 1,
-   "kingdom": "Elowen",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "dungeon",
    "size": [
     34,
@@ -8894,7 +8894,8 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 547,
@@ -8940,7 +8941,8 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 548,
@@ -10452,7 +10454,8 @@
    ],
    "key_features": [
     "Unown ruins set piece; Spiritomb static (Odd Keystone)"
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 628,
@@ -10608,7 +10611,8 @@
    ],
    "key_features": [
     "optional island via Surf; tropical"
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 660,
@@ -11812,7 +11816,8 @@
    ],
    "key_features": [
     "drowned capital beneath Underveil"
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 825,
@@ -11854,7 +11859,8 @@
    ],
    "key_features": [
     "Voss throne-room scene"
-   ]
+   ],
+   "wild_theme_exempt": true
   },
   {
    "id": 828,
@@ -12002,7 +12008,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
-   "bleed_of": "Underveil Dark Imprint"
+   "bleed_of": "Underveil Dark Imprint",
+   "wild_theme_exempt": true
   },
   {
    "id": 860,

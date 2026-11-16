@@ -25,6 +25,7 @@ def maps_for(tsid):
 def learn(tsid, ids, period, layer=0, phase_of=None):
     ids = set(ids)
     table = defaultdict(Counter)
+    inner = defaultdict(Counter)     # key of a class cell -> (layer, tile) on layers 1/2 (0 = none)
     overlay = defaultdict(Counter)   # key=(x%P,y%P,bits) of a NON-class cell -> (layer, tile) of layers 1/2
     phase = defaultdict(Counter)
     for mid, m in maps_for(tsid):
@@ -49,13 +50,15 @@ def learn(tsid, ids, period, layer=0, phase_of=None):
                     px, py = x % period, y % period
                 if t in ids:
                     table[(px, py, bits)][t] += 1
+                    for z in (1, 2):
+                        inner[(px, py, bits)][(z, int(d[z, y, x]))] += 1
                     phase[t][(x % period, y % period)] += 1
                 elif bits:
                     for z in (1, 2):
                         u = int(d[z, y, x])
                         if u:
                             overlay[(px, py, bits)][(z, u)] += 1
-    return table, overlay, phase
+    return table, overlay, phase, inner
 
 
 def main():
@@ -68,13 +71,14 @@ def main():
         phase_of = {808: (0, 0), 809: (1, 0), 810: (0, 0), 811: (1, 0), 800: (0, 1), 801: (1, 1), 802: (0, 1),
                     803: (1, 1), 818: (0, 1), 819: (1, 1), 816: (0, 1), 817: (1, 1)}
         ids = [i for i in ids if i in phase_of]
-    table, overlay, phase = learn(tsid, ids, period, phase_of=phase_of)
+    table, overlay, phase, inner = learn(tsid, ids, period, phase_of=phase_of)
     if '--phase' in a:
         for t, c in sorted(phase.items()):
             print(t, dict(c))
     print('%s: %d keys' % (name, len(table)))
     out = {'name': name, 'period': period, 'ids': sorted(ids),
            'table': {'%d,%d,%d' % k: dict(v.most_common()) for k, v in table.items()},
+           'inner': {'%d,%d,%d' % k: {'%d:%d' % zt: n for zt, n in v.most_common()} for k, v in inner.items()},
            'overlay': {'%d,%d,%d' % k: {'%d:%d' % zt: n for zt, n in v.most_common()} for k, v in overlay.items()}}
     if '--out' in a:
         json.dump(out, open(a[a.index('--out') + 1], 'w'), indent=0)

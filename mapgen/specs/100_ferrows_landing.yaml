@@ -1,0 +1,68 @@
+# Ferrow's Landing (map 100) - starting village, south-coast ferry dock of the Elowen (Sylvan) forest kingdom.
+# Source: design/maps.json id 100 + WORLD.md section 7. Glyph legend: palettes/outside.yaml.
+id: 100
+name: Ferrow's Landing
+palette: outside
+bgm: Lappet Town
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 26], BattleBack: field}
+connections:
+  - {dir: N, offset: 17, to: 520, to_offset: 10}
+map: |
+  TTTTTTTTTTTTTTTT...::::.TTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTTTTT...::::.TTTTTTTTTTTTTTTT
+  TTTTTT....::::::::::::::::::::....TTTTTT
+  TTTTTT....::::::::::::::::::::....TTTTTT
+  TTTTTT....::....#######.....::....TTTTTT
+  TTTTTT....::....#######.....::....TTTTTT
+  TT........::****#######.***.::........TT
+  TT........::****#######.***.::........TT
+  TT........::....#######.....::........TT
+  TT........::::::::::::::::::::........TT
+  TTTT......::::::::::::::::::::....TT..TT
+  TTTT..#####........::::...........TT..TT
+  TT....#####........::::...####........TT
+  TT....#####........::::...####........TT
+  TT....#####........::::...####........TT
+  TT....#####........::::...####...#####TT
+  TT..:::::::::::::::::::::::::::::#####TT
+  TT..:::::::::::::::::::::::::::::#####TT
+  TT...#####..#######::::...#####::#####TT
+  TT**.#####..#######::::...#####::#####TT
+  TT**.#####..#######::::...#####::::::.TT
+  TT**.#####..#######::::...#####::::::.TT
+  TT**.#####________________#####_______..
+  TT____________________________________..
+  ~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~=======~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~=======~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stamps:
+  - {stamp: lab,        at: [16, 4],  link: FL_LAB,     name: Lab door}
+  - {stamp: pokecenter, at: [6, 11],  link: FL_PC,      name: Poke Center door}
+  - {stamp: mart,       at: [26, 12], link: FL_MART,    name: Mart door}
+  - {stamp: house_red,  at: [5, 18],  link: FL_INN,     name: Inn door}
+  - {stamp: institute,  at: [12, 18], link: FL_CUSTOMS, name: Customs door}
+  - {stamp: house_red2, at: [26, 18], link: FL_DOCK,    name: Dockmaster door}
+  - {stamp: condo,      at: [33, 15], link: FL_LIGHT,   name: Lighthouse door}
+  - {stamp: mailbox,    at: [4, 21]}
+  - {stamp: mailbox,    at: [25, 21]}
+events:
+  - {type: sign, at: [18, 2], text: "Ferrow's Landing\nLast harbour of the Elowen Crown."}
+  - {type: sign, at: [11, 15], post: false, name: PC sign, text: "Pok\u00e9mon Center\nHeal your Pok\u00e9mon here."}
+  - {type: npc, name: Scanner tech, at: [16, 23], sprite: trainer_SCIENTIST, dir: down,
+     text: "[TODO story] Next! Step up to the scanner, please... Huh. It reads NULL again."}
+  - {type: npc, name: Fisherman, at: [21, 27], sprite: trainer_FISHERMAN, dir: left,
+     text: "[TODO story] The ferry won't sail again till the quarantine lifts. Fish don't care, though."}
+  - {type: npc, name: Villager, at: [13, 13], sprite: NPC 03, move: random,
+     text: "[TODO story] They say the whole south coast is under quarantine now. Something about the Bleed."}
+  - {type: npc, name: Child, at: [24, 11], sprite: NPC 07, move: random,
+     text: "[TODO story] My cousin says a forest up north turned into glass overnight!"}
+  - {type: item, at: [3, 12], item: POTION}
+  - {type: item, at: [37, 10], item: POKEBALL, hidden: true}
+  - {type: npc, name: Sailor, at: [19, 29], sprite: trainer_SAILOR, dir: up,
+     text: "[TODO story] The Dovetail's moored here till the Accord says otherwise. Last ferry in, last ferry out."}

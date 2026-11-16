@@ -176,7 +176,7 @@ class PrismfallFestivalBracketScene
     ])
     # Entrant name boxes
     texts = []
-    fe::BRACKET.each_with_index do |id, slot|
+    fe.bracket.each_with_index do |id, slot|
       x = leaf_x(slot)
       y = leaf_top(slot)
       out = !fe.eliminated_in(id).nil?

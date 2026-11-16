@@ -27,25 +27,29 @@ module Prismfall
       :JUNO      => { :display => "Juno",      :trainer_type => :RIVAL_JUNO,       :name => "Juno",      :rival_battle => 4, :rating => 88, :level_hint => 88 },
       :KESTREL   => { :display => "Kestrel",   :trainer_type => :RIVAL_KESTREL,    :name => "Kestrel",   :rival_battle => 8, :rating => 93, :level_hint => 93 },
       :VALEN     => { :display => "Valen",     :trainer_type => :CHAMPION_VALEN,   :name => "Valen",     :version => 0,      :rating => 99, :level_hint => 96 },
-      # Wardens (NPC-only in the bracket; versions reserved, no trainer data needed
-      # unless :exhibition is turned on)
+      # Wardens (NPC-only in the bracket; version 50 reserved, no trainer data
+      # needed unless :exhibition is turned on)
       :KAITO     => { :display => "Kaito",     :trainer_type => :LEADER_KAITO,     :name => "Kaito",     :version => 50, :rating => 82 },
       :YSOLDE    => { :display => "Ysolde",    :trainer_type => :LEADER_YSOLDE,    :name => "Ysolde",    :version => 50, :rating => 83 },
       :NYX       => { :display => "Nyx",       :trainer_type => :LEADER_NYX,       :name => "Nyx",       :version => 50, :rating => 84 },
+      :ODESSA    => { :display => "Odessa",    :trainer_type => :LEADER_ODESSA,    :name => "Odessa",    :version => 50, :rating => 83 },
       :CELESTINE => { :display => "Celestine", :trainer_type => :LEADER_CELESTINE, :name => "Celestine", :version => 50, :rating => 85 },
       :SIGRUN    => { :display => "Sigrun",    :trainer_type => :LEADER_SIGRUN,    :name => "Sigrun",    :version => 50, :rating => 87 },
-      # Invited cameo champions from the sister fangames (SPINE Revision 2).
-      # PLACEHOLDERS until design/CAMEOS.md fixes the roster: replace each
-      # :trainer_type/:name/:display with the FESTIVAL_<NAME> ID and trainer
-      # name from that file. Keep the keys (:CAMEO_1..7) or rename them here
-      # AND in BRACKET / HEADLINE_CAMEO / SCRIPTED_WINNERS.
-      :CAMEO_1   => { :display => "Cameo 1", :trainer_type => :FESTIVAL_CAMEO_1, :name => "Cameo 1", :version => 0, :exhibition => true, :rating => 95, :level_hint => 90 },  # headline cameo (QF)
-      :CAMEO_2   => { :display => "Cameo 2", :trainer_type => :FESTIVAL_CAMEO_2, :name => "Cameo 2", :version => 0, :exhibition => true, :rating => 96 },
-      :CAMEO_3   => { :display => "Cameo 3", :trainer_type => :FESTIVAL_CAMEO_3, :name => "Cameo 3", :version => 0, :exhibition => true, :rating => 92 },
-      :CAMEO_4   => { :display => "Cameo 4", :trainer_type => :FESTIVAL_CAMEO_4, :name => "Cameo 4", :version => 0, :exhibition => true, :rating => 90 },
-      :CAMEO_5   => { :display => "Cameo 5", :trainer_type => :FESTIVAL_CAMEO_5, :name => "Cameo 5", :version => 0, :exhibition => true, :rating => 90 },
-      :CAMEO_6   => { :display => "Cameo 6", :trainer_type => :FESTIVAL_CAMEO_6, :name => "Cameo 6", :version => 0, :exhibition => true, :rating => 89 },
-      :CAMEO_7   => { :display => "Cameo 7", :trainer_type => :FESTIVAL_CAMEO_7, :name => "Cameo 7", :version => 0, :exhibition => true, :rating => 88 },
+      # Visiting champions (design/CAMEOS.md). Version scheme from CAMEOS.md:
+      # 1 = R16/exhibition (~90), 2 = QF (~92), 3 = SF/Final-tier draw (~94),
+      # 9 = post-game rematch. Draw candidates may override :version.
+      # :exhibition_after_out => only offered once eliminated from the bracket.
+      :LIN       => { :display => "Lin",       :trainer_type => :FESTIVAL_LIN,       :name => "Lin",       :version => 2, :rating => 97, :level_hint => 92 },  # headline (QF); post-game rematch only
+      :AMARIA    => { :display => "Amaria",    :trainer_type => :FESTIVAL_AMARIA,    :name => "Amaria",    :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 89 },
+      :SHELLY    => { :display => "Shelly",    :trainer_type => :FESTIVAL_SHELLY,    :name => "Shelly",    :version => 1, :exhibition => true, :exhibition_after_out => true, :exhibition_double => true, :rating => 90 },
+      :ALEXANDRA => { :display => "Alexandra", :trainer_type => :FESTIVAL_ALEXANDRA, :name => "Alexandra", :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 92 },
+      :VENAM     => { :display => "Venam",     :trainer_type => :FESTIVAL_VENAM,     :name => "Venam",     :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 90 },
+      :SHIV      => { :display => "Shiv",      :trainer_type => :FESTIVAL_SHIV,      :name => "Shiv",      :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 93 },
+      :GARRET    => { :display => "Garret",    :trainer_type => :FESTIVAL_GARRET,    :name => "Garret",    :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 89 },
+      # Extra draw candidates (not seeded; exhibition-only when not drawn)
+      :MELIA     => { :display => "Melia",     :trainer_type => :FESTIVAL_MELIA,     :name => "Melia",     :version => 1, :exhibition => true, :rating => 90 },
+      :TITANIA   => { :display => "Titania",   :trainer_type => :FESTIVAL_TITANIA,   :name => "Titania",   :version => 1, :exhibition => true, :rating => 90 },
+      :NOVA      => { :display => "Nova",      :trainer_type => :FESTIVAL_NOVA,      :name => "Nova",      :version => 3, :rating => 94 },   # Ruin Route only
       # Not a bracket entrant: the hijack
       :VOSS      => { :display => "Aurelian Voss",
                       :trainer_type => [:MERIDIAN_VOSS, :MERIDIAN_AURELIAN, :MERIDIAN_CEO],
@@ -53,38 +57,39 @@ module Prismfall
     }
 
     #---------------------------------------------------------------------------
-    # Seeding: 16 slots. Matches are (0,1) (2,3) ... ; quarters are 4 slots,
-    # halves 8 slots. The player's path is enforced by PLAYER_PATH below.
+    # Default seeding (CAMEOS.md "Default draw"): 16 slots, matches (0,1)
+    # (2,3)...; quarters are 4 slots, halves 8. The choice-driven draw
+    # (015_Festival_Draw.rb) can re-seat or replace the player's opponents.
     #---------------------------------------------------------------------------
     BRACKET = [
-      :PLAYER,  :JUNO,       # R16 m0  (player)
-      :CAMEO_1, :YSOLDE,     # R16 m1  -> headline cameo (locked: QF opponent)
-      :KESTREL, :CAMEO_7,    # R16 m2  -> Kestrel (locked: SF opponent)
-      :CAMEO_4, :KAITO,      # R16 m3
-      :VALEN,   :CELESTINE,  # R16 m4  -> Valen (locked: Final opponent)
-      :CAMEO_2, :CAMEO_5,    # R16 m5
-      :CAMEO_3, :NYX,        # R16 m6
-      :CAMEO_6, :SIGRUN      # R16 m7
+      :PLAYER,    :JUNO,       # R16 m0  (player)
+      :LIN,       :NYX,        # R16 m1  -> Lin (QF opponent)
+      :KESTREL,   :SHIV,       # R16 m2  -> Kestrel (SF opponent)
+      :GARRET,    :KAITO,      # R16 m3  -> Garret
+      :VALEN,     :ODESSA,     # R16 m4  -> Valen (Final opponent)
+      :ALEXANDRA, :CELESTINE,  # R16 m5  -> Alexandra
+      :SHELLY,    :VENAM,      # R16 m6  -> Venam
+      :AMARIA,    :SIGRUN      # R16 m7  -> Sigrun
     ]
 
-    # The quarterfinal opponent is "the headline cameo" (SPINE Revision 2).
-    HEADLINE_CAMEO = :CAMEO_1
-    # Opponent per bracket round (0 = R16 ... 3 = Final). LOCKED by SPINE.
+    # The quarterfinal opponent is "the headline cameo" (CAMEOS.md: Lin).
+    HEADLINE_CAMEO = :LIN
+    # Default opponent per bracket round (0 = R16 ... 3 = Final). Since
+    # Revision 3 this is the FALLBACK of the choice-driven draw.
     PLAYER_PATH = [:JUNO, HEADLINE_CAMEO, :KESTREL, :VALEN]
 
     ROUND_NAMES = ["Round of 16", "Quarterfinals", "Semifinals", "Final"]
 
     # Scripted winners of NPC-vs-NPC matches, keyed by [round, match index].
-    # Matches involving a PLAYER_PATH entrant are always won by that entrant
-    # (until they meet the player), so they don't need an entry here.
-    # Unscripted matches are simulated (SIMULATE_UNSCRIPTED) or go to the
-    # higher :rating.
+    # Matches involving a drawn path entrant are always won by that entrant
+    # (until they meet the player). Unscripted matches are simulated
+    # (SIMULATE_UNSCRIPTED) or go to the higher :rating.
     SCRIPTED_WINNERS = {
-      [0, 3] => :CAMEO_4,   # Cameo 4 vs Kaito
-      [0, 5] => :CAMEO_2,   # Cameo 2 vs Cameo 5
-      [0, 6] => :CAMEO_3,   # Cameo 3 vs Nyx
-      [0, 7] => :SIGRUN,    # Cameo 6 vs Sigrun  (a Warden upset)
-      [1, 3] => :SIGRUN     # Cameo 3 vs Sigrun  (Velmora's Dragon Warden reaches the semis)
+      [0, 3] => :GARRET,     # Garret vs Kaito
+      [0, 5] => :ALEXANDRA,  # Alexandra vs Celestine
+      [0, 6] => :VENAM,      # Shelly vs Venam
+      [0, 7] => :SIGRUN,     # Amaria vs Sigrun
+      [1, 3] => :SIGRUN      # Venam vs Sigrun
     }
     SIMULATE_UNSCRIPTED = true   # false = higher :rating always wins
     SIMULATION_SHARPNESS = 6     # higher = favourites win more often

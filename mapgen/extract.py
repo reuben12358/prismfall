@@ -29,6 +29,13 @@ def main():
         ground = GROUND.get(m.tileset_id, set())
         if not s.get('keep_ground'):
             lay[0][np.isin(lay[0], list(ground))] = 0
+            lay[0][lay[0] < 384] = 0          # autotiles (water etc.) belong to the terrain, not the stamp
+            for v in s.get('drop0', []):
+                lay[0][lay[0] == v] = 0
+            if s.get('drop0_all'):
+                lay[0][:] = 0
+            for v in s.get('drop1', []):
+                lay[1][lay[1] == v] = 0
         st = dict(tileset=m.tileset_id, w=w, h=h, layers=lay.tolist(), src=[s['map']] + s['rect'])
         if 'door' in s:
             dx, dy = s['door']
@@ -44,7 +51,16 @@ def main():
     os.makedirs(os.path.join(HERE, 'data', 'templates'), exist_ok=True)
     for name, t in (spec.get('templates') or {}).items():
         m = load_map(t['map'])
-        x, y, w, h = t.get('rect', [0, 0, m.width, m.height])
+        r = t.get('rect', 'auto')
+        if r == 'auto':
+            void = int(m.data.data[0, m.height - 1, m.width - 1])
+            occ = (m.data.data[0] != void) | (m.data.data[1] > 0) | (m.data.data[2] > 0)
+            for e in m.events.values():
+                occ[e.y, e.x] = True
+            nz = np.argwhere(occ)
+            (y0, x0), (y1, x1) = nz.min(axis=0), nz.max(axis=0)
+            r = [int(x0), int(y0), int(x1 - x0 + 1), int(y1 - y0 + 1)]
+        x, y, w, h = r
         lay = m.data.data[:, y:y + h, x:x + w].astype(int)
         evs = []
         for e in sorted(m.events.values(), key=lambda e: e.id):

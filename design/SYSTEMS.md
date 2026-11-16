@@ -24,11 +24,17 @@ battle or trainer-loading layer (never the battle scene), so it works with or wi
 | `NPCTrainer#skill_level` | AI skill floor per mode |
 | `PokemonPauseMenu#pbShowInfo` | pause-menu box: "Level cap: Lv. 23 / Mode: Standard" |
 | `PokemonTrainerCard_Scene#pbDrawTrainerCardFront` | 18-badge layout |
+| `pbCallTitle` | one-shot redirect to "load last save" after a story game over |
+| `Pokemon#calcIV`, `Pokemon#able?` | passwords: Perfect IVs, Monotype (only in battle, only for player-owned Pokémon) |
+| `Player#has_exp_all`, `PokemonBag#has?(:EXPALL)` | password: No Exp. All |
+| pause menu entry `:prismfall_ledger` | Ledger viewer |
 
 Custom events other plugins can listen to (`EventHandlers.add(event, :key, proc)`):
 `:prismfall_badge_awarded (n)`, `:prismfall_difficulty_changed (old, new)`, `:prismfall_festival_started`,
 `:prismfall_festival_before_battle (stage_id, opponent_id)`, `:prismfall_festival_result (stage_id, won)`,
-`:prismfall_festival_boss (pkmn, stage_id)` (non-EBDX boss path), `:prismfall_festival_finished (champion)`.
+`:prismfall_festival_boss (pkmn, stage_id)` (non-EBDX boss path), `:prismfall_festival_finished (champion)`,
+`:prismfall_festival_drawn (path)`, `:prismfall_narrative_changed (kind, id, old, new)`, `:prismfall_game_over (id, first)`,
+`:prismfall_ending (id, first)`, `:prismfall_ruin_route_started`, `:prismfall_password_enabled (id, value)`.
 
 ## 1. Gyms and badges
 `Prismfall::GYMS` mirrors SPINE: one Hash per gym with `:index, :type, :city, :warden, :trainer_name,
@@ -55,7 +61,7 @@ Art to draw (none of it is required, there are code fallbacks):
 ## 2. Level caps
 Cap = `:cap` of the **first gym whose badge isn't owned**: 15 before Badge 1, ... , 85 before Badge 18.
 With all 18 badges the cap is 90; it becomes 100 after `Prismfall::LevelCap.unlock_finale!`. The Festival
-calls that for the finale stages (Hijack and Arceus); see the question at the end of this file.
+calls that for the finale stages; earlier rounds raise the cap through an override (QF 92, SF 94, Final 96).
 - Battle Exp stops at the cap, and a single gain can't push a Pokémon past it. EVs are still gained.
   "X is at the level cap" is shown once per battle per Pokémon.
 - Rare Candy and EXP Candy are refused at the cap, and the "how many?" maximum stops at the cap.
@@ -118,20 +124,37 @@ Script: pbMessage(_INTL("Kestrel picked {1}!", GameData::Species.get(Prismfall::
 ```
 
 ## 5. Festival of Champions
-Data lives in `008_Festival_Data.rb`. There are 16 bracket slots (`BRACKET`); `PLAYER_PATH = [:JUNO, HEADLINE_CAMEO, :KESTREL, :VALEN]` is locked.
-Entrants on that path always win their NPC matches until they meet the player. The other NPC matches use
-`SCRIPTED_WINNERS[[round, match]]`; anything left over is simulated from `:rating` with a per-save seed, so results are
-stable across reloads. `Festival.validate` (run on start in debug) checks that the seeding allows the path.
+Data lives in `008_Festival_Data.rb` (entrants, default seeding, rule sets, stages) and `015_Festival_Draw.rb`
+(choice-driven draw). The roster comes from `design/CAMEOS.md`: Lin is the headline/QF cameo, plus Amaria, Shelly,
+Alexandra, Venam, Shiv and Garret. Melia, Titania and Nova are draw-only extras. The bracket Wardens are Nyx, Kaito,
+Odessa, Celestine and Sigrun; they're NPC-only, with version 50 reserved. The default seeding is CAMEOS.md's
+"Default draw" table. Cameo versions follow CAMEOS.md: 1 = R16/exhibition, 2 = QF, 3 = SF/Final-tier.
+`PLAYER_PATH = [:JUNO, :LIN, :KESTREL, :VALEN]` is now only the **fallback**, see 5a. The player's drawn opponents
+always win their NPC matches until they meet the player. The other NPC matches use `SCRIPTED_WINNERS[[round, match]]`;
+anything left over is simulated from `:rating` with a per-save seed, so results are stable across reloads.
 
-**Cameos (SPINE Revision 2):** the 7 invitees are placeholders `:CAMEO_1..7` → `FESTIVAL_CAMEO_1..7`, trainer names
-"Cameo N". When `design/CAMEOS.md` lands, edit `:trainer_type`, `:name` and `:display` in `ENTRANTS` (keys can stay).
-`HEADLINE_CAMEO` (currently `:CAMEO_1`) is the quarterfinal opponent. The Wardens in the bracket (Kaito, Ysolde, Nyx,
-Celestine, Sigrun) are NPC-only, so no trainer data is needed for them (version 50 is reserved if they ever get exhibitions).
+Stages and caps (per-round rule sets): R16 90, QF 92, SF 94, Final 96, Hijack 100, True Finale 100. The QF-to-Final rule
+sets set a cap override; the 100 rule set unlocks the finale cap. Every rule set means: no Bag, canLose (retry), heal
+before and after, no prize money. Exhibitions are offered for flagged entrants who are no longer alive in the bracket
+(Shelly's is a double battle).
 
-Stages: R16 (Juno J4, rival-versioned 40+slot), QF (headline cameo), SF (Kestrel K8, 80+slot), Final (CHAMPION_VALEN v0),
-Hijack (`MERIDIAN_VOSS "Aurelian"` v0 on `:PRISM_ARENA`), True finale (wild Arceus Lv100 boss on `:PRISM_ARENA`).
-Rule sets (`RULESETS`): bracket = level limit 90 / no Bag / canLose (retry) / heal before+after / no prize money;
-finale = the same with 100 (this unlocks the 100 cap); exhibition = like the bracket.
+### 5a. Choice-driven draw (Revision 3)
+`DRAWS[stage_id]` is an ordered list of `{ :opponent, :condition, :version }`. The first candidate whose condition holds
+wins; the stage default is always appended last as the fallback. Bracket stages (R16 to Final) are drawn when
+`Festival.start` runs. The drawn opponent is seated in the player's block: if it's already seeded it swaps seats with the
+default, otherwise it replaces the default, which leaves the bracket. Hijack is drawn live and fixed when its battle starts.
+A variant is just another entrant with the same `:person`, e.g. `:KESTREL_FALLEN` = RIVAL_KESTREL with `:rival_battle => 9`,
+which loads versions 90/91/92. Validation runs at load (console warning) and on `Festival.start` in debug (raises). It checks
+that every candidate exists, every condition parses, every stage has a fallback, and no person is a candidate in two stages,
+so a run can never draw anyone twice.
+```ruby
+DRAWS[:SF] = [
+  { :opponent => :KESTREL_FALLEN, :condition => "bond(:KESTREL) <= -4 || choice(:kestrel_truth) == :betrayed" },
+  { :opponent => :TITANIA, :condition => "choice(:kestrel_truth) == :told && bond(:KESTREL) >= 6", :version => 3 }
+]   # fallback: :KESTREL
+```
+Sample draw entrants that need trainer data: `LEADER_ROWAN "Rowan" v50`, `CHAMPION_SUCCESSOR "Successor" v0`,
+`HOLLOW_MOURNER "Mourner" v0`, Kestrel v90-92, Melia v1, Titania v3, Nova v2. All of these are placeholders until NARRATIVE_KEYS.md arrives.
 
 ```
 # Reception desk (after Badge 18):
@@ -142,7 +165,7 @@ Conditional Branch > Script: Prismfall::Festival.next_match
    (won)  -> cutscene for the stage; branch on Prismfall::Festival.stage_id (:QF, :SF, :FINAL, :HIJACK, :ARCEUS, nil=finished)
    (else) -> "Try again?" loop; the stage doesn't advance
 # Exhibition hall NPC:
-Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:CAMEO_3)
+Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:SHIV)
 # Custom battle staged by the event (e.g. a scripted double):
 Script: Prismfall::Festival.record_result(true)
 Conditional Branch > Script: Prismfall::Festival.finished?
@@ -183,10 +206,107 @@ Script: EliteBattle.bossBattle(:GIRATINA, 60, 1, false, { :bossboost => { :HP =>
 (Set `setBattleRule("field", :INVERSE)` or `setBattleRule("canLose")` first if needed. EBDX's wild boss path runs `prepare_battle`, so Core's and Field Effects' rules still apply.)
 
 ## 7. Debug
-Debug menu → **Prismfall Core...**: status and data check, set difficulty, set starter, cap override / finale cap / caps on-off,
-Festival tools (start, reset, skip to stage, bracket, next match, exhibitions). The separate *Prismfall Debug Tools* plugin covers fields, Wardens and badge count.
+Debug menu → **Prismfall Core...** covers:
+- status and data check
+- set difficulty, set starter
+- cap override, finale cap, caps on/off
+- Festival tools: start, reset, skip to stage, bracket, next match, exhibitions
+- **Narrative tools**: edit bond/standing/resonance, make a choice, test a condition string, show the determined ending, trigger an ending, force the password prompt, redraw the bracket
+- **Ledger tools**: view, mark all found, clear, test any game over The separate *Prismfall Debug Tools* plugin covers fields, Wardens and badge count.
+
+## 8. Narrative state (Bonds / Standing / Resonance / Choices)
+Data tables are in `012_Narrative_Data.rb`. They're SAMPLE keys until `design/NARRATIVE_KEYS.md` exists; then transcribe them there.
+State is saved in `Prismfall.state.narrative` (save file, not switches). Unregistered keys still work, with a console warning in debug.
+- **Bonds** `BONDS` (default range -10..10, per-character `:start`), tiers `BOND_TIERS` (:hostile, :wary, :neutral, :friendly, :close, :devoted).
+- **Standing** `FACTIONS` (:HOLLOW, :MERIDIAN, :ACCORD), tiers `STANDING_TIERS`.
+- **Resonance** is one integer from -10 (Ruin) to +10 (Harmony). Bands: :ruin, :ruin_leaning, :balanced, :harmony_leaning, :harmony.
+- **Choices** `CHOICES[key] = { :values, :once }`. Every decision is logged with play time and map ID. `:once` choices can't be changed.
+```
+Script: pf_bond_add(:JUNO, 1)              # quiet
+Script: pf_bond_add(:KESTREL, -2, true)    # with "Kestrel will remember that."
+Script: pf_standing_add(:HOLLOW, 1)
+Script: pf_resonance_add(-1)               # toward Ruin (+ = Harmony)
+Script: pf_choose(:mourner_fate, :spare)
+Conditional Branch > Script: pf_choice(:mourner_fate) == :spare
+Conditional Branch > Script: pf_bond(:JUNO) >= 3
+Conditional Branch > Script: pf_cond("bond(:JUNO) >= 3 && standing(:ACCORD) > 0")
+```
+In Ruby: `Prismfall::Bonds.get/set/add/tier`, `Prismfall::Standing.*`, `Prismfall::Resonance.value/shift/band`,
+`Prismfall::Choices.get/make/made?/log`. Every change fires `:prismfall_narrative_changed (kind, id, old, new)`.
+
+## 9. Condition strings (safe subset, no eval)
+These are used by draws and ending rules, and are available to any data table through `Prismfall.cond(str)` / `pf_cond(str)`.
+Operators: `&& || !` (or `and or not`), `== != >= <= > <`, `+ -`, and parentheses. Literals: integers, `:symbols`,
+`"strings"`, `true false nil`. Only these functions exist:
+`bond(:ID) bond_tier(:ID) standing(:F) standing_tier(:F) resonance resonance_band choice(:K) made(:K) chose(:K, :V)
+badges has_badge(N) difficulty level_cap starter_slot starter_gen password(:ID) gameover_found(:ID) gameovers_found
+ending_seen(:ID) ruin_unlocked ruin_route festival_stage eliminated(:ID) switch(N) var(N)` (switches and variables are read-only).
+`nil` counts as 0 in arithmetic and `< >` comparisons. Use `Prismfall::Conditions.check(str)` → `[ok, error]` to validate.
+To add a function, add a line to `Conditions::FUNCTIONS`.
+
+## 10. Story game overs + checkpoints
+`GAME_OVERS[id] = { :title, :epitaph, :hint, :me, :ruin_exempt }` (12 samples).
+`Prismfall.game_over(:GO_X)` does the following:
+1. Records the ID in the Ledger.
+2. Fades BGM/BGS.
+3. Shows a code-drawn dark screen: "GAME OVER", the red title, the epitaph and the Ledger progress.
+4. Offers **Load last save** (only if a save exists) or **Return to title**.
+5. Ends the event and leaves the map through the vanilla return-to-title flag. *Load last save* redirects that one title call to a scene that loads Game.rxdata.
+
+Call it from map or common events, not from inside a battle. `Prismfall.checkpoint` saves like the Save menu, so place it
+**before** a risky scene's trigger, not inside an autorun that would re-run on load.
+```
+Script: Prismfall.checkpoint
+...
+Text: (the player chooses to follow the Hollow into the pyre)
+Script: Prismfall.game_over(:GO_HOLLOW_PYRE)
+# Battle-loss game over:
+Script: setBattleRule("canLose")
+Conditional Branch > Script: !Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6)
+   Script: Prismfall.game_over(:GO_VANES_FALL)
+```
+
+## 11. Ledger (cross-save)
+The Ledger is a text file next to the save, `Prismfall_Ledger.txt` in `System.data_directory`. It holds the game overs
+found and endings seen, and survives new games. **Ruin Route unlocked** = every registered game over (minus `:ruin_exempt`) found.
+View it with `Prismfall::Ledger.show` or from the pause-menu "Ledger" entry, which appears once anything is recorded. Unfound
+entries show as "???"; set `LEDGER_SHOW_HINTS` to show the `:hint` text instead.
+```
+Conditional Branch > Script: Prismfall::Ledger.ruin_unlocked?
+   Script: Prismfall.start_ruin_route        # sets this save's Ruin Route flag (condition: ruin_route)
+```
+
+## 12. Endings
+`ENDINGS[id] = { :name, :kind (:good/:bad/:grey/:ruin), :common_event, :credits }`. `ENDING_RULES` is an ordered list of
+`[id, condition]` with `DEFAULT_ENDING` as the fallback. There are 7 samples: 1 good, 1 bad, 4 grey, 1 ruin.
+`Prismfall.trigger_ending(:END_X)` does the following:
+1. With no ID, it uses `Prismfall::Endings.determine`.
+2. Records the ending in the Ledger.
+3. Sets this save's post-game state (`narrative[:ending]`, `[:endings]`, `[:postgame]`) and unlocks the cap.
+4. Fires `:prismfall_ending (id, first_time)` and the optional `Endings::HOOK` proc.
+5. Runs the ending's common event, then the credits if `:credits` is set. After the credits the map returns and the calling event continues.
+```
+Script: pf_choose(:final_decision, :restore)
+Script: Prismfall.trigger_ending            # determined from the rules
+Script: pbMessage("...epilogue text after the credits...")
+Conditional Branch > Script: Prismfall::Endings.postgame?
+```
+
+## 13. New-game passwords
+`Prismfall::Passwords.prompt` asks "Would you like to enter a password?", then takes passwords until a blank entry. It then
+closes, because passwords are new-game only. Put it in the intro right after `Prismfall.choose_difficulty`, or before it:
+the Hard Lock password restricts the choice to Hard. The table is `Passwords::TABLE`; add a row to add a password.
+
+| Word | ID | Effect |
+|---|---|---|
+| `nocap` | :NO_LEVEL_CAPS | caps disabled for the save |
+| `fullivs` | :FULL_IVS | player-owned Pokémon calculate stats with 31 in every IV |
+| `noexpall` | :EXP_ALL_OFF | `has_exp_all` and the Exp. All item read as off |
+| `monotype` | :MONOTYPE | asks for a type; Pokémon without it can't battle (they count as fainted in battle) |
+| `hardonly` | :HARD_LOCK | sets Hard; difficulty menus only offer Hard |
+| `litemode` | :LITEMODE | overrides: Exp ×2, no disobedience, AI skill ≤ 32 |
+Passwords that change tunables do it through `:overrides`, which `Prismfall::Difficulty.setting` checks first.
+Conditions can test them with `password(:MONOTYPE)`.
 
 ## Open questions (need the user)
-1. **Festival "finale" cap:** SPINE says "90 during the bracket, 100 for the finale". Core currently raises the cap to 100 at
-   the Hijack (after the Final), so the Final vs Valen (~96) is fought at cap 90. If "finale" means the Final itself, set the Final's `:ruleset` to `:finale`.
-2. **Hard mode Bag lock:** this also blocks Poké Balls and items in *trainer* battles only; wild battles stay open. Is that right?
+1. **Hard mode Bag lock:** this also blocks Poké Balls and items in *trainer* battles only; wild battles stay open. Is that right?

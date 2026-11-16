@@ -1,0 +1,11 @@
+# id<TAB>parent_id<TAB>name   (consumed by mapgen/merge_mapinfos.py and the Prismfall Map Installer plugin)
+100	0	Ferrow's Landing
+101	100	Ferrow's Landing Pokémon Center
+102	100	Ferrow's Landing Mart
+103	100	Larch Research Station
+104	100	Tidewater Inn
+105	100	Ferrow Lighthouse 1F
+106	105	Ferrow Lighthouse Lamp Room
+107	100	Dockmaster's House
+108	100	Quarantine Customs Hall
+990	0	Prismfall Test Arena

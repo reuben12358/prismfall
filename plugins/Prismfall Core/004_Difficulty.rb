@@ -21,7 +21,12 @@ module Prismfall
       return DIFFICULTIES[mode || current] || DIFFICULTIES[DIFFICULTY_DEFAULT]
     end
 
+    # Active passwords (020_Passwords.rb) may override a tunable, e.g. Lite Mode.
     def setting(key, mode = nil)
+      if mode.nil? && defined?(Prismfall::Passwords)
+        ov = Prismfall::Passwords.override(key)
+        return ov if !ov.nil?
+      end
       return data(mode)[key]
     end
 
@@ -67,7 +72,11 @@ module Prismfall
     # nil if cancelled (only possible when cancelable is true).
     # Event usage (intro): Script: Prismfall.choose_difficulty
     def choose(cancelable: false, message: nil, modes: nil)
-      modes ||= DIFFICULTY_ORDER
+      modes = (respond_to?(:allowed_modes)) ? allowed_modes(modes || DIFFICULTY_ORDER) : (modes || DIFFICULTY_ORDER)
+      if modes.length == 1
+        set(modes[0])
+        return modes[0]
+      end
       commands = modes.map { |m| _INTL(DIFFICULTIES[m][:name]) }
       helps    = modes.map { |m| _INTL(DIFFICULTIES[m][:description]) }
       default  = modes.index(current) || 0
@@ -96,6 +105,7 @@ module Prismfall
       else
         modes = DIFFICULTY_ORDER.clone
       end
+      modes = allowed_modes(modes) if respond_to?(:allowed_modes)
       if modes.length <= 1
         pbMessage(_INTL("There's no other difficulty to switch to."))
         return nil

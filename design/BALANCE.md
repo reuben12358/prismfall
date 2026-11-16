@@ -234,11 +234,12 @@ telegraph, not one wall. Kestrel (tag partner in the hijack per cast) does **not
 ## Intentional non-learnable moves (validator allowlist)
 
 Rows here are read by `tools/validate_trainers.py`: `| TYPE,Name,Version | SPECIES | MOVE or ABILITY | reason |`.
-Currently none are needed — every set is legal (Rotom's appliance moves are granted by its form handler and special-cased
-in the validator).
+Version `*` = every version of that trainer. Rotom's appliance moves are granted by its form handler and are special-cased
+in the validator, so they need no row.
 
 | Trainer | Species | Move | Reason |
 |---|---|---|---|
+| FESTIVAL_LIN,Lin,* | TOGEKISS | OBLIVIONWING | Lin's Reborn signature: a Togekiss with an illegal move (CAMEOS.md). Casual swaps it for Air Slash. |
 
 ## Status of Festival choice-variant teams and cameos
 

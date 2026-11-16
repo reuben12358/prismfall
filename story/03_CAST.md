@@ -305,7 +305,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Motivation:** See the Hymn fulfilled before she dies.
 - **Secret:** She keeps the **Hymn of Return**, the Accord's original liturgy, suppressed since AF 140. It says the Plates must go home when "one of no color walks the eighteen roads".
 - **Plot role:** Gym 17 and K7. Gives the PC the Hymn.
-- **Legendary:** Gloaming's Great Tree is **Xerneas** asleep, dreaming the Pixie Plate's dusk. Celestine is its gardener.
+- **Legendary tie:** Gloaming's Great Tree holds the Pixie Plate in its roots. The Ogre's masks in Elowen's folklore (Ogerpon) were carved from its fallen bark. Celestine is the one person who has always told the true version of the Ogre story, in rhyme, to anyone who'd listen.
 - **Arc:** At the Festival she is an entrant (R16 vs Alexandra, see CAMEOS.md). In the finale she sings the Hymn as the chains break. In Homecoming, her dusk ends with her Imprint. She sees her first full night sky in sixty years and ages gracefully in the epilogue.
 - **Ace:** **Togekiss** (it appears where there is peace, so it's waiting for one); also **Mimikyu**, **Sylveon**, **Alcremie**.
 
@@ -346,7 +346,7 @@ The Wardens answer to the Accord, but their cities sit inside kingdoms whose rul
 - **Dominar Hrothgar Ashfall of Ashkaar** (64): Dragon-Lord and Sigrun's father. A warlord-king who believes "dragons bow to no Accord." He threatens war on Zenith after the Cindervault caldera crisis (Ch8) and masses legions at Wyrmrest in Act V. He can be swayed (`DOMINAR_SWAYED`) to fly for Crownhaven instead of against Zenith.
 - **Prince-Elector Idris Kassan of Ossaria** (45): elected for life by the caravan houses. Charming and venal, he sells Meridian drilling and mining rights (Duneholt's aquifer, Cragholm's seams) and pays the Bone Sands' fossil-hunters to look the other way.
 - **The Zenith Council**: Zenith's governing council of founding houses, chaired by **Voss**. Notables include **Councillor Renata Sallow** (old-money airship house, Voss's rival, who becomes a reluctant ally in Act IV) and **Magnus Strade** (Cogsworth).
-- **The Sump Barons of Nadir**: the chem-lords and pit-bosses who actually run the City Below, chief among them **Mother Gutter** (an ancient sludge-baron with a Muk the size of a cart). They pay tithes to Nyx, hate Zenith, and are the Hollow's best recruiters' best customers.
+- **The Sump Barons of Nadir**: the chem-lords and pit-bosses who actually run the City Below, chief among them **Mother Gutter** (an ancient sludge-baron with a Muk the size of a cart). They pay tithes to Nyx and hate Zenith. They are also the Hollow's most reliable source of recruits and money.
 - **Envoy Delphine Okoro of the Concert of Regions**: the neighboring realms across the strait. She attends the Festival to decide whether the quarantine lifts or becomes **Severance**, meaning permanent abandonment. She can be persuaded (`ENVOY_PERSUADED`), which affects the epilogue's international outcome.
 - **Chancellor Ambrose Hollis**: see above. He is the hinge between the kingdoms' grievances and Meridian's money.
 - **Vesper Lindqvist** (24): leader of **the Eevee Octave**, eight Glassfall orphans raised by the Prism Choir, each beside a different Imprint. She runs the Festival-week Eeveelution gauntlet. Gentle and devout, and a little in love with the idea of the Festival.

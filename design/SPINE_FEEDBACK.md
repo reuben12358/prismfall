@@ -18,3 +18,8 @@
 2. **Aurelia location.** Revision 2 put the Undercity/Nadir beneath Lumen (north-central). WORLD.md therefore places drowned Aurelia under Underveil on the **north** coast below Zenith's cliffs. 00_OVERVIEW says the Fault drains the **south** coast. Story team: please pick one (World is easy to flip).
 3. **Rock Climb** has no `Settings::BADGE_FOR_*` constant or field handler in v21. Core needs to add `BADGE_FOR_ROCKCLIMB = 10` plus a cliff-event helper (WORLD.md §4).
 4. **Boss battles:** see the Tech lead's note #3. GYM_PUZZLES marks Ilsa/Celestine "multi-bar boss style (Hard)". That needs Core's custom multi-bar code.
+- Update (tech lead, 2026-11-15): evaluated the Renovation fork (cloned to /home/claude/ref/ebdx_renovation, commit 452d27ca).
+  Plugin Name still `Elite Battle: DX` (v4.0, Essentials 21.1); bridge and Core hooks are API-compatible. SETUP.md now
+  recommends it (option A), with Manurocker95's repo as the fallback (option B). Its Gen 9 Pack is 3.3.8 (ours: 3.2.5):
+  validators currently target /home/claude/ref/ebdx/PBS; consider re-validating trainers/encounters against
+  /home/claude/ref/ebdx_renovation/PBS.

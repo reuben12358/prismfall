@@ -311,3 +311,83 @@ SkillLevel = 100
 BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
 # --- Festival of Champions cameo champions: FESTIVAL_<NAME> from design/CAMEOS.md (appended below when it lands) ---
+#-------------------------------
+[FESTIVAL_LIN]
+Name = Champion
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_AMARIA]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_SHELLY]
+Name = Champion
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_ALEXANDRA]
+Name = Acting Champion
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_VENAM]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_SHIV]
+Name = Champion
+Gender = Male
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_GARRET]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_MELIA]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_TITANIA]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[FESTIVAL_NOVA]
+Name = Team Crescent
+Gender = Mixed
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader

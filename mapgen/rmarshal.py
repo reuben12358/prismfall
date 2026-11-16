@@ -28,6 +28,11 @@ class RBytes(bytes):
     """A Ruby String that is not valid UTF-8 (kept as raw bytes)."""
 
 
+class PStr(str):
+    """A Ruby String that was stored WITHOUT an encoding ivar (RMXP / Ruby 1.8 style); written back the same way."""
+    __slots__ = ()
+
+
 class RObject:
     __slots__ = ('cls', 'ivars')
 
@@ -194,7 +199,9 @@ class Reader:
         if t == ':': self.p -= 1; return self.symbol()
         if t == ';': self.p -= 1; return self.symbol()
         if t == '@': return self.objs[self.long()]
-        if t == '"': return self.reg(self.mkstr(self.bytes_()))
+        if t == '"':
+            v = self.mkstr(self.bytes_())
+            return self.reg(PStr(v) if isinstance(v, str) else v)
         if t == 'f':
             s = self.bytes_().decode()
             v = {'nan': float('nan'), 'inf': float('inf'), '-inf': float('-inf')}.get(s)
@@ -216,6 +223,10 @@ class Reader:
         if t == 'I':
             idx = len(self.objs)
             o = self.obj()
+            if isinstance(o, PStr):          # string carried an encoding ivar -> normal (UTF-8) string
+                o = str(o)
+                if idx < len(self.objs):
+                    self.objs[idx] = o
             for _ in range(self.long()):
                 self.symbol(); self.obj()   # encoding ivars (E / encoding) -> ignored
             return o
@@ -323,6 +334,7 @@ class Writer:
             s = repr(v) if v != int(v) else str(int(v))
             self.bytes_(s.encode())
         elif isinstance(v, RBytes): o.append(ord('"')); self.bytes_(bytes(v))
+        elif isinstance(v, PStr): o.append(ord('"')); self.bytes_(v.encode('utf-8'))
         elif isinstance(v, str): self.string(v.encode('utf-8'))
         elif isinstance(v, (list, tuple)):
             o.append(ord('[')); self.long(len(v))

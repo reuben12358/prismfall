@@ -1,0 +1,42 @@
+# Palette for tileset 1 "Outside" (Graphics/Tilesets/Outside.png). Tile rules were mined from the
+# base project's sample maps with learn.py and checked visually (see design/MAPGEN.md).
+tileset: 1
+ground: {base: 385, variants: {386: 5, 387: 5, 388: 4, 389: 2}}   # weights in % for random grass detail
+classes:
+  grass:     {kind: ground}
+  tallgrass: {kind: tile, layer: 0, tile: 390}                      # terrain tag 2 (wild encounters)
+  tree:      {kind: tree2x2, U: [808, 809], Uopen: [810, 811], D: [800, 801], Dside: [802, 803],
+              Dbottom: [818, 819], canopy: [804, 805], canopy_layer: 2}
+  lpath:     {kind: blob, layer: 0, center: 401, N: 393, S: 409, W: 403, E: 402, NW: 395, NE: 394, SW: 411, SE: 410,
+              inner_nw: 406, inner_ne: 405, inner_sw: 398, inner_se: 397}
+  sand:      {kind: blob, layer: 0, min_width: 1, center: 546, N: 538, S: 554, W: 545, E: 547, NW: 537, NE: 539, SW: 553, SE: 555,
+              inner_nw: 558, inner_ne: 556, inner_sw: 542, inner_se: 540}
+  sea:       {kind: autotile, layer: 0, id: 48, same: [sea, deep, pier, harbour]}  # terrain tag 7 (surf)
+  deep:      {kind: autotile, layer: 0, id: 144}                     # Sea deep, terrain tag 5
+  shore:     {kind: autotile, layer: 0, id: 192}                     # Sand shore, terrain tag 3
+  flowers:   {kind: autotile, layer: 0, id: 240}                     # animated red flowers
+  fence:     {kind: hline, layer: 1, left: 1680, mid: 1681, right: 1682, single: 1681,
+              vtop: 1663, vmid: 1664, vbottom: 1705, corner_tl: 1658}
+  ledge:     {kind: hline, layer: 1, left: 1194, mid: 1212, right: 1198, single: 1212}   # jump south
+  pier:      {kind: pier, layer: 1, under: sea, top: [1589, 1590, 1591], body: [1597, 1598, 1599]}
+  harbour:   {kind: ground_as, as: sea}      # water cells under a harbour stamp
+  building:  {kind: ground}                  # footprint marker for stamps
+tiles:
+  sign: {layer: 1, tile: 1336}
+  gym_sign: {layer: 2, tile: 1355}
+glyphs:
+  '.': grass
+  '#': building
+  ',': tallgrass
+  'T': tree
+  ':': lpath
+  '_': sand
+  '~': sea
+  'W': deep
+  's': shore
+  '*': flowers
+  'f': fence
+  'L': ledge
+  '=': pier
+  'h': harbour
+stamps: [pokecenter, mart, house_red, house_red2, lab, house_blue_a, house_blue_b, fanclub, mailbox, gym, harbour_pier]

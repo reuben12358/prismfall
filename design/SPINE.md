@@ -22,6 +22,11 @@
 6. **Also adding:** Rejuvenation-style new-game **passwords** (QoL/challenge toggles), **Field Notes** (in-game field encyclopedia
    that fills in as you encounter fields), playable **interludes** as other characters, and a **quest log**.
 
+7. **Coordinator rulings (2026-11-15):** Game Switches/Variables **301–400** are reserved for gym and dungeon puzzles
+   (gym n uses 300+5n … 300+5n+4; World design owns them). Drowned **Aurelia** lies beneath Underveil on the **north**
+   coast, under Zenith's cliffs. Rejuvenation-style multi-bar **boss battles** live in a 5th plugin, `Prismfall Bosses`.
+   Core adds **Rock Climb** (`BADGE_FOR_ROCKCLIMB`). Velmora is town-map **region 0**.
+
 ## >>> REVISION 2 (user feedback, 2026-11-15) — superseded where Revision 3 conflicts <<<
 1. **Kingdoms.** Velmora is a realm of seven kingdoms plus the neutral capital. Each kingdom's wild Pokémon are
    dominated (~70%) by its types; borderland routes between kingdoms are mixed. Gym order/cities/wardens/fields/caps are

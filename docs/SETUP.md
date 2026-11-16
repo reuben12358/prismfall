@@ -131,10 +131,8 @@ recompile of the PBS, the plugins (`Data/PluginScripts.rxdata`) and EBDX's own d
 
 Check the console:
 - It should list `Prismfall Core`, `Prismfall Field Effects`, `Prismfall EBDX Bridge` and `Prismfall Debug Tools` as loaded.
-- `Plugin 'Prismfall EBDX Bridge' requires plugin 'Elite Battle: DX'` means EBDX is missing or its folder lacks its meta.txt.
-  To run **without EBDX**, edit our bridge's `meta.txt` and change
-  `Requires   = Elite Battle: DX,1.4.7` to `Optional   = Elite Battle: DX,1.4.7`.
-  The bridge then swaps vanilla `Graphics/Battlebacks/<backdrop>_bg/_base0/_base1/_message` instead.
+- Our bridge lists EBDX as `Optional`, so the project also runs **without EBDX**: the bridge then swaps vanilla
+  `Graphics/Battlebacks/<backdrop>_bg/_base0/_base1/_message` instead.
 
 ## 5. Test a field battle quickly
 
@@ -164,17 +162,19 @@ For a per-map default, add `FieldEffects::MAP_FIELDS[map_id] = :FIELD_ID` in any
 
 ## 6. Known EBDX-on-v21 issues and fixes
 
+**Option A (Renovation) already fixes the first and third rows:** its `mkxp.json` ships with `"syncToRefreshrate": false, "fixedFramerate": 60`, and it has no trainer out-of-place hotfix or delta-time switches (the `Config.rb` constants named below exist only in option B). The other rows apply to both options.
+
 Sources: the port's [discussion thread](https://eeveeexpo.com/threads/6958/), its
 [update log](https://eeveeexpo.com/resources/1338/updates), its [reviews](https://eeveeexpo.com/resources/1338/reviews)
 and the port's code (`Plugins/Elite Battle DX/[003] Config/Config.rb`).
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| **Battle animations too fast** on 120/144 Hz monitors, or intros and fades too slow | v21 timing is in seconds, but EBDX animates per frame. The repo's `mkxp.json` has `"syncToRefreshrate": true`, so the frame rate equals your monitor's refresh rate. | In `mkxp.json`, set `"syncToRefreshrate": false` and add `"fixedFramerate": 60` (option names from mkxp.json's own comments). Then try `USE_DELTA_TIME_HOTFIX` in Config.rb both ways (default `false` = frame-based with the SceoFlash13 hotfix; `true` = delta-time waits, added in the port's May 2024 updates). The [Renovation Project](https://eeveeexpo.com/resources/1831/) also caps EBDX at 60 FPS. |
+| **Battle animations too fast** on 120/144 Hz monitors, or intros and fades too slow | v21 timing is in seconds, but EBDX animates per frame. The repo's `mkxp.json` has `"syncToRefreshrate": true`, so the frame rate equals your monitor's refresh rate. | In `mkxp.json`, set `"syncToRefreshrate": false` and add `"fixedFramerate": 60` (option names from mkxp.json's own comments). Then try `USE_DELTA_TIME_HOTFIX` in Config.rb both ways (default `false` = frame-based with the SceoFlash13 hotfix; `true` = delta-time waits, added in the port's May 2024 updates). Option A is preconfigured this way. |
 | **Crash at battle start:** `undefined method 'has_key?' for nil` in `Scene Backdrops.rb … adjustMetrics` (reported in the thread, no fix posted) | From the code: `adjustMetrics` reads `EliteBattle.get(:battlerMetrics)`, which is filled from `Data/metrics.ebdx`. If `PBS/EBDX/metrics.txt` is missing, never compiled, or lacks `[BATTLERPOS-0]` / `[BATTLERPOS-1]`, the hash is empty and the method crashes. | Make sure `PBS/EBDX/metrics.txt` exists (it's in the repo), then launch in **debug mode holding Ctrl** so `Data/metrics.ebdx` is rebuilt. Release builds must ship `Data/*.ebdx`, because EBDX only compiles in debug mode. |
-| **Trainer sprite out of place / camera shows the void** after a trainer's end speech | Known port issue | `USE_TRAINER_OUT_OF_PLACE_HOTFIX` in Config.rb (default `true` in this repo). If trainers drift, set it to `false` (one user reported the camera fixed itself after one F12 reset). SceoFlash13's manual patch to `pbShowOpponent`/`pbHideOpponent` in `Battle Modifiers/Scripted Battles.rb` is in thread page 2. The Renovation Project ships with this hotfix off. |
+| **Trainer sprite out of place / camera shows the void** after a trainer's end speech (option B) | Known port issue | `USE_TRAINER_OUT_OF_PLACE_HOTFIX` in Config.rb (default `true` in this repo). If trainers drift, set it to `false` (one user reported the camera fixed itself after one F12 reset). SceoFlash13's manual patch to `pbShowOpponent`/`pbHideOpponent` in `Battle Modifiers/Scripted Battles.rb` is in thread page 2. Option A removed this hotfix. |
 | **Animated trainer sprites look small or slow** | Scale | `TRAINER_SPRITE_SCALE = 2` in Config.rb (confirmed by a user). |
-| **White flashes and a 1–3 s delay** at wild encounters or faints (2025 reviews) | Unresolved in 1.4.7.1 | Try the frame-rate fix above. The Renovation Project reports fixing pre-battle music delay and lag with its `EBDXwaiter` class. |
+| **White flashes and a 1–3 s delay** at wild encounters or faints (2025 reviews) | Unresolved in 1.4.7.1 | Try the frame-rate fix above. Option A reports fixing the pre-battle music delay and lag. |
 | **`NameError: uninitialized constant EliteBattle::SKIP_CACHED_DATA`** | Your Config.rb is older than the scripts | Update the whole `Plugins/Elite Battle DX` folder (1.4.7.1 defines it). |
 | **Crash when a Pokémon must use Struggle** (thread page 1) | Some EBDX code looks up Struggle's move data | If you hit it, add a `PBS/moves_ebdxfix.txt` with a `[STRUGGLE]` entry (`FunctionCode = Struggle`, Power 50, Type NORMAL, Physical, TotalPP 1, Target RandomNearFoe). Metronome already excludes the `Struggle` function code. Not reproduced here. |
 | **Map `BattleEnv` in `PBS/EBDX/maps.txt` ignored** (thread page 2) | Unresolved | Doesn't affect fields: the bridge sets the room directly. For plain maps, call `EliteBattle.set(:nextBattleBack, {...})` before the battle. |

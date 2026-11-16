@@ -9,8 +9,8 @@
 #   * swaps bg/bases/message bar live on :prismfall_field_changed with a fade.
 # Uses only Essentials v21.1 Battle::Scene members (verified in
 # 011_Battle/004_Scene/002_Scene_Initialize.rb#pbCreateBackdropSprites).
-# Note: meta.txt Requires EBDX (SPINE). To run without EBDX, replace the line
-# "Requires = Elite Battle: DX,1.4.7" with "Optional = Elite Battle: DX,1.4.7".
+# meta.txt lists EBDX as Optional (>= 1.4.7; Renovation 4.0 also satisfies it),
+# so this fallback runs whenever EBDX is not installed.
 #===============================================================================
 module PrismfallEBDX
   module Vanilla

@@ -56,6 +56,7 @@ module Prismfall
         old = state
         Prismfall.state.festival = new_state
         state[:exhibitions] = old[:exhibitions] if old.is_a?(Hash) && old[:exhibitions]
+        draw_bracket_stages!
       end
       EventHandlers.trigger(:prismfall_festival_started)
       return true
@@ -102,8 +103,18 @@ module Prismfall
     #---------------------------------------------------------------------------
     # Bracket structure
     #---------------------------------------------------------------------------
+    # Seeding / player path for this run (set by the draw at start), falling
+    # back to the default BRACKET / PLAYER_PATH constants.
+    def self.bracket
+      return (started? && state[:bracket].is_a?(Array)) ? state[:bracket] : BRACKET
+    end
+
+    def self.path
+      return (started? && state[:path].is_a?(Array)) ? state[:path] : PLAYER_PATH
+    end
+
     def self.player_slot
-      return BRACKET.index(:PLAYER)
+      return bracket.index(:PLAYER)
     end
 
     def self.matches_in_round(r)
@@ -116,7 +127,7 @@ module Prismfall
 
     # The two entrants of match m in round r (nil while still undecided).
     def self.participants(r, m)
-      return [BRACKET[2 * m], BRACKET[(2 * m) + 1]] if r == 0
+      return [bracket[2 * m], bracket[(2 * m) + 1]] if r == 0
       return [results[[r - 1, 2 * m]], results[[r - 1, (2 * m) + 1]]]
     end
 
@@ -159,6 +170,7 @@ module Prismfall
       STAGES.each do |st|
         errors.push("Stage #{st[:id]} uses unknown ruleset #{st[:ruleset].inspect}") if !RULESETS[st[:ruleset]]
       end
+      errors.concat(validate_draws) if respond_to?(:validate_draws)
       return errors
     end
 
@@ -167,8 +179,8 @@ module Prismfall
     #---------------------------------------------------------------------------
     def self.npc_winner(a, b, r, m)
       # Player-path entrants always advance until they meet the player.
-      ka = PLAYER_PATH.index(a)
-      kb = PLAYER_PATH.index(b)
+      ka = path.index(a)
+      kb = path.index(b)
       return a if ka && ka > r
       return b if kb && kb > r
       scripted = SCRIPTED_WINNERS[[r, m]]
@@ -222,11 +234,11 @@ module Prismfall
     def self.opponent_id(stage = nil)
       stage ||= current_stage
       return nil if !stage
-      return stage[:opponent] if !stage[:round]
+      return drawn_opponent(stage) if !stage[:round]
       r = stage[:round]
       a, b = participants(r, player_match_index(r))
       opp = (a == :PLAYER) ? b : a
-      return opp || PLAYER_PATH[r]
+      return opp || path[r]
     end
 
     def self.current_opponent_name
@@ -292,14 +304,15 @@ module Prismfall
     #---------------------------------------------------------------------------
     # Battles
     #---------------------------------------------------------------------------
-    def self.battle_entrant(id, exhibition: false, lose_text: nil)
+    # version: explicit trainer version (e.g. from a draw candidate).
+    def self.battle_entrant(id, exhibition: false, lose_text: nil, version: nil)
       e = entrant(id)
       raise ArgumentError, "Unknown Festival entrant #{id.inspect}" if !e || id == :PLAYER
-      if e[:rival_battle] && !exhibition
+      if e[:rival_battle] && !exhibition && version.nil?
         return Prismfall::Rival.battle(Array(e[:trainer_type]).first, Array(e[:name]).first,
                                        e[:rival_battle], lose_text: lose_text)
       end
-      version = ((exhibition) ? e[:exhibition_version] : nil) || e[:version] || 0
+      version ||= ((exhibition) ? e[:exhibition_version] : nil) || e[:version] || 0
       tr_type, tr_name = resolve_trainer(e, version)
       return TrainerBattle.start([tr_type, tr_name, version, lose_text])
     end
@@ -331,7 +344,13 @@ module Prismfall
       heal if rules[:heal_before]
       EventHandlers.trigger(:prismfall_festival_before_battle, st[:id], opponent_id(st))
       apply_battle_rules(rules, st[:field], st[:rules])
-      won = (st[:wild]) ? boss_battle(st) : battle_entrant(opponent_id(st), lose_text: lose_text)
+      if st[:wild]
+        won = boss_battle(st)
+      else
+        opp = opponent_id(st)
+        lock_draw(st, opp)   # a non-bracket stage's draw is fixed once its battle starts
+        won = battle_entrant(opp, lose_text: lose_text, version: draw_version(st, opp))
+      end
       won = (won) ? true : false
       record_result(won)
       heal if rules[:heal_after]
@@ -371,8 +390,14 @@ module Prismfall
     #---------------------------------------------------------------------------
     # Exhibition matches (optional battles during Festival week)
     #---------------------------------------------------------------------------
+    # Exhibition opponents: entrants flagged :exhibition, except anyone still
+    # alive in the current bracket (CAMEOS.md: available once eliminated).
     def self.exhibition_ids
-      return ENTRANTS.keys.select { |id| ENTRANTS[id][:exhibition] }
+      return ENTRANTS.keys.select do |id|
+        next false if !ENTRANTS[id][:exhibition]
+        next true if !active? || !bracket.include?(id)
+        next !eliminated_in(id).nil?
+      end
     end
 
     def self.exhibition_result(id)
@@ -390,6 +415,7 @@ module Prismfall
       return false if !party_eligible?(rules)
       heal if rules[:heal_before]
       apply_battle_rules(rules)
+      setBattleRule("double") if entrant(id)[:exhibition_double]
       won = battle_entrant(id, exhibition: true, lose_text: lose_text) ? true : false
       state[:exhibitions][id] = :won if won
       state[:exhibitions][id] ||= :lost
