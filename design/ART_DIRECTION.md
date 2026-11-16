@@ -11,11 +11,13 @@
 4. **Real architecture at real scale.** Kingdom seats are castle cities: curtain walls, gatehouses, towers, keep or palace on
    high ground, cathedral, markets, harbour, slums, and grand interiors (throne room, great hall).
 
-**Honest status.** Rejuvenation's, Reborn's and Desolation's own tilesets are **not reachable from this sandbox** (§2.4).
-What we have is the next best thing: Pokémon Tectonic's sheets, a compilation from the same artist pool those games credit
-(Kyledove, Magiscarf, Phyromatical, Hek-el-grande, Alucus, Speedialga, WesleyFG, Zetavares852, ThatsSoWitty and others).
-It gets us the Gen 4/5 look and a castle kit today. It does **not** contain Rejuvenation's signature steep-roof timber
-townhouses; those are either a user download (§2.4) or custom work (§5).
+**Status.** We now hold **real Rejuvenation v13.5 tilesets** (15 sheets, §2.0) from a public mod repo, plus Tectonic's
+large Gen 4/5 compilation (§2.1). The full Rejuvenation, Reborn and Desolation games remain unreachable (§2.4), so
+Rejuvenation's autotiles and most of its other sheets are missing.
+
+**Style note for the coordinator.** Rejuvenation's own sheets are more saturated than DPPt and some pieces (Sheridan's
+trees, Gearen's grass) read close to Gen 3. Rev 6 names Rejuvenation as the target, so they are allowed, but pick the
+Gen 4-looking pieces first and keep each map to one sheet family.
 
 ## 1. Target look
 - 16-px pixel art doubled to 32-px tiles (verified: every 2×2 block in the Tectonic sheets is one colour). **All custom art
@@ -26,6 +28,45 @@ townhouses; those are either a user download (§2.4) or custom work (§5).
 - One style per map. Mixed styles are the most common fangame failure; a piece that looks off-style is cut, not "balanced".
 
 ## 2. Tileset decision
+
+### 2.0 Ranked sources
+| Rank | Source | Path | Verdict against the Rejuvenation screenshot |
+|---|---|---|---|
+| 1 | **Rejuvenation v13.5 sheets** via `pbflo/Where-Love-Lies-Overhaul` | `/home/claude/ref/art/wll` (17 MB) | The real thing: Sheridan's timber houses with steep dark roofs, vines, flower borders, signposts; Gearen's apartment blocks, scaffolds, museum facade. Partial set. |
+| 2 | **Tectonic** | `/home/claude/ref/art/tectonic` | Clean Gen 4/5 look, widest coverage, castle kit, complete autotiles and passages. Plainer houses. |
+| 3 | Infinite Fusion (parts) | `/home/claude/ref/art/pif` | Caves, underwater temple, sewers only. |
+
+**Rejuvenation sheets in `wll/Changed Files/Graphics/Tilesets/`** (passages, priorities, terrain tags in
+`wll/Changed Files/Data/Tilesets.rxdata`; dump `/home/claude/ref/art/dumps/wll/tilesets.json`; 81 maps included):
+
+| Sheet (tileset ID) | Size | Covers |
+|---|---|---|
+| `Sheridan_2` (37, 40, 41), `SheridanInside` (38) | 256×7072, ×1760 | Timber village, steep roofs, bridges, cliffs, arena; wooden interiors |
+| `GearenCity Real` (1) | 256×16000 | City blocks, apartments, scaffolding, grand museum facade, port, trucks |
+| `Route 2_new` (39), `Route 2_1` (7, 11), `Route 3` (8) | up to 256×10000 | Routes, forest, fields, ruined village |
+| `Goldenleaf Forrest` (15, 23) | 256×9000 | Autumn forest town, haunted tower |
+| `Amethyst Cave` (20), `Amethyst Grotto` (21), `Goldenwood Cave` (13), `CorruptedCave` (4) | up to 256×8000 | Crystal caves, corrupted cave with lava: Cragholm, Bleed zones |
+| `Carotos Mountain` (12) | 256×2800 | Mountain, conveyors |
+| `Chrisola Hotel` (3), `RoseTheatre` (36), `Help Centers` (29) | up to 256×6100 | Mansion and hotel interiors, theatre (Pell Playhouse), Pokémon Center |
+| `Rejuvenation Integration/…/Aelita_rift_2` | 256×9088 | Rift area |
+
+**Missing from that repo:** 36 of the 38 autotiles those tilesets name (only `BurntGrassSheridan`, `DirtDark` are
+present). Renders therefore show black where Gearen's streets and some ground should be. To use these sheets, map each
+missing autotile slot to a Tectonic autotile (`water2`, `Sea`, `Waterfall*`, `Road`, `Dirt`, `Light grass`, `Sand`) at
+import. The terrain tags are Rejuvenation's own and need a check before trusting them. No castle, desert, ice or
+sci-fi sheets are in this set; those still come from Tectonic and custom work.
+
+Renders: `/home/claude/ref/art/renders/rejuv_wll_{002 Gearen, 038 Sheridan, 056 Route 2, 023, 043, 014}.png`
+(render with `PRISMFALL_GFX=/home/claude/ref/art/_gfx_wll`). Reference only: Rejuvenation forbids copying its maps.
+
+**Search log (this sandbox).**
+- Only `git clone` from github.com works. The GitHub API (`gh search`, `gh release`), codeload zips and raw files
+  return 403. archive.org, itch.io, gamejolt, mediafire, mega, gitlab, deviantart, eeveeexpo and rebornevo.com all fail
+  with "CONNECT tunnel failed, response 403" (one HEAD each).
+- Probed by web search plus clone: `Waynolt/SWM-modular-modpack` (scripts only), `fuyukai/reborn-rebalance`,
+  `birblett/RemiX` (no graphics), `aleksjovcic/pokemon-alpine`, `starrcasm/pokemon-essentials-sesk`, three Essentials
+  forks (stock tiles or none), `Aiwyn17/pokemon` (stock tiles plus 5 custom sub-tilesets, not examined),
+  `espparki1/PokemonValhalla` (wrong style). No Reborn or Desolation graphics found anywhere on GitHub.
 
 ### 2.1 Primary: Pokémon Tectonic (cloned)
 `/home/claude/ref/art/tectonic` — sparse, blobless clone of `github.com/Badagronk/Pokemon-Tectonic-Fork`
@@ -82,10 +123,10 @@ are not to be used wholesale.
 ### 2.3 Rejected
 - `/home/claude/ref/art/valhalla` (Essentials-BES): its big sheet is RPG-Maker-style art, not Pokémon style.
 - `/home/claude/ref/art/reborn-rebalance`, `/home/claude/ref/art/remix`: Reborn/Rejuvenation mods with no graphics.
+- `/home/claude/ref/art/_probe/*`: blobless probes from the search above; nothing usable.
 
-### 2.4 Not reachable from here: Rejuvenation / Reborn / Desolation tilesets
-Fourteen guessed GitHub paths for the three games do not exist, web search found no mirror, the GitHub API is blocked,
-and rebornevo.com refuses automated fetches. These games ship only as downloads from rebornevo.com. If the user wants
+### 2.4 Still not reachable: the full Rejuvenation / Reborn / Desolation games
+The games are not on GitHub, and every other host is blocked by the sandbox proxy (see the search log). These games ship only as downloads from rebornevo.com. If the user wants
 the true Rejuvenation look, this is the one thing only they can do:
 1. Download a game from its official page: Rejuvenation `https://www.rebornevo.com/forums/topic/53076-pokemon-rejuvenation-download/`
    (v14 notes: `https://rebornevo.com/rejuvdev/records/rejuvenation-v14-v1400-is-out-now-r77/`), Desolation
@@ -152,7 +193,7 @@ All custom work derives from the Tectonic sheets with PIL, on the 16-px grid (§
 
 | Gap | Fill |
 |---|---|
-| **Rejuvenation-style steep-roof timber townhouses** | Not in any reachable pack. Best: user download (§2.4). Otherwise custom: re-roof Tectonic house bodies with a drawn steep dark-green roof kit. Largest single custom job. |
+| **Rejuvenation-style steep-roof timber townhouses** | Now available: `Sheridan_2` in `wll` (§2.0). Recolour roofs per realm. |
 | **Grand interiors** (throne room, great hall, cathedral nave) | Tectonic interiors are modest. Compose from castle-kit stone as interior walls, Outside paving rows 433–441 as marble floors, Inside carpets and statues; draw thrones, banners, columns, stained glass, chandeliers. |
 | Kingdom fortresses in four stone colours | Palette remap of the castle kit. Done as prototype. |
 | Giant-tree villages | Assemble 6×8 trees from canopy tiles and stump bark; doors and windows from house tiles; draw rope bridges. |
@@ -177,6 +218,18 @@ Scripts in `/home/claude/ref/art/tools/`, outputs in `/home/claude/ref/art/custo
 - Other tools: `sheet_grid.py` (row-numbered crops for cataloguing), `sheet_strip.py`, `render_ref.py`, `map_metrics.py`,
   `gen3_vet.py`.
 
-## 7. Credits
+## 7. Character portraits (Rev 7)
+Rejuvenation-style round portraits with expressions in the speech bubble.
+- **Spec.** 96×96 PNG (48×48 art doubled), transparent outside the disc; 2-px ring in the realm cloth colour (§4);
+  head and shoulders, facing three-quarters toward the text. File `Graphics/Pictures/Portraits/<CHARACTER>_<expr>.png`.
+  Expressions for main cast: `neutral, happy, angry, sad, surprised, hurt`; minor NPCs: `neutral` only.
+- **Placeholders from trainer sprites.** Crop the top square of the trainer front sprite (`Graphics/Trainers/*.png`,
+  128×128), mask to a disc, add the ring. Prototype looked at: `/home/claude/ref/art/custom/_preview_portraits.png`;
+  it reads fine as a placeholder. Expressions need hand edits of eyes and mouth (a few pixels each).
+- **Obtainable resources.** Pokémon portraits with emotion sets: `github.com/PMDCollab/SpriteCollab` (exists, clonable,
+  not cloned; 40×40 PMD style, credit per its credits file). No trainer mugshot pack is on GitHub; the `wll` repo has
+  only two Rejuvenation portrait pictures.
+
+## 8. Credits
 Artist credits and usage terms are in `/home/claude/fangame/docs/CREDITS.md`. Tectonic's repo is CC BY-NC-SA 4.0, so
 our derived tiles carry the same terms.

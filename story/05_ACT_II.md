@@ -7,6 +7,8 @@
 
 **Act-opening beat (start of segment 4):** the PC leaves Lumen City through the **Lowlight (Shattered)** (608, `:BLEED`). A shrine of soda cans and candles has grown around Dex's glass figure. If the PC stands with him, the shard *hums* and the glass warms slightly under their hand. (Harmony seed for the Good ending's waking.) Mandate checkpoints with Directorate officers in white-and-gold now stand at every lift down to Nadir.
 
+> **Revision 7 (comedy):** each chapter here has a scripted funny scene in `15_COMEDY.md` §4 (Ch6–9), plus running gags (§3) and optional kingdom bits (§5). Place each scene where its heading says, and never inside the beats §1 lists as joke-free.
+
 ---
 
 ## CHAPTER 6 — "What the Sand Keeps" (R9 → Static Tunnels → R10 → Duneholt, Gym 5; Ossuary of Dunes; K3)

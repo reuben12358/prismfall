@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 7 (user feedback, 2026-11-16 10:02) <<<
+**The game needs funny moments.** Rejuvenation-style comedy alongside the dark plot: expressive character-portrait speech
+bubbles over the overworld (circular portrait with an expression: crying-yelling, deadpan, smug, panicking; plus emote
+effects like sweat drops and shock lines), running gags, banter between companions, a comic-relief recurring character or two,
+and absurd optional moments. Roughly one good laugh per chapter, never undercutting the big dramatic beats.
+Dialogue lines carry `[portrait: NAME, expression]` tags; the `Prismfall Cutscenes` plugin renders them.
+
 ## >>> REVISION 6 (user feedback, 2026-11-16) — supersedes everything below where they conflict <<<
 1. **The Ashkaar–Isenmar War.** At some point in the main story (story team picks the act; mid-game, Act III–IV suggested) open
    war breaks out between Ashkaar (Fire/Dragon) and Isenmar (Water/Ice). It must feel like a full war (fronts, sieges, the

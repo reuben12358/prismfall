@@ -6,6 +6,8 @@
 > **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
 
 
+> **Revision 7 (comedy):** each chapter here has a scripted funny scene in `15_COMEDY.md` §4 (Ch18–21), plus running gags (§3) and optional kingdom bits (§5). Place each scene where its heading says, and never inside the beats §1 lists as joke-free.
+
 ---
 
 ## CHAPTER 18 — "Once Upon a Time" (R33 → Lightless Deep → R34 Gloamwood Verge → Gloaming, Gym 17; Pecharunt; K7; the Hymn)

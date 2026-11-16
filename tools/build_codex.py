@@ -21,6 +21,7 @@ CHAPTERS = [
     ("story/10_CHOICES_ENDINGS.md", "choices", "Choices & endings"),
     ("story/12_RUIN_ROUTE.md", "ruin", "Ruin Route"),
     ("story/13_CUTSCENES.md", "cutscenes", "Cutscenes"),
+    ("story/15_COMEDY.md", "comedy", "Comedy"),
     ("story/11_FINALE_LINES.md", "finale", "Finale lines"),
     ("design/CAMEOS.md", "cameos", "Sidequest cameos"),
 ]

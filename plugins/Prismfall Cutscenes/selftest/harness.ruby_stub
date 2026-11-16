@@ -1,0 +1,436 @@
+# Prismfall Cutscenes - offline self-test (NOT loaded by the game: the file name
+# has no ".rb" in it on purpose, PluginManager loads every *.rb* file).
+#
+#   ruby selftest/harness.ruby_stub                 run the whole suite
+#   ruby selftest/harness.ruby_stub --render ID --at 1,2.5,7 --out /tmp/frames [--assets] [key=value ...]
+#
+# It fakes the RGSS classes (Sprite/Bitmap/Viewport/Graphics/Input/...) strictly
+# enough to catch non-integer pixel coordinates, use-after-dispose and leaks,
+# and can software-render frames to PNG (needs ImageMagick `convert`).
+require "set"
+PLUGIN_DIR = File.expand_path("..", __dir__)
+GAME_DIR   = File.expand_path("../..", PLUGIN_DIR)
+ASSET_DIR  = ENV["PF_ASSETS"] || "/home/claude/ref/ebdx_renovation"
+$opt = { :assets => false, :render => false, :fps => 40.0 }
+$stats = Hash.new(0)
+$live = { :sprite => 0, :bitmap => 0, :viewport => 0 }
+$audio = []
+$clock = 0.0
+$DEBUG_PF = true
+
+class Color
+  attr_accessor :red, :green, :blue, :alpha
+  def initialize(r = 0, g = 0, b = 0, a = 255); set(r, g, b, a); end
+  def set(r, g, b, a = 255)
+    [r, g, b, a].each { |v| raise TypeError, "Color component #{v.inspect}" if !v.is_a?(Numeric) }
+    @red = r.to_f; @green = g.to_f; @blue = b.to_f; @alpha = a.to_f
+    self
+  end
+  def pack; (@red.round.clamp(0, 255) << 24) | (@green.round.clamp(0, 255) << 16) | (@blue.round.clamp(0, 255) << 8) | @alpha.round.clamp(0, 255); end
+end
+
+class Tone
+  attr_accessor :red, :green, :blue, :gray
+  def initialize(r = 0, g = 0, b = 0, gr = 0); set(r, g, b, gr); end
+  def set(r, g, b, gr = 0); @red = r.to_f; @green = g.to_f; @blue = b.to_f; @gray = gr.to_f; self; end
+end
+
+class Rect
+  attr_accessor :x, :y, :width, :height
+  def initialize(x = 0, y = 0, w = 0, h = 0); set(x, y, w, h); end
+  def set(x, y, w, h)
+    [x, y, w, h].each { |v| raise TypeError, "Rect wants Integers, got #{v.inspect}" if !v.is_a?(Integer) }
+    @x = x; @y = y; @width = w; @height = h
+    self
+  end
+end
+
+class Font
+  attr_accessor :size, :color, :name, :bold
+  def initialize; @size = 27; @color = Color.new(255, 255, 255); @name = "stub"; end
+end
+
+class Bitmap
+  attr_reader :width, :height, :font, :px
+  def initialize(a, b = nil)
+    if a.is_a?(String)
+      raise "Bitmap: file not found #{a}" if !File.file?(a)
+      @width, @height = `identify -format "%w %h" "#{a}"`.split.map(&:to_i)
+      @path = a
+      @px = `convert "#{a}" -depth 8 rgba:-`.unpack("N*") if $opt[:render]
+    else
+      raise TypeError, "Bitmap size #{a.inspect}x#{b.inspect}" if !a.is_a?(Integer) || !b.is_a?(Integer) || a <= 0 || b <= 0
+      @width = a; @height = b
+      @px = Array.new(a * b, 0) if $opt[:render]
+    end
+    @font = Font.new
+    @disposed = false
+    $live[:bitmap] += 1
+    $stats[:bitmaps] += 1
+  end
+  def alive!; raise "use of disposed Bitmap" if @disposed; end
+  def dispose; return if @disposed; @disposed = true; $live[:bitmap] -= 1; end
+  def disposed?; @disposed; end
+  def rect; Rect.new(0, 0, @width, @height); end
+  def clear; alive!; $stats[:clear] += 1; @px.fill(0) if @px; end
+  def fill_rect(*args)
+    alive!
+    if args.length == 2 then r, c = args; x, y, w, h = r.x, r.y, r.width, r.height
+    else x, y, w, h, c = args
+    end
+    [x, y, w, h].each { |v| raise TypeError, "fill_rect wants Integers, got #{[x, y, w, h].inspect}" if !v.is_a?(Integer) }
+    raise TypeError, "fill_rect colour #{c.inspect}" if !c.is_a?(Color)
+    $stats[:fill] += 1
+    $frame_fills += 1
+    return if !@px
+    x0 = [x, 0].max; y0 = [y, 0].max; x1 = [x + w, @width].min; y1 = [y + h, @height].min
+    return if x1 <= x0 || y1 <= y0
+    v = c.pack
+    (y0...y1).each { |yy| @px.fill(v, (yy * @width) + x0, x1 - x0) }
+  end
+  def blt(x, y, src, r, opacity = 255)
+    alive!; src.alive!
+    raise TypeError, "blt" if !x.is_a?(Integer) || !y.is_a?(Integer) || !r.is_a?(Rect)
+    $stats[:blt] += 1
+    return if !@px || !src.px
+    r.height.times do |j|
+      sy = r.y + j; dy = y + j
+      next if sy < 0 || sy >= src.height || dy < 0 || dy >= @height
+      r.width.times do |i|
+        sx = r.x + i; dx = x + i
+        next if sx < 0 || sx >= src.width || dx < 0 || dx >= @width
+        p = src.px[(sy * src.width) + sx]
+        @px[(dy * @width) + dx] = p if (p & 255) > 0
+      end
+    end
+  end
+  def text_size(str); Rect.new(0, 0, (str.to_s.length * @font.size * 0.45).round, @font.size); end
+  def draw_text(x, y, w, h, str, align = 0)
+    alive!
+    [x, y, w, h].each { |v| raise TypeError, "draw_text wants Integers" if !v.is_a?(Integer) }
+    $stats[:text] += 1
+    return if !@px || str.to_s.strip.empty?
+    tw, th, data = Bitmap.render_text(str.to_s, @font.size)
+    ox = x + ((align == 1) ? (w - tw) / 2 : ((align == 2) ? w - tw : 0))
+    oy = y + ((h - th) / 2)
+    col = @font.color.pack & 0xFFFFFF00
+    th.times do |j|
+      dy = oy + j
+      next if dy < 0 || dy >= @height
+      tw.times do |i|
+        dx = ox + i
+        next if dx < 0 || dx >= @width
+        a = data[(j * tw) + i] & 255
+        @px[(dy * @width) + dx] = col | 255 if a > 110
+      end
+    end
+  end
+  def self.render_text(str, size)
+    @texts ||= {}
+    key = [str, size]
+    return @texts[key] if @texts[key]
+    tmp = "/tmp/pf_text_#{Process.pid}.rgba"
+    safe = str.gsub("\\", "\\\\\\\\").gsub('"', '\"').gsub("%", "%%").gsub("@", "\\@")
+    dims = `convert -background none -fill white -font DejaVu-Sans-Bold -pointsize #{(size * 0.62).round} label:"#{safe}" -depth 8 -print "%w %h" rgba:#{tmp} 2>/dev/null`
+    w, h = dims.split.map(&:to_i)
+    data = (w && h && File.file?(tmp)) ? File.binread(tmp).unpack("N*") : []
+    w, h = 1, 1 if data.empty?
+    data = [0] if data.empty?
+    @texts[key] = [w, h, data]
+  end
+end
+
+class Viewport
+  attr_accessor :z, :color, :tone, :ox, :oy, :visible
+  attr_reader :rect, :sprites
+  ALL = []
+  def initialize(x, y, w, h)
+    @rect = Rect.new(x, y, w, h); @z = 0; @color = Color.new(0, 0, 0, 0); @tone = Tone.new; @sprites = []
+    @disposed = false; @serial = (ALL.last ? ALL.last.serial + 1 : 0)
+    ALL.push(self); $live[:viewport] += 1
+  end
+  attr_reader :serial
+  def dispose
+    return if @disposed
+    @disposed = true; ALL.delete(self); $live[:viewport] -= 1
+    left = @sprites.reject(&:disposed?)
+    raise "Viewport disposed with #{left.length} live sprites" if !left.empty?
+  end
+  def disposed?; @disposed; end
+end
+
+class Sprite
+  attr_reader :x, :y, :z, :ox, :oy, :bitmap, :viewport, :src_rect, :serial
+  attr_accessor :zoom_x, :zoom_y, :angle, :mirror, :color, :tone, :visible, :blend_type
+  @@serial = 0
+  def initialize(viewport = nil)
+    raise "Sprite needs a live viewport" if viewport && viewport.disposed?
+    @viewport = viewport; @x = @y = @z = @ox = @oy = 0; @zoom_x = @zoom_y = 1.0; @angle = 0; @mirror = false
+    @opacity = 255; @color = Color.new(0, 0, 0, 0); @tone = Tone.new; @visible = true; @blend_type = 0
+    @src_rect = Rect.new(0, 0, 0, 0); @disposed = false; @serial = (@@serial += 1)
+    viewport.sprites.push(self) if viewport
+    $live[:sprite] += 1; $stats[:sprites] += 1
+  end
+  def int!(v, what); raise TypeError, "Sprite##{what} must be an Integer (pixel grid), got #{v.inspect}" if !v.is_a?(Integer); v; end
+  def x=(v); @x = int!(v, :x); end
+  def y=(v); @y = int!(v, :y); end
+  def z=(v); @z = int!(v, :z); end
+  def ox=(v); @ox = int!(v, :ox); end
+  def oy=(v); @oy = int!(v, :oy); end
+  def opacity; @opacity; end
+  def opacity=(v); raise TypeError, "opacity #{v.inspect}" if !v.is_a?(Numeric); @opacity = v.clamp(0, 255); end
+  def bitmap=(b)
+    raise "disposed bitmap assigned" if b && b.disposed?
+    @bitmap = b
+    @src_rect = Rect.new(0, 0, b.width, b.height) if b
+  end
+  def dispose; return if @disposed; @disposed = true; $live[:sprite] -= 1; end
+  def disposed?; @disposed; end
+end
+
+module Graphics
+  def self.width; 512; end
+  def self.height; 384; end
+  def self.frame_rate; $opt[:fps]; end
+  def self.update
+    $stats[:frames] += 1
+    $max_fills = [$max_fills, $frame_fills].max
+    $fill_log.push($frame_fills) if $frame_fills > 0
+    $frame_fills = 0
+    $on_frame.call if $on_frame
+    dt = 1.0 / $opt[:fps]
+    dt *= 0.5 + rand if $opt[:jitter]
+    dt = 0.5 if $opt[:hitch] && ($stats[:frames] % 97) == 0     # simulated lag spikes
+    $clock += dt
+  end
+end
+$max_fills = 0
+$frame_fills = 0
+$fill_log = []
+
+module System; def self.uptime; $clock; end; end
+
+module Input
+  USE = :use; BACK = :back; ACTION = :action
+  def self.update; end
+  def self.press?(b); $input_press ? $input_press.call(b) : false; end
+  def self.trigger?(b); $input_trigger ? $input_trigger.call(b) : false; end
+end
+
+def asset(path)
+  return nil if !$opt[:assets] || path.nil?
+  return path if path.start_with?("/") && File.file?(path)
+  [path, path + ".png"].each { |p| f = File.join(ASSET_DIR, p); return f if File.file?(f) }
+  nil
+end
+def pbResolveBitmap(path); asset(path); end
+def pbSetSystemFont(bmp); bmp.font.size = 27; end
+def _INTL(str, *args); args.each_with_index { |a, i| str = str.gsub("{#{i + 1}}", a.to_s) }; str; end
+def echoln(s); $stderr.puts(s) if ENV["PF_VERBOSE"]; ($log ||= []).push(s); end
+def pbBGMPlay(n, v = nil, p = nil); $audio.push([:bgm, n, v]); end
+def pbBGSPlay(n, v = nil, p = nil); $audio.push([:bgs, n, v]); end
+def pbSEPlay(n, v = nil, p = nil);  $audio.push([:se, n, v]); end
+def pbMEPlay(n, v = nil, p = nil);  $audio.push([:me, n, v]); end
+def pbBGMFade(s = 0.0); $audio.push([:bgm_fade, s]); end
+def pbBGSFade(s = 0.0); $audio.push([:bgs_fade, s]); end
+def pbMessage(msg, *rest); ($messages ||= []).push(msg); 0; end
+def pbConfirmMessage(msg); ($messages ||= []).push(msg); true; end
+def pbUpdateSceneMap; end
+module FileTest
+  # Pretend the design/AUDIO.md cues exist so the cue list can be checked.
+  def self.audio_exist?(path); $opt[:audio] != false; end
+end
+class GameSystemStub
+  def bgm_memorize; $audio.push([:memorize]); end
+  def bgm_restore; $audio.push([:restore]); end
+end
+$game_system = GameSystemStub.new
+$game_player = Struct.new(:character_name).new("trainer_POKEMONTRAINER_Red")
+
+module MenuHandlers
+  HANDLERS = {}
+  def self.add(menu, id, hash); (HANDLERS[menu] ||= {})[id] = hash; end
+end
+module EventHandlers
+  def self.add(*a); end
+end
+
+module GameData
+  SpeciesStub = Struct.new(:id, :name, :types)
+  TYPES = {}
+  # types from the real PBS when present
+  ["#{ASSET_DIR}/PBS/pokemon.txt"].each do |f|
+    next if !File.file?(f)
+    cur = nil
+    File.foreach(f, :encoding => "utf-8") do |line|
+      if line =~ /^\[(\w+)\]/ then cur = $1.to_sym
+      elsif cur && line =~ /^Types\s*=\s*(.+)/ then TYPES[cur] = $1.strip.split(",").map { |t| t.strip.to_sym }
+      end
+    end
+  end
+  module Species
+    def self.try_get(s); return nil if s.nil?; SpeciesStub.new(s, s.to_s.capitalize, TYPES[s] || [:NORMAL]); end
+    def self.front_sprite_filename(s, form = 0, gender = 0, shiny = false, shadow = false)
+      asset("Graphics/Pokemon/Front#{shiny ? ' shiny' : ''}/#{s}")
+    end
+    def self.back_sprite_filename(s, form = 0, gender = 0, shiny = false, shadow = false)
+      asset("Graphics/Pokemon/Back#{shiny ? ' shiny' : ''}/#{s}")
+    end
+    def self.icon_filename(s, form = 0, gender = 0, shiny = false, shadow = false, egg = false)
+      asset("Graphics/Pokemon/Icons/#{s}")
+    end
+    def self.play_cry_from_species(s, form = 0, vol = 90, pitch = 100); $audio.push([:cry, s]); end
+  end
+  module TrainerType
+    def self.front_sprite_filename(t); asset("Graphics/Trainers/#{t}") || asset("Graphics/Trainers/#{$trainer_art[t]}"); end
+    def self.charset_filename(t); asset("Graphics/Characters/trainer_#{t}"); end
+    def self.exists?(t); true; end
+  end
+  TrainerStub = Struct.new(:trainer_type, :real_name, :version, :pokemon)
+  module Trainer
+    DATA = {}
+    f = File.join(GAME_DIR, "pbs/trainers.txt")
+    if File.file?(f)
+      cur = nil
+      File.foreach(f, :encoding => "utf-8") do |line|
+        if line =~ /^\[(\w+),([^,\]]+)(?:,(\d+))?\]/
+          cur = TrainerStub.new($1.to_sym, $2.strip, ($3 || 0).to_i, [])
+          DATA[[cur.trainer_type, cur.real_name, cur.version]] = cur
+        elsif cur && line =~ /^Pokemon\s*=\s*(\w+),(\d+)/
+          cur.pokemon.push({ :species => $1.to_sym, :level => $2.to_i })
+        end
+      end
+    end
+    def self.try_get(t, n, v = 0); DATA[[t, n, v]]; end
+    def self.exists?(t, n, v = 0); DATA.has_key?([t, n, v]); end
+  end
+end
+$trainer_art = Hash.new("POKEMONTRAINER_Red")
+
+#-------------------------------------------------------------------------------
+# Software compositor (render mode)
+#-------------------------------------------------------------------------------
+def composite
+  w = Graphics.width; h = Graphics.height
+  out = Array.new(w * h, 0x000000FF)
+  Viewport::ALL.sort_by { |v| [v.z, v.serial] }.each do |vp|
+    layer = vp.sprites.reject { |s| s.disposed? || !s.visible || s.opacity <= 0 || s.bitmap.nil? || s.bitmap.px.nil? }
+    first = out.dup if vp.tone.red != 0 || vp.tone.green != 0 || vp.tone.blue != 0 || vp.tone.gray != 0
+    layer.sort_by { |s| [s.z, s.serial] }.each do |s|
+      bmp = s.bitmap; sr = s.src_rect
+      zx = s.zoom_x.to_f; zy = s.zoom_y.to_f
+      next if zx <= 0 || zy <= 0
+      dw = (sr.width * zx).round; dh = (sr.height * zy).round
+      x0 = s.x - (s.ox * zx).round; y0 = s.y - (s.oy * zy).round
+      ca = s.color.alpha / 255.0; cr = s.color.red; cg = s.color.green; cb = s.color.blue
+      op = s.opacity / 255.0
+      xs = (0...dw).map { |i| u = (i / zx).floor; u = sr.width - 1 - u if s.mirror; sr.x + u.clamp(0, sr.width - 1) }
+      dh.times do |j|
+        dy = y0 + j
+        next if dy < 0 || dy >= h
+        sy = sr.y + (j / zy).floor.clamp(0, sr.height - 1)
+        next if sy >= bmp.height
+        row = sy * bmp.width
+        dw.times do |i|
+          dx = x0 + i
+          next if dx < 0 || dx >= w
+          sx = xs[i]
+          next if sx >= bmp.width
+          p = bmp.px[row + sx]
+          a = (p & 255) * op / 255.0
+          next if a <= 0
+          r = p >> 24; g = (p >> 16) & 255; b = (p >> 8) & 255
+          if ca > 0
+            r += (cr - r) * ca; g += (cg - g) * ca; b += (cb - b) * ca
+          end
+          if a < 1
+            q = out[(dy * w) + dx]
+            r = (r * a) + ((q >> 24) * (1 - a)); g = (g * a) + (((q >> 16) & 255) * (1 - a)); b = (b * a) + (((q >> 8) & 255) * (1 - a))
+          end
+          out[(dy * w) + dx] = (r.round.clamp(0, 255) << 24) | (g.round.clamp(0, 255) << 16) | (b.round.clamp(0, 255) << 8) | 255
+        end
+      end
+    end
+    t = vp.tone
+    if first
+      out.each_index do |i|
+        q = out[i]
+        r = q >> 24; g = (q >> 16) & 255; b = (q >> 8) & 255
+        if t.gray > 0
+          l = (r * 0.3) + (g * 0.59) + (b * 0.11); k = t.gray / 255.0
+          r += (l - r) * k; g += (l - g) * k; b += (l - b) * k
+        end
+        out[i] = ((r + t.red).round.clamp(0, 255) << 24) | ((g + t.green).round.clamp(0, 255) << 16) | ((b + t.blue).round.clamp(0, 255) << 8) | 255
+      end
+    end
+    if vp.color.alpha > 0
+      a = vp.color.alpha / 255.0
+      out.each_index do |i|
+        q = out[i]
+        out[i] = (((q >> 24) * (1 - a) + vp.color.red * a).round << 24) | ((((q >> 16) & 255) * (1 - a) + vp.color.green * a).round << 16) |
+                 ((((q >> 8) & 255) * (1 - a) + vp.color.blue * a).round << 8) | 255
+      end
+    end
+  end
+  out
+end
+
+def save_png(pixels, file)
+  raw = file.sub(/\.png\z/, ".rgba")
+  File.binwrite(raw, pixels.pack("N*"))
+  system("convert", "-size", "#{Graphics.width}x#{Graphics.height}", "-depth", "8", "rgba:#{raw}", file)
+  File.delete(raw)
+end
+
+#-------------------------------------------------------------------------------
+# Load the plugin exactly as PluginManager would (every .rb, sorted)
+#-------------------------------------------------------------------------------
+def load_plugin
+  core = ENV["PF_WITH_CORE_STUB"]
+  Dir[File.join(PLUGIN_DIR, "**", "*")].select { |f| File.file?(f) && f.include?(".rb") }.sort.each { |f| load f }
+end
+
+def run_scene(id, vars = {})
+  $clock = 0.0
+  $max_fills = 0
+  $fill_log = []
+  $audio = []
+  before = $live.dup
+  t0 = $clock
+  Prismfall::Cutscene.raise_errors = true
+  ok = id.is_a?(Proc) ? id.call : Prismfall::Cutscene.play(id, **vars)
+  leaks = $live.map { |k, v| [k, v - before[k]] }.reject { |_, v| v == 0 }
+  { :ok => ok, :seconds => ($clock - t0).round(2), :max_fills => $max_fills,
+    :avg_fills => ($fill_log.empty? ? 0 : $fill_log.sum / $fill_log.length), :leaks => leaks }
+end
+
+if __FILE__ == $0
+  args = ARGV.dup
+  if (i = args.index("--render"))
+    id = args[i + 1].to_sym
+    times = args[args.index("--at") + 1].split(",").map(&:to_f)
+    out = args[args.index("--out") + 1]
+    $opt[:assets] = args.include?("--assets")
+    $opt[:render] = true
+    $opt[:fps] = 30.0
+    vars = {}
+    args.each { |a| vars[$1.to_sym] = ($2 =~ /\A\d+\z/ ? $2.to_i : $2.to_sym) if a =~ /\A(\w+)=(\w+)\z/ }
+    load_plugin
+    pending = times.sort
+    require "fileutils"
+    FileUtils.mkdir_p(out)
+    $on_frame = proc do
+      if pending[0] && $clock >= pending[0]
+        t = pending.shift
+        save_png(composite, File.join(out, format("%s_%06.2f.png", id, t)))
+        $stderr.puts "rendered #{id} @ #{t}s"
+      end
+    end
+    r = if id == :SAMPLE_HIGHLIGHT then run_scene(proc { Prismfall::Cutscene.play_sample_highlight })
+        else run_scene(id, vars)
+        end
+    p r
+    exit
+  end
+  load File.join(__dir__, "suite.ruby_stub")
+end

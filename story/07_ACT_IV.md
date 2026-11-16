@@ -11,6 +11,8 @@
 - News screens show the **north coast**: the sea pulled back from Zenith's cliffs, and drowned Aurelia's golden spires standing in the mud below Underveil.
 - The Concert of Regions announces it will decide on **Severance** at the Festival.
 
+> **Revision 7 (comedy):** each chapter here has a scripted funny scene in `15_COMEDY.md` §4 (Ch14–17), plus running gags (§3) and optional kingdom bits (§5). Place each scene where its heading says, and never inside the beats §1 lists as joke-free.
+
 ---
 
 ## CHAPTER 14 — "The Deep Seams" (R25 → R26 → Geode Hollow → Cragholm, Gym 13)

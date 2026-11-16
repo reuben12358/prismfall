@@ -33,6 +33,7 @@ Three hundred years ago a king tried to chain Arceus. Rather than be bound, the 
 - **Every antagonist is partially right.** The Hollow are right that the Plates must leave. Meridian is right that the Accord hoards power and lies. Valen is right that ripping the Plates out unguided would kill thousands. Voss is right that gods have been absent landlords.
 - **Wardens are people first.** Every gym chapter turns on the Warden's personal problem, which is also their city's problem. The type theme is the costume, not the character.
 - **Specific over generic.** Name the street, the dish, the song, the dead. A Fixed child in the Lowlight district is more affecting than "many casualties".
+- **Funny on purpose (Revision 7).** The humor guide, running gags and one scripted comic scene per chapter are in `15_COMEDY.md`.
 - **Humor lives in the cast.** Odessa's irreverence, Corvin's gallows wit, Dorian's theatrics, Bastian's folksiness and Juno's earnestness keep the dark from going grey. Rival banter should be fun.
 - **No mustache-twirling.** Voss is gracious, generous and devastatingly reasonable. The first person to be kind to you in Velmora is the final villain.
 - **The protagonist** is mostly silent, but dialogue choices matter and they speak in a few key scenes (see 03_CAST). Never write them as a blank. They are the person everyone is trying to use, and their choices are how they refuse to be used.

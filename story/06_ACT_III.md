@@ -7,6 +7,8 @@
 
 **Act-opening state:** the Mandate is realm-wide. Directorate checkpoints stand at every kingdom border, and Meridian scanners at every Pokémon Center door now flag the PC's NULL reading with a polite "**Fellowship Priority Guest**" banner. Even being watched is courteous.
 
+> **Revision 7 (comedy):** each chapter here has a scripted funny scene in `15_COMEDY.md` §4 (Ch10–13), plus running gags (§3) and optional kingdom bits (§5). Place each scene where its heading says, and never inside the beats §1 lists as joke-free.
+
 ---
 
 ## CHAPTER 10 — "The Seat That Blooms" (R17 Lift Road → R18 Prism Falls → Verdance, Gym 9; J3)

@@ -20,6 +20,12 @@ WilsonScarloxy, Minorthreat0987, PurpleZaffre, Akizakura16, WildDeadHero, Derlo,
 Voltseon, WesleyFG, Shawn Frost, NSora-96, DarkDragonn, rafa-cac, Newtiteuf, moca, Jaggedthorn, Raindropsonwhiskers,
 and the Pokémon Tectonic team.
 
+### Pokémon Rejuvenation tilesets
+Sheridan, Gearen City, Route 2/3, Goldenleaf, Amethyst Cave, Carotos Mountain, Chrisola Hotel, Rose Theatre and related
+sheets are by the **Pokémon Rejuvenation Team** (Jan and team) and the artists they credit, obtained from the
+Where Love Lies Overhaul mod by pbflo (github.com/pbflo/Where-Love-Lies-Overhaul). Rejuvenation's asset rules: credit
+the Rejuvenation Team; do not copy maps.
+
 ### Additional tiles (only if the listed sheets are used)
 From **Pokémon Infinite Fusion** (Chardub; github.com/infinitefusion/infinitefusion-e18), cave, underwater, sky and sewer
 sheets. Its credits for public tiles:
@@ -37,8 +43,8 @@ are edits of the tiles credited above, and are shared under the same terms (CC B
 ### Usage terms we follow
 - Credit every artist; non-commercial use only; derived tiles stay share-alike.
 - Other games' maps are used as visual reference only and are never copied.
-- If Rejuvenation, Reborn or Desolation tilesets are added later: credit the Rejuvenation Team, the Reborn Team and the
-  Desolation Team here, and follow each game's asset rules.
+- If Reborn or Desolation tilesets are added later: credit the Reborn Team and the Desolation Team here, and follow
+  each game's asset rules.
 
 ### Pokémon sprites, icons and overworlds
 From the base project (Essentials v21.1 + EBDX + Gen 9 Pack); full lists in its `README.md` and `gen9_credits.txt`.
@@ -47,6 +53,10 @@ From the base project (Essentials v21.1 + EBDX + Gen 9 Pack); full lists in its 
 - Icons: Alaguesia, harveydentmd, Marin, MapleBranchWing, Larry Turbo, leParagon, ezerart, JordanosArt, LuigiTKO and others.
 - Pokémon overworlds: MissingLukey, help-14, Kymotonian, cSc-A7X, 2and2makes5, princess-phoenix, Larry Turbo, SageDeoxys,
   Wolfang62, Azria, DarkusShadow, Caruban and others.
+
+### Portraits
+Placeholder character portraits are cropped from the base project's trainer sprites (see its credits). If Pokémon
+portraits are used: PMDCollab SpriteCollab contributors.
 
 ## Music and sound
 Full plan, filenames and terms: `Design/AUDIO.md`. Compositions from the Pokémon games remain the property of
