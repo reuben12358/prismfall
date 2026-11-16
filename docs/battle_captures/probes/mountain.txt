@@ -105,17 +105,17 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   [Mew 341/341 | Snorlax 461/461]
   Mew used Blizzard!
   The mountain wind howled behind Blizzard!
-    HP Snorlax (foe): 461 -> 409 / 461
+    HP Snorlax (foe): 461 -> 359 / 461
   Frost creeps across the rocks... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 409/461]
+  [Mew 341/341 | Snorlax 359/461]
   Mew used Blizzard!
   The mountain wind howled behind Blizzard!
-    HP Snorlax (foe): 409 -> 353 / 461
+    HP Snorlax (foe): 359 -> 249 / 461
 ## FIELD CHANGE: MOUNTAIN -> SNOWY_MOUNTAIN
   A snowstorm swept over the peaks!
   The wild Snorlax used Splash!
@@ -123,7 +123,7 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 353/461]
+  [Mew 341/341 | Snorlax 249/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -131,7 +131,7 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 353/461]
+  [Mew 341/341 | Snorlax 249/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)

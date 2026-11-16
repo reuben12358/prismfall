@@ -22,9 +22,9 @@ map: |
   KKKKFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGGFkkkkkFGGGGFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFKKKK
   GGGGFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGGFkkkkkFGGGGFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFGGGG
   GGGGFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGGFkkkkkFGGGGFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFGGGG
-  GGGG..............GGGG................GGGG.kkkkk.GGGG...............GGGG............GGGG
-  GGGGTTTTTTTTTTTTTT......TTTTTTTTTTTTT.GGGG#kkkkk#GGGGTTTTTTTTTTTTTT.....TTTTTTTTTTT.GGGG
-  WW..TTTTTTTTTTTTTT......TTTTTTTTTTTTT.....#kkkkk#....TTTTTTTTTTTTTT.....TTTTTTTTTTT...WW
+  GGGG..............GGGG.TTTTT..........GGGGTkkkkk.GGGG......TTTTTTT..GGGG............GGGG
+  GGGGTTTTTTTTTTTTTT.....TTTTTTTTTTTTTT.GGGG#kkkkk#GGGGTTTTTTTTTTTTTT.....TTTTTTTTTTT.GGGG
+  WW..TTTTTTTTTTTTTT......TTTTTTTTTTTTT..TTT#kkkkk#....TTTTTTTTTTTTTT.....TTTTTTTTTTT...WW
   WWTTkppppppppppppppppkkccccccccccccccccccckkkkkkkcccccccccccccccccckkppppppppppppppp..WW
   WWTTkppppppppppppppppkkccccccccccccccccccckkkkkkkcccccccccccccccccckkppppppppppppppp..WW
   WWTTkppppppppppppppppkkccccccccccccccccccckkkkkkkcccccccccccccccccckkpppppppppppppppTTWW
@@ -34,16 +34,16 @@ map: |
   WW..kppppppppppppppppkkccccccccccccccccccckkkkkkkcccccccccccccccccckkppppppppppppppp..WW
   WW..kppppppppppppppppkkccccccccccccccccccckkkkkkkcccccccccccccccccckkppppppppppppppp..WW
   WWTTkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..WW
-  WWTTk........kkkkkk......................kkkkkkkkk..................kkkkkkk...........WW
+  WWTTk........kkkkkk......................kkkkkkkkk.............TTT..kkkkkkk...........WW
   WWTTk.TTTTTT.kkkkkk.TTTTTTTTTTTTTTTTTTTT.kkkkkkkkk#TTTTTTTTTTTTTTTT.kkkkkkk.TTTTTTT.TTWW
   WWTTk.TTTTTT.kkkkkk.TTTTTTTTTTTTTTTTTTTT.kkkkkkkkk#TTTTTTTTTTTTTTTT.kkkkkkk.TTTTTTT.TTWW
   WW..kkkkkkkk..kkk...CCCCCCCCCCCCCCC........kkkkk..#kkkkkkkkkkkkkkkkk..kkk.CCCCCCCCCCTTWW
   WW.........CCCkkkCCCCCCCCCCCCCCCCCCCCCCCCCCkkkkk#CCC...............CCCkkkCCCCCCCCCCCCCWW
   WWCCCCCCCCCCCCkkkCCCCCCCCCCCCCCCCCCCCCCCCCCkkkkk#CCCCCCCCCCCCCCCCCCCCCkkkCCCCCCCCCCCCCWW
   WWCCCCCCCCCCCCkkkCCCC.............CCCCCCCCCkkkkk#CCCCCCCCCCCCCCCCCCCCCkkkCC...TTTTTCCCWW
-  WWCCCCCCCCCCT.kkk...........TTTTT.........#kkkkk##.CCCCCCCCCCCCCCCCC..kkk....TTTTTTT..WW
-  KKK...TTTTT...kkk####kkkkkkkkkkkkkTTT.....#kkkkk.#..TTTTTTTTTTTT.####.kkk..kkkkkkkk...WW
-  KKK.cccccccccccccccccccckkkkkkkkkkkkkkkkkkkkkkkkkkk....T#TTpppppppppppkkkkkkkkkkkkkk..WW
+  WWCCCCCCCCCCT.kkk...........TTTTT.TTTTTTTT#kkkkk##TCCCCCCCCCCCCCCCCC..kkk....TTTTTTT..WW
+  KKK...TTTTT...kkk####kkkkkkkkkkkkkTTTTTTTT#kkkkk,#TTTTTTTTTTTTTT.####.kkk..kkkkkkkk...WW
+  KKK.cccccccccccccccccccckkkkkkkkkkkkkkkkkkkkkkkkkkkTT..T#TTpppppppppppkkkkkkkkkkkkkk..WW
   KKK.cccccccccccccccccccckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkpppppppppppkkcccccccccccc..WW
   GGG.cccchhchhhcccccccccckkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkpppppppppppkkcccccccccccc..WW
   GGG.cccchhchhhcccccccccckkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkpppppppppppkkcccccccccccc..WW
@@ -61,20 +61,20 @@ map: |
   WWTTpppppppppppppppp.TTTTTTTkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkTGGG
   WW..ppppppppppppppppk..TTT.kkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkTTkk
   WW..ppppppppppppppppkkk...kkkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkTTkk
-  WW..ppppppppppppppppkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kk
-  WW..ppppppppppppppppkkkkkkkkkkkkkbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kk
-  WWTTppppppppppppppppkkkkkkkkkkkkkbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.KKK
+  WW..ppppppppppppppppkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkTTkk
+  WW..ppppppppppppppppkkkkkkkkkkkkkbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkTTkk
+  WWTTppppppppppppppppkkkkkkkkkkkkkbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkTKKK
   WWTTppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkpppppppppppppppkkccccccccccc.KKK
   WWTTppppppppppppppppkkkkkkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTKKK
   WWTTppppppppppppppppkkkkkkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTGGG
-  WW..ppppppppppppppppkkkkkkkcccccchhhcccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTGGG
-  WW..kkkkkk....kkkkkkkkkkkkkcccccchhhcccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTGGG
-  KKK.kkkkk.TTT.kkkkkkkkkkkkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkccccccccccc..WW
-  KKK.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkccccccccccc..WW
-  KKK.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkkkkkkk..TTTTT..kkccccccccccc..WW
-  GGG.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkccccccccccc..WW
-  GGGTcccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkccccccccccc..WW
-  GGGTcccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkccccccccccc..WW
+  WW..ppppppppppppppppkkkkkkkcccccchhhcccccccccckkkTTTkkkkpppppppppppppppkkcccccccccccTGGG
+  WW..kkkkkk....kkkkkkkkkkkkkcccccchhhcccccccccckkkTTTkkkkpppppppppppppppkkcccccccccccTGGG
+  KKK.kkkkk.TTT.kkkkkkkkkkkkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTTWW
+  KKK.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkpppppppppppppppkkcccccccccccTTWW
+  KKK.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkkkkkkk..TTTTT..kkcccccccccccTTWW
+  GGG.cccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkcccccccccccTTWW
+  GGGTcccccccccccccccccccckkkccccccccccccccccccckkkkTTTkkkccccccccccccccckkcccccccccccTTWW
+  GGGTcccccccccccccccccccckkkccccccccccccccccccckkkkTTTkkkccccccccccccccckkcccccccccccTTWW
   WWTTcccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkcccccccccccTTWW
   WWTTcccccccccccccccccccckkkccccccccccccccccccckkkkkkkkkkccccccccccccccckkcccccccccccTTWW
   WW..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkTTWW

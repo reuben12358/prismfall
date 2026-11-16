@@ -234,7 +234,7 @@ CORROSIVE_MIRE probe: end-of-round rule 1: heal on {:types=>[:POISON]} [subject 
   field: CORROSIVE_MIRE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Muk!
-    >> sent out (player): Muk Lv.100 [STICKYHOLD]
+    >> sent out (player): Muk Lv.100 [STENCH]
 ## FIELD CHANGE: NONE -> CORROSIVE_MIRE
   Toxic sludge bubbles underfoot... the air reeks of corrosion.
 
@@ -272,7 +272,7 @@ CORROSIVE_MIRE probe: end-of-round rule 2: damage on {:grounded=>true, :types=>[
   field: CORROSIVE_MIRE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Klinklang!
-    >> sent out (player): Klinklang Lv.100 [MINUS]
+    >> sent out (player): Klinklang Lv.100 [PLUS]
 ## FIELD CHANGE: NONE -> CORROSIVE_MIRE
   Toxic sludge bubbles underfoot... the air reeks of corrosion.
 
@@ -303,45 +303,43 @@ CORROSIVE_MIRE probe: end-of-round rule 2: damage on {:grounded=>true, :types=>[
 RESULT: fled/forfeit after 2 turn(s)
 
 
-CORROSIVE_MIRE probe: end-of-round rule 3: status on {:grounded=>true, :not_types=>[:POISON, :STEEL]} [subject Snorlax]
-=======================================================================================================================
+CORROSIVE_MIRE probe: end-of-round rule 3: status on {:grounded=>true, :not_types=>[:POISON, :STEEL]} [subject Arcanine]
+========================================================================================================================
 
 --- Battle start ---
   field: CORROSIVE_MIRE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
-  Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+  Go! Arcanine!
+    >> sent out (player): Arcanine Lv.100 [INTIMIDATE]
 ## FIELD CHANGE: NONE -> CORROSIVE_MIRE
   Toxic sludge bubbles underfoot... the air reeks of corrosion.
+    [ability: Arcanine (player)'s Intimidate]
+    (anim: StatDown)
+  The wild Snorlax's Attack fell!
 
 --- Turn 1 ---
-  [Snorlax 230/461 | Snorlax 230/461]
-  The wild Snorlax used Splash!
+  [Arcanine 160/321 | Snorlax 230/461]
+  Arcanine used Splash!
   But nothing happened!
-  Snorlax used Splash!
+  The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     (anim: Poison)
-  The wild Snorlax was poisoned by the corrosive mire!
-    (anim: Poison)
-  Snorlax was poisoned by the corrosive mire!
+  Arcanine was poisoned by the corrosive mire!
 
 --- Turn 2 ---
-  [Snorlax 230/461 POISON | Snorlax 230/461 POISON]
-  The wild Snorlax used Splash!
+  [Arcanine 160/321 POISON | Snorlax 230/461]
+  Arcanine used Splash!
   But nothing happened!
-  Snorlax used Splash!
+  The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     (anim: Poison)
-    HP Snorlax (foe): 230 -> 173 / 461
-  The wild Snorlax was hurt by poison!
-    (anim: Poison)
-    HP Snorlax (player): 230 -> 173 / 461
-  Snorlax was hurt by poison!
+    HP Arcanine (player): 160 -> 120 / 321
+  Arcanine was hurt by poison!
 
 --- Turn 3 ---
-  [Snorlax 173/461 POISON | Snorlax 173/461 POISON]
+  [Arcanine 120/321 POISON | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)

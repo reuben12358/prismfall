@@ -117,7 +117,7 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Glaciate!
-    HP Snorlax (foe): 461 -> 436 / 461
+    HP Snorlax (foe): 461 -> 414 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
   Ice spreads across the water... (2 more)
@@ -126,9 +126,9 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 436/461]
+  [Mew 341/341 | Snorlax 414/461]
   Mew used Glaciate!
-    HP Snorlax (foe): 436 -> 410 / 461
+    HP Snorlax (foe): 414 -> 363 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
   Ice spreads across the water... (1 more)
@@ -137,9 +137,9 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 410/461]
+  [Mew 341/341 | Snorlax 363/461]
   Mew used Glaciate!
-    HP Snorlax (foe): 410 -> 384 / 461
+    HP Snorlax (foe): 363 -> 312 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 ## FIELD CHANGE: WATER_SURFACE -> FROZEN_LAKE
@@ -149,7 +149,7 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 384/461]
+  [Mew 341/341 | Snorlax 312/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -157,7 +157,7 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 384/461]
+  [Mew 341/341 | Snorlax 312/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)

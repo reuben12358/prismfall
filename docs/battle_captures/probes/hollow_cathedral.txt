@@ -160,7 +160,7 @@ HOLLOW_CATHEDRAL probe: transition [stage 1: moves SACREDFIRE/SACREDSWORD/JUDGME
   Mew used Sacred Fire!
   The flames burned with an eerie ghostfire!
   Light streamed through the stained glass!
-    HP Snorlax (foe): 461 -> 389 / 461
+    HP Snorlax (foe): 461 -> 318 / 461
     (anim: Burn)
   The wild Snorlax was burned!
   The cathedral bell stirs... (2 more)
@@ -168,54 +168,37 @@ HOLLOW_CATHEDRAL probe: transition [stage 1: moves SACREDFIRE/SACREDSWORD/JUDGME
   But nothing happened!
   (end of round)
     (anim: Burn)
-    HP Snorlax (foe): 389 -> 361 / 461
+    HP Snorlax (foe): 318 -> 290 / 461
   The wild Snorlax was hurt by its burn!
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 361/461 BURN]
+  [Mew 341/341 | Snorlax 290/461 BURN]
   Mew used Sacred Fire!
   The flames burned with an eerie ghostfire!
   Light streamed through the stained glass!
-    HP Snorlax (foe): 361 -> 284 / 461
+    HP Snorlax (foe): 290 -> 136 / 461
   The cathedral bell stirs... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     (anim: Burn)
-    HP Snorlax (foe): 284 -> 256 / 461
+    HP Snorlax (foe): 136 -> 108 / 461
   The wild Snorlax was hurt by its burn!
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 256/461 BURN]
+  [Mew 341/341 | Snorlax 108/461 BURN]
   Mew used Sacred Fire!
   The flames burned with an eerie ghostfire!
   Light streamed through the stained glass!
-    HP Snorlax (foe): 256 -> 179 / 461
+    HP Snorlax (foe): 108 -> 0 / 461
+  The wild Snorlax fainted!
+    xx fainted: Snorlax (foe)
 ## FIELD STAGE: HOLLOW_CATHEDRAL is now stage 2
   The bell tolled! Holy light fills the nave and the spirits fall silent.
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Burn)
-    HP Snorlax (foe): 179 -> 151 / 461
-  The wild Snorlax was hurt by its burn!
-
---- Turn 4 ---
-  [Mew 341/341 | Snorlax 151/461 BURN]
-  Mew used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Burn)
-    HP Snorlax (foe): 151 -> 123 / 461
-  The wild Snorlax was hurt by its burn!
-
---- Turn 5 ---
-  [Mew 341/341 | Snorlax 123/461 BURN]
-  battle result code: 3
+  Mew is at the level cap (Lv. 100) and can't gain Exp. Points.
+  battle result code: 1
   
-RESULT: fled/forfeit after 4 turn(s)
+RESULT: player won after 2 turn(s)
 
 
 HOLLOW_CATHEDRAL probe: transition [stage 2: moves CURSE/SPITE/GRUDGE... x2 -> stage 1] using SPITE, SPITE

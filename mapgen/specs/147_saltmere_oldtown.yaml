@@ -19,64 +19,64 @@ map: |
   KKKKFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFKKKK
   GGGGFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGG
   GGGGFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFGGGGFFFFFFFFFFFFFFFFGGGG
-  GGGG................GGGG................................T.......GGGG................GGGG
-  GGGG................GGGG.hhh.TTT....###############....TTT......GGGG...hh........#..GGGG
-  WW.....hhhh..............hhhTTTTT...###############...TTThh..hh...#....hh..#.....#....WW
-  WW.....hhhh....##.....hh....TTT##...###############...TTThh..hh...#..#.....#..........WW
-  WW.............##.....hh....TTT##...###############...TTThh..hh......#................WW
-  WW...........................TT#....###############....TTT............................WW
-  WW......oooooooooooooo.........#....###############.....TT.......oooooooooooooooooooo.WW
-  WW.ooooooooooooooooooooooooooo......###############......oooooooooooooooooooooooooooo.WW
-  WW.oooooooooooooo....ooooooooooooo..###############..oooooooooooooo.......ooooooooooo.WW
-  WW......#...oo............#..ooooo..###############..ooooooooo............ooo...#.ooo.WW
-  WW......#...oo............#.........###############.......#.#.............oo...##.....WW
-  WW....##T#..oo...##.hhhhT#TT##..hh..###############.......#TT###########..oo...#T..##.WW
-  WW....##T#T.oo...##ThhhhT#TT##..hh..###############......TTTT###########..ooo.TTTTT##.WW
-  WW....TTTTT.oo......T#TTTTTT....hh..###############.......TTT###########..oooTTTTTT...WW
-  WW..####TTT.oo.......#..............###############....#################..ooo.T####...WW
-  WW..####....oo....hh...#............###############....#################..ooo..####...WW
-  WW..####....oo.##.hh...#.#.hhh......###############....#################..ooo..####...WW
-  WW..####....oo.##........#.hhh....ccccccccccccccccccc..#################..ooo..####...WW
-  WW..####..#.oo....................ccccccccccccccccccc..#################..ooo..####...WW
-  WW..####..#.oo.....CCCCCCCCCCCCCCCccccccccccccccccccc..#################..oo...####...WW
-  WW..........oo..CCCCCCCCCCCCCCCCCCCCCCCcccccccccccccc................CCCC.oo..CCCCCCCCWW
-  WW.CCCCCCCCCoo#CCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCcccc............CCCCCCCCCoo#CCCCCCCCCWW
-  WWCCCCCCCCCC###CCCCC...........TTCCCCCCCkkkkkkCCC...CCCCCCCCCCCCCCCCCCCCCC###CCCCCCCCCWW
-  WWCCCCCCCCCC###CC.............TT##T...CCkkkkkkCCCCCCCCCCCCCCCCCCCCCCCC..CC###CC..TTT..WW
-  WWCC####.TTT###..##########....T##......kkkkkk#.CCCCCCCCCCCCCCCCCC#####...###..####TT.WW
-  KKK.####.TTTkkk.cccccccccccccc..........kkkkkk#.CCCCC.TTTT.cccccccccccccc.kkk..####T..WW
-  KKK.####.TTTkkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkk..####.#.WW
-  KKK.####..#.kkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkk..####.#.WW
+  GGGG..TTTTT...TTTTTTGGGG...................TTTTTTT......T.......GGGGTTTTT...........GGGG
+  GGGG.#########TTTTTTGGGG.....TTT....###############....#########GGGGTTTTT.......TTTTGGGG
+  WWTTT#########TTTTTTT.....TTTTTTT...###############...T#########TTTTTTTTT.....TTTTTTTTWW
+  WWTTT#########TT###########TTTTTT...###############...T#########T###########TTTTTTTTTTWW
+  WWTTT#########.T###########TTTTTT...###############...T#########T###########TTTTTTTTTTWW
+  WWTTT#########..###########TTTTT....###############....#########T###########TTTTTTTTTTWW
+  WWTTT#########..###########TTT.TTTT.###############....#########T###########..TTTTTTTTWW
+  WW...#########..###########TTT.TTTTT###############....#########.###########..TTTTTTT.WW
+  WW...#########..###########TTT.TTTTT###############....#########.###########...T#TTTT.WW
+  WW...#########..###########TT..TTTTT###############TT..#########.###########....#Tooo.WW
+  WW.oooooooooooooooo,,,,,,,,.....TTTT###############TTT.,,,,,,,,,.,,,,ooooo,,ooooooooo.WW
+  WW.oooooooooooooooooooTTTTTT##.####.###############TTTT....TTTTTTTooooooooooooooooooo.WW
+  WW....#TTToooooooooooooTTTTT##.####T###############TTT...TTTTTTTToooooooooooooTTToooo.WW
+  WW....#TTTTTooTTooooooooooTT.....TTT###############TT.#...TTTTooooooooo...oooTTTTTT...WW
+  WW....TTTTT.ooTTT..oooooooooo....TTT###############...#....oooooooooTTTTT.oooTTTTTTTT.WW
+  WW.####.....oo..........ooooooooooTT###############.....ooooooo######TT#T.oooT#TTTTTTTWW
+  WW.####.#...oo.##.#......#.ooooooooo###############..ooooooo...######TT#TToooT#TTTTTTTWW
+  WW.####.#...oo.##.#..TTTT#T...oooooooccccccccccccccooooooTTTT..######TTTTTooo.#T#.#...WW
+  WW.####.....oo......TTTTTTTT...ooooooccccccccccccccooo.TTTTTT..######TTTTTooo.#.#.#...WW
+  WW.####.....oo.....CCCCCCCCCCCCCCCooocccccccccccccccc...TTTTT..######..TTToo..........WW
+  WW.####.....oo..CCCCCCCCCCCCCCCCCCCCCCCcccccccccccccc..........######CCCCToo..CCCCCCCCWW
+  WW.CCCCCCCCCoo#CCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCcccc..........,,CCCCCCCCCoo#CCCCCCCCCWW
+  WWCCCCCCCCCC###CCCCC.TTTTTT.TTTTTCCCCCCCkkkkkkCCC...CCCCCCCCCCCCCCCCCCCCCC###CCCCCCCCCWW
+  WWCCCCCCCCCC###CC....TTTTT.TTTTT##T...CCkkkkkkCCCCCCCCCCCCCCCCCCCCCCCC..CC###CCTTTTT..WW
+  WWCC####.TTT###..##########.TTTT##......kkkkkk#.CCCCCCCCCCCCCCCCCC####....###TT####TT.WW
+  KKKT####.TTTkkk.cccccccccccccc..........kkkkkk#.CCCCC.TTTT.cccccccccccccc.kkkTT####T..WW
+  KKKT####.TTTkkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkkTT####.#.WW
+  KKKT####..#.kkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb.cccccccccccccc.kkk..####.#.WW
   GGG.####..#.kkk.ccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbb#cccccccccccccc.kkk..####...WW
   GGG.####....kkk.ccccccccccccccbbbbccccccccccccccccccccbbbb#cccccccccccccc.kkk..###kkk.WW
-  GGG.........kkk.ccccccccccccccbbbbccccccccccccccccccccbbbb#cccccccccccccc.kkkkkkkkkkk.WW
+  GGG.,,,,....kkk.ccccccccccccccbbbbccccccccccccccccccccbbbb#cccccccccccccc.kkkkkkkkkkk.WW
   kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccbbbbbbbbbbbbbbbbccbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.WW
   kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccbbbbbbbbbbbbbbbbccbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.WW
-  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccccccccccccccccccccbbkkkkkkkkkkkkkkkkkkkkkk..#.....WW
-  kkkkkkkkkkkkkkkkkkkoookkkkkkkkbbbbccccccccccccccccccccbbbb...##.#oo.kkkkkkk###..#.....WW
-  KKK.#########.....#ooo...#....bbbbbbbbbbbbbbbbbbbbbbbbbbbb...##.#oo..#########..#.....WW
-  KKK.#########.....#ooo...#...#bbbbbbbbbbbbbbbbbbbbbbbbbbbb##....#oo..#########........WW
-  KKK.#############..ooo..TTTTT#bbbbbbbbbbbbkkkbbbbbbbbbbbbb##TTTTToo..###############..WW
-  GGG.#############..ooo.#TTTTT#............kkk......#......#TTTTTToo..###############..WW
-  GGG.#############..ooo.#TTTTT........##...kkk......#........TTTTooo..###############..WW
-  GGG.#############..ooo.....#...hh....##...kkk..#.......hh..hhh..ooo..###############..WW
-  WW..#############..ooo.....#...hh.........kkk..#.......hh..hhh..oo...###############..WW
-  WW..#############..ooo....#########.......kkk..........hh.......oo...###############..WW
-  WW.................ooo....#kkkkkkkkkkkkkkkkkk...................ookkkkkkkkkkkkk.kkkkk.WW
+  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbccccccccccccccccccccbbkkkkkkkkkkkkkkkkkkkkkkTT#TTTT.WW
+  kkkkkkkkkkkkkkkkkkkoookkkkkkkkbbbbccccccccccccccccccccbbbbTTT##T#oo.kkkkkkkTTTTT#TTTTTWW
+  KKK.#########TTTT.#ooo...#TT..bbbbbbbbbbbbbbbbbbbbbbbbbbbbTTT##T#oo......TTTTTTT#TTTTTWW
+  KKK.#########TTTT.#ooo...#TT.#bbbbbbbbbbbbbbbbbbbbbbbbbbbb##.TTT#oo..###########TTTTTTWW
+  KKK.#############TTooo..TTTTT#bbbbbbbbbbbbkkkbbbbbbbbbbbbb##TTTTTooTT###############TTWW
+  GGG.#############TTooo.#TTTTT#TT..........kkk..TTTT#.....T#TTTTTTooTT###############TTWW
+  GGG.#############TTooo.#TTTTTTTT.....##...kkk...TTT#...TTTTTTTTToooTT###############TTWW
+  GGG.#############TToooTTTT.#TTThh...T##...kkk..#TTTTTT.hhTThhhTToooTT###############.TWW
+  WW..#############TToooTTTTT#.T.hhTTTTTT...kkk..#TTTTTT.hhTThhhTTooTTT###############..WW
+  WW..#############..oooTTTTT......TTTTTTT..kkk..TTTTTTT.hhTT..TTToo...###############..WW
+  WW..,,,,,,,,,,,,,..oooTTTTTkkkkkkkkkkkkkkkkkk.....TT.........TTTookkkkkkkkkkkkk,kkkkk.WW
   WW..#kkkkkkkkkkkkkkoookkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkookkkkkkkkkkkkkkkkkkk.WW
-  WW..#kkkkkkkkkkkkkkoookkkkkk#######.kkkkkkkkkkkkkkkkkkkkkkkkkkkkookkkk.######kkkkkkkk.WW
-  WW..#####kkkkkkkkkkkkkk...#########......#kkk......kkkkkkkkkkkkkkkk....###########....WW
-  WW..###############.######################kkk..######..###kkk#########.###########....WW
-  WW..###############.#####################kkkk..######TT####.##########.###########....WW
-  WW..###############.#####################kkkk.#######TT####.##########.###########.#..WW
-  WW..###############.#####################kkkk.#######TT####.##########.###########.#..WW
-  WW..###############.#####################kkkk.#######..####.##########.###########...KKK
-  WW..###############.#####################kkkk..######..####.##########.###########...KKK
-  KKK.............oooooooooooooooooooooooooooooooo......................oooooooooooooooKKK
+  WW..#kkkkkkkkkkkkkkoookkkkkk........kkkkkkkkkkkkkkkkkkkkkkkkkkkkookkkk...TTTTkkkkkkkkTWW
+  WW..#####kkkkkkkkkkkkkk.............TTTTT#kkkTT####kkkkkkkkkkkkkkkk########TTTT.TTTTTTWW
+  WW..###########.##########.##########TTTT#kkkTT###########kkk########################.WW
+  WW..###########T##########T##########T#TTkkkkTT######################################TWW
+  WW..###########T##########T##########T#TTkkkk.#######################################TWW
+  WW..###########T##########T##########TTTTkkkk.#######################################TWW
+  WW..###########.##########.##########TTTTkkkk.#######################################KKK
+  WW..###########.##########.##########.TT.kkkk..######################################KKK
+  KKK.,,,,,,,,,,,.oooooooooooooooooooooooooooooooo,,,,,,,,,,,,,,,,,,,,,,oooooooooooooooKKK
   KKKooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooGGG
-  KKKooooooooooooooooooooo....ooooooooooo..oooooooooooooooooooooooooooooooooTTToooooo..GGG
-  GGG.......TTTTTTTTTTTTT.CCCCCCCCCCC.........TTTTTTTTTTTTTTCCCCCCCCCCCCCCCCCCCTTTT....GGG
-  GGGCC.......TCCCCCCCCCCCC~~~~~C~~~CCCCCCCCCCCCCTTTTTTT.CCCC~~~~~~~~~~~~~~~~~CCCCC....GGG
+  KKKoooooooooooooooooooooTTTTooooooooooo.ToooooooooooooooooooooooooooooooooTTToooooo..GGG
+  GGG.......TTTTTTTTTTTTTTCCCCCCCCCCC.....TTTTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCCCCTTTTTTT.GGG
+  GGGCC.......TCCCCCCCCCCCC~~~~~C~~~CCCCCCCCCCCCCTTTTTTT.CCCC~~~~~~~~~~~~~~~~~CCCCCTTTTGGG
   GGG~CCCCCCCCCC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCCCCCCC~~~~~~~~~~~~~~~~~~~~~~~~CCCCC.FF
   GGG~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCFF
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,49 +181,29 @@ stamps:
   at: [36, 38]
 - stamp: t_bench
   at: [50, 38]
-- stamp: t_bench
-  at: [15, 8]
-- stamp: t_bench
-  at: [31, 8]
-- stamp: t_barrel
-  at: [31, 10]
-- stamp: t_barrel2
-  at: [81, 6]
-- stamp: t_barrel2
-  at: [69, 8]
-- stamp: t_barrel
-  at: [75, 7]
-- stamp: t_barrel
-  at: [66, 7]
+- stamp: w_manor_a
+  at: [5, 6]
+- stamp: w_longhouse
+  at: [16, 8]
+- stamp: w_manor_a
+  at: [55, 6]
+- stamp: w_longhouse
+  at: [65, 8]
 - stamp: w_cot
-  at: [4, 19]
-- stamp: t_board
-  at: [10, 23]
-- stamp: t_barrel
-  at: [21, 18]
-- stamp: t_bench
-  at: [17, 16]
-- stamp: t_barrel
-  at: [23, 20]
+  at: [3, 20]
 - stamp: w_house
-  at: [55, 19]
-- stamp: w_manor_b
-  at: [61, 16]
-- stamp: w_cot
-  at: [79, 19]
-- stamp: t_bench
-  at: [83, 16]
+  at: [63, 20]
 - stamp: w_cot
   at: [4, 29]
 - stamp: t_board
   at: [10, 32]
-- stamp: t_stall
+- stamp: w_house
   at: [17, 29]
-- stamp: t_townhouse
-  at: [22, 29]
+- stamp: w_cot
+  at: [23, 29]
 - stamp: t_barrel
   at: [28, 33]
-- stamp: t_stall
+- stamp: w_cot
   at: [66, 29]
 - stamp: t_bench
   at: [60, 32]
@@ -231,40 +211,40 @@ stamps:
   at: [79, 29]
 - stamp: t_board
   at: [84, 31]
-- stamp: w_ell_b
-  at: [4, 37]
+- stamp: w_manor_a
+  at: [4, 39]
 - stamp: w_cot
   at: [13, 42]
 - stamp: t_barrel2
   at: [27, 45]
 - stamp: t_barrel
   at: [47, 45]
-- stamp: w_ell_b
-  at: [69, 37]
-- stamp: w_house
-  at: [78, 42]
+- stamp: w_longhouse
+  at: [69, 41]
+- stamp: w_cot
+  at: [80, 42]
 - stamp: w_manor_b
   at: [4, 49]
+- stamp: w_house
+  at: [16, 52]
 - stamp: w_cot
-  at: [15, 52]
+  at: [22, 52]
 - stamp: w_house
-  at: [20, 52]
-- stamp: w_ell_b
-  at: [26, 47]
-- stamp: w_house
-  at: [35, 52]
-- stamp: w_house
-  at: [47, 52]
+  at: [27, 52]
 - stamp: w_cot
-  at: [55, 52]
-- stamp: w_house
-  at: [60, 52]
-- stamp: w_cot
-  at: [66, 52]
-- stamp: w_manor_b
-  at: [71, 49]
+  at: [33, 52]
 - stamp: t_barrel2
-  at: [83, 54]
+  at: [38, 53]
+- stamp: w_longhouse
+  at: [47, 51]
+- stamp: w_house
+  at: [58, 52]
+- stamp: w_longhouse
+  at: [64, 51]
+- stamp: w_cot
+  at: [75, 52]
+- stamp: w_house
+  at: [79, 52]
 - stamp: t_barrel
   at: [32, 39]
 - stamp: t_barrel
@@ -278,31 +258,41 @@ stamps:
 - stamp: t_rock
   at: [28, 16]
 - stamp: t_barrel2
-  at: [58, 15]
-- stamp: t_trellis
-  at: [6, 16]
+  at: [78, 20]
+- stamp: t_barrel
+  at: [54, 18]
 - stamp: t_barrel
   at: [51, 43]
+- stamp: t_barrel
+  at: [6, 17]
 - stamp: t_trellis
   at: [32, 28]
 - stamp: t_barrel2
   at: [25, 21]
+- stamp: t_barrel2
+  at: [78, 22]
+- stamp: t_barrel
+  at: [80, 22]
 - stamp: t_trellis
   at: [61, 39]
 - stamp: t_barrel
   at: [25, 40]
 - stamp: t_barrel
+  at: [82, 22]
+- stamp: t_barrel
   at: [59, 41]
 - stamp: t_barrel
   at: [23, 43]
 - stamp: t_barrel
-  at: [79, 15]
+  at: [18, 21]
 - stamp: t_trellis
   at: [15, 21]
 - stamp: t_barrel
-  at: [9, 16]
-- stamp: t_barrel2
-  at: [25, 16]
+  at: [8, 21]
+- stamp: t_barrel
+  at: [71, 20]
+- stamp: t_table
+  at: [31, 16]
 - stamp: t_rock
   at: [37, 44]
 - stamp: t_lamp
@@ -328,12 +318,6 @@ stamps:
 - stamp: t_lamp
   at: [46, 54]
 - stamp: t_lamp
-  at: [8, 13]
-- stamp: t_lamp
-  at: [26, 13]
-- stamp: t_lamp
-  at: [60, 13]
-- stamp: t_lamp
   at: [80, 13]
 tiles:
 - tile: 3859
@@ -346,25 +330,22 @@ tiles:
   at: [54, 41]
   layer: 0
 - tile: 3916
-  at: [42, 23]
+  at: [38, 23]
   layer: 0
 - tile: 3916
-  at: [44, 23]
+  at: [49, 23]
   layer: 0
 - tile: 3916
-  at: [47, 23]
+  at: [41, 24]
   layer: 0
 - tile: 3916
-  at: [46, 24]
+  at: [45, 25]
   layer: 0
 - tile: 3916
-  at: [42, 25]
+  at: [51, 25]
   layer: 0
 - tile: 3916
-  at: [44, 25]
-  layer: 0
-- tile: 3916
-  at: [52, 38]
+  at: [35, 38]
   layer: 0
 - tile: 1554
   at: [5, 69]

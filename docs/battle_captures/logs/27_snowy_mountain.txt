@@ -104,7 +104,7 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
   It's super effective!
   The opposing Masquerain fainted!
     xx fainted: Masquerain (foe)
-  Staravia got 479 Exp. Points!
+  Staravia is at the level cap (Lv. 17) and can't gain Exp. Points.
   (end of round)
   Champion Shelly is about to send out Joltik. Will you switch your Pokémon?  [auto: No]
   Champion Shelly sent out Joltik!
@@ -149,7 +149,7 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
     xx fainted: Joltik (foe)
   It's super effective!
   Hit 1 time!
-  Roggenrola got 193 Exp. Points!
+  Roggenrola is at the level cap (Lv. 17) and can't gain Exp. Points.
   (end of round)
   Champion Shelly is about to send out Larvesta. Will you switch your Pokémon?  [auto: No]
   Champion Shelly sent out Larvesta!
@@ -171,7 +171,6 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
     xx fainted: Larvesta (foe)
   It's super effective!
   Hit 2 times!
-  Roggenrola got 245 Exp. Points!
   (end of round)
   Champion Shelly is about to send out Scyther. Will you switch your Pokémon?  [auto: No]
   Champion Shelly sent out Scyther!
@@ -224,7 +223,7 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
   The opposing Scyther fainted!
     xx fainted: Scyther (foe)
   The opposing Scyther dropped its Eviolite!
-  Machop got 341 Exp. Points!
+  Machop is at the level cap (Lv. 17) and can't gain Exp. Points.
   You defeated Champion Shelly!
   S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
   You got $2,550 for winning!

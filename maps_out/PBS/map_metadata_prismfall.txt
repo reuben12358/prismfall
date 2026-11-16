@@ -110,7 +110,7 @@ Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center
-HealingSpot = 140,12,25
+HealingSpot = 140,19,30
 MapPosition = 0,10,25
 #-------------------------------
 [142]   # Saltmere Mart

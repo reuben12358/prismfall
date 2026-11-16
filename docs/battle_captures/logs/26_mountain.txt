@@ -54,7 +54,7 @@ Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
     HP Machop (foe): 12 -> 0 / 47
   The opposing Machop fainted!
     xx fainted: Machop (foe)
-  Growlithe got 173 Exp. Points!
+  Growlithe is at the level cap (Lv. 16) and can't gain Exp. Points.
   (end of round)
   Your team's Tailwind petered out!
   Black Belt Taro is about to send out Timburr. Will you switch your Pokémon?  [auto: No]
@@ -91,7 +91,7 @@ Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
     HP Timburr (foe): 12 -> 0 / 52
   The opposing Timburr fainted!
     xx fainted: Timburr (foe)
-  Machop got 196 Exp. Points!
+  Machop is at the level cap (Lv. 16) and can't gain Exp. Points.
   You defeated Black Belt Taro!
   Hah! My fists need more salt-mine training.
   You got $512 for winning!

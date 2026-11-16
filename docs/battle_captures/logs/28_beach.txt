@@ -47,7 +47,7 @@ Beach [BEACH] - Picnicker Susie vs challenger (Lv.18)
     HP Meowth (foe): 19 -> 0 / 45
   The opposing Meowth fainted!
     xx fainted: Meowth (foe)
-  Growlithe got 209 Exp. Points!
+  Growlithe is at the level cap (Lv. 18) and can't gain Exp. Points.
   You defeated Picnicker Susie!
   Defeated! Oh my!
   You got $288 for winning!

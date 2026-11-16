@@ -107,35 +107,35 @@ ASHEN_WASTE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x
   [Mew 341/341 | Snorlax 461/461]
   Mew used Eruption!
   The ash smothered the flames...
-    HP Snorlax (foe): 461 -> 417 / 461
+    HP Snorlax (foe): 461 -> 375 / 461
   The crust glows red beneath the ash... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     HP Mew (player): 341 -> 320 / 341
   Mew is choking on the ash!
-    HP Snorlax (foe): 417 -> 388 / 461
+    HP Snorlax (foe): 375 -> 346 / 461
   The wild Snorlax is choking on the ash!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 388/461]
+  [Mew 320/341 | Snorlax 346/461]
   Mew used Eruption!
   The ash smothered the flames...
-    HP Snorlax (foe): 388 -> 345 / 461
+    HP Snorlax (foe): 346 -> 262 / 461
   The crust glows red beneath the ash... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     HP Mew (player): 320 -> 299 / 341
   Mew is choking on the ash!
-    HP Snorlax (foe): 345 -> 316 / 461
+    HP Snorlax (foe): 262 -> 233 / 461
   The wild Snorlax is choking on the ash!
 
 --- Turn 3 ---
-  [Mew 299/341 | Snorlax 316/461]
+  [Mew 299/341 | Snorlax 233/461]
   Mew used Eruption!
   The ash smothered the flames...
-    HP Snorlax (foe): 316 -> 277 / 461
+    HP Snorlax (foe): 233 -> 156 / 461
 ## FIELD CHANGE: ASHEN_WASTE -> VOLCANIC
   The magma reawakened beneath the ash!
   The wild Snorlax used Splash!
@@ -143,11 +143,11 @@ ASHEN_WASTE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x
   (end of round)
     HP Mew (player): 299 -> 278 / 341
   Mew was scorched by the magma!
-    HP Snorlax (foe): 277 -> 248 / 461
+    HP Snorlax (foe): 156 -> 127 / 461
   The wild Snorlax was scorched by the magma!
 
 --- Turn 4 ---
-  [Mew 278/341 | Snorlax 248/461]
+  [Mew 278/341 | Snorlax 127/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -155,11 +155,11 @@ ASHEN_WASTE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x
   (end of round)
     HP Mew (player): 278 -> 257 / 341
   Mew was scorched by the magma!
-    HP Snorlax (foe): 248 -> 219 / 461
+    HP Snorlax (foe): 127 -> 98 / 461
   The wild Snorlax was scorched by the magma!
 
 --- Turn 5 ---
-  [Mew 257/341 | Snorlax 219/461]
+  [Mew 257/341 | Snorlax 98/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
@@ -207,7 +207,7 @@ ASHEN_WASTE probe: end-of-round rule 1: damage on {:not_types=>[:FIRE, :GROUND, 
   field: ASHEN_WASTE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
   Grey ash drifts over the cooled crust...
 

@@ -15,73 +15,73 @@ metadata:
   Weather: [Rain, 10]
 map: |
   WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC######CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~~~
-  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~~~
-  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WW..................kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WW..........pppppp..kkbbbbbbbbbbbbbbbbbbbcccccccckbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.pppppppTTpppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW........TTT.......kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW........TTT.......kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.ppppp..pppppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbb~~~~~~~~~~~~~~~~
-  WW.ppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WW.ppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WW.ppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkccccccccckkkkk~~~~~~~~~~~~~~~~
-  WW.ppppp............kkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkkkk~~~~~~~~~~~~~~~~
-  WW.................Tkkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkkkk~~~~~~~~~~~~~~~~
-  WW..pppppppppppp..TTkkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkkkk~~~~~~~~~~~~~~~~
-  WW..pppppppppppp..TTkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkccccccccckkkkk~~~~~~~~~~~~~~~~
-  WW..pppppppppppp..TTkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WW..................kkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WWkkkkkkkkkkkkkkkkkkkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppk~~~~~~~~~~~~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppk~~~~~~~~~~~~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppk~~~~~~~~~~~~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppk~~~~~~~CC~~~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppk~~~~~CCCCCC~~~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppk~~~CCCTTTTCCC~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppk~~CCTTTTTTTTC~~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppk~CC..TTTTTTTCC~~
-  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkkkkkkkkkkbbbbbb~C...........C~~
-  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkbbbbbb~C...........C~~
-  WWkkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbCC...........C~~
-  WWkkkkkkkkkkkkkkkkkkkkkbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbC....#######.C~~
-  WWkkkkkkkkkkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkbbbbbbbbC....#######.CC~
-  KKKbbbbbbbkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkbbbbbbbbbbbCo...#######..C~
-  KKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbCCoo..#######..C~
-  KKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~Cooo..#######..CC
-  GGGbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~C.ooo.#######....
-  GGGbbbbbbbbbbbbbbbbbbbbbbbb=~~~~~~~~~bbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~C.oooo#######....
-  GGGbbbbbbbbbbbbbbbbbbbb~~===~~~~~~~~~~~~~~bbbbbbbbbbbbbbbbbbbbbbbb~~~~~C..oooo######....
-  ~~bbbbbbbbbbbbbbbbbb~~~~~===~~~~~~~~~~~~~~~====~~~bbbbbbbbbbbbbb~~~~~~~C..oooo######....
-  ~~~~~~~~~=bbbbb~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~bbb==~~~~~~~~C...ooo######....
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~C...ooo######....
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~C..T.oo######....
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~C.TTToo######T...
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~C.TTTooo#####TT..
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~CC###ooo#####TT..
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~~C###.ooo####TTT.
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~~CC##.ooo####TTCC
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~C##.ooo####TTC~
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~CC#.ooooTTTTCC~
-  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~C#.ooooTTTTC~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CC.ooooTTTCC~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~C.......CC~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~C......CC~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CC...CCC~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCC~~~~~~~
+  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
+  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
+  WW.TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.kcccccccck.TTTTTTTTTTTTTTTTTTTTTT.~~~~~~~~~~~~~~
+  WW......................................kcccccccck........................~~~~~~~~~~~~~~
+  WW..................kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WW..........pppppp..kkbbbbbbbbbbbbbbbbbbbcccccccckbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WW.ppppppp..pppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WWTpppppppTTpppppp..kkbbbbbbbbbbbbbbbbbbbkkkkTTTkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WWTTTT....TTT.......kkbbbbbbbbbbbbbbbbbbbkkkkTTTkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WWTTTT....TTT.......kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WW.ppppp..pppppppp..kkbbbbbbbbbbbbbbbbbbbkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbkk~~~~~~~~~~~~~~
+  WW.ppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WWTppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WWTppppp..pppppppp..kkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkccccccccckkTTTkk~~~~~~~~~~~~~~
+  WWTppppp............kkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkTTTkk~~~~~~~~~~~~~~
+  WWTT...............Tkkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkkkkkk~~~~~~~~~~~~~~
+  WWT.pppppppppppp..TTkkpppppppppppppppppkkcccccccckkkkkkkkkccccccccckkkkkkk~~~~~~~~~~~~~~
+  WW..pppppppppppp..TTkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkccccccccckkkkkkk~~~~~~~~~~~~~~
+  WW..pppppppppppp..TTkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WW..................kkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WWkkkkkkkkkkkkkkkkkkkkpppppppppppppppppkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk~~~~~~~~~~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppkkk~~~~~~~~~~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppkkk~~~~~~~~~~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppkkk~~~~~~~~~~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppkkk~~~~~~~~~~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkppppppppppppppkkk~~~TTTTTT~~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppkkk~.TTTTTTTT~~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppkkk..TTTTTTTTT~~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkppppppppppppppkk...TTTTTTTTTT~~
+  WWkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkcccccccckkkkkkkkkkkkkkkkkkbbbbbbb....TTTTTTTTT~~
+  WWkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkcccccccckkkkkkkkkkkkkkkkkkbbbbbbb..TTT........~~
+  WWkkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbb.TTTTT.......~~
+  WWkkkkkkkkkkkkkkkkkkkkkbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkkkkkkkkkkkbbbbbbb.TTT#######..~~
+  WWkkkkkkkkkkkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkkkkkkkkkkkkkkbbbbbbbbooTTT#######TT.~
+  KKKbbbbbbbkkkkkbbbbbbbbbbbbbbbbbbbbTTTbbbbbbbbbbbbbbbbbbbbkkkbbbbbbbbbbboo.TT#######TT.~
+  KKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbTTTbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.ooo..#######TT.~
+  KKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~..oo..#######TTT.
+  GGGbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~..ooo.#######TTT.
+  GGGbbbbbbbbbbbbbbbbbbbbbbbb=~~~~~~~~~bbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~~~~...ooo#######TT..
+  GGGbbbbbbbbbbbbbbbbbbbb~~===~~~~~~~~~~~~~~bbbbbbbbbbbbbbbbbbbbbbbb~~~~~...oooo######TT..
+  ~~bbbbbbbbbbbbbbbbbb~~~~~===~~~~~~~~~~~~~~~====~~~bbbbbbbbbbbbbb~~~~~~~...oooo######TT..
+  ~~~~~~~~~=bbbbb~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~bbb==~~~~~~~~....ooo######....
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~....ooo######TT..
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~....ooo######TT..
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~.....oo######TT..
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~...T.oo######TT..
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~..TTToo######TTT.
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~.TTTTooo#####TTT.
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~~TTTTooo#####TTT.
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~.TTTooo#####TTT.
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~.TTTooo,,,,,TTT.
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~..T.ooo...TTTT.~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...ooo........~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...ooo..TTTTT.~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~..oooo..TTTTT~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.oo....TTTT~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ooo.......~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~o........~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~........~~~~~~~~~~~~~~~~~~~o........~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~oooooooooTTTTTTT........TTTTToooooooooooooooo.....TTT~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~oooooooooooooooooooooooooooooooooooooooooooooooo...TTTTTT.~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~...oooooooooooooooooooooooooooooooooooooo..........TTTTTTT~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.....TTTTTooooooo.....ooooooo.................~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCCCCC.TTTTTTTT..............TTTTTTTT.......CCCCCC~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~CC.....TTTTTTTTTTTT.........TTTTTTTTTTTTTTT.......CCCC~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCC....TTTTTTTT..............TTTTTTTTTT.....CCCCC~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,46 +115,46 @@ heights: |
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  0000000000000000000000000000000000000000000000000000000000000000000000000000000110000000
-  0000000000000000000000000000000000000000000000000000000000000000000000000000011111100000
-  0000000000000000000000000000000000000000000000000000000000000000000000000001111111111000
-  0000000000000000000000000000000000000000000000000000000000000000000000000011111111111000
-  0000000000000000000000000000000000000000000000000000000000000000000000000111111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000000111111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000000111111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111110
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111110
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111110
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000001111111111111111
-  0000000000000000000000000000000000000000000000000000000000000000000000000111111111111110
-  0000000000000000000000000000000000000000000000000000000000000000000000000111111111111110
-  0000000000000000000000000000000000000000000000000000000000000000000000000011111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000000011111111111100
-  0000000000000000000000000000000000000000000000000000000000000000000000000001111111111000
-  0000000000000000000000000000000000000000000000000000000000000000000000000001111111110000
-  0000000000000000000000000000000000000000000000000000000000000000000000000001111111100000
-  0000000000000000000000000000000000000000000000000000000000000000000000000000111110000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  0000000000000000000000000000000000111111111111111111111111111111111111111100000000000000
-  0000000000000000000000000001111111111111111111111111111111111111111111111111111000000000
-  0000000000000000000000000001111111111111111111111111111111111111111111111111111110000000
-  0000000000000000000000000000111111111111111111111111111111111111111111111111110000000000
-  0000000000000000000000000000000111111111111111111111111111111111111111111100000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -174,7 +174,7 @@ stamps:
 - stamp: t_ship
   at: [48, 47]
 - stamp: t_ship
-  at: [64, 50]
+  at: [13, 52]
 - stamp: t_warehouse
   at: [23, 6]
 - stamp: h_black
@@ -219,29 +219,33 @@ stamps:
   at: [31, 18]
 - stamp: t_barrel2
   at: [37, 21]
-- stamp: t_table
+- stamp: t_bench
   at: [60, 39]
 - stamp: t_crate_pair
   at: [14, 36]
-- stamp: t_table
+- stamp: t_bench
   at: [20, 40]
-- stamp: t_table
+- stamp: t_bench
   at: [29, 36]
 - stamp: t_cont_brown
   at: [42, 21]
-- stamp: t_table
+- stamp: t_bench
   at: [30, 14]
 - stamp: t_crate_a
   at: [40, 28]
-- stamp: t_table
+- stamp: t_bench
+  at: [68, 22]
+- stamp: t_barrel
   at: [56, 21]
+- stamp: t_cont_long
+  at: [23, 37]
 - stamp: t_crates_b
   at: [43, 14]
 - stamp: t_barrel
   at: [65, 21]
 - stamp: t_barrel
   at: [7, 40]
-- stamp: t_table
+- stamp: t_bench
   at: [48, 37]
 - stamp: t_barrel2
   at: [54, 36]
@@ -253,10 +257,14 @@ stamps:
   at: [9, 39]
 - stamp: t_crates_b
   at: [41, 34]
-- stamp: t_table
+- stamp: t_barrel
+  at: [23, 40]
+- stamp: t_bench
   at: [29, 39]
 - stamp: t_cont_green
   at: [51, 18]
+- stamp: t_barrel2
+  at: [60, 20]
 - stamp: t_cont_green
   at: [4, 39]
 - stamp: t_barrel
@@ -277,24 +285,8 @@ stamps:
   at: [18, 39]
 - stamp: t_barrel
   at: [57, 37]
-- stamp: t_table
+- stamp: t_bench
   at: [60, 36]
-- stamp: t_barrel
-  at: [4, 34]
-- stamp: t_barrel
-  at: [40, 14]
-- stamp: t_cont_green
-  at: [64, 14]
-- stamp: t_barrel2
-  at: [59, 18]
-- stamp: t_table
-  at: [25, 24]
-- stamp: t_barrel
-  at: [67, 16]
-- stamp: t_barrel2
-  at: [51, 40]
-- stamp: t_cont_brown
-  at: [25, 36]
 - stamp: t_lamp
   at: [40, 6]
 - stamp: t_lamp
@@ -310,13 +302,9 @@ stamps:
 - stamp: t_lamp
   at: [8, 38]
 - stamp: t_lamp
-  at: [24, 37]
-- stamp: t_lamp
   at: [58, 38]
 - stamp: t_lamp
   at: [70, 32]
-- stamp: t_bench
-  at: [34, 37]
 tiles:
 - tile: 914
   at: [15, 26]
@@ -346,97 +334,82 @@ tiles:
   at: [39, 8]
   layer: 0
 - tile: 3859
-  at: [13, 26]
+  at: [14, 27]
   layer: 0
 - tile: 3859
-  at: [33, 26]
+  at: [13, 28]
   layer: 0
 - tile: 3859
-  at: [17, 27]
+  at: [35, 29]
   layer: 0
 - tile: 3859
-  at: [68, 36]
+  at: [68, 37]
   layer: 0
 - tile: 3859
-  at: [39, 37]
+  at: [21, 38]
   layer: 0
 - tile: 3859
-  at: [40, 37]
+  at: [17, 39]
   layer: 0
 - tile: 3859
-  at: [23, 38]
+  at: [47, 39]
   layer: 0
 - tile: 3859
-  at: [24, 38]
+  at: [49, 39]
   layer: 0
 - tile: 3859
-  at: [16, 39]
+  at: [25, 40]
   layer: 0
 - tile: 3859
-  at: [36, 39]
+  at: [31, 40]
   layer: 0
 - tile: 3859
-  at: [38, 39]
+  at: [47, 40]
   layer: 0
 - tile: 3859
-  at: [53, 39]
+  at: [48, 40]
   layer: 0
 - tile: 3859
-  at: [17, 40]
-  layer: 0
-- tile: 3859
-  at: [28, 40]
-  layer: 0
-- tile: 3859
-  at: [43, 40]
-  layer: 0
-- tile: 3859
-  at: [44, 40]
-  layer: 0
-- tile: 3859
-  at: [14, 41]
+  at: [16, 41]
   layer: 0
 - tile: 3859
   at: [44, 41]
   layer: 0
 - tile: 3859
-  at: [63, 41]
+  at: [62, 41]
   layer: 0
 - tile: 3859
-  at: [19, 42]
+  at: [18, 42]
   layer: 0
 - tile: 3859
-  at: [58, 42]
+  at: [57, 42]
   layer: 0
 - tile: 3859
-  at: [14, 43]
+  at: [13, 43]
   layer: 0
 - tile: 3859
-  at: [52, 43]
+  at: [51, 43]
   layer: 0
 - tile: 3859
-  at: [13, 44]
+  at: [12, 44]
+  layer: 0
+- tile: 3859
+  at: [14, 44]
+  layer: 0
+- tile: 3859
+  at: [58, 44]
   layer: 0
 - tile: 3916
   at: [42, 16]
   layer: 0
 - tile: 3916
-  at: [60, 17]
-  layer: 0
-- tile: 3916
-  at: [42, 18]
+  at: [41, 33]
   layer: 0
 - tile: 1555
   at: [54, 69]
   layer: 2
 - tile: 1563
   at: [54, 70]
-  layer: 2
-- tile: 1554
-  at: [74, 4]
-  layer: 2
-- tile: 1562
-  at: [74, 5]
   layer: 2
 - tile: 1552
   at: [9, 68]
@@ -498,12 +471,6 @@ tiles:
 - tile: 1563
   at: [85, 11]
   layer: 2
-- tile: 1554
-  at: [22, 57]
-  layer: 2
-- tile: 1562
-  at: [22, 58]
-  layer: 2
 - tile: 1555
   at: [79, 6]
   layer: 2
@@ -551,6 +518,12 @@ tiles:
   layer: 2
 - tile: 1562
   at: [37, 46]
+  layer: 2
+- tile: 1555
+  at: [59, 68]
+  layer: 2
+- tile: 1563
+  at: [59, 69]
   layer: 2
 - tile: 1554
   at: [29, 56]
@@ -641,18 +614,6 @@ tiles:
   layer: 2
 - tile: 1562
   at: [85, 4]
-  layer: 2
-- tile: 1552
-  at: [16, 54]
-  layer: 2
-- tile: 1553
-  at: [17, 54]
-  layer: 2
-- tile: 1560
-  at: [16, 55]
-  layer: 2
-- tile: 1561
-  at: [17, 55]
   layer: 2
 - tile: 1552
   at: [21, 64]
@@ -792,16 +753,28 @@ tiles:
 - tile: 1561
   at: [43, 55]
   layer: 2
+- tile: 1555
+  at: [38, 52]
+  layer: 2
+- tile: 1563
+  at: [38, 53]
+  layer: 2
+- tile: 1555
+  at: [49, 69]
+  layer: 2
+- tile: 1563
+  at: [49, 70]
+  layer: 2
 - tile: 1554
-  at: [72, 60]
+  at: [33, 43]
   layer: 2
 - tile: 1562
-  at: [72, 61]
+  at: [33, 44]
   layer: 2
 tileblocks: []
 events:
 - type: sign
-  at: [75, 58]
+  at: [72, 62]
   text: The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed.
 - type: sign
   at: [53, 33]

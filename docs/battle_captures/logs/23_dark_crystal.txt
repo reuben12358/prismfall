@@ -62,7 +62,7 @@ Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
   The opposing Carvanha fainted!
     xx fainted: Carvanha (foe)
   The opposing Carvanha dropped its Oran Berry!
-  Machop got 209 Exp. Points!
+  Machop is at the level cap (Lv. 21) and can't gain Exp. Points.
   (end of round)
   Hollow Keeper Teo is about to send out Arrokuda. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Teo sent out Arrokuda!
@@ -89,7 +89,6 @@ Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
   The opposing Arrokuda fainted!
     xx fainted: Arrokuda (foe)
   The opposing Arrokuda dropped its Oran Berry!
-  Machop got 214 Exp. Points!
   (end of round)
   Hollow Keeper Teo is about to send out Snapper. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Teo sent out Snapper!
@@ -126,7 +125,7 @@ Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
   It's super effective!
   The opposing Snapper fainted!
     xx fainted: Snapper (foe)
-  Mareep got 240 Exp. Points!
+  Mareep is at the level cap (Lv. 21) and can't gain Exp. Points.
   You defeated Hollow Keeper Teo!
   Tell my sister— no. Don't tell her anything.
   You got $1,680 for winning!

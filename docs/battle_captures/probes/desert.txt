@@ -129,7 +129,7 @@ DESERT probe: end-of-round rule 2: damage on {:types=>[:ICE]} [subject Glalie]
   field: DESERT | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Glalie!
-    >> sent out (player): Glalie Lv.100 [ICEBODY]
+    >> sent out (player): Glalie Lv.100 [INNERFOCUS]
 ## FIELD CHANGE: NONE -> DESERT
   Heat shimmers over the endless dunes...
 

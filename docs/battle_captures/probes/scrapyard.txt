@@ -98,7 +98,7 @@ SCRAPYARD probe: end-of-round rule 1: damage on {:types=>[:STEEL]} +condition [s
   field: SCRAPYARD | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Klinklang!
-    >> sent out (player): Klinklang Lv.100 [MINUS]
+    >> sent out (player): Klinklang Lv.100 [PLUS]
 ## FIELD CHANGE: NONE -> SCRAPYARD
   Jagged scrap and leaking chemicals litter the ground...
     HP Klinklang (player): 130 -> 122 / 261

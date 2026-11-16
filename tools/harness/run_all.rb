@@ -146,6 +146,7 @@ FULL_BATTLES.each_with_index do |b, i|
     raise "level cap mismatch for #{b[:label]}: #{cap} vs #{b[:level]}" if cap != b[:level]
   else
     Harness.set_badges(18)
+    Prismfall::LevelCap.set_override(b[:level])   # story-forced cap = the opponent's top level
   end
   $player.party = Harness.challenger_party(b[:level], Harness.field_seed(field))
   title = "#{FieldEffects.name_of(field)} [#{field}] - #{b[:label]} vs challenger (Lv.#{b[:level]})"
@@ -158,6 +159,7 @@ FULL_BATTLES.each_with_index do |b, i|
       TrainerBattle.start(b[:type], b[:name], b[:version])
     end
   end
+  Prismfall::LevelCap.clear_override
   seen = Harness.observed_field_messages(log, field)
   path = Harness.write_log("logs", format("%02d_%s", i + 1, field.to_s.downcase), log)
   RESULTS[:battles] << { :field => field, :label => b[:label], :level => b[:level], :outcome => log.outcome,
@@ -199,6 +201,82 @@ if !ONLY || ONLY.include?(:BOSSES)
     puts format("boss   %-28s %-11s %3d turns  bars broken:%d  errors:%d", s[:name], s[:outcome_text], s[:turns],
                 s[:bar_breaks].size, r[:log].errors.size)
   end
+end
+
+
+#-------------------------------------------------------------------------------
+# 4. Summary table
+#-------------------------------------------------------------------------------
+def tick(ok); ok ? "yes" : "**NO**"; end
+def frac(list); list.empty? ? "none defined" : "#{list.count { |r| r[:ok] }}/#{list.size}"; end
+
+if !ONLY
+  boot = RESULTS[:boot]
+  clean = RESULTS[:battles].count { |b| b[:outcome] && b[:errors] == 0 }
+  md = []
+  md << "# Prismfall battle captures - headless logic test"
+  md << ""
+  md << "> **These are logic-test outputs, not game screenshots.** The real Pokemon Essentials v21.1 battle code"
+  md << "> (Battle, Battler, Move, AI, abilities, items) ran in plain Ruby with the Prismfall Core, Field Effects and"
+  md << "> Bosses plugins loaded by the real PluginManager, behind a text-logging battle scene. No graphics, audio,"
+  md << "> EBDX or RPG Maker runtime was involved, so nothing here proves how the game *looks*."
+  md << ""
+  md << "Regenerate with `ruby tools/harness/run_all.rb` then `python3 -I tools/harness/render_cards.py`."
+  md << ""
+  md << "## What loaded"
+  md << "- Engine: #{boot[:engine_scripts]} script sections of the base project (Essentials v21.1), in order."
+  md << "- Plugins, in PluginManager order: #{boot[:plugins].join(', ')}."
+  md << "- PBS compiled by the real Compiler: #{boot[:species]} species, #{boot[:moves]} moves, #{boot[:trainers]} trainers" \
+        " (incl. the kit's trainers/trainer types/seed items); #{boot[:fields]} fields registered."
+  md << "- Not loaded: Elite Battle DX, Prismfall EBDX Bridge, Cutscenes, Debug Tools, maps, encounters."
+  md << ""
+  md << "## Result"
+  md << "- Full AI-vs-AI battles: **#{clean}/#{RESULTS[:battles].size} completed without an error** (one per field)."
+  pr = RESULTS[:probes].values
+  md << "- Scripted probes: boosted move #{pr.count { |s| s[:boost][:ok] }}/#{pr.size} fields; transitions " \
+        "#{pr.sum { |s| s[:transitions].count { |r| r[:ok] } }}/#{pr.sum { |s| s[:transitions].size }} rules fired; seeds " \
+        "#{pr.sum { |s| s[:seeds].count { |r| r[:ok] } }}/#{pr.sum { |s| s[:seeds].size }}; end-of-round rules " \
+        "#{pr.sum { |s| s[:eor].count { |r| r[:ok] } }}/#{pr.sum { |s| s[:eor].size }}."
+  md << "- Boss / arena runs: #{RESULTS[:bosses].size} (see below). Exceptions in the final run: **#{RESULTS[:errors].size}**."
+  md << ""
+  md << "## Per field"
+  md << "\"Field messages\" = distinct messages written in the field's definition that appeared in the full battle."
+  md << ""
+  md << "| # | Field | Full battle vs | Completed? | Result | Turns | Field messages | Boosted move (damage on field / no field) | Transitions fired | Seed | End-of-round |"
+  md << "|---|---|---|---|---|---|---|---|---|---|---|"
+  RESULTS[:battles].each_with_index do |b, i|
+    s = RESULTS[:probes][b[:field]]
+    boost = s[:boost][:ok] ? "#{GameData::Move.get(s[:boost][:move]).name} #{s[:boost][:with]} / #{s[:boost][:without]}" : "**not observed**"
+    md << "| #{i + 1} | #{FieldEffects.name_of(b[:field])} `#{b[:field]}` | #{b[:label]} (Lv.#{b[:level]}) | " \
+          "#{tick(b[:outcome] && b[:errors] == 0)} | #{b[:outcome_text]} | #{b[:turns]} | #{b[:field_messages].size} | " \
+          "#{boost} | #{frac(s[:transitions])} | #{frac(s[:seeds])} | #{frac(s[:eor])} |"
+  end
+  md << ""
+  md << "Logs: `logs/NN_<field>.txt` (full battle) and `probes/<field>.txt` (every scripted probe for that field)."
+  md << ""
+  md << "## Bosses and PRISM_ARENA"
+  md << "| Run | Result | Turns | Bars broken | Field changes | Log |"
+  md << "|---|---|---|---|---|---|"
+  RESULTS[:bosses].each do |b|
+    fc = b[:field_changes].reject { |o, _n, _s| o == :NONE }.map { |o, n, _s| "#{o}->#{n}" }.join(", ")
+    fc = "Plate turns: " + b[:rotations].map { |t, ids| "T#{t} #{ids.join('+')}" }.join(", ") if b[:rotations]
+    md << "| #{b[:name]} | #{b[:outcome_text]} | #{b[:turns]} | #{b[:bar_breaks].size} | #{fc.empty? ? '-' : fc} | `#{b[:log]}` |"
+  end
+  md << ""
+  md << "## Probe detail"
+  RESULTS[:probes].each do |field, s|
+    md << "### #{FieldEffects.name_of(field)} (`#{field}`)"
+    md << "- Boost: #{s[:boost][:detail]}"
+    s[:transitions].each { |r| md << "- Transition #{r[:ok] ? 'FIRED' : 'NOT OBSERVED'} - #{r[:desc]}: #{r[:detail]}" }
+    s[:seeds].each { |r| md << "- Seed #{r[:ok] ? 'OK' : 'NOT OBSERVED'} - #{r[:desc]}: #{r[:detail]}" }
+    s[:eor].each { |r| md << "- End of round #{r[:ok] ? 'OK' : 'NOT OBSERVED'} - #{r[:desc]}: #{r[:detail]}" }
+    md << ""
+  end
+  if !RESULTS[:errors].empty?
+    md << "## Exceptions"
+    RESULTS[:errors].each { |e| md << "- [#{e[:kind]} #{e[:name]}] #{e[:class]}: #{e[:message]} (#{e[:backtrace].first})" }
+  end
+  File.write(File.join(OUT_DIR, "SUMMARY.md"), md.join("\n") + "\n")
 end
 
 File.write(File.join(OUT_DIR, "results.json"), JSON.pretty_generate(RESULTS))

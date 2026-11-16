@@ -101,7 +101,7 @@ Rainbow [RAINBOW] - Gym Leader Amaria vs challenger (Lv.78)
   Lucario's Special Defense fell!
   The opposing Indiana fainted!
     xx fainted: Indiana (foe)
-  Lucario got 3538 Exp. Points!
+  Lucario is at the level cap (Lv. 78) and can't gain Exp. Points.
   (end of round)
   Gym Leader Amaria is about to send out Atlantica. Will you switch your Pokémon?  [auto: No]
   Gym Leader Amaria sent out Atlantica!
@@ -158,7 +158,7 @@ Rainbow [RAINBOW] - Gym Leader Amaria vs challenger (Lv.78)
     HP Atlantica (foe): 46 -> 0 / 242
   The opposing Atlantica fainted!
     xx fainted: Atlantica (foe)
-  Togekiss got 4096 Exp. Points!
+  Togekiss is at the level cap (Lv. 78) and can't gain Exp. Points.
   (end of round)
   Gym Leader Amaria is about to send out Milotic. Will you switch your Pokémon?  [auto: No]
   Gym Leader Amaria sent out Milotic!
@@ -213,8 +213,8 @@ Rainbow [RAINBOW] - Gym Leader Amaria vs challenger (Lv.78)
   The opposing Milotic was hurt by its burn!
   The opposing Milotic fainted!
     xx fainted: Milotic (foe)
-  Magnezone got 2786 Exp. Points!
-  Charizard got 2786 Exp. Points!
+  Magnezone is at the level cap (Lv. 78) and can't gain Exp. Points.
+  Charizard is at the level cap (Lv. 78) and can't gain Exp. Points.
   Gym Leader Amaria is about to send out Deliverer. Will you switch your Pokémon?  [auto: No]
   Gym Leader Amaria sent out Deliverer!
     >> sent out (foe): Deliverer Lv.78 @LEFTOVERS [SHELLARMOR]
@@ -248,7 +248,7 @@ Rainbow [RAINBOW] - Gym Leader Amaria vs challenger (Lv.78)
     xx fainted: Magnezone (player)
   You have no more Pokémon that can fight!
   You lost against Gym Leader Amaria!
-  You gave $9,360 to the winner...
+  You gave $3,526 to the winner...
   battle result code: 2
   
 RESULT: player lost after 16 turn(s)

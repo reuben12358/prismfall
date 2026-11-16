@@ -105,7 +105,7 @@ Underwater [UNDERWATER] - Fisherman Andrew vs challenger (Lv.18)
     HP Magikarp (foe): 2 -> 0 / 37
   The opposing Magikarp fainted!
     xx fainted: Magikarp (foe)
-  Growlithe got 145 Exp. Points!
+  Growlithe is at the level cap (Lv. 18) and can't gain Exp. Points.
   (end of round)
     HP Growlithe (player): 11 -> 14 / 53
   Aqua Ring restored Growlithe's HP!
@@ -138,8 +138,7 @@ Underwater [UNDERWATER] - Fisherman Andrew vs challenger (Lv.18)
     xx fainted: Magikarp (foe)
     (anim: StatUp)
   Mareep's Special Attack rose!
-  Growlithe got 88 Exp. Points!
-  Mareep got 88 Exp. Points!
+  Mareep is at the level cap (Lv. 18) and can't gain Exp. Points.
   You defeated Fisherman Andrew!
   Washed out!
   You got $576 for winning!

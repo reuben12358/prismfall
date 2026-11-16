@@ -114,7 +114,7 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
   Staravia fell asleep!
   The opposing Morelull fainted!
     xx fainted: Morelull (foe)
-  Staravia got 130 Exp. Points!
+  Staravia is at the level cap (Lv. 15) and can't gain Exp. Points.
   (end of round)
   Hollow Keeper Thistle is about to send out Foongus. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Thistle sent out Foongus!
@@ -261,7 +261,6 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
   It's super effective!
   The opposing Foongus fainted!
     xx fainted: Foongus (foe)
-  Staravia got 155 Exp. Points!
   (end of round)
   Hollow Keeper Thistle is about to send out Lowmarsh. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Thistle sent out Lowmarsh!
@@ -274,7 +273,6 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
   It's super effective!
   The opposing Lowmarsh fainted!
     xx fainted: Lowmarsh (foe)
-  Staravia got 187 Exp. Points!
   You defeated Hollow Keeper Thistle!
   Lowmarsh is glass now. Remember that when you sleep.
   You got $1,200 for winning!

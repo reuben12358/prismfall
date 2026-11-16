@@ -100,6 +100,7 @@ def build_140():
     for i, (x, y, rx, ry) in enumerate([(24, 40, 3.5, 2.2), (66, 55, 4, 2), (11, 53, 2, 1.6), (78, 38, 3, 1.5), (8, 24, 5, 1.2),
                                         (30, 25, 6, 1.2), (58, 25, 6, 1.3), (80, 24, 4, 1.3)]):
         c.blob(x, y, rx, ry, 'T', 20 + i)
+    c.pits(26, 'k', 1); c.pits(4, 'b', 2); c.groves(160, 5)
     # --- events
     E = [ev('SALTMERE', (41, 9)), ev('Juno J1', (42, 40)), ev('Busker', (38, 43)), ev('Caramel seller', (50, 42)),
          ev('Eevee breeder', (40, 62)), ev('Kestrel', (68, 42)), ev('Royal notice', (62, 41))]
@@ -123,15 +124,16 @@ def build_146():
     def shore(x): return 44 + int(round(1.5 * math.sin(x / 7.0) + 2.0 * (vnoise(x, 0, 31, 6.0) - 0.5))) if x < 66 else 40
     def hgt(x, y):
         if y < 1: return 1
-        if ((x - 79.0) / 8.5) ** 2 + ((y - 44.0) / 17.0) ** 2 <= 1.0 + 0.3 * (vnoise(x, y, 5, 4.0) - 0.5): return 1     # headland
-        if ((x - 52.0) / 30.0) ** 2 + ((y - 65.0) / 2.6) ** 2 <= 1.0 + 0.5 * (vnoise(x, y, 6, 3.0) - 0.5) and x > 26: return 1  # breakwater
-        if y < shore(x) and x < 72: return 0
+        if ((x - 79.0) / 8.5) ** 2 + ((y - 46.0) / 19.0) ** 2 <= 1.0 + 0.3 * (vnoise(x, y, 5, 4.0) - 0.5): return 2     # headland
+        if ((x - 54.0) / 30.0) ** 2 + ((y - 64.5) / 2.4) ** 2 <= 1.0 + 0.5 * (vnoise(x, y, 6, 3.0) - 0.5) and x > 26: return 2  # breakwater
+        if y < shore(x) and x < 74: return 0
         return -1
     c.set_heights(hgt)
     for y in range(H):
         for x in range(W):
             if c.ht[y][x] < 0: c.g[y][x] = '~'
             elif c.ht[y][x] == 0: c.g[y][x] = 'k'
+            elif c.ht[y][x] == 2: c.ht[y][x] = 0                   # headland and breakwater: grass at quay level
     # quay paving: cobbled streets, brick wharf along the water, brick aprons under the sheds, cream loading bays
     for x in range(W):
         for y in range(shore(x) - 7, shore(x)):
@@ -143,7 +145,8 @@ def build_146():
     # piers
     for x0, w, ln in ((9, 3, 11), (25, 3, 15), (43, 4, 10), (60, 3, 12)):
         c.rect(x0, shore(x0 + 1) - 1, w, ln, '=', '~')
-    c.path([(72, 38), (76, 44), (79, 56)], 2, 'o', 12, only='.')
+    c.path([(72, 37), (76, 44), (78, 56), (74, 63), (60, 65), (40, 65), (28, 64)], 2, 'o', 12, only='.')
+    c.rect(2, 2, 38, 3, '.', 'k'); c.rect(50, 2, 24, 3, '.', 'k'); c.trees(3, 2, 36); c.trees(51, 2, 22)
     c.wall_v(0, 0, 40); c.tower(0, 38, 3, 3, 3)
     c.stairs(42, 0, 2)
     c.cliffs(face=2, keep='WFKG~=')
@@ -153,23 +156,22 @@ def build_146():
     d = {}
     d['office'] = c.stamp('t_lodge', 50, 27, 'SM_HARBOUR', 'Harbour Office door')
     c.stamp('t_lighthouse', 77, 36)
-    c.stamp('t_ship', 48, shore(46) + 3, force=True); c.stamp('t_ship', 64, 50, force=True)
+    c.stamp('t_ship', 48, shore(46) + 3, force=True); c.stamp('t_ship', 13, 52, force=True)
     c.quarter(22, 6, 40, 13, POOL_DOCK + ['t_house_blue2'], 'b', beds=False); c.quarter(50, 6, 71, 13, POOL_DOCK, 'b', beds=False)
     c.quarter(4, 25, 37, 33, POOL_DOCK + POOL_TECT[:6], 'b', beds=False); c.quarter(57, 25, 70, 32, POOL_TECT[:8], 'p')
     c.quarter(22, 17, 38, 23, POOL_TECT + ['t_stall'], 'p')
     c.scatter_props(3, 14, 70, 43, ['t_cont_green', 't_cont_brown', 't_cont_long', 't_crate_pair', 't_crate_a', 't_crates_b',
-                                    't_barrel', 't_barrel2', 't_barrel', 't_table'], 38, 'bck', 1)
+                                    't_barrel', 't_barrel2', 't_barrel', 't_bench'], 34, 'bck', 1)
+    c.pits(14, 'k', 3); c.pits(6, 'b', 4); c.groves(80, 6)
     c.inlay(0, 0, 87, 50, 'b', [3859], 0.07); c.inlay(0, 0, 87, 50, 'c', [3916], 0.12)
     street_lamps(c, [(40, 8), (49, 8), (20, 25), (38, 22), (48, 22), (72, 22), (8, 40), (24, 39), (42, 40), (58, 40), (70, 34)])
     for x in (16, 34, 54): c.stamp('t_bench', x, 37)
-    for i, (x, y, rx, ry) in enumerate([(80, 30, 5, 3), (82, 52, 4, 5), (74, 50, 2, 3), (11, 11, 1.5, 1.5), (40, 65, 6, 1.2),
-                                        (62, 65, 8, 1.2), (19, 20, 1.5, 2)]):
+    for i, (x, y, rx, ry) in enumerate([(80, 31, 5, 3), (83, 50, 3, 6), (74, 52, 2, 3), (11, 11, 1.5, 1.5), (40, 63, 6, 0.8),
+                                        (62, 63, 8, 0.8), (19, 20, 1.5, 2), (84, 40, 2, 4)]):
         c.blob(x, y, rx, ry, 'T', 40 + i)
-    for x in range(72, 86):
-        if c.g[60][x] == '.' and c.ht[60][x] == 1: c.g[60][x] = 'f'
     c.sea_rocks(46, avoid=[(44, 44, 78, 58)])
     ox, oy = d['office']
-    E = [ev('The breakwater', (75, 58)),
+    E = [ev('The breakwater', (72, 62)),
          {'type': 'sign', 'at': [ox + 2, oy + 1], 'text': 'SALTMERE HARBOUR OFFICE\nAll ferries suspended by order of the quarantine.'},
          {'type': 'npc', 'name': 'Stevedore', 'at': [30, 38], 'sprite': 'NPC 07', 'dir': 'down', 'move': 'random',
           'text': "Stevedore: Tax-barges tie up outside the breakwater and no further.\nFree port means free. [TODO story]"},
@@ -199,8 +201,8 @@ def build_147():
     c.rect(34, 22, 19, 5, 'c'); c.rect(40, 27, 6, 4, 'k')              # Playhouse forecourt and stair head
     c.rect(30, 31, 28, 12, 'b'); c.rect(34, 34, 20, 6, 'c'); c.rect(36, 36, 16, 2, 'b')    # Playhouse Square
     c.rect(0, 36, 30, 4, 'k'); c.path([(58, 37), (70, 38), (84, 36)], 3, 'k', 2)
-    c.path([(4, 13), (18, 12), (33, 14)], 2, 'o', 3); c.path([(54, 14), (70, 12), (84, 13)], 2, 'o', 4)
-    c.path([(13, 14), (13, 26)], 2, 'o', 5); c.path([(75, 13), (75, 26)], 2, 'o', 6)
+    c.path([(4, 16), (18, 17), (35, 23)], 2, 'o', 3); c.path([(52, 23), (70, 17), (84, 16)], 2, 'o', 4)
+    c.path([(13, 17), (13, 26)], 2, 'o', 5); c.path([(75, 17), (75, 26)], 2, 'o', 6)
     c.rect(12, 30, 3, 6, 'k'); c.rect(74, 30, 3, 7, 'k')
     c.path([(6, 50), (20, 51), (30, 49), (43, 50), (60, 51), (72, 49), (84, 50)], 2, 'k', 7)
     c.path([(43, 43), (44, 50), (43, 59)], 3, 'k', 8)
@@ -218,14 +220,13 @@ def build_147():
     d['gym'] = c.stamp('t_hall', 36, 6, 'SM_GYM', 'Playhouse door')
     c.stamp('t_cart', 31, 32); market_stalls(c, 50, 32, 57, 41, 2, 5)
     for x, y in ((36, 35), (50, 35), (36, 38), (50, 38)): c.stamp('t_bench', x, y)
-    G = (0, 0, 1, 1, 2)
-    c.quarter(5, 5, 33, 12, ['w_manor_a', 'w_manor_b', 'w_ell_a', 'w_longhouse', 'h_manor'], '', gaps=G)
-    c.quarter(54, 5, 83, 12, ['w_manor_b', 'w_ell_b', 'w_longhouse', 'w_manor_a'], '', gaps=G)
-    c.quarter(3, 15, 11, 25, POOL_TIMBER, '', gaps=G); c.quarter(16, 15, 34, 25, POOL_TIMBER, '', gaps=G)
-    c.quarter(54, 15, 73, 25, POOL_TIMBER, '', gaps=G); c.quarter(78, 15, 85, 25, POOL_TIMBER, '', gaps=G)
-    c.quarter(3, 30, 11, 35, POOL_TIMBER, '', gaps=G); c.quarter(16, 30, 29, 35, POOL_SHOPS + ['w_house'], 'c')
-    c.quarter(59, 30, 72, 35, POOL_SHOPS + ['w_house', 'w_cot'], 'c'); c.quarter(78, 30, 85, 35, POOL_TIMBER, '', gaps=G)
-    c.quarter(3, 41, 19, 48, POOL_TIMBER, '', gaps=G); c.quarter(23, 44, 41, 48, POOL_TIMBER + ['t_shop_purple'], '', gaps=G)
+    G = (0, 0, 1, 1, 2); BIG = ['w_manor_a', 'w_manor_b', 'w_ell_a', 'w_longhouse', 'w_ell_b']; SH = ['t_stall', 'w_house', 'w_cot', 't_shop_purple']
+    c.house_row(5, 33, 14, BIG, gaps=G); c.house_row(55, 84, 14, BIG, gaps=G)
+    c.house_row(3, 10, 25, POOL_TIMBER, gaps=G); c.house_row(17, 34, 25, POOL_TIMBER, gaps=G)
+    c.house_row(54, 72, 25, POOL_TIMBER, gaps=G); c.house_row(78, 85, 25, POOL_TIMBER, gaps=G)
+    c.quarter(3, 30, 11, 35, POOL_TIMBER, '', gaps=G); c.quarter(16, 30, 29, 35, SH, 'c')
+    c.quarter(59, 30, 72, 35, SH, 'c'); c.quarter(78, 30, 85, 35, POOL_TIMBER, '', gaps=G)
+    c.quarter(3, 41, 19, 48, POOL_TIMBER, '', gaps=G); c.quarter(23, 44, 41, 48, POOL_TIMBER, '', gaps=G)
     c.quarter(46, 44, 64, 48, POOL_TIMBER, '', gaps=G); c.quarter(68, 41, 85, 48, POOL_TIMBER, '', gaps=G)
     c.quarter(3, 52, 41, 58, POOL_TIMBER, '', gaps=G); c.quarter(46, 52, 85, 58, POOL_TIMBER, '', gaps=G)
     c.scatter_props(30, 31, 57, 42, ['t_barrel', 't_crate_pair', 't_barrel2'], 5, 'b', 1)
@@ -238,6 +239,7 @@ def build_147():
                                         (34, 54, 4, 1.4), (54, 54, 4, 1.4), (76, 54, 4, 1.4), (10, 30, 1.5, 2), (32, 28, 2, 1.5),
                                         (56, 29, 2.5, 1.5), (82, 29, 2, 2), (16, 61, 6, 1.2), (50, 61, 7, 1.2), (74, 61, 6, 1.2)]):
         c.blob(x, y, rx, ry, 'T', 60 + i)
+    c.groves(320, 9, 1.8, 3.8)
     c.sea_rocks(22)
     gx, gy = d['gym']
     E = [ev('Playhouse sign', (gx - 3, gy + 2)),

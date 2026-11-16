@@ -41,6 +41,7 @@ module Harness
       p = Pokemon.new(species, level)
       GameData::Stat.each_main { |s| p.iv[s.id] = 31; p.ev[s.id] = 0 }
       p.nature = :HARDY
+      p.ability_index = 0            # fixed ability slot (paired runs must not differ)
       p.ability = ability if ability
       p.item = item
       p.forget_all_moves
@@ -451,13 +452,17 @@ module Harness
                        "boss_kyogre", strong_party(100)) { Prismfall::Bosses.wild_battle(:KYOGRE_ISENMAR, :can_lose => true) }
       runs << boss_run("BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party", "boss_arceus",
                        strong_party(100)) { Prismfall::Bosses.wild_battle(:ARCEUS_FINALE, :can_lose => true) }
-      old = Prismfall::Difficulty.current rescue nil
-      runs << boss_run("BOSS Hard-mode Warden Ilsa (ace is a 2-bar boss) on MINDSCAPE vs over-levelled Lv.100 party",
+      # Hard mode through the kit's own event call: +100 trainer variant, forced Set style, Bag lock, and
+      # the standing rule that turns Ilsa's ace into a 2-bar boss.
+      Prismfall.set_difficulty(:HARD)
+      runs << boss_run("BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs over-levelled Lv.100 party",
                        "boss_hard_warden_ilsa", strong_party(100)) do
         Harness.set_badges(11)
-        Prismfall::Bosses.trainer_battle(:LEADER_ILSA, "Ilsa", 100, :boss => :WARDEN_ACE_2BAR, :can_lose => true,
-                                         :field => :MINDSCAPE)
+        Prismfall::LevelCap.set_override(100)   # so the over-levelled party obeys on Hard
+        Prismfall.gym_battle(12, :can_lose => true)
       end
+      Prismfall::LevelCap.clear_override
+      Prismfall.set_difficulty(:STANDARD)
       Harness.set_badges(18)
       runs << prism_rotation
       runs

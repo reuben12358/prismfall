@@ -1,99 +1,209 @@
 LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
 Not a game screenshot: no EBDX visuals were rendered.
 
-PRISM_ARENA rotation: Arceus (Multitype) for 20 rounds, Judgment every 3rd round
-================================================================================
+PRISM_ARENA rotation: Lv.25 Arceus (Multitype) for 20 rounds, Judgment every 3rd round
+======================================================================================
 
 --- Battle start ---
   field: PRISM_ARENA | weather: None | terrain: None
   Oh! A wild Cresselia appeared!
   Go! Arceus!
-    >> sent out (player): Arceus Lv.100 [MULTITYPE]
+    >> sent out (player): Arceus Lv.25 [MULTITYPE]
 ## FIELD CHANGE: NONE -> PRISM_ARENA
   The eighteen Plates blaze in a ring above Crownhaven's arena!
 
 --- Turn 1 ---
-  [Arceus 381/381 | Cresselia 381/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 381/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Arceus 381/381 | Cresselia 381/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 381/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
   The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field!
 
 --- Turn 3 ---
-  [Arceus 381/381 | Cresselia 381/381]
-  Arceus used Judgment!
-    HP Cresselia (foe): 381 -> 279 / 381
+  [Arceus 102/102 | Cresselia 381/381]
   The wild Cresselia used Splash!
   But nothing happened!
+  Arceus used Judgment!
+    HP Cresselia (foe): 381 -> 372 / 381
   (end of round)
   The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:VOLCANIC] (was [])
   Arceus's Multitype resonated with the Flame Plate! It became the Fire type!
 
 --- Turn 4 ---
-  [Arceus 381/381 | Cresselia 279/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 372/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 5 ---
-  [Arceus 381/381 | Cresselia 279/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 372/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
   The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
 
 --- Turn 6 ---
-  [Arceus 381/381 | Cresselia 279/381]
-  Arceus used Judgment!
-  The magma roared!
-    HP Cresselia (foe): 279 -> 113 / 381
+  [Arceus 102/102 | Cresselia 372/381]
   The wild Cresselia used Splash!
   But nothing happened!
+  Arceus used Judgment!
+  The magma roared!
+    HP Cresselia (foe): 372 -> 358 / 381
   (end of round)
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
   Arceus's Multitype resonated with the Splash Plate! It became the Water type!
 
 --- Turn 7 ---
-  [Arceus 381/381 | Cresselia 113/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 358/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 8 ---
-  [Arceus 381/381 | Cresselia 113/381]
-  Arceus used Splash!
-  But nothing happened!
+  [Arceus 102/102 | Cresselia 358/381]
   The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
   But nothing happened!
   (end of round)
   The Meadow Plate begins to glow... After the next turn, the arena becomes the Flower Garden!
 
 --- Turn 9 ---
-  [Arceus 381/381 | Cresselia 113/381]
+  [Arceus 102/102 | Cresselia 358/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
   Arceus used Judgment!
   The waves amplified the attack!
-    HP Cresselia (foe): 113 -> 0 / 381
-  The wild Cresselia fainted!
-    xx fainted: Cresselia (foe)
-  Arceus is at the level cap (Lv. 100) and can't gain Exp. Points.
-  battle result code: 1
+    HP Cresselia (foe): 358 -> 345 / 381
+  (end of round)
+  The Plates turn! The Meadow Plate blazes, and the arena becomes the Flower Garden!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FLOWER_GARDEN] (was [:WATER_SURFACE])
+  Arceus's Multitype resonated with the Meadow Plate! It became the Grass type!
+
+--- Turn 10 ---
+  [Arceus 102/102 | Cresselia 345/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 11 ---
+  [Arceus 102/102 | Cresselia 345/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+  The Zap Plate begins to glow... After the next turn, the arena becomes the Neon Grid!
+
+--- Turn 12 ---
+  [Arceus 102/102 | Cresselia 345/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Judgment!
+    HP Cresselia (foe): 345 -> 334 / 381
+  (end of round)
+  The Plates turn! The Zap Plate blazes, and the arena becomes the Neon Grid!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:NEON_GRID] (was [:FLOWER_GARDEN])
+  Arceus's Multitype resonated with the Zap Plate! It became the Electric type!
+
+--- Turn 13 ---
+  [Arceus 102/102 | Cresselia 334/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 14 ---
+  [Arceus 102/102 | Cresselia 334/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+  The Icicle Plate begins to glow... After the next turn, the arena becomes the Frozen Lake!
+
+--- Turn 15 ---
+  [Arceus 102/102 | Cresselia 334/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Judgment!
+  The neon grid surged!
+    HP Cresselia (foe): 334 -> 315 / 381
+  A critical hit!
+  (end of round)
+  The Plates turn! The Icicle Plate blazes, and the arena becomes the Frozen Lake!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FROZEN_LAKE] (was [:NEON_GRID])
+  Arceus's Multitype resonated with the Icicle Plate! It became the Ice type!
+
+--- Turn 16 ---
+  [Arceus 102/102 | Cresselia 315/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 17 ---
+  [Arceus 102/102 | Cresselia 315/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+  The Fist Plate begins to glow... After the next turn, the arena becomes the Colosseum!
+
+--- Turn 18 ---
+  [Arceus 102/102 | Cresselia 315/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Judgment!
+  The frozen lake chilled the attack!
+    HP Cresselia (foe): 315 -> 302 / 381
+  (end of round)
+  The Plates turn! The Fist Plate blazes, and the arena becomes the Colosseum!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:COLOSSEUM] (was [:FROZEN_LAKE])
+  Arceus's Multitype resonated with the Fist Plate! It became the Fighting type!
+
+--- Turn 19 ---
+  [Arceus 102/102 | Cresselia 302/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 20 ---
+  [Arceus 102/102 | Cresselia 302/381]
+  The wild Cresselia used Splash!
+  But nothing happened!
+  Arceus used Splash!
+  But nothing happened!
+  (end of round)
+  The Earth Plate begins to glow... After the next turn, the arena becomes the Desert!
+
+--- Turn 21 ---
+  [Arceus 102/102 | Cresselia 302/381]
+  battle result code: 3
   
-RESULT: player won after 8 turn(s)
+RESULT: fled/forfeit after 20 turn(s)

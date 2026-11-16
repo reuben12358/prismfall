@@ -66,7 +66,7 @@ Ashen Waste [ASHEN_WASTE] - Hiker Ford vs challenger (Lv.19)
     HP Machop (foe): 5 -> 0 / 58
   The opposing Machop fainted!
     xx fainted: Machop (foe)
-  Staravia got 232 Exp. Points!
+  Staravia is at the level cap (Lv. 19) and can't gain Exp. Points.
   You defeated Hiker Ford!
   You're too good for me!
   You got $608 for winning!

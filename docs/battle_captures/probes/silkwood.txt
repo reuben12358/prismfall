@@ -174,11 +174,9 @@ SILKWOOD probe: end-of-round rule 1: heal on {:types=>[:BUG]} [subject Pinsir]
   field: SILKWOOD | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Pinsir!
-    >> sent out (player): Pinsir Lv.100 [MOLDBREAKER]
+    >> sent out (player): Pinsir Lv.100 [HYPERCUTTER]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-    [ability: Pinsir (player)'s Mold Breaker]
-  Pinsir breaks the mold!
   The wild Snorlax blundered into a sticky web!
     (anim: StatDown)
   The wild Snorlax's Speed fell!

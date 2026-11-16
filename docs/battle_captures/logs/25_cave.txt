@@ -10,12 +10,9 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
   Camper Liam sent out Diglett!
     >> sent out (foe): Diglett Lv.10 [SANDVEIL]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.11 @TELLURICSEED [INTIMIDATE]
+    >> sent out (player): Growlithe Lv.11 @TELLURICSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> CAVE
   The cave walls loom close... every sound echoes.
-    [ability: Growlithe (player)'s Intimidate]
-    (anim: StatDown)
-  The opposing Diglett's Attack fell!
     (anim: UseItem)
   Growlithe's Telluric Seed shook stones loose from the ceiling!
     (anim: StatUp)
@@ -28,7 +25,7 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
     HP Diglett (foe): 22 -> 0 / 22
   The opposing Diglett fainted!
     xx fainted: Diglett (foe)
-  Growlithe got 98 Exp. Points!
+  Growlithe is at the level cap (Lv. 11) and can't gain Exp. Points.
   (end of round)
   Camper Liam is about to send out Bonsly. Will you switch your Pokémon?  [auto: No]
   Camper Liam sent out Bonsly!
@@ -55,24 +52,33 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
   It's not very effective...
   The opposing Bonsly used Copycat!
   The opposing Bonsly used Ember!
-    HP Growlithe (player): 14 -> 12 / 36
-  It's not very effective...
+    [ability: Growlithe (player)'s Flash Fire]
+  The power of Growlithe's Fire-type moves rose!
   (end of round)
 
 --- Turn 4 ---
-  [Growlithe 12/36 | Bonsly 10/32]
-  Growlithe used Bite!
-    HP Bonsly (foe): 10 -> 3 / 32
-  The opposing Bonsly flinched and couldn't move!
+  [Growlithe 14/36 | Bonsly 10/32]
+  Growlithe used Flame Wheel!
+    HP Bonsly (foe): 10 -> 2 / 32
+  It's not very effective...
+  The opposing Bonsly used Rock Throw!
+  The cavern rumbled!
+    HP Growlithe (player): 14 -> 0 / 36
+  It's super effective!
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
   (end of round)
+  Your opponent's weak! Get 'em, Machop!
+    >> sent out (player): Machop Lv.11 [NOGUARD]
 
 --- Turn 5 ---
-  [Growlithe 12/36 | Bonsly 3/32]
-  Growlithe used Bite!
-    HP Bonsly (foe): 3 -> 0 / 32
+  [Machop 39/39 | Bonsly 2/32]
+  Machop used Low Sweep!
+    HP Bonsly (foe): 2 -> 0 / 32
+  It's super effective!
   The opposing Bonsly fainted!
     xx fainted: Bonsly (foe)
-  Growlithe got 128 Exp. Points!
+  Machop is at the level cap (Lv. 11) and can't gain Exp. Points.
   You defeated Camper Liam!
   A very good battle, indeed!
   You got $176 for winning!

@@ -16,13 +16,13 @@ SNOWY_MOUNTAIN probe: boosted move ICEBEAM (on field)
   [Mew 341/341 | Snorlax 461/461]
   Mew used Ice Beam!
   The frigid peak sharpened the cold!
-    HP Snorlax (foe): 461 -> 411 / 461
+    HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 411/461]
+  [Mew 341/341 | Snorlax 362/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -40,13 +40,13 @@ SNOWY_MOUNTAIN probe: boosted move ICEBEAM (baseline, no field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Ice Beam!
-    HP Snorlax (foe): 461 -> 428 / 461
+    HP Snorlax (foe): 461 -> 395 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 428/461]
+  [Mew 341/341 | Snorlax 395/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -108,18 +108,18 @@ SNOWY_MOUNTAIN probe: transition [stage 1: moves HEATWAVE/ERUPTION/LAVAPLUME... 
   Mew used Heat Wave!
   The bitter cold dulled the flames...
   The freezing gale howled behind Heat Wave!
-    HP Snorlax (foe): 461 -> 427 / 461
+    HP Snorlax (foe): 461 -> 394 / 461
   The snow is melting... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 427/461]
+  [Mew 341/341 | Snorlax 394/461]
   Mew used Heat Wave!
   The bitter cold dulled the flames...
   The freezing gale howled behind Heat Wave!
-    HP Snorlax (foe): 427 -> 391 / 461
+    HP Snorlax (foe): 394 -> 321 / 461
 ## FIELD CHANGE: SNOWY_MOUNTAIN -> MOUNTAIN
   The snow melted away, baring the rocky slopes!
   The wild Snorlax used Splash!
@@ -127,7 +127,7 @@ SNOWY_MOUNTAIN probe: transition [stage 1: moves HEATWAVE/ERUPTION/LAVAPLUME... 
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 391/461]
+  [Mew 341/341 | Snorlax 321/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -135,7 +135,7 @@ SNOWY_MOUNTAIN probe: transition [stage 1: moves HEATWAVE/ERUPTION/LAVAPLUME... 
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 391/461]
+  [Mew 341/341 | Snorlax 321/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)

@@ -134,7 +134,7 @@ NEON_GRID probe: end-of-round rule 1: status on {:grounded=>true, :not_types=>[:
   field: NEON_GRID | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> NEON_GRID
   Neon circuitry hums beneath your feet!
 

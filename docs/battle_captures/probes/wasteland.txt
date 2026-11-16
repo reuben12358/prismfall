@@ -180,7 +180,7 @@ WASTELAND probe: end-of-round rule 1: damage on {:not_types=>[:POISON, :STEEL], 
   field: WASTELAND | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [THICKFAT]
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
 ## FIELD CHANGE: NONE -> WASTELAND
   Poisoned slag and dead trees stretch to a jaundiced horizon...
 

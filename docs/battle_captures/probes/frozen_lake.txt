@@ -16,13 +16,13 @@ FROZEN_LAKE probe: boosted move ICEBEAM (on field)
   [Mew 341/341 | Snorlax 461/461]
   Mew used Ice Beam!
   The frozen lake chilled the attack!
-    HP Snorlax (foe): 461 -> 411 / 461
+    HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 411/461]
+  [Mew 341/341 | Snorlax 362/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -40,13 +40,13 @@ FROZEN_LAKE probe: boosted move ICEBEAM (baseline, no field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Ice Beam!
-    HP Snorlax (foe): 461 -> 428 / 461
+    HP Snorlax (foe): 461 -> 395 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 428/461]
+  [Mew 341/341 | Snorlax 395/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -120,24 +120,24 @@ FROZEN_LAKE probe: transition [stage 1: types ICE, category damaging rewinds {:c
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
-    HP Snorlax (foe): 461 -> 428 / 461
+    HP Snorlax (foe): 461 -> 396 / 461
   The lake ice groaned and cracked! (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 428/461]
+  [Mew 341/341 | Snorlax 396/461]
   Mew used Ice Beam!
   The frozen lake chilled the attack!
-    HP Snorlax (foe): 428 -> 375 / 461
+    HP Snorlax (foe): 396 -> 292 / 461
   The cold sealed the cracks in the ice!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 375/461]
+  [Mew 341/341 | Snorlax 292/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -145,7 +145,7 @@ FROZEN_LAKE probe: transition [stage 1: types ICE, category damaging rewinds {:c
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 375/461]
+  [Mew 341/341 | Snorlax 292/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)

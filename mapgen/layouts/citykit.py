@@ -149,6 +149,9 @@ class City:
                 if self.inb(x + xx, y + yy) and (occ[yy][xx] or h > 3):
                     self.taken[y + yy][x + xx] = True
                     if self.g[y + yy][x + xx] in '.T': self.g[y + yy][x + xx] = '#'
+        if h >= 4:                                  # keep the doorstep row free of trees and scatter
+            for xx in range(x, x + w):
+                if self.inb(xx, y + h) and self.g[y + h][xx] == '.': self.g[y + h][xx] = ','
         return (x + dd[0], y + dd[1]) if dd else (x + w // 2, y + h - 1)
 
     def house_row(self, x0, x1, yb, pool, gaps=(0, 0, 1, 1, 2), on='.#cpbk,', jitter=0):
@@ -198,6 +201,28 @@ class City:
         for y in range(y0, y0 + h):
             for x in range(x0, x0 + w):
                 if self.inb(x, y) and self.g[y][x] in only and not self.taken[y][x]: self.g[y][x] = 'T'
+
+    def pits(self, n, on='k', seed=0, w=3):
+        """Street trees: n grass planters (w x 2) with a tree, only where a 2-wide passage stays on every side."""
+        r = random.Random(self.seed * 5 + seed); k = 0
+        for _ in range(n * 60):
+            if k >= n: break
+            x = r.randint(3, self.W - w - 4); y = r.randint(2, self.H // 2 - 3) * 2
+            if not self.free(x - 2, y - 2, w + 4, 6, on, level=True): continue
+            for yy in (y, y + 1):
+                for xx in range(x, x + w): self.g[yy][xx] = 'T'; self.taken[yy][xx] = True
+            for xx in range(x - 1, x + w + 1):
+                for yy in (y - 1, y + 2): self.taken[yy][xx] = True
+            k += 1
+        return k
+
+    def groves(self, n, seed=0, rmin=1.6, rmax=3.5):
+        """Tree clumps on whatever open grass is left (never on doorsteps, which are ','), plus undergrowth."""
+        r = random.Random(self.seed * 3 + seed)
+        for i in range(n):
+            x, y = r.randint(2, self.W - 3), r.randint(2, self.H - 3)
+            if self.g[y][x] == '.' and not self.taken[y][x]:
+                self.blob(x, y, r.uniform(rmin, rmax), r.uniform(rmin, rmax) * 0.8, 'T', seed + i, only='.')
 
     def prop(self, name, x, y, on=None):
         return self.stamp(name, x, y, on=on)

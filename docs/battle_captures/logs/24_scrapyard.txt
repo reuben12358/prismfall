@@ -28,7 +28,9 @@ Scrapyard [SCRAPYARD] - Meridian Director Sabine vs challenger (Lv.97)
   [Garchomp 324/346 | Obstagoon 310/331]
   The opposing Obstagoon used Obstruct!
   The opposing Obstagoon protected itself!
-  Garchomp won't obey!
+  Garchomp used Stone Edge!
+    (anim: Obstruct)
+  The opposing Obstagoon protected itself!
   (end of round)
     (anim: Burn)
   The opposing Obstagoon was burned by the Flame Orb!
@@ -36,24 +38,23 @@ Scrapyard [SCRAPYARD] - Meridian Director Sabine vs challenger (Lv.97)
 --- Turn 2 ---
   [Garchomp 324/346 | Obstagoon 310/331 BURN]
   The opposing Obstagoon used Facade!
-    HP Garchomp (player): 324 -> 149 / 346
-  Garchomp ignored orders!
-  Garchomp used Stone Edge!
-  Garchomp's attack missed!
+    HP Garchomp (player): 324 -> 161 / 346
+  Garchomp used Dragon Claw!
+    HP Obstagoon (foe): 310 -> 206 / 331
   (end of round)
     (anim: Burn)
-    HP Obstagoon (foe): 310 -> 290 / 331
+    HP Obstagoon (foe): 206 -> 186 / 331
   The opposing Obstagoon was hurt by its burn!
 
 --- Turn 3 ---
-  [Garchomp 149/346 | Obstagoon 290/331 BURN]
+  [Garchomp 161/346 | Obstagoon 186/331 BURN]
   The opposing Obstagoon used Facade!
-    HP Garchomp (player): 149 -> 0 / 346
+    HP Garchomp (player): 161 -> 0 / 346
   Garchomp fainted!
     xx fainted: Garchomp (player)
   (end of round)
     (anim: Burn)
-    HP Obstagoon (foe): 290 -> 270 / 331
+    HP Obstagoon (foe): 186 -> 166 / 331
   The opposing Obstagoon was hurt by its burn!
   Go for it, Lucario!
     >> sent out (player): Lucario Lv.97 [INNERFOCUS]
@@ -61,7 +62,7 @@ Scrapyard [SCRAPYARD] - Meridian Director Sabine vs challenger (Lv.97)
   Lucario was cut by jagged scrap!
 
 --- Turn 4 ---
-  [Lucario 263/272 | Obstagoon 270/331 BURN]
+  [Lucario 263/272 | Obstagoon 166/331 BURN]
   The opposing Obstagoon used Close Combat!
     HP Lucario (player): 263 -> 0 / 272
   It's super effective!
@@ -72,35 +73,21 @@ Scrapyard [SCRAPYARD] - Meridian Director Sabine vs challenger (Lv.97)
     xx fainted: Lucario (player)
   (end of round)
     (anim: Burn)
-    HP Obstagoon (foe): 270 -> 250 / 331
+    HP Obstagoon (foe): 166 -> 146 / 331
   The opposing Obstagoon was hurt by its burn!
-  Go for it, Togekiss!
+  Just a little more! Hang in there, Togekiss!
     >> sent out (player): Togekiss Lv.97 [HUSTLE]
 
 --- Turn 5 ---
-  [Togekiss 301/301 | Obstagoon 250/331 BURN]
-  Meridian Director Sabine used a Full Restore.
-    HP Obstagoon (foe): 250 -> 331 / 331
-  The opposing Obstagoon's HP was restored.
+  [Togekiss 301/301 | Obstagoon 146/331 BURN]
+  The opposing Obstagoon used Facade!
+    HP Togekiss (player): 301 -> 35 / 301
   Togekiss used Dazzling Gleam!
-    HP Obstagoon (foe): 331 -> 1 / 331
-  It's super effective!
-  (end of round)
-    (anim: Burn)
-  The opposing Obstagoon was burned by the Flame Orb!
-
---- Turn 6 ---
-  [Togekiss 301/301 | Obstagoon 1/331 BURN]
-  Meridian Director Sabine used a Full Restore.
-    HP Obstagoon (foe): 1 -> 331 / 331
-  The opposing Obstagoon's HP was restored.
-  Togekiss ignored orders!
-  Togekiss used Dazzling Gleam!
-    HP Obstagoon (foe): 331 -> 0 / 331
+    HP Obstagoon (foe): 146 -> 0 / 331
   It's super effective!
   The opposing Obstagoon fainted!
     xx fainted: Obstagoon (foe)
-  Togekiss is at the level cap (Lv. 90) and can't gain Exp. Points.
+  Togekiss is at the level cap (Lv. 97) and can't gain Exp. Points.
   (end of round)
   Meridian Director Sabine is about to send out Crawdaunt. Will you switch your Pokémon?  [auto: No]
   Meridian Director Sabine sent out Crawdaunt!
@@ -108,98 +95,68 @@ Scrapyard [SCRAPYARD] - Meridian Director Sabine vs challenger (Lv.97)
     HP Crawdaunt (foe): 276 -> 267 / 276
   The opposing Crawdaunt was cut by jagged scrap!
 
---- Turn 7 ---
-  [Togekiss 301/301 | Crawdaunt 267/276]
-  Togekiss used Flamethrower!
-    HP Crawdaunt (foe): 267 -> 212 / 276
-  It's not very effective...
-  The opposing Crawdaunt used Swords Dance!
-    (anim: StatUp)
-  The opposing Crawdaunt's Attack rose sharply!
-  (end of round)
-
---- Turn 8 ---
-  [Togekiss 301/301 | Crawdaunt 212/276]
-  Togekiss used Flamethrower!
-    HP Crawdaunt (foe): 212 -> 155 / 276
-  It's not very effective...
-  The opposing Crawdaunt used Crabhammer!
-    HP Togekiss (player): 301 -> 0 / 301
+--- Turn 6 ---
+  [Togekiss 35/301 | Crawdaunt 267/276]
+  The opposing Crawdaunt used Aqua Jet!
+    HP Togekiss (player): 35 -> 0 / 301
   Togekiss fainted!
     xx fainted: Togekiss (player)
-    HP Crawdaunt (foe): 155 -> 128 / 276
+    HP Crawdaunt (foe): 267 -> 240 / 276
   The opposing Crawdaunt lost some of its HP!
   (end of round)
-  Just a little more! Hang in there, Magnezone!
+  Go for it, Magnezone!
     >> sent out (player): Magnezone Lv.97 [STURDY]
     HP Magnezone (player): 272 -> 268 / 272
   Magnezone was cut by jagged scrap!
 
---- Turn 9 ---
-  [Magnezone 268/272 | Crawdaunt 128/276]
+--- Turn 7 ---
+  [Magnezone 268/272 | Crawdaunt 240/276]
   The opposing Crawdaunt used Crabhammer!
     HP Magnezone (player): 268 -> 0 / 272
+  A critical hit!
   It's super effective!
   Magnezone fainted!
     xx fainted: Magnezone (player)
-    HP Crawdaunt (foe): 128 -> 101 / 276
+    HP Crawdaunt (foe): 240 -> 213 / 276
   The opposing Crawdaunt lost some of its HP!
   (end of round)
-  Just a little more! Hang in there, Starmie!
+  Go for it, Starmie!
     >> sent out (player): Starmie Lv.97 [ILLUMINATE]
     HP Starmie (player): 253 -> 245 / 253
   Starmie was cut by jagged scrap!
 
---- Turn 10 ---
-  [Starmie 245/253 | Crawdaunt 101/276]
-  Starmie used Thunderbolt!
-    HP Crawdaunt (foe): 101 -> 0 / 276
-  It's super effective!
-  The opposing Crawdaunt fainted!
-    xx fainted: Crawdaunt (foe)
-  Starmie is at the level cap (Lv. 90) and can't gain Exp. Points.
-  (end of round)
-  Meridian Director Sabine is about to send out Kingambit. Will you switch your Pokémon?  [auto: No]
-  Meridian Director Sabine sent out Kingambit!
-    >> sent out (foe): Kingambit Lv.97 @BLACKGLASSES [SUPREMEOVERLORD]
-    HP Kingambit (foe): 351 -> 340 / 351
-  The opposing Kingambit was cut by jagged scrap!
-    [ability: Kingambit (foe)'s Supreme Overlord]
-  The opposing Kingambit gained strength from the fallen!
-
---- Turn 11 ---
-  [Starmie 245/253 | Kingambit 340/351]
-  Starmie pretended not to notice!
-  The opposing Kingambit used Kowtow Cleave!
+--- Turn 8 ---
+  [Starmie 245/253 | Crawdaunt 213/276]
+  Starmie used Ice Beam!
+    HP Crawdaunt (foe): 213 -> 162 / 276
+  It's not very effective...
+  The opposing Crawdaunt used Knock Off!
     HP Starmie (player): 245 -> 0 / 253
   It's super effective!
   Starmie fainted!
     xx fainted: Starmie (player)
+    HP Crawdaunt (foe): 162 -> 135 / 276
+  The opposing Crawdaunt lost some of its HP!
   (end of round)
-  Go for it, Charizard!
+  Just a little more! Hang in there, Charizard!
     >> sent out (player): Charizard Lv.97 [BLAZE]
 
---- Turn 12 ---
-  [Charizard 288/288 | Kingambit 340/351]
-  Charizard used Flamethrower!
-    HP Kingambit (foe): 340 -> 109 / 351
+--- Turn 9 ---
+  [Charizard 288/288 | Crawdaunt 135/276]
+  Charizard used Air Slash!
+    HP Crawdaunt (foe): 135 -> 4 / 276
+  The opposing Crawdaunt used Crabhammer!
+    HP Charizard (player): 288 -> 0 / 288
   It's super effective!
-  The opposing Kingambit used Swords Dance!
-    (anim: StatUp)
-  The opposing Kingambit's Attack rose sharply!
-  (end of round)
-
---- Turn 13 ---
-  [Charizard 288/288 | Kingambit 109/351]
-  Charizard used Flamethrower!
-    HP Kingambit (foe): 109 -> 0 / 351
-  It's super effective!
-  The opposing Kingambit fainted!
-    xx fainted: Kingambit (foe)
-  Charizard is at the level cap (Lv. 90) and can't gain Exp. Points.
-  You defeated Meridian Director Sabine!
-  Nothing personal. It never is.
-  You got $7,760 for winning!
-  battle result code: 1
+  Charizard fainted!
+    xx fainted: Charizard (player)
+    HP Crawdaunt (foe): 4 -> 0 / 276
+  The opposing Crawdaunt lost some of its HP!
+  The opposing Crawdaunt fainted!
+    xx fainted: Crawdaunt (foe)
+  You have no more Pokémon that can fight!
+  You lost against Meridian Director Sabine!
+  You gave $2,880 to the winner...
+  battle result code: 2
   
-RESULT: player won after 12 turn(s)
+RESULT: player lost after 8 turn(s)

@@ -16,17 +16,17 @@ VOLCANIC probe: boosted move FLAMETHROWER (on field)
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
   The magma roared!
-    HP Snorlax (foe): 461 -> 411 / 461
+    HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     HP Mew (player): 341 -> 320 / 341
   Mew was scorched by the magma!
-    HP Snorlax (foe): 411 -> 382 / 461
+    HP Snorlax (foe): 362 -> 333 / 461
   The wild Snorlax was scorched by the magma!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 382/461]
+  [Mew 320/341 | Snorlax 333/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -44,13 +44,13 @@ VOLCANIC probe: boosted move FLAMETHROWER (baseline, no field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
-    HP Snorlax (foe): 461 -> 428 / 461
+    HP Snorlax (foe): 461 -> 395 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 428/461]
+  [Mew 341/341 | Snorlax 395/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
