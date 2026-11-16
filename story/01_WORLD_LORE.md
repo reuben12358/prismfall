@@ -60,9 +60,9 @@ There she gathered the eighteen Plate-keeping families and the war-chiefs of the
 | AF 52 | Playwright **Ansel Crewe** is executed for "The Gilded King", the true story of the Fall. One copy survives in Saltmere. |
 | AF 61 | Maren dies after her fifth Tuning, aged 80, "very tired". |
 | AF 118 | **Zenith** is founded on the cliff-plateau above drowned Aurelia by a league of guild-houses. One of them, House Voss, is secretly the Aurel line. The poor who dig its foundations settle in the caverns and old Aurelian upper towers below. That is the start of **Nadir**. |
-| AF 140 | **The Glass Opening.** The Veiled Synod first opens the Veil Gate, and the Festival invites champions of *other worlds*. In the same year, **Sovereign Odo Prell's Reform** strikes the Hymn of Return from the liturgy: "a temporary arrangement is bad for public confidence." Only Gloaming keeps the full text. |
+| AF 140 | **The Glass Opening.** The Veiled Synod first opens the Veil Gate, and for ninety years the Festival invites champions of *other worlds*. In the same year, **Sovereign Odo Prell's Reform** strikes the Hymn of Return from the liturgy: "a temporary arrangement is bad for public confidence." Only Gloaming keeps the full text. |
 | AF 196–199 | **The Thornwar.** Elowen and Ashkaar fight over the Wyrmrest pass and the Draco Plate. The Accord founds **the Wardguard** to keep kings' hands off Plates. |
-| AF 230 | **The Hollow Festival.** Sovereign Edmund Crane collapses and dies *during* the Tuning. Officially, it was a heart attack. |
+| AF 230 | **The Hollow Festival.** Sovereign Edmund Crane collapses and dies *during* the Tuning. Officially, it was a heart attack. Unnerved, the Veiled Synod **seals the Veil Gate**. From then on, foreign entrants come from the Concert realms across the strait. |
 | AF 241 | Meridian is founded as a small Zenith utility company. |
 | AF 251 | **The First Sump Uprising** in Nadir is crushed by Zenith's militia. |
 | AF 270 | **Valen Corrigan** wins the Festival. Sovereign Adela Wyndham dies months later. |
@@ -82,7 +82,7 @@ There she gathered the eighteen Plate-keeping families and the war-chiefs of the
 | Festival | Sovereign | Remembered for |
 |---|---|---|
 | AF 10 | Maren Ilse | The first. Every Warden knelt. |
-| AF 140 | Odo Prell | First otherworld champions, and the Reform. |
+| AF 140 | Odo Prell | First otherworld champions (the tradition ended in AF 230), and the Reform. |
 | AF 150 | Ysmay Hart | A visiting champion won and politely declined the Seat. This becomes tradition for every foreign winner since, and the Seat passes to the best-placed Velmoran. |
 | AF 230 | Edmund Crane | "The Hollow Festival." The Sovereign died at the ceremony. |
 | AF 270 | Valen Corrigan | The young soldier who beat the old guard. |
@@ -181,7 +181,7 @@ The Legend Plate holds **every type, and none.** It has two faces, and the PC's 
   - **Nadir** wants to *exist*: recognition, a vote, clean air.
 - **Outside:**
   - **The Concert of Regions** (the neighboring realms across the Hallow Strait) imposed the quarantine and will decide at this Festival whether to lift it or declare **Severance**, permanent abandonment. Its envoy is Delphine Okoro.
-  - The **Veil Gate** through Antumbra is the only other door, and it opens to other *worlds* (see `design/CAMEOS.md`).
+  - The **Veil Gate** through Antumbra opens to other *worlds*, and it has been sealed since AF 230. Since the Bleed and the Fault thinned the Glass, it **leaks**: travelers from other worlds slip into Velmora uninvited, and that is the basis of the optional cameo sidequests (`design/CAMEOS.md`).
 
 ## 10. Culture notes (for NPC writing)
 

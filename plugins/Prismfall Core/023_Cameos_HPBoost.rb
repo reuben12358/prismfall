@@ -59,13 +59,16 @@ class Pokemon
   alias __prismfall_core_calc_stats calc_stats unless method_defined?(:__prismfall_core_calc_stats)
 
   # *args keeps EBDX's calc_stats(basestat, boss) signature working.
+  # Damage taken is preserved across recalculation (like vanilla level-ups).
   def calc_stats(*args)
-    ret = __prismfall_core_calc_stats(*args)
     m = @prismfall_hp_multiplier
-    if m && m != 1 && @totalhp.to_i > 1
-      base = @totalhp
-      @totalhp = (base * m).floor
-      @hp = [@hp + (@totalhp - base), @totalhp].min if @hp > 0
+    return __prismfall_core_calc_stats(*args) if !m || m == 1
+    damage = (@totalhp.to_i > 0) ? @totalhp - @hp : nil
+    fainted = @totalhp.to_i > 0 && @hp.to_i <= 0
+    ret = __prismfall_core_calc_stats(*args)
+    if @totalhp.to_i > 1
+      @totalhp = (@totalhp * m).floor
+      @hp = (fainted) ? 0 : (damage.nil?) ? @totalhp : (@totalhp - damage).clamp(1, @totalhp)
     end
     return ret
   end

@@ -109,7 +109,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ## CHAPTER 20 — "The Festival of Champions" (Crownhaven, Festival week)
 
-> **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, and Narrative Systems is rebuilding them (`story/10_CHOICES_ENDINGS.md` §3). Requests for new original entrants go to 03_CAST. Draw stagings below are written for the candidates already confirmed; slots marked *(rebuilt draw)* get their scenes when NS names the entrant.
+> **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, following `story/10_CHOICES_ENDINGS.md` §3 and NARRATIVE_KEYS §6. The four outsider entrants are profiled in 03_CAST.
 
 ### Day 0: Arrival
 1. **Crownhaven** is white stone and bells in the caldera. Upper Crownhaven is festooned with **Tamsin's eighteen banners**, woven since Ch10. The **Meridian Prism Arena** gleams where the old grounds were, too new.
@@ -119,8 +119,14 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
    - The Lantern Hollow are disguised as Choir porters.
    - The kings are in the observers' gallery: Caedmon for Elowen, Eirik, the Dominar's herald, Kassan, Dask.
    - **Envoy Delphine Okoro** of the Concert, deciding on Severance.
-4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." Foreign places in the bracket go to original **Concert champions** from across the strait *(rebuilt draw)*.
-5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps. Velmoran entrants: the PC, Kestrel, Juno, the Wardens Kaito, Nyx, Odessa, Celestine and Sigrun by default, and Valen as reigning Sovereign. Seeds can be **yielded** (see Day 2).
+4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." Instead, four outsiders fill the foreign places:
+   - Three come with **Envoy Okoro's** sealed Concert delegation: **Isaura Vell**, Champion of Solvane; **Matthias Drey**, Champion of the Karst Republic and Okoro's security chief; and **Mireille Vance**, Champion of Lys.
+   - One is entered by a king: **Ser Ivo Thorne**, the Queen's Champion, sent by Queen Maelis to win the Sovereign Seat for a crown.
+   - **Isaura** meets the PC at the Basilica steps and looks at their chest for a long moment: "Your god's in pieces and your champion's made of glass. Lovely region."
+5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps.
+   - **Sixteen seeds:** the PC, Juno, Kestrel, Valen; the Wardens Nyx, Kaito, Marisol, Odessa, Celestine, Ysolde, Anja and Sigrun; and the four outsiders.
+   - **Default R16 pairs:** PC–Juno, Isaura–Nyx, Kestrel–Drey, Kaito–Marisol, Valen–Odessa, Mireille–Celestine, Ysolde–Anja, Thorne–Sigrun.
+   - The lots are honest; the bowl isn't. The Accord's old customs (the Right of Grievance, yielded invitations, a Warden asking for a challenger's quarter, and Dorian, who has never once let the bowl ruin a good story) bend it on screen (NS §3.1).
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
 1. **The procession.** At dusk, eighteen Wardens descend the Sovereign's Stair into the Prism Arena, each carrying their Plate in a reliquary, in gym order to the counting rhyme sung by the Choir:
@@ -153,26 +159,32 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ### Day 2: Round of 16 ("someone from your past")
 Story staging for each R16 candidate (draw rules: NS §3.2):
-- **Marisol, by Right of Grievance** (Teo died, and her Bond ≤ 2). An old Ebb Guild custom lets a wronged party claim a match. **Kaito** stands and yields his invitation to her without a word. Marisol: "Let's see you run past *me*."
-- **Anja** (exposed in Ch11). **Odessa** gives Anja her place: "She's owed a swing." Anja: "You threw me to the court. Fine. Ice remembers."
+- **Marisol, by Right of Grievance** (Teo died, and her Bond ≤ 2). The old Accord custom lets a Warden claim a first-round match against a challenger who wronged their city, and the Hierophant reads it out. Marisol and Juno swap seeds: "Let's see you run past *me*."
+- **Anja** (exposed in Ch11). She invokes the same right, and she and Juno swap seeds: "You threw me to the court. Fine. Ice remembers."
 - **Rowan, "the Gardener"** (Rowan alive, mercy pleaded at the tribunal, Hollow Standing ≥ 4). Rowan enters masked under a false name. **Juno** gave him her own invitation: "One last garden, child. Then I'm done with masks." If Rowan drowned at the Fault, this candidate doesn't exist.
-- **Juno (J4, fallback).** Joyful and nervous under the arena's lights: "We started on the same dock. Let's see who's grown more." The fields cycle on `:PRISM_ARENA`. Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`. If she's displaced by Marisol or Anja, she takes the yielded seed, loses her first match, and opens her **Garden Match** exhibition.
+- **Juno (J4, fallback).** Joyful and nervous under the arena's lights: "We started on the same dock. Let's see who's grown more." The fields cycle on `:PRISM_ARENA`. Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`. If she's displaced by Marisol or Anja, she plays on in their seed (vs Kaito or vs Ysolde), loses, and opens her **Garden Match** exhibition. If she gave her invitation to Rowan, she watches from the Wardens' box.
 
 **After the match: the garden court.**
 - If Rowan lives, the PC finds Juno and Rowan in the arena's garden court, sitting apart on the same bench. If the PC carries **Venam's Testimony** and hasn't played it yet, they can play it here: *"I could hear everything. Everyone who sat with me."* Rowan sits down on the grass and cries, and Juno takes his good hand. It's the first time they've touched since Ironreach.
 - Without the testimony, Juno does it herself, more slowly: "Corvin says they dream. I'm going to believe him."
 - If Rowan drowned, Juno sits alone with Elin's pressed lily from the Bride Tree.
 
-**Other R16 results** are per the rebuilt draw. Story requirements:
-- **Kestrel** advances with the Gauntlet, and his opponent notices something is "driving" his Pokémon.
-- **Valen** advances. If Odessa wasn't displaced, he beats her, and she loses with style.
-- **Sigrun** advances.
+**Other R16 results** (default):
+- **Isaura beats Nyx.** Nyx, amused: "She's sold more secrets than me. I can tell."
+- **Kestrel beats Matthias Drey** with the Gauntlet. Drey, the Concert's hardliner on Severance, says to anyone who'll listen: "Your rival is fighting with something that isn't him." This is Okoro's first real doubt about Meridian.
+- **Kaito vs Marisol** (if both still seeded).
+- **Valen beats Odessa**, who loses with style.
+- **Celestine beats Mireille Vance**, who asks for her autograph afterward.
+- **Ysolde vs Anja** (if both still seeded).
+- **Sigrun beats Ser Ivo Thorne** in front of every king in the stands. Queen Maelis's bid for the Seat dies in four turns, and Prince Caedmon leaves the box early.
 
 ### Day 3: Exhibitions and the Festival Grounds
 - **The Eevee Octave** (Eeveelution gauntlet). Eight Glassfall orphans raised by the Choir, each beside a different Imprint, fight a back-to-back gauntlet in the Choir gardens, each fielding a different Eeveelution. It ends with leader **Vesper Lindqvist**'s full Eeveelution team on a field that shifts to match whichever Eeveelution is active.
   - Vesper, gentle: "We were all born the year the Crown broke. The Choir says we're lucky. I think we're just... what was left."
   - Reward: a Prism Ribbon for Understudy. If Understudy has evolved, Vesper notes which Imprint "claimed" it.
-- **Conditional exhibitions** (NS §3.6, original characters only):
+- **Other exhibitions** (NS §3.6, original characters only):
+  - **The Pageant Bout:** Dorian and Rook in a double battle staged as "a duet for the cameras", with Rook's Rotom filming it.
+  - **The beaten outsiders**, each the day after their loss: Drey and Thorne from Day 3, then Isaura and Mireille.
   - **Juno's Garden Match**, if she wasn't the PC's R16.
   - **The Ebb Guild match** with Marisol while Teo heckles from the stands, if Teo was saved and Marisol is close.
 - **Festival grounds side content:** the **Concordance Spire** (Battle Tower) under construction, a teaser; street food from every kingdom; Dorian rehearsing in secret with Celestine.
@@ -180,12 +192,19 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
   - **Proof** needs **two of three**: the **Larch Papers**, the **Arbiter Blueprints**, and **Venam's Testimony** (cameo sidequest, Ch7). Together they show the Bleed is *caused* and so curable, not contagious. Okoro recommends against Severance (`ENVOY_PERSUADED`).
   - **Plea:** she listens and drafts Severance anyway, "with regret".
 
-### Day 4: Quarterfinal ("the stranger")
-**The PC vs a stranger** *(rebuilt draw)*. The story job is unchanged from earlier drafts: an outsider's honest view of the PC's choice, delivered in a hard fight at cap 92.
-- The fallback entrant is a headline **Concert champion**, an original character NS will request for 03_CAST. Their post-match line must land the outside confirmation of the Return: *something that big doesn't want to be held.*
-- Conditional candidates follow the same rule, reframed for original characters: one reading the PC's Resonance, one asking whether the Fixed wake if the oath was Keep, one noticing a Fallen Kestrel, and one for a PC with many close Bonds.
+### Day 4: Quarterfinal ("the outsider's view")
+The story job is an honest view of the PC's choice from someone who isn't trying to use them, delivered in a hard fight at cap 92. A conditional candidate swaps seeds with Isaura, who plays on in their old seed (NS §3.5).
+- **Isaura Vell (fallback, the headline).** The hardest non-boss trainer in the game. Mid-battle: "You're carrying it, aren't you. I can hear it. It's so *loud* in you." After the match, on the empty stands:
+  > *"Twelve years ago Necrozma started eating my islands' light. I caught it. We had a whole year with no sun. You want to know what happens when you put a god in a box? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."*
 
-**Other QF:** Kestrel advances, and Valen advances. Sigrun advances, unless the rebuilt draw places her elsewhere.
+  This is the outside confirmation of the Return.
+- **Celestine** (Resonance ≤ −3): "You're getting louder in the wrong key. I'd like to hear it up close."
+- **Kaito** (the oath was Keep): "You'd keep them? Marrowgate's still knocking."
+- **Ysolde** (Kestrel has fallen): "If I can't reach him, I'll find out what reached you."
+- **Mireille** (five or more close Bonds and Harmony-leaning): "Everyone keeps telling you what you're *for*. Have you decided yet?"
+- *(Ruin Route: Archseer Dask. See 12_RUIN_ROUTE.)*
+
+**Other QF** (default): **Kestrel** advances. **Valen** advances. **Sigrun** advances.
 
 ### Day 5: The Night of Masques, the audience, Little Owl
 - **Corvin**, privately, after treating Valen in the Sanctum: "He has weeks. Maybe. He's holding the Plates quiet *right now*, with his body, every hour since the ceremony. He'll fight you tomorrow on what's left."
@@ -227,6 +246,8 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 > *"You chose a country over a daughter. Fine. Then save the country, Father. Don't make a child pay for it."*
 
 Valen: "...Little owl." It's the name from her childhood, which the player heard in the Mindscape in Ch13. She stays the night. If not completed, she watches the Sanctum door from the colonnade and doesn't go in.
+
+**"One More"** (exhibition): **Bastian**, too old for the bracket, wants one last fight. "I'm seventy-four. Rock's patient. I'm not."
 
 **Morwen's Echo** (conditional exhibition, NS §3.6: Kestrel and Ysolde reconciled, and the K6 line was Resolve). After midnight, Ysolde lights the Hollow Cathedral's lantern in a Crownhaven chapel. **Morwen's echo** fights the PC once, gently, "to see what I bought."
 
@@ -289,41 +310,52 @@ See Chapter 21.
 4. The Crown is torn from Valen's hand into the cradle. The PC is pinned by their own shard's pull, half-kneeling at the cradle's palm.
 5. **Voss** descends from his box onto the arena floor in a Meridian Engine-harness. He's calm, almost apologetic, wearing his gold sunburst pin.
    > *"You carried my key through eighteen doors. Let me show you what it opens."*
-6. **Game over `GO_HIS_HAND` "His Hand".** Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt." Taking it (on any path except `VOSS_ACCEPTED`, where Narrative Systems routes to an ending instead) triggers it. Foreshadowing: Lin's warning, Kestrel's K7 speech, Celestine's "not chained, not bought". *Epitaph: "It didn't hurt. That was the cruelest part."*
 
-**The allies move.** Each beat fires only if its flag is set. Show as a fast montage, one line each:
-- **Rook** cuts Lumen's grid from the arena feed: "First time Lumen's been dark in ten years. Kinda pretty." The Engine flickers.
-- **Nyx** blacks out Meridian comms. With the bargain she's precise; without it she's bloody but successful.
+**Hijacker variants** (NS §3.2):
+- **Dr. Quent** (Voss discredited: `MAGNUS_EXPOSED` plus Rook's leak plus the Night of Masques). The board removed Voss in disgrace before Day 7. Quent giggles in the harness, with Voss's Silvally team. Voss watches from the gallery, appalled at his own machine in someone else's hands.
+- **Ruin Route:** Theodric, the Gilded Reflection (`story/12_RUIN_ROUTE.md`, R7).
+
+**His hand.** Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt."
+- **With `VOSS_ACCEPTED`** (`:ch21_hand`):
+  - *Take* it: **Concord Dawn** begins here, and Arceus is never fought.
+  - *Refuse*: Voss, genuinely hurt: "You promised."
+- **Without it,** taking his hand is **Game over `GO_HIS_HAND` "His Hand"**. Foreshadowing: Kestrel's K7 speech, and Celestine's "not chained, not bought". *Epitaph: "It didn't hurt. That was the cruelest part."*
+
+**The allies move.** Each beat fires only if its condition holds. Show as a fast montage, one line each. These are Larch's eleven lamps (NS §6.2).
+- **Rook** (`ROOK_CUTS_GRID`, which needs `:ch16_rook` = hold) cuts Lumen's grid from the arena feed: "First time Lumen's been dark in ten years. Kinda pretty." The Engine flickers.
+- **Nyx** blacks out Meridian comms. With the bargain (`NYX_PRECISE`) it's surgical. Without it, it's bloody, and it doesn't count as an Engine break.
 - **Magnus** (`MAGNUS_KEPT_FAITH`) in the arena's machine-gallery disables the safety governor: "No machine I have built will kill a child. Governor's off. Go."
-- **Marchetti** (`MARCHETTI_TURNED`) orders the Directorate to stand down: "Not for this. Never for this."
-- **Larch** (`TELEMETRY_SABOTAGED`) reads the Engine's live output: "It's miscalibrated! It's reaching for a shard that isn't where it thinks!"
-- **Sigrun** and her dragons hold the sky against Meridian's *Gilded Hours* airships. **Reshiram** is with her. With `DOMINAR_SWAYED`, the Ashkaar legions fly with her.
+- **Marchetti** (`MARCHETTI_TURNED`: Ch14 evidence, or saved at the Fault) orders the Directorate to stand down: "Not for this. Never for this."
+- **Larch** reads the Engine's live output off her board of eleven lamps. With `TELEMETRY_SABOTAGED`: "It's miscalibrated! It's reaching for a shard that isn't where it thinks!"
+- **Calla's schematics** (`:ch20_calla`) light one lamp, or two if she went back. If she went back, Larch touches the second lamp and says nothing.
+- **Sigrun** and her dragons hold the sky against Meridian's *Gilded Hours* airships, with **Reshiram** beside her. With `DOMINAR_SWAYED`, the Ashkaar legions fly with her.
 - **Marisol's** fishing fleet evacuates Lower Crownhaven across the caldera lake. **Edda** pilots the lead boat.
-- **Tamsin** and **Shelly** throw silk nets that catch falling arena debris over the stands.
-- **Lantern Hollow** (Rowan, Wick, Thistle, Teo) guard the Ring's pylons against Directorate techs.
+- **Tamsin's** silk nets catch falling arena debris over the stands.
+- **The Lantern Hollow** (`LANTERN_HOLDS`), led by Rowan, Teo, or Thistle and Wick, guard the Ring's pylons against Directorate techs.
 - **Kaito** holds the arena gate.
-- The **visiting champions** fight Meridian's security alongside the Wardens. Lin, flatly: "i've seen this movie."
 
-**Tag battle (story).** **PC + Kestrel** (Redeemed) vs **Quent + Kroll**, or vs **Marchetti + Quent** if Marchetti isn't turned. It's a short, desperate double battle on the cracking arena floor that clears the way to Voss.
-- If Kestrel is Fallen, his place goes to **Juno**, and Kestrel instead appears in the hijack variant below.
-
-**Hijacker variants** ("the hijacker depends on what you exposed"; story content for the Narrative Systems rules):
-- **Default: Voss.**
-- **Quent:** if Voss was publicly discredited (Rook's leak *plus* the Night of Masques *plus* `MAGNUS_EXPOSED`), the Meridian board has removed Voss in disgrace before Day 7. Quent triggers the Engine instead, giggling, with the Engine-harness and Voss's Silvally team. Voss watches from the gallery, appalled at his own machine in someone else's hands. In this variant Voss can be *redeemed* at the end.
-- **Kestrel (Fallen):** Voss makes Kestrel his champion, harnessed into the Engine through the Gauntlet. The PC fights Kestrel's Gauntlet-fused team. Voss commands from the cradle. If the PC wins *and* has the letter or the ring, Kestrel can be pulled back mid-cutscene.
+**Tag battle (story).** It's a short, desperate double battle on the cracking arena floor that clears the way to the hijacker.
+- **Partner:** **Kestrel** if Redeemed, otherwise **Juno**.
+- **Foes:** two of **Marchetti / Quent / Kroll**, whichever aren't turned, dead or hijacking (NS: "Ch21 tag foes v21").
 
 ### Voss (`MERIDIAN_VOSS`, cap 100) on `:PRISM_ARENA`
 - **Boss battle** (multi-bar for his ace): **Silvally** (Project NULL), whose type *follows the active field* as the Prism Arena cycles through the eighteen gym fields. The rest of his team is "things men made" (see 03_CAST).
 - Mid-battle lines:
   - "Your mother wilted for ten years because a god dropped its furniture on her."
   - "I'm not your enemy. I'm the only adult in this arena who'll say the true thing out loud: *we don't need it*."
+- **Between bars 2 and 3, if `KESTREL_FALLEN`:** Kestrel is revealed harnessed into the Engine as Voss's conduit, Gauntlet fused to the cradle and burning. **CHOICE `:ch21_reach_kestrel`:**
+  - **Reach** (needs Morwen's Ring or Morwen's words from a kept letter): the PC says her line, *"Be the kind that's nearest when it matters."* He comes back. The Gauntlet goes dark, and Kestrel tears himself loose.
+  - **Burn:** the PC's shard tears the Gauntlet off by force. He lives, scarred across the arm (Ruin −3).
+  - **Let go:** he burns out as the Engine fires (`KESTREL_LOST`). This is the road to **The Empty Lighthouse**.
 - **On defeat:** the Engine doesn't stop. Voss drives his harness-spike into the cradle and becomes the conduit himself. "Then *I'll* hold it."
 
 ### Arceus Descends
 1. The sky over Crownhaven opens, white.
 2. **Arceus** is dragged down through it into the Engine's golden chains, eighteen locks closing on eighteen empty places in its wheel. It is enormous, half-bound and *in agony*. The **Prism Arena turns to `:BLEED`** across the whole caldera.
-3. Voss, at the cradle, ecstatic and horrified: "It's — it's *beautiful* —"
-4. Arceus's Judgment strikes the Engine-harness. What happens to Voss is set later (see Endings).
+3. The hijacker, at the cradle, ecstatic and horrified: "It's — it's *beautiful* —"
+4. **Arceus's Judgment strikes the harness.** **CHOICE `:ch21_spare_voss`:**
+   - **Shield** him with the shard (`PC_SPARED_VOSS`): he lives, crippled.
+   - **Let it judge:** he becomes light at the arena's heart.
 5. The Bleed surge rolls out toward forty thousand people in the stands.
 
 **Valen holds the Ring.**
@@ -332,23 +364,18 @@ See Chapter 21.
 3. If `ILSA_RECONCILED`, Ilsa is at his back with her hands on his shoulders, pouring her mind into his: "I've got you. Little owl's got you."
    > *"Go. Free it. I'll hold the door — I've had thirty years of practice."*
 
-### The True Finale: Arceus (cap 100)
-**Boss battle: Arceus** (multi-bar, type- and field-shifting).
-- Arceus cycles through the eighteen types, one per bar or phase as the systems team sets it, and the Prism Arena shifts to the matching gym field each time.
-- **Each phase is a lock breaking.** Between bars, a story beat plays: the **Warden of that Plate releases it**, kneeling at their pylon and letting go of the bond they've carried their whole life. This is the **Wardens' Consent** mechanic. Narrative Systems owns the threshold and how unreleased Plates change the fight (e.g., a lock that must be broken "by force", making the phase harder).
-- **Release lines** (one per Warden; write all eighteen in the script pass). Examples:
-  - **Juno**, first: "Verdance has never had an autumn. I'd like to see one."
-  - **Bastian**: "First time in three hundred years a Warden's had nothing in his keeping. Feels like setting down a sack of stone. Go on, then."
-  - **Brann**, weeping: "Forge it to break right, lad. Forge it to break *right*."
-  - **Celestine** sings the Hymn's last verse as her lock breaks. The Gloaming choir in the stands picks it up, then the Prism Choir, then the crowd.
-  - **Ysolde**: "Go home. All of you. Go home."
-  - **Kestrel** (if Ysolde has offered him the Ghost seat) is the one who releases the Spooky Plate, at Ysolde's side.
-- **Refusals:** a Warden with low Bond or an unresolved arc refuses, and their lock holds. The PC must break it by force (a harder phase). Refusal lines:
-  - **Anja** (if exposed): "Rimeholt *drowns* without it."
-  - **Magnus** (if exposed): "I won't hand my city's future to a god."
-- **Harmony vs Ruin:** at high Harmony, the PC's Pokémon are steadied by the shard (systems: minor buffs). At high Ruin, the shard *eats* Arceus's types instead of freeing them, and the battle is a war, not a liberation. This is the Ruin Route's divergence point.
+(If Valen collapsed before the Final, he is carried to the Ring on his stretcher and stands up anyway.)
 
-**Valen's death** (all paths). As the final lock breaks, Valen's crystal burns through, not to glass but to *light*. He says the PC's name. If reconciled, he says "Little owl." Then he's gone, and the Crown falls empty to the arena floor.
+### The True Finale: Arceus (cap 100)
+**Boss battle: Arceus**, multi-bar, type- and field-shifting. Variant by state (NS §6.6): **Bound** (default), **Miscalibrated** (telemetry sabotaged), **War** (Resonance ≤ −6), **Gilded** (Engine calibrated: the Bad ending), **Judgment** (Ruin Route only).
+- **Six bars, three locks each, in gym order.** Bar 1 is Tamsin, Dorian and Marisol, and so on through bar 6: Nyx, Celestine and Sigrun. The Prism Arena shifts to the matching gym field for each lock.
+- **Between bars**, those three Wardens kneel at their pylons and **release** their Plate, letting go of the bond they've carried their whole life, or **refuse**. Every refusal makes the next lock **forced**: Arceus gains +1 to every stat stage for that bar.
+- **All 36 lines** (18 releases, 18 refusals, each refusal tied to the player's choice that caused it) are in **`story/11_FINALE_LINES.md`**.
+- **Celestine** sings the Hymn's last verse as her lock breaks. The Gloaming choir in the stands picks it up, then the Prism Choir, then the crowd.
+- **Harmony vs Ruin.** At high Harmony, the PC's Pokémon are steadied by the shard (systems: minor buffs). In the **War** variant, the shard *eats* Arceus's types instead of freeing them, and the battle is a war, not a liberation.
+- **Gilded variant:** the PC fights *for* Arceus against the chains and loses the struggle anyway. The last bar can't be broken. This is **The Gilded Chain**.
+
+**Valen's death** (all main-route paths except Gilded). As the final lock breaks, Valen's crystal burns through, not to glass but to *light*. He says the PC's name. If reconciled, he says "Little owl." Then he's gone, and the Crown falls empty to the arena floor.
 
 ### Arceus speaks
 1. Freed, Arceus stands over the arena, whole except for its heart.
@@ -357,36 +384,40 @@ See Chapter 21.
 4. **Ilsa** (if reconciled) gives Arceus's voice to everyone in the arena:
    > *"Little light. You have carried me far. You may give my heart back, and the rest of me with it. Or you may keep what was borrowed, and wear it, and hold this land quiet in your two hands for a hundred years. I will not take what is not given. I learned that here."*
 
-**The final decision.** The PC speaks (authored), **CHOICE `:ch21_final`**. Narrative Systems may add or restrict options by state:
-- **"Go home. Take them with you."** (Return)
-- **"I'll keep them. I'll keep everyone safe."** (Keep)
-- *(Ruin, only on the Ruin Route or at extreme Ruin)* **"No. No more gods."** (Unmaking)
-- *(Concord Dawn, if `VOSS_ACCEPTED` or the governor was kept)* **"Stay. Stay and power the world."**
-- *(Borrowed Crown, if Kestrel is Redeemed with high Bond, or Sigrun's Bond is high)* the PC hesitates, and **Kestrel (or Sigrun) steps forward and takes the Crown**: "Not you. Let me be nearest."
+   (The last sentence is a Ruin Route hint: Arceus is talking about Judgment.)
+
+**The final decision.** The PC speaks (authored), **CHOICE `:ch21_final`**. Availability per NS §6.1:
+- **Return** (always): **"Go home. Take them with you."**
+- **Keep** (always): **"I'll keep them. I'll keep everyone safe."**
+- **Borrowed** (Kestrel Redeemed and devoted, or Sigrun Bond ≥ 6): the PC hesitates, and **Kestrel (or Sigrun) steps forward and takes the Crown**: "Not you. Let me be nearest."
+- **Concord** (`VOSS_ACCEPTED`, or Magnus's governor never switched off): **"Stay. Stay and power the world."**
+- **Unmake** (Resonance ≤ −6, or Hollow Standing ≥ 4 with Rowan radicalized or Kroll never publicly exposed): **"No. No more gods."**
 
 ---
 
-## THE ENDINGS (story scenes; triggers in 10_CHOICES_ENDINGS.md)
+## THE ENDINGS (scenes; the conditions matrix is NS §6.3)
 
 ### GOOD: "Homecoming"
 1. Arceus takes the eighteen Plates and its heart, and ascends. Light rains on Crownhaven.
 2. The Bleed **recedes** across the realm in one long exhale.
 3. **The Fixed who still dream wake:**
-   - In Verdance, the Bride Tree's blossom falls all at once, and **Elin** opens her eyes in Rowan's arms with Juno beside them, under the first falling leaves Verdance has ever seen.
+   - In Verdance, the Bride Tree's blossom falls all at once, and **Elin** opens her eyes in Rowan's arms with Juno beside them, under the first falling leaves Verdance has ever seen. *If Rowan drowned at the Fault,* Juno holds her aunt alone and has to tell her.
    - In the Lowlight, **Dex** blinks, finishes his wave, and says, "—and *that's* why my sister says I talk too much." Rook, standing there in the dark city, laughs until he cries.
    - In Mirefen, Corvin's Quiet Ward sits up.
    - In Lower Crownhaven, the Glassfall Scar's forty breathe again.
 4. **The Fixed who stopped dreaming** (Marrowgate's oldest, the long-Fixed of the Quiet Towns) dissolve into soft light. Kaito is there to watch it, at Marrowgate's sealed gate, with his Lucario. He opens the gate.
 5. The PC, alone in the arena center, feels something they've never felt: *the ground*. The plain land, with no Imprint at all, **imprints them**. A Meridian scanner left on the floor reads a faint, ordinary color at last.
-6. **Voss:** if the PC shielded him at the end (`PC_SPARED_VOSS`), he's alive, crippled, and asks to see the sunrise. Otherwise he is light at the arena's center, a man who reached for a god.
+6. **Voss:** if shielded, he's alive, crippled, and asks to see the sunrise. Otherwise he is light at the arena's center, a man who reached for a god.
 
 **Epilogue** ("One Year Later": Fallmorn, AF 301, the first **Festival of Seasons**). Slides:
-- **Juno** in Verdance's first autumn, raking leaves with Elin and Rowan.
-- **Kestrel**, Ghost Warden of Gravenmoor if `KESTREL_ACCEPTED_SEAT`, or a wanderer with a new Gale Post route.
+- **Juno** in Verdance's first autumn, raking leaves with Elin, and with Rowan if he lived.
+- **Kestrel**, Ghost Warden of Gravenmoor (`KESTREL_ACCEPTED_SEAT`), or a Gale Post wanderer.
+- **Teo** on the Ebbmouth quay, or his photograph on the Guild wall.
+- **Calla's name** on the new Spire memorial, if she went back.
 - **Rimeholt** rebuilding on the southern shore, with Anja and Eirik and a thaw-fishery.
 - **Cindervault's** forges on coal again. Brann has forged Valen's memorial from the empty Crown's setting.
-- **Lumen** with fewer lights and more stars, the Zenith Council reformed with Nadir's first elected seat. Nyx is in it and hates it.
-- **The quarantine lifted** if `ENVOY_PERSUADED`. Otherwise it is lifted a year later, grudgingly. **Edda's** ferry runs again.
+- **Lumen** with fewer lights and more stars, and the Zenith Council reformed with **Nadir's first elected seat**. Nyx is in it and hates it.
+- **The quarantine:** it lifts now (`ENVOY_PERSUADED`) or a year late, grudgingly. **Edda's** ferry runs again.
 - **Bastian** dies peacefully at home: "the first Warden in three hundred years with nothing in his keeping".
 - **Celestine** sees her first full night sky in sixty years and starts to age, gladly.
 - **The PC** stands at the Ferrow's Landing rail where they arrived, as the first ferry comes in. Edda: "Don't lean on my rail like that, sprog."
@@ -396,39 +427,49 @@ See Chapter 21.
 2. The PC, the keystone, sleeps in the cradle, adored as "the Sovereign Who Sleeps", visited by schoolchildren.
 3. Zenith blazes. Nadir is cleared. The Bleed stops.
 4. The kingdoms kneel, because Meridian owns the light.
-5. **Voss** (or Quent) on the Zenith Council. The final image is the chipped linesman's mug on a desk above the world, steaming.
+5. The final image is the chipped linesman's mug on a desk above the world, steaming. *Quent variant:* the mug is Quent's novelty mug, and **Voss** stands among the visiting schoolchildren's parents, looking up at the PC in the cradle.
+6. Credits, then the title screen. There is no post-game.
 
-### GREY 1: "The Long Vigil"
-The PC wears the Crown. The Plates sleep quiet. Arceus departs incomplete, sorrowing. The Bleed halts, the Fixed stay Fixed, and the miracles remain. The epilogue is the PC at the next Tuning, ten years later, with the first crystal on their hand. Juno and Kestrel are beside them, swearing to find another door.
+### GREY: "The Long Vigil" (Keep)
+The PC wears the Crown. The Plates sleep quiet. Arceus departs incomplete, sorrowing. The Bleed halts, the Fixed stay Fixed, and the miracles remain. The epilogue is the PC at the next Tuning, ten years later, with the first crystal on their hand. Juno and Kestrel are beside them, swearing to find another door. Post-game: the Warden's Gauntlet is framed as Sovereign's audiences.
 
-### GREY 2: "Homecoming, Unfinished"
-The Return happens without enough consent. The unreleased Plates are torn away, and those cities suffer a last Shatter (named per refusals: Rimeholt, Cogsworth, and so on). The rest is Homecoming, but with funerals. It's hard, it's free, and it's ash-grey and hopeful.
+### GREY: "Homecoming, Unfinished" (Return, Consent < 12 or Resonance < 2)
+The Return happens without enough consent. The unreleased Plates are torn away, and those cities suffer a **Last Shatter**. The rest is Homecoming, but with funerals. The slides show one image per refusing Warden's city, in gym order, using the lines in `11_FINALE_LINES.md` §3. If Resonance was below Harmony, the PC's scar never takes the land's color. It's hard, it's free, and it's ash-grey and hopeful.
 
-### GREY 3: "The Hollow Spring"
-The PC uses the shard to **break** the Plates. The Imprints die in one night of fire and glass. Arceus, with no Plates to receive, departs wounded forever. Velmora is ruined, and free: nobody will ever rule through a Plate again. Rowan plants the first seed in plain soil. Juno doesn't speak to him.
+### GREY: "The Empty Lighthouse" (Return with Consent and Harmony, but `KESTREL_LOST`)
+Everything in Homecoming happens, but Kestrel burned out as the Engine's conduit.
+- Hesper climbs the lighthouse every night and lights a lamp nobody needs.
+- Ysolde keeps the Ghost seat.
+- The PC reads Morwen's letter aloud at Kestrel's grave in Gravenmoor, beside his mother's, for the boy who never opened it.
+- Last slide: Kestrel's Aegislash, sheathed, on the PC's belt.
 
-### GREY 4: "Concord Dawn"
-Arceus is "humanely" half-bound by Magnus's governor and powers the realm. The Bleed ends and prosperity booms. The PC sits on the Zenith Council. Lin's line plays over the final slide: "it's quiet. for a while."
+### GREY: "The Hollow Spring" (Unmake, main route)
+The PC uses the shard to **break** the Plates. The Imprints die in one night of fire and glass. Arceus, with no Plates to receive, departs wounded forever. Velmora is ruined, and free: nobody will ever rule through a Plate again. Rowan plants the first seed in plain soil, or **Thistle** does if Rowan drowned. Juno doesn't speak to him, or to her. If Teo lived, he's the one who won't. Post-game: partial (Spire and Gauntlet only).
 
-### GREY 5: "The Borrowed Crown"
-Kestrel (or Sigrun) takes the Crown in the PC's place. The Plates sleep, and the bearer starts to crystallize. The PC sails home on the first ferry after the quarantine lifts, then comes back every Festival. In the last slide, Kestrel's hand on the rail is beginning to turn to glass, and he's smiling.
+### GREY: "Concord Dawn"
+- Arceus is "humanely" half-bound by Magnus's governor and powers the realm.
+- The Bleed ends and prosperity booms. The PC sits on the Zenith Council.
+- Over the last slide, Larch, retired to Tidewatch, speaks: "It's quiet. For a while."
+- **If reached through `:ch21_hand`,** the PC never fought Arceus. The last slide is the PC reading the arena's power output on a Council screen.
+- Post-game: partial (Spire only; the Wardens are pensioned off; Quent's Concord Zero arc starts).
 
-### RUIN: "The Unmaking" (Ruin Route; spec by Narrative Systems)
-Story premise: the PC who has seen every way the world ends (the Ledger) refuses all of them.
-- The shard's *none* unmakes Arceus's chains, the Plates, Judgment and finally the Glass itself.
-- Antumbra and Velmora fold into each other, and a new world without gods or types begins.
-- **Nova** (CAMEOS.md) appears on this route only, offering a gentler dream.
-- **Giratina** is the final witness. Story hooks: Lin knows ("you've done this before, haven't you"), and Shiv has dreamed it.
+### GREY: "The Borrowed Crown"
+Kestrel (`KESTREL_BEARS`) or Sigrun takes the Crown in the PC's place. The Plates sleep, and the bearer starts to crystallize. The PC sails home on the first ferry after the quarantine lifts, then comes back every Festival.
+- With Kestrel, the last slide is his hand on the rail, beginning to turn to glass, and he's smiling.
+- With Sigrun: "Ten years. Maybe twelve. I was relieved once. Never again."
+
+### RUIN: "The Unmaking" / "The One Who Came Back"
+Ruin Route only. See **`story/12_RUIN_ROUTE.md`** (R7) and NS §5.4.
 
 ---
 
 ## POST-GAME HOOKS
-- **The Concordance Spire** (Battle Tower) in Crownhaven, and **the Warden's Gauntlet**: all eighteen Wardens back-to-back at level 100. In Homecoming their teams no longer use fields, because the Imprints are fading, so it's a "pure" gauntlet. That's a neat in-world twist.
-- **Zygarde chooses the PC.** The Zygarde Cell quest completes at Valen's memorial.
-- **The Distortion Core** (Antumbra, 910): Giratina's rematch and capture, and the Veil Gate's other side.
+Scope by ending (NS §6.5): **full** after Homecoming, Unfinished (refusers are absent from the Gauntlet), Empty Lighthouse, Long Vigil, Borrowed Crown and both Ruin endings. **Partial** after the Hollow Spring and Concord Dawn. **None** after the Gilded Chain.
+- **The Concordance Spire** (Battle Tower) in Crownhaven, and **the Warden's Gauntlet**: all eighteen Wardens back-to-back at level 100. In Homecoming their teams no longer use fields, because the Imprints are fading, so it's a "pure" gauntlet.
+- **Zygarde chooses the PC** at Valen's memorial (`ZYGARDE_CHOOSES`: Valen Bond ≥ 3 or Ilsa reconciled), completing the Zygarde Cell quest.
+- **The Distortion Core** (Antumbra, 910): Giratina's rematch and capture, and the leak in the Glass.
 - **Legendary rematches and captures:** Kyogre (Lake Rime), Groudon (Undersands), Zekrom (Stormfront), Reshiram (Wyrmscar, if not with Sigrun), Pecharunt (Lightless Deep), Ogerpon and the Loyal Three (Bride Grove).
 - **Shardfall Isles** (905) and the **Hallow Strait** (900/901): the outer islands, where the quarantine began. Bleed remnants are fading.
 - **Concord Zero:** **Dr. Quent** escapes with an Engine fragment, the seed of a post-game villain arc.
-- **Cameo rematches** at level 100, including **Lin** ("again. properly this time.").
-- **Garret's rumor:** a girl like Eden seen near Marrowgate. A deliberate dead end, and a kindness.
+- **Cameo superbosses** (`design/CAMEOS.md`), all optional: **Lin** (with her lines changed by ending), Garret's Eden rumor near Marrowgate (a deliberate dead end, and a kindness), and level-100 rematches with the earlier cameos.
 - **The Ferrow's Landing lighthouse:** Hesper Vane, finally, asks the PC to tell her about her daughter's last night.

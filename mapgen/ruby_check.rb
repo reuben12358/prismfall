@@ -13,6 +13,7 @@ module RPG
   class MoveRoute; attr_accessor :repeat, :skippable, :list; end
   class MoveCommand; attr_accessor :code, :parameters; end
   class AudioFile; attr_accessor :name, :volume, :pitch; end
+  class Tileset; attr_accessor :id, :name, :tileset_name, :autotile_names, :panorama_name, :panorama_hue, :fog_name, :fog_hue, :fog_opacity, :fog_blend_type, :fog_zoom, :fog_sx, :fog_sy, :battleback_name, :passages, :priorities, :terrain_tags; end
 end
 class Table
   attr_reader :xsize, :ysize, :zsize, :data

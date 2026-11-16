@@ -82,6 +82,20 @@ The stock intro's controls tutorial is not reproduced.
   IDs). GO-03 "Curtain Call" uses **`:GO_CURTAIN_CALL` (not registered yet; Core warns but still runs it)**. Rename both
   sides together if Narrative picks other IDs.
 
+## 2b. New tilesets (tileset-agnostic pipeline)
+- **Register a tileset:** `python3 -I mapgen/import_tileset.py mapgen/tilesets/<name>.yaml [--palette-skeleton]`. The
+  descriptor sets the ID, name, PNG, up to 7 autotiles, and per-tile passages/priorities/terrain tags (ranges allowed,
+  plus per-autotile-slot props). See `mapgen/tilesets/example_coast.yaml.example`. It copies the graphics to
+  `maps_out/Graphics/`, records the tileset in `maps_out/tilesets_prismfall.json` (the renderer and the reachability
+  QA read it, and imported graphics take precedence), and can write a palette skeleton `palettes/<name>.yaml`.
+- **Install into the project:** `python3 -I mapgen/merge_tilesets.py <ProjectDir>` (close RMXP first). It backs up
+  `Tilesets.rxdata`, copies the graphics, writes an `RPG::Tileset` at each registered ID, pads skipped slots with
+  blank tilesets, and refuses ID collisions unless `--force`.
+- **Specs** pick a tileset through their palette (`palette: <name>`, whose `tileset:` is the ID). Palettes so far:
+  `outside` (1), `gym_rock` (14), `harbour` (15), `mansion` (16).
+- Tested end to end with a dummy imported tileset (ID 30): import, build a map, render, merge into a copy of the
+  Renovation project's Tilesets.rxdata, then load it with Ruby's Marshal.
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen
@@ -123,6 +137,12 @@ events: [...]
 `exit_link: FL_PC` (the template's Exit mat links back to that door), `drop_template_events: [names]`,
 `stretch: [[x|y, index, count]]` (repeats a row or column to resize a room), and `tile_edits: [[layer, x, y, tile] | [layer, x, y, w, h, tile]]`.
 
+**Layout scripts** (`mapgen/layouts/<town>.py`, so far Saltmere) write a spec's `map:` ASCII and its decoration lists between
+`# LAYOUT-DECO-BEGIN/END` markers. Run one after editing it, then run build.py. `tileblocks:` places rectangles of tileset art by
+top-left tile id: the fountain 1501 [3,4], the lighthouse 3941 [3,8], a ship 4349 [3,3], rowing boats 4318 [2,3],
+benches 1437 [3,1], planters 1485 [3,2], lamps 1408 [1,3]. Single objects go in `tiles:`: barrels 1536–1538, crates 1376–1381,
+rocks 1328/1329, saplings 1331, flower pots 1340/1341.
+
 **Outside glyphs** (`palettes/outside.yaml`):
 | Glyph | Terrain |
 |---|---|
@@ -140,6 +160,9 @@ events: [...]
 | `=` | wooden pier over water |
 | `h` | water under a harbour stamp |
 | `#` | building footprint (ground) |
+| `c` | grey cobbles (blob rules mined from Cedolan City) |
+| `C` | cliff face band (1187/1188/1193 faces; 1184/1185/1186 base lip on the row below) |
+| `S` | stone stairs cut through a cliff band (1161) |
 Paths and blobs should be at least 2 tiles wide.
 **Gym (rock theme) glyphs** (`palettes/gym_rock.yaml`): `.` floor, `_` plank floor, `v` void (impassable), `o` boulder,
 `#` wall (faces and side edges drawn automatically).
@@ -192,6 +215,8 @@ above the mat facing up, and leave onto the door tile, where the door animates y
   rock-gym theme of the Gyms tileset, with no silk/web art; there is no ship sprite, so the Customs Hall template's moored ship
   stands in for the Dovetail. Real art needs custom tiles.
 - No cliffs or mountains yet. Outdoor barriers are trees, water, fences and ledges. The Lighthouse is a condo stamp.
+- The stock ships and boats in the Outside tileset are cut at the sheet's right edge (the hulls continue off-sheet),
+  so ships may only sit flush against a map's right edge. Saltmere's ship does.
 - Not built yet:
   - Gullcry B1F (565) and The Rehearsal (568, :BLEED): signs.
   - Reyes Cellar (166): the cellar door is barred.

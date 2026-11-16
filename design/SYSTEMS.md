@@ -28,6 +28,9 @@ battle or trainer-loading layer (never the battle scene), so it works with or wi
 | `Pokemon#calcIV`, `Pokemon#able?` | passwords: Perfect IVs, Monotype (only in battle, only for player-owned Pokémon) |
 | `Player#has_exp_all`, `PokemonBag#has?(:EXPALL)` | password: No Exp. All |
 | pause menu entry `:prismfall_ledger` | Ledger viewer |
+| `Pokemon#calc_stats` | `HP_BOOSTS` max-HP multipliers (Shiv's Ambipom) |
+| `Scene_Credits#main` | credits → title for endings with no post-game |
+| `:on_trainer_load` `:prismfall_hp_boosts` | applies `HP_BOOSTS` |
 
 Custom events other plugins can listen to (`EventHandlers.add(event, :key, proc)`):
 `:prismfall_badge_awarded (n)`, `:prismfall_difficulty_changed (old, new)`, `:prismfall_festival_started`,
@@ -128,37 +131,46 @@ Script: pbMessage(_INTL("Kestrel picked {1}!", GameData::Species.get(Prismfall::
 ```
 
 ## 5. Festival of Champions
-Data lives in `008_Festival_Data.rb` (entrants, default seeding, rule sets, stages) and `015_Festival_Draw.rb`
-(choice-driven draw). The roster comes from `design/CAMEOS.md`: Lin is the headline/QF cameo, plus Amaria, Shelly,
-Alexandra, Venam, Shiv and Garret. Melia, Titania and Nova are draw-only extras. The bracket Wardens are Nyx, Kaito,
-Odessa, Celestine and Sigrun; they're NPC-only, with version 50 reserved. The default seeding is CAMEOS.md's
-"Default draw" table. Cameo versions follow CAMEOS.md: 1 = R16/exhibition, 2 = QF, 3 = SF/Final-tier.
-`PLAYER_PATH = [:JUNO, :LIN, :KESTREL, :VALEN]` is now only the **fallback**, see 5a. The player's drawn opponents
-always win their NPC matches until they meet the player. The other NPC matches use `SCRIPTED_WINNERS[[round, match]]`;
-anything left over is simulated from `:rating` with a per-save seed, so results are stable across reloads.
+Data lives in `008_Festival_Data.rb` (entrants, default seeding, rule sets, stages) and `015_Festival_Draw.rb` (draw, exhibitions,
+Arceus variants). It's transcribed from NARRATIVE_KEYS §6. **SPINE Revision 4** applies: original characters only, so the
+sister-game cameos are sidequest fights (§14).
 
-Stages and caps (per-round rule sets): R16 90, QF 92, SF 94, Final 96, Hijack 100, True Finale 100. The QF-to-Final rule
-sets set a cap override; the 100 rule set unlocks the finale cap. Every rule set means: no Bag, canLose (retry), heal
-before and after, no prize money. Exhibitions are offered for flagged entrants who are no longer alive in the bracket
-(Shelly's is a double battle).
+Entrants:
+- Velmorans: Juno, Kestrel, Valen and the Wardens.
+- Envoy Okoro's delegation: `FESTIVAL_ISAURA` (headline/QF), `FESTIVAL_DREY` and `FESTIVAL_MIREILLE`.
+- The Queen's Champion `FESTIVAL_THORNE`.
+- Draw-only variants: Rowan "the Gardener", Archseer Dask (Ruin), Kestrel (Fallen), Brann/Sigrun stand-ins, Valen (Last Tuning).
+- Hijackers: Voss, Quent and Theodric.
 
-### 5a. Choice-driven draw (Revision 3)
-`DRAWS[stage_id]` is an ordered list of `{ :opponent, :condition, :version }`. The first candidate whose condition holds
-wins; the stage default is always appended last as the fallback. Bracket stages (R16 to Final) are drawn when
-`Festival.start` runs. The drawn opponent is seated in the player's block: if it's already seeded it swaps seats with the
-default, otherwise it replaces the default, which leaves the bracket. Hijack is drawn live and fixed when its battle starts.
-A variant is just another entrant with the same `:person`, e.g. `:KESTREL_FALLEN` = RIVAL_KESTREL with `:rival_battle => 9`,
-which loads versions 90/91/92. Validation runs at load (console warning) and on `Festival.start` in debug (raises). It checks
-that every candidate exists, every condition parses, every stage has a fallback, and no person is a candidate in two stages,
-so a run can never draw anyone twice.
-```ruby
-DRAWS[:SF] = [
-  { :opponent => :KESTREL_FALLEN, :condition => "bond(:KESTREL) <= -4 || choice(:kestrel_truth) == :betrayed" },
-  { :opponent => :TITANIA, :condition => "choice(:kestrel_truth) == :told && bond(:KESTREL) >= 6", :version => 3 }
-]   # fallback: :KESTREL
-```
-Sample draw entrants that need trainer data: `LEADER_ROWAN "Rowan" v50`, `CHAMPION_SUCCESSOR "Successor" v0`,
-`HOLLOW_MOURNER "Mourner" v0`, Kestrel v90-92, Melia v1, Titania v3, Nova v2. All of these are placeholders until NARRATIVE_KEYS.md arrives.
+`PLAYER_PATH = [:JUNO, :ISAURA, :KESTREL, :VALEN]` is the fallback. The drawn path entrants win their NPC matches until they meet the
+player; the other matches use `SCRIPTED_WINNERS` or the simulation. Caps by round: R16 90, QF 92, SF 94, Final 96, Hijack/True Finale 100.
+Every round: no Bag, canLose (retry), heals.
+
+### 5a. The draw
+`DRAWS[stage]` is an ordered list of `{ :opponent, :condition, :version }`. The first match whose *person* isn't already used wins; the
+stage default is the fallback.
+- **R16, QF, SF** are drawn at `Festival.start`. If the drawn opponent is already seeded, it **swaps** seats with the default, who plays on
+  as an NPC (e.g. Juno takes Anja's seed). If it's unseeded (Rowan, Dask), it replaces the default, who **withdraws**; that counts as out
+  for `eliminated()` and exhibitions.
+- **The Final is `:live`**. Valen is seeded at start; the draw runs when the Final battle starts on Day 7. A stand-in (Sigrun v96 or Brann)
+  fights in his slot without reseating anyone.
+- **The Hijack** is drawn live and fixed when its battle starts.
+
+Variants share a `:person`, and that person is never drawn twice. Validation checks candidates, conditions and fallbacks, that the
+persons are disjoint across stages, and that no cameo entrant remains.
+- `Festival.drawn(:STAGE)` and the condition `drawn(:STAGE)` return the locked entrant (nil until drawn).
+- `Festival.arceus_variant` returns the first matching `ARCEUS_VARIANTS` entry (`:id`, `:bars`, `:player_side`) for Prismfall Bosses.
+  Core itself doesn't change the `:ARCEUS` stage.
+- Each opponent the player meets is written to the Ledger `met` list, for the Hall of Reflections.
+
+### 5b. Festival days and exhibitions
+Events set the day: `Prismfall::Festival.set_day(3)` or `.next_day!`; conditions can read it with `festival_day`. Exhibitions (`exhibition_menu`,
+`exhibition(:ID)`) offer two kinds of opponent:
+- entrants flagged `:exhibition` (Isaura, Drey, Mireille, Thorne), from the day **after** they're knocked out or withdraw;
+- `EXHIBITION_EXTRAS` entries (Pageant Bout: Dorian & Rook as a double; Bastian; Juno's Garden Match; Marisol; Isaura or Mireille when not
+  drawn; Morwen's Echo), each with a `:condition` and a `:from_day`.
+
+None are offered on the Ruin Route; its Eevee Octave is run by events. Two-trainer entrants (`:double => true`) start a double battle.
 
 ```
 # Reception desk (after Badge 18):
@@ -169,7 +181,8 @@ Conditional Branch > Script: Prismfall::Festival.next_match
    (won)  -> cutscene for the stage; branch on Prismfall::Festival.stage_id (:QF, :SF, :FINAL, :HIJACK, :ARCEUS, nil=finished)
    (else) -> "Try again?" loop; the stage doesn't advance
 # Exhibition hall NPC:
-Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:SHIV)
+Script: Prismfall::Festival.set_day(3)
+Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:DREY)
 # Custom battle staged by the event (e.g. a scripted double):
 Script: Prismfall::Festival.record_result(true)
 Conditional Branch > Script: Prismfall::Festival.finished?
@@ -220,98 +233,130 @@ Debug menu → **Prismfall Core...** covers:
 - **Ledger tools**: view, mark all found, clear, test any game over The separate *Prismfall Debug Tools* plugin covers fields, Wardens and badge count.
 
 ## 8. Narrative state (Bonds / Standing / Resonance / Choices)
-Data tables are in `012_Narrative_Data.rb`. They're SAMPLE keys until `design/NARRATIVE_KEYS.md` exists; then transcribe them there.
-State is saved in `Prismfall.state.narrative` (save file, not switches). Unregistered keys still work, with a console warning in debug.
-- **Bonds** `BONDS` (default range -10..10, per-character `:start`), tiers `BOND_TIERS` (:hostile, :wary, :neutral, :friendly, :close, :devoted).
-- **Standing** `FACTIONS` (:HOLLOW, :MERIDIAN, :ACCORD), tiers `STANDING_TIERS`.
-- **Resonance** is one integer from -10 (Ruin) to +10 (Harmony). Bands: :ruin, :ruin_leaning, :balanced, :harmony_leaning, :harmony.
-- **Choices** `CHOICES[key] = { :values, :once }`. Every decision is logged with play time and map ID. `:once` choices can't be changed.
+The data in `012_Narrative_Data.rb` is transcribed from `design/NARRATIVE_KEYS.md` §1–5, 9 and 12. Re-run the transcription when that file
+changes. State is saved in `Prismfall.state.narrative`, not in switches.
+- **Bonds**: 10 (Juno, Kestrel, Rowan, Voss, Valen, Ilsa, Sigrun, Nyx, Marisol, Ysolde), range −10..10. Tiers: hostile, wary, neutral,
+  friendly, close, devoted.
+- **Standing**: Hollow, Meridian, Accord. Tiers: enemy, distrusted, neutral, trusted, ally.
+- **Resonance**: −10 (Ruin) .. +10 (Harmony), in 5 bands.
+- **Choices**: 48 keys, all `:once`. **`pf_choose` applies `CHOICE_EFFECTS` once.** The effect tokens are `ID+n`, with `RES` meaning
+  Resonance. The toast "X will remember that." appears only when a Bond changes tier. Events no longer apply deltas by hand.
+- **Aliases**: the Map Builder's keys `:PRO_FELLOWSHIP`, `:CH2_TAMSIN`, `:CH3_JUNO_TALK`, `:CH4_KESTREL_MOURNER` and `:CH4_TEO` resolve to
+  the canonical lowercase keys. Any UPPERCASE key whose lowercase form is registered also resolves. Those map events still hand-apply their
+  own (older) deltas, so effects are **not** auto-applied through a legacy alias (`LEGACY_ALIASES_SKIP_EFFECTS`). To migrate an event, change
+  it to the lowercase key and delete its `pf_bond_add` / `pf_standing_add` lines.
+- **Derived flags** (`DERIVED_FLAGS`, ~45) such as `TEO_SAVED` and `KESTREL_FALLEN` are computed and never stored. Flags can reference
+  other flags; cycles are rejected. **Tallies**: `CONSENT` (the 18 `WARDEN_CONSENT` conditions; ≥12 is needed for the Good ending),
+  `ENGINE_BREAKS` and `WARM_BONDS`.
+- **Mirror switches**: Core rewrites S221–S228 (TEO_SAVED … KESTREL_REDEEMED) after every narrative change. Events read them; never write them.
 ```
-Script: pf_bond_add(:JUNO, 1)              # quiet
-Script: pf_bond_add(:KESTREL, -2, true)    # with "Kestrel will remember that."
-Script: pf_standing_add(:HOLLOW, 1)
-Script: pf_resonance_add(-1)               # toward Ruin (+ = Harmony)
-Script: pf_choose(:mourner_fate, :spare)
-Conditional Branch > Script: pf_choice(:mourner_fate) == :spare
-Conditional Branch > Script: pf_bond(:JUNO) >= 3
-Conditional Branch > Script: pf_cond("bond(:JUNO) >= 3 && standing(:ACCORD) > 0")
+Script: pf_choose(:ch9_teo_sable, :save_teo)        # applies MARISOL+4 HOLLOW+1 RES+1 once
+Conditional Branch > Script: pf_flag(:TEO_SAVED)
+Conditional Branch > Script: pf_tally(:CONSENT) >= 12
+Conditional Branch > Script: pf_cond("flag(:KESTREL_FALLEN) && choice(:ch21_reach_kestrel) == :let_go")
+Script: pf_bond_add(:ILSA, 1)                       # Quiet Hours scenes etc.
 ```
-In Ruby: `Prismfall::Bonds.get/set/add/tier`, `Prismfall::Standing.*`, `Prismfall::Resonance.value/shift/band`,
-`Prismfall::Choices.get/make/made?/log`. Every change fires `:prismfall_narrative_changed (kind, id, old, new)`.
+`Prismfall::NarrativeCheck.run` implements the NARRATIVE_KEYS §15 checklist:
+- every choice key and value used in conditions exists;
+- every `flag`/`tally`/`bond`/`standing` name used exists;
+- no flag cycles;
+- effect tokens are valid;
+- every alias target exists;
+- `ENDING_RULES` covers every `:ch21_final` value;
+- `WARDEN_CONSENT` has 18 entries;
+- the Festival draw is valid.
+
+It runs at load (console warnings in debug) and from Debug → Prismfall Core → Show Core status.
 
 ## 9. Condition strings (safe subset, no eval)
-These are used by draws and ending rules, and are available to any data table through `Prismfall.cond(str)` / `pf_cond(str)`.
-Operators: `&& || !` (or `and or not`), `== != >= <= > <`, `+ -`, and parentheses. Literals: integers, `:symbols`,
-`"strings"`, `true false nil`. Only these functions exist:
-`bond(:ID) bond_tier(:ID) standing(:F) standing_tier(:F) resonance resonance_band choice(:K) made(:K) chose(:K, :V)
-badges has_badge(N) difficulty level_cap starter_slot starter_gen password(:ID) gameover_found(:ID) gameovers_found
-ending_seen(:ID) ruin_unlocked ruin_route festival_stage eliminated(:ID) switch(N) var(N)` (switches and variables are read-only).
-`nil` counts as 0 in arithmetic and `< >` comparisons. Use `Prismfall::Conditions.check(str)` → `[ok, error]` to validate.
-To add a function, add a line to `Conditions::FUNCTIONS`.
+These are used by draws, flags, tallies, ending rules and exhibitions, and are available anywhere via `Prismfall.cond(str)` / `pf_cond(str)`.
+Operators: `&& || !` (or `and or not`), `== != >= <= > <`, `+ -`, and parentheses. Literals: integers, `:symbols`, `"strings"`, `true false nil`.
+Only these functions exist:
+`bond bond_tier standing standing_tier resonance resonance_band choice made chose flag tally badges has_badge difficulty level_cap
+starter_slot starter_gen password gameover_found gameovers_found ending_seen ruin_unlocked ruin_route festival_stage festival_day drawn
+eliminated met cameo_beaten switch var` (switches and variables are read-only).
+`nil` counts as 0 in arithmetic and `< >` comparisons. To add a function, add a line to `Conditions::FUNCTIONS`.
 
 ## 10. Story game overs + checkpoints
-`GAME_OVERS[id] = { :title, :epitaph, :hint, :me, :ruin_exempt }` (12 samples).
-`Prismfall.game_over(:GO_X)` does the following:
-1. Records the ID in the Ledger.
-2. Fades BGM/BGS.
-3. Shows a code-drawn dark screen: "GAME OVER", the red title, the epitaph and the Ledger progress.
-4. Offers **Load last save** (only if a save exists) or **Return to title**.
-5. Ends the event and leaves the map through the vanilla return-to-title flag. *Load last save* redirects that one title call to a scene that loads Game.rxdata.
+There are 25 entries: 23 canonical, plus 2 Ruin-only marked `:ruin_exempt`. Map-builder aliases resolve to canonical IDs:
+`:GO_LAST_FERRY` → `:GO_HOMEWARD`, `:GO_BLEED_TIDE` → `:GO_ORCHARD`. `Prismfall.game_over(:GO_X)` does the following:
+1. Records the canonical ID in the Ledger.
+2. Shows the dark code-drawn screen.
+3. Offers **Load last save** or **Return to title**.
 
-Call it from map or common events, not from inside a battle. `Prismfall.checkpoint` saves like the Save menu, so place it
-**before** a risky scene's trigger, not inside an autorun that would re-run on load.
+`Prismfall.checkpoint` saves, so place it **before** the trigger page (the NARRATIVE_KEYS §10 table lists each checkpoint). The `nomercy`
+password turns checkpoints off.
 ```
 Script: Prismfall.checkpoint
-...
-Text: (the player chooses to follow the Hollow into the pyre)
-Script: Prismfall.game_over(:GO_HOLLOW_PYRE)
-# Battle-loss game over:
+Script: Prismfall.game_over(:GO_CURTAIN_CALL)
+# Battle-loss game over (GO_WEATHER: the unwinnable Kyogre):
 Script: setBattleRule("canLose")
-Conditional Branch > Script: !Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 6)
-   Script: Prismfall.game_over(:GO_VANES_FALL)
+Conditional Branch > Script: !WildBattle.start(:KYOGRE, 80)
+   Script: Prismfall.game_over(:GO_WEATHER)
 ```
 
 ## 11. Ledger (cross-save)
-The Ledger is a text file next to the save, `Prismfall_Ledger.txt` in `System.data_directory`. It holds the game overs
-found and endings seen, and survives new games. **Ruin Route unlocked** = every registered game over (minus `:ruin_exempt`) found.
-View it with `Prismfall::Ledger.show` or from the pause-menu "Ledger" entry, which appears once anything is recorded. Unfound
-entries show as "???"; set `LEDGER_SHOW_HINTS` to show the `:hint` text instead.
+The Ledger is the file `Prismfall_Ledger.txt` next to the save, and it survives new games. It holds:
+- game overs found,
+- endings seen,
+- **cameos beaten**,
+- Festival opponents **met** (for the Hall of Reflections),
+
+each with the first-found time. **Ruin Route unlocked** = all 23 canonical game overs found. View it with `Prismfall::Ledger.show`, or
+through the pause-menu "Ledger" entry. It has three tabs: Game Overs / Endings / Cameos, with "???" for anything unfound. Hints for unfound
+game overs show with the `ledgerhints` password or once any ending has been seen.
 ```
-Conditional Branch > Script: Prismfall::Ledger.ruin_unlocked?
-   Script: Prismfall.start_ruin_route        # sets this save's Ruin Route flag (condition: ruin_route)
+Conditional Branch > Script: Prismfall::Ledger.ruin_unlocked?       # Ch15 Reverse Depths pane
+   Script: pf_choose(:ch15_look_back, :yes)
+   Script: Prismfall.start_ruin_route
 ```
 
 ## 12. Endings
-`ENDINGS[id] = { :name, :kind (:good/:bad/:grey/:ruin), :common_event, :credits }`. `ENDING_RULES` is an ordered list of
-`[id, condition]` with `DEFAULT_ENDING` as the fallback. There are 7 samples: 1 good, 1 bad, 4 grey, 1 ruin.
-`Prismfall.trigger_ending(:END_X)` does the following:
-1. With no ID, it uses `Prismfall::Endings.determine`.
-2. Records the ending in the Ledger.
-3. Sets this save's post-game state (`narrative[:ending]`, `[:endings]`, `[:postgame]`) and unlocks the cap.
-4. Fires `:prismfall_ending (id, first_time)` and the optional `Endings::HOOK` proc.
-5. Runs the ending's common event, then the credits if `:credits` is set. After the credits the map returns and the calling event continues.
+There are 10 endings: Homecoming (good), The Gilded Chain (bad), 6 grey, and 2 ruin. `ENDING_RULES` is an ordered list (`DEFAULT_ENDING` =
+Unfinished). `Prismfall.trigger_ending` with no ID does the following:
+1. Determines the ending from the rules.
+2. Records it in the Ledger.
+3. Sets `narrative[:postgame]` to the ending ID and writes the **post-game switches S263–S269** from `POSTGAME_SWITCHES`.
+4. Fires `:prismfall_ending`.
+5. Runs the ending's common event, then the credits.
+
+The Gilded Chain has no post-game, so its credits return to the title. Every other ending returns to the map, and the calling event continues.
 ```
-Script: pf_choose(:final_decision, :restore)
-Script: Prismfall.trigger_ending            # determined from the rules
-Script: pbMessage("...epilogue text after the credits...")
-Conditional Branch > Script: Prismfall::Endings.postgame?
+Script: pf_choose(:ch21_final, :return)
+Script: Prismfall.trigger_ending
 ```
 
 ## 13. New-game passwords
-`Prismfall::Passwords.prompt` asks "Would you like to enter a password?", then takes passwords until a blank entry. It then
-closes, because passwords are new-game only. Put it in the intro right after `Prismfall.choose_difficulty`, or before it:
-the Hard Lock password restricts the choice to Hard. The table is `Passwords::TABLE`; add a row to add a password.
+`Prismfall::Passwords.prompt` takes passwords at new game only. Put it in the intro, next to `Prismfall.choose_difficulty`.
 
-| Word | ID | Effect |
-|---|---|---|
-| `nocap` | :NO_LEVEL_CAPS | caps disabled for the save |
-| `fullivs` | :FULL_IVS | player-owned Pokémon calculate stats with 31 in every IV |
-| `noexpall` | :EXP_ALL_OFF | `has_exp_all` and the Exp. All item read as off |
-| `monotype` | :MONOTYPE | asks for a type; Pokémon without it can't battle (they count as fainted in battle) |
-| `hardonly` | :HARD_LOCK | sets Hard; difficulty menus only offer Hard |
-| `litemode` | :LITEMODE | overrides: Exp ×2, no disobedience, AI skill ≤ 32 |
-Passwords that change tunables do it through `:overrides`, which `Prismfall::Difficulty.setting` checks first.
-Conditions can test them with `password(:MONOTYPE)`.
+| Word | Effect |
+|---|---|
+| `nocap` | no level caps |
+| `fullivs` | 31 IVs for player-owned Pokémon |
+| `noexpall` | Exp. All off |
+| `monotype` | choose a type; Pokémon without it can't battle |
+| `hardonly` | Hard, and it can't be lowered |
+| `litemode` | Exp ×2, no disobedience, AI ≤ 32 |
+| `ledgerhints` | Ledger hints for unfound game overs |
+| `nomercy` | `Prismfall.checkpoint` does nothing |
+| `openbook` | flag for the Ties page (shows numbers) |
+| `colorless` | Resonance swings halved |
+| `secondferry` | accepted only once the Ledger has an ending; sets `:SECOND_FERRY` (the NG+ carryover itself is still to do) |
+
+Rows go in `Passwords::TABLE`. Use `:overrides` for difficulty tunables and `:requires`/`:refusal` for gated passwords.
+
+## 14. Sidequest cameo fights + HP boosts
+These are Revision 4's optional cameo sidequests:
+```
+Script: Prismfall.cameo_battle(:FESTIVAL_LIN, "Lin", 9)     # post-game rematch version 9 (BALANCE.md: 0/1/2/3/9)
+Script: Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 0, double: true)
+```
+Each is a normal trainer battle with the difficulty variant and canLose, so a loss doesn't black out. It returns true on a win. The first win
+against each cameo trainer type is recorded in the Ledger, with a toast; `Narrative::CAMEOS` lists the 10 names. The condition
+`cameo_beaten(:FESTIVAL_LIN)` checks it.
+
+`HP_BOOSTS` gives listed trainer Pokémon a max-HP multiplier through an `:on_trainer_load` handler. Damage carries through recalculation.
+It's currently used for Shiv's Ambipom at ×2 (BALANCE.md).
 
 ## Open questions (need the user)
 1. **Hard mode Bag lock:** this also blocks Poké Balls and items in *trainer* battles only; wild battles stay open. Is that right?

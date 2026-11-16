@@ -25,22 +25,38 @@ AUTOTILE_PATTERNS = [
      [37, 42, 43, 48], [17, 18, 47, 48], [13, 18, 43, 48], [1, 2, 7, 8]]]
 
 
+OUT_GFX = os.path.join(os.path.dirname(HERE), 'maps_out', 'Graphics')
+
+
 def tilesets():
+    """Base-project tilesets (data/tilesets.json) + tilesets registered by import_tileset.py."""
     global _TS
     if _TS is None:
         _TS = {t['id']: t for t in json.load(open(os.path.join(HERE, 'data', 'tilesets.json')))}
+        reg = os.path.join(os.path.dirname(HERE), 'maps_out', 'tilesets_prismfall.json')
+        if os.path.exists(reg):
+            _TS.update({t['id']: t for t in json.load(open(reg))})
     return _TS
+
+
+def gfx(sub, name):
+    """Imported graphics (maps_out/Graphics) win over the base project's."""
+    for root in (OUT_GFX, GFX):
+        p = os.path.join(root, sub, name + '.png')
+        if os.path.exists(p):
+            return p
+    return None
 
 
 class TileCache:
     def __init__(self, ts):
         self.ts = ts
-        p = os.path.join(GFX, 'Tilesets', ts['tileset_name'] + '.png')
-        self.sheet = Image.open(p).convert('RGBA') if ts['tileset_name'] and os.path.exists(p) else None
+        p = gfx('Tilesets', ts['tileset_name']) if ts['tileset_name'] else None
+        self.sheet = Image.open(p).convert('RGBA') if p else None
         self.autos = []
         for n in ts['autotile_names']:
-            p = os.path.join(GFX, 'Autotiles', n + '.png') if n else None
-            self.autos.append(Image.open(p).convert('RGBA') if p and os.path.exists(p) else None)
+            p = gfx('Autotiles', n) if n else None
+            self.autos.append(Image.open(p).convert('RGBA') if p else None)
         self.cache = {}
 
     def tile(self, tid):

@@ -236,7 +236,7 @@ module Prismfall
     def self.opponent_id(stage = nil)
       stage ||= current_stage
       return nil if !stage
-      return drawn_opponent(stage) if !stage[:round]
+      return drawn_opponent(stage) if !stage[:round] || stage[:live]
       r = stage[:round]
       a, b = participants(r, player_match_index(r))
       opp = (a == :PLAYER) ? b : a
@@ -401,14 +401,31 @@ module Prismfall
     #---------------------------------------------------------------------------
     # Exhibition matches (optional battles during Festival week)
     #---------------------------------------------------------------------------
-    # Exhibition opponents: entrants flagged :exhibition, except anyone still
-    # alive in the current bracket (CAMEOS.md: available once eliminated).
+    # Exhibition opponents (NARRATIVE_KEYS 6.5): entrants flagged :exhibition
+    # open from the day after they're knocked out (or withdraw); EXHIBITION_EXTRAS
+    # (015) add more. None on the Ruin Route (its Eevee Octave is event-run).
     def self.exhibition_ids
-      return ENTRANTS.keys.select do |id|
-        next false if !ENTRANTS[id][:exhibition]
-        next true if !active? || !bracket.include?(id)
-        next !eliminated_in(id).nil?
+      return [] if Prismfall.ruin_route?
+      ids = []
+      if started?
+        ENTRANTS.each_key do |id|
+          next if !ENTRANTS[id][:exhibition]
+          d = (state[:out_day] || {})[id]
+          ids.push(id) if d && day > d
+        end
       end
+      EXHIBITION_EXTRAS.each do |x|
+        next if ids.include?(x[:entrant])
+        next if x[:from_day] && day < x[:from_day]
+        next if x[:condition] && !Prismfall::Conditions.evaluate(x[:condition])
+        ids.push(x[:entrant])
+      end
+      return ids
+    end
+
+    def self.exhibition_version(id)
+      x = EXHIBITION_EXTRAS.find { |e| e[:entrant] == id && e[:version] }
+      return (x) ? x[:version] : nil
     end
 
     def self.exhibition_result(id)

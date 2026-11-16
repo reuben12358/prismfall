@@ -54,9 +54,9 @@ deco = {
     'tileblocks': [
         {'tile': 1501, 'size': [3, 4], 'at': [19, 8], 'layer': 1, 'skip': [1510, 1518]},     # plaza fountain
         {'tile': 3941, 'size': [3, 8], 'at': [35, 21], 'layer': 1},                         # lighthouse
-        {'tile': 4349, 'size': [3, 3], 'at': [23, 29], 'layer': 1},                         # moored ship
-        {'tile': 4318, 'size': [2, 3], 'at': [12, 29], 'layer': 1},                         # rowing boat
-        {'tile': 4318, 'size': [2, 3], 'at': [5, 29], 'layer': 1},
+        # The stock ship/boat art is cut at the tileset's right edge (the hulls continue off-sheet), so ships may
+        # only sit flush against the map's right edge, where the missing half is off-map.
+        {'tile': 4349, 'size': [3, 3], 'at': [37, 31], 'layer': 1},                         # moored ship (edge)
         {'tile': 1437, 'size': [3, 1], 'at': [14, 10], 'layer': 1},                         # plaza benches
         {'tile': 1437, 'size': [3, 1], 'at': [24, 10], 'layer': 1},
         {'tile': 1437, 'size': [3, 1], 'at': [28, 26], 'layer': 1},                         # quay bench

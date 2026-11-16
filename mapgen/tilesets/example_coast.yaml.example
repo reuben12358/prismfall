@@ -1,0 +1,13 @@
+# Example descriptor for import_tileset.py (rename to .yaml and point `graphic` at a real file).
+id: 30
+name: Prismfall Test Coast
+tileset_name: Test Coast
+graphic: /tmp/tstest/Test Coast.png
+autotiles:
+  - {name: Sea}
+battleback: ''
+defaults: {passage: 0, priority: 0, terrain: 0}
+passages: {"800-831": 15}
+priorities: {"804-805": 1}
+terrain_tags: {"390": 2}
+autotile_props: {1: {passage: 15, terrain: 7}}

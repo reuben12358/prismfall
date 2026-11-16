@@ -27,16 +27,16 @@
 | 18 | **Sigrun knew and was relieved** | Ch8: Sigrun's appraisal ("smaller than I expected") | Ch17: Brann, "Sigrun knows. Ask her why she's angry." | **Ch19** confession |
 | 19 | **The Hymn of Return (the Plates were borrowed)** | ★ Ch2: disguised Celestine's rhyme at the Loyal Three shrine. ★ Juno's larch speech ("letting go so they don't snap") | Ch7: Wick's Wound Doctrine. Ch10: Wick's verse (branch). Ch13: the sealed Secret Articles. Ch17: Maren's page (Archive branch). 01 lore: Odo Prell's Reform | **Ch18** full Hymn. Ch20: Valen: "Maren wrote that. I thought it was a poem." |
 | 20 | **The Loyal Three were thieves; the Ogre was the guardian** | ★ Ch2: the Loyal Three shrine + ogre masks + Celestine's rhyme ("who was the thief"). ★ Ch3: the Mourner: "why the Loyal Three wore poison on their collars" | Ch7: Sweetrot's peach smell, "the peach that keeps you". The Hollow's masks are the Ogre's | **Ch10** Bride Grove (collars, Ogerpon guarding Elin). Full lore: Ch18 Pecharunt |
-| 21 | **The Fixed still dream (they can wake)** | ★ Ch5: Dex's glass warms under the PC's hand (Act II opener) | Ch7: Corvin, "I can see their eyes move." Ch10: Juno, "Sometimes I think she's listening." Ch14: the Dreaming Quarter mirages | **Ch20** Venam: "I could hear everything." Payoff: the Homecoming wakings |
+| 21 | **The Fixed still dream (they can wake)** | ★ Ch5: Dex's glass warms under the PC's hand (Act II opener) | Ch7: Corvin, "I can see their eyes move." Ch10: Juno, "Sometimes I think she's listening." Ch14: the Dreaming Quarter mirages | **Venam's Testimony** (optional cameo sidequest, Ch7), played for Juno in Ch10 or Ch20: "I could hear everything." Payoff: the Homecoming wakings |
 | 22 | **Kyogre is frozen under Isenmar** | Ch4: Ebbmouth's "Sleeping Whale" songs | Ch11: the lake "breathes" | Ch11 Thaw |
 | 23 | **Zekrom is the Spire's Dark Stone** | ★ Ch5: the Gala's black core that "breathes" | Ch12: the Stormfront Wyrm; Larch, "that's the shape of the Spire's core" | Ch16 core chamber |
 | 24 | **Groudon sleeps under the Bone Sands** | Ch6: warm ground; "the sleeping red giant turning over" | Ch6: Ossuary murals, "Two Weathers" | Ch14→15 Undersands |
-| 25 | **Giratina guards the seam; the Glass touches other worlds** | Ch12 cliffhanger: the reflection moves late | Ch13: six-winged shadows in reflections. 01 lore: AF 140 Glass Opening | Ch15 Reverse Depths. Ch20 Veil Gate |
+| 25 | **Giratina guards the seam; the Glass touches other worlds** | Ch12 cliffhanger: the reflection moves late | Ch13: six-winged shadows in reflections. 01 lore: AF 140 Glass Opening, AF 230 sealing. Cameo sidequests (travelers slipping through) | Ch15 Reverse Depths. Ruin Route R1 |
 | 26 | **Pecharunt is the source of Sweetrot** | Ch7: Sweetrot thralls' blank bliss | Ch10: the Loyal Three's eyes "the same blissful blank" | Ch18 Lightless Deep |
 | 27 | **Marrowgate and the Quiet Towns** | Act I: maps with blank spaces (Town Map has an unlabeled region in Ossaria's borderlands) | Ch9: Kaito's "A fist is a promise…". 01 lore | Ch13 Kaito's testimony (if encouraged). Payoff: Homecoming, Kaito opens the gate |
 | 28 | **Velmorans wilt abroad; the PC's mother wilted** | ★ P: Ines's letter ("I wanted one of us to have an ordinary life") | Ch1: Larch, "the bravest coward". Ch12: Morwen's letter, "keep wilting, love" | Ch15 echo, then Ch20 with Valen |
-| 29 | **Lin caught a god** | (Cameo knowledge for Reborn players) Ch20 arrival: "it wouldn't come. it knew where i was going." | — | Ch20 QF speech |
-| 30 | **Shiv dreamed the PC** | Ch20 arrival | Ruin Route hooks | Ruin Route |
+| 29 | **Isaura caught a god (the Sunless Year)** | Ch20 Day 0: her black-glass pendant, and "Lovely region" | Envoy delegation gossip about Solvane's dark year | Ch20 QF speech |
+| 30 | **Shiv dreamed the PC** (cameo) | Ch18 sidequest "Dreamwalker" | — | Ruin Route hooks |
 
 ## Act I → Act V seed checklist (★ items)
 Each one must exist in the Act I build:

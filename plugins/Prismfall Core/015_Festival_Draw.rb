@@ -1,56 +1,118 @@
 #===============================================================================
-# Prismfall Core - 015 Choice-driven Festival draw (SPINE Revision 3)
+# Prismfall Core - 015 Choice-driven Festival draw (NARRATIVE_KEYS section 6)
 #-------------------------------------------------------------------------------
 # DRAWS[stage_id] is an ordered candidate list; the first candidate whose
-# condition holds is the player's opponent for that stage. The stage's default
-# (PLAYER_PATH[round], or the stage's :opponent) is always appended as the final
-# fallback. Candidate keys:
-#   :opponent   entrant ID (ENTRANTS; variants are separate entrants with the
-#               same :person, e.g. :KESTREL_FALLEN)
+# condition holds (and whose person isn't already used by an earlier stage) is
+# the player's opponent. The stage default (PLAYER_PATH[round] or the stage's
+# :opponent) is always appended as the final fallback. Candidate keys:
+#   :opponent   entrant ID (variants share a :person, e.g. :KESTREL_FALLEN)
 #   :condition  Prismfall::Conditions string (nil = always)
 #   :version    trainer version override for this draw (optional)
-# Bracket stages (R16-Final) are drawn when Festival.start runs: the drawn
-# opponent is seated in the player's path (swapping seats with it if it's
-# already seeded, or replacing the default occupant if not). Non-bracket stages
-# (Hijack) are drawn live and fixed when their battle starts.
-# Validation (at load + Festival.validate): every candidate exists, every
-# condition parses, and no person is a candidate in two different stages, so a
-# run can never draw the same character twice.
+# Timing:
+#   bracket stages   drawn at Festival.start. A drawn opponent seeded elsewhere
+#                    swaps seats with the default; an unseeded one (Rowan, Dask)
+#                    replaces the default, who withdraws (counts as out).
+#   :live stages     (the Final) seeded with the default at start and drawn
+#                    when the battle starts (Day 7); a stand-in fights in the
+#                    default's slot without reseating anyone.
+#   other stages     (the Hijack) drawn live, fixed when their battle starts.
+# Validation (load + Festival.validate): candidates exist, conditions parse,
+# every stage has a fallback, no person is a candidate in two stages.
+# Also here: Festival days (exhibitions), drawn(:STAGE), ARCEUS_VARIANTS.
 #===============================================================================
 module Prismfall
   module Festival
-    # Variant / draw-only entrants (SAMPLE until NARRATIVE_KEYS.md).
-    ENTRANTS.merge!({
-      :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL,
-                           :name => "Kestrel", :rival_battle => 9, :rating => 94, :level_hint => 94 },   # versions 90-92
-      :ROWAN          => { :display => "Rowan", :trainer_type => :LEADER_ROWAN, :name => "Rowan",
-                           :version => 50, :rating => 89, :level_hint => 90 },
-      :SUCCESSOR      => { :display => "The Successor", :trainer_type => :CHAMPION_SUCCESSOR,
-                           :name => "Successor", :version => 0, :rating => 97, :level_hint => 96 },
-      :MOURNER        => { :display => "The Mourner", :trainer_type => :HOLLOW_MOURNER, :name => "Mourner",
-                           :version => 0, :rating => 98, :level_hint => 98 }
-    })
-
     DRAWS = {
-      :R16 => [
-        { :opponent => :ROWAN,  :condition => "choice(:rowan_exile) == :exiled && bond(:ROWAN) <= -3" },
-        { :opponent => :MELIA,  :condition => "bond(:JUNO) >= 6 && resonance >= 4", :version => 1 }
+      :R16 => [   # default :JUNO (J4)
+        { :opponent => :MARISOL, :condition => "!ruin_route && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2" },
+        { :opponent => :ANJA,    :condition => "!ruin_route && flag(:ANJA_EXPOSED)" },
+        { :opponent => :ROWAN,   :condition => "!ruin_route && flag(:ROWAN_ALIVE) && choice(:ch13_rowan_testimony) == :mercy && standing(:HOLLOW) >= 4" }
       ],
-      :QF => [
-        { :opponent => :NOVA,   :condition => "ruin_route && resonance_band == :ruin", :version => 2 }
+      :QF => [    # default :ISAURA (v2)
+        { :opponent => :DASK,      :condition => "ruin_route" },
+        { :opponent => :CELESTINE, :condition => "resonance <= -3",                         :version => 92 },
+        { :opponent => :KAITO,     :condition => "choice(:ch19_oath) == :keep",             :version => 92 },
+        { :opponent => :YSOLDE,    :condition => "flag(:KESTREL_FALLEN)" },
+        { :opponent => :MIREILLE,  :condition => "tally(:WARM_BONDS) >= 5 && resonance >= 2" }
       ],
-      :SF => [
-        { :opponent => :KESTREL_FALLEN, :condition => "bond(:KESTREL) <= -4 || choice(:kestrel_truth) == :betrayed" },
-        { :opponent => :TITANIA, :condition => "choice(:kestrel_truth) == :told && bond(:KESTREL) >= 6", :version => 3 }
+      :SF => [    # default :KESTREL (K8); the Ruin Route uses the same team with Ruin dialogue
+        { :opponent => :KESTREL_FALLEN, :condition => "!ruin_route && flag(:KESTREL_FALLEN)" }
       ],
-      :FINAL => [
-        { :opponent => :SUCCESSOR, :condition => "choice(:valen_secret) == :exposed" }
+      :FINAL => [ # default :VALEN; stage is :live (drawn on Day 7)
+        { :opponent => :VALEN_RUIN, :condition => "ruin_route" },
+        { :opponent => :SIGRUN,     :condition => "flag(:VALEN_COLLAPSED) && bond(:SIGRUN) >= 5", :version => 96 },
+        { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
       ],
-      :HIJACK => [
-        { :opponent => :MOURNER, :condition => "choice(:exposed) == :meridian" }
+      :HIJACK => [ # default :VOSS (drawn live)
+        { :opponent => :THEODRIC, :condition => "ruin_route" },
+        { :opponent => :QUENT,    :condition => "flag(:VOSS_DISCREDITED)" }
       ]
     }
 
+    # Offered in addition to knocked-out :exhibition entrants (NARRATIVE_KEYS 6.5).
+    EXHIBITION_EXTRAS = [
+      { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },
+      { :entrant => :BASTIAN,      :condition => "!ruin_route", :from_day => 5 },
+      { :entrant => :JUNO,         :condition => "!ruin_route && drawn(:R16) != :JUNO", :from_day => 3 },
+      { :entrant => :MARISOL,      :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },
+      { :entrant => :ISAURA,       :condition => "!ruin_route && drawn(:QF) != :ISAURA", :from_day => 5 },
+      { :entrant => :MIREILLE,     :condition => "!ruin_route && drawn(:QF) != :MIREILLE", :from_day => 3 },
+      { :entrant => :MORWEN,       :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }
+    ]
+
+    # True Finale variants (read by the Prismfall Bosses plugin; Core doesn't
+    # change the :ARCEUS stage). First match wins.
+    ARCEUS_VARIANTS = [
+      { :id => :ARCEUS_JUDGMENT,      :condition => "ruin_route",                 :bars => 7, :player_side => 2 },
+      { :id => :ARCEUS_GILDED,        :condition => "flag(:ENGINE_CALIBRATED)",   :bars => 6 },
+      { :id => :ARCEUS_WAR,           :condition => "resonance <= -6",            :bars => 7 },
+      { :id => :ARCEUS_MISCALIBRATED, :condition => "flag(:TELEMETRY_SABOTAGED)", :bars => 5 },
+      { :id => :ARCEUS_BOUND,         :condition => nil,                          :bars => 6 }
+    ]
+
+    def self.arceus_variant
+      ARCEUS_VARIANTS.each { |v| return v if v[:condition].nil? || Prismfall::Conditions.evaluate(v[:condition]) }
+      return ARCEUS_VARIANTS.last
+    end
+
+    #---------------------------------------------------------------------------
+    # Festival days (events set them: Prismfall::Festival.set_day(3))
+    #---------------------------------------------------------------------------
+    def self.day
+      return (started? && state[:day]) ? state[:day] : 1
+    end
+
+    def self.set_day(n)
+      return if !started?
+      state[:day] = n.to_i
+    end
+
+    def self.next_day!
+      set_day(day + 1)
+      return day
+    end
+
+    # Entrant knocked out (or withdrawn) on the current day.
+    def self.mark_out(id)
+      return if !started? || id.nil? || id == :PLAYER
+      state[:out_day] ||= {}
+      state[:out_day][id] ||= day
+    end
+
+    def self.out?(id)
+      return false if !started? || !state[:out_day]
+      return state[:out_day].has_key?(id)
+    end
+
+    # Entrant locked for a stage (nil if not drawn yet).
+    def self.drawn(stage_id)
+      return nil if !started? || !state[:draws]
+      return state[:draws][stage_id]
+    end
+
+    #---------------------------------------------------------------------------
+    # Draw resolution
+    #---------------------------------------------------------------------------
     def self.person_of(id)
       e = ENTRANTS[id]
       return (e && e[:person]) ? e[:person] : id
@@ -67,7 +129,6 @@ module Prismfall
       return list
     end
 
-    # First matching candidate not already used by an earlier stage.
     def self.resolve_draw(stage, used_persons = [])
       stage_candidates(stage).each do |c|
         next if used_persons.include?(person_of(c[:opponent]))
@@ -78,53 +139,72 @@ module Prismfall
     end
 
     # Seats drawn opponent `opp` in the player's round-r block of `br`.
+    # Returns the withdrawn entrant (if the default had to leave), else nil.
     def self.seat_opponent(br, r, opp)
       p = br.index(:PLAYER)
       block = (p >> r) ^ 1
       cur = br.index(opp)
-      return if cur && (cur >> r) == block   # already where it needs to be
+      return nil if cur && (cur >> r) == block
       target = BRACKET.index(PLAYER_PATH[r])
       target = (block << r) if !target || (target >> r) != block
       if cur
         br[cur], br[target] = br[target], br[cur]
-        return
+        return nil
       end
       same = br.index { |e| e != :PLAYER && person_of(e) == person_of(opp) }
       if same && same != target
-        br[same] = br[target]   # the default occupant takes the variant's twin seat
+        br[same] = br[target]   # variant: the default takes its twin's seat
+        br[target] = opp
+        return nil
       end
+      gone = br[target]
       br[target] = opp
+      return (gone && person_of(gone) != person_of(opp)) ? gone : nil
     end
 
-    # Called by Festival.start: draws R16-Final and builds this run's bracket.
+    # Called by Festival.start: draws R16-SF (and seeds the :live Final with
+    # its default) and builds this run's bracket.
     def self.draw_bracket_stages!
       br   = BRACKET.clone
       pth  = PLAYER_PATH.clone
       used = []
       state[:draws] = {}
       state[:draw_versions] = {}
+      withdrawn = []
       STAGES.each do |st|
         next if !st[:round]
+        if st[:live]
+          used.push(person_of(default_opponent(st)))
+          next
+        end
         c = resolve_draw(st, used) || { :opponent => default_opponent(st) }
         opp = c[:opponent]
         used.push(person_of(opp))
         pth[st[:round]] = opp
-        seat_opponent(br, st[:round], opp)
+        gone = seat_opponent(br, st[:round], opp)
+        withdrawn.push(gone) if gone
         state[:draws][st[:id]] = opp
         state[:draw_versions][st[:id]] = c[:version] if c[:version]
       end
       state[:bracket] = br
       state[:path]    = pth
+      withdrawn.each { |id| mark_out(id) }
       EventHandlers.trigger(:prismfall_festival_drawn, pth.clone)
     end
 
-    # Opponent of a non-bracket stage (live until its battle starts).
+    # Opponent of a live/non-bracket stage (resolved live until its battle starts).
     def self.drawn_opponent(stage)
-      locked = (started? && state[:draws]) ? state[:draws][stage[:id]] : nil
+      locked = drawn(stage[:id])
       return locked if locked
-      used = (started?) ? path.map { |id| person_of(id) } : []
+      used = []
+      if started?
+        path.each_with_index do |id, i|
+          next if stage[:round] && i == stage[:round]
+          used.push(person_of(id))
+        end
+      end
       c = resolve_draw(stage, used)
-      return (c) ? c[:opponent] : stage[:opponent]
+      return (c) ? c[:opponent] : default_opponent(stage)
     end
 
     def self.lock_draw(stage, opp)
@@ -139,7 +219,7 @@ module Prismfall
 
     def self.draw_version(stage, opp)
       return nil if !started? || !state[:draw_versions]
-      return nil if state[:draws].nil? || state[:draws][stage[:id]] != opp
+      return nil if drawn(stage[:id]) != opp
       return state[:draw_versions][stage[:id]]
     end
 
@@ -166,6 +246,16 @@ module Prismfall
             errors.push("#{person.inspect} is a candidate in both #{owner[person]} and #{st[:id]}")
           end
           owner[person] ||= st[:id]
+        end
+      end
+      EXHIBITION_EXTRAS.each do |x|
+        errors.push("EXHIBITION_EXTRAS: unknown entrant #{x[:entrant].inspect}") if !ENTRANTS[x[:entrant]]
+      end
+      ENTRANTS.each do |id, e|
+        next if !e[:trainer_type]
+        types = Array(e[:trainer_type])
+        if Prismfall::Narrative::CAMEOS.keys.any? { |t| types.include?(t) }
+          errors.push("#{id}: sister-game cameos aren't Festival entrants (SPINE Revision 4)")
         end
       end
       return errors

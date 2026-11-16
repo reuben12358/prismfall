@@ -79,24 +79,8 @@ tileblocks:
   - 3
   - 3
   at:
-  - 23
-  - 29
-  layer: 1
-- tile: 4318
-  size:
-  - 2
-  - 3
-  at:
-  - 12
-  - 29
-  layer: 1
-- tile: 4318
-  size:
-  - 2
-  - 3
-  at:
-  - 5
-  - 29
+  - 37
+  - 31
   layer: 1
 - tile: 1437
   size:
