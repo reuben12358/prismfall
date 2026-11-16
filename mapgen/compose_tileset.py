@@ -67,11 +67,27 @@ def main():
         meta = json.load(open(c2[:-4] + '.json'))
         offs['custom2'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': []}
         pas += [int(v) for v in meta['passages']]; pri += [int(v) for v in meta['priorities']]; tag += [0] * n; ims.append(im)
+    # Art Director's curated sheets (fangame/art/tilesets): appended whole, passages from their descriptors
+    import yaml, import_tileset as IT
+    AT = os.path.join(os.path.dirname(HERE), 'art', 'tilesets')
+    for key in ('town_props', 'houses', 'forest'):
+        dp = os.path.join(AT, key + '.yaml')
+        if not os.path.exists(dp): continue
+        d = yaml.safe_load(open(dp))
+        if not os.path.isabs(d['graphic']): d['graphic'] = os.path.join(AT, os.path.basename(d['graphic']))
+        e = IT.build_entry(d); im = Image.open(d['graphic']).convert('RGBA'); n = im.height // 32 * 8
+        offs['pf_' + key] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [d['id']]}
+        pas += e['passages'][384:384 + n]; pri += e['priorities'][384:384 + n]; tag += [0] * n; ims.append(im)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height
     sheet.save(os.path.join(OUT, 'Graphics', 'Tilesets', 'Prismfall City.png'))
-    e = dict(base); e.update(id=33, name='Prismfall City', tileset_name='Prismfall City', n_tiles=len(pas), passages=pas,
+    # town maps never use lava: slot 3 (Lavafall) becomes Tectonic's Dirt autotile (ids 144-191)
+    import shutil
+    names = list(base['autotile_names']); names[2] = 'Dirt'
+    shutil.copyfile('/home/claude/ref/art/tectonic/Graphics/Autotiles/Dirt.png', os.path.join(OUT, 'Graphics', 'Autotiles', 'Dirt.png'))
+    for i in range(144, 192): pas[i] = 0; pri[i] = 0; tag[i] = 0
+    e = dict(base); e.update(autotile_names=names, id=33, name='Prismfall City', tileset_name='Prismfall City', n_tiles=len(pas), passages=pas,
                              priorities=pri, terrain_tags=tag)
     reg = [t for t in reg if t['id'] != 33] + [e]
     json.dump(sorted(reg, key=lambda t: t['id']), open(REG, 'w'))

@@ -157,6 +157,35 @@ The stock intro's controls tutorial is not reproduced.
   no column, chandelier, stained-glass, fountain, well or statue art; 283/284/289/294/296 districts not built; 540/560 still
   declare stale connection offsets to 140 (140's own win); Act I maps other than Saltmere are still on stock tilesets.
 
+## 2e. Early-game towns (Revision 8): Ferrow's Landing, the Dovetail, Briarwick and their interiors
+- **Tileset 33 additions** (`compose_tileset.py`, offsets in `data/compose_offsets.json`): `custom2` (17960, from
+  `make_custom.py`: giant-tree boles and crowns built from Tectonic stump and canopy tiles, laundry line, rope bridge, dye
+  vats, loom, net rack, silk lantern, light pool, silk awning), then the Art Director's `PF Town Props`, `PF Houses`,
+  `PF Forest` sheets (`pf_*`). Autotile slot 3 is now Tectonic's `Dirt` (ids 144-191) instead of `Lavafall`.
+- **Tileset 34 "Prismfall Interior"**: Tectonic `Inside` (ids unchanged) + Rejuvenation `SheridanInside`, `Help Centers`,
+  `Chrisola Hotel`, `RoseTheatre`. Palette `interior`. Install both with `merge_tilesets.py`.
+- **Palette `village`** = `city` plus `d` dirt lane (autotile), `s` sand, `w` wooden rail fence (learned `wfence`),
+  `t` tall grass, `H` flower border, `D` ship deck; scatter uses Sheridan flowers, ferns, clover and mushrooms.
+- **`layouts/villagekit.py`**: prop stamps in `data/stamps_v.json` (`g_tree6/4/4p/2` giant trees, `p_*` props, and every
+  stamp of the curated sheets as `tp_*`, `hs_*`, `fo_*`), and `Village` with `dress` (scatter props, optionally only
+  beside walls or paths), `borders` (flower beds along house walls), `meadow`, `fence_run`, `people` and `signs`.
+- **`layouts/interiorkit.py`**: `Room(w, h)` builds a Sheridan timber room (walls, windows, plank floor, door notch and
+  mat); `sf(name, x, y)` places furniture mined at run time from the Sheridan interior maps, `tf(...)` furniture listed
+  from Tectonic's Inside sheet. Maps are padded to RMXP's 20x15 minimum. Spec key `take_events:` reuses a base-template
+  event (Nurse, Healing balls, PC, Mart clerk) at a new position, so the Essentials event logic is kept.
+- **`layouts/scriptpour.py`** parses `story/20_SCRIPT_CH0-2.md`: `[name: X]` / `[portrait: X, expr]` lines become NPC
+  events (portraits as `\pf[NAME,expr]`, "(again)" lines as a second page), `LABEL: text` lines become signs,
+  `HIDDEN ITEM` lines hidden items. It does not parse cutscenes, choices, battle calls or `[after Sxxx]` variants.
+- **Scripts:** `ferrow.py` (100, 68x60), `briarwick.py` (120, 72x64), `dovetail.py` (109 deck 34x22 + calls
+  `early_interiors.py`: 101-108, 110, 121-125). Old events come from the committed specs (`layouts/old_*.yaml`,
+  `ferrow_events.yaml`, `briarwick_events.yaml`) and are re-seated by name. Run all three, then `build.py`.
+- **Links changed:** 100 north edge to Route 1 is now `offset 28` (lane at x 33-36); 120 west edge to Route 3 `offset 29`
+  (road rows 30-31); 120's south warp to Gossamer Wood is at (35-36, 63) and arrives at 524 (24, 1). Prologue arrival is
+  100 (34, 55) on the pier. HealingSpots: 100 (24, 28), 120 (28, 29). The routes builder must match these.
+- **Not done from the script:** named-resident rewrites (Wenna, Coll, Odo keep the earlier lines), reactive `[after]`
+  variants, both sidequests per town, the Docking / K1 / Larch / Tamsin cutscene rewrites, 110's passengers, the Briarwick
+  chapel room and Guildhall loft. No fog pictures are set. 100 misses the mirror number by a hair (15.1; sea rows).
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen

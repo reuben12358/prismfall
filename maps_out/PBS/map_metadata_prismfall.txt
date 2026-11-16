@@ -9,7 +9,7 @@ BattleBack = field
 #-------------------------------
 [101]   # Ferrow's Landing Pokémon Center
 Name = Ferrow's Landing Pokémon Center
-HealingSpot = 100,8,16
+HealingSpot = 100,24,28
 MapPosition = 0,14,26
 #-------------------------------
 [102]   # Ferrow's Landing Mart
@@ -57,7 +57,7 @@ BattleBack = field
 #-------------------------------
 [121]   # Briarwick Pokémon Center
 Name = Briarwick Pokémon Center
-HealingSpot = 120,10,27
+HealingSpot = 120,28,29
 MapPosition = 0,12,22
 #-------------------------------
 [122]   # Briarwick Mart

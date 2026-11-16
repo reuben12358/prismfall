@@ -54,10 +54,8 @@ G.FLAGMAP = flag
 class Ctx:
     def __init__(self):
         self.stamps = json.load(open(os.path.join(HERE, 'data', 'stamps.json')))
-        for fn in ('stamps_t.json', 'stamps_w.json'):
-            tp = os.path.join(HERE, 'data', fn)
-            if os.path.exists(tp):
-                self.stamps.update(json.load(open(tp)))
+        for tp in sorted(glob.glob(os.path.join(HERE, 'data', 'stamps_*.json'))):   # every data/stamps_*.json (REQUESTS item 4)
+            self.stamps.update(json.load(open(tp)))
         self.palettes = {}
         self.specs = {}
         self.doors = {}   # link -> (map, x, y)   exterior door tiles
@@ -178,6 +176,12 @@ def prepare(spec, ctx):
             layers[t.get('layer', tdef['layer']), t['at'][1], t['at'][0]] = tdef['tile']
         spec['_layers'] = layers
         spec['_tevents'] = []
+        for i, tk in enumerate(spec.get('take_events', [])):   # reuse a base-template event (nurse, PC, clerk) at a new spot
+            te = next((e for e in map(rjson.from_j, load_template(tk['template'])['events']) if e.name == tk['name']), None)
+            if te is None:
+                ctx.warn(mid, 'take_events: no %r in template %s' % (tk['name'], tk['template'])); continue
+            te.ivars['x'], te.ivars['y'] = tk['at']
+            spec['_tevents'].append(te)
     if 'tileset' in spec:
         ts = spec['tileset']
         spec['_tileset'] = TILESET_NAMES.get(ts, ts) if isinstance(ts, str) else ts

@@ -309,7 +309,7 @@ class Canvas:
                     if not s2.any():
                         continue
                     d = np.array(r[0], float)
-                    k = 0.62 if lit else 0.38
+                    k = 0.5
                     c = d * k + np.array(ink, float) * (1 - k)
                     out[s2, :3] = c.astype(np.uint8)
                     out[s2, 3] = 255

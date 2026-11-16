@@ -89,11 +89,8 @@ module Prismfall
             end
           elsif p.shape == :puff                # soft-edged puffs that thin out as they age
             r = p.size + ((k < 0.5) ? 1 : 0)
-            if k > 0.55 then Dither.disc(b, x, y, r, r, p.ramp.rgb[(k * 3.99).to_i], 2)
-            else
-              Pix.disc(b, x, y, r, c)
-              Pix.rect(b, x - (r / 2), y - (r / 2), [r / 2, 1].max, 1, p.ramp.core)
-            end
+            Dither.disc(b, x, y, r, r, p.ramp.rgb[1 + (k * 2.99).to_i], (k > 0.6) ? 4 : 2)     # see-through wisps
+            Pix.disc(b, x, y, [r - 2, 1].max, c) if k < 0.35
           else
             Pix.rect(b, x, y, size, size, c)
           end

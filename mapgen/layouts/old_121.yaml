@@ -1,0 +1,98 @@
+# Briarwick interiors (maps 121-125), built from base-project templates + our events.
+id: 121
+name: Briarwick Pokémon Center
+parent: 120
+template: pokecenter
+exit_link: BW_PC
+drop_template_events: [Bill]
+bgm: Poke Center
+metadata: {HealingSpot: [120, 10, 27], MapPosition: [0, 12, 22]}
+events:
+  - {type: npc, name: Trainer, at: [12, 6], sprite: NPC 08, dir: left,
+     text: "[TODO story] Bug-types everywhere in Briarwick. Bring something that burns or flies."}
+---
+id: 122
+name: Briarwick Mart
+parent: 120
+template: mart
+exit_link: BW_MART
+drop_template_events: [Questionnaire, Deliveryman]
+bgm: Poke Mart
+metadata: {MapPosition: [0, 12, 22]}
+events: []
+---
+id: 123
+name: Weavers' Guildhall
+parent: 120
+template: house
+exit_link: BW_GUILD
+drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 12, 22]}
+events:
+  - {type: npc, name: Guild master, at: [5, 4], sprite: NPC 25, dir: down,
+     text: "[TODO story] The Guild spun silk for the Crown long before there was a Warden. Tamsin forgets that."}
+  - {type: npc, name: Apprentice, at: [9, 6], sprite: NPC 07, dir: left, move: random,
+     text: "[TODO story] (whispering) The new loom wire hums at night. Meridian brought it."}
+---
+id: 124
+name: Treetop House
+parent: 120
+template: house2
+exit_link: BW_HOUSE1
+drop_template_events: [Kurt]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 12, 22]}
+events:
+  - {type: npc, name: Grandmother, at: [7, 4], sprite: NPC 28, dir: down,
+     text: "[TODO story] My grandson climbs the old trees every morning. Says the bark has started to feel like glass."}
+---
+id: 125
+name: Cutter's House
+parent: 120
+template: house2
+exit_link: BW_HOUSE2
+drop_template_events: [Kurt]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 12, 22]}
+events:
+  - name: Cutter
+    type: event
+    at: [7, 4]
+    pages:
+      - graphic: {sprite: trainer_HIKER, dir: down}
+        commands:
+          - if: "Prismfall.has_badge?(1)"
+            then:
+              - "[TODO story] Tamsin sent you? Then take this - every forester in Elowen should have one."
+              - {script: "pbReceiveItem(:HM01)"}
+              - {selfswitch: [A, true]}
+            else:
+              - "[TODO story] Come back with the Warden's badge and I'll teach you to clear a path."
+      - cond: {self: A}
+        graphic: {sprite: trainer_HIKER, dir: down}
+        commands: ["[TODO story] Cut clears small trees. Mind the old ones."]
+---
+id: 526
+name: Woodward's Hut
+parent: 524
+template: house2
+exit_link: WOOD_HUT
+drop_template_events: [Kurt]
+bgm: Route 3
+metadata: {MapPosition: [0, 13, 23]}
+events:
+  - {type: npc, name: Woodward, at: [7, 4], sprite: trainer_HIKER, dir: down,
+     text: "[TODO story] Rest by the fire. The wood's been restless since the glass came to the orchard."}
+---
+id: 523
+name: Hale Farmhouse
+parent: 521
+template: house
+exit_link: R2_FARM
+drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
+bgm: Route 2
+metadata: {MapPosition: [0, 14, 23]}
+events:
+  - {type: npc, name: Farmer Hale, at: [5, 4], sprite: NPC 25, dir: down,
+     text: "[TODO story] Juno's dad here. Headbutt the apple trees and see what falls out! (Headbutt tutor TODO)"}

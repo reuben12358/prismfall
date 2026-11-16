@@ -1,103 +1,769 @@
-# Briarwick (map 120): Elowen forest town, home of the Loomhouse Gym (Gym 1, Bug, Warden Tamsin Loom).
-# Source: design/maps.json id 120. Giant hollow trees / rope bridges are approximated with tree clumps ([TODO art]).
+# Briarwick (120). WRITTEN BY layouts/briarwick.py - edit that script.
 id: 120
 name: Briarwick
-palette: outside
+palette: village
 bgm: Lerucean Town
 parent: 0
-metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 12, 22], BattleBack: field}
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 12, 22]
+  BattleBack: field
 connections:
-  - {dir: W, offset: 14, to: 540, to_offset: 10}
+- {dir: W, offset: 29, to: 540, to_offset: 10}
+rubric: true
+yards_ok: true
+tone: [-8, 8, -18, 0]
 map: |
-  TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TT~~~.....TTTT................TTTTTT......TT
-  TT~~~.....TTTT................TTTTTT......TT
-  TT~~~.....TTTT.....#######....TTTTTT......TT
-  TT~~~.....TTTT.....#######....TTTTTT......TT
-  TT~~~.....TTTT.....#######..........TTTT..TT
-  TT~~~.....TTTT.....#######..........TTTT..TT
-  TT~~~..............#######..........TTTT..TT
-  TT~~~............::::::::::.........TTTT..TT
-  TT~~~............::::::::::......#####....TT
-  TT~~~#######.........::..........#####....TT
-  TT~~~#######.....**..::...**.....#####....TT
-  TT~~~#######.....**..::...**.....#####....TT
-  ..~~~#######.........::..........#####....TT
-  ::===:::::::::::::::::::::::::::::::::::..TT
-  ::===:::::::::::::::::::::::::::::::::::..TT
-  ..~~~................::...................TT
-  ..~~~.........TTTT...::.....TTTT..........TT
-  ..~~~.........TTTT...::.....TTTT..........TT
-  ..~~~.........TTTT...::.....TTTT..........TT
-  TT~~~.........TTTT...::.....TTTT..........TT
-  TT~~~...#####........::...................TT
-  TT~~~...#####........::.......####........TT
-  TT~~~.**#####**......::.....**####........TT
-  TT~~~.**#####**......::.....**####.**.....TT
-  TT~~~...#####........::.......####.**.....TT
-  TT~~~...::::::::::::::::::::::::::........TT
-  TT~~~...::::::::::::::::::::::::::........TT
-  TT~~~................::...................TT
-  TT~~~.TTTT..TTTTTT...::...........TTTTTT..TT
-  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
-  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
-  TT~~~.TTTT..TTTTTT...::..#####....TTTTTT..TT
-  TT~~~.......TTTTTT...::..#####....TTTTTT..TT
-  TT~~~.......TTTTTT...::..#####....TTTTTT..TT
-  TT~~~................::::::::.............TT
-  TT~~~................::::::::.............TT
-  TT~~~TTTTTTTTTTTTTTT.::.TTTTTTTTTTTTTTTTTTTT
-  TT~~~TTTTTTTTTTTTTTT.::.TTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTT,,,TTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTT,,,TTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTT...TTT~~~TTTTTTTTT,TTCCCCCCCCCCCCCCCCCTT....h####.TTTTTT...TTTTTT
+  TTTTTTTT.....~~~hTT......,TTCTTTTTTTTTT.....C......t####TTTTTTT...TTTTTT
+  TTTTTTTT,....~~~##........CCCTT.########T...C....,,.####TTTTTTT...TTTTTT
+  TTTTTTTTT....~~~##....h..CC#################CCC.....####TTT,T,T..tTTTTTT
+  TT,,,TTTT...,~~~##..TTTTCC####################CCCTTT####tTTTTTT..tTTTTTT
+  TT,,,TTTT.,,,~~~##TTTTTCCT####################t,CTTT####tTTT,TTT.tTT,,,T
+  TTTT####TT,,.~~~##TT###CTT####################,,CTTT,,,,tTTT,TT,T.TT,,,T
+  TTTT####..ttT~~~##TT###CTT#########,,,########TTCtTTTT,TTTTTTTT..hTTTTTT
+  TTTT####.tttT~~~,,TT###CCT######################C#tttttTTTT.######TTTTTT
+  TTTT####..TT~~~TTTTT###CCT#####################CCoo..,..T..,######TTTTTT
+  TTTT####..TT~~~T,,,T###CCCo,,,,,ccccccccc,,,,,CCCooo.....,..######TTTTTT
+  TTTT####.T,T~~~T,,,.####CCCC..TTcccccccccTT.CCCCC#ooo...,,,.######TTTTTT
+  TTTTTT,,TT,~~~TT,,,h,,,oCCCCCCCCCCccccccCCCCCCCC##Tooo.t,,,T######TTTTTT
+  TTTTTTTTTTT~~~.#######oooCCCCCCCCCCdddCCCCCCCCC###Tooo.tttTT######TTTTTT
+  TTTTTTTTTTT~~~h#######ooo..CCCCCCCCdddCCCCCCCT,,,,T.ooott.TT######TTTTTT
+  TTTTTTTTT,T~~~t######ooo..h.h.TTTCCdddCCC.TT,TTTTTtttooot.TT,,,,TTTTTTTT
+  TTT######,~~~TT######ootth.....TTTdddd....,,TTTT.,...ooot.TTTTTT.TTTTTTT
+  TTT######T~~~TT######oottt........dddd....,,,,,T,,,.#ooo##TTTTTTTTTTTTTT
+  TTT######T~~~TT###,,,oottt#####.,.dddd,...TTTTTT,,,.#ooo##TTTTTTTTTTTTTT
+  TTT######~~~TTT######oo.tt#####t,hddddT..,TTTTTTTTTT#ooo##TTTTTtTTTTTTTT
+  TTT######~~~T,,######oo.tt#####t.TddddTT.TT,T####TTT#ooo######.t.TTTTTTT
+  TTT######~~~,,,,,,,d,oo,,t#####,,TddddTTTTTT.####TT,#ooo######.ttTTTTTTT
+  TTT######~~~tttT...dToo,,t#####,,Tdddd,,TTT..####TT,#oo#######.ttT####TT
+  TTTTTTdddd~~ttdddddddoottt,,d,,TT,ddddddTTT..####TT,#oo#######...T####TT
+  ddddddddddddddddddddddddddd,dTddd.ddddddddd..,d,,TTT,oo,,,####..,T####TT
+  ddddddddddddddddddddddddddddddddddddddddddddh.d.dddddddddT####..,T####TT
+  TTTTTTTT~~~ttoo,..ddddddddddddddddcccccddddddddddddddddddddddddddT####TT
+  TTTTTTTT~~~ttooo,,,,Toooh.TTTTddddcccccddddddddddtTToooodddddddddh####TT
+  TTTTTTTT~~~ttooo.,,,Tooo.,,,TdddddcccccdddddtTTTTtT,ooooTTTTTdddd.TTTTTT
+  TTTTTTTTT~~~tooo....,ooo.,,,TTddddddddddddddttttttT,ToooTTTTTT....TTTTTT
+  TTTTTTTTT~~~.oooo,..,oooTTTTTTT,..ddddddddddT.,.TTT,.oooTT######..TTTTTT
+  TTTTTTTTT~~~.oooo...,ooo######T,,TddddddddTTT,,,TTT,,ooooT######.tTTTTTT
+  TTTTT####~~~Tooooo.,..oo######T,,TTddTTTTTT,T,,,.TT,,ooooT######,TTTTTTT
+  TTTTT####~~~TTooooooo.ooo#####T,TTTddT.,.T,,...h..,TTooooT######tTTTTTTT
+  TTTTT####~~~T,T..oooo..oo#########TddT,,,.,,######TTTToooT######TTTTTTTT
+  TTTTT####T~~~TT,Toooo.,oo#########TddT,,,.,.######TTTToooh######TTTTTTTT
+  TTTTT####T~~~T,TT,ooo..oooo#######dddTTTT.t.######TTTTooot######TTTTTTTT
+  TTTTT####T~~~T~~~~~~T...oooo######dddTTTT.t.######TTToooot,,,,,TTTTTTTTT
+  TTTTTTTT,T~~~~~~~~~~~~..ooooo,####ddd,TT#####,,,##TTToooot.....TTTTTTTTT
+  TTTTTTTTTTT~~~~~~~~~~~...ooooo####tdd,TT##########ooooooot....,TTTTTTTTT
+  T,,TTTTTTTt~~~~~~~~~~~~...oooo,,,,tdd.TT########ooooooTT,,T,..######TTTT
+  TTTTTTT..tt~~~~~~~~~~~.TTT.oooooTTtdd.,T####,,d,ooooo.TT,,TTTT######TTTT
+  TTTTTTT.,,t~~~~~~~~~~~.TttT..oooooodd.oooooooooooooo...TTT,,,T######TTTT
+  TTTTTTT.,,tt~~~~~~~~,,,TttT...oooodddoooooooooooooo....TTT,,,T######TTTT
+  TTTTTTTT,,,t~~~TTTTT,,,T,######..odddoooooo,TTTT,,,,.h.TTTTTT.######TTTT
+  TTTTTTTT,,,,~~~tTTTT,,,T,######.h.dd,TTTTTTTTT########..T,,,..######TTTT
+  TTTTTTTT,,,,t~~~.TTTT,,,T######...dd,TTTTtt,,T########..T,,,..######TTTT
+  TTTTTTTTTTttt~~~.TTTT,,,T######,..dd,TTTTTT,,T########..,,,,.,,,TTTTTTTT
+  TTTTTTTTTt,tt~~~TTT,TTTT.######,.,ddd,TT,TTTTT########.,,...T,..TTTTTTTT
+  TTTTTTTT.t,tT~~~TTTTTTT..######...ddd,T.,.TTTT########..,..TTTTTTTTTTTTT
+  TTTTTTTTttttT~~~TTTTTT#########...dddT####TTTT########TTt..TTTTT####TTTT
+  TTTTTTTTTTttTT~~~TTTTT####TTTTTT..dddT####TTTT########T,,TTTTTTT####TTTT
+  TTTTTTTTTTTTTT~~~TTTTT####TTTTTTTTddTT####TTTT########TTTTTTTTTT####TTTT
+  TT,,,TTTTTTTTT~~~TTTTT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
+  TT,,,,,TTTTTT~~~T,,,TT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
+  TTTTTTTTTTTTT~~~T,,,TT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
+  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+heights: |
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000011111111111111111000000000000000000000000000
+  000000000000000000000000000011111111111111111000000000000000000000000000
+  000000000000000000000000001111111111111111111000000000000000000000000000
+  000000000000000000000000011111111111111111111110000000000000000000000000
+  000000000000000000000000111111111111111111111111100000000000000000000000
+  000000000000000000000001111111111111111111111111100000000000000000000000
+  000000000000000000000001111111111111111111111111100000000000000000000000
+  000000000000000000000001111111111111111111111111100000000000000000000000
+  000000000000000000000001111111111111111111111111100000000000000000000000
+  000000000000000000000000111111111111111111111111100000000000000000000000
+  000000000000000000000000111111111111111111111111000000000000000000000000
+  000000000000000000000000011111111111111111111110000000000000000000000000
+  000000000000000000000000000111111111111111111000000000000000000000000000
+  000000000000000000000000000000000111111110000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000000000000000000000000000000000000000000
 stamps:
-  - {stamp: gym,        at: [19, 4],  link: BW_GYM,    name: Gym door}
-  - {stamp: pokecenter, at: [8, 22],  link: BW_PC,     name: Poke Center door}
-  - {stamp: mart,       at: [30, 23], link: BW_MART,   name: Mart door}
-  - {stamp: institute,  at: [5, 11],  link: BW_GUILD,  name: Guildhall door}
-  - {stamp: house_red,  at: [33, 10], link: BW_HOUSE1, name: Treetop House door}
-  - {stamp: house_red2, at: [25, 31], link: BW_HOUSE2, name: Cutter's House door}
+- stamp: t_stairs
+  at: [35, 19]
+- stamp: g_tree6
+  at: [32, 8]
+  link: BW_GYM
+  name: Gym door
+  door: [4, 7]
+- stamp: g_tree4p
+  at: [26, 9]
+- stamp: g_tree4p
+  at: [40, 9]
+- stamp: g_tree6
+  at: [15, 19]
+  link: BW_GUILD
+  name: Guildhall door
+  door: [4, 7]
+- stamp: g_tree4
+  at: [52, 23]
+  link: BW_HOUSE1
+  name: Treetop House door
+  door: [2, 6]
+- stamp: g_tree4
+  at: [44, 40]
+  link: BW_HOUSE2
+  name: Cutter's House door
+  door: [2, 6]
+- stamp: t_pokecenter
+  at: [26, 24]
+  link: BW_PC
+  name: Poke Center door
+  door: [2, 4]
+- stamp: t_mart
+  at: [45, 26]
+  link: BW_MART
+  name: Mart door
+  door: [1, 3]
+- stamp: g_tree4
+  at: [24, 37]
+- stamp: g_tree4
+  at: [58, 36]
+- stamp: g_tree4
+  at: [25, 50]
+- stamp: g_tree6
+  at: [46, 51]
+- stamp: g_tree4
+  at: [60, 14]
+- stamp: g_tree4p
+  at: [3, 22]
+- stamp: g_tree4p
+  at: [62, 46]
+- stamp: g_tree2
+  at: [46, 14]
+- stamp: g_tree2
+  at: [20, 12]
+- stamp: g_tree2
+  at: [40, 44]
+- stamp: g_tree2
+  at: [30, 40]
+- stamp: g_tree2
+  at: [58, 26]
+- stamp: g_tree2
+  at: [22, 56]
+- stamp: g_tree2
+  at: [66, 28]
+- stamp: g_tree2
+  at: [5, 38]
+- stamp: g_tree2
+  at: [52, 6]
+- stamp: g_tree2
+  at: [14, 8]
+- stamp: g_tree2
+  at: [64, 56]
+- stamp: g_tree2
+  at: [4, 12]
+- stamp: g_tree2
+  at: [38, 56]
+- stamp: p_awning
+  at: [35, 13]
+- stamp: p_awning
+  at: [18, 24]
+- stamp: p_awning
+  at: [53, 27]
+- stamp: p_awning
+  at: [45, 44]
+- stamp: p_vat_r
+  at: [19, 38]
+- stamp: p_vat_y
+  at: [20, 35]
+- stamp: p_vat_y
+  at: [16, 33]
+- stamp: p_vat_b
+  at: [14, 42]
+- stamp: p_vat_b
+  at: [13, 40]
+- stamp: p_vat_y
+  at: [15, 41]
+- stamp: p_vat_b
+  at: [17, 36]
+- stamp: p_vat_r
+  at: [15, 32]
+- stamp: p_vat_r
+  at: [17, 42]
+- stamp: tp_stall_21
+  at: [25, 34]
+- stamp: p_loom
+  at: [31, 27]
+- stamp: p_loom
+  at: [23, 27]
+- stamp: p_loom
+  at: [18, 33]
+- stamp: p_loom
+  at: [13, 26]
+- stamp: p_silk
+  at: [9, 21]
+- stamp: p_silk1
+  at: [19, 54]
+- stamp: p_silk
+  at: [43, 52]
+- stamp: p_strand_w
+  at: [44, 52]
+- stamp: p_strand_p
+  at: [37, 54]
+- stamp: p_silk1
+  at: [53, 15]
+- stamp: p_silk1
+  at: [59, 46]
+- stamp: p_silk1
+  at: [27, 30]
+- stamp: p_silk
+  at: [11, 51]
+- stamp: p_silk1
+  at: [51, 34]
+- stamp: p_silk1
+  at: [12, 27]
+- stamp: p_silk1
+  at: [59, 9]
+- stamp: p_silk
+  at: [40, 54]
+- stamp: p_strand_w
+  at: [17, 33]
+- stamp: p_silk1
+  at: [56, 53]
+- stamp: p_silk1
+  at: [43, 38]
+- stamp: p_silk1
+  at: [43, 26]
+- stamp: p_silk
+  at: [60, 11]
+- stamp: p_silk1
+  at: [56, 55]
+- stamp: p_strand_p
+  at: [24, 50]
+- stamp: p_silk1
+  at: [46, 12]
+- stamp: p_silk
+  at: [64, 30]
+- stamp: p_strand_w
+  at: [25, 6]
+- stamp: p_silk1
+  at: [22, 41]
+- stamp: p_silk1
+  at: [38, 24]
+- stamp: p_strand_p
+  at: [20, 36]
+- stamp: p_strand_w
+  at: [10, 17]
+- stamp: p_silk
+  at: [10, 54]
+- stamp: p_strand_w
+  at: [12, 10]
+- stamp: p_silk1
+  at: [41, 25]
+- stamp: p_web
+  at: [2, 59]
+- stamp: p_web1
+  at: [55, 57]
+- stamp: p_web
+  at: [58, 48]
+- stamp: p_web1
+  at: [44, 23]
+- stamp: p_web1
+  at: [1, 46]
+- stamp: p_web1
+  at: [5, 60]
+- stamp: p_web1
+  at: [49, 8]
+- stamp: p_web
+  at: [68, 11]
+- stamp: p_web
+  at: [5, 1]
+- stamp: p_web
+  at: [21, 52]
+- stamp: p_web1
+  at: [38, 28]
+- stamp: p_web
+  at: [17, 60]
+- stamp: p_web
+  at: [2, 10]
+- stamp: p_web1
+  at: [55, 54]
+- stamp: p_lantern
+  at: [45, 36]
+- stamp: p_lantern
+  at: [38, 39]
+- stamp: p_lantern
+  at: [56, 16]
+- stamp: p_lantern
+  at: [48, 22]
+- stamp: p_pinkbush
+  at: [42, 39]
+- stamp: p_pot
+  at: [61, 9]
+- stamp: p_bush_r
+  at: [46, 23]
+- stamp: tp_stall_13
+  at: [42, 22]
+- stamp: p_crates
+  at: [20, 49]
+- stamp: tp_stall_01
+  at: [48, 50]
+- stamp: p_bush_g
+  at: [51, 37]
+- stamp: t_barrel
+  at: [31, 53]
+- stamp: p_bush_r
+  at: [38, 47]
+- stamp: p_stump
+  at: [62, 45]
+- stamp: p_bush_r
+  at: [63, 12]
+- stamp: p_pot
+  at: [33, 29]
+- stamp: p_bush_r
+  at: [44, 21]
+- stamp: p_crates
+  at: [16, 16]
+- stamp: p_stump
+  at: [50, 39]
+- stamp: t_barrel
+  at: [51, 35]
+- stamp: p_bush_r
+  at: [59, 15]
+- stamp: p_bush_r
+  at: [42, 41]
+- stamp: p_pinkbush
+  at: [8, 48]
+- stamp: p_crates
+  at: [57, 51]
+- stamp: p_pot
+  at: [8, 8]
+- stamp: p_bush_r
+  at: [54, 13]
+- stamp: p_pot
+  at: [33, 54]
+- stamp: p_pot
+  at: [64, 38]
+- stamp: p_crates
+  at: [8, 50]
+- stamp: t_barrel
+  at: [61, 53]
+- stamp: tp_stall_13
+  at: [10, 11]
+- stamp: tp_stall_13
+  at: [56, 46]
+- stamp: t_barrel
+  at: [47, 11]
+- stamp: p_stump
+  at: [31, 36]
+- stamp: t_bench
+  at: [36, 33]
+- stamp: p_banner
+  at: [37, 44]
+- stamp: p_banner
+  at: [32, 37]
+- stamp: p_banner3
+  at: [51, 27]
+- stamp: p_banner
+  at: [32, 24]
+- stamp: p_banner3
+  at: [31, 37]
+- stamp: p_banner3
+  at: [36, 51]
 tiles:
-  - {tile: gym_sign, at: [24, 9]}
+- tile: 18075
+  at: [31, 11]
+  layer: 2
+- tile: 18075
+  at: [32, 11]
+  layer: 2
+- tile: 18075
+  at: [39, 11]
+  layer: 2
+- tile: 18075
+  at: [40, 11]
+  layer: 2
+- tile: 18075
+  at: [23, 21]
+  layer: 2
+- tile: 18075
+  at: [24, 21]
+  layer: 2
+- tile: 18075
+  at: [25, 21]
+  layer: 2
+- tile: 18075
+  at: [46, 25]
+  layer: 2
+- tile: 18075
+  at: [47, 25]
+  layer: 2
+- tile: 18075
+  at: [48, 25]
+  layer: 2
+- tile: 18075
+  at: [49, 25]
+  layer: 2
+- tile: 18075
+  at: [50, 25]
+  layer: 2
+- tile: 18075
+  at: [51, 25]
+  layer: 2
+- tile: 18075
+  at: [50, 38]
+  layer: 2
+- tile: 18075
+  at: [51, 38]
+  layer: 2
+- tile: 18075
+  at: [52, 38]
+  layer: 2
+- tile: 18075
+  at: [53, 38]
+  layer: 2
+- tile: 18075
+  at: [54, 38]
+  layer: 2
+- tile: 18075
+  at: [55, 38]
+  layer: 2
+- tile: 18075
+  at: [56, 38]
+  layer: 2
+- tile: 18075
+  at: [57, 38]
+  layer: 2
+- tile: 18075
+  at: [34, 46]
+  layer: 2
+- tile: 18075
+  at: [35, 46]
+  layer: 2
+- tile: 18075
+  at: [36, 46]
+  layer: 2
+- tile: 18075
+  at: [37, 46]
+  layer: 2
+- tile: 18075
+  at: [38, 46]
+  layer: 2
+- tile: 18075
+  at: [39, 46]
+  layer: 2
+- tile: 18075
+  at: [54, 53]
+  layer: 2
+- tile: 18075
+  at: [55, 53]
+  layer: 2
+- tile: 18075
+  at: [56, 53]
+  layer: 2
+- tile: 18075
+  at: [57, 53]
+  layer: 2
+- tile: 18075
+  at: [21, 39]
+  layer: 2
+- tile: 18075
+  at: [22, 39]
+  layer: 2
+- tile: 18075
+  at: [23, 39]
+  layer: 2
+- tile: 1554
+  at: [13, 47]
+  layer: 2
+- tile: 1562
+  at: [13, 48]
+  layer: 2
+- tile: 1555
+  at: [18, 45]
+  layer: 2
+- tile: 1563
+  at: [18, 46]
+  layer: 2
+tileblocks: []
 events:
-  - {type: warp, name: To Gossamer Wood, at: [22, 39], link: WOOD_BRIAR, arrive: [22, 38, up]}
-  - {type: sign, at: [24, 9], post: false, name: Gym sign, text: "BRIARWICK LOOMHOUSE GYM\nWarden: Tamsin Loom - The Weaver of Webs"}
-  - {type: sign, at: [20, 17], text: "BRIARWICK\nWhere the looms never stop."}
-  - {type: sign, at: [24, 26], name: Loyal Three shrine,
-     text: "A shrine to the Loyal Three, \"who drove the Gossamer Ogre from the wood.\" Carved ogre masks hang from the eaves."}
-  - {type: sign, at: [18, 26], name: Festival poster,
-     text: "A Festival of Champions poster. The Crown is drawn with a tiny chip missing from its stone."}
-  - {type: npc, name: Masked child, at: [17, 28], sprite: NPC 07, move: random,
-     text: "Child: The old mural in the chapel shows the Crown all whole. Mum says the Crown got hurt once."}
-  - type: event
-    name: Pallbearer Thistle
-    at: [39, 15]
-    pages:
-      - graphic: {sprite: trainer_BURGLAR, dir: left}
-        commands:
-          - "A masked figure is cutting Meridian's orange survey flags, one by one."
-          - "Thistle: You'll stop me? Lowmarsh had looms too, once."
-          - if: 'TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")'
-            then:
-              - "Thistle: ...Ask your Warden what she signed."
-              - "The Hollow pallbearer slips away between the trees."
-              - {switch: [CH2_THISTLE_DONE, true]}
-              - {selfswitch: [A, true]}
-      - cond: {self: A}
-  - {type: sign, at: [40, 17], name: Lattice pylon,
-     text: "A half-built Meridian Lattice pylon. Orange survey flags march east from it, toward the Glasswood."}
-  - type: event
-    name: Old woman at the shrine
-    at: [25, 27]
-    pages:
-      - cond: {switch: GLOAMING_DISGUISED_CELESTINE}
-        graphic: {sprite: NPC 28, dir: up}
-        commands:
-          - "An old woman sings softly to the shrine:"
-          - "\"Three loyal hounds and an ogre so bold - but who was the thief, when the story was told?\""
-          - "She doesn't turn around."
-  - {type: npc, name: Gym guide, at: [21, 11], sprite: NPC 01, dir: down,
-     text: "The Loomhouse is all silk and string. Threads that hold only when twisted together - that's the Warden's whole puzzle."}
-  - {type: npc, name: Meridian liaison, at: [24, 18], sprite: trainer_GENTLEMAN, dir: left,
-     text: "Meridian liaison: Meridian has... arrangements with the Warden. The Lattice will save these groves. Eventually."}
-  - {type: npc, name: Dyer, at: [6, 20], sprite: NPC 12, dir: left, move: random,
-     text: "Dyer: The silk-moths are dying. Fewer cocoons every week, and the Glasswood creeps closer along those flags."}
+- type: warp
+  name: To Gossamer Wood
+  at: [35, 63]
+  link: WOOD_BRIAR
+  arrive: [35, 62, up]
+- type: sign
+  at: [38, 17]
+  post: false
+  name: Gym sign
+  text: 'LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM. "A thread holds because it''s twisted with others."'
+- type: sign
+  at: [20, 32]
+  post: false
+  name: Gym sign
+  text: 'BRIARWICK — Where the Thread Never Tangles. (Carved under it, smaller: "Unlike the Guild Accounts.")'
+- type: sign
+  at: [38, 31]
+  name: Loyal Three shrine
+  text: A shrine to the Loyal Three, "who drove the Gossamer Ogre from the wood." Carved ogre masks hang from the eaves.
+- type: sign
+  at: [33, 30]
+  name: Festival poster
+  text: 'The same poster as the Landing. Here the dark fleck in the Crown''s stone has been circled in charcoal. Someone has written: "SEE CHAPEL."'
+- type: event
+  name: Pallbearer Thistle
+  at: [63, 33]
+  pages:
+  - graphic: {sprite: trainer_BURGLAR, dir: left}
+    commands:
+    - A masked figure is cutting Meridian's orange survey flags, one by one.
+    - 'Thistle: You''ll stop me? Lowmarsh had looms too, once.'
+    - if: TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")
+      then:
+      - 'Thistle: ...Ask your Warden what she signed.'
+      - The Hollow pallbearer slips away between the trees.
+      - switch: [CH2_THISTLE_DONE, true]
+      - selfswitch: [A, true]
+  - cond: {self: A}
+- type: sign
+  at: [65, 32]
+  name: Lattice pylon
+  text: 'Half a brass pylon. A plate reads: MERIDIAN CONCORD — LATTICE 15 (BRIARWICK) — "Light for Everyone." It is faintly warm, and the grass around it
+    is stiff, like spun sugar.'
+- type: event
+  name: Old woman at the shrine
+  at: [39, 32]
+  pages:
+  - cond: {switch: GLOAMING_DISGUISED_CELESTINE}
+    graphic: {sprite: NPC 28, dir: up}
+    commands: ['An old woman sings softly to the shrine:', '"Three loyal hounds and an ogre so bold - but who was the thief, when the story was told?"',
+      She doesn't turn around.]
+- type: npc
+  name: Gym guide
+  at: [34, 17]
+  sprite: NPC 01
+  dir: down
+  text: The Loomhouse is all silk and string. Threads that hold only when twisted together - that's the Warden's whole puzzle.
+- type: npc
+  name: Meridian liaison
+  at: [50, 32]
+  sprite: trainer_GENTLEMAN
+  dir: left
+  text: 'Meridian liaison: Meridian has... arrangements with the Warden. The Lattice will save these groves. Eventually.'
+- type: warp
+  name: To Gossamer Wood b
+  at: [36, 63]
+  to: {map: 524, x: 24, y: 1, dir: down}
+- type: event
+  name: Finch
+  at: [22, 30]
+  pages:
+  - graphic: {sprite: NPC 13, dir: down}
+    move: random
+    commands: ['Finch: Fourteen dead this week. They fly east at dusk and come back with glass on their wings. Then they don''t come back.', 'Finch: Meridian
+        says the Lattice will "stabilize" it. The line they''ve drawn for it goes straight through my grove.']
+- type: event
+  name: Weaver at loom
+  at: [16, 36]
+  pages:
+  - graphic: &id001 {sprite: NPC 16, dir: down}
+    move: fixed
+    commands:
+    - 'Weaver at loom: Clack-clack. Sixty picks a minute. Don''t talk to me on the downstroke.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: *id001
+    move: fixed
+    commands: ['Weaver at loom: That was the downstroke.']
+- type: event
+  name: Dyer
+  at: [19, 28]
+  pages:
+  - graphic: {sprite: NPC 15, dir: down}
+    move: fixed
+    commands: ['Dyer: Elowen green, that''s my vat. The Queen''s own shade. She''s never paid for a yard of it. "The Crown''s by right of soil," says the
+        taxman. So''s the mud, I said.']
+- type: event
+  name: Apprentice
+  at: [39, 48]
+  pages:
+  - graphic: {sprite: NPC 17, dir: down}
+    move: random
+    commands: ['Apprentice: I wove my first scarf! It''s got eleven mistakes. Tamsin found a twelfth and then apologized for an hour.']
+- type: event
+  name: Rope-bridge Boy
+  at: [30, 33]
+  pages:
+  - graphic: {sprite: NPC 10, dir: down}
+    move: fixed
+    commands: ['Rope-bridge Boy: If you jump on the bridge it goes BWOING. I''m not allowed. You''re a grown-up. YOU do it.', 'Boy: HA!', 'Voice below:
+        WHO''S JUMPING?!', 'Boy: Coward.']
+- type: event
+  name: Grandmother knitting
+  at: [48, 32]
+  pages:
+  - graphic: {sprite: NPC 02, dir: down}
+    move: fixed
+    commands: ['Grandmother knitting: It''s a jumper for my Caterpie. Sixteen sleeves. I''m on the fourth. Don''t rush me.']
+- type: event
+  name: Silk Merchant
+  at: [60, 33]
+  pages:
+  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    move: random
+    commands: ['Silk Merchant: Briarwick silk never tangles and never rots. That''s why nobody ever buys a second one. Terrible business. Wonderful product.']
+- type: event
+  name: Meridian Linesman
+  at: [36, 26]
+  pages:
+  - graphic: &id002 {sprite: trainer_SCIENTIST, dir: down}
+    move: fixed
+    commands:
+    - 'Meridian Linesman: Pylon''ll be humming by month''s end. Free light for the looms! Folk here look at me like I''m selling plague.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: *id002
+    move: fixed
+    commands: ['Meridian Linesman: Truth is, I don''t know what it does to the wood. I just bolt the brass.']
+- type: event
+  name: Tired Mother
+  at: [44, 48]
+  pages:
+  - graphic: {sprite: NPC 17, dir: down}
+    move: fixed
+    commands: ['Tired Mother: Three nights running somebody''s cut the survey flags. I''m not saying who. I''m saying I slept very well through it.']
+- type: event
+  name: Old Man on bridge
+  at: [34, 34]
+  pages:
+  - graphic: {sprite: NPC 09, dir: down}
+    move: random
+    commands: ['Old Man on bridge: The Loyal Three drove the Ogre out of this wood. My grandfather told me. His grandfather told him. Nobody''s grandfather
+        SAW it, mind.']
+- type: event
+  name: Girl in ogre mask
+  at: [36, 44]
+  pages:
+  - graphic: {sprite: NPC 16, dir: down}
+    move: fixed
+    commands: ['Girl in ogre mask: RAAH! I''m the Gossamer Ogre! I steal children and eat looms!', 'Boy in dog mask: And I''m a Loyal Hound and I bite you!
+        ...Why does the Ogre mask look sad?']
+- type: event
+  name: Egg-seller
+  at: [28, 46]
+  pages:
+  - graphic: {sprite: NPC 22, dir: down}
+    move: fixed
+    commands: ['Egg-seller: Silk-moth eggs, a copper each. That loud girl bought forty. FORTY. For her uncle, she says.']
+- type: event
+  name: Tax-barge Deserter
+  at: [39, 30]
+  pages:
+  - graphic: {sprite: trainer_SAILOR, dir: down}
+    move: random
+    commands: ['Tax-barge Deserter: I rowed the Queen''s tax-barge. Jumped off at Saltmere when they booed us. Weaving''s quieter. Nobody boos a scarf.']
+- type: event
+  name: Accord Chaplain
+  at: [34, 18]
+  pages:
+  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    move: fixed
+    commands: ['Accord Chaplain: The chapel''s open. The mural''s older than the looms. Mind the Crown in it — people say it''s painted wrong. It isn''t.
+        It''s painted *before*.']
+- type: event
+  name: Youngster
+  at: [56, 40]
+  pages:
+  - graphic: {sprite: trainer_YOUNGSTER, dir: down}
+    move: fixed
+    commands: ['Youngster: The Warden cries in the gym at night. I heard her through the wall. Then she apologized to the wall.']
+- type: event
+  name: Woman with basket
+  at: [50, 45]
+  pages:
+  - graphic: {sprite: NPC 17, dir: down}
+    move: random
+    commands: ['Woman with basket: East wood rings like a bell now. My mother says a ringing wood means a wedding. I don''t think this is a wedding.']
+- type: event
+  name: Cutter's Wife
+  at: [23, 21]
+  pages:
+  - graphic: {sprite: NPC 13, dir: down}
+    move: fixed
+    commands: ['Cutter''s Wife: You''ll want my husband if there''s a tree in your way. He''ll say no first. He always says no first. Wait for the second
+        answer.']
+- type: sign
+  name: Survey Flags
+  at: [62, 30]
+  post: true
+  text: Orange cloth on stakes. Four of the stakes have been neatly cut. The cuts are very clean. A weaver's shears.
+- type: sign
+  name: Silk Racks
+  at: [23, 26]
+  post: true
+  text: The silk moves in no wind at all.
+- type: item
+  item: XATTACK
+  hidden: true
+  at: [37, 47]
+- type: item
+  item: TINYMUSHROOM
+  hidden: true
+  at: [15, 40]

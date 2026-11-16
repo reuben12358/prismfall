@@ -309,7 +309,7 @@ module Prismfall
     @last_results = {}
 
     class << self
-      attr_reader :last_results
+      attr_reader :last_results, :current     # current = the Scene being played, or nil
 
       # Registers a scene. options: skippable: (true), restore_bgm: (true),
       # vars: a proc returning default variables (evaluated at play time).
@@ -354,6 +354,7 @@ module Prismfall
             defn = build(id, **vars)
           end
           scene = Scene.new(defn)
+          @current = scene
           status = scene.play
           @last_results = scene.results
           @skipped = (status == :skipped)
@@ -365,6 +366,7 @@ module Prismfall
           return false
         ensure
           @playing = false
+          @current = nil
         end
       end
 

@@ -1,0 +1,10 @@
+# Interior palette for tileset 34 "Prismfall Interior" (Tectonic Inside + Rejuvenation SheridanInside / Help Centers /
+# Chrisola Hotel / RoseTheatre appended; compose_tileset.py). Rooms are composed by layouts/interiorkit.py with explicit
+# `tiles:`; the map grid is only the black surround.
+tileset: 34
+ground: {base: 5437}
+classes:
+  void: {kind: ground}
+tiles: {}
+glyphs:
+  '.': void

@@ -1,0 +1,77 @@
+# WILDS palette (builder 3): tileset 40 "Prismfall Wilds" = Tectonic Outside (ids unchanged) + Rejuvenation Route 2 and
+# Goldenleaf sheets + PF Forest + a Bleed recolour of the Tectonic part (id + 13912) + custom silk strip. See compose_wilds.py.
+# Trees, props and scatter are placed by layouts/wildkit.py as explicit tiles; this palette only paints terrain.
+tileset: 40
+ground: {base: 2197}
+ground_table: grass
+ground_ids: [2197, 2504, 2505, 2506, 2507, 2508, 2509, 2510, 2511, 2512, 2513, 2514, 2515, 2516, 2517, 2518, 2519,
+             2520, 2521, 2522, 2523, 2524, 2525, 2526, 2527, 2528]
+classes:
+  grass:    {kind: ground}
+  clear:    {kind: ground}
+  building: {kind: ground}
+  ash:      {kind: tile, tile: 16109, layer: 0}                 # glassed ground (Bleed copy of 2197)
+  ashdark:  {kind: tile, tile: 16001, layer: 0}                 # darker glassed ground (Bleed copy of 2089)
+  cavefloor: {kind: tile, tile: 16313, layer: 0}                # Bleed copy of cave dirt 2401 (Cocoonfall floor)
+  void:     {kind: tile, tile: 0, layer: 0}                     # black
+  dirt:     {kind: blob, layer: 1, min_width: 1, NW: 2563, N: 2564, NE: 2565, W: 2571, center: 2572, E: 2573, SW: 2579, S: 2580, SE: 2581,
+             inner_nw: 2587, inner_ne: 2588, inner_sw: 2595, inner_se: 2596}       # trodden earth lane over grass
+  bdirt:    {kind: blob, layer: 1, min_width: 1, NW: 16475, N: 16476, NE: 16477, W: 16483, center: 16484, E: 16485, SW: 16491, S: 16492, SE: 16493,
+             inner_nw: 16499, inner_ne: 16500, inner_sw: 16507, inner_se: 16508}
+  stones:   {kind: learned, table: stones, layer: 1}
+  water:    {kind: sea, id: 288, rock: 2609, quay: [], also: [pier], same: [water, pier]}
+  bwater:   {kind: sea, id: 144, rock: 16521, quay: [], also: [bpier], same: [bwater, bpier]}
+  pier:     {kind: tpier, layer: 2, left: 3806, mid: 3831, right: 3807}
+  bpier:    {kind: tpier, layer: 2, left: 17718, mid: 17743, right: 17719}
+  cliff:    {kind: cliffline, table: cliff, west: 2608, east: 2610, rock: 2609}
+  bcliff:   {kind: cliffline, table: b3_bcliff, west: 16520, east: 16522, rock: 16521}
+  tgrass:   {kind: autotile, id: 96, layer: 1}
+  bgrass:   {kind: autotile, id: 336, layer: 1}
+  fence:    {kind: learned, table: fence, layer: 2}
+  cstairs:  {kind: ground}
+  forest:   {kind: forest, patch: 6.0, mix: 0.3, under_p: 0.8,
+             species: [{top: [401, 402], mid: [409, 410], bot: [417, 418]},
+                       {top: [405, 406], mid: [413, 414], bot: [421, 422]},
+                       {top: [605, 606], mid: [613, 614], bot: [621, 622]},
+                       {top: [688, 689], mid: [696, 697], bot: [704, 705]},
+                       {top: [768, 769], mid: [736, 737], bot: [744, 745]},
+                       {top: [732, 733], mid: [740, 741], bot: [748, 749]}],
+             under: [947, 947, 939, 1164, 1172, 1180, 1189, 1188, 955, 1048, 1057]}
+  bforest:  {kind: forest, patch: 6.0, mix: 0.3, under_p: 0.8,
+             species: [{top: [14313, 14314], mid: [14321, 14322], bot: [14329, 14330]},
+                       {top: [14317, 14318], mid: [14325, 14326], bot: [14333, 14334]},
+                       {top: [14517, 14518], mid: [14525, 14526], bot: [14533, 14534]},
+                       {top: [14600, 14601], mid: [14608, 14609], bot: [14616, 14617]}],
+             under: [14859, 14851, 15076, 15084, 15092, 15101, 15100, 14867]}
+scatter:
+  on: []
+  density: 0.0
+  patches: []
+  singles: [[1164, 1]]
+tiles:
+  sign: {layer: 1, tile: 3264}
+  sign_top: {layer: 2, tile: 3256}
+glyphs:
+  '.': grass
+  ',': clear
+  '#': building
+  'a': ash
+  'A': ashdark
+  'v': cavefloor
+  'x': void
+  'd': dirt
+  'D': bdirt
+  'o': stones
+  '~': water
+  'w': bwater
+  '=': pier
+  '+': bpier
+  'C': cliff
+  'B': bcliff
+  'g': tgrass
+  'G': bgrass
+  'f': fence
+  'S': cstairs
+  'T': forest
+  'U': bforest
+water_under_stamps: 288

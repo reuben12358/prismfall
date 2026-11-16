@@ -202,8 +202,8 @@ module Prismfall
         blob(b, cx + off, cy, r * 0.82, pal_r.outer, frame, 4, 6, 0.36, -0.5)
         blob(b, cx - (off * 0.6), cy, r * 0.6, pal_l.inner, frame, 5, 5, 0.4, -0.6)
         blob(b, cx + (off * 0.6), cy, r * 0.6, pal_r.inner, frame, 6, 5, 0.4, 0.6)
-        blob(b, cx, cy, r * 0.62, pal_l.core, frame, 7, 11, 0.4, 0.7)
-        blob(b, cx, cy, r * 0.5, pal_l.core, frame, 8, 4, 1.5, 0.12)       # glare
+        blob(b, cx, cy, r * 0.44, pal_l.core, frame, 7, 9, 0.38, 0.7)
+        blob(b, cx, cy, r * 0.36, pal_l.core, frame, 8, 4, 1.35, 0.12)     # glare
         5.times do |i|
           ang = (Util.hash01(frame / 2, i, 41) * Math::PI * 2)
           l0 = r * 0.9
@@ -537,7 +537,7 @@ module Prismfall
         @steam = (@steam || 0.0) + (22 * @intensity * dt)
         while @steam >= 1                                            # steam where fire meets ice
           @steam -= 1
-          scene.particles.spawn(:steam, c[0] + ((scene.rng.rand - 0.5) * @ball * 2), c[1] - (@ball * 0.5), { :size => 3 + scene.rng.rand(3), :speed => 1.6 })
+          scene.particles.spawn(:steam, c[0] + ((scene.rng.rand - 0.5) * @ball * 2), c[1] - (@ball * 0.5), { :size => 3 + scene.rng.rand(2), :speed => 1.6 })
           scene.particles.spawn(:steam, c[0] + ((scene.rng.rand - 0.5) * 200), ground_y(c), { :size => 2 + scene.rng.rand(2), :layer => :back })
         end
         @lift += 16 * @intensity * dt
@@ -705,7 +705,8 @@ module Prismfall
           ground_light(back, bx, cx, gy, wb, pal_b, f) if wb >= 2
           if @ball_scale > 0.3                                   # white pool of light under the clash
             r = @ball * z * @ball_scale
-            Dither.glow(back, cx, gy, r * 3.0, r * 0.8, Util.palette(:white).rgb[0])
+            Dither.disc(back, cx, gy, r * 2.4, r * 0.4, Util.palette(:white).rgb[1], 8)
+            Dither.disc(back, cx, gy, r * 1.4, r * 0.24, Util.palette(:white).rgb[0], 4)
           end
           # the stronger beam is drawn last so it overlaps the weaker one
           order = (wa >= wb) ? [[bx, by, pal_b, wb, 2], [ax, ay, pal_a, wa, 1]] : [[ax, ay, pal_a, wa, 1], [bx, by, pal_b, wb, 2]]
@@ -729,10 +730,10 @@ module Prismfall
         return if width < 2 || (x1 - x0).abs < 4
         lo = [x0, x1].min
         len = (x1 - x0).abs
-        h = (width * 0.5).round + (f % 2)
-        Dither.fill(b, lo - 6, gy - h, len + 12, h * 2, pal.rgb[2], 8)
+        h = [(width * 0.2).round, 3].max + (f % 2)
+        Dither.fill(b, lo - 4, gy - h, len + 8, h * 2, pal.rgb[2], 8)
         Dither.fill(b, lo, gy - (h / 2), len, h, pal.rgb[2], 4)
-        Dither.fill(b, lo + 4, gy - (h / 4), len - 8, [h / 2, 2].max, pal.rgb[1], 2)
+        Dither.fill(b, lo + 6, gy - 1, len - 12, 2, pal.rgb[1], 2)
       end
     end
 

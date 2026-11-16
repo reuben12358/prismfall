@@ -47,7 +47,7 @@ def main():
     events.append({'type': 'npc', 'name': 'Healer', 'at': [hx, hy], 'sprite': 'NPC 16', 'dir': 'down',
                    'commands': ['Let me heal your team.', {'heal': True}, {'me': 'Pkmn healing'}, {'wait': 40},
                                 'All better! (Battles here use setBattleRule("canLose").)']})
-    events.append({'type': 'warp', 'name': 'Exit', 'at': [10, 12], 'to': {'map': 100, 'x': 8, 'y': 16, 'dir': 'down'},
+    events.append({'type': 'warp', 'name': 'Exit', 'at': [10, 12], 'to': {'map': 100, 'x': 24, 'y': 28, 'dir': 'down'},
                    'se': 'Door exit'})
     events.append({'type': 'sign', 'name': 'Arena sign', 'at': [10, 3], 'post': False, 'text':
                    'PRISMFALL TEST ARENA - talk to a trainer to start a battle on their field. '

@@ -1,70 +1,1206 @@
-# Route 1 (map 520): coastal heath north of Ferrow's Landing. Source: design/maps.json id 520.
+# Route 1 (520). WRITTEN BY layouts/route1.py - edit that, not this file.
 id: 520
 name: Route 1
-palette: outside
 bgm: Route 1
 parent: 0
-metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 24], BattleBack: field}
+tone: [4, 6, -8, 0]
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 14, 24]
+  BattleBack: field
 connections:
-  - {dir: S, offset: 10, to: 100, to_offset: 17}
-  - {dir: N, offset: 12, to: 521, to_offset: 42}
+- {dir: S, offset: 10, to: 100, to_offset: 28}
+- {dir: N, offset: 25, to: 521, to_offset: 40}
+palette: wilds
+rubric: true
 map: |
-  TTTTTTTTTT..____..TTTT~~~~
-  TTTTTTTTTT..____..TTTT~~~~
-  TT..........____......~~~~
-  TT..........____......~~~~
-  TT..........____..TTTT~~~~
-  TT..........____..TTTT~~~~
-  TT..,,,,,,,.____..TTTT~~~~
-  TT..,,,,,,,.____..TTTT~~~~
-  TT..,,,,________......~~~~
-  TT..,,,,________......~~~~
-  TT..,,,,__,...........~~~~
-  TT......__............~~~~
-  TTTT....__....TTTT....~~~~
-  TTTT....__....TTTT....~~~~
-  TT......__....TTTT....~~~~
-  TT,,,,..__....TTTT....~~~~
-  TT,,,,..__............~~~~
-  TT,,,,..__............~~~~
-  TT,,,,..__....,,,,,,,,~~~~
-  TT,,,,..__....,,,,,,,,~~~~
-  TT,,,,..____________,,~~~~
-  TT......____________,,~~~~
-  TT............,,,,__,,~~~~
-  TT................__..~~~~
-  TTLLLLLLLLLLLLLLLL__..~~~~
-  TT................__..~~~~
-  TT..TT....TTTT....__..~~~~
-  TT..TT....TTTT....__..~~~~
-  TT........TTTT....__TT~~~~
-  TT........TTTT....__TT~~~~
-  TT.,,,,,,,,.......__TT~~~~
-  TT.,,,,,,,,.......__TT~~~~
-  TT.,,,,,,,,.......__..~~~~
-  TT.,,,,,,,,.......__..~~~~
-  TT.,,,,,,,,.________..~~~~
-  TT.,,,,,,,,.________..~~~~
-  TT..........____......~~~~
-  TT..........____......~~~~
-  TTTTTTTT....____......~~~~
-  TTTTTTTT....____......~~~~
-  TTTTTTTT....____,,,,..TTTT
-  TTTTTTTT....____,,,,..TTTT
-  TT..........____,,,,..TTTT
-  TT..........____,,,,..TTTT
-  TT..........____......TTTT
-  TT..........____......TTTT
-  TTTTTTTT....____..TTTTTTTT
-  TTTTTTTT....____..TTTTTTTT
+  TTTTTTCTTTTTTCTTTTTTTT...dd....TTTTTC~~~~~~~
+  TTTTTCCTTTTTTCCCTTTTTT...dd....TTTTTC~~~~~~~
+  TTTCCCTTTTTTTTTCCCTTTT...dd...TTTTTTC~~~~~~~
+  TTCCTTTTTTTTTTTTTCCTTT...dd...TTTTTTC~~~~~~~
+  TCCTTT.......TTTTTCC.....dd...TTTTTTC~~~~~~~
+  CCTTT.......TTTTTT.C.....dd....TTTTTCC~~~~~~
+  TTTTT.......TTTTTT.C.....dd..........C~~~~~~
+  TTTT.~~~~~....TTT..CC....dd..........CC~~~~~
+  TTTT~~~~~~~.........C....dd...........C~~~~~
+  TTTT~~~~~~~.........C....dd...........C~~~~~
+  TTT.~~~~~~~.........C....ddd..........C~~~~~
+  TTT..~~~~~..dd......C....ddd.........CC~~~~~
+  TTT........ddd.....CC.....dd.........C~~~~~~
+  CCT.......ddd...TT.CC.....dd.........C~~~~~~
+  CCCT......dd...TTTCCC.....ddd....g...C~~~~~~
+  CCCCCCgg..dd...TTCCC.....dddd........C~~~~~~
+  TCCCCCCgg.dd...CCCCC....ddddd..ggggg.C~~~~~~
+  TTCCCCCCC.ddCCCCCCC.....dddddd.ggggg.C~~~~~~
+  TTTT.CCCC.ddCCCCCC.....dddd.dd.gggggCC~~~~~~
+  TTTT..CCCSSSCCCC......ddd...dddgggggC~~~~~~~
+  TTTT....CSSSC.......dddd....dddggggCC~~~~~~~
+  TTTT....CSSSC....dddddd......dd.gggC~~~~~~~~
+  TTTT.....SSS..dddddddd.......dd..g.C~~~~~~~~
+  TTTT.....,dd.dddddddd........dd....C~~~~~~~~
+  TTTTT.....ddddddddd.gg......ddd...CC~~~~~~~~
+  TTTTT.....ddddddd.~~~gg.....ddddddC~~~~~~~~~
+  TTTTT............~~~~~gg....ddddddC~~~~~~~~~
+  TTTTT............~~~~~gg...ddd....C~~~~~~~~~
+  TTTTT.....gggggg.~~~~~~~..ddd....CC~~~~~~~~~
+  TTTTT....gggggggg.g~g~~~~.ddd....C~~~~~~~~~~
+  TTTTT....gggggggg...gg~~~~===~~~~~~~~~~~~~~~
+  TTTTT........gggg.......~~===~~~~~~~~~~~~~~~
+  TTTTTTTTTggggggg..........dd.....~~~~~~~~~~~
+  TTTTTTTTTTgggg............dd.....C~~~~~~~~~~
+  TTTTTTTTTT................ddd....CC~~~~~~~~~
+  TTTTTTTTTT...............dddd.....C~~~~~~~~~
+  TTTTT.TTTT......ddddddddddddd.....CC~~~~~~~~
+  TTTTT..TT......dddddddddddddd......C~~~~~~~~
+  TTTTT.......dddddddddddd...........C~~~~~~~~
+  TTTTT.....dddddddd..ddd............C~~~~~~~~
+  TTTTT....dddd.......ddd..........ggC~~~~~~~~
+  TTTTT....ddd..ggggg.ddd.CCCC....gggC~~~~~~~~
+  TTTTT...ddd..gggggCCCSSSCCCCCCCggggC~~~~~~~~
+  TTTTT...ddd.ggggCCCCCSSSCCCCCCCCCggCC~~~~~~~
+  CCCCC.......ggCCCCCCCSSSC..CCCCCCCCCC~~~~~~~
+  CCCCCCCCSSSCCCCCCCCg.SSS......CCCCCCC~~~~~~~
+  CCCCCCCCSSSCCCCCC....ddddddd...gCCCCC.~~~~~~
+  TTTTCCCCSSSCCCC.......dddddd...ggg.CC.~~~~~~
+  TTTTT...SSS.....................ggg...~~~~~~
+  TTTTT...ddd...........................~~~~~~
+  TTTTT...ddd...........................~~~~~~
+  TTTTTT..ddd...........................~~~~~~
+  TTTTTTT.ddddd.........................~~~~~~
+  TTTTTTT..ddddd.........................~~~~~
+  TTTTTTT...ddddd......TTT...............~~~~~
+  TTTTTT.....ddddd.....TTTTT.............~~~~~
+  TTTTTgg.....dddd........Tgggg..........~~~~~
+  TTTTgggg....ddddd......ggggggg........~~~~~~
+  TTTTggggg....dddd.....ggggggggg...TTTT~~~~~~
+  TTTTggggg....dddd.....ggggggggg..TTTT~~~~~~~
+  TTTTggggg.....ddd.....gggggggggg.TTT~~~~~~~~
+  TTTTTgggg......dd.....gggggggggg..TT~~~~~~~~
+  TTTTTgggg......dd.................TT~~~~~~~~
+  TTTTTggg.......dd......ggggggg.....T~~~~~~~~
+  TTTTTTT........dd.......ggg.........~~~~~~~~
+  TTTTTTTTTTTT..ddd....TTTTTTTTT.....~~~~~~~~~
+  TTTTTTTTTTTT..ddd....TTTTTTTTT.....~~~~~~~~~
+  TTTTTTTTTTTT..ddd....TTTTTTTTT.....~~~~~~~~~
+heights: |
+  11111122222222111111111111111111111110000000
+  11111222222222221111111111111111111110000000
+  11122222222222222211111111111111111110000000
+  11222222222222222221111111111111111110000000
+  12222222222222222222111111111111111110000000
+  22222222222222222222111111111111111111000000
+  22222222222222222222111111111111111111000000
+  22222222222222222222211111111111111111100000
+  22222222222222222222211111111111111111100000
+  22222222222222222222211111111111111111100000
+  22222222222222222222211111111111111111100000
+  22222222222222222222211111111111111111100000
+  22222222222222222222211111111111111111000000
+  22222222222222222222111111111111111111000000
+  12222222222222222222111111111111111111000000
+  11222222222222222221111111111111111111000000
+  11111222222222222211111111111111111111000000
+  11111122222222221111111111111111111111000000
+  11111111222221111111111111111111111111000000
+  11111111222221111111111111111111111110000000
+  11111111111111111111111111111111111110000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111110000000000
+  11111111111111111111111111111111110000000000
+  11111111111111111111111111111111110000000000
+  11111111111111111111111111111111110000000000
+  11111111111111111111111111111111110000000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111111000000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111111111111111100000000
+  11111111111111111111111110011111111100000000
+  11111111111111111110000000000011111110000000
+  11111111111111111000000000000000111110000000
+  00001111111111100000000000000000000110000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000
+stamps:
+- stamp: t_stairs
+  at: [8, 45]
+- stamp: t_stairs
+  at: [9, 19]
+- stamp: t_stairs
+  at: [21, 42]
+tileblocks: []
+tiles:
+- {tile: 1555, at: [41, 21], layer: 2}
+- {tile: 1563, at: [41, 22], layer: 2}
+- {tile: 1554, at: [40, 3], layer: 2}
+- {tile: 1562, at: [40, 4], layer: 2}
+- {tile: 1554, at: [37, 32], layer: 2}
+- {tile: 1562, at: [37, 33], layer: 2}
+- {tile: 1555, at: [39, 28], layer: 2}
+- {tile: 1563, at: [39, 29], layer: 2}
+- {tile: 1555, at: [37, 22], layer: 2}
+- {tile: 1563, at: [37, 23], layer: 2}
+- {tile: 1554, at: [39, 17], layer: 2}
+- {tile: 1562, at: [39, 18], layer: 2}
+- {tile: 1552, at: [38, 25], layer: 2}
+- {tile: 1553, at: [39, 25], layer: 2}
+- {tile: 1560, at: [38, 26], layer: 2}
+- {tile: 1561, at: [39, 26], layer: 2}
+- {tile: 1554, at: [37, 36], layer: 2}
+- {tile: 1562, at: [37, 37], layer: 2}
+- {tile: 1555, at: [40, 9], layer: 2}
+- {tile: 1563, at: [40, 10], layer: 2}
+- {tile: 1041, at: [22, 0], layer: 1}
+- {tile: 951, at: [24, 0], layer: 1}
+- {tile: 1173, at: [27, 0], layer: 1}
+- {tile: 947, at: [28, 0], layer: 1}
+- {tile: 1164, at: [30, 0], layer: 1}
+- {tile: 951, at: [24, 1], layer: 1}
+- {tile: 939, at: [27, 1], layer: 1}
+- {tile: 955, at: [28, 1], layer: 1}
+- {tile: 947, at: [29, 1], layer: 1}
+- {tile: 1263, at: [30, 1], layer: 1}
+- {tile: 1189, at: [22, 2], layer: 1}
+- {tile: 1041, at: [24, 2], layer: 1}
+- {tile: 958, at: [27, 2], layer: 1}
+- {tile: 1042, at: [28, 2], layer: 1}
+- {tile: 1164, at: [29, 2], layer: 1}
+- {tile: 1173, at: [23, 3], layer: 1}
+- {tile: 947, at: [27, 3], layer: 1}
+- {tile: 947, at: [28, 3], layer: 1}
+- {tile: 1164, at: [29, 3], layer: 1}
+- {tile: 1172, at: [6, 4], layer: 1}
+- {tile: 1164, at: [8, 4], layer: 1}
+- {tile: 1164, at: [10, 4], layer: 1}
+- {tile: 1164, at: [24, 4], layer: 1}
+- {tile: 1164, at: [29, 4], layer: 1}
+- {tile: 1148, at: [5, 5], layer: 1}
+- {tile: 977, at: [6, 5], layer: 1}
+- {tile: 1172, at: [10, 5], layer: 1}
+- {tile: 1180, at: [18, 5], layer: 1}
+- {tile: 1172, at: [22, 5], layer: 1}
+- {tile: 947, at: [24, 5], layer: 1}
+- {tile: 1200, at: [28, 5], layer: 1}
+- {tile: 1203, at: [29, 5], layer: 1}
+- {tile: 947, at: [30, 5], layer: 1}
+- {tile: 958, at: [5, 6], layer: 1}
+- {tile: 1189, at: [7, 6], layer: 1}
+- {tile: 1164, at: [8, 6], layer: 1}
+- {tile: 1164, at: [9, 6], layer: 1}
+- {tile: 1164, at: [11, 6], layer: 1}
+- {tile: 947, at: [20, 6], layer: 1}
+- {tile: 947, at: [21, 6], layer: 1}
+- {tile: 939, at: [22, 6], layer: 1}
+- {tile: 939, at: [23, 6], layer: 1}
+- {tile: 955, at: [24, 6], layer: 1}
+- {tile: 1216, at: [28, 6], layer: 1}
+- {tile: 1219, at: [29, 6], layer: 1}
+- {tile: 955, at: [30, 6], layer: 1}
+- {tile: 947, at: [31, 6], layer: 1}
+- {tile: 947, at: [32, 6], layer: 1}
+- {tile: 939, at: [33, 6], layer: 1}
+- {tile: 1172, at: [34, 6], layer: 1}
+- {tile: 947, at: [35, 6], layer: 1}
+- {tile: 947, at: [36, 6], layer: 1}
+- {tile: 1180, at: [10, 7], layer: 1}
+- {tile: 1042, at: [12, 7], layer: 1}
+- {tile: 1164, at: [13, 7], layer: 1}
+- {tile: 1164, at: [17, 7], layer: 1}
+- {tile: 947, at: [18, 7], layer: 1}
+- {tile: 939, at: [21, 7], layer: 1}
+- {tile: 939, at: [22, 7], layer: 1}
+- {tile: 1164, at: [23, 7], layer: 1}
+- {tile: 955, at: [24, 7], layer: 1}
+- {tile: 947, at: [30, 7], layer: 1}
+- {tile: 939, at: [32, 7], layer: 1}
+- {tile: 947, at: [34, 7], layer: 1}
+- {tile: 955, at: [36, 7], layer: 1}
+- {tile: 1164, at: [11, 8], layer: 1}
+- {tile: 1164, at: [16, 8], layer: 1}
+- {tile: 1042, at: [17, 8], layer: 1}
+- {tile: 1042, at: [18, 8], layer: 1}
+- {tile: 1041, at: [19, 8], layer: 1}
+- {tile: 955, at: [21, 8], layer: 1}
+- {tile: 947, at: [22, 8], layer: 1}
+- {tile: 955, at: [23, 8], layer: 1}
+- {tile: 947, at: [24, 8], layer: 1}
+- {tile: 947, at: [29, 8], layer: 1}
+- {tile: 1042, at: [30, 8], layer: 1}
+- {tile: 1042, at: [31, 8], layer: 1}
+- {tile: 1042, at: [32, 8], layer: 1}
+- {tile: 939, at: [33, 8], layer: 1}
+- {tile: 947, at: [34, 8], layer: 1}
+- {tile: 955, at: [36, 8], layer: 1}
+- {tile: 939, at: [37, 8], layer: 1}
+- {tile: 1041, at: [12, 9], layer: 1}
+- {tile: 1024, at: [15, 9], layer: 1}
+- {tile: 1035, at: [18, 9], layer: 1}
+- {tile: 1042, at: [19, 9], layer: 1}
+- {tile: 955, at: [21, 9], layer: 1}
+- {tile: 939, at: [22, 9], layer: 1}
+- {tile: 947, at: [23, 9], layer: 1}
+- {tile: 947, at: [24, 9], layer: 1}
+- {tile: 955, at: [27, 9], layer: 1}
+- {tile: 955, at: [28, 9], layer: 1}
+- {tile: 955, at: [29, 9], layer: 1}
+- {tile: 951, at: [30, 9], layer: 1}
+- {tile: 1042, at: [31, 9], layer: 1}
+- {tile: 1164, at: [35, 9], layer: 1}
+- {tile: 947, at: [36, 9], layer: 1}
+- {tile: 947, at: [37, 9], layer: 1}
+- {tile: 1042, at: [3, 10], layer: 1}
+- {tile: 1180, at: [11, 10], layer: 1}
+- {tile: 1042, at: [12, 10], layer: 1}
+- {tile: 1042, at: [14, 10], layer: 1}
+- {tile: 1172, at: [15, 10], layer: 1}
+- {tile: 1024, at: [16, 10], layer: 1}
+- {tile: 1164, at: [17, 10], layer: 1}
+- {tile: 1164, at: [18, 10], layer: 1}
+- {tile: 939, at: [21, 10], layer: 1}
+- {tile: 1200, at: [22, 10], layer: 1}
+- {tile: 1202, at: [23, 10], layer: 1}
+- {tile: 1203, at: [24, 10], layer: 1}
+- {tile: 947, at: [28, 10], layer: 1}
+- {tile: 1042, at: [30, 10], layer: 1}
+- {tile: 1164, at: [33, 10], layer: 1}
+- {tile: 939, at: [37, 10], layer: 1}
+- {tile: 1172, at: [3, 11], layer: 1}
+- {tile: 1035, at: [4, 11], layer: 1}
+- {tile: 955, at: [10, 11], layer: 1}
+- {tile: 1164, at: [11, 11], layer: 1}
+- {tile: 1024, at: [15, 11], layer: 1}
+- {tile: 1024, at: [16, 11], layer: 1}
+- {tile: 984, at: [18, 11], layer: 1}
+- {tile: 947, at: [19, 11], layer: 1}
+- {tile: 1216, at: [22, 11], layer: 1}
+- {tile: 1218, at: [23, 11], layer: 1}
+- {tile: 1219, at: [24, 11], layer: 1}
+- {tile: 947, at: [29, 11], layer: 1}
+- {tile: 1164, at: [34, 11], layer: 1}
+- {tile: 1189, at: [35, 11], layer: 1}
+- {tile: 947, at: [36, 11], layer: 1}
+- {tile: 1024, at: [4, 12], layer: 1}
+- {tile: 1024, at: [5, 12], layer: 1}
+- {tile: 1024, at: [6, 12], layer: 1}
+- {tile: 950, at: [7, 12], layer: 1}
+- {tile: 1024, at: [8, 12], layer: 1}
+- {tile: 1042, at: [9, 12], layer: 1}
+- {tile: 1042, at: [10, 12], layer: 1}
+- {tile: 1024, at: [16, 12], layer: 1}
+- {tile: 1024, at: [17, 12], layer: 1}
+- {tile: 1024, at: [18, 12], layer: 1}
+- {tile: 947, at: [22, 12], layer: 1}
+- {tile: 955, at: [23, 12], layer: 1}
+- {tile: 955, at: [24, 12], layer: 1}
+- {tile: 939, at: [28, 12], layer: 1}
+- {tile: 1024, at: [29, 12], layer: 1}
+- {tile: 1024, at: [33, 12], layer: 1}
+- {tile: 1024, at: [34, 12], layer: 1}
+- {tile: 1164, at: [35, 12], layer: 1}
+- {tile: 1042, at: [36, 12], layer: 1}
+- {tile: 955, at: [3, 13], layer: 1}
+- {tile: 1164, at: [8, 13], layer: 1}
+- {tile: 1164, at: [9, 13], layer: 1}
+- {tile: 984, at: [13, 13], layer: 1}
+- {tile: 977, at: [14, 13], layer: 1}
+- {tile: 968, at: [15, 13], layer: 1}
+- {tile: 1041, at: [18, 13], layer: 1}
+- {tile: 947, at: [21, 13], layer: 1}
+- {tile: 955, at: [22, 13], layer: 1}
+- {tile: 947, at: [23, 13], layer: 1}
+- {tile: 955, at: [25, 13], layer: 1}
+- {tile: 947, at: [28, 13], layer: 1}
+- {tile: 939, at: [35, 13], layer: 1}
+- {tile: 947, at: [36, 13], layer: 1}
+- {tile: 947, at: [4, 14], layer: 1}
+- {tile: 1041, at: [5, 14], layer: 1}
+- {tile: 1041, at: [6, 14], layer: 1}
+- {tile: 1189, at: [9, 14], layer: 1}
+- {tile: 984, at: [13, 14], layer: 1}
+- {tile: 958, at: [14, 14], layer: 1}
+- {tile: 955, at: [21, 14], layer: 1}
+- {tile: 955, at: [22, 14], layer: 1}
+- {tile: 947, at: [23, 14], layer: 1}
+- {tile: 947, at: [25, 14], layer: 1}
+- {tile: 1172, at: [31, 14], layer: 1}
+- {tile: 939, at: [34, 14], layer: 1}
+- {tile: 947, at: [35, 14], layer: 1}
+- {tile: 947, at: [36, 14], layer: 1}
+- {tile: 958, at: [12, 15], layer: 1}
+- {tile: 951, at: [14, 15], layer: 1}
+- {tile: 1164, at: [20, 15], layer: 1}
+- {tile: 947, at: [22, 15], layer: 1}
+- {tile: 947, at: [23, 15], layer: 1}
+- {tile: 947, at: [24, 15], layer: 1}
+- {tile: 947, at: [29, 15], layer: 1}
+- {tile: 939, at: [35, 15], layer: 1}
+- {tile: 947, at: [36, 15], layer: 1}
+- {tile: 1041, at: [12, 16], layer: 1}
+- {tile: 976, at: [13, 16], layer: 1}
+- {tile: 958, at: [14, 16], layer: 1}
+- {tile: 947, at: [20, 16], layer: 1}
+- {tile: 939, at: [21, 16], layer: 1}
+- {tile: 1172, at: [22, 16], layer: 1}
+- {tile: 947, at: [23, 16], layer: 1}
+- {tile: 1024, at: [29, 16], layer: 1}
+- {tile: 1042, at: [36, 16], layer: 1}
+- {tile: 947, at: [19, 17], layer: 1}
+- {tile: 947, at: [20, 17], layer: 1}
+- {tile: 1024, at: [21, 17], layer: 1}
+- {tile: 1024, at: [22, 17], layer: 1}
+- {tile: 955, at: [23, 17], layer: 1}
+- {tile: 947, at: [30, 17], layer: 1}
+- {tile: 969, at: [18, 18], layer: 1}
+- {tile: 955, at: [19, 18], layer: 1}
+- {tile: 1042, at: [20, 18], layer: 1}
+- {tile: 947, at: [21, 18], layer: 1}
+- {tile: 947, at: [30, 18], layer: 1}
+- {tile: 955, at: [4, 19], layer: 1}
+- {tile: 1164, at: [5, 19], layer: 1}
+- {tile: 969, at: [18, 19], layer: 1}
+- {tile: 947, at: [19, 19], layer: 1}
+- {tile: 1041, at: [20, 19], layer: 1}
+- {tile: 947, at: [21, 19], layer: 1}
+- {tile: 947, at: [25, 19], layer: 1}
+- {tile: 1164, at: [26, 19], layer: 1}
+- {tile: 955, at: [4, 20], layer: 1}
+- {tile: 955, at: [5, 20], layer: 1}
+- {tile: 1164, at: [6, 20], layer: 1}
+- {tile: 947, at: [13, 20], layer: 1}
+- {tile: 939, at: [14, 20], layer: 1}
+- {tile: 1164, at: [15, 20], layer: 1}
+- {tile: 958, at: [18, 20], layer: 1}
+- {tile: 939, at: [19, 20], layer: 1}
+- {tile: 950, at: [24, 20], layer: 1}
+- {tile: 947, at: [5, 21], layer: 1}
+- {tile: 947, at: [13, 21], layer: 1}
+- {tile: 947, at: [14, 21], layer: 1}
+- {tile: 947, at: [15, 21], layer: 1}
+- {tile: 947, at: [23, 21], layer: 1}
+- {tile: 939, at: [24, 21], layer: 1}
+- {tile: 1164, at: [27, 21], layer: 1}
+- {tile: 947, at: [31, 21], layer: 1}
+- {tile: 955, at: [4, 22], layer: 1}
+- {tile: 947, at: [5, 22], layer: 1}
+- {tile: 1172, at: [7, 22], layer: 1}
+- {tile: 1180, at: [12, 22], layer: 1}
+- {tile: 955, at: [13, 22], layer: 1}
+- {tile: 955, at: [22, 22], layer: 1}
+- {tile: 939, at: [23, 22], layer: 1}
+- {tile: 958, at: [24, 22], layer: 1}
+- {tile: 947, at: [25, 22], layer: 1}
+- {tile: 1172, at: [26, 22], layer: 1}
+- {tile: 1035, at: [31, 22], layer: 1}
+- {tile: 939, at: [32, 22], layer: 1}
+- {tile: 947, at: [34, 22], layer: 1}
+- {tile: 968, at: [4, 23], layer: 1}
+- {tile: 939, at: [5, 23], layer: 1}
+- {tile: 976, at: [6, 23], layer: 1}
+- {tile: 1024, at: [12, 23], layer: 1}
+- {tile: 947, at: [21, 23], layer: 1}
+- {tile: 955, at: [22, 23], layer: 1}
+- {tile: 939, at: [24, 23], layer: 1}
+- {tile: 939, at: [25, 23], layer: 1}
+- {tile: 1172, at: [28, 23], layer: 1}
+- {tile: 1035, at: [31, 23], layer: 1}
+- {tile: 955, at: [32, 23], layer: 1}
+- {tile: 955, at: [33, 23], layer: 1}
+- {tile: 947, at: [34, 23], layer: 1}
+- {tile: 939, at: [5, 24], layer: 1}
+- {tile: 955, at: [6, 24], layer: 1}
+- {tile: 947, at: [7, 24], layer: 1}
+- {tile: 1041, at: [8, 24], layer: 1}
+- {tile: 1024, at: [9, 24], layer: 1}
+- {tile: 955, at: [19, 24], layer: 1}
+- {tile: 1042, at: [22, 24], layer: 1}
+- {tile: 939, at: [23, 24], layer: 1}
+- {tile: 939, at: [24, 24], layer: 1}
+- {tile: 1024, at: [25, 24], layer: 1}
+- {tile: 1024, at: [26, 24], layer: 1}
+- {tile: 1035, at: [31, 24], layer: 1}
+- {tile: 939, at: [32, 24], layer: 1}
+- {tile: 955, at: [33, 24], layer: 1}
+- {tile: 1042, at: [8, 25], layer: 1}
+- {tile: 1172, at: [9, 25], layer: 1}
+- {tile: 958, at: [17, 25], layer: 1}
+- {tile: 947, at: [23, 25], layer: 1}
+- {tile: 955, at: [24, 25], layer: 1}
+- {tile: 1172, at: [25, 25], layer: 1}
+- {tile: 955, at: [26, 25], layer: 1}
+- {tile: 1189, at: [27, 25], layer: 1}
+- {tile: 1172, at: [7, 26], layer: 1}
+- {tile: 1173, at: [10, 26], layer: 1}
+- {tile: 1024, at: [12, 26], layer: 1}
+- {tile: 939, at: [16, 26], layer: 1}
+- {tile: 947, at: [24, 26], layer: 1}
+- {tile: 955, at: [26, 26], layer: 1}
+- {tile: 1148, at: [5, 27], layer: 1}
+- {tile: 1165, at: [9, 27], layer: 1}
+- {tile: 1189, at: [11, 27], layer: 1}
+- {tile: 1024, at: [12, 27], layer: 1}
+- {tile: 1164, at: [16, 27], layer: 1}
+- {tile: 947, at: [24, 27], layer: 1}
+- {tile: 1172, at: [25, 27], layer: 1}
+- {tile: 947, at: [26, 27], layer: 1}
+- {tile: 1172, at: [33, 27], layer: 1}
+- {tile: 1164, at: [7, 28], layer: 1}
+- {tile: 947, at: [24, 28], layer: 1}
+- {tile: 939, at: [25, 28], layer: 1}
+- {tile: 977, at: [29, 28], layer: 1}
+- {tile: 977, at: [30, 28], layer: 1}
+- {tile: 1164, at: [6, 29], layer: 1}
+- {tile: 1173, at: [7, 29], layer: 1}
+- {tile: 1042, at: [8, 29], layer: 1}
+- {tile: 947, at: [25, 29], layer: 1}
+- {tile: 1024, at: [29, 29], layer: 1}
+- {tile: 969, at: [31, 29], layer: 1}
+- {tile: 977, at: [32, 29], layer: 1}
+- {tile: 1164, at: [5, 30], layer: 1}
+- {tile: 1041, at: [8, 30], layer: 1}
+- {tile: 1164, at: [18, 30], layer: 1}
+- {tile: 1164, at: [19, 30], layer: 1}
+- {tile: 1024, at: [17, 31], layer: 1}
+- {tile: 1164, at: [18, 31], layer: 1}
+- {tile: 939, at: [20, 31], layer: 1}
+- {tile: 947, at: [21, 31], layer: 1}
+- {tile: 1035, at: [22, 31], layer: 1}
+- {tile: 1172, at: [23, 31], layer: 1}
+- {tile: 1180, at: [16, 32], layer: 1}
+- {tile: 1164, at: [17, 32], layer: 1}
+- {tile: 1172, at: [19, 32], layer: 1}
+- {tile: 1035, at: [20, 32], layer: 1}
+- {tile: 1164, at: [21, 32], layer: 1}
+- {tile: 1041, at: [24, 32], layer: 1}
+- {tile: 1041, at: [25, 32], layer: 1}
+- {tile: 947, at: [28, 32], layer: 1}
+- {tile: 950, at: [29, 32], layer: 1}
+- {tile: 1164, at: [31, 32], layer: 1}
+- {tile: 1041, at: [32, 32], layer: 1}
+- {tile: 939, at: [15, 33], layer: 1}
+- {tile: 1164, at: [17, 33], layer: 1}
+- {tile: 1164, at: [19, 33], layer: 1}
+- {tile: 1035, at: [20, 33], layer: 1}
+- {tile: 958, at: [21, 33], layer: 1}
+- {tile: 1024, at: [24, 33], layer: 1}
+- {tile: 939, at: [25, 33], layer: 1}
+- {tile: 947, at: [28, 33], layer: 1}
+- {tile: 1172, at: [29, 33], layer: 1}
+- {tile: 1172, at: [31, 33], layer: 1}
+- {tile: 1035, at: [11, 34], layer: 1}
+- {tile: 947, at: [12, 34], layer: 1}
+- {tile: 947, at: [13, 34], layer: 1}
+- {tile: 1042, at: [14, 34], layer: 1}
+- {tile: 977, at: [15, 34], layer: 1}
+- {tile: 968, at: [16, 34], layer: 1}
+- {tile: 1189, at: [18, 34], layer: 1}
+- {tile: 1164, at: [20, 34], layer: 1}
+- {tile: 976, at: [21, 34], layer: 1}
+- {tile: 968, at: [22, 34], layer: 1}
+- {tile: 1035, at: [24, 34], layer: 1}
+- {tile: 1024, at: [25, 34], layer: 1}
+- {tile: 947, at: [29, 34], layer: 1}
+- {tile: 1164, at: [30, 34], layer: 1}
+- {tile: 1164, at: [32, 34], layer: 1}
+- {tile: 955, at: [13, 35], layer: 1}
+- {tile: 1041, at: [14, 35], layer: 1}
+- {tile: 1035, at: [15, 35], layer: 1}
+- {tile: 1035, at: [17, 35], layer: 1}
+- {tile: 1173, at: [20, 35], layer: 1}
+- {tile: 1189, at: [23, 35], layer: 1}
+- {tile: 1024, at: [24, 35], layer: 1}
+- {tile: 939, at: [29, 35], layer: 1}
+- {tile: 1164, at: [30, 35], layer: 1}
+- {tile: 1148, at: [5, 36], layer: 1}
+- {tile: 1148, at: [10, 36], layer: 1}
+- {tile: 1042, at: [12, 36], layer: 1}
+- {tile: 1042, at: [13, 36], layer: 1}
+- {tile: 1042, at: [14, 36], layer: 1}
+- {tile: 976, at: [15, 36], layer: 1}
+- {tile: 1164, at: [29, 36], layer: 1}
+- {tile: 1024, at: [31, 36], layer: 1}
+- {tile: 1041, at: [32, 36], layer: 1}
+- {tile: 947, at: [6, 37], layer: 1}
+- {tile: 1164, at: [12, 37], layer: 1}
+- {tile: 1041, at: [14, 37], layer: 1}
+- {tile: 1172, at: [30, 37], layer: 1}
+- {tile: 1164, at: [34, 37], layer: 1}
+- {tile: 1164, at: [6, 38], layer: 1}
+- {tile: 947, at: [7, 38], layer: 1}
+- {tile: 1042, at: [24, 38], layer: 1}
+- {tile: 939, at: [25, 38], layer: 1}
+- {tile: 947, at: [26, 38], layer: 1}
+- {tile: 939, at: [27, 38], layer: 1}
+- {tile: 1042, at: [28, 38], layer: 1}
+- {tile: 1041, at: [30, 38], layer: 1}
+- {tile: 1042, at: [31, 38], layer: 1}
+- {tile: 1041, at: [32, 38], layer: 1}
+- {tile: 1172, at: [33, 38], layer: 1}
+- {tile: 1164, at: [6, 39], layer: 1}
+- {tile: 950, at: [9, 39], layer: 1}
+- {tile: 1164, at: [19, 39], layer: 1}
+- {tile: 1164, at: [25, 39], layer: 1}
+- {tile: 1164, at: [29, 39], layer: 1}
+- {tile: 1164, at: [31, 39], layer: 1}
+- {tile: 1041, at: [32, 39], layer: 1}
+- {tile: 1172, at: [33, 39], layer: 1}
+- {tile: 1164, at: [5, 40], layer: 1}
+- {tile: 1164, at: [13, 40], layer: 1}
+- {tile: 1172, at: [14, 40], layer: 1}
+- {tile: 1164, at: [15, 40], layer: 1}
+- {tile: 1164, at: [19, 40], layer: 1}
+- {tile: 1164, at: [24, 40], layer: 1}
+- {tile: 1189, at: [25, 40], layer: 1}
+- {tile: 1164, at: [27, 40], layer: 1}
+- {tile: 1164, at: [28, 40], layer: 1}
+- {tile: 1172, at: [30, 40], layer: 1}
+- {tile: 976, at: [5, 41], layer: 1}
+- {tile: 1024, at: [7, 41], layer: 1}
+- {tile: 939, at: [12, 41], layer: 1}
+- {tile: 1172, at: [19, 41], layer: 1}
+- {tile: 1164, at: [23, 41], layer: 1}
+- {tile: 1035, at: [11, 42], layer: 1}
+- {tile: 947, at: [12, 42], layer: 1}
+- {tile: 1164, at: [5, 43], layer: 1}
+- {tile: 1041, at: [6, 44], layer: 1}
+- {tile: 1172, at: [8, 44], layer: 1}
+- {tile: 951, at: [9, 44], layer: 1}
+- {tile: 955, at: [10, 44], layer: 1}
+- {tile: 969, at: [25, 44], layer: 1}
+- {tile: 968, at: [26, 44], layer: 1}
+- {tile: 939, at: [20, 45], layer: 1}
+- {tile: 1172, at: [26, 45], layer: 1}
+- {tile: 947, at: [27, 45], layer: 1}
+- {tile: 1164, at: [28, 45], layer: 1}
+- {tile: 1164, at: [29, 45], layer: 1}
+- {tile: 955, at: [18, 46], layer: 1}
+- {tile: 939, at: [19, 46], layer: 1}
+- {tile: 947, at: [20, 46], layer: 1}
+- {tile: 1164, at: [29, 46], layer: 1}
+- {tile: 1042, at: [30, 46], layer: 1}
+- {tile: 939, at: [15, 47], layer: 1}
+- {tile: 955, at: [16, 47], layer: 1}
+- {tile: 947, at: [17, 47], layer: 1}
+- {tile: 984, at: [18, 47], layer: 1}
+- {tile: 947, at: [19, 47], layer: 1}
+- {tile: 947, at: [20, 47], layer: 1}
+- {tile: 1024, at: [21, 47], layer: 1}
+- {tile: 1024, at: [5, 48], layer: 1}
+- {tile: 1024, at: [7, 48], layer: 1}
+- {tile: 947, at: [11, 48], layer: 1}
+- {tile: 947, at: [12, 48], layer: 1}
+- {tile: 1035, at: [13, 48], layer: 1}
+- {tile: 939, at: [15, 48], layer: 1}
+- {tile: 939, at: [16, 48], layer: 1}
+- {tile: 947, at: [17, 48], layer: 1}
+- {tile: 947, at: [18, 48], layer: 1}
+- {tile: 939, at: [19, 48], layer: 1}
+- {tile: 1024, at: [20, 48], layer: 1}
+- {tile: 947, at: [21, 48], layer: 1}
+- {tile: 1024, at: [22, 48], layer: 1}
+- {tile: 1024, at: [23, 48], layer: 1}
+- {tile: 2048, at: [24, 48], layer: 1}
+- {tile: 2049, at: [25, 48], layer: 1}
+- {tile: 1189, at: [26, 48], layer: 1}
+- {tile: 1164, at: [27, 48], layer: 1}
+- {tile: 2049, at: [28, 48], layer: 1}
+- {tile: 2049, at: [29, 48], layer: 1}
+- {tile: 2049, at: [30, 48], layer: 1}
+- {tile: 2049, at: [31, 48], layer: 1}
+- {tile: 1164, at: [35, 48], layer: 1}
+- {tile: 1189, at: [37, 48], layer: 1}
+- {tile: 1035, at: [11, 49], layer: 1}
+- {tile: 955, at: [12, 49], layer: 1}
+- {tile: 947, at: [13, 49], layer: 1}
+- {tile: 939, at: [14, 49], layer: 1}
+- {tile: 947, at: [15, 49], layer: 1}
+- {tile: 939, at: [16, 49], layer: 1}
+- {tile: 947, at: [17, 49], layer: 1}
+- {tile: 947, at: [18, 49], layer: 1}
+- {tile: 1164, at: [19, 49], layer: 1}
+- {tile: 955, at: [20, 49], layer: 1}
+- {tile: 1024, at: [21, 49], layer: 1}
+- {tile: 1024, at: [22, 49], layer: 1}
+- {tile: 1024, at: [23, 49], layer: 1}
+- {tile: 2056, at: [24, 49], layer: 1}
+- {tile: 1172, at: [25, 49], layer: 1}
+- {tile: 1164, at: [26, 49], layer: 1}
+- {tile: 976, at: [27, 49], layer: 1}
+- {tile: 2058, at: [33, 49], layer: 1}
+- {tile: 1164, at: [36, 49], layer: 1}
+- {tile: 958, at: [37, 49], layer: 1}
+- {tile: 947, at: [5, 50], layer: 1}
+- {tile: 1041, at: [6, 50], layer: 1}
+- {tile: 947, at: [7, 50], layer: 1}
+- {tile: 947, at: [11, 50], layer: 1}
+- {tile: 955, at: [14, 50], layer: 1}
+- {tile: 955, at: [18, 50], layer: 1}
+- {tile: 1164, at: [19, 50], layer: 1}
+- {tile: 1041, at: [20, 50], layer: 1}
+- {tile: 1041, at: [21, 50], layer: 1}
+- {tile: 1024, at: [22, 50], layer: 1}
+- {tile: 1024, at: [23, 50], layer: 1}
+- {tile: 2056, at: [24, 50], layer: 1}
+- {tile: 1172, at: [25, 50], layer: 1}
+- {tile: 3514, at: [26, 50], layer: 1}
+- {tile: 3514, at: [28, 50], layer: 1}
+- {tile: 1189, at: [29, 50], layer: 1}
+- {tile: 3514, at: [30, 50], layer: 1}
+- {tile: 3513, at: [31, 50], layer: 1}
+- {tile: 2058, at: [33, 50], layer: 1}
+- {tile: 1180, at: [34, 50], layer: 1}
+- {tile: 1189, at: [35, 50], layer: 1}
+- {tile: 950, at: [37, 50], layer: 1}
+- {tile: 955, at: [6, 51], layer: 1}
+- {tile: 947, at: [7, 51], layer: 1}
+- {tile: 947, at: [11, 51], layer: 1}
+- {tile: 939, at: [12, 51], layer: 1}
+- {tile: 939, at: [13, 51], layer: 1}
+- {tile: 947, at: [15, 51], layer: 1}
+- {tile: 947, at: [16, 51], layer: 1}
+- {tile: 939, at: [17, 51], layer: 1}
+- {tile: 955, at: [18, 51], layer: 1}
+- {tile: 1042, at: [20, 51], layer: 1}
+- {tile: 951, at: [21, 51], layer: 1}
+- {tile: 939, at: [22, 51], layer: 1}
+- {tile: 947, at: [23, 51], layer: 1}
+- {tile: 2056, at: [24, 51], layer: 1}
+- {tile: 1164, at: [25, 51], layer: 1}
+- {tile: 1172, at: [26, 51], layer: 1}
+- {tile: 3514, at: [27, 51], layer: 1}
+- {tile: 3514, at: [29, 51], layer: 1}
+- {tile: 955, at: [30, 51], layer: 1}
+- {tile: 3514, at: [31, 51], layer: 1}
+- {tile: 939, at: [32, 51], layer: 1}
+- {tile: 2058, at: [33, 51], layer: 1}
+- {tile: 947, at: [7, 52], layer: 1}
+- {tile: 947, at: [13, 52], layer: 1}
+- {tile: 1024, at: [14, 52], layer: 1}
+- {tile: 1024, at: [15, 52], layer: 1}
+- {tile: 939, at: [16, 52], layer: 1}
+- {tile: 939, at: [17, 52], layer: 1}
+- {tile: 969, at: [18, 52], layer: 1}
+- {tile: 947, at: [19, 52], layer: 1}
+- {tile: 1164, at: [20, 52], layer: 1}
+- {tile: 2056, at: [24, 52], layer: 1}
+- {tile: 3514, at: [26, 52], layer: 1}
+- {tile: 1164, at: [27, 52], layer: 1}
+- {tile: 3514, at: [28, 52], layer: 1}
+- {tile: 1172, at: [29, 52], layer: 1}
+- {tile: 3514, at: [30, 52], layer: 1}
+- {tile: 2058, at: [33, 52], layer: 1}
+- {tile: 1024, at: [14, 53], layer: 1}
+- {tile: 1024, at: [15, 53], layer: 1}
+- {tile: 1024, at: [16, 53], layer: 1}
+- {tile: 947, at: [17, 53], layer: 1}
+- {tile: 955, at: [18, 53], layer: 1}
+- {tile: 947, at: [19, 53], layer: 1}
+- {tile: 1042, at: [20, 53], layer: 1}
+- {tile: 1164, at: [21, 53], layer: 1}
+- {tile: 2056, at: [24, 53], layer: 1}
+- {tile: 1042, at: [26, 53], layer: 1}
+- {tile: 3514, at: [27, 53], layer: 1}
+- {tile: 3514, at: [29, 53], layer: 1}
+- {tile: 1042, at: [30, 53], layer: 1}
+- {tile: 3514, at: [31, 53], layer: 1}
+- {tile: 2058, at: [33, 53], layer: 1}
+- {tile: 1164, at: [7, 54], layer: 1}
+- {tile: 1164, at: [8, 54], layer: 1}
+- {tile: 947, at: [15, 54], layer: 1}
+- {tile: 1042, at: [16, 54], layer: 1}
+- {tile: 939, at: [17, 54], layer: 1}
+- {tile: 969, at: [18, 54], layer: 1}
+- {tile: 1172, at: [19, 54], layer: 1}
+- {tile: 2064, at: [24, 54], layer: 1}
+- {tile: 2065, at: [25, 54], layer: 1}
+- {tile: 2065, at: [26, 54], layer: 1}
+- {tile: 2065, at: [27, 54], layer: 1}
+- {tile: 2065, at: [28, 54], layer: 1}
+- {tile: 2065, at: [29, 54], layer: 1}
+- {tile: 2065, at: [30, 54], layer: 1}
+- {tile: 2065, at: [31, 54], layer: 1}
+- {tile: 2065, at: [32, 54], layer: 1}
+- {tile: 2066, at: [33, 54], layer: 1}
+- {tile: 1024, at: [34, 54], layer: 1}
+- {tile: 1024, at: [35, 54], layer: 1}
+- {tile: 1164, at: [36, 54], layer: 1}
+- {tile: 1041, at: [38, 54], layer: 1}
+- {tile: 1024, at: [6, 55], layer: 1}
+- {tile: 1024, at: [7, 55], layer: 1}
+- {tile: 1189, at: [8, 55], layer: 1}
+- {tile: 1035, at: [9, 55], layer: 1}
+- {tile: 939, at: [16, 55], layer: 1}
+- {tile: 947, at: [17, 55], layer: 1}
+- {tile: 939, at: [18, 55], layer: 1}
+- {tile: 1042, at: [20, 55], layer: 1}
+- {tile: 947, at: [27, 55], layer: 1}
+- {tile: 1164, at: [28, 55], layer: 1}
+- {tile: 1024, at: [31, 55], layer: 1}
+- {tile: 1024, at: [32, 55], layer: 1}
+- {tile: 1024, at: [33, 55], layer: 1}
+- {tile: 1024, at: [34, 55], layer: 1}
+- {tile: 1024, at: [36, 55], layer: 1}
+- {tile: 1035, at: [38, 55], layer: 1}
+- {tile: 951, at: [7, 56], layer: 1}
+- {tile: 2073, at: [10, 56], layer: 1}
+- {tile: 2073, at: [11, 56], layer: 1}
+- {tile: 2073, at: [16, 56], layer: 1}
+- {tile: 2073, at: [17, 56], layer: 1}
+- {tile: 2072, at: [18, 56], layer: 1}
+- {tile: 2073, at: [19, 56], layer: 1}
+- {tile: 2073, at: [20, 56], layer: 1}
+- {tile: 2072, at: [21, 56], layer: 1}
+- {tile: 2073, at: [22, 56], layer: 1}
+- {tile: 2073, at: [23, 56], layer: 1}
+- {tile: 1172, at: [29, 56], layer: 1}
+- {tile: 1024, at: [31, 56], layer: 1}
+- {tile: 1024, at: [32, 56], layer: 1}
+- {tile: 1173, at: [33, 56], layer: 1}
+- {tile: 1024, at: [34, 56], layer: 1}
+- {tile: 1041, at: [38, 56], layer: 1}
+- {tile: 950, at: [8, 57], layer: 1}
+- {tile: 1172, at: [9, 57], layer: 1}
+- {tile: 1164, at: [10, 57], layer: 1}
+- {tile: 984, at: [18, 57], layer: 1}
+- {tile: 1024, at: [30, 57], layer: 1}
+- {tile: 1024, at: [31, 57], layer: 1}
+- {tile: 1024, at: [32, 57], layer: 1}
+- {tile: 984, at: [33, 57], layer: 1}
+- {tile: 1164, at: [36, 57], layer: 1}
+- {tile: 1164, at: [10, 58], layer: 1}
+- {tile: 1172, at: [18, 58], layer: 1}
+- {tile: 1189, at: [19, 58], layer: 1}
+- {tile: 1024, at: [31, 58], layer: 1}
+- {tile: 968, at: [9, 59], layer: 1}
+- {tile: 977, at: [10, 59], layer: 1}
+- {tile: 969, at: [11, 59], layer: 1}
+- {tile: 1164, at: [18, 59], layer: 1}
+- {tile: 1189, at: [21, 59], layer: 1}
+- {tile: 1024, at: [31, 59], layer: 1}
+- {tile: 1024, at: [32, 59], layer: 1}
+- {tile: 977, at: [9, 60], layer: 1}
+- {tile: 976, at: [10, 60], layer: 1}
+- {tile: 947, at: [11, 60], layer: 1}
+- {tile: 947, at: [12, 60], layer: 1}
+- {tile: 939, at: [13, 60], layer: 1}
+- {tile: 1042, at: [32, 60], layer: 1}
+- {tile: 1041, at: [10, 61], layer: 1}
+- {tile: 939, at: [11, 61], layer: 1}
+- {tile: 939, at: [12, 61], layer: 1}
+- {tile: 955, at: [13, 61], layer: 1}
+- {tile: 955, at: [14, 61], layer: 1}
+- {tile: 939, at: [32, 61], layer: 1}
+- {tile: 947, at: [33, 61], layer: 1}
+- {tile: 1172, at: [9, 62], layer: 1}
+- {tile: 947, at: [11, 62], layer: 1}
+- {tile: 955, at: [12, 62], layer: 1}
+- {tile: 955, at: [13, 62], layer: 1}
+- {tile: 939, at: [14, 62], layer: 1}
+- {tile: 1172, at: [20, 62], layer: 1}
+- {tile: 1172, at: [8, 63], layer: 1}
+- {tile: 1164, at: [10, 63], layer: 1}
+- {tile: 1200, at: [11, 63], layer: 1}
+- {tile: 1202, at: [12, 63], layer: 1}
+- {tile: 1203, at: [13, 63], layer: 1}
+- {tile: 947, at: [14, 63], layer: 1}
+- {tile: 1172, at: [17, 63], layer: 1}
+- {tile: 969, at: [18, 63], layer: 1}
+- {tile: 968, at: [19, 63], layer: 1}
+- {tile: 947, at: [20, 63], layer: 1}
+- {tile: 947, at: [21, 63], layer: 1}
+- {tile: 947, at: [22, 63], layer: 1}
+- {tile: 1164, at: [32, 63], layer: 1}
+- {tile: 955, at: [33, 63], layer: 1}
+- {tile: 955, at: [34, 63], layer: 1}
+- {tile: 1164, at: [10, 64], layer: 1}
+- {tile: 1216, at: [11, 64], layer: 1}
+- {tile: 1218, at: [12, 64], layer: 1}
+- {tile: 1219, at: [13, 64], layer: 1}
+- {tile: 976, at: [17, 64], layer: 1}
+- {tile: 1200, at: [18, 64], layer: 1}
+- {tile: 1203, at: [19, 64], layer: 1}
+- {tile: 1042, at: [20, 64], layer: 1}
+- {tile: 947, at: [21, 64], layer: 1}
+- {tile: 947, at: [22, 64], layer: 1}
+- {tile: 939, at: [23, 64], layer: 1}
+- {tile: 947, at: [27, 64], layer: 1}
+- {tile: 939, at: [28, 64], layer: 1}
+- {tile: 1024, at: [29, 64], layer: 1}
+- {tile: 1024, at: [30, 64], layer: 1}
+- {tile: 1164, at: [32, 64], layer: 1}
+- {tile: 955, at: [33, 64], layer: 1}
+- {tile: 955, at: [34, 64], layer: 1}
+- {tile: 947, at: [35, 64], layer: 1}
+- {tile: 977, at: [12, 65], layer: 1}
+- {tile: 969, at: [13, 65], layer: 1}
+- {tile: 968, at: [17, 65], layer: 1}
+- {tile: 1216, at: [18, 65], layer: 1}
+- {tile: 1219, at: [19, 65], layer: 1}
+- {tile: 947, at: [20, 65], layer: 1}
+- {tile: 1024, at: [30, 65], layer: 1}
+- {tile: 1024, at: [31, 65], layer: 1}
+- {tile: 955, at: [34, 65], layer: 1}
+- {tile: 1263, at: [12, 66], layer: 1}
+- {tile: 939, at: [18, 66], layer: 1}
+- {tile: 939, at: [19, 66], layer: 1}
+- {tile: 947, at: [20, 66], layer: 1}
+- {tile: 1041, at: [33, 66], layer: 1}
+- {tile: 1042, at: [34, 66], layer: 1}
+- {tile: 1024, at: [12, 67], layer: 1}
+- {tile: 1035, at: [13, 67], layer: 1}
+- {tile: 955, at: [17, 67], layer: 1}
+- {tile: 955, at: [18, 67], layer: 1}
+- {tile: 939, at: [20, 67], layer: 1}
+- {tile: 1164, at: [32, 67], layer: 1}
+- {tile: 1164, at: [26, 4], layer: 2}
+- {tile: 1170, at: [26, 6], layer: 2}
+- {tile: 1675, at: [7, 9], layer: 2}
+- {tile: 1171, at: [26, 13], layer: 2}
+- {tile: 1365, at: [30, 15], layer: 2}
+- {tile: 1366, at: [31, 15], layer: 2}
+- {tile: 1366, at: [32, 15], layer: 2}
+- {tile: 1366, at: [33, 15], layer: 2}
+- {tile: 1367, at: [34, 15], layer: 2}
+- {tile: 1171, at: [28, 16], layer: 2}
+- {tile: 1164, at: [16, 22], layer: 2}
+- {tile: 1365, at: [5, 31], layer: 2}
+- {tile: 1366, at: [6, 31], layer: 2}
+- {tile: 1366, at: [7, 31], layer: 2}
+- {tile: 1366, at: [8, 31], layer: 2}
+- {tile: 1366, at: [9, 31], layer: 2}
+- {tile: 1366, at: [10, 31], layer: 2}
+- {tile: 1366, at: [11, 31], layer: 2}
+- {tile: 1367, at: [12, 31], layer: 2}
+- {tile: 1171, at: [27, 32], layer: 2}
+- {tile: 1170, at: [23, 36], layer: 2}
+- {tile: 1164, at: [16, 37], layer: 2}
+- {tile: 1171, at: [10, 39], layer: 2}
+- {tile: 1171, at: [13, 39], layer: 2}
+- {tile: 3506, at: [26, 49], layer: 2}
+- {tile: 3506, at: [28, 49], layer: 2}
+- {tile: 3506, at: [30, 49], layer: 2}
+- {tile: 3505, at: [31, 49], layer: 2}
+- {tile: 3506, at: [27, 50], layer: 2}
+- {tile: 3506, at: [29, 50], layer: 2}
+- {tile: 3506, at: [31, 50], layer: 2}
+- {tile: 3506, at: [26, 51], layer: 2}
+- {tile: 3506, at: [28, 51], layer: 2}
+- {tile: 3506, at: [30, 51], layer: 2}
+- {tile: 3506, at: [27, 52], layer: 2}
+- {tile: 3506, at: [29, 52], layer: 2}
+- {tile: 3506, at: [31, 52], layer: 2}
+- {tile: 1170, at: [10, 53], layer: 2}
+- {tile: 1171, at: [14, 59], layer: 2}
+- {tile: 1365, at: [22, 62], layer: 2}
+- {tile: 1366, at: [23, 62], layer: 2}
+- {tile: 1366, at: [24, 62], layer: 2}
+- {tile: 1366, at: [25, 62], layer: 2}
+- {tile: 1366, at: [26, 62], layer: 2}
+- {tile: 1366, at: [27, 62], layer: 2}
+- {tile: 1366, at: [28, 62], layer: 2}
+- {tile: 1366, at: [29, 62], layer: 2}
+- {tile: 1366, at: [30, 62], layer: 2}
+- {tile: 1366, at: [31, 62], layer: 2}
+- {tile: 1366, at: [32, 62], layer: 2}
+- {tile: 1367, at: [33, 62], layer: 2}
 events:
-  - {type: sign, at: [11, 44], text: "ROUTE 1\nFerrow's Landing - Hale Orchards"}
-  - {type: npc, name: Juno, at: [12, 40], sprite: trainer_RIVAL2, dir: down,
-     text: "[TODO story] Juno: Let me show you how catching works! Weaken it first, then throw a Poké Ball."}
-  - {type: trainer, at: [15, 28], sight: 4, dir: right, sprite: trainer_YOUNGSTER, trainer: [YOUNGSTER, Pip],
-     intro: "[TODO story] Hey! You're new. Battle me!", after: "[TODO story] The heath's full of Pokémon if you look in the gorse."}
-  - {type: trainer, at: [11, 13], sight: 4, dir: left, sprite: trainer_LASS, trainer: [LASS, Wren],
-     intro: "[TODO story] Off the ferry? Show me what you've got!", after: "[TODO story] You're strong. Juno said you would be."}
-  - {type: item, at: [20, 9], item: POTION}
-  - {type: item, at: [2, 3], item: POKEBALL}
-  - {type: berry, at: [20, 35], berry: ORANBERRY}
+- type: sign
+  at: [18, 62]
+  text: 'ROUTE 1
+
+    Ferrow''s Landing - Hale''s Bramble - Route 2.
+
+    Mind the hedges. The hedges mind you.'
+- type: trainer
+  at: [13, 50]
+  sight: 4
+  dir: down
+  sprite: trainer_YOUNGSTER
+  trainer: [YOUNGSTER, Pim]
+  intro: A trainer! With a real partner! Fight me, I've got a Bidoof and a dream!
+  after: The dream's fine. The Bidoof needs a minute.
+- type: trainer
+  at: [19, 38]
+  sight: 4
+  dir: left
+  sprite: trainer_LASS
+  trainer: [LASS, Dory]
+  intro: My Fletchling only knows Tackle and judgment.
+  after: It's judging me now.
+- type: npc
+  name: Farmhand
+  at: [23, 46]
+  sprite: NPC 03
+  dir: down
+  move: random
+  text: 'Farmhand: Tall grass is where the wild ones are. Juno''ll tell you their Latin names. Nobody asked her to learn those.'
+- type: event
+  name: Juno tutorial
+  at: [8, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 2
+  at: [9, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 3
+  at: [10, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 4
+  at: [11, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 5
+  at: [12, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 6
+  at: [13, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 7
+  at: [14, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 8
+  at: [15, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 9
+  at: [16, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 10
+  at: [17, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 11
+  at: [18, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 12
+  at: [19, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 13
+  at: [20, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: item
+  at: [11, 57]
+  item: POTION
+  hidden: true
+  name: Under the stile
+- type: sign
+  at: [10, 56]
+  post: false
+  name: Stile
+  text: A stile over the hedge bank. Somebody has carved a tally of Wingull into the top rail.
+- type: sign
+  at: [31, 50]
+  post: false
+  name: Scarecrow
+  text: It's wearing a Meridian linesman's cap. Somebody has a sense of humor.
+- type: sign
+  at: [31, 25]
+  post: false
+  name: Lookout board
+  text: 'GULLWATCH LOOKOUT
+
+    On a clear day you can see the Dovetail turn for home.'
+- type: sign
+  at: [12, 11]
+  post: false
+  name: Waystone
+  text: A waystone, older than the lane. EIGHTEEN IN CONCORD, it says. The last line has been chiselled off.
+- type: sign
+  at: [13, 40]
+  post: false
+  name: Old well
+  text: A dry well. Something small has made a nest of ferry tickets at the bottom.
+- type: item
+  at: [32, 33]
+  item: POTION
+- type: item
+  at: [6, 13]
+  item: POKEBALL
+- type: item
+  at: [37, 47]
+  item: REPEL
+  hidden: true
+  name: Cliff-foot cache
+- type: berry
+  at: [34, 47]
+  berry: ORANBERRY
+- type: event
+  name: Atmosphere
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {comment: 'fog: prismfall_seamist (see REQUESTS.md item 3)'}
+    - raw:
+      - 204
+      - [1, prismfall_seamist, 0, 36, 0, 200, 1, 0]
+    - selfswitch: [A, true]
+  - cond: {self: A}

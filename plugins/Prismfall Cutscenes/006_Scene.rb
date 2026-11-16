@@ -43,7 +43,7 @@ module Prismfall
         @tile     = spec[:tile]
         @opacity  = spec[:opacity]
         @front    = spec[:front]
-        z = 1500 + z if @front            # in front of the actors, behind the front FX layer
+        z = 812 + z if @front             # in front of actors standing further back than y = 312
         @off      = 0.0
         @sprites  = Array.new((@tile) ? 3 : 1) do
           s = Sprite.new(scene.viewport)
@@ -606,7 +606,21 @@ module Prismfall
         return [@camera.x + by[0], @camera.y + by[1]]
       end
 
+      # A cut or camera jump ends any pan/zoom still running.
+      def stop_camera_moves
+        @effects.reject! { |e| e.id == :__camera }
+      end
+
+      def camera_tween(dur, ease, &block)
+        stop_camera_moves
+        t = tween(dur, ease, &block)
+        return nil if !t
+        run_effect(t, @time, :__camera)
+        return nil
+      end
+
       def op_camera(a, _dur)
+        stop_camera_moves
         @camera.x, @camera.y = camera_target(a) if a[:at] || a[:to] || a[:by]
         @camera.zoom = quantize_zoom(a[:zoom]) if a[:zoom]
         nil
@@ -624,7 +638,7 @@ module Prismfall
         x1, y1 = camera_target(a)
         z0 = @camera.zoom
         z1 = a[:zoom] || z0
-        tween(dur, a[:ease] || :in_out) do |k, _|
+        camera_tween(dur, a[:ease] || :in_out) do |k, _|
           @camera.x = Util.lerp(x0, x1, k)
           @camera.y = Util.lerp(y0, y1, k)
           @camera.zoom = quantize_zoom(Util.lerp(z0, z1, k))
@@ -634,7 +648,7 @@ module Prismfall
       def op_zoom(a, dur)
         z0 = @camera.zoom
         z1 = (a[:to] || 1.0).to_f
-        tween(dur, a[:ease] || :in_out) { |k, _| @camera.zoom = quantize_zoom(Util.lerp(z0, z1, k)) }
+        camera_tween(dur, a[:ease] || :in_out) { |k, _| @camera.zoom = quantize_zoom(Util.lerp(z0, z1, k)) }
       end
 
       # Zoom moves in 1/16 steps so sprites land on whole pixels more often.

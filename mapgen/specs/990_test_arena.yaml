@@ -968,8 +968,8 @@ events:
   - 12
   to:
     map: 100
-    x: 8
-    y: 16
+    x: 24
+    y: 28
     dir: down
   se: Door exit
 - type: sign

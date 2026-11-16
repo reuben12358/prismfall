@@ -211,6 +211,18 @@ def main():
         im, p, q = wll_part(wt, tid, fname)
         offs[key] = {'offset': len(pas), 'tiles': len(p)}
         pas += p; pri += q; tag += [0] * len(p); ims.append(im)
+    # Art Director's curated "PF Forest" sheet (art/tilesets): Magiscarf trees and rocks, Ekat fairy/haunted woods
+    import yaml
+    AT = os.path.join(os.path.dirname(HERE), 'art', 'tilesets')
+    if os.path.exists(os.path.join(AT, 'forest.yaml')):
+        fd = yaml.safe_load(open(os.path.join(AT, 'forest.yaml')))
+        im = Image.open(os.path.join(AT, 'PF Forest.png')).convert('RGBA'); n = im.height // 32 * 8
+        o = len(pas)
+        fp = {int(k): int(v) for k, v in (fd.get('passages') or {}).items()}; fq = {int(k): int(v) for k, v in (fd.get('priorities') or {}).items()}
+        pas += [fp.get(384 + i, 0) for i in range(n)]; pri += [fq.get(384 + i, 0) for i in range(n)]; tag += [0] * n; ims.append(im)
+        st = json.load(open(os.path.join(AT, 'forest_stamps.json')))
+        offs['pfforest'] = {'offset': o, 'tiles': n,
+                            'stamps': {d['name']: [o + d['first_tile_id'] - 384, d['tile_rect'][2], d['tile_rect'][3], d.get('kind', '')] for d in st}}
     # Bleed recolour of the Tectonic part; ground rows (grass, dry grass, dirt-in-grass) go ashen instead of glassy
     ground_rows = [((a - 384) // 8, (b - 384) // 8) for a, b in ((2080, 2128), (2184, 2304), (2504, 2560), (936, 968))]
     bl = recolour(tect, ground_rows)
@@ -239,7 +251,7 @@ def main():
     json.dump(sorted(reg, key=lambda t: t['id']), open(REG, 'w'))
     json.dump(offs, open(os.path.join(HERE, 'data', 'compose_wilds_offsets.json'), 'w'), indent=1)
     print('tileset 40: %d tiles, sheet %dx%d' % (len(pas) - 384, sheet.width, sheet.height))
-    print({k: v['offset'] for k, v in offs.items()}); print(offs['custom']['names'])
+    print({k: v['offset'] for k, v in offs.items()})
 
 
 if __name__ == '__main__':

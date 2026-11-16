@@ -8,7 +8,7 @@ import yaml
 from terrain import vnoise
 
 STAMPS = {}
-for fn in ('stamps_t.json', 'stamps_w.json'):
+for fn in ('stamps_t.json', 'stamps_w.json', 'stamps_v.json'):
     p = os.path.join(HERE, 'data', fn)
     if os.path.exists(p):
         STAMPS.update(json.load(open(p)))
@@ -139,7 +139,7 @@ class City:
         st = STAMPS[name]; w, h = st['w'], st['h']
         if not force and not self.free(x - pad, y, w + 2 * pad, h, on): return None
         d = {'stamp': name, 'at': [x, y]}
-        dd = door or DOORS.get(name)
+        dd = door or DOORS.get(name) or DOORS.get(name[:-2] if name[-2:] in ('_s', '_m') else name)
         if link:
             d.update({'link': link, 'name': dname or name, 'door': list(dd)})
         self.stamps.append(d)
@@ -326,8 +326,14 @@ class City:
         return [best[1], best[2]]
 
     def mirror(self):
-        n = sum(self.g[y][x] == self.g[y][self.W - 1 - x] for y in range(self.H) for x in range(self.W))
-        return n / float(self.W * self.H)
+        """Share of land cells equal to their mirror image (open water is exempt, as in the rubric)."""
+        n = t = 0
+        for y in range(self.H):
+            for x in range(self.W):
+                a, b = self.g[y][x], self.g[y][self.W - 1 - x]
+                if a == '~' and b == '~': continue
+                t += 1; n += a == b
+        return n / float(max(1, t))
 
     def prop(self, name, x, y, on=None):
         return self.stamp(name, x, y, on=on)

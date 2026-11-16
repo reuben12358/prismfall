@@ -332,8 +332,8 @@ class Bust:
             E(1, 'blank'); E(0, 'blank'); B(1, dy_in=-2, dy_out=0, lift=3); B(0, dy_in=-2, dy_out=0, lift=3); M('wobble')
             # blue dread on the brow
             gl = (120, 132, 190)
-            for x in range(14, 36, 3):
-                for y in range(self.ey - 9, self.ey - 5 + (x % 2)):
+            for x in range(13, 37, 2):
+                for y in range(self.ey - 12, self.ey - 7 + (x % 4)):
                     if c.head_ok(x, y) and c.ovr[y, x, 3] == 0 and c.mat[y, x] == c.m('skin'):
                         c.px(x, y, gl)
         elif expr == 'sad':
@@ -369,7 +369,16 @@ class Bust:
         if s.get('hair_front'):
             before = c.mat.copy()
             s['hair_front'](self)
-            self.hair_mask = (c.mat != before) | ((c.mat == c.m('hair')) & (before == c.m('hair')) & False)
+            self.hair_mask = (c.mat != before)
+            # cast shadow: skin directly below the fringe drops one tone
+            sk = (c.mat == c.m('skin')) & self.head_mask
+            up1 = np.zeros_like(sk); up1[1:] = self.hair_mask[:-1]
+            up2 = np.zeros_like(sk); up2[2:] = self.hair_mask[:-2]
+            c.tone[sk & (up1 | up2)] = 0.4
+            # far-side form shadow down the right contour of the face
+            edge = np.zeros_like(sk); edge[:, :-2] = ~self.head_mask[:, 2:]
+            rows = np.zeros_like(sk); rows[self.ey + 3:, :] = True
+            c.tone[sk & edge & rows & (c.xx > 30)] = 0.4
         # face features are override pixels; they must not sit on top of hair
         self._features(expr)
         if s.get('over_face'):
@@ -419,6 +428,7 @@ def shine(b, pts, mat='hair'):
     c = b.c
     for i in range(len(pts) - 1):
         c.stroke([pts[i], pts[i + 1]], tone=0.95, only=mat)
+        c.stroke([(pts[i][0], pts[i][1] + 1), (pts[i + 1][0], pts[i + 1][1] + 1)], tone=0.95, only=mat)
 
 
 def strands(b, lines, mat='hair'):

@@ -42,6 +42,16 @@ the Rejuvenation Team; do not copy maps.
 - **Aiwyn17** for the Freljord, sanctuary and airship sub-tilesets.
 - Collection found in M0RGEBBY/pokemon-fan-game.
 
+### Curated PF sheets (`art/tilesets/`): credit by stamp
+Each `<key>_stamps.json` records the artist and source file of every stamp. Summary:
+- **PF Town Props**: `stall_*`, `barrel_*` Magiscarf (Rustic Tiles); `garden_*`, `patio_*`, `park_*` Ekat (Garden Objects,
+  Patio Objects, Park Gazebo; with Vurtax and Heartlessdragoon per Ekat's Credits.txt).
+- **PF Houses**: `timber_*`, `longhouse_*`, `door_*` Magiscarf; `pointy_*`, `jonquil_*` Ekat (Pointy Buildings, Jonquil Town).
+- **PF Landmarks**: `uranium_*` Pokémon Uranium team; `tower_*`, `temple_*` Ekat (Dragonspiral Stuff, Snowpoint Temple).
+- **PF Forest**: `rustic_*` Magiscarf; `bigtree_*`, `fairy_*`, `haunted_*` Ekat.
+- **PF Interiors**: Ekat (Basic Interior Collection, Wine Cellar, Viridian Mansion, Ship Interior).
+- Autotiles in `art/tilesets/autotiles/`: Pokémon Tectonic tilesheet artists (list above); `DirtDark` Rejuvenation Team.
+
 ### Additional tiles (only if the listed sheets are used)
 From **Pokémon Infinite Fusion** (Chardub; github.com/infinitefusion/infinitefusion-e18), cave, underwater, sky and sewer
 sheets. Its credits for public tiles:

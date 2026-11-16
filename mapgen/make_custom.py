@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 Image.MAX_IMAGE_PIXELS = None
 T = Image.open('/home/claude/ref/art/tectonic/Graphics/Tilesets/Outside.png').convert('RGBA')
 S = Image.open('/home/claude/ref/art/wll/Changed Files/Graphics/Tilesets/Sheridan_2.png').convert('RGBA')
-ROWS = 20
+ROWS = 24
 sheet = Image.new('RGBA', (256, ROWS * 32), (0, 0, 0, 0))
 pas = [15] * (ROWS * 8); pri = [0] * (ROWS * 8)
 
@@ -130,6 +130,7 @@ pri[15 * 8 + 7] = 5; pas[15 * 8 + 7] = 0; pri[15 * 8 + 3] = pri[15 * 8 + 4] = 5;
 pri[15 * 8 + 5] = pri[15 * 8 + 6] = 5; pas[15 * 8 + 5] = pas[15 * 8 + 6] = 0
 draw16(3, 1, awning, 1, 17, 0, 5)
 crown(4, 3, 23, 4, 17)
+crown(6, 4, 31, 0, 20)
 os.makedirs(os.path.join(HERE, 'custom'), exist_ok=True)
 sheet.save(os.path.join(HERE, 'custom', 'prismfall_custom2.png'))
 json.dump({'passages': pas, 'priorities': pri}, open(os.path.join(HERE, 'custom', 'prismfall_custom2.json'), 'w'))

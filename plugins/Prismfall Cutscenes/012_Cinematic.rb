@@ -112,51 +112,79 @@ module Prismfall
       def floes(o, vw, vh, seed)
         cols = o[:colors] || ICES[o[:palette] || :dawn] || ICES[:dawn]
         top = v(o[:horizon] || 200)
+        x0 = o[:x] || 0
+        vw = v(o[:width]) if o[:width]          # a wide, untiled sheet (needed with pools)
         b = Bitmap.new(vw, vh - top + 16)
         water = o[:water] || [10, 14, 34]
         deep = Util.mix(water, [40, 56, 104], 0.5)
         Pix.gradient(b, 0, 0, vw, b.height, [deep, Util.mix(water, deep, 0.5), water, water], true)
         Pix.rect(b, 0, 0, vw, 1, Util.color(Util.mix(cols[0], [255, 255, 255], 0.4)))
-        pools = (o[:pools] || []).map { |p| [v(p[0]), v(p[1]) - top, v(p[2]), v(p[3])] }
+        pools = (o[:pools] || []).map { |p| [v(p[0] - x0), v(p[1]) - top, v(p[2]), v(p[3])] }
         y = 1
         row = 0
         while y < b.height - 2
-          h = 3 + (row * row * 0.55).round + row          # row depth grows towards the viewer
+          h = 3 + (row * row * 0.5).round + row            # rows get deeper towards the viewer
           side = [1 + (row / 2), 5].min                   # thickness of the side face
-          lit = Util.mix(cols[[row / 2, cols.length - 1].min], [255, 255, 255], 0.15)
-          face = cols[[row / 2, cols.length - 1].min]
+          band = cols[[row / 2, cols.length - 1].min]
           shade = Util.mix(cols[-1], [24, 40, 96], 0.45 + (row * 0.03))
-          x = -((Util.hash01(row, seed, 1) * 20).round)
+          x = -((Util.hash01(row, seed, 1) * 30).round)
           i = 0
           while x < vw
-            w = ((h * (2.2 + (Util.hash01(row, i, seed) * 3.2))) + 6).round
-            gap = 1 + ((row + 2) / 3) + ((Util.hash01(row, i, seed + 2) * 2).round)
-            fh = h - side - 1 - ((Util.hash01(row, i, seed + 3) * 2).round)
-            fy = y + ((Util.hash01(row, i, seed + 4) * 2).round)
+            small = Util.hash01(row, i, seed + 6) < 0.22
+            w = ((h * (1.5 + (Util.hash01(row, i, seed) * 4.2))) + 4).round
+            w = (w * 0.4).round + 3 if small
+            gap = 2 + ((row + 1) / 2) + ((Util.hash01(row, i, seed + 2) * (2 + row)).round)
+            fh = h - side - ((Util.hash01(row, i, seed + 3) * (1 + (h / 4))).round)
+            fh = (fh * 0.6).round if small
+            fy = y + ((Util.hash01(row, i, seed + 4) * (1 + (h / 3))).round)
             cx = x + (w / 2)
-            in_pool = pools.any? { |p| (((cx - p[0]).to_f / p[2])**2) + (((fy + (fh / 2) - p[1]).to_f / p[3])**2) < 1.0 }
+            in_pool = pools.any? { |p| (((cx - p[0]).to_f / (p[2] + (w / 2)))**2) + (((fy + (fh / 2) - p[1]).to_f / (p[3] + 2))**2) < 1.0 }
             if fh >= 1 && !in_pool
-              skew = (row > 1) ? ((Util.hash01(row, i, seed + 5) * 4) - 2).round : 0
-              Pix.rect(b, x + skew + 1, fy + fh, w - 2, side, Util.color(shade))                       # side face
-              Pix.rect(b, x + 1, fy, w - 2, fh, Util.color(face))                                    # top face
-              Pix.rect(b, x, fy + 1, w, [fh - 2, 1].max, Util.color(face))                           # rounded corners
-              Pix.rect(b, x + 2, fy, w - 4, 1, Util.color(lit))                                      # lit far edge
-              if fh > 3                                                                               # surface detail
-                Pix.rect(b, x + 3 + ((Util.hash01(row, i, 7) * (w - 8)).round), fy + 2, [w / 5, 2].max, 1, Util.color(lit))
-                Pix.line(b, x + (w / 3), fy + 1, x + (w / 3) + (fh / 2), fy + fh - 1, Util.color(Util.mix(face, shade, 0.5))) if Util.hash01(row, i, 8) > 0.55
+              tint = (Util.hash01(row, i, seed + 9) - 0.5) * 0.14
+              face = Util.mix(band, (tint > 0) ? [255, 255, 255] : cols[-1], tint.abs * 2)
+              lit = Util.mix(face, [255, 255, 255], 0.5)
+              sl = (Util.hash01(row, i, seed + 10) - 0.5) * 1.1      # slant of the left / right edge
+              sr = (Util.hash01(row, i, seed + 11) - 0.5) * 1.1
+              corner = [fh / 3, 3].min
+              run = nil
+              ry = 0
+              l = r = 0
+              (0..fh).each do |j|                                  # irregular outline, row by row
+                key = nil
+                if j < fh
+                  round = [corner - j, corner - (fh - 1 - j), 0].max
+                  l = x + round + (sl * j).round + ((Util.hash01(row, i, j + 40) > 0.8) ? 1 : 0)
+                  r = x + w - round + (sr * j).round - ((Util.hash01(row, i, j + 80) > 0.8) ? 1 : 0)
+                  key = [l, r]
+                end
+                next if key == run
+                Pix.rect(b, run[0], fy + ry, run[1] - run[0], j - ry, Util.color(face)) if run
+                run = key
+                ry = j
               end
-              Dither.fill(b, x + 2, fy + fh + side, w - 4, 1, shade, 2) if row > 1                    # reflection in the water
+              Pix.rect(b, l + 1, fy + fh, r - l - 2, side, Util.color(shade))                          # side face
+              Pix.rect(b, l + 2, fy + fh + side, r - l - 4, 1, Util.color(Util.mix(shade, water, 0.5))) if side > 1
+              Pix.rect(b, x + corner + 1, fy, w - (corner * 2) - 2, 1, Util.color(lit))                 # lit far edge
+              if fh > 4                                                                               # drifted snow and a hairline crack
+                sw = [w / 4, 2].max
+                Pix.rect(b, x + 3 + ((Util.hash01(row, i, 7) * [w - sw - 6, 1].max).round), fy + 2, sw, 1, Util.color(lit))
+                Pix.rect(b, x + 5 + ((Util.hash01(row, i, 17) * [w - sw - 10, 1].max).round), fy + 3, [sw / 2, 1].max, 1, Util.color(lit))
+                if Util.hash01(row, i, 8) > 0.6
+                  kx = x + (w / 3) + ((Util.hash01(row, i, 18) * (w / 3)).round)
+                  Pix.line(b, kx, fy + 1, kx + (fh / 2), fy + fh - 1, Util.color(Util.mix(face, shade, 0.55)))
+                end
+              end
             end
             x += w + gap
             i += 1
           end
-          y += h + 1 + (row / 3)
+          y += h + 1 + (row / 2)
           row += 1
         end
         pools.each do |p|                                  # foam rim round open water
           Pix.ring(b, p[0], p[1], p[2], Util.color(Util.mix(cols[0], [255, 255, 255], 0.5)), 1, p[3])
         end
-        return [spec(b, o, { :parallax => 1.0, :y => top * PX, :tile => o[:pools].nil? })]
+        return [spec(b, o, { :parallax => 1.0, :y => top * PX, :x => x0, :tile => o[:width].nil? && o[:pools].nil? })]
       end
 
       # Northern lights: hanging curtains fading upwards in dither steps.
@@ -188,24 +216,35 @@ module Prismfall
         w = v(o[:width] || 320)
         h = v(o[:height] || 170)
         b = Bitmap.new(w, h)
-        dark = o[:color] || [40, 24, 44]
-        mid = Util.mix(dark, [120, 56, 56], 0.4)
+        dark = o[:color] || [34, 22, 44]
+        mid = Util.mix(dark, [150, 64, 56], 0.45)
+        soft = Util.mix(dark, [96, 64, 96], 0.5)
         glow = o[:glow] || [248, 136, 48]
-        Dither.fill(b, 0, h - 26, w, 26, glow, 4)
-        Dither.fill(b, 0, h - 12, w, 12, glow, 2)
-        14.times do |i|
-          cx = (Util.hash01(i, seed, 1) * w).round
-          col_h = (h * (0.45 + (Util.hash01(i, seed, 2) * 0.5))).round
-          puffs = 5 + (i % 3)
-          puffs.times do |k|
-            f = k / puffs.to_f
-            r = (8 + (f * 16) + (Util.hash01(i, k, seed) * 6)).round
-            x = cx + (Math.sin((k * 0.9) + i) * 10).round + ((o[:lean] || -14) * f).round
-            y = h - (col_h * f).round
-            Pix.disc(b, x, y, r, Util.color((k < 2) ? mid : dark), (r * 0.75).round)
-            Pix.disc(b, x - (r / 4), y - (r / 4), r / 2, Util.color(Util.mix(dark, [96, 64, 88], 0.5)), r / 3) if k.odd?
-            Dither.disc(b, x, y - (r / 2), r + 3, (r * 0.6).round, dark, 2)
+        n = o[:plumes] || 5
+        band_y = (h * 0.3).round
+        n.times do |i|                                   # thin columns climbing from the camp fires
+          cx = (((i + 0.5) * w / n) + ((Util.hash01(i, seed, 1) - 0.5) * (w / n) * 0.5)).round
+          Dither.glow(b, cx, h - 3, 26, 10, glow)
+          steps = ((h - band_y) / 5.0).ceil
+          steps.times do |k|
+            f = k / (steps - 1.0)
+            r = (2 + (f * 7)).round
+            x = cx + (Math.sin((k * 0.6) + (i * 2)) * (2 + (f * 5))).round + ((o[:lean] || -30) * f * f).round
+            y = h - 6 - ((h - band_y - 6) * f).round
+            Dither.disc(b, x, y, r + 2, r + 1, dark, 2) if k.odd?
+            Pix.disc(b, x, y, r, Util.color((f < 0.25) ? mid : dark), [(r * 0.85).round, 1].max)
+            Pix.disc(b, x + (r / 3), y + (r / 3), [r / 2, 1].max, Util.color((f < 0.4) ? Util.mix(mid, glow, 0.35) : soft), [r / 3, 1].max) if k % 3 == 0
           end
+        end
+        11.times do |i|                                  # the pall they feed: long flat rolls, ragged underneath
+          x = ((i + 0.3) * w / 10.0).round + ((Util.hash01(i, seed, 5) - 0.5) * 20).round
+          y = band_y + ((Util.hash01(i, seed, 6) - 0.5) * 22).round
+          rx = 28 + (Util.hash01(i, seed, 7) * 22).round
+          ry = 6 + (Util.hash01(i, seed, 8) * 5).round
+          Dither.disc(b, x, y + 3, rx + 6, ry + 3, dark, 2)
+          Pix.disc(b, x, y + 1, rx, Util.color(soft), ry)
+          Pix.disc(b, x - 2, y - 1, rx - 2, Util.color(dark), [ry - 1, 1].max)
+          Dither.disc(b, x, y - ry, (rx * 0.7).round, 3, dark, 4)
         end
         return [spec(b, o, { :parallax => 0.2, :tile => false, :x => o[:x] || 0, :y => (o[:y] || 210) - (h * PX), :scroll => 0 })]
       end
@@ -313,13 +352,13 @@ module Prismfall
           grow = lambda do |x, y, ang2, len, from, depth|
             steps = (len / 14).ceil
             steps.times do |k|
-              ang2 += (rng.rand - 0.5) * 0.9
+              ang2 += (rng.rand - 0.5) * 0.7
               step = len / steps
               nx = x + (Math.cos(ang2) * step)
               ny = y + (Math.sin(ang2) * step * squash)
               d0 = from + (k * step)
               @segs.push([d0 / radius, x, y, nx, ny, (depth == 0 && k < steps / 2) ? 2 : 1])
-              grow.call(nx, ny, ang2 + ((rng.rand < 0.5) ? 0.9 : -0.9), len * 0.4, d0 + step, depth + 1) if depth < 2 && rng.rand < 0.4
+              grow.call(nx, ny, ang2 + ((rng.rand < 0.5) ? 0.9 : -0.9), len * 0.4, d0 + step, depth + 1) if depth < 1 && rng.rand < 0.3
               x = nx
               y = ny
             end
@@ -328,8 +367,8 @@ module Prismfall
         end
         @segs.sort_by! { |s| s[0] }
         @drawn = 0
-        @dark = Util.color(a[:color] || [10, 14, 40])
-        @light = Util.color(a[:highlight] || [255, 255, 255])
+        @dark = Util.color(a[:color] || [16, 22, 60])
+        @light = Util.color(a[:highlight] || [226, 238, 255])
       end
 
       def update(scene, lt, dt)
@@ -340,7 +379,7 @@ module Prismfall
           @drawn += 1
           x0, y0 = scene.decal_point(s[1], s[2])
           x1, y1 = scene.decal_point(s[3], s[4])
-          Pix.line(b, x0, y0 - 1, x1, y1 - 1, @light, 1)
+          Pix.line(b, x0, y0 - 1, x1, y1 - 1, @light, 1) if s[5] > 1      # lit lip on the main cracks only
           Pix.line(b, x0, y0, x1, y1, @dark, s[5])
         end
         return k >= 1.0
@@ -479,9 +518,10 @@ module Prismfall
         @glows.each do |side, g|
           lv = g[:level] * (0.9 + (0.1 * Math.sin(@fx_frame * 0.7)))
           next if lv <= 0.01
-          [[0.46, 8], [0.3, 4], [0.15, 2]].each do |frac, density|
+          [[0.13, 8], [0.045, 4]].each do |frac, density|     # a faint dithered falloff, never a wall
             w = (@vw * frac * lv).round
             w -= w % 2
+            next if w <= 0
             x = (side == :left) ? 0 : @vw - w
             Dither.fill(b, x, 0, w, @vh, g[:rgb], density)
           end
