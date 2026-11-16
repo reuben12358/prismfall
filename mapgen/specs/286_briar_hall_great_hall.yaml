@@ -184,10 +184,10 @@ events:
   to: {map: 287, x: 13, y: 23, dir: up}
 - type: warp
   at: [15, 23]
-  to: {map: 285, x: 42, y: 23, dir: down}
+  to: {map: 285, x: 48, y: 23, dir: down}
 - type: warp
   at: [16, 23]
-  to: {map: 285, x: 42, y: 23, dir: down}
+  to: {map: 285, x: 48, y: 23, dir: down}
 - type: warp
   at: [17, 23]
-  to: {map: 285, x: 42, y: 23, dir: down}
+  to: {map: 285, x: 48, y: 23, dir: down}

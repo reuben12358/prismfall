@@ -45,9 +45,12 @@
 173	170	Tidelock Gym - Basins (High Water)
 174	170	Tidelock Gym - Warden's Pool
 280	0	Verdance - Market Terraces
+281	280	Verdance Pokémon Center
+282	280	Verdance Mart
 285	280	Briar Hall - Upper Court
 286	285	Briar Hall - Great Hall
 287	285	Briar Hall - Throne Room
+295	280	Cathedral of the Evergreen
 520	0	Route 1
 521	0	Route 2
 522	521	The Glassed Orchard

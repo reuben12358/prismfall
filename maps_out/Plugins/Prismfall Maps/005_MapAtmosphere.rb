@@ -8,6 +8,7 @@ module PrismfallMaps
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
     287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
+    295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
   }
 
   def self.apply_map_tone

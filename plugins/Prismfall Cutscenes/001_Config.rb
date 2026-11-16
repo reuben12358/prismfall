@@ -16,7 +16,8 @@ module Prismfall
     MASH_BUTTON    = :USE
     FADE_TIME      = 0.4      # automatic fade in/out of every scene
     MAX_PARTICLES  = 260
-    BEAM_CHUNK     = 3        # art pixels per beam segment
+    BEAM_CHUNK     = 4        # art pixels per beam segment
+    BEAM_DITHER    = true     # dithered fringes between beam colours (set false on very weak machines)
     POKEMON_ANIM_FPS = 20     # EBDX sprite strips
     # Sprites up to this height are native-resolution art and are shown at 2x
     # (EBDX battlers/trainers); taller ones are already doubled.
@@ -26,6 +27,9 @@ module Prismfall
 
     # Effect palettes: [core, inner, outer, edge] (4 colours per effect).
     PALETTES = {
+      # the war's two beams: orange-red-violet against cyan-blue-white
+      :fireclash => [[255, 255, 224], [255, 200, 56],  [240, 80, 32],   [136, 40, 168]],
+      :seaclash  => [[255, 255, 255], [168, 248, 255], [40, 152, 248],  [24, 64, 184]],
       :fire     => [[255, 250, 220], [255, 208, 64],  [240, 112, 24],  [160, 32, 16]],
       :blueflare=> [[255, 255, 255], [200, 236, 255], [96, 168, 255],  [232, 96, 32]],
       :water    => [[236, 252, 255], [120, 208, 255], [40, 120, 232],  [16, 48, 152]],
@@ -83,6 +87,24 @@ module Prismfall
       :me_hl_hit       => ["Festival highlight hit"],
       :me_hl_result    => ["Festival highlight result", "Slots win"]
     }
+    # Stock sprites that stand in for Prismfall trainer types until their own
+    # art exists (Graphics/Trainers/X.png and Graphics/Characters/trainer_X.png).
+    # Own art always wins; with neither, a code-drawn figure is used.
+    STAND_INS = {
+      :ASHKAAR_SOLDIER => :BLACKBELT,     :ASHKAAR_SOLDIER_M => :BLACKBELT,  :ASHKAAR_SOLDIER_F => :CRUSHGIRL,
+      :ASHKAAR_OFFICER => :ELITEFOUR_Lance,
+      :ISENMAR_SOLDIER => :SAILOR,        :ISENMAR_SOLDIER_M => :SAILOR,     :ISENMAR_SOLDIER_F => :SWIMMER2_F,
+      :ISENMAR_OFFICER => :ELITEFOUR_Bruno,
+      :MERIDIAN_QUENT  => :PROFESSOR,     :MERIDIAN_AGENT => :SCIENTIST,     :MERIDIAN_AGENT_M => :SCIENTIST,
+      :MERIDIAN_AGENT_F => :SCIENTIST,    :MERIDIAN_ADMIN => :SUPERNERD,     :MERIDIAN_VOSS => :ROCKETBOSS,
+      :LEADER_SIGRUN   => :COOLTRAINER_F, :LEADER_ANJA => :ELITEFOUR_Lorelei, :LEADER_BRANN => :HIKER,
+      :LEADER_MARISOL  => :SWIMMER2_F,    :LEADER_KAITO => :BLACKBELT,       :LEADER_ROOK => :ROCKER,
+      :LEADER_ODESSA   => :BIRDKEEPER,    :LEADER_YSOLDE => :CHANNELER,      :LEADER_CELESTINE => :LADY,
+      :LEADER_NYX      => :BEAUTY,        :LEADER_MAGNUS => :ENGINEER,       :LEADER_TAMSIN => :BUGCATCHER,
+      :LEADER_DORIAN   => :GENTLEMAN,     :LEADER_JUNO => :PICNICKER,        :RIVAL_JUNO => :PICNICKER,
+      :RIVAL_KESTREL   => :RIVAL1,        :CHAMPION_VALEN => :CHAMPION
+    }
+
     HIGHLIGHT_BGM_VOLUME = 70
     HIGHLIGHT_MIN_SECONDS = 15.0
     HIGHLIGHT_MAX_SECONDS = 30.0

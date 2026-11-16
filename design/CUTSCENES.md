@@ -156,13 +156,13 @@ Declaring an id again replaces that actor. Sprites up to 128 px tall are treated
 | `pan` | `to:` / `by:`, `zoom:` |
 | `zoom` | `to:` (keep it >= 1; zooming out shows layer edges) |
 | `shake` | `power:` px, `decay: false` |
-| `flash` | `color:`, `power:` 0–255 |
+| `flash` | `color:`, `power:` 0–255, `hold:` seconds at full strength |
 | `tone` | `to: [r, g, b, gray]` (tints the world, not text) |
 | `fade_out` / `fade_in` | To and from black |
 | `letterbox true/false` | `height: 32` |
 
 ### Particles and overlays
-- `emit :embers / :snow / :rain / :debris / :sparks / :smoke / :steam / :ice_shards / :petals / :motes`, with
+- `emit :embers / :snow / :rain / :debris / :sparks / :smoke / :steam / :ice_shards / :lift / :petals / :motes`, with
   `at:` / `from:` / `area:` (none of them = whole-screen weather), `rate:`, `duration:`, `color:`, `id:`,
   `layer: :back`, `speed:`, `angle:`, `spread:`. `stop_emit :id` (or all with no id).
 - `burst kind, at:, count:, color:`
@@ -174,11 +174,11 @@ Declaring an id again replaces that actor. Sprites up to 128 px tall are treated
 | Command | Options |
 |---|---|
 | `charge_up` | `at:`, `color:`, `size:` |
-| `beam` | `from:`, `to:`, `color:`, `width: 8`, `travel:`, `impact: false`, `hit: false`, `shake:` |
+| `beam` | `from:`, `to:`, `color:`, `width: 14` (full thickness in art pixels; 1 art pixel = 2 screen pixels), `travel:`, `impact: false`, `hit: false`, `shake:` |
 | `impact` / `ring` | `at:`, `color:`, `size:` / `radius:`, `squash:`, `layer: :front` |
 | `beam_clash` | see below |
 
-`color:` is a palette name (`:fire :blueflare :water :ice :dragon :electric :grass :psychic :dark :ghost :fairy
+`color:` is a palette name (`:fireclash :seaclash :fire :blueflare :water :ice :dragon :electric :grass :psychic :dark :ghost :fairy
 :steel :poison :ground :rock :fighting :bug :flying :light :white :bleed :steam :smoke`) or one `[r, g, b]` (a
 four-colour ramp is derived).
 
@@ -188,8 +188,14 @@ beam_clash a: { from: :kyogre, color: :water, width: 10 },   # or just a: :kyogr
            duration: 7, winner: :a,        # :a, :b, :both (detonation), :fizzle (gutters out), :mash
            curve: :a_rallies,              # or [[0, 0.5], [0.5, 0.3], [1, 0.6]]
            mash: true, player: :a,         # button mashing pushes the clash point
-           launch: 0.45, resolve: 1.5, ball: 9, shake: 4, strobe: true, id: :clash
+           launch: 0.6, resolve: 1.6, ball: 20, ground: 306, shake: 4, strobe: true, id: :clash
 ```
+- Each beam is drawn as a dark pixel outline, a coloured edge and body, a hot inner band and a white core, with
+  dithered fringes between the bands. `width:` per side defaults to 22; the war climax uses 32 (64 screen pixels, a
+  sixth of the screen height). The clash sphere (`ball:` radius, default 0.9 x width) swirls both colours round a
+  white core. Each keyframe of `curve:` is a surge: flash, shake, rings and a spray of sparks and ice.
+  `ground: y` sets where rubble lifts from. With `winner: :a/:b` the winning beam swells, swallows the other and
+  washes the screen white. Previews: `docs/cutscene_previews/beam_clash_*.png`.
 - The clash position runs from 0 (at `a`) to 1 (at `b`); high means `a` is winning. `curve:` is the scripted
   struggle (time 0–1 over the struggle phase). Presets: `:even :a_rallies :b_rallies :a_dominates :b_dominates
   :left_right_hold`.
@@ -229,6 +235,7 @@ Isenmar and Kyogre are on the left, Ashkaar and Reshiram on the right.
 | `water_legend:` / `fire_legend:` | placeholder species (`:KYOGRE` / `:RESHIRAM`) | story team can swap |
 | `water_mon:` / `fire_mon:` | aces when `legends: false` (`:MAMOSWINE` / `:SALAMENCE`) | |
 | `starter_charset:` | charset for the starter in shot 9A | `"Followers/EEVEE"` |
+| `overpower:` | `true` with `:B`/`:C`: the winning kingdom's beam swallows the other and whites out the screen instead of the clash falling silent. Not in the storyboard, so off by default | `false` |
 
 Event: `Script: pbCutscene(:WAR_CLIMAX)`. `:WAR_CLIMAX_DEMO` is the same scene fixed to variant `:A2`.
 Audio follows design/AUDIO.md: `War - Battlefield` → 0.5 s fade → `War - Beam Clash` on the clash frame → silence
@@ -325,11 +332,19 @@ Prismfall::Portrait.register(:MARTIN, name: "Martin", trainer: :LEADER_MARTIN, e
 - Load order: `NAME_expression.png` → `NAME.png` → round crop of the trainer front sprite's head (trainer type
   from `register`, else `NAME`, `LEADER_NAME`, `RIVAL_NAME`, `CHAMPION_NAME`) → silhouette with the initial.
 
+### Stand-in sprites
+Prismfall trainer types have no art yet, so `STAND_INS` in `001_Config.rb` maps them to stock sprites
+(`ASHKAAR_SOLDIER` → Black Belt, `ISENMAR_SOLDIER` → Sailor, `LEADER_ANJA` → Lorelei, `MERIDIAN_QUENT` → Professor,
+and so on). The mapping is my guess at a look, not a casting decision; edit it freely. Own art
+(`Graphics/Trainers/TYPE.png`, `Graphics/Characters/trainer_TYPE.png`) always wins, and a type with neither gets
+the code-drawn figure.
+
 ## 7. Limitations
 
 - Not run in the real engine yet (no mkxp-z here). It is tested against strict fakes and a software renderer
-  (section 9). First thing to check in game: beam-clash frame rate on a weak machine; if needed lower `FX_FPS` or
-  raise `BEAM_CHUNK` in `001_Config.rb`.
+  (section 9). First thing to check in game: beam-clash frame rate. The thick clash issues roughly 800–2,000
+  `fill_rect` calls per FX frame; if that is slow, set `BEAM_DITHER = false`, lower `FX_FPS` or raise `BEAM_CHUNK`
+  in `001_Config.rb`.
 - Pixel-grid rules: FX are drawn at half resolution and shown at 2x, in four colours per effect, at 30 FX frames per
   second. Sprites snap to even pixels at zoom 1. Camera zoom other than 1 or 2 and `rotate` break the grid by nature.
 - No split screen, no shaders, no per-region tints. Sprite rotation is used only for fallen soldiers.

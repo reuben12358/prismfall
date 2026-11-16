@@ -264,7 +264,7 @@ module Prismfall
           ensure_mons(row)
           @b.wait 0.3
           @b.charge_up at: id(s), color: pal(s), duration: 0.6
-          @b.beam from: id(s), to: id(o), color: pal(s), duration: 1.1, width: (row[:strong]) ? 11 : 8,
+          @b.beam from: id(s), to: id(o), color: pal(s), duration: 1.1, width: (row[:strong]) ? 18 : 13,
                   hit_se: (row[:strong]) ? :impact_super : :impact
           damage(o, (row[:strong]) ? 0.7 : 0.5)
           @b.flash duration: 0.25, power: 140 if row[:strong]
@@ -284,8 +284,8 @@ module Prismfall
             b.charge_up at: b_id, color: pb, duration: 0.6
           end
           b.zoom to: 1.25, duration: 0.5
-          b.beam_clash a: { from: a_id, color: pa, width: 7 }, b: { from: b_id, color: pb, width: 7 },
-                       duration: 3.8, winner: s, ball: 7, shake: 3
+          b.beam_clash a: { from: a_id, color: pa, width: 18 }, b: { from: b_id, color: pb, width: 18 },
+                       duration: 3.8, winner: s, ball: 15, shake: 3, ground: 322
           b.zoom to: 1.0, duration: 0.4
           b.emit :steam, at: [256, 280], rate: 30, duration: 0.8, id: :hl_steam
           damage(o, 0.6)
@@ -373,7 +373,7 @@ module Prismfall
           ensure_mons(row)
           @b.wait 0.3
           @b.charge_up at: id(s), color: pal(s), duration: 0.7, size: 9
-          @b.beam from: id(s), to: id(o), color: pal(s), duration: 1.2, width: 11, shake: 9, hit_se: :impact_super
+          @b.beam from: id(s), to: id(o), color: pal(s), duration: 1.2, width: 18, shake: 9, hit_se: :impact_super
           damage(o, 1.0, 0.5)
           @b.flash duration: 0.4, power: 200
           @b.me :me_hl_hit
@@ -388,7 +388,7 @@ module Prismfall
           ensure_mons(row)
           @b.wait 0.3
           @b.charge_up at: id(o), color: pal(o), duration: 0.5
-          @b.beam from: id(o), to: id(s), color: pal(o), duration: 1.0, width: 10
+          @b.beam from: id(o), to: id(s), color: pal(o), duration: 1.0, width: 15
           @hp[s] = 0.04
           @b.hp_bar id(s), value: 0.04, duration: 0.7
           @b.tremble id(s), duration: 0.7

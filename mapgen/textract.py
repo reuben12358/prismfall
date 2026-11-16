@@ -53,6 +53,12 @@ def main():
         if 'door' in s:
             st['door'] = [s['door'][0] - int(x0), s['door'][1] - int(y0)]; st['door_gfx'] = ['', 0, 2]
         out[name] = st
+    for st in out.values():          # roofs belong on layer 3 (rubric 5): lift the upper rows of buildings where layer 3 is empty
+        if st['h'] < 4 or st['w'] < 3: continue
+        L = np.array(st['layers']); k = int(np.ceil(st['h'] * 0.6))
+        m = (L[2, :k] == 0) & (L[1, :k] > 0)
+        L[2, :k][m] = L[1, :k][m]; L[1, :k][m] = 0
+        st['layers'] = L.tolist()
     json.dump(out, open(os.path.join(HERE, 'data', 'stamps_t.json'), 'w'))
     print('stamps:', {k: (v['w'], v['h']) for k, v in out.items()})
     if '--sheet' in sys.argv:

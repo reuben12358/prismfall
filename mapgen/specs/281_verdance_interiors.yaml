@@ -1,0 +1,22 @@
+# Verdance service interiors (281-282). Placeholders on the stock templates until Gen 4/5 interiors are imported.
+id: 281
+name: Verdance Pokémon Center
+parent: 280
+template: pokecenter
+exit_link: C280_PC
+drop_template_events: [Bill]
+bgm: Poke Center
+metadata: {HealingSpot: [280, 50, 66], MapPosition: [0, 14, 12]}
+events:
+  - {type: npc, name: Pilgrim, at: [12, 6], sprite: NPC 11, dir: left,
+     text: "Pilgrim: Eighteen windows in the cathedral, and they left one clear. [TODO story]"}
+---
+id: 282
+name: Verdance Mart
+parent: 280
+template: mart
+exit_link: C280_MART
+drop_template_events: [Questionnaire, Deliveryman]
+bgm: Poke Mart
+metadata: {MapPosition: [0, 14, 12]}
+events: []

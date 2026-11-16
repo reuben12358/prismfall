@@ -25,6 +25,7 @@ module Prismfall
         :smoke      => { :speed => [8, 22],   :angle => -90, :spread => 25,  :life => [1.6, 2.8], :grav => -4,  :size => 3, :sway => 6, :pal => :smoke },
         :steam      => { :speed => [12, 30],  :angle => -90, :spread => 40,  :life => [1.2, 2.4], :grav => -8,  :size => 3, :sway => 8, :pal => :steam },
         :petals     => { :speed => [20, 50],  :angle => 70,  :spread => 50,  :life => [2.0, 3.5], :grav => 8,   :size => 2, :sway => 18, :pal => :fairy },
+        :lift       => { :speed => [14, 46],  :angle => -90, :spread => 22,  :life => [0.9, 2.0], :grav => -30, :size => 3, :sway => 5, :pal => :ice },
         :motes      => { :speed => [4, 14],   :angle => -90, :spread => 180, :life => [1.5, 3.0], :grav => 0,   :size => 1, :sway => 4, :pal => :light }
       }
 
@@ -148,33 +149,45 @@ module Prismfall
       def draws?; return true; end
       def update(scene, lt, dt); return false; end   # lives until `dome off: true`
 
+      # A flat translucent disc (no stripes) with a chunky dithered rim and
+      # glints; the hole is cut row by row.
       def draw(scene, back, front)
         cx, cy = scene.to_fx(@at.call)
         z = scene.camera.zoom
         rx = (@radius * z / PX).round
         ry = (rx * @squash).round
-        return if rx < 2
+        return if rx < 2 || ry < 2
         f = scene.fx_frame
+        @fill ||= @pal.rgb[1..3].map { |c| Color.new(c[0], c[1], c[2], 84) }
+        fill = @fill[(f / 8) % 3]
         hx = hy = hr = nil
         if @hole_at && @hole > 1
           hx, hy = scene.to_fx(@hole_at.call)
           hr = (@hole * z / PX).round
         end
-        (-ry..ry).each do |dy|
-          next if ((dy + (f / 2)) % 2) != 0      # every other scanline, slowly rolling
-          w = (rx * Math.sqrt(1.0 - ((dy.to_f / ry)**2))).round
-          c = @pal[1 + (((dy + f) / 6) % 3)]
+        run_w = nil
+        run_y = 0
+        (-ry..ry + 1).each do |dy|
           y = cy + dy
-          if hr && (y - hy).abs < hr * @squash
-            hw = (hr * Math.sqrt(1.0 - (((y - hy) / (hr * @squash))**2))).round
-            Pix.rect(back, cx - w, y, (hx - hw) - (cx - w), 1, c)
-            Pix.rect(back, hx + hw, y, (cx + w) - (hx + hw), 1, c)
-          else
-            Pix.rect(back, cx - w, y, (w * 2) + 1, 1, c)
-          end
+          in_hole = hr && dy <= ry && (y - hy).abs < hr * @squash
+          w = (dy > ry) ? nil : (rx * Math.sqrt(1.0 - ((dy.to_f / ry)**2))).round
+          key = (in_hole) ? [:hole, dy] : w
+          next if key == run_w
+          Pix.rect(back, cx - run_w, cy + run_y, (run_w * 2) + 1, dy - run_y, fill) if run_w.is_a?(Integer)
+          run_w = key
+          run_y = dy
+          next if !in_hole
+          hw = (hr * Math.sqrt(1.0 - (((y - hy) / (hr * @squash))**2))).round
+          Pix.rect(back, cx - w, y, (hx - hw) - (cx - w), 1, fill)
+          Pix.rect(back, hx + hw, y, (cx + w) - (hx + hw), 1, fill)
         end
-        Pix.ring(front, cx, cy, rx, @pal.core, 1, ry)
-        Pix.ring(front, cx, cy, rx + 2, @pal[1 + ((f / 3) % 3)], 1, ry + 1)
+        Pix.ring(front, cx, cy, rx, @pal.core, 2, ry)
+        Pix.ring(front, cx, cy, rx + 3, @pal[1 + ((f / 4) % 3)], 1, ry + 2)
+        14.times do |i|                                   # glints drifting inside
+          ang = (i * 2.399) + (f * 0.02)
+          d = 0.25 + (Util.hash01(i, f / 6, 9) * 0.7)
+          Pix.rect(back, cx + (Math.cos(ang) * rx * d), cy + (Math.sin(ang) * ry * d), 2, 2, @pal.core)
+        end
       end
     end
 

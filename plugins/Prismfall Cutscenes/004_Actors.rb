@@ -70,6 +70,7 @@ module Prismfall
         end
         file ||= "Graphics/Trainers/#{type}"
         bmp = load_bitmap(file)
+        bmp ||= load_bitmap("Graphics/Trainers/#{STAND_INS[type]}") if STAND_INS[type]
         return from_sheet(bmp) if bmp
         return person(person_color(type), 2, 3)
       end
@@ -83,6 +84,7 @@ module Prismfall
           file = "Graphics/Characters/#{name}"
         end
         bmp = load_bitmap(file)
+        bmp ||= load_bitmap("Graphics/Characters/trainer_#{STAND_INS[name]}") if name.is_a?(Symbol) && STAND_INS[name]
         return Data.new(bmp, bmp.width / 4, bmp.height / 4, 4, :charset, 1, nil, false) if bmp
         return placeholder_charset(color || person_color(name))
       end

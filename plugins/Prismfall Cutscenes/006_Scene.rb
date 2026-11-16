@@ -407,9 +407,14 @@ module Prismfall
         run_effect(ShakeEffect.new(power, dur), t0 || @time)
       end
 
-      def add_flash(color, dur, power = 255, t0 = nil)
+      # hold: seconds at full strength before the fade (part of dur).
+      def add_flash(color, dur, power = 255, t0 = nil, hold = 0.0)
         @flash_sprite.bitmap.fill_rect(0, 0, 4, 4, Util.color(color || [255, 255, 255]))
-        run_effect(Tween.new(dur, :out) { |k, _| @flash_sprite.opacity = (power * (1 - k)).round }, t0 || @time)
+        run_effect(Tween.new(dur, :linear) { |_, raw|
+          t = raw * dur
+          k = (t <= hold) ? 0.0 : Ease.apply(:out, (t - hold) / [dur - hold, 0.001].max)
+          @flash_sprite.opacity = (power * (1 - k)).round
+        }, t0 || @time)
       end
 
       # White flash + knock-back on an actor (dir: -1 left, 1 right).
@@ -629,7 +634,7 @@ module Prismfall
       end
 
       def op_flash(a, dur)
-        add_flash(a[:color], dur, a[:power] || 255)
+        add_flash(a[:color], dur, a[:power] || 255, nil, a[:hold] || 0.0)
         nil
       end
 

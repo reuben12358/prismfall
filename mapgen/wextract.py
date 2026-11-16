@@ -41,6 +41,15 @@ def main():
             doors.sort(key=lambda d: (-d[1], d[0])); st['door'] = list(doors[0]); st['doors'] = [list(d) for d in doors]
             st['door_gfx'] = ['', 0, 2]
         out[name] = st
+        for suf, key in (('_s', 'sheridan_slate'), ('_m', 'sheridan_moss')):      # recoloured variants
+            if grp['sheet'] == 'sheridan' and key in offs:
+                dlt = offs[key]['offset'] - offs['sheridan']['offset']
+                v = dict(st); v['layers'] = np.where(lay > 0, lay + dlt, 0).tolist(); out[name + suf] = v
+    for st in out.values():          # roofs belong on layer 3 (rubric 5): lift the upper rows where layer 3 is empty
+        L = np.array(st['layers']); k = int(np.ceil(st['h'] * 0.6))
+        m = (L[2, :k] == 0) & (L[1, :k] > 0)
+        L[2, :k][m] = L[1, :k][m]; L[1, :k][m] = L[0, :k][m]; L[0, :k][m] = 0
+        st['layers'] = L.tolist()
     json.dump(out, open(os.path.join(HERE, 'data', 'stamps_w.json'), 'w'))
     print({k: (v['w'], v['h'], v.get('door')) for k, v in out.items()})
     if '--sheet' in sys.argv:

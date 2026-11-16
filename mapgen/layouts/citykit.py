@@ -224,6 +224,111 @@ class City:
             if self.g[y][x] == '.' and not self.taken[y][x]:
                 self.blob(x, y, r.uniform(rmin, rmax), r.uniform(rmin, rmax) * 0.8, 'T', seed + i, only='.')
 
+    # ---------------------------------------------------------------- organic plans (fix round)
+    def hills(self, blobs, base=1):
+        """Height map from irregular noise-edged blobs [(cx, cy, rx, ry, level, seed)]: elevation as masses, not bands."""
+        def h(x, y):
+            v = base
+            for cx, cy, rx, ry, lv, sd in blobs:
+                if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1.0 + 0.55 * (vnoise(x, y, sd, 5.0) - 0.5) + 0.25 * (vnoise(x, y, sd + 1, 2.5) - 0.5):
+                    v = max(v, lv) if lv >= 0 else lv
+            return v
+        self.set_heights(h)
+
+    def notch(self, x0, x1, y, level, depth=40):
+        """Cut a straight south-facing step into a hill so a stairway fits: columns x0..x1 drop below row y."""
+        for x in range(x0 - 1, x1 + 2):
+            for yy in range(y + 1, min(self.H, y + depth)):
+                if self.ht[yy][x] >= level: self.ht[yy][x] = level - 1
+            for yy in range(max(0, y - 3), y + 1):
+                if self.ht[yy][x] < level: self.ht[yy][x] = level
+
+    def is_street(self, x, y, street='kbcog='):
+        return self.inb(x, y) and self.g[y][x] in street
+
+    def front_place(self, name, near, link=None, dname=None, street='kbco', r=14):
+        """Put a named building on the street frontage nearest to `near` (its door row sits just above street cells)."""
+        st = STAMPS[name]; w, h = st['w'], st['h']; dd = DOORS.get(name, (w // 2, h - 1))
+        cand = []
+        for y in range(max(h, near[1] - r), min(self.H - 1, near[1] + r)):
+            for x in range(max(0, near[0] - r), min(self.W - w, near[0] + r)):
+                if self.is_street(x + dd[0], y + 1, street) and not self.is_street(x + dd[0], y, street):
+                    cand.append(((x + dd[0] - near[0]) ** 2 + (y - near[1]) ** 2, x, y))
+        for _, x, y in sorted(cand):
+            if self.free(x, y - h + 1, w, h, on='.,#T'):
+                return self.stamp(name, x, y - h + 1, link, dname)
+        raise SystemExit('front_place: no frontage for %s near %s' % (name, near))
+
+    def frontage(self, pool, box=None, street='kbco', seed=0, skip=0.0):
+        """Pack houses wall to wall along every street: each sits with its bottom row directly above street cells."""
+        r = random.Random(self.seed * 11 + seed); x0, y0, x1, y1 = box or (0, 0, self.W - 1, self.H - 1); n = 0
+        for y in range(y1 - 1, y0, -1):
+            x = x0
+            while x <= x1:
+                if not (self.is_street(x, y + 1, street) and not self.is_street(x, y, street)) or self.taken[y][x] or r.random() < skip:
+                    x += 1; continue
+                cand = list(pool); r.shuffle(cand); ok = False
+                for nm in cand:
+                    st = STAMPS[nm]; w, h = st['w'], st['h']
+                    if x + w - 1 > x1 or y - h + 1 < y0: continue
+                    if sum(self.is_street(xx, y + 1, street) for xx in range(x, x + w)) * 2 < w: continue
+                    if self.free(x, y - h + 1, w, h, on='.,#T') and self.stamp(nm, x, y - h + 1):
+                        x += w; n += 1; ok = True; break
+                if not ok: x += 1
+        return n
+
+    def backfill(self, pool, box=None, p=0.6, seed=0):
+        """Second rank: houses behind the frontage wherever a footprint is still free (alleys of roofs, Prizca-style)."""
+        r = random.Random(self.seed * 17 + seed); x0, y0, x1, y1 = box or (0, 0, self.W - 1, self.H - 1); n = 0
+        for y in range(y1, y0, -1):
+            x = x0
+            while x <= x1:
+                nm = r.choice(pool); st = STAMPS[nm]; w, h = st['w'], st['h']
+                if r.random() < p and x + w - 1 <= x1 and y - h + 1 >= y0 and self.free(x, y - h + 1, w, h, on='.#T') \
+                        and self.stamp(nm, x, y - h + 1):
+                    x += w + r.choice((0, 0, 1)); n += 1
+                else: x += 1
+        return n
+
+    def greenfill(self, thr=0.38, seed=0, beds=0.10, box=None):
+        """Whatever land is left becomes garden: tree masses where the noise is high, flower beds and lawn elsewhere."""
+        r = random.Random(self.seed * 19 + seed); x0, y0, x1, y1 = box or (0, 0, self.W - 1, self.H - 1)
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                if self.g[y][x] != '.' or self.taken[y][x]: continue
+                if vnoise(x, y, self.seed + seed, 4.0) > thr: self.g[y][x] = 'T'
+                elif r.random() < beds: self.g[y][x] = 'h'
+
+    def edge_props(self, names, n, street='kbc', seed=0):
+        """Street furniture hugging the building line (lamps, barrels, boards, benches); the carriageway stays clear."""
+        r = random.Random(self.seed * 23 + seed); k = 0
+        for _ in range(n * 80):
+            if k >= n: break
+            nm = r.choice(names); st = STAMPS[nm]; w, h = st['w'], st['h']
+            x, y = r.randint(1, self.W - w - 2), r.randint(h, self.H - 3)
+            if not all(self.is_street(xx, y, street) and not self.taken[y][xx] for xx in range(x, x + w)): continue
+            if self.is_street(x, y - 1, street) and self.is_street(x - 1, y, street) and self.is_street(x + w, y, street): continue
+            if not all(self.is_street(xx, y + dy, street) and not self.taken[y + dy][xx] for xx in range(x - 1, x + w + 1) for dy in (1, 2)): continue
+            if any(self.taken[yy][xx] and (self.g[yy][xx] in street) for xx in range(x - 2, x + w + 2) for yy in range(y - 1, y + 2) if self.inb(xx, yy)): continue
+            if self.free(x, y - h + 1, w, h, level=False) and self.stamp(nm, x, y - h + 1): k += 1
+        return k
+
+    def snap(self, x, y, street='kbco', r=8):
+        """Nearest free street cell to (x, y); the cell is reserved (events stand there, props keep off)."""
+        best = None
+        for yy in range(max(1, y - r), min(self.H - 1, y + r + 1)):
+            for xx in range(max(1, x - r), min(self.W - 1, x + r + 1)):
+                if self.g[yy][xx] in street and not self.taken[yy][xx]:
+                    d = (xx - x) ** 2 + (yy - y) ** 2
+                    if best is None or d < best[0]: best = (d, xx, yy)
+        if best is None: raise SystemExit('snap: no street near %d,%d' % (x, y))
+        self.taken[best[2]][best[1]] = True
+        return [best[1], best[2]]
+
+    def mirror(self):
+        n = sum(self.g[y][x] == self.g[y][self.W - 1 - x] for y in range(self.H) for x in range(self.W))
+        return n / float(self.W * self.H)
+
     def prop(self, name, x, y, on=None):
         return self.stamp(name, x, y, on=on)
 
@@ -278,7 +383,11 @@ class City:
         for (x, y), (tx, ty) in zip(cells, to_cells):
             self.events.append({'type': 'warp', 'at': [x, y], 'to': {'map': to_map, 'x': tx, 'y': ty, 'dir': d}})
 
-    def write(self, fname, head, comment=''):
+    def write(self, fname, head, comment='', mirror_max=0.40):
+        m = self.mirror()                      # symmetry guard: the glyph plan may not mirror itself left-right
+        print('%s: plan mirror match %.1f%% (limit %.0f%%)' % (fname, m * 100, mirror_max * 100))
+        if m > mirror_max:
+            raise SystemExit('%s: layout is too symmetric (%.1f%% of cells equal their mirror image)' % (fname, m * 100))
         rows = [''.join(r) for r in self.g]
         hr = [''.join(str(min(9, max(h, 0))) for h in r) for r in self.ht]
         spec = dict(head)

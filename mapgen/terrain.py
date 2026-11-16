@@ -222,8 +222,11 @@ class Painter:
         L = self.layers
         for y, x in np.argwhere(own):
             L[0, y, x] = c['floor']
-            L[1, y, x] = blob_tile(c['rim'], nbits(own, x, y))
-            L[2, y, x] = 0
+            rt = blob_tile(c['rim'], nbits(own, x, y))
+            if rt == c['rim']['S']:          # the south parapet is walk-behind: it goes on layer 3, as in Prizca Castle
+                L[1, y, x] = 0; L[2, y, x] = rt
+            else:
+                L[1, y, x] = rt; L[2, y, x] = 0
 
     def k_castleface(self, n, c, own, same):
         """South-facing wall face under a parapet: left/mid/right columns, a base course on the last row, buttresses
@@ -274,7 +277,7 @@ class Painter:
                 cells = [(x, y + 1), (x + 1, y + 1), (x, y + 2), (x + 1, y + 2)]
                 if not all(0 <= cx < W and 0 <= cy < H and free[cy, cx] for cx, cy in cells):
                     continue
-                k = sp[int(vnoise(x, y, seed, c.get('patch', 6.0)) * len(sp) * 0.999)]
+                k = sp[max(0, min(len(sp) - 1, int(vnoise(abs(x), abs(y), seed, c.get('patch', 6.0)) * len(sp) * 0.999)))]
                 if self.rng.random() < c.get('mix', 0.25):
                     k = self.rng.choice(sp)
                 L[1, y + 1, x], L[1, y + 1, x + 1] = k['mid']

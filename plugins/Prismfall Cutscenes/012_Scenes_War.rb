@@ -13,6 +13,8 @@
 #   legends: false = :war_legend kept the legendaries away; the Wardens' aces
 #            fight instead (fire_mon: / water_mon:, default Salamence / Mamoswine)
 #   fire_legend: / water_legend: placeholder species the story team can swap.
+#   overpower: true (B/C only, not in the storyboard) = instead of falling silent,
+#            the winning kingdom's beam swallows the other and washes the screen white.
 # :WAR_CLIMAX_DEMO is the same scene with fixed variables (variant :A2), for
 # testing without a save file.
 #===============================================================================
@@ -47,10 +49,14 @@ module Prismfall
       legends = var(:legends, true)
       water   = (legends) ? var(:water_legend, :KYOGRE)   : var(:water_mon, :MAMOSWINE)
       fire    = (legends) ? var(:fire_legend, :RESHIRAM)  : var(:fire_mon, :SALAMENCE)
-      water_pal = (legends) ? :water : :ice
-      fire_pal  = (legends) ? :blueflare : :fire
+      water_pal = :seaclash
+      fire_pal  = :fireclash
       who = WAR_SPEAKERS
       clash_pt = [256, 214]
+      overpower = var(:overpower, false) && [:B, :C].include?(variant)
+      clash_end = :fizzle
+      clash_end = :both if variant == :A2
+      clash_end = ((variant == :B) ? :b : :a) if overpower
 
       #--- the stage -----------------------------------------------------------
       background :sky, palette: :dawn, sun: [256, 150]
@@ -78,7 +84,7 @@ module Prismfall
 
       #--- 2: the water bulges; the sea-beast rises ----------------------------
       cut at: [84, 236], zoom: 1.25
-      actor :water, species: water, at: [84, 500], flip: true, mouth: (legends) ? [-66, -60] : nil
+      actor :water, species: water, at: [84, 500], flip: true, mouth: (legends) ? [-56, -100] : nil
       se :rumble
       shake power: 5, duration: 1.6, decay: false
       emit :steam, at: [84, 316], rate: 30, duration: 1.6, id: :bulge
@@ -109,7 +115,7 @@ module Prismfall
       else
         wait 0.5
       end
-      actor :fire, species: fire, at: [566, 150], opacity: 0, scale: 0.5, mouth: (legends) ? [-56, -186] : nil
+      actor :fire, species: fire, at: [566, 150], opacity: 0, scale: 0.5, mouth: (legends) ? [-30, -192] : nil
       fade :fire, to: 255, duration: 0.4
       scale :fire, to: 1.0, duration: 0.6, ease: :out_back
       move :fire, to: [566, 262], duration: 0.9, ease: :out
@@ -123,8 +129,8 @@ module Prismfall
       cut at: [256, 200], zoom: 1.0
       bgm_fade 0.5
       together do
-        charge_up at: :water, color: water_pal, duration: 2.0, size: 10
-        charge_up at: :fire, color: fire_pal, duration: 2.0, size: 10
+        charge_up at: :water, color: water_pal, duration: 2.0, size: 16
+        charge_up at: :fire, color: fire_pal, duration: 2.0, size: 16
         tremble :water, duration: 2.0
         tremble :fire, duration: 2.0
         tone to: [-8, -8, 8, 0], duration: 1.5
@@ -134,10 +140,10 @@ module Prismfall
       s5, s6, s7, s8, s9, s10, s11 = 1.5, 3.2, 3.6, 3.0, 4.6, 3.2, 3.2
       total = s5 + s6 + s7 + s8 + s9 + s10 + s11
       bgm :bgm_war_clash
-      beam_clash a: { from: :water, color: water_pal, width: 10 }, b: { from: :fire, color: fire_pal, width: 10 },
-                 id: :clash, duration: total, launch: 0.9, resolve: s11, winner: (variant == :A2) ? :both : :fizzle,
+      beam_clash a: { from: :water, color: water_pal, width: 32 }, b: { from: :fire, color: fire_pal, width: 32 },
+                 id: :clash, duration: total, launch: 1.2, resolve: s11, winner: clash_end,
                  curve: [[0, 0.5], [0.08, 0.36], [0.16, 0.64], [0.24, 0.5], [0.5, 0.47], [0.75, 0.53], [1, 0.5]],
-                 ball: 10, shake: 3, wait: false
+                 ball: 26, shake: 3, ground: 306, wait: false
       wait s5
       # 6: hard zoom on the meeting point
       pan to: clash_pt, zoom: 1.5, duration: 0.35, ease: :out
@@ -207,7 +213,7 @@ module Prismfall
       tint :pc, color: [255, 255, 255], amount: 150, duration: 1.0
       emit :motes, from: { actor: :pc, part: :top }, rate: 30, color: :white, angle: -90, spread: 20, speed: 4, id: :shard
       ring at: { actor: :pc, part: :center }, color: :white, radius: 320, duration: 2.2, squash: 0.8, layer: :front
-      clash_mod :clash, white: 1.0, intensity: 0.4, shake: 2, strobe: false, duration: 2.4
+      clash_mod :clash, white: (overpower) ? 0.0 : 1.0, intensity: (overpower) ? 1.0 : 0.4, shake: (overpower) ? 5 : 2, strobe: overpower, duration: 2.4
       wait s10
       # 11: silence (A/B/C) or the white-out (A2)
       cut at: clash_pt, zoom: 1.25
@@ -332,6 +338,7 @@ module Prismfall
     define(:WAR_CLIMAX, vars: proc { Cutscene.war_vars }, &WAR_CLIMAX_BLOCK)
     [:A2, :B, :C].each { |v| build(:WAR_CLIMAX, variant: v) }              # author-time check of every variant
     build(:WAR_CLIMAX, legends: false)
+    build(:WAR_CLIMAX, variant: :C, overpower: true)
     define(:WAR_CLIMAX_DEMO) { include_scene(:WAR_CLIMAX, variant: var(:variant, :A2)) }
   end
 end

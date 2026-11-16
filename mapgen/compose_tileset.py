@@ -40,6 +40,26 @@ def main():
     cu.paste(Image.open('/home/claude/ref/art/custom/throne_2x3_crownhaven.png').convert('RGBA'), (0, 64))
     offs['custom'] = {'offset': len(pas), 'tiles': 40, 'src_tilesets': []}
     pas += [15] * 40; pri += [0] * 40; tag += [0] * 40; ims.append(cu)
+    # recoloured Sheridan sheets (roof and timber browns -> slate / moss) so the eight timber houses do not all match
+    import colorsys
+    src = Image.open(os.path.join(WLL, 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGBA')
+    src = src.crop((0, 0, 256, src.height // 32 * 32)); st = wt[37]; n = src.height // 32 * 8
+    for key, (hue, sm, vm) in (('sheridan_slate', (0.60, 0.45, 1.0)), ('sheridan_moss', (0.36, 0.75, 0.9))):
+        im = src.copy(); px = im.load(); cache = {}
+        for y in range(im.height):
+            for x in range(256):
+                r, g, b, a = px[x, y]
+                if a == 0: continue
+                k = (r, g, b)
+                if k not in cache:
+                    h, s_, v = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)
+                    if 0.0 <= h <= 0.11 and s_ > 0.3 and v < 0.8:
+                        cache[k] = tuple(int(c * 255) for c in colorsys.hsv_to_rgb(hue, s_ * sm, v * vm))
+                    else: cache[k] = k
+                px[x, y] = cache[k] + (a,)
+        offs[key] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [37]}
+        p = [int(v) for v in st.passages.data.reshape(-1)][384:384 + n]; q = [int(v) for v in st.priorities.data.reshape(-1)][384:384 + n]
+        pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n; ims.append(im)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

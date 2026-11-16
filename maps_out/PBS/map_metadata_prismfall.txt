@@ -110,7 +110,7 @@ Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center
-HealingSpot = 140,19,30
+HealingSpot = 140,28,30
 MapPosition = 0,10,25
 #-------------------------------
 [142]   # Saltmere Mart
@@ -221,6 +221,15 @@ ShowArea = true
 MapPosition = 0,14,12
 BattleBack = field
 #-------------------------------
+[281]   # Verdance Pokémon Center
+Name = Verdance Pokémon Center
+HealingSpot = 280,50,66
+MapPosition = 0,14,12
+#-------------------------------
+[282]   # Verdance Mart
+Name = Verdance Mart
+MapPosition = 0,14,12
+#-------------------------------
 [285]   # Briar Hall - Upper Court
 Name = Briar Hall
 Outdoor = true
@@ -235,6 +244,11 @@ MapPosition = 0,14,12
 #-------------------------------
 [287]   # Briar Hall - Throne Room
 Name = Briar Hall
+Outdoor = false
+MapPosition = 0,14,12
+#-------------------------------
+[295]   # Cathedral of the Evergreen
+Name = Cathedral of the Evergreen
 Outdoor = false
 MapPosition = 0,14,12
 #-------------------------------

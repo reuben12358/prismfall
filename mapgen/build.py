@@ -411,7 +411,7 @@ def walk_check(spec, ctx, m):
     if stranded > ok.sum() * 0.05 and '--walkmap' in sys.argv:
         for y in range(H):
             print(''.join('#' if not ok[y, x] else ('.' if seen[y, x] else '!') for x in range(W)))
-    if stranded > ok.sum() * 0.05:
+    if stranded > ok.sum() * 0.05 and not spec.get('yards_ok'):   # yards_ok: enclosed back gardens are intended
         ctx.warn(spec['id'], '%d walkable tiles (%.0f%%) are cut off from the first door/warp' % (stranded, 100.0 * stranded / max(1, ok.sum())))
 
 

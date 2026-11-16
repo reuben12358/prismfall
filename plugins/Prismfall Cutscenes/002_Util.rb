@@ -33,11 +33,13 @@ module Prismfall
 
     # Four ready-made Color objects for one effect.
     class Palette
-      attr_reader :core, :inner, :outer, :edge, :rgb
+      attr_reader :core, :inner, :outer, :edge, :outline, :rgb
 
       def initialize(rgb)
         @rgb = rgb
         @core, @inner, @outer, @edge = rgb.map { |c| Color.new(c[0], c[1], c[2]) }
+        o = rgb[3].map { |v| (v * 0.38).round }          # darker pixel outline
+        @outline = Color.new(o[0], o[1], o[2])
       end
 
       def [](i); return [@core, @inner, @outer, @edge][i % 4]; end

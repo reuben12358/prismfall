@@ -454,7 +454,7 @@ if __FILE__ == $0
     $opt[:render] = true
     $opt[:fps] = 30.0
     vars = {}
-    args.each { |a| m = a.match(/\A(\w+)=(\w+)\z/); vars[m[1].to_sym] = (m[2] =~ /\A\d+\z/ ? m[2].to_i : m[2].to_sym) if m }
+    args.each { |a| m = a.match(/\A(\w+)=(\w+)\z/); vars[m[1].to_sym] = (m[2] =~ /\A\d+\z/ ? m[2].to_i : (m[2] == "true" ? true : (m[2] == "false" ? false : m[2].to_sym))) if m }
     load_plugin
     pending = times.sort
     require "fileutils"
