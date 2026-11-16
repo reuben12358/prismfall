@@ -1,5 +1,16 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 8 (user feedback, 2026-11-16 12:19) <<<
+1. **PRIORITY: the early game.** Get the prologue and first two chapters (through Gym 1 and its aftermath, then Gym 2's arc)
+   fully fleshed out and playable — final-quality maps, full scripted dialogue, events, trainers, comedy scenes — before more
+   mid/late-game work. Other workstreams continue at lower priority.
+2. **Tileset rule clarified:** the ban is on the basic stock FRLG/RSE-looking tiles. Rejuvenation/Reborn-style tiles are all
+   fine even when saturated. Use best judgement; the only test is "is this visually beautiful?". Keep finding more beautiful
+   tilesets and use them. Maps need FAR more density and detail than the current drafts.
+3. **Original character art.** Named characters need original trainer sprites, overworld sprites and expressive portraits made
+   for this game, in the style of Rejuvenation/Reborn custom trainers. Reused stock sprites are placeholders only.
+4. **A working visual battle demo** (Gen 5-style EBDX scene + field effects) must be shown to the user.
+
 ## >>> REVISION 7 (user feedback, 2026-11-16 10:02) <<<
 **The game needs funny moments.** Rejuvenation-style comedy alongside the dark plot: expressive character-portrait speech
 bubbles over the overworld (circular portrait with an expression: crying-yelling, deadpan, smug, panicking; plus emote

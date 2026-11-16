@@ -42,6 +42,8 @@ module Prismfall
         @y        = spec[:y].to_f
         @tile     = spec[:tile]
         @opacity  = spec[:opacity]
+        @front    = spec[:front]
+        z = 1500 + z if @front            # in front of the actors, behind the front FX layer
         @off      = 0.0
         @sprites  = Array.new((@tile) ? 3 : 1) do
           s = Sprite.new(scene.viewport)
@@ -68,6 +70,11 @@ module Prismfall
           s.y = sy.round
           s.zoom_x = s.zoom_y = zoom
           s.opacity = @opacity
+          next if !@front
+          sil = scene.silhouette_rgb
+          if sil then s.color.set(sil[0], sil[1], sil[2], 255)
+          else s.color.set(0, 0, 0, 0)
+          end
         end
       end
 
@@ -161,6 +168,7 @@ module Prismfall
         @owned   = []     # extra sprites/bitmaps to dispose
         @particles = Particles.new(self)
         @time    = 0.0
+        @timescale = 1.0
         @next    = 0
         @fx_acc  = 0.0
         @fx_frame = 0
@@ -186,8 +194,9 @@ module Prismfall
       end
 
       def update(dt)
-        @time += dt
         check_skip(dt)
+        dt *= @timescale
+        @time += dt
         @camera.sx = @camera.sy = 0.0
         @actors.each_value { |a| a.off_x = a.off_y = 0.0 }
         events = @definition.events
@@ -206,6 +215,7 @@ module Prismfall
         @actors.each_value { |a| a.update(self, dt) }
         @armies.each_value { |a| a.update(self, dt) }
         @attached.each_value { |a| a.update(self, dt) }
+        update_decal
         @fx_acc += dt
         if @fx_acc >= 1.0 / FX_FPS
           @fx_acc = (@fx_acc >= 2.0 / FX_FPS) ? 0.0 : @fx_acc - (1.0 / FX_FPS)
@@ -329,7 +339,7 @@ module Prismfall
 
       def redraw_fx
         drawers = @effects.select(&:draws?)
-        active = !drawers.empty? || @particles.count > 0 || @overlay[:burning] > 0
+        active = !drawers.empty? || @particles.count > 0 || @overlay[:burning] > 0 || glows_active?
         if @fx_dirty
           @fx_back_bmp.clear
           @fx_front_bmp.clear
@@ -337,6 +347,7 @@ module Prismfall
         end
         update_frost
         return if !active
+        draw_glows(@fx_back_bmp)
         drawers.each { |e| e.draw(self, @fx_back_bmp, @fx_front_bmp) }
         @particles.draw(@fx_back_bmp, @fx_front_bmp)
         draw_burning(@fx_front_bmp) if @overlay[:burning] > 0
@@ -694,8 +705,8 @@ module Prismfall
           o.bitmap.dispose if o.respond_to?(:bitmap) && o.bitmap && !o.bitmap.disposed?
           o.dispose
         end
-        [@fx_back, @fx_front, @frost_sprite].compact.each { |s| s.dispose if !s.disposed? }
-        [@fx_back_bmp, @fx_front_bmp, @frost_bmp].compact.each { |b| b.dispose if !b.disposed? }
+        [@fx_back, @fx_front, @frost_sprite, @decal_sprite].compact.each { |s| s.dispose if !s.disposed? }
+        [@fx_back_bmp, @fx_front_bmp, @frost_bmp, @decal].compact.each { |b| b.dispose if !b.disposed? }
         @viewport.dispose
         @ui.dispose
         Sound.fade(:bgs, 0.5) if @used_bgs

@@ -26,6 +26,22 @@ sheets are by the **Pokémon Rejuvenation Team** (Jan and team) and the artists 
 Where Love Lies Overhaul mod by pbflo (github.com/pbflo/Where-Love-Lies-Overhaul). Rejuvenation's asset rules: credit
 the Rejuvenation Team; do not copy maps.
 
+### Community tile packs (credit each when its sheets are used)
+- **Magiscarf**: Rustic Tiles, Concrete Tiles, The Path to Somewhere, animated water.
+- **Ekat (Ekat99)**: Ekat's Public Tiles. Per her `Credits.txt`, most sheets also credit **Vurtax** (FRLG rips) and
+  **Heartlessdragoon** (RSE rips), and some credit TheDeadHeroAlistair, Slimshady, Dasani and Idilio; copy the exact
+  per-sheet lines from that file for every sheet used.
+- **princess-phoenix**: Desert Interior Tileset, The Home of Excello Village, A Burrow.
+- **carchagui**: City Tiles, Swamp Village Tileset, Mountains Variations.
+- **aveontrainer**: Factory, Machinery, Log Cabin Tileset.
+- **Phyromatical**: Victory Ruins. **Zeo254**: Pokémon Resurgent tileset. **Akizakura16**: Hi-Res Interior General Tileset.
+- Two large seasonal town sheets in the same collection have no artist in their filenames (DeviantArt IDs `dbf3bkq`,
+  `ddpuooa`). **Find and credit the artist before shipping anything from them.**
+- **Pokémon Uranium team** (tiles via acedogblast/Project-Uranium-Godot; see that repo's PermittedAssets and credits).
+- **Pokémon Infinite Fusion 2: Hoenn** (Chardub and team) for the Hoenn town, route and interior sheets.
+- **Aiwyn17** for the Freljord, sanctuary and airship sub-tilesets.
+- Collection found in M0RGEBBY/pokemon-fan-game.
+
 ### Additional tiles (only if the listed sheets are used)
 From **Pokémon Infinite Fusion** (Chardub; github.com/infinitefusion/infinitefusion-e18), cave, underwater, sky and sewer
 sheets. Its credits for public tiles:

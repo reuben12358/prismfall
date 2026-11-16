@@ -1,0 +1,90 @@
+# VILLAGE palette (GENERATED from city.yaml by a one-off edit; early-game towns). Extra ground classes and richer scatter.
+# CITY palette (tileset 33 "Prismfall City" = Tectonic Outside + Rejuvenation sheets appended, see compose_tileset.py).
+# Same painters as `tectonic` plus the castle kit, street paving and denser, clumped scatter.
+# (derived from) Palette for tileset 30 "Prismfall Outside" (= Pokémon Tectonic's Outside sheet, Gen 4/5 style; imported with
+# import_tileset.py from tilesets/tectonic_outside.yaml). Tiling tables are learned from Tectonic's own maps
+# (tlearn.py -> data/learned/t_*.json); objects are mined stamps (textract.py -> data/stamps_t.json).
+# Only rows that were looked at are referenced (ART_DIRECTION 2.1 vetting rule).
+tileset: 33
+ground: {base: 2197}
+ground_table: grass                    # grass rims where it meets rock, paving and water
+ground_ids: [2197, 2504, 2505, 2506, 2507, 2508, 2509, 2510, 2511, 2512, 2513, 2514, 2515, 2516, 2517, 2518, 2519,
+             2520, 2521, 2522, 2523, 2524, 2525, 2526, 2527, 2528]
+classes:
+  grass:    {kind: ground}
+  clear:    {kind: ground}             # grass kept free of scatter (door fronts, lanes)
+  building: {kind: ground}
+  brick:    {kind: learned, table: brick, layer: 0}          # red brick paving
+  cream:    {kind: learned, table: cream, layer: 0}          # cream flagstones
+  saltpan:  {kind: learned, table: saltpan, layer: 0}        # pale blue tiles (salt pans)
+  stones:   {kind: learned, table: stones, layer: 1}         # stepping-stone path over grass
+  sea:      {kind: sea, id: 288, rock: 2609, quay: [brick, cream, sand], also: [pier], same: [sea, pier]}
+  pier:     {kind: tpier, layer: 2, left: 3806, mid: 3831, right: 3807}
+  cliff:    {kind: cliffline, table: cliff, west: 2608, east: 2610, rock: 2609}
+  fence:    {kind: learned, table: fence, layer: 2}
+  flowerbed: {kind: autotile, id: 240, layer: 1}              # white-flower bed (Prizca planters)
+  void:     {kind: tile, tile: 0, layer: 0}                    # black surround of interior maps
+  flag:     {kind: tile, tile: 3910, layer: 0}                 # pale castle flagstones
+  cobble:   {kind: tile, tile: 2273, layer: 0}
+  dirt:     {kind: learned, table: dirt, layer: 1}             # worn earth path over grass
+  sand:     {kind: tile, tile: 3089, layer: 0}
+  wfence:   {kind: learned, table: wfence, layer: 1}          # split-rail wooden fence
+  tallgrass: {kind: autotile, id: 96, layer: 1}
+  flowerbed2: {kind: autotile, id: 192, layer: 1}                 # lilac-grey street setts (Prizca streets)
+  wall:     {kind: castle, floor: 3910, rim: &rim {NW: 3920, N: 3921, NE: 3922, W: 3928, E: 3930, SW: 3936, S: 3937, SE: 3938,
+             inner_nw: 3923, inner_ne: 3924, inner_sw: 3931, inner_se: 3932, center: 0}}
+  tower:    {kind: castle, floor: 3910, rim: *rim}
+  keep:     {kind: castle, floor: 3910, rim: *rim}
+  wallface: &face {kind: castleface, face: [3944, 3945, 3946], base: [3952, 3953, 3954], pillar: [3940, 3948, 3956],
+             slit: 4029, window: [4004, 4012], buttress: 6}
+  towerface: *face
+  keepface: *face
+  cstairs:  {kind: cstairs, rows: [[3925, 3926, 3927], [3933, 3934, 3935], [3941, 3942, 3943]]}
+  forest:   {kind: forest, patch: 7.0, mix: 0.3, under_p: 0.75,
+             species: [{top: [401, 402], mid: [409, 410], bot: [417, 418]},
+                       {top: [405, 406], mid: [413, 414], bot: [421, 422]},
+                       {top: [605, 606], mid: [613, 614], bot: [621, 622]},
+                       {top: [601, 602], mid: [609, 610], bot: [617, 618]}],
+             under: [947, 947, 939, 1164, 585, 1172, 571]}
+scatter:
+  on: [grass]
+  density: 0.10
+  patches:
+    - {tiles: [9422, 9423, 9430, 9434, 9442, 9443, 9450, 8723, 8724, 8725, 8717, 1035], threshold: 0.70, scale: 3.5, fill: 0.85}
+    - {tiles: [947, 939, 947, 955, 8622], threshold: 0.62, scale: 3.5, fill: 0.95}
+    - {tiles: [1164, 1164, 1172, 8628, 8627], threshold: 0.52, scale: 6.0, fill: 0.9}
+    - {tiles: [1035, 1035, 8620, 8629, 1172], threshold: 0.72, scale: 2.5, fill: 0.9}
+  singles: [[1164, 6], [585, 2], [1069, 1], [8627, 2], [8628, 2], [1141, 1], [1142, 1], [8619, 1], [1157, 1]]
+tiles:
+  sign: {layer: 1, tile: 3264}
+  sign_top: {layer: 2, tile: 3256}
+glyphs:
+  '.': grass
+  ',': clear
+  '#': building
+  'b': brick
+  'c': cream
+  'p': saltpan
+  'o': stones
+  '~': sea
+  '=': pier
+  'C': cliff
+  'f': fence
+  'T': forest
+  'k': cobble
+  'd': dirt
+  's': sand
+  'w': wfence
+  't': tallgrass
+  'H': flowerbed2
+  'x': void
+  'g': flag
+  'h': flowerbed
+  'W': wall
+  'F': wallface
+  'K': tower
+  'G': towerface
+  'Q': keep
+  'R': keepface
+  'S': cstairs
+water_under_stamps: 288      # autotile id put on layer 0 under ships and piers

@@ -1,0 +1,6 @@
+Name       = ZZ Demo Autorun
+Version    = 1.0.0
+Essentials = 21.1
+Requires   = Prismfall EBDX Bridge
+Requires   = Prismfall Bosses
+Credits    = Prismfall dev team (dev-only capture tool; never ship)

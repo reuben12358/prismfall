@@ -111,7 +111,9 @@ module Prismfall
           s.z = 500 + (u.y + @off_y).round
           s.angle = (u.fall > 0) ? ((@facing == :right) ? 90 : -90) * Ease.apply(:out, u.fall) : 0
           s.opacity = (@opacity * ((u.fall > 0) ? 1 - (u.fall * 0.55) : 1)).round
-          if u.flash > 0 then s.color.set(255, 255, 255, 255 * u.flash)
+          sil = scene.silhouette_rgb
+          if sil then s.color.set(sil[0], sil[1], sil[2], 255)
+          elsif u.flash > 0 then s.color.set(255, 255, 255, 255 * u.flash)
           else s.color.set(@tint[0], @tint[1], @tint[2], @tint[3])
           end
         end

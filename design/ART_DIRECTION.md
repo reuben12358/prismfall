@@ -1,23 +1,20 @@
 # ART DIRECTION — Pokémon Prismfall overworld
 
-## 0. Hard requirements (SPINE Rev 5 + Rev 6) — read first
-1. **Gen 4 / Gen 5 style only (DPPt / HGSS / BW).** No Gen 3 tiles and no Gen 3 palette anywhere. The stock Essentials
-   FRLG/RSE tilesets (`Outside`, `Interior general`, `Caves`, all 25 base tilesets) are **banned** from every shipped map,
-   interiors included. Everything comes from Gen 4/5-style packs or from custom tiles drawn to match them.
-2. **Target look = Pokémon Rejuvenation's overworld** (Rev 6): tall timber-and-stone buildings with steep dark roofs, rows of
+## 0. Hard requirements (SPINE Rev 5–8) — read first
+1. **No stock Essentials tiles.** The base project's FireRed/LeafGreen-looking tilesets (`Outside`, `Interior general`,
+   `Caves` and the rest of the 25) are banned from every shipped map, interiors included.
+2. **The only style test is beauty** (Rev 8). Rejuvenation/Reborn-style tiles with saturated greens are fine, and so are
+   well-drawn Gen 3-derived community sets. Keep each map to one visual family so pieces do not clash.
+3. **Target look = Pokémon Rejuvenation's overworld** (Rev 6): tall timber-and-stone buildings with steep dark roofs, rows of
    townhouses, lush mixed foliage, textured dirt paths with pebbles, signboards, and a moody weather / time-of-day overlay.
-3. **No generic tree walls.** Borders come from what the place is: cliffs, sea, city walls, rooftops, mountains, canals, ruins,
+4. **No generic tree walls.** Borders come from what the place is: cliffs, sea, city walls, rooftops, mountains, canals, ruins,
    and forest canopy only where the biome is forest.
-4. **Real architecture at real scale.** Kingdom seats are castle cities: curtain walls, gatehouses, towers, keep or palace on
+5. **Real architecture at real scale.** Kingdom seats are castle cities: curtain walls, gatehouses, towers, keep or palace on
    high ground, cathedral, markets, harbour, slums, and grand interiors (throne room, great hall).
 
-**Status.** We now hold **real Rejuvenation v13.5 tilesets** (15 sheets, §2.0) from a public mod repo, plus Tectonic's
-large Gen 4/5 compilation (§2.1). The full Rejuvenation, Reborn and Desolation games remain unreachable (§2.4), so
-Rejuvenation's autotiles and most of its other sheets are missing.
-
-**Style note for the coordinator.** Rejuvenation's own sheets are more saturated than DPPt and some pieces (Sheridan's
-trees, Gearen's grass) read close to Gen 3. Rev 6 names Rejuvenation as the target, so they are allowed, but pick the
-Gen 4-looking pieces first and keep each map to one sheet family.
+**Status.** Ten art sources are cloned (§2.0), including real Rejuvenation v13.5 sheets and several community packs with
+steep-roof houses, market props, castle and bridge stonework, city blocks, ice, volcano and sci-fi sets. The full
+Rejuvenation, Reborn and Desolation games remain unreachable (§2.4).
 
 ## 1. Target look
 - 16-px pixel art doubled to 32-px tiles (verified: every 2×2 block in the Tectonic sheets is one colour). **All custom art
@@ -34,7 +31,23 @@ Gen 4-looking pieces first and keep each map to one sheet family.
 |---|---|---|---|
 | 1 | **Rejuvenation v13.5 sheets** via `pbflo/Where-Love-Lies-Overhaul` | `/home/claude/ref/art/wll` (17 MB) | The real thing: Sheridan's timber houses with steep dark roofs, vines, flower borders, signposts; Gearen's apartment blocks, scaffolds, museum facade. Partial set. |
 | 2 | **Tectonic** | `/home/claude/ref/art/tectonic` | Clean Gen 4/5 look, widest coverage, castle kit, complete autotiles and passages. Plainer houses. |
-| 3 | Infinite Fusion (parts) | `/home/claude/ref/art/pif` | Caves, underwater temple, sewers only. |
+| 3 | **Community packs inside `M0RGEBBY/pokemon-fan-game`** | `/home/claude/ref/art/morgebby/Graphics/Tilesets/Tilesets/` (13 MB repo) | The richest find for towns. Two unnamed mega-sheets (`dbf3bkq-…png` 1920×3360, `ddpuooa-…png` 3328×2752): four-season trees and ground, timber houses, castle towers, stone bridges, fountains, canals, torii, windows and doors. Magiscarf's rustic tiles (timber houses, market stalls, washing lines, kilns, crates, rock arches) and concrete tiles. Also princess-phoenix (desert interior, Excello village, burrow), carchagui (city tiles, swamp village, mountains), aveontrainer (factory, machinery, log cabin), Phyromatical (Victory ruins), Zeo254. Beautiful, on target. **All 16-px native: double on import.** No passage data. |
+| 4 | **Ekat's Public Tiles** (80 sheets, same folder, `Ekat's Public Tiles/`, with `Credits.txt`) | as above | Steep-roof "Pointy Buildings", Brick City, Jonquil Town, Silph City (sci-fi), Volcano Set, Haunted and Fairy Woods, Floating Cliffs, Wine Cellar, Ship Interior, Dragonspiral, Snowpoint Temple, Wild West, Coral, Deep Sea, garden and patio props. Charming and dense; Emerald-scale palette, so use as its own family. 16-px native, no passage data. |
+| 5 | **Pokémon Uranium tiles** via `acedogblast/Project-Uranium-Godot` | `/home/claude/ref/art/uranium/Maps/tilesets/` (4 MB) | `PU_buildings+` is a strong Gen 4-style city set: towers, domed palace, brick mansion, pagoda, cooling towers, stadium, harbour. Plus ground, water, caves, indoors. Wide sheets (512–912 px), 32-px tiles; needs re-cutting to 8 columns. No RMXP passage data. |
+| 6 | **Infinite Fusion 2: Hoenn** | `/home/claude/ref/art/pif-hoenn` (6 MB) | 22 sheets with `Tilesets.rxdata`: Rustboro, Slateport, Mauville, Dewford town sets (apartments, market stalls, fountains, lighthouse, shipyard), routes, caves, contest and power-plant interiors. Clean and attractive. Maps not fetched. |
+| 7 | **`Aiwyn17/pokemon` sub-tilesets** | `/home/claude/ref/art/aiwyn/Graphics/Tilesets/` | Ice kingdom material: Freljord villages and port (4480 px), frozen routes, demigod sanctuary, trial cavern, an airship; plus Akizakura16's hi-res interior sheet (19168 px). Direct fit for Isenmar and Zenith's airships. Looks good at sheet level; no maps rendered. |
+| 8 | Infinite Fusion (parts) | `/home/claude/ref/art/pif` | Caves, underwater temple, sewers only. |
+| 9 | LPC (ElizaWy) | `/home/claude/ref/art/_probe/ElizaWy_LPC` (tree only, not checked out) | Open-licence 32-px walls, floors, furniture. Different proportions from Pokémon art; last resort for grand-interior furniture. |
+| 10 | Kenney CC0 library | `/home/claude/ref/art/_probe/Tiddybub_2d-assets` (tree only) | CC0 but flat vector style; does not match. Not recommended. |
+
+**What the new sources close.** Steep-roof townhouses and more house shapes (1, 3, 4), street props such as stalls,
+washing lines, fountains, barrels and lamps (3, 4, 6), landmark buildings (5: domed palace, mansion; 3: towers), castle and
+bridge stonework (2, 3), ice kingdom (7), sci-fi city (4, 5), volcano and haunted woods (4), desert interior (3).
+**Still thin:** cathedral, guildhalls, grand throne-room interiors, slum and undercity sets, dragon citadel. Custom work (§5).
+
+**Import cost.** Sources 1, 2 and 6 come with passages. Sources 3, 4, 5 and 7 are loose sheets: they must be cut into
+256-px-wide RMXP sheets (16-px art doubled first) and given passages, priorities and terrain tags by hand or by rule.
+Nothing from sources 3–7 has been rendered in a map yet; the judgements above are from the sheets.
 
 **Rejuvenation sheets in `wll/Changed Files/Graphics/Tilesets/`** (passages, priorities, terrain tags in
 `wll/Changed Files/Data/Tilesets.rxdata`; dump `/home/claude/ref/art/dumps/wll/tilesets.json`; 81 maps included):
@@ -63,7 +76,11 @@ Renders: `/home/claude/ref/art/renders/rejuv_wll_{002 Gearen, 038 Sheridan, 056 
 - Only `git clone` from github.com works. The GitHub API (`gh search`, `gh release`), codeload zips and raw files
   return 403. archive.org, itch.io, gamejolt, mediafire, mega, gitlab, deviantart, eeveeexpo and rebornevo.com all fail
   with "CONNECT tunnel failed, response 403" (one HEAD each).
-- Probed by web search plus clone: `Waynolt/SWM-modular-modpack` (scripts only), `fuyukai/reborn-rebalance`,
+- Second pass, 30 more repos probed by clone: hits are sources 3–7 above. Empty or stock-only: ten Essentials forks,
+  `Dzitars/PkmnFanGame`, `Ethanol-Rouxy/PokEMT`, `omanoloneto/pokemon-essentials-enhanced-v20.1`,
+  `kurayamiblackheart/kurayshinyrevamp` (same tiles as `pif`), Añil release repos (one README each), three Uranium
+  repos, `ChimeraGaming/FanmakePokemonMaps_Android`, `Concave-World/mapmaking` (Gather.town art, wrong style).
+- First pass, by web search plus clone: `Waynolt/SWM-modular-modpack` (scripts only), `fuyukai/reborn-rebalance`,
   `birblett/RemiX` (no graphics), `aleksjovcic/pokemon-alpine`, `starrcasm/pokemon-essentials-sesk`, three Essentials
   forks (stock tiles or none), `Aiwyn17/pokemon` (stock tiles plus 5 custom sub-tilesets, not examined),
   `espparki1/PokemonValhalla` (wrong style). No Reborn or Desolation graphics found anywhere on GitHub.
@@ -92,11 +109,9 @@ above 16, so **remap on import**:
 | 18 Puddle | 16 | | 28 FishingContest | 6 StillWater |
 | 19 SparseGrass, 21–23 flowery/tinted grass | 10 TallGrass | | 20, 24, 27, 29–32, 34, 39–43 | 0 |
 
-**Gen 3 vetting (not finished).** `tools/gen3_vet.py` flags tiles sharing exact colours with the stock FRLG sheets:
-1683 of 7701 tiles in Outside and 87 of 3753 in Inside. Some flags are shared neutral colours, some are real stock
-Essentials pieces carried into the sheet. Nobody has looked at the flagged rows yet. **Rule: a palette may only reference
-sheet rows that have been visually cleared; flagged rows are off-limits until then.** The trees, cliffs, castle kit and
-city blocks seen in the renders are Gen 4/5 style.
+**Stock-tile check.** Tectonic's sheet still carries some stock Essentials pieces. `tools/gen3_vet.py` lists tiles that
+share exact colours with the stock sheets (1683 of 7701, many false positives). It is a helper for spotting stock pieces,
+not a blocker: judge by eye.
 
 **Reference maps** (rendered to `/home/claude/ref/art/renders/tectonic_NNN.png`). Use them to learn tiling rules with
 `learn.py` and to mine building and prop stamps. **Do not copy layouts** (standing fangame etiquette; Rejuvenation's

@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Cutscenes - 013 Portrait speech bubbles (SPINE Revision 7)
+# Prismfall Cutscenes - 014 Portrait speech bubbles (SPINE Revision 7)
 #-------------------------------------------------------------------------------
 # A round portrait with a white ring and a speech tail pointing at the speaker
 # on the map, popping in above the normal message box, with code-drawn emotes.

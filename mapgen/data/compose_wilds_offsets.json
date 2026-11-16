@@ -1,0 +1,37 @@
+{
+ "route2": {
+  "offset": 8616,
+  "tiles": 2496
+ },
+ "goldenleaf": {
+  "offset": 11112,
+  "tiles": 2248
+ },
+ "bleed": {
+  "offset": 13360,
+  "tiles": 8232
+ },
+ "custom": {
+  "offset": 21592,
+  "tiles": 248,
+  "names": {
+   "strand_h": 21592,
+   "strand_v": 21600,
+   "strand_d1": 21608,
+   "strand_d2": 21616,
+   "web_nw": 21624,
+   "web_ne": 21632,
+   "web_sw": 21640,
+   "web_se": 21648,
+   "silkmat": 21656,
+   "cocoon": 21680,
+   "cocoon_big": 21696,
+   "cocoon_low": 21720,
+   "curtain": 21728,
+   "shaft": 21744,
+   "shade": 21776,
+   "silk_tree": 21792,
+   "crystal_tree": 21816
+  }
+ }
+}

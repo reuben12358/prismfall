@@ -12,6 +12,7 @@ CHAPTERS = [
     ("story/02_FACTIONS.md", "factions", "Factions"),
     ("story/03_CAST.md", "cast", "Cast"),
     ("story/04_ACT_I.md", "act-1", "Act I"),
+    ("story/20_SCRIPT_CH0-2.md", "script-1", "Script: first hour"),
     ("story/05_ACT_II.md", "act-2", "Act II"),
     ("story/06_ACT_III.md", "act-3", "Act III"),
     ("story/07_ACT_IV.md", "act-4", "Act IV"),

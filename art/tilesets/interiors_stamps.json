@@ -1,0 +1,769 @@
+[
+{
+"name": "basic_01",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+1,
+3,
+3
+],
+"first_tile_id": 392
+},
+{
+"name": "basic_02",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+4,
+8,
+5
+],
+"first_tile_id": 416
+},
+{
+"name": "basic_03",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+9,
+1,
+2
+],
+"first_tile_id": 456
+},
+{
+"name": "basic_04",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+1,
+9,
+1,
+2
+],
+"first_tile_id": 457
+},
+{
+"name": "basic_05",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+2,
+9,
+1,
+2
+],
+"first_tile_id": 458
+},
+{
+"name": "basic_06",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+9,
+1,
+2
+],
+"first_tile_id": 459
+},
+{
+"name": "basic_07",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+4,
+9,
+3,
+2
+],
+"first_tile_id": 460
+},
+{
+"name": "basic_08",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+11,
+3,
+2
+],
+"first_tile_id": 472
+},
+{
+"name": "basic_09",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+11,
+1,
+1
+],
+"first_tile_id": 475
+},
+{
+"name": "basic_10",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+4,
+11,
+1,
+2
+],
+"first_tile_id": 476
+},
+{
+"name": "basic_11",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+5,
+11,
+3,
+2
+],
+"first_tile_id": 477
+},
+{
+"name": "basic_12",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+13,
+1,
+2
+],
+"first_tile_id": 488
+},
+{
+"name": "basic_13",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+1,
+13,
+1,
+1
+],
+"first_tile_id": 489
+},
+{
+"name": "basic_14",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+2,
+13,
+3,
+4
+],
+"first_tile_id": 490
+},
+{
+"name": "basic_15",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+5,
+13,
+3,
+2
+],
+"first_tile_id": 493
+},
+{
+"name": "basic_16",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+17,
+1,
+2
+],
+"first_tile_id": 520
+},
+{
+"name": "basic_17",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+1,
+17,
+1,
+1
+],
+"first_tile_id": 521
+},
+{
+"name": "basic_18",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+2,
+17,
+1,
+2
+],
+"first_tile_id": 522
+},
+{
+"name": "basic_19",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+17,
+1,
+1
+],
+"first_tile_id": 523
+},
+{
+"name": "basic_20",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+4,
+17,
+2,
+2
+],
+"first_tile_id": 524
+},
+{
+"name": "basic_21",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+6,
+17,
+2,
+2
+],
+"first_tile_id": 526
+},
+{
+"name": "basic_22",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+19,
+3,
+2
+],
+"first_tile_id": 536
+},
+{
+"name": "basic_23",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+19,
+3,
+2
+],
+"first_tile_id": 539
+},
+{
+"name": "basic_24",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+21,
+3,
+2
+],
+"first_tile_id": 552
+},
+{
+"name": "basic_25",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+21,
+2,
+2
+],
+"first_tile_id": 555
+},
+{
+"name": "basic_26",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+5,
+21,
+3,
+2
+],
+"first_tile_id": 557
+},
+{
+"name": "basic_27",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+23,
+3,
+2
+],
+"first_tile_id": 568
+},
+{
+"name": "basic_28",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+23,
+2,
+2
+],
+"first_tile_id": 571
+},
+{
+"name": "basic_29",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+5,
+23,
+3,
+2
+],
+"first_tile_id": 573
+},
+{
+"name": "basic_30",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+0,
+25,
+1,
+2
+],
+"first_tile_id": 584
+},
+{
+"name": "basic_31",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+1,
+25,
+1,
+1
+],
+"first_tile_id": 585
+},
+{
+"name": "basic_32",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+2,
+25,
+1,
+2
+],
+"first_tile_id": 586
+},
+{
+"name": "basic_33",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Basic Interior Collection.png",
+"tile_rect": [
+3,
+25,
+1,
+1
+],
+"first_tile_id": 587
+},
+{
+"name": "cellar_01",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+4,
+25,
+1,
+1
+],
+"first_tile_id": 588
+},
+{
+"name": "cellar_02",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+5,
+25,
+1,
+1
+],
+"first_tile_id": 589
+},
+{
+"name": "cellar_03",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+6,
+25,
+1,
+1
+],
+"first_tile_id": 590
+},
+{
+"name": "cellar_04",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+27,
+2,
+1
+],
+"first_tile_id": 600
+},
+{
+"name": "cellar_05",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+28,
+8,
+4
+],
+"first_tile_id": 608
+},
+{
+"name": "cellar_06",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+32,
+1,
+2
+],
+"first_tile_id": 640
+},
+{
+"name": "cellar_07",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+1,
+32,
+1,
+2
+],
+"first_tile_id": 641
+},
+{
+"name": "cellar_08",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+34,
+8,
+7
+],
+"first_tile_id": 656
+},
+{
+"name": "cellar_09",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+41,
+8,
+7
+],
+"first_tile_id": 712
+},
+{
+"name": "cellar_10",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Wine Cellar.png",
+"tile_rect": [
+0,
+48,
+1,
+2
+],
+"first_tile_id": 768
+},
+{
+"name": "mansion_01",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+0,
+50,
+8,
+5
+],
+"first_tile_id": 784
+},
+{
+"name": "mansion_02",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+0,
+55,
+8,
+14
+],
+"first_tile_id": 824
+},
+{
+"name": "mansion_03",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+0,
+69,
+2,
+2
+],
+"first_tile_id": 936
+},
+{
+"name": "mansion_04",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+2,
+69,
+3,
+4
+],
+"first_tile_id": 938
+},
+{
+"name": "mansion_05",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+5,
+69,
+1,
+2
+],
+"first_tile_id": 941
+},
+{
+"name": "mansion_06",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Viridian Mansion.png",
+"tile_rect": [
+0,
+73,
+3,
+1
+],
+"first_tile_id": 968
+},
+{
+"name": "ship_01",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+0,
+74,
+8,
+12
+],
+"first_tile_id": 976
+},
+{
+"name": "ship_02",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+0,
+86,
+1,
+2
+],
+"first_tile_id": 1072
+},
+{
+"name": "ship_03",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+1,
+86,
+1,
+2
+],
+"first_tile_id": 1073
+},
+{
+"name": "ship_04",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+2,
+86,
+2,
+3
+],
+"first_tile_id": 1074
+},
+{
+"name": "ship_05",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+0,
+89,
+8,
+10
+],
+"first_tile_id": 1096
+},
+{
+"name": "ship_06",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+0,
+99,
+2,
+3
+],
+"first_tile_id": 1176
+},
+{
+"name": "ship_07",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+2,
+99,
+1,
+2
+],
+"first_tile_id": 1178
+},
+{
+"name": "ship_08",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+3,
+99,
+3,
+2
+],
+"first_tile_id": 1179
+},
+{
+"name": "ship_09",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+6,
+99,
+1,
+1
+],
+"first_tile_id": 1182
+},
+{
+"name": "ship_10",
+"kind": "prop",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Ship Interior.png",
+"tile_rect": [
+0,
+102,
+3,
+2
+],
+"first_tile_id": 1200
+}
+]

@@ -1,0 +1,229 @@
+100:
+  events:
+  - type: sign
+    at:
+    - 18
+    - 2
+    text: 'FERROW''S LANDING
+
+      Last harbour of the Evergreen Crown.'
+  - type: sign
+    at:
+    - 11
+    - 15
+    post: false
+    name: Accord plaque
+    text: 'An old bronze Accord plaque: "Eighteen in Concord, One in Keeping."'
+  - type: event
+    name: Customs scan
+    at:
+    - 19
+    - 23
+    pages: &id001
+    - cond:
+        switch: PRO_FERRY_DONE
+      trigger: touch
+      commands:
+      - 'Calla Wren: Next! Meridian customs. Hold still for the Imprint scan.'
+      - se: Battle ball shake
+      - 'Every passenger before you got a colored tint bar. Yours reads blank: NULL.'
+      - 'Calla Wren: ...That''s not right. Again.'
+      - se: Battle ball shake
+      - NULL.
+      - 'Aurelian Voss: Faulty unit. These things hate sea air. Let them through, Calla.'
+      - He glances back at you, once.
+      - switch:
+        - PRO_SCANNED_NULL
+        - true
+      - var:
+        - STORY_ACT
+        - 1
+      - var:
+        - STORY_CHAPTER
+        - 1
+    - cond:
+        switch: PRO_SCANNED_NULL
+  - type: event
+    name: Customs scan 2
+    at:
+    - 20
+    - 23
+    pages: *id001
+  - type: event
+    name: Customs scan 3
+    at:
+    - 21
+    - 23
+    pages: *id001
+  - type: event
+    name: Calla Wren
+    at:
+    - 16
+    - 23
+    pages:
+    - graphic:
+        sprite: trainer_SCIENTIST
+        dir: right
+      commands:
+      - 'Calla Wren: Meridian customs. Everyone gets scanned. Everyone.'
+    - cond:
+        switch: PRO_SCANNED_NULL
+      graphic:
+        sprite: trainer_SCIENTIST
+        dir: right
+      commands:
+      - 'Calla Wren: Faulty unit, he says. Sure.'
+      - (She's looking at something on her screen.)
+  - type: event
+    name: Captain Edda
+    at:
+    - 21
+    - 29
+    pages:
+    - cond:
+        switch: PRO_FERRY_DONE
+      graphic:
+        sprite: trainer_SAILOR
+        dir: left
+      commands:
+      - 'Captain Edda Morrow: That''s the last of you. The Dovetail sails back at dusk, empty.'
+      - choices:
+        - Good luck, Captain
+        - Take me back with you
+        cancel: 1
+        branches:
+        - - 'Captain Edda Morrow: Luck''s for people who don''t check their knots. Off with you, sprog.'
+        - - 'Captain Edda Morrow: Last chance, sprog. Once I cast off, that''s it.'
+          - choices:
+            - '...Never mind'
+            - Take me home
+            cancel: 1
+            branches:
+            - - 'Captain Edda Morrow: Thought so.'
+            - - script: Prismfall.game_over(:GO_HOMEWARD)
+  - type: event
+    name: Coll Hale
+    at:
+    - 24
+    - 11
+    pages:
+    - graphic:
+        sprite: NPC 03
+        dir: down
+      commands:
+      - 'Coll Hale: You''re the Larch kid? Eat this. You''re too thin.'
+      - He hands you a bramble tart. It's still warm.
+  - type: event
+    name: Wenna Hale
+    at:
+    - 25
+    - 11
+    pages:
+    - graphic:
+        sprite: NPC 11
+        dir: down
+      commands:
+      - 'Wenna Hale: Juno''s at the Station with the Professor. Tell her to come home for supper. She won''t.'
+      - 'Wenna Hale: Here - Juno''s old Pokégear. She upgraded. You''ll want a map and a phone in this place.'
+      - script: $player.has_pokegear = true
+      - \PN received a Pokégear!
+      - selfswitch:
+        - A
+        - true
+    - cond:
+        self: A
+      graphic:
+        sprite: NPC 11
+        dir: down
+      commands:
+      - 'Wenna Hale: Juno''s at the Station with the Professor. Tell her to come home for supper. She won''t.'
+  - type: npc
+    name: Skipping children
+    at:
+    - 13
+    - 13
+    sprite: NPC 07
+    move: random
+    text: 'One for the weaver, two for the stage,
+
+      three for the river that won''t turn its page,
+
+      four for the lantern, five for the dune...!'
+  - type: event
+    name: Fisherman
+    at:
+    - 21
+    - 27
+    pages:
+    - graphic:
+        sprite: trainer_FISHERMAN
+        dir: left
+      commands:
+      - 'Fisherman: The ferry won''t sail again. Fish don''t care, though. Here - every coast kid needs one.'
+      - script: pbReceiveItem(:OLDROD)
+      - selfswitch:
+        - A
+        - true
+    - cond:
+        self: A
+      graphic:
+        sprite: trainer_FISHERMAN
+        dir: left
+      commands:
+      - 'Fisherman: Cast off the end of the pier. Tentacool bite at dusk.'
+  - type: event
+    name: Kestrel K1
+    at:
+    - 19
+    - 10
+    pages:
+    - cond:
+        switch: CH1_STARTER_GOT
+      trigger: autorun
+      graphic:
+        sprite: trainer_RIVAL1
+        dir: up
+      commands:
+      - 'Kestrel: Hey. Tourist. Let''s see if you can actually use that thing.'
+      - if: 'Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, can_lose: true)'
+        then:
+        - 'Kestrel: ...Tch. Beginner''s luck.'
+        else:
+        - 'Kestrel: Figures.'
+      - heal: true
+      - 'Kestrel: You came in on the last ferry? Great. Velmora''s sinking and they''re still letting tourists on.'
+      - switch:
+        - CH1_K1_DONE
+        - true
+    - cond:
+        switch: CH1_K1_DONE
+  - type: item
+    at:
+    - 3
+    - 12
+    item: POTION
+  - type: item
+    at:
+    - 37
+    - 10
+    item: POKEBALL
+    hidden: true
+  head:
+    id: 100
+    name: Ferrow's Landing
+    palette: outside
+    bgm: Lappet Town
+    parent: 0
+    metadata:
+      Outdoor: true
+      ShowArea: true
+      MapPosition:
+      - 0
+      - 14
+      - 26
+      BattleBack: field
+    connections:
+    - dir: N
+      offset: 17
+      to: 520
+      to_offset: 10

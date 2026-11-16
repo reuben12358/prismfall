@@ -275,6 +275,7 @@ module Prismfall
         @walking = o[:walk] || false
         @animate = o[:animate] != false
         @mouth   = o[:mouth]
+        @submerge = (o[:submerge] || 0).to_i
         @tint    = [0.0, 0.0, 0.0, 0.0]
         sil = o[:silhouette]
         sil = [16, 16, 24] if sil == true
@@ -290,12 +291,13 @@ module Prismfall
         @sprite = Sprite.new(scene.viewport)
         @sprite.bitmap = @gfx.bitmap
         @sprite.ox = @gfx.fw / 2
-        @sprite.oy = @gfx.fh
+        @sprite.oy = @gfx.fh - @submerge
+        @sprite.src_rect.set(0, 0, @gfx.fw, @gfx.fh - @submerge) if @submerge > 0
         update(scene, 0)
       end
 
       def width;  return @gfx.fw * @gfx.px * @scale; end
-      def height; return @gfx.fh * @gfx.px * @scale; end
+      def height; return (@gfx.fh - @submerge) * @gfx.px * @scale; end
       def pos;    return [@x, @y]; end
       def center; return [@x, @y - (height / 2)]; end
       def top;    return [@x, @y - height]; end
@@ -319,7 +321,7 @@ module Prismfall
           end
         when :charset
           col = (@walking) ? (@time * 6).to_i % 4 : 0
-          @sprite.src_rect.set(col * @gfx.fw, (Gfx::DIR_ROWS[@dir] || 0) * @gfx.fh, @gfx.fw, @gfx.fh)
+          @sprite.src_rect.set(col * @gfx.fw, (Gfx::DIR_ROWS[@dir] || 0) * @gfx.fh, @gfx.fw, @gfx.fh - @submerge)
         when :icon
           col = (@animate) ? (@time * 4).to_i % @gfx.frames : 0
           @sprite.src_rect.set(col * @gfx.fw, 0, @gfx.fw, @gfx.fh)
@@ -337,11 +339,16 @@ module Prismfall
         @sprite.mirror = @flip
         @sprite.opacity = @opacity.round
         @sprite.z = @z || (500 + @y.round)
-        @color.set(@tint[0], @tint[1], @tint[2], @tint[3])
+        sil = scene.silhouette_rgb
+        if sil then @color.set(sil[0], sil[1], sil[2], 255)
+        else @color.set(@tint[0], @tint[1], @tint[2], @tint[3])
+        end
         @sprite.color = @color
+        update_rim(scene) if @rim
       end
 
       def dispose
+        dispose_rim if @rim
         @sprite.dispose if @sprite && !@sprite.disposed?
         Gfx.dispose(@gfx)
       end

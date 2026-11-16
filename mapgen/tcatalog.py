@@ -21,7 +21,7 @@ def isobj(a):
     for lo_, hi_ in ROWS: m |= (a >= 384) & (r >= lo_) & (r <= hi_)
     return m
 seen_sig = set(); out = {}; ims = []
-tc = R.TileCache(R.tilesets()[33])
+tc = R.TileCache(R.tilesets()[int(opt('--tsr', '33'))])
 for f in sorted(glob.glob(TD + '/Map[0-9]*.rxdata')):
     m = M.load_file(f)
     if m.tileset_id not in TS: continue
@@ -37,7 +37,7 @@ for f in sorted(glob.glob(TD + '/Map[0-9]*.rxdata')):
             lab[y, x] = n; cells.append((x, y)); st += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
         xs = [c[0] for c in cells]; ys = [c[1] for c in cells]
         x, y, w, h = min(xs), min(ys), max(xs) - min(xs) + 1, max(ys) - min(ys) + 1
-        if w < 3 or h < 3 or w > 30 or h > 30: continue
+        if w < int(opt('--min', '3')) or h < int(opt('--min', '3')) or w > 30 or h > 30: continue
         sig = (w, h, tuple(D[1:, y:y + h, x:x + w].reshape(-1).tolist()))
         if any(s_[0] == w and s_[1] == h and sum(a != b for a, b in zip(s_[2], sig[2])) < 0.15 * len(sig[2]) for s_ in seen_sig): continue
         if sig in seen_sig: continue

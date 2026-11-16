@@ -1,0 +1,405 @@
+[
+{
+"name": "uranium_01",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+1,
+7,
+9
+],
+"first_tile_id": 392
+},
+{
+"name": "uranium_02",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+10,
+6,
+5
+],
+"first_tile_id": 464
+},
+{
+"name": "uranium_03",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+15,
+8,
+6
+],
+"first_tile_id": 504
+},
+{
+"name": "uranium_04",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+21,
+5,
+6
+],
+"first_tile_id": 552
+},
+{
+"name": "uranium_05",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+27,
+5,
+5
+],
+"first_tile_id": 600
+},
+{
+"name": "uranium_06",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+5,
+27,
+3,
+8
+],
+"first_tile_id": 605
+},
+{
+"name": "uranium_07",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+35,
+3,
+3
+],
+"first_tile_id": 664
+},
+{
+"name": "uranium_08",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+3,
+35,
+4,
+4
+],
+"first_tile_id": 667
+},
+{
+"name": "uranium_09",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+39,
+4,
+3
+],
+"first_tile_id": 696
+},
+{
+"name": "uranium_10",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+4,
+39,
+4,
+6
+],
+"first_tile_id": 700
+},
+{
+"name": "uranium_11",
+"kind": "house",
+"artist": "Pok\u00e9mon Uranium team",
+"source": "uranium/Maps/tilesets/PU_buildings+.png",
+"tile_rect": [
+0,
+45,
+4,
+2
+],
+"first_tile_id": 744
+},
+{
+"name": "tower_01",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+4,
+45,
+3,
+4
+],
+"first_tile_id": 748
+},
+{
+"name": "tower_02",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+49,
+3,
+1
+],
+"first_tile_id": 776
+},
+{
+"name": "tower_03",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+3,
+49,
+2,
+1
+],
+"first_tile_id": 779
+},
+{
+"name": "tower_04",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+5,
+49,
+2,
+1
+],
+"first_tile_id": 781
+},
+{
+"name": "tower_05",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+7,
+49,
+1,
+3
+],
+"first_tile_id": 783
+},
+{
+"name": "tower_06",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+52,
+1,
+2
+],
+"first_tile_id": 800
+},
+{
+"name": "tower_07",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+1,
+52,
+1,
+3
+],
+"first_tile_id": 801
+},
+{
+"name": "tower_08",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+2,
+52,
+3,
+2
+],
+"first_tile_id": 802
+},
+{
+"name": "tower_09",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+5,
+52,
+3,
+1
+],
+"first_tile_id": 805
+},
+{
+"name": "tower_10",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+55,
+2,
+1
+],
+"first_tile_id": 824
+},
+{
+"name": "tower_11",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+2,
+55,
+3,
+1
+],
+"first_tile_id": 826
+},
+{
+"name": "tower_12",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+5,
+55,
+1,
+3
+],
+"first_tile_id": 829
+},
+{
+"name": "tower_13",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+6,
+55,
+1,
+2
+],
+"first_tile_id": 830
+},
+{
+"name": "tower_14",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+7,
+55,
+1,
+3
+],
+"first_tile_id": 831
+},
+{
+"name": "tower_15",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+58,
+4,
+2
+],
+"first_tile_id": 848
+},
+{
+"name": "tower_16",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+4,
+58,
+3,
+1
+],
+"first_tile_id": 852
+},
+{
+"name": "tower_17",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+60,
+2,
+1
+],
+"first_tile_id": 864
+},
+{
+"name": "tower_18",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+61,
+8,
+3
+],
+"first_tile_id": 872
+},
+{
+"name": "tower_19",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+0,
+64,
+2,
+1
+],
+"first_tile_id": 896
+},
+{
+"name": "tower_20",
+"kind": "house",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Dragonspiral Stuff.png",
+"tile_rect": [
+2,
+64,
+2,
+1
+],
+"first_tile_id": 898
+}
+]

@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Cutscenes - 012 The war climax (story/13_CUTSCENES.md, WAR-1)
+# Prismfall Cutscenes - 013 The war climax (story/13_CUTSCENES.md, WAR-1)
 #-------------------------------------------------------------------------------
 # :WAR_CLIMAX  "The Beam Clash on the Shattered Ice" - 15 shots, about 63 s.
 # Isenmar and Kyogre hold the left of the strait, Ashkaar and Reshiram the right.

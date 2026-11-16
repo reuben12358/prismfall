@@ -1,0 +1,211 @@
+109:
+  events:
+  - type: event
+    name: Prologue intro
+    at:
+    - 1
+    - 1
+    pages:
+    - trigger: autorun
+      commands:
+      - tone:
+        - -255
+        - -255
+        - -255
+        - 0
+        - 0
+      - A ship's horn, somewhere in the dark.
+      - Spring, AF 300. The Concert of Regions has sealed the borders of Velmora.
+      - This is the final civilian crossing.
+      - The cabin lamp flickers on. In the black porthole glass, a reflection looks back at you.
+      - choices:
+        - That's me. (Style A)
+        - That's me. (Style B)
+        cancel: 0
+        branches:
+        - - script: pbChangePlayer(1)
+        - - script: pbChangePlayer(2)
+      - tone:
+        - -40
+        - -55
+        - -20
+        - 40
+        - 30
+      - wait: 30
+      - Up on deck, the dusk is cold and salt-bright. You stand at the rail with one bag and your mother's letter.
+      - 'Captain Edda Morrow: Don''t lean on my rail like that, sprog - you''ll - huh.'
+      - She stares a beat too long.
+      - 'Captain Edda Morrow: ...Never mind. Name for the manifest? Last crossing. I''m not losing anybody off my books.'
+      - label: Manifest name
+      - script: pbTrainerName
+      - 'Captain Edda Morrow: \PN. That right?'
+      - choices:
+        - That's right
+        - No, let me spell it
+        cancel: 0
+        branches:
+        - []
+        - - jump_label: Manifest name
+      - 'Captain Edda Morrow: \PN it is. Mind the gap when we dock.'
+      - script: $player.has_running_shoes = true
+      - script: Prismfall.choose_difficulty
+      - switch:
+        - LARCH_AT_TIDEWATCH
+        - true
+      - var:
+        - STORY_ACT
+        - 0
+      - var:
+        - STORY_CHAPTER
+        - 0
+      - selfswitch:
+        - A
+        - true
+    - cond:
+        self: A
+  - type: npc
+    name: Captain Edda
+    at:
+    - 10
+    - 4
+    sprite: trainer_SAILOR
+    dir: down
+    text: 'Captain Edda Morrow: Last crossing I''ll ever make. Thirty years on this strait. Mind the rail, sprog.'
+  - type: npc
+    name: Deckhand
+    at:
+    - 6
+    - 9
+    sprite: trainer_SAILOR
+    dir: right
+    move: random
+    text: 'When I was a lad you could only see the Imprints on a clear night.
+
+      Now you see ''em through fog.'
+  - type: sign
+    at:
+    - 24
+    - 7
+    post: false
+    name: Horizon
+    text: On the horizon, eighteen colored glows sit low over the sea.
+  - type: event
+    name: Aurelian Voss
+    at:
+    - 20
+    - 6
+    pages:
+    - graphic:
+        sprite: trainer_GENTLEMAN
+        dir: left
+      commands:
+      - A man in a plain coat leans on the rail, holding a chipped Meridian mug.
+      - 'Man: First crossing? Everyone gets quiet when they see the lights.'
+      - 'Aurelian Voss: Aurelian. I''ve just come from the Concert summit - I begged them to keep Velmora''s trade open. They didn''t listen.'
+      - 'Aurelian Voss: Here. We make these for the League anyway. Call it a welcome from a fellow traveler.'
+      - You received a Meridian badge case!
+      - 'Aurelian Voss: And a Meridian Fellowship card - a small stipend, a discount at any Mart. No strings.'
+      - choices:
+        - Accept the Fellowship
+        - Politely decline
+        - Say nothing
+        cancel: 0
+        branches:
+        - - script: 'pf_choose(:pro_fellowship, :accept)
+
+              $player.money += 1000'
+          - 'Aurelian Voss: Good. Velmora needs people who say yes to things.'
+          - You received a Fellowship stipend of $1000!
+        - - script: pf_choose(:pro_fellowship, :decline)
+          - 'Aurelian Voss: Independent. Good.'
+        - - script: pf_choose(:pro_fellowship, :silent)
+          - He smiles, and leaves the card on the rail anyway.
+      - A long horn. The lights of Ferrow's Landing slide out of the fog.
+      - switch:
+        - PRO_FERRY_DONE
+        - true
+      - tone:
+        - -255
+        - -255
+        - -255
+        - 0
+        - 20
+      - wait: 20
+      - transfer:
+          map: 100
+          x: 19
+          y: 28
+          dir: up
+      - tone:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 20
+    - cond:
+        switch: PRO_FERRY_DONE
+  - type: warp
+    name: Cabin hatch
+    at:
+    - 15
+    - 7
+    link: DOVE_CABIN
+    arrive:
+    - 15
+    - 8
+    - down
+    se: Door exit
+  head:
+    id: 109
+    name: The Dovetail - Deck
+    palette: outside
+    bgm: Islands
+    parent: 100
+    metadata:
+      Name: The Dovetail
+      MapPosition:
+      - 0
+      - 14
+      - 27
+110:
+  events:
+  - type: warp
+    name: Up to deck
+    at:
+    - 6
+    - 8
+    link: DOVE_CABIN
+    arrive:
+    - 6
+    - 7
+    - up
+    se: Door exit
+  - type: sign
+    at:
+    - 5
+    - 3
+    post: false
+    name: Ines's letter
+    text: 'Your mother''s letter. Her handwriting slants when she''s frightened. [TODO story: Ines''s letter text]'
+  - type: sign
+    at:
+    - 3
+    - 3
+    post: false
+    name: Bunk
+    text: Your bunk. You haven't slept since the crossing began.
+  head:
+    id: 110
+    name: The Dovetail - Cabin
+    parent: 109
+    template: house2
+    drop_template_events:
+    - Kurt
+    - Exit
+    bgm: Islands
+    metadata:
+      Name: The Dovetail
+      MapPosition:
+      - 0
+      - 14
+      - 27

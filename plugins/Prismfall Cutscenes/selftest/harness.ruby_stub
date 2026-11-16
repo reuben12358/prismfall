@@ -237,7 +237,9 @@ end
 def asset(path)
   return nil if !$opt[:assets] || path.nil?
   return path if path.start_with?("/") && File.file?(path)
-  [path, path + ".png"].each { |p| f = File.join(ASSET_DIR, p); return f if File.file?(f) }
+  [File.join(GAME_DIR, "art/out"), ASSET_DIR].each do |root|     # the project's own art wins over the stock base
+    [path, path + ".png"].each { |p| f = File.join(root, p); return f if File.file?(f) }
+  end
   nil
 end
 def pbResolveBitmap(path); asset(path); end
@@ -434,11 +436,11 @@ def run_scene(id, vars = {})
   $fill_log = []
   $audio = []
   before = $live.dup
-  cache0 = Prismfall::Cutscene::Gfx.placeholder_cache_size
+  cache0 = Prismfall::Cutscene.cached_bitmaps
   t0 = $clock
   Prismfall::Cutscene.raise_errors = true
   ok = id.is_a?(Proc) ? id.call : Prismfall::Cutscene.play(id, **vars)
-  before[:bitmap] += Prismfall::Cutscene::Gfx.placeholder_cache_size - cache0   # shared placeholder sheets are cached on purpose
+  before[:bitmap] += Prismfall::Cutscene.cached_bitmaps - cache0   # shared placeholder sheets are cached on purpose
   leaks = $live.map { |k, v| [k, v - before[k]] }.reject { |_, v| v == 0 }
   { :ok => ok, :seconds => ($clock - t0).round(2), :max_fills => $max_fills,
     :avg_fills => ($fill_log.empty? ? 0 : $fill_log.sum / $fill_log.length), :leaks => leaks }

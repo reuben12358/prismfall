@@ -60,6 +60,13 @@ def main():
         offs[key] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [37]}
         p = [int(v) for v in st.passages.data.reshape(-1)][384:384 + n]; q = [int(v) for v in st.priorities.data.reshape(-1)][384:384 + n]
         pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n; ims.append(im)
+    # second custom block (make_custom.py): giant-tree boles and crowns, silk awnings, laundry lines, light pools ...
+    c2 = os.path.join(HERE, 'custom', 'prismfall_custom2.png')
+    if os.path.exists(c2):
+        im = Image.open(c2).convert('RGBA'); n = im.height // 32 * 8
+        meta = json.load(open(c2[:-4] + '.json'))
+        offs['custom2'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': []}
+        pas += [int(v) for v in meta['passages']]; pri += [int(v) for v in meta['priorities']]; tag += [0] * n; ims.append(im)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height
@@ -72,5 +79,37 @@ def main():
     print('tileset 33: %d tiles, sheet %dx%d, offsets %s' % (len(pas) - 384, sheet.width, sheet.height, offs))
 
 
+def interior():
+    """Tileset 34 "Prismfall Interior": Tectonic's Inside sheet (ids unchanged, its autotiles) + Rejuvenation interior sheets."""
+    import shutil
+    TG = '/home/claude/ref/art/tectonic'
+    tt = M.load_file(os.path.join(TG, 'Data', 'Tilesets.rxdata'))[25]
+    wt = M.load_file(os.path.join(WLL, 'Data', 'Tilesets.rxdata'))
+    im0 = Image.open(os.path.join(TG, 'Graphics', 'Tilesets', tt.tileset_name + '.png')).convert('RGBA')
+    im0 = im0.crop((0, 0, 256, im0.height // 32 * 32)); n0 = 384 + im0.height // 32 * 8
+    fix = lambda v: ([int(x) for x in v.data.reshape(-1)] + [0] * n0)[:n0]
+    pas, pri = fix(tt.passages), fix(tt.priorities); tag = [x if x <= 16 else 0 for x in fix(tt.terrain_tags)]
+    ims = [im0]; offs = json.load(open(os.path.join(HERE, 'data', 'compose_offsets.json')))
+    for key, tid, fname in (('in_sheridan', 38, 'SheridanInside'), ('in_help', 29, 'Help Centers'), ('in_hotel', 3, 'Chrisola Hotel'),
+                            ('in_theatre', 36, 'RoseTheatre')):
+        im = Image.open(os.path.join(WLL, 'Graphics', 'Tilesets', fname + '.png')).convert('RGBA')
+        im = im.crop((0, 0, 256, im.height // 32 * 32)); n = im.height // 32 * 8; t = wt[tid]
+        offs[key] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [tid]}
+        p = [int(x) for x in t.passages.data.reshape(-1)][384:384 + n]; q = [int(x) for x in t.priorities.data.reshape(-1)][384:384 + n]
+        pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n; ims.append(im)
+    sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
+    for i in ims:
+        sheet.paste(i, (0, y)); y += i.height
+    sheet.save(os.path.join(OUT, 'Graphics', 'Tilesets', 'Prismfall Interior.png'))
+    for nme in tt.autotile_names:
+        if nme: shutil.copyfile(os.path.join(TG, 'Graphics', 'Autotiles', nme + '.png'), os.path.join(OUT, 'Graphics', 'Autotiles', nme + '.png'))
+    e = dict(id=34, name='Prismfall Interior', tileset_name='Prismfall Interior', autotile_names=list(tt.autotile_names), panorama='',
+             fog='', battleback='', n_tiles=len(pas), passages=pas, priorities=pri, terrain_tags=tag)
+    reg = [t for t in json.load(open(REG)) if t['id'] != 34] + [e]
+    json.dump(sorted(reg, key=lambda t: t['id']), open(REG, 'w'))
+    json.dump(offs, open(os.path.join(HERE, 'data', 'compose_offsets.json'), 'w'))
+    print('tileset 34: %d tiles' % (len(pas) - 384), {k: v['offset'] for k, v in offs.items() if k.startswith('in_')}, tt.autotile_names)
+
+
 if __name__ == '__main__':
-    main()
+    main(); interior()

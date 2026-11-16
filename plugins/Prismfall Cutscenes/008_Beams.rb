@@ -16,17 +16,23 @@
 module Prismfall
   module Cutscene
     module BeamDraw
-      WAVE = [-1, 0, 1, 0]
-      # band widths as a share of the full beam: outline, edge, body, inner, core
-      BANDS = [1.0, 0.9, 0.74, 0.5, 0.24]
+      COL = 2                                   # art pixels per beam column
+      BANDS = [1.0, 0.86, 0.66, 0.42, 0.2]      # outline, edge, body, inner, core (share of thickness)
 
       module_function
 
-      # Thick beam from (x0, y0) to (x1, y1) in art pixels: dark pixel outline,
-      # coloured edge and body, hot inner band and white core, with dithered
-      # fringes between the bands, a ripple flowing away from the source and
-      # bright slugs racing down the core. width = full thickness.
-      def beam(b, x0, y0, x1, y1, pal, width, frame, seed = 0, nozzle = true)
+      # Smooth pseudo-noise -1..1 that scrolls with the frame (the "flow").
+      def flow(i, frame, k)
+        return (Math.sin((i * 0.37) - (frame * 0.8) + (k * 1.7)) * 0.55) + (Math.sin((i * 0.13) + (frame * 0.23) + k) * 0.45)
+      end
+
+      # A turbulent beam from (x0, y0) to (x1, y1), in art pixels.
+      #   nozzle: cone out of the mouth        head: rounded white-hot leading edge
+      #   swell:  flares out where it slams into something
+      # Each 2px column has its own top and bottom edge (so the silhouette
+      # boils), band borders wander with a scrolling flow, and bright and dark
+      # streaks run down the body.
+      def beam(b, x0, y0, x1, y1, pal, width, frame, seed = 0, nozzle: true, head: false, swell: false)
         dx = x1 - x0
         dy = y1 - y0
         len = Math.sqrt((dx * dx) + (dy * dy))
@@ -35,152 +41,176 @@ module Prismfall
         major = (horiz) ? dx.abs : dy.abs
         return if major < 1
         sgn = (horiz) ? (dx <=> 0) : (dy <=> 0)
-        thick = width * len / major          # keep the visual width on slanted beams
-        n = (major / BEAM_CHUNK.to_f).ceil
+        thick = width * len / major
+        n = (major / COL.to_f).ceil
         cols = [pal.outline, pal.edge, pal.outer, pal.inner, pal.core]
         thin = thick < 6
-        dither = BEAM_DITHER && !thin
-        5.times do |pass|
-          next if thin && pass == 1
-          n.times do |i|
-            a0 = i * BEAM_CHUNK
-            a1 = [a0 + BEAM_CHUNK, major].min
-            w = thick * BANDS[pass]
-            w = [w, thick - 2].min if pass == 1 && thick >= 6        # outline is one pixel each side
-            if pass <= 2
-              w += WAVE[(i - frame) % 4] * ((thick >= 16) ? 2 : 1)   # ripple
-              w += 2 if Util.hash01(i, frame, seed) > 0.85           # flicker
+        cap = thick * 0.75
+        cone = thick * 1.3
+        n.times do |i|
+          a0 = i * COL
+          a1 = [a0 + COL, major].min
+          t = (a0 + a1) / 2.0 / major
+          rest = major - a0
+          prof = 1.0
+          prof = 0.28 + (0.72 * (a0 / cone)) if nozzle && a0 < cone
+          hot = 0.0
+          if head && rest < cap                      # rounded leading edge, white-hot
+            e = rest / cap
+            prof *= 1.22 * Math.sqrt(1 - ((1 - e)**2)) + 0.08
+            hot = 1 - e
+          elsif swell && rest < cap                  # pressure front
+            e = rest / cap
+            prof *= 1.0 + (0.55 * (1 - e) * (1 - e))
+            hot = (1 - e) * 0.7
+          end
+          up = (thick / 2.0) * prof * (1 + (0.11 * flow(i, frame, seed)))
+          dn = (thick / 2.0) * prof * (1 + (0.11 * flow(i, frame, seed + 3)))
+          up += 1 if Util.hash01(i, frame, seed) > 0.88
+          dn += 1 if Util.hash01(i, frame, seed + 1) > 0.88
+          mid = (horiz) ? y0 + (dy * t) : x0 + (dx * t)
+          la = (horiz ? x0 : y0) + (sgn * a0)
+          lb = (horiz ? x0 : y0) + (sgn * a1)
+          lo = [la, lb].min
+          last = 9.0
+          5.times do |k|
+            next if thin && (k == 1 || k == 3)
+            f = BANDS[k]
+            if k >= 2
+              f *= 1 + (0.17 * flow(i * 1.3, frame * 1.4, seed + (k * 2)))
+              f = Util.lerp(f, [0.9, 0.78, 0.62][k - 2], hot) if hot > 0
+              f = [f, last - 0.05].min
             end
-            slug = ((i - (frame * 2)) % 9) < 2                       # bright slugs
-            w += thick * 0.12 if slug && pass >= 3
-            w *= 0.4 + (0.2 * i) if nozzle && i < 3
-            w = [w.round, 1].max
-            t = (a0 + a1) / 2.0 / major
-            la = (horiz ? x0 : y0) + (sgn * a0)
-            lb = (horiz ? x0 : y0) + (sgn * a1)
-            lo = [la, lb].min
-            mid = (horiz) ? y0 + (dy * t) : x0 + (dx * t)
-            top = (mid - (w / 2.0)).round
-            if horiz then Pix.rect(b, lo, top, a1 - a0, w, cols[pass])
-            else Pix.rect(b, top, lo, w, a1 - a0, cols[pass])
+            last = f
+            top = (mid - (up * f)).round
+            bot = (mid + (dn * f)).round
+            if k == 0
+              top -= 1
+              bot += 1
+            elsif k >= 2 && ((i + k + frame) % 2) == 0       # dither teeth between bands
+              top -= 1
+              bot += 1
             end
-            next if !dither || pass < 2 || w < 3
-            # dithered fringe: this band's colour stippled one pixel into its neighbour
-            ph = (i + frame + pass) % 2
-            (a1 - a0).times do |k|
-              next if ((k + ph) % 2) != 0
-              if horiz
-                Pix.rect(b, lo + k, top - 1, 1, 1, cols[pass])
-                Pix.rect(b, lo + k, top + w, 1, 1, cols[pass])
-              else
-                Pix.rect(b, top - 1, lo + k, 1, 1, cols[pass])
-                Pix.rect(b, top + w, lo + k, 1, 1, cols[pass])
-              end
+            h = [bot - top, 1].max
+            if horiz then Pix.rect(b, lo, top, a1 - a0, h, cols[k])
+            else Pix.rect(b, top, lo, h, a1 - a0, cols[k])
             end
           end
         end
         return if thin
-        # streaks of turbulence sliding along the body
-        n.times do |i|
-          next if ((i + (frame * 3) + seed) % 7) != 0
-          a0 = i * BEAM_CHUNK
-          t = a0.to_f / major
-          off = ((Util.hash01(i, seed, 4) > 0.5) ? 1 : -1) * thick * 0.31
-          la = (horiz ? x0 : y0) + (sgn * a0)
+        streaks = (major / 6.0).ceil                          # flow streaks racing down the body
+        streaks.times do |j|
+          speed = 3 + (Util.hash01(j, seed, 31) * 5)
+          a0 = ((Util.hash01(j, seed, 32) * major) + (frame * speed)) % major
+          l = 4 + (Util.hash01(j, seed, 33) * 9).round
+          l = [l, major - a0].min
+          next if l < 2 || (nozzle && a0 < cone)
+          off = (Util.hash01(j, seed, 34) - 0.5) * thick * 0.74
+          tone = [pal.core, pal.inner, pal.edge, pal.inner][j % 4]
+          tone = pal.outer if off.abs < thick * 0.12 && j.odd?     # dark thread in the core
+          t = (a0 + (l / 2.0)) / major
           mid = ((horiz) ? y0 + (dy * t) : x0 + (dx * t)) + off
-          if horiz then Pix.rect(b, [la, la + (sgn * 6)].min, mid, 6, 1, pal.inner)
-          else Pix.rect(b, mid, [la, la + (sgn * 6)].min, 1, 6, pal.inner)
+          la = (horiz ? x0 : y0) + (sgn * a0)
+          lb = la + (sgn * l)
+          th = (thick >= 20 && j % 3 == 0) ? 2 : 1
+          if horiz then Pix.rect(b, [la, lb].min, mid, l, th, tone)
+          else Pix.rect(b, mid, [la, lb].min, th, l, tone)
           end
         end
       end
 
-      def orb(b, x, y, r, pal, frame)
-        r = r.round
+      # Irregular blob: radius wobbles with the angle (spikes), turning with the
+      # frame. The building block for flares and bursts (never a clean circle).
+      def blob(b, cx, cy, r, col, frame, seed = 0, spikes = 6, amp = 0.3, spin = 0.25)
         return if r < 1
-        Pix.disc(b, x, y, r + 1, pal.outline) if r >= 3
-        Pix.disc(b, x, y, r, (frame.even?) ? pal.edge : pal.outer)
-        Pix.disc(b, x, y, (r * 0.8).round, pal.outer)
-        Pix.disc(b, x, y, (r * 0.58).round, pal.inner)
-        Pix.disc(b, x, y, (r * 0.34).round, pal.core)
-      end
-
-      # Chunky four-point star: tapered bars, diagonals on odd frames.
-      def star(b, x, y, len, col, frame, th = 1)
-        len = len.round
-        [[1.0, th], [0.6, th + 2]].each do |frac, t|
-          l = (len * frac).round
-          Pix.rect(b, x - l, y - (t / 2), (l * 2) + 1, t, col)
-          Pix.rect(b, x - (t / 2), y - l, t, (l * 2) + 1, col)
-        end
-        return if frame.even?
-        d = len / 2
-        Pix.line(b, x - d, y - d, x + d, y + d, col, th)
-        Pix.line(b, x - d, y + d, x + d, y - d, col, th)
-      end
-
-      # The clash sphere: dark outline, the two beams' colours swirling round
-      # each other in a two-armed spiral, a scalloped white-hot core and a star.
-      def clash_ball(b, cx, cy, r, pal_l, pal_r, frame)
-        r = (r + ([0, 1, 3, 1][frame % 4] * ((r >= 14) ? 1 : 0.5))).round
-        return if r < 1
-        Pix.disc(b, cx, cy, r + 2, (frame.even?) ? pal_l.outline : pal_r.outline)
-        Pix.disc(b, cx, cy, r + 1, (frame.even?) ? pal_r.edge : pal_l.edge)
-        phase = frame * 0.5
-        step = (r >= 12) ? 2 : 1
-        (-r..r).step(step) do |dy|
-          half = Math.sqrt((r * r) - (dy * dy)).round
-          cur = nil
-          start = -half
-          x = -half
-          while x <= half + step
-            col = nil
-            if x <= half
-              d = Math.sqrt((x * x) + (dy * dy))
-              k = Math.sin((Math.atan2(dy, x) * 2) + (d * 0.24) - phase)
-              side = (k > 0) ? pal_l : pal_r
-              col = (k.abs < 0.3) ? side.inner : side.outer
+        reach = (r * (1 + amp)).ceil
+        step = (r >= 14) ? 2 : 1
+        rot = (frame * spin) + seed
+        (-reach..reach).step(step) do |dy|
+          start = nil
+          x = -reach
+          while x <= reach + step
+            inside = false
+            if x <= reach
+              ang = Math.atan2(dy, x)
+              lim = r * (1 + (amp * ((Math.sin((ang * spikes) + rot) * 0.6) + (Math.sin((ang * ((spikes * 2) + 1)) - (rot * 1.7)) * 0.4))))
+              inside = ((x * x) + (dy * dy)) <= lim * lim
             end
-            if col != cur
-              Pix.rect(b, cx + start, cy + dy, x - start, step, cur) if cur
-              cur = col
+            if inside && !start
               start = x
+            elsif !inside && start
+              Pix.rect(b, cx + start, cy + dy, x - start, step, col)
+              start = nil
             end
             x += step
           end
         end
-        core = (r * 0.5).round
-        8.times do |i|                                   # scalloped edge of the core, counter-rotating
-          ang = (i * Math::PI / 4) - (frame * 0.3)
-          Pix.disc(b, cx + (Math.cos(ang) * core), cy + (Math.sin(ang) * core), [(r * 0.16).round, 1].max, pal_l.core)
-        end
-        Pix.disc(b, cx, cy, core, pal_l.core)
-        star(b, cx, cy, (r * 1.45) + ((frame % 3) * 3), pal_r.core, frame, (r >= 14) ? 3 : 1)
       end
 
-      # Energy thrown out sideways from the clash point: tapered tongues that
-      # lean back towards each beam's own side. (ux, uy) = beam direction.
-      def splash(b, cx, cy, ux, uy, r, pal_a, pal_b, frame)
-        px = -uy
-        py = ux
-        6.times do |i|
-          side = (i.even?) ? 1 : -1                       # above / below the beam line
-          own = (i < 3) ? -1 : 1                          # a's side / b's side
-          pal = (own < 0) ? pal_a : pal_b
-          len = r * (0.7 + (Util.hash01(i, frame / 2, 21) * 1.5))
-          lean = 0.35 + (Util.hash01(i, frame / 2, 22) * 0.5)
-          base = r * 0.25 * (1 + (i % 3))
-          segs = [(len / 2).ceil, 1].max
-          segs.times do |sgi|
-            f = sgi / segs.to_f
-            d = (r * 0.8) + (len * f)
-            w = [(r * 0.5 * (1 - f) * (1 - f)).round, 1].max
-            wob = Math.sin((f * 5) + (frame * 0.9) + i) * r * 0.1
-            x = cx + (px * side * d) + (ux * (own * (base + (len * f * lean)) + wob))
-            y = cy + (py * side * d) + (uy * (own * (base + (len * f * lean)) + wob))
-            col = (f < 0.25) ? pal.core : ((f < 0.5) ? pal.inner : ((f < 0.8) ? pal.outer : pal.edge))
-            Pix.rect(b, x - (w / 2) - 1, y - 1, w + 2, 4, pal.outline) if w > 3 && sgi.even?
-            Pix.rect(b, x - (w / 2), y, w, 2, col)
-          end
+      # Muzzle flare: a ragged, flickering burst (not concentric rings).
+      def flare(b, x, y, r, pal, frame, seed = 0)
+        return if r < 1
+        r += frame % 2
+        blob(b, x, y, r + 1.5, pal.outline, frame, seed, 7, 0.34)
+        blob(b, x, y, r, pal.edge, frame, seed, 7, 0.34)
+        blob(b, x, y, r * 0.8, pal.outer, frame, seed + 1, 6, 0.4, -0.3)
+        blob(b, x, y, r * 0.55, pal.inner, frame, seed + 2, 5, 0.45)
+        blob(b, x, y, r * 0.3, pal.core, frame, seed + 3, 4, 0.5, -0.4)
+      end
+
+      # Kept for small uses (charge motes, volleys): a soft orb with a ragged edge.
+      def orb(b, x, y, r, pal, frame)
+        flare(b, x, y, r, pal, frame)
+      end
+
+      # Chunky four-point glint.
+      def star(b, x, y, len, col, frame, th = 1)
+        blob(b, x, y, len * 0.42, col, frame, 0, 4, 1.25, 0.0)
+      end
+
+      # Forked pixel lightning between two points.
+      def lightning(b, x0, y0, x1, y1, col, core, frame, seed, th = 2)
+        segs = 4
+        px = x0
+        py = y0
+        nx = -(y1 - y0)
+        ny = (x1 - x0)
+        nl = Math.sqrt((nx * nx) + (ny * ny))
+        return if nl < 2
+        segs.times do |i|
+          f = (i + 1) / segs.to_f
+          j = (i == segs - 1) ? 0 : (Util.hash01(frame / 2, seed, i) - 0.5) * 0.5
+          qx = x0 + ((x1 - x0) * f) + (nx * j)
+          qy = y0 + ((y1 - y0) * f) + (ny * j)
+          Pix.line(b, px, py, qx, qy, col, th)
+          Pix.line(b, px, py, qx, qy, core, 1) if th > 1 && i < 2
+          px = qx
+          py = qy
+        end
+      end
+
+      # The clash point: a ragged white-hot burst with both beams' colours
+      # boiling round it, a turning four-point glare and forked lightning.
+      def clash_burst(b, cx, cy, r, pal_l, pal_r, frame)
+        r += [0, 1, 3, 1][frame % 4] * ((r >= 12) ? 1 : 0.4)
+        return if r < 1
+        off = r * 0.3
+        blob(b, cx, cy, r * 1.22, (frame.even?) ? pal_l.outline : pal_r.outline, frame, 5, 9, 0.3)
+        blob(b, cx - off, cy, r, pal_l.edge, frame, 1, 7, 0.32, 0.35)
+        blob(b, cx + off, cy, r, pal_r.edge, frame, 2, 7, 0.32, -0.35)
+        blob(b, cx - off, cy, r * 0.82, pal_l.outer, frame, 3, 6, 0.36, 0.5)
+        blob(b, cx + off, cy, r * 0.82, pal_r.outer, frame, 4, 6, 0.36, -0.5)
+        blob(b, cx - (off * 0.6), cy, r * 0.6, pal_l.inner, frame, 5, 5, 0.4, -0.6)
+        blob(b, cx + (off * 0.6), cy, r * 0.6, pal_r.inner, frame, 6, 5, 0.4, 0.6)
+        blob(b, cx, cy, r * 0.62, pal_l.core, frame, 7, 11, 0.4, 0.7)
+        blob(b, cx, cy, r * 0.5, pal_l.core, frame, 8, 4, 1.5, 0.12)       # glare
+        5.times do |i|
+          ang = (Util.hash01(frame / 2, i, 41) * Math::PI * 2)
+          l0 = r * 0.9
+          l1 = r * (1.5 + (Util.hash01(frame / 2, i, 42) * 0.9))
+          pal = (Math.cos(ang) < 0) ? pal_l : pal_r
+          lightning(b, cx + (Math.cos(ang) * l0), cy + (Math.sin(ang) * l0), cx + (Math.cos(ang) * l1), cy + (Math.sin(ang) * l1),
+                    pal.inner, pal.core, frame, i, (r >= 12) ? 2 : 1)
         end
       end
     end
@@ -207,23 +237,21 @@ module Prismfall
         cx, cy = scene.to_fx(@at.call)
         f = scene.fx_frame
         z = scene.camera.zoom
-        r = ([@size * @k, 1].max + (f % 2)) * z
-        if @k > 0.15                              # flat glow behind the actor
-          @halo ||= Color.new(@pal.rgb[2][0], @pal.rgb[2][1], @pal.rgb[2][2], 96)
-          Pix.disc(back, cx, cy, (r * 2.2).round + ((f.even?) ? 2 : 0), @halo)
-        end
-        12.times do |i|                           # motes pulled inward
-          ph = ((@k * 3) + (i / 12.0)) % 1.0
-          dist = (1 - ph) * (18 + (@size * 2)) * z
-          ang = (i * 2.399) + (@k * 1.5)
+        r = [@size * @k, 1].max * z
+        Dither.glow(back, cx, cy, (r * 3.2) + 6, (r * 3.2) + 6, @pal.rgb[2]) if @k > 0.1     # light gathering behind
+        18.times do |i|                           # motes and shards pulled inward along curved paths
+          ph = ((@k * 3) + (i / 18.0)) % 1.0
+          dist = (1 - ph) * (26 + (@size * 2.4)) * z
+          ang = (i * 2.399) + (@k * 2.5) + (ph * 1.2)
           x = cx + (Math.cos(ang) * dist)
-          y = cy + (Math.sin(ang) * dist * 0.8)
-          s = (ph > 0.75) ? 2 : 1
-          Pix.rect(front, x + (Math.cos(ang) * 2), y + (Math.sin(ang) * 2), 1, 1, @pal.outer)
-          Pix.rect(front, x, y, s, s, (ph > 0.6) ? @pal.core : @pal.inner)
+          y = cy + (Math.sin(ang) * dist * 0.85)
+          tx = Math.cos(ang) * (2 + (ph * 4))
+          ty = Math.sin(ang) * (2 + (ph * 4))
+          Pix.line(front, x + tx, y + ty, x, y, (ph > 0.6) ? @pal.inner : @pal.outer, (ph > 0.8) ? 2 : 1)
+          Pix.rect(front, x, y, 1, 1, @pal.core)
         end
-        BeamDraw.orb(front, cx, cy, r, @pal, f)
-        BeamDraw.star(front, cx, cy, (r * 1.5) + 3 + (f % 3), @pal.core, f, (r >= 8) ? 3 : 1) if @k > 0.5
+        BeamDraw.flare(front, cx, cy, r, @pal, f, 3)
+        BeamDraw.blob(front, cx, cy, (r * 0.9) + 2, @pal.core, f, 9, 4, 1.4, 0.2) if @k > 0.6 && f % 3 != 0
       end
     end
 
@@ -278,12 +306,12 @@ module Prismfall
         cx, cy = scene.to_fx(@pt)
         z = scene.camera.zoom
         f = scene.fx_frame
-        if @k < 0.35
-          r = (@size * (0.5 + (@k * 2.2)) * z).round
-          Pix.disc(front, cx, cy, r, @pal.outer)
-          Pix.disc(front, cx, cy, (r * 0.7).round, @pal.inner)
-          Pix.disc(front, cx, cy, (r * 0.45).round, @pal.core)
-          BeamDraw.star(front, cx, cy, r + 4, @pal.core, f)
+        if @k < 0.45
+          r = (@size * (0.5 + (@k * 2.0)) * z).round
+          BeamDraw.blob(front, cx, cy, r * 1.1, @pal.outline, f, 1, 9, 0.4, 0.5)
+          BeamDraw.blob(front, cx, cy, r, @pal.outer, f, 1, 9, 0.4, 0.5)
+          BeamDraw.blob(front, cx, cy, r * 0.72, @pal.inner, f, 2, 7, 0.45, -0.5)
+          BeamDraw.blob(front, cx, cy, r * 0.46, @pal.core, f, 3, 5, 0.9, 0.3)
         end
         r = (@size * (0.7 + (1.5 * Ease.apply(:out, @k))) * z).round
         Pix.ring(front, cx, cy, r, @pal[(@k * 3.99).to_i], (@k < 0.5) ? 2 : 1)
@@ -350,10 +378,12 @@ module Prismfall
         return if w < 0.5
         hx = (x0 + ((x1 - x0) * k)).round
         hy = (y0 + ((y1 - y0) * k)).round
-        BeamDraw.beam(front, x0, y0, hx, hy, @pal, w, f)
-        BeamDraw.orb(front, x0, y0, (w * 0.6) + (f % 2), @pal, f)
-        BeamDraw.orb(front, hx, hy, (w * 0.75) + ((@landed) ? (f % 3) : 0), @pal, f)
-        BeamDraw.star(front, hx, hy, w + 3 + (f % 3), @pal.core, f, (w >= 10) ? 3 : 1) if @landed
+        BeamDraw.beam(front, x0, y0, hx, hy, @pal, w, f, 0, head: !@landed, swell: @landed)
+        BeamDraw.flare(front, x0, y0, w * 0.5, @pal, f, 1)
+        if @landed
+          BeamDraw.blob(front, hx, hy, w * 0.7, @pal.inner, f, 2, 7, 0.45, 0.6)
+          BeamDraw.blob(front, hx, hy, w * 0.45, @pal.core, f, 3, 5, 0.9, -0.4)
+        end
       end
     end
 
@@ -504,6 +534,12 @@ module Prismfall
           scene.particles.spawn(:sparks, c[0], c[1] + ((up > 0) ? @ball : -@ball),
                                 { :color => pal, :angle => ang + up + (lean * ((up > 0) ? -1 : 1)), :spread => 40, :speed => 1.3, :size => 2 })
         end
+        @steam = (@steam || 0.0) + (22 * @intensity * dt)
+        while @steam >= 1                                            # steam where fire meets ice
+          @steam -= 1
+          scene.particles.spawn(:steam, c[0] + ((scene.rng.rand - 0.5) * @ball * 2), c[1] - (@ball * 0.5), { :size => 3 + scene.rng.rand(3), :speed => 1.6 })
+          scene.particles.spawn(:steam, c[0] + ((scene.rng.rand - 0.5) * 200), ground_y(c), { :size => 2 + scene.rng.rand(2), :layer => :back })
+        end
         @lift += 16 * @intensity * dt
         while @lift >= 1                                             # ice and rubble lifting off the ground
           @lift -= 1
@@ -613,49 +649,90 @@ module Prismfall
         end
       end
 
+      # Light on the two Pokemon: a rim on the side facing the clash and a tint
+      # towards their own beam, flickering with the struggle.
+      def light_actors(scene, on)
+        [[@a, 1], [@b, -1]].each do |sd, dir|
+          act = sd.actor && scene.actors[sd.actor]
+          next if !act
+          @base_tint ||= {}
+          @base_tint[sd.actor] ||= act.tint.dup
+          if on
+            c = sd.pal.whitened(@white).rgb[1]
+            flick = (scene.fx_frame.even?) ? 78 : 52
+            act.tint = [c[0].to_f, c[1].to_f, c[2].to_f, flick * [@intensity, 0.4].max]
+            act.set_rim(scene, Util.palette(:white).rgb[0], dir * @dir_x)
+          else
+            act.tint = @base_tint[sd.actor]
+            act.set_rim(scene, nil)
+          end
+        end
+      end
+
+      def dispose
+        return if !@scene_ref
+        light_actors(@scene_ref, false)
+      end
+
       def draw(scene, back, front)
+        @scene_ref = scene
         c, pa, pb = clash_point
         ax, ay = scene.to_fx(pa)
         bx, by = scene.to_fx(pb)
         cx, cy = scene.to_fx(c)
         f = scene.fx_frame
         z = scene.camera.zoom
+        @dir_x = ((bx - ax) <=> 0)
+        @dir_x = 1 if @dir_x == 0
         pal_a, pal_b = palettes
         wa = @a.width * z * @wf[0]
         wb = @b.width * z * @wf[1]
+        _gx, gy = scene.to_fx([c[0], ground_y(c)])
         if @lt < @launch                            # both beams race to the meeting point
           k = Util.clamp(@lt / @launch, 0.0, 1.0)
           hax = (ax + ((cx - ax) * k)).round
           hay = (ay + ((cy - ay) * k)).round
           hbx = (bx + ((cx - bx) * k)).round
           hby = (by + ((cy - by) * k)).round
-          BeamDraw.beam(front, ax, ay, hax, hay, pal_a, wa, f, 1)
-          BeamDraw.beam(front, bx, by, hbx, hby, pal_b, wb, f, 2)
-          BeamDraw.orb(front, hax, hay, wa * 0.62, pal_a, f)
-          BeamDraw.orb(front, hbx, hby, wb * 0.62, pal_b, f)
+          ground_light(back, ax, hax, gy, wa, pal_a, f)
+          ground_light(back, bx, hbx, gy, wb, pal_b, f)
+          BeamDraw.beam(front, ax, ay, hax, hay, pal_a, wa, f, 1, head: true)
+          BeamDraw.beam(front, bx, by, hbx, hby, pal_b, wb, f, 2, head: true)
         else
+          light_actors(scene, @wf[0] + @wf[1] > 0.2 && !@mote)
           gutter = @winner == :fizzle && @resolving && f.odd?   # guttering flicker
+          ground_light(back, ax, cx, gy, wa, pal_a, f) if wa >= 2
+          ground_light(back, bx, cx, gy, wb, pal_b, f) if wb >= 2
+          if @ball_scale > 0.3                                   # white pool of light under the clash
+            r = @ball * z * @ball_scale
+            Dither.glow(back, cx, gy, r * 3.0, r * 0.8, Util.palette(:white).rgb[0])
+          end
           # the stronger beam is drawn last so it overlaps the weaker one
           order = (wa >= wb) ? [[bx, by, pal_b, wb, 2], [ax, ay, pal_a, wa, 1]] : [[ax, ay, pal_a, wa, 1], [bx, by, pal_b, wb, 2]]
-          order.each { |x, y, pal, w, seed| BeamDraw.beam(front, x, y, cx, cy, pal, w, f, seed) if w >= 0.5 && !gutter }
+          order.each { |x, y, pal, w, seed| BeamDraw.beam(front, x, y, cx, cy, pal, w, f, seed, swell: @ball_scale > 0) if w >= 0.5 && !gutter }
           if @ball_scale > 0
-            r = @ball * z * @ball_scale
-            len = Math.sqrt(((bx - ax)**2) + ((by - ay)**2))
-            len = 1.0 if len < 1
-            ux = (bx - ax) / len
-            uy = (by - ay) / len
-            BeamDraw.splash(front, cx, cy, ux, uy, r, pal_a, pal_b, f) if @ball_scale > 0.5 && !@mote
             left, right = (ax <= bx) ? [pal_a, pal_b] : [pal_b, pal_a]
-            BeamDraw.clash_ball(front, cx, cy, r, left, right, f)
+            BeamDraw.clash_burst(front, cx, cy, @ball * z * @ball_scale, left, right, f)
           end
         end
-        BeamDraw.orb(front, ax, ay, (wa * 0.5) + (f % 2), pal_a, f) if wa > 1
-        BeamDraw.orb(front, bx, by, (wb * 0.5) + (f % 2), pal_b, f) if wb > 1
+        BeamDraw.flare(front, ax, ay, wa * 0.42, pal_a, f, 11) if wa > 1
+        BeamDraw.flare(front, bx, by, wb * 0.42, pal_b, f, 12) if wb > 1
         if @mote
           mx, my = scene.to_fx([@mote[0], @mote[1]])
           Pix.rect(front, mx, my - 4, 2, 4, Util.palette(:white).outer)
           Pix.rect(front, mx - 1, my, 4, 4, Util.palette(:white).core)
         end
+      end
+
+      # Beam light thrown on the ground along its length (dithered, flickering).
+      def ground_light(b, x0, x1, gy, width, pal, f)
+        return if width < 2 || (x1 - x0).abs < 4
+        lo = [x0, x1].min
+        len = (x1 - x0).abs
+        h = (width * 0.5).round + (f % 2)
+        Dither.fill(b, lo - 6, gy - h, len + 12, h * 2, pal.rgb[2], 8)
+        Dither.fill(b, lo, gy - (h / 2), len, h, pal.rgb[2], 4)
+        Dither.fill(b, lo + 4, gy - (h / 4), len - 8, [h / 2, 2].max, pal.rgb[1], 2)
       end
     end
 

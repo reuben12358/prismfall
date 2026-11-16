@@ -11,7 +11,7 @@
 module Prismfall
   module Cutscene
     class Particles
-      P = Struct.new(:x, :y, :vx, :vy, :age, :life, :ramp, :size, :grav, :back, :screen, :streak, :sway, :seed)
+      P = Struct.new(:x, :y, :vx, :vy, :age, :life, :ramp, :size, :grav, :back, :screen, :streak, :sway, :seed, :shape)
 
       # kind => [speed range, angle centre (deg, 0 = right, 90 = down), spread,
       #          life range, gravity, size, streak, sway, default palette, weather?]
@@ -19,13 +19,13 @@ module Prismfall
         :embers     => { :speed => [14, 44],  :angle => -90, :spread => 35,  :life => [1.4, 3.0], :grav => -6,  :size => 1, :sway => 10, :pal => :fire,  :weather => :bottom },
         :snow       => { :speed => [14, 30],  :angle => 100, :spread => 20,  :life => [5.0, 8.0], :grav => 0,   :size => 1, :sway => 12, :pal => :white, :weather => :top },
         :rain       => { :speed => [260, 320], :angle => 105, :spread => 3,  :life => [0.9, 1.2], :grav => 0,   :size => 1, :streak => 4, :pal => :water, :weather => :top },
-        :debris     => { :speed => [40, 130], :angle => -90, :spread => 60,  :life => [0.6, 1.2], :grav => 260, :size => 2, :pal => :rock },
-        :ice_shards => { :speed => [50, 150], :angle => -90, :spread => 70,  :life => [0.6, 1.1], :grav => 240, :size => 2, :pal => :ice },
+        :debris     => { :speed => [40, 130], :angle => -90, :spread => 60,  :life => [0.6, 1.2], :grav => 260, :size => 2, :pal => :rock, :shape => :shard },
+        :ice_shards => { :speed => [50, 150], :angle => -90, :spread => 70,  :life => [0.6, 1.1], :grav => 240, :size => 2, :pal => :ice, :shape => :shard },
         :sparks     => { :speed => [60, 190], :angle => 0,   :spread => 180, :life => [0.2, 0.55], :grav => 60, :size => 1, :streak => 2, :pal => :electric },
-        :smoke      => { :speed => [8, 22],   :angle => -90, :spread => 25,  :life => [1.6, 2.8], :grav => -4,  :size => 3, :sway => 6, :pal => :smoke },
-        :steam      => { :speed => [12, 30],  :angle => -90, :spread => 40,  :life => [1.2, 2.4], :grav => -8,  :size => 3, :sway => 8, :pal => :steam },
+        :smoke      => { :speed => [8, 22],   :angle => -90, :spread => 25,  :life => [1.6, 2.8], :grav => -4,  :size => 3, :sway => 6, :pal => :smoke, :shape => :puff },
+        :steam      => { :speed => [12, 30],  :angle => -90, :spread => 40,  :life => [1.2, 2.4], :grav => -8,  :size => 3, :sway => 8, :pal => :steam, :shape => :puff },
         :petals     => { :speed => [20, 50],  :angle => 70,  :spread => 50,  :life => [2.0, 3.5], :grav => 8,   :size => 2, :sway => 18, :pal => :fairy },
-        :lift       => { :speed => [14, 46],  :angle => -90, :spread => 22,  :life => [0.9, 2.0], :grav => -30, :size => 3, :sway => 5, :pal => :ice },
+        :lift       => { :speed => [14, 46],  :angle => -90, :spread => 22,  :life => [0.9, 2.0], :grav => -30, :size => 3, :sway => 5, :pal => :ice, :shape => :shard },
         :motes      => { :speed => [4, 14],   :angle => -90, :spread => 180, :life => [1.5, 3.0], :grav => 0,   :size => 1, :sway => 4, :pal => :light }
       }
 
@@ -46,7 +46,7 @@ module Prismfall
         life = Util.lerp(pr[:life][0], pr[:life][1], rng.rand) * (o[:life] || 1.0)
         pal = Util.palette(o[:color] || pr[:pal])
         @list.push(P.new(wx, wy, Math.cos(ang) * sp, Math.sin(ang) * sp, 0.0, life, pal, o[:size] || pr[:size],
-                         pr[:grav], o[:layer] == :back, o[:screen] || false, pr[:streak], pr[:sway] || 0, rng.rand * 6.28))
+                         pr[:grav], o[:layer] == :back, o[:screen] || false, pr[:streak], pr[:sway] || 0, rng.rand * 6.28, pr[:shape]))
         @count = @list.length
       end
 
@@ -78,6 +78,22 @@ module Prismfall
             tx = (p.vx.abs > p.vy.abs) ? -(p.vx <=> 0) : 0
             ty = (p.vx.abs > p.vy.abs) ? 0 : -(p.vy <=> 0)
             p.streak.times { |i| Pix.rect(b, x + (tx * i), y + (ty * i), 1, 1, (i == 0) ? p.ramp.core : c) }
+          elsif p.shape == :shard               # jagged chips, four variants, tumbling
+            v = ((p.seed * 10) + (p.age * 6)).to_i % 4
+            hi = p.ramp.core
+            case v
+            when 0 then Pix.rect(b, x, y, size, 1, c); Pix.rect(b, x + 1, y + 1, size, 1, c); Pix.rect(b, x, y, 1, 1, hi)
+            when 1 then Pix.rect(b, x, y, 1, size + 1, c); Pix.rect(b, x + 1, y, 1, size - 1, c); Pix.rect(b, x, y, 1, 1, hi)
+            when 2 then Pix.rect(b, x, y, size, size, c); Pix.rect(b, x + size, y - 1, 1, 1, c); Pix.rect(b, x, y, 1, 1, hi)
+            else        Pix.rect(b, x, y + 1, size + 1, 1, c); Pix.rect(b, x + 1, y, size - 1, 1, hi)
+            end
+          elsif p.shape == :puff                # soft-edged puffs that thin out as they age
+            r = p.size + ((k < 0.5) ? 1 : 0)
+            if k > 0.55 then Dither.disc(b, x, y, r, r, p.ramp.rgb[(k * 3.99).to_i], 2)
+            else
+              Pix.disc(b, x, y, r, c)
+              Pix.rect(b, x - (r / 2), y - (r / 2), [r / 2, 1].max, 1, p.ramp.core)
+            end
           else
             Pix.rect(b, x, y, size, size, c)
           end

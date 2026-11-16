@@ -57,7 +57,7 @@ module Prismfall
                  :scroll => o[:scroll] || defaults[:scroll] || 0,
                  :x => o[:x] || defaults[:x] || 0, :y => defaults[:y] || 0,
                  :tile => (o.has_key?(:tile)) ? o[:tile] : defaults.fetch(:tile, true),
-                 :opacity => o[:opacity] || 255 }
+                 :opacity => o[:opacity] || 255, :front => o[:front] || false }
       end
 
       # Returns an array of layer specs.
@@ -94,6 +94,7 @@ module Prismfall
         when :fleet     then return fleet(o, vw, vh, seed)
         when :fortress  then return fortress(o, vw, vh, seed)
         end
+        return send(kind, o, vw, vh, seed) if respond_to?(kind)      # kinds added by other files
         raise ArgumentError, "Unknown background kind #{kind.inspect}"
       end
 

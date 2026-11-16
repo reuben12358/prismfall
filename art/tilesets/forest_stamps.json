@@ -1,0 +1,1419 @@
+[
+{
+"name": "rustic_01",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+1,
+2,
+4
+],
+"first_tile_id": 392
+},
+{
+"name": "rustic_02",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+2,
+1,
+2,
+4
+],
+"first_tile_id": 394
+},
+{
+"name": "rustic_03",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+4,
+1,
+2,
+4
+],
+"first_tile_id": 396
+},
+{
+"name": "rustic_04",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+6,
+1,
+2,
+3
+],
+"first_tile_id": 398
+},
+{
+"name": "rustic_05",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+5,
+1,
+1
+],
+"first_tile_id": 424
+},
+{
+"name": "rustic_06",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+1,
+5,
+2,
+4
+],
+"first_tile_id": 425
+},
+{
+"name": "rustic_07",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+3,
+5,
+2,
+4
+],
+"first_tile_id": 427
+},
+{
+"name": "rustic_08",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+5,
+5,
+2,
+4
+],
+"first_tile_id": 429
+},
+{
+"name": "rustic_09",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+9,
+2,
+3
+],
+"first_tile_id": 456
+},
+{
+"name": "rustic_10",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+2,
+9,
+1,
+1
+],
+"first_tile_id": 458
+},
+{
+"name": "rustic_11",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+3,
+9,
+4,
+1
+],
+"first_tile_id": 459
+},
+{
+"name": "rustic_12",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+12,
+5,
+1
+],
+"first_tile_id": 480
+},
+{
+"name": "rustic_13",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+13,
+4,
+1
+],
+"first_tile_id": 488
+},
+{
+"name": "rustic_14",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+14,
+5,
+1
+],
+"first_tile_id": 496
+},
+{
+"name": "rustic_15",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+5,
+14,
+3,
+8
+],
+"first_tile_id": 501
+},
+{
+"name": "rustic_16",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+22,
+2,
+8
+],
+"first_tile_id": 560
+},
+{
+"name": "rustic_17",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+2,
+22,
+1,
+2
+],
+"first_tile_id": 562
+},
+{
+"name": "rustic_18",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+3,
+22,
+5,
+3
+],
+"first_tile_id": 563
+},
+{
+"name": "rustic_19",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+30,
+1,
+1
+],
+"first_tile_id": 624
+},
+{
+"name": "rustic_20",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+1,
+30,
+1,
+2
+],
+"first_tile_id": 625
+},
+{
+"name": "rustic_21",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+2,
+30,
+5,
+3
+],
+"first_tile_id": 626
+},
+{
+"name": "rustic_22",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+7,
+30,
+1,
+1
+],
+"first_tile_id": 631
+},
+{
+"name": "rustic_23",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+33,
+1,
+2
+],
+"first_tile_id": 648
+},
+{
+"name": "rustic_24",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+1,
+33,
+5,
+3
+],
+"first_tile_id": 649
+},
+{
+"name": "rustic_25",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+6,
+33,
+1,
+1
+],
+"first_tile_id": 654
+},
+{
+"name": "rustic_26",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+7,
+33,
+1,
+1
+],
+"first_tile_id": 655
+},
+{
+"name": "rustic_27",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+36,
+1,
+1
+],
+"first_tile_id": 672
+},
+{
+"name": "rustic_28",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+1,
+36,
+1,
+1
+],
+"first_tile_id": 673
+},
+{
+"name": "rustic_29",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+2,
+36,
+3,
+1
+],
+"first_tile_id": 674
+},
+{
+"name": "rustic_30",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+5,
+36,
+1,
+1
+],
+"first_tile_id": 677
+},
+{
+"name": "rustic_31",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+6,
+36,
+1,
+1
+],
+"first_tile_id": 678
+},
+{
+"name": "rustic_32",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+7,
+36,
+1,
+1
+],
+"first_tile_id": 679
+},
+{
+"name": "rustic_33",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+37,
+1,
+1
+],
+"first_tile_id": 680
+},
+{
+"name": "rustic_34",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+1,
+37,
+5,
+2
+],
+"first_tile_id": 681
+},
+{
+"name": "rustic_35",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+0,
+39,
+5,
+3
+],
+"first_tile_id": 696
+},
+{
+"name": "rustic_36",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+5,
+39,
+1,
+1
+],
+"first_tile_id": 701
+},
+{
+"name": "rustic_37",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+6,
+39,
+1,
+1
+],
+"first_tile_id": 702
+},
+{
+"name": "rustic_38",
+"kind": "tree",
+"artist": "Magiscarf",
+"source": "morgebby/Graphics/Tilesets/Tilesets/_free__rustic_tiles_w__updates_by_magiscarf_daojd43.png",
+"tile_rect": [
+7,
+39,
+1,
+1
+],
+"first_tile_id": 703
+},
+{
+"name": "bigtree_01",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/outdoor collection big trees.png",
+"tile_rect": [
+0,
+42,
+1,
+2
+],
+"first_tile_id": 720
+},
+{
+"name": "bigtree_02",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/outdoor collection big trees.png",
+"tile_rect": [
+1,
+42,
+2,
+1
+],
+"first_tile_id": 721
+},
+{
+"name": "fairy_01",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+42,
+1,
+1
+],
+"first_tile_id": 723
+},
+{
+"name": "fairy_02",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+42,
+3,
+2
+],
+"first_tile_id": 724
+},
+{
+"name": "fairy_03",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+44,
+7,
+8
+],
+"first_tile_id": 736
+},
+{
+"name": "fairy_04",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+52,
+3,
+2
+],
+"first_tile_id": 800
+},
+{
+"name": "fairy_05",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+52,
+3,
+2
+],
+"first_tile_id": 803
+},
+{
+"name": "fairy_06",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+54,
+3,
+2
+],
+"first_tile_id": 816
+},
+{
+"name": "fairy_07",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+54,
+1,
+3
+],
+"first_tile_id": 819
+},
+{
+"name": "fairy_08",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+54,
+1,
+6
+],
+"first_tile_id": 820
+},
+{
+"name": "fairy_09",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+5,
+54,
+1,
+1
+],
+"first_tile_id": 821
+},
+{
+"name": "fairy_10",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+6,
+54,
+1,
+1
+],
+"first_tile_id": 822
+},
+{
+"name": "fairy_11",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+7,
+54,
+1,
+4
+],
+"first_tile_id": 823
+},
+{
+"name": "fairy_12",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+60,
+1,
+1
+],
+"first_tile_id": 864
+},
+{
+"name": "fairy_13",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+1,
+60,
+1,
+1
+],
+"first_tile_id": 865
+},
+{
+"name": "fairy_14",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+60,
+1,
+1
+],
+"first_tile_id": 866
+},
+{
+"name": "fairy_15",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+60,
+1,
+1
+],
+"first_tile_id": 867
+},
+{
+"name": "fairy_16",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+60,
+3,
+3
+],
+"first_tile_id": 868
+},
+{
+"name": "fairy_17",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+7,
+60,
+1,
+1
+],
+"first_tile_id": 871
+},
+{
+"name": "fairy_18",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+63,
+2,
+2
+],
+"first_tile_id": 888
+},
+{
+"name": "fairy_19",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+63,
+2,
+2
+],
+"first_tile_id": 890
+},
+{
+"name": "fairy_20",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+63,
+2,
+2
+],
+"first_tile_id": 892
+},
+{
+"name": "fairy_21",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+6,
+63,
+2,
+2
+],
+"first_tile_id": 894
+},
+{
+"name": "fairy_22",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+65,
+1,
+2
+],
+"first_tile_id": 904
+},
+{
+"name": "fairy_23",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+1,
+65,
+2,
+2
+],
+"first_tile_id": 905
+},
+{
+"name": "fairy_24",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+65,
+2,
+2
+],
+"first_tile_id": 907
+},
+{
+"name": "fairy_25",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+5,
+65,
+2,
+1
+],
+"first_tile_id": 909
+},
+{
+"name": "fairy_26",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+67,
+2,
+3
+],
+"first_tile_id": 920
+},
+{
+"name": "fairy_27",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+67,
+2,
+2
+],
+"first_tile_id": 922
+},
+{
+"name": "fairy_28",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+67,
+1,
+2
+],
+"first_tile_id": 924
+},
+{
+"name": "fairy_29",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+5,
+67,
+3,
+5
+],
+"first_tile_id": 925
+},
+{
+"name": "fairy_30",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+72,
+2,
+5
+],
+"first_tile_id": 960
+},
+{
+"name": "fairy_31",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+72,
+3,
+2
+],
+"first_tile_id": 962
+},
+{
+"name": "fairy_32",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+5,
+72,
+1,
+2
+],
+"first_tile_id": 965
+},
+{
+"name": "fairy_33",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+6,
+72,
+2,
+1
+],
+"first_tile_id": 966
+},
+{
+"name": "fairy_34",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+77,
+2,
+1
+],
+"first_tile_id": 1000
+},
+{
+"name": "fairy_35",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+77,
+1,
+1
+],
+"first_tile_id": 1002
+},
+{
+"name": "fairy_36",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+77,
+1,
+1
+],
+"first_tile_id": 1003
+},
+{
+"name": "fairy_37",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+78,
+8,
+6
+],
+"first_tile_id": 1008
+},
+{
+"name": "fairy_38",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+84,
+6,
+3
+],
+"first_tile_id": 1056
+},
+{
+"name": "fairy_39",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+6,
+84,
+1,
+1
+],
+"first_tile_id": 1062
+},
+{
+"name": "fairy_40",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+87,
+2,
+1
+],
+"first_tile_id": 1080
+},
+{
+"name": "fairy_41",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+87,
+1,
+1
+],
+"first_tile_id": 1082
+},
+{
+"name": "fairy_42",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+87,
+1,
+1
+],
+"first_tile_id": 1083
+},
+{
+"name": "fairy_43",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+4,
+87,
+1,
+1
+],
+"first_tile_id": 1084
+},
+{
+"name": "fairy_44",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+88,
+8,
+14
+],
+"first_tile_id": 1088
+},
+{
+"name": "fairy_45",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+0,
+102,
+1,
+1
+],
+"first_tile_id": 1200
+},
+{
+"name": "fairy_46",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+1,
+102,
+1,
+1
+],
+"first_tile_id": 1201
+},
+{
+"name": "fairy_47",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+2,
+102,
+1,
+1
+],
+"first_tile_id": 1202
+},
+{
+"name": "fairy_48",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Fairy Woods - Default Pallet.png",
+"tile_rect": [
+3,
+102,
+1,
+1
+],
+"first_tile_id": 1203
+},
+{
+"name": "haunted_01",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+4,
+102,
+1,
+1
+],
+"first_tile_id": 1204
+},
+{
+"name": "haunted_02",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+5,
+102,
+1,
+1
+],
+"first_tile_id": 1205
+},
+{
+"name": "haunted_03",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+6,
+102,
+1,
+1
+],
+"first_tile_id": 1206
+},
+{
+"name": "haunted_04",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+7,
+102,
+1,
+2
+],
+"first_tile_id": 1207
+},
+{
+"name": "haunted_05",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+0,
+104,
+1,
+1
+],
+"first_tile_id": 1216
+},
+{
+"name": "haunted_06",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+1,
+104,
+3,
+4
+],
+"first_tile_id": 1217
+},
+{
+"name": "haunted_07",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+4,
+104,
+1,
+1
+],
+"first_tile_id": 1220
+},
+{
+"name": "haunted_08",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+5,
+104,
+1,
+1
+],
+"first_tile_id": 1221
+},
+{
+"name": "haunted_09",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+6,
+104,
+1,
+1
+],
+"first_tile_id": 1222
+},
+{
+"name": "haunted_10",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+7,
+104,
+1,
+2
+],
+"first_tile_id": 1223
+},
+{
+"name": "haunted_11",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+0,
+108,
+1,
+1
+],
+"first_tile_id": 1248
+},
+{
+"name": "haunted_12",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+1,
+108,
+2,
+5
+],
+"first_tile_id": 1249
+},
+{
+"name": "haunted_13",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+3,
+108,
+3,
+5
+],
+"first_tile_id": 1251
+},
+{
+"name": "haunted_14",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+6,
+108,
+2,
+5
+],
+"first_tile_id": 1254
+},
+{
+"name": "haunted_15",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+0,
+113,
+1,
+2
+],
+"first_tile_id": 1288
+},
+{
+"name": "haunted_16",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+1,
+113,
+1,
+2
+],
+"first_tile_id": 1289
+},
+{
+"name": "haunted_17",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+2,
+113,
+2,
+2
+],
+"first_tile_id": 1290
+},
+{
+"name": "haunted_18",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+4,
+113,
+1,
+2
+],
+"first_tile_id": 1292
+},
+{
+"name": "haunted_19",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+5,
+113,
+2,
+2
+],
+"first_tile_id": 1293
+},
+{
+"name": "haunted_20",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+7,
+113,
+1,
+2
+],
+"first_tile_id": 1295
+},
+{
+"name": "haunted_21",
+"kind": "tree",
+"artist": "Ekat",
+"source": "morgebby/Graphics/Tilesets/Tilesets/Ekat's Public Tiles/Haunted Woods.png",
+"tile_rect": [
+0,
+115,
+2,
+2
+],
+"first_tile_id": 1304
+}
+]
