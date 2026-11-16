@@ -43,9 +43,13 @@ Custom events other plugins can listen to (`EventHandlers.add(event, :key, proc)
 - `$player.badges` grows to 18 entries automatically (padded on load/award). `Prismfall.badge_count` counts badges 1-18.
 - Award with `Prismfall.award_badge(n)`, not `$player.badges[n-1] = true`: it also records the badge time,
   fires `:prismfall_badge_awarded` and announces the new cap.
-- Field-move requirements: `FIELD_MOVE_BADGES` (CUT 1, ROCKSMASH 2, SURF 3, FLASH 4, STRENGTH 5, FLY 8,
-  WATERFALL 10, DIVE 12) are written into `Settings::BADGE_FOR_*` at load. `FIELD_MOVES_COUNT_BADGES = true`
-  means "at least N badges"; set it to `false` for "gym N's badge specifically" (written 1-18 in our config).
+- Field-move requirements (WORLD.md section 4): `FIELD_MOVE_BADGES` sets CUT 1, ROCKSMASH 2, FLASH 4, STRENGTH 5, SURF 6,
+  FLY 8, ROCKCLIMB 10, WATERFALL 11, DIVE 15. These are written into `Settings::BADGE_FOR_*` at load.
+  `FIELD_MOVES_COUNT_BADGES = true` means "at least N badges"; set it to `false` for "gym N's badge specifically" (written 1-18 in our config).
+- **Rock Climb** (v21 has no handler; `022_RockClimb.rb` adds one) uses `Prismfall::BADGE_FOR_ROCKCLIMB` (also `Settings::BADGE_FOR_ROCKCLIMB`) = 10.
+  To map a cliff, put an Action-Button event on the bottom tile and one on the top tile, named `RockClimb` or `RockClimb(N)`,
+  with `Script: pbRockClimb` (or `pbRockClimb(3)`). The player then moves N tiles in the facing direction with Through on (default 2).
+  Using the move from the party menu while facing the event works too. Keep the landing tile passable. Optional SE: `Audio/SE/Rock climb`.
 
 ### Trainer Card (18 badges in 2 rows of 9)
 Core keeps the vanilla text and suppresses only the vanilla 8-badge row. Layout is set in `TrainerCardLayout`:
@@ -188,7 +192,8 @@ EBDX ships `EliteBattle.bossBattle(species, level, player_side = 2, can_catch = 
 - no capture, no running
 - `generateWild` options: `:moves, :iv, :ev, :ability, :nature, :item, :form, :shiny`
 
-Core uses it automatically for the Festival Arceus stage when EBDX is present (`STAGES[...][:boss]`).
+Core uses it automatically for the Festival Arceus stage when EBDX is present (`STAGES[...][:boss]`). The separate
+`Prismfall Bosses` plugin (Rejuvenation-style multi-bar bosses, another agent) is adding its own switch to take that stage over when it's installed. Core leaves the stage as is.
 
 EBDX has **no native multiple HP bars**. To get the Rejuvenation "phases" feel, combine three things:
 1. `EliteBattle.bossBattle` with a high `:HP` boost.

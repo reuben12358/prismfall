@@ -52,15 +52,17 @@ module Prismfall
   # false = the number is "gym N's badge specifically" (1-18, NOT 0-based here;
   #         converted to Essentials' 0-based badge index automatically).
   FIELD_MOVES_COUNT_BADGES = true
+  # Values follow design/WORLD.md section 4 (badge counts).
   FIELD_MOVE_BADGES = {
-    :CUT       => 1,    # after Tamsin (Bug)
-    :ROCKSMASH => 2,    # after Dorian (Normal)
-    :SURF      => 3,    # after Marisol (Water)
-    :FLASH     => 4,    # after Rook (Electric)
-    :STRENGTH  => 5,    # after Sahar (Ground)
-    :FLY       => 8,    # end of Act II
-    :WATERFALL => 10,   # Act III
-    :DIVE      => 12    # needed for Act IV "The Drowned Crown"
+    :CUT       => 1,    # HM01, Briarwick Cutter's House
+    :ROCKSMASH => 2,    # TM98, Brinecut miner
+    :FLASH     => 4,    # TM70, Rook Calder
+    :STRENGTH  => 5,    # HM04, Duneholt excavators
+    :SURF      => 6,    # HM03, Mirefen ferrymen
+    :FLY       => 8,    # HM02, Skyreach courier
+    :ROCKCLIMB => 10,   # TM100, Rimeholt ice-climbers (handler: 022_RockClimb.rb)
+    :WATERFALL => 11,   # HM05, Skyreach sky-river guides
+    :DIVE      => 15    # HM06, Cogsworth bathysphere works
   }
 
   #-----------------------------------------------------------------------------

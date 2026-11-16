@@ -139,6 +139,8 @@ def prepare(spec, ctx):
         if e['type'] == 'exit':
             arr = e.get('arrive', [e['at'][0], e['at'][1] - 1, 'up'])
             ctx.exits[e['link']] = (mid, arr[0], arr[1], arr[2] if len(arr) > 2 else 'up')
+        if e['type'] == 'warp' and 'link' in e and 'arrive' in e:
+            ctx.doors.setdefault(e['link'], (mid, e['arrive'][0], e['arrive'][1]))
         if e['type'] == 'warp' and 'link' in e:
             arr = e.get('arrive', [e['at'][0], e['at'][1] - 1, 'up'])
             ctx.exits.setdefault(e['link'], (mid, arr[0], arr[1], arr[2] if len(arr) > 2 else 'up'))
@@ -348,6 +350,33 @@ def main():
         if s.get('field'):
             fmap[s['id']] = s['field']
     json.dump({'built': sorted(built), 'fields': fmap}, open(os.path.join(OUT, 'manifest.json'), 'w'), indent=1)
+    # every Transfer Player must point at a built map (ours) or a base-project map (< 100)
+    for s in selected:
+        m = M.load_file(os.path.join(OUT, 'Data', 'Map%03d.rxdata' % s['id']))
+        for ev in m.events.values():
+            for pg in ev.pages:
+                for c in pg.list:
+                    if c.code == 201 and c.parameters[0] == 0:
+                        tm = c.parameters[1]
+                        if tm not in built and tm >= 100:
+                            ctx.warn(s['id'], 'event "%s" transfers to map %d, which is not built yet' % (ev.name, tm))
+                        elif tm in built and tm != s['id']:
+                            tw, th = next(x['_size'] for x in specs if x['id'] == tm)
+                            if not (0 <= c.parameters[2] < tw and 0 <= c.parameters[3] < th):
+                                ctx.warn(s['id'], 'event "%s" transfers outside map %d' % (ev.name, tm))
+    # trainers referenced by events -> list for the trainer-data owner
+    need = set()
+    for s in selected:
+        m = M.load_file(os.path.join(OUT, 'Data', 'Map%03d.rxdata' % s['id']))
+        for ev in m.events.values():
+            for pg in ev.pages:
+                for c in pg.list:
+                    if c.code in (111, 355, 655) and 'TrainerBattle.start(' in str(c.parameters[-1]):
+                        need.add((s['id'], str(c.parameters[-1]).split('TrainerBattle.start(')[1].split(')')[0]))
+    with open(os.path.join(OUT, 'trainers_needed.txt'), 'w') as f:
+        f.write('# map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)\n')
+        for mid, a in sorted(need):
+            f.write('%d\t%s\n' % (mid, a))
     for w in ctx.warnings:
         print('WARN', w)
     print('%d maps; %d warnings' % (len(selected), len(ctx.warnings)))

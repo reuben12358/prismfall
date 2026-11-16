@@ -9,5 +9,14 @@
 107	100	Dockmaster's House
 108	100	Quarantine Customs Hall
 120	0	Briarwick
+121	120	Briarwick Pokémon Center
+122	120	Briarwick Mart
+123	120	Weavers' Guildhall
+124	120	Treetop House
+125	120	Cutter's House
+130	120	Loomhouse Gym - Foyer
+131	130	Loomhouse Gym - Weaving Hall
+132	130	Loomhouse Gym - Canopy Lofts
+133	130	Loomhouse Gym - The Spindle
 520	0	Route 1
 990	0	Prismfall Test Arena

@@ -47,6 +47,43 @@ ShowArea = true
 MapPosition = 0,12,22
 BattleBack = field
 #-------------------------------
+[121]   # Briarwick Pokémon Center
+Name = Briarwick Pokémon Center
+HealingSpot = 120,10,27
+MapPosition = 0,12,22
+#-------------------------------
+[122]   # Briarwick Mart
+Name = Briarwick Mart
+MapPosition = 0,12,22
+#-------------------------------
+[123]   # Weavers' Guildhall
+Name = Weavers' Guildhall
+MapPosition = 0,12,22
+#-------------------------------
+[124]   # Treetop House
+Name = Treetop House
+MapPosition = 0,12,22
+#-------------------------------
+[125]   # Cutter's House
+Name = Cutter's House
+MapPosition = 0,12,22
+#-------------------------------
+[130]   # Loomhouse Gym - Foyer
+Name = Loomhouse Gym - Foyer
+MapPosition = 0,12,22
+#-------------------------------
+[131]   # Loomhouse Gym - Weaving Hall
+Name = Loomhouse Gym - Weaving Hall
+MapPosition = 0,12,22
+#-------------------------------
+[132]   # Loomhouse Gym - Canopy Lofts
+Name = Loomhouse Gym - Canopy Lofts
+MapPosition = 0,12,22
+#-------------------------------
+[133]   # Loomhouse Gym - The Spindle
+Name = Loomhouse Gym - The Spindle
+MapPosition = 0,12,22
+#-------------------------------
 [520]   # Route 1
 Name = Route 1
 Outdoor = true

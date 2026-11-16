@@ -87,6 +87,18 @@ def charframe(name, hue, direction, pattern):
     return im
 
 
+def initial_page(ev):
+    """Page active at game start: last page whose conditions hold with all switches OFF and variables 0."""
+    for pg in reversed(ev.pages):
+        c = pg.condition
+        if c.switch1_valid or c.switch2_valid or c.self_switch_valid:
+            continue
+        if c.variable_valid and c.variable_value > 0:
+            continue
+        return pg
+    return None
+
+
 def render(m, events=True, grid=False, ts=None):
     ts = ts or tilesets()[m.tileset_id]
     tc = TileCache(ts)
@@ -110,7 +122,9 @@ def render(m, events=True, grid=False, ts=None):
     if events:
         d = ImageDraw.Draw(img)
         for ev in sorted(m.events.values(), key=lambda e: e.y):
-            pg = ev.pages[0]
+            pg = initial_page(ev)
+            if pg is None:
+                continue
             g = pg.graphic
             drawn = False
             if g.tile_id and g.tile_id >= 384:
