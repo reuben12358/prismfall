@@ -31,7 +31,7 @@ Range −10..+10. Tiers: hostile ≤ −5 · wary −4..−2 · neutral −1..1 
 | **Voss** | +1 | the first person who was kind to you | how warmly he offers, how bitterly he takes refusal; Ruin R4 |
 | **Valen** | 0 | the father-figure who planned your life | his collapse (≤ −2 with a refusal at the audience); his last words; Zygarde chooses the PC post-game at ≥ 3 |
 | **Ilsa** | 0 | the daughter who reads minds | Little Owl (≥ 3 to start, ≥ 4 to reconcile); Consent (≥ 5 or reconciled) |
-| **Sigrun** | 0 | the heir who was relieved | Final stand-in (≥ 5); Borrowed Crown bearer (≥ 6) |
+| **Sigrun** | 0 | the heir who was relieved | war trust (≥ 4); she draws into your QF if you've gone Ruin-leaning or broke Ashkaar; Borrowed Crown bearer (≥ 6) |
 | **Nyx** | 0 | the broker | Consent (≥ 4 or the bargain) |
 | **Marisol** | 0 | the sister of the boy you may not save | if Teo died: Consent at ≥ 3, otherwise she claims her Right of Grievance in R16 |
 | **Ysolde** | 0 | Morwen's partner | Kestrel–Ysolde reconciliation (≥ 4), Kestrel's Ghost seat, Morwen's Echo exhibition |
@@ -128,6 +128,23 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
   else Thistle and Wick); whether Elin wakes into her husband's arms; Juno −4.*
 - **`:sq_doctors_cell`** — "The Doctor's Cell" (Ch11–13): free Corvin from the holding barge, or fail. *Corvin's Consent; the Cragholm hospital.*
 
+### The Ashkaar–Isenmar War (Revision 6; chapters placed by the story lead, Act III–IV) — six proposed choices
+- **`:war_warning`** — you see the Dominar's legions at Frostfang Pass before anyone. Warn Isenmar / warn Ashkaar they've been seen / warn both
+  (the Accord's way; both sides note it) / say nothing.
+- **`:war_convoy`** — Marisol asks the one person who can walk the Bleed-front to take a convoy into besieged Rimeholt: *relief* (food) /
+  *arms* (harpoon-guns; Marisol +3, Sigrun −2) / *refuse*.
+- **`:war_prisoner`** — Ashkaar holds Anja; the Thane holds the Dominar's nephew. *free* one in secret / broker an *exchange* / *leave* them.
+- **`:war_legend`** — both sides beg you to bring their legend: *calm Kyogre* / *wake Reshiram* / *neither*. It decides whose beams meet in the climax.
+- ★ **`:war_climax`** — the frozen strait, both lines charging. **Stand between** them / **back Ashkaar** / **back Isenmar**. Standing between only
+  stops the war if both armies have seen you act in good faith four times (war trust: warned both, relief, a prisoner helped, no legend used as a
+  weapon, Sigrun ≥ 4, Marisol ≥ 3). Otherwise the beam clash goes off over your head and breaks both armies.
+- **`:war_terms`** — if one side won: argue for *mercy*, *reparations* or *occupation*.
+
+*Long-term:* a beaten kingdom forfeits a Festival seat (§3.1); beaten and unforgiven, its Wardens won't release their Plates (Marisol and Anja,
+or Brann and Sigrun; both pairs if the clash broke both armies), which can sink Consent below 12 on its own; *occupation* makes Homecoming
+impossible (Unfinished at best); the winner's fleets or legions (both, if you stopped it) defend Crownhaven in the hijack; Anja vs Brann in the
+bracket is decided by it.
+
 ### Act IV — "The Drowned Crown" (who are you willing to become?)
 - ★ **`:ch14_telemetry`** — Larch opens the badge case. **Destroy** (Voss knows at once; Directorate pressure in Ch16–17; an Engine crack) /
   **Sabotage** (keep it and feed it lies: two cracks, a tense "did he notice?" beat at every later badge) / **Leave** it (the road to the Bad
@@ -174,101 +191,95 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
 
 ---
 
-## 3. The Festival draw (Revision 4: original characters only)
+## 3. The Festival draw (Revisions 5–6: kingdom delegations, story-met characters only)
 
-### 3.1 In-world: the lots are honest, the bowl isn't
-The Hierophant draws lots from the crystal bowl on the Basilica steps (08_ACT_V). The draw *looks* random. It isn't, and Velmorans half-know it:
-the Accord's old customs let certain people choose their opponent. The **Right of Grievance** lets a Warden claim a first-round match against a
-challenger who wronged their city. A **Warden's invitation** can be given away. Any Warden may ask the Hierophant for a challenger's quarter. A
-Sovereign who can't stand is replaced by a stand-in. And Dorian, the Accord's Pageant-Master, has never once let the bowl ruin a good story.
-Every rule below has one of those reasons on screen.
+### 3.1 What the Festival is now
+The Festival of Champions is the rite by which all Velmora chooses the one person who receives **Arceus's Blessing**. Sixteen stand in the Prism
+Arena: the Unimprinted challenger and **fifteen delegates**, two from each of the seven kingdoms and the Accord's Sovereign. Nobody in the bracket
+is a stranger: every possible opponent has been met at least twice by Act IV. The four Rev-4 outsiders are gone.
 
-**Entrants.** Sixteen seeds, all original: the PC, Juno, Kestrel, Valen; the Wardens Nyx, Kaito, Marisol, Odessa, Celestine, Ysolde, Anja and
-Sigrun; and four outsiders who came with Envoy Okoro's sealed Concert delegation or were entered by a king:
-- **Isaura Vell, Champion of Solvane** (`FESTIVAL_ISAURA`), the new headline. Twelve years ago Necrozma began eating Solvane's light; she caught it,
-  and her islands had the **Sunless Year** until she let it go. Blunt, tired, and the only person in Crownhaven who has already done what Voss
-  wants to do. She takes over the outside confirmation of the Return: "You want to know what happens when you put a god in a box? It's quiet. For a
-  while. Then it isn't. Give it back before someone teaches it to hate you." Ace concept: Volcarona "Dawn".
-- **Matthias Drey, Champion of the Karst Republic** (`FESTIVAL_DREY`): Okoro's security chief and the Concert's hardliner on Severance; a Steel/Ground
-  fortress (ace concept: Copperajah). Kestrel's Gauntlet beats him in R16, and he's the one who says "Your rival is fighting with something that isn't him."
-- **Mireille Vance, Champion of Lys** (`FESTIVAL_MIREILLE`): seventeen, the Concert's youngest champion, kind and starstruck by Celestine; Fairy/Normal
-  (ace concept: Florges).
-- **Ser Ivo Thorne, the Queen's Champion** (`FESTIVAL_THORNE`): Lord-Commander of Elowen's Thornguard, entered by Queen Maelis to win the Sovereign
-  Seat for a crown; Grass/Steel (ace concept: Ferrothorn). Sigrun beats him in R16, in front of every king in the stands.
-Default R16 pairs: PC–Juno, Isaura–Nyx, Kestrel–Drey, Kaito–Marisol, Valen–Odessa, Mireille–Celestine, Ysolde–Anja, Thorne–Sigrun.
+**Who each kingdom sends** (exact rules: NARRATIVE_KEYS §6.1):
+
+| Kingdom | Seat A | Seat B | What decides it |
+|---|---|---|---|
+| **Elowen** | Juno | Celestine | fixed, but Juno gives her seat to "the Gardener" (Rowan) if you earned it (R16 draw) |
+| **Antumbra** | Ysolde | **Kestrel** if Gravenmoor names him (redeemed, and the ring given or Ysolde ≥ 4), else **Ilsa** | whether the name *Vane* is restored or he's disowned |
+| **Zenith** | **Rook** if he held the footage and is still Meridian's face, else **Odessa** | **Kestrel** under Meridian's sunburst if Gravenmoor didn't claim him; else **Magnus** unless exposed; else Odessa/Rook | Rook's and Magnus's Ch16 choices; Kestrel's state |
+| **Nadir** | Kaito | **Nyx**, or **Corvin** if you freed him and refused Nyx's bargain | who the City Below trusts |
+| **Ossaria** | Sahar | **Bastian**, unless the raid came in on your beacon (telemetry left); then the seat is lent out | Ch14 |
+| **Isenmar** | Marisol (or Anja, if only one seat is left and she's the one with the open account with you) | Anja, or **forfeit** | the war |
+| **Ashkaar** | Sigrun | Brann, or **forfeit** | the war |
+| **The Accord** | Valen | — | — |
+
+**The war decides seats.** A kingdom that lost the war (or both, if the clash broke both armies) forfeits its second seat; the Accord lends it to a
+Warden with no seat (Dorian first, then Tamsin, Rook, Odessa, Ilsa, Nyx, Corvin). A victor gets terms, never a third delegate.
 
 ### 3.2 Stage pools (first matching candidate wins; the last line is the fallback)
 
-| Stage (cap) | Priority | Opponent | Condition (plain words; exact strings in NARRATIVE_KEYS §6.3) | On-screen reason |
+| Stage (cap) | Priority | Opponent | Condition | On-screen reason |
 |---|---|---|---|---|
-| **R16** (90) "someone from your past" | 1 | **Marisol** (Grievance) | Teo died and Marisol's Bond is 2 or less | Right of Grievance: "Let's see you run past *me*." |
-| | 2 | **Anja** | you exposed her to the Thane's court | "You threw me to the court. Fine. Ice remembers." |
-| | 3 | **Rowan, "the Gardener"** | Rowan lived, you pleaded mercy, and the Hollow trusts you (≥ 4) | Juno gives her uncle her own invitation: "One last garden, child." |
+| **R16** (90) | 1 | **Marisol** (Grievance) | she holds a seat, Teo died, Bond ≤ 2 | Right of Grievance: "Let's see you run past *me*." |
+| | 2 | **Anja** | she holds a seat and you exposed her | "You threw me to the court. Fine. Ice remembers." |
+| | 3 | **Rowan, "the Gardener"** | Rowan lived, you pleaded mercy, Hollow trust ≥ 4 | Juno gives him Elowen's seat: "One last garden, child." |
 | | fallback | **Juno** (J4) | — | "We started on the same dock." |
-| **QF** (92) "the outsider's view" | 0 | **Archseer Imre Dask** | Ruin Route | the Veiled Synod claims the Renegade: "Behind, welcome. Welcome, behind." |
-| | 1 | **Celestine** | Resonance ≤ −3 | "You're getting louder in the wrong key. I'd like to hear it up close." |
+| **QF** (92) | 0 | **Archseer Dask** | Ruin Route | "Behind, welcome. Welcome, behind." |
+| | 1 | **Sigrun** | Resonance ≤ −3, or you helped Isenmar break her father's legions | "Dragons weigh things. You've gotten heavier." |
 | | 2 | **Kaito** | your oath was Keep | "You'd keep them? Marrowgate's still knocking." |
 | | 3 | **Ysolde** | Kestrel has fallen | "If I can't reach him, I'll find out what reached you." |
-| | 4 | **Mireille** | five or more Bonds at close (≥ 5) and Harmony-leaning | "Everyone keeps telling you what you're *for*. Have you decided yet?" |
-| | fallback | **Isaura** | — | the headline: "Your god's in pieces and your champion's made of glass. Lovely region." |
-| **SF** (94) "the mirror" | 1 | **Kestrel (Fallen)** | `KESTREL_FALLEN` | he keeps the Gauntlet on and fights like someone drowning |
-| | fallback | **Kestrel (Redeemed)**, K8 | — (Ruin Route: same team, Ruin dialogue) | he tears the Gauntlet off: "If I beat you, I beat *you*." |
-| **Final** (96) "the crown", drawn live on Day 7 | 0 | **Valen, the Last Tuning** | Ruin Route | he fights to hold the Plates quiet one more time, and to stop you |
-| | 1 | **Sigrun**, Sovereign-designate | Valen collapsed, and Sigrun is close (≥ 5) | "He beat me with an arm made of glass. Now he can't stand. So it's me." |
-| | 2 | **Brann** | Valen collapsed | "He asked me to. Last thing he asked." |
-| | fallback | **Valen** | — | Zygarde, Complete on its last bar |
-| **Hijack** (100), drawn live | 0 | **Theodric, the Gilded Reflection** | Ruin Route | the Gilded King steps out of the arena's crystal walls |
-| | 1 | **Dr. Quent** | Voss discredited (Magnus exposed + Rook's leak + the Night of Masques) | the board removed Voss; Quent giggles in the harness; Voss watches, appalled |
-| | fallback | **Voss** | — | "You carried my key through eighteen doors." |
-| **True Finale** (100) | — | **Arceus** variant | Judgment (Ruin) > Gilded (Engine calibrated) > War (Resonance ≤ −6) > Miscalibrated (telemetry sabotaged) > Bound | §6.2 |
+| | 4 | **Odessa** | she holds a seat; five close Bonds; Harmony-leaning | "Everyone keeps telling you what you're *for*. The wind doesn't care. What do *you* want?" |
+| | fallback | **Celestine** | — | "I cannot lie, so listen while we fight." |
+| **SF** (94) | 1 | **Kestrel (Fallen)** | `KESTREL_FALLEN` | Meridian's banner; he keeps the Gauntlet on |
+| | fallback | **Kestrel (Redeemed)**, K8 | — | Gravenmoor's banner or Meridian's; he tears the Gauntlet off |
+| **Final** (96), live on Day 7 | 0 | **Valen, the Last Tuning** | Ruin Route | — |
+| | 1 | **Brann** | Valen collapsed | "He asked me to. Last thing he asked." |
+| | fallback | **Valen** | — | Zygarde |
+| **Hijack** (100), live | 0 / 1 / fallback | **Theodric** (Ruin) / **Quent** (Voss discredited) / **Voss** | — | — |
+| **True Finale** (100) | — | **Arceus** variant | Judgment > Gilded > War > Miscalibrated > Bound | §6.2 |
+
+**Functions moved off the retired outsiders:** the Return confirmation is **Celestine's**, and it's an oath because she cannot lie ("Give them back.
+I've waited forty years to say that to someone who could."). The warning before *His Hand* is **Larch's** ("Don't let him make you a part. He's very
+good at parts."). The Concord Dawn closing line is Celestine's, in fairy-tale cadence: "Once upon a time a god was kept in a box. It was quiet. For a
+while." "That isn't him fighting" is **Kaito's**, because his Lucario felt it. The Ruin hint is **Ilsa's**: "You're thinking very loudly.
+Twenty-three times."
 
 ### 3.3 Proof: exactly one opponent per stage, never the same person twice
+1. **At least one / at most one.** Every list ends in an unconditional fallback who is *always seated* (Juno, Celestine, Kestrel, Valen; Voss), and the
+   resolver stops at the first match.
+2. **No duplicates.** Persons per stage are disjoint: R16 {Marisol, Anja, Rowan, Juno}; QF {Dask, Sigrun, Kaito, Ysolde, Odessa, Celestine}; SF
+   {Kestrel}; Final {Valen, Brann}; Hijack {Theodric, Quent, Voss}. Core's validator enforces it.
+3. **Only seated people are drawn.** Candidates whose seat depends on choices (Marisol, Anja, Odessa) carry `seated()` in their condition; Kaito,
+   Ysolde and Sigrun are always seated; Rowan and Dask enter by replacing the default; Brann's stand-in is live and needs no seat.
+4. **Fifteen seats always fill.** Each seat ends in an unconditional candidate or a forfeit drawn from a pool of seven for at most three forfeits.
+5. **Alive and present.** Rowan needs `ROWAN_ALIVE`; Quent precedes Voss when Voss was removed; Brann only when Valen collapsed.
 
-1. **At least one.** Every stage's list ends with an unconditional fallback (Juno, Isaura, Kestrel, Valen, Voss; Arceus's last variant has no
-   condition). Core's resolver returns the first entry whose condition holds and whose *person* isn't used yet, so it always reaches a match.
-2. **At most one.** The resolver stops at the first match.
-3. **No duplicates.** Each person appears in exactly one stage's list: R16 {Marisol, Anja, Rowan, Juno}; QF {Dask, Celestine, Kaito, Ysolde,
-   Mireille, Isaura}; SF {Kestrel}; Final {Valen, Sigrun, Brann}; Hijack {Theodric, Quent, Voss}. The sets are disjoint (Core's validator enforces it),
-   so the "person already used" check can never skip a candidate and no playthrough fights anyone twice. Variants (Kestrel Fallen, Valen of the
-   Last Tuning) share a person with the default *of the same stage only*.
-4. **Everyone drawn is alive and present.** Rowan's entry requires `ROWAN_ALIVE`. Quent precedes Voss whenever Voss was removed. Sigrun and Brann are
-   only drawn when Valen collapsed. Every other drawable person is a seeded entrant who can't die before the Festival.
-5. **Nobody vanishes by accident.** Every candidate except Rowan and Dask is already seeded, so a draw is a seat swap: the displaced default plays on
-   in the drawn entrant's old seed. Rowan's draw removes Juno, and Dask's removes Isaura; both are deliberate and explained (§3.5).
-6. **Fallen Kestrel is not a hijack opponent.** He's the Engine's harnessed conduit inside the Voss fight (`:ch21_reach_kestrel`), so he's never fought twice.
+### 3.4 Companion matches and highlights
+NPC matches resolve by rule, and the player can watch any notable one as a pixel-animated highlight (`MATCH_RULES`, NARRATIVE_KEYS §6.5: winner
+rule plus 2–4 key moments each). Order: a drawn path opponent wins until they meet the player; then the pair's rule; then rating. Examples:
+- **Anja vs Brann**, the war in miniature: Anja wins if Isenmar won or the war was stopped with the prisoners freed, else Brann. Its centre is a
+  Blizzard–Flamethrower beam clash where, this time, nobody dies.
+- **Kestrel vs Kaito** (Kestrel wins): Lucario flinches from something that isn't the blade.
+- **Juno**, when a Grievance displaces her: she beats Ysolde at Bond ≥ 5 ("Your aunt is listening"), and loses to Sigrun with her garden at stage five.
+- **Valen vs Sigrun** (Valen): "He beat me with an arm made of glass." **Valen vs Kaito**: Kaito's first Aura Sphere goes a hand's width wide, on purpose.
 
-### 3.4 Five sample runs
+### 3.5 Sample runs
 
-| Run | Key choices | R16 | QF | SF | Final | Hijack | Arceus |
-|---|---|---|---|---|---|---|---|
-| "The kind one" | saved Teo, mercy for Rowan, Hollow trust 5, five close Bonds, ring given, telemetry sabotaged | **Rowan** | **Mireille** | Kestrel (Redeemed) | Valen | Voss | Miscalibrated |
-| "The honest one" | chased Sable, exposed Anja and Magnus, oath Open | **Marisol** (Grievance beats Anja's priority) | Isaura | Kestrel | Valen | **Quent** | Bound |
-| "Meridian's friend" | Fellowship, dampers, telemetry left, Kestrel cold, oath Keep, cold refusal at the audience | Juno | **Kaito** | **Kestrel (Fallen)** | **Brann** (Valen collapsed; Sigrun not close) | Voss | **Gilded** (Bad) |
-| "The angry one" | burned the letter, silenced the Matriarch, Resonance −7, condemned Rowan | Juno | **Celestine** | Kestrel (Fallen via low Bond) | Valen | Voss | **War** |
-| "The Renegade" | Ruin Route | Juno (Ruin dialogue) | **Dask** | Kestrel (Ruin dialogue) | **Valen, Last Tuning** | **Theodric** | **Judgment** |
+| Run | R16 | QF | SF | Final | Hijack | Arceus |
+|---|---|---|---|---|---|---|
+| "The kind one" (Teo saved, mercy, war stopped, five close Bonds) | **Rowan** | **Odessa** | Kestrel, for Gravenmoor | Valen | Voss | Miscalibrated |
+| "The honest one" (chased Sable, exposed Anja and Magnus) | **Marisol** | Celestine | Kestrel | Valen | **Quent** | Bound |
+| "Isenmar's sword" (backed Isenmar, occupation) | Juno | **Sigrun** | Kestrel | Valen | Voss | Bound → *Unfinished* at best |
+| "Meridian's friend" (telemetry left, oath Keep, cold audience) | Juno | **Kaito** | **Kestrel (Fallen)**, for Meridian | **Brann** | Voss | **Gilded** |
+| "The Renegade" | Juno | **Dask** | Kestrel | **Valen, Last Tuning** | **Theodric** | **Judgment** |
 
-### 3.5 Where the displaced go
-- **R16 Marisol or Anja:** they swap seeds with Juno. Juno plays on (vs Kaito or vs Ysolde) and loses, which opens her Garden Match exhibition.
-- **R16 Rowan:** Juno leaves the bracket by design. She gave "the Gardener" her own invitation, and watches from the Wardens' box.
-- **QF Celestine, Kaito, Ysolde or Mireille:** they swap with Isaura, who plays on in their old seed (and opens her exhibition when she's out).
-- **QF Dask (Ruin):** Isaura withdraws rather than play the Renegade ("I put a god in a box once. I won't help someone break one."). Dask takes her seed.
-- **Final stand-ins:** Valen reached the Final, then collapsed; the stand-in takes his slot and he watches from a stretcher.
-
-### 3.6 Exhibitions (original only)
-Always: the **Eevee Octave**. Every outsider who loses (Drey, Thorne, Isaura, Mireille) opens an exhibition the next day. Plus (NARRATIVE_KEYS §6.5):
-- **The Pageant Bout** (Day 3): Dorian and Rook, a double battle staged as "a duet for the cameras". Rook's Rotom films it.
-- **"One More"** (Day 5): Bastian, too old for the bracket, wants one last fight. "I'm seventy-four. Rock's patient. I'm not."
-- **Juno's Garden Match** if she wasn't your R16; the **Ebb Guild match** with Marisol while Teo heckles from the stands (Teo saved and Marisol close).
-- **Morwen's Echo** on the Night of Masques: Ysolde lights the Cathedral lantern in Crownhaven and Kestrel's mother fights the PC once, gently,
-  "to see what I bought" (Kestrel and Ysolde reconciled, and the K6 line was Resolve).
-On the Ruin Route only the Eevee Octave plays: nobody will fight the Renegade for sport.
-The sister-game cameos (Revision 4) are optional sidequests elsewhere in the world, owned by the story lead; none appear in the Festival.
-
-### 3.7 Teams the balance team must build
-Full table with `[TYPE, Name, Version]`: NARRATIVE_KEYS §7. **22 new Festival teams:** Marisol 90, Anja 90, Rowan 90, Isaura 2, Celestine 92,
-Kaito 92, Ysolde 92, Mireille 2, Dask 92, Kestrel Fallen 90–92, Sigrun 96, Brann 96, Valen 1, Quent 99, Theodric 0, Drey 1, Thorne 1, Dorian 90,
-Rook 90, Bastian 90, Morwen 90 (Dorian and Rook are two teams for one double). **4 new Arceus boss configs**, and the non-Festival extras
-(Juno partner 70–72, Ch21 tag foes v21, four Ruin gym teams v1, the Reflection). Every `FESTIVAL_<cameo>` team is no longer a Festival team.
+### 3.6 Displaced defaults, exhibitions, teams
+- **Displaced:** Marisol/Anja swap seats with Juno, and the QF Wardens swap with Celestine; the displaced one plays on as an NPC. Rowan takes Juno's
+  seat (she gave it), and on the Ruin Route Dask takes Celestine's ("I cannot lie, so I won't pretend this is a game.").
+- **Exhibitions** (story-met only): the **Pageant Bout** (Dorian and Rook, a double), **Juno's Garden Match** if she wasn't your R16, the **Ebb Guild
+  match** with Marisol (Teo saved, close), and **Morwen's Echo** on the Night of Masques. The Eevee Octave is suspended until Vesper is met earlier
+  (§8). None on the Ruin Route.
+- **Teams:** NARRATIVE_KEYS §7. **19 new Festival teams** (Marisol 90, Anja 90, Rowan 90, Celestine 92, Sigrun 92, Kaito 92, Ysolde 92, Odessa 92,
+  Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Theodric 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
+  the other delegates are NPC-only. Retired: Isaura 2, Drey 1, Mireille 2, Thorne 1, Bastian 90, Sigrun 96, and every cameo `FESTIVAL_*` team.
 
 ---
 
@@ -375,7 +386,7 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
 - **R6 "The Unfestival"** (Festival week). The Accord bars "the Renegade". Archseer Dask claims the PC for the Veiled Synod and walks them in through the Glass; Dorian, who has never
   once let the bowl ruin a story, seeds them anyway. **R16 Juno** ("You'll make sure Verdance never gets an autumn."), **QF Archseer Dask** (his offer to stay behind the Glass is
   `GO_R_WELCOME_BEHIND`), **SF Kestrel** (he tears the Gauntlet off to fight you as himself), **Final Valen, the Last Tuning** ("I'll hold them quiet
-  one more time. I'll die doing it. That's still better than you."). No exhibitions. Isaura, on the stands: "You've done this before, haven't you. Died, I mean."
+  one more time. I'll die doing it. That's still better than you."). No exhibitions. Ilsa, earmuffs off: "You're thinking very loudly. Twenty-three times."
   At the Night of Masques, the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one.
 - **R7 "Every Type and None"** (the finale). At the Coronation the Engine wakes, but the hand that reaches up through the arena's crystal walls
   isn't only Voss's: **Theodric's reflection** steps through wearing the Chain. Voss kneels (kneel with him: `GO_R_KNEEL`). When Theodric casts him
@@ -467,7 +478,7 @@ Borrowed Crown. This spec adds the conditions that vary them, and three new endi
 - **The Hollow Spring (Grey).** As written. If Rowan drowned, Thistle plants the first seed in plain soil; if Teo lived, he's the one who won't
   speak to her.
 - **Concord Dawn (Grey).** As written, plus: if reached through `:ch21_hand`, the PC never fights Arceus at all, and the last slide is the PC
-  reading the arena's power output on a Council screen with Isaura's line over it: "It's quiet. For a while."
+  reading the arena's power output on a Council screen with Celestine's line over it: "Once upon a time a god was kept in a box. It was quiet. For a while."
 - **The Gilded Chain (Bad).** As written. The PC as "the Sovereign Who Sleeps". If Quent hijacked, the mug on the desk is Quent's, not Voss's,
   and Voss is in the crowd of schoolchildren's parents, visiting.
 - **The Unmaking / The One Who Came Back (Ruin).** §5.4.
@@ -497,7 +508,7 @@ Zygarde chooses the PC at Valen's memorial in any ending with a memorial if Vale
    when they trigger; Core stores a set per field.
 4. **The Ledger viewer and Hall of Reflections.** The Ledger also records every Festival opponent variant the player has **met**. Post-game,
    the Distortion Core's **Hall of Reflections** lets them re-fight any variant they've met in *any* playthrough (Kestrel Fallen, the Gardener,
-   Sigrun as Regent, Quent…) at lv 100. It reuses every team the balance team built. *Impl.:* Ledger lines `MET:<ENTRANT>`; the hall's menu reads them.
+   Brann for Valen, Quent…) at lv 100. It reuses every team the balance team built. *Impl.:* Ledger lines `MET:<ENTRANT>`; the hall's menu reads them.
 5. **The Second Ferry (New Game+).** After any ending, the `secondferry` password starts a new game that keeps the Ledger (always), Field Notes,
    Pokédex *seen* flags and one Pokémon of choice from the Hall of Fame as "a passenger". Ines's letter gains a postscript that matches the last
    ending seen. The Journal shows faint "echo" lines under choices made in the previous run. *Impl.:* a carryover file written at the ending,
@@ -536,7 +547,7 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
 13. **08 Ch20:** add Calla's defection scene at the Night of Masques (`:ch20_calla`); Envoy Okoro's *proof* needs two of the three proofs; cut
     GO-20 Encore; Valen's collapse is `VALEN_COLLAPSED` (no Little Owl, a refusal with a cold Bond, and the telemetry left running).
 14. **08 Ch20 Draw:** stage the Right of Grievance (Marisol), Kaito and Odessa yielding their invitations, Juno giving hers to "the Gardener",
-    the QF draw lines for Celestine, Kaito, Ysolde and Mireille, and Isaura's withdrawal on the Ruin Route (§3.2, §3.5). Anja (exposed) replaces the story lead's
+    the QF draw lines for Sigrun, Kaito, Ysolde and Odessa, and Celestine's withdrawal on the Ruin Route (§3.2, §3.6). Anja (exposed) replaces the story lead's
     Tamsin variant, which is cut (no Tamsin Bond to read).
 15. **08 Ch21:** Fallen Kestrel is not a hijack opponent; he's harnessed as Voss's conduit and `:ch21_reach_kestrel` plays between Voss's second
     and third bars. The tag partner is Juno when he's Fallen.
@@ -544,12 +555,14 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
 17. **08 Endings:** add **The Empty Lighthouse**; the Gilded Chain's Quent variant; the two Ruin endings (§5.4) replace the Unmaking sketch, and Archseer Dask
     is the Ruin QF (his offer is `GO_R_WELCOME_BEHIND`).
 18. **Ruin Route (new):** chapters R1–R7 (§5.3) need scripting, plus four Mirrorwalk Reverse maps (World lead) and black badge art (art).
-19. **Hints to plant on the main route:** Isaura's "You've done this before, haven't you" only after any game over is in the Ledger; Hesper's cracked
+19. **Hints to plant on the main route:** Ilsa's "You're thinking very loudly" count line only after any game over is in the Ledger; Hesper's cracked
     mirror; Arceus's "I learned that here"; Celestine phrasing the Hymn as "the verses I sing".
 20. **03_CAST** still lists the retired canon cameos and Revision 2 kingdom names in places; update to Revision 4.
-21. **Revision 4 (cameos out of the Festival):** add to 03_CAST the four original entrants (Isaura Vell, Matthias Drey, Mireille Vance, Ser Ivo
-    Thorne; profiles in §3.1) and Archseer Dask's Festival role. Rewrite 08_ACT_V's Festival with the new default bracket (§3.1), exhibitions
-    (§3.6) and these reassignments: Lin's lines and Return confirmation → **Isaura**; Garret's "driven by something that isn't him" → **Drey**;
-    Venam's "I could hear everything" (the Fixed still dream) → **Teo** if he lived, otherwise Corvin's ward records; Shiv's "met you on a ferry" →
-    cut, or give it to Dask; "the visiting champions fight Meridian's security" → Isaura, Drey, Mireille and Thorne; Amaria's Maren lament → one of
-    Dorian's Saltmere Players. CAMEOS.md's "Default draw" table is obsolete; the cameos' optional sidequests are yours.
+21. **Revisions 4–6 (Festival):** no cameos and no outsiders. Rewrite 08_ACT_V's Festival as the Blessing rite with kingdom delegations (§3.1),
+    the pools and reassigned lines in §3.2, companion-match highlights (§3.4) and the exhibitions in §3.6. Venam's "I could hear everything" goes to
+    Teo if he lived, otherwise Corvin's ward records. CAMEOS.md's default draw is obsolete.
+22. **Rev 5 screen-time fixes:** give Anja one Act IV scene and Ysolde one pre-Ch15 scene; introduce Archseer Dask again in Ruin R1 and R4 (done in
+    §5.3's intent; script it); the Eevee Octave only returns if Vesper Lindqvist is met twice before the Festival (suggest: Ch3 pageant choir, Ch13).
+23. **The war (Rev 6):** build the chapters around the six `:war_*` choices above, with Anja's capture, the Rimeholt siege, and a climax cutscene
+    whose ending frame follows `WAR_STOPPED / WAR_BOTH_BROKEN / WAR_ASHKAAR_WON / WAR_ISENMAR_WON` (NARRATIVE_KEYS §4.3). Ch19's Dominar petition
+    must read the war's outcome.

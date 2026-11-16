@@ -49,4 +49,34 @@ From the base project (Essentials v21.1 + EBDX + Gen 9 Pack); full lists in its 
   Wolfang62, Azria, DarkusShadow, Caruban and others.
 
 ## Music and sound
-(To be added by the audio team.)
+Full plan, filenames and terms: `Design/AUDIO.md`. Compositions from the Pokémon games remain the property of
+Nintendo / Game Freak / Creatures Inc.; arrangers are credited for their arrangements only. Non-commercial fan project.
+
+### Included in the kit (stand-in soundtrack)
+- **Dedrum** — original music from **Pokémon Tectonic** (github.com/xeuorux/Pokemon-Tectonic; fetched from the
+  Badagronk fork at commit `b726e8a1`). Licence: CC BY-NC-SA 4.0 (credit, non-commercial, share-alike).
+  Tracks: Boot Intro, Intro, Mainland Dock, Casaba Villa, Casaba Villa (Remix), Floral Rest, Frostflow Farms,
+  Repora Forest, Scenic Trail, Sky Walk, Prizca East, Prizca (Unused), Regi Dungeon, Primal Clay, Primal Clay (Fear),
+  Epitaph of the Demiurge, Yezera Battle Theme. (Individual tracks may be by other Tectonic contributors; the repo
+  names Dedrum as lead composer.)
+- **NMM / lequietriot** (Nintendo MIDI Music) — FR/LG-style MIDI arrangements, from Team Aqua's Asset Repo
+  (github.com/TeamAquasHideout/Team-Aquas-Asset-Repo, commit `3e06f6f9`). "Open source, free to use"; credit optional,
+  given gladly. Used: Elm Lab, Lavender (Peace), Mt. Ember, Pewter, Indigo Plateau, Ice Path, Dragon's Den, Route 29,
+  Route 47, Route 23, Rocket Warehouse, Dark Cave, Victory Road, Pokémon Mansion, Gym (Sinnoh), Kanto Emotion,
+  Global Terminal, and the wild / trainer / rival / gym leader / Team Rocket / legend / Elite Four / rank match themes.
+- From the same repo ("free to use and edit", credit the creator): **nico** (VS Champion Nemona, VS Cipher Admin,
+  BW VS Legendary, Waterfall Colosseum), **Celia Dawn** (DMCA Battle), **Kasen** (VS Iris), **ShinyDragonHunter**
+  (Suicune Encounter, Forest), **camgotay** (HGSS Entei Battle, HGSS Rocket Hideout), **Specker** (Sadpop).
+- Stock Essentials / EBDX audio (victory themes, jingles, PWT tracks, SE): Pokémon Essentials (Maruno, Poccil,
+  Flameguru and contributors) and Elite Battle: DX (Luka S.J.).
+
+### Planned final soundtrack (add when the files are in)
+- **GlitchxCity** — Pokémon remixes. youtube.com/@GlitchxCity · glitchxcity.bandcamp.com
+  Terms: per-video ("Refer to each video description about usage"); no re-uploads; credit by name with a link.
+  List every track used here, one per line: `Track title — GlitchxCity — video link`.
+  Her Rejuvenation-commissioned tracks are NOT used (Rejuvenation's asset guide reserves them).
+- **Vetrom** (if used) — Pokémon remixes; credit by name with a link.
+
+### Thanks
+Team Aqua's Hideout for the open asset repo; the Pokémon Tectonic team for open-sourcing their game.
+
