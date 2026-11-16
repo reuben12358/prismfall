@@ -328,6 +328,7 @@ Unfinished). `Prismfall.trigger_ending` with no ID does the following:
 The Gilded Chain has no post-game, so its credits return to the title. Every other ending returns to the map, and the calling event continues.
 ```
 Script: pf_choose(:ch21_final, :return)
+Script: pf_choose(:ch21_boon, :end_reparations)   # the Boon is asked BEFORE the ending fires; this value lifts an occupation
 Script: Prismfall.trigger_ending
 ```
 

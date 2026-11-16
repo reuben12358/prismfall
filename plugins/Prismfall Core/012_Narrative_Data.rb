@@ -215,7 +215,7 @@ module Prismfall
       :SIGRUN_BEARS             => "!flag(:KESTREL_BEARS) && bond(:SIGRUN) >= 6",
       :KESTREL_ACCEPTED_SEAT    => "flag(:KESTREL_YSOLDE_RECONCILED) && !flag(:KESTREL_LOST) && !(choice(:ch21_final) == :borrowed && flag(:KESTREL_BEARS))",
       # Act V
-      :DOMINAR_SWAYED           => "choice(:ch19_dominar) == :swayed",
+      :DOMINAR_SWAYED           => "choice(:ch19_dominar) == :swayed && !(flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)",
       :ENVOY_PERSUADED          => "choice(:ch20_envoy) == :proof",
       :CALLA_ALIVE              => "choice(:ch20_calla) != :send_back",
       :ILSA_RECONCILED          => "choice(:sq_little_owl) == :reconciled",
@@ -281,11 +281,14 @@ module Prismfall
     #---------------------------------------------------------------------------
     CHOICES.merge!({
       :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
-      :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Bleed-front: food for besieged Rimeholt, or harpoon-guns" },
+      :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
       :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
       :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
-      :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the frozen strait" },
-      :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table (only if one side won)" }
+      :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Shattered Ice" },
+      :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table in Skaldfast (only if one side won)" },
+      # the story lead's two Blessing keys (14_WAR_AND_BLESSING Part A)
+      :ch20_colors   => { :values => [:elowen, :zenith, :nadir, :unsworn], :once => true, :description => "Ch20 Day 0: whose colors the Unimprinted challenger wears (flavor + one delta)" },
+      :ch21_boon     => { :values => [:end_reparations, :seat_nadir, :dissolve_seat], :once => true, :description => "Ch21: the Blessed's one binding decree. Asked after :ch21_final in the Return, Keep and Borrowed outcomes, BEFORE Prismfall.trigger_ending" }
     })
     CHOICE_EFFECTS.merge!({
       :war_warning  => { :warn_isenmar => "MARISOL+2 SIGRUN-2", :warn_ashkaar => "SIGRUN+1 MARISOL-2", :warn_both => "ACCORD+2 SIGRUN+1 MARISOL+1", :silent => "RES-1" },
@@ -293,7 +296,9 @@ module Prismfall
       :war_prisoner => { :free => "RES+1 ACCORD-1", :exchange => "ACCORD+2", :leave => "RES-1" },
       :war_legend   => { :calm_kyogre => "RES+2 MARISOL-1", :wake_reshiram => "SIGRUN+1 RES-2", :neither => "" },
       :war_climax   => { :stand_between => "RES+2 ACCORD+1", :back_ashkaar => "SIGRUN+2 MARISOL-4 RES-1", :back_isenmar => "MARISOL+3 SIGRUN-4 RES-1" },
-      :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" }
+      :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" },
+      :ch20_colors  => { :elowen => "ACCORD-1", :zenith => "MERIDIAN+1", :nadir => "HOLLOW+1", :unsworn => "RES+1" },
+      :ch21_boon    => { :end_reparations => "", :seat_nadir => "", :dissolve_seat => "" }
     })
     TALLIES[:WAR_TRUST] = [                       # what both armies have seen the PC do
       "choice(:war_warning) == :warn_both",
@@ -309,6 +314,7 @@ module Prismfall
       :WAR_ASHKAAR_WON   => "choice(:war_climax) == :back_ashkaar",
       :WAR_ISENMAR_WON   => "choice(:war_climax) == :back_isenmar",
       :WAR_OCCUPATION    => "choice(:war_terms) == :occupation",
+      :BOON_LIFTS_OCCUPATION => "choice(:ch21_boon) == :end_reparations",   # the Blessed can undo their own armistice terms
       :ISENMAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ASHKAAR_WON) && choice(:war_terms) != :mercy)",
       :ASHKAAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)"
     })
@@ -427,7 +433,7 @@ module Prismfall
       [:END_HOLLOW_SPRING,    "choice(:ch21_final) == :unmake"],
       [:END_BORROWED_CROWN,   "choice(:ch21_final) == :borrowed"],
       [:END_LONG_VIGIL,       "choice(:ch21_final) == :keep"],
-      [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || flag(:WAR_OCCUPATION))"],
+      [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || (flag(:WAR_OCCUPATION) && !flag(:BOON_LIFTS_OCCUPATION)))"],
       [:END_EMPTY_LIGHTHOUSE, "choice(:ch21_final) == :return && flag(:KESTREL_LOST)"],
       [:END_HOMECOMING,       "choice(:ch21_final) == :return"]
     ]
