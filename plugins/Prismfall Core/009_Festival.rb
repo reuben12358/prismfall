@@ -159,14 +159,8 @@ module Prismfall
         errors.push("BRACKET has no :PLAYER")
         return errors
       end
-      PLAYER_PATH.each_with_index do |opp, r|
-        s = BRACKET.index(opp)
-        if !s
-          errors.push("PLAYER_PATH entrant #{opp.inspect} is not in BRACKET")
-        elsif (s >> r) != ((p >> r) ^ 1)
-          errors.push("#{opp.inspect} can't meet the player in #{ROUND_NAMES[r]} with this seeding")
-        end
-      end
+      # (The draw swaps path opponents into the player's blocks, so seeding
+      # doesn't have to place them there.)
       STAGES.each do |st|
         errors.push("Stage #{st[:id]} uses unknown ruleset #{st[:ruleset].inspect}") if !RULESETS[st[:ruleset]]
       end
@@ -181,8 +175,15 @@ module Prismfall
       # Player-path entrants always advance until they meet the player.
       ka = path.index(a)
       kb = path.index(b)
-      return a if ka && ka > r
-      return b if kb && kb > r
+      locked = (ka && ka > r) ? a : ((kb && kb > r) ? b : nil)
+      rule = match_rule(a, b)
+      rule = MATCH_RULES.find { |x| x[:pair].include?(a) && x[:pair].include?(b) && x[:winner] == locked } if locked && rule && rule[:winner] != locked
+      if rule && (locked.nil? || rule[:winner] == locked)
+        state[:match_rules] ||= {}
+        state[:match_rules][[r, m]] = MATCH_RULES.index(rule)   # highlight data for this match
+      end
+      return locked if locked
+      return rule[:winner] if rule
       scripted = SCRIPTED_WINNERS[[r, m]]
       return scripted if scripted && [a, b].include?(scripted)
       ra = rating(a)
@@ -363,6 +364,7 @@ module Prismfall
       won = (won) ? true : false
       record_result(won)
       heal if rules[:heal_after]
+      show_round_results(st[:round]) if won && st[:round] && AUTO_ROUND_RESULTS
       return won
     end
 
@@ -382,6 +384,7 @@ module Prismfall
         results[[r, player_match_index(r)]] = :PLAYER
         mark_out((a == :PLAYER) ? b : a)
         resolve_round(r)
+        state[:last_round] = r
       end
       state[:stage] += 1
       EventHandlers.trigger(:prismfall_festival_result, st[:id], true)

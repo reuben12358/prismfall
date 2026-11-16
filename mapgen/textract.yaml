@@ -3,26 +3,28 @@
 drop: [401-422, 600-622, 728-775, 936-951, 1160-1175, 2384-2391, 2608-2633, 1632-1655, 2504-2528, 2560-2583,
        1936-1967, 1064-1073, 7096-7103]
 stamps:
-  t_pokecenter:  {map: 217, seed: [27, 26]}
-  t_theatre:     {map: 217, seed: [32, 9]}
-  t_shop_purple: {map: 217, seed: [38, 9]}
-  t_greenhouse:  {map: 217, seed: [25, 10]}
-  t_house_red:   {map: 217, seed: [23, 21]}
-  t_house_red2:  {map: 217, seed: [37, 21]}
-  t_house_blue:  {map: 217, seed: [18, 25]}
-  t_house_blue2: {map: 217, seed: [43, 21]}
-  t_mart:        {map: 217, seed: [37, 30]}
-  t_warehouse:   {map: 217, seed: [5, 26]}
-  t_lodge:       {map: 217, seed: [50, 37]}
-  t_lighthouse:  {map: 217, seed: [59, 48]}
-  t_ship:        {map: 217, seed: [32, 59]}
-  t_stairs:      {map: 217, seed: [31, 19]}
-  t_stairs_s:    {map: 217, seed: [34, 19]}
-  t_cont_green:  {map: 217, seed: [15, 47]}
-  t_cont_brown:  {map: 217, seed: [18, 44]}
-  t_cont_long:   {map: 217, seed: [24, 48]}
-  t_crate_big:   {map: 217, seed: [23, 41]}
-  t_crate_big2:  {map: 217, seed: [31, 48]}
-  t_crate_small: {map: 217, seed: [28, 39]}
-  t_bench:       {map: 217, seed: [19, 37]}
-  t_table:       {map: 217, seed: [50, 34]}
+  t_theatre:     {map: 217, rect: [29, 7, 7, 6]}
+  t_shop_purple: {map: 217, rect: [36, 7, 5, 6]}
+  t_greenhouse:  {map: 217, rect: [23, 9, 4, 4]}
+  t_house_red:   {map: 217, rect: [22, 18, 4, 6]}
+  t_house_red2:  {map: 217, rect: [36, 18, 4, 6]}
+  t_house_blue:  {map: 217, rect: [17, 23, 4, 6]}
+  t_house_blue2: {map: 217, rect: [42, 19, 5, 5]}
+  t_pokecenter:  {map: 217, rect: [25, 24, 5, 5]}
+  t_mart:        {map: 217, rect: [36, 29, 4, 4]}
+  t_warehouse:   {map: 217, rect: [2, 23, 8, 7]}
+  t_lodge:       {map: 217, rect: [48, 35, 5, 6]}
+  t_lighthouse:  {map: 217, rect: [56, 36, 7, 18]}
+  t_ship:        {map: 217, rect: [27, 56, 12, 6]}
+  t_stairs:      {map: 217, rect: [30, 18, 3, 4]}
+  t_stairs_s:    {map: 217, rect: [33, 18, 3, 3]}
+  t_stairs_tall: {map: 217, rect: [30, 36, 3, 5]}
+  t_cont_green:  {map: 217, rect: [15, 44, 2, 5]}
+  t_cont_brown:  {map: 217, rect: [18, 42, 2, 5]}
+  t_cont_long:   {map: 217, rect: [22, 44, 5, 4]}
+  t_crate_pair:  {map: 217, rect: [24, 40, 4, 3]}
+  t_crate_a:     {map: 217, rect: [31, 46, 4, 4]}
+  t_crates_b:    {map: 217, rect: [39, 44, 6, 7]}
+  t_bench:       {map: 217, rect: [19, 36, 2, 2]}
+  t_table:       {map: 217, rect: [49, 33, 4, 2]}
+  t_rock:        {map: 217, rect: [22, 36, 2, 2]}

@@ -19,6 +19,8 @@ module Prismfall
       n::MIRROR_SWITCHES.each { |sw, c| list.push(["mirror S#{sw}", c]) }
       fe = Prismfall::Festival
       fe::DRAWS.each { |st, cands| cands.each { |c| list.push(["draw #{st} #{c[:opponent]}", c[:condition]]) if c[:condition] } }
+      fe::DELEGATIONS.each { |seat, cands| cands.each { |id, c| list.push(["seat #{seat} #{id}", c]) if c } }
+      fe::MATCH_RULES.each_with_index { |r, i| list.push(["match rule #{i}", r[:condition]]) if r[:condition] }
       if fe.const_defined?(:EXHIBITION_EXTRAS)
         fe::EXHIBITION_EXTRAS.each { |x| list.push(["exhibition #{x[:entrant]}", x[:condition]]) if x[:condition] }
       end

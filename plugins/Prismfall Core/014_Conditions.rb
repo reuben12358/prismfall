@@ -43,6 +43,7 @@ module Prismfall
       "festival_stage" => [0, proc { Prismfall::Festival.stage_id }],
       "eliminated"     => [1, proc { |id| Prismfall::Festival.out?(id) }],
       "drawn"          => [1, proc { |stage| Prismfall::Festival.drawn(stage) }],
+      "seated"         => [1, proc { |id| Prismfall::Festival.seated?(id) }],
       "festival_day"   => [0, proc { Prismfall::Festival.day }],
       "flag"           => [1, proc { |n| Prismfall::Narrative.flag(n) }],
       "tally"          => [1, proc { |n| Prismfall::Narrative.tally(n) }],

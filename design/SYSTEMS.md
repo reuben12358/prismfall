@@ -131,44 +131,45 @@ Script: pbMessage(_INTL("Kestrel picked {1}!", GameData::Species.get(Prismfall::
 ```
 
 ## 5. Festival of Champions
-Data lives in `008_Festival_Data.rb` (entrants, default seeding, rule sets, stages) and `015_Festival_Draw.rb` (draw, exhibitions,
-Arceus variants). It's transcribed from NARRATIVE_KEYS §6. **SPINE Revision 4** applies: original characters only, so the
-sister-game cameos are sidequest fights (§14).
+Data lives in `008_Festival_Data.rb` (entrants, `DELEGATIONS`, rule sets, stages) and `015_Festival_Draw.rb` (draw, `MATCH_RULES`,
+exhibitions, Arceus variants). It's transcribed from NARRATIVE_KEYS §6. **SPINE Revisions 5–6** apply: the Festival chooses who
+receives Arceus's Blessing. There are 16 seats: the player plus 15 kingdom delegates (two per kingdom, plus Valen for the Accord).
+Every entrant is a story-met character. Cameos are sidequest fights (§14).
 
-Entrants:
-- Velmorans: Juno, Kestrel, Valen and the Wardens.
-- Envoy Okoro's delegation: `FESTIVAL_ISAURA` (headline/QF), `FESTIVAL_DREY` and `FESTIVAL_MIREILLE`.
-- The Queen's Champion `FESTIVAL_THORNE`.
-- Draw-only variants: Rowan "the Gardener", Archseer Dask (Ruin), Kestrel (Fallen), Brann/Sigrun stand-ins, Valen (Last Tuning).
-- Hijackers: Voss, Quent and Theodric.
+`Festival.start` runs in this order:
+1. **Delegations.** For each seat in `DELEGATIONS`, the first candidate whose condition holds and who isn't seated yet takes it.
+   `:FORFEIT` seats (a kingdom that lost the war, or Cragholm after the raid) are lent to the first free name in `FORFEIT_POOL`.
+   `BRACKET_SEATS` maps seats to bracket slots. `Festival.seated?(:ID)` and the condition `seated(:ID)` report who got in; before
+   the Festival starts they give a live preview.
+2. **The draw** (5a) over the seated entrants.
+3. **NPC matches.** A drawn path opponent wins until they meet the player. Otherwise the first `MATCH_RULES` row for that pair whose
+   condition holds decides it, and failing that the higher `:rating`.
 
-`PLAYER_PATH = [:JUNO, :ISAURA, :KESTREL, :VALEN]` is the fallback. The drawn path entrants win their NPC matches until they meet the
-player; the other matches use `SCRIPTED_WINNERS` or the simulation. Caps by round: R16 90, QF 92, SF 94, Final 96, Hijack/True Finale 100.
-Every round: no Bag, canLose (retry), heals.
+Caps by round: R16 90, QF 92, SF 94, Final 96, Hijack/True Finale 100. Every round: no Bag, canLose (retry), heals.
+
+**Highlights.** After the player wins a round, `show_round_results` announces each NPC result. If the match has `MATCH_RULES` moments
+(`[actor, pokemon, event, caption]`), it asks "Watch the highlights?". If `Prismfall::Cutscene.match_highlight` exists, Core calls it as
+`match_highlight(a, b, winner, moments)`, where each trainer is `{ :id, :name, :trainer_type }`. Otherwise the captions play as text.
+Set `AUTO_ROUND_RESULTS = false` to call `Prismfall::Festival.show_round_results(round)` from an event instead.
 
 ### 5a. The draw
 `DRAWS[stage]` is an ordered list of `{ :opponent, :condition, :version }`. The first match whose *person* isn't already used wins; the
-stage default is the fallback.
-- **R16, QF, SF** are drawn at `Festival.start`. If the drawn opponent is already seeded, it **swaps** seats with the default, who plays on
-  as an NPC (e.g. Juno takes Anja's seed). If it's unseeded (Rowan, Dask), it replaces the default, who **withdraws**; that counts as out
-  for `eliminated()` and exhibitions.
-- **The Final is `:live`**. Valen is seeded at start; the draw runs when the Final battle starts on Day 7. A stand-in (Sigrun v96 or Brann)
-  fights in his slot without reseating anyone.
-- **The Hijack** is drawn live and fixed when its battle starts.
+stage default (`PLAYER_PATH = [:JUNO, :CELESTINE, :KESTREL, :VALEN]`) is the fallback.
+- **R16, QF, SF** are drawn at start. A seated opponent **swaps** into the player's block and the displaced entrant plays on as an NPC.
+  An unseated one (Rowan, Dask) replaces the default, who **withdraws**; that counts as out.
+- **The Final is `:live`**: it's drawn when its battle starts on Day 7. Brann stands in for a collapsed Valen without reseating anyone.
+- **The Hijack** is drawn live (Voss, Quent or Theodric).
 
-Variants share a `:person`, and that person is never drawn twice. Validation checks candidates, conditions and fallbacks, that the
-persons are disjoint across stages, and that no cameo entrant remains.
-- `Festival.drawn(:STAGE)` and the condition `drawn(:STAGE)` return the locked entrant (nil until drawn).
-- `Festival.arceus_variant` returns the first matching `ARCEUS_VARIANTS` entry (`:id`, `:bars`, `:player_side`) for Prismfall Bosses.
-  Core itself doesn't change the `:ARCEUS` stage.
-- Each opponent the player meets is written to the Ledger `met` list, for the Hall of Reflections.
+`Festival.drawn(:STAGE)` and `drawn(:STAGE)` return the locked entrant. `Festival.arceus_variant` returns the matching `ARCEUS_VARIANTS`
+entry for Prismfall Bosses. Opponents the player meets go to the Ledger `met` list. Validation covers seats, forfeits, match rules and
+draws (persons disjoint across stages), and flags any cameo or Rev-4 outsider entrant.
 
 ### 5b. Festival days and exhibitions
 Events set the day: `Prismfall::Festival.set_day(3)` or `.next_day!`; conditions can read it with `festival_day`. Exhibitions (`exhibition_menu`,
 `exhibition(:ID)`) offer two kinds of opponent:
-- entrants flagged `:exhibition` (Isaura, Drey, Mireille, Thorne), from the day **after** they're knocked out or withdraw;
-- `EXHIBITION_EXTRAS` entries (Pageant Bout: Dorian & Rook as a double; Bastian; Juno's Garden Match; Marisol; Isaura or Mireille when not
-  drawn; Morwen's Echo), each with a `:condition` and a `:from_day`.
+- entrants flagged `:exhibition` (Marisol), from the day **after** they're knocked out or withdraw;
+- `EXHIBITION_EXTRAS` entries (Pageant Bout: Dorian & Rook as a double; Juno's Garden Match; Marisol; Morwen's Echo), each with a
+  `:condition` and a `:from_day`.
 
 None are offered on the Ruin Route; its Eevee Octave is run by events. Two-trainer entrants (`:double => true`) start a double battle.
 
@@ -182,7 +183,7 @@ Conditional Branch > Script: Prismfall::Festival.next_match
    (else) -> "Try again?" loop; the stage doesn't advance
 # Exhibition hall NPC:
 Script: Prismfall::Festival.set_day(3)
-Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:DREY)
+Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:PAGEANT_BOUT)
 # Custom battle staged by the event (e.g. a scripted double):
 Script: Prismfall::Festival.record_result(true)
 Conditional Branch > Script: Prismfall::Festival.finished?
@@ -248,6 +249,10 @@ changes. State is saved in `Prismfall.state.narrative`, not in switches.
 - **Derived flags** (`DERIVED_FLAGS`, ~45) such as `TEO_SAVED` and `KESTREL_FALLEN` are computed and never stored. Flags can reference
   other flags; cycles are rejected. **Tallies**: `CONSENT` (the 18 `WARDEN_CONSENT` conditions; ≥12 is needed for the Good ending),
   `ENGINE_BREAKS` and `WARM_BONDS`.
+- **The Ashkaar–Isenmar War** (§4.3): six `:war_*` choices with effects, and the `WAR_TRUST` tally. The outcome flags are
+  `WAR_STOPPED`, `WAR_BOTH_BROKEN`, `WAR_ASHKAAR_WON` and `WAR_ISENMAR_WON`, plus `WAR_OCCUPATION` and `ISENMAR_EMBITTERED` /
+  `ASHKAAR_EMBITTERED`. An embittered kingdom's Wardens withhold Consent (entries 3, 10 / 7, 18), occupation forces the Unfinished
+  ending, and the loser of the war gets one Festival seat.
 - **Mirror switches**: Core rewrites S221–S228 (TEO_SAVED … KESTREL_REDEEMED) after every narrative change. Events read them; never write them.
 ```
 Script: pf_choose(:ch9_teo_sable, :save_teo)        # applies MARISOL+4 HOLLOW+1 RES+1 once
@@ -273,7 +278,7 @@ These are used by draws, flags, tallies, ending rules and exhibitions, and are a
 Operators: `&& || !` (or `and or not`), `== != >= <= > <`, `+ -`, and parentheses. Literals: integers, `:symbols`, `"strings"`, `true false nil`.
 Only these functions exist:
 `bond bond_tier standing standing_tier resonance resonance_band choice made chose flag tally badges has_badge difficulty level_cap
-starter_slot starter_gen password gameover_found gameovers_found ending_seen ruin_unlocked ruin_route festival_stage festival_day drawn
+starter_slot starter_gen password gameover_found gameovers_found ending_seen ruin_unlocked ruin_route festival_stage festival_day drawn seated
 eliminated met cameo_beaten switch var` (switches and variables are read-only).
 `nil` counts as 0 in arithmetic and `< >` comparisons. To add a function, add a line to `Conditions::FUNCTIONS`.
 
