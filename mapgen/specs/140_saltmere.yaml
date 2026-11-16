@@ -1,5 +1,4 @@
 # Saltmere (map 140): Elowen's free port; Pell Playhouse (Gym 2). Story: story/04_ACT_I.md Chapter 3.
-# The W edge (Route 5, map 560) is closed by trees until 560 is built.
 id: 140
 name: Saltmere
 palette: outside
@@ -8,6 +7,7 @@ parent: 0
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 10, 25], BattleBack: field}
 connections:
   - {dir: N, offset: 20, to: 541, to_offset: 12}
+  - {dir: W, offset: 14, to: 560, to_offset: 10}
 map: |
   TTTTTTTTTTTTTTTTTTTT____....TTTTTTTTTTTTTTTTTTTT
   TTTTTTTTTTTTTTTTTTTT____....TTTTTTTTTTTTTTTTTTTT
@@ -23,12 +23,12 @@ map: |
   TT...#####..........____.....__........#####..TT
   TT...#####....____________________.....#####..TT
   TT...#####....____________________________....TT
-  TT...#####....____________________________....TT
-  TT..______________________________............TT
-  TT..______________________________..........TTTT
-  TT............____________________..........TTTT
-  TTTT..........____________________..........TTTT
-  TTTT..........____________________..........TTTT
+  .....#####....____________________________....TT
+  __________________________________............TT
+  __________________________________..........TTTT
+  ..............____________________..........TTTT
+  ..TT..........____________________..........TTTT
+  ..TT..........____________________..........TTTT
   TTTT......#####___________________............TT
   TTTT......#####_________________####..........TT
   TT........#####_________________####..........TT

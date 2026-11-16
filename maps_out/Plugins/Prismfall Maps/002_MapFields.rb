@@ -9,6 +9,11 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[152] = :GRAND_STAGE   # Pell Playhouse - Fly Loft
   FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse - Dressing Rooms
   FieldEffects::MAP_FIELDS[154] = :GRAND_STAGE   # Pell Playhouse - The Grand Stage
+  FieldEffects::MAP_FIELDS[170] = :WATER_SURFACE   # Tidelock Gym - Lock Hall
+  FieldEffects::MAP_FIELDS[171] = :WATER_SURFACE   # Tidelock Gym - Basins (Low Water)
+  FieldEffects::MAP_FIELDS[172] = :WATER_SURFACE   # Tidelock Gym - Basins (Mid Water)
+  FieldEffects::MAP_FIELDS[173] = :WATER_SURFACE   # Tidelock Gym - Basins (High Water)
+  FieldEffects::MAP_FIELDS[174] = :WATER_SURFACE   # Tidelock Gym - Warden's Pool
   FieldEffects::MAP_FIELDS[522] = :BLEED   # The Glassed Orchard
   FieldEffects::MAP_FIELDS[524] = :SILKWOOD   # Gossamer Wood
   FieldEffects::MAP_FIELDS[525] = :SILKWOOD   # Gossamer Deepwood
@@ -16,4 +21,5 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[544] = :CAVE   # Brinecut Mine 1F
   FieldEffects::MAP_FIELDS[545] = :CAVE   # Brinecut Mine B1F
   FieldEffects::MAP_FIELDS[548] = :BLEED   # Cocoonfall Hollow
+  FieldEffects::MAP_FIELDS[564] = :CAVE   # Gullcry Caves
 end

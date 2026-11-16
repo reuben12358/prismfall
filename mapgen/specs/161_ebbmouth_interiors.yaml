@@ -1,0 +1,78 @@
+# Ebbmouth interiors (161-166).
+id: 161
+name: Ebbmouth Pokémon Center
+parent: 160
+template: pokecenter
+exit_link: EB_PC
+drop_template_events: [Bill]
+bgm: Poke Center
+metadata: {HealingSpot: [160, 10, 31], MapPosition: [0, 8, 20]}
+events:
+  - type: event
+    name: Professor Larch
+    at: [12, 6]
+    pages:
+      - graphic: {sprite: trainer_PROFESSOR, dir: left}
+        commands:
+          - if: "Prismfall.has_badge?(3)"
+            then:
+              - "Professor Larch: Came by Gale Post with the tide data. Look. The stutters line up exactly with the Lattice draw peaks."
+              - "Professor Larch: It's not the Hollow stopping the river. It's us. It's MY design."
+            else: ["Professor Larch: Not now, child. I'm counting tides."]
+---
+id: 162
+name: Ebbmouth Mart
+parent: 160
+template: mart
+exit_link: EB_MART
+drop_template_events: [Questionnaire, Deliveryman]
+bgm: Poke Mart
+metadata: {MapPosition: [0, 8, 20]}
+events: []
+---
+id: 163
+name: Anglers' Guild
+parent: 160
+template: house
+exit_link: EB_ANGLER
+drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 8, 20]}
+events:
+  - type: event
+    name: Guildmaster
+    at: [5, 4]
+    pages:
+      - graphic: {sprite: trainer_FISHERMAN, dir: down}
+        commands:
+          - "Guildmaster: An angler from the south coast? Take this - the Ebb deserves better than an Old Rod."
+          - {script: "pbReceiveItem(:GOODROD)"}
+          - {selfswitch: [A, true]}
+      - cond: {self: A}
+        graphic: {sprite: trainer_FISHERMAN, dir: down}
+        commands: ["Guildmaster: The river stutters, the fish stutter. Funny how that works."]
+---
+id: 164
+name: Reyes House
+parent: 160
+template: house2
+exit_link: EB_REYES
+drop_template_events: [Kurt]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 8, 20]}
+events:
+  - {type: npc, name: Mrs Reyes, at: [7, 4], sprite: NPC 28, dir: down,
+     text: "Mrs Reyes: Marisol's at the locks, Teo's... out. Always out. Mind the cellar stairs, they're rotten."}
+  - {type: sign, at: [1, 6], post: false, name: Cellar door, text: "The cellar door is barred from below. [TODO map 166: Hollow cell]"}
+---
+id: 165
+name: Net-mender's House
+parent: 160
+template: house2
+exit_link: EB_HOUSE
+drop_template_events: [Kurt]
+bgm: Lerucean Town
+metadata: {MapPosition: [0, 8, 20]}
+events:
+  - {type: npc, name: Net-mender, at: [7, 4], sprite: NPC 25, dir: down,
+     text: "Net-mender: Forty years of nets. The fish come up wrong-way-round lately. Facing upstream, dead."}

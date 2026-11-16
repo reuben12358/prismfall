@@ -1,0 +1,17 @@
+# Palette for tileset 15 "Harbour" (Graphics/Tilesets/Harbour interior.png), mined from sample Map071:
+# stone quay floor 409, Sea autotile on layer 1, railings 449/442, wall faces 393/401 with floor shadow 418.
+tileset: 15
+ground: {base: 409}
+classes:
+  floor:  {kind: ground}
+  water:  {kind: autotile, layer: 1, id: 48}
+  rail:   {kind: hline, layer: 1, left: 449, mid: 449, right: 449, single: 449, vtop: 442, vmid: 442, vbottom: 442}
+  wall:   {kind: wall, face_low: 401, face_high: 393, side_l: 385, side_r: 385, solid: 385, shadow: 418,
+           not_floor: [water]}
+tiles:
+  raft: {layer: 1, tile: 457}
+glyphs:
+  '.': floor
+  '~': water
+  'f': rail
+  '#': wall

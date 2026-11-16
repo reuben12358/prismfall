@@ -1,0 +1,19 @@
+# Palette for tileset 16 "Mansion" (Graphics/Tilesets/Mansion interior.png). No sample map uses this tileset;
+# tile roles were read off the tileset image (probe.py rows 16 ...) and checked in previews.
+tileset: 16
+ground: {base: 481, variants: {482: 15, 480: 10}}
+classes:
+  floor:   {kind: ground}
+  checker: {kind: tile, layer: 0, tile: 448}
+  carpet:  {kind: tile, layer: 0, tile: 497}
+  dirt:    {kind: tile, layer: 0, tile: 500}
+  void:    {kind: tile, layer: 0, tile: 391}
+  wall:    {kind: wall, face_low: 425, face_high: 417, side_l: 391, side_r: 391, solid: 391, not_floor: [void]}
+tiles: {}
+glyphs:
+  '.': floor
+  ':': checker
+  '=': carpet
+  ',': dirt
+  'v': void
+  '#': wall

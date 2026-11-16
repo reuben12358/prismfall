@@ -175,6 +175,22 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   Silvally `getForm` handler) and show "NULL re-indexes to the X Memory!". Normal field (Grand Stage) = no Memory.
 - **Choice-driven bracket (Rev 3):** every candidate/variant in `story/10_CHOICES_ENDINGS.md` gets a team at its round cap.
   Status: see the end of this file.
+- **Choice-draw and story teams (NARRATIVE_KEYS §7) — all built**, each with +100/+200:
+  | Key | Team (ace last) |
+  |---|---|
+  | `LEADER_MARISOL,Marisol,90` | Pelipper, Floatzel, Lanturn, Araquanid, Barraskewda, Gyarados "Lucky" (Hard Mega) — rain on Water Surface |
+  | `LEADER_ANJA,Anja,90` | her Gym 10 team with Hard sets as Standard, 86–90 |
+  | `LEADER_ROWAN,Rowan,90` | sun team: Sunflora (Solar Power, Sunny Day), Leavanny, Roserade, Breloom, Shiftry, Trevenant "Glasswood" (Harvest) |
+  | `RIVAL_KESTREL,Kestrel,90/91/92` (K9, Fallen) | K8 with Hard sets on Standard; Krookodile replaced by Meridian's **Genesect "Gauntlet"** |
+  | `LEADER_SIGRUN,Sigrun,96` / `LEADER_BRANN,Brann,96` | Gym 18 / Gym 7 teams, promoted sets, 92–96 |
+  | `CHAMPION_VALEN,Valen,1` (Last Tuning) | v0 with promoted sets; **Zygarde Form 2 (Complete)** from the start |
+  | `MERIDIAN_QUENT,Percival,99` | Bronzong (TR), Metagross, Jirachi, Porygon-Z, Magnezone, Silvally "NULL" (same field hook as Voss) |
+  | `GILDED_THEODRIC,Theodric,0` | Golurk, Aegislash, Kyogre, Groudon, Regigigas, **Gholdengo "Gilt"** (100) |
+  | `ECHO_MORWEN,Morwen,90` | Spiritomb, Dusknoir, Jellicent, Houndstone, Gengar, Chandelure "Lantern" (no Mismagius) |
+  | `RIVAL_JUNO,Juno,70/71/72` (J7) | Ch21 tag partner: Whimsicott, starter, Tsareena (95–97) |
+  | `MERIDIAN_KROLL,Sabine,21`, `MERIDIAN_MARCHETTI,Helene,21`, `MERIDIAN_QUENT,Percival,21`, `MERIDIAN_DIRECTORATE,Captain,21` | Ch21 tag foes, 3 mons each, ace 97 |
+  | `LEADER_MAGNUS/NYX/CELESTINE/SIGRUN,…,1` | Ruin Gyms 15–18: Hard sets on Standard, new leads (Klinklang / Weavile / Tinkaton / Haxorus); Ruin Sigrun all Jolly/Timid |
+  | `REFLECTION,???,0` | fallback only (3× Imposter Ditto, Lv 85) — Core mirrors `$player.party` |
 - **Cameos** from `design/CAMEOS.md` (`FESTIVAL_<NAME>`, versions 0/100/200; aces 92 for the QF headliner, 92–96 exhibition).
 
 ## 7. True finale — Arceus boss spec (for Core / Field Effects / EBDX Bridge)
@@ -188,9 +204,19 @@ Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, fa
 | | Casual | Standard | Hard |
 |---|---|---|---|
 | `:bossboost` HP / other stats | 1.5 / 1.1 | 2.0 / 1.25 (Core default) | 2.5 / 1.3 (Spe 1.15) |
-| Phases (Plate shifts at HP %) | 2 (50) | 3 (66, 33) | 4 (75, 50, 25) |
+| Bar HP (× boosted max HP; bar count is set by the story variant) | 0.6 | 1.0 | 1.25 |
 | Recover in sets | no | yes, max 2 uses per phase | yes |
 | Telegraph next Plate | 2 turns ahead | 1 turn ahead | 1 turn ahead |
+
+**Alignment with NARRATIVE_KEYS §6.6 (authoritative for bar counts):** a "phase" below = one **bar**. Default
+`ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Bug/Normal/Water … bar 6 Dark/Fairy/Dragon), so
+within a bar Arceus cycles only among those three Plates/fields. Forced locks (+1 all stats per refusing Warden) stack on top.
+Variants: `_MISCALIBRATED` 5 bars (bar 5 cycles all six Plates of gyms 13–18 — use bar HP ×0.85 to keep it fair);
+`_GILDED` 6 bars, bar 6 refills 3× (use the Casual bar HP for refills on every difficulty); `_WAR` 7 bars, every lock
+forced — cap Arceus's stages at +2 on Casual/Standard; bar 7 = Legend Plate phase; `_JUDGMENT` (Ruin) 7 bars with the
+Giratina-Origin partner (`player_side 2`), bar 7 on `:INVERSE`. The HP-% thresholds in the difficulty table become
+"bar HP": each bar = Arceus's boosted max HP × 0.6 (Casual) / 1.0 (Standard) / 1.25 (Hard); bar count never changes with
+difficulty. HARMONY_BUFF (Resonance ≥ 6) applies at every bar break as specified there.
 
 **Phase logic ("Judgment of the Plates").**
 1. Battle starts on `:PRISM_ARENA`, which (per FIELD_API `:borrow`, `:order => :sequential`) cycles gym fields every
@@ -266,7 +292,6 @@ in the validator, so they need no row.
   "Venam's Kiss" is stood in by Poison Jab (swap in a custom move if the move team adds one); Shiv's Ambipom "Aipom"
   needs its "absurd HP" from a Core hook (suggest ×2 max HP for `FESTIVAL_SHIV` party slot 6, like EBDX `:bossboost`) —
   PBS can only give it 252 HP EVs; Shelly's exhibition should be started as a double battle (her set is doubles-ready).
-- **Choice-driven variants (`story/10_CHOICES_ENDINGS.md`): not built yet** — the file did not exist at hand-off. The
-  default path (J4, Lin QF, K8, Valen, Voss) is complete. Variants like "Kestrel (Fallen)" should reuse the rival scheme
-  with new battle numbers (e.g. K9x = Fallen, K10x = hijack tag partner) and Valen's successor / alternate hijackers get
-  their own `[TYPE,Name,v]` + 100/200.
+- **Choice-driven variants: done** — every entry of NARRATIVE_KEYS §7 (15 new Festival teams + Juno partner, Ch21 tag foes,
+  Ruin Gyms 15–18, Reflection) is built and validated; see §6. Not trainer data (specified in §7 for Prismfall Bosses):
+  the four new Arceus configs and `GIRATINA_ORIGIN_TRIAL`.

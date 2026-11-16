@@ -15,7 +15,10 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 | 130–133 | Loomhouse Gym (Gym 1) | Heddle planks, spool ziplines, then `Prismfall.gym_battle(1)` → `award_badge(1)`. Tamsin's confession and the `CH2_TAMSIN` choice |
 | 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
 | 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Route 3's mine mouth with Route 4's back door. Salt miner gives TM98 after Badge 2 |
-| 546–547 | Thistledown Manor + Attic (haunted house) | DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
+| 546–547 | Thistledown Manor + Attic (haunted house) | Mansion tileset (`palettes/mansion.yaml`): checker foyer with a grand staircase, arched-window portrait hall, dust-sheeted dining room, ruined cobwebbed attic. DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
+| 560, 561, 564 | Route 5 (salt flats), Route 6 (sea cliffs, landslide detour), Gullcry Caves | K2 (Trainer(4) sight event, `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)`), `CH4_KESTREL_MOURNER` choice, S111, V114=1. Gullcry reuses the Rock Cave template |
+| 160–165 | Ebbmouth and interiors | Rain. River Ebb with footbridges, Meridian tidal Lattice. Teo night scene (after K2): HOLLOW_TEO battle, `CH4_TEO` choice, S112. Good Rod (Anglers' Guild). Ice-fishers' whale song. Larch's tide-data revelation after Badge 3 |
+| 170–174 | Tidelock Gym (Gym 3, :WATER_SURFACE) | Harbour tileset (`palettes/harbour.yaml`). Low/Mid/High basin variant maps. Sluice wheels W/C/E transfer to the same x,y on another level. Mid: raft events (passable plank tile) to the bell-rope. High: current lanes (forced moves). The north lane reaches the exit only with the tide bell ON (S315). Marisol `gym_battle(3)` → Badge 3, TM03 |
 | 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
 | 150–154 | Pell Playhouse (Gym 2, :GRAND_STAGE) | Revolving-stage wheel (scene order, actor battles, CUT), fly-loft spotlights with coupled rigging, Comedy door. Dorian double battle → Badge 2, TM42, Eevee "Understudy" (S110) |
 | 990 | Prismfall Test Arena | One NPC per SPINE field: wild or trainer test battle with `setBattleRule("field", :ID)` |
@@ -64,12 +67,17 @@ The stock intro's controls tutorial is not reproduced.
   - Gym 1: V305–307 heddles, S305–307 cords.
   - Gym 2: V310 scene, V311 acts, V312–314 spotlights; S310 ladder, S311 mask, S312 trapdoor, S313 spotlights initialised.
   - Gym 2 actor-beaten flags are self switches B/C/D on the wheel event.
+  - Gym 3: S315 tide bell (ON = currents run inland/north). Water level = which variant map you're on (no variable).
+  - Story IDs also used now: S111 CH4_K2_DONE, S112 CH4_TEO_MET, V114 KESTREL_STAGE (set to 1 after K2).
 - The base project's System.rxdata defines 100 switches and 100 variables. Raise the maximum in Database → System to see names for the higher IDs.
 
 **Keys the narrative spec must register / confirm** (used by events via `pf_choose` and `Prismfall.game_over`):
 - `:PRO_FELLOWSHIP` → :accept / :decline / :silent (with `pf_standing_add(:MERIDIAN, 1)` and $1000, or `pf_bond_add(:VOSS, 1)`)
 - `:CH2_TAMSIN` → :help_confess / :expose (MERIDIAN −1, ACCORD +1) / :keep_secret (MERIDIAN +1)
 - `:CH3_JUNO_TALK` → :told (JUNO +1) / :deflect / :silent
+- `:CH4_KESTREL_MOURNER` → :kind (KESTREL +1) / :blunt (KESTREL −1) / :silent
+- `:CH4_TEO` → :report (MERIDIAN +1) / :keep_secret (HOLLOW +1) / :confront. Marisol has no Bond ID in Core yet, so her
+  bond deltas aren't applied. Register `:MARISOL` if Narrative wants them.
 - Game overs: GO-01 "Homeward" uses `:GO_LAST_FERRY`, GO-02 "Two in the Orchard" uses `:GO_BLEED_TIDE` (Core's registered
   IDs). GO-03 "Curtain Call" uses **`:GO_CURTAIN_CALL` (not registered yet; Core warns but still runs it)**. Rename both
   sides together if Narrative picks other IDs.
@@ -184,10 +192,14 @@ above the mat facing up, and leave onto the door tile, where the door animates y
   rock-gym theme of the Gyms tileset, with no silk/web art; there is no ship sprite, so the Customs Hall template's moored ship
   stands in for the Dovetail. Real art needs custom tiles.
 - No cliffs or mountains yet. Outdoor barriers are trees, water, fences and ledges. The Lighthouse is a condo stamp.
-- Not built yet: Route 5 onward (560/561, Gullcry Caves 564/565, The Rehearsal 568, Ebbmouth 160–166, Tidelock Gym 170–174,
-  then Routes 7–8 and Lumen City with the Act I finale). Saltmere's west edge is closed with trees until 560 exists.
-  Gym 3's water-level variant rooms (171–173) need a water palette for the Gyms tileset, or the Outside sea tiles.
-- Manor and mine use other tilesets' templates (Interior general, Caves) instead of a Mansion palette: [TODO art].
+- Not built yet:
+  - Gullcry B1F (565) and The Rehearsal (568, :BLEED): signs.
+  - Reyes Cellar (166): the cellar door is barred.
+  - Routes 7–8 (580/581), Lumen City (180–193) with Gym 4, the Meridian gala and the Lowlight Shatter (Act I finale):
+    Ebbmouth's east edge stays closed with trees until 580 exists.
+- The River Ebb's day/night current flip in town is not done; the Outside tileset has no current autotiles. Gym 3 uses
+  event-driven currents instead.
+- The mine and Gullcry Caves share the base project's Rock Cave template, so they look alike: [TODO art].
 - Deviation from maps.json: Route 4's north edge joins Route 3's **south** edge at x=2–9. maps.json paired 540-west with
   541-north, which isn't a legal Essentials edge pair.
 - Story items without item data (Meridian badge case, Fellowship card, Gilded King page, Granny Loom's shuttle) are text

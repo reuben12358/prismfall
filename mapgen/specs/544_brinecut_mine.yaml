@@ -52,25 +52,63 @@ events:
   - {type: item, at: [1, 15], item: NUGGET, hidden: true}
   - {type: sign, at: [12, 7], post: false, name: Salt lake, text: "A still salt lake glimmers in the dark. [TODO art: salt lake]"}
 ---
-# Thistledown Manor (546) + Attic (547): the comic haunted house (story/04_ACT_I.md Ch3 optional set piece).
-# Built on the base project's big-house / small-house templates with DarkMap (light circle) for the haunting.
+# Thistledown Manor (546) + Attic (547): the comic haunted house (story/04_ACT_I.md Ch3 optional set piece),
+# on the base project's Mansion interior tileset (palettes/mansion.yaml): checker foyer with a grand staircase,
+# a long portrait hall, a dust-sheeted dining room, and a ruined, cobwebbed attic. DarkMap = circle of light.
 id: 546
 name: Thistledown Manor
 parent: 540
-template: bigroom
-exit_link: R3_MANOR
-drop_template_events: [Stairs up, Stairs down, PC, EV005, "Trainer, Visual Editor, Terrain Tags", "Debug, badges, screenshots",
-                       Pokédex, Mom, Warp tile 1, Warp tile 2, Choices NPC, Text formatting NPC, Pokémon-checking NPC,
-                       Roaming Pokémon, Item, EV017, Trainer(1)]
+palette: mansion
 bgm: Cave
 metadata: {DarkMap: true, MapPosition: [0, 12, 21]}
+map: |
+  ################################
+  ################################
+  ################################
+  #::::::::::....................#
+  #::::::::::====================#
+  #::::::::::====================#
+  #::::::::::....................#
+  #::::::::::#########..##########
+  #::::::::::#########..##########
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::##.................##
+  #::::::::::#####################
+  #####::#########################
+tileblocks:
+  - {tile: 521, size: [4, 3], at: [4, 3], layer: 1}      # grand staircase (impassable art; the warp is bumped)
+  - {tile: 433, size: [2, 2], at: [14, 1], layer: 1}     # arched windows along the hall
+  - {tile: 433, size: [2, 2], at: [22, 1], layer: 1}
+  - {tile: 476, size: [3, 1], at: [1, 3], layer: 2}      # cobweb fringe
+  - {tile: 476, size: [3, 1], at: [27, 9], layer: 2}
+  - {tile: 542, size: [2, 1], at: [19, 12], layer: 1}    # long dining table
+  - {tile: 542, size: [2, 1], at: [21, 12], layer: 1}
+tiles:
+  - {tile: 518, at: [12, 3], layer: 1}
+  - {tile: 518, at: [30, 3], layer: 1}
+  - {tile: 596, at: [19, 11], layer: 1}
+  - {tile: 596, at: [21, 11], layer: 1}
+  - {tile: 604, at: [20, 13], layer: 1}
+  - {tile: 605, at: [14, 15], layer: 1}
+  - {tile: 606, at: [15, 15], layer: 1}
+  - {tile: 607, at: [27, 15], layer: 1}
+  - {tile: 519, at: [1, 16], layer: 1}
+  - {tile: 519, at: [10, 16], layer: 1}
 events:
-  - {type: warp, name: Stairs up, at: [10, 2], link: MANOR_UP, arrive: [10, 3, down], se: Door exit}
-  - {type: sign, at: [28, 2], post: false, name: Cellar stairs, text: "The cellar stairs end in a painted wall. Very theatrical."}
+  - {type: exit, at: [5, 18], link: R3_MANOR}
+  - {type: warp, name: Grand staircase, at: [5, 5], link: MANOR_UP, arrive: [5, 6, down], se: Door exit}
+  - {type: sign, at: [12, 4], post: false, name: Portrait L, text: "A portrait of a Thistledown actor in a crown. The eyes follow the light."}
+  - {type: sign, at: [30, 4], post: false, name: Portrait R, text: "A portrait of the whole company, AF 211. One face has been painted over."}
   - &scene
     type: event
     name: Scene 1
-    at: [7, 4]
+    at: [8, 9]
     pages:
       - graphic: {sprite: NPC 25, dir: down, opacity: 160}
         commands:
@@ -85,7 +123,7 @@ events:
         commands: ["Only a cold spot where the actor stood."]
   - <<: *scene
     name: Scene 2
-    at: [20, 4]
+    at: [26, 5]
     pages:
       - graphic: {sprite: NPC 28, dir: down}
         commands:
@@ -100,7 +138,7 @@ events:
         commands: ["A faint scent of greasepaint lingers."]
   - <<: *scene
     name: Scene 3
-    at: [25, 6]
+    at: [28, 12]
     pages:
       - graphic: {sprite: NPC 03, dir: left}
         commands:
@@ -115,7 +153,7 @@ events:
         commands: ["Freshly turned earth on a parlour rug."]
   - type: event
     name: Lady Thistledown
-    at: [2, 6]
+    at: [23, 10]
     pages:
       - graphic: {sprite: NPC 28, dir: down, opacity: 180}
         commands:
@@ -139,7 +177,7 @@ events:
         commands: ["The parlour is quiet. On the mantel, a playbill: THE THISTLEDOWN PLAYERS - FINAL SEASON."]
   - type: event
     name: Ghost girl
-    at: [5, 6]
+    at: [2, 13]
     pages:
       - graphic: {sprite: NPC 07, dir: down, opacity: 140}
         commands:
@@ -147,22 +185,43 @@ events:
           - "When you blink, she's gone."
           - {selfswitch: [A, true]}
       - cond: {self: A}
-  - {type: trainer, at: [22, 7], sight: 4, dir: left, sprite: trainer_CHANNELER, trainer: [CHANNELER, Mireille],
+  - {type: trainer, at: [17, 6], sight: 4, dir: right, sprite: trainer_CHANNELER, trainer: [CHANNELER, Mireille],
      intro: "The spirits asked me to audition you!", after: "They say you have presence. Ghostly presence."}
-  - {type: item, at: [26, 4], item: CLEANSETAG}
+  - {type: item, at: [29, 16], item: CLEANSETAG}
 ---
 id: 547
 name: Thistledown Manor - Attic
 parent: 546
-template: house2
-drop_template_events: [Kurt, Exit]
+palette: mansion
 bgm: Cave
 metadata: {DarkMap: true, MapPosition: [0, 12, 21]}
+map: |
+  ################
+  ################
+  ################
+  #,,,,,,,,,,,,,,#
+  #,,,,,,,,,...,,#
+  #,,,...,,,...,,#
+  #,,,...,,,...,,#
+  #,,,,,,,,,,,,,,#
+  #,,,,,,,,,,,,,,#
+  #,,,,,,,,,,,,,,#
+  ##,,############
+tileblocks:
+  - {tile: 476, size: [3, 1], at: [1, 3], layer: 2}
+  - {tile: 476, size: [3, 1], at: [11, 3], layer: 2}
+tiles:
+  - {tile: 605, at: [5, 5], layer: 1}
+  - {tile: 606, at: [6, 5], layer: 1}
+  - {tile: 607, at: [11, 4], layer: 1}
+  - {tile: 510, at: [8, 8], layer: 1}
+  - {tile: 511, at: [13, 7], layer: 1}
+  - {tile: 510, at: [2, 6], layer: 1}
 events:
-  - {type: warp, name: Stairs down, at: [6, 8], link: MANOR_UP, arrive: [6, 7, up], se: Door exit}
+  - {type: warp, name: Stairs down, at: [2, 10], link: MANOR_UP, arrive: [2, 9, up], se: Door exit}
   - type: event
     name: Greavard
-    at: [5, 3]
+    at: [10, 6]
     pages:
       - graphic: {sprite: Object boulder}
         commands:
@@ -170,4 +229,4 @@ events:
           - {script: "WildBattle.start(:GREAVARD, 16)"}
           - {selfswitch: [A, true]}
       - cond: {self: A}
-  - {type: item, at: [8, 6], item: SPELLTAG}
+  - {type: item, at: [13, 4], item: SPELLTAG}

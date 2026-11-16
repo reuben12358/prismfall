@@ -391,3 +391,52 @@ BaseMoney = 150
 SkillLevel = 100
 BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
+# --- Added for the choice-driven Festival / finale / Ruin Route (design/NARRATIVE_KEYS.md 7) ---
+#-------------------------------
+[LEADER_ROWAN]
+Name = Gardener
+Gender = Male
+BaseMoney = 120
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_QUENT]
+Name = Meridian R&D Head
+Gender = Male
+BaseMoney = 120
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_DIRECTORATE]
+Name = Directorate Captain
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[GILDED_THEODRIC]
+Name = The Gilded King
+Gender = Male
+BaseMoney = 0
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+#-------------------------------
+[ECHO_MORWEN]
+Name = Echo of the Ghost Warden
+Gender = Female
+BaseMoney = 0
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[REFLECTION]
+Name = Reflection
+Gender = Mixed
+BaseMoney = 0
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader

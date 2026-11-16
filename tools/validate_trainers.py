@@ -90,10 +90,12 @@ RIVAL_BATTLES = OrderedDict([
     (("RIVAL_KESTREL", 6), ("Kestrel", 67)),
     (("RIVAL_KESTREL", 7), ("Kestrel", 80)),
     (("RIVAL_KESTREL", 8), ("Kestrel", 94)),
+    (("RIVAL_KESTREL", 9), ("Kestrel", 94)),    # Festival SF variant "Kestrel (Fallen)"
     (("RIVAL_JUNO", 1), ("Juno", 19)),
     (("RIVAL_JUNO", 2), ("Juno", 35)),
     (("LEADER_JUNO", 3), ("Juno", 47)),     # J3 is the Gym 9 Warden battle
     (("RIVAL_JUNO", 4), ("Juno", 90)),
+    (("RIVAL_JUNO", 7), ("Juno", 97)),          # Ch21 tag-battle partner (when Kestrel is Fallen)
 ])
 # Gen 1 starter line written in PBS for each starter_slot of the player
 # (0 = player chose Grass, 1 = Fire, 2 = Water).
@@ -659,6 +661,12 @@ def validate_scheme(trainers, types, rep):
                 lo, hi = CAMEO_LEVELS if b == 0 else (CAMEO_STAGE_ACE.get(b, 0),) * 2
                 if not (lo <= top <= hi):
                     rep.warn(t.label(), "cameo ace level %d outside %d-%d" % (top, lo, hi))
+    # Every Prismfall (non-stock) base version must have its Hard and Casual variants
+    for t in trainers:
+        if t.version < 100 and t.ttype in types:
+            for d in (1, 2):
+                if (t.ttype, t.name, t.version + 100 * d) not in by_key:
+                    rep.warn(t.label(), "no %s variant (v+%d); Core falls back to Standard" % (DIFF_NAMES[d], 100 * d))
     # Every trainer: variants of any version must have a base
     for t in trainers:
         if t.version >= 100:

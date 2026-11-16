@@ -148,6 +148,55 @@ MapPosition = 0,10,25
 Name = Pell Playhouse - The Grand Stage
 MapPosition = 0,10,25
 #-------------------------------
+[160]   # Ebbmouth
+Name = Ebbmouth
+Outdoor = true
+ShowArea = true
+MapPosition = 0,8,20
+BattleBack = field
+Weather = Rain,30
+#-------------------------------
+[161]   # Ebbmouth Pokémon Center
+Name = Ebbmouth Pokémon Center
+HealingSpot = 160,10,31
+MapPosition = 0,8,20
+#-------------------------------
+[162]   # Ebbmouth Mart
+Name = Ebbmouth Mart
+MapPosition = 0,8,20
+#-------------------------------
+[163]   # Anglers' Guild
+Name = Anglers' Guild
+MapPosition = 0,8,20
+#-------------------------------
+[164]   # Reyes House
+Name = Reyes House
+MapPosition = 0,8,20
+#-------------------------------
+[165]   # Net-mender's House
+Name = Net-mender's House
+MapPosition = 0,8,20
+#-------------------------------
+[170]   # Tidelock Gym - Lock Hall
+Name = Tidelock Gym - Lock Hall
+MapPosition = 0,8,20
+#-------------------------------
+[171]   # Tidelock Gym - Basins (Low Water)
+Name = Tidelock Gym - Basins (Low Water)
+MapPosition = 0,8,20
+#-------------------------------
+[172]   # Tidelock Gym - Basins (Mid Water)
+Name = Tidelock Gym - Basins (Mid Water)
+MapPosition = 0,8,20
+#-------------------------------
+[173]   # Tidelock Gym - Basins (High Water)
+Name = Tidelock Gym - Basins (High Water)
+MapPosition = 0,8,20
+#-------------------------------
+[174]   # Tidelock Gym - Warden's Pool
+Name = Tidelock Gym - Warden's Pool
+MapPosition = 0,8,20
+#-------------------------------
 [520]   # Route 1
 Name = Route 1
 Outdoor = true
@@ -223,6 +272,26 @@ MapPosition = 0,12,21
 Name = Thistledown Manor - Attic
 DarkMap = true
 MapPosition = 0,12,21
+#-------------------------------
+[560]   # Route 5
+Name = Route 5
+Outdoor = true
+ShowArea = true
+MapPosition = 0,9,23
+BattleBack = field
+#-------------------------------
+[561]   # Route 6
+Name = Route 6
+Outdoor = true
+ShowArea = true
+MapPosition = 0,8,21
+BattleBack = field
+Weather = Rain,20
+#-------------------------------
+[564]   # Gullcry Caves
+Name = Gullcry Caves
+MapPosition = 0,8,21
+BattleBack = cave1
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

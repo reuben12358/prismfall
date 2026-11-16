@@ -13,6 +13,13 @@
 153	:JUGGLER, "Pierrot"
 153	:LADY, "Odette"
 154	Prismfall.gym_battle(2)
+160	:HOLLOW_TEO, "Teo"
+170	:FISHERMAN, "Gunnar"
+171	:SWIMMER_F, "Ingrid"
+172	:FISHERMAN, "Oskar"
+172	:SWIMMER_M, "Leif"
+173	:SAILOR, "Bjorn"
+174	Prismfall.gym_battle(3)
 520	:LASS, "Wren"
 520	:YOUNGSTER, "Pip"
 521	:BUGCATCHER, "Dell"
@@ -36,4 +43,14 @@
 544	:HIKER, "Bram"
 545	:HIKER, "Gorse"
 546	:CHANNELER, "Mireille"
+560	:BIKER, "Rook"
+560	:PICNICKER, "Sela"
+560	:POKEMANIAC, "Ivo"
+560	:RUINMANIAC, "Alder"
+561	:BIRDKEEPER, "Wren"
+561	:COOLTRAINER_F, "Astrid"
+561	:FISHERMAN, "Kjell"
+561	:SAILOR, "Haldor"
+561	Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)
+564	:HIKER, "Torvald"
 990	:YOUNGSTER, "Ben"

@@ -154,6 +154,13 @@ def prepare(spec, ctx):
                           'text': s.get('locked_text', 'The door is locked.')}
                 stamp_events.append(ev)
         spec['events'] = stamp_events + spec['events']   # doors first: their autorun page runs before story autoruns
+        for t in spec.get('tileblocks', []):   # {tile: top-left id, size: [w,h], at: [x,y], layer: 1}
+            w, h = t['size']
+            for dy in range(h):
+                for dx in range(w):
+                    tid = t['tile'] + dy * 8 + dx
+                    if tid not in t.get('skip', []):
+                        layers[t.get('layer', 1), t['at'][1] + dy, t['at'][0] + dx] = tid
         for t in spec.get('tiles', []):   # explicit tile placements {tile: name|id, at: [x,y], layer}
             tdef = pal['tiles'].get(t['tile']) if isinstance(t['tile'], str) else {'tile': t['tile'], 'layer': t.get('layer', 1)}
             layers[t.get('layer', tdef['layer']), t['at'][1], t['at'][0]] = tdef['tile']

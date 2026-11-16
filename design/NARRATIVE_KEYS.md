@@ -273,7 +273,9 @@ DERIVED_FLAGS = {
   :CONCORD_OPEN             => "!ruin_route && (flag(:VOSS_ACCEPTED) || choice(:ch16_magnus) != :conscience)",
   :BORROWED_OPEN            => "!ruin_route && (flag(:KESTREL_BEARS) || flag(:SIGRUN_BEARS))",
   :UNMAKE_OPEN              => "ruin_route || resonance <= -6 || (standing(:HOLLOW) >= 4 && (flag(:ROWAN_RADICAL) || !flag(:KROLL_EXPOSED_CH13)))",
-  :HARMONY_BUFF             => "resonance >= 6"
+  :HARMONY_BUFF             => "resonance >= 6",
+  :ZYGARDE_CHOOSES          => "bond(:VALEN) >= 3 || flag(:ILSA_RECONCILED)",
+  :JUNO_ESTRANGED           => "bond(:JUNO) <= -5"   # Ch11: she travels apart; the Thaw partner is Anja
 }
 
 # Wardens' Consent, gym order (index = gym - 1). A Warden who doesn't consent refuses to release their Plate in the Arceus fight.
@@ -584,8 +586,9 @@ on the trigger. Every trigger is a deliberate player choice with at least one co
 - **In-story trigger:** Ch15, immediately after the Giratina boss in the Reverse Depths. Only if `ruin_unlocked`, a pane of the Depths shows
   Juno calling the PC's name (the GO_LOOKING_BACK image). Prompt `:ch15_look_back`. `:yes` → `Prismfall.start_ruin_route` (sets `ruin_route`),
   resonance set to `min(resonance, -6)`, warp to R1. `:no` → main story continues; the prompt never returns on this save.
-- **Route chapters:** R1–R7 (10_CHOICES_ENDINGS §5). All main-route Act IV–V choice prompts after Ch15 are skipped on the Ruin Route except
-  `:ch16_magnus`, `:ch17_nyx`, `:ch18_kestrel_ring` and `:ch19_oath`, whose Ruin variants use the same keys.
+- **Route chapters:** R1–R7 (10_CHOICES_ENDINGS §5). On the Ruin Route every main-route prompt after Ch15 is skipped except `:ch16_zekrom`,
+  `:ch16_magnus`, `:ch17_nyx`, `:ch18_kestrel_ring`, `:ch19_oath` (only `:ruin` is offered) and `:ch21_crown`, whose Ruin scenes reuse the keys.
+  Ruin game overs that reuse main-route triggers (Overtime, The Throne, Fair Bargain …) still fire and still count.
 - **Choices:** `:ruin_voss`, `:ruin_walk`. Game overs: `GO_R_SWEET_DREAMS`, `GO_R_KNEEL` (exempt).
 - **Gyms 15–18** use version 1 of each leader (see §7). Badges are still awarded with `Prismfall.award_badge(n)` (caps unchanged); the badge
   art swaps to the black "Reflection" set when `ruin_route`.

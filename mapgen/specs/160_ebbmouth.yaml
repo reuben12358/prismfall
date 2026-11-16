@@ -1,0 +1,96 @@
+# Ebbmouth (160): Isenmar's southern port where the River Ebb meets the sea. Story: 04_ACT_I.md Chapter 4.
+# The river's day/night current flip is [TODO] (the Outside tileset has no current autotiles); the E edge to Route 7
+# (580) is closed until 580 is built.
+id: 160
+name: Ebbmouth
+palette: outside
+bgm: Lerucean Town
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 8, 20], BattleBack: field, Weather: [Rain, 30]}
+connections:
+  - {dir: S, offset: 22, to: 561, to_offset: 12}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTT~~~~~~TTTTTTTTTTTT
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTT~~~~~~TTTTTTTTTTTT
+  TTTTTT..............::::....~~~~~~......TTTTTT
+  TTTTTT..............::::....~~~~~~......TTTTTT
+  TTTTTT.........#####::#####.~~~~~~......TTTTTT
+  TTTTTT.........#####::#####.~~~~~~......TTTTTT
+  TT.............#####::#####.~~~~~~..........TT
+  TT.............#####::#####.~~~~~~..........TT
+  TT.............#####::#####.~~~~~~..........TT
+  TT..................::::....~~~~~~..........TT
+  TT..::::::::::::::::::::::::~~~~~~..........TT
+  TT..::::::::::::::::::::::::~~~~~~..........TT
+  TT..::........::....::::....~~~~~~.#######..TT
+  TT..::........::....::::....~~~~~~.#######..TT
+  TT..::..............::::....~~~~~~.#######..TT
+  TT..::.#####........::::....~~~~~~.#######..TT
+  TT..::.#####........::::....~~~~~~.#######..TT
+  TT..::.#####........::::....======::::::::..TT
+  TT..::.#####........::::....======::::::::..TT
+  TT..::..............::::....~~~~~~..........TT
+  TT..::..............::::....~~~~~~..........TT
+  TT..::..............::::....~~~~~~..........TT
+  TT..::~==~~~........::::....~~~~~~..........TT
+  TT..::~==~~~........::::....~~~~~~..........TT
+  TT..::~==~~~........::::....~~~~~~..........TT
+  TT..::~==~~~........::::....~~~~~~..........TT
+  TT..::..#####.......::::....~~~~~~....TTTT..TT
+  TT..::..#####.....####::....~~~~~~....TTTT..TT
+  TT..::::#####:::::####::::::~~~~~~....TTTT..TT
+  TT..::::#####:::::####::::::~~~~~~....TTTT..TT
+  TT..................::::....======..........TT
+  TT..................::::....======..........TT
+  TT........TTTT......::::....~~~~~~..........TT
+  TT........TTTT......::::....~~~~~~..........TT
+  TT........TTTT......::::....~~~~~~..........TT
+  TT........TTTT......::::....~~~~~~..........TT
+  TT__________________::::____======__________TT
+  TT__________________::::____======__________TT
+  ~~~~~~~~~~~~~~~~~~~~::::~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~::::~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~::::~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~::::~~~~~~~~~~~~~~~~~~~~~~
+stamps:
+  - {stamp: pokecenter, at: [8, 26],  link: EB_PC,     name: Poke Center door}
+  - {stamp: mart,       at: [18, 27], link: EB_MART,   name: Mart door}
+  - {stamp: gym,        at: [35, 12], link: EB_GYM,    name: Tidelock Gym door}
+  - {stamp: fanclub,    at: [7, 15],  link: EB_ANGLER, name: Anglers' Guild door}
+  - {stamp: house_red,  at: [22, 4],  link: EB_REYES,  name: Reyes House door}
+  - {stamp: house_red2, at: [15, 4],  link: EB_HOUSE,  name: Net-mender's House door}
+tiles:
+  - {tile: gym_sign, at: [41, 18]}
+events:
+  - {type: sign, at: [41, 18], post: false, name: Gym sign, text: "TIDELOCK GYM\nWarden: Marisol Reyes - The Ebb runs both ways."}
+  - {type: sign, at: [24, 33], text: "EBBMOUTH\nWhere the Ebb meets the sea. Southern port of Isenmar."}
+  - {type: sign, at: [27, 36], text: "MERIDIAN TIDAL LATTICE - UNIT 2\nPowering Isenmar's future. Keep off the intake."}
+  - {type: npc, name: Ice-fisher, at: [10, 34], sprite: trainer_FISHERMAN, dir: up,
+     text: "\u266a Sleep, old whale, under the ice... When the whale wakes, the sea remembers it's a sea. \u266a"}
+  - {type: npc, name: Guild striker, at: [16, 30], sprite: NPC 03, dir: down, move: random,
+     text: "Ebb Guild: Thane Eirik taxes our catch, Meridian lays us off. And the river stops dead for minutes now!"}
+  - {type: npc, name: Dockworker, at: [36, 34], sprite: trainer_SAILOR, dir: left,
+     text: "Watch the mill-wheels. When the Ebb stutters they freeze mid-turn and we all hold our breath."}
+  - type: event
+    name: Teo
+    at: [31, 36]
+    pages:
+      - cond: {switch: CH4_K2_DONE}
+        graphic: {sprite: trainer_BURGLAR, dir: down}
+        commands:
+          - "Night. The river has stopped. A child's boat drifts toward the stalled mill-race - and a Hollow cell is spiking the Lattice."
+          - "Marisol vaults the rail beside you: \"Get the kid! I'll take the - Teo?!\""
+          - "Teo Reyes: Stay out of it, sis. You too, ferry kid."
+          - if: 'TrainerBattle.start(:HOLLOW_TEO, "Teo")'
+            then:
+              - "The boat is safe. Teo backs toward the dark water. Marisol... lets him run."
+              - "She sees that you saw."
+              - choices: ["Report Teo to Meridian", "Keep Marisol's secret", "Confront her privately"]
+                cancel: 0
+                branches:
+                  - [{script: "pf_choose(:CH4_TEO, :report)\npf_standing_add(:MERIDIAN, 1)"}, "Marisol Reyes: ...Do what you have to."]
+                  - [{script: "pf_choose(:CH4_TEO, :keep_secret)\npf_standing_add(:HOLLOW, 1)"}, "Marisol Reyes: I owe you. I won't forget it."]
+                  - [{script: "pf_choose(:CH4_TEO, :confront)"}, "Marisol Reyes: He's my brother! He's - he's nineteen and furious and he's RIGHT about the river!"]
+              - {switch: [CH4_TEO_MET, true]}
+              - {selfswitch: [A, true]}
+      - cond: {self: A}

@@ -1,0 +1,176 @@
+# Route 5 (560, salt flats), Route 6 (561, sea cliffs, K2) and Gullcry Caves (564). Story: 04_ACT_I.md Chapter 4.
+# The Rehearsal (568) and Gullcry B1F (565) are not built yet (signs).
+id: 560
+name: Route 5
+palette: outside
+bgm: Route 2
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 9, 23], BattleBack: field}
+connections:
+  - {dir: E, offset: 10, to: 140, to_offset: 14}
+  - {dir: W, offset: 8, to: 561, to_offset: 40}
+map: |
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  ................................................................
+  ________________________________________________________________
+  ________________________________________________________________
+  __________,,,,,,,,,,____________________________________......__
+  __________,,,,,,,,,,____________________________________......__
+  __________,,,,,,,,,,____________________________________......__
+  __________,,,,,,,,,,____________________________________......__
+  __________,,,,,,,,,,__sss_sss_sss_sss_sss_sss___________________
+  __________,,,,,,,,,,__sss_sss_sss_sss_sss_sss___________________
+  ______________________sss_sss_sss_sss_sss_sss___________________
+  ________________________________________________________________
+  ________________________________________________________________
+  ________________________________________________________________
+  ________________________________________________________________
+  ________________________________________________________________
+  ____________________________________________,,,,,,,,,,,,________
+  ____________________________________________,,,,,,,,,,,,________
+  __________________________......____________,,,,,,,,,,,,________
+  __________________________......____________,,,,,,,,,,,,________
+  __......__________________......____________,,,,,,,,,,,,________
+  __......__________________......____________,,,,,,,,,,,,________
+  __......________________________________________________________
+  __......________________________________________________________
+  ________________________________________________________________
+  ________________________________________________________________
+  ................................................................
+  TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+events:
+  - {type: sign, at: [30, 24], text: "The road south dips into a wrecked pier village half-sunk in brine. Something replays there, over and over. [TODO map 568: The Rehearsal]"}
+  - {type: sign, at: [60, 11], text: "ROUTE 5 - THE SALT FLATS\nElowen / Isenmar border. A Meridian sunburst is bolted over both kingdoms' arms."}
+  - {type: trainer, at: [16, 13], sight: 4, dir: right, sprite: trainer_RUINMANIAC, trainer: [RUINMANIAC, Alder],
+     intro: "There's a whole village under that brine!", after: "Old pier town. Gone in a night, they say."}
+  - {type: trainer, at: [36, 6], sight: 4, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Sela],
+     intro: "Salt-flat picnic! Bring your own shade!", after: "Isenmar's colder than I thought."}
+  - {type: trainer, at: [50, 13], sight: 4, dir: up, sprite: trainer_BIKER, trainer: [BIKER, Rook],
+     intro: "Flats are made for speed!", after: "Flats are made for losing, apparently."}
+  - {type: trainer, at: [6, 19], sight: 4, dir: down, sprite: trainer_POKEMANIAC, trainer: [POKEMANIAC, Ivo],
+     intro: "Salt-crusted Pokémon! Have you SEEN them?!", after: "They're so crunchy."}
+  - {type: item, at: [60, 24], item: SOFTSAND}
+  - {type: item, at: [2, 3], item: SUPERPOTION}
+---
+id: 561
+name: Route 6
+palette: outside
+bgm: Route 3
+parent: 0
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 8, 21], BattleBack: field, Weather: [Rain, 20]}
+connections:
+  - {dir: N, offset: 12, to: 160, to_offset: 22}
+map: |
+  TTTTTTTTTT____TTTTTTTT~~~~~~~~
+  TTTTTTTTTT____TTTTTTTT~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT..TT..____,,,,,,..~~~~~~~~
+  TTTT..TT..____,,,,,,..~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT......____,,,,,,..~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____........~~~~~~~~
+  TTTT......____..TTTT..~~~~~~~~
+  TTTT......____..TTTT..~~~~~~~~
+  TTTT......____..TTTT..~~~~~~~~
+  TTTT......____..TTTT..~~~~~~~~
+  TTTT__________........~~~~~~~~
+  TTTT__________........~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..........,,,,,,..~~~~~~~~
+  TTTT..........,,,,,,..~~~~~~~~
+  TTTT__........,,,,,,..~~~~~~~~
+  TTTT__........,,,,,,..~~~~~~~~
+  TTTT__................~~~~~~~~
+  TTTT__................~~~~~~~~
+  TTTT__................________
+  TTTT__................________
+  TTTT__________________________
+  TTTT__________________________
+  TTTT..,,,,,,,,,,......________
+  TTTT..,,,,,,,,,,......________
+  TTTT..,,,,,,,,,,......~~~~~~~~
+  TTTT..,,,,,,,,,,......~~~~~~~~
+  TTTT..,,,,,,,,,,TTTT..~~~~~~~~
+  TTTT..,,,,,,,,,,TTTT..~~~~~~~~
+  TTTT..,,,,,,,,,,TTTT..~~~~~~~~
+  TTTT..,,,,,,,,,,TTTT..~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTT..................~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+  TTTTTTTTTTTTTTTTTTTTTT~~~~~~~~
+events:
+  - {type: warp, name: Gullcry north mouth, at: [3, 22], link: R6_CAVE_N, arrive: [4, 22, right], se: Door exit}
+  - {type: warp, name: Gullcry south mouth, at: [3, 37], link: R6_CAVE_S, arrive: [4, 37, right], se: Door exit}
+  - {type: sign, at: [12, 32], text: "LANDSLIDE - ROAD CLOSED\nDetour through Gullcry Caves."}
+  - type: event
+    name: Trainer(4)
+    at: [11, 5]
+    pages:
+      - graphic: {sprite: trainer_RIVAL1, dir: down}
+        trigger: event_touch
+        commands:
+          - "Kestrel: You. Of course it's you. I'm tracking a Hollow cell from Saltmere - stay out of my way."
+          - "He draws a Poké Ball. An Honedge hums at his hip. \"Gran's. My mother's blade's child. Don't you dare lose it,\" she'd said."
+          - if: 'Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)'
+            then:
+              - "Kestrel: ...Tch."
+              - choices: ["(Kind) Do you think the Mourner is your mother?", "(Blunt) The Mourner sounds just like her, doesn't she?", "(Say nothing)"]
+                cancel: 0
+                branches:
+                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :kind)\npf_bond_add(:KESTREL, 1)"}, "Kestrel: Don't. Just - don't. ...Thanks for asking quiet, I guess."]
+                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :blunt)\npf_bond_add(:KESTREL, -1)"}, "He shoves past you without a word."]
+                  - [{script: "pf_choose(:CH4_KESTREL_MOURNER, :silent)"}, "Kestrel: ...She'd never wear a mask. She hated masks."]
+              - {switch: [CH4_K2_DONE, true]}
+              - {var: [KESTREL_STAGE, 1]}
+              - {selfswitch: [A, true]}
+      - cond: {self: A}
+  - {type: trainer, at: [12, 48], sight: 4, dir: up, sprite: trainer_BIRDKEEPER, trainer: [BIRDKEEPER, Wren],
+     intro: "The gulls here are huge!", after: "Gullcry Caves are full of them."}
+  - {type: trainer, at: [10, 40], sight: 4, dir: down, sprite: trainer_SAILOR, trainer: [SAILOR, Haldor],
+     intro: "Cliff path's shut! Battle while you wait!", after: "The caves are slippery. Mind the tide pools."}
+  - {type: trainer, at: [14, 14], sight: 4, dir: left, sprite: trainer_COOLTRAINER_F, trainer: [COOLTRAINER_F, Astrid],
+     intro: "Isenmar breeds tough trainers. Let me show you.", after: "Ebbmouth's just north. Smell the eel?"}
+  - {type: trainer, at: [20, 16], sight: 4, dir: left, sprite: trainer_FISHERMAN, trainer: [FISHERMAN, Kjell],
+     intro: "Sea-cliff fishing is an art!", after: "The sea's restless lately."}
+  - {type: item, at: [5, 46], item: GREATBALL}
+  - {type: item, at: [20, 4], item: MYSTICWATER}
+---
+id: 564
+name: Gullcry Caves
+parent: 561
+template: cave1
+drop_template_events: [Exit south, Exit right, Ladder, Hole, NPC, StrengthBoulder, Boulder position checks, Sign,
+                       Dungeon ladder, Dungeon sign, Tile puzzles, EV016]
+bgm: Cave
+field: CAVE
+metadata: {Name: Gullcry Caves, MapPosition: [0, 8, 21], BattleBack: cave1}
+events:
+  - {type: warp, name: North mouth, at: [24, 9], link: R6_CAVE_N, arrive: [24, 10, down], se: Door exit}
+  - {type: warp, name: South mouth, at: [18, 22], link: R6_CAVE_S, arrive: [18, 21, up], se: Door exit}
+  - {type: sign, at: [10, 12], post: false, name: Shaft, text: "A dark shaft drops toward the tide pools below. [TODO map 565: Gullcry B1F]"}
+  - {type: trainer, at: [14, 12], sight: 4, dir: right, sprite: trainer_HIKER, trainer: [HIKER, Torvald],
+     intro: "Gull droppings and sea spray - my favourite cave!", after: "Hear them? Gullcry. Every tide."}
+  - {type: item, at: [12, 7], item: REVIVE}

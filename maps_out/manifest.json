@@ -32,6 +32,17 @@
   152,
   153,
   154,
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  170,
+  171,
+  172,
+  173,
+  174,
   520,
   521,
   522,
@@ -47,6 +58,9 @@
   546,
   547,
   548,
+  560,
+  561,
+  564,
   990
  ],
  "fields": {
@@ -59,12 +73,18 @@
   "152": "GRAND_STAGE",
   "153": "GRAND_STAGE",
   "154": "GRAND_STAGE",
+  "170": "WATER_SURFACE",
+  "171": "WATER_SURFACE",
+  "172": "WATER_SURFACE",
+  "173": "WATER_SURFACE",
+  "174": "WATER_SURFACE",
   "522": "BLEED",
   "524": "SILKWOOD",
   "525": "SILKWOOD",
   "548": "BLEED",
   "541": "BEACH",
   "544": "CAVE",
-  "545": "CAVE"
+  "545": "CAVE",
+  "564": "CAVE"
  }
 }

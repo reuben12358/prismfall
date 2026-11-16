@@ -17,3 +17,4 @@ switches:
   GYM2_MASK: 311      # Comedy door chosen: corridor exit open
   GYM2_TRAP: 312      # every light upon the Beast: trapdoor open
   GYM2_SPOTS_SET: 313 # Fly Loft spotlights initialised to (Hero, King, King)
+  GYM3_BELL: 315      # Tidelock tide bell: ON = currents run inland (north)
