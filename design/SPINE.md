@@ -1,6 +1,24 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
-## >>> REVISION 5 (user feedback, 2026-11-15 21:21) — supersedes everything below where they conflict <<<
+## >>> REVISION 6 (user feedback, 2026-11-16) — supersedes everything below where they conflict <<<
+1. **The Ashkaar–Isenmar War.** At some point in the main story (story team picks the act; mid-game, Act III–IV suggested) open
+   war breaks out between Ashkaar (Fire/Dragon) and Isenmar (Water/Ice). It must feel like a full war (fronts, sieges, the
+   player caught between, choices with consequences) and its climax is shown as a **fully pixel-animated cutscene** (like
+   Rejuvenation's Renegade Route set pieces) containing **at least one beam clash** (e.g. the kingdoms' legendaries or
+   Wardens' aces: fire/dragon beam vs water/ice beam).
+2. **Festival of Champions reframed.** It is a sacred ceremony held by ALL kingdoms to choose the one person who receives
+   **Arceus's Blessing** (the story team decides exactly what the Blessing is and how it ties to the Sovereign Seat, the
+   Plates/Tuning and Voss's plan). **Each kingdom sends its champions/delegates** and those are the people you fight: Wardens,
+   rivals, royals, faction figures, all met earlier in the story (Rev 5 rule stands). Who each kingdom sends depends on your choices.
+3. **Companion matches.** Your companions/rivals can be drawn against each other. Those NPC-vs-NPC matches resolve according
+   to your choices, and the player can optionally **watch each match's key moments as a pixel-animated highlight** cutscene.
+4. **Cutscene engine.** A 6th plugin, `Prismfall Cutscenes`, provides code-driven pixel-animated cutscenes (Pokémon/trainer
+   sprites, camera pans, beams, beam clashes, impacts, screen shake, text) used for the war climax and Festival highlights.
+5. **Art target = Pokémon Rejuvenation's look** (user sent a screenshot: tall detailed timber buildings, lush layered
+   foliage, textured paths, moody weather/lighting overlays). The user is fine with using the actual tilesets from
+   Rejuvenation/Reborn/Desolation for this personal project; credit their artists in CREDITS.md.
+
+## >>> REVISION 5 (user feedback, 2026-11-15 21:21) — superseded by Revision 6 where they conflict <<<
 1. **Festival opponents must be characters the player has met in the story.** Every Festival entrant who can be the player's
    opponent (all draw pools and exhibitions) must have ≥2 meaningful prior story encounters and be introduced by Act IV at the latest.
    No new characters introduced at the Festival "for plot reasons". The Rev-4 foreign entrants (Isaura, Drey, Mireille, Thorne)

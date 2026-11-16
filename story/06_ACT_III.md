@@ -12,7 +12,7 @@
 **Location:**
 - **R17 Lift Road** (the great freight-lift from Nadir up to the plateau) and **R18 Prism Falls** (`:RAINBOW`).
 - **Grudgestone Quarry**, **Echo Coliseum** (688, `:BLEED`: Ironreach's attack replaying as ghost-sound).
-- **Verdance** (Elowen's royal seat, `:FLOWER_GARDEN`), **Briar Hall**, the **Heartgarden**, the **Bride Grove** (708), the **Royal Chase** (Safari-style reserve).
+- **Verdance** (Elowen's royal seat, `:FLOWER_GARDEN`), **Briar Keep** (the Queen's castle on the highest terrace), the **Heartgarden**, the **Bride Grove** (708), the **Royal Chase** (Safari-style reserve).
 - **Branch maps by Standing:** 698 **Hollow Sanctuary** (high Hollow) or 699 **Meridian Black Site** (high Meridian).
 
 **Branch scene on the Lift Road:**
@@ -89,7 +89,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 **Aftermath and revelation.**
 - **Anja** stands on a fishing hut's roof in the rain, watching her city sink: "I read the numbers. I *read* them. And I signed anyway, because the heaters were warm."
 - **CHOICE `:ch11_anja`:**
-  - **Expose her** to the Thane's court with the console readings (`ANJA_EXPOSED`). Anja is stripped of her honors, though Wardens can't be removed by kings. Accord Standing goes up and Meridian is blamed loudly. In Act V she refuses to release the Icicle Plate: "Rimeholt drowns without it."
+  - **Expose her** to the Thane's court in the Holdfast's great hall with the console readings (`ANJA_EXPOSED`). Anja is stripped of her honors, though Wardens can't be removed by kings. Accord Standing goes up and Meridian is blamed loudly. In Act V she refuses to release the Icicle Plate: "Rimeholt drowns without it."
   - **Let her confess herself** before the court. She becomes a key Act V swing vote, and at the end she lets go.
   - Either way, **Anja breaks with Meridian publicly.**
 - **Thane Eirik** declares **martial law** and evacuates the lower town south into Elowen, which causes a border crisis with Queen Maelis's Thornguard.
@@ -192,6 +192,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 
 **The tribunal (set piece).** In the Athenaeum's Glass Court, Valen presides. Wardens attend, and the kings' observers sit in their gallery. **Rowan** is gaunt from Meridian custody, with his right hand still Bleed-burned in a lightning pattern.
 
+0. **In attendance:** Hierophant Ellery, with the **Eevee Octave** as her honor guard. Vesper's second encounter is an optional sparring double battle in the Athenaeum cloister. She is shaken by the Fault later in the chapter: "The Choir says we were born lucky. I don't feel lucky." **Celestine** refuses to swear the witness oath ("I can't lie anyway; it'd be rude to pretend").
 1. **Rowan's statement:** "I wanted to pull the nails. I was wrong about how. I was not wrong about why."
 2. **Kaito's testimony.**
    - **CHOICE `:ch13_kaito`:** before the session, Kaito asks the PC whether he should speak about **Marrowgate**. Encourage him (`KAITO_TESTIFIED`) or tell him it isn't his burden.

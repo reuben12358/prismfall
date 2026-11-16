@@ -107,6 +107,7 @@
 - Bereaved grunts drop Hollow Ring banners. The crowd panics, and a battle against two grunts follows.
 - The Mourner looks straight at the PC across the theater and goes **still**. "...You." Then he's gone in a burst of Cotton Spore.
 - Juno, shaken: "He sounded sad. Isn't that weird? I thought he'd sound evil."
+- **First meeting with the Eevee Octave.** The Prism Choir's touring chorus sings the Pageant's hymns. It includes **the Eevee Octave**, eight Glassfall orphans each partnered with an Eevee-line Pokémon. Their leader **Vesper Lindqvist** (24, gentle, devout) finds the PC backstage after the panic and kneels to Understudy: "It hasn't decided which Imprint it belongs to yet. Neither have you, I think." Optional battle vs Vesper's Eevee and one sister's Eeveelution (double). Encounter 1 of 3 for her Festival exhibition.
 
 **Aftermath and revelation.**
 - Dorian, rattled and pale, pulls the PC into his dressing room and presses a yellowed page into their hands: the **prologue of "The Gilded King"** (Key Item). "Ansel Crewe wrote that in AF 52. They hanged him for it. I've never staged it. I'm a coward with excellent diction." The page includes the line: *"If heaven will not kneel, we'll build a chain."*

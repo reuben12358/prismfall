@@ -134,7 +134,14 @@
 
 **Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier Nadir trusts.
 - **The Conclave.** Sovereign Valen has called a rare **Accord Conclave** here, the first held in Nadir in a century, to vote on extending the Mandate realm-wide. Every available Warden is present.
-  - **Introductions/reunions:** Tamsin, Dorian, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and Odessa's Gale Post courier (who delivers **Fly**).
+  - **Introductions/reunions:** Tamsin, Dorian, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and **Odessa Gale** herself, who delivers **Fly** in person from a skiff she lands on the Pit's rim ("Courier's privilege").
+  - **First sightings** (Revision 5: these Wardens must be met before the Festival):
+    - **Ysolde Ashgrave**, veiled, watches Kestrel across the Pit and leaves before he sees her.
+    - **Nyx Calloway** is "slumming it" in the observers' gallery and buys the PC a drink they're too young for.
+    - **Celestine Aubade**, barefoot and openly herself this time, smiles at the PC: "We've met. You didn't know it yet."
+    - **Anja Sorrel** arrives with her brother's envoy and complains about the heat.
+    - **Bastian Ore** pretends to be deaf to Hollis for the whole session.
+  - Each Warden gets one line. Their full chapters come later.
   - Chancellor Hollis presides.
   - Kings' envoys sit in the "observers' gallery", and the Elowen and Ashkaar envoys refuse to sit next to each other.
 

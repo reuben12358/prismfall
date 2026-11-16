@@ -67,11 +67,11 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 **Location:** R35 **Gloamwood** (`:FAIRY_TALE`), R36 (`:MOUNTAIN`), **Wyrmscar Rift** (864 `:CAVE` / 865 `:DRAGONS_DEN`), **Wyrmrest** (Ashkaar), **Rainbow Scar** (868, `:RAINBOW`).
 
 ### Arrival: Ashkaar, second visit (escalation)
-- **Dominar Hrothgar's legions** are camped on Wyrmrest's slopes: banners, braziers and a thousand dragon-riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
+- **Dominar Hrothgar** has come to his seat, the **Ember Citadel**, and his legions fill its terraces and the slopes below: banners, braziers and a thousand dragon-riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
 - **Sigrun Ashfall** keeps the pass open anyway, in open defiance, standing on the gate in dragonhide with her Salamence. "Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed. *I* do the weighing, Father. Not you."
 
 ### The Dominar (optional political scene, `DOMINAR_SWAYED`)
-- The PC can petition the Dominar in his war-tent. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
+- The PC can petition the Dominar in the Ember Citadel's throne hall, a cooled lava-tube where his throne sits over a channel of living magma. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
 - Persuading him to fly *for* Crownhaven instead of *against* Zenith requires:
   - the Light Stone sent to Wyrmrest (`:ch8_lightstone` = wyrmrest) **plus** proof (the **Arbiter Blueprints** or the **Larch Papers**), **or**
   - Sigrun's Bond ≥ 4, so that she speaks for the PC (`:ch19_dominar`).
@@ -109,7 +109,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ## CHAPTER 20 — "The Festival of Champions" (Crownhaven, Festival week)
 
-> **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, following `story/10_CHOICES_ENDINGS.md` §3 and NARRATIVE_KEYS §6. The four outsider entrants are profiled in 03_CAST.
+> **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, following `story/10_CHOICES_ENDINGS.md` §3 and NARRATIVE_KEYS §6. **Revision 5:** every possible opponent is someone the PC has met at least twice by Act IV.
 
 ### Day 0: Arrival
 1. **Crownhaven** is white stone and bells in the caldera. Upper Crownhaven is festooned with **Tamsin's eighteen banners**, woven since Ch10. The **Meridian Prism Arena** gleams where the old grounds were, too new.
@@ -119,13 +119,9 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
    - The Lantern Hollow are disguised as Choir porters.
    - The kings are in the observers' gallery: Caedmon for Elowen, Eirik, the Dominar's herald, Kassan, Dask.
    - **Envoy Delphine Okoro** of the Concert, deciding on Severance.
-4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." Instead, four outsiders fill the foreign places:
-   - Three come with **Envoy Okoro's** sealed Concert delegation: **Isaura Vell**, Champion of Solvane; **Matthias Drey**, Champion of the Karst Republic and Okoro's security chief; and **Mireille Vance**, Champion of Lys.
-   - One is entered by a king: **Ser Ivo Thorne**, the Queen's Champion, sent by Queen Maelis to win the Sovereign Seat for a crown.
-   - **Isaura** meets the PC at the Basilica steps and looks at their chest for a long moment: "Your god's in pieces and your champion's made of glass. Lovely region."
+4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." No foreign champions come this year. Every entrant is someone the PC has met on the road (Revision 5).
 5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps.
-   - **Sixteen seeds:** the PC, Juno, Kestrel, Valen; the Wardens Nyx, Kaito, Marisol, Odessa, Celestine, Ysolde, Anja and Sigrun; and the four outsiders.
-   - **Default R16 pairs:** PC–Juno, Isaura–Nyx, Kestrel–Drey, Kaito–Marisol, Valen–Odessa, Mireille–Celestine, Ysolde–Anja, Thorne–Sigrun.
+   - **Sixteen seeds**, all established characters, are listed in NARRATIVE_KEYS §6 (Revision 5 re-fill pending). Story staging for each candidate is written below and updated when the list lands.
    - The lots are honest; the bowl isn't. The Accord's old customs (the Right of Grievance, yielded invitations, a Warden asking for a challenger's quarter, and Dorian, who has never once let the bowl ruin a good story) bend it on screen (NS §3.1).
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
@@ -169,14 +165,9 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 - Without the testimony, Juno does it herself, more slowly: "Corvin says they dream. I'm going to believe him."
 - If Rowan drowned, Juno sits alone with Elin's pressed lily from the Bride Tree.
 
-**Other R16 results** (default):
-- **Isaura beats Nyx.** Nyx, amused: "She's sold more secrets than me. I can tell."
-- **Kestrel beats Matthias Drey** with the Gauntlet. Drey, the Concert's hardliner on Severance, says to anyone who'll listen: "Your rival is fighting with something that isn't him." This is Okoro's first real doubt about Meridian.
-- **Kaito vs Marisol** (if both still seeded).
-- **Valen beats Odessa**, who loses with style.
-- **Celestine beats Mireille Vance**, who asks for her autograph afterward.
-- **Ysolde vs Anja** (if both still seeded).
-- **Sigrun beats Ser Ivo Thorne** in front of every king in the stands. Queen Maelis's bid for the Seat dies in four turns, and Prince Caedmon leaves the box early.
+**Other R16 results:** per the revised draw (pending). Story requirements:
+- **Kestrel** advances with the Gauntlet, and his opponent says aloud that something is driving his Pokémon.
+- **Valen** and **Sigrun** advance.
 
 ### Day 3: Exhibitions and the Festival Grounds
 - **The Eevee Octave** (Eeveelution gauntlet). Eight Glassfall orphans raised by the Choir, each beside a different Imprint, fight a back-to-back gauntlet in the Choir gardens, each fielding a different Eeveelution. It ends with leader **Vesper Lindqvist**'s full Eeveelution team on a field that shifts to match whichever Eeveelution is active.
@@ -184,7 +175,6 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
   - Reward: a Prism Ribbon for Understudy. If Understudy has evolved, Vesper notes which Imprint "claimed" it.
 - **Other exhibitions** (NS §3.6, original characters only):
   - **The Pageant Bout:** Dorian and Rook in a double battle staged as "a duet for the cameras", with Rook's Rotom filming it.
-  - **The beaten outsiders**, each the day after their loss: Drey and Thorne from Day 3, then Isaura and Mireille.
   - **Juno's Garden Match**, if she wasn't the PC's R16.
   - **The Ebb Guild match** with Marisol while Teo heckles from the stands, if Teo was saved and Marisol is close.
 - **Festival grounds side content:** the **Concordance Spire** (Battle Tower) under construction, a teaser; street food from every kingdom; Dorian rehearsing in secret with Celestine.
@@ -192,16 +182,14 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
   - **Proof** needs **two of three**: the **Larch Papers**, the **Arbiter Blueprints**, and **Venam's Testimony** (cameo sidequest, Ch7). Together they show the Bleed is *caused* and so curable, not contagious. Okoro recommends against Severance (`ENVOY_PERSUADED`).
   - **Plea:** she listens and drafts Severance anyway, "with regret".
 
-### Day 4: Quarterfinal ("the outsider's view")
-The story job is an honest view of the PC's choice from someone who isn't trying to use them, delivered in a hard fight at cap 92. A conditional candidate swaps seeds with Isaura, who plays on in their old seed (NS §3.5).
-- **Isaura Vell (fallback, the headline).** The hardest non-boss trainer in the game. Mid-battle: "You're carrying it, aren't you. I can hear it. It's so *loud* in you." After the match, on the empty stands:
-  > *"Twelve years ago Necrozma started eating my islands' light. I caught it. We had a whole year with no sun. You want to know what happens when you put a god in a box? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."*
-
-  This is the outside confirmation of the Return.
+### Day 4: Quarterfinal ("the honest view")
+The story job is an honest view of the PC's choice from someone who isn't trying to use them, delivered in a hard fight at cap 92. Conditional candidates swap seeds with the fallback (NS §3.5).
+- **Fallback (pending the revised §6):** an established character who carries the **outside confirmation of the Return**. Suggested: **Professor Larch**, who has the history for it (she designed the Lattice that drained the Zap Plate in Meridian's vault):
+  > *"I built the box. Eleven cities' worth of box. You want to know what happens when you keep a god in one? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."*
 - **Celestine** (Resonance ≤ −3): "You're getting louder in the wrong key. I'd like to hear it up close."
 - **Kaito** (the oath was Keep): "You'd keep them? Marrowgate's still knocking."
 - **Ysolde** (Kestrel has fallen): "If I can't reach him, I'll find out what reached you."
-- **Mireille** (five or more close Bonds and Harmony-leaning): "Everyone keeps telling you what you're *for*. Have you decided yet?"
+- **A close friend** (five or more close Bonds and Harmony-leaning; pending): "Everyone keeps telling you what you're *for*. Have you decided yet?"
 - *(Ruin Route: Archseer Dask. See 12_RUIN_ROUTE.)*
 
 **Other QF** (default): **Kestrel** advances. **Valen** advances. **Sigrun** advances.

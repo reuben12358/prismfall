@@ -348,7 +348,7 @@ Land,25
     8,RELLOR,14,17
     10,NYMBLE,14,17
 #-------------------------------
-[140] # Saltmere
+[140] # Saltmere - Promenade & Market
 Water
     40,TENTACOOL,28,34
     30,WINGULL,28,33
@@ -774,7 +774,7 @@ Land,25
     7,NINCADA,30,34
     5,DWEBBLE,30,34
 #-------------------------------
-[200] # Duneholt
+[200] # Duneholt - Terrace Bazaar
 Water
     40,BARBOACH,30,36
     30,WOOPER,30,36
@@ -1301,7 +1301,7 @@ Land,25
     4,BRAMBLEGHAST,47,50
     4,SAWSBUCK,47,50
 #-------------------------------
-[300] # Rimeholt
+[300] # Rimeholt - Thane's Harbour
 Water
     5,LAPRAS,45,50
     25,SEEL,45,50

@@ -35,7 +35,6 @@
 | 26 | **Pecharunt is the source of Sweetrot** | Ch7: Sweetrot thralls' blank bliss | Ch10: the Loyal Three's eyes "the same blissful blank" | Ch18 Lightless Deep |
 | 27 | **Marrowgate and the Quiet Towns** | Act I: maps with blank spaces (Town Map has an unlabeled region in Ossaria's borderlands) | Ch9: Kaito's "A fist is a promise…". 01 lore | Ch13 Kaito's testimony (if encouraged). Payoff: Homecoming, Kaito opens the gate |
 | 28 | **Velmorans wilt abroad; the PC's mother wilted** | ★ P: Ines's letter ("I wanted one of us to have an ordinary life") | Ch1: Larch, "the bravest coward". Ch12: Morwen's letter, "keep wilting, love" | Ch15 echo, then Ch20 with Valen |
-| 29 | **Isaura caught a god (the Sunless Year)** | Ch20 Day 0: her black-glass pendant, and "Lovely region" | Envoy delegation gossip about Solvane's dark year | Ch20 QF speech |
 | 30 | **Shiv dreamed the PC** (cameo) | Ch18 sidequest "Dreamwalker" | — | Ruin Route hooks |
 
 ## Act I → Act V seed checklist (★ items)

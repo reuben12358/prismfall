@@ -36,7 +36,7 @@ Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, aft
 | Kingdom | Legendary | Where / when | Lv |
 |---|---|---|---|
 | Elowen | **Okidogi, Munkidori, Fezandipiti** (Act III, Royal Chase / Bride Grove) → **Ogerpon** (Act V, Gloamwood) | the "Masked Ogre and the Three Loyal" folktale (Briarwick old woman foreshadows) | 46 / 78 |
-| Isenmar | **Kyogre** (Ebbmouth Sea Grotto depths, after Rimeholt's lake thaw; Dive revisit) | Act IV revisit | 66 |
+| Isenmar | **Kyogre** (Whalebone Keep Ice Vault 308, under Lake Rime, after the thaw) | Act IV revisit | 66 |
 | Zenith | **Zekrom** (Stormwatch Spire roof, storm event) | Act III | 58 |
 | Nadir | **Pecharunt** (Lightless Deep B1F; its poison chains mirror the Gilded Chain) | Act V | 78 |
 | Ashkaar | **Reshiram** (Wyrmscar Depths; truth to Zekrom's ideals) | Act V | 84 |

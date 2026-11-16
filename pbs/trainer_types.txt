@@ -440,3 +440,76 @@ BaseMoney = 0
 SkillLevel = 100
 BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
+#-------------------------------
+[ARCHSEER_DASK]
+Name = Archseer
+Gender = Male
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+# --- War arc (SPINE Rev 6): generic soldiers/officers. Name "Soldier"/"Officer"; version = encounter number (<100). ---
+#-------------------------------
+[ASHKAAR_SOLDIER]
+Name = Ashkaar Soldier
+Gender = Mixed
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ASHKAAR_SOLDIER_M]
+Name = Ashkaar Soldier
+Gender = Male
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ASHKAAR_SOLDIER_F]
+Name = Ashkaar Soldier
+Gender = Female
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ASHKAAR_OFFICER]
+Name = Ashkaar Officer
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[ISENMAR_SOLDIER]
+Name = Isenmar Soldier
+Gender = Mixed
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ISENMAR_SOLDIER_M]
+Name = Isenmar Soldier
+Gender = Male
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ISENMAR_SOLDIER_F]
+Name = Isenmar Soldier
+Gender = Female
+BaseMoney = 48
+SkillLevel = 48
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[ISENMAR_OFFICER]
+Name = Isenmar Officer
+Gender = Mixed
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader

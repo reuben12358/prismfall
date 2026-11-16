@@ -44,7 +44,8 @@ The level cap (Core) means grinding past the cap is impossible, so Standard diff
 
 Rival max levels (Standard; Hard same top, others +1): K1 6 · J1 17 · K2 21 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
 K7 79. Festival aces (coordinator, SPINE Rev 3): R16 **90** · QF **92** · SF **94** · Final **96** · Hijack **100** · Arceus **100**;
-rest of each team 1–4 below. Exhibition cameos: aces 92–96. (Casual Festival teams keep 6 mons at −4 levels.)
+rest of each team 1–4 below. (Casual Festival teams keep 6 mons at −4 levels.) Sister-game cameos are optional sidequest fights
+(SPINE Rev 4) — see §6.
 
 ## 3. AI skill per trainer class (`trainer_types.txt`)
 
@@ -191,7 +192,17 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   | `MERIDIAN_KROLL,Sabine,21`, `MERIDIAN_MARCHETTI,Helene,21`, `MERIDIAN_QUENT,Percival,21`, `MERIDIAN_DIRECTORATE,Captain,21` | Ch21 tag foes, 3 mons each, ace 97 |
   | `LEADER_MAGNUS/NYX/CELESTINE/SIGRUN,…,1` | Ruin Gyms 15–18: Hard sets on Standard, new leads (Klinklang / Weavile / Tinkaton / Haxorus); Ruin Sigrun all Jolly/Timid |
   | `REFLECTION,???,0` | fallback only (3× Imposter Ditto, Lv 85) — Core mirrors `$player.party` |
-- **Cameos** from `design/CAMEOS.md` (`FESTIVAL_<NAME>`, versions 0/100/200; aces 92 for the QF headliner, 92–96 exhibition).
+- **More Festival teams (Rev 4 list):** `LEADER_CELESTINE/KAITO/YSOLDE,…,92` (QF: their gym teams with promoted sets, 88–92),
+  `ARCHSEER_DASK,Imre,92` (Ruin QF; inversion team — Bronzong, Sableye (Hard Mega), Espeon, Umbreon, Gothitelle, Malamar
+  "Behind" with Topsy-Turvy; suggested field `:INVERSE`), `LEADER_DORIAN,Dorian,90` + `LEADER_ROOK,Rook,90` (Pageant Bout
+  2-vs-1 double, **3 Pokémon each**), `LEADER_BASTIAN,Bastian,90`. **Held per Rev 5 (not built):** FESTIVAL_ISAURA, DREY,
+  MIREILLE, THORNE — waiting for the re-filled bracket.
+- **Sister-game cameos = optional sidequests** (`Prismfall.cameo_battle`, design/CAMEOS.md): **v1** at the placement level,
+  **v2** post-game at 100, each +100/+200. Shelly v1 17 (double; Lv-17 roster: Masquerain, Joltik, Larvesta, Scyther, Hard
+  +Araquanid) · Venam 38 · Garret 46 (Mega Lucario on Standard too) · Melia 50 · Alexandra 56 · Amaria + Titania 78 (tag
+  double, 4 each; full 6 at v2) · Shiv 84 (Core ×2 HP on Ambipom) · Lin v1 only, superboss with all six at 100 · Nova v1
+  only, 90. Cameo visitors may run ahead of the level-up curve (the validator doesn't warn for `FESTIVAL_*`).
+  Festival cameo versions 0/1/2/3/9 are gone.
 
 ## 7. True finale — Arceus boss spec (for Core / Field Effects / EBDX Bridge)
 
@@ -281,17 +292,10 @@ in the validator, so they need no row.
 |---|---|---|---|
 | FESTIVAL_LIN,Lin,* | TOGEKISS | OBLIVIONWING | Lin's Reborn signature: a Togekiss with an illegal move (CAMEOS.md). Casual swaps it for Air Slash. |
 
-## Status of Festival choice-variant teams and cameos
+## Status
 
-- **Cameos: done** for all 10 in CAMEOS.md (Lin, Amaria, Shelly, Alexandra, Venam, Shiv, Garret, Melia, Titania, Nova).
-  Versions per cameo: `0` exhibition (ace 92–96: Lin 96, Nova 96, Alexandra 95, Shiv/Garret/Titania 94, Amaria/Shelly/
-  Venam 93, Melia 92), `1` R16 (90), `2` QF (92), `3` SF/Final-tier (94), `9` post-game (100); each +100/+200.
-  Core's placeholder `FESTIVAL_CAMEO_1..7` must be repointed to these IDs/names.
-  Special cases: Lin's Togekiss knows Oblivion Wing (allowlisted); Garret's Mega Lucario is canon so his Standard team
-  also carries `MEGARING`; Amaria's "Deliverance" is shortened to **"Deliverer"** (10-char nickname limit); Venam's
-  "Venam's Kiss" is stood in by Poison Jab (swap in a custom move if the move team adds one); Shiv's Ambipom "Aipom"
-  needs its "absurd HP" from a Core hook (suggest ×2 max HP for `FESTIVAL_SHIV` party slot 6, like EBDX `:bossboost`) —
-  PBS can only give it 252 HP EVs; Shelly's exhibition should be started as a double battle (her set is doubles-ready).
-- **Choice-driven variants: done** — every entry of NARRATIVE_KEYS §7 (15 new Festival teams + Juno partner, Ch21 tag foes,
-  Ruin Gyms 15–18, Reflection) is built and validated; see §6. Not trainer data (specified in §7 for Prismfall Bosses):
-  the four new Arceus configs and `GIRATINA_ORIGIN_TRIAL`.
+- Wardens, rivals (K1–K9, J1–J4, J7), villains/admins (Thistle, Teo, Ch21 foes), Valen/Voss/Quent/Theodric/Morwen,
+  every built Festival entry in NARRATIVE_KEYS §7 except the four held entrants, the Ruin teams, the cameo sidequests and
+  every route/gym trainer the built maps reference: **done, 0 validator errors** (`--maps maps_out/Data`: all resolve).
+- Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
+- Pending: FESTIVAL_ISAURA / DREY / MIREILLE / THORNE (held, SPINE Rev 5); new maps' trainers as they are generated.

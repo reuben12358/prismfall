@@ -222,7 +222,7 @@ Format: look/age · personality · voice · motivation · secret · plot role ·
 - **Motivation:** Atone.
 - **Secret:** In AF 285 he led the Wardguard detachment that **sealed Marrowgate**, a Bleed-struck town, with Fixing survivors still inside, on Valen's order. His Lucario could feel them.
 - **Plot role:** Gym 8, and his Colosseum hosts the Conclave attack.
-- **Arc:** In Act III he testifies publicly about Marrowgate if the PC encourages him (`KAITO_TESTIFIED`), which shatters the Accord's credibility and makes him the Wardens' conscience. In Act V he is a Festival entrant (default R16 vs Marisol) and fights with the PC in the hijack.
+- **Arc:** In Act III he testifies publicly about Marrowgate if the PC encourages him (`KAITO_TESTIFIED`), which shatters the Accord's credibility and makes him the Wardens' conscience. In Act V he is a Festival entrant (opponents per the Festival draw, NARRATIVE_KEYS §6) and fights with the PC in the hijack.
 - **Ace:** **Lucario** ("It remembers for me."); also **Conkeldurr**, **Hawlucha**, **Machamp**.
 
 ### 9. Juno Hale — Grass — Verdance — `LEADER_JUNO` / `RIVAL_JUNO` — `:FLOWER_GARDEN`
@@ -295,7 +295,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Motivation:** Survive, profit, and keep a promise her family made 300 years ago that she has privately decided is stupid.
 - **Secret:** Her house descends from Princess Maren's guard. They are the **Keepers of the Drowned Truth** and have always known the real Prismfall. She **sold Voss the location of the Gilded Chain's remains** two years ago.
 - **Plot role:** Gym 16. Underveil is Nadir's heart, built in the upper towers of drowned Aurelia beneath Zenith. Zenith claims sovereignty, but Nadir has no recognized government, so Nyx is its de facto queen and the Sump Barons pay her tithes. She guides the PC into drowned Aurelia.
-- **Arc:** Offers the PC a bargain: their secret for the Engine schematics (`NYX_BARGAIN_TAKEN`). After the Sump Purge she declares Nadir independent of Zenith (Ch17). In Act V she cuts Meridian's comms during the hijack. She is a Festival entrant (default R16 vs Isaura Vell, who beats her).
+- **Arc:** Offers the PC a bargain: their secret for the Engine schematics (`NYX_BARGAIN_TAKEN`). After the Sump Purge she declares Nadir independent of Zenith (Ch17). In Act V she cuts Meridian's comms during the hijack. She is a Festival entrant (opponents per the Festival draw).
 - **Ace:** **Zoroark** (illusion); also **Honchkrow**, **Grimmsnarl**, **Weavile**.
 
 ### 17. Celestine Aubade — Fairy — Gloaming — `LEADER_CELESTINE` — `:FAIRY_TALE`
@@ -306,7 +306,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Secret:** She keeps the **Hymn of Return**, the Accord's original liturgy, suppressed since AF 140. It says the Plates must go home when "one of no color walks the eighteen roads".
 - **Plot role:** Gym 17 and K7. Gives the PC the Hymn.
 - **Legendary tie:** Gloaming's Great Tree holds the Pixie Plate in its roots. The Ogre's masks in Elowen's folklore (Ogerpon) were carved from its fallen bark. Celestine is the one person who has always told the true version of the Ogre story, in rhyme, to anyone who'd listen.
-- **Arc:** At the Festival she is an entrant (default R16 vs Mireille Vance, who adores her). She voices Princess Maren in Dorian's Night of Masques. In the finale she sings the Hymn as the chains break. In Homecoming, her dusk ends with her Imprint. She sees her first full night sky in sixty years and ages gracefully in the epilogue.
+- **Arc:** At the Festival she is an entrant (opponents per the Festival draw). She voices Princess Maren in Dorian's Night of Masques. In the finale she sings the Hymn as the chains break. In Homecoming, her dusk ends with her Imprint. She sees her first full night sky in sixty years and ages gracefully in the epilogue.
 - **Ace:** **Sylveon** (ribbons that read intent: a creature of bonds for a woman bound by oaths); also **Mimikyu**, **Togekiss**, **Alcremie**.
 
 ### 18. Sigrun Ashfall — Dragon — Wyrmrest — `LEADER_SIGRUN` — `:DRAGONS_DEN`
@@ -316,7 +316,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Motivation:** Honor, and atonement for her relief.
 - **Secret:** She knows Valen's plan for the PC, and she let it happen because it meant the Crown wouldn't be hers.
 - **Plot role:** Gym 18 makes the PC prove they choose the Festival with full knowledge. She refuses to give the badge until the PC says aloud what they intend.
-- **Arc:** In Ch19 she defies her father, whose legions are poised to march on Zenith, by keeping Wyrmrest's pass open to the PC. Reshiram wakes for the PC's spoken truth during her trial. At the Festival she beats **Ser Ivo Thorne**, the Queen's Champion, in front of every king in the stands. She loses the semifinal to Valen after entering to win the Crown herself and spare the PC. In the hijack, her dragons hold the sky over Crownhaven against Meridian's airships, and if `DOMINAR_SWAYED`, her father's legions fly with her.
+- **Arc:** In Ch19 she defies her father, whose legions are poised to march on Zenith, by keeping Wyrmrest's pass open to the PC. Reshiram wakes for the PC's spoken truth during her trial. At the Festival she fights her way to the semifinal (opponents per the draw). She loses the semifinal to Valen after entering to win the Crown herself and spare the PC. In the hijack, her dragons hold the sky over Crownhaven against Meridian's airships, and if `DOMINAR_SWAYED`, her father's legions fly with her.
 - **Ace:** **Salamence** (it dreamed of wings until it grew them); also **Haxorus**, **Flygon**, **Kommo-o**.
 
 ---
@@ -340,7 +340,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 ## KINGDOM RULERS & POLITICAL FIGURES
 
 The Wardens answer to the Accord, but their cities sit inside kingdoms whose rulers resent that. Each ruler wants something from the Plates in their land.
-- **Queen Maelis Thorne of Elowen** (82): an ancient, fairy-tale-cunning monarch who holds court in Verdance's Briar Hall. Her doctrine is "the Plates are the Crown's by right of soil." She claims the Meadow Plate when Rowan falls (Ch10) and later signs a "Forest Compact" with Meridian. Her heir **Prince Caedmon** (34) is a smiling modernizer and quietly Meridian's man. Maelis outlives her usefulness to him in Act V.
+- **Queen Maelis Thorne of Elowen** (82): an ancient, fairy-tale-cunning monarch who holds court in Briar Keep, the castle crowning Verdance. Her doctrine is "the Plates are the Crown's by right of soil." She claims the Meadow Plate when Rowan falls (Ch10) and later signs a "Forest Compact" with Meridian. Her heir **Prince Caedmon** (34) is a smiling modernizer and quietly Meridian's man. Maelis outlives her usefulness to him in Act V.
 - **Archseer Imre Dask and the Veiled Synod of Antumbra**: Antumbra's rulers are a theocratic council of seers (Lucent) and lantern-priests (Gravenmoor) who mediate with Giratina. Dask (60s, two different-colored eyes, speaks in mirrored sentences) fears the Bleed is thinning the Glass. He refuses to open the Veil Gate for this Festival ("I won't open a door in a wall that's falling down"). On the Ruin Route, Dask is the Synod's champion who claims the Renegade in the QF: "Behind, welcome. Welcome, behind." (Team: Psychic/Ghost on `:INVERSE`.)
 - **Thane Eirik Sorrel of Isenmar** (52): Anja's older brother. Practical and proud, he is drowning in debt to Meridian for heat. He declares martial law after the Thaw (Ch11) and sends Isenmar's refugees south into Elowen, which causes a border crisis.
 - **Dominar Hrothgar Ashfall of Ashkaar** (64): Dragon-Lord and Sigrun's father. A warlord-king who believes "dragons bow to no Accord." He threatens war on Zenith after the Cindervault caldera crisis (Ch8) and masses legions at Wyrmrest in Act V. He can be swayed (`DOMINAR_SWAYED`) to fly for Crownhaven instead of against Zenith.
@@ -351,45 +351,9 @@ The Wardens answer to the Accord, but their cities sit inside kingdoms whose rul
 - **Chancellor Ambrose Hollis**: see above. He is the hinge between the kingdoms' grievances and Meridian's money.
 - **Vesper Lindqvist** (24): leader of **the Eevee Octave**, eight Glassfall orphans raised by the Prism Choir, each beside a different Imprint. She runs the Festival-week Eeveelution gauntlet. Gentle and devout, and a little in love with the idea of the Festival.
 
-## FESTIVAL OUTSIDERS (original foreign entrants, Revision 4)
-
-Three came with Envoy Okoro's sealed Concert delegation, and one was entered by a king. Draw rules are in 10_CHOICES_ENDINGS §3.1–3.2, and teams in NARRATIVE_KEYS §7.
-
-### Isaura Vell — Champion of Solvane — `FESTIVAL_ISAURA` ★ the default Quarterfinal (headline)
-- **38.** Sun-browned, with grey streaks she doesn't hide and a sailor's squint. She wears a pendant of black glass. Solvane is an island realm of the Concert, far to the south-east.
-- **History:** Twelve years ago **Necrozma** began eating Solvane's light. She caught it, and her islands had **the Sunless Year**: crops failed, children grew pale, and the sea went dark at noon. Then she let it go. She is the only person in Crownhaven who has *already done* what Voss wants to do.
-- **Personality:** Blunt and tired, with no patience for ceremony. Kind in actions and never in words. She came to the Festival because the invitation's description of the Bleed sounded like her Sunless Year.
-- **Voice:**
-  - *(Day 0)* "Your god's in pieces and your champion's made of glass. Lovely region."
-  - *(QF)* "You're carrying it, aren't you. I can hear it. It's so *loud* in you."
-  - *(after the QF)* "You want to know what happens when you put a god in a box? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."
-- **Role:** She is the outside confirmation of the Return, and the voice of experience Voss refuses to hear. They have one cold exchange at the Night of Masques. Voss: "You lacked the engineering." Isaura: "I lacked the *arrogance*. You've got enough for both of us."
-- **Ace concept:** **Volcarona "Dawn"** (the sun she brought back). Team: sun-and-light themes, the hardest non-boss trainer in the game.
-
-### Matthias Drey — Champion of the Karst Republic — `FESTIVAL_DREY`
-- **51.** Square and grey-bearded, in a Concert officer's greatcoat. He is Envoy Okoro's security chief and the Concert's hardliner on **Severance**.
-- **Personality:** Dry, suspicious and fair. He believes in walls because he has seen what comes through open doors.
-- **Voice:** "Quarantine isn't cruelty. It's arithmetic." / *(after losing to Kestrel's Gauntlet)* "Your rival is fighting with something that isn't him."
-- **Role:** Kestrel beats him in the R16 with the Gauntlet. His complaint is the Envoy's first real doubt about Meridian.
-- **Ace concept:** **Copperajah** (a Steel/Ground fortress team).
-
-### Mireille Vance — Champion of Lys — `FESTIVAL_MIREILLE`
-- **17.** The Concert's youngest champion: ribbons, a sketchbook, and an autograph book she has already filled with Velmoran Wardens.
-- **Personality:** Kind, starstruck (especially by Celestine) and sharper than she lets on. Her questions are the uncomfortable kind children ask.
-- **Voice:** "Everyone keeps telling you what you're *for*. Have you decided yet?"
-- **Role:** Loses to Celestine in R16 by default. She is the QF candidate for a PC with many close Bonds.
-- **Ace concept:** **Florges** (Fairy/Normal team).
-
-### Ser Ivo Thorne — the Queen's Champion — `FESTIVAL_THORNE`
-- **44.** Lord-Commander of Elowen's **Thornguard**, in briar-green plate, and a distant cousin of House Thorne. Queen Maelis entered him to win the Sovereign Seat for a crown.
-- **Personality:** Courteous, rigid and loyal to the Crown rather than to Caedmon. He knows he's a political piece and plays the part with dignity.
-- **Voice:** "I'm here to win a chair for a woman who has buried four Sovereigns. Don't take it personally."
-- **Role:** Sigrun beats him in R16 in front of every king in the stands, ending the crown's bid. If the PC holds Maelis's **Royal Writ**, he salutes them afterward.
-- **Ace concept:** **Ferrothorn** (a Grass/Steel team).
-
 ## SISTER-GAME CAMEOS (optional sidequests, Revision 4)
 
-Lin, Amaria, Shelly, Alexandra, Venam, Shiv, Garret, Melia and Titania (and Nova, on the Ruin Route only) appear in small optional sidequests across the kingdoms, as Rejuvenation handles Reborn's Aya and Adrienn. **None appear in the Festival or the finale.** Antumbra's Glass is leaking, and that is the in-universe reason they're here. The full roster is in **`design/CAMEOS.md`**.
+Lin, Amaria, Shelly, Alexandra, Venam, Shiv, Garret, Melia and Titania (and Nova, on the Ruin Route only) appear in small optional sidequests across the kingdoms, as Rejuvenation handles Reborn's Aya and Adrienn. **None appear in the Festival or the finale. **Revision 5:** every Festival opponent is a character the player has met at least twice by Act IV.** Antumbra's Glass is leaking, and that is the in-universe reason they're here. The full roster is in **`design/CAMEOS.md`**.
 
 ## HISTORICAL FIGURES
 

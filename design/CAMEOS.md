@@ -1,153 +1,156 @@
-# CAMEOS — Visiting Champions of the Festival (Story lead)
+# CAMEOS — Sister-Game Sidequests (Story lead; SPINE Revision 4)
 
-> Replaces the canon-champion roster (SPINE Rev. 2 §3 / Rev. 3 §3). Owner: Story lead. Trainer teams: trainer/balance agent.
-> All cameos come from the sister fangames **Pokémon Reborn**, **Pokémon Rejuvenation** and **Pokémon Desolation**.
-> Facts marked ✔ were checked against web sources (listed at the bottom). Anything not marked is our own Festival-flavor invention, written in the spirit of the source.
-> The **headline cameo** (default Quarterfinal opponent, replacing Cynthia) is **Lin**.
+> The Reborn / Rejuvenation / Desolation cameos are **optional sidequests**, the way Rejuvenation features Reborn's Aya and Adrienn: a small quest somewhere in the world, usually ending in **one tough optional fight**. They are **never** in the Festival, never required, never in the finale. The Festival uses original entrants (03_CAST "Festival Outsiders"; 10_CHOICES_ENDINGS §3). The old Festival default draw in earlier drafts of this file is **obsolete**.
+> Trainer type IDs keep the SPINE cameo convention `FESTIVAL_<NAME>`. Versions: **`1`** = the sidequest fight, **`2`** = post-game rematch at level 100 (unless noted). SPINE difficulty offsets (+100 Hard, +200 Casual) apply.
+> Facts marked ✔ were checked against web sources (bottom). The rest is our own invention, in the spirit of the source game. Rulings: **Lin's Togekiss keeps Oblivion Wing**; **Amaria's Lapras is "Deliverer"**.
 
----
+## Why they're in Velmora (in-universe)
+Antumbra, the Kingdom Behind the Glass, is the reverse side of the world. Its Glass faces outward too, onto other worlds that already brush against each other:
+- ✔ Desolation's Shiv appears in Reborn's post-game.
+- ✔ Reborn's Adrienn and Aya help rebuild Aevium.
 
-## Why champions of other worlds are in Velmora (in-universe)
+The Festival once invited champions through Antumbra's **Veil Gate**, but the Synod sealed it in AF 230. Since the Bleed accelerated (AF 289) and above all since the Fault (end of Act III), the Glass has been **leaking**. Travelers from Reborn, Aevium and Ayrith slip through mirrors, puddles, sewer-grates and dreams, and wake up somewhere in Velmora. Each one needs a way home, and the PC, who can walk through Bleed Veils, is the one who can find the right mirror. **Rule of the Glass:** a traveler can bring only what is theirs. Anything bound to their home world's gods stays behind.
 
-The Festival of Champions has always been a **festival of other worlds**. When the Prismfall tore Velmora, it opened a seam behind the forests of Elowen: **Antumbra, the Kingdom Behind the Glass**, Giratina's domain. The Glass is a mirror that faces *outward* as well as inward. Since AF 140, the Accord has sent its invitations through Antumbra's **Veil Gate**, and they reach the champions of worlds that already brush against each other: **Reborn**, **Aevium** and **Ayrith**.
+## Placement overview (one or two per act before post-game)
 
-These worlds already leak into one another, so the cameos aren't surprised:
-- ✔ Desolation's Champion **Shiv** turns up in Reborn's post-game.
-- ✔ Reborn's Adrienn and Aya help rebuild Gearen City in Aevium.
-- ✔ Aevium's Flora appears in Reborn.
-
-To them, Velmora is just a new door. That is also why the quarantine doesn't stop them: they don't cross the Hallow Strait, they step through the Glass. The Veiled Synod opens the Gate for Festival week only. Giratina allows it, and Ch20 shows its eye in the Gate as each champion passes.
-
-**Rules of the Glass (story constraint, useful for balance):** a traveler can bring only what is *theirs*. Anything bound to their home world's gods stays behind. That is why Lin arrives **without her Arceus**, and it is the single most important thing she says all week.
-
----
-
-## Roster (7 + 2 extra candidates + 1 Ruin-only)
-
-Trainer type IDs follow `FESTIVAL_<NAME>`. **Suggested version scheme** (trainer agent decides; SPINE difficulty offsets +100/+200 still apply):
-- `1` = Round of 16 / exhibition (lv ~90)
-- `2` = Quarterfinal (lv ~92)
-- `3` = Semifinal or substitute Final-tier draw (lv ~94)
-- `9` = post-game rematch (lv 100)
-
-The Festival bracket is choice-driven (Rev. 3). The "default draw" below is the fallback, and the draw rules belong to `story/10_CHOICES_ENDINGS.md`.
-
-### 1. Lin — "the Meteor Champion" (Reborn) — `FESTIVAL_LIN` — ★ HEADLINE / default QF
-- ✔ **Source:** Lin (Lindsey Paraeah) is Reborn's hidden Big Bad. She usurped Team Meteor and is fought as Reborn's **Champion**. ✔ Her signature is a **Togekiss carrying an illegal move (Oblivion Wing)**, and ✔ she **caught Arceus**. ✔ TV Tropes describes her as cynical, blunt, mean-spirited and Jekyll-and-Hyde. ✔ Fans know her late-game speech for being written entirely in lowercase.
-- **Why she's here:** Voss's people slipped a second letter into her invitation: *"a god in eighteen pieces, waiting to be collected."* He wanted her expertise. She came to see whether someone was about to make her mistake.
-- **Why she's the headline:** She is the one person in Velmora who has *already done* what Voss is trying to do. She is a living warning, a dark mirror for both Voss and the PC, and the source of the key outside confirmation for the Return ending (this replaces Cynthia's old lore role).
-- **Voice:** Lowercase whenever she's being honest. It's an homage, so the dialogue box should literally render it that way.
-  - *(arrival, Ch20)* "your god's in pieces and your champion's made of glass. cute region."
-  - *(QF, mid-battle)* "you're carrying it, aren't you. i can hear it. it's so *loud* in you."
-  - *(after the QF)* "you want to know what happens when you put a god in a box? it's quiet. for a while. then it isn't. it doesn't want to be held. nothing that big wants to be held. give it back before someone teaches it to hate you."
-- **Team spirit:** Reborn endgame. Brutal, coverage-heavy, field-aware.
-  - **Ace: Togekiss** (with the Oblivion Wing homage; needs a custom move learn in PBS).
-  - The rest should be her "Meteor" heavy hitters, chosen by balance (no Arceus, per the Rules of the Glass). Example concept: Hydreigon, Garchomp, Gardevoir, Ferrothorn, Volcarona.
-  - She should feel like the hardest non-story-boss trainer in the game.
-
-### 2. Amaria — "Flotsam Amaria" (Reborn) — `FESTIVAL_AMARIA`
-- ✔ **Source:** A late-game Reborn **Water** Gym Leader, famous for her nicknamed team: ✔ **Lapras "Deliverance"** (ace), Starmie "Twinkle", Ludicolo "Indiana", Kingdra "Atlantica". ✔ She rescues the player from a Garchomp, and ✔ her gym is an underwater maze. Her chapter is linked to Titania's (Reborn badges 15–16). She carries a heavy, melancholy history.
-- **Why she's here:** Drowned places call to her. She came for the rumor of a city under a city, Aurelia.
-- **Velmora hooks:**
-  - Bonds with Marisol over working-class water folk.
-  - Sits for a long time at the Crownhaven lake.
-  - Dorian talks her into voicing **Princess Maren's lament** in the Night of Masques.
-- **Voice:** quiet, wry and tired: "Everything sinks eventually. The trick is learning to breathe down there."
-- **Team spirit:** Water mono with nicknames intact. **Ace: Lapras "Deliverance."**
-- **Default draw:** R16 vs Sigrun (loses). Exhibition available from Day 3.
-
-### 3. Shelly — Champion of Reborn (post-game) (Reborn) — `FESTIVAL_SHELLY`
-- ✔ **Source:** Reborn's pink-haired **Bug** Gym Leader, who loves throwing bugs at you in **double battles**. ✔ In Reborn's post-game she has become **Champion** with half her team still partly Bug-type. She insists she is *not* the region's Professor "until her credentials arrive next year."
-- **Why she's here:** As a reigning Champion she was formally invited, and she was too polite to say no. She is terrified of crowds.
-- **Velmora hooks:** She mentors Tamsin Loom (two shy Bug specialists). In the hijack, she helps Tamsin's silk nets catch falling debris.
-- **Voice:** "Oh — um — you don't have to bow, I'm only Champion until somebody better comes along. Which might be you? Sorry."
-- **Team spirit:** A Bug core with champion-grade partners. **Her exhibition should be a DOUBLE battle.** Ace concept: Volcarona or Scizor (balance to confirm against her source team).
-- **Default draw:** R16 vs Venam (loses). Exhibition from Day 3.
-
-### 4. Alexandra — Acting Champion of Aevium (Rejuvenation) — `FESTIVAL_ALEXANDRA`
-- ✔ **Source:** Elite 8 member and **Acting Champion** of Aevium (League ID No. 2), formerly travelling under the aliases April and Krystal. ✔ Her known Pokémon lean Dragon/Psychic: Latias, Dragonite, Altaria, Starmie, Lapras, Sigilyph, Garchomp. ✔ Her mother **Celine**, Aevium's Champion, is **encased in crystal**, in stasis recovering from injuries inflicted by Madame X.
-- **Why she's here:** She stands in for her crystal-sealed mother. When she hears Velmora's Bleed turns people to glass, it stops being a tournament for her.
-- **Velmora hooks:**
-  - She visits Corvin's Quiet Ward and the Lowlight's glass victims.
-  - She bonds with Sigrun (Dragon) and with Juno (a fellow inheritor of a seat).
-  - Her question, "Can they hear us?", sets up Venam's answer.
-- **Voice:** thoughtful and controlled: "My mother has been asleep in crystal for a long time. I'd like to know if yours wake up."
-- **Team spirit:** Dragon/Psychic champion team. **Ace: Latias.**
-- **Default draw:** R16 vs Celestine (wins), QF vs Valen (loses). Exhibition from Day 5.
-
-### 5. Venam — Poison Gym Leader of East Gearen (Rejuvenation) — `FESTIVAL_VENAM`
-- ✔ **Source:** Veronica "Venam" Vasile, 17, a Punk Girl and Aevium's **Poison** Gym Leader (Poison Heart Badge). ✔ She leads East Gearen's teen trainers out of the **Abandoned Sewers**. ✔ Her **ace is Seviper**, and ✔ her signature move is **Venam's Kiss**, a Poison move super-effective against Steel. ✔ Loud, spunky and welcoming. ✔ She was **petrified** and restored by the Spring of Rejuvenation, and came back less sure of herself.
-- **Why she's here:** Her invitation came addressed to "the Gym Leader of the sewers". It was meant for someone else, and she came anyway. Nadir feels like home within five minutes.
-- **Velmora hooks (important):** Venam is the **only person in Velmora who has been turned to stone and come back.** She tells Juno and Rowan: *"I could hear everything. Everyone who sat with me. Talk to your aunt. She's listening."* This is the outside confirmation that the Fixed still dream, which sets up Xerneas's role in the Good ending.
-- **Voice:** "Your City Below's got better graffiti than mine and worse air. Respect."
-- **Team spirit:** Punk Poison. **Ace: Seviper** (custom "Venam's Kiss" if the move team wants it, otherwise a high-power Poison move).
-- **Default draw:** R16 vs Shelly (wins), QF vs Sigrun (loses). Exhibition from Day 5.
-
-### 6. Shiv — Champion of Ayrith (Desolation) — `FESTIVAL_SHIV`
-- ✔ **Source:** The **Champion of Ayrith**. Mysterious, initially shady, ✔ later revealed to be working under Darkrai. ✔ His signature is an **Aipom (→ Ambipom) with far more HP than any Aipom should have**. ✔ He is a trickster. ✔ He has already crossed worlds, as "Dreamer Shiv" in Reborn's post-game Darkrai quest. ✔ He has a twin, Aurora.
-- **Why he's here:** He *delivered* the invitations. Dreams leak through the Glass, and Shiv walks dreams. He knows the PC from a dream he had before they ever stepped off the ferry, and it's the creepiest line of Festival week.
-- **Voice:** grinning and evasive: "Met you already. You were standing on a ferry, glowing like a lighthouse. No? Must've been a different night."
-- **Team spirit:** Trickster tech (Fake Out, Trick, Taunt, weird abilities). **Ace: Ambipom** with an absurd HP stat (custom EVs/IVs, or a balance-approved stat override).
-- **Default draw:** R16 vs Kestrel, losing to Kestrel's Resonance Gauntlet. Afterward: *"Your rival's dreaming somebody else's dream."* Exhibition from Day 3.
-
-### 7. Garret — Fighting Gym Leader of Cellia South (Desolation) — `FESTIVAL_GARRET`
-- ✔ **Source:** Ayrith's **Fighting** Gym Leader. Gruff, blunt and loyal, and ✔ searching for his kidnapped sister **Eden**. ✔ Signature: **Mega Lucario**.
-- **Why he's here:** A big brother looking for a lost sister will go through any door.
-- **Velmora hooks:**
-  - Mirror match with **Kaito Ren**, Lucario against Lucario: two men who carry what their Lucario remembers.
-  - He is the one who notices in the QF that Kestrel's Pokémon "are being driven by something that isn't him."
-  - Optional post-game rumor: a girl matching Eden's description seen near the Quiet Towns. This stays a dead end; we never resolve another game's plot.
-- **Voice:** "Talk less. Fight more. Then we'll talk."
-- **Team spirit:** Fighting with Mega Lucario (if Megas are enabled; otherwise Lucario with an item build).
-- **Default draw:** R16 vs Kaito (wins), QF vs Kestrel (loses). Exhibition from Day 5.
+| # | Cameo (source) | Act / Ch | Kingdom, area | Unlock | Fight (lv) | ID / version |
+|---|---|---|---|---|---|---|
+| 1 | Shelly (Reborn) | I / Ch2 | Elowen, Gossamer Deepwood | after Gym 1 | double, ~17 | `FESTIVAL_SHELLY` 1 (2 = PG) |
+| 2 | Venam (Rejuvenation) | II / Ch7 | Nadir, Miasma Caverns under Mirefen | after Gym 6 and J2 | ~38 | `FESTIVAL_VENAM` 1 (2) |
+| 3 | Garret (Desolation) | II / Ch9 | Nadir, Ironreach's lower shafts | after the Conclave (Gym 8) | ~46 | `FESTIVAL_GARRET` 1 (2) |
+| 4 | Melia (Rejuvenation) | III / Ch10 | Elowen, the Royal Chase | after J3 (Gym 9) | ~50 | `FESTIVAL_MELIA` 1 (2) |
+| 5 | Alexandra (Rejuvenation) | III / Ch11 | Isenmar, Rimeholt's sunken lower town | after the Thaw and Gym 10 | ~56 | `FESTIVAL_ALEXANDRA` 1 (2) |
+| 6 | Amaria + Titania (Reborn) | IV / Ch17 | Nadir, drowned Aurelia's lower galleries | after Gym 16, Dive | double, ~78 | `FESTIVAL_AMARIA` 1, `FESTIVAL_TITANIA` 1 (2) |
+| 7 | Shiv (Desolation) | V / Ch18 | Elowen, Gloaming's dusk-chapels | after Gym 17 | ~84 | `FESTIVAL_SHIV` 1 (2) |
+| 8 | Lin (Reborn) | Post-game | Ferrow's Landing lighthouse, then the Antumbra Distortion Core antechamber | any ending with a post-game | **superboss, 100** | `FESTIVAL_LIN` 1 |
+| 9 | Nova (Desolation) | Ruin Route only | Mirrorwalk dream-road (R5) | Ruin Route | ~90 | `FESTIVAL_NOVA` 1 |
 
 ---
 
-### Extra candidates (for the choice-driven draw)
+## 1. "Lost in the Gossamer" — Shelly (Reborn)
+- **Source ✔:** Reborn's pink-haired **Bug** Gym Leader, who loves throwing bugs at you in **double battles**. ✔ In Reborn's post-game she becomes **Champion**, and insists she isn't the region's Professor "until her credentials arrive next year".
+- **Where/when:** Act I, Ch2, Gossamer Deepwood (`:SILKWOOD`), after Gym 1. It's the first cameo and teaches players that the Glass leaks.
+- **Premise:**
+  - Silk-moth weavers report "a girl who keeps apologizing to the Bugs" deep in the wood.
+  - Shelly fell through a dew-pond's reflection and has spent three days lost, because the Silkwood keeps re-weaving the paths.
+  - She's terrified of crowds, so Briarwick's busy looms scare her more than the wood does.
+  - The PC finds her, walks her through a small Bleed Veil to the dew-pond she came through, and helps her calm a Bleed-glassed Masquerain guarding it.
+  - Before she steps back through, she asks for "one practice battle, so I'm not rusty when I get home".
+- **Fight:** **double battle**, lv ~17, on `:SILKWOOD`. Bug core with a partner, so it's tough for its placement.
+- **Reward:** **Silver Powder** and a TM (Struggle Bug). Lore: "Your forest sounds like home used to, before the city got sick."
+- **Post-game (v2):** she comes back through the same pond, at lv 100 in doubles.
 
-#### 8. Melia (Rejuvenation) — `FESTIVAL_MELIA`
-- ✔ **Source:** The heart of Rejuvenation. Adoptive daughter of Professor Jenner and a reserve **Normal**-type Gym Leader. ✔ She owns **Hapi, a Togekiss** raised from her treasured Togepi, plus Zoroark, Mimikyu and Snorlax. ✔ She was presumed dead and later infiltrated Blacksteeple Castle under the alias "Emma". ✔ She grew from childlike innocence into someone more cautious and goal-focused. ✔ She is Venam's close friend and ex.
-- **Use:** A warm draw for a player with high Bonds who has been kind to the people around them. She comes with Venam.
-- **Voice:** "Everyone keeps telling you what you're *for*. Have you decided yet?"
-- **Ace:** Togekiss "Hapi". (Lin also uses Togekiss. If both appear in one run, that's a deliberate echo: two Togekiss, two very different women.)
+## 2. "Sewer Royalty" — Venam (Rejuvenation)
+- **Source ✔:** Veronica "Venam" Vasile, 17, a Punk Girl and Aevium's **Poison** Gym Leader (Poison Heart Badge).
+  - ✔ She leads East Gearen's teen trainers out of the **Abandoned Sewers**.
+  - ✔ **Ace: Seviper**, and ✔ her signature move is **Venam's Kiss** (a Poison move super-effective against Steel).
+  - ✔ She was **petrified** and restored by the Spring of Rejuvenation.
+- **Where/when:** Act II, Ch7, the **Miasma Caverns** runoff tunnels under Mirefen (`:CORROSIVE_MIRE`), after Gym 6 and J2.
+- **Premise:**
+  - Wenlow mentions "a loud girl with a snake" helping drag Sweetrot addicts to the Infirmary from the deep tunnels. She fell through a sewer-grate's reflection.
+  - Venam loves Nadir within five minutes ("better graffiti than mine, worse air") and hates the Sweet Market vendors on sight.
+  - The quest is a tunnel crawl with her as a temporary partner: a partner battle against Mother Gutter's vendors.
+  - At the Quiet Ward, she sits with the half-Fixed patients and goes quiet. Then she tells Corvin and the PC about being stone: *"I could hear everything. Everyone who sat with me."* Corvin asks if he can record it.
+- **Fight:** the farewell fight at the grate she came through, lv ~38, on `:CORROSIVE_MIRE`. Ace Seviper with a custom Venam's Kiss (if the move team adds it; otherwise a strong Poison move).
+- **Reward:** **Venam's Testimony** (Key Item, Corvin's recording).
+  - It can be played for Juno at the Bride Tree (Ch10) or in Ch20.
+  - It is one of the **three proofs** for Envoy Okoro (`:ch20_envoy`).
+  - Also **Black Sludge**.
+- **Post-game (v2):** lv 100.
 
-#### 9. Titania (Reborn) — `FESTIVAL_TITANIA`
-- ✔ **Source:** Reborn's **Steel** Gym Leader. Her battle is on the **Fairy Tale field** in a sky castle, and her chapter is paired with Amaria's. Her team concept is knightly: Aegislash, Mawile and heavy Steel.
-- **Use:** A draw tied to Celestine's Gloaming and the Fairy Tale field. She arrives with Amaria and is fiercely protective of her.
-- **Voice:** "I came to guard someone, not to play in your tournament. Fine. En garde."
-- **Ace concept:** Aegislash. If Kestrel is in the same bracket, there's a rival-mirror line, sword against sword.
+## 3. "Two Lucarios" — Garret (Desolation)
+- **Source ✔:** Ayrith's **Fighting** Gym Leader (Cellia South). Gruff, blunt and loyal, and ✔ searching for his kidnapped sister **Eden**. ✔ **Mega Lucario**.
+- **Where/when:** Act II, Ch9, Ironreach's lower shafts below the Iron Pit, after the Conclave.
+- **Premise:**
+  - During the Ironreach Open's undercard, a stranger with a Lucario asks every pit-fighter about a girl named Eden. He walked out of a puddle in the shafts during the Conclave's Bleed burst.
+  - Kaito recognizes something in him and lends him a cot.
+  - The PC helps him search the old Aurel shafts, where his Lucario senses people sleeping behind the walls. This is a tiny foreshadow of the Quiet Towns and Marrowgate.
+  - She isn't here. He wants to fight the PC "to see if this world's worth searching".
+- **Fight:** lv ~46 on `:COLOSSEUM`, with Mega Lucario (if Megas are enabled; otherwise Lucario with an item build). Kaito watches.
+- **Reward:** **Lucarionite** if Megas are enabled, otherwise a **Riolu** egg. Also Black Belt. Lore: "Talk less. Fight more. Then we'll talk."
+- **Post-game (v2):** lv 100, plus the **Marrowgate rumor**: a girl matching Eden's description seen near the Quiet Towns. It's a deliberate dead end and a kindness. We never resolve another game's plot.
 
-#### 10. (Ruin Route only) Nova (Desolation) — `FESTIVAL_NOVA`
-- ✔ **Source:** Leader of **Team Crescent**. An anti-villain who wants a dream world where everyone is happy, manipulative but sincere. ✔ Signature: **Gothitelle**.
-- **Use:** Appears **only on the Ruin Route** (see 10_CHOICES_ENDINGS.md), drawn to a PC whose Resonance has tipped to Ruin. She offers to help them unmake the waking world.
-- **Voice:** "You could make it so nobody ever has to wake up into this again. I'd help."
+## 4. "What Are You For?" — Melia (Rejuvenation)
+- **Source ✔:** The heart of Rejuvenation. Adoptive daughter of Professor Jenner and a reserve **Normal** Gym Leader. ✔ **Hapi** (a Togekiss raised from her treasured Togepi), Zoroark, Mimikyu, Snorlax. ✔ She is Venam's close friend and ex.
+- **Where/when:** Act III, Ch10, the **Royal Chase** (Safari-style reserve) outside Verdance, after J3.
+- **Premise:**
+  - A blonde girl with a Togekiss is searching the reserve for "a friend who fell through a sewer". If the Venam quest is done, the PC can tell her Venam got home safely.
+  - The Queen's huntsmen think she's a poacher. The PC vouches for her.
+  - She watched Juno's confirmation from the crowd and asks the PC the question nobody else does: *"Everyone keeps telling you what you're* for*. Have you decided yet?"*
+  - Her way home is the reflection in the Chase's royal fishpond.
+- **Fight:** lv ~50, with **Hapi (Togekiss)** as ace.
+- **Reward:** a **Togepi** egg and a Soothe Bell.
+  - Bonus if Venam's quest is done: a Gale Post letter from Venam, routed through the Glass ("u owe me a rematch, null kid").
+- **Post-game (v2):** lv 100.
+
+## 5. "Crystal Sleep" — Alexandra (Rejuvenation)
+- **Source ✔:** Elite 8 member and **Acting Champion** of Aevium. ✔ Her known Pokémon lean Dragon/Psychic: Latias, Dragonite, Altaria, Starmie, Lapras, Sigilyph, Garchomp. ✔ Her mother **Celine**, Aevium's Champion, sleeps **encased in crystal**, recovering from wounds inflicted by Madame X.
+- **Where/when:** Act III, Ch11, Rimeholt's **sunken lower town** after the Thaw and Gym 10.
+- **Premise:**
+  - Among the half-Fixed fishers on the broken ice sits a tall woman with a Latias, asking each one whether they can hear her. She came through the Thaw's black water.
+  - Velmora's Fixing looks horribly like her mother's crystal. She has questions for Anja (blunt) and Corvin (by Gale Post).
+  - The PC helps her move three Fixing fishers to the heat-tower shelters before the next freeze. She is quietly devastated by how many there are.
+  - She leaves through a frozen mirror in the Thane's hall: "My mother has been asleep in crystal for a long time. I'd like to know if yours wake up."
+- **Fight:** lv ~56, on a Dragon/Psychic champion team. **Ace: Latias.**
+- **Reward:** a **Draco Meteor** tutor and **Celine's Notes** (lore Key Item: an otherworld physician's notes on crystal stasis). Field Notes then adds a line: "the sleepers may be dreaming".
+- **Post-game (v2):** lv 100.
+
+## 6. "Deliverer" — Amaria and Titania (Reborn)
+- **Source ✔:** **Amaria**, Reborn's late-game **Water** Gym Leader, famous for her nicknamed team, including **Lapras "Deliverer"** (ace, per ruling), Starmie "Twinkle", Ludicolo "Indiana" and Kingdra "Atlantica". ✔ Her gym is an underwater maze. **Titania**, Reborn's **Steel** Gym Leader: ✔ her battle is on the **Fairy Tale field** in a sky castle, and her chapter is paired with Amaria's (badges 15–16). Her team concept is knightly (Aegislash, Mawile).
+- **Where/when:** Act IV, Ch17, drowned **Aurelia**'s lower galleries (Seabed / Aurelia maps, Dive), after Gym 16, before the PC leaves Underveil.
+- **Premise:**
+  - Edda's divers report a woman swimming *without a suit* in the drowned galleries, singing to a Lapras, and an armored knight pacing the drained shallows above who refuses to leave.
+  - Amaria followed "a city under a city" through the Glass. Drowned places call to her, and Aurelia is calling hard.
+  - Titania followed Amaria.
+  - The PC dives a short underwater maze to reach Amaria, who is sitting in a flooded Gilder hall. She says the drowned city "isn't dead, it's *waiting*". This is a Ruin Route hint about Theodric's reflection.
+  - Titania won't let Amaria go home until "someone who can walk through walls" proves the way back is safe.
+- **Fight:** **double battle** vs Amaria and Titania, lv ~78, on `:WATER_SURFACE` (Amaria's side; Titania's Steel suffers). Aces: **Lapras "Deliverer"** and **Aegislash**.
+- **Reward:** a **Liquidation** TM, an **Assault Vest** from Titania ("a knight's spare"), and a **Lapras** of the PC's own: Deliverer's calf. "She'll carry you out of a flood someday." This echoes Valen's Lapras.
+- **Post-game (v2):** both at lv 100.
+
+## 7. "Dreamwalker" — Shiv (Desolation)
+- **Source ✔:** The **Champion of Ayrith**. Mysterious and initially shady, ✔ later revealed to be working under Darkrai. ✔ Signature **Aipom → Ambipom** with absurd HP. ✔ He's a trickster, and ✔ he has already crossed worlds, as "Dreamer Shiv" in Reborn's post-game.
+- **Where/when:** Act V, Ch18, Gloaming's dusk-chapels, after Gym 17.
+- **Premise:**
+  - Gloaming's townsfolk keep dreaming the same grinning stranger. He walks dreams, and Gloaming's endless dusk makes the dream-road easy.
+  - He greets the PC: *"Met you already. You were standing on a ferry, glowing like a lighthouse."*
+  - The quest is three dream-errands for the townsfolk: return a lost name, finish a dead man's sentence, find a child's Pokémon in a dream that isn't hers.
+  - He finally admits he's lost: "Dreams leak through your Glass like water through a roof. I followed one too far."
+- **Fight:** lv ~84. Trickster tech (Fake Out, Trick, Taunt, odd abilities). **Ace: Ambipom** with absurd HP (custom stats, balance-approved).
+- **Reward:** a **Dusk Stone** and **Dream Mist** (Key Item: re-watch any completed interlude).
+- **Ruin hint:** only if the Ledger holds any game over: *"You've done this before, haven't you. I can smell the other nights on you."*
+- **Post-game (v2):** lv 100.
+
+## 8. "the meteor champion" — Lin (Reborn) — post-game superboss
+- **Source ✔:** Lin (Lindsey Paraeah), Reborn's hidden Big Bad. She usurped Team Meteor and is fought as Reborn's **Champion**.
+  - ✔ Signature: a **Togekiss with Oblivion Wing**, a move it can't legally learn (signature beats legality, per ruling).
+  - ✔ She **caught Arceus**.
+  - ✔ Cynical, blunt, mean-spirited, Jekyll-and-Hyde. Her honest lines are written **in lowercase**, as an homage.
+- **Where/when:** post-game, any ending with a post-game. Hesper Vane reports "a woman who talks without capital letters" haunting the Ferrow's Landing lighthouse at night. Found there; fought at the **Distortion Core** antechamber (Antumbra).
+- **Premise:**
+  - She came through the Glass the night Arceus came down, because she felt it from her world. Per the Rule of the Glass, her own Arceus wouldn't follow.
+  - Her lines depend on the ending:
+    - Homecoming: "you gave it back. good. i couldn't."
+    - Long Vigil: "you kept it. i kept mine too. look at us."
+    - Concord Dawn: "it's quiet, isn't it. for a while."
+  - With any game over in the Ledger: "you've done this before, haven't you."
+- **Fight:** **superboss**, lv 100, the hardest optional fight in the game. **Ace: Togekiss (Oblivion Wing).** The rest are Reborn-endgame heavy hitters, chosen by balance (no Arceus).
+- **Reward:** the **Ledger Lens** (Key Item: turns Ledger hints on for this save, the in-game equivalent of the 'ledgerhints' password), plus a lowercase letter left in the lighthouse: "see you in the next one."
+
+## 9. Nova (Desolation) — Ruin Route only
+- **Source ✔:** Leader of **Team Crescent**. An anti-villain who wants a dream world where everyone is happy, manipulative but sincere. ✔ Signature: **Gothitelle**.
+- **Where/when:** Ruin Route, R5, on the **Mirrorwalk dream-road** between Gloaming and Wyrmrest (`story/12_RUIN_ROUTE.md`).
+- **Premise:** drawn to a PC whose Resonance has locked at Ruin, she offers a gentler unmaking: everyone asleep and happy forever. Accepting is `GO_R_SWEET_DREAMS`. Refusing leads to a fight.
+- **Fight:** lv ~90. **Ace: Gothitelle.**
+- **Reward:** the **Crescent Charm** (Ruin Key Item; Nova's last kindness). In R7 it lets the Reflection speak one extra line.
 
 ---
-
-## Default draw (fallback when no choice rule fires)
-
-| R16 match | Winner | QF | SF | Final |
-|---|---|---|---|---|
-| PC vs Juno | PC | PC vs **Lin** | PC vs Kestrel | PC vs Valen |
-| Lin vs Nyx | Lin | | | |
-| Kestrel vs Shiv | Kestrel | Kestrel vs Garret | | |
-| Garret vs Kaito | Garret | | | |
-| Valen vs Odessa | Valen | Valen vs Alexandra | Valen vs Sigrun | |
-| Alexandra vs Celestine | Alexandra | | | |
-| Shelly vs Venam | Venam | Sigrun vs Venam | | |
-| Amaria vs Sigrun | Sigrun | | | |
-
-**Exhibitions** (optional, Festival week; cameos become available once eliminated):
-- Day 3: Shiv, Amaria, Shelly (Shelly's is a double battle).
-- Day 5: Garret, Alexandra, Venam.
-- **Lin:** post-game rematch only.
-- **Melia/Titania:** exhibition-only when not drawn.
 
 ## Sources (checked 2026-11-15)
 - TV Tropes, *Pokémon Desolation* characters: https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonDesolation
-- TV Tropes, *Pokémon Reborn* "Others" and "Postgame Characters" tabs: https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornOthers · https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornPostgameCharacters
-- TV Tropes, *Pokémon Rejuvenation* (game page and Past Characters tab): https://tvtropes.org/pmwiki/pmwiki.php/VideoGame/PokemonRejuvenation · https://www.tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRejuvenationPastCharacters
-- Rejuvenation Wiki: https://rejuvenation.wiki.gg/wiki/Venam · /Melia · /Alexandra · /Celine · /Tesla
-- Reborn walkthrough (Rebalance mod; teams there are *modded*, used only for identity, field and nickname cross-checks): https://reborn-rebalance-out.pages.dev/walkthroughs/21_titania_amaria · /27_elite_4.html
+- TV Tropes, *Pokémon Reborn* "Others" and "Postgame Characters": https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornOthers · https://tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRebornPostgameCharacters
+- TV Tropes, *Pokémon Rejuvenation*: https://tvtropes.org/pmwiki/pmwiki.php/VideoGame/PokemonRejuvenation · https://www.tvtropes.org/pmwiki/pmwiki.php/Characters/PokemonRejuvenationPastCharacters
+- Rejuvenation Wiki: https://rejuvenation.wiki.gg/wiki/Venam · /Melia · /Alexandra · /Celine
+- Reborn Rebalance walkthrough (modded teams; used only for identity, field and nickname cross-checks): https://reborn-rebalance-out.pages.dev/walkthroughs/21_titania_amaria · /27_elite_4.html
 
-**Caveat for the trainer agent:** canon source teams vary by game version and route. Treat the aces above as identity anchors and build the rest "in the spirit" of each source, using Velmora's caps.
+**Note for the trainer agent:** NARRATIVE_KEYS §7 no longer lists any `FESTIVAL_<cameo>` team as a Festival team. Build the versions in this file instead.

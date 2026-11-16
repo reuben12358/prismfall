@@ -59,7 +59,8 @@ Borderland routes (marked `Borderland (A/B)` in maps.json) mix both kingdoms' ty
 | **100 + 20·c** (c = 0 Ferrow's Landing, 1 Briarwick … 18 Wyrmrest) | city block: +0 exterior, +1 Pokémon Center, +2 Mart, +3..+9 houses/landmarks, **+10..+19 gym rooms** (+10 entrance … last = Warden arena) |
 | 480–519 | Crownhaven (+10..+19 Festival Arena, Battle Tower) |
 | **520 + 20·s** (s = badges held, 0–18) | overworld segment s, the land between gym s and gym s+1: +0..+3 routes, +4..+7 dungeons, **+8..+9 Bleed zone**, +10..+17 rest houses/gates, +18..+19 optional |
-| 900–949 | postgame (Hallow Strait, Shardfall Isles, Antumbra Distortion Core) |
+| 900–919, 940–949 | postgame (Hallow Strait, Shardfall Isles, Antumbra Distortion Core) |
+| 920–939 | Ashkaar–Isenmar war theatre (§9) |
 | 950–959 | overflow for big-city districts |
 | 960–979 | **Ruin Route only** maps |
 | 980–989 | interludes (playable as other characters) · 990–999 dev/test |
@@ -136,6 +137,39 @@ Field TMs: Giga Drain TM19 (Gossamer Wood), X-Scissor TM81 (Cocoonfall), Work Up
 Key items: Badge case (Voss, prologue; records the shard, story), Bicycle (Lumen Glide shop, s3), Linking Cord (sold in the Lumen Dept. Store 2F; trade evolutions), Dowsing Machine (Duneholt, s5), Odd Keystone (Ossuary, s5), Fossil revival at Lumen Fossil Lab (Act II) and Cragholm (Act IV), Imprint Lens (*prov.*, Larch, Act II: shows hidden Bleed paths).
 
 ---
+## 8. Scale, seats, borders and look (Revisions 5–6)
+**Look:** the target is Pokémon Rejuvenation's overworld (tall timber buildings, layered foliage, textured paths, weather and lighting overlays). No Gen 3 look. In maps.json, `tileset` is only the stock placeholder used for prototypes. `tileset_kit` names a **role** (e.g. `G45_CASTLE_CITY`, `G4_SNOW_FORTRESS`, `G5_METROPOLIS`, `G4_DISTORTION`) that the Map Builder maps onto Rejuvenation/Reborn/Desolation tilesets (credit the artists in CREDITS.md).
+**Borders:** every map has a `border` field saying what forms its edge (sea, cliffs, curtain walls, facades, canyon walls, frozen sea, oldwood canopy with giant trunks). Generic tree-row walls are banned.
+**Visual briefs:** 20 major places carry `visual_brief` (landmarks, silhouette, materials, palette, 3 set pieces).
+
+**Kingdom seats** are castle cities built from several linked district maps (`districts` on the main map), with walls and a gatehouse, a keep or palace on high ground, slums, and grand interiors. Each has a **royal court** map (`royal_court`) where the kingdom names its Festival delegation.
+| Kingdom | Seat (main ID) | Districts / interiors | Court |
+|---|---|---|---|
+| Elowen | **Verdance** 280 | Glasshouse Ward 283, Kingsgate Barbican 284, Briar Hall Upper Court 285, Great Hall 286, Royal Gallery 288, Thorn Crypts 289, Heartgarden 294 (Gym 9), Cathedral of the Evergreen 295, Rootward slums 296 | Thorn Throne 287 |
+| Isenmar | **Rimeholt** 300 (fortress-port on the frozen sea) | Icewall Gate 303, Sled Market 304, Whalebone Keep Bailey 305, Mead Hall 306, Ice Vault 308 (Kyogre sleeps below), Sinking Quarter 309, Net Row 314 | Thane's Seat 307 |
+| Ashkaar | **Cindervault** 240 (*prov.* seat: Pyre Keep on the caldera rim) | Caldera Gate 243, Hearthguild Hall 244, Pyre Keep Rampart 245, Hall of Oaths 247, Dragon Roosts 248, Slag Ward 249, Ancestor Crypts 254 | Ember Throne 246 |
+| Ossaria | **Duneholt** 200 (canyon city) | Sandgate 203, Aquifer Quarter 204, Elector's Palace Courtyard 205, Mural Gallery 207, Necropolis of the Electors 208, Dig Lab 209, Sinkwells 214 | Hall of Audience 206 |
+| Zenith | **Lumen City** 180 (metropolis, 5 districts) | Lowlight 181, Council Ward 194, Spire District 195 (Meridian Spire 185/186/198/199), Skyport Terrace 196 | Council Chamber 197 |
+| Nadir | **Underveil** 420 (vertical undercity in drowned Aurelia's towers) | Moon Market 423, Sump Docks 424, Barons' Stair 425, Bell Tower 426, Drowned Cathedral 429; Sun Court = 826 | Nyx's Hall of Whispers 427 |
+| Antumbra | **Lucent** 340 + its inverted reflection | Tribunal Ward 343, Athenaeum 344/345, The Speculum 346, Palace of Glass 347/348/355 (*prov.* names) | Veiled Throne 349 |
+| Crownhaven | Lower Crownhaven 480 | Eighteen Gates 482, Basilica Close 483, Basilica 484/485, Accord Palace 486/488/492, Memorial Garden 489, Market Ring 496, Pilgrims' Quarter 497, Concordance Spire 493/494/498 | Sovereign's Throne Room 487 |
+
+**Festival grounds:** the **Temple-Arena of the Blessing** (the rebuilt Meridian Prism Arena) is a colosseum fused with a cathedral: Processional Plaza 495, Hall of Eighteen Doors 490, Altar Stage 491 (`:PRISM_ARENA`). Next to it is the Court of Eight Pavilions 499, one pavilion per delegation.
+**Other cities at their own scale:** Saltmere gains Harbour & Breakwater 146 and Old Town 147. Ebbmouth gains Mill Quay 167. Skyreach is vertical (323–326). Ferrow's Landing and Briarwick stay villages. Story landmarks added: Corvin's Infirmary 223, the Iron Pit 263, Vane Hall 383, Lantern Hospice 384, Strade Works 403, Cragholm Lift Galleries 363, Great Tree Roots 443.
+
+## 9. The Ashkaar–Isenmar war (Revision 6)
+The two kingdoms meet on the **north-east coast**: Isenmar's frozen sea runs east along the north shore to the **Rime Narrows**, opposite Ashkaar's **Cinder Cape**. War-theatre maps are **920–939** (all *prov.* names; the story team sets the act):
+| ID | Map | Role |
+|---|---|---|
+| 920 | The Rime Narrows | front line on the ice: trenches, burnt sled-forts |
+| 921–923 | **Skaldfast**: Outer Walls, Harbour Keep, Great Hall | the besieged Isenmar fortress-port |
+| 924 | Ashkaar Siege Camp | legion tents, dragon pickets, the Dominar's war-tent |
+| 925 | The Steamline | no-man's-land where lava meets sea ice |
+| 926 | **The Shattered Ice** | frozen-sea battlefield for the climax cutscene (beam clash; FROZEN_LAKE → WATER_SURFACE) |
+| 927 | Cinder Cape Warfort | Ashkaar's staging fortress |
+Access is by sled-road from Route 21 and by the coast road from Route 15. A `war` state is defined on Rimeholt 300/304, Cindervault 240, Ebbmouth 160, Routes 21/22/15/16 and Wyrmrest 460.
+
+---
 ## 7. Act I map layouts (detail; exact data in maps.json)
 
 **Ferrow's Landing (100)**, 40×32, Outside. South coast ferry village, Elowen.
@@ -177,4 +211,4 @@ Prologue: 110 cabin → 109 deck (Voss) → berth (19,28) → Customs (NULL scan
 **Ebbmouth (160)**, 46×42, Isenmar's warm southern port. The River Ebb runs through it (x30–35), and its **current tiles flip with day/night** (two event pages), which is the Imprint's signature. Canals and stilt houses. The Tidelock Gym is the lock-house on the river (E). The Reyes House cellar (166) holds the Hollow cell. The Anglers' Guild gives the Good Rod after B3.
 **Route 7 (580)**, 52×42 delta reed-beds: a mesh of still-water channels crossed by boardwalks, rain. The NW dam leads to the **Voltaic Sluiceworks (584/585**, optional, static Rotom Lv25). The W bank leads to **Ebb Hollow (588)**.
 **Route 8 (581)**, 32×52 switchbacks up the Lumen escarpment, Isenmar/Zenith borderland. The fenced Meridian Extraction Lattice #4 is a story landmark. Lumen South Gate (582) is at the top.
-**Lumen City (180 Concourse 64×52, 181 Lowlight 40×30)**. A white-stone grid with a central Prism fountain plaza, Meridian Tower to the E (185/186, Act I gala and Shatter), the Circuit Gym to the W, and the Dept. Store (183/184) and Fossil Lab (188) to the S. The Lowlight district steps down to the SE. After the Shatter (end of Act I), a story switch swaps 181 for the Bleed map **608**. The Static Tunnels entrance (Act II, needs Flash) is at the NE rail tunnel.
+**Lumen City (180 Concourse 64×52, 181 Lowlight 40×30)**. A white-stone grid with a central Prism fountain plaza, Meridian Spire in its own Spire District (195; interiors 185/186, Act I gala and Shatter), the Circuit Gym to the W, and the Dept. Store (183/184) and Fossil Lab (188) to the S. The Lowlight district steps down to the SE. After the Shatter (end of Act I), a story switch swaps 181 for the Bleed map **608**. The Static Tunnels entrance (Act II, needs Flash) is at the NE rail tunnel.

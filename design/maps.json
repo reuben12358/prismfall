@@ -9,13 +9,16 @@
   "tileset names = files in Graphics/Tilesets of the base project. bgm names = Audio/BGM placeholders.",
   "states: alternate looks of one map keyed by Core story state (act number, choice keys from story/10_CHOICES_ENDINGS.md, ruin_route). Build them as event pages / overlay events on the SAME map unless 'replaced_by' names another map ID. Encounter changes use $PokemonGlobal.encounter_version: 0 default, 1 Bleed-spread (Act IV+), 2 Ruin Route, 3 postgame.",
   "branch_only maps exist only on one story branch; ruin_route maps only on the secret Ruin Route (IDs 960-979).",
-  "Outline city exteriors do not list doors yet; links C<id>_PC / C<id>_MART are reserved for them."
+  "Outline city exteriors do not list doors yet; links C<id>_PC / C<id>_MART are reserved for them.",
+  "REV6: visual target = Pokemon Rejuvenation overworld (tall timber buildings, layered foliage, textured paths, weather/lighting overlays); tileset_kit names are ROLES to map onto Rejuvenation/Reborn/Desolation tilesets (credit artists in CREDITS.md). No Gen 3 look. 'tileset' is the stock placeholder used for prototypes; final art uses 'tileset_kit' (see WORLD.md section 8). 'border' says what forms the map edge (never generic tree walls). 'districts' lists a city's linked district maps. 'visual_brief' = landmarks, silhouette, materials, palette, set pieces."
  ],
  "id_scheme": {
   "100-479": "cities: block = 100 + 20*city_index (Ferrow's Landing=0, Briarwick=1 ... Wyrmrest=18); +0 exterior, +1 PC, +2 Mart, +3..+9 interiors, +10..+19 gym",
   "480-519": "Crownhaven",
   "520-899": "overworld segments: block = 520 + 20*s (s = badges held, 0-18); +0..+3 routes, +4..+7 dungeons, +8..+9 Bleed zone, +10..+17 interiors/rest houses, +18..+19 optional",
-  "900-949": "postgame",
+  "900-919": "postgame",
+  "920-939": "Ashkaar-Isenmar war theatre",
+  "940-949": "postgame (spare)",
   "950-959": "overflow (big-city districts)",
   "960-979": "Ruin Route only",
   "980-989": "interludes (play as other characters)",
@@ -226,7 +229,25 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G4_FISHING_VILLAGE",
+   "border": "S: open sea (Hallow Strait) and pier; E: red sandstone headland cliffs under the lighthouse; N/W: Elowen oldwood canopy rising behind the village (giant trunks, root banks), N gap = lane to Route 1",
+   "visual_brief": {
+    "landmarks": [
+     "red-and-white lighthouse",
+     "long tarred pier",
+     "bronze Accord plaque",
+     "new Meridian customs gate"
+    ],
+    "silhouette": "low stilt-houses under a tall lighthouse, forest wall behind",
+    "materials": "tarred timber, kelp racks, rope, sandstone",
+    "palette": "DPPt Canalave/Sunyshore dusk: teal sea, rust-red roofs, cream lighthouse",
+    "set_pieces": [
+     "the Dovetail docking in fog",
+     "NULL scan at the customs gate",
+     "lamp-room talk with Kestrel"
+    ]
+   }
   },
   {
    "id": 101,
@@ -283,7 +304,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 102,
@@ -326,7 +349,9 @@
       "REPEL"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 103,
@@ -398,7 +423,9 @@
      ],
      "name": "Imprint scanner prop"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 104,
@@ -442,7 +469,9 @@
      ],
      "note": "player's rented room; respawn point"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 105,
@@ -496,7 +525,9 @@
      ],
      "says": "K1 trigger (story)"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 106,
@@ -540,7 +571,9 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 107,
@@ -585,7 +618,9 @@
      ],
      "says": "heals party"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 108,
@@ -629,7 +664,9 @@
      ],
      "name": "Meridian Imprint scanner (story NULL scene)"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 109,
@@ -687,7 +724,9 @@
      ],
      "name": "arrival at Ferrow's Landing -> transfer to 100 (19,28)"
     }
-   ]
+   ],
+   "tileset_kit": "G5_SHIP",
+   "border": "building walls (interior)"
   },
   {
    "id": 110,
@@ -730,7 +769,9 @@
      ],
      "name": "Ines's letter (intro)"
     }
-   ]
+   ],
+   "tileset_kit": "G5_SHIP",
+   "border": "building walls (interior)"
   },
   {
    "id": 120,
@@ -893,6 +934,24 @@
      "says": "dye vats flavour"
     }
    ],
+   "tileset_kit": "G4_FOREST_TOWN",
+   "border": "giant hollow trees and silk curtains; stream W; Gossamer canopy",
+   "visual_brief": {
+    "landmarks": [
+     "Loomhouse (largest hollow tree)",
+     "rope bridges",
+     "silk-dye vats",
+     "Loyal Three shrine"
+    ],
+    "silhouette": "six colossal trunks with houses lashed between them",
+    "materials": "living wood, silk banners, dyed cloth",
+    "palette": "Eterna Forest greens with saffron/indigo dye accents",
+    "set_pieces": [
+     "looms clacking at dawn",
+     "Glasswood crystals creeping from the east",
+     "the ogre-mask shrine"
+    ]
+   },
    "states": [
     {
      "id": "default"
@@ -964,7 +1023,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 122,
@@ -1009,7 +1070,9 @@
       "ESCAPEROPE"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 123,
@@ -1054,7 +1117,9 @@
      ],
      "says": "trade NPC"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 124,
@@ -1090,7 +1155,9 @@
      ],
      "says": "gives a Elowen folktale (Ogerpon foreshadow)"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 125,
@@ -1126,7 +1193,9 @@
      ],
      "says": "gives HM01 Cut after Badge 1"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 130,
@@ -1179,7 +1248,9 @@
      ],
      "count": 2
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 131,
@@ -1331,7 +1402,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 132,
@@ -1431,7 +1504,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 133,
@@ -1476,11 +1551,13 @@
      ],
      "name": "giant loom (Bug Plate housing)"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 140,
-   "name": "Saltmere",
+   "name": "Saltmere - Promenade & Market",
    "act": 1,
    "kingdom": "Elowen",
    "kind": "town",
@@ -1632,6 +1709,28 @@
      "says": "Grand Stage lore"
     }
    ],
+   "districts": [
+    146,
+    147
+   ],
+   "tileset_kit": "G5_PORT_TOWN",
+   "border": "S: lagoon harbour; N: salt-flat promenade railings; E/W: town walls of the free port",
+   "visual_brief": {
+    "landmarks": [
+     "Lantern Theatre",
+     "Pell Playhouse",
+     "breakwater",
+     "salt-pan promenade"
+    ],
+    "silhouette": "theatre domes and lantern masts over a white salt lake",
+    "materials": "whitewashed stone, salt-crusted timber, lanterns",
+    "palette": "BW Nacrene/Castelia warm: cream, coral, lantern gold",
+    "set_pieces": [
+     "Pageant hijack",
+     "tax-barge turned back at the breakwater",
+     "street theatre in the square"
+    ]
+   },
    "states": [
     {
      "id": "default"
@@ -1703,7 +1802,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 142,
@@ -1752,7 +1853,9 @@
       "ESCAPEROPE"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 143,
@@ -1788,7 +1891,9 @@
      ],
      "says": "ferries suspended (quarantine)"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 144,
@@ -1824,11 +1929,13 @@
      ],
      "says": "trade: her LECHONK for a Bug-type"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 145,
-   "name": "Pageant Hall",
+   "name": "Lantern Theatre",
    "act": 1,
    "kingdom": "Elowen",
    "kind": "interior",
@@ -1871,7 +1978,57 @@
      ],
      "says": "story: Hollow hijacks the Prismfall pageant"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 146,
+   "name": "Saltmere - Harbour & Breakwater",
+   "act": 1,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    48,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 1,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Saltmere (140)"
+   ],
+   "key_features": [
+    "free-port harbour; the breakwater where tax-barges are turned back"
+   ],
+   "tileset_kit": "G5_PORT_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 147,
+   "name": "Saltmere - Old Town",
+   "act": 1,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    40,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 1,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Saltmere (140)"
+   ],
+   "key_features": [
+    "actors' lanes, costume shops, the Pell Playhouse square"
+   ],
+   "tileset_kit": "G5_PORT_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 150,
@@ -1925,7 +2082,9 @@
      ],
      "says": "casts the player as understudy; sets SCENE var 0"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 151,
@@ -2031,7 +2190,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 152,
@@ -2106,7 +2267,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 153,
@@ -2186,7 +2349,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 154,
@@ -2235,7 +2400,9 @@
      ],
      "note": "crowd NPC sprites"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 160,
@@ -2384,6 +2551,27 @@
      "says": "story: Hollow cell hint"
     }
    ],
+   "districts": [
+    167
+   ],
+   "tileset_kit": "G5_PORT_TOWN",
+   "border": "river Ebb, canals, sea wall S; stilt-house rows",
+   "visual_brief": {
+    "landmarks": [
+     "tidal mills",
+     "Tidelock gym lock-house",
+     "union halls",
+     "stilt canals"
+    ],
+    "silhouette": "mill wheels and gull-crowded roofs along a two-way river",
+    "materials": "grey stone, slate, tarred wood",
+    "palette": "foggy HGSS Olivine: slate blue, moss, gull white",
+    "set_pieces": [
+     "the river stopping dead (stutter)",
+     "eel stalls at the fog market",
+     "Hollow cell in the Reyes cellar"
+    ]
+   },
    "states": [
     {
      "id": "default"
@@ -2392,6 +2580,11 @@
      "id": "thaw",
      "when": "act>=3",
      "change": "river current events stop flipping (Imprint failing); flooded canal tiles"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "Isenmar blockade fleet in the roads; Ashkaar envoys expelled"
     }
    ]
   },
@@ -2450,7 +2643,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 162,
@@ -2497,7 +2692,9 @@
       "ESCAPEROPE"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 163,
@@ -2542,7 +2739,9 @@
      ],
      "says": "fishing tips"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 164,
@@ -2595,7 +2794,9 @@
      ],
      "note": "locked until story flag"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 165,
@@ -2640,7 +2841,9 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 166,
@@ -2704,7 +2907,33 @@
      ],
      "says": "story confrontation"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 167,
+   "name": "Ebbmouth - Mill Quay",
+   "act": 1,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    40,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 2,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Ebbmouth (160)"
+   ],
+   "key_features": [
+    "tidal mills and union halls on the Ebb"
+   ],
+   "tileset_kit": "G5_PORT_TOWN",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
   },
   {
    "id": 170,
@@ -2750,7 +2979,9 @@
      ],
      "says": "tips"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 171,
@@ -2869,7 +3100,9 @@
      "sight": 4,
      "on": "Low"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 172,
@@ -2992,7 +3225,9 @@
      "sight": 4,
      "on": "Mid"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 173,
@@ -3124,7 +3359,9 @@
      "sight": 4,
      "on": "High"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 174,
@@ -3172,7 +3409,9 @@
       6
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 180,
@@ -3196,7 +3435,7 @@
      10
     ]
    },
-   "layout": "Gleaming plateau city-state: grid of white stone boulevards, glass towers, airship masts on the north skyline. Central plaza with Prism fountain. Meridian Tower dominates the east. The Lowlight (old lower district) steps down to the south-east. Neon-lined Circuit Gym west. Big city: 4 quadrants.",
+   "layout": "Central district of a multi-map metropolis (Castelia-scale). White-stone boulevards between glass towers whose facades form the map's walls; central Prism fountain plaza; tram line E-W. Circuit Gym W. Exits: N-W to Council Ward (194), N to Skyport Terrace (196), E-N to Spire District (195), E-S down the stairs to the Lowlight (181), S gate viaduct to Route 8.",
    "connections": [
     {
      "type": "warp",
@@ -3240,15 +3479,6 @@
     },
     {
      "type": "door",
-     "name": "Meridian Tower",
-     "at": [
-      52,
-      18
-     ],
-     "link": "LC_TOWER"
-    },
-    {
-     "type": "door",
      "name": "Circuit Gym",
      "at": [
       10,
@@ -3282,6 +3512,45 @@
       40
      ],
      "link": "LC_APT"
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 194,
+     "span": [
+      4,
+      20
+     ],
+     "to_span": [
+      20,
+      36
+     ]
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 196,
+     "span": [
+      30,
+      38
+     ],
+     "to_span": [
+      14,
+      22
+     ]
+    },
+    {
+     "type": "edge",
+     "dir": "east",
+     "to": 195,
+     "span": [
+      6,
+      16
+     ],
+     "to_span": [
+      30,
+      40
+     ]
     }
    ],
    "features": [
@@ -3347,6 +3616,24 @@
      "says": "Neon Grid lore"
     }
    ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "skyscraper facades and plaza colonnades; S gate viaduct",
+   "visual_brief": {
+    "landmarks": [
+     "Prism fountain",
+     "Meridian Spire (skyline)",
+     "tram line",
+     "holo-ad towers"
+    ],
+    "silhouette": "Castelia-scale glass towers stepping up to a black-cored spire on the cliff",
+    "materials": "white stone, brass, glass, neon",
+    "palette": "BW Castelia/Nimbasa: white, brass, cyan-magenta neon",
+    "set_pieces": [
+     "Rotom delivery drones",
+     "the gala at Meridian Spire",
+     "the Shatter: neon dying district by district"
+    ]
+   },
    "states": [
     {
      "id": "default"
@@ -3424,6 +3711,8 @@
      "hidden": true
     }
    ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "tenement rooftops and stairs down the cliff; Spire's shadow",
    "states": [
     {
      "id": "default"
@@ -3490,7 +3779,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 183,
@@ -3547,7 +3838,9 @@
       "ESCAPEROPE"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 184,
@@ -3603,11 +3896,13 @@
      ],
      "says": "EV items"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 185,
-   "name": "Meridian Tower Lobby",
+   "name": "Meridian Spire - Lobby",
    "act": 1,
    "kingdom": "Zenith",
    "kind": "interior",
@@ -3636,6 +3931,15 @@
      ],
      "to": 186,
      "link": "LC_GALA"
+    },
+    {
+     "type": "warp",
+     "at": [
+      12,
+      2
+     ],
+     "to": 198,
+     "link": "SPIRE_LIFT"
     }
    ],
    "features": [
@@ -3655,12 +3959,23 @@
       4
      ],
      "name": "Imprint energy exhibit"
+    },
+    {
+     "type": "elevator",
+     "at": [
+      12,
+      2
+     ],
+     "to": 198,
+     "note": "executive lift; opens Act IV"
     }
-   ]
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 186,
-   "name": "Meridian Tower - Gala Hall",
+   "name": "Meridian Spire - Gala Hall",
    "act": 1,
    "kingdom": "Zenith",
    "kind": "interior",
@@ -3701,7 +4016,9 @@
      ],
      "note": "the Plate that Shatters"
     }
-   ]
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 187,
@@ -3737,7 +4054,9 @@
      ],
      "says": "gives BICYCLE (Meridian promo) after gala invite"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 188,
@@ -3773,7 +4092,9 @@
      ],
      "says": "revives fossils (Act II unlock)"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 189,
@@ -3809,7 +4130,9 @@
      ],
      "says": "Skyreach lore"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 190,
@@ -3854,7 +4177,9 @@
      ],
      "says": "tips"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 191,
@@ -3948,7 +4273,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 192,
@@ -4052,7 +4379,9 @@
      "party_size": 3,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 193,
@@ -4089,11 +4418,425 @@
      ],
      "says": "Gym 4 single battle. Badge 4 + TM43 Volt Switch + TM70 Flash"
     }
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 194,
+   "name": "Lumen City - Council Ward",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    48,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": "Cedolan City",
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 180,
+     "span": [
+      20,
+      36
+     ],
+     "to_span": [
+      4,
+      20
+     ]
+    },
+    {
+     "type": "door",
+     "name": "Zenith Council Hall",
+     "at": [
+      24,
+      8
+     ],
+     "link": "LC_COUNCIL"
+    }
+   ],
+   "features": [
+    {
+     "type": "mansions",
+     "at": [
+      4,
+      14
+     ],
+     "count": 6,
+     "name": "founding houses' brass-and-glass townhouses"
+    },
+    {
+     "type": "statue",
+     "at": [
+      24,
+      22
+     ],
+     "name": "Founders' Orrery (bronze, slowly turning)"
+    },
+    {
+     "type": "npc",
+     "role": "Council clerk",
+     "at": [
+      20,
+      26
+     ],
+     "says": "Mandate politics"
+    },
+    {
+     "type": "trainer",
+     "class": "GENTLEMAN",
+     "at": [
+      10,
+      30
+     ],
+     "levels": [
+      23,
+      24
+     ],
+     "party_size": 2,
+     "sight": 4
+    },
+    {
+     "type": "trainer",
+     "class": "LADY",
+     "at": [
+      36,
+      30
+     ],
+     "levels": [
+      23,
+      24
+     ],
+     "party_size": 2,
+     "sight": 4
+    }
+   ],
+   "layout": "High town on the plateau's crown: terraced avenues rising N to the domed Council Hall. Borders = facades of the founding houses + plateau railing W.",
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "founding-house facades; plateau railing W"
+  },
+  {
+   "id": 195,
+   "name": "Lumen City - Spire District",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    44,
+    48
+   ],
+   "tileset": "Outside",
+   "bgm": "Cedolan City",
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 180,
+     "span": [
+      30,
+      40
+     ],
+     "to_span": [
+      6,
+      16
+     ]
+    },
+    {
+     "type": "door",
+     "name": "Meridian Spire",
+     "at": [
+      22,
+      10
+     ],
+     "link": "LC_TOWER"
+    }
+   ],
+   "features": [
+    {
+     "type": "spire_base",
+     "at": [
+      16,
+      0
+     ],
+     "size": [
+      13,
+      12
+     ],
+     "name": "Meridian Spire on the cliff edge (Aurelian sun-tower foundations visible)"
+    },
+    {
+     "type": "cliff_railing",
+     "at": [
+      40,
+      0
+     ],
+     "size": [
+      4,
+      48
+     ],
+     "note": "E border: plateau cliff, Nadir's lights far below"
+    },
+    {
+     "type": "npc",
+     "role": "Meridian guard",
+     "at": [
+      22,
+      14
+     ],
+     "says": "gala gate"
+    },
+    {
+     "type": "item",
+     "item": "XSPEED",
+     "at": [
+      4,
+      44
+     ],
+     "hidden": false
+    }
+   ],
+   "layout": "Corporate plaza at the plateau's lip. Spire base N; holo-ad colonnade; skybridge to Skyport.",
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railing E (Nadir lights below); Spire base N"
+  },
+  {
+   "id": 196,
+   "name": "Lumen City - Skyport Terrace",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Ingido Plateau",
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 180,
+     "span": [
+      14,
+      22
+     ],
+     "to_span": [
+      30,
+      38
+     ]
+    },
+    {
+     "type": "door",
+     "name": "Skyport Customs",
+     "at": [
+      20,
+      6
+     ],
+     "link": "LC_SKYPORT"
+    }
+   ],
+   "features": [
+    {
+     "type": "airship_masts",
+     "at": [
+      4,
+      2
+     ],
+     "count": 4,
+     "name": "mooring masts with docked airships (sprite events)"
+    },
+    {
+     "type": "rail_tunnel",
+     "at": [
+      36,
+      30
+     ],
+     "note": "Static Tunnels entrance (Act II, Flash)"
+    }
+   ],
+   "layout": "Wind-swept mooring terrace N of the Concourse. Border N = sky (cloud parallax) and mast gantries.",
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "sky (cloud parallax) and mast gantries N"
+  },
+  {
+   "id": 197,
+   "name": "Zenith Council Hall - Council Chamber",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "interior",
+   "size": [
+    31,
+    23
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      15,
+      22
+     ],
+     "link": "LC_COUNCIL"
+    }
+   ],
+   "features": [
+    {
+     "type": "tiered_seating",
+     "at": [
+      3,
+      6
+     ],
+     "size": [
+      25,
+      8
+     ],
+     "name": "semicircle of the founding houses"
+    },
+    {
+     "type": "dais",
+     "at": [
+      15,
+      3
+     ],
+     "name": "Chair's seat (Voss)"
+    },
+    {
+     "type": "gallery",
+     "at": [
+      1,
+      1
+     ],
+     "size": [
+      29,
+      2
+     ],
+     "name": "public gallery"
+    }
+   ],
+   "royal_court": "Zenith",
+   "festival_delegation": "court where Zenith names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 198,
+   "name": "Meridian Spire - Executive Gallery",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "interior",
+   "size": [
+    31,
+    19
+   ],
+   "tileset": "Department store interior",
+   "bgm": null,
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "warp",
+     "at": [
+      15,
+      18
+     ],
+     "to": 185,
+     "link": "SPIRE_LIFT"
+    },
+    {
+     "type": "warp",
+     "at": [
+      28,
+      2
+     ],
+     "to": 199,
+     "link": "SPIRE_CORE"
+    }
+   ],
+   "features": [
+    {
+     "type": "gallery",
+     "at": [
+      2,
+      2
+     ],
+     "size": [
+      27,
+      4
+     ],
+     "name": "Aurelian artefact gallery (Gilded King murals, story)"
+    },
+    {
+     "type": "window_wall",
+     "at": [
+      0,
+      0
+     ],
+     "size": [
+      31,
+      1
+     ],
+     "name": "glass wall over the cliff"
+    }
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 199,
+   "name": "Meridian Spire - Dark Stone Core",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "interior",
+   "size": [
+    25,
+    25
+   ],
+   "tileset": "Factory interior",
+   "bgm": "Cave",
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "warp",
+     "at": [
+      12,
+      24
+     ],
+     "to": 198,
+     "link": "SPIRE_CORE"
+    }
+   ],
+   "features": [
+    {
+     "type": "dark_stone",
+     "at": [
+      12,
+      12
+     ],
+     "name": "the Dark Stone in its cradle (Act IV)"
+    }
+   ],
+   "metadata": {
+    "story_gated": "Act IV"
+   },
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 200,
-   "name": "Duneholt",
+   "name": "Duneholt - Terrace Bazaar",
    "act": 2,
    "kingdom": "Ossaria",
    "kind": "town",
@@ -4117,6 +4860,34 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "districts": [
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    214
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas",
+   "visual_brief": {
+    "landmarks": [
+     "Elector's Palace in the canyon face",
+     "great sinking well",
+     "rock-cut tombs",
+     "murals"
+    ],
+    "silhouette": "sandstone terraces down a canyon to a well, palace façade carved into the cliff",
+    "materials": "red sandstone, bone, brass waterwheels",
+    "palette": "BW Desert Resort/Relic Castle: ochre, terracotta, turquoise water",
+    "set_pieces": [
+     "dunes uncovering a mural",
+     "the well collapsing",
+     "Necropolis of the Electors"
+    ]
    }
   },
   {
@@ -4174,7 +4945,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 202,
@@ -4213,7 +4986,179 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 203,
+   "name": "Duneholt - Sandgate",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "town",
+   "size": [
+    40,
+    24
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "canyon-mouth wall and gate towers"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
+  },
+  {
+   "id": 204,
+   "name": "Duneholt - Aquifer Quarter",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "town",
+   "size": [
+    44,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "caravanserai around the great sinking well"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
+  },
+  {
+   "id": 205,
+   "name": "Elector's Palace - Courtyard",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "town",
+   "size": [
+    40,
+    34
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "palace cut into the canyon's high face"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
+  },
+  {
+   "id": 206,
+   "name": "Elector's Palace - Hall of Audience",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "interior",
+   "size": [
+    29,
+    25
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "Prince-Elector Kassan's throne; fossil pillars"
+   ],
+   "royal_court": "Ossaria",
+   "festival_delegation": "court where Ossaria names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 207,
+   "name": "Elector's Palace - Mural Gallery",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "interior",
+   "size": [
+    41,
+    15
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "murals: golden king chaining an eighteen-lit beast"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 208,
+   "name": "Necropolis of the Electors",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "dungeon",
+   "size": [
+    44,
+    40
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "rock-cut tomb facades (Petra-style); leads to the Ossuary"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "canyon walls, dune ridges, sandstone mesas"
+  },
+  {
+   "id": 209,
+   "name": "Sahar's Dig Lab",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "interior",
+   "size": [
+    21,
+    15
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "fossil revival"
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 210,
@@ -4235,7 +5180,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-5"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 211,
@@ -4257,7 +5204,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-5"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 212,
@@ -4279,7 +5228,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-5"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 213,
@@ -4301,7 +5252,33 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-5"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 214,
+   "name": "Duneholt - Sinkwells",
+   "act": 2,
+   "kingdom": "Ossaria",
+   "kind": "town",
+   "size": [
+    40,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Duneholt (200)"
+   ],
+   "key_features": [
+    "slum where wells collapse"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 220,
@@ -4329,7 +5306,9 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 221,
@@ -4386,7 +5365,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 222,
@@ -4425,7 +5406,30 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 223,
+   "name": "Corvin Mott's Infirmary",
+   "act": 2,
+   "kingdom": "Nadir",
+   "kind": "interior",
+   "size": [
+    25,
+    19
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 5,
+   "detail": "outline",
+   "key_features": [
+    "Quiet Ward on the highest stilts"
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 230,
@@ -4447,7 +5451,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-6"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 231,
@@ -4469,7 +5475,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-6"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 232,
@@ -4491,7 +5499,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-6"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 233,
@@ -4513,11 +5523,13 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-6"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 240,
-   "name": "Cindervault",
+   "name": "Cindervault - Forge Terraces",
    "act": 2,
    "kingdom": "Ashkaar",
    "kind": "town",
@@ -4541,7 +5553,45 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "districts": [
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    254
+   ],
+   "tileset_kit": "G4_VOLCANIC_CITADEL",
+   "border": "basalt cliffs, lava rivers, caldera walls",
+   "visual_brief": {
+    "landmarks": [
+     "Pyre Keep on the caldera rim",
+     "Hearthguild forge terraces",
+     "dragon roosts",
+     "magma lake"
+    ],
+    "silhouette": "black citadel crowning a crater rim, forge-smoke columns, dragons wheeling",
+    "materials": "basalt, bronze, dragonbone, glowing slag",
+    "palette": "Pt Stark Mountain: basalt black, magma orange, bronze",
+    "set_pieces": [
+     "oath-brazier at the Ember Throne",
+     "Meridian tap venting the caldera",
+     "dragon roosts at sunset"
+    ]
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "legions mustering, forges on war quota, dragon roosts emptied"
+    }
+   ]
   },
   {
    "id": 241,
@@ -4598,7 +5648,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 242,
@@ -4637,7 +5689,179 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 243,
+   "name": "Cindervault - Caldera Gate",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    40,
+    24
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "gate carved through the crater wall; dragon-headed portcullis"
+   ],
+   "tileset_kit": "G4_VOLCANIC_CITADEL",
+   "border": "basalt cliffs, lava rivers, caldera walls"
+  },
+  {
+   "id": 244,
+   "name": "Hearthguild Hall",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "interior",
+   "size": [
+    31,
+    23
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "smiths' guildhall; vault holds the Light Stone"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 245,
+   "name": "Pyre Keep - Rampart",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    40,
+    34
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "Dominar's citadel on the caldera rim (prov. seat)"
+   ],
+   "tileset_kit": "G4_VOLCANIC_CITADEL",
+   "border": "basalt cliffs, lava rivers, caldera walls"
+  },
+  {
+   "id": 246,
+   "name": "Pyre Keep - Ember Throne",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "interior",
+   "size": [
+    27,
+    27
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "throne before a lava window; oath-brazier"
+   ],
+   "royal_court": "Ashkaar",
+   "festival_delegation": "court where Ashkaar names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 247,
+   "name": "Pyre Keep - Hall of Oaths",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "interior",
+   "size": [
+    33,
+    23
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "great hall; lying here is a capital crime"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 248,
+   "name": "Pyre Keep - Dragon Roosts",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    36,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "aerie ledges over the magma lake"
+   ],
+   "tileset_kit": "G4_VOLCANIC_CITADEL",
+   "border": "basalt cliffs, lava rivers, caldera walls"
+  },
+  {
+   "id": 249,
+   "name": "Cindervault - Slag Ward",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    40,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "workers' slums on cooled slag terraces"
+   ],
+   "tileset_kit": "G4_VOLCANIC_CITADEL",
+   "border": "basalt cliffs, lava rivers, caldera walls"
   },
   {
    "id": 250,
@@ -4659,7 +5883,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-7"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 251,
@@ -4681,7 +5907,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-7"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 252,
@@ -4703,7 +5931,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-7"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 253,
@@ -4725,7 +5955,33 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-7"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 254,
+   "name": "Pyre Keep - Ancestor Crypts",
+   "act": 2,
+   "kingdom": "Ashkaar",
+   "kind": "dungeon",
+   "size": [
+    33,
+    29
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Cindervault (240)"
+   ],
+   "key_features": [
+    "Ashfall dead in basalt niches"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "basalt cliffs, lava rivers, caldera walls"
   },
   {
    "id": 260,
@@ -4753,7 +6009,9 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 261,
@@ -4810,7 +6068,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 262,
@@ -4849,7 +6109,30 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 263,
+   "name": "The Iron Pit",
+   "act": 2,
+   "kingdom": "Nadir",
+   "kind": "dungeon",
+   "size": [
+    41,
+    33
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 7,
+   "detail": "outline",
+   "key_features": [
+    "colosseum in a mined-out cavern; Conclave venue"
+   ],
+   "tileset_kit": "G4_OLD_CHATEAU",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 270,
@@ -4871,7 +6154,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-8"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 271,
@@ -4893,7 +6178,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-8"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 272,
@@ -4915,7 +6202,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-8"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 273,
@@ -4937,7 +6226,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-8"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 274,
@@ -4959,11 +6250,13 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-8"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 280,
-   "name": "Verdance",
+   "name": "Verdance - Market Terraces",
    "act": 3,
    "kingdom": "Elowen",
    "kind": "town",
@@ -4987,6 +6280,36 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "districts": [
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    294,
+    295,
+    296
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland",
+   "visual_brief": {
+    "landmarks": [
+     "Briar Hall on the Thornhill",
+     "glasshouse ward",
+     "Kingsgate barbican",
+     "Bride Tree in the Heartgarden"
+    ],
+    "silhouette": "walled terraced city climbing to a briar-crowned palace; glass roofs glinting",
+    "materials": "pale limestone, living briar, greenhouse glass",
+    "palette": "Pt Floaroma/Eterna lush greens, rose pink, limestone cream, with grey soil underneath",
+    "set_pieces": [
+     "court audience in the Thorn Throne room",
+     "Bride Tree in eternal blossom",
+     "the starving grey soil under the Rootward"
+    ]
    }
   },
   {
@@ -5044,7 +6367,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 282,
@@ -5083,7 +6408,179 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 283,
+   "name": "Verdance - Glasshouse Ward",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    48,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "high town of glasshouses & guild halls"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 284,
+   "name": "Verdance - Kingsgate Barbican",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    40,
+    24
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "curtain wall + twin-towered gatehouse; Royal Chase road"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 285,
+   "name": "Briar Hall - Upper Court",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    44,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "palace on the Thornhill; terraces, briar arches"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 286,
+   "name": "Briar Hall - Great Hall",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "interior",
+   "size": [
+    33,
+    25
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "banquet hall, living-wood rafters"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 287,
+   "name": "Briar Hall - Throne Room",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "interior",
+   "size": [
+    27,
+    27
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "Queen Maelis's Thorn Throne under a rose window"
+   ],
+   "royal_court": "Elowen",
+   "festival_delegation": "court where Elowen names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 288,
+   "name": "Briar Hall - Royal Gallery",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "interior",
+   "size": [
+    41,
+    15
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "portraits of the Thorne kings; fairy-tale tapestries (lies)"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 289,
+   "name": "Briar Hall - Thorn Crypts",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "dungeon",
+   "size": [
+    35,
+    31
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "royal crypts in grey starving soil; nothing rots"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 290,
@@ -5105,7 +6602,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-9"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 291,
@@ -5127,7 +6626,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-9"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 292,
@@ -5149,7 +6650,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-9"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 293,
@@ -5171,11 +6674,85 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-9"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 294,
+   "name": "The Heartgarden",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    40,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "Warden's garden; Bride Tree; Gym 9 entrance"
+   ],
+   "tileset_kit": "G4_FOREST_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 295,
+   "name": "Cathedral of the Evergreen",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "interior",
+   "size": [
+    31,
+    29
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "18 stained windows + clear 19th pane"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 296,
+   "name": "Verdance - Rootward",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "town",
+   "size": [
+    44,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Verdance (280)"
+   ],
+   "key_features": [
+    "slums under the terraces, grey soil, root-cellar homes"
+   ],
+   "tileset_kit": "G4_FOREST_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 300,
-   "name": "Rimeholt",
+   "name": "Rimeholt - Thane's Harbour",
    "act": 3,
    "kingdom": "Isenmar",
    "kind": "town",
@@ -5199,7 +6776,45 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "districts": [
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    314
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "visual_brief": {
+    "landmarks": [
+     "Whalebone Keep on a rock island",
+     "Icewall sea-gate",
+     "sled-roads",
+     "ice-fishing holes"
+    ],
+    "silhouette": "timber-and-whalebone fortress-port on a frozen sea, keep on a crag",
+    "materials": "whalebone, black timber, packed ice, iron",
+    "palette": "DPPt Snowpoint: ice blue, soot black, ember orange windows",
+    "set_pieces": [
+     "the dark that breathes under the fishing holes",
+     "a quarter sinking (Act III)",
+     "mead-hall debt tallies"
+    ]
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "war footing: levies drilling, refugees from Skaldfast, harbour chained"
+    }
+   ]
   },
   {
    "id": 301,
@@ -5256,7 +6871,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 302,
@@ -5295,7 +6912,189 @@
       "see Core mart progression"
      ]
     }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 303,
+   "name": "Rimeholt - Icewall Gate",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    40,
+    24
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "sea-wall of packed ice and whalebone; portcullis gatehouse"
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 304,
+   "name": "Rimeholt - Sled Market",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    46,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "market on the ice, sled-roads, fish racks"
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "rationing; half the stalls shut"
+    }
    ]
+  },
+  {
+   "id": 305,
+   "name": "Whalebone Keep - Bailey",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    36,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "keep on a rock island in the frozen lake"
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 306,
+   "name": "Whalebone Keep - Mead Hall",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "interior",
+   "size": [
+    31,
+    21
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "great hall, whale-rib vault, debt-tally walls"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 307,
+   "name": "Whalebone Keep - Thane's Seat",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "interior",
+   "size": [
+    25,
+    23
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "Thane Eirik's throne of a single whale skull"
+   ],
+   "royal_court": "Isenmar",
+   "festival_delegation": "court where Isenmar names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 308,
+   "name": "Whalebone Keep - Ice Vault",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "dungeon",
+   "size": [
+    33,
+    33
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "crypts in the lake ice; the dark that breathes (Kyogre)"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 309,
+   "name": "Rimeholt - Sinking Quarter",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    40,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "Act III: quarter that sinks (state)"
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
   },
   {
    "id": 310,
@@ -5317,7 +7116,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-10"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 311,
@@ -5339,7 +7140,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-10"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 312,
@@ -5361,7 +7164,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-10"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 313,
@@ -5383,11 +7188,37 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-10"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 314,
+   "name": "Rimeholt - Net Row",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    40,
+    28
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Rimeholt (300)"
+   ],
+   "key_features": [
+    "fisher slums on stilts over cut ice"
+   ],
+   "tileset_kit": "G4_SNOW_FORTRESS",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
   },
   {
    "id": 320,
-   "name": "Skyreach",
+   "name": "Skyreach - Mast Ward",
    "act": 3,
    "kingdom": "Zenith",
    "kind": "town",
@@ -5411,6 +7242,30 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "districts": [
+    323,
+    324,
+    325,
+    326
+   ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railings, building facades, rail viaducts",
+   "visual_brief": {
+    "landmarks": [
+     "docking masts",
+     "skybridges",
+     "Stormwatch Spire",
+     "Gale Post"
+    ],
+    "silhouette": "needle city of masts climbing into a permanent storm wall",
+    "materials": "brass, canvas, cable, storm glass",
+    "palette": "BW Mistralton/Nimbasa: slate grey, brass, lightning white",
+    "set_pieces": [
+     "airship docking in a gale",
+     "courier dash across skybridges",
+     "Zekrom in the storm"
+    ]
    }
   },
   {
@@ -5468,7 +7323,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 322,
@@ -5507,7 +7364,105 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 323,
+   "name": "Skyreach - Lower Gantries",
+   "act": 3,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    30,
+    48
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Skyreach (320)"
+   ],
+   "key_features": [
+    "vertical city base, cargo lifts"
+   ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
+  },
+  {
+   "id": 324,
+   "name": "Skyreach - Skybridge Ward",
+   "act": 3,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    48,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Skyreach (320)"
+   ],
+   "key_features": [
+    "bridges between masts in the Stormfront"
+   ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
+  },
+  {
+   "id": 325,
+   "name": "Gale Post Hall",
+   "act": 3,
+   "kingdom": "Zenith",
+   "kind": "interior",
+   "size": [
+    25,
+    17
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Skyreach (320)"
+   ],
+   "key_features": [
+    "courier guild"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 326,
+   "name": "Skyreach - Smugglers' Gantry",
+   "act": 3,
+   "kingdom": "Zenith",
+   "kind": "town",
+   "size": [
+    30,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Skyreach (320)"
+   ],
+   "key_features": [
+    "black-market moorings"
+   ],
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 330,
@@ -5529,7 +7484,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-11"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 331,
@@ -5551,7 +7508,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-11"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 332,
@@ -5573,7 +7532,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-11"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 333,
@@ -5595,11 +7556,13 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-11"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 340,
-   "name": "Lucent",
+   "name": "Lucent - Athenaeum Quarter",
    "act": 3,
    "kingdom": "Antumbra",
    "kind": "town",
@@ -5623,6 +7586,34 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "districts": [
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    355
+   ],
+   "tileset_kit": "G4_SCHOLAR_CITY",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges",
+   "visual_brief": {
+    "landmarks": [
+     "Lucent Athenaeum",
+     "the upside-down Speculum in the sky",
+     "Tribunal courts",
+     "Palace of Glass"
+    ],
+    "silhouette": "a scholar city with its mirror twin hanging inverted overhead",
+    "materials": "white marble, brass orreries, mirror glass",
+    "palette": "Pt Canalave library + Distortion World: ivory, violet, silver",
+    "set_pieces": [
+     "walking up into the reflection",
+     "tribunal of Rowan",
+     "the Veiled Throne's mirrored court"
+    ]
    }
   },
   {
@@ -5680,7 +7671,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 342,
@@ -5719,7 +7712,179 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 343,
+   "name": "Lucent - Tribunal Ward",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "town",
+   "size": [
+    44,
+    34
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "Accord tribunal courts"
+   ],
+   "tileset_kit": "G4_SCHOLAR_CITY",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+  },
+  {
+   "id": 344,
+   "name": "Lucent Athenaeum - Great Reading Hall",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "interior",
+   "size": [
+    41,
+    27
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "ten-storey stacks, ladders, orreries"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 345,
+   "name": "Lucent Athenaeum - Sealed Stacks",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "dungeon",
+   "size": [
+    35,
+    31
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "archive crypt: Concordance original, Secret Articles"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+  },
+  {
+   "id": 346,
+   "name": "The Speculum - Mirror City",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "town",
+   "size": [
+    46,
+    44
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "Lucent's upside-down reflection in the sky; INVERSE"
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+  },
+  {
+   "id": 347,
+   "name": "Palace of Glass - Gate of Veils",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "town",
+   "size": [
+    36,
+    28
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "mirror palace gatehouse"
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+  },
+  {
+   "id": 348,
+   "name": "Palace of Glass - Hall of Mirrors",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "interior",
+   "size": [
+    41,
+    17
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "gallery of reflections that lag"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 349,
+   "name": "Palace of Glass - Veiled Throne",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "interior",
+   "size": [
+    27,
+    27
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "Archseer Imre Dask; Synod seats in a ring"
+   ],
+   "royal_court": "Antumbra",
+   "festival_delegation": "court where Antumbra names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 350,
@@ -5741,7 +7906,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-12"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 351,
@@ -5763,7 +7930,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-12"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 352,
@@ -5785,7 +7954,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-12"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 353,
@@ -5807,7 +7978,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-12"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 354,
@@ -5829,7 +8002,33 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-12"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 355,
+   "name": "Palace of Glass - Undercroft of Echoes",
+   "act": 3,
+   "kingdom": "Antumbra",
+   "kind": "dungeon",
+   "size": [
+    33,
+    31
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Lucent (340)"
+   ],
+   "key_features": [
+    "crypt of reflections of the dead"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 360,
@@ -5857,7 +8056,9 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 361,
@@ -5914,7 +8115,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 362,
@@ -5953,7 +8156,30 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 363,
+   "name": "Cragholm - Lift Galleries",
+   "act": 4,
+   "kingdom": "Ossaria",
+   "kind": "interior",
+   "size": [
+    30,
+    44
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 12,
+   "detail": "outline",
+   "key_features": [
+    "lamplit galleries and lift-cages down the canyon wall"
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 370,
@@ -5975,7 +8201,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-13"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 371,
@@ -5997,7 +8225,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-13"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 372,
@@ -6019,7 +8249,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-13"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 373,
@@ -6041,7 +8273,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-13"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 380,
@@ -6069,6 +8303,24 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges",
+   "visual_brief": {
+    "landmarks": [
+     "Hollow Cathedral",
+     "Vane Hall",
+     "barrows",
+     "Lantern Hospice"
+    ],
+    "silhouette": "black cathedral spires over fog moors",
+    "materials": "dark granite, lead glass, peat",
+    "palette": "Pt Hearthome/Old Chateau gloom: mauve fog, candle gold",
+    "set_pieces": [
+     "the Cathedral replaying the AF 290 Fracture",
+     "dust-sheeted Vane Hall",
+     "barrow lights"
+    ]
    }
   },
   {
@@ -6126,7 +8378,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 382,
@@ -6165,7 +8419,51 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 383,
+   "name": "Vane Hall",
+   "act": 4,
+   "kingdom": "Antumbra",
+   "kind": "interior",
+   "size": [
+    33,
+    27
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 13,
+   "detail": "outline",
+   "key_features": [
+    "Kestrel's empty, haunted family manor"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 384,
+   "name": "Lantern Hospice",
+   "act": 4,
+   "kingdom": "Antumbra",
+   "kind": "interior",
+   "size": [
+    25,
+    17
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 13,
+   "detail": "outline",
+   "key_features": [
+    "where Morwen died"
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 390,
@@ -6187,7 +8485,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-14"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 391,
@@ -6209,7 +8509,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-14"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 392,
@@ -6231,7 +8533,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-14"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 393,
@@ -6253,7 +8557,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-14"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 394,
@@ -6275,7 +8581,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-14"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 400,
@@ -6303,6 +8611,24 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "tileset_kit": "G5_METROPOLIS",
+   "border": "plateau cliff railings, building facades, rail viaducts",
+   "visual_brief": {
+    "landmarks": [
+     "Strade Works",
+     "clock towers",
+     "smokestacks",
+     "bathysphere yard"
+    ],
+    "silhouette": "sawtooth factory roofs and clock towers at the plateau edge",
+    "materials": "iron, brick, copper pipe",
+    "palette": "BW Driftveil/Castelia industrial: rust, brick red, steam grey",
+    "set_pieces": [
+     "shift-change crowd",
+     "Arbiter Engine blueprints",
+     "Dive-suit trials"
+    ]
    }
   },
   {
@@ -6360,7 +8686,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 402,
@@ -6399,7 +8727,30 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 403,
+   "name": "Strade Works - Foundry Floor",
+   "act": 4,
+   "kingdom": "Zenith",
+   "kind": "dungeon",
+   "size": [
+    45,
+    33
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 14,
+   "detail": "outline",
+   "key_features": [
+    "airship hulls; secret Arbiter Engine parts"
+   ],
+   "tileset_kit": "G4_OLD_CHATEAU",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 410,
@@ -6421,7 +8772,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-15"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 411,
@@ -6443,7 +8796,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-15"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 412,
@@ -6465,7 +8820,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-15"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 413,
@@ -6487,11 +8844,13 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-15"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 420,
-   "name": "Underveil",
+   "name": "Underveil - Lantern Tiers",
    "act": 4,
    "kingdom": "Nadir",
    "kind": "town",
@@ -6515,6 +8874,32 @@
    ],
    "metadata": {
     "outdoor": false
+   },
+   "districts": [
+    423,
+    424,
+    425,
+    426,
+    427,
+    429
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "rock walls",
+   "visual_brief": {
+    "landmarks": [
+     "drowned Aurelian towers",
+     "Moon Market",
+     "Sump docks",
+     "Barons' Stair"
+    ],
+    "silhouette": "vertical lantern-lit shanties clinging to half-drowned gold towers in permanent night",
+    "materials": "rusted iron, salvaged gold, tarp, lantern glass",
+    "palette": "BW Castelia sewers + Pt Sunyshore night: navy, sodium amber, tarnished gold",
+    "set_pieces": [
+     "the Fault drains the Sump overnight",
+     "the Sun Court revealed",
+     "lantern boats in the Moon Market"
+    ]
    }
   },
   {
@@ -6572,7 +8957,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 422,
@@ -6611,7 +8998,155 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 423,
+   "name": "Underveil - Moon Market",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "town",
+   "size": [
+    44,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "Nyx's market of secrets on a drowned plaza"
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
+  },
+  {
+   "id": 424,
+   "name": "Underveil - Sump Docks",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "town",
+   "size": [
+    44,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "harbour of skiffs on the flooded Sump"
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
+  },
+  {
+   "id": 425,
+   "name": "Underveil - Barons' Stair",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "town",
+   "size": [
+    30,
+    50
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "vertical slum: stacked shanties up an Aurelian tower"
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
+  },
+  {
+   "id": 426,
+   "name": "Underveil - Bell Tower of Aurel",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "dungeon",
+   "size": [
+    25,
+    40
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "vertical connector inside a drowned tower"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
+  },
+  {
+   "id": 427,
+   "name": "Nyx's Hall of Whispers",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "interior",
+   "size": [
+    29,
+    21
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "broker's great hall"
+   ],
+   "royal_court": "Nadir",
+   "festival_delegation": "court where Nadir names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 429,
+   "name": "Drowned Cathedral of Aurel",
+   "act": 4,
+   "kingdom": "Nadir",
+   "kind": "interior",
+   "size": [
+    33,
+    31
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Underveil (420)"
+   ],
+   "key_features": [
+    "half-flooded nave; gold mosaics"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 430,
@@ -6633,7 +9168,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-16"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 431,
@@ -6655,7 +9192,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-16"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 432,
@@ -6677,7 +9216,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-16"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 433,
@@ -6699,7 +9240,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-16"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 440,
@@ -6727,6 +9270,24 @@
    ],
    "metadata": {
     "outdoor": true
+   },
+   "tileset_kit": "G4_FOREST_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland",
+   "visual_brief": {
+    "landmarks": [
+     "the Great Tree",
+     "mushroom bridges",
+     "lantern-moths",
+     "dusk-chapels"
+    ],
+    "silhouette": "town in the roots of one titanic tree under a permanent dusk sky",
+    "materials": "living wood, mushroom caps, moth-lantern glass",
+    "palette": "Pt Eterna Forest at dusk: violet, rose, firefly yellow",
+    "set_pieces": [
+     "the Hymn of Return",
+     "bargains that bind",
+     "the dusk spreading south"
+    ]
    }
   },
   {
@@ -6784,7 +9345,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 442,
@@ -6823,7 +9386,30 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 443,
+   "name": "Great Tree Roots",
+   "act": 5,
+   "kingdom": "Elowen",
+   "kind": "dungeon",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 16,
+   "detail": "outline",
+   "key_features": [
+    "the Pixie Plate's root-chamber"
+   ],
+   "tileset_kit": "G4_OLD_CHATEAU",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 450,
@@ -6845,7 +9431,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-17"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 451,
@@ -6867,7 +9455,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-17"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 452,
@@ -6889,7 +9479,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-17"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 453,
@@ -6911,7 +9503,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-17"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 454,
@@ -6933,7 +9527,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-17"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 460,
@@ -6961,7 +9557,19 @@
    ],
    "metadata": {
     "outdoor": true
-   }
+   },
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "Dominar's legions camped on the slopes (Act V)"
+    }
+   ]
   },
   {
    "id": 461,
@@ -7018,7 +9626,9 @@
      ],
      "says": "local tip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 462,
@@ -7057,7 +9667,9 @@
       "see Core mart progression"
      ]
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 470,
@@ -7079,7 +9691,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-18"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 471,
@@ -7101,7 +9715,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-18"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 472,
@@ -7123,7 +9739,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-18"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 473,
@@ -7145,7 +9763,9 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-18"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 474,
@@ -7167,11 +9787,13 @@
    ],
    "key_features": [
     "see GYM_PUZZLES.md#gym-18"
-   ]
+   ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 480,
-   "name": "Crownhaven",
+   "name": "Lower Crownhaven",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "town",
@@ -7192,7 +9814,40 @@
     "Accord Palace",
     "Battle Tower (postgame)",
     "PC/Mart"
-   ]
+   ],
+   "districts": [
+    482,
+    483,
+    484,
+    485,
+    486,
+    487,
+    488,
+    489,
+    495,
+    496,
+    497,
+    498
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls",
+   "visual_brief": {
+    "landmarks": [
+     "Basilica of First Light",
+     "Accord Palace",
+     "Meridian Prism Arena",
+     "Eighteen Gates",
+     "Glassfall Scar"
+    ],
+    "silhouette": "white city on the inner slopes of a caldera ring, bell towers above a glass-scarred crater floor",
+    "materials": "white stone, bronze bells, prism glass",
+    "palette": "Pt Pokémon League / BW2 Opelucid: white, gold, prism-spectrum accents",
+    "set_pieces": [
+     "the Festival opening with all eighteen Plates",
+     "the Tuning in the Basilica",
+     "the untended Glassfall memorial"
+    ]
+   }
   },
   {
    "id": 481,
@@ -7210,11 +9865,207 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 482,
+   "name": "Crownhaven - The Eighteen Gates",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    60,
+    24
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "gate ring facing the Imprints; main gatehouse from Route 37"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 483,
+   "name": "Upper Crownhaven - Basilica Close",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    50,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "white stone, bell towers"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 484,
+   "name": "Basilica of First Light",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "interior",
+   "size": [
+    35,
+    37
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "18 windows round a clear pane"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 485,
+   "name": "Basilica Crypts",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "dungeon",
+   "size": [
+    33,
+    31
+   ],
+   "tileset": "Ruins interior",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "Sovereigns' tombs"
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 486,
+   "name": "Accord Palace - Court of Wardens",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    44,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "palace on the caldera's inner crown"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 487,
+   "name": "Accord Palace - Sovereign's Throne Room",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "interior",
+   "size": [
+    29,
+    31
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "Sovereign Seat; Valen's audience"
+   ],
+   "royal_court": "Accord (host)",
+   "festival_delegation": "court where Accord (host) names its Festival champions (choice-dependent); delegation departs from here",
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 488,
+   "name": "Accord Palace - Gallery of Plates",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "interior",
+   "size": [
+    45,
+    17
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "eighteen empty plinths (Plates come for the Tuning)"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 489,
+   "name": "Glassfall Memorial Garden",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    40,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "untended garden fencing the Scar (888)"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
   },
   {
    "id": 490,
-   "name": "Crownhaven Festival Arena - Concourse",
+   "name": "Temple-Arena of the Blessing - Hall of Eighteen Doors",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "interior",
@@ -7228,11 +10079,13 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 491,
-   "name": "Crownhaven Festival Arena - Prism Stage",
+   "name": "Temple-Arena of the Blessing - Altar Stage",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "interior",
@@ -7246,11 +10099,29 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)",
+   "visual_brief": {
+    "landmarks": [
+     "altar of the Blessing",
+     "eighteen Plate plinths in a ring",
+     "delegation galleries",
+     "prism oculus"
+    ],
+    "silhouette": "colosseum fused with a cathedral: domed arena-temple with eighteen spired doors",
+    "materials": "white marble, gold, prism glass (too-new Meridian steel under it)",
+    "palette": "white and gold with prism-spectrum light shafts",
+    "set_pieces": [
+     "procession of eight delegations",
+     "all eighteen Plates raised for the Tuning",
+     "Arceus's Blessing descending through the oculus"
+    ]
+   }
   },
   {
    "id": 492,
-   "name": "Crownhaven Accord Palace",
+   "name": "Accord Palace - Entrance Hall",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "interior",
@@ -7264,11 +10135,13 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 493,
-   "name": "Crownhaven Battle Tower Lobby",
+   "name": "Concordance Spire - Lobby (Battle Tower)",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "interior",
@@ -7282,11 +10155,13 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 494,
-   "name": "Crownhaven Battle Tower Arena",
+   "name": "Concordance Spire - Arena",
    "act": 5,
    "kingdom": "Crownhaven",
    "kind": "interior",
@@ -7300,7 +10175,142 @@
    "segment": 18,
    "detail": "outline",
    "connections_outline": [],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 495,
+   "name": "Temple-Arena of the Blessing - Processional Plaza",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    50,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "too-new arena exterior"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls",
+   "visual_brief": {
+    "landmarks": [
+     "altar of the Blessing",
+     "eighteen Plate plinths in a ring",
+     "delegation galleries",
+     "prism oculus"
+    ],
+    "silhouette": "colosseum fused with a cathedral: domed arena-temple with eighteen spired doors",
+    "materials": "white marble, gold, prism glass (too-new Meridian steel under it)",
+    "palette": "white and gold with prism-spectrum light shafts",
+    "set_pieces": [
+     "procession of eight delegations",
+     "all eighteen Plates raised for the Tuning",
+     "Arceus's Blessing descending through the oculus"
+    ]
+   }
+  },
+  {
+   "id": 496,
+   "name": "Lower Crownhaven - Market Ring",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    50,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "crater-floor market"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 497,
+   "name": "Lower Crownhaven - Pilgrims' Quarter",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    44,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "slums of pilgrims and Fixed families"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 498,
+   "name": "Concordance Spire - Exterior",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    36,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "connections_outline": [
+    "district of Crownhaven (480)"
+   ],
+   "key_features": [
+    "old archive tower"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+  },
+  {
+   "id": 499,
+   "name": "Festival Grounds - Court of Eight Pavilions",
+   "act": 5,
+   "kingdom": "Crownhaven",
+   "kind": "town",
+   "size": [
+    60,
+    44
+   ],
+   "tileset": "Outside",
+   "bgm": "Ingido Plateau",
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "key_features": [
+    "one pavilion per kingdom delegation (banners, champions, exhibition matches); processional way to the Temple-Arena"
+   ],
+   "tileset_kit": "G45_CASTLE_CITY",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
   },
   {
    "id": 520,
@@ -7454,7 +10464,9 @@
      ],
      "berry": "ORANBERRY"
     }
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "E: sea cliffs; W: drystone walls and gorse banks on the heath; S/N: open lanes"
   },
   {
    "id": 521,
@@ -7636,6 +10648,8 @@
      "berry": "PECHABERRY"
     }
    ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "N/S: hedgerows and drystone field walls; W: oldwood canopy (forest edge proper); NE: Accord cordon tape + glass trees",
    "states": [
     {
      "id": "default"
@@ -7723,6 +10737,8 @@
      "note": "Bleed Shard #1 (collectible key item proposed in WORLD.md)"
     }
    ],
+   "tileset_kit": "G4_FOREST_TOWN+BLEED_OVERLAY",
+   "border": "glass-crystal orchard trees (impassable) and the cordon; Bleed shimmer",
    "states": [
     {
      "id": "default"
@@ -7777,7 +10793,9 @@
      ],
      "says": "heal + gift 5 POKEBALL"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 524,
@@ -7991,6 +11009,8 @@
      "hidden": true
     }
    ],
+   "tileset_kit": "G4_OLDWOOD",
+   "border": "giant Gossamer trunks with silk curtains and root walls (canopy), never single tree rows",
    "states": [
     {
      "id": "default"
@@ -8122,7 +11142,9 @@
      ],
      "count": 4
     }
-   ]
+   ],
+   "tileset_kit": "G4_OLDWOOD",
+   "border": "pond banks, root walls, silk canopy"
   },
   {
    "id": 526,
@@ -8158,7 +11180,9 @@
      ],
      "says": "heals party; silk-harvest lore"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 540,
@@ -8381,7 +11405,9 @@
      ],
      "berry": "CHERIBERRY"
     }
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "S: river; N: chalk downs with ruined manor wall; E/W: hedgerows"
   },
   {
    "id": 541,
@@ -8572,7 +11598,9 @@
      "count": 2,
      "note": "needs 2 badges"
     }
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "E: chalk cliff; S: shingle beach and sea; W: salt-marsh pools"
   },
   {
    "id": 542,
@@ -8608,7 +11636,9 @@
      ],
      "says": "heals; Saltmere gossip"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 544,
@@ -8730,7 +11760,9 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "salt-rock walls"
   },
   {
    "id": 545,
@@ -8806,7 +11838,9 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "salt-rock walls, salt lake"
   },
   {
    "id": 546,
@@ -8895,6 +11929,8 @@
      "hidden": false
     }
    ],
+   "tileset_kit": "G4_OLD_CHATEAU",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland",
    "wild_theme_exempt": true
   },
   {
@@ -8942,6 +11978,8 @@
      "hidden": false
     }
    ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)",
    "wild_theme_exempt": true
   },
   {
@@ -9015,7 +12053,9 @@
      "hidden": false,
      "note": "Bleed Shard #2"
     }
-   ]
+   ],
+   "tileset_kit": "G4_FOREST_TOWN+BLEED_OVERLAY",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland; Bleed Veil shimmer at the entrance"
   },
   {
    "id": 560,
@@ -9185,7 +12225,9 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "salt-pan dykes, brine channels, wrecked pier S"
   },
   {
    "id": 561,
@@ -9377,7 +12419,9 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "W: sea cliffs; E: open sea; the landslide"
   },
   {
    "id": 564,
@@ -9495,7 +12539,9 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "sea-cave rock and tide pools"
   },
   {
    "id": 565,
@@ -9569,7 +12615,9 @@
      "party_size": 2,
      "sight": 4
     }
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 568,
@@ -9643,6 +12691,8 @@
      "note": "Bleed Shard #3"
     }
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Saltmere Normal Imprint"
   },
   {
@@ -9816,7 +12866,9 @@
      ],
      "hidden": true
     }
-   ]
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "reed beds and channels, dam wall NW"
   },
   {
    "id": 581,
@@ -9977,7 +13029,9 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "escarpment cliffs and switchback retaining walls; viaduct overhead"
   },
   {
    "id": 582,
@@ -10022,7 +13076,9 @@
      ],
      "says": "ID check; waves PC through"
     }
-   ]
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 584,
@@ -10131,7 +13187,9 @@
      "hidden": false,
      "note": "custom item from Field Effects plugin"
     }
-   ]
+   ],
+   "tileset_kit": "G5_INDUSTRIAL",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 585,
@@ -10181,7 +13239,9 @@
      ],
      "hidden": false
     }
-   ]
+   ],
+   "tileset_kit": "G5_INDUSTRIAL",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 588,
@@ -10255,6 +13315,8 @@
      "note": "Bleed Shard #4"
     }
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Ebbmouth Water Imprint"
   },
   {
@@ -10277,7 +13339,9 @@
    ],
    "key_features": [
     "plateau rail-line east; Lumen->Dunelands"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 601,
@@ -10299,7 +13363,9 @@
    ],
    "key_features": [
     "red canyon road to Duneholt; sandstorm weather"
-   ]
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 604,
@@ -10321,7 +13387,9 @@
    ],
    "key_features": [
     "old tram tunnels from Lumen; DARK (Flash, 4 badges)"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 605,
@@ -10343,7 +13411,9 @@
    ],
    "key_features": [
     "optional"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 608,
@@ -10366,6 +13436,8 @@
    "key_features": [
     "post-Shatter Lowlight; 12 Fixed in glass; story"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Lumen Electric Imprint"
   },
   {
@@ -10388,7 +13460,9 @@
    ],
    "key_features": [
     "deep desert; ruins; Sun Stone"
-   ]
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 621,
@@ -10410,7 +13484,9 @@
    ],
    "key_features": [
     "runoff channels from Lumen's foundries down to Mirefen"
-   ]
+   ],
+   "tileset_kit": "G4_MARSH",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 624,
@@ -10432,7 +13508,9 @@
    ],
    "key_features": [
     "buried Aurel-era ruins; murals; Strength boulders; Unown chambers"
-   ]
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "rock walls"
   },
   {
    "id": 625,
@@ -10455,6 +13533,8 @@
    "key_features": [
     "Unown ruins set piece; Spiritomb static (Odd Keystone)"
    ],
+   "tileset_kit": "G4_RUINS",
+   "border": "rock walls",
    "wild_theme_exempt": true
   },
   {
@@ -10478,6 +13558,8 @@
    "key_features": [
     "liquefying farmland; optional"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Duneholt Ground Imprint"
   },
   {
@@ -10500,7 +13582,9 @@
    ],
    "key_features": [
     "fen boardwalks below the plateau; Surf (6 badges)"
-   ]
+   ],
+   "tileset_kit": "G4_MARSH",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 641,
@@ -10522,7 +13606,9 @@
    ],
    "key_features": [
     "lake crossing south-east toward Ember"
-   ]
+   ],
+   "tileset_kit": "G4_MARSH",
+   "border": "cavern walls, sump water and stacked shanty rooftops"
   },
   {
    "id": 644,
@@ -10544,7 +13630,9 @@
    ],
    "key_features": [
     "sump caves of Lumen runoff"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 645,
@@ -10566,7 +13654,9 @@
    ],
    "key_features": [
     "optional"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 648,
@@ -10589,6 +13679,8 @@
    "key_features": [
     "near the Fixing ward"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Mirefen Poison Imprint"
   },
   {
@@ -10612,6 +13704,8 @@
    "key_features": [
     "optional island via Surf; tropical"
    ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "cliffs/sea as appropriate",
    "wild_theme_exempt": true
   },
   {
@@ -10634,6 +13728,18 @@
    ],
    "key_features": [
     "ash slopes; SootGrass"
+   ],
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "supply columns north; scorched ice-raider wrecks"
+    }
    ]
   },
   {
@@ -10656,6 +13762,18 @@
    ],
    "key_features": [
     "mountain pass to Ironreach's mine-head"
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "cavern walls, sump water and stacked shanty rooftops",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "checkpoint and conscription post"
+    }
    ]
   },
   {
@@ -10676,7 +13794,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_VOLCANIC_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 665,
@@ -10696,7 +13816,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_VOLCANIC_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 666,
@@ -10718,7 +13840,9 @@
    ],
    "key_features": [
     "Meridian geothermal tap (story)"
-   ]
+   ],
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls"
   },
   {
    "id": 668,
@@ -10741,6 +13865,8 @@
    "key_features": [
     "village burning cold"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Cindervault Fire Imprint"
   },
   {
@@ -10763,7 +13889,9 @@
    ],
    "key_features": [
     "mine lift up to highland pastures"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 681,
@@ -10785,7 +13913,9 @@
    ],
    "key_features": [
     "terraces + rainbow falls"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 682,
@@ -10807,7 +13937,9 @@
    ],
    "key_features": [
     "Safari-style reserve (old royal hunting forest) - optional"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 684,
@@ -10829,7 +13961,9 @@
    ],
    "key_features": [
     "pit-fight mines"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 685,
@@ -10849,7 +13983,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 688,
@@ -10872,6 +14008,8 @@
    "key_features": [
     "site of Sable's Conclave attack"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Ironreach Fighting Imprint"
   },
   {
@@ -10892,7 +14030,9 @@
    "branch_only": true,
    "key_features": [
     "branch: Standing Hollow high (Act III) - Hollow hideout under the Royal Chase"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 699,
@@ -10912,7 +14052,9 @@
    "branch_only": true,
    "key_features": [
     "branch: Standing Meridian high (Act III) - Meridian lab in Grudgestone; Type: Null gift line"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 700,
@@ -10934,7 +14076,9 @@
    ],
    "key_features": [
     "runaway-bloom woods north of Verdance"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 701,
@@ -10956,7 +14100,9 @@
    ],
    "key_features": [
     "tundra edge"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 703,
@@ -10978,7 +14124,9 @@
    ],
    "key_features": [
     "REVISIT: deeper Gossamer Wood opened by Verdance's bloom (Strength/Surf)"
-   ]
+   ],
+   "tileset_kit": "G4_OLDWOOD",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 704,
@@ -11000,7 +14148,9 @@
    ],
    "key_features": [
     "ice cave"
-   ]
+   ],
+   "tileset_kit": "G4_ICE_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 705,
@@ -11022,7 +14172,9 @@
    ],
    "key_features": [
     "ice-slide floors"
-   ]
+   ],
+   "tileset_kit": "G4_ICE_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 708,
@@ -11045,6 +14197,8 @@
    "key_features": [
     "Elin's Bride Tree"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Verdance Grass Imprint"
   },
   {
@@ -11067,6 +14221,18 @@
    ],
    "key_features": [
     "Lake Rime shore; Meridian Lattice thawing the lake"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "sled convoys and wounded; watch-fires"
+    }
    ]
   },
   {
@@ -11089,6 +14255,18 @@
    ],
    "key_features": [
     "glacier"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "patrols; burnt waystation"
+    }
    ]
   },
   {
@@ -11111,7 +14289,9 @@
    ],
    "key_features": [
     "REVISIT: Ebbmouth coast cave (Surf+Waterfall later)"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 724,
@@ -11133,7 +14313,9 @@
    ],
    "key_features": [
     "Rock Climb walls"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 725,
@@ -11153,7 +14335,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 726,
@@ -11173,7 +14357,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 728,
@@ -11196,6 +14382,8 @@
    "key_features": [
     "town frozen mid-moment"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Rimeholt Ice Imprint"
   },
   {
@@ -11218,7 +14406,9 @@
    ],
    "key_features": [
     "airship gantries/sky bridges"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 741,
@@ -11240,7 +14430,9 @@
    ],
    "key_features": [
     "descends into the forest"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 742,
@@ -11262,7 +14454,9 @@
    ],
    "key_features": [
     "Elowen lake whose reflection is the gate to Antumbra"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 743,
@@ -11284,7 +14478,9 @@
    ],
    "key_features": [
     "upside-down wood; leads to Lucent"
-   ]
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 744,
@@ -11304,7 +14500,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_INDUSTRIAL",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 745,
@@ -11324,7 +14522,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_INDUSTRIAL",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 746,
@@ -11344,7 +14544,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 748,
@@ -11367,6 +14569,8 @@
    "key_features": [
     "floating islands"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Skyreach Flying Imprint"
   },
   {
@@ -11389,7 +14593,9 @@
    ],
    "key_features": [
     "mirrored plateau; exits back through the mirror"
-   ]
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 761,
@@ -11411,7 +14617,9 @@
    ],
    "key_features": [
     "highland canyon falls (Waterfall)"
-   ]
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 764,
@@ -11431,7 +14639,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CRYSTAL_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 765,
@@ -11451,7 +14661,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CRYSTAL_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 768,
@@ -11472,6 +14684,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Lucent Psychic Imprint"
   },
   {
@@ -11494,7 +14708,9 @@
    ],
    "key_features": [
     "quarry badlands"
-   ]
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 781,
@@ -11516,7 +14732,9 @@
    ],
    "key_features": [
     "fog moors (via the Grave Glass gate)"
-   ]
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 783,
@@ -11538,7 +14756,9 @@
    ],
    "key_features": [
     "REVISIT: deeper Ossuary (Groudon arc)"
-   ]
+   ],
+   "tileset_kit": "G4_RUINS",
+   "border": "canyon walls, dune ridges, sandstone mesas"
   },
   {
    "id": 784,
@@ -11558,7 +14778,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CRYSTAL_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 785,
@@ -11578,7 +14800,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CRYSTAL_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 788,
@@ -11601,6 +14825,8 @@
    "key_features": [
     "petrified village; fossils awaken"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Cragholm Rock Imprint"
   },
   {
@@ -11623,7 +14849,9 @@
    ],
    "key_features": [
     "barrow moors"
-   ]
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 801,
@@ -11645,7 +14873,9 @@
    ],
    "key_features": [
     "industrial wasteland approach"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 804,
@@ -11665,7 +14895,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_RUINS",
+   "border": "rock walls"
   },
   {
    "id": 805,
@@ -11685,7 +14917,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_RUINS",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 806,
@@ -11707,7 +14941,9 @@
    ],
    "key_features": [
     "Antumbra legendary arc (Giratina boss); story-gated"
-   ]
+   ],
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
   },
   {
    "id": 808,
@@ -11728,6 +14964,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Gravenmoor Ghost Imprint"
   },
   {
@@ -11750,7 +14988,9 @@
    ],
    "key_features": [
     "rail scrap line"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 821,
@@ -11772,7 +15012,9 @@
    ],
    "key_features": [
     "drowned coast; sea drawn back by the Fault"
-   ]
+   ],
+   "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
+   "border": "plateau cliff railings, building facades, rail viaducts"
   },
   {
    "id": 822,
@@ -11794,7 +15036,9 @@
    ],
    "key_features": [
     "Dive (15 badges)"
-   ]
+   ],
+   "tileset_kit": "G5_UNDERWATER",
+   "border": "trench walls, kelp forest and drop-offs"
   },
   {
    "id": 824,
@@ -11817,6 +15061,8 @@
    "key_features": [
     "drowned capital beneath Underveil"
    ],
+   "tileset_kit": "G5_UNDERWATER",
+   "border": "trench walls, kelp forest and drop-offs",
    "wild_theme_exempt": true
   },
   {
@@ -11837,7 +15083,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_RUINS",
+   "border": "rock walls"
   },
   {
    "id": 826,
@@ -11860,6 +15108,8 @@
    "key_features": [
     "Voss throne-room scene"
    ],
+   "tileset_kit": "G4_RUINS",
+   "border": "rock walls",
    "wild_theme_exempt": true
   },
   {
@@ -11881,6 +15131,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Cogsworth Steel Imprint"
   },
   {
@@ -11901,7 +15153,9 @@
    "branch_only": true,
    "key_features": [
     "branch: Standing Accord high (Act IV) - sealed archive reached from Aurelia"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 840,
@@ -11923,7 +15177,9 @@
    ],
    "key_features": [
     "underground river"
-   ]
+   ],
+   "tileset_kit": "G5_UNDERCITY",
+   "border": "rock walls"
   },
   {
    "id": 841,
@@ -11945,7 +15201,9 @@
    ],
    "key_features": [
     "twilight forest edge"
-   ]
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 844,
@@ -11965,7 +15223,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CRYSTAL_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 845,
@@ -11987,7 +15247,9 @@
    ],
    "key_features": [
     "Pecharunt arc"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 848,
@@ -12008,6 +15270,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Underveil Dark Imprint",
    "wild_theme_exempt": true
   },
@@ -12029,7 +15293,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
   },
   {
    "id": 861,
@@ -12051,7 +15317,9 @@
    ],
    "key_features": [
     "dragon highlands"
-   ]
+   ],
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls"
   },
   {
    "id": 864,
@@ -12071,7 +15339,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 865,
@@ -12093,7 +15363,9 @@
    ],
    "key_features": [
     "Reshiram arc"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 868,
@@ -12114,6 +15386,8 @@
     "see WORLD.md"
    ],
    "key_features": [],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Gloaming Fairy Imprint"
   },
   {
@@ -12134,7 +15408,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_MOUNTAIN",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
   },
   {
    "id": 884,
@@ -12156,7 +15432,9 @@
    ],
    "key_features": [
     "Victory Road"
-   ]
+   ],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 885,
@@ -12176,7 +15454,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G5_CAVE",
+   "border": "rock walls"
   },
   {
    "id": 886,
@@ -12196,7 +15476,9 @@
    "connections_outline": [
     "see WORLD.md"
    ],
-   "key_features": []
+   "key_features": [],
+   "tileset_kit": "G4_MOUNTAIN",
+   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
   },
   {
    "id": 888,
@@ -12219,6 +15501,8 @@
    "key_features": [
     "AF 290 Glassfall site"
    ],
+   "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
+   "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "all Imprints"
   },
   {
@@ -12240,7 +15524,9 @@
     "postgame"
    ],
    "key_features": [],
-   "postgame": true
+   "postgame": true,
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "cliffs/sea as appropriate"
   },
   {
    "id": 901,
@@ -12261,7 +15547,9 @@
     "postgame"
    ],
    "key_features": [],
-   "postgame": true
+   "postgame": true,
+   "tileset_kit": "G5_UNDERWATER",
+   "border": "trench walls, kelp forest and drop-offs"
   },
   {
    "id": 905,
@@ -12282,7 +15570,9 @@
     "postgame"
    ],
    "key_features": [],
-   "postgame": true
+   "postgame": true,
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "cliffs/sea as appropriate"
   },
   {
    "id": 910,
@@ -12303,7 +15593,279 @@
     "postgame"
    ],
    "key_features": [],
-   "postgame": true
+   "postgame": true,
+   "tileset_kit": "G4_DISTORTION",
+   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+  },
+  {
+   "id": 920,
+   "name": "The Rime Narrows",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "route",
+   "size": [
+    60,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "SNOWY_MOUNTAIN",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "front line: frozen strait on the NE coast where Isenmar's ice meets Ashkaar's Cinder Cape; trenches cut in ice, burnt sled-forts"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 921,
+   "name": "Skaldfast - Outer Walls",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    56,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "SNOWY_MOUNTAIN",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "besieged Isenmar fortress-port: ice-and-granite curtain wall, breached gatehouse, siege ladders, dragonfire scorch"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "visual_brief": {
+    "landmarks": [
+     "breached gatehouse",
+     "ice-and-granite curtain wall",
+     "chained longships",
+     "keep on the harbour mole"
+    ],
+    "silhouette": "squat fortress-port frozen into the sea, smoke and dragon shapes over the walls",
+    "materials": "granite, packed ice, whalebone, scorched timber",
+    "palette": "Rejuvenation winter: steel blue, ash grey, fire orange",
+    "set_pieces": [
+     "dragonfire run along the wall",
+     "sortie across the ice",
+     "hospital in the mead hall"
+    ]
+   }
+  },
+  {
+   "id": 922,
+   "name": "Skaldfast - Harbour Keep",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "town",
+   "size": [
+    48,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "FROZEN_LAKE",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "ice-locked harbour, chained longships, keep on the mole; refugees"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 923,
+   "name": "Skaldfast - Great Hall",
+   "act": 3,
+   "kingdom": "Isenmar",
+   "kind": "interior",
+   "size": [
+    33,
+    25
+   ],
+   "tileset": "Mansion interior",
+   "bgm": null,
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "war council; field hospital in the mead hall"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 924,
+   "name": "Ashkaar Siege Camp",
+   "act": 3,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    56,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "ASHEN_WASTE",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "legion tents, dragon pickets, trebuchets on melting ice; Dominar's war-tent"
+   ],
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls"
+  },
+  {
+   "id": 925,
+   "name": "The Steamline",
+   "act": 3,
+   "kingdom": "Borderland (Ashkaar/Isenmar)",
+   "kind": "route",
+   "size": [
+    64,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "ASHEN_WASTE",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "no-man's-land where lava channels meet sea ice: permanent steam wall, dead ground between the fronts"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
+  },
+  {
+   "id": 926,
+   "name": "The Shattered Ice",
+   "act": 3,
+   "kingdom": "Borderland (Ashkaar/Isenmar)",
+   "kind": "dungeon",
+   "size": [
+    60,
+    48
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "FROZEN_LAKE",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "frozen-sea battlefield for the war climax (pixel-animated beam clash; field melts FROZEN_LAKE->WATER_SURFACE)"
+   ],
+   "tileset_kit": "G4_SNOW_COAST",
+   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "visual_brief": {
+    "landmarks": [
+     "cracked ice plain",
+     "lava-breached floes",
+     "wrecked sled-forts",
+     "two war banners"
+    ],
+    "silhouette": "flat white sea split by glowing fissures under a steam sky",
+    "materials": "sea ice, basalt, steam",
+    "palette": "white/cyan against magma orange, heavy steam overlay",
+    "set_pieces": [
+     "beam clash: fire/dragon vs water/ice",
+     "the ice breaking under both armies",
+     "player caught between the lines"
+    ]
+   }
+  },
+  {
+   "id": 927,
+   "name": "Cinder Cape Warfort",
+   "act": 3,
+   "kingdom": "Ashkaar",
+   "kind": "town",
+   "size": [
+    48,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "VOLCANIC",
+   "segment": 10,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+   ],
+   "key_features": [
+    "Ashkaar staging fortress on a basalt cape; dragon launch ramps"
+   ],
+   "tileset_kit": "G4_VOLCANIC",
+   "border": "basalt cliffs, lava rivers, caldera walls"
+  },
+  {
+   "id": 959,
+   "name": "Skyport Customs",
+   "act": 1,
+   "kingdom": "Zenith",
+   "kind": "interior",
+   "size": [
+    17,
+    11
+   ],
+   "tileset": "Harbour interior",
+   "bgm": null,
+   "field": null,
+   "segment": 3,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      8,
+      10
+     ],
+     "link": "LC_SKYPORT"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "airship purser",
+     "at": [
+      8,
+      3
+     ],
+     "says": "Skyreach shuttle (Act III)"
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 960,
@@ -12323,7 +15885,9 @@
    "ruin_route": true,
    "key_features": [
     "Ruin Route hub: a mirror-archive where game-over epitaphs are written; reached from any Bleed Veil once the Ruin Route unlocks"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 961,
@@ -12343,7 +15907,9 @@
    "ruin_route": true,
    "key_features": [
     "Ruin Route version of 522 at full intensity"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 962,
@@ -12363,7 +15929,9 @@
    "ruin_route": true,
    "key_features": [
     "Ruin Route: where the Gilded Chain is re-forged (player-led)"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 963,
@@ -12383,7 +15951,9 @@
    "ruin_route": true,
    "key_features": [
     "Ruin Route ending area"
-   ]
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   }
  ]
 }

@@ -23,3 +23,8 @@
   recommends it (option A), with Manurocker95's repo as the fallback (option B). Its Gen 9 Pack is 3.3.8 (ours: 3.2.5):
   validators currently target /home/claude/ref/ebdx/PBS; consider re-validating trainers/encounters against
   /home/claude/ref/ebdx_renovation/PBS.
+
+## From: World & level design lead — 2026-11-16 (Rev 5–6 pass)
+1. **Ashkaar's seat** is not named in the lore. WORLD.md §8 provisionally makes it **Pyre Keep on Cindervault's caldera rim** (Wyrmrest stays the pass fortress). Story team: confirm or move it.
+2. **Antumbra's seat** is provisionally the **Palace of Glass in the Speculum** (Lucent's inverted reflection), with the Veiled Synod's court there.
+3. **War geography** (§9): Ashkaar and Isenmar don't share a land border on the map, so the front is the north-east coast (Rime Narrows / Cinder Cape), with besieged **Skaldfast** and the **Shattered Ice** climax field. All names are provisional.

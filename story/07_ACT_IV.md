@@ -27,6 +27,8 @@
 - Lantern Hollow faithful: **Rowan**, gaunt (or their new leader, if he drowned), with **Wick** and **Thistle**.
 - **Corvin's field hospital**, if `CORVIN_FREED`. That flag comes from the Act III side quest "The Doctor's Cell", available Ch11–13: Corvin was arrested under the Mandate for treating Hollow wounded, and the PC can free him from a Directorate holding barge on Lake Sallow. If he wasn't freed, the hospital is run by a frightened **Wenlow** alone, and Corvin's absence is felt.
 
+**Anja** arrives on the second day with a column of Rimeholt refugees, frostbitten and furious at herself. If she was exposed in Ch11 she won't meet the PC's eyes, and if she confessed she shakes their hand. This is her second encounter before the Festival.
+
 Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he and Juno (if she's visited) don't speak, but they sit at the same table. If he drowned, Juno sits with Thistle, who was with him at the end.
 
 **Bastian's account.**
@@ -65,6 +67,7 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 **Location:** R27 (`:MOUNTAIN`), R28 (Antumbra moors, fog), **Gravenmoor** (Antumbra, `:HOLLOW_CATHEDRAL`), **Vane Hall** (haunted house), the **Lantern Hospice**, the barrows, then on the way out **Barrow of the Wardens** and **Giratina's Reverse Depths** (806, `:INVERSE`), **The Hush** (808).
 
 **Arrival: Antumbra, second visit.** Gravenmoor is fog, barrows and lanterns. The Spooky Plate makes the dead *linger as echoes*: a woman sweeping a step that isn't there, two children playing a game that ended in AF 211.
+- **Archseer Dask** has come to Gravenmoor himself (his second encounter, needed for the Ruin Route): "The echoes are louder. Louder, the echoes. Something behind the Glass is listening back."
 - The Veiled Synod's lantern-priests are frightened. Since the Fault, the echoes have been getting **louder**, and some have started to notice the living.
 - Warden **Ysolde Ashgrave**, lace and veil, lantern always lit, greets the PC softly: "The dead aren't gone here. They're just very bad at conversation." She knows who the PC is. She has been waiting for them, and for Kestrel.
 

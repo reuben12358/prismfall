@@ -115,8 +115,13 @@ SINGLE_BOSSES = [  # (type, name, min ace level, max ace level) - Standard/Hard
 ]
 # Every FESTIVAL_<NAME> cameo type that has trainer data must have 0/100/200 and an
 # ace in this range (Standard/Hard).
-CAMEO_LEVELS = (92, 96)   # exhibition (version 0)
-CAMEO_STAGE_ACE = {1: 90, 2: 92, 3: 94, 9: 100}
+# design/CAMEOS.md placements: {type: {version: ace level}}
+CAMEO_PLACEMENT = {
+    "FESTIVAL_SHELLY": {1: 17, 2: 100}, "FESTIVAL_VENAM": {1: 38, 2: 100}, "FESTIVAL_GARRET": {1: 46, 2: 100},
+    "FESTIVAL_MELIA": {1: 50, 2: 100}, "FESTIVAL_ALEXANDRA": {1: 56, 2: 100}, "FESTIVAL_AMARIA": {1: 78, 2: 100},
+    "FESTIVAL_TITANIA": {1: 78, 2: 100}, "FESTIVAL_SHIV": {1: 84, 2: 100}, "FESTIVAL_LIN": {1: 100},
+    "FESTIVAL_NOVA": {1: 90},
+}
 DIFF_NAMES = {0: "Standard", 1: "Hard", 2: "Casual"}
 
 
@@ -505,10 +510,10 @@ def validate_mon(t, mon, ref, rep, allow, megaring_items):
             else:
                 if all(s[0] == "level" for s in src):
                     lvl = min(s[1] for s in src)
-                    if lvl > mon.level and not allowed:
+                    if lvl > mon.level and not allowed and not t.ttype.startswith("FESTIVAL_"):
                         rep.warn(where, "%s learns %s only by level-up at L%d (> L%d)"
                                  % (data["name"], m, lvl, mon.level))
-    elif t.ttype not in ref.ref_trainer_types and not re.search(r"_(GRUNT|AGENT)(_[MF])?$", t.ttype):
+    elif t.ttype not in ref.ref_trainer_types and not re.search(r"_(GRUNT|AGENT|SOLDIER)(_[MF])?$", t.ttype):
         # stock route trainers and generic grunts may use level-up movesets
         rep.warn(where, "no Moves given (will use level-up moveset)")
     # ability
@@ -643,24 +648,27 @@ def validate_scheme(trainers, types, rep):
             top = max(m.level for m in t.mons)
             if d != 2 and not (lo <= top <= hi):
                 rep.warn(t.label(), "ace level %d outside expected %d-%d" % (top, lo, hi))
-    # Cameos (design/CAMEOS.md): v0 exhibition (ace 92-96), v1 R16 (90), v2 QF (92),
-    # v3 SF/Final-tier (94), v9 post-game (100); every base needs +100/+200.
+    # Cameos (design/CAMEOS.md, SPINE Rev 4): optional sidequest fights. v1 = sidequest at its
+    # placement level, v2 = post-game rematch at 100; every base needs +100/+200.
     cameo_names = sorted({(t.ttype, t.name) for t in trainers if t.ttype.startswith("FESTIVAL_")})
     for tt, nm in cameo_names:
         if tt not in types:
             rep.err("scheme", "trainer type %s missing from trainer_types.txt" % tt)
         bases = sorted({t.version % 100 for t in trainers if (t.ttype, t.name) == (tt, nm)})
-        if 0 not in bases:
-            rep.err("scheme", "cameo %s,%s has no exhibition version 0" % (tt, nm))
-        for b in bases:
+        want = CAMEO_PLACEMENT.get(tt)
+        if want is None:
+            rep.warn("scheme", "cameo %s has no placement in the validator's CAMEO_PLACEMENT table" % tt)
+            continue
+        for b in sorted(set(bases) | set(want)):
+            if b not in want:
+                rep.warn("scheme", "cameo [%s,%s,%d] is not a version listed in CAMEOS.md" % (tt, nm, b))
+                continue
             for d in (0, 1, 2):
                 t = need((tt, nm, b + 100 * d), "(cameo %s)" % DIFF_NAMES[d])
-                if not t or d == 2:
-                    continue
-                top = max(m.level for m in t.mons)
-                lo, hi = CAMEO_LEVELS if b == 0 else (CAMEO_STAGE_ACE.get(b, 0),) * 2
-                if not (lo <= top <= hi):
-                    rep.warn(t.label(), "cameo ace level %d outside %d-%d" % (top, lo, hi))
+                if t and d != 2:
+                    top = max(m.level for m in t.mons)
+                    if top != want[b]:
+                        rep.warn(t.label(), "cameo ace level %d, CAMEOS.md placement says %d" % (top, want[b]))
     # Every Prismfall (non-stock) base version must have its Hard and Casual variants
     for t in trainers:
         if t.version < 100 and t.ttype in types:
