@@ -156,44 +156,38 @@ Core writes these from NARRATIVE_KEYS only if an event page condition needs one.
 
 ---
 
-## Proposed narrative keys (crosswalk for NARRATIVE_KEYS.md)
+## Narrative keys, game overs and endings
 
-These are the choice and outcome keys used in story files 04–08. **Narrative Systems owns the final names, values and effects.** Rename freely, but tell the story lead so the act files can be updated.
+**Superseded:** the crosswalk that used to sit here has been adopted and finalized by Narrative Systems. The single source is **`design/NARRATIVE_KEYS.md`**:
+- Choice keys are lowercase symbols (`:ch9_teo_sable`, `:war_climax`), §4 and §4.3.
+- Derived flags keep their uppercase names (`TEO_SAVED`, `WAR_STOPPED`), §5.
+- Game overs are `GO_<NAME>` (23 canonical plus 2 Ruin-only), §9. "Encore" was cut. `GO_WEATHER` and `GO_STAY_OUT` were added.
+- Endings: 1 Good, 1 Bad, 6 Grey, 2 Ruin, §12.
 
-| Key | Chapter | Values (suggested) |
+Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC's delegation colors, flavor) and `:ch21_boon` (the Blessed's one decree in the Good ending). Both are described in `story/14_WAR_AND_BLESSING.md`.
+
+## Additions since the first registry (Revisions 4–6)
+
+| ID | Name | Meaning |
 |---|---|---|
-| PRO_FELLOWSHIP | P | accept / decline / silent |
-| CH2_TAMSIN | 2 | expose / help_confess / keep_secret |
-| CH3_JUNO_TALK | 3 | told / deflect / silent |
-| CH4_KESTREL_MOURNER | 4 | kind / blunt / silent |
-| CH4_TEO | 4 | report / keep_secret / confront |
-| CH5_LOWLIGHT_TESTIMONY | 5 | mourner / someone_else / unknown |
-| CH6_DRILLSITE | 6 | hollow / directorate / sanctuary |
-| CH6_KESTREL_RUMOR | 6 | encourage / warn / silent |
-| CH7_LEDGER | 7 | name_him / reassure / ask_corvin |
-| CH8_CALDERA | 8 | vent / dampers / shutdown |
-| CH8_LIGHTSTONE | 8 | hearthguild / wyrmrest / dominar |
-| CH9_TEO_SABLE | 9 | save_teo (→ TEO_SAVED) / chase_sable (→ IRONREACH_EVIDENCE) |
-| CH9_ROWAN_WORDS | 9 | why / look_after / silent |
-| CH10_OGRE | 10 | ogre (→ OGERPON_TRUSTED) / three (GO) / hesitate |
-| CH10_SUCCESSION_STANCE | 10 | accord / kingdoms / nobody |
-| CH11_ANJA | 11 | expose (→ ANJA_EXPOSED) / let_confess |
-| CH12_LETTER | 12 | keep / send / burn |
-| CH13_REMEMBER | 13 | show / scared / not_yet |
-| CH13_KAITO | 13 | encourage (→ KAITO_TESTIFIED) / spare |
-| CH13_ROWAN_TESTIMONY | 13 | condemn / mercy / refuse |
-| CH14_TELEMETRY | 14 | destroy / sabotage (→ TELEMETRY_SABOTAGED) / leave |
-| CH14_MARCHETTI | 14 | show_evidence (→ MARCHETTI_TURNED eligible) / none |
-| CH15_KESTREL | 15 | sorry / she_chose / resolve |
-| CH16_ROOK | 16 | leak_now / hold |
-| CH16_MAGNUS | 16 | expose (→ MAGNUS_EXPOSED) / conscience (→ MAGNUS_KEPT_FAITH) |
-| CH17_NYX | 17 | trade (→ NYX_BARGAIN_TAKEN) / refuse |
-| CH17_VOSS_OFFER | 17 | refuse / feign (→ VOSS_FEIGNED) / accept (→ VOSS_ACCEPTED) |
-| CH18_KESTREL_RING | 18 | give_now / keep |
-| CH19_OATH | 19 | return / keep / open / ruin |
-| CH20_AUDIENCE | 20 | return / keep / refuse |
-| CH21_CROWN | 21 | kneel / stand / step_back |
-| CH21_FINAL | 21 | return / keep / unmake / concord / borrowed |
-| Outcome-only keys | various | ZEKROM_FREED, CORVIN_FREED, ILSA_RECONCILED, DOMINAR_SWAYED, ENVOY_PERSUADED, PC_SPARED_VOSS, KESTREL_ACCEPTED_SEAT, KESTREL_YSOLDE_RECONCILED, TAMSIN_PUBLIC_CONFESSION |
+| V122 | WAR_STATE | 0 = tension, 1 = passes closed (Ch8), 2 = war declared (Ch11), 3 = Siege of Skaldfast (Ch15), 4 = Battle of the Shattered Ice fought (Ch19), 5 = Peace of Plates (Festival), 6 = settled (ending) |
+| V123 | CAMEO_QUESTS_DONE | Count of sister-game sidequests completed (0–8) for NPC chatter |
+| S181 | CAMEO_SHELLY_DONE | "Lost in the Gossamer" complete |
+| S182 | CAMEO_VENAM_DONE | "Sewer Royalty" complete (Venam's Testimony obtained) |
+| S183 | CAMEO_GARRET_DONE | "Two Lucarios" complete |
+| S184 | CAMEO_MELIA_DONE | "What Are You For?" complete |
+| S185 | CAMEO_ALEXANDRA_DONE | "Crystal Sleep" complete |
+| S186 | CAMEO_AMARIA_TITANIA_DONE | "Deliverer" complete |
+| S187 | CAMEO_SHIV_DONE | "Dreamwalker" complete |
+| S188 | CAMEO_LIN_DONE | Lin superboss beaten (post-game) |
+| S189 | CAMEO_NOVA_DONE | Nova fought (Ruin Route) |
+| S190 | VESPER_MET_SALTMERE | Eevee Octave first meeting (Ch3) |
+| S191 | VESPER_MET_LUCENT | Eevee Octave second meeting (Ch13); the Festival exhibition needs both |
+| S192 | WAR_CUTSCENE_SEEN | WAR-1 has played (enables skip and theater replay) |
+| S193 | RUIN_ROUTE_ACTIVE | Event-page mirror of Core's `ruin_route` (Core-written, read-only) |
+| S229 | Mirror: Rowan alive (`ROWAN_ALIVE`) | Rowan vs Teo/Thistle NPC pages in Acts IV–V (Core-written) |
+| S230 | Mirror: war outcome is a victory for Ashkaar | Banner events at Skaldfast and the Festival pavilions (Core-written) |
+| S231 | Mirror: war outcome is a victory for Isenmar | Same |
+| S232 | Mirror: `WAR_BOTH_BROKEN` | Empty pavilions for both kingdoms |
 
-**Proposed game overs** (titles and triggers in 04–08): GO-01 Homeward · 02 Two in the Orchard · 03 Curtain Call · 04 Live Wire · 05 Sinkfield · 06 Sweet Tooth · 07 Let Them Listen · 08 Pull the Nail · 09 Loyal · 10 Thin Ice · 11 Read the Fine Print (Kestrel interlude) · 12 Looking Back · 13 Willing · 14 Echo · 15 Overtime · 16 Into the Line · 17 The Throne · 18 Fair Bargain · 19 Liar's Pyre · 20 Encore (optional) · 21 Early Crown · 22 His Hand. That is 22 candidates. Narrative Systems picks the canonical set (≥12) and the IDs.
+S181–S193 use part of the block previously reserved for per-Warden side-arc steps; S194–S220 remain reserved for those. V122–V123 use two of the reserved chapter counters.

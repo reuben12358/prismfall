@@ -7,7 +7,7 @@
 
 ## WAR-1 — "The Beam Clash on the Shattered Ice" (Ch19 climax; ~95 s)
 
-**Backdrop:** the Shattered Ice (broken sea-ice plates, black water between; Skaldfast's walls left, Cinder Cape Warfort right; dawn). **Variants:** A = PC stands between (`:ch19_war` = between), B = rode with Ashkaar, C = sailed with Isenmar.
+**Backdrop:** the Shattered Ice (broken sea-ice plates, black water between; Skaldfast's walls left, Cinder Cape Warfort right; dawn). **Variants** (NARRATIVE_KEYS §4.3): A = `WAR_STOPPED`, A′ = `WAR_BOTH_BROKEN` (shots 1–10 as A; then shot 11 is a white-out, shot 12 is cut, and shot 13 shows both lines gone and the two rulers alone on the glass), B = `WAR_ASHKAAR_WON`, C = `WAR_ISENMAR_WON`. If `:war_legend` kept the legendaries away, shots 2–5 use Sigrun's Salamence (Draco Meteor, then Flamethrower) against Anja's Mamoswine or Marisol's Gyarados (Blizzard / Hydro Pump); the clash in shot 6 is unchanged.
 
 | # | Camera | Action | FX | Text |
 |---|---|---|---|---|
@@ -35,7 +35,7 @@
 
 ## Festival highlight cutscenes (companion vs companion)
 
-Offered as "Watch the highlights?" after any NPC-vs-NPC match (~25–35 s each). All on the Temple-Arena backdrop with the active gym field's tint. Outcomes follow the player's choices.
+Offered as "Watch the highlights?" after any NPC-vs-NPC match (~25–35 s each). **Winners and key moments for all twelve companion pairings are data in NARRATIVE_KEYS §6 (`:pair`, `:winner`, `:moments`).** The four below are the fully storyboarded ones; the other eight use the generic three-shot template (entrance, key moment, result) with the listed moments. All on the Temple-Arena backdrop with the active gym field's tint. Outcomes follow the player's choices.
 
 ### FH-1 — Juno vs Kestrel (R16 or QF, whenever the bowl pairs Elowen and Zenith)
 **Variants:** A = Kestrel Redeemed-track (not `KESTREL_FALLEN`), B = Fallen, C = Juno wins (Kestrel Bond ≥ 5 *and* Juno Bond ≥ 5: he lets himself lose honestly; *(proposed `JUNO_BEATS_KESTREL`)*).
@@ -62,7 +62,7 @@ Offered as "Watch the highlights?" after any NPC-vs-NPC match (~25–35 s each).
 | 6 | Two-shot (4 s) | Valen catches himself on one knee. Sigrun stares, furious, then offers her arm. He takes it | — | Sigrun: "You beat me with an arm made of glass." |
 
 ### FH-3 — Anja vs Sigrun, "the Truce Match" (R16 or QF; Isenmar vs Ashkaar)
-A second, deliberate **beam clash**, this time under rules. **Variants** follow `:ch19_war`: A = stood between, B = Ashkaar won, C = Isenmar won. If the Thane or the Dominar replaced a delegate, swap the sprite and lines (Eirik's Walrein / Hrothgar's Charizard).
+A second, deliberate **beam clash**, this time under rules. **Variants:** A = `WAR_STOPPED`, B = `WAR_ASHKAAR_WON`, C = `WAR_ISENMAR_WON`. (If a kingdom forfeited its second seat, the pairing is Marisol vs Sigrun or Anja vs Brann, with the same shots.) If the Thane or the Dominar replaced a delegate, swap the sprite and lines (Eirik's Walrein / Hrothgar's Charizard).
 | # | Camera | Action | FX | Text |
 |---|---|---|---|---|
 | 1 | Wide, split stands (3 s) | Isenmar furs left, Ashkaar red right. Wardguard line between the blocks | Banners | Hierophant: "Under the Peace of Plates." |

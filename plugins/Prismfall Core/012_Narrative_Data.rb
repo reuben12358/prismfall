@@ -237,14 +237,14 @@ module Prismfall
     WARDEN_CONSENT = [
       "choice(:ch2_tamsin) != :keep_secret",                          #  1 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
       "choice(:ch5_lowlight_testimony) != :mourner",                  #  2 Dorian  - you told the official story on record; he keeps the lie he knows
-      "flag(:TEO_SAVED) || bond(:MARISOL) >= 3",                      #  3 Marisol
+      "(flag(:TEO_SAVED) || bond(:MARISOL) >= 3) && !flag(:ISENMAR_EMBITTERED)",                    #  3 Marisol
       "flag(:ROOK_CUTS_GRID) || flag(:MARCHETTI_TURNED)",             #  4 Rook    - the Zap Plate is in Meridian's vault; he can only release what he can reach
       "choice(:ch6_drillsite) != :directorate",                       #  5 Sahar
       "flag(:CORVIN_FREED)",                                          #  6 Corvin  - otherwise a Choir porter carries his Plate and can't release it
-      "choice(:ch8_lightstone) != :dominar",                          #  7 Brann
+      "choice(:ch8_lightstone) != :dominar && !flag(:ASHKAAR_EMBITTERED)",                      #  7 Brann
       "flag(:KAITO_TESTIFIED)",                                       #  8 Kaito   - a man who never confessed can't let go
       "bond(:JUNO) >= 0",                                             #  9 Juno
-      "choice(:ch11_anja) == :let_confess",                           # 10 Anja    - "Rimeholt drowns without it."
+      "choice(:ch11_anja) == :let_confess && !flag(:ISENMAR_EMBITTERED)",                      # 10 Anja    - "Rimeholt drowns without it."
       "choice(:ch12_letter) != :burn",                                # 11 Odessa  - you burned a dead letter
       "flag(:ILSA_RECONCILED) || bond(:ILSA) >= 5",                   # 12 Ilsa
       "choice(:ch14_telemetry) != :leave",                            # 13 Bastian - you walked a Meridian beacon into his seams
@@ -252,7 +252,7 @@ module Prismfall
       "flag(:MAGNUS_KEPT_FAITH)",                                     # 15 Magnus  - "I won't hand my city's future to a god."
       "flag(:NYX_BARGAIN_TAKEN) || bond(:NYX) >= 4",                  # 16 Nyx
       "resonance >= 2",                                               # 17 Celestine - she hears which key you sing in
-      "choice(:ch19_oath) != :keep && choice(:ch19_oath) != :ruin"    # 18 Sigrun
+      "choice(:ch19_oath) != :keep && choice(:ch19_oath) != :ruin && !flag(:ASHKAAR_EMBITTERED)"    # 18 Sigrun
     ]
 
     TALLIES = {
@@ -273,6 +273,53 @@ module Prismfall
       :WARM_BONDS    => ["bond(:JUNO) >= 5", "bond(:KESTREL) >= 5", "bond(:ROWAN) >= 5", "bond(:VOSS) >= 5", "bond(:VALEN) >= 5",
                          "bond(:ILSA) >= 5", "bond(:SIGRUN) >= 5", "bond(:NYX) >= 5", "bond(:MARISOL) >= 5", "bond(:YSOLDE) >= 5"]
     }
+
+    #---------------------------------------------------------------------------
+    # 4.3 The Ashkaar-Isenmar War (SPINE Revision 6): choices, effects, WAR_TRUST
+    # tally and outcome flags (WAR_STOPPED / WAR_BOTH_BROKEN / WAR_ASHKAAR_WON /
+    # WAR_ISENMAR_WON). Merged after the base tables below are defined.
+    #---------------------------------------------------------------------------
+    CHOICES.merge!({
+      :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
+      :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Bleed-front: food for besieged Rimeholt, or harpoon-guns" },
+      :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
+      :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
+      :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the frozen strait" },
+      :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table (only if one side won)" }
+    })
+    CHOICE_EFFECTS.merge!({
+      :war_warning  => { :warn_isenmar => "MARISOL+2 SIGRUN-2", :warn_ashkaar => "SIGRUN+1 MARISOL-2", :warn_both => "ACCORD+2 SIGRUN+1 MARISOL+1", :silent => "RES-1" },
+      :war_convoy   => { :relief => "MARISOL+2 RES+1", :arms => "MARISOL+3 SIGRUN-2 RES-1", :refuse => "MARISOL-2" },
+      :war_prisoner => { :free => "RES+1 ACCORD-1", :exchange => "ACCORD+2", :leave => "RES-1" },
+      :war_legend   => { :calm_kyogre => "RES+2 MARISOL-1", :wake_reshiram => "SIGRUN+1 RES-2", :neither => "" },
+      :war_climax   => { :stand_between => "RES+2 ACCORD+1", :back_ashkaar => "SIGRUN+2 MARISOL-4 RES-1", :back_isenmar => "MARISOL+3 SIGRUN-4 RES-1" },
+      :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" }
+    })
+    TALLIES[:WAR_TRUST] = [                       # what both armies have seen the PC do
+      "choice(:war_warning) == :warn_both",
+      "choice(:war_convoy) == :relief",
+      "choice(:war_prisoner) != :leave",
+      "choice(:war_legend) == :calm_kyogre || choice(:war_legend) == :neither",
+      "bond(:SIGRUN) >= 4",
+      "bond(:MARISOL) >= 3"
+    ]
+    DERIVED_FLAGS.merge!({
+      :WAR_STOPPED       => "choice(:war_climax) == :stand_between && tally(:WAR_TRUST) >= 4",   # both lines hold fire; the beams meet over the PC and part
+      :WAR_BOTH_BROKEN   => "choice(:war_climax) == :stand_between && tally(:WAR_TRUST) < 4",    # nobody listens; the clash detonates and breaks both armies
+      :WAR_ASHKAAR_WON   => "choice(:war_climax) == :back_ashkaar",
+      :WAR_ISENMAR_WON   => "choice(:war_climax) == :back_isenmar",
+      :WAR_OCCUPATION    => "choice(:war_terms) == :occupation",
+      :ISENMAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ASHKAAR_WON) && choice(:war_terms) != :mercy)",
+      :ASHKAAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)"
+    })
+
+    # 6.1 Delegation flags
+    DERIVED_FLAGS.merge!({
+      :KESTREL_FOR_ANTUMBRA => "flag(:KESTREL_REDEEMED) && (choice(:ch18_kestrel_ring) == :give_now || bond(:YSOLDE) >= 4)",  # Gravenmoor names him; else he's Meridian's sponsored champion for Zenith
+      :ISENMAR_ONE_SEAT     => "flag(:WAR_ASHKAAR_WON) || flag(:WAR_BOTH_BROKEN)",
+      :ASHKAAR_ONE_SEAT     => "flag(:WAR_ISENMAR_WON) || flag(:WAR_BOTH_BROKEN)",
+      :ISENMAR_KEEPS_ANJA   => "flag(:ANJA_EXPOSED) && (flag(:TEO_SAVED) || bond(:MARISOL) > 2)"   # the one with the open account with you stays
+    })
 
     # Core-written mirror switches (design/FLAGS.md S221-S228), refreshed on every
     # narrative change. Events read them, never write them.
@@ -346,7 +393,7 @@ module Prismfall
                                 :epitaph => "It didn't hurt. That was the cruelest part." },
       # Ruin Route only (not needed for the unlock)
       :GO_R_WELCOME_BEHIND => { :title => "Welcome, Behind",   :hint => "Ruin. The Archseer's kindness.", :ruin_exempt => true,
-                            :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
+                                :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
       :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
                                 :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
     }
@@ -380,7 +427,7 @@ module Prismfall
       [:END_HOLLOW_SPRING,    "choice(:ch21_final) == :unmake"],
       [:END_BORROWED_CROWN,   "choice(:ch21_final) == :borrowed"],
       [:END_LONG_VIGIL,       "choice(:ch21_final) == :keep"],
-      [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2)"],
+      [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || flag(:WAR_OCCUPATION))"],
       [:END_EMPTY_LIGHTHOUSE, "choice(:ch21_final) == :return && flag(:KESTREL_LOST)"],
       [:END_HOMECOMING,       "choice(:ch21_final) == :return"]
     ]

@@ -1,0 +1,28 @@
+# Stamps mined from Tectonic reference maps (objects only; layouts are never copied). See textract.py.
+# seed = a cell inside the object: the 4-connected blob of non-terrain tiles on layers 1-2 is taken.
+drop: [401-422, 600-622, 728-775, 936-951, 1160-1175, 2384-2391, 2608-2633, 1632-1655, 2504-2528, 2560-2583,
+       1936-1967, 1064-1073, 7096-7103]
+stamps:
+  t_pokecenter:  {map: 217, seed: [27, 26]}
+  t_theatre:     {map: 217, seed: [32, 9]}
+  t_shop_purple: {map: 217, seed: [38, 9]}
+  t_greenhouse:  {map: 217, seed: [25, 10]}
+  t_house_red:   {map: 217, seed: [23, 21]}
+  t_house_red2:  {map: 217, seed: [37, 21]}
+  t_house_blue:  {map: 217, seed: [18, 25]}
+  t_house_blue2: {map: 217, seed: [43, 21]}
+  t_mart:        {map: 217, seed: [37, 30]}
+  t_warehouse:   {map: 217, seed: [5, 26]}
+  t_lodge:       {map: 217, seed: [50, 37]}
+  t_lighthouse:  {map: 217, seed: [59, 48]}
+  t_ship:        {map: 217, seed: [32, 59]}
+  t_stairs:      {map: 217, seed: [31, 19]}
+  t_stairs_s:    {map: 217, seed: [34, 19]}
+  t_cont_green:  {map: 217, seed: [15, 47]}
+  t_cont_brown:  {map: 217, seed: [18, 44]}
+  t_cont_long:   {map: 217, seed: [24, 48]}
+  t_crate_big:   {map: 217, seed: [23, 41]}
+  t_crate_big2:  {map: 217, seed: [31, 48]}
+  t_crate_small: {map: 217, seed: [28, 39]}
+  t_bench:       {map: 217, seed: [19, 37]}
+  t_table:       {map: 217, seed: [50, 34]}

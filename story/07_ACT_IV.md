@@ -232,6 +232,8 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
    - **Accept** (`VOSS_ACCEPTED`): this opens the Concord Dawn ending path. Narrative Systems owns the consequences.
 7. **Meridian admin battle: Kroll** (`MERIDIAN_KROLL`), or **Quent** if Kroll was beaten publicly in Ch13. They hold the PC off while Voss's team lifts the **keystone cradle** out through the wall. Voss leaves on a Meridian submarine. His last words: "Win your badges. I'll see you at the coronation."
 
+**Ysolde in Underveil.** The Ghost Warden has come down the lifts with a cart of Gravenmoor lanterns, one for each of the Purge's dead, and she lights them along the Moon Market stairs with Nyx's people. She asks the PC one thing: "Is he eating? Kestrel. You'd know better than I would." (Her third scene before the Festival.)
+
 **Brann's confession** (if not already given in the Archive branch). Above water, at Underveil's docks, **Brann Holloway** is waiting. He has come from Crownhaven on Valen's behalf. Confronted with everything, he tells the truth at last:
 - The Tuning is real.
 - The Crown kills Sovereigns.

@@ -78,7 +78,7 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
   - the Light Stone sent to Wyrmrest (`:ch8_lightstone` = wyrmrest) **plus** proof (the **Arbiter Blueprints** or the **Larch Papers**), **or**
   - Sigrun's Bond ≥ 4, so that she speaks for the PC (`:ch19_dominar`).
 - Success: "If the god is in chains, then dragons will break them. Not for the Accord. For the god." His legions are present in the hijack.
-- Failure: the legions march on Zenith during the Festival. In the epilogue, war is narrowly averted, or not, depending on the ending.
+- Failure: his riders go home after the truce and take no part in defending Crownhaven. (`DOMINAR_SWAYED` can't be set if Isenmar won the war without mercy terms.)
 
 ### Sigrun's trial (Wyrmscar Rift)
 1. Sigrun won't let the PC challenge her until they walk the **Wyrmscar Rift** to the Draco Plate with her and **speak aloud what they intend to do at the Festival**.
@@ -124,7 +124,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
    - **Envoy Delphine Okoro** of the Concert, deciding on Severance.
 4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." No foreign champions come this year. Every entrant is someone the PC has met on the road (Revision 5).
 5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps.
-   - **Sixteen seeds**, all established characters, are listed in NARRATIVE_KEYS §6 (Revision 5 re-fill pending). Story staging for each candidate is written below and updated when the list lands.
+   - **Sixteen stand in the arena:** the PC and fifteen kingdom delegates (10_CHOICES_ENDINGS §3.1; staging in 14_WAR_AND_BLESSING Part A). The war decides how many seats Isenmar and Ashkaar hold.
    - The lots are honest; the bowl isn't. The Accord's old customs (the Right of Grievance, yielded invitations, a Warden asking for a challenger's quarter, and Dorian, who has never once let the bowl ruin a good story) bend it on screen (NS §3.1).
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
@@ -168,8 +168,8 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 - Without the testimony, Juno does it herself, more slowly: "Corvin says they dream. I'm going to believe him."
 - If Rowan drowned, Juno sits alone with Elin's pressed lily from the Bride Tree.
 
-**Other R16 results:** per the revised draw (pending). Story requirements:
-- **Kestrel** advances with the Gauntlet, and his opponent says aloud that something is driving his Pokémon.
+**Other R16 results** follow the companion match rules (NARRATIVE_KEYS §6), and each can be watched as a highlight (`13_CUTSCENES.md`). Story requirements:
+- **Kestrel** advances with the Gauntlet. **Kaito**, whose Lucario felt it, says it aloud: "That isn't him fighting."
 - **Valen** and **Sigrun** advance.
 
 ### Day 3: Exhibitions and the Festival Grounds
@@ -187,12 +187,12 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 
 ### Day 4: Quarterfinal ("the honest view")
 The story job is an honest view of the PC's choice from someone who isn't trying to use them, delivered in a hard fight at cap 92. Conditional candidates swap seeds with the fallback (NS §3.5).
-- **Fallback (pending the revised §6):** an established character who carries the **outside confirmation of the Return**. Suggested: **Professor Larch**, who has the history for it (she designed the Lattice that drained the Zap Plate in Meridian's vault):
-  > *"I built the box. Eleven cities' worth of box. You want to know what happens when you keep a god in one? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."*
-- **Celestine** (Resonance ≤ −3): "You're getting louder in the wrong key. I'd like to hear it up close."
+- **Celestine (fallback, the headline).** She confirms the Return, and it counts as an oath because she cannot lie: "I cannot lie, so listen while we fight." After the match:
+  > *"Give them back. I've waited forty years to say that to someone who could."*
+- **Sigrun** (Resonance ≤ −3, or the PC helped Isenmar break her father's legions): "Dragons weigh things. You've gotten heavier."
 - **Kaito** (the oath was Keep): "You'd keep them? Marrowgate's still knocking."
 - **Ysolde** (Kestrel has fallen): "If I can't reach him, I'll find out what reached you."
-- **A close friend** (five or more close Bonds and Harmony-leaning; pending): "Everyone keeps telling you what you're *for*. Have you decided yet?"
+- **Odessa** (she holds a seat; five close Bonds; Harmony-leaning): "Everyone keeps telling you what you're *for*. The wind doesn't care. What do *you* want?"
 - *(Ruin Route: Archseer Dask. See 12_RUIN_ROUTE.)*
 
 **Other QF** (default): **Kestrel** advances. **Valen** advances. **Sigrun** advances.
@@ -306,7 +306,7 @@ See Chapter 21.
 - **Dr. Quent** (Voss discredited: `MAGNUS_EXPOSED` plus Rook's leak plus the Night of Masques). The board removed Voss in disgrace before Day 7. Quent giggles in the harness, with Voss's Silvally team. Voss watches from the gallery, appalled at his own machine in someone else's hands.
 - **Ruin Route:** Theodric, the Gilded Reflection (`story/12_RUIN_ROUTE.md`, R7).
 
-**His hand.** Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt."
+**His hand.** Larch has warned the PC that morning: "Don't let him make you a part. He's very good at parts." Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt."
 - **With `VOSS_ACCEPTED`** (`:ch21_hand`):
   - *Take* it: **Concord Dawn** begins here, and Arceus is never fought.
   - *Refuse*: Voss, genuinely hurt: "You promised."
@@ -440,7 +440,7 @@ The PC uses the shard to **break** the Plates. The Imprints die in one night of 
 ### GREY: "Concord Dawn"
 - Arceus is "humanely" half-bound by Magnus's governor and powers the realm.
 - The Bleed ends and prosperity booms. The PC sits on the Zenith Council.
-- Over the last slide, Larch, retired to Tidewatch, speaks: "It's quiet. For a while."
+- Over the last slide, Celestine speaks in fairy-tale cadence: "Once upon a time a god was kept in a box. It was quiet. For a while."
 - **If reached through `:ch21_hand`,** the PC never fought Arceus. The last slide is the PC reading the arena's power output on a Council screen.
 - Post-game: partial (Spire only; the Wardens are pensioned off; Quent's Concord Zero arc starts).
 

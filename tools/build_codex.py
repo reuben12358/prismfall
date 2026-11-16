@@ -17,8 +17,12 @@ CHAPTERS = [
     ("story/07_ACT_IV.md", "act-4", "Act IV"),
     ("story/08_ACT_V.md", "act-5", "Act V"),
     ("story/09_MYSTERIES_FORESHADOWING.md", "mysteries", "Mysteries"),
+    ("story/14_WAR_AND_BLESSING.md", "war", "War & the Blessing"),
     ("story/10_CHOICES_ENDINGS.md", "choices", "Choices & endings"),
-    ("design/CAMEOS.md", "cameos", "Festival cameos"),
+    ("story/12_RUIN_ROUTE.md", "ruin", "Ruin Route"),
+    ("story/13_CUTSCENES.md", "cutscenes", "Cutscenes"),
+    ("story/11_FINALE_LINES.md", "finale", "Finale lines"),
+    ("design/CAMEOS.md", "cameos", "Sidequest cameos"),
 ]
 
 # Gym order (SPINE): type, city
