@@ -125,6 +125,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." No foreign champions come this year. Every entrant is someone the PC has met on the road (Revision 5).
 5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps.
    - **Sixteen stand in the arena:** the PC and fifteen kingdom delegates (10_CHOICES_ENDINGS §3.1; staging in 14_WAR_AND_BLESSING Part A). The war decides how many seats Isenmar and Ashkaar hold.
+   - **The PC's colors (`:ch20_colors`).** Before the bowl, Queen Maelis, the Zenith Council and Nyx each offer the PC their colors, and Larch offers none: the old clause for "the Unsworn". Values `elowen / zenith / nadir / unsworn` (NARRATIVE_KEYS §4.3).
    - The lots are honest; the bowl isn't. The Accord's old customs (the Right of Grievance, yielded invitations, a Warden asking for a challenger's quarter, and Dorian, who has never once let the bowl ruin a good story) bend it on screen (NS §3.1).
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
@@ -158,18 +159,18 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ### Day 2: Round of 16 ("someone from your past")
 Story staging for each R16 candidate (draw rules: NS §3.2):
-- **Marisol, by Right of Grievance** (Teo died, and her Bond ≤ 2). The old Accord custom lets a Warden claim a first-round match against a challenger who wronged their city, and the Hierophant reads it out. Marisol and Juno swap seeds: "Let's see you run past *me*."
-- **Anja** (exposed in Ch11). She invokes the same right, and she and Juno swap seeds: "You threw me to the court. Fine. Ice remembers."
+- **Marisol, by Right of Grievance** (she holds an Isenmar seat, Teo died, and her Bond ≤ 2). The old Accord custom lets a Warden claim a first-round match against a challenger who wronged their city, and the Hierophant reads it out. Marisol and Juno swap seeds: "Let's see you run past *me*."
+- **Anja** (she holds an Isenmar seat, and was exposed in Ch11). She invokes the same right, and she and Juno swap seeds: "You threw me to the court. Fine. Ice remembers."
 - **Rowan, "the Gardener"** (Rowan alive, mercy pleaded at the tribunal, Hollow Standing ≥ 4). Rowan enters masked under a false name. **Juno** gave him her own invitation: "One last garden, child. Then I'm done with masks." If Rowan drowned at the Fault, this candidate doesn't exist.
-- **Juno (J4, fallback).** Joyful and nervous under the arena's lights: "We started on the same dock. Let's see who's grown more." The fields cycle on `:PRISM_ARENA`. Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`. If she's displaced by Marisol or Anja, she plays on in their seed (vs Kaito or vs Ysolde), loses, and opens her **Garden Match** exhibition. If she gave her invitation to Rowan, she watches from the Wardens' box.
+- **Juno (J4, fallback).** Joyful and nervous under the arena's lights: "We started on the same dock. Let's see who's grown more." The fields cycle on `:PRISM_ARENA`. Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`. If she's displaced by Marisol or Anja, she plays on in their seed (Isenmar's: against Nadir's second delegate, or against Ashkaar's), and her **Garden Match** exhibition opens when she's out. If she gave her invitation to Rowan, she watches from the Wardens' box.
 
 **After the match: the garden court.**
-- If Rowan lives, the PC finds Juno and Rowan in the arena's garden court, sitting apart on the same bench. If the PC carries **Venam's Testimony** and hasn't played it yet, they can play it here: *"I could hear everything. Everyone who sat with me."* Rowan sits down on the grass and cries, and Juno takes his good hand. It's the first time they've touched since Ironreach.
+- If Rowan lives, the PC finds Juno and Rowan in the arena's garden court, sitting apart on the same bench. If **Teo** lived, he says it himself, holding up his glassed fingers: *"I could hear everything while it had me. Everyone who sat with me."* (If the PC carries Venam's Testimony from her optional sidequest, it can be played here instead.) Rowan sits down on the grass and cries, and Juno takes his good hand. It's the first time they've touched since Ironreach.
 - Without the testimony, Juno does it herself, more slowly: "Corvin says they dream. I'm going to believe him."
 - If Rowan drowned, Juno sits alone with Elin's pressed lily from the Bride Tree.
 
 **Other R16 results** follow the companion match rules (NARRATIVE_KEYS §6), and each can be watched as a highlight (`13_CUTSCENES.md`). Story requirements:
-- **Kestrel** advances with the Gauntlet. **Kaito**, whose Lucario felt it, says it aloud: "That isn't him fighting."
+- **Kestrel** advances with the Gauntlet, over Zenith's first delegate (Rook or Odessa).
 - **Valen** and **Sigrun** advance.
 
 ### Day 3: Exhibitions and the Festival Grounds
@@ -182,7 +183,7 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
   - **The Ebb Guild match** with Marisol while Teo heckles from the stands, if Teo was saved and Marisol is close.
 - **Festival grounds side content:** the **Concordance Spire** (Battle Tower) under construction, a teaser; street food from every kingdom; Dorian rehearsing in secret with Celestine.
 - **Diplomacy with Envoy Okoro (`:ch20_envoy`).**
-  - **Proof** needs **two of three**: the **Larch Papers**, the **Arbiter Blueprints**, and **Venam's Testimony** (cameo sidequest, Ch7). Together they show the Bleed is *caused* and so curable, not contagious. Okoro recommends against Severance (`ENVOY_PERSUADED`).
+  - **Proof** needs **two of three**: the **Larch Papers**, the **Arbiter Blueprints**, and **testimony that the Fixed still dream** (any one of: Teo's, if he lived; Corvin's Quiet Ward records, if he's free; Venam's Testimony from her optional sidequest). Together they show the Bleed is *caused* and so curable, not contagious. Okoro recommends against Severance (`ENVOY_PERSUADED`).
   - **Plea:** she listens and drafts Severance anyway, "with regret".
 
 ### Day 4: Quarterfinal ("the honest view")
@@ -195,7 +196,7 @@ The story job is an honest view of the PC's choice from someone who isn't trying
 - **Odessa** (she holds a seat; five close Bonds; Harmony-leaning): "Everyone keeps telling you what you're *for*. The wind doesn't care. What do *you* want?"
 - *(Ruin Route: Archseer Dask. See 12_RUIN_ROUTE.)*
 
-**Other QF** (default): **Kestrel** advances. **Valen** advances. **Sigrun** advances.
+**Other QF** (default): **Kestrel** beats **Kaito**, whose Lucario felt it: "That isn't him fighting." **Valen** advances. **Sigrun** advances, unless she was drawn into the PC's quarter (then Celestine plays on in Ashkaar's seed).
 
 ### Day 5: The Night of Masques, the audience, Little Owl
 - **Corvin**, privately, after treating Valen in the Sanctum: "He has weeks. Maybe. He's holding the Plates quiet *right now*, with his body, every hour since the ceremony. He'll fight you tomorrow on what's left."
@@ -238,8 +239,6 @@ The story job is an honest view of the PC's choice from someone who isn't trying
 
 Valen: "...Little owl." It's the name from her childhood, which the player heard in the Mindscape in Ch13. She stays the night. If not completed, she watches the Sanctum door from the colonnade and doesn't go in.
 
-**"One More"** (exhibition): **Bastian**, too old for the bracket, wants one last fight. "I'm seventy-four. Rock's patient. I'm not."
-
 **Morwen's Echo** (conditional exhibition, NS §3.6: Kestrel and Ysolde reconciled, and the K6 line was Resolve). After midnight, Ysolde lights the Hollow Cathedral's lantern in a Crownhaven chapel. **Morwen's echo** fights the PC once, gently, "to see what I bought."
 
 **INTERLUDE V — "The Last Night"** (playable as **Valen**).
@@ -267,7 +266,7 @@ Valen: "...Little owl." It's the name from her childhood, which the player heard
   If both Ysolde's and Kestrel's Bonds are high (`KESTREL_YSOLDE_RECONCILED`), he lets her sit beside him.
 - **Fallen:** he doesn't read it. Ysolde keeps it. If the PC kept `:ch12_letter`, they can quote Morwen to him in the Engine instead.
 
-**Other SF** (default): **Valen beats Sigrun.** Sigrun entered to win the Crown herself and spare the PC, and Valen beat her *to protect her*. She leaves the arena without a word. The PC finds her on the Basilica roof: "He beat me with an arm made of glass. I've never been so angry in my life."
+**Other SF** (default; if Sigrun was the PC's QF, Valen's semifinal is a one-line result instead): **Valen beats Sigrun.** Sigrun entered to win the Crown herself and spare the PC, and Valen beat her *to protect her*. She leaves the arena without a word. The PC finds her on the Basilica roof: "He beat me with an arm made of glass. I've never been so angry in my life."
 
 ### Day 7: The Final, the Coronation, the Hijack
 See Chapter 21.

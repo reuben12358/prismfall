@@ -131,14 +131,18 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
 ### The Ashkaar–Isenmar War (Revision 6; chapters placed by the story lead, Act III–IV) — six proposed choices
 - **`:war_warning`** — you see the Dominar's legions at Frostfang Pass before anyone. Warn Isenmar / warn Ashkaar they've been seen / warn both
   (the Accord's way; both sides note it) / say nothing.
-- **`:war_convoy`** — Marisol asks the one person who can walk the Bleed-front to take a convoy into besieged Rimeholt: *relief* (food) /
+- **`:war_convoy`** — Marisol asks the one person who can walk the Bleed-front to take a convoy through the Steamline into besieged Skaldfast: *relief* (food) /
   *arms* (harpoon-guns; Marisol +3, Sigrun −2) / *refuse*.
 - **`:war_prisoner`** — Ashkaar holds Anja; the Thane holds the Dominar's nephew. *free* one in secret / broker an *exchange* / *leave* them.
 - **`:war_legend`** — both sides beg you to bring their legend: *calm Kyogre* / *wake Reshiram* / *neither*. It decides whose beams meet in the climax.
-- ★ **`:war_climax`** — the frozen strait, both lines charging. **Stand between** them / **back Ashkaar** / **back Isenmar**. Standing between only
+- ★ **`:war_climax`** — the Shattered Ice, both lines charging. **Stand between** them / **back Ashkaar** / **back Isenmar**. Standing between only
   stops the war if both armies have seen you act in good faith four times (war trust: warned both, relief, a prisoner helped, no legend used as a
   weapon, Sigrun ≥ 4, Marisol ≥ 3). Otherwise the beam clash goes off over your head and breaks both armies.
-- **`:war_terms`** — if one side won: argue for *mercy*, *reparations* or *occupation*.
+- **`:war_terms`** — if one side won: argue for *mercy*, *reparations* or *occupation* at the armistice table in Skaldfast.
+- **`:ch20_colors`** (the story lead's key) — whose colors the challenger wears on Day 0: Elowen's, Zenith's, Nadir's, or none ("the Unsworn", a whisper
+  of Harmony). Crowd reactions, one R16 line, one small delta.
+- **`:ch21_boon`** (the story lead's key) — the Blessed's one binding decree: end the war's reparations / seat Nadir on every council / dissolve the
+  Seat. It is asked before the ending is fixed, so ending reparations can undo an *occupation* you argued for and reopen Homecoming.
 
 *Long-term:* a beaten kingdom forfeits a Festival seat (§3.1); beaten and unforgiven, its Wardens won't release their Plates (Marisol and Anja,
 or Brann and Sigrun; both pairs if the clash broke both armies), which can sink Consent below 12 on its own; *occupation* makes Homecoming
@@ -275,8 +279,8 @@ rule plus 2–4 key moments each). Order: a drawn path opponent wins until they 
 - **Displaced:** Marisol/Anja swap seats with Juno, and the QF Wardens swap with Celestine; the displaced one plays on as an NPC. Rowan takes Juno's
   seat (she gave it), and on the Ruin Route Dask takes Celestine's ("I cannot lie, so I won't pretend this is a game.").
 - **Exhibitions** (story-met only): the **Pageant Bout** (Dorian and Rook, a double), **Juno's Garden Match** if she wasn't your R16, the **Ebb Guild
-  match** with Marisol (Teo saved, close), and **Morwen's Echo** on the Night of Masques. The Eevee Octave is suspended until Vesper is met earlier
-  (§8). None on the Ruin Route.
+  match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (Vesper is met in Ch3 and Ch13). On the
+  Ruin Route only the Octave plays.
 - **Teams:** NARRATIVE_KEYS §7. **19 new Festival teams** (Marisol 90, Anja 90, Rowan 90, Celestine 92, Sigrun 92, Kaito 92, Ysolde 92, Odessa 92,
   Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Theodric 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
   the other delegates are NPC-only. Retired: Isaura 2, Drey 1, Mireille 2, Thorne 1, Bastian 90, Sigrun 96, and every cameo `FESTIVAL_*` team.
@@ -562,7 +566,7 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
     the pools and reassigned lines in §3.2, companion-match highlights (§3.4) and the exhibitions in §3.6. Venam's "I could hear everything" goes to
     Teo if he lived, otherwise Corvin's ward records. CAMEOS.md's default draw is obsolete.
 22. **Rev 5 screen-time fixes:** give Anja one Act IV scene and Ysolde one pre-Ch15 scene; introduce Archseer Dask again in Ruin R1 and R4 (done in
-    §5.3's intent; script it); the Eevee Octave only returns if Vesper Lindqvist is met twice before the Festival (suggest: Ch3 pageant choir, Ch13).
-23. **The war (Rev 6):** build the chapters around the six `:war_*` choices above, with Anja's capture, the Rimeholt siege, and a climax cutscene
+    §5.3's intent; script it); the Eevee Octave is cleared (Vesper is met in Ch3 and Ch13).
+23. **The war (Rev 6):** build the chapters around the six `:war_*` choices above, with Anja's capture, the siege of Skaldfast, and a climax cutscene
     whose ending frame follows `WAR_STOPPED / WAR_BOTH_BROKEN / WAR_ASHKAAR_WON / WAR_ISENMAR_WON` (NARRATIVE_KEYS §4.3). Ch19's Dominar petition
     must read the war's outcome.

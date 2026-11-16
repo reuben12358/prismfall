@@ -154,7 +154,7 @@ CHOICES = {
 | `:ch14_marchetti` `:show_evidence` | holds the Splitter Casing (always found in Ch12) or the comm-device (`chose(:ch9_teo_sable, :chase_sable)`). |
 | `:ch15_look_back` | only if `ruin_unlocked`. `:yes` calls `Prismfall.start_ruin_route` (§11). |
 | `:ch19_oath` `:ruin` | only if `resonance <= -2`. The hidden "Whatever you want to hear." is `GO_LIARS_PYRE` (always offered; see §10). |
-| `:ch20_envoy` `:proof` | the PC holds at least two of: Larch Papers (Ch12), Arbiter Blueprints (Ch16), testimony that the Fixed still dream (Teo, "I could hear everything while my hand was glass", if `TEO_SAVED`; otherwise Corvin's Quiet Ward records, if `CORVIN_FREED`). |
+| `:ch20_envoy` `:proof` | the PC holds at least two of: Larch Papers (Ch12), Arbiter Blueprints (Ch16), testimony that the Fixed still dream (any one of: Teo's, if `TEO_SAVED`; Corvin's Quiet Ward records, if `CORVIN_FREED`; Venam's Testimony from her optional sidequest). |
 | `:ch20_calla` | only if `choice(:ch16_rook) == :hold` OR `choice(:ch16_magnus) == :conscience` (Calla only defects if someone inside is already moving). |
 | `:sq_little_owl` | the quest's earlier steps need `bond(:ILSA) >= 3` by Ch18. `:reconciled` needs `bond(:ILSA) >= 4` at the final step, else the event records `:refused`. |
 | `:ch21_hand` | only if `flag(:VOSS_ACCEPTED)`. Without it, taking the hand is `GO_HIS_HAND`. |
@@ -223,11 +223,14 @@ Quiet Hours relationship scenes (10_CHOICES_ENDINGS §7.1) add `+1` to their Bon
 ```ruby
 CHOICES.merge!({
   :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
-  :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Bleed-front: food for besieged Rimeholt, or harpoon-guns" },
+  :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
   :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
   :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
-  :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the frozen strait" },
-  :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table (only if one side won)" }
+  :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Shattered Ice" },
+  :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table in Skaldfast (only if one side won)" },
+  # the story lead's two Blessing keys (14_WAR_AND_BLESSING Part A)
+  :ch20_colors   => { :values => [:elowen, :zenith, :nadir, :unsworn], :once => true, :description => "Ch20 Day 0: whose colors the Unimprinted challenger wears (flavor + one delta)" },
+  :ch21_boon     => { :values => [:end_reparations, :seat_nadir, :dissolve_seat], :once => true, :description => "Ch21: the Blessed's one binding decree. Asked after :ch21_final in the Return, Keep and Borrowed outcomes, BEFORE Prismfall.trigger_ending" }
 })
 CHOICE_EFFECTS.merge!({
   :war_warning  => { :warn_isenmar => "MARISOL+2 SIGRUN-2", :warn_ashkaar => "SIGRUN+1 MARISOL-2", :warn_both => "ACCORD+2 SIGRUN+1 MARISOL+1", :silent => "RES-1" },
@@ -235,7 +238,9 @@ CHOICE_EFFECTS.merge!({
   :war_prisoner => { :free => "RES+1 ACCORD-1", :exchange => "ACCORD+2", :leave => "RES-1" },
   :war_legend   => { :calm_kyogre => "RES+2 MARISOL-1", :wake_reshiram => "SIGRUN+1 RES-2", :neither => "" },
   :war_climax   => { :stand_between => "RES+2 ACCORD+1", :back_ashkaar => "SIGRUN+2 MARISOL-4 RES-1", :back_isenmar => "MARISOL+3 SIGRUN-4 RES-1" },
-  :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" }
+  :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" },
+  :ch20_colors  => { :elowen => "ACCORD-1", :zenith => "MERIDIAN+1", :nadir => "HOLLOW+1", :unsworn => "RES+1" },
+  :ch21_boon    => { :end_reparations => "", :seat_nadir => "", :dissolve_seat => "" }
 })
 TALLIES[:WAR_TRUST] = [                       # what both armies have seen the PC do
   "choice(:war_warning) == :warn_both",
@@ -251,6 +256,7 @@ DERIVED_FLAGS.merge!({
   :WAR_ASHKAAR_WON   => "choice(:war_climax) == :back_ashkaar",
   :WAR_ISENMAR_WON   => "choice(:war_climax) == :back_isenmar",
   :WAR_OCCUPATION    => "choice(:war_terms) == :occupation",
+  :BOON_LIFTS_OCCUPATION => "choice(:ch21_boon) == :end_reparations",   # the Blessed can undo their own armistice terms
   :ISENMAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ASHKAAR_WON) && choice(:war_terms) != :mercy)",
   :ASHKAAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)"
 })
@@ -261,8 +267,9 @@ DERIVED_FLAGS.merge!({
 - **Consent:** `WARDEN_CONSENT` entries 3 (Marisol) and 10 (Anja) gain `&& !flag(:ISENMAR_EMBITTERED)`; entries 7 (Brann) and 18 (Sigrun) gain
   `&& !flag(:ASHKAAR_EMBITTERED)`. A beaten, unforgiven kingdom won't give up the last thing it holds. (Applied in §5's array below this note:
   Core should transcribe the four amended strings.)
-- **Endings:** `END_UNFINISHED` also fires on `flag(:WAR_OCCUPATION)` (Arceus won't bless a land with a boot on its neck); `DOMINAR_SWAYED` can't be
-  set if `WAR_ISENMAR_WON` without `:mercy`; `LANTERN_HOLDS`-style hijack help: the winning side's (or, if stopped, both sides') fleets and legions defend Crownhaven.
+- **Endings:** `END_UNFINISHED` also fires on `flag(:WAR_OCCUPATION)` (Arceus won't bless a land with a boot on its neck) unless the Boon ends it;
+  `:ch21_boon` otherwise only picks epilogue slides (reparations ended / Nadir seated on every council / the Seat dissolved); `DOMINAR_SWAYED` is false
+  if `WAR_ISENMAR_WON` without `:mercy` (enforced in the §5 flag); `LANTERN_HOLDS`-style hijack help: the winning side's (or, if stopped, both sides') fleets and legions defend Crownhaven.
 
 ---
 
@@ -305,7 +312,7 @@ DERIVED_FLAGS = {
   :SIGRUN_BEARS             => "!flag(:KESTREL_BEARS) && bond(:SIGRUN) >= 6",
   :KESTREL_ACCEPTED_SEAT    => "flag(:KESTREL_YSOLDE_RECONCILED) && !flag(:KESTREL_LOST) && !(choice(:ch21_final) == :borrowed && flag(:KESTREL_BEARS))",
   # Act V
-  :DOMINAR_SWAYED           => "choice(:ch19_dominar) == :swayed",
+  :DOMINAR_SWAYED           => "choice(:ch19_dominar) == :swayed && !(flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)",
   :ENVOY_PERSUADED          => "choice(:ch20_envoy) == :proof",
   :CALLA_ALIVE              => "choice(:ch20_calla) != :send_back",
   :ILSA_RECONCILED          => "choice(:sq_little_owl) == :reconciled",
@@ -544,7 +551,7 @@ MATCH_RULES = [
 "Notable" = involves Juno or Kestrel, the war's two sides, or Valen. Other NPC matches show a one-line result only.
 
 ### 6.6 Exhibitions (story-met only) [CORE+ `EXHIBITION_EXTRAS`]
-The Eevee Octave is **suspended** until the story lead gives Vesper two earlier encounters. No exhibitions on the Ruin Route.
+The **Eevee Octave** always plays (Vesper is now met in Ch3 and Ch13), including on the Ruin Route, where it is the only exhibition.
 ```ruby
 EXHIBITION_EXTRAS = [
   { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                    # Dorian & Rook double
@@ -773,7 +780,7 @@ ENDING_RULES = [
   [:END_HOLLOW_SPRING,    "choice(:ch21_final) == :unmake"],
   [:END_BORROWED_CROWN,   "choice(:ch21_final) == :borrowed"],
   [:END_LONG_VIGIL,       "choice(:ch21_final) == :keep"],
-  [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || flag(:WAR_OCCUPATION))"],
+  [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || (flag(:WAR_OCCUPATION) && !flag(:BOON_LIFTS_OCCUPATION)))"],
   [:END_EMPTY_LIGHTHOUSE, "choice(:ch21_final) == :return && flag(:KESTREL_LOST)"],
   [:END_HOMECOMING,       "choice(:ch21_final) == :return"]
 ]
