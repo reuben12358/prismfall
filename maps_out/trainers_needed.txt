@@ -53,4 +53,4 @@
 561	:SAILOR, "Haldor"
 561	Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)
 564	:HIKER, "Torvald"
-990	:YOUNGSTER, "Ben"
+990	:YOUNGSTER, "Prismtest"

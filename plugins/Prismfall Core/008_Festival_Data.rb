@@ -3,9 +3,12 @@
 #-------------------------------------------------------------------------------
 # Edit this file to change entrants, seeding, scripted NPC results, rule sets
 # and the finale. The player's path (SPINE, LOCKED):
-#   R16 Juno -> QF headline cameo -> SF Kestrel -> Final Valen -> Hijack Voss
-#   (:PRISM_ARENA) -> True finale Arceus (Lv 100)
-# Festival.validate! checks that BRACKET seeding makes this path possible.
+#   Default (fallback) path: R16 Juno -> QF Isaura -> SF Kestrel -> Final Valen
+#   -> Hijack Voss (:PRISM_ARENA) -> True finale Arceus (Lv 100). The actual
+#   opponents come from the choice-driven draw (015_Festival_Draw.rb).
+# SPINE Revision 4: original characters only (no sister-game cameos; those are
+# sidequest fights via Prismfall.cameo_battle). Data: NARRATIVE_KEYS.md sec. 6.
+# Festival.validate checks that BRACKET seeding makes the default path possible.
 #===============================================================================
 module Prismfall
   module Festival
@@ -19,78 +22,76 @@ module Prismfall
     # :rival_battle           use the rival scheme (N*10 + starter slot) instead.
     # :exhibition             true = can be fought in exhibition matches.
     # :exhibition_version     version for exhibitions (defaults to :version).
+    # :double                 with array :trainer_type/:name = a 2-trainer
+    #                         double battle (exhibition Pageant Bout).
+    # :person                 variants of one character share a person.
     # :rating                 used to simulate unscripted NPC-vs-NPC matches.
     # :level_hint             design note only (ace level for the trainer team).
     ENTRANTS = {
       :PLAYER    => { :display => nil, :rating => 0 },   # name = $player.name
-      # Velmorans
-      :JUNO      => { :display => "Juno",      :trainer_type => :RIVAL_JUNO,       :name => "Juno",      :rival_battle => 4, :rating => 88, :level_hint => 88 },
-      :KESTREL   => { :display => "Kestrel",   :trainer_type => :RIVAL_KESTREL,    :name => "Kestrel",   :rival_battle => 8, :rating => 93, :level_hint => 93 },
+      # Rivals / Champion
+      :JUNO      => { :display => "Juno",      :trainer_type => :RIVAL_JUNO,       :name => "Juno",      :rival_battle => 4, :rating => 88, :level_hint => 90 },   # J4 = 40-42
+      :KESTREL   => { :display => "Kestrel",   :trainer_type => :RIVAL_KESTREL,    :name => "Kestrel",   :rival_battle => 8, :rating => 93, :level_hint => 94 },   # K8 = 80-82
       :VALEN     => { :display => "Valen",     :trainer_type => :CHAMPION_VALEN,   :name => "Valen",     :version => 0,      :rating => 99, :level_hint => 96 },
-      # Wardens (NPC-only in the bracket; version 50 reserved, no trainer data
-      # needed unless :exhibition is turned on)
-      :KAITO     => { :display => "Kaito",     :trainer_type => :LEADER_KAITO,     :name => "Kaito",     :version => 50, :rating => 82 },
-      :YSOLDE    => { :display => "Ysolde",    :trainer_type => :LEADER_YSOLDE,    :name => "Ysolde",    :version => 50, :rating => 83 },
+      # Wardens (version 50 = NPC-only placeholder; draws pass their own :version)
+      :KAITO     => { :display => "Kaito",     :trainer_type => :LEADER_KAITO,     :name => "Kaito",     :version => 50, :rating => 85 },
       :NYX       => { :display => "Nyx",       :trainer_type => :LEADER_NYX,       :name => "Nyx",       :version => 50, :rating => 84 },
       :ODESSA    => { :display => "Odessa",    :trainer_type => :LEADER_ODESSA,    :name => "Odessa",    :version => 50, :rating => 83 },
-      :CELESTINE => { :display => "Celestine", :trainer_type => :LEADER_CELESTINE, :name => "Celestine", :version => 50, :rating => 85 },
-      :SIGRUN    => { :display => "Sigrun",    :trainer_type => :LEADER_SIGRUN,    :name => "Sigrun",    :version => 50, :rating => 87 },
-      # Visiting champions (design/CAMEOS.md). Version scheme from CAMEOS.md:
-      # 1 = R16/exhibition (~90), 2 = QF (~92), 3 = SF/Final-tier draw (~94),
-      # 9 = post-game rematch. Draw candidates may override :version.
-      # :exhibition_after_out => only offered once eliminated from the bracket.
-      :LIN       => { :display => "Lin",       :trainer_type => :FESTIVAL_LIN,       :name => "Lin",       :version => 2, :rating => 97, :level_hint => 92 },  # headline (QF); post-game rematch only
-      :AMARIA    => { :display => "Amaria",    :trainer_type => :FESTIVAL_AMARIA,    :name => "Amaria",    :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 89 },
-      :SHELLY    => { :display => "Shelly",    :trainer_type => :FESTIVAL_SHELLY,    :name => "Shelly",    :version => 1, :exhibition => true, :exhibition_after_out => true, :exhibition_double => true, :rating => 90 },
-      :ALEXANDRA => { :display => "Alexandra", :trainer_type => :FESTIVAL_ALEXANDRA, :name => "Alexandra", :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 92 },
-      :VENAM     => { :display => "Venam",     :trainer_type => :FESTIVAL_VENAM,     :name => "Venam",     :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 90 },
-      :SHIV      => { :display => "Shiv",      :trainer_type => :FESTIVAL_SHIV,      :name => "Shiv",      :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 93 },
-      :GARRET    => { :display => "Garret",    :trainer_type => :FESTIVAL_GARRET,    :name => "Garret",    :version => 1, :exhibition => true, :exhibition_after_out => true, :rating => 89 },
-      # Extra draw candidates (not seeded; exhibition-only when not drawn)
-      :MELIA     => { :display => "Melia",     :trainer_type => :FESTIVAL_MELIA,     :name => "Melia",     :version => 1, :exhibition => true, :rating => 90 },
-      :TITANIA   => { :display => "Titania",   :trainer_type => :FESTIVAL_TITANIA,   :name => "Titania",   :version => 1, :exhibition => true, :rating => 90 },
-      :NOVA      => { :display => "Nova",      :trainer_type => :FESTIVAL_NOVA,      :name => "Nova",      :version => 3, :rating => 94 },   # Ruin Route only
-      # Not a bracket entrant: the hijack
+      :CELESTINE => { :display => "Celestine", :trainer_type => :LEADER_CELESTINE, :name => "Celestine", :version => 50, :rating => 87 },
+      :SIGRUN    => { :display => "Sigrun",    :trainer_type => :LEADER_SIGRUN,    :name => "Sigrun",    :version => 50, :rating => 89 },
+      :MARISOL   => { :display => "Marisol",   :trainer_type => :LEADER_MARISOL,   :name => "Marisol",   :version => 90, :rating => 84, :level_hint => 90 },
+      :ANJA      => { :display => "Anja",      :trainer_type => :LEADER_ANJA,      :name => "Anja",      :version => 90, :rating => 84, :level_hint => 90 },
+      :YSOLDE    => { :display => "Ysolde",    :trainer_type => :LEADER_YSOLDE,    :name => "Ysolde",    :version => 92, :rating => 86, :level_hint => 92 },
+      # Original foreign entrants (Envoy Okoro's Concert delegation) + the Queen's Champion
+      :ISAURA    => { :display => "Isaura",    :trainer_type => :FESTIVAL_ISAURA,   :name => "Isaura",   :version => 2, :exhibition => true, :rating => 96, :level_hint => 92 },  # headline (QF)
+      :DREY      => { :display => "Drey",      :trainer_type => :FESTIVAL_DREY,     :name => "Matthias", :version => 1, :exhibition => true, :rating => 91, :level_hint => 90 },
+      :MIREILLE  => { :display => "Mireille",  :trainer_type => :FESTIVAL_MIREILLE, :name => "Mireille", :version => 2, :exhibition => true, :rating => 88, :level_hint => 92 },
+      :THORNE    => { :display => "Thorne",    :trainer_type => :FESTIVAL_THORNE,   :name => "Ivo",      :version => 1, :exhibition => true, :rating => 86, :level_hint => 90 },
+      # Draw-only (never in the default seeding)
+      :ROWAN     => { :display => "The Gardener",  :trainer_type => :LEADER_ROWAN,  :name => "Rowan", :version => 90, :rating => 88, :level_hint => 90 },
+      :DASK      => { :display => "Archseer Dask", :trainer_type => :ARCHSEER_DASK, :name => "Imre",  :version => 92, :rating => 92, :level_hint => 92 },   # Ruin only
+      :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },  # 90-92
+      :BRANN     => { :display => "Brann",     :trainer_type => :LEADER_BRANN,     :name => "Brann",     :version => 96, :rating => 90, :level_hint => 96 },
+      :VALEN_RUIN => { :display => "Valen",    :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
+      # Hijackers (not bracket entrants)
       :VOSS      => { :display => "Aurelian Voss",
                       :trainer_type => [:MERIDIAN_VOSS, :MERIDIAN_AURELIAN, :MERIDIAN_CEO],
-                      :name => ["Aurelian", "Voss", "Aurelian Voss"], :version => 0, :rating => 98, :level_hint => 98 }
+                      :name => ["Aurelian", "Voss", "Aurelian Voss"], :version => 0, :rating => 98, :level_hint => 100 },
+      :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,  :name => "Percival", :version => 99, :rating => 97, :level_hint => 100 },
+      :THEODRIC  => { :display => "Theodric",  :trainer_type => :GILDED_THEODRIC, :name => "Theodric", :version => 0,  :rating => 99, :level_hint => 100 },
+      # Exhibition-only (never seeded)
+      :MORWEN       => { :display => "Morwen",  :trainer_type => :ECHO_MORWEN,    :name => "Morwen",  :version => 90, :exhibition => true, :rating => 0 },
+      :BASTIAN      => { :display => "Bastian", :trainer_type => :LEADER_BASTIAN, :name => "Bastian", :version => 90, :exhibition => true, :rating => 0 },
+      :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK],
+                         :name => ["Dorian", "Rook"], :version => 90, :exhibition => true, :rating => 0 }
     }
 
     #---------------------------------------------------------------------------
-    # Default seeding (CAMEOS.md "Default draw"): 16 slots, matches (0,1)
-    # (2,3)...; quarters are 4 slots, halves 8. The choice-driven draw
-    # (015_Festival_Draw.rb) can re-seat or replace the player's opponents.
+    # Default seeding (NARRATIVE_KEYS 6.2): 16 slots, matches (0,1) (2,3)...;
+    # quarters are 4 slots, halves 8. The draw swaps drawn opponents in.
     #---------------------------------------------------------------------------
     BRACKET = [
-      :PLAYER,    :JUNO,       # R16 m0  (player)
-      :LIN,       :NYX,        # R16 m1  -> Lin (QF opponent)
-      :KESTREL,   :SHIV,       # R16 m2  -> Kestrel (SF opponent)
-      :GARRET,    :KAITO,      # R16 m3  -> Garret
-      :VALEN,     :ODESSA,     # R16 m4  -> Valen (Final opponent)
-      :ALEXANDRA, :CELESTINE,  # R16 m5  -> Alexandra
-      :SHELLY,    :VENAM,      # R16 m6  -> Venam
-      :AMARIA,    :SIGRUN      # R16 m7  -> Sigrun
+      :PLAYER,   :JUNO,       # R16 m0  (player; J4)
+      :ISAURA,   :NYX,        # R16 m1  -> Isaura (default QF opponent)
+      :KESTREL,  :DREY,       # R16 m2  -> Kestrel (Gauntlet)
+      :KAITO,    :MARISOL,    # R16 m3
+      :VALEN,    :ODESSA,     # R16 m4  -> Valen
+      :MIREILLE, :CELESTINE,  # R16 m5
+      :YSOLDE,   :ANJA,       # R16 m6
+      :THORNE,   :SIGRUN      # R16 m7  -> Sigrun beats the Queen's Champion
     ]
 
-    # The quarterfinal opponent is "the headline cameo" (CAMEOS.md: Lin).
-    HEADLINE_CAMEO = :LIN
-    # Default opponent per bracket round (0 = R16 ... 3 = Final). Since
-    # Revision 3 this is the FALLBACK of the choice-driven draw.
-    PLAYER_PATH = [:JUNO, HEADLINE_CAMEO, :KESTREL, :VALEN]
+    HEADLINE_OPPONENT = :ISAURA
+    # Default opponent per bracket round (0 = R16 ... 3 = Final). Fallback of the draw.
+    PLAYER_PATH = [:JUNO, HEADLINE_OPPONENT, :KESTREL, :VALEN]
 
     ROUND_NAMES = ["Round of 16", "Quarterfinals", "Semifinals", "Final"]
 
     # Scripted winners of NPC-vs-NPC matches, keyed by [round, match index].
-    # Matches involving a drawn path entrant are always won by that entrant
-    # (until they meet the player). Unscripted matches are simulated
-    # (SIMULATE_UNSCRIPTED) or go to the higher :rating.
-    SCRIPTED_WINNERS = {
-      [0, 3] => :GARRET,     # Garret vs Kaito
-      [0, 5] => :ALEXANDRA,  # Alexandra vs Celestine
-      [0, 6] => :VENAM,      # Shelly vs Venam
-      [0, 7] => :SIGRUN,     # Amaria vs Sigrun
-      [1, 3] => :SIGRUN      # Venam vs Sigrun
-    }
+    # Drawn path opponents always win until they meet the player; the rest
+    # simulate (SIMULATE_UNSCRIPTED) or go to the higher :rating.
+    SCRIPTED_WINNERS = { [0, 3] => :KAITO, [0, 5] => :CELESTINE, [0, 6] => :YSOLDE, [0, 7] => :SIGRUN,
+                         [1, 2] => :VALEN, [1, 3] => :SIGRUN }
     SIMULATE_UNSCRIPTED = true   # false = higher :rating always wins
     SIMULATION_SHARPNESS = 6     # higher = favourites win more often
 
@@ -130,7 +131,7 @@ module Prismfall
       { :id => :R16,    :round => 0, :name => "Round of 16",  :ruleset => :bracket, :field => nil },
       { :id => :QF,     :round => 1, :name => "Quarterfinal", :ruleset => :bracket_qf, :field => nil },
       { :id => :SF,     :round => 2, :name => "Semifinal",    :ruleset => :bracket_sf, :field => nil },
-      { :id => :FINAL,  :round => 3, :name => "Final",        :ruleset => :bracket_final, :field => nil },
+      { :id => :FINAL,  :round => 3, :name => "Final",        :ruleset => :bracket_final, :field => nil, :live => true },  # drawn on Day 7
       { :id => :HIJACK, :opponent => :VOSS, :name => "The Hijack", :ruleset => :finale, :field => :PRISM_ARENA },
       { :id => :ARCEUS, :wild => :ARCEUS, :level => 100, :name => "True Finale", :ruleset => :finale,
         :field => :PRISM_ARENA, :rules => ["cannotRun", "disablePokeBalls"],

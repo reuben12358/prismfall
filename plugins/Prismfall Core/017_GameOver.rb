@@ -31,7 +31,7 @@ module Prismfall
     # Returns only if the player is sent back (always true); the map scene then
     # closes on the next frame.
     def self.trigger(id, can_reload = true)
-      id = id.to_sym
+      id = Prismfall::Ledger.canonical_game_over(id)
       data = data_for(id)
       first = Prismfall::Ledger.record_game_over(id)
       EventHandlers.trigger(:prismfall_game_over, id, first)
@@ -57,6 +57,8 @@ module Prismfall
   # scene's trigger, not inside an autorun event that would re-run on load)
   def self.checkpoint(show_message = true)
     return false if $game_temp.in_battle || !$game_system
+    return false if defined?(Prismfall::Passwords) && Prismfall::Passwords.active?(:NO_MERCY)   # 'nomercy'
+
     ok = Game.save
     if show_message
       pbMessage((ok) ? _INTL("\\se[]Progress saved.") : _INTL("\\se[GUI save choice]Save failed."))

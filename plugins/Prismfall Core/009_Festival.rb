@@ -204,7 +204,9 @@ module Prismfall
         a, b = participants(r, m)
         next if !a || !b
         next if a == :PLAYER || b == :PLAYER   # the player's matches are played
-        results[[r, m]] = npc_winner(a, b, r, m)
+        w = npc_winner(a, b, r, m)
+        results[[r, m]] = w
+        mark_out((w == a) ? b : a)
       end
       state[:champion] = results[[ROUNDS - 1, 0]] if results[[ROUNDS - 1, 0]]
     end
@@ -308,11 +310,17 @@ module Prismfall
     def self.battle_entrant(id, exhibition: false, lose_text: nil, version: nil)
       e = entrant(id)
       raise ArgumentError, "Unknown Festival entrant #{id.inspect}" if !e || id == :PLAYER
-      if e[:rival_battle] && !exhibition && version.nil?
+      if e[:rival_battle] && version.nil?
         return Prismfall::Rival.battle(Array(e[:trainer_type]).first, Array(e[:name]).first,
                                        e[:rival_battle], lose_text: lose_text)
       end
       version ||= ((exhibition) ? e[:exhibition_version] : nil) || e[:version] || 0
+      if e[:double]   # two trainers side by side (arrays are trainer pairs, not candidates)
+        setBattleRule("double")
+        foes = Array(e[:trainer_type]).each_with_index.map { |tt, i| [tt, Array(e[:name])[i], version] }
+        foes[-1].push(lose_text) if lose_text
+        return TrainerBattle.start(*foes)
+      end
       tr_type, tr_name = resolve_trainer(e, version)
       return TrainerBattle.start([tr_type, tr_name, version, lose_text])
     end
@@ -348,7 +356,8 @@ module Prismfall
         won = boss_battle(st)
       else
         opp = opponent_id(st)
-        lock_draw(st, opp)   # a non-bracket stage's draw is fixed once its battle starts
+        lock_draw(st, opp)   # a live/non-bracket stage's draw is fixed once its battle starts
+        Prismfall::Ledger.record_met(opp)
         won = battle_entrant(opp, lose_text: lose_text, version: draw_version(st, opp))
       end
       won = (won) ? true : false
@@ -369,7 +378,9 @@ module Prismfall
       end
       if st[:round]
         r = st[:round]
+        a, b = participants(r, player_match_index(r))
         results[[r, player_match_index(r)]] = :PLAYER
+        mark_out((a == :PLAYER) ? b : a)
         resolve_round(r)
       end
       state[:stage] += 1
@@ -405,8 +416,8 @@ module Prismfall
     end
 
     # Event usage: Script: Prismfall::Festival.exhibition(:CAMEO_3)
-    def self.exhibition(id, lose_text: nil)
-      raise ArgumentError, "#{id.inspect} has no exhibition match" if !exhibition_ids.include?(id)
+    def self.exhibition(id, lose_text: nil, force: false)
+      raise ArgumentError, "#{id.inspect} has no exhibition match today" if !force && !exhibition_ids.include?(id)
       if !started?   # exhibitions before the bracket opens: keep the Festival inactive
         Prismfall.state.festival = new_state
         state[:active] = false
@@ -416,7 +427,9 @@ module Prismfall
       heal if rules[:heal_before]
       apply_battle_rules(rules)
       setBattleRule("double") if entrant(id)[:exhibition_double]
-      won = battle_entrant(id, exhibition: true, lose_text: lose_text) ? true : false
+      Prismfall::Ledger.record_met(id)
+      won = battle_entrant(id, exhibition: true, lose_text: lose_text,
+                           version: exhibition_version(id)) ? true : false
       state[:exhibitions][id] = :won if won
       state[:exhibitions][id] ||= :lost
       heal if rules[:heal_after]

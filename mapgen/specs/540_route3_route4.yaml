@@ -81,7 +81,7 @@ parent: 0
 field: BEACH
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 11, 24], BattleBack: field}
 connections:
-  - {dir: S, offset: 12, to: 140, to_offset: 20}
+  - {dir: S, offset: 12, to: 140, to_offset: 15}
 map: |
   TT..____..TTTTTTTTTTTTTTTTTTTT
   TT..____..TTTTTTTTTTTTTTTTTTTT

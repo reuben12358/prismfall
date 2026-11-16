@@ -18,14 +18,14 @@
 - On the horizon, **eighteen colored glows** sit low over the sea. A deckhand: "When I was a lad you could only see the Imprints on a clear night. Now you see 'em through fog."
 - **Aurelian Voss** joins the PC at the rail in a plain coat, holding a chipped Meridian mug. He's warm and self-deprecating, a man coming home from a summit where he begged the Concert to keep Velmora's trade open. "First crossing? Everyone gets quiet when they see the lights."
 - He gives the PC a **Meridian badge case**: "We make them for the League anyway. Call it a welcome from a fellow traveler." This is the telemetry device, so the player must receive it. He also offers a **Meridian Fellowship card** (₽ stipend, Mart discount).
-- **CHOICE `PRO_FELLOWSHIP`:** accept the Fellowship (+Meridian Standing, more money in Act I) / politely decline (+Voss Bond, because he respects it: "Independent. Good.") / say nothing (he leaves the card on the rail anyway).
+- **CHOICE `:pro_fellowship`:** accept the Fellowship (+Meridian Standing, more money in Act I) / politely decline (+Voss Bond, because he respects it: "Independent. Good.") / say nothing (he leaves the card on the rail anyway).
 
 **Scene 2: Ferrow's Landing dock.**
 - A brand-new Meridian **customs gate** stands beside the old bronze Accord plaque ("Eighteen in Concord, One in Keeping").
 - Every passenger is scanned and gets a colored tint bar. The PC's reads blank: `NULL`.
 - The technician (**Calla Wren**) frowns and rescans. Same result.
 - Voss, smoothly: "Faulty unit. These things hate sea air. Let them through, Calla." He glances back once. (Players who look closely will see Calla photograph the screen.)
-- **GO-01 "Homeward" (proposed).** Trigger: at the dock, the PC tells Edda they want to go back. Foreshadowing: Edda asks twice, "Last chance, sprog. Once I cast off, that's it." The ferry leaves. *Epitaph: "You went home. The lights went out one by one, and you watched them from the other shore."* (A Rejuvenation-style joke game over in the first five minutes. It teaches players that GOs exist and are recorded.)
+- **Game over `GO_HOMEWARD` "Homeward".** Trigger: at the dock, the PC tells Edda they want to go back. Foreshadowing: Edda asks twice, "Last chance, sprog. Once I cast off, that's it." The ferry leaves. *Epitaph: "You went home. The lights went out one by one, and you watched them from the other shore."* (A Rejuvenation-style joke game over in the first five minutes. It teaches players that GOs exist and are recorded.)
 
 ---
 
@@ -48,8 +48,8 @@
    - The PC walks through. Inside, a Bleed-maddened Pokémon (a glassed Wurmple swarm leader) calms when the PC approaches. This is the first demonstration of Harmony.
    - The PC retrieves the farm's lost Skwovet for a reward.
    - Larch, waiting at the edge with a notebook, says very quietly: "Well. That's that, then." She records the first **Field Notes** entry (`:BLEED`).
-   - **GO-02 "Two in the Orchard" (proposed).** Trigger: Juno asks "Can you pull me through? Just for a second?" and the PC says yes. Foreshadowing: the burning line, plus Larch's earlier warning, "Never take a tinted person past a Veil. Never." Juno's hand glasses in yours. *Epitaph: "She trusted you. That was the whole problem."*
-7. **Evening.** Hesper Vane's lighthouse. The old woman shouts at Kestrel from the gallery while the PC passes below. She sees the PC and drops her lamp-rag.
+   - **Game over `GO_ORCHARD` "Two in the Orchard".** Trigger: Juno asks "Can you pull me through? Just for a second?" and the PC says yes. Foreshadowing: the burning line, plus Larch's earlier warning, "Never take a tinted person past a Veil. Never." Juno's hand glasses in yours. *Epitaph: "She trusted you. That was the whole problem."*
+7. **Evening.** Hesper Vane's lighthouse. The old woman shouts at Kestrel from the gallery while the PC passes below. She sees the PC and drops her lamp-rag. Inside the lighthouse door, visible if the PC knocks, hangs a **cracked mirror** Hesper refuses to replace: "Leave it. It shows the truth crooked, same as everything." (A Ruin Route seed: it is the last image of `END_REFLECTION`.)
 
 **Cliffhanger:** Larch, at night, writes in her journal (a short cutscene): *"Subject reads NULL. Second such reading in my life. The first was in Crownhaven, AF 290. God help us, Ines."* Fade.
 
@@ -69,13 +69,19 @@
 **Gym 1 (`:SILKWOOD`).** Puzzle per GYM_PUZZLES.md. Thematic note: *threads that hold only when twisted together.* Tamsin battles with her nervous fury: "Granny Loom wove this room. Don't you dare tear it." Her ace is the Leavanny line (Swadloon). On victory she awards the badge, and the badge case **hums** faintly the first time a badge goes in. (Seed. Juno: "Ooh, is it supposed to do that?")
 
 **Aftermath and revelation.** Thistle's accusation sticks. Tamsin confesses to the PC in the loom-loft: Briarwick is bankrupt, and she signed the Lattice contract alone. The Lattice is feeding the Glasswood.
-- **CHOICE `CH2_TAMSIN`:**
-  - **Expose her publicly** at the village meeting. Village trust is shaken, the contract is torn up, Tamsin's Bond goes down at first and recovers later, the Hollow and Accord gain Standing, and Meridian loses some.
-  - **Help her confess herself.** The slow route: Tamsin's Bond goes way up, she renegotiates the contract, and Meridian keeps a smaller pylon.
-  - **Keep her secret.** Meridian Standing goes up and Tamsin's Bond goes up, but Thistle's cell comes back angrier in Ch10 ("You *knew*").
+- **CHOICE `:ch2_tamsin`:**
+  - **Expose her publicly** at the village meeting. Village trust is shaken and the contract is torn up. The Hollow and Accord gain Standing, and Meridian loses some.
+  - **Help her confess herself.** The slow route: she renegotiates the contract, and Meridian keeps a smaller pylon. She never forgets who stood next to her.
+  - **Keep her secret.** Meridian Standing goes up. The pylon keeps draining Briarwick, Thistle's cell comes back angrier in Ch10 ("You *knew*"), and in Act V Tamsin can't afford to release her Plate (her Consent condition).
   - Every branch leads to the same next beat.
-- **Boss battle, "The Glass Matriarch" (multi-bar, Rejuvenation-style).** In **Cocoonfall Hollow**, a giant glassed **Galvantula** has woven a nest of crystal silk at the Bleed's heart. Tamsin can't cross the Veil, so she gives the PC her grandmother's shuttle "for luck". Defeating the Matriarch slows the Glasswood's spread (map state change: the Hollow's edge recedes on return in Ch10). The PC's presence calms the nest's Pokémon afterward, which is a Harmony beat.
+- **Boss battle, "The Glass Matriarch" (multi-bar, Rejuvenation-style).** In **Cocoonfall Hollow**, a giant glassed **Galvantula** has woven a nest of crystal silk at the Bleed's heart. Tamsin can't cross the Veil, so she gives the PC her grandmother's shuttle "for luck". Defeating the Matriarch slows the Glasswood's spread (map state change: the Hollow's edge recedes on return in Ch10). The PC's presence calms the nest's Pokémon afterward.
+- **CHOICE `:ch2_matriarch`:** the beaten Matriarch thrashes in the silk-moth grove, shedding crystal.
+  - **Soothe:** stay with it all night. It calms at dawn, but half the grove crystallizes (Harmony).
+  - **Silence:** press your hand to it, and the Imprint drains out of it like water down a drain. The grove is saved, and the Matriarch is left hollow and dull-eyed (Ruin −2). Tamsin, seeing it: "Oh. Oh, that's — thank you. I think."
+  - This is the player's first lesson: the efficient choice is the Ruin one.
 - On the way out, a wandering old woman at the Loyal Three shrine (actually **Celestine**, in disguise, unnamed) sings: *"Three loyal hounds and an ogre so bold — but who was the thief, when the story was told?"* (A seed for Elowen's legendary arc and for Celestine's Act V reveal.)
+
+**Optional thread: cameo sidequest "Lost in the Gossamer" (Shelly).** See `design/CAMEOS.md`. After Gym 1, a pink-haired stranger is stuck in Gossamer Deepwood, apologizing to the Bug Pokémon. It's the first cameo, and it teaches players that the Glass leaks.
 
 **Cliffhanger:** A Festival poster in Briarwick's square shows the Crown. Its stone is drawn with a tiny chip missing. An old mural in the chapel shows it whole. A child: "Mum says the Crown got hurt once."
 
@@ -86,12 +92,12 @@
 **Location:** R3, **Thistledown Manor** (546/547, the haunted house), R4 (`:BEACH`), **Brinecut Mine**, **Saltmere** (Elowen's free port, `:GRAND_STAGE`).
 
 **Optional set piece: Thistledown Manor** (comic haunted house). The dead **Thistledown Players**, a ghost acting family, are still rehearsing *Hamlet-but-with-Pokémon*. The PC must "play a role" in three scenes (choose lines; wrong choices start ghost battles). Reward: Spell Tag and a Litwick. The Manor's matriarch-ghost wants the PC to stay for the second act.
-- **GO-03 "Curtain Call" (proposed).** Trigger: accept her offer to "join the company forever". Foreshadowing: the butler-ghost mouths *don't* behind her. *Epitaph: "Your notices were excellent. The run has not closed. It never will."*
+- **Game over `GO_CURTAIN_CALL` "Curtain Call".** Trigger: accept her offer to "join the company forever". Foreshadowing: the butler-ghost mouths *don't* behind her. *Epitaph: "Your notices were excellent. The run has not closed. It never will."*
 
 **Arrival.** Saltmere is salt-caramel stalls, lamplit promenades and a breakwater where the Queen's tax-barges are turned back by tradition (show it: an Elowen barge, booed). The Blank Plate makes Saltmere *ordinary*, so it's the only city untouched by Bleed, and it makes its own miracles on stage. Everyone is preparing **the Pageant of the Prismfall** (the official myth, "a gift of love from the Original One"). This year's companion piece is **"The Loyal Three"**.
 
 **J1.** Juno arrives by cart with seed-sacks and challenges the PC to a cheerful spar on the promenade (**J1**). Afterward the two of them sit on the breakwater eating salt-caramel. This is a quiet friendship scene, and it should be a breather.
-- **CHOICE `CH3_JUNO_TALK`:** tell Juno about the NULL scan (Juno Bond up. She promises to keep it secret, and she does) / deflect / say nothing.
+- **CHOICE `:ch3_juno_talk`:** tell Juno about the NULL scan (Juno Bond up. She promises to keep it secret, and she does) / deflect / say nothing.
 
 **Gym 2 (`:GRAND_STAGE`), a double battle: "a duet".** Thematic note: *perform for the crowd; the audience's mood changes the stage.* **Dorian Pell** in velvet: "Enter, stage left, our brave challenger!" His ace is **Kecleon**, which changes "costume" with each type. After the battle, his troupe gives the PC the gift **Eevee "Understudy"** ("forty auditions, never cast — you two are a matched set").
 
@@ -117,7 +123,7 @@
 **Borderland.** The PC crosses from Elowen into **Isenmar**. Mixed wild types, the first fur-coated NPCs, bone toggles. A border marker has both kingdoms' arms and a Meridian sunburst bolted over both.
 
 **K2 (R6, before Gym 3).** Kestrel is hunting a Hollow cell he tracked from Saltmere, and he wants the PC out of his way. He is more raw than in K1. He has his new **Honedge** from his grandmother ("It was your mother's blade's child. Don't you dare lose it."). After the battle:
-- **CHOICE `CH4_KESTREL_MOURNER`:** ask whether he thinks the Mourner is his mother.
+- **CHOICE `:ch4_kestrel_mourner`:** ask whether he thinks the Mourner is his mother.
   - Kind: Kestrel Bond up a little. He snaps, but later sends a curt note.
   - Blunt: Kestrel Bond down. He shoves past.
   - Silence: neutral. He fills the silence himself: "...She'd never wear a mask. She hated masks."
@@ -127,7 +133,7 @@
 - Get the **Good Rod** at the Anglers' Guild.
 
 **Conflict.** Warden **Marisol Reyes**, elected and brash, is caught in the middle. A Hollow cell spikes the tidal Lattice at night, and the river stops entirely for an hour. A child's boat drifts toward the stalled mill-race, and the PC and Marisol rescue the kid in a battle-and-chase. The cell leader is **Teo Reyes** (`HOLLOW_TEO` admin battle), 19 and furious, and he is Marisol's brother. Marisol lets him run. The PC sees it.
-- **CHOICE `CH4_TEO`:**
+- **CHOICE `:ch4_teo`:**
   - Report Teo to the Meridian guard: Meridian Standing up, Marisol's Bond down hard, and Teo is hunted (his Act II arc gets harder).
   - Keep Marisol's secret: Marisol's Bond up, Hollow Standing up a little.
   - Confront Marisol privately: Marisol's Bond up. She admits it, crying and swearing.
@@ -163,7 +169,7 @@
 - The PC pursues them down to the **Plate Vault** and arrives in time to see it go wrong. The **Mourner** reaches the Zap Plate's cradle, but **Sable** (masked, Hollow-grey, cheerful) slaps a **Splitter** charge on the Plate. The Mourner lunges for it.
 - **The Shatter.** A white-violet blast. The Plate cracks. The Mourner catches it barehanded and his glove *smokes*: "No — no — what did you *do*?" (To Sable. The player will read it as aimed at the PC or at himself.) Sable is gone. The Mourner sees the PC, drops the cracked Plate into its cradle, and flees.
 - **Boss battle, "Overcharged" (multi-bar):** a Bleed-maddened **Electivire**, swollen with the Shatter's discharge, blocks the vault door. The field flips mid-battle from `:NEON_GRID` to `:BLEED`, the first scripted any→BLEED transition.
-- **GO-04 "Live Wire" (proposed).** Trigger: during the Electivire fight's interlude prompt, choose "Grab the cracked Plate and run". Foreshadowing: the Mourner's smoking glove a moment earlier, and Rook's shout, "Don't touch it with your hands!" *Epitaph: "Even you weren't made to hold lightning bare."*
+- **Game over `GO_LIVE_WIRE` "Live Wire".** Trigger: during the Electivire fight's interlude prompt, choose "Grab the cracked Plate and run". Foreshadowing: the Mourner's smoking glove a moment earlier, and Rook's shout, "Don't touch it with your hands!" *Epitaph: "Even you weren't made to hold lightning bare."*
 
 **Aftermath: the Lowlight.**
 - The Spire's shadow-district has been hit by the Shatter wave. **Twelve people are Fixed in glass mid-motion**: a woman hanging laundry, a man mid-laugh, and **Dex, mid-wave**, soda crate on his hip.
@@ -173,10 +179,11 @@
 - **Valen** walks into the Lowlight's edge, removes his glove for a moment to touch the Veil, and the player glimpses crystal. Then he sees the PC standing *inside*. "You were in the Lowlight when it went? And you're... standing." He looks a beat too long, then turns away.
 - Valen's broadcast that night grants Meridian **the Mandate**: security powers wherever Lattices stand. "Velmora endures."
 
-**CHOICE `CH5_LOWLIGHT_TESTIMONY`:** a Directorate officer asks what the PC saw.
+**CHOICE `:ch5_lowlight_testimony`:** a Directorate officer asks what the PC saw.
 - **"The Mourner broke the Plate"** (what it looked like): Meridian Standing up, Hollow Standing down, and the Mandate passes with a bigger majority (flavor).
 - **"Someone else was there"** (the masked second figure): Hollow Standing up, Meridian Standing down a little. Marchetti makes a note of the PC's name. Larch quietly says "good".
 - **"I don't know"**: neutral.
+- If the PC said "The Mourner broke the Plate", **Dorian** reads it in the papers in Saltmere: "So you told them the pageant version. I know that one by heart." This seeds his Act V refusal: he keeps the lie he knows, and won't release the Blank Plate.
 
 **Revelation.** Larch, in the ruined vault at 3 a.m. with a borrowed scanner: "That wasn't the Hollow's hammer. Look at the stress lines. The Plate was *already* cracking. Something's been drinking from it for ten years." She looks up at the Lattice conduits. "Something I built."
 

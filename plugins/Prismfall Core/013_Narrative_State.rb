@@ -55,6 +55,82 @@ module Prismfall
       h.push([kind, id, old, new])
       h.shift while h.length > HISTORY_LIMIT
       EventHandlers.trigger(:prismfall_narrative_changed, kind, id, old, new)
+      refresh_mirrors
+    end
+
+    #---------------------------------------------------------------------------
+    # Derived flags / tallies (NARRATIVE_KEYS section 5)
+    #---------------------------------------------------------------------------
+    @flag_stack = []
+
+    def self.flag(name)
+      name = name.to_sym
+      cond = DERIVED_FLAGS[name]
+      if cond.nil?
+        warn("Unknown derived flag #{name.inspect}")
+        return false
+      end
+      raise Prismfall::Conditions::Error, "Flag cycle: #{(@flag_stack + [name]).join(' -> ')}" if @flag_stack.include?(name)
+      @flag_stack.push(name)
+      begin
+        return Prismfall::Conditions.evaluate(cond)
+      ensure
+        @flag_stack.pop
+      end
+    end
+
+    def self.tally(name)
+      list = TALLIES[name.to_sym]
+      if !list
+        warn("Unknown tally #{name.inspect}")
+        return 0
+      end
+      return list.count { |cond| Prismfall::Conditions.evaluate(cond) }
+    end
+
+    # Writes MIRROR_SWITCHES (S221-S228) from their conditions.
+    def self.refresh_mirrors
+      return if !MIRRORS_ENABLED || !$game_switches
+      changed = false
+      MIRROR_SWITCHES.each do |sw, cond|
+        v = (Prismfall::Conditions.evaluate(cond) rescue false) ? true : false
+        next if $game_switches[sw] == v
+        $game_switches[sw] = v
+        changed = true
+      end
+      $game_map.need_refresh = true if changed && $game_map
+    end
+
+    # Applies an effects string such as "MERIDIAN+2 VOSS+1 RES-1". Shows
+    # "X will remember that." for each Bond whose tier changed (if show).
+    def self.apply_effects(text, show = true)
+      return if text.nil? || text.strip.empty?
+      toasts = []
+      text.split(/\s+/).each do |tok|
+        m = /\A([A-Za-z_]+)([+-]\d+)\z/.match(tok)
+        if !m
+          warn("Bad effect token #{tok.inspect}")
+          next
+        end
+        id = m[1].upcase.to_sym
+        delta = m[2].to_i
+        if id == :RES
+          Resonance.shift(delta)
+        elsif BONDS.has_key?(id)
+          old_tier = Bonds.tier(id)
+          Bonds.add(id, delta)
+          toasts.push(id) if Bonds.tier(id) != old_tier && !toasts.include?(id)
+        elsif FACTIONS.has_key?(id)
+          Standing.add(id, delta)
+        else
+          warn("Effect token #{tok.inspect} names no Bond/faction")
+        end
+      end
+      return if !show
+      toasts.each do |id|
+        text = (Bonds.get(id) >= 0) ? BOND_UP_TEXT : BOND_DOWN_TEXT
+        pbMessage("\\se[]" + _INTL(text, Bonds.display_name(id))) if text
+      end
     end
 
     # Shared logic for Bonds and Standing (bounded integer meters).
@@ -144,7 +220,12 @@ module Prismfall
         return new
       end
 
-      def self.shift(delta);   return set(value + delta.to_i); end
+      # The 'colorless' password halves every Resonance swing (toward 0).
+      def self.shift(delta)
+        delta = delta.to_i
+        delta = (delta.abs / 2) * (delta <=> 0) if defined?(Prismfall::Passwords) && Prismfall::Passwords.active?(:COLORLESS)
+        return set(value + delta)
+      end
       def self.harmony(n = 1); return shift(n.abs);            end
       def self.ruin(n = 1);    return shift(-n.abs);           end
 
@@ -154,23 +235,39 @@ module Prismfall
     end
 
     module Choices
+      # Resolves legacy/map aliases (CHOICE_ALIASES, or an UPPERCASE key whose
+      # lowercase form is registered) to the canonical key.
+      def self.canonical(key)
+        key = key.to_sym
+        return Narrative::CHOICE_ALIASES[key] if Narrative::CHOICE_ALIASES.has_key?(key)
+        down = key.to_s.downcase.to_sym
+        return down if !Narrative::CHOICES.has_key?(key) && Narrative::CHOICES.has_key?(down)
+        return key
+      end
+
+      def self.legacy_alias?(key)
+        return Narrative::CHOICE_ALIASES.has_key?(key.to_sym)
+      end
+
       def self.definition(key)
+        key = canonical(key)
         d = Narrative::CHOICES[key]
         Narrative.warn("Unregistered choice #{key.inspect}") if !d
         return d || {}
       end
 
       def self.get(key)
-        return Narrative.store[:choices][key.to_sym]
+        return Narrative.store[:choices][canonical(key)]
       end
 
       def self.made?(key)
-        return Narrative.store[:choices].has_key?(key.to_sym)
+        return Narrative.store[:choices].has_key?(canonical(key))
       end
 
       # Records a decision. Returns false if refused (:once and already made).
-      def self.make(key, value)
-        key = key.to_sym
+      def self.make(key, value, show_effects = true)
+        skip_effects = Narrative::LEGACY_ALIASES_SKIP_EFFECTS && legacy_alias?(key)
+        key = canonical(key)
         d = definition(key)
         if d[:values] && !d[:values].include?(value)
           raise ArgumentError, "Choice #{key.inspect} doesn't allow #{value.inspect} (allowed: #{d[:values].inspect})" if $DEBUG
@@ -178,10 +275,15 @@ module Prismfall
         end
         return false if d[:once] && made?(key) && get(key) != value
         old = get(key)
+        first_time = !made?(key)
         Narrative.store[:choices][key] = value
         map_id = ($game_map) ? $game_map.map_id : 0
         Narrative.store[:choice_log].push([key, value, Narrative.play_time, map_id])
         Narrative.record_history(:choice, key, old, value) if old != value
+        if first_time && !skip_effects
+          effects = (Narrative::CHOICE_EFFECTS[key] || {})[value]
+          Narrative.apply_effects(effects, show_effects)
+        end
         return true
       end
 
@@ -190,7 +292,7 @@ module Prismfall
       end
 
       def self.clear(key)   # debug / story resets
-        Narrative.store[:choices].delete(key.to_sym)
+        Narrative.store[:choices].delete(canonical(key))
       end
     end
   end
@@ -217,3 +319,5 @@ def pf_choice(key);                       return Prismfall::Choices.get(key);   
 def pf_choose(key, value);                return Prismfall::Choices.make(key, value);       end
 def pf_chose?(key, value);                return Prismfall::Choices.get(key) == value;      end
 def pf_cond(text);                        return Prismfall::Conditions.evaluate(text);      end
+def pf_flag(name);                        return Prismfall::Narrative.flag(name);           end
+def pf_tally(name);                       return Prismfall::Narrative.tally(name);          end

@@ -47,7 +47,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.4em 0}
 <header class="band">
   <div><h1>The Prismfall Codex</h1>
   <p class="lede">The story bible for Pokémon Prismfall: the realm of Velmora, its seven kingdoms, eighteen Wardens and the Festival of Champions.</p>
-  <p class="meta">Working draft · 48,116 words · 11 chapters</p></div>
+  <p class="meta">Working draft · 56,994 words · 12 chapters</p></div>
   <div class="prism"><svg viewBox="0 0 1200 600" role="img" aria-label="A prism splitting light into the eighteen gym types">
   <defs><linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".9"/></linearGradient>
   <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#9fb6c8" stop-opacity=".18"/></linearGradient></defs>
@@ -57,7 +57,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.4em 0}
   <polygon points="300,120 330,420 170,420" fill="#fff" opacity=".12"/>
 </svg></div>
 </header>
-<nav aria-label="Chapters"><a href="#overview">Overview</a><a href="#world">World &amp; lore</a><a href="#factions">Factions</a><a href="#cast">Cast</a><a href="#act-1">Act I</a><a href="#act-2">Act II</a><a href="#act-3">Act III</a><a href="#act-4">Act IV</a><a href="#act-5">Act V</a><a href="#mysteries">Mysteries</a><a href="#cameos">Festival cameos</a></nav>
+<nav aria-label="Chapters"><a href="#overview">Overview</a><a href="#world">World &amp; lore</a><a href="#factions">Factions</a><a href="#cast">Cast</a><a href="#act-1">Act I</a><a href="#act-2">Act II</a><a href="#act-3">Act III</a><a href="#act-4">Act IV</a><a href="#act-5">Act V</a><a href="#mysteries">Mysteries</a><a href="#choices">Choices &amp; endings</a><a href="#cameos">Festival cameos</a></nav>
 <main><section class="chapter" id="overview"><h1 id="overview-pok-mon-prismfall-story-bible-00-overview">POKÉMON PRISMFALL — Story Bible 00: Overview</h1>
 <blockquote>
 <p>Owner: Story &amp; World lead. Binding source: <code>design/SPINE.md</code>. Flags: <code>design/FLAGS.md</code>.
@@ -2803,7 +2803,978 @@ Map names per WORLD.md (segments 16–18, Crownhaven 480–519). Caps: R16 90 ·
 <li><strong>"Dorian is the Mourner."</strong> A theatrical voice, and he's oddly calm at the hijacked pageant. Disproved when he's on stage beside the Mourner.</li>
 <li><strong>"Larch is working for Meridian."</strong> Her past, her Lattice. She's guilty but loyal. It resolves at Ch12, when she burns her career on air.</li>
 <li><strong>"Valen is the villain."</strong> He's the most suspicious figure in Acts III–IV. He's the liar, not the villain. Ch20 recontextualizes.</li>
-</ul></section><section class="chapter" id="cameos"><h1 id="cameos-cameos-visiting-champions-of-the-festival-story-lead">CAMEOS — Visiting Champions of the Festival (Story lead)</h1>
+</ul></section><section class="chapter" id="choices"><h1 id="choices-story-bible-10-choices-the-festival-draw-game-overs-the-ruin-route-and-the-endings">Story Bible 10: Choices, the Festival Draw, Game Overs, the Ruin Route and the Endings</h1>
+<blockquote>
+<p>Owner: Narrative Systems. Binding: <code>design/SPINE.md</code> Revision 3. Implementation contract (every key, value, condition and ID):
+<strong><code>design/NARRATIVE_KEYS.md</code></strong> — if this file and that one disagree, NARRATIVE_KEYS wins and this file is the bug.
+Built on the story lead's act files 04–08 and the FLAGS.md crosswalk; their key names are kept (lowercased).
+Kingdom names are Revision 3: Elowen, Antumbra, Isenmar, Ashkaar, Ossaria, Zenith, Nadir, and Crownhaven.</p>
+</blockquote>
+<h2 id="choices-0-design-pillars">0. Design pillars</h2>
+<ol>
+<li><strong>No good/evil buttons.</strong> Every prompt trades something real: a life now against proof later (Teo or Sable's comm-device), the truth
+   against the person who'd tell it (expose Magnus, or trust him), honesty against a friend's dignity (expose Anja, or let her confess).</li>
+<li><strong>Delayed and visible.</strong> Most choices pay off two or three chapters later, and the game <em>shows</em> the debt coming due (§1.4), never the numbers.</li>
+<li><strong>The world keeps score, not a meter.</strong> The big outcomes are counts of people: how many Wardens let go of their Plate (Consent),
+   how many cracks the PC and their friends put in Voss's machine (Engine breaks). Both are shown on screen before the finale.</li>
+<li><strong>Easy in, dark later.</strong> Act I's choices are small and kind-hearted (who to trust, what to say). Act II asks who to save. Acts III–V ask
+   who you'll let die, and who you'll become.</li>
+</ol>
+<hr />
+<h2 id="choices-1-choice-architecture">1. Choice architecture</h2>
+<h3 id="choices-1-1-bonds-10">1.1 Bonds (10)</h3>
+<p>Range −10..+10. Tiers: hostile ≤ −5 · wary −4..−2 · neutral −1..1 · friendly 2..4 · close 5..7 · devoted 8+.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Bond</th>
+<th>Start</th>
+<th>Why it's tracked</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Juno</strong></td>
+<td>+2</td>
+<td>the friend you start with</td>
+<td>Consent (≥ 0); estranged Juno (≤ −5) travels apart in Ch11; Garden Match exhibition; Homecoming slide with the PC</td>
+</tr>
+<tr>
+<td><strong>Kestrel</strong></td>
+<td>−1</td>
+<td>the rival who can fall</td>
+<td>Fallen at ≤ −4 (or ≤ 1 with the pity line, or ≤ 1 while you're Meridian's ally), unless you gave him the ring or answered K6 bluntly; devoted (8+) lets him take the Borrowed Crown; Ghost seat with Ysolde</td>
+</tr>
+<tr>
+<td><strong>Rowan</strong></td>
+<td>0</td>
+<td>the Mourner</td>
+<td>radicalized (≤ −2 after being condemned) opens the Hollow Spring; his R16 appearance needs mercy, not affection</td>
+</tr>
+<tr>
+<td><strong>Voss</strong></td>
+<td>+1</td>
+<td>the first person who was kind to you</td>
+<td>how warmly he offers, how bitterly he takes refusal; Ruin R4</td>
+</tr>
+<tr>
+<td><strong>Valen</strong></td>
+<td>0</td>
+<td>the father-figure who planned your life</td>
+<td>his collapse (≤ −2 with a refusal at the audience); his last words; Zygarde chooses the PC post-game at ≥ 3</td>
+</tr>
+<tr>
+<td><strong>Ilsa</strong></td>
+<td>0</td>
+<td>the daughter who reads minds</td>
+<td>Little Owl (≥ 3 to start, ≥ 4 to reconcile); Consent (≥ 5 or reconciled)</td>
+</tr>
+<tr>
+<td><strong>Sigrun</strong></td>
+<td>0</td>
+<td>the heir who was relieved</td>
+<td>Final stand-in (≥ 5); Borrowed Crown bearer (≥ 6)</td>
+</tr>
+<tr>
+<td><strong>Nyx</strong></td>
+<td>0</td>
+<td>the broker</td>
+<td>Consent (≥ 4 or the bargain)</td>
+</tr>
+<tr>
+<td><strong>Marisol</strong></td>
+<td>0</td>
+<td>the sister of the boy you may not save</td>
+<td>if Teo died: Consent at ≥ 3, otherwise she claims her Right of Grievance in R16</td>
+</tr>
+<tr>
+<td><strong>Ysolde</strong></td>
+<td>0</td>
+<td>Morwen's partner</td>
+<td>Kestrel–Ysolde reconciliation (≥ 4), Kestrel's Ghost seat, Morwen's Echo exhibition</td>
+</tr>
+</tbody>
+</table></div>
+<p>Other Wardens are <strong>not</strong> Bond tracks. When an act file says "Tamsin's Bond goes up", the choice key itself carries it, and it surfaces in
+that Warden's Consent condition (§6.2). That keeps ten relationships deep instead of thirty shallow.</p>
+<h3 id="choices-1-2-standing-hollow-meridian-accord">1.2 Standing (Hollow / Meridian / Accord)</h3>
+<p>Range −10..+10 (Meridian and Accord start at +1, the Hollow at 0). "High" = ≥ 4 (the Ch10 Sanctuary / Black Site branches, the Ch17 Archive
+branch); "Low" = ≤ −2; "broken" Hollow = below 0. Standing gates <strong>content</strong> (branch maps, who ambushes you, Voss's warmth, Lantern Hollow at the
+hijack) far more than endings; the endings read Standing only through the Hollow Spring and Concord options.</p>
+<h3 id="choices-1-3-resonance-harmony-ruin">1.3 Resonance (Harmony ↔ Ruin)</h3>
+<p>One integer from −10 (Ruin, <em>none</em>) to +10 (Harmony, <em>every</em>). It moves only when the PC <em>uses</em> the shard or chooses how to carry grief:
+soothing or silencing the Glass Matriarch (Ch2), venting or forcing the caldera (Ch8), the Ogre (Ch10), "nobody" (Ch10), burning Morwen's
+letter (Ch12), the Mindscape line (Ch13), the K6 line (Ch15), the oath (Ch19), Calla (Ch20), burning Kestrel's gauntlet off (Ch21).
+Bands: ruin ≤ −6 · ruin-leaning −5..−2 · balanced · harmony-leaning 2..5 · harmony ≥ 6.</p>
+<h3 id="choices-1-4-how-the-player-sees-consequences-no-numbers">1.4 How the player sees consequences (no numbers)</h3>
+<ul>
+<li><strong>"X will remember that."</strong> Only when a Bond changes tier, or on a MAJOR choice. Rare on purpose, so it lands.</li>
+<li><strong>The Ties page</strong> (Trainer Card, page 3): ten portraits with a lantern that is cracked / guttering / lit / bright / blazing / starred,
+  plus three faction sigils with one word each (Enemy … Ally). The <code>openbook</code> password adds numbers.</li>
+<li><strong>The scar.</strong> The PC's star-shaped scar in the Bag portrait shifts from pearl-white through colorless to a black-violet that <em>eats</em> the
+  edges of the icon. Bleed motes drift toward the PC at Harmony and away at Ruin. Wardens comment ("You've gone cold, love.").</li>
+<li><strong>The Velmora Gazette</strong> in every Pokémon Center: two headlines per chapter picked by rule (e.g. "IRONREACH BOMBER STILL AT LARGE" vs
+  "MERIDIAN CONTRACTOR LINKED TO IRONREACH" after Ch13).</li>
+<li><strong>Tamsin's eighteen banners</strong> (Ch20, the opening ceremony): she weaves one per Warden, in white thread if that Warden will let go and grey if
+  not. "Twelve white. I don't know what it means, but it feels like it means something." That is the Consent count, shown.</li>
+<li><strong>Larch's Engine board</strong> (Ch20, Day 5): a hand-built panel of eleven lamps wired to her readings of the arena. Each lit lamp is a crack in
+  the Engine (§6.2). "If that case is still singing to him and Magnus never flinched, three lamps won't be enough. I can't make that sound kinder."</li>
+<li><strong>The Journal</strong> records every named decision in one line of prose ("You told the Glass Court what you saw in the Lowlight.").</li>
+</ul>
+<hr />
+<h2 id="choices-2-choice-catalog-48-keys">2. Choice catalog (48 keys)</h2>
+<p>Format: <strong>key</strong> — situation. Options → immediate effect. <em>Long-term.</em> Exact deltas: NARRATIVE_KEYS §4.2. ★ = MAJOR (10).</p>
+<h3 id="choices-prologue-and-act-i-the-last-ferry-warm-nothing-here-can-ruin-you-but-everything-is-remembered">Prologue and Act I — "The Last Ferry" (warm; nothing here can ruin you, but everything is remembered)</h3>
+<ul>
+<li><strong><code>:pro_fellowship</code></strong> — Voss offers a Fellowship card on the <em>Dovetail</em>. <em>accept</em> (money, Meridian trust) / <em>decline</em> (Voss likes you more:
+  "Independent. Good.") / <em>silent</em> (he leaves it on the rail). <em>Sets how warmly Meridian treats you in Acts I–II.</em></li>
+<li><strong><code>:ch2_matriarch</code></strong> <em>(new)</em> — The beaten Glass Matriarch thrashes in the silk-moth grove. <em>soothe</em> (stay with it all night; half the grove
+  crystallizes; Harmony) / <em>silence</em> (press your hand to it and the Imprint leaves it like water down a drain; the grove is saved, the
+  Matriarch is left hollow; Ruin −2). <em>The player's first lesson: the efficient choice is the Ruin one.</em></li>
+<li><strong><code>:ch2_tamsin</code></strong> — Tamsin's secret Lattice contract. <em>expose</em> / <em>help_confess</em> / <em>keep_secret</em>. <em>Keeping it means the pylon keeps
+  draining Briarwick, and in Act V she can't afford to let go of her Plate (Consent).</em></li>
+<li><strong><code>:ch3_juno_talk</code></strong> — tell Juno about the NULL scan? <em>told</em> (she keeps it) / <em>deflect</em> / <em>silent</em>.</li>
+<li><strong><code>:ch4_kestrel_mourner</code></strong> — is the Mourner his mother? <em>kind</em> / <em>blunt</em> (−2) / <em>silent</em>.</li>
+<li><strong><code>:ch4_teo</code></strong> — Marisol is tipping off her brother's cell. <em>report</em> (Meridian trust; Marisol −4; Teo is hunted) / <em>keep_secret</em> / <em>confront</em>
+  (she breaks down; the strongest Marisol bond). <em>Seeds who Marisol is if Teo dies.</em></li>
+<li><strong><code>:ch5_lowlight_testimony</code></strong> — a Directorate officer asks what you saw. <em>"The Mourner broke the Plate"</em> (it's what it looked like) /
+  <em>"Someone else was there"</em> / <em>"I don't know."</em> <em>Telling the official story on record costs Dorian's Consent: "I keep the lie I know until
+  someone shows me a better one."</em></li>
+</ul>
+<h3 id="choices-act-ii-imprints-who-do-you-save">Act II — "Imprints" (who do you save?)</h3>
+<ul>
+<li><strong><code>:ch6_drillsite</code></strong> — the freed Pokémon and the drill-site children. <em>hollow</em> / <em>directorate</em> (a Mandate Pass that opens checkpoints later) /
+  <em>sanctuary</em> (Sahar invokes Warden's right). <em>Directorate costs Sahar's Consent.</em></li>
+<li><strong><code>:ch6_kestrel_rumor</code></strong> — K3. <em>encourage</em> (+2 now, −3 at Ironreach when it isn't her) / <em>warn</em> (−1 now, +2 at Ironreach: "I hate that you were
+  right") / <em>silent</em>. <em>The kind answer now is the cruel one later.</em></li>
+<li><strong><code>:ch7_ledger</code></strong> — J2. <em>name_him</em> (Juno −3, then +2 at Ironreach: she already knew) / <em>reassure</em> (+2, then −2) / <em>ask_corvin</em>.</li>
+<li><strong><code>:ch8_caldera</code></strong> — the Caldera Crisis. <em>vent</em> with Wick (forges cold; Harmony) / <em>dampers</em> with Quent (the tap keeps running; Ruin −1) /
+  <em>shutdown</em> by force (a harder fight; Accord trust; the Dominar's respect).</li>
+<li><strong><code>:ch8_lightstone</code></strong> — <em>hearthguild</em> / <em>wyrmrest</em> (Sigrun +2; the only route to swaying the Dominar) / <em>dominar</em> (Brann won't let go of his
+  Plate for a man who'd give away his guild's relic).</li>
+<li>★ <strong><code>:ch9_teo_sable</code></strong> — the Conclave Shatter. Teo is Fixing under the scaffolding; Sable is running for the service lift with the
+  comm-device. <strong>Save Teo</strong> (he lives with glassed fingers; Marisol +4; Sable escapes clean) / <strong>chase Sable</strong> (you tear the device from her belt;
+  Teo dies reaching for his sister). <em>Long-term: Teo leads the Lantern Hollow strikers, or his photo is nailed to the strike banner; only the
+  device exposes Kroll publicly at the Ch13 tribunal; Marisol's Consent or her Right of Grievance in R16.</em></li>
+<li><strong><code>:ch9_rowan_words</code></strong> — Rowan, led away. <em>why</em> / <em>look_after</em> (+2) / <em>silent</em> (+1).</li>
+</ul>
+<h3 id="choices-act-iii-fault-lines-who-do-you-let-fall">Act III — "Fault Lines" (who do you let fall?)</h3>
+<ul>
+<li><strong><code>:ch10_null</code></strong> — Black Site branch only: take the Type: Null. Voss +2. <em>An unsettling gift: it reacts to you like the badge case.</em></li>
+<li><strong><code>:ch10_ogre</code></strong> — the Loyal Three or the Ogre (<em>three</em> is <code>GO_LOYAL</code>). <em>ogre</em> (Ogerpon fights with you, later joins Juno) / <em>hesitate</em>.</li>
+<li><strong><code>:ch10_succession_stance</code></strong> — "Who should own the Plates?" <em>accord</em> (Valen +2) / <em>kingdoms</em> / <em>nobody</em> (the first "nobody"; Harmony).</li>
+<li><strong><code>:ch11_anja</code></strong> — her suppressed readings. <em>expose</em> (<code>ANJA_EXPOSED</code>; Meridian blamed loudly) / <em>let_confess</em> (she becomes the Act V swing
+  vote). <em>Exposing her costs her Consent and makes her claim R16: "You threw me to the court. Fine. Ice remembers."</em></li>
+<li><strong><code>:ch11_strike</code></strong> <em>(new)</em> — the Ebbmouth Strike picket when the strikebreakers arrive. <em>stand</em> (the optional tag battle with Marisol;
+  +2, +3 if Teo died) / <em>mediate</em>. <em>The only Act III way back to Marisol after Teo's death.</em></li>
+<li><strong><code>:ch12_letter</code></strong> — Morwen's dead letter to "I.". <em>keep</em> (you can quote her in the hijack) / <em>send</em> (Kestrel +3: "You sent me a <em>letter</em>.
+  Hers.") / <em>burn</em> (Ruin −2; Odessa finds out: "Dead letters are the last thing some people ever said." She won't let go of her Plate.)</li>
+<li><strong><code>:ch13_remember</code></strong> — the five-year-old in the Mindscape. <em>"Show me."</em> / <em>"I'm scared too."</em> (Ilsa +2, Harmony +2) / <em>"...Not yet."</em></li>
+<li>★ <strong><code>:ch13_kaito</code></strong> — Kaito asks whether to speak about Marrowgate. <strong>Encourage</strong> (the Accord's moral authority cracks; Valen −2; Ilsa +2;
+  Kaito's Consent) / <strong>spare</strong> him the burden (Accord trust; Kaito never lets go). <em>A man who never confessed can't release anything.</em></li>
+<li>★ <strong><code>:ch13_rowan_testimony</code></strong> — your testimony at the Glass Court. <strong>Condemn</strong> (Pale Gaol; Juno −3; Rowan −4: if he survives, he radicalizes,
+  which opens the Hollow Spring) / <strong>Mercy</strong> (Rowan +3, Juno +3, Hollow +2; with Hollow trust ≥ 4 he comes to the Festival as "the Gardener"
+  with Juno's blessing) / <strong>Refuse</strong> (Ilsa, privately: "Coward. Kind of a coward. I understand.").</li>
+<li>★ <strong><code>:ch13_fault</code></strong> <em>(new, who lives)</em> — the Fault. The Glass Court's undercroft floods with Rowan chained in the dock, and the orrery's
+  brass ring comes down on Director Marchetti. Wick's people are on the far side of the water. You can reach one. <strong>Rowan</strong> (he escapes with
+  Wick, as written; Marchetti is dragged out by her troops, maimed and unturned) / <strong>Marchetti</strong> (Rowan drowns in the dark under the court, still
+  chained; Marchetti owes you her life and stands the Directorate down at the hijack). <em>Long-term: who leads the Lantern Hollow (Rowan, else Teo,
+  else Thistle and Wick); whether Elin wakes into her husband's arms; Juno −4.</em></li>
+<li><strong><code>:sq_doctors_cell</code></strong> — "The Doctor's Cell" (Ch11–13): free Corvin from the holding barge, or fail. <em>Corvin's Consent; the Cragholm hospital.</em></li>
+</ul>
+<h3 id="choices-act-iv-the-drowned-crown-who-are-you-willing-to-become">Act IV — "The Drowned Crown" (who are you willing to become?)</h3>
+<ul>
+<li>★ <strong><code>:ch14_telemetry</code></strong> — Larch opens the badge case. <strong>Destroy</strong> (Voss knows at once; Directorate pressure in Ch16–17; an Engine crack) /
+  <strong>Sabotage</strong> (keep it and feed it lies: two cracks, a tense "did he notice?" beat at every later badge) / <strong>Leave</strong> it (the road to the Bad
+  ending, and Bastian's Consent is gone: "You walked a Meridian beacon into my seams.").</li>
+<li><strong><code>:ch14_marchetti</code></strong> — after her defeat, show her the Splitter Casing or the comm-device? <em>show_evidence</em> (she goes still; turns at the
+  hijack) / <em>none</em>.</li>
+<li><strong><code>:ch15_kestrel</code></strong> — the PC's authored line after K6. <em>sorry</em> ("I'd give it back if I could": +1 now, +3 at the SF if he's Redeemed, but
+  pity is the one thing a weak bond can't carry) / <em>she_chose</em> ("Don't you dare make her choice my crime": −2, and he can never fall) /
+  <em>resolve</em> ("I'm going to make it worth it": +2, Harmony +2).</li>
+<li><strong><code>:ch15_look_back</code></strong> — only with a complete Ledger: the Ruin Route door (§5).</li>
+<li><strong><code>:ch16_zekrom</code></strong> — outcome of freeing Zekrom (always, if you win). One Engine crack.</li>
+<li><strong><code>:ch16_rook</code></strong> — <em>leak_now</em> (Kroll is confirmed realm-wide today; Rook is fired and blacklisted from the Spire) / <em>hold</em> (he leaks on Day 1
+  of the Festival, and he's still inside on Day 7 to cut Lumen's grid). <em>Truth now, or a weapon later. Rook can only release a Plate he can reach.</em></li>
+<li>★ <strong><code>:ch16_magnus</code></strong> — the Arbiter blueprints. <strong>Expose</strong> (Magnus arrested; with Rook's leak and the Night of Masques, Meridian's board throws
+  Voss out before Day 7 and <strong>Quent</strong> hijacks the Engine instead) / <strong>Conscience</strong> ("Will you let it take a child?": the governor goes off in the
+  finale, an Engine crack, Magnus's Consent). <em>The honest public act removes the man who could have saved you from inside.</em></li>
+<li><strong><code>:ch17_nyx</code></strong> — <em>trade</em> your secret for the arena schematics (her blackout is precise, an Engine crack, her Consent) / <em>refuse</em>
+  (she helps anyway, sloppily, and gets hurt).</li>
+<li>★ <strong><code>:ch17_voss_offer</code></strong> — the Sun Court. <strong>Refuse</strong> / <strong>Feign</strong> (the hijack opens with Voss's Silvally weakened: "You let me get close.") /
+  <strong>Accept</strong> (<code>VOSS_ACCEPTED</code>: at the hijack his hand ends the game in Concord Dawn if you take it).</li>
+</ul>
+<h3 id="choices-act-v-sovereign-who-carries-it">Act V — "Sovereign" (who carries it?)</h3>
+<ul>
+<li>★ <strong><code>:ch18_kestrel_ring</code></strong> — after K7, Morwen's Ring. <strong>Give now</strong> (+3: he can never fall) / <strong>Keep</strong> (a bigger moment at the SF if he's
+  Redeemed, and the one thing that can reach him in the Engine if he isn't). <em>The safest choice and the most dramatic choice are different.</em>
+  Then the prompt that is <code>GO_STAY_OUT</code>.</li>
+<li>★ <strong><code>:ch19_oath</code></strong> — at the Draco brazier, aloud. <strong>Return</strong> / <strong>Keep</strong> (Valen +3; Alexandra comes to the QF to ask whether the Fixed will
+  ever wake; Sigrun won't let go of the Draco Plate) / <strong>Open</strong> ("I don't know yet") / <strong>Ruin</strong> (only at Ruin-leaning or lower; Sigrun draws her
+  blade and lets you pass). The hidden "Whatever you want to hear." is <code>GO_LIARS_PYRE</code>.</li>
+<li><strong><code>:ch19_dominar</code></strong> — the petition. <em>swayed</em> (needs the Light Stone at Wyrmrest plus proof, or Sigrun ≥ 4) / <em>failed</em> (the legions march on Zenith).</li>
+<li><strong><code>:ch20_envoy</code></strong> — Envoy Okoro. <em>proof</em> (needs two of: Larch Papers, Arbiter Blueprints, Venam's testimony; no Severance) / <em>plea</em>.</li>
+<li><strong><code>:ch20_calla</code></strong> <em>(new, who lives)</em> — at the Night of Masques Calla Wren finds you, shaking: she can get the arena's power schematics to Larch.
+  Only offered if someone inside is already moving (Rook held, or Magnus kept faith). <em>shelter</em> her with Edda (partial schematics, one crack) /
+  <em>send_back</em> for the full set (two cracks, and Kroll finds her in the Spire stairwell; she doesn't come back) / <em>turn_away</em>.</li>
+<li>★ <strong><code>:ch20_audience</code></strong> — the PC answers Valen's confession. <strong>Return</strong> / <strong>Keep</strong> (he weeps, once) / <strong>Refuse</strong> ("Nobody decides for me."). <em>If the
+  PC refuses with a cold Bond, Ilsa never came, and the telemetry still runs, Voss's pre-ignition drains him: Valen collapses before the Final,
+  and his successor fights you.</em></li>
+<li><strong><code>:sq_little_owl</code></strong> — Ilsa's quest culmination: <em>reconciled</em> / <em>refused</em>.</li>
+<li><strong><code>:ch21_crown</code></strong> — kneel / stand / step back (flavor; stepping back is a whisper of Harmony).</li>
+<li><strong><code>:ch21_hand</code></strong> — only with <code>VOSS_ACCEPTED</code>: take his hand (Concord Dawn now) / refuse ("You promised.").</li>
+<li><strong><code>:ch21_reach_kestrel</code></strong> <em>(new)</em> — only if Kestrel fell: he's harnessed into the Engine as Voss's conduit, between Voss's second and third bars.
+  <em>reach</em> (needs the ring or Morwen's words; he comes back) / <em>burn</em> (the shard tears the gauntlet off; he lives, scarred; Ruin −3) /
+  <em>let_go</em> (he burns out as the Engine fires).</li>
+<li><strong><code>:ch21_spare_voss</code></strong> — Judgment strikes the hijacker. <em>shield</em> (he lives, crippled, and asks to see the sunrise) / <em>let_judge</em>.</li>
+<li><strong><code>:ch21_final</code></strong> — the final decision (§6.1).</li>
+</ul>
+<hr />
+<h2 id="choices-3-the-festival-draw">3. The Festival draw</h2>
+<h3 id="choices-3-1-in-world-the-lots-are-honest-the-bowl-isn-t">3.1 In-world: the lots are honest, the bowl isn't</h3>
+<p>The Hierophant draws lots from the crystal bowl on the Basilica steps (08_ACT_V). The draw <em>looks</em> random. It isn't, and Velmorans half-know it:
+the Accord's old customs let certain people choose their opponent. The <strong>Right of Grievance</strong> lets a Warden claim a first-round match against a
+challenger who wronged their city. A <strong>Warden's invitation</strong> can be given away. A Sovereign who can't stand is replaced by a stand-in. And
+Dorian, the Accord's Pageant-Master, has never once let the bowl ruin a good story. Every rule below has one of those reasons on screen.</p>
+<h3 id="choices-3-2-stage-pools-first-matching-candidate-wins-the-last-line-is-the-fallback">3.2 Stage pools (first matching candidate wins; the last line is the fallback)</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Stage (cap)</th>
+<th>Priority</th>
+<th>Opponent</th>
+<th>Condition (plain words; exact strings in NARRATIVE_KEYS §6.2)</th>
+<th>On-screen reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R16</strong> (90) "someone from your past"</td>
+<td>1</td>
+<td><strong>Marisol</strong> (Grievance)</td>
+<td>Teo died and Marisol's Bond is 2 or less</td>
+<td>Right of Grievance: "Let's see you run past <em>me</em>." Kaito yields his invitation to her</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td><strong>Anja</strong></td>
+<td>you exposed her to the Thane's court</td>
+<td>"You threw me to the court. Fine. Ice remembers." Odessa gives Anja her place</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td><strong>Rowan, "the Gardener"</strong></td>
+<td>Rowan lived, you pleaded mercy, and the Hollow trusts you (≥ 4)</td>
+<td>Juno gives her uncle her own invitation: "One last garden, child."</td>
+</tr>
+<tr>
+<td></td>
+<td>fallback</td>
+<td><strong>Juno</strong> (J4)</td>
+<td>—</td>
+<td>"We started on the same dock."</td>
+</tr>
+<tr>
+<td><strong>QF</strong> (92) "the stranger"</td>
+<td>0</td>
+<td><strong>Nova</strong></td>
+<td>Ruin Route</td>
+<td>Shiv walks her through the dream in his place</td>
+</tr>
+<tr>
+<td></td>
+<td>1</td>
+<td><strong>Titania</strong></td>
+<td>Resonance ≤ −3</td>
+<td>"I came to guard someone. Now I think I'm guarding everyone from you." Amaria withdraws</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td><strong>Alexandra</strong></td>
+<td>your oath was Keep</td>
+<td>her mother sleeps in crystal: "If you keep them, do yours ever wake?"</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td><strong>Garret</strong></td>
+<td>Kestrel has fallen</td>
+<td>"Somebody's driving your rival. I want to see who's driving you."</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td><strong>Melia</strong></td>
+<td>five or more Bonds at close (≥ 5) and Harmony-leaning</td>
+<td>"Everyone keeps telling you what you're <em>for</em>. Have you decided yet?" Venam hands her the invitation</td>
+</tr>
+<tr>
+<td></td>
+<td>fallback</td>
+<td><strong>Lin</strong></td>
+<td>—</td>
+<td>the headline: "your god's in pieces and your champion's made of glass. cute region."</td>
+</tr>
+<tr>
+<td><strong>SF</strong> (94) "the mirror"</td>
+<td>1</td>
+<td><strong>Kestrel (Fallen)</strong></td>
+<td><code>KESTREL_FALLEN</code></td>
+<td>he keeps the Gauntlet on and fights like someone drowning</td>
+</tr>
+<tr>
+<td></td>
+<td>fallback</td>
+<td><strong>Kestrel (Redeemed)</strong>, K8</td>
+<td>— (Ruin Route: same team, Ruin dialogue)</td>
+<td>he tears the Gauntlet off: "If I beat you, I beat <em>you</em>."</td>
+</tr>
+<tr>
+<td><strong>Final</strong> (96) "the crown", drawn live on Day 7</td>
+<td>0</td>
+<td><strong>Valen, the Last Tuning</strong></td>
+<td>Ruin Route</td>
+<td>he fights to hold the Plates quiet one more time, and to stop you</td>
+</tr>
+<tr>
+<td></td>
+<td>1</td>
+<td><strong>Sigrun</strong>, Sovereign-designate</td>
+<td>Valen collapsed, and Sigrun is close (≥ 5)</td>
+<td>"He beat me with an arm made of glass. Now he can't stand. So it's me."</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td><strong>Brann</strong></td>
+<td>Valen collapsed</td>
+<td>"He asked me to. Last thing he asked."</td>
+</tr>
+<tr>
+<td></td>
+<td>fallback</td>
+<td><strong>Valen</strong></td>
+<td>—</td>
+<td>Zygarde, Complete on its last bar</td>
+</tr>
+<tr>
+<td><strong>Hijack</strong> (100), drawn live</td>
+<td>0</td>
+<td><strong>Theodric, the Gilded Reflection</strong></td>
+<td>Ruin Route</td>
+<td>the Gilded King steps out of the arena's crystal walls</td>
+</tr>
+<tr>
+<td></td>
+<td>1</td>
+<td><strong>Dr. Quent</strong></td>
+<td>Voss discredited (Magnus exposed + Rook's leak + the Night of Masques)</td>
+<td>the board removed Voss; Quent giggles in the harness; Voss watches, appalled</td>
+</tr>
+<tr>
+<td></td>
+<td>fallback</td>
+<td><strong>Voss</strong></td>
+<td>—</td>
+<td>"You carried my key through eighteen doors."</td>
+</tr>
+<tr>
+<td><strong>True Finale</strong> (100)</td>
+<td>—</td>
+<td><strong>Arceus</strong> variant</td>
+<td>Judgment (Ruin) &gt; Gilded (Engine calibrated) &gt; War (Resonance ≤ −6) &gt; Miscalibrated (telemetry sabotaged) &gt; Bound</td>
+<td>§6.2</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="choices-3-3-proof-exactly-one-opponent-per-stage-never-the-same-person-twice">3.3 Proof: exactly one opponent per stage, never the same person twice</h3>
+<ol>
+<li><strong>At least one.</strong> Every stage's list ends with an unconditional fallback (Juno, Lin, Kestrel, Valen, Voss; Arceus's last variant has no
+   condition). Core's resolver returns the first entry whose condition holds and whose <em>person</em> isn't used yet, so it always reaches a match.</li>
+<li><strong>At most one.</strong> The resolver stops at the first match.</li>
+<li><strong>No duplicates.</strong> Each person appears in exactly one stage's list: R16 {Marisol, Anja, Rowan, Juno}; QF {Nova, Titania, Alexandra, Garret,
+   Melia, Lin}; SF {Kestrel}; Final {Valen, Sigrun, Brann}; Hijack {Theodric, Quent, Voss}. The sets are disjoint (Core's validator enforces it),
+   so the "person already used" check can never skip a candidate and no playthrough fights anyone twice. Variants (Kestrel Fallen, Valen of the
+   Last Tuning) share a person with the default <em>of the same stage only</em>.</li>
+<li><strong>Everyone drawn is alive and present.</strong> Rowan's entry requires <code>ROWAN_ALIVE</code>. Quent precedes Voss whenever Voss was removed. Sigrun and
+   Brann are only drawn when Valen collapsed. No other drawable person can die before the Festival.</li>
+<li><strong>Vacated seeds never collide.</strong> The five entrants who give up a seed (Kaito, Odessa, Amaria, Venam, Shiv) are on no stage list, and each is
+   vacated by exactly one candidate; R16 candidates are mutually exclusive by priority, and so are QF candidates.</li>
+<li><strong>Fallen Kestrel is not a hijack opponent.</strong> The story lead's "Kestrel (Fallen) hijacker" would fight him twice; instead he's the Engine's
+   harnessed conduit inside the Voss fight (<code>:ch21_reach_kestrel</code>).</li>
+</ol>
+<h3 id="choices-3-4-five-sample-runs">3.4 Five sample runs</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Key choices</th>
+<th>R16</th>
+<th>QF</th>
+<th>SF</th>
+<th>Final</th>
+<th>Hijack</th>
+<th>Arceus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"The kind one"</td>
+<td>saved Teo, mercy for Rowan, Hollow trust 5, five close Bonds, ring given, telemetry sabotaged</td>
+<td><strong>Rowan</strong></td>
+<td><strong>Melia</strong></td>
+<td>Kestrel (Redeemed)</td>
+<td>Valen</td>
+<td>Voss</td>
+<td>Miscalibrated</td>
+</tr>
+<tr>
+<td>"The honest one"</td>
+<td>chased Sable, exposed Anja and Magnus, oath Open</td>
+<td><strong>Marisol</strong> (Grievance beats Anja's priority)</td>
+<td>Lin</td>
+<td>Kestrel</td>
+<td>Valen</td>
+<td><strong>Quent</strong></td>
+<td>Bound</td>
+</tr>
+<tr>
+<td>"Meridian's friend"</td>
+<td>Fellowship, dampers, telemetry left, Kestrel cold, oath Keep, cold refusal at the audience</td>
+<td>Juno</td>
+<td><strong>Alexandra</strong></td>
+<td><strong>Kestrel (Fallen)</strong></td>
+<td><strong>Brann</strong> (Valen collapsed; Sigrun not close)</td>
+<td>Voss</td>
+<td><strong>Gilded</strong> (Bad)</td>
+</tr>
+<tr>
+<td>"The angry one"</td>
+<td>burned the letter, silenced the Matriarch, Resonance −7, condemned Rowan</td>
+<td>Juno</td>
+<td><strong>Titania</strong></td>
+<td>Kestrel (Fallen via low Bond)</td>
+<td>Valen</td>
+<td>Voss</td>
+<td><strong>War</strong></td>
+</tr>
+<tr>
+<td>"The Renegade"</td>
+<td>Ruin Route</td>
+<td>Juno (Ruin dialogue)</td>
+<td><strong>Nova</strong></td>
+<td>Kestrel (Ruin dialogue)</td>
+<td><strong>Valen, Last Tuning</strong></td>
+<td><strong>Theodric</strong></td>
+<td><strong>Judgment</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="choices-3-5-where-the-displaced-go">3.5 Where the displaced go</h3>
+<p>When an unseeded candidate replaces a default, the default isn't simply deleted (NARRATIVE_KEYS §6.3–6.4):
+Juno moves into Kaito's seed (Marisol drawn) or Odessa's (Anja drawn) and loses her first match, which opens her "Garden Match" exhibition. When
+Rowan is drawn, Juno is absent by design: she gave him her invitation. Lin moves into Amaria's, Venam's or Shiv's seed (Titania, Melia, Nova).
+Alexandra and Garret are already seeded, so they just swap with Lin. If Core doesn't build <code>:vacates</code>, the fallback is that the default yields
+their own place, with the same lines.</p>
+<h3 id="choices-3-6-exhibitions-that-vary">3.6 Exhibitions that vary</h3>
+<p>Always: the Eevee Octave and every eliminated cameo (CAMEOS.md). Conditional (NARRATIVE_KEYS §6.5): <strong>Juno's Garden Match</strong> (if she wasn't
+your R16), the <strong>Ebb Guild match</strong> with Marisol while Teo heckles from the stands (Teo saved and Marisol close), <strong>Lin</strong> (if she wasn't your QF),
+<strong>Melia</strong> / <strong>Titania</strong> (if not drawn), and <strong>Morwen's Echo</strong> on the Night of Masques: Ysolde lights the Cathedral lantern in Crownhaven and
+Kestrel's mother fights the PC once, gently, "to see what I bought" (Kestrel and Ysolde reconciled, and the K6 line was Resolve).
+On the Ruin Route only the Eevee Octave plays: the champions won't fight the Renegade for sport.</p>
+<h3 id="choices-3-7-teams-the-balance-team-must-build">3.7 Teams the balance team must build</h3>
+<p>The full table, with <code>[TYPE, Name, Version]</code> for every entry, is NARRATIVE_KEYS §7: <strong>15 new Festival teams</strong> (Marisol 90, Anja 90, Rowan 90,
+Alexandra 2, Garret 2, Titania 2, Melia 2, Nova 2, Kestrel Fallen 90–92, Sigrun 96, Brann 96, Valen 1, Quent 99, Theodric 0, Morwen 90),
+<strong>4 new Arceus boss configs</strong>, and the non-Festival extras (Juno partner 70–72, Ch21 tag foes v21, four Ruin gym teams v1, the Reflection).</p>
+<hr />
+<h2 id="choices-4-game-overs-the-ledger">4. Game overs: the Ledger</h2>
+<p><strong>23 canonical game overs</strong> (the story lead's 22 minus the cut "Encore", plus two new ones) and 2 Ruin-only extras. Titles, epitaphs, hints,
+triggers, the foreshadowing that must be on screen first, and checkpoint placement are in NARRATIVE_KEYS §9–10, verbatim. Rules every one of them follows:
+- <strong>Fair.</strong> Each is a deliberate player choice, warned at least once on screen in the same chapter, and most need a confirm or a repeated
+  prompt. None fires from a cumulative stat on its own (Pull the Nail is <em>offered</em> only at high Hollow trust, but you still have to say yes).
+- <strong>Cheap to retry.</strong> <code>Prismfall.checkpoint</code> sits directly before each trigger, so a curious player loses seconds, not an hour.
+- <strong>Recorded.</strong> Each death writes its epitaph to the cross-save Ledger, where it stays across new games.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Act</th>
+<th>#</th>
+<th>Game over</th>
+<th>Kind</th>
+<th>One-line trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>1</td>
+<td>Homeward</td>
+<td>joke (tutorial)</td>
+<td>go back on the ferry</td>
+</tr>
+<tr>
+<td>I</td>
+<td>2</td>
+<td>Two in the Orchard</td>
+<td>defy a warning</td>
+<td>pull Juno through the Veil</td>
+</tr>
+<tr>
+<td>I</td>
+<td>3</td>
+<td>Curtain Call</td>
+<td>darkly funny</td>
+<td>join the ghost company "forever"</td>
+</tr>
+<tr>
+<td>I</td>
+<td>4</td>
+<td>Live Wire</td>
+<td>defy</td>
+<td>grab the cracked Zap Plate barehanded</td>
+</tr>
+<tr>
+<td>II</td>
+<td>5</td>
+<td>Sinkfield</td>
+<td>defy</td>
+<td>step off the bones for the glint</td>
+</tr>
+<tr>
+<td>II</td>
+<td>6</td>
+<td>Sweet Tooth</td>
+<td>darkly funny</td>
+<td>take the Sweetrot a third time</td>
+</tr>
+<tr>
+<td>II</td>
+<td>7</td>
+<td>Let Them Listen</td>
+<td>complicity</td>
+<td>take the Hammer's detonator</td>
+</tr>
+<tr>
+<td>II</td>
+<td>8</td>
+<td>Pull the Nail</td>
+<td>betrayal (Sable's)</td>
+<td>plant her charge where only you can walk</td>
+</tr>
+<tr>
+<td>III</td>
+<td>9</td>
+<td>Loyal</td>
+<td>choice</td>
+<td>stand with the Loyal Three</td>
+</tr>
+<tr>
+<td>III</td>
+<td>10</td>
+<td><strong>Weather</strong> <em>(new)</em></td>
+<td><strong>battle you were told to flee</strong></td>
+<td>fight Kyogre the moment it wakes instead of running for the towers</td>
+</tr>
+<tr>
+<td>III</td>
+<td>11</td>
+<td>Thin Ice</td>
+<td>failed escape</td>
+<td>go back for the data core</td>
+</tr>
+<tr>
+<td>III</td>
+<td>12</td>
+<td>Read the Fine Print</td>
+<td>interlude (as Kestrel), darkly funny</td>
+<td>open Voss's drawer</td>
+</tr>
+<tr>
+<td>III</td>
+<td>13</td>
+<td>Looking Back</td>
+<td>defy</td>
+<td>look back through the Glass</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>14</td>
+<td>Willing</td>
+<td>capture</td>
+<td>let Quent "examine" you</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>15</td>
+<td>Echo</td>
+<td>defy</td>
+<td>stay for your mother's echo three times</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>16</td>
+<td>Overtime</td>
+<td><strong>timed</strong></td>
+<td>keep copying past the klaxon</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>17</td>
+<td>Into the Line</td>
+<td>defy</td>
+<td>step between the Directorate and Nadir</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>18</td>
+<td>The Throne</td>
+<td>capture, darkly funny</td>
+<td>sit on the Gilded King's throne</td>
+</tr>
+<tr>
+<td>V</td>
+<td>19</td>
+<td>Fair Bargain</td>
+<td>darkly funny</td>
+<td>buy an answer without asking the price</td>
+</tr>
+<tr>
+<td>V</td>
+<td>20</td>
+<td><strong>Somebody Else's Story</strong> <em>(new)</em></td>
+<td>choice-based</td>
+<td>agree to stay out of Crownhaven</td>
+</tr>
+<tr>
+<td>V</td>
+<td>21</td>
+<td>Liar's Pyre</td>
+<td>defy</td>
+<td>tell the brazier "Whatever you want to hear."</td>
+</tr>
+<tr>
+<td>V</td>
+<td>22</td>
+<td>Early Crown</td>
+<td>betrayal (Valen's)</td>
+<td>accept the crown the night before the Final</td>
+</tr>
+<tr>
+<td>V</td>
+<td>23</td>
+<td>His Hand</td>
+<td>betrayal (Voss's)</td>
+<td>take his hand at the hijack</td>
+</tr>
+<tr>
+<td>Ruin</td>
+<td>R1</td>
+<td>Sweet Dreams</td>
+<td>Ruin-only</td>
+<td>accept Nova's dream</td>
+</tr>
+<tr>
+<td>Ruin</td>
+<td>R2</td>
+<td>Long Live the King</td>
+<td>Ruin-only</td>
+<td>kneel to Theodric</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The two new ones.</strong>
+- <strong>Weather (Ch11).</strong> At step 4 of the Thaw, "the lake <em>breathes</em>". Anja, already running: "That's not a Pokémon, that's <em>weather</em>. Towers!" Prompt:
+  <em>Fight it now</em> / <em>Get to the towers</em>. Fighting starts an unwinnable lv 80 Kyogre (one Primal-rain Origin Pulse). <em>"You tried to fight the sea.
+  The sea didn't notice. In spring, Rimeholt carved your name on the ice wall, and the thaw took that too."</em> Choosing the towers continues to the
+  partner battle and the real boss, as written. This is the game's one "battle you were told to flee", and it teaches the Ch21 lesson early.
+- <strong>Somebody Else's Story (Ch18).</strong> After K7, Kestrel: "Don't come. I mean it." Prompt: <em>Stay out of Crownhaven?</em> → <em>He's already walking away.
+  Let him go?</em> Everyone who matters has told the PC it must be them (Celestine's "walker", Sigrun's summons, Larch's letter). <em>"You did what
+  everyone had told you since the ferry. The Engine took Kestrel instead. He lasted eleven minutes. Velmora lasted a week."</em></p>
+<p><strong>Cut:</strong> "Encore" (Ch20). It needed four conditions to fire and duplicated Into the Line's lesson ("don't make them choose"). Dorian's ad-lib
+stays as flavor; the PC simply doesn't go up.</p>
+<p><strong>Hints.</strong> After the first ending is seen (or with the <code>ledgerhints</code> password), unfound Ledger slots show a one-line riddle instead of "???".
+Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cracks make a door shape (the only diegetic hint that the Ledger means something).</p>
+<hr />
+<h2 id="choices-5-the-ruin-route-every-type-and-none">5. The Ruin Route: "Every Type and None"</h2>
+<h3 id="choices-5-1-unlock-and-branch">5.1 Unlock and branch</h3>
+<ul>
+<li><strong>Unlock:</strong> all 23 canonical game overs in the Ledger (<code>ruin_unlocked</code>).</li>
+<li><strong>In-story trigger:</strong> Ch15, right after the Giratina boss in the Reverse Depths. A pane of black glass shows Juno on the other side, calling
+  the PC's name: the exact image of <em>Looking Back</em> (GO 13). On a save with a full Ledger, the prompt appears again: <strong>Look back?</strong> Saying yes no
+  longer kills you. The reflection steps aside, and the PC walks <em>through</em>. (<code>:ch15_look_back</code>; <code>no</code> keeps the main story and the door never
+  reopens on that save.) The branch comes after K6, so Kestrel's state is already set.</li>
+<li><strong>Why it needs every death:</strong> inside the Glass, the PC finds out that every game over <em>happened</em>. Antumbra is the reverse side of the world,
+  where things that almost were are kept, and Giratina kept every one of them. You can't walk into the Reverse until it knows your face, and it
+  learns your face from your graves.</li>
+</ul>
+<h3 id="choices-5-2-what-the-ruin-route-reveals-never-stated-on-the-main-route">5.2 What the Ruin Route reveals (never stated on the main route)</h3>
+<ol>
+<li><strong>The Ledger is real.</strong> The Reverse Depths' floor is a field of twenty-three graves, each carved with its epitaph. "You have no Imprint in
+   Velmora. In here, you have twenty-three." The PC's <strong>Reflection</strong> stands up from the last grave: the one who remembers dying every time.</li>
+<li><strong>Antumbra is an unfinished Judgment.</strong> At AF 0, when the Chain closed, Arceus <em>began to judge Aurelia</em>: to unmake it. The Prismfall was
+   the god choosing to break itself rather than finish. The half-done unmaking is Antumbra. Rivers run uphill there because that's what a world
+   looks like halfway to nothing. Giratina, guardian of reverse places, has held the seam shut for three hundred years so the sentence can't finish.</li>
+<li><strong>The verse of none.</strong> Maren carved a third verse of the Hymn of Return on the Reverse side of the Concordance, where only the Glass could
+   read it: <em>"And if the walker comes with no color in their heart, the god will come home to finish what it began."</em> A whole Arceus, returned
+   to a land that chained it, could complete the Judgment of AF 0. Celestine knew: "I cannot lie, so I stopped singing it."</li>
+<li><strong>What "I learned that here" means.</strong> In every main-route ending Arceus says "I will not take what is not given. I learned that here." It's
+   talking about Judgment. It came within one heartbeat of unmaking a kingdom, and chose to break instead. Homecoming works because the Wardens
+   <em>give</em>, and the PC carries the shard in Harmony. The Ruin Route is the PC deciding nobody, god or Crown or company, should hold that power again.</li>
+<li><strong>The Gilded King is still alive, behind the glass.</strong> Antumbra froze the Sun Court at the instant of the Calling. Theodric's reflection stands
+   in it mid-command, the reflected Chain in his hands. Voss has dreamed of him all his life.</li>
+</ol>
+<h3 id="choices-5-3-chapter-outline-replaces-the-rest-of-ch15-through-ch21">5.3 Chapter outline (replaces the rest of Ch15 through Ch21)</h3>
+<ul>
+<li><strong>R1 "Twenty-Three Graves"</strong> (Reverse Depths). The graves; the Reflection, who speaks in the PC's own authored lines, reversed. <strong>Mirror battle:
+  the Reflection</strong> (your own party, generated at your levels, on <code>:INVERSE</code>). Then <strong>Giratina (Origin) tests the Renegade</strong> (multi-bar trial on
+  <code>:INVERSE</code>). Giratina gives the PC the <strong>none</strong>: Resonance locks at ruin (≤ −6), and the Ledger becomes a Key Item, <em>the Black Case</em>.
+  New traversal, <strong>Mirrorwalk</strong>: marked mirrors in Zenith, Nadir, Elowen and Ashkaar open onto their Reverse maps.</li>
+<li><strong>R2 "Built to Break"</strong> (Cogsworth, Gym 15). The PC now <em>wants</em> the Engine finished: it's the only machine that can hold all eighteen Plates
+  still long enough to unmake them. Zekrom still has to be freed (the core must fail so Voss reroutes everything to Crownhaven). <code>:ch16_magnus</code>
+  reads differently: <em>expose</em> means you ruin him so nobody stops the build; <em>conscience</em> means you persuade him to build it "to break right".
+  <strong>Gym 15 (Ruin):</strong> Magnus on <code>:FACTORY</code>, which becomes <code>:SCRAPYARD</code> on turn one: "You came here to break it. So did I, once."</li>
+<li><strong>R3 "The Sun Court Below"</strong> (Underveil, Gym 16; Aurelia). Nyx sides with the Renegade; her house kept the drowned truth for three hundred years
+  and she's tired of it. <strong>Gym 16 (Ruin):</strong> an illusion double battle where <code>:NEW_MOON</code> runs with Inverse matchups. In the Sun Court, Theodric's
+  reflection fills the mirror-wall. Voss walks in, sees him, and falls to his knees: "He's alive. Behind the glass he's still alive." He leaves
+  with the cradle, serving a dead king now.</li>
+<li><strong>R4 "Midnight in Gloaming"</strong> (Gym 17; Pecharunt; K7). Celestine tells the PC the verse of none, and refuses the badge. <strong>Gym 17 (Ruin):</strong> <code>:FAIRY_TALE</code>
+  turns <code>:INVERSE</code> for her last Pokémon ("Once upon a time, which was the only time"). Xerneas does <strong>not</strong> wake; the dusk stays. K7 plays as
+  written, but Kestrel knows: "You're going to <em>erase</em> her? Everything she paid for?" <code>:ch18_kestrel_ring</code> is still offered.</li>
+<li><strong>R5 "The Last Gate"</strong> (Wyrmrest, Gym 18). The oath can only be true one way: "I'm going to end it. All of it." Reshiram accepts the truth and
+  flies away without a fight. <strong>Gym 18 (Ruin):</strong> Sigrun on <code>:DRAGONS_DEN</code>, no Reshiram, every Pokémon a step faster ("Dragons don't let anything
+  through they haven't weighed. I've weighed you."). The Dominar can't be swayed; his legions march on Zenith during the Festival.</li>
+<li><strong>R6 "The Unfestival"</strong> (Festival week). The Accord bars "the Renegade". Shiv opens the dream-road and brings Nova; Dorian, who has never
+  once let the bowl ruin a story, seeds the PC himself. <strong>R16 Juno</strong> ("You'll make sure Verdance never gets an autumn."), <strong>QF Nova</strong> (her offer is
+  <code>GO_R_SWEET_DREAMS</code>), <strong>SF Kestrel</strong> (he tears the Gauntlet off to fight you as himself), <strong>Final Valen, the Last Tuning</strong> ("I'll hold them quiet
+  one more time. I'll die doing it. That's still better than you."). No exhibitions. Lin, on the stands: "you've done this before, haven't you."
+  At the Night of Masques, the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one.</li>
+<li><strong>R7 "Every Type and None"</strong> (the finale). At the Coronation the Engine wakes, but the hand that reaches up through the arena's crystal walls
+  isn't only Voss's: <strong>Theodric's reflection</strong> steps through wearing the Chain. Voss kneels (kneel with him: <code>GO_R_KNEEL</code>). When Theodric casts him
+  aside, <code>:ruin_voss</code>: <em>spare</em> him or <em>abandon</em> him to the Chain. <strong>Hijack: Theodric.</strong> Then Arceus descends, not dragged but <em>coming</em>, to finish what
+  it began. <strong>True Finale: Arceus (Judgment)</strong>, seven bars, Giratina at the PC's side (player side of two), the last bar on <code>:INVERSE</code> as Giratina
+  turns the arena inside out. Valen holds the Ring one last time, to keep the crowd alive while god and Renegade fight. Then the Unmaking.</li>
+</ul>
+<h3 id="choices-5-4-final-boss-endings-and-cost">5.4 Final boss, endings and cost</h3>
+<ul>
+<li><strong>Final boss:</strong> Arceus (Judgment), <code>ARCEUS_JUDGMENT</code> (NARRATIVE_KEYS §6.6).</li>
+<li><strong>The Unmaking needs a vessel.</strong> The <em>none</em> unmakes the Chain, the Plates, Judgment and finally the Glass, and whoever carries it goes with the
+  Glass. The Reflection offers to go in the PC's place: "I've done this twenty-three times. Let me do it once on purpose." Then <strong><code>:ruin_walk</code>: who
+  walks out of the Glass?</strong></li>
+<li><strong><code>:me</code> → END_UNMAKING "The Unmaking".</strong> The Reflection is unmade with the Glass. Antumbra and Velmora fold into each other. Every Imprint ends at
+    once: no fields, no Bleed, no miracles; Rimeholt thaws, Cindervault cools, Verdance gets its first autumn (Juno won't look at the PC while it
+    falls). The Fixed wake, <em>all</em> of them, even the long-Fixed who had stopped dreaming, and some of them wake as strangers. Arceus, with nothing left
+    to judge or be chained by, leaves as a light with no color and never comes back. Giratina, the final witness, closes its eyes. Mirrors are just
+    mirrors. The PC is the only person alive who remembers the old world, and twenty-three ways it ended. The scar is still colorless, by choice.</li>
+<li><strong><code>:reflection</code> → END_REFLECTION "The One Who Came Back"</strong> (secret). The PC is unmade with the Glass, and the Reflection walks out wearing their
+    face, which is GO 13's epitaph come true. The epilogue is the same world as the Unmaking, seen slightly wrong: the Reflection signs its name
+    mirrored once and corrects it; Juno, raking the first leaves: "You never used to hum." Last image: Hesper's lighthouse mirror, with nothing behind it.</li>
+<li><strong>Post-game:</strong> Antumbra's mirrors stay open as ordinary places (the Reverse maps), Giratina is catchable at the Distortion Core, there is no Arceus,
+  and the Festival never runs again. On END_REFLECTION the post-game is played as the Reflection (nobody else notices).</li>
+</ul>
+<h3 id="choices-5-5-why-it-s-worth-playing">5.5 Why it's worth playing</h3>
+<p>It answers the three questions the main route leaves open (what Antumbra is, why the Ledger remembers, what Arceus meant by "I learned that
+here"), and once you know them, Homecoming reads differently: it was one consenting Warden away from the end of the world. It adds four
+re-fought gyms, a new Festival bracket (Nova, Valen of the Last Tuning, Theodric), the only scenes where the Gilded King speaks, Giratina as an
+ally, Mirrorwalk maps, two endings, and two more graves for completionists.</p>
+<hr />
+<h2 id="choices-6-endings">6. Endings</h2>
+<h3 id="choices-6-1-the-final-decisions">6.1 The final decisions</h3>
+<ol>
+<li><strong>Ch17, the Sun Court (<code>:ch17_voss_offer</code>).</strong> Accepting is a promise you keep or break later.</li>
+<li><strong>Ch21, the hijack (<code>:ch21_hand</code>, only if you accepted).</strong> Taking Voss's hand ends the game in <strong>Concord Dawn</strong> before Arceus is ever fought.
+   Without the promise, the same gesture is <code>GO_HIS_HAND</code>.</li>
+<li><strong>Ch21, the True Finale.</strong> If the Engine is fully calibrated, the PC fights <em>for</em> Arceus and loses the struggle anyway: <strong>The Gilded Chain</strong>.</li>
+<li><strong>Ch21, Arceus speaks (<code>:ch21_final</code>).</strong> The PC says it aloud:
+   - <strong>Return</strong> — "Go home. Take them with you." (always)
+   - <strong>Keep</strong> — "I'll keep them. I'll keep everyone safe." (always)
+   - <strong>Borrowed</strong> — the PC hesitates, and Kestrel (redeemed and devoted) or Sigrun (Bond ≥ 6) steps forward: "Not you. Let me be nearest."
+   - <strong>Concord</strong> — "Stay. Stay and power the world." (if you accepted Voss's offer, or Magnus's governor was never switched off)
+   - <strong>Unmake</strong> — "No. No more gods." (main route: Resonance ≤ −6, or Hollow trust ≥ 4 with Rowan radicalized or Kroll never publicly exposed)</li>
+<li><strong>Ruin Route, R7 (<code>:ruin_walk</code>).</strong> Who walks out of the Glass.</li>
+</ol>
+<h3 id="choices-6-2-what-decides-the-outcome">6.2 What decides the outcome</h3>
+<ul>
+<li><strong>Wardens' Consent</strong> = how many of the 18 Wardens release their Plate (NARRATIVE_KEYS §5 <code>WARDEN_CONSENT</code>, one condition each, in gym order).
+  It's on screen twice: Tamsin's white and grey banners (Ch20), and the Arceus fight itself, which is six bars of three locks each. Between bars
+  those three Wardens kneel and let go, or refuse. Every refusal makes the next lock <strong>forced</strong> (Arceus gains +1 to every stat stage for that bar).
+  Each refusal has a reason the player caused: Tamsin can't afford it (her secret kept), Dorian keeps the lie he knows (you told the official story),
+  Rook can't reach his Plate, Corvin is in a cell, Brann won't for a man who gave the Light Stone away, Kaito never confessed, Anja "drowns without
+  it", Odessa remembers the burned letter, Bastian remembers the beacon, Ysolde lost Kestrel, Magnus "won't hand my city's future to a god",
+  Celestine hears the wrong key, Sigrun meant to wear the Crown.</li>
+<li><strong>Engine breaks</strong> = eleven lamps on Larch's board: telemetry destroyed or sabotaged (sabotage counts twice), Zekrom freed, Magnus's
+  conscience, Rook still inside, Nyx's precise blackout, Calla's schematics (twice if she went back), Marchetti turned, the Lantern Hollow at the
+  pylons, Kestrel not lost. <strong>The Engine is calibrated</strong> (Bad ending live) only if the telemetry was left running, Magnus wasn't reached, <em>and</em>
+  three or fewer lamps are lit.</li>
+</ul>
+<h3 id="choices-6-3-conditions-matrix-first-row-that-matches-wins-exact-strings-narrative-keys-12">6.3 Conditions matrix (first row that matches wins; exact strings: NARRATIVE_KEYS §12)</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Ending</th>
+<th>Kind</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>The One Who Came Back</strong></td>
+<td>Ruin (secret)</td>
+<td>Ruin Route and the Reflection walks out</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>The Unmaking</strong></td>
+<td>Ruin</td>
+<td>Ruin Route</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Concord Dawn</strong></td>
+<td>Grey</td>
+<td>took Voss's hand (after accepting in Ch17), or chose Concord</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>The Gilded Chain</strong></td>
+<td><strong>Bad (canon)</strong></td>
+<td>Engine calibrated</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>The Hollow Spring</strong></td>
+<td>Grey</td>
+<td>chose Unmake (main route)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>The Borrowed Crown</strong></td>
+<td>Grey</td>
+<td>let Kestrel or Sigrun take it</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>The Long Vigil</strong></td>
+<td>Grey</td>
+<td>chose Keep</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Homecoming, Unfinished</strong></td>
+<td>Grey</td>
+<td>Return, but Consent &lt; 12 or Resonance &lt; 2</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>The Empty Lighthouse</strong> <em>(new)</em></td>
+<td>Grey</td>
+<td>Return with Consent and Harmony, but Kestrel burned out in the Engine</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Homecoming</strong></td>
+<td><strong>Good (canon)</strong></td>
+<td>Return, Consent ≥ 12, Resonance ≥ 2, Kestrel alive</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="choices-6-4-epilogue-beats">6.4 Epilogue beats</h3>
+<p>The story lead's scenes in 08_ACT_V stand for Homecoming, the Gilded Chain, the Long Vigil, Unfinished, the Hollow Spring, Concord Dawn and the
+Borrowed Crown. This spec adds the conditions that vary them, and three new endings.
+- <strong>Homecoming (Good).</strong> As written. The variable slides: Elin wakes in Rowan's arms <em>or</em>, if Rowan drowned at the Fault, Juno alone holds her aunt
+  and tells her; Teo on the Ebbmouth quay or his photo on the guild wall; Kestrel as Ghost Warden (<code>KESTREL_ACCEPTED_SEAT</code>) or a Gale Post wanderer;
+  Calla's name on the Spire memorial if she went back; the quarantine lifts now (<code>ENVOY_PERSUADED</code>) or a year late; Voss watches the sunrise
+  (spared) or is light at the arena's heart; Nadir's first elected seat with Nyx in it.
+- <strong>Homecoming, Unfinished (Grey).</strong> One slide per refusing Warden's city, in gym order, each a single image of what the Last Shatter took
+  ("Briarwick: the looms went still in one night. Tamsin weaves by hand now."). If Resonance was below Harmony, the PC's scar never takes the land's color.
+- <strong>The Empty Lighthouse (Grey, new).</strong> Everything in Homecoming happens, but Kestrel burned out as the Engine's conduit. Hesper climbs the
+  lighthouse every night and lights a lamp nobody needs. Ysolde keeps the Ghost seat. The PC reads Morwen's letter aloud at the grave he never
+  visited, the letter he never opened. Last slide: Kestrel's Aegislash, sheathed, on the PC's belt.
+- <strong>The Long Vigil / The Borrowed Crown (Grey).</strong> As written; the bearer is Kestrel if <code>KESTREL_BEARS</code>, else Sigrun. With Sigrun: "Ten years.
+  Maybe twelve. I was relieved once. Never again." Juno and the PC swear to find another door either way.
+- <strong>The Hollow Spring (Grey).</strong> As written. If Rowan drowned, Thistle plants the first seed in plain soil; if Teo lived, he's the one who won't
+  speak to her.
+- <strong>Concord Dawn (Grey).</strong> As written, plus: if reached through <code>:ch21_hand</code>, the PC never fights Arceus at all, and the last slide is the PC
+  reading the arena's power output on a Council screen with Lin's line over it.
+- <strong>The Gilded Chain (Bad).</strong> As written. The PC as "the Sovereign Who Sleeps". If Quent hijacked, the mug on the desk is Quent's, not Voss's,
+  and Voss is in the crowd of schoolchildren's parents, visiting.
+- <strong>The Unmaking / The One Who Came Back (Ruin).</strong> §5.4.</p>
+<h3 id="choices-6-5-post-game-state">6.5 Post-game state</h3>
+<p>Per NARRATIVE_KEYS §12. In short: <strong>full</strong> post-game (Concordance Spire, Warden's Gauntlet, Distortion Core, legendary rematches) after Homecoming,
+Unfinished (refusers are absent from the Gauntlet and their cities keep Bleed scars), Empty Lighthouse, the Long Vigil (the PC is Sovereign; the
+Gauntlet is framed as Sovereign's audiences), the Borrowed Crown (the bearer is absent) and both Ruin endings (Mirrorwalk maps stay open).
+<strong>Partial</strong> after the Hollow Spring (Spire and Gauntlet only; most legendaries are gone with their Plates) and Concord Dawn (Spire only; the
+Wardens are pensioned off; Quent's Concord Zero arc starts). <strong>None</strong> after the Gilded Chain: credits, then the title screen.
+Zygarde chooses the PC at Valen's memorial in any ending with a memorial if Valen's Bond is 3 or more, or Ilsa reconciled with him (<code>ZYGARDE_CHOOSES</code>).</p>
+<hr />
+<h2 id="choices-7-other-systems">7. Other systems</h2>
+<ol>
+<li><strong>Quiet Hours (relationship scenes).</strong> A bench icon at Pokémon Centers when a Bond first reaches friendly and again at close: 20 short scenes
+   (Juno's seed catalogue, Kestrel teaching the PC to throw stones at the lighthouse, Ysolde lighting a lantern for Ines). Each grants +1 and a
+   keepsake at close (Juno's seed packet = a Grassy Seed; Marisol's union pin; Nyx's crescent earring, which sells for one Poké Dollar and is
+   priceless). <em>Impl.:</em> one common event per scene; condition <code>bond_tier(:X) == :friendly &amp;&amp; !made(:qh_x1)</code>, register <code>:qh_&lt;bond&gt;&lt;n&gt;</code> choice keys with value <code>[:seen]</code>.</li>
+<li><strong>Interludes.</strong> The act files already define five (Rowan, Kestrel, Wenlow, Valen…). Add <strong>Interlude VI "The Night Ferry"</strong> as Morwen in AF 290,
+   unlocked after any ending: a stealth walk carrying the five-year-old PC to Edda's boat. Its last line is Morwen's echo's line from Ch15.
+   <em>Impl.:</em> <code>pbChangePlayer</code> to the interlude character, stash <code>$player.party</code> in Core state, give a preset party, restore on exit; interlude
+   choices never touch the PC's Bonds (except where the act file says so).</li>
+<li><strong>Field Notes.</strong> Each field gets an entry on first battle; individual effects fill in only once <em>observed</em> ("Fire moves hit harder here.").
+   <code>:BLEED</code> keeps a log of which fields it has borrowed. <em>Impl.:</em> listen to <code>:prismfall_field_changed</code>; Field Effects marks effect lines as seen
+   when they trigger; Core stores a set per field.</li>
+<li><strong>The Ledger viewer and Hall of Reflections.</strong> The Ledger also records every Festival opponent variant the player has <strong>met</strong>. Post-game,
+   the Distortion Core's <strong>Hall of Reflections</strong> lets them re-fight any variant they've met in <em>any</em> playthrough (Kestrel Fallen, the Gardener,
+   Sigrun as Regent, Quent…) at lv 100. It reuses every team the balance team built. <em>Impl.:</em> Ledger lines <code>MET:&lt;ENTRANT&gt;</code>; the hall's menu reads them.</li>
+<li><strong>The Second Ferry (New Game+).</strong> After any ending, the <code>secondferry</code> password starts a new game that keeps the Ledger (always), Field Notes,
+   Pokédex <em>seen</em> flags and one Pokémon of choice from the Hall of Fame as "a passenger". Ines's letter gains a postscript that matches the last
+   ending seen. The Journal shows faint "echo" lines under choices made in the previous run. <em>Impl.:</em> a carryover file written at the ending,
+   read by the password handler.</li>
+<li><strong>The Velmora Gazette.</strong> Two headlines per chapter per Pokémon Center, chosen by condition strings from a table (§1.4). <em>Impl.:</em>
+   <code>GAZETTE[chapter] = [[condition, headline], …]</code>, first match per slot, shown by a newspaper event.</li>
+<li><strong>Promises.</strong> A Quest Log category for things the PC says they'll do ("I'll come back for a Fizzbolt," to Dex; "I'll look after her," to
+   Rowan). Kept promises pay off in epilogue slides; broken ones get one quiet line. <em>Impl.:</em> choice keys <code>:promise_&lt;name&gt;</code> with
+   <code>[:made, :kept, :broken]</code>; the Quest Log lists <code>:made</code> ones.</li>
+<li><strong>Passwords.</strong> Core's table plus <code>ledgerhints</code>, <code>nomercy</code> (no checkpoints before game overs), <code>openbook</code> (numbers on the Ties page),
+   <code>colorless</code> (halved Resonance swings) and <code>secondferry</code> (NARRATIVE_KEYS §14).</li>
+</ol>
+<hr />
+<h2 id="choices-8-requests-for-the-story-lead-reconciliation-list">8. Requests for the story lead (reconciliation list)</h2>
+<p>Edits the act files need so they match this spec. Keys and conditions are in NARRATIVE_KEYS; nothing here changes a LOCKED SPINE item.
+1. <strong>All files:</strong> write choice keys as lowercase symbols (<code>:ch9_teo_sable</code>); outcome names like <code>TEO_SAVED</code> stay as they are (they're derived flags).
+2. <strong>Bond mentions for non-Bond characters</strong> (Tamsin, Sahar, Brann, Anja, Rook, Corvin): replace "X's Bond goes up/down" with the choice key; their
+   payoff is their Consent condition (NARRATIVE_KEYS §5). Ysolde and Marisol <strong>are</strong> Bonds now.
+3. <strong>04 Ch2:</strong> add the Glass Matriarch prompt (<code>:ch2_matriarch</code>: soothe / silence) after the boss.
+4. <strong>04 Ch5:</strong> add Dorian's refusal line for the Arceus fight if the PC told the Directorate "The Mourner broke the Plate".
+5. <strong>06 Ch11:</strong> add the <em>Fight it now / Get to the towers</em> prompt at "the lake breathes" (<code>GO_WEATHER</code>); make the strike's optional tag battle the
+   <code>:ch11_strike</code> choice (stand / mediate).
+6. <strong>06 Ch13 tribunal:</strong> the Splitter Casing alone is circumstantial. Public exposure of Kroll at the tribunal needs the Ironreach comm-device; the
+   casing still lets the PC turn Marchetti in Ch14.
+7. <strong>06 Ch13 Fault (new MAJOR):</strong> add <code>:ch13_fault</code>. If the PC pulls out Marchetti, Rowan drowns in the flooded undercroft and Wick's people can't
+   reach him. Knock-ons: the Lantern Hollow is led by Teo (if saved) or by Thistle and Wick; "the Gardener" can't enter R16; Homecoming's Bride
+   Tree scene is Juno alone; the Hollow Spring's seed is Thistle's; Rowan's Act IV–V lines go to whoever leads.
+8. <strong>07 Ch15:</strong> after the Giratina boss, the Ruin trigger (only with a full Ledger), §5.1.
+9. <strong>07 Ch16 <code>:ch16_rook</code>:</strong> <em>leak_now</em> gets Rook fired and blacklisted from the Spire, so he can't cut the grid in Ch21; <em>hold</em> keeps him inside.
+   Update the hijack montage line to fire on <code>ROOK_CUTS_GRID</code>.
+10. <strong>07 Ch17:</strong> Nyx's refuse branch is fine as written (her blackout happens, but it doesn't count as an Engine break).
+11. <strong>08 Ch18:</strong> after K7, add <em>Stay out of Crownhaven?</em> (<code>GO_STAY_OUT</code>).
+12. <strong>08 Ch19:</strong> Liar's Pyre's hidden option is simply always offered (no lie tracking). The <em>Ruin</em> oath needs Resonance ≤ −2.
+13. <strong>08 Ch20:</strong> add Calla's defection scene at the Night of Masques (<code>:ch20_calla</code>); Envoy Okoro's <em>proof</em> needs two of the three proofs; cut
+    GO-20 Encore; Valen's collapse is <code>VALEN_COLLAPSED</code> (no Little Owl, a refusal with a cold Bond, and the telemetry left running).
+14. <strong>08 Ch20 Draw:</strong> stage the Right of Grievance (Marisol), Kaito and Odessa yielding their invitations, Juno giving hers to "the Gardener",
+    Amaria / Venam / Shiv yielding to Titania / Melia / Nova; Alexandra's and Garret's draw lines (§3.2). Anja (exposed) replaces the story lead's
+    Tamsin variant, which is cut (no Tamsin Bond to read).
+15. <strong>08 Ch21:</strong> Fallen Kestrel is not a hijack opponent; he's harnessed as Voss's conduit and <code>:ch21_reach_kestrel</code> plays between Voss's second
+    and third bars. The tag partner is Juno when he's Fallen.
+16. <strong>08 Ch21 Arceus:</strong> six bars of three locks in gym order; write all 18 release lines and all 18 refusal lines (reasons in §6.2).
+17. <strong>08 Endings:</strong> add <strong>The Empty Lighthouse</strong>; the Gilded Chain's Quent variant; the two Ruin endings (§5.4) replace the Unmaking sketch, and Nova
+    is the Ruin QF (her offer is <code>GO_R_SWEET_DREAMS</code>).
+18. <strong>Ruin Route (new):</strong> chapters R1–R7 (§5.3) need scripting, plus four Mirrorwalk Reverse maps (World lead) and black badge art (art).
+19. <strong>Hints to plant on the main route:</strong> Lin's "you've done this before, haven't you" only after any game over is in the Ledger; Hesper's cracked
+    mirror; Arceus's "I learned that here"; Celestine phrasing the Hymn as "the verses I sing".
+20. <strong>03_CAST</strong> still lists the retired canon cameos and Revision 2 kingdom names in places; update to CAMEOS.md and Revision 3.</p></section><section class="chapter" id="cameos"><h1 id="cameos-cameos-visiting-champions-of-the-festival-story-lead">CAMEOS — Visiting Champions of the Festival (Story lead)</h1>
 <blockquote>
 <p>Replaces the canon-champion roster (SPINE Rev. 2 §3 / Rev. 3 §3). Owner: Story lead. Trainer teams: trainer/balance agent.
 All cameos come from the sister fangames <strong>Pokémon Reborn</strong>, <strong>Pokémon Rejuvenation</strong> and <strong>Pokémon Desolation</strong>.

@@ -107,7 +107,7 @@ class Painter:
         def members(n):
             c = classes[n]
             return [n] + [a for a, t in alias.items() if t == n] + c.get('same', [])
-        order = ['tile', 'blob', 'autotile', 'pier', 'hline', 'tree2x2', 'wall']
+        order = ['blob', 'autotile', 'pier', 'hline', 'tree2x2', 'wall', 'cliffband', 'tile']
         for kind in order:
             for n, c in classes.items():
                 if c['kind'] != kind:
@@ -184,6 +184,19 @@ class Painter:
             for y, x in np.argwhere(walk):
                 if y > 0 and own[y - 1, x] and self.cls[y, x] == c.get('shadow_on', 'floor'):
                     L[0, y, x] = sh
+
+    def k_cliffband(self, n, c, own, same):
+        """Cliff faces: every 'C' cell is a face tile (left/mid/right by row neighbours); the first non-cliff cell
+        below a face column gets the base overlay on layer 1 (the bottom lip, drawn over the lower ground)."""
+        H, W = own.shape
+        stairs = self.mask(['stairs'])
+        at = lambda x, y: 0 <= x < W and 0 <= y < H and (own[y, x] or stairs[y, x])
+        for y, x in np.argwhere(own):
+            l, r = at(x - 1, y), at(x + 1, y)
+            self.layers[0, y, x] = c['mid'] if (l and r) else (c['left'] if r else (c['right'] if l else c['mid']))
+            if y + 1 < H and not own[y + 1, x] and not stairs[y + 1, x]:
+                lb, rb = at(x - 1, y), at(x + 1, y)
+                self.layers[1, y + 1, x] = c['base_mid'] if (lb and rb) else (c['base_left'] if rb else (c['base_right'] if lb else c['base_mid']))
 
     def k_tree2x2(self, n, c, own, same):
         H, W = own.shape

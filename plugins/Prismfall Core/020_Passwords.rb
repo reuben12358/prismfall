@@ -34,7 +34,20 @@ module Prismfall
                       :apply => proc { Prismfall::Difficulty.set(:HARD) } },
       "litemode" => { :id => :LITEMODE, :name => "Lite Mode", :conflicts => [:HARD_LOCK],
                       :description => "Double Exp, no disobedience, gentler AI.",
-                      :overrides => { :exp_multiplier => 2.0, :obedience => false, :ai_skill_max => 32 } }
+                      :overrides => { :exp_multiplier => 2.0, :obedience => false, :ai_skill_max => 32 } },
+      # NARRATIVE_KEYS section 14
+      "ledgerhints" => { :id => :LEDGER_HINTS, :name => "Ledger Hints",
+                         :description => "The Ledger shows a hint for every game over you haven't found." },
+      "nomercy"     => { :id => :NO_MERCY, :name => "No Mercy",
+                         :description => "No checkpoints: a story game over sends you back to your last manual save." },
+      "openbook"    => { :id => :OPEN_BOOK, :name => "Open Book",
+                         :description => "The Ties page shows numbers next to each tier." },
+      "colorless"   => { :id => :COLORLESS, :name => "Colorless",
+                         :description => "Every Resonance swing is halved. Harmony and Ruin are both harder to reach." },
+      "secondferry" => { :id => :SECOND_FERRY, :name => "The Second Ferry",
+                         :description => "New Game+: carry over what the Ledger remembers.",
+                         :requires => proc { !Prismfall::Ledger.endings_seen.empty? },
+                         :refusal => "The ferry only sails for those who've reached an ending." }
     }
 
     def self.store
@@ -103,6 +116,10 @@ module Prismfall
       if clash
         other = definition(clash)
         pbMessage(_INTL("That can't be combined with {1}.", _INTL(other[:name]))) if show
+        return false
+      end
+      if d[:requires] && !d[:requires].call
+        pbMessage(_INTL(d[:refusal] || "That password can't be used yet.")) if show
         return false
       end
       value = true

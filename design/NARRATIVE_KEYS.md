@@ -21,9 +21,9 @@
 3. **`drawn(:STAGE)`** → the entrant ID locked for a Festival stage (`state[:draws][stage]`), `nil` if not drawn yet.
 4. **`:effects` on CHOICES** (optional): `pf_choose(key, value)` applies `CHOICE_EFFECTS[key][value]` once, with the
    "X will remember that." toast only when a Bond changes tier. Lets events stop hand-applying deltas.
-5. **Festival draw extensions** (§6): `:vacates => :ENTRANT` on a candidate (the displaced default takes that entrant's seed; that
-   entrant leaves and counts as `eliminated`), and `:live => true` on a stage (seed the default at `Festival.start`, resolve the
-   candidate list when the stage's battle starts, like Hijack). Plus `EXHIBITION_EXTRAS` (§6.5) and `ARCEUS_VARIANTS` (§6.6).
+5. **Festival draw extensions** (§6): `:live => true` on a stage (seed the default at `Festival.start`, resolve the candidate list when
+   the stage's battle starts, like Hijack), `EXHIBITION_EXTRAS` (§6.5) and `ARCEUS_VARIANTS` (§6.6). (`:vacates` is withdrawn: Revision 4
+   seeds every draw candidate.)
 
 ---
 
@@ -77,7 +77,7 @@ RESONANCE_BANDS = [[-10, :ruin], [-5, :ruin_leaning], [-1, :balanced], [2, :harm
 # ruin -10..-6 | ruin_leaning -5..-2 | balanced -1..1 | harmony_leaning 2..5 | harmony 6..10
 ```
 Story checks: Kyogre's last bar calms at `resonance >= 2` (Ch11); Celestine's Consent `>= 2`; Good ending `>= 2`;
-Titania drawn at `<= -3`; Ruin "war" Arceus and the main-route Unmake option at `<= -6`; harmony battle buff at `>= 6`.
+Celestine drawn into your QF at `<= -3`; Ruin "war" Arceus and the main-route Unmake option at `<= -6`; harmony battle buff at `>= 6`.
 
 ---
 
@@ -154,7 +154,7 @@ CHOICES = {
 | `:ch14_marchetti` `:show_evidence` | holds the Splitter Casing (always found in Ch12) or the comm-device (`chose(:ch9_teo_sable, :chase_sable)`). |
 | `:ch15_look_back` | only if `ruin_unlocked`. `:yes` calls `Prismfall.start_ruin_route` (§11). |
 | `:ch19_oath` `:ruin` | only if `resonance <= -2`. The hidden "Whatever you want to hear." is `GO_LIARS_PYRE` (always offered; see §10). |
-| `:ch20_envoy` `:proof` | the PC holds at least two of: Larch Papers (Ch12), Arbiter Blueprints (Ch16), Venam's testimony (Festival Day 2). |
+| `:ch20_envoy` `:proof` | the PC holds at least two of: Larch Papers (Ch12), Arbiter Blueprints (Ch16), testimony that the Fixed still dream (Teo, "I could hear everything while my hand was glass", if `TEO_SAVED`; otherwise Corvin's Quiet Ward records, if `CORVIN_FREED`). |
 | `:ch20_calla` | only if `choice(:ch16_rook) == :hold` OR `choice(:ch16_magnus) == :conscience` (Calla only defects if someone inside is already moving). |
 | `:sq_little_owl` | the quest's earlier steps need `bond(:ILSA) >= 3` by Ch18. `:reconciled` needs `bond(:ILSA) >= 4` at the final step, else the event records `:refused`. |
 | `:ch21_hand` | only if `flag(:VOSS_ACCEPTED)`. Without it, taking the hand is `GO_HIS_HAND`. |
@@ -323,44 +323,88 @@ TALLIES = {
 
 ---
 
-## 6. Festival draw (replaces the sample DRAWS in `015_Festival_Draw.rb`)
+## 6. Festival draw (SPINE Revision 4: original characters only)
 
-### 6.1 Entrant additions / changes
+Revision 4 removes every sister-game cameo from the Festival. The bracket, the draw pools and the exhibitions use Velmorans and four
+**new original foreign entrants** (§6.1). Every draw candidate is now **seeded in the default bracket** except Rowan ("the Gardener") and
+the Ruin-only Archseer Dask, so Core's existing swap behaviour covers nearly every case and **`:vacates` is no longer requested**.
+
+### 6.1 New original entrants (also requested for 03_CAST; trainer type `FESTIVAL_<NAME>`)
+All four arrive with **Envoy Okoro's Concert delegation** on the sealed Concert cutter: the quarantine's one sanctioned crossing.
+- **Isaura Vell, Champion of Solvane** (`FESTIVAL_ISAURA`, 40s). Solvane is a sun-baked archipelago east of the Hallow Strait. Twelve years ago
+  Necrozma began eating her region's light and she caught it; Solvane then had **the Sunless Year** (failed harvests, stilled tides) until she
+  let it go. She arrives without it. Blunt, sardonic and tired. **The new headline QF opponent**, and the outside confirmation of the Return:
+  "You want to know what happens when you put a god in a box? It's quiet. For a while. Then it isn't. Give it back before someone teaches it to hate you."
+  Ace concept: Volcarona "Dawn" (the light that came back).
+- **Matthias Drey, Champion of the Karst Republic** (`FESTIVAL_DREY`, 50s). Envoy Okoro's security chief and the Concert's hardliner on Severance.
+  Cold and scrupulously fair, with a Steel/Ground fortress team (ace concept: Copperajah). He loses R16 to Kestrel's Gauntlet and is the one who
+  says it: "Your rival is fighting with something that isn't him." Exhibition from Day 3.
+- **Mireille Vance, Champion of Lys** (`FESTIVAL_MIREILLE`, 17). The Concert's youngest champion; kind, curious, starstruck by Celestine. Fairy/Normal
+  (ace concept: Florges). The **warm QF draw**: "Everyone keeps telling you what you're *for*. Have you decided yet?" Exhibition if not drawn.
+- **Ser Ivo Thorne, the Queen's Champion** (`FESTIVAL_THORNE`, 40s). A famous Velmoran: Lord-Commander of Elowen's Thornguard, entered by Queen
+  Maelis to win the Sovereign Seat for a crown. Grass/Steel (ace concept: Ferrothorn). He loses R16 to Sigrun, which tells every king in the
+  stands what the Wardens think of them. Exhibition from Day 3.
+
+### 6.2 Default bracket (replaces CAMEOS.md's "Default draw")
 ```ruby
+BRACKET = [
+  :PLAYER,  :JUNO,       # R16 m0  (player; J4)
+  :ISAURA,  :NYX,        # R16 m1  -> Isaura (default QF opponent)
+  :KESTREL, :DREY,       # R16 m2  -> Kestrel (Gauntlet)
+  :KAITO,   :MARISOL,    # R16 m3
+  :VALEN,   :ODESSA,     # R16 m4  -> Valen (Odessa loses with style)
+  :MIREILLE,:CELESTINE,  # R16 m5
+  :YSOLDE,  :ANJA,       # R16 m6
+  :THORNE,  :SIGRUN      # R16 m7  -> Sigrun beats the Queen's Champion
+]
+HEADLINE_OPPONENT = :ISAURA          # was HEADLINE_CAMEO = :LIN
+PLAYER_PATH = [:JUNO, :ISAURA, :KESTREL, :VALEN]   # fallback only
+SCRIPTED_WINNERS = { [0, 3] => :KAITO, [0, 5] => :CELESTINE, [0, 6] => :YSOLDE, [0, 7] => :SIGRUN,
+                     [1, 2] => :VALEN, [1, 3] => :SIGRUN }   # Valen then beats Sigrun in the other SF
 ENTRANTS.merge!({
-  :MARISOL        => { :display => "Marisol",  :trainer_type => :LEADER_MARISOL, :name => "Marisol", :version => 90, :rating => 86, :level_hint => 90 },
-  :ANJA           => { :display => "Anja",     :trainer_type => :LEADER_ANJA,    :name => "Anja",    :version => 90, :rating => 86, :level_hint => 90 },
-  :ROWAN          => { :display => "The Gardener", :trainer_type => :LEADER_ROWAN, :name => "Rowan", :version => 90, :rating => 88, :level_hint => 90 },
-  :KESTREL_FALLEN => { :display => "Kestrel",  :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
-  :BRANN          => { :display => "Brann",    :trainer_type => :LEADER_BRANN,   :name => "Brann",   :version => 96, :rating => 90, :level_hint => 96 },
-  :VALEN_RUIN     => { :display => "Valen",    :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
-  :QUENT          => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT, :name => "Percival", :version => 99, :rating => 97, :level_hint => 100 },
-  :THEODRIC       => { :display => "Theodric", :trainer_type => :GILDED_THEODRIC, :name => "Theodric", :version => 0, :rating => 99, :level_hint => 100 },
-  :MORWEN         => { :display => "Morwen",   :trainer_type => :ECHO_MORWEN,    :name => "Morwen",  :version => 90, :exhibition => true, :rating => 0, :level_hint => 90 }
+  :ISAURA    => { :display => "Isaura",   :trainer_type => :FESTIVAL_ISAURA,   :name => "Isaura",   :version => 2, :exhibition => true, :rating => 96, :level_hint => 92 },
+  :DREY      => { :display => "Drey",     :trainer_type => :FESTIVAL_DREY,     :name => "Matthias", :version => 1, :exhibition => true, :rating => 91, :level_hint => 90 },
+  :MIREILLE  => { :display => "Mireille", :trainer_type => :FESTIVAL_MIREILLE, :name => "Mireille", :version => 2, :exhibition => true, :rating => 88, :level_hint => 92 },
+  :THORNE    => { :display => "Thorne",   :trainer_type => :FESTIVAL_THORNE,   :name => "Ivo",      :version => 1, :exhibition => true, :rating => 86, :level_hint => 90 },
+  :MARISOL   => { :display => "Marisol",  :trainer_type => :LEADER_MARISOL,    :name => "Marisol",  :version => 90, :rating => 84, :level_hint => 90 },
+  :ANJA      => { :display => "Anja",     :trainer_type => :LEADER_ANJA,       :name => "Anja",     :version => 90, :rating => 84, :level_hint => 90 },
+  :YSOLDE    => { :display => "Ysolde",   :trainer_type => :LEADER_YSOLDE,     :name => "Ysolde",   :version => 92, :rating => 86, :level_hint => 92 },
+  :ROWAN     => { :display => "The Gardener", :trainer_type => :LEADER_ROWAN,  :name => "Rowan",    :version => 90, :rating => 88, :level_hint => 90 },
+  :DASK      => { :display => "Archseer Dask", :trainer_type => :ARCHSEER_DASK, :name => "Imre",    :version => 92, :rating => 92, :level_hint => 92 },
+  :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
+  :BRANN     => { :display => "Brann",    :trainer_type => :LEADER_BRANN,      :name => "Brann",    :version => 96, :rating => 90, :level_hint => 96 },
+  :VALEN_RUIN=> { :display => "Valen",    :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
+  :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,   :name => "Percival", :version => 99, :rating => 97, :level_hint => 100 },
+  :THEODRIC  => { :display => "Theodric", :trainer_type => :GILDED_THEODRIC,   :name => "Theodric", :version => 0, :rating => 99, :level_hint => 100 },
+  # exhibition-only (never seeded)
+  :MORWEN       => { :display => "Morwen",  :trainer_type => :ECHO_MORWEN,    :name => "Morwen",  :version => 90, :exhibition => true, :rating => 0 },
+  :BASTIAN      => { :display => "Bastian", :trainer_type => :LEADER_BASTIAN, :name => "Bastian", :version => 90, :exhibition => true, :rating => 0 },
+  :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK], :name => ["Dorian", "Rook"],
+                     :version => 90, :exhibition => true, :rating => 0 }   # double battle
 })
-# Retire the samples :SUCCESSOR and :MOURNER. :JUNO gets :exhibition => true (rival versions 40-42).
-# :MELIA, :TITANIA, :NOVA, :ALEXANDRA, :GARRET already exist; their QF draws pass :version => 2.
+# Remove every cameo entrant (:LIN :AMARIA :SHELLY :ALEXANDRA :VENAM :SHIV :GARRET :MELIA :TITANIA :NOVA) and the samples :SUCCESSOR, :MOURNER.
+# :KAITO and :CELESTINE stay NPC entrants; their QF draws pass :version => 92. :SIGRUN's Final stand-in passes :version => 96.
 ```
 
-### 6.2 Draw lists (first match wins; the stage default is the appended fallback)
+### 6.3 Draw lists (first match wins; the stage default is the appended fallback)
 ```ruby
 DRAWS = {
   :R16 => [   # default :JUNO (J4)
-    { :opponent => :MARISOL, :condition => "!ruin_route && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2", :vacates => :KAITO },
-    { :opponent => :ANJA,    :condition => "!ruin_route && flag(:ANJA_EXPOSED)", :vacates => :ODESSA },
+    { :opponent => :MARISOL, :condition => "!ruin_route && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2" },
+    { :opponent => :ANJA,    :condition => "!ruin_route && flag(:ANJA_EXPOSED)" },
     { :opponent => :ROWAN,   :condition => "!ruin_route && flag(:ROWAN_ALIVE) && choice(:ch13_rowan_testimony) == :mercy && standing(:HOLLOW) >= 4" }
   ],
-  :QF => [    # default :LIN (v2)
-    { :opponent => :NOVA,      :condition => "ruin_route",                                    :version => 2, :vacates => :SHIV },
-    { :opponent => :TITANIA,   :condition => "resonance <= -3",                               :version => 2, :vacates => :AMARIA },
-    { :opponent => :ALEXANDRA, :condition => "choice(:ch19_oath) == :keep",                   :version => 2 },
-    { :opponent => :GARRET,    :condition => "flag(:KESTREL_FALLEN)",                         :version => 2 },
-    { :opponent => :MELIA,     :condition => "tally(:WARM_BONDS) >= 5 && resonance >= 2",     :version => 2, :vacates => :VENAM }
+  :QF => [    # default :ISAURA (v2)
+    { :opponent => :DASK,      :condition => "ruin_route" },
+    { :opponent => :CELESTINE, :condition => "resonance <= -3",                            :version => 92 },
+    { :opponent => :KAITO,     :condition => "choice(:ch19_oath) == :keep",                :version => 92 },
+    { :opponent => :YSOLDE,    :condition => "flag(:KESTREL_FALLEN)" },
+    { :opponent => :MIREILLE,  :condition => "tally(:WARM_BONDS) >= 5 && resonance >= 2" }
   ],
-  :SF => [    # default :KESTREL (K8, 80-82); on the Ruin Route the same team with Ruin dialogue
+  :SF => [    # default :KESTREL (K8, 80-82); the Ruin Route uses the same team with Ruin dialogue
     { :opponent => :KESTREL_FALLEN, :condition => "!ruin_route && flag(:KESTREL_FALLEN)" }
   ],
-  :FINAL => [ # default :VALEN. Stage flag :live => true (drawn when the Final starts, Day 7)
+  :FINAL => [ # default :VALEN. Stage flag :live => true [CORE+]: drawn when the Final starts (Day 7)
     { :opponent => :VALEN_RUIN, :condition => "ruin_route" },
     { :opponent => :SIGRUN,     :condition => "flag(:VALEN_COLLAPSED) && bond(:SIGRUN) >= 5", :version => 96 },
     { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
@@ -371,42 +415,31 @@ DRAWS = {
   ]
 }
 ```
-**Why FINAL must be live:** Valen's collapse reads Day 5 events (the audience, Little Owl). A live Final keeps Valen seeded and in the
-bracket all week; on Day 7 the stand-in takes his Final slot without reseating anyone (Valen watches from a stretcher, then holds the Ring).
+**Why FINAL must be live:** Valen's collapse reads Day 5 events (the audience, Little Owl). Seed Valen at `Festival.start`; on Day 7 a stand-in
+takes his Final slot without reseating anyone. Valen watches from a stretcher, then holds the Ring.
 
-### 6.3 `:vacates` semantics [CORE+]
-When an **unseeded** candidate C with `:vacates => V` is drawn for a bracket stage whose default is D:
-C takes D's seat (as today), **D moves into V's seed instead of leaving**, and V leaves the bracket (`eliminated(V)` is true, and V's
-exhibition, if flagged, opens from Day 3). Validation: V must be seeded, must not be any stage's default or candidate, and no two
-candidates may vacate the same V. Seeded candidates (Alexandra, Garret) keep today's swap behaviour; variants (`:person`) keep the twin-seat rule.
+### 6.4 Who is displaced, and where they go (the coordinator's question)
+| Drawn | Default displaced | Result | Story reason |
+|---|---|---|---|
+| R16 Marisol / Anja | Juno | **swap**: Juno takes Marisol's seed (vs Kaito) or Anja's (vs Ysolde) and plays on as an NPC | Marisol claims the **Right of Grievance**; Anja asks Dorian for "the child who threw me to the court", and the Pageant-Master obliges |
+| R16 Rowan | Juno | **Juno leaves the bracket by design** | she gives "the Gardener" her own invitation (her blessing is the condition); she watches from the Wardens' box; Garden Match exhibition offered |
+| QF Celestine / Kaito / Ysolde / Mireille | Isaura | **swap**: Isaura takes the drawn entrant's seed and plays on | Celestine "hears the wrong key" and asks the Hierophant for your quarter; Kaito: "You'd keep them? Marrowgate's still knocking."; Ysolde: "If I can't reach him, I'll find out what reached you."; Mireille simply asked to meet you |
+| QF Dask (Ruin) | Isaura | **Isaura leaves** | she withdraws rather than play the Renegade: "I put a god in a box once. I won't help someone break one." Dask takes her seed on the Synod's authority over the Glass |
+| SF Kestrel (Fallen), Final Valen (Last Tuning) | — | variants: same seed | — |
+| Final Sigrun / Brann (live stand-in) | Valen, collapsed after his SF | stand-in takes the Final slot | Valen can't stand; the Accord names the Sovereign-designate (Sigrun) or Brann, at Valen's request |
 
-### 6.4 Displacement answers (the coordinator's question)
-
-| Drawn | Displaced default | Where the default goes | Who leaves, and the story reason | If `:vacates` isn't built |
-|---|---|---|---|---|
-| R16 Marisol | Juno | Kaito's seed (R16 vs Garret; she loses, exhibition Day 3) | **Kaito** yields his invitation to Marisol's **Right of Grievance** ("A fist is a promise. Hers came first."). He still holds the arena gate in the hijack. | Juno yields to the Grievance herself: absent from the bracket, present as Verdance's Warden, Juno exhibition offered. |
-| R16 Anja | Juno | Odessa's seed (R16 vs Valen; she loses) | **Odessa** gives Anja her place ("She's got a drowned city to answer for. I've only got mail."), and spends the week rigging evacuation skiffs. Her hijack airlift is unchanged. | as above |
-| R16 Rowan | Juno | **absent from the bracket by design** | Juno gives "the Gardener" her own invitation (her blessing *is* the condition: tribunal mercy + Hollow trust). She watches from the Wardens' box; Venam's garden-court scene still plays; Juno's "Garden Match" exhibition is offered. | same |
-| QF Titania | Lin | Amaria's seed (R16 vs Sigrun) | **Amaria** withdraws; Titania fights in her place to keep the darkening PC away from her. Amaria still voices Maren's lament. | Lin withdraws: "i came to warn somebody. looks like somebody else got the job." Lin exhibition (v2). |
-| QF Melia | Lin | Venam's seed (R16 vs Shelly) | **Venam** hands Melia her invitation ("you're better at the talking part"). She stays for her Juno/Rowan testimony; Venam exhibition from Day 3. | as above |
-| QF Nova (Ruin) | Lin | Shiv's seed (R16 vs Kestrel; she loses to him) | **Shiv** walked Nova through the dream in his place ("She paid more for the ticket than I did."). | Lin refuses to play "someone who wants to break a god", and watches. |
-| QF Alexandra / Garret | Lin | swaps into the drawn cameo's seed | nobody leaves | — |
-| SF Kestrel (Fallen) | — | variant: same seed | — | — |
-| FINAL Sigrun / Brann (live stand-in) | Valen (collapsed after his SF win) | stays in the bracket record; watches the Final from a stretcher | — | — |
-| FINAL Valen (Last Tuning), Ruin | — | variant: same seed | — | — |
-
-NPC results: no new SCRIPTED_WINNERS are required. Drawn path opponents already win until they meet the player; everything else simulates.
-
-### 6.5 Exhibitions that vary [CORE+ `EXHIBITION_EXTRAS`]
-Ruin Route: every exhibition is closed ("the champions won't play the Renegade") except the Eevee Octave, which the event handles.
+### 6.5 Exhibitions (original only) [CORE+ `EXHIBITION_EXTRAS`]
+The **Eevee Octave** always. Eliminated entrants flagged `:exhibition` (Drey, Thorne, Isaura, Mireille) open from the day after they lose. The
+"Warden showcase bouts" and other extras below are offered in addition. On the Ruin Route only the Eevee Octave plays.
 ```ruby
-EXHIBITION_EXTRAS = [   # offered in addition to eliminated cameos; all require !ruin_route
-  { :entrant => :JUNO,    :condition => "!ruin_route && drawn(:R16) != :JUNO", :from_day => 3 },                             # "Garden Match", J4 team
-  { :entrant => :MARISOL, :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },  # Ebb Guild match, Teo cheering
-  { :entrant => :LIN,     :condition => "!ruin_route && drawn(:QF) != :LIN", :version => 2, :from_day => 5 },
-  { :entrant => :MELIA,   :condition => "!ruin_route && drawn(:QF) != :MELIA", :version => 2, :from_day => 3 },
-  { :entrant => :TITANIA, :condition => "!ruin_route && drawn(:QF) != :TITANIA", :version => 2, :from_day => 3 },
-  { :entrant => :MORWEN,  :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }  # Night of Masques: Ysolde calls the echo
+EXHIBITION_EXTRAS = [
+  { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                   # Dorian & Rook, "a duet for the cameras" (double)
+  { :entrant => :BASTIAN,      :condition => "!ruin_route", :from_day => 5 },                                   # "I'm seventy-four. One more."
+  { :entrant => :JUNO,         :condition => "!ruin_route && drawn(:R16) != :JUNO", :from_day => 3 },           # Garden Match (J4 team)
+  { :entrant => :MARISOL,      :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },  # Ebb Guild match
+  { :entrant => :ISAURA,       :condition => "!ruin_route && drawn(:QF) != :ISAURA", :from_day => 5 },
+  { :entrant => :MIREILLE,     :condition => "!ruin_route && drawn(:QF) != :MIREILLE", :from_day => 3 },
+  { :entrant => :MORWEN,       :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }  # Night of Masques
 ]
 ```
 
@@ -426,47 +459,57 @@ ARCEUS_VARIANTS = [
 
 ---
 
-## 7. Festival trainer teams the trainer agent must build (complete list)
+## 7. Festival trainer teams the trainer agent must build (complete list, Revision 4)
 
-Version = the Standard base; Core adds +100 (Hard) / +200 (Casual) when those exist. Rival entries are ×3 (one per starter slot,
-Gen 1 starter line, swapped by Core). Festival-only Warden/NPC teams use **version = ace level** (90/96/99) so they never collide with
-story versions. "Planned" = already in the trainer agent's queue; **NEW** = added by this spec.
+Version = the Standard base; Core adds +100 (Hard) / +200 (Casual) when those exist. Rival entries are ×3 (one per starter slot).
+Festival-only Warden/NPC teams use **version = ace level** (90/92/96/99) so they never collide with story versions.
 
-| # | Stage | Entrant | `[TYPE, Name, Version]` | Ace lv | Status | Notes |
-|---|---|---|---|---|---|---|
-| 1 | R16 | Juno (J4, default) | `[RIVAL_JUNO, Juno, 40/41/42]` | 90 | planned | also the "Garden Match" exhibition |
-| 2 | R16 | Marisol (Grievance) | `[LEADER_MARISOL, Marisol, 90]` | 90 | **NEW** | also the Ebb Guild exhibition; Gyarados ace, rain + `:WATER_SURFACE` core |
-| 3 | R16 | Anja (exposed) | `[LEADER_ANJA, Anja, 90]` | 90 | **NEW** | Mamoswine; "Ice remembers." |
-| 4 | R16 | Rowan, "the Gardener" | `[LEADER_ROWAN, Rowan, 90]` | 90 | **NEW** | Warden-era Grass team + Trevenant; replaces Core's sample v50 |
-| 5 | QF | Lin (default) | `[FESTIVAL_LIN, Lin, 2]` | 92 | planned | also exhibition if not drawn |
-| 6 | QF | Alexandra | `[FESTIVAL_ALEXANDRA, Alexandra, 2]` | 92 | **NEW** | v1 (R16/exhibition) stays planned |
-| 7 | QF | Garret | `[FESTIVAL_GARRET, Garret, 2]` | 92 | **NEW** | v1 stays planned |
-| 8 | QF | Titania | `[FESTIVAL_TITANIA, Titania, 2]` | 92 | **NEW** | Core sample said v3; use 2. Also her exhibition |
-| 9 | QF | Melia | `[FESTIVAL_MELIA, Melia, 2]` | 92 | **NEW** | Core sample said v1; use 2. Also her exhibition |
-| 10 | QF (Ruin) | Nova | `[FESTIVAL_NOVA, Nova, 2]` | 92 | **NEW** | Gothitelle |
-| 11 | SF | Kestrel (Redeemed, K8, default) | `[RIVAL_KESTREL, Kestrel, 80/81/82]` | 94 | planned | Ruin Route reuses it with Ruin dialogue |
-| 12 | SF | Kestrel (Fallen) | `[RIVAL_KESTREL, Kestrel, 90/91/92]` | 94 | **NEW** | `rival_battle 9`; Gauntlet-fused, no tear-off; field-control battle script |
-| 13 | Final | Valen (default) | `[CHAMPION_VALEN, Valen, 0]` | 96 | planned | Zygarde |
-| 14 | Final | Sigrun, Sovereign-designate | `[LEADER_SIGRUN, Sigrun, 96]` | 96 | **NEW** | Salamence; stand-in for a collapsed Valen |
-| 15 | Final | Brann (stand-in) | `[LEADER_BRANN, Brann, 96]` | 96 | **NEW** | Coalossal; "He asked me to. Last thing he asked." |
-| 16 | Final (Ruin) | Valen, the Last Tuning | `[CHAMPION_VALEN, Valen, 1]` | 96 | **NEW** | fights to stop the Unmaking; Zygarde Complete from bar 1 |
-| 17 | Hijack | Voss (default) | `[MERIDIAN_VOSS, Aurelian, 0]` | 100 | planned | Silvally (field-following) |
-| 18 | Hijack | Dr. Quent | `[MERIDIAN_QUENT, Percival, 99]` | 100 | **NEW** | Voss's Silvally team in Quent's hands, plus his Psychic/Steel core |
-| 19 | Hijack (Ruin) | Theodric, the Gilded Reflection | `[GILDED_THEODRIC, Theodric, 0]` | 100 | **NEW** | new trainer type; Golurk, Aegislash, Regigigas reflection, Groudon/Kyogre echoes |
-| 20 | Exhibition | Morwen's Echo | `[ECHO_MORWEN, Morwen, 90]` | 90 | **NEW** | new trainer type; Mismagius-less (it's Kestrel's now): Chandelure, Gengar, Spiritomb, Dusknoir |
-| B1–B5 | True Finale | Arceus | boss configs `ARCEUS_BOUND` (planned), `_MISCALIBRATED`, `_WAR`, `_GILDED`, `_JUDGMENT` | 100 | 4 **NEW** | Prismfall Bosses; §6.6 |
+| # | Stage | Entrant | `[TYPE, Name, Version]` | Ace | Status |
+|---|---|---|---|---|---|
+| 1 | R16 | Juno (J4, default; also Garden Match) | `[RIVAL_JUNO, Juno, 40/41/42]` | 90 | planned |
+| 2 | R16 | Marisol (Grievance; also Ebb Guild match) | `[LEADER_MARISOL, Marisol, 90]` | 90 | **NEW** |
+| 3 | R16 | Anja (exposed) | `[LEADER_ANJA, Anja, 90]` | 90 | **NEW** |
+| 4 | R16 | Rowan, "the Gardener" | `[LEADER_ROWAN, Rowan, 90]` | 90 | **NEW** (replaces Core's sample v50) |
+| 5 | QF | **Isaura Vell** (default; also exhibition) | `[FESTIVAL_ISAURA, Isaura, 2]` | 92 | **NEW** (replaces Lin) |
+| 6 | QF | Celestine ("the wrong key") | `[LEADER_CELESTINE, Celestine, 92]` | 92 | **NEW** |
+| 7 | QF | Kaito ("Marrowgate's still knocking") | `[LEADER_KAITO, Kaito, 92]` | 92 | **NEW** |
+| 8 | QF | Ysolde (Kestrel fallen) | `[LEADER_YSOLDE, Ysolde, 92]` | 92 | **NEW** |
+| 9 | QF | Mireille Vance (warm draw; also exhibition) | `[FESTIVAL_MIREILLE, Mireille, 2]` | 92 | **NEW** |
+| 10 | QF (Ruin) | Archseer Imre Dask | `[ARCHSEER_DASK, Imre, 92]` | 92 | **NEW** (new trainer type; replaces Nova) |
+| 11 | SF | Kestrel (Redeemed, K8, default) | `[RIVAL_KESTREL, Kestrel, 80/81/82]` | 94 | planned |
+| 12 | SF | Kestrel (Fallen) | `[RIVAL_KESTREL, Kestrel, 90/91/92]` | 94 | **NEW** (`rival_battle 9`) |
+| 13 | Final | Valen (default) | `[CHAMPION_VALEN, Valen, 0]` | 96 | planned |
+| 14 | Final | Sigrun, Sovereign-designate | `[LEADER_SIGRUN, Sigrun, 96]` | 96 | **NEW** |
+| 15 | Final | Brann (stand-in) | `[LEADER_BRANN, Brann, 96]` | 96 | **NEW** |
+| 16 | Final (Ruin) | Valen, the Last Tuning | `[CHAMPION_VALEN, Valen, 1]` | 96 | **NEW** |
+| 17 | Hijack | Voss (default) | `[MERIDIAN_VOSS, Aurelian, 0]` | 100 | planned |
+| 18 | Hijack | Dr. Quent | `[MERIDIAN_QUENT, Percival, 99]` | 100 | **NEW** (Voss's Silvally team in Quent's hands) |
+| 19 | Hijack (Ruin) | Theodric, the Gilded Reflection | `[GILDED_THEODRIC, Theodric, 0]` | 100 | **NEW** (new trainer type) |
+| 20 | Exhibition | Matthias Drey | `[FESTIVAL_DREY, Matthias, 1]` | 90 | **NEW** |
+| 21 | Exhibition | Ser Ivo Thorne | `[FESTIVAL_THORNE, Ivo, 1]` | 90 | **NEW** |
+| 22 | Exhibition | Pageant Bout: Dorian + Rook (double) | `[LEADER_DORIAN, Dorian, 90]` + `[LEADER_ROOK, Rook, 90]` | 90 | **NEW** ×2 |
+| 23 | Exhibition | Bastian, "One More" | `[LEADER_BASTIAN, Bastian, 90]` | 90 | **NEW** |
+| 24 | Exhibition | Morwen's Echo | `[ECHO_MORWEN, Morwen, 90]` | 90 | **NEW** (new trainer type) |
+| B1–B5 | True Finale | Arceus | boss configs `ARCEUS_BOUND` (planned), `_MISCALIBRATED`, `_WAR`, `_GILDED`, `_JUDGMENT` | 100 | 4 **NEW** |
 
-Cameo exhibitions keep CAMEOS.md's v1 teams (planned). Total **new Festival teams: 15** (+4 Arceus boss configs).
+**Total new Festival teams: 22** (+4 Arceus boss configs). New trainer types: `FESTIVAL_ISAURA`, `FESTIVAL_DREY`, `FESTIVAL_MIREILLE`,
+`FESTIVAL_THORNE`, `ARCHSEER_DASK`, `GILDED_THEODRIC`, `ECHO_MORWEN` (plus `LEADER_ROWAN` if it doesn't exist yet).
+NPC-only seeded entrants needing **no** trainer data: Nyx, Odessa (and Kaito/Celestine/Ysolde/Marisol/Anja/Sigrun/Brann only when not drawn).
+
+**No longer Festival teams (Revision 4):** every `FESTIVAL_LIN`, `FESTIVAL_AMARIA`, `FESTIVAL_SHELLY`, `FESTIVAL_ALEXANDRA`, `FESTIVAL_VENAM`,
+`FESTIVAL_SHIV`, `FESTIVAL_GARRET`, `FESTIVAL_MELIA`, `FESTIVAL_TITANIA` and `FESTIVAL_NOVA` team at versions 1, 2 and 3. They move to the story
+lead's optional sidequests, which set their own levels; whether their trainer type keeps the `FESTIVAL_` prefix is the story lead's call.
 
 **Non-Festival teams this spec adds** (story battles):
 
 | `[TYPE, Name, Version]` | Where | Why |
 |---|---|---|
 | `[RIVAL_JUNO, Juno, 70/71/72]` | Ch21 tag-battle partner | replaces Kestrel when `KESTREL_FALLEN` |
-| `[MERIDIAN_KROLL, Sabine, 21]` + `[MERIDIAN_MARCHETTI, Helene, 21]` + `[MERIDIAN_QUENT, Percival, 21]` | Ch21 tag foes | pairs: Quent + Kroll (default), Marchetti + Quent (Marchetti not turned); if Quent is the hijacker: Marchetti + Kroll, or Kroll + `[MERIDIAN_DIRECTORATE, Captain, 21]` when Marchetti is turned |
-| `[LEADER_MAGNUS, Magnus, 1]`, `[LEADER_NYX, Nyx, 1]`, `[LEADER_CELESTINE, Celestine, 1]`, `[LEADER_SIGRUN, Sigrun, 1]` | Ruin Route Gyms 15–18 | Ruin versions (harder, different leads; see 10_CHOICES_ENDINGS §5) |
-| `[REFLECTION, ???, 0]` | Ruin R1 | generated at battle start from `$player.party` (same species/levels/moves, mirrored nature); the PBS team is only a fallback |
+| `[MERIDIAN_KROLL, Sabine, 21]` + `[MERIDIAN_MARCHETTI, Helene, 21]` + `[MERIDIAN_QUENT, Percival, 21]` | Ch21 tag foes | Quent + Kroll (default), Marchetti + Quent (Marchetti not turned); if Quent is the hijacker: Marchetti + Kroll, or Kroll + `[MERIDIAN_DIRECTORATE, Captain, 21]` when Marchetti is turned |
+| `[LEADER_MAGNUS, Magnus, 1]`, `[LEADER_NYX, Nyx, 1]`, `[LEADER_CELESTINE, Celestine, 1]`, `[LEADER_SIGRUN, Sigrun, 1]` | Ruin Route Gyms 15–18 | Ruin versions (10_CHOICES_ENDINGS §5) |
+| `[REFLECTION, ???, 0]` | Ruin R1 | generated at battle start from `$player.party`; the PBS team is only a fallback |
 | boss config `GIRATINA_ORIGIN_TRIAL` | Ruin R1 | Giratina tests the Renegade on `:INVERSE` |
+| boss config `KYOGRE_WEATHER` | Ch11 `GO_WEATHER` | the existing Kyogre at a fixed lv 80, unwinnable, no catch |
 
 ## 8. Story-battle variants in the finale (not Festival stages)
 
@@ -540,8 +583,8 @@ GAME_OVERS = {
   :GO_HIS_HAND         => { :title => "His Hand",           :hint => "Ch21. Not chained, not bought.",
                             :epitaph => "It didn't hurt. That was the cruelest part." },
   # Ruin Route only (not needed for the unlock)
-  :GO_R_SWEET_DREAMS   => { :title => "Sweet Dreams",       :hint => "Ruin. Nova's kindness.", :ruin_exempt => true,
-                            :epitaph => "Nova kept her promise. Nobody in Velmora ever had to wake up again." },
+  :GO_R_WELCOME_BEHIND => { :title => "Welcome, Behind",   :hint => "Ruin. The Archseer's kindness.", :ruin_exempt => true,
+                            :epitaph => "You stayed behind the Glass. It remembers those who stay perfectly, and forgets them a little more each day." },
   :GO_R_KNEEL          => { :title => "Long Live the King", :hint => "Ruin. A king asks you to kneel.", :ruin_exempt => true,
                             :epitaph => "You knelt. The Aureate Kingdom stepped through the Glass, golden and starving, and Theodric finished his sentence." }
 }
@@ -576,8 +619,8 @@ on the trigger. Every trigger is a deliberate player choice with at least one co
 | GO_STAY_OUT | 18 | choice-based (NEW) | after K7: "Stay out of Crownhaven?" → Yes → "He's already walking away. Let him go?" → Yes | Celestine ("It says *walker*"), Sigrun's summons, Larch's letter all say it must be the PC | after K7 |
 | GO_LIARS_PYRE | 19 | defy | the hidden 5th oath "Whatever you want to hear." (always offered; no lie-tracking needed) | gate-guard: "say true or say nothing"; the brazier oath | Rift heart |
 | GO_EARLY_CROWN | 20 | betrayal (Valen's) | accept the crown tonight | Ilsa: "Don't let him hand you anything tonight." | Sanctum door |
-| GO_HIS_HAND | 21 | betrayal | take Voss's hand (any path without `VOSS_ACCEPTED`) | Lin's warning, K7 speech, Celestine | before the Coronation |
-| GO_R_SWEET_DREAMS | R6 | Ruin | accept Nova's dream | Nova's own pitch | Ruin QF |
+| GO_HIS_HAND | 21 | betrayal | take Voss's hand (any path without `VOSS_ACCEPTED`) | Isaura's warning, K7 speech, Celestine | before the Coronation |
+| GO_R_WELCOME_BEHIND | R6 | Ruin | accept Dask's offer to stay behind the Glass | Dask's own mirrored pitch | Ruin QF |
 | GO_R_KNEEL | R7 | Ruin | kneel to Theodric | Voss kneels first; Giratina's warning | before the Ruin hijack |
 
 ## 11. Ruin Route keys
@@ -589,7 +632,7 @@ on the trigger. Every trigger is a deliberate player choice with at least one co
 - **Route chapters:** R1–R7 (10_CHOICES_ENDINGS §5). On the Ruin Route every main-route prompt after Ch15 is skipped except `:ch16_zekrom`,
   `:ch16_magnus`, `:ch17_nyx`, `:ch18_kestrel_ring`, `:ch19_oath` (only `:ruin` is offered) and `:ch21_crown`, whose Ruin scenes reuse the keys.
   Ruin game overs that reuse main-route triggers (Overtime, The Throne, Fair Bargain …) still fire and still count.
-- **Choices:** `:ruin_voss`, `:ruin_walk`. Game overs: `GO_R_SWEET_DREAMS`, `GO_R_KNEEL` (exempt).
+- **Choices:** `:ruin_voss`, `:ruin_walk`. Game overs: `GO_R_WELCOME_BEHIND`, `GO_R_KNEEL` (exempt).
 - **Gyms 15–18** use version 1 of each leader (see §7). Badges are still awarded with `Prismfall.award_badge(n)` (caps unchanged); the badge
   art swaps to the black "Reflection" set when `ruin_route`.
 
@@ -659,6 +702,7 @@ every other ending after `:ch21_final` (main) or `:ruin_walk` (Ruin). Each is `P
 | outcome-only `KESTREL_ACCEPTED_SEAT`, `KESTREL_YSOLDE_RECONCILED`, `TAMSIN_PUBLIC_CONFESSION` | derived flags only | computed from Bonds/choices |
 | `VOSS_FEIGNED`, `VOSS_ACCEPTED`, `TEO_SAVED`, `IRONREACH_EVIDENCE`, `ANJA_EXPOSED`, `KAITO_TESTIFIED`, `TELEMETRY_SABOTAGED`, `MAGNUS_EXPOSED`, `MAGNUS_KEPT_FAITH`, `NYX_BARGAIN_TAKEN`, `OGERPON_TRUSTED`, `MARCHETTI_TURNED` | derived flags of the same name | — |
 | GO-01 … GO-22 | `GO_<NAME>` IDs in §9 | descriptive IDs; GO-20 Encore cut |
+| (Revision 4) cameo entrants, `HEADLINE_CAMEO = :LIN`, Nova / Melia / Titania / Alexandra / Garret draws, `GO_R_SWEET_DREAMS` | `:ISAURA` headline, original QF pool (§6.3), `GO_R_WELCOME_BEHIND` | cameos are sidequests now |
 | (new) | `:ch2_matriarch`, `:ch11_strike`, `:ch13_fault`, `:ch20_calla`, `:ch21_hand`, `:ch21_reach_kestrel`, `:ch15_look_back`, `:ruin_voss`, `:ruin_walk`, `GO_WEATHER`, `GO_STAY_OUT`, `END_EMPTY_LIGHTHOUSE`, `END_REFLECTION` | see 10_CHOICES_ENDINGS |
 | Core samples `:MOURNER` bond, `:SUCCESSOR`, `:MOURNER` entrant, `LEADER_ROWAN v50`, `KESTREL_FALLEN` conditions, all sample CHOICES/GAME_OVERS/ENDINGS | retired / replaced | — |
 
@@ -677,6 +721,6 @@ every other ending after `:ch21_final` (main) or `:ruin_walk` (Ruin). Each is `P
 1. Every `choice(:k)`, `chose(:k, :v)`, `made(:k)` in any condition names a key in CHOICES, and `:v` is in its `:values`.
 2. Every `flag()` / `tally()` name exists; no flag cycle.
 3. Every Bond / faction ID in CHOICE_EFFECTS exists.
-4. DRAWS: persons disjoint across stages (Core already checks); every `:vacates` target seeded, not a candidate anywhere, used once.
+4. DRAWS: persons disjoint across stages (Core already checks); every candidate except `:ROWAN` and `:DASK` is seeded in BRACKET; no cameo entrant remains.
 5. ENDING_RULES: the last main-route rule `choice(:ch21_final) == :return` plus the Concord/Gilded/other `:ch21_final` rules cover every value of `:ch21_final`.
 6. `WARDEN_CONSENT.size == 18`.

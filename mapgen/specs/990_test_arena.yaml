@@ -44,7 +44,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -74,7 +74,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -104,7 +104,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -134,7 +134,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -164,7 +164,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -194,7 +194,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -224,7 +224,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -254,7 +254,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -284,7 +284,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -314,7 +314,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -344,7 +344,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -374,7 +374,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -404,7 +404,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -434,7 +434,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -464,7 +464,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -494,7 +494,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -524,7 +524,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -554,7 +554,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -584,7 +584,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -614,7 +614,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -644,7 +644,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -674,7 +674,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -704,7 +704,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -734,7 +734,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -764,7 +764,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -794,7 +794,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -824,7 +824,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -854,7 +854,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -884,7 +884,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -914,7 +914,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []
@@ -944,7 +944,7 @@ events:
 
           setBattleRule("canLose")
 
-          TrainerBattle.start(:YOUNGSTER, "Ben")
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
 
           $player.heal_party'
     - []

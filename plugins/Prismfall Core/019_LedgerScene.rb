@@ -10,7 +10,7 @@ module Prismfall
     LEDGER_IN_PAUSE_MENU = true
 
     def self.any?
-      return !data[:game_overs].empty? || !data[:endings].empty?
+      return !data[:game_overs].empty? || !data[:endings].empty? || !data[:cameos].empty?
     end
 
     def self.show
@@ -36,8 +36,8 @@ class PrismfallLedgerScene
 
   def initialize
     @tab = 0
-    @index = [0, 0]
-    @top = [0, 0]
+    @index = [0, 0, 0]
+    @top = [0, 0, 0]
   end
 
   def entries(tab)
@@ -48,10 +48,16 @@ class PrismfallLedgerScene
         [id, Prismfall::Ledger.game_over_found?(id), d[:title], d[:epitaph], d[:hint]]
       end
     end
-    reg = Prismfall::Narrative::ENDINGS
-    return reg.keys.map do |id|
-      d = reg[id]
-      [id, Prismfall::Ledger.ending_seen?(id), d[:name], _INTL("Kind: {1}", d[:kind].to_s.capitalize), nil]
+    if tab == 1
+      reg = Prismfall::Narrative::ENDINGS
+      return reg.keys.map do |id|
+        d = reg[id]
+        [id, Prismfall::Ledger.ending_seen?(id), d[:name], _INTL("Kind: {1}", d[:kind].to_s.capitalize), nil]
+      end
+    end
+    reg = Prismfall::Narrative::CAMEOS
+    return reg.keys.map do |t|
+      [t, Prismfall::Ledger.cameo_beaten?(t), reg[t], _INTL("Defeated {1}.", _INTL(reg[t])), nil]
     end
   end
 
@@ -65,11 +71,12 @@ class PrismfallLedgerScene
     pbSetSystemFont(bmp)
     pbDrawTextPositions(bmp, [[_INTL("THE LEDGER"), w / 2, 4, :center, GOLD, SHADOW]])
     pbSetSmallFont(bmp)
-    tabs = [_INTL("Game Overs"), _INTL("Endings")]
+    tabs = [_INTL("Game Overs"), _INTL("Endings"), _INTL("Cameos")]
+    tab_w = (w - 32 - 16) / 3
     tabs.each_with_index do |t, i|
-      x = (i == 0) ? 16 : w / 2 + 8
-      bmp.fill_rect(x, 34, (w / 2) - 24, 24, (i == @tab) ? SELECT : PANEL)
-      pbDrawTextPositions(bmp, [[t, x + ((w / 2) - 24) / 2, 36, :center, (i == @tab) ? TEXT : DIM, SHADOW]])
+      x = 16 + (i * (tab_w + 8))
+      bmp.fill_rect(x, 34, tab_w, 24, (i == @tab) ? SELECT : PANEL)
+      pbDrawTextPositions(bmp, [[t, x + (tab_w / 2), 36, :center, (i == @tab) ? TEXT : DIM, SHADOW]])
     end
     # Rows
     bmp.fill_rect(16, LIST_TOP, w - 32, ROWS * ROW_H, PANEL)
@@ -91,7 +98,7 @@ class PrismfallLedgerScene
     if sel
       detail = if sel[1]
                  _INTL(sel[3].to_s)
-               elsif sel[4] && Prismfall::Narrative::LEDGER_SHOW_HINTS
+               elsif sel[4] && Prismfall::Ledger.show_hints?
                  _INTL("Not yet found. ({1})", _INTL(sel[4].to_s))
                else
                  _INTL("Not yet found.")
@@ -121,7 +128,7 @@ class PrismfallLedgerScene
         pbPlayCloseMenuSE
         break
       elsif Input.trigger?(Input::LEFT) || Input.trigger?(Input::RIGHT)
-        @tab = 1 - @tab
+        @tab = (@tab + ((Input.trigger?(Input::LEFT)) ? 2 : 1)) % 3
         pbPlayCursorSE
         refresh
       elsif (Input.repeat?(Input::UP) || Input.repeat?(Input::DOWN)) && count > 0

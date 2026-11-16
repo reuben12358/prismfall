@@ -7796,9 +7796,552 @@ Pokemon = SINISTEA,14
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 990 Prismfall Test Arena (dummy; overrides base [YOUNGSTER,Ben])
+# Map 560 Route 5
 #-------------------------------
-[YOUNGSTER,Ben]
+[BIKER,Rook]
+LoseText = Not THAT Rook. Everybody asks.
+Pokemon = GLAMEOW,17
+    Ability = OWNTEMPO
+    Nature = JOLLY
+    IV = 8
+Pokemon = TAUROS,18
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIKER,Rook,100]
+LoseText = Not THAT Rook. Everybody asks.
+Pokemon = GLAMEOW,17
+    Ability = OWNTEMPO
+    Nature = JOLLY
+    IV = 20
+Pokemon = TAUROS,18
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIKER,Rook,200]
+LoseText = Not THAT Rook. Everybody asks.
+Pokemon = GLAMEOW,16
+    Ability = OWNTEMPO
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = TAUROS,17
+    Ability = INTIMIDATE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 560 Route 5
+#-------------------------------
+[PICNICKER,Sela]
+LoseText = Okay, you win the last sandwich.
+Pokemon = SKITTY,16
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 8
+Pokemon = PHANPY,17
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[PICNICKER,Sela,100]
+LoseText = Okay, you win the last sandwich.
+Pokemon = SKITTY,16
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 20
+Pokemon = PHANPY,17
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[PICNICKER,Sela,200]
+LoseText = Okay, you win the last sandwich.
+Pokemon = SKITTY,15
+    Ability = CUTECHARM
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = PHANPY,16
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 560 Route 5
+#-------------------------------
+[POKEMANIAC,Ivo]
+LoseText = My precious monsters!
+Pokemon = CUBONE,17
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 8
+Pokemon = KANGASKHAN,19
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Ivo,100]
+LoseText = My precious monsters!
+Pokemon = CUBONE,17
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 20
+Pokemon = KANGASKHAN,19
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Ivo,200]
+LoseText = My precious monsters!
+Pokemon = CUBONE,16
+    Ability = ROCKHEAD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = KANGASKHAN,18
+    Ability = EARLYBIRD
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 560 Route 5
+#-------------------------------
+[RUINMANIAC,Alder]
+LoseText = The old stones told me I'd lose. I never listen.
+Pokemon = HELIOPTILE,17
+    Ability = DRYSKIN
+    Nature = TIMID
+    IV = 8
+Pokemon = DUNSPARCE,18
+    Ability = SERENEGRACE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[RUINMANIAC,Alder,100]
+LoseText = The old stones told me I'd lose. I never listen.
+Pokemon = HELIOPTILE,17
+    Ability = DRYSKIN
+    Nature = TIMID
+    IV = 20
+Pokemon = DUNSPARCE,18
+    Ability = SERENEGRACE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[RUINMANIAC,Alder,200]
+LoseText = The old stones told me I'd lose. I never listen.
+Pokemon = HELIOPTILE,16
+    Ability = DRYSKIN
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = DUNSPARCE,17
+    Ability = SERENEGRACE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 561 Route 6
+#-------------------------------
+[BIRDKEEPER,Wren]
+LoseText = My flock scattered! Well flown.
+Pokemon = TAILLOW,17
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 8
+Pokemon = DUCKLETT,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+Pokemon = CHATOT,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Wren,100]
+LoseText = My flock scattered! Well flown.
+Pokemon = TAILLOW,17
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 20
+Pokemon = DUCKLETT,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+Pokemon = CHATOT,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Wren,200]
+LoseText = My flock scattered! Well flown.
+Pokemon = TAILLOW,16
+    Ability = GUTS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = DUCKLETT,17
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHATOT,17
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 561 Route 6
+#-------------------------------
+[COOLTRAINER_F,Astrid]
+LoseText = Cool. You'll do fine in the Tidelock.
+Pokemon = ORICORIO,19
+    Ability = DANCER
+    Nature = TIMID
+    IV = 8
+Pokemon = CRAMORANT,19
+    Ability = GULPMISSILE
+    Nature = MODEST
+    IV = 8
+Pokemon = SNORUNT,19
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[COOLTRAINER_F,Astrid,100]
+LoseText = Cool. You'll do fine in the Tidelock.
+Pokemon = ORICORIO,19
+    Ability = DANCER
+    Nature = TIMID
+    IV = 20
+Pokemon = CRAMORANT,19
+    Ability = GULPMISSILE
+    Nature = MODEST
+    IV = 20
+Pokemon = SNORUNT,19
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[COOLTRAINER_F,Astrid,200]
+LoseText = Cool. You'll do fine in the Tidelock.
+Pokemon = ORICORIO,18
+    Ability = DANCER
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = CRAMORANT,18
+    Ability = GULPMISSILE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SNORUNT,18
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 561 Route 6
+#-------------------------------
+[FISHERMAN,Kjell]
+LoseText = The sea gives, the sea takes.
+Pokemon = MAGIKARP,17
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 8
+Pokemon = FINNEON,18
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 8
+Pokemon = WOOPER,18
+    Ability = DAMP
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[FISHERMAN,Kjell,100]
+LoseText = The sea gives, the sea takes.
+Pokemon = MAGIKARP,17
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 20
+Pokemon = FINNEON,18
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 20
+Pokemon = WOOPER,18
+    Ability = DAMP
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[FISHERMAN,Kjell,200]
+LoseText = The sea gives, the sea takes.
+Pokemon = MAGIKARP,16
+    Ability = SWIFTSWIM
+    Nature = HARDY
+    IV = 0
+    EV = 0
+Pokemon = FINNEON,17
+    Ability = SWIFTSWIM
+    Nature = TIMID
+    IV = 0
+    EV = 0
+Pokemon = WOOPER,17
+    Ability = DAMP
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 561 Route 6
+#-------------------------------
+[SAILOR,Haldor]
+LoseText = Arr! Isenmar's coast breeds tough kids.
+Pokemon = WINGULL,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+Pokemon = SPHEAL,19
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SAILOR,Haldor,100]
+LoseText = Arr! Isenmar's coast breeds tough kids.
+Pokemon = WINGULL,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+Pokemon = SPHEAL,19
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SAILOR,Haldor,200]
+LoseText = Arr! Isenmar's coast breeds tough kids.
+Pokemon = WINGULL,17
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SPHEAL,18
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 564 Gullcry Caves
+#-------------------------------
+[HIKER,Torvald]
+LoseText = The gulls laugh at me every time.
+Pokemon = BINACLE,19
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CLOBBOPUS,20
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[HIKER,Torvald,100]
+LoseText = The gulls laugh at me every time.
+Pokemon = BINACLE,19
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CLOBBOPUS,20
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[HIKER,Torvald,200]
+LoseText = The gulls laugh at me every time.
+Pokemon = BINACLE,18
+    Ability = TOUGHCLAWS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CLOBBOPUS,19
+    Ability = LIMBER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 170 Tidelock Gym - Lock Hall
+#-------------------------------
+[FISHERMAN,Gunnar]
+LoseText = Lock's open. Mind the current.
+Pokemon = GOLDEEN,18
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BARBOACH,19
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FISHERMAN,Gunnar,100]
+LoseText = Lock's open. Mind the current.
+Pokemon = GOLDEEN,18
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BARBOACH,19
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FISHERMAN,Gunnar,200]
+LoseText = Lock's open. Mind the current.
+Pokemon = GOLDEEN,17
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BARBOACH,18
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 171 Tidelock Gym - Basins (Low Water)
+#-------------------------------
+[SWIMMER_F,Ingrid]
+LoseText = You swim like you were born here.
+Pokemon = BUIZEL,19
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 8
+Pokemon = CHEWTLE,19
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SWIMMER_F,Ingrid,100]
+LoseText = You swim like you were born here.
+Pokemon = BUIZEL,19
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 20
+Pokemon = CHEWTLE,19
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SWIMMER_F,Ingrid,200]
+LoseText = You swim like you were born here.
+Pokemon = BUIZEL,18
+    Ability = SWIFTSWIM
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = CHEWTLE,18
+    Ability = STRONGJAW
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 172 Tidelock Gym - Basins (Mid Water)
+#-------------------------------
+[FISHERMAN,Oskar]
+LoseText = Hooked a loss. Marisol'll laugh.
+Pokemon = BARBOACH,20
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CORPHISH,20
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[FISHERMAN,Oskar,100]
+LoseText = Hooked a loss. Marisol'll laugh.
+Pokemon = BARBOACH,20
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CORPHISH,20
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[FISHERMAN,Oskar,200]
+LoseText = Hooked a loss. Marisol'll laugh.
+Pokemon = BARBOACH,19
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CORPHISH,19
+    Ability = HYPERCUTTER
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 172 Tidelock Gym - Basins (Mid Water)
+#-------------------------------
+[SWIMMER_M,Leif]
+LoseText = Ugh, the water's rising. So's my shame.
+Pokemon = ARROKUDA,20
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = PSYDUCK,20
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SWIMMER_M,Leif,100]
+LoseText = Ugh, the water's rising. So's my shame.
+Pokemon = ARROKUDA,20
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = PSYDUCK,20
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SWIMMER_M,Leif,200]
+LoseText = Ugh, the water's rising. So's my shame.
+Pokemon = ARROKUDA,19
+    Ability = SWIFTSWIM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = PSYDUCK,19
+    Ability = SWIFTSWIM
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 173 Tidelock Gym - Basins (High Water)
+#-------------------------------
+[SAILOR,Bjorn]
+LoseText = The Warden's pool is next. Good luck, sprat.
+Pokemon = WINGULL,20
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+Pokemon = CHINCHOU,21
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[SAILOR,Bjorn,100]
+LoseText = The Warden's pool is next. Good luck, sprat.
+Pokemon = WINGULL,20
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+Pokemon = CHINCHOU,21
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[SAILOR,Bjorn,200]
+LoseText = The Warden's pool is next. Good luck, sprat.
+Pokemon = WINGULL,19
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CHINCHOU,20
+    Ability = VOLTABSORB
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 990 Prismfall Test Arena (dummy)
+#-------------------------------
+[YOUNGSTER,Prismtest]
 LoseText = Testing, testing... you win!
 Pokemon = SNORLAX,50
     Moves = TACKLE,DEFENSECURL,REST,SNORE
@@ -7806,7 +8349,7 @@ Pokemon = SNORLAX,50
     Nature = HARDY
     IV = 8
 #-------------------------------
-[YOUNGSTER,Ben,100]
+[YOUNGSTER,Prismtest,100]
 LoseText = Testing, testing... you win!
 Pokemon = SNORLAX,50
     Moves = TACKLE,DEFENSECURL,REST,SNORE
@@ -7814,7 +8357,7 @@ Pokemon = SNORLAX,50
     Nature = HARDY
     IV = 20
 #-------------------------------
-[YOUNGSTER,Ben,200]
+[YOUNGSTER,Prismtest,200]
 LoseText = Testing, testing... you win!
 Pokemon = SNORLAX,49
     Moves = TACKLE,DEFENSECURL,REST,SNORE
@@ -7889,6 +8432,82 @@ Pokemon = PHANTUMP,13
     Name = Lowmarsh
     Moves = BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY
     Ability = NATURALCURE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 4
+    EV = 0
+# Map 160 Ebbmouth - Teo Reyes, Ebbmouth Hollow cell (recurring: later battles use versions 1, 2, ...)
+#-------------------------------
+[HOLLOW_TEO,Teo]
+Items = SUPERPOTION,SUPERPOTION
+LoseText = Tell my sister— no. Don't tell her anything.
+Pokemon = CARVANHA,19
+    Moves = AQUAJET,BITE,POISONFANG,SCARYFACE
+    Ability = ROUGHSKIN
+    Item = ORANBERRY
+    Nature = JOLLY
+    IV = 12
+Pokemon = ARROKUDA,20
+    Moves = AQUAJET,BITE,FURYATTACK,AGILITY
+    Ability = SWIFTSWIM
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 12
+Pokemon = CHEWTLE,21
+    Name = Snapper
+    Moves = BITE,HEADBUTT,WATERGUN,PROTECT
+    Ability = STRONGJAW
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 12
+#-------------------------------
+[HOLLOW_TEO,Teo,100]
+Items = HYPERPOTION,HYPERPOTION
+LoseText = Tell my sister— no. Don't tell her anything.
+Pokemon = CARVANHA,20
+    Moves = AQUAJET,CRUNCH,POISONFANG,ICEFANG
+    Ability = SPEEDBOOST
+    Item = FOCUSSASH
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = BASCULIN,20
+    Moves = WATERFALL,CRUNCH,AQUAJET,PSYCHICFANGS
+    Ability = RECKLESS
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = ARROKUDA,21
+    Moves = LIQUIDATION,BITE,AQUAJET,CLOSECOMBAT
+    Ability = SWIFTSWIM
+    Item = MYSTICWATER
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = CHEWTLE,22
+    Name = Snapper
+    Moves = BITE,LIQUIDATION,ICEFANG,PROTECT
+    Ability = STRONGJAW
+    Item = EVIOLITE
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,4,0,0,0
+#-------------------------------
+[HOLLOW_TEO,Teo,200]
+Items = SUPERPOTION
+LoseText = Tell my sister— no. Don't tell her anything.
+Pokemon = ARROKUDA,18
+    Moves = AQUAJET,BITE,FURYATTACK,AGILITY
+    Ability = SWIFTSWIM
+    Item = ORANBERRY
+    Nature = ADAMANT
+    IV = 4
+    EV = 0
+Pokemon = CHEWTLE,19
+    Name = Snapper
+    Moves = BITE,WATERGUN,PROTECT,TACKLE
+    Ability = STRONGJAW
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 4

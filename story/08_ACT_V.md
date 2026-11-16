@@ -42,19 +42,22 @@ In the dusk-chapel at the Great Tree's roots, Celestine gives the PC the **compl
 > *not chained, not broken, not bought, not crowned:*
 > *given back, as a gift is found.*
 
-Celestine: "I've been waiting for you for forty years, little colorless thing. Valen reads 'one of no color' as *vessel*. The Hollow read it as *hammer*. Meridian reads it as *key*. It says *walker*. I cannot lie. I can, however, sing."
+Celestine: "I've been waiting for you for forty years, little colorless thing. Valen reads 'one of no color' as *vessel*. The Hollow read it as *hammer*. Meridian reads it as *key*. It says *walker*. I cannot lie. I can, however, sing. These are the verses I sing." (Her phrasing is exact and deliberate. On the Ruin Route she admits there's a verse she stopped singing.)
 
 ### K7 (the Great Tree's roots)
 1. Kestrel, Meridian's sponsored Festival entrant with 18 badges, arrives on a Directorate skiff. He's here to stop the PC going to Crownhaven, not for Meridian.
    > *"They all want to use you. Valen wants a lock. Voss wants a key. Your Hollow friends want a crowbar. Stay out of Crownhaven and let me end it. I'll beat Valen in front of the whole world and make him say her name."*
 2. **K7** on the Fairy Tale field. Kestrel insists he's the knight and the PC is the dragon. If the PC's Bond with him is high, he flinches mid-battle.
 3. After the battle:
-   - **CHOICE `CH18_KESTREL_RING`:** if the PC has **Morwen's Ring** (Ch15), give it to him now or keep it for later.
+   - **CHOICE `:ch18_kestrel_ring`:** if the PC has **Morwen's Ring** (Ch15), give it to him now or keep it for later.
      - Give it now: Kestrel's Bond goes up, and his Redeemed path becomes more likely. He doesn't say thank you. He puts it on.
      - Keep it: the ring can be given at the SF instead, for a bigger moment if he's Redeemed.
-4. Kestrel leaves for Crownhaven: "Don't come. I mean it. ...You're going to come. Fine. Then don't lose before you reach me."
+4. **Prompt: Stay out of Crownhaven?** (*Yes* / *No*.) *Yes* triggers **Game over `GO_STAY_OUT` "Somebody Else's Story"**: the PC does what everyone has told them since the ferry, and the Engine takes Kestrel instead.
+5. On *No*, Kestrel leaves for Crownhaven: "Don't come. I mean it. ...You're going to come. Fine. Then don't lose before you reach me."
 
-### GO-18 "Fair Bargain" (proposed)
+**Optional thread: cameo sidequest "Dreamwalker" (Shiv).** See `design/CAMEOS.md`. In Gloaming's dusk-chapels, a grinning stranger keeps appearing in the townsfolk's dreams. He says he's met the PC before, on a ferry.
+
+### Game over `GO_FAIR_BARGAIN` "Fair Bargain"
 Gloaming's lantern-moth market offers bargains. One stall promises "the answer to your mother's last question". Accepting without asking the price triggers it. Celestine has warned the PC on arrival: "In Gloaming, always ask what it costs *before* you say yes." *Epitaph: "The price was your name. You are very happy now, as a lantern-moth, and you will glow at every dusk."*
 
 ---
@@ -70,8 +73,8 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 ### The Dominar (optional political scene, `DOMINAR_SWAYED`)
 - The PC can petition the Dominar in his war-tent. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
 - Persuading him to fly *for* Crownhaven instead of *against* Zenith requires:
-  - the Light Stone sent to Sigrun or Wyrmrest (`CH8_LIGHTSTONE`), and
-  - one of: the **Arbiter Blueprints** or the **Larch Papers** as proof, or Sigrun's Bond high enough that she speaks for the PC.
+  - the Light Stone sent to Wyrmrest (`:ch8_lightstone` = wyrmrest) **plus** proof (the **Arbiter Blueprints** or the **Larch Papers**), **or**
+  - Sigrun's Bond ≥ 4, so that she speaks for the PC (`:ch19_dominar`).
 - Success: "If the god is in chains, then dragons will break them. Not for the Accord. For the god." His legions are present in the hijack.
 - Failure: the legions march on Zenith during the Festival. In the epilogue, war is narrowly averted, or not, depending on the ending.
 
@@ -79,12 +82,12 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 1. Sigrun won't let the PC challenge her until they walk the **Wyrmscar Rift** to the Draco Plate with her and **speak aloud what they intend to do at the Festival**.
 2. **Sigrun's confession** on the walk:
    > *"He trained me to be his successor. Then he told me I'd never survive the Crown, and I was relieved. Do you understand? Relieved. And then he went looking for you. I knew. For two years I knew, and I let it happen, because it meant it wasn't me."*
-3. At the Rift's heart, at the brazier over the Draco Plate, the PC speaks. This is an **authored line** and also a soft commitment that the ending checks (Narrative Systems owns how much weight it carries). **CHOICE `CH19_OATH`:**
+3. At the Rift's heart, at the brazier over the Draco Plate, the PC speaks. This is an **authored line** and also a soft commitment that the ending checks (Narrative Systems owns how much weight it carries). **CHOICE `:ch19_oath`:**
    - **"I'm going to give them back."** (Return)
    - **"I'm going to keep them safe. Whatever it costs me."** (Keep)
    - **"I don't know yet. I'm going to find out with my eyes open."** (Open)
-   - *(Only if Resonance leans Ruin:)* **"I'm going to end it. All of it."** (Ruin flavor; Sigrun draws her blade but lets them pass, horrified.)
-4. **GO-19 "Liar's Pyre" (proposed).** A fifth, hidden option appears only if the PC has *lied* in at least one earlier Ashkaar-flagged conversation: "Whatever you want to hear." Foreshadowing: the Ashkaar gate-guard's "say true or say nothing", and the brazier oath. The fire answers. *Epitaph: "Ashkaar burns liars. It is the oldest law, and the dragons remember it even when men forget."*
+   - *(Only if Resonance ≤ −2:)* **"I'm going to end it. All of it."** Sigrun draws her blade but lets them pass, horrified.
+4. **Game over `GO_LIARS_PYRE` "Liar's Pyre".** A fifth option is always offered: "Whatever you want to hear." Foreshadowing: the Ashkaar gate-guard's "say true or say nothing", and the brazier oath. The fire answers. *Epitaph: "Ashkaar burns liars. It is the oldest law, and the dragons remember it even when men forget."*
 
 ### Reshiram (Ashkaar's legendary arc)
 1. Any true answer wakes the **Light Stone**, which has hung in Wyrmrest's Rift-shrine since Ch8 if it was sent there, or which arrives carried by a Hearthguild runner if it wasn't.
@@ -106,33 +109,27 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ## CHAPTER 20 — "The Festival of Champions" (Crownhaven, Festival week)
 
+> **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, and Narrative Systems is rebuilding them (`story/10_CHOICES_ENDINGS.md` §3). Requests for new original entrants go to 03_CAST. Draw stagings below are written for the candidates already confirmed; slots marked *(rebuilt draw)* get their scenes when NS names the entrant.
+
 ### Day 0: Arrival
 1. **Crownhaven** is white stone and bells in the caldera. Upper Crownhaven is festooned with **Tamsin's eighteen banners**, woven since Ch10. The **Meridian Prism Arena** gleams where the old grounds were, too new.
-2. Every faction is here:
+2. **The Consent display.** By Day 1 each Warden's banner hangs **white** (they would let go) or **grey** (they won't). It is Tamsin's private reading of her colleagues, and the player can read it. These are the Consent conditions made visible (NS §6.2).
+3. Every faction is here:
    - Meridian runs security under a Council vote that Anja's swing vote couldn't stop.
    - The Lantern Hollow are disguised as Choir porters.
    - The kings are in the observers' gallery: Caedmon for Elowen, Eirik, the Dominar's herald, Kassan, Dask.
    - **Envoy Delphine Okoro** of the Concert, deciding on Severance.
-3. **The Veil Gate opens** in Crownhaven's mirror-plaza. Archseer Dask officiates, and **Giratina's eye** fills the Gate as each visiting champion steps through from their own world. See `design/CAMEOS.md`:
-   - **Lin** arrives without her Arceus ("it wouldn't come. it knew where i was going.").
-   - **Amaria** and (if drawn) **Titania**.
-   - **Shelly**.
-   - **Alexandra**.
-   - **Venam** (and, if drawn, **Melia**).
-   - **Shiv**, who greets the PC: "Met you already. You were standing on a ferry, glowing like a lighthouse."
-   - **Garret**.
-4. **The Draw** is choice-driven (Narrative Systems).
-   - Story staging: the Hierophant draws lots from a crystal bowl at the Basilica steps.
-   - Velmoran entrants: the PC, Kestrel, Juno and the Wardens Kaito, Nyx, Odessa, Celestine and Sigrun by default, plus Valen as reigning Sovereign.
+4. **The Veil Gate stays shut.** The Festival used to host champions of other worlds, until the Synod sealed the Gate in AF 230 (01_WORLD_LORE). Archseer **Dask** refuses Hollis's request to reopen it "for prestige": "The Glass is leaking already. I won't open a door in a wall that's falling down." Foreign places in the bracket go to original **Concert champions** from across the strait *(rebuilt draw)*.
+5. **The Draw.** The Hierophant draws lots from a crystal bowl at the Basilica steps. Velmoran entrants: the PC, Kestrel, Juno, the Wardens Kaito, Nyx, Odessa, Celestine and Sigrun by default, and Valen as reigning Sovereign. Seeds can be **yielded** (see Day 2).
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
 1. **The procession.** At dusk, eighteen Wardens descend the Sovereign's Stair into the Prism Arena, each carrying their Plate in a reliquary, in gym order to the counting rhyme sung by the Choir:
    - Tamsin (Insect)
    - Dorian (Blank)
    - Marisol (Splash)
-   - Rook (Zap, still cracked, carried in a cradle)
+   - Rook (Zap, still cracked, in a cradle; if Rook was fired in Ch16, a Meridian officer carries it, and Rook watches from the crowd)
    - Sahar (Earth)
-   - Corvin (Toxic, carried by a Choir porter in his mask if he's absent)
+   - Corvin (Toxic; carried by a Choir porter in his mask unless `CORVIN_FREED`)
    - Brann (Flame)
    - Kaito (Fist)
    - Juno (Meadow)
@@ -141,67 +138,72 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
    - Ilsa (Mind)
    - Bastian (Stone, leaning on Pip)
    - Ysolde (Spooky)
-   - Magnus (Iron; if `MAGNUS_EXPOSED`, a Cogsworth deputy carries it under guard)
+   - Magnus (Iron; under guard if `MAGNUS_EXPOSED`)
    - Nyx (Dread)
    - Celestine (Pixie)
    - Sigrun (Draco)
 
    Each sets their Plate into a pylon of the **Concordance Ring**.
 2. **The Tuning.** Valen in white, the Crown on his brow, the grey glove *off*. The arena sees his crystal arm for the first time, and a murmur runs through forty thousand people. The Choir sings the half-Hymn. The Ring lights in eighteen colors, and the sky over Crownhaven ripples.
-3. **The PC's vision.** The PC's shard resonates violently. The world goes white. In the white, a vast shape of light with eighteen empty places in its wheel opens one eye:
+3. **The PC's vision.** The shard resonates violently. The world goes white. In the white, a vast shape of light with eighteen empty places in its wheel opens one eye:
    > *"...Little light. You have carried me far."*
 
    The PC collapses in the stands. Valen sees. Ilsa, in the Warden ranks, takes her earmuffs off and *flinches* at her father's pain.
-4. **Rook's leak** (if held in Ch16): the Spire footage of Kroll with a Meridian keycard plays on the arena's own screens, hijacked by Rook's Rotom. The crowd turns. Voss, in his box, doesn't blink: "Rogue contractor. The inquiry continues." Meridian's polling drops, and the Concert envoy takes notes.
+4. **Rook's leak** (if `:ch16_rook` = hold): the Spire footage of Kroll with a Meridian keycard plays on the arena's own screens, hijacked by Rook's Rotom. The crowd turns. Voss, in his box, doesn't blink: "Rogue contractor. The inquiry continues." Meridian's polling drops, and the Envoy takes notes.
 
-### Day 2: Round of 16
-**PC vs Juno (J4, default)** under the arena's lights. Juno, joyful and nervous: "We started on the same dock. Let's see who's grown more." The fields cycle on the Prism Arena (`:PRISM_ARENA` uses gym fields). Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`.
+### Day 2: Round of 16 ("someone from your past")
+Story staging for each R16 candidate (draw rules: NS §3.2):
+- **Marisol, by Right of Grievance** (Teo died, and her Bond ≤ 2). An old Ebb Guild custom lets a wronged party claim a match. **Kaito** stands and yields his invitation to her without a word. Marisol: "Let's see you run past *me*."
+- **Anja** (exposed in Ch11). **Odessa** gives Anja her place: "She's owed a swing." Anja: "You threw me to the court. Fine. Ice remembers."
+- **Rowan, "the Gardener"** (Rowan alive, mercy pleaded at the tribunal, Hollow Standing ≥ 4). Rowan enters masked under a false name. **Juno** gave him her own invitation: "One last garden, child. Then I'm done with masks." If Rowan drowned at the Fault, this candidate doesn't exist.
+- **Juno (J4, fallback).** Joyful and nervous under the arena's lights: "We started on the same dock. Let's see who's grown more." The fields cycle on `:PRISM_ARENA`. Her ace is Tsareena, with **Ogerpon** in her party if `OGERPON_TRUSTED`. If she's displaced by Marisol or Anja, she takes the yielded seed, loses her first match, and opens her **Garden Match** exhibition.
 
-**Draw variants** (story text for the Narrative Systems rules):
-- **Someone you wronged:**
-  - **Marisol**, if Teo died and her Bond is low: "Let's see you run past *me*."
-  - **Tamsin**, if exposed and her Bond is low: "You tore my thread in front of everyone. I mended it. Watch."
-  - **Anja**, if exposed: "You threw me to the court. Fine. Ice remembers."
-- **Rowan**, in disguise, entering under a false name with Juno's blessing (high Hollow Standing plus mercy at the tribunal): "One last garden, child. Then I'm done with masks."
+**After the match: the garden court.**
+- If Rowan lives, the PC finds Juno and Rowan in the arena's garden court, sitting apart on the same bench. If the PC carries **Venam's Testimony** and hasn't played it yet, they can play it here: *"I could hear everything. Everyone who sat with me."* Rowan sits down on the grass and cries, and Juno takes his good hand. It's the first time they've touched since Ironreach.
+- Without the testimony, Juno does it herself, more slowly: "Corvin says they dream. I'm going to believe him."
+- If Rowan drowned, Juno sits alone with Elin's pressed lily from the Bride Tree.
 
-**After the match: Venam's testimony** (key Good-ending setup). Venam, eliminated or not, finds Juno and Rowan in the arena's garden court:
-> *"I was stone once, back home. I could hear everything. Everyone who sat with me. Talk to your aunt. She's listening."*
-
-Rowan sits down on the grass and cries. Juno holds his good hand. This is the first time they've touched since Ironreach.
-
-**Other R16 results** (default): Lin beats Nyx. **Kestrel beats Shiv** with the Gauntlet, and Shiv: "Your rival's dreaming somebody else's dream." Garret beats Kaito in the Lucario mirror. Valen beats Odessa, who loses with style. Alexandra beats Celestine. Venam beats Shelly. Sigrun beats Amaria.
+**Other R16 results** are per the rebuilt draw. Story requirements:
+- **Kestrel** advances with the Gauntlet, and his opponent notices something is "driving" his Pokémon.
+- **Valen** advances. If Odessa wasn't displaced, he beats her, and she loses with style.
+- **Sigrun** advances.
 
 ### Day 3: Exhibitions and the Festival Grounds
-- **Exhibitions:** Shiv, Amaria, and Shelly (a double battle) are now available.
 - **The Eevee Octave** (Eeveelution gauntlet). Eight Glassfall orphans raised by the Choir, each beside a different Imprint, fight a back-to-back gauntlet in the Choir gardens, each fielding a different Eeveelution. It ends with leader **Vesper Lindqvist**'s full Eeveelution team on a field that shifts to match whichever Eeveelution is active.
   - Vesper, gentle: "We were all born the year the Crown broke. The Choir says we're lucky. I think we're just... what was left."
-  - Reward: a *Prism Ribbon* for Understudy. If Understudy has evolved, Vesper notes which Imprint "claimed" it.
-- **Festival grounds side content:** the champions' plaza; the **Concordance Spire** (Battle Tower) under construction, a teaser; street food from every kingdom; Dorian rehearsing in secret.
-- **Diplomacy, Envoy Okoro (`ENVOY_PERSUADED`).** The PC can bring her proof that the Bleed is *caused* (the Larch Papers, the Arbiter Blueprints, Venam's testimony) and so curable, not contagious. Persuaded, she recommends against Severance. Unpersuaded, she drafts it.
+  - Reward: a Prism Ribbon for Understudy. If Understudy has evolved, Vesper notes which Imprint "claimed" it.
+- **Conditional exhibitions** (NS §3.6, original characters only):
+  - **Juno's Garden Match**, if she wasn't the PC's R16.
+  - **The Ebb Guild match** with Marisol while Teo heckles from the stands, if Teo was saved and Marisol is close.
+- **Festival grounds side content:** the **Concordance Spire** (Battle Tower) under construction, a teaser; street food from every kingdom; Dorian rehearsing in secret with Celestine.
+- **Diplomacy with Envoy Okoro (`:ch20_envoy`).**
+  - **Proof** needs **two of three**: the **Larch Papers**, the **Arbiter Blueprints**, and **Venam's Testimony** (cameo sidequest, Ch7). Together they show the Bleed is *caused* and so curable, not contagious. Okoro recommends against Severance (`ENVOY_PERSUADED`).
+  - **Plea:** she listens and drafts Severance anyway, "with regret".
 
-### Day 4: Quarterfinal
-**PC vs Lin** (default; `FESTIVAL_LIN`, cap 92). The hardest non-boss trainer in the game.
-- Mid-battle: "you're carrying it, aren't you. i can hear it. it's so *loud* in you."
-- After the match, on the empty stands:
-  > *"you want to know what happens when you put a god in a box? it's quiet. for a while. then it isn't. it doesn't want to be held. nothing that big wants to be held. give it back before someone teaches it to hate you."*
-- Her line is the outside confirmation of the Return.
+### Day 4: Quarterfinal ("the stranger")
+**The PC vs a stranger** *(rebuilt draw)*. The story job is unchanged from earlier drafts: an outsider's honest view of the PC's choice, delivered in a hard fight at cap 92.
+- The fallback entrant is a headline **Concert champion**, an original character NS will request for 03_CAST. Their post-match line must land the outside confirmation of the Return: *something that big doesn't want to be held.*
+- Conditional candidates follow the same rule, reframed for original characters: one reading the PC's Resonance, one asking whether the Fixed wake if the oath was Keep, one noticing a Fallen Kestrel, and one for a PC with many close Bonds.
 
-**Draw variants:** **Melia** (high Bonds overall): "Everyone keeps telling you what you're *for*. Have you decided yet?" **Titania**, **Garret** or **Alexandra**. Each has the same structural job: an outsider's view of the PC's choice.
-
-**Other QF** (default): Kestrel beats Garret. Garret afterward, to the PC: "His Pokémon are being driven by something that isn't him." Valen beats Alexandra. Sigrun beats Venam.
+**Other QF:** Kestrel advances, and Valen advances. Sigrun advances, unless the rebuilt draw places her elsewhere.
 
 ### Day 5: The Night of Masques, the audience, Little Owl
-- **Exhibitions:** Garret, Alexandra, and Venam become available.
 - **Corvin**, privately, after treating Valen in the Sanctum: "He has weeks. Maybe. He's holding the Plates quiet *right now*, with his body, every hour since the ceremony. He'll fight you tomorrow on what's left."
 
 **The Night of Masques: "The Gilded King."**
-1. In the Basilica square, **Dorian** stages Ansel Crewe's banned play for the first time in 248 years. **Amaria** voices **Princess Maren's lament**, and the Saltmere Players wear the Hollow's ogre masks *as the chorus*.
+1. In the Basilica square, **Dorian** stages Ansel Crewe's banned play for the first time in 248 years. **Celestine**, who cannot lie, voices **Princess Maren's lament**, and the Saltmere Players wear the Hollow's ogre masks *as the chorus*.
 2. The square watches the true Prismfall: the Blight, the chain, the god breaking itself, the city drowning, the daughter's penance.
 3. Chancellor **Hollis** sends the Wardguard to stop it. **Kaito** (and, if alive, **Teo**'s strikers) stand in the way, and the guard doesn't push.
 4. When the actor playing the Gilded King says *"If heaven will not kneel, we'll build a chain"*, every head in the square turns to the Meridian box.
 5. **Voss** stands and applauds. Alone. Warmly.
    > *"Bravo. They finally cast the king correctly."*
-6. **GO-20 (alt) "Encore" (proposed, optional).** In the play's last scene, Dorian ad-libs a call for "the colorless child" to come on stage. If the PC goes up *and* tells the crowd what they carry, with Meridian Standing low and Rook's leak not yet played, Kroll's sniper in the bell tower ends it. Foreshadowing: Nyx's earlier "Don't make them choose." Narrative Systems may cut this if the GO count is high. *Epitaph: "It was the greatest performance in Saltmere's history. The run was one night."*
+
+**Calla's defection (`:ch20_calla`, who lives).** Only offered if someone inside is already moving (`:ch16_rook` = hold, or `MAGNUS_KEPT_FAITH`).
+- In the crowd after the play, **Calla Wren** finds the PC, shaking, still in her Meridian lanyard. She can get the arena's power schematics to Larch.
+  > *"I scanned you on the dock. I photographed the screen. I've been sending him your life for six months. Let me do one thing that isn't that."*
+- **Shelter her** with Edda's boat. She brings the partial schematics she already has: one crack in the Engine. She lives.
+- **Send her back** for the full set: two cracks. Kroll finds her in the Spire stairwell, and she doesn't come back. The schematics arrive by Gale Post at dawn, with a smear of blood on the envelope.
+- **Turn her away:** "Then I'll just — go home, I suppose." She leaves, and nobody sees her again.
 
 **Valen's audience (the PC speaks).** Valen summons the PC to the **Sovereign's Sanctum**: candlelight, a camp bed, his crystal arm resting on a cushion like something borrowed. He doesn't defend himself. He explains.
 > *"Every ten years I bring the Plates home to Crownhaven, and every ten years Velmora *endures*. You noticed I never said 'thrives'. Nobody ever notices."*
@@ -210,20 +212,23 @@ Rowan sits down on the grass and cries. Juno holds his good hand. This is the fi
 >
 > *"When you beat me tomorrow — and you will — I'll put the Crown on you. The splinter in your heart will make it whole. You'll hold the Plates quiet for a hundred years, and you won't age as fast as I did. You'll be... very lonely. I'm sorry. I have no other door."*
 
-**The PC answers** (authored line, **CHOICE `CH20_AUDIENCE`**):
+**The PC answers** (authored line, **CHOICE `:ch20_audience`**):
 1. **"There's another door. The Hymn. We give them back."** (Return)
    - Valen: "And let eighteen cities go dark? Rimeholt drowns, Cindervault freezes, Verdance's fields fail in a year..."
    - The PC can answer with the Hymn ("given back, as a gift is found") if they hold the complete version.
    - Valen, very quietly: "...Maren wrote that. I thought it was a poem."
 2. **"Then I'll wear it. Somebody has to."** (Keep) Valen weeps, once.
 3. **"You don't get to decide that for me. Nobody does."** (Refuse) Valen: "Good. Then decide it yourself, tomorrow. That's all I ever wanted, and I never had the courage to want it out loud."
+   - If the PC refuses with a cold Bond, Ilsa never came, and the telemetry still runs, this sets **`VALEN_COLLAPSED`**. Voss's pre-ignition drains him overnight, and he can't stand for the Final.
 
-**GO-21 "Early Crown" (proposed).** Valen offers, desperate, to crown the PC *tonight* and skip the Final, "so I don't have to hurt you first." Accepting triggers it. Foreshadowing: Ilsa's earlier warning, "Don't let him hand you anything tonight. He's not thinking, he's *drowning*." The Crown is incomplete without the Engine's cradle, which Voss has. The half-Tuning Fixes the PC in the Sanctum, and Voss's men collect the keystone from the Sanctum floor. *Epitaph: "The Crown was whole for one second. Then it was Meridian's."*
+**Game over `GO_EARLY_CROWN` "Early Crown".** Valen offers, desperate, to crown the PC *tonight* and skip the Final, "so I don't have to hurt you first." Accepting triggers it. Foreshadowing: Ilsa's earlier warning, "Don't let him hand you anything tonight. He's not thinking, he's *drowning*." The Crown is incomplete without the Engine's cradle, which Voss has. The half-Tuning Fixes the PC in the Sanctum, and Voss's men collect the keystone from the Sanctum floor. *Epitaph: "The Crown was whole for one second. Then it was Meridian's."*
 
-**"Little Owl"** (Ilsa's side quest culmination, `ILSA_RECONCILED`). If the PC completed her quest steps, carrying her messages to her father through Acts III–V, Ilsa comes to the Sanctum after the audience.
+**"Little Owl"** (Ilsa's side quest culmination, `:sq_little_owl`). If the PC completed her quest steps, carrying her messages to her father through Acts III–V, Ilsa comes to the Sanctum after the audience.
 > *"You chose a country over a daughter. Fine. Then save the country, Father. Don't make a child pay for it."*
 
 Valen: "...Little owl." It's the name from her childhood, which the player heard in the Mindscape in Ch13. She stays the night. If not completed, she watches the Sanctum door from the colonnade and doesn't go in.
+
+**Morwen's Echo** (conditional exhibition, NS §3.6: Kestrel and Ysolde reconciled, and the K6 line was Resolve). After midnight, Ysolde lights the Hollow Cathedral's lantern in a Crownhaven chapel. **Morwen's echo** fights the PC once, gently, "to see what I bought."
 
 **INTERLUDE V — "The Last Night"** (playable as **Valen**).
 1. Short and quiet. The player controls Valen in the Sanctum before dawn.
@@ -234,21 +239,21 @@ Valen: "...Little owl." It's the name from her childhood, which the player heard
 3. He walks to the window and talks to **Zygarde** (a single Cell glowing on the sill): "Order, not justice. I chose order. Was I wrong?" The Cell pulses once. The player decides what that means.
 
 ### Day 6: Semifinal — Kestrel (K8)
-**Kestrel's state** (Narrative Systems decides; story content for both):
-- **Kestrel (Redeemed)** (high Bond, ring given or K6 answered with Resolve or Blunt, and so on). He fights with the Gauntlet at first. Mid-battle, at the first field-cycle, he looks at the Gauntlet's light and **tears it off**, then throws it across the arena floor:
+**Kestrel's state** (`KESTREL_FALLEN` or not; NS rules):
+- **Kestrel (Redeemed)** (fallback). He fights with the Gauntlet at first. Mid-battle, at the first field-cycle, he looks at the Gauntlet's light and **tears it off**, then throws it across the arena floor:
   > *"No. Not like this. If I beat you, I beat* you*."*
 
   He finishes with **Morwen's Mismagius** and his **Aegislash**, honest and ferocious.
-- **Kestrel (Fallen)** (low Bond, Meridian-aligned, ring kept or refused). He *keeps* the Gauntlet on. His Pokémon glow with stolen Imprint, the field cycles under his command, and he fights like someone drowning. After the loss, the Gauntlet overloads and burns his hand, and Voss's men carry him off "for medical attention". In the finale he is Voss's instrument (see the hijack variants) unless the PC reaches him.
+- **Kestrel (Fallen).** He *keeps* the Gauntlet on. His Pokémon glow with stolen Imprint, the field cycles under his command, and he fights like someone drowning. After the loss, the Gauntlet overloads and burns his hand, and Voss's men carry him off "for medical attention". He reappears in the hijack harnessed into the Engine (Ch21).
 
 **After the match, Morwen's letter.** **Ysolde** walks onto the arena floor and gives Kestrel the sealed letter at last. He reads it there, in front of forty thousand people, and the arena screens tactfully cut away. The text (Key Item, readable later):
 > *"Kestrel. If you're reading this, you're ready, or Ysolde's given up waiting. Both are fine. I didn't fail. I chose. There was a child in the light and I was nearest, and I'd have wanted someone to choose you. They'll call me a disgrace. Let them. Be a Vane anyway — be the kind that's nearest when it matters. I love you more than my seat, more than my name, more than my Plate. That's the whole letter. — Mum."*
 
-- **Redeemed:** Kestrel sits down on the arena floor. If the PC still has **Morwen's Ring**, they can give it now (CHOICE). Then:
+- **Redeemed:** Kestrel sits down on the arena floor. If the PC still has **Morwen's Ring**, they can give it now. Then:
   > *"...Then you take him. Take him for both of us."*
 
-  `KESTREL_YSOLDE_RECONCILED` is set if Ysolde's Bond and Kestrel's are both high: he lets her sit beside him.
-- **Fallen:** he doesn't read it. Ysolde keeps it, and it becomes a hijack beat.
+  If both Ysolde's and Kestrel's Bonds are high (`KESTREL_YSOLDE_RECONCILED`), he lets her sit beside him.
+- **Fallen:** he doesn't read it. Ysolde keeps it. If the PC kept `:ch12_letter`, they can quote Morwen to him in the Engine instead.
 
 **Other SF** (default): **Valen beats Sigrun.** Sigrun entered to win the Crown herself and spare the PC, and Valen beat her *to protect her*. She leaves the arena without a word. The PC finds her on the Basilica roof: "He beat me with an arm made of glass. I've never been so angry in my life."
 
@@ -265,15 +270,16 @@ See Chapter 21.
 3. **The battle** on `:PRISM_ARENA`, with fields cycling. His ace is **Zygarde** (Complete Forme on its last bar: "Order, not justice. I chose order.").
 4. Mid-battle, every time the field cycles, his crystal visibly spreads, from shoulder to throat.
 5. **Draw variant, "Valen or his successor":** if Valen has collapsed before the Final, the PC fights the Sovereign-designate instead.
-   - Valen collapses if: Ilsa was never reconciled *and* the PC refused the audience coldly *and* the telemetry is intact, which means Voss's pre-ignition drains him (Narrative Systems).
-   - **Sigrun** (if Sigrun's Bond is high), or **Brann**, who fights in tears: "He asked me to. Last thing he asked."
+   - This happens if `VALEN_COLLAPSED` is set (Ch20 audience).
+   - **Sigrun** (Bond ≥ 5): "He beat me with an arm made of glass. Now he can't stand. So it's me."
+   - Otherwise **Brann**, who fights in tears: "He asked me to. Last thing he asked."
    - Valen watches from a stretcher, which puts him in position for the Ring later.
 6. **After the PC wins:** Valen yields, smiling. "Velmora has a new champion."
 
 ### The Coronation
 1. Valen lifts the **Crown** from his head and walks to the PC at the arena's heart, inside the Concordance Ring.
 2. The Choir sings, and the crowd is on its feet.
-3. **CHOICE `CH21_CROWN`:** kneel to receive it / stand / step back. Each is flavor that the Narrative Systems endings may read.
+3. **CHOICE `:ch21_crown`:** kneel to receive it / stand / step back. Each is flavor that the Narrative Systems endings may read.
 4. The moment the Crown is raised over the PC's head, the eighteen Plates in the Ring *scream*.
 
 ### The Hijack (default hijacker: Voss)
@@ -283,7 +289,7 @@ See Chapter 21.
 4. The Crown is torn from Valen's hand into the cradle. The PC is pinned by their own shard's pull, half-kneeling at the cradle's palm.
 5. **Voss** descends from his box onto the arena floor in a Meridian Engine-harness. He's calm, almost apologetic, wearing his gold sunburst pin.
    > *"You carried my key through eighteen doors. Let me show you what it opens."*
-6. **GO-22 "His Hand" (proposed).** Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt." Taking it (on any path except `VOSS_ACCEPTED`, where Narrative Systems routes to an ending instead) triggers it. Foreshadowing: Lin's warning, Kestrel's K7 speech, Celestine's "not chained, not bought". *Epitaph: "It didn't hurt. That was the cruelest part."*
+6. **Game over `GO_HIS_HAND` "His Hand".** Voss offers his hand: "Stand up. Stand with me. It doesn't have to hurt." Taking it (on any path except `VOSS_ACCEPTED`, where Narrative Systems routes to an ending instead) triggers it. Foreshadowing: Lin's warning, Kestrel's K7 speech, Celestine's "not chained, not bought". *Epitaph: "It didn't hurt. That was the cruelest part."*
 
 **The allies move.** Each beat fires only if its flag is set. Show as a fast montage, one line each:
 - **Rook** cuts Lumen's grid from the arena feed: "First time Lumen's been dark in ten years. Kinda pretty." The Engine flickers.
@@ -351,7 +357,7 @@ See Chapter 21.
 4. **Ilsa** (if reconciled) gives Arceus's voice to everyone in the arena:
    > *"Little light. You have carried me far. You may give my heart back, and the rest of me with it. Or you may keep what was borrowed, and wear it, and hold this land quiet in your two hands for a hundred years. I will not take what is not given. I learned that here."*
 
-**The final decision.** The PC speaks (authored), **CHOICE `CH21_FINAL`**. Narrative Systems may add or restrict options by state:
+**The final decision.** The PC speaks (authored), **CHOICE `:ch21_final`**. Narrative Systems may add or restrict options by state:
 - **"Go home. Take them with you."** (Return)
 - **"I'll keep them. I'll keep everyone safe."** (Keep)
 - *(Ruin, only on the Ruin Route or at extreme Ruin)* **"No. No more gods."** (Unmaking)

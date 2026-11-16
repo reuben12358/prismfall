@@ -19,10 +19,10 @@
 
 **Conflict.**
 - A drill-site explodes. The **Hollow** freed Pokémon that Meridian had been using as living drill-cores (Excadrill and Drilbur fitted with Lattice collars). The Directorate arrives with the Mandate's new powers and starts arresting caravan kids.
-- **CHOICE `CH6_DRILLSITE`:**
+- **CHOICE `:ch6_drillsite`:**
   - Help the Hollow get the freed Pokémon into the dunes: Hollow Standing up, Meridian Standing down. Directorate ambushes follow in Ch7.
   - Help the Directorate secure the site: Meridian Standing up, and you earn a "commendation" (a lightly sinister Key Item: a Mandate Pass that later opens checkpoints).
-  - Get Sahar to invoke the Warden's right of sanctuary over the children: Accord Standing up and Sahar's Bond up. The Directorate backs off, furious.
+  - Get Sahar to invoke the Warden's right of sanctuary over the children: Accord Standing goes up and the Directorate backs off, furious. (Choosing the Directorate here is Sahar's Consent refusal in Act V.)
 
 **Gym 5 (`:DESERT`).** Thematic note: *dig down, because what you need is buried.* Sahar is patient, dry and coughing: "The desert keeps everything. It just doesn't keep it where you left it." Her ace is **Claydol**. She gives Strength via her excavators.
 
@@ -39,12 +39,12 @@
 
 **K3 (after Gym 5, at the Ossuary exit).** Kestrel has been following the Hollow's trail from Ebbmouth and arrived in time to see the murals over the PC's shoulder.
 - After the battle he finally says it aloud: "Everyone keeps telling me to let it go. My mother had a seat, and a Plate, and a city that loved her. Then one night she had nothing. Let *what* go?" He lays out the rumor running all over Velmora: **the Mourner is Morwen Vane, alive.** "She wasn't killed by the Bleed. She was *made* to disappear."
-- **CHOICE `CH6_KESTREL_RUMOR`:**
+- **CHOICE `:ch6_kestrel_rumor`:**
   - Encourage him to find out (Kestrel Bond up, and his obsession grows).
   - Warn him it might not be her (Bond down a little now, but it pays off at Ironreach, where he remembers you warned him).
   - Silence.
 
-**GO-05 "Sinkfield" (proposed).** **Sinkfield** (628) is a Bleed zone where the collapsing aquifer and the Earth Imprint have made the sand behave like water. Trigger: ignore Sahar's three warnings ("walk the bones, never the sand") and step off the fossil path to grab a glinting item. Foreshadowing: the Field Notes entry and a caravan-boy's lost sandal sinking slowly. *Epitaph: "The desert kept you. Somewhere else."*
+**Game over `GO_SINKFIELD` "Sinkfield".** **Sinkfield** (628) is a Bleed zone where the collapsing aquifer and the Earth Imprint have made the sand behave like water. Trigger: ignore Sahar's three warnings ("walk the bones, never the sand") and step off the fossil path to grab a glinting item. Foreshadowing: the Field Notes entry and a caravan-boy's lost sandal sinking slowly. *Epitaph: "The desert kept you. Somewhere else."*
 
 **Cliffhanger:** A Gale Post courier finds the PC with a letter from Juno: *"Uncle Rowan's been 'away on Warden business' every time something happens. I'm being silly. Come to Mirefen? I'm helping Dr. Mott with his seed-medicine. Bring snacks."*
 
@@ -64,16 +64,16 @@
 - Warden **Corvin Mott** is gaunt, in a plague-doctor half-mask, and wickedly funny. He runs the Infirmary and its **Quiet Ward**: forty patients at Fixing stages 2–3, some humming, some half-glass, one a child whose hair has turned to salt.
 - His apprentice **Wenlow** (17) is cheerful and clumsy, and introduces the PC to every patient by name. (Players should love Wenlow. Wenlow dies in Ch16.)
 - **Sweetrot.** Pastel mochi-like sweets sold in the **Sweet Market** by smiling vendors of the Sump Barons (**Mother Gutter**'s people). Users go docile, loyal and blissful, and they keep coming back. Corvin's other ward is full of Sweetrot addicts. "It's not a drug. It's a *leash*." This is the Pecharunt seed: the sweets have a faint peach-and-poison smell, and a child's rhyme mentions "the peach that keeps you".
-- **GO-06 "Sweet Tooth" (proposed).** Trigger: accept Sweetrot from a vendor *three times* across the chapter (each offer gets more insistent; Wenlow's warning comes after the first). *Epitaph: "You were so happy. You never wondered why again."*
+- **Game over `GO_SWEET_TOOTH` "Sweet Tooth".** Trigger: accept Sweetrot from a vendor *three times* across the chapter (each offer gets more insistent; Wenlow's warning comes after the first). *Epitaph: "You were so happy. You never wondered why again."*
 
 **J2.**
 - Juno is in the Infirmary helping Corvin brew seed-medicine from Verdance stock. She is luminous with purpose.
 - Alphabetizing his ledgers, she finds an entry from the **night of the Lumen Shatter**: *"R.A. — 2nd-degree Bleed-burn, right palm and fingers. Lightning pattern. Discretion."* Corvin snatches it back too quickly.
 - Juno laughs it off ("R.A., there's loads of R.A.s") and challenges the PC to a spar on the stilt-walk to shake off the feeling (**J2**). Mid-battle line: "He wouldn't. He *wouldn't*."
-- **CHOICE `CH7_LEDGER`:**
+- **CHOICE `:ch7_ledger`:**
   - Say "Rowan Ashby" out loud: Juno's Bond drops sharply and she storms off. At Ironreach she is *less* shattered, because she already knew. This becomes a branch flavor in J3.
   - Reassure her: Juno's Bond goes up. The unmasking hits her full-force.
-  - Ask Corvin directly, privately: Corvin's Bond goes up. He says only, "I'm a doctor. I treat hands. I don't ask whose."
+  - Ask Corvin directly, privately. He says only, "I'm a doctor. I treat hands. I don't ask whose."
 
 **Hollow admin: Brother Wick** (`HOLLOW_WICK`).
 - The PC tracks a Hollow medicine-runner to a drowned chapel on the edge of the **Weeping Fen**, a Bleed zone where rain falls upward and every puddle weeps.
@@ -83,6 +83,8 @@
 **Gym 6 (`:CORROSIVE_MIRE`), a double battle.** Thematic note: *poison is a dose; the right amount heals.* Corvin: "Don't worry. I'm a doctor. I know exactly how much this hurts." His ace is **Toxapex**. The Mirefen ferrymen give the PC Surf.
 
 **Revelation.** That night Corvin drinks bog coffee with the PC on the Infirmary roof. "Do you know why nobody in my Ward is dead? They're not dying. They're *dreaming*. I can see their eyes move under the glass." A beat. "Somebody should find out what they're dreaming about." (This seeds the Good ending's waking and Venam's Act V testimony.)
+
+**Optional thread: cameo sidequest "Sewer Royalty" (Venam).** See `design/CAMEOS.md`. A loud punk girl with a Seviper has fallen through a sewer mirror into Mirefen's runoff tunnels, and she is helping Wenlow drag Sweetrot addicts to the Infirmary. Completing it earns **Venam's Testimony**, a recording of her account of being turned to stone and coming back ("I could hear everything"). It counts as one of the Envoy's proofs in Ch20 and can be played for Juno in Ch10.
 
 **Cliffhanger:** A Hollow broadcast hijacks every screen in Nadir. It isn't the Mourner. It's **Sable**, unmasked mouth, cheerful: *"The Mourner's gone soft. The Hammer hasn't. Cindervault's next. Light for everyone, right?"*
 
@@ -107,18 +109,18 @@
 - **Wick's Hollow faithful**, with a plan to *vent* the pressure by quenching the Imprint with Lake Sallow water piped through the old lava-channels. It's safe but drastic: it turns the caldera to ash for a season.
 - **Dr. Percival Quent's** Meridian team, who want to install "dampers" and keep the tap running. **Meridian admin battle: Quent** (`MERIDIAN_QUENT`), giggling: "Oh, it's *you*. The null reading! Hold still, I've only got one probe."
 - **The Hammer:** a Bereaved squad planting a Splitter on the tap to cause an eruption "Meridian can't cover up".
-- **CHOICE `CH8_CALDERA`:**
-  - **Help Wick vent.** The battle field transitions `:VOLCANIC` → `:ASHEN_WASTE`. The eruption is averted and the forges go cold for months, so Brann's Bond drops at first and recovers later. Hollow Standing goes up, Meridian Standing down. R15 becomes ash.
+- **CHOICE `:ch8_caldera`:**
+  - **Help Wick vent.** The battle field transitions `:VOLCANIC` → `:ASHEN_WASTE`. The eruption is averted and the forges go cold for months, and Brann grumbles about it for a season. Hollow Standing goes up, Meridian Standing down. R15 becomes ash.
   - **Help Quent's dampers.** The eruption is averted, Meridian Standing goes up and the tap keeps running. The Bleed at Ashkaarfall grows (map state), and Brann's Bond goes up ("You kept my forges lit").
   - **Shut the tap down by force** (a harder fight vs Quent plus Directorate). The eruption is averted, Accord Standing goes up and the Dominar is impressed (`DOMINAR` respect +1). Meridian Standing drops hard.
-- **GO-07 "Let Them Listen" (proposed).** Trigger: a Hammer bomber hands the PC the detonator and says "Do it. They'll finally listen." The PC accepts. Foreshadowing: the Field Notes entry on Shatters, and the Lowlight's glass. *Epitaph: "They listened. There was no one left to tell."*
+- **Game over `GO_LET_THEM_LISTEN` "Let Them Listen".** Trigger: a Hammer bomber hands the PC the detonator and says "Do it. They'll finally listen." The PC accepts. Foreshadowing: the Field Notes entry on Shatters, and the Lowlight's glass. *Epitaph: "They listened. There was no one left to tell."*
 
 **Aftermath: the Light Stone.**
 - After the crisis, the Dominar's envoys try to seize the Light Stone in the confusion, and Sigrun stops them herself.
-- **CHOICE `CH8_LIGHTSTONE`:**
-  - Back Brann in keeping it under the Hearthguild: Brann's Bond up, and the Dominar's grudge grows.
+- **CHOICE `:ch8_lightstone`:**
+  - Back Brann in keeping it under the Hearthguild. The Dominar's grudge grows.
   - Suggest it go to Sigrun at Wyrmrest, neutral ground under a Warden: Sigrun's Bond up, Accord Standing up. This seeds `DOMINAR_SWAYED`, because the Dominar respects his daughter's claim more than Brann's.
-  - Say it should go to the Dominar ("it's his people's"): Ashkaar's favor goes up, Brann is hurt, Accord Standing drops. Late payoff: Reshiram's trial at Wyrmrest is harder.
+  - Say it should go to the Dominar ("it's his people's"): Ashkaar's favor goes up and Accord Standing drops. Brann is hurt, and in Act V he won't release the Flame Plate "for a man who gave the Light Stone away" (his Consent refusal). Late payoff: Reshiram's trial at Wyrmrest is harder.
 
 **Revelation.** Brann, drunk and maudlin over chestnuts, lets slip one sentence: "I reset the Crown's stone myself, y'know. After the accident. Ten years back. It was smaller than it should've been." Then he catches himself: "Ach, I'm an old fool. Forget it." The PC's shard throbs once. (Larch notices the PC wince.)
 
@@ -153,7 +155,7 @@
 8. Rowan, bleeding and half-glassed at the shoulder: *"Juno. Don't look at me like that. Look at the flowers. Look at what they're standing on."*
 9. The PC is the only one who can walk into the Bleed to pull Rowan out. Everyone, Valen included, watches them do it.
 
-**CHOICE `CH9_TEO_SABLE` (the act's big choice).** Through the smoke the PC sees two things at once:
+**CHOICE `:ch9_teo_sable` (the act's big choice).** Through the smoke the PC sees two things at once:
 - **Teo Reyes** is pinned under fallen scaffolding at the Bleed's edge. He came with Rowan to stop the Hammer, and he is Fixing fast.
 - **Sable** is running for a Meridian service lift with a comm-device in her hand.
 
@@ -165,13 +167,15 @@ The PC has time for one:
 - **Meridian Directorate** officers take Rowan into **Meridian custody**, not the Accord's, under the Mandate, which just passed in the chaos. Marchetti: "Mandate jurisdiction, Sovereign." Valen allows it.
 - Kestrel stares at Rowan's face for a long time. "...It's not her." He doesn't know whether he's relieved. He walks away into the shafts.
   - If the PC warned him in Ch6: "You said it might not be. I hate that you were right."
-- Juno sits on the Pit's floor in the glass dust. She won't speak to anyone except, if `CH3_JUNO_TALK` was kind, the PC.
-- **CHOICE `CH9_ROWAN_WORDS`:** as Rowan is led away, he looks to the PC. Answer:
+- Juno sits on the Pit's floor in the glass dust. She won't speak to anyone except, if `:ch3_juno_talk` was kind, the PC.
+- **CHOICE `:ch9_rowan_words`:** as Rowan is led away, he looks to the PC. Answer:
   - "Why?": he says, "Ask the Drowned Crown."
   - "I'll look after her": he says, "I know. That's why I'm not afraid."
   - Silence: he says, "You saw what I saw. In the Lowlight. Didn't you?"
 
   Each sets a small Rowan Bond and colors his tribunal in Ch13.
+
+**Optional thread: cameo sidequest "Two Lucarios" (Garret).** See `design/CAMEOS.md`. In the Ironreach Open's undercard, a gruff stranger with a Lucario asks every pit-fighter about a missing girl named Eden. It's available after the Conclave, in the shafts below the Pit.
 
 **Revelation.** Valen crosses the ruined Pit to the PC, whose shoulder is dusted with glass that isn't hurting them. He looks at the glass, then at the PC.
 
@@ -179,7 +183,7 @@ The PC has time for one:
 
 He leaves. Brann, at his elbow, looks back at the PC with an expression of pure grief.
 
-**GO-08 "Pull the Nail" (proposed).** Available only if Hollow Standing is high. Before the attack, Sable approaches the PC in the shafts: "You can walk in the Bleed. You could plant it where no one else can reach." Accepting leads to the Shatter in full, and Juno is Fixed. Foreshadowing: Wick's Ch7 line ("he wants to carry them home") and Sable's broadcast. *Epitaph: "You pulled the nail. The whole house came down."*
+**Game over `GO_PULL_THE_NAIL` "Pull the Nail".** Available only if Hollow Standing is high. Before the attack, Sable approaches the PC in the shafts: "You can walk in the Bleed. You could plant it where no one else can reach." Accepting leads to the Shatter in full, and Juno is Fixed. Foreshadowing: Wick's Ch7 line ("he wants to carry them home") and Sable's broadcast. *Epitaph: "You pulled the nail. The whole house came down."*
 
 **INTERLUDE II — "The Bride Tree"** (playable as **Rowan**, as a flashback that plays *after* the unmasking).
 - The dawn before the Conclave. Verdance's Heartgarden. The player controls Rowan as he waters the **Bride Tree**.

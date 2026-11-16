@@ -2,6 +2,7 @@
 
 > **Tone:** Desolation. Truth arrives in layers, and every layer costs something. A massacre the player can't stop, a rival's world shattering, a beloved mentor's complicity, a villain who is *reasonable*. Keep one warm scene per chapter (a meal, a joke, a Pokémon moment) so the dark has contrast.
 > Conventions as in 04. Map names per WORLD.md (segments 12–15). From the start of Act IV, revisited early maps use **encounter version 1 (Bleed-spread)**.
+> **If Rowan drowned at the Fault (`:ch13_fault` = marchetti):** every Rowan line in Acts IV–V goes to the Lantern Hollow's leader instead: **Teo** if `TEO_SAVED`, otherwise **Thistle** with **Wick**. Juno's scenes reference her uncle's death.
 
 **Act-opening state (after the Fault):**
 - The Bleed has leapt forward everywhere. Briarwick's Glasswood has reached the looms. The Lowlight's glass has spread a block. Saltmere, never once touched by Bleed, has a glass puddle on the promenade, and Dorian has roped it off as "our first miracle, darlings".
@@ -23,10 +24,10 @@
 **The deep seams (hidden-refuge sequence).** Below Meridian's level, Bastian shelters everyone the Accord and Meridian would rather didn't exist:
 - **Professor Larch**, smuggled in by Odessa.
 - Rimeholt refugees.
-- Lantern Hollow faithful: **Rowan**, gaunt, with **Wick** and **Thistle**.
+- Lantern Hollow faithful: **Rowan**, gaunt (or their new leader, if he drowned), with **Wick** and **Thistle**.
 - **Corvin's field hospital**, if `CORVIN_FREED`. That flag comes from the Act III side quest "The Doctor's Cell", available Ch11–13: Corvin was arrested under the Mandate for treating Hollow wounded, and the PC can free him from a Directorate holding barge on Lake Sallow. If he wasn't freed, the hospital is run by a frightened **Wenlow** alone, and Corvin's absence is felt.
 
-Warm scene: a communal meal of date-bread and miners' stew. Rowan and Juno (if she's visited) don't speak, but they sit at the same table.
+Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he and Juno (if she's visited) don't speak, but they sit at the same table. If he drowned, Juno sits with Thistle, who was with him at the end.
 
 **Bastian's account.**
 > *"I've seen three Festivals, two Sovereigns and one crown break. AF 290. I was carrying the Stone Plate in the procession. I was nearest the Choir loft. There was brass behind the loft that had no business in a church, and men in white coats with little gold suns on their pockets, watching dials. When the Crown cracked, the dials jumped. They weren't surprised. They were *pleased*. Then Valen said 'find the child', and Morwen Vane threw herself over a little thing in a Choir ribbon, and the next week Morwen was ruined and nobody ever asked me what I saw. I never told. I was afraid. I'm still afraid. I'm telling you anyway."*
@@ -35,17 +36,17 @@ Warm scene: a communal meal of date-bread and miners' stew. Rowan and Juno (if s
 
 **Larch and the badge case (revelation).** Larch takes the PC's **Meridian badge case** apart on a miner's bench. Inside the lining is a sliver of Lattice-glass and a transmitter.
 - "Every badge you've won, it's recorded your — whatever it is in you — resonating with that Plate. And it's been sending it to Meridian. Voss isn't watching you. He's **tuning** you."
-- **CHOICE `CH14_TELEMETRY`** (major; it feeds the endings):
+- **CHOICE `:ch14_telemetry`** (major; it feeds the endings):
   - **Destroy it.** Voss loses the stream. In the finale the Engine is under-calibrated, but Voss knows immediately and moves faster (Directorate pressure in Ch16–17).
   - **Feed it false data** (Larch's plan, `TELEMETRY_SABOTAGED`). The PC keeps the case and Larch rigs it to send corrupted resonance. Voss's Engine is *miscalibrated* in the finale, which is the strongest single weakening. It's risky: every remaining badge triggers a tense "did he notice?" beat.
   - **Leave it.** It keeps working. This is the road to the Bad ending if other weak points also fail.
-- **GO-13 "Willing" (proposed).** Trigger: Dr. Quent arrives with the raid and offers to "remove the faulty device painlessly, and give you a full Fellowship medical". The PC agrees. Foreshadowing: Larch's flat instruction a scene earlier, "Never, ever let them examine you." *Epitaph: "The exam was painless, as promised. You've been asleep since. Meridian sends flowers."*
+- **Game over `GO_WILLING` "Willing".** Trigger: Dr. Quent arrives with the raid and offers to "remove the faulty device painlessly, and give you a full Fellowship medical". The PC agrees. Foreshadowing: Larch's flat instruction a scene earlier, "Never, ever let them examine you." *Epitaph: "The exam was painless, as promised. You've been asleep since. Meridian sends flowers."*
 
 **The raid.**
 1. **Marchetti's** Directorate raids the seams, hunting Larch and Rowan.
 2. **Admin battle: Marchetti** in the Darkglass gallery (`:DARK_CRYSTAL` after the lamps are shot out).
 3. **Thistle defects openly to the PC's side**, earlier and warmer at high Hollow Standing. Her Pokémon hold the lift-shaft while refugees escape.
-4. **CHOICE `CH14_MARCHETTI`:** after her defeat, the PC can show Marchetti the **Splitter Casing** or the Ironreach comm-device: "Your own Special Accounts bombed Skyreach." With either item, `MARCHETTI_TURNED` becomes possible. She doesn't turn now. She just goes very still, and in the Festival hijack she stands down. Without the evidence, she remains loyal.
+4. **CHOICE `:ch14_marchetti`:** after her defeat, the PC can show Marchetti the **Splitter Casing** or the Ironreach comm-device: "Your own Special Accounts bombed Skyreach." With either item, `MARCHETTI_TURNED` becomes possible. She doesn't turn now. She just goes very still, and in the Festival hijack she stands down. Without the evidence, she remains loyal.
 
 **Transit (segment 13), Ossaria: Duneholt Undersands and Groudon.**
 - On the road to Gravenmoor, the PC passes back through Duneholt. The aquifer has *gone*, the great well is a dry shaft, and Meridian's deep drill has punched through into something hot.
@@ -95,9 +96,9 @@ Warm scene: a communal meal of date-bread and miners' stew. Rowan and Juno (if s
 **K6 (raw, furious).**
 - Kestrel turns on the PC:
   > *"My whole life for you. Do you know what they called me in school? The Glassfall boy. My grandmother spat on her grave. And she was saving YOU."*
-- If `CH12_LETTER` was "sent to Kestrel": he opens with "You sent me her *letter*, and you still came here."
+- If `:ch12_letter` was "sent to Kestrel": he opens with "You sent me her *letter*, and you still came here."
 - The battle is **K6**. His Gauntlet surges with the Cathedral's grief. Mid-battle the field flickers to `:BLEED` for a turn, the Gauntlet overloading.
-- **After K6: the PC speaks (authored line, CHOICE `CH15_KESTREL`).**
+- **After K6: the PC speaks (authored line, CHOICE `:ch15_kestrel`).**
   1. **"I'm sorry. I didn't know. I'd give it back if I could."** Kind: Kestrel's Bond goes up a lot, delayed. He can't accept it now.
   2. **"I was five. She chose. Don't you dare make her choice my crime."** Blunt: his Bond drops now, but it unlocks his Redeemed path in K8, because he respects being fought back.
   3. **"...Your mother saved my life. I'm going to make it worth it."** The Resolve option: his Bond goes up, and Resonance leans Harmony.
@@ -108,14 +109,17 @@ Warm scene: a communal meal of date-bread and miners' stew. Rowan and Juno (if s
 
 She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V for Kestrel).
 
-**GO-14 "Echo" (proposed).** In the Cathedral, after the replay, an echo of **Ines** keeps singing in the Choir loft. A prompt: "Stay and listen?" Choosing to stay *three times* triggers it. Ysolde warns that "echoes are a door that only opens one way", and the PC's own hand turns translucent on the second "stay". *Epitaph: "You stayed for the song. Gravenmoor has one more echo now. It sings harmony."*
+**Game over `GO_ECHO` "Echo".** In the Cathedral, after the replay, an echo of **Ines** keeps singing in the Choir loft. A prompt: "Stay and listen?" Choosing to stay *three times* triggers it. Ysolde warns that "echoes are a door that only opens one way", and the PC's own hand turns translucent on the second "stay". *Epitaph: "You stayed for the song. Gravenmoor has one more echo now. It sings harmony."*
 
 **Transit (segment 14), Giratina's Reverse Depths.**
 - Leaving Gravenmoor through the **Barrow of the Wardens**, where generations of Wardens are buried with replica Plates, the PC finds a barrow-door that opens *downward into the sky*: the **Reverse Depths** (806, `:INVERSE`).
 - **Giratina** waits there. The Fault and the Gauntlet's abuse of the Spooky Plate have torn the Glass, and Giratina is furious and wounded.
 - **Boss battle: Giratina** (multi-bar; Altered, then Origin on the last bar).
 - After the fight it doesn't flee. It *looks* at the PC the way Kyogre did. Story text: *it knows what you carry. It has been guarding the hole your god left for three hundred years.* It lets the PC pass and closes the tear behind them.
-- (It will open the Veil Gate for the Festival champions in Ch20. Post-game: the Distortion Core.)
+- The Glass has been leaking since the Fault, and Giratina's wound is why visitors from other worlds keep slipping into Velmora (the cameo sidequests, `design/CAMEOS.md`). Post-game: the Distortion Core.
+- **Ruin Route trigger** (only with a full Ledger, `ruin_unlocked`). A pane of black glass in the Depths shows Juno on the other side, calling the PC's name: the exact image of `GO_LOOKING_BACK`. The prompt appears again: **Look back?** (`:ch15_look_back`).
+  - *Yes:* it no longer kills you. The reflection steps aside, and the PC walks *through* into `story/12_RUIN_ROUTE.md` (R1).
+  - *No:* the main story continues, and the door never reopens on that save.
 - **The Hush** (808): a Bleed zone where sound doesn't exist. The PC can see their own footsteps as ripples. Atmospheric breather.
 
 ---
@@ -129,7 +133,9 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 - Topside "**Unity Rallies**" fill the plazas. Voss on giant screens: "Order. Light. Unity." Directorate banners hang from every gantry.
 - Workers are tired and proud. Many are from Nadir, commuting up the lifts. They know something huge is being built and don't know what.
 - **Rook Calder** is here, off-camera and unshaven. Since the Lowlight he has been quietly collecting Meridian Spire security footage. He finds the PC in a workers' canteen: "I've got Sable on tape. With a Meridian keycard. I've had it for months. I was scared."
-  - **CHOICE `CH16_ROOK`:** encourage him to **leak it now** (Rook's Bond goes up, and it's public: Kroll's identity is confirmed realm-wide even without Ch13 evidence) or **hold it for the Festival** (Rook's Bond goes up, and he leaks it at the worst possible moment for Voss in Ch20).
+  - **CHOICE `:ch16_rook`:**
+    - **Leak it now:** it's public, and Kroll's identity is confirmed realm-wide even without Ch13 evidence. Meridian fires Rook within the hour and blacklists him from the Spire, so he can't cut the grid in Ch21 and can't reach the Zap Plate to release it (unless Marchetti turns).
+    - **Hold it for the Festival:** Rook stays inside, smiling for cameras. He leaks it at the worst possible moment for Voss (Ch20 opening ceremony), and he's still in position to cut Lumen's grid in the hijack (`ROOK_CUTS_GRID`).
 
 **Gym 15 (`:FACTORY`).** Thematic note: *conveyor-belt arena; machines you can jam or overdrive.* **Magnus Strade** is immaculate, prosthetic hand, pocket watch. "Faith gave us three hundred years of the Bleed. Engineering will give us the next three hundred without it." His ace is **Metagross**. He gives Dive suits via the bathysphere works.
 
@@ -142,12 +148,12 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
    - The notation: **"Calibration subject: UNIMPRINTED-01. Retention: indefinite."**
 4. The **core chamber**: the Dark Stone at the center of a cage of Lattice-glass. It has **cracked open**, and **Zekrom** is half-emerged and bound in golden cable. This was the Fault's test-fire.
 5. **Boss battle: Zekrom** (multi-bar). Each bar breaks a containment cable, and the PC is *freeing* it, not beating it. On victory, Zekrom tears free through the foundry roof into the Stormfront. Story consequence: **the Engine's original core is lost** (`ZEKROM_FREED`), and Voss must reroute through Lumen's grid.
-6. **GO-15 "Overtime" (proposed).** Trigger: during the core-chamber sequence, a prompt to "finish copying the blueprints" while the containment klaxon counts down from 3 (warned twice by Rook: "We go when the whistle goes, no heroics"). *Epitaph: "You stayed past the whistle. Strade Works issued a statement about an industrial accident."*
+6. **Game over `GO_OVERTIME` "Overtime".** Trigger: during the core-chamber sequence, a prompt to "finish copying the blueprints" while the containment klaxon counts down from 3 (warned twice by Rook: "We go when the whistle goes, no heroics"). *Epitaph: "You stayed past the whistle. Strade Works issued a statement about an industrial accident."*
 
 **Magnus (choice).** Magnus finds the PC in the ruined vault with the blueprints. He doesn't call security.
 > *"I don't build weapons. I build tolerances. I was told it was a Plate stabilizer. I learned the truth two years ago and kept building, because the math was beautiful and the alternative was the Bleed."*
 
-- **CHOICE `CH16_MAGNUS`:**
+- **CHOICE `:ch16_magnus`:**
   - **Expose him** (`MAGNUS_EXPOSED`): the PC takes the blueprints to the Zenith Council via Councillor Sallow. Magnus is arrested, Meridian loses a board vote and some public trust, and the Engine's design leaks publicly. But nobody is inside to sabotage it later.
   - **Appeal to his conscience** (`MAGNUS_KEPT_FAITH`): "Will you let it take a child?" He says nothing. He winds his watch. In the finale, he disables the Engine's **safety governor**, which weakens Voss's binding: "No machine I have built will kill a child."
 
@@ -179,7 +185,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 **Arrival: Nadir, third visit (aftermath of the Purge).**
 - Underveil is a city of lanterns in the upper towers of drowned Aurelia, in permanent night under the Dread Plate. This morning it is smoke, broken lanterns and Directorate barricades.
 - **Dozens are dead.** Nadir's fighters have pushed the Directorate back to the lifts. Mother Gutter's Muk holds one barricade, and Lantern Hollow volunteers hold another.
-- **GO-16 "Into the Line" (proposed).** Trigger: at a barricade, a Directorate line advances on unarmed Nadir protestors. The PC is offered "Step between them?" Nyx's courier warns the PC twice, "Not you. You're the one thing they want alive. Don't make them choose." *Epitaph: "They didn't choose. The bullet did. Meridian called it a tragic accident, and meant it."*
+- **Game over `GO_INTO_THE_LINE` "Into the Line".** Trigger: at a barricade, a Directorate line advances on unarmed Nadir protestors. The PC is offered "Step between them?" Nyx's courier warns the PC twice, "Not you. You're the one thing they want alive. Don't make them choose." *Epitaph: "They didn't choose. The bullet did. Meridian called it a tragic accident, and meant it."*
 
 **Nyx Calloway.**
 - Silk, smoke, a crescent-moon earring. She receives the PC in the **Moon Market** among sellers of secrets.
@@ -189,7 +195,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 **Gym 16 (`:NEW_MOON`), an illusion double battle.** Thematic note: *nothing on the field is what it looks like; illusions mask both sides.* Nyx: "Everything has a price. Yours just went up." Her ace is **Zoroark**.
 
 **Nyx's bargain.**
-- **CHOICE `CH17_NYX`:** Nyx has the **Engine's arena schematics**, Meridian's install plans for the Prism Arena.
+- **CHOICE `:ch17_nyx`:** Nyx has the **Engine's arena schematics**, Meridian's install plans for the Prism Arena.
   - **Trade the PC's own secret** (`NYX_BARGAIN_TAKEN`). Nyx gets to *know* exactly what the PC is, and she will use it. The PC gets the schematics, and in Ch21 Nyx cuts Meridian's comms precisely.
   - **Refuse:** Nyx shrugs and helps anyway in Ch21, sloppily, at a cost to herself (she's injured).
 - Nyx confesses, unprompted, after the gym: "Two years ago I sold Voss the way into the Sun Court. I told myself it was just a door. My family's kept that door shut for three hundred years. I'm the one who opened it."
@@ -205,7 +211,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 4. **The keystone cradle itself** sits in the throne room's center: a golden hand, open, the size of a door. **The PC's shard resonates violently.** The PC's chest *glows* through their shirt, and the drowned room lights up with eighteen faint colors.
 5. Nyx, who came down after all: **"Oh. Oh, darling. You're the missing piece."**
 6. **The truth, named.** Sahar reads the cradle's inscription: *"Here rests the One that is every color and none."* The PC carries **a splinter of the Legend Plate**, Arceus's heart.
-7. **GO-17 "The Throne" (proposed).** Trigger: an exploration prompt, "Sit on the Gilded King's throne?" Foreshadowing: Sahar ("Don't touch anything gold. *Anything*."), and the throne's armrests shaped like open hands. The cradle *closes*. *Epitaph: "You fit perfectly. That was the problem the Gilders were trying to solve."*
+7. **Game over `GO_THE_THRONE` "The Throne".** Trigger: an exploration prompt, "Sit on the Gilded King's throne?" Foreshadowing: Sahar ("Don't touch anything gold. *Anything*."), and the throne's armrests shaped like open hands. The cradle *closes*. *Epitaph: "You fit perfectly. That was the problem the Gilders were trying to solve."*
 
 **Aurelian Voss in the Sun Court.**
 1. A Meridian salvage team cuts in through the throne room's far wall, and **Voss** walks in among them in a pressure suit with his helmet off in an air-pocket. He's here to collect the cradle. He is delighted to see the PC.
@@ -214,7 +220,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 3. He admits AF 290 plainly: "My array. My dials. I was trying to measure the convergence. I didn't know it would break the Crown. I was very sorry about the forty people. I was even sorrier when I understood what I'd learned."
 4. On the Lowlight: *"Twelve people. I've lost more to the Bleed in a quiet week. I made those twelve *mean* something."*
 5. His philosophy: "Gods are absentee landlords. Arceus dropped its furniture on our heads three hundred years ago and never came back. I'm not trying to become a god. I'm trying to make sure we never need one again."
-6. **His offer** (**CHOICE `CH17_VOSS_OFFER`**):
+6. **His offer** (**CHOICE `:ch17_voss_offer`**):
    > *"Stand with me at the Festival. When it's done, no child in Velmora will ever be Fixed again. Your mother wilted in exile because of a broken god. I can fix the god."*
    - **Refuse** (always available).
    - **Feign agreement** (`VOSS_FEIGNED`): Voss lets the PC close in the finale, and the hijack has a different opening beat. It's risky, because if Meridian Standing is high and telemetry is intact, it tips toward Concord Dawn or the Bad ending.
@@ -230,6 +236,8 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 
 He delivers Valen's message:
 > *"He says: 'Win your last two badges. Then come to me, and I'll tell you everything.'"*
+
+**Optional thread: cameo sidequest "Deliverer" (Amaria and Titania).** See `design/CAMEOS.md`. Edda's divers report a woman swimming *without a suit* in drowned Aurelia's lower galleries, singing to a Lapras, and an armored knight pacing the drained shallows above, refusing to leave. After Gym 16, before the PC leaves Underveil.
 
 **Cliffhanger:** Night on the Underveil docks. The PC, Nyx, Sahar, Edda and Rook (and Rowan, if he came down) sit on crates in the lantern-light. Nyx counts on her fingers:
 > *"Meridian wants you in that arena. The Accord wants you in that arena. The Hollow wants you in that arena. Two kings want you as *their* champion in that arena. Thirty days, sweetheart. Every power in Velmora is waiting for you to walk into one room."*

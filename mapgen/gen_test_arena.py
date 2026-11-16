@@ -36,7 +36,7 @@ def npc(i, fid, name, species):
                 'Test field: %s (:%s).' % (name, fid),
                 {'choices': ['Wild battle', 'Trainer battle', 'Cancel'], 'cancel': 3, 'branches': [
                     [{'script': rules + '\nWildBattle.start(:%s, 20)\n$player.heal_party' % species}],
-                    [{'script': rules + '\nTrainerBattle.start(:YOUNGSTER, "Ben")\n$player.heal_party'}],
+                    [{'script': rules + '\nTrainerBattle.start(:YOUNGSTER, "Prismtest")\n$player.heal_party'}],
                     []]}]}
 
 

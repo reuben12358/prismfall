@@ -7,7 +7,7 @@ bgm: Route 2
 parent: 0
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 9, 23], BattleBack: field}
 connections:
-  - {dir: E, offset: 10, to: 140, to_offset: 14}
+  - {dir: E, offset: 10, to: 140, to_offset: 23}
   - {dir: W, offset: 8, to: 561, to_offset: 40}
 map: |
   TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT

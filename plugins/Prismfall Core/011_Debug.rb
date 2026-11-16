@@ -26,8 +26,13 @@ MenuHandlers.add(:debug_menu, :prismfall_core_status, {
       pbMessage(_INTL("Festival stage: {1}. Losses: {2}.", (Prismfall::Festival.stage_id || "finished").to_s,
                       Prismfall::Festival.state[:losses]))
     end
-    errors = Prismfall::Festival.validate + Prismfall::Rival.missing_species.map { |s| "Missing species #{s}" }
-    pbMessage(_INTL("Data check: {1}", (errors.empty?) ? "OK" : errors.join("; ")))
+    errors = Prismfall::NarrativeCheck.run + Prismfall::Rival.missing_species.map { |s| "Missing species #{s}" }
+    if errors.empty?
+      pbMessage(_INTL("Data check: OK"))
+    else
+      errors.each { |e| echoln("[Prismfall check] #{e}") } if defined?(echoln)
+      pbMessage(_INTL("Data check: {1} problem(s). First: {2}", errors.length, errors[0]))
+    end
   }
 })
 

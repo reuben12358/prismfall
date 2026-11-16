@@ -1,6 +1,15 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
-## >>> REVISION 3 (user feedback, 2026-11-15 evening) — supersedes Revision 2 and everything below where they conflict <<<
+## >>> REVISION 4 (user feedback, 2026-11-15 21:11) — supersedes everything below where they conflict <<<
+**Sister-game cameos are OUT of the Festival.** The Festival of Champions (bracket, exhibitions, draw pools) uses
+**original characters only**: Wardens, rivals, Valen and his successor candidates, faction figures (Mourner/Rowan, Meridian's
+champions, etc.), and new ORIGINAL foreign entrants if needed. The Reborn/Rejuvenation/Desolation cameos (Lin, Amaria, Shelly,
+Alexandra, Venam, Shiv, Garret, Melia, Titania, Nova) become **optional sidequest cameos**, the way Rejuvenation features
+Reborn's Aya and Adrienn: each appears in a small optional sidequest somewhere in the world (Antumbra's distortion is the
+in-universe reason), usually ending in **one optional, tough fight** levelled for where it sits (some can be post-game).
+Never required, never in the main finale. The QF "headline cameo" slot is replaced by an original character from the draw.
+
+## >>> REVISION 3 (user feedback, 2026-11-15 evening) — superseded by Revision 4 where they conflict <<<
 1. **Kingdom names (final):** Sylvan Crown → **Elowen, the Evergreen Crown** · Umbra → **Antumbra, the Kingdom Behind the Glass** ·
    Glaciem → **Isenmar, the Frozen Sea** · Ember Dominion → **Ashkaar, the Dragonfire Dominion** · Dunelands → **Ossaria, the Bone Sands**
    (fossil country) · Lumen → **Zenith, the City Above** (Lumen City is its capital district) · Undercity → **Nadir, the City Below**.

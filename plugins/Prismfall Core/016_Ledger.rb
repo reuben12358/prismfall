@@ -14,14 +14,16 @@ module Prismfall
   module Ledger
     FILENAME = "Prismfall_Ledger.txt"
     HEADER   = "# Prismfall Ledger 1"
-    KINDS    = { "gameover" => :game_overs, "ending" => :endings }
+    # gameover/ending: game overs found, endings seen. cameo: sidequest cameo
+    # trainer types beaten. met: Festival opponents met (Hall of Reflections).
+    KINDS    = { "gameover" => :game_overs, "ending" => :endings, "cameo" => :cameos, "met" => :met }
 
     def self.path
       return File.join(File.dirname(SaveData::FILE_PATH), FILENAME)
     end
 
     def self.blank
-      return { :game_overs => {}, :endings => {} }
+      return { :game_overs => {}, :endings => {}, :cameos => {}, :met => {} }
     end
 
     def self.data
@@ -79,10 +81,29 @@ module Prismfall
       return entry.nil?
     end
 
-    def self.record_game_over(id); return record(:game_overs, id); end
-    def self.record_ending(id);    return record(:endings, id);    end
+    def self.canonical_game_over(id)
+      id = id.to_sym
+      return Prismfall::Narrative::GAME_OVER_ALIASES[id] || id
+    end
 
-    def self.game_over_found?(id); return data[:game_overs].has_key?(id.to_sym); end
+    def self.record_game_over(id); return record(:game_overs, canonical_game_over(id)); end
+    def self.record_ending(id);    return record(:endings, id);    end
+    def self.record_cameo(type);   return record(:cameos, type);   end
+    def self.record_met(id);       return record(:met, id);        end
+
+    def self.game_over_found?(id); return data[:game_overs].has_key?(canonical_game_over(id)); end
+    def self.cameo_beaten?(type);  return data[:cameos].has_key?(type.to_sym); end
+    def self.met?(id);             return data[:met].has_key?(id.to_sym);     end
+    def self.cameos_beaten;        return data[:cameos].keys;                 end
+    def self.met_list;             return data[:met].keys;                    end
+
+    # Hints for unfound game overs: LEDGER_SHOW_HINTS, the 'ledgerhints'
+    # password, or any ending seen (NARRATIVE_KEYS section 14).
+    def self.show_hints?
+      return true if Prismfall::Narrative::LEDGER_SHOW_HINTS
+      return true if !data[:endings].empty?
+      return defined?(Prismfall::Passwords) && Prismfall::Passwords.active?(:LEDGER_HINTS)
+    end
     def self.ending_seen?(id);     return data[:endings].has_key?(id.to_sym);    end
     def self.game_overs_found;     return data[:game_overs].keys;                 end
     def self.endings_seen;         return data[:endings].keys;                    end

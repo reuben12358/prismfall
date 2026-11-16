@@ -41,7 +41,13 @@ module Prismfall
       "ruin_unlocked"  => [0, proc { Prismfall::Ledger.ruin_unlocked? }],
       "ruin_route"     => [0, proc { Prismfall.ruin_route? }],
       "festival_stage" => [0, proc { Prismfall::Festival.stage_id }],
-      "eliminated"     => [1, proc { |id| !Prismfall::Festival.eliminated_in(id).nil? }],
+      "eliminated"     => [1, proc { |id| Prismfall::Festival.out?(id) }],
+      "drawn"          => [1, proc { |stage| Prismfall::Festival.drawn(stage) }],
+      "festival_day"   => [0, proc { Prismfall::Festival.day }],
+      "flag"           => [1, proc { |n| Prismfall::Narrative.flag(n) }],
+      "tally"          => [1, proc { |n| Prismfall::Narrative.tally(n) }],
+      "cameo_beaten"   => [1, proc { |t| Prismfall::Ledger.cameo_beaten?(t) }],
+      "met"            => [1, proc { |id| Prismfall::Ledger.met?(id) }],
       "switch"         => [1, proc { |n| $game_switches ? $game_switches[n] : false }],   # read-only
       "var"            => [1, proc { |n| $game_variables ? $game_variables[n] : 0 }]     # read-only
     }

@@ -11,6 +11,10 @@ classes:
               inner_nw: 406, inner_ne: 405, inner_sw: 398, inner_se: 397}
   sand:      {kind: blob, layer: 0, min_width: 1, center: 546, N: 538, S: 554, W: 545, E: 547, NW: 537, NE: 539, SW: 553, SE: 555,
               inner_nw: 558, inner_ne: 556, inner_sw: 542, inner_se: 540}
+  pave:      {kind: blob, layer: 0, min_width: 1, center: 790, N: 785, S: 793, W: 789, E: 791, NW: 784, NE: 786,
+              SW: 797, SE: 799}                                 # grey cobbles (Cedolan City)
+  cliff:     {kind: cliffband, left: 1187, mid: 1188, right: 1193, base_left: 1184, base_mid: 1185, base_right: 1186}
+  stairs:    {kind: tile, layer: 0, tile: 1161}                 # stone steps cut into a cliff band
   sea:       {kind: autotile, layer: 0, id: 48, same: [sea, deep, pier, harbour, deck, rail]}  # terrain tag 7 (surf)
   deep:      {kind: autotile, layer: 0, id: 144}                     # Sea deep, terrain tag 5
   shore:     {kind: autotile, layer: 0, id: 192}                     # Sand shore, terrain tag 3
@@ -44,4 +48,7 @@ glyphs:
   'h': harbour
   'd': deck
   'r': rail
+  'c': pave
+  'C': cliff
+  'S': stairs
 stamps: [pokecenter, mart, house_red, house_red2, lab, house_blue_a, house_blue_b, fanclub, mailbox, gym, harbour_pier]
