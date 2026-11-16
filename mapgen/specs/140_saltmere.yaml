@@ -1,377 +1,361 @@
 # Saltmere (map 140): Elowen's free port; Pell Playhouse (Gym 2). Story: story/04_ACT_I.md Chapter 3.
+# ART PILOT on the Tectonic tileset (palette `tectonic`). Map, heights and stamps are WRITTEN BY layouts/saltmere.py;
+# edit that script, run it, then build.py. Events below are hand-edited.
 id: 140
 name: Saltmere
-palette: outside
+palette: tectonic
 bgm: Lerucean Town
 parent: 0
-metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 10, 25], BattleBack: field}
+rubric: true
+tone: [10, 4, -14, 0]                 # warm lantern-gold cast (ART_DIRECTION rubric 10)
+metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 10, 25], BattleBack: field, Weather: [Rain, 10]}
 connections:
-  - {dir: N, offset: 15, to: 541, to_offset: 12}
-  - {dir: W, offset: 23, to: 560, to_offset: 10}
+  - {dir: N, offset: 44, to: 541, to_offset: 13}
+  - {dir: W, offset: 32, to: 560, to_offset: 12}
 map: |
-  TTTTTTTTTTTTTT.ccc..TTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTTTT.ccc..TTTTTTTTTTTTTTTTTTTT
-  TTT..TTTT.TT...ccc...#######TTTTTTTTTTTT
-  TTT..TTTT.TT...ccc...#######......TTTTTT
-  TTT..........**ccc...#######..TT..TTTTTT
-  TTTfffffffff.**ccc...#######..TT..TTTTTT
-  TTTf.#####.f...cccccccccccc....#####.TTT
-  TTTf.#####.f...cccccccccccc....#####.TTT
-  TTTf.#####*fc..cc**ccc**ccc....#####.TTT
-  TTTf.#####*fccccccccccccccccc.c#####.TTT
-  TTTf.#####.fccccccccccccccccc.ccc....TTT
-  TTT.::::::::c...cccccccccc...........TTT
-  TTT.::::::::....c**ccc**cc.......***.TTT
-  TTT.**::***....cccccccccccc......***.TTT
-  TTTfffffff..ff.*******ffff..fffffffffTTT
-  TTTCCCCCCCSSCC.*******.CCCSSCCCCCCCCCTTT
-  TTTCCCCCCCSSCCCCCCCCCCCCCCSSCCCCCCCCC...
-  ..........SS..CCCCCCCCC...SS......__TTTT
-  _____#####ccc......######cccc.....__TTTT
-  _ss_s#####cc####.cc######cccc######___TT
-  _ss_s#####cc####.cc######cccc######_____
-  _____#####cc####.cc######cccc######_____
-  .....#####cc####.cc......cccc######_____
-  cccccccccccccccccccccccccccccccccc______
-  cccccccccccccccccccccccccccccccccc______
-  cccccccc______________cccccccccccc______
-  ________________________________________
-  ________________________________________
-  ~~~~~~~~===~~~~~~~~===~~~~~~~~~~~~______
-  ~~~~~~~~===~~~~~~~~===~~~~~~~~~~~~______
-  ~~~~~~~~===~~~~~~~~===~~~~~~~~~~~~______
-  ~~~~~~~~===~~~~~~~~===~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~===~~~~~~~~===~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  .....TT....................................cccc...........TTTT..
+  .TTTTTTT...................................ccccc...TTTT.TTTTTTTT
+  TTTTTTTTT..................................ccccc..TTTTTTTTTTTTTT
+  TTTTTTTTT..................................ccccc..TTTTTTTTTTTTTT
+  TTTTTTTTTT.................................ccccc..TTTTTTTTTTTTTT
+  TTTTTTTTTT..................................cccc...TTTTTTTTTTTTT
+  TTTTTTTTTT.................................ccccc.......TTTTTTTTT
+  TTTTTTTTTTT.............................TTTccccc........TTTTTTT.
+  .TTTTTTTTTT...oooooo....................TTTccccc.........TTTTT..
+  ..TTTTTTTTT...oooooTTTo.................TTTccccfffffffffffTTTTT.
+  ........fffffffffoTTTTT.................TTTcccc..........fTTTTTT
+  ........f.......f.TTTTTo.................TTccc...........fTTTTTT
+  ........f.......f.TTTTTo..............TT.ccccc...........fTTTTTT
+  TTTT....f.......f.TTTTTo.............TTT.ccccc...........fTTTTT.
+  TTTTT...f.......f.TTTTToo............TTTccccc............f.TTTTT
+  TTTTTT..f..........TTTooo............TTTccccc............fTTTTTT
+  TTTTTT..f...ooo.......ooo.............T.ccccccccccccc....fTTTTTT
+  TTTTT...f.oooooo......ooo...ccccccccc...ccccccccccccc.....TTTTTT
+  TTTTToooooooooooooo...ooo..cccccccccccc.ccccccccccccc......TTTTT
+  TTTTToooooooooooooooooTTcccccccccccccccccccccccccc.........TTTTT
+  .TTT.ooooooo.....ooooooccccccccccccccccccccccccc......TTT..TTTTT
+  .......TTTTTTT......oocccccccccccccccccccccccTTT....TTTTTTT.TTTT
+  ......TTTTTTTT.........cccccccccccccccccccfTTTTTT...TTTTTTTT.T..
+  .TTT...TTTTTTT......ffCCCCCCCcccccccCCCCCCCCCCCTT...TTTTTTT.....
+  TTTTT............ffCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCTT........
+  CCCCCfffffffffffCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC...ff
+  CCCCCCCCCCCCCCCCCCCCCCC.....CCCCCCCCC.........CCCCCCCCCCCCCCCCCC
+  CCCCCCCCCCCCCCCCCCCC..........bbbbb.....fffff........CCCCCCCCCCC
+  ..ppCCCCCCCCCCCCC..........T..bbbbb.......................CCCCCC
+  ..pppppp..........T.......TTTTbbbbb.........T...........TTT.....
+  ..pppppp.........TTT.....TTTTTbbbbb........TTT..........TTT.TTTT
+  bbbTTT.......bbbbTTT.....TTTTTbbbbb........TTT..........TTTTTTTT
+  bbbbbbbbbbbbbbbbbbbbbbb..bbbbbbbbbb........bbbbbbbb......T.TTTTT
+  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbo......TTTTTT
+  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbboooo...TTTTTT
+  ..............bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb..oooo....TTTTT
+  ..ppppp..ppppTTTTTbbbbb.bbbCCCCCCCCCCCCbbbbbbb.....oooo....TTTTT
+  ..ppppp..ppppTTTTTbbbbb.fCCCCCCCCCCCCCCCTbbbb.ffTTT.ooo.....TT..
+  ........f...CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCTToooffff...ff
+  fffffffCCCCCCCCCCCCCCCCCCCCC..........CCCCCCCCCCCCCCCoo.........
+  CCCCCCCCCCCCCCCCCCCCCCCCCC.............CCCCCCCCCCCC~Coo.........
+  CCCCCCCCCCCCC.....bbbbb.................bbbbb....CC~Coo.....TT..
+  CCCCCCCC..........bbbbb.................bbbbb......~Coo....TTTT.
+  ......bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~CCoo..TTTTT.
+  ......bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~Coo..TTTTT.
+  ......bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~CoooTTTTTT.
+  ......bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~CoooooooTT.
+  ......bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~CToooooo...
+  .....~bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb~~CTTooooo...
+  ....~~~~~~~~~~~~===~~~~~~~~~===~~~~~~~~~~~~~~~~~==~~~CCTT.....CC
+  .~~~~~~~~~~~~~~~===~~~~~~~~~===~~~~~~~~~~~~~~~~~==~~~~C.......C~
+  ~~~~~~~~~~~~~~~~===~~~~~~~~~===~~~~~~~~~~~~~~~~~==~~~~CC......C~
+  ~~~~~~~~~~~~~~~~===~~~~~~~~~===~~~~~~~~~~~~~~~~~==~~~~~CCffffCC~
+  ~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCC.CC~~
+  ~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~CCCCCCC~~~~~~~~~~CCC~~~
+  ~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~CCCCCCC.....CCCCCC~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CCCCC.......CCCCCC~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~C.......C~~~~~~~~~~~~~~~~
+heights: |
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222222222222222222222222222222222222222222222
+  2222222222222222222222211111222222222111111111222222222222222222
+  2222222222222222222211111111111111111111111111111111122222222222
+  1111222222222222211111111111111111111111111111111111111111222222
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111000000000011111111111111111111111111
+  1111111111111111111111111100000000000001111111111111111111111111
+  1111111111111000000000000000000000000000000000000111111111111111
+  1111111100000000000000000000000000000000000000000000111111111111
+  0000000000000000000000000000000000000000000000000000111111111111
+  0000000000000000000000000000000000000000000000000000111111111111
+  0000000000000000000000000000000000000000000000000000111111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000011111111111
+  0000000000000000000000000000000000000000000000000000001111111110
+  0000000000000000000000000000000000000000000000000000001111111110
+  0000000000000000000000000000000000000000000000000000000111111110
+  0000000000000000000000000000000000000000000000000000000011111100
+  0000000000000000000000000000000000000000011111110000000000111000
+  0000000000000000000000000000000000011111111111111111100000000000
+  0000000000000000000000000000000000011111111111111111100000000000
+  0000000000000000000000000000000000000001111111110000000000000000
 stamps:
-  - {stamp: institute,  at: [21, 2],  link: SM_GYM,      name: Playhouse door}
-  - {stamp: fanclub,    at: [31, 6],  link: SM_PAGEANT,  name: Pageant Hall door}
-  - {stamp: house_red2, at: [5, 6],   link: SM_HOUSE1,   name: Saltwife's House door}
-  - {stamp: pokecenter, at: [5, 18],  link: SM_PC,       name: Poke Center door}
-  - {stamp: mart,       at: [12, 19], link: SM_MART,     name: Mart door}
-  - {stamp: daycare,    at: [29, 19], link: SM_HARBOUR,  name: Harbour Office door}
-  - {stamp: stall_a,    at: [19, 18]}
+- stamp: t_hall
+  at: [25, 2]
+  link: SM_GYM
+  name: Playhouse door
+  door: [7, 15]
+- stamp: t_theatre
+  at: [48, 11]
+  link: SM_PAGEANT
+  name: Pageant Hall door
+  door: [3, 5]
+- stamp: t_house_red
+  at: [10, 12]
+  link: SM_HOUSE1
+  name: Saltwife's House door
+  door: [2, 4]
+- stamp: t_pokecenter
+  at: [9, 28]
+  link: SM_PC
+  name: Poke Center door
+  door: [2, 4]
+- stamp: t_mart
+  at: [46, 29]
+  link: SM_MART
+  name: Mart door
+  door: [1, 3]
+- stamp: t_lodge
+  at: [37, 28]
+  link: SM_HARBOUR
+  name: Harbour Office door
+  door: [1, 5]
+- stamp: t_townhouse
+  at: [13, 3]
+- stamp: t_townhouse
+  at: [19, 4]
+- stamp: t_house_orange
+  at: [41, 2]
+- stamp: t_house_blue
+  at: [4, 20]
+- stamp: t_house_blue
+  at: [15, 27]
+- stamp: t_house_blue2
+  at: [51, 27]
+- stamp: t_stall
+  at: [22, 28]
+- stamp: t_shop_purple
+  at: [25, 41]
+- stamp: t_warehouse
+  at: [7, 42]
+- stamp: t_lighthouse
+  at: [57, 29]
+- stamp: t_ship
+  at: [33, 49]
+- stamp: t_stairs
+  at: [31, 24]
+- stamp: t_stairs
+  at: [20, 38]
+- stamp: t_stairs
+  at: [42, 38]
+- stamp: t_cont_green
+  at: [17, 43]
+- stamp: t_cont_brown
+  at: [31, 43]
+- stamp: t_cont_long
+  at: [33, 46]
+- stamp: t_crate_pair
+  at: [21, 46]
+- stamp: t_crate_a
+  at: [46, 43]
+- stamp: t_crates_b
+  at: [38, 43]
+- stamp: t_bench
+  at: [24, 22]
+- stamp: t_bench
+  at: [39, 22]
+- stamp: t_table
+  at: [50, 36]
+- stamp: t_rock
+  at: [3, 44]
+- stamp: t_rock
+  at: [25, 36]
+- stamp: t_lamp
+  at: [28, 19]
+- stamp: t_lamp
+  at: [36, 19]
+- stamp: t_lamp
+  at: [29, 31]
+- stamp: t_lamp
+  at: [35, 31]
+- stamp: t_lamp
+  at: [12, 34]
+- stamp: t_lamp
+  at: [48, 35]
+- stamp: t_lamp
+  at: [24, 45]
+- stamp: t_lamp
+  at: [45, 46]
+- stamp: t_lamp
+  at: [47, 7]
+- stamp: t_barrel
+  at: [15, 46]
+- stamp: t_barrel2
+  at: [16, 46]
+- stamp: t_barrel
+  at: [33, 46]
+- stamp: t_barrel2
+  at: [49, 45]
+- stamp: t_barrel
+  at: [21, 33]
+- stamp: t_trellis
+  at: [9, 15]
 tiles:
-  - {tile: gym_sign, at: [27, 6]}
-# LAYOUT-DECO-BEGIN (written by layouts/saltmere.py)
-tileblocks:
-- tile: 1501
-  size:
-  - 3
-  - 4
-  at:
-  - 19
-  - 8
-  layer: 1
-  skip:
-  - 1510
-  - 1518
-- tile: 3941
-  size:
-  - 3
-  - 8
-  at:
-  - 35
-  - 21
-  layer: 1
-- tile: 4349
-  size:
-  - 3
-  - 3
-  at:
-  - 37
-  - 31
-  layer: 1
-- tile: 1437
-  size:
-  - 3
-  - 1
-  at:
-  - 14
-  - 10
-  layer: 1
-- tile: 1437
-  size:
-  - 3
-  - 1
-  at:
-  - 24
-  - 10
-  layer: 1
-- tile: 1437
-  size:
-  - 3
-  - 1
-  at:
-  - 28
-  - 26
-  layer: 1
-- tile: 1485
-  size:
-  - 3
-  - 2
-  at:
-  - 0
-  - 16
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 25
-  - 3
-  layer: 1
-- tile: 1485
-  size:
-  - 3
-  - 2
-  at:
-  - 13
-  - 5
-  layer: 1
-- tile: 1485
-  size:
-  - 3
-  - 2
-  at:
-  - 32
-  - 13
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 13
-  - 7
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 28
-  - 7
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 16
-  - 22
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 33
-  - 22
-  layer: 1
-- tile: 1408
-  size:
-  - 1
-  - 3
-  at:
-  - 7
-  - 24
-  layer: 1
-tiles:
-- tile: 378
-  at:
-  - 20
-  - 9
+- tile: 1552
+  at: [2, 52]
   layer: 2
-- tile: 380
-  at:
-  - 20
-  - 10
+- tile: 1553
+  at: [3, 52]
   layer: 2
-- tile: 1376
-  at:
-  - 13
-  - 26
-  layer: 1
-- tile: 1378
-  at:
-  - 14
-  - 26
-  layer: 1
-- tile: 1379
-  at:
-  - 6
-  - 27
-  layer: 1
-- tile: 1380
-  at:
-  - 7
-  - 27
-  layer: 1
-- tile: 1328
-  at:
-  - 13
-  - 18
-  layer: 1
-- tile: 1329
-  at:
-  - 23
-  - 18
-  layer: 1
-- tile: 1331
-  at:
-  - 34
-  - 13
-  layer: 1
-- tile: 1331
-  at:
-  - 4
-  - 9
-  layer: 1
-- tile: 1331
-  at:
-  - 30
-  - 2
-  layer: 1
-- tile: 1331
-  at:
-  - 14
-  - 8
-  layer: 1
-- tile: 1331
-  at:
-  - 27
-  - 8
-  layer: 1
-- tile: 1331
-  at:
-  - 14
-  - 12
-  layer: 1
-- tile: 1331
-  at:
-  - 27
-  - 12
-  layer: 1
-- tile: 1536
-  at:
-  - 11
-  - 26
-  layer: 1
-- tile: 1537
-  at:
-  - 18
-  - 27
-  layer: 1
-- tile: 1538
-  at:
-  - 22
-  - 26
-  layer: 1
-- tile: 1536
-  at:
-  - 18
-  - 22
-  layer: 1
-- tile: 1537
-  at:
-  - 25
-  - 21
-  layer: 1
-- tile: 1538
-  at:
-  - 25
-  - 20
-  layer: 1
-- tile: 1536
-  at:
-  - 3
-  - 25
-  layer: 1
-- tile: 1537
-  at:
-  - 3
-  - 27
-  layer: 1
-- tile: 1536
-  at:
-  - 22
-  - 27
-  layer: 1
-- tile: 1538
-  at:
-  - 11
-  - 27
-  layer: 1
-- tile: 1537
-  at:
-  - 12
-  - 27
-  layer: 1
-- tile: 1376
-  at:
-  - 16
-  - 26
-  layer: 1
-- tile: 1377
-  at:
-  - 17
-  - 26
-  layer: 1
-- tile: 1328
-  at:
-  - 3
-  - 17
-  layer: 1
-- tile: 1329
-  at:
-  - 33
-  - 18
-  layer: 1
-- tile: 1331
-  at:
-  - 7
-  - 4
-  layer: 1
-- tile: 1331
-  at:
-  - 26
-  - 7
-  layer: 1
-- tile: 1340
-  at:
-  - 12
-  - 8
-  layer: 1
-- tile: 1340
-  at:
-  - 29
-  - 8
-  layer: 1
-- tile: 1341
-  at:
-  - 24
-  - 13
-  layer: 1
-- tile: 1341
-  at:
-  - 17
-  - 13
-  layer: 1
-# LAYOUT-DECO-END
+- tile: 1560
+  at: [2, 53]
+  layer: 2
+- tile: 1561
+  at: [3, 53]
+  layer: 2
+- tile: 1554
+  at: [54, 55]
+  layer: 2
+- tile: 1562
+  at: [54, 56]
+  layer: 2
+- tile: 1555
+  at: [13, 55]
+  layer: 2
+- tile: 1563
+  at: [13, 56]
+  layer: 2
+- tile: 1555
+  at: [10, 51]
+  layer: 2
+- tile: 1563
+  at: [10, 52]
+  layer: 2
+- tile: 1555
+  at: [7, 55]
+  layer: 2
+- tile: 1563
+  at: [7, 56]
+  layer: 2
+- tile: 1555
+  at: [21, 51]
+  layer: 2
+- tile: 1563
+  at: [21, 52]
+  layer: 2
+- tile: 1555
+  at: [25, 54]
+  layer: 2
+- tile: 1563
+  at: [25, 55]
+  layer: 2
+- tile: 1555
+  at: [51, 51]
+  layer: 2
+- tile: 1563
+  at: [51, 52]
+  layer: 2
+- tile: 1554
+  at: [30, 55]
+  layer: 2
+- tile: 1562
+  at: [30, 56]
+  layer: 2
+- tile: 1554
+  at: [6, 50]
+  layer: 2
+- tile: 1562
+  at: [6, 51]
+  layer: 2
+- tile: 1552
+  at: [20, 54]
+  layer: 2
+- tile: 1553
+  at: [21, 54]
+  layer: 2
+- tile: 1560
+  at: [20, 55]
+  layer: 2
+- tile: 1561
+  at: [21, 55]
+  layer: 2
+- tile: 1554
+  at: [13, 51]
+  layer: 2
+- tile: 1562
+  at: [13, 52]
+  layer: 2
+- tile: 1555
+  at: [2, 55]
+  layer: 2
+- tile: 1563
+  at: [2, 56]
+  layer: 2
+- tile: 1552
+  at: [24, 50]
+  layer: 2
+- tile: 1553
+  at: [25, 50]
+  layer: 2
+- tile: 1560
+  at: [24, 51]
+  layer: 2
+- tile: 1561
+  at: [25, 51]
+  layer: 2
 events:
-  - {type: sign, at: [27, 6], post: false, name: Playhouse sign,
+  - {type: sign, at: [35, 18], name: Playhouse sign,
      text: "THE PELL PLAYHOUSE - SALTMERE GYM\nWarden: Dorian Pell. Tonight: The Gilded King."}
-  - {type: sign, at: [18, 3], text: "SALTMERE\nThe free port of the Evergreen Crown."}
-  - {type: npc, name: Busker, at: [15, 8], sprite: NPC 08, dir: down, move: random,
+  - {type: sign, at: [43, 4], text: "SALTMERE\nThe free port of the Evergreen Crown."}
+  - {type: npc, name: Busker, at: [27, 21], sprite: NPC 08, dir: down, move: random,
      text: "Busker: Saltmere's Plate makes everything ordinary - no Bleed, no miracles. So we make our own, on stage!"}
-  - {type: npc, name: Caramel seller, at: [21, 22], sprite: NPC 11, dir: down,
+  - {type: npc, name: Caramel seller, at: [24, 34], sprite: NPC 11, dir: down,
      text: "Salt-caramel! Fresh salt-caramel! Pageant tonight - the Loyal Three companion piece!"}
-  - {type: sign, at: [36, 30], text: "The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed."}
+  - {type: sign, at: [55, 45], text: "The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed."}
   - type: event
     name: Juno J1
-    at: [26, 12]
+    at: [36, 22]
     pages:
       - cond: {switch: CH2_MATRIARCH_DONE}
         graphic: {sprite: trainer_RIVAL2, dir: down}
@@ -394,11 +378,11 @@ events:
       - cond: {switch: CH3_J1_DONE}
         graphic: {sprite: trainer_RIVAL2, dir: down}
         commands: ["Juno: Same breakwater, same caramel, next time. Deal?"]
-  - {type: npc, name: Eevee breeder, at: [24, 26], sprite: NPC 25, dir: down,
+  - {type: npc, name: Eevee breeder, at: [29, 45], sprite: NPC 25, dir: down,
      text: "Breeder: Dorian's troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage."}
   - type: event
     name: Kestrel
-    at: [33, 11]
+    at: [53, 18]
     pages:
       - cond: {switch: CH3_PAGEANT_DONE}
         graphic: {sprite: trainer_RIVAL1, dir: left}
@@ -410,7 +394,7 @@ events:
       - cond: {self: A}
   - type: event
     name: Royal notice
-    at: [30, 11]
+    at: [47, 18]
     pages:
       - cond: {switch: CH3_PAGEANT_DONE}
         commands:

@@ -1,0 +1,5 @@
+Name       = Prismfall Cutscenes
+Version    = 1.0.0
+Essentials = 21.1
+Optional   = Prismfall Core,1.0.0
+Credits    = Prismfall dev team

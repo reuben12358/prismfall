@@ -5,9 +5,9 @@
 # Briarwick (120) - Route 3 (540)
 120,W,14,540,E,10
 # Saltmere (140) - Route 4 (541)
-140,N,15,541,S,12
+140,N,44,541,S,13
 # Saltmere (140) - Route 5 (560)
-140,W,23,560,E,10
+140,W,32,560,E,12
 # Ebbmouth (160) - Route 6 (561)
 160,S,22,561,N,12
 # Route 1 (520) - Route 2 (521)

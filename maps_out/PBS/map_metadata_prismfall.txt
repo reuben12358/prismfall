@@ -106,6 +106,7 @@ Outdoor = true
 ShowArea = true
 MapPosition = 0,10,25
 BattleBack = field
+Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center

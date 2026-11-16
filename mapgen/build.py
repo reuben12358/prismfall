@@ -54,6 +54,9 @@ G.FLAGMAP = flag
 class Ctx:
     def __init__(self):
         self.stamps = json.load(open(os.path.join(HERE, 'data', 'stamps.json')))
+        tp = os.path.join(HERE, 'data', 'stamps_t.json')
+        if os.path.exists(tp):
+            self.stamps.update(json.load(open(tp)))
         self.palettes = {}
         self.specs = {}
         self.doors = {}   # link -> (map, x, y)   exterior door tiles
@@ -124,6 +127,9 @@ def prepare(spec, ctx):
         pal = ctx.palette(spec.get('palette', 'outside'))
         lines = [l for l in spec['map'].strip('\n').split('\n')]
         p = T.Painter(pal, lines, seed=spec.get('seed', mid), warn=lambda m: ctx.warn(mid, m))
+        if 'heights' in spec:
+            hl = spec['heights'].strip('\n').split('\n')
+            p.heights = np.array([[int(ch) if ch.isdigit() else 0 for ch in l.strip().ljust(p.W, '0')[:p.W]] for l in hl])
         layers = p.paint()
         spec['_painter'] = p
         spec['_tileset'] = pal['tileset']
@@ -135,16 +141,17 @@ def prepare(spec, ctx):
             h, w = sl.shape[1:]
             if x < 0 or y < 0 or x + w > layers.shape[2] or y + h > layers.shape[1]:
                 ctx.warn(mid, 'stamp %s at %s out of bounds' % (s['stamp'], s['at'])); continue
+            occ = sl.max(axis=0) > 0
+            for z in (1, 2):   # the object replaces whatever the painters scattered there
+                layers[z, y:y + h, x:x + w][occ] = 0
             for z in range(3):
                 reg = layers[z, y:y + h, x:x + w]
                 m = sl[z] > 0
                 reg[m] = sl[z][m]
-                if z == 0:  # building footprint: clear decorative layers the terrain put there
-                    pass
             # clear tree canopy etc. on layer 2 where the stamp has layer-1 tiles but no layer-2 tile
             l2 = layers[2, y:y + h, x:x + w]; l2[(sl[1] > 0) & (sl[2] == 0)] = 0
-            if 'door' in st:
-                dx, dy = st['door']
+            if 'door' in st or 'door' in s:
+                dx, dy = s.get('door', st.get('door'))
                 gfx = st.get('door_gfx', ['doors1', 0, 2])
                 ev = {'type': 'door', 'at': [x + dx, y + dy], 'gfx': gfx, 'name': s.get('name', s['stamp'] + ' door')}
                 if 'link' in s: ev['link'] = s['link']
@@ -153,6 +160,10 @@ def prepare(spec, ctx):
                     ev = {'type': 'sign', 'at': [x + dx, y + dy], 'post': False, 'name': ev['name'],
                           'text': s.get('locked_text', 'The door is locked.')}
                 stamp_events.append(ev)
+        if pal.get('water_under_stamps'):   # objects placed on water (ships, piers) keep water beneath them
+            wid = pal['water_under_stamps']
+            wm = p.mask(['sea', 'pier']) & ~((layers[1] >= wid) & (layers[1] < wid + 48))
+            layers[0][wm] = wid
         spec['events'] = stamp_events + spec['events']   # doors first: their autorun page runs before story autoruns
         for t in spec.get('tileblocks', []):   # {tile: top-left id, size: [w,h], at: [x,y], layer: 1}
             w, h = t['size']
@@ -303,6 +314,9 @@ def build_map(spec, ctx):
         if e['type'] == 'sign' and e.get('post', True) and pal and 'sign' in pal.get('tiles', {}):
             tdef = pal['tiles'][e.get('post_tile', 'sign')]
             layers[tdef['layer'], y, x] = tdef['tile']
+            top = pal['tiles'].get('sign_top')
+            if top and y > 0:
+                layers[top['layer'], y - 1, x] = top['tile']
         name = e.get('name') or default_name(e)
         events[nid] = G.event(nid, name, x, y, pages_from(e, ctx, mid))
         occupied[(x, y)] = nid
@@ -310,6 +324,14 @@ def build_map(spec, ctx):
     bgm = spec.get('bgm', '')
     m = G.rmap(spec['_tileset'], W, H, G.table3(layers), events, bgm=bgm, encounter_step=spec.get('encounter_step', 30))
     check_reach(spec, ctx, m)
+    if spec.get('rubric'):
+        walk_check(spec, ctx, m)
+        r = rubric(layers)
+        spec['_rubric'] = r
+        need = [('layer2', 55, 1), ('layer3', 20, 1), ('bare', 35, -1), ('bare3x3', 13, -1), ('stacks', 10, 1), ('mirror', 15, -1)]
+        print('RUBRIC %d %s: ' % (mid, spec['name']) + '  '.join(
+            '%s %.1f%s' % (k, r[k], '' if (r[k] - lim) * sgn >= 0 else ' FAIL(%s%d)' % ('>=' if sgn > 0 else '<=', lim))
+            for k, lim, sgn in need))
     return m
 
 
@@ -342,6 +364,51 @@ def check_reach(spec, ctx, m):
         if not any(n) and not cell_passable(lay, ts, ev.x, ev.y):
             if any(p.trigger in (0, 1, 2) and any(c.code != 0 for c in p.list) for p in ev.pages):
                 ctx.warn(spec['id'], 'event "%s" at %d,%d is walled in (no walkable neighbour)' % (ev.name, ev.x, ev.y))
+
+
+def rubric(layers):
+    """ART_DIRECTION.md section 3 numbers (same definitions as ref/art/tools/map_metrics.py)."""
+    d = layers; H, W = d.shape[1:]; n = W * H
+    key = d[0].astype(np.int64) * 10**8 + d[1].astype(np.int64) * 10**4 + d[2]
+    bare = (d[1] == 0) & (d[2] == 0)
+    bp = sum(1 for y in range(1, H - 1) for x in range(1, W - 1) if bare[y - 1:y + 2, x - 1:x + 2].all())
+    return dict(layer2=(d[1] > 0).mean() * 100, layer3=(d[2] > 0).mean() * 100, bare=bare.mean() * 100,
+                bare3x3=bp / n * 100, stacks=len(np.unique(key)) / n * 100, mirror=(key == key[:, ::-1]).mean() * 100)
+
+
+def walk_check(spec, ctx, m):
+    """Flood-fill walkable tiles from the first warp/door: warn about cut-off events and stranded areas."""
+    import render as R
+    ts = R.tilesets()[m.tileset_id]; lay = m.data.data; H, W = m.height, m.width
+    solid = {(e.x, e.y) for e in m.events.values() if e.pages[0].graphic.character_name and not e.pages[0].through}
+    ok = np.array([[cell_passable(lay, ts, x, y) and (x, y) not in solid for x in range(W)] for y in range(H)])
+    starts = [(e.x, e.y) for e in m.events.values() if any(c.code == 201 for p in e.pages for c in p.list)]
+    if not starts:
+        return
+    seen = np.zeros_like(ok); st = []
+    for sx, sy in starts[:1]:
+        for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0)):
+            if 0 <= sx + dx < W and 0 <= sy + dy < H and ok[sy + dy, sx + dx]:
+                st.append((sx + dx, sy + dy))
+    while st:
+        x, y = st.pop()
+        if seen[y, x]: continue
+        seen[y, x] = True
+        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            if 0 <= x + dx < W and 0 <= y + dy < H and ok[y + dy, x + dx] and not seen[y + dy, x + dx]:
+                st.append((x + dx, y + dy))
+    for e in m.events.values():
+        if not any(c.code != 0 for p in e.pages for c in p.list):
+            continue
+        if not any(0 <= e.x + dx < W and 0 <= e.y + dy < H and seen[e.y + dy, e.x + dx]
+                   for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0))):
+            ctx.warn(spec['id'], 'event "%s" at %d,%d cannot be reached on foot from the first door/warp' % (e.name, e.x, e.y))
+    stranded = int((ok & ~seen).sum())
+    if stranded > ok.sum() * 0.05 and '--walkmap' in sys.argv:
+        for y in range(H):
+            print(''.join('#' if not ok[y, x] else ('.' if seen[y, x] else '!') for x in range(W)))
+    if stranded > ok.sum() * 0.05:
+        ctx.warn(spec['id'], '%d walkable tiles (%.0f%%) are cut off from the first door/warp' % (stranded, 100.0 * stranded / max(1, ok.sum())))
 
 
 def default_name(e):
@@ -458,6 +525,20 @@ def main():
     pdir = os.path.join(OUT, 'Plugins', 'Prismfall Maps')
     os.makedirs(pdir, exist_ok=True)
     open(os.path.join(pdir, '002_MapFields.rb'), 'w', encoding='utf-8').write('\n'.join(rb) + '\n')
+    # per-map atmosphere (ART_DIRECTION rubric 10): base screen tone, applied on entering the map
+    rb = ['# GENERATED by mapgen/build.py from the specs\' `tone:` entries - do not edit.',
+          'module PrismfallMaps', '  MAP_TONES = {']
+    for s in specs:
+        if s.get('tone'):
+            rb.append('    %d => [%s],   # %s' % (s['id'], ', '.join(str(int(v)) for v in s['tone']), s['name']))
+    rb += ['  }', '',
+           '  def self.apply_map_tone', '    return if !$game_map || !$game_screen',
+           '    t = MAP_TONES[$game_map.map_id]', '    tone = (t) ? Tone.new(*t) : Tone.new(0, 0, 0, 0)',
+           '    return if @last_tone_map == $game_map.map_id', '    @last_tone_map = $game_map.map_id',
+           '    $game_screen.start_tone_change(tone, 0) if t || @tone_was_set', '    @tone_was_set = !t.nil?', '  end', 'end', '',
+           'EventHandlers.add(:on_enter_map, :prismfall_map_tone,', '  proc { |_old_map_id| PrismfallMaps.apply_map_tone }', ')']
+    pdir0 = os.path.join(OUT, 'Plugins', 'Prismfall Maps')
+    open(os.path.join(pdir0, '005_MapAtmosphere.rb'), 'w', encoding='utf-8').write('\n'.join(rb) + '\n')
     bosses = yaml.safe_load(open(os.path.join(HERE, 'bosses.yaml'))) or {}
     rb = ['# GENERATED by mapgen/build.py from mapgen/bosses.yaml - do not edit. Story bosses used by the generated maps.',
           'if defined?(Prismfall::Bosses)']

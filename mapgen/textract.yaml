@@ -28,3 +28,11 @@ stamps:
   t_bench:       {map: 217, rect: [19, 36, 2, 2]}
   t_table:       {map: 217, rect: [49, 33, 4, 2]}
   t_rock:        {map: 217, rect: [22, 36, 2, 2]}
+  t_hall:        {map: 187, rect: [22, 13, 15, 16]}
+  t_townhouse:   {map: 187, rect: [23, 7, 5, 6]}
+  t_lamp:        {map: 187, rect: [22, 11, 1, 3]}
+  t_stall:       {map: 187, rect: [44, 11, 5, 6]}
+  t_house_orange: {map: 187, rect: [50, 11, 5, 5]}
+  t_barrel:      {map: 187, rect: [61, 8, 1, 2]}
+  t_barrel2:     {map: 187, rect: [62, 7, 1, 2]}
+  t_trellis:     {map: 187, rect: [19, 25, 2, 3]}

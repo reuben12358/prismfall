@@ -91,6 +91,30 @@ The stock intro's controls tutorial is not reproduced.
 - Tested end to end with a dummy imported tileset (ID 30): import, build a map, render, merge into a copy of the
   Renovation project's Tilesets.rxdata, then load it with Ruby's Marshal.
 
+## 2c. Tectonic tileset pilot (ART_DIRECTION.md)
+- `tilesets/tectonic_outside.yaml` imports Tectonic's Outside sheet as **tileset 30 "Prismfall Outside"** straight from its
+  `Tilesets.rxdata` (`from_rxdata:`; terrain tags above 16 are remapped per ART_DIRECTION §2.1). Install it into the
+  project with `merge_tilesets.py`. Licence: CC BY-NC-SA 4.0 (docs/CREDITS.md).
+- `palettes/tectonic.yaml` paints with **example-based rules learned from Tectonic's own maps** (`tlearn.py` →
+  `data/learned/t_*.json`: 8-neighbour → tile, nearest-match fallback) and stamps mined with `textract.py`
+  (`textract.yaml` → `data/stamps_t.json`; objects only, never layouts). `tprobe.py` is the research helper.
+- New painter kinds:
+  - `learned`: paving and fences.
+  - `cliffline`: Gen 4 rim-line cliffs from a `heights:` grid, with stacked 3-row faces.
+  - `sea`: water autotile on layer 2 with rock or quay showing under its shore.
+  - `tpier`: timber piers.
+  - `forest`: mixed-species staggered 2×3 trees with undergrowth.
+  - `ground_table` pass: grass rims where grass meets rock, paving and water.
+  - `scatter` pass: noise-patch flowers and tall grass plus single tufts on bare grass.
+- Spec keys:
+  - `rubric: true` prints the ART_DIRECTION §3 numbers and runs a walk-through flood fill (cut-off events and areas).
+  - `heights:` gives the height grid for `cliffline`.
+  - `tone: [r, g, b, gray]` goes to the generated `Plugins/Prismfall Maps/005_MapAtmosphere.rb` (applied on map entry).
+  - Weather stays in `metadata`.
+- Layout scripts (`layouts/saltmere.py`) build the height map, cliff lines, curving variable-width paths (`path()`),
+  noise-edged blobs and the stamp list, then write them into the spec.
+- Only Saltmere (140) uses this so far. Every other map is still on the banned stock tilesets and must be redone.
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen
