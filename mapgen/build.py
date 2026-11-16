@@ -401,7 +401,7 @@ def main():
     import shutil
     # MapInfos entries (merged into the user's own MapInfos.rxdata by merge_mapinfos.py / the in-game installer)
     with open(os.path.join(OUT, 'mapinfos_prismfall.txt'), 'w', encoding='utf-8') as f:
-        f.write('# id<TAB>parent_id<TAB>name   (consumed by mapgen/merge_mapinfos.py and the Prismfall Map Installer plugin)\n')
+        f.write('# id<TAB>parent_id<TAB>name   (consumed by mapgen/merge_mapinfos.py and the Prismfall Maps plugin)\n')
         for mi in sorted(mapinfos, key=lambda d: d['id']):
             f.write('%d\t%d\t%s\n' % (mi['id'], mi['parent'], mi['name']))
     shutil.copyfile(os.path.join(OUT, 'mapinfos_prismfall.txt'), os.path.join(OUT, 'Data', 'mapinfos_prismfall.txt'))

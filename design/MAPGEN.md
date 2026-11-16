@@ -3,27 +3,34 @@
 The map generator turns readable YAML specs into real RMXP map files (`Data/MapNNN.rxdata`) for Essentials v21.1 + EBDX, using
 the base project's stock tilesets. Code and specs live in `mapgen/`, output in `maps_out/`.
 
-## 1. What's built (Act I slice, in progress)
-| IDs | Maps | Notes |
+## 1. What's built (Act I, in story order)
+| IDs | Maps | Story / mechanics |
 |---|---|---|
-| 100 | Ferrow's Landing (40×32) | Town: Lab, PC, Mart, Inn, Customs, Dockmaster, Lighthouse, pier and berth, linked doors, N edge to Route 1 |
-| 101–108 | Ferrow's interiors | PC (nurse, healing balls, PC), Mart, Larch lab (starter table: any Gen 1–9 starter via `Prismfall::Rival.line` + `Prismfall.record_starter`), Inn (rest = heal), Lighthouse 1F/Lamp room (stairs), Dockmaster, Customs Hall (moored ship) |
-| 120 | Briarwick (44×40) | Gym, PC, Mart, Guildhall, two houses, stream with a plank bridge, W edge to Route 3 (540), S warp to Gossamer Wood (524) |
-| 121–125 | Briarwick interiors | Cutter's House gives HM01 once Badge 1 is held |
-| 130–133 | Loomhouse Gym (Gym 1) | Foyer → Weaving Hall (heddle-lever plank puzzle, V305–V307) → Canopy Lofts (spool ziplines, S305–S307, rope ladders) → The Spindle (Tamsin; `Prismfall.award_badge(1)`, TM89) |
-| 520 | Route 1 (26×48) | Tall grass, a south-only ledge, 2 trainers, Juno tutorial NPC, items, an Oran berry tree |
-| 521, 523 | Route 2 (60×26) + Hale Farmhouse | Orchard hedgerows, 3 trainers, the NE quarantine cordon (Accord guard blocks the gap to 522), W warp to Gossamer Wood |
-| 524, 526 | Gossamer Wood (48×48, :SILKWOOD) + Woodward's Hut | Forest maze, S↔Route 2 and N↔Briarwick warps, a silk wall forcing the west loop, a Cut tree, 4 trainers, Kestrel |
-| 990 | Prismfall Test Arena (21×13) | One NPC per field in SPINE's roster (31), each offering a wild or trainer test battle with `setBattleRule("field", :ID)` and `canLose`; a healer; Exit → Ferrow's Landing |
+| 109–110 | The Dovetail: deck and cabin (prologue) | The intro autorun runs `Prismfall.choose_difficulty`. Voss gives the badge case and the `PRO_FELLOWSHIP` choice, then a fade to the Ferrow's berth. The deck is pier planks and rails over the sea ([TODO art] ship) |
+| 100–108 | Ferrow's Landing and interiors | Customs NULL scan (S102). Edda's GO-01. The Hales' stall, the counting rhyme, the Old Rod. Larch's letter scene, then the starter table (any Gen 1–9, plus Juno's and Kestrel's counter-picks). K1 autorun at the lab gate (`Prismfall.rival_battle`, S104). Rowan, Hesper |
+| 520, 521 (+523) | Route 1, Route 2 (+ Hale Farmhouse) | The Route 2 cordon guard lets you through once K1 is done |
+| 522 | The Glassed Orchard (:BLEED) | Bleed Veil scene with Juno: GO-02 choice, the Wurmple calm, Larch's Field Notes line (S105) |
+| 524–526 | Gossamer Wood, Deepwood, Woodward's Hut (:SILKWOOD) | Silk-wall loop, Cut tree to Deepwood |
+| 120–125 | Briarwick and interiors | Thistle at the pylon (HOLLOW_THISTLE, S106), Loyal Three shrine, poster, Celestine (S170) |
+| 130–133 | Loomhouse Gym (Gym 1) | Heddle planks, spool ziplines, then `Prismfall.gym_battle(1)` → `award_badge(1)`. Tamsin's confession and the `CH2_TAMSIN` choice |
+| 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch via `EliteBattle.bossBattle` (S107, V105=1, V102=3) |
+| 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
+| 150–154 | Pell Playhouse (Gym 2, :GRAND_STAGE) | Revolving-stage wheel (scene order, actor battles, CUT), fly-loft spotlights with coupled rigging, Comedy door. Dorian double battle → Badge 2, TM42, Eevee "Understudy" (S110) |
+| 990 | Prismfall Test Arena | One NPC per SPINE field: wild or trainer test battle with `setBattleRule("field", :ID)` |
 
-Previews: `maps_out/previews/NNN_<name>.png`. Each is rendered from the written `.rxdata` file and shows the event pages active at game start.
+**New game hookup:** in the base project's intro map (Map001), change its final Transfer Player to **map 109, (8,6)**.
+That keeps Essentials' name and gender setup. 109's intro autorun then starts the prologue.
 
 ## 2. Installing into your project (Windows, RPG Maker XP)
 1. **Close RPG Maker XP.** It rewrites `MapInfos.rxdata` when it saves.
 2. Copy `maps_out/Data/Map*.rxdata` and `maps_out/Data/mapinfos_prismfall.txt` into your project's `Data/`.
    Copy `maps_out/PBS/map_metadata_prismfall.txt` and `map_connections_prismfall.txt` into `PBS/`. v21.1 merges `<base>_<suffix>.txt` files.
-3. Register the maps in `Data/MapInfos.rxdata` with **either** method:
-   - **In-game (recommended, uses the game's own Marshal):** copy `maps_out/Plugins/Prismfall Map Installer/` into `Plugins/`.
+3. Copy the runtime plugin `maps_out/Plugins/Prismfall Maps/` into `Plugins/`. It holds:
+   - `002_MapFields.rb`, **generated** by build.py from the specs' `field:` entries. It fills `FieldEffects::MAP_FIELDS`
+     (guarded with `if defined?(FieldEffects)`), so map → field defaults ship with the maps and nobody edits Field Effects by hand.
+   - The Debug installer action from step 4.
+4. Register the maps in `Data/MapInfos.rxdata` with **either** method:
+   - **In-game (recommended, uses the game's own Marshal):** with the plugin installed,
      Start the game in Debug mode and run **Debug → Files → Install Prismfall maps**. The plugin backs up `MapInfos.rxdata` once,
      to `MapInfos.rxdata.prismfall-bak`. It adds each line of `mapinfos_prismfall.txt` with its name and parent, keeps every
      existing entry, and reports any ID collision (skipped) or missing map file.
@@ -32,21 +39,28 @@ Previews: `maps_out/previews/NNN_<name>.png`. Each is rendered from the written 
      adds our entries, warns on and skips collisions, and makes a backup. Add `--dry-run` to only report.
    - We never ship a prebuilt MapInfos. Both methods start from your own file.
    - If you skip this step, Essentials' compiler still imports the maps in Debug mode, but with names like `MAP100` and no tree.
-4. Start the game in Debug mode so it **recompiles** (or use Debug → Compile data). Then open RMXP: the maps appear under their parents.
-5. Field defaults: `maps_out/manifest.json` → `fields` lists `map_id → FIELD`. Those are the gym rooms and :SILKWOOD so far.
-   The Field Effects owner adds them to `FieldEffects::MAP_FIELDS`. The gym battles also set the field explicitly.
+5. Start the game in Debug mode so it **recompiles** (or use Debug → Compile data). Then open RMXP: the maps appear under their parents.
 6. Trainers used by map events are listed in `maps_out/trainers_needed.txt`, for example `:YOUNGSTER, "Pip"`.
    Each must exist in PBS. Missing ones crash at battle start; in Debug mode, compiling offers to create them.
 
-**Game Switches / Variables used by map events** (name them in RMXP's database; we don't touch `System.rxdata`):
-| ID | Kind | Use |
-|---|---|---|
-| 22 | Switch | stock Essentials `s:tsOff?("A")`, used by the animated door pattern (same as the base project) |
-| 305 / 306 / 307 | Variable | Gym 1 Weaving Hall heddles A / B / C (0–2: which plank column is down) |
-| 305 / 306 / 307 | Switch | Gym 1 Canopy Lofts cords α / β / γ |
-The gym puzzle block is 300+5n … 300+5n+4. Gym 1 = 305–309, per GYM_PUZZLES.md and the SPINE_FEEDBACK request.
-The base project's System.rxdata defines only 100 switches and 100 variables. The game works with higher IDs, but to see their names
-in RMXP, raise the maximum in Database → System (or in the switch/variable picker).
+**Game Switches / Variables used by map events.** We never touch `System.rxdata`; name them in RMXP's database.
+- **Story IDs (101–300)** come from `design/FLAGS.md`. build.py parses its tables, and specs use the names (`switch: CH1_K1_DONE`,
+  `var: [STORY_CHAPTER, 3]`, `@@NAME` inside scripts). Used so far:
+  - Switches: S101–S110, S161 LARCH_AT_TIDEWATCH (switched on by the prologue intro), S170 GLOAMING_DISGUISED_CELESTINE.
+  - Variables: V101 STORY_ACT, V102 STORY_CHAPTER, V105 BRIARWICK_GLASSWOOD.
+  - Plus stock switch 22 `s:tsOff?("A")`, used by the door pattern.
+- **Gym puzzle IDs (301–400)**, in `mapgen/flags.yaml`:
+  - Gym 1: V305–307 heddles, S305–307 cords.
+  - Gym 2: V310 scene, V311 acts, V312–314 spotlights; S310 ladder, S311 mask, S312 trapdoor, S313 spotlights initialised.
+  - Gym 2 actor-beaten flags are self switches B/C/D on the wheel event.
+- The base project's System.rxdata defines 100 switches and 100 variables. Raise the maximum in Database → System to see names for the higher IDs.
+
+**Keys the narrative spec must register / confirm** (used by events via `pf_choose` and `Prismfall.game_over`):
+- `:PRO_FELLOWSHIP` → :accept / :decline / :silent (with `pf_standing_add(:MERIDIAN, 1)` and $1000, or `pf_bond_add(:VOSS, 1)`)
+- `:CH2_TAMSIN` → :help_confess / :expose (MERIDIAN −1, ACCORD +1) / :keep_secret (MERIDIAN +1)
+- `:CH3_JUNO_TALK` → :told (JUNO +1) / :deflect / :silent
+- Game overs: GO-01 "Homeward" uses `:GO_LAST_FERRY`, GO-02 "Two in the Orchard" uses `:GO_BLEED_TIDE` (Core's registered
+  IDs). Rename both sides together if Narrative picks other IDs.
 
 ## 3. Regenerating
 ```
@@ -123,6 +137,7 @@ condo, institute, daycare, harbour_pier, mailbox.
 | `warp` | `to: {...}` or `link`, `arrive: [x, y, dir]`, `se` | touch transfer |
 | `berry` | `berry` | |
 | `cut_tree` | | "CutTree" event: `pbCut` → `pbSmashEvent` |
+Doors from stamps get the lowest event IDs on a map, so their arrival autorun runs before story autoruns.
 | `mart` | `items` | |
 | `pc` | | |
 | `event` | raw `pages`: `cond {switch, switch2, var: [id, min], self}`, `graphic {sprite, dir, tile}`, `trigger action\|touch\|event_touch\|autorun\|parallel`, `move`, `through`, `commands` | full control |
@@ -155,8 +170,14 @@ above the mat facing up, and leave onto the door tile, where the door animates y
   rock-gym theme of the Gyms tileset, with no silk/web art; there is no ship sprite, so the Customs Hall template's moored ship
   stands in for the Dovetail. Real art needs custom tiles.
 - No cliffs or mountains yet. Outdoor barriers are trees, water, fences and ledges. The Lighthouse is a condo stamp.
-- Not built yet: 109/110 (Dovetail deck/cabin, Boat tileset), 522 Glassed Orchard, 525 Deepwood (the Cut tree leads to a
-  `[TODO map]` sign), Route 3 onward (Briarwick's W edge connection to 540 is held back until 540 exists).
+- Not built yet: 544/545 Brinecut Mine (Caves tileset, needs a palette), 546/547 Thistledown Manor (Mansion tileset), and
+  Route 5 onward (Ebbmouth, Lumen). Their entrances are signs, and Saltmere's west edge is closed with trees.
+- Deviation from maps.json: Route 4's north edge joins Route 3's **south** edge at x=2–9. maps.json paired 540-west with
+  541-north, which isn't a legal Essentials edge pair.
+- Story items without item data (Meridian badge case, Fellowship card, Gilded King page, Granny Loom's shuttle) are text
+  only. Add key items, then swap the text for `pbReceiveItem`.
+- The Glass Matriarch uses EBDX `bossBattle` (HP×3) and falls back to `WildBattle`. Switch to the Prismfall Bosses
+  plugin's API when it exists.
 - Dialogue is placeholder `[TODO story]` text, except gym mechanics from GYM_PUZZLES.md.
 - Trainers in `trainers_needed.txt` (route and gym trainers, Test Arena `YOUNGSTER Ben`, a base PBS trainer) must exist in PBS.
 - RMXP can only test variable conditions with ">=", so each plank uses two pages (show at ≥k, hide at ≥k+1).

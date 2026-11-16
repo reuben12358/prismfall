@@ -100,7 +100,7 @@ decision) · `:refill` (next bar's HP fraction, default 1.0, break only).
 Conditional Branch > Script: Prismfall::Bosses.wild_battle(:KYOGRE_ISENMAR)
    Conditional Branch > Script: Prismfall::Bosses.last_result[:result] == :calmed
 Script: Prismfall::Bosses.wild_battle(:ZEKROM_ENGINE, can_lose: true, field: :NONE)
-# Trainer whose ace is a boss:
+# Trainer whose ace is a boss (:MOURNER_TREVENANT is a hypothetical definition):
 Script: Prismfall::Bosses.trainer_battle(:HOLLOW_MOURNER, "Mourner", 0, boss: :MOURNER_TREVENANT, species: :TREVENANT)
 # Wrap another helper (one-shot, consumed by the next trainer load):
 Script: Prismfall::Bosses.mark_next_trainer(:WARDEN_ACE_2BAR)
@@ -135,7 +135,7 @@ Debug > **Prismfall Bosses...**: start any registered wild boss (with canLose, t
 Hard Warden ace (Ilsa/Celestine Hard team, 2-bar ace), and toggle the Festival switch.
 
 ## 6. Verification
-`ruby -c` passes on every file. A stub harness (`/tmp/bosses_test/test.rb` + `test_ebdx.rb`, 60 checks, all passing)
+`ruby -c` passes on every file. A stub harness (`/tmp/bosses_test/test.rb` + `test_ebdx.rb`, 59 checks, all passing)
 loads the plugin against minimal Essentials stubs that use v21's real `pbReduceHP`/`pbRecoverHP` logic. It covers:
 - breaks from move damage (3-hit move: first hit trimmed to hp-1, later hits absorbed, exact full refill) and from effect damage
 - every on-break effect used by the examples, statuses and immunity drop, the calm/free/faint defeat paths, and ball deflection

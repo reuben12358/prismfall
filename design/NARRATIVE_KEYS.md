@@ -218,3 +218,103 @@ CHOICE_EFFECTS = {
 }
 ```
 Quiet Hours relationship scenes (10_CHOICES_ENDINGS §7.1) add `+1` to their Bond when first reaching `friendly` and `close`.
+
+---
+
+## 5. Derived flags and tallies [CORE+ `flag()` / `tally()`]
+
+Every outcome name the act files use (`TEO_SAVED`, `MAGNUS_KEPT_FAITH` …) is a **derived flag**, never stored. FLAGS.md's mirror
+switches S221–S228 are written from these by Core (`S221 = flag(:TEO_SAVED)` etc.; S228 = `flag(:KESTREL_REDEEMED)`).
+
+```ruby
+DERIVED_FLAGS = {
+  # Act I-III outcomes
+  :TAMSIN_PUBLIC_CONFESSION => "choice(:ch2_tamsin) == :expose",
+  :TEO_SAVED                => "choice(:ch9_teo_sable) == :save_teo",
+  :IRONREACH_EVIDENCE       => "choice(:ch9_teo_sable) == :chase_sable",
+  :KROLL_EXPOSED_CH13       => "flag(:IRONREACH_EVIDENCE)",            # public unmasking at the tribunal needs the comm-device
+  :OGERPON_TRUSTED          => "choice(:ch10_ogre) == :ogre",
+  :ANJA_EXPOSED             => "choice(:ch11_anja) == :expose",
+  :KAITO_TESTIFIED          => "choice(:ch13_kaito) == :encourage",
+  :ROWAN_ALIVE              => "choice(:ch13_fault) != :marchetti",
+  :ROWAN_RADICAL            => "flag(:ROWAN_ALIVE) && choice(:ch13_rowan_testimony) == :condemn && bond(:ROWAN) <= -2",
+  :CORVIN_FREED             => "choice(:sq_doctors_cell) == :freed",
+  # Act IV
+  :MARCHETTI_TURNED         => "choice(:ch13_fault) == :marchetti || choice(:ch14_marchetti) == :show_evidence",
+  :TELEMETRY_SABOTAGED      => "choice(:ch14_telemetry) == :sabotage",
+  :ZEKROM_FREED             => "made(:ch16_zekrom)",
+  :MAGNUS_EXPOSED           => "choice(:ch16_magnus) == :expose",
+  :MAGNUS_KEPT_FAITH        => "choice(:ch16_magnus) == :conscience",
+  :ROOK_CUTS_GRID           => "choice(:ch16_rook) == :hold",          # a leaked Rook is fired and loses grid access
+  :NYX_BARGAIN_TAKEN        => "choice(:ch17_nyx) == :trade",
+  :NYX_PRECISE              => "flag(:NYX_BARGAIN_TAKEN)",
+  :VOSS_FEIGNED             => "choice(:ch17_voss_offer) == :feign",
+  :VOSS_ACCEPTED            => "choice(:ch17_voss_offer) == :accept",
+  :VOSS_DISCREDITED         => "flag(:MAGNUS_EXPOSED) && made(:ch16_rook)", # Rook's leak + Night of Masques + Magnus exposed
+  # Kestrel
+  :KESTREL_FALLEN           => "choice(:ch18_kestrel_ring) != :give_now && choice(:ch15_kestrel) != :she_chose && (bond(:KESTREL) <= -4 || (bond(:KESTREL) <= 1 && (choice(:ch15_kestrel) == :sorry || standing(:MERIDIAN) >= 5)))",
+  :KESTREL_REDEEMED         => "!flag(:KESTREL_FALLEN)",
+  :KESTREL_LOST             => "flag(:KESTREL_FALLEN) && choice(:ch21_reach_kestrel) == :let_go",
+  :KESTREL_YSOLDE_RECONCILED=> "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 5 && bond(:YSOLDE) >= 4",
+  :KESTREL_BEARS            => "!flag(:KESTREL_FALLEN) && bond(:KESTREL) >= 8",
+  :SIGRUN_BEARS             => "!flag(:KESTREL_BEARS) && bond(:SIGRUN) >= 6",
+  :KESTREL_ACCEPTED_SEAT    => "flag(:KESTREL_YSOLDE_RECONCILED) && !flag(:KESTREL_LOST) && !(choice(:ch21_final) == :borrowed && flag(:KESTREL_BEARS))",
+  # Act V
+  :DOMINAR_SWAYED           => "choice(:ch19_dominar) == :swayed",
+  :ENVOY_PERSUADED          => "choice(:ch20_envoy) == :proof",
+  :CALLA_ALIVE              => "choice(:ch20_calla) != :send_back",
+  :ILSA_RECONCILED          => "choice(:sq_little_owl) == :reconciled",
+  :VALEN_COLLAPSED          => "!flag(:ILSA_RECONCILED) && choice(:ch20_audience) == :refuse && bond(:VALEN) <= -2 && choice(:ch14_telemetry) == :leave",
+  :LANTERN_HOLDS            => "standing(:HOLLOW) >= 0 && (flag(:ROWAN_ALIVE) || flag(:TEO_SAVED))",
+  :PC_SPARED_VOSS           => "choice(:ch21_spare_voss) == :shield && !flag(:VOSS_DISCREDITED)",
+  :VOSS_REDEEMED            => "flag(:VOSS_DISCREDITED) && bond(:VOSS) >= 0",  # Quent hijacks; Voss comes down from the gallery
+  # Engine and endings
+  :ENGINE_CALIBRATED        => "choice(:ch14_telemetry) == :leave && choice(:ch16_magnus) != :conscience && tally(:ENGINE_BREAKS) <= 3",
+  :CONCORD_OPEN             => "!ruin_route && (flag(:VOSS_ACCEPTED) || choice(:ch16_magnus) != :conscience)",
+  :BORROWED_OPEN            => "!ruin_route && (flag(:KESTREL_BEARS) || flag(:SIGRUN_BEARS))",
+  :UNMAKE_OPEN              => "ruin_route || resonance <= -6 || (standing(:HOLLOW) >= 4 && (flag(:ROWAN_RADICAL) || !flag(:KROLL_EXPOSED_CH13)))",
+  :HARMONY_BUFF             => "resonance >= 6"
+}
+
+# Wardens' Consent, gym order (index = gym - 1). A Warden who doesn't consent refuses to release their Plate in the Arceus fight.
+WARDEN_CONSENT = [
+  "choice(:ch2_tamsin) != :keep_secret",                          #  1 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
+  "choice(:ch5_lowlight_testimony) != :mourner",                  #  2 Dorian  - you told the official story on record; he keeps the lie he knows
+  "flag(:TEO_SAVED) || bond(:MARISOL) >= 3",                      #  3 Marisol
+  "flag(:ROOK_CUTS_GRID) || flag(:MARCHETTI_TURNED)",             #  4 Rook    - the Zap Plate is in Meridian's vault; he can only release what he can reach
+  "choice(:ch6_drillsite) != :directorate",                       #  5 Sahar
+  "flag(:CORVIN_FREED)",                                          #  6 Corvin  - otherwise a Choir porter carries his Plate and can't release it
+  "choice(:ch8_lightstone) != :dominar",                          #  7 Brann
+  "flag(:KAITO_TESTIFIED)",                                       #  8 Kaito   - a man who never confessed can't let go
+  "bond(:JUNO) >= 0",                                             #  9 Juno
+  "choice(:ch11_anja) == :let_confess",                           # 10 Anja    - "Rimeholt drowns without it."
+  "choice(:ch12_letter) != :burn",                                # 11 Odessa  - you burned a dead letter
+  "flag(:ILSA_RECONCILED) || bond(:ILSA) >= 5",                   # 12 Ilsa
+  "choice(:ch14_telemetry) != :leave",                            # 13 Bastian - you walked a Meridian beacon into his seams
+  "!flag(:KESTREL_FALLEN) || choice(:ch21_reach_kestrel) == :reach", # 14 Ysolde
+  "flag(:MAGNUS_KEPT_FAITH)",                                     # 15 Magnus  - "I won't hand my city's future to a god."
+  "flag(:NYX_BARGAIN_TAKEN) || bond(:NYX) >= 4",                  # 16 Nyx
+  "resonance >= 2",                                               # 17 Celestine - she hears which key you sing in
+  "choice(:ch19_oath) != :keep && choice(:ch19_oath) != :ruin"    # 18 Sigrun
+]
+
+TALLIES = {
+  :CONSENT       => WARDEN_CONSENT,
+  :ENGINE_BREAKS => [                                             # Larch's Engine board in Ch20 shows these as lights
+    "choice(:ch14_telemetry) != :leave",                          # destroyed or sabotaged: under-calibrated
+    "flag(:TELEMETRY_SABOTAGED)",                                 # sabotage counts twice (the strongest single weakening)
+    "flag(:ZEKROM_FREED)",
+    "flag(:MAGNUS_KEPT_FAITH)",
+    "flag(:ROOK_CUTS_GRID)",
+    "flag(:NYX_PRECISE)",
+    "chose(:ch20_calla, :shelter) || chose(:ch20_calla, :send_back)",
+    "chose(:ch20_calla, :send_back)",                             # she went back for the full set, and died for it
+    "flag(:MARCHETTI_TURNED)",
+    "flag(:LANTERN_HOLDS)",
+    "!flag(:KESTREL_LOST)"
+  ],
+  :WARM_BONDS    => ["bond(:JUNO) >= 5", "bond(:KESTREL) >= 5", "bond(:ROWAN) >= 5", "bond(:VOSS) >= 5", "bond(:VALEN) >= 5",
+                     "bond(:ILSA) >= 5", "bond(:SIGRUN) >= 5", "bond(:NYX) >= 5", "bond(:MARISOL) >= 5", "bond(:YSOLDE) >= 5"]
+}
+```
+`tally(:CONSENT) >= 12` is the Good-ending threshold. `ENGINE_CALIBRATED` is evaluated when the True Finale starts (all inputs are known by then).

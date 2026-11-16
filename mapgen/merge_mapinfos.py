@@ -12,7 +12,7 @@ Steps (close RPG Maker XP first - it rewrites MapInfos.rxdata when it saves):
      ID collisions with a differently-named existing map are reported and skipped.
   4. writes MapInfos.rxdata back (existing strings keep their original encoding style).
 No prebuilt MapInfos is shipped: the merge always starts from the user's file.
-An in-game alternative (uses the game's own Marshal) is the 'Prismfall Map Installer' debug plugin in maps_out/Plugins."""
+An in-game alternative (uses the game's own Marshal) is the 'Prismfall Maps' plugin (Debug > Files > Install Prismfall maps) in maps_out/Plugins."""
 import sys, os, shutil
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rmarshal as M
