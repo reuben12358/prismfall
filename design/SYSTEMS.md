@@ -1,0 +1,192 @@
+# SYSTEMS — `Prismfall Core` plugin
+
+Plugin folder: `plugins/Prismfall Core/` (Essentials v21.1, Ruby 3.1-safe). All tunables are in
+`001_Config.rb` (gyms, caps, difficulty, starters, trainer card) and `008_Festival_Data.rb` (Festival).
+Core state is saved in its own save value (`$prismfall`, `Prismfall::SaveState`), never in switches/variables.
+
+## 0. Load order and hooks
+`meta.txt` declares `Optional = v21.1 Hotfixes` and `Optional = Elite Battle: DX`, so Core loads **after**
+them. This matters because EBDX redefines `pbLoadTrainer`; Core must wrap EBDX's version.
+Every hook is an `alias`-chain with a `unless method_defined?` guard (safe on F12 soft reset), and sits at the
+battle or trainer-loading layer (never the battle scene), so it works with or without EBDX:
+
+| Hook | Purpose |
+|---|---|
+| `pbLoadTrainer` | picks the difficulty variant (+100 Hard / +200 Casual, falls back to base) |
+| `:on_trainer_load` handler | rival starter swap (TrainerBattle foes and registered partners) |
+| `BattleCreationHelperMethods.prepare_battle` | forced Set style, Bag lock, snapshot of cap/difficulty in `battle.rules` |
+| `Game_Temp#add_battle_rule` | new rules `"noBagItems"` / `"allowBagItems"` |
+| `Battle#pbItemMenu` | blocks the Bag when the Bag lock is on |
+| `Battle#pbGainExpOne` + `GameData::GrowthRate#add_exp` | no Exp at cap, Exp clamped to the cap, difficulty Exp multiplier |
+| `Battle::Battler#pbObedienceCheck?` | disobedience above the cap (vanilla badge check runs if caps are off) |
+| Rare Candy / EXP Candy item handlers + `pbChangeExp` | blocked at cap, usable quantity limited to the cap |
+| `DayCare::DayCareSlot#add_exp` | Day Care stops at the cap |
+| `NPCTrainer#skill_level` | AI skill floor per mode |
+| `PokemonPauseMenu#pbShowInfo` | pause-menu box: "Level cap: Lv. 23 / Mode: Standard" |
+| `PokemonTrainerCard_Scene#pbDrawTrainerCardFront` | 18-badge layout |
+
+Custom events other plugins can listen to (`EventHandlers.add(event, :key, proc)`):
+`:prismfall_badge_awarded (n)`, `:prismfall_difficulty_changed (old, new)`, `:prismfall_festival_started`,
+`:prismfall_festival_before_battle (stage_id, opponent_id)`, `:prismfall_festival_result (stage_id, won)`,
+`:prismfall_festival_boss (pkmn, stage_id)` (non-EBDX boss path), `:prismfall_festival_finished (champion)`.
+
+## 1. Gyms and badges
+`Prismfall::GYMS` mirrors SPINE: one Hash per gym with `:index, :type, :city, :warden, :trainer_name,
+:trainer_type, :field, :cap, :version` (gym 9 also has `:rival_battle => 3`, i.e. Juno's J3 uses versions 30/31/32).
+
+- `$player.badges` grows to 18 entries automatically (padded on load/award). `Prismfall.badge_count` counts badges 1-18.
+- Award with `Prismfall.award_badge(n)`, not `$player.badges[n-1] = true`: it also records the badge time,
+  fires `:prismfall_badge_awarded` and announces the new cap.
+- Field-move requirements: `FIELD_MOVE_BADGES` (CUT 1, ROCKSMASH 2, SURF 3, FLASH 4, STRENGTH 5, FLY 8,
+  WATERFALL 10, DIVE 12) are written into `Settings::BADGE_FOR_*` at load. `FIELD_MOVES_COUNT_BADGES = true`
+  means "at least N badges"; set it to `false` for "gym N's badge specifically" (written 1-18 in our config).
+
+### Trainer Card (18 badges in 2 rows of 9)
+Core keeps the vanilla text and suppresses only the vanilla 8-badge row. Layout is set in `TrainerCardLayout`:
+32x32 icons, row 1 at y=294 and row 2 at y=332, x = 64 + col*44 (badge strip covers about x 56-456, y 286-372).
+Art to draw (none of it is required, there are code fallbacks):
+
+| File | Size | Notes |
+|---|---|---|
+| `Graphics/UI/Trainer Card/icon_badges_18.png` | 288x64 | 9 columns x 2 rows of 32x32; badge *i* (0-based) at column `i % 9`, row `i / 9`. Fallback: vanilla `icon_badges.png` read 8 per row. |
+| `Graphics/UI/Trainer Card/icon_badge_slot.png` | 32x32 | optional empty-slot frame drawn under every slot; fallback is a faint box drawn in code |
+| `Graphics/UI/Trainer Card/card.png`, `card_f.png` | 512x384 | redraw the bottom panel as a 2x9 badge strip (area above); the text rows are unchanged from vanilla |
+
+## 2. Level caps
+Cap = `:cap` of the **first gym whose badge isn't owned**: 15 before Badge 1, ... , 85 before Badge 18.
+With all 18 badges the cap is 90; it becomes 100 after `Prismfall::LevelCap.unlock_finale!`. The Festival
+calls that for the finale stages (Hijack and Arceus); see the question at the end of this file.
+- Battle Exp stops at the cap, and a single gain can't push a Pokémon past it. EVs are still gained.
+  "X is at the level cap" is shown once per battle per Pokémon.
+- Rare Candy and EXP Candy are refused at the cap, and the "how many?" maximum stops at the cap.
+  Setting `RARE_CANDY_EVOLVES_AT_CAP = true` lets a Rare Candy trigger a pending level evolution instead.
+- Obedience: Pokémon above `cap + :obedience_margin` can disobey (same formula as vanilla, using the cap
+  instead of the badge level). Off on Casual. When caps are off, the vanilla badge check runs.
+- Day Care growth stops at the cap.
+- The cap is shown in the pause menu info box (`SHOW_CAP_IN_PAUSE_MENU`), on the debug status screen, and through `Prismfall::LevelCap.announce`.
+
+```
+Script: Prismfall::LevelCap.announce            # "The current level cap is Lv. 23."
+Script: Prismfall::LevelCap.set_override(30)    # story-forced cap; .clear_override to undo
+Script: Prismfall::LevelCap.unlock_finale!      # post-Badge-18 cap becomes 100
+Conditional Branch > Script: Prismfall.level_cap >= 50
+```
+
+## 3. Difficulty (Casual / Standard / Hard)
+| Tunable | Casual | Standard | Hard |
+|---|---|---|---|
+| trainer version offset | +200 | 0 | +100 |
+| Exp multiplier | 1.5 | 1.0 | 1.0 |
+| forced Set style | no | no | **yes** |
+| Bag in trainer battles | yes | yes | **no** |
+| cap obedience | off | on | on |
+| AI skill floor | - | - | 48 (high) |
+Also available per mode: `:exp_at_cap`, `:candy_at_cap` (make caps soft), `:cap_bonus`, `:ai_skill_max`,
+`:obedience_margin`. The rule for changing modes later is `DIFFICULTY_CHANGE_RULE` (`:any`, `:lower_only` or `:locked`).
+
+Trainer variants (SPINE): any `TrainerBattle`/`pbLoadTrainer` call with version `v < 100` loads `v+offset`
+if it exists in trainers.txt, else `v`. Versions >= 100 are explicit and never remapped.
+Explicit battle rules always win over the mode: `setBattleRule("switchStyle")`, `setBattleRule("allowBagItems")`, `setBattleRule("noBagItems")`.
+
+```
+# Intro event, after the player names themselves:
+Script: Prismfall.choose_difficulty            # choice list with descriptions + confirm
+# NPC / PC that lets the player change it later:
+Script: Prismfall::Difficulty.change_menu
+Conditional Branch > Script: Prismfall::Difficulty.hard?
+```
+
+## 4. Rival starter system
+Starter table `STARTER_LINES`: Gen 1-9 × [Grass, Fire, Water] × 3 stages (all IDs checked against the Gen 9 Pack PBS).
+1. Record the starter when the player receives it:
+   `Script: Prismfall.record_starter($player.party[0])` (or `:SPRIGATITO`). For an off-table pick, pass the slot and gen explicitly:
+   `Prismfall.record_starter(:EEVEE, gen: 1, slot: 2)`. If nothing was recorded, Core falls back to the player's earliest-received starter-line Pokémon.
+2. Rival battles: `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 3)` gives version `3*10 + slot`
+   (+ the difficulty offset through `pbLoadTrainer`). Options: `lose_text:`, `can_lose:`, `double:`, `field:`, `outcome_var:`. Returns true on a win.
+3. At load, every Gen 1 starter-line Pokémon of `RIVAL_KESTREL`, `RIVAL_JUNO` or `LEADER_JUNO` becomes the same
+   slot and stage in the player's generation: the level is kept, level-up moves are regenerated, item/nature/EVs/IVs/shininess/nickname
+   are kept, and so is the ability slot (an explicit PBS `Ability` maps to its slot). Mega Stones are remapped to the
+   new species' stone if it has one, else replaced with `MEGA_STONE_FALLBACK_ITEM` (Life Orb).
+- Cutscene helpers: `Prismfall::Rival.kestrel_slot` / `juno_slot` (Kestrel has the advantage, Juno is weak),
+  `Prismfall::Rival.rival_starter_species(:KESTREL, 0)` gives the species ID to name or show.
+- Gym 9: `Prismfall.gym_battle(9)` uses LEADER_JUNO version 30/31/32 automatically.
+
+```
+Script: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, can_lose: true)
+Script: Prismfall.gym_battle(3)          # Marisol, sets :WATER_SURFACE if Field Effects is installed
+Script: pbMessage(_INTL("Kestrel picked {1}!", GameData::Species.get(Prismfall::Rival.rival_starter_species(:KESTREL)).name))
+```
+
+## 5. Festival of Champions
+Data lives in `008_Festival_Data.rb`. There are 16 bracket slots (`BRACKET`); `PLAYER_PATH = [:JUNO, HEADLINE_CAMEO, :KESTREL, :VALEN]` is locked.
+Entrants on that path always win their NPC matches until they meet the player. The other NPC matches use
+`SCRIPTED_WINNERS[[round, match]]`; anything left over is simulated from `:rating` with a per-save seed, so results are
+stable across reloads. `Festival.validate` (run on start in debug) checks that the seeding allows the path.
+
+**Cameos (SPINE Revision 2):** the 7 invitees are placeholders `:CAMEO_1..7` → `FESTIVAL_CAMEO_1..7`, trainer names
+"Cameo N". When `design/CAMEOS.md` lands, edit `:trainer_type`, `:name` and `:display` in `ENTRANTS` (keys can stay).
+`HEADLINE_CAMEO` (currently `:CAMEO_1`) is the quarterfinal opponent. The Wardens in the bracket (Kaito, Ysolde, Nyx,
+Celestine, Sigrun) are NPC-only, so no trainer data is needed for them (version 50 is reserved if they ever get exhibitions).
+
+Stages: R16 (Juno J4, rival-versioned 40+slot), QF (headline cameo), SF (Kestrel K8, 80+slot), Final (CHAMPION_VALEN v0),
+Hijack (`MERIDIAN_VOSS "Aurelian"` v0 on `:PRISM_ARENA`), True finale (wild Arceus Lv100 boss on `:PRISM_ARENA`).
+Rule sets (`RULESETS`): bracket = level limit 90 / no Bag / canLose (retry) / heal before+after / no prize money;
+finale = the same with 100 (this unlocks the 100 cap); exhibition = like the bracket.
+
+```
+# Reception desk (after Badge 18):
+Conditional Branch > Script: Prismfall::Festival.start
+# Arena entrance:
+Script: Prismfall::Festival.show_bracket
+Conditional Branch > Script: Prismfall::Festival.next_match
+   (won)  -> cutscene for the stage; branch on Prismfall::Festival.stage_id (:QF, :SF, :FINAL, :HIJACK, :ARCEUS, nil=finished)
+   (else) -> "Try again?" loop; the stage doesn't advance
+# Exhibition hall NPC:
+Script: Prismfall::Festival.exhibition_menu          # or .exhibition(:CAMEO_3)
+# Custom battle staged by the event (e.g. a scripted double):
+Script: Prismfall::Festival.record_result(true)
+Conditional Branch > Script: Prismfall::Festival.finished?
+```
+The bracket scene is drawn entirely in code: names at the edges, gold/grey/blue paths, and a centre Final/Champion box.
+An optional background goes in `Graphics/UI/Prismfall/festival_bracket_bg.png` (512x384).
+
+**Why not PWT?** The base project's *Pokemon World Tournament* is a random 8-trainer, 3-round, map-event-driven
+tournament with no saved bracket. It can't hold a 16-entrant, story-locked, saved bracket, so the Festival doesn't use it.
+PWT stays available for the post-game Battle Tower and Warden rematch gauntlet. It works alongside Core: its `pbLoadTrainer`
+and `prepare_battle` aliases chain with ours, so PWT opponents also get difficulty variants. PWT battles set
+`internalBattle = false`, so caps and Exp don't apply there.
+
+## 6. Boss battles (Rejuvenation-style) with EBDX
+EBDX ships `EliteBattle.bossBattle(species, level, player_side = 2, can_catch = false, options = {})`
+(`Plugins/Elite Battle DX/[000] Scripts/Battle Mechanics/Boss Battles.rb`). It provides:
+- a 2v1 or 1v1 wild battle with the boss databox (`dataBoxBoss`)
+- stat multipliers through `:bossboost`; `:HP => 2.0` doubles max HP
+- status immunities (configured by `BOSSBATTLES` `IMMUNITIES` in the EBDX metrics)
+- no capture, no running
+- `generateWild` options: `:moves, :iv, :ev, :ability, :nature, :item, :form, :shiny`
+
+Core uses it automatically for the Festival Arceus stage when EBDX is present (`STAGES[...][:boss]`).
+
+EBDX has **no native multiple HP bars**. To get the Rejuvenation "phases" feel, combine three things:
+1. `EliteBattle.bossBattle` with a high `:HP` boost.
+2. A battle script, set before the battle with `EliteBattle.set(:nextBattleScript, :MY_BOSS)`, holding a `BattleScripts::MY_BOSS` hash whose keys are
+   `"turnStartN"`, `"damageOpp"`, `"lastOpp"` and so on (see `[003] Config/Battle Scripts.rb`). A key's value can be a proc that runs in the scene, e.g.
+   `@battlers[1].pbRecoverHP(...)`, `@battlers[1].pbRaiseStatStageBasic(:ATTACK, 1)`, `@battle.change_field(:BLEED, "...")`
+   or `@sprites["battlebg"].reconfigure(...)`. That gives a scripted "bar break" at a damage threshold.
+3. For trainer villains, the same script through the EBDX trainer PBS `BattleScript` key.
+
+If true multi-bar HP is needed later, it belongs in a small hook on `Battle::Battler#pbReduceHP` (an EBDX Bridge task). Don't rewrite bossBattle.
+
+```
+Script: EliteBattle.bossBattle(:GIRATINA, 60, 1, false, { :bossboost => { :HP => 2.5, :ATTACK => 1.2, :DEFENSE => 1.2, :SPECIAL_ATTACK => 1.2, :SPECIAL_DEFENSE => 1.2, :SPEED => 1.0 }, :moves => [:SHADOWFORCE, :DRAGONCLAW, :AURASPHERE, :WILLOWISP] })
+```
+(Set `setBattleRule("field", :INVERSE)` or `setBattleRule("canLose")` first if needed. EBDX's wild boss path runs `prepare_battle`, so Core's and Field Effects' rules still apply.)
+
+## 7. Debug
+Debug menu → **Prismfall Core...**: status and data check, set difficulty, set starter, cap override / finale cap / caps on-off,
+Festival tools (start, reset, skip to stage, bracket, next match, exhibitions). The separate *Prismfall Debug Tools* plugin covers fields, Wardens and badge count.
+
+## Open questions (need the user)
+1. **Festival "finale" cap:** SPINE says "90 during the bracket, 100 for the finale". Core currently raises the cap to 100 at
+   the Hijack (after the Final), so the Final vs Valen (~96) is fought at cap 90. If "finale" means the Final itself, set the Final's `:ruleset` to `:finale`.
+2. **Hard mode Bag lock:** this also blocks Poké Balls and items in *trainer* battles only; wild battles stay open. Is that right?

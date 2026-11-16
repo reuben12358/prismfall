@@ -1,0 +1,793 @@
+#===============================================================================
+# Prismfall Field Effects - rule evaluation engine
+#-------------------------------------------------------------------------------
+# Pure logic used by the Battle/Battler/Move/AI hooks in later files.
+#===============================================================================
+module FieldEffects
+  DEFAULT_FAIL_MESSAGE        = "But it failed!"
+  DEFAULT_SEED_MESSAGE        = "{1}'s {2} reacted to the field!"
+  DEFAULT_WEATHER_BLOCK_TEXT  = "The field prevented the weather from changing!"
+  DEFAULT_TERRAIN_BLOCK_TEXT  = "The field prevented the terrain from changing!"
+
+  #=============================================================================
+  # Matchers
+  #=============================================================================
+  # rule: Hash containing any MOVE_MATCH_KEYS. target may be nil (then a rule
+  # with a target: matcher never matches). type is the move's type this use.
+  def self.move_matches?(rule, battle, user, target, move, type)
+    return false if !move
+    return false if rule[:moves] && !rule[:moves].include?(move.id)
+    return false if rule[:not_moves]&.include?(move.id)
+    return false if rule[:types] && !rule[:types].include?(type)
+    return false if rule[:not_types]&.include?(type)
+    return false if rule[:flags] && rule[:flags].none? { |f| self.move_has_flag?(move, f, user) }
+    return false if rule[:category] && rule[:category].none? { |c| self.category_matches?(move, c, type) }
+    return false if rule[:function_codes] && !rule[:function_codes].include?(move.function_code)
+    return false if rule[:user] && !self.battler_matches?(rule[:user], battle, user)
+    return false if rule[:target] && !self.battler_matches?(rule[:target], battle, target)
+    return false if rule[:condition] && !self.safe_call(rule[:condition], battle, user, target, move, type)
+    return true
+  end
+
+  def self.move_has_flag?(move, flag, user = nil)
+    flag = flag.to_s
+    if flag.casecmp?("Contact")
+      return (user) ? move.pbContactMove?(user) : move.contactMove?
+    end
+    return move.flags.any? { |f| f.casecmp?(flag) }
+  end
+
+  def self.category_matches?(move, category, type)
+    case category
+    when :physical then return move.damagingMove? && move.physicalMove?(type)
+    when :special  then return move.damagingMove? && move.specialMove?(type)
+    when :status   then return move.statusMove?
+    when :damaging then return move.damagingMove?
+    end
+    return false
+  end
+
+  # spec: Hash containing any BATTLER_MATCH_KEYS.
+  def self.battler_matches?(spec, battle, battler)
+    return false if !battler
+    return true if !spec
+    return false if spec[:types] && spec[:types].none? { |t| battler.pbHasType?(t) }
+    return false if spec[:not_types]&.any? { |t| battler.pbHasType?(t) }
+    return false if spec[:abilities] && !battler.hasActiveAbility?(spec[:abilities])
+    return false if spec[:not_abilities] && battler.hasActiveAbility?(spec[:not_abilities])
+    return false if spec[:items] && !battler.hasActiveItem?(spec[:items])
+    return false if spec[:not_items] && battler.hasActiveItem?(spec[:not_items])
+    if spec.key?(:grounded)
+      return false if spec[:grounded] == battler.airborne?
+    end
+    if spec[:status]
+      st = battler.status
+      ok = spec[:status].include?(st) || (st == :POISON && spec[:status].include?(:TOXIC))
+      return false if !ok
+    end
+    return false if spec[:condition] && !self.safe_call(spec[:condition], battle, battler)
+    return true
+  end
+
+  #=============================================================================
+  # Move type
+  #=============================================================================
+  # Returns [new_type, message] (new_type == type if unchanged).
+  def self.changed_move_type(battle, user, move, type)
+    msg = nil
+    self.active_defs(battle).each do |defn|
+      defn[:type_changes]&.each do |rule|
+        next if rule[:to] == type
+        next if !self.move_matches?(rule, battle, user, nil, move, type)
+        type = rule[:to]
+        msg = rule[:message] if rule[:message]
+        break
+      end
+      next if !defn[:hooks] || !defn[:hooks][:base_type]
+      new_type = self.safe_call(defn[:hooks][:base_type], battle, user, move, type)
+      type = new_type if new_type.is_a?(Symbol)
+    end
+    return type, msg
+  end
+
+  # Extra types added to a move this use (Flying Press-style). Returns
+  # [[type, message], ...].
+  def self.extra_types(battle, user, target, move, type)
+    ret = []
+    return ret if !type
+    self.rules(battle, :extra_types).each do |rule|
+      next if rule[:add] == type || ret.any? { |e| e[0] == rule[:add] }
+      next if !self.move_matches?(rule, battle, user, target, move, type)
+      ret.push([rule[:add], rule[:message]])
+    end
+    return ret
+  end
+
+  #=============================================================================
+  # Type effectiveness
+  #=============================================================================
+  def self.effectiveness_rules_active?(battle)
+    return self.active_defs(battle).any? do |d|
+      d[:effectiveness_mods] || d[:inverse] || d[:extra_types] ||
+        (d[:hooks] && d[:hooks][:effectiveness])
+    end
+  end
+
+  # Modifies the effectiveness of move_type against ONE defending type.
+  def self.modify_effectiveness(battle, move, move_type, def_type, user, target, eff)
+    self.active_defs(battle).each do |defn|
+      defn[:effectiveness_mods]&.each do |rule|
+        next if rule[:attack] && !rule[:attack].include?(move_type)
+        next if rule[:defend] && !rule[:defend].include?(def_type)
+        next if rule[:moves] && (!move || !rule[:moves].include?(move.id))
+        eff = rule[:set].to_f if rule.key?(:set)
+        eff *= rule[:mult] if rule[:mult]
+      end
+      eff = self.invert_effectiveness(eff) if defn[:inverse]
+      next if !defn[:hooks] || !defn[:hooks][:effectiveness]
+      val = self.safe_call(defn[:hooks][:effectiveness], battle, move, move_type, def_type, user, target, eff)
+      eff = val.to_f if val.is_a?(Numeric)
+    end
+    return eff
+  end
+
+  # Inverse Battle chart: immune/resisted -> super effective, super -> resisted.
+  def self.invert_effectiveness(eff)
+    return Effectiveness::SUPER_EFFECTIVE_MULTIPLIER if eff < Effectiveness::NORMAL_EFFECTIVE_MULTIPLIER
+    return Effectiveness::NOT_VERY_EFFECTIVE_MULTIPLIER if eff > Effectiveness::NORMAL_EFFECTIVE_MULTIPLIER
+    return eff
+  end
+
+  #=============================================================================
+  # Damage
+  #=============================================================================
+  # Applies every damage modifier of the active field(s) to the multipliers
+  # Hash used by Battle::Move#pbCalcDamage. ai = true: prediction only (no
+  # messages).
+  def self.apply_damage_mods(battle, user, target, move, type, mults, ai = false)
+    uname = (ai) ? "" : user.pbThis
+    mname = move.name
+    if !ai
+      # Messages for this use's type change / added types
+      tmsg = move.instance_variable_get(:@fe_type_message)
+      self.show_once(battle, user, move, tmsg, uname, mname) if tmsg
+      self.extra_types(battle, user, target, move, type).each do |_t, emsg|
+        self.show_once(battle, user, move, emsg, uname, mname) if emsg
+      end
+    end
+    self.active_defs(battle).each do |defn|
+      if type && defn[:type_mods] && defn[:type_mods][type]
+        mults[:power_multiplier] *= defn[:type_mods][type]
+        if !ai && defn[:type_messages] && defn[:type_messages][type]
+          self.show_once(battle, user, move, defn[:type_messages][type], uname, mname)
+        end
+      end
+      if defn[:move_mods] && defn[:move_mods][move.id]
+        mults[:power_multiplier] *= defn[:move_mods][move.id]
+        if !ai && defn[:move_messages] && defn[:move_messages][move.id]
+          self.show_once(battle, user, move, defn[:move_messages][move.id], uname, mname)
+        end
+      end
+      defn[:damage_mods]&.each do |rule|
+        next if !self.move_matches?(rule, battle, user, target, move, type)
+        mults[:power_multiplier]        *= rule[:mult]         if rule[:mult]
+        mults[:attack_multiplier]       *= rule[:attack_mult]  if rule[:attack_mult]
+        mults[:defense_multiplier]      *= rule[:defense_mult] if rule[:defense_mult]
+        mults[:final_damage_multiplier] *= rule[:final_mult]   if rule[:final_mult]
+        self.show_once(battle, user, move, rule[:message], uname, mname) if !ai && rule[:message]
+      end
+      if defn[:hooks] && defn[:hooks][:damage]
+        self.safe_call(defn[:hooks][:damage], battle, user, target, move, type, mults, ai)
+      end
+    end
+  end
+
+  # Single number summarising the field's damage effect (used by the AI).
+  def self.damage_multiplier(battle, user, target, move, type)
+    mults = { :power_multiplier => 1.0, :attack_multiplier => 1.0,
+              :defense_multiplier => 1.0, :final_damage_multiplier => 1.0 }
+    self.apply_damage_mods(battle, user, target, move, type, mults, true)
+    defense = [mults[:defense_multiplier], 0.01].max
+    return mults[:power_multiplier] * mults[:attack_multiplier] / defense *
+           mults[:final_damage_multiplier]
+  end
+
+  #=============================================================================
+  # Accuracy, priority, critical hits, effect chances
+  #=============================================================================
+  def self.apply_accuracy_mods(battle, user, target, move, type, mods)
+    self.active_defs(battle).each do |defn|
+      defn[:accuracy_mods]&.each do |rule|
+        next if !self.move_matches?(rule, battle, user, target, move, type)
+        mods[:accuracy_multiplier] *= rule[:mult]         if rule[:mult]
+        mods[:evasion_multiplier]  *= rule[:evasion_mult] if rule[:evasion_mult]
+        mods[:base_accuracy] = rule[:set]                 if rule[:set]
+        mods[:base_accuracy] = 0                          if rule[:always_hit]
+      end
+      if defn[:hooks] && defn[:hooks][:accuracy]
+        self.safe_call(defn[:hooks][:accuracy], battle, user, target, move, type, mods)
+      end
+    end
+  end
+
+  def self.priority_change(battle, user, move)
+    rules = self.rules(battle, :priority_mods)
+    return 0 if rules.empty?
+    type = move.pbBaseType(user)
+    type, _msg = self.changed_move_type(battle, user, move, type)
+    ret = 0
+    rules.each do |rule|
+      ret += rule[:add].to_i if self.move_matches?(rule, battle, user, nil, move, type)
+    end
+    return ret
+  end
+
+  # Returns [extra critical hit stages, always_crit?]
+  def self.crit_change(battle, user, target, move, type)
+    add = 0
+    always = false
+    self.rules(battle, :crit_mods).each do |rule|
+      next if !self.move_matches?(rule, battle, user, target, move, type)
+      add += rule[:add].to_i if rule[:add]
+      always = true if rule[:always]
+    end
+    return add, always
+  end
+
+  def self.modify_effect_chance(battle, user, target, move, chance)
+    return chance if chance <= 0
+    self.rules(battle, :effect_chance_mods).each do |rule|
+      next if !self.move_matches?(rule, battle, user, target, move, move.calcType)
+      chance = rule[:set] if rule[:set]
+      chance = (chance * rule[:mult]).round if rule[:mult]
+    end
+    return chance.clamp(0, 100)
+  end
+
+  #=============================================================================
+  # Move failure
+  #=============================================================================
+  # Returns a failure message if the field makes this move fail, else nil.
+  def self.move_failure_message(battle, user, move)
+    return nil if !self.active?(battle)
+    type = move.pbBaseType(user)
+    type, _msg = self.changed_move_type(battle, user, move, type)
+    self.rules(battle, :move_fails).each do |rule|
+      next if !self.move_matches?(rule, battle, user, nil, move, type)
+      return rule[:message] || DEFAULT_FAIL_MESSAGE
+    end
+    self.hooks(battle, :block_move).each do |h|
+      val = self.safe_call(h, battle, user, move)
+      return val if val.is_a?(String)
+      return DEFAULT_FAIL_MESSAGE if val
+    end
+    return nil
+  end
+
+  #=============================================================================
+  # Stat / status helpers
+  #=============================================================================
+  def self.can_inflict_status?(battler, status, user = nil, move = nil)
+    case status
+    when :SLEEP           then return battler.pbCanSleep?(user, false, move)
+    when :POISON, :TOXIC  then return battler.pbCanPoison?(user, false, move)
+    when :BURN            then return battler.pbCanBurn?(user, false, move)
+    when :PARALYSIS       then return battler.pbCanParalyze?(user, false, move)
+    when :FROZEN          then return battler.pbCanFreeze?(user, false, move)
+    end
+    return false
+  end
+
+  # msg: custom message replacing the default "X was burned!" (may be nil).
+  def self.inflict_status(battler, status, user = nil, msg = nil)
+    case status
+    when :SLEEP     then battler.pbSleep(msg)
+    when :POISON    then battler.pbPoison(user, msg)
+    when :TOXIC     then battler.pbPoison(user, msg, true)
+    when :BURN      then battler.pbBurn(user, msg)
+    when :PARALYSIS then battler.pbParalyze(user, msg)
+    when :FROZEN    then battler.pbFreeze(msg)
+    end
+  end
+
+  def self.stat_changes_possible?(battler, stats, user = nil)
+    return stats.any? do |stat, n|
+      next false if n == 0
+      next battler.pbCanRaiseStatStage?(stat, user || battler) if n > 0
+      next battler.pbCanLowerStatStage?(stat, user)
+    end
+  end
+
+  # user nil = caused by the field (respects Mist/Clear Body etc. for drops).
+  def self.apply_stat_changes(battler, stats, user = nil)
+    anim = true
+    ret = false
+    stats.each do |stat, n|
+      next if n == 0 || battler.fainted?
+      if n > 0
+        next if !battler.pbCanRaiseStatStage?(stat, user || battler)
+        ret = true if battler.pbRaiseStatStage(stat, n, user || battler, anim)
+      else
+        next if !battler.pbCanLowerStatStage?(stat, user)
+        ret = true if battler.pbLowerStatStage(stat, -n, user, anim)
+      end
+      anim = false
+    end
+    return ret
+  end
+
+  #=============================================================================
+  # Named battler effects (effects: [...])
+  #=============================================================================
+  BATTLER_EFFECT_PROCS = {
+    :ingrain      => [proc { |b| next false if b.effects[PBEffects::Ingrain]
+                                 b.effects[PBEffects::Ingrain] = true },
+                      "{1} planted its roots!"],
+    :aqua_ring    => [proc { |b| next false if b.effects[PBEffects::AquaRing]
+                                 b.effects[PBEffects::AquaRing] = true },
+                      "{1} surrounded itself with a veil of water!"],
+    :magnet_rise  => [proc { |b| next false if b.effects[PBEffects::MagnetRise] > 0 ||
+                                               b.effects[PBEffects::Ingrain] ||
+                                               b.effects[PBEffects::SmackDown]
+                                 b.effects[PBEffects::MagnetRise] = 5 },
+                      "{1} levitated with electromagnetism!"],
+    :focus_energy => [proc { |b| next false if b.effects[PBEffects::FocusEnergy] >= 2
+                                 b.effects[PBEffects::FocusEnergy] = 2 },
+                      "{1} is getting pumped!"],
+    :laser_focus  => [proc { |b| next false if b.effects[PBEffects::LaserFocus] > 0
+                                 b.effects[PBEffects::LaserFocus] = 2 },
+                      "{1} concentrated intensely!"],
+    :charge       => [proc { |b| next false if b.effects[PBEffects::Charge] > 0
+                                 b.effects[PBEffects::Charge] = 2 },
+                      "{1} began charging power!"],
+    :defense_curl => [proc { |b| next false if b.effects[PBEffects::DefenseCurl]
+                                 b.effects[PBEffects::DefenseCurl] = true },
+                      "{1} curled up!"],
+    :minimize     => [proc { |b| next false if b.effects[PBEffects::Minimize]
+                                 b.effects[PBEffects::Minimize] = true },
+                      "{1} shrank!"],
+    :smack_down   => [proc { |b| next false if b.effects[PBEffects::SmackDown] || !b.airborne?
+                                 b.effects[PBEffects::SmackDown]   = true
+                                 b.effects[PBEffects::MagnetRise]  = 0
+                                 b.effects[PBEffects::Telekinesis] = 0 },
+                      "{1} fell straight down!"],
+    :telekinesis  => [proc { |b| next false if b.effects[PBEffects::Telekinesis] > 0 ||
+                                               b.effects[PBEffects::Ingrain] ||
+                                               b.effects[PBEffects::SmackDown]
+                                 b.effects[PBEffects::Telekinesis] = 3 },
+                      "{1} was hurled into the air!"],
+    :flash_fire   => [proc { |b| next false if b.effects[PBEffects::FlashFire]
+                                 b.effects[PBEffects::FlashFire] = true },
+                      "The power of {1}'s Fire-type moves rose!"],
+    :stockpile    => [proc { |b| next false if b.effects[PBEffects::Stockpile] >= 3
+                                 b.effects[PBEffects::Stockpile] += 1 },
+                      "{1} stockpiled energy!"]
+  }
+
+  def self.apply_named_effect(battler, effect)
+    entry = BATTLER_EFFECT_PROCS[effect]
+    return nil if !entry
+    return (entry[0].call(battler) == false) ? nil : entry[1]
+  end
+
+  #=============================================================================
+  # Battler effects (end_of_round / on_entry / seed rules)
+  #=============================================================================
+  # Applies one rule to one battler. extra_args are extra message arguments
+  # ({2}, {3}...). Returns true if anything happened.
+  def self.apply_battler_effect(battle, battler, rule, *extra_args)
+    return false if !battler || battler.fainted?
+    return false if rule[:chance] && battle.pbRandom(100) >= rule[:chance]
+    shown = false
+    did = false
+    msg = rule[:message]
+    announce = lambda do
+      next if shown
+      shown = true
+      battle.pbCommonAnimation(rule[:animation], battler) if rule[:animation]
+      battle.pbDisplay(self.format(msg, battler.pbThis, *extra_args)) if msg
+    end
+    # Damage
+    if rule[:damage] && battler.takesIndirectDamage?
+      amt = battler.totalhp * rule[:damage].to_f
+      if rule[:damage_type]
+        amt *= Effectiveness.calculate(rule[:damage_type], *battler.pbTypes(true))
+      end
+      if amt > 0
+        battle.pbCommonAnimation(rule[:animation], battler) if rule[:animation]
+        shown = true
+        battler.pbTakeEffectDamage([amt.round, 1].max) do |_hp_lost|
+          battle.pbDisplay(self.format(msg, battler.pbThis, *extra_args)) if msg
+        end
+        did = true
+        return true if battler.fainted?
+      end
+    end
+    # Healing
+    if rule[:heal] && battler.canHeal?
+      announce.call
+      battler.pbRecoverHP([(battler.totalhp * rule[:heal].to_f).round, 1].max)
+      did = true
+    end
+    # Status cure
+    if rule[:cure_status] && battler.status != :NONE
+      announce.call
+      battler.pbCureStatus(true)
+      did = true
+    end
+    # Status
+    if rule[:status] && self.can_inflict_status?(battler, rule[:status])
+      custom = (!shown && msg) ? self.format(msg, battler.pbThis, *extra_args) : nil
+      battle.pbCommonAnimation(rule[:animation], battler) if rule[:animation] && !shown
+      shown = true
+      self.inflict_status(battler, rule[:status], nil, custom)
+      did = true
+    end
+    # Confusion
+    if rule[:confuse] && battler.pbCanConfuse?(nil, false)
+      announce.call
+      battler.pbConfuse
+      did = true
+    end
+    # Stat changes
+    if rule[:stats] && self.stat_changes_possible?(battler, rule[:stats])
+      announce.call
+      did = true if self.apply_stat_changes(battler, rule[:stats], nil)
+    end
+    # Named effects
+    rule[:effects]&.each do |eff|
+      default_msg = self.apply_named_effect(battler, eff)
+      next if !default_msg
+      if msg
+        announce.call
+      else
+        battle.pbDisplay(self.format(default_msg, battler.pbThis))
+      end
+      did = true
+    end
+    # Bespoke
+    if rule[:proc]
+      res = self.safe_call(rule[:proc], battle, battler)
+      did = true if res
+    end
+    return did
+  end
+
+  def self.apply_entry_effects(battle, battler, on_change_only = false)
+    return if !self.active?(battle) || battler.fainted?
+    self.rules(battle, :on_entry).each do |rule|
+      next if on_change_only && !rule[:also_on_change]
+      next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, battler)
+      self.apply_battler_effect(battle, battler, rule)
+      return if battler.fainted?
+    end
+    return if on_change_only
+    self.hooks(battle, :on_entry).each { |h| self.safe_call(h, battle, battler) }
+  end
+
+  #=============================================================================
+  # Seeds
+  #=============================================================================
+  def self.seed_rule(battle, battler, item)
+    defn = self.current_definition(battle)
+    return nil if !defn || !defn[:seed]
+    defn[:seed].each do |rule|
+      next if rule[:item] != item
+      next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, battler)
+      return rule
+    end
+    return nil
+  end
+
+  # Triggers a held seed if the current field defines an effect for it.
+  def self.trigger_seed(battle, battler, item)
+    return false if battler.fainted? || !battler.itemActive?
+    rule = self.seed_rule(battle, battler, item)
+    return false if !rule
+    item_name = GameData::Item.get(item).name
+    battle.pbCommonAnimation("UseItem", battler)
+    rule = rule.merge(:message => DEFAULT_SEED_MESSAGE) if !rule[:message]
+    rule = rule.reject { |k, _v| k == :chance }
+    self.apply_battler_effect(battle, battler, rule, item_name)
+    battler.pbConsumeItem if battler.item_id == item
+    return true
+  end
+
+  def self.check_all_seeds(battle)
+    battle.pbPriority(true).each do |b|
+      next if b.fainted? || !b.item_id || !SEED_ITEMS.include?(b.item_id)
+      self.trigger_seed(battle, b, b.item_id)
+    end
+  end
+
+  #=============================================================================
+  # Speed and abilities
+  #=============================================================================
+  def self.speed_multiplier(battle, battler)
+    mult = 1.0
+    self.rules(battle, :speed_mods).each do |rule|
+      next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, battler)
+      mult *= rule[:mult]
+    end
+    self.hooks(battle, :speed).each do |h|
+      val = self.safe_call(h, battle, battler, mult)
+      mult = val if val.is_a?(Numeric)
+    end
+    return mult
+  end
+
+  def self.ability_negated?(battle, ability_id)
+    return false if !ability_id
+    defs = self.active_defs(battle)
+    return false if defs.empty?
+    return defs.any? { |d| d[:negated_abilities]&.include?(ability_id) }
+  end
+
+  #=============================================================================
+  # Weather and terrain
+  #=============================================================================
+  def self.env_spec_value(battle, kind, key, id)
+    self.active_defs(battle).each do |defn|
+      spec = defn[kind]
+      next if !spec || !spec[key]
+      val = (key == :block) ? spec[key].include?(id) : spec[key][id]
+      return val if val
+    end
+    return nil
+  end
+
+  def self.env_block_message(battle, kind)
+    self.active_defs(battle).each do |defn|
+      spec = defn[kind]
+      return spec[:block_message] if spec && spec[:block_message]
+    end
+    return (kind == :weather) ? DEFAULT_WEATHER_BLOCK_TEXT : DEFAULT_TERRAIN_BLOCK_TEXT
+  end
+
+  #=============================================================================
+  # Transitions
+  #=============================================================================
+  def self.move_trigger?(rule)
+    return !(rule[:weather] || rule[:terrain] || rule[:turns] || rule[:check])
+  end
+
+  # Counts one trigger of transition idx; performs it once :uses is reached.
+  # Returns true if the field (or stage) changed.
+  def self.count_transition(battle, rule, idx)
+    st = self.raw_state(battle)
+    uses = [rule[:uses] || 1, 1].max
+    st[:counters][idx] = (st[:counters][idx] || 0) + 1
+    if st[:counters][idx] >= uses
+      st[:counters][idx] = 0
+      return self.perform_transition(battle, rule)
+    end
+    if rule[:progress_message]
+      battle.pbDisplay(self.format(rule[:progress_message], (uses - st[:counters][idx]).to_s))
+    end
+    return false
+  end
+
+  def self.perform_transition(battle, rule)
+    if rule.key?(:to)
+      to = (rule[:to].is_a?(Proc)) ? self.safe_call(rule[:to], battle) : rule[:to]
+      return false if to.nil?
+      return battle.change_field(to, rule[:message])
+    end
+    if rule[:stage] || rule[:stage_delta]
+      new_stage = rule[:stage] || (self.stage(battle) + rule[:stage_delta].to_i)
+      return battle.set_field_stage(new_stage, rule[:message])
+    end
+    return false
+  end
+
+  def self.transitions(battle)
+    defn = self.current_definition(battle)
+    return [] if !defn || !defn[:transitions]
+    return defn[:transitions]
+  end
+
+  def self.check_move_transitions(battle, user, targets, move)
+    st = self.raw_state(battle)
+    return if !st || st[:changing]
+    self.transitions(battle).each_with_index do |rule, i|
+      next if !self.move_trigger?(rule)
+      next if user.lastMoveFailed && !rule[:even_if_failed]
+      next if !self.move_matches?(rule, battle, user, targets.first, move, move.calcType)
+      return if self.count_transition(battle, rule, i)
+    end
+  end
+
+  def self.check_env_transitions(battle, kind, id)
+    st = self.raw_state(battle)
+    return if !st || st[:changing]
+    self.transitions(battle).each_with_index do |rule, i|
+      next if !rule[kind] || !rule[kind].include?(id)
+      return if self.count_transition(battle, rule, i)
+    end
+  end
+
+  def self.check_round_transitions(battle)
+    self.transitions(battle).each_with_index do |rule, i|
+      if rule[:turns]
+        next if self.raw_state(battle)[:turns] < rule[:turns]
+        return if self.perform_transition(battle, rule)
+      elsif rule[:check]
+        next if !self.safe_call(rule[:check], battle)
+        return if self.count_transition(battle, rule, i)
+      end
+    end
+  end
+
+  #=============================================================================
+  # After a move is used
+  #=============================================================================
+  def self.after_move(battle, user, targets, move, num_hits)
+    return if !self.active?(battle)
+    type = move.calcType
+    charging = user.effects[PBEffects::TwoTurnAttack]
+    if !user.lastMoveFailed && !user.fainted? && !charging
+      self.rules(battle, :move_stat_boosts).each do |rule|
+        next if !self.move_matches?(rule, battle, user, targets.first, move, type)
+        affected = []
+        if rule[:user_stats] && self.stat_changes_possible?(user, rule[:user_stats], user)
+          affected.push([user, rule[:user_stats], user])
+        end
+        if rule[:target_stats]
+          targets.each do |t|
+            next if t.fainted? || t.damageState.unaffected || t.index == user.index
+            next if !self.stat_changes_possible?(t, rule[:target_stats], user)
+            affected.push([t, rule[:target_stats], user])
+          end
+        end
+        next if affected.empty?
+        battle.pbDisplay(self.format(rule[:message], user.pbThis, move.name)) if rule[:message]
+        affected.each { |b, stats, src| self.apply_stat_changes(b, stats, src) }
+      end
+    end
+    self.hooks(battle, :after_move).each do |h|
+      self.safe_call(h, battle, user, targets, move, num_hits)
+    end
+    self.check_move_transitions(battle, user, targets, move)
+  end
+
+  #=============================================================================
+  # Added effects (per hit)
+  #=============================================================================
+  def self.apply_added_effects(battle, user, target, move)
+    return if !self.active?(battle)
+    return if target.damageState.unaffected || target.damageState.calcDamage == 0
+    type = move.calcType
+    self.rules(battle, :added_effects).each do |rule|
+      next if !self.move_matches?(rule, battle, user, target, move, type)
+      recipient = (rule[:apply_to] == :user) ? user : target
+      next if recipient.fainted?
+      if recipient.index != user.index
+        next if target.damageState.substitute
+        next if user.hasActiveAbility?(:SHEERFORCE)
+        next if target.hasActiveAbility?(:SHIELDDUST) && !battle.moldBreaker
+      end
+      chance = rule[:chance] || 100
+      chance *= 2 if chance < 100 && (user.hasActiveAbility?(:SERENEGRACE) ||
+                                      user.pbOwnSide.effects[PBEffects::Rainbow] > 0)
+      next if battle.pbRandom(100) >= chance
+      msg = (rule[:message]) ? self.format(rule[:message], recipient.pbThis, move.name) : nil
+      if rule[:status] && self.can_inflict_status?(recipient, rule[:status], user, move)
+        self.inflict_status(recipient, rule[:status], user, msg)
+        msg = nil
+      end
+      if rule[:confuse] && recipient.pbCanConfuse?(user, false, move)
+        battle.pbDisplay(msg) if msg
+        msg = nil
+        recipient.pbConfuse
+      end
+      if rule[:flinch] && recipient.index != user.index
+        recipient.pbFlinch(user)
+      end
+      if rule[:stats] && self.stat_changes_possible?(recipient, rule[:stats], user)
+        battle.pbDisplay(msg) if msg
+        msg = nil
+        self.apply_stat_changes(recipient, rule[:stats], user)
+      end
+      self.safe_call(rule[:proc], battle, user, target, move) if rule[:proc]
+    end
+  end
+
+  #=============================================================================
+  # Borrowing (overlay effects from other fields, e.g. :BLEED)
+  #=============================================================================
+  def self.borrow_pool(battle, spec)
+    cur = self.current(battle)
+    pool = (spec[:pool] == :all) ? self.ids : Array(spec[:pool])
+    return pool.select do |id|
+      next false if id == cur || spec[:exclude].include?(id)
+      defn = self.get(id)
+      next defn && !defn[:borrow]
+    end
+  end
+
+  def self.start_borrowing(battle)
+    spec = self.current_definition(battle)&.[](:borrow)
+    return if !spec
+    self.raw_state(battle)[:borrow_timer] = spec[:interval]
+    self.rotate_borrowed(battle) if spec[:start_immediately]
+  end
+
+  def self.rotate_borrowed(battle)
+    spec = self.current_definition(battle)&.[](:borrow)
+    return if !spec
+    st = self.raw_state(battle)
+    pool = self.borrow_pool(battle, spec)
+    return if pool.empty?
+    old = st[:borrowed].dup
+    count = [spec[:count].to_i, pool.length].min
+    chosen = []
+    if spec[:order] == :sequential
+      count.times do
+        chosen.push(pool[st[:borrow_cursor] % pool.length])
+        st[:borrow_cursor] += 1
+      end
+    else
+      candidates = pool - old
+      candidates = pool.dup if candidates.length < count
+      count.times do
+        break if candidates.empty?
+        chosen.push(candidates.delete_at(battle.pbRandom(candidates.length)))
+      end
+    end
+    st[:borrowed] = chosen
+    self.invalidate_cache(battle)
+    names = chosen.map { |id| self.name_of(id) }.join(", ")
+    battle.pbDisplay(self.format(spec[:message], names)) if spec[:message]
+    self.log("Borrowed effects now: #{chosen.inspect}")
+    self.notify_overlay_change(battle, self.current(battle), old, chosen)
+    # Borrowed fields' "also_on_change" entry effects hit the active battlers
+    battle.pbPriority(true).each do |b|
+      next if b.fainted?
+      chosen.each do |bid|
+        view = self.borrowable_view(bid)
+        view[:on_entry]&.each do |rule|
+          next if !rule[:also_on_change]
+          next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, b)
+          self.apply_battler_effect(battle, b, rule)
+        end
+      end
+      b.pbFaint if b.fainted?
+    end
+  end
+
+  def self.tick_borrowing(battle)
+    spec = self.current_definition(battle)&.[](:borrow)
+    return if !spec
+    st = self.raw_state(battle)
+    st[:borrow_timer] -= 1
+    return if st[:borrow_timer] > 0
+    st[:borrow_timer] = spec[:interval]
+    self.rotate_borrowed(battle)
+  end
+
+  #=============================================================================
+  # End of round
+  #=============================================================================
+  def self.end_of_round(battle)
+    return if battle.decision > 0
+    return if !self.active?(battle)
+    st = self.raw_state(battle)
+    field_at_start = self.current(battle)
+    priority = battle.pbPriority(true)
+    self.rules(battle, :end_of_round).each do |rule|
+      priority.each do |b|
+        next if b.fainted?
+        next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, b)
+        self.apply_battler_effect(battle, b, rule)
+        b.pbFaint if b.fainted?
+      end
+    end
+    self.hooks(battle, :end_of_round).each { |h| self.safe_call(h, battle) }
+    return if battle.decision > 0
+    return if self.current(battle) != field_at_start   # A hook changed the field
+    st[:turns] += 1
+    self.check_round_transitions(battle)
+    return if self.current(battle) != field_at_start
+    self.tick_borrowing(battle)
+  end
+end

@@ -1,0 +1,121 @@
+# Prismfall — Field Battle Art (backdrops, bases, layers)
+
+This lists every graphic the field system can use, per field, with sizes, file names and a short art brief.
+You can source or commission it all from this list.
+**Nothing here is required to play**: a field without art falls back to a tinted stock EBDX room with its
+particle FX (`Plugins/Prismfall EBDX Bridge/001_Bridge_Config.rb`, `:fallback` + `:tone`).
+Add art in any order.
+
+## 1. Formats
+
+### EBDX (primary — this is what players see)
+Each field's art lives in `Graphics/EBDX/Battlebacks/` and uses the field definition's `:backdrop` name `<bd>`.
+
+| File | Size | Required? | Notes |
+|---|---|---|---|
+| `battlebg/<bd>.png` | **384 × 308** | yes (else the fallback room is used) | The whole "room": sky/walls **and** floor with both battle platforms painted in. EBDX scales it ×2.25 (`ROOM_SCALE`) and pans/zooms it with the camera, so paint at native pixel size, Gen 5 style. Keep important detail away from the outer ~40 px. |
+| `battlebg/<bd>_night.png` | 384 × 308 | optional | Used at night, outdoor fields only (marked 🌙 below). |
+| `base/<bd>.png` | **384 × 182** | optional | Ground overlay stamped onto the bottom of the room (EBDX `"base"`). Use it to vary the floor without repainting the room. |
+| `elements/<bd>_fog.png` | ~708 × 120 (tileable horizontally) | optional | Scrolling semi-transparent front layer (mist, heat haze, spores). It's drawn in front of the Pokémon, so keep it faint and in the top half. |
+
+**Platform placement:** battlers stand at room coordinates (x, y) from `PBS/EBDX/metrics.txt`.
+
+| Battle type | Player side | Foe side |
+|---|---|---|
+| Single | ~(116, 252) | ~(234, 152) |
+| Double | (92, 240) and (192, 262) | (256, 164) and (198, 152) |
+
+Paint platforms or clearings around those points.
+Every field also gets **particle FX** drawn by the bridge. It generates the shapes itself, so no art is needed.
+Battle weather (rain, sun, sand, hail, fog) comes from EBDX's own weather layers.
+
+**Format:** PNG, RGBA or indexed. Avoid alpha in the room image's corners: EBDX samples pixels (0,0) and (0,307)
+to fill the void around the room.
+
+### Vanilla Essentials (only if you run without EBDX)
+Files go in `Graphics/Battlebacks/`, sized like the stock `field_*` set:
+
+| File | Size |
+|---|---|
+| `<bd>_bg.png` | **512 × 288** |
+| `<bd>_base0.png` (player platform) | **512 × 64** |
+| `<bd>_base1.png` (foe platform) | **256 × 128** |
+| `<bd>_message.png` (message bar) | **512 × 96** |
+
+Optional `_eve` / `_night` variants work as in vanilla.
+
+## 2. File names
+
+The names below are the definitions' `:backdrop` values. The ones marked ✓ are already registered in
+`Plugins/Prismfall Field Effects/1NN_Field_*.rb`. The rest follow the team convention `field_<snake_id>`
+(FIELD_API §11); check the definition when it lands.
+
+**FLOWER_GARDEN** has 5 stages. Each stage may declare its own `:backdrop`, e.g. `field_flower_garden_2`…`_5`;
+check the definition for the exact names. A stage without its own art reuses the stage-1 art.
+
+## 3. Per-field list and art direction
+
+Legend: 🌙 = outdoor field, so `_night` variants are worth making. FX = what the bridge animates on top, so don't paint it.
+
+### Gym fields
+
+| # | Field | `<bd>` | Fallback until art exists | Art direction |
+|---|---|---|---|---|
+| 1 | SILKWOOD | `field_silkwood` ✓ | Forest, mossy tint | Old-growth Briarwick forest hung with silk curtains between trunks. Dew-beaded webs catch the light. Silk-wrapped stump platforms. Soft green-gold canopy light. *FX: drifting silk threads, spores.* |
+| 2 | GRAND_STAGE | `field_grand_stage` ✓ | EBDX "Stage" | Saltmere's opera house from the stage: red velvet, gilt boxes, footlights, a painted backdrop flat. The player stands on the boards, the foe under a spotlight. *FX: confetti; EBDX spin/stage lights.* |
+| 3 | WATER_SURFACE | `field_water_surface` ✓ 🌙 | EBDX "Water" | Ebbmouth's flooded harbour at high tide: open water to the horizon, drowned pilings, floating buoy platforms. Northern-coast palette (cold teal, white spray). *FX: sun glints; EBDX water shimmer.* |
+| 4 | NEON_GRID | `field_neon_grid` ✓ | EBDX "Net", blue tint | Lumen City arena floor, a glowing cyan circuit grid; holo-billboards and an airship silhouette behind. Clean Piltover-style chrome. *FX: rising sparks, neon flickers, faint flashes.* |
+| 5 | DESERT | `field_desert` ✓ 🌙 | EBDX "Sand", warm tint | Duneholt dunes under a white-hot sky, canyon walls in the distance, half-buried ruins. Flat sandstone slabs as platforms. *FX: blowing sand.* |
+| 6 | CORROSIVE_MIRE | `field_corrosive_mire` ✓ | Forest, purple tint | Mirefen runoff marsh below the Undercity: violet-green sludge, rusted drain pipes, dead reeds, a sickly lamp glow. *FX: rising toxic bubbles.* |
+| 7 | VOLCANIC | `field_volcanic` ✓ | EBDX "Magma" | Cindervault caldera: basalt shelves over a lava river, a glowing magma crust, dragon-lord banners on obsidian pillars. *FX: embers, ash.* |
+| 8 | COLOSSEUM | `field_colosseum` | EBDX "Net" crowd, warm tint | Ironreach pit-fighting ring in an old mine shaft: a chain-link fence, a packed crowd on scaffolding, hanging work lamps, a sand floor. *FX: dust motes.* |
+| 9 | FLOWER_GARDEN (×5) | stage 1 `field_flower_garden` 🌙, stages 2–5 per the definition | Outdoor field + tall grass | Verdance's terraced garden. Stage 1: bare beds with buds. 2: sprouts. 3: blooms. 4: full flowering with arches. 5: an overgrown riot of colour with a giant bloom behind the foe. Keep the composition identical across stages so the swap reads as growth. *FX: petals and pollen that increase each stage.* |
+| 10 | FROZEN_LAKE | `field_frozen_lake` 🌙 | EBDX "Snow", cool tint | Rimeholt's frozen lake: thick blue ice with cracks, pines and fjord cliffs, the aurora at night. Ice-floe platforms. *FX: snowfall, ice glints.* |
+| 11 | STORMFRONT | `field_stormfront` 🌙 | EBDX "Sky", dark grey | Skyreach airship spire deck above the clouds in a storm: anvil clouds, rigging, a wind-torn pennant. Platforms are deck plates. *FX: rain and wind streaks, lightning flashes.* |
+| 12 | MINDSCAPE | `field_mindscape` | EBDX "Dimension", violet | Lucent's psychic dreamscape (Umbra): a floating library, mirrored stairs, impossible geometry, a pastel-violet void. *FX: thought-motes; EBDX vacuum rings.* |
+| 13 | CRYSTAL_CAVERN | `field_crystal_cavern` | EBDX "Cave", teal tint | Cragholm geode cavern with huge prismatic crystal clusters, lit from inside. Crystal-ringed platforms. *FX: crystal glints.* |
+| 14 | HOLLOW_CATHEDRAL | `field_hollow_cathedral` | EBDX "Champion" pillars, dark purple | Gravenmoor's ruined cathedral: broken stained glass, pews, a candle-lit altar behind the foe, moonlight shafts. *FX: will-o'-wisps, dust in the light shafts.* |
+| 15 | FACTORY | `field_factory` | EBDX "IndoorA", grey | Cogsworth foundry: conveyor lines, crucibles pouring molten steel, giant gears, catwalks. Steel-plate platforms. *FX: steam, falling sparks.* |
+| 16 | NEW_MOON | `field_new_moon` | EBDX "Darkness" | Underveil's heart: a black sky with a dark moon and starfield over undercity rooftops, faint violet rim light. *FX: stars, shadow motes; EBDX dark rings.* |
+| 17 | FAIRY_TALE | `field_fairy_tale` | Forest, pink tint | Gloaming: a storybook castle glade in the forest heart, giant mushrooms, a fairy-ring stone circle, warm twilight. *FX: sparkles.* |
+| 18 | DRAGONS_DEN | `field_dragons_den` | EBDX "Magma", purple | Wyrmrest lair: dragon bones and a treasure hoard on a magma-lit cavern floor, carved wyrm statues. *FX: violet-orange embers, gold glints.* |
+
+### Story / route fields
+
+| Field | `<bd>` | Fallback | Art direction |
+|---|---|---|---|
+| CAVE | `field_cave` | EBDX "Cave" | Generic Velmoran cave: damp stone, stalactites, a lantern-lit path. *FX: dust.* |
+| MOUNTAIN | `field_mountain` 🌙 | EBDX "Mountain" | Highland ridge: wind-bent pines, distant peaks, rocky ledges. *FX: wind streaks.* |
+| SNOWY_MOUNTAIN | `field_snowy_mountain` 🌙 | EBDX "Snow" | Glaciem summit in a blizzard, cornices, prayer flags. *FX: heavy snow.* |
+| BEACH | `field_beach` 🌙 | Sand + water | Southern coast (Ferrow's Landing): sand, tide pools, a ferry pier on the horizon. *FX: sun glints; EBDX water.* |
+| UNDERWATER | `field_underwater` ✓ | EBDX "Underwater" | Kelp-forest sea floor with ruins, god rays from above. *FX: plankton; EBDX bubbles, light shafts.* |
+| RAINBOW | `field_rainbow` 🌙 | EBDX "Sky", bright | A cloud field under a full double rainbow, prismatic mist. *FX: prismatic sparkles.* |
+| WASTELAND | `field_wasteland` 🌙 | Sand, sick grey | Bleed-scarred dump: barrels, slag, dead trees, a jaundiced sky. *FX: toxic bubbles, ash.* |
+| ASHEN_WASTE | `field_ashen_waste` ✓ | Cave, grey | VOLCANIC after quenching: cooled black rock, steam vents, falling ash. **Same layout as VOLCANIC** so the transition reads as the same place. *FX: heavy ash, steam.* |
+| DARK_CRYSTAL | `field_dark_crystal` | Dark cave | CRYSTAL_CAVERN darkened: **same layout**, crystals gone obsidian-violet, light dead. *FX: violet glints; EBDX vacuum.* |
+| SCRAPYARD | `field_scrapyard` | IndoorA, rust | FACTORY wrecked: **same layout**, collapsed gantry, fires out, scrap piles. *FX: smoke, sparks.* |
+| INVERSE | `field_inverse` ✓ | Dimension, greyscale | Umbra's mirrored realm (Distortion World cue): upside-down terrain, floating islands, inverted colours (paint it as a negative image, since EBDX can't invert at runtime). *FX: upward "snow".* |
+| BLEED | `field_bleed` ✓ | EBDX "Darkness", red | The corruption: torn reality, red-cyan chromatic aberration, shards of other fields bleeding through. *FX: glitch shards, distortion transition, flashes. Borrowed fields' FX appear on top as BLEED rotates them.* |
+| PRISM_ARENA | `field_prism_arena` | EBDX "Champion" | Crownhaven Festival finale: a colossal arena with the 18 Plates hung in a ring overhead, prismatic floor sigil. *FX: prismatic sparkles; borrowed gym FX appear as it cycles.* |
+
+**Transitions to keep visually consistent** (same camera framing and platform positions):
+VOLCANIC↔ASHEN_WASTE, FROZEN_LAKE→WATER_SURFACE, WATER_SURFACE↔UNDERWATER, CRYSTAL_CAVERN→DARK_CRYSTAL,
+FACTORY→SCRAPYARD, and FLOWER_GARDEN stages 1–5.
+
+## 4. Optional EBDX extras per field
+
+- Any EBDX room key can be added to a field's `:art_extras` in the bridge config:
+  - `"sky" => true` animated sky with clouds, sun and stars. It is drawn **over** the top ~105 px of the room, so keep your horizon and skyline below that line.
+  - `"lightsA"` / `"lightsB"` / `"lightsC"` stage, disco or ambient light shafts.
+  - `"water" => true` water shimmer.
+  - `"vacuum"` dark rings.
+  - `"imgNNN" => { :bitmap => ..., :scrolling/:sheet/:rainbow/:effect => ... }` your own animated layers from `elements/`
+    (see the [EBDX environment docs](https://luka-sj.com/essentials/resources/EBDX/docs?page=24)).
+- Trainer intro backgrounds are a separate EBDX feature (`Graphics/EBDX/Transitions/`). They aren't needed for fields.
+
+## 5. Asset checklist
+
+- [ ] Gym fields: 18 rooms (plus FLOWER_GARDEN stages 2–5, 4 more rooms)
+- [ ] Route/story fields: 13 rooms
+- [ ] 🌙 night variants: 10 optional
+- [ ] Vanilla `_bg/_base0/_base1/_message` sets: only if you ship without EBDX

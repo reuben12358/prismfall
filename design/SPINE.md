@@ -1,0 +1,181 @@
+# PROJECT SPINE — "Pokémon Prismfall" (working title)
+
+## >>> REVISION 3 (user feedback, 2026-11-15 evening) — supersedes Revision 2 and everything below where they conflict <<<
+1. **Kingdom names (final):** Sylvan Crown → **Elowen, the Evergreen Crown** · Umbra → **Antumbra, the Kingdom Behind the Glass** ·
+   Glaciem → **Isenmar, the Frozen Sea** · Ember Dominion → **Ashkaar, the Dragonfire Dominion** · Dunelands → **Ossaria, the Bone Sands**
+   (fossil country) · Lumen → **Zenith, the City Above** (Lumen City is its capital district) · Undercity → **Nadir, the City Below**.
+   Crownhaven unchanged. Same types/cities as the Revision 2 table.
+2. **Choices matter (Reborn/Rejuvenation/Desolation-style).** Core tracks: **Bonds** (affinity with key characters), faction
+   **Standing** (Hollow / Meridian / Accord), **Resonance** (the player's Legend Plate axis: Harmony ↔ Ruin), and a **Choice log** of
+   named decisions. Narrative spec: `story/10_CHOICES_ENDINGS.md` (written by the Narrative Systems designer; uses symbolic keys
+   stored in Core save data — not Game Switches).
+3. **The Festival bracket is choice-driven (replaces the LOCKED player path).** Stages and caps are unchanged (R16 90, QF 92, SF 94,
+   Final 96, Hijack 100, True Finale 100), but each stage's OPPONENT is drawn from a candidate pool by rules over bonds/standing/
+   choices (e.g. Juno or someone you wronged in R16; Kestrel redeemed or fallen in the SF; Valen or his successor in the Final; the
+   hijacker depends on what you exposed). The default path in Revision 2 is the fallback when no rule matches. Every candidate
+   (and variant, like "Kestrel (Fallen)") needs a trainer team.
+4. **Game overs** (Rejuvenation/Desolation-style): ≥12 story game overs, each with an ID, title, epitaph and fair foreshadowing,
+   recorded in a cross-save **Ledger** file. Finding them all unlocks the **Ruin Route** — a secret alternate storyline
+   (cf. Rejuvenation's Renegade Route) with its own ending(s).
+5. **Endings:** 1 canon **Good**, 1 canon **Bad**, ≥4 **Grey** endings, plus the **Ruin** ending(s). Decided by accumulated choices +
+   the final decision. Seen endings are also recorded in the Ledger.
+6. **Also adding:** Rejuvenation-style new-game **passwords** (QoL/challenge toggles), **Field Notes** (in-game field encyclopedia
+   that fills in as you encounter fields), playable **interludes** as other characters, and a **quest log**.
+
+## >>> REVISION 2 (user feedback, 2026-11-15) — superseded where Revision 3 conflicts <<<
+1. **Kingdoms.** Velmora is a realm of seven kingdoms plus the neutral capital. Each kingdom's wild Pokémon are
+   dominated (~70%) by its types; borderland routes between kingdoms are mixed. Gym order/cities/wardens/fields/caps are
+   UNCHANGED, so the journey criss-crosses kingdoms and revisits each one 2–3 times as the story escalates (each return
+   shows consequences: Bleed spread, political fallout).
+   | Kingdom | Character | Wild types | Gym cities (gym #) |
+   |---|---|---|---|
+   | **The Sylvan Crown** | vast fairy-tale forest kingdom, old monarchy | Fairy, Grass, Bug, Normal | Briarwick (1), Saltmere (2, its free port), Verdance (9), Gloaming (17, the forest's heart). Ferrow's Landing is its southern ferry dock. |
+   | **Umbra** (the Reverse Kingdom) | a mirrored realm behind the Sylvan forest (cf. Platinum's Distortion World); upside-down rules, `:INVERSE` territory, Giratina's domain | Ghost, Psychic, Dark | Lucent (12), Gravenmoor (14) |
+   | **Glaciem** | frozen northern coast kingdom | Water, Ice | Ebbmouth (3), Rimeholt (10) |
+   | **The Ember Dominion** | volcanic dragon-lord kingdom | Fire, Dragon | Cindervault (7), Wyrmrest (18) |
+   | **The Dunelands** | desert and canyon kingdom | Ground, Rock | Duneholt (5), Cragholm (13) |
+   | **Lumen** | gleaming tech city-state of progress and airships (Piltover-like); Meridian Concord's home | Electric, Steel, Flying | Lumen City (4), Skyreach (11, airship spire), Cogsworth (15, foundry district) |
+   | **The Undercity** | the slums and sumps beneath Lumen (Zaun-like); the Hollow recruits here | Poison, Dark, Fighting | Mirefen (6, toxic runoff marsh), Ironreach (8, pit-fighting arenas in old mine shafts), Underveil (16, the undercity's heart) |
+   | **Crownhaven** (neutral) | the Accord's capital at the realm's center | — | Festival venue |
+2. **Tone:** easy to get into like Rejuvenation (warm, accessible Act I hook), then steadily darker — Desolation-leaning by Act III–V.
+3. **All original characters.** NO canon-game characters (Cynthia, Lance, Steven, Alder, Diantha, Leon, Geeta are REMOVED).
+   Festival invitees are **cameos from the sister fangames — Pokémon Reborn, Rejuvenation and Desolation** — plus Velmoran entrants.
+   The story team researches those games and fixes the roster in `design/CAMEOS.md` (7 cameo champions: trainer type IDs
+   `FESTIVAL_<NAME>`, ace teams in the spirit of their source game). The player's Quarterfinal opponent (was Cynthia) becomes
+   the headline cameo chosen there. Everything else in the player path is unchanged.
+4. **Tropes the user loves** (from Rejuvenation and the mainline games) — work several in: an Eeveelution battle/gauntlet,
+   gym double/tag battles, partner battles with rivals, Rejuvenation-style multi-bar **boss battles** for legendaries/villains
+   (EBDX ships a boss-battle module — check it before building our own), one legendary arc per kingdom (Giratina in Umbra, etc.),
+   classic set pieces (haunted house, fossil revival, Unown ruins, Safari-style reserve, post-game Battle Tower / Warden rematch gauntlet).
+5. **Maps are being built for the user.** A Map Builder tool generates RPG Maker XP map files programmatically using the stock
+   Essentials tilesets; World design owns the map ID scheme (100+) and the layout specs it consumes.
+6. **Base project & reference.** Recommended base project = Manurocker95's *Pokemon-Essentials-21-With-Unofficial-EBDX*
+   (Essentials 21.1 + Hotfixes + EBDX 1.4.7.1 + Gen 9 Pack + Luka's Scripting Utilities + PWT), cloned read-only at
+   `/home/claude/ref/ebdx` (full project: PBS with **Gen 1–9 / 1,025 species**, Plugins/, Graphics/, Data/*.rxdata, 71 sample maps).
+   Use `/home/claude/ref/ebdx/PBS` for ID validation and `/home/claude/ref/ebdx/Plugins/Elite Battle DX` for EBDX code;
+   `/home/claude/ref/essentials/Data/Scripts` for readable core scripts. Starters: **any Gen 1–9 starter**.
+   Never `Marshal.load` the reference .rxdata files in Ruby (untrusted data); parse them with a pure-Python reader run as `python3 -I`.
+7. **PBS ships as suffixed files** (v21.1 merges `PBS/<base>_<suffix>.txt`): trainers_prismfall.txt, trainer_types_prismfall.txt,
+   items_prismfall.txt, encounters_prismfall.txt, map_metadata_prismfall.txt. Packaging renames our pbs/ files automatically.
+
+This is the single source of truth every workstream builds from. Items marked **LOCKED** must not be
+renamed or reordered by any agent (other files depend on them). Everything else may be expanded.
+If you think a LOCKED item is genuinely wrong, finish your work using it as-is and write the
+objection to `/home/claude/fangame/design/SPINE_FEEDBACK.md` (append, don't overwrite).
+
+## Tech stack (LOCKED)
+- Engine: **Pokémon Essentials v21.1** + **v21.1 Hotfixes** plugin. Runs on mkxp-z (Ruby 3.1 — avoid Ruby 3.2+ only syntax/features).
+- Battle scene: **Elite Battle: DX (EBDX) — unofficial port for Essentials v21.1, v1.4.7.1 (Manurocker95)**, Gen 5–style animated sprites + dynamic camera.
+- Reference source (read-only, do NOT execute anything in it): `/home/claude/ref/essentials` (Maruno17/pokemon-essentials master, based on v21.1). Scripts: `Data/Scripts/`, PBS: `PBS/`. Grep it to verify every class/method/constant/PBS key you use.
+- Our code ships as Essentials plugins in `/home/claude/fangame/plugins/<Plugin Name>/` (each with `meta.txt` + numbered `.rb` files). PBS additions go in `/home/claude/fangame/pbs/`.
+- Syntax-check all Ruby with `ruby -c <file>` (Ruby 3.3 is installed locally; keep code 3.1-compatible).
+- Plugins (LOCKED names):
+  - `Prismfall Core` — 18 badges, level caps, difficulty modes, Festival of Champions tournament manager, shared constants.
+  - `Prismfall Field Effects` — the field effect engine + all fields + seed items.
+  - `Prismfall EBDX Bridge` — swaps EBDX battle backdrops/visual FX when a field is set or changes. Requires EBDX + Field Effects.
+
+## Shared integration contract (LOCKED)
+- Namespaces: `Prismfall` (core), `FieldEffects` (fields). Never monkey-patch without `alias`-chaining the original.
+- Setting a field for the next battle: `setBattleRule("field", :VOLCANIC)` (Field Effects plugin must extend the battle rule system to accept this). Default per-map fields via `FieldEffects::MAP_FIELDS = { map_id => :FIELD_ID }`.
+- In battle: `battle.field_effect` → Symbol (`:NONE` if none). Change with `battle.change_field(:NEW_ID, "message")`.
+- Every field change MUST call `FieldEffects.notify_change(battle, old_id, new_id)`, which runs `EventHandlers.trigger(:prismfall_field_changed, battle, old_id, new_id)`. The EBDX Bridge listens to this.
+- Every field definition exposes `:name`, `:backdrop` (String, base name of battle background graphic, e.g. `"field_volcanic"`), `:intro_message`.
+- Story flags: Game Switches **101–300** and Variables **101–300** reserved for story (story team owns the registry in `design/FLAGS.md`). Systems (Core plugin) store state in their own save data, NOT switches.
+- Trainer type IDs: `LEADER_<FIRSTNAME>` (e.g. `LEADER_TAMSIN`), rivals `RIVAL_KESTREL`, `RIVAL_JUNO`, champion `CHAMPION_VALEN`, villains `HOLLOW_*`, `MERIDIAN_*`, cameo champions `FESTIVAL_<NAME>`.
+
+## Trainer versioning scheme (LOCKED — shared by trainer data + Core plugin)
+- `trainers.txt` sections are `[TRAINER_TYPE,Name,Version]`.
+- Difficulty: base version `v` = **Standard**. `v+100` = **Hard** variant, `v+200` = **Casual** variant. Core plugin picks the variant for the active difficulty and falls back to `v` if the variant doesn't exist.
+- Rival battles: base version = `battle_number*10 + starter_slot`, where starter_slot is 0 = player chose a Grass starter, 1 = Fire, 2 = Water (e.g. Kestrel K3 vs a Fire-starter player = version 31).
+  The rival's starter is written in PBS as the **Gen 1 line** (Bulbasaur/Charmander/Squirtle lines). At battle start, Core swaps it to the **same-generation counterpart** of the player's starter (matching evolution stage; level-up moveset regenerated for that species; item/nature/EVs/IVs kept).
+
+## Fixed places (LOCKED)
+- Starting village: **Ferrow's Landing** (ferry dock on the south coast; the "last ferry" arrives here).
+- Capital + Festival venue: **Crownhaven** (seat of the Accord; only reachable after Badge 18 / story-gated).
+
+## World
+- Region: **Velmora** — a fractured continent of highlands, drowned coasts, and old-growth forest, ringed by islands. 18 cities, each built around an **Imprint**.
+- Core myth: Three hundred years ago, in **the Prismfall**, Arceus's 18 Plates fell from the sky and embedded in Velmora's land. Each Plate "imprints" its type onto the surrounding land — the in-world reason **field effects** exist. Cities grew around Imprints because they are resources (geothermal fire, endless current, fertile soil...).
+- Governance: **The Accord**. Each city's Gym Leader is its **Warden** — hereditary-ish guardian of its Plate and de facto governor. Above them sits the **Sovereign Seat** (Champion). Badges = a Warden's formal endorsement.
+- The threat: **the Bleed** — Imprints have begun spreading beyond their cities, warping land (towns frozen, forests turned to crystal). Velmora is under border quarantine.
+- The **Festival of Champions**: held once a decade; champions of other regions are invited; the winner holds the Sovereign Seat. 18 badges are the entry requirement for a Velmoran challenger. All 18 Plates are brought together for the opening ceremony.
+- The protagonist is **Unimprinted** — immune to Imprints and able to walk into Bleed zones. (Secret, revealed late: they carry a fragment of the **Legend Plate**, the 19th plate that holds every type and none.)
+
+## Factions (names LOCKED, depth open)
+- **The Hollow** — eco-zealots who believe the Plates are poisoning Velmora and must be destroyed. Leader: masked **"the Mourner"** (identity is the story team's call). Main antagonists Acts I–II, sympathetic, partially right.
+- **Meridian Concord** — energy conglomerate that harvests Imprints to power the region. CEO **Aurelian Voss**. Ally-seeming early, true antagonist by Act IV: plans to use the Festival convergence to forge an artificial Judgment and bind Arceus.
+- **The Accord / League** — Champion **Valen Corrigan**, Sovereign for 30 years. Has known about the Bleed for decades; the Festival's ceremony secretly re-tunes the Plates. Tragic guardian, not a villain — but has lied to everyone.
+
+## Main cast (names LOCKED)
+- **Kestrel Vane** — aggressive rival; child of the disgraced former Ghost Warden. Picks the starter with type advantage over the player's.
+- **Juno Hale** — friendly rival; picks the starter weak to the player's. Becomes Grass Warden in Act III (player battles her for Badge 9).
+- **Aurelian Voss**, **Valen Corrigan**, **the Mourner** — see factions.
+- Starters: the player may choose **any Gen 1–9 starter** (Reborn-style).
+
+## Acts (LOCKED boundaries)
+| Act | Title | Gyms |
+|---|---|---|
+| I | The Last Ferry | 1–4 |
+| II | Imprints | 5–8 |
+| III | Fault Lines | 9–12 |
+| IV | The Drowned Crown | 13–16 |
+| V | Sovereign | 17–18 + Festival of Champions |
+
+## The 18 Gyms (LOCKED: order, type, city, leader, field ID, level cap)
+| # | Type | City | Warden | Signature field ID | Level cap |
+|---|---|---|---|---|---|
+| 1 | Bug | Briarwick | Tamsin Loom | `:SILKWOOD` | 15 |
+| 2 | Normal | Saltmere | Dorian Pell | `:GRAND_STAGE` | 19 |
+| 3 | Water | Ebbmouth | Marisol Reyes | `:WATER_SURFACE` | 23 |
+| 4 | Electric | Lumen City | Rook Calder | `:NEON_GRID` | 27 |
+| 5 | Ground | Duneholt | Sahar Ostrand | `:DESERT` | 31 |
+| 6 | Poison | Mirefen | Corvin Mott | `:CORROSIVE_MIRE` | 35 |
+| 7 | Fire | Cindervault | Brann Holloway | `:VOLCANIC` | 39 |
+| 8 | Fighting | Ironreach | Kaito Ren | `:COLOSSEUM` | 43 |
+| 9 | Grass | Verdance | Juno Hale (succeeds Rowan Ashby) | `:FLOWER_GARDEN` | 47 |
+| 10 | Ice | Rimeholt | Anja Sorrel | `:FROZEN_LAKE` | 51 |
+| 11 | Flying | Skyreach | Odessa Gale | `:STORMFRONT` | 55 |
+| 12 | Psychic | Lucent | Ilsa Marr | `:MINDSCAPE` | 59 |
+| 13 | Rock | Cragholm | Bastian Ore | `:CRYSTAL_CAVERN` | 63 |
+| 14 | Ghost | Gravenmoor | Ysolde Ashgrave | `:HOLLOW_CATHEDRAL` | 67 |
+| 15 | Steel | Cogsworth | Magnus Strade | `:FACTORY` | 71 |
+| 16 | Dark | Underveil | Nyx Calloway | `:NEW_MOON` | 75 |
+| 17 | Fairy | Gloaming | Celestine Aubade | `:FAIRY_TALE` | 80 |
+| 18 | Dragon | Wyrmrest | Sigrun Ashfall | `:DRAGONS_DEN` | 85 |
+
+Festival of Champions caps rise per round to match that round's ace: R16 90, QF 92, SF 94, Final 96, Hijack + Arceus 100.
+
+## Field roster (LOCKED IDs; ~30 fields)
+Gym fields (above) plus story/route fields:
+`:CAVE`, `:MOUNTAIN`, `:SNOWY_MOUNTAIN`, `:BEACH`, `:UNDERWATER`, `:RAINBOW`, `:WASTELAND`, `:ASHEN_WASTE`,
+`:DARK_CRYSTAL`, `:SCRAPYARD`, `:INVERSE`, `:BLEED` (this game's signature corrupted field — unstable, borrows random
+effects from other fields), `:PRISM_ARENA` (Festival finale — cycles through gym fields).
+Known transitions (more allowed): VOLCANIC→ASHEN_WASTE (quenched), FROZEN_LAKE→WATER_SURFACE (melted),
+WATER_SURFACE↔UNDERWATER (Dive), CRYSTAL_CAVERN→DARK_CRYSTAL (darkened), FACTORY→SCRAPYARD (wrecked),
+FLOWER_GARDEN has 5 growth stages, any field→BLEED in specific story battles.
+Built-in Electric/Grassy/Misty/Psychic Terrain must interact sensibly with fields (overlay, suppress, or transform).
+Field "seed" items (Reborn-style): `ELEMENTALSEED`, `MAGICALSEED`, `TELLURICSEED`, `SYNTHETICSEED` — effect varies by field.
+
+## Festival of Champions (LOCKED player path)
+Entrants include the Velmoran challenger (player), Kestrel, Juno, selected Wardens, and 7 invited cameo champions from the
+sister fangames (Reborn / Rejuvenation / Desolation — roster in `design/CAMEOS.md`) (+ the reigning Sovereign, Valen).
+Player's bracket path:
+1. Round of 16 — **Juno Hale** (ace 90)
+2. Quarterfinal — **headline sister-game cameo** (see CAMEOS.md) (ace 92)
+3. Semifinal — **Kestrel Vane** (ace 94)
+4. Final — **Champion Valen Corrigan** (ace 96)
+5. Hijack — **Aurelian Voss** on `:PRISM_ARENA` (ace 100)
+6. True finale — **Arceus** boss battle, type and field shifting (lv 100)
+Other cameo champions are optional exhibition battles during the Festival week.
+
+## Rival battle slots (LOCKED)
+- Kestrel: K1 intro (lv 6), K2 before Gym 3, K3 after Gym 5, K4 at Gym 8 arc, K5 Gym 11 arc, K6 Gym 14 arc, K7 Gym 17 arc, K8 Festival semifinal.
+- Juno: J1 Gym 2 arc, J2 Gym 6 arc, J3 = Gym 9 leader battle, J4 Festival Round of 16.
+
+## Tone
+Reborn/Rejuvenation-style: dark, politically tangled, character-driven, mature themes (loss, corruption, sacrifice)
+but ultimately hopeful. Gyms are puzzles + set-piece battles; difficulty is high, with selectable difficulty modes.
+
+## Output locations
+- Story: `/home/claude/fangame/story/` — Design docs: `/home/claude/fangame/design/` — Setup/docs: `/home/claude/fangame/docs/`
+- Plugins: `/home/claude/fangame/plugins/` — PBS: `/home/claude/fangame/pbs/`

@@ -1,0 +1,6 @@
+Name       = Prismfall Debug Tools
+Version    = 1.0.0
+Essentials = 21.1
+Optional   = Prismfall Core
+Optional   = Prismfall Field Effects
+Credits    = Prismfall dev team

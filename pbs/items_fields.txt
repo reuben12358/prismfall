@@ -1,0 +1,38 @@
+# Prismfall field seed items (Essentials v21.1 items.txt format).
+# Effects are defined per field by the Prismfall Field Effects plugin (see design/FIELDS.md).
+#-------------------------------
+[ELEMENTALSEED]
+Name = Elemental Seed
+NamePlural = Elemental Seeds
+Pocket = 1
+Price = 4000
+SellPrice = 2000
+Flags = Fling_10
+Description = A seed steeped in raw elemental Imprints. When held, it reacts to fiery, watery or electric fields. Single use.
+#-------------------------------
+[MAGICALSEED]
+Name = Magical Seed
+NamePlural = Magical Seeds
+Pocket = 1
+Price = 4000
+SellPrice = 2000
+Flags = Fling_10
+Description = A seed that hums with strange, shifting power. When held, it reacts to warped, wondrous or theatrical fields. Single use.
+#-------------------------------
+[TELLURICSEED]
+Name = Telluric Seed
+NamePlural = Telluric Seeds
+Pocket = 1
+Price = 4000
+SellPrice = 2000
+Flags = Fling_10
+Description = A seed heavy with soil and stone. When held, it reacts to earthen, natural or decaying fields. Single use.
+#-------------------------------
+[SYNTHETICSEED]
+Name = Synthetic Seed
+NamePlural = Synthetic Seeds
+Pocket = 1
+Price = 4000
+SellPrice = 2000
+Flags = Fling_10
+Description = A seed grown in a Meridian lab. When held, it reacts to artificial or corrupted fields. Single use.

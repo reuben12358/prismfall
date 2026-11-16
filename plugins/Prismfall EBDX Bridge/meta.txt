@@ -1,0 +1,6 @@
+Name       = Prismfall EBDX Bridge
+Version    = 1.0.0
+Essentials = 21.1
+Optional   = Elite Battle: DX,1.4.7
+Requires   = Prismfall Field Effects
+Credits    = Prismfall Team

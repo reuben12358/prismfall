@@ -1,0 +1,5 @@
+Name       = Prismfall Field Effects
+Version    = 1.0.0
+Essentials = 21.1
+Optional   = Generation 9 Pack,3.0
+Credits    = Prismfall Team

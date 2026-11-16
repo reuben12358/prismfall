@@ -1,0 +1,313 @@
+# Pokémon Prismfall - trainer types (Essentials v21.1 format). Ships as trainer_types_prismfall.txt.
+# SkillLevel tiers (v21.1 AI): 1-31 basic, 32+ switches/HP-aware, 48+ high, 100+ best (adds ReserveLastPokemon).
+# Prismfall Core raises the floor to 48 on Hard. BGM names are stock base-project files; swap for custom tracks later.
+# --- Wardens (gym leaders). Gyms 1-2 use high skill (48), the rest best skill (100). ---
+#-------------------------------
+[LEADER_TAMSIN]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 48
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_DORIAN]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 48
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_MARISOL]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_ROOK]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_SAHAR]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_CORVIN]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_BRANN]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_KAITO]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_JUNO]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_ANJA]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_ODESSA]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_ILSA]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_BASTIAN]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_YSOLDE]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_MAGNUS]
+Name = Warden
+Gender = Male
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_NYX]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_CELESTINE]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_SIGRUN]
+Name = Warden
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+# --- Rivals (Kestrel's gender is the story team's call; sprite decides) ---
+#-------------------------------
+[RIVAL_KESTREL]
+Name = Rival
+Gender = Male
+BaseMoney = 60
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[RIVAL_JUNO]
+Name = Rival
+Gender = Female
+BaseMoney = 60
+SkillLevel = 64
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+# --- The Accord ---
+#-------------------------------
+[CHAMPION_VALEN]
+Name = Sovereign
+Gender = Male
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+# --- The Hollow ---
+#-------------------------------
+[HOLLOW_GRUNT]
+Name = Hollow Acolyte
+Gender = Mixed
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[HOLLOW_GRUNT_M]
+Name = Hollow Acolyte
+Gender = Male
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[HOLLOW_GRUNT_F]
+Name = Hollow Acolyte
+Gender = Female
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[HOLLOW_ADMIN]
+Name = Hollow Keeper
+Gender = Mixed
+BaseMoney = 70
+SkillLevel = 64
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[HOLLOW_WICK]
+Name = Hollow Keeper
+Gender = Male
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[HOLLOW_THISTLE]
+Name = Hollow Keeper
+Gender = Female
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[HOLLOW_TEO]
+Name = Hollow Keeper
+Gender = Male
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[HOLLOW_SABLE]
+Name = Hollow Keeper
+Gender = Female
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[HOLLOW_MOURNER]
+Name = The Mourner
+Gender = Male
+BaseMoney = 120
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+# --- Meridian Concord ---
+#-------------------------------
+[MERIDIAN_AGENT]
+Name = Meridian Agent
+Gender = Mixed
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[MERIDIAN_AGENT_M]
+Name = Meridian Agent
+Gender = Male
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[MERIDIAN_AGENT_F]
+Name = Meridian Agent
+Gender = Female
+BaseMoney = 40
+SkillLevel = 32
+BattleBGM = Battle trainer
+VictoryBGM = Battle victory trainer
+#-------------------------------
+[MERIDIAN_ADMIN]
+Name = Meridian Director
+Gender = Mixed
+BaseMoney = 70
+SkillLevel = 64
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_MARCHETTI]
+Name = Meridian Director
+Gender = Male
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_KROLL]
+Name = Meridian Director
+Gender = Male
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_ASHE]
+Name = Meridian Director
+Gender = Female
+BaseMoney = 80
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader
+#-------------------------------
+[MERIDIAN_VOSS]
+Name = Meridian CEO
+Gender = Male
+BaseMoney = 150
+SkillLevel = 100
+BattleBGM = Battle Champion
+VictoryBGM = Battle victory leader
+# --- Festival of Champions cameo champions: FESTIVAL_<NAME> from design/CAMEOS.md (appended below when it lands) ---
