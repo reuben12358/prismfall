@@ -1,0 +1,5 @@
+# Pokémon Tectonic "Outside" (its tileset 24) registered as Prismfall tileset 30. See design/ART_DIRECTION.md §2.1.
+id: 30
+name: Prismfall Outside
+tileset_name: Prismfall Outside
+from_rxdata: {file: /home/claude/ref/art/tectonic/Data/Tilesets.rxdata, id: 24, graphics: /home/claude/ref/art/tectonic/Graphics, remap_tags: true}

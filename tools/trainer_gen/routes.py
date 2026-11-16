@@ -51,7 +51,25 @@ def ROUTES(P):
     t("Map 545 Brinecut Mine B1F", "HIKER", "Gorse", "Deep enough down here to hear the sea. Well fought.", [m("ARON", 16, "STURDY", "ADAMANT"), m("NOSEPASS", 17, "STURDY", "IMPISH")])
     # Map 546 Thistledown Manor (haunted house, lv 14-15)
     t("Map 546 Thistledown Manor", "CHANNELER", "Mireille", "The Players say... you were adequate. High praise.", [m("GASTLY", 14, "LEVITATE", "TIMID"), m("SHUPPET", 14, "INSOMNIA", "ADAMANT"), m("SINISTEA", 15, "WEAKARMOR", "MODEST")])
+    # Map 560 Route 5 (lv 16-19)
+    t("Map 560 Route 5", "BIKER", "Rook", "Not THAT Rook. Everybody asks.", [m("GLAMEOW", 17, "OWNTEMPO", "JOLLY"), m("TAUROS", 18, "INTIMIDATE", "JOLLY")])
+    t("Map 560 Route 5", "PICNICKER", "Sela", "Okay, you win the last sandwich.", [m("SKITTY", 16, "CUTECHARM", "TIMID"), m("PHANPY", 17, "PICKUP", "ADAMANT")])
+    t("Map 560 Route 5", "POKEMANIAC", "Ivo", "My precious monsters!", [m("CUBONE", 17, "ROCKHEAD", "ADAMANT"), m("KANGASKHAN", 19, "EARLYBIRD", "ADAMANT")])
+    t("Map 560 Route 5", "RUINMANIAC", "Alder", "The old stones told me I'd lose. I never listen.", [m("HELIOPTILE", 17, "DRYSKIN", "TIMID"), m("DUNSPARCE", 18, "SERENEGRACE", "ADAMANT")])
+    # Map 561 Route 6 (lv 17-20)
+    t("Map 561 Route 6", "BIRDKEEPER", "Wren", "My flock scattered! Well flown.", [m("TAILLOW", 17, "GUTS", "JOLLY"), m("DUCKLETT", 18, "KEENEYE", "MODEST"), m("CHATOT", 18, "KEENEYE", "MODEST")])
+    t("Map 561 Route 6", "COOLTRAINER_F", "Astrid", "Cool. You'll do fine in the Tidelock.", [m("ORICORIO", 19, "DANCER", "TIMID"), m("CRAMORANT", 19, "GULPMISSILE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
+    t("Map 561 Route 6", "FISHERMAN", "Kjell", "The sea gives, the sea takes.", [m("MAGIKARP", 17, "SWIFTSWIM", "HARDY"), m("FINNEON", 18, "SWIFTSWIM", "TIMID"), m("WOOPER", 18, "DAMP", "IMPISH")])
+    t("Map 561 Route 6", "SAILOR", "Haldor", "Arr! Isenmar's coast breeds tough kids.", [m("WINGULL", 18, "KEENEYE", "MODEST"), m("SPHEAL", 19, "THICKFAT", "MODEST")])
+    # Map 564 Gullcry Caves (lv 19-20)
+    t("Map 564 Gullcry Caves", "HIKER", "Torvald", "The gulls laugh at me every time.", [m("BINACLE", 19, "TOUGHCLAWS", "ADAMANT"), m("CLOBBOPUS", 20, "LIMBER", "ADAMANT")])
+    # Maps 170-173 Tidelock Gym (Gym 3, lv 18-21; :WATER_SURFACE)
+    t("Map 170 Tidelock Gym - Lock Hall", "FISHERMAN", "Gunnar", "Lock's open. Mind the current.", [m("GOLDEEN", 18, "SWIFTSWIM", "ADAMANT"), m("BARBOACH", 19, "OBLIVIOUS", "ADAMANT")])
+    t("Map 171 Tidelock Gym - Basins (Low Water)", "SWIMMER_F", "Ingrid", "You swim like you were born here.", [m("BUIZEL", 19, "SWIFTSWIM", "JOLLY"), m("CHEWTLE", 19, "STRONGJAW", "ADAMANT")])
+    t("Map 172 Tidelock Gym - Basins (Mid Water)", "FISHERMAN", "Oskar", "Hooked a loss. Marisol'll laugh.", [m("BARBOACH", 20, "OBLIVIOUS", "ADAMANT"), m("CORPHISH", 20, "HYPERCUTTER", "ADAMANT")])
+    t("Map 172 Tidelock Gym - Basins (Mid Water)", "SWIMMER_M", "Leif", "Ugh, the water's rising. So's my shame.", [m("ARROKUDA", 20, "SWIFTSWIM", "ADAMANT"), m("PSYDUCK", 20, "SWIFTSWIM", "MODEST")])
+    t("Map 173 Tidelock Gym - Basins (High Water)", "SAILOR", "Bjorn", "The Warden's pool is next. Good luck, sprat.", [m("WINGULL", 20, "KEENEYE", "MODEST"), m("CHINCHOU", 21, "VOLTABSORB", "MODEST")])
     # Map 990 test arena dummy
-    t("Map 990 Prismfall Test Arena (dummy; overrides base [YOUNGSTER,Ben])", "YOUNGSTER", "Ben", "Testing, testing... you win!",
+    t("Map 990 Prismfall Test Arena (dummy)", "YOUNGSTER", "Prismtest", "Testing, testing... you win!",
       [m("SNORLAX", 50, "THICKFAT", "HARDY", "TACKLE,DEFENSECURL,REST,SNORE")], cap=50)
     return R

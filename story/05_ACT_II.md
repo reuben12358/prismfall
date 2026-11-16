@@ -2,6 +2,8 @@
 
 > **Tone:** Reborn-grey. The cost of Velmora's miracles becomes visible: company towns, Fixing wards, a street drug, an act of terror, and an unmasking that hurts someone you like. Humor stays, but it's gallows humor now.
 > Conventions as in 04 (CHOICE / GO / map names per WORLD.md).
+> **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
+
 
 **Act-opening beat (start of segment 4):** the PC leaves Lumen City through the **Lowlight (Shattered)** (608, `:BLEED`). A shrine of soda cans and candles has grown around Dex's glass figure. If the PC stands with him, the shard *hums* and the glass warms slightly under their hand. (Harmony seed for the Good ending's waking.) Mandate checkpoints with Directorate officers in white-and-gold now stand at every lift down to Nadir.
 

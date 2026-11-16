@@ -3,6 +3,8 @@
 > **Tone:** Desolation-dark, then a hard-won dawn. Everything planted pays off. The Festival week should feel like the whole game is in one city: every Warden, every faction, every Bond.
 > **Mechanics ownership:** the Festival draw, game-over IDs and ending triggers belong to `story/10_CHOICES_ENDINGS.md` and `design/NARRATIVE_KEYS.md`. This file gives the **story content of every branch** they select from. "Default" means the SPINE Rev. 2 path, the fallback.
 > Map names per WORLD.md (segments 16–18, Crownhaven 480–519). Caps: R16 90 · QF 92 · SF 94 · Final 96 · Hijack 100 · True Finale 100.
+> **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
+
 
 ---
 
@@ -67,11 +69,11 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 **Location:** R35 **Gloamwood** (`:FAIRY_TALE`), R36 (`:MOUNTAIN`), **Wyrmscar Rift** (864 `:CAVE` / 865 `:DRAGONS_DEN`), **Wyrmrest** (Ashkaar), **Rainbow Scar** (868, `:RAINBOW`).
 
 ### Arrival: Ashkaar, second visit (escalation)
-- **Dominar Hrothgar** has come to his seat, the **Ember Citadel**, and his legions fill its terraces and the slopes below: banners, braziers and a thousand dragon-riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
+- **Dominar Hrothgar** is at the front with his legions (the Ashkaar Siege Camp, 14_WAR_AND_BLESSING). Wyrmrest is held by Sigrun's own riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
 - **Sigrun Ashfall** keeps the pass open anyway, in open defiance, standing on the gate in dragonhide with her Salamence. "Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed. *I* do the weighing, Father. Not you."
 
 ### The Dominar (optional political scene, `DOMINAR_SWAYED`)
-- The PC can petition the Dominar in the Ember Citadel's throne hall, a cooled lava-tube where his throne sits over a channel of living magma. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
+- The PC petitions the Dominar in his command pavilion at the Siege Camp, after the battle. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
 - Persuading him to fly *for* Crownhaven instead of *against* Zenith requires:
   - the Light Stone sent to Wyrmrest (`:ch8_lightstone` = wyrmrest) **plus** proof (the **Arbiter Blueprints** or the **Larch Papers**), **or**
   - Sigrun's Bond ≥ 4, so that she speaks for the PC (`:ch19_dominar`).
@@ -110,6 +112,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 ## CHAPTER 20 — "The Festival of Champions" (Crownhaven, Festival week)
 
 > **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, following `story/10_CHOICES_ENDINGS.md` §3 and NARRATIVE_KEYS §6. **Revision 5:** every possible opponent is someone the PC has met at least twice by Act IV.
+> **Revision 6:** the Festival is the ceremony of **Arceus's Blessing**. Entrants are **kingdom delegations** (two per kingdom, Valen, and the PC), chosen by player choices: see `14_WAR_AND_BLESSING.md` Part A, which replaces the seed list here. The PC picks their colors on Day 0 (`:ch20_colors`). Companion-vs-companion matches can be watched as highlight cutscenes (`13_CUTSCENES.md`). The Coronation in Ch21 is "the Blessing", and Ch19's Dominar scenes play inside the Battle of the Shattered Ice.
 
 ### Day 0: Arrival
 1. **Crownhaven** is white stone and bells in the caldera. Upper Crownhaven is festooned with **Tamsin's eighteen banners**, woven since Ch10. The **Meridian Prism Arena** gleams where the old grounds were, too new.

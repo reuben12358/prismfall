@@ -5,6 +5,8 @@
 > - **CHOICE** = a named decision. Keys and effects are owned by `story/10_CHOICES_ENDINGS.md`. Suggested keys are in `code`, and Bonds/Standing deltas are indicative.
 > - **GO** = a proposed story game over (title / trigger / foreshadowing / epitaph) for the Ledger catalog.
 > - Map names follow `design/WORLD.md`.
+> **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
+
 
 ---
 

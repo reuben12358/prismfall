@@ -1,0 +1,74 @@
+slot	folder	final_name	local_source	target	target_link	verified
+Title screen	BGM	Title - Prismfall	dedrum_tectonic/Tectonic_Intro.ogg	GlitchxCity - Pokemon Main Theme / Title remix (pick one)	https://www.youtube.com/@GlitchxCity	U
+Splash / boot	BGM	Title - Boot	dedrum_tectonic/Tectonic_Boot_Intro.ogg	(keep local original)		-
+Prologue: the Dovetail ferry	BGM	Intro - Last Ferry	dedrum_tectonic/Tectonic_Mainland_Dock.ogg	GlitchxCity - Undella Town or S.S. Anne remix	https://www.youtube.com/@GlitchxCity	U
+Intro lecture (Larch) / lab	BGM	Intro - Larch Lab	nmm_lequietriot/mus_elm_lab.mid	GlitchxCity - Professor lab remix	https://www.youtube.com/@GlitchxCity	U
+Ferrow's Landing	BGM	Town - Ferrows Landing	dedrum_tectonic/Tectonic_Casaba_Villa.ogg	GlitchxCity - Twinleaf / Littleroot Town remix	https://www.youtube.com/@GlitchxCity	U
+Elowen towns (Briarwick, Saltmere, Verdance, Gloaming)	BGM	Town - Elowen	dedrum_tectonic/Tectonic_Floral_Rest.ogg	GlitchxCity - Floaroma / Eterna City remix	https://www.youtube.com/@GlitchxCity	U
+Antumbra towns (Lucent, Gravenmoor)	BGM	Town - Antumbra	nmm_lequietriot/mus_lavender_peace.mid	GlitchxCity - Lavender Town remix	https://www.youtube.com/@GlitchxCity	U
+Isenmar towns (Ebbmouth, Rimeholt)	BGM	Town - Isenmar	dedrum_tectonic/Tectonic_Frostflow_Farms.ogg	GlitchxCity - Snowpoint / Snowbelle City remix	https://www.youtube.com/@GlitchxCity	U
+Ashkaar towns (Cindervault, Wyrmrest)	BGM	Town - Ashkaar	nmm_lequietriot/mus_mt_ember.mid	GlitchxCity - Lavaridge / Blackthorn / Opelucid remix	https://www.youtube.com/@GlitchxCity	U
+Ossaria towns (Duneholt, Cragholm)	BGM	Town - Ossaria	nmm_lequietriot/mus_pewter.mid	GlitchxCity - Relic Castle / desert remix	https://www.youtube.com/@GlitchxCity	U
+Zenith (Lumen City, Skyreach, Cogsworth)	BGM	Town - Zenith	dedrum_tectonic/Tectonic_Prizca_East.ogg	GlitchxCity - Castelia / Lumiose / Nimbasa remix	https://www.youtube.com/@GlitchxCity	U
+Nadir (Mirefen, Ironreach, Underveil)	BGM	Town - Nadir	dedrum_tectonic/Tectonic_Prizca_Unused.ogg	GlitchxCity - Virbank City / Po Town remix	https://www.youtube.com/@GlitchxCity	U
+Crownhaven (capital, Festival week)	BGM	Town - Crownhaven	nmm_lequietriot/mus_indigo_plateau_league.mid	GlitchxCity - Pokemon League / PWT remix	https://www.youtube.com/@GlitchxCity	U
+Elowen routes	BGM	Route - Elowen	dedrum_tectonic/Tectonic_Scenic_Trail.ogg	GlitchxCity - Route 209 / Route 10 remix	https://www.youtube.com/@GlitchxCity	U
+Elowen forest (Gossamer Wood, Glasswood)	BGM	Route - Elowen Forest	dedrum_tectonic/Tectonic_Repora_Forest.ogg	GlitchxCity - Eterna Forest remix	https://www.youtube.com/@GlitchxCity	U
+Antumbra routes (behind the Glass)	BGM	Route - Antumbra	dedrum_tectonic/Tectonic_Primal_Clay_Fear.ogg	GlitchxCity - Distortion World / Old Chateau remix	https://www.youtube.com/@GlitchxCity	U
+Isenmar routes	BGM	Route - Isenmar	nmm_lequietriot/mus_ice_path.mid	GlitchxCity - Route 216 remix	https://www.youtube.com/@GlitchxCity	U
+Ashkaar routes	BGM	Route - Ashkaar	nmm_lequietriot/mus_dragons_den.mid	GlitchxCity - Mt. Chimney / Route 113 remix	https://www.youtube.com/@GlitchxCity	U
+Ossaria routes	BGM	Route - Ossaria	nmm_lequietriot/mus_route47.mid	GlitchxCity - Route 111 desert / Route 4 (BW) remix	https://www.youtube.com/@GlitchxCity	U
+Zenith routes / skyways	BGM	Route - Zenith	dedrum_tectonic/Tectonic_Sky_Walk.ogg	GlitchxCity - X and Y Route 15 remix	https://www.youtube.com/watch?v=ar6fbyeWj8U	V
+Nadir tunnels / sumps	BGM	Route - Nadir	nmm_lequietriot/mus_rocket_warehouse.mid	GlitchxCity - Castelia Sewers / Team hideout remix	https://www.youtube.com/@GlitchxCity	U
+Borderland routes (default)	BGM	Route - Borderlands	nmm_lequietriot/mus_route29.mid	GlitchxCity - Route 1 / Route 201 remix	https://www.youtube.com/@GlitchxCity	U
+Caves (generic)	BGM	Dungeon - Cave	nmm_lequietriot/mus_dark_cave.mid	GlitchxCity - Mt. Moon / Union Cave remix	https://www.youtube.com/@GlitchxCity	U
+Ruins / Ossuary of Dunes / Aurelia	BGM	Dungeon - Ruins	dedrum_tectonic/Tectonic_Regi_Dungeon.ogg	GlitchxCity - Ruins of Alph / Sealed Chamber remix	https://www.youtube.com/@GlitchxCity	U
+Late dungeons / Victory-Road type	BGM	Dungeon - Deep	nmm_lequietriot/mus_victory_road_cave.mid	GlitchxCity - Victory Road remix	https://www.youtube.com/@GlitchxCity	U
+Haunted houses (Thistledown Manor, Vane Hall)	BGM	Dungeon - Manor	nmm_lequietriot/mus_poke_mansion.mid	GlitchxCity - Old Chateau / Strange House remix	https://www.youtube.com/@GlitchxCity	U
+Gym interiors	BGM	Gym - Warden Hall	nmm_lequietriot/mus_gym_sinnoh.mid	GlitchxCity - Gym remix	https://www.youtube.com/@GlitchxCity	U
+Wild	BGM	Battle - Wild	nmm_lequietriot/mus_vs_wild_sinnoh.mid	GlitchxCity - Wild Battle remix (DPPt or BW)	https://www.youtube.com/@GlitchxCity	U
+Trainer	BGM	Battle - Trainer	nmm_lequietriot/mus_vs_trainer_sinnoh.mid	GlitchxCity - Trainer Battle remix	https://www.youtube.com/@GlitchxCity	U
+Rival Kestrel	BGM	Battle - Kestrel	nmm_lequietriot/mus_vs_rival.mid	GlitchxCity - Rival Battle remix (Silver / Hugh)	https://www.youtube.com/@GlitchxCity	U
+Rival Juno	BGM	Battle - Juno	team_aquas_misc/nico/mus_vs_champion_nemona.mid	GlitchxCity - Hop / Hau / Wally battle remix	https://www.youtube.com/@GlitchxCity	U
+Warden (gym leader)	BGM	Battle - Warden	nmm_lequietriot/mus_vs_gym_leader_sinnoh.mid	GlitchxCity - Gym Leader Battle remix	https://www.youtube.com/@GlitchxCity	U
+Warden, last Pokemon	BGM	Battle - Warden Last	nmm_lequietriot/mus_vs_gym_leader_rematch.mid	GlitchxCity - Gym Leader Last Pokemon (BW) remix	https://www.youtube.com/@GlitchxCity	U
+Hollow grunt	BGM	Battle - Hollow	nmm_lequietriot/mus_vs_team_rocket.mid	GlitchxCity - Team Plasma Theme / battle remix	https://www.youtube.com/@GlitchxCity	V
+Hollow admin	BGM	Battle - Hollow Admin	nmm_lequietriot/mus_vs_team_rocket_admin.mid	GlitchxCity - Team Magma and Aqua Boss Battle remix	https://www.youtube.com/@GlitchxCity	V
+Meridian agent	BGM	Battle - Meridian	team_aquas_misc/nico/mus_vs_cipher_admin.mid	GlitchxCity - Team Galactic / Team Flare battle remix	https://www.youtube.com/@GlitchxCity	U
+Meridian admin (Marchetti, Kroll, Quent)	BGM	Battle - Meridian Admin	team_aquas_misc/camgotay/hgss_rocket_hideout.mid	GlitchxCity - Galactic Commander / Colress battle remix	https://www.youtube.com/@GlitchxCity	U
+The Mourner	BGM	Battle - Mourner	nmm_lequietriot/mus_vs_team_rocket_boss.mid	GlitchxCity - N Battle / Ghetsis remix	https://www.youtube.com/@GlitchxCity	U
+Aurelian Voss	BGM	Battle - Voss	dedrum_tectonic/Tectonic_Yezera_Battle_Theme.mp3	GlitchxCity - Lysandre / Cyrus / Rose battle remix	https://www.youtube.com/@GlitchxCity	U
+Legendary (catchable)	BGM	Battle - Legendary	team_aquas_misc/nico/mus_bw_vs_legendary.mid	GlitchxCity - Giratina Battle remix	https://www.youtube.com/watch?v=tjYI_ie-kvw	V
+Boss (multi-bar)	BGM	Battle - Boss	nmm_lequietriot/mus_vs_legend.mid	GlitchxCity - Deoxys Battle remix	https://www.youtube.com/watch?v=QdlUIgMRVPQ	V
+Boss, final bar	BGM	Battle - Boss Final Bar	team_aquas_misc/ShinyDragonHunter/mus_c_vs_legend_beast.mid	GlitchxCity - Ultra Necrozma / Zinnia remix	https://www.youtube.com/@GlitchxCity	U
+Festival bracket	BGM	Battle - Festival	nmm_lequietriot/mus_vs_rank_match.mid	GlitchxCity - PWT / Battle Subway remix	https://www.youtube.com/@GlitchxCity	U
+Festival final rounds (SF/Final)	BGM	Battle - Festival Final	nmm_lequietriot/mus_vs_elite_four.mid	GlitchxCity - PWT Final Round remix	https://www.youtube.com/@GlitchxCity	U
+Champion Valen	BGM	Battle - Valen	nmm_lequietriot/mus_cynthia.mid	GlitchxCity - Champion Cynthia remix	https://www.youtube.com/@GlitchxCity	U
+Arceus finale	BGM	Battle - Arceus	dedrum_tectonic/Tectonic_Epitaph_of_the_Demiurge.ogg	GlitchxCity - Arceus Battle remix	https://www.youtube.com/@GlitchxCity	U
+Ruin Route	BGM	Battle - Ruin	team_aquas_misc/Celia Dawn/mus_dmca_battle.mid	GlitchxCity - Giratina Battle remix (pitch 90) or a second dark remix	https://www.youtube.com/watch?v=tjYI_ie-kvw	V
+Sidequest cameo fights	BGM	Battle - Cameo	team_aquas_misc/Kasen/mus_vs_iris.mid	GlitchxCity - Battle Frontier Brain remix	https://www.youtube.com/@GlitchxCity	U
+Wild victory	BGM	Battle victory wild	(stock base project)	keep stock		-
+Trainer victory	BGM	Battle victory trainer	(stock base project)	keep stock		-
+Warden / boss victory	BGM	Battle victory leader	(stock base project)	keep stock		-
+Festival round won	BGM	Victory - Festival	(stock base project) B2W2 213 Winning in the PWT!	keep stock track		-
+Champion / Festival won	BGM	Victory - Sovereign	(stock base project) B2W2 214 PWT Victor!	keep stock track		-
+Emotional	BGM	Mood - Emotion	nmm_lequietriot/mus_kanto_emotion.mid	GlitchxCity - Emotion (BW) remix	https://www.youtube.com/@GlitchxCity	U
+Farewell / loss	BGM	Mood - Farewell	nmm_lequietriot/mus_lavender_peace_intro.mid	GlitchxCity - N's Farewell remix	https://www.youtube.com/@GlitchxCity	U
+Tension	BGM	Mood - Tension	nmm_lequietriot/mus_encounter_rocket_boss.mid	GlitchxCity - Looker / Unwavering Emotions remix	https://www.youtube.com/@GlitchxCity	U
+Mystery / the Bleed	BGM	Mood - Mystery	dedrum_tectonic/Tectonic_Primal_Clay.ogg	GlitchxCity - Lake Guardians / Mt. Pyre remix	https://www.youtube.com/@GlitchxCity	U
+Hollow theme	BGM	Theme - Hollow	nmm_lequietriot/mus_encounter_rocket.mid	GlitchxCity - Team Plasma Theme	https://www.youtube.com/@GlitchxCity	V
+Meridian theme	BGM	Theme - Meridian	nmm_lequietriot/mus_global_terminal_tower.mid	GlitchxCity - Team Galactic HQ / Silph Co. remix	https://www.youtube.com/@GlitchxCity	U
+Accord / Valen theme	BGM	Theme - Accord	nmm_lequietriot/mus_indigo_plateau.mid	GlitchxCity - Champion encounter / League remix	https://www.youtube.com/@GlitchxCity	U
+Rival encounter	BGM	Theme - Kestrel	nmm_lequietriot/mus_encounter_johto_shady.mid	GlitchxCity - Rival encounter remix	https://www.youtube.com/@GlitchxCity	U
+War march (mustering, fronts)	BGM	War - March	nmm_lequietriot/mus_route23_badge7.mid	GlitchxCity - Victory Road / Route 10 (BW) remix	https://www.youtube.com/@GlitchxCity	U
+Battlefield (maps + war battles)	BGM	War - Battlefield	team_aquas_misc/nico/mus_waterfall_colosseum.mid	GlitchxCity - Battle Dialga/Palkia or Zekrom/Reshiram remix	https://www.youtube.com/@GlitchxCity	U
+Beam-clash cutscene climax	BGM	War - Beam Clash	team_aquas_misc/camgotay/hgss_entei_battle.mid	GlitchxCity - Kyurem / Rayquaza battle remix	https://www.youtube.com/@GlitchxCity	U
+Aftermath	BGM	War - Aftermath	team_aquas_misc/Specker/mus_sadpop.mid	GlitchxCity - Mt. Pyre / Emotion remix (slow)	https://www.youtube.com/@GlitchxCity	U
+Highlight intro sting	ME	Festival highlight start	(stock base project) ME: BP Fanfare	cut 3-5 s from the Festival battle remix		-
+Key-moment sting (KO, clutch)	ME	Festival highlight hit	(stock base project) ME: Slots win	cut 2-3 s hit from the same remix		-
+Match result sting	ME	Festival highlight result	(stock base project) ME: Slots big win	cut 4-6 s cadence		-
+Highlight reel bed (loop under the cutscene)	BGM	Festival - Highlights	(stock base project) B2W2 212 PWT Final Round!	GlitchxCity - PWT remix (same as bracket, lower volume)	https://www.youtube.com/@GlitchxCity	U
+Game over	ME	Prismfall game over	(stock base project) ME: Voltorb Flip game over	short cut from Mood - Farewell		-
+Ending: Good / Grey (hopeful)	BGM	Ending - Homecoming	dedrum_tectonic/Tectonic_Casaba_Villa_Remix.ogg	GlitchxCity - Ending / Hall of Fame remix	https://www.youtube.com/@GlitchxCity	U
+Ending: Bad / Ruin	BGM	Ending - Ruin	team_aquas_misc/ShinyDragonHunter/mus_rg_sevii_dungeon.mid	GlitchxCity - Lavender Town remix (pitch 85)	https://www.youtube.com/@GlitchxCity	U
+Credits	BGM	Credits	(stock base project)	keep stock name (Scene_Credits::BGM)		-

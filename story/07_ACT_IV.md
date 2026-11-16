@@ -3,6 +3,8 @@
 > **Tone:** Desolation. Truth arrives in layers, and every layer costs something. A massacre the player can't stop, a rival's world shattering, a beloved mentor's complicity, a villain who is *reasonable*. Keep one warm scene per chapter (a meal, a joke, a Pokémon moment) so the dark has contrast.
 > Conventions as in 04. Map names per WORLD.md (segments 12–15). From the start of Act IV, revisited early maps use **encounter version 1 (Bleed-spread)**.
 > **If Rowan drowned at the Fault (`:ch13_fault` = marchetti):** every Rowan line in Acts IV–V goes to the Lantern Hollow's leader instead: **Teo** if `TEO_SAVED`, otherwise **Thistle** with **Wick**. Juno's scenes reference her uncle's death.
+> **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
+
 
 **Act-opening state (after the Fault):**
 - The Bleed has leapt forward everywhere. Briarwick's Glasswood has reached the looms. The Lowlight's glass has spread a block. Saltmere, never once touched by Bleed, has a glass puddle on the promenade, and Dorian has roped it off as "our first miracle, darlings".

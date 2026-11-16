@@ -22,8 +22,8 @@
 4. **`:effects` on CHOICES** (optional): `pf_choose(key, value)` applies `CHOICE_EFFECTS[key][value]` once, with the
    "X will remember that." toast only when a Bond changes tier. Lets events stop hand-applying deltas.
 5. **Festival draw extensions** (§6): `:live => true` on a stage (seed the default at `Festival.start`, resolve the candidate list when
-   the stage's battle starts, like Hijack), `EXHIBITION_EXTRAS` (§6.5) and `ARCEUS_VARIANTS` (§6.6). (`:vacates` is withdrawn: Revision 4
-   seeds every draw candidate.)
+   the stage's battle starts, like Hijack), `EXHIBITION_EXTRAS` (§6.6) and `ARCEUS_VARIANTS` (§6.7). (`:vacates` is withdrawn.) Rev 6 adds `DELEGATIONS` + `seated()` (§6.1)
+   and `MATCH_RULES` (§6.5).
 
 ---
 
@@ -219,6 +219,51 @@ CHOICE_EFFECTS = {
 ```
 Quiet Hours relationship scenes (10_CHOICES_ENDINGS §7.1) add `+1` to their Bond when first reaching `friendly` and `close`.
 
+### 4.3 The Ashkaar–Isenmar War (SPINE Revision 6) — proposed keys; the story lead places the chapters (Act III–IV)
+```ruby
+CHOICES.merge!({
+  :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
+  :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Bleed-front: food for besieged Rimeholt, or harpoon-guns" },
+  :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
+  :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
+  :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the frozen strait" },
+  :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table (only if one side won)" }
+})
+CHOICE_EFFECTS.merge!({
+  :war_warning  => { :warn_isenmar => "MARISOL+2 SIGRUN-2", :warn_ashkaar => "SIGRUN+1 MARISOL-2", :warn_both => "ACCORD+2 SIGRUN+1 MARISOL+1", :silent => "RES-1" },
+  :war_convoy   => { :relief => "MARISOL+2 RES+1", :arms => "MARISOL+3 SIGRUN-2 RES-1", :refuse => "MARISOL-2" },
+  :war_prisoner => { :free => "RES+1 ACCORD-1", :exchange => "ACCORD+2", :leave => "RES-1" },
+  :war_legend   => { :calm_kyogre => "RES+2 MARISOL-1", :wake_reshiram => "SIGRUN+1 RES-2", :neither => "" },
+  :war_climax   => { :stand_between => "RES+2 ACCORD+1", :back_ashkaar => "SIGRUN+2 MARISOL-4 RES-1", :back_isenmar => "MARISOL+3 SIGRUN-4 RES-1" },
+  :war_terms    => { :mercy => "RES+2", :reparations => "ACCORD+1", :occupation => "RES-2 ACCORD-1" }
+})
+TALLIES[:WAR_TRUST] = [                       # what both armies have seen the PC do
+  "choice(:war_warning) == :warn_both",
+  "choice(:war_convoy) == :relief",
+  "choice(:war_prisoner) != :leave",
+  "choice(:war_legend) == :calm_kyogre || choice(:war_legend) == :neither",
+  "bond(:SIGRUN) >= 4",
+  "bond(:MARISOL) >= 3"
+]
+DERIVED_FLAGS.merge!({
+  :WAR_STOPPED       => "choice(:war_climax) == :stand_between && tally(:WAR_TRUST) >= 4",   # both lines hold fire; the beams meet over the PC and part
+  :WAR_BOTH_BROKEN   => "choice(:war_climax) == :stand_between && tally(:WAR_TRUST) < 4",    # nobody listens; the clash detonates and breaks both armies
+  :WAR_ASHKAAR_WON   => "choice(:war_climax) == :back_ashkaar",
+  :WAR_ISENMAR_WON   => "choice(:war_climax) == :back_isenmar",
+  :WAR_OCCUPATION    => "choice(:war_terms) == :occupation",
+  :ISENMAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ASHKAAR_WON) && choice(:war_terms) != :mercy)",
+  :ASHKAAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)"
+})
+```
+- **Cutscene variants** (Prismfall Cutscenes): the climax always contains the beam clash (Reshiram's Blue Flare vs Kyogre's Origin Pulse if
+  `:war_legend` woke/failed to calm them; otherwise Sigrun's Salamence Draco Meteor vs Anja's Mamoswine/Marisol's Gyarados Hydro Pump–Blizzard).
+  Ending frame by flag: `WAR_STOPPED` (beams part around the PC), `WAR_BOTH_BROKEN` (white-out, both lines gone), a victor's banner otherwise.
+- **Consent:** `WARDEN_CONSENT` entries 3 (Marisol) and 10 (Anja) gain `&& !flag(:ISENMAR_EMBITTERED)`; entries 7 (Brann) and 18 (Sigrun) gain
+  `&& !flag(:ASHKAAR_EMBITTERED)`. A beaten, unforgiven kingdom won't give up the last thing it holds. (Applied in §5's array below this note:
+  Core should transcribe the four amended strings.)
+- **Endings:** `END_UNFINISHED` also fires on `flag(:WAR_OCCUPATION)` (Arceus won't bless a land with a boot on its neck); `DOMINAR_SWAYED` can't be
+  set if `WAR_ISENMAR_WON` without `:mercy`; `LANTERN_HOLDS`-style hijack help: the winning side's (or, if stopped, both sides') fleets and legions defend Crownhaven.
+
 ---
 
 ## 5. Derived flags and tallies [CORE+ `flag()` / `tally()`]
@@ -282,14 +327,14 @@ DERIVED_FLAGS = {
 WARDEN_CONSENT = [
   "choice(:ch2_tamsin) != :keep_secret",                          #  1 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
   "choice(:ch5_lowlight_testimony) != :mourner",                  #  2 Dorian  - you told the official story on record; he keeps the lie he knows
-  "flag(:TEO_SAVED) || bond(:MARISOL) >= 3",                      #  3 Marisol
+  "(flag(:TEO_SAVED) || bond(:MARISOL) >= 3) && !flag(:ISENMAR_EMBITTERED)",                    #  3 Marisol
   "flag(:ROOK_CUTS_GRID) || flag(:MARCHETTI_TURNED)",             #  4 Rook    - the Zap Plate is in Meridian's vault; he can only release what he can reach
   "choice(:ch6_drillsite) != :directorate",                       #  5 Sahar
   "flag(:CORVIN_FREED)",                                          #  6 Corvin  - otherwise a Choir porter carries his Plate and can't release it
-  "choice(:ch8_lightstone) != :dominar",                          #  7 Brann
+  "choice(:ch8_lightstone) != :dominar && !flag(:ASHKAAR_EMBITTERED)",                      #  7 Brann
   "flag(:KAITO_TESTIFIED)",                                       #  8 Kaito   - a man who never confessed can't let go
   "bond(:JUNO) >= 0",                                             #  9 Juno
-  "choice(:ch11_anja) == :let_confess",                           # 10 Anja    - "Rimeholt drowns without it."
+  "choice(:ch11_anja) == :let_confess && !flag(:ISENMAR_EMBITTERED)",                      # 10 Anja    - "Rimeholt drowns without it."
   "choice(:ch12_letter) != :burn",                                # 11 Odessa  - you burned a dead letter
   "flag(:ILSA_RECONCILED) || bond(:ILSA) >= 5",                   # 12 Ilsa
   "choice(:ch14_telemetry) != :leave",                            # 13 Bastian - you walked a Meridian beacon into his seams
@@ -297,7 +342,7 @@ WARDEN_CONSENT = [
   "flag(:MAGNUS_KEPT_FAITH)",                                     # 15 Magnus  - "I won't hand my city's future to a god."
   "flag(:NYX_BARGAIN_TAKEN) || bond(:NYX) >= 4",                  # 16 Nyx
   "resonance >= 2",                                               # 17 Celestine - she hears which key you sing in
-  "choice(:ch19_oath) != :keep && choice(:ch19_oath) != :ruin"    # 18 Sigrun
+  "choice(:ch19_oath) != :keep && choice(:ch19_oath) != :ruin && !flag(:ASHKAAR_EMBITTERED)"    # 18 Sigrun
 ]
 
 TALLIES = {
@@ -323,134 +368,193 @@ TALLIES = {
 
 ---
 
-## 6. Festival draw (SPINE Revisions 4–5: established characters only)
+## 6. Festival draw (SPINE Revisions 5–6: kingdom delegations, story-met characters only)
 
-**Rule (Rev 5):** every possible Festival opponent, in every draw pool and exhibition, is someone the player has met in at least two meaningful
-story encounters, introduced by Act IV at the latest. The Rev-4 outsiders (Isaura, Drey, Mireille, Thorne) are **retired**. All sixteen seeds
-are rivals, Wardens and the Sovereign; the only unseeded candidates are Rowan ("the Gardener", R16), Brann (Final stand-in) and the Ruin-only
-Archseer Dask, so a draw is almost always a seat swap and **`:vacates` stays withdrawn**.
+The Festival chooses who receives **Arceus's Blessing**. Sixteen seats: the Unimprinted challenger (the PC) and **fifteen delegates**, two per kingdom
+plus the Accord's Sovereign. Who each kingdom sends is decided by the player's choices (§6.1). Every possible opponent is story-met (Rev 5); the
+Rev-4 outsiders are retired. Order of operations at `Festival.start`: **(1)** resolve delegations into seats, **(2)** run the draw (§6.3) over the
+seated entrants, **(3)** resolve NPC matches by `MATCH_RULES` (§6.5).
 
-### 6.1 Who can be an opponent, and where the player met them
-| Character | Pools | Encounters before the Festival |
-|---|---|---|
-| Juno | R16 default, exhibition | everywhere (J1–J3) |
-| Marisol | R16, exhibition | Ch4 (gym, Teo), Ch9 (Ironreach), Ch11 (the strike) |
-| Anja | R16 | Ch11 (gym, the Thaw, her confession) — *request:* one Act IV refugee scene |
-| Rowan | R16 | Ch1, Ch3, Ch5, Ch9, Ch13 (as the Mourner and as himself) |
-| Celestine | **QF default** | Ch2 (disguised, the shrine rhyme), Ch18 (gym, the Hymn, K7) |
-| Sigrun | QF | Ch8 (the Light Stone), Ch19 (gym, the Rift) |
-| Kaito | QF | Ch9 (gym, the Conclave), Ch13 (Marrowgate testimony) |
-| Ysolde | QF | Ch15 (gym, the Cathedral echo, K6 aftermath, Morwen's letter) |
-| Odessa | QF | Ch12 (gym, the Larch Papers, the raid), Ch14–16 (the blockade flight) |
-| Kestrel | SF | everywhere (K1–K7) |
-| Valen | Final | Ch5, Ch9, Ch10, Ch13, Ch20 |
-| Brann | Final (stand-in) | Ch8 (gym, the Caldera), Ch17 (his confession) |
-| Voss / Quent | Hijack | Voss everywhere; Quent Ch8, Ch10, Ch14, Ch16 |
-| Dask (Ruin) | QF | Ch13 (Mirror Mere), Ruin R1 (presiding over the graves), R4 (the Synod's offer) |
-| Theodric (Ruin) | Hijack | Ruin R3 (the Sun Court's mirror-wall), R6 (behind the Night of Masques stage) |
-| Dorian, Rook | exhibition (Pageant Bout) | Dorian Ch3, Ch17; Rook Ch5, Ch16 |
-| Morwen's Echo | exhibition | Ch13 (the Mindscape memory), Ch15 (the Cathedral echo) |
-
-### 6.2 Default bracket (replaces CAMEOS.md's "Default draw" and the Rev-4 table)
+### 6.1 Delegations [CORE+ `DELEGATIONS`: per seat, the first candidate whose condition holds and who isn't seated yet]
 ```ruby
-BRACKET = [
-  :PLAYER,    :JUNO,     # R16 m0  (player; J4)
-  :CELESTINE, :DORIAN,   # R16 m1  -> Celestine (default QF opponent). Dorian loses gloriously in round one, as is tradition
-  :KESTREL,   :ROOK,     # R16 m2  -> Kestrel's Gauntlet beats Zenith's idol on live broadcast
-  :KAITO,     :TAMSIN,   # R16 m3
-  :VALEN,     :ODESSA,   # R16 m4  -> Valen (Odessa loses with style)
-  :NYX,       :SAHAR,    # R16 m5
-  :YSOLDE,    :ANJA,     # R16 m6
-  :MARISOL,   :SIGRUN    # R16 m7
-]
+DERIVED_FLAGS.merge!({
+  :KESTREL_FOR_ANTUMBRA => "flag(:KESTREL_REDEEMED) && (choice(:ch18_kestrel_ring) == :give_now || bond(:YSOLDE) >= 4)",  # Gravenmoor names him; else he's Meridian's sponsored champion for Zenith
+  :ISENMAR_ONE_SEAT     => "flag(:WAR_ASHKAAR_WON) || flag(:WAR_BOTH_BROKEN)",
+  :ASHKAAR_ONE_SEAT     => "flag(:WAR_ISENMAR_WON) || flag(:WAR_BOTH_BROKEN)",
+  :ISENMAR_KEEPS_ANJA   => "flag(:ANJA_EXPOSED) && (flag(:TEO_SAVED) || bond(:MARISOL) > 2)"   # the one with the open account with you stays
+})
+DELEGATIONS = {   # seat => ordered [entrant, condition]; nil = always
+  :ELOWEN_A   => [[:JUNO, nil]],                                    # Verdance's Warden (she may give the seat to Rowan: R16 draw)
+  :ELOWEN_B   => [[:CELESTINE, nil]],                               # Gloaming; the Queen has no say over a Warden who cannot lie
+  :ANTUMBRA_A => [[:YSOLDE, nil]],
+  :ANTUMBRA_B => [[:KESTREL, "flag(:KESTREL_FOR_ANTUMBRA)"], [:ILSA, nil]],
+  :ZENITH_A   => [[:ROOK, "choice(:ch16_rook) == :hold"], [:ODESSA, nil]],     # a fired Rook can't represent Zenith
+  :ZENITH_B   => [[:KESTREL, "!flag(:KESTREL_FOR_ANTUMBRA)"], [:MAGNUS, "!flag(:MAGNUS_EXPOSED)"], [:ODESSA, nil], [:ROOK, nil]],
+  :NADIR_A    => [[:KAITO, nil]],
+  :NADIR_B    => [[:CORVIN, "flag(:CORVIN_FREED) && choice(:ch17_nyx) == :refuse"], [:NYX, nil]],
+  :OSSARIA_A  => [[:SAHAR, nil]],
+  :OSSARIA_B  => [[:BASTIAN, "choice(:ch14_telemetry) != :leave"], [:FORFEIT, nil]],  # Cragholm raided through your beacon: Bastian stays with his dead
+  :ISENMAR_A  => [[:ANJA, "flag(:ISENMAR_ONE_SEAT) && flag(:ISENMAR_KEEPS_ANJA)"], [:MARISOL, nil]],
+  :ISENMAR_B  => [[:FORFEIT, "flag(:ISENMAR_ONE_SEAT)"], [:ANJA, nil]],   # :FORFEIT = first unseated entrant of FORFEIT_POOL (the Accord lends the seat)
+  :ASHKAAR_A  => [[:SIGRUN, nil]],
+  :ASHKAAR_B  => [[:FORFEIT, "flag(:ASHKAAR_ONE_SEAT)"], [:BRANN, nil]],
+  :ACCORD     => [[:VALEN, nil]]
+}
+# Seat template (slot order; R16 pairs are (0,1) (2,3) ...). The draw then swaps path opponents into the player's blocks as it does today.
+BRACKET_SEATS = [:PLAYER, :ELOWEN_A, :ELOWEN_B, :OSSARIA_A, :ANTUMBRA_B, :ZENITH_A, :NADIR_A, :OSSARIA_B,
+                 :ACCORD, :ZENITH_B, :NADIR_B, :ISENMAR_A, :ISENMAR_B, :ASHKAAR_B, :ANTUMBRA_A, :ASHKAAR_A]
 HEADLINE_OPPONENT = :CELESTINE
 PLAYER_PATH = [:JUNO, :CELESTINE, :KESTREL, :VALEN]   # fallback only
-SCRIPTED_WINNERS = { [0, 3] => :KAITO, [0, 5] => :NYX, [0, 6] => :YSOLDE, [0, 7] => :SIGRUN,
-                     [1, 3] => :SIGRUN }   # Kestrel beats Kaito in the QF (Kaito: "Lucario felt it. That isn't him."); Valen beats Sigrun in the other SF
+```
+`FORFEIT_POOL = [:DORIAN, :TAMSIN, :ROOK, :ODESSA, :ILSA, :NYX, :CORVIN]` (seven names for at most three forfeits, so one is always free; a victor
+gets terms, never a third delegate). Seats resolve in hash order, forfeits last. Guarantees: every seat ends in an unconditional candidate or `:FORFEIT`; Kestrel, Juno, Celestine, Kaito, Ysolde, Sigrun and Valen are **always seated**.
+New function **[CORE+] `seated(:ENTRANT)`** → true if that entrant holds a seat this run.
+
+New/changed entrants (all story-met; NPC-only unless a team is listed in §7):
+```ruby
 ENTRANTS.merge!({
-  # seeded Wardens: NPC-only unless drawn (the draw passes the Festival version)
   :CELESTINE => { :display => "Celestine", :trainer_type => :LEADER_CELESTINE, :name => "Celestine", :version => 92, :rating => 92, :level_hint => 92 },
-  :DORIAN    => { :display => "Dorian",    :trainer_type => :LEADER_DORIAN,    :name => "Dorian",    :version => 50, :rating => 80 },
-  :ROOK      => { :display => "Rook",      :trainer_type => :LEADER_ROOK,      :name => "Rook",      :version => 50, :rating => 82 },
-  :TAMSIN    => { :display => "Tamsin",    :trainer_type => :LEADER_TAMSIN,    :name => "Tamsin",    :version => 50, :rating => 78 },
-  :SAHAR     => { :display => "Sahar",     :trainer_type => :LEADER_SAHAR,     :name => "Sahar",     :version => 50, :rating => 83 },
+  :YSOLDE    => { :display => "Ysolde",    :trainer_type => :LEADER_YSOLDE,    :name => "Ysolde",    :version => 92, :rating => 86, :level_hint => 92 },
   :MARISOL   => { :display => "Marisol",   :trainer_type => :LEADER_MARISOL,   :name => "Marisol",   :version => 90, :exhibition => true, :rating => 84, :level_hint => 90 },
   :ANJA      => { :display => "Anja",      :trainer_type => :LEADER_ANJA,      :name => "Anja",      :version => 90, :rating => 84, :level_hint => 90 },
-  :YSOLDE    => { :display => "Ysolde",    :trainer_type => :LEADER_YSOLDE,    :name => "Ysolde",    :version => 92, :rating => 86, :level_hint => 92 },
-  # (:KAITO, :NYX, :ODESSA, :SIGRUN already exist; Kaito/Sigrun/Odessa QF draws pass :version => 92)
-  # unseeded candidates
+  :BRANN     => { :display => "Brann",     :trainer_type => :LEADER_BRANN,     :name => "Brann",     :version => 96, :rating => 88, :level_hint => 96 },
+  :ILSA      => { :display => "Ilsa",      :trainer_type => :LEADER_ILSA,      :name => "Ilsa",      :version => 50, :rating => 85 },
+  :MAGNUS    => { :display => "Magnus",    :trainer_type => :LEADER_MAGNUS,    :name => "Magnus",    :version => 50, :rating => 86 },
+  :CORVIN    => { :display => "Corvin",    :trainer_type => :LEADER_CORVIN,    :name => "Corvin",    :version => 50, :rating => 83 },
+  :BASTIAN   => { :display => "Bastian",   :trainer_type => :LEADER_BASTIAN,   :name => "Bastian",   :version => 50, :rating => 80 },
+  :SAHAR     => { :display => "Sahar",     :trainer_type => :LEADER_SAHAR,     :name => "Sahar",     :version => 50, :rating => 83 },
+  :TAMSIN    => { :display => "Tamsin",    :trainer_type => :LEADER_TAMSIN,    :name => "Tamsin",    :version => 50, :rating => 78 },
+  :DORIAN    => { :display => "Dorian",    :trainer_type => :LEADER_DORIAN,    :name => "Dorian",    :version => 50, :rating => 80 },
+  :ROOK      => { :display => "Rook",      :trainer_type => :LEADER_ROOK,      :name => "Rook",      :version => 50, :rating => 82 },
   :ROWAN     => { :display => "The Gardener", :trainer_type => :LEADER_ROWAN,  :name => "Rowan",     :version => 90, :rating => 88, :level_hint => 90 },
-  :BRANN     => { :display => "Brann",     :trainer_type => :LEADER_BRANN,     :name => "Brann",     :version => 96, :rating => 90, :level_hint => 96 },
   :DASK      => { :display => "Archseer Dask", :trainer_type => :ARCHSEER_DASK, :name => "Imre",     :version => 92, :rating => 92, :level_hint => 92 },
   :KESTREL_FALLEN => { :display => "Kestrel", :person => :KESTREL, :trainer_type => :RIVAL_KESTREL, :name => "Kestrel", :rival_battle => 9, :rating => 95, :level_hint => 94 },
   :VALEN_RUIN=> { :display => "Valen",     :person => :VALEN, :trainer_type => :CHAMPION_VALEN, :name => "Valen", :version => 1, :rating => 99, :level_hint => 96 },
   :QUENT     => { :display => "Dr. Quent", :trainer_type => :MERIDIAN_QUENT,   :name => "Percival",  :version => 99, :rating => 97, :level_hint => 100 },
   :THEODRIC  => { :display => "Theodric",  :trainer_type => :GILDED_THEODRIC,  :name => "Theodric",  :version => 0, :rating => 99, :level_hint => 100 },
-  # exhibition-only (never seeded)
   :MORWEN       => { :display => "Morwen", :trainer_type => :ECHO_MORWEN, :name => "Morwen", :version => 90, :exhibition => true, :rating => 0 },
   :PAGEANT_BOUT => { :display => "Dorian & Rook", :double => true, :trainer_type => [:LEADER_DORIAN, :LEADER_ROOK], :name => ["Dorian", "Rook"],
-                     :version => 90, :exhibition => true, :rating => 0 }   # double battle
+                     :version => 90, :exhibition => true, :rating => 0 }
 })
-# Remove: every cameo entrant (:LIN :AMARIA :SHELLY :ALEXANDRA :VENAM :SHIV :GARRET :MELIA :TITANIA :NOVA), the Rev-4 outsiders
-# (:ISAURA :DREY :MIREILLE :THORNE), :BASTIAN (exhibition cut: only one chapter of screen time), and the samples :SUCCESSOR, :MOURNER.
+# Remove every cameo entrant, the Rev-4 outsiders (:ISAURA :DREY :MIREILLE :THORNE) and the samples :SUCCESSOR, :MOURNER.
 ```
+
+### 6.2 Where the player met every possible opponent (Rev 5 audit)
+Juno, Kestrel, Valen, Rowan, Voss: throughout. Marisol: Ch4, Ch9, Ch11, the war. Anja: Ch11, the war (prisoner). Celestine: Ch2 (disguised), Ch18.
+Sigrun: Ch8, the war, Ch19. Kaito: Ch9, Ch13. Ysolde: Ch15 (gym, echo, K6 aftermath). Odessa: Ch12, Ch14–16. Brann: Ch8, Ch17. Quent: Ch8, Ch10, Ch14, Ch16.
+Dorian/Rook (exhibition): Ch3, Ch17 / Ch5, Ch16. Morwen's Echo: Ch13 memory, Ch15 echo. Ruin only: Dask (Ch13, R1, R4), Theodric (R3, R6).
 
 ### 6.3 Draw lists (first match wins; the stage default is the appended fallback)
 ```ruby
 DRAWS = {
   :R16 => [   # default :JUNO (J4)
-    { :opponent => :MARISOL, :condition => "!ruin_route && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2" },
-    { :opponent => :ANJA,    :condition => "!ruin_route && flag(:ANJA_EXPOSED)" },
+    { :opponent => :MARISOL, :condition => "!ruin_route && seated(:MARISOL) && !flag(:TEO_SAVED) && bond(:MARISOL) <= 2" },
+    { :opponent => :ANJA,    :condition => "!ruin_route && seated(:ANJA) && flag(:ANJA_EXPOSED)" },
     { :opponent => :ROWAN,   :condition => "!ruin_route && flag(:ROWAN_ALIVE) && choice(:ch13_rowan_testimony) == :mercy && standing(:HOLLOW) >= 4" }
   ],
   :QF => [    # default :CELESTINE (v92)
     { :opponent => :DASK,   :condition => "ruin_route" },
-    { :opponent => :SIGRUN, :condition => "resonance <= -3",                         :version => 92 },
-    { :opponent => :KAITO,  :condition => "choice(:ch19_oath) == :keep",             :version => 92 },
+    { :opponent => :SIGRUN, :condition => "resonance <= -3 || flag(:WAR_ISENMAR_WON)",       :version => 92 },   # she weighs you again, or comes for the one who broke her father's legions
+    { :opponent => :KAITO,  :condition => "choice(:ch19_oath) == :keep",                     :version => 92 },
     { :opponent => :YSOLDE, :condition => "flag(:KESTREL_FALLEN)" },
-    { :opponent => :ODESSA, :condition => "tally(:WARM_BONDS) >= 5 && resonance >= 2", :version => 92 }
+    { :opponent => :ODESSA, :condition => "seated(:ODESSA) && tally(:WARM_BONDS) >= 5 && resonance >= 2", :version => 92 }
   ],
-  :SF => [    # default :KESTREL (K8, 80-82); the Ruin Route uses the same team with Ruin dialogue
+  :SF => [    # default :KESTREL (K8, 80-82); Ruin Route: same team, Ruin dialogue
     { :opponent => :KESTREL_FALLEN, :condition => "!ruin_route && flag(:KESTREL_FALLEN)" }
   ],
-  :FINAL => [ # default :VALEN. Stage flag :live => true [CORE+]: drawn when the Final starts (Day 7)
+  :FINAL => [ # default :VALEN. :live => true [CORE+]: drawn when the Final starts (Day 7)
     { :opponent => :VALEN_RUIN, :condition => "ruin_route" },
     { :opponent => :BRANN,      :condition => "flag(:VALEN_COLLAPSED)" }
   ],
-  :HIJACK => [ # default :VOSS (drawn live, as now)
+  :HIJACK => [ # default :VOSS (drawn live)
     { :opponent => :THEODRIC, :condition => "ruin_route" },
     { :opponent => :QUENT,    :condition => "flag(:VOSS_DISCREDITED)" }
   ]
 }
 ```
-**Why FINAL must be live:** Valen's collapse reads Day 5 events (the audience, Little Owl). Seed Valen at `Festival.start`; on Day 7 Brann takes
-his Final slot without reseating anyone ("He asked me to. Last thing he asked."). Valen watches from a stretcher, then holds the Ring.
-(Sigrun is no longer a Final stand-in: one person, one stage. She's in the QF pool instead.)
+Kestrel's banner in the SF is Gravenmoor's (`KESTREL_FOR_ANTUMBRA`) or Meridian's sunburst; the team is the same. Brann may stand in for Valen
+whether or not he held Ashkaar's second seat ("I lost in the first round. He asked me anyway.").
 
 ### 6.4 Who is displaced, and where they go
 | Drawn | Default displaced | Result | Story reason |
 |---|---|---|---|
-| R16 Marisol / Anja | Juno | **swap**: Juno takes Marisol's seed (vs Sigrun) or Anja's (vs Ysolde) and plays on | Marisol claims the **Right of Grievance**; Anja asks Dorian for "the child who threw me to the court", and the Pageant-Master obliges |
-| R16 Rowan | Juno | **Juno leaves the bracket by design** | she gives "the Gardener" her own invitation (her blessing is the condition); she watches from the Wardens' box; Garden Match exhibition offered |
-| QF Sigrun / Kaito / Ysolde / Odessa | Celestine | **swap**: Celestine takes the drawn Warden's seed and plays on | Sigrun: "Dragons weigh things. You've gotten heavier."; Kaito: "You'd keep them? Marrowgate's still knocking."; Ysolde: "If I can't reach him, I'll find out what reached you."; Odessa: "Everyone keeps telling you what you're *for*. The wind doesn't care. What do *you* want?" |
-| QF Dask (Ruin) | Celestine | **Celestine leaves** | "I cannot lie, so I won't pretend this is a game." Dask takes her seed on the Synod's authority over the Glass |
-| SF Kestrel (Fallen), Final Valen (Last Tuning) | — | variants: same seed | — |
-| Final Brann (live stand-in) | Valen, collapsed after his SF | Brann takes the Final slot | Valen asked him to |
+| R16 Marisol / Anja | Juno | **swap** seats; Juno plays on as an NPC | the **Right of Grievance** (Marisol); Anja asks the Pageant-Master for "the child who threw me to the court" |
+| R16 Rowan | Juno | **Juno leaves the bracket by design** | she gives "the Gardener" Elowen's seat; Garden Match exhibition offered |
+| QF Sigrun / Kaito / Ysolde / Odessa | Celestine | **swap**; Celestine plays on | each asks the Hierophant for the challenger's quarter (lines in 10_CHOICES_ENDINGS §3.2) |
+| QF Dask (Ruin) | Celestine | **Celestine leaves** | "I cannot lie, so I won't pretend this is a game." |
+| SF / Final variants, Brann's stand-in | — | same seat | — |
 
-### 6.5 Exhibitions (established characters only) [CORE+ `EXHIBITION_EXTRAS`]
-Eliminated seeded entrants are NPC-only (no exhibitions) except Marisol and Juno below. On the Ruin Route no exhibitions play.
-The **Eevee Octave** (Vesper Lindqvist and the Glassfall orphans) is **suspended** under Rev 5: they first appear at the Festival. It returns only if
-the story lead gives Vesper two earlier encounters (10_CHOICES_ENDINGS §8, item 22).
+### 6.5 Companion matches: winner rules and highlight data [CORE+ `MATCH_RULES`, consumed by Prismfall Cutscenes]
+Resolution order for any NPC match: a drawn path opponent always wins until they meet the player → the first `MATCH_RULES` row for that pair
+whose condition holds → higher `:rating`. Each row carries 2–4 key moments: `[actor, pokemon, event, caption]`, where event is one of
+`:send_out :attack :beam :beam_clash :dodge :faint :switch :field_shift :taunt :forfeit :finish`.
+```ruby
+MATCH_RULES = [
+  { :pair => [:KESTREL, :KAITO], :winner => :KESTREL, :condition => nil, :moments => [
+      [:KAITO,   :LUCARIO,   :send_out,   "Kaito: \"Stand up. Again.\""],
+      [:KESTREL, :AEGISLASH, :attack,     "The Gauntlet flares; the arena's field surges on its own."],
+      [:KAITO,   :LUCARIO,   :dodge,      "Lucario flinches from something that isn't the blade."],
+      [:KESTREL, :AEGISLASH, :finish,     "Kaito, after: \"Lucario felt it. That isn't him fighting.\""] ] },
+  { :pair => [:KESTREL, :ROOK], :winner => :KESTREL, :condition => nil, :moments => [
+      [:ROOK,    :ROTOM,     :send_out,   "Rook: \"Chat says you're gonna lose.\""],
+      [:KESTREL, :STARAPTOR, :attack,     "Brave Bird through a Thunderbolt, live on every screen in Zenith."],
+      [:ROOK,    :TOXTRICITY,:faint,      "Rook, off-mic: \"...Chat's wrong a lot.\""] ] },
+  { :pair => [:KESTREL, :ODESSA], :winner => :KESTREL, :condition => nil, :moments => [
+      [:ODESSA,  :CORVIKNIGHT, :send_out, "Odessa: \"Hold onto something.\""],
+      [:KESTREL, :AEGISLASH,   :attack,   "King's Shield, then the counter."],
+      [:ODESSA,  :CORVIKNIGHT, :forfeit,  "She salutes and loses with style."] ] },
+  { :pair => [:ANJA, :BRANN], :winner => :ANJA, :condition => "flag(:WAR_ISENMAR_WON) || (flag(:WAR_STOPPED) && choice(:war_prisoner) == :free)", :moments => [
+      [:BRANN, :COALOSSAL, :send_out,     "Two Wardens who were on opposite shores a season ago."],
+      [:ANJA,  :MAMOSWINE, :beam_clash,   "Blizzard meets Flamethrower: the war's beam clash, in miniature, and this time nobody dies."],
+      [:BRANN, :COALOSSAL, :faint,        "Brann laughs until he coughs. \"Aye. Ice remembers.\""] ] },
+  { :pair => [:ANJA, :BRANN], :winner => :BRANN, :condition => nil, :moments => [
+      [:ANJA,  :MAMOSWINE, :send_out,     "Anja doesn't bow."],
+      [:BRANN, :COALOSSAL, :beam_clash,   "Flamethrower against Blizzard; steam hides the whole arena."],
+      [:ANJA,  :MAMOSWINE, :faint,        "Brann offers a hand. Whether she takes it depends on the armistice (ISENMAR_EMBITTERED)."] ] },
+  { :pair => [:MARISOL, :BRANN], :winner => :MARISOL, :condition => "!flag(:WAR_ASHKAAR_WON)", :moments => [
+      [:MARISOL, :GYARADOS, :send_out,    "\"Tides take it. Let's go, old man.\""],
+      [:MARISOL, :GYARADOS, :beam,        "Hydro Pump douses the forge-field: :VOLCANIC cools to :ASHEN_WASTE."],
+      [:BRANN,   :ARCANINE, :faint,       "Brann: \"Forged to break right.\""] ] },
+  { :pair => [:YSOLDE, :SIGRUN], :winner => :SIGRUN, :condition => nil, :moments => [
+      [:YSOLDE, :CHANDELURE, :field_shift, "The Cathedral's candles follow her in."],
+      [:SIGRUN, :SALAMENCE,  :attack,      "Salamence dives through the dark."],
+      [:YSOLDE, :CHANDELURE, :faint,       "Ysolde: \"The dead say you fight like someone with nothing to bury.\""] ] },
+  { :pair => [:JUNO, :SIGRUN], :winner => :SIGRUN, :condition => nil, :moments => [
+      [:JUNO,   :TSAREENA,  :send_out,     "Juno, displaced by a Grievance, fights anyway."],
+      [:JUNO,   :TSAREENA,  :field_shift,  "The Flower Garden reaches stage five for the first time in her life."],
+      [:SIGRUN, :HAXORUS,   :finish,       "Sigrun kneels to her afterward. Nobody has seen her do that."] ] },
+  { :pair => [:JUNO, :YSOLDE], :winner => :JUNO, :condition => "bond(:JUNO) >= 5", :moments => [
+      [:YSOLDE, :GENGAR,    :taunt,        "\"Your aunt is listening, you know.\""],
+      [:JUNO,   :WHIMSICOTT,:attack,       "Juno, crying, doesn't miss."],
+      [:YSOLDE, :GENGAR,    :faint,        "Ysolde smiles. It was a kindness, and it worked."] ] },
+  { :pair => [:CELESTINE, :MARISOL], :winner => :CELESTINE, :condition => nil, :moments => [
+      [:CELESTINE, :TOGEKISS, :send_out,   "\"Once upon a time, a dockworker fought a fairy tale.\""],
+      [:MARISOL,   :GYARADOS, :attack,     "\"I don't do stories. Waterfall.\""],
+      [:CELESTINE, :TOGEKISS, :finish,     "The story wins. Marisol swears for a full caption box."] ] },
+  { :pair => [:VALEN, :SIGRUN], :winner => :VALEN, :condition => nil, :moments => [
+      [:SIGRUN, :SALAMENCE, :send_out,     "She entered to take the Blessing so the child wouldn't have to."],
+      [:VALEN,  :ZYGARDE,   :attack,       "His crystal arm spreads to the collarbone with the order."],
+      [:SIGRUN, :SALAMENCE, :faint,        "\"He beat me with an arm made of glass.\""] ] },
+  { :pair => [:VALEN, :KAITO], :winner => :VALEN, :condition => nil, :moments => [
+      [:KAITO, :LUCARIO, :send_out,        "The man who sealed Marrowgate, and the man who ordered it."],
+      [:KAITO, :LUCARIO, :attack,          "Kaito's first Aura Sphere is aimed a hand's width wide. On purpose."],
+      [:VALEN, :ZYGARDE, :finish,          "If KAITO_TESTIFIED: Valen bows first."] ] }
+]
+```
+"Notable" = involves Juno or Kestrel, the war's two sides, or Valen. Other NPC matches show a one-line result only.
+
+### 6.6 Exhibitions (story-met only) [CORE+ `EXHIBITION_EXTRAS`]
+The Eevee Octave is **suspended** until the story lead gives Vesper two earlier encounters. No exhibitions on the Ruin Route.
 ```ruby
 EXHIBITION_EXTRAS = [
-  { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                    # Dorian & Rook, "a duet for the cameras" (double)
+  { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                    # Dorian & Rook double
   { :entrant => :JUNO,         :condition => "!ruin_route && drawn(:R16) != :JUNO", :from_day => 3 },            # Garden Match (J4 team)
-  { :entrant => :MARISOL,      :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },  # Ebb Guild match
-  { :entrant => :MORWEN,       :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }  # Night of Masques
+  { :entrant => :MARISOL,      :condition => "!ruin_route && drawn(:R16) != :MARISOL && flag(:TEO_SAVED) && bond(:MARISOL) >= 5", :from_day => 3 },
+  { :entrant => :MORWEN,       :condition => "!ruin_route && flag(:KESTREL_YSOLDE_RECONCILED) && choice(:ch15_kestrel) == :resolve", :from_day => 5 }
 ]
 ```
 
-### 6.6 True Finale variants [CORE+ `ARCEUS_VARIANTS`, read by Prismfall Bosses]
+### 6.7 True Finale variants [CORE+ `ARCEUS_VARIANTS`, read by Prismfall Bosses]
 Bars = locks. Default bar *k* (1–6) holds the Plates of gyms 3k−2..3k; between bars those three Wardens' release (or refusal) beats play.
 Each Warden in the coming bar whose `WARDEN_CONSENT` is false makes it a **forced lock**: Arceus starts that bar with +1 to every stat stage per refusal.
 ```ruby
@@ -478,7 +582,7 @@ Festival-only Warden/NPC teams use **version = ace level** (90/92/96/99) so they
 | 3 | R16 | Anja (exposed) | `[LEADER_ANJA, Anja, 90]` | 90 | **NEW** |
 | 4 | R16 | Rowan, "the Gardener" | `[LEADER_ROWAN, Rowan, 90]` | 90 | **NEW** (replaces Core's sample v50) |
 | 5 | QF | **Celestine** (default) | `[LEADER_CELESTINE, Celestine, 92]` | 92 | **NEW** |
-| 6 | QF | Sigrun (Resonance ≤ −3) | `[LEADER_SIGRUN, Sigrun, 92]` | 92 | **NEW** (replaces the Rev-4 v96 stand-in team) |
+| 6 | QF | Sigrun (Resonance ≤ −3, or Isenmar won the war) | `[LEADER_SIGRUN, Sigrun, 92]` | 92 | **NEW** (replaces the Rev-4 v96 stand-in team) |
 | 7 | QF | Kaito (Keep oath) | `[LEADER_KAITO, Kaito, 92]` | 92 | **NEW** |
 | 8 | QF | Ysolde (Kestrel fallen) | `[LEADER_YSOLDE, Ysolde, 92]` | 92 | **NEW** |
 | 9 | QF | Odessa (warm draw) | `[LEADER_ODESSA, Odessa, 92]` | 92 | **NEW** |
@@ -497,6 +601,9 @@ Festival-only Warden/NPC teams use **version = ace level** (90/92/96/99) so they
 
 **Total new Festival teams: 19** (+4 Arceus boss configs). New trainer types: `ARCHSEER_DASK`, `GILDED_THEODRIC`, `ECHO_MORWEN` (plus `LEADER_ROWAN` if
 it doesn't exist yet). Seeded NPC-only entrants needing **no** trainer data: Dorian, Rook, Tamsin, Sahar, Nyx (and the QF/R16 Wardens when not drawn).
+
+Rev 6 adds **no** teams: delegation seats that aren't draw candidates (Ilsa, Magnus, Corvin, Bastian, Sahar, Tamsin, Dorian, Rook, Nyx) are NPC-only
+and resolve by `MATCH_RULES`.
 
 **Retired team IDs (no longer Festival teams):**
 - Rev 4 outsiders, withdrawn before anyone built them: `[FESTIVAL_ISAURA, Isaura, 2]`, `[FESTIVAL_DREY, Matthias, 1]`, `[FESTIVAL_MIREILLE, Mireille, 2]`,
@@ -666,7 +773,7 @@ ENDING_RULES = [
   [:END_HOLLOW_SPRING,    "choice(:ch21_final) == :unmake"],
   [:END_BORROWED_CROWN,   "choice(:ch21_final) == :borrowed"],
   [:END_LONG_VIGIL,       "choice(:ch21_final) == :keep"],
-  [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2)"],
+  [:END_UNFINISHED,       "choice(:ch21_final) == :return && (tally(:CONSENT) < 12 || resonance < 2 || flag(:WAR_OCCUPATION))"],
   [:END_EMPTY_LIGHTHOUSE, "choice(:ch21_final) == :return && flag(:KESTREL_LOST)"],
   [:END_HOMECOMING,       "choice(:ch21_final) == :return"]
 ]

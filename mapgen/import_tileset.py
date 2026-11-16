@@ -47,7 +47,32 @@ def expand(spec):
     return out
 
 
+TAG_REMAP = {17: 0, 18: 16, 19: 10, 21: 10, 22: 10, 23: 10, 25: 7, 33: 7, 35: 7, 36: 7, 37: 7, 38: 7, 26: 0, 28: 6}
+
+
+def entry_from_rxdata(d):
+    """from_rxdata: {file: .../Tilesets.rxdata, id: 24, graphics: <dir with Tilesets/ and Autotiles/>, remap_tags: true}
+    Reads passages/priorities/terrain tags with the safe parser; terrain tags > 16 are remapped to v21.1 ids."""
+    import rmarshal as M
+    f = d['from_rxdata']
+    t = M.load_file(f['file'])[int(f['id'])]
+    tags = [int(x) for x in t.terrain_tags.data.reshape(-1)]
+    if f.get('remap_tags', True):
+        tags = [x if x <= 16 else TAG_REMAP.get(x, 0) for x in tags]
+    g = f['graphics']
+    d['graphic'] = os.path.join(g, 'Tilesets', t.tileset_name + '.png')
+    d.setdefault('tileset_name', d.get('name', t.name))
+    d['autotiles'] = [{'name': n, 'file': os.path.join(g, 'Autotiles', n + '.png')} if n else {'name': ''}
+                      for n in t.autotile_names]
+    return dict(id=int(d['id']), name=d['name'], tileset_name=d['tileset_name'], autotile_names=list(t.autotile_names),
+                panorama='', fog='', battleback='', n_tiles=t.passages.xsize,
+                passages=[int(x) for x in t.passages.data.reshape(-1)],
+                priorities=[int(x) for x in t.priorities.data.reshape(-1)], terrain_tags=tags)
+
+
 def build_entry(d):
+    if 'from_rxdata' in d:
+        return entry_from_rxdata(d)
     im = Image.open(d['graphic'])
     if im.width != 256 or im.height % 32:
         sys.exit('tileset graphic must be 256 px wide and a multiple of 32 tall (got %dx%d)' % im.size)

@@ -183,7 +183,8 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   | `LEADER_ANJA,Anja,90` | her Gym 10 team with Hard sets as Standard, 86–90 |
   | `LEADER_ROWAN,Rowan,90` | sun team: Sunflora (Solar Power, Sunny Day), Leavanny, Roserade, Breloom, Shiftry, Trevenant "Glasswood" (Harvest) |
   | `RIVAL_KESTREL,Kestrel,90/91/92` (K9, Fallen) | K8 with Hard sets on Standard; Krookodile replaced by Meridian's **Genesect "Gauntlet"** |
-  | `LEADER_SIGRUN,Sigrun,96` / `LEADER_BRANN,Brann,96` | Gym 18 / Gym 7 teams, promoted sets, 92–96 |
+  | `LEADER_BRANN,Brann,96` | Gym 7 team, promoted sets, 92–96 |
+  | `LEADER_SIGRUN,Sigrun,92` / `LEADER_ODESSA,Odessa,92` | QF draws: gym teams, promoted sets, 88–92 |
   | `CHAMPION_VALEN,Valen,1` (Last Tuning) | v0 with promoted sets; **Zygarde Form 2 (Complete)** from the start |
   | `MERIDIAN_QUENT,Percival,99` | Bronzong (TR), Metagross, Jirachi, Porygon-Z, Magnezone, Silvally "NULL" (same field hook as Voss) |
   | `GILDED_THEODRIC,Theodric,0` | Golurk, Aegislash, Kyogre, Groudon, Regigigas, **Gholdengo "Gilt"** (100) |
@@ -195,8 +196,8 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 - **More Festival teams (Rev 4 list):** `LEADER_CELESTINE/KAITO/YSOLDE,…,92` (QF: their gym teams with promoted sets, 88–92),
   `ARCHSEER_DASK,Imre,92` (Ruin QF; inversion team — Bronzong, Sableye (Hard Mega), Espeon, Umbreon, Gothitelle, Malamar
   "Behind" with Topsy-Turvy; suggested field `:INVERSE`), `LEADER_DORIAN,Dorian,90` + `LEADER_ROOK,Rook,90` (Pageant Bout
-  2-vs-1 double, **3 Pokémon each**), `LEADER_BASTIAN,Bastian,90`. **Held per Rev 5 (not built):** FESTIVAL_ISAURA, DREY,
-  MIREILLE, THORNE — waiting for the re-filled bracket.
+  2-vs-1 double, **3 Pokémon each**). Retired and removed per Rev 5/6: Isaura, Drey, Mireille, Thorne (never built),
+  Bastian v90, Sigrun v96. List matches NARRATIVE_KEYS §7 (Revision 5/6).
 - **Sister-game cameos = optional sidequests** (`Prismfall.cameo_battle`, design/CAMEOS.md): **v1** at the placement level,
   **v2** post-game at 100, each +100/+200. Shelly v1 17 (double; Lv-17 roster: Masquerain, Joltik, Larvesta, Scyther, Hard
   +Araquanid) · Venam 38 · Garret 46 (Mega Lucario on Standard too) · Melia 50 · Alexandra 56 · Amaria + Titania 78 (tag
@@ -295,7 +296,8 @@ in the validator, so they need no row.
 ## Status
 
 - Wardens, rivals (K1–K9, J1–J4, J7), villains/admins (Thistle, Teo, Ch21 foes), Valen/Voss/Quent/Theodric/Morwen,
-  every built Festival entry in NARRATIVE_KEYS §7 except the four held entrants, the Ruin teams, the cameo sidequests and
+  every Festival entry in NARRATIVE_KEYS §7 (Rev 5/6), the Ruin teams, the cameo sidequests and
   every route/gym trainer the built maps reference: **done, 0 validator errors** (`--maps maps_out/Data`: all resolve).
 - Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
-- Pending: FESTIVAL_ISAURA / DREY / MIREILLE / THORNE (held, SPINE Rev 5); new maps' trainers as they are generated.
+- Pending: war-arc soldier/officer teams (types `ASHKAAR_*` / `ISENMAR_*` exist; teams once the story lead writes the war);
+  new maps' trainers as they are generated.

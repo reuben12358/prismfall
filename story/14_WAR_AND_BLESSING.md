@@ -30,10 +30,10 @@ Every delegate has been met at least twice by Act IV (Revision 5). Who a kingdom
 | Kingdom (court) | Default delegates | Swaps by player choice |
 |---|---|---|
 | **Elowen** (Queen Maelis, Briar Keep) | **Juno**, **Dorian** | Rowan "the Gardener" takes Juno's place (alive, mercy pleaded, Hollow Standing ≥ 4). Tamsin replaces Dorian if the PC told the Directorate the pageant version (the Queen won't send a liar's friend). |
-| **Antumbra** (Veiled Synod, Mirror Palace) | **Ilsa**, **Ysolde** | Dask replaces Ilsa on the Ruin Route. |
+| **Antumbra** (Veiled Synod, Palace of Glass) | **Ilsa**, **Ysolde** | Dask replaces Ilsa on the Ruin Route. |
 | **Isenmar** (Thane Eirik, the Holdfast) | **Marisol**, **Anja** | If Anja was exposed, the Thane strips her place and fights himself (**Eirik**, met Ch11 and Ch19). If Teo died and Marisol's Bond ≤ 2, Marisol invokes the Right of Grievance against the PC. |
-| **Ashkaar** (Dominar Hrothgar, Ember Citadel) | **Sigrun**, **Brann** | If the Dominar wasn't swayed, he replaces Brann with himself (**Hrothgar**, met Ch8 by envoy, Ch11 war council broadcast, Ch19). |
-| **Ossaria** (Prince-Elector Kassan, Sandglass Palace) | **Sahar**, **Bastian's proxy Pip?** No: **Sahar**, **Kaito** is Nadir's. Ossaria sends **Sahar** and **Corvin's rival? ** See note. | — |
+| **Ashkaar** (Dominar Hrothgar, Pyre Keep) | **Sigrun**, **Brann** | If the Dominar wasn't swayed, he replaces Brann with himself (**Hrothgar**, met Ch8 by envoy, Ch11 war council broadcast, Ch19). |
+| **Ossaria** (Prince-Elector Kassan, Sandglass Palace) | **Sahar**, **Bastian** | None. Kassan wanted to send a Meridian mining agent, and both Wardens refused to yield. |
 | **Zenith** (the Council, Council Spire) | **Kestrel** (Meridian's sponsored challenger), **Rook** | Magnus replaces Rook if Rook was fired (`:ch16_rook` = leak_now). Marchetti replaces Magnus if he was exposed. |
 | **Nadir** (Nyx's Moon Court; seated for the first time, by Valen's invitation after the Purge) | **Nyx**, **Kaito** | Corvin replaces Kaito if Kaito testified and resigned his Warden's honors (he sits out in protest) and Corvin is free. |
 | **The Accord** | **Valen** (reigning Blessed) | Sigrun or Brann stands in if `VALEN_COLLAPSED` (then Ashkaar's second seat goes to Hrothgar). |
@@ -66,25 +66,25 @@ Every delegate has been met at least twice by Act IV (Revision 5). Who a kingdom
 | **Ch11** Rimeholt: **war breaks out** | With the passes closed, Rimeholt's towers overdraw the local Lattice to compensate, which causes the Thaw. Kyogre's rain rolls east and floods Ashkaar's lowland forts. The Thane blames the embargo for his drowned town; the Dominar blames "Isenmar's sea-beast". **War is declared** at the chapter's end, on every screen, with Voss offering Meridian's "neutral logistics" to both. |
 | **Ch12** Skyreach | Gale Post flies war mail for both sides. Odessa refuses Directorate orders to carry Prism munitions. The Larch Papers include the two heat contracts side by side. Nobody reads that page. |
 | **Ch13** Lucent | Rowan's tribunal is interrupted twice by couriers from the front. The kings' gallery has two empty chairs. |
-| **Ch14** Cragholm / Undersands | **The Headwaters Front** is visible from R27: steam-glass on the horizon. Refugees from both kingdoms share Bastian's seams and fight over bread. **CHOICE `:ch14_convoy` *(proposed)*:** the PC finds a Meridian convoy carrying identical Prism lances to both armies. *Expose it* to both camps (slows the war; Meridian Standing −; both crowns owe you) / *sabotage it* quietly (fewer dead at the Siege; nobody knows) / *let it pass*. |
-| **Ch15** interlude beat | News: **the Siege of Ebbmouth**. Ashkaar's dragons hold the river mouth. Marisol's Guild runs the blockade by night. If Teo lived, he's organizing boats. |
+| **Ch14** Cragholm / Undersands | **The Steamline** is on every screen: steam-glass along the north-east coast. Refugees from both kingdoms share Bastian's seams and fight over bread. **CHOICE `:ch14_convoy` *(proposed)*:** the PC finds a Meridian convoy carrying identical Prism lances to both armies. *Expose it* to both camps (slows the war; Meridian Standing −; both crowns owe you) / *sabotage it* quietly (fewer dead at the Siege; nobody knows) / *let it pass*. |
+| **Ch15** interlude beat | News: **the Siege of Skaldfast**. Ashkaar's dragons ring the fortress-port. Marisol's Ebb Guild runs the blockade through the Rime Narrows by night. If Teo lived, he's organizing boats. |
 | **Ch16–17** | The Purge happens while both crowns are looking at each other. That is why nobody stops it. Nyx says so. |
 | **Ch18** | Gloaming shelters deserters from both armies. They can't lie there, so they tell the truth about why they ran. |
 | **Ch19** Wyrmrest: **the climax** | See below. This replaces "the Dominar marches on Zenith": his legions are massed against Isenmar's host, which has come up the frozen Ebb with Kyogre before it. |
 | **Ch20** | The **Peace of Plates**: a truce for the Festival. Both kingdoms send delegates to win the Boon and end the war on their terms. |
 
-### The Battle of Wyrmscar Pass (Ch19)
-**Setup.** The PC needs the pass to reach Crownhaven. So does everyone else: the Isenmar host (Thane Eirik, Anja, the ice-fleet dragged up the frozen Ebb on sled-runners, and **Kyogre** walking the river like a tide) and the Ashkaar legions (the Dominar, a thousand riders, and Sigrun on the gate between them). Sigrun's trial and the oath (08, Ch19) happen *the night before*, in the Rift, with both armies' fires visible.
+### The Battle of the Shattered Ice (Ch19)
+**Setup.** The front is on the north-east coast (WORLD.md §8–9): Isenmar's fortress-port **Skaldfast** is besieged from the **Ashkaar Siege Camp**, the **Cinder Cape Warfort** guards Ashkaar's shore, the **Rime Narrows** between them are choked with the ice-fleet, and the Bleed line of steam-glass where the Imprints meet is **the Steamline**. Sigrun's trial and oath (08, Ch19) happen first, at Wyrmrest. Then word comes that Kyogre has risen from the Ice Vault and is walking the Narrows like a tide, and that her father has carried the Light Stone to the front. Sigrun flies the PC there overnight. The climax is fought on **the Shattered Ice**, the broken sea between the two hosts.
 
-**CHOICE `:ch19_war` *(proposed, MAJOR)*.** At dawn both rulers summon the PC, separately. Each offers the pass in exchange for the PC walking through the steam-glass line to strike the other side's banner-legendary from behind.
+**CHOICE `:ch19_war` *(proposed, MAJOR)*.** At dawn both rulers summon the PC, separately. Each offers safe passage to Crownhaven and their delegation's friendship in exchange for the PC walking through the steam-glass line to strike the other side's banner-legendary from behind.
 - **Stand between** (needs the oath Return or Open; Harmony): the PC walks into the Bleed line alone and stands in the middle. This is the cutscene's hero version.
-- **Ride with Ashkaar** (Sigrun Bond +, Marisol and Anja Bond −): the PC breaks Kyogre's guard. Isenmar's host is routed; Ebbmouth stays occupied until the Festival.
-- **Sail with Isenmar** (Marisol and Anja +, Sigrun −, Brann refuses Consent): the PC grounds Reshiram's wing. The Ember Citadel's lower bailey burns.
+- **Ride with Ashkaar** (Sigrun Bond +, Marisol and Anja Bond −): the PC breaks Kyogre's guard. Isenmar's host is routed; Skaldfast falls and stays occupied until the Festival.
+- **Sail with Isenmar** (Marisol and Anja +, Sigrun −, Brann refuses Consent): the PC grounds Reshiram's wing. The Cinder Cape Warfort falls.
 - Any side-taking sets `WAR_VICTOR` *(proposed)* and changes which crown's delegates enter the Festival bitter or triumphant, and one Homecoming slide.
 
 **The battle.** Playable set pieces around the cutscene: a gauntlet through the camp of the side you didn't choose (or both, if you stand between), a partner battle with Sigrun or Marisol, then the boss fight **as written for Reshiram** in 08, reframed: the PC fights whichever legendary is about to fire on the other army (Reshiram by default; **Kyogre** if riding with Ashkaar).
 
-**The climax** is the pixel-animated cutscene **WAR-1 "The Beam Clash at Wyrmscar"** (`13_CUTSCENES.md`): Reshiram's Blue Flare meets Kyogre's Origin Pulse over the pass. Where they meet, the air turns to steam-glass and a Bleed dome swells over both armies. The PC's shard (and the two Wardens who love each side) ends it.
+**The climax** is the pixel-animated cutscene **WAR-1 "The Beam Clash on the Shattered Ice"** (`13_CUTSCENES.md`): Reshiram's Blue Flare meets Kyogre's Origin Pulse over the Shattered Ice. Where they meet, the air turns to steam-glass and a Bleed dome swells over both armies. The PC's shard (and the two Wardens who love each side) ends it.
 
 **Aftermath.**
 - Meridian observers on the ridge pack up their instruments before the steam clears. Larch, by radio: "That wasn't a battle to them. That was a *reading*." Field Notes logs the Engine's calibration jumping.

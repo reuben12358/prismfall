@@ -2,6 +2,8 @@
 
 > **Tone:** Desolation begins. Political fracture, kingdoms arming, a city sinking, a mentor framed, a rival curdling. The PC is now *known*, and everyone wants something. Each chapter ends worse than it began.
 > Conventions as in 04. Map names per WORLD.md (segments 8–11).
+> **Revision 6:** this act carries beats of the Ashkaar–Isenmar War and the Blessing. See `14_WAR_AND_BLESSING.md` (timeline table) for the inserts per chapter; that file wins on conflicts.
+
 
 **Act-opening state:** the Mandate is realm-wide. Directorate checkpoints stand at every kingdom border, and Meridian scanners at every Pokémon Center door now flag the PC's NULL reading with a polite "**Fellowship Priority Guest**" banner. Even being watched is courteous.
 

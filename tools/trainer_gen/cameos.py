@@ -1,6 +1,19 @@
 # Festival cameo champions (design/CAMEOS.md). Levels are offsets from the ace (0).
-# Versions: 0 = exhibition (ace EXHIB), 1 = R16 (90), 2 = QF (92), 3 = SF/Final-tier (94), 9 = post-game (100).
-STAGE_ACE = {1: 90, 2: 92, 3: 94, 9: 100}
+# Sidequest cameos (design/CAMEOS.md, SPINE Rev 4): version 1 = the sidequest fight at its placement level,
+# version 2 = post-game rematch at 100. Levels in team lists are offsets from the ace (0).
+# versions: {version: (ace_level, mode)}; mode None = full team, "last4" = last four (tag-double halves), "flat" = all at ace.
+PLACEMENT = {
+    "FESTIVAL_SHELLY":    {1: (17, None), 2: (100, None)},   # Act I Gossamer Deepwood, DOUBLE (v1 uses V1_TEAMS)
+    "FESTIVAL_VENAM":     {1: (38, None), 2: (100, None)},   # Act II Miasma Caverns, :CORROSIVE_MIRE
+    "FESTIVAL_GARRET":    {1: (46, None), 2: (100, None)},   # Act II Ironreach lower shafts, :COLOSSEUM
+    "FESTIVAL_MELIA":     {1: (50, None), 2: (100, None)},   # Act III Royal Chase
+    "FESTIVAL_ALEXANDRA": {1: (56, None), 2: (100, None)},   # Act III Rimeholt sunken town
+    "FESTIVAL_AMARIA":    {1: (78, "last4"), 2: (100, None)},  # Act IV Aurelia, tag DOUBLE with Titania, :WATER_SURFACE
+    "FESTIVAL_TITANIA":   {1: (78, "last4"), 2: (100, None)},
+    "FESTIVAL_SHIV":      {1: (84, None), 2: (100, None)},   # Act V Gloaming dusk-chapels
+    "FESTIVAL_LIN":       {1: (100, "flat")},                # post-game superboss
+    "FESTIVAL_NOVA":      {1: (90, None)},                   # Ruin Route R5 Mirrorwalk
+}
 
 def CAMEOS(P):
     C = []
@@ -117,4 +130,15 @@ def CAMEOS(P):
         P("GOTHITELLE", 0, "SHADOWTAG", "LEFTOVERS", "BOLD", "PSYCHIC,THUNDERBOLT,CALMMIND,REST", "BPD",
           casual={"ab": "COMPETITIVE"}),
     ])
+    V1 = {"FESTIVAL_SHELLY": [
+        P("MASQUERAIN", -1, "INTIMIDATE", "SITRUSBERRY", "TIMID", "STRUGGLEBUG,BUBBLEBEAM,QUICKATTACK,STICKYWEB", "S"),
+        P("JOLTIK", -1, "COMPOUNDEYES", "ORANBERRY", "TIMID", "ELECTROWEB,STRUGGLEBUG,BUGBITE,THUNDERWAVE", "S", only="nocasual"),
+        P("ARAQUANID", 0, "WATERBUBBLE", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,WIDEGUARD,PROTECT", "HA", only="hard"),
+        P("LARVESTA", 0, "FLAMEBODY", "ORANBERRY", "MODEST", "FLAMECHARGE,STRUGGLEBUG,LEECHLIFE,STRINGSHOT", "S"),
+        P("SCYTHER", 0, "TECHNICIAN", "EVIOLITE", "JOLLY", "FURYCUTTER,WINGATTACK,QUICKATTACK,FOCUSENERGY", "A",
+          hard={"moves": "BUGBITE,AERIALACE,QUICKATTACK,SWORDSDANCE"}),
+    ]}
+    for cm in C:
+        cm["versions"] = PLACEMENT[cm["tt"]]
+        cm["v1_mons"] = V1.get(cm["tt"])
     return C

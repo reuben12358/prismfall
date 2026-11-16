@@ -9,7 +9,7 @@ EV = {  # PBS order: HP, Atk, Def, Spe, SpA, SpD
     "BPD": "252,4,252,0,0,0", "SPD": "252,0,0,4,0,252",
 }
 TR_IV = "31,31,31,0,31,31"
-MEGA_STONES = {"GYARADOSITE", "TYRANITARITE", "LUCARIONITE", "METAGROSSITE", "GENGARITE", "SALAMENCITE", "GALLADITE", "GARDEVOIRITE",
+MEGA_STONES = {"SABLENITE", "GYARADOSITE", "TYRANITARITE", "LUCARIONITE", "METAGROSSITE", "GENGARITE", "SALAMENCITE", "GALLADITE", "GARDEVOIRITE",
                "LATIASITE", "MAWILITE", "BANETTITE"}
 
 def P(sp, lv, ab, item, nat, moves, ev="A", only=None, hard=None, casual=None, **kw):
@@ -544,6 +544,17 @@ ADMINS.append(("Map 120 Briarwick - first admin battle (Act I)", "HOLLOW_THISTLE
     P("PHANTUMP", 15, "NATURALCURE", "SITRUSBERRY", "ADAMANT", "BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY", "HA",
       nick="Lowmarsh", hard={"ab": "HARVEST", "moves": "BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP"}),
 ]))
+ADMINS.append(("Map 160 Ebbmouth - Teo Reyes, Ebbmouth Hollow cell (recurring: later battles use versions 1, 2, ...)", "HOLLOW_TEO", "Teo", 23,
+    "Tell my sister— no. Don't tell her anything.", [
+    P("CARVANHA", 19, "ROUGHSKIN", "ORANBERRY", "JOLLY", "AQUAJET,BITE,POISONFANG,SCARYFACE", "A",
+      only="nocasual", hard={"ab": "SPEEDBOOST", "moves": "AQUAJET,CRUNCH,POISONFANG,ICEFANG", "item": "FOCUSSASH"}),
+    P("BASCULIN", 20, "RECKLESS", "SITRUSBERRY", "ADAMANT", "AQUAJET,BITE,FLAIL,TAILWHIP", "A", only="hard",
+      hard={"moves": "WATERFALL,CRUNCH,AQUAJET,PSYCHICFANGS"}),
+    P("ARROKUDA", 20, "SWIFTSWIM", "ORANBERRY", "ADAMANT", "AQUAJET,BITE,FURYATTACK,AGILITY", "A",
+      hard={"moves": "LIQUIDATION,BITE,AQUAJET,CLOSECOMBAT", "item": "MYSTICWATER"}),
+    P("CHEWTLE", 21, "STRONGJAW", "SITRUSBERRY", "ADAMANT", "BITE,HEADBUTT,WATERGUN,PROTECT", "BA", nick="Snapper", casual={"moves": "BITE,WATERGUN,PROTECT,TACKLE"},
+      hard={"moves": "BITE,LIQUIDATION,ICEFANG,PROTECT", "item": "EVIOLITE"}),
+]))
 BOSSES = []
 BOSSES.append(("CHAMPION_VALEN", "Valen", 96, "Order, not justice. I chose order... Perhaps the land will forgive us both.", [
     P("BRONZONG", 92, "LEVITATE", "LEFTOVERS", "RELAXED", "STEALTHROCK,GYROBALL,PSYCHIC,TRICKROOM", "PD",
@@ -633,8 +644,10 @@ X("R16 - Rowan, the Gardener (requires ROWAN_ALIVE); sun team", "LEADER_ROWAN", 
     P("SHIFTRY", 89, "CHLOROPHYLL", "LIFEORB", "JOLLY", "LEAFBLADE,KNOCKOFF,SUCKERPUNCH,SWORDSDANCE", "A", casual={"item": "SITRUSBERRY"}),
     P("TREVENANT", 90, "HARVEST", "SITRUSBERRY", "IMPISH", "HORNLEECH,POLTERGEIST,WILLOWISP,LEECHSEED", "BPD", nick="Glasswood"),
 ])
-X("Final - Sigrun, Sovereign-designate (Valen collapsed)", "LEADER_SIGRUN", "Sigrun", 96, 96,
-  "You'll carry it better than I would have. Go.", relevel(drop_only(promote(warden_mons("Sigrun"))), [92, 93, 94, 94, 95, 96]))
+X("QF - Sigrun (Resonance <= -3, or Isenmar won the war)", "LEADER_SIGRUN", "Sigrun", 92, 92,
+  "You'll carry it better than I would have. Go.", relevel(drop_only(promote(warden_mons("Sigrun"))), [88, 89, 90, 90, 91, 92]))
+X("QF - Odessa (warm draw)", "LEADER_ODESSA", "Odessa", 92, 92,
+  "Tailwinds, flyer. All the way up.", relevel(drop_only(promote(warden_mons("Odessa"))), [88, 89, 90, 90, 91, 92]))
 X("Final - Brann, stand-in (Valen collapsed)", "LEADER_BRANN", "Brann", 96, 96,
   "He asked me to. Last thing he asked. ...Forge on, then.", relevel(drop_only(promote(warden_mons("Brann"))), [92, 93, 94, 94, 95, 96]))
 valen0 = [b for b in BOSSES if b[0] == "CHAMPION_VALEN"][0][4]
@@ -642,6 +655,35 @@ vlast = relevel(promote(valen0), [92, 93, 94, 94, 95, 96])
 vlast[-1] = dict(vlast[-1], form=2, nick="Order", casual=dict(vlast[-1]["casual"], ab="POWERCONSTRUCT"))
 X("Final (Ruin) - Valen, the Last Tuning: Zygarde Complete from bar 1", "CHAMPION_VALEN", "Valen", 1, 96,
   "Then unmake it, and be the last thing it remembers.", vlast)
+X("QF - Celestine (\"the wrong key\")", "LEADER_CELESTINE", "Celestine", 92, 92,
+  "Wrong key, right door. ...Go on.", relevel(drop_only(promote(warden_mons("Celestine"))), [88, 89, 90, 90, 91, 92]))
+X("QF - Kaito (\"Marrowgate's still knocking\")", "LEADER_KAITO", "Kaito", 92, 92,
+  "...It still remembers. So do I.", relevel(drop_only(promote(warden_mons("Kaito"))), [88, 89, 90, 90, 91, 92]))
+X("QF - Ysolde (Kestrel fallen)", "LEADER_YSOLDE", "Ysolde", 92, 92,
+  "Bring him back. Whatever it costs. Promise me.", relevel(drop_only(promote(warden_mons("Ysolde"))), [88, 89, 90, 90, 91, 92]))
+X("QF (Ruin) - Archseer Imre Dask of the Veiled Synod; suggested field :INVERSE", "ARCHSEER_DASK", "Imre", 92, 92,
+  "Behind, welcome. ...Welcome, behind.", [
+    P("BRONZONG", 88, "LEVITATE", "LIGHTCLAY", "RELAXED", "TRICKROOM,REFLECT,LIGHTSCREEN,GYROBALL", "PD", tr=True),
+    P("SABLEYE", 89, "PRANKSTER", "LEFTOVERS", "CAREFUL", "WILLOWISP,FOULPLAY,RECOVER,QUASH", "SD",
+      hard={"item": "SABLENITE", "moves": "WILLOWISP,FOULPLAY,RECOVER,KNOCKOFF"}),
+    P("ESPEON", 90, "MAGICBOUNCE", "LIFEORB", "TIMID", "PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND", "S", casual={"item": "SITRUSBERRY"}),
+    P("UMBREON", 90, "SYNCHRONIZE", "LEFTOVERS", "CALM", "FOULPLAY,WISH,YAWN,PROTECT", "SD"),
+    P("GOTHITELLE", 91, "COMPETITIVE", "LEFTOVERS", "BOLD", "PSYCHIC,THUNDERBOLT,TRICKROOM,CALMMIND", "BPD"),
+    P("MALAMAR", 92, "CONTRARY", "LEFTOVERS", "ADAMANT", "SUPERPOWER,KNOCKOFF,PSYCHOCUT,TOPSYTURVY", "BA", nick="Behind"),
+])
+X("Exhibition - Pageant Bout (2-vs-1 double with Rook v90): Dorian's half", "LEADER_DORIAN", "Dorian", 90, 90,
+  "Encore! ENCORE!", [
+    P("AMBIPOM", 88, "TECHNICIAN", "LIFEORB", "JOLLY", "FAKEOUT,DOUBLEHIT,KNOCKOFF,UTURN", "A", casual={"item": "SILKSCARF"}),
+    P("EXPLOUD", 89, "SCRAPPY", "THROATSPRAY", "MODEST", "BOOMBURST,FIREBLAST,FOCUSBLAST,ICEBEAM", "S"),
+    P("KECLEON", 90, "PROTEAN", "SITRUSBERRY", "ADAMANT", "FAKEOUT,SHADOWSNEAK,KNOCKOFF,DRAINPUNCH", "BA", nick="Encore",
+      casual={"ab": "COLORCHANGE"}),
+])
+X("Exhibition - Pageant Bout (2-vs-1 double with Dorian v90): Rook's half", "LEADER_ROOK", "Rook", 90, 90,
+  "Aaand that's a wrap! Clip it, Camera!", [
+    P("TOXTRICITY", 88, "PUNKROCK", "THROATSPRAY", "MODEST", "OVERDRIVE,SLUDGEBOMB,BOOMBURST,VOLTSWITCH", "S"),
+    P("ELECTIVIRE", 89, "MOTORDRIVE", "LIFEORB", "JOLLY", "WILDCHARGE,ICEPUNCH,CROSSCHOP,EARTHQUAKE", "A", casual={"item": "SITRUSBERRY"}),
+    P("ROTOM", 90, "LEVITATE", "LEFTOVERS", "TIMID", "HYDROPUMP,THUNDERBOLT,WILLOWISP,VOLTSWITCH", "S", form=2, nick="Camera"),
+])
 X("Hijack - Dr. Percival Quent (Voss removed)", "MERIDIAN_QUENT", "Percival", 99, 100,
   "Hee... the numbers were so pretty. So pretty.", [
     P("BRONZONG", 96, "LEVITATE", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,EARTHQUAKE,EXPLOSION", "PD", tr=True),
@@ -713,6 +755,8 @@ X("Ruin R1 - the Reflection (fallback only; Core mirrors $player.party at battle
 ])
 
 # ------------------------------------------------------------------------------
+CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
+
 def main():
     OUT.append("# Pokémon Prismfall - trainers (Essentials v21.1 format).\n"
                "# Generated from the Prismfall balance data. See design/BALANCE.md for the scheme:\n"
@@ -754,13 +798,15 @@ def main():
         spec = importlib.util.spec_from_file_location("cameos", sys.argv[1])
         mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
         section("FESTIVAL OF CHAMPIONS - invited cameo champions (see design/CAMEOS.md)")
-        OUT.append("# Versions: 0 = exhibition, 1 = Round of 16 (ace 90), 2 = Quarterfinal (92), 3 = Semifinal/Final-tier (94),\n"
-                   "# 9 = post-game rematch (100); each +100 Hard / +200 Casual.")
+        OUT.append("# Optional sidequest cameos (SPINE Rev 4). Version 1 = sidequest fight at its placement level, 2 = post-game\n"
+                   "# rematch at 100; each +100 Hard / +200 Casual. Started with Prismfall.cameo_battle(:FESTIVAL_X, \"Name\", v).")
         for cm in mod.CAMEOS(P):
-            OUT.append("# %s (%s)" % (cm["nm"], cm["tt"]))
-            for v in (0, 1, 2, 3, 9):
-                ace = cm["exhib"] if v == 0 else mod.STAGE_ACE[v]
-                mons = [dict(m, lv=ace + m["lv"]) for m in cm["mons"]]
+            for v, (ace, mode) in sorted(cm["versions"].items()):
+                OUT.append("# %s (%s) v%d - ace %d%s" % (cm["nm"], cm["tt"], v, ace, (" (" + mode + ")") if mode else ""))
+                src = cm["v1_mons"] if (v == 1 and cm.get("v1_mons")) else cm["mons"]
+                if mode == "last4":
+                    src = src[-4:]
+                mons = [dict(m, lv=ace + (0 if mode == "flat" else m["lv"])) for m in src]
                 OUT.extend(variants(cm["tt"], cm["nm"], v, mons, cm["lose"], ace, mega_std=cm["mega_std"]))
     print("\n".join(OUT))
 
