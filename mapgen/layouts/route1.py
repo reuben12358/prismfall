@@ -77,10 +77,10 @@ def build():
     c.land('haystack', 20, 49); c.land('hay', 34, 51); c.land('haycart', 21, 52); c.land('hay_loose', 19, 51)
     c.land('kennel', 24, 46); c.land('sack', 25, 47)
     # the lookout over the sea: bench, signboard, lamp
-    c.land('bench', 33, 25); c.land('signboard', 31, 24); c.land('lamp_post', 35, 25)
+    c.land('st:t_bench', 33, 25); c.land('signboard', 31, 24); c.land('st:t_lamp', 35, 23)
     # Beacon Knoll: old waystone by the pond, a well below
     c.land('tablet', 12, 10); c.land('pillar_moss', 10, 11); c.land('pillar_moss2', 14, 10)
-    c.land('well', 13, 39); c.land('gravestone', 5, 13)
+    c.land('well', 13, 39); c.land('stump_moss', 5, 13)
     c.land('boulder', 20, 31); c.land('crag', 36, 3) or c.land('crag', 33, 3)
     for i, (gx, gy, rx, ry) in enumerate(((36, 60, 3.2, 3.5), (7, 34, 2.5, 3.0), (33, 3, 3.5, 2.5), (15, 5, 3, 2.5), (4, 53, 2.5, 3.5), (34, 19, 2.0, 2.0), (17, 15, 2.5, 2.2), (23, 55, 2.5, 2.0), (36, 40, 2, 3))):
         c.blob(gx, gy, rx, ry, 'T', 70 + i, only='.', rough=0.7)

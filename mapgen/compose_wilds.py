@@ -178,6 +178,13 @@ def draw_custom():
             r = ((x - 15.5) / 15.0) ** 2 + ((y - 15.5) / 13.0) ** 2
             if r < 1.0 and (x * 5 + y * 3) % 4 != 0: px[x, y] = (16, 40, 34, int(80 * (1 - r) + 16))
     S.add('shade', dbl(sd), 0, 0)
+    # --- Meridian survey flag (1x2): stake (solid) with an orange pennant overhead ---
+    fl = canvas(1, 2); d = ImageDraw.Draw(fl)
+    d.line([(7, 3), (7, 29)], fill=(92, 70, 52, 255)); d.line([(8, 3), (8, 29)], fill=(140, 108, 78, 255))
+    d.polygon([(9, 3), (15, 6), (9, 9)], fill=(244, 128, 36, 255)); d.line([(9, 3), (15, 6)], fill=(255, 186, 96, 255))
+    d.line([(9, 9), (15, 6)], fill=(176, 72, 20, 255))
+    d.ellipse((4, 27, 11, 31), fill=(40, 60, 40, 90))
+    S.add('survey_flag', dbl(fl), [[0], [15]], [[1], [0]])
     # --- Art Director prototypes: silk-wrapped tree and crystal tree (2x3; trunk rows block) ---
     for name, fn in (('silk_tree', 'silk_tree_2x3.png'), ('crystal_tree', 'crystal_tree_2x3.png')):
         im = Image.open(os.path.join(CUSTOM, fn)).convert('RGBA')

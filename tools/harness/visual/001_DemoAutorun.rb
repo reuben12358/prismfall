@@ -64,8 +64,10 @@ module DemoRun
     def run
       File.write("#{ROOT}/demo.log", "") rescue Dir.mkdir(ROOT)
       log("boot ok: plugins #{PluginManager.plugins.inspect}")
+      Graphics.transition(0)            # Main leaves the screen frozen for the title scene
       Game.start_new
-      $player.name = "Reuben" if false
+      $scene.createSpritesets           # what Scene_Map#main would do; EBDX intros snapshot the map
+      30.times { Graphics.update; $scene.miniupdate }
       $player.name = "Tester"
       $PokemonSystem.textspeed = 2 rescue nil
       $PokemonSystem.battlescene = 0
@@ -83,8 +85,8 @@ module DemoRun
         end
       end
       if plan.include?("silkwood")
-        party = [mon(:GROWLITHE, 15, [:EMBER, :BITE], :TELLURICSEED), mon(:STARAVIA, 15), mon(:MAREEP, 15)]
-        battle("silkwood", party, :turns => 5) do
+        party = [mon(:GROWLITHE, 15, [:EMBER], :TELLURICSEED), mon(:STARAVIA, 15), mon(:MAREEP, 15)]
+        battle("silkwood", party, :turns => 6) do
           $player.badges = Array.new(18) { false }
           Prismfall.gym_battle(1, :can_lose => true)
         end

@@ -30,7 +30,7 @@ def pc_T_detail(f):
 add('PLAYER_A', tt=['PLAYER_A'], exprs=STD, P=dict(
     skin='#f3cda8', hair='#5d5868', eye='#3f8f96', age='teen', jaw='soft', mats=PC_MATS, outfit=pc_outfit,
     **PH([(8, 27), (11, 28), (12, 21), (15, 18), (18, 21.5), (21, 16.5), (25, 20.5), (28, 15.5), (32, 19.5), (35, 15.5), (38, 19), (40, 22)], vol=2.5, top=1,
-         back=[[(9, 10), (2, 7), (7, 16)], [(7, 16), (1, 18), (7, 23)], [(16, 5), (13, -1), (22, 3.5)]], front=[[(30, 5), (37, 0), (36, 7)], [(37, 9), (43, 7), (40, 14)]],
+         back=[[(7, 24), (3, 30), (10, 31)], [(38, 22), (44, 27), (39, 29)]], front=[[(21, 4), (25, -1), (28, 4.5)], [(33, 5.5), (40, 3), (37, 9)]],
          sh=[[(12, 14), (15, 11), (19, 9)], [(23, 9), (27, 8)]], st=[[(21, 12), (21, 16)], [(28, 10), (28, 15)]])))
 T('PLAYER_A', skin='#f3cda8', hair='#5d5868', eye='#2f7f86', H=49, sw=5.4, hw=4.2, ra=1.7, rl=2.3, head=(5.5, 6.0), pose='ball', eye_h=3, mats=PC_MATS,
   garment=TG(), detail=pc_T_detail,
@@ -85,7 +85,7 @@ O('EDDA', garment='coat', broad=1, shirt_v=2, ow_hair=dict(fringe=[0] * 10, side
 
 # -------------------------------------------------------------------- VOSS
 def voss_silver(b):
-    for ln in ([(9, 21), (10, 26)], [(11, 19), (11, 26)], [(12, 21), (12, 25)], [(38, 18), (39, 21)]):
+    for ln in ([(12, 19), (12, 22)], [(13, 17), (14, 18)], [(37, 16), (38, 19)]):
         b.c.stroke(ln, new='silver', only='hair', tone=0.7)
 
 
@@ -102,7 +102,7 @@ VOSS_M = dict(top='#4b4d5c', shirt='#eef0f4', tie='#b88a2a', silver='#b4b6c4', l
 add('VOSS', tt=['MERIDIAN_VOSS'], exprs=FULL, P=dict(
     skin='#eac3a0', hair='#3b3742', eye='#7a6238', age='adult', jaw='long', nose='medium', rest_mouth='smile', shoulders='broad', hair_contrast=1.2,
     mats=VOSS_M, outfit=voss_outfit, extras=lambda b, e: wrinkles(b, e),
-    **PH([(8, 26), (11, 27), (12, 19), (15, 14.5), (21, 12.5), (28, 13), (34, 14.5), (38, 18), (40, 21)], vol=1.6, top=0.6, after=voss_silver,
+    **PH([(8, 21), (11, 21), (12, 18), (15, 14.5), (21, 12.5), (28, 13), (34, 14.5), (38, 18), (40, 20)], vol=1.6, top=0.6, after=voss_silver,
          sh=[[(14, 10), (18, 7), (23, 6)]], st=[[(17, 8), (14, 14)], [(26, 6), (30, 12)]])))
 T('VOSS', skin='#eac3a0', hair='#3b3742', eye='#5a4628', H=57, sw=6.6, hw=4.6, ra=1.9, rl=2.5, head=(5.2, 6.1), pose='ball', ball=False, eye_h=2, brow_t=1, chin=0.8,
   mouth_t='smile', nose_t=2, mats=VOSS_M, hair_contrast=1.2,
@@ -370,7 +370,9 @@ def dorian_extras(b, expr):
     c = b.c
     my = b.ey + 12
     col = shift(b.s['hair'], dv=-0.05)
-    c.pxs([(22, my - 2), (23, my - 3), (24, my - 3), (25, my - 3), (26, my - 3), (27, my - 3), (28, my - 3), (29, my - 3), (30, my - 2), (21, my - 2), (31, my - 2), (20, my - 3), (32, my - 3)], col)
+    dk = shift(col, dv=-0.12)
+    c.pxs([(x, my - 3) for x in range(23, 30)] + [(21, my - 4), (31, my - 4), (20, my - 5), (32, my - 5)], col)
+    c.pxs([(x, my - 2) for x in range(22, 31)] + [(21, my - 3), (31, my - 3)], dk)
 
 
 DOR_M = dict(top='#7a2f5c', shirt='#f2ead8', trim='#d8b04a', silver='#c4c4d2', legs='#3a3446', shoes='#2a2630')

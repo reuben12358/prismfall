@@ -39,20 +39,20 @@ OBJ = {
     'log_moss': (2085, 2, 1, 1), 'stump_moss': (2087, 1, 1, 1), 'log_moss2': (2102, 2, 1, 1),
     'log_grey': (1260, 2, 1, 1), 'stump_grey': (1262, 1, 1, 1),
     'fern_big': (1176, 2, 2, 1), 'rafflesia': (1178, 2, 2, 2), 'corpse': (1174, 2, 3, 1),
-    'creep1': (1096, 2, 4, 1), 'creep2': (1098, 2, 4, 1), 'fallen': (1116, 2, 2, 1),
+    'creep1': (1096, 2, 4, 1), 'fallen': (1116, 2, 2, 1),
     'dead1': (1232, 2, 4, 1), 'dead2': (1234, 2, 4, 1), 'dead3': (1236, 2, 3, 1), 'dead4': (1238, 2, 3, 1),
     'gstump_dark': (1085, 3, 4, 2), 'gstump': (1128, 3, 4, 2), 'roots': (1118, 2, 2, 1),
     'thicket': (1200, 4, 3, 3), 'hedge_v': (1204, 1, 3, 3),
     'rock_b1': (1456, 2, 1, 1), 'rock_b2': (1458, 2, 1, 1), 'rock_big': (1480, 2, 2, 1), 'rock_tall': (1485, 1, 2, 1),
-    'boulder': (1512, 2, 3, 2), 'boulder2': (1514, 2, 3, 2), 'boulder_dark': (1517, 2, 2, 1),
+    'boulder': (1512, 3, 3, 2), 'boulder2': (1515, 3, 3, 2), 'boulder_dark': (1518, 2, 2, 1),
     'pillar_moss': (1576, 1, 2, 1), 'pillar_moss2': (1577, 1, 2, 1), 'crag': (1578, 3, 4, 2), 'crag_bare': (1581, 3, 4, 2),
-    'well': (1273, 2, 2, 1), 'gravestone': (1340, 1, 1, 1),
-    'hay': (3456, 2, 2, 1), 'haystack': (3461, 3, 2, 1), 'hay_loose': (3472, 2, 2, 2), 'haycart': (3476, 2, 2, 1), 'haybig': (3470, 2, 3, 1),
+    'pit_ladder': (1273, 2, 2, 1),
+    'hay': (3456, 2, 2, 1), 'haystack': (3461, 3, 2, 1), 'hay_loose': (3472, 2, 2, 2), 'haycart': (3476, 2, 2, 1),
     'beehive': (3488, 2, 2, 1), 'beehive2': (3490, 2, 2, 1), 'kennel': (3504, 1, 2, 1), 'scarecrow': (3505, 1, 2, 1),
     'crop': (3506, 1, 2, 1), 'pumpkin': (3515, 1, 1, 1), 'sack': (3507, 1, 1, 1),
     'tomb': (3592, 2, 2, 1), 'tablet': (3594, 2, 2, 1), 'plaque': (3598, 2, 2, 1),
-    'web_big': (3628, 4, 3, 0), 'web_s': (3622, 2, 2, 0), 'web_low': (3652, 3, 2, 0),
-    'statue': (3275, 2, 3, 1), 'signboard': (3259, 2, 2, 1), 'lamp_post': (3273, 1, 3, 1), 'bench': (3268, 2, 2, 1),
+    'web_s': (3623, 1, 1, 0),
+    'signboard': (3259, 2, 2, 1),
     'cry_blue': (8088, 2, 2, 1), 'cry_teal': (8104, 2, 2, 1), 'cry_violet': (8120, 2, 2, 1),
     'cry_blue_s': (8090, 1, 2, 1), 'cry_teal_s': (8106, 1, 2, 1), 'cry_violet_s': (8122, 1, 2, 1),
     'cry_blue_m': (8093, 2, 2, 1), 'cry_teal_m': (8109, 2, 2, 1), 'cry_violet_m': (8125, 2, 2, 1),
@@ -61,14 +61,23 @@ OBJ = {
     'r_tree_l3': (R2 + 635, 3, 4, 1), 'r_tree_l4': (R2 + 640, 3, 4, 1), 'r_tree_l5': (R2 + 672, 3, 4, 1), 'r_tree_l6': (R2 + 675, 3, 4, 1),
     'r_pine_d': (R2 + 603, 2, 3, 1), 'r_pine_l': (R2 + 605, 2, 3, 1), 'r_cherry': (R2 + 704, 5, 5, 1),
     'r_cry_big': (R2 + 2040, 2, 2, 1), 'r_cry_spray': (R2 + 2057, 2, 2, 1), 'r_cry_s': (R2 + 2064, 1, 1, 1), 'r_cry_s2': (R2 + 2042, 1, 2, 1),
-    'r_rock': (R2 + 436, 2, 1, 1),
     # custom strip
     'cocoon': (CU['cocoon'], 1, 2, 1), 'cocoon_big': (CU['cocoon_big'], 2, 3, 2), 'cocoon_low': (CU['cocoon_low'], 1, 1, 1),
     'curtain': (CU['curtain'], 1, 2, 1), 'shaft': (CU['shaft'], 2, 4, 0), 'shade': (CU['shade'], 2, 2, 4),
+    'survey_flag': (CU['survey_flag'], 1, 2, 1), 'barrier': (3293, 2, 1, 1),
     'silk_tree': (CU['silk_tree'], 2, 3, 1), 'crystal_tree': (CU['crystal_tree'], 2, 3, 1),
 }
 for _k, (_t, _w, _h, _kind) in PF.items():
-    OBJ['pf_' + _k] = (_t, _w, _h, 1)
+    if not _k.startswith('rustic'): OBJ['pf_' + _k] = (_t, _w, _h, 1)
+OBJ['well'] = OBJ.get('pf_haunted_06', OBJ['pit_ladder'])
+# Tectonic stamps (stamps_t.json) usable as objects: 'st:<name>'
+def _stamp_cells(name):
+    st = STAMPS[name]; out = []
+    for z in range(3):
+        for yy, row in enumerate(st['layers'][z]):
+            for xx, t in enumerate(row):
+                if t: out.append((xx, yy, z, t))
+    return out
 # Tectonic 2x3 trees: (top, mid, bot) left ids; right = +1
 TREES = {'t_round': (401, 409, 417), 't_dark': (405, 413, 421), 't_leafy': (605, 613, 621), 't_olive': (688, 696, 704),
          't_yellow': (768, 736, 744), 't_bright': (732, 740, 748), 't_palm': (880, 888, 896)}
@@ -81,6 +90,7 @@ def obj_cells(name, bleed=False):
     """-> [(dx, dy, layer, tile)] with blank tiles dropped."""
     out = []; sh = B if bleed else 0
     if isinstance(name, int): return [(0, 0, 1, name + sh)]
+    if name.startswith('st:'): return [(dx, dy, z, t + (sh if t < 8616 else 0)) for dx, dy, z, t in _stamp_cells(name[3:])]
     if name in TREES:
         top, mid, bot = TREES[name]
         for dx in (0, 1):

@@ -349,7 +349,27 @@ O('JUNO', garment='dress', shirt_v=2, ow_mouth=True,
   ow_hair=dict(fringe=[1, 1, 0, 1, 0, 1, 0, 1, 1, 1], sides=5, back=2, vol=2.4, top=1, spikes=[(-7, 1), (-7, 3), (6, 1), (6, 3), (-6, 5), (5, 5)]), ow_acc=band('kerchief', -6, -4))
 O('KESTREL', garment='coat', tall=1, shirt_v=3,
   ow_hair=dict(fringe=[1, 1, 0, 1, 2, 0, 1, 0, 1, 1], sides=2, back=0, vol=1.4, top=1, spikes=[(-3, -8), (0, -9), (3, -8), (-7, -3), (6, -3), (-7, 0), (6, 0), (6, -6), (-6, -6), (7, -1)]))
-O('LARCH', garment='coat', tall=1, shirt_v=2, hem=1,
+def larch_ow(c, d, hx_, iy, step):
+    from overworld import R
+    g = (92, 84, 110)
+    if d == 'down':
+        c.px(4, iy, g); c.px(6, iy, g); c.px(9, iy, g); c.px(11, iy, g); c.px(7, iy, g); c.px(8, iy, g)
+        c.paint(R(c, 2, iy + 2, 3, iy + 8), 'hair', 0.7, edge=False)
+        c.stroke([(2, iy + 4), (3, iy + 4)], tone=0.3, only='hair'); c.stroke([(2, iy + 6), (3, iy + 6)], tone=0.3, only='hair')
+        c.px(2, iy + 9, (168, 69, 58)); c.px(3, iy + 9, (168, 69, 58))
+    elif d == 'left':
+        c.px(3, iy, g); c.px(5, iy, g); c.px(6, iy, g)
+        c.paint(R(c, 10, iy + 1, 11, iy + 7), 'hair', 0.6, edge=False)
+        c.stroke([(10, iy + 3), (11, iy + 3)], tone=0.3, only='hair'); c.stroke([(10, iy + 5), (11, iy + 5)], tone=0.3, only='hair')
+    else:
+        c.paint(R(c, 7, iy + 2, 8, iy + 9), 'hair', 0.6, edge=False)
+        for k in range(iy + 3, iy + 9, 2):
+            c.stroke([(7, k), (8, k)], tone=0.3, only='hair')
+        c.px(7, iy + 10, (168, 69, 58)); c.px(8, iy + 10, (168, 69, 58))
+
+
+O('LARCH', garment='coat', tall=1, shirt_v=2, hem=1, ow_acc=larch_ow,
   ow_hair=dict(fringe=[0] * 10, line=-3, sides=0, back=0, vol=0.6))
 
 import cast3  # noqa: E402,F401  (registers the rest of the cast)
+import cast4  # noqa: E402,F401
