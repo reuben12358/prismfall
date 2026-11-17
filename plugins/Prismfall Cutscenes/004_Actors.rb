@@ -16,11 +16,20 @@ module Prismfall
 
       module_function
 
+      # Art shipped with this plugin (Graphics/ inside the plugin folder) is found
+      # when the game's own Graphics folder has no file of that name.
+      PLUGIN_ROOT = "Plugins/Prismfall Cutscenes/"
+
       def resolve(path)
         return nil if path.nil? || path == ""
-        return pbResolveBitmap(path) if defined?(pbResolveBitmap)
-        return path if File.file?(path)
-        return path + ".png" if File.file?(path + ".png")
+        [path, PLUGIN_ROOT + path].each do |p|
+          found = if defined?(pbResolveBitmap) then pbResolveBitmap(p)
+                  elsif File.file?(p) then p
+                  elsif File.file?(p + ".png") then p + ".png"
+                  end
+          return found if found
+          break if path.start_with?("/")
+        end
         return nil
       rescue StandardError
         return nil

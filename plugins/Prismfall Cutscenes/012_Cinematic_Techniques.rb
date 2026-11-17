@@ -56,7 +56,7 @@ module Prismfall
     end
 
     class Actor
-      attr_accessor :cell
+      attr_accessor :cell, :idle, :busy
       attr_reader :follow
 
       alias prismfall_tech_initialize initialize
@@ -85,6 +85,10 @@ module Prismfall
             @x = ch.screen_x + @follow_off[0]
             @y = ch.screen_y + @follow_off[1]
           end
+        end
+        if @idle && (@busy || 0) <= 0                 # idle loop between flipbooks
+          @idle_t = (@idle_t || 0.0) + dt
+          set_frame(@idle[0][(@idle_t / @idle[1]).to_i % @idle[0].length])
         end
         prismfall_tech_update(scene, dt)
         @sprite.blend_type = @blend if @blend
@@ -209,7 +213,9 @@ module Prismfall
         loops = a[:loops] || 1
         se = a[:se] || {}
         last = -1
+        act.busy = (act.busy || 0) + 1
         tween(dur, :linear) do |_, raw|
+          act.busy -= 1 if raw >= 1 && act.busy
           t = (raw >= 1) ? (total * loops) - 0.0001 : raw * total * loops
           t %= total
           i = 0
@@ -225,6 +231,13 @@ module Prismfall
       end
 
       def op_still(a, dur); return Still.new(self, a, dur); end
+
+      # idle :id, frames: 0..3, hold: 0.15  (frames: nil stops)
+      def op_idle(a, _dur)
+        act = actor!(a[:id])
+        act.idle = (a[:frames]) ? [a[:frames].to_a, (a[:hold] || 0.15).to_f] : nil
+        nil
+      end
 
       def op_pulse(a, dur)
         from = @tone.dup
@@ -271,6 +284,7 @@ module Prismfall
 
     class Builder
       def pose(id, **o); add(:pose, o.merge(:id => ref(id))); end
+      def idle(id, **o); add(:idle, o.merge(:id => ref(id))); end
 
       def flipbook(id, **o)
         n = o[:frames].to_a.length

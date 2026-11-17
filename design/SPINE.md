@@ -1,5 +1,23 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 10 (user feedback, 2026-11-17) <<<
+1. **Field effects, deeper.** Study how Reborn/Rejuvenation/Desolation implement fields (their Scripts/*.rb, fields.dat,
+   fieldnotes.dat are in /home/claude/ref/games/<name>/) and bring their logic and depth into ours, keeping our good
+   original ideas (e.g. Electroweb travelling along Silkwood's threads). Flavor must treat Pokémon as amazing creatures that
+   harness and transform their surroundings, not victims ("choking on ash" is the wrong tone). Transitions must lead to fields
+   that are as interesting as the one they replace (Volcanic quenched → not "nothing").
+2. **Every battle has a field** (except tutorial and a few special indoor battles): default fields for every map, every route,
+   cave, town, interior where battles happen, every trainer and wild battle.
+3. **Every field gets a backdrop as good as the Volcanic and Silkwood ones** (the user loved those). Bland backdrops (e.g. the
+   Factory/Zekrom boss) are not acceptable. The games' Battlebacks folders are available as source.
+4. **Opponents are thematically consistent and build for their field**: Wardens and trainers pick Pokémon, abilities, items and
+   moves that exploit their field, and the AI plays the field.
+5. **Characters must be exciting.** Juno v4 read as "soulless" and "a recolor gender swap of Sword/Shield's grass leader".
+   Characters need a bold, specific concept with personality in pose, face and silhouette. Study a wide range of sprite art
+   to learn what makes characters remarkable; show the user several distinct concepts before polishing one.
+6. **Puzzles at Reborn's level.** Gym and dungeon puzzles must be genuinely complex and satisfying (study Reborn's puzzles).
+7. **Keep hunting** the internet for great tilesets and sprite resources.
+
 ## >>> REVISION 9 (user feedback, 2026-11-16 23:36) <<<
 **Borderlands.** Kingdoms connect only through borderland regions that blend the two kingdoms' biomes, cultures and
 wild Pokémon, each with at least one intermediate town showcasing how the two peoples live and trade together (or don't).

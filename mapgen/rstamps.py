@@ -53,7 +53,7 @@ def mine(name, s):
     C, L, m = composite_map(s['game'], s['map'])
     x, y, w, h = s['rect']
     src = L[:, y:y + h, x:x + w]; lay = C[:, y:y + h, x:x + w].copy()
-    rows = ranges(s.get('rows')); keep = set(s.get('ids', [])); drop = set(s.get('drop', []))
+    rows = ranges(s.get('rows')) - ranges(s.get('deny')); keep = set(s.get('ids', [])); drop = set(s.get('drop', []))
     srow = np.where(src >= 384, (src - 384) // 8, -1)
     ok = (np.isin(srow, list(rows)) | np.isin(src, list(keep))) & ~np.isin(src, list(drop)) & (src > 0)
     if not s.get('l0'): ok[0] = False

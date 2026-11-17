@@ -44,7 +44,7 @@ module Prismfall
       return vars
     end
 
-    WAR_CLIMAX_BLOCK = proc do
+    WAR_CLIMAX_PROCEDURAL_BLOCK = proc do
       variant = var(:variant, :A)
       legends = var(:legends, true)
       water   = (legends) ? var(:water_legend, :KYOGRE)   : var(:water_mon, :MAMOSWINE)
@@ -427,10 +427,6 @@ module Prismfall
       fade_out duration: 1.2
     end
 
-    define(:WAR_CLIMAX, vars: proc { Cutscene.war_vars }, &WAR_CLIMAX_BLOCK)
-    [:A2, :B, :C].each { |v| build(:WAR_CLIMAX, variant: v) }              # author-time check of every variant
-    build(:WAR_CLIMAX, legends: false)
-    build(:WAR_CLIMAX, variant: :C, overpower: true)
-    define(:WAR_CLIMAX_DEMO) { include_scene(:WAR_CLIMAX, variant: var(:variant, :A2)) }
+    define(:WAR_CLIMAX_PROCEDURAL, vars: proc { Cutscene.war_vars }, &WAR_CLIMAX_PROCEDURAL_BLOCK)
   end
 end

@@ -1,10 +1,9 @@
-# Briarwick (120). WRITTEN BY layouts/briarwick.py - edit that script.
+# Briarwick (120). WRITTEN BY layouts/briarwick_rj.py (PF Rejuv) - edit that script.
 id: 120
 biome: forest
 name: Briarwick
 parent: 0
 bgm: Lerucean Town
-palette: village
 rubric: true
 yards_ok: true
 metadata:
@@ -16,1474 +15,44 @@ tone: [-10, -22, 2, 4]
 fog: {name: prismfall_spores, opacity: 46, blend: 1, zoom: 100, sx: 1, sy: -1}
 connections:
 - {dir: W, offset: 29, to: 540, to_offset: 10}
-map: |
-  TTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTT,,,TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTT,,,TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTT.TTTT~~~TTTTTTTTTTTTTTTCC###########TCCTTTT....h,.h.TTTTT....TTTTT
-  TTTTTT...hh~~~.,.TT.....####CC############.#CC###.........TTTTT....TTTTT
-  TTTTTT......~~~,........###CC#############.##CC##...t....TTTTTh...tTTTTT
-  TTTTTT.....h~~~.........##CC##############h###CC#,,.,..TTTTTTT....,TTTTT
-  TTTTTT......~~~.h...######C###############.####CC......TTTT########TTTTT
-  TT,,,TT,....~~~.....######C###############.#####CT....TTTTT########TTTTT
-  TT,,,TT..h.~~~..h...######C###############T####CCTTTTTTTtTT########T,,,T
-  TTTTTTT,...~~~TTTTTT######CC#####d########T###CCCTTTTTTTTTT########T,,,T
-  TTTTTTT,h.h~~~,TTTTT#####,CCCdddddd#######T,,,CCCTTT..TTTTT########TTTTT
-  TTTTTTT.h.t~~~TTTTTT##d##dCCCCCCdd########T...CC###ttt..TT.########TTTTT
-  TTTTTT,...~~~TTTTTTT,,,ddddCCCCCCCkkkkkkk#T,CCC####..,,,,.h########TTTTT
-  TTTTTT,...~~~TTT,,T...TTTTT.CCCCCCCkkkCCCCCCCCC####...,,,..########TTTTT
-  TTTTTT....~~~TTT,,T..h.,,T....TCCCC###CCCCCCCCC####.,,..tt.,,,,,,TTTTTTT
-  TTTTTT.TT~~~.TTTTT...t..T.,,,,,TTCC###CCCCCCC.T####.,,..tth.,..ttTTTTTTT
-  TTTTTTTTT~~~...########h.h,,,,,TTTC###CT.....TT####.....t.TT,T...TTTTTTT
-  TTTTTTTT~~~....########.......,TTTT###......TTT,,,,.hh,tt.TTTTT..TTTTTTT
-  TTTT####~~~...t########...h...,TTT,,dd....######TTTt######T,,,T...TTTTTT
-  TTTT####~~~TT..########.T....####T,,dd....######TTT.######T,,,T...TTTTTT
-  TTTT###~~~TTTTT########T.t...####..Tdd....######TTT.######T,,,TT.,TTTTTT
-  TTTT###~~~TTTTT###,,,##Ttttt.####..Tdd,...######TTT.######.TTTTT####TTTT
-  TTTT###~~~TTTTT########Tttttt####..,dd....####,#,TT.#,,,##.TTTTT####TTTT
-  TTTT##~~~#TTT,T####dd##t,,,,,,,##.TTddTh..####,#,TTT######.h..,.####TTTT
-  TTTT##~~~#TT,TT,,,,ddd,t,,,,,,,##TTTdddTTT,,ddd,TTTT######.....t####TTTT
-  TTTTTT~~~,ttttT....ddd.t,,,,,,,,,TTTTddTTT..ddd.TTTT,,d,,,###..t####TTTT
-  dddTTT~~~TtttT.....ddd,t,,,,,,,TT,TTTddTTT..dd..TT,T,TdTT####...####TTTT
-  ddd,,,~~~,,,t.hd...ddd,t,,,,,,,TT####dddTT..d..hTTTT,TTTT####..dddddddTT
-  ddd,,,~~~,,,,,dddddTddtt##,,###TT####TddTT.dd...TTddTTTTT###dddddddddddT
-  ddd###~~~###,,.dddddddttt.T,TTTTT####.ddTTdd...ddddddddddddddddd...TddTT
-  TTTTTT~~~ttt.....,.dddd..hT,,TTTT####dddddddddddddddddddddddd......TTTTT
-  TTTTTT~~~T.....,.,..dddddhTTTTTTT###dddddddddddTTTT,TTTTdd,,,T,....TTTTT
-  TTTTTTT~~~......,..,,t,ddd,TT,,,T##ddddkkkkddddtTTT,TT,TTTTTTT,,,..TTTTT
-  TTTTTTT~~~,,..h....,,,..dddTTTT..,,ddddkkkkkdddTTT.,.,,TTTTTTT,h...TTTTT
-  TTTTTTT~~~,,...,....,,h##ddd#TT.,.TTddddkkkkdddT...,,,T######T.####TTTTT
-  TTTTTTTT~~~TT..####..,.###ddd.TT,TTTdddddddddd....T,,TT######..####TTTTT
-  TTTTTTT.~~~TTTT####..,.####ddd.TTTTdddddddddd.....,TTTT######..####TTTTT
-  TTTTTTT.~~~TTTT####....#####dddTTTddddTT.h....h,..dTTTT####,#..####TTTTT
-  TTTTTTT.#~~~##T####,,.,####,#dddTdddTTT,......h,.dddddT####,#..####TTTTT
-  TTTTTTTt#~~~##T####TT..####,#.d.dddTTTTT..t.hhh...dddddd###,#..####TTTTT
-  TTTTTTTt#~~~##T####TT..,,d,,,..ddd.TTT######......TTdddddd,,,..,TTTTTTTT
-  TTTTTTTT##~~~#~~~~~TT...hd..h..dd....T######.h....#####dddd..######TTTTT
-  TTTTTTTT##~~~~~~~~~~~.........dd,,.,,.######..,...#######dd..######TTTTT
-  T,,TTT.T##~~~~~~~~~~~..,,.....dd,,.t..######..,...########dd.######TTTTT
-  TTTTTT..##~~~~~~~~~~~~.,,.###dddTh.t..#,,,######..########TdT######TTTTT
-  TTTTTT..,,,~~~~~~~~~~~.TTT###ddTTT.t..##########..########,,,######TTTTT
-  TTTTTT...tt~~~~~~~~~~h.Ttt###dddT..th.#ddd######.h########,,,######TTTTT
-  TTTTTTTTTTt~~~~~~~~TTTTT,T###ddddddddddddd,,####T.########TTT######TTTTT
-  TTTTTTTTTTt~~~tThTTTTTTT,T####ddddddddddddTT####TT,,,,,,,#..,,,,,,TTTTTT
-  TTTTTTTTTTt~~~tt..TT####TT####dd.h.TdTTTTTT,####Tt,,,,,,,,,,,,,,,,TTTTTT
-  TTTTTTTT,,t~~~t,,TTT####..,,,,ddd..TTTTTTTT,,,,,Tt,,,,,,,,,,,,,,,,TTTTTT
-  TTTTTTTT,,t~~~T,,TT,####..TTTT.dd..TT,TT,######TTt,,,,,,,###,,,,,,TTTTTT
-  TTTTTTT..tt~~~TTTTTT####..TTTT..dd.TT,T.,######Ttt##,,###...######TTTTTT
-  TTTTTTT..tt~~~,,TTTT####..TTTTT.dddTTT...######Tttttttttt...TTTTTTTTTTTT
-  TTTTTTT..h.~~~,,TTTT####TTT,TTT..dddTT..h######TTTTTTTT,,...TTTTTTTTTTTT
-  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTT.dddTTTT######TTTTTTTTTTTTTTTTTTTTTTTTT
-  TT,,,TTTTT~~~TTTTTTTTTTTTTTTTTTTTTTddTTTT######TTTTTTTTTTTTTTTTTTTTTTTTT
-  TT,,,,,TTT~~~TTTT,,,TTTTTTTTTTTTTTddddTTT######TTTTTTTTT,,TTTTTTTTTTTTTT
-  TTTTTTTTTT~~~TTTT,,,TTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-heights: |
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000001000000000000000000000000000000000000
-  000000000000000000000000000000111111111111110000000000000000000000000000
-  000000000000000000000000000001111111111111111000000000000000000000000000
-  000000000000000000000000000011111111111111111100000000000000000000000000
-  000000000000000000000000000111111111111111111110000000000000000000000000
-  000000000000000000000000001111111111111111111111000000000000000000000000
-  000000000000000000000000001111111111111111111111100000000000000000000000
-  000000000000000000000000001111111111111111111111100000000000000000000000
-  000000000000000000000000001111111111111111111111100000000000000000000000
-  000000000000000000000000001111111111111111111111000000000000000000000000
-  000000000000000000000000000111111111111111111110000000000000000000000000
-  000000000000000000000000000011111111111111111110000000000000000000000000
-  000000000000000000000000000000011111111111111110000000000000000000000000
-  000000000000000000000000000000000111111111111000000000000000000000000000
-  000000000000000000000000000000000011111000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-stamps:
-- stamp: stairs_log@33
-  at: [35, 17]
-- stamp: g_elder
-  at: [30, 4]
-  link: BW_GYM
-  name: Gym door
-  door: [6, 11]
-- stamp: g_tree6
-  at: [15, 19]
-  link: BW_GUILD
-  name: Guildhall door
-  door: [4, 7]
-- stamp: g_tree4
-  at: [52, 21]
-  link: BW_HOUSE1
-  name: Treetop House door
-  door: [2, 6]
-- stamp: g_tree4
-  at: [38, 43]
-  link: BW_HOUSE2
-  name: Cutter's House door
-  door: [2, 6]
-- stamp: w_house_r
-  at: [42, 21]
-  link: BW_PC
-  name: Poke Center door
-  door: [2, 5]
-- stamp: w_house_s
-  at: [23, 37]
-  link: BW_MART
-  name: Mart door
-  door: [2, 5]
-- stamp: w_house_m
-  at: [55, 37]
-  link: BW_CHAPEL
-  name: Chapel door
-  door: [2, 5]
-- stamp: g_tree4p
-  at: [24, 6]
-- stamp: g_tree4p
-  at: [43, 6]
-- stamp: g_tree6
-  at: [59, 9]
-- stamp: g_tree4
-  at: [4, 21]
-- stamp: g_tree6
-  at: [50, 44]
-- stamp: g_tree4p
-  at: [61, 44]
-- stamp: g_tree2
-  at: [26, 47]
-- stamp: g_tree2
-  at: [44, 47]
-- stamp: g_tree2
-  at: [20, 52]
-- stamp: g_tree4p
-  at: [41, 54]
-- stamp: g_tree2
-  at: [47, 14]
-- stamp: g_tree2
-  at: [20, 9]
-- stamp: g_tree2
-  at: [64, 24]
-- stamp: g_tree2
-  at: [15, 38]
-- stamp: g_tree2
-  at: [57, 28]
-- stamp: g_tree2
-  at: [29, 22]
-- stamp: g_tree4p
-  at: [8, 41]
-- stamp: g_tree2
-  at: [63, 37]
-- stamp: g_tree2
-  at: [33, 30]
-- stamp: p_banner
-  at: [46, 25]
-- stamp: p_banner
-  at: [27, 41]
-- stamp: p_banner3
-  at: [59, 40]
-- stamp: p_awning
-  at: [18, 24]
-- stamp: p_awning
-  at: [53, 25]
-- stamp: p_awning
-  at: [39, 47]
-- stamp: p_vat_y
-  at: [19, 36]
-- stamp: p_vat_y
-  at: [15, 34]
-- stamp: p_vat_b
-  at: [21, 39]
-- stamp: p_vat_y
-  at: [22, 35]
-- stamp: p_vat_y
-  at: [22, 41]
-- stamp: p_vat_r
-  at: [15, 37]
-- stamp: p_vat_r
-  at: [20, 41]
-- stamp: p_vat_b
-  at: [16, 35]
-- stamp: p_vat_r
-  at: [19, 35]
-- stamp: tp_stall_20
-  at: [26, 18]
-- stamp: p_laundry
-  at: [29, 35]
-- stamp: p_loom
-  at: [29, 27]
-- stamp: p_loom
-  at: [25, 29]
-- stamp: p_lantern
-  at: [51, 51]
-- stamp: p_lantern
-  at: [60, 52]
-- stamp: p_lantern
-  at: [63, 51]
-- stamp: tp_stall_13
-  at: [54, 52]
-- stamp: t_barrel
-  at: [50, 52]
-- stamp: tp_barrel_06
-  at: [62, 53]
-- stamp: p_silk
-  at: [65, 51]
-- stamp: logbench@33
-  at: [56, 53]
-- stamp: tp_stall_05
-  at: [26, 26]
-- stamp: tp_barrel_06
-  at: [30, 29]
-- stamp: tp_garden_09
-  at: [41, 35]
-- stamp: p_silk1
-  at: [19, 54]
-- stamp: p_silk
-  at: [43, 52]
-- stamp: p_strand_p
-  at: [37, 54]
-- stamp: p_silk1
-  at: [53, 15]
-- stamp: p_strand_p
-  at: [7, 12]
-- stamp: p_silk1
-  at: [7, 10]
-- stamp: p_silk1
-  at: [54, 20]
-- stamp: p_strand_p
-  at: [30, 18]
-- stamp: p_silk
-  at: [29, 18]
-- stamp: p_silk
-  at: [30, 20]
-- stamp: p_silk1
-  at: [51, 34]
-- stamp: p_silk1
-  at: [12, 27]
-- stamp: p_silk1
-  at: [35, 22]
-- stamp: p_silk
-  at: [40, 54]
-- stamp: p_strand_w
-  at: [17, 33]
-- stamp: p_strand_p
-  at: [48, 25]
-- stamp: p_strand_w
-  at: [53, 36]
-- stamp: p_silk1
-  at: [35, 45]
-- stamp: p_strand_p
-  at: [46, 45]
-- stamp: p_strand_p
-  at: [24, 50]
-- stamp: p_silk
-  at: [6, 15]
-- stamp: p_strand_p
-  at: [27, 32]
-- stamp: p_silk1
-  at: [36, 45]
-- stamp: p_silk1
-  at: [38, 24]
-- stamp: p_silk
-  at: [47, 40]
-- stamp: p_strand_p
-  at: [20, 36]
-- stamp: p_web
-  at: [2, 59]
-- stamp: p_web1
-  at: [55, 57]
-- stamp: p_web
-  at: [58, 48]
-- stamp: p_web1
-  at: [1, 46]
-- stamp: p_web1
-  at: [5, 60]
-- stamp: p_web1
-  at: [49, 8]
-- stamp: p_web
-  at: [68, 11]
-- stamp: p_web
-  at: [5, 1]
-- stamp: p_web
-  at: [17, 60]
-- stamp: p_web
-  at: [2, 10]
-- stamp: p_web
-  at: [54, 15]
-- stamp: p_web1
-  at: [63, 35]
-- stamp: p_web1
-  at: [56, 60]
-- stamp: p_web1
-  at: [23, 17]
-- stamp: p_bush_r
-  at: [52, 8]
-- stamp: p_bush_r
-  at: [13, 26]
-- stamp: p_bush_r
-  at: [14, 13]
-- stamp: p_pot
-  at: [27, 57]
-- stamp: p_bush_r
-  at: [19, 41]
-- stamp: p_bush_r
-  at: [39, 41]
-- stamp: fo_rustic_20
-  at: [60, 18]
-- stamp: p_stump
-  at: [65, 23]
-- stamp: fo_rustic_20
-  at: [15, 6]
-- stamp: p_bush_g
-  at: [10, 36]
-- stamp: fo_rustic_22
-  at: [50, 29]
-- stamp: tp_stall_13
-  at: [52, 17]
-- stamp: p_stump
-  at: [20, 35]
-- stamp: p_bush_r
-  at: [43, 15]
-- stamp: t_barrel
-  at: [34, 21]
-- stamp: p_bush_r
-  at: [66, 8]
-- stamp: p_bush_g
-  at: [51, 37]
-- stamp: fo_rustic_22
-  at: [62, 26]
-- stamp: p_bush_g
-  at: [14, 56]
-- stamp: p_pot
-  at: [35, 25]
-- stamp: p_pinkbush
-  at: [12, 31]
-- stamp: t_barrel
-  at: [52, 29]
-- stamp: p_pot
-  at: [33, 29]
-- stamp: p_bush_r
-  at: [28, 33]
-- stamp: p_bush_g
-  at: [32, 45]
-- stamp: p_bush_r
-  at: [26, 35]
-- stamp: p_stump
-  at: [50, 39]
-- stamp: p_pot
-  at: [54, 5]
-- stamp: t_barrel
-  at: [51, 35]
-- stamp: p_crates
-  at: [59, 21]
-- stamp: p_pinkbush2
-  at: [8, 53]
-- stamp: p_pinkbush
-  at: [23, 46]
-- stamp: p_pinkbush
-  at: [16, 16]
-- stamp: p_pinkbush
-  at: [15, 53]
-- stamp: p_banner3
-  at: [21, 36]
-- stamp: p_banner
-  at: [32, 37]
-- stamp: p_banner
-  at: [54, 35]
-- stamp: p_banner
-  at: [22, 29]
-- stamp: p_banner3
-  at: [62, 34]
-tiles:
-- tile: 8721
-  at: [3, 30]
-  layer: 1
-- tile: 8737
-  at: [3, 31]
-  layer: 1
-- tile: 8756
-  at: [3, 32]
-  layer: 1
-- tile: 23362
-  at: [3, 30]
-  layer: 2
-- tile: 23362
-  at: [3, 31]
-  layer: 2
-- tile: 8721
-  at: [4, 30]
-  layer: 1
-- tile: 8737
-  at: [4, 31]
-  layer: 1
-- tile: 8756
-  at: [4, 32]
-  layer: 1
-- tile: 23362
-  at: [4, 30]
-  layer: 2
-- tile: 23362
-  at: [4, 31]
-  layer: 2
-- tile: 8721
-  at: [5, 30]
-  layer: 1
-- tile: 8737
-  at: [5, 31]
-  layer: 1
-- tile: 8756
-  at: [5, 32]
-  layer: 1
-- tile: 23362
-  at: [5, 30]
-  layer: 2
-- tile: 23362
-  at: [5, 31]
-  layer: 2
-- tile: 8721
-  at: [6, 30]
-  layer: 1
-- tile: 8737
-  at: [6, 31]
-  layer: 1
-- tile: 23362
-  at: [6, 30]
-  layer: 2
-- tile: 23362
-  at: [6, 31]
-  layer: 2
-- tile: 8721
-  at: [7, 30]
-  layer: 1
-- tile: 8737
-  at: [7, 31]
-  layer: 1
-- tile: 23362
-  at: [7, 30]
-  layer: 2
-- tile: 23362
-  at: [7, 31]
-  layer: 2
-- tile: 8721
-  at: [8, 30]
-  layer: 1
-- tile: 8737
-  at: [8, 31]
-  layer: 1
-- tile: 23362
-  at: [8, 30]
-  layer: 2
-- tile: 23362
-  at: [8, 31]
-  layer: 2
-- tile: 8721
-  at: [9, 30]
-  layer: 1
-- tile: 8737
-  at: [9, 31]
-  layer: 1
-- tile: 8756
-  at: [9, 32]
-  layer: 1
-- tile: 23362
-  at: [9, 30]
-  layer: 2
-- tile: 23362
-  at: [9, 31]
-  layer: 2
-- tile: 8721
-  at: [10, 30]
-  layer: 1
-- tile: 8737
-  at: [10, 31]
-  layer: 1
-- tile: 8756
-  at: [10, 32]
-  layer: 1
-- tile: 23362
-  at: [10, 30]
-  layer: 2
-- tile: 23362
-  at: [10, 31]
-  layer: 2
-- tile: 8721
-  at: [11, 30]
-  layer: 1
-- tile: 8737
-  at: [11, 31]
-  layer: 1
-- tile: 8756
-  at: [11, 32]
-  layer: 1
-- tile: 23362
-  at: [11, 30]
-  layer: 2
-- tile: 23362
-  at: [11, 31]
-  layer: 2
-- tile: 8720
-  at: [24, 26]
-  layer: 1
-- tile: 8721
-  at: [25, 26]
-  layer: 1
-- tile: 8721
-  at: [26, 26]
-  layer: 1
-- tile: 8721
-  at: [27, 26]
-  layer: 1
-- tile: 8721
-  at: [28, 26]
-  layer: 1
-- tile: 8721
-  at: [29, 26]
-  layer: 1
-- tile: 8722
-  at: [30, 26]
-  layer: 1
-- tile: 8728
-  at: [24, 27]
-  layer: 1
-- tile: 8729
-  at: [25, 27]
-  layer: 1
-- tile: 8729
-  at: [26, 27]
-  layer: 1
-- tile: 8729
-  at: [27, 27]
-  layer: 1
-- tile: 8729
-  at: [28, 27]
-  layer: 1
-- tile: 8729
-  at: [29, 27]
-  layer: 1
-- tile: 8730
-  at: [30, 27]
-  layer: 1
-- tile: 8728
-  at: [24, 28]
-  layer: 1
-- tile: 8729
-  at: [25, 28]
-  layer: 1
-- tile: 8729
-  at: [26, 28]
-  layer: 1
-- tile: 8729
-  at: [27, 28]
-  layer: 1
-- tile: 8729
-  at: [28, 28]
-  layer: 1
-- tile: 8729
-  at: [29, 28]
-  layer: 1
-- tile: 8730
-  at: [30, 28]
-  layer: 1
-- tile: 8728
-  at: [24, 29]
-  layer: 1
-- tile: 8729
-  at: [25, 29]
-  layer: 1
-- tile: 8729
-  at: [26, 29]
-  layer: 1
-- tile: 8729
-  at: [27, 29]
-  layer: 1
-- tile: 8729
-  at: [28, 29]
-  layer: 1
-- tile: 8729
-  at: [29, 29]
-  layer: 1
-- tile: 8730
-  at: [30, 29]
-  layer: 1
-- tile: 8736
-  at: [24, 30]
-  layer: 1
-- tile: 8737
-  at: [25, 30]
-  layer: 1
-- tile: 8729
-  at: [26, 30]
-  layer: 1
-- tile: 8729
-  at: [27, 30]
-  layer: 1
-- tile: 8737
-  at: [28, 30]
-  layer: 1
-- tile: 8737
-  at: [29, 30]
-  layer: 1
-- tile: 8738
-  at: [30, 30]
-  layer: 1
-- tile: 8755
-  at: [24, 31]
-  layer: 1
-- tile: 8756
-  at: [25, 31]
-  layer: 1
-- tile: 8776
-  at: [26, 31]
-  layer: 1
-- tile: 8776
-  at: [27, 31]
-  layer: 1
-- tile: 8756
-  at: [28, 31]
-  layer: 1
-- tile: 8756
-  at: [29, 31]
-  layer: 1
-- tile: 8757
-  at: [30, 31]
-  layer: 1
-- tile: 23365
-  at: [24, 26]
-  layer: 2
-- tile: 23362
-  at: [25, 26]
-  layer: 2
-- tile: 23362
-  at: [25, 30]
-  layer: 2
-- tile: 23362
-  at: [26, 26]
-  layer: 2
-- tile: 23362
-  at: [27, 26]
-  layer: 2
-- tile: 23362
-  at: [28, 26]
-  layer: 2
-- tile: 23362
-  at: [28, 30]
-  layer: 2
-- tile: 23362
-  at: [29, 26]
-  layer: 2
-- tile: 23362
-  at: [29, 30]
-  layer: 2
-- tile: 23366
-  at: [30, 26]
-  layer: 2
-- tile: 23363
-  at: [24, 27]
-  layer: 2
-- tile: 23364
-  at: [30, 27]
-  layer: 2
-- tile: 23363
-  at: [24, 28]
-  layer: 2
-- tile: 23364
-  at: [30, 28]
-  layer: 2
-- tile: 23363
-  at: [24, 29]
-  layer: 2
-- tile: 23364
-  at: [30, 29]
-  layer: 2
-- tile: 23363
-  at: [24, 30]
-  layer: 2
-- tile: 23364
-  at: [30, 30]
-  layer: 2
-- tile: 8720
-  at: [50, 51]
-  layer: 1
-- tile: 8721
-  at: [51, 51]
-  layer: 1
-- tile: 8721
-  at: [52, 51]
-  layer: 1
-- tile: 8721
-  at: [53, 51]
-  layer: 1
-- tile: 8721
-  at: [54, 51]
-  layer: 1
-- tile: 8721
-  at: [55, 51]
-  layer: 1
-- tile: 8721
-  at: [56, 51]
-  layer: 1
-- tile: 8728
-  at: [50, 52]
-  layer: 1
-- tile: 8729
-  at: [51, 52]
-  layer: 1
-- tile: 8729
-  at: [52, 52]
-  layer: 1
-- tile: 8729
-  at: [53, 52]
-  layer: 1
-- tile: 8729
-  at: [54, 52]
-  layer: 1
-- tile: 8729
-  at: [55, 52]
-  layer: 1
-- tile: 8729
-  at: [56, 52]
-  layer: 1
-- tile: 8728
-  at: [50, 53]
-  layer: 1
-- tile: 8729
-  at: [51, 53]
-  layer: 1
-- tile: 8729
-  at: [52, 53]
-  layer: 1
-- tile: 8729
-  at: [53, 53]
-  layer: 1
-- tile: 8729
-  at: [54, 53]
-  layer: 1
-- tile: 8729
-  at: [55, 53]
-  layer: 1
-- tile: 8729
-  at: [56, 53]
-  layer: 1
-- tile: 8736
-  at: [50, 54]
-  layer: 1
-- tile: 8737
-  at: [51, 54]
-  layer: 1
-- tile: 8729
-  at: [52, 54]
-  layer: 1
-- tile: 8729
-  at: [53, 54]
-  layer: 1
-- tile: 8737
-  at: [54, 54]
-  layer: 1
-- tile: 8737
-  at: [55, 54]
-  layer: 1
-- tile: 8737
-  at: [56, 54]
-  layer: 1
-- tile: 8755
-  at: [50, 55]
-  layer: 1
-- tile: 8756
-  at: [51, 55]
-  layer: 1
-- tile: 8776
-  at: [52, 55]
-  layer: 1
-- tile: 8776
-  at: [53, 55]
-  layer: 1
-- tile: 8756
-  at: [54, 55]
-  layer: 1
-- tile: 8756
-  at: [55, 55]
-  layer: 1
-- tile: 8757
-  at: [56, 55]
-  layer: 1
-- tile: 23365
-  at: [50, 51]
-  layer: 2
-- tile: 23362
-  at: [51, 51]
-  layer: 2
-- tile: 23362
-  at: [51, 54]
-  layer: 2
-- tile: 23362
-  at: [52, 51]
-  layer: 2
-- tile: 23362
-  at: [53, 51]
-  layer: 2
-- tile: 23362
-  at: [54, 51]
-  layer: 2
-- tile: 23362
-  at: [54, 54]
-  layer: 2
-- tile: 23362
-  at: [55, 51]
-  layer: 2
-- tile: 23362
-  at: [55, 54]
-  layer: 2
-- tile: 23362
-  at: [56, 51]
-  layer: 2
-- tile: 23362
-  at: [56, 54]
-  layer: 2
-- tile: 23363
-  at: [50, 52]
-  layer: 2
-- tile: 23363
-  at: [50, 53]
-  layer: 2
-- tile: 23363
-  at: [50, 54]
-  layer: 2
-- tile: 8721
-  at: [57, 52]
-  layer: 1
-- tile: 8737
-  at: [57, 53]
-  layer: 1
-- tile: 8756
-  at: [57, 54]
-  layer: 1
-- tile: 23362
-  at: [57, 52]
-  layer: 2
-- tile: 23362
-  at: [57, 53]
-  layer: 2
-- tile: 8721
-  at: [58, 52]
-  layer: 1
-- tile: 8737
-  at: [58, 53]
-  layer: 1
-- tile: 8756
-  at: [58, 54]
-  layer: 1
-- tile: 23362
-  at: [58, 52]
-  layer: 2
-- tile: 23362
-  at: [58, 53]
-  layer: 2
-- tile: 8721
-  at: [59, 52]
-  layer: 1
-- tile: 8737
-  at: [59, 53]
-  layer: 1
-- tile: 8756
-  at: [59, 54]
-  layer: 1
-- tile: 23362
-  at: [59, 52]
-  layer: 2
-- tile: 23362
-  at: [59, 53]
-  layer: 2
-- tile: 8721
-  at: [60, 51]
-  layer: 1
-- tile: 8721
-  at: [61, 51]
-  layer: 1
-- tile: 8721
-  at: [62, 51]
-  layer: 1
-- tile: 8721
-  at: [63, 51]
-  layer: 1
-- tile: 8721
-  at: [64, 51]
-  layer: 1
-- tile: 8722
-  at: [65, 51]
-  layer: 1
-- tile: 8729
-  at: [60, 52]
-  layer: 1
-- tile: 8729
-  at: [61, 52]
-  layer: 1
-- tile: 8729
-  at: [62, 52]
-  layer: 1
-- tile: 8729
-  at: [63, 52]
-  layer: 1
-- tile: 8729
-  at: [64, 52]
-  layer: 1
-- tile: 8730
-  at: [65, 52]
-  layer: 1
-- tile: 8729
-  at: [60, 53]
-  layer: 1
-- tile: 8729
-  at: [61, 53]
-  layer: 1
-- tile: 8729
-  at: [62, 53]
-  layer: 1
-- tile: 8729
-  at: [63, 53]
-  layer: 1
-- tile: 8729
-  at: [64, 53]
-  layer: 1
-- tile: 8730
-  at: [65, 53]
-  layer: 1
-- tile: 8737
-  at: [60, 54]
-  layer: 1
-- tile: 8737
-  at: [61, 54]
-  layer: 1
-- tile: 8737
-  at: [62, 54]
-  layer: 1
-- tile: 8737
-  at: [63, 54]
-  layer: 1
-- tile: 8737
-  at: [64, 54]
-  layer: 1
-- tile: 8738
-  at: [65, 54]
-  layer: 1
-- tile: 8755
-  at: [60, 55]
-  layer: 1
-- tile: 8756
-  at: [61, 55]
-  layer: 1
-- tile: 8756
-  at: [62, 55]
-  layer: 1
-- tile: 8756
-  at: [63, 55]
-  layer: 1
-- tile: 8756
-  at: [64, 55]
-  layer: 1
-- tile: 8757
-  at: [65, 55]
-  layer: 1
-- tile: 23362
-  at: [60, 51]
-  layer: 2
-- tile: 23362
-  at: [60, 54]
-  layer: 2
-- tile: 23362
-  at: [61, 51]
-  layer: 2
-- tile: 23362
-  at: [61, 54]
-  layer: 2
-- tile: 23362
-  at: [62, 51]
-  layer: 2
-- tile: 23362
-  at: [62, 54]
-  layer: 2
-- tile: 23362
-  at: [63, 51]
-  layer: 2
-- tile: 23362
-  at: [63, 54]
-  layer: 2
-- tile: 23362
-  at: [64, 51]
-  layer: 2
-- tile: 23362
-  at: [64, 54]
-  layer: 2
-- tile: 23366
-  at: [65, 51]
-  layer: 2
-- tile: 23364
-  at: [65, 52]
-  layer: 2
-- tile: 23364
-  at: [65, 53]
-  layer: 2
-- tile: 23364
-  at: [65, 54]
-  layer: 2
-- tile: 20193
-  at: [45, 25]
-  layer: 2
-- tile: 20193
-  at: [26, 41]
-  layer: 2
-- tile: 18075
-  at: [41, 10]
-  layer: 2
-- tile: 18075
-  at: [42, 10]
-  layer: 2
-- tile: 18075
-  at: [28, 10]
-  layer: 2
-- tile: 18075
-  at: [29, 10]
-  layer: 2
-- tile: 18075
-  at: [23, 22]
-  layer: 2
-- tile: 18075
-  at: [24, 22]
-  layer: 2
-- tile: 18075
-  at: [25, 22]
-  layer: 2
-- tile: 18075
-  at: [26, 22]
-  layer: 2
-- tile: 18075
-  at: [58, 46]
-  layer: 2
-- tile: 18075
-  at: [59, 46]
-  layer: 2
-- tile: 18075
-  at: [60, 46]
-  layer: 2
-- tile: 18075
-  at: [61, 46]
-  layer: 2
-- tile: 18075
-  at: [47, 46]
-  layer: 2
-- tile: 18075
-  at: [48, 46]
-  layer: 2
-- tile: 18075
-  at: [49, 46]
-  layer: 2
-- tile: 18075
-  at: [50, 46]
-  layer: 2
-- tile: 8288
-  at: [23, 12]
-  layer: 2
-- tile: 8289
-  at: [24, 12]
-  layer: 2
-- tile: 8296
-  at: [23, 13]
-  layer: 1
-- tile: 8297
-  at: [24, 13]
-  layer: 1
-- tile: 8304
-  at: [23, 14]
-  layer: 1
-- tile: 8305
-  at: [24, 14]
-  layer: 1
-- tile: 23368
-  at: [51, 54]
-  layer: 2
-- tile: 23376
-  at: [51, 55]
-  layer: 2
-- tile: 23369
-  at: [52, 54]
-  layer: 2
-- tile: 23377
-  at: [52, 55]
-  layer: 2
-- tile: 23368
-  at: [60, 55]
-  layer: 2
-- tile: 23376
-  at: [60, 56]
-  layer: 2
-- tile: 23369
-  at: [61, 55]
-  layer: 2
-- tile: 23377
-  at: [61, 56]
-  layer: 2
-- tile: 23368
-  at: [63, 54]
-  layer: 2
-- tile: 23376
-  at: [63, 55]
-  layer: 2
-- tile: 23369
-  at: [64, 54]
-  layer: 2
-- tile: 23377
-  at: [64, 55]
-  layer: 2
-- tile: 23368
-  at: [51, 54]
-  layer: 2
-- tile: 23376
-  at: [51, 55]
-  layer: 2
-- tile: 23369
-  at: [52, 54]
-  layer: 2
-- tile: 23377
-  at: [52, 55]
-  layer: 2
-- tile: 23368
-  at: [60, 55]
-  layer: 2
-- tile: 23376
-  at: [60, 56]
-  layer: 2
-- tile: 23369
-  at: [61, 55]
-  layer: 2
-- tile: 23377
-  at: [61, 56]
-  layer: 2
-- tile: 23368
-  at: [63, 54]
-  layer: 2
-- tile: 23376
-  at: [63, 55]
-  layer: 2
-- tile: 23369
-  at: [64, 54]
-  layer: 2
-- tile: 23377
-  at: [64, 55]
-  layer: 2
-- tile: 23178
-  at: [31, 33]
-  layer: 2
-- tile: 23177
-  at: [32, 33]
-  layer: 2
-- tile: 23178
-  at: [33, 33]
-  layer: 2
-- tile: 23179
-  at: [34, 33]
-  layer: 2
-- tile: 23176
-  at: [35, 33]
-  layer: 2
-- tile: 23178
-  at: [36, 33]
-  layer: 2
-- tile: 23178
-  at: [37, 33]
-  layer: 2
-- tile: 23179
-  at: [38, 33]
-  layer: 2
-- tile: 23176
-  at: [39, 33]
-  layer: 2
-- tile: 23177
-  at: [40, 33]
-  layer: 2
-- tile: 23178
-  at: [41, 33]
-  layer: 2
-- tile: 23179
-  at: [42, 33]
-  layer: 2
-- tile: 23176
-  at: [43, 33]
-  layer: 2
-- tile: 23177
-  at: [44, 33]
-  layer: 2
-- tile: 23178
-  at: [45, 33]
-  layer: 2
-- tile: 23178
-  at: [46, 33]
-  layer: 2
-- tile: 23176
-  at: [47, 33]
-  layer: 2
-- tile: 23177
-  at: [27, 44]
-  layer: 2
-- tile: 23178
-  at: [28, 44]
-  layer: 2
-- tile: 23179
-  at: [29, 44]
-  layer: 2
-- tile: 23176
-  at: [30, 44]
-  layer: 2
-- tile: 23178
-  at: [31, 44]
-  layer: 2
-- tile: 23178
-  at: [32, 44]
-  layer: 2
-- tile: 23179
-  at: [33, 44]
-  layer: 2
-- tile: 23176
-  at: [34, 44]
-  layer: 2
-- tile: 23177
-  at: [35, 44]
-  layer: 2
-- tile: 23178
-  at: [40, 26]
-  layer: 2
-- tile: 23179
-  at: [41, 26]
-  layer: 2
-- tile: 23176
-  at: [42, 26]
-  layer: 2
-- tile: 23178
-  at: [43, 26]
-  layer: 2
-- tile: 23178
-  at: [44, 26]
-  layer: 2
-- tile: 23179
-  at: [45, 26]
-  layer: 2
-- tile: 23176
-  at: [46, 26]
-  layer: 2
-- tile: 23177
-  at: [47, 26]
-  layer: 2
-- tile: 23178
-  at: [48, 26]
-  layer: 2
-- tile: 23179
-  at: [49, 26]
-  layer: 2
-- tile: 23179
-  at: [17, 29]
-  layer: 2
-- tile: 23176
-  at: [18, 29]
-  layer: 2
-- tile: 23178
-  at: [19, 29]
-  layer: 2
-- tile: 23178
-  at: [20, 29]
-  layer: 2
-- tile: 23179
-  at: [21, 29]
-  layer: 2
-- tile: 23176
-  at: [22, 29]
-  layer: 2
-- tile: 23177
-  at: [23, 29]
-  layer: 2
-- tile: 23177
-  at: [52, 35]
-  layer: 2
-- tile: 23178
-  at: [53, 35]
-  layer: 2
-- tile: 23179
-  at: [54, 35]
-  layer: 2
-- tile: 23176
-  at: [55, 35]
-  layer: 2
-- tile: 23178
-  at: [56, 35]
-  layer: 2
-- tile: 23178
-  at: [57, 35]
-  layer: 2
-- tile: 23179
-  at: [58, 35]
-  layer: 2
-- tile: 23176
-  at: [59, 35]
-  layer: 2
-- tile: 23177
-  at: [60, 35]
-  layer: 2
-- tile: 23178
-  at: [61, 35]
-  layer: 2
-- tile: 23179
-  at: [62, 35]
-  layer: 2
-- tile: 23178
-  at: [29, 57]
-  layer: 2
-- tile: 23179
-  at: [30, 57]
-  layer: 2
-- tile: 23176
-  at: [31, 57]
-  layer: 2
-- tile: 23178
-  at: [32, 57]
-  layer: 2
-- tile: 23178
-  at: [33, 57]
-  layer: 2
-- tile: 23179
-  at: [34, 57]
-  layer: 2
-- tile: 23176
-  at: [35, 57]
-  layer: 2
-- tile: 23177
-  at: [36, 57]
-  layer: 2
-- tile: 23178
-  at: [37, 57]
-  layer: 2
-- tile: 23179
-  at: [38, 57]
-  layer: 2
-- tile: 23176
-  at: [39, 57]
-  layer: 2
-- tile: 23179
-  at: [49, 40]
-  layer: 2
-- tile: 23176
-  at: [50, 40]
-  layer: 2
-- tile: 23178
-  at: [51, 40]
-  layer: 2
-- tile: 23178
-  at: [52, 40]
-  layer: 2
-- tile: 23179
-  at: [53, 40]
-  layer: 2
-- tile: 23176
-  at: [54, 40]
-  layer: 2
-- tile: 23177
-  at: [55, 40]
-  layer: 2
-- tile: 23178
-  at: [56, 40]
-  layer: 2
-- tile: 23179
-  at: [57, 40]
-  layer: 2
-- tile: 23178
-  at: [31, 19]
-  layer: 2
-- tile: 23177
-  at: [32, 19]
-  layer: 2
-- tile: 23178
-  at: [33, 19]
-  layer: 2
-- tile: 23179
-  at: [34, 19]
-  layer: 2
-- tile: 23176
-  at: [35, 19]
-  layer: 2
-- tile: 23178
-  at: [36, 19]
-  layer: 2
-- tile: 23178
-  at: [37, 19]
-  layer: 2
-- tile: 23179
-  at: [38, 19]
-  layer: 2
-- tile: 23176
-  at: [39, 19]
-  layer: 2
-- tile: 23177
-  at: [40, 19]
-  layer: 2
-- tile: 23178
-  at: [41, 19]
-  layer: 2
-- tile: 1552
-  at: [15, 46]
-  layer: 2
-- tile: 1553
-  at: [16, 46]
-  layer: 2
-- tile: 1560
-  at: [15, 47]
-  layer: 2
-- tile: 1561
-  at: [16, 47]
-  layer: 2
-tileblocks: []
+raw: data/raw/120.npy
+tileset: 50
 events:
+- type: door
+  at: [36, 12]
+  gfx: ['', 0, 2]
+  name: Gym door
+  link: BW_GYM
+- type: door
+  at: [17, 26]
+  gfx: ['', 0, 2]
+  name: Guildhall door
+  link: BW_GUILD
+- type: door
+  at: [45, 23]
+  gfx: ['', 0, 2]
+  name: Poke Center door
+  link: BW_PC
+- type: door
+  at: [55, 24]
+  gfx: ['', 0, 2]
+  name: Treetop House door
+  link: BW_HOUSE1
+- type: door
+  at: [27, 40]
+  gfx: ['', 0, 2]
+  name: Mart door
+  link: BW_MART
+- type: door
+  at: [63, 42]
+  gfx: ['', 0, 2]
+  name: Chapel door
+  link: BW_CHAPEL
+- type: door
+  at: [42, 50]
+  gfx: ['', 0, 2]
+  name: Cutter's House door
+  link: BW_HOUSE2
 - type: warp
   name: To Gossamer Wood
   link: WOOD_BRIAR
@@ -1551,11 +120,16 @@ events:
   at: [37, 62]
 - type: sign
   name: Loomhouse sign
-  post: true
+  post: false
   text: 'LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM.
 
     "A thread holds because it''s twisted with others."'
-  at: [38, 16]
+  at: [38, 13]
+- type: sign
+  name: Loyal Three shrine
+  post: false
+  text: 'A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. Someone keeps it swept.'
+  at: [21, 8]
 - type: event
   name: Old woman at the shrine
   pages:
@@ -1581,12 +155,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 28, dir: up}
     cond: {switch: GLOAMING_DISGUISED_CELESTINE}
-  at: [24, 15]
-- type: sign
-  name: Loyal Three shrine
-  post: false
-  text: 'A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. Someone keeps it swept.'
-  at: [23, 14]
+  at: [22, 9]
 - type: event
   name: Dusk petal
   pages:
@@ -1604,7 +173,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [25, 14]
+  at: [23, 8]
 - type: event
   name: Lattice pylon
   pages:
@@ -1619,12 +188,12 @@ events:
             it is stiff, like spun sugar.']
     trigger: action
     move: fixed
-  at: [68, 30]
+  at: [69, 30]
 - type: sign
   name: Survey flags
   post: false
   text: Orange cloth on stakes. Four of the stakes have been neatly cut. The cuts are very clean. A weaver's shears.
-  at: [66, 33]
+  at: [67, 33]
 - type: event
   name: Pylon watch 1
   pages:
@@ -1906,7 +475,7 @@ events:
     trigger: action
     move: fixed
     cond: {switch: CH2_THISTLE_DONE}
-  at: [65, 29]
+  at: [65, 30]
 - type: event
   name: Bereaved 2
   pages:
@@ -1957,12 +526,12 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [43, 35]
+  at: [41, 34]
 - type: sign
   name: Festival poster
   post: false
   text: 'The same poster as the Landing. Here the dark fleck in the Crown''s stone has been circled in charcoal. Someone has written: "SEE CHAPEL."'
-  at: [40, 34]
+  at: [38, 30]
 - type: event
   name: Charcoal child
   pages:
@@ -1987,7 +556,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 08, dir: up}
     cond: {self: B}
-  at: [40, 35]
+  at: [38, 35]
 - type: event
   name: Weaver at loom
   pages:
@@ -2008,12 +577,12 @@ events:
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
     cond: {self: A}
-  at: [28, 28]
+  at: [26, 25]
 - type: sign
   name: Silk racks
   post: false
   text: The silk moves in no wind at all.
-  at: [25, 27]
+  at: [23, 24]
 - type: event
   name: HiddenItem rope bridge
   pages:
@@ -2028,7 +597,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [24, 23]
+  at: [28, 21]
 - type: event
   name: HiddenItem dye vats
   pages:
@@ -2043,14 +612,14 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [13, 36]
+  at: [14, 38]
 - type: sign
   name: Town sign
-  post: true
+  post: false
   text: 'BRIARWICK — Where the Thread Never Tangles.
 
     (Carved under it, smaller: "Unlike the Guild Accounts.")'
-  at: [34, 58]
+  at: [37, 57]
 - type: event
   name: Finch
   pages:
@@ -2065,7 +634,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 07, dir: right}
     cond: {switch: CH2_MATRIARCH_DONE}
-  at: [57, 34]
+  at: [60, 33]
 - type: event
   name: Rope-bridge Boy
   pages:
@@ -2082,7 +651,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
-  at: [24, 34]
+  at: [30, 31]
 - type: event
   name: Grandmother knitting
   pages:
@@ -2116,7 +685,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 11, dir: down}
-  at: [45, 38]
+  at: [46, 36]
 - type: event
   name: Dyer
   pages:
@@ -2128,7 +697,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 15, dir: down}
-  at: [16, 32]
+  at: [16, 36]
 - type: event
   name: Apprentice
   pages:
@@ -2136,7 +705,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: NPC 17, dir: down}
-  at: [21, 30]
+  at: [21, 31]
 - type: event
   name: Silk Merchant
   pages:
@@ -2144,7 +713,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
-  at: [38, 39]
+  at: [36, 36]
 - type: event
   name: Meridian Linesman
   pages:
@@ -2159,7 +728,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
     cond: {self: A}
-  at: [61, 32]
+  at: [52, 31]
 - type: event
   name: Tired Mother
   pages:
@@ -2170,7 +739,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
-  at: [31, 47]
+  at: [33, 48]
 - type: event
   name: Old Man on bridge
   pages:
@@ -2179,7 +748,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 09, dir: down}
-  at: [2, 31]
+  at: [9, 32]
 - type: event
   name: Girl in ogre mask
   pages:
@@ -2188,7 +757,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
-  at: [35, 36]
+  at: [43, 32]
 - type: event
   name: Boy in dog mask
   pages:
@@ -2197,7 +766,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
-  at: [36, 38]
+  at: [44, 33]
 - type: event
   name: Egg-seller
   pages:
@@ -2205,7 +774,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
-  at: [43, 38]
+  at: [47, 33]
 - type: event
   name: Tax-barge Deserter
   pages:
@@ -2213,7 +782,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
-  at: [32, 54]
+  at: [33, 55]
 - type: event
   name: Accord Chaplain
   pages:
@@ -2222,7 +791,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
-  at: [56, 43]
+  at: [58, 45]
 - type: event
   name: Youngster
   pages:
@@ -2230,7 +799,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: trainer_YOUNGSTER, dir: down}
-  at: [47, 32]
+  at: [50, 29]
 - type: event
   name: Woman with basket
   pages:
@@ -2238,7 +807,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
-  at: [49, 41]
+  at: [46, 40]
 - type: event
   name: Cutter's Wife
   pages:
@@ -2247,4 +816,4 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 13, dir: down}
-  at: [38, 51]
+  at: [44, 52]

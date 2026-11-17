@@ -235,7 +235,14 @@ module Input
 end
 
 def asset(path)
-  return nil if !$opt[:assets] || path.nil?
+  return nil if path.nil?
+  if path.start_with?("Plugins/Prismfall Cutscenes/")             # the plugin's own Graphics overlay (always present)
+    f = File.join(PLUGIN_DIR, path.sub("Plugins/Prismfall Cutscenes/", ""))
+    return f if File.file?(f)
+    return f + ".png" if File.file?(f + ".png")
+    return nil
+  end
+  return nil if !$opt[:assets]
   return path if path.start_with?("/") && File.file?(path)
   [File.join(GAME_DIR, "art/out"), ASSET_DIR].each do |root|     # the project's own art wins over the stock base
     [path, path + ".png"].each { |p| f = File.join(root, p); return f if File.file?(f) }
@@ -359,11 +366,53 @@ def composite
     layer.sort_by { |s| [s.z, s.serial] }.each do |s|
       bmp = s.bitmap; sr = s.src_rect
       zx = s.zoom_x.to_f; zy = s.zoom_y.to_f
-      next if zx <= 0 || zy <= 0
-      dw = (sr.width * zx).round; dh = (sr.height * zy).round
-      x0 = s.x - (s.ox * zx).round; y0 = s.y - (s.oy * zy).round
+      next if zx <= 0 || zy <= 0 || sr.width <= 0 || sr.height <= 0
       ca = s.color.alpha / 255.0; cr = s.color.red; cg = s.color.green; cb = s.color.blue
       op = s.opacity / 255.0
+      blend = s.blend_type || 0
+      plot = lambda do |dx, dy, p|
+        a = (p & 255) * op / 255.0
+        return if a <= 0
+        r = p >> 24; g = (p >> 16) & 255; b = (p >> 8) & 255
+        if ca > 0
+          r += (cr - r) * ca; g += (cg - g) * ca; b += (cb - b) * ca
+        end
+        q = out[(dy * w) + dx]
+        qr = q >> 24; qg = (q >> 16) & 255; qb = (q >> 8) & 255
+        if blend == 1
+          r = qr + (r * a); g = qg + (g * a); b = qb + (b * a)
+        elsif blend == 2
+          r = qr - (r * a); g = qg - (g * a); b = qb - (b * a)
+        elsif a < 1
+          r = (r * a) + (qr * (1 - a)); g = (g * a) + (qg * (1 - a)); b = (b * a) + (qb * (1 - a))
+        end
+        out[(dy * w) + dx] = (r.round.clamp(0, 255) << 24) | (g.round.clamp(0, 255) << 16) | (b.round.clamp(0, 255) << 8) | 255
+      end
+      ang = (s.angle || 0).to_f
+      if ang.abs > 0.01
+        th = ang * Math::PI / 180
+        c = Math.cos(th); sn = Math.sin(th)
+        corners = [[0, 0], [sr.width, 0], [0, sr.height], [sr.width, sr.height]].map do |u, v|
+          xx = (u - s.ox) * zx; yy = (v - s.oy) * zy
+          [s.x + (c * xx) + (sn * yy), s.y - (sn * xx) + (c * yy)]
+        end
+        xs = corners.map(&:first); ys = corners.map(&:last)
+        ([ys.min.floor, 0].max..[ys.max.ceil, h - 1].min).each do |dy|
+          ([xs.min.floor, 0].max..[xs.max.ceil, w - 1].min).each do |dx|
+            xr = dx + 0.5 - s.x; yr = dy + 0.5 - s.y
+            xx = (c * xr) - (sn * yr); yy = (sn * xr) + (c * yr)
+            u = (xx / zx + s.ox).floor; v = (yy / zy + s.oy).floor
+            next if u < 0 || v < 0 || u >= sr.width || v >= sr.height
+            u = sr.width - 1 - u if s.mirror
+            su = sr.x + u; sv = sr.y + v
+            next if su >= bmp.width || sv >= bmp.height
+            plot.call(dx, dy, bmp.px[(sv * bmp.width) + su])
+          end
+        end
+        next
+      end
+      dw = (sr.width * zx).round; dh = (sr.height * zy).round
+      x0 = s.x - (s.ox * zx).round; y0 = s.y - (s.oy * zy).round
       xs = (0...dw).map { |i| u = (i / zx).floor; u = sr.width - 1 - u if s.mirror; sr.x + u.clamp(0, sr.width - 1) }
       dh.times do |j|
         dy = y0 + j
@@ -377,17 +426,8 @@ def composite
           sx = xs[i]
           next if sx >= bmp.width
           p = bmp.px[row + sx]
-          a = (p & 255) * op / 255.0
-          next if a <= 0
-          r = p >> 24; g = (p >> 16) & 255; b = (p >> 8) & 255
-          if ca > 0
-            r += (cr - r) * ca; g += (cg - g) * ca; b += (cb - b) * ca
-          end
-          if a < 1
-            q = out[(dy * w) + dx]
-            r = (r * a) + ((q >> 24) * (1 - a)); g = (g * a) + (((q >> 16) & 255) * (1 - a)); b = (b * a) + (((q >> 8) & 255) * (1 - a))
-          end
-          out[(dy * w) + dx] = (r.round.clamp(0, 255) << 24) | (g.round.clamp(0, 255) << 16) | (b.round.clamp(0, 255) << 8) | 255
+          next if (p & 255) == 0
+          plot.call(dx, dy, p)
         end
       end
     end

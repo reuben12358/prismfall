@@ -43,7 +43,7 @@ KITS = {
     'sh': dict(N=(C('sh', 1624), C('sh', 1625), C('sh', 1627)), W=C('sh', 1632), E=C('sh', 1634),
                rows=[(C('sh', 1640), C('sh', 1641), C('sh', 1642)), (C('sh', 1648), C('sh', 1649), C('sh', 1650)),
                      (C('sh', 1648), C('sh', 1649), C('sh', 1650)), (C('sh', 1656), C('sh', 1657), C('sh', 1658))],
-               inW=(C('sh', 1636), C('sh', 1644)), inE=(C('sh', 1635), C('sh', 1643)), l0=True, vines=(C('sh', 1421), 0.12)),
+               inW=(C('sh', 1636), C('sh', 1644)), inE=(C('sh', 1635), C('sh', 1643)), l0=True),
     'ak': dict(N=(C('ak', 440), C('ak', 441), C('ak', 442)), W=C('ak', 448), E=C('ak', 450),
                rows=[(C('ak', 456), C('ak', 457), C('ak', 458)), (C('ak', 464), C('ak', 465), C('ak', 466)),
                      (C('ak', 472), C('ak', 473), C('ak', 474))], inW=None, inE=None, l0=False),
@@ -108,6 +108,13 @@ class RMap:
         self.stamps.append((name, x, y))
         L = np.array(st['layers'])
         occ = L.max(axis=0) > 0
+        if mark == 'B' and name[:3] in ('gl_', 'sh_', 'kf_', 'pf_', 'ak_') and not name.startswith('pf_tr'):
+            if not hasattr(self, 'bfoot'): self.bfoot = np.zeros((self.H, self.W), bool)
+            hit = self.bfoot[y:y + h, x:x + w] & occ
+            if hit.any():
+                yy, xx = np.argwhere(hit)[0]
+                raise SystemExit('stamp %s at %d,%d overlaps another building at %d,%d' % (name, x, y, x + xx, y + yy))
+            self.bfoot[y:y + h, x:x + w] |= occ
         self.taken[y:y + h, x:x + w] |= occ
         if mark:
             ts = self.ts()
@@ -122,6 +129,66 @@ class RMap:
             self.cls[y + d[1], x + d[0]] = 'B'
             return (x + d[0], y + d[1])
         return None
+
+    def front(self, name, dx, dy, link=None, dname=None, **kw):
+        """place a stamp so that its door lands on (dx, dy)"""
+        st = STAMPS[name]; ox, oy = st['door']
+        return self.stamp(name, dx - ox, dy - oy, link, dname or (name + ' door'), **kw)
+
+    def near(self, name, x, y, on='.', r=3):
+        """place a prop stamp at the free spot nearest (x, y) (within r); returns True if placed"""
+        st = STAMPS[name]
+        for d in range(r + 1):
+            for yy in range(y - d, y + d + 1):
+                for xx in range(x - d, x + d + 1):
+                    if max(abs(xx - x), abs(yy - y)) == d and self.free(xx, yy, st['w'], st['h'], on=on):
+                        self.stamp(name, xx, yy); return True
+        print('  (no room for %s near %d,%d)' % (name, x, y)); return False
+
+    def beds(self, prefixes=('gl_', 'sh_'), p=0.8, seed=4):
+        """flower beds along the foot of every building's front wall and along its sides (Sheridan / Goldenleaf habit)"""
+        rng = random.Random(self.seed + seed)
+        fl = self.decor['flowers']
+        for name, x, y in self.stamps:
+            if not name.startswith(prefixes) or 'door' not in STAMPS[name]: continue
+            st = STAMPS[name]; occ = np.array(st['layers']).max(axis=0) > 0
+            cols = [dx for dx in range(st['w']) if occ[:, dx].any()]
+            for dx in cols:
+                bottom = max(dy for dy in range(st['h']) if occ[dy, dx])
+                X, Y = x + dx, y + bottom + 1
+                if self.inb(X, Y) and self.cls[Y, X] == '.' and not self.taken[Y, X] and rng.random() < p:
+                    self.tile(rng.choice(fl), X, Y, 1)
+
+    def street(self, pts, w=3, c='g', only=None):
+        """orthogonal street through pts (each leg axis-aligned), w wide, centred on the points"""
+        a = w // 2
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            xa, xb = sorted((x0, x1)); ya, yb = sorted((y0, y1))
+            self.rect(xa - a, ya - a, xb - xa + w, yb - ya + w, c, only)
+
+    def can_tree(self, name, x, y, on='.'):
+        st = STAMPS[name]; w, h = st['w'], st['h']
+        if x < 0 or x + w > self.W or y + h > self.H: return False
+        foot = [(x + dx, y + h - 1 - dy) for dx in range(w) for dy in range(2)]        # trunk rows must be free
+        return all(self.cls[yy, xx] in on and not self.taken[yy, xx] and not self.cliff[yy, xx] for xx, yy in foot if yy >= 0)
+
+    def trees(self, cx, cy, n, kinds, r=4, on='.', seed=0):
+        """a cluster of up to n yard trees around (cx, cy); canopies may overlap, trunks may not"""
+        rng = random.Random(self.seed * 31 + seed + cx * 7 + cy); placed = 0
+        for _ in range(n * 12):
+            if placed >= n: break
+            k = rng.choice(kinds); st = STAMPS[k]
+            x = int(round(cx + rng.uniform(-r, r))) - st['w'] // 2; y = int(round(cy + rng.uniform(-r, r))) - st['h'] + 1
+            if y >= 0 and self.can_tree(k, x, y, on):
+                self.stamp(k, x, y, mark='B'); placed += 1
+        return placed
+
+    def fence(self, x0, x1, y, gaps=()):
+        F = (C('sh', 4875 - 4448), C('sh', 4876 - 4448), C('sh', 4877 - 4448))
+        for x in range(x0, x1 + 1):
+            if any(a <= x <= b for a, b in gaps) or not self.inb(x, y): continue
+            l = x == x0 or any(x == b + 1 for a, b in gaps); r = x == x1 or any(x == a - 1 for a, b in gaps)
+            self.tile(F[0] if l and not r else F[2] if r and not l else F[1], x, y, 1); self.cls[y, x] = 'B'
 
     def ts(self):
         return R.tilesets()[self.tid]
@@ -156,20 +223,37 @@ class RMap:
         for y, x in np.argwhere(self.cls == 't'):
             L[0, y, x] = SH_TALL
 
-    def autotiles(self, z=0):
-        """Each autotile class on layer z; neighbours of the same class (and the map edge) join."""
+    # class -> layer of its autotile: water on the ground layer; lanes, streets, beach sand and deep water on layer 2
+    AUTO_Z = {'w': 0, 'd': 1, 'g': 1, 's': 1, 'W': 1, 'u': 1}
+    JOIN = {'w': 'wW', 's': None, 'W': 'W'}          # None: everything except water joins (no shore edge toward land)
+
+    def autotiles(self):
+        """Each autotile class on its layer; neighbours of the same class (and the map edge) join."""
+        water = np.isin(self.cls, ['w', 'W'])
         for c, (name, game) in self.auto.items():
-            m = self.cls == c
-            if c == 'w': m = m | (self.cls == 'W')
-            if not m.any(): continue
-            base = RC.vauto(game, name, 0)
-            H, W = m.shape
+            cells = self.cls == c
+            if not cells.any(): continue
+            j = self.JOIN.get(c, c)
+            m = ~water if j is None else np.isin(self.cls, list(j))
+            if j is None: m = m | cells
+            base = RC.vauto(game, name, 0); z = self.AUTO_Z.get(c, 0)
             pad = np.pad(m, 1, constant_values=True)
-            for y, x in np.argwhere(self.cls == c):
+            for y, x in np.argwhere(cells):
                 b = 0
                 for dx, dy, bit in ((0, -1, 1), (1, -1, 2), (1, 0, 4), (1, 1, 8), (0, 1, 16), (-1, 1, 32), (-1, 0, 64), (-1, -1, 128)):
                     if pad[y + 1 + dy, x + 1 + dx]: b |= bit
                 self.L[z, y, x] = base + NB2AUTO[b]
+        wbase = RC.vauto('rejuvenation', self.water, 0)       # water under the beach and deep band (edges show it)
+        for y, x in np.argwhere(np.isin(self.cls, ['s', 'W'])):
+            self.L[0, y, x] = wbase + 0
+        if (self.cls == 's').any() or (self.cls == 'W').any():
+            wm = np.isin(self.cls, ['w', 'W', 's'])
+            pad = np.pad(wm, 1, constant_values=True)
+            for y, x in np.argwhere(np.isin(self.cls, ['w', 'W', 's'])):
+                b = 0
+                for dx, dy, bit in ((0, -1, 1), (1, -1, 2), (1, 0, 4), (1, 1, 8), (0, 1, 16), (-1, 1, 32), (-1, 0, 64), (-1, -1, 128)):
+                    if pad[y + 1 + dy, x + 1 + dx]: b |= bit
+                self.L[0, y, x] = wbase + NB2AUTO[b]
 
     def cliffs(self):
         """Plateaus in `ht`.  The last high row of a plateau is the lip; the face rows hang below it on the LOW cells
@@ -218,8 +302,9 @@ class RMap:
                 t = K['N'][0 if wn else 2 if en else 1]
             if kind == 'row' and 0 < k < len(K['rows']) - 1 and K.get('vines') and self.rng.random() < K['vines'][1]:
                 t = K['vines'][0] if t == K['rows'][k][1] else t
-            self.L[1, y, x] = t
-            if K.get('l0') and self.cls[y, x] not in 'wW' and kind == 'row' and t == K['rows'][k][1]: self.L[0, y, x] = t
+            z = 2 if self.L[1, y, x] and self.cls[y, x] in 'sdgW' else 1     # over a beach or lane: above it
+            self.L[z, y, x] = t
+            if K.get('l0') and self.cls[y, x] == '.' and kind == 'row' and t == K['rows'][k][1]: self.L[0, y, x] = t
             if kind != 'N': self.cliff[y, x] = True
             self.taken[y, x] = True
         self.pieces = piece
@@ -238,7 +323,7 @@ class RMap:
         for sx, sy, sw, sn in self.stairs_at:
             for yy in range(sy, sy + sn):
                 for i, xx in enumerate(range(sx, sx + sw)):
-                    self.L[1, yy, xx] = self.STAIRS[0 if i == 0 else 2 if i == sw - 1 else 1]
+                    self.L[2, yy, xx] = self.STAIRS[0 if i == 0 else 2 if i == sw - 1 else 1]
                     self.taken[yy, xx] = True; self.cliff[yy, xx] = False
 
     TREES_SH = [  # 3x4 forest trees: (top two rows on layer 3, bottom two rows on layer 2), weights
@@ -268,28 +353,43 @@ class RMap:
                         if self.inb(x, y) and bot[dy][dx]: self.L[1, y, x] = bot[dy][dx]; self.taken[y, x] = True
 
     def put_stamps(self):
+        lattice = {t for tr in self.TREES_SH for part in tr[:2] for row in part for t in row if t}
         for name, x, y in self.stamps:
             L = np.array(STAMPS[name]['layers']); h, w = L.shape[1:]
-            occ = L.max(axis=0) > 0
-            for z in (1, 2):
-                reg = self.L[z, y:y + h, x:x + w]; reg[occ & (L[z] == 0) & (z == 2)] = reg[occ & (L[z] == 0) & (z == 2)]
-            for z in range(3):
-                reg = self.L[z, y:y + h, x:x + w]; mm = L[z] > 0; reg[mm] = L[z][mm]
-            l1 = self.L[1, y:y + h, x:x + w]; l1[occ & (L[1] == 0) & (L[2] > 0)] = 0   # tree lattice under a roof goes
+            for dy in range(h):
+                for dx in range(w):
+                    X, Y = x + dx, y + dy
+                    t0, t1, t2 = (int(v) for v in L[:, dy, dx])
+                    cur1 = int(self.L[1, Y, X])
+                    if t0:
+                        self.L[0, Y, X] = t0
+                        if cur1 >= RC.VBASE: self.L[1, Y, X] = 0; cur1 = 0
+                    if t1:
+                        if cur1 >= RC.VBASE: self.L[0, Y, X] = cur1          # keep the lane / sand under the object
+                        self.L[1, Y, X] = t1
+                    elif t2 and cur1 in lattice:
+                        self.L[1, Y, X] = 0                                   # a forest trunk under a roof goes
+                    if t2: self.L[2, Y, X] = t2
         for z, x, y, t in self.over:
+            if z == 1 and self.L[1, y, x] >= RC.VBASE: self.L[0, y, x] = self.L[1, y, x]
             self.L[z, y, x] = t
 
-    def scatter(self, n_per_100=9, seed=3, on='.', groups=None):
-        """Decor in noise-driven clumps on free grass: flowers in drifts, green tufts everywhere, a few rare props."""
+    def scatter(self, n_per_100=9, seed=3, on='.', groups=None, edge_boost=2.5):
+        """Decor on free grass: green tufts and flowers, thicker along edges (walls, lanes, cliffs, trees) the way
+        Rejuvenation's mappers dress the foot of things; flowers drift in noise patches; a few rare props."""
         groups = groups or self.decor
+        open_ = (self.cls == '.') & ~self.taken & ~self.cliff & (self.L[1] == 0) & (self.L[2] == 0)
+        pad = np.pad(open_, 1, constant_values=True)
         for y in range(self.H):
             for x in range(self.W):
-                if self.cls[y, x] not in on or self.taken[y, x] or self.cliff[y, x] or self.L[1, y, x] or self.L[2, y, x]: continue
+                if not open_[y, x] or self.cls[y, x] not in on: continue
+                edge = not pad[y:y + 3, x:x + 3].all()
+                k = n_per_100 * (edge_boost if edge else 1.0)
                 nz = vnoise(x, y, seed, 5.0)
                 r = self.rng.random() * 100
-                if nz > 0.62 and r < n_per_100 * 2.2: self.L[1, y, x] = self.rng.choice(groups['flowers'])
-                elif r < n_per_100: self.L[1, y, x] = self.rng.choice(groups['green'])
-                elif r < n_per_100 + 0.6: self.L[1, y, x] = self.rng.choice(groups['rare'])
+                if nz > 0.58 and r < k * 2.4: self.L[1, y, x] = self.rng.choice(groups['flowers'])
+                elif r < k: self.L[1, y, x] = self.rng.choice(groups['green'])
+                elif r < k + 0.6: self.L[1, y, x] = self.rng.choice(groups['rare'])
 
     def paint(self):
         self.paint_ground(); self.autotiles(); self.cliffs(); self.paint_stairs(); self.forest(); self.put_stamps()

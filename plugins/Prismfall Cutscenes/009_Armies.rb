@@ -22,7 +22,7 @@ module Prismfall
         @id = id
         @facing = o[:facing] || :right
         @off_x = @off_y = 0.0
-        @walking = false
+        @walking = o[:walk] || false
         @opacity = 255.0
         @tint = [0.0, 0.0, 0.0, 0.0]
         @time = 0.0
@@ -100,7 +100,7 @@ module Prismfall
             s.mirror = (@facing == :right)
             hop = (@walking && u.alive) ? -(Math.sin(((@time * 6) + u.phase) * Math::PI).abs * 4) : 0.0
           end
-          sx, sy = cam.to_screen(u.x + @off_x + u.ox, u.y + @off_y + u.oy + hop, 1.0)
+          sx, sy = cam.to_screen(u.x + @off_x + u.ox, u.y + @off_y + u.oy + hop + (u.fall * 4), 1.0)
           if cam.zoom == 1.0
             sx = Util.snap(sx)
             sy = Util.snap(sy)
@@ -109,8 +109,8 @@ module Prismfall
           s.y = sy.round
           s.zoom_x = s.zoom_y = g.px * @scale * cam.zoom
           s.z = 500 + (u.y + @off_y).round
-          s.angle = (u.fall > 0) ? ((@facing == :right) ? 90 : -90) * Ease.apply(:out, u.fall) : 0
-          s.opacity = (@opacity * ((u.fall > 0) ? 1 - (u.fall * 0.55) : 1)).round
+          s.angle = 0                                   # fallen units fade where they stand (no rotated pixels)
+          s.opacity = (@opacity * ((u.fall > 0) ? 1 - (u.fall * 0.8) : 1)).round
           sil = scene.silhouette_rgb
           if sil then s.color.set(sil[0], sil[1], sil[2], 255)
           elsif u.flash > 0 then s.color.set(255, 255, 255, 255 * u.flash)

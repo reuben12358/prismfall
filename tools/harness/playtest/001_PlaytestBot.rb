@@ -76,7 +76,7 @@ module PlayBot
     # Like a key press: armed now, live from the next Input.update until the one after (so the Input.update
     # that pbMessageDisplay calls on closing clears it, and a press never leaks into the next screen)
     def press(button);  @armed[button] = true; end
-    def pressed?(b);    return @live.has_key?(b); end
+    def pressed?(b);    return !@planning && @live.has_key?(b); end
     def input_updated;  @live = @armed; @armed = {}; end
     def dir;            return @dir; end
     def last_text=(t);  @last_text = t.to_s; end
@@ -145,6 +145,13 @@ module PlayBot
     end
 
     def brain
+      @planning = true
+      brain_inner
+    ensure
+      @planning = false
+    end
+
+    def brain_inner
       cmd_live = @cmd && @cmd_seen >= @frame - 2 && !@cmd.disposed? && @cmd.visible && @cmd.active
       msg_live = @msgwin && @msg_seen >= @frame - 2 && !@msgwin.disposed? && @msgwin.visible &&
                  ($game_temp.nil? || $game_temp.message_window_showing)
@@ -361,6 +368,7 @@ module PlayBot
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]
+        return ctrl_step($game_player.x, $game_player.y) if !$game_player.moving? && boxed_in?($game_player.x, $game_player.y)
         case kind
         when :goto
           return next_step if $game_player.x == x && $game_player.y == y && !$game_player.moving?
@@ -473,9 +481,6 @@ module PlayBot
         @path = path_dirs(x, y)
         @path_goal = [$game_map.map_id, x, y]
         @path_at = [px, py]
-        if @path.nil? && boxed_in?(px, py)
-          return ctrl_step(px, py, x, y)
-        end
         if @path.nil?
           @nopath = (@nopath || 0) + 1
           return stuck("no path to (#{x},#{y})") if @nopath > 120   # NPCs may step aside
@@ -491,23 +496,40 @@ module PlayBot
     end
 
     # The player stands on an impassable tile (a map bug: an arrival or start tile under a prop). In Debug mode a
-    # tester holds Ctrl to walk through it; do the same for one step toward a neighbour that has a path on.
-    def ctrl_step(px, py, x, y)
+    # tester holds Ctrl to walk through it; do the same for one step, onto the neighbour with the most open floor.
+    def ctrl_step(px, py)
+      best = nil
       [4, 6, 8, 2].each do |d|
         dx, dy = DIRS[d]
         nx, ny = px + dx, py + dy
         next if !$game_map.valid?(nx, ny)
         next if $game_map.events.values.any? { |e| e.x == nx && e.y == ny && e.trigger == 1 }  # not onto a door mat
-        next if !path_dirs(x, y, nx, ny) && [nx, ny] != [x, y]
-        if !@seen["boxed#{$game_map.map_id},#{px},#{py}"]
-          shot_once("boxed#{$game_map.map_id},#{px},#{py}", "BOXED_IN_map#{$game_map.map_id}_#{px}_#{py}")
-          log("BOXED IN on map #{$game_map.map_id} (#{px},#{py}): Ctrl-walk (Debug through) one step #{d}")
-        end
-        press(B::CTRL)
-        @dir = d
-        return
+        n = reach_count(nx, ny)
+        best = [n, d] if !best || n > best[0]
       end
-      stuck("boxed in at (#{px},#{py}) with no way on")
+      return stuck("boxed in at (#{px},#{py}) with no way on") if !best || best[0] <= 1
+      if !@seen["boxed#{$game_map.map_id},#{px},#{py}"]
+        shot_once("boxed#{$game_map.map_id},#{px},#{py}", "BOXED_IN_map#{$game_map.map_id}_#{px}_#{py}")
+        log("BOXED IN on map #{$game_map.map_id} (#{px},#{py}): Ctrl-walk (Debug walk-through) one step #{best[1]}")
+      end
+      @planning = false
+      press(B::CTRL)
+      @dir = best[1]
+    end
+
+    def reach_count(sx, sy, cap = 150)
+      seen = { [sx, sy] => true }
+      queue = [[sx, sy]]
+      until queue.empty? || seen.length >= cap
+        cx, cy = queue.shift
+        DIRS.each do |d, (dx, dy)|
+          nx, ny = cx + dx, cy + dy
+          next if seen[[nx, ny]] || !$game_map.valid?(nx, ny) || !$game_player.passable?(cx, cy, d)
+          seen[[nx, ny]] = true
+          queue.push([nx, ny])
+        end
+      end
+      return seen.length
     end
 
     def debug_install

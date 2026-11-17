@@ -42,7 +42,7 @@ module PrismfallMaps
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
   MAP_FOGS = {
-    100 => ["prismfall_seamist", 0, 40, 0, 100, 2, 0],   # Ferrow's Landing
+    100 => ["prismfall_seamist", 0, 34, 0, 100, 2, 0],   # Ferrow's Landing
     109 => ["prismfall_seamist", 0, 55, 0, 100, 3, 0],   # The Dovetail - Deck
     120 => ["prismfall_spores", 0, 46, 1, 100, 1, -1],   # Briarwick
   }

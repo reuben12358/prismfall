@@ -521,7 +521,7 @@ module Prismfall
           @next_ring = @lt + Util.lerp(0.55, 0.26, u)
           @rings += 1
           pal = [pal_a, pal_b, Util.palette(:white)][@rings % 3]
-          scene.run_effect(ShockRing.new(c, pal, 70 + (@ball * 2) + (20 * u), 0.55, 0.5, true, @ball), scene.time)
+          scene.run_effect(ShockRing.new(c, pal, 70 + (@ball * 2) + (20 * u), 0.55, 0.5, true, @ball), scene.time) if !@no_rings
           scene.add_flash([255, 255, 255], 0.08, 50 * @intensity) if @strobe && @rings.even?
         end
         @acc += 60 * @intensity * dt
