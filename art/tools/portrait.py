@@ -364,7 +364,8 @@ class Bust:
         self.head()
         if s.get('under_face'):
             s['under_face'](self)
-        self.nose()
+        if not s.get('masked'):
+            self.nose()
         # hair first into a scratch mask so tears etc. know where skin shows
         if s.get('hair_front'):
             before = c.mat.copy()

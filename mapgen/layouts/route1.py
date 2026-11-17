@@ -74,14 +74,14 @@ def build():
         for x in range(26, 32):
             if (x + y) % 2 == 0 and c.g[y][x] == '.': c.obj('crop', x, y - 1, check=False)
     c.obj('scarecrow', 31, 49, check=False)
-    c.obj('haystack', 20, 49); c.obj('hay', 34, 51); c.obj('haycart', 21, 52); c.obj('hay_loose', 19, 51)
-    c.obj('kennel', 24, 46); c.obj('sack', 25, 47)
+    c.land('haystack', 20, 49); c.land('hay', 34, 51); c.land('haycart', 21, 52); c.land('hay_loose', 19, 51)
+    c.land('kennel', 24, 46); c.land('sack', 25, 47)
     # the lookout over the sea: bench, signboard, lamp
-    c.obj('bench', 33, 25); c.obj('signboard', 31, 24); c.obj('lamp_post', 35, 25)
+    c.land('bench', 33, 25); c.land('signboard', 31, 24); c.land('lamp_post', 35, 25)
     # Beacon Knoll: old waystone by the pond, a well below
-    c.obj('tablet', 12, 10); c.obj('pillar_moss', 10, 11); c.obj('pillar_moss2', 14, 10)
-    c.obj('well', 13, 39); c.obj('gravestone', 5, 13)
-    c.obj('boulder', 20, 31); c.obj('crag', 36, 3) or c.obj('crag', 33, 3)
+    c.land('tablet', 12, 10); c.land('pillar_moss', 10, 11); c.land('pillar_moss2', 14, 10)
+    c.land('well', 13, 39); c.land('gravestone', 5, 13)
+    c.land('boulder', 20, 31); c.land('crag', 36, 3) or c.land('crag', 33, 3)
     for i, (gx, gy, rx, ry) in enumerate(((36, 60, 3.2, 3.5), (7, 34, 2.5, 3.0), (33, 3, 3.5, 2.5), (15, 5, 3, 2.5), (4, 53, 2.5, 3.5), (34, 19, 2.0, 2.0), (17, 15, 2.5, 2.2), (23, 55, 2.5, 2.0), (36, 40, 2, 3))):
         c.blob(gx, gy, rx, ry, 'T', 70 + i, only='.', rough=0.7)
     for hx, hy, hw in ((18, 64, 2), (11, 63, 3), (4, 46, 3), (13, 47, 5), (26, 44, 7), (32, 22, 3), (22, 10, 3), (28, 5, 2), (14, 41, 4)):

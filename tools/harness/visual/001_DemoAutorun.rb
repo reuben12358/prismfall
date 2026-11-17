@@ -170,3 +170,15 @@ alias demo_autorun_pbCallTitle pbCallTitle unless defined?(demo_autorun_pbCallTi
 def pbCallTitle
   return Scene_DemoRun.new
 end
+
+# No audio device in the capture environment (and this engine build's audio binding rejects
+# Essentials' float positions): silence every Audio call.
+module Audio
+  class << self
+    %w[bgm_play bgm_stop bgm_fade bgs_play bgs_stop bgs_fade me_play me_stop me_fade se_play se_stop].each do |m|
+      define_method(m) { |*_args| nil }
+    end
+    def bgm_pos; 0; end
+    def bgs_pos; 0; end
+  end
+end

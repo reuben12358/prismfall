@@ -351,3 +351,5 @@ O('KESTREL', garment='coat', tall=1, shirt_v=3,
   ow_hair=dict(fringe=[1, 1, 0, 1, 2, 0, 1, 0, 1, 1], sides=2, back=0, vol=1.4, top=1, spikes=[(-3, -8), (0, -9), (3, -8), (-7, -3), (6, -3), (-7, 0), (6, 0), (6, -6), (-6, -6), (7, -1)]))
 O('LARCH', garment='coat', tall=1, shirt_v=2, hem=1,
   ow_hair=dict(fringe=[0] * 10, line=-3, sides=0, back=0, vol=0.6))
+
+import cast3  # noqa: E402,F401  (registers the rest of the cast)

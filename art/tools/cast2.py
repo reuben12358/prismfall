@@ -52,7 +52,7 @@ def wrinkles(b, expr=None, heavy=False):
     y = b.ey + b.eh + 1
     pts = [(13, y), (14, y + 1), (35, y), (22, y + 4), (21, y + 5), (31, y + 4), (32, y + 5)]
     if heavy:
-        pts += [(18, b.ey - 6), (19, b.ey - 6), (20, b.ey - 6), (27, b.ey - 7), (28, b.ey - 7), (29, b.ey - 7), (13, y - 1), (20, y + 6), (33, y + 6)]
+        pts += [(18, b.ey - 6), (19, b.ey - 6), (20, b.ey - 6), (28, b.ey - 7), (29, b.ey - 7), (20, y + 6)]
     for x, yy in pts:
         if c.ovr[yy, x, 3] == 0 and c.mat[yy, x] == c.m('skin'):
             c.px(x, yy, col)

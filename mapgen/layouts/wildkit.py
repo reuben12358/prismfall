@@ -120,6 +120,7 @@ class Wild(City):
         self.sol = [[False] * W for _ in range(H)]                    # cells blocked by explicit props
         self.must = []                                                # cells that have to stay connected on foot
         self.ledges = []
+        self.strand_ok = 2                                            # walkable cells a single prop may cut off
         self.log = []
 
     # ------------------------------------------------------------------ walkability model
@@ -176,17 +177,16 @@ class Wild(City):
         if not force and not self.can(name, x, y, on, bleed, pad): return False
         cells = obj_cells(name, bleed)
         blocked = [(x + dx, y + dy) for dx, dy, z, t in cells if solid(t) and self.inb(x + dx, y + dy)]
+        strict = check and not force and self.must and getattr(self, '_sealed', False)
+        before = len(self.flood(self.must[0])) if strict else 0
         old = [(c, self.sol[c[1]][c[0]]) for c in blocked]
         for cx, cy in blocked: self.sol[cy][cx] = True
         if check and not force and self.must:
-            before = getattr(self, '_reach', None)
-            if before is None: before = len(self.flood(self.must[0])) + sum(1 for (cx, cy), v in old if not v and self.g[cy][cx] in WALK) * 0
             bad = any(tuple(m) in blocked for m in self.must)
             if not bad:
                 seen = self.flood(self.must[0])
                 lost = sum(1 for (cx, cy), v in old if not v and self.g[cy][cx] in WALK)
-                bad = any(tuple(m) not in seen for m in self.must[1:]) or (getattr(self, '_reach', None) is not None and len(seen) < self._reach - lost - 1)
-                if not bad: self._reach = len(seen)
+                bad = any(tuple(m) not in seen for m in self.must[1:]) or (strict and len(seen) < before - lost - self.strand_ok)
             if bad:
                 for (cx, cy), v in old: self.sol[cy][cx] = v
                 return False
@@ -196,9 +196,16 @@ class Wild(City):
                 if z == 1: self.taken[y + dy][x + dx] = True
         return True
 
+    def land(self, name, x, y, on='.', bleed=False, r=3):
+        """Landmark: place at (x, y) or the nearest spot within r that fits; says so when it cannot. -> (x, y) or None"""
+        cand = sorted(((dx * dx + dy * dy, dx, dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1)))
+        for _, dx, dy in cand:
+            if self.obj(name, x + dx, y + dy, on, bleed): return (x + dx, y + dy)
+        print('  landmark %s could not be placed near %d,%d' % (name, x, y)); return None
+
     def seal(self):
         """Call once the terrain is final: from here on no prop may strand walkable ground."""
-        self._reach = len(self.flood(self.must[0]))
+        self._sealed = True
 
     def base_of(self, name):
         t = OBJ.get(name); return (t[1], t[2]) if t else (2, 3)
