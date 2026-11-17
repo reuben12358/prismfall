@@ -1,0 +1,136 @@
+[palette]
+K #1b1320  outline
+S #ffd8bc  skin
+s #e79f7e  skin shadow
+q #a8574a  skin deep / mouth line / freckle
+m #6e1c2c  mouth inside
+n #e8707a  tongue
+X #ffffff  white / catchlight / teeth
+e #2a1828  eye dark
+H #e98a4a  hair light
+h #c0532c  hair base (auburn)
+r #86302a  hair shadow
+R #521c22  hair deep
+p #c42f3a  ball red
+P #ef5a52  ball red light
+x #c9ccd8  ball grey
+b #c8963c  brass
+B #f2cf72  brass light
+o #7e5524  brass shadow
+g #a9ddd6  glass
+G #effffb  glass glint
+a #6fb0ad  glass shadow
+l #4f9c4a  leaf
+L #9fd35a  leaf light
+d #2c6438  leaf dark
+j #6d3b7e  blackberry knit
+J #9d62ad  knit light
+u #43224f  knit shadow
+t #3d4868  trouser
+T #5a6890  trouser light
+v #262c45  trouser shadow
+w #6b3c22  leather
+W #a0663a  leather light
+k #40241a  boot dark
+y #f0c43a  sock yellow
+f #e86fa0  bounsweet pink
+F #ffb0cc  bounsweet light
+c #fff4e0  label paper
+
+[layer main]
+00|..............................................................KGGGGGGGGGGGGGGGGaaGGGGGGGGaKK....
+01|............................................................KKGgggggggggggggggaacagggggggggaKK..
+02|...........................................................KGGgggggggggggggggaaPPPgggggggggggaK.
+03|.........................................................KKGggggggggggggggggaacPppGgggggggggggaK
+04|........................................................KaaaaaaaaaaaaaaaaaaaaccPppaaaaaaaaaaaaaa
+05|.......................................................KBBBBBBBBooooooroooooocccBBBBBBBBBBBBBBBo
+06|......................................................KBbbbbbbbooHHHHHhhrrrrcccBbbbbbbbbbbbbbbbo
+07|........................................K...........K.KBboooooooHhhhhhhrrrrcccooooooooooooooobbo
+08|.....................................KKKrKKK.....KKKrKKoboGGaaHHhhhhhhhrrrcccrraGGGGGGGGGGGGabbo
+09|....................................KHHHhhrrK...KHHHhhrrooGaaHhhhhhhhhrrrcccHhrragggggggggggaBbo
+10|...................................KHhhhhhhrrK.KHhhhhhhrroGaHhhhhhhhhrrrrcccHhhrrgggggggggggaBbo
+11|..................................KHhhhhhhhhrrKHhhhhhhhhrraaHhhhhhhhrrrrcccHhhhrragggggggggaaBbo
+12|..................................KHhhhhhhhhrrKHhhhhhhhhrraHhhhhhhhhrrrcccHhhhhhrraGgggggaaadBbo
+13|..............................K...KHhhhhhhhhrrKHhhhhhhhhhhhhhhhhhhhrrrcccHhhhhhhhrrgggggaaLddBbo
+14|...........................KKKrKKKrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrcccHhhhhhhhrrGggggaLlddBbo
+15|..........................KHHHhhrrKhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrcccHhhhhhhhhrrGGggaaLlddBbo
+16|.........................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrcccHhhhhhhhhhrrGgggadllddBbo
+17|........................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrcccHhhhhhhhhhhrraggggadlddBbo
+18|........................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrccHhhhhhhhhhhhrrrggggaddddBbo
+19|........................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrcHhhhhhhhhhhhrrGgggggadddBbo
+20|.......................KrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrGgggggggadBbo
+21|........................KhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrGgaagggggaBbo
+22|........................KrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrraaadaaaggaBbo
+23|........................KrrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrLLLllddagaBbo
+24|.........................KrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrLllllllddaaBbo
+25|.........................KKhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrLllllllllddaBbo
+26|........................KHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrLllllllllddaBbo
+27|......................K.KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrraLllllllllddaBbo
+28|...................KKKrKKHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrradllllllllldddBbo
+29|..................KHHHhhHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrrrrrrrGGgalllllllllddaBbo
+30|.................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrrrrrrrrGgggadllllllldddaBbo
+31|................KHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhrrdrddBBoGgggaddlllllddddaBbo
+32|................KHhhhhhhhhhhhhhhrrrhhhhhhhhhrrrhhhhhhhhrrrrhhhhhhhhhrrlddBboGggggadddddddddGaBbo
+33|................KHhhhhhhhhhhhhhrrrrrhhhhhhhrrrrrhhhhhhrrrrrrrhhhhhhhrrdddBboGgggggadddddddGgaBbo
+34|...............KrhhhhhhhhrrrhrrrrrsrrrhhhrrrrrsrrrhhhrrrrSsrrhhhhhhhrrdddBboGgggggggGadGGGggaBbo
+35|................KhhhhhhhhrrrrrrrrSSssrrhrrrrrSSsrrrhrrrrSSsSsrhhhhhhhhrraBboGgggggggggggggggaBbo
+36|................KrhhhhhhhrrsrrrSSSSSSsrrrrrSSSSSSsrrrrrSSSSssrhhhhhhhhhrroboaaaaaaaaaaaaaaaaaBbo
+37|................KrrhhhhhhrrsrrRRRRRSSSsrrrRRRRRRSSsrrrSSSSSSSshhhhhhhhhhrrbbbBBBBBBBBBBBBBBBBbbo
+38|...........KK....KrrrrhhhrrSSRSSSSSRSSSSSRSSSSSSRSSSSSSSSSSSSsHhhhhhhhhhrrBbbbbbbbbbbbbbbbbbbbbo
+39|..........KXXK....KrrrhhhrrSSssSSSSSSSSSSsSSSSSSSSSSSsSSSSSSSsHhhhhhhhhhrrooooooooooooooooooobbo
+40|.........KSSSsK....KKKhhhrrSSSeeeeeSSSSSSeeeeeeeSSSSSSSSSSSSssHhhXhhhhhhrrroLLLLLLddddaGGGGGabbo
+41|........KsSSSsK......KHhhrrSSeXXddeSSSSSeXXXddddeSSSSSSSSSSSssHhXgXhhhhhrrBoLllllldddddgggggaBbo
+42|.........KSSSsK...KKKHhhhrrSSeXXddeSSSSSeXXdddddeSSSSSSSSSSSssrhXaXhhhhrrrBoLlllllddKddaggggaBbo
+43|.........KSSSsK..KHHHhhhhrrSSeddddeSSSSSedddLdddeSSSSSSSSSSSssrhhXhhhhrrrrBoLllllldddKddggggaBbo
+44|.........KSSSsK.KHhhhhhhhrrsSeddLdeSSSSSeddddLddeSSSSSSSSSSSsSshhhhhhrrrrBboLllllldddKKdGgggaBbo
+45|.........KSSSsKKHhhhhhhhhhrrSedddddeSSSSedddddddeSSSSSSSSSSsSSsHhhhhhrrraBboLlllldddGddKagggaBbo
+46|.........KSSSsKKHhhhhhhhhhrrSSeeeeeSSSSSSeeeeeeeSSSSSSSSSSSsSSsHhhhhhrradBboLlllddddGddKKaggaBbo
+47|.........KSSSsKKHhhhhhhhhhrrSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSsSSsHhhhhhrraaBboLllddddGddGdaKggaBbo
+48|.........KSSSsKrhhhhhhhhhhrrSnsnqSqSsSSSSsSqSqnsnSSSSSSSSSSsSSsHhhhhrrrdaBboLlldddGddGddGgggaBbo
+49|.........KSSSsKKhhhhhhhhhhrrSSsSqSSsSSSSSqSqSSsSSSSSSSSSSSSsSssHhhhhrrrddBboLldddGddGdddGgggaBbo
+50|.........KSSSsKKrhhhhhhhhhrrSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSsSsHhhhhhrrLddBboLldddGddGddGggggaBbo
+51|.........KSSSsKKrrhhhhhhhhrrSSSSSqmmmmmmmmqSSSSSSSSSSSSSSSSsSsHhhhhhrrdddBbodlddGddGdddGgaagaBbo
+52|.........KSSSSsKKrrrrrrrhhrrSSSSqmXXXXXXXXmqSSSSSSSSSSSSSSSsssHhhhhhrrdddBboddddddGdddaaaadaaBbo
+53|.........KSSSSsK.KrrrrrrhhrrSSSSqmmmmmmmmmmqSSSSSSSSSSSSSSSssHhhhhhhhrrddBboadddddddGaaLLLlddBbo
+54|.........KSSSSSsKKKKKrKKhhrrSSSSqmmnnnnnnmmqSSSSSSSSSSSSSSsSsHhhhhhhhhrrdBboGgGadGGGaaLllllddBbo
+55|.........KsSSSSSSSsK.KhHhhrrsSSSSqmnnnnnnmqSSSSSSSSSSSSSSSsSsHhhhhhhhhrrdBboGgggggggaLlllllddBbo
+56|..........KSSSSSSSSsKHhhhhhrrSSSSSqmmmmmmqSSSSSSSSSSSSSSSSsssHhhhhhhhhrraBboGgggggggaLlllllddBbo
+57|.........KSSSSSSSSssHhhhhhhrrsSSSSSqqqqqqSSSSSSSSSSSSSSSSSssHhhhhhhhhrrraBboGggggggaaLlllllddBbo
+58|.........KSSSSSSSSsHhhhhhhhhrrSSSSSSSSSSSSSSSSSSSSSSSSSSSSssHhhhhhhhrrrraBboGggggggadllllllddBbo
+59|.........KSSSSSSSSsHhhhhhhhhrrsSSSSSSSSSSSSSSSSSSSSSSSSSSssHhhhhhhhrrrrGaBboGgggggggallllllddBbo
+60|.........KSSSSSSSSsHhhhhhhhhhrrsSSSSSSSSSSSSSSSSSSSSSSSSssHhhhrrrrrrrrGgaBboGgggggggadlllllddBbo
+61|.........KsSSSSSSSsrhhhhhhhrrrrrSSSSSSSSSSSSSSSSSSSSSSSssHhhhhrrrrrrrGggaBboGgggggggaddllllddBbo
+62|..........KSSSSSSSsrrhhhhhrrrrrrsSSSSSSSSSSSSSSSSSSSSSssHhhhhhrraGGGGgggaBboGggggggggadddddddBbo
+63|..........KSSSSSSSsKrrhhhrrrrKKrrSSSSSSSSSSSSSSSSSSSSssHhhhhhhhrrgggggggaBboGgggggggggaddddddBbo
+64|..........KSSSSSSSsKKrrrrrrrK..KrsSSSSSSSSSSSSSSSSSSsSsHhhhhhhhrrGggggggaBboGgggggggggggGadGaBbo
+65|.........KuSSSSSSSsK.KrrrrrK....KrssSSSSSSSSSSSSSSSsSSsHhhhhhhhrraggggggaBboGgggggggggggggggaBbo
+66|.........KuSSSSSSSsuK.KKKKK......KKrssSSSSSSSSSSSSsSSSsrhhhhhhhrrrggggggaBboGgggggggggggggggaBbo
+67|.........KuSSSSSSSsuK..............KKrssSSSSSSSSSSSSSSsrhhhhhhhrrGggggggaBboGgggggggggggggggaBbo
+68|.........KuSSSSSSSsuK................KKKssSSSSSSSSSSSSsorhhhhhrrrGggggggaBboGgggggggggggggggaBbo
+69|.........KuSSSSSSSSsK...................KKSSsssssssssSsorrrrrrrrraaaaaaaaBboaaaaaaaaaaaaaaaaaBbo
+70|.........KuSSSSSSSSsK....................KSSSSSSSSSSSSsBorrrrrrrKKKKKKKKKBboKKKKKKKKKKKKKKKKKBbo
+71|.........KuSSSSSSSssuK..............KKKKKKSSSSSSSSSSSSsooooorBBBBooBBBBBBbbbbBBBBBBBBBBBBBBBBbbo
+72|.........KusSSSSSSsuuK.............KJJJJJJSSSSSSSSSSSSsJJJJbbbbbookobbbbbbbbbbbbbbbbbbbbbbbbbbbo
+73|.........KuuSSSSSSsuuK......KKKKKKKKJJJJJJsssssssssssssJJJJooooooWwkoooooooooooooooooooooooooooo
+74|.........KuusSSSSssuuK....KKJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJjJJuuWwwwkKKKKKKKKKKKKKKKKKKKKKKKKKKK
+75|.........KJuusssssJuuK..KKJJjjjjjjjjjJJJJJJJJJJJJJJJJJJJJJjjjjuukwwwkK..........................
+76|.........KJjjjJJJJjuuK.KJJjjjjjjjjjjjJJJJJJJJJJJJJJJJJJJJJjjjjjuuwwwwkK.........................
+77|.........KJjjjjjjjjjuuKJjjjjjjjjjjjjjJJJJJJJJJJJJJJJJJJJJJjjjjjuuWwwwkuKK.......................
+78|.........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjJJJJJJJJJJJJJJJJJJJjjjjjjuukwwwkuuuKK.....................
+79|.........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjJJJJJJJJJJJJJJJJJJJjjjjjjjuuwwwwkujuuKK...................
+80|.........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuukwwwkujjjuuKK.................
+81|.........KujjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuwwwwkjjjjjuuKK...............
+82|.........KujjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuWwwwkuujjjjjuuK..............
+83|..........KjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuukkkkkuujjjjjuuK..............
+84|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuBBBBBojjjjjjuuK.............
+85|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuBbbbboJjjjjjuuK.............
+86|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuBbbbboJjjjjjjuuK............
+87|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuBbbbboJjjjjjjuuK............
+88|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuBbbbboujjjjjjjuuK...........
+89|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuooooooujjjjjjjuuK...........
+90|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuWWWWkujjjjjjuuK...........
+91|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuukwwwkujjjjjjjuuK..........
+92|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuwwwwkjjjjjjjuuK..........
+93|..........KJjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjuuWwwwkujjjjjjjuuK.........
+94|..........KuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuukwwwkuuuuuuuuuuK.........
+95|.........KuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuukkkkkuuuuuuuuuuK........

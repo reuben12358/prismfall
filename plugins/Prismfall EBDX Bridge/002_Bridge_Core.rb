@@ -145,12 +145,27 @@ module PrismfallEBDX
     end
     if art
       data = { "backdrop" => art }
+      # HD art: <art>_hd.png is the same room painted at ROOM_SCALE resolution (864x693). It is
+      # drawn as a flat EBDX layer at 1/ROOM_SCALE zoom, so the default camera shows it 1:1.
+      if HD_ART && pbResolveBitmap(EBDX_BATTLEBG + art + "_hd")
+        inv = 1.0 / room_scale
+        data["img000"] = { :bitmap => EBDX_BATTLEBG + art + "_hd", :flat => true, :x => 0, :y => 0,
+                           :ox => 0, :oy => 0, :zoom_x => inv, :zoom_y => inv, :z => 0 }
+      end
       data["base"] = bd if pbResolveBitmap(EBDX_BASE + bd)
       if pbResolveBitmap(EBDX_ELEMENTS + bd + "_fog")
         data["img090"] = { :bitmap => bd + "_fog", :scrolling => true, :speed => 0.5,
                            :oy => 0, :z => 30, :flat => true }
       end
-      (profile[:art_extras] || {}).each { |k, v| data[k] = deep_dup(v) }
+      (profile[:art_extras] || {}).each do |k, v|
+        # Skip (and log) EBDX image layers whose graphic is missing, so a partial art drop never crashes.
+        if v.is_a?(Hash) && v[:bitmap] && !pbResolveBitmap(v[:bitmap].to_s) &&
+           !pbResolveBitmap(EBDX_ELEMENTS + v[:bitmap].to_s)
+          log("Missing element '#{v[:bitmap]}' for :#{field_id} (#{k}); layer skipped.")
+          next
+        end
+        data[k] = deep_dup(v)
+      end
       data["prismfall_tone"] = profile[:art_tone] if profile[:art_tone]
     else
       data = fallback_room(profile[:fallback])
@@ -160,8 +175,17 @@ module PrismfallEBDX
     end
     data["outdoor"] = true if outdoor
     data["prismfall_fx"] = deep_dup(profile[:fx] || []) if AMBIENT_FX
+    # Animated art layers only belong to the field's own art (the fallback room has none of it).
+    if art && AMBIENT_LAYERS
+      layers = (profile[:layers] || []).select { |l| l[:bitmap].nil? || pbResolveBitmap(EBDX_ELEMENTS + l[:bitmap].to_s) }
+      data["prismfall_layers"] = deep_dup(layers)
+    end
     data["prismfall_field"] = field_id
     return data
+  end
+
+  def room_scale
+    return (defined?(EliteBattle::ROOM_SCALE) ? EliteBattle::ROOM_SCALE : 2.25).to_f
   end
 
   def fallback_room(fallback)
@@ -221,6 +245,16 @@ module PrismfallEBDX
       if size >= 3
         [[0, 0], [size - 1, 0], [0, size - 1], [size - 1, size - 1]].each do |p|
           bmp.set_pixel(p[0], p[1], white.call(0))
+        end
+      end
+    when :puff   # soft round cloud (steam, smoke, spores): radial alpha falloff
+      bmp = Bitmap.new(size, size)
+      r = size / 2.0
+      size.times do |yy|
+        size.times do |xx|
+          d = Math.sqrt(((xx + 0.5 - r)**2) + ((yy + 0.5 - r)**2)) / r
+          next if d >= 1
+          bmp.set_pixel(xx, yy, white.call((255 * ((1 - d)**1.5)).round))
         end
       end
     when :spark  # four-point star

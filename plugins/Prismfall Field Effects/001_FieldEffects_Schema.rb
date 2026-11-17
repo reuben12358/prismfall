@@ -6,7 +6,7 @@
 # The full DSL reference lives in design/FIELD_API.md.
 #===============================================================================
 module FieldEffects
-  VERSION = "1.0.0"
+  VERSION = "1.1.0"
 
   # The "no field" value of battle.field_effect.
   NONE = :NONE
@@ -14,6 +14,41 @@ module FieldEffects
   # Default field per map: FieldEffects::MAP_FIELDS[map_id] = :FIELD_ID
   # (LOCKED integration contract). Other plugins/files may add entries.
   MAP_FIELDS = {} unless const_defined?(:MAP_FIELDS, false)
+  # A value of :NONE (or "none") marks a map as deliberately field-free (Poké Centers,
+  # tutorial rooms); a missing entry falls back to the rules below.
+
+  #-----------------------------------------------------------------------------
+  # v1.1 "every battle has a field" fallbacks (see design/FIELD_DEFAULTS.yaml)
+  #-----------------------------------------------------------------------------
+  # Wild battles only: per-map field for wild encounters (overrides MAP_FIELDS).
+  MAP_WILD_FIELDS = {} unless const_defined?(:MAP_WILD_FIELDS, false)
+  # Wild battles only: by encounter type. Keys are GameData::EncounterType IDs
+  # (:Land, :Cave, :Water, :OldRod...) or their :type (:land, :cave, :water,
+  # :fishing, :contest). ID entries win over :type entries. Applied unless the
+  # map's own field is listed in ENCOUNTER_KEEP_FIELDS for that key.
+  ENCOUNTER_FIELDS = {
+    :water   => :WATER_SURFACE,   # surfing
+    :fishing => :WATER_SURFACE,   # rods
+    :contest => :MEADOW           # Bug-Catching-style contests
+  } unless const_defined?(:ENCOUNTER_FIELDS, false)
+  # Fields that already ARE the right place for that encounter (no override).
+  ENCOUNTER_KEEP_FIELDS = {
+    :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :STEAM_CALDERA, :BLEED, :PRISM_ARENA],
+    :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :STEAM_CALDERA, :FROZEN_LAKE, :BEACH, :BLEED]
+  } unless const_defined?(:ENCOUNTER_KEEP_FIELDS, false)
+  # Any battle while diving is underwater; while surfing, on the water.
+  DIVING_FIELD  = :UNDERWATER
+  SURFING_FIELD = :WATER_SURFACE
+  # Last resort for maps with no MAP_FIELDS entry: the battle environment
+  # (map metadata BattleEnvironment / terrain tag) decides. nil = no field.
+  ENVIRONMENT_FIELDS = {
+    :Grass => :MEADOW, :TallGrass => :MEADOW, :Forest => :SILKWOOD, :ForestGrass => :SILKWOOD,
+    :MovingWater => :WATER_SURFACE, :StillWater => :WATER_SURFACE, :Puddle => :MEADOW,
+    :Underwater => :UNDERWATER, :Cave => :CAVE, :Rock => :MOUNTAIN, :Sand => :BEACH,
+    :Snow => :SNOWY_MOUNTAIN, :Ice => :FROZEN_LAKE, :Volcano => :VOLCANIC,
+    :Graveyard => :HOLLOW_CATHEDRAL, :Sky => :STORMFRONT, :Space => :MINDSCAPE,
+    :UltraSpace => :INVERSE
+  } unless const_defined?(:ENVIRONMENT_FIELDS, false)
 
   # Every field ID named in design/SPINE.md (LOCKED). Used by the validator to
   # check transition targets that may not be implemented yet.
@@ -25,7 +60,16 @@ module FieldEffects
     :ASHEN_WASTE, :DARK_CRYSTAL, :SCRAPYARD, :INVERSE, :BLEED, :PRISM_ARENA
   ].freeze
 
+  # Fields added after the SPINE roster (Revision 10). Valid transition targets
+  # and listed after the roster in Field Notes.
+  EXTRA_FIELDS = [:STEAM_CALDERA, :WILDFIRE, :MEADOW].freeze
+  KNOWN_FIELDS = (ROSTER + EXTRA_FIELDS).freeze
+
   SEED_ITEMS = [:ELEMENTALSEED, :MAGICALSEED, :TELLURICSEED, :SYNTHETICSEED].freeze
+  # Field families (Reborn-style): each family reacts to "its" seed.
+  FAMILIES     = [:elemental, :telluric, :synthetic, :magical].freeze
+  FAMILY_SEEDS = { :elemental => :ELEMENTALSEED, :telluric => :TELLURICSEED,
+                   :synthetic => :SYNTHETICSEED, :magical => :MAGICALSEED }.freeze
 
   #-----------------------------------------------------------------------------
   # Enumerations
@@ -44,7 +88,26 @@ module FieldEffects
   # Named battler effects usable in `effects:` (on-entry, end-of-round, seeds).
   BATTLER_EFFECTS = [:ingrain, :aqua_ring, :magnet_rise, :focus_energy, :laser_focus,
                      :charge, :defense_curl, :minimize, :smack_down, :telekinesis,
-                     :flash_fire, :stockpile].freeze
+                     :flash_fire, :stockpile,
+                     # v1.1: side effects on the battler's own side ...
+                     :tailwind, :safeguard, :mist, :lucky_chant, :reflect, :light_screen,
+                     # ... battler effects ...
+                     :wish, :taunt,
+                     # ... and hazards laid on the OPPOSING side
+                     :stealth_rock, :spikes, :toxic_spikes, :sticky_web].freeze
+  # Abilities :activate_abilities can switch on (they act as if their weather /
+  # terrain / HP / status trigger were met). See FIELD_API.md 4.7.
+  ACTIVATABLE_ABILITIES = [:BLAZE, :OVERGROW, :TORRENT, :SWARM,
+                           :SWIFTSWIM, :CHLOROPHYLL, :SANDRUSH, :SLUSHRUSH, :SURGESURFER, :QUICKFEET,
+                           :SANDVEIL, :SNOWCLOAK, :SANDFORCE, :SOLARPOWER, :FLOWERGIFT,
+                           :TOXICBOOST, :FLAREBOOST, :GUTS, :MARVELSCALE, :GRASSPELT,
+                           :RAINDISH, :ICEBODY, :DRYSKIN, :HYDRATION, :LEAFGUARD].freeze
+  # Moves whose lingering effect :effect_durations can extend (see 4.10).
+  DURATION_MOVES = [:TAILWIND, :REFLECT, :LIGHTSCREEN, :AURORAVEIL, :SAFEGUARD, :MIST, :LUCKYCHANT,
+                    :TRICKROOM, :MAGICROOM, :WONDERROOM, :GRAVITY, :MUDSPORT, :WATERSPORT,
+                    :MAGNETRISE, :TELEKINESIS, :TAUNT, :ENCORE, :HEALBLOCK, :EMBARGO,
+                    :SUNNYDAY, :RAINDANCE, :SANDSTORM, :HAIL, :SNOWSCAPE,
+                    :ELECTRICTERRAIN, :GRASSYTERRAIN, :MISTYTERRAIN, :PSYCHICTERRAIN].freeze
   BORROW_ORDERS = [:random, :sequential].freeze
   APPLY_TO      = [:target, :user].freeze
 
@@ -54,21 +117,23 @@ module FieldEffects
   # Move matcher: every key present must match (AND). Array values match if ANY
   # element matches (OR).
   MOVE_MATCH_KEYS = [:moves, :not_moves, :types, :not_types, :flags, :category,
-                     :function_codes, :user, :target, :condition].freeze
+                     :function_codes, :user, :target, :condition,
+                     :in_weather, :on_terrain].freeze
   # Battler matcher (used by user:/target:/battlers:).
   BATTLER_MATCH_KEYS = [:types, :not_types, :abilities, :not_abilities, :items,
-                        :not_items, :grounded, :status, :condition].freeze
+                        :not_items, :grounded, :status, :condition,
+                        :hp_below, :hp_above, :in_weather, :on_terrain].freeze
   # Things that happen to one battler (end_of_round, on_entry, seed).
   BATTLER_EFFECT_KEYS = [:battlers, :chance, :damage, :damage_type, :heal, :status,
                          :confuse, :cure_status, :stats, :effects, :message,
-                         :animation, :proc].freeze
+                         :animation, :proc, :add_type].freeze
 
   #-----------------------------------------------------------------------------
   # Rule lists: top-level key => allowed keys inside each rule Hash
   #-----------------------------------------------------------------------------
   RULE_KEYS = {
     :damage_mods        => MOVE_MATCH_KEYS + [:mult, :attack_mult, :defense_mult, :final_mult, :message],
-    :effectiveness_mods => [:attack, :defend, :moves, :set, :mult],
+    :effectiveness_mods => [:attack, :defend, :moves, :set, :mult, :user, :target],
     :type_changes       => MOVE_MATCH_KEYS + [:to, :message],
     :extra_types        => MOVE_MATCH_KEYS + [:add, :message],
     :accuracy_mods      => MOVE_MATCH_KEYS + [:mult, :evasion_mult, :set, :always_hit],
@@ -86,8 +151,9 @@ module FieldEffects
     :speed_mods         => [:battlers, :mult],
     :transitions        => MOVE_MATCH_KEYS + [:to, :stage, :stage_delta, :message, :uses,
                                               :progress_message, :weather, :terrain, :turns,
-                                              :check, :even_if_failed, :id, :rewind],
-    :seed               => BATTLER_EFFECT_KEYS + [:item]
+                                              :check, :even_if_failed, :id, :rewind, :boost],
+    :seed               => BATTLER_EFFECT_KEYS + [:item],
+    :status_immunity    => [:battlers, :status, :message]
   }.freeze
 
   WEATHER_SPEC_KEYS = [:block, :block_message, :transform, :extend].freeze
@@ -116,7 +182,10 @@ module FieldEffects
     :terrain           => :terrain_spec,
     :borrow            => :borrow_spec,
     :hooks             => :hooks,
-    :stages            => :stages
+    :stages            => :stages,
+    :family            => :family,            # v1.1 (:elemental/:telluric/:synthetic/:magical)
+    :activate_abilities => :ability_list,     # v1.1
+    :effect_durations  => :duration_hash      # v1.1 { MOVE => extra turns }
   }.merge(RULE_KEYS.keys.map { |k| [k, :rules] }.to_h).freeze
 
   REQUIRED_KEYS = [:name, :backdrop, :intro_message].freeze
@@ -127,7 +196,7 @@ module FieldEffects
                      :accuracy_mods, :priority_mods, :crit_mods, :added_effects,
                      :effect_chance_mods, :fixed_damage_mods, :weather_as, :move_stat_boosts, :move_fails, :end_of_round,
                      :on_entry, :speed_mods, :negated_abilities, :weather, :terrain,
-                     :hooks].freeze
+                     :hooks, :activate_abilities, :status_immunity, :effect_durations].freeze
   # Hooks a borrowing field copies (lifecycle hooks on_start/on_end are NOT copied).
   BORROWABLE_HOOKS = [:on_entry, :end_of_round, :base_type, :damage, :effectiveness,
                       :accuracy, :after_move, :block_move, :speed, :ai_score].freeze

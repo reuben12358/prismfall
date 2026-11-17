@@ -29,9 +29,22 @@ module FieldEffects
       entry[:count] += 1
     end
 
-    # Display order: SPINE roster order, then any other registered fields.
+    # Display order: SPINE roster, then the Revision 10 fields, then any others.
     def self.ids
-      return ROSTER.select { |i| FieldEffects.exists?(i) } + (FieldEffects.ids - ROSTER)
+      known = KNOWN_FIELDS.select { |i| FieldEffects.exists?(i) }
+      return known + (FieldEffects.ids - known)
+    end
+
+    FAMILY_NAMES = { :elemental => "Elemental", :telluric => "Telluric",
+                     :synthetic => "Synthetic", :magical => "Magical" }.freeze
+
+    # "Elemental field - reacts to the Elemental Seed." (nil if no :family)
+    def self.family_line(id)
+      fam = FieldEffects.get(id)&.[](:family)
+      return nil if !fam || !FAMILY_NAMES[fam]
+      seed = FAMILY_SEEDS[fam]
+      seed_name = (seed && GameData::Item.exists?(seed)) ? GameData::Item.get(seed).name : seed.to_s
+      return _INTL("{1} field - reacts to the {2}.", _INTL(FAMILY_NAMES[fam]), seed_name)
     end
 
     def self.name(klass, id)
@@ -179,6 +192,8 @@ class PrismfallFieldNotes_Scene
       textpos.push([_INTL("Battled here: {1}", FieldEffects::FieldNotes.count(id)), w + 12, 40, :right,
                     DIM_COLOR, SHADOW_COLOR])
       lines.concat(wrap(bitmap, _INTL(defn[:description]), w)) if defn[:description]
+      fam = FieldEffects::FieldNotes.family_line(id)
+      lines.concat(wrap(bitmap, fam, w)) if fam
       lines.push("")
       FieldEffects::FieldNotes.effect_lines(id).each { |l| lines.concat(wrap(bitmap, "- " + l, w)) }
     end

@@ -1,0 +1,134 @@
+# The Rimewood (562). WRITTEN BY layouts/rimewood.py - edit that script.
+id: 562
+name: The Rimewood
+parent: 0
+rubric: true
+yards_ok: true
+biome: forest
+bgm: Natural Park
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 7, 20]
+  BattleBack: snow
+  Weather: [Snow, 30]
+tone: [-10, -4, 14, 16]
+fog: {name: prismfall_spores, opacity: 30, blend: 1, zoom: 100, sx: 1, sy: 1}
+connections:
+- {dir: N, offset: 12, to: 561, to_offset: 10}
+raw: data/raw/562.npy
+tileset: 52
+events:
+- type: trainer
+  at: [14, 48]
+  sight: 4
+  dir: right
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Pell]
+  intro: Bugs sleep in the ice here! I'm waking them up!
+  after: They were NOT happy to be woken.
+- type: trainer
+  at: [31, 39]
+  sight: 4
+  dir: left
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [POKEMONRANGER_F, Orla]
+  intro: Elowen forester. These woods are frozen, not dead. Prove you respect that.
+  after: You'll do. Mind the silk curtains, they cut.
+- type: trainer
+  at: [10, 26]
+  sight: 4
+  dir: down
+  sprite: trainer_HIKER
+  trainer: [HIKER, Ulf]
+  intro: Trapping season! You look like you'd fit in a trap.
+  after: Ha! No, no traps for you.
+- type: trainer
+  at: [36, 20]
+  sight: 4
+  dir: left
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Rook]
+  intro: I've camped here three nights. I can't feel my ears!
+  after: '...Is that what the aurora''s for?'
+- type: trainer
+  at: [22, 8]
+  sight: 4
+  dir: down
+  sprite: trainer_TWINS
+  trainer: [TWINS, Ana & Ida]
+  intro: Two of us! Two Pokémon! Two kingdoms! Two-on-two!
+  after: We split the loss. Half each.
+  rules: [setBattleRule("double")]
+- type: event
+  name: Lost trapper child
+  at: [40, 44]
+  pages:
+  - graphic: {sprite: NPC 02, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - I'm not LOST. I'm... scouting. In circles.
+    - '...Can you tell Frostwick I''m by the big tree? Any big tree. They''re all big.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 02, dir: down}
+    trigger: action
+    move: fixed
+    commands: [Still scouting! Still circles!]
+- type: event
+  name: Trapper
+  at: [8, 41]
+  pages:
+  - graphic: {sprite: NPC 22, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - Sit by the lean-to. Warm your Pokémon.
+    - {heal: true}
+    - There. Back to it.
+- type: sign
+  name: Frost Loom
+  at: [33, 10]
+  text: 'THE FROST LOOM
+
+    A giant tree where drifting silk froze mid-weave. The warp still hums in a wind.'
+  post: false
+- type: sign
+  name: Fallen giant
+  at: [24, 21]
+  text: A fallen giant spans the ravine. Its bark is glazed in clear ice. Watch your step.
+  post: false
+- type: item
+  at: [43, 47]
+  item: ICEHEAL
+- type: item
+  at: [8, 30]
+  item: GREATBALL
+- type: item
+  at: [37, 7]
+  item: TM07
+  hidden: true
+- type: event
+  name: Applewood log
+  at: [35, 9]
+  pages:
+  - graphic: {sprite: Object ball, dir: down}
+    trigger: action
+    commands:
+    - A seasoned applewood log, wrapped in sacking. Someone in Frostwick will want this.
+    - {script: 'pfm_item(:APPLEWOODLOG, 1, "Applewood Log")'}
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: '', dir: down}
+    trigger: action
+    commands: []
+- type: cut_tree
+  name: Frosted sapling
+  at: [46, 24]
+- type: warp
+  name: To Rimewood Glade
+  at: [47, 24]
+  link: RIME_GLADE
+  arrive: [45, 24, left]
+  se: Door exit

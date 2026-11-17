@@ -155,6 +155,7 @@ def build(preview=None):
     m.fence(9, 18, 31, gaps=((11, 11),))                       # the inn's front garden
     m.fence(45, 51, 31, gaps=((48, 48),)); m.fence(54, 61, 31, gaps=((58, 58),))
     m.beds()
+    m.greenfill(3)
     # ---------------------------------------------------------------- paint
     m.paint()
     pier_paint(m)

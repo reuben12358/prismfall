@@ -173,3 +173,90 @@ Battle::AI::Handlers::GeneralMoveScore.add(:prismfall_field_effects,
     next score
   }
 )
+
+#===============================================================================
+# v1.1 Field disruption (Reborn's getFieldDisruptScore idea, data-driven):
+# a move that advances or completes a transition is scored by how much better
+# (or worse) the destination field is for the AI's side than the current one.
+#===============================================================================
+module FieldEffects
+  module AIField
+    module_function
+
+    # Rough favourability of a field (stage) for one battler: its STAB types'
+    # field multipliers, field speed rules, and end-of-round damage/healing.
+    def battler_affinity(battle, defn, b)
+      return 0.0 if !defn || !b || b.fainted?
+      v = 0.0
+      types = b.pbTypes(true)
+      if defn[:type_mods] && !types.empty?
+        v += types.sum { |t| (defn[:type_mods][t] || 1.0) - 1.0 } / types.length
+      end
+      Array(defn[:speed_mods]).each do |r|
+        next if !FieldEffects::AIField.static_match?(battle, r[:battlers], b)
+        v += (r[:mult] - 1.0) * 0.5
+      end
+      Array(defn[:end_of_round]).each do |r|
+        next if !FieldEffects::AIField.static_match?(battle, r[:battlers], b)
+        chance = (r[:chance] || 100) / 100.0
+        v -= r[:damage].to_f * 4 * chance if r[:damage]
+        v += r[:heal].to_f * 4 * chance if r[:heal]
+      end
+      if defn[:activate_abilities]&.include?(b.ability_id)
+        v += 0.25
+      end
+      return v
+    end
+
+    # Battler matcher check without procs (other fields' procs may assume their
+    # own state). Rules with a :condition count as not matching.
+    def static_match?(battle, spec, b)
+      return true if !spec
+      return false if spec[:condition]
+      return false if spec[:types] && spec[:types].none? { |t| b.pbHasType?(t) }
+      return false if spec[:not_types]&.any? { |t| b.pbHasType?(t) }
+      return false if spec[:abilities] && !b.hasActiveAbility?(spec[:abilities])
+      return false if spec[:not_abilities] && b.hasActiveAbility?(spec[:not_abilities])
+      return false if spec[:items] && !b.hasActiveItem?(spec[:items])
+      return false if spec[:not_items] && b.hasActiveItem?(spec[:not_items])
+      return false if spec.key?(:grounded) && spec[:grounded] == b.airborne?
+      return false if spec[:status] && !spec[:status].include?(b.status)
+      return true
+    end
+
+    # Favourability of field `id` (stage) for user's side minus the foe side.
+    def field_value(battle, id, stage, user)
+      return 0.0 if id.nil? || id == FieldEffects::NONE
+      defn = FieldEffects.definition_for(id, stage || 1)
+      return 0.0 if !defn
+      v = 0.0
+      battle.allBattlers.each do |b|
+        next if b.fainted?
+        a = battler_affinity(battle, defn, b)
+        v += (b.opposes?(user)) ? -a : a
+      end
+      return v
+    end
+
+    def score_change(battle, user, move, type)
+      info = FieldEffects.transition_this_move_advances(battle, user, move, type)
+      return 0 if !info
+      count, uses, dest = info
+      dest_id, dest_stage = dest
+      return 0 if dest_id.nil?
+      now = field_value(battle, FieldEffects.current(battle), FieldEffects.stage(battle), user)
+      after = field_value(battle, dest_id, dest_stage, user)
+      weight = (count + 1 >= uses) ? 1.0 : 0.5 / (uses - count)
+      return ((after - now) * 25 * weight).round.clamp(-25, 25)
+    end
+  end
+end
+
+Battle::AI::Handlers::GeneralMoveScore.add(:prismfall_field_transitions,
+  proc { |score, move, user, ai, battle|
+    next score if !FieldEffects.active?(battle) || !ai.trainer.medium_skill?
+    delta = FieldEffects::AIField.score_change(battle, user.battler, move.move, move.rough_type)
+    PBDebug.log_score_change(delta, "field transition") if delta != 0
+    next score + delta
+  }
+)

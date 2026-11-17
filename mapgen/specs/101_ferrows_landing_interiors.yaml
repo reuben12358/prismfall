@@ -4,7 +4,7 @@ name: Ferrow's Landing Pokémon Center
 parent: 100
 bgm: Poke Center
 metadata:
-  HealingSpot: [100, 19, 27]
+  HealingSpot: [100, 24, 15]
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
 biome: interior

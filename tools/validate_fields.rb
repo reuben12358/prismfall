@@ -140,7 +140,7 @@ def check_field_target(where, v, all_ids)
   return if v.is_a?(Proc) || v == :NONE
   if !v.is_a?(Symbol)
     err(where, "transition target must be a field Symbol, :NONE or a Proc")
-  elsif !FieldEffects::ROSTER.include?(v) && !all_ids.include?(v)
+  elsif !FieldEffects::KNOWN_FIELDS.include?(v) && !all_ids.include?(v)
     err(where, "transition target :#{v} is not in the SPINE roster or registered")
   elsif !all_ids.include?(v)
     warn!(where, "transition target :#{v} is not implemented yet (roster field)")
@@ -161,6 +161,10 @@ def check_battler_matcher(where, m)
     when :grounded                  then check_bool(w, v)
     when :status                    then check_enum(w, v, FieldEffects::STATUSES, "status")
     when :condition                 then check_proc(w, v)
+    when :hp_below, :hp_above
+      err(w, "must be a fraction of max HP in (0, 1]") if !v.is_a?(Numeric) || v <= 0 || v > 1 || v.is_a?(Integer)
+    when :in_weather                then check_enum(w, v, FieldEffects::WEATHERS, "weather")
+    when :on_terrain                then check_enum(w, v, FieldEffects::TERRAINS, "terrain")
     else err(where, "unknown battler matcher key :#{k}")
     end
   end
@@ -195,6 +199,10 @@ def check_rule(where, key, rule, all_ids)
     when :apply_to                      then check_enum(w, v, FieldEffects::APPLY_TO, "apply_to")
     when :status
       check_enum(w, v, FieldEffects::STATUSES - [:NONE], "status")
+    when :in_weather                    then check_enum(w, v, FieldEffects::WEATHERS, "weather")
+    when :on_terrain                    then check_enum(w, v, FieldEffects::TERRAINS, "terrain")
+    when :add_type                      then check_ids(w, v, TYPES, "type")
+    when :boost                         then check_bool(w, v)
     when :stats, :user_stats, :target_stats then check_stats(w, v)
     when :damage, :heal                 then check_fraction(w, v)
     when :effects                       then check_enum(w, v, FieldEffects::BATTLER_EFFECTS, "battler effect")
@@ -267,7 +275,7 @@ def check_rule(where, key, rule, all_ids)
     end
   when :end_of_round, :on_entry, :seed
     err(where, "seed rule needs :item") if key == :seed && !rule[:item]
-    actions = [:damage, :heal, :status, :confuse, :cure_status, :stats, :effects, :proc]
+    actions = [:damage, :heal, :status, :confuse, :cure_status, :stats, :effects, :proc, :add_type]
     err(where, "battler effect does nothing (no #{actions.join('/')})") if (rule.keys & actions).empty?
     warn!(where, ":damage_type without :damage does nothing") if rule[:damage_type] && !rule[:damage]
   end
@@ -322,7 +330,24 @@ def check_definition(where, defn, all_ids, stage = false)
     when :type    then check_ids(w, v, TYPES, "type")
     when :integer then check_int(w, v, 0, 14)
     when :boolean then check_bool(w, v)
-    when :ability_list then check_ids(w, v, ABILITIES, "ability")
+    when :ability_list
+      check_ids(w, v, ABILITIES, "ability")
+      if k == :activate_abilities
+        list(v).each { |a| err(w, ":#{a} can't be activated (supported: #{FieldEffects::ACTIVATABLE_ABILITIES.join(', ')})") if a.is_a?(Symbol) && !FieldEffects::ACTIVATABLE_ABILITIES.include?(a) }
+      end
+    when :family then check_enum(w, v, FieldEffects::FAMILIES, "family")
+    when :duration_hash
+      if !v.is_a?(Hash)
+        err(w, "must be a Hash { MOVE => turns or [turns, \"message\"] }")
+        next
+      end
+      v.each do |mv, val|
+        check_ids(w, mv, MOVES, "move")
+        err(w, ":#{mv} has no lingering effect to extend") if !FieldEffects::DURATION_MOVES.include?(mv)
+        n, msg = val.is_a?(Array) ? val : [val, nil]
+        check_int("#{w}[:#{mv}]", n, 1)
+        check_string("#{w}[:#{mv}] message", msg) if msg
+      end
     when :type_number_hash, :move_number_hash, :type_string_hash, :move_string_hash
       if !v.is_a?(Hash)
         err(w, "must be a Hash")
@@ -425,8 +450,13 @@ FieldEffects.registered.each do |id, entries|
   end
   defn, file = entries.last
   where = "#{file} :#{id}"
-  warn!(where, ":#{id} is not in the SPINE roster") if !FieldEffects::ROSTER.include?(id)
+  warn!(where, ":#{id} is not in the SPINE roster or EXTRA_FIELDS") if !FieldEffects::KNOWN_FIELDS.include?(id)
   check_definition(where, defn, all_ids)
+  if defn.is_a?(Hash) && defn[:family]
+    fam_seed = FieldEffects::FAMILY_SEEDS[defn[:family]]
+    seeds = list(defn[:seed] || []).map { |r| r.is_a?(Hash) ? r[:item] : nil }.compact
+    warn!(where, "no :seed entry for its family seed :#{fam_seed}") if fam_seed && !seeds.include?(fam_seed) && !defn[:borrow]
+  end
 end
 
 # Seed items must exist in our PBS

@@ -46,6 +46,7 @@ cp "$ROOT"/design/*.md "$OUT/Design/" 2>/dev/null || true
 cp "$ROOT"/design/*.json "$OUT/Design/" 2>/dev/null || true
 cp "$ROOT"/story/*.md  "$OUT/Story/"  2>/dev/null || true
 cp "$ROOT"/docs/*.md   "$OUT/Docs/"   2>/dev/null || true
+[[ -d "$ROOT/docs/playtest" ]] && cp -r "$ROOT/docs/playtest" "$OUT/Docs/"   # real-engine playtest shots + GIF
 mkdir -p "$OUT/Docs/map_previews" && cp "$ROOT"/maps_out/previews/*.png "$OUT/Docs/map_previews/" 2>/dev/null || true
 [[ -f "$ROOT/README.md" ]] && cp "$ROOT/README.md" "$OUT/README.md"
 

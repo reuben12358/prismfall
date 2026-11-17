@@ -38,3 +38,11 @@ gl_field:    {game: rejuvenation, map: 82, rect: [46, 52, 10, 9], rows: [[6, 555
 ak_boulder:  {game: rejuvenation, map: 13, rect: [45, 26, 4, 5], rows: [[13, 19]]}
 ak_rock2:    {game: rejuvenation, map: 13, rect: [50, 33, 4, 4], rows: [[13, 19]]}
 ak_fern:     {sheet: ak, at: [6, 31], size: [2, 2], top: 2}
+# Kristiline Town (Frozen), map 328: snow-glazed A-frame longhouses, flat huts, the raised hall (part kf)
+kf_aframe:  {game: rejuvenation, map: 328, rect: [9, 25, 5, 8], rows: [[55, 80], [111, 116], [166, 168], [188, 198]], door: [11, 32], clear: [[4, 0], [4, 1], [4, 2], [0, 7]]}
+kf_aframe2: {game: rejuvenation, map: 328, rect: [54, 24, 8, 9], rows: [[55, 80], [111, 116], [166, 168], [188, 198]], door: [58, 31]}
+kf_flat:    {game: rejuvenation, map: 328, rect: [24, 35, 5, 6], rows: [[55, 80], [111, 116], [166, 168], [188, 198]], door: [26, 39]}
+kf_hall:    {game: rejuvenation, map: 328, rect: [37, 31, 6, 9], rows: [[55, 80], [111, 116], [166, 168], [188, 198]]}
+kf_tree:    {game: rejuvenation, map: 328, rect: [14, 34, 4, 6], rows: [[82, 110]]}
+pine:       {sheet: rb4, at: [4, 31], size: [2, 3], top: 2}
+pine2:      {sheet: rb4, at: [2, 19], size: [2, 3], top: 2}

@@ -58,6 +58,7 @@ def mine(name, s):
     ok = (np.isin(srow, list(rows)) | np.isin(src, list(keep))) & ~np.isin(src, list(drop)) & (src > 0)
     if not s.get('l0'): ok[0] = False
     lay[~ok] = 0
+    for cx, cy in s.get('clear', []): lay[:, cy, cx] = 0          # stray neighbour pieces, rect-relative
     occ = np.argwhere(lay.max(axis=0) > 0)
     if len(occ) == 0: raise SystemExit('EMPTY stamp %s' % name)
     (y0, x0), (y1, x1) = occ.min(axis=0), occ.max(axis=0)

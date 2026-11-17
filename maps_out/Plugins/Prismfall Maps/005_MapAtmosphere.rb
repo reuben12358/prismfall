@@ -36,8 +36,19 @@ module PrismfallMaps
     521 => [8, 4, -10, 0],   # Route 2
     522 => [-18, -22, 26, 70],   # The Glassed Orchard
     524 => [-28, -8, -30, 25],   # Gossamer Wood
-    525 => [-40, -24, -30, 40],   # Gossamer Deepwood
     548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
+    525 => [-40, -24, -30, 40],   # Gossamer Deepwood
+    560 => [-6, -2, 10, 10],   # Route 5
+    561 => [-10, -6, 6, 20],   # Route 6
+    562 => [-10, -4, 14, 16],   # The Rimewood
+    563 => [-6, -2, 16, 12],   # Rimewood Glade
+    570 => [-8, -4, 12, 12],   # Frostwick
+    571 => [6, 2, -6, 0],   # Frostwick Pokémon Center
+    572 => [6, 2, -6, 0],   # The Exchange
+    573 => [6, 2, -6, 0],   # The Two Hearths
+    574 => [6, 2, -6, 0],   # Rime-silk Loft
+    575 => [6, 2, -6, 0],   # Border House
+    576 => [6, 2, -6, 0],   # Halvard's Smokehouse
   }
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
@@ -45,6 +56,8 @@ module PrismfallMaps
     100 => ["prismfall_seamist", 0, 34, 0, 100, 2, 0],   # Ferrow's Landing
     109 => ["prismfall_seamist", 0, 55, 0, 100, 3, 0],   # The Dovetail - Deck
     120 => ["prismfall_spores", 0, 46, 1, 100, 1, -1],   # Briarwick
+    562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
+    570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }
 
   def self.apply_map_fog

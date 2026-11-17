@@ -68,5 +68,14 @@
 548	540	Cocoonfall Hollow
 560	0	Route 5
 561	0	Route 6
+562	0	The Rimewood
+563	562	Rimewood Glade
 564	561	Gullcry Caves
+570	0	Frostwick
+571	570	Frostwick Pokémon Center
+572	570	The Exchange
+573	570	The Two Hearths
+574	570	Rime-silk Loft
+575	570	Border House
+576	570	Halvard's Smokehouse
 990	0	Prismfall Test Arena

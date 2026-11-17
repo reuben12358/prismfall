@@ -183,4 +183,6 @@ def build():
 
 
 if __name__ == '__main__':
+    raise SystemExit('superseded by layouts/reskin.py (MAPGEN 2h): running this would overwrite the PF Rejuv spec')
+if False:
     save('521_route2.yaml', build())

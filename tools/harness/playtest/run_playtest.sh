@@ -13,7 +13,8 @@
 # Needs the mkxp-z build from tools/harness/visual/run_engine_capture.sh (build step).
 # Test-copy-only changes: the bot plugin, mkxp.json (Ruby stdlib path, no vsync, own
 # save folder "Prismfall Playtest") and the Linux engine binary. Nothing else is patched.
-# The engine runs with TZ=Asia/Dubai (override: PLAY_TZ) so Essentials' day/night tint shows the maps by day,
+# The engine runs with a TZ whose local time is about 13:00 (override: PLAY_TZ) so Essentials' day/night tint
+# shows the maps by day,
 # on its own Xvfb display :147 (override: PLAY_DISPLAY) so it never collides with other engine runs.
 #===============================================================================
 set -euo pipefail
@@ -45,11 +46,17 @@ PY
   echo "assembled $GAME"
 }
 
+# POSIX TZ whose local time is about 13:00 now (POSIX signs are inverted: PLAY5 = UTC-5)
+midday_tz() {
+  local off=$(( (13 - 10#$(date -u +%H) + 36) % 24 - 12 ))
+  echo "PLAY$(( -off ))"
+}
+
 session() {
   [[ "$1" == install ]] && rm -rf "$SAVE_DIR"          # a fresh machine: no saves, no logs
   rm -f "$SAVE_DIR"/Game*.rxdata                         # New Game must be the first load-screen entry
   rm -rf "$GAME/Playtest"; mkdir -p "$RUN/playtest_out"
-  (cd "$GAME" && PLAYBOT_SESSION="$1" TZ="${PLAY_TZ:-Asia/Dubai}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
+  (cd "$GAME" && PLAYBOT_SESSION="$1" TZ="${PLAY_TZ:-$(midday_tz)}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
      xvfb-run -n "${PLAY_DISPLAY:-147}" -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/playtest_$1_stdout.txt" 2>&1) || true
   rm -rf "$RUN/playtest_out/$1"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$1" 2>/dev/null || true
   [[ -f "$SAVE_DIR/errorlog.txt" ]] && cp "$SAVE_DIR/errorlog.txt" "$RUN/playtest_out/$1/" || true

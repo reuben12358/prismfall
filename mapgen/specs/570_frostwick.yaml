@@ -1,0 +1,164 @@
+# Frostwick (570). WRITTEN BY layouts/rimewood.py - edit that script.
+id: 570
+name: Frostwick
+parent: 0
+rubric: true
+yards_ok: true
+biome: village
+bgm: Lerucean Town
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 7, 21]
+  BattleBack: snow
+  Weather: [Snow, 20]
+tone: [-8, -4, 12, 12]
+fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 100, sx: 1, sy: 0}
+connections:
+- {dir: N, offset: 20, to: 562, to_offset: 22}
+- {dir: E, offset: 18, to: 560, to_offset: 10}
+raw: data/raw/570.npy
+tileset: 52
+events:
+- type: door
+  at: [13, 25]
+  gfx: ['', 0, 2]
+  name: Poke Center door
+  link: FW_PC
+- type: door
+  at: [44, 19]
+  gfx: ['', 0, 2]
+  name: Exchange door
+  link: FW_EXCH
+- type: door
+  at: [22, 17]
+  gfx: ['', 0, 2]
+  name: Two Hearths door
+  link: FW_INN
+- type: door
+  at: [52, 19]
+  gfx: ['', 0, 2]
+  name: Border House door
+  link: FW_BORDER
+- type: door
+  at: [44, 29]
+  gfx: ['', 0, 2]
+  name: Smokehouse door
+  link: FW_SMOKE
+- type: door
+  at: [12, 12]
+  gfx: ['', 0, 2]
+  name: Loft door
+  link: FW_LOFT
+- type: sign
+  name: Hearth Stone
+  at: [28, 25]
+  text: 'THE HEARTH STONE
+
+    Carved twice: once in Elowen''s knotwork, once in Isenmar''s runes.
+
+    Both say the same thing. "Here, no one is a foreigner by the fire."'
+  post: false
+- type: sign
+  name: Town sign
+  at: [40, 23]
+  text: 'FROSTWICK
+
+    Where the Rimewood meets the salt.'
+  post: false
+- type: sign
+  name: PC sign
+  at: [12, 30]
+  text: POKEMON CENTER
+  post: false
+- type: sign
+  name: Exchange sign
+  at: [43, 24]
+  text: 'THE EXCHANGE
+
+    Honey for furs. Silk for oil. Coin if you must.'
+  post: false
+- type: event
+  name: Brannagh
+  at: [21, 23]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - Brannagh, Elowen side of the Two Hearths. Applewood fire, honey cakes, no shouting.
+    - Halvard's lot burn whale oil on the other hearth. Smells like a shipwreck. We get on fine.
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: [Find me an applewood log in the Rimewood and I'll show that whale-oil man what a fire is.]
+- type: event
+  name: Halvard
+  at: [27, 23]
+  pages:
+  - graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - Halvard. Sealer. Isenmar side of the Two Hearths.
+    - Brannagh's applewood smells like a pudding. A man can't think by a pudding.
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands: [Ask her about the log. Go on. I want to watch her face.]
+- type: event
+  name: Girl in ogre mask
+  at: [40, 33]
+  pages:
+  - graphic: {sprite: NPC 07, dir: down}
+    trigger: action
+    move: random
+    commands: [We're playing Kingdoms! I'm Elowen! RAAAH! Briar curse!]
+- type: event
+  name: Boy in whale mask
+  at: [41, 34]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: random
+    commands: [I'm Isenmar! Whale curse! ...There's no whale curse. I'm making it up.]
+- type: event
+  name: Huscarl
+  at: [57, 23]
+  pages:
+  - graphic: {sprite: NPC 11, dir: left}
+    trigger: action
+    move: fixed
+    commands: [Gate's open. Wipe your boots. Declare any honey.]
+- type: event
+  name: Forester
+  at: [57, 17]
+  pages:
+  - graphic: {sprite: NPC 14, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Elowen''s watch. Isenmar''s watch. Same gate, same cold. We split the shifts.']
+- type: event
+  name: Ice-fisher
+  at: [30, 14]
+  pages:
+  - graphic: {sprite: trainer_FISHERMAN, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['See the dark holes along the brook? Fish come up to breathe.', Face the open water and use a rod. Even an Old Rod works here.]
+- type: event
+  name: Swinub herder
+  at: [48, 38]
+  pages:
+  - graphic: {sprite: NPC 17, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['The sled-pens. Swinub now, Mamoswine by spring if they eat their greens.', They don't eat greens. They eat everything else.]
+- type: item
+  at: [40, 41]
+  item: SNOWBALL
+  hidden: true

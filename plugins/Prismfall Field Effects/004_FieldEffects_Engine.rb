@@ -25,6 +25,8 @@ module FieldEffects
     return false if rule[:function_codes] && !rule[:function_codes].include?(move.function_code)
     return false if rule[:user] && !self.battler_matches?(rule[:user], battle, user)
     return false if rule[:target] && !self.battler_matches?(rule[:target], battle, target)
+    return false if rule[:in_weather] && !rule[:in_weather].include?(battle.pbWeather)
+    return false if rule[:on_terrain] && !rule[:on_terrain].include?(battle.field.terrain)
     return false if rule[:condition] && !self.safe_call(rule[:condition], battle, user, target, move, type)
     return true
   end
@@ -65,6 +67,10 @@ module FieldEffects
       ok = spec[:status].include?(st) || (st == :POISON && spec[:status].include?(:TOXIC))
       return false if !ok
     end
+    return false if spec[:hp_below] && battler.hp > battler.totalhp * spec[:hp_below].to_f
+    return false if spec[:hp_above] && battler.hp <= battler.totalhp * spec[:hp_above].to_f
+    return false if spec[:in_weather] && !spec[:in_weather].include?(battler.effectiveWeather)
+    return false if spec[:on_terrain] && !spec[:on_terrain].include?(battle.field.terrain)
     return false if spec[:condition] && !self.safe_call(spec[:condition], battle, battler)
     return true
   end
@@ -120,6 +126,8 @@ module FieldEffects
         next if rule[:attack] && !rule[:attack].include?(move_type)
         next if rule[:defend] && !rule[:defend].include?(def_type)
         next if rule[:moves] && (!move || !rule[:moves].include?(move.id))
+        next if rule[:user] && !self.battler_matches?(rule[:user], battle, user)
+        next if rule[:target] && !self.battler_matches?(rule[:target], battle, target)
         eff = rule[:set].to_f if rule.key?(:set)
         eff *= rule[:mult] if rule[:mult]
       end
@@ -180,6 +188,10 @@ module FieldEffects
         self.safe_call(defn[:hooks][:damage], battle, user, target, move, type, mults, ai)
       end
     end
+    self.apply_activated_ability_damage(battle, user, target, move, type, mults)
+    if self.transform_boost?(battle, user, target, move, type)
+      mults[:power_multiplier] *= TRANSFORM_BOOST
+    end
   end
 
   # Single number summarising the field's damage effect (used by the AI).
@@ -206,6 +218,13 @@ module FieldEffects
       end
       if defn[:hooks] && defn[:hooks][:accuracy]
         self.safe_call(defn[:hooks][:accuracy], battle, user, target, move, type, mods)
+      end
+    end
+    if target && !battle.moldBreaker
+      [[:SANDVEIL, [:Sandstorm]], [:SNOWCLOAK, [:Hail]]].each do |ab, weathers|
+        next if !self.ability_activated?(battle, target, ab)
+        next if weathers.include?(target.effectiveWeather)
+        mods[:evasion_multiplier] *= 1.25
       end
     end
   end
@@ -445,6 +464,16 @@ module FieldEffects
       end
       did = true
     end
+    # Added type (third type)
+    if rule[:add_type] && self.apply_added_type(battle, battler, rule[:add_type])
+      if msg
+        announce.call
+      else
+        battle.pbDisplay(self.format("{1} became part {2} type!", battler.pbThis,
+                                     GameData::Type.get(rule[:add_type]).name))
+      end
+      did = true
+    end
     # Bespoke
     if rule[:proc]
       res = self.safe_call(rule[:proc], battle, battler)
@@ -458,6 +487,7 @@ module FieldEffects
 
   def self.apply_entry_effects(battle, battler, on_change_only = false)
     return if !self.active?(battle) || battler.fainted?
+    self.apply_natural_type(battle, battler)
     self.rules(battle, :on_entry).each do |rule|
       next if on_change_only && !rule[:also_on_change]
       next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, battler)
@@ -512,6 +542,7 @@ module FieldEffects
       next if rule[:battlers] && !self.battler_matches?(rule[:battlers], battle, battler)
       mult *= rule[:mult]
     end
+    mult *= self.activated_speed_multiplier(battle, battler)
     self.hooks(battle, :speed).each do |h|
       val = self.safe_call(h, battle, battler, mult)
       mult = val if val.is_a?(Numeric)
@@ -747,6 +778,7 @@ module FieldEffects
         affected.each { |b, stats, src| self.apply_stat_changes(b, stats, src) }
       end
     end
+    self.extend_effect_durations(battle, user, targets, move) if !user.fainted?
     self.hooks(battle, :after_move).each do |h|
       self.safe_call(h, battle, user, targets, move, num_hits)
     end
@@ -885,6 +917,7 @@ module FieldEffects
         b.pbFaint if b.fainted?
       end
     end
+    self.activated_ability_end_of_round(battle, priority)
     self.hooks(battle, :end_of_round).each { |h| self.safe_call(h, battle) }
     return if battle.decision > 0
     return if self.current(battle) != field_at_start   # A hook changed the field

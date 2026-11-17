@@ -1,0 +1,142 @@
+{
+ "ASHEN_WASTE": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgVolcano, enemybaseVolcano (cooled: gradient-mapped, lava crusted over)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "decor006"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "quench recolour, ember cracks, steam vents, soot-stained banners"
+  ]
+ ],
+ "CAVE": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgCave (mirrored), enemybaseCave"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "decor006, decor009, fog (the CAVE environment's layers)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "timber mine supports, stalactites, hanging lanterns, lantern light"
+  ]
+ ],
+ "COLOSSEUM": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgColosseum, enemybaseColosseum (sanded floor)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "cheering crowd (2-frame sheet), scaffolding, chain-link fence, hanging work lamps"
+  ]
+ ],
+ "CRYSTAL_CAVERN": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgCrystalCavern, enemybaseCrystalCavern"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "giant prismatic crystal clusters, crystal glow, prismatic light shafts"
+  ]
+ ],
+ "DARK_CRYSTAL": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgDarkCrystalCavern, enemybaseDarkCrystalCavern"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "dark006 (vacuum rings)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "obsidian crystal clusters (same placement as Crystal Cavern), dying glow, murk"
+  ]
+ ],
+ "DESERT": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgDesert (extended)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "mesas, half-buried sandstone ruins, sandstone slab platforms, sun glare, heat haze"
+  ]
+ ],
+ "DRAGONS_DEN": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgDragonsDen (gradient-mapped violet/orange, extended)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "decor009"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "cavern mouth, wyrm statues, dragon skull, gold hoard, platforms, glows"
+  ]
+ ],
+ "FROZEN_LAKE": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgFrozen, enemybaseFrozen"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "fjord cliffs, far-shore pines, ice cracks, lake mist; night variant with aurora"
+  ]
+ ],
+ "MOUNTAIN": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgMountain, enemybaseMountain"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "sky, layered snow-capped ridges, pines, clouds, valley mist"
+  ]
+ ],
+ "SNOWY_MOUNTAIN": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgSnowyMountain, enemybaseSnowyMountain"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
+  ]
+ ],
+ "VOLCANIC": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgVolcano, enemybaseVolcano (extended to the EBDX room, platforms re-placed)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "decor006, decor009, base001, bubbleRed (the MAGMA environment's layers)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "obsidian pillars, dragon-lord banners, lava and caldera glow, heat haze"
+  ]
+ ],
+ "WASTELAND": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgWasteland (sky re-graded), enemybaseWasteland"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
+  ]
+ ]
+}

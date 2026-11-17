@@ -33,7 +33,7 @@ PARTS = [('gl', 'rejuvenation', 62, 'Goldenleaf Forrest'),
          ('rb4', 'reborn', 43, 'Route4'),
          ('ap', 'rejuvenation', 2, 'Aevium Past'),
          ('pf', None, None, None)]          # Prismfall custom pieces (rj_custom.png, built by rcustom.py)
-CUSTOM_ROWS = 96
+CUSTOM_ROWS = 200
 
 # every autotile any PF Rejuv tileset may use: (game, source tileset whose passages it takes, source name)
 AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'), ('rejuvenation', 127, 'Dirt'),
@@ -52,6 +52,12 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
 # spring grass (the same two colours DirtDark's verge uses), so the Goldenleaf street gravel sits on green ground.
 DERIVED = {'Gravel Spring': ('rejuvenation', 'Gravel(G)', {(213, 184, 68): (168, 216, 160), (173, 133, 72): (112, 200, 160)})}
 VBASE = 100000
+# v21.1 terrain tags for water autotiles these games leave at 0 (they script surfing differently): 5 DeepWater,
+# 6 StillWater, 7 Water, 8 Waterfall, 9 WaterfallCrest.  Fishing and surfing need them.
+AUTO_TAG = {'Sea(Grass)': 7, 'Sea': 7, 'Ocean': 7, 'Sea deep': 5, 'Hoenn Sea': 7, 'Ocean(Terajuma)_2': 7,
+            'Still water': 6, 'Still water - Copy': 6, 'stillwaterr4': 6, 'Still water grey': 6, 'Still water snow': 6,
+            'Waterfall': 8, 'Waterfall (1)': 8, 'Waterfall crest': 9, 'Waterfall crest (T)': 9, 'Waterfall bottom': 7,
+            'Waterfall bottom (T)': 7}
 PREFIX = {'rejuvenation': 'RJ ', 'reborn': 'RB ', 'pf': 'PF '}
 # tileset id -> (name, autotile keys (game, name), biome note).  The sheet is shared.
 TILESETS = {
@@ -62,7 +68,7 @@ TILESETS = {
                             ('rejuvenation', 'Sand shore_2'), ('rejuvenation', 'Sea deep'), ('pf', 'Gravel Spring'),
                             ('rejuvenation', 'Dirt')]),
     52: ('PF Rejuv Snow', [('rejuvenation', 'KristilineWatersFrozen'), ('rejuvenation', 'KristilineDirt'),
-                           ('rejuvenation', 'Ocean(Terajuma)_2'), ('rejuvenation', 'Sand shore(Terajuma)'),
+                           ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore(Terajuma)'),
                            ('rejuvenation', 'Waterfall crest (T)'), ('rejuvenation', 'Waterfall (1)'), ('reborn', 'Still water snow')]),
     53: ('PF Rejuv Wild', [('rejuvenation', 'Sea(Grass)'), ('rejuvenation', 'DirtDark'), ('rejuvenation', 'Dirt'),
                            ('rejuvenation', 'Gravel(G)'), ('rejuvenation', 'Still water'), ('rejuvenation', 'Waterfall'),
@@ -166,7 +172,8 @@ def main():
             t = RR.tileset(game, tid); s = t['autotile_names'].index(name) + 1
         autos.append(dict(game=game, name=name, file=dst_name, passages=t['passages'][48 * s:48 * s + 48],
                           priorities=t['priorities'][48 * s:48 * s + 48],
-                          tags=[x if x <= 16 else TAG_REMAP_GAMES.get(x, 0) for x in t['terrain_tags'][48 * s:48 * s + 48]]))
+                          tags=[AUTO_TAG.get(name, x if x <= 16 else TAG_REMAP_GAMES.get(x, 0)) if (x == 0 or x > 16) else x
+                                for x in t['terrain_tags'][48 * s:48 * s + 48]]))
     json.dump({'sheet': SHEET, 'parts': parts, 'n_tiles': len(pas)}, open(os.path.join(HERE, 'data', 'rj_compose.json'), 'w'), indent=1)
     reg = json.load(open(REG)) if os.path.exists(REG) else []
     for tid, (name, keys) in TILESETS.items():

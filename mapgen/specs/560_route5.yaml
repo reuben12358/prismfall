@@ -1,0 +1,137 @@
+# Route 5 (560). WRITTEN BY layouts/rimewood.py - edit that script.
+id: 560
+name: Route 5
+parent: 0
+rubric: true
+yards_ok: true
+biome: route
+display_name: Route 5 - Frostflat Causeway
+bgm: Route 2
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 7, 22]
+  BattleBack: snow
+  Weather: [Snow, 10]
+tone: [-6, -2, 10, 10]
+connections:
+- {dir: E, offset: 12, to: 140, to_offset: 32}
+- {dir: W, offset: 10, to: 570, to_offset: 18}
+raw: data/raw/560.npy
+tileset: 52
+events:
+- type: sign
+  name: Border Stones
+  at: [33, 11]
+  text: 'Two old stones. One bears Elowen''s briar crown, the other Isenmar''s whale and axe.
+
+    A brass Meridian sunburst has been bolted across both of them. The bolts are new.'
+  post: false
+- type: sign
+  name: Route sign
+  at: [60, 11]
+  text: 'ROUTE 5 - THE FROSTFLAT CAUSEWAY
+
+    W: Frostwick   E: Saltmere'
+  post: false
+- type: sign
+  name: Old salt road
+  at: [31, 25]
+  text: 'The old salt road dips toward a drowned pier village. Something replays there, over and over.
+
+    [The Rehearsal, map 568: not built yet]'
+  post: false
+- type: event
+  name: Royal forester
+  at: [32, 8]
+  pages:
+  - graphic: {sprite: NPC 14, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - Past the stones the trees wear coats. Ice ones. You'll see.
+    - Elowen ends here, officially. Unofficially it ends wherever the honey runs out.
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 14, dir: down}
+    trigger: action
+    move: fixed
+    commands: [Mind the frost-pans west of here. They're slick as a courtier.]
+- type: event
+  name: Fur-trader
+  at: [22, 15]
+  pages:
+  - graphic: {sprite: NPC 22, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - My Spheal pulls the sled. Lovely creature. Round.
+    - '...The problem is the sled is on a SLOPE, and Spheal is ALSO round.'
+    - If you see a sled rolling toward Saltmere with a Spheal on it, wave. It likes that.
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 22, dir: down}
+    trigger: action
+    move: fixed
+    commands: [Still no sled. Still no Spheal. Still a lovely day.]
+- type: event
+  name: Meridian surveyor
+  at: [20, 9]
+  pages:
+  - graphic: {sprite: NPC 16, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['*tink* *tink* Survey peg. Lattice line. Don''t touch.', 'Who authorised it? The Meridian. Who authorised the Meridian? ...Move along, please.']
+- type: trainer
+  at: [50, 9]
+  sight: 4
+  dir: down
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Sela]
+  intro: Salt-flat picnic! Bring your own shade!
+  after: Isenmar's colder than I thought.
+- type: trainer
+  at: [40, 17]
+  sight: 4
+  dir: up
+  sprite: trainer_HIKER
+  trainer: [HIKER, Torvald]
+  intro: Thirty years I've carted salt down this road! Show me something new!
+  after: Salt in my boots, frost in my beard. Good trade.
+- type: trainer
+  at: [14, 17]
+  sight: 4
+  dir: right
+  sprite: trainer_LASS
+  trainer: [LASS, Tilde]
+  intro: Did you slide here too? Everyone slides here.
+  after: My Swinub slid farther than me.
+- type: trainer
+  at: [20, 10]
+  sight: 4
+  dir: down
+  sprite: trainer_SAILOR
+  trainer: [SAILOR, Haakon]
+  intro: Sealer out of Ebbmouth! The sea's too thick to row, so I walk!
+  after: Ice'll break by summer. Probably.
+- type: trainer
+  at: [26, 22]
+  sight: 4
+  dir: up
+  sprite: trainer_BIRDKEEPER
+  trainer: [BIRDKEEPER, Ailsa]
+  intro: The gulls change colour past the stones. Watch!
+  after: Frostwick's gulls wear little ice hats. Not really.
+- type: item
+  at: [61, 4]
+  item: SUPERPOTION
+- type: item
+  at: [5, 9]
+  item: ICEHEAL
+- type: item
+  at: [57, 24]
+  item: SOFTSAND
+  hidden: true
+- type: item
+  at: [46, 22]
+  item: HEALPOWDER

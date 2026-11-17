@@ -9,7 +9,7 @@ BattleBack = field
 #-------------------------------
 [101]   # Ferrow's Landing Pokémon Center
 Name = Ferrow's Landing Pokémon Center
-HealingSpot = 100,19,27
+HealingSpot = 100,24,15
 MapPosition = 0,14,26
 #-------------------------------
 [102]   # Ferrow's Landing Mart
@@ -57,7 +57,7 @@ BattleBack = field
 #-------------------------------
 [121]   # Briarwick Pokémon Center
 Name = Briarwick Pokémon Center
-HealingSpot = 120,44,27
+HealingSpot = 120,45,24
 MapPosition = 0,12,22
 #-------------------------------
 [122]   # Briarwick Mart
@@ -278,16 +278,16 @@ ShowArea = true
 MapPosition = 0,13,23
 BattleBack = forest
 #-------------------------------
-[525]   # Gossamer Deepwood
-Name = Gossamer Deepwood
-ShowArea = true
-MapPosition = 0,13,23
-BattleBack = forest
-#-------------------------------
 [548]   # Cocoonfall Hollow
 Name = Cocoonfall Hollow
 ShowArea = true
 MapPosition = 0,11,22
+BattleBack = forest
+#-------------------------------
+[525]   # Gossamer Deepwood
+Name = Gossamer Deepwood
+ShowArea = true
+MapPosition = 0,13,23
 BattleBack = forest
 #-------------------------------
 [540]   # Route 3
@@ -329,24 +329,74 @@ DarkMap = true
 MapPosition = 0,12,21
 #-------------------------------
 [560]   # Route 5
-Name = Route 5
+Name = Route 5 - Frostflat Causeway
 Outdoor = true
 ShowArea = true
-MapPosition = 0,9,23
-BattleBack = field
+MapPosition = 0,7,22
+BattleBack = snow
+Weather = Snow,10
 #-------------------------------
 [561]   # Route 6
-Name = Route 6
+Name = Route 6 - Gullcry Cliffs
 Outdoor = true
 ShowArea = true
 MapPosition = 0,8,21
 BattleBack = field
 Weather = Rain,20
 #-------------------------------
+[562]   # The Rimewood
+Name = The Rimewood
+Outdoor = true
+ShowArea = true
+MapPosition = 0,7,20
+BattleBack = snow
+Weather = Snow,30
+#-------------------------------
+[563]   # Rimewood Glade
+Name = Rimewood Glade
+Outdoor = true
+ShowArea = true
+MapPosition = 0,8,20
+BattleBack = snow
+Weather = Snow,20
+#-------------------------------
 [564]   # Gullcry Caves
 Name = Gullcry Caves
 MapPosition = 0,8,21
 BattleBack = cave1
+#-------------------------------
+[570]   # Frostwick
+Name = Frostwick
+Outdoor = true
+ShowArea = true
+MapPosition = 0,7,21
+BattleBack = snow
+Weather = Snow,20
+#-------------------------------
+[571]   # Frostwick Pokémon Center
+Name = Frostwick Pokémon Center
+ShowArea = false
+HealingSpot = 570,13,26
+#-------------------------------
+[572]   # The Exchange
+Name = The Exchange
+ShowArea = false
+#-------------------------------
+[573]   # The Two Hearths
+Name = The Two Hearths
+ShowArea = false
+#-------------------------------
+[574]   # Rime-silk Loft
+Name = Rime-silk Loft
+ShowArea = false
+#-------------------------------
+[575]   # Border House
+Name = Border House
+ShowArea = false
+#-------------------------------
+[576]   # Halvard's Smokehouse
+Name = Halvard's Smokehouse
+ShowArea = false
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

@@ -94,6 +94,7 @@ def build(preview=None):
     m.street([(48, 37), (55, 46), (55, 49)], 2, 'd', only='.')
     m.stairs(35, 14, w=3, kit_rows=4)
     m.stairs(21, 13, w=2, kit_rows=4)
+    m.street([(22, 10), (22, 12)], 2, 'd', only='.')                             # shrine path above the stairs
     # ---------------------------------------------------------------- buildings
     E = []
     P = lambda n, at, **kw: E.append(SE.place(120, n, at, **kw))
@@ -170,6 +171,7 @@ def build(preview=None):
     for x, y in ((33, 21), (39, 27), (33, 39), (48, 34), (38, 48), (59, 32), (27, 32), (18, 30)):
         if m.free(x, y - 1, 1, 2, on='.'): m.stamp('pf_lantern', x, y - 1)
     m.beds(prefixes=('sh_',))
+    m.greenfill(3)
     # ---------------------------------------------------------------- paint
     m.paint()
     garlands(m, ((33, 47, 29, 0), (35, 41, 47, 1), (41, 48, 25, 2), (18, 28, 29, 3), (50, 62, 36, 1), (33, 40, 57, 2)))

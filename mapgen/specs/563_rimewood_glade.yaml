@@ -1,0 +1,55 @@
+# Rimewood Glade (563). WRITTEN BY layouts/rimewood.py - edit that script.
+id: 563
+name: Rimewood Glade
+parent: 562
+rubric: true
+yards_ok: true
+biome: forest
+bgm: Natural Park
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 8, 20]
+  BattleBack: snow
+  Weather: [Snow, 20]
+tone: [-6, -2, 16, 12]
+raw: data/raw/563.npy
+tileset: 52
+events:
+- type: trainer
+  at: [20, 24]
+  sight: 4
+  dir: left
+  sprite: trainer_POKEMONRANGER_M
+  trainer: [POKEMONRANGER_M, Sigurd]
+  intro: Isenmar ranger. Nobody finds this glade by accident.
+  after: '...So you cut your way in. Fair.'
+- type: item
+  at: [19, 14]
+  item: NEVERMELTICE
+- type: item
+  at: [29, 10]
+  item: REVIVE
+  hidden: true
+- type: sign
+  name: Snowveil Shrine
+  at: [28, 21]
+  text: 'THE SNOWVEIL SHRINE
+
+    A pot of honey and a smoked eel sit side by side on the altar.
+
+    Neither has been touched by the other.'
+  post: false
+- type: sign
+  name: Silk-fall
+  at: [17, 9]
+  text: 'THE SILK-FALL
+
+    A waterfall of Gossamer silk, frozen as it fell. It rings faintly when the wind moves.'
+  post: false
+- type: warp
+  name: To the Rimewood
+  at: [0, 15]
+  link: RIME_GLADE
+  arrive: [1, 15, right]
+  se: Door exit

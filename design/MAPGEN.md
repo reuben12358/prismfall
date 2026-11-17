@@ -16,7 +16,8 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 | 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
 | 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Route 3's mine mouth with Route 4's back door. Salt miner gives TM98 after Badge 2 |
 | 546–547 | Thistledown Manor + Attic (haunted house) | Mansion tileset (`palettes/mansion.yaml`): checker foyer with a grand staircase, arched-window portrait hall, dust-sheeted dining room, ruined cobwebbed attic. DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
-| 560, 561, 564 | Route 5 (salt flats), Route 6 (sea cliffs, landslide detour), Gullcry Caves | K2 (Trainer(4) sight event, `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)`), `CH4_KESTREL_MOURNER` choice, S111, V114=1. Gullcry reuses the Rock Cave template |
+| 560–563, 570–576 | Borderland A (the Rimewood, §2h): Route 5 Frostflat Causeway, Frostwick and interiors (PC, the Exchange, the Two Hearths, Rime-silk Loft, Border House, Halvard's Smokehouse), The Rimewood, Rimewood Glade (Cut) | Chain 140 → 560 → 570 → 562 → 561 → 160; 562 ↔ 563 by warp `RIME_GLADE` behind a Cut sapling. 11 new route trainers, Border Stones, lagoon ice, the Silk-fall, the Snowveil Shrine |
+| 561, 564 | Route 6 (sea cliffs, landslide detour), Gullcry Caves | K2 (Trainer(4) sight event, `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)`), `CH4_KESTREL_MOURNER` choice, S111, V114=1. Gullcry reuses the Rock Cave template |
 | 160–165 | Ebbmouth and interiors | Rain. River Ebb with footbridges, Meridian tidal Lattice. Teo night scene (after K2): HOLLOW_TEO battle, `CH4_TEO` choice, S112. Good Rod (Anglers' Guild). Ice-fishers' whale song. Larch's tide-data revelation after Badge 3 |
 | 170–174 | Tidelock Gym (Gym 3, :WATER_SURFACE) | Harbour tileset (`palettes/harbour.yaml`). Low/Mid/High basin variant maps. Sluice wheels W/C/E transfer to the same x,y on another level. Mid: raft events (passable plank tile) to the bell-rope. High: current lanes (forced moves). The north lane reaches the exit only with the tide bell ON (S315). Marisol `gym_battle(3)` → Badge 3, TM03 |
 | 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
@@ -261,6 +262,112 @@ OLDCHOWDER, BRAMBLETART, LAMPTAPER, BARKMASK, DUSKPETAL, KELPTEABAG, MOTHERLOOMS
   shrouds and stays; sliced to tileset 33 parts `dovetail` / `ship_moored`, placements in `data/ship_*.json`.
 - **Readability** (top-down contrast rule): paths carry almost no decals (`path_decor` <= 0.015); texture and contrast live
   in borders, undergrowth and props; wilds forest mixes species in small patches with dense layered undergrowth.
+
+## 2h. The Rejuvenation pass (PF Rejuv composite, tilesets 50–53)
+**Why:** the user wants the maps to look like Rejuvenation's Goldenleaf Town and Sheridan. The full games are in
+`/home/claude/ref/games/` (GAMES_READY.md). Only tiles and stamps are taken from them: every layout here is our own.
+Rejuvenation's asset rules forbid copying its maps.
+
+**Tools (all read the games with the safe parser; nothing from `ref/` is executed):**
+- `rref.py`: `render <game> <map> out.png [scale] [--crop x,y,w,h] [--grid]`, `stats`, `doors` (transfer events), `maps <tileset ids>`.
+- `rcat.py`: a numbered contact sheet of a map's objects (connected layer-2/3 components) for picking stamps.
+- `rcompose.py`: builds the sheet **`PF Rejuv`** from whole sheets. Parts are append-only, so ids never move:
+  - gl Goldenleaf 384
+  - sh Sheridan_2 4832
+  - ak Akuwa `Route 4` 6832
+  - kf Kristiline Town (Frozen) 8304
+  - rb4 Reborn Route4 10448
+  - ap Aevium Past 11496
+  - pf (our own pieces) 17744
+
+  A composite id is the part offset + (source id − 384). It registers four tilesets that share the sheet, each with its
+  own 7 autotiles (copied as `RJ <name>` / `RB <name>` / `PF <name>`):
+
+  | ID | Name | Autotiles |
+  |---|---|---|
+  | 50 | Village | Sea(Grass), DirtDark, waterfalls, Gravel Spring, Dirt |
+  | 51 | Coast | Sea(Grass), DirtDark, Ocean, Sand shore_2, Sea deep, Gravel Spring, Dirt |
+  | 52 | Snow | KristilineWatersFrozen, KristilineDirt, Sea deep, Sand shore(Terajuma), waterfalls (T), Still water snow |
+  | 53 | Wild | Sea(Grass), DirtDark, Dirt, Gravel(G), Still water, Waterfall, Waterfall bottom |
+
+  - Terrain tags 17+ use GAMES_READY's table.
+  - These games leave water autotiles at tag 0 (they script surfing). `AUTO_TAG` gives them v21 tags 5–9, so Old Rod fishing and Surf work.
+  - `Gravel Spring` is Goldenleaf's `Gravel(G)` with its autumn verge recoloured to Sheridan green.
+  - Layouts never use autotile slots. They use *virtual* ids (`rcompose.vauto(game, name)`), resolved per tileset at write time.
+- `import_tileset.py` gained `tag_remap:` (per-source table). Do not use `remap_tags: true` for these games.
+- `rcustom.py` builds the `pf` part:
+  - Prismfall's own art from tileset 33: giant trees and Briarwick's elder (greens re-graded to Sheridan's ramp), silk props, garlands, quay lamps, the moored Dovetail, material variants.
+  - **snowified** copies: Sheridan cliffs, Akuwa sea cliffs, the Sheridan tree lattice, grass, a cave arch, and every giant tree (`pf_g_*_ice`).
+  - Output: `data/stamps_rjc.json` (`pf_*`, `_snow`, `_singles`, `_ship_moored`).
+- `rstamps.py` + `rstamps.yaml`: stamps mined from real maps by rect + source-row filter (`rows`, `deny`, `drop`, `clear`, `door`) or straight from the sheet (`sheet:`). Output `data/stamps_rj.json`:
+  - Goldenleaf houses `gl_pc/gym/hall/mart/ell/emblem/cot/flat1/flat2/shed`, with the autumn bushes dropped
+  - Sheridan `sh_big/help/inn/small/shop/ell/cot` and props `sh_campfire/crates/gate/arch`
+  - Kristiline `kf_aframe/aframe2/flat/tree`
+  - Akuwa `ak_boulder/rock2/fern`
+  - trees `tr_oak/oak2/pine/pine2/teal/pink`, Reborn `pine2`
+  - the striped `lighthouse`, `gl_lamp`, `gl_tables`
+- `layouts/rkit.py` (`RMap`) paints the maps:
+  - Plan classes: `.` grass, `t` tall grass, `d` lane, `g` gravel street, `w` water, `W` deep, `s` beach, `T` forest, `o` frozen water, `I`/`i` ice, `B` blocked.
+  - Plus a height grid, stamps (with a building-overlap guard), events and over-tiles.
+  - `paint()` runs, in order: ground, autotiles (water on layer 1, lanes/sand/deep on layer 2 so their edges blend), cliff kits, stairs, the tree lattice, stamps.
+  - Cliff kits: `sh` / `sh3` Sheridan (lip + 3 or 2 face rows over grass, 1-wide sides, inner corners), `ak` Akuwa grass-capped sea cliffs, and the snow versions `shs` / `aks`.
+  - Helpers: `front` (seat a building by its door), `street`, `lane`, `stairs`, `trees` (yard clusters; trunks never overlap), `greenfill` (leftover lawn ≥ n tiles from any lane, door or event becomes forest), `beds` (flowers at the foot of front walls), `fence`, `near`, `scatter` (edge-weighted decor), `preview`, `write`.
+  - `write` emits `data/raw/NNN.npy` and a spec with `raw:` + `tileset:`. `build.py` now takes `raw:` specs.
+- `compare.py <id> <ref png> out.png`: our build next to a reference at the same tile scale.
+- `build.py`: spec key `walk_from: [[x, y], ...]` adds flood seeds, for maps whose halves join through another map (561 via the caves).
+
+**Composition patterns learned from Goldenleaf (map 82), Sheridan (423, 214, 38), Akuwa (13) and Kristiline Frozen (328):**
+1. *Ground is quiet, texture lives above it.* Each map uses one 2×2 grass checker (Sheridan 646/647/654/655) or plain snow. Contrast comes from layer-2/3 objects, lane edges and the dense decor at the foot of things, never from noisy ground.
+2. *Streets are orthogonal and wide.*
+   - Goldenleaf: gravel streets 3–4 wide on a rectilinear plan with T-junctions, one paved plaza with a landmark (fountain and statue).
+   - Sheridan: dirt lanes 2–3 wide with right-angle jogs.
+   - Never diagonal, never a 1-wide path.
+3. *Buildings front the street.* The door sits 1–2 cells above the street with a stoop. Houses stand shoulder to shoulder, 1–3 tiles apart. Big buildings (Center, gym) get a timber porch pad or deck. Signboards stand beside doors, lamps at junctions, crates and barrels by shops, picnic tables in squares, fences at yard edges.
+4. *No lawns.* Every cell that is not street, yard or water is tree mass:
+   - Forest is a staggered lattice of 3×4 trees, period 3 horizontally, rows every 2, each row shifted.
+   - Top two rows go on layer 3, trunks on layer 2. Two species are mixed.
+   - Single yard trees stand at building corners, plus pines and blossoms for accents.
+5. *Elevation:*
+   - Goldenleaf rings the town with 3–4 concentric terraces, a waterfall off the top one, and wooden stairs 2–3 wide.
+   - Sheridan cliffs are a lip row plus 3 face rows with 1-wide sides and inner corners.
+   - Akuwa's grass-capped cliffs rise straight out of the sea onto a white beach, with 2×2 and 4×4 rocks offshore.
+6. *Water:*
+   - Sheridan rivers use the grass-edged `Sea(Grass)` autotile, crossed by plank walkways and bridges.
+   - Kristiline's frozen sea is walkable ice (2476, tag 12) with dark holes of the `KristilineWatersFrozen` autotile; the autotile's rims carry the ice texture.
+7. *Density:* roughly every 16×12 screen holds a building or landmark plus 3–5 prop clusters. Flowers grow in drifts, not singles.
+
+**Maps on PF Rejuv:**
+- **100 Ferrow's Landing** (`layouts/ferrow_rj.py`, tileset 51, 68×60):
+  - Bluff (Akuwa cliffs), Tidewatch hill and north-west terraces (Sheridan cliffs), harbour beach, 3-wide pier at x 33–35 (water from row 48), the Dovetail moored east, striped lighthouse on the west headland.
+  - Doors: PC (24,14), inn (11,27), Mart (39,22), lab (53,11), customs (22,44), Dockmaster (44,43), lighthouse (5,40).
+  - HealingSpot is [100, 24, 15].
+- **120 Briarwick** (`layouts/briarwick_rj.py`, tileset 50, 72×64):
+  - Doors: elder-tree gym (36,12), Guildhall (17,26), Help Center (45,23), Treetop House (55,24), Mart (27,40), chapel (63,42), Cutter's House (42,50).
+  - Route 3 road on rows 30–31 over the stream walkway. HealingSpot is [120, 45, 24].
+- **Borderland A** (`layouts/rimewood.py` + `rimewood_interiors.py`, tileset 52 / interiors on 34): 560 (64×30), 570 Frostwick (60×48), 562 (48×56), 563 (34×30), 561 (30×60), 571–576.
+  - Fixed: 560's west edge now joins **570** (offset 10/18), no longer 561.
+  - Edges: 570 N(20) ↔ 562 S(22); 562 N(12) ↔ 561 S(10); 561 N(12) ↔ 160; 560 E(12) ↔ 140 W(32).
+  - 561's Gullcry mouths are now arches in south-facing outcrop faces at (5,22) and (5,37). The links are unchanged.
+  - Old specs live in `layouts/old_560_route5_route6.yaml`, `old_561.yaml` and `specs/564_gullcry_caves.yaml`.
+- **Re-skins** (`layouts/reskin.py`, tileset 53): 520, 521, 524, 525.
+  - Each keeps its plan, heights, events and links from `layouts/old_<id>_wilds.yaml` and is repainted with the kit (Sheridan ground, lanes, 2-face cliffs, log stairs, lattice forest, yard trees, greenfill).
+  - 524/525 also get silk webs and strands.
+- `ferrow.py`, `briarwick.py`, `route1.py`, `route2.py`, `gossamer.py` and `deepwood.py` are superseded. Their `__main__` refuses to run, because it would overwrite the new specs.
+  - deepwood.py also wrote 548: to change 548's plan, lift its guard and re-run `reskin.py 525`.
+- **Not yet on PF Rejuv:**
+  - 109/110: the Dovetail is custom ship art.
+  - 101–108, 121–125, 523, 526: interiors on tileset 34, whose walls and floors are already Rejuvenation's SheridanInside.
+  - 522/548: Bleed glass art.
+  - 130–133: held until the GYM_PUZZLES.md rewrite lands; only a re-skin is allowed.
+- Rubric and screenshots are in the step reports. Previews `maps_out/previews/compare_100_vs_rejuv082.png` and `compare_120_vs_rejuv082.png`.
+- Run order:
+  ```
+  python3 -I rcustom.py && python3 -I rcompose.py && python3 -I rstamps.py
+  python3 -I layouts/ferrow_rj.py && python3 -I layouts/briarwick_rj.py && python3 -I layouts/rimewood.py
+  python3 -I layouts/reskin.py 520 521 524 525
+  python3 -I build.py --strict
+  ```
+  Install tilesets 50–53 with `merge_tilesets.py`. The `PF Rejuv` sheet is 256×75840 px.
 
 ## 3. Regenerating
 ```

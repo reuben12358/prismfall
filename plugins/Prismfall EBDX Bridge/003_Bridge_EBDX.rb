@@ -99,6 +99,7 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
         @pf_flash = nil
         # Created at base z like EBDX's own sprites; reconfigure's defocus/focus
         # then shifts them together with the rest of the room.
+        prismfall_spawn_art_layers(@data["prismfall_layers"]) if PrismfallEBDX::AMBIENT_LAYERS
         prismfall_spawn_layer(@data["prismfall_fx"], "pfx", false) if PrismfallEBDX::AMBIENT_FX
         prismfall_spawn_layer(@prismfall_overlay_specs, "pfo", false) if PrismfallEBDX::AMBIENT_FX
       rescue StandardError => e
@@ -205,6 +206,7 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
       x1, y1, x2, y2 = prismfall_area(spec)
       zr = spec[:zoom] || [0.5, 1.0]
       spr.param = prismfall_rand(zr, [0.5, 1.0])
+      p[:param0] = spr.param
       layers = spec[:layers] || [:mid]
       lz = PrismfallEBDX::LAYER_Z[layers[rand(layers.length)]] || [12, 19]
       spr.z = lz[0] + rand(lz[1] - lz[0] + 1) - ((focus_offset && !@focused) ? 100 : 0)
@@ -259,9 +261,89 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
       return peak
     end
 
+    #---------------------------------------------------------------------------
+    # Animated art layers (profile :layers, see 001_Bridge_Config.rb). One sprite
+    # each in the room's own hash, so EBDX's camera/zoom/focus code moves them.
+    #---------------------------------------------------------------------------
+    def prismfall_spawn_art_layers(specs)
+      @pf_layers = []
+      return if !specs.is_a?(Array)
+      inv = 1.0 / PrismfallEBDX.room_scale
+      specs.each_with_index do |spec, i|
+        next if !spec.is_a?(Hash) || !spec[:bitmap]
+        key = "pfl#{i}"
+        spr = Sprite.new(@viewport)
+        spr.default!
+        bmp = pbBitmap(PrismfallEBDX::EBDX_ELEMENTS + spec[:bitmap].to_s)
+        spr.bitmap = bmp
+        frames = [(spec[:frames] || 1).to_i, 1].max
+        fw = bmp.width / frames
+        spr.src_rect.set(0, 0, fw, bmp.height) if frames > 1
+        spr.ox = spec[:ox] || (fw / 2)
+        spr.oy = spec[:oy] || (bmp.height / 2)
+        spr.ex = spec[:x] || 0
+        spr.ey = spec[:y] || 0
+        spr.z = spec[:z] || 1
+        spr.param = (spec[:hd] ? inv : 1.0) * (spec[:zoom] || 1.0)
+        spr.blend_type = spec[:blend] || 0
+        spr.opacity = spec[:opacity] || 255
+        spr.mirror = true if spec[:mirror]
+        spr.angle = spec[:angle] if spec[:angle]
+        @sprites[key] = spr
+        @pf_layers.push({ :key => key, :spec => spec, :t => (spec[:phase_frames] || rand(1000)).to_f,
+                          :frames => frames, :fw => fw, :base_x => spr.ex, :base_y => spr.ey, :fl => 0 })
+      end
+    end
+
+    def prismfall_update_art_layers(d)
+      return if !@pf_layers
+      @pf_layers.each do |l|
+        spr = @sprites[l[:key]]
+        next if !spr || spr.disposed?
+        s = l[:spec]
+        l[:t] += 1.0 / d
+        t = l[:t]
+        per = (s[:period] || 120).to_f
+        w = t * 2 * Math::PI / per + (s[:phase] || 0)
+        base_o = (s[:opacity] || 255).to_f
+        o = base_o
+        anims = s[:anim].is_a?(Array) ? s[:anim] : [s[:anim]]
+        anims.each do |a|
+          case a
+          when :pulse    # smooth glow breathing between :min and :max opacity
+            lo = (s[:min] || (base_o * 0.5)).to_f
+            hi = (s[:max] || base_o).to_f
+            o = lo + ((hi - lo) * (0.5 + (0.5 * Math.sin(w))))
+          when :flicker  # random dropouts (broken lamps, buzzing neon)
+            if l[:fl] > 0
+              l[:fl] -= 1.0 / d
+              o = (s[:min] || 0).to_f
+            elsif rand < (s[:chance] || 0.02) / d
+              l[:fl] = 1 + rand((s[:dropout] || 6).to_i)
+              o = (s[:min] || 0).to_f
+            end
+          when :sway     # pendulum around the anchor (chains, banners, lamps)
+            spr.angle = (s[:angle] || 0) + ((s[:amp] || 4) * Math.sin(w))
+          when :rotate   # continuous spin (gears, rings)
+            spr.angle += (s[:speed] || 0.5) / d
+          when :bob      # vertical float
+            spr.ey = l[:base_y] + ((s[:amp] || 2) * Math.sin(w))
+          when :drift    # horizontal float
+            spr.ex = l[:base_x] + ((s[:amp] || 6) * Math.sin(w))
+          end
+        end
+        spr.opacity = o
+        if l[:frames] > 1
+          f = (t / (s[:frame_time] || 8).to_f).to_i % l[:frames]
+          spr.src_rect.x = f * l[:fw]
+        end
+      end
+    end
+
     def prismfall_update_fx
       d = self.delta
       d = 1.0 if d <= 0
+      prismfall_update_art_layers(d)
       @pf_particles.each do |p|
         spr = @sprites[p[:key]]
         next if !spr || spr.disposed?
@@ -301,6 +383,10 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
                                          spr.ex > x2 + 70 || spr.ex < x1 - 70
         end
         spr.angle += p[:spin] / d if p[:spin] != 0 && spec[:type] != :streak
+        if spec[:grow] && [:rise, :fall].include?(spec[:type])   # puffs swell as they rise
+          prog = spec[:type] == :rise ? (y2 - spr.ey) / (y2 - y1).to_f : (spr.ey - y1) / (y2 - y1).to_f
+          spr.param = p[:param0] * (1 + (spec[:grow] * [[prog, 0].max, 1].min)) if p[:param0]
+        end
       end
       prismfall_update_flash(d)
     end

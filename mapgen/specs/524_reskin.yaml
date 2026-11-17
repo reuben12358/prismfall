@@ -1,0 +1,233 @@
+# Gossamer Wood (524). RE-SKINNED BY layouts/reskin.py from layouts/old_524_wilds.yaml - edit that plan.
+id: 524
+biome: forest
+name: Gossamer Wood
+bgm: Route 3
+parent: 0
+field: SILKWOOD
+tone: [-28, -8, -30, 25]
+metadata:
+  ShowArea: true
+  MapPosition: [0, 13, 23]
+  BattleBack: forest
+rubric: true
+raw: data/raw/524.npy
+tileset: 53
+events:
+- type: warp
+  name: To Route 2
+  at: [23, 57]
+  link: R2_WOOD
+  arrive: [23, 56, up]
+- type: warp
+  name: To Route 2 b
+  at: [22, 57]
+  to: {map: 521, x: 1, y: 9, dir: left}
+- type: warp
+  name: To Route 2 c
+  at: [24, 57]
+  to: {map: 521, x: 1, y: 11, dir: left}
+- type: warp
+  name: To Briarwick
+  at: [25, 0]
+  link: WOOD_BRIAR
+  arrive: [25, 1, down]
+- type: cut_tree
+  at: [45, 27]
+- type: warp
+  name: To Deepwood
+  at: [49, 27]
+  link: WOOD_DEEP
+  arrive: [48, 27, left]
+- type: door
+  name: Woodward's Hut door
+  at: [42, 25]
+  link: WOOD_HUT
+  gfx: [doors1, 0, 2]
+- type: sign
+  at: [27, 25]
+  post: false
+  name: Silk wall
+  text: Thick silk blocks the trail. Maybe there's a way around.
+- type: event
+  name: Atmosphere
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {comment: 'fog: prismfall_spores (see REQUESTS.md item 3)'}
+    - raw:
+      - 204
+      - [1, prismfall_spores, 0, 55, 0, 200, 1, 1]
+    - selfswitch: [A, true]
+  - cond: {self: A}
+- type: event
+  name: Wood entry 1
+  at: [22, 54]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
+- type: event
+  name: Wood entry 2
+  at: [23, 54]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
+- type: event
+  name: Wood entry 3
+  at: [24, 54]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
+- type: event
+  name: Juno at the Veil 1
+  at: [43, 26]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'GLASS']]
+      then: []
+      else:
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
+- type: event
+  name: Juno at the Veil 2
+  at: [43, 27]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'GLASS']]
+      then: []
+      else:
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
+- type: event
+  name: Juno at the Veil 3
+  at: [43, 28]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'GLASS']]
+      then: []
+      else:
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
+- type: npc
+  name: Silk-picker
+  at: [14, 32]
+  sprite: NPC 11
+  dir: up
+  move: random
+  text: 'Silk-picker: Don''t cut the low strands, they''re this year''s. Cut the high ones. No, higher. No— you know what, I''ll do it.'
+- type: npc
+  name: Old Weaver
+  at: [27, 33]
+  sprite: NPC 13
+  dir: down
+  text: 'Old Weaver: Sixty years I''ve walked this wood. This spring it rings. Hear it? East. Like someone tapping a glass.'
+- type: sign
+  at: [13, 11]
+  post: false
+  name: Shrine stone
+  text: A small mossy shrine stone. A carving of three beasts chasing a masked figure. Someone has left a honey bun in front of the masked one, not the
+    three.
+- type: npc
+  name: Kestrel
+  at: [25, 4]
+  sprite: trainer_RIVAL1
+  dir: down
+  text: 'Kestrel: Briarwick''s just ahead. Try not to get lost in the webs. ...Not that I''d come looking.'
+- type: trainer
+  at: [20, 30]
+  sight: 3
+  dir: right
+  sprite: trainer_YOUNGSTER
+  trainer: [TWINS, Mo & Jo]
+  intro: We battle together!
+  after: We lose together.
+  rules: [setBattleRule("double")]
+- type: trainer
+  at: [21, 47]
+  sight: 3
+  dir: right
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Tobin]
+  intro: My bugs love the silk here!
+  after: The webs move at night. I swear it.
+- type: trainer
+  at: [31, 30]
+  sight: 3
+  dir: left
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Reed]
+  intro: You walked right into my web!
+  after: Tamsin catches bugs bigger than me.
+- type: trainer
+  at: [26, 14]
+  sight: 3
+  dir: down
+  sprite: trainer_AROMALADY
+  trainer: [AROMALADY, Petra]
+  intro: Smell that? Night-blooming gossamer.
+  after: It's lovely here. Mostly.
+- type: trainer
+  at: [13, 18]
+  sight: 4
+  dir: down
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Bram]
+  intro: Camping in Gossamer? Battle first, questions later!
+  after: Watch for the silk walls.
+- type: item
+  at: [42, 44]
+  item: POTION
+- type: item
+  at: [8, 27]
+  item: REPEL
+- type: item
+  at: [43, 10]
+  item: TM19
+- type: item
+  at: [33, 36]
+  item: ETHER
+- type: event
+  name: HiddenItem
+  at: [33, 5]
+  pages:
+  - commands:
+    - if: pbItemBall(:NETBALL, 2)
+      then:
+      - The web gave them up without a fight.
+      - selfswitch: [A, true]
+      else: []
+  - cond: {self: A}

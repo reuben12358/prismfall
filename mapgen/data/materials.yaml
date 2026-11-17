@@ -44,3 +44,29 @@ tilesets:
     - [12648, 12703, modern]     # Goldenleaf: Poké Center / Mart
   33:
     - [10384, 14383, modern]     # GearenCity Real: apartment blocks, scaffolds, trucks (city maps only)
+  # PF Rejuv composite (rcompose.py; MAPGEN 2h), shared by tilesets 50-53: gl part ids = Goldenleaf source ids,
+  # ap = Aevium Past at 11496 (modern city sheet; only the striped lighthouse, source rows 367-382, is period)
+  50:
+    - [1416, 1433, modern]       # Goldenleaf: Poke Center / Mart fronts
+    - [1760, 1807, modern]       # Goldenleaf: train
+    - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
+    - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
+    - [14560, 17743, modern]     # Aevium Past: city blocks
+  51:
+    - [1416, 1433, modern]       # Goldenleaf: Poke Center / Mart fronts
+    - [1760, 1807, modern]       # Goldenleaf: train
+    - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
+    - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
+    - [14560, 17743, modern]     # Aevium Past: city blocks
+  52:
+    - [1416, 1433, modern]       # Goldenleaf: Poke Center / Mart fronts
+    - [1760, 1807, modern]       # Goldenleaf: train
+    - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
+    - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
+    - [14560, 17743, modern]     # Aevium Past: city blocks
+  53:
+    - [1416, 1433, modern]       # Goldenleaf: Poke Center / Mart fronts
+    - [1760, 1807, modern]       # Goldenleaf: train
+    - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
+    - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
+    - [14560, 17743, modern]     # Aevium Past: city blocks

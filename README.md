@@ -40,6 +40,7 @@ This kit is an **overlay**: copy its folders into an Essentials + EBDX project. 
 | `Tools/` | Validators, standalone map merge tool, map generator specs |
 
 ## Status
-Everything is syntax-checked and validated against the base project's data and exercised with mock tests, but it has
-**not yet been run inside the real engine** — expect first-boot fixes. Art is stock Essentials only (see
-`Docs/ART_ASSETS.md` for the field backdrops to source). Report crashes with the error log text and they'll be fixed.
+The packaged kit has now been installed into a fresh copy of the EBDX Renovation base project and played in the real
+engine (mkxp-z, Linux): the installer, the Dovetail prologue, Ferrow's Landing, the starter and the first rival battle.
+See `Docs/playtest/` for screenshots, a GIF and the open issues. Not yet verified on Windows, with audio, or by a human
+player. Art is mostly stock Essentials (see `Docs/ART_ASSETS.md`). Report crashes with the error log text and they'll be fixed.

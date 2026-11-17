@@ -226,6 +226,7 @@ class Battle
     old_id = @field_effect
     @fe_state[:changing] = true
     begin
+      (@fe_history ||= []).push(old_id) if old_id != FieldEffects::NONE
       FieldEffects.on_field_end(self, new_id)
       @field_effect = new_id
       FieldEffects.reset_state(self)
@@ -330,24 +331,25 @@ module BattleCreationHelperMethods
 end
 
 module FieldEffects
-  # Decides the field for a battle being prepared: explicit rule > map default.
-  # MAP_FIELDS values: :ID or [:ID, starting_stage]. setBattleRule("fieldStage", n)
-  # overrides the starting stage either way.
+  # Decides the field for a battle being prepared:
+  #   1. setBattleRule("field", ...) ("none" = deliberately no field)
+  #   2. diving -> DIVING_FIELD; wild battles: MAP_WILD_FIELDS, then the encounter
+  #      type (ENCOUNTER_FIELDS: surfing, fishing...) unless the map's own field
+  #      already fits (ENCOUNTER_KEEP_FIELDS); surfing -> SURFING_FIELD
+  #   3. MAP_FIELDS[map_id] (:ID or [:ID, stage]; :NONE = field-free map)
+  #   4. ENVIRONMENT_FIELDS[battle.environment] (maps with no entry at all)
+  # setBattleRule("fieldStage", n) overrides the starting stage either way.
   def self.apply_battle_rule(battle)
     return if !battle.respond_to?(:fe_set_initial_field)
     rules = $game_temp.battle_rules
-    id = nil
-    stage = 1
+    base_id, base_stage = self.default_field_for_battle(battle)
+    battle.instance_variable_set(:@fe_base_field, base_id)
     if rules.key?("field")
       id = rules["field"]
-    elsif $game_map && MAP_FIELDS[$game_map.map_id]
-      entry = MAP_FIELDS[$game_map.map_id]
-      if entry.is_a?(Array)
-        id = self.normalize_id(entry[0])
-        stage = entry[1] || 1
-      else
-        id = self.normalize_id(entry)
-      end
+      stage = 1
+    else
+      id = base_id
+      stage = base_stage
     end
     return if id.nil? || id == NONE
     stage = rules["fieldStage"] if rules["fieldStage"]
@@ -372,5 +374,73 @@ module FieldEffects
       battle.backdrop = backdrop
     end
     self.log("Battle field set to :#{id}")
+  end
+
+  # [field_id, stage] this battle would get without an explicit "field" rule.
+  def self.default_field_for_battle(battle)
+    map_id = ($game_map) ? $game_map.map_id : nil
+    map_entry = (map_id) ? MAP_FIELDS[map_id] : nil
+    map_id_value, map_stage = self.split_field_entry(map_entry)
+    glob = (defined?($PokemonGlobal) && $PokemonGlobal) ? $PokemonGlobal : nil
+    return [DIVING_FIELD, 1] if glob && glob.respond_to?(:diving) && glob.diving && DIVING_FIELD
+    wild = battle.respond_to?(:wildBattle?) && battle.wildBattle?
+    if wild
+      wid, wstage = self.split_field_entry(map_id ? MAP_WILD_FIELDS[map_id] : nil)
+      return [wid, wstage] if wid
+      enc = self.encounter_override(map_id_value)
+      return [enc, 1] if enc
+    end
+    if glob && glob.respond_to?(:surfing) && glob.surfing && SURFING_FIELD &&
+       !Array(ENCOUNTER_KEEP_FIELDS[:water]).include?(map_id_value)
+      return [SURFING_FIELD, 1]
+    end
+    return [map_id_value, map_stage] if map_entry
+    env = (battle.respond_to?(:environment)) ? battle.environment : nil
+    env_field = (env) ? ENVIRONMENT_FIELDS[env] : nil
+    return [env_field, 1] if env_field && self.exists?(env_field)
+    return [NONE, 1]
+  end
+
+  def self.split_field_entry(entry)
+    return [nil, 1] if entry.nil?
+    return [self.normalize_id(entry[0]), [entry[1].to_i, 1].max] if entry.is_a?(Array)
+    return [self.normalize_id(entry), 1]
+  end
+
+  # Field forced by the current wild encounter's type, or nil.
+  def self.encounter_override(map_field)
+    return nil if !defined?($game_temp) || !$game_temp.respond_to?(:encounter_type)
+    enc = $game_temp.encounter_type
+    return nil if !enc
+    kind = nil
+    if defined?(GameData::EncounterType) && GameData::EncounterType.exists?(enc)
+      kind = GameData::EncounterType.get(enc).type
+    end
+    [enc, kind].compact.each do |key|
+      next if !ENCOUNTER_FIELDS.key?(key)
+      next if Array(ENCOUNTER_KEEP_FIELDS[key]).include?(map_field)
+      target = self.normalize_id(ENCOUNTER_FIELDS[key])
+      return target if target != NONE && self.exists?(target)
+    end
+    return nil
+  end
+
+  # The field this battle would have had from the map (ignoring setBattleRule),
+  # or nil. Used to "return to the land beneath" (e.g. a fading Rainbow).
+  def self.base_field(battle)
+    id = battle.instance_variable_get(:@fe_base_field)
+    return (id.nil? || id == NONE) ? nil : id
+  end
+
+  # The most recent earlier field of this battle that isn't the current one,
+  # else the map's base field, else `default`.
+  def self.previous_field(battle, default = nil)
+    cur = self.current(battle)
+    hist = battle.instance_variable_get(:@fe_history) || []
+    prev = hist.reverse.find { |f| f != cur && f != NONE && self.exists?(f) }
+    return prev if prev
+    base = self.base_field(battle)
+    return base if base && base != cur && self.exists?(base)
+    return default
   end
 end

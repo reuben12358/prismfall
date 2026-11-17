@@ -1,0 +1,293 @@
+# Route 1 (520). RE-SKINNED BY layouts/reskin.py from layouts/old_520_wilds.yaml - edit that plan.
+id: 520
+biome: route
+name: Route 1
+bgm: Route 1
+parent: 0
+tone: [4, 6, -8, 0]
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 14, 24]
+  BattleBack: field
+connections:
+- {dir: S, offset: 10, to: 100, to_offset: 28}
+- {dir: N, offset: 25, to: 521, to_offset: 40}
+rubric: true
+raw: data/raw/520.npy
+tileset: 53
+events:
+- type: sign
+  at: [18, 62]
+  text: 'ROUTE 1
+
+    Ferrow''s Landing - Hale''s Bramble - Route 2.
+
+    Mind the hedges. The hedges mind you.'
+  post: false
+- type: trainer
+  at: [13, 50]
+  sight: 4
+  dir: down
+  sprite: trainer_YOUNGSTER
+  trainer: [YOUNGSTER, Pim]
+  intro: A trainer! With a real partner! Fight me, I've got a Bidoof and a dream!
+  after: The dream's fine. The Bidoof needs a minute.
+- type: trainer
+  at: [19, 38]
+  sight: 4
+  dir: left
+  sprite: trainer_LASS
+  trainer: [LASS, Dory]
+  intro: My Fletchling only knows Tackle and judgment.
+  after: It's judging me now.
+- type: npc
+  name: Farmhand
+  at: [23, 46]
+  sprite: NPC 03
+  dir: down
+  move: random
+  text: 'Farmhand: Tall grass is where the wild ones are. Juno''ll tell you their Latin names. Nobody asked her to learn those.'
+- type: event
+  name: Juno tutorial
+  at: [9, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 2
+  at: [10, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 3
+  at: [11, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 4
+  at: [12, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 5
+  at: [13, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 6
+  at: [14, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 7
+  at: [15, 54]
+  pages:
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: item
+  at: [11, 57]
+  item: POTION
+  hidden: true
+  name: Under the stile
+- type: sign
+  at: [10, 56]
+  post: false
+  name: Stile
+  text: A stile over the hedge bank. Somebody has carved a tally of Wingull into the top rail.
+- type: sign
+  at: [31, 50]
+  post: false
+  name: Scarecrow
+  text: It's wearing a Meridian linesman's cap. Somebody has a sense of humor.
+- type: sign
+  at: [31, 25]
+  post: false
+  name: Lookout board
+  text: 'GULLWATCH LOOKOUT
+
+    On a clear day you can see the Dovetail turn for home.'
+- type: sign
+  at: [12, 11]
+  post: false
+  name: Waystone
+  text: A waystone, older than the lane. EIGHTEEN IN CONCORD, it says. The last line has been chiselled off.
+- type: sign
+  at: [13, 40]
+  post: false
+  name: Old well
+  text: A dry well. Something small has made a nest of ferry tickets at the bottom.
+- type: item
+  at: [32, 33]
+  item: POTION
+- type: item
+  at: [6, 13]
+  item: POKEBALL
+- type: item
+  at: [37, 47]
+  item: REPEL
+  hidden: true
+  name: Cliff-foot cache
+- type: berry
+  at: [34, 47]
+  berry: ORANBERRY
+- type: event
+  name: Atmosphere
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {comment: 'fog: prismfall_seamist (see REQUESTS.md item 3)'}
+    - raw:
+      - 204
+      - [1, prismfall_seamist, 0, 36, 0, 200, 1, 0]
+    - selfswitch: [A, true]
+  - cond: {self: A}
+- type: event
+  name: Professor Larch
+  at: [14, 56]
+  pages:
+  - commands: []
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: trainer_PROFESSOR, dir: down}
+    commands:
+    - if: $game_self_switches[[520, 0, 'CH2']]
+      then: []
+      else:
+      - '\pf[LARCH,neutral]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom. Go easy on her,
+        she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two by post.'
+      - '\pf[JUNO,happy]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - &id001 {script: 'pbReceiveItem(:TOWNMAP)'}
+      - (Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)
+      - 'QUEST: "Eighteen Roads" - Earn the first badge in Briarwick.'
+      - &id002 {script: '$game_variables[102] = 2 if $game_variables[102] < 2'}
+      - &id003 {script: 'ev = $game_map.events.values.find { |e| e.name == ''Professor Larch'' }
+
+          $game_self_switches[[520, ev.id, ''A'']] = true if ev
+
+          $game_map.need_refresh = true'}
+      - {script: '$game_self_switches[[520, 0, ''CH2'']] = true'}
+  - cond: {self: A}
+    commands: []
+- type: event
+  name: Stile send-off 1
+  at: [14, 60]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'CH2']]
+      then: []
+      else:
+      - '\pf[LARCH,neutral]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom. Go easy on her,
+        she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two by post.'
+      - '\pf[JUNO,happy]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - *id001
+      - (Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)
+      - 'QUEST: "Eighteen Roads" - Earn the first badge in Briarwick.'
+      - *id002
+      - *id003
+      - {script: '$game_self_switches[[520, 0, ''CH2'']] = true'}
+- type: event
+  name: Stile send-off 2
+  at: [15, 60]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'CH2']]
+      then: []
+      else:
+      - '\pf[LARCH,neutral]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom. Go easy on her,
+        she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two by post.'
+      - '\pf[JUNO,happy]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - *id001
+      - (Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)
+      - 'QUEST: "Eighteen Roads" - Earn the first badge in Briarwick.'
+      - *id002
+      - *id003
+      - {script: '$game_self_switches[[520, 0, ''CH2'']] = true'}
+- type: event
+  name: Stile send-off 3
+  at: [16, 60]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'CH2']]
+      then: []
+      else:
+      - '\pf[LARCH,neutral]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom. Go easy on her,
+        she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two by post.'
+      - '\pf[JUNO,happy]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - *id001
+      - (Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)
+      - 'QUEST: "Eighteen Roads" - Earn the first badge in Briarwick.'
+      - *id002
+      - *id003
+      - {script: '$game_self_switches[[520, 0, ''CH2'']] = true'}

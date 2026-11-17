@@ -1,0 +1,16 @@
+id: 564
+name: Gullcry Caves
+parent: 561
+template: cave1
+drop_template_events: [Exit south, Exit right, Ladder, Hole, NPC, StrengthBoulder, Boulder position checks, Sign,
+                       Dungeon ladder, Dungeon sign, Tile puzzles, EV016]
+bgm: Cave
+field: CAVE
+metadata: {Name: Gullcry Caves, MapPosition: [0, 8, 21], BattleBack: cave1}
+events:
+  - {type: warp, name: North mouth, at: [24, 9], link: R6_CAVE_N, arrive: [24, 10, down], se: Door exit}
+  - {type: warp, name: South mouth, at: [18, 22], link: R6_CAVE_S, arrive: [18, 21, up], se: Door exit}
+  - {type: sign, at: [10, 12], post: false, name: Shaft, text: "A dark shaft drops toward the tide pools below. [TODO map 565: Gullcry B1F]"}
+  - {type: trainer, at: [14, 12], sight: 4, dir: right, sprite: trainer_HIKER, trainer: [HIKER, Torvald],
+     intro: "Gull droppings and sea spray - my favourite cave!", after: "Hear them? Gullcry. Every tide."}
+  - {type: item, at: [12, 7], item: REVIVE}

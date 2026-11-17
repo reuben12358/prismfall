@@ -347,10 +347,12 @@ module PlayBot
       kind, map = step
       if @step_start == 0
         @step_start = @frame
-        @step_busy0 = @went_busy
+        @step_frames = 0
         log("step #{@step}: #{step.inspect}")
       end
-      if @frame - @step_start > 5400
+      @step_frames += 1                # only frames with the map free count (cutscenes can be long)
+      return wait_for_map if ![:done, :debug_install].include?(kind) && $game_map.map_id != map
+      if @step_frames > 5400
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
         return next_step
@@ -432,9 +434,20 @@ module PlayBot
       return nil
     end
 
+    # Tiles of touch events that transfer the player (door mats): a walking player steps around them
+    def transfer_tiles
+      ret = {}
+      $game_map.events.each_value do |e|
+        next if ![1, 2].include?(e.trigger) || !e.list
+        ret[[e.x, e.y]] = true if e.list.any? { |c| c.code == 201 }
+      end
+      return ret
+    end
+
     # BFS on the current map with the player's own passability
     def path_dirs(tx, ty, sx = $game_player.x, sy = $game_player.y)
       return [] if sx == tx && sy == ty
+      avoid = transfer_tiles
       w = $game_map.width
       prev = { (sy * w) + sx => nil }
       queue = [[sx, sy]]
@@ -445,6 +458,7 @@ module PlayBot
           next if !$game_map.valid?(nx, ny)
           k = (ny * w) + nx
           next if prev.has_key?(k)
+          next if avoid[[nx, ny]] && [nx, ny] != [tx, ty]
           next if !$game_player.passable?(cx, cy, d)
           prev[k] = [(cy * w) + cx, d]
           if nx == tx && ny == ty

@@ -93,6 +93,17 @@ module FieldEffects
       defn[k] = defn[k].map { |rule| self.normalize_rule(rule) }.freeze
     end
     defn[:negated_abilities] = Array(defn[:negated_abilities]).freeze if defn.key?(:negated_abilities)
+    defn[:activate_abilities] = Array(defn[:activate_abilities]).freeze if defn.key?(:activate_abilities)
+    if defn[:status_immunity]
+      defn[:status_immunity] = defn[:status_immunity].map do |r|
+        r.merge(:status => Array(r[:status] || STATUSES - [:NONE])).freeze
+      end.freeze
+    end
+    if defn[:effect_durations]
+      defn[:effect_durations] = defn[:effect_durations].map do |mv, v|
+        [mv, v.is_a?(Array) ? v : [v, nil]]
+      end.to_h.freeze
+    end
     [:weather, :terrain].each do |k|
       next if !defn[k]
       spec = defn[k].dup
@@ -111,10 +122,11 @@ module FieldEffects
 
   # Rule-level keys whose value may be given as a single element or an Array.
   RULE_ARRAY_KEYS = [:moves, :not_moves, :types, :not_types, :flags, :function_codes,
-                     :category, :weather, :terrain, :attack, :defend, :effects].freeze
+                     :category, :weather, :terrain, :attack, :defend, :effects,
+                     :in_weather, :on_terrain].freeze
   # Battler-matcher keys (inside user:/target:/battlers:) that are lists.
   MATCHER_ARRAY_KEYS = [:types, :not_types, :abilities, :not_abilities, :items,
-                        :not_items, :status].freeze
+                        :not_items, :status, :in_weather, :on_terrain].freeze
 
   def self.normalize_rule(rule)
     return rule if !rule.is_a?(Hash)

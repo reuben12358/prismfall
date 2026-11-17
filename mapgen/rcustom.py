@@ -37,6 +37,35 @@ def sheridan_ramp():
     return sorted(cols, key=lambda c: cols[c])
 
 
+def snowify(im, mode):
+    """recolour a tile: greens -> snow / hoarfrost ramp by brightness; browns -> slate (cliffs) or frosted bark (trees)"""
+    px = im.load()
+    for yy in range(im.height):
+        for xx in range(im.width):
+            r, g, b, a = px[xx, yy]
+            if not a: continue
+            h, s_, v = colorsys.rgb_to_hsv(r / 255., g / 255., b / 255.)
+            if 0.17 < h < 0.5 and s_ > 0.15:                      # foliage / grass -> snow
+                if mode == 'tree':
+                    v2 = min(1.0, 0.45 + v * 0.62); col = colorsys.hsv_to_rgb(0.58, 0.10 + 0.25 * (1 - v), v2)
+                else:
+                    v2 = min(1.0, 0.62 + v * 0.42); col = colorsys.hsv_to_rgb(0.60, 0.06 + 0.12 * (1 - v), v2)
+            elif (h < 0.13 or h > 0.92) and s_ > 0.12:               # earth / bark -> slate blue-grey
+                col = colorsys.hsv_to_rgb(0.62, 0.16 + 0.1 * s_, v * (0.92 if mode == 'cliff' else 0.98))
+            else:
+                continue
+            px[xx, yy] = tuple(int(c * 255) for c in col) + (a,)
+    return im
+
+
+# derived snow tiles: (key, game, source sheet, source ids, mode)
+SNOW = [('cliff_sh', 'rejuvenation', 'Sheridan_2', list(range(1624, 1664)), 'cliff'),
+        ('cliff_ak', 'rejuvenation', 'Route 4', list(range(440, 480)), 'cliff'),
+        ('tree_sh', 'rejuvenation', 'Sheridan_2', list(range(592, 624)) + list(range(1504, 1536)), 'tree'),
+        ('grass_sh', 'rejuvenation', 'Sheridan_2', [646, 647, 654, 655, 390, 391], 'grass'),
+        ('cave_sh', 'rejuvenation', 'Sheridan_2', list(range(616, 648)), 'cliff')]
+
+
 def main():
     ts33 = R.tilesets()[33]; tc = R.TileCache(ts33)
     want = {}
@@ -76,9 +105,30 @@ def main():
         sheet.paste(im, ((i % 8) * 32, (i // 8) * 32))
         idmap[t] = i
         props[i] = (ts33['passages'][t], ts33['priorities'][t], ts33['terrain_tags'][t])
+    snow = {}
+    n0 = len(ids)
+    k = n0
+    for key, game, sheetname, srcs, mode in SNOW:
+        src = Image.open(os.path.join(RC.RR.GAMES[game], 'Graphics', 'Tilesets', sheetname + '.png')).convert('RGBA')
+        t = RC.RR.tileset(game, {'Sheridan_2': 126, 'Route 4': 211}[sheetname])
+        for sid in srcs:
+            i = sid - 384; tile = src.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32))
+            tile = snowify(tile.copy(), mode)
+            sheet.paste(tile, ((k % 8) * 32, (k // 8) * 32))
+            props[k] = (t['passages'][sid], t['priorities'][sid], t['terrain_tags'][sid] if t['terrain_tags'][sid] <= 16 else 0)
+            snow['%s:%d' % (key, sid)] = k; k += 1
+    if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
+    # snowy giant trees: every tree tile again, snowified (ice-glazed boles for the Rimewood)
+    tree_snow = {}
+    for t in sorted(tree_ids):
+        im = tc.tile(t)
+        if im is None: continue
+        sheet.paste(snowify(im.copy(), 'tree'), ((k % 8) * 32, (k // 8) * 32))
+        props[k] = props[idmap[t]]; tree_snow[t] = k; k += 1
+    if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
-               'singles': {k: idmap[v] for k, v in SINGLES.items()}}, open(os.path.join(HERE, 'data', 'rj_custom.json'), 'w'))
+               'singles': {k: idmap[v] for k, v in SINGLES.items()}, 'snow': snow}, open(os.path.join(HERE, 'data', 'rj_custom.json'), 'w'))
     # stamps in PF Rejuv ids (the pf part's offset is fixed: it is the last part)
     base = json.load(open(os.path.join(HERE, 'data', 'rj_compose.json')))['parts']['pf']['offset']
     out = {}
@@ -90,6 +140,12 @@ def main():
         if n == 'g_tree6': d['door'] = [4, 7]
         if n == 'g_tree4': d['door'] = [2, 6]
         out['pf_' + n] = d
+    for n in TREES:
+        st = want[n]; L = np.array(st['layers'])
+        L2 = np.where(L >= 384, np.vectorize(lambda t: base + tree_snow.get(int(t), idmap.get(int(t), 0)) if t >= 384 else 0)(L), 0)
+        d = dict(out['pf_' + n]); d['layers'] = L2.tolist(); d['src'] = ['pf33-snow', n]
+        out['pf_' + n + '_ice'] = d
+    out['_snow'] = {k2: base + v for k2, v in snow.items()}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}
     out['_singles'] = {k: base + idmap[v] for k, v in SINGLES.items()}
     json.dump(out, open(os.path.join(HERE, 'data', 'stamps_rjc.json'), 'w'))

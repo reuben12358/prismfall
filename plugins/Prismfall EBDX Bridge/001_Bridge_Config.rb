@@ -35,6 +35,10 @@ module PrismfallEBDX
   AMBIENT_FX      = true
   FX_DENSITY      = 1.0
   MAX_PARTICLES   = 90     # hard cap per room (main + overlay layers)
+  # Field art: use battlebg/<bd>_hd.png (864x693, drawn 1:1 at the default camera) when present.
+  HD_ART          = true
+  # Animated art layers (:layers in the profiles: pulsing glows, flickering lamps, swaying chains...).
+  AMBIENT_LAYERS  = true
   # If a script set EliteBattle.set(:nextBattleBack, ...) for this battle, keep
   # that backdrop at battle start (live field changes still swap it).
   RESPECT_SCRIPTED_BACKDROP = true
@@ -72,7 +76,8 @@ module PrismfallEBDX
   # Particle spec keys (Hash per emitter):
   #   :type    :rise / :fall / :drift / :twinkle / :streak, or :flash (room flash timer)
   #   :count   particles (scaled by FX_DENSITY)
-  #   :shape   :dot / :glow / :spark / :rect (generated, white, tinted by :colors)
+  #   :shape   :dot / :glow / :spark / :rect / :puff (generated, white, tinted by :colors;
+  #            :puff = soft round cloud for steam/smoke)
   #   :size    shape size in px; :w/:h for :rect
   #   :bitmap  alternative to :shape: file in Graphics/EBDX/Battlebacks/elements/
   #   :colors  [[r,g,b], ...] random tint per particle
@@ -86,6 +91,19 @@ module PrismfallEBDX
   #   :angle   :streak motion direction in degrees (0 = right, 90 = down)
   #   :spin    max degrees per frame (petals, confetti)
   #   :dir     :drift direction 1 (right) / -1 (left); random if omitted
+  #   :grow    :rise/:fall only: size grows by this factor over the path (puffs swell)
+  #-----------------------------------------------------------------------------
+  # Art layers (:layers, written by art/battlebacks/build_backdrops.py into
+  # 006_Bridge_Art.rb). One sprite each, in room coordinates like EBDX elements:
+  #   :bitmap  file in elements/      :x, :y  room-image anchor   :ox, :oy  pivot in bitmap px
+  #   :hd      true = painted at ROOM_SCALE resolution (drawn 1:1 at the default camera)
+  #   :zoom    extra size factor      :z  room z (foe ~11, player ~21)   :blend  0/1/2
+  #   :opacity base opacity           :angle  base angle   :mirror  true/false
+  #   :frames, :frame_time            horizontal sprite-sheet animation
+  #   :anim    :pulse / :flicker / :sway / :rotate / :bob / :drift, or an Array of them
+  #   :period  frames per cycle (40 fps frames); :phase radians
+  #   :min/:max opacity range (:pulse, :flicker)  :amp sway degrees / bob / drift px
+  #   :speed   :rotate degrees per frame          :chance/:dropout  :flicker odds / length
   #   flash:   :color, :alpha, :interval [min, max] frames, :decay, :double
   #-----------------------------------------------------------------------------
   EMBER  = [[255, 150, 50], [255, 100, 30], [255, 210, 90]]

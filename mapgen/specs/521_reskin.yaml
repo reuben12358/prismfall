@@ -1,0 +1,242 @@
+# Route 2 (521). RE-SKINNED BY layouts/reskin.py from layouts/old_521_wilds.yaml - edit that plan.
+id: 521
+biome: route
+name: Route 2
+bgm: Route 2
+parent: 0
+tone: [8, 4, -10, 0]
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 14, 23]
+  BattleBack: field
+connections:
+- {dir: S, offset: 40, to: 520, to_offset: 25}
+rubric: true
+raw: data/raw/521.npy
+tileset: 53
+events:
+- type: door
+  at: [30, 35]
+  gfx: ['', 0, 2]
+  name: Farmhouse door
+  link: R2_FARM
+- type: warp
+  name: To Gossamer Wood
+  at: [0, 10]
+  link: R2_WOOD
+  arrive: [1, 10, right]
+- type: warp
+  name: To Gossamer Wood 2
+  at: [0, 9]
+  to: {map: 524, x: 22, y: 56, dir: up}
+- type: warp
+  name: To Gossamer Wood 3
+  at: [0, 11]
+  to: {map: 524, x: 24, y: 56, dir: up}
+- type: warp
+  name: To the Glassed Orchard
+  at: [61, 23]
+  link: R2_ORCHARD
+  arrive: [60, 23, left]
+- type: warp
+  name: To the Glassed Orchard 2
+  at: [61, 22]
+  to: {map: 522, x: 2, y: 37, dir: right}
+- type: sign
+  at: [43, 44]
+  text: 'ROUTE 2
+
+    Briarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown''s forest and the Warden''s care. Litterers will be woven into something.'
+  post: false
+- type: event
+  name: Accord barrier 1
+  at: [3, 9]
+  pages:
+  - graphic: {tile: 22960}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {tile: 22960}
+    trigger: action
+    commands:
+    - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
+    - 'Accord Guard: ...You''ve got a Badge Case. A challenger. Right. Challengers pass, that''s older law than the quarantine.'
+    - 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go.'
+    - &id001 {se: Door exit}
+    - The guard drags the barrier off the road.
+    - {script: '$game_self_switches[[521, 0, ''BAR'']] = true; $game_map.need_refresh = true'}
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands:
+    - {comment: gone once the barrier is lifted (see page 4 script condition)}
+- type: event
+  name: Accord barrier 2
+  at: [3, 10]
+  pages:
+  - graphic: {tile: 22960}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {tile: 22960}
+    trigger: action
+    commands:
+    - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
+    - 'Accord Guard: ...You''ve got a Badge Case. A challenger. Right. Challengers pass, that''s older law than the quarantine.'
+    - 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go.'
+    - *id001
+    - The guard drags the barrier off the road.
+    - {script: '$game_self_switches[[521, 0, ''BAR'']] = true; $game_map.need_refresh = true'}
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands:
+    - {comment: gone once the barrier is lifted (see page 4 script condition)}
+- type: event
+  name: Accord barrier 3
+  at: [3, 11]
+  pages:
+  - graphic: {tile: 22960}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {tile: 22960}
+    trigger: action
+    commands:
+    - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
+    - 'Accord Guard: ...You''ve got a Badge Case. A challenger. Right. Challengers pass, that''s older law than the quarantine.'
+    - 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go.'
+    - *id001
+    - The guard drags the barrier off the road.
+    - {script: '$game_self_switches[[521, 0, ''BAR'']] = true; $game_map.need_refresh = true'}
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands:
+    - {comment: gone once the barrier is lifted (see page 4 script condition)}
+- type: event
+  name: Accord guard
+  at: [4, 8]
+  pages:
+  - graphic: {sprite: NPC 07, dir: down}
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 07, dir: down}
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.', 'Accord Guard: ...You''ve got a Badge Case. A challenger.
+        Right. Challengers pass, that''s older law than the quarantine.', 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go.']
+- type: event
+  name: Accord guard (aside)
+  at: [7, 8]
+  pages:
+  - graphic: {sprite: NPC 07, dir: right}
+    commands: ['Second Guard: Nobody past. Orders came down this morning.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 07, dir: right}
+    commands: ['Second Guard: (low) That''s the null one from the dock. Captain said let them through, whatever happens.', 'Accord Guard: Which captain?',
+      'Second Guard: Didn''t say. Came down from Crownhaven with a white seal on it.', '\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
+      '\pf[ACCORD_GUARD,deadpan,sweat,Accord guard (aside)](Both of them, very interested in the sky.)', 'Accord Guard: Lovely weather.']
+- type: trainer
+  at: [31, 16]
+  sight: 4
+  dir: down
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Wim]
+  intro: I'm going to be Warden of Briarwick!
+  after: '...Assistant Warden.'
+- type: trainer
+  at: [50, 19]
+  sight: 4
+  dir: left
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Ada]
+  intro: My Budew sneezes pollen when it's nervous. It's nervous now.
+  after: Bless you. Bless both of us.
+- type: trainer
+  at: [10, 12]
+  sight: 3
+  dir: right
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Joss]
+  intro: Trainers have to battle when their eyes meet! It's in the Accord. Probably.
+  after: The wood's just west. Mind the silk walls.
+- type: npc
+  name: Meridian Surveyor
+  at: [35, 19]
+  sprite: trainer_SCIENTIST
+  dir: left
+  text: 'Meridian Surveyor: Mind the orange flags. Survey line for the new Lattice. Straight through to the wood. Trees aren''t in the plan, but trees rarely
+    are.'
+- type: npc
+  name: Hay-cart Driver
+  at: [54, 24]
+  sprite: NPC 25
+  dir: down
+  text: 'Hay-cart Driver: Used to take me a day to Briarwick and back. Now the east road''s all glass and I go round. Day and a half. Glass doesn''t pay
+    my horse.'
+- type: npc
+  name: Coll (Headbutt tutor)
+  at: [33, 39]
+  sprite: NPC 03
+  dir: down
+  commands:
+  - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
+  - {script: 'pbMoveTutorChoice(:HEADBUTT)'}
+- type: event
+  name: Juno flags 1
+  at: [57, 21]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[521, 0, 'FLAG']]
+      then: []
+      else:
+      - '\pf[JUNO,neutral]Juno: These weren''t here in winter. They go right toward the Glasswood. That''s... probably fine?'
+      - {script: '$game_self_switches[[521, 0, ''FLAG'']] = true'}
+- type: event
+  name: Juno flags 2
+  at: [56, 21]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[521, 0, 'FLAG']]
+      then: []
+      else:
+      - '\pf[JUNO,neutral]Juno: These weren''t here in winter. They go right toward the Glasswood. That''s... probably fine?'
+      - {script: '$game_self_switches[[521, 0, ''FLAG'']] = true'}
+- type: event
+  name: Juno flags 3
+  at: [58, 21]
+  pages:
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[521, 0, 'FLAG']]
+      then: []
+      else:
+      - '\pf[JUNO,neutral]Juno: These weren''t here in winter. They go right toward the Glasswood. That''s... probably fine?'
+      - {script: '$game_self_switches[[521, 0, ''FLAG'']] = true'}
+- type: item
+  at: [46, 17]
+  item: ANTIDOTE
+  hidden: true
+  name: Base of the third flag
+- type: berry
+  at: [26, 41]
+  berry: PECHABERRY
+- type: item
+  at: [9, 37]
+  item: POKEBALL
+- type: sign
+  at: [14, 6]
+  post: false
+  name: Wayside shrine
+  text: A wayside shrine to the Loyal Three. Someone has tied a strand of silver silk around it. It hums, very faintly, if you hold your breath.
+- type: sign
+  at: [9, 8]
+  post: false
+  name: Checkpoint notice
+  text: 'ACCORD QUARANTINE NOTICE
+
+    No travel beyond the Landing without papers.
+
+    Underneath, in pencil: challengers excepted, obviously, it''s the LAW.'

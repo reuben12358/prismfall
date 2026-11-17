@@ -461,7 +461,8 @@ def walk_check(spec, ctx, m):
     if not starts:
         return
     seen = np.zeros_like(ok); st = []
-    for sx, sy in starts[:1]:
+    # walk_from: extra seeds (map edges joined by connections, halves joined through another map such as a cave)
+    for sx, sy in starts[:1] + [tuple(p) for p in spec.get('walk_from', [])]:
         for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0)):
             if 0 <= sx + dx < W and 0 <= sy + dy < H and ok[sy + dy, sx + dx]:
                 st.append((sx + dx, sy + dy))

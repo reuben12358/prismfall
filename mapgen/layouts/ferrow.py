@@ -166,4 +166,6 @@ def build():
 
 
 if __name__ == '__main__':
+    raise SystemExit('superseded by layouts/ferrow_rj.py (MAPGEN 2h): running this would overwrite the PF Rejuv spec')
+if False:
     build()

@@ -19,6 +19,12 @@ for fn in ('stamps_rj.json', 'stamps_rjc.json'):
     p = os.path.join(HERE, 'data', fn)
     if os.path.exists(p): _ST.update(json.load(open(p)))
 STAMPS = {k: v for k, v in _ST.items() if not k.startswith('_')}
+SNOWT = _ST.get('_snow', {})
+
+
+def SN(key, sid):
+    """composite id of a snowified copy of a source tile (rcustom.SNOW)"""
+    return SNOWT['%s:%d' % (key, sid)]
 SHIP = _ST.get('_ship_moored', {}).get('tiles', [])
 SINGLE = _ST.get('_singles', {})
 
@@ -50,6 +56,17 @@ KITS = {
 }
 
 
+KITS['shs'] = dict(N=(SN('cliff_sh', 1624), SN('cliff_sh', 1625), SN('cliff_sh', 1627)), W=SN('cliff_sh', 1632), E=SN('cliff_sh', 1634),
+                   rows=[tuple(SN('cliff_sh', b + i) for i in range(3)) for b in (1640, 1648, 1648, 1656)],
+                   inW=(SN('cliff_sh', 1636), SN('cliff_sh', 1644)), inE=(SN('cliff_sh', 1635), SN('cliff_sh', 1643)), l0=True) if SNOWT else None
+KITS['aks'] = dict(N=tuple(SN('cliff_ak', 440 + i) for i in range(3)), W=SN('cliff_ak', 448), E=SN('cliff_ak', 450),
+                   rows=[tuple(SN('cliff_ak', b + i) for i in range(3)) for b in (456, 464, 472)], inW=None, inE=None, l0=False) if SNOWT else None
+SNOW_GROUND = [[C('kf', 2475), C('kf', 2475)], [C('kf', 2475), C('kf', 2475)]]
+SNOW_TALL = [C('kf', i) for i in (411, 412, 419, 420, 427, 428)]        # frosted ferns (terrain tag 2)
+DECOR_SNOW = {'flowers': [9725, 9725, 10620], 'green': [10551, 10555, 10556, 10371, 9725],
+              'rare': [10628, 10620]}
+
+
 class RMap:
     def __init__(self, W, H, tileset, seed, water='Sea(Grass)', kit='sh', grass=SH_GRASS, decor=DECOR_SH):
         self.W, self.H, self.tid, self.seed = W, H, tileset, seed
@@ -62,6 +79,7 @@ class RMap:
         self.stamps = []                    # (name, x, y)
         self.events = []; self.doors = {}; self.stairs_at = []
         self.water, self.kit, self.grass, self.decor = water, kit, grass, decor
+        self.tall = SH_TALL
         self.auto = {'d': ('DirtDark', 'rejuvenation'), 'g': ('Gravel Spring', 'pf'), 'w': (water, 'rejuvenation'),
                      's': ('Sand shore_2', 'rejuvenation'), 'W': ('Sea deep', 'rejuvenation'), 'u': ('Dirt', 'rejuvenation')}
         self.cliff = np.zeros((H, W), bool)
@@ -108,7 +126,7 @@ class RMap:
         self.stamps.append((name, x, y))
         L = np.array(st['layers'])
         occ = L.max(axis=0) > 0
-        if mark == 'B' and name[:3] in ('gl_', 'sh_', 'kf_', 'pf_', 'ak_') and not name.startswith('pf_tr'):
+        if mark == 'B' and name[:3] in ('gl_', 'sh_', 'kf_', 'pf_', 'ak_') and name != 'kf_tree':
             if not hasattr(self, 'bfoot'): self.bfoot = np.zeros((self.H, self.W), bool)
             hit = self.bfoot[y:y + h, x:x + w] & occ
             if hit.any():
@@ -158,6 +176,28 @@ class RMap:
                 X, Y = x + dx, y + bottom + 1
                 if self.inb(X, Y) and self.cls[Y, X] == '.' and not self.taken[Y, X] and rng.random() < p:
                     self.tile(rng.choice(fl), X, Y, 1)
+
+    def greenfill(self, dist=3, on='.', seed=9):
+        """Goldenleaf habit: leftover lawn far from streets, doors and events becomes tree mass (class T, painted by the
+        lattice), so towns read as streets cut through woodland, not houses on a lawn"""
+        walk = np.isin(self.cls, list('dgsD')) | self.cliff
+        for e in self.events:
+            x, y = e['at']; walk[max(0, y - 1):y + 2, max(0, x - 1):x + 2] = True
+        from collections import deque
+        D = np.full((self.H, self.W), 99); q = deque()
+        for y, x in np.argwhere(walk): D[y, x] = 0; q.append((y, x))
+        while q:
+            y, x = q.popleft()
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                Y, X = y + dy, x + dx
+                if 0 <= Y < self.H and 0 <= X < self.W and D[Y, X] > D[y, x] + 1:
+                    D[Y, X] = D[y, x] + 1; q.append((Y, X))
+        n = 0
+        for y in range(self.H):
+            for x in range(self.W):
+                if self.cls[y, x] in on and not self.taken[y, x] and D[y, x] >= dist + (vnoise(x, y, seed, 3.0) > 0.7):
+                    self.cls[y, x] = 'T'; n += 1
+        return n
 
     def street(self, pts, w=3, c='g', only=None):
         """orthogonal street through pts (each leg axis-aligned), w wide, centred on the points"""
@@ -217,11 +257,12 @@ class RMap:
     # ------------------------------------------------------------ paint
     def paint_ground(self):
         L = self.L
+        g2 = getattr(self, 'grass2', None)
         for y in range(self.H):
             for x in range(self.W):
-                L[0, y, x] = self.grass[y % 2][x % 2]
+                L[0, y, x] = (g2 if g2 and vnoise(x, y, self.seed + 77, 4.0) > 0.52 else self.grass)[y % 2][x % 2]
         for y, x in np.argwhere(self.cls == 't'):
-            L[0, y, x] = SH_TALL
+            L[0, y, x] = self.tall[(x * 7 + y * 3) % len(self.tall)] if isinstance(self.tall, list) else self.tall
 
     # class -> layer of its autotile: water on the ground layer; lanes, streets, beach sand and deep water on layer 2
     AUTO_Z = {'w': 0, 'd': 1, 'g': 1, 's': 1, 'W': 1, 'u': 1}
@@ -234,6 +275,7 @@ class RMap:
             cells = self.cls == c
             if not cells.any(): continue
             j = self.JOIN.get(c, c)
+            if j == 'all': j = None
             m = ~water if j is None else np.isin(self.cls, list(j))
             if j is None: m = m | cells
             base = RC.vauto(game, name, 0); z = self.AUTO_Z.get(c, 0)
@@ -243,7 +285,8 @@ class RMap:
                 for dx, dy, bit in ((0, -1, 1), (1, -1, 2), (1, 0, 4), (1, 1, 8), (0, 1, 16), (-1, 1, 32), (-1, 0, 64), (-1, -1, 128)):
                     if pad[y + 1 + dy, x + 1 + dx]: b |= bit
                 self.L[z, y, x] = base + NB2AUTO[b]
-        wbase = RC.vauto('rejuvenation', self.water, 0)       # water under the beach and deep band (edges show it)
+        wg, wn = self.auto['w'][1], self.auto['w'][0]
+        wbase = RC.vauto(wg, wn, 0)                           # water under the beach and deep band (edges show it)
         for y, x in np.argwhere(np.isin(self.cls, ['s', 'W'])):
             self.L[0, y, x] = wbase + 0
         if (self.cls == 's').any() or (self.cls == 'W').any():
@@ -331,29 +374,39 @@ class RMap:
          [[C('sh', 608), C('sh', 609), C('sh', 610)], [C('sh', 616), C('sh', 617), C('sh', 618)]], 5),
         ([[C('sh', 1504), C('sh', 1505), C('sh', 1506)], [C('sh', 1512), C('sh', 1513), C('sh', 1514)]],
          [[C('sh', 1520), C('sh', 1521), C('sh', 1522)], [C('sh', 1528), C('sh', 1529), C('sh', 1530)]], 4)]
+    if SNOWT:
+        TREES_SNOW = [([[SN('tree_sh', t) if t else 0 for t in row] for row in top], [[SN('tree_sh', t) for t in row] for row in bot], w)
+                      for top, bot, w in (([[592, 593, 0], [600, 601, 602]], [[608, 609, 610], [616, 617, 618]], 5),
+                                          ([[1504, 1505, 1506], [1512, 1513, 1514]], [[1520, 1521, 1522], [1528, 1529, 1530]], 4))]
+    PINES = [([[C('rb4', 538), C('rb4', 539)], [C('rb4', 546), C('rb4', 547)]], [[C('rb4', 554), C('rb4', 555)]], 1)]
+    lattice = None
 
-    def forest(self, trees=None, mask=None):
-        """Staggered lattice of 3x4 trees on class T: rows every 2 tiles, period 3, each row shifted 1-2."""
-        trees = trees or self.TREES_SH
+    def forest(self, trees=None, mask=None, vstep=2):
+        """Staggered lattice of trees on class T (Rejuvenation/Reborn habit): rows every `vstep`, period = tree width,
+        each row shifted; the top rows go on layer 3, the trunk rows on layer 2."""
+        trees = trees or self.lattice or self.TREES_SH
         m = (self.cls == 'T') if mask is None else mask
         wts = [t[2] for t in trees]
-        phase = self.rng.randrange(3)
-        for ty in range(-2, self.H, 2):
-            phase = (phase + self.rng.choice((1, 2))) % 3
-            for tx in range(phase - 3, self.W, 3):
-                foot = [(tx + dx, ty + 2 + dy) for dx in range(3) for dy in range(2)]
-                if not all(self.inb(x, y) and m[y, x] for x, y in foot if self.inb(x, y)): continue
+        tw = len(trees[0][1][0]); nt = len(trees[0][0]); nb = len(trees[0][1])
+        phase = self.rng.randrange(tw)
+        for ty in range(-nt, self.H, vstep):
+            phase = (phase + self.rng.choice(range(1, tw)) if tw > 1 else 0) % tw
+            for tx in range(phase - tw, self.W, tw):
+                foot = [(tx + dx, ty + nt + dy) for dx in range(tw) for dy in range(nb)]
+                if not all(m[y, x] for x, y in foot if self.inb(x, y)): continue
                 if not any(self.inb(x, y) for x, y in foot): continue
                 top, bot, _ = self.rng.choices(trees, wts)[0]
-                for dy in range(2):
-                    for dx in range(3):
+                for dy in range(nt):
+                    for dx in range(tw):
                         x, y = tx + dx, ty + dy
                         if self.inb(x, y) and top[dy][dx] and self.L[2, y, x] == 0: self.L[2, y, x] = top[dy][dx]
-                        x, y = tx + dx, ty + 2 + dy
+                for dy in range(nb):
+                    for dx in range(tw):
+                        x, y = tx + dx, ty + nt + dy
                         if self.inb(x, y) and bot[dy][dx]: self.L[1, y, x] = bot[dy][dx]; self.taken[y, x] = True
 
     def put_stamps(self):
-        lattice = {t for tr in self.TREES_SH for part in tr[:2] for row in part for t in row if t}
+        lattice = {t for tr in (self.lattice or self.TREES_SH) for part in tr[:2] for row in part for t in row if t}
         for name, x, y in self.stamps:
             L = np.array(STAMPS[name]['layers']); h, w = L.shape[1:]
             for dy in range(h):
