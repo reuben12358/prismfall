@@ -6,8 +6,17 @@
 module DemoRun
   ROOT = "Captures"
   @rec = nil; @frame = 0; @shots = 0; @every = 3; @auto = false
+  # DEMO_SLOW=1: readable pacing for viewers (slow text, holds after every message, 1 s pause
+  # before each turn, frame-locked clock, 30 fps PNG capture with a per-frame state log).
+  SLOW          = (ENV["DEMO_SLOW"] == "1")
+  HOLD_NORMAL   = 2.5    # seconds a finished message stays up
+  HOLD_FIELD    = 3.5    # field / boss messages
+  TURN_PAUSE    = 1.0
+  @every = 2 if SLOW
+  @idle = 0; @idle_text = nil
   class << self
-    attr_accessor :every, :auto, :plan, :turn_limit, :script, :started
+    attr_accessor :every, :auto, :plan, :turn_limit, :script, :started, :scene, :change_turn,
+                  :after_change_turns, :virtual_clock
     def log(msg)
       File.open("#{ROOT}/demo.log", "a") { |f| f.puts(msg) }
     end
@@ -24,9 +33,99 @@ module DemoRun
 
     def tick
       @frame += 1
+      update_idle
       return if !@rec || @frame % @every != 0
-      Graphics.screenshot(format("%s/f%05d.bmp", @rec, @shots))
+      if SLOW
+        Graphics.screenshot(format("%s/f%05d.png", @rec, @shots))
+        w = msg_window
+        state = (!w) ? "none" : (w.busy? && !w.pausing?) ? "typing" : "shown"
+        txt = (w) ? w.text.to_s.gsub(/[\t\n\r]/, " ") : ""
+        File.open("#{@rec}/frames.tsv", "a") do |f|
+          f.puts([@shots, @frame, state, (state == "none") ? "" : (field_message?(txt) ? "field" : "normal"), txt].join("\t"))
+        end
+      else
+        Graphics.screenshot(format("%s/f%05d.bmp", @rec, @shots))
+      end
       @shots += 1
+    end
+
+    #---------------------------------------------------------------------------
+    # Slow mode helpers
+    #---------------------------------------------------------------------------
+    # The battle message window, if it is up with text in it.
+    def msg_window
+      sc = @scene
+      return nil if !sc
+      sprites = sc.instance_variable_get(:@sprites)
+      w = sprites && sprites["messageWindow"]
+      return nil if !w || w.disposed? || !w.visible || w.text.to_s.empty?
+      return w
+    end
+
+    # Frames the current text has been fully shown (typing finished, or paused at a \1).
+    def update_idle
+      w = msg_window
+      if w && (!w.busy? || w.pausing?)
+        if w.text == @idle_text
+          @idle += 1
+        else
+          @idle_text = w.text; @idle = 1
+        end
+      else
+        @idle = 0; @idle_text = nil
+      end
+    end
+
+    def hold_frames(text)
+      return ((field_message?(text) ? HOLD_FIELD : HOLD_NORMAL) * 60).round
+    end
+
+    # Ready to "press" Use on a prompt (yes/no, command list) whose text has been read.
+    def prompt_ready?
+      return false if @idle == 0 || @idle < hold_frames(@idle_text)
+      @idle = 0
+      return true
+    end
+
+    # Messages written in field definitions or boss definitions get the longer hold.
+    def field_message?(text)
+      return false if text.nil? || text.empty?
+      @field_res ||= build_field_res
+      plain = text.gsub(/\\[a-z]+\[[^\]]*\]/i, "").gsub("\1", "")
+      return @field_res.any? { |re| plain =~ re }
+    end
+
+    def build_field_res
+      strings = []
+      skip = [:name, :backdrop, :description, :notes, :id]
+      walk = lambda do |obj, key|
+        case obj
+        when Hash then obj.each { |k, v| walk.call(v, k) if !skip.include?(k) }
+        when Array then obj.each { |v| walk.call(v, key) }
+        when String then strings << obj if obj.length > 8
+        end
+      end
+      FieldEffects.ids.each { |id| walk.call(FieldEffects.get(id), nil) } if defined?(FieldEffects)
+      if defined?(Prismfall::Bosses)
+        Prismfall::Bosses.ids.each { |id| walk.call(Prismfall::Bosses.get(id), nil) }
+        walk.call(Prismfall::Bosses::BREAK_MESSAGE, nil) if Prismfall::Bosses.const_defined?(:BREAK_MESSAGE)
+      end
+      strings.uniq.map do |str|
+        Regexp.new("\\A" + Regexp.escape(str).gsub(/\\\{\d\\\}/, ".+") + "\\z", Regexp::IGNORECASE)
+      end
+    end
+
+    # Game time advances exactly 1/60 s per frame, so captured frames are real time even when
+    # software rendering runs slower than 60 fps.
+    def enable_virtual_clock
+      return if @vbase
+      @vbase = System.uptime
+      @vframe = @frame
+      self.virtual_clock = true
+    end
+
+    def virtual_uptime
+      return @vbase + (@frame - @vframe) / 60.0
     end
 
     def mon(species, level, moves = nil, item = nil)
@@ -46,6 +145,8 @@ module DemoRun
       $player.party = party
       self.turn_limit = turns
       self.script = script
+      self.change_turn = nil
+      self.scene = nil
       record(name)
       self.auto = true
       begin
@@ -55,6 +156,7 @@ module DemoRun
         log("EXCEPTION #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(25).join("\n  "))
       end
       self.auto = false
+      self.scene = nil
       40.times { Graphics.update }
       stop
       $game_temp.clear_battle_rules
@@ -74,7 +176,9 @@ module DemoRun
       $scene.createSpritesets           # what Scene_Map#main would do; EBDX intros snapshot the map
       30.times { Graphics.update; $scene.miniupdate }
       $player.name = "Tester"
-      $PokemonSystem.textspeed = 2 rescue nil
+      $PokemonSystem.textspeed = (SLOW) ? 0 : 2   # 0 = Slow (the slowest setting)
+      enable_virtual_clock if SLOW
+      self.after_change_turns = (SLOW) ? 1 : nil   # slow mode: end one turn after the field transition
       $PokemonSystem.battlescene = 0
       Prismfall.record_starter(:CHARMANDER)
       $player.badges = Array.new(18) { true }
@@ -124,7 +228,17 @@ module Input
   class << self
     alias demo_autorun_trigger? trigger? unless method_defined?(:demo_autorun_trigger?)
     def trigger?(button)
-      return true if (DemoRun.auto || !DemoRun.started) && button == Input::USE && DemoRun.frame % 24 == 0
+      if button == Input::USE
+        if DemoRun::SLOW && DemoRun.auto
+          if DemoRun.msg_window
+            return true if DemoRun.prompt_ready?
+          elsif DemoRun.frame % (DemoRun::HOLD_NORMAL * 60).round == 0
+            return true                     # any other dialog: one press per 2.5 s
+          end
+        elsif (DemoRun.auto || !DemoRun.started) && DemoRun.frame % 24 == 0
+          return true
+        end
+      end
       return demo_autorun_trigger?(button)
     end
   end
@@ -136,7 +250,10 @@ module BattleCreationHelperMethods
     alias demo_autorun_prepare_battle prepare_battle unless method_defined?(:demo_autorun_prepare_battle)
     def prepare_battle(battle)
       demo_autorun_prepare_battle(battle)
-      battle.controlPlayer = true if DemoRun.auto
+      if DemoRun.auto
+        battle.controlPlayer = true
+        DemoRun.scene = battle.scene
+      end
     end
   end
 end
@@ -148,6 +265,15 @@ class Battle
       DemoRun.log("turn limit reached at turn #{@turnCount}")
       @decision = 3
       return
+    end
+    if DemoRun.auto && DemoRun.change_turn && DemoRun.after_change_turns &&
+       @turnCount >= DemoRun.change_turn + 1 + DemoRun.after_change_turns   # change_turn = 0-based turn index
+      DemoRun.log("stopping #{DemoRun.after_change_turns} turn(s) after the field change")
+      @decision = 3
+      return
+    end
+    if DemoRun::SLOW && DemoRun.auto
+      (DemoRun::TURN_PAUSE * 60).round.times { @scene.pbUpdate }
     end
     DemoRun.log("turn #{@turnCount + 1}: field #{field_effect} " +
                 allBattlers.map { |b| "#{b.name} #{b.hp}/#{b.totalhp}" }.join(" | "))
@@ -190,3 +316,77 @@ module Audio
     def bgs_pos; 0; end
   end
 end
+
+#===============================================================================
+# Slow mode: message holds (replaces EBDX's 1-second auto-close and brief messages)
+#===============================================================================
+class Battle::Scene
+  alias demo_slow_pbDisplayMessage pbDisplayMessage unless method_defined?(:demo_slow_pbDisplayMessage)
+  def pbDisplayMessage(msg, brief = false, &block)
+    return demo_slow_pbDisplayMessage(msg, brief, &block) if !(DemoRun::SLOW && DemoRun.auto)
+    pbWaitMessage
+    pbShowWindow(MESSAGE_BOX)
+    cw = @sprites["messageWindow"]
+    cw.setText(msg)
+    PBDebug.log_message(msg)
+    demo_slow_hold(cw, msg, &block)
+    if brief
+      @briefMessage = true          # stays up while the next thing happens, as in normal play
+    else
+      cw.text = ""
+      cw.visible = false
+    end
+  end
+
+  alias demo_slow_pbDisplayPausedMessage pbDisplayPausedMessage unless method_defined?(:demo_slow_pbDisplayPausedMessage)
+  def pbDisplayPausedMessage(msg, &block)
+    return demo_slow_pbDisplayPausedMessage(msg, &block) if !(DemoRun::SLOW && DemoRun.auto)
+    pbWaitMessage
+    pbShowWindow(MESSAGE_BOX)
+    cw = @sprites["messageWindow"]
+    cw.text = msg
+    PBDebug.log_message(msg)
+    demo_slow_hold(cw, msg, &block)
+    cw.text = ""
+    cw.visible = false
+  end
+
+  def demo_slow_hold(cw, msg)
+    hold = DemoRun.hold_frames(msg)
+    yielded = false
+    shown = 0
+    loop do
+      pbUpdate(cw)
+      if !cw.busy? || cw.pausing?
+        if !yielded
+          yield if block_given?
+          yielded = true
+        end
+        shown += 1
+        if shown >= hold
+          break if !cw.busy?
+          cw.resume              # a \1 pause inside the text: continue typing
+          shown = 0
+        end
+      end
+    end
+  end
+end
+
+module System
+  class << self
+    alias demo_slow_uptime uptime unless method_defined?(:demo_slow_uptime)
+    def uptime
+      return DemoRun.virtual_uptime if DemoRun.virtual_clock
+      return demo_slow_uptime
+    end
+  end
+end
+
+EventHandlers.add(:prismfall_field_changed, :demo_autorun_change_turn,
+  proc { |battle, old_id, new_id|
+    next if !DemoRun.auto || old_id == :NONE || DemoRun.change_turn
+    DemoRun.change_turn = battle.turnCount
+    DemoRun.log("field change #{old_id} -> #{new_id} at turn #{battle.turnCount}")
+  }
+)

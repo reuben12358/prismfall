@@ -1,5 +1,6 @@
 # Ferrow's Landing (100). WRITTEN BY layouts/ferrow.py - edit that script.
 id: 100
+biome: village
 name: Ferrow's Landing
 parent: 0
 bgm: Lappet Town
@@ -17,55 +18,55 @@ connections:
 - {dir: N, offset: 28, to: 520, to_offset: 10}
 map: |
   TTTTTTTTTCCtTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTtttttttttttt
-  TTTTCCCCCCCCCCCCTTTTTTTT,,TTTTTTTddddTTTTTTTTCCCCCCCCCCCTTTTtttttTTT
-  TTTCCTTTTTTTTTTCC....TTT,,wTTTTTTTddTTTTTCCCCCTTTTTTTTTCCCCCCtttTTTT
-  CCCCTT,,..TTTT..CCC...TTTTwTTTT.TTddT.TCCCTTTT,,T,TTTTTTTwTTCCttTTTT
-  TTTTTT,,t..TTT....CCh.TTTTwTTTTT..dd.TCC.TT,,T,,T,THHHTTTwTTTCCTTTTT
-  TTTTTTTt.,TTTT....hC.TTTTTwTT,TT.hddTCCTTTT,,#########T,,,TTTTCCCTTT
-  TTTTTTTtT,T,,..h..CCT,TTTTwTTTTT..dddCTTTTTTH#########T,,,,TTTTTCTTT
-  CCCTTTttTTT,,...,CCCT,TTTTwTTT.,...ddCTtTTTTH#########T,,,TTTTTTCTTT
-  CCCCCTTTTTTT..TH,CCCTTTTTTwTTT,,,..ddCCTTTTT,#########T..wTTTTT.CTTT
-  CCCCCCCCTTTCCC###CCTTTTTTTwTTT,,,..ddCCCTTTTT#########T#.,,,TTTTCTTT
+  TTTTCCCCCCCCCCCCTTTTTTTT,,TTTTTTTddddTTTTTTTTCCCCCCCCCCCTTTTt,ttt,TT
+  TTTCCTTTTTTTTTTCC....T,,,,wT,,TTTTddTTTTTCCCCCTTTTTTT,,CCCCCCtttTTTT
+  CCCCTT,,.,TTTT..CCC...,,TTwT,,T.TTdd,.TCCCTTTT,TT,TTT,,TT,,TCCttTTTT
+  TTTTTT,,t..TTT....CC.hTTTTwTTTTT..dd.TCC.TT,,,,TTTT,TTTTT,,TTCCTTTTT
+  TTTTTTT,,,TTTT.....C.TTTTT,,TTTTh.ddTCCTTTT,,#########T,,,TTTTCCCTTT
+  TTTTTTT,,,TTT.,,h.CCT,TTTT,,TTTT.hdddCTTTTTTH#########T,twTTTTTTCTTT
+  CCC,TTttTTTT,.,,,CCCTTTTTTwTTT.,...ddCTtTTTTH#########T,,,TTTTTTCT,T
+  CCCCCTTT,TTT..HH,CCCTTTTTTwTT,,,,..ddCCTTTTT,#########T..wTTTTT.CTTT
+  CCCCCCCCTTTCCC###CCTTTTTTTwTTT,,,..ddCCCT,TTT#########T#.,,,TTTTCTTT
   TTCCCCCCCCCCCC###CTTTTTTTTwTTTTTTTTddCCCCTT,T#########T#.wTTTTCCCTTT
-  TTTTCCCCCCCCCC###CT,TtTT,TTT,TTTTTTdddCCCTdddddd,,,,d,.,.w.CCCCCCTTT
-  TTTTTTTCCCCC.H#d#TTT..TTTTTT,TTTTTTddTTCCddddddddddddd..CCCCCCCCCTTT
-  TTT,,TTTTTTTTT,ddTTT.TTT.,.TttTTTTTddT,,CHddddddCCCCCCCCCCCCCCCTTTTT
-  T,,,,,,,,,,,,,tddtttTTTT,,,tt.,.TTdddT,,C###CCCCCCCCCCCCCCCC.TTTTTTT
-  T,,,,,TTTTT,HTTTddTTTTTT,,,TT,,,TTdddT,,C#d#CCCCCCCCCCCCCTT..,,..TTT
-  TTH##########,TTddddTTTTTTTTT,,,TTddddddCdddCCCCCTTTTTTTTTT..,,..TTT
-  TTH##########HTTTTddddddTTTTTTTTTTddddddddd#wwwwwwwwwwwwwwwww...,TTT
-  TTT##########HTTTTTTTddddddTTTTTTddd.TTTT,,,Tt.....TTTTTT,,,T.h.hTTT
-  TTT##########,,TTTT,HTTHTdddddTTTddT.TTTTT,,TTT.....TTTT,HTHTH,..TTT
-  T,H##########,,TH###########dddddddT,THTT,,,,,,,,H.,,,,H######Ht.TTT
-  T,H##########,,TH###########HTddddTT,T############H,,,,T######Ht.TTT
-  TTT##########,,TT###########TTTdddTT,T############,.H.TT######,,,TTT
-  T,,##########,,,,###########HTTddTTT,T############,H##########,,,TTT
-  T,,##########HHTH###########HTdddTTTTT############T.##########,,,THT
-  T,,###################,#####HTdddTTtTH####,#######T.##########H####T
-  TTT########d##########,#####dddddTTTT,####,#######,,####,,,,,,H####T
-  T,T,,,,,,,ddd####,,d,,,,,,ddddddddTTT,,,d,,,####,,,,####TTTTTdT####T
-  TTTTTTtt,,Tdd####,TdTT,T,ddddkkkdddddTTTdT######,TTH####.,Tdddd####T
-  T,,,wwwwwTTdd####TTTTTTTddddkkkkkddddddT,T######,TTT,,,,.dddddH####T
-  tTTTTTTt,TTdd####TTTddddddddkkkkkddddddddd######HTT,T.ddddddT,,####T
-  tH#####,TTTddddddddddddddddddddddTTtdddddddd####....dddddTTTT,,,,,,T
-  tH#####HTTTddddddddddddddTTTTTddTTTtT..ddddddddddddddddTTTTTTTTTTTTT
-  TH#####HTddddddTTTTTdTT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTTTTTTTTT
-  TH####ddddddTTTCCCCCCCCCCCCCCCCCddTTTTT.,.TTdTTdddddTTTT.TTTTTTTTTTT
-  TH##ddddddTTTTTCCCCCCCCCCCCCCCCCdddTTTTT..TTwTTTTddddTT...TTT,TtTTTT
-  TH##dddddTTTTTTCCCCCCCCCCssssssCTdddTCCCCCCCCCCCCCCdddT...TTT,TTT,TT
-  TT##dddTTTTTTTTCsssssssssssssssCC#ddCCCCCCCCCCCCCCCTddCCCCTTTTTTT,TT
-  tH#####HTT.,.TTCsssssssssssssssCCsssCCCCCCCCCCCCCCC###CCCCTTTTTTTTTT
-  tH#####T,T,,,TCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
-  tT,,,,,T.T,,,TCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
-  tTTTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
-  t,TTTTT,,TTTTTCsssssssssssssssssskkksssssssssssssssssssssCCCCCssssss
-  T,TTTTTTTTTTTTCsssssssssssssssskkkkkkkssssssssssssssssssssssssssssss
-  TTTTTTTTTTTTTCCsssssssssssssskkkkkkkkkkkssssssssssssssssssssssssssss
-  TTT,TTTTTTTT.CCsssssssssskkkkkkkkkkkkkkkskkkkkkkkkssssssssssssssssss
-  TTT,TTTTTTTTCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssss~~~~
-  TTTTTTTTTTTCCCssskkk~~kkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssss~~~~~~~~~
+  TTTTCCCCCCCCCC###CT,,tTTTTTT,,,TTTTdddCCCTdddddd,,,,d,.,.w.CCCCCCTTT
+  TTTTTTTCCCCC..#d#HT,,.TTTTTT.,,TTTTddTTCCddddddddddddd..CCCCCCCCCTTT
+  TTTTTTTTTTTTTT,ddTTT.TTT.,.TttTTTTTddTTTCTddddddCCCCCCCCCCCCCCC,,TTT
+  T,,,,,,,,,TTT,tddtttTTTT,,,tt.,.TTdddTTTC###CCCCCCCCCCCCCCCC.TT,,TTT
+  T,,,,,THTTT,TTTTddTTTTTT,,,TT,,,TTdddTTTC#d#CCCCCCCCCCCCCTT..,,..,TT
+  TTH##########,TTddddTTTTTTTTT,,,TTddddddCdddCCCCCTTT,TTT,,T..,,..TTT
+  T,,##########HTTT,ddddddTTTTTTTTTTddddddddd#wwwwwwwwwwww,,www...,,TT
+  TT,##########HTTT,TTTddddddTTTTTTddd.TTTT,,,Tt.,..,TTTTTT,,,T...,,TT
+  TTT##########,TTTTH,HTTTTdddddTTTddT.TTTTT,,TTT....hTTTT,HHHHHT.hTTT
+  T,H##########,TTT###########dddddddT,TT,H,,,,HTHH..,,,,H######Ht,TTT
+  TTT##########,,TT###########HTddddTTTT############H,,,TT######Ht.TTT
+  TTH##########,,TH###########HTTdddT,,T############,...T,######tt.TTT
+  T,T##########H,,H###########HTTddTT,,T############,H##########H,,TTT
+  TTT##########HHH.###########,TdddTTTTT############T.##########H,,HHT
+  T,,###################,#####HTdddTTtTH####,#######T.##########T####T
+  T,,########d##########,#####dddddTTT,,####,#######,,####,,,,,,H####T
+  T,T,,,,,,,ddd####,,d,,,,,,ddddddddTT,,,,d,,,####,,,,####T,TTTdT####T
+  TTTTTTtt,,Tdd####,TdTTT,,ddddgggdddddTTTdT######,TTT####..Tdddd####T
+  T,,,wwwwwTTdd####HTTTTT,ddddgggggddddddT,T######TTTT,,,,.dddddT####T
+  tTTTTTTt,TTdd####TTTddddddddgggggddddddddd######TTT,T.ddddddT,,####T
+  tH#####,TTTddddddddddddddddddddddTTtdddddddd####H...dddddTTTT,,,,,,T
+  tT#####HTTTddddddddddddddTTTTTddTTTtT..ddddddddddddddddTTTTTTTTTTTTT
+  TT#####TTddddddTTTTTdTT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTT,TT,TTT
+  TH####ddddddTTTCCCCCCCCCCCCCCCCCddTTTTT,,.TTdTTdddddTTTT.TTTTTT,TTTT
+  TH##ddddddTTTTTCCCCCCCCCCCCCCCCCdddTTT,T..TTw,TT,ddddTT...TTT,TtTTTT
+  TT##dddddTTTTTTCCCCCCCCCCssssssCTdddTCCCCCCCCCCCCCCdddT...TTTTTTT,TT
+  TH##dddTTTTTTTTCsssssssssssssssCC#ddCCCCCCCCCCCCCCCTddCCCCTTTTTTTTTT
+  tH#####HTTTTTTTCsssssssssssssssCCsssCCCCCCCCCCCCCCC###CCCCTTTTTTTTTT
+  tH#####T,,TTTTCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
+  tT,,,,,T,,TTTTCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
+  t,TTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
+  tTTT,TT,,TT,,TCssssssssssssssssssgggsssssssssssssssssssssCCCCCssssss
+  TTTTTTTTTTT,,TCssssssssssssssssgggggggssssssssssssssssssssssssssssss
+  TTTTTTTTTTTTTCCssssssssssssssgggggggggggssssssssssssssssssssssssssss
+  TTT,TTTTTT,T.CCssssssssssgggggggggggggggsgggggggggssssssssssssssssss
+  TTTTTTTTTTTTCCCssgggggggggggggggggggggggggggggggggssssssssssssss~~~~
+  TTTTTTTTTTTCCCsssggg~~ggggggggggggggggggggggggggggsssssssss~~~~~~~~~
   TTTT,TTTTTTCCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
-  CCTT,TTTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  CCTTTTTTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~CCTTTTTTCC~~~~~~~==~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
   ~~CCCTTCCC~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
   ~~~~CCCC~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
@@ -138,13 +139,13 @@ heights: |
   00000000000000000000000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_stone@33
   at: [33, 37]
-- stamp: t_stairs
+- stamp: stairs_stone@33
   at: [41, 14]
-- stamp: t_stairs
+- stamp: stairs_stone@33
   at: [51, 38]
-- stamp: t_stairs
+- stamp: stairs_stone@33
   at: [14, 9]
 - stamp: hs_jonquil_12
   at: [39, 51]
@@ -198,8 +199,12 @@ stamps:
   door: [2, 5]
 - stamp: lh_ferrow
   at: [2, 31]
-- stamp: t_stall
-  at: [41, 40]
+- stamp: w_flat_m
+  at: [40, 40]
+- stamp: p_awning
+  at: [42, 43]
+- stamp: p_crates
+  at: [47, 41]
 - stamp: hs_jonquil_16
   at: [32, 45]
 - stamp: hs_jonquil_16
@@ -218,32 +223,22 @@ stamps:
   at: [44, 21]
 - stamp: w_house_s
   at: [56, 20]
-- stamp: tp_barrel_09
-  at: [34, 42]
+- stamp: tp_barrel_06
+  at: [57, 45]
 - stamp: hs_jonquil_36
   at: [17, 41]
 - stamp: hs_jonquil_36
   at: [53, 44]
-- stamp: p_stump
-  at: [57, 44]
 - stamp: t_barrel
   at: [51, 44]
-- stamp: tp_barrel_06
-  at: [63, 44]
-- stamp: tp_barrel_06
-  at: [48, 42]
-- stamp: p_stump
-  at: [60, 45]
-- stamp: p_stump
-  at: [55, 46]
-- stamp: tp_barrel_09
-  at: [32, 42]
-- stamp: tp_barrel_09
-  at: [50, 47]
-- stamp: hs_jonquil_36
-  at: [36, 42]
 - stamp: t_barrel
-  at: [34, 44]
+  at: [64, 43]
+- stamp: tp_barrel_09
+  at: [59, 45]
+- stamp: tp_barrel_09
+  at: [55, 46]
+- stamp: tp_barrel_06
+  at: [62, 45]
 - stamp: p_laundry
   at: [6, 14]
 - stamp: p_laundry
@@ -258,23 +253,21 @@ stamps:
   at: [57, 18]
 - stamp: p_laundry
   at: [55, 7]
-- stamp: tp_barrel_01
+- stamp: p_pot
   at: [36, 20]
-- stamp: tp_garden_09
-  at: [3, 13]
-- stamp: t_barrel
-  at: [37, 26]
-- stamp: tp_stall_16
+- stamp: p_bush_w
+  at: [36, 26]
+- stamp: tp_barrel_01
   at: [13, 19]
 - stamp: p_bush_w
   at: [42, 19]
 - stamp: p_bush_r
   at: [1, 27]
-- stamp: tp_stall_01
-  at: [55, 6]
+- stamp: t_barrel
+  at: [17, 17]
 - stamp: p_pinkbush
   at: [43, 4]
-- stamp: tp_stall_16
+- stamp: tp_barrel_01
   at: [46, 3]
 - stamp: p_pot
   at: [56, 19]
@@ -282,28 +275,30 @@ stamps:
   at: [13, 21]
 - stamp: p_bush_r
   at: [24, 28]
-- stamp: tp_stall_01
-  at: [13, 23]
-- stamp: tp_stall_16
-  at: [11, 6]
-- stamp: tp_stall_01
-  at: [10, 14]
+- stamp: p_pot
+  at: [1, 41]
+- stamp: p_pinkbush
+  at: [63, 23]
 - stamp: p_stump
   at: [11, 15]
 - stamp: p_pot
+  at: [2, 17]
+- stamp: p_pot
   at: [44, 8]
-- stamp: tp_garden_09
-  at: [1, 23]
+- stamp: p_bush_w
+  at: [1, 25]
 - stamp: t_barrel
   at: [5, 14]
 - stamp: p_pot
-  at: [22, 28]
-- stamp: tp_garden_09
-  at: [38, 13]
+  at: [39, 20]
+- stamp: p_bush_r
+  at: [13, 14]
 - stamp: p_pot
   at: [41, 20]
 - stamp: p_bush_w
   at: [1, 14]
+- stamp: p_net
+  at: [8, 39]
 - stamp: p_stump
   at: [8, 28]
 - stamp: p_bush_r
@@ -311,38 +306,46 @@ stamps:
 - stamp: p_bush_g
   at: [7, 41]
 - stamp: p_bush_r
+  at: [1, 17]
+- stamp: p_stump
+  at: [14, 23]
+- stamp: p_bush_r
   at: [19, 19]
+- stamp: p_bush_r
+  at: [15, 23]
 - stamp: t_barrel
   at: [50, 22]
+- stamp: p_bush_w
+  at: [3, 14]
+- stamp: p_pot
+  at: [57, 27]
 - stamp: p_bush_r
   at: [40, 29]
-- stamp: tp_barrel_01
+- stamp: p_pot
   at: [48, 28]
 - stamp: p_pot
   at: [49, 3]
-- stamp: p_bush_r
-  at: [8, 39]
-- stamp: p_bush_r
-  at: [57, 28]
 - stamp: t_barrel
   at: [16, 7]
 - stamp: p_bush_g
   at: [50, 26]
+- stamp: tp_barrel_01
+  at: [23, 28]
 - stamp: p_stump
   at: [51, 30]
 - stamp: p_pinkbush
   at: [61, 30]
 - stamp: p_bush_r
   at: [13, 16]
-- stamp: tp_stall_01
-  at: [45, 20]
+- stamp: p_pot
+  at: [51, 4]
 - stamp: p_pot
   at: [9, 14]
 - stamp: p_pot
   at: [17, 28]
 - stamp: p_pot
   at: [44, 20]
-- stamp: tp_barrel_01
+- stamp: p_pot
   at: [54, 20]
 - stamp: p_bush_r
   at: [55, 11]
@@ -350,58 +353,134 @@ stamps:
   at: [9, 28]
 - stamp: p_pot
   at: [8, 30]
-- stamp: p_pot
-  at: [49, 4]
-- stamp: p_stump
-  at: [62, 19]
-- stamp: p_crates
-  at: [62, 22]
-- stamp: tp_barrel_01
-  at: [36, 22]
 - stamp: p_lantern
   at: [29, 14]
 - stamp: p_lantern
   at: [30, 7]
 - stamp: p_lantern
-  at: [10, 38]
-- stamp: p_lantern
   at: [24, 13]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [4, 48]
-- stamp: fo_rustic_22
-  at: [24, 11]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [1, 20]
 - stamp: p_pinkbush
   at: [6, 3]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [3, 45]
 - stamp: p_pinkbush
   at: [61, 15]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [28, 11]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [61, 35]
-- stamp: fo_rustic_22
+- stamp: p_bush_g
   at: [64, 17]
-- stamp: fo_rustic_22
+- stamp: p_bush_g
   at: [19, 11]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [21, 6]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [65, 36]
-- stamp: fo_rustic_22
-  at: [29, 5]
-- stamp: fo_rustic_20
+- stamp: p_stump
   at: [9, 5]
-- stamp: fo_rustic_20
-  at: [1, 42]
 - stamp: p_pinkbush
   at: [24, 1]
+- stamp: p_bush_w
+  at: [26, 5]
+- stamp: p_stump
+  at: [61, 33]
+- stamp: p_stump
+  at: [47, 18]
+- stamp: p_pot
+  at: [64, 33]
+- stamp: p_pinkbush
+  at: [14, 6]
+- stamp: p_bush_g
+  at: [22, 2]
+- stamp: p_bush_w
+  at: [57, 3]
+- stamp: p_bush_r
+  at: [55, 22]
+- stamp: p_pinkbush
+  at: [63, 13]
+- stamp: p_bush_w
+  at: [53, 2]
+- stamp: p_stump
+  at: [2, 18]
+- stamp: p_bush_r
+  at: [36, 3]
+- stamp: p_pinkbush
+  at: [7, 5]
+- stamp: p_pot
+  at: [66, 7]
+- stamp: p_bush_r
+  at: [39, 34]
+- stamp: p_stump
+  at: [9, 3]
+- stamp: p_pot
+  at: [4, 42]
+- stamp: p_bush_r
+  at: [38, 35]
+- stamp: p_stump
+  at: [61, 1]
+- stamp: p_bush_r
+  at: [9, 6]
+- stamp: p_bush_r
+  at: [28, 24]
+- stamp: p_bush_r
+  at: [63, 34]
+- stamp: p_stump
+  at: [52, 16]
+- stamp: p_pot
+  at: [50, 18]
+- stamp: p_bush_r
+  at: [41, 9]
+- stamp: p_stump
+  at: [10, 45]
+- stamp: p_bush_w
+  at: [28, 2]
+- stamp: p_stump
+  at: [12, 7]
+- stamp: p_pinkbush
+  at: [56, 16]
+- stamp: p_pot
+  at: [45, 4]
+- stamp: p_bush_w
+  at: [11, 42]
+- stamp: p_bush_r
+  at: [55, 6]
+- stamp: p_bush_r
+  at: [45, 35]
+- stamp: p_pot
+  at: [65, 1]
+- stamp: p_bush_g
+  at: [35, 22]
+- stamp: p_bush_r
+  at: [3, 7]
+- stamp: p_stump
+  at: [48, 35]
+- stamp: p_pot
+  at: [8, 8]
+- stamp: p_pot
+  at: [29, 8]
+- stamp: p_bush_r
+  at: [65, 15]
+- stamp: p_bush_r
+  at: [1, 23]
+- stamp: p_stump
+  at: [64, 20]
+- stamp: p_pinkbush
+  at: [29, 11]
 - stamp: p_sign
   at: [40, 34]
 - stamp: p_sign
   at: [7, 31]
+- stamp: logbench@33
+  at: [36, 44]
+- stamp: logbench@33
+  at: [45, 46]
+- stamp: logbench@33
+  at: [21, 46]
 tiles:
 - tile: 3831
   at: [39, 50]
@@ -542,13 +621,19 @@ tiles:
   at: [12, 46]
   layer: 2
 - tile: 3916
-  at: [35, 44]
-  layer: 0
-- tile: 3859
-  at: [29, 45]
+  at: [32, 44]
   layer: 0
 - tile: 3916
-  at: [46, 46]
+  at: [30, 45]
+  layer: 0
+- tile: 3916
+  at: [31, 46]
+  layer: 0
+- tile: 3916
+  at: [39, 46]
+  layer: 0
+- tile: 3916
+  at: [48, 46]
   layer: 0
 - tile: 1555
   at: [22, 57]
@@ -1535,7 +1620,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
-  at: [26, 45]
+  at: [24, 45]
 - type: event
   name: Wingull (with girl)
   pages:
@@ -1548,7 +1633,7 @@ events:
     graphic: {sprite: Followers/WINGULL, dir: left}
     cond: {self: A}
     step_anime: true
-  at: [27, 45]
+  at: [30, 43]
 - type: event
   name: Lamplighter
   pages:
@@ -1606,7 +1691,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 18127, dir: down}
-  at: [24, 45]
+  at: [23, 45]
 - type: event
   name: Quay lamp 2
   pages:
@@ -1669,7 +1754,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 18127, dir: down}
-  at: [45, 47]
+  at: [45, 44]
 - type: event
   name: Quay lamp 5
   pages:
@@ -1690,7 +1775,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 18127, dir: down}
-  at: [49, 45]
+  at: [49, 44]
 - type: event
   name: Quay lamp 6
   pages:
@@ -1720,7 +1805,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 01, dir: down}
-  at: [30, 28]
+  at: [30, 27]
 - type: sign
   name: Town sign
   post: true
@@ -1746,7 +1831,7 @@ events:
   name: Fish barrels
   post: false
   text: Magikarp. They look resigned.
-  at: [44, 46]
+  at: [44, 44]
 - type: event
   name: Rope-skipping Girl 1
   pages:
@@ -1792,7 +1877,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
-  at: [38, 45]
+  at: [38, 43]
 - type: event
   name: Old Sailor
   pages:
@@ -1800,7 +1885,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
-  at: [30, 45]
+  at: [31, 42]
 - type: event
   name: Meridian Linesman
   pages:
@@ -1815,7 +1900,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
     cond: {self: A}
-  at: [25, 45]
+  at: [22, 45]
 - type: event
   name: Fishwife
   pages:
@@ -1839,7 +1924,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: NPC 22, dir: down}
-  at: [22, 45]
+  at: [21, 45]
 - type: event
   name: Accord Clerk
   pages:

@@ -1,5 +1,6 @@
 # The Glassed Orchard (522). WRITTEN BY layouts/orchard.py - edit that, not this file.
 id: 522
+biome: bleed
 name: The Glassed Orchard
 palette: bleed
 bgm: Route 2
@@ -94,9 +95,9 @@ heights: |
   00000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_stone@40
   at: [18, 30]
-- stamp: t_stairs
+- stamp: stairs_stone@40
   at: [33, 17]
 tileblocks: []
 tiles:

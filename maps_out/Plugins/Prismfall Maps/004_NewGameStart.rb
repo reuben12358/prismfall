@@ -14,10 +14,30 @@ module PrismfallMaps
     st = PRISMFALL_START
     return false if !st
     return false if !pbRgssExists?(sprintf("Data/Map%03d.rxdata", st[0]))
+    if !start_tileset_installed?(st[0])
+      # Without our tilesets Game_Map#setup crashes (tileset_name for nil). In Debug mode, offer the installer
+      # (same as Debug > Files > Install Prismfall maps); otherwise start on RMXP's own starting position.
+      if $DEBUG && defined?(PrismfallMapInstaller) &&
+         pbConfirmMessage(_INTL("The Prismfall tilesets and maps aren't installed in this project yet. Install them now?"))
+        PrismfallMapInstaller.install(new_game: true)
+      end
+      if !start_tileset_installed?(st[0])
+        echoln("[Prismfall Maps] The start map's tileset is not installed: run Debug > Files > Install Prismfall maps.")
+        return false
+      end
+    end
     $data_system.start_map_id = st[0]
     $data_system.start_x      = st[1]
     $data_system.start_y      = st[2]
     return true
+  end
+
+  def self.start_tileset_installed?(map_id)
+    map = load_data(sprintf("Data/Map%03d.rxdata", map_id))
+    ts = $data_tilesets && $data_tilesets[map.tileset_id]
+    return !ts.nil? && !ts.tileset_name.to_s.empty?
+  rescue StandardError
+    return true   # let the normal start report any other problem
   end
 end
 

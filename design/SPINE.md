@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 9 (user feedback, 2026-11-16 23:36) <<<
+**Borderlands.** Kingdoms connect only through borderland regions that blend the two kingdoms' biomes, cultures and
+wild Pokémon, each with at least one intermediate town showcasing how the two peoples live and trade together (or don't).
+Ashkaar (fire) and Isenmar (ice) must NOT share a border; their war is fought across the sea (the Shattered Ice strait).
+User's examples: Ashkaar–Ossaria = a volcanic, ash-laden desert/forest; Isenmar–Elowen = frozen forests. World design defines
+the full adjacency graph, every borderland and its town, consistent with the locked gym order.
+
 ## >>> REVISION 8 (user feedback, 2026-11-16 12:19) <<<
 1. **PRIORITY: the early game.** Get the prologue and first two chapters (through Gym 1 and its aftermath, then Gym 2's arc)
    fully fleshed out and playable — final-quality maps, full scripted dialogue, events, trainers, comedy scenes — before more

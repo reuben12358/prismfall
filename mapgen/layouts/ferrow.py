@@ -37,7 +37,7 @@ def build():
     # ---- lanes: narrow, winding, 2 wide (3 only in the square)
     c.rect(33, 0, 4, 2, 'd', '.')
     c.lane([(34.5, 0), (34.5, 4), (36, 10), (35, 16), (32, 22), (30, 27)], 'd', 1)
-    c.blob(30, 29, 5.5, 3.2, 'd', 2, only='.', rough=0.9); c.blob(30, 29, 2.5, 1.5, 'k', 3, only='d')
+    c.blob(30, 29, 5.5, 3.2, 'd', 2, only='.', rough=0.9); c.blob(30, 29, 2.5, 1.5, 'g', 3, only='d')       # flagstones, not flat setts (MAPGEN 2g)
     c.lane([(30, 31), (32, 34), (34.5, 37)], 'd', 4)
     c.lane([(26, 30), (20, 31.5), (14, 32), (9, 34), (5, 36)], 'd', 5)
     c.lane([(34, 29), (40, 31), (47, 33), (54, 31), (61, 28)], 'd', 6)
@@ -51,8 +51,9 @@ def build():
         for x in range(17, 50):
             band = y >= SHORE - 2 - (1 if vnoise(x, 0, 12, 4.0) > 0.5 else 0)
             head = ((x - 34) / 5.5) ** 2 + ((y - 46) / 4.0) ** 2 < 1.0 + 0.3 * (vnoise(x, y, 8, 3.0) - 0.5)
-            if c.g[y][x] == 's' and (band or head): c.g[y][x] = 'k'
+            if c.g[y][x] == 's' and (band or head): c.g[y][x] = 'g'      # worn flagstone quay (MAPGEN 2g)
     c.rect(33, SHORE, 3, H - SHORE, '=', '~s'); c.rect(18, shore(18), 2, 56 - shore(18), '=', '~s')
+    c.stair_kind = 'stairs_stone@33'     # worn stone steps on the bluff (MAPGEN 2g)
     c.stairs(33, bluff(34)); c.stairs(41, 14); c.stairs(51, bluff(52)); c.stairs(14, 9)
     c.cliffs(face=2, keep='~=')
     for y in range(H):
@@ -85,7 +86,8 @@ def build():
     d['customs'] = c.stamp('w_longhouse_s', 19, 38, 'FL_CUSTOMS', 'Customs door', force=True)
     d['dock'] = c.stamp('w_house', 42, 27, 'FL_DOCK', 'Dockmaster door', force=True)
     c.stamp('lh_ferrow', 2, 31, force=True); light_door = (4, 39)
-    c.stamp('t_stall', 41, 40, force=True)                       # the Hales' bramble-tart stall on the quay
+    c.stamp('w_flat_m', 40, 40, force=True); c.stamp('p_awning', 42, 43, force=True)   # the Hales' bramble-tart stall: timber, silk awning (MAPGEN 2g)
+    c.stamp('p_crates', 47, 41, force=True)
     for nm, x, y in (('hs_jonquil_16', 32, 45), ('hs_jonquil_16', 36, 45)):   # the customs gate's brass posts
         c.stamp(nm, x, y, force=True)
     for k, dd in d.items():
@@ -110,7 +112,7 @@ def build():
     P('Wenna Hale', (46, 43)); P('Coll Hale', (47, 45)); P('HiddenItem tart stall', (40, 41))
     P('HiddenItem breakwater', (18, 55)); P('Wingull (rocks)', (15, 45))
     P('Girl with Wingull', c.snap(26, 44, 'sk', r=4)); P('Wingull (with girl)', c.snap(27, 44, 'sk', r=3))
-    P('Lamplighter', c.snap(29, 46, 'k', r=3))
+    P('Lamplighter', c.snap(29, 46, 'g', r=3))
     for i, (x, y) in enumerate(((24, 44), (28, 42), (38, 42), (45, 47), (49, 45), (55, 44))):
         x, y = c.snap(x, y, 'ks', r=3)
         e = SE.place(100, 'Quay lamp %d' % (i + 1), (x, y))
@@ -137,13 +139,16 @@ def build():
     c.backfill([n for n in WS if ('cot' in n or 'house' in n) and not n.endswith('_r')], (1, 15, 66, 36), 0.12, 2)
     # ---- dressing
     c.dress(['hs_jonquil_26', 'hs_jonquil_29', 'hs_jonquil_31', 'hs_jonquil_33'], 6, 's', 1, (2, 42, 31, 47), pad=1)
-    c.dress(['p_net', 'p_net', 'p_crates', 't_barrel', 't_barrel2', 'hs_jonquil_36', 'hs_jonquil_35', 'tp_stall_13', 't_crate_pair',
+    c.dress(['p_net', 'p_net', 'p_crates', 't_barrel', 't_barrel2', 'hs_jonquil_36', 'hs_jonquil_35', 't_crate_pair',
              'p_stump', 'hs_jonquil_19', 'tp_barrel_06', 'tp_barrel_09'], 24, 'sk', 2, (2, 41, 64, 47))
     c.dress(['p_laundry', 'tp_stall_08', 'p_laundry'], 7, '.', 4, near='#')
-    c.dress(GARDEN + ['tp_stall_01', 'p_crates', 't_barrel', 'tp_stall_16', 'tp_barrel_01', 'tp_garden_09'], 50, '.', 5, near='#', pad=0)
+    c.dress(GARDEN + ['p_net', 'p_crates', 't_barrel', 'tp_barrel_01', 'p_pot'], 50, '.', 5, near='#', pad=0)
     c.dress(['p_lantern'], 10, '.', 6, near='dk')
-    c.dress(['p_cherry', 'p_bush_w', 'p_pinkbush', 'fo_rustic_20', 'fo_rustic_22'], 16, '.', 7)
-    c.dress(['p_sign'], 2, '.', 8, near='d', pad=0); c.dress(['t_bench'], 2, 'k', 9, pad=0)
+    c.dress(['p_cherry', 'p_bush_w', 'p_pinkbush', 'p_stump', 'p_bush_g'], 16, '.', 7)
+    # the lawn pockets between the lanes: hedged kitchen gardens, flower beds and small groves (MAPGEN 2g)
+    c.dress(['p_bush_g', 'p_bush_r', 'p_pinkbush', 'p_cherry', 'p_stump', 'p_pot', 'p_bush_w'], 40, '.', 11, pad=0)
+    c.groves(6, seed=12, rmin=1.4, rmax=2.6)
+    c.dress(['p_sign'], 2, '.', 8, near='d', pad=0); c.dress(['logbench@33'], 3, 'g', 9, pad=0)
     c.fence_run([(43, 17), (60, 17)]); c.fence_run([(26, 2), (26, 10)]); c.fence_run([(57, 3), (57, 13)])
     c.fence_run([(2, 29), (8, 29)]); c.fence_run([(44, 34), (44, 38)])
     c.borders(p=0.7); c.meadow(0.84, 1)
@@ -152,10 +157,10 @@ def build():
             edge = min(y + 1.5 * (vnoise(x, 0, 21, 4.0)), x + 2 * vnoise(0, y, 22, 4.0), W - 1 - x + 2 * vnoise(0, y, 23, 4.0))
             if c.g[y][x] == '.' and not c.taken[y][x] and y < 38 and edge < 3.2: c.g[y][x] = 'T'
     c.greenfill(0.27, 1, beds=0.05)
-    c.inlay(17, 36, 50, 47, 'k', [3859, 3916], 0.06)
+    c.inlay(17, 36, 50, 47, 'g', [3916], 0.05)
     c.sea_rocks(24, avoid=[(30, 44, 56, 59)])
     c.events = E
-    head = {'id': 100, 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,
+    head = {'id': 100, 'biome': 'village', 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 26], 'BattleBack': 'field'},
             'tone': [6, 2, -10, 0], 'fog': {'name': 'prismfall_seamist', 'opacity': 40, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0},
             'connections': [{'dir': 'N', 'offset': 28, 'to': 520, 'to_offset': 10}]}

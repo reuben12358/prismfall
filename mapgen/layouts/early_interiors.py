@@ -18,7 +18,7 @@ FLOOR_TILE = 501         # glasshouse floor for Tidewatch's Wayfarer Sanctuary (
 
 
 def head(i, src=None, **kw):
-    s = (src or OLD)[i]; h = {k: s[k] for k in KEEP if k in s}; h.update(kw); h.setdefault('tone', [10, 4, -12, 0]); return h
+    s = (src or OLD)[i]; h = {k: s[k] for k in KEEP if k in s}; h.update(kw); h.setdefault('tone', [10, 4, -12, 0]); h.setdefault('biome', 'interior'); return h
 
 
 def old(i, name, at, **kw):

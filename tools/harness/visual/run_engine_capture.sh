@@ -89,7 +89,8 @@ PY
 }
 
 assemble() {
-  (cd "$KIT" && bash tools/package.sh)
+  # PACKAGE=0 reuses the existing dist/ (don't rebuild it while another tool may be reading it)
+  [[ "${PACKAGE:-1}" == "1" ]] && (cd "$KIT" && bash tools/package.sh)
   rm -rf "$RUN/game"; cp -r "$BASE" "$RUN/game"
   D="$KIT/dist/Prismfall_DevKit"
   cp -r "$D/Plugins/." "$RUN/game/Plugins/"; cp "$D"/PBS/*.txt "$RUN/game/PBS/"; cp "$D"/Data/* "$RUN/game/Data/"
@@ -99,10 +100,12 @@ assemble() {
   sed -i '4s/^class PokemonSprite < SpriteWrapper/class PokemonSprite   # capture-copy patch: superclass mismatch/' \
     "$RUN/game/Plugins/Elite Battle DX/[000] Scripts/Battle UI/UI Fixes.rb"
   # Engine config: find Ruby's stdlib (zlib.so), no vsync wait under Xvfb
-  python3 - "$RUN/game/mkxp.json" "$RUBY_HOME" <<'PY'
+  # Own save/error-log directory per capture copy (dataPathApp), so copies never share one.
+  python3 - "$RUN/game/mkxp.json" "$RUBY_HOME" "PrismfallCapture-$(basename "$RUN")" <<'PY'
 import sys
-p, r = sys.argv[1], sys.argv[2]; s = open(p, encoding='utf-8').read(); i = s.index('"windowTitle"')
-s = s[:i] + '"rubyLoadpath": ["%s/lib/ruby/3.3.0/x86_64-linux", "%s/lib/ruby/3.3.0"],\n    "vsync": false, "frameSkip": false,\n    ' % (r, r) + s[i:]
+p, r, app = sys.argv[1], sys.argv[2], sys.argv[3]; s = open(p, encoding='utf-8').read(); i = s.index('"windowTitle"')
+s = s[:i] + ('"rubyLoadpath": ["%s/lib/ruby/3.3.0/x86_64-linux", "%s/lib/ruby/3.3.0"],\n    "vsync": false, "frameSkip": false,\n'
+             '    "dataPathApp": "%s",\n    ') % (r, r, app) + s[i:]
 open(p, 'w', encoding='utf-8').write(s)
 PY
   cp "$B/mkxp-z/b/mkxp-z.x86_64" "$RUN/game/"
@@ -112,7 +115,7 @@ PY
 run_plan() {
   plan="${1:-volcanic}"
   rm -rf "$RUN/game/Captures"; mkdir -p "$RUN/game/Captures" "$RUN/captures_keep"
-  (cd "$RUN/game" && DEMO_PLAN="$plan" ALSOFT_DRIVERS=null timeout 1500 \
+  (cd "$RUN/game" && DEMO_PLAN="$plan" ALSOFT_DRIVERS=null timeout "${RUN_TIMEOUT:-1500}" \
      xvfb-run -a -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/engine_stdout.txt" 2>&1) || true
   cat "$RUN/game/Captures/demo.log"
   for d in "$RUN"/game/Captures/*/; do n="$(basename "$d")"; rm -rf "$RUN/captures_keep/$n"; cp -r "$d" "$RUN/captures_keep/$n"; done

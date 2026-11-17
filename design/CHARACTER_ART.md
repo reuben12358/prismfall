@@ -2,19 +2,24 @@
 
 Owner: Character Artist. Status date: 2026-11-16.
 
-## 0. Status
+## 0. Status (v3, 2026-11-16)
+
+User direction: stock sprites are **pose skeletons only**. Each character is redrawn to its design sheet (§8): head, face, hair,
+proportions, outfit, props. Recolouring is not enough.
 
 | Character | Battle front | Overworld | Portraits | State |
 |---|---|---|---|---|
-| PLAYER_A (protagonist, look A) | done | done | 10 expressions | v2 frankensprite, awaiting user review |
-| PLAYER_B (protagonist, look B) | done | done | 10 expressions | v2 frankensprite, awaiting user review |
-| LARCH | done | done | 10 expressions | v2 frankensprite, awaiting user review |
-| KESTREL (`RIVAL_KESTREL`) | done | done | **on hold** | batch 2, sheet `03_kestrel_juno_player_backs.png` |
-| JUNO (`RIVAL_JUNO`, `LEADER_JUNO`) | done | done | **on hold** | batch 2 |
-| Player back sprites | `PLAYER_A_back`, `PLAYER_B_back` done | | | batch 2 |
-| Everyone else | stand-in (`STAND_INS`) | stand-in | engine fallback | **paused** until the user approves v2 |
+| KESTREL | **v3** hand-drawn on Lance's lunge | **v3** (new heads and coat on Lance's walk frames) | not started for v3 | sheets 04, 05 |
+| JUNO | **v3** hand-drawn on May's stance | **v3** (new heads and dungarees on May's walk frames) | not started for v3 | sheets 04, 05 |
+| PLAYER_A | **v3** hand-drawn on Red's throw (Red's legs and ball hand repainted) | v2 (recolour; to redo) | v2 (Blue-based; to redo for the v3 design) | sheet 06 |
+| PLAYER_B, LARCH | v2 (recolour; to redo) | v2 | v2 | queued |
+| Player back sprites | v2 (recolour; to redo for the v3 designs) | | | queued |
+| TAMSIN, VOSS, ROWAN/MOURNER, EDDA, CALLA, THISTLE | stand-in | stand-in | fallback | designs in §8, queued |
 
-Review sheet: `art/previews/02_frankensprite_protagonist_larch.png`. It shows the stock sprites beside ours at 1× and 4×, the overworlds at 1× and 3×, and every portrait at 2× and 1×.
+v3 method: the head, upper body and outfit are hand-placed pixels in ASCII grids (`art/tools/fr/chars/<name>.py`: a legend plus
+per-row spans), followed by an automatic edge-light pass (`shade.py`: light from the upper left). Limbs may be kept from the pose
+source, but only repainted. Overworld heads are hand-drawn 16×16 stamps per direction (`ow3.py`), with right mirrored from left.
+Review sheets: `04_kestrel_juno_v3_rebuild.png`, `05_kestrel_juno_v3_overworld.png`, `06_v3_kestrel_juno_player_a.png`.
 
 **v1 was rejected.** The user rejected the first, parametric approach (characters drawn from scratch by code). Its output is quarantined in
 `art/rejected_parametric_v1/` (files, previews and the old `art/tools/*.py` pipeline). **Do not install anything from it.**
@@ -122,6 +127,32 @@ Integration notes for other plugins and PBS:
 The frankensprites are derived from the base project's Gen 4/5-style trainer fronts and charsets and the HGSS VS busts (Pokémon ©
 Nintendo / Game Freak; the sprite rips and edits belong to their respective rippers and artists). Credit them in the game's credits
 the same way the base pack's own assets are credited, and add "Prismfall character edits".
+
+## 8. Design sheets (v3: first-hour cast)
+
+User direction (2026-11-16): stock poses may be reused, but **each character is redrawn**: head and face, hair, proportions,
+outfit, props. The stock body is only a pose skeleton. The test: next to its stock source, nobody recognises the source character,
+only the pose. Rules: a strong two-colour identity, one exaggerated feature that reads at 1×, a readable silhouette, and no two
+characters sharing a silhouette or colour pair.
+(Exception: PLAYER_A and PLAYER_B are two looks of the same person and never appear together, so they share the PC pair.)
+
+| Character | Colour pair (dominant + accent) | Iconic shape (reads at 1×) | Silhouette | Outfit (faction / personality) | Memorable at a glance |
+|---|---|---|---|---|---|
+| **PLAYER_A** | chalk white + prism teal | a **long teal scarf** whose frayed tail streams out behind | compact, short spiky ash hair; the scarf tail breaks the outline | white hooded windbreaker (raised abroad, came on the ferry), dark slim trousers, teal-soled boots, beat-up satchel | the "colourless" kid: almost all white, with one teal streak |
+| **PLAYER_B** | chalk white + prism teal | the same scarf, tied into the hair as a **long side tail** | long plum hair swept into one big side tail | white windbreaker cropped at the waist, dark shorts over leggings, teal boots, satchel | as A, with a big plum hair shape |
+| **LARCH** | oilskin mustard + slate grey | a **rope-thick grey braid to the waist** | tall, thin, A-line knee coat with a big storm collar | fisherman's oilskin (Tidewatch station, sea air) over a slate engineer's shirt, reading glasses on a chain, mug of green kelp tea | yellow coat, a long braid, a steaming green mug |
+| **JUNO** | leaf green + marigold | a **huge frizzy auburn hair-cloud** bursting out of a marigold kerchief | round head mass on a small body, wide boots | green dungarees with patched knees, rolled cream shirt, oversized gardening gloves, a satchel spilling seed packets (tiny coloured squares) | the hair cloud and the falling seed packets |
+| **KESTREL** | black + crimson | an **oversized black greatcoat**: sleeves past the hands, collar flipped up, tails split like a raptor's tail | lean, sharp V shape; the coat tails flare behind | his mother's coat (a size too big), a crimson undershirt, a crimson feather pin (kestrel), boots; a long lock over one eye | the too-big coat and the split tails |
+| **TAMSIN** | cream + moth rose-brown | a **moth-wing shawl** with two big eyespots that opens like wings | slight figure, wide wing-shawl, messy bun stabbed with needles | Briarwick weaver: cream smock, ink-stained fingers, yellow measuring tape round the neck, pincushion bracelet | the eyespot wings |
+| **VOSS** | charcoal + gold | a **gold sunburst pin** on a long, sharp suit line | tallest of the cast, very narrow and vertical | bespoke charcoal three-piece with a long overcoat over the shoulders, slicked black hair with silver temples, a chipped white company mug | gold on charcoal; the cheap mug in an expensive hand |
+| **ROWAN** | moss green + earth brown | a **wide-brimmed gardener's hat with one white lily** in the band (a fair clue) | lanky, hat brim wider than the shoulders | the Verdance Warden's work clothes: moss field coat, earth-brown trousers, soil-dark gloves, a watering can | the hat with the lily |
+| **MOURNER** | ash grey + bone white | a **tall pointed cowl and a pale bark mask with one lily** | tall narrow triangle; the robe hem frays into strips | the Hollow's mourning robe, ash-bark mask, a lily over the brow | a white mask in a grey triangle |
+| **EDDA** | navy + rust red | a **red knit watch cap** on a **barrel-shaped** body | squat and round, the widest silhouette | the *Dovetail* captain: navy pea coat with brass buttons, red neckerchief, rolled sleeve showing a Lapras tattoo, gold tooth | a round navy barrel with a red cap |
+| **CALLA** | ivory + cobalt | a **severe asymmetric black bob** and a brass handheld scanner with a green lens | narrow pencil line: fitted jacket, pencil skirt | Meridian executive staff uniform (ivory with cobalt piping, sunburst lapel pin), tablet clipboard | the bob and the scanner's green light |
+| **THISTLE** | ash grey + thistle purple | **huge weaver's shears** carried like a blade, and a thistle brooch | hooded, hunched forward, shears jutting out | Hollow Pallbearer grey hood and wrap, a purple thistle sash (Lowmarsh weavers), a torn survey flag in the belt | the shears |
+
+Colour pairs in use (check against these before adding anyone): white/teal (PC), mustard/slate, green/marigold, black/crimson,
+cream/rose-brown, charcoal/gold, moss/earth, ash/bone, navy/rust, ivory/cobalt, ash/thistle purple.
 
 ## 7. Honest assessment (v2)
 

@@ -1,0 +1,46 @@
+# Material / era tags for tile ids (MAPGEN 2g). build.py reads each map's `biome:` and reports tiles whose material
+# the biome forbids (`--strict` makes that an error). Untagged tiles are allowed everywhere: tag families as you meet them.
+# Ranges are inclusive tile ids; `shared` applies to every tileset whose first 8616 ids are Tectonic Outside (30, 33, 40).
+materials: [wood, stone, earth, plant, water, rope, silk, crystal, iron, metal, concrete, modern, fabric]
+biomes:
+  forest:      {forbid: [iron, metal, concrete, modern, fabric]}
+  route:       {forbid: [iron, metal, concrete, modern]}
+  bleed:       {forbid: [iron, metal, concrete, modern, fabric]}
+  canopy_gym:  {forbid: [iron, metal, concrete, modern]}
+  village:     {forbid: [metal, concrete, modern]}
+  harbour:     {forbid: [concrete, modern]}
+  city:        {forbid: []}
+  interior:    {forbid: []}
+shared:
+  - [1316, 1319, metal]          # vent grates
+  - [1368, 1455, metal]          # grey slat steps, blue-railed metal stairs (t_stairs 1389-1415), escalators
+  - [1848, 1855, metal]          # steel posts
+  - [1928, 2039, iron]           # wrought-iron and chain-link fences ('fence' glyph of tectonic/city)
+  - [3272, 3275, modern]         # street lamps, post box
+  - [3276, 3277, iron]           # park bench (t_bench)
+  - [3278, 3278, iron]           # Prizca lamp (t_lamp)
+  - [3279, 3283, modern]
+  - [3284, 3285, iron]
+  - [3286, 3286, iron]
+  - [3287, 3311, modern]         # barriers (3293-3294), statue plinth, traffic posts
+  - [3552, 3583, fabric]         # beach parasols
+  - [4048, 4223, modern]         # stop signs, road markings, machinery, shipping containers
+  - [6280, 6423, modern]         # solar roofs, glass office blocks
+  - [7296, 7703, modern]         # towers, apartment blocks
+  - [7432, 7432, iron]           # lamp head of t_lamp (inside the modern block above; listed after it, so it wins)
+  - [8160, 8287, modern]         # hazard tape, steel walkways
+  - [8368, 8615, modern]         # roads, trains
+  - [8064, 8159, crystal]
+tilesets:
+  40:                            # Prismfall Wilds: Route 2 sheet (+8232), Goldenleaf (+10728)
+    - [9464, 9495, metal]        # Route 2: organ pipes, steel fittings
+    - [9520, 9543, modern]       # Route 2: the red truck
+    - [9576, 9631, modern]       # Route 2: the train
+    - [9696, 9911, modern]       # Route 2: arena block, tech panels
+    - [9976, 10007, modern]      # Route 2: truck
+    - [10008, 10239, metal]      # Route 2: rails, lamp posts
+    - [11760, 11777, modern]     # Goldenleaf: Poké Center / Mart fronts
+    - [12104, 12151, modern]     # Goldenleaf: train
+    - [12648, 12703, modern]     # Goldenleaf: Poké Center / Mart
+  33:
+    - [10384, 14383, modern]     # GearenCity Real: apartment blocks, scaffolds, trucks (city maps only)

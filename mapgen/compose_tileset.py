@@ -99,6 +99,15 @@ def main():
         im = Image.open(c3).convert('RGBA'); n = im.height // 32 * 8; meta = json.load(open(c3[:-4] + '.json'))
         offs['custom3'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': []}
         pas += [int(v) for v in meta['passages']]; pri += [int(v) for v in meta['priorities']]; tag += [0] * n; ims.append(im)
+    import material_art as MA                                      # per-biome stairs/props (MAPGEN 2g), appended last
+    mim, mnames, mp, mq = MA.strip(ims[0])
+    offs['materials'] = {'offset': len(pas), 'tiles': len(mp), 'src_tilesets': [], 'names': mnames}
+    pas += mp; pri += mq; tag += [0] * len(mp); ims.append(mim)
+    import ship_art as SA                                          # the Dovetail's hull, deck and rigging (map 109), appended last
+    sim, sp, sq, splace = SA.strip()
+    offs['dovetail'] = {'offset': len(pas), 'tiles': len(sp), 'src_tilesets': []}
+    json.dump(splace, open(os.path.join(HERE, 'data', 'ship_dovetail.json'), 'w'))
+    pas += sp; pri += sq; tag += [0] * len(sp); ims.append(sim)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

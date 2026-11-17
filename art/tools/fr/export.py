@@ -2,7 +2,10 @@
 import os
 import numpy as np
 from PIL import Image
-import pc_a, pc_b, larch, ow_fr, batch2
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(__file__), 'chars'))
+import pc_a, pc_b, larch, ow_fr, batch2, ow3
+import kestrel as k3, juno as j3, player_a as pa3
 from render_busts import build
 from exprs import EXPRS
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'out', 'Graphics'))
@@ -10,14 +13,14 @@ LOCK = os.path.join(os.path.dirname(__file__), 'locked.txt')
 LOCKED = {l.strip() for l in open(LOCK) if l.strip() and not l.startswith('#')} if os.path.exists(LOCK) else set()
 
 CHARS = {
-    'PLAYER_A': dict(front=pc_a.build, ow=ow_fr.player_a),
+    'PLAYER_A': dict(front=pa3.build, ow=ow_fr.player_a),        # front v3; overworld still v2
     'PLAYER_B': dict(front=pc_b.build, ow=ow_fr.player_b),
     'LARCH': dict(front=larch.build, ow=ow_fr.larch),
 }
 # battle + overworld only (portraits on hold); several trainer types share one art file
 SPRITES = {
-    'KESTREL': dict(types=['RIVAL_KESTREL'], front=batch2.kestrel, ow=batch2.kestrel_ow),
-    'JUNO': dict(types=['RIVAL_JUNO', 'LEADER_JUNO'], front=batch2.juno, ow=batch2.juno_ow),
+    'KESTREL': dict(types=['RIVAL_KESTREL'], front=k3.build, ow=ow3.kestrel_ow),
+    'JUNO': dict(types=['RIVAL_JUNO', 'LEADER_JUNO'], front=j3.build, ow=ow3.juno_ow),
 }
 BACKS = {'PLAYER_A_back': batch2.back_a, 'PLAYER_B_back': batch2.back_b}
 

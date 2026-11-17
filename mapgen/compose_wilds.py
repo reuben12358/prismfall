@@ -277,6 +277,10 @@ def main():
     for t in S.tiles:
         pas.append(t[1] if t else 0); pri.append(t[2] if t else 0); tag.append(t[3] if t else 0)
     ims.append(cu)
+    import material_art as MA                                      # per-biome stairs/props (MAPGEN 2g), appended last
+    mim, mnames, mp, mq = MA.strip(tect)
+    offs['materials'] = {'offset': len(pas), 'tiles': len(mp), 'names': mnames}
+    pas += mp; pri += mq; tag += [0] * len(mp); ims.append(mim)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

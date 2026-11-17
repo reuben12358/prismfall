@@ -134,7 +134,7 @@ def deepwood():
         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'Followers/MASQUERAIN', 'dir': 'left'}, 'through': True,
          'commands': ["It rests on the water, calm."]}]})
     c.events = E
-    head = {'id': 525, 'name': 'Gossamer Deepwood', 'bgm': 'Route 3', 'parent': 524, 'field': 'SILKWOOD', 'tone': [-40, -24, -30, 40],
+    head = {'id': 525, 'biome': 'forest', 'name': 'Gossamer Deepwood', 'bgm': 'Route 3', 'parent': 524, 'field': 'SILKWOOD', 'tone': [-40, -24, -30, 40],
             'metadata': {'ShowArea': True, 'MapPosition': [0, 13, 23], 'BattleBack': 'forest'}}
     return c.write('', head, "# Gossamer Deepwood (525) and Cocoonfall Hollow (548). WRITTEN BY layouts/deepwood.py - edit that, not this file.\n")
 
@@ -259,7 +259,7 @@ def hollow():
               'text': "Dozens of glass cocoons, hanging. Inside each, a moth, wings spread, perfectly still.\nOne of them twitches."})
     E.append({'type': 'item', 'at': P['tm'], 'item': 'TM81'})
     c.events = E
-    head = {'id': 548, 'name': 'Cocoonfall Hollow', 'palette': 'bleed', 'bgm': 'Route 3', 'parent': 540, 'field': 'BLEED', 'tone': [-46, -50, 4, 90],
+    head = {'id': 548, 'biome': 'bleed', 'name': 'Cocoonfall Hollow', 'palette': 'bleed', 'bgm': 'Route 3', 'parent': 540, 'field': 'BLEED', 'tone': [-46, -50, 4, 90],
             'metadata': {'ShowArea': True, 'MapPosition': [0, 11, 22], 'BattleBack': 'forest'}}
     return c.write('', head, '')
 

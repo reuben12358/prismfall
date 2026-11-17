@@ -3,6 +3,7 @@ id: 130
 name: Loomhouse Gym - Foyer
 parent: 120
 palette: loom
+biome: canopy_gym
 bgm: Gym
 field: SILKWOOD
 rubric: true
@@ -379,6 +380,7 @@ id: 131
 name: Loomhouse Gym - Weaving Hall
 parent: 130
 palette: loom
+biome: canopy_gym
 bgm: Gym
 rubric: true
 field: SILKWOOD
@@ -1929,6 +1931,7 @@ id: 132
 name: Loomhouse Gym - Canopy Lofts
 parent: 130
 palette: loom
+biome: canopy_gym
 bgm: Gym
 rubric: true
 field: SILKWOOD
@@ -3175,6 +3178,7 @@ id: 133
 name: Loomhouse Gym - The Spindle
 parent: 130
 palette: loom
+biome: canopy_gym
 bgm: Gym
 field: SILKWOOD
 rubric: true

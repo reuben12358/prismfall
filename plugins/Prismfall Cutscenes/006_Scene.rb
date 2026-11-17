@@ -144,6 +144,7 @@ module Prismfall
         until @finished
           Graphics.update
           Input.update
+          pbUpdateSceneMap if on_map? && defined?(pbUpdateSceneMap)   # the map keeps living underneath
           now = Util.now
           update(Util.clamp(now - last, 0.0, MAX_DT))
           last = now
@@ -190,7 +191,11 @@ module Prismfall
         @curtain_sprite = solid([0, 0, 0], Z_CURTAIN)
         @memo_bgm = @definition.uses?(:bgm) && @definition.options[:restore_bgm] != false
         $game_system.bgm_memorize if @memo_bgm && $game_system && $game_system.respond_to?(:bgm_memorize)
-        run_effect(Tween.new(FADE_TIME, :linear) { |k, _| @curtain = 255.0 * (1 - k) }, 0.0)
+        if on_map?
+          @curtain = 0.0                # on-map scenes start and end on the live map, no black
+        else
+          run_effect(Tween.new(FADE_TIME, :linear) { |k, _| @curtain = 255.0 * (1 - k) }, 0.0)
+        end
       end
 
       def update(dt)
@@ -209,6 +214,10 @@ module Prismfall
           done = e.update(self, @time - e.t0, dt)
           e.dispose if done
           done
+        end
+        if Cutscene.photosensitive?
+          @camera.sx = Util.snap(@camera.sx * 0.2)
+          @camera.sy = Util.snap(@camera.sy * 0.2)
         end
         @particles.update(dt)
         @layers.each { |l| l.update(self, dt) }
@@ -233,7 +242,8 @@ module Prismfall
       def begin_ending(fade)
         @ending = true
         from = @curtain
-        @end_at = @time + ((from >= 255) ? 0.0 : fade)
+        @end_at = @time + ((from >= 255 || (on_map? && from <= 0)) ? 0.0 : fade)
+        return if on_map? && from <= 0
         run_effect(Tween.new(fade, :linear) { |k, _| @curtain = from + ((255.0 - from) * k) }, @time)
       end
 
@@ -420,6 +430,10 @@ module Prismfall
 
       # hold: seconds at full strength before the fade (part of dur).
       def add_flash(color, dur, power = 255, t0 = nil, hold = 0.0)
+        if Cutscene.photosensitive?          # a soft, short brightening instead of a flash
+          power = [power * 0.25, 60].min
+          hold = 0.0
+        end
         @flash_sprite.bitmap.fill_rect(0, 0, 4, 4, Util.color(color || [255, 255, 255]))
         run_effect(Tween.new(dur, :linear) { |_, raw|
           t = raw * dur
@@ -514,7 +528,7 @@ module Prismfall
       def op_fade(a, dur)
         act = actor!(a[:id])
         o0 = act.opacity
-        tween(dur, a[:ease] || :linear) { |k, _| act.opacity = Util.lerp(o0, (a[:to] || 0).to_f, k) }
+        tween(dur, a[:ease] || ((a[:steps]) ? :"step#{a[:steps]}" : :linear)) { |k, _| act.opacity = Util.lerp(o0, (a[:to] || 0).to_f, k) }
       end
 
       # tint :id, color: [r, g, b] or palette, amount: 0..255 (255 = silhouette)
@@ -673,12 +687,12 @@ module Prismfall
 
       def op_fade_out(a, dur)
         from = @curtain
-        tween(dur, :linear) { |k, _| @curtain = Util.lerp(from, 255.0, k) }
+        tween(dur, a[:ease] || ((a[:steps]) ? :"step#{a[:steps]}" : :linear)) { |k, _| @curtain = Util.lerp(from, 255.0, k) }
       end
 
       def op_fade_in(a, dur)
         from = @curtain
-        tween(dur, :linear) { |k, _| @curtain = Util.lerp(from, 0.0, k) }
+        tween(dur, a[:ease] || ((a[:steps]) ? :"step#{a[:steps]}" : :linear)) { |k, _| @curtain = Util.lerp(from, 0.0, k) }
       end
 
       def op_letterbox(a, dur)

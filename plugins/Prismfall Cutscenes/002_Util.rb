@@ -22,6 +22,8 @@ module Prismfall
         },
         :steps     => proc { |k| (k * 6).floor / 6.0 }   # deliberately choppy
       }
+      # :step3 .. :step8 - n hard steps (Rejuvenation fades opacity in 5 steps of 1/20 s)
+      (3..8).each { |n| FUNCS[:"step#{n}"] = proc { |k| (k >= 1) ? 1.0 : (k * n).floor / n.to_f } }
 
       def self.apply(name, k)
         k = 0.0 if k < 0

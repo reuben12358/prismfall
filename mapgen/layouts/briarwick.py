@@ -76,6 +76,7 @@ def build():
     c.lane([(50, 41), (57, 44), (59, 47)], 'd', 11, only='.', r=0.8)
     c.lane([(33, 13), (27, 14), (23, 14)], 'd', 12, only='.')
     c.rect(32, 15, 9, 2, 'k', '.')
+    c.stair_kind = 'stairs_log@33'       # earth-cut log steps in the forest village (MAPGEN 2g)
     c.stairs(35, 17)
     c.cliffs(face=2, keep='~')
     for y in range(H):
@@ -143,7 +144,7 @@ def build():
     c.dress(['tp_stall_05', 'tp_stall_06', 'tp_stall_20', 'tp_stall_21', 'p_laundry', 'tp_stall_08'], 8, '.', 2, (12, 18, 34, 50))
     for x, y in ((29, 27), (25, 29)): c.stamp('p_loom', x, y, force=True)
     for x, y in ((52, 51), (61, 52), (64, 51)): c.stamp('p_lantern', x - 1, y, force=True)
-    for nm, x, y in (('tp_stall_13', 54, 52), ('t_barrel', 50, 52), ('tp_barrel_06', 62, 53), ('p_silk', 65, 51), ('t_bench', 56, 53),
+    for nm, x, y in (('tp_stall_13', 54, 52), ('t_barrel', 50, 52), ('tp_barrel_06', 62, 53), ('p_silk', 65, 51), ('logbench@33', 56, 53),
                      ('tp_stall_05', 26, 26), ('tp_barrel_06', 30, 29), ('tp_garden_09', 41, 35)):
         c.stamp(nm, x, y, force=True)        # life on the decks; the well on the green
     c.dress(['p_silk', 'p_silk1', 'p_strand_w', 'p_strand_p', 'p_silk1'], 26, '.', 4, pad=0)
@@ -151,7 +152,7 @@ def build():
     c.dress(['p_lantern'], 34, '.', 6, near='dk')
     c.dress(GARDEN + ['p_crates', 'tp_stall_13', 't_barrel', 'tp_stall_01', 'fo_rustic_20', 'fo_rustic_22'], 30, '.', 7, pad=0)
     c.dress(['p_cherry', 'p_pinkbush', 'p_pinkbush2', 'fo_fairy_05'], 10, '.', 8)
-    c.dress(['t_bench'], 3, 'k', 9, pad=0); c.dress(['p_banner3', 'p_banner'], 5, '.', 10, near='d', pad=0)
+    c.dress(['logbench@33'], 3, 'k', 9, pad=0); c.dress(['p_banner3', 'p_banner'], 5, '.', 10, near='d', pad=0)
     # silk strung overhead across the lanes (layer 3), lanterns hanging in it
     for x0, x1, y, sd in ((31, 47, 33, 0), (27, 35, 44, 1), (40, 49, 26, 2), (17, 23, 29, 3), (52, 62, 35, 1), (29, 39, 57, 2),
                           (49, 57, 40, 3), (31, 41, 19, 0)):
@@ -160,7 +161,7 @@ def build():
     c.greenfill(0.47, 1, beds=0.06)
     c.sea_rocks(4)
     c.events = E
-    head = {'id': 120, 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,
+    head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},
             'tone': [-18, -30, 4, 12], 'fog': {'name': 'prismfall_spores', 'opacity': 46, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1},
             'connections': [{'dir': 'W', 'offset': 29, 'to': 540, 'to_offset': 10}]}

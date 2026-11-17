@@ -697,5 +697,18 @@
    "web_big": 22800,
    "loom": 22824
   }
+ },
+ "materials": {
+  "offset": 22848,
+  "tiles": 120,
+  "names": {
+   "stairs_log": 0,
+   "stairs_stone": 27,
+   "stairs_plank": 56,
+   "signpost": 83,
+   "lantern": 92,
+   "logbench": 109,
+   "barricade": 112
+  }
  }
 }

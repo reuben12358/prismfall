@@ -16,5 +16,5 @@ glyphs:
   'o': rock
   '#': wall
 tiles:
-  sign: {layer: 1, tile: 3264}
-  sign_top: {layer: 2, tile: 3256}
+  sign: {layer: 1, tile: 22939}          # wooden signpost (material_art), MAPGEN 2g
+  sign_top: {layer: 2, tile: 22931}

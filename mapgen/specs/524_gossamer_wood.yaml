@@ -1,5 +1,6 @@
 # Gossamer Wood (524). WRITTEN BY layouts/gossamer.py - edit that, not this file.
 id: 524
+biome: forest
 name: Gossamer Wood
 bgm: Route 3
 parent: 0
@@ -130,9 +131,9 @@ heights: |
   00000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_log@40
   at: [11, 21]
-- stamp: t_stairs
+- stamp: stairs_log@40
   at: [26, 21]
 tileblocks: []
 tiles:
@@ -527,32 +528,27 @@ tiles:
 - {tile: 418, at: [26, 54], layer: 1}
 - {tile: 1096, at: [27, 0], layer: 2}
 - {tile: 1097, at: [28, 0], layer: 2}
-- {tile: 689, at: [24, 1], layer: 2}
 - {tile: 1104, at: [27, 1], layer: 2}
 - {tile: 1105, at: [28, 1], layer: 2}
 - {tile: 8835, at: [32, 1], layer: 2}
 - {tile: 8836, at: [33, 1], layer: 2}
-- {tile: 405, at: [26, 2], layer: 2}
+- {tile: 406, at: [24, 2], layer: 2}
 - {tile: 1112, at: [27, 2], layer: 2}
 - {tile: 1113, at: [28, 2], layer: 2}
 - {tile: 22560, at: [29, 2], layer: 2}
 - {tile: 1063, at: [31, 2], layer: 2}
 - {tile: 8843, at: [32, 2], layer: 2}
 - {tile: 8844, at: [33, 2], layer: 2}
-- {tile: 689, at: [24, 3], layer: 2}
 - {tile: 8835, at: [28, 3], layer: 2}
 - {tile: 8836, at: [29, 3], layer: 2}
 - {tile: 1062, at: [32, 3], layer: 2}
-- {tile: 401, at: [34, 3], layer: 2}
-- {tile: 689, at: [24, 4], layer: 2}
+- {tile: 402, at: [24, 4], layer: 2}
 - {tile: 8843, at: [28, 4], layer: 2}
 - {tile: 8844, at: [29, 4], layer: 2}
 - {tile: 3623, at: [33, 4], layer: 2}
-- {tile: 606, at: [24, 5], layer: 2}
 - {tile: 1063, at: [27, 5], layer: 2}
 - {tile: 22616, at: [31, 5], layer: 2}
 - {tile: 1052, at: [33, 5], layer: 2}
-- {tile: 401, at: [34, 5], layer: 2}
 - {tile: 22800, at: [15, 6], layer: 2}
 - {tile: 22801, at: [16, 6], layer: 2}
 - {tile: 22802, at: [17, 6], layer: 2}
@@ -561,27 +557,23 @@ tiles:
 - {tile: 22808, at: [15, 7], layer: 2}
 - {tile: 22809, at: [16, 7], layer: 2}
 - {tile: 22810, at: [17, 7], layer: 2}
-- {tile: 405, at: [25, 7], layer: 2}
 - {tile: 22816, at: [15, 8], layer: 2}
 - {tile: 22817, at: [16, 8], layer: 2}
 - {tile: 22818, at: [17, 8], layer: 2}
-- {tile: 402, at: [21, 8], layer: 2}
-- {tile: 401, at: [22, 8], layer: 2}
 - {tile: 22681, at: [25, 8], layer: 2}
-- {tile: 401, at: [30, 8], layer: 2}
+- {tile: 605, at: [30, 8], layer: 2}
 - {tile: 22560, at: [41, 8], layer: 2}
 - {tile: 22568, at: [42, 8], layer: 2}
 - {tile: 3594, at: [12, 9], layer: 2}
 - {tile: 3595, at: [13, 9], layer: 2}
-- {tile: 406, at: [20, 9], layer: 2}
+- {tile: 405, at: [20, 9], layer: 2}
 - {tile: 22688, at: [24, 9], layer: 2}
 - {tile: 22689, at: [25, 9], layer: 2}
+- {tile: 402, at: [28, 9], layer: 2}
 - {tile: 22616, at: [29, 9], layer: 2}
 - {tile: 22560, at: [39, 9], layer: 2}
-- {tile: 605, at: [43, 9], layer: 2}
+- {tile: 406, at: [40, 9], layer: 2}
 - {tile: 1063, at: [44, 9], layer: 2}
-- {tile: 606, at: [16, 10], layer: 2}
-- {tile: 405, at: [17, 10], layer: 2}
 - {tile: 8637, at: [18, 10], layer: 2}
 - {tile: 605, at: [19, 10], layer: 2}
 - {tile: 1160, at: [21, 10], layer: 2}
@@ -589,15 +581,13 @@ tiles:
 - {tile: 22696, at: [24, 10], layer: 2}
 - {tile: 22616, at: [30, 10], layer: 2}
 - {tile: 402, at: [36, 10], layer: 2}
-- {tile: 405, at: [38, 10], layer: 2}
 - {tile: 22681, at: [42, 10], layer: 2}
-- {tile: 406, at: [6, 11], layer: 2}
+- {tile: 402, at: [6, 11], layer: 2}
 - {tile: 1085, at: [7, 11], layer: 2}
 - {tile: 1086, at: [8, 11], layer: 2}
 - {tile: 1087, at: [9, 11], layer: 2}
 - {tile: 22616, at: [10, 11], layer: 2}
 - {tile: 1576, at: [11, 11], layer: 2}
-- {tile: 605, at: [14, 11], layer: 2}
 - {tile: 8644, at: [17, 11], layer: 2}
 - {tile: 8645, at: [18, 11], layer: 2}
 - {tile: 8646, at: [19, 11], layer: 2}
@@ -610,6 +600,7 @@ tiles:
 - {tile: 22802, at: [38, 11], layer: 2}
 - {tile: 22688, at: [41, 11], layer: 2}
 - {tile: 22689, at: [42, 11], layer: 2}
+- {tile: 605, at: [45, 11], layer: 2}
 - {tile: 22560, at: [6, 12], layer: 2}
 - {tile: 1093, at: [7, 12], layer: 2}
 - {tile: 1094, at: [8, 12], layer: 2}
@@ -620,7 +611,6 @@ tiles:
 - {tile: 8654, at: [19, 12], layer: 2}
 - {tile: 8843, at: [21, 12], layer: 2}
 - {tile: 8844, at: [22, 12], layer: 2}
-- {tile: 688, at: [29, 12], layer: 2}
 - {tile: 22808, at: [36, 12], layer: 2}
 - {tile: 22809, at: [37, 12], layer: 2}
 - {tile: 14032, at: [38, 12], layer: 2}
@@ -630,7 +620,6 @@ tiles:
 - {tile: 14036, at: [42, 12], layer: 2}
 - {tile: 14037, at: [43, 12], layer: 2}
 - {tile: 1052, at: [6, 13], layer: 2}
-- {tile: 401, at: [32, 13], layer: 2}
 - {tile: 22816, at: [36, 13], layer: 2}
 - {tile: 22817, at: [37, 13], layer: 2}
 - {tile: 14040, at: [38, 13], layer: 2}
@@ -639,28 +628,19 @@ tiles:
 - {tile: 14043, at: [41, 13], layer: 2}
 - {tile: 14044, at: [42, 13], layer: 2}
 - {tile: 14045, at: [43, 13], layer: 2}
-- {tile: 688, at: [44, 13], layer: 2}
 - {tile: 22616, at: [10, 14], layer: 2}
 - {tile: 605, at: [14, 14], layer: 2}
 - {tile: 606, at: [15, 14], layer: 2}
 - {tile: 1062, at: [17, 14], layer: 2}
-- {tile: 605, at: [19, 14], layer: 2}
-- {tile: 688, at: [44, 14], layer: 2}
-- {tile: 605, at: [19, 15], layer: 2}
-- {tile: 688, at: [42, 15], layer: 2}
+- {tile: 401, at: [42, 15], layer: 2}
+- {tile: 689, at: [10, 16], layer: 2}
 - {tile: 1062, at: [13, 16], layer: 2}
 - {tile: 22616, at: [14, 16], layer: 2}
-- {tile: 405, at: [18, 16], layer: 2}
-- {tile: 405, at: [27, 16], layer: 2}
-- {tile: 402, at: [11, 17], layer: 2}
-- {tile: 401, at: [16, 17], layer: 2}
+- {tile: 688, at: [27, 16], layer: 2}
 - {tile: 22528, at: [26, 17], layer: 2}
 - {tile: 22528, at: [27, 17], layer: 2}
-- {tile: 606, at: [11, 18], layer: 2}
-- {tile: 405, at: [14, 18], layer: 2}
 - {tile: 22664, at: [26, 18], layer: 2}
 - {tile: 22664, at: [27, 18], layer: 2}
-- {tile: 405, at: [13, 19], layer: 2}
 - {tile: 22800, at: [4, 20], layer: 2}
 - {tile: 22801, at: [5, 20], layer: 2}
 - {tile: 22802, at: [6, 20], layer: 2}
@@ -676,7 +656,6 @@ tiles:
 - {tile: 22800, at: [16, 21], layer: 2}
 - {tile: 22801, at: [17, 21], layer: 2}
 - {tile: 22802, at: [18, 21], layer: 2}
-- {tile: 406, at: [28, 21], layer: 2}
 - {tile: 6848, at: [38, 21], layer: 2}
 - {tile: 6849, at: [39, 21], layer: 2}
 - {tile: 6850, at: [40, 21], layer: 2}
@@ -695,7 +674,6 @@ tiles:
 - {tile: 6859, at: [41, 22], layer: 2}
 - {tile: 6860, at: [42, 22], layer: 2}
 - {tile: 6861, at: [43, 22], layer: 2}
-- {tile: 406, at: [45, 22], layer: 2}
 - {tile: 22776, at: [46, 22], layer: 2}
 - {tile: 22777, at: [47, 22], layer: 2}
 - {tile: 1096, at: [9, 23], layer: 2}
@@ -706,7 +684,7 @@ tiles:
 - {tile: 1085, at: [19, 23], layer: 2}
 - {tile: 1086, at: [20, 23], layer: 2}
 - {tile: 1087, at: [21, 23], layer: 2}
-- {tile: 605, at: [22, 23], layer: 2}
+- {tile: 688, at: [22, 23], layer: 2}
 - {tile: 6864, at: [38, 23], layer: 2}
 - {tile: 6865, at: [39, 23], layer: 2}
 - {tile: 6866, at: [40, 23], layer: 2}
@@ -720,14 +698,14 @@ tiles:
 - {tile: 8836, at: [8, 24], layer: 2}
 - {tile: 1104, at: [9, 24], layer: 2}
 - {tile: 1105, at: [10, 24], layer: 2}
-- {tile: 689, at: [11, 24], layer: 2}
-- {tile: 605, at: [13, 24], layer: 2}
+- {tile: 688, at: [13, 24], layer: 2}
 - {tile: 22560, at: [18, 24], layer: 2}
 - {tile: 1093, at: [19, 24], layer: 2}
 - {tile: 1094, at: [20, 24], layer: 2}
 - {tile: 1095, at: [21, 24], layer: 2}
 - {tile: 22568, at: [22, 24], layer: 2}
-- {tile: 405, at: [28, 24], layer: 2}
+- {tile: 606, at: [26, 24], layer: 2}
+- {tile: 605, at: [28, 24], layer: 2}
 - {tile: 1062, at: [36, 24], layer: 2}
 - {tile: 22728, at: [47, 24], layer: 2}
 - {tile: 1063, at: [6, 25], layer: 2}
@@ -736,43 +714,37 @@ tiles:
 - {tile: 1112, at: [9, 25], layer: 2}
 - {tile: 1113, at: [10, 25], layer: 2}
 - {tile: 1052, at: [11, 25], layer: 2}
-- {tile: 406, at: [18, 25], layer: 2}
-- {tile: 606, at: [26, 25], layer: 2}
+- {tile: 405, at: [13, 25], layer: 2}
+- {tile: 406, at: [26, 25], layer: 2}
+- {tile: 605, at: [28, 25], layer: 2}
 - {tile: 406, at: [35, 25], layer: 2}
-- {tile: 405, at: [44, 25], layer: 2}
-- {tile: 406, at: [46, 25], layer: 2}
+- {tile: 688, at: [44, 25], layer: 2}
 - {tile: 22728, at: [47, 25], layer: 2}
-- {tile: 606, at: [48, 25], layer: 2}
+- {tile: 688, at: [48, 25], layer: 2}
 - {tile: 22568, at: [16, 26], layer: 2}
 - {tile: 406, at: [18, 26], layer: 2}
-- {tile: 401, at: [22, 26], layer: 2}
-- {tile: 402, at: [25, 26], layer: 2}
-- {tile: 405, at: [28, 26], layer: 2}
+- {tile: 406, at: [25, 26], layer: 2}
 - {tile: 22616, at: [35, 26], layer: 2}
 - {tile: 22681, at: [37, 26], layer: 2}
-- {tile: 402, at: [46, 26], layer: 2}
+- {tile: 405, at: [44, 26], layer: 2}
 - {tile: 22728, at: [47, 26], layer: 2}
 - {tile: 22681, at: [9, 27], layer: 2}
-- {tile: 406, at: [23, 27], layer: 2}
-- {tile: 606, at: [24, 27], layer: 2}
-- {tile: 405, at: [28, 27], layer: 2}
-- {tile: 406, at: [33, 27], layer: 2}
+- {tile: 405, at: [19, 27], layer: 2}
 - {tile: 22688, at: [36, 27], layer: 2}
 - {tile: 22689, at: [37, 27], layer: 2}
+- {tile: 406, at: [45, 27], layer: 2}
 - {tile: 22728, at: [47, 27], layer: 2}
 - {tile: 22688, at: [8, 28], layer: 2}
 - {tile: 22689, at: [9, 28], layer: 2}
 - {tile: 1118, at: [11, 28], layer: 2}
 - {tile: 1119, at: [12, 28], layer: 2}
-- {tile: 406, at: [29, 28], layer: 2}
+- {tile: 402, at: [22, 28], layer: 2}
 - {tile: 22696, at: [36, 28], layer: 2}
 - {tile: 1063, at: [44, 28], layer: 2}
-- {tile: 606, at: [46, 28], layer: 2}
 - {tile: 22728, at: [47, 28], layer: 2}
 - {tile: 406, at: [4, 29], layer: 2}
 - {tile: 22696, at: [8, 29], layer: 2}
-- {tile: 688, at: [15, 29], layer: 2}
-- {tile: 606, at: [18, 29], layer: 2}
+- {tile: 406, at: [18, 29], layer: 2}
 - {tile: 22681, at: [24, 29], layer: 2}
 - {tile: 22704, at: [36, 29], layer: 2}
 - {tile: 1063, at: [38, 29], layer: 2}
@@ -781,9 +753,8 @@ tiles:
 - {tile: 1063, at: [42, 29], layer: 2}
 - {tile: 22776, at: [46, 29], layer: 2}
 - {tile: 22777, at: [47, 29], layer: 2}
-- {tile: 688, at: [48, 29], layer: 2}
+- {tile: 605, at: [48, 29], layer: 2}
 - {tile: 22704, at: [8, 30], layer: 2}
-- {tile: 689, at: [18, 30], layer: 2}
 - {tile: 22688, at: [23, 30], layer: 2}
 - {tile: 22689, at: [24, 30], layer: 2}
 - {tile: 1063, at: [29, 30], layer: 2}
@@ -792,11 +763,11 @@ tiles:
 - {tile: 22802, at: [33, 30], layer: 2}
 - {tile: 22784, at: [46, 30], layer: 2}
 - {tile: 22785, at: [47, 30], layer: 2}
-- {tile: 606, at: [18, 31], layer: 2}
+- {tile: 406, at: [18, 31], layer: 2}
 - {tile: 22696, at: [23, 31], layer: 2}
 - {tile: 22616, at: [26, 31], layer: 2}
 - {tile: 1063, at: [30, 31], layer: 2}
-- {tile: 688, at: [31, 31], layer: 2}
+- {tile: 405, at: [31, 31], layer: 2}
 - {tile: 22809, at: [32, 31], layer: 2}
 - {tile: 22810, at: [33, 31], layer: 2}
 - {tile: 1063, at: [38, 31], layer: 2}
@@ -806,37 +777,29 @@ tiles:
 - {tile: 22728, at: [47, 31], layer: 2}
 - {tile: 1052, at: [4, 32], layer: 2}
 - {tile: 1684, at: [9, 32], layer: 2}
-- {tile: 405, at: [15, 32], layer: 2}
-- {tile: 606, at: [18, 32], layer: 2}
 - {tile: 22704, at: [23, 32], layer: 2}
 - {tile: 1118, at: [28, 32], layer: 2}
 - {tile: 1119, at: [29, 32], layer: 2}
-- {tile: 605, at: [31, 32], layer: 2}
+- {tile: 22816, at: [31, 32], layer: 2}
 - {tile: 22817, at: [32, 32], layer: 2}
-- {tile: 402, at: [33, 32], layer: 2}
+- {tile: 22818, at: [33, 32], layer: 2}
+- {tile: 605, at: [47, 32], layer: 2}
 - {tile: 1062, at: [8, 33], layer: 2}
 - {tile: 1062, at: [9, 33], layer: 2}
 - {tile: 1675, at: [11, 33], layer: 2}
-- {tile: 401, at: [14, 33], layer: 2}
 - {tile: 22560, at: [17, 33], layer: 2}
 - {tile: 1160, at: [27, 33], layer: 2}
 - {tile: 1161, at: [28, 33], layer: 2}
-- {tile: 401, at: [31, 33], layer: 2}
-- {tile: 406, at: [34, 33], layer: 2}
 - {tile: 22800, at: [42, 33], layer: 2}
 - {tile: 22801, at: [43, 33], layer: 2}
 - {tile: 22802, at: [44, 33], layer: 2}
-- {tile: 688, at: [46, 33], layer: 2}
-- {tile: 689, at: [5, 34], layer: 2}
 - {tile: 1675, at: [12, 34], layer: 2}
-- {tile: 606, at: [17, 34], layer: 2}
 - {tile: 688, at: [33, 34], layer: 2}
-- {tile: 405, at: [39, 34], layer: 2}
+- {tile: 606, at: [35, 34], layer: 2}
 - {tile: 22808, at: [42, 34], layer: 2}
 - {tile: 22809, at: [43, 34], layer: 2}
 - {tile: 22810, at: [44, 34], layer: 2}
-- {tile: 605, at: [19, 35], layer: 2}
-- {tile: 402, at: [22, 35], layer: 2}
+- {tile: 401, at: [39, 35], layer: 2}
 - {tile: 22816, at: [42, 35], layer: 2}
 - {tile: 22817, at: [43, 35], layer: 2}
 - {tile: 22818, at: [44, 35], layer: 2}
@@ -845,7 +808,8 @@ tiles:
 - {tile: 22802, at: [11, 36], layer: 2}
 - {tile: 8835, at: [31, 36], layer: 2}
 - {tile: 8836, at: [32, 36], layer: 2}
-- {tile: 605, at: [39, 36], layer: 2}
+- {tile: 405, at: [34, 36], layer: 2}
+- {tile: 606, at: [37, 36], layer: 2}
 - {tile: 22808, at: [9, 37], layer: 2}
 - {tile: 22809, at: [10, 37], layer: 2}
 - {tile: 22810, at: [11, 37], layer: 2}
@@ -853,26 +817,21 @@ tiles:
 - {tile: 8844, at: [32, 37], layer: 2}
 - {tile: 605, at: [33, 37], layer: 2}
 - {tile: 606, at: [34, 37], layer: 2}
-- {tile: 689, at: [38, 37], layer: 2}
-- {tile: 688, at: [39, 37], layer: 2}
 - {tile: 22616, at: [41, 37], layer: 2}
 - {tile: 1176, at: [42, 37], layer: 2}
 - {tile: 1177, at: [43, 37], layer: 2}
 - {tile: 22816, at: [9, 38], layer: 2}
 - {tile: 22817, at: [10, 38], layer: 2}
 - {tile: 22818, at: [11, 38], layer: 2}
-- {tile: 688, at: [19, 38], layer: 2}
 - {tile: 1160, at: [30, 38], layer: 2}
 - {tile: 1161, at: [31, 38], layer: 2}
-- {tile: 606, at: [38, 38], layer: 2}
 - {tile: 1128, at: [41, 38], layer: 2}
 - {tile: 1129, at: [42, 38], layer: 2}
 - {tile: 1130, at: [43, 38], layer: 2}
 - {tile: 688, at: [44, 38], layer: 2}
 - {tile: 22681, at: [15, 39], layer: 2}
-- {tile: 405, at: [20, 39], layer: 2}
+- {tile: 401, at: [20, 39], layer: 2}
 - {tile: 1063, at: [32, 39], layer: 2}
-- {tile: 689, at: [37, 39], layer: 2}
 - {tile: 22560, at: [40, 39], layer: 2}
 - {tile: 1136, at: [41, 39], layer: 2}
 - {tile: 1137, at: [42, 39], layer: 2}
@@ -884,7 +843,6 @@ tiles:
 - {tile: 1579, at: [37, 40], layer: 2}
 - {tile: 1580, at: [38, 40], layer: 2}
 - {tile: 22681, at: [39, 40], layer: 2}
-- {tile: 688, at: [44, 40], layer: 2}
 - {tile: 605, at: [14, 41], layer: 2}
 - {tile: 606, at: [15, 41], layer: 2}
 - {tile: 1586, at: [36, 41], layer: 2}
@@ -893,38 +851,30 @@ tiles:
 - {tile: 22616, at: [39, 41], layer: 2}
 - {tile: 1160, at: [41, 41], layer: 2}
 - {tile: 1161, at: [42, 41], layer: 2}
-- {tile: 405, at: [44, 41], layer: 2}
 - {tile: 22704, at: [14, 42], layer: 2}
 - {tile: 22696, at: [38, 42], layer: 2}
 - {tile: 1050, at: [44, 42], layer: 2}
 - {tile: 1051, at: [45, 42], layer: 2}
 - {tile: 1160, at: [37, 43], layer: 2}
 - {tile: 1161, at: [38, 43], layer: 2}
-- {tile: 402, at: [15, 44], layer: 2}
-- {tile: 605, at: [19, 44], layer: 2}
+- {tile: 606, at: [15, 44], layer: 2}
 - {tile: 1160, at: [40, 44], layer: 2}
 - {tile: 1161, at: [41, 44], layer: 2}
-- {tile: 405, at: [44, 44], layer: 2}
-- {tile: 402, at: [38, 45], layer: 2}
-- {tile: 402, at: [18, 46], layer: 2}
+- {tile: 405, at: [19, 45], layer: 2}
 - {tile: 22568, at: [20, 46], layer: 2}
 - {tile: 22800, at: [21, 46], layer: 2}
 - {tile: 22801, at: [22, 46], layer: 2}
 - {tile: 22802, at: [23, 46], layer: 2}
-- {tile: 689, at: [39, 46], layer: 2}
-- {tile: 406, at: [19, 47], layer: 2}
+- {tile: 401, at: [40, 46], layer: 2}
 - {tile: 22568, at: [21, 47], layer: 2}
 - {tile: 22809, at: [22, 47], layer: 2}
 - {tile: 22810, at: [23, 47], layer: 2}
-- {tile: 406, at: [19, 48], layer: 2}
 - {tile: 22816, at: [21, 48], layer: 2}
 - {tile: 22817, at: [22, 48], layer: 2}
 - {tile: 22818, at: [23, 48], layer: 2}
 - {tile: 22568, at: [24, 48], layer: 2}
-- {tile: 406, at: [20, 49], layer: 2}
 - {tile: 405, at: [25, 49], layer: 2}
 - {tile: 406, at: [26, 49], layer: 2}
-- {tile: 689, at: [20, 50], layer: 2}
 - {tile: 22681, at: [23, 50], layer: 2}
 - {tile: 1063, at: [20, 51], layer: 2}
 - {tile: 1052, at: [21, 51], layer: 2}
@@ -937,7 +887,6 @@ tiles:
 - {tile: 22800, at: [29, 52], layer: 2}
 - {tile: 22801, at: [30, 52], layer: 2}
 - {tile: 22802, at: [31, 52], layer: 2}
-- {tile: 406, at: [20, 53], layer: 2}
 - {tile: 22704, at: [22, 53], layer: 2}
 - {tile: 22808, at: [29, 53], layer: 2}
 - {tile: 22809, at: [30, 53], layer: 2}
@@ -946,8 +895,6 @@ tiles:
 - {tile: 22817, at: [30, 54], layer: 2}
 - {tile: 22818, at: [31, 54], layer: 2}
 - {tile: 1685, at: [39, 54], layer: 2}
-- {tile: 402, at: [21, 55], layer: 2}
-- {tile: 605, at: [25, 55], layer: 2}
 events:
 - type: warp
   name: To Route 2

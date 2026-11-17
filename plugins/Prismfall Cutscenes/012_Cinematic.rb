@@ -331,7 +331,7 @@ module Prismfall
           scene.set_silhouette(nil)
           return true
         end
-        scene.set_silhouette((i.even?) ? :white : :black)
+        scene.set_silhouette((i.even?) ? :white : :black) if !Cutscene.photosensitive?
         return false
       end
 

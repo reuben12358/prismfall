@@ -7,6 +7,7 @@ metadata:
   HealingSpot: [100, 19, 27]
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -819,6 +820,7 @@ bgm: Poke Mart
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -1478,6 +1480,7 @@ metadata:
   Name: Tidewatch Station
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '............................
 
@@ -3236,6 +3239,7 @@ bgm: Lappet Town
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '.....................
 
@@ -4362,6 +4366,7 @@ bgm: Lappet Town
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -4989,6 +4994,7 @@ bgm: Lappet Town
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -5444,6 +5450,7 @@ bgm: Lappet Town
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -6161,6 +6168,7 @@ bgm: Lappet Town
 metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '.........................
 

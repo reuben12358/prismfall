@@ -8,7 +8,7 @@ import yaml
 from terrain import vnoise
 
 STAMPS = {}
-for fn in ('stamps_t.json', 'stamps_w.json', 'stamps_v.json'):
+for fn in ('stamps_t.json', 'stamps_w.json', 'stamps_v.json', 'stamps_m.json'):     # m = material variants (MAPGEN 2g)
     p = os.path.join(HERE, 'data', fn)
     if os.path.exists(p):
         STAMPS.update(json.load(open(p)))
@@ -82,7 +82,10 @@ class City:
                 if cl[y][x] and self.g[y][x] not in keep and not any(a <= x <= b and r <= y <= r + face + 1 for a, b, r in self.stairs_x):
                     self.g[y][x] = 'C'; self.taken[y][x] = True
 
-    def stairs(self, x, yrim, n=1, kind='t_stairs'):
+    stair_kind = 't_stairs'          # MAPGEN 2g: layouts pick a biome variant, e.g. 'stairs_log@40', 'stairs_stone@33'
+
+    def stairs(self, x, yrim, n=1, kind=None):
+        kind = kind or self.stair_kind
         """n side-by-side 3-wide stone stairways through a south-facing cliff whose rim row is yrim."""
         self.stairs_x.append((x, x + 3 * n - 1, yrim))
         for i in range(n):

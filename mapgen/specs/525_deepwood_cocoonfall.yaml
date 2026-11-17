@@ -1,5 +1,6 @@
 # Gossamer Deepwood (525) and Cocoonfall Hollow (548). WRITTEN BY layouts/deepwood.py - edit that, not this file.
 id: 525
+biome: forest
 name: Gossamer Deepwood
 bgm: Route 3
 parent: 524
@@ -94,7 +95,7 @@ heights: |
   00000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_log@40
   at: [22, 13]
 tileblocks: []
 tiles:
@@ -603,6 +604,7 @@ events:
     commands: ['It rests on the water, calm.']
 ---
 id: 548
+biome: bleed
 name: Cocoonfall Hollow
 palette: bleed
 bgm: Route 3

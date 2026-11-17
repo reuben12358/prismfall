@@ -22,6 +22,7 @@ def show_larch():
 def build():
     c = Wild(W, H, 522, base='a')
     c.forest_glyph = 'U'
+    c.stair_kind = 'stairs_stone@40'      # worn stone: wood would read wrong in the glass
     def hf(x, y):
         if x > 30 + 2 * math.sin(y / 4.0) and y < 18 + 2 * (vnoise(x, y, 3, 4.0) - 0.5): return 2
         if x > 14 + 3 * math.sin(y / 5.0) + 2 * (vnoise(x, y, 5, 4.0) - 0.5) and y < 31 + 2 * math.sin(x / 6.0): return 1
@@ -205,7 +206,7 @@ def build():
     E.append({'type': 'sign', 'at': P['house_sign'], 'post': False, 'name': 'Pruett house',
               'text': "The Pruett house. The door is glass, and so is the key in it. A child's coat hangs on the peg inside, perfectly clear."})
     c.events = E
-    head = {'id': 522, 'name': 'The Glassed Orchard', 'palette': 'bleed', 'bgm': 'Route 2', 'parent': 521, 'field': 'BLEED', 'tone': [-18, -22, 26, 70],
+    head = {'id': 522, 'biome': 'bleed', 'name': 'The Glassed Orchard', 'palette': 'bleed', 'bgm': 'Route 2', 'parent': 521, 'field': 'BLEED', 'tone': [-18, -22, 26, 70],
             'metadata': {'ShowArea': True, 'MapPosition': [0, 15, 22], 'BattleBack': 'field'}}
     return c.write('522_glassed_orchard.yaml', head, "# The Glassed Orchard (522). WRITTEN BY layouts/orchard.py - edit that, not this file.\n")
 

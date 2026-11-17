@@ -5,7 +5,7 @@ South gate x 40-42 (Route 1).  West road exit (0, 9-11) -> 524 (warp R2_WOOD).  
 Run:  python3 -I layouts/route2.py && python3 -I build.py 521"""
 import os, sys, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from wildkit import Wild, save, say, trainer, once, vnoise, FLOWERS, MUSH, B
+from wildkit import Wild, save, say, trainer, once, vnoise, FLOWERS, MUSH, B, OBJ
 
 W, H = 62, 48
 
@@ -74,7 +74,7 @@ def build():
                      ('kennel', 34, 34), ('sack', 37, 33), ('pumpkin', 44, 42), ('pumpkin', 46, 43), ('well', 23, 41)):
         c.land(nm, x, y)
     # ---- checkpoint on the west road: a barrier across the lane, fence wings, a lamp and a notice board
-    c.land('st:t_lamp', 7, 6); c.land('signboard', 9, 7)
+    c.land('lantern', 7, 5); c.land('signpost', 9, 6)
     # ---- the survey line: orange flags from the orchard glass, straight across the terrace towards the wood
     flags = []
     for i in range(9):
@@ -123,8 +123,8 @@ def build():
     for i, y in enumerate((9, 10, 11)):
         if c.g[y][3] not in 'dD.': continue
         E.append({'type': 'event', 'name': 'Accord barrier %d' % (i + 1), 'at': [3, y],
-                  'pages': [{'graphic': {'tile': 3293 + (i % 2)}, 'trigger': 'action', 'commands': [hold]},
-                            {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'tile': 3293 + (i % 2)}, 'trigger': 'action',
+                  'pages': [{'graphic': {'tile': OBJ['barricade'][0]}, 'trigger': 'action', 'commands': [hold]},
+                            {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'tile': OBJ['barricade'][0]}, 'trigger': 'action',
                              'commands': lifted + [{'script': "$game_self_switches[[521, 0, 'BAR']] = true; $game_map.need_refresh = true"}]},
                             {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'through': True,
                              'commands': [{'comment': 'gone once the barrier is lifted (see page 4 script condition)'}]}]})
@@ -176,7 +176,7 @@ def build():
               'text': "ACCORD QUARANTINE NOTICE\nNo travel beyond the Landing without papers.\nUnderneath, in pencil: challengers excepted, obviously, it's the LAW."})
     c.events = E
     c.ledge(28, 37, 30)
-    head = {'id': 521, 'name': 'Route 2', 'bgm': 'Route 2', 'parent': 0, 'tone': [8, 4, -10, 0],
+    head = {'id': 521, 'biome': 'route', 'name': 'Route 2', 'bgm': 'Route 2', 'parent': 0, 'tone': [8, 4, -10, 0],
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 23], 'BattleBack': 'field'},
             'connections': [{'dir': 'S', 'offset': 40, 'to': 520, 'to_offset': 25}]}
     return c.write('521_route2.yaml', head, "# Route 2 (521). WRITTEN BY layouts/route2.py - edit that, not this file.\n")

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds dist/Prismfall_DevKit.zip — an overlay you copy into an Essentials v21.1 + EBDX project.
-# Layout mirrors a project root: Plugins/, PBS/, Data/ can be copied straight in (nothing overwrites stock files).
+# Layout mirrors a project root: Plugins/, PBS/, Data/, Graphics/ can be copied straight in (nothing overwrites stock files).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist/Prismfall_DevKit"
@@ -26,9 +26,20 @@ for f in "$ROOT"/pbs/*.txt; do
 done
 [[ -d "$ROOT/maps_out/PBS" ]] && cp "$ROOT"/maps_out/PBS/*.txt "$OUT/PBS/"
 
-# Data: generated maps + the MapInfos entry list (merged in-game; we never ship MapInfos.rxdata)
+# Data: generated maps + the MapInfos entry list + our RPG::Tileset entries (both merged in-game by
+# Debug > Files > Install Prismfall maps; we never ship MapInfos.rxdata or Tilesets.rxdata)
 cp "$ROOT"/maps_out/Data/Map*.rxdata "$OUT/Data/" 2>/dev/null || true
 [[ -f "$ROOT/maps_out/Data/mapinfos_prismfall.txt" ]] && cp "$ROOT/maps_out/Data/mapinfos_prismfall.txt" "$OUT/Data/"
+if [[ -f "$ROOT/maps_out/tilesets_prismfall.json" ]]; then
+  python3 -I "$ROOT/mapgen/export_tilesets_rxdata.py"     # refresh from the registry (needs numpy here only)
+  cp "$ROOT/maps_out/Data/Tilesets_prismfall.rxdata" "$OUT/Data/"
+fi
+
+# Graphics the maps need: our tileset sheets, autotiles and fog pictures (new file names only)
+for sub in Tilesets Autotiles Fogs; do
+  [[ -d "$ROOT/maps_out/Graphics/$sub" ]] || continue
+  mkdir -p "$OUT/Graphics/$sub" && cp "$ROOT/maps_out/Graphics/$sub/"*.png "$OUT/Graphics/$sub/"
+done
 
 # Docs
 cp "$ROOT"/design/*.md "$OUT/Design/" 2>/dev/null || true

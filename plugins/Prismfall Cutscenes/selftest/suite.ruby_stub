@@ -217,6 +217,75 @@ end
 end
 $opt[:assets] = false
 
+section "Rejuvenation-style techniques"
+sheet_dir = Dir.mktmpdir("pf_sheet")
+FileUtils.mkdir_p(File.join(sheet_dir, "Graphics/Characters"))
+FileUtils.mkdir_p(File.join(sheet_dir, "Graphics/Pictures"))
+system("convert", "-size", "128x192", "xc:none", "-fill", "red", "-draw", "rectangle 0,0 31,47", File.join(sheet_dir, "Graphics/Characters/FlipTest.png"))
+system("convert", "-size", "512x384", "xc:navy", File.join(sheet_dir, "Graphics/Pictures/Storyboard_T.png"))
+old_assets = ASSET_DIR
+Object.send(:remove_const, :ASSET_DIR); ASSET_DIR = sheet_dir
+$opt[:assets] = true
+frames_seen = []
+C.define(:TECHNIQUES) do
+  background :color, color: [20, 20, 30]
+  actor :fx, sheet: "Graphics/Characters/FlipTest", grid: [4, 4], at: [256, 300], frame: 0
+  actor :ghost, sheet: "Graphics/Characters/Missing", at: [100, 300]
+  pose :fx, row: 2, col: 1
+  call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
+  flipbook :fx, frames: [0, 1, 2, 3, [1, 0]], hold: 0.1, se: { 2 => "Anim/Explosion" }, wait: true
+  call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
+  flipbook :fx, frames: 4..7, holds: [0.05, 0.05, 0.3, 0.05], loops: 2, end_frame: 0, wait: true
+  call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
+  pulse tone: [-68, -102, -102, 120], duration: 0.15, times: 2
+  fade :fx, to: 0, steps: 5, duration: 0.25
+  still "Graphics/Pictures/Storyboard_T", duration: 1.0, fade: 0.25, steps: 5, dim: 120
+  still "Graphics/Pictures/Nope", duration: 0.5
+  anim 3, at: :fx
+  fade_out steps: 5, duration: 0.25
+end
+d = C.build(:TECHNIQUES)
+check "flipbook durations", (C.build { actor :a, sheet: "x"; flipbook :a, frames: 0..3, hold: 0.25, wait: true }.length - 1.0).abs < 1e-6
+r = run_scene(:TECHNIQUES)
+check "techniques scene", r[:ok] && r[:leaks].empty?, r.inspect
+check "pose and flipbook cells", frames_seen == [[2, 1], [1, 0], [0, 0]], frames_seen.inspect
+check "flipbook SE cue", $audio.any? { |x| x[0] == :se && x[1] == "Anim/Explosion" }
+check "stepped ease", C::Ease.apply(:step5, 0.39) == 0.2 && C::Ease.apply(:step5, 1.0) == 1.0
+# database animation through a stand-in RPG::Sprite
+module RPG
+  class Sprite < ::Sprite
+    def animation(anim, hit, height = 3); @left = 6; ($anims ||= []).push(anim); end
+    def effect?; return (@left || 0) > 0; end
+    def update; @left -= 1 if @left; end
+  end
+end
+$data_animations = [nil, :grass, :dust, :exclaim]
+$anims = []
+r = run_scene(:TECHNIQUES)
+check "database animation", r[:ok] && r[:leaks].empty? && $anims == [:exclaim], [$anims, r].inspect
+# on-map mode: no black curtain, actor follows an event
+$game_map.events = { 7 => EventStub.new("Juno", 300, 200) }
+spots = []
+C.define(:ONMAP, on_map: true) do
+  actor :mark, sheet: "Graphics/Characters/FlipTest", event: 7, offset: [0, -40]
+  wait 0.3
+  call { |sc| spots.push(sc.actors[:mark].pos, sc.curtain) }
+  flipbook :mark, frames: 0..3, hold: 0.1, wait: true
+end
+r = run_scene(:ONMAP)
+check "on-map scene", r[:ok] && r[:leaks].empty? && spots == [[300.0, 160.0], 0.0] && r[:seconds] < 0.9, [r, spots].inspect
+# photosensitive mode
+C.photosensitive = true
+peak = 0
+$on_frame = proc { sc = C.current; next if !sc; peak = [peak, sc.camera.sx.abs, sc.camera.sy.abs].max; }
+r = run_scene(:WAR_CLIMAX_DEMO)
+$on_frame = nil
+check "photosensitive: no impact frames, little shake", r[:ok] && peak <= 6, peak
+C.photosensitive = nil
+FileUtils.rm_rf(sheet_dir)
+Object.send(:remove_const, :ASSET_DIR); ASSET_DIR = old_assets
+$opt[:assets] = false
+
 section "a broken scene never softlocks"
 C.define(:BROKEN) { background :sea; wait 0.5; call { |_s| raise "boom" }; wait 1 }
 C.raise_errors = false

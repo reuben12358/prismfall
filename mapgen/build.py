@@ -353,6 +353,7 @@ def build_map(spec, ctx):
     bgm = spec.get('bgm', '')
     m = G.rmap(spec['_tileset'], W, H, G.table3(layers), events, bgm=bgm, encounter_step=spec.get('encounter_step', 30))
     check_reach(spec, ctx, m)
+    ctx.material_bad = getattr(ctx, 'material_bad', 0) + material_check(spec, ctx, layers, spec['_tileset'])
     if spec.get('rubric'):
         walk_check(spec, ctx, m)
         r = rubric(layers)
@@ -403,6 +404,44 @@ def rubric(layers):
     bp = sum(1 for y in range(1, H - 1) for x in range(1, W - 1) if bare[y - 1:y + 2, x - 1:x + 2].all())
     return dict(layer2=(d[1] > 0).mean() * 100, layer3=(d[2] > 0).mean() * 100, bare=bare.mean() * 100,
                 bare3x3=bp / n * 100, stacks=len(np.unique(key)) / n * 100, mirror=(key == key[:, ::-1]).mean() * 100)
+
+
+_MAT = None
+
+
+def material_check(spec, ctx, layers, tileset_id):
+    """MAPGEN 2g: every tile's material (data/materials.yaml) against the map's `biome:`; returns the offender count."""
+    global _MAT
+    if _MAT is None:
+        d = yaml.safe_load(open(os.path.join(HERE, 'data', 'materials.yaml')))
+        _MAT = d; d['_tab'] = {}
+    biome = spec.get('biome')
+    if not biome: return 0
+    forbid = set(_MAT['biomes'].get(biome, {}).get('forbid', []))
+    if not forbid: return 0
+    tab = _MAT['_tab'].get(tileset_id)
+    if tab is None:
+        tab = {}
+        ranges = (_MAT['shared'] if tileset_id in (30, 33, 40) else []) + (_MAT.get('tilesets') or {}).get(tileset_id, [])
+        for a, b, mat in ranges:
+            for t in range(a, b + 1): tab[t] = mat
+        _MAT['_tab'][tileset_id] = tab
+    bad = {}
+    Z, H, W = layers.shape
+    for z in range(Z):
+        for y in range(H):
+            for x in range(W):
+                mat = tab.get(int(layers[z, y, x]))
+                if mat in forbid:
+                    bad.setdefault(mat, []).append((x, y, int(layers[z, y, x])))
+    for e in spec.get('events', []):                        # tile-graphic events (barriers, planks) count too
+        for pg in e.get('pages', []) or []:
+            t = (pg.get('graphic') or {}).get('tile')
+            if isinstance(t, int) and tab.get(t) in forbid:
+                bad.setdefault(tab[t], []).append((e['at'][0], e['at'][1], t))
+    for mat, cells in bad.items():
+        ctx.warn(spec['id'], 'MATERIAL %s in a %s map: %d tiles, e.g. tile %d at %d,%d' % (mat, biome, len(cells), cells[0][2], cells[0][0], cells[0][1]))
+    return sum(len(v) for v in bad.values())
 
 
 def walk_check(spec, ctx, m):
@@ -635,6 +674,8 @@ def main():
     for w in ctx.warnings:
         print('WARN', w)
     print('%d maps; %d warnings' % (len(selected), len(ctx.warnings)))
+    if '--strict' in sys.argv and getattr(ctx, 'material_bad', 0):
+        sys.exit('--strict: %d tiles of a material their map\'s biome forbids (see MATERIAL warnings)' % ctx.material_bad)
 
 
 def slug(n):

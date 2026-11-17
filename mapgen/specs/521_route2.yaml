@@ -1,5 +1,6 @@
 # Route 2 (521). WRITTEN BY layouts/route2.py - edit that, not this file.
 id: 521
+biome: route
 name: Route 2
 bgm: Route 2
 parent: 0
@@ -112,7 +113,7 @@ heights: |
   00000000000000000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_log@40
   at: [39, 24]
 - stamp: t_house_orange
   at: [29, 31]
@@ -208,11 +209,11 @@ tiles:
 - {tile: 613, at: [53, 7], layer: 1}
 - {tile: 614, at: [54, 7], layer: 1}
 - {tile: 1164, at: [55, 7], layer: 1}
-- {tile: 1164, at: [8, 8], layer: 1}
-- {tile: 3267, at: [9, 8], layer: 1}
-- {tile: 3268, at: [10, 8], layer: 1}
+- {tile: 22956, at: [8, 8], layer: 1}
+- {tile: 22939, at: [9, 8], layer: 1}
+- {tile: 1164, at: [10, 8], layer: 1}
 - {tile: 1180, at: [11, 8], layer: 1}
-- {tile: 22736, at: [12, 8], layer: 1}
+- {tile: 22744, at: [12, 8], layer: 1}
 - {tile: 1172, at: [13, 8], layer: 1}
 - {tile: 1172, at: [14, 8], layer: 1}
 - {tile: 2087, at: [15, 8], layer: 1}
@@ -312,7 +313,7 @@ tiles:
 - {tile: 749, at: [12, 12], layer: 1}
 - {tile: 950, at: [13, 12], layer: 1}
 - {tile: 1164, at: [15, 12], layer: 1}
-- {tile: 22736, at: [18, 12], layer: 1}
+- {tile: 22744, at: [18, 12], layer: 1}
 - {tile: 1172, at: [30, 12], layer: 1}
 - {tile: 1164, at: [32, 12], layer: 1}
 - {tile: 1172, at: [33, 12], layer: 1}
@@ -385,7 +386,7 @@ tiles:
 - {tile: 410, at: [27, 15], layer: 1}
 - {tile: 976, at: [28, 15], layer: 1}
 - {tile: 969, at: [29, 15], layer: 1}
-- {tile: 22736, at: [35, 15], layer: 1}
+- {tile: 22744, at: [35, 15], layer: 1}
 - {tile: 1164, at: [39, 15], layer: 1}
 - {tile: 417, at: [40, 15], layer: 1}
 - {tile: 418, at: [41, 15], layer: 1}
@@ -410,7 +411,7 @@ tiles:
 - {tile: 8660, at: [37, 16], layer: 1}
 - {tile: 8661, at: [38, 16], layer: 1}
 - {tile: 8662, at: [39, 16], layer: 1}
-- {tile: 22736, at: [40, 16], layer: 1}
+- {tile: 22744, at: [40, 16], layer: 1}
 - {tile: 1164, at: [42, 16], layer: 1}
 - {tile: 1000, at: [43, 16], layer: 1}
 - {tile: 1001, at: [44, 16], layer: 1}
@@ -421,8 +422,8 @@ tiles:
 - {tile: 1018, at: [52, 16], layer: 1}
 - {tile: 613, at: [53, 16], layer: 1}
 - {tile: 614, at: [54, 16], layer: 1}
-- {tile: 22784, at: [55, 16], layer: 1}
-- {tile: 22785, at: [56, 16], layer: 1}
+- {tile: 22792, at: [55, 16], layer: 1}
+- {tile: 22793, at: [56, 16], layer: 1}
 - {tile: 15076, at: [59, 16], layer: 1}
 - {tile: 947, at: [4, 17], layer: 1}
 - {tile: 1070, at: [9, 17], layer: 1}
@@ -445,7 +446,7 @@ tiles:
 - {tile: 1008, at: [43, 17], layer: 1}
 - {tile: 1009, at: [44, 17], layer: 1}
 - {tile: 1164, at: [45, 17], layer: 1}
-- {tile: 22736, at: [46, 17], layer: 1}
+- {tile: 22744, at: [46, 17], layer: 1}
 - {tile: 951, at: [48, 17], layer: 1}
 - {tile: 8133, at: [50, 17], layer: 1}
 - {tile: 8134, at: [51, 17], layer: 1}
@@ -515,7 +516,7 @@ tiles:
 - {tile: 958, at: [46, 19], layer: 1}
 - {tile: 958, at: [47, 19], layer: 1}
 - {tile: 1164, at: [49, 19], layer: 1}
-- {tile: 22736, at: [51, 19], layer: 1}
+- {tile: 22744, at: [51, 19], layer: 1}
 - {tile: 14859, at: [52, 19], layer: 1}
 - {tile: 8114, at: [53, 19], layer: 1}
 - {tile: 15076, at: [54, 19], layer: 1}
@@ -541,7 +542,7 @@ tiles:
 - {tile: 1035, at: [36, 20], layer: 1}
 - {tile: 1260, at: [55, 20], layer: 1}
 - {tile: 1261, at: [56, 20], layer: 1}
-- {tile: 22736, at: [57, 20], layer: 1}
+- {tile: 22744, at: [57, 20], layer: 1}
 - {tile: 15076, at: [58, 20], layer: 1}
 - {tile: 947, at: [12, 21], layer: 1}
 - {tile: 947, at: [13, 21], layer: 1}
@@ -727,8 +728,8 @@ tiles:
 - {tile: 947, at: [48, 30], layer: 1}
 - {tile: 939, at: [49, 30], layer: 1}
 - {tile: 947, at: [50, 30], layer: 1}
-- {tile: 22784, at: [51, 30], layer: 1}
-- {tile: 22785, at: [52, 30], layer: 1}
+- {tile: 22792, at: [51, 30], layer: 1}
+- {tile: 22793, at: [52, 30], layer: 1}
 - {tile: 1164, at: [55, 30], layer: 1}
 - {tile: 1164, at: [56, 30], layer: 1}
 - {tile: 14859, at: [58, 30], layer: 1}
@@ -752,8 +753,8 @@ tiles:
 - {tile: 1164, at: [52, 31], layer: 1}
 - {tile: 1165, at: [54, 31], layer: 1}
 - {tile: 1164, at: [55, 31], layer: 1}
-- {tile: 22784, at: [56, 31], layer: 1}
-- {tile: 22785, at: [57, 31], layer: 1}
+- {tile: 22792, at: [56, 31], layer: 1}
+- {tile: 22793, at: [57, 31], layer: 1}
 - {tile: 1164, at: [4, 32], layer: 1}
 - {tile: 1164, at: [8, 32], layer: 1}
 - {tile: 1042, at: [9, 32], layer: 1}
@@ -1137,15 +1138,16 @@ tiles:
 - {tile: 8649, at: [52, 5], layer: 2}
 - {tile: 8650, at: [53, 5], layer: 2}
 - {tile: 8651, at: [54, 5], layer: 2}
+- {tile: 22940, at: [8, 6], layer: 2}
 - {tile: 1576, at: [13, 6], layer: 2}
 - {tile: 1068, at: [31, 6], layer: 2}
 - {tile: 401, at: [37, 6], layer: 2}
 - {tile: 402, at: [38, 6], layer: 2}
 - {tile: 605, at: [53, 6], layer: 2}
 - {tile: 606, at: [54, 6], layer: 2}
-- {tile: 3259, at: [9, 7], layer: 2}
-- {tile: 3260, at: [10, 7], layer: 2}
-- {tile: 22728, at: [12, 7], layer: 2}
+- {tile: 22948, at: [8, 7], layer: 2}
+- {tile: 22931, at: [9, 7], layer: 2}
+- {tile: 22736, at: [12, 7], layer: 2}
 - {tile: 8835, at: [30, 7], layer: 2}
 - {tile: 8836, at: [31, 7], layer: 2}
 - {tile: 1160, at: [32, 7], layer: 2}
@@ -1193,7 +1195,7 @@ tiles:
 - {tile: 732, at: [56, 10], layer: 2}
 - {tile: 733, at: [57, 10], layer: 2}
 - {tile: 8637, at: [17, 11], layer: 2}
-- {tile: 22728, at: [18, 11], layer: 2}
+- {tile: 22736, at: [18, 11], layer: 2}
 - {tile: 8843, at: [37, 11], layer: 2}
 - {tile: 8844, at: [38, 11], layer: 2}
 - {tile: 8634, at: [45, 11], layer: 2}
@@ -1223,24 +1225,24 @@ tiles:
 - {tile: 401, at: [26, 14], layer: 2}
 - {tile: 402, at: [27, 14], layer: 2}
 - {tile: 1171, at: [29, 14], layer: 2}
-- {tile: 22728, at: [35, 14], layer: 2}
+- {tile: 22736, at: [35, 14], layer: 2}
 - {tile: 8644, at: [37, 14], layer: 2}
 - {tile: 8645, at: [38, 14], layer: 2}
 - {tile: 8646, at: [39, 14], layer: 2}
 - {tile: 1052, at: [45, 14], layer: 2}
-- {tile: 22768, at: [55, 14], layer: 2}
-- {tile: 22769, at: [56, 14], layer: 2}
+- {tile: 22776, at: [55, 14], layer: 2}
+- {tile: 22777, at: [56, 14], layer: 2}
 - {tile: 8665, at: [16, 15], layer: 2}
 - {tile: 401, at: [19, 15], layer: 2}
 - {tile: 402, at: [20, 15], layer: 2}
 - {tile: 8652, at: [37, 15], layer: 2}
 - {tile: 8653, at: [38, 15], layer: 2}
 - {tile: 8654, at: [39, 15], layer: 2}
-- {tile: 22728, at: [40, 15], layer: 2}
+- {tile: 22736, at: [40, 15], layer: 2}
 - {tile: 605, at: [53, 15], layer: 2}
 - {tile: 606, at: [54, 15], layer: 2}
-- {tile: 22776, at: [55, 15], layer: 2}
-- {tile: 22777, at: [56, 15], layer: 2}
+- {tile: 22784, at: [55, 15], layer: 2}
+- {tile: 22785, at: [56, 15], layer: 2}
 - {tile: 1062, at: [9, 16], layer: 2}
 - {tile: 8672, at: [15, 16], layer: 2}
 - {tile: 8673, at: [16, 16], layer: 2}
@@ -1248,7 +1250,7 @@ tiles:
 - {tile: 8665, at: [27, 16], layer: 2}
 - {tile: 605, at: [41, 16], layer: 2}
 - {tile: 606, at: [42, 16], layer: 2}
-- {tile: 22728, at: [46, 16], layer: 2}
+- {tile: 22736, at: [46, 16], layer: 2}
 - {tile: 8125, at: [50, 16], layer: 2}
 - {tile: 8126, at: [51, 16], layer: 2}
 - {tile: 1238, at: [55, 16], layer: 2}
@@ -1276,14 +1278,14 @@ tiles:
 - {tile: 8637, at: [30, 18], layer: 2}
 - {tile: 1480, at: [43, 18], layer: 2}
 - {tile: 1481, at: [44, 18], layer: 2}
-- {tile: 22728, at: [51, 18], layer: 2}
+- {tile: 22736, at: [51, 18], layer: 2}
 - {tile: 8106, at: [53, 18], layer: 2}
 - {tile: 8120, at: [58, 18], layer: 2}
 - {tile: 8121, at: [59, 18], layer: 2}
 - {tile: 8644, at: [29, 19], layer: 2}
 - {tile: 8645, at: [30, 19], layer: 2}
 - {tile: 8646, at: [31, 19], layer: 2}
-- {tile: 22728, at: [57, 19], layer: 2}
+- {tile: 22736, at: [57, 19], layer: 2}
 - {tile: 8652, at: [29, 20], layer: 2}
 - {tile: 8653, at: [30, 20], layer: 2}
 - {tile: 8654, at: [31, 20], layer: 2}
@@ -1339,8 +1341,8 @@ tiles:
 - {tile: 8646, at: [33, 28], layer: 2}
 - {tile: 1068, at: [43, 28], layer: 2}
 - {tile: 8637, at: [49, 28], layer: 2}
-- {tile: 22768, at: [51, 28], layer: 2}
-- {tile: 22769, at: [52, 28], layer: 2}
+- {tile: 22776, at: [51, 28], layer: 2}
+- {tile: 22777, at: [52, 28], layer: 2}
 - {tile: 8090, at: [56, 28], layer: 2}
 - {tile: 8122, at: [57, 28], layer: 2}
 - {tile: 1160, at: [19, 29], layer: 2}
@@ -1352,17 +1354,17 @@ tiles:
 - {tile: 8644, at: [48, 29], layer: 2}
 - {tile: 8645, at: [49, 29], layer: 2}
 - {tile: 8646, at: [50, 29], layer: 2}
-- {tile: 22776, at: [51, 29], layer: 2}
-- {tile: 22777, at: [52, 29], layer: 2}
-- {tile: 22768, at: [56, 29], layer: 2}
-- {tile: 22769, at: [57, 29], layer: 2}
+- {tile: 22784, at: [51, 29], layer: 2}
+- {tile: 22785, at: [52, 29], layer: 2}
+- {tile: 22776, at: [56, 29], layer: 2}
+- {tile: 22777, at: [57, 29], layer: 2}
 - {tile: 1050, at: [35, 30], layer: 2}
 - {tile: 1051, at: [36, 30], layer: 2}
 - {tile: 8652, at: [48, 30], layer: 2}
 - {tile: 8653, at: [49, 30], layer: 2}
 - {tile: 8654, at: [50, 30], layer: 2}
-- {tile: 22776, at: [56, 30], layer: 2}
-- {tile: 22777, at: [57, 30], layer: 2}
+- {tile: 22784, at: [56, 30], layer: 2}
+- {tile: 22785, at: [57, 30], layer: 2}
 - {tile: 732, at: [11, 31], layer: 2}
 - {tile: 733, at: [12, 31], layer: 2}
 - {tile: 732, at: [27, 31], layer: 2}
@@ -1517,11 +1519,11 @@ events:
 - type: warp
   name: To Gossamer Wood 2
   at: [0, 9]
-  to: {map: 524, x: 22, y: 54, dir: up}
+  to: {map: 524, x: 22, y: 56, dir: up}
 - type: warp
   name: To Gossamer Wood 3
   at: [0, 11]
-  to: {map: 524, x: 24, y: 54, dir: up}
+  to: {map: 524, x: 24, y: 56, dir: up}
 - type: warp
   name: To the Glassed Orchard
   at: [61, 23]
@@ -1540,11 +1542,11 @@ events:
   name: Accord barrier 1
   at: [3, 9]
   pages:
-  - graphic: {tile: 3293}
+  - graphic: {tile: 22960}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 3293}
+    graphic: {tile: 22960}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
@@ -1561,11 +1563,11 @@ events:
   name: Accord barrier 2
   at: [3, 10]
   pages:
-  - graphic: {tile: 3294}
+  - graphic: {tile: 22960}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 3294}
+    graphic: {tile: 22960}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
@@ -1582,11 +1584,11 @@ events:
   name: Accord barrier 3
   at: [3, 11]
   pages:
-  - graphic: {tile: 3293}
+  - graphic: {tile: 22960}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 3293}
+    graphic: {tile: 22960}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'

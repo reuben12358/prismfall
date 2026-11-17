@@ -57,8 +57,8 @@ scatter:
     - {tiles: [1035, 1035, 8620, 8629, 1172], threshold: 0.72, scale: 2.5, fill: 0.9}
   singles: [[1164, 6], [585, 2], [1069, 1], [8627, 2], [8628, 2], [1141, 1], [1142, 1], [8619, 1], [1157, 1]]
 tiles:
-  sign: {layer: 1, tile: 3264}
-  sign_top: {layer: 2, tile: 3256}
+  sign: {layer: 1, tile: 23339}          # wooden signpost (material_art), MAPGEN 2g
+  sign_top: {layer: 2, tile: 23331}
 glyphs:
   '.': grass
   ',': clear

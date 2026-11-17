@@ -358,7 +358,7 @@ module Prismfall
           status = scene.play
           @last_results = scene.results
           @skipped = (status == :skipped)
-          Scene.fade_back
+          Scene.fade_back if !defn.options[:on_map]
           return !@skipped
         rescue StandardError => e
           Util.log("#{id.is_a?(Definition) ? id.id : id}: #{e.class}: #{e.message}\n#{(e.backtrace || [])[0, 6].join("\n")}")

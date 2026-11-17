@@ -67,6 +67,9 @@ OBJ = {
     'survey_flag': (CU['survey_flag'], 1, 2, 1), 'web_big': (CU.get('web_big', CU['web_nw']), 3, 3, 0), 'veil': (CU['veil'], 1, 1, 0), 'barrier': (3293, 2, 1, 1),
     'silk_tree': (CU['silk_tree'], 2, 3, 1), 'crystal_tree': (CU['crystal_tree'], 2, 3, 1),
 }
+MATS = OFF['materials']['offset']; MN = OFF['materials']['names']
+OBJ.update({'signpost': (MATS + MN['signpost'], 1, 2, 1), 'lantern': (MATS + MN['lantern'], 1, 3, 1),
+            'logbench': (MATS + MN['logbench'], 2, 1, 1), 'barricade': (MATS + MN['barricade'], 2, 1, 1)})
 for _k, (_t, _w, _h, _kind) in PF.items():
     if not _k.startswith('rustic'): OBJ['pf_' + _k] = (_t, _w, _h, 1)
 OBJ['well'] = OBJ.get('pf_haunted_06', OBJ['pit_ladder'])
@@ -130,6 +133,7 @@ class Wild(City):
         self.sol = [[False] * W for _ in range(H)]                    # cells blocked by explicit props
         self.must = []                                                # cells that have to stay connected on foot
         self.ledges = []
+        self.stair_kind = 'stairs_log@40'
         self.strand_ok = 2                                            # walkable cells a single prop may cut off
         self.log = []
 
@@ -255,7 +259,8 @@ class Wild(City):
                     for xx in range(int(round(x - w / 2.0)), int(round(x - w / 2.0)) + w):
                         if self.inb(xx, yy): self.g[yy][xx] = c
 
-    def stairs(self, x, yrim, n=1, kind='t_stairs'):
+    def stairs(self, x, yrim, n=1, kind=None):
+        kind = kind or self.stair_kind
         City.stairs(self, x, yrim, n, kind)
         h = STAMPS[kind]['h']
         for yy in range(yrim, yrim + h):

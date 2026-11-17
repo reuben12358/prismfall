@@ -205,7 +205,7 @@ def main():
         say('TAMSIN', 'sad', "..."),
         say('TAMSIN', 'deadpan', "I'm going to go and stand in the web now."),
         {'move': {'who': 0, 'route': ['up', 'up', 'up', 'up', 'up']}}, {'selfswitch': ['A', True]}]
-    docs.append({'id': 130, 'name': 'Loomhouse Gym - Foyer', 'parent': 120, 'palette': 'loom', 'bgm': 'Gym', 'field': 'SILKWOOD',
+    docs.append({'id': 130, 'name': 'Loomhouse Gym - Foyer', 'parent': 120, 'palette': 'loom', 'biome': 'canopy_gym', 'bgm': 'Gym', 'field': 'SILKWOOD',
                  'rubric': True, 'tone': [-10, -6, -18, 10], 'metadata': M, 'map': '\n'.join(FOYER),
                  'tiles': decorate(FOYER, 130, [('loom', 2, 3), ('loom', 10, 3), ('cocoon', 1, 4), ('cocoon', 13, 4), ('web_big', 6, 0)]),
                  'events': [
@@ -248,7 +248,7 @@ def main():
                              'else': ["(Juno is at the hall's entrance, eating a honey-silk bun.)",
                                       say('JUNO', 'happy', "I made it! Go on! I'll be loud!"), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
     hall = weaving_hall()
-    docs.append({'id': 131, 'name': 'Loomhouse Gym - Weaving Hall', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'rubric': True,
+    docs.append({'id': 131, 'name': 'Loomhouse Gym - Weaving Hall', 'parent': 130, 'palette': 'loom', 'biome': 'canopy_gym', 'bgm': 'Gym', 'rubric': True,
                  'field': 'SILKWOOD', 'tone': [-10, -6, -18, 10], 'metadata': M, 'map': hall,
                  'tiles': decorate(hall.split('\n'), 131, [('loom', 15, 0), ('loom', 6, 0), ('cocoon', 1, 7), ('cocoon', 23, 12), ('shaft', 9, 13)]),
                  'events': hall_events})
@@ -272,7 +272,7 @@ def main():
         if e.get('type') == 'trainer' and e['trainer'][1] == 'Ash':
             e.update(intro="Rangers learn the high lines first. Let's see if you can keep your feet up here.",
                      after="You've got canopy legs. Tamsin'll like that.")
-    docs.append({'id': 132, 'name': 'Loomhouse Gym - Canopy Lofts', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'rubric': True,
+    docs.append({'id': 132, 'name': 'Loomhouse Gym - Canopy Lofts', 'parent': 130, 'palette': 'loom', 'biome': 'canopy_gym', 'bgm': 'Gym', 'rubric': True,
                  'field': 'SILKWOOD', 'tone': [-14, -8, -20, 15], 'metadata': M, 'map': lofts,
                  'tiles': zip_tiles + decorate(lofts.split('\n'), 132, [('web_big', 7, 9), ('web_big', 15, 17), ('web_big', 5, 2), ('web_big', 16, 9), ('web_big', 1, 16), ('shaft', 16, 7)]), 'events': loft_events})
     # ---------------------------------------------------------------- 133 The Spindle (Warden battle, confession)
@@ -323,7 +323,7 @@ def main():
             say('TAMSIN', 'angry', "But I can weave. Granny Loom wove this room. Don't you dare tear it.")]},
         {'script': key(133, 'TRIED') + ' = true'},
         {'if': 'Prismfall.gym_battle(1)', 'then': win}]
-    docs.append({'id': 133, 'name': 'Loomhouse Gym - The Spindle', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'field': 'SILKWOOD',
+    docs.append({'id': 133, 'name': 'Loomhouse Gym - The Spindle', 'parent': 130, 'palette': 'loom', 'biome': 'canopy_gym', 'bgm': 'Gym', 'field': 'SILKWOOD',
                  'rubric': True, 'tone': [-16, -10, -20, 15], 'metadata': M, 'map': '\n'.join(SPINDLE),
                  'tiles': decorate(SPINDLE, 133, [('loom', 6, 1), ('cocoon_big', 2, 3), ('cocoon_big', 11, 3), ('web_big', 1, 6), ('web_big', 11, 6), ('shaft', 6, 5)]),
                  'events': [

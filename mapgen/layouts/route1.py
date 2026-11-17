@@ -77,7 +77,7 @@ def build():
     c.land('haystack', 20, 49); c.land('hay', 34, 51); c.land('haycart', 21, 52); c.land('hay_loose', 19, 51)
     c.land('kennel', 24, 46); c.land('sack', 25, 47)
     # the lookout over the sea: bench, signboard, lamp
-    c.land('st:t_bench', 33, 25); c.land('signboard', 31, 24); c.land('st:t_lamp', 35, 23)
+    c.land('logbench', 33, 26); c.land('signpost', 31, 24); c.land('lantern', 35, 23)
     # Beacon Knoll: old waystone by the pond, a well below
     c.land('tablet', 12, 10); c.land('pillar_moss', 10, 11); c.land('pillar_moss2', 14, 10)
     c.land('well', 13, 39); c.land('stump_moss', 5, 13)
@@ -151,7 +151,7 @@ def build():
             {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'trigger': 'touch', 'commands': once(520, 'CH2', ch2)}]})
     c.events = E
     
-    head = {'id': 520, 'name': 'Route 1', 'bgm': 'Route 1', 'parent': 0, 'tone': [4, 6, -8, 0],
+    head = {'id': 520, 'biome': 'route', 'name': 'Route 1', 'bgm': 'Route 1', 'parent': 0, 'tone': [4, 6, -8, 0],
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 24], 'BattleBack': 'field'},
             'connections': [{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 25, 'to': 521, 'to_offset': 40}]}
     return c.write('520_route1.yaml', head, "# Route 1 (520). WRITTEN BY layouts/route1.py - edit that, not this file.\n")

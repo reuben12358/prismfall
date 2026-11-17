@@ -7,6 +7,7 @@ metadata:
   HealingSpot: [120, 44, 27]
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -843,6 +844,7 @@ bgm: Poke Mart
 metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 
@@ -1493,6 +1495,7 @@ bgm: Lerucean Town
 metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '.........................................
 
@@ -3235,6 +3238,7 @@ bgm: Lerucean Town
 metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '........................................
 
@@ -4656,6 +4660,7 @@ bgm: Lerucean Town
 metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
+biome: interior
 palette: interior
 map: '....................
 

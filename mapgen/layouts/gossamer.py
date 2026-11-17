@@ -172,7 +172,7 @@ def build():
         {'cond': {'self': 'A'}}]})
     c.overlay('web_s', P['netball'][0], P['netball'][1] - 1)
     c.events = E
-    head = {'id': 524, 'name': 'Gossamer Wood', 'bgm': 'Route 3', 'parent': 0, 'field': 'SILKWOOD', 'tone': [-28, -8, -30, 25],
+    head = {'id': 524, 'biome': 'forest', 'name': 'Gossamer Wood', 'bgm': 'Route 3', 'parent': 0, 'field': 'SILKWOOD', 'tone': [-28, -8, -30, 25],
             'metadata': {'ShowArea': True, 'MapPosition': [0, 13, 23], 'BattleBack': 'forest'}}
     return c.write('524_gossamer_wood.yaml', head, "# Gossamer Wood (524). WRITTEN BY layouts/gossamer.py - edit that, not this file.\n")
 

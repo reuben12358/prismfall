@@ -13,19 +13,16 @@ import early_interiors as EI
 def build():
     W, H = 34, 22
     c = Village(W, H, 109, base='~')
-    def deck(x, y):
-        if not 5 <= y <= 15: return False
-        half = 5.5 if x < 22 else 5.5 * max(0.0, 1 - ((x - 22) / 8.0) ** 1.6)
-        if x < 7: half = 5.5 * (1 - ((7 - x) / 5.0) ** 2)
-        return 3 <= x <= 30 and abs(y - 10) <= half
+    import ship_art as SA, json as _json
+    deck = SA.deck
     for y in range(H):
         for x in range(W):
-            if deck(x, y):
-                rim = not all(deck(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
-                c.g[y][x] = 'w' if rim else 'D'
-                if rim: c.tile(3831, x, y, 0); c.taken[y][x] = True
+            if deck(x, y): c.g[y][x] = 'D'
+            rim = deck(x, y) and not all(deck(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+            if rim or not deck(x, y) and any(deck(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1, 2)): c.taken[y][x] = True
+    for mx, my in SA.MASTS: c.taken[my][mx] = True
     gang = (9, 15)                                   # the gangway gap in the starboard rail, aft
-    c.g[gang[1]][gang[0]] = 'D'
+    c.g[gang[1]][gang[0]] = 'D'; c.taken[gang[1]][gang[0]] = False
     E = []
     P = lambda n, at, **kw: E.append(SE.place(109, n, at, **kw))
     P('Prologue intro', (16, 13)); P('Rail sign', (12, 5)); P('Mug ring', (13, 5))
@@ -47,12 +44,24 @@ def build():
     for x in (14, 15, 16): c.taken[10][x] = c.taken[11][x] = True
     for x in range(10, 15): c.taken[6][x] = True
     for nm, x, y in (('hs_jonquil_12', 4, 6), ('p_crates', 18, 11), ('p_crates', 21, 11), ('hs_jonquil_36', 9, 6), ('hs_jonquil_37', 8, 6),
-                     ('t_barrel', 20, 13), ('t_barrel2', 21, 13), ('tp_stall_13', 11, 12), ('p_lantern', 23, 6), ('p_lantern', 7, 12),
-                     ('tp_stall_01', 12, 14), ('hs_jonquil_35', 18, 13), ('p_net', 24, 8), ('p_crates', 4, 12), ('p_banner3', 19, 8),
-                     ('hs_jonquil_07', 28, 9), ('tp_barrel_06', 25, 11)):
+                     ('t_barrel', 20, 13), ('t_barrel2', 21, 13), ('p_lantern', 23, 6), ('p_lantern', 7, 12),
+                     ('p_crates', 13, 13), ('hs_jonquil_35', 18, 13), ('p_net', 24, 8), ('p_crates', 4, 12), ('p_banner3', 19, 8),
+                     ('hs_jonquil_07', 26, 7), ('tp_barrel_06', 25, 11)):
         c.stamp(nm, x, y, force=True)
+    # the hull, deck, rail, masts and rigging painted by ship_art (tileset 33 part 'dovetail'); overhead tiles skip stamp roofs
+    off = _json.load(open(os.path.join(HERE, 'data', 'compose_offsets.json')))['dovetail']['offset']
+    from villagekit import STAMPS
+    roof = set()
+    for st in c.stamps:
+        S2 = STAMPS[st['stamp']]
+        for yy, row in enumerate(S2['layers'][2]):
+            for xx, t in enumerate(row):
+                if t: roof.add((st['at'][0] + xx, st['at'][1] + yy))
+    for x, y, z, i in _json.load(open(os.path.join(HERE, 'data', 'ship_dovetail.json'))):
+        if z == 2 and deck(x, y) and (x, y) in roof: continue
+        c.tile(off + i, x, y, z)
     c.events = E
-    head = {'id': 109, 'name': 'The Dovetail - Deck', 'parent': 0, 'bgm': 'Surfing', 'palette': 'village', 'tone': [14, -4, -24, 10],
+    head = {'id': 109, 'biome': 'harbour', 'name': 'The Dovetail - Deck', 'parent': 0, 'bgm': 'Surfing', 'palette': 'village', 'tone': [14, -4, -24, 10],
             'fog': {'name': 'prismfall_seamist', 'opacity': 55, 'blend': 0, 'zoom': 100, 'sx': 3, 'sy': 0},
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 28], 'Weather': ['Rain', 0]}}
     old = {s['id']: s for s in yaml.safe_load_all(open(os.path.join(HERE, 'layouts', 'old_109.yaml'))) if s}[109]

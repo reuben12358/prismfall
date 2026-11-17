@@ -1,0 +1,8 @@
+Name       = ZZ Playtest Bot
+Version    = 1.0.0
+Essentials = 21.1
+Requires   = Prismfall Maps
+Requires   = Prismfall Core
+Requires   = Prismfall Cutscenes
+Requires   = Prismfall EBDX Bridge
+Credits    = Prismfall dev team (dev-only playtest tool; never ship)

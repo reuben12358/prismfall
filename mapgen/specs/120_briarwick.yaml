@@ -1,5 +1,6 @@
 # Briarwick (120). WRITTEN BY layouts/briarwick.py - edit that script.
 id: 120
+biome: forest
 name: Briarwick
 parent: 0
 bgm: Lerucean Town
@@ -146,7 +147,7 @@ heights: |
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
 stamps:
-- stamp: t_stairs
+- stamp: stairs_log@33
   at: [35, 17]
 - stamp: g_elder
   at: [30, 4]
@@ -273,7 +274,7 @@ stamps:
   at: [62, 53]
 - stamp: p_silk
   at: [65, 51]
-- stamp: t_bench
+- stamp: logbench@33
   at: [56, 53]
 - stamp: tp_stall_05
   at: [26, 26]

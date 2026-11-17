@@ -12059,19 +12059,20 @@
   },
   {
    "id": 560,
-   "name": "Route 5",
+   "name": "Route 5 - Frostflat Causeway",
    "act": 1,
    "kingdom": "Borderland (Elowen/Isenmar)",
    "kind": "route",
    "size": [
     64,
-    28
+    30
    ],
    "tileset": "Outside",
    "bgm": "Route 2",
    "field": null,
    "segment": 2,
-   "layout": "Salt flats west of Saltmere: white sand (Sand terrain), cracked pans, a wrecked pier village half-sunk in brine to the south (The Rehearsal Bleed zone).",
+   "weather": "Snow,10",
+   "layout": "Borderland start. A raised salt road (the Causeway, y12-14) runs W from Saltmere's west gate across flats whose crust turns from SALT (east half: white sand, salt-pans, salt-cedars) to FROST (west half: rime crust, frozen brine pools you slide on, frosted reeds). Mid-way the Border Stones flank the road: Elowen's briar crown on one, Isenmar's whale-and-axe on the other, a Meridian sunburst bolted across both. A spur S leads to the old salt road where the Rehearsal loops. The Rimewood's glittering canopy fills the west horizon (parallax).",
    "connections": [
     {
      "type": "edge",
@@ -12089,37 +12090,127 @@
     {
      "type": "edge",
      "dir": "west",
-     "to": 561,
+     "to": 570,
      "span": [
-      8,
-      14
+      10,
+      16
      ],
      "to_span": [
-      40,
-      46
+      18,
+      24
      ]
     },
     {
      "type": "warp",
      "at": [
       30,
-      26
+      28
      ],
      "to": 568,
      "link": "R5_REHEARSAL",
-     "note": "Bleed Veil on pier"
+     "note": "Bleed Veil across the old salt road spur"
     }
    ],
    "features": [
     {
-     "type": "sand",
+     "type": "causeway",
      "at": [
       0,
-      0
+      12
      ],
      "size": [
       64,
-      28
+      3
+     ],
+     "note": "raised salt road, sand-paving texture"
+    },
+    {
+     "type": "salt_pans",
+     "at": [
+      36,
+      4
+     ],
+     "count": 6
+    },
+    {
+     "type": "salt_cedars",
+     "at": [
+      38,
+      18
+     ],
+     "count": 5
+    },
+    {
+     "type": "frost_pans",
+     "at": [
+      4,
+      4
+     ],
+     "count": 5,
+     "note": "rime crust ground"
+    },
+    {
+     "type": "ice_patch",
+     "at": [
+      8,
+      18
+     ],
+     "size": [
+      10,
+      4
+     ],
+     "note": "Ice terrain: first slide tiles (teaches sliding); 2 rock stoppers"
+    },
+    {
+     "type": "landmark",
+     "at": [
+      32,
+      10
+     ],
+     "name": "Border Stones (both arms + bolted Meridian sunburst)",
+     "size": [
+      1,
+      6
+     ]
+    },
+    {
+     "type": "survey_pegs",
+     "at": [
+      20,
+      6
+     ],
+     "count": 6,
+     "note": "Meridian Lattice survey line, orange flags"
+    },
+    {
+     "type": "wagon_wreck",
+     "at": [
+      44,
+      20
+     ],
+     "name": "overturned salt wagon (HEALPOWDER inside)"
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      42,
+      4
+     ],
+     "size": [
+      10,
+      5
+     ],
+     "note": "salt grass"
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      48,
+      20
+     ],
+     "size": [
+      10,
+      6
      ]
     },
     {
@@ -12129,49 +12220,85 @@
       4
      ],
      "size": [
-      10,
+      8,
       6
-     ]
+     ],
+     "note": "frosted grass"
     },
     {
      "type": "tall_grass",
      "at": [
-      44,
-      16
+      6,
+      22
      ],
      "size": [
-      12,
+      10,
       6
-     ]
+     ],
+     "note": "frosted grass"
     },
     {
-     "type": "salt_pans",
+     "type": "npc",
+     "role": "Elowen royal forester",
+     "at": [
+      31,
+      9
+     ],
+     "says": "border lore: 'Past the stones the trees wear coats'"
+    },
+    {
+     "type": "npc",
+     "role": "Isenmar fur-trader",
      "at": [
       22,
-      8
+      15
      ],
-     "count": 6
+     "says": "comic: his Spheal-drawn sled keeps rolling off downhill"
     },
     {
-     "type": "trainer",
-     "class": "RUINMANIAC",
+     "type": "npc",
+     "role": "Meridian surveyor",
      "at": [
-      16,
-      14
+      20,
+      6
      ],
-     "levels": [
-      16,
-      17
-     ],
-     "party_size": 2,
-     "sight": 4
+     "says": "hammering survey pegs; story tension"
     },
     {
      "type": "trainer",
      "class": "PICNICKER",
      "at": [
-      36,
-      6
+      50,
+      8
+     ],
+     "levels": [
+      15,
+      16
+     ],
+     "party_size": 2,
+     "sight": 4
+    },
+    {
+     "type": "trainer",
+     "class": "HIKER",
+     "at": [
+      40,
+      18
+     ],
+     "levels": [
+      16,
+      17
+     ],
+     "party_size": 2,
+     "sight": 4,
+     "note": "salt carter"
+    },
+    {
+     "type": "trainer",
+     "class": "LASS",
+     "at": [
+      14,
+      20
      ],
      "levels": [
       16,
@@ -12182,10 +12309,25 @@
     },
     {
      "type": "trainer",
-     "class": "BIKER",
+     "class": "SAILOR",
      "at": [
-      50,
-      12
+      20,
+      8
+     ],
+     "levels": [
+      17,
+      18
+     ],
+     "party_size": 2,
+     "sight": 4,
+     "note": "Isenmar sealer"
+    },
+    {
+     "type": "trainer",
+     "class": "BIRDKEEPER",
+     "at": [
+      26,
+      24
      ],
      "levels": [
       17,
@@ -12195,35 +12337,40 @@
      "sight": 4
     },
     {
-     "type": "trainer",
-     "class": "POKEMANIAC",
+     "type": "item",
+     "item": "SUPERPOTION",
+     "at": [
+      62,
+      2
+     ],
+     "hidden": false
+    },
+    {
+     "type": "item",
+     "item": "ICEHEAL",
      "at": [
       6,
+      2
+     ],
+     "hidden": false
+    },
+    {
+     "type": "item",
+     "item": "HEALPOWDER",
+     "at": [
+      44,
       20
      ],
-     "levels": [
-      17
-     ],
-     "party_size": 3,
-     "sight": 4
+     "hidden": false
     },
     {
      "type": "item",
      "item": "SOFTSAND",
      "at": [
-      60,
-      24
+      56,
+      26
      ],
      "hidden": true
-    },
-    {
-     "type": "item",
-     "item": "SUPERPOTION",
-     "at": [
-      2,
-      2
-     ],
-     "hidden": false
     }
    ],
    "tileset_kit": "G5_TEMPERATE",
@@ -12231,7 +12378,7 @@
   },
   {
    "id": 561,
-   "name": "Route 6",
+   "name": "Route 6 - Gullcry Cliffs",
    "act": 1,
    "kingdom": "Isenmar",
    "kind": "route",
@@ -12244,19 +12391,19 @@
    "field": null,
    "segment": 2,
    "weather": "Rain,30",
-   "layout": "Sea cliffs running north to Ebbmouth. A landslide cuts the cliff path mid-way (y=28-32): detour through Gullcry Caves (south mouth y~36, north mouth y~22). Lookout tower ruins. K2 at the north end.",
+   "layout": "First true Isenmar ground: wind-scoured sea cliffs running N to Ebbmouth, with drift-ice in the sea below. Whalebone waymarkers and cod-skull cairns line the path, and there are fishing huts on stilts. A landslide cuts the cliff path mid-way (y28-32), forcing a detour through Gullcry Caves (south mouth y~36, north mouth y~22). Ruined lookout tower. K2 at the north end. South edge: the Rimewood's last frozen trees thin out into cliff-top heath.",
    "connections": [
     {
      "type": "edge",
-     "dir": "east",
-     "to": 560,
+     "dir": "south",
+     "to": 562,
      "span": [
-      40,
-      46
+      10,
+      16
      ],
      "to_span": [
-      8,
-      14
+      12,
+      18
      ]
     },
     {
@@ -12302,7 +12449,7 @@
       8,
       60
      ],
-     "note": "sea under cliffs; surf later"
+     "note": "sea under cliffs with drift-ice floes; surf later"
     },
     {
      "type": "landslide",
@@ -12336,6 +12483,39 @@
       10,
       8
      ]
+    },
+    {
+     "type": "waymarkers",
+     "at": [
+      12,
+      50
+     ],
+     "count": 4,
+     "name": "whalebone waymarkers"
+    },
+    {
+     "type": "cairn",
+     "at": [
+      16,
+      34
+     ],
+     "name": "cod-skull cairn"
+    },
+    {
+     "type": "fishing_huts",
+     "at": [
+      18,
+      40
+     ],
+     "count": 2
+    },
+    {
+     "type": "ruin",
+     "at": [
+      4,
+      14
+     ],
+     "name": "lookout tower ruin"
     },
     {
      "type": "trainer",
@@ -12424,6 +12604,431 @@
    "border": "W: sea cliffs; E: open sea; the landslide"
   },
   {
+   "id": 562,
+   "name": "The Rimewood",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "route",
+   "size": [
+    48,
+    56
+   ],
+   "tileset": "Outside",
+   "bgm": "Natural Park",
+   "field": null,
+   "segment": 2,
+   "weather": "Snow,30",
+   "layout": "The southern Rimewood: Elowen oldwood frozen in a permanent hoar. Giant trunks glazed in clear ice form the walls, and their icicle fringes catch the light. Frozen silk drifted from the Gossamer Wood hangs in glittering curtains that act as soft walls. The path climbs N from Frostwick to the Isenmar cliffs. Features: the frozen Hoar Brook (an Ice-slide shortcut), a fallen giant-tree bridge over a ravine, a trapper's lean-to, the Frost Loom, and an aurora clearing at the N end.",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 570,
+     "span": [
+      22,
+      28
+     ],
+     "to_span": [
+      20,
+      26
+     ]
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 561,
+     "span": [
+      12,
+      18
+     ],
+     "to_span": [
+      10,
+      16
+     ]
+    },
+    {
+     "type": "warp",
+     "at": [
+      47,
+      24
+     ],
+     "to": 563,
+     "link": "RIME_GLADE",
+     "note": "behind a frosted sapling (CUT, 1 badge)"
+    }
+   ],
+   "features": [
+    {
+     "type": "ice_glazed_trees",
+     "at": [
+      0,
+      0
+     ],
+     "note": "map walls: giant ice-glazed boles + root walls (never single tree rows)"
+    },
+    {
+     "type": "silk_curtains",
+     "at": [
+      10,
+      32
+     ],
+     "count": 6,
+     "note": "frozen silk soft walls"
+    },
+    {
+     "type": "ice_slide",
+     "at": [
+      18,
+      30
+     ],
+     "size": [
+      12,
+      6
+     ],
+     "note": "frozen brook; 3 rock stoppers; optional shortcut to the TM ledge"
+    },
+    {
+     "type": "ravine_bridge",
+     "at": [
+      24,
+      14
+     ],
+     "size": [
+      2,
+      6
+     ],
+     "name": "fallen giant tree bridge"
+    },
+    {
+     "type": "rest_point",
+     "at": [
+      8,
+      40
+     ],
+     "name": "trapper's lean-to (heal NPC)"
+    },
+    {
+     "type": "landmark",
+     "at": [
+      34,
+      8
+     ],
+     "name": "the Frost Loom (a giant tree where silk froze mid-weave; sign)"
+    },
+    {
+     "type": "aurora_clearing",
+     "at": [
+      22,
+      2
+     ],
+     "size": [
+      8,
+      4
+     ]
+    },
+    {
+     "type": "survey_pegs",
+     "at": [
+      28,
+      26
+     ],
+     "count": 5,
+     "note": "Meridian Lattice line; Glasswood crystals spread along it in Act III"
+    },
+    {
+     "type": "cut_tree",
+     "at": [
+      46,
+      24
+     ]
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      6,
+      46
+     ],
+     "size": [
+      10,
+      6
+     ],
+     "note": "deep snow grass"
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      30,
+      36
+     ],
+     "size": [
+      10,
+      6
+     ]
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      10,
+      10
+     ],
+     "size": [
+      10,
+      6
+     ]
+    },
+    {
+     "type": "trainer",
+     "class": "BUGCATCHER",
+     "at": [
+      14,
+      48
+     ],
+     "levels": [
+      16,
+      17
+     ],
+     "party_size": 2,
+     "sight": 4
+    },
+    {
+     "type": "trainer",
+     "class": "POKEMONRANGER_F",
+     "at": [
+      30,
+      40
+     ],
+     "levels": [
+      17,
+      18
+     ],
+     "party_size": 2,
+     "sight": 4,
+     "note": "Elowen forester"
+    },
+    {
+     "type": "trainer",
+     "class": "HIKER",
+     "at": [
+      10,
+      26
+     ],
+     "levels": [
+      17,
+      18
+     ],
+     "party_size": 2,
+     "sight": 4,
+     "note": "Isenmar trapper"
+    },
+    {
+     "type": "trainer",
+     "class": "CAMPER",
+     "at": [
+      36,
+      20
+     ],
+     "levels": [
+      17,
+      18
+     ],
+     "party_size": 2,
+     "sight": 4
+    },
+    {
+     "type": "trainer",
+     "class": "TWINS",
+     "at": [
+      22,
+      8
+     ],
+     "levels": [
+      18
+     ],
+     "party_size": 2,
+     "sight": 4,
+     "note": "double battle"
+    },
+    {
+     "type": "npc",
+     "role": "lost trapper child",
+     "at": [
+      40,
+      44
+     ],
+     "says": "escort to Frostwick: reward 3 HONEY"
+    },
+    {
+     "type": "npc",
+     "role": "trapper (heal)",
+     "at": [
+      8,
+      41
+     ],
+     "says": "rest"
+    },
+    {
+     "type": "item",
+     "item": "ICEHEAL",
+     "at": [
+      44,
+      52
+     ],
+     "hidden": false
+    },
+    {
+     "type": "item",
+     "item": "GREATBALL",
+     "at": [
+      4,
+      30
+     ],
+     "hidden": false
+    },
+    {
+     "type": "item",
+     "item": "TM07",
+     "at": [
+      40,
+      4
+     ],
+     "hidden": true,
+     "note": "Hail/Snowscape"
+    },
+    {
+     "type": "item",
+     "item": "APPLEWOOD_LOG_PLACEHOLDER",
+     "at": [
+      35,
+      9
+     ],
+     "hidden": false,
+     "note": "sidequest key item for The Two Hearths"
+    }
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 563,
+   "name": "Rimewood Glade",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "route",
+   "size": [
+    34,
+    30
+   ],
+   "tileset": "Outside",
+   "bgm": "Natural Park",
+   "field": null,
+   "segment": 2,
+   "weather": "Snow,20",
+   "metadata": {
+    "optional": true,
+    "requires": "CUT"
+   },
+   "layout": "Hidden glade: a frozen waterfall of silk (the Silk-fall) over a frozen pond, with the Snowveil Shrine (honey and eel offerings side by side).",
+   "connections": [
+    {
+     "type": "warp",
+     "at": [
+      0,
+      15
+     ],
+     "to": 562,
+     "link": "RIME_GLADE"
+    }
+   ],
+   "features": [
+    {
+     "type": "silkfall",
+     "at": [
+      14,
+      0
+     ],
+     "size": [
+      6,
+      6
+     ],
+     "name": "the Silk-fall"
+    },
+    {
+     "type": "ice_slide",
+     "at": [
+      8,
+      10
+     ],
+     "size": [
+      16,
+      10
+     ],
+     "note": "pond slide puzzle; prize on the far islet"
+    },
+    {
+     "type": "landmark",
+     "at": [
+      28,
+      20
+     ],
+     "name": "Snowveil Shrine"
+    },
+    {
+     "type": "tall_grass",
+     "at": [
+      2,
+      22
+     ],
+     "size": [
+      10,
+      6
+     ]
+    },
+    {
+     "type": "stantler_herd",
+     "at": [
+      24,
+      4
+     ],
+     "note": "decor sleeping herd"
+    },
+    {
+     "type": "trainer",
+     "class": "POKEMONRANGER_M",
+     "at": [
+      20,
+      24
+     ],
+     "levels": [
+      18,
+      19
+     ],
+     "party_size": 2,
+     "sight": 4
+    },
+    {
+     "type": "item",
+     "item": "NEVERMELTICE",
+     "at": [
+      16,
+      14
+     ],
+     "hidden": false,
+     "note": "ice-pond islet"
+    },
+    {
+     "type": "item",
+     "item": "REVIVE",
+     "at": [
+      30,
+      2
+     ],
+     "hidden": true
+    }
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
    "id": 564,
    "name": "Gullcry Caves 1F",
    "act": 1,
@@ -12437,7 +13042,7 @@
    "bgm": "Cave",
    "field": "CAVE",
    "segment": 2,
-   "layout": "Sea cave honeycombed with tide pools. Two mouths onto Route 6 (west wall). Shallow pools (still water, impassable until Surf) and gull roosts.",
+   "layout": "Sea cave honeycombed with tide pools and ice-rimmed rock. Two mouths open onto Route 6 (west wall). Shallow pools (still water, impassable until Surf) and gull roosts.",
    "connections": [
     {
      "type": "warp",
@@ -12636,7 +13241,7 @@
    "metadata": {
     "outdoor": true,
     "optional": true,
-    "note": "pier village stuck performing the same day on loop; NPC 'actors' repeat lines; Fixed people as stage-dummies"
+    "note": "a stretch of the old salt road where five seconds of a wagon crash replay forever (story 04_ACT_I Ch4); salt flats frozen mid-gust"
    },
    "connections": [
     {
@@ -12651,13 +13256,21 @@
    ],
    "features": [
     {
+     "type": "looping_scene",
+     "at": [
+      12,
+      10
+     ],
+     "note": "wagon, driver and Tauros replay the crash on a 5-second move-route loop; player can step 'between' frames"
+    },
+    {
      "type": "looping_npcs",
      "at": [
       8,
       8
      ],
-     "count": 6,
-     "note": "move-route loops; dialogue repeats with one word changed each visit"
+     "count": 4,
+     "note": "onlookers repeat lines with one word changed each visit"
     },
     {
      "type": "tall_grass",
@@ -12694,6 +13307,638 @@
    "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
    "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Saltmere Normal Imprint"
+  },
+  {
+   "id": 570,
+   "name": "Frostwick",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "town",
+   "size": [
+    44,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 2,
+   "weather": "Snow,20",
+   "metadata": {
+    "outdoor": true,
+    "town_map_pos": [
+     0,
+     7,
+     21
+    ],
+    "heal_point_map": 571
+   },
+   "layout": "Borderland village where the Rimewood meets the salt lagoon. Six ice-glazed giant trees carry Elowen treehouses on their upper limbs. On the ground between them stand Isenmar turf-roofed longhouses with whalebone gables. The frozen Hoar Brook runs N-S (x22-25) through the square, with ice-fishing holes. Rime-silk curtains (frozen silk that never thaws) hang from the branches and glitter. The east gate is two gates in one: a whale-rib palisade arch wrapped in briar. The Hearth Stone (truce stone) stands in the square. North edge: the forest path into the Rimewood.",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "east",
+     "to": 560,
+     "span": [
+      18,
+      24
+     ],
+     "to_span": [
+      10,
+      16
+     ]
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 562,
+     "span": [
+      20,
+      26
+     ],
+     "to_span": [
+      22,
+      28
+     ]
+    },
+    {
+     "type": "door",
+     "name": "Pokémon Center",
+     "at": [
+      10,
+      28
+     ],
+     "link": "FW_PC"
+    },
+    {
+     "type": "door",
+     "name": "The Exchange",
+     "at": [
+      30,
+      28
+     ],
+     "link": "FW_EXCH"
+    },
+    {
+     "type": "door",
+     "name": "The Two Hearths (inn)",
+     "at": [
+      20,
+      18
+     ],
+     "link": "FW_INN"
+    },
+    {
+     "type": "door",
+     "name": "Rime-silk Loft",
+     "at": [
+      8,
+      10
+     ],
+     "link": "FW_LOFT",
+     "note": "door at a giant tree's base; stair up inside"
+    },
+    {
+     "type": "door",
+     "name": "Border House",
+     "at": [
+      36,
+      20
+     ],
+     "link": "FW_BORDER"
+    },
+    {
+     "type": "door",
+     "name": "Halvard's Smokehouse",
+     "at": [
+      32,
+      10
+     ],
+     "link": "FW_SMOKE"
+    }
+   ],
+   "features": [
+    {
+     "type": "giant_tree",
+     "at": [
+      2,
+      2
+     ],
+     "count": 6,
+     "name": "ice-glazed giant trees (clear ice over bark, icicle fringes)"
+    },
+    {
+     "type": "rope_bridges",
+     "at": [
+      6,
+      6
+     ],
+     "note": "frosted rope bridges between treehouses (decor)"
+    },
+    {
+     "type": "river",
+     "at": [
+      22,
+      0
+     ],
+     "size": [
+      4,
+      40
+     ],
+     "note": "frozen brook: Ice terrain; fishing holes at (23,14) (23,30)"
+    },
+    {
+     "type": "gate",
+     "at": [
+      40,
+      18
+     ],
+     "name": "whale-rib palisade arch wrapped in briar"
+    },
+    {
+     "type": "landmark",
+     "at": [
+      22,
+      26
+     ],
+     "name": "the Hearth Stone (truce stone; carved oath in both tongues)"
+    },
+    {
+     "type": "silk_curtains",
+     "at": [
+      4,
+      4
+     ],
+     "count": 8,
+     "note": "rime-silk decor, sparkle animation"
+    },
+    {
+     "type": "pens",
+     "at": [
+      30,
+      34
+     ],
+     "name": "Swinub/Mamoswine sled-pens"
+    },
+    {
+     "type": "market_stalls",
+     "at": [
+      14,
+      30
+     ],
+     "count": 4,
+     "name": "honey, silk, furs, smoked eel"
+    },
+    {
+     "type": "npc",
+     "role": "Brannagh (Elowen innkeeper)",
+     "at": [
+      18,
+      22
+     ],
+     "says": "sidequest 'The Two Hearths'"
+    },
+    {
+     "type": "npc",
+     "role": "Halvard (Isenmar sealer)",
+     "at": [
+      24,
+      22
+     ],
+     "says": "sidequest 'The Two Hearths'"
+    },
+    {
+     "type": "npc",
+     "role": "children",
+     "at": [
+      26,
+      32
+     ],
+     "says": "playing 'kingdoms' in ogre masks and whale masks (comic)"
+    },
+    {
+     "type": "npc",
+     "role": "Isenmar huscarl",
+     "at": [
+      38,
+      22
+     ],
+     "says": "gate guard"
+    },
+    {
+     "type": "npc",
+     "role": "Elowen forester",
+     "at": [
+      36,
+      16
+     ],
+     "says": "gate guard"
+    },
+    {
+     "type": "npc",
+     "role": "ice-fisher",
+     "at": [
+      23,
+      13
+     ],
+     "says": "fishing tutorial; Old Rod works here"
+    },
+    {
+     "type": "item",
+     "item": "SNOWBALL",
+     "at": [
+      40,
+      36
+     ],
+     "hidden": true
+    }
+   ],
+   "tileset_kit": "G4_FOREST_TOWN",
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+  },
+  {
+   "id": 571,
+   "name": "Frostwick Pokémon Center",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 2,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "FW_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 572,
+   "name": "The Exchange",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    17,
+    11
+   ],
+   "tileset": "Mart interior",
+   "bgm": "Poke Mart",
+   "field": null,
+   "segment": 2,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      8,
+      10
+     ],
+     "link": "FW_EXCH"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "clerk",
+     "at": [
+      3,
+      3
+     ],
+     "says": "mart",
+     "stock": [
+      "POKEBALL",
+      "GREATBALL",
+      "POTION",
+      "SUPERPOTION",
+      "ICEHEAL",
+      "BURNHEAL",
+      "PARALYZEHEAL",
+      "REPEL",
+      "ESCAPEROPE"
+     ]
+    },
+    {
+     "type": "npc",
+     "role": "barter-woman",
+     "at": [
+      12,
+      3
+     ],
+     "says": "trades: 3 Honey -> 1 Fresh Water... (barter list); Elowen silk vs Isenmar fur"
+    },
+    {
+     "type": "tally_board",
+     "at": [
+      8,
+      1
+     ],
+     "name": "exchange rates in briar-marks and notch-tallies"
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 573,
+   "name": "The Two Hearths",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    23,
+    13
+   ],
+   "tileset": "Interior general",
+   "bgm": null,
+   "field": null,
+   "segment": 2,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      11,
+      12
+     ],
+     "link": "FW_INN"
+    }
+   ],
+   "features": [
+    {
+     "type": "hearth",
+     "at": [
+      3,
+      2
+     ],
+     "name": "Elowen applewood hearth (west half: carved timber, flower garlands)"
+    },
+    {
+     "type": "hearth",
+     "at": [
+      19,
+      2
+     ],
+     "name": "Isenmar whale-oil hearth (east half: whalebone, furs, drinking horns)"
+    },
+    {
+     "type": "long_table",
+     "at": [
+      6,
+      6
+     ],
+     "size": [
+      11,
+      2
+     ]
+    },
+    {
+     "type": "npc",
+     "role": "innkeeper (heal)",
+     "at": [
+      11,
+      3
+     ],
+     "says": "free rest"
+    },
+    {
+     "type": "npc",
+     "role": "bard",
+     "at": [
+      6,
+      9
+     ],
+     "says": "sings the 'Sleeping Whale' (Kyogre seed)"
+    }
+   ],
+   "visual_brief": {
+    "landmarks": [
+     "two hearths at opposite ends",
+     "one long table"
+    ],
+    "silhouette": "interior split down the middle by style",
+    "materials": "carved applewood | whalebone and fur",
+    "palette": "warm amber west, blue-grey east",
+    "set_pieces": [
+     "the hearth argument",
+     "midwinter feast (sidequest end)"
+    ]
+   },
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 574,
+   "name": "Rime-silk Loft",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    13,
+    10
+   ],
+   "tileset": "Interior general",
+   "bgm": null,
+   "field": null,
+   "segment": 2,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      6,
+      9
+     ],
+     "link": "FW_LOFT"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "weaver",
+     "at": [
+      4,
+      3
+     ],
+     "says": "rime-silk lore: Briarwick silk drifts west and freezes"
+    },
+    {
+     "type": "frozen_loom",
+     "at": [
+      8,
+      2
+     ]
+    },
+    {
+     "type": "npc",
+     "role": "Snom & Joltik spinners",
+     "at": [
+      6,
+      5
+     ],
+     "says": "decor Pokémon"
+    },
+    {
+     "type": "item",
+     "item": "SILKSCARF",
+     "at": [
+      9,
+      6
+     ],
+     "hidden": false,
+     "note": "gift after Two Hearths? no: free gift for talking to weaver"
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 575,
+   "name": "Border House",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    17,
+    11
+   ],
+   "tileset": "Interior general",
+   "bgm": null,
+   "field": null,
+   "segment": 2,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      8,
+      10
+     ],
+     "link": "FW_BORDER"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "Elowen forester-clerk",
+     "at": [
+      4,
+      3
+     ],
+     "says": "stamps briar seal"
+    },
+    {
+     "type": "npc",
+     "role": "Isenmar huscarl-clerk",
+     "at": [
+      12,
+      3
+     ],
+     "says": "stamps whale seal"
+    },
+    {
+     "type": "npc",
+     "role": "Meridian clerk",
+     "at": [
+      8,
+      3
+     ],
+     "says": "stamps the sunburst OVER both (story)"
+    },
+    {
+     "type": "seal_desk",
+     "at": [
+      8,
+      4
+     ]
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
+  },
+  {
+   "id": 576,
+   "name": "Halvard's Smokehouse",
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    11,
+    9
+   ],
+   "tileset": "Interior general",
+   "bgm": null,
+   "field": null,
+   "segment": 2,
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      5,
+      8
+     ],
+     "link": "FW_SMOKE"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "Halvard's daughter",
+     "at": [
+      4,
+      3
+     ],
+     "says": "heals; smoked eel"
+    },
+    {
+     "type": "smoke_racks",
+     "at": [
+      2,
+      1
+     ],
+     "count": 4
+    }
+   ],
+   "tileset_kit": "G45_INTERIOR",
+   "border": "building walls (interior)"
   },
   {
    "id": 580,

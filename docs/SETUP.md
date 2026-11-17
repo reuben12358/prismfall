@@ -96,10 +96,11 @@ The top commit is *"framerate setup and last item hotfix"*.
 
 Close RPG Maker XP first: it overwrites `Data/*.rxdata` when it saves. Back up the project folder.
 
-1. **Plugins.** Copy these four folders into `<project>/Plugins/`:
-   `Prismfall Core`, `Prismfall Field Effects`, `Prismfall EBDX Bridge`, `Prismfall Debug Tools`.
+1. **Plugins.** Copy every folder of the kit's `Plugins/` into `<project>/Plugins/` (Core, Field Effects, EBDX Bridge,
+   Bosses, Cutscenes, Debug Tools, Maps and `~Prismfall Base Fixes`).
    Each folder must contain its `meta.txt` directly (`Plugins/Prismfall EBDX Bridge/meta.txt`), not a nested folder.
-   Load order follows the dependencies automatically: EBDX → Field Effects → Bridge.
+   Load order follows the dependencies automatically: EBDX → Field Effects → Bridge. `~Prismfall Base Fixes` loads
+   before every other plugin on purpose (see §6, "superclass mismatch"); keep the `~` in its folder name.
 2. **PBS.** Copy our PBS files into `<project>/PBS/`. They ship with suffixes, so no stock file is edited:
    `trainer_types_prismfall.txt`, `trainers_prismfall.txt`, `items_prismfall.txt` (field seeds),
    `encounters_prismfall.txt` and `map_metadata_prismfall.txt`.
@@ -108,12 +109,22 @@ Close RPG Maker XP first: it overwrites `Data/*.rxdata` when it saves. Back up t
 3. **Battle graphics (optional at first).** Put field backdrops in `Graphics/EBDX/Battlebacks/battlebg/` (see
    [ART_ASSETS.md](ART_ASSETS.md)). Until you do, every field uses a tinted stock EBDX room with its particle FX,
    so fields are playable on day one.
-4. **Maps (when the Map Builder output ships).**
+4. **Maps and tilesets.**
    1. Close RMXP and back up `Data/`.
-   2. Copy the generated `Data/MapNNN.rxdata` files (IDs 100+) into `<project>/Data/`.
-   3. Run the shipped **MapInfos merge step**. It adds our maps to `Data/MapInfos.rxdata` without touching existing entries.
-      Its exact tool or file name comes with the map package; follow that README.
-   4. Reopen RMXP: the new maps appear in the map tree. Maps use stock Essentials tilesets, so `Tilesets.rxdata` doesn't change.
+   2. Copy the kit's `Data/` (the `MapNNN.rxdata` files, IDs 100+, plus `mapinfos_prismfall.txt` and
+      `Tilesets_prismfall.rxdata`) and `Graphics/` (`Tilesets/`, `Autotiles/`, `Fogs/`: new file names only;
+      `Autotiles/Dirt.png` is byte-identical to the stock file) into the project.
+   3. Launch in Debug mode (§4) and start a **New Game**. The first time, it asks to install the Prismfall tilesets and
+      maps: say Yes and the game carries on into the prologue. The same installer is **Debug → Files options → Install
+      Prismfall maps**; running it again changes nothing. It:
+      - backs up `Data/Tilesets.rxdata` and `Data/MapInfos.rxdata` once (`*.prismfall-bak`);
+      - writes our tilesets (IDs 30, 33, 34, 40) into `Tilesets.rxdata`, padding the empty slots below them, and never
+        overwrites a differently named tileset at the same ID (it reports it instead);
+      - adds our maps to `MapInfos.rxdata` with their names and tree, including renaming the `MAP100`-style entries that
+        Essentials' compiler makes for new map files on every Debug boot. Other existing entries are never changed.
+   4. Reopen RMXP: the new maps appear in the map tree with their tilesets.
+   - Tilesets 33 and 40 are tall sheets (about 90,000 px). Essentials wraps them into columns; that needs a GPU whose
+     maximum texture size is at least 8192 (any current GPU; very old integrated graphics stop with "Tileset is too long").
 
 ## 4. Compile and launch in Debug mode
 
@@ -170,6 +181,7 @@ and the port's code (`Plugins/Elite Battle DX/[003] Config/Config.rb`).
 
 | Symptom | Cause | Fix |
 |---|---|---|
+| **Boot stops: `superclass mismatch for class PokemonSprite`** at `[Elite Battle: DX] UI Fixes.rb:4` (both base projects, with or without Prismfall) | Base-project bug. Essentials v21.1 defines `class PokemonSprite < Sprite`; EBDX defines its own unrelated `class SpriteWrapper` (`Battle Core/EBDX SpriteWrapper.rb`) and then reopens the class as `class PokemonSprite < SpriteWrapper`. Ruby refuses a reopened class with a different superclass. Reproduced on an untouched copy of the Renovation fork (commit 452d27ca) in mkxp-z 2.4.2. | Nothing to do with the kit installed: `Plugins/~Prismfall Base Fixes` loads first and drops the superclass from that one line in memory (no file is changed). Without the kit, or if you prefer to fix the file: in `Plugins/Elite Battle DX/[000] Scripts/Battle UI/UI Fixes.rb`, change line 4 from `class PokemonSprite < SpriteWrapper` to `class PokemonSprite`, then hold Ctrl on the next launch so the plugins recompile. The class body only adds `constrict`, which works on the stock class. |
 | **Battle animations too fast** on 120/144 Hz monitors, or intros and fades too slow | v21 timing is in seconds, but EBDX animates per frame. The repo's `mkxp.json` has `"syncToRefreshrate": true`, so the frame rate equals your monitor's refresh rate. | In `mkxp.json`, set `"syncToRefreshrate": false` and add `"fixedFramerate": 60` (option names from mkxp.json's own comments). Then try `USE_DELTA_TIME_HOTFIX` in Config.rb both ways (default `false` = frame-based with the SceoFlash13 hotfix; `true` = delta-time waits, added in the port's May 2024 updates). Option A is preconfigured this way. |
 | **Crash at battle start:** `undefined method 'has_key?' for nil` in `Scene Backdrops.rb … adjustMetrics` (reported in the thread, no fix posted) | From the code: `adjustMetrics` reads `EliteBattle.get(:battlerMetrics)`, which is filled from `Data/metrics.ebdx`. If `PBS/EBDX/metrics.txt` is missing, never compiled, or lacks `[BATTLERPOS-0]` / `[BATTLERPOS-1]`, the hash is empty and the method crashes. | Make sure `PBS/EBDX/metrics.txt` exists (it's in the repo), then launch in **debug mode holding Ctrl** so `Data/metrics.ebdx` is rebuilt. Release builds must ship `Data/*.ebdx`, because EBDX only compiles in debug mode. |
 | **Trainer sprite out of place / camera shows the void** after a trainer's end speech (option B) | Known port issue | `USE_TRAINER_OUT_OF_PLACE_HOTFIX` in Config.rb (default `true` in this repo). If trainers drift, set it to `false` (one user reported the camera fixed itself after one F12 reset). SceoFlash13's manual patch to `pbShowOpponent`/`pbHideOpponent` in `Battle Modifiers/Scripted Battles.rb` is in thread page 2. Option A removed this hotfix. |
