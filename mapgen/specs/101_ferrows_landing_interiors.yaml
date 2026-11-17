@@ -2929,20 +2929,35 @@ tiles:
 - tile: 3475
   at: [20, 10]
   layer: 1
-- tile: 4824
-  at: [22, 12]
-  layer: 1
-- tile: 4825
-  at: [23, 12]
-  layer: 1
-- tile: 4832
-  at: [22, 13]
-  layer: 1
-- tile: 4833
-  at: [23, 13]
-  layer: 1
 - tile: 4101
   at: [17, 12]
+  layer: 1
+- tile: 2153
+  at: [21, 11]
+  layer: 1
+- tile: 2154
+  at: [22, 11]
+  layer: 1
+- tile: 2155
+  at: [23, 11]
+  layer: 1
+- tile: 2161
+  at: [21, 12]
+  layer: 1
+- tile: 2162
+  at: [22, 12]
+  layer: 1
+- tile: 2163
+  at: [23, 12]
+  layer: 1
+- tile: 2169
+  at: [21, 13]
+  layer: 1
+- tile: 2170
+  at: [22, 13]
+  layer: 1
+- tile: 2171
+  at: [23, 13]
   layer: 1
 events:
 - type: exit

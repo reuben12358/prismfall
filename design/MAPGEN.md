@@ -6,8 +6,8 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 ## 1. What's built (Act I, in story order)
 | IDs | Maps | Story / mechanics |
 |---|---|---|
-| 109–110 | The Dovetail: deck and cabin (prologue) | The intro autorun runs `Prismfall.choose_difficulty`. Voss gives the badge case and the `PRO_FELLOWSHIP` choice, then a fade to the Ferrow's berth. The deck is pier planks and rails over the sea ([TODO art] ship) |
-| 100–108 | Ferrow's Landing and interiors | Customs NULL scan (S102). Edda's GO-01. The Hales' stall, the counting rhyme, the Old Rod. Larch's letter scene, then the starter table (any Gen 1–9, plus Juno's and Kestrel's counter-picks). K1 autorun at the lab gate (`Prismfall.rival_battle`, S104). Rowan, Hesper |
+| 109–110 | The Dovetail: deck and cabin (prologue) | FINAL script (§2f): title card, appearance, manifest name, difficulty; Edda's rail scene, Voss and `:pro_fellowship`, checkpoint, gangway opens on S101; six passengers, cook, trunk, letter |
+| 100–108 | Ferrow's Landing and interiors | FINAL script (§2f): docking, Edda's last call (GO_HOMEWARD), the NULL scan and title card, Larch/Sanctuary/starter/Kestrel, K1, Rowan, Juno's errand, Ch1 end at the inn, Larch's send-off, Wingull and Lamplighter sidequests, Hesper |
 | 520, 521 (+523) | Route 1, Route 2 (+ Hale Farmhouse) | The Route 2 cordon guard lets you through once K1 is done |
 | 522 | The Glassed Orchard (:BLEED) | Bleed Veil scene with Juno: GO-02 choice, the Wurmple calm, Larch's Field Notes line (S105) |
 | 524–526 | Gossamer Wood, Deepwood, Woodward's Hut (:SILKWOOD) | Silk-wall loop, Cut tree to Deepwood |
@@ -175,16 +175,71 @@ The stock intro's controls tutorial is not reproduced.
   event (Nurse, Healing balls, PC, Mart clerk) at a new position, so the Essentials event logic is kept.
 - **`layouts/scriptpour.py`** parses `story/20_SCRIPT_CH0-2.md`: `[name: X]` / `[portrait: X, expr]` lines become NPC
   events (portraits as `\pf[NAME,expr]`, "(again)" lines as a second page), `LABEL: text` lines become signs,
-  `HIDDEN ITEM` lines hidden items. It does not parse cutscenes, choices, battle calls or `[after Sxxx]` variants.
+  `HIDDEN ITEM` lines hidden items. `layouts/story_early.py` uses it for the flavour townsfolk only (§2f).
 - **Scripts:** `ferrow.py` (100, 68x60), `briarwick.py` (120, 72x64), `dovetail.py` (109 deck 34x22 + calls
-  `early_interiors.py`: 101-108, 110, 121-125). Old events come from the committed specs (`layouts/old_*.yaml`,
-  `ferrow_events.yaml`, `briarwick_events.yaml`) and are re-seated by name. Run all three, then `build.py`.
-- **Links changed:** 100 north edge to Route 1 is now `offset 28` (lane at x 33-36); 120 west edge to Route 3 `offset 29`
-  (road rows 30-31); 120's south warp to Gossamer Wood is at (35-36, 63) and arrives at 524 (24, 1). Prologue arrival is
-  100 (34, 55) on the pier. HealingSpots: 100 (24, 28), 120 (28, 29). The routes builder must match these.
-- **Not done from the script:** named-resident rewrites (Wenna, Coll, Odo keep the earlier lines), reactive `[after]`
-  variants, both sidequests per town, the Docking / K1 / Larch / Tamsin cutscene rewrites, 110's passengers, the Briarwick
-  chapel room and Guildhall loft. No fog pictures are set. 100 misses the mirror number by a hair (15.1; sea rows).
+  `early_interiors.py`: 101-108, 110, 121-125, and builder 3's 523/526). Story events come from `layouts/story_early.py`;
+  `layouts/old_*.yaml` / `*_events.yaml` now supply only map heads, the 105/106 stair warps and 108's two NPCs.
+  Run `python3 -I layouts/ferrow.py && python3 -I layouts/briarwick.py && python3 -I layouts/dovetail.py && python3 -I build.py`.
+- **Links:** 100 north edge `offset 28` (lane x 33-36); 120 west edge `offset 29` (the road crosses the stream on a raised
+  walkway at rows 30-31); 120's south warp (35, 63) has link `WOOD_BRIAR` (pairs with 524's "To Briarwick"), (36, 63)
+  goes to 524 (25, 1). Prologue arrival 100 (34, 55) on the pier. HealingSpots: 100 (19, 27), 120 (44, 27).
+
+## 2f. Early towns, second pass: the whole script, the timber look, shared tooling
+**Script (story/20_SCRIPT_CH0-2.md, maps 100-110, 120-125): `layouts/story_early.py`** writes every event by hand from the
+FINAL script; layouts only seat them (`place(map, name, xy)`) and abort if any event is left unplaced (`unplaced(map)`).
+- Portrait lines are `\pf[ID,expr,emotes,event]Name: text` (379 tags; the script's *(anger vein)* / *(sweat drop)* /
+  *(shock lines)* / *(question mark)* / *("...")* become the emotes `anger sweat shock question dots`); the speaker's event is
+  named so the bubble's tail points at it. Choices use NARRATIVE_KEYS' keys through `pf_choose` only (`:pro_fellowship`,
+  `:ch2_tamsin`). Game over `:GO_HOMEWARD` with `Prismfall.checkpoint` after the badge-case scene.
+- Built: Dovetail intro, Edda's rail scene (touch line at the port rail), Voss, the gangway; docking (passengers through the
+  gate), Edda's last call, the NULL scan with Voss/Calla/the camera/the chain/Crier/`PF_ACT1_TITLE`; Calla and Edda after;
+  Wenna (tart, Pokégear, [after S103], [after S105] + the Biscuit reward shared with 523's self switch), Coll, Odo, Crier,
+  all flavour townsfolk with (again) pages; Larch's letter scene (autorun), the Sanctuary starter scene (Juno's and Kestrel's
+  picks named from `Prismfall::Rival`), Kestrel's loft drop, K1 with both outcomes and Juno's "Team Compost", Rowan,
+  Juno's errand; the end of Chapter 1 when resting at the inn (`PF_CH1_NOTEBOOK`, V102 = 2); Larch's send-off on the north
+  lane (V102 >= 2; TOWN MAP); sidequests "Captain Edda" (Wingull on the lighthouse rocks, SHARP BEAK) and "The Last Round"
+  (taper, six lamp events that change graphic, dusk tone, CHARCOAL); lighthouse locked until S105; Hesper's autorun.
+  Briarwick: Juno's arrival, Tamsin bumping into you, Thistle's night scene at the pylon (after meeting Tamsin), Finch,
+  the old woman (S170 on at arrival, off after Badge 1 by a parallel "Stage manager"), the Dusk Petal, the bridge boy,
+  "Sixteen Sleeves", every townsfolk line with the after-gym variants, signs, hidden items, the charcoal child (after
+  S107) and the Gale Post letters (V102 = 3). Interiors: nurses' script lines (`take_events` `replace_text`, plus the
+  no-Pokémon line via `prepend`), Fellowship activation at the Mart, inn guests, Dockmaster's ledger, the lighthouse
+  objects, Hett and "The Locked Ledger", the Warden's loft (ledger + Tamsin's `:ch2_tamsin` confession, guarded), the
+  chapel (second room of 124, door `BW_CHAPEL` on 120), the Cutter's two-step HM01.
+- **Runtime helpers** (`mapgen/ruby/006_MapStory.rb`, copied into `Plugins/Prismfall Maps/` by build.py): `pfm?` /
+  `pfm_set` / `pfm_add` saved scene flags (no new switch ids), `pfm_item(:ID, n, "Name")` (real item if PBS has it, else a
+  message + remembered story item), `pfm_has?`, `pfm_quest` / `pfm_quest_done` (a small quest log in `$PokemonGlobal`),
+  `pfm_money`, `pfm_card(:SCENE, lines...)` (title cards defined there for the Cutscenes plugin, message fallback),
+  `pfm_dusk` / `pfm_day`.
+**DSL / build.py additions:** `who: "Event name"` in `move`, `%EV[Name]%` in scripts (event ids resolved per map),
+`{anim: [who, id]}` (Show Animation), door `locked: {until: SWITCH, text}` (a locked page, then the door), `take_events`
+`replace_text` / `prepend`, spec key **`fog: {name, opacity, blend, zoom, sx, sy, hue}`** (generated into
+`005_MapAtmosphere.rb` next to MAP_TONES; REQUESTS item 3), **`build.py --mood`** writes `previews/mood/` with tone and fog
+applied (`render.mood`, item 5).
+**Tileset 33 additions (appended at the end; no earlier offset moved):** `sheridan_red` (red-roofed timber, stamps `w_*_r`,
+for Poké Centers), `custom3` (Briarwick's elder tree `g_elder` 12x12 with door (6, 11); silk garland tiles: plain,
+pennants, hanging lantern, tufts). `custom2` gained the quay oil lamp unlit/lit (C2+166/167) in two free cells.
+**Painters:** `terrain.k_forest` now puts the canopy body ("mid" row) on layer 3 as well as the top (rubric 5); this also
+lifts layer 3 on every palette using `kind: forest` (city, village, tectonic, wilds, bleed) without changing passability.
+`villagekit.Village.lane()` paints smooth Catmull-Rom lanes 2-3 tiles wide; `villagekit.DECK` is Sheridan's raised timber
+deck (9-slice with edge passages, solid stilts, plank stairs) used by `briarwick.deck()` / `walkway()`.
+**interiorkit:** 30 more Tectonic Inside pieces (bookcases, paintings, clocks, dining set, sideboard, china cabinet, pens,
+workshop clutter), `Room.rug()` (Sheridan 9-slice rug; furniture on it moves up a layer), `Room.floor()`, and
+`combine(rooms, head, events)` for multi-room maps (103 annex, 123 loft, 124 chapel).
+**Look:** Ferrow's Poké Center is a red timber longhouse, the Mart a slate-blue timber house, both with banners and a
+Poké Ball plaque; Tidewatch is a moss timber cottage with a lantern turret and a brass sea-glass on the hill; the lighthouse
+is Jonquil's octagonal tower on the west headland; lanes are 2-3 wide and wind; the Dovetail is a plank hull with rails,
+a wheelhouse and a pennant mast (no sheet has a timber ship). Briarwick: the elder tree on its knoll is the Loomhouse, boles
+of four sizes, a raised weavers' deck, two lantern decks joined by a walkway, a raised walkway over the stream, silk
+garlands with lanterns overhead, dusk tone and spore fog. 523/526 are re-tiled Sheridan rooms with builder 3's events.
+**Rubric (build output):** 100 layer2 67.8, layer3 23.4, bare 15.3, bare3x3 1.1, stacks 18.6, mirror 13.0;
+120 layer2 63.9, layer3 39.8, bare 9.6, bare3x3 0.1, stacks 18.6, mirror 2.9. No reachability warnings on 100-125.
+**Not built as written:** Juno as a following character (no follower API: she is placed events), Kestrel's figure on the
+lighthouse gallery (text), the Dovetail sprite pulling back and the chain drawn across (text), "the PC's hand moves to
+their chest" (text), the guild meetings (fade + text), the keep-secret "finished pylon" (pylon sign text changes, map art
+does not), the ledger key in the Loomhouse foyer (map 130, builder 3: see REQUESTS), the Ch1 notebook scene at the
+farmhouse bed (523's own event does it). Items without PBS data are given by `pfm_item` (BADGECASE, FELLOWSHIPCARD,
+OLDCHOWDER, BRAMBLETART, LAMPTAPER, BARKMASK, DUSKPETAL, KELPTEABAG, MOTHERLOOMSSHUTTLE, LEDGERKEY, TMSTRINGSHOT).
 
 ## 3. Regenerating
 ```
@@ -216,6 +271,7 @@ bgm: Lappet Town             # Audio/BGM name, autoplayed
 metadata: {Outdoor: true, ShowArea: true, MapPosition: [0, 14, 26], BattleBack: field}   # -> map_metadata_prismfall.txt
 connections: [{dir: N, offset: 17, to: 520, to_offset: 10}]   # -> map_connections_prismfall.txt (once per pair)
 field: SILKWOOD              # -> manifest.json fields (FieldEffects::MAP_FIELDS); staged: field: [FLOWER_GARDEN, 3]
+tone: [-18, -30, 4, 12]       # screen tone on entry; fog: {name: prismfall_spores, opacity: 46, blend: 1, sx: 1, sy: -1}
 map: |                       # ASCII terrain, one char per tile (legend in the palette)
   TTTT....::::....
 stamps:                      # multi-tile buildings at their top-left corner; a stamp with a door adds a door event

@@ -78,7 +78,7 @@ def build():
     r.sf('stairs', 9, 5)                                    # Larch's hayloft (Kestrel sleeps up there)
     for fx, fy in ((13, 0), (21, 0), (13, 8), (21, 8), (16, 8), (19, 3)): r.tf('fern_big' if (fx + fy) % 2 else 'plant', fx, fy - 1 if fy == 0 else fy - 1)
     r.tf('labtank', 15, -1); r.tf('shrub', 18, -1); r.sf('plants3', 13, 3); r.tf('shrub', 21, 4); r.tf('flowerpot', 20, 6)
-    r.tf('table_tea', 16, 4); r.tf('pallet', 19, 7); r.tf('bucket', 14, 7)
+    r.tf('table_tea', 16, 4); r.tf('bucket', 14, 7); r.tf('pen', 18, 6)    # a starter pen
     E = [P(103, 'Professor Larch', r.at(6, 1), ), P(103, 'Juno', r.at(5, 4)), P(103, 'Kestrel (loft)', r.at(10, 3)),
          P(103, 'Starter table', r.at(17, 5)), P(103, 'Rowan Ashby', r.at(14, 5)), P(103, 'Juno (station)', r.at(16, 6)),
          P(103, 'Station bookshelf', r.at(1, 0)), P(103, 'Imprint scanner', r.at(9, 0)), P(103, 'Kettle', r.at(11, 0))]
@@ -160,9 +160,8 @@ def build():
     h.tf('easel1', 0, 4); h.tf('flowerpot', 8, 5); h.tf('bucket', 1, 5)
     ch = Room(13, 9)
     for fx in (2, 6, 10): ch.window(fx)
-    for fy in (3, 5, 7):
-        ch.tf('bench_v', 2, fy - 2) if False else None
-        ch.tf('sofa_g', 1, fy); ch.tf('sofa_g', 8, fy)
+    for fy in (3, 5, 7):                                  # rows of chapel chairs either side of the aisle
+        for fx in (1, 2, 3, 9, 10, 11): ch.tf('stool', fx, fy)
     ch.rug(5, 1, 3, 8); ch.tf('bust', 6, -1); ch.tf('flowerpot', 4, 0); ch.tf('flowerpot', 8, 0); ch.tf('painting2', 0, -2); ch.tf('painting4', 11, -2)
     ch.tf('plant', 0, 0); ch.tf('plant', 12, 0)
     ev = [(0, P(124, 'Retired Weaver', h.at(5, 3))), (0, P(124, 'Bookshelf', h.at(6, 0))), (0, P(124, 'Loom', h.at(0, 3))),
@@ -179,7 +178,7 @@ def build():
     r.tf('kitchen', 0, -1); r.tf('shelf_bottles', 4, -1); r.rug(4, 2, 6, 4); r.tf('dining', 5, 2); r.tf('clock', 11, -2)
     r.sf('bed_o', 12, 0); r.tf('bookcase', 10, -2); r.sf('plants3', 12, 5); r.tf('barrel_y', 0, 6); r.tf('crate_i', 1, 6)
     r.tf('sideboard', 0, 2); r.tf('stool', 9, 3); r.tf('painting1', 6, -2); r.tf('bucket', 11, 6)
-    b = B3[523]; at = {'Kitchen table': (6, 1), 'Wenna': (4, 3), 'Farmer Hale': (10, 5), 'Bookshelf': (10, 0), "Juno's seed packets": (8, 0), 'Bed': (12, 3)}
+    b = B3[523]; at = {'Kitchen table': (6, 1), 'Wenna': (4, 3), 'Farmer Hale': (10, 5), 'Bookshelf': (10, 0), "Juno's seed packets": (8, 0), 'Bed': (13, 2)}
     h523 = {k: b[k] for k in KEEP if k in b}; h523['tone'] = [10, 4, -12, 0]
     s523 = r.spec(h523, [dict(e, at=r.at(*at[e['name']])) for e in b['events']], b['exit_link'])
     r = Room(9, 7); r.window(2)

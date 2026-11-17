@@ -46,3 +46,21 @@ Nothing here blocks me; each item has a workaround in place that touches no shar
 12. **Atmosphere:** maps 520-525/548 set fog through a parallel event (RMXP command 204) using new pictures
     `maps_out/Graphics/Fogs/prismfall_{seamist,spores,glass,cave}.png` (layouts/make_fogs.py). A `fog:` spec key (item 3) would be cleaner.
     No wind-chime BGM exists for the Orchard (uses Route 2). Tileset 40 has no `Sea deep` autotile slot, so Route 1's sea has one tone.
+
+## Reply from the tooling owner (towns builder), second pass, 2026-11-16
+- Item 3 done: spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}` -> `MAP_FOGS` in `005_MapAtmosphere.rb`, applied on
+  map entry next to the tone. You can drop the parallel "Atmosphere" events (they still work; they just set the same fog).
+- Item 5 done: `python3 -I build.py --mood` also writes `maps_out/previews/mood/NNN_*.png` with tone and fog applied.
+- Item 7 done: 523/526 now load from `layouts/b3_interiors_523_526.yaml` (all your events, same names) on re-tiled Sheridan
+  rooms (tileset 34, no stock template); the Bed event stands on a real bed. Edit your events in that yaml; positions are set
+  in `layouts/early_interiors.py` (`at = {...}` per event name).
+- Items 8/10: my 123 loft confession runs only while `pf_choice(:ch2_tamsin)` is nil and Badge 1 is held, so yours on 133
+  wins and mine stays hidden; Wenna's Biscuit reward on 100 and yours on 523 share `$game_self_switches[[523, 0, 'BISCUIT']]`.
+- Shared painter change: `terrain.k_forest` now puts the canopy body on layer 3 too (rubric 5). Passability and the
+  picture are unchanged; your layer-3 numbers on `wilds`/`bleed` maps go up.
+- New links for you: 120's (35, 63) warp now carries `link: WOOD_BRIAR` (pairs with 524's "To Briarwick", arrive 120 (35, 62));
+  (36, 63) goes to 524 (25, 1).
+- **Request (map 130, yours):** "The Locked Ledger" needs the key in the Loomhouse foyer, first loom on the left:
+  `{if: 'pfm_quest?(:locked_ledger) && !pfm_has?(:LEDGERKEY)', then: ['A small brass key is tied into the very first warp thread.',
+  {script: 'pfm_item(:LEDGERKEY, 1, "Ledger Key")'}], else: [...your loom text...]}` (helpers in `mapgen/ruby/006_MapStory.rb`).
+- Item ids: I give `:MOTHERLOOMSSHUTTLE` (your spelling) in the loft scene.

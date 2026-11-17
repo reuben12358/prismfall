@@ -146,7 +146,7 @@ def build():
     c.dress(['p_sign'], 2, '.', 8, near='d', pad=0); c.dress(['t_bench'], 2, 'k', 9, pad=0)
     c.fence_run([(43, 17), (60, 17)]); c.fence_run([(26, 2), (26, 10)]); c.fence_run([(57, 3), (57, 13)])
     c.fence_run([(2, 29), (8, 29)]); c.fence_run([(44, 34), (44, 38)])
-    c.borders(p=0.7); c.meadow(0.74, 1)
+    c.borders(p=0.7); c.meadow(0.84, 1)
     for y in range(H):              # woods behind the village: a ragged band along the north and side edges
         for x in range(W):
             edge = min(y + 1.5 * (vnoise(x, 0, 21, 4.0)), x + 2 * vnoise(0, y, 22, 4.0), W - 1 - x + 2 * vnoise(0, y, 23, 4.0))

@@ -82,8 +82,8 @@ stamps:
   at: [18, 13]
 - stamp: p_net
   at: [24, 8]
-- stamp: t_crate_pair
-  at: [5, 13]
+- stamp: p_crates
+  at: [4, 12]
 - stamp: p_banner3
   at: [19, 8]
 - stamp: hs_jonquil_07

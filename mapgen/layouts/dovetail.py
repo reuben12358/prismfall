@@ -48,7 +48,7 @@ def build():
     for x in range(10, 15): c.taken[6][x] = True
     for nm, x, y in (('hs_jonquil_12', 4, 6), ('p_crates', 18, 11), ('p_crates', 21, 11), ('hs_jonquil_36', 9, 6), ('hs_jonquil_37', 8, 6),
                      ('t_barrel', 20, 13), ('t_barrel2', 21, 13), ('tp_stall_13', 11, 12), ('p_lantern', 23, 6), ('p_lantern', 7, 12),
-                     ('tp_stall_01', 12, 14), ('hs_jonquil_35', 18, 13), ('p_net', 24, 8), ('t_crate_pair', 5, 13), ('p_banner3', 19, 8),
+                     ('tp_stall_01', 12, 14), ('hs_jonquil_35', 18, 13), ('p_net', 24, 8), ('p_crates', 4, 12), ('p_banner3', 19, 8),
                      ('hs_jonquil_07', 28, 9), ('tp_barrel_06', 25, 11)):
         c.stamp(nm, x, y, force=True)
     c.events = E

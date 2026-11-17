@@ -16,53 +16,53 @@ fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 100, sx: 2, sy: 0}
 connections:
 - {dir: N, offset: 28, to: 520, to_offset: 10}
 map: |
-  TTTTtTTTTCCtTTTTTTTTTTTTTTTTTTTTTddddtTTTtttTTTTTTTTTTTttttttttttttt
-  TTTTCCCCCCCCCCCCTTTTTTTT,,TTTTTTTddddTTTTTTTTCCCCCCCCCCCtttttttttttT
-  TTTCCTTttttTTTTCC....TTT,,wTTTTTTTddTTTTTCCCCCTTTTTTTTTCCCCCCttttTTT
-  CCCCTT,,ttTTTT..CCC...TTTTwTTTT.TTddT.TCCCTTTT,,T,TTTTTTTwTtCCttTTTT
-  tTTTTT,,tt.TTT....CC..TTTTwTtTTT..dd.TCChTT,,T,,T,THHHTTTwTTtCCtTTTT
-  TTTTTTttt,TTTT.....C.TTTTTwTt,TT..ddTCCTTTT,,#########T,,,TTTTCCCTTT
-  TTTTTTttt,T,,h..h.CCT,TTTTwttTTT.hdddCTTTTTTH#########T,,,,TTTTTCTTT
-  CCCTTttttTT,,...,CCCT,TTTTwttt.,...ddCttTTTTH#########T,,,tTTTTTCTTT
-  CCCCCTTtTTTT..TH,CCCTTTTTTwTtT,,,..ddCCTTTTT,#########T.twTTTTT.CTTT
-  CCCCCCCCTTTCCC###CCTTTTTTTwTtT,,,..ddCCCTTTTT#########T#.,,,TTTTCTTT
-  TTCCCCCCCCCCCC###CTTTtTTTTwTTTTTTTTddCCCCTT,T#########T#.wTttTCCCTTT
-  TTTTCCCCCCCCCC###CT,TtTT,TTT,TTTTTtdddCCCTdddddd,,,,d,.,.w.CCCCCCTTT
-  TTTTTTTCCCCC.H#d#TTT.tTTTTTT,ttTTTtddTTCCddddddddddddd..CCCCCCCCCTTT
-  TTT,,TTTTTTTTT,ddTTttttT.,.tttttttTddT,,CHddddddCCCCCCCCCCCCCCCTTTTT
-  t,,,,,,,,,,,,,tddttttttt,,,tt.,.ttdddT,,C###CCCCCCCCCCCCCCCC.TTTTTTT
-  T,,,,,TTTTT,HtttddTTTTTt,,,tt,,,TTdddT,,C#d#CCCCCCCCCCCCCTT..,,..TTT
-  TTH##########,TTddddTTTTttTTT,,,TTddddddCdddCCCCCTTTTTTTTTT..,,..TTT
-  TTH##########HTTTTddddddttTTTTTTTTddddddddd#wwwwwwwwwwwwwwwww...,TTT
-  TTT##########HTTTTTTTddddddTTTTTTddd.TTtt,,,ttt....TTTTTT,,,T....TTT
-  TTT##########,,TTTT,HTTHTdddddTTTddT.TTTTT,,Ttt....hTTTT,HTHTH,t.TTT
-  T,H##########,,TH###########dddddddT,THTT,,,,,,,,Hh,,,,H######Ht.TTT
-  T,H##########,,tH###########HTddddTT,T############H,,,,T######HttTTT
-  TTT##########,,tT###########TTTdddTT,T############,.H.TT######,,,TTT
+  TTTTTTTTTCCtTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTtttttttttttt
+  TTTTCCCCCCCCCCCCTTTTTTTT,,TTTTTTTddddTTTTTTTTCCCCCCCCCCCTTTTtttttTTT
+  TTTCCTTTTTTTTTTCC....TTT,,wTTTTTTTddTTTTTCCCCCTTTTTTTTTCCCCCCtttTTTT
+  CCCCTT,,..TTTT..CCC...TTTTwTTTT.TTddT.TCCCTTTT,,T,TTTTTTTwTTCCttTTTT
+  TTTTTT,,t..TTT....CCh.TTTTwTTTTT..dd.TCC.TT,,T,,T,THHHTTTwTTTCCTTTTT
+  TTTTTTTt.,TTTT....hC.TTTTTwTT,TT.hddTCCTTTT,,#########T,,,TTTTCCCTTT
+  TTTTTTTtT,T,,..h..CCT,TTTTwTTTTT..dddCTTTTTTH#########T,,,,TTTTTCTTT
+  CCCTTTttTTT,,...,CCCT,TTTTwTTT.,...ddCTtTTTTH#########T,,,TTTTTTCTTT
+  CCCCCTTTTTTT..TH,CCCTTTTTTwTTT,,,..ddCCTTTTT,#########T..wTTTTT.CTTT
+  CCCCCCCCTTTCCC###CCTTTTTTTwTTT,,,..ddCCCTTTTT#########T#.,,,TTTTCTTT
+  TTCCCCCCCCCCCC###CTTTTTTTTwTTTTTTTTddCCCCTT,T#########T#.wTTTTCCCTTT
+  TTTTCCCCCCCCCC###CT,TtTT,TTT,TTTTTTdddCCCTdddddd,,,,d,.,.w.CCCCCCTTT
+  TTTTTTTCCCCC.H#d#TTT..TTTTTT,TTTTTTddTTCCddddddddddddd..CCCCCCCCCTTT
+  TTT,,TTTTTTTTT,ddTTT.TTT.,.TttTTTTTddT,,CHddddddCCCCCCCCCCCCCCCTTTTT
+  T,,,,,,,,,,,,,tddtttTTTT,,,tt.,.TTdddT,,C###CCCCCCCCCCCCCCCC.TTTTTTT
+  T,,,,,TTTTT,HTTTddTTTTTT,,,TT,,,TTdddT,,C#d#CCCCCCCCCCCCCTT..,,..TTT
+  TTH##########,TTddddTTTTTTTTT,,,TTddddddCdddCCCCCTTTTTTTTTT..,,..TTT
+  TTH##########HTTTTddddddTTTTTTTTTTddddddddd#wwwwwwwwwwwwwwwww...,TTT
+  TTT##########HTTTTTTTddddddTTTTTTddd.TTTT,,,Tt.....TTTTTT,,,T.h.hTTT
+  TTT##########,,TTTT,HTTHTdddddTTTddT.TTTTT,,TTT.....TTTT,HTHTH,..TTT
+  T,H##########,,TH###########dddddddT,THTT,,,,,,,,H.,,,,H######Ht.TTT
+  T,H##########,,TH###########HTddddTT,T############H,,,,T######Ht.TTT
+  TTT##########,,TT###########TTTdddTT,T############,.H.TT######,,,TTT
   T,,##########,,,,###########HTTddTTT,T############,H##########,,,TTT
-  T,,##########HHTH###########HTdddTTtTT############t.##########,,,THT
-  T,,###################,#####HTdddTTtTH####,#######tt##########H####T
-  TTt########d##########,#####dddddTTTT,####,#######,,####,,,,,,H####T
-  T,t,,,,,,,ddd####,,d,,,,,,ddddddddTTT,,,d,,,####,,,,####TTTTTdT####T
-  tttttttt,,Tdd####,TdTT,T,ddddkkkdddddTTTdT######,TTH####.,Tdddd####T
-  t,,,wwwwwTTdd####TtTTTTTddddkkkkkddddddT,T######,TTT,,,,.dddddH####T
-  tTTTTTtt,TTdd####tttddddddddkkkkkddddddddd######HTT,T.ddddddT,,####T
-  tH#####,tTTddddddddddddddddddddddTTtdddddddd####....dddddTTTT,,,,,,T
-  tH#####HTTTddddddddddddddTTTTTddTTttT..ddddddddddddddddttTTTTTTTTTTT
-  tH#####HTddddddTTTTTdtT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTTTTTTTTT
-  TH####ddddddTTTCCCCCCCCCCCCCCCCCddTtTTT.,.TTdTTdddddTTTT.TTTTTTtTTTT
-  TH##ddddddTTTTTCCCCCCCCCCCCCCCCCdddtTTTT..TTwTTTTddddTT...TTT,tttTTT
-  TH##dddddTTTTTTCCCCCCCCCCssssssCTdddTCCCCCCCCCCCCCCdddT...TTT,TtT,TT
-  tT##dddTTTTTTTTCsssssssssssssssCC#ddCCCCCCCCCCCCCCCTddCCCCTTTTTTT,TT
+  T,,##########HHTH###########HTdddTTTTT############T.##########,,,THT
+  T,,###################,#####HTdddTTtTH####,#######T.##########H####T
+  TTT########d##########,#####dddddTTTT,####,#######,,####,,,,,,H####T
+  T,T,,,,,,,ddd####,,d,,,,,,ddddddddTTT,,,d,,,####,,,,####TTTTTdT####T
+  TTTTTTtt,,Tdd####,TdTT,T,ddddkkkdddddTTTdT######,TTH####.,Tdddd####T
+  T,,,wwwwwTTdd####TTTTTTTddddkkkkkddddddT,T######,TTT,,,,.dddddH####T
+  tTTTTTTt,TTdd####TTTddddddddkkkkkddddddddd######HTT,T.ddddddT,,####T
+  tH#####,TTTddddddddddddddddddddddTTtdddddddd####....dddddTTTT,,,,,,T
+  tH#####HTTTddddddddddddddTTTTTddTTTtT..ddddddddddddddddTTTTTTTTTTTTT
+  TH#####HTddddddTTTTTdTT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTTTTTTTTT
+  TH####ddddddTTTCCCCCCCCCCCCCCCCCddTTTTT.,.TTdTTdddddTTTT.TTTTTTTTTTT
+  TH##ddddddTTTTTCCCCCCCCCCCCCCCCCdddTTTTT..TTwTTTTddddTT...TTT,TtTTTT
+  TH##dddddTTTTTTCCCCCCCCCCssssssCTdddTCCCCCCCCCCCCCCdddT...TTT,TTT,TT
+  TT##dddTTTTTTTTCsssssssssssssssCC#ddCCCCCCCCCCCCCCCTddCCCCTTTTTTT,TT
   tH#####HTT.,.TTCsssssssssssssssCCsssCCCCCCCCCCCCCCC###CCCCTTTTTTTTTT
   tH#####T,T,,,TCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
-  tt,,,,,T.T,,,TCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
-  ttTTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
-  t,TTTTT,,TTTTtCsssssssssssssssssskkksssssssssssssssssssssCCCCCssssss
-  t,TTTTTTTTTTTTCsssssssssssssssskkkkkkkssssssssssssssssssssssssssssss
+  tT,,,,,T.T,,,TCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
+  tTTTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
+  t,TTTTT,,TTTTTCsssssssssssssssssskkksssssssssssssssssssssCCCCCssssss
+  T,TTTTTTTTTTTTCsssssssssssssssskkkkkkkssssssssssssssssssssssssssssss
   TTTTTTTTTTTTTCCsssssssssssssskkkkkkkkkkkssssssssssssssssssssssssssss
   TTT,TTTTTTTT.CCsssssssssskkkkkkkkkkkkkkkskkkkkkkkkssssssssssssssssss
-  TTT,TTTTTTttCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssss~~~~
+  TTT,TTTTTTTTCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssss~~~~
   TTTTTTTTTTTCCCssskkk~~kkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssss~~~~~~~~~
   TTTT,TTTTTTCCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
   CCTT,TTTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
