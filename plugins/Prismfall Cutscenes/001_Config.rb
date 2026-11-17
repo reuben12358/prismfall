@@ -10,6 +10,7 @@ module Prismfall
     PX             = 2        # one "art pixel" = PX screen pixels (all FX are drawn on this grid)
     FX_FPS         = 30       # FX layers redraw at this rate (animating "on twos" reads as pixel art)
     MAX_DT         = 0.1      # longest time step accepted per frame (lag never skips content)
+    TICK           = 0.05     # one RMXP event "Wait 1" in Reborn/Rejuvenation (40 FPS, 2 frames): port event timings as n * TICK
     VIEWPORT_Z     = 99_990
     SKIP_BUTTONS   = [:BACK]  # Input constants; hold one to skip
     SKIP_HOLD      = 0.7      # seconds

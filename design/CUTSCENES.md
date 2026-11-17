@@ -23,9 +23,11 @@ sprite or portrait is replaced by a code-drawn placeholder. All sound cues are s
 | `009_Armies.rb` | Crowds, marching, army clash, volleys |
 | `010_Text.rb` | Captions, speaker lines, title card, VS card, HP bars |
 | `011_Highlights.rb` | `match_highlight` |
-| `012_Scenes_War.rb` | `:WAR_CLIMAX` (story/13_CUTSCENES.md WAR-1) and `:WAR_CLIMAX_DEMO` |
-| `013_Portraits.rb` | Portrait speech bubbles and the message hook |
-| `014_Debug.rb` | Debug menu: "Prismfall Cutscenes..." |
+| `012_Cinematic.rb` | Dithering, scenery layers (floes, aurora, smoke, hosts), impact frames, slow motion, fracture, rim light, edge glow |
+| `012_Cinematic_Techniques.rb` | Techniques from Rejuvenation/Reborn: sheets and flipbooks, `play_sheet`, blend modes, stills, pulses, database animations, on-map mode, camera follow, photosensitive mode (see design/CUTSCENE_RESEARCH.md) |
+| `013_Scenes_War.rb` | `:WAR_CLIMAX` (story/13_CUTSCENES.md WAR-1) and `:WAR_CLIMAX_DEMO` |
+| `014_Portraits.rb` | Portrait speech bubbles and the message hook |
+| `015_Debug.rb` | Debug menu: "Prismfall Cutscenes..." |
 | `selftest/` | Offline test harness (not loaded by the game; see section 9) |
 
 ---
@@ -48,9 +50,15 @@ Conditional Branch > Script: pbCutscene(:MY_SCENE)    # true = watched to the en
 - A scene that raises an error is logged and ended (returns false) instead of freezing the event. In Debug with
   `$DEBUG` set, the error is raised so you see it.
 
+### Photosensitive mode
+`Prismfall::Cutscene.photosensitive = true` (or a `$PokemonSystem.photosensitive` option set to 1, or the Debug menu
+toggle) does three things in every cutscene: flashes are capped at a quarter strength with no hold, impact frames are
+skipped, and camera shake is cut to 20%. Rejuvenation and Reborn do the same with their own photosensitive setting.
+Expose it in the options menu when Core adds one.
+
 ## 2. Writing a scene
 
-Put scenes in any plugin script that loads after this one (or in `012_Scenes_War.rb` style files here).
+Put scenes in any plugin script that loads after this one (or in `013_Scenes_War.rb` style files here).
 
 ```ruby
 Prismfall::Cutscene.define(:MY_SCENE) do
@@ -213,6 +221,27 @@ beam_clash a: { from: :kyogre, color: :water, width: 10 },   # or just a: :kyogr
 | `volley` | `from:`, `to:`, `kind: :fire :ice :water :arrow :rock :dragon :electric`, `count:`, `arc:`, `casualties:` |
 | `rout :id` / `army_fall :id` / `army_tint :id` | `by:` / `fraction:` / `color:`, `amount:` |
 
+### Sheets, flipbooks and other Rejuvenation/Reborn techniques
+These come from how those games actually build their scenes (design/CUTSCENE_RESEARCH.md).
+
+| Command | Options |
+|---|---|
+| `actor :id, sheet: "Graphics/Characters/X", grid: [4, 4], frame: 0` | Any grid sheet (charset format is 4×4). `px:` zoom (default 1), `blend: :add / :sub` |
+| `pose :id, frame: n` / `pose :id, row:, col:` | Show one cell (also works on charset and icon actors) |
+| `flipbook :id, frames: 0..7, hold: 0.1` | Step through cells. `holds: [..]` per frame, `loops:`, `se: { 3 => "Anim/Explosion" }`, `end_frame:`. A tween: add `wait: true` to block |
+| `play_sheet "Graphics/Animations/X", grid: [5, 2], frames: 0..4, at: point, hold: 0.05` | One-shot effect that removes itself (`blend: :add` default). Chain several with `at(t) { ... }` along a path for travelling bursts |
+| `still "Graphics/Pictures/X", duration: 3, fade: 0.3, steps: 5, dim: 120` | Full-screen CG or storyboard over the scene (blocking) |
+| `pulse tone: [-68, -102, -102, 120], duration: 0.15, times: 2` | Tone heartbeat for impacts |
+| `anim 16, at: point` | Plays database animation #16 from `Data/Animations.rxdata` |
+| `follow :id, smooth: 0.15` / `follow off: true` | Camera keeps tracking an actor; `cut`, `pan`, `camera` end it |
+| `fade_in steps: 5`, `fade_out steps: 5`, `fade :id, to: 0, steps: 5`, `ease: :step3`..`:step8` | Stepped (pixel-art) fades |
+
+**On-map scenes:** `define(:ID, on_map: true) { ... }` plays over the live map. There is no black curtain, the map
+keeps updating underneath and no background is needed. Actors can follow map events with `actor :x, ..., event: 12`
+(or `event: :player`), plus `offset: [dx, dy]`.
+
+**Porting event timings:** one RMXP "Wait 1" in those games is `TICK` = 0.05 s.
+
 ### Text and audio
 - `text "Caption"` (`position: :bottom/:top/:center`, `duration:`), `say "Name", "Line"` (typed out),
   `title "BIG", sub: "small"`. Text is timed (default from its length) and never waits for a button.
@@ -225,7 +254,7 @@ beam_clash a: { from: :kyogre, color: :water, width: 10 },   # or just a: :kyogr
 
 ## 4. The war climax
 
-`:WAR_CLIMAX` follows story/13_CUTSCENES.md WAR-1 shot by shot (about 63 s; the storyboard's 95 s was a suggestion).
+`:WAR_CLIMAX` follows story/13_CUTSCENES.md WAR-1 shot by shot (about 64 s, including a slow-motion beat; the storyboard's 95 s was a suggestion).
 Isenmar and Kyogre are on the left, Ashkaar and Reshiram on the right.
 
 | Variable | Values | Default source |
@@ -247,6 +276,16 @@ Differences from the storyboard, all because of engine limits:
 - Shots 9B/9C use a Salamence battler / a code-drawn ship as the mount.
 - Shot 14's ridge is the same backdrop far to the side. A dedicated backdrop image would be better.
 - **To confirm with the story team:** I read "`:war_legend` kept the legendaries away" as the `:neither` choice.
+
+### Legendary acting sheets (war climax)
+If `Graphics/Characters/pkmn_kyogre_war.png` / `pkmn_reshiram_war.png` exist (named after the species in use), the war
+climax uses them instead of battle sprites. The spec:
+- 4×4 cells of about 140×100 px each, shown at 2×.
+- Overworld scale and 3/4 overworld perspective, dark outline, 24–32 colours.
+- Rows: 0 rise/enter, 1 charge, 2 fire loop, 3 recoil/exit.
+- The default is 4×4; pass a different `water_sheet:` / `fire_sheet:` to use another file.
+
+Reborn's Zygarde scene (`pkmn_zygarde5.png`) is the model.
 
 ## 5. Festival highlights
 
@@ -361,6 +400,8 @@ the code-drawn figure.
 
 | Art | Where | Gain |
 |---|---|---|
+| Legendary acting sheets | `Graphics/Characters/pkmn_<species>_war.png` (see section 4) | The war climax's biggest missing piece: staged battle sprites read wrong at this scale |
+| Effect sheets | `Graphics/Animations/*.png` (192 px cells) or any grid | Sparse, 4-colour impacts and beam segments for `play_sheet ... blend: :add`, the way Reborn builds its set pieces |
 | Portraits | `Graphics/Portraits/NAME_expression.png` | The biggest win for Rev 7 comedy; see the spec above |
 | Soldier charsets | `Graphics/Characters/trainer_ASHKAAR_SOLDIER.png`, `trainer_ISENMAR_SOLDIER.png`, `..._OFFICER` | Replaces the block-figure armies and rulers |
 | Character charsets | `trainer_LEADER_SIGRUN`, `trainer_LEADER_ANJA`, `trainer_MERIDIAN_QUENT`, `trainer_MERIDIAN_AGENT` | Shots 13–14 |
@@ -382,4 +423,7 @@ no leaked sprites or viewports), reads teams from `pbs/trainers.txt` and Core's 
 `--render` composites frames to PNG (needs ImageMagick; `--assets` uses the EBDX base project's sprites, path in
 `PF_ASSETS`). The suite covers both example scenes at 20/40/60/144 FPS and with jitter and lag spikes, all war
 variants, every DSL command, skipping, mash clashes, Core's `match_highlight` call for all 12 rules, the portrait
-tag forms, every expression and emote, the art fallback chain, and the Debug menu entries.
+tag forms, every expression and emote, the art fallback chain, the Debug menu entries, and the
+Rejuvenation/Reborn techniques: flipbooks, `play_sheet` chains, blend modes, stills, pulses, database animations
+(through a stand-in `RPG::Sprite`), on-map mode with event-following actors, camera follow, legend sheets in the war
+climax, and photosensitive mode.

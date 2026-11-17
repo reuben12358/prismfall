@@ -11,6 +11,10 @@ off.
 
 These captures are **not** made on Windows, with real art, or with sound (see "Not verified").
 
+> **Easier to follow:** `slow/` has the same three battles re-recorded with in-engine reading pacing
+> (slow text, 2.5–3.5 s message holds, 1 s before each turn) as full-battle MP4s plus trimmed GIFs.
+> See `slow/README.md`. The files below are the original fast captures.
+
 ## Files
 
 | File | What it shows |

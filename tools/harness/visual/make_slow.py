@@ -190,15 +190,29 @@ def write_gif(spec, rows, cap, card):
     if spec.get("gif_watch"):
         card = title_card(card.size, spec["title"] + " - key stretch",
                           spec["gif_watch"] + ["The MP4 next to this GIF has the whole battle at the same pace."])
-    a = find(rows, spec["gif_from"], "first", nth=spec.get("gif_from_nth", 1))
-    b = find(rows, spec["gif_to"], "last", start=a or 0)
-    if a is None or b is None:
-        raise SystemExit("gif markers not found: %r %r" % (spec["gif_from"], spec["gif_to"]))
-    a = max(0, a - int(spec.get("gif_before", 1.0) * FPS))
-    b = min(len(rows) - 1, b + int(spec.get("gif_after", 1.5) * FPS))
-    sel = gif_frames(spec, rows, a, b)
-    imgs = [card] + [cap(Image.open(frame_path(spec["frames"], rows[k]["i"])).convert("RGB")) for k, _ in sel]
-    durs = [spec.get("card_seconds", 6) * 1000.0] + [d for _, d in sel]
+    segs = spec.get("gif_segments") or [{"from": spec["gif_from"], "nth": spec.get("gif_from_nth", 1),
+                                         "to": spec["gif_to"], "before": spec.get("gif_before", 1.0),
+                                         "after": spec.get("gif_after", 1.5)}]
+    imgs, durs, spans = [card], [spec.get("card_seconds", 6) * 1000.0], []
+    for n, sg in enumerate(segs):
+        a = find(rows, sg["from"], "first", nth=sg.get("nth", 1))
+        b = find(rows, sg["to"], "last", start=a or 0)
+        if a is None or b is None:
+            raise SystemExit("gif markers not found: %r %r" % (sg["from"], sg["to"]))
+        a = max(0, a - int(sg.get("before", 1.0) * FPS))
+        b = min(len(rows) - 1, b + int(sg.get("after", 1.5) * FPS))
+        if n > 0:   # a visible time-skip card between segments (never mistaken for footage)
+            skip = Image.new("RGB", card.size, (0, 0, 0))
+            d = ImageDraw.Draw(skip)
+            d.text((14, card.size[1] // 2 - 20), "... time skip: %.0f s of the battle omitted ..." %
+                   ((a - spans[-1][1]) / FPS), font=F_BOLD, fill=(210, 210, 210))
+            d.text((14, card.size[1] // 2 + 4), "(the MP4 has the whole battle)", font=F_CARD_S, fill=(150, 150, 150))
+            imgs.append(skip)
+            durs.append(1800.0)
+        sel = gif_frames(spec, rows, a, b)
+        imgs += [cap(Image.open(frame_path(spec["frames"], rows[k]["i"])).convert("RGB")) for k, _ in sel]
+        durs += [d for _, d in sel]
+        spans.append((a, b))
     # GIF delays are in 10 ms units: round with error carry so total time stays exact
     out_d, carry = [], 0.0
     for d in durs:
@@ -217,8 +231,9 @@ def write_gif(spec, rows, cap, card):
     out = spec["out"] + ".gif"
     q[0].save(out, save_all=True, append_images=q[1:], duration=out_d, loop=0, optimize=True)
     total = sum(out_d) / 1000.0
-    print("wrote %s: %d GIF frames covering engine frames %d-%d (%.1f s of battle + card), %.1f MB"
-          % (out, len(q), rows[a]["i"], rows[b]["i"], total - spec.get("card_seconds", 6), os.path.getsize(out) / 1e6))
+    battle_s = sum((b - a + 1) / FPS for a, b in spans)
+    print("wrote %s: %d GIF frames, engine frame ranges %s (%.1f s of battle), %.1f s total, %.1f MB"
+          % (out, len(q), [(rows[a]["i"], rows[b]["i"]) for a, b in spans], battle_s, total, os.path.getsize(out) / 1e6))
 
 
 def write_keys(spec, rows, cap):
@@ -229,12 +244,12 @@ def write_keys(spec, rows, cap):
             if k is None:
                 print("key not found:", regex)
                 continue
-            best, bestv = k, -1
-            for j in range(max(0, k - 4 * FPS), k):
-                v = float(np.asarray(Image.open(frame_path(spec["frames"], rows[j]["i"])).convert("L")).mean())
-                if v > bestv:
-                    best, bestv = j, v
-            k = best
+            # the frame whose average colour differs most from the window's median (any flash colour)
+            js = list(range(max(0, k - 4 * FPS), k))
+            means = np.array([np.asarray(Image.open(frame_path(spec["frames"], rows[j]["i"])).convert("RGB"),
+                                         dtype=np.float32).reshape(-1, 3).mean(0) for j in js])
+            dist = np.abs(means - np.median(means, axis=0)).sum(1)
+            k = js[int(dist.argmax())]
         else:
             k = find(rows, regex, which)
             if k is None:

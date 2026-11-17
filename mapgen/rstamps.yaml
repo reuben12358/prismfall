@@ -1,0 +1,20 @@
+# PF Rejuv stamps (rstamps.py).  rect = map tiles; rows = source sheet rows kept; door = map coords.
+# Goldenleaf Town (Rejuvenation map 82, sheet `Goldenleaf Forrest`, part gl): timber-and-stone houses
+gl_pc:     {game: rejuvenation, map: 82, rect: [36, 16, 13, 14], rows: [[330, 392]], l0: true, door: [42, 26]}
+gl_gym:    {game: rejuvenation, map: 82, rect: [23, 0, 9, 17], rows: [[330, 392]], l0: true, door: [27, 12]}
+gl_mart:   {game: rejuvenation, map: 82, rect: [30, 21, 7, 7], rows: [[330, 392]], l0: true, door: [32, 26]}
+gl_hall:   {game: rejuvenation, map: 82, rect: [37, 1, 13, 13], rows: [[330, 392]], l0: true, door: [43, 12]}
+gl_shed:   {game: rejuvenation, map: 82, rect: [63, 23, 6, 7], rows: [[330, 392]], l0: true, door: [65, 28]}
+gl_emblem: {game: rejuvenation, map: 82, rect: [53, 32, 8, 7], rows: [[330, 392]], l0: true, door: [57, 37]}
+gl_ell:    {game: rejuvenation, map: 82, rect: [43, 34, 11, 12], rows: [[330, 392]], l0: true, door: [46, 41]}
+gl_cot:    {game: rejuvenation, map: 82, rect: [25, 44, 8, 9], rows: [[330, 392]], l0: true, door: [28, 51]}
+gl_flat1:  {game: rejuvenation, map: 82, rect: [36, 45, 8, 8], rows: [[330, 392]], l0: true, door: [40, 51]}
+gl_flat2:  {game: rejuvenation, map: 82, rect: [47, 45, 8, 8], rows: [[330, 392]], l0: true, door: [51, 51]}
+# Sheridan Village (map 423, sheet `Sheridan_2`, part sh): dark timber, crossed beams, steep roofs
+sh_big:    {game: rejuvenation, map: 423, rect: [14, 5, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [22, 14]}
+sh_help:   {game: rejuvenation, map: 423, rect: [45, 8, 9, 8], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [49, 14]}
+sh_inn:    {game: rejuvenation, map: 423, rect: [46, 22, 12, 11], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [48, 31]}
+sh_small:  {game: rejuvenation, map: 423, rect: [14, 25, 6, 7], rows: [[0, 22], [110, 139], [160, 175]], l0: true}
+sh_shop:   {game: rejuvenation, map: 423, rect: [12, 38, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [20, 46]}
+sh_ell:    {game: rejuvenation, map: 423, rect: [33, 40, 11, 12], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [36, 46]}
+sh_cot:    {game: rejuvenation, map: 423, rect: [49, 40, 8, 8], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [52, 46]}

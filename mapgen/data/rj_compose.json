@@ -1,0 +1,52 @@
+{
+ "sheet": "PF Rejuv",
+ "parts": {
+  "gl": {
+   "offset": 384,
+   "tiles": 4448,
+   "game": "rejuvenation",
+   "src_tileset": 62,
+   "sheet": "Goldenleaf Forrest"
+  },
+  "sh": {
+   "offset": 4832,
+   "tiles": 2000,
+   "game": "rejuvenation",
+   "src_tileset": 126,
+   "sheet": "Sheridan_2"
+  },
+  "ak": {
+   "offset": 6832,
+   "tiles": 1472,
+   "game": "rejuvenation",
+   "src_tileset": 211,
+   "sheet": "Route 4"
+  },
+  "kf": {
+   "offset": 8304,
+   "tiles": 2144,
+   "game": "rejuvenation",
+   "src_tileset": 93,
+   "sheet": "Kristiline Town (Frozen)"
+  },
+  "rb4": {
+   "offset": 10448,
+   "tiles": 1048,
+   "game": "reborn",
+   "src_tileset": 43,
+   "sheet": "Route4"
+  },
+  "ap": {
+   "offset": 11496,
+   "tiles": 6248,
+   "game": "rejuvenation",
+   "src_tileset": 2,
+   "sheet": "Aevium Past"
+  },
+  "pf": {
+   "offset": 17744,
+   "tiles": 512
+  }
+ },
+ "n_tiles": 18256
+}

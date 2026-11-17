@@ -1,0 +1,17 @@
+# Round 6: Poke Ball held in an oversized gardening glove; fingers curl over the ball's right side,
+# palm under it, a flared gauntlet cuff, then the wrist.
+17: 18 ............
+18: 18 ....KKKK....
+19: 18 ...KXPPPK...
+20: 18 ..KPPPPPbb..
+21: 18 ..KPPPPpTTb.
+22: 18 ..KKKXXKoTb.
+23: 18 ..KXXKKxTTb.
+24: 18 ..bTTTTToTb.
+25: 18 ..bTTTTTTob.
+26: 18 ...bTTTTTob.
+27: 18 ..boooooooob
+28: 18 ..bTTTTTTTob
+29: 18 .bTTTTTTTToob
+30: 18 .booooooooob
+31: 18 ..bbbbbSSsbbb

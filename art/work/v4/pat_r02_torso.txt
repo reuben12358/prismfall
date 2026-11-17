@@ -1,0 +1,93 @@
+# Round 2: raised arm + ball + glove, shirt, straps, bib, satchel strap, far arm, satchel. Segment rows "y: x chars | x chars"
+# --- clear the old arm/glove area first
+31: 18 ................
+32: 18 ................
+33: 18 ................
+34: 18 ................
+35: 18 ................
+36: 18 ................
+37: 18 ................
+38: 18 ................
+39: 18 ................
+40: 18 ................
+41: 18 ................
+# --- ball (x20..27) and the oversized glove wrapping it
+19: 20 ..KKKK
+20: 20 .KXPPPK
+21: 20 KPPPPPpK
+22: 20 KPPPPppK
+23: 20 KKKXXKKbb
+24: 20 KXXKKXbTb
+25: 20 .KbbbbTTb
+26: 20 .bTTTTTob
+27: 20 .bTToTTob
+28: 20 ..bTTTTob
+29: 20 ..bTTTTTob
+30: 20 ..boTTTTob | 31 vWWW
+31: 22 .boooob.vWWWWW
+# --- forearm rising out of the rolled cuff
+32: 24 KSSsK.vWWWW
+33: 25 KSSsKWWWWw
+34: 25 KSSsKwWWWw
+35: 25 KvWWWWwvw
+36: 25 KWWwWWWwv
+37: 25 KwwvwwwvK
+38: 26 KvvvvvK
+39: 27 KKKKK
+# --- collar, shirt
+28: 36 vWSSssWv
+29: 34 vWWWwSswWWWWv
+30: 35 WWWWwwwWWWWW
+31: 35 WWWWWWWWWWW
+# straps (green, light left px / shadow right px) and bib
+29: 35 Ge | 44 ge
+30: 35 Ge | 44 ge
+31: 36 Ge | 43 ge
+32: 33 vWW | 36 YGGGgggge | 45 ww
+33: 33 vWW | 36 gggggggge | 45 ww
+34: 33 vWW | 36 ggeeeeege | 45 ww
+35: 33 vWW | 36 gggggggge | 45 ww
+36: 33 vWw | 36 ggegggege | 45 ww
+37: 33 vWw | 35 GgggeeeggeE | 46 w
+38: 33 vWw | 35 Ggggggggge | 45 ww
+39: 33 vWw | 35 Gggggggggge | 46 w
+40: 33 vWw | 35 Ggggggggegge
+41: 33 vYgggggggggeggY
+# satchel strap: a clean 1:1 diagonal, leather on top, dark underside
+30: 34 b
+31: 34 db
+32: 35 db
+33: 36 db
+34: 37 db
+35: 38 db
+36: 39 db
+37: 40 db
+38: 41 db
+39: 42 db
+40: 43 db
+41: 44 db
+42: 45 db
+# --- far arm: sleeve, rolled cuff, forearm down to the glove resting on the satchel flap
+29: 46 Wv
+30: 46 WWv
+31: 46 wWWv
+32: 46 KWWwv
+33: 46 vwWWwv
+34: 47 vWWwK
+35: 47 vWWWwK
+36: 47 vwWWwK
+37: 48 vwwvK
+38: 49 KSsK
+39: 49 rSsK
+# --- satchel: flap (light leather) over the body, buckle, glove on top
+40: 46 dBBBdTTTdBBd
+41: 46 dBBdTTTTodBd
+42: 46 dBBdTTTTTodd
+43: 46 dbbdoTToTodd
+44: 46 dBBBdTTTTodBd
+45: 46 dbbbbdodobdbd
+46: 46 dbbbbbbbbbbbd
+47: 46 dbbbbbbYbbbbd
+48: 46 dbbbbbbbbbbbd
+49: 46 dbbbbbbbbbbd
+50: 46 Kddddddddddd

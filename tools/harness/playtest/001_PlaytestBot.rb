@@ -36,11 +36,12 @@ module PlayBot
     [:goto, 103, 14, 15],          # exit -> K1 autorun at the lab gate
     [:edge, 100, 34, 0, 8],        # north lane -> Route 1
     [:goto, 520, 12, 54],          # Juno's catching tutorial
-    [:goto, 520, 16, 45],          # up the route (Route 1 trainers may spot us)
+    [:goto, 520, 10, 44],          # up the route past the Youngster (Route 1 trainers may spot us)
+    [:goto, 520, 16, 38],
     [:done]
   ]
 
-  @frame = 0; @press = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
+  @frame = 0; @armed = {}; @live = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
   @cmd = nil; @cmd_seen = -10; @cmd_key = nil; @cmd_target = nil; @cmd_since = 0; @cmd_moved = 0
   @cmd_used = {}; @msgwin = nil; @msg_seen = -10; @msg_pause = 0; @msg_wait = 0; @last_text = ""
   @seen = {}; @nshot = 0; @nframe = 0; @recording = false; @fatal = nil; @use_tick = 0
@@ -72,8 +73,11 @@ module PlayBot
       shot(name)
     end
 
-    def press(button);  @press[button] = @frame; end
-    def pressed?(b);    return @press[b] == @frame; end
+    # Like a key press: armed now, live from the next Input.update until the one after (so the Input.update
+    # that pbMessageDisplay calls on closing clears it, and a press never leaks into the next screen)
+    def press(button);  @armed[button] = true; end
+    def pressed?(b);    return @live.has_key?(b); end
+    def input_updated;  @live = @armed; @armed = {}; end
     def dir;            return @dir; end
     def last_text=(t);  @last_text = t.to_s; end
 
@@ -128,6 +132,14 @@ module PlayBot
       return true
     end
 
+    def busy_flags
+      return "scene #{$scene.class}" if !on_map? || !$game_temp
+      t = $game_temp
+      return "msg=#{t.message_window_showing} menu=#{t.in_menu} battle=#{t.in_battle} xfer=#{t.player_transferring} " \
+             "trans=#{t.transition_processing} mini=#{t.respond_to?(:in_mini_update) && t.in_mini_update} " \
+             "interp=#{pbMapInterpreterRunning?} msgwin=#{@msgwin && !@msgwin.disposed? && @msgwin.visible}"
+    end
+
     def map_idle?
       return map_ready? && !$game_player.moving? && !$game_player.jumping?
     end
@@ -155,6 +167,7 @@ module PlayBot
         # Boot messages, load screen, cutscenes, scripted waits: Use every 30 frames is harmless here
         @use_tick += 1
         press(B::USE) if @use_tick % 30 == 0
+        log("busy: " + busy_flags) if @use_tick % 600 == 0
       end
       @went_busy = @frame
       @ready = 0
@@ -412,8 +425,7 @@ module PlayBot
     end
 
     # BFS on the current map with the player's own passability
-    def path_dirs(tx, ty)
-      sx, sy = $game_player.x, $game_player.y
+    def path_dirs(tx, ty, sx = $game_player.x, sy = $game_player.y)
       return [] if sx == tx && sy == ty
       w = $game_map.width
       prev = { (sy * w) + sx => nil }
@@ -461,6 +473,9 @@ module PlayBot
         @path = path_dirs(x, y)
         @path_goal = [$game_map.map_id, x, y]
         @path_at = [px, py]
+        if @path.nil? && boxed_in?(px, py)
+          return ctrl_step(px, py, x, y)
+        end
         if @path.nil?
           @nopath = (@nopath || 0) + 1
           return stuck("no path to (#{x},#{y})") if @nopath > 120   # NPCs may step aside
@@ -469,6 +484,30 @@ module PlayBot
         @nopath = 0
       end
       @dir = @path[0] || 0
+    end
+
+    def boxed_in?(px, py)
+      return DIRS.keys.none? { |d| $game_player.passable?(px, py, d) }
+    end
+
+    # The player stands on an impassable tile (a map bug: an arrival or start tile under a prop). In Debug mode a
+    # tester holds Ctrl to walk through it; do the same for one step toward a neighbour that has a path on.
+    def ctrl_step(px, py, x, y)
+      [4, 6, 8, 2].each do |d|
+        dx, dy = DIRS[d]
+        nx, ny = px + dx, py + dy
+        next if !$game_map.valid?(nx, ny)
+        next if $game_map.events.values.any? { |e| e.x == nx && e.y == ny && e.trigger == 1 }  # not onto a door mat
+        next if !path_dirs(x, y, nx, ny) && [nx, ny] != [x, y]
+        if !@seen["boxed#{$game_map.map_id},#{px},#{py}"]
+          shot_once("boxed#{$game_map.map_id},#{px},#{py}", "BOXED_IN_map#{$game_map.map_id}_#{px}_#{py}")
+          log("BOXED IN on map #{$game_map.map_id} (#{px},#{py}): Ctrl-walk (Debug through) one step #{d}")
+        end
+        press(B::CTRL)
+        @dir = d
+        return
+      end
+      stuck("boxed in at (#{px},#{py}) with no way on")
     end
 
     def debug_install
@@ -516,6 +555,11 @@ end
 
 module Input
   class << self
+    alias playbot_input_update update unless method_defined?(:playbot_input_update)
+    def update
+      playbot_input_update
+      PlayBot.input_updated
+    end
     alias playbot_trigger? trigger? unless method_defined?(:playbot_trigger?)
     alias playbot_press? press? unless method_defined?(:playbot_press?)
     alias playbot_repeat? repeat? unless method_defined?(:playbot_repeat?)

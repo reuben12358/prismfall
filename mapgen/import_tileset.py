@@ -57,7 +57,10 @@ def entry_from_rxdata(d):
     f = d['from_rxdata']
     t = M.load_file(f['file'])[int(f['id'])]
     tags = [int(x) for x in t.terrain_tags.data.reshape(-1)]
-    if f.get('remap_tags', True):
+    if f.get('tag_remap') is not None:        # per-source table, e.g. Rejuvenation/Reborn/Desolation (GAMES_READY.md)
+        tm = {int(k): int(v) for k, v in f['tag_remap'].items()}
+        tags = [x if x <= 16 else tm.get(x, 0) for x in tags]
+    elif f.get('remap_tags', True):           # Tectonic's numbering only
         tags = [x if x <= 16 else TAG_REMAP.get(x, 0) for x in tags]
     g = f['graphics']
     d['graphic'] = os.path.join(g, 'Tilesets', t.tileset_name + '.png')
