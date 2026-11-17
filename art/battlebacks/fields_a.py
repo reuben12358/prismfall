@@ -457,9 +457,6 @@ def colosseum():
     for x in range(0, 864, 96):
         fd.rectangle([x, 186, x + 4, 302], fill=(100, 100, 110, 255))
     save_room("field_colosseum", hd)
-    layers = [
-        layer(F, "crowd", Image.new("RGBA", (1, 1)), z=1),   # placeholder replaced below
-    ]
     name = "pf_colosseum_crowd"
     save_element(name, cs)
     layers = [P(bitmap=name, hd=True, x=0.0, y=round(212 / 2.25, 2), ox=0, oy=0, z=1, frames=2, frame_time=14)]

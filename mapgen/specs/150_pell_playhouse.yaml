@@ -1058,6 +1058,11 @@ drop_template_events:
 - Entrance
 bgm: Gym
 field: GRAND_STAGE
+tile_edits:
+- - 1
+  - 6
+  - 11
+  - 0
 metadata:
   MapPosition:
   - 0

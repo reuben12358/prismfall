@@ -103,17 +103,17 @@ them, or where a state crosses maps.
 | 4 | Rook · Neon Grid | **Route the power, never the alarm** | rotate conduits → tees and an alarm lamp → Rotom drone as a portable wire + latching relays → the empty Plate socket | 4 |
 | 5 | Sahar · Desert | **Sun hardens, shade sinks**: falling is a way across | one drop → sun-mirrors decide which lanes are crust and which sink → a two-floor loop where drops are transport → mural rubbing | 5 |
 | 6 | Corvin · Corrosive Mire | **Dose makes the cure**: exact measures with unmarked flasks | one flask → 3+5 make 4 → doses carried across a filter-step budget → the Quiet Ward (4+9) | 5 |
-| 7 | Brann · Volcanic | **Pour, then quench**: empty → molten → iron | one mould → spout aims and limited quench → cross-floor drains with a rail cart → "forge to break right" | 6 |
+| 7 | Brann · Volcanic | **Pour, then quench**: empty → molten → iron | one mould → aimed spouts and one quench → what you don't quench drains into the moulds below → the cracked-mould vault | 6 |
 | 8 | Kaito · Colosseum | **Every step you take, they take**: pursuers vs Strength boulders | one sparring Machop → two pursuers and rope lines → boulders, plates and pursuers → the Marrowgate door | 6 |
-| 9 | Juno · Flower Garden | **Water spreads**: each plot grows itself and its neighbours, and the leftover overgrowth becomes the arena's field stage | one plot → a ring of six → sun lamps and pruning → the Bride Bower bloom | 7 |
+| 9 | Juno · Flower Garden | **Water spreads**: each plot grows itself and its neighbours, and the leftover overgrowth becomes the arena's field stage | one plot → a ring of six → two rings sharing a junction → the Bride Bower | 7 |
 | 10 | Anja · Frozen Lake | **Ice remembers weight**: slides, cracks and the under-ice | slide → cracked ice drops you to the under-ice → ice blocks plug holes and refreeze → the Sounding | 7 |
-| 11 | Odessa · Stormfront | **The wind doesn't care**: vanes steer fans that push you and the mail | one fan → coupled vanes → updraft floors + lightning cycles → Dead-Letter Archive | 8 |
+| 11 | Odessa · Stormfront | **The wind doesn't care**: vanes steer fans that push you and the mail | one lane → coupled vanes → letter sacks ride and stack → Dead-Letter Archive | 8 |
 | 12 | Ilsa · Mindscape | **Your reflection keeps you honest**: a mirrored self walks your steps | mirrored walk → swap pads → thoughts only the reflection may stand on → the Quiet Room | 8 |
 | 13 | Bastian · Crystal Cavern | **Light remembers its colour**: beams, prisms and colour gates | one mirror → filters and splitters → boulders as beam blocks + the prism-glow cycle → Bastian's long story | 9 |
 | 14 | Ysolde · Hollow Cathedral | **The dead walk where you walked**: twin naves and Morwen's echo | living ⇄ dead bell → pews persist across worlds → the echo replays your path → Morwen's letter | 9 |
 | 15 | Magnus · Factory | **Tolerances**: belts, presses and crates on one clock | belts → reversing lever groups → crane-placed crates jam presses → the Tolerance Lab | 10 |
 | 16 | Nyx · New Moon | **Information is the key**: guards, lanterns and secrets that change the doors | sight lines → lanterns turn guards → each stolen secret re-routes the vault → the Ledger | 10 |
-| 17 | Celestine · Fairy Tale | **She cannot lie, but she can phrase**: truth-bound storybook rules | the Red Path's rule → true-but-misleading guards → the Midnight clock × the dancers → the Eight Princesses | 10 |
+| 17 | Celestine · Fairy Tale | **She cannot lie, but she can phrase**: truth-bound storybook rules | the Red Path → the Midnight clock × dancers × truthful guests → the Eight Princesses' statements → the Ninth Door | 10 |
 | 18 | Sigrun · Dragon's Den | **Nothing passes unweighed**: scales, statues and the magma tide | one scale → the coupled statue ring → hoard weights on magma-floated pans → say it aloud | 10 |
 
 ---
@@ -638,4 +638,1372 @@ y14  ##########@##########
 **Gym 3 trainers (5):** Fisherman Gunnar (170), Swimmer ♀ Ingrid (171 trench), Swimmer ♂ Leif and Fisherman Oskar (172),
 Sailor Bjorn (173 ND). Lv 19–22.
 
-<!-- GYMS 4-18 FOLLOW -->
+---
+## Gym 4 — Lumen City, Circuit Gym · Rook Calder (Electric, `:NEON_GRID`, cap 27) · ★★★★
+
+**Core rule: route the power, never the alarm.** Conduit nodes rotate. Power flows from a generator through matching ports
+and lights whatever lamps the circuit reaches. **Twist:** tee nodes split power, and one lamp is Rook's camera
+"alarm", which resets the board. **Combine:** Rook's **Rotom drone** is a *portable wire* (a follower you can dock into a
+gap). Latching relays stay open after the power is cut, and live strips shock, so the circuit you need is also the wall
+in your way. **Mastery:** light every node for the B-roll. **The aha** belongs to the story: in the Core, the Zap Plate's
+cradle is cold. The gym runs on a Meridian main.
+**Warden link:** Rook is a hacker-engineer who is always on camera ("Chat says you're gonna lose"). The drone and the
+alarm are his streaming rig. Mechanically, the secret that "he doesn't hold the Plate" becomes the last power source you
+splice. **Field:** Neon Grid (trainers run Volt Switch, Charge and Magnet Rise). **Kingdom:** Zenith's showcase city.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S320 | `G4_190_DOOR` | 190 door lamp lit (recomputed by `pfp_power`) |
+| S321 | `G4_LATCH_GATE` | 192 inner gate latched open (permanent) |
+| S322 | `G4_LATCH_CORE` | 192 Core door latched open (permanent) |
+| S323 | `G4_DRONE_DOCKED` | Rotom docked in socket g1 (192) |
+| S324 | `G4_191_DOOR` | 191 door lamp lit (live: recomputed) |
+| V320 | `G4_ALARMS` | alarm count in 191 (hint tiers) |
+| S420 | `G4_191_SIDE` | 191 side lamp lit → Edit Bay door |
+| S421 | `G4_EDITBAY_DONE` | Mastery chest |
+Node rotations are one-hot self switches (`pfp_rotate`). **Port masks:** N=1, E=2, S=4, W=8. Base shapes at rotation 0:
+`I` = N+S, `L` = N+E, `T` = N+E+S. Each rotation turns the shape clockwise. Power enters a node only through a port that
+faces the source, and passes to a neighbour only if both facing ports exist (`pfp_power`).
+
+### 190 Switchroom — TEACH (17×13)
+```
+     01234567890123456
+y0   ########D########    D (8,0) door → 191 (13,19); passable while S320
+y1   #...............#
+y5   #...............#
+y6   G===1===2===3==L#    G generator (0,6) · nodes 1 (4,6) I rot0 · 2 (8,6) I rot1 · 3 (12,6) I rot0 · L lamp (15,6) · = strip art
+y7   #...............#
+y10  #..A.........r..#    A apprentice "Spark" (3,10) · r Rook's drone hovering (13,10), talks
+y12  ########@########
+```
+Each node: action → `pfp_rotate(name, 2)` (I has 2 states), then `pfp_power(:g4_190)`, which sets S320 when L is lit.
+**Solution:** turn node 1 and node 3 once. The strip lights end to end and the door opens. Drone: "Chat says turn the
+sideways ones. Chat is, for once, right."
+
+### 191 Breadboard Hall — TWIST "tees, and the alarm" (27×21)
+Nodes on a 4×3 grid at **x = 6, 11, 16, 21; y = 5, 10, 15** (named `Node c,r`). Strips (decor tiles) join neighbours.
+The generator sits on the west wall at (1,10) and feeds node (0,1) from the west. **Lamps:**
+- **DOOR**: the north door at (21,0), fed from node (3,0)'s N port; strip x21, rows 1–4. Passable while S324 is on.
+- **ALARM**: Rook's camera flash on the east wall (26,10), fed from node (3,1)'s E port.
+- **SIDE**: the Edit Bay door on the south wall (11,20), fed from node (1,2)'s S port. Passable while S420 is on.
+
+Entrance @ (13,20). Apprentice "Spark" at (2,18). Trainers: Engineer (8,8), Super Nerd (19,13).
+
+| Node (c,r) | Shape · start rotation |
+|---|---|
+| (0,0) | L · 1 |
+| (1,0) | I · 0 |
+| (2,0) | T · 2 |
+| (3,0) | L · 3 |
+| (0,1) | T · 0 |
+| (1,1) | L · 2 |
+| (2,1) | I · 1 |
+| (3,1) | T · 1 |
+| (0,2) | L · 0 |
+| (1,2) | T · 3 |
+| (2,2) | L · 1 |
+| (3,2) | I · 0 |
+
+- Node action: `pfp_rotate`, then `pfp_power(:g4_191)`. That updates S324 and S420. If ALARM is lit:
+  - flash and SE "Thunder1", drone: "CHAT SAYS WRONG WIRE." V320 += 1;
+  - every node returns to its start rotation (`pfp_state` reset).
+- **Verified (exhaustive search over all rotations):**
+  - **Door: 4 clicks.** Node (1,0) +1, node (2,0) +1, node (0,1) +2. That lights 8 of 12 nodes.
+  - **The tempting middle-row route lights the ALARM** (also 4 clicks).
+  - **Side door: 2 clicks.** Node (0,1) +1, node (1,2) +1. Door + side together: 6.
+- **The twist:** the generator's tee wants to send power straight east along the middle row, which is where the alarm
+  is. The door route bends north early.
+- **Hints (Spark):** 1 "A tee sends power three ways. Make sure the third way's a wall." 2 "Go north at the
+  generator, not east." 3 the solution.
+
+### 192 Live Wire Hall — COMBINE "the drone is a wire; the latch remembers" (27×25, schematic)
+```
+     012345678901234567890123456
+y0   #############|######E######    E (20,0) Core door → 193 (needs S322)
+y1   #............|.....s.......#    s (20,1) last strip tile of circuit 2 = the door's approach tile
+y2   #............|.....s.......#
+y6   G===a===b....|...d==e......#   G1 (0,6) · a (4,6) I rot0 · b (8,6) L rot0 | east: d (17,6) L rot3 · e (20,6) L rot1
+y7   #.......=....|...=.........#
+y11  #.......=....|...=.........#    strip x8 rows 7-11 (b→g1) · strip x17 rows 7-11 (c→d)
+y12  #.......g===[G]==c.........#    g1 socket (8,12) · strip x9-11 · [G] inner gate (13,12) latch L1 · strip x14-16 · c (17,12) T rot1
+y13  #............|...!.........#    ! (17,13) ALARM (c's S port)
+y23  #.....A......|.............#    A apprentice "Spark" (6,23)
+y24  ######@######|##############    @ (6,24) ← 191 · | grille fence x13 (impassable)
+```
+**Circuits:**
+- **Circuit 1 (west).** G1 → a → b → socket **g1** → the inner gate's lock **L1**. Docking the drone in g1 closes the
+  gap.
+- **Circuit 2 (east)** has no generator. It is fed *through* L1: the feed runs from L1 → c → d → e → the Core door's
+  lock L2.
+- So **circuit 2 is live only while circuit 1 is live.**
+
+**Shock rule (this room only):**
+- Strip tiles of a live circuit shock you: flash, SE "Paralyze1", you are pushed back 1 tile.
+- The strips beside each lock (x9–11 row 12 for the gate; x20 rows 1–5 for the Core door) **are the approach tiles**.
+  You cannot walk through a lock while it is powered.
+
+**Devices:**
+- **Drone (follower).** On entering, `Followers.add(drone, "RotomDrone")`. Socket g1 (action, from (7,12) or (8,13)):
+  "Dock Rotom?" → `Followers.remove`, the socket shows the drone (S323 on), `pfp_power(:g4_192)`. Again: "Call Rotom
+  back?" → S323 off, follower re-added, recompute. Leaving the room returns the drone (S323 off).
+- **Latches.** When L1 is lit, S321 goes on *for good*; the gate events become passable. When L2 is lit, S322 goes on for
+  good.
+- **Alarm.** c's S port faces the alarm (17,13). If lit: the east nodes reset to their start rotations, plus the drone's
+  line.
+
+**Solution (6 + 3 clicks):**
+1. West: turn a once (E–W) and b twice (W–S).
+2. Dock the drone in g1. L1 latches (S321) and the gate unlocks, but its approach strip is live.
+3. Call the drone back. The circuit dies and the gate stays open (**the latch remembers**).
+4. Walk east. Turn **c → rotation 3** (W–N–E; its third port faces a wall), **d → 1** (S–E), **e → 3** (W–N).
+5. Walk back west. **Dock the drone again.** Power runs through the open latch L1 into the east and lights L2 (S322).
+6. Call the drone back, walk east, and the Core door is open.
+
+**Two ahas:**
+- *Power isn't needed once latched.* You must unplug the very circuit you just built.
+- *Set the far side first, then power it from the near side.* If the east is wrong when you dock, the alarm resets it.
+
+**Hints (Spark):** 1 "Latches hold. Wires don't have to." 2 "The east board has no generator. Where does its power
+come from?" 3 the solution.
+**Reset:** Spark → node states reset, S321–323 off, the drone back to you.
+
+### 193 The Core — arena (19×15)
+Before the arena door, the **Plate cradle** (action): "The Zap Plate's cradle is cold. There's dust in it. A thick
+Meridian cable runs past it into the floor, warm to the touch." The arena door needs one splice node turned onto the
+Meridian main (1 click). The drone films it, and Rook's voice comes over the PA: "...Turn it off. Rotom. Turn it *off*."
+Rook, single battle. Badge 4 + TM43 Volt Switch + TM70 Flash.
+
+### 950 Edit Bay — MASTERY (optional; via 191's side door; overflow ID 950 because 194–199 belong to Lumen districts)
+A 3×3 board at x = 5, 9, 13; y = 4, 8, 12. Generator west of node (0,1). **Goal: every node lit** ("B-roll needs every
+light on").
+| | c0 | c1 | c2 |
+|---|---|---|---|
+| r0 | L · 1 | L · 3 | I · 1 |
+| r1 | T · 0 | T · 3 | I · 1 |
+| r2 | L · 1 | T · 0 | I · 1 |
+**Verified solution (11 clicks, exhaustive search; the only other solution takes 12):** (1,0) +2 · (0,1) +2 · (1,1) +1 ·
+(0,2) +3 · (1,2) +3.
+**Reward:** Synthetic Seed ×2 (on Neon Grid: +1 Sp. Atk and Magnet Rise) + Cell Battery + "Rook's blooper reel" (a
+comedy scene: Rook falling off his own stage).
+
+**Gym 4 trainers (6):** Engineer ×2, Super Nerd, Scientist, Rocker, "Circuit Tester" (Engineer) in 192 east, at (23,18).
+Lv 23–26.
+
+---
+## Gym 5 — Duneholt, the Dig · Sahar Ostrand (Ground, `:DESERT`, cap 31) · ★★★★★
+
+**Core rule: sun hardens, shade sinks.** Sand lanes in direct sunbeam bake into glassy crust (walkable). Lanes left in
+shade are soft and drop you to the **Under-Dig** below, at the same x,y. **Sun-mirrors** choose which lanes are lit.
+**The aha:** falling is not failing; a drop is the fastest way *across*. **Combine:** a two-floor loop where you drop on
+purpose to reach the mirror that controls the lane you need. **Mastery:** rub the mural that Sahar sealed.
+**Warden link:** "The desert keeps everything. It just doesn't keep it where you left it." Sahar is a patient teacher,
+so the first drop is a lesson, not a trap. **Field:** Desert (sandstorm fog on 211). **Kingdom:** Ossaria's tomb
+country; the Under-Dig is an Elector-era necropolis.
+
+### State
+| ID | Name | Values |
+|---|---|---|
+| V325 | `G5_MIRROR_1` | 0 lights lane a · 1 lane b · 2 lights a wall |
+| V326 | `G5_MIRROR_2` | 0 lane c · 1 lane d · 2 a wall |
+| S325 | `G5_MURAL_DONE` | |
+| S326 | `G5_FIRST_FALL` | first-drop message shown |
+| V425–V428 | `G5_TABLET_A..D` | 0–3 (215) |
+
+### 210 Entrance — TEACH "the first drop" (21×17)
+A cracked sand floor (x8–12, y6–8) sits between the entrance and the far door. The far door is fake: a painted
+mural. Sahar's aide: "Everyone tries the door. The way in is *down*." Touch the soft sand → it drops you to 212's
+**cellar** (x10–18, y22–23), where a ladder at (14,22) climbs to 211 (14,22) on the entrance plaza.
+
+### 211 The Dunes / 212 The Under-Dig — TWIST + COMBINE (29×25 each; twin footprints)
+```
+211 The Dunes (true scale)                       212 The Under-Dig (true scale; same footprint)
+     0         1         2                             0         1         2
+     01234567890123456789012345678                     01234567890123456789012345678
+y0   ##############E##############                y0   #############################
+y1   ####cccccc.........#dddddXXX#                y1   ####......##########.......D#
+y2   ####cccccc.........#dddddXiX#                y2   ####......##########........#
+y3   ####cccccc......T..#dddddXXX#                y3   ####......##########........#
+y4   ####cccccc.........#dddddXXX#                y4   ####......##########........#
+y5   ####cccccc##########dddddXXX#                y5   ####.........T.....#........#
+y6   ####cccccc##########dddddXXX#                y6   ####...............#........#
+y7   ####cccccc##########dddddXXX#                y7   ####......#######..#........#
+y8   #.......#############....####                y8   #################..#####H####
+y9   #.......#############.......#                y9   #################..##########
+y10  #.......#############.......#                y10  #################..##########
+y11  #.......#############.......#                y11  #################.......#####
+y12  #.M.....#############.....M.#                y12  #################......H#####
+y13  #.......#############.......#                y13  #############################
+y14  #.......#############.......#                y14  ##H.#########################
+y15  #.......#############.......#                y15  ##..#########################
+y16  #.......#############.......#                y16  ##..#########################
+y17  ####aaaaaa#########bbbbbb####                y17  ##........#########......####
+y18  ####aaaaaa#########bbbbbb####                y18  ####......#########..T...####
+y19  ####aaaaaa.........bbbbbb####                y19  ####..T...#########......####
+y20  ####aaaaaa.........bbbbbb####                y20  ####......#H.............####
+y21  ####aaaaaa.........bbbbbb####                y21  ####......#########......####
+y22  ##########....@....##########                y22  ##########....H....##########
+y23  ##########.......A.##########                y23  ##########.........##########
+y24  #############################                y24  #############################
+211: E (14,0) stairs → 213 · T3 x10-18 y1-4 (T Ruin Maniac (16,3)) · lanes a/b/c/d · X cistern x25-27 y1-7, i Max Ether (26,2)
+     T1 x1-7 y8-16 with M1 (2,12) · T2 x21-27 y8-16 with M2 (26,12) · T0 x10-18 y19-23 · @ (14,22) cellar ladder arrival · A (17,23)
+212: five sealed galleries, one ladder H each (verified by flood fill): Uc (under c, long dig) → H (23,12) → T2 ·
+     Ud (under d + cistern vault) → H (24,8) → T2, D (27,1) Rock Smash door → 215 · Ua → H (2,14) → T1 ·
+     Ub → H (11,20) → T0 · cellar (from 210) → H (14,22) → T0 · trainers T: Hiker (13,5), Picnicker (6,19), Hiker (21,18)
+```
+- **Terraces (always firm):** T0, T1, T2, T3 as drawn. The rock outcrop is impassable on both floors, except where
+  212's tunnels run under it.
+- **Lanes (sand):** **a** T1 ↔ T0 · **b** T0 ↔ T2 · **c** T1 ↔ T3 · **d** T2 ↔ the cistern X (dead end, Max Ether).
+- **Lane tiles** are events `Sand <lane> x,y`.
+  - Lit → tile CRUST (passable).
+  - Soft → blank (sand) + `touch` → "The sand swallows you!" → fall animation → `pfp_swap_map(212)` at the same x,y.
+  - The pages implement "a lit iff V325 == 0", etc. (two-page pattern).
+- **Mirrors** (action, rotate the aim): **M1 on T1 (2,12)** cycles V325 0→1→2; **M2 on T2 (26,12)** cycles V326. Each aim
+  draws a beam overlay (event tiles, `Beam M1 …`) across its lane.
+- **212 ladders** (`touch` → `pfp_swap_map(211)` at the same x,y) are listed under the map. The galleries never connect, so
+  where you fall decides where you come up.
+- **Start:** V325 = 0 (lane a lit), V326 = 1 (lane d lit).
+
+**Solution (verified, BFS; impossible without dropping):**
+1. Walk lane **a** to T1.
+2. Step onto lane **c**: it is soft, so you drop into Uc. Follow the long dig tunnel to ladder (23,12); up to **T2**.
+3. Turn **M2 twice** (d → wall → c): lane c is now crust.
+4. Step onto lane **b**: soft, drop to Ub, ladder (11,20) up to **T0**.
+5. Walk lane **a** (still lit) to T1, then walk lane **c** (now lit) to T3 and the stairs.
+
+**The aha:** the mirror for lane c is on the *far* terrace, and the only way to it is to fall through lane c itself.
+**Hints (aide "Nadim", T0 (17,23)):** 1 "Sahar says the dig taught her more than the dunes ever did." 2 "Lane c's mirror is
+on the east terrace. Fall into c and see where it takes you." 3 the solution.
+**Reset:** Nadim → V325 = 0, V326 = 1, to T0. Falls are free and need no reset.
+
+### 213 Warden Arena (21×17)
+Sahar, single battle. Badge 5 + TM83 Bulldoze. Strength (HM04) comes from the excavators afterwards (WORLD §4).
+
+### 215 Mural Gallery — MASTERY (optional, 21×15; via the Rock Smash door in Ud)
+- Four pivoting tablets T_a–T_d (action: cycle V425–V428 through **Sun · Eye · Wave · Bone**).
+- Each gallery of 212 has one Elector glyph carved over its ladder: **Ua: Wave, Ub: Sun, Uc: Bone, Ud: Eye** (sign
+  events: "A carved Wave, worn by water that hasn't run here in 300 years").
+- Caption: "Each road remembers what lies beneath it." Set every tablet to its own lane's glyph → `pfp_check(:g5_mural)`.
+- Failure lines name the wrong tablet ("The b-tablet grinds and stops. The Sun doesn't sit there.").
+- **Reward:** Telluric Seed ×2 (on Desert: +1 Def, +1 Sp. Def, −1 Speed) + Soft Sand, and a mural fragment (lore:
+  sealed AF 281, on Valen's order).
+- Sahar, afterwards: "I buried that. The sand dug it up. I'd rather not argue with sand twice."
+
+**Gym 5 trainers (5):** Ruin Maniac ×2, Hiker ×2, Picnicker ×1. Lv 27–30.
+
+---
+## Gym 6 — Mirefen, the Infirmary · Corvin Mott (Poison, `:CORROSIVE_MIRE`, cap 35) · ★★★★★
+
+**Core rule: dose makes the cure.** Unmarked flasks (3 and 5 measures). Funnels and basins accept *exact* doses. The tap
+is the only place you can fill a flask. You can pour between flasks, or tip them into the sludge, anywhere.
+**Twist:** make 4 from 3 and 5. **Combine:** the doses must be *carried* across a toxic gallery on a mask-filter step
+budget, and one basin is cumulative, so you plan trips. **Mastery:** the Quiet Ward (4 and 9).
+**Warden link:** "Everything's poison, dear. Dose makes the cure." Corvin is a physician, and his doomed apprentice
+**Wenlow** is the apprentice NPC. His cheerful hints are written to land differently on a replay after Ch16. **Field:**
+Corrosive Mire (Purify turns the field to water; trainers carry Acid Spray). **Kingdom:** Nadir's runoff marsh.
+
+### State
+| ID | Name | Values |
+|---|---|---|
+| V330 / V331 | `G6_FLASK_3 / G6_FLASK_5` | 0–3 / 0–5 |
+| V332 | `G6_FILTER` | sludge steps used (0–10) |
+| V333 | `G6_BASIN` | 0–7 (cumulative) |
+| S330 | `G6_VALVE_4` | 231 purge valve dosed |
+| S331 / S332 | `G6_SOCKET_A / G6_BASIN_B` | 232 doses delivered |
+| S333 | `G6_QUIET_DONE` | 234 |
+| V430 / V431 / V432 | `G6_FLASK_4 / G6_FLASK_9 / G6_PATIENTS` | 234 |
+
+**The bench** (one event type, reused): action → choice menu `Fill the 3 · Fill the 5 · Pour 3→5 · Pour 5→3 · Tip the 3
+out · Tip the 5 out · Look at the flasks` (pour = transfer until the source is empty or the target is full). Away from a
+bench, the same menu without the two Fill options is on a **key item** "Corvin's Flask Case" (register it to Ready).
+**Funnels** (action): `Pour the 3 / Pour the 5`. Exact → success. Wrong → the flask is wasted, and Wenlow names the
+amount ("That's 2. The funnel wants 4. Dose makes the cure, sir says. Sir says it a lot.").
+
+### 230 The Ward — TEACH (21×17)
+Bench + a funnel needing **3**. Fill the 3, pour. The ward's inner door opens. Corvin's sign: "If you can count to three,
+you can count to anything. Measure, don't guess."
+
+### 231 Dispensary — TWIST "four from three and five" (29×25)
+```
+     0         1         2
+     01234567890123456789012345678
+y0   ##############E##############   E (14,0) → 232 (needs S330)
+y2   #..........######...........#
+y3   #..........#FFFF#...........#   F purge funnel needs 4 (14,3)
+y8   #....B.................T....#   B bench (5,8) · T Scientist (23,8)
+y12  #.......W...........T.......#   W Wenlow (8,12) apprentice · T Burglar (20,12)
+y24  ##############@##############
+```
+**Solution (6 actions):** Fill 5 → pour 5→3 (5 holds 2) → tip 3 → pour 5→3 (3 holds 2) → fill 5 → pour 5→3 (5 holds 4)
+→ pour the 5 into the funnel.
+**Hints (Wenlow):** 1 "Sir always says: the empty space is a measure too." 2 "Get a 2 into the little one first." 3 the
+solution.
+
+### 232 Sludge Gallery — COMBINE "carry the cure" (29×25)
+```
+     0         1         2
+     01234567890123456789012345678
+y9   #############################   rows 0-8 / 14-24: the ward corridors (trainers) and walls
+y10  #....~~~~~~...~~~~~~~~......#   tap end x1-4 · sludge 1 x5-10 (6 steps) · island A x11-13 · sludge 2 x14-21 (8 steps) · dais x22-27
+y11  #BR..~~~~~~.a.~~~~~~~~..b...E   B bench (1,11) · R refill (2,11) · a socket A needs 1 (12,11) · b basin B needs 7 (24,11) · E exit (28,11)
+y12  #....~~~~~~.r.~~~~~~~~......#   r refill (12,12) · no refill on the dais
+y13  #############################
+```
+- **Sludge tiles** (`~`): walkable. A step hook (`pfp_step_hook`) adds 1 to V332 per sludge step. At 10: "Your mask
+  filter is spent!" → fade → back to the tap end (V332 = 0). Flask contents and deliveries are **kept**.
+- Refill stations set V332 = 0.
+- **Socket A** takes exactly 1 (one pour).
+- **Basin B** is cumulative: V333 += the pour. At exactly 7, S332 goes on. Above 7: "It overflows and drains." V333 = 0.
+- **Why it's a combine:** you can't fill anywhere but the tap, 1 + 7 = 8 = both flasks full, and a flask holding
+  exactly 1 can't be made without the tap.
+- **Plan (two deliveries):**
+  1. At the tap: fill 3 → pour into 5 → fill 3 → pour into 5 until full. The 3 holds **1**.
+  2. Carry it to A (6 steps). Refill at A. Walk back (6).
+  3. At the tap: fill 5 → pour 5→3 → tip 3 → pour 5→3 (3 holds 2) → fill 5. You carry **2 + 5**.
+  4. Tap → A (refill) → B (8 steps). Pour both: 7.
+- Wandering in the sludge costs a reset, never progress.
+- **Hints (Wenlow):** 1 "You can pour between flasks anywhere, sir lets me. You can only *fill* at the tap."
+  2 "Basin B adds up. Bring two flasks that add to seven." 3 the plan.
+
+### 233 The Theatre — arena (21×17)
+Corvin, single battle. Badge 6 + TM84 Poison Jab. Surf (HM03) comes from the ferrymen afterwards.
+
+### 234 The Quiet Ward — MASTERY (optional, 21×15; door from 232's tap end)
+- Flasks of **4 and 9** (V430/V431). A bench at the ward door.
+- Three beds whose IV funnels need **1, 3 and 6** (V432 tracks the beds done).
+- Verified sequences:
+  - **1** = fill 9, pour into 4, tip 4, pour into 4: the 9 holds 1.
+  - **3** = fill the 4 and pour it into the 9, three times: the 4 holds 3.
+  - **6** = the 3 above, then tip the 9 and continue: fill 4 → 9 (7), fill 4 → 9 (9; the 4 holds 2), tip 9, pour 4 → 9
+    (2), fill 4 → 9 (6).
+- Patients are Fixing (turning to "garden furniture"), so this room is quiet and dim, with no comedy.
+- **Reward:** Synthetic Seed ×2 (on Corrosive Mire: poisons the holder, +1 Atk and +1 Sp. Atk) + Black Sludge +
+  Wenlow's note: "Thanks for helping with the Quiet ones. Sir pretends he doesn't cry. — W."
+
+**Gym 6 trainers (5):** Scientist ×2, Burglar *(Nadir scavenger)* ×2, Aroma Lady ×1. Lv 31–34. None stand in sludge.
+
+---
+## Gym 7 — Cindervault, the Foundry · Brann Holloway (Fire, `:VOLCANIC`, cap 39) · ★★★★★★
+
+**Core rule: pour, then quench.** A trench channel is *empty* (a gap). Pour a crucible into it and it is *molten*
+(impassable, glowing). Quench it and it is *iron* (a bridge). **Twist:** crucibles pour once, through spouts aimed at one
+of two channels, and the foundry has **one** quench. **Combine (cross-floor):** a channel still molten when you go down
+the slag chute **drains into the mould below**, so it is a gap upstairs and a bridge downstairs. **Mastery:** "forge to
+break right". Drain the channel everyone quenches and a cracked mould opens a vault.
+**Warden link:** "Some things you forge to last. Some things you forge to *break* right — that's the harder craft."
+The bridge you deliberately *don't* finish is the one that carries you. **Field:** Volcanic (Rock moves hit as Fire;
+trainers lean on Lava Plume). **Kingdom:** Ashkaar's forge-guilds, commoners under a dragon-lord.
+
+### State
+| ID | Name | Values |
+|---|---|---|
+| V335 / V336 / V337 | `G7_AIM_K1 / K2 / K3` | K1: 0 → X1, 1 → X2 · K2: 0 → X2, 1 → X3 · K3: 0 → X1, 1 → X3 |
+| V338 | `G7_QUENCH` | quench charges left (starts 1) |
+| S335 / S336 / S337 | `G7_POURED_K1 / K2 / K3` | crucible spent |
+| S338 | `G7_TEACH_DONE` | 250 bridge |
+| S339 | `G7_VAULT_DONE` | vault chest |
+| V435 / V436 / V437 | `G7_X1 / X2 / X3` | 0 empty · 1 molten · 2 iron (251 channels) |
+| S435 / S436 / S437 | `G7_M1 / M2 / M3` | mould under X_k is iron (252) |
+
+### 250 Gate Hall — TEACH (21×17)
+One crucible, one channel (rows 8–9), one quench wheel. Pour → molten. Quench → iron → cross. The foreman points at a
+floor grate: "And what you *don't* quench runs down to the moulds below. Waste not."
+
+### 251 Pour Floor — TWIST (29×25)
+```
+     0         1         2
+     01234567890123456789012345678
+y0   ##############E##############   E (14,0) → 253
+y1   #.............N band........#   N band rows 1-3 · ladder from 252 M3 side at (24,2)
+y4   #XXXXXXXXXXXXX3XXXXXXXXXXXXX#   X3 rows 4-5 (channel)
+y6   #...........mid2..........C2#   mid2 rows 6-9 · C2 chute (24,7) → 252
+y10  #XXXXXXXXXXXXX2XXXXXXXXXXXXX#   X2 rows 10-11
+y12  #...H.......mid1............#   mid1 rows 12-15 · H (4,13) ladder from 252 M1 side
+y16  #XXXXXXXXXXXXX1XXXXXXXXXXXXX#   X1 rows 16-17
+y19  #..K1...K2...K3.......A..Q1.#   S band rows 19-23 · crucibles K1 (3,19) K2 (7,19) K3 (11,19) · A apprentice (21,19)
+y20  #......................Q2...#   quench valves Q1 (26,19) Q2 (24,20) Q3 (26,21) (one per channel, one shared charge)
+y21  #.........................Q3#
+y22  #.............C1............#   C1 chute (14,22) → 252
+y24  ##############@##############
+```
+- **Channel tiles** `X<k> x,y`: P0 [—] blank (empty trench art, impassable) · P1 [V43k≥1] tile MOLTEN (impassable;
+  `touch` from an adjacent tile: "Too hot!") · P2 [V43k≥2] tile IRON (passable).
+- **Crucible K** (action): if spent: "Empty." Else choose `Aim the spout / Pour`. Aim cycles its two channels and the
+  spout graphic turns. Pour: the target channel becomes molten if empty, re-melts if iron, and nothing happens if
+  already molten. Then the crucible is spent.
+- **Quench valve Q_k:** if V338 > 0 and channel k is molten → iron, V338 −= 1. Otherwise: "The cistern's dry." or
+  "Nothing to quench."
+- **Chutes C1/C2** (`touch`): first **drain**: for every molten channel k, X_k = empty and M_k = iron ("A roar below: the
+  moulds fill."). Then `pfp_swap_map(252)`.
+
+### 252 Mould Floor — COMBINE (29×25, below 251)
+- **M1** (pit, rows 16–17) separates the chute-1 landing (S part) from the M1 side (rows 12–15). The ladder **H (4,13)**
+  there goes up to 251's **mid1**.
+- **M2** (rows 10–11) separates the M1 side from the **vault** (rows 6–9, centre): see Mastery.
+- **M3** (rows 4–5) separates the chute-2 landing (24,7) from the north side. The ladder **(24,2)** goes up to 251's **N band**.
+- Each `M<k>` tile: P0 [—] blank (pit) · P1 [S43k on] tile IRON_CAST (passable).
+- Trainers: Worker (8,21), Black Belt (20,8).
+
+**Solution (verified by hand; 3 pours, 1 quench, 2 drains):**
+1. Pour **K3 → X1**, **K1 → X2**, **K2 → X3** (aim first).
+2. **Quench X2** only.
+3. Take chute C1: X1 and X3 drain, so M1 and M3 are iron.
+4. Below: cross M1 → ladder H → 251 mid1 → cross X2 (iron) → mid2 → chute C2.
+5. Below: cross M3 → ladder → N band → E.
+
+**The aha:** the natural move, quenching X1 to cross it, leaves X2 un-quenchable and M1 a pit. "The bridge you don't
+finish upstairs is the one that carries you downstairs."
+**Hints (apprentice "Sooty", S band):** 1 "Brann never wastes a pour. Whatever's still hot when you go down, the moulds
+get." 2 "You only need one bridge upstairs. Which one can't the moulds give you?" 3 the solution.
+**Reset:** Sooty → crucibles refilled, aims 0, V338 = 1, X and M all reset, player to the S band.
+
+**MASTERY "forge to break right" (in 252's vault; no extra map).** If X2 is *also* left molten when you take C1, M2 casts
+across the pit and you can reach the **vault**. Its cracked mould has split under the pour and exposes Brann's
+apprentice-piece hoard.
+- **Reward:** Elemental Seed ×2 (on Volcanic: burns the holder, +1 Atk/Sp. Atk/Speed) + Charcoal + "Brann's first hammer"
+  (lore: his AF 280 Festival match with Valen).
+- That run can't finish, because X2 is gone upstairs. Sooty resets it and you take the main route.
+- Brann, after: "Ha! Found the cracked one. Aye — some things you break *on purpose*."
+
+### 253 Warden Arena (21×17)
+Brann, single battle. Badge 7 + TM35 Flamethrower.
+
+**Gym 7 trainers (5):** Worker *(Engineer)* ×2, Black Belt, Camper "Kindler", Cool Trainer ♂. Lv 35–38.
+
+---
+## Gym 8 — Ironreach, the Pit · Kaito Ren (Fighting, `:COLOSSEUM`, cap 43) · ★★★★★★
+
+**Core rule: every step you take, they take.** Sparring partners are **pursuers**: after each of your steps, each one
+steps one tile toward you (`pfp_pursue(:chase)`).
+- **Movement:** they first try the axis with the larger gap; if that is blocked, the other axis; if both are blocked,
+  they wait.
+- **Blockers:** they cannot cross **rope lines**, boulders or each other.
+- **Contact:** a partner stepping onto your tile ends the round. The first time, it is that trainer's battle; after
+  that: "Stand up. Again." Partners and boulders return to their marks.
+
+**Twist:** rope lines you can step over but they can't. **Combine:** Strength boulders block pursuers and hold plates.
+**Mastery:** lure the pursuers *onto* the plates, because a sparring partner weighs as much as a boulder.
+**Warden link:** "Stand up. Again." "A fist is a promise." Kaito's discipline is control, and the pit punishes rushing.
+The Mastery door is his guilt, made physical. **Field:** Colosseum (knockouts power the crowd). **Kingdom:** Nadir's
+pit-fighting quarter in old Aurel mine shafts.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S340 / S341 / S342 | `G8_BELL_1 / BELL_2 / GAUNTLET` | rooms cleared |
+| S343 | `G8_MARROWGATE` | 275 cleared |
+| V340 | `G8_ROUNDS` | contacts this visit (hint tiers) |
+Pursuer and boulder start squares come from the map. Boulders use `pbPushThisBoulder` (Strength; Badge 5 has passed). A
+plate is "held" while a boulder or pursuer stands on it (`pfp_check`). Partners that have been battled stay as pursuers;
+their battle simply isn't repeated.
+
+### 271 Sparring Floor — TEACH + TWIST (29×25; two halves)
+**West half "The Pillar" (TEACH, x1–13):** one partner (Machop, Black Belt "Daigo") at (7,4). A 3×3 pillar at (6–8, 9–11).
+The bell is at (7,1), behind the partner. You start at (7,21).
+- **Solution:** walk up the east side of the pillar until the partner commits to the east, then circle the pillar
+  clockwise. A greedy chaser always chases the larger gap, so it follows you round and parks on the far side. Dash to
+  the bell.
+- Kaito's sign: "Don't fight the one in front of you. Move it."
+
+**East half "Rope Line" (TWIST, x15–27):** two partners (Crush Girl "Mae" at (17,4), Black Belt "Ren" at (25,4)). A rope
+line `r` across row 12 (x15–27) has one gap at x21. The bell is at (21,1). You start at (21,22).
+- Ropes are passable to you only.
+- **Solution:** step over the rope at x17 and draw Mae south to the rope. Walk back east along row 13 (below the rope).
+  Mae is stuck behind the line and Ren comes through the gap. Lead Ren south-west, around and back over the rope at x26,
+  and ring the bell.
+- Builder: verify both halves with the pursuer BFS.
+
+### 272 Rope Ring — TWIST, harder (29×25)
+- Three partners. A ring of ropes around a central bell dais (x10–18, y8–16) with two gaps (N (14,8) and S (14,16)).
+- Boulder-free. You must get all three partners on the *wrong* side of a rope at the same time.
+- Intended: enter the ring through S, exit over the east rope, re-enter over the north rope, and ring the bell while the
+  partners funnel through the gaps.
+
+### 273 The Gauntlet — COMBINE (29×25)
+```
+     0         1         2
+     01234567890123456789012345678
+y0   ##############E##############   E (14,0) → 274 (gate opens while plates P1 and P2 are held)
+y2   #.............P1..........r.#   P1 plate (14,2)
+y6   #....O........###.....O.....#   O boulders (5,6), (22,6)
+y10  #..p.....rrrrr.....rrrrr..p.#   p partners (3,10), (26,10) · rope segments
+y14  #.........O...P2....O.......#   P2 plate (14,14) · O (10,14), (20,14)
+y22  #.............@...A.........#   @ (14,22) · A apprentice "Hiro" (18,22)
+```
+- **Rule:** both plates must be held at the same time; you can't stand on two at once.
+- **Solution shape:** push boulder (10,14) east four tiles onto P2. Use boulder (20,14) to wall off the east partner's
+  greedy path. Then lure the west partner across the rope gap so it can't follow, and push boulder (5,6) along row 6 and
+  up to P1.
+- **Push budget:** 30 pushes (Kaito: "Discipline over rage"). V341 `G8_PUSHES` counts them; over budget, the boulders reset.
+- Builder: verify with the BFS (boulders + pursuers; small grid).
+
+### 274 The Pit — arena (21×17)
+Kaito: **tag battle** with Kestrel (K4 arc), or a single battle on Standard (story team confirms). Badge 8 + TM31 Brick
+Break.
+
+### 275 Marrowgate Door — MASTERY (optional, 21×15; side door in 273)
+- A sealed iron gate with three plates. Knocking sounds play from behind it (SE loop), and Lucario's aura flickers on the
+  wall.
+- **One** boulder. **Two** sparring partners.
+- **The aha:** partners are heavy, so lure each one onto a plate. A greedy chaser stops on the plate if the next tile
+  toward you is blocked: stand behind a rope, directly past the plate.
+- **Reward:** Telluric Seed ×2 (on Colosseum: +1 Atk and Focus Energy) + Black Belt.
+- A plaque: "MARROWGATE — SEALED AF 285 — BY ORDER." Kaito, after the badge: "You opened it. It was empty, wasn't it.
+  ...I always hoped it would be."
+
+**Gym 8 trainers (6):** Black Belt ×2, Crush Girl ×2, Battle Girl-style "Crush Kin" ×1, Pit Brawler *(new)* ×1. These
+are the pursuers. Lv 39–42.
+
+---
+## Gym 9 — Verdance, the Heartgarden Gym · Juno Hale (Grass, `:FLOWER_GARDEN`, cap 47) · ★★★★★★★
+
+**Core rule: water spreads.** Watering a plot grows it **and its neighbours** by one stage, mod 4:
+- 0 bare bed
+- 1 sprouts
+- **2 vine bridge** (walkable over the canals)
+- **3 hedge** (impassable overgrowth)
+- watering a hedge collapses it to 0.
+
+**Consequence:** the **arena's Flower Garden field starts at stage 1 + (number of hedges you leave in 291 and 292)**,
+max 5. Overgrowth is literally Juno's strength. **Twist:** a ring of six. **Combine:** two rings sharing one junction
+plot. **Mastery:** the Bride Bower's exact pattern.
+**Warden link:** Juno, new Warden in a runaway bloom: "Please don't go easy on me — I'll cry either way." The gym
+guide warns you plainly that over-watering helps her. That is a real, honest trade-off (fewer waterings vs a harder
+fight). **Field:** Flower Garden stages (FIELDS.md), via `setBattleRule("fieldStage", n)`. **Kingdom:** Elowen's royal
+gardens, the Evergreen Crown's pride.
+
+### State
+Plot stages are one-hot self switches (`pfp_state`, 4 states). No IDs are needed.
+| ID | Name | Use |
+|---|---|---|
+| V345 | `G9_HEDGES` | hedges left, recomputed on leaving 291/292 (`pfp_check(:g9_hedges)`) → arena stage |
+| S345 / S346 | `G9_RING_DONE / G9_EIGHT_DONE` | path complete (for gates and hint text) |
+| S347 | `G9_BOWER_DONE` | |
+
+**Plot event:** P0 [—] bed (impassable; canal below) · P1 [self A] sprouts · P2 [self B] **vine bridge (passable tile)**
+· P3 [self C] **hedge (impassable)**. The watering can is a key item. Action on a plot → "Water it?" →
+`pfp_water(name)` adds +1 to it and to the neighbours listed in the room. Plots are watered from the walkway beside them.
+
+### 290 Gate — TEACH (21×17)
+One plot over the entrance canal at stage 1. Water once → bridge. A second, decorative plot beside it also grows (its
+neighbour), and Juno's sign points it out: "Gardens are gossips. Water one and the neighbours hear about it."
+
+### 291 Hedge Garden — TWIST "the ring of six" (29×25)
+- Six plots P1–P6 in a ring around a fountain, each spanning a canal.
+- The path crosses the canals at **P1, P3, P5** (they must be 2). P2, P4, P6 are free, but any of them left at 3 is a
+  hedge.
+- Neighbours: P_i ↔ P_{i±1} (P6 ↔ P1).
+- **Start: P1–P6 = 0, 0, 1, 2, 1, 2.**
+
+**Verified (exhaustive, mod 4):**
+- **Cheapest: 2 waterings** (P2 once, P6 once) → 2,1,2,2,2,**3** = one hedge (P6).
+- **Clean: 5 waterings** (P4 once, P5 twice, P6 twice) → 2,0,2,1,2,2 = no hedges.
+- The guide: "Every hedge you leave, she gets stronger. Your call, challenger."
+
+**Hints (apprentice "Bram", Juno's cousin):** 1 "Water the plot *next* to the one you want." 2 "P6 is nearly
+overgrown already; watering it collapses it, but it also feeds P1." 3 both solutions.
+
+### 292 Glasshouse — COMBINE "two rings, one heart" (29×25)
+- A figure-eight: ring A (J, A1, A2, A3, A4) and ring B (J, B1, B2, B3, B4) share the **junction J**.
+- J has four neighbours (A1, A4, B1, B4). The others have two.
+- The path needs **J, A2, A3, B2, B3 = 2**.
+- **Start: J = 1; A1–A4 = 0, 3, 1, 2; B1–B4 = 2, 0, 3, 1.**
+- **Verified (exhaustive, 256 solutions):**
+  - **fewest waterings: 7** (J ×0, A1 ×2, A3 ×1, B1 ×1, B3 ×1, B4 ×2) → **2 hedges**.
+  - **no hedges: 8** (J ×2, A1 ×2, A3 ×1, B3 ×2, B4 ×1).
+- **The combine:** the junction couples both rings; fixing ring A through J disturbs ring B.
+- Sun lamps (decor) and the glass roof.
+
+### 293 Warden Arena (21×17)
+Juno (J3), **double battle**. Field `:FLOWER_GARDEN` at stage `1 + min(V345, 4)`. Badge 9 + TM53 Energy Ball. Juno,
+if the stage is 4+: "You let it grow? For me? ...That's either kind or tactical and I'm too nervous to ask which."
+
+### 297 The Bride Bower — MASTERY (optional, 21×15; gate in 292, open after S346)
+- Five plots in a row under an arch. Neighbours are left and right only (the ends have one).
+- **Target 2,3,2,3,2** (bridge-hedge alternating, "the bridal arch").
+- **Start 0, 2, 1, 3, 1.**
+- **Verified minimum 6:** P2 ×2, P3 ×3, P5 ×1.
+- Hedges here don't count toward the arena.
+- **Reward:** Telluric Seed ×2 (on Flower Garden: +1 Sp. Def and Ingrain, and the garden grows) + Miracle Seed + a
+  pressed Bride Tree petal (lore: Elin).
+
+**Gym 9 trainers (5):** Aroma Lady ×2, Pokémon Breeder, Picnicker, Gardener *(Lass)*. Lv 43–46.
+
+---
+## Gym 10 — Rimeholt, the Lake Hall · Anja Sorrel (Ice, `:FROZEN_LAKE`, cap 51) · ★★★★★★★
+
+**Core rule: ice remembers weight.** Native v21 ice sliding (terrain tag `Ice`: you slide until something stops you). A
+**cracked** tile holds once: the first slide over it cracks it, and the second gives way. You drop into the under-ice
+grotto and climb back to the room's start. **Twist:** a room where the shortest line uses a crack twice, so you plan
+around your own footprints. **Combine:** **ice blocks** slide when pushed (stopped by rock, blocks or floor), and a block
+that slides into a broken crack **plugs** it. The plug becomes rough ice: a stopper, and the room's built-in repair kit.
+**Mastery:** a 33-move room.
+**Warden link:** "Ice remembers. Every crack. Every weight. You walk on my lake, it knows your name by spring." Anja
+signed the Lattice knowing the lake was cracking: the gym is her guilt in physics. **Field:** Frozen Lake (cracks →
+Water Surface). **Kingdom:** Isenmar's ice-fishers.
+
+### State
+Crack states are one-hot self switches on each `Crack x,y` event: none = intact, A = cracked, B = broken (a hole; fall
+`touch`), C = plugged (rough ice, stops slides). Block positions use `pbPushThisEvent` + `pfp_save(:g10_<room>)`.
+| ID | Name | Use |
+|---|---|---|
+| S350 / S351 / S352 | `G10_HALL / CRACKWALK / SOUNDING` | rooms cleared (doors stay open) |
+| V350 | `G10_FALLS` | falls this visit (hint tiers) |
+**Fall:** touching a broken crack → "The ice gives way!" → 316 Under-ice Grotto (a short cave with a ladder) → back to
+the room's start. The room's cracks are **kept** (they remember), so the apprentice reset matters here.
+**Sliding blocks** are custom: the push moves the block until stopped (`pfp_push_line` applied to the event). A block
+crossing a broken crack drops in: the crack goes to state C, the block is erased (self switch), and the block is saved.
+
+### 310 Boathouse — TEACH (21×17)
+A 7×5 ice pond with two rocks. Slide to the far side. One cracked tile sits on an *optional* line to a Pearl, so a
+second visit drops you (Anja's net-mender: "Told you. It remembers.").
+
+### 311 Ice Hall — TWIST "every crack once" (29×25; puzzle area 13×11 at offset (8,7))
+```
+     0123456789012       (local; room x = 8 + local x, y = 7 + local y)
+y0   ######E######       E (6,0) → 312
+y1   ##..........#
+y2   #..#.#...c.##       c = cracked tile · # inside = rock
+y3   #...#.c##...#
+y4   #.....#.....#
+y5   ##.c........#
+y6   #.....c.....#
+y7   #.#......#.##
+y8   #...........#
+y9   #...#....c.##
+y10  ######F######       F (6,10) start floor (non-ice) ← 310
+```
+- **Verified (BFS, slide model, cracks hold once):** shortest **17 slides**:
+  `U R U L U L D L D R U L D R U R U`. Ignoring cracks it would be 13, so the cracks *are* the puzzle.
+- **Hints (apprentice "Liv", Anja's granddaughter, at room (22,22)):** 1 "Gran says you get one go over each crack.
+  Plan where you've already been." 2 "The straight way up crosses the middle crack twice." 3 the slide list.
+- **Reset:** Liv → all cracks intact (self switches cleared), player to F.
+
+### 312 Crackwalk — COMBINE "blocks, cracks and plugs" (29×25; puzzle area 13×11 at offset (8,7))
+```
+     0123456789012
+y0   ##########E##       E (10,0) → 313
+y1   ##.....##...#
+y2   #....##.#...#
+y3   #.........#.#
+y4   #....B...c.c#       B ice blocks at (5,4) and (5,7)
+y5   #...#.......#
+y6   #...........#
+y7   #c..#B....#.#       (local (5,7) block; (4,7) and (10,7) rock)
+y8   #.......#...#
+y9   #c..........#
+y10  ######F######       F (6,10) start
+```
+(Block glyphs `B` mark ice blocks standing on ice. The underlying tile is `.`.)
+- **Push rule:** walk into a block from a standing tile and the block slides in that direction until it meets rock,
+  another block, or floor. You stay put.
+- **Verified (BFS):** **16 actions**, `U L U R D [push R] L D R U [push U] U L U R U`. It is **unsolvable without
+  pushing**: the two blocks become the stoppers the room lacks.
+- **The plug (the aha):** if you break a crack, push a block over the hole. It sinks in and leaves rough ice, *a new
+  place to stop*. The apprentice's tier-2 hint teaches it as a repair, and players then use it on purpose in 315.
+- **Hints (Liv):** 1 "A block's just a rock you can move." 2 "Broke one? Shove a block into the hole. Rough ice
+  stops you." 3 the list.
+
+### 313 Warden Arena (21×17)
+Anja, single battle. Badge 10 + TM13 Ice Beam. Rock Climb TM100 comes from the ice-climbers afterwards.
+
+### 315 The Sounding — MASTERY (optional; 21×17, puzzle area 15×13; door in 312)
+```
+     012345678901234
+y0   ##########E####     E (10,0) → the Sounding hole (reward)
+y1   #.#...........#
+y2   #........#....#
+y3   #...#...B.....#     B blocks at (8,3), (4,6), (6,9)
+y4   #.......#c...##
+y5   #....c........#
+y6   #.#.B..#..#...#
+y7   ##.........c###
+y8   #.....#c...#..#
+y9   #.#.c.B...c...#
+y10  #....#...#....#
+y11  #......c.....c#
+y12  #######F#######
+```
+- **Verified (BFS): 33 actions**, 7 of them pushes:
+  `U R U R D L [L] D L [L] L U [U] L D R U [U] [L] U L D R U R [R] D R D R U L U` (`[X]` = push).
+  Unsolvable without pushing.
+- **Reward:** Elemental Seed ×2 (on Frozen Lake: +1 Def, +1 Speed) + Never-Melt Ice. At the hole, Anja's family
+  sounding-line: "Every name the lake has learned since AF 90." Yours is the newest.
+
+**Gym 10 trainers (5):** Skier-style Cool Trainer ♀ ×2, Hiker, Swimmer ♂ (ice diver), Boarder *(new)*. All stand on
+floor tiles off the slide lines. Lv 47–50.
+
+---
+## Gym 11 — Skyreach, the Gale Post · Odessa Gale (Flying, `:STORMFRONT`, cap 55) · ★★★★★★★★
+
+**Core rule: the wind doesn't care.** **Gust lanes** are corridors where the wind carries you end to end
+(`pfp_push_line(:wind)`). A lane can only be ridden *with* the wind. **Weather vanes** on the decks flip lanes, and every
+vane is rigged to **two** lanes. **Twist:** coupled vanes on a five-platform deck; the vanes are on different platforms,
+so you ride lanes to reach the vane that fixes the lane you need. **Combine:** the Mail Chute, where letter sacks ride
+the same lanes, stack at lane ends and become stoppers. **Mastery:** deliver the dead letters.
+**Warden link:** "Skyreach's got one law: the wind doesn't care. Everything else is negotiable." Odessa smuggles refugees
+and letters, and the Mastery is literally her dead-letter archive (Morwen's letters to "I."). **Field:** Stormfront
+(trainers use Tailwind and Hurricane). **Kingdom:** Zenith's airship spire.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S355–S360 *(see below)* | `G11_L1..L6` | lane direction bits for 331 (OFF = a→b, ON = b→a) |
+Lanes L1–L5 use S355–S359 and L6 uses S455 (secondary). Sack positions are saved with `pfp_save(:g11_chute)`.
+| S456 | `G11_CHUTE_DONE` | |
+| S457 | `G11_ARCHIVE_DONE` | |
+
+### 330 Hangar — TEACH (21×17)
+One gust lane across a gap, and one vane beside it. Ride it, flip the vane, ride back. A courier: "Wind goes one way at a
+time. You don't argue with it; you just wait at the right end."
+
+### 331 Gust Deck — TWIST "coupled vanes" (29×25, schematic)
+```
+           P4 (exit E (14,0))
+            ^ L4
+  P3 (20,6) ---L6--- P1 (8,6)
+   |  \               |
+   L3   (V2 on P3)    L1          P0 start (8,20) · P1 (8,6) · P2 (20,20) · P3 (20,6) · P4 (14,1)
+   |                  |
+  P2 (20,20) --L5-- P0 (8,20) --- L2 joins P1 (8,6) and P2 (20,20) diagonally (a long N-S then E-W lane)
+```
+| Lane | Joins | Start (bit) | Flipped by |
+|---|---|---|---|
+| L1 | P0–P1 | 1 (P1→P0) | V3 |
+| L2 | P1–P2 | 0 (P1→P2) | — |
+| L3 | P2–P3 | 1 (P3→P2) | V2 |
+| L4 | P3–P4 | 0 (P3→P4) | V1 |
+| L5 | P0–P2 | 0 (P0→P2) | V3 |
+| L6 | P1–P3 | 1 (P3→P1) | V1, V2 |
+**Vanes:** **V1 on P0** flips L4 and L6 · **V2 on P3** flips L3 and L6 · **V3 on P2** flips L1 and L5. Each vane's rods
+are visible running to its two fans.
+- **Lane entry** (`touch` at the lane mouth): with the wind → ride to the far platform. Against it: "The gale shoves you
+  back."
+- **Verified (BFS): 14 actions.**
+
+| # | Action | Arrive / effect |
+|---|---|---|
+| 1 | V1 | L4, L6 flipped |
+| 2 | L5 | P2 |
+| 3 | V3 | L1, L5 flipped |
+| 4 | L5 | P0 |
+| 5 | L1 | P1 |
+| 6 | L6 | P3 |
+| 7 | V2 | L3, L6 flipped |
+| 8 | L6 | P1 |
+| 9 | L2 | P2 |
+| 10 | L5 | P0 |
+| 11 | V1 | L4, L6 flipped |
+| 12 | L1 | P1 |
+| 13 | L6 | P3 |
+| 14 | L4 | P4 |
+
+- **The aha:** L6 is on two vanes, so it is the "hinge" you flip twice. The final approach needs L4 forward *and* L6
+  forward at the same time, which means using V1 a second time after V2 has spoiled L6.
+- **Hints (courier "Pip"):** 1 "Every vane works two fans. Look up — the rods show which." 2 "The P1–P3 lane is on two
+  vanes. Fix it last." 3 the table.
+
+### 332 Mail Chute — COMBINE "sacks ride the wind" (29×25)
+- Three gust lanes, each with a vane (4 directions here, not 2): a crossroads chute.
+- Three letter sacks (pushable: `pbPushThisEvent`). A sack pushed into a lane mouth rides to the far end and stops
+  against the end wall or another sack. **Sacks stack.**
+- Three pigeonholes (plates) at lane ends must each hold a sack. A sack in a lane also **shortens the lane for you**:
+  you stop one tile before it. That is the only way to land on the mid-lane ledge holding the third pigeonhole.
+- **Intended order:**
+  1. Sack 1 down the east lane (vane E) into pigeonhole A.
+  2. Turn the north vane south. Push sack 2 so it stacks *before* the north wall.
+  3. Ride the north lane: you stop at the ledge beside pigeonhole C.
+  4. Push sack 3 off the ledge into C. Re-aim and deliver sack 2 to B.
+- Builder: verify with the Sokoban BFS.
+
+### 333 Captain's Deck — arena (21×17)
+Odessa, **double battle** (Tailwind theme). Badge 11 + TM51 Roost. Waterfall (HM05) comes from the sky-river guides
+afterwards.
+
+### 334 Dead-Letter Archive — MASTERY (optional; 21×15; door in 332)
+- Pigeonholes labelled by kingdom. Five dead letters on a gust carousel: one lane loop with four vanes.
+- Route each letter to its kingdom by setting the vanes before each push. The addresses are written as riddles in
+  Gale Post slang (a sign glossary).
+- The Morwen letter (to "I.") cannot be delivered. Its hole is "Abroad — closed by quarantine". Leaving it in the
+  carousel completes the room (Odessa: "Some letters you keep.").
+- **Reward:** Elemental Seed ×2 (on Stormfront: +1 Speed and Charge) + Sharp Beak + the undelivered letter (key item,
+  for K6/Ysolde).
+
+**Gym 11 trainers (6):** Bird Keeper ×2, Pilot *(Cool Trainer ♂)* ×2, Sky Courier *(new)*, Gambler. Lv 51–54.
+
+---
+## Gym 12 — Lucent, the Athenaeum · Ilsa Marr (Psychic, `:MINDSCAPE`, cap 59) · ★★★★★★★★
+
+**Core rule: your reflection keeps you honest.** Beyond a mirror wall walks your **reflection**. When you step left it
+steps right; up and down match. Its side has **different walls**. If either of you is blocked, that one stays put while
+the other moves: the only way to "desync" the pair. Plates and doors need you **both** in place. **Twist:** a hall where
+the walls differ, so you steer two bodies with one stick. **Combine:** **swap pads** trade your places, and **thought
+tiles** may be stood on only by the reflection. **Mastery:** the Quiet Room.
+**Warden link:** "You're thinking very loudly. Please stop." Ilsa reads minds. The gym makes you think in two
+directions at once, and the Quiet Room is about the truth she kept sheathed for eleven years. **Field:** Mindscape
+(Topsy-Turvy → Inverse). **Kingdom:** Antumbra, the Kingdom Behind the Glass.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S360 / S361 / S362 | `G12_HALL / ATRIUM / GALLERY` | rooms cleared |
+| S363 | `G12_QUIET_DONE` | |
+| V360 | `G12_RESETS` | hint tiers |
+The reflection is an event moved by `pfp_pursue(:mirror)` after each player step, with its own pane's passability. On
+leaving a room, it snaps back to its start.
+
+### 350 Reading Room — TEACH (21×17)
+Two identical 5×5 panes. You and the reflection start mirrored, with mirrored plates. Walk up three, step left (it
+steps right), and both stand on plates. "See? It's only you, the other way round."
+
+### 351 Mirror Hall — TWIST (29×25; two 9×9 panes: yours at (2,8), the reflection's at (18,8))
+```
+ your pane (local)     reflection pane (local; its x runs the other way to yours)
+     012345678            012345678
+y0   #########            #########
+y1   #.##....#            #.......#     goals: you (6,1) · reflection (7,1) (plates)
+y2   #...#...#            #...#..##
+y3   #.....###            #.......#
+y4   #.#.....#            #....##.#
+y5   #...###.#            #.##..#.#
+y6   #...#..##            #...##.##
+y7   #...#...#            ###.....#     starts: you (1,7) · reflection (7,7)
+y8   #########            #########
+```
+- **Verified (BFS): 26 steps**, `U U R R R R U R R U U U L L L L L L D R R U R U U L`. That is the longest of 4,000
+  generated boards, and it uses three deliberate desyncs.
+- **Hints (apprentice "Ada", an Athenaeum reader):** 1 "When it bumps a wall and you don't, you've gained a step on it."
+  2 "Start by walking it into the wall at its row 7." 3 the sequence.
+
+### 352 Swap Atrium — COMBINE (29×25)
+- Two panes again. Each holds **swap pads**: step on one and you and the reflection trade places, mirrored. **Thought
+  tiles** (shimmering) are walls to you and floor to the reflection.
+- The door needs you on plate P and the reflection on plate Q. Q is ringed by thought tiles, so only the reflection
+  can reach it. P is in a pocket of your pane that only the reflection's pane leads to (via a swap).
+- **Intended:**
+  1. Lead the reflection through the thought maze to the pad nearest Q.
+  2. Swap: you are now in its pane, beside Q's maze; it is in yours, beside P.
+  3. Walk *it* onto P (desync against a wall), then swap back, and walk yourself onto Q's neighbour.
+- Builder: verify with the two-walker BFS (`mapgen/puzzles/reflection.py`).
+
+### 354 Warden Arena (21×17)
+Ilsa, single battle. On Hard: an EBDX multi-bar intro. Badge 12 + TM29 Psychic.
+
+### 356 The Quiet Room — MASTERY (optional; 17×13; ID 356, as 355 is the Palace undercroft)
+- Five sealed doors, and five Athenaeum readers in front of them. Each reader makes one statement about which door holds
+  "the truth Ilsa kept".
+- **Rule (on the wall):** "Exactly two readers lie."
+- Statements (sign texts):
+  - A: "It is behind door 2 or 4."
+  - B: "C lies."
+  - C: "It is behind door 5."
+  - D: "A and C are both honest."
+  - E: "It is not behind door 2."
+- **Unique answer: door 4.** Check: if door 4, then A true, C false, B true, D false, E true → liars C and D, exactly two
+  ✓. Every other door gives a liar count other than two.
+- Choose a door: wrong → "A reader sighs. *That's what you wanted to be true.*" (reset).
+- **Reward:** Magical Seed ×2 (on Mindscape: +2 Sp. Atk, confused) + Twisted Spoon + Ilsa's unsent letter to Valen (lore;
+  feeds `:ILSA_RECONCILED` later).
+
+**Gym 12 trainers (6):** Psychic ♂ ×2, Psychic ♀ ×2, Channeler, Scholar *(Super Nerd)*. Lv 55–58.
+
+---
+## Gym 13 — Cragholm, the Lamp Galleries · Bastian Ore (Rock, `:CRYSTAL_CAVERN`, cap 63) · ★★★★★★★★★
+
+**Core rule: light remembers its colour.**
+- A miner's lamp throws a beam. **Mirrors** (`/` or `\`, one-hot, 2 states) turn it.
+- **Filter crystals** recolour it. **Gates** open only to their colour; an **alarm crystal** (red) cracks and resets the
+  board.
+
+**Twist:** the obvious route crosses a red filter, and the gate wants blue. **Combine:** Strength **boulders** block beams,
+and **splitters** fork them. The cavern's own **prism glow** (the field's red → blue → green → amethyst cycle) sets the
+lamp's starting colour, and it advances each time a gate opens. **Mastery:** Bastian's story *is* the code.
+**Warden link:** "Rock's patient. Rock'll wait for you to make a mistake for a thousand years." Bastian tells long
+stories that turn out to be important, and the Mastery code is in his story. **Field:** Crystal Cavern (Prism glow;
+Light moves ×1.5). **Kingdom:** Ossaria's deep seams, where Bastian hides fugitives.
+
+### State
+Mirrors are one-hot (`pfp_state`, 2 states). Beam segments are events lit by `pfp_beam` (self A). Boulder positions use
+`pfp_save`.
+| ID | Name | Use |
+|---|---|---|
+| S365 / S366 | `G13_GATE_1 / GATE_2` | gates opened (latched) |
+| V365 | `G13_GLOW` | 0 red · 1 blue · 2 green · 3 amethyst (the cavern's current glow) |
+| S367 | `G13_STORY_DONE` | Mastery |
+
+### 370 Lamp Room — TEACH (21×17)
+One lamp, two mirrors, one white gate. Turn both mirrors and the beam bends around a pillar into the gate. Bastian's lamp
+boy: "Light goes straight till it's told otherwise. Same as me."
+
+### 371 Prism Gallery — TWIST "the colour the gate wants" (29×25; board 15×11 at offset (7,7))
+```
+     012345678901234          (local)
+y0   .......A.......          A alarm crystal (7,0) — red
+y1   ....M..R..M....          M2 (4,1) · R red filter (7,1) · M3 (10,1)
+y4   ..........b....          b blue filter (10,4)
+y5   L...M..M.......          L lamp (0,5) shines east · M1 (4,5) · M6 (7,5)
+y8   ....M.....M...G          M5 (4,8) · M4 (10,8) · G blue gate (14,8) → 372
+y10  ....S..........          S side crystal (4,10), white → side alcove (Max Revive)
+```
+- **Start:** M1 `/`, M2 `\`, M3 `/`, M4 `/`, M5 `\`, M6 `\` (state 0 = `/`). Nothing is lit.
+- **Verified (exhaustive, 64 configurations):** **blue gate: 3 turns** (M2 → `/`, M3 → `\`, M4 → `\`).
+  The path:
+  1. Lamp → M1 up → M2 east → **red** filter → M3 down → **blue** filter → M4 east → gate.
+  2. The beam turns red, then blue: the gate accepts it because the last filter wins.
+- Other three-turn configurations hit the **alarm** (red) or the **side** crystal (white). The alarm flashes and returns
+  every mirror to its start.
+- **The twist:** the shortest-looking path runs along row 5 (M6) and never meets the blue filter.
+- **Hints ("Pell", lamp boy):** 1 "A crystal takes the last colour that touched it." 2 "Go up first, then come down the
+  east side." 3 the solution.
+
+### 372 Quarry — COMBINE (29×25)
+- Two lamps, one splitter (a beam entering it continues *and* forks left and right), two gates (green and amethyst),
+  three Strength boulders, one Rock Climb wall to the upper gallery.
+- **Glow:** the lamps shine in the cavern's current colour V365. The glow advances one step each time any gate opens:
+  red → blue → green → amethyst.
+- **Intended:**
+  1. Open the green gate first, which needs the glow at green: open the 371 gate's twin "practice" gate here at the
+     lower lamp to advance red → blue → green.
+  2. Push boulder 1 into the splitter's west fork, so only the east fork reaches the green gate.
+  3. Once it opens, the glow becomes amethyst. Pull boulder 1 back (Strength from the other side, via the Rock Climb
+     wall), and push boulder 2 to block the east fork, so the amethyst beam reaches the amethyst gate.
+- Builder: verify with `pfp_beam` + boulder BFS.
+
+### 373 Warden Arena (21×17)
+Bastian, single battle. The field can darken (Dark Pulse → Dark Crystal Cavern). Badge 13 + TM76 Stealth Rock.
+
+### 374 Bastian's Seam — MASTERY (optional; 21×15)
+- Bastian tells his crown story in 370: three "um, where was I" pauses, each naming a stone colour in order. The
+  story is long on purpose, and a sign later quotes it.
+- The seam's four colour crystals must be lit in **that order** (amethyst, red, green, blue) by turning a single lamp
+  turret (4 positions).
+- **Reward:** Telluric Seed ×2 (on Crystal Cavern: +1 Def, +1 Sp. Def) + Light Clay + a fugitive's thank-you (Larch is
+  hiding here in Act IV, foreshadowed).
+
+**Gym 13 trainers (5):** Hiker ×2, Ruin Maniac, Worker, Gemcutter *(Lady)*. Lv 59–62.
+
+---
+## Gym 14 — Gravenmoor, the Hollow Cathedral · Ysolde Ashgrave (Ghost, `:HOLLOW_CATHEDRAL`, cap 67) · ★★★★★★★★★
+
+**Core rule: the dead walk where you walked.**
+- Ringing the nave bell moves you between the **Living Nave** (391) and the **Dead Nave** (392): twin maps, same x,y,
+  through `pfp_swap_map`.
+- The Dead Nave has ghost walls and broken floors (open crypts).
+- **Pews** are real in both worlds: push one in the Living Nave, where the floor is whole, and it stands in the same
+  place in the Dead Nave, **bridging an open crypt**.
+
+**Twist:** bridging the dead world from the living one. **Combine:** in the Requiem Crypt, **Morwen's echo** replays your
+last 12 steps when you ring the hand-bell, then stays where those steps ended, holding a plate while you walk elsewhere.
+**Mastery:** Morwen's chapel and the letter for Kestrel.
+**Warden link:** "The dead aren't gone here. They're just very bad at conversation." Ysolde keeps Morwen's promise. The
+echo *is* Morwen's lingering echo, and her chapel holds the sealed letter (story K6). **Field:** Hollow Cathedral
+(Consecrated stage 2). **Kingdom:** Antumbra's mournful province.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S370 | `G14_NAVE_DONE` | |
+| S371 | `G14_CRYPT_DONE` | |
+| S372 | `G14_CHAPEL_DONE` | |
+| V370 | `G14_ECHO_LEN` | steps recorded (0–12) |
+Pew positions: `pfp_save(:g14_pews)`, restored on **both** 391 and 392 (the twin rule). The echo's recorded path is an
+array in `pfm`.
+
+### 390 Narthex — TEACH (21×17)
+The bell-rope toggles between two small twin rooms. A pew in the living room is pushed one tile over a crack, and in the
+dead room that crack is an open grave the pew now spans. Ysolde: "Whatever you move among the living, the dead must
+walk around."
+
+### 391 / 392 Living and Dead Naves — TWIST (29×25 twins)
+- Pews: 6 (pushable, horizontal 2-tile pews are two linked events moved together by the helper).
+- Ghost walls (392 only) close the side aisles. Open crypts (392 only) cut the central aisle into three islands.
+- The altar door (392 only) is at the north end.
+- **Rule:** you can only *push* pews in 391 (the dead can't move wood). In 392 they are fixed.
+- **Intended:**
+  1. In the living nave, push pews 2 and 5 into the central aisle over the crypt marks: bridges in the dead nave.
+  2. Push pew 3 *out* of the aisle where it would block the dead nave's only path round the ghost wall.
+  3. Ring, then walk the dead nave over the pew bridges to the altar door.
+- The trap: a pew pushed onto a crypt mark in the *wrong* orientation blocks the aisle in both worlds. The apprentice
+  resets the pews.
+- Builder: verify with the two-map BFS (positions × world).
+
+### 393 Requiem Crypt — COMBINE "the echo" (29×25)
+- **Echo rule:** ring the hand-bell to start recording (a chime). Each step is stored, up to 12. Ring again to stop:
+  Morwen's echo appears at the start square and walks your recorded steps, then **stays** (and holds plates). Ringing
+  again erases her. One echo at a time.
+- The crypt door needs **three plates** held at once. You stand on one; the echo stands on another; the third is under
+  the coffin lid that only the echo can pass (ghost wall).
+- **Intended:**
+  1. Record the walk through the ghost wall *in the dead nave* and onto plate C. Swap there, record 6 steps, and stop.
+  2. Return to the living nave by ringing the main bell (the echo stays in the dead world, on C).
+  3. Push the last pew onto plate B. Stand on A.
+- Uses all three systems: worlds, pews, echo. Builder: verify with the BFS.
+
+### 394 Warden Arena (21×17)
+Ysolde, **double battle**. Badge 14 + TM30 Shadow Ball.
+
+### 395 Morwen's Chapel — MASTERY (optional; 17×13)
+- Six candles. Morwen's echo lights them **in the order you lit them last time you were here**, which on a first visit
+  is none.
+- The gravestone verses give the order. The aha: record your path past the candles with the echo, so the *echo* lights
+  the last candle while you stand at the lectern (two candles are on opposite sides of a ghost wall).
+- **Reward:** Magical Seed ×2 (on Hollow Cathedral: +1 Sp. Def, the holder becomes part Ghost) + Spell Tag + **Morwen's
+  sealed letter** (story K6; Ysolde: "When he's ready. I don't think anyone is ever ready.").
+
+**Gym 14 trainers (6):** Channeler ×3, Gentleman (revenant), Lady, Mourner-acolyte *(HOLLOW)*. Ghost trainers exist only in
+392. Lv 63–66.
+
+---
+## Gym 15 — Cogsworth, Strade Works · Magnus Strade (Steel, `:FACTORY`, cap 71) · ★★★★★★★★★★
+
+**Core rule: tolerances.** The whole works runs on **one clock that ticks when you step**. Every player step (or a press of
+a **time-clock** punch, which spends a tick standing still) advances V375 (0–3).
+- **Belts** move what stands on them 1 tile per tick: you, crates, Magnus's Klink.
+- **Presses** slam on their beat (a press marked "2" is down on tick 2). Being under a press when it comes down = "Line
+  stop!" → back to the room start.
+- **Lever groups** reverse whole sets of belts.
+
+It is turn-based: no reflexes, only precision. **Twist:** reversing groups shares belts between routes. **Combine:** the
+**crane** drops a crate where you choose. A crate under a press when it slams **jams it open forever** (a permanently
+safe tile). Crates ride belts, so you drop them *upstream* and let the line deliver them. **Mastery:** three crates, three
+bays, the same tick.
+**Warden link:** "I don't build weapons. I build tolerances." "Engineering will give us the next three hundred [years]."
+Magnus believes in precision, and in the story he built the Arbiter core. The crane-jam is "breaking his machine
+correctly", the same choice his Act V governor scene asks of him. **Field:** Factory (Explosion → Scrapyard). **Kingdom:**
+Zenith's foundry district under martial law.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| V375 | `G15_TICK` | 0–3 (`pfp_step_hook` +1 per step; time-clock +1) |
+| S375 / S376 / S377 | `G15_GROUP_A/B/C` | belt groups reversed |
+| S378 | `G15_LINE_DONE` | 411 cleared |
+| S379 | `G15_BAY_DONE` | 412 cleared |
+| S475 | `G15_LAB_DONE` | 414 cleared |
+Jammed presses are self switch A on each `Press` event. Crate positions use `pfp_save(:g15_<room>)`.
+- **Belt events:** a `touch` page that calls `pfp_push_line(dir, :belt)` *on the tick* (the step hook moves everything on
+  belts one tile per tick, in event-ID order: crates first, then you).
+- **Press events:** page `[V375≥k]` shows the down graphic on beat k (two-page pattern). The step hook checks whether
+  anyone is under a down press.
+
+### 410 Gatehouse — TEACH (21×17)
+One belt and one press (beat 2), and a time-clock beside the belt. Ride the belt; punch the clock once so the press
+lifts before you arrive. Klink foreman: "The line moves when you move. Mr. Strade likes it that way."
+
+### 411 Assembly Line — TWIST (29×25, schematic)
+- Five belts in a serpentine to the exit (E (27,1)), crossed by three presses (beats 0, 1, 3).
+- Groups: **A** = belts 1 and 3 · **B** = belts 2 and 3 · **C** = belts 4 and 5. Levers on side platforms.
+- **The twist:** belt 3 is in two groups. The forward route needs belt 3 forward and belt 2 *backward* (to carry you to
+  the lever for C). So pull **A then B** (belt 3 flips twice = forward, belt 2 backward, belt 1 backward). Ride 2 to the
+  C platform, pull C, then use the time-clock twice before the beat-3 press on belt 5.
+- Builder: verify with the tick BFS (state = position × tick × groups).
+
+### 412 Crane Bay — COMBINE (29×25)
+- Crane control (action menu: `← → Drop`) on a gantry over three belt lanes. Three crates in the hopper.
+- Four presses guard the only route (beats 0–3, one per beat, so some press is always down).
+- **Intended:** drop crate 1 on lane 2 two tiles upstream of press P2 so it arrives on P2's beat and jams it. Drop crate
+  2 on lane 3 for P4 (the lane is reversed by group lever C first). P1 and P3 you time with the clock. The route then
+  needs only two waits.
+- **The aha:** you don't beat the machine, you *feed* it. A crate that arrives a tick late is crushed into scrap (Klink:
+  "Tolerance exceeded.") and the crane refills after a reset.
+- Builder: verify with the tick BFS.
+
+### 413 Warden Arena (21×17)
+Magnus, single battle. The partner battle with his apprentice comes just before, in the story. Badge 15 + TM91 Flash
+Cannon. Dive (HM06) comes from the bathysphere works.
+
+### 414 Tolerance Lab — MASTERY (optional; 21×15)
+- Three belts converging on three bays. Each bay must receive its crate **on the same tick** (the bay doors close one
+  tick after the first crate).
+- Crates are placed by the crane at chosen distances. Belts have different lengths (5, 7, 8), so the drops must be
+  staggered by the clock.
+- **Reward:** Synthetic Seed ×2 (on Factory: +1 Atk, +1 Speed) + Metal Coat + Magnus's tolerance gauge (lore: the
+  Arbiter core's spec sheet margin note, "±0. No exceptions.").
+
+**Gym 15 trainers (6):** Engineer ×2, Worker ×2, Scientist, Meridian Foreman *(MERIDIAN_*)*. Lv 67–70.
+
+---
+## Gym 16 — Underveil, the Hall of Whispers · Nyx Calloway (Dark, `:NEW_MOON`, cap 75) · ★★★★★★★★★★
+
+**Core rule: information is the key.**
+- **Guards** walk fixed, step-driven patrols. They see 3 tiles ahead in the dark and **5 in lamplight** (essentials
+  trainer sight, with lamplit tiles lengthening it). Seen = "Caught!" → back to the room start (no battle after the
+  first).
+- **Shuttered lanterns** light corridors, and a guard who sees a lantern open **turns to face it**.
+
+**Twist:** use the lanterns to turn guards. **Combine:** in the Vault, every **secret** (dossier) you take **re-routes the
+doors**, and taking one in the wrong order seals you in, until you **put it back** (taking is reversible). **Mastery:** the
+Ledger: what will you sell?
+**Warden link:** "Everything has a price. Yours just went up." Nyx trades in secrets. The Vault literally makes knowledge
+change the building, and the Mastery is a moral choice about information (she sold Voss the Gilded Chain's location).
+**Field:** New Moon (darkness lowers accuracy). **Kingdom:** Nadir's undercity, Underveil in drowned Aurelia's towers.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| S380–S383 | `G16_LANTERN_1..4` | 431 shutters open |
+| S384 | `G16_GALLERY_DONE` | |
+| S480–S484 | `G16_DOOR_1..5` | 432 doors d1–d5 open (the R1–R2 wall has no door) |
+| V380 | `G16_CAUGHT` | hint tiers |
+
+### 430 Vestibule — TEACH (21×17)
+One guard walking a square loop and one lantern. Open the lantern: the guard turns to look at it, and you slip past
+behind him. Nyx's voice over a speaking-tube: "Light is a lie you tell guards, darling."
+
+### 431 Gallery of Shadows — TWIST (29×25)
+- Three guards on loops of 8, 10 and 12 steps (all step-driven, so the loops are exact) and four lanterns.
+- The exit is behind guard 3's loop, which watches it.
+- **Intended:**
+  1. Open lantern 2 to turn guard 1 north.
+  2. Wait in the alcove (guards never look into alcoves) for guard 2's loop to reach its far end (5 steps).
+  3. Open lantern 4 at the exit, which turns guard 3 to face it, *away from you*. Close lantern 2 behind you so guard
+     1 resumes his loop without seeing the alcove.
+- Builder: verify with the patrol BFS (state = position × step mod 120 × lanterns).
+
+### 432 The Vault — COMBINE "knowledge moves the walls" (29×25)
+Rooms: **H** (hall, start), **R1**, **R2**, **R3** (one dossier each: A, B, C; "held" = self switch A on the dossier
+event), **X** (exit). Doors: d1 H–R1 · d2 H–R2 · d3 R2–R3 · d4 R3–X · d5 R1–R3.
+- **Start open:** d1, d3, d5.
+- **Taking (or returning) a dossier toggles two doors:** **A** (R1): d1, d5 · **B** (R2): d1, d2 · **C** (R3): d4, d5.
+- **Goal:** reach X holding all three.
+- **Verified (BFS): 12 actions.**
+
+| # | Action | Doors open afterwards |
+|---|---|---|
+| 1–3 | d1 → R1, d5 → R3, d3 → R2 | d1, d3, d5 |
+| 4 | **take B** | d2, d3, d5 |
+| 5–6 | d3 → R3, d5 → R1 | |
+| 7 | **take A** | d1, d2, d3 |
+| 8–10 | d1 → H, d2 → R2, d3 → R3 | |
+| 11 | **take C** | d1–d5 |
+| 12 | d4 → X | |
+
+- **The trap that teaches:** taking A first seals R1 (no open door). Nyx: "Caught with your hand in the drawer. Put it
+  back, or stay." Returning it re-toggles the doors.
+- Each dossier's text is a real secret (guard rotas, the Sump Barons' tithe, and one about *you*), so the information
+  is the reward.
+- **Hints (informant "Crow"):** 1 "Every secret changes who can walk where. Read before you take." 2 "Take the one
+  that opens the way you came in." 3 the table.
+
+### 433 Warden Arena (21×17)
+Nyx, **double battle** ("two shadows"). Badge 16 + TM79 Dark Pulse.
+
+### 434 The Ledger — MASTERY (optional; 17×13)
+- A two-guard stealth room (lanterns only) leading to Nyx's ledger. At the ledger you choose which of the three
+  dossiers to **sell back** to her: the price is one dossier.
+- Each choice opens a different strongbox (one TM-rich, one seed-rich, one lore: the Gilded Chain bill of sale, which
+  reveals her sale to Voss). Recorded as a Core choice key (narrative team: `:g16_ledger`, proposal).
+- **Reward (any box):** Magical Seed ×2 (on New Moon: +1 accuracy and Focus Energy) + Black Glasses, plus the box's extra.
+
+**Gym 16 trainers (6):** Burglar ×2 (guards), Gambler, Rocker, Hollow Defector *(HOLLOW)*, Informant *(Lady)*. Lv 71–74.
+
+---
+## Gym 17 — Gloaming, the Storybook Gym · Celestine Aubade (Fairy, `:FAIRY_TALE`, cap 80) · ★★★★★★★★★★
+
+**Core rule: she cannot lie, but she can phrase.** Everyone in the storybook is truth-bound (Gloaming's oath). Every
+statement is literally true, and the puzzles are about what the statements *don't* say: knights-and-knaves logic with
+true-but-misleading phrasing.
+- **Teach:** one door and one truthful sign.
+- **Twist:** the Red Path. True signs mislead you off the path, and off the path is the wolf.
+- **Combine:** the Midnight Ballroom. A 40-step clock, dancers on fixed loops, and truthful guests who each know one
+  thing.
+- **Gauntlet:** the Eight Princesses (the Eeveelution gauntlet), whose statements together locate the last key.
+- **Mastery:** the Ninth Door.
+
+**Warden link:** "I cannot lie. I can, however, *phrase*." The keeper of the Hymn has made true-but-misleading speech an
+art. **Field:** Fairy Tale (Dragon moves wake the Dragon's Den). **Kingdom:** Elowen's twilight heart.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| V385 | `G17_CLOCK` | ballroom steps used (0–40) |
+| S385 / S386 | `G17_PATH_DONE / G17_BALL_DONE` | |
+| S387 | `G17_PRINCESSES` | all eight beaten (also S177 EEVEE_OCTAVE story flag) |
+| S388 | `G17_NINTH_DONE` | |
+Princess defeats use their trainer self switches.
+
+### 450 Prologue Page — TEACH (21×17)
+Two doors. The sign says: "*At least one of these doors leads on.*" The left door's plaque: "*The right door leads on.*"
+- If the left plaque were false, both doors would be dead ends. That breaks the sign, and nothing here can lie.
+- So the left plaque is true: the right door leads on. A wrong door opens onto a painted wall (harmless).
+
+### 451 The Red Path — TWIST (29×25)
+- A forest page with a red path. Stepping off it summons the wolf (a trainer battle once, then a reset to the page start).
+- Three forks, each with a truthful signpost:
+  - **Fork 1:** "*The left way is shorter.*" (true, but it ends at the wolf's den).
+  - **Fork 2:** "*Grandmother lives at the end of a path.*" (true, but it doesn't say *this* path).
+  - **Fork 3:** "*Not every red stone is the path.*" Three red stones; the path continues through the one that is *not*
+    painted.
+- **Solution:** right, right, the unpainted stone.
+- Celestine's narration on each reset: "And the child thought: *but it was true!* And so it was."
+
+### 452 Midnight Ballroom — COMBINE (29×25)
+- The stair must be reached in ≤ 40 steps (V385; the clock strikes at 40 → "The spell breaks!" and you are back at the
+  door). On Casual: 60.
+- Six dancers on fixed loops: step-driven, and touching one costs 3 steps.
+- Three truthful guests, each saying one thing:
+  - "*The stair that isn't gold is behind a pillar.*"
+  - "*I've never seen anyone leave by the silver stair.*" (true: nobody has, but it works)
+  - "*The east stair is gold.*"
+- Two stairs (gold east, silver west) and only the silver one leads on.
+- **Intended route:** 32 steps through the dancers' gaps, west to the silver stair.
+- Builder: verify with the step BFS (dancers deterministic).
+
+### 453 The Eight Princesses — GAUNTLET (29×25)
+Eight alcoves, each guarded by a princess trainer with one Eeveelution ace (the Rejuvenation trope; S177). Beat them in
+any order. Each loser gives one true statement about where the **Sylveon key** is hidden among the eight alcoves.
+- Together the statements locate it uniquely, but only after all eight.
+- The tricky one is Umbreon's: "*It's not in an alcove I'd ever enter.*" She is afraid of light, so it's in a lit
+  alcove.
+- Walking to the right alcove opens the stair. Statements are listed in the event text; the unique answer is the
+  Glaceon alcove (cold, lit, east).
+
+### 454 Warden Arena (21×17)
+Celestine, single battle (multi-bar boss on Hard). Badge 17 + TM21 Dazzling Gleam.
+
+### 455 The Ninth Door — MASTERY (optional; 17×13)
+- Three doors and three storybook guards: the Knight (always true), the Courtier (true but always *phrases* — never
+  answers yes/no directly), and the Mirror (repeats the last true thing said).
+- You may ask one question from a list. The only question that resolves it is to ask the Courtier "*Which door would
+  the Knight tell me is the right one?*" The Courtier must answer with a phrasing that names a door: true.
+- **Reward:** Magical Seed ×2 (on Fairy Tale: +1 Sp. Atk, +1 Sp. Def) + Fairy Feather + a page of the Hymn of Return in
+  Celestine's hand.
+
+**Gym 17 trainers:** 8 princesses + Lady + Beauty. Lv 76–79.
+
+---
+## Gym 18 — Wyrmrest, the Weighing Hall · Sigrun Ashfall (Dragon, `:DRAGONS_DEN`, cap 85) · ★★★★★★★★★★
+
+**Core rule: nothing passes unweighed.** Dragons weigh what passes their gate. **Scales** lower bridges when balanced.
+**Statues** turn on chains, and each chain drags its two neighbours (Gym 1's threads, grown up). The **magma tide**
+rises and falls every 10 steps (`pfp_step_hook`), and crust paths exist only at low tide.
+- **Teach:** one scale.
+- **Twist:** the statue ring.
+- **Combine:** hoard weights pushed across tide crust onto two scales.
+- **Mastery:** the Weighing of the Heir, which uses all three.
+- The gym also **recalls** the journey: chains (Gym 1), tide (Gym 3), Strength (Gym 8), Rock Climb and Waterfall
+  (Gyms 10/11).
+
+**Warden link:** "Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed." Sigrun refuses the
+badge until you say aloud what you intend (story). The final scale weighs *you*. **Field:** Dragon's Den (Wyrmfire stage
+2). **Kingdom:** Ashkaar's holiest roost.
+
+### State
+| ID | Name | Use |
+|---|---|---|
+| V390 | `G18_TIDE` | 0 low · 1 high (toggled every 10 steps) |
+| V391 / V392 | `G18_PAN_A / G18_PAN_B` | weight on each scale |
+| S390 / S391 / S392 | `G18_RING / G18_SCALES / G18_HEIR` | rooms done |
+Statues are one-hot `pfp_state` (4 facings: 0 N, 1 E, 2 S, 3 W). Hoard piles use `pfp_save`.
+
+### 470 Gate — TEACH (21×17)
+One scale needing 5 and two hoard piles (2 and 3). Push both onto the pan and the bridge lowers. A dragon-tamer: "The
+roost counts. It always counts."
+
+### 471 Wyrm's Spine — RECALL (29×25)
+- A climbing gauntlet: Rock Smash, Strength (one Sokoban push), Rock Climb, Waterfall.
+- The magma tide toggles every 10 steps; crust paths (`[V390≥1]` = magma, impassable) are open only at low tide.
+- Teach the tide here with a counter brazier (it flares at 7, 8, 9).
+- Two dragon-tamer battles mid-climb.
+
+### 472 Statue Court — TWIST "the chained ring" (29×25)
+- Five dragon statues around the altar. Chains (visible) link **S1–S2–S3–S4–S5–S1**.
+- Turning a statue (action, 90° clockwise) also turns its two chained neighbours 90° clockwise.
+- **Goal:** each faces the altar.
+  - Positions: S1 north (faces S = 2), S2 east (faces W = 3), S3 south-east (faces N = 0), S4 west (faces E = 1), S5
+    south-west (faces N = 0).
+  - The chains cross the court, so ring order ≠ compass order, deliberately; follow the chains.
+- **Start: S1–S5 = E, W, N, S, E (1, 3, 0, 2, 1). Target: 2, 3, 0, 1, 0.**
+- **Verified (exhaustive, mod 4): unique solution, 9 turns:** S1 ×2, S3 ×2, S4 ×2, S5 ×3.
+- **Hints (tamer "Ingrid"):** 1 "Follow the chains, not the compass." 2 "S2 needs no turn of its own." 3 the counts.
+
+### 473 Hoard Scales — COMBINE (29×25)
+- Two scales: **A needs 9**, **B needs 10**. Five hoard piles: **1, 2, 3, 5, 8** (Strength), total 19.
+- Tide crust: piles can cross the magma channel only at low tide, and a push onto a crust tile when the tide turns
+  sinks the pile. Sunk piles return to the hoard (fair reset). The 8-pile is slow (it moves 1 tile per 2 pushes).
+- **Valid partitions (exhaustive):** A {1,8} + B {2,3,5}, or A {1,3,5} + B {2,8}.
+- The geometry makes the 8 reachable only to B's side (it can't make the tide window to A), so **A {1,3,5}, B {2,8}**.
+- **Intended:** push 2 and 8 to B during two low tides (the 8 needs both windows). Ferry 1, 3 and 5 to A across the
+  short crust.
+
+### 474 Warden Arena (21×17)
+Sigrun, single battle on `:DRAGONS_DEN`. Before the badge, she asks you to say what you intend (story, S153). Badge 18 +
+TM59 Dragon Pulse.
+
+### 475 The Weighing of the Heir — MASTERY (optional; 21×17)
+- One great scale, a three-statue chain ring, and the tide.
+- The pan needs **your weight plus 3**. You stand on it yourself (the scale reads the player as 5), so you push the
+  3-pile on and then step on.
+- The statues must face the pan, and the chain ring can only be turned from tiles that are crust at low tide. Plan all
+  three within one tide window.
+- **Reward:** Elemental Seed ×2 (on Dragon's Den: +1 Atk, +1 Speed and Flash Fire) + Dragon Fang. Sigrun: "It weighed
+  you and let you pass. It never let me."
+
+**Gym 18 trainers (6):** Dragon Tamer-style Cool Trainer ♂/♀ ×4, Ace Trainer ×2. Lv 81–84.
+
+---
+## 4. What the map builder must add to the toolchain
+
+1. **`mapgen/ruby/007_Puzzles.rb`** (runtime, copied to `Plugins/Prismfall Maps/`): every helper in §3. The big ones:
+   - **one-hot state** (`pfp_state`);
+   - **position save/restore + Restorer** (`pfp_save` / `pfp_restore!`);
+   - **twin-map swap** with landing fix-ups (`pfp_swap_map`);
+   - **forced-line movement** for belts, wind, currents and ice blocks (`pfp_push_line`);
+   - **beam tracer** (`pfp_beam`) and **power tracer** (`pfp_power`);
+   - **step hooks** (`pfp_step_hook`: tick clocks, filter budgets, tide, pursuers, mirror and echo walkers);
+   - **checkers** (`pfp_check`) with per-reason failure text;
+   - **apprentice** support (`pfp_hint`, `pfp_skip?`).
+2. **Builder macros in the generator scripts** (like `plank_events` in `gen_gym1.py`):
+   - multi-page exact-value events;
+   - lettered state-maze tiles (Gym 2's `s/f/t/S/F/T`);
+   - visit-once tiles;
+   - lane/belt/wind tiles with a direction source;
+   - press and hazard events on a tick;
+   - pushable crates and ice blocks;
+   - pursuer, mirror and echo events;
+   - the apprentice NPC (menu + reset script).
+3. **Followers:** a DSL hook for `Followers.add/remove` (the Gym 4 drone). Auto-remove followers on map exit.
+4. **Pushable physics:**
+   - `pbPushThisEvent` (crates) and `pbPushThisBoulder` (Strength);
+   - **sliding blocks** (push → slide until stopped);
+   - **2-tile objects** (pews) moved as one;
+   - "drop into hole → plug" (Gym 10).
+5. **Rotating tiles:** one-hot rotation events with charsets whose 4 rows are the 4 rotations (conduits, mirrors,
+   statues, vanes). **Turntable ride** for Gym 2 153 (the player is moved with the floor).
+6. **Light beams and power:** `Beam x,y` / `Strip x,y` overlay events generated on every cell a beam or strip can occupy,
+   lit by the tracers.
+7. **Conveyors, currents, wind:** forced movement with stacking (objects stop against objects) and a tick order.
+8. **Twin maps:** spec support for "variant of map N" (shared walls, per-variant events), as Gym 3 already does by
+   hand. Used by Gyms 3, 5, 10, 14 and several dungeons.
+9. **Art the puzzles need** (Art Director): silk heddles and spools, stage flats (ship/forest/throne), rope rails,
+   gangplank/log/dais, rafts and a lock gate, conduit pieces (I/L/T in 4 rotations) and lit strips, sun-mirrors and
+   crust/soft sand, flasks and funnels, crucibles/molten/iron channels and moulds, rope lines, garden plots (4 stages),
+   cracked/broken/plugged ice, gust lanes and vanes, mirror panes, beam segments in 5 colours (each colour also has a
+   *pattern*, for colour-blind players), pews and an echo sprite, belts/presses/crane, lanterns and guards' sight-cone
+   decals, storybook flats, hoard piles and scales.
+10. **Verification:** a `mapgen/puzzles/` package of small Python state models (the ones used for this spec: heddles,
+    spools, stage maze, raft drift, conduits, falls, rings, ice slides, mirror walker, vanes, beams, vault). The builder
+    runs them in `build.py` and fails the build if a room's start state can't reach its goal or can reach a dead end
+    without an apprentice.
+11. **Registry:** extend `flags.yaml` with §1's blocks and raise the installer's switch/variable maximum to 600.
+12. **Password:** Core gains `puzzleskip` (`:PUZZLE_SKIP`, writes S301). It's owned by the Systems team; this is the
+    request.
+
+## 5. Verification log (what was proven while writing this spec)
+Exhaustive search or BFS in Python state models (scratch copies in `/tmp/pstudy/solve/`; the builder ports them):
+- Gym 1 131 (3 pulls; start state no longer a solution), 132 (8 actions; unsolvable without the brass wire), 134
+  (unique 3 treadles).
+- Gym 2 151+152 (Script order forced; unsolvable without the loft), 153 (3 cranks).
+- Gym 3 basins (16 actions), with the gate also blocking the Low trench.
+- Gym 4 191 (door 4 / side 2 / alarm on the naive route), 950 (11 clicks).
+- Gym 5 (drop required; flood-fill of the five Under-Dig galleries).
+- Gym 9 291 (2 vs 5 waterings), 292 (7 vs 8), 297 (6).
+- Gym 10 311 (17), 312 (16, pushing required), 315 (33).
+- Gym 11 331 (14).
+- Gym 12 351 (26).
+- Gym 13 371 (3 turns; alarm and side configurations).
+- Gym 16 432 (12).
+- Gym 18 472 (unique, 9 turns); 473 partitions.
+**Builder must still verify** (rules fixed here, exact boards to finalise with the solver): Gym 7 (hand-proved; small),
+Gym 8 271–275 (pursuers), Gym 11 332, Gym 12 352, Gym 13 372, Gym 14 391–393, Gym 15 411–414, Gym 16 431, Gym 17 452,
+Gym 18 473/475 geometry.

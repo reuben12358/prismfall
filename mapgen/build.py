@@ -476,6 +476,8 @@ def walk_check(spec, ctx, m):
     for e in m.events.values():
         if not any(c.code != 0 for p in e.pages for c in p.list):
             continue
+        if all(p.trigger in (3, 4) for p in e.pages):          # autorun / parallel: nobody walks to them
+            continue
         if not any(0 <= e.x + dx < W and 0 <= e.y + dy < H and seen[e.y + dy, e.x + dx]
                    for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0))):
             ctx.warn(spec['id'], 'event "%s" at %d,%d cannot be reached on foot from the first door/warp' % (e.name, e.x, e.y))
@@ -663,6 +665,7 @@ def main():
                             tw, th = next(x['_size'] for x in specs if x['id'] == tm)
                             if not (0 <= c.parameters[2] < tw and 0 <= c.parameters[3] < th):
                                 ctx.warn(s['id'], 'event "%s" transfers outside map %d' % (ev.name, tm))
+    ctx.arrival_bad = check_arrivals(selected, specs, ctx)
     # trainers referenced by events -> list for the trainer-data owner
     need = set()
     for s in selected:
@@ -684,6 +687,61 @@ def main():
     print('%d maps; %d warnings' % (len(selected), len(ctx.warnings)))
     if '--strict' in sys.argv and getattr(ctx, 'material_bad', 0):
         sys.exit('--strict: %d tiles of a material their map\'s biome forbids (see MATERIAL warnings)' % ctx.material_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'arrival_bad', 0):
+        sys.exit('--strict: %d blocked arrival / door tiles (see ARRIVAL warnings)' % ctx.arrival_bad)
+
+
+def check_arrivals(selected, specs, ctx):
+    """Playtest blockers (2026-11-17): every Transfer Player of a built map must land on a passable tile that no solid
+    event or decor covers; a door tile (interior exits land on it) and the tile below it (the door event walks the player
+    out) must be passable.  Returns the number of problems; each is an ARRIVAL warning."""
+    import render as R
+    built = {s['id'] for s in specs}
+    cache = {}
+
+    def load(mid):
+        if mid not in cache:
+            p = os.path.join(OUT, 'Data', 'Map%03d.rxdata' % mid)
+            cache[mid] = M.load_file(p) if os.path.exists(p) else None
+        return cache[mid]
+
+    def solid_event(m, x, y, skip=None):
+        for ev in m.events.values():
+            if ev.x == x and ev.y == y and ev is not skip:
+                pg = ev.pages[0]; g = pg.graphic
+                if (g.character_name or g.tile_id) and not pg.through: return ev.name
+        return None
+
+    def is_door(ev):
+        return any(c.code == 201 for p in ev.pages for c in p.list) and any(
+            c.code == 209 for p in ev.pages for c in p.list)
+
+    bad = 0
+    sel = {s['id'] for s in selected}
+    for s in specs:                                         # every built map's transfers, reported when either end is selected
+        m = load(s['id'])
+        if m is None: continue
+        for ev in m.events.values():
+            for pg in ev.pages:
+                for c in pg.list:
+                    if c.code != 201 or c.parameters[0] != 0: continue
+                    tm, tx, ty = c.parameters[1], c.parameters[2], c.parameters[3]
+                    if tm not in built or (s['id'] not in sel and tm not in sel): continue
+                    dm = load(tm)
+                    if dm is None: continue
+                    ts = R.tilesets()[dm.tileset_id]
+                    lay = dm.data.data
+                    door_here = next((e for e in dm.events.values() if e.x == tx and e.y == ty and is_door(e)), None)
+                    if not cell_passable(lay, ts, tx, ty):
+                        ctx.warn(s['id'], 'ARRIVAL: "%s" lands on map %d (%d,%d), a blocked tile' % (ev.name, tm, tx, ty)); bad += 1
+                    who = solid_event(dm, tx, ty, door_here)
+                    if who:
+                        ctx.warn(s['id'], 'ARRIVAL: "%s" lands on map %d (%d,%d) under event "%s"' % (ev.name, tm, tx, ty, who)); bad += 1
+                    if door_here is not None and not (cell_passable(lay, ts, tx, ty + 1) and not solid_event(dm, tx, ty + 1)):
+                        ctx.warn(s['id'], 'ARRIVAL: "%s" lands on door "%s" (map %d), but the step out (%d,%d) is blocked'
+                                 % (ev.name, door_here.name, tm, tx, ty + 1)); bad += 1
+                    break
+    return bad
 
 
 def slug(n):

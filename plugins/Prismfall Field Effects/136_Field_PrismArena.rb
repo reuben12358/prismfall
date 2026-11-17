@@ -107,6 +107,7 @@ FieldEffects.register(:PRISM_ARENA, (lambda do
   {
     :name          => "Prism Arena",
     :backdrop      => "field_prism_arena",
+    :family        => :magical,
     :intro_message => "The eighteen Plates blaze in a ring above Crownhaven's arena!",
     :description   => "The Festival finale. Every 3 turns the Plates turn and the arena takes on the next gym field, in a fixed order announced a turn ahead.",
     :notes         => ["Opening: the Plates rest for 3 turns. Then every 3 turns they turn, and the arena takes on a gym field's effects.",

@@ -22,6 +22,16 @@ module FieldEffects
   #-----------------------------------------------------------------------------
   # Wild battles only: per-map field for wild encounters (overrides MAP_FIELDS).
   MAP_WILD_FIELDS = {} unless const_defined?(:MAP_WILD_FIELDS, false)
+  # Interim per-map defaults generated from design/FIELD_DEFAULTS.yaml by
+  # tools/field_defaults_to_rb.rb (011_FieldEffects_MapDefaults.rb). Consulted
+  # only when MAP_FIELDS / MAP_WILD_FIELDS (written by mapgen) have no entry,
+  # so mapgen's output always wins once it consumes the YAML itself.
+  MAP_DEFAULT_FIELDS      = {} unless const_defined?(:MAP_DEFAULT_FIELDS, false)
+  MAP_DEFAULT_WILD_FIELDS = {} unless const_defined?(:MAP_DEFAULT_WILD_FIELDS, false)
+  # Trainer battles with a fixed field regardless of map (tutorial fights,
+  # special indoor battles). Keys: trainer type, or [trainer type, version].
+  # Value: field (:NONE = no field) or [field, stage]. First opponent decides.
+  TRAINER_FIELDS = {} unless const_defined?(:TRAINER_FIELDS, false)
   # Wild battles only: by encounter type. Keys are GameData::EncounterType IDs
   # (:Land, :Cave, :Water, :OldRod...) or their :type (:land, :cave, :water,
   # :fishing, :contest). ID entries win over :type entries. Applied unless the
@@ -36,6 +46,11 @@ module FieldEffects
     :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :BLEED, :PRISM_ARENA],
     :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :FROZEN_LAKE, :BEACH, :BLEED]
   } unless const_defined?(:ENCOUNTER_KEEP_FIELDS, false)
+  # Wild battles on maps with no field of their own (no MAP_FIELDS /
+  # MAP_DEFAULT_FIELDS entry, or :NONE): the encounter type supplies one.
+  ENCOUNTER_FALLBACK_FIELDS = {
+    :cave => :CAVE                # cave encounters -> Cave
+  } unless const_defined?(:ENCOUNTER_FALLBACK_FIELDS, false)
   # Any battle while diving is underwater; while surfing, on the water.
   DIVING_FIELD  = :UNDERWATER
   SURFING_FIELD = :WATER_SURFACE

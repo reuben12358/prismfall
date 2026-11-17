@@ -73,7 +73,7 @@ def build():
     for fx in (3, 9, 14, 19): r.window(fx)
     r.floor(13, 0, 9, 10, FLOOR_TILE)                    # the glasshouse annex: tiled floor, plants, pens
     r.sf('shelf', 0, -2); r.tf('bookcase', 2, -2); r.tf('map_wall', 5, -2); r.tf('console', 8, -1); r.tf('kitchen', 10, -1)
-    r.sf('table_long', 4, 2); r.tf('desk', 0, 5); r.tf('cabinet', 0, 8); r.tf('crate_i', 3, 8); r.tf('barrel_b', 11, 8)
+    r.sf('table_long', 4, 2); r.tf('desk', 0, 5); r.tf('cabinet', 0, 8); r.tf('crate_i', 3, 8); r.tf('barrel_b', 8, 8)   # off the door column (x 11 = map 14: playtest)
     r.rug(4, 5, 5, 3); r.tf('table_dark', 5, 5); r.tf('stool', 7, 6); r.tf('books_open', 4, 6); r.tf('clock', 11, 1)
     r.sf('stairs', 9, 5)                                    # Larch's hayloft (Kestrel sleeps up there)
     for fx, fy in ((13, 0), (21, 0), (13, 8), (21, 8), (16, 8), (19, 3)): r.tf('fern_big' if (fx + fy) % 2 else 'plant', fx, fy - 1 if fy == 0 else fy - 1)
@@ -149,7 +149,7 @@ def build():
     sp = combine([(h, 'BW_GUILD'), (l, None)], head(123), ev)
     xo = sp['_offsets']
     sp['events'] += [{'type': 'warp', 'name': 'Loft stairs up', 'at': [stair_h[0] + xo[0], stair_h[1]],
-                      'to': {'map': 123, 'x': stair_l[0] + xo[1] + 1, 'y': stair_l[1], 'dir': 'right'}, 'se': 'Door exit'},
+                      'to': {'map': 123, 'x': stair_l[0] + xo[1] + 2, 'y': stair_l[1], 'dir': 'right'}, 'se': 'Door exit'},
                      {'type': 'warp', 'name': 'Loft stairs down', 'at': [stair_l[0] + xo[1], stair_l[1]],
                       'to': {'map': 123, 'x': stair_h[0] + xo[0] - 1, 'y': stair_h[1] + 1, 'dir': 'down'}, 'se': 'Door exit'}]
     B.append(sp); done(123)

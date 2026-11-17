@@ -2708,10 +2708,10 @@ tiles:
   at: [7, 14]
   layer: 1
 - tile: 4823
-  at: [14, 13]
+  at: [11, 13]
   layer: 2
 - tile: 4831
-  at: [14, 14]
+  at: [11, 14]
   layer: 1
 - tile: 5411
   at: [7, 10]

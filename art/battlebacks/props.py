@@ -713,3 +713,68 @@ def penrose(size=150, color=(220, 200, 250), dark=(150, 120, 210), light=(250, 2
         poly = [p, q, (q[0] + nx, q[1] + ny), (p[0] + nx, p[1] + ny)]
         d.polygon(poly, fill=C(col), outline=C(outline))
     return im
+
+
+def flame_sheet(w=26, h=44, frames=4, seed=0, outer=(230, 70, 30), mid=(255, 150, 40), inner=(255, 236, 140),
+                outline=(90, 20, 10)):
+    """Flickering flame, horizontal sprite sheet (pivot bottom centre)."""
+    rng = random.Random(seed)
+    sheet = Image.new("RGBA", (w * frames, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(sheet)
+    for f in range(frames):
+        ox = f * w
+        hh = h * rng.uniform(0.75, 1.0)
+        lean = rng.uniform(-4, 4)
+        for (col, k) in ((outline, 1.0), (outer, 0.92), (mid, 0.68), (inner, 0.38)):
+            ww = (w / 2 - 2) * k
+            top = h - hh * k
+            pts = [(ox + w / 2 - ww, h - 2), (ox + w / 2 - ww * 0.8, h - hh * k * 0.45),
+                   (ox + w / 2 + lean * k, top), (ox + w / 2 + ww * 0.8, h - hh * k * 0.5), (ox + w / 2 + ww, h - 2)]
+            d.polygon(pts, fill=C(col))
+        if rng.random() < 0.7:
+            d.ellipse([ox + w / 2 + lean - 2, h - hh - 6, ox + w / 2 + lean + 1, h - hh - 3], fill=C(mid))
+    return sheet
+
+
+def eye_sheet(r=10, frames=4, iris=(220, 30, 50)):
+    w = int(r * 2.6) + 4
+    sheet = Image.new("RGBA", (w * frames, r * 2 + 4), (0, 0, 0, 0))
+    d = ImageDraw.Draw(sheet)
+    for f in range(frames):
+        ox = f * w
+        cx, cy = ox + w / 2, r + 2
+        if f == frames - 1:
+            d.line([(cx - r * 1.2, cy), (cx + r * 1.2, cy)], fill=C((40, 0, 10)), width=2)
+            continue
+        d.ellipse([cx - r * 1.25, cy - r * 0.75, cx + r * 1.25, cy + r * 0.75], fill=C((240, 224, 220)),
+                  outline=C((30, 0, 8)))
+        d.ellipse([cx - r * 0.5, cy - r * 0.5, cx + r * 0.5, cy + r * 0.5], fill=C(iris))
+        d.ellipse([cx - r * 0.2, cy - r * 0.45, cx + r * 0.2, cy + r * 0.45], fill=C((10, 0, 4)))
+        d.point((cx - r * 0.2, cy - r * 0.3), fill=(255, 255, 255, 255))
+    return sheet
+
+
+def rose(len_=14):
+    im = Image.new("RGBA", (len_ + 6, 8), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.line([(0, 5), (len_, 3)], fill=C((40, 110, 50)), width=2)
+    d.ellipse([len_ - 2, 0, len_ + 5, 7], fill=C((210, 30, 50)), outline=C((90, 10, 20)))
+    d.point((len_ + 1, 2), fill=C((255, 120, 130)))
+    return im
+
+
+def flowers_scatter(canvas, region, n, colors, seed=0, min_y=None, size=(1, 3)):
+    """Tiny pixel flowers scattered over a region (denser and bigger toward the bottom)."""
+    rng = random.Random(seed)
+    d = ImageDraw.Draw(canvas)
+    x0, y0, x1, y1 = region
+    for _ in range(n):
+        t = rng.random() ** 0.6
+        y = y0 + (y1 - y0) * t
+        x = rng.uniform(x0, x1)
+        s = size[0] + (size[1] - size[0]) * t
+        col = rng.choice(colors)
+        d.ellipse([x - s, y - s * 0.7, x + s, y + s * 0.7], fill=C(col))
+        if s > 1.5:
+            d.point((x, y), fill=C((255, 240, 150)))
+            d.line([(x, y + s), (x, y + s + 2 + s)], fill=C((60, 130, 60)))

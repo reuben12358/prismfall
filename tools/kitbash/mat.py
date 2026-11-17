@@ -167,3 +167,79 @@ def outline_outer(im, col=BLACK, only_missing=True):
                     q[x, y] = col
                     break
     return out
+
+
+def shear_rows(im, y_anchor, k, direction=1):
+    """lean an object: shift each row above y_anchor by (y_anchor-y)//k pixels (integer row shifts,
+    so straight verticals become clean 1:k stairs and horizontals stay crisp)."""
+    out = Image.new('RGBA', im.size, CLEAR)
+    for y in range(im.size[1]):
+        s = max(0, (y_anchor - y)) // k * direction
+        row = im.crop((0, y, im.size[0], y + 1))
+        out.paste(row, (s, y))
+    return out
+
+
+def dissolve(im, pts):
+    """remove a thin line: each listed pixel takes the majority colour of its non-listed
+    8-neighbours (transparent if most neighbours are transparent). Iterates inward."""
+    out = im.copy(); p = out.load(); w, h = im.size
+    todo = set(pts)
+    for _ in range(6):
+        nxt = set()
+        for (x, y) in sorted(todo):
+            cnt = {}
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    if dx == dy == 0:
+                        continue
+                    xx, yy = x + dx, y + dy
+                    if not (0 <= xx < w and 0 <= yy < h) or (xx, yy) in todo:
+                        continue
+                    c = p[xx, yy]
+                    c = c if c[3] else CLEAR
+                    cnt[c] = cnt.get(c, 0) + (2 if dx == 0 or dy == 0 else 1)
+            if not cnt:
+                nxt.add((x, y)); continue
+            best = max(cnt.items(), key=lambda t: t[1])[0]
+            p[x, y] = best
+        todo = nxt
+        if not todo:
+            break
+    return out
+
+
+def pts_of(im, cols, box):
+    cols = set(cols); p = im.load(); out = []
+    for y in range(box[1], box[3] + 1):
+        for x in range(box[0], box[2] + 1):
+            if p[x, y][3] and p[x, y] in cols:
+                out.append((x, y))
+    return out
+
+
+def component(im, seed, stop=lambda c: False, outline_cols=((0, 0, 0, 255),)):
+    """flood-fill the connected non-transparent, non-outline region from seed, then add the
+    outline pixels that touch it. Returns a new image with only that part."""
+    w, h = im.size; p = im.load()
+    oc = set(outline_cols)
+    seen = set(); st = [seed]
+    while st:
+        x, y = st.pop()
+        if (x, y) in seen or not (0 <= x < w and 0 <= y < h):
+            continue
+        c = p[x, y]
+        if not c[3] or c in oc or stop(c):
+            continue
+        seen.add((x, y))
+        st += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+    out = Image.new('RGBA', im.size, CLEAR); q = out.load()
+    for (x, y) in seen:
+        q[x, y] = p[x, y]
+    for (x, y) in list(seen):
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                xx, yy = x + dx, y + dy
+                if 0 <= xx < w and 0 <= yy < h and p[xx, yy] in oc:
+                    q[xx, yy] = p[xx, yy]
+    return out

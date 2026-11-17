@@ -3222,7 +3222,7 @@ events:
 - type: warp
   name: Loft stairs up
   at: [16, 6]
-  to: {map: 123, x: 26, y: 9, dir: right}
+  to: {map: 123, x: 27, y: 9, dir: right}
   se: Door exit
 - type: warp
   name: Loft stairs down

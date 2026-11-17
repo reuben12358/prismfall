@@ -132,3 +132,6 @@ events:
   link: RIME_GLADE
   arrive: [45, 24, left]
   se: Door exit
+- type: item
+  at: [26, 33]
+  item: ICESTONE

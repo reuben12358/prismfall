@@ -75,4 +75,21 @@ def ROUTES(P):
     # Map 990 test arena dummy
     t("Map 990 Prismfall Test Arena (dummy)", "YOUNGSTER", "Prismtest", "Testing, testing... you win!",
       [m("SNORLAX", 50, "THICKFAT", "HARDY", "TACKLE,DEFENSECURL,REST,SNORE")], cap=50)
+    # Trainers the generated maps use that were missing (playtest, 2026-11-17)
+    t("Map 521 Route 2", "BUGCATCHER", "Wim", '...Assistant Warden.', [m("SPINARAK", 6, "SWARM", "ADAMANT"), m("COMBEE", 7, "HONEYGATHER", "HASTY")])
+    t("Map 521 Route 2", "PICNICKER", "Ada", 'Bless you. Bless both of us.', [m("ODDISH", 6, "CHLOROPHYLL", "MODEST"), m("BUDEW", 7, "NATURALCURE", "MODEST")])
+    t("Map 524 Gossamer Wood", "TWINS", "Mo & Jo", 'We lost together!', [m("KARRABLAST", 9, "SWARM", "ADAMANT"), m("SHELMET", 9, "HYDRATION", "BOLD")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "BUGCATCHER", "Nell", "Knotted up. Tamsin'll untangle you.", [m("SEWADDLE", 11, "SWARM", "ADAMANT"), m("SPINARAK", 12, "INSOMNIA", "ADAMANT")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "LASS", "Orla", 'See? Never the red shuttle first.', [m("LEDYBA", 11, "EARLYBIRD", "JOLLY"), m("SPEWPA", 12, "SHEDSKIN", "BOLD")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "GENTLEMAN", "Bram", 'Sorry. No, wait, you won. Well done.', [m("VENONAT", 12, "COMPOUNDEYES", "MODEST"), m("SEWADDLE", 13, "CHLOROPHYLL", "ADAMANT")])
+    t("Map 525 Gossamer Deepwood", "POKEMANIAC", "Ferris", 'That one hummed. Did you hear it hum?', [m("PARAS", 11, "EFFECTSPORE", "ADAMANT"), m("NINCADA", 11, "COMPOUNDEYES", "JOLLY"), m("YANMA", 12, "SPEEDBOOST", "MODEST")])
+    t("Map 560 Route 5", "LASS", "Tilde", 'My Swinub slid farther than me.', [m("SWINUB", 16, "OBLIVIOUS", "ADAMANT"), m("SNOM", 17, "SHIELDDUST", "MODEST")])
+    t("Map 560 Route 5", "SAILOR", "Haakon", "Ice'll break by summer. Probably.", [m("SPHEAL", 17, "THICKFAT", "MODEST"), m("CETODDLE", 18, "THICKFAT", "ADAMANT")])
+    t("Map 560 Route 5", "BIRDKEEPER", "Ailsa", "Frostwick's gulls wear little ice hats. Not really.", [m("WINGULL", 17, "KEENEYE", "MODEST"), m("DELIBIRD", 18, "HUSTLE", "JOLLY")])
+    t("Map 562 The Rimewood", "BUGCATCHER", "Pell", 'They were NOT happy to be woken.', [m("SNOM", 18, "SHIELDDUST", "MODEST"), m("TAROUNTULA", 19, "INSOMNIA", "ADAMANT")])
+    t("Map 562 The Rimewood", "POKEMONRANGER_F", "Orla", "You'll do. Mind the silk curtains, they cut.", [m("DEERLING", 18, "SAPSIPPER", "JOLLY"), m("SNOVER", 19, "SNOWWARNING", "MODEST"), m("STANTLER", 20, "INTIMIDATE", "ADAMANT")])
+    t("Map 562 The Rimewood", "HIKER", "Ulf", 'Ha! No, no traps for you.', [m("TEDDIURSA", 18, "PICKUP", "ADAMANT"), m("BERGMITE", 19, "OWNTEMPO", "IMPISH")])
+    t("Map 562 The Rimewood", "CAMPER", "Rook", "...Is that what the aurora's for?", [m("CUBCHOO", 18, "SNOWCLOAK", "ADAMANT"), m("SNEASEL", 19, "INNERFOCUS", "JOLLY")])
+    t("Map 562 The Rimewood", "TWINS", "Ana & Ida", 'Two of us lost! Two kingdoms of losing!', [m("MORELULL", 19, "EFFECTSPORE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
+    t("Map 563 Rimewood Glade", "POKEMONRANGER_M", "Sigurd", '...So you cut your way in. Fair.', [m("STANTLER", 19, "INTIMIDATE", "ADAMANT"), m("CRYOGONAL", 20, "LEVITATE", "CALM")])
     return R

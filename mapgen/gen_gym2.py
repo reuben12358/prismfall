@@ -201,6 +201,7 @@ def main():
                      (11, 8, 'NPC 25', 'left', 'I come every night. Every. Night.')])]
     docs.append({'id': 154, 'name': 'Pell Playhouse - The Grand Stage', 'parent': 150, 'template': 'arena',
                  'drop_template_events': ['Champion', 'Door', 'Entrance'], 'bgm': 'Gym', 'field': 'GRAND_STAGE',
+                 'tile_edits': [[1, 6, 11, 0]],      # open the arena template's front wall at the door (arrival 6,11; playtest)
                  'metadata': {'MapPosition': [0, 10, 25]},
                  'events': [{'type': 'warp', 'name': 'To Dressing Rooms', 'at': [6, 12],
                              'to': {'map': 153, 'x': 24, 'y': 5, 'dir': 'left'}},

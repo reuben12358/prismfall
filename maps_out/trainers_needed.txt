@@ -1,7 +1,1 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-120	:HOLLOW_THISTLE, "Thistle"
-562	:BUGCATCHER, "Pell"
-562	:CAMPER, "Rook"
-562	:HIKER, "Ulf"
-562	:POKEMONRANGER_F, "Orla"
-562	:TWINS, "Ana & Ida"

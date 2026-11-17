@@ -333,10 +333,13 @@ end
 module FieldEffects
   # Decides the field for a battle being prepared:
   #   1. setBattleRule("field", ...) ("none" = deliberately no field)
-  #   2. diving -> DIVING_FIELD; wild battles: MAP_WILD_FIELDS, then the encounter
-  #      type (ENCOUNTER_FIELDS: surfing, fishing...) unless the map's own field
-  #      already fits (ENCOUNTER_KEEP_FIELDS); surfing -> SURFING_FIELD
-  #   3. MAP_FIELDS[map_id] (:ID or [:ID, stage]; :NONE = field-free map)
+  #   2. diving -> DIVING_FIELD; trainer battles: TRAINER_FIELDS (tutorials and
+  #      special fights); wild battles: MAP_WILD_FIELDS, then the encounter type
+  #      (ENCOUNTER_FIELDS: surfing, fishing...) unless the map's own field
+  #      already fits (ENCOUNTER_KEEP_FIELDS), then ENCOUNTER_FALLBACK_FIELDS
+  #      (caves) on maps with no field; surfing -> SURFING_FIELD
+  #   3. MAP_FIELDS[map_id], else MAP_DEFAULT_FIELDS[map_id] (:ID or [:ID, stage];
+  #      :NONE = field-free map)
   #   4. ENVIRONMENT_FIELDS[battle.environment] (maps with no entry at all)
   # setBattleRule("fieldStage", n) overrides the starting stage either way.
   def self.apply_battle_rule(battle)
@@ -379,13 +382,17 @@ module FieldEffects
   # [field_id, stage] this battle would get without an explicit "field" rule.
   def self.default_field_for_battle(battle)
     map_id = ($game_map) ? $game_map.map_id : nil
-    map_entry = (map_id) ? MAP_FIELDS[map_id] : nil
+    map_entry = (map_id) ? (MAP_FIELDS[map_id] || MAP_DEFAULT_FIELDS[map_id]) : nil
     map_id_value, map_stage = self.split_field_entry(map_entry)
     glob = (defined?($PokemonGlobal) && $PokemonGlobal) ? $PokemonGlobal : nil
     return [DIVING_FIELD, 1] if glob && glob.respond_to?(:diving) && glob.diving && DIVING_FIELD
     wild = battle.respond_to?(:wildBattle?) && battle.wildBattle?
+    if !wild
+      tid, tstage = self.split_field_entry(self.trainer_field_entry(battle))
+      return [tid, tstage] if tid
+    end
     if wild
-      wid, wstage = self.split_field_entry(map_id ? MAP_WILD_FIELDS[map_id] : nil)
+      wid, wstage = self.split_field_entry(map_id ? (MAP_WILD_FIELDS[map_id] || MAP_DEFAULT_WILD_FIELDS[map_id]) : nil)
       return [wid, wstage] if wid
       enc = self.encounter_override(map_id_value)
       return [enc, 1] if enc
@@ -399,6 +406,15 @@ module FieldEffects
     env_field = (env) ? ENVIRONMENT_FIELDS[env] : nil
     return [env_field, 1] if env_field && self.exists?(env_field)
     return [NONE, 1]
+  end
+
+  # TRAINER_FIELDS entry for the battle's first opponent ([type, version] first).
+  def self.trainer_field_entry(battle)
+    return nil if TRAINER_FIELDS.empty? || !battle.respond_to?(:opponent)
+    trainer = Array(battle.opponent).first
+    return nil if !trainer || !trainer.respond_to?(:trainer_type)
+    version = (trainer.respond_to?(:version)) ? trainer.version : 0
+    return TRAINER_FIELDS[[trainer.trainer_type, version]] || TRAINER_FIELDS[trainer.trainer_type]
   end
 
   def self.split_field_entry(entry)
@@ -421,6 +437,14 @@ module FieldEffects
       next if Array(ENCOUNTER_KEEP_FIELDS[key]).include?(map_field)
       target = self.normalize_id(ENCOUNTER_FIELDS[key])
       return target if target != NONE && self.exists?(target)
+    end
+    # Maps with no field of their own: the encounter type picks one (caves -> Cave)
+    if map_field.nil? || map_field == NONE
+      [enc, kind].compact.each do |key|
+        next if !ENCOUNTER_FALLBACK_FIELDS.key?(key)
+        target = self.normalize_id(ENCOUNTER_FALLBACK_FIELDS[key])
+        return target if target != NONE && self.exists?(target)
+      end
     end
     return nil
   end

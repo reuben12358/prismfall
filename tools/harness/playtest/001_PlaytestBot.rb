@@ -42,6 +42,20 @@ module PlayBot
   ]
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
   ROUTE1_PLAN = [[:goto, 520, 12, 54], [:goto, 520, 10, 44], [:goto, 520, 16, 38], [:goto, 520, 16, 34], [:done]]
+  # PLAYBOT_SESSION=checks: real map lines with glyphs the fonts lack, a quest-log line, then every trainer added on
+  # 2026-11-17 (AI vs AI, two turns each) - checks 002_Font_Glyphs.rb and the new PBS entries in the engine
+  CHECK_LINES = [
+    "\\pf[EDDA,shocked,dots]Edda: Don't lean on my rail like that, you'll\u2014 huh.",
+    "\u2191 Tidewatch Station (Prof. I. Larch) \u00b7 \u2192 Hale's Bramble \u00b7 \u2190 Lighthouse (KEEP OUT. THIS MEANS YOU, KESTREL.)",
+    "The last page: \"Received of the Meridian Concord, for stewardship rights, Lattice 15: \u20bd400,000. Signed, T. Loom, Warden.\"",
+    "A fierce old woman at a loom. Brass plate: \"Mother Loom, Warden AF 247\u2013299. 'Twist it or lose it.'\"",
+    "Smart quotes and ellipsis are real glyphs: \u201cfine\u201d, \u2018fine\u2019\u2026"
+  ]
+  CHECK_TRAINERS = [[:YOUNGSTER, "Pim"], [:LASS, "Dory"], [:BUGCATCHER, "Wim"], [:PICNICKER, "Ada"], [:TWINS, "Mo & Jo", true],
+                    [:BUGCATCHER, "Nell"], [:LASS, "Orla"], [:GENTLEMAN, "Bram"], [:POKEMANIAC, "Ferris"], [:LASS, "Tilde"],
+                    [:SAILOR, "Haakon"], [:BIRDKEEPER, "Ailsa"], [:BUGCATCHER, "Pell"], [:POKEMONRANGER_F, "Orla"],
+                    [:HIKER, "Ulf"], [:CAMPER, "Rook"], [:TWINS, "Ana & Ida", true], [:POKEMONRANGER_M, "Sigurd"]]
+  CHECKS_PLAN = [[:run_checks, 520], [:done]]
 
   @frame = 0; @armed = {}; @live = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
   @cmd = nil; @cmd_seen = -10; @cmd_key = nil; @cmd_target = nil; @cmd_since = 0; @cmd_moved = 0
@@ -212,6 +226,7 @@ module PlayBot
         @msg_wait = 0
         @msg_pause += 1
         bubble_shot if @msg_pause == 10
+        shot("msg_" + @last_text.to_s.gsub(/\\\w+\[[^\]]*\]/, "")[0, 24]) if @msg_pause == 10 && SESSION == "checks"
         if @msg_pause >= 24
           press(B::USE)
           @msg_pause = 0
@@ -343,7 +358,26 @@ module PlayBot
     #---------------------------------------------------------------------------
     # Plan steps (run while the map is free; walking keeps going while moving)
     #---------------------------------------------------------------------------
-    def plan; return (SESSION == "route1") ? ROUTE1_PLAN : PLAN; end
+    def plan
+      return ROUTE1_PLAN if SESSION == "route1"
+      return CHECKS_PLAN if SESSION == "checks"
+      return PLAN
+    end
+
+    # Queue the checks as an event list on the map interpreter (so messages and battles run as from a map event)
+    def run_checks
+      return next_step if @checks_queued
+      @checks_queued = true
+      cmds = CHECK_LINES.map { |t| RPG::EventCommand.new(101, 0, [t]) }
+      cmds.push(RPG::EventCommand.new(355, 0, ['pfm_quest(:glyph_check, "Mum\'s Letter", "Find Imelda Larch at the research station on the headland.")']))
+      CHECK_TRAINERS.each do |tt, name, double|
+        script = (double ? 'setBattleRule("double"); ' : '') + "setBattleRule(\"canLose\"); TrainerBattle.start(:#{tt}, #{name.inspect})"
+        cmds.push(RPG::EventCommand.new(355, 0, [script]))
+      end
+      cmds.push(RPG::EventCommand.new(0, 0, []))
+      log("checks: #{CHECK_LINES.length} lines, quest log, #{CHECK_TRAINERS.length} trainer battles")
+      pbMapInterpreter.setup(cmds, 0)
+    end
 
     def drive_plan
       step = plan[@step]
@@ -355,7 +389,7 @@ module PlayBot
         log("step #{@step}: #{step.inspect}")
       end
       @step_frames += 1                # only frames with the map free count (cutscenes can be long)
-      return wait_for_map if ![:done, :debug_install].include?(kind) && $game_map.map_id != map
+      return wait_for_map if ![:done, :debug_install, :run_checks].include?(kind) && $game_map.map_id != map
       if @step_frames > 5400
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
@@ -371,6 +405,8 @@ module PlayBot
       when :debug_install
         return next_step if SESSION != "play" || $game_map.map_id != map
         debug_install if @idle >= 12
+      when :run_checks
+        run_checks if @idle >= 30
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]
@@ -669,17 +705,18 @@ module Game
     def start_new
       PlayBot.log("New Game (session #{PlayBot::SESSION}); plugins: #{PluginManager.plugins.inspect}")
       PlayBot.recording = (PlayBot::SESSION == "play")
-      if PlayBot::SESSION == "route1"   # dev shortcut: begin on Route 1's south edge, as after K1
+      if ["route1", "checks"].include?(PlayBot::SESSION)   # dev shortcut: begin on Route 1's south edge, as after K1
         PrismfallMaps.define_singleton_method(:apply_start_position) do
           $data_system.start_map_id, $data_system.start_x, $data_system.start_y = 520, 16, 67
           true
         end
       end
       playbot_start_new
-      if PlayBot::SESSION == "route1"
+      if ["route1", "checks"].include?(PlayBot::SESSION)
         $player.name = PlayBot::NAME
         $player.has_running_shoes = true
         $player.party = [Pokemon.new(:MUDKIP, 7)]
+        $player.party.push(Pokemon.new(:STARLY, 7)) if PlayBot::SESSION == "checks"   # doubles need two
         $game_switches[103] = $game_switches[104] = true
         $game_map.need_refresh = true
       end
@@ -703,6 +740,16 @@ module BattleCreationHelperMethods
 end
 
 class Battle
+  alias playbot_pbCommandPhase pbCommandPhase unless method_defined?(:playbot_pbCommandPhase)
+  def pbCommandPhase
+    if PlayBot::SESSION == "checks" && @turnCount >= 2
+      PlayBot.log("  checks: ending the battle after 2 turns")
+      @decision = 3
+      return
+    end
+    playbot_pbCommandPhase
+  end
+
   alias playbot_pbDisplay pbDisplay unless method_defined?(:playbot_pbDisplay)
   def pbDisplay(msg, &block)
     PlayBot.log("  battle: #{msg}")

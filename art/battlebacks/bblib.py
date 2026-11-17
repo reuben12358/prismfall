@@ -1,6 +1,6 @@
-"""Prismfall battle backdrop compositor (EBDX rooms).
+"""Prismfall battle backdrop compositor (EBDX rooms). Overview and conventions: docs/ART_ASSETS.md.
 
-Geometry (measured in the real engine, see README.md):
+Geometry (measured in the real engine with a calibration grid):
   EBDX room bitmap 384x308 is drawn at ROOM_SCALE 2.25.  At the default camera the screen
   (512x384) shows room x 70.44..298, y 66.44..237.  We author every backdrop as an HD canvas
   of 864x693 (= room * 2.25) which the Bridge draws as a flat EBDX layer at zoom 1/2.25, so at
@@ -300,8 +300,13 @@ def quantize_rgb(im, step=8):
 OUT = "/home/claude/fangame/graphics/EBDX/Battlebacks"
 
 
+WRITTEN = []   # files written by the current builder (for docs/CREDITS.md)
+
+
 def save_room(name, hd, out=OUT):
     """Write battlebg/<name>_hd.png (864x693) and battlebg/<name>.png (384x308)."""
+    WRITTEN.append("battlebg/" + name + ".png")
+    WRITTEN.append("battlebg/" + name + "_hd.png")
     assert hd.size == HD, hd.size
     os.makedirs(os.path.join(out, "battlebg"), exist_ok=True)
     hd = hd.convert("RGBA")
@@ -315,6 +320,7 @@ def save_room(name, hd, out=OUT):
 
 
 def save_element(name, im, out=OUT):
+    WRITTEN.append("elements/" + name + ".png")
     os.makedirs(os.path.join(out, "elements"), exist_ok=True)
     p = os.path.join(out, "elements", name + ".png")
     im.save(p, optimize=True)

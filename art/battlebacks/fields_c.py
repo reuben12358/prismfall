@@ -193,9 +193,8 @@ def factory_scene(wrecked):
             w0 = 4 + rng.choice([0, 1, 1, 2])
             pd.line([(8 - w0, y), (8 + w0, y)], fill=C((255, 170, 60)))
             pd.line([(8 - 1, y), (8 + 1, y)], fill=C((255, 240, 170)))
-        save_element("pf_factory_pour", pour)
         px = cx0 + 12
-        extras["img010"] = {S("bitmap"): "pf_factory_pour", S("scrolling"): True, S("vertical"): True, S("speed"): 3,
+        extras["img010"] = {S("bitmap"): "pf_factory_pour2", S("scrolling"): True, S("vertical"): True, S("speed"): 3,
                             S("direction"): -1, S("ox"): 8, S("oy"): 0, S("x"): round(px / 2.25, 2),
                             S("y"): round((cy0 + 50) / 2.25, 2), S("zoom"): INV, S("z"): 2}
         pour_len = (floor_top - 22) - (cy0 + 50)

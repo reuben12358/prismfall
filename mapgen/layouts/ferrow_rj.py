@@ -67,7 +67,8 @@ def build(preview=None):
             west = x < 3 + 3 * vnoise(0, y, 12, 4.0) and y < 25
             if nw or ne or east or west: m.cls[y, x] = 'T'
     # ---------------------------------------------------------------- streets (orthogonal, Goldenleaf style)
-    m.rect(32, 0, 5, 25, 'g')                                          # Route 1 lane (x 33-36 at the edge) -> square
+    m.rect(32, 0, 3, 7, 'd')                                           # Route 1's dirt lane (520 x 14-16 = our x 32-34)
+    m.rect(32, 7, 5, 18, 'g')                                          # ... becomes the gravel street at the town lamps
     m.rect(26, 24, 17, 7, 'g')                                         # the square
     m.street([(33, 30), (33, 37)], 3)                                  # down to the quay stairs
     m.street([(9, 19), (32, 19)], 3)                                   # upper street (Poke Center)
@@ -110,7 +111,7 @@ def build(preview=None):
     P('Lighthouse door', light_door)
     gx, gy = d['lab']
     P('Kestrel K1', (gx - 2, gy + 2)); P('Juno (lab yard)', (gx, gy + 1))
-    for i, x in enumerate((33, 34, 35, 36)): P('Sendoff %d' % (i + 1), (x, 4))
+    for i, x in enumerate((32, 33, 34, 35)): P('Sendoff %d' % (i + 1), (x, 4))        # across the dirt lane
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     P('Larch (sendoff)', m.snap(38, 3, '.')); P('Juno (sendoff)', m.snap(30, 3, '.'))
     P('Wenna Hale', (39, 44)); P('Coll Hale', (41, 46)); P('HiddenItem tart stall', (37, 43))

@@ -640,7 +640,7 @@ events:
     move: fixed
     cond:
       var: [STORY_CHAPTER, 2]
-  at: [33, 4]
+  at: [32, 4]
 - type: event
   name: Sendoff 2
   pages:
@@ -662,7 +662,7 @@ events:
     move: fixed
     cond:
       var: [STORY_CHAPTER, 2]
-  at: [34, 4]
+  at: [33, 4]
 - type: event
   name: Sendoff 3
   pages:
@@ -684,7 +684,7 @@ events:
     move: fixed
     cond:
       var: [STORY_CHAPTER, 2]
-  at: [35, 4]
+  at: [34, 4]
 - type: event
   name: Sendoff 4
   pages:
@@ -706,7 +706,7 @@ events:
     move: fixed
     cond:
       var: [STORY_CHAPTER, 2]
-  at: [36, 4]
+  at: [35, 4]
 - type: event
   name: Larch (sendoff)
   pages:

@@ -16,6 +16,11 @@ PARTS = [('sheridan', 37, 'Sheridan_2'), ('gearen', 1, 'GearenCity Real')]
 Image.MAX_IMAGE_PIXELS = None
 
 
+# tileset-33 door tiles that door events stand on (Saltmere, Verdance).  7138 and 5073 also appear as event-less doors on
+# other houses: those become one-step dead ends, which is better than stranding the player on a solid door.
+DOOR33 = (4833, 5259, 4611, 7567, 7138, 5073)
+
+
 def main():
     reg = json.load(open(REG))
     base = next(t for t in reg if t['id'] == 30)
@@ -118,6 +123,7 @@ def main():
     names = list(base['autotile_names']); names[2] = 'Dirt'
     shutil.copyfile('/home/claude/ref/art/tectonic/Graphics/Autotiles/Dirt.png', os.path.join(OUT, 'Graphics', 'Autotiles', 'Dirt.png'))
     for i in range(144, 192): pas[i] = 0; pri[i] = 0; tag[i] = 0
+    for i in DOOR33: pas[i] = 0          # door tiles under door events: interior exits land ON them (playtest 2026-11-17)
     e = dict(base); e.update(autotile_names=names, id=33, name='Prismfall City', tileset_name='Prismfall City', n_tiles=len(pas), passages=pas,
                              priorities=pri, terrain_tags=tag)
     reg = [t for t in reg if t['id'] != 33] + [e]

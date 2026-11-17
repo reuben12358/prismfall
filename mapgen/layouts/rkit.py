@@ -67,6 +67,19 @@ DECOR_SNOW = {'flowers': [9725, 9725, 10620], 'green': [10551, 10555, 10556, 103
               'rare': [10628, 10620]}
 
 
+def incoming(mid):
+    """cells of map `mid` where other specs' transfers land (`to: {map: mid, x, y}`): keep them walkable and bare"""
+    import glob
+    out = []
+    for f in glob.glob(os.path.join(HERE, 'specs', '*.yaml')):
+        for d in yaml.safe_load_all(open(f)):
+            if not d: continue
+            for e in d.get('events', []) or []:
+                t = e.get('to')
+                if isinstance(t, dict) and t.get('map') == mid: out.append((t['x'], t['y']))
+    return out
+
+
 class RMap:
     def __init__(self, W, H, tileset, seed, water='Sea(Grass)', kit='sh', grass=SH_GRASS, decor=DECOR_SH):
         self.W, self.H, self.tid, self.seed = W, H, tileset, seed
@@ -125,6 +138,7 @@ class RMap:
         return not self.taken[y:y + h, x:x + w].any() and all(ch in on for ch in self.cls[y:y + h, x:x + w].reshape(-1))
 
     TREELIKE = ('pf_g_', 'tr_', 'pine', 'kf_tree', 'ice_', 'wb_elder')
+    EXTRA_DOORS = {'sh_big': [(3, 8)]}          # second doors without an interior: walkable door tile + a locked sign
 
     def stamp(self, name, x, y, link=None, dname=None, door=None, mark='B', level=None, blend=False):
         """Place a stamp.  Tree-like stamps (giant trees, yard trees) keep their overhead-only cells (crown tiles on
@@ -159,6 +173,9 @@ class RMap:
             for dy in range(h):
                 for dx in range(w):
                     if occ[dy, dx] and self.blocked_stack(L[:, dy, dx], ts): self.cls[y + dy, x + dx] = mark
+        for ex, ey in self.EXTRA_DOORS.get(name, ()):
+            self.events.append({'type': 'sign', 'name': 'Locked door', 'at': [x + ex, y + ey], 'post': False,
+                                'text': 'The door is barred from the inside.'})
         d = door or st.get('door')
         if d is not None and (link or dname):
             ev = {'type': 'door', 'at': [x + d[0], y + d[1]], 'gfx': ['', 0, 2], 'name': dname or (name + ' door')}

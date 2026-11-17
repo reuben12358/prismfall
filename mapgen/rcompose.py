@@ -148,6 +148,59 @@ def resolve(L, tid):
     return out
 
 
+def door_tiles(pri):
+    """Composite ids that must be passable because a door event sits on them: in every stamp with a `door`, the tiles of
+    the door cell from the top layer down to the first priority-0 tile (RMXP's passable? stops there).  These games mark
+    their door tiles solid (their doors drop you BELOW the door); ours land the player ON the door tile, and the door
+    event walks them out, so a solid door tile strands the player (playtest, 2026-11-17).  A tile that also appears in a
+    non-door cell of any stamp is a shared wall piece: it is reported and left solid."""
+    st = {}
+    for fn in ('stamps_rj.json', 'stamps_rjc.json'):
+        p = os.path.join(HERE, 'data', fn)
+        if os.path.exists(p): st.update({k: v for k, v in json.load(open(p)).items() if not k.startswith('_')})
+    door, other = set(), set()
+    pri0 = lambda t: t < len(pri) and pri[t] == 0
+    for n, s in st.items():
+        L = np.array(s['layers'])
+        dc = tuple(s['door']) if 'door' in s else None
+        for z in range(3):
+            for y in range(s['h']):
+                for x in range(s['w']):
+                    t = int(L[z, y, x])
+                    if t <= 0 or t >= VBASE: continue
+                    (other if (x, y) != dc else door).add(t)
+        if dc:
+            for z in (2, 1, 0):
+                t = int(L[z, dc[1], dc[0]])
+                if 0 < t < VBASE:
+                    door.add(t)
+                    if pri0(t): break
+    keep = {t for t in door if t not in other or t in DOOR_FORCE}
+    return keep, sorted(door - keep)
+
+
+# door tiles that also appear as a second, event-less door of a stamp (sh_big's west door): passable anyway; rkit puts
+# a "locked" sign on those cells (rkit.EXTRA_DOORS)
+DOOR_FORCE = {5885}
+
+
+def patch_doors(reg=None, quiet=False):
+    """set passage 0 on the door tiles of every PF Rejuv tileset in the registry (run by rcompose and by rstamps, whose
+    stamps are mined after the sheet is composed)"""
+    own = reg is None
+    if own: reg = json.load(open(REG))
+    n = 0; shared = []
+    for t in reg:
+        if t['id'] not in TILESETS: continue
+        keep, shared = door_tiles(t['priorities'])
+        for i in keep:
+            if t['passages'][i] != 0: t['passages'][i] = 0; n += 1
+    if own: json.dump(reg, open(REG, 'w'))
+    if not quiet:
+        print('door tiles made passable: %d (per tileset %d)%s' % (n, len(keep), ('; shared wall pieces left solid: %s' % shared) if shared else ''))
+    return reg
+
+
 def main():
     ims = []; pas = [0] * 384; pri = [0] * 384; tag = [0] * 384; parts = {}
     src_ts = {}
@@ -217,6 +270,7 @@ def main():
                  n_tiles=len(p), passages=p, priorities=q, terrain_tags=g)
         reg = [t for t in reg if t['id'] != tid] + [e]
         print('registered %d %s: %d tiles, autotiles %s' % (tid, name, len(p) - 384, names))
+    reg = patch_doors(reg)
     json.dump(sorted(reg, key=lambda t: t['id']), open(REG, 'w'))
     print('sheet %s: %d rows; parts %s' % (SHEET, H // 32, {k: v['offset'] for k, v in parts.items()}))
 

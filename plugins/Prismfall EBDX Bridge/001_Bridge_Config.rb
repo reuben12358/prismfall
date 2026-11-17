@@ -65,6 +65,9 @@ module PrismfallEBDX
     [:UNDERWATER, :WATER_SURFACE]     => [150, 210, 255],   # surface
     [:CRYSTAL_CAVERN, :DARK_CRYSTAL]  => :black,
     [:FACTORY, :SCRAPYARD]            => [255, 150, 40],    # explosion flash
+    [:SILKWOOD, :WILDFIRE]            => [255, 120, 30],    # the forest catches
+    [:FLOWER_GARDEN, :WILDFIRE]       => [255, 120, 30],
+    [:WILDFIRE, :ASHEN_WASTE]         => [200, 200, 200],
     [:ANY, :BLEED]                    => :distortion,
     [:BLEED, :ANY]                    => :white
   }
@@ -410,6 +413,18 @@ module PrismfallEBDX
           :area => [60, 0, 324, 220], :speed => [2.0, 3.5], :sway => 3, :zoom => [0.5, 0.8], :opacity => [200, 255],
           :layers => [:back, :mid], :blend => 1 }
       ]
+    },
+    :WILDFIRE => {
+      :fallback => :FOREST, :tone => [60, -10, -50, 20], :transition => [255, 120, 30],
+      :fx => [
+        { :type => :rise, :count => 30, :shape => :glow, :size => 5, :colors => EMBER,
+          :speed => [1.0, 2.4], :sway => 12, :zoom => [0.3, 0.7], :opacity => [180, 255],
+          :layers => [:back, :mid, :front], :blend => 1 }
+      ],
+      :stages => { 2 => { :tone => [-20, -25, -25, 120], :fx => [
+        { :type => :fall, :count => 30, :shape => :dot, :size => 3, :colors => ASH,
+          :speed => [0.3, 0.7], :sway => 16, :zoom => [0.4, 0.8], :opacity => [130, 210], :layers => [:back, :mid, :front] }
+      ] } }
     },
     :INVERSE => {
       :fallback => :DIMENSION, :tone => [0, 0, 0, 255], :transition => :white,

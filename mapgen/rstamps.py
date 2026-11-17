@@ -126,6 +126,7 @@ def main():
     out = {n: v for n, v in out.items() if n in spec}
     json.dump(out, open(OUTF, 'w'))
     print('stamps_rj:', len(out))
+    RC.patch_doors()                       # door tiles of the new stamps: passable (see rcompose.door_tiles)
     if '--sheet' in a:
         contact({n: out[n] for n in names}, a[a.index('--sheet') + 1])
 

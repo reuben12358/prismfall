@@ -144,7 +144,8 @@ project's sample Ben — ours normally compiles later and wins, but packaging sh
 **Generic villains** (`HOLLOW_GRUNT_M/F`, `MERIDIAN_AGENT_M/F`, name "Grunt"/"Agent"): version = encounter number
 (0 = Saltmere Pageant Hall tag battle, then 1, 2, ... in story order; < 100), +100/+200 as usual. Map events must pass
 the version. Named admins (Thistle v0 = Briarwick, Lv 13–15) use 0, 1, 2 ... per rematch.
-Re-check map references any time with `python3 -I tools/validate_trainers.py --maps maps_out/Data`.
+Re-check map references any time with `python3 -I tools/validate_map_trainers.py` (every battle form: TrainerBattle.start,
+rival/gym/cameo battles, trainer intros; also stock trainers and difficulty variants) or `tools/validate_trainers.py --maps maps_out/Data`.
 
 ## 5. Rivals (Prismfall Core swaps the Gen 1 starter; ability slot is kept, so `AbilityIndex = 2` = hidden ability)
 

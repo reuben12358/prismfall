@@ -50,6 +50,7 @@ name: Pageant Hall
 parent: 140
 template: arena
 drop_template_events: [Champion, Door, Entrance]
+tile_edits: [[1, 6, 11, 0]]   # open the arena template's front wall at the door (arrival 6,11; playtest 2026-11-17)
 bgm: Lerucean Town
 metadata: {MapPosition: [0, 10, 25]}
 events:

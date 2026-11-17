@@ -6478,7 +6478,6 @@ Pokemon = FLETCHLING,4
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 521 Route 2
 # Map 520 Route 1 (script names: story/20_SCRIPT_CH0-2.md, map events from mapgen/layouts/route1.py)
 #-------------------------------
 [YOUNGSTER,Pim]
@@ -6524,6 +6523,7 @@ Pokemon = FLETCHLING,4
     Nature = ADAMANT
     IV = 0
     EV = 0
+# Map 521 Route 2
 #-------------------------------
 [BUGCATCHER,Dell]
 LoseText = My Metapod was supposed to evolve this time...
@@ -6628,6 +6628,78 @@ Pokemon = FIDOUGH,6
     EV = 0
 Pokemon = SMOLIV,6
     Ability = EARLYBIRD
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 521 Route 2
+#-------------------------------
+[BUGCATCHER,Wim]
+LoseText = ...Assistant Warden.
+Pokemon = SPINARAK,6
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = COMBEE,7
+    Ability = HONEYGATHER
+    Nature = HASTY
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Wim,100]
+LoseText = ...Assistant Warden.
+Pokemon = SPINARAK,7
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = COMBEE,8
+    Ability = HONEYGATHER
+    Nature = HASTY
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Wim,200]
+LoseText = ...Assistant Warden.
+Pokemon = SPINARAK,5
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = COMBEE,6
+    Ability = HONEYGATHER
+    Nature = HASTY
+    IV = 0
+    EV = 0
+# Map 521 Route 2
+#-------------------------------
+[PICNICKER,Ada]
+LoseText = Bless you. Bless both of us.
+Pokemon = ODDISH,6
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 8
+Pokemon = BUDEW,7
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[PICNICKER,Ada,100]
+LoseText = Bless you. Bless both of us.
+Pokemon = ODDISH,7
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 20
+Pokemon = BUDEW,8
+    Ability = NATURALCURE
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[PICNICKER,Ada,200]
+LoseText = Bless you. Bless both of us.
+Pokemon = ODDISH,5
+    Ability = CHLOROPHYLL
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = BUDEW,6
+    Ability = NATURALCURE
     Nature = MODEST
     IV = 0
     EV = 0
@@ -6801,6 +6873,42 @@ Pokemon = SIZZLIPEDE,9
     Nature = ADAMANT
     IV = 0
     EV = 0
+# Map 524 Gossamer Wood (double battle)
+#-------------------------------
+[TWINS,Mo & Jo]
+LoseText = We lost together!
+Pokemon = KARRABLAST,9
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SHELMET,9
+    Ability = HYDRATION
+    Nature = BOLD
+    IV = 8
+#-------------------------------
+[TWINS,Mo & Jo,100]
+LoseText = We lost together!
+Pokemon = KARRABLAST,10
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SHELMET,10
+    Ability = HYDRATION
+    Nature = BOLD
+    IV = 20
+#-------------------------------
+[TWINS,Mo & Jo,200]
+LoseText = We lost together!
+Pokemon = KARRABLAST,8
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SHELMET,8
+    Ability = HYDRATION
+    Nature = BOLD
+    IV = 0
+    EV = 0
 # Map 131 Loomhouse Gym - Weaving Hall
 #-------------------------------
 [BUGCATCHER,Milo]
@@ -6870,6 +6978,114 @@ Pokemon = CUTIEFLY,10
     EV = 0
 Pokemon = SEWADDLE,11
     Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 131 Loomhouse Gym - Weaving Hall
+#-------------------------------
+[BUGCATCHER,Nell]
+LoseText = Knotted up. Tamsin'll untangle you.
+Pokemon = SEWADDLE,11
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SPINARAK,12
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Nell,100]
+LoseText = Knotted up. Tamsin'll untangle you.
+Pokemon = SEWADDLE,12
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SPINARAK,13
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Nell,200]
+LoseText = Knotted up. Tamsin'll untangle you.
+Pokemon = SEWADDLE,10
+    Ability = SWARM
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SPINARAK,11
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 131 Loomhouse Gym - Weaving Hall
+#-------------------------------
+[LASS,Orla]
+LoseText = See? Never the red shuttle first.
+Pokemon = LEDYBA,11
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 8
+Pokemon = SPEWPA,12
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 8
+#-------------------------------
+[LASS,Orla,100]
+LoseText = See? Never the red shuttle first.
+Pokemon = LEDYBA,12
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 20
+Pokemon = SPEWPA,13
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 20
+#-------------------------------
+[LASS,Orla,200]
+LoseText = See? Never the red shuttle first.
+Pokemon = LEDYBA,10
+    Ability = EARLYBIRD
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SPEWPA,11
+    Ability = SHEDSKIN
+    Nature = BOLD
+    IV = 0
+    EV = 0
+# Map 131 Loomhouse Gym - Weaving Hall
+#-------------------------------
+[GENTLEMAN,Bram]
+LoseText = Sorry. No, wait, you won. Well done.
+Pokemon = VENONAT,12
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 8
+Pokemon = SEWADDLE,13
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[GENTLEMAN,Bram,100]
+LoseText = Sorry. No, wait, you won. Well done.
+Pokemon = VENONAT,13
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 20
+Pokemon = SEWADDLE,14
+    Ability = CHLOROPHYLL
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[GENTLEMAN,Bram,200]
+LoseText = Sorry. No, wait, you won. Well done.
+Pokemon = VENONAT,11
+    Ability = COMPOUNDEYES
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SEWADDLE,12
+    Ability = CHLOROPHYLL
     Nature = ADAMANT
     IV = 0
     EV = 0
@@ -7028,6 +7244,55 @@ Pokemon = DEERLING,10
 Pokemon = SKIDDO,11
     Ability = SAPSIPPER
     Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 525 Gossamer Deepwood
+#-------------------------------
+[POKEMANIAC,Ferris]
+LoseText = That one hummed. Did you hear it hum?
+Pokemon = PARAS,11
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = NINCADA,11
+    Ability = COMPOUNDEYES
+    Nature = JOLLY
+    IV = 8
+Pokemon = YANMA,12
+    Ability = SPEEDBOOST
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[POKEMANIAC,Ferris,100]
+LoseText = That one hummed. Did you hear it hum?
+Pokemon = PARAS,12
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = NINCADA,12
+    Ability = COMPOUNDEYES
+    Nature = JOLLY
+    IV = 20
+Pokemon = YANMA,13
+    Ability = SPEEDBOOST
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[POKEMANIAC,Ferris,200]
+LoseText = That one hummed. Did you hear it hum?
+Pokemon = PARAS,10
+    Ability = EFFECTSPORE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = NINCADA,10
+    Ability = COMPOUNDEYES
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = YANMA,11
+    Ability = SPEEDBOOST
+    Nature = MODEST
     IV = 0
     EV = 0
 # Map 540 Route 3
@@ -7985,6 +8250,114 @@ Pokemon = DUNSPARCE,17
     Nature = ADAMANT
     IV = 0
     EV = 0
+# Map 560 Route 5
+#-------------------------------
+[LASS,Tilde]
+LoseText = My Swinub slid farther than me.
+Pokemon = SWINUB,16
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SNOM,17
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 8
+#-------------------------------
+[LASS,Tilde,100]
+LoseText = My Swinub slid farther than me.
+Pokemon = SWINUB,17
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SNOM,18
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 20
+#-------------------------------
+[LASS,Tilde,200]
+LoseText = My Swinub slid farther than me.
+Pokemon = SWINUB,15
+    Ability = OBLIVIOUS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SNOM,16
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 560 Route 5
+#-------------------------------
+[SAILOR,Haakon]
+LoseText = Ice'll break by summer. Probably.
+Pokemon = SPHEAL,17
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 8
+Pokemon = CETODDLE,18
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[SAILOR,Haakon,100]
+LoseText = Ice'll break by summer. Probably.
+Pokemon = SPHEAL,18
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 20
+Pokemon = CETODDLE,19
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[SAILOR,Haakon,200]
+LoseText = Ice'll break by summer. Probably.
+Pokemon = SPHEAL,16
+    Ability = THICKFAT
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = CETODDLE,17
+    Ability = THICKFAT
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 560 Route 5
+#-------------------------------
+[BIRDKEEPER,Ailsa]
+LoseText = Frostwick's gulls wear little ice hats. Not really.
+Pokemon = WINGULL,17
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 8
+Pokemon = DELIBIRD,18
+    Ability = HUSTLE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[BIRDKEEPER,Ailsa,100]
+LoseText = Frostwick's gulls wear little ice hats. Not really.
+Pokemon = WINGULL,18
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 20
+Pokemon = DELIBIRD,19
+    Ability = HUSTLE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[BIRDKEEPER,Ailsa,200]
+LoseText = Frostwick's gulls wear little ice hats. Not really.
+Pokemon = WINGULL,16
+    Ability = KEENEYE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = DELIBIRD,17
+    Ability = HUSTLE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
 # Map 561 Route 6
 #-------------------------------
 [BIRDKEEPER,Wren]
@@ -8166,6 +8539,235 @@ Pokemon = WINGULL,17
 Pokemon = SPHEAL,18
     Ability = THICKFAT
     Nature = MODEST
+    IV = 0
+    EV = 0
+# Map 562 The Rimewood
+#-------------------------------
+[BUGCATCHER,Pell]
+LoseText = They were NOT happy to be woken.
+Pokemon = SNOM,18
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 8
+Pokemon = TAROUNTULA,19
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[BUGCATCHER,Pell,100]
+LoseText = They were NOT happy to be woken.
+Pokemon = SNOM,19
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 20
+Pokemon = TAROUNTULA,20
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[BUGCATCHER,Pell,200]
+LoseText = They were NOT happy to be woken.
+Pokemon = SNOM,17
+    Ability = SHIELDDUST
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = TAROUNTULA,18
+    Ability = INSOMNIA
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 562 The Rimewood
+#-------------------------------
+[POKEMONRANGER_F,Orla]
+LoseText = You'll do. Mind the silk curtains, they cut.
+Pokemon = DEERLING,18
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 8
+Pokemon = SNOVER,19
+    Ability = SNOWWARNING
+    Nature = MODEST
+    IV = 8
+Pokemon = STANTLER,20
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_F,Orla,100]
+LoseText = You'll do. Mind the silk curtains, they cut.
+Pokemon = DEERLING,19
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 20
+Pokemon = SNOVER,20
+    Ability = SNOWWARNING
+    Nature = MODEST
+    IV = 20
+Pokemon = STANTLER,21
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_F,Orla,200]
+LoseText = You'll do. Mind the silk curtains, they cut.
+Pokemon = DEERLING,17
+    Ability = SAPSIPPER
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+Pokemon = SNOVER,18
+    Ability = SNOWWARNING
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = STANTLER,19
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+# Map 562 The Rimewood
+#-------------------------------
+[HIKER,Ulf]
+LoseText = Ha! No, no traps for you.
+Pokemon = TEDDIURSA,18
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 8
+Pokemon = BERGMITE,19
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 8
+#-------------------------------
+[HIKER,Ulf,100]
+LoseText = Ha! No, no traps for you.
+Pokemon = TEDDIURSA,19
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 20
+Pokemon = BERGMITE,20
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 20
+#-------------------------------
+[HIKER,Ulf,200]
+LoseText = Ha! No, no traps for you.
+Pokemon = TEDDIURSA,17
+    Ability = PICKUP
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = BERGMITE,18
+    Ability = OWNTEMPO
+    Nature = IMPISH
+    IV = 0
+    EV = 0
+# Map 562 The Rimewood
+#-------------------------------
+[CAMPER,Rook]
+LoseText = ...Is that what the aurora's for?
+Pokemon = CUBCHOO,18
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 8
+Pokemon = SNEASEL,19
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[CAMPER,Rook,100]
+LoseText = ...Is that what the aurora's for?
+Pokemon = CUBCHOO,19
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 20
+Pokemon = SNEASEL,20
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[CAMPER,Rook,200]
+LoseText = ...Is that what the aurora's for?
+Pokemon = CUBCHOO,17
+    Ability = SNOWCLOAK
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = SNEASEL,18
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 562 The Rimewood (double battle)
+#-------------------------------
+[TWINS,Ana & Ida]
+LoseText = Two of us lost! Two kingdoms of losing!
+Pokemon = MORELULL,19
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 8
+Pokemon = SNORUNT,19
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[TWINS,Ana & Ida,100]
+LoseText = Two of us lost! Two kingdoms of losing!
+Pokemon = MORELULL,20
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 20
+Pokemon = SNORUNT,20
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[TWINS,Ana & Ida,200]
+LoseText = Two of us lost! Two kingdoms of losing!
+Pokemon = MORELULL,18
+    Ability = EFFECTSPORE
+    Nature = MODEST
+    IV = 0
+    EV = 0
+Pokemon = SNORUNT,18
+    Ability = INNERFOCUS
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+# Map 563 Rimewood Glade
+#-------------------------------
+[POKEMONRANGER_M,Sigurd]
+LoseText = ...So you cut your way in. Fair.
+Pokemon = STANTLER,19
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 8
+Pokemon = CRYOGONAL,20
+    Ability = LEVITATE
+    Nature = CALM
+    IV = 8
+#-------------------------------
+[POKEMONRANGER_M,Sigurd,100]
+LoseText = ...So you cut your way in. Fair.
+Pokemon = STANTLER,20
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 20
+Pokemon = CRYOGONAL,21
+    Ability = LEVITATE
+    Nature = CALM
+    IV = 20
+#-------------------------------
+[POKEMONRANGER_M,Sigurd,200]
+LoseText = ...So you cut your way in. Fair.
+Pokemon = STANTLER,18
+    Ability = INTIMIDATE
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
+Pokemon = CRYOGONAL,19
+    Ability = LEVITATE
+    Nature = CALM
     IV = 0
     EV = 0
 # Map 564 Gullcry Caves

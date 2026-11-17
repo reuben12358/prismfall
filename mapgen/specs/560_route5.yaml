@@ -16,7 +16,7 @@ metadata:
 tone: [-6, -2, 10, 10]
 connections:
 - {dir: E, offset: 12, to: 140, to_offset: 32}
-- {dir: W, offset: 10, to: 570, to_offset: 18}
+- {dir: W, offset: 10, to: 570, to_offset: 21}
 raw: data/raw/560.npy
 tileset: 52
 events:

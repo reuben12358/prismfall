@@ -16,43 +16,43 @@ tone: [-8, -4, 12, 12]
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 100, sx: 1, sy: 0}
 connections:
 - {dir: N, offset: 20, to: 562, to_offset: 22}
-- {dir: E, offset: 18, to: 560, to_offset: 10}
+- {dir: E, offset: 21, to: 560, to_offset: 10}
 raw: data/raw/570.npy
 tileset: 52
 events:
 - type: door
-  at: [13, 25]
+  at: [5, 9]
   gfx: ['', 0, 2]
-  name: Poke Center door
-  link: FW_PC
+  name: Loft door
+  link: FW_LOFT
 - type: door
-  at: [44, 19]
-  gfx: ['', 0, 2]
-  name: Exchange door
-  link: FW_EXCH
-- type: door
-  at: [22, 17]
+  at: [19, 21]
   gfx: ['', 0, 2]
   name: Two Hearths door
   link: FW_INN
 - type: door
-  at: [52, 19]
+  at: [40, 21]
+  gfx: ['', 0, 2]
+  name: Exchange door
+  link: FW_EXCH
+- type: door
+  at: [49, 21]
   gfx: ['', 0, 2]
   name: Border House door
   link: FW_BORDER
 - type: door
-  at: [44, 29]
+  at: [6, 35]
+  gfx: ['', 0, 2]
+  name: Poke Center door
+  link: FW_PC
+- type: door
+  at: [55, 35]
   gfx: ['', 0, 2]
   name: Smokehouse door
   link: FW_SMOKE
-- type: door
-  at: [12, 12]
-  gfx: ['', 0, 2]
-  name: Loft door
-  link: FW_LOFT
 - type: sign
   name: Hearth Stone
-  at: [28, 25]
+  at: [23, 25]
   text: 'THE HEARTH STONE
 
     Carved twice: once in Elowen''s knotwork, once in Isenmar''s runes.
@@ -61,26 +61,33 @@ events:
   post: false
 - type: sign
   name: Town sign
-  at: [40, 23]
+  at: [53, 26]
   text: 'FROSTWICK
 
     Where the Rimewood meets the salt.'
   post: false
 - type: sign
   name: PC sign
-  at: [12, 30]
+  at: [10, 36]
   text: POKEMON CENTER
   post: false
 - type: sign
   name: Exchange sign
-  at: [43, 24]
+  at: [43, 22]
   text: 'THE EXCHANGE
 
-    Honey for furs. Silk for oil. Coin if you must.'
+    In the hollow of the Hearth Elder. Honey for furs. Silk for oil. Coin if you must.'
+  post: false
+- type: sign
+  name: Inn sign
+  at: [22, 22]
+  text: 'THE TWO HEARTHS
+
+    Applewood on the left. Whale oil on the right. Sit where you like.'
   post: false
 - type: event
   name: Brannagh
-  at: [21, 23]
+  at: [20, 23]
   pages:
   - graphic: {sprite: NPC 25, dir: down}
     trigger: action
@@ -96,7 +103,7 @@ events:
     commands: [Find me an applewood log in the Rimewood and I'll show that whale-oil man what a fire is.]
 - type: event
   name: Halvard
-  at: [27, 23]
+  at: [17, 23]
   pages:
   - graphic: {sprite: NPC 28, dir: down}
     trigger: action
@@ -111,8 +118,26 @@ events:
     move: fixed
     commands: [Ask her about the log. Go on. I want to watch her face.]
 - type: event
+  name: Honey-seller
+  at: [14, 27]
+  pages:
+  - graphic: {sprite: NPC 06, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Rimewood honey! The bees sleep all winter, so every jar is a summer someone saved.', Isenmar folk pay in eel. I've learned to like eel.
+        Mostly.]
+- type: event
+  name: Fishmonger
+  at: [40, 28]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Lagoon char, smoked eel, a Spheal-fat candle if your nights are long.', The Elowen lot haggle in poetry. I haggle in fish. We both go home
+        happy.]
+- type: event
   name: Girl in ogre mask
-  at: [40, 33]
+  at: [9, 26]
   pages:
   - graphic: {sprite: NPC 07, dir: down}
     trigger: action
@@ -120,7 +145,7 @@ events:
     commands: [We're playing Kingdoms! I'm Elowen! RAAAH! Briar curse!]
 - type: event
   name: Boy in whale mask
-  at: [41, 34]
+  at: [9, 27]
   pages:
   - graphic: {sprite: NPC 03, dir: down}
     trigger: action
@@ -128,7 +153,7 @@ events:
     commands: [I'm Isenmar! Whale curse! ...There's no whale curse. I'm making it up.]
 - type: event
   name: Huscarl
-  at: [57, 23]
+  at: [57, 26]
   pages:
   - graphic: {sprite: NPC 11, dir: left}
     trigger: action
@@ -136,7 +161,7 @@ events:
     commands: [Gate's open. Wipe your boots. Declare any honey.]
 - type: event
   name: Forester
-  at: [57, 17]
+  at: [56, 23]
   pages:
   - graphic: {sprite: NPC 14, dir: left}
     trigger: action
@@ -144,21 +169,34 @@ events:
     commands: ['Elowen''s watch. Isenmar''s watch. Same gate, same cold. We split the shifts.']
 - type: event
   name: Ice-fisher
-  at: [30, 14]
+  at: [32, 17]
   pages:
   - graphic: {sprite: trainer_FISHERMAN, dir: down}
     trigger: action
     move: fixed
-    commands: ['See the dark holes along the brook? Fish come up to breathe.', Face the open water and use a rod. Even an Old Rod works here.]
+    commands: ['See the dark holes in the brook ice? Fish come up to breathe.', Face the open water and use a rod. Even an Old Rod works here.]
 - type: event
   name: Swinub herder
-  at: [48, 38]
+  at: [50, 39]
   pages:
   - graphic: {sprite: NPC 17, dir: down}
     trigger: action
     move: fixed
-    commands: ['The sled-pens. Swinub now, Mamoswine by spring if they eat their greens.', They don't eat greens. They eat everything else.]
+    commands: [The sled-Swinub. Mamoswine by spring if they eat their greens., They don't eat greens. They eat everything else.]
+- type: event
+  name: Rime-silk weaver
+  at: [7, 10]
+  pages:
+  - graphic: {sprite: NPC 09, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Up here we weave the silk that froze in the Rimewood. It never thaws, so it never frays.', 'The walkways? Elowen children learn to cross
+        them before they learn to read.']
 - type: item
   at: [40, 41]
   item: SNOWBALL
+  hidden: true
+- type: item
+  at: [22, 10]
+  item: NEVERMELTICE
   hidden: true

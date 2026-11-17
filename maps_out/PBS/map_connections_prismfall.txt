@@ -15,7 +15,7 @@
 # Route 3 (540) - Route 4 (541)
 540,S,2,541,N,2
 # Route 5 (560) - Frostwick (570)
-560,W,10,570,E,18
+560,W,10,570,E,21
 # Route 6 (561) - The Rimewood (562)
 561,S,10,562,N,12
 # Frostwick (570) - The Rimewood (562)

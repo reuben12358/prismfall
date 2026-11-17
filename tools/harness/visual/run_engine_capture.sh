@@ -94,6 +94,7 @@ assemble() {
   rm -rf "$RUN/game"; cp -r "$BASE" "$RUN/game"
   D="$KIT/dist/Prismfall_DevKit"
   cp -r "$D/Plugins/." "$RUN/game/Plugins/"; cp "$D"/PBS/*.txt "$RUN/game/PBS/"; cp "$D"/Data/* "$RUN/game/Data/"
+  [[ -d "$D/Graphics" ]] && cp -r "$D/Graphics/." "$RUN/game/Graphics/"   # field backdrops, map graphics
   mkdir -p "$RUN/game/Plugins/ZZ Demo Autorun"
   cp "$HERE/meta.txt" "$HERE/001_DemoAutorun.rb" "$RUN/game/Plugins/ZZ Demo Autorun/"
   # Base-project fix needed to boot at all (see docs/battle_captures/engine/README.md):

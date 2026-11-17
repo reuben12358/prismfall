@@ -41,6 +41,12 @@ for sub in Tilesets Autotiles Fogs; do
   mkdir -p "$OUT/Graphics/$sub" && cp "$ROOT/maps_out/Graphics/$sub/"*.png "$OUT/Graphics/$sub/"
 done
 
+# Field battle backdrops: graphics/ mirrors the project's Graphics/ folder (EBDX rooms, HD rooms, animated
+# layers; see docs/ART_ASSETS.md). Rebuild with: python3 -I art/battlebacks/build_backdrops.py
+if [[ -d "$ROOT/graphics" ]]; then
+  mkdir -p "$OUT/Graphics" && cp -r "$ROOT/graphics/." "$OUT/Graphics/"
+fi
+
 # Docs
 cp "$ROOT"/design/*.md "$OUT/Design/" 2>/dev/null || true
 cp "$ROOT"/design/*.json "$OUT/Design/" 2>/dev/null || true

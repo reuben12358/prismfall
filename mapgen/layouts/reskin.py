@@ -52,6 +52,8 @@ def reskin(d, preview=None):
     for e in d.get('events', []):                             # events keep their cells: keep them walkable and free
         x, y = e['at']
         if m.inb(x, y): m.taken[y, x] = True
+    for x, y in K.incoming(mid):                              # and so do the cells other maps' warps land on
+        if m.inb(x, y): m.taken[y, x] = True; m.cls[y, x] = 'd' if m.cls[y, x] in 'T' else m.cls[y, x]
     # bridges / piers over water: plank deck tiles
     deck = np.argwhere(m.cls == 'D')
     for y, x in deck: m.over.append((1, x, y, C('sh', 497))); m.cls[y, x] = 'w'
@@ -59,8 +61,8 @@ def reskin(d, preview=None):
     for e in m.events:
         if e.get('type') == 'sign': e['post'] = False; m.tile(4847, e['at'][0], e['at'][1], 1)
     keep = np.zeros((H, W), bool)                              # events keep a free ring (trees may not wall them in)
-    for e in m.events:
-        x, y = e['at']; keep[max(0, y - 2):y + 3, max(0, x - 2):x + 3] = True
+    for x, y in [e['at'] for e in m.events] + K.incoming(mid):
+        keep[max(0, y - 2):y + 3, max(0, x - 2):x + 3] = True
     m.taken |= keep
     import random
     rng = random.Random(mid)
@@ -74,7 +76,8 @@ def reskin(d, preview=None):
             if m.free(x, y, st['w'], st['h'], on='.'): m.stamp(nm, x, y, mark=None)
     m.greenfill(4, on='.')
     m.taken &= ~keep
-    for e in m.events: m.taken[e['at'][1], e['at'][0]] = True
+    for x, y in [e['at'] for e in m.events] + K.incoming(mid):
+        if m.inb(x, y): m.taken[y, x] = True
     m.paint()
     for y, x in deck: m.L[1, y, x] = C('sh', 497)
     m.scatter(8, seed=mid)

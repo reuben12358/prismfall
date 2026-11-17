@@ -1,368 +1,838 @@
 {
- "ASHEN_WASTE": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgVolcano, enemybaseVolcano (cooled: gradient-mapped, lava crusted over)"
+ "ASHEN_WASTE": {
+  "files": [
+   "battlebg/field_ashen_waste.png",
+   "battlebg/field_ashen_waste_hd.png",
+   "elements/pf_ashen_waste_banner0.png",
+   "elements/pf_ashen_waste_banner1.png",
+   "elements/pf_ashen_waste_embers.png",
+   "elements/pf_ashen_waste_steam.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "decor006"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "quench recolour, ember cracks, steam vents, soot-stained banners"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgVolcano, enemybaseVolcano (cooled: gradient-mapped, lava crusted over)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "decor006"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "quench recolour, ember cracks, steam vents, soot-stained banners"
+   ]
   ]
- ],
- "BEACH": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgBeach"
+ },
+ "BEACH": {
+  "files": [
+   "battlebg/field_beach.png",
+   "battlebg/field_beach_hd.png",
+   "elements/pf_beach_foam.png",
+   "elements/pf_beach_glints.png",
+   "elements/pf_beach_gull0.png",
+   "elements/pf_beach_gull1.png",
+   "elements/pf_beach_gull2.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "ferry pier, sand platforms, tide-pool rocks, sea glints and foam, gulls"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgBeach"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "ferry pier, sand platforms, tide-pool rocks, sea glints and foam, gulls"
+   ]
   ]
- ],
- "BLEED": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgDimensional (red-graded)"
+ },
+ "BLEED": {
+  "files": [
+   "battlebg/field_bleed.png",
+   "battlebg/field_bleed_hd.png",
+   "elements/pf_bleed_slice0.png",
+   "elements/pf_bleed_slice1.png",
+   "elements/pf_bleed_slice2.png",
+   "elements/pf_bleed_slice3.png",
+   "elements/pf_bleed_tears.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "torn-reality collage: shards of Prismfall's own field rooms with chromatic split, glitch slices, glowing tears"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgDimensional (red-graded)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "torn-reality collage: shards of Prismfall's own field rooms with chromatic split, glitch slices, glowing tears"
+   ]
   ]
- ],
- "CAVE": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgCave (2x crop of the tunnel mouth), enemybaseCave"
+ },
+ "CAVE": {
+  "files": [
+   "battlebg/field_cave.png",
+   "battlebg/field_cave_hd.png",
+   "elements/pf_cave_lantern0.png",
+   "elements/pf_cave_lantern1.png",
+   "elements/pf_cave_lanternglow0.png",
+   "elements/pf_cave_lanternglow1.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "decor006, decor009, fog (the CAVE environment's layers)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "timber mine supports, stalactites, hanging lanterns, lantern light"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgCave (2x crop of the tunnel mouth), enemybaseCave"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "decor006, decor009, fog (the CAVE environment's layers)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "timber mine supports, stalactites, hanging lanterns, lantern light"
+   ]
   ]
- ],
- "COLOSSEUM": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgColosseum, enemybaseColosseum (sanded floor)"
+ },
+ "COLOSSEUM": {
+  "files": [
+   "battlebg/field_colosseum.png",
+   "battlebg/field_colosseum_hd.png",
+   "elements/pf_colosseum_cone0.png",
+   "elements/pf_colosseum_cone1.png",
+   "elements/pf_colosseum_cone2.png",
+   "elements/pf_colosseum_cone3.png",
+   "elements/pf_colosseum_crowd.png",
+   "elements/pf_colosseum_fence.png",
+   "elements/pf_colosseum_lamp0.png",
+   "elements/pf_colosseum_lamp1.png",
+   "elements/pf_colosseum_lamp2.png",
+   "elements/pf_colosseum_lamp3.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "cheering crowd (2-frame sheet), scaffolding, chain-link fence, hanging work lamps"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgColosseum, enemybaseColosseum (sanded floor)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "cheering crowd (2-frame sheet), scaffolding, chain-link fence, hanging work lamps"
+   ]
   ]
- ],
- "CORROSIVE_MIRE": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgCorrosive (gradient-mapped)"
+ },
+ "CORROSIVE_MIRE": {
+  "files": [
+   "battlebg/field_corrosive_mire.png",
+   "battlebg/field_corrosive_mire_hd.png",
+   "elements/pf_corrosive_mire_fumes.png",
+   "elements/pf_corrosive_mire_goo.png",
+   "elements/pf_corrosive_mire_lamp.png",
+   "elements/pf_corrosive_mire_lampcone.png",
+   "elements/pf_corrosive_mire_sludgeglow.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "bubbleDark"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, sickly hanging lamp, fumes, sludge-rimmed platforms"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgCorrosive (gradient-mapped)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "bubbleDark"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, sickly hanging lamp, fumes, sludge-rimmed platforms"
+   ]
   ]
- ],
- "CRYSTAL_CAVERN": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgCrystalCavern, enemybaseCrystalCavern"
+ },
+ "CRYSTAL_CAVERN": {
+  "files": [
+   "battlebg/field_crystal_cavern.png",
+   "battlebg/field_crystal_cavern_hd.png",
+   "elements/pf_crystal_cavern_glow.png",
+   "elements/pf_crystal_cavern_shaft0.png",
+   "elements/pf_crystal_cavern_shaft1.png",
+   "elements/pf_crystal_cavern_shaft2.png",
+   "elements/pf_crystal_cavern_shine.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "giant prismatic crystal clusters, crystal glow, prismatic light shafts"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgCrystalCavern, enemybaseCrystalCavern"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "giant prismatic crystal clusters, crystal glow, prismatic light shafts"
+   ]
   ]
- ],
- "DARK_CRYSTAL": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgDarkCrystalCavern, enemybaseDarkCrystalCavern"
+ },
+ "DARK_CRYSTAL": {
+  "files": [
+   "battlebg/field_dark_crystal.png",
+   "battlebg/field_dark_crystal_hd.png",
+   "elements/pf_dark_crystal_glow.png",
+   "elements/pf_dark_crystal_murk.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "dark006 (vacuum rings)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "obsidian crystal clusters (same placement as Crystal Cavern), dying glow, murk"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgDarkCrystalCavern, enemybaseDarkCrystalCavern"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "dark006 (vacuum rings)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "obsidian crystal clusters (same placement as Crystal Cavern), dying glow, murk"
+   ]
   ]
- ],
- "DESERT": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgDesert (extended)"
+ },
+ "DESERT": {
+  "files": [
+   "battlebg/field_desert.png",
+   "battlebg/field_desert_bloom.png",
+   "battlebg/field_desert_bloom_hd.png",
+   "battlebg/field_desert_hd.png",
+   "elements/pf_desert_haze.png",
+   "elements/pf_desert_haze2.png",
+   "elements/pf_desert_sun.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "mesas, half-buried sandstone ruins, sandstone slab platforms, sun glare, heat haze"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgDesert (extended)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "mesas, half-buried sandstone ruins, sandstone slab platforms, sun glare, heat haze"
+   ],
+   [
+    "stage 2",
+    "Superbloom: same dunes after rain - flower carpet, green shoots, damp sand, faint rainbow, drifting petals and pollen"
+   ]
   ]
- ],
- "DRAGONS_DEN": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"
+ },
+ "DRAGONS_DEN": {
+  "files": [
+   "battlebg/field_dragons_den.png",
+   "battlebg/field_dragons_den_hd.png",
+   "battlebg/field_dragons_den_wyrmfire.png",
+   "battlebg/field_dragons_den_wyrmfire_hd.png",
+   "elements/pf_dragons_den_goldglint.png",
+   "elements/pf_dragons_den_haze.png",
+   "elements/pf_dragons_den_magma.png",
+   "elements/pf_dragons_den_violet.png",
+   "elements/pf_dragons_den_wyrmfire_eyes.png",
+   "elements/pf_dragons_den_wyrmfire_flame.png",
+   "elements/pf_dragons_den_wyrmfire_magma.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "decor009"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "decor009"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
+   ],
+   [
+    "stage 2",
+    "Wyrmfire: same lair awake - magma surging wider and brighter, statue eyes lit, wyrmfire flames (4-frame sheets) along the floor, heavy embers"
+   ]
   ]
- ],
- "FACTORY": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgFactory (gradient-mapped steel-blue with forge light, extended)"
+ },
+ "FACTORY": {
+  "files": [
+   "battlebg/field_factory.png",
+   "battlebg/field_factory_hd.png",
+   "elements/pf_factory_belt.png",
+   "elements/pf_factory_channel.png",
+   "elements/pf_factory_cruchain.png",
+   "elements/pf_factory_crucible.png",
+   "elements/pf_factory_furnace.png",
+   "elements/pf_factory_gear0.png",
+   "elements/pf_factory_gear1.png",
+   "elements/pf_factory_gear2.png",
+   "elements/pf_factory_gear3.png",
+   "elements/pf_factory_gear4.png",
+   "elements/pf_factory_heat.png",
+   "elements/pf_factory_hook0.png",
+   "elements/pf_factory_hook1.png",
+   "elements/pf_factory_hook2.png",
+   "elements/pf_factory_pour2.png",
+   "elements/pf_factory_pourglow.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "rotating gears, catwalk and girders, conveyor with ingots (scrolling), crucible pouring molten steel, hooks, hazard-striped steel platforms, furnace glow, heat haze"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgFactory (gradient-mapped steel-blue with forge light, extended)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "rotating gears, catwalk and girders, conveyor with ingots (scrolling), crucible pouring molten steel, hooks, hazard-striped steel platforms, furnace glow, heat haze"
+   ]
   ]
- ],
- "FAIRY_TALE": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgMeadow, enemybaseMeadow (twilight grade)"
+ },
+ "FAIRY_TALE": {
+  "files": [
+   "battlebg/field_fairy_tale.png",
+   "battlebg/field_fairy_tale_hd.png",
+   "elements/pf_fairy_tale_windows.png",
+   "elements/pf_fairy_tale_wisp0.png",
+   "elements/pf_fairy_tale_wisp1.png",
+   "elements/pf_fairy_tale_wisp2.png",
+   "elements/pf_fairy_tale_wisp3.png",
+   "elements/pf_fairy_tale_wisp4.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "storybook castle, giant mushrooms, fairy ring, lantern wisps"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgMeadow, enemybaseMeadow (twilight grade)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "storybook castle, giant mushrooms, fairy ring, lantern wisps"
+   ]
   ]
- ],
- "FLOWER_GARDEN": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgFlowerGarden0-4, enemybaseFlowerGarden0-4 (one per stage)"
+ },
+ "FLOWER_GARDEN": {
+  "files": [
+   "battlebg/field_flower_garden.png",
+   "battlebg/field_flower_garden_2.png",
+   "battlebg/field_flower_garden_2_hd.png",
+   "battlebg/field_flower_garden_3.png",
+   "battlebg/field_flower_garden_3_hd.png",
+   "battlebg/field_flower_garden_4.png",
+   "battlebg/field_flower_garden_4_hd.png",
+   "battlebg/field_flower_garden_5.png",
+   "battlebg/field_flower_garden_5_hd.png",
+   "battlebg/field_flower_garden_hd.png",
+   "elements/pf_flower_garden2_sun.png",
+   "elements/pf_flower_garden3_sun.png",
+   "elements/pf_flower_garden4_sun.png",
+   "elements/pf_flower_garden5_glow.png",
+   "elements/pf_flower_garden5_sun.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "flower rings round the platforms (stages 3-5), giant bloom (stage 5), sunbeams"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgFlowerGarden0-4, enemybaseFlowerGarden0-4 (one per stage)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "flower rings round the platforms (stages 3-5), giant bloom (stage 5), sunbeams"
+   ]
   ]
- ],
- "FROZEN_LAKE": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgFrozen, enemybaseFrozen"
+ },
+ "FROZEN_LAKE": {
+  "files": [
+   "battlebg/field_frozen_lake.png",
+   "battlebg/field_frozen_lake_hd.png",
+   "battlebg/field_frozen_lake_night.png",
+   "battlebg/field_frozen_lake_night_hd.png",
+   "elements/pf_frozen_lake_mist.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "fjord cliffs, far-shore pines, ice cracks, lake mist; night variant with aurora"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgFrozen, enemybaseFrozen"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "fjord cliffs, far-shore pines, ice cracks, lake mist; night variant with aurora"
+   ]
   ]
- ],
- "GRAND_STAGE": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgBeach (scaled, as the painted seascape backdrop flat)"
+ },
+ "GRAND_STAGE": {
+  "files": [
+   "battlebg/field_grand_stage.png",
+   "battlebg/field_grand_stage_2.png",
+   "battlebg/field_grand_stage_2_hd.png",
+   "battlebg/field_grand_stage_3.png",
+   "battlebg/field_grand_stage_3_hd.png",
+   "battlebg/field_grand_stage_hd.png",
+   "elements/pf_grand_stage2_sweep0.png",
+   "elements/pf_grand_stage2_sweep1.png",
+   "elements/pf_grand_stage3_gold.png",
+   "elements/pf_grand_stage3_sweep0.png",
+   "elements/pf_grand_stage3_sweep1.png",
+   "elements/pf_grand_stage3_sweep2.png",
+   "elements/pf_grand_stage_flatglow.png",
+   "elements/pf_grand_stage_footlights.png",
+   "elements/pf_grand_stage_pool.png",
+   "elements/pf_grand_stage_spot.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "lightsA, spinLights"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "opera house: velvet curtains and valance, wing flats, gilt boxes, stage boards, footlights, spotlight, velvet platforms"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgBeach (scaled, as the painted seascape backdrop flat)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "lightsA, spinLights"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "opera house: velvet curtains and valance, wing flats, gilt boxes, stage boards, footlights, spotlight, velvet platforms"
+   ],
+   [
+    "stage 2",
+    "Encore: roses on the boards, warmer house lights, sweeping coloured spots, heavier confetti"
+   ],
+   [
+    "stage 3",
+    "Standing Ovation: stage strewn with roses, golden flood light, three sweeping spots, confetti, rose petals and gold sparkle"
+   ]
   ]
- ],
- "HOLLOW_CATHEDRAL": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgBlacksteepleIndoor (gradient-mapped night violet, extended)"
+ },
+ "HOLLOW_CATHEDRAL": {
+  "files": [
+   "battlebg/field_hollow_cathedral.png",
+   "battlebg/field_hollow_cathedral_consecrated.png",
+   "battlebg/field_hollow_cathedral_consecrated_hd.png",
+   "battlebg/field_hollow_cathedral_hd.png",
+   "elements/pf_hollow_cathedral_candles.png",
+   "elements/pf_hollow_cathedral_consecrated_holy0.png",
+   "elements/pf_hollow_cathedral_consecrated_holy1.png",
+   "elements/pf_hollow_cathedral_consecrated_holy2.png",
+   "elements/pf_hollow_cathedral_consecrated_rose.png",
+   "elements/pf_hollow_cathedral_mist.png",
+   "elements/pf_hollow_cathedral_moon0.png",
+   "elements/pf_hollow_cathedral_moon1.png",
+   "elements/pf_hollow_cathedral_rose.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "gothic nave arches and pillars, broken rose window, candle-lit altar, pews, moonlight shafts, floor mist"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgBlacksteepleIndoor (gradient-mapped night violet, extended)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "gothic nave arches and pillars, broken rose window, candle-lit altar, pews, moonlight shafts, floor mist"
+   ],
+   [
+    "stage 2",
+    "Consecrated: same nave washed in ivory and gold, rose window restored and blazing, holy light shafts, rising light motes"
+   ]
   ]
- ],
- "INVERSE": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgInverse, enemybaseInverse"
+ },
+ "INVERSE": {
+  "files": [
+   "battlebg/field_inverse.png",
+   "battlebg/field_inverse_hd.png",
+   "elements/pf_inverse_island0.png",
+   "elements/pf_inverse_island1.png",
+   "elements/pf_inverse_island2.png",
+   "elements/pf_inverse_rock0.png",
+   "elements/pf_inverse_rock1.png",
+   "elements/pf_inverse_rock2.png",
+   "elements/pf_inverse_static.png"
   ],
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgForest (inverted crops as upside-down floating islands)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "floating island undersides, static mist"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgInverse, enemybaseInverse"
+   ],
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgForest (colour-inverted and flipped: the world hanging overhead)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "negative floating rock islands, static mist"
+   ]
   ]
- ],
- "MINDSCAPE": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgPsychic (pastel gradient map)"
+ },
+ "MINDSCAPE": {
+  "files": [
+   "battlebg/field_mindscape.png",
+   "battlebg/field_mindscape_hd.png",
+   "battlebg/field_mindscape_nightmare.png",
+   "battlebg/field_mindscape_nightmare_hd.png",
+   "elements/pf_mindscape_book0.png",
+   "elements/pf_mindscape_book1.png",
+   "elements/pf_mindscape_book2.png",
+   "elements/pf_mindscape_book3.png",
+   "elements/pf_mindscape_book4.png",
+   "elements/pf_mindscape_book5.png",
+   "elements/pf_mindscape_book6.png",
+   "elements/pf_mindscape_book7.png",
+   "elements/pf_mindscape_door.png",
+   "elements/pf_mindscape_nightmare_door.png",
+   "elements/pf_mindscape_nightmare_dread.png",
+   "elements/pf_mindscape_nightmare_eye.png",
+   "elements/pf_mindscape_penrose.png",
+   "elements/pf_mindscape_shelf0.png",
+   "elements/pf_mindscape_shelf1.png",
+   "elements/pf_mindscape_shelf2.png",
+   "elements/pf_mindscape_thought.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "dark006 (vacuum rings)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "Penrose triangle, impossible stairs, glowing door, floating library shelves and books, mirror-glass checker floor, rune-ring platforms, thought mist"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgPsychic (pastel gradient map)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "dark006 (vacuum rings)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "Penrose triangle, impossible stairs, glowing door, floating library shelves and books, mirror-glass checker floor, rune-ring platforms, thought mist"
+   ],
+   [
+    "stage 2",
+    "Nightmare: same dream curdled crimson-black - blinking eyes in the void, shadow hands, blood-red door, dread mist"
+   ]
   ]
- ],
- "MOUNTAIN": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgMountain, enemybaseMountain"
+ },
+ "MOUNTAIN": {
+  "files": [
+   "battlebg/field_mountain.png",
+   "battlebg/field_mountain_hd.png",
+   "elements/pf_mountain_clouds.png",
+   "elements/pf_mountain_mist.png",
+   "elements/pf_mountain_pine0.png",
+   "elements/pf_mountain_pine1.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "sky, layered snow-capped ridges, pines, clouds, valley mist"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgMountain, enemybaseMountain"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "sky, layered snow-capped ridges, pines, clouds, valley mist"
+   ]
   ]
- ],
- "NEON_GRID": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgZeight (sky repainted to night, extended)"
+ },
+ "NEON_GRID": {
+  "files": [
+   "battlebg/field_neon_grid.png",
+   "battlebg/field_neon_grid_blackout.png",
+   "battlebg/field_neon_grid_blackout_hd.png",
+   "battlebg/field_neon_grid_hd.png",
+   "elements/pf_neon_grid_airship.png",
+   "elements/pf_neon_grid_blackout_alarm.png",
+   "elements/pf_neon_grid_blackout_flicker.png",
+   "elements/pf_neon_grid_blackout_sparks.png",
+   "elements/pf_neon_grid_board0.png",
+   "elements/pf_neon_grid_board1.png",
+   "elements/pf_neon_grid_board2.png",
+   "elements/pf_neon_grid_circuits.png",
+   "elements/pf_neon_grid_scan.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "spinLights"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "Lumen skyline, perspective circuit grid, neon ring platforms, holo-billboards, airship, circuit glow"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgZeight (sky repainted to night, extended)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "spinLights"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "Lumen skyline, perspective circuit grid, neon ring platforms, holo-billboards, airship, circuit glow"
+   ],
+   [
+    "stage 2",
+    "Blackout: same rooftop with the grid dead - dark city, red emergency lamps, live sparks crackling over the floor, a few circuits buzzing back"
+   ]
   ]
- ],
- "NEW_MOON": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgStarlight1 (starfield, darkened)"
+ },
+ "NEW_MOON": {
+  "files": [
+   "battlebg/field_new_moon.png",
+   "battlebg/field_new_moon_abyss.png",
+   "battlebg/field_new_moon_abyss_hd.png",
+   "battlebg/field_new_moon_hd.png",
+   "battlebg/field_new_moon_lamplight.png",
+   "battlebg/field_new_moon_lamplight_hd.png",
+   "elements/pf_new_moon_abyss_rim.png",
+   "elements/pf_new_moon_abyss_void.png",
+   "elements/pf_new_moon_corona.png",
+   "elements/pf_new_moon_lamplight_lamps.png",
+   "elements/pf_new_moon_lamplight_pools.png",
+   "elements/pf_new_moon_lamplight_windows.png",
+   "elements/pf_new_moon_shadow.png",
+   "elements/pf_new_moon_windows.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "dark004 (vacuum rings)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "dark moon with violet corona, Underveil rooftops and windows, violet rim light"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgStarlight1 (starfield, darkened)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "dark004 (vacuum rings)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "dark moon with violet corona, Underveil rooftops and windows, violet rim light"
+   ],
+   [
+    "stage 2",
+    "Abyss: same rooftops swallowed by darkness - stars and moon gone, only faint violet edges, void mist"
+   ],
+   [
+    "stage 3",
+    "Lamplight: same rooftops with Nadir's gaslamps lit - lamp posts, warm windows and light pools, rising lamp sparks"
+   ]
   ]
- ],
- "PRISM_ARENA": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgChampion (gradient-mapped night, as the arena sky glow)"
+ },
+ "PRISM_ARENA": {
+  "files": [
+   "battlebg/field_prism_arena.png",
+   "battlebg/field_prism_arena_hd.png",
+   "elements/pf_prism_arena_beam0.png",
+   "elements/pf_prism_arena_beam1.png",
+   "elements/pf_prism_arena_plates.png",
+   "elements/pf_prism_arena_prism.png",
+   "elements/pf_prism_arena_sigil.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "lightsA"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "Crownhaven stands with crowd lights, the 18 Plates ring, prismatic floor sigil, searchlights, marble platforms"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgChampion (gradient-mapped night, as the arena sky glow)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "lightsA"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "Crownhaven stands with crowd lights, the 18 Plates ring, prismatic floor sigil, searchlights, marble platforms"
+   ]
   ]
- ],
- "RAINBOW": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgRainbow, enemybaseRainbow"
+ },
+ "RAINBOW": {
+  "files": [
+   "battlebg/field_rainbow.png",
+   "battlebg/field_rainbow_hd.png",
+   "elements/pf_rainbow_clouds.png",
+   "elements/pf_rainbow_mist.png",
+   "elements/pf_rainbow_shimmer.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "cloud-bank floor, prismatic mist, drifting foreground clouds"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgRainbow, enemybaseRainbow"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "cloud-bank floor, prismatic mist, drifting foreground clouds"
+   ]
   ]
- ],
- "SCRAPYARD": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgFactory (gradient-mapped rust, extended)"
+ },
+ "SCRAPYARD": {
+  "files": [
+   "battlebg/field_scrapyard.png",
+   "battlebg/field_scrapyard_hd.png",
+   "elements/pf_scrapyard_alarm.png",
+   "elements/pf_scrapyard_alarmglow.png",
+   "elements/pf_scrapyard_chain.png",
+   "elements/pf_scrapyard_dangle.png",
+   "elements/pf_scrapyard_smoke.png",
+   "elements/pf_scrapyard_spark.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "same layout wrecked: dead broken gears, collapsed catwalk, snapped conveyor, tipped crucible, scrap heaps, rusted platforms, red alarm lamp, severed-cable sparks, smoke"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgFactory (gradient-mapped rust, extended)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "same layout wrecked: dead broken gears, collapsed catwalk, snapped conveyor, tipped crucible, scrap heaps, rusted platforms, red alarm lamp, severed-cable sparks, smoke"
+   ]
   ]
- ],
- "SILKWOOD": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgForest (graded green-gold)"
+ },
+ "SILKWOOD": {
+  "files": [
+   "battlebg/field_silkwood.png",
+   "battlebg/field_silkwood_hd.png",
+   "elements/pf_silkwood_canopy.png",
+   "elements/pf_silkwood_cocoon0.png",
+   "elements/pf_silkwood_cocoon1.png",
+   "elements/pf_silkwood_dew.png",
+   "elements/pf_silkwood_strand0.png",
+   "elements/pf_silkwood_strand1.png",
+   "elements/pf_silkwood_strand2.png",
+   "elements/pf_silkwood_strand3.png",
+   "elements/pf_silkwood_strand4.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "forestShade, lightsC"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "orb webs with dew, silk curtains, silk-wrapped stump platforms, hanging strands and cocoons"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgForest (graded green-gold)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "forestShade, lightsC"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "orb webs with dew, silk curtains, silk-wrapped stump platforms, hanging strands and cocoons"
+   ]
   ]
- ],
- "SNOWY_MOUNTAIN": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgSnowyMountain, enemybaseSnowyMountain"
+ },
+ "SNOWY_MOUNTAIN": {
+  "files": [
+   "battlebg/field_snowy_mountain.png",
+   "battlebg/field_snowy_mountain_hd.png",
+   "elements/pf_snowy_mountain_blizzard.png",
+   "elements/pf_snowy_mountain_flags.png",
+   "elements/pf_snowy_mountain_flags2.png",
+   "elements/pf_snowy_mountain_spindrift.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgSnowyMountain, enemybaseSnowyMountain"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
+   ]
   ]
- ],
- "STORMFRONT": [
-  [
-   "Pok\u00e9mon Desolation (Desolation Team)",
-   "battlebgClouds (gradient-mapped to storm)"
+ },
+ "STORMFRONT": {
+  "files": [
+   "battlebg/field_stormfront.png",
+   "battlebg/field_stormfront_hd.png",
+   "elements/pf_stormfront_lightning.png",
+   "elements/pf_stormfront_mist.png",
+   "elements/pf_stormfront_pennant.png",
+   "elements/pf_stormfront_scud.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "airship deck, rail, mast and rigging, pennant, scud clouds, lightning glow"
+  "sources": [
+   [
+    "Pok\u00e9mon Desolation (Desolation Team)",
+    "battlebgClouds (gradient-mapped to storm)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "airship deck, rail, mast and rigging, pennant, scud clouds, lightning glow"
+   ]
   ]
- ],
- "UNDERWATER": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgUnderwater, enemybaseUnderwater"
+ },
+ "UNDERWATER": {
+  "files": [
+   "battlebg/field_underwater.png",
+   "battlebg/field_underwater_hd.png",
+   "elements/pf_underwater_kelp0.png",
+   "elements/pf_underwater_kelp1.png",
+   "elements/pf_underwater_kelp2.png",
+   "elements/pf_underwater_kelp3.png",
+   "elements/pf_underwater_ray0.png",
+   "elements/pf_underwater_ray1.png",
+   "elements/pf_underwater_ray2.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "bubbles, lightsC, forestShade (caustics)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "sunken ruin columns, kelp forest (swaying), god rays"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgUnderwater, enemybaseUnderwater"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "bubbles, lightsC, forestShade (caustics)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "sunken ruin columns, kelp forest (swaying), god rays"
+   ]
   ]
- ],
- "VOLCANIC": [
-  [
-   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgVolcano, enemybaseVolcano (extended to the EBDX room, platforms re-placed)"
+ },
+ "VOLCANIC": {
+  "files": [
+   "battlebg/field_volcanic.png",
+   "battlebg/field_volcanic_hd.png",
+   "elements/pf_volcanic_banner0.png",
+   "elements/pf_volcanic_banner1.png",
+   "elements/pf_volcanic_caldera.png",
+   "elements/pf_volcanic_haze.png",
+   "elements/pf_volcanic_lavaglow.png"
   ],
-  [
-   "Elite Battle: DX stock elements (Luka S.J.)",
-   "decor006, decor009, base001, bubbleRed (the MAGMA environment's layers)"
-  ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "obsidian pillars, dragon-lord banners, lava and caldera glow, heat haze"
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgVolcano, enemybaseVolcano (extended to the EBDX room, platforms re-placed)"
+   ],
+   [
+    "Elite Battle: DX stock elements (Luka S.J.)",
+    "decor006, decor009, base001, bubbleRed (the MAGMA environment's layers)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "obsidian pillars, dragon-lord banners, lava and caldera glow, heat haze"
+   ]
   ]
- ],
- "WASTELAND": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgWasteland (sky re-graded), enemybaseWasteland"
+ },
+ "WASTELAND": {
+  "files": [
+   "battlebg/field_wasteland.png",
+   "battlebg/field_wasteland_hd.png",
+   "elements/pf_wasteland_pools.png",
+   "elements/pf_wasteland_smog.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgWasteland (sky re-graded), enemybaseWasteland"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
+   ]
   ]
- ],
- "WATER_SURFACE": [
-  [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgWaterSurface, enemybaseWaterSurface"
+ },
+ "WATER_SURFACE": {
+  "files": [
+   "battlebg/field_water_surface.png",
+   "battlebg/field_water_surface_hd.png",
+   "elements/pf_water_surface_beacon.png",
+   "elements/pf_water_surface_buoy.png",
+   "elements/pf_water_surface_buoy2.png",
+   "elements/pf_water_surface_glints.png",
+   "elements/pf_water_surface_spray.png"
   ],
-  [
-   "Prismfall (procedural, art/battlebacks/*.py)",
-   "Ebbmouth harbour and lighthouse silhouette, drowned pilings, buoys, glint strip, spray"
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgWaterSurface, enemybaseWaterSurface"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "Ebbmouth harbour and lighthouse silhouette, drowned pilings, buoys, glint strip, spray"
+   ]
   ]
- ]
+ },
+ "WILDFIRE": {
+  "files": [
+   "battlebg/field_wildfire.png",
+   "battlebg/field_wildfire_embers.png",
+   "battlebg/field_wildfire_embers_hd.png",
+   "battlebg/field_wildfire_hd.png",
+   "elements/pf_wildfire_blaze.png",
+   "elements/pf_wildfire_embers_coals.png",
+   "elements/pf_wildfire_embers_smoke.png",
+   "elements/pf_wildfire_flame.png",
+   "elements/pf_wildfire_heat.png",
+   "elements/pf_wildfire_smoke.png"
+  ],
+  "sources": [
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgGoldForest, enemybaseGoldForest (gradient-mapped to fire)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "burning-canopy glow, 4-frame flame sheets on trees and ground, smoke and heat strips"
+   ],
+   [
+    "stage 2",
+    "Embers: same forest charred - charcoal grade, glowing coal beds, ghostly smoke, pioneer sprouts, falling ash"
+   ]
+  ]
+ }
 }

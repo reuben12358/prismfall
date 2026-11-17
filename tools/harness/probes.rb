@@ -271,7 +271,7 @@ module Harness
           elsif rule[:turns]
             scripts << [:SPLASH] * (rule[:turns] + 1)
           elsif rule[:check]
-            scripts = []
+            scripts << [:SPLASH] * 8   # time-based checks (fuel, counters) fire on their own; others stay "not observed"
           else
             prefix = []
             if !rule[:to] && !rule[:stage] && !rule[:stage_delta] && rule[:rewind]
@@ -280,6 +280,11 @@ module Harness
               tgt = rules.find { |r| r[:id] == rid }
               pm = tgt && (results.find { |r| r[:rule_id] == rid && r[:ok] }&.[](:move) || moves_for_rule(tgt).first)
               prefix = [pm] if pm
+            end
+            # Rules gated by :in_weather get that weather set up first.
+            if rule[:in_weather]
+              wm = rule[:in_weather].map { |w| WEATHER_MOVES[w] }.compact.first
+              prefix = [wm] + prefix if wm
             end
             moves_for_rule(rule).each { |mv| scripts << prefix + ([mv] * uses) }
           end
@@ -366,8 +371,12 @@ module Harness
                "#{rule[:battlers]&.values&.any? { |v| v.is_a?(Proc) } ? ' +condition' : ''}"
         res = nil
         conditional = rule[:battlers]&.values&.any? { |v| v.is_a?(Proc) }
-        # Rules gated by a condition proc are also tried under each weather.
+        # Rules gated by a condition proc are also tried under each weather; :in_weather rules under theirs.
         preludes = conditional ? [[], [:RAINDANCE], [:SUNNYDAY], [:SANDSTORM], [:HAIL]] : [[]]
+        if rule[:battlers] && rule[:battlers][:in_weather]
+          preludes = rule[:battlers][:in_weather].map { |w| WEATHER_MOVES[w] }.compact.uniq.map { |m| [m] }
+          preludes = [[]] if preludes.empty?
+        end
         frozen = Array(rule[:battlers] && rule[:battlers][:status]).include?(:FROZEN)   # fixed rolls: no random thaw
         preludes.each do |prelude|
           subjects = eor_subjects(rule[:battlers], rule[:cure_status] ? :BURN : nil)

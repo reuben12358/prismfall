@@ -99,4 +99,8 @@ New Game start tile is boxed in. You may call it at the end of build.py; it is i
    525 POKEMANIAC Ferris; 560 LASS Tilde, SAILOR Haakon, BIRDKEEPER Ailsa; 562 BUGCATCHER Pell, POKEMONRANGER_F Orla,
    HIKER Ulf, CAMPER Rook, TWINS "Ana & Ida"; 563 POKEMONRANGER_M Sigurd. Route 1's Pim and Dory are now in pbs/trainers.txt.
    `trainers_needed.txt` lists only the maps of the last (partial) build, so these slipped past it.
+   **Done (playtest agent):** all 16 added to pbs/trainers.txt and tools/trainer_gen/routes.py (BALANCE 4b levels, 3 variants).
+   New check for every battle form on every map: `python3 -I tools/validate_map_trainers.py` (run it after each build).
 9. `mapgen/ruby/006_MapStory.rb` `pfm_quest` formats "QUEST LOG: "{1}" — {2}" with an em dash: shows a box on every quest.
+   **Items 4 and 9 done at display time:** `Plugins/~Prismfall Base Fixes/002_Font_Glyphs.rb` draws — as "--", – as "-",
+   ₽ as "$" and arrows as ->, <-, ^, v in every text (Bitmap#draw_text / text_size). Keep writing "—" freely.

@@ -244,39 +244,67 @@ def rib_gate():
 
 
 # --------------------------------------------------------------------------------------------- walkways, smoke, props
+ROPE = (196, 172, 120, 255); ROPED = (128, 104, 70, 255)
+
+
 def walkway_h():
-    """1x1 rope walkway, east-west: snow-dusted planks between two hand-ropes (high overhead)"""
+    """1x1 rope walkway, east-west, high overhead: snow-dusted planks, a dark underside and a cast shadow below
+    (it reads as up in the air), hand-ropes above with hangers"""
     im, d = canvas(1, 1)
-    d.rectangle([0, 5, 15, 11], fill=WOOD[2])
-    for x in range(0, 16, 4): d.line([x, 5, x, 11], fill=WOOD[0]); d.line([x + 1, 6, x + 1, 10], fill=WOOD[3])
-    d.line([0, 4, 15, 4], fill=OUT); d.line([0, 12, 15, 12], fill=OUT)
-    for x in range(16): P(im, x, 5, SNOW[3] if x % 5 else SNOW[2]); P(im, x, 6, SNOW[2] if x % 3 == 0 else im.getpixel((x, 6)))
-    for x in range(16):
-        P(im, x, 2 + (1 if 4 <= x <= 11 else 0), (196, 172, 120, 255)); P(im, x, 14 + (1 if 4 <= x <= 11 else 0), (196, 172, 120, 255))
+    for x in range(16): P(im, x, 14, (90, 100, 130, 110)); P(im, x, 15, (90, 100, 130, 70))      # shadow far below
+    d.rectangle([0, 6, 15, 10], fill=WOOD[2])
+    for x in range(0, 16, 3): d.line([x, 6, x, 10], fill=WOOD[0]); P(im, x + 1, 7, WOOD[3])
+    d.line([0, 11, 15, 11], fill=WOOD[0]); d.line([0, 12, 15, 12], fill=OUT)
+    for x in range(16): P(im, x, 6, SNOW[3] if x % 4 else SNOW[2])
+    for x in range(16):                                  # hand-rope sagging between posts, hangers down to the planks
+        yy = 2 + (1 if 3 <= x <= 12 else 0)
+        P(im, x, yy, ROPE); P(im, x, yy + 1, ROPED)
+    for x in (0, 15): d.line([x, 1, x, 6], fill=WOOD[1])
+    for x in (5, 10): d.line([x, 4, x, 6], fill=ROPED)
     return im
 
 
 def walkway_v():
     im, d = canvas(1, 1)
     d.rectangle([4, 0, 11, 15], fill=WOOD[2])
-    for y in range(0, 16, 4): d.line([4, y, 11, y], fill=WOOD[0]); d.line([5, y + 1, 10, y + 1], fill=WOOD[3])
-    d.line([3, 0, 3, 15], fill=OUT); d.line([12, 0, 12, 15], fill=OUT)
+    for y in range(0, 16, 3): d.line([4, y, 11, y], fill=WOOD[0]); P(im, 5, y + 1, WOOD[3])
+    d.line([3, 0, 3, 15], fill=OUT); d.line([12, 0, 12, 15], fill=OUT); d.line([13, 0, 13, 15], fill=(90, 100, 130, 110))
     for y in range(16):
-        P(im, 4, y, SNOW[3] if y % 4 else SNOW[2]); P(im, 1, y, (196, 172, 120, 255)); P(im, 14, y, (196, 172, 120, 255))
+        P(im, 4, y, SNOW[3] if y % 4 else SNOW[2]); P(im, 1, y, ROPE); P(im, 14, y, ROPE)
     return im
 
 
 def walkway_end(side):
-    """the rope lashing where a walkway meets a giant's bole: knot and a hanging lantern"""
+    """where a walkway is lashed to a giant's bole: the last planks, a rope knot, a hanging lantern"""
     im, d = canvas(1, 1)
-    x0 = 0 if side == 'w' else 8
-    d.rectangle([x0, 5, x0 + 7, 11], fill=WOOD[2])
-    for x in range(x0, x0 + 8, 4): d.line([x, 5, x, 11], fill=WOOD[0])
-    d.line([x0, 4, x0 + 7, 4], fill=OUT); d.line([x0, 12, x0 + 7, 12], fill=OUT)
-    for x in range(x0, x0 + 8): P(im, x, 5, SNOW[3])
-    kx = 7 if side == 'w' else 8
-    disc(im, kx, 8, 2.4, (150, 120, 80, 255)); disc(im, kx, 8, 1.3, (196, 172, 120, 255))
-    d.line([kx, 11, kx, 13], fill=OUT); d.rectangle([kx - 1, 13, kx + 1, 15], fill=GLOW[1], outline=OUT)
+    x0 = 0 if side == 'w' else 6
+    for x in range(x0, x0 + 10): P(im, x, 14, (90, 100, 130, 110)); P(im, x, 15, (90, 100, 130, 70))
+    d.rectangle([x0, 6, x0 + 9, 10], fill=WOOD[2])
+    for x in range(x0, x0 + 10, 3): d.line([x, 6, x, 10], fill=WOOD[0])
+    d.line([x0, 11, x0 + 9, 11], fill=WOOD[0]); d.line([x0, 12, x0 + 9, 12], fill=OUT)
+    for x in range(x0, x0 + 10): P(im, x, 6, SNOW[3]); P(im, x, 2, ROPE); P(im, x, 3, ROPED)
+    kx = 11 if side == 'w' else 4
+    disc(im, kx, 5, 2.6, ROPED); disc(im, kx, 5, 1.5, ROPE)
+    d.line([kx, 8, kx, 9], fill=OUT); d.rectangle([kx - 1, 10, kx + 1, 13], fill=GLOW[1], outline=OUT); P(im, kx, 11, GLOW[2])
+    return im
+
+
+def palisade(kind):
+    """the town palisade: sharpened log stakes lashed with rope, snow on the points.  'v' runs north-south (seen
+    edge-on: a column of stakes), 'h' east-west (a row of stakes, lower half solid)"""
+    im, d = canvas(1, 1)
+    if kind == 'h':
+        for i, x in enumerate(range(0, 16, 4)):
+            top = 2 + (i % 2)
+            d.rectangle([x, top + 2, x + 3, 15], fill=WOOD[2]); d.line([x, top + 2, x, 15], fill=WOOD[0])
+            d.line([x + 1, top + 3, x + 1, 14], fill=WOOD[3])
+            d.polygon([(x, top + 2), (x + 1.5, top - 1), (x + 3, top + 2)], fill=WOOD[1]); P(im, x + 1, top, SNOW[3])
+        d.line([0, 9, 15, 9], fill=ROPE); d.line([0, 10, 15, 10], fill=ROPED)
+    else:
+        d.rectangle([5, 0, 10, 15], fill=WOOD[2]); d.line([5, 0, 5, 15], fill=WOOD[0]); d.line([10, 0, 10, 15], fill=WOOD[0])
+        d.line([6, 0, 6, 15], fill=WOOD[3])
+        for y in range(0, 16, 4): d.line([5, y, 10, y], fill=WOOD[1]); P(im, 7, y + 1, SNOW[3]); P(im, 8, y + 1, SNOW[2])
+        for y in (5, 13): d.line([4, y, 11, y], fill=ROPE)
     return im
 
 
@@ -284,7 +312,7 @@ def smoke(kind):
     """a hearth plume, 1x2 high overhead: applewood (thin, warm grey) or whale oil (heavier, blue-grey)"""
     im, d = canvas(1, 2)
     rng = random.Random(1 if kind == 'apple' else 2)
-    base = (180, 172, 168) if kind == 'apple' else (120, 126, 146)
+    base = (176, 166, 160) if kind == 'apple' else (104, 110, 132)
     hi = (236, 232, 228) if kind == 'apple' else (188, 194, 208)
     for i, y in enumerate(range(30, -1, -3)):
         x = 8 + 3.5 * math.sin(y / 5.0 + (0 if kind == 'apple' else 1.3))
@@ -392,11 +420,13 @@ def drift(seed):
     return im
 
 
-def fishing_hole():
-    """an ice-fishing hole with a little tripod and line (1x1, over ice)"""
+def fishing_hole(tripod=False):
+    """an ice-fishing hole: dark water in a ring of broken white ice (1x1, over ice); with a little line tripod"""
     im, d = canvas(1, 1)
-    d.ellipse([3, 8, 12, 14], fill=(40, 62, 98, 255), outline=ICE[3]); d.ellipse([5, 9, 10, 12], fill=(30, 46, 76, 255))
-    d.line([3, 14, 7, 2], fill=WOOD[1]); d.line([11, 14, 7, 2], fill=WOOD[1]); d.line([7, 2, 7, 11], fill=(220, 220, 220, 255))
+    d.ellipse([3, 6, 12, 13], fill=ICE[3]); d.ellipse([4, 7, 11, 12], fill=(52, 84, 128, 255)); d.ellipse([5, 8, 9, 10], fill=(70, 110, 156, 255))
+    P(im, 3, 9, ICE[1]); P(im, 12, 10, ICE[1]); P(im, 7, 13, ICE[2])
+    if tripod:
+        d.line([4, 13, 8, 3], fill=WOOD[2]); d.line([12, 13, 8, 3], fill=WOOD[2]); d.line([8, 3, 8, 9], fill=SNOW[1])
     return im
 
 
@@ -413,8 +443,8 @@ def brazier():
     im, d = canvas(1, 2)
     d.line([4, 31, 7, 18], fill=OUT, width=2); d.line([11, 31, 8, 18], fill=OUT, width=2)
     d.rectangle([2, 15, 13, 19], fill=STONE[1], outline=OUT); d.line([3, 16, 12, 16], fill=STONE[3])
-    for i, (x, y, r, c) in enumerate(((7.5, 11, 3.4, GLOW[0]), (7.5, 10, 2.4, GLOW[1]), (7, 9, 1.2, GLOW[2]))): disc(im, x, y, r, c)
-    disc(im, 7.5, 8, 4.5, (255, 200, 110, 40))
+    d.polygon([(3, 15), (5, 9), (7, 12), (8, 6), (10, 11), (12, 8), (12, 15)], fill=(214, 92, 40, 255))
+    d.polygon([(5, 15), (7, 10), (8, 13), (10, 9), (11, 15)], fill=GLOW[1]); d.line([7, 14, 9, 12], fill=GLOW[2])
     return im, ['O', 'W']
 
 
@@ -463,6 +493,37 @@ def hearth_stone():
     return im, ['O', 'W']
 
 
+BARK = [(56, 58, 76, 255), (88, 94, 118, 255), (122, 130, 156, 255), (164, 174, 198, 255)]
+
+
+def fallen_log(part):
+    """the fallen giant over the Rimewood ravine, lying north-south, glazed in ice: 2 tiles wide.  part 'n' the root
+    plate end, 'm' a trunk segment (repeats), 's' the snapped crown end.  Walkable (it is the bridge)."""
+    im, d = canvas(2, 1)
+    if part == 'm':
+        d.rectangle([3, 0, 28, 15], fill=BARK[1])
+        for x in range(4, 28, 3):
+            for y in range(16):
+                if (y + x * 3) % 7 < 4: P(im, x, y, BARK[2])
+        d.line([3, 0, 3, 15], fill=BARK[0]); d.line([28, 0, 28, 15], fill=BARK[0])
+        d.line([5, 0, 5, 15], fill=BARK[3]); d.line([6, 0, 6, 15], fill=ICE[2])
+        for y in (3, 11): P(im, 14, y, ICE[3]); P(im, 15, y, ICE[2])
+        d.line([2, 0, 2, 15], fill=(90, 100, 130, 110)); d.line([29, 0, 29, 15], fill=(90, 100, 130, 160))
+        for y in range(0, 16, 5): P(im, 10, y, SNOW[3]); P(im, 11, y, SNOW[3]); P(im, 20, y + 2, SNOW[3])
+    elif part == 'n':
+        d.ellipse([0, 1, 31, 15], fill=BARK[0])
+        d.ellipse([2, 3, 29, 14], fill=(110, 84, 64, 255)); d.ellipse([7, 5, 24, 13], fill=(140, 108, 80, 255))
+        for k in range(4): d.arc([7 + k * 2, 5 + k, 24 - k * 2, 13 - k], 0, 360, fill=(120, 90, 66, 255))
+        d.rectangle([3, 12, 28, 15], fill=BARK[1]); d.line([5, 12, 5, 15], fill=BARK[3])
+        snow_cap(im, 4, 26, 1, 2, 40)
+    else:
+        d.rectangle([3, 0, 28, 8], fill=BARK[1]); d.line([3, 0, 3, 8], fill=BARK[0]); d.line([28, 0, 28, 8], fill=BARK[0])
+        d.line([5, 0, 5, 8], fill=BARK[3])
+        d.polygon([(3, 8), (8, 13), (12, 9), (16, 14), (20, 9), (24, 13), (28, 8)], fill=(150, 116, 86, 255), outline=BARK[0])
+        d.line([8, 2, 4, 0], fill=BARK[0])
+    return im
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -488,7 +549,11 @@ def pieces():
     im, c = banner(TEAL); out['fw_ban_i'] = (im, c, None)
     for i in range(3): out['fw_drift%d' % i] = (drift(i + 1), ['F'], None)
     out['fw_hole'] = (fishing_hole(), ['F'], None)
+    out['fw_hole_t'] = (fishing_hole(True), ['F'], None)
+    out['fw_pal_h'] = (palisade('h'), ['W'], None)
+    out['fw_pal_v'] = (palisade('v'), ['W'], None)
     im, c = frozen_fall(4, 5); out['fw_fall'] = (im, c, None)
+    for k in 'nms': out['fw_log_' + k] = (fallen_log(k), ['FF'], None)
     return out
 
 
