@@ -61,6 +61,16 @@ if defined?(MenuHandlers)
     }
   })
 
+  MenuHandlers.add(:debug_menu, :prismfall_cutscenes_photosensitive, {
+    "name"        => _INTL("Toggle photosensitive mode"),
+    "parent"      => :prismfall_cutscenes_menu,
+    "description" => _INTL("Weak flashes, no impact frames, little camera shake in cutscenes."),
+    "effect"      => proc {
+      Prismfall::Cutscene.photosensitive = !Prismfall::Cutscene.photosensitive?
+      pbMessage(_INTL("Photosensitive mode: {1}.", (Prismfall::Cutscene.photosensitive?) ? _INTL("on") : _INTL("off")))
+    }
+  })
+
   MenuHandlers.add(:debug_menu, :prismfall_cutscenes_portraits, {
     "name"        => _INTL("Portrait bubbles"),
     "parent"      => :prismfall_cutscenes_menu,

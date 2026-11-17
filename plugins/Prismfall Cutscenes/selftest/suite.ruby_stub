@@ -249,6 +249,25 @@ C.define(:TECHNIQUES) do
   anim 3, at: :fx
   fade_out steps: 5, duration: 0.25
 end
+blends = []
+cams = []
+C.define(:TECH2) do
+  background :color, color: [0, 0, 0]
+  actor :glow, sheet: "Graphics/Characters/FlipTest", at: [100, 300], blend: :add
+  actor :hole, sheet: "Graphics/Characters/FlipTest", at: [200, 300], blend: :sub
+  actor :runner, charset: "NPC 01", at: [0, 300]
+  call { |sc| blends.push(sc.actors[:glow].sprite.blend_type, sc.actors[:hole].sprite.blend_type) }
+  4.times { |i| at(0.2 + (i * 0.1)) { play_sheet "Graphics/Characters/FlipTest", grid: [4, 4], frames: 0..3, at: [100 + (i * 60), 280], hold: 0.05 } }
+  follow :runner, smooth: 0.2
+  move :runner, to: [400, 300], duration: 1.0, ease: :linear
+  wait 1.6
+  call { |sc| cams.push(sc.camera.x.round, sc.actors.keys.count { |k| k.to_s.start_with?("__fx") }) }
+  follow off: true
+  pan to: [256, 192], duration: 0.3
+end
+r = run_scene(:TECH2)
+check "blend modes", blends == [1, 2], blends.inspect
+check "play_sheet chain cleans up; camera followed", r[:ok] && r[:leaks].empty? && cams == [[400, 0]].flatten, [r, cams].inspect
 d = C.build(:TECHNIQUES)
 check "flipbook durations", (C.build { actor :a, sheet: "x"; flipbook :a, frames: 0..3, hold: 0.25, wait: true }.length - 1.0).abs < 1e-6
 r = run_scene(:TECHNIQUES)
@@ -279,6 +298,14 @@ C.define(:ONMAP, on_map: true) do
 end
 r = run_scene(:ONMAP)
 check "on-map scene", r[:ok] && r[:leaks].empty? && spots == [[300.0, 160.0], 0.0] && r[:seconds] < 0.9, [r, spots].inspect
+# war climax uses overworld-scale legend sheets when they exist
+FileUtils.mkdir_p(File.join(sheet_dir, "Graphics/Characters"))
+system("convert", "-size", "552x360", "xc:none", "-fill", "#2050c0", "-draw", "rectangle 20,20 120,80", File.join(sheet_dir, "Graphics/Characters/pkmn_kyogre_war.png"))
+dw = C.build(:WAR_CLIMAX, variant: :A)
+check "legend sheet picked up", dw.events.any? { |e| e.op == :actor && e.args[:id] == :water && e.args[:sheet] } &&
+                                dw.events.any? { |e| e.op == :actor && e.args[:id] == :fire && e.args[:species] }
+r = run_scene(:WAR_CLIMAX, variant: :A)
+check "war climax with a legend sheet", r[:ok] && r[:leaks].empty?, r.inspect
 # photosensitive mode
 C.photosensitive = true
 peak = 0

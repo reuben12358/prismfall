@@ -622,7 +622,7 @@ module Prismfall
 
       # A cut or camera jump ends any pan/zoom still running.
       def stop_camera_moves
-        @effects.reject! { |e| e.id == :__camera }
+        @effects.reject! { |e| e.id == :__camera || e.id == :__follow }   # explicit camera moves end a follow too
       end
 
       def camera_tween(dur, ease, &block)

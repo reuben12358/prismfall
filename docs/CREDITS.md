@@ -20,7 +20,21 @@ WilsonScarloxy, Minorthreat0987, PurpleZaffre, Akizakura16, WildDeadHero, Derlo,
 Voltseon, WesleyFG, Shawn Frost, NSora-96, DarkDragonn, rafa-cac, Newtiteuf, moca, Jaggedthorn, Raindropsonwhiskers,
 and the Pokémon Tectonic team.
 
-### Pokémon Rejuvenation tilesets
+### Pokémon Rejuvenation, Pokémon Reborn and Pokémon Desolation
+Tilesets, autotiles and other graphics from these games are used with credit, for a free non-commercial fan project.
+- **Pokémon Rejuvenation** (v14.0) by **the Rejuvenation Team** (Jan and team). The game's own full credits run as a
+  video (`Graphics/Videos/Credits.ogv`); its published asset rules ask users to credit the Rejuvenation Team and forbid
+  copying its maps. We take tiles only, never map layouts.
+- **Pokémon Reborn** (19.5) by **the Reborn Team** (Amethyst and team). Its credits list, for tilesets and mapping:
+  Amethyst, Crim, Smeargletail; mapping support: Ikaru, Autumn, Lin, Kanaya; tilesets: Pokémon Essentials,
+  princess-phoenix, Lin.
+- **Pokémon Desolation** (Episode 6) by **the Desolation Team**. Its in-game credits script carries the same
+  tileset and mapping list as Reborn's (Amethyst, Crim, Smeargletail; Ikaru, Autumn, Lin, Kanaya; Pokémon Essentials,
+  princess-phoenix, Lin). Check the game's own credit screens for additions before shipping.
+- These games draw on the community tile artists credited elsewhere in this file (Kyle Dove, Speedialga, Alucus,
+  WesleyFG, ThatsSoWitty's Public Tileset contributors and others). Credit them as those games do.
+
+### Pokémon Rejuvenation tilesets (via Where Love Lies Overhaul)
 Sheridan, Gearen City, Route 2/3, Goldenleaf, Amethyst Cave, Carotos Mountain, Chrisola Hotel, Rose Theatre and related
 sheets are by the **Pokémon Rejuvenation Team** (Jan and team) and the artists they credit, obtained from the
 Where Love Lies Overhaul mod by pbflo (github.com/pbflo/Where-Love-Lies-Overhaul). Rejuvenation's asset rules: credit

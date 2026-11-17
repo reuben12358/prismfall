@@ -49,6 +49,11 @@ module Prismfall
       legends = var(:legends, true)
       water   = (legends) ? var(:water_legend, :KYOGRE)   : var(:water_mon, :MAMOSWINE)
       fire    = (legends) ? var(:fire_legend, :RESHIRAM)  : var(:fire_mon, :SALAMENCE)
+      # Optional overworld-scale acting sheets (see design/CUTSCENE_RESEARCH.md): used when the file exists.
+      water_sheet = var(:water_sheet, "Graphics/Characters/pkmn_#{water.to_s.downcase}_war")
+      fire_sheet  = var(:fire_sheet, "Graphics/Characters/pkmn_#{fire.to_s.downcase}_war")
+      water_src = (Gfx.resolve(water_sheet)) ? { sheet: water_sheet, grid: [4, 4], frame: 0, px: 2 } : { species: water }
+      fire_src  = (Gfx.resolve(fire_sheet)) ? { sheet: fire_sheet, grid: [4, 4], frame: 0, px: 2 } : { species: fire }
       water_pal = :seaclash
       fire_pal  = :fireclash
       who = WAR_SPEAKERS
@@ -105,7 +110,7 @@ module Prismfall
 
       #--- 2: the water bulges; a shape rises behind Isenmar's ranks -------------
       cut at: [70, 226], zoom: 1.0
-      actor :water, species: water, at: [water_at[0], water_at[1] + 240], flip: true, silhouette: [8, 14, 44],
+      actor :water, **water_src, at: [water_at[0], water_at[1] + 240], flip: water_src[:species] ? true : false, silhouette: [8, 14, 44],
             submerge: (legends) ? 26 : 0, mouth: (legends) ? [-56, -48] : nil
       se :rumble
       shake power: 4, duration: 2.0, decay: false
@@ -113,6 +118,7 @@ module Prismfall
       ring at: [water_at[0], 302], color: :seaclash, radius: 150, duration: 1.4, squash: 0.2
       wait 0.6
       move :water, to: water_at, duration: 1.5, ease: :out
+      flipbook :water, frames: 0..3, hold: 0.1 if water_src[:sheet]
       wait 0.9
       burst :ice_shards, at: [water_at[0], 300], count: 30, speed: 1.3
       burst :lift, at: [water_at[0], 300], count: 12
@@ -150,7 +156,7 @@ module Prismfall
         wait 0.4
       end
       cut at: [430, 200], zoom: 1.0
-      actor :fire, species: fire, at: [fire_at[0] + 40, fire_at[1] - 300], silhouette: [255, 255, 255],
+      actor :fire, **fire_src, at: [fire_at[0] + 40, fire_at[1] - 300], silhouette: [255, 255, 255],
             mouth: (legends) ? [-30, -192] : nil
       move :fire, to: fire_at, duration: 1.3, ease: :out
       emit :embers, from: { actor: :fire, part: :center }, rate: 60, duration: 1.6, id: :wake
@@ -177,6 +183,8 @@ module Prismfall
       tone to: [-72, -72, -52, 40], duration: 0.6
       glow side: :left, level: 0.2, duration: 0.6
       glow side: :right, level: 0.2, duration: 0.6
+      flipbook :water, frames: 4..7, holds: [0.3, 0.1, 0.1, 2.0] if water_src[:sheet]
+      flipbook :fire, frames: 4..7, holds: [0.3, 0.1, 0.1, 2.0] if fire_src[:sheet]
       charge_up at: :water, color: water_pal, duration: 3.5, size: 15, wait: false
       charge_up at: :fire, color: fire_pal, duration: 3.5, size: 15, wait: false
       tremble :water, duration: 3.5

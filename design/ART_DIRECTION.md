@@ -12,9 +12,10 @@
 5. **Real architecture at real scale.** Kingdom seats are castle cities: curtain walls, gatehouses, towers, keep or palace on
    high ground, cathedral, markets, harbour, slums, and grand interiors (throne room, great hall).
 
-**Status.** Ten art sources are cloned (§2.0), including real Rejuvenation v13.5 sheets and several community packs with
-steep-roof houses, market props, castle and bridge stonework, city blocks, ice, volcano and sci-fi sets. The full
-Rejuvenation, Reborn and Desolation games remain unreachable (§2.4).
+**Status (2026-11-16).** The full **Rejuvenation 14, Reborn 19.5 and Desolation E6** games are downloaded (their
+Graphics and Data only) to `/home/claude/ref/games/` and rank at the top of §2.0. That gives us the target look
+directly: Rejuvenation's Goldenleaf and Sheridan sets are the screenshot look. Import guide for builders:
+`/home/claude/fangame/art/tilesets/GAMES_READY.md`. The ten community sources below stay as supplements.
 
 ## 1. Target look
 - 16-px pixel art doubled to 32-px tiles (verified: every 2×2 block in the Tectonic sheets is one colour). **All custom art
@@ -27,18 +28,31 @@ Rejuvenation, Reborn and Desolation games remain unreachable (§2.4).
 ## 2. Tileset decision
 
 ### 2.0 Ranked sources
-| Rank | Source | Path | Verdict against the Rejuvenation screenshot |
+**Tier A: the three games** (official Windows builds from rebornevo.com, downloaded 2026-11-16; Graphics, Data and
+Scripts kept, audio and archives deleted; untrusted data, never run). All tileset sheets and autotiles their
+`Tilesets.rxdata` names are present, so they import with passages, priorities and terrain tags intact
+(`from_rxdata:`), with one caveat: their terrain tags 17+ differ from Tectonic's (see GAMES_READY.md).
+
+| Rank | Game | Path | Contents | Verdict (renders in `/home/claude/ref/art/renders/games/`) |
+|---|---|---|---|---|
+| A1 | **Rejuvenation 14.0** | `/home/claude/ref/games/rejuvenation` (569 MB) | 212 tilesets, 143 sheets, 361 autotiles, 690 maps; 4913 Characters (357 trainer sprites), 2355 Battlers, 1829 Pictures, 26 Fogs, 63 Panoramas, 396 Transitions, 13 Faces | **The target.** Goldenleaf Town (082) is the screenshot look: timber-and-stone houses, autumn trees, lamps, signs, pebbled roads. Also Sheridan (127, 038), Akuwa coast town (013), modern cities (209, 194, 059), desert village (517), dark castle and frozen port (440, 457), white-castle grand interiors (632), ice palace (023), mansions (250, 112). Covers most kingdoms. |
+| A2 | **Desolation E6** | `/home/claude/ref/games/desolation` (148 MB) | 56 tilesets, 78 sheets, 217 autotiles, 480 maps; 1478 Characters, 1423 Battlers, 622 Pictures, 22 Fogs, **90 Faces (96×96 expression portraits)** | Best night cities: Blackview (132) for Nadir, neon Cellia East (401) for Zenith by night, crimson Cellia (241), docks (228), sewers (261); snow forest (026), canyon river (106), beach town (443). Dense and moody. |
+| A3 | **Reborn 19.5.0** | `/home/claude/ref/games/reborn` (152 MB) | 100 tilesets, 93 sheets, 243 autotiles, 896 maps; 1700 Characters (297 trainer sprites), 1326 Battlers, 539 Pictures | Snow city in a mountain bowl (413), dark industrial city (414), canyon city (354, Ossaria), canyon routes (360), slum blocks (324, Nadir), park and forest (132, 269), snowy route (412), grand hall (038). Its mountains are blocky stacked-cliff terraces; use them sparingly. |
+
+**Tier B: community sources** (earlier finds; supplements, mostly loose sheets):
+
+| Rank | Source | Path | Verdict |
 |---|---|---|---|
-| 1 | **Rejuvenation v13.5 sheets** via `pbflo/Where-Love-Lies-Overhaul` | `/home/claude/ref/art/wll` (17 MB) | The real thing: Sheridan's timber houses with steep dark roofs, vines, flower borders, signposts; Gearen's apartment blocks, scaffolds, museum facade. Partial set. |
-| 2 | **Tectonic** | `/home/claude/ref/art/tectonic` | Clean Gen 4/5 look, widest coverage, castle kit, complete autotiles and passages. Plainer houses. |
-| 3 | **Community packs inside `M0RGEBBY/pokemon-fan-game`** | `/home/claude/ref/art/morgebby/Graphics/Tilesets/Tilesets/` (13 MB repo) | The richest find for towns. Two unnamed mega-sheets (`dbf3bkq-…png` 1920×3360, `ddpuooa-…png` 3328×2752): four-season trees and ground, timber houses, castle towers, stone bridges, fountains, canals, torii, windows and doors. Magiscarf's rustic tiles (timber houses, market stalls, washing lines, kilns, crates, rock arches) and concrete tiles. Also princess-phoenix (desert interior, Excello village, burrow), carchagui (city tiles, swamp village, mountains), aveontrainer (factory, machinery, log cabin), Phyromatical (Victory ruins), Zeo254. Beautiful, on target. **All 16-px native: double on import.** No passage data. |
-| 4 | **Ekat's Public Tiles** (80 sheets, same folder, `Ekat's Public Tiles/`, with `Credits.txt`) | as above | Steep-roof "Pointy Buildings", Brick City, Jonquil Town, Silph City (sci-fi), Volcano Set, Haunted and Fairy Woods, Floating Cliffs, Wine Cellar, Ship Interior, Dragonspiral, Snowpoint Temple, Wild West, Coral, Deep Sea, garden and patio props. Charming and dense; Emerald-scale palette, so use as its own family. 16-px native, no passage data. |
-| 5 | **Pokémon Uranium tiles** via `acedogblast/Project-Uranium-Godot` | `/home/claude/ref/art/uranium/Maps/tilesets/` (4 MB) | `PU_buildings+` is a strong Gen 4-style city set: towers, domed palace, brick mansion, pagoda, cooling towers, stadium, harbour. Plus ground, water, caves, indoors. Wide sheets (512–912 px), 32-px tiles; needs re-cutting to 8 columns. No RMXP passage data. |
-| 6 | **Infinite Fusion 2: Hoenn** | `/home/claude/ref/art/pif-hoenn` (6 MB) | 22 sheets with `Tilesets.rxdata`: Rustboro, Slateport, Mauville, Dewford town sets (apartments, market stalls, fountains, lighthouse, shipyard), routes, caves, contest and power-plant interiors. Clean and attractive. Maps not fetched. |
-| 7 | **`Aiwyn17/pokemon` sub-tilesets** | `/home/claude/ref/art/aiwyn/Graphics/Tilesets/` | Ice kingdom material: Freljord villages and port (4480 px), frozen routes, demigod sanctuary, trial cavern, an airship; plus Akizakura16's hi-res interior sheet (19168 px). Direct fit for Isenmar and Zenith's airships. Looks good at sheet level; no maps rendered. |
-| 8 | Infinite Fusion (parts) | `/home/claude/ref/art/pif` | Caves, underwater temple, sewers only. |
-| 9 | LPC (ElizaWy) | `/home/claude/ref/art/_probe/ElizaWy_LPC` (tree only, not checked out) | Open-licence 32-px walls, floors, furniture. Different proportions from Pokémon art; last resort for grand-interior furniture. |
-| 10 | Kenney CC0 library | `/home/claude/ref/art/_probe/Tiddybub_2d-assets` (tree only) | CC0 but flat vector style; does not match. Not recommended. |
+| B1 | **Rejuvenation v13.5 sheets** (superseded by A1) via `pbflo/Where-Love-Lies-Overhaul` | `/home/claude/ref/art/wll` (17 MB) | The real thing: Sheridan's timber houses with steep dark roofs, vines, flower borders, signposts; Gearen's apartment blocks, scaffolds, museum facade. Partial set. |
+| B2 | **Tectonic** | `/home/claude/ref/art/tectonic` | Clean Gen 4/5 look, widest coverage, castle kit, complete autotiles and passages. Plainer houses. |
+| B3 | **Community packs inside `M0RGEBBY/pokemon-fan-game`** | `/home/claude/ref/art/morgebby/Graphics/Tilesets/Tilesets/` (13 MB repo) | The richest find for towns. Two unnamed mega-sheets (`dbf3bkq-…png` 1920×3360, `ddpuooa-…png` 3328×2752): four-season trees and ground, timber houses, castle towers, stone bridges, fountains, canals, torii, windows and doors. Magiscarf's rustic tiles (timber houses, market stalls, washing lines, kilns, crates, rock arches) and concrete tiles. Also princess-phoenix (desert interior, Excello village, burrow), carchagui (city tiles, swamp village, mountains), aveontrainer (factory, machinery, log cabin), Phyromatical (Victory ruins), Zeo254. Beautiful, on target. **All 16-px native: double on import.** No passage data. |
+| B4 | **Ekat's Public Tiles** (80 sheets, same folder, `Ekat's Public Tiles/`, with `Credits.txt`) | as above | Steep-roof "Pointy Buildings", Brick City, Jonquil Town, Silph City (sci-fi), Volcano Set, Haunted and Fairy Woods, Floating Cliffs, Wine Cellar, Ship Interior, Dragonspiral, Snowpoint Temple, Wild West, Coral, Deep Sea, garden and patio props. Charming and dense; Emerald-scale palette, so use as its own family. 16-px native, no passage data. |
+| B5 | **Pokémon Uranium tiles** via `acedogblast/Project-Uranium-Godot` | `/home/claude/ref/art/uranium/Maps/tilesets/` (4 MB) | `PU_buildings+` is a strong Gen 4-style city set: towers, domed palace, brick mansion, pagoda, cooling towers, stadium, harbour. Plus ground, water, caves, indoors. Wide sheets (512–912 px), 32-px tiles; needs re-cutting to 8 columns. No RMXP passage data. |
+| B6 | **Infinite Fusion 2: Hoenn** | `/home/claude/ref/art/pif-hoenn` (6 MB) | 22 sheets with `Tilesets.rxdata`: Rustboro, Slateport, Mauville, Dewford town sets (apartments, market stalls, fountains, lighthouse, shipyard), routes, caves, contest and power-plant interiors. Clean and attractive. Maps not fetched. |
+| B7 | **`Aiwyn17/pokemon` sub-tilesets** | `/home/claude/ref/art/aiwyn/Graphics/Tilesets/` | Ice kingdom material: Freljord villages and port (4480 px), frozen routes, demigod sanctuary, trial cavern, an airship; plus Akizakura16's hi-res interior sheet (19168 px). Direct fit for Isenmar and Zenith's airships. Looks good at sheet level; no maps rendered. |
+| B8 | Infinite Fusion (parts) | `/home/claude/ref/art/pif` | Caves, underwater temple, sewers only. |
+| B9 | LPC (ElizaWy) | `/home/claude/ref/art/_probe/ElizaWy_LPC` (tree only, not checked out) | Open-licence 32-px walls, floors, furniture. Different proportions from Pokémon art; last resort for grand-interior furniture. |
+| B10 | Kenney CC0 library | `/home/claude/ref/art/_probe/Tiddybub_2d-assets` (tree only) | CC0 but flat vector style; does not match. Not recommended. |
 
 **What the new sources close.** Steep-roof townhouses and more house shapes (1, 3, 4), street props such as stalls,
 washing lines, fountains, barrels and lamps (3, 4, 6), landmark buildings (5: domed palace, mansion; 3: towers), castle and
@@ -140,16 +154,16 @@ are not to be used wholesale.
 - `/home/claude/ref/art/reborn-rebalance`, `/home/claude/ref/art/remix`: Reborn/Rejuvenation mods with no graphics.
 - `/home/claude/ref/art/_probe/*`: blobless probes from the search above; nothing usable.
 
-### 2.4 Still not reachable: the full Rejuvenation / Reborn / Desolation games
-The games are not on GitHub, and every other host is blocked by the sandbox proxy (see the search log). These games ship only as downloads from rebornevo.com. If the user wants
-the true Rejuvenation look, this is the one thing only they can do:
-1. Download a game from its official page: Rejuvenation `https://www.rebornevo.com/forums/topic/53076-pokemon-rejuvenation-download/`
-   (v14 notes: `https://rebornevo.com/rejuvdev/records/rejuvenation-v14-v1400-is-out-now-r77/`), Desolation
-   `https://www.rebornevo.com/forums/topic/52360-pokemon-desolation-episode-51/`, Reborn via rebornevo.com's Reborn
-   download page (URL not confirmed from here).
-2. Send back three things from the game folder: `Graphics/Tilesets/`, `Graphics/Autotiles/`, `Data/Tilesets.rxdata`
-   (plus `Graphics/Fogs/` for atmosphere). `import_tileset.py` then registers them with passages intact.
-Rejuvenation's published asset rules: credit the Rejuvenation Team; maps may not be copied.
+### 2.4 Obtained (was: not reachable)
+With internet access enabled, the three games came from their official pages: Reborn as a direct rebornevo.com zip,
+Rejuvenation and Desolation from the official MEGA links (fetched with `/home/claude/ref/art/tools/mega_dl.py`).
+MediaFire mirrors still return 403 and were not needed. Sources used:
+- Reborn: `https://www.rebornevo.com/pr/download/` → `https://www.rebornevo.com/downloads/rebornremote/Reborn_19.5/Reborn-19.5.0-windows.zip` (656 MB)
+- Rejuvenation: `https://www.rebornevo.com/rejuvdown/` → MEGA `Rejuvenation-14.0-windows.zip` (2.1 GB)
+- Desolation: `https://www.rebornevo.com/deso/desodownloads/` → MEGA `Pokemon Desolation.zip` (841 MB)
+
+Rejuvenation's published asset rules: credit the Rejuvenation Team; **maps may not be copied**. Treat the games' maps as
+references only, and take tiles and stamps from them.
 
 ## 3. MAP QUALITY RUBRIC (the generator must pass this before a map ships)
 Measured with `/home/claude/ref/art/tools/map_metrics.py` on 15 Tectonic outdoor maps versus 12 of ours:

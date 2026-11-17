@@ -187,6 +187,9 @@ def gif_frames(spec, rows, a, b):
 
 
 def write_gif(spec, rows, cap, card):
+    if spec.get("gif_watch"):
+        card = title_card(card.size, spec["title"] + " - key stretch",
+                          spec["gif_watch"] + ["The MP4 next to this GIF has the whole battle at the same pace."])
     a = find(rows, spec["gif_from"], "first", nth=spec.get("gif_from_nth", 1))
     b = find(rows, spec["gif_to"], "last", start=a or 0)
     if a is None or b is None:

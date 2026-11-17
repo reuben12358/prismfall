@@ -17,6 +17,11 @@
 #   define(:ID, on_map: true) { actor :mark, image: "...", event: 12, offset: [0, -40] }
 #                                    - play over the live map; actors can follow events
 #   Prismfall::Cutscene.photosensitive = true   - weak flashes, no impact frames, little shake
+#   actor ..., blend: :add / :sub    - additive glow cells / subtractive darkness (Reborn's anim cells)
+#   play_sheet "Graphics/Animations/x", grid: [5, 2], frames: 0..4, at: [x, y], hold: 0.05, blend: :add
+#                                    - a one-shot effect sheet that removes itself (chain several
+#                                      along a path with at() for Reborn-style travelling bursts)
+#   follow :kyogre, smooth: 0.15     - camera keeps tracking an actor (follow off: true to stop)
 #===============================================================================
 module Prismfall
   module Cutscene
@@ -60,6 +65,7 @@ module Prismfall
           @sheet_opts = o
         end
         @follow = o[:event]
+        @blend = { :add => 1, :sub => 2, :normal => 0 }[o[:blend]] || o[:blend]
         @follow_off = o[:offset] || [0, 0]
         @grid_cols = (o[:grid] || [4, 4])[0]
         prismfall_tech_initialize(scene, id, o)
@@ -81,10 +87,11 @@ module Prismfall
           end
         end
         prismfall_tech_update(scene, dt)
+        @sprite.blend_type = @blend if @blend
         if @cell && [:grid, :charset, :icon].include?(@gfx.mode)
-          @sprite.src_rect.set(@cell[1] * @gfx.fw, @cell[0] * @gfx.fh, @gfx.fw, @gfx.fh)
+          @sprite.src_rect.set(@cell[1] * @gfx.fw, @cell[0] * @gfx.fh, @gfx.fw, @gfx.fh - (@submerge || 0))
         elsif @gfx.mode == :grid
-          @sprite.src_rect.set(0, 0, @gfx.fw, @gfx.fh)
+          @sprite.src_rect.set(0, 0, @gfx.fw, @gfx.fh - (@submerge || 0))
         end
       end
 
@@ -231,6 +238,28 @@ module Prismfall
         end
       end
 
+      # Camera tracks an actor with exponential smoothing (Rejuvenation's camera follow).
+      def op_follow(a, _dur)
+        @effects.reject! { |e| e.id == :__follow }
+        stop_camera_moves
+        return nil if a[:off]
+        act = actor!(a[:id])
+        smooth = (a[:smooth] || 0.15).to_f
+        off = a[:offset] || [0, 0]
+        eff = Class.new(Effect) {
+          define_method(:update) do |scene, _lt, dt|
+            return true if !scene.actors.value?(act)
+            tx, ty = act.center
+            k = 1 - ((1 - smooth)**(dt * 60))          # frame-rate independent smoothing
+            scene.camera.x += (tx + off[0] - scene.camera.x) * k
+            scene.camera.y += (ty + off[1] - scene.camera.y) * k
+            false
+          end
+        }.new
+        run_effect(eff, @time, :__follow)
+        nil
+      end
+
       def op_anim(a, _dur)
         if !defined?(RPG::Sprite) || !defined?($data_animations) || !$data_animations || !$data_animations[a[:anim_id]]
           Util.log("anim #{a[:anim_id]}: no database animation available here")
@@ -254,6 +283,22 @@ module Prismfall
       end
 
       def pulse(**o); add(:pulse, o, (o[:duration] || 0.15) * (o[:times] || 1)); end
+      def follow(id = nil, **o); add(:follow, (o[:off]) ? o : o.merge(:id => ref(id))); end
+
+      # One-shot effect sheet: declares a temporary actor, plays it once, removes it.
+      def play_sheet(path, at:, frames: nil, grid: [5, 1], hold: 0.05, holds: nil, blend: :add, scale: 1, px: 1, z: nil, wait: false, **o)
+        @auto_fx = (@auto_fx || 0) + 1
+        id = :"__fx#{@auto_fx}"
+        frames ||= (0...(grid[0] * grid[1]))
+        list = frames.to_a
+        holds ||= [hold] * list.length
+        start = now
+        actor id, sheet: path, grid: grid, at: at, frame: list.first, blend: blend, scale: scale, px: px, z: z, **o
+        flipbook id, frames: list, holds: holds
+        at(start + holds.sum) { remove id }
+        wait(holds.sum) if wait
+        return id
+      end
       def anim(id, **o); add(:anim, check_points(o).merge(:anim_id => id)); end
     end
   end
