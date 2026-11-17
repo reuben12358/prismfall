@@ -77,6 +77,23 @@ GARDEN = ['p_bush_w', 'p_bush_g', 'p_bush_r', 'p_pot', 'p_pinkbush', 'p_bush_r',
 
 
 class Village(City):
+    def lane(self, pts, c='d', seed=1, only='.,', r=1.05, wide=0.25):
+        """A winding lane: Catmull-Rom curve through pts, painted as a disc of radius r (2-3 tiles wide on any heading);
+        where the noise is high the lane swells by half a tile (yards, passing places)."""
+        P = [pts[0]] + list(pts) + [pts[-1]]
+        for i in range(1, len(P) - 2):
+            p0, p1, p2, p3 = P[i - 1], P[i], P[i + 1], P[i + 2]
+            n = int(max(abs(p2[0] - p1[0]), abs(p2[1] - p1[1])) * 4) + 1
+            for k in range(n + 1):
+                t = k / n; t2, t3 = t * t, t * t * t
+                x = 0.5 * (2 * p1[0] + (-p0[0] + p2[0]) * t + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t3)
+                y = 0.5 * (2 * p1[1] + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3)
+                rr = r + (0.5 if vnoise(x, y, seed, 5.0) > 1 - wide else 0)
+                for yy in range(int(y - rr - 1), int(y + rr + 2)):
+                    for xx in range(int(x - rr - 1), int(x + rr + 2)):
+                        if self.inb(xx, yy) and (xx - x) ** 2 + (yy - y) ** 2 <= rr * rr and (only is None or self.g[yy][xx] in only):
+                            self.g[yy][xx] = c
+
     def door_path(self, door, to, c='d', width=2, seed=1, only='.,'):
         self.path([(door[0], door[1] + 1), (door[0], door[1] + 2), to], width, c, seed, only=only)
 

@@ -35,20 +35,23 @@ def build():
             if c.ht[y][x] < 0: c.g[y][x] = '~'
             elif c.ht[y][x] == 0: c.g[y][x] = 's'
     # ---- lanes: narrow, winding, 2 wide (3 only in the square)
-    c.path([(34.5, 0), (34, 6), (36, 11), (35, 16), (32, 22), (30, 27)], 2, 'd', 1, only='.')
+    c.rect(33, 0, 4, 2, 'd', '.')
+    c.lane([(34.5, 0), (34.5, 4), (36, 10), (35, 16), (32, 22), (30, 27)], 'd', 1)
     c.blob(30, 29, 5.5, 3.2, 'd', 2, only='.', rough=0.9); c.blob(30, 29, 2.5, 1.5, 'k', 3, only='d')
-    c.path([(30, 31), (32, 34), (34, 37)], 2, 'd', 4, only='.')
-    c.path([(26, 30), (20, 31), (14, 32), (9, 33), (5, 35)], 2, 'd', 5, only='.')
-    c.path([(34, 29), (40, 31), (47, 33), (54, 31), (61, 28)], 2, 'd', 6, only='.')
-    c.path([(35, 16), (39, 16), (42, 16)], 2, 'd', 7, only='.')
-    c.path([(42, 12), (47, 12), (52, 12)], 2, 'd', 8, only='.')
-    c.path([(12, 31), (11, 27)], 2, 'd', 9, only='.')
-    c.path([(47, 33), (51, 35), (52, 37)], 2, 'd', 10, only='.')
-    c.path([(15, 12), (16, 15), (22, 17), (31, 21)], 2, 'd', 11, only='.')
+    c.lane([(30, 31), (32, 34), (34.5, 37)], 'd', 4)
+    c.lane([(26, 30), (20, 31.5), (14, 32), (9, 34), (5, 36)], 'd', 5)
+    c.lane([(34, 29), (40, 31), (47, 33), (54, 31), (61, 28)], 'd', 6)
+    c.lane([(35, 16), (39, 16.5), (42, 16)], 'd', 7)
+    c.lane([(42, 12), (47, 12.5), (52, 12)], 'd', 8)
+    c.lane([(12, 31), (11, 27)], 'd', 9)
+    c.lane([(47, 33), (51, 35), (52.5, 37)], 'd', 10)
+    c.lane([(15, 12), (17, 16), (24, 18), (32, 21)], 'd', 11, r=0.8)
     # ---- quay: cobbles around the pier head, a stone breakwater west, the pier
-    for y in range(36, SHORE):
+    for y in range(36, SHORE):          # cobbled quay: a promenade band along the water, widening at the pier head and the stairs
         for x in range(17, 50):
-            if c.g[y][x] == 's' and ((x - 33) / 16.0) ** 2 + ((y - 47) / 7.5) ** 2 < 1.0 + 0.3 * (vnoise(x, y, 8, 3.0) - 0.5): c.g[y][x] = 'k'
+            band = y >= SHORE - 2 - (1 if vnoise(x, 0, 12, 4.0) > 0.5 else 0)
+            head = ((x - 34) / 5.5) ** 2 + ((y - 46) / 4.0) ** 2 < 1.0 + 0.3 * (vnoise(x, y, 8, 3.0) - 0.5)
+            if c.g[y][x] == 's' and (band or head): c.g[y][x] = 'k'
     c.rect(33, SHORE, 3, H - SHORE, '=', '~s'); c.rect(18, shore(18), 2, 56 - shore(18), '=', '~s')
     c.stairs(33, bluff(34)); c.stairs(41, 14); c.stairs(51, bluff(52)); c.stairs(14, 9)
     c.cliffs(face=2, keep='~=')
@@ -96,7 +99,7 @@ def build():
     P = lambda n, at, **kw: E.append(SE.place(100, n, at, **kw))
     for i, x in enumerate((33, 34, 35)): P('Customs gate %d' % (i + 1), (x, SHORE - 1))
     for i, x in enumerate((33, 34, 35)): P("Edda's last call %d" % (i + 1), (x, SHORE + 3))
-    P('Docking', (1, 58)); P('Calla', (31, SHORE - 1)); P('Captain Edda', (35, SHORE + 5)); P('Aurelian Voss (dock)', (33, SHORE + 6))
+    P('Docking', (33, 58)); P('Calla', (31, SHORE - 1)); P('Captain Edda', (35, SHORE + 5)); P('Aurelian Voss (dock)', (33, SHORE + 6))
     P('Boy (pier)', (34, SHORE)); P("Boy's Mother (pier)", (33, SHORE + 1)); P('Woman with crate (pier)', (35, SHORE + 1))
     P('Accord plaque', (37, SHORE - 1)); P('Odo', (34, 58))
     P('Lighthouse door', light_door)
@@ -105,7 +108,7 @@ def build():
     for i, x in enumerate((33, 34, 35, 36)): P('Sendoff %d' % (i + 1), (x, 4))
     P('Larch (sendoff)', c.snap(37, 3, '.,', r=3)); P('Juno (sendoff)', c.snap(31, 3, '.,', r=3))
     P('Wenna Hale', (46, 43)); P('Coll Hale', (47, 45)); P('HiddenItem tart stall', (40, 41))
-    P('HiddenItem breakwater', (18, 55)); P('Wingull (rocks)', c.snap(12, 49, '.,s', r=4))
+    P('HiddenItem breakwater', (18, 55)); P('Wingull (rocks)', (15, 45))
     P('Girl with Wingull', c.snap(26, 44, 'sk', r=4)); P('Wingull (with girl)', c.snap(27, 44, 'sk', r=3))
     P('Lamplighter', c.snap(29, 46, 'k', r=3))
     for i, (x, y) in enumerate(((24, 44), (28, 42), (38, 42), (45, 47), (49, 45), (55, 44))):
@@ -114,6 +117,8 @@ def build():
         e['pages'][0]['graphic'] = {'tile': LAMP_OFF, 'dir': 'down'}; e['pages'][1]['graphic'] = {'tile': LAMP_ON, 'dir': 'down'}
         E.append(e)
     for e in E: c.taken[e['at'][1]][e['at'][0]] = True
+    for x, y, a in ((14, 43, (1554, 1562)), (16, 45, (1555, 1563)), (12, 45, (1555, 1563))):     # the lighthouse rocks
+        c.tile(a[0], x, y, 2); c.tile(a[1], x, y + 1, 2); c.taken[y][x] = c.taken[y + 1][x] = True
     for x in range(32, 37):
         for y in range(SHORE - 1, H): c.taken[y][x] = True
     S = lambda n, ax, ay, on='dko', r=8: P(n, c.snap(ax, ay, on, r=r))
@@ -128,8 +133,8 @@ def build():
     missing = SE.unplaced(100)
     if missing: raise SystemExit('ferrow: script events not placed: %s' % missing)
     # ---- houses along the lanes, then yards
-    c.frontage([n for n in WS if 'ell' not in n and not n.endswith('_r')], (1, 15, 66, 36), 'd', 1, skip=0.45)
-    c.backfill([n for n in WS if ('cot' in n or 'house' in n) and not n.endswith('_r')], (1, 15, 66, 36), 0.25, 2)
+    c.frontage([n for n in WS if 'ell' not in n and not n.endswith('_r')], (1, 15, 66, 36), 'd', 1, skip=0.5)
+    c.backfill([n for n in WS if ('cot' in n or 'house' in n) and not n.endswith('_r')], (1, 15, 66, 36), 0.12, 2)
     # ---- dressing
     c.dress(['hs_jonquil_26', 'hs_jonquil_29', 'hs_jonquil_31', 'hs_jonquil_33'], 6, 's', 1, (2, 42, 31, 47), pad=1)
     c.dress(['p_net', 'p_net', 'p_crates', 't_barrel', 't_barrel2', 'hs_jonquil_36', 'hs_jonquil_35', 'tp_stall_13', 't_crate_pair',
@@ -137,12 +142,17 @@ def build():
     c.dress(['p_laundry', 'tp_stall_08', 'p_laundry'], 7, '.', 4, near='#')
     c.dress(GARDEN + ['tp_stall_01', 'p_crates', 't_barrel', 'tp_stall_16', 'tp_barrel_01', 'tp_garden_09'], 50, '.', 5, near='#', pad=0)
     c.dress(['p_lantern'], 10, '.', 6, near='dk')
-    c.dress(['p_cherry', 'p_rocks', 'p_bush_w', 'p_pinkbush', 'fo_rock_01' if 'fo_rock_01' in STAMPS else 'p_rocks'], 16, '.', 7)
+    c.dress(['p_cherry', 'p_bush_w', 'p_pinkbush', 'fo_rustic_20', 'fo_rustic_22'], 16, '.', 7)
     c.dress(['p_sign'], 2, '.', 8, near='d', pad=0); c.dress(['t_bench'], 2, 'k', 9, pad=0)
     c.fence_run([(43, 17), (60, 17)]); c.fence_run([(26, 2), (26, 10)]); c.fence_run([(57, 3), (57, 13)])
     c.fence_run([(2, 29), (8, 29)]); c.fence_run([(44, 34), (44, 38)])
     c.borders(p=0.7); c.meadow(0.74, 1)
-    c.greenfill(0.30, 1, beds=0.05)
+    for y in range(H):              # woods behind the village: a ragged band along the north and side edges
+        for x in range(W):
+            edge = min(y + 1.5 * (vnoise(x, 0, 21, 4.0)), x + 2 * vnoise(0, y, 22, 4.0), W - 1 - x + 2 * vnoise(0, y, 23, 4.0))
+            if c.g[y][x] == '.' and not c.taken[y][x] and y < 38 and edge < 3.2: c.g[y][x] = 'T'
+    c.greenfill(0.27, 1, beds=0.05)
+    c.inlay(17, 36, 50, 47, 'k', [3859, 3916], 0.06)
     c.sea_rocks(24, avoid=[(30, 44, 56, 59)])
     c.events = E
     head = {'id': 100, 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,

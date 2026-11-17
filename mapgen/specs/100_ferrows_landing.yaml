@@ -16,56 +16,56 @@ fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 100, sx: 2, sy: 0}
 connections:
 - {dir: N, offset: 28, to: 520, to_offset: 10}
 map: |
-  TTTTtTTTTCCtTTT.....TTTTTTTTTTTTTdddttTTTtttTTTTTT...TTttttttttttttt
-  TTTTCCCCCCCCCCCC.....TTT,,TT,,TTTddttTTTTTTTTCCCCCCCCCCCtttttttt,,,T
-  TTTCCTTttttTTTTCC....TTT,,wT,,TTTddtTTTTTCCCCCTTTTTTTTTCCCCCCttt,,,T
-  CCCCTT,,ttTTTTh.CCC...TTTTwTTTT..ddtT.TCCCTTTT,,T,TTTTTTTwTtCCtt,,,T
-  tTTTTT,,tt..T.h..hCC..TTTTwTtTTThdd..TCC..T,,T,,T,HTHHTTTwTTtCCtTTTT
-  TTTTTTttt..TT......C.TTTTTwTt.,..ddTTCCT.TT,,#########T,,,TTTTCCCTTT
-  TTTTTTtttTT,,.....CCT,,TTT,,t,,,.dddTCTTTTTTT#########T,,,,TTTTTCTTT
-  CCCTTttttTT,,...,CCCT,,TTT,,t,,,.ddddCttT,,TH#########T,,,tTTTTTCTTT
-  CCCCCTTtTTTT..HH,CCCTTTTTTwTtTT..ddddCCTT,,T,#########T.tw.TTTT.C.TT
-  CCCCCCCCTTTCCC###CCTTTTTTTwTt.,..ddddCCCTTTTT#########T#.,,,TTTTCTTT
-  TTCCCCCCCCCCCC###CTTTtTTTTwTT,,,TTdddCCCCTT,T####dddd#.#.w.ttTCCCTTT
-  TTTTCCCCCCCCCCdd#CTTT.,.TTTTt,,,TTdddTCCCdddddddddddd,.,.w.CCCCCCTTT
-  TTTTTTTCCCCC..dd#HT..,,,T,,,tttTTTdddTTCCdddddddddddd...CCCCCCCCCTTT
-  TTT,,TTTTTTTTTdddTTtt,,,T,,,ttttttdddTTTCTTHTTTTCCCCCCCCCCCCCCCTTTTT
-  t,,,,,,,,,,,,,ddddddttttt,,,t.,.ttdddTTTC###CCCCCCCCCCCCCCCC..TTTHHT
-  T,,,,,TTHTT,Htdddddddddtttttt,,,TdddddddCdd#CCCCCCCCCCCCCTTh.hH####T
-  .TH##########,dddddddddddtTTT,,,TdddddddCdd#CCCCC.T,,,,,TTT...H####T
-  .TT##########TTTTTddddddddddTTTTTddd,,,tH###ww,,wwwww######,,,,####T
-  TTT##########TTTTTTTddddddddddTTdddd,,,tt,,,tt,,HHHHH######T..H####T
-  TTT##########,,TTHH,HTTddddddddddddT,,,TTT,,TH######.######HTTH####T
-  TTT##########,,TH########dddddddddTT,THHT,,,,H######.######HHHt####T
-  TTH##########,,tH###########ddddddTT,T######HH######,##########,,,,T
-  ..T##########,,tH###########TTdddTTTTT######HH######H##############T
-  .,,##########,,,,###########HTdddTTTTT######TH######H####,,########T
-  .,,##########Tt.H###########HTddTTTtTT######T,######.####tT########T
-  .,,##########,,TH#####,#####TdddTTTtTH####,#TT,,####,####TT########T
-  ..H#######dd#,,,H#####,#####dddddTTTT,####,#TTT,####t####TT########T
-  T,t,,,,,,,dd,TTT.,,d,,,,,,ddddddddTTT,,,d,,,########.####TTddd,####T
-  tttttttt,,dddTTT.,TdTT,T,ddddkkkdddddTTTdT##########H####dddddH,,,,T
-  t,,,wwwwwTdddTTTTTtdddddddddkkkkkddddddddT##########T,ddddddd####HTT
-  tTTTTTtt,TTddTTdddddddddddddkkkkkdddddddddd#########ddddddTTH####,TT
-  tH#####,tTTdddddddddddddTTdddddddTTtTddddddddd##ddddddddtTTTH####HTT
-  tT#####dddddddddddddd....TTTTTddTTtt..ddddddddddddddd..ttTTTT####TTT
-  tH###dddddddTTTTTTTTTt..CCCCCCCCdTTtTT....,,ddddddddTTT.,.TTT####TTT
-  TT##dddddTTTTTTCCCCCCCCCCCCCCCCCddTtTTT.,..TdTdddddddTT,,,TTT####TTT
-  TH##dddTTTTTTTTCCCCCCCCCCCCCCCCCddTtTTT...TTwTTTdddddTT,,,TTT,,,,,,T
-  TT#####HTTTTTTTCCCCCCCCCCssssssCdddHTCCCCCCCCCCCCCCddTT...TTTT,,,,,T
-  tT#####H,,,TTTTCsssssssssssssssCCdd#CCCCCCCCCCCCCCCddHCCCCTTTT,,,TTT
-  tH#####HTTTTTTTCsssssssssssssssCCsssCCCCCCCCCCCCCCCdd#CCCCTTTT,,,TTT
-  tH#####H,TT,,TCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
-  tt,,,,,...T,,TCCsssssssssskkkkkkkkkkkkkkksssssssssCsssCssCCCCCCCCCCC
-  ttTTTTT,,TTTTTCCssssssssskkkkkkkkkkkkkkkkkkksssssssssssssCCCCCCCCCCC
-  t,,TTTT,,T,,TtCsssssssskkkkkkkkkkkkkkkkkkkkkkksssssssssssCCCCCssssss
-  t,,TTTTTTT,,TTCssssskkkkkkkkkkkkkkkkkkkkkkkkkkksssssssssssssssssssss
-  TTTTTTTTTTTTTCCsssskkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssssssssss
-  TTT,,TTTTTTTTCCssskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssssssssss
-  TTT,,TTTTTttCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssssssssss~~~~
+  TTTTtTTTTCCtTTTTTTTTTTTTTTTTTTTTTddddtTTTtttTTTTTTTTTTTttttttttttttt
+  TTTTCCCCCCCCCCCCTTTTTTTT,,TTTTTTTddddTTTTTTTTCCCCCCCCCCCtttttttttttT
+  TTTCCTTttttTTTTCC....TTT,,wTTTTTTTddTTTTTCCCCCTTTTTTTTTCCCCCCttttTTT
+  CCCCTT,,ttTTTT..CCC...TTTTwTTTT.TTddT.TCCCTTTT,,T,TTTTTTTwTtCCttTTTT
+  tTTTTT,,tt.TTT....CC..TTTTwTtTTT..dd.TCChTT,,T,,T,THHHTTTwTTtCCtTTTT
+  TTTTTTttt,TTTT.....C.TTTTTwTt,TT..ddTCCTTTT,,#########T,,,TTTTCCCTTT
+  TTTTTTttt,T,,h..h.CCT,TTTTwttTTT.hdddCTTTTTTH#########T,,,,TTTTTCTTT
+  CCCTTttttTT,,...,CCCT,TTTTwttt.,...ddCttTTTTH#########T,,,tTTTTTCTTT
+  CCCCCTTtTTTT..TH,CCCTTTTTTwTtT,,,..ddCCTTTTT,#########T.twTTTTT.CTTT
+  CCCCCCCCTTTCCC###CCTTTTTTTwTtT,,,..ddCCCTTTTT#########T#.,,,TTTTCTTT
+  TTCCCCCCCCCCCC###CTTTtTTTTwTTTTTTTTddCCCCTT,T#########T#.wTttTCCCTTT
+  TTTTCCCCCCCCCC###CT,TtTT,TTT,TTTTTtdddCCCTdddddd,,,,d,.,.w.CCCCCCTTT
+  TTTTTTTCCCCC.H#d#TTT.tTTTTTT,ttTTTtddTTCCddddddddddddd..CCCCCCCCCTTT
+  TTT,,TTTTTTTTT,ddTTttttT.,.tttttttTddT,,CHddddddCCCCCCCCCCCCCCCTTTTT
+  t,,,,,,,,,,,,,tddttttttt,,,tt.,.ttdddT,,C###CCCCCCCCCCCCCCCC.TTTTTTT
+  T,,,,,TTTTT,HtttddTTTTTt,,,tt,,,TTdddT,,C#d#CCCCCCCCCCCCCTT..,,..TTT
+  TTH##########,TTddddTTTTttTTT,,,TTddddddCdddCCCCCTTTTTTTTTT..,,..TTT
+  TTH##########HTTTTddddddttTTTTTTTTddddddddd#wwwwwwwwwwwwwwwww...,TTT
+  TTT##########HTTTTTTTddddddTTTTTTddd.TTtt,,,ttt....TTTTTT,,,T....TTT
+  TTT##########,,TTTT,HTTHTdddddTTTddT.TTTTT,,Ttt....hTTTT,HTHTH,t.TTT
+  T,H##########,,TH###########dddddddT,THTT,,,,,,,,Hh,,,,H######Ht.TTT
+  T,H##########,,tH###########HTddddTT,T############H,,,,T######HttTTT
+  TTT##########,,tT###########TTTdddTT,T############,.H.TT######,,,TTT
+  T,,##########,,,,###########HTTddTTT,T############,H##########,,,TTT
+  T,,##########HHTH###########HTdddTTtTT############t.##########,,,THT
+  T,,###################,#####HTdddTTtTH####,#######tt##########H####T
+  TTt########d##########,#####dddddTTTT,####,#######,,####,,,,,,H####T
+  T,t,,,,,,,ddd####,,d,,,,,,ddddddddTTT,,,d,,,####,,,,####TTTTTdT####T
+  tttttttt,,Tdd####,TdTT,T,ddddkkkdddddTTTdT######,TTH####.,Tdddd####T
+  t,,,wwwwwTTdd####TtTTTTTddddkkkkkddddddT,T######,TTT,,,,.dddddH####T
+  tTTTTTtt,TTdd####tttddddddddkkkkkddddddddd######HTT,T.ddddddT,,####T
+  tH#####,tTTddddddddddddddddddddddTTtdddddddd####....dddddTTTT,,,,,,T
+  tH#####HTTTddddddddddddddTTTTTddTTttT..ddddddddddddddddttTTTTTTTTTTT
+  tH#####HTddddddTTTTTdtT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTTTTTTTTT
+  TH####ddddddTTTCCCCCCCCCCCCCCCCCddTtTTT.,.TTdTTdddddTTTT.TTTTTTtTTTT
+  TH##ddddddTTTTTCCCCCCCCCCCCCCCCCdddtTTTT..TTwTTTTddddTT...TTT,tttTTT
+  TH##dddddTTTTTTCCCCCCCCCCssssssCTdddTCCCCCCCCCCCCCCdddT...TTT,TtT,TT
+  tT##dddTTTTTTTTCsssssssssssssssCC#ddCCCCCCCCCCCCCCCTddCCCCTTTTTTT,TT
+  tH#####HTT.,.TTCsssssssssssssssCCsssCCCCCCCCCCCCCCC###CCCCTTTTTTTTTT
+  tH#####T,T,,,TCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
+  tt,,,,,T.T,,,TCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
+  ttTTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
+  t,TTTTT,,TTTTtCsssssssssssssssssskkksssssssssssssssssssssCCCCCssssss
+  t,TTTTTTTTTTTTCsssssssssssssssskkkkkkkssssssssssssssssssssssssssssss
+  TTTTTTTTTTTTTCCsssssssssssssskkkkkkkkkkkssssssssssssssssssssssssssss
+  TTT,TTTTTTTT.CCsssssssssskkkkkkkkkkkkkkkskkkkkkkkkssssssssssssssssss
+  TTT,TTTTTTttCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssss~~~~
   TTTTTTTTTTTCCCssskkk~~kkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssss~~~~~~~~~
-  TTTT,,TTTT.CCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
-  CCTT,,TTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TTTT,TTTTTTCCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
+  CCTT,TTTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~CCTTTTTTCC~~~~~~~==~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
   ~~CCCTTCCC~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
   ~~~~CCCC~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
@@ -208,22 +208,16 @@ stamps:
   at: [22, 25]
 - stamp: p_banner
   at: [42, 25]
-- stamp: w_cot
-  at: [48, 25]
+- stamp: w_cot_m
+  at: [13, 25]
 - stamp: w_cot_s
-  at: [59, 21]
-- stamp: w_cot_s
-  at: [61, 29]
+  at: [63, 25]
 - stamp: w_cot
-  at: [53, 23]
-- stamp: w_cot
-  at: [63, 22]
-- stamp: w_house_s
-  at: [46, 19]
+  at: [52, 23]
 - stamp: w_house
-  at: [53, 17]
-- stamp: w_cot_s
-  at: [63, 15]
+  at: [44, 21]
+- stamp: w_house_s
+  at: [56, 20]
 - stamp: tp_barrel_09
   at: [34, 42]
 - stamp: hs_jonquil_36
@@ -250,22 +244,20 @@ stamps:
   at: [36, 42]
 - stamp: t_barrel
   at: [34, 44]
-- stamp: tp_barrel_06
-  at: [17, 46]
-- stamp: p_laundry
-  at: [8, 37]
 - stamp: p_laundry
   at: [6, 14]
 - stamp: p_laundry
   at: [1, 29]
+- stamp: tp_stall_08
+  at: [51, 20]
 - stamp: p_laundry
   at: [55, 5]
 - stamp: p_laundry
   at: [57, 9]
 - stamp: p_laundry
+  at: [57, 18]
+- stamp: p_laundry
   at: [55, 7]
-- stamp: p_bush_r
-  at: [15, 26]
 - stamp: tp_barrel_01
   at: [36, 20]
 - stamp: tp_garden_09
@@ -284,6 +276,8 @@ stamps:
   at: [43, 4]
 - stamp: tp_stall_16
   at: [46, 3]
+- stamp: p_pot
+  at: [56, 19]
 - stamp: p_bush_g
   at: [13, 21]
 - stamp: p_bush_r
@@ -293,29 +287,21 @@ stamps:
 - stamp: tp_stall_16
   at: [11, 6]
 - stamp: tp_stall_01
-  at: [52, 16]
-- stamp: tp_stall_01
   at: [10, 14]
-- stamp: p_bush_w
-  at: [65, 35]
 - stamp: p_stump
   at: [11, 15]
 - stamp: p_pot
   at: [44, 8]
-- stamp: p_bush_g
-  at: [13, 25]
-- stamp: tp_stall_01
-  at: [59, 17]
 - stamp: tp_garden_09
   at: [1, 23]
 - stamp: t_barrel
   at: [5, 14]
 - stamp: p_pot
   at: [22, 28]
+- stamp: tp_garden_09
+  at: [38, 13]
 - stamp: p_pot
   at: [41, 20]
-- stamp: p_crates
-  at: [62, 36]
 - stamp: p_bush_w
   at: [1, 14]
 - stamp: p_stump
@@ -326,36 +312,40 @@ stamps:
   at: [7, 41]
 - stamp: p_bush_r
   at: [19, 19]
-- stamp: p_bush_g
-  at: [46, 17]
+- stamp: t_barrel
+  at: [50, 22]
+- stamp: p_bush_r
+  at: [40, 29]
+- stamp: tp_barrel_01
+  at: [48, 28]
 - stamp: p_pot
   at: [49, 3]
 - stamp: p_bush_r
   at: [8, 39]
+- stamp: p_bush_r
+  at: [57, 28]
 - stamp: t_barrel
   at: [16, 7]
-- stamp: p_bush_r
-  at: [47, 26]
-- stamp: p_crates
-  at: [36, 17]
+- stamp: p_bush_g
+  at: [50, 26]
+- stamp: p_stump
+  at: [51, 30]
+- stamp: p_pinkbush
+  at: [61, 30]
 - stamp: p_bush_r
   at: [13, 16]
+- stamp: tp_stall_01
+  at: [45, 20]
 - stamp: p_pot
   at: [9, 14]
-- stamp: p_bush_r
-  at: [51, 16]
 - stamp: p_pot
   at: [17, 28]
 - stamp: p_pot
   at: [44, 20]
-- stamp: p_stump
-  at: [52, 25]
-- stamp: p_bush_r
-  at: [45, 24]
+- stamp: tp_barrel_01
+  at: [54, 20]
 - stamp: p_bush_r
   at: [55, 11]
-- stamp: p_bush_r
-  at: [52, 21]
 - stamp: p_pot
   at: [9, 28]
 - stamp: p_pot
@@ -363,43 +353,51 @@ stamps:
 - stamp: p_pot
   at: [49, 4]
 - stamp: p_stump
-  at: [65, 30]
+  at: [62, 19]
+- stamp: p_crates
+  at: [62, 22]
+- stamp: tp_barrel_01
+  at: [36, 22]
 - stamp: p_lantern
   at: [29, 14]
 - stamp: p_lantern
-  at: [55, 33]
+  at: [30, 7]
 - stamp: p_lantern
-  at: [29, 9]
+  at: [10, 38]
 - stamp: p_lantern
-  at: [29, 5]
-- stamp: p_lantern
-  at: [21, 11]
-- stamp: p_bush_w
-  at: [6, 3]
+  at: [24, 13]
+- stamp: fo_rustic_20
+  at: [4, 48]
+- stamp: fo_rustic_22
+  at: [24, 11]
+- stamp: fo_rustic_20
+  at: [1, 20]
 - stamp: p_pinkbush
+  at: [6, 3]
+- stamp: fo_rustic_20
   at: [3, 45]
 - stamp: p_pinkbush
+  at: [61, 15]
+- stamp: fo_rustic_20
+  at: [28, 11]
+- stamp: fo_rustic_20
+  at: [61, 35]
+- stamp: fo_rustic_22
+  at: [64, 17]
+- stamp: fo_rustic_22
+  at: [19, 11]
+- stamp: fo_rustic_20
   at: [21, 6]
-- stamp: p_pinkbush
+- stamp: fo_rustic_20
+  at: [65, 36]
+- stamp: fo_rustic_22
+  at: [29, 5]
+- stamp: fo_rustic_20
+  at: [9, 5]
+- stamp: fo_rustic_20
   at: [1, 42]
-- stamp: p_bush_w
+- stamp: p_pinkbush
   at: [24, 1]
-- stamp: p_pinkbush
-  at: [41, 7]
-- stamp: p_rocks
-  at: [25, 12]
-- stamp: p_pinkbush
-  at: [10, 42]
-- stamp: p_cherry
-  at: [64, 1]
-- stamp: p_bush_w
-  at: [4, 48]
-- stamp: p_pinkbush
-  at: [11, 39]
-- stamp: p_pinkbush
-  at: [28, 1]
-- stamp: p_bush_w
-  at: [26, 6]
 - stamp: p_sign
   at: [40, 34]
 - stamp: p_sign
@@ -525,6 +523,33 @@ tiles:
 - tile: 20193
   at: [41, 25]
   layer: 2
+- tile: 1554
+  at: [14, 43]
+  layer: 2
+- tile: 1562
+  at: [14, 44]
+  layer: 2
+- tile: 1555
+  at: [16, 45]
+  layer: 2
+- tile: 1563
+  at: [16, 46]
+  layer: 2
+- tile: 1555
+  at: [12, 45]
+  layer: 2
+- tile: 1563
+  at: [12, 46]
+  layer: 2
+- tile: 3916
+  at: [35, 44]
+  layer: 0
+- tile: 3859
+  at: [29, 45]
+  layer: 0
+- tile: 3916
+  at: [46, 46]
+  layer: 0
 - tile: 1555
   at: [22, 57]
   layer: 2
@@ -1019,7 +1044,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [1, 58]
+  at: [33, 58]
 - type: event
   name: Calla
   pages:
@@ -1476,7 +1501,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: B}
-  at: [10, 48]
+  at: [15, 45]
 - type: event
   name: Girl with Wingull
   pages:
@@ -1805,7 +1830,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 14, dir: down}
-  at: [12, 32]
+  at: [12, 33]
 - type: event
   name: Boy with toy boat
   pages:
@@ -1861,7 +1886,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 18, dir: down}
-  at: [48, 31]
+  at: [46, 33]
 - type: event
   name: Meridian Recruiter
   pages:
@@ -1894,7 +1919,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 04, dir: down}
     cond: {switch: PRO_SCANNED_NULL}
-  at: [32, 23]
+  at: [33, 22]
 - type: event
   name: Woman with crate (town)
   pages:
