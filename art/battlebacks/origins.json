@@ -13,10 +13,20 @@
    "quench recolour, ember cracks, steam vents, soot-stained banners"
   ]
  ],
+ "BEACH": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgBeach"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "ferry pier, sand platforms, tide-pool rocks, sea glints and foam, gulls"
+  ]
+ ],
  "CAVE": [
   [
    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgCave (mirrored), enemybaseCave"
+   "battlebgCave (2x crop of the tunnel mouth), enemybaseCave"
   ],
   [
    "Elite Battle: DX stock elements (Luka S.J.)",
@@ -35,6 +45,20 @@
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
    "cheering crowd (2-frame sheet), scaffolding, chain-link fence, hanging work lamps"
+  ]
+ ],
+ "CORROSIVE_MIRE": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgCorrosive (gradient-mapped), enemybaseCorrosive"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "bubbleDark"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, sickly hanging lamp, fumes"
   ]
  ],
  "CRYSTAL_CAVERN": [
@@ -73,8 +97,8 @@
  ],
  "DRAGONS_DEN": [
   [
-   "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgDragonsDen (gradient-mapped violet/orange, extended) as the cavern glow"
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"
   ],
   [
    "Elite Battle: DX stock elements (Luka S.J.)",
@@ -82,7 +106,27 @@
   ],
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
-   "cave walls and stalactites, magma-cracked floor, wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
+   "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
+  ]
+ ],
+ "FAIRY_TALE": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgMeadow, enemybaseMeadow (twilight grade)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "storybook castle, giant mushrooms, fairy ring, lantern wisps"
+  ]
+ ],
+ "FLOWER_GARDEN": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgFlowerGarden0-4, enemybaseFlowerGarden0-4 (one per stage)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "flower rings round the platforms (stages 3-5), giant bloom (stage 5), sunbeams"
   ]
  ],
  "FROZEN_LAKE": [
@@ -105,6 +149,30 @@
    "sky, layered snow-capped ridges, pines, clouds, valley mist"
   ]
  ],
+ "RAINBOW": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgRainbow, enemybaseRainbow"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "cloud field, prismatic mist, drifting foreground clouds"
+  ]
+ ],
+ "SILKWOOD": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgForest, enemybaseForest (graded green-gold)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "forestShade, lightsC"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "orb webs with dew, silk curtains, silk-wrapped platforms, hanging strands and cocoons"
+  ]
+ ],
  "SNOWY_MOUNTAIN": [
   [
    "Pok\u00e9mon Reborn (Reborn Team)",
@@ -113,6 +181,30 @@
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
    "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
+  ]
+ ],
+ "STORMFRONT": [
+  [
+   "Pok\u00e9mon Desolation (Desolation Team)",
+   "battlebgClouds (gradient-mapped to storm)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "airship deck, rail, mast and rigging, pennant, scud clouds, lightning glow"
+  ]
+ ],
+ "UNDERWATER": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgUnderwater, enemybaseUnderwater"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "bubbles, lightsC, forestShade (caustics)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "sunken ruin columns, kelp forest (swaying), god rays"
   ]
  ],
  "VOLCANIC": [
@@ -137,6 +229,16 @@
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
    "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
+  ]
+ ],
+ "WATER_SURFACE": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgWaterSurface, enemybaseWaterSurface"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "Ebbmouth harbour and lighthouse silhouette, drowned pilings, buoys, glint strip, spray"
   ]
  ]
 }

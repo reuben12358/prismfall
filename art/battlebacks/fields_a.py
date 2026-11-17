@@ -137,7 +137,7 @@ def dragon_skull(scale=1.0, bone=(214, 200, 170), outline=(30, 20, 26), shade=(1
         d.polygon([(x, 64 * s), (x + 4 * s, 64 * s), (x + 2 * s, 72 * s)], fill=C((240, 232, 210)), outline=C(outline))
     d.ellipse([84 * s, 36 * s, 104 * s, 50 * s], fill=C((20, 10, 24)), outline=C(outline))
     d.ellipse([30 * s, 46 * s, 38 * s, 52 * s], fill=C((30, 16, 30)))
-    for k, sgn in ((0, 1), (1, -1)):
+    for k in (0, 1):
         pts = [(96 * s, 30 * s), (120 * s, 8 * s - k * 6 * s), (146 * s, 2 * s + k * 4 * s), (128 * s, 18 * s),
                (110 * s, 34 * s)]
         d.polygon(pts, fill=C(shade if k else bone), outline=C(outline))
@@ -145,75 +145,87 @@ def dragon_skull(scale=1.0, bone=(214, 200, 170), outline=(30, 20, 26), shade=(1
     return im
 
 
-def hoard(w, h, seed=0, gold=(232, 182, 60), dark=(150, 96, 30), light=(255, 236, 140)):
+def hoard(w, h, seed=0, gold=(226, 176, 56), dark=(130, 80, 24), light=(255, 238, 150), outline=(54, 30, 8),
+          extras=True):
+    """Mound of coins: stepped outline, coin rows lit from the upper left, a few jewels and a blade."""
     rng = random.Random(seed)
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    d.chord([0, h * 0.25, w, h * 1.6], 180, 360, fill=C(dark), outline=C((60, 34, 10)))
-    d.chord([w * 0.06, h * 0.32, w * 0.94, h * 1.5], 180, 360, fill=C(gold))
-    for _ in range(int(w * h / 18)):
-        x = rng.uniform(0.08, 0.92) * w
-        top = h * 0.3 + (abs(x - w / 2) / (w / 2)) ** 2 * h * 0.6
-        y = rng.uniform(top + 2, h - 1)
-        c = rng.choice([gold, light, dark, (210, 150, 40)])
-        d.ellipse([x - 2, y - 1, x + 2, y + 1], fill=C(c))
-    for _ in range(max(2, w // 40)):
-        x = rng.uniform(0.2, 0.8) * w
-        y = h * 0.45 + rng.uniform(0, h * 0.3)
-        c = rng.choice([(200, 40, 60), (60, 160, 220), (90, 200, 110)])
-        d.polygon([(x, y - 4), (x + 4, y), (x, y + 4), (x - 4, y)], fill=C(c), outline=C((40, 20, 20)))
+    pts = []
+    for i in range(0, w + 1, 4):
+        u = (i - w / 2) / (w / 2)
+        y = h - (h - 4) * max(0.0, 1 - abs(u) ** 1.7) ** 0.8 + rng.uniform(-1.5, 1.5)
+        pts.append((i, min(h - 1, y)))
+    d.polygon([(0, h - 1)] + pts + [(w, h - 1)], fill=C(dark), outline=C(outline))
+    for yy in range(4, h, 3):
+        for xx in range(2, w - 2, 4):
+            u = (xx - w / 2) / (w / 2)
+            top = h - (h - 4) * max(0.0, 1 - abs(u) ** 1.7) ** 0.8
+            if yy < top + 2 or rng.random() < 0.15:
+                continue
+            lit = (1 - (yy - top) / max(h - top, 1)) * 0.6 + (0.4 if u < 0 else 0.1)
+            col = light if lit > 0.75 else gold if lit > 0.35 else (186, 128, 36)
+            ox = (yy // 3) % 2 * 2
+            d.ellipse([xx + ox - 2, yy - 1, xx + ox + 2, yy + 1], fill=C(col))
+            if rng.random() < 0.3:
+                d.point((xx + ox - 1, yy - 1), fill=C(lighter(col, 0.5)))
+    if extras:
+        for _ in range(max(1, w // 60)):
+            x = rng.uniform(0.25, 0.75) * w; y = h * rng.uniform(0.45, 0.75)
+            c = rng.choice([(210, 40, 70), (60, 170, 230), (90, 210, 120), (190, 90, 230)])
+            d.polygon([(x, y - 4), (x + 4, y), (x, y + 4), (x - 4, y)], fill=C(c), outline=C((40, 20, 20)))
+            d.point((x - 1, y - 2), fill=(255, 255, 255, 255))
+        if w > 120:
+            bx = w * rng.uniform(0.35, 0.6)
+            d.line([(bx, h * 0.15), (bx + 10, h * 0.62)], fill=C((30, 30, 40)), width=5)
+            d.line([(bx, h * 0.15), (bx + 10, h * 0.62)], fill=C((200, 210, 230)), width=3)
+            d.line([(bx - 7, h * 0.58), (bx + 18, h * 0.54)], fill=C((180, 130, 40)), width=4)
+    for _ in range(w // 10):
+        x = rng.uniform(0, w); y = h - rng.uniform(1, 4)
+        d.ellipse([x - 2, y - 1, x + 2, y + 1], fill=C(rng.choice([gold, light])))
     return im
 
 
 def dragons_den():
     F = "dragons_den"
-    hd = vanilla("reborn", "DragonsDen", base=False)
-    hd = gradient_map(hd, [(0.0, (10, 4, 16)), (0.18, (34, 12, 46)), (0.4, (86, 30, 92)),
-                           (0.62, (200, 70, 70)), (0.82, (255, 140, 60)), (1.0, (255, 220, 140))])
-    hz = 300
-    back = mountains((864, 693), hz + 6, 46, (30, 12, 38), seed=51, rough=0.9, peaks=8, outline=(255, 130, 60))
-    hd.alpha_composite(back)
-    floor, cracks = ground_plane(HD, hz + 4, (62, 30, 58), (34, 16, 40), seed=52, cracks=(255, 120, 50),
-                                 crack_n=30, vanish_x=520)
-    hd.alpha_composite(floor)
-    hd.alpha_composite(cracks)
-    # wyrm statues flanking the hoard
-    for x, flip in ((352, False), (700, True)):
-        pillar(hd, x, 170, 316, 22, (52, 30, 60), (96, 62, 104), (26, 14, 32), (10, 4, 12),
+    # deep inside the caldera tunnel: the painted cave zoomed 2x on its tunnel mouth, recoloured violet
+    src = game_img("rejuvenation", "battlebgVolcano").transpose(Image.FLIP_LEFT_RIGHT)
+    hd = extend_vanilla(src, origin=O)
+    lava = mask_from(hd, lambda r, g, b: (r > 200) & (g > 70) & (b < 120))
+    hd = gradient_map(hd, [(0.0, (14, 6, 22)), (0.08, (34, 16, 50)), (0.18, (66, 32, 88)), (0.3, (104, 54, 126)),
+                           (0.45, (150, 84, 160)), (0.7, (255, 150, 70)), (1.0, (255, 230, 150))])
+    a = arr(hd)
+    lm = lava[..., None]
+    a = a * (1 - lm) + np.array([255, 120, 50, 255], np.float32) * lm
+    hd = img(a)
+    for x, flip in ((356, False), (698, True)):
+        pillar(hd, x, 176, 318, 22, (52, 30, 60), (96, 62, 104), (26, 14, 32), (10, 4, 12),
                rim=(255, 140, 70), rim_side=-1 if flip else 1)
-        sk = dragon_skull(0.42, bone=(96, 64, 108), shade=(60, 38, 70), outline=(14, 6, 18))
+        sk = dragon_skull(0.46, bone=(110, 76, 120), shade=(70, 44, 80), outline=(14, 6, 18))
         if flip:
             sk = sk.transpose(Image.FLIP_LEFT_RIGHT)
-        paste(hd, sk, x, 174, "bottom")
-    walls = side_walls(HD, inner_x=(200, 700), color=(18, 8, 24), rim=(200, 80, 120), seed=53, ceiling=90)
-    hd.alpha_composite(walls)
-    d = ImageDraw.Draw(hd)
-    rng = random.Random(54)
-    for _ in range(22):
-        x = rng.uniform(170, 740); L = rng.uniform(16, 60); wd = rng.uniform(5, 13); y0 = rng.uniform(40, 120)
-        d.polygon([(x - wd, y0), (x + wd, y0), (x, y0 + L)], fill=C((24, 10, 30)), outline=C((10, 4, 14)))
-        d.line([(x + wd - 2, y0 + 2), (x + 1, y0 + L - 4)], fill=C((150, 60, 90)))
-    paste(hd, hoard(210, 70, seed=2), 680, 336, "bottom")
-    paste(hd, hoard(170, 58, seed=5), 380, 328, "bottom")
-    paste(hd, hoard(300, 96, seed=8), 120, 600, "bottom")
-    paste(hd, dragon_skull(0.75), 250, 344, "bottom")
-    rib = Image.new("RGBA", (120, 60), (0, 0, 0, 0)); rd = ImageDraw.Draw(rib)
+        paste(hd, sk, x, 180, "bottom")
+    paste(hd, hoard(220, 74, seed=2), 680, 340, "bottom")
+    paste(hd, hoard(160, 56, seed=5), 372, 334, "bottom")
+    paste(hd, hoard(320, 110, seed=8), 110, 620, "bottom")
+    paste(hd, hoard(240, 80, seed=11), 790, 640, "bottom")
+    paste(hd, dragon_skull(0.8), 236, 360, "bottom")
+    rib = Image.new("RGBA", (130, 64), (0, 0, 0, 0)); rd = ImageDraw.Draw(rib)
     for i in range(5):
-        rd.arc([i * 18, 4, i * 18 + 50, 110], 200, 300, fill=C((214, 200, 170)), width=4)
-        rd.arc([i * 18, 4, i * 18 + 50, 110], 200, 300, fill=C((30, 20, 26)), width=1)
-    paste(hd, rib, 790, 560, "bottom")
+        rd.arc([i * 18, 4, i * 18 + 50, 120], 200, 300, fill=C((30, 20, 26)), width=6)
+        rd.arc([i * 18, 4, i * 18 + 50, 120], 200, 300, fill=C((214, 200, 170)), width=3)
+    paste(hd, rib, 820, 470, "bottom")
     platform(hd, FOE, 116, 25, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16))
     ring_stones(hd, FOE, 116, 25, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=26, size=(5, 8), seed=4)
     platform(hd, PLAYER, 232, 50, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16), thick=12)
     ring_stones(hd, PLAYER, 232, 50, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=34, size=(8, 13), seed=9)
     save_room("field_dragons_den", hd)
-    cm = np.asarray(cracks, np.float32)[..., 3] / 255.0
     gold = mask_from(hd, lambda r, g, b: (r > 225) & (g > 170) & (b < 120))
     layers = [
-        layer(F, "magma", glow_from_mask(cm, (255, 110, 50), radius=5, gain=1.3, core=0.8), z=1, blend=1,
+        layer(F, "magma", glow_from_mask(lava, (255, 110, 50), radius=9, gain=1.3), z=1, blend=1,
               opacity=140, anim=S("pulse"), min=50, max=170, period=130),
-        layer(F, "violet", soft_glow((520, 260), 330, (170, 60, 255), alpha=110, squash=0.45), z=1, blend=1,
-              anim=S("pulse"), min=30, max=110, period=190, phase=1.5),
+        layer(F, "violet", soft_glow((520, 230), 330, (170, 60, 255), alpha=120, squash=0.5), z=1, blend=1,
+              anim=S("pulse"), min=30, max=120, period=190, phase=1.5),
         layer(F, "goldglint", glow_from_mask(gold, (255, 220, 120), radius=3, gain=0.8, core=0.4), z=1, blend=1,
               opacity=120, anim=S("pulse"), min=40, max=150, period=70),
     ]
@@ -222,10 +234,9 @@ def dragons_den():
                                    opacity=90),
               "img003": strip(F, "haze", haze, 230, speed=0.5, direction=-1, z=4)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
-            "origins": [[REB, "battlebgDragonsDen (gradient-mapped violet/orange, extended) as the cavern glow"],
+            "origins": [[REJ, "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"],
                         [EBDX, "decor009"],
-                        [OWN, "cave walls and stalactites, magma-cracked floor, wyrm statues, dragon skull and "
-                              "ribs, gold hoard, coin-ringed platforms, glows"]]}
+                        [OWN, "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"]]}
 
 
 #---------------------------------------------------------------------------------------------
@@ -278,7 +289,8 @@ def desert():
 #---------------------------------------------------------------------------------------------
 def cave():
     F = "cave"
-    bg = game_img("rejuvenation", "battlebgCave").transpose(Image.FLIP_LEFT_RIGHT)
+    src = game_img("rejuvenation", "battlebgCave")
+    bg = src.crop((200, 30, 456, 174)).resize((512, 288), Image.NEAREST)   # 2x: deep in the tunnel mouth
     hd = extend_vanilla(bg, origin=O)
     eb = game_img("rejuvenation", "enemybaseCave")
     place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
@@ -322,7 +334,7 @@ def cave():
           P(type=":fall", count=4, shape=":rect", w=1, h=3, colors=[[170, 200, 230]], area=[60, 60, 330, 240],
             speed=[2.0, 3.0], sway=0, zoom=[0.6, 0.9], opacity=[120, 200], layers=[":back", ":mid"])]
     return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
-            "origins": [[REJ, "battlebgCave (mirrored), enemybaseCave"],
+            "origins": [[REJ, "battlebgCave (2x crop of the tunnel mouth), enemybaseCave"],
                         [EBDX, "decor006, decor009, fog (the CAVE environment's layers)"],
                         [OWN, "timber mine supports, stalactites, hanging lanterns, lantern light"]]}
 

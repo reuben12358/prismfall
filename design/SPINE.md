@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 11 (user feedback, 2026-11-17 10:38) <<<
+Character art v5 (the four Juno concept thumbnails) was rejected: "it looks god awful... theres so much good pixel art out there, surely we can do better."
+- Drawing trainer sprites from scratch, pixel by pixel in code, has failed five times. Stop doing it.
+- New method: KITBASH (frankensprite) from professional pixel art, the way real fangames build their casts. Use ~830 trainer fronts in the Reborn, Rejuvenation and Desolation folders, plus portraits (Faces), PIF/Uranium/Tectonic/Valhalla art and online resource packs. Take the base body, head/hair, outfit pieces and props from several donors at matching pixel density. Repaint by region with designed ramps. Hand-edit only small seams and details.
+- Quality gate: nothing reaches the user unless it is indistinguishable in quality from its donors, shown side by side at 1x and 2x. An independent critic who didn't make the art reviews it first.
+- Design still matters: each character needs a hook (silhouette, prop, pose, expression). The concepts are kept as design input, not as art.
+
 ## >>> REVISION 10 (user feedback, 2026-11-17) <<<
 1. **Field effects, deeper.** Study how Reborn/Rejuvenation/Desolation implement fields (their Scripts/*.rb, fields.dat,
    fieldnotes.dat are in /home/claude/ref/games/<name>/) and bring their logic and depth into ours, keeping our good
