@@ -86,12 +86,12 @@ def seat(m, events, on='.dt'):
     out = []
     for e in events:
         x, y = e['at']
-        if not (m.inb(x, y) and m.cls[y, x] in on and not m.taken[y, x] and flat(m, x, y)):
+        if not (m.inb(x, y) and m.cls[y, x] in on and not m.taken[y, x] and not m.overm[y, x] and flat(m, x, y)):
             best = None
             for r in range(1, 10):
                 for yy in range(y - r, y + r + 1):
                     for xx in range(x - r, x + r + 1):
-                        if m.inb(xx, yy) and m.cls[yy, xx] in on and not m.taken[yy, xx] and flat(m, xx, yy):
+                        if m.inb(xx, yy) and m.cls[yy, xx] in on and not m.taken[yy, xx] and not m.overm[yy, xx] and flat(m, xx, yy):
                             d = abs(xx - x) + abs(yy - y)
                             if best is None or d < best[0]: best = (d, xx, yy)
                 if best: break

@@ -45,7 +45,7 @@ Scripts kept, audio and archives deleted; untrusted data, never run). All tilese
 |---|---|---|---|
 | B1 | **Rejuvenation v13.5 sheets** (superseded by A1) via `pbflo/Where-Love-Lies-Overhaul` | `/home/claude/ref/art/wll` (17 MB) | The real thing: Sheridan's timber houses with steep dark roofs, vines, flower borders, signposts; Gearen's apartment blocks, scaffolds, museum facade. Partial set. |
 | B2 | **Tectonic** | `/home/claude/ref/art/tectonic` | Clean Gen 4/5 look, widest coverage, castle kit, complete autotiles and passages. Plainer houses. |
-| B3 | **Community packs inside `M0RGEBBY/pokemon-fan-game`** | `/home/claude/ref/art/morgebby/Graphics/Tilesets/Tilesets/` (13 MB repo) | The richest find for towns. Two unnamed mega-sheets (`dbf3bkq-…png` 1920×3360, `ddpuooa-…png` 3328×2752): four-season trees and ground, timber houses, castle towers, stone bridges, fountains, canals, torii, windows and doors. Magiscarf's rustic tiles (timber houses, market stalls, washing lines, kilns, crates, rock arches) and concrete tiles. Also princess-phoenix (desert interior, Excello village, burrow), carchagui (city tiles, swamp village, mountains), aveontrainer (factory, machinery, log cabin), Phyromatical (Victory ruins), Zeo254. Beautiful, on target. **All 16-px native: double on import.** No passage data. |
+| B3 | **Community packs inside `M0RGEBBY/pokemon-fan-game`** | `/home/claude/ref/art/morgebby/Graphics/Tilesets/Tilesets/` (13 MB repo) | The richest find for towns. Two mega-sheets (`dbf3bkq-…png` 1920×3360, `ddpuooa-…png` 3328×2752; identified as Magiscarf's "Tileset ver.3" and "Revamped Tiles", non-commercial): four-season trees and ground, timber houses, castle towers, stone bridges, fountains, canals, torii, windows and doors. Magiscarf's rustic tiles (timber houses, market stalls, washing lines, kilns, crates, rock arches) and concrete tiles. Also princess-phoenix (desert interior, Excello village, burrow), carchagui (city tiles, swamp village, mountains), aveontrainer (factory, machinery, log cabin), Phyromatical (Victory ruins), Zeo254. Beautiful, on target. **All 16-px native: double on import.** No passage data. |
 | B4 | **Ekat's Public Tiles** (80 sheets, same folder, `Ekat's Public Tiles/`, with `Credits.txt`) | as above | Steep-roof "Pointy Buildings", Brick City, Jonquil Town, Silph City (sci-fi), Volcano Set, Haunted and Fairy Woods, Floating Cliffs, Wine Cellar, Ship Interior, Dragonspiral, Snowpoint Temple, Wild West, Coral, Deep Sea, garden and patio props. Charming and dense; Emerald-scale palette, so use as its own family. 16-px native, no passage data. |
 | B5 | **Pokémon Uranium tiles** via `acedogblast/Project-Uranium-Godot` | `/home/claude/ref/art/uranium/Maps/tilesets/` (4 MB) | `PU_buildings+` is a strong Gen 4-style city set: towers, domed palace, brick mansion, pagoda, cooling towers, stadium, harbour. Plus ground, water, caves, indoors. Wide sheets (512–912 px), 32-px tiles; needs re-cutting to 8 columns. No RMXP passage data. |
 | B6 | **Infinite Fusion 2: Hoenn** | `/home/claude/ref/art/pif-hoenn` (6 MB) | 22 sheets with `Tilesets.rxdata`: Rustboro, Slateport, Mauville, Dewford town sets (apartments, market stalls, fountains, lighthouse, shipyard), routes, caves, contest and power-plant interiors. Clean and attractive. Maps not fetched. |
@@ -54,10 +54,37 @@ Scripts kept, audio and archives deleted; untrusted data, never run). All tilese
 | B9 | LPC (ElizaWy) | `/home/claude/ref/art/_probe/ElizaWy_LPC` (tree only, not checked out) | Open-licence 32-px walls, floors, furniture. Different proportions from Pokémon art; last resort for grand-interior furniture. |
 | B10 | Kenney CC0 library | `/home/claude/ref/art/_probe/Tiddybub_2d-assets` (tree only) | CC0 but flat vector style; does not match. Not recommended. |
 
+**Tier C: web hunt of 2026-11-17** (Eevee Expo and DeviantArt; full notes, file paths and best pieces in
+`/home/claude/fangame/art/tilesets/NEW_SOURCES.md`; boards in `/home/claude/ref/art/renders/new_sources/`). Loose sheets
+under `/home/claude/ref/assets/<source>/`, no passage data. Density: `x2` = doubled 16-px art like the games, `16` = double
+on import, `hi` = 32-px art with 1-px detail (own map family, or halve-then-double and touch up).
+
+| Rank | Source | Density | Verdict |
+|---|---|---|---|
+| C1 | **TerribleJared** (DeviantArt) | hi | Muted, cohesive, beautiful. Cargo ships, ferries, yachts and quay props; brick sewer and sump shanties; graveyard and mausoleums; adobe desert town with domed palace; dragon-keeper buildings and statues. Closes **harbour/ships, undercity, desert city, Ashkaar dragon culture**. |
+| C2 | **WesleyFG's DPPt** (Eevee Expo 295) | x2 | RMXP-ready 256×26752 DPPt building library: four-spired League hall (recolour as basilica), library mansion, glass towers, stadium, ferries, cranes, lighthouses. Same density as our maps. |
+| C3 | **PkmnAlexandrite** (DeviantArt) | x2 / 16 | Civic landmarks: domed cathedral, clock tower, mansard town hall (guildhall), bank, library, glass Neocity towers, food trucks. Closes **guildhalls, city blocks**. |
+| C4 | **Magiscarf extra sheets** (DeviantArt) | 16 | Snow-capped trees in six colours (**frozen forests**), white-stone castle towers and bridges, snowy stone townhouses, crystal cave. |
+| C5 | **PeekyChew** (DeviantArt) | hi / 16 | Full Bodiam-style **castle** stamp; snow, desert, beach dumps; animated lava and cave tiles. |
+| C6 | **Phyromatical** "December of Tilesets" | 16 / hi | Distortion World floating islands (**mirror world**), dark ruins, water-dungeon temple (drowned Aurelia), two ice caves, slate-roof timber houses, cloud realm. |
+| C7 | **UltimoSpriter** BW tiles | 16 | Black City towers (**neon/night city**), Virbank industry, cranes and containers. |
+| C8 | **Pokémon Gaia, compiled** (Eevee Expo 1377) | x2 | RMXP-ready modern Gen 4 city with road autotiles. |
+| C9 | Smaller fills | mixed | carchagui snow chalets; J-Treecko252 crystals in eight colours (**crystal caves**); aveontrainer sewer and airport; princess-phoenix fossil museum and factory interiors; Akizakura16 4th-gen indoor/outdoor; moca Public Gen 4; SirMalo HGSS rips; KingTapir desert; Kyle Dove biome tiles. |
+
+Dropped as off-style: figyberries, CoreBear, ORAS/XY and Orre battlebacks (blurry 3D or bland), Elinthind crystal
+cave, itch.io packs. Dropped as private or permission-only: The-Red-eX's Dawn tiles, aveontrainer's Church, Phyromatical's
+Lava Cavern, Hek's tower, DirtyWiggles, chimcharsfireworkd. **Credit fix:** morgebby's unnamed mega-sheets `dbf3bkq` and
+`ddpuooa` are Magiscarf's "Tileset ver.3" and "Revamped Tiles" (non-commercial).
+**Trainer sprites** (kitbash bases, Showdown's 1500 BW-style fronts, kyledove classes, B2W2 VS busts, 316 Wergan
+overworlds): see the TRAINER SPRITES section of NEW_SOURCES.md.
+
 **What the new sources close.** Steep-roof townhouses and more house shapes (1, 3, 4), street props such as stalls,
 washing lines, fountains, barrels and lamps (3, 4, 6), landmark buildings (5: domed palace, mansion; 3: towers), castle and
 bridge stonework (2, 3), ice kingdom (7), sci-fi city (4, 5), volcano and haunted woods (4), desert interior (3).
-**Still thin:** cathedral, guildhalls, grand throne-room interiors, slum and undercity sets, dragon citadel. Custom work (§5).
+Tier C adds ships and harbour props (C1, C2), sewer and slum pieces (C1, C7, C9), civic cathedral and guildhalls (C2, C3),
+a castle stamp (C5), frozen-forest trees and chalets (C4, C9), mirror-world islands (C6) and crystals (C9).
+**Still thin:** grand throne-room, great-hall and cathedral-nave interiors; airships; a full mirror/glass world; dragon
+citadel; obsidian glass-desert; neon signage. Custom work (§5).
 
 **Import cost.** Sources 1, 2 and 6 come with passages. Sources 3, 4, 5 and 7 are loose sheets: they must be cut into
 256-px-wide RMXP sheets (16-px art doubled first) and given passages, priorities and terrain tags by hand or by rule.
@@ -87,6 +114,11 @@ Renders: `/home/claude/ref/art/renders/rejuv_wll_{002 Gearen, 038 Sheridan, 056 
 (render with `PRISMFALL_GFX=/home/claude/ref/art/_gfx_wll`). Reference only: Rejuvenation forbids copying its maps.
 
 **Search log (this sandbox).**
+- Third pass (2026-11-17, internet on): Eevee Expo's 348 Graphics resources and 100 game-jam packs listed by downloads;
+  34 DeviantArt tile artists' galleries via RSS; DeviantArt keyword searches; itch.io. Reachable: Eevee Expo, DeviantArt
+  (full-size images via oEmbed), MEGA file links, Google Drive, Dropbox, catbox, Pokémon Showdown. Blocked or gone:
+  Relic Castle (placeholder page), PokéCommunity and The Spriters Resource (Cloudflare 403), MediaFire, Bulbagarden
+  Archives (403), GitHub search (login). Results: Tier C above and NEW_SOURCES.md.
 - Only `git clone` from github.com works. The GitHub API (`gh search`, `gh release`), codeload zips and raw files
   return 403. archive.org, itch.io, gamejolt, mediafire, mega, gitlab, deviantart, eeveeexpo and rebornevo.com all fail
   with "CONNECT tunnel failed, response 403" (one HEAD each).

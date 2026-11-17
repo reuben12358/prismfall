@@ -6479,6 +6479,51 @@ Pokemon = FLETCHLING,4
     IV = 0
     EV = 0
 # Map 521 Route 2
+# Map 520 Route 1 (script names: story/20_SCRIPT_CH0-2.md, map events from mapgen/layouts/route1.py)
+#-------------------------------
+[YOUNGSTER,Pim]
+LoseText = The dream's fine. The Bidoof needs a minute.
+Pokemon = BIDOOF,5
+    Ability = SIMPLE
+    Nature = JOLLY
+    IV = 8
+#-------------------------------
+[YOUNGSTER,Pim,100]
+LoseText = The dream's fine. The Bidoof needs a minute.
+Pokemon = BIDOOF,6
+    Ability = SIMPLE
+    Nature = JOLLY
+    IV = 20
+#-------------------------------
+[YOUNGSTER,Pim,200]
+LoseText = The dream's fine. The Bidoof needs a minute.
+Pokemon = BIDOOF,4
+    Ability = SIMPLE
+    Nature = JOLLY
+    IV = 0
+    EV = 0
+#-------------------------------
+[LASS,Dory]
+LoseText = It's judging me now.
+Pokemon = FLETCHLING,5
+    Ability = BIGPECKS
+    Nature = ADAMANT
+    IV = 8
+#-------------------------------
+[LASS,Dory,100]
+LoseText = It's judging me now.
+Pokemon = FLETCHLING,6
+    Ability = BIGPECKS
+    Nature = ADAMANT
+    IV = 20
+#-------------------------------
+[LASS,Dory,200]
+LoseText = It's judging me now.
+Pokemon = FLETCHLING,4
+    Ability = BIGPECKS
+    Nature = ADAMANT
+    IV = 0
+    EV = 0
 #-------------------------------
 [BUGCATCHER,Dell]
 LoseText = My Metapod was supposed to evolve this time...

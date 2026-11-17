@@ -8,6 +8,9 @@ def ROUTES(P):
     # Map 520 Route 1 (lv 4-6)
     t("Map 520 Route 1", "YOUNGSTER", "Pip", "Aw, my squad lost!", [m("LILLIPUP", 4, "PICKUP", "JOLLY"), m("SKWOVET", 5, "CHEEKPOUCH", "IMPISH")])
     t("Map 520 Route 1", "LASS", "Wren", "My birdies! Oh, well done.", [m("PIKIPEK", 4, "KEENEYE", "ADAMANT"), m("FLETCHLING", 5, "BIGPECKS", "JOLLY")])
+    # Route 1 trainers as the script (story/20_SCRIPT_CH0-2.md) and the generated map 520 name them
+    t("Map 520 Route 1", "YOUNGSTER", "Pim", "The dream's fine. The Bidoof needs a minute.", [m("BIDOOF", 5, "SIMPLE", "JOLLY")])
+    t("Map 520 Route 1", "LASS", "Dory", "It's judging me now.", [m("FLETCHLING", 5, "BIGPECKS", "ADAMANT")])
     # Map 521 Route 2 (lv 6-8)
     t("Map 521 Route 2", "BUGCATCHER", "Dell", "My Metapod was supposed to evolve this time...", [m("CATERPIE", 6, "SHIELDDUST", "HARDY"), m("METAPOD", 7, "SHEDSKIN", "IMPISH")])
     t("Map 521 Route 2", "CAMPER", "Joss", "Guess I'll go camp somewhere quieter.", [m("ZIGZAGOON", 6, "PICKUP", "JOLLY"), m("SHINX", 7, "INTIMIDATE", "ADAMANT")])

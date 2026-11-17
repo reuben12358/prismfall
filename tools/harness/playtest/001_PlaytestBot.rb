@@ -40,6 +40,8 @@ module PlayBot
     [:goto, 520, 16, 38],
     [:done]
   ]
+  # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
+  ROUTE1_PLAN = [[:goto, 520, 12, 54], [:goto, 520, 10, 44], [:goto, 520, 16, 38], [:goto, 520, 16, 34], [:done]]
 
   @frame = 0; @armed = {}; @live = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
   @cmd = nil; @cmd_seen = -10; @cmd_key = nil; @cmd_target = nil; @cmd_since = 0; @cmd_moved = 0
@@ -341,8 +343,10 @@ module PlayBot
     #---------------------------------------------------------------------------
     # Plan steps (run while the map is free; walking keeps going while moving)
     #---------------------------------------------------------------------------
+    def plan; return (SESSION == "route1") ? ROUTE1_PLAN : PLAN; end
+
     def drive_plan
-      step = PLAN[@step]
+      step = plan[@step]
       return if !step
       kind, map = step
       if @step_start == 0
@@ -401,7 +405,7 @@ module PlayBot
 
     # A step for another map: skip ahead to the first later step for the map we are on
     def wait_for_map
-      later = PLAN[@step..].index { |s| s[1] == $game_map.map_id }
+      later = plan[@step..].index { |s| s[1] == $game_map.map_id }
       return if !later
       @step += later
       @step_start = 0
@@ -665,7 +669,20 @@ module Game
     def start_new
       PlayBot.log("New Game (session #{PlayBot::SESSION}); plugins: #{PluginManager.plugins.inspect}")
       PlayBot.recording = (PlayBot::SESSION == "play")
+      if PlayBot::SESSION == "route1"   # dev shortcut: begin on Route 1's south edge, as after K1
+        PrismfallMaps.define_singleton_method(:apply_start_position) do
+          $data_system.start_map_id, $data_system.start_x, $data_system.start_y = 520, 16, 67
+          true
+        end
+      end
       playbot_start_new
+      if PlayBot::SESSION == "route1"
+        $player.name = PlayBot::NAME
+        $player.has_running_shoes = true
+        $player.party = [Pokemon.new(:MUDKIP, 7)]
+        $game_switches[103] = $game_switches[104] = true
+        $game_map.need_refresh = true
+      end
       $PokemonSystem.textspeed = 2 if $PokemonSystem   # Fast
       $PokemonSystem.runstyle = 1 if $PokemonSystem    # run without holding Back
       PlayBot.log("started on map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")

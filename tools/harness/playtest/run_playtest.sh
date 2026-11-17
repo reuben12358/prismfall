@@ -8,6 +8,7 @@
 #   bash run_playtest.sh assemble   # package, fresh copy, apply the kit, add the bot
 #   bash run_playtest.sh install    # 1st Debug boot (compiles), New Game -> install offer -> quit
 #   bash run_playtest.sh play       # restart, New Game, Debug > Files > Install (no-op), prologue
+#   bash run_playtest.sh route1     # dev shortcut: start on Route 1 after K1, walk into its trainers
 #   python3 make_playtest_media.py  # shots + GIF -> docs/playtest/
 #
 # Needs the mkxp-z build from tools/harness/visual/run_engine_capture.sh (build step).
@@ -73,6 +74,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|play) session "$1" ;;
-  *) echo "usage: $0 assemble | install | play | stop"; exit 1 ;;
+  install|play|route1) session "$1" ;;
+  *) echo "usage: $0 assemble | install | play | route1 | stop"; exit 1 ;;
 esac

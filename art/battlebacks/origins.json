@@ -23,6 +23,16 @@
    "ferry pier, sand platforms, tide-pool rocks, sea glints and foam, gulls"
   ]
  ],
+ "BLEED": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgDimensional (red-graded)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "torn-reality collage: shards of Prismfall's own field rooms with chromatic split, glitch slices, glowing tears"
+  ]
+ ],
  "CAVE": [
   [
    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
@@ -50,7 +60,7 @@
  "CORROSIVE_MIRE": [
   [
    "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgCorrosive (gradient-mapped), enemybaseCorrosive"
+   "battlebgCorrosive (gradient-mapped)"
   ],
   [
    "Elite Battle: DX stock elements (Luka S.J.)",
@@ -58,7 +68,7 @@
   ],
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
-   "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, sickly hanging lamp, fumes"
+   "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, sickly hanging lamp, fumes, sludge-rimmed platforms"
   ]
  ],
  "CRYSTAL_CAVERN": [
@@ -109,6 +119,16 @@
    "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
   ]
  ],
+ "FACTORY": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgFactory (gradient-mapped steel-blue with forge light, extended)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "rotating gears, catwalk and girders, conveyor with ingots (scrolling), crucible pouring molten steel, hooks, hazard-striped steel platforms, furnace glow, heat haze"
+  ]
+ ],
  "FAIRY_TALE": [
   [
    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
@@ -139,6 +159,58 @@
    "fjord cliffs, far-shore pines, ice cracks, lake mist; night variant with aurora"
   ]
  ],
+ "GRAND_STAGE": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgBeach (scaled, as the painted seascape backdrop flat)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "lightsA, spinLights"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "opera house: velvet curtains and valance, wing flats, gilt boxes, stage boards, footlights, spotlight, velvet platforms"
+  ]
+ ],
+ "HOLLOW_CATHEDRAL": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgBlacksteepleIndoor (gradient-mapped night violet, extended)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "gothic nave arches and pillars, broken rose window, candle-lit altar, pews, moonlight shafts, floor mist"
+  ]
+ ],
+ "INVERSE": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgInverse, enemybaseInverse"
+  ],
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgForest (inverted crops as upside-down floating islands)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "floating island undersides, static mist"
+  ]
+ ],
+ "MINDSCAPE": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgPsychic (pastel gradient map)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "dark006 (vacuum rings)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "Penrose triangle, impossible stairs, glowing door, floating library shelves and books, mirror-glass checker floor, rune-ring platforms, thought mist"
+  ]
+ ],
  "MOUNTAIN": [
   [
    "Pok\u00e9mon Reborn (Reborn Team)",
@@ -149,6 +221,48 @@
    "sky, layered snow-capped ridges, pines, clouds, valley mist"
   ]
  ],
+ "NEON_GRID": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgZeight (sky repainted to night, extended)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "spinLights"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "Lumen skyline, perspective circuit grid, neon ring platforms, holo-billboards, airship, circuit glow"
+  ]
+ ],
+ "NEW_MOON": [
+  [
+   "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+   "battlebgStarlight1 (starfield, darkened)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "dark004 (vacuum rings)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "dark moon with violet corona, Underveil rooftops and windows, violet rim light"
+  ]
+ ],
+ "PRISM_ARENA": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgChampion (gradient-mapped night, as the arena sky glow)"
+  ],
+  [
+   "Elite Battle: DX stock elements (Luka S.J.)",
+   "lightsA"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "Crownhaven stands with crowd lights, the 18 Plates ring, prismatic floor sigil, searchlights, marble platforms"
+  ]
+ ],
  "RAINBOW": [
   [
    "Pok\u00e9mon Reborn (Reborn Team)",
@@ -156,13 +270,23 @@
   ],
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
-   "cloud field, prismatic mist, drifting foreground clouds"
+   "cloud-bank floor, prismatic mist, drifting foreground clouds"
+  ]
+ ],
+ "SCRAPYARD": [
+  [
+   "Pok\u00e9mon Reborn (Reborn Team)",
+   "battlebgFactory (gradient-mapped rust, extended)"
+  ],
+  [
+   "Prismfall (procedural, art/battlebacks/*.py)",
+   "same layout wrecked: dead broken gears, collapsed catwalk, snapped conveyor, tipped crucible, scrap heaps, rusted platforms, red alarm lamp, severed-cable sparks, smoke"
   ]
  ],
  "SILKWOOD": [
   [
    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-   "battlebgForest, enemybaseForest (graded green-gold)"
+   "battlebgForest (graded green-gold)"
   ],
   [
    "Elite Battle: DX stock elements (Luka S.J.)",
@@ -170,7 +294,7 @@
   ],
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
-   "orb webs with dew, silk curtains, silk-wrapped platforms, hanging strands and cocoons"
+   "orb webs with dew, silk curtains, silk-wrapped stump platforms, hanging strands and cocoons"
   ]
  ],
  "SNOWY_MOUNTAIN": [

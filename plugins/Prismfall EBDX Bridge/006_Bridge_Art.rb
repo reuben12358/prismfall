@@ -255,6 +255,82 @@ module PrismfallEBDX
       ]
     },
     # <<< BEACH
+    # >>> BLEED
+    :BLEED => {
+      :layers => [
+        {
+          :bitmap => "pf_bleed_slice0",
+          :hd => true,
+          :x => 4.44,
+          :y => 47.11,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 230,
+          :chance => 0.04,
+          :dropout => 6
+        },
+        {
+          :bitmap => "pf_bleed_slice1",
+          :hd => true,
+          :x => 8.0,
+          :y => 134.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 230,
+          :chance => 0.04,
+          :dropout => 6
+        },
+        {
+          :bitmap => "pf_bleed_slice2",
+          :hd => true,
+          :x => 1.78,
+          :y => 226.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 26,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 230,
+          :chance => 0.04,
+          :dropout => 6
+        },
+        {
+          :bitmap => "pf_bleed_slice3",
+          :hd => true,
+          :x => 0.0,
+          :y => 204.44,
+          :ox => 0,
+          :oy => 0,
+          :z => 26,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 230,
+          :chance => 0.04,
+          :dropout => 6
+        },
+        {
+          :bitmap => "pf_bleed_tears",
+          :hd => true,
+          :x => 42.67,
+          :y => 44.89,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 60,
+          :max => 200,
+          :period => 40
+        }
+      ]
+    },
+    # <<< BLEED
     # >>> CAVE
     :CAVE => {
       :art_extras => {
@@ -481,7 +557,7 @@ module PrismfallEBDX
         {
           :bitmap => "pf_corrosive_mire_sludgeglow",
           :hd => true,
-          :x => 36.44,
+          :x => 17.33,
           :y => 114.67,
           :ox => 0,
           :oy => 0,
@@ -828,6 +904,191 @@ module PrismfallEBDX
       ]
     },
     # <<< DRAGONS_DEN
+    # >>> FACTORY
+    :FACTORY => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_factory_belt",
+          :scrolling => true,
+          :speed => 2,
+          :direction => -1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 129.78,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 2
+        },
+        "img010" => {
+          :bitmap => "pf_factory_pour2",
+          :scrolling => true,
+          :vertical => true,
+          :speed => 3,
+          :direction => -1,
+          :ox => 8,
+          :oy => 0,
+          :x => 267.56,
+          :y => 88.89,
+          :zoom => 0.444444444,
+          :z => 2
+        },
+        "img002" => {
+          :bitmap => "pf_factory_heat",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 111.11,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 4
+        }
+      },
+      :layers => [
+        { :bitmap => "pf_factory_gear0", :hd => true, :x => 104.89, :y => 80.0, :ox => 109, :oy => 109, :z => 1, :anim => :rotate, :speed => 0.195652174 },
+        { :bitmap => "pf_factory_gear1", :hd => true, :x => 158.22, :y => 46.22, :ox => 62, :oy => 62, :z => 1, :anim => :rotate, :speed => -0.346153846 },
+        { :bitmap => "pf_factory_gear2", :hd => true, :x => 314.67, :y => 66.67, :ox => 130, :oy => 130, :z => 1, :anim => :rotate, :speed => -0.163636364 },
+        { :bitmap => "pf_factory_gear3", :hd => true, :x => 367.11, :y => 120.0, :ox => 72, :oy => 72, :z => 1, :anim => :rotate, :speed => 0.3 },
+        { :bitmap => "pf_factory_gear4", :hd => true, :x => 248.89, :y => 42.67, :ox => 48, :oy => 48, :z => 1, :anim => :rotate, :speed => 0.45 },
+        {
+          :bitmap => "pf_factory_crucible",
+          :hd => true,
+          :x => 288.44,
+          :y => 66.67,
+          :ox => 43,
+          :oy => -12,
+          :z => 2,
+          :anim => :sway,
+          :amp => 0.6,
+          :period => 200
+        },
+        { :bitmap => "pf_factory_cruchain", :hd => true, :x => 286.22, :y => 0.0, :ox => 0, :oy => 0, :z => 2 },
+        {
+          :bitmap => "pf_factory_pourglow",
+          :hd => true,
+          :x => 224.0,
+          :y => 106.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 110,
+          :max => 220,
+          :period => 30
+        },
+        {
+          :bitmap => "pf_factory_furnace",
+          :hd => true,
+          :x => 42.67,
+          :y => 239.56,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 60,
+          :max => 130,
+          :period => 140
+        },
+        {
+          :bitmap => "pf_factory_channel",
+          :hd => true,
+          :x => 0.0,
+          :y => 128.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 90,
+          :max => 190,
+          :period => 80
+        },
+        { :bitmap => "pf_factory_hook0", :hd => true, :x => 84.44, :y => 112.0, :ox => 11, :oy => 2, :z => 3, :anim => :sway, :amp => 3, :period => 150 },
+        { :bitmap => "pf_factory_hook1", :hd => true, :x => 142.22, :y => 112.0, :ox => 11, :oy => 2, :z => 3, :anim => :sway, :amp => 3, :period => 180 },
+        { :bitmap => "pf_factory_hook2", :hd => true, :x => 320.0, :y => 112.0, :ox => 11, :oy => 2, :z => 3, :anim => :sway, :amp => 3, :period => 210 }
+      ],
+      :fx => [
+        {
+          :type => :fall,
+          :count => 14,
+          :shape => :dot,
+          :size => 2,
+          :colors => [
+            [255, 150, 50],
+            [255, 210, 90],
+            [255, 240, 170]
+          ],
+          :area => [262, 90, 290, 140],
+          :speed => [2.0, 3.5],
+          :sway => 10,
+          :zoom => [0.5, 0.8],
+          :opacity => [200, 255],
+          :layers => [:back, :mid],
+          :blend => 1
+        },
+        {
+          :type => :rise,
+          :count => 10,
+          :shape => :glow,
+          :size => 4,
+          :colors => [
+            [255, 150, 50],
+            [255, 200, 80]
+          ],
+          :area => [0, 140, 384, 308],
+          :speed => [0.5, 1.2],
+          :sway => 8,
+          :zoom => [0.3, 0.6],
+          :opacity => [150, 230],
+          :layers => [:back, :mid, :front],
+          :blend => 1
+        },
+        {
+          :type => :rise,
+          :count => 6,
+          :shape => :puff,
+          :size => 20,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [61.7, 42.2, 71.7, 142.2],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [50, 95],
+          :layers => [:back],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 6,
+          :shape => :puff,
+          :size => 20,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [359.4, 51.1, 369.4, 151.1],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [50, 95],
+          :layers => [:back],
+          :blend => 0
+        }
+      ]
+    },
+    # <<< FACTORY
     # >>> FAIRY_TALE
     :FAIRY_TALE => {
       :layers => [
@@ -1103,6 +1364,407 @@ module PrismfallEBDX
       ]
     },
     # <<< FROZEN_LAKE
+    # >>> GRAND_STAGE
+    :GRAND_STAGE => {
+      :art_extras => { "lightsA" => true, "spinLights" => true },
+      :layers => [
+        {
+          :bitmap => "pf_grand_stage_spot",
+          :hd => true,
+          :x => 215.56,
+          :y => 66.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 80,
+          :max => 130,
+          :period => 160
+        },
+        {
+          :bitmap => "pf_grand_stage_pool",
+          :hd => true,
+          :x => 184.44,
+          :y => 136.44,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 70,
+          :max => 120,
+          :period => 160
+        },
+        {
+          :bitmap => "pf_grand_stage_footlights",
+          :hd => true,
+          :x => 9.33,
+          :y => 279.56,
+          :ox => 0,
+          :oy => 0,
+          :z => 24,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 120,
+          :max => 200,
+          :period => 90
+        },
+        {
+          :bitmap => "pf_grand_stage_flatglow",
+          :hd => true,
+          :x => 158.67,
+          :y => 68.89,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 30,
+          :max => 70,
+          :period => 220
+        }
+      ]
+    },
+    # <<< GRAND_STAGE
+    # >>> HOLLOW_CATHEDRAL
+    :HOLLOW_CATHEDRAL => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_hollow_cathedral_mist",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 133.33,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 4
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_hollow_cathedral_rose",
+          :hd => true,
+          :x => 200.0,
+          :y => 68.44,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 60,
+          :max => 160,
+          :period => 180
+        },
+        {
+          :bitmap => "pf_hollow_cathedral_candles",
+          :hd => true,
+          :x => 199.11,
+          :y => 112.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => [:pulse, :flicker],
+          :min => 120,
+          :max => 210,
+          :period => 25,
+          :chance => 0.03,
+          :dropout => 2
+        },
+        {
+          :bitmap => "pf_hollow_cathedral_moon0",
+          :hd => true,
+          :x => 140.89,
+          :y => 66.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 30,
+          :max => 80,
+          :period => 240,
+          :phase => 0
+        },
+        {
+          :bitmap => "pf_hollow_cathedral_moon1",
+          :hd => true,
+          :x => 283.56,
+          :y => 66.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 30,
+          :max => 80,
+          :period => 300,
+          :phase => 2
+        }
+      ]
+    },
+    # <<< HOLLOW_CATHEDRAL
+    # >>> INVERSE
+    :INVERSE => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_inverse_static",
+          :scrolling => true,
+          :speed => 2,
+          :direction => -1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 115.56,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 3
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_inverse_island0",
+          :hd => true,
+          :x => 83.56,
+          :y => 92.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => :bob,
+          :amp => 6,
+          :period => 200,
+          :phase => 0
+        },
+        {
+          :bitmap => "pf_inverse_island1",
+          :hd => true,
+          :x => 265.78,
+          :y => 80.89,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => :bob,
+          :amp => 6,
+          :period => 250,
+          :phase => 2
+        },
+        {
+          :bitmap => "pf_inverse_island2",
+          :hd => true,
+          :x => 181.33,
+          :y => 95.11,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => :bob,
+          :amp => 6,
+          :period => 300,
+          :phase => 4
+        }
+      ]
+    },
+    # <<< INVERSE
+    # >>> MINDSCAPE
+    :MINDSCAPE => {
+      :art_extras => {
+        "vacuum" => "dark006",
+        "img001" => {
+          :bitmap => "pf_mindscape_thought",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 106.67,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 3
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_mindscape_door",
+          :hd => true,
+          :x => 262.22,
+          :y => 96.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 80,
+          :max => 200,
+          :period => 120
+        },
+        {
+          :bitmap => "pf_mindscape_penrose",
+          :hd => true,
+          :x => 93.33,
+          :y => 62.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 30,
+          :max => 120,
+          :period => 170,
+          :phase => 1.0
+        },
+        {
+          :bitmap => "pf_mindscape_shelf0",
+          :hd => true,
+          :x => 88.44,
+          :y => 101.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => :bob,
+          :amp => 4,
+          :period => 160,
+          :phase => 0
+        },
+        {
+          :bitmap => "pf_mindscape_shelf1",
+          :hd => true,
+          :x => 310.67,
+          :y => 146.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 22,
+          :anim => :bob,
+          :amp => 4,
+          :period => 200,
+          :phase => 1
+        },
+        {
+          :bitmap => "pf_mindscape_shelf2",
+          :hd => true,
+          :x => 190.22,
+          :y => 70.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => :bob,
+          :amp => 4,
+          :period => 240,
+          :phase => 2
+        },
+        {
+          :bitmap => "pf_mindscape_book0",
+          :hd => true,
+          :x => 236.62,
+          :y => 93.66,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 100,
+          :phase => 0
+        },
+        {
+          :bitmap => "pf_mindscape_book1",
+          :hd => true,
+          :x => 299.68,
+          :y => 78.59,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 113,
+          :phase => 1
+        },
+        {
+          :bitmap => "pf_mindscape_book2",
+          :hd => true,
+          :x => 307.58,
+          :y => 82.89,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 126,
+          :phase => 2
+        },
+        {
+          :bitmap => "pf_mindscape_book3",
+          :hd => true,
+          :x => 265.24,
+          :y => 88.01,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 139,
+          :phase => 3
+        },
+        {
+          :bitmap => "pf_mindscape_book4",
+          :hd => true,
+          :x => 320.76,
+          :y => 102.64,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 152,
+          :phase => 4
+        },
+        {
+          :bitmap => "pf_mindscape_book5",
+          :hd => true,
+          :x => 143.24,
+          :y => 84.63,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 165,
+          :phase => 5
+        },
+        {
+          :bitmap => "pf_mindscape_book6",
+          :hd => true,
+          :x => 276.69,
+          :y => 100.39,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 178,
+          :phase => 6
+        },
+        {
+          :bitmap => "pf_mindscape_book7",
+          :hd => true,
+          :x => 312.72,
+          :y => 90.06,
+          :ox => 11,
+          :oy => 6,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 5,
+          :period => 191,
+          :phase => 7
+        }
+      ]
+    },
+    # <<< MINDSCAPE
     # >>> MOUNTAIN
     :MOUNTAIN => {
       :art_extras => {
@@ -1199,6 +1861,234 @@ module PrismfallEBDX
       ]
     },
     # <<< MOUNTAIN
+    # >>> NEON_GRID
+    :NEON_GRID => {
+      :art_extras => {
+        "spinLights" => true,
+        "img001" => {
+          :bitmap => "pf_neon_grid_scan",
+          :scrolling => true,
+          :speed => 4,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 116.44,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 2
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_neon_grid_circuits",
+          :hd => true,
+          :x => 0.0,
+          :y => 56.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => [:pulse, :flicker],
+          :min => 60,
+          :max => 180,
+          :period => 70,
+          :chance => 0.008,
+          :dropout => 4
+        },
+        {
+          :bitmap => "pf_neon_grid_board0",
+          :hd => true,
+          :x => 92.44,
+          :y => 39.11,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:bob, :flicker],
+          :amp => 2,
+          :period => 120,
+          :chance => 0.01,
+          :dropout => 5,
+          :min => 60
+        },
+        {
+          :bitmap => "pf_neon_grid_board1",
+          :hd => true,
+          :x => 283.56,
+          :y => 25.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:bob, :flicker],
+          :amp => 2,
+          :period => 150,
+          :chance => 0.01,
+          :dropout => 5,
+          :min => 60
+        },
+        {
+          :bitmap => "pf_neon_grid_board2",
+          :hd => true,
+          :x => 230.22,
+          :y => 79.11,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:bob, :flicker],
+          :amp => 2,
+          :period => 180,
+          :chance => 0.01,
+          :dropout => 5,
+          :min => 60
+        },
+        {
+          :bitmap => "pf_neon_grid_airship",
+          :hd => true,
+          :x => 145.78,
+          :y => 9.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:drift, :bob],
+          :amp => 40,
+          :period => 600
+        }
+      ]
+    },
+    # <<< NEON_GRID
+    # >>> NEW_MOON
+    :NEW_MOON => {
+      :art_extras => {
+        "vacuum" => "dark004",
+        "img001" => {
+          :bitmap => "pf_new_moon_shadow",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => -1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 124.44,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 4
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_new_moon_corona",
+          :hd => true,
+          :x => 219.56,
+          :y => 48.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 50,
+          :max => 150,
+          :period => 200
+        },
+        {
+          :bitmap => "pf_new_moon_windows",
+          :hd => true,
+          :x => 11.56,
+          :y => 98.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :flicker,
+          :opacity => 200,
+          :min => 60,
+          :chance => 0.01,
+          :dropout => 10
+        }
+      ]
+    },
+    # <<< NEW_MOON
+    # >>> PRISM_ARENA
+    :PRISM_ARENA => {
+      :art_extras => {
+        "lightsA" => true,
+        "img001" => {
+          :bitmap => "pf_prism_arena_prism",
+          :scrolling => true,
+          :speed => 1,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 111.11,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 3
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_prism_arena_plates",
+          :hd => true,
+          :x => 72.0,
+          :y => 57.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 60,
+          :max => 170,
+          :period => 120
+        },
+        {
+          :bitmap => "pf_prism_arena_sigil",
+          :hd => true,
+          :x => 8.0,
+          :y => 140.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 40,
+          :max => 150,
+          :period => 150,
+          :phase => 1.0
+        },
+        {
+          :bitmap => "pf_prism_arena_beam0",
+          :hd => true,
+          :x => 105.78,
+          :y => 14.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :sway,
+          :amp => 6,
+          :period => 300,
+          :opacity => 150
+        },
+        {
+          :bitmap => "pf_prism_arena_beam1",
+          :hd => true,
+          :x => 292.44,
+          :y => 14.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :sway,
+          :amp => 6,
+          :period => 370,
+          :opacity => 150
+        }
+      ]
+    },
+    # <<< PRISM_ARENA
     # >>> RAINBOW
     :RAINBOW => {
       :art_extras => {
@@ -1249,6 +2139,166 @@ module PrismfallEBDX
       ]
     },
     # <<< RAINBOW
+    # >>> SCRAPYARD
+    :SCRAPYARD => {
+      :art_extras => {
+        "img002" => {
+          :bitmap => "pf_scrapyard_smoke",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => -1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 80.0,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 4
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_scrapyard_dangle",
+          :hd => true,
+          :x => 151.11,
+          :y => 132.44,
+          :ox => 15,
+          :oy => 2,
+          :z => 2,
+          :anim => :sway,
+          :amp => 4,
+          :period => 210
+        },
+        { :bitmap => "pf_scrapyard_chain", :hd => true, :x => 111.11, :y => 53.33, :ox => 11, :oy => 2, :z => 2, :anim => :sway, :amp => 2, :period => 260 },
+        { :bitmap => "pf_scrapyard_alarm", :hd => true, :x => 182.67, :y => 112.0, :ox => 0, :oy => 0, :z => 3 },
+        {
+          :bitmap => "pf_scrapyard_alarmglow",
+          :hd => true,
+          :x => 101.78,
+          :y => 52.44,
+          :ox => 0,
+          :oy => 0,
+          :z => 3,
+          :blend => 1,
+          :anim => [:pulse, :flicker],
+          :min => 10,
+          :max => 130,
+          :period => 50,
+          :chance => 0.03,
+          :dropout => 8
+        },
+        {
+          :bitmap => "pf_scrapyard_spark",
+          :hd => true,
+          :x => 144.0,
+          :y => 128.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 3,
+          :blend => 1,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 255,
+          :chance => 0.05,
+          :dropout => 3
+        }
+      ],
+      :fx => [
+        {
+          :type => :rise,
+          :count => 7,
+          :shape => :puff,
+          :size => 24,
+          :colors => [
+            [90, 86, 84],
+            [70, 68, 70],
+            [110, 104, 98]
+          ],
+          :area => [128.3, 6.7, 138.3, 146.7],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 7,
+          :shape => :puff,
+          :size => 24,
+          :colors => [
+            [90, 86, 84],
+            [70, 68, 70],
+            [110, 104, 98]
+          ],
+          :area => [306.1, -6.7, 316.1, 133.3],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 26,
+          :colors => [
+            [90, 86, 84],
+            [70, 68, 70],
+            [110, 104, 98]
+          ],
+          :area => [35.0, 128.9, 45.0, 248.9],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [50, 100],
+          :layers => [:front],
+          :blend => 0
+        },
+        {
+          :type => :fall,
+          :count => 5,
+          :shape => :dot,
+          :size => 2,
+          :colors => [
+            [255, 150, 50],
+            [255, 100, 30],
+            [255, 210, 90]
+          ],
+          :area => [146, 130, 156, 150],
+          :speed => [2.0, 3.5],
+          :sway => 3,
+          :zoom => [0.5, 0.8],
+          :opacity => [200, 255],
+          :layers => [:back],
+          :blend => 1
+        },
+        {
+          :type => :drift,
+          :count => 10,
+          :shape => :dot,
+          :size => 2,
+          :colors => [
+            [110, 110, 110],
+            [150, 140, 130],
+            [80, 80, 85]
+          ],
+          :speed => [0.2, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :opacity => [80, 140],
+          :layers => [:back, :mid]
+        }
+      ]
+    },
+    # <<< SCRAPYARD
     # >>> SILKWOOD
     :SILKWOOD => {
       :art_extras => {

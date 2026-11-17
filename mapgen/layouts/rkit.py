@@ -83,6 +83,8 @@ class RMap:
         self.auto = {'d': ('DirtDark', 'rejuvenation'), 'g': ('Gravel Spring', 'pf'), 'w': (water, 'rejuvenation'),
                      's': ('Sand shore_2', 'rejuvenation'), 'W': ('Sea deep', 'rejuvenation'), 'u': ('Dirt', 'rejuvenation')}
         self.cliff = np.zeros((H, W), bool)
+        self.overm = np.zeros((H, W), bool)          # overhead-only crown cells of tree-like stamps (free below)
+        self.bodym = np.zeros((H, W), bool)          # every other stamp cell (walls, boles, trunks, props)
 
     def inb(self, x, y): return 0 <= x < self.W and 0 <= y < self.H
 
@@ -116,24 +118,42 @@ class RMap:
                         if self.inb(xx, yy) and (xx + 0.5 - x - 0.5) ** 2 + (yy + 0.5 - y - 0.5) ** 2 <= r * r + 0.15:
                             if only is None or self.cls[yy, xx] in only: self.cls[yy, xx] = c
 
-    def free(self, x, y, w, h, on='.t'):
+    def free(self, x, y, w, h, on='.t', under=False):
+        """no stamp, event or over-tile in the rect and every class in `on`; crowns count as taken unless under=True"""
         if x < 0 or y < 0 or x + w > self.W or y + h > self.H: return False
+        if not under and self.overm[y:y + h, x:x + w].any(): return False
         return not self.taken[y:y + h, x:x + w].any() and all(ch in on for ch in self.cls[y:y + h, x:x + w].reshape(-1))
 
-    def stamp(self, name, x, y, link=None, dname=None, door=None, mark='B', level=None):
+    TREELIKE = ('pf_g_', 'tr_', 'pine', 'kf_tree', 'ice_', 'wb_elder')
+
+    def stamp(self, name, x, y, link=None, dname=None, door=None, mark='B', level=None, blend=False):
+        """Place a stamp.  Tree-like stamps (giant trees, yard trees) keep their overhead-only cells (crown tiles on
+        layer 3 with nothing below) FREE: forest may grow under the crown so its transparent edge shows canopy, not a
+        box of bare ground (MAPGEN 2h fix round).  blend=True also turns those cells into forest class 'T'."""
         st = STAMPS[name]; w, h = st['w'], st['h']
         if x < 0 or y < 0 or x + w > self.W or y + h > self.H: raise SystemExit('stamp %s at %d,%d out of bounds' % (name, x, y))
         self.stamps.append((name, x, y))
         L = np.array(st['layers'])
         occ = L.max(axis=0) > 0
-        if mark == 'B' and name[:3] in ('gl_', 'sh_', 'kf_', 'pf_', 'ak_') and name != 'kf_tree':
+        over = (L[0] == 0) & (L[1] == 0) & (L[2] > 0)
+        treelike = name.startswith(self.TREELIKE)
+        if mark == 'B' and name[:3] in ('gl_', 'sh_', 'kf_', 'pf_', 'ak_', 'wb_', 'fw_', 'ic_') and name != 'kf_tree':
             if not hasattr(self, 'bfoot'): self.bfoot = np.zeros((self.H, self.W), bool)
             hit = self.bfoot[y:y + h, x:x + w] & occ
             if hit.any():
                 yy, xx = np.argwhere(hit)[0]
                 raise SystemExit('stamp %s at %d,%d overlaps another building at %d,%d' % (name, x, y, x + xx, y + yy))
             self.bfoot[y:y + h, x:x + w] |= occ
-        self.taken[y:y + h, x:x + w] |= occ
+        if treelike:
+            self.overm[y:y + h, x:x + w] |= over
+            self.bodym[y:y + h, x:x + w] |= occ & ~over
+            self.taken[y:y + h, x:x + w] |= occ & ~over
+            if blend:
+                sub = self.cls[y:y + h, x:x + w]
+                sub[over & np.isin(sub, ['.', 't'])] = 'T'
+        else:
+            self.bodym[y:y + h, x:x + w] |= occ
+            self.taken[y:y + h, x:x + w] |= occ
         if mark:
             ts = self.ts()
             for dy in range(h):
@@ -210,7 +230,11 @@ class RMap:
         st = STAMPS[name]; w, h = st['w'], st['h']
         if x < 0 or x + w > self.W or y + h > self.H: return False
         foot = [(x + dx, y + h - 1 - dy) for dx in range(w) for dy in range(2)]        # trunk rows must be free
-        return all(self.cls[yy, xx] in on and not self.taken[yy, xx] and not self.cliff[yy, xx] for xx, yy in foot if yy >= 0)
+        if not all(self.cls[yy, xx] in on and not self.taken[yy, xx] and not self.cliff[yy, xx] for xx, yy in foot if yy >= 0):
+            return False
+        L = np.array(st['layers']); occ = L.max(axis=0) > 0                       # and no cell under a giant's crown
+        y0 = max(0, y)
+        return not (self.overm[y0:y + h, x:x + w] & occ[y0 - y:]).any()
 
     def trees(self, cx, cy, n, kinds, r=4, on='.', seed=0):
         """a cluster of up to n yard trees around (cx, cy); canopies may overlap, trunks may not"""
@@ -248,7 +272,7 @@ class RMap:
         best = None
         for yy in range(y - r, y + r + 1):
             for xx in range(x - r, x + r + 1):
-                if self.inb(xx, yy) and self.cls[yy, xx] in on and not self.taken[yy, xx] and not self.cliff[yy, xx]:
+                if self.inb(xx, yy) and self.cls[yy, xx] in on and not self.taken[yy, xx] and not self.cliff[yy, xx] and not self.overm[yy, xx]:
                     d = abs(xx - x) + abs(yy - y)
                     if best is None or d < best[0]: best = (d, xx, yy)
         if best is None: raise SystemExit('snap: nothing free near %d,%d' % (x, y))
@@ -409,6 +433,7 @@ class RMap:
         lattice = {t for tr in (self.lattice or self.TREES_SH) for part in tr[:2] for row in part for t in row if t}
         for name, x, y in self.stamps:
             L = np.array(STAMPS[name]['layers']); h, w = L.shape[1:]
+            treelike = name.startswith(self.TREELIKE)
             for dy in range(h):
                 for dx in range(w):
                     X, Y = x + dx, y + dy
@@ -420,8 +445,9 @@ class RMap:
                     if t1:
                         if cur1 >= RC.VBASE: self.L[0, Y, X] = cur1          # keep the lane / sand under the object
                         self.L[1, Y, X] = t1
-                    elif t2 and cur1 in lattice:
+                    elif t2 and cur1 in lattice and not treelike:
                         self.L[1, Y, X] = 0                                   # a forest trunk under a roof goes
+                    # (under a crown the forest's lower canopy stays: the crown's ragged edge shows foliage, not a box)
                     if t2: self.L[2, Y, X] = t2
         for z, x, y, t in self.over:
             if z == 1 and self.L[1, y, x] >= RC.VBASE: self.L[0, y, x] = self.L[1, y, x]

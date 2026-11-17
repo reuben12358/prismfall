@@ -49,12 +49,52 @@ the Rejuvenation Team; do not copy maps.
 - **carchagui**: City Tiles, Swamp Village Tileset, Mountains Variations.
 - **aveontrainer**: Factory, Machinery, Log Cabin Tileset.
 - **Phyromatical**: Victory Ruins. **Zeo254**: Pokémon Resurgent tileset. **Akizakura16**: Hi-Res Interior General Tileset.
-- Two large seasonal town sheets in the same collection have no artist in their filenames (DeviantArt IDs `dbf3bkq`,
-  `ddpuooa`). **Find and credit the artist before shipping anything from them.**
+- The two large seasonal town sheets in the same collection (DeviantArt IDs `dbf3bkq`, `ddpuooa`) are **Magiscarf's**
+  "Tileset ver.3 [Free*]" and "Revamped Tiles" (identified 2026-11-17). Terms: free to use and edit for non-commercial
+  purposes only. `ddejpun` is Magiscarf's "Fields Backgrounds".
 - **Pokémon Uranium team** (tiles via acedogblast/Project-Uranium-Godot; see that repo's PermittedAssets and credits).
 - **Pokémon Infinite Fusion 2: Hoenn** (Chardub and team) for the Hoenn town, route and interior sheets.
 - **Aiwyn17** for the Freljord, sanctuary and airship sub-tilesets.
 - Collection found in M0RGEBBY/pokemon-fan-game.
+
+### Community tiles from the 2026-11-17 hunt (credit each when its sheets are used)
+Paths, per-file sources and terms: `art/tilesets/NEW_SOURCES.md` and each folder's `_sources.tsv`.
+- **TerribleJared**: boats and ferries, quay and harbour, sewer, graveyard and mausoleum, desert town, Dragon Keepers
+  packs (with credit to Aveontrainer for the desert building style), snowy sleighs, machines, subway, swamp, campground.
+  Free and public.
+- **WesleyFG**: DPPt tileset (formatted for RPG Maker XP by Aldo), public tiles. Credit WesleyFG.
+- **PkmnAlexandrite**: cathedral, clock tower, town hall, bank, library, Neocity, hotel, city decorations, food trucks,
+  residential buildings. Non-commercial; edits of tiles by Magiscarf, WesleyFG, Zeo254, Rata, The-Red-eX, SailorVicious.
+- **Magiscarf**: Bunch o' free tiles, New Tiles Mastersheet, Snow and Stone, City Tiles, Buildings w/ Snow, Crystal Caves,
+  Art Deco Building, Misc. Tiles, Interiors. Non-commercial.
+- **PeekyChew**: Medieval Castle, Public Tileset Dumps (snow, desert, beach), Lava and Cave, animated lava, cafe and bar,
+  Platinum gatehouse, stone slabs, custom houses. Free for non-commercial use; also credit the artists named on each post.
+- **Phyromatical** (December of Tilesets): Distortion World remake, Dark Ruins, Water Dungeon, Deep Ice Cave, Evolina
+  Ice Cave and Mountains, Ice Floe, Bridgeton (buildings by The-Red-eX), Heaven Realm, Alternate Volcano, Autumn,
+  Halloween, Old Ways, Magiscarf edits. Credit Phyromatical and the artists named on each post.
+- **UltimoSpriter**: Black City, Virbank, Cold Storage, Driftveil, Misc B/W, Starter Kit, Random Interiors. Public.
+- **Pokémon Gaia** tiles by **zetavares852** and contributors (compiled by A.I.R; full list on Eevee Expo resource 1377).
+- **moca**: Public Gen 4 Tileset (with Magiscarf, WesleyFG, SailorVicious, Shawn Frost, NSora-96, PeekyChew, Kyle-Dove,
+  calisprojects.com, Minorthreat0987, The-Red-Ex, UltimoSpriter, TyranitarDark, DarkDragonn, rafa-cac, Phyromatical,
+  Alucus, Newtiteuf, ChaoticCherryCake).
+- **SirMalo**: HGSS rips for RPG Maker XP (official art © Nintendo/Game Freak).
+- **carchagui** (snow village, mine), **J-Treecko252** (crystal tiles), **aveontrainer** (sewer, airport, hospital,
+  fisherman's hut, desert house; non-commercial; with Magiscarf, Kyle Dove, Kane89), **princess-phoenix** (fossil museum,
+  Poké Ball factory, swampy gatehouse, virtual tournament room), **Akizakura16** (4th gen indoor and outdoor tilesets;
+  non-commercial only, the project may not take donations or run a Patreon), **ChaoticCherryCake** (non-commercial),
+  **KingTapir** (desert tilesets, towers), **Hek-el-grande** (volcanic tiles, BIIIG tileset minus the private tower),
+  **Kyle Dove** and **Speedialga** (DP tiles, biome tiles minus the red panel, undersea tiles), **Rayquaza-dot** (magma
+  autotile), **The-Red-eX** (public tileset).
+
+### Trainer and overworld sprite resources (kitbash bases)
+- **Pokémon Showdown trainer sprites**: per-file artists in `/home/claude/ref/art/sprites_showdown/credits.tsv`
+  (kyledove, Brumirage, Beliot419, ZacWeavile, Gnomowladny, Horo, Grapo, hyo-oppa, Fifty Shades of Rez, Flamibane,
+  RADU, Selena, wisteriapurple); the rest are official sprites © Nintendo/Game Freak.
+- **kyledove**: XY, ORAS and SWSH trainer class sprites. **Muffyang**: handmade alternate trainer sprites (no credit
+  required). **jinxed**: Battle Revolution colosseum leaders. **TechSkylander151**: Gen 5 and Platinum VS sprite packs,
+  Chakra Clinic resource pack. **Sylvecario**: Gen 4 partner backsprites. **Wergan**: overworld sprites (terms not
+  stated; ask before shipping). **VanillaSunshine**: Gen 4 overworlds. **Radical Raptr**: Gen 5 overworld pack.
+  **SalyaDarken**: OC sprites.
 
 ### Curated PF sheets (`art/tilesets/`): credit by stamp
 Each `<key>_stamps.json` records the artist and source file of every stamp. Summary:

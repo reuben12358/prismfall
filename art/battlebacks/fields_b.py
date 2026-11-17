@@ -36,8 +36,10 @@ def cocoon(h=34):
 
 def silkwood():
     F = "silkwood"
-    hd = vanilla("rejuvenation", "Forest")
+    hd = vanilla("rejuvenation", "Forest", base=False)
     hd = grade(hd, mul=(1.0, 1.02, 0.9), sat=1.05)
+    stump_platform(hd, FOE, 116, 25)
+    stump_platform(hd, PLAYER, 232, 50, thick=24)
     hd = blend(hd, vgradient(HD, [(0, (255, 220, 120, 70)), (0.45, (200, 230, 120, 0)), (1, (20, 40, 20, 60))]),
                "softlight")
     silk_wrap(hd, FOE, 120, 26, seed=1)
@@ -90,9 +92,9 @@ def silkwood():
           P(type=":twinkle", count=8, shape=":spark", size=5, colors=[[255, 255, 230]], area=[60, 50, 330, 230],
             speed=[3, 6], zoom=[0.4, 0.8], opacity=[150, 255], layers=[":back"], blend=1)]
     return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
-            "origins": [[REJ, "battlebgForest, enemybaseForest (graded green-gold)"],
+            "origins": [[REJ, "battlebgForest (graded green-gold)"],
                         [EBDX, "forestShade, lightsC"],
-                        [OWN, "orb webs with dew, silk curtains, silk-wrapped platforms, hanging strands and cocoons"]]}
+                        [OWN, "orb webs with dew, silk curtains, silk-wrapped stump platforms, hanging strands and cocoons"]]}
 
 
 #---------------------------------------------------------------------------------------------
@@ -128,6 +130,8 @@ def flower_garden():
     stages = {}
     for st in range(1, 6):
         hd = vanilla("reborn", "FlowerGarden%d" % (st - 1))
+        if st == 1:
+            hd = grade(hd, mul=(1.12, 1.12, 1.05), gamma=0.9)
         if st >= 3:
             cols = [(255, 150, 200), (255, 240, 120), (190, 150, 255), (255, 255, 255), (255, 120, 120)]
             n = {3: 18, 4: 26, 5: 34}[st]
@@ -446,15 +450,18 @@ def stormfront():
                         [OWN, "airship deck, rail, mast and rigging, pennant, scud clouds, lightning glow"]]}
 
 
+def make_cloud_strip():
+    im = cloud_floor(864, 120, 40, seed=95, rmin=14, rmax=30, rows=2)
+    a = arr(im)
+    a[100:, :, 3] = 0
+    return img(a)
+
+
 def rainbow():
     F = "rainbow"
     hd = vanilla("reborn", "Rainbow")
     hd = grade(hd, sat=1.1, contrast=1.05)
-    cl = cloud_band(864, 260, (255, 255, 255), (220, 210, 240), seed=91, density=0.55, scale=26)
-    a = arr(cl)
-    hd.alpha_composite(img(a), (0, 150 + 150))
-    cl2 = cloud_band(864, 160, (255, 250, 255), (230, 220, 245), seed=92, density=0.5, scale=20)
-    hd.alpha_composite(cl2, (0, 540))
+    hd.alpha_composite(cloud_floor(864, 693, 150 + 140, seed=91, rmin=16, rmax=40, rows=6))
     eb = game_img("reborn", "enemybaseRainbow")
     place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
     save_room("field_rainbow", hd)
@@ -462,11 +469,10 @@ def rainbow():
                     anim=S("pulse"), min=20, max=90, period=160)]
     extras = {"img001": strip(F, "mist", fog_strip(864, 120, (255, 220, 250), seed=93, scale=20, density=0.5,
                                                    alpha=100), 260, speed=0.5, direction=1, z=2),
-              "img002": strip(F, "clouds", cloud_band(864, 90, (255, 255, 255), (230, 225, 245), seed=94,
-                                                      density=0.45, scale=18), 600, speed=1, direction=-1, z=26)}
+              "img002": strip(F, "clouds", make_cloud_strip(), 600, speed=1, direction=-1, z=26)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
             "origins": [[REB, "battlebgRainbow, enemybaseRainbow"],
-                        [OWN, "cloud field, prismatic mist, drifting foreground clouds"]]}
+                        [OWN, "cloud-bank floor, prismatic mist, drifting foreground clouds"]]}
 
 
 #---------------------------------------------------------------------------------------------
@@ -495,8 +501,9 @@ def corrosive_mire():
         d.ellipse([x + rx * 0.1, y - ry * 0.3, x + rx * 0.5, y + ry * 0.2], fill=C((170, 110, 210)))
     for (x, y, w, h) in ((150, 330, 120, 90), (720, 320, 110, 80), (40, 640, 160, 140), (820, 660, 150, 150)):
         paste(hd, reeds(w, h, (70, 66, 50), (24, 20, 16), n=12, seed=x, heads=(80, 60, 50)), x, y, "bottom")
-    eb = game_img("reborn", "enemybaseCorrosive")
-    place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
+    plat_pair(hd, (70, 54, 66), (40, 30, 40), outline=(14, 10, 16),
+              speckle=([(120, 200, 70), (90, 70, 90), (170, 110, 210)], 200),
+              rim=(140, 230, 90))
     save_room("field_corrosive_mire", hd)
     sm = mask_from(hd, lambda r, g, b: (g > 140) & (r < 180) & (b < 120))
     layers = [layer(F, "sludgeglow", glow_from_mask(sm, (150, 255, 90), radius=10, gain=1.2), z=1, blend=1,
@@ -529,10 +536,10 @@ def corrosive_mire():
           P(type=":fall", count=6, shape=":rect", w=2, h=3, colors=[[150, 230, 90]], area=[140, 0, 340, 120],
             speed=[1.5, 2.5], sway=0, zoom=[0.6, 1.0], opacity=[180, 240], layers=[":back"])]
     return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
-            "origins": [[REB, "battlebgCorrosive (gradient-mapped), enemybaseCorrosive"],
+            "origins": [[REB, "battlebgCorrosive (gradient-mapped)"],
                         [EBDX, "bubbleDark"],
                         [OWN, "undercity wall, rusted drain pipes with falling sludge, sludge pools, dead reeds, "
-                              "sickly hanging lamp, fumes"]]}
+                              "sickly hanging lamp, fumes, sludge-rimmed platforms"]]}
 
 
 BUILDERS = {"SILKWOOD": silkwood, "FLOWER_GARDEN": flower_garden, "FAIRY_TALE": fairy_tale,

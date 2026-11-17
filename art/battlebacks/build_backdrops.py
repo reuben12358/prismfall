@@ -26,6 +26,7 @@ ORIGINS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "origins.json
 
 def main(argv):
     want = [a.upper() for a in argv] or sorted(REGISTRY)
+    want = ["ZZ_BLEED" if w == "BLEED" else w for w in want]
     origins = json.load(open(ORIGINS)) if os.path.exists(ORIGINS) else {}
     profiles = {}
     prev = load_previous_profiles()
@@ -36,10 +37,11 @@ def main(argv):
             paint.PREVIEW.clear()
             res = REGISTRY[fid]()
             write_preview(fid, res)
-            profiles[fid] = res["profile"]
-            origins[fid] = res["origins"]
-        elif fid in prev:
-            profiles[fid] = None   # keep the previously generated text
+            key = fid.replace("ZZ_", "")
+            profiles[key] = res["profile"]
+            origins[key] = res["origins"]
+        elif fid.replace("ZZ_", "") in prev:
+            profiles[fid.replace("ZZ_", "")] = None   # keep the previously generated text
     write_ruby(profiles, prev)
     json.dump(origins, open(ORIGINS, "w"), indent=1, sort_keys=True)
 
@@ -51,7 +53,7 @@ def write_preview(fid, res):
     """Room + recorded layers composited (static frame) for quick offline review."""
     import paint
     os.makedirs(PREV_DIR, exist_ok=True)
-    name = res.get("room", "field_" + fid.lower())
+    name = res.get("room", "field_" + fid.replace("ZZ_", "").lower())
     p = os.path.join(OUT, "battlebg", name + "_hd.png")
     if not os.path.exists(p):
         return

@@ -47,10 +47,33 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
          ('reborn', 43, 'Still water grey'), ('reborn', 43, 'Still water snow'), ('rejuvenation', 62, 'Still water'),
          ('rejuvenation', 2, 'White path2'), ('rejuvenation', 7, 'Sand shore'),
          ('rejuvenation', 2, 'Hoenn Sea'), ('rejuvenation', 7, 'Dirt Route 5'), ('rejuvenation', 2, 'Still water - Copy'),
-         ('pf', 62, 'Gravel Spring')]
-# derived autotiles: name -> (source game, source name, colour map).  Gravel(G)'s autumn-yellow verge becomes Sheridan's
-# spring grass (the same two colours DirtDark's verge uses), so the Goldenleaf street gravel sits on green ground.
-DERIVED = {'Gravel Spring': ('rejuvenation', 'Gravel(G)', {(213, 184, 68): (168, 216, 160), (173, 133, 72): (112, 200, 160)})}
+         ('pf', 62, 'Gravel Spring'), ('pf', 95, 'Packed Snow'), ('pf', 43, 'Frozen Pond')]
+
+
+def _ice(x, y):
+    """16-periodic ice texture on the 16-px logical grid (safe under RMXP's quarter-tile autotile assembly): Kristiline's
+    two ice tones in broad diagonal bands"""
+    return (208, 248, 248) if ((x // 2) + (y // 2)) % 8 < 3 else (160, 238, 248)
+
+
+# derived autotiles: name -> (source game, source name, colour map, extra).  extra: fn {colour: f(x, y)} per-pixel
+# texture for a source colour; tag / pas override the terrain tag / passage of all 48 shapes.
+#  - Gravel Spring: Goldenleaf's Gravel(G) with its autumn-yellow verge turned to Sheridan's spring grass (DirtDark's
+#    verge colours), so the street gravel sits on green ground.
+#  - Packed Snow: Rejuvenation's Terajuma DirtSnow (Kristiline's island) re-graded from grey slush to trodden snow: the
+#    texture (footprint ticks, soft speckled rim) stays, the greys become pale blue-greys a step below Kristiline's snow.
+#  - Frozen Pond: Reborn's Still water snow with the water frozen (Kristiline's ice tones, 16-periodic bands) and the
+#    stone rim turned into a snow bank with a blue shadow lip: an irregular pond with a soft natural shoreline.
+#    Terrain tag 12 (Ice: the player slides), passable.
+DERIVED = {'Gravel Spring': ('rejuvenation', 'Gravel(G)', {(213, 184, 68): (168, 216, 160), (173, 133, 72): (112, 200, 160)}, {}),
+           'Packed Snow': ('rejuvenation', 'Terajuma DirtSnow',
+                           {(123, 134, 142): (212, 216, 234), (88, 105, 121): (178, 188, 216), (84, 105, 120): (178, 188, 216),
+                            (132, 151, 159): (196, 204, 228), (92, 109, 122): (184, 194, 220), (170, 170, 197): (200, 206, 230)}, {}),
+           'Frozen Pond': ('reborn', 'Still water snow',
+                           {(48, 96, 160): (128, 206, 236), (63, 66, 80): (116, 136, 184), (92, 94, 102): (150, 166, 204),
+                            (120, 121, 130): (184, 196, 226), (155, 156, 166): (210, 218, 238), (183, 185, 195): (226, 230, 244),
+                            (230, 233, 234): (240, 242, 250)},
+                           {'fn': {(96, 160, 216): _ice}, 'tag': 12, 'pas': 0})}
 VBASE = 100000
 # v21.1 terrain tags for water autotiles these games leave at 0 (they script surfing differently): 5 DeepWater,
 # 6 StillWater, 7 Water, 8 Waterfall, 9 WaterfallCrest.  Fishing and surfing need them.
@@ -68,8 +91,8 @@ TILESETS = {
                             ('rejuvenation', 'Sand shore_2'), ('rejuvenation', 'Sea deep'), ('pf', 'Gravel Spring'),
                             ('rejuvenation', 'Dirt')]),
     52: ('PF Rejuv Snow', [('rejuvenation', 'KristilineWatersFrozen'), ('rejuvenation', 'KristilineDirt'),
-                           ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore(Terajuma)'),
-                           ('rejuvenation', 'Waterfall crest (T)'), ('rejuvenation', 'Waterfall (1)'), ('reborn', 'Still water snow')]),
+                           ('rejuvenation', 'Sea deep'), ('pf', 'Packed Snow'),
+                           ('pf', 'Frozen Pond'), ('rejuvenation', 'Waterfall (1)'), ('reborn', 'Still water snow')]),
     53: ('PF Rejuv Wild', [('rejuvenation', 'Sea(Grass)'), ('rejuvenation', 'DirtDark'), ('rejuvenation', 'Dirt'),
                            ('rejuvenation', 'Gravel(G)'), ('rejuvenation', 'Still water'), ('rejuvenation', 'Waterfall'),
                            ('rejuvenation', 'Waterfall bottom')]),
@@ -157,23 +180,29 @@ def main():
     autos = []
     for game, tid, name in AUTOS:
         dst_name = PREFIX[game] + name
+        extra = {}
         if game == 'pf':
-            sg, sn, cmap = DERIVED[name]
+            sg, sn, cmap, extra = DERIVED[name]
             im = Image.open(os.path.join(RR.GAMES[sg], 'Graphics', 'Autotiles', sn + '.png')).convert('RGBA'); px = im.load()
+            fn = extra.get('fn', {})
             for yy in range(im.height):
                 for xx in range(im.width):
                     r, g_, b, al = px[xx, yy]
-                    if al and (r, g_, b) in cmap: px[xx, yy] = cmap[(r, g_, b)] + (al,)
+                    if not al: continue
+                    if (r, g_, b) in fn: px[xx, yy] = fn[(r, g_, b)](xx, yy) + (al,)
+                    elif (r, g_, b) in cmap: px[xx, yy] = cmap[(r, g_, b)] + (al,)
             im.save(os.path.join(OUT, 'Graphics', 'Autotiles', dst_name + '.png'))
             t = RR.tileset(sg, tid); s = t['autotile_names'].index(sn) + 1
         else:
             src = os.path.join(RR.GAMES[game], 'Graphics', 'Autotiles', name + '.png')
             Image.open(src).save(os.path.join(OUT, 'Graphics', 'Autotiles', dst_name + '.png'))
             t = RR.tileset(game, tid); s = t['autotile_names'].index(name) + 1
-        autos.append(dict(game=game, name=name, file=dst_name, passages=t['passages'][48 * s:48 * s + 48],
-                          priorities=t['priorities'][48 * s:48 * s + 48],
-                          tags=[AUTO_TAG.get(name, x if x <= 16 else TAG_REMAP_GAMES.get(x, 0)) if (x == 0 or x > 16) else x
-                                for x in t['terrain_tags'][48 * s:48 * s + 48]]))
+        tags = [AUTO_TAG.get(name, x if x <= 16 else TAG_REMAP_GAMES.get(x, 0)) if (x == 0 or x > 16) else x
+                for x in t['terrain_tags'][48 * s:48 * s + 48]]
+        apas = t['passages'][48 * s:48 * s + 48]
+        if 'tag' in extra: tags = [extra['tag']] * 48
+        if 'pas' in extra: apas = [extra['pas']] * 48
+        autos.append(dict(game=game, name=name, file=dst_name, passages=apas, priorities=t['priorities'][48 * s:48 * s + 48], tags=tags))
     json.dump({'sheet': SHEET, 'parts': parts, 'n_tiles': len(pas)}, open(os.path.join(HERE, 'data', 'rj_compose.json'), 'w'), indent=1)
     reg = json.load(open(REG)) if os.path.exists(REG) else []
     for tid, (name, keys) in TILESETS.items():

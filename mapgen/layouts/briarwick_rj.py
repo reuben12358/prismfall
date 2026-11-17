@@ -93,7 +93,7 @@ def build(preview=None):
     m.street([(42, 51), (42, 52)], 2, 'd', only='.')
     m.street([(48, 37), (55, 46), (55, 49)], 2, 'd', only='.')
     m.stairs(35, 14, w=3, kit_rows=4)
-    m.stairs(21, 13, w=2, kit_rows=4)
+    m.stairs(21, 12, w=2, kit_rows=4)                                           # the ridge lip is row 12 at x 21-22
     m.street([(22, 10), (22, 12)], 2, 'd', only='.')                             # shrine path above the stairs
     # ---------------------------------------------------------------- buildings
     E = []

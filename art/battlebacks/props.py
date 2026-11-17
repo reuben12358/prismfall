@@ -639,3 +639,77 @@ def ground_plane(size, horizon, near, far, seed=0, cracks=None, crack_n=24, vani
                 pts.append((x, y))
             d.line(pts, fill=C(cracks), width=1)
     return im, crack_img
+
+
+def cloud_floor(w, h, top, color=(255, 255, 255), shade=(214, 206, 236), deep=(186, 176, 220), seed=0,
+                rmin=18, rmax=46, rows=3):
+    """Solid bank of puffy clouds whose upper edge sits around y=`top` (RGBA, w x h)."""
+    rng = random.Random(seed)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, top + rmax * 0.5, w, h], fill=C(deep))
+    for row in range(rows):
+        y0 = top + row * rmax * 0.9
+        x = -rmax
+        while x < w + rmax:
+            r = rng.uniform(rmin, rmax) * (1 + row * 0.25)
+            cy = y0 + rng.uniform(-r * 0.25, r * 0.25)
+            d.ellipse([x - r, cy - r * 0.8, x + r, cy + r * 0.8], fill=C(shade))
+            d.ellipse([x - r * 0.9, cy - r * 0.8, x + r * 0.8, cy + r * 0.5], fill=C(color))
+            d.arc([x - r * 0.7, cy - r * 0.72, x + r * 0.5, cy + r * 0.3], 200, 280, fill=C(lighter(color, 0.6)), width=2)
+            x += r * rng.uniform(1.1, 1.5)
+    return im
+
+
+def stump_platform(canvas, center, rx, ry, top=(196, 150, 96), ring=(150, 104, 60), bark=(92, 62, 40),
+                   outline=(40, 26, 16), thick=14):
+    cx, cy = center
+    d = ImageDraw.Draw(canvas)
+    d.ellipse([cx - rx, cy - ry + thick, cx + rx, cy + ry + thick], fill=C(bark), outline=C(outline))
+    d.rectangle([cx - rx + 1, cy, cx + rx - 1, cy + thick], fill=C(bark))
+    for x in range(int(cx - rx + 6), int(cx + rx - 4), 9):
+        d.line([x, cy + 2, x + 2, cy + thick + ry * 0.6 * (1 - abs(x - cx) / rx)], fill=C(darker(bark, 0.7)))
+    d.line([cx - rx, cy, cx - rx, cy + thick], fill=C(outline)); d.line([cx + rx, cy, cx + rx, cy + thick], fill=C(outline))
+    d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=C(top), outline=C(outline))
+    for k in range(1, 6):
+        f = k / 6
+        d.ellipse([cx - rx * f, cy - ry * f, cx + rx * f, cy + ry * f], outline=C(ring))
+    d.line([cx - rx * 0.1, cy - ry * 0.1, cx + rx * 0.5, cy + ry * 0.4], fill=C(darker(ring, 0.8)))
+
+
+def checker_plane(size, horizon, c1, c2, n=14, vanish_x=520, seed=0, depth_rows=1.35, line=None):
+    w, h = size
+    ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
+    depth = np.clip((ys - horizon) / (h - horizon), 1e-3, 1)
+    u = (xs - vanish_x) / depth / (w / n)
+    v = 1.0 / depth
+    cu = np.floor(u).astype(int); cv = np.floor(v * 2.2).astype(int)
+    m = ((cu + cv) % 2) == 0
+    out = np.zeros((h, w, 4), np.float32)
+    for c in range(3):
+        out[..., c] = np.where(m, c1[c], c2[c])
+    if line:
+        fu = u - np.floor(u); fv = v * 2.2 - np.floor(v * 2.2)
+        e = (fu < 0.03 / np.maximum(depth, 0.15)) | (fv < 0.02 * v)
+        for c in range(3):
+            out[..., c] = np.where(e, line[c], out[..., c])
+    out[..., 3] = np.where(ys >= horizon, 255, 0)
+    return img(out)
+
+
+def penrose(size=150, color=(220, 200, 250), dark=(150, 120, 210), light=(250, 240, 255), outline=(80, 50, 120)):
+    im = Image.new("RGBA", (size + 10, size + 10), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    s = size; t = s * 0.18
+    A = (5 + s / 2, 5); B = (5 + s, 5 + s * 0.87); Cc = (5, 5 + s * 0.87)
+
+    def lerp(p, q, k):
+        return (p[0] + (q[0] - p[0]) * k, p[1] + (q[1] - p[1]) * k)
+    # three bars, each overlapping the next (the impossible joins)
+    bars = [(A, B, color), (B, Cc, dark), (Cc, A, light)]
+    for (p, q, col) in bars:
+        nx, ny = q[1] - p[1], -(q[0] - p[0])
+        L = math.hypot(nx, ny); nx, ny = nx / L * t, ny / L * t
+        poly = [p, q, (q[0] + nx, q[1] + ny), (p[0] + nx, p[1] + ny)]
+        d.polygon(poly, fill=C(col), outline=C(outline))
+    return im
