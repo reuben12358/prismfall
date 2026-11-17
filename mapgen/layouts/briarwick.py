@@ -18,6 +18,29 @@ def rope(c, x0, x1, y):
     for x in range(min(x0, x1), max(x0, x1) + 1): c.tile(C2 + 115, x, y, 2)
 
 
+import json as _json
+_MAT = _json.load(open(os.path.join(HERE, 'data', 'compose_offsets.json')))['materials']
+RAIL = {k: _MAT['offset'] + _MAT['names'][k] for k in ('rail_h', 'rail_w', 'rail_e', 'rail_nw', 'rail_ne', 'glow')}
+
+
+def rails(c, x0, y0, w, h, stairs=(), open_sides=''):
+    """Timber railings around a deck (layer 3, drawn over the player; the deck edge tiles keep their passages)."""
+    for x in range(x0, x0 + w):
+        lw, le = x == x0 and 'W' not in open_sides, x == x0 + w - 1 and 'E' not in open_sides
+        c.tile(RAIL['rail_nw'] if lw else RAIL['rail_ne'] if le else RAIL['rail_h'], x, y0, 2)
+        if x not in stairs: c.tile(RAIL['rail_h'], x, y0 + h - 1, 2) if not (lw or le) else None
+    for y in range(y0 + 1, y0 + h):
+        if 'W' not in open_sides: c.tile(RAIL['rail_w'], x0, y, 2)
+        if 'E' not in open_sides: c.tile(RAIL['rail_e'], x0 + w - 1, y, 2)
+
+
+def glow(c, x, y):
+    """A warm light pool centred on (x, y) (2x2 overlay, layer 3)."""
+    for dx in (0, 1):
+        for dy in (0, 1):
+            if c.inb(x - 1 + dx, y - 1 + dy): c.tile(RAIL['glow'] + dy * 8 + dx, x - 1 + dx, y - 1 + dy, 2)
+
+
 def deck(c, x0, y0, w, h, stairs=(), open_sides=''):
     """Raised timber deck: 9-slice planks with blocking edges, solid stilts below, plank stairs down from `stairs` columns.
     open_sides: 'W'/'E' leave that edge open (where a walkway joins)."""
@@ -31,6 +54,7 @@ def deck(c, x0, y0, w, h, stairs=(), open_sides=''):
         y = y0 + h
         t = DECK['stair'] if x in stairs else DECK['legL' if x == x0 else 'legR' if x == x0 + w - 1 else 'leg']
         c.tile(t, x, y, 1); c.g[y][x] = ',' if x in stairs else '#'; c.taken[y][x] = True
+    rails(c, x0, y0, w, h, stairs, open_sides)
 
 
 def walkway(c, x0, x1, y):
@@ -40,6 +64,7 @@ def walkway(c, x0, x1, y):
         if c.g[y][x] != '~': c.g[y][x] = ','
         if c.g[y + 1][x] != '~': c.g[y + 1][x] = ','
         if c.g[y + 2][x] != '~': c.tile(DECK['leg'], x, y + 2, 1); c.g[y + 2][x] = '#'; c.taken[y + 2][x] = True
+        c.tile(RAIL['rail_h'], x, y, 2); c.tile(RAIL['rail_h'], x, y + 1, 2)
 
 
 def garland(c, x0, x1, y, seed=0):
@@ -143,13 +168,15 @@ def build():
     c.dress(['p_vat_b', 'p_vat_r', 'p_vat_y'], 9, '.', 1, (12, 33, 22, 44), pad=0)
     c.dress(['tp_stall_05', 'tp_stall_06', 'tp_stall_20', 'tp_stall_21', 'p_laundry', 'tp_stall_08'], 8, '.', 2, (12, 18, 34, 50))
     for x, y in ((29, 27), (25, 29)): c.stamp('p_loom', x, y, force=True)
-    for x, y in ((52, 51), (61, 52), (64, 51)): c.stamp('p_lantern', x - 1, y, force=True)
+    for x, y in ((52, 51), (61, 52), (64, 51)): c.stamp('p_lantern', x - 1, y, force=True); glow(c, x, y + 2)
     for nm, x, y in (('tp_stall_13', 54, 52), ('t_barrel', 50, 52), ('tp_barrel_06', 62, 53), ('p_silk', 65, 51), ('logbench@33', 56, 53),
                      ('tp_stall_05', 26, 26), ('tp_barrel_06', 30, 29), ('tp_garden_09', 41, 35)):
         c.stamp(nm, x, y, force=True)        # life on the decks; the well on the green
     c.dress(['p_silk', 'p_silk1', 'p_strand_w', 'p_strand_p', 'p_silk1'], 26, '.', 4, pad=0)
     c.dress(['p_web', 'p_web1'], 14, '.T', 5, pad=0)
     c.dress(['p_lantern'], 34, '.', 6, near='dk')
+    for st in list(c.stamps):
+        if st['stamp'] == 'p_lantern': glow(c, st['at'][0] + 1, st['at'][1] + 2)
     c.dress(GARDEN + ['p_crates', 'tp_stall_13', 't_barrel', 'tp_stall_01', 'fo_rustic_20', 'fo_rustic_22'], 30, '.', 7, pad=0)
     c.dress(['p_cherry', 'p_pinkbush', 'p_pinkbush2', 'fo_fairy_05'], 10, '.', 8)
     c.dress(['logbench@33'], 3, 'k', 9, pad=0); c.dress(['p_banner3', 'p_banner'], 5, '.', 10, near='d', pad=0)
@@ -163,7 +190,7 @@ def build():
     c.events = E
     head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},
-            'tone': [-18, -30, 4, 12], 'fog': {'name': 'prismfall_spores', 'opacity': 46, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1},
+            'tone': [-10, -22, 2, 4], 'fog': {'name': 'prismfall_spores', 'opacity': 46, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1},
             'connections': [{'dir': 'W', 'offset': 29, 'to': 540, 'to_offset': 10}]}
     import yaml
     src = yaml.safe_load(open(os.path.join(HERE, 'layouts', 'briarwick_events.yaml')))[120]['head']

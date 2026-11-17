@@ -104,10 +104,11 @@ def main():
     offs['materials'] = {'offset': len(pas), 'tiles': len(mp), 'src_tilesets': [], 'names': mnames}
     pas += mp; pri += mq; tag += [0] * len(mp); ims.append(mim)
     import ship_art as SA                                          # the Dovetail's hull, deck and rigging (map 109), appended last
-    sim, sp, sq, splace = SA.strip()
-    offs['dovetail'] = {'offset': len(pas), 'tiles': len(sp), 'src_tilesets': []}
-    json.dump(splace, open(os.path.join(HERE, 'data', 'ship_dovetail.json'), 'w'))
-    pas += sp; pri += sq; tag += [0] * len(sp); ims.append(sim)
+    for sname in ('dovetail', 'moored'):                           # 109's deck, and the same ship moored at Ferrow's pier (100)
+        sim, sp, sq, splace = SA.strip(sname)
+        offs['ship_' + sname if sname != 'dovetail' else 'dovetail'] = {'offset': len(pas), 'tiles': len(sp), 'src_tilesets': []}
+        json.dump(splace, open(os.path.join(HERE, 'data', 'ship_%s.json' % sname), 'w'))
+        pas += sp; pri += sq; tag += [0] * len(sp); ims.append(sim)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

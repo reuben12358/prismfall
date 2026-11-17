@@ -28,3 +28,12 @@
 1. **Ashkaar's seat** is not named in the lore. WORLD.md §8 provisionally makes it **Pyre Keep on Cindervault's caldera rim** (Wyrmrest stays the pass fortress). Story team: confirm or move it.
 2. **Antumbra's seat** is provisionally the **Palace of Glass in the Speculum** (Lucent's inverted reflection), with the Veiled Synod's court there.
 3. **War geography** (§9): Ashkaar and Isenmar don't share a land border on the map, so the front is the north-east coast (Rime Narrows / Cinder Cape), with besieged **Skaldfast** and the **Shattered Ice** climax field. All names are provisional.
+
+## From: World & level design lead — 2026-11-16 (Rev 9 borderlands)
+Story impacts (full detail in WORLD.md §10, data in maps.json `borderlands`):
+1. **Ch4 (Saltmere → Ebbmouth)** now passes R5 Frostflat Causeway → **Frostwick (570, new borderland village)** → The Rimewood (562) → R6 Gullcry Cliffs. 04_ACT_I's border marker ("both arms + Meridian sunburst") is the Border Stones on R5, and the Border House in Frostwick stamps the sunburst over both seals. New NPCs for the story team to voice: Brannagh and Halvard (sidequest "The Two Hearths"), the Meridian clerk, the Frostwick huscarl/forester. **Map Builder:** `mapgen/specs/560_route5_route6.yaml` still joins 560 W → 561. It must now be 560 W → 570, 570 N → 562, 562 N → 561 S. 561 no longer has an E edge.
+2. **Act II:** Lumen → Duneholt goes through Copperdune, Duneholt → Mirefen through Charwell, and Mirefen → Cindervault through Scaldwater (whose mercenary recruiting is a war seed). Cindervault → Ironreach uses the Ironway. R17 "Lift Road" is now **The Rootdeep** (Nadir/Elowen cave route) with the town Lanternroot.
+3. **Antumbra** has a second stable gate besides Mirror Mere: the **Grave Glass** in the Obsidian Barrows (Ossaria), with the town Vigil. Act IV legs 12→13, 13→14 and 14→15 walk through it. Story team: confirm, or I'll swap in an airship jump.
+4. **War:** no Ashkaar–Isenmar land border. The war is across the Shattered Ice strait between Isenmar's Rime Isles (Skaldfast) and Ashkaar's Cinder Cape. Ashkaar's road to the front runs through the Cinderglass Barrens and Glasswake (border M). The previous "NE coast / Rime Narrows" wording is replaced.
+5. **Crownhaven** is entered only via the Pilgrim Pass (K) from Wyrmrest, with the pilgrim town Pilgrim's Rest. This matches the lore that Wyrmrest guards "the only overland pass".
+All 15 new borderland town names are provisional.

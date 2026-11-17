@@ -8,23 +8,36 @@ the player). slice() turns both into unique 32x32 tiles plus a placement list fo
 import math
 from PIL import Image, ImageDraw
 
-W, H = 34, 22                     # map 109
-CY = 10.5                         # hull centre line (tile units, centre of row 10)
-MASTS = [(11, 9), (22, 9)]       # mast feet (tile cells); keep clear of story events
-GANG = (9, 15)
+# Ship configs: canvas size (tiles), centre line CY, beam B, stern / waist-end / bow x, masts, gangway, walk-in cells.
+SHIPS = {
+    'dovetail': dict(W=34, H=22, CY=10.5, B=5.5, stern=2.0, waist0=7.0, waist1=22.0, bow=30.6, masts=[(11, 9), (22, 9)],
+                     gang=(9, 15), open=[(x, 10) for x in range(26, 30)], sprit=3.2),
+    'moored':   dict(W=68, H=60, CY=53.5, B=3.3, stern=36.4, waist0=40.0, waist1=48.0, bow=55.4, masts=[(43, 53), (49, 53)],
+                     gang=(38, 52), open=[], sprit=2.6),
+}
+CFG = SHIPS['dovetail']
+W, H, CY = CFG['W'], CFG['H'], CFG['CY']
+MASTS, GANG = CFG['masts'], CFG['gang']
+
+
+def use(name):
+    global CFG, W, H, CY, MASTS, GANG
+    CFG = SHIPS[name]; W, H, CY, MASTS, GANG = CFG['W'], CFG['H'], CFG['CY'], CFG['masts'], CFG['gang']
 
 
 def half(xf):
     """Half-beam in tiles at x (continuous): straight waist, rounded stern, long tapering bow."""
-    if xf < 7.0: return max(0.0, 5.5 * (1 - ((7.0 - xf) / 5.0) ** 2))
-    if xf > 22.0: return max(0.0, 5.5 * (1 - ((xf - 22.0) / 8.6) ** 1.6))
-    return 5.5
+    c = CFG; B = c['B']
+    if xf < c['waist0']: return max(0.0, B * (1 - ((c['waist0'] - xf) / (c['waist0'] - c['stern'])) ** 2))
+    if xf > c['waist1']: return max(0.0, B * (1 - ((xf - c['waist1']) / (c['bow'] - c['waist1'])) ** 1.6))
+    return B
 
 
 def deck(x, y):
-    """Tile-level deck mask (same footprint the story events were seated on)."""
-    if not 5 <= y <= 15: return False
-    return 3 <= x <= 30 and abs(y - 10) <= half(x + 0.5) + 0.01
+    """Tile-level deck mask (the footprint the story events are seated on)."""
+    c = CFG
+    if not (c['CY'] - c['B'] - 1 <= y + 0.5 <= c['CY'] + c['B'] + 1): return False
+    return c['stern'] + 1 <= x <= c['bow'] - 0.6 and abs(y + 0.5 - c['CY']) <= half(x + 0.5) + 0.01
 
 
 S = 16
@@ -41,7 +54,7 @@ def paint():
     for px in range(W * S):
         xf = px / float(S)
         h = half(xf)
-        if h <= 0.05 and not (2.6 <= xf <= 31.6): continue
+        if h <= 0.05 and not (CFG['stern'] + 0.6 <= xf <= CFG['bow'] + 1.0): continue
         t, bt = top(xf), bot(xf)
         if h <= 0.05: t, bt = CY * S - 3, CY * S + 3
         # hull: visible flank under the deck edge (south), a dark lip on the north
@@ -83,13 +96,16 @@ def paint():
         bt = int(bot(px / float(S)))
         for py in range(bt - 4, bt): b[px, py] = DECK[1] + (255,)
     # bow: stem post and bowsprit; stern: transom with a gilt band
-    d.line([(int(30.6 * S), int(CY * S)), (int(33.8 * S), int(CY * S) - 6)], fill=HULL[1] + (255,), width=3)
-    d.line([(int(30.6 * S), int(CY * S) - 1), (int(33.8 * S), int(CY * S) - 7)], fill=HULL[3] + (255,), width=1)
-    for py in range(int(top(2.8)), int(bot(2.8))):
-        for px in range(int(2.0 * S), int(2.8 * S)):
+    bw, bs = CFG['bow'], CFG['bow'] + CFG['sprit']
+    d.line([(int(bw * S), int(CY * S)), (int(bs * S), int(CY * S) - 6)], fill=HULL[1] + (255,), width=3)
+    d.line([(int(bw * S), int(CY * S) - 1), (int(bs * S), int(CY * S) - 7)], fill=HULL[3] + (255,), width=1)
+    st = CFG['stern']
+    for py in range(int(top(st + 0.8)), int(bot(st + 0.8))):
+        for px in range(int(st * S), int((st + 0.8) * S)):
             if b[px, py][3]: b[px, py] = ((196, 160, 60) if py % 9 == 4 else HULL[1]) + (255,)
     # hatches (grated), the capstan
-    for (hx, hy, hw, hh) in ((16.2, 9.2, 1.6, 1.6), (19.5, 12.2, 1.4, 1.0)):
+    hatches = ((16.2, 9.2, 1.6, 1.6), (19.5, 12.2, 1.4, 1.0)) if CFG is SHIPS['dovetail'] else ((45.3, 52.8, 1.4, 1.4),)
+    for (hx, hy, hw, hh) in hatches:
         x0, y0 = int(hx * S), int(hy * S)
         d.rectangle((x0, y0, x0 + int(hw * S), y0 + int(hh * S)), fill=HULL[1] + (255,))
         for gx2 in range(x0 + 2, x0 + int(hw * S) - 1, 3):
@@ -116,7 +132,7 @@ def paint():
             o.polygon([(cx + 2, cy - 24), (cx + 16, cy - 21), (cx + 2, cy - 18)], fill=(46, 76, 150, 255))
             o.line([(cx + 2, cy - 24), (cx + 16, cy - 21)], fill=(200, 60, 60, 255))
     fx, fy = MASTS[1][0] * S + 8, MASTS[1][1] * S + 8                                       # forestay to the bowsprit
-    o.line([(fx, fy - 14), (int(33.6 * S), int(CY * S) - 6)], fill=ROPE + (220,), width=1)
+    o.line([(fx, fy - 14), (int((CFG['bow'] + CFG['sprit'] - 0.2) * S), int(CY * S) - 6)], fill=ROPE + (220,), width=1)
     mx0, my0 = MASTS[0][0] * S + 8, MASTS[0][1] * S + 8
     o.line([(mx0, my0 - 14), (fx, fy - 14)], fill=ROPE + (200,), width=1)                  # the stay between the masts
     big = lambda im: im.resize((im.width * 2, im.height * 2), Image.NEAREST)
@@ -138,7 +154,7 @@ def slice_tiles():
             on_deck = deck(x, y)
             if on_deck:
                 rim = not all(deck(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))) and (x, y) != GANG \
-                    and not (y == 10 and 26 <= x <= 29)          # the bow walk up to the stem (the Horizon scene)
+                    and (x, y) not in CFG['open']                # e.g. the bow walk up to the stem (the Horizon scene)
                 solid = rim or (x, y) in MASTS
                 if hb: place.append((x, y, 0, add(bb, 15 if solid else 0, 0)))
                 if ho: place.append((x, y, 2, add(oo, 0, 3)))
@@ -148,7 +164,8 @@ def slice_tiles():
     return tiles, pas, pri, place
 
 
-def strip():
+def strip(name='dovetail'):
+    use(name)
     tiles, pas, pri, place = slice_tiles()
     n = (len(tiles) + 7) // 8 * 8
     im = Image.new('RGBA', (256, n // 8 * 32))

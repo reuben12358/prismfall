@@ -48,7 +48,10 @@ check "wait: overrides + at()", (d.length - 11.0).abs < 1e-6, d.length
 
 warm = run_scene(:WAR_CLIMAX_DEMO)   # fills the placeholder caches
 section "example scenes at several frame rates (no assets)"
-base_len = { :WAR_CLIMAX_DEMO => C.build(:WAR_CLIMAX_DEMO).length, :HL => C.play_sample_highlight(play: false).length }
+# slowmo stretches wall-clock time: dur scene-seconds take dur / scale real seconds
+slow = proc { |d| d.events.select { |e| e.op == :slowmo }.sum { |e| e.dur * ((1.0 / e.args[:scale]) - 1) } }
+war_d = C.build(:WAR_CLIMAX_DEMO)
+base_len = { :WAR_CLIMAX_DEMO => war_d.length + slow.call(war_d), :HL => C.play_sample_highlight(play: false).length }
 [[20, {}], [40, {}], [60, {}], [144, {}], [40, { :jitter => true }], [60, { :hitch => true }]].each do |fps, extra|
   $opt[:fps] = fps.to_f
   $opt[:jitter] = extra[:jitter]
@@ -234,8 +237,10 @@ C.define(:TECHNIQUES) do
   pose :fx, row: 2, col: 1
   call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
   flipbook :fx, frames: [0, 1, 2, 3, [1, 0]], hold: 0.1, se: { 2 => "Anim/Explosion" }, wait: true
+  wait 0.05
   call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
   flipbook :fx, frames: 4..7, holds: [0.05, 0.05, 0.3, 0.05], loops: 2, end_frame: 0, wait: true
+  wait 0.05
   call { |sc| frames_seen.push(sc.actors[:fx].cell.dup) }
   pulse tone: [-68, -102, -102, 120], duration: 0.15, times: 2
   fade :fx, to: 0, steps: 5, duration: 0.25

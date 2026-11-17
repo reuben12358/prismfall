@@ -1,5 +1,367 @@
 {
  "schema": "prismfall-maps/1",
+ "borderlands": [
+  {
+   "code": "A",
+   "kingdoms": [
+    "Elowen",
+    "Isenmar"
+   ],
+   "name": "The Rimewood",
+   "crossings": [
+    "2->3 (south: R5, Rimewood, R6)",
+    "9->10 (north: R20)"
+   ],
+   "biome": "Elowen oldwood frozen in permanent hoar: ice-glazed giant trees, frozen silk curtains drifted from the Gossamer Wood, rime-crusted salt flats on the coast, aurora clearings",
+   "landmarks": [
+    "Border Stones (both arms, Meridian sunburst bolted over)",
+    "the Frost Loom",
+    "the Silk-fall",
+    "Hearth Stone"
+   ],
+   "field": "none (snow weather); Glade ice-slide",
+   "wild": "Grass/Bug/Normal/Fairy x Water/Ice: Snover, Snom, Cubchoo, Swinub, Bergmite, Vanillite, Deerling, Stantler, Teddiursa, Smoochum, Delibird",
+   "routes": [
+    560,
+    562,
+    563,
+    701
+   ],
+   "town": 570
+  },
+  {
+   "code": "A2",
+   "kingdoms": [
+    "Elowen",
+    "Isenmar"
+   ],
+   "name": "The Rimewood (north)",
+   "crossings": [
+    "9->10"
+   ],
+   "biome": "deep snow-forest on the way to Lake Rime; royal hunting lodges",
+   "landmarks": [
+    "Snowbriar lodge",
+    "frozen Bride-briar hedges"
+   ],
+   "field": "SNOWY_MOUNTAIN",
+   "wild": "as A plus Abomasnow, Sawsbuck, Ursaring",
+   "routes": [
+    701
+   ],
+   "town": 710
+  },
+  {
+   "code": "B",
+   "kingdoms": [
+    "Isenmar",
+    "Zenith"
+   ],
+   "name": "The Icefall Locks",
+   "crossings": [
+    "3->4 (south: R8, Sluiceworks)",
+    "10->11 (north: R22, Cloudstair)"
+   ],
+   "biome": "Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice",
+   "landmarks": [
+    "the Ice Elevator (cable lift hauling cut ice up the cliff)",
+    "frozen turbine wheels",
+    "Voltaic Sluiceworks"
+   ],
+   "field": "none; Sluiceworks SCRAPYARD",
+   "wild": "Water/Ice x Electric/Steel/Flying: Magnemite, Pawmi, Wattrel, Tadbulb, Snover, Bergmite, Plusle/Minun, Delibird",
+   "routes": [
+    581,
+    584,
+    585
+   ],
+   "town": 590
+  },
+  {
+   "code": "B2",
+   "kingdoms": [
+    "Isenmar",
+    "Zenith"
+   ],
+   "name": "The Mast Glacier",
+   "crossings": [
+    "10->11"
+   ],
+   "biome": "glacier tongue with Skyreach airships anchored by ice-anchors",
+   "landmarks": [
+    "Anchorhold's ice-anchors"
+   ],
+   "field": "SNOWY_MOUNTAIN",
+   "wild": "Ice x Flying/Steel",
+   "routes": [
+    721,
+    724
+   ],
+   "town": 730
+  },
+  {
+   "code": "C",
+   "kingdoms": [
+    "Zenith",
+    "Ossaria"
+   ],
+   "name": "The Brass Dunes",
+   "crossings": [
+    "4->5 (R9)",
+    "14->15 east (R30 Slag Mesa)"
+   ],
+   "biome": "Zenith's rail and slag spilling into Ossaria's desert: dune-buried trains, sand-scoured brass machinery, mirage of glass towers, slag mesas near Cogsworth",
+   "landmarks": [
+    "the broken viaduct",
+    "dune-buried locomotive",
+    "slag mesas"
+   ],
+   "field": "R9 none; R30 WASTELAND",
+   "wild": "Electric/Steel/Flying x Ground/Rock: Sandshrew, Silicobra, Hippopotas, Rufflet, Vullaby, Electrike, Orthworm, Flamigo",
+   "routes": [
+    600,
+    801
+   ],
+   "town": 610
+  },
+  {
+   "code": "D",
+   "kingdoms": [
+    "Ossaria",
+    "Nadir"
+   ],
+   "name": "The Leach Canyons",
+   "crossings": [
+    "5->6 (R12)"
+   ],
+   "biome": "Zenith's toxic runoff carving blue-glowing canals through Ossaria's sandstone; fossil beds leaching in poison; Nadir mine adits in the canyon walls",
+   "landmarks": [
+    "bone-char filter weirs",
+    "glowing canal falls",
+    "adit mouths"
+   ],
+   "field": "none",
+   "wild": "Ground/Rock x Poison/Dark/Fighting: Ekans, Gulpin, Shroodle, Maschiff, Skorupi, Croagunk, Drilbur, Krokorok, Glimmet, Makuhita",
+   "routes": [
+    621
+   ],
+   "town": 630
+  },
+  {
+   "code": "E",
+   "kingdoms": [
+    "Nadir",
+    "Ashkaar"
+   ],
+   "name": "The Sulfur Reach",
+   "crossings": [
+    "6->7 (R14 Lake Sallow)",
+    "7->8 (R16 Ironway)"
+   ],
+   "biome": "acid hot-spring country where Nadir's runoff meets Ashkaar's magma: sulfur flats, boiling yellow pools, crystal crusts, steam vents; Lake Sallow turned to a vast hot spring",
+   "landmarks": [
+    "the Truce Baths",
+    "sulfur mines",
+    "the Ironway pass"
+   ],
+   "field": "R14 none; R16 MOUNTAIN",
+   "wild": "Poison/Dark/Fighting x Fire/Dragon: Salandit, Charcadet, Numel, Croagunk, Scraggy, Maschiff, Houndour, Capsakid, Cyclizar",
+   "routes": [
+    641,
+    661
+   ],
+   "town": 650
+  },
+  {
+   "code": "M",
+   "kingdoms": [
+    "Ashkaar",
+    "Ossaria"
+   ],
+   "name": "The Cinderglass Barrens",
+   "crossings": [
+    "war road (Cindervault -> Cinder Cape)",
+    "optional Cindervault <-> Duneholt link from 7 badges"
+   ],
+   "biome": "obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms",
+   "landmarks": [
+    "Glasswake's furnace chimneys",
+    "the Petrified Ashwood",
+    "glass-storm dunes"
+   ],
+   "field": "ASHEN_WASTE (Barrens), DESERT (Ashwood edges)",
+   "wild": "Fire/Dragon x Ground/Rock: Carkol, Magcargo, Numel, Torkoal, Vibrava, Gible, Sudowoodo, Onix, Rhyhorn, Golett",
+   "routes": [
+    662,
+    663
+   ],
+   "town": 670
+  },
+  {
+   "code": "F",
+   "kingdoms": [
+    "Nadir",
+    "Elowen"
+   ],
+   "name": "The Rootdeep",
+   "crossings": [
+    "8->9 (R17)",
+    "16->17 (R33)"
+   ],
+   "biome": "Elowen's giant roots breaking into Nadir's mine shafts: root-cathedrals, glowing fungus groves, overgrown mine carts, moth swarms",
+   "landmarks": [
+    "Lanternroot's mushroom farms",
+    "root-cathedral",
+    "flooded root river (south)"
+   ],
+   "field": "CAVE",
+   "wild": "Poison/Dark/Fighting x Grass/Bug/Fairy: Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy",
+   "routes": [
+    680,
+    840
+   ],
+   "town": 690
+  },
+  {
+   "code": "G",
+   "kingdoms": [
+    "Zenith",
+    "Elowen"
+   ],
+   "name": "The Wired Wood",
+   "crossings": [
+    "11->12 (R24, then Mirror Mere)"
+   ],
+   "biome": "the forest edge wired with Meridian Lattice: vine-wrapped brass pylons, clockwork orchards, greenhouse-factories, Glasswood crystals creeping along the cables",
+   "landmarks": [
+    "Verdigris orchard-factory",
+    "crystallised pylon line"
+   ],
+   "field": "none",
+   "wild": "Electric/Steel/Flying x Fairy/Grass/Normal: Luxray, Manectric, Boltund, Klang, Floette, Granbull, Tinkatuff, Oinkologne",
+   "routes": [
+    741
+   ],
+   "town": 750
+  },
+  {
+   "code": "H",
+   "kingdoms": [
+    "Elowen",
+    "Antumbra"
+   ],
+   "name": "The Looking-Glass Wood",
+   "crossings": [
+    "11->12 (Mirror Mere -> Antumbra Threshold)"
+   ],
+   "biome": "lakeside woods whose reflections disagree; rivers that run uphill near the gate",
+   "landmarks": [
+    "Mirror Mere",
+    "Glassmere's doubled houses"
+   ],
+   "field": "none (Threshold INVERSE)",
+   "wild": "Grass/Bug/Fairy x Psychic/Ghost: Kirlia, Flittle, Rabsca, Ribombee, Shiinotic",
+   "routes": [
+    742,
+    743
+   ],
+   "town": 753
+  },
+  {
+   "code": "I",
+   "kingdoms": [
+    "Antumbra",
+    "Ossaria"
+   ],
+   "name": "The Obsidian Barrows",
+   "crossings": [
+    "12->13 (R25)",
+    "13->14 (Grave Glass -> R28)",
+    "14->15 (R29 east gate -> R30)"
+   ],
+   "biome": "Ossaria's old necropolis where obsidian tomb-mirrors (glass from the Cinderglass) became gates to Antumbra; shadows fall upward; the inverted desert hangs in the sky",
+   "landmarks": [
+    "the Grave Glass",
+    "mirrored tomb facades",
+    "Vigil's House of Echoes"
+   ],
+   "field": "INVERSE near the gates",
+   "wild": "Ghost/Psychic/Dark x Ground/Rock: Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Misdreavus, Houndstone",
+   "routes": [
+    760
+   ],
+   "town": 770
+  },
+  {
+   "code": "L",
+   "kingdoms": [
+    "Zenith",
+    "Nadir"
+   ],
+   "name": "The Hanging Stair",
+   "crossings": [
+    "15->16 (R31, R32)"
+   ],
+   "biome": "the vertical cliff beneath Zenith: foundations, cable lifts, outflow pipes and Nadir's shanty scaffolds meeting halfway; the drowned coast below",
+   "landmarks": [
+    "Midstair's lift towers",
+    "the outflow falls",
+    "rope-bridge streets"
+   ],
+   "field": "R31 SCRAPYARD; R32 WATER_SURFACE",
+   "wild": "Electric/Steel/Flying x Poison/Dark/Fighting: Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty, Kilowattrel, Corviknight",
+   "routes": [
+    820,
+    821
+   ],
+   "town": 830
+  },
+  {
+   "code": "J",
+   "kingdoms": [
+    "Elowen",
+    "Ashkaar"
+   ],
+   "name": "The Thornwar Marches",
+   "crossings": [
+    "17->18 (R36)"
+   ],
+   "biome": "fire-scarred oldwood: ash-grey giant trees with ember-glowing leaves that burn without dying, charcoal-burners' clearings, dragon-scorched Thornwar forts, fire-lily meadows",
+   "landmarks": [
+    "Thornwatch truce bell",
+    "burnt Thornwar fort",
+    "ember-leaf canopy"
+   ],
+   "field": "MOUNTAIN",
+   "wild": "Grass/Bug/Fairy x Fire/Dragon: Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon, Fraxure, Drampa",
+   "routes": [
+    861
+   ],
+   "town": 870
+  },
+  {
+   "code": "K",
+   "kingdoms": [
+    "Ashkaar",
+    "Crownhaven"
+   ],
+   "name": "The Pilgrim Pass",
+   "crossings": [
+    "18->Festival (R37)"
+   ],
+   "biome": "the Wyrmrest pass climbing the Crown ring: shrines of all eighteen types, pilgrim camps, Ashkaar toll-forts",
+   "landmarks": [
+    "the Eighteen Shrines",
+    "Ashkaar toll-gate"
+   ],
+   "field": "MOUNTAIN",
+   "wild": "mixed high-level",
+   "routes": [
+    880
+   ],
+   "town": 890
+  }
+ ],
  "notes": [
   "Coordinates are tile coords [x,y], origin top-left; approximate - builder may nudge to fit tiles, but must keep warp pairs consistent.",
   "Warp pairing: an exterior 'door'/'warp' and an interior 'warp_in'/'warp' with the same 'link' key form a two-way transfer.",
@@ -12373,8 +12735,25 @@
      "hidden": true
     }
    ],
-   "tileset_kit": "G5_TEMPERATE",
-   "border": "salt-pan dykes, brine channels, wrecked pier S"
+   "tileset_kit": "BL_SALT_TO_FROST",
+   "border": "E: Saltmere's west gate wall; N: reed beds and sea dyke; S: brine lagoon; W: Frostwick's whale-rib palisade",
+   "borderland": "The Rimewood",
+   "visual_brief": {
+    "landmarks": [
+     "Border Stones with a bolted Meridian sunburst",
+     "raised salt causeway",
+     "salt-pans turning to frost-pans",
+     "overturned salt wagon"
+    ],
+    "silhouette": "a long white causeway across flat crust, the glittering Rimewood wall on the west horizon",
+    "materials": "salt-crusted timber, white sand, rime ice, carved standing stones",
+    "palette": "Rejuvenation-bright: bone-white and pale gold (east) fading to ice-blue and lilac (west); low winter sun",
+    "set_pieces": [
+     "the Spheal sled rolling off downhill (comic)",
+     "stamping your papers at the Border Stones",
+     "first slide on frozen brine"
+    ]
+   }
   },
   {
    "id": 561,
@@ -12601,7 +12980,22 @@
     }
    ],
    "tileset_kit": "G4_SNOW_COAST",
-   "border": "W: sea cliffs; E: open sea; the landslide"
+   "border": "W: sea cliffs; E: open sea with drift-ice; the landslide",
+   "visual_brief": {
+    "landmarks": [
+     "whalebone waymarkers",
+     "cod-skull cairn",
+     "stilt fishing huts",
+     "ruined lookout tower"
+    ],
+    "silhouette": "black sea cliffs over a grey sea flecked with drift-ice",
+    "materials": "dark granite, whalebone, tarred wood",
+    "palette": "slate, sea-green, foam white; driving rain",
+    "set_pieces": [
+     "K2 at the cliff top",
+     "the landslide forcing the cave detour"
+    ]
+   }
   },
   {
    "id": 562,
@@ -12905,8 +13299,35 @@
      "note": "sidequest key item for The Two Hearths"
     }
    ],
-   "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "tileset_kit": "BL_RIMEWOOD",
+   "border": "ice-glazed giant boles, frozen silk curtains, ravine edges",
+   "borderland": "The Rimewood",
+   "visual_brief": {
+    "landmarks": [
+     "the Frost Loom",
+     "fallen giant-tree bridge",
+     "frozen Hoar Brook",
+     "aurora clearing"
+    ],
+    "silhouette": "colossal ice-sheathed trunks with icicle fringes, silk curtains glittering between them",
+    "materials": "clear ice over oak bark, frozen silk, snowdrifts, hoarfrost",
+    "palette": "silver, pale teal and lavender with sparkle overlays; snow-light fog",
+    "set_pieces": [
+     "light through frozen silk",
+     "sliding the frozen brook",
+     "the first aurora over the clearing"
+    ]
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "bleed_spread",
+     "when": "act>=3",
+     "change": "crystal growths along the Meridian survey line; one silk curtain shattered (new path)"
+    }
+   ]
   },
   {
    "id": 563,
@@ -13025,8 +13446,22 @@
      "hidden": true
     }
    ],
-   "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "tileset_kit": "BL_RIMEWOOD",
+   "border": "ice-glazed giant boles, frozen silk curtains, ravine edges",
+   "borderland": "The Rimewood",
+   "visual_brief": {
+    "landmarks": [
+     "the Silk-fall",
+     "Snowveil Shrine"
+    ],
+    "silhouette": "a frozen waterfall of silk over a mirror-flat pond",
+    "materials": "frozen silk, ice, stone shrine",
+    "palette": "white, cyan and soft pink",
+    "set_pieces": [
+     "pond slide puzzle",
+     "offerings of honey and eel side by side"
+    ]
+   }
   },
   {
    "id": 564,
@@ -13146,7 +13581,20 @@
     }
    ],
    "tileset_kit": "G5_CAVE",
-   "border": "sea-cave rock and tide pools"
+   "border": "sea-cave rock and tide pools",
+   "visual_brief": {
+    "landmarks": [
+     "tide pools",
+     "gull roosts"
+    ],
+    "silhouette": "honeycombed sea cave with ice-rimmed pools",
+    "materials": "wet rock, ice, kelp",
+    "palette": "teal and grey with pale ice highlights",
+    "set_pieces": [
+     "tide-pool path",
+     "gulls bursting from the roost"
+    ]
+   }
   },
   {
    "id": 565,
@@ -13552,8 +14000,40 @@
      "hidden": true
     }
    ],
-   "tileset_kit": "G4_FOREST_TOWN",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "tileset_kit": "BL_RIMEWOOD_TOWN",
+   "border": "ice-glazed giant trunks and root walls (N/W), salt lagoon shore (S), palisade gate (E)",
+   "visual_brief": {
+    "landmarks": [
+     "six ice-glazed giant trees with treehouses",
+     "turf-roofed whalebone longhouses",
+     "the Two Hearths inn",
+     "Hearth Stone",
+     "whale-rib gate wrapped in briar"
+    ],
+    "silhouette": "tall frosted trunks rising over low turf roofs, smoke from two kinds of chimneys",
+    "materials": "living wood glazed in ice, whalebone, turf, rime-silk, carved briar",
+    "palette": "warm amber windows against ice-blue bark; Elowen rose and green banners beside Isenmar slate and teal",
+    "set_pieces": [
+     "the hearth argument at the inn",
+     "ice-fishing at dusk",
+     "children in ogre and whale masks"
+    ]
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "bleed_spread",
+     "when": "act>=3",
+     "change": "Glasswood crystals climb two of the glazed trees along the survey line"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war",
+     "change": "Isenmar levies drawn from the longhouses; Elowen side stays neutral; refugees at the inn"
+    }
+   ]
   },
   {
    "id": 571,
@@ -13825,7 +14305,7 @@
       6
      ],
      "hidden": false,
-     "note": "gift after Two Hearths? no: free gift for talking to weaver"
+     "note": "gift from the weaver"
     }
    ],
    "tileset_kit": "G45_INTERIOR",
@@ -14117,7 +14597,7 @@
   },
   {
    "id": 581,
-   "name": "Route 8",
+   "name": "Route 8 - Icefall Locks",
    "act": 1,
    "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "route",
@@ -14276,7 +14756,8 @@
     }
    ],
    "tileset_kit": "G4_SNOW_COAST",
-   "border": "escarpment cliffs and switchback retaining walls; viaduct overhead"
+   "border": "borderland edges: Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice",
+   "borderland": "The Icefall Locks"
   },
   {
    "id": 582,
@@ -14329,7 +14810,7 @@
    "id": 584,
    "name": "Voltaic Sluiceworks",
    "act": 1,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "dungeon",
    "size": [
     40,
@@ -14434,13 +14915,14 @@
     }
    ],
    "tileset_kit": "G5_INDUSTRIAL",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice",
+   "borderland": "The Icefall Locks"
   },
   {
    "id": 585,
    "name": "Sluiceworks Turbine Hall",
    "act": 1,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "dungeon",
    "size": [
     30,
@@ -14486,7 +14968,8 @@
     }
    ],
    "tileset_kit": "G5_INDUSTRIAL",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice",
+   "borderland": "The Icefall Locks"
   },
   {
    "id": 588,
@@ -14565,8 +15048,97 @@
    "bleed_of": "Ebbmouth Water Imprint"
   },
   {
+   "id": 590,
+   "name": "Brassfall",
+   "act": 1,
+   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 3,
+   "detail": "outline",
+   "borderland": "The Icefall Locks",
+   "key_features": [
+    "lock-and-lift town climbing the frozen falls",
+    "trade: cut ice and smoked eel <-> batteries, brass, scrip",
+    "culture mix: Isenmar ice-cutters' union + Zenith lock engineers",
+    "tension: Meridian scrip vs union pay; the Lattice drains the river (Ebb stutter)",
+    "sidequest: 'The Ice Elevator': restart the stuck ice-lift with Electric Pokémon"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 591
+   },
+   "tileset_kit": "BL_ICEFALL_LOCKS",
+   "border": "borderland edges: Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice"
+  },
+  {
+   "id": 591,
+   "name": "Brassfall Pokémon Center",
+   "act": 1,
+   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 3,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T590_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 600,
-   "name": "Route 9",
+   "name": "Route 9 - The Brass Dunes",
    "act": 2,
    "kingdom": "Borderland (Zenith/Ossaria)",
    "kind": "route",
@@ -14586,7 +15158,8 @@
     "plateau rail-line east; Lumen->Dunelands"
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: Zenith's rail and slag spilling into Ossaria's desert",
+   "borderland": "The Brass Dunes"
   },
   {
    "id": 601,
@@ -14686,6 +15259,95 @@
    "bleed_of": "Lumen Electric Imprint"
   },
   {
+   "id": 610,
+   "name": "Copperdune",
+   "act": 2,
+   "kingdom": "Borderland (Zenith/Ossaria)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 4,
+   "detail": "outline",
+   "borderland": "The Brass Dunes",
+   "key_features": [
+    "desert rail-junction around a broken viaduct",
+    "trade: fossils and bone-meal <-> coal, rails, brass",
+    "culture mix: Ossarian bone-traders' caravanserai + Zenith freight depot",
+    "tension: Meridian deep-drill crews staging here; tomb-robbers sell fossils to Zenith collectors",
+    "sidequest: 'Tomb Freight': return a stolen fossil to its tomb"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 611
+   },
+   "tileset_kit": "BL_BRASS_DUNES",
+   "border": "borderland edges: Zenith's rail and slag spilling into Ossaria's desert"
+  },
+  {
+   "id": 611,
+   "name": "Copperdune Pokémon Center",
+   "act": 2,
+   "kingdom": "Borderland (Zenith/Ossaria)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 4,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T610_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 620,
    "name": "Route 11",
    "act": 2,
@@ -14711,7 +15373,7 @@
   },
   {
    "id": 621,
-   "name": "Route 12",
+   "name": "Route 12 - The Leach Canyons",
    "act": 2,
    "kingdom": "Borderland (Ossaria/Nadir)",
    "kind": "route",
@@ -14731,7 +15393,8 @@
     "runoff channels from Lumen's foundries down to Mirefen"
    ],
    "tileset_kit": "G4_MARSH",
-   "border": "cavern walls, sump water and stacked shanty rooftops"
+   "border": "borderland edges: Zenith's toxic runoff carving blue-glowing canals through Ossaria's sandstone; fossil beds leaching in poison; Nadir mine adits in the canyon walls",
+   "borderland": "The Leach Canyons"
   },
   {
    "id": 624,
@@ -14808,6 +15471,95 @@
    "bleed_of": "Duneholt Ground Imprint"
   },
   {
+   "id": 630,
+   "name": "Charwell",
+   "act": 2,
+   "kingdom": "Borderland (Ossaria/Nadir)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 5,
+   "detail": "outline",
+   "borderland": "The Leach Canyons",
+   "key_features": [
+    "cliff-cave town that filters Nadir's poison through Ossarian bone-char",
+    "trade: bone-char filters <-> scrap metal; clean water",
+    "culture mix: Ossarian char-burners + Nadir sump-folk",
+    "tension: who owns the clean water; filters failing as runoff grows",
+    "sidequest: 'Clean Water': gather bone-char for the failing weir"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 631
+   },
+   "tileset_kit": "BL_LEACH_CANYONS",
+   "border": "borderland edges: Zenith's toxic runoff carving blue-glowing canals through Ossaria's sandstone; fossil beds leaching in poison; Nadir mine adits in the canyon walls"
+  },
+  {
+   "id": 631,
+   "name": "Charwell Pokémon Center",
+   "act": 2,
+   "kingdom": "Borderland (Ossaria/Nadir)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 5,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T630_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 640,
    "name": "Route 13",
    "act": 2,
@@ -14833,7 +15585,7 @@
   },
   {
    "id": 641,
-   "name": "Route 14 - Lake Sallow",
+   "name": "Route 14 - Sulfur Reach (Lake Sallow)",
    "act": 2,
    "kingdom": "Borderland (Nadir/Ashkaar)",
    "kind": "route",
@@ -14853,7 +15605,8 @@
     "lake crossing south-east toward Ember"
    ],
    "tileset_kit": "G4_MARSH",
-   "border": "cavern walls, sump water and stacked shanty rooftops"
+   "border": "borderland edges: acid hot-spring country where Nadir's runoff meets Ashkaar's magma",
+   "borderland": "The Sulfur Reach"
   },
   {
    "id": 644,
@@ -14927,6 +15680,109 @@
    "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
    "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Mirefen Poison Imprint"
+  },
+  {
+   "id": 650,
+   "name": "Scaldwater",
+   "act": 2,
+   "kingdom": "Borderland (Nadir/Ashkaar)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 6,
+   "detail": "outline",
+   "borderland": "The Sulfur Reach",
+   "key_features": [
+    "hot-spring spa and sulfur-mining town",
+    "trade: sulfur, spa rights, mercenary contracts",
+    "culture mix: Nadir bath-house workers + off-duty Ashkaar legionnaires (the Truce of the Baths)",
+    "tension: Ashkaar recruiting Nadir youths as war mercenaries; oath-culture vs no-oaths culture",
+    "sidequest: 'Truce of the Waters': stop a comic bath-house brawl (Rev 7 humour)"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 651
+   },
+   "visual_brief": {
+    "landmarks": [
+     "the Truce Baths",
+     "sulfur mines",
+     "steam vents"
+    ],
+    "silhouette": "terraced pools steaming under yellow cliffs",
+    "materials": "sulfur crust, cedar bath-houses, iron pipes",
+    "palette": "sulfur yellow, teal water, steam white",
+    "set_pieces": [
+     "the bath-house brawl",
+     "legion recruiters at the hiring hall"
+    ]
+   },
+   "tileset_kit": "BL_SULFUR_REACH",
+   "border": "borderland edges: acid hot-spring country where Nadir's runoff meets Ashkaar's magma"
+  },
+  {
+   "id": 651,
+   "name": "Scaldwater Pokémon Center",
+   "act": 2,
+   "kingdom": "Borderland (Nadir/Ashkaar)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 6,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T650_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 658,
@@ -15009,7 +15865,8 @@
     "mountain pass to Ironreach's mine-head"
    ],
    "tileset_kit": "G5_UNDERCITY",
-   "border": "cavern walls, sump water and stacked shanty rooftops",
+   "border": "borderland edges: acid hot-spring country where Nadir's runoff meets Ashkaar's magma",
+   "borderland": "The Sulfur Reach",
    "states": [
     {
      "id": "default"
@@ -15020,6 +15877,56 @@
      "change": "checkpoint and conscription post"
     }
    ]
+  },
+  {
+   "id": 662,
+   "name": "Route 15b - The Cinderglass Barrens",
+   "act": 2,
+   "kingdom": "Borderland (Ashkaar/Ossaria)",
+   "kind": "route",
+   "size": [
+    56,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 3",
+   "field": "ASHEN_WASTE",
+   "segment": 7,
+   "detail": "outline",
+   "borderland": "The Cinderglass Barrens",
+   "key_features": [
+    "obsidian dunes and glass-storms; north road from Cindervault to Glasswake and on to Cinder Cape (war road)"
+   ],
+   "connections_outline": [
+    "662: S from Cindervault (Caldera Gate 243), N to Glasswake 670, E to 663; 663: E to Ossaria south canyons (Duneholt side)"
+   ],
+   "tileset_kit": "BL_CINDERGLASS_BARRENS",
+   "border": "borderland edges: obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms"
+  },
+  {
+   "id": 663,
+   "name": "The Petrified Ashwood",
+   "act": 2,
+   "kingdom": "Borderland (Ashkaar/Ossaria)",
+   "kind": "route",
+   "size": [
+    56,
+    40
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 3",
+   "field": "DESERT",
+   "segment": 7,
+   "detail": "outline",
+   "borderland": "The Cinderglass Barrens",
+   "key_features": [
+    "stone forest buried by ash; Sudowoodo hide among petrified trunks; lava tubes"
+   ],
+   "connections_outline": [
+    "662: S from Cindervault (Caldera Gate 243), N to Glasswake 670, E to 663; 663: E to Ossaria south canyons (Duneholt side)"
+   ],
+   "tileset_kit": "BL_CINDERGLASS_BARRENS",
+   "border": "borderland edges: obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms"
   },
   {
    "id": 664,
@@ -15115,8 +16022,111 @@
    "bleed_of": "Cindervault Fire Imprint"
   },
   {
+   "id": 670,
+   "name": "Glasswake",
+   "act": 2,
+   "kingdom": "Borderland (Ashkaar/Ossaria)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 7,
+   "detail": "outline",
+   "borderland": "The Cinderglass Barrens",
+   "key_features": [
+    "glassworks town on the obsidian dunes",
+    "trade: glass, lenses, amber-glass fossils, black mirrors",
+    "culture mix: Ashkaar furnace-masters + Ossarian sand-merchants",
+    "tension: Ashkaar conscripting glassblowers for dragon-armour lenses; the Elector's tariffs; black-mirror trade with Antumbra",
+    "sidequest: 'The Glassblower's Apprentice': deliver obsidian for a lens"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 671
+   },
+   "visual_brief": {
+    "landmarks": [
+     "furnace chimneys",
+     "black-mirror market",
+     "glass-roofed workshops"
+    ],
+    "silhouette": "squat sandstone workshops under tall smoking chimneys on black dunes",
+    "materials": "sandstone, obsidian, glass, bronze",
+    "palette": "black sand, ember orange, glass-cyan glints",
+    "set_pieces": [
+     "a glass-storm sweeping the dunes",
+     "pouring molten glass"
+    ]
+   },
+   "tileset_kit": "BL_CINDERGLASS_BARRENS",
+   "border": "borderland edges: obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms"
+  },
+  {
+   "id": 671,
+   "name": "Glasswake Pokémon Center",
+   "act": 2,
+   "kingdom": "Borderland (Ashkaar/Ossaria)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 7,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T670_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 680,
-   "name": "Route 17 - The Lift Road",
+   "name": "Route 17 - The Rootdeep",
    "act": 3,
    "kingdom": "Borderland (Nadir/Elowen)",
    "kind": "route",
@@ -15124,9 +16134,9 @@
     30,
     56
    ],
-   "tileset": "Outside",
+   "tileset": "Caves",
    "bgm": "Route 3",
-   "field": null,
+   "field": "CAVE",
    "segment": 8,
    "detail": "outline",
    "connections_outline": [
@@ -15136,7 +16146,8 @@
     "mine lift up to highland pastures"
    ],
    "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "border": "borderland edges: Elowen's giant roots breaking into Nadir's mine shafts",
+   "borderland": "The Rootdeep"
   },
   {
    "id": 681,
@@ -15258,6 +16269,95 @@
    "bleed_of": "Ironreach Fighting Imprint"
   },
   {
+   "id": 690,
+   "name": "Lanternroot",
+   "act": 3,
+   "kingdom": "Borderland (Nadir/Elowen)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 8,
+   "detail": "outline",
+   "borderland": "The Rootdeep",
+   "key_features": [
+    "mushroom-farming mining hamlet in a root-cavern",
+    "trade: lamp-moss, mushroom ale <-> ore, tools",
+    "culture mix: Elowen fungus-growers + Nadir miners",
+    "tension: the Queen's foresters forbid cutting sacred roots; miners need the seams",
+    "sidequest: 'The Root That Bleeds': trace sap leaking into a mine"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 691
+   },
+   "tileset_kit": "BL_ROOTDEEP",
+   "border": "borderland edges: Elowen's giant roots breaking into Nadir's mine shafts"
+  },
+  {
+   "id": 691,
+   "name": "Lanternroot Pokémon Center",
+   "act": 3,
+   "kingdom": "Borderland (Nadir/Elowen)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 8,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T690_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 698,
    "name": "Hollow Sanctuary",
    "act": 3,
@@ -15327,7 +16427,7 @@
   },
   {
    "id": 701,
-   "name": "Route 20",
+   "name": "Route 20 - Northern Rimewood",
    "act": 3,
    "kingdom": "Borderland (Elowen/Isenmar)",
    "kind": "route",
@@ -15347,7 +16447,8 @@
     "tundra edge"
    ],
    "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "border": "borderland edges: deep snow-forest on the way to Lake Rime; royal hunting lodges",
+   "borderland": "The Rimewood (north)"
   },
   {
    "id": 703,
@@ -15447,6 +16548,95 @@
    "bleed_of": "Verdance Grass Imprint"
   },
   {
+   "id": 710,
+   "name": "Snowbriar",
+   "act": 3,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 9,
+   "detail": "outline",
+   "borderland": "The Rimewood (north)",
+   "key_features": [
+    "royal hunting-lodge village of the Queen's foresters and Isenmar trappers",
+    "trade: furs, venison, briar-honey",
+    "culture mix: Elowen lodges + Isenmar trappers' lean-tos",
+    "tension: Queen's game laws vs clan hunting rights",
+    "sidequest: 'The White Stag': track a Stantler poacher"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 711
+   },
+   "tileset_kit": "BL_RIMEWOOD_NORTH",
+   "border": "borderland edges: deep snow-forest on the way to Lake Rime; royal hunting lodges"
+  },
+  {
+   "id": 711,
+   "name": "Snowbriar Pokémon Center",
+   "act": 3,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 9,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T710_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 720,
    "name": "Route 21",
    "act": 3,
@@ -15482,7 +16672,7 @@
   },
   {
    "id": 721,
-   "name": "Route 22",
+   "name": "Route 22 - Mast Glacier",
    "act": 3,
    "kingdom": "Borderland (Isenmar/Zenith)",
    "kind": "route",
@@ -15502,7 +16692,8 @@
     "glacier"
    ],
    "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors",
+   "borderland": "The Mast Glacier",
    "states": [
     {
      "id": "default"
@@ -15560,7 +16751,8 @@
     "Rock Climb walls"
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors",
+   "borderland": "The Mast Glacier"
   },
   {
    "id": 725,
@@ -15632,6 +16824,95 @@
    "bleed_of": "Rimeholt Ice Imprint"
   },
   {
+   "id": 730,
+   "name": "Anchorhold",
+   "act": 3,
+   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 10,
+   "detail": "outline",
+   "borderland": "The Mast Glacier",
+   "key_features": [
+    "airship-anchorage on the glacier",
+    "trade: ice-anchors, mooring rights, storm forecasts",
+    "culture mix: Isenmar anchor-smiths + Skyreach pilots",
+    "tension: Gale Post smugglers; Meridian embargo",
+    "sidequest: 'Cut Loose': free a moored airship in a storm"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 731
+   },
+   "tileset_kit": "BL_MAST_GLACIER",
+   "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors"
+  },
+  {
+   "id": 731,
+   "name": "Anchorhold Pokémon Center",
+   "act": 3,
+   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 10,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T730_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 740,
    "name": "Route 23",
    "act": 3,
@@ -15657,7 +16938,7 @@
   },
   {
    "id": 741,
-   "name": "Route 24",
+   "name": "Route 24 - The Wired Wood",
    "act": 3,
    "kingdom": "Borderland (Zenith/Elowen)",
    "kind": "route",
@@ -15677,13 +16958,14 @@
     "descends into the forest"
    ],
    "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "border": "borderland edges: the forest edge wired with Meridian Lattice",
+   "borderland": "The Wired Wood"
   },
   {
    "id": 742,
    "name": "Mirror Mere",
    "act": 3,
-   "kingdom": "Elowen",
+   "kingdom": "Borderland (Elowen/Antumbra)",
    "kind": "route",
    "size": [
     36,
@@ -15701,7 +16983,8 @@
     "Elowen lake whose reflection is the gate to Antumbra"
    ],
    "tileset_kit": "G5_TEMPERATE",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland"
+   "border": "borderland edges: lakeside woods whose reflections disagree; rivers that run uphill near the gate",
+   "borderland": "The Looking-Glass Wood"
   },
   {
    "id": 743,
@@ -15725,7 +17008,8 @@
     "upside-down wood; leads to Lucent"
    ],
    "tileset_kit": "G4_DISTORTION",
-   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+   "border": "borderland edges: lakeside woods whose reflections disagree; rivers that run uphill near the gate",
+   "borderland": "The Looking-Glass Wood"
   },
   {
    "id": 744,
@@ -15819,10 +17103,188 @@
    "bleed_of": "Skyreach Flying Imprint"
   },
   {
+   "id": 750,
+   "name": "Verdigris",
+   "act": 3,
+   "kingdom": "Borderland (Zenith/Elowen)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "borderland": "The Wired Wood",
+   "key_features": [
+    "copper-roofed orchard-factory town",
+    "trade: fruit, silk <-> tools, Lattice power",
+    "culture mix: Meridian plantation managers + Elowen orchard workers",
+    "tension: the Glasswood creeping along the pylons; Lattice drains the orchards",
+    "sidequest: 'Clockwork Bees': recapture runaway Combee drones"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 751
+   },
+   "tileset_kit": "BL_WIRED_WOOD",
+   "border": "borderland edges: the forest edge wired with Meridian Lattice"
+  },
+  {
+   "id": 751,
+   "name": "Verdigris Pokémon Center",
+   "act": 3,
+   "kingdom": "Borderland (Zenith/Elowen)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 11,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T750_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
+   "id": 753,
+   "name": "Glassmere",
+   "act": 3,
+   "kingdom": "Borderland (Elowen/Antumbra)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 11,
+   "detail": "outline",
+   "borderland": "The Looking-Glass Wood",
+   "key_features": [
+    "lakeside hamlet where every house has a mirror-double in the mere",
+    "trade: mirror-readings, prophecies <-> bread, wool",
+    "culture mix: Elowen fisherfolk + Antumbran 'reflections'",
+    "tension: people who come back from the mere 'reversed'; Synod envoys",
+    "sidequest: 'Your Other Half': your reflection in the mere doesn't match you"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 754
+   },
+   "tileset_kit": "BL_LOOKING-GLASS_WOOD",
+   "border": "borderland edges: lakeside woods whose reflections disagree; rivers that run uphill near the gate"
+  },
+  {
+   "id": 754,
+   "name": "Glassmere Pokémon Center",
+   "act": 3,
+   "kingdom": "Borderland (Elowen/Antumbra)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 11,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T753_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 760,
-   "name": "Route 25",
+   "name": "Route 25 - The Obsidian Barrows",
    "act": 4,
-   "kingdom": "Antumbra",
+   "kingdom": "Borderland (Antumbra/Ossaria)",
    "kind": "route",
    "size": [
     56,
@@ -15840,7 +17302,8 @@
     "mirrored plateau; exits back through the mirror"
    ],
    "tileset_kit": "G4_DISTORTION",
-   "border": "mirror-fog void with inverted cliffs (sky below), cracked-glass edges"
+   "border": "borderland edges: Ossaria's old necropolis where obsidian tomb-mirrors (glass from the Cinderglass) became gates to Antumbra; shadows fall upward; the inverted desert hangs in the sky",
+   "borderland": "The Obsidian Barrows"
   },
   {
    "id": 761,
@@ -15932,6 +17395,95 @@
    "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
    "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "Lucent Psychic Imprint"
+  },
+  {
+   "id": 770,
+   "name": "Vigil",
+   "act": 4,
+   "kingdom": "Borderland (Antumbra/Ossaria)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 12,
+   "detail": "outline",
+   "borderland": "The Obsidian Barrows",
+   "key_features": [
+    "town of embalmers and mediums keeping watch at the Grave Glass",
+    "trade: grave-goods, embalming, consultations with echoes",
+    "culture mix: Ossarian embalmers + Antumbran mediums",
+    "tension: Ossarian tomb-law vs the Synod's claim on the dead's reflections; grave-robbing for Meridian",
+    "sidequest: 'The Unquiet Elector': restore a dead Elector's erased name"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 771
+   },
+   "tileset_kit": "BL_OBSIDIAN_BARROWS",
+   "border": "borderland edges: Ossaria's old necropolis where obsidian tomb-mirrors (glass from the Cinderglass) became gates to Antumbra; shadows fall upward; the inverted desert hangs in the sky"
+  },
+  {
+   "id": 771,
+   "name": "Vigil Pokémon Center",
+   "act": 4,
+   "kingdom": "Borderland (Antumbra/Ossaria)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 12,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T770_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 780,
@@ -16100,9 +17652,9 @@
   },
   {
    "id": 801,
-   "name": "Route 30",
+   "name": "Route 30 - Slag Mesa",
    "act": 4,
-   "kingdom": "Borderland (Antumbra/Zenith)",
+   "kingdom": "Borderland (Ossaria/Zenith)",
    "kind": "route",
    "size": [
     32,
@@ -16120,7 +17672,8 @@
     "industrial wasteland approach"
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: Zenith's rail and slag spilling into Ossaria's desert",
+   "borderland": "The Brass Dunes"
   },
   {
    "id": 804,
@@ -16215,9 +17768,9 @@
   },
   {
    "id": 820,
-   "name": "Route 31",
+   "name": "Route 31 - The Hanging Stair",
    "act": 4,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Zenith/Nadir)",
    "kind": "route",
    "size": [
     60,
@@ -16235,7 +17788,8 @@
     "rail scrap line"
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: the vertical cliff beneath Zenith",
+   "borderland": "The Hanging Stair"
   },
   {
    "id": 821,
@@ -16259,7 +17813,8 @@
     "drowned coast; sea drawn back by the Fault"
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
-   "border": "plateau cliff railings, building facades, rail viaducts"
+   "border": "borderland edges: the vertical cliff beneath Zenith",
+   "borderland": "The Hanging Stair"
   },
   {
    "id": 822,
@@ -16381,6 +17936,95 @@
    "bleed_of": "Cogsworth Steel Imprint"
   },
   {
+   "id": 830,
+   "name": "Midstair",
+   "act": 4,
+   "kingdom": "Borderland (Zenith/Nadir)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 15,
+   "detail": "outline",
+   "borderland": "The Hanging Stair",
+   "key_features": [
+    "vertical town of lift-operators halfway down the cliff",
+    "trade: tolls on everything that goes up or down",
+    "culture mix: Zenith servants commuting down + Nadir workers commuting up",
+    "tension: Meridian checkpoints and curfews",
+    "sidequest: 'The Lift Strike': settle a lift-operators' strike"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 831
+   },
+   "tileset_kit": "BL_HANGING_STAIR",
+   "border": "borderland edges: the vertical cliff beneath Zenith"
+  },
+  {
+   "id": 831,
+   "name": "Midstair Pokémon Center",
+   "act": 4,
+   "kingdom": "Borderland (Zenith/Nadir)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 15,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T830_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 838,
    "name": "Accord Archive",
    "act": 4,
@@ -16404,9 +18048,9 @@
   },
   {
    "id": 840,
-   "name": "Route 33",
+   "name": "Route 33 - Rootdeep River",
    "act": 5,
-   "kingdom": "Nadir",
+   "kingdom": "Borderland (Nadir/Elowen)",
    "kind": "route",
    "size": [
     56,
@@ -16424,7 +18068,8 @@
     "underground river"
    ],
    "tileset_kit": "G5_UNDERCITY",
-   "border": "rock walls"
+   "border": "borderland edges: Elowen's giant roots breaking into Nadir's mine shafts",
+   "borderland": "The Rootdeep"
   },
   {
    "id": 841,
@@ -16521,6 +18166,95 @@
    "wild_theme_exempt": true
   },
   {
+   "id": 850,
+   "name": "Mothwell",
+   "act": 5,
+   "kingdom": "Borderland (Nadir/Elowen)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 16,
+   "detail": "outline",
+   "borderland": "The Rootdeep",
+   "key_features": [
+    "hamlet on the root river",
+    "trade: moth-silk, river fish",
+    "culture mix: Nadir boatmen + Gloamwood moth-keepers",
+    "tension: the dusk spreading south from Gloaming",
+    "sidequest: 'Lantern Moths': relight the river lanterns"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 851
+   },
+   "tileset_kit": "BL_ROOTDEEP",
+   "border": "borderland edges: Elowen's giant roots breaking into Nadir's mine shafts"
+  },
+  {
+   "id": 851,
+   "name": "Mothwell Pokémon Center",
+   "act": 5,
+   "kingdom": "Borderland (Nadir/Elowen)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 16,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T850_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
    "id": 860,
    "name": "Route 35 - Gloamwood",
    "act": 5,
@@ -16544,9 +18278,9 @@
   },
   {
    "id": 861,
-   "name": "Route 36",
+   "name": "Route 36 - Thornwar Marches",
    "act": 5,
-   "kingdom": "Ashkaar",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
    "kind": "route",
    "size": [
     32,
@@ -16564,7 +18298,8 @@
     "dragon highlands"
    ],
    "tileset_kit": "G4_VOLCANIC",
-   "border": "basalt cliffs, lava rivers, caldera walls"
+   "border": "borderland edges: fire-scarred oldwood",
+   "borderland": "The Thornwar Marches"
   },
   {
    "id": 864,
@@ -16636,10 +18371,99 @@
    "bleed_of": "Gloaming Fairy Imprint"
   },
   {
-   "id": 880,
-   "name": "Route 37 - Sovereign's Approach",
+   "id": 870,
+   "name": "Thornwatch",
    "act": 5,
-   "kingdom": "Crownhaven",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 17,
+   "detail": "outline",
+   "borderland": "The Thornwar Marches",
+   "key_features": [
+    "old Thornwar border fort turned market town",
+    "trade: charcoal <-> forged tools; dragon-riders buy forest herbs",
+    "culture mix: Elowen charcoal-burners + Ashkaar smiths",
+    "tension: Thornwar memory; the Dominar's legions passing through",
+    "sidequest: 'The Truce Bell': recast the cracked truce bell"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 871
+   },
+   "tileset_kit": "BL_THORNWAR_MARCHES",
+   "border": "borderland edges: fire-scarred oldwood"
+  },
+  {
+   "id": 871,
+   "name": "Thornwatch Pokémon Center",
+   "act": 5,
+   "kingdom": "Borderland (Elowen/Ashkaar)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 17,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T870_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
+  },
+  {
+   "id": 880,
+   "name": "Route 37 - Pilgrim Pass",
+   "act": 5,
+   "kingdom": "Borderland (Ashkaar/Crownhaven)",
    "kind": "route",
    "size": [
     32,
@@ -16655,7 +18479,8 @@
    ],
    "key_features": [],
    "tileset_kit": "G4_MOUNTAIN",
-   "border": "the Crown caldera's ring cliffs and the city's curtain walls"
+   "border": "borderland edges: the Wyrmrest pass climbing the Crown ring",
+   "borderland": "The Pilgrim Pass"
   },
   {
    "id": 884,
@@ -16749,6 +18574,95 @@
    "tileset_kit": "G5_TEMPERATE+BLEED_OVERLAY",
    "border": "cliffs/sea as appropriate; Bleed Veil shimmer at the entrance",
    "bleed_of": "all Imprints"
+  },
+  {
+   "id": 890,
+   "name": "Pilgrim's Rest",
+   "act": 5,
+   "kingdom": "Borderland (Ashkaar/Crownhaven)",
+   "kind": "town",
+   "size": [
+    40,
+    36
+   ],
+   "tileset": "Outside",
+   "bgm": "Lerucean Town",
+   "field": null,
+   "segment": 18,
+   "detail": "outline",
+   "borderland": "The Pilgrim Pass",
+   "key_features": [
+    "pilgrim town below the Crown's gate",
+    "trade: lodging, relics, Festival tickets",
+    "culture mix: pilgrims of every kingdom + Ashkaar toll-keepers",
+    "tension: Ashkaar tolls on a sacred road",
+    "sidequest: 'Eighteen Shrines': light all eighteen roadside shrines"
+   ],
+   "metadata": {
+    "outdoor": true,
+    "heal_point_map": 891
+   },
+   "tileset_kit": "BL_PILGRIM_PASS",
+   "border": "borderland edges: the Wyrmrest pass climbing the Crown ring"
+  },
+  {
+   "id": 891,
+   "name": "Pilgrim's Rest Pokémon Center",
+   "act": 5,
+   "kingdom": "Borderland (Ashkaar/Crownhaven)",
+   "kind": "interior",
+   "size": [
+    15,
+    11
+   ],
+   "tileset": "Poke Centre interior",
+   "bgm": "Poke Center",
+   "field": null,
+   "segment": 18,
+   "metadata": {
+    "heal_point": true
+   },
+   "connections": [
+    {
+     "type": "warp_in",
+     "at": [
+      7,
+      10
+     ],
+     "link": "T890_PC"
+    }
+   ],
+   "features": [
+    {
+     "type": "npc",
+     "role": "nurse",
+     "at": [
+      7,
+      2
+     ],
+     "says": "standard heal"
+    },
+    {
+     "type": "npc",
+     "role": "pc",
+     "at": [
+      11,
+      2
+     ],
+     "says": "PC terminal"
+    },
+    {
+     "type": "npc",
+     "role": "info",
+     "at": [
+      3,
+      6
+     ],
+     "says": "local tip"
+    }
+   ],
+   "border": "ruin/rock walls and Bleed shimmer",
+   "tileset_kit": "G4_RUINS"
   },
   {
    "id": 900,
@@ -16859,10 +18773,10 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
-    "front line: frozen strait on the NE coast where Isenmar's ice meets Ashkaar's Cinder Cape; trenches cut in ice, burnt sled-forts"
+    "Isenmar's front line on the strait ice off the Rime Isles: trenches cut in ice, burnt sled-forts"
    ],
    "tileset_kit": "G4_SNOW_COAST",
    "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast"
@@ -16884,10 +18798,10 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
-    "besieged Isenmar fortress-port: ice-and-granite curtain wall, breached gatehouse, siege ladders, dragonfire scorch"
+    "besieged Isenmar fortress-port on the Rime Isles across the Shattered Ice strait: ice-and-granite curtain wall, breached gatehouse, dragonfire scorch"
    ],
    "tileset_kit": "G4_SNOW_COAST",
    "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
@@ -16925,7 +18839,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "ice-locked harbour, chained longships, keep on the mole; refugees"
@@ -16950,7 +18864,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "war council; field hospital in the mead hall"
@@ -16975,7 +18889,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "legion tents, dragon pickets, trebuchets on melting ice; Dominar's war-tent"
@@ -16987,7 +18901,7 @@
    "id": 925,
    "name": "The Steamline",
    "act": 3,
-   "kingdom": "Borderland (Ashkaar/Isenmar)",
+   "kingdom": "Sea - the Shattered Ice strait (contested)",
    "kind": "route",
    "size": [
     64,
@@ -17000,7 +18914,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "no-man's-land where lava channels meet sea ice: permanent steam wall, dead ground between the fronts"
@@ -17012,7 +18926,7 @@
    "id": 926,
    "name": "The Shattered Ice",
    "act": 3,
-   "kingdom": "Borderland (Ashkaar/Isenmar)",
+   "kingdom": "Sea - the Shattered Ice strait (contested)",
    "kind": "dungeon",
    "size": [
     60,
@@ -17025,7 +18939,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "frozen-sea battlefield for the war climax (pixel-animated beam clash; field melts FROZEN_LAKE->WATER_SURFACE)"
@@ -17066,7 +18980,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "war theatre: reached by sled-road from Rimeholt (Route 21) and by the Ashkaar coast road from Route 15; act set by story team (III-IV)"
+    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
    ],
    "key_features": [
     "Ashkaar staging fortress on a basalt cape; dragon launch ramps"

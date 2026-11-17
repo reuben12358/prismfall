@@ -125,11 +125,38 @@ def barricade():
     return dbl(c)
 
 
+def rail(kind):
+    c = Image.new('RGBA', (16, 16)); d = ImageDraw.Draw(c)
+    if kind in ('h', 'nw', 'ne'):
+        d.rectangle((0, 1, 15, 3), fill=WOOD[2]); d.line([(0, 1), (15, 1)], fill=WOOD[3]); d.line([(0, 4), (15, 4)], fill=(40, 28, 20, 140))
+        for x in (1, 9): d.rectangle((x, 4, x + 1, 10), fill=WOOD[1]); d.point((x, 11), fill=(40, 28, 20, 120))
+    if kind in ('w', 'nw'):
+        d.rectangle((0, 0, 2, 15), fill=WOOD[2]); d.line([(0, 0), (0, 15)], fill=WOOD[3]); d.line([(3, 0), (3, 15)], fill=(40, 28, 20, 120))
+    if kind in ('e', 'ne'):
+        d.rectangle((13, 0, 15, 15), fill=WOOD[2]); d.line([(15, 0), (15, 15)], fill=WOOD[1]); d.line([(12, 0), (12, 15)], fill=(40, 28, 20, 120))
+    return dbl(c)
+
+
+def glow():
+    c = Image.new('RGBA', (32, 32)); px = c.load()
+    for y in range(32):
+        for x in range(32):
+            r = ((x - 15.5) / 15.5) ** 2 + ((y - 15.5) / 13.5) ** 2
+            if r < 1:
+                a = int(110 * (1 - r) ** 1.5)
+                a = a // 22 * 22                                       # banded, pixel-art falloff
+                if a: px[x, y] = (255, 214, 130, a)
+    return dbl(c)
+
+
 PIECES = [  # name, builder, (w, h), passages rows, priorities rows
     ('stairs_log', stairs_log, (3, 4), 0, 0), ('stairs_stone', stairs_stone, (3, 4), 0, 0), ('stairs_plank', stairs_plank, (3, 4), 0, 0),
     ('signpost', lambda s: signpost(), (1, 2), [[0], [15]], [[1], [0]]),
     ('lantern', lambda s: lantern(), (1, 3), [[0], [0], [15]], [[2], [1], [0]]),
-    ('logbench', lambda s: logbench(), (2, 1), 15, 0), ('barricade', lambda s: barricade(), (2, 1), 15, 0)]
+    ('logbench', lambda s: logbench(), (2, 1), 15, 0), ('barricade', lambda s: barricade(), (2, 1), 15, 0),
+    ('rail_h', lambda s: rail('h'), (1, 1), 0, 1), ('rail_w', lambda s: rail('w'), (1, 1), 0, 1), ('rail_e', lambda s: rail('e'), (1, 1), 0, 1),
+    ('rail_nw', lambda s: rail('nw'), (1, 1), 0, 1), ('rail_ne', lambda s: rail('ne'), (1, 1), 0, 1),
+    ('glow', lambda s: glow(), (2, 2), 0, 5)]
 
 
 def strip(sheet):
@@ -166,3 +193,13 @@ def stamps(offset, names):
                 lay[z][j][i] = b + j * 8 + i
         out[name] = {'w': w, 'h': h, 'layers': lay}
     return out
+
+
+def write_stamps():
+    """data/stamps_m.json: every piece as '<name>@<tileset>' for tilesets 33 and 40 (run after both composers)."""
+    import json, os
+    here = os.path.dirname(os.path.abspath(__file__)); st = {}
+    for tid, fn in ((33, 'compose_offsets.json'), (40, 'compose_wilds_offsets.json')):
+        o = json.load(open(os.path.join(here, 'data', fn)))['materials']
+        for k, v in stamps(o['offset'], o['names']).items(): st['%s@%d' % (k, tid)] = v
+    json.dump(st, open(os.path.join(here, 'data', 'stamps_m.json'), 'w')); return st

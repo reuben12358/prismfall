@@ -37,7 +37,7 @@ def build():
     # ---- lanes: narrow, winding, 2 wide (3 only in the square)
     c.rect(33, 0, 4, 2, 'd', '.')
     c.lane([(34.5, 0), (34.5, 4), (36, 10), (35, 16), (32, 22), (30, 27)], 'd', 1)
-    c.blob(30, 29, 5.5, 3.2, 'd', 2, only='.', rough=0.9); c.blob(30, 29, 2.5, 1.5, 'g', 3, only='d')       # flagstones, not flat setts (MAPGEN 2g)
+    c.blob(30, 29, 5.5, 3.2, 'd', 2, only='.', rough=0.9)
     c.lane([(30, 31), (32, 34), (34.5, 37)], 'd', 4)
     c.lane([(26, 30), (20, 31.5), (14, 32), (9, 34), (5, 36)], 'd', 5)
     c.lane([(34, 29), (40, 31), (47, 33), (54, 31), (61, 28)], 'd', 6)
@@ -51,7 +51,7 @@ def build():
         for x in range(17, 50):
             band = y >= SHORE - 2 - (1 if vnoise(x, 0, 12, 4.0) > 0.5 else 0)
             head = ((x - 34) / 5.5) ** 2 + ((y - 46) / 4.0) ** 2 < 1.0 + 0.3 * (vnoise(x, y, 8, 3.0) - 0.5)
-            if c.g[y][x] == 's' and (band or head): c.g[y][x] = 'g'      # worn flagstone quay (MAPGEN 2g)
+            if c.g[y][x] == 's' and (band or head): c.g[y][x] = 'D'      # timber boardwalk quay on piles (MAPGEN 2g)
     c.rect(33, SHORE, 3, H - SHORE, '=', '~s'); c.rect(18, shore(18), 2, 56 - shore(18), '=', '~s')
     c.stair_kind = 'stairs_stone@33'     # worn stone steps on the bluff (MAPGEN 2g)
     c.stairs(33, bluff(34)); c.stairs(41, 14); c.stairs(51, bluff(52)); c.stairs(14, 9)
@@ -59,22 +59,19 @@ def build():
     for y in range(H):
         for x in range(W):
             if c.g[y][x] == 'C' and c.ht[y][x] < 0: c.g[y][x] = '~'; c.taken[y][x] = False
-    # ---- the Dovetail: a plank hull with rails, moored east of the pier
-    def hull(x, y):           # round stern at the pier, long waist, pointed bow to the east
-        if not 50 <= y <= 56 or not 37 <= x <= 55: return False
-        if x < 40: half = 3.2 * math.sqrt(max(0.0, 1 - ((40 - x) / 3.4) ** 2))
-        elif x < 48: half = 3.2
-        else: half = 3.2 * max(0.0, 1 - ((x - 48) / 7.5) ** 1.5)
-        return abs(y - 53) <= half + 0.15
+    # ---- the Dovetail moored east of the pier: the same ship as map 109, painted by ship_art (tileset 33 part 'ship_moored')
+    import ship_art as SA, json as _json
+    SA.use('moored')
     for y in range(H):
         for x in range(W):
-            if hull(x, y):
-                rim = not all(hull(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
-                c.g[y][x] = 'w' if rim else 'D'; c.taken[y][x] = True
-                if rim: c.tile(3831, x, y, 0)
-    for nm, x, y in (('hs_jonquil_12', 39, 51), ('p_crates', 43, 51), ('tp_barrel_06', 46, 52), ('tp_barrel_02', 47, 51),
-                     ('tp_stall_13', 42, 54), ('hs_jonquil_07', 50, 52), ('p_banner3', 45, 52), ('tp_barrel_09', 49, 54)):
-        c.stamp(nm, x, y, force=True)            # wheelhouse, freight, a pennant mast, a life ring on the rail
+            if SA.deck(x, y):
+                c.g[y][x] = 'D'; c.taken[y][x] = True
+            elif c.g[y][x] == '~' and any(SA.deck(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-2, -1, 0, 1)):
+                c.taken[y][x] = True
+    for nm, x, y in (('hs_jonquil_12', 38, 51), ('p_crates', 46, 54), ('tp_barrel_06', 47, 52), ('p_net', 50, 52)):
+        c.stamp(nm, x, y, force=True)            # wheelhouse aft, freight, nets
+    _off = _json.load(open(os.path.join(HERE, 'data', 'compose_offsets.json')))['ship_moored']['offset']
+    _ship_tiles = [(x, y, z, _off + i) for x, y, z, i in _json.load(open(os.path.join(HERE, 'data', 'ship_moored.json')))]
     # ---- named buildings
     d = {}
     d['lab'] = c.stamp('w_house_m', 45, 5, 'FL_LAB', 'Lab door', force=True)
@@ -86,8 +83,7 @@ def build():
     d['customs'] = c.stamp('w_longhouse_s', 19, 38, 'FL_CUSTOMS', 'Customs door', force=True)
     d['dock'] = c.stamp('w_house', 42, 27, 'FL_DOCK', 'Dockmaster door', force=True)
     c.stamp('lh_ferrow', 2, 31, force=True); light_door = (4, 39)
-    c.stamp('w_flat_m', 40, 40, force=True); c.stamp('p_awning', 42, 43, force=True)   # the Hales' bramble-tart stall: timber, silk awning (MAPGEN 2g)
-    c.stamp('p_crates', 47, 41, force=True)
+    c.stamp('p_awning', 42, 41, force=True); c.stamp('p_crates', 47, 39, force=True); c.stamp('t_barrel', 45, 41, force=True)   # the Hales' tart stall: silk awning over crates (MAPGEN 2g)
     for nm, x, y in (('hs_jonquil_16', 32, 45), ('hs_jonquil_16', 36, 45)):   # the customs gate's brass posts
         c.stamp(nm, x, y, force=True)
     for k, dd in d.items():
@@ -112,7 +108,7 @@ def build():
     P('Wenna Hale', (46, 43)); P('Coll Hale', (47, 45)); P('HiddenItem tart stall', (40, 41))
     P('HiddenItem breakwater', (18, 55)); P('Wingull (rocks)', (15, 45))
     P('Girl with Wingull', c.snap(26, 44, 'sk', r=4)); P('Wingull (with girl)', c.snap(27, 44, 'sk', r=3))
-    P('Lamplighter', c.snap(29, 46, 'g', r=3))
+    P('Lamplighter', c.snap(29, 46, 'D', r=3))
     for i, (x, y) in enumerate(((24, 44), (28, 42), (38, 42), (45, 47), (49, 45), (55, 44))):
         x, y = c.snap(x, y, 'ks', r=3)
         e = SE.place(100, 'Quay lamp %d' % (i + 1), (x, y))
@@ -127,7 +123,7 @@ def build():
     S('Harbor Crier', 30, 28); S('Town sign', 34, 2); S('Lane sign', 33, 26); S('Notice board', 28, 26)
     S('Festival poster', 27, 31); S('Fish barrels', 44, 46, 'ks')
     town = [('Rope-skipping Girl 1', 26, 29), ('Rope-skipping Girl 2', 27, 29), ('Kelp-drier', 38, 45), ('Old Sailor', 30, 45),
-            ('Meridian Linesman', 26, 45), ('Fishwife', 46, 44), ('Woman hanging washing', 12, 33), ('Boy with toy boat', 22, 44),
+            ('Meridian Linesman', 28, 46), ('Fishwife', 46, 44), ('Woman hanging washing', 12, 33), ('Boy with toy boat', 17, 47),
             ('Accord Clerk', 24, 38), ('Drunk on the steps', 37, 39), ('Old Woman on bench', 32, 31), ('Net-mender', 16, 44),
             ('Twin 1', 45, 31), ('Twin 2', 46, 31), ('Meridian Recruiter', 36, 30), ('Boy (town)', 31, 24),
             ("Boy's Mother (town)", 33, 23), ('Woman with crate (town)', 41, 30)]
@@ -148,7 +144,7 @@ def build():
     # the lawn pockets between the lanes: hedged kitchen gardens, flower beds and small groves (MAPGEN 2g)
     c.dress(['p_bush_g', 'p_bush_r', 'p_pinkbush', 'p_cherry', 'p_stump', 'p_pot', 'p_bush_w'], 40, '.', 11, pad=0)
     c.groves(6, seed=12, rmin=1.4, rmax=2.6)
-    c.dress(['p_sign'], 2, '.', 8, near='d', pad=0); c.dress(['logbench@33'], 3, 'g', 9, pad=0)
+    c.dress(['p_sign'], 2, '.', 8, near='d', pad=0)
     c.fence_run([(43, 17), (60, 17)]); c.fence_run([(26, 2), (26, 10)]); c.fence_run([(57, 3), (57, 13)])
     c.fence_run([(2, 29), (8, 29)]); c.fence_run([(44, 34), (44, 38)])
     c.borders(p=0.7); c.meadow(0.84, 1)
@@ -157,7 +153,7 @@ def build():
             edge = min(y + 1.5 * (vnoise(x, 0, 21, 4.0)), x + 2 * vnoise(0, y, 22, 4.0), W - 1 - x + 2 * vnoise(0, y, 23, 4.0))
             if c.g[y][x] == '.' and not c.taken[y][x] and y < 38 and edge < 3.2: c.g[y][x] = 'T'
     c.greenfill(0.27, 1, beds=0.05)
-    c.inlay(17, 36, 50, 47, 'g', [3916], 0.05)
+    for x, y, z, t in _ship_tiles: c.tile(t, x, y, z)
     c.sea_rocks(24, avoid=[(30, 44, 56, 59)])
     c.events = E
     head = {'id': 100, 'biome': 'village', 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'palette': 'village', 'rubric': True, 'yards_ok': True,

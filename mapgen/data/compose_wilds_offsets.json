@@ -700,7 +700,7 @@
  },
  "materials": {
   "offset": 22848,
-  "tiles": 120,
+  "tiles": 136,
   "names": {
    "stairs_log": 0,
    "stairs_stone": 27,
@@ -708,7 +708,13 @@
    "signpost": 83,
    "lantern": 92,
    "logbench": 109,
-   "barricade": 112
+   "barricade": 112,
+   "rail_h": 114,
+   "rail_w": 115,
+   "rail_e": 116,
+   "rail_nw": 117,
+   "rail_ne": 118,
+   "glow": 120
   }
  }
 }

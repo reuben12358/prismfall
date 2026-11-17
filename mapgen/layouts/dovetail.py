@@ -14,7 +14,7 @@ def build():
     W, H = 34, 22
     c = Village(W, H, 109, base='~')
     import ship_art as SA, json as _json
-    deck = SA.deck
+    SA.use('dovetail'); deck = SA.deck
     for y in range(H):
         for x in range(W):
             if deck(x, y): c.g[y][x] = 'D'

@@ -8,7 +8,7 @@
 # own "Player's Starting Position" instead.
 #===============================================================================
 module PrismfallMaps
-  PRISMFALL_START = [109, 8, 6]   # [map_id, x, y] or nil
+  PRISMFALL_START = [109, 7, 6]   # [map_id, x, y] or nil; must be a walkable tile (8,6 is under the deck barrels)
 
   def self.apply_start_position
     st = PRISMFALL_START

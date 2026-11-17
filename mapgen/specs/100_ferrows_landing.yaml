@@ -45,9 +45,9 @@ map: |
   T,,###################,#####HTdddTTtTH####,#######T.##########T####T
   T,,########d##########,#####dddddTTT,,####,#######,,####,,,,,,H####T
   T,T,,,,,,,ddd####,,d,,,,,,ddddddddTT,,,,d,,,####,,,,####T,TTTdT####T
-  TTTTTTtt,,Tdd####,TdTTT,,ddddgggdddddTTTdT######,TTT####..Tdddd####T
-  T,,,wwwwwTTdd####HTTTTT,ddddgggggddddddT,T######TTTT,,,,.dddddT####T
-  tTTTTTTt,TTdd####TTTddddddddgggggddddddddd######TTT,T.ddddddT,,####T
+  TTTTTTtt,,Tdd####,TdTTT,,ddddddddddddTTTdT######,TTT####..Tdddd####T
+  T,,,wwwwwTTdd####HTTTTT,dddddddddddddddT,T######TTTT,,,,.dddddT####T
+  tTTTTTTt,TTdd####TTTdddddddddddddddddddddd######TTT,T.ddddddT,,####T
   tH#####,TTTddddddddddddddddddddddTTtdddddddd####H...dddddTTTT,,,,,,T
   tT#####HTTTddddddddddddddTTTTTddTTTtT..ddddddddddddddddTTTTTTTTTTTTT
   TT#####TTddddddTTTTTdTT.CCCCCCCCdTTtTT....,dddddddddTTTTTTTTT,TT,TTT
@@ -59,21 +59,21 @@ map: |
   tH#####T,,TTTTCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
   tT,,,,,T,,TTTTCCssssssssssssssssssssssssssssssssssCsssCssCCCCCCCCCCC
   t,TTTTT,,TTTTTCCsssssssssssssssssssssssssssssssssssssssssCCCCCCCCCCC
-  tTTT,TT,,TT,,TCssssssssssssssssssgggsssssssssssssssssssssCCCCCssssss
-  TTTTTTTTTTT,,TCssssssssssssssssgggggggssssssssssssssssssssssssssssss
-  TTTTTTTTTTTTTCCssssssssssssssgggggggggggssssssssssssssssssssssssssss
-  TTT,TTTTTT,T.CCssssssssssgggggggggggggggsgggggggggssssssssssssssssss
-  TTTTTTTTTTTTCCCssgggggggggggggggggggggggggggggggggssssssssssssss~~~~
-  TTTTTTTTTTTCCCsssggg~~ggggggggggggggggggggggggggggsssssssss~~~~~~~~~
+  tTTT,TT,,TT,,TCssssssssssssssssssDDDsssssssssssssssssssssCCCCCssssss
+  TTTTTTTTTTT,,TCssssssssssssssssDDDDDDDssssssssssssssssssssssssssssss
+  TTTTTTTTTTTTTCCssssssssssssssDDDDDDDDDDDssssssssssssssssssssssssssss
+  TTT,TTTTTT,T.CCssssssssssDDDDDDDDDDDDDDDsDDDDDDDDDssssssssssssssssss
+  TTTTTTTTTTTTCCCssDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDssssssssssssss~~~~
+  TTTTTTTTTTTCCCsssDDD~~DDDDDDDDDDDDDDDDDDDDDDDDDDDDsssssssss~~~~~~~~~
   TTTT,TTTTTTCCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
   CCTTTTTTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~CCTTTTTTCC~~~~~~~==~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
-  ~~CCCTTCCC~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
-  ~~~~CCCC~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDDDw~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
+  ~CCTTTTTTCC~~~~~~~==~~~~~~~~~~~~~===~~~DDDDDDDDDDD~~~~~~~~~~~~~~~~~~
+  ~~CCCTTCCC~~~~~~~~==~~~~~~~~~~~~~===~~DDDDDDDDDDDDDD~~~~~~~~~~~~~~~~
+  ~~~~CCCC~~~~~~~~~~==~~~~~~~~~~~~~===~~DDDDDDDDDDDDDDDD~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~~DDDDDDDDDDDDDDDDD~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~~DDDDDDDDDDDDDDDD~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~~DDDDDDDDDDDDDD~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~DDDDDDDDDDD~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,21 +148,13 @@ stamps:
 - stamp: stairs_stone@33
   at: [14, 9]
 - stamp: hs_jonquil_12
-  at: [39, 51]
+  at: [38, 51]
 - stamp: p_crates
-  at: [43, 51]
+  at: [46, 54]
 - stamp: tp_barrel_06
-  at: [46, 52]
-- stamp: tp_barrel_02
-  at: [47, 51]
-- stamp: tp_stall_13
-  at: [42, 54]
-- stamp: hs_jonquil_07
+  at: [47, 52]
+- stamp: p_net
   at: [50, 52]
-- stamp: p_banner3
-  at: [45, 52]
-- stamp: tp_barrel_09
-  at: [49, 54]
 - stamp: w_house_m
   at: [45, 5]
   link: FL_LAB
@@ -199,12 +191,12 @@ stamps:
   door: [2, 5]
 - stamp: lh_ferrow
   at: [2, 31]
-- stamp: w_flat_m
-  at: [40, 40]
 - stamp: p_awning
-  at: [42, 43]
+  at: [42, 41]
 - stamp: p_crates
-  at: [47, 41]
+  at: [47, 39]
+- stamp: t_barrel
+  at: [45, 41]
 - stamp: hs_jonquil_16
   at: [32, 45]
 - stamp: hs_jonquil_16
@@ -235,6 +227,8 @@ stamps:
   at: [64, 43]
 - stamp: tp_barrel_09
   at: [59, 45]
+- stamp: tp_barrel_06
+  at: [41, 43]
 - stamp: tp_barrel_09
   at: [55, 46]
 - stamp: tp_barrel_06
@@ -475,127 +469,7 @@ stamps:
   at: [40, 34]
 - stamp: p_sign
   at: [7, 31]
-- stamp: logbench@33
-  at: [36, 44]
-- stamp: logbench@33
-  at: [45, 46]
-- stamp: logbench@33
-  at: [21, 46]
 tiles:
-- tile: 3831
-  at: [39, 50]
-  layer: 0
-- tile: 3831
-  at: [40, 50]
-  layer: 0
-- tile: 3831
-  at: [41, 50]
-  layer: 0
-- tile: 3831
-  at: [42, 50]
-  layer: 0
-- tile: 3831
-  at: [43, 50]
-  layer: 0
-- tile: 3831
-  at: [44, 50]
-  layer: 0
-- tile: 3831
-  at: [45, 50]
-  layer: 0
-- tile: 3831
-  at: [46, 50]
-  layer: 0
-- tile: 3831
-  at: [47, 50]
-  layer: 0
-- tile: 3831
-  at: [48, 50]
-  layer: 0
-- tile: 3831
-  at: [49, 50]
-  layer: 0
-- tile: 3831
-  at: [38, 51]
-  layer: 0
-- tile: 3831
-  at: [50, 51]
-  layer: 0
-- tile: 3831
-  at: [51, 51]
-  layer: 0
-- tile: 3831
-  at: [52, 51]
-  layer: 0
-- tile: 3831
-  at: [37, 52]
-  layer: 0
-- tile: 3831
-  at: [53, 52]
-  layer: 0
-- tile: 3831
-  at: [54, 52]
-  layer: 0
-- tile: 3831
-  at: [37, 53]
-  layer: 0
-- tile: 3831
-  at: [55, 53]
-  layer: 0
-- tile: 3831
-  at: [37, 54]
-  layer: 0
-- tile: 3831
-  at: [53, 54]
-  layer: 0
-- tile: 3831
-  at: [54, 54]
-  layer: 0
-- tile: 3831
-  at: [38, 55]
-  layer: 0
-- tile: 3831
-  at: [50, 55]
-  layer: 0
-- tile: 3831
-  at: [51, 55]
-  layer: 0
-- tile: 3831
-  at: [52, 55]
-  layer: 0
-- tile: 3831
-  at: [39, 56]
-  layer: 0
-- tile: 3831
-  at: [40, 56]
-  layer: 0
-- tile: 3831
-  at: [41, 56]
-  layer: 0
-- tile: 3831
-  at: [42, 56]
-  layer: 0
-- tile: 3831
-  at: [43, 56]
-  layer: 0
-- tile: 3831
-  at: [44, 56]
-  layer: 0
-- tile: 3831
-  at: [45, 56]
-  layer: 0
-- tile: 3831
-  at: [46, 56]
-  layer: 0
-- tile: 3831
-  at: [47, 56]
-  layer: 0
-- tile: 3831
-  at: [48, 56]
-  layer: 0
-- tile: 3831
-  at: [49, 56]
-  layer: 0
 - tile: 20193
   at: [20, 25]
   layer: 2
@@ -620,21 +494,726 @@ tiles:
 - tile: 1563
   at: [12, 46]
   layer: 2
-- tile: 3916
-  at: [32, 44]
+- tile: 23672
+  at: [43, 48]
+  layer: 2
+- tile: 23673
+  at: [38, 49]
+  layer: 2
+- tile: 23674
+  at: [39, 49]
+  layer: 2
+- tile: 23675
+  at: [40, 49]
+  layer: 2
+- tile: 23675
+  at: [41, 49]
+  layer: 2
+- tile: 23675
+  at: [42, 49]
+  layer: 2
+- tile: 23676
+  at: [43, 49]
+  layer: 2
+- tile: 23675
+  at: [44, 49]
+  layer: 2
+- tile: 23675
+  at: [45, 49]
+  layer: 2
+- tile: 23675
+  at: [46, 49]
+  layer: 2
+- tile: 23675
+  at: [47, 49]
+  layer: 2
+- tile: 23677
+  at: [48, 49]
+  layer: 2
+- tile: 23678
+  at: [49, 49]
+  layer: 2
+- tile: 23679
+  at: [50, 49]
+  layer: 2
+- tile: 23680
+  at: [37, 50]
+  layer: 2
+- tile: 23681
+  at: [38, 50]
+  layer: 2
+- tile: 23682
+  at: [39, 50]
   layer: 0
-- tile: 3916
-  at: [30, 45]
+- tile: 23683
+  at: [40, 50]
   layer: 0
-- tile: 3916
-  at: [31, 46]
+- tile: 23684
+  at: [40, 50]
+  layer: 2
+- tile: 23685
+  at: [41, 50]
   layer: 0
-- tile: 3916
-  at: [39, 46]
+- tile: 23686
+  at: [41, 50]
+  layer: 2
+- tile: 23687
+  at: [42, 50]
   layer: 0
-- tile: 3916
-  at: [48, 46]
+- tile: 23683
+  at: [43, 50]
   layer: 0
+- tile: 23688
+  at: [43, 50]
+  layer: 2
+- tile: 23685
+  at: [44, 50]
+  layer: 0
+- tile: 23689
+  at: [44, 50]
+  layer: 2
+- tile: 23687
+  at: [45, 50]
+  layer: 0
+- tile: 23690
+  at: [45, 50]
+  layer: 2
+- tile: 23683
+  at: [46, 50]
+  layer: 0
+- tile: 23684
+  at: [46, 50]
+  layer: 2
+- tile: 23685
+  at: [47, 50]
+  layer: 0
+- tile: 23686
+  at: [47, 50]
+  layer: 2
+- tile: 23691
+  at: [48, 50]
+  layer: 0
+- tile: 23692
+  at: [49, 50]
+  layer: 0
+- tile: 23693
+  at: [49, 50]
+  layer: 2
+- tile: 23694
+  at: [50, 50]
+  layer: 2
+- tile: 23695
+  at: [51, 50]
+  layer: 2
+- tile: 23696
+  at: [52, 50]
+  layer: 2
+- tile: 23697
+  at: [36, 51]
+  layer: 2
+- tile: 23698
+  at: [37, 51]
+  layer: 2
+- tile: 23685
+  at: [38, 51]
+  layer: 0
+- tile: 23699
+  at: [39, 51]
+  layer: 0
+- tile: 23700
+  at: [40, 51]
+  layer: 0
+- tile: 23701
+  at: [41, 51]
+  layer: 0
+- tile: 23702
+  at: [41, 51]
+  layer: 2
+- tile: 23703
+  at: [42, 51]
+  layer: 0
+- tile: 23704
+  at: [42, 51]
+  layer: 2
+- tile: 23700
+  at: [43, 51]
+  layer: 0
+- tile: 23705
+  at: [43, 51]
+  layer: 2
+- tile: 23701
+  at: [44, 51]
+  layer: 0
+- tile: 23706
+  at: [44, 51]
+  layer: 2
+- tile: 23703
+  at: [45, 51]
+  layer: 0
+- tile: 23700
+  at: [46, 51]
+  layer: 0
+- tile: 23701
+  at: [47, 51]
+  layer: 0
+- tile: 23702
+  at: [47, 51]
+  layer: 2
+- tile: 23703
+  at: [48, 51]
+  layer: 0
+- tile: 23704
+  at: [48, 51]
+  layer: 2
+- tile: 23707
+  at: [49, 51]
+  layer: 0
+- tile: 23708
+  at: [49, 51]
+  layer: 2
+- tile: 23685
+  at: [50, 51]
+  layer: 0
+- tile: 23709
+  at: [50, 51]
+  layer: 2
+- tile: 23710
+  at: [51, 51]
+  layer: 0
+- tile: 23711
+  at: [51, 51]
+  layer: 2
+- tile: 23712
+  at: [52, 51]
+  layer: 2
+- tile: 23713
+  at: [53, 51]
+  layer: 2
+- tile: 23714
+  at: [54, 51]
+  layer: 2
+- tile: 23715
+  at: [36, 52]
+  layer: 2
+- tile: 23716
+  at: [37, 52]
+  layer: 2
+- tile: 23717
+  at: [38, 52]
+  layer: 0
+- tile: 23718
+  at: [39, 52]
+  layer: 0
+- tile: 23701
+  at: [40, 52]
+  layer: 0
+- tile: 23719
+  at: [41, 52]
+  layer: 0
+- tile: 23720
+  at: [42, 52]
+  layer: 0
+- tile: 23721
+  at: [42, 52]
+  layer: 2
+- tile: 23701
+  at: [43, 52]
+  layer: 0
+- tile: 23722
+  at: [43, 52]
+  layer: 2
+- tile: 23719
+  at: [44, 52]
+  layer: 0
+- tile: 23723
+  at: [44, 52]
+  layer: 2
+- tile: 23724
+  at: [45, 52]
+  layer: 0
+- tile: 23725
+  at: [45, 52]
+  layer: 2
+- tile: 23726
+  at: [46, 52]
+  layer: 0
+- tile: 23725
+  at: [46, 52]
+  layer: 2
+- tile: 23719
+  at: [47, 52]
+  layer: 0
+- tile: 23725
+  at: [47, 52]
+  layer: 2
+- tile: 23727
+  at: [48, 52]
+  layer: 0
+- tile: 23728
+  at: [48, 52]
+  layer: 2
+- tile: 23729
+  at: [49, 52]
+  layer: 0
+- tile: 23730
+  at: [49, 52]
+  layer: 2
+- tile: 23731
+  at: [50, 52]
+  layer: 0
+- tile: 23732
+  at: [50, 52]
+  layer: 2
+- tile: 23733
+  at: [51, 52]
+  layer: 0
+- tile: 23734
+  at: [51, 52]
+  layer: 2
+- tile: 23735
+  at: [52, 52]
+  layer: 0
+- tile: 23736
+  at: [52, 52]
+  layer: 2
+- tile: 23737
+  at: [53, 52]
+  layer: 0
+- tile: 23738
+  at: [53, 52]
+  layer: 2
+- tile: 23739
+  at: [54, 52]
+  layer: 2
+- tile: 23740
+  at: [55, 52]
+  layer: 2
+- tile: 23741
+  at: [36, 53]
+  layer: 2
+- tile: 23742
+  at: [37, 53]
+  layer: 2
+- tile: 23743
+  at: [38, 53]
+  layer: 0
+- tile: 23744
+  at: [39, 53]
+  layer: 0
+- tile: 23745
+  at: [40, 53]
+  layer: 0
+- tile: 23746
+  at: [41, 53]
+  layer: 0
+- tile: 23744
+  at: [42, 53]
+  layer: 0
+- tile: 23747
+  at: [42, 53]
+  layer: 2
+- tile: 23748
+  at: [43, 53]
+  layer: 0
+- tile: 23749
+  at: [43, 53]
+  layer: 2
+- tile: 23746
+  at: [44, 53]
+  layer: 0
+- tile: 23750
+  at: [44, 53]
+  layer: 2
+- tile: 23751
+  at: [45, 53]
+  layer: 0
+- tile: 23752
+  at: [46, 53]
+  layer: 0
+- tile: 23746
+  at: [47, 53]
+  layer: 0
+- tile: 23753
+  at: [48, 53]
+  layer: 0
+- tile: 23747
+  at: [48, 53]
+  layer: 2
+- tile: 23754
+  at: [49, 53]
+  layer: 0
+- tile: 23755
+  at: [49, 53]
+  layer: 2
+- tile: 23756
+  at: [50, 53]
+  layer: 0
+- tile: 23757
+  at: [50, 53]
+  layer: 2
+- tile: 23727
+  at: [51, 53]
+  layer: 0
+- tile: 23758
+  at: [52, 53]
+  layer: 0
+- tile: 23759
+  at: [53, 53]
+  layer: 0
+- tile: 23760
+  at: [54, 53]
+  layer: 0
+- tile: 23761
+  at: [55, 53]
+  layer: 2
+- tile: 23762
+  at: [56, 53]
+  layer: 2
+- tile: 23763
+  at: [57, 53]
+  layer: 2
+- tile: 23764
+  at: [58, 53]
+  layer: 2
+- tile: 23765
+  at: [36, 54]
+  layer: 2
+- tile: 23766
+  at: [37, 54]
+  layer: 2
+- tile: 23767
+  at: [38, 54]
+  layer: 0
+- tile: 23701
+  at: [39, 54]
+  layer: 0
+- tile: 23768
+  at: [40, 54]
+  layer: 0
+- tile: 23769
+  at: [41, 54]
+  layer: 0
+- tile: 23701
+  at: [42, 54]
+  layer: 0
+- tile: 23770
+  at: [42, 54]
+  layer: 2
+- tile: 23768
+  at: [43, 54]
+  layer: 0
+- tile: 23771
+  at: [43, 54]
+  layer: 2
+- tile: 23769
+  at: [44, 54]
+  layer: 0
+- tile: 23772
+  at: [44, 54]
+  layer: 2
+- tile: 23773
+  at: [45, 54]
+  layer: 0
+- tile: 23774
+  at: [46, 54]
+  layer: 0
+- tile: 23769
+  at: [47, 54]
+  layer: 0
+- tile: 23701
+  at: [48, 54]
+  layer: 0
+- tile: 23770
+  at: [48, 54]
+  layer: 2
+- tile: 23775
+  at: [49, 54]
+  layer: 0
+- tile: 23776
+  at: [49, 54]
+  layer: 2
+- tile: 23777
+  at: [50, 54]
+  layer: 0
+- tile: 23778
+  at: [50, 54]
+  layer: 2
+- tile: 23779
+  at: [51, 54]
+  layer: 0
+- tile: 23780
+  at: [52, 54]
+  layer: 0
+- tile: 23781
+  at: [53, 54]
+  layer: 0
+- tile: 23782
+  at: [54, 54]
+  layer: 2
+- tile: 23783
+  at: [55, 54]
+  layer: 2
+- tile: 23784
+  at: [56, 54]
+  layer: 2
+- tile: 23785
+  at: [36, 55]
+  layer: 2
+- tile: 23786
+  at: [37, 55]
+  layer: 2
+- tile: 23787
+  at: [38, 55]
+  layer: 0
+- tile: 23701
+  at: [39, 55]
+  layer: 0
+- tile: 23703
+  at: [40, 55]
+  layer: 0
+- tile: 23700
+  at: [41, 55]
+  layer: 0
+- tile: 23788
+  at: [41, 55]
+  layer: 2
+- tile: 23701
+  at: [42, 55]
+  layer: 0
+- tile: 23711
+  at: [42, 55]
+  layer: 2
+- tile: 23703
+  at: [43, 55]
+  layer: 0
+- tile: 23789
+  at: [43, 55]
+  layer: 2
+- tile: 23700
+  at: [44, 55]
+  layer: 0
+- tile: 23790
+  at: [44, 55]
+  layer: 2
+- tile: 23701
+  at: [45, 55]
+  layer: 0
+- tile: 23703
+  at: [46, 55]
+  layer: 0
+- tile: 23700
+  at: [47, 55]
+  layer: 0
+- tile: 23788
+  at: [47, 55]
+  layer: 2
+- tile: 23701
+  at: [48, 55]
+  layer: 0
+- tile: 23711
+  at: [48, 55]
+  layer: 2
+- tile: 23791
+  at: [49, 55]
+  layer: 0
+- tile: 23792
+  at: [49, 55]
+  layer: 2
+- tile: 23793
+  at: [50, 55]
+  layer: 0
+- tile: 23794
+  at: [50, 55]
+  layer: 2
+- tile: 23795
+  at: [51, 55]
+  layer: 0
+- tile: 23796
+  at: [51, 55]
+  layer: 2
+- tile: 23797
+  at: [52, 55]
+  layer: 2
+- tile: 23798
+  at: [53, 55]
+  layer: 2
+- tile: 23799
+  at: [54, 55]
+  layer: 2
+- tile: 23800
+  at: [55, 55]
+  layer: 2
+- tile: 23801
+  at: [56, 55]
+  layer: 2
+- tile: 23802
+  at: [36, 56]
+  layer: 2
+- tile: 23803
+  at: [37, 56]
+  layer: 2
+- tile: 23804
+  at: [38, 56]
+  layer: 2
+- tile: 23805
+  at: [39, 56]
+  layer: 0
+- tile: 23806
+  at: [40, 56]
+  layer: 0
+- tile: 23807
+  at: [40, 56]
+  layer: 2
+- tile: 23685
+  at: [41, 56]
+  layer: 0
+- tile: 23808
+  at: [41, 56]
+  layer: 2
+- tile: 23809
+  at: [42, 56]
+  layer: 0
+- tile: 23806
+  at: [43, 56]
+  layer: 0
+- tile: 23810
+  at: [43, 56]
+  layer: 2
+- tile: 23685
+  at: [44, 56]
+  layer: 0
+- tile: 23811
+  at: [44, 56]
+  layer: 2
+- tile: 23809
+  at: [45, 56]
+  layer: 0
+- tile: 23812
+  at: [45, 56]
+  layer: 2
+- tile: 23806
+  at: [46, 56]
+  layer: 0
+- tile: 23807
+  at: [46, 56]
+  layer: 2
+- tile: 23685
+  at: [47, 56]
+  layer: 0
+- tile: 23808
+  at: [47, 56]
+  layer: 2
+- tile: 23813
+  at: [48, 56]
+  layer: 0
+- tile: 23814
+  at: [49, 56]
+  layer: 0
+- tile: 23815
+  at: [49, 56]
+  layer: 2
+- tile: 23816
+  at: [50, 56]
+  layer: 2
+- tile: 23817
+  at: [51, 56]
+  layer: 2
+- tile: 23818
+  at: [52, 56]
+  layer: 2
+- tile: 23819
+  at: [53, 56]
+  layer: 2
+- tile: 23820
+  at: [54, 56]
+  layer: 2
+- tile: 23821
+  at: [37, 57]
+  layer: 2
+- tile: 23822
+  at: [38, 57]
+  layer: 2
+- tile: 23823
+  at: [39, 57]
+  layer: 2
+- tile: 23824
+  at: [40, 57]
+  layer: 2
+- tile: 23825
+  at: [41, 57]
+  layer: 2
+- tile: 23826
+  at: [42, 57]
+  layer: 2
+- tile: 23827
+  at: [43, 57]
+  layer: 2
+- tile: 23828
+  at: [44, 57]
+  layer: 2
+- tile: 23829
+  at: [45, 57]
+  layer: 2
+- tile: 23830
+  at: [46, 57]
+  layer: 2
+- tile: 23826
+  at: [47, 57]
+  layer: 2
+- tile: 23831
+  at: [48, 57]
+  layer: 2
+- tile: 23832
+  at: [49, 57]
+  layer: 2
+- tile: 23833
+  at: [50, 57]
+  layer: 2
+- tile: 23834
+  at: [51, 57]
+  layer: 2
+- tile: 23835
+  at: [52, 57]
+  layer: 2
+- tile: 23836
+  at: [38, 58]
+  layer: 2
+- tile: 23837
+  at: [39, 58]
+  layer: 2
+- tile: 23838
+  at: [40, 58]
+  layer: 2
+- tile: 23839
+  at: [41, 58]
+  layer: 2
+- tile: 23840
+  at: [42, 58]
+  layer: 2
+- tile: 23841
+  at: [43, 58]
+  layer: 2
+- tile: 23842
+  at: [44, 58]
+  layer: 2
+- tile: 23838
+  at: [45, 58]
+  layer: 2
+- tile: 23839
+  at: [46, 58]
+  layer: 2
+- tile: 23840
+  at: [47, 58]
+  layer: 2
+- tile: 23843
+  at: [48, 58]
+  layer: 2
+- tile: 23844
+  at: [49, 58]
+  layer: 2
+- tile: 23845
+  at: [50, 58]
+  layer: 2
 - tile: 1555
   at: [22, 57]
   layer: 2
@@ -1805,7 +2384,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 01, dir: down}
-  at: [30, 27]
+  at: [30, 28]
 - type: sign
   name: Town sign
   post: true
@@ -1900,7 +2479,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
     cond: {self: A}
-  at: [22, 45]
+  at: [30, 41]
 - type: event
   name: Fishwife
   pages:
@@ -1924,7 +2503,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: NPC 22, dir: down}
-  at: [21, 45]
+  at: [16, 47]
 - type: event
   name: Accord Clerk
   pages:

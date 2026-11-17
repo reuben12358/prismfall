@@ -285,11 +285,12 @@ module PlayBot
         mode = sc.instance_variable_get(:@mode)
         chars = PokemonEntryScene2.class_variable_get(:@@Characters)[mode][0]
         pos = chars.index(NAME[@typed])
-        if pos.nil?
-          log("entry: '#{NAME[@typed]}' not on page #{mode}")
-          @typed += 1
+        if pos.nil?                  # the page is still switching (auto-lowercase): try again, then switch it
+          @entry_miss = (@entry_miss || 0) + 1
+          press(B::SPECIAL) if @entry_miss % 5 == 0
           return
         end
+        @entry_miss = 0
         sc.instance_variable_set(:@cursorpos, pos)
         sc.instance_variable_get(:@sprites)["cursor"].setCursorPos(pos)
         press(B::USE)
@@ -390,6 +391,7 @@ module PlayBot
       @bumps = 0
       @talk_at = nil
       @path = nil
+      @nopath = 0
     end
 
     def stuck(why)

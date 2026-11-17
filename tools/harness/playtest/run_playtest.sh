@@ -54,8 +54,16 @@ session() {
   grep -E "FATAL|STUCK|bot error|installer|plan done|finished" "$RUN/playtest_out/$1/bot.log" || true
 }
 
+# Stop only this test copy's engine (other engine runs may share the machine)
+stop() {
+  for p in $(pgrep -f mkxp-z.x86_64 || true); do
+    [[ "$(readlink "/proc/$p/cwd" 2>/dev/null)" == "$GAME" ]] && kill "$p" && echo "stopped $p"
+  done; true
+}
+
 case "${1:-}" in
   assemble) assemble ;;
+  stop) stop ;;
   install|play) session "$1" ;;
-  *) echo "usage: $0 assemble | install | play"; exit 1 ;;
+  *) echo "usage: $0 assemble | install | play | stop"; exit 1 ;;
 esac

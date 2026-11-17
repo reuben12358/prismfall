@@ -12,7 +12,7 @@ metadata:
   ShowArea: true
   MapPosition: [0, 12, 22]
   BattleBack: field
-tone: [-18, -30, 4, 12]
+tone: [-10, -22, 2, 4]
 fog: {name: prismfall_spores, opacity: 46, blend: 1, zoom: 100, sx: 1, sy: -1}
 connections:
 - {dir: W, offset: 29, to: 540, to_offset: 10}
@@ -450,6 +450,12 @@ tiles:
 - tile: 8756
   at: [3, 32]
   layer: 1
+- tile: 23362
+  at: [3, 30]
+  layer: 2
+- tile: 23362
+  at: [3, 31]
+  layer: 2
 - tile: 8721
   at: [4, 30]
   layer: 1
@@ -459,6 +465,12 @@ tiles:
 - tile: 8756
   at: [4, 32]
   layer: 1
+- tile: 23362
+  at: [4, 30]
+  layer: 2
+- tile: 23362
+  at: [4, 31]
+  layer: 2
 - tile: 8721
   at: [5, 30]
   layer: 1
@@ -468,24 +480,48 @@ tiles:
 - tile: 8756
   at: [5, 32]
   layer: 1
+- tile: 23362
+  at: [5, 30]
+  layer: 2
+- tile: 23362
+  at: [5, 31]
+  layer: 2
 - tile: 8721
   at: [6, 30]
   layer: 1
 - tile: 8737
   at: [6, 31]
   layer: 1
+- tile: 23362
+  at: [6, 30]
+  layer: 2
+- tile: 23362
+  at: [6, 31]
+  layer: 2
 - tile: 8721
   at: [7, 30]
   layer: 1
 - tile: 8737
   at: [7, 31]
   layer: 1
+- tile: 23362
+  at: [7, 30]
+  layer: 2
+- tile: 23362
+  at: [7, 31]
+  layer: 2
 - tile: 8721
   at: [8, 30]
   layer: 1
 - tile: 8737
   at: [8, 31]
   layer: 1
+- tile: 23362
+  at: [8, 30]
+  layer: 2
+- tile: 23362
+  at: [8, 31]
+  layer: 2
 - tile: 8721
   at: [9, 30]
   layer: 1
@@ -495,6 +531,12 @@ tiles:
 - tile: 8756
   at: [9, 32]
   layer: 1
+- tile: 23362
+  at: [9, 30]
+  layer: 2
+- tile: 23362
+  at: [9, 31]
+  layer: 2
 - tile: 8721
   at: [10, 30]
   layer: 1
@@ -504,6 +546,12 @@ tiles:
 - tile: 8756
   at: [10, 32]
   layer: 1
+- tile: 23362
+  at: [10, 30]
+  layer: 2
+- tile: 23362
+  at: [10, 31]
+  layer: 2
 - tile: 8721
   at: [11, 30]
   layer: 1
@@ -513,6 +561,12 @@ tiles:
 - tile: 8756
   at: [11, 32]
   layer: 1
+- tile: 23362
+  at: [11, 30]
+  layer: 2
+- tile: 23362
+  at: [11, 31]
+  layer: 2
 - tile: 8720
   at: [24, 26]
   layer: 1
@@ -639,6 +693,60 @@ tiles:
 - tile: 8757
   at: [30, 31]
   layer: 1
+- tile: 23365
+  at: [24, 26]
+  layer: 2
+- tile: 23362
+  at: [25, 26]
+  layer: 2
+- tile: 23362
+  at: [25, 30]
+  layer: 2
+- tile: 23362
+  at: [26, 26]
+  layer: 2
+- tile: 23362
+  at: [27, 26]
+  layer: 2
+- tile: 23362
+  at: [28, 26]
+  layer: 2
+- tile: 23362
+  at: [28, 30]
+  layer: 2
+- tile: 23362
+  at: [29, 26]
+  layer: 2
+- tile: 23362
+  at: [29, 30]
+  layer: 2
+- tile: 23366
+  at: [30, 26]
+  layer: 2
+- tile: 23363
+  at: [24, 27]
+  layer: 2
+- tile: 23364
+  at: [30, 27]
+  layer: 2
+- tile: 23363
+  at: [24, 28]
+  layer: 2
+- tile: 23364
+  at: [30, 28]
+  layer: 2
+- tile: 23363
+  at: [24, 29]
+  layer: 2
+- tile: 23364
+  at: [30, 29]
+  layer: 2
+- tile: 23363
+  at: [24, 30]
+  layer: 2
+- tile: 23364
+  at: [30, 30]
+  layer: 2
 - tile: 8720
   at: [50, 51]
   layer: 1
@@ -744,6 +852,48 @@ tiles:
 - tile: 8757
   at: [56, 55]
   layer: 1
+- tile: 23365
+  at: [50, 51]
+  layer: 2
+- tile: 23362
+  at: [51, 51]
+  layer: 2
+- tile: 23362
+  at: [51, 54]
+  layer: 2
+- tile: 23362
+  at: [52, 51]
+  layer: 2
+- tile: 23362
+  at: [53, 51]
+  layer: 2
+- tile: 23362
+  at: [54, 51]
+  layer: 2
+- tile: 23362
+  at: [54, 54]
+  layer: 2
+- tile: 23362
+  at: [55, 51]
+  layer: 2
+- tile: 23362
+  at: [55, 54]
+  layer: 2
+- tile: 23362
+  at: [56, 51]
+  layer: 2
+- tile: 23362
+  at: [56, 54]
+  layer: 2
+- tile: 23363
+  at: [50, 52]
+  layer: 2
+- tile: 23363
+  at: [50, 53]
+  layer: 2
+- tile: 23363
+  at: [50, 54]
+  layer: 2
 - tile: 8721
   at: [57, 52]
   layer: 1
@@ -753,6 +903,12 @@ tiles:
 - tile: 8756
   at: [57, 54]
   layer: 1
+- tile: 23362
+  at: [57, 52]
+  layer: 2
+- tile: 23362
+  at: [57, 53]
+  layer: 2
 - tile: 8721
   at: [58, 52]
   layer: 1
@@ -762,6 +918,12 @@ tiles:
 - tile: 8756
   at: [58, 54]
   layer: 1
+- tile: 23362
+  at: [58, 52]
+  layer: 2
+- tile: 23362
+  at: [58, 53]
+  layer: 2
 - tile: 8721
   at: [59, 52]
   layer: 1
@@ -771,6 +933,12 @@ tiles:
 - tile: 8756
   at: [59, 54]
   layer: 1
+- tile: 23362
+  at: [59, 52]
+  layer: 2
+- tile: 23362
+  at: [59, 53]
+  layer: 2
 - tile: 8721
   at: [60, 51]
   layer: 1
@@ -861,6 +1029,48 @@ tiles:
 - tile: 8757
   at: [65, 55]
   layer: 1
+- tile: 23362
+  at: [60, 51]
+  layer: 2
+- tile: 23362
+  at: [60, 54]
+  layer: 2
+- tile: 23362
+  at: [61, 51]
+  layer: 2
+- tile: 23362
+  at: [61, 54]
+  layer: 2
+- tile: 23362
+  at: [62, 51]
+  layer: 2
+- tile: 23362
+  at: [62, 54]
+  layer: 2
+- tile: 23362
+  at: [63, 51]
+  layer: 2
+- tile: 23362
+  at: [63, 54]
+  layer: 2
+- tile: 23362
+  at: [64, 51]
+  layer: 2
+- tile: 23362
+  at: [64, 54]
+  layer: 2
+- tile: 23366
+  at: [65, 51]
+  layer: 2
+- tile: 23364
+  at: [65, 52]
+  layer: 2
+- tile: 23364
+  at: [65, 53]
+  layer: 2
+- tile: 23364
+  at: [65, 54]
+  layer: 2
 - tile: 20193
   at: [45, 25]
   layer: 2
@@ -933,6 +1143,78 @@ tiles:
 - tile: 8305
   at: [24, 14]
   layer: 1
+- tile: 23368
+  at: [51, 52]
+  layer: 2
+- tile: 23376
+  at: [51, 53]
+  layer: 2
+- tile: 23369
+  at: [52, 52]
+  layer: 2
+- tile: 23377
+  at: [52, 53]
+  layer: 2
+- tile: 23368
+  at: [60, 53]
+  layer: 2
+- tile: 23376
+  at: [60, 54]
+  layer: 2
+- tile: 23369
+  at: [61, 53]
+  layer: 2
+- tile: 23377
+  at: [61, 54]
+  layer: 2
+- tile: 23368
+  at: [63, 52]
+  layer: 2
+- tile: 23376
+  at: [63, 53]
+  layer: 2
+- tile: 23369
+  at: [64, 52]
+  layer: 2
+- tile: 23377
+  at: [64, 53]
+  layer: 2
+- tile: 23368
+  at: [51, 52]
+  layer: 2
+- tile: 23376
+  at: [51, 53]
+  layer: 2
+- tile: 23369
+  at: [52, 52]
+  layer: 2
+- tile: 23377
+  at: [52, 53]
+  layer: 2
+- tile: 23368
+  at: [60, 53]
+  layer: 2
+- tile: 23376
+  at: [60, 54]
+  layer: 2
+- tile: 23369
+  at: [61, 53]
+  layer: 2
+- tile: 23377
+  at: [61, 54]
+  layer: 2
+- tile: 23368
+  at: [63, 52]
+  layer: 2
+- tile: 23376
+  at: [63, 53]
+  layer: 2
+- tile: 23369
+  at: [64, 52]
+  layer: 2
+- tile: 23377
+  at: [64, 53]
+  layer: 2
 - tile: 23178
   at: [31, 33]
   layer: 2

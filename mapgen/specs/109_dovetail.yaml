@@ -90,1357 +90,1357 @@ stamps:
 - stamp: tp_barrel_06
   at: [25, 11]
 tiles:
-- tile: 23368
+- tile: 23384
   at: [11, 3]
   layer: 2
-- tile: 23369
+- tile: 23385
   at: [22, 3]
   layer: 2
-- tile: 23370
+- tile: 23386
   at: [5, 4]
   layer: 2
-- tile: 23371
+- tile: 23387
   at: [6, 4]
   layer: 2
-- tile: 23372
+- tile: 23388
   at: [7, 4]
   layer: 2
-- tile: 23373
+- tile: 23389
   at: [8, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [9, 4]
   layer: 2
-- tile: 23372
+- tile: 23388
   at: [10, 4]
   layer: 2
-- tile: 23375
+- tile: 23391
   at: [11, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [12, 4]
   layer: 2
-- tile: 23376
+- tile: 23392
   at: [13, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [14, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [15, 4]
   layer: 2
-- tile: 23372
+- tile: 23388
   at: [16, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [17, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [18, 4]
   layer: 2
-- tile: 23377
+- tile: 23393
   at: [19, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [20, 4]
   layer: 2
-- tile: 23374
+- tile: 23390
   at: [21, 4]
   layer: 2
-- tile: 23378
+- tile: 23394
   at: [22, 4]
   layer: 2
-- tile: 23379
+- tile: 23395
   at: [23, 4]
   layer: 2
-- tile: 23380
+- tile: 23396
   at: [24, 4]
   layer: 2
-- tile: 23381
+- tile: 23397
   at: [4, 5]
   layer: 2
-- tile: 23382
+- tile: 23398
   at: [5, 5]
   layer: 0
-- tile: 23383
+- tile: 23399
   at: [6, 5]
   layer: 0
-- tile: 23384
+- tile: 23400
   at: [7, 5]
   layer: 0
-- tile: 23385
-  at: [8, 5]
-  layer: 0
-- tile: 23386
-  at: [8, 5]
-  layer: 2
-- tile: 23387
-  at: [9, 5]
-  layer: 0
-- tile: 23388
-  at: [9, 5]
-  layer: 2
-- tile: 23384
-  at: [10, 5]
-  layer: 0
-- tile: 23385
-  at: [11, 5]
-  layer: 0
-- tile: 23389
-  at: [11, 5]
-  layer: 2
-- tile: 23387
-  at: [12, 5]
-  layer: 0
-- tile: 23390
-  at: [12, 5]
-  layer: 2
-- tile: 23384
-  at: [13, 5]
-  layer: 0
-- tile: 23391
-  at: [13, 5]
-  layer: 2
-- tile: 23385
-  at: [14, 5]
-  layer: 0
-- tile: 23387
-  at: [15, 5]
-  layer: 0
-- tile: 23384
-  at: [16, 5]
-  layer: 0
-- tile: 23385
-  at: [17, 5]
-  layer: 0
-- tile: 23387
-  at: [18, 5]
-  layer: 0
-- tile: 23384
-  at: [19, 5]
-  layer: 0
-- tile: 23386
-  at: [19, 5]
-  layer: 2
-- tile: 23385
-  at: [20, 5]
-  layer: 0
-- tile: 23388
-  at: [20, 5]
-  layer: 2
-- tile: 23387
-  at: [21, 5]
-  layer: 0
-- tile: 23392
-  at: [22, 5]
-  layer: 0
-- tile: 23393
-  at: [22, 5]
-  layer: 2
-- tile: 23394
-  at: [23, 5]
-  layer: 0
-- tile: 23395
-  at: [23, 5]
-  layer: 2
-- tile: 23396
-  at: [24, 5]
-  layer: 2
-- tile: 23397
-  at: [25, 5]
-  layer: 2
-- tile: 23398
-  at: [26, 5]
-  layer: 2
-- tile: 23399
-  at: [3, 6]
-  layer: 2
-- tile: 23400
-  at: [4, 6]
-  layer: 0
 - tile: 23401
-  at: [5, 6]
+  at: [8, 5]
   layer: 0
 - tile: 23402
-  at: [6, 6]
-  layer: 0
+  at: [8, 5]
+  layer: 2
 - tile: 23403
-  at: [7, 6]
+  at: [9, 5]
   layer: 0
 - tile: 23404
-  at: [8, 6]
+  at: [9, 5]
+  layer: 2
+- tile: 23400
+  at: [10, 5]
+  layer: 0
+- tile: 23401
+  at: [11, 5]
   layer: 0
 - tile: 23405
-  at: [9, 6]
+  at: [11, 5]
+  layer: 2
+- tile: 23403
+  at: [12, 5]
   layer: 0
 - tile: 23406
-  at: [9, 6]
+  at: [12, 5]
   layer: 2
-- tile: 23403
-  at: [10, 6]
+- tile: 23400
+  at: [13, 5]
   layer: 0
 - tile: 23407
-  at: [10, 6]
+  at: [13, 5]
   layer: 2
+- tile: 23401
+  at: [14, 5]
+  layer: 0
+- tile: 23403
+  at: [15, 5]
+  layer: 0
+- tile: 23400
+  at: [16, 5]
+  layer: 0
+- tile: 23401
+  at: [17, 5]
+  layer: 0
+- tile: 23403
+  at: [18, 5]
+  layer: 0
+- tile: 23400
+  at: [19, 5]
+  layer: 0
+- tile: 23402
+  at: [19, 5]
+  layer: 2
+- tile: 23401
+  at: [20, 5]
+  layer: 0
 - tile: 23404
-  at: [11, 6]
+  at: [20, 5]
+  layer: 2
+- tile: 23403
+  at: [21, 5]
   layer: 0
 - tile: 23408
-  at: [11, 6]
-  layer: 2
-- tile: 23405
-  at: [12, 6]
+  at: [22, 5]
   layer: 0
 - tile: 23409
-  at: [12, 6]
-  layer: 2
-- tile: 23403
-  at: [13, 6]
-  layer: 0
-- tile: 23404
-  at: [14, 6]
-  layer: 0
-- tile: 23405
-  at: [15, 6]
-  layer: 0
-- tile: 23403
-  at: [16, 6]
-  layer: 0
-- tile: 23404
-  at: [17, 6]
-  layer: 0
-- tile: 23405
-  at: [18, 6]
-  layer: 0
-- tile: 23403
-  at: [19, 6]
-  layer: 0
-- tile: 23404
-  at: [20, 6]
-  layer: 0
-- tile: 23406
-  at: [20, 6]
-  layer: 2
-- tile: 23405
-  at: [21, 6]
-  layer: 0
-- tile: 23407
-  at: [21, 6]
+  at: [22, 5]
   layer: 2
 - tile: 23410
-  at: [22, 6]
+  at: [23, 5]
   layer: 0
 - tile: 23411
-  at: [22, 6]
+  at: [23, 5]
   layer: 2
-- tile: 23401
-  at: [23, 6]
-  layer: 0
 - tile: 23412
-  at: [23, 6]
+  at: [24, 5]
   layer: 2
 - tile: 23413
-  at: [24, 6]
-  layer: 0
+  at: [25, 5]
+  layer: 2
 - tile: 23414
-  at: [25, 6]
-  layer: 0
+  at: [26, 5]
+  layer: 2
 - tile: 23415
-  at: [26, 6]
+  at: [3, 6]
   layer: 2
 - tile: 23416
-  at: [27, 6]
-  layer: 2
+  at: [4, 6]
+  layer: 0
 - tile: 23417
-  at: [2, 7]
-  layer: 2
+  at: [5, 6]
+  layer: 0
 - tile: 23418
-  at: [3, 7]
-  layer: 2
+  at: [6, 6]
+  layer: 0
 - tile: 23419
-  at: [4, 7]
+  at: [7, 6]
   layer: 0
 - tile: 23420
-  at: [5, 7]
+  at: [8, 6]
   layer: 0
 - tile: 23421
-  at: [6, 7]
+  at: [9, 6]
   layer: 0
 - tile: 23422
-  at: [7, 7]
+  at: [9, 6]
+  layer: 2
+- tile: 23419
+  at: [10, 6]
   layer: 0
 - tile: 23423
-  at: [8, 7]
+  at: [10, 6]
+  layer: 2
+- tile: 23420
+  at: [11, 6]
   layer: 0
 - tile: 23424
-  at: [9, 7]
-  layer: 0
-- tile: 23422
-  at: [10, 7]
+  at: [11, 6]
+  layer: 2
+- tile: 23421
+  at: [12, 6]
   layer: 0
 - tile: 23425
-  at: [10, 7]
+  at: [12, 6]
   layer: 2
-- tile: 23423
-  at: [11, 7]
+- tile: 23419
+  at: [13, 6]
   layer: 0
-- tile: 23426
-  at: [11, 7]
+- tile: 23420
+  at: [14, 6]
+  layer: 0
+- tile: 23421
+  at: [15, 6]
+  layer: 0
+- tile: 23419
+  at: [16, 6]
+  layer: 0
+- tile: 23420
+  at: [17, 6]
+  layer: 0
+- tile: 23421
+  at: [18, 6]
+  layer: 0
+- tile: 23419
+  at: [19, 6]
+  layer: 0
+- tile: 23420
+  at: [20, 6]
+  layer: 0
+- tile: 23422
+  at: [20, 6]
   layer: 2
-- tile: 23424
-  at: [12, 7]
+- tile: 23421
+  at: [21, 6]
+  layer: 0
+- tile: 23423
+  at: [21, 6]
+  layer: 2
+- tile: 23426
+  at: [22, 6]
   layer: 0
 - tile: 23427
-  at: [12, 7]
+  at: [22, 6]
   layer: 2
-- tile: 23422
-  at: [13, 7]
+- tile: 23417
+  at: [23, 6]
   layer: 0
-- tile: 23423
-  at: [14, 7]
-  layer: 0
-- tile: 23424
-  at: [15, 7]
-  layer: 0
-- tile: 23422
-  at: [16, 7]
-  layer: 0
-- tile: 23423
-  at: [17, 7]
-  layer: 0
-- tile: 23424
-  at: [18, 7]
-  layer: 0
-- tile: 23422
-  at: [19, 7]
-  layer: 0
-- tile: 23423
-  at: [20, 7]
-  layer: 0
-- tile: 23424
-  at: [21, 7]
-  layer: 0
-- tile: 23425
-  at: [21, 7]
-  layer: 2
 - tile: 23428
-  at: [22, 7]
-  layer: 0
-- tile: 23429
-  at: [22, 7]
+  at: [23, 6]
   layer: 2
+- tile: 23429
+  at: [24, 6]
+  layer: 0
 - tile: 23430
-  at: [23, 7]
+  at: [25, 6]
   layer: 0
 - tile: 23431
-  at: [23, 7]
+  at: [26, 6]
   layer: 2
 - tile: 23432
-  at: [24, 7]
-  layer: 0
+  at: [27, 6]
+  layer: 2
 - tile: 23433
-  at: [25, 7]
-  layer: 0
+  at: [2, 7]
+  layer: 2
 - tile: 23434
-  at: [26, 7]
-  layer: 0
+  at: [3, 7]
+  layer: 2
 - tile: 23435
-  at: [27, 7]
-  layer: 2
+  at: [4, 7]
+  layer: 0
 - tile: 23436
-  at: [28, 7]
-  layer: 2
+  at: [5, 7]
+  layer: 0
 - tile: 23437
-  at: [2, 8]
-  layer: 2
+  at: [6, 7]
+  layer: 0
 - tile: 23438
-  at: [3, 8]
+  at: [7, 7]
   layer: 0
 - tile: 23439
-  at: [4, 8]
+  at: [8, 7]
   layer: 0
 - tile: 23440
-  at: [5, 8]
+  at: [9, 7]
+  layer: 0
+- tile: 23438
+  at: [10, 7]
   layer: 0
 - tile: 23441
-  at: [6, 8]
+  at: [10, 7]
+  layer: 2
+- tile: 23439
+  at: [11, 7]
   layer: 0
 - tile: 23442
-  at: [7, 8]
+  at: [11, 7]
+  layer: 2
+- tile: 23440
+  at: [12, 7]
   layer: 0
 - tile: 23443
-  at: [8, 8]
+  at: [12, 7]
+  layer: 2
+- tile: 23438
+  at: [13, 7]
   layer: 0
+- tile: 23439
+  at: [14, 7]
+  layer: 0
+- tile: 23440
+  at: [15, 7]
+  layer: 0
+- tile: 23438
+  at: [16, 7]
+  layer: 0
+- tile: 23439
+  at: [17, 7]
+  layer: 0
+- tile: 23440
+  at: [18, 7]
+  layer: 0
+- tile: 23438
+  at: [19, 7]
+  layer: 0
+- tile: 23439
+  at: [20, 7]
+  layer: 0
+- tile: 23440
+  at: [21, 7]
+  layer: 0
+- tile: 23441
+  at: [21, 7]
+  layer: 2
 - tile: 23444
-  at: [9, 8]
-  layer: 0
-- tile: 23442
-  at: [10, 8]
+  at: [22, 7]
   layer: 0
 - tile: 23445
-  at: [10, 8]
+  at: [22, 7]
   layer: 2
-- tile: 23443
-  at: [11, 8]
-  layer: 0
 - tile: 23446
-  at: [11, 8]
-  layer: 2
-- tile: 23444
-  at: [12, 8]
+  at: [23, 7]
   layer: 0
 - tile: 23447
-  at: [12, 8]
+  at: [23, 7]
   layer: 2
-- tile: 23442
-  at: [13, 8]
-  layer: 0
 - tile: 23448
-  at: [13, 8]
-  layer: 2
-- tile: 23443
-  at: [14, 8]
-  layer: 0
-- tile: 23448
-  at: [14, 8]
-  layer: 2
-- tile: 23444
-  at: [15, 8]
-  layer: 0
-- tile: 23448
-  at: [15, 8]
-  layer: 2
-- tile: 23442
-  at: [16, 8]
-  layer: 0
-- tile: 23448
-  at: [16, 8]
-  layer: 2
-- tile: 23443
-  at: [17, 8]
-  layer: 0
-- tile: 23448
-  at: [17, 8]
-  layer: 2
-- tile: 23444
-  at: [18, 8]
-  layer: 0
-- tile: 23448
-  at: [18, 8]
-  layer: 2
-- tile: 23442
-  at: [19, 8]
-  layer: 0
-- tile: 23443
-  at: [20, 8]
-  layer: 0
-- tile: 23448
-  at: [20, 8]
-  layer: 2
-- tile: 23444
-  at: [21, 8]
+  at: [24, 7]
   layer: 0
 - tile: 23449
-  at: [21, 8]
-  layer: 2
+  at: [25, 7]
+  layer: 0
 - tile: 23450
-  at: [22, 8]
+  at: [26, 7]
   layer: 0
 - tile: 23451
-  at: [22, 8]
+  at: [27, 7]
   layer: 2
 - tile: 23452
-  at: [23, 8]
-  layer: 0
+  at: [28, 7]
+  layer: 2
 - tile: 23453
-  at: [23, 8]
+  at: [2, 8]
   layer: 2
 - tile: 23454
-  at: [24, 8]
+  at: [3, 8]
+  layer: 0
+- tile: 23455
+  at: [4, 8]
   layer: 0
 - tile: 23456
-  at: [25, 8]
+  at: [5, 8]
+  layer: 0
+- tile: 23457
+  at: [6, 8]
   layer: 0
 - tile: 23458
-  at: [26, 8]
+  at: [7, 8]
   layer: 0
 - tile: 23459
-  at: [27, 8]
+  at: [8, 8]
   layer: 0
 - tile: 23460
-  at: [28, 8]
-  layer: 2
+  at: [9, 8]
+  layer: 0
+- tile: 23458
+  at: [10, 8]
+  layer: 0
 - tile: 23461
-  at: [29, 8]
+  at: [10, 8]
   layer: 2
+- tile: 23459
+  at: [11, 8]
+  layer: 0
 - tile: 23462
-  at: [2, 9]
+  at: [11, 8]
   layer: 2
+- tile: 23460
+  at: [12, 8]
+  layer: 0
 - tile: 23463
-  at: [3, 9]
+  at: [12, 8]
+  layer: 2
+- tile: 23458
+  at: [13, 8]
   layer: 0
 - tile: 23464
-  at: [4, 9]
+  at: [13, 8]
+  layer: 2
+- tile: 23459
+  at: [14, 8]
+  layer: 0
+- tile: 23464
+  at: [14, 8]
+  layer: 2
+- tile: 23460
+  at: [15, 8]
+  layer: 0
+- tile: 23464
+  at: [15, 8]
+  layer: 2
+- tile: 23458
+  at: [16, 8]
+  layer: 0
+- tile: 23464
+  at: [16, 8]
+  layer: 2
+- tile: 23459
+  at: [17, 8]
+  layer: 0
+- tile: 23464
+  at: [17, 8]
+  layer: 2
+- tile: 23460
+  at: [18, 8]
+  layer: 0
+- tile: 23464
+  at: [18, 8]
+  layer: 2
+- tile: 23458
+  at: [19, 8]
+  layer: 0
+- tile: 23459
+  at: [20, 8]
+  layer: 0
+- tile: 23464
+  at: [20, 8]
+  layer: 2
+- tile: 23460
+  at: [21, 8]
   layer: 0
 - tile: 23465
-  at: [5, 9]
-  layer: 0
-- tile: 23401
-  at: [6, 9]
-  layer: 0
+  at: [21, 8]
+  layer: 2
 - tile: 23466
-  at: [7, 9]
+  at: [22, 8]
   layer: 0
 - tile: 23467
-  at: [8, 9]
-  layer: 0
+  at: [22, 8]
+  layer: 2
 - tile: 23468
-  at: [9, 9]
-  layer: 0
-- tile: 23466
-  at: [10, 9]
+  at: [23, 8]
   layer: 0
 - tile: 23469
-  at: [11, 9]
-  layer: 0
-- tile: 23470
-  at: [11, 9]
+  at: [23, 8]
   layer: 2
-- tile: 23468
-  at: [12, 9]
-  layer: 0
-- tile: 23466
-  at: [13, 9]
-  layer: 0
-- tile: 23467
-  at: [14, 9]
-  layer: 0
-- tile: 23468
-  at: [15, 9]
-  layer: 0
-- tile: 23471
-  at: [16, 9]
+- tile: 23470
+  at: [24, 8]
   layer: 0
 - tile: 23472
-  at: [17, 9]
-  layer: 0
-- tile: 23468
-  at: [18, 9]
-  layer: 0
-- tile: 23466
-  at: [19, 9]
-  layer: 0
-- tile: 23467
-  at: [20, 9]
-  layer: 0
-- tile: 23468
-  at: [21, 9]
-  layer: 0
-- tile: 23473
-  at: [22, 9]
+  at: [25, 8]
   layer: 0
 - tile: 23474
-  at: [22, 9]
-  layer: 2
+  at: [26, 8]
+  layer: 0
 - tile: 23475
-  at: [23, 9]
+  at: [27, 8]
   layer: 0
 - tile: 23476
-  at: [24, 9]
-  layer: 0
+  at: [28, 8]
+  layer: 2
 - tile: 23477
-  at: [25, 9]
-  layer: 0
+  at: [29, 8]
+  layer: 2
 - tile: 23478
-  at: [25, 9]
+  at: [2, 9]
   layer: 2
 - tile: 23479
-  at: [26, 9]
+  at: [3, 9]
   layer: 0
 - tile: 23480
-  at: [26, 9]
-  layer: 2
+  at: [4, 9]
+  layer: 0
 - tile: 23481
-  at: [27, 9]
+  at: [5, 9]
+  layer: 0
+- tile: 23417
+  at: [6, 9]
   layer: 0
 - tile: 23482
-  at: [27, 9]
-  layer: 2
+  at: [7, 9]
+  layer: 0
 - tile: 23483
-  at: [28, 9]
+  at: [8, 9]
   layer: 0
 - tile: 23484
-  at: [28, 9]
-  layer: 2
+  at: [9, 9]
+  layer: 0
+- tile: 23482
+  at: [10, 9]
+  layer: 0
 - tile: 23485
-  at: [29, 9]
+  at: [11, 9]
   layer: 0
 - tile: 23486
-  at: [29, 9]
+  at: [11, 9]
   layer: 2
+- tile: 23484
+  at: [12, 9]
+  layer: 0
+- tile: 23482
+  at: [13, 9]
+  layer: 0
+- tile: 23483
+  at: [14, 9]
+  layer: 0
+- tile: 23484
+  at: [15, 9]
+  layer: 0
 - tile: 23487
-  at: [30, 9]
-  layer: 2
+  at: [16, 9]
+  layer: 0
 - tile: 23488
-  at: [31, 9]
-  layer: 2
+  at: [17, 9]
+  layer: 0
+- tile: 23484
+  at: [18, 9]
+  layer: 0
+- tile: 23482
+  at: [19, 9]
+  layer: 0
+- tile: 23483
+  at: [20, 9]
+  layer: 0
+- tile: 23484
+  at: [21, 9]
+  layer: 0
 - tile: 23489
-  at: [32, 9]
-  layer: 2
+  at: [22, 9]
+  layer: 0
 - tile: 23490
-  at: [2, 10]
+  at: [22, 9]
   layer: 2
 - tile: 23491
-  at: [3, 10]
+  at: [23, 9]
   layer: 0
 - tile: 23492
-  at: [4, 10]
+  at: [24, 9]
   layer: 0
 - tile: 23493
-  at: [5, 10]
-  layer: 0
-- tile: 23401
-  at: [6, 10]
+  at: [25, 9]
   layer: 0
 - tile: 23494
-  at: [7, 10]
-  layer: 0
-- tile: 23495
-  at: [8, 10]
-  layer: 0
-- tile: 23496
-  at: [9, 10]
-  layer: 0
-- tile: 23494
-  at: [10, 10]
-  layer: 0
-- tile: 23497
-  at: [10, 10]
+  at: [25, 9]
   layer: 2
 - tile: 23495
-  at: [11, 10]
+  at: [26, 9]
+  layer: 0
+- tile: 23496
+  at: [26, 9]
+  layer: 2
+- tile: 23497
+  at: [27, 9]
   layer: 0
 - tile: 23498
-  at: [11, 10]
+  at: [27, 9]
   layer: 2
-- tile: 23496
-  at: [12, 10]
-  layer: 0
 - tile: 23499
-  at: [12, 10]
-  layer: 2
-- tile: 23494
-  at: [13, 10]
-  layer: 0
-- tile: 23495
-  at: [14, 10]
-  layer: 0
-- tile: 23496
-  at: [15, 10]
+  at: [28, 9]
   layer: 0
 - tile: 23500
-  at: [16, 10]
-  layer: 0
-- tile: 23501
-  at: [17, 10]
-  layer: 0
-- tile: 23496
-  at: [18, 10]
-  layer: 0
-- tile: 23494
-  at: [19, 10]
-  layer: 0
-- tile: 23495
-  at: [20, 10]
-  layer: 0
-- tile: 23496
-  at: [21, 10]
-  layer: 0
-- tile: 23497
-  at: [21, 10]
+  at: [28, 9]
   layer: 2
-- tile: 23502
-  at: [22, 10]
+- tile: 23501
+  at: [29, 9]
   layer: 0
+- tile: 23502
+  at: [29, 9]
+  layer: 2
 - tile: 23503
-  at: [22, 10]
+  at: [30, 9]
   layer: 2
 - tile: 23504
-  at: [23, 10]
-  layer: 0
-- tile: 23505
-  at: [23, 10]
+  at: [31, 9]
   layer: 2
-- tile: 23401
-  at: [24, 10]
-  layer: 0
+- tile: 23505
+  at: [32, 9]
+  layer: 2
 - tile: 23506
-  at: [25, 10]
-  layer: 0
+  at: [2, 10]
+  layer: 2
 - tile: 23507
-  at: [26, 10]
+  at: [3, 10]
   layer: 0
 - tile: 23508
-  at: [27, 10]
+  at: [4, 10]
   layer: 0
 - tile: 23509
-  at: [28, 10]
+  at: [5, 10]
+  layer: 0
+- tile: 23417
+  at: [6, 10]
   layer: 0
 - tile: 23510
-  at: [29, 10]
+  at: [7, 10]
   layer: 0
 - tile: 23511
-  at: [30, 10]
+  at: [8, 10]
   layer: 0
 - tile: 23512
-  at: [31, 10]
-  layer: 2
+  at: [9, 10]
+  layer: 0
+- tile: 23510
+  at: [10, 10]
+  layer: 0
 - tile: 23513
-  at: [32, 10]
+  at: [10, 10]
   layer: 2
+- tile: 23511
+  at: [11, 10]
+  layer: 0
 - tile: 23514
-  at: [33, 10]
+  at: [11, 10]
   layer: 2
+- tile: 23512
+  at: [12, 10]
+  layer: 0
 - tile: 23515
-  at: [2, 11]
+  at: [12, 10]
   layer: 2
+- tile: 23510
+  at: [13, 10]
+  layer: 0
+- tile: 23511
+  at: [14, 10]
+  layer: 0
+- tile: 23512
+  at: [15, 10]
+  layer: 0
 - tile: 23516
-  at: [3, 11]
+  at: [16, 10]
   layer: 0
 - tile: 23517
-  at: [4, 11]
+  at: [17, 10]
   layer: 0
-- tile: 23401
-  at: [5, 11]
+- tile: 23512
+  at: [18, 10]
   layer: 0
+- tile: 23510
+  at: [19, 10]
+  layer: 0
+- tile: 23511
+  at: [20, 10]
+  layer: 0
+- tile: 23512
+  at: [21, 10]
+  layer: 0
+- tile: 23513
+  at: [21, 10]
+  layer: 2
 - tile: 23518
-  at: [6, 11]
+  at: [22, 10]
   layer: 0
 - tile: 23519
-  at: [7, 11]
-  layer: 0
+  at: [22, 10]
+  layer: 2
 - tile: 23520
-  at: [8, 11]
+  at: [23, 10]
   layer: 0
 - tile: 23521
-  at: [9, 11]
-  layer: 0
-- tile: 23519
-  at: [10, 11]
+  at: [23, 10]
+  layer: 2
+- tile: 23417
+  at: [24, 10]
   layer: 0
 - tile: 23522
-  at: [10, 11]
-  layer: 2
-- tile: 23520
-  at: [11, 11]
+  at: [25, 10]
   layer: 0
 - tile: 23523
-  at: [11, 11]
-  layer: 2
-- tile: 23521
-  at: [12, 11]
+  at: [26, 10]
   layer: 0
 - tile: 23524
-  at: [12, 11]
-  layer: 2
-- tile: 23519
-  at: [13, 11]
-  layer: 0
-- tile: 23520
-  at: [14, 11]
-  layer: 0
-- tile: 23521
-  at: [15, 11]
-  layer: 0
-- tile: 23519
-  at: [16, 11]
-  layer: 0
-- tile: 23520
-  at: [17, 11]
-  layer: 0
-- tile: 23521
-  at: [18, 11]
-  layer: 0
-- tile: 23519
-  at: [19, 11]
-  layer: 0
-- tile: 23520
-  at: [20, 11]
-  layer: 0
-- tile: 23521
-  at: [21, 11]
+  at: [27, 10]
   layer: 0
 - tile: 23525
-  at: [22, 11]
+  at: [28, 10]
+  layer: 0
+- tile: 23526
+  at: [29, 10]
   layer: 0
 - tile: 23527
-  at: [23, 11]
+  at: [30, 10]
   layer: 0
+- tile: 23528
+  at: [31, 10]
+  layer: 2
 - tile: 23529
-  at: [24, 11]
-  layer: 0
+  at: [32, 10]
+  layer: 2
 - tile: 23530
-  at: [25, 11]
-  layer: 0
+  at: [33, 10]
+  layer: 2
 - tile: 23531
-  at: [26, 11]
-  layer: 0
-- tile: 23476
-  at: [27, 11]
-  layer: 0
+  at: [2, 11]
+  layer: 2
 - tile: 23532
-  at: [28, 11]
+  at: [3, 11]
   layer: 0
 - tile: 23533
-  at: [29, 11]
+  at: [4, 11]
+  layer: 0
+- tile: 23417
+  at: [5, 11]
   layer: 0
 - tile: 23534
-  at: [30, 11]
-  layer: 2
+  at: [6, 11]
+  layer: 0
 - tile: 23535
-  at: [31, 11]
-  layer: 2
+  at: [7, 11]
+  layer: 0
 - tile: 23536
-  at: [2, 12]
-  layer: 2
+  at: [8, 11]
+  layer: 0
 - tile: 23537
-  at: [3, 12]
+  at: [9, 11]
+  layer: 0
+- tile: 23535
+  at: [10, 11]
   layer: 0
 - tile: 23538
-  at: [4, 12]
-  layer: 0
-- tile: 23401
-  at: [5, 12]
+  at: [10, 11]
+  layer: 2
+- tile: 23536
+  at: [11, 11]
   layer: 0
 - tile: 23539
-  at: [6, 12]
+  at: [11, 11]
+  layer: 2
+- tile: 23537
+  at: [12, 11]
   layer: 0
 - tile: 23540
-  at: [7, 12]
+  at: [12, 11]
+  layer: 2
+- tile: 23535
+  at: [13, 11]
+  layer: 0
+- tile: 23536
+  at: [14, 11]
+  layer: 0
+- tile: 23537
+  at: [15, 11]
+  layer: 0
+- tile: 23535
+  at: [16, 11]
+  layer: 0
+- tile: 23536
+  at: [17, 11]
+  layer: 0
+- tile: 23537
+  at: [18, 11]
+  layer: 0
+- tile: 23535
+  at: [19, 11]
+  layer: 0
+- tile: 23536
+  at: [20, 11]
+  layer: 0
+- tile: 23537
+  at: [21, 11]
   layer: 0
 - tile: 23541
-  at: [8, 12]
-  layer: 0
-- tile: 23542
-  at: [9, 12]
+  at: [22, 11]
   layer: 0
 - tile: 23543
-  at: [9, 12]
-  layer: 2
-- tile: 23540
-  at: [10, 12]
-  layer: 0
-- tile: 23544
-  at: [10, 12]
-  layer: 2
-- tile: 23541
-  at: [11, 12]
+  at: [23, 11]
   layer: 0
 - tile: 23545
-  at: [11, 12]
-  layer: 2
-- tile: 23542
-  at: [12, 12]
+  at: [24, 11]
   layer: 0
 - tile: 23546
-  at: [12, 12]
-  layer: 2
-- tile: 23540
-  at: [13, 12]
-  layer: 0
-- tile: 23541
-  at: [14, 12]
-  layer: 0
-- tile: 23542
-  at: [15, 12]
-  layer: 0
-- tile: 23540
-  at: [16, 12]
-  layer: 0
-- tile: 23541
-  at: [17, 12]
-  layer: 0
-- tile: 23542
-  at: [18, 12]
+  at: [25, 11]
   layer: 0
 - tile: 23547
-  at: [19, 12]
+  at: [26, 11]
+  layer: 0
+- tile: 23492
+  at: [27, 11]
   layer: 0
 - tile: 23548
-  at: [20, 12]
+  at: [28, 11]
   layer: 0
-- tile: 23543
-  at: [20, 12]
-  layer: 2
-- tile: 23542
-  at: [21, 12]
-  layer: 0
-- tile: 23544
-  at: [21, 12]
-  layer: 2
 - tile: 23549
-  at: [22, 12]
+  at: [29, 11]
   layer: 0
 - tile: 23550
-  at: [22, 12]
+  at: [30, 11]
   layer: 2
 - tile: 23551
-  at: [23, 12]
-  layer: 0
+  at: [31, 11]
+  layer: 2
 - tile: 23552
-  at: [23, 12]
+  at: [2, 12]
   layer: 2
 - tile: 23553
-  at: [24, 12]
+  at: [3, 12]
   layer: 0
 - tile: 23554
-  at: [25, 12]
+  at: [4, 12]
+  layer: 0
+- tile: 23417
+  at: [5, 12]
   layer: 0
 - tile: 23555
-  at: [26, 12]
-  layer: 0
-- tile: 23516
-  at: [27, 12]
+  at: [6, 12]
   layer: 0
 - tile: 23556
-  at: [28, 12]
+  at: [7, 12]
+  layer: 0
+- tile: 23557
+  at: [8, 12]
+  layer: 0
+- tile: 23558
+  at: [9, 12]
+  layer: 0
+- tile: 23559
+  at: [9, 12]
+  layer: 2
+- tile: 23556
+  at: [10, 12]
+  layer: 0
+- tile: 23560
+  at: [10, 12]
   layer: 2
 - tile: 23557
-  at: [29, 12]
+  at: [11, 12]
+  layer: 0
+- tile: 23561
+  at: [11, 12]
   layer: 2
 - tile: 23558
-  at: [30, 12]
-  layer: 2
-- tile: 23559
-  at: [31, 12]
-  layer: 2
-- tile: 23560
-  at: [2, 13]
-  layer: 2
-- tile: 23561
-  at: [3, 13]
-  layer: 2
+  at: [12, 12]
+  layer: 0
 - tile: 23562
-  at: [4, 13]
+  at: [12, 12]
+  layer: 2
+- tile: 23556
+  at: [13, 12]
+  layer: 0
+- tile: 23557
+  at: [14, 12]
+  layer: 0
+- tile: 23558
+  at: [15, 12]
+  layer: 0
+- tile: 23556
+  at: [16, 12]
+  layer: 0
+- tile: 23557
+  at: [17, 12]
+  layer: 0
+- tile: 23558
+  at: [18, 12]
   layer: 0
 - tile: 23563
-  at: [5, 13]
+  at: [19, 12]
   layer: 0
 - tile: 23564
-  at: [6, 13]
+  at: [20, 12]
   layer: 0
+- tile: 23559
+  at: [20, 12]
+  layer: 2
+- tile: 23558
+  at: [21, 12]
+  layer: 0
+- tile: 23560
+  at: [21, 12]
+  layer: 2
 - tile: 23565
-  at: [7, 13]
+  at: [22, 12]
   layer: 0
 - tile: 23566
-  at: [8, 13]
-  layer: 0
+  at: [22, 12]
+  layer: 2
 - tile: 23567
-  at: [9, 13]
+  at: [23, 12]
   layer: 0
 - tile: 23568
-  at: [9, 13]
+  at: [23, 12]
   layer: 2
-- tile: 23565
-  at: [10, 13]
-  layer: 0
-- tile: 23566
-  at: [11, 13]
-  layer: 0
 - tile: 23569
-  at: [11, 13]
-  layer: 2
-- tile: 23567
-  at: [12, 13]
+  at: [24, 12]
   layer: 0
 - tile: 23570
-  at: [12, 13]
-  layer: 2
-- tile: 23565
-  at: [13, 13]
-  layer: 0
-- tile: 23566
-  at: [14, 13]
-  layer: 0
-- tile: 23567
-  at: [15, 13]
-  layer: 0
-- tile: 23565
-  at: [16, 13]
-  layer: 0
-- tile: 23566
-  at: [17, 13]
-  layer: 0
-- tile: 23567
-  at: [18, 13]
+  at: [25, 12]
   layer: 0
 - tile: 23571
-  at: [19, 13]
+  at: [26, 12]
+  layer: 0
+- tile: 23532
+  at: [27, 12]
   layer: 0
 - tile: 23572
-  at: [20, 13]
-  layer: 0
-- tile: 23568
-  at: [20, 13]
+  at: [28, 12]
   layer: 2
-- tile: 23567
-  at: [21, 13]
-  layer: 0
 - tile: 23573
-  at: [22, 13]
-  layer: 0
+  at: [29, 12]
+  layer: 2
 - tile: 23574
-  at: [22, 13]
+  at: [30, 12]
   layer: 2
 - tile: 23575
-  at: [23, 13]
-  layer: 0
+  at: [31, 12]
+  layer: 2
 - tile: 23576
-  at: [23, 13]
+  at: [2, 13]
   layer: 2
 - tile: 23577
-  at: [24, 13]
-  layer: 0
+  at: [3, 13]
+  layer: 2
 - tile: 23578
-  at: [25, 13]
+  at: [4, 13]
   layer: 0
 - tile: 23579
-  at: [26, 13]
+  at: [5, 13]
   layer: 0
 - tile: 23580
-  at: [27, 13]
+  at: [6, 13]
+  layer: 0
+- tile: 23581
+  at: [7, 13]
+  layer: 0
+- tile: 23582
+  at: [8, 13]
+  layer: 0
+- tile: 23583
+  at: [9, 13]
+  layer: 0
+- tile: 23584
+  at: [9, 13]
   layer: 2
 - tile: 23581
-  at: [28, 13]
-  layer: 2
+  at: [10, 13]
+  layer: 0
 - tile: 23582
-  at: [29, 13]
+  at: [11, 13]
+  layer: 0
+- tile: 23585
+  at: [11, 13]
   layer: 2
 - tile: 23583
-  at: [2, 14]
-  layer: 2
-- tile: 23584
-  at: [3, 14]
-  layer: 2
-- tile: 23585
-  at: [4, 14]
+  at: [12, 13]
   layer: 0
 - tile: 23586
-  at: [5, 14]
+  at: [12, 13]
+  layer: 2
+- tile: 23581
+  at: [13, 13]
+  layer: 0
+- tile: 23582
+  at: [14, 13]
+  layer: 0
+- tile: 23583
+  at: [15, 13]
+  layer: 0
+- tile: 23581
+  at: [16, 13]
+  layer: 0
+- tile: 23582
+  at: [17, 13]
+  layer: 0
+- tile: 23583
+  at: [18, 13]
   layer: 0
 - tile: 23587
-  at: [6, 14]
+  at: [19, 13]
   layer: 0
 - tile: 23588
-  at: [7, 14]
+  at: [20, 13]
+  layer: 0
+- tile: 23584
+  at: [20, 13]
+  layer: 2
+- tile: 23583
+  at: [21, 13]
   layer: 0
 - tile: 23589
-  at: [8, 14]
+  at: [22, 13]
   layer: 0
 - tile: 23590
-  at: [9, 14]
-  layer: 0
+  at: [22, 13]
+  layer: 2
 - tile: 23591
-  at: [9, 14]
-  layer: 2
-- tile: 23588
-  at: [10, 14]
-  layer: 0
-- tile: 23589
-  at: [11, 14]
-  layer: 0
-- tile: 23389
-  at: [11, 14]
-  layer: 2
-- tile: 23590
-  at: [12, 14]
+  at: [23, 13]
   layer: 0
 - tile: 23592
-  at: [12, 14]
+  at: [23, 13]
   layer: 2
-- tile: 23588
-  at: [13, 14]
-  layer: 0
-- tile: 23589
-  at: [14, 14]
-  layer: 0
-- tile: 23590
-  at: [15, 14]
-  layer: 0
-- tile: 23588
-  at: [16, 14]
-  layer: 0
-- tile: 23589
-  at: [17, 14]
-  layer: 0
-- tile: 23590
-  at: [18, 14]
-  layer: 0
-- tile: 23588
-  at: [19, 14]
-  layer: 0
-- tile: 23589
-  at: [20, 14]
-  layer: 0
-- tile: 23590
-  at: [21, 14]
-  layer: 0
 - tile: 23593
-  at: [22, 14]
+  at: [24, 13]
   layer: 0
-- tile: 23393
-  at: [22, 14]
-  layer: 2
 - tile: 23594
-  at: [23, 14]
+  at: [25, 13]
   layer: 0
 - tile: 23595
-  at: [23, 14]
-  layer: 2
-- tile: 23596
-  at: [24, 14]
+  at: [26, 13]
   layer: 0
+- tile: 23596
+  at: [27, 13]
+  layer: 2
 - tile: 23597
-  at: [24, 14]
+  at: [28, 13]
   layer: 2
 - tile: 23598
-  at: [25, 14]
-  layer: 0
+  at: [29, 13]
+  layer: 2
 - tile: 23599
-  at: [26, 14]
+  at: [2, 14]
   layer: 2
 - tile: 23600
-  at: [27, 14]
+  at: [3, 14]
   layer: 2
 - tile: 23601
-  at: [28, 14]
-  layer: 2
+  at: [4, 14]
+  layer: 0
 - tile: 23602
-  at: [3, 15]
-  layer: 2
+  at: [5, 14]
+  layer: 0
 - tile: 23603
-  at: [4, 15]
+  at: [6, 14]
+  layer: 0
+- tile: 23604
+  at: [7, 14]
+  layer: 0
+- tile: 23605
+  at: [8, 14]
+  layer: 0
+- tile: 23606
+  at: [9, 14]
+  layer: 0
+- tile: 23607
+  at: [9, 14]
   layer: 2
 - tile: 23604
-  at: [5, 15]
-  layer: 0
-- tile: 23516
-  at: [6, 15]
+  at: [10, 14]
   layer: 0
 - tile: 23605
-  at: [7, 15]
+  at: [11, 14]
+  layer: 0
+- tile: 23405
+  at: [11, 14]
+  layer: 2
+- tile: 23606
+  at: [12, 14]
+  layer: 0
+- tile: 23608
+  at: [12, 14]
+  layer: 2
+- tile: 23604
+  at: [13, 14]
+  layer: 0
+- tile: 23605
+  at: [14, 14]
   layer: 0
 - tile: 23606
-  at: [8, 15]
+  at: [15, 14]
   layer: 0
-- tile: 23607
-  at: [8, 15]
-  layer: 2
-- tile: 23608
-  at: [9, 15]
+- tile: 23604
+  at: [16, 14]
+  layer: 0
+- tile: 23605
+  at: [17, 14]
+  layer: 0
+- tile: 23606
+  at: [18, 14]
+  layer: 0
+- tile: 23604
+  at: [19, 14]
+  layer: 0
+- tile: 23605
+  at: [20, 14]
+  layer: 0
+- tile: 23606
+  at: [21, 14]
   layer: 0
 - tile: 23609
-  at: [9, 15]
+  at: [22, 14]
+  layer: 0
+- tile: 23409
+  at: [22, 14]
   layer: 2
-- tile: 23605
-  at: [10, 15]
-  layer: 0
-- tile: 23606
-  at: [11, 15]
-  layer: 0
-- tile: 23408
-  at: [11, 15]
-  layer: 2
-- tile: 23385
-  at: [12, 15]
-  layer: 0
 - tile: 23610
-  at: [12, 15]
-  layer: 2
-- tile: 23605
-  at: [13, 15]
+  at: [23, 14]
   layer: 0
 - tile: 23611
-  at: [13, 15]
+  at: [23, 14]
   layer: 2
-- tile: 23606
-  at: [14, 15]
-  layer: 0
-- tile: 23385
-  at: [15, 15]
-  layer: 0
-- tile: 23605
-  at: [16, 15]
-  layer: 0
-- tile: 23606
-  at: [17, 15]
-  layer: 0
-- tile: 23385
-  at: [18, 15]
-  layer: 0
-- tile: 23605
-  at: [19, 15]
-  layer: 0
-- tile: 23607
-  at: [19, 15]
-  layer: 2
-- tile: 23606
-  at: [20, 15]
-  layer: 0
-- tile: 23609
-  at: [20, 15]
-  layer: 2
-- tile: 23385
-  at: [21, 15]
-  layer: 0
 - tile: 23612
-  at: [22, 15]
+  at: [24, 14]
   layer: 0
-- tile: 23411
-  at: [22, 15]
-  layer: 2
 - tile: 23613
-  at: [23, 15]
-  layer: 0
-- tile: 23614
-  at: [24, 15]
+  at: [24, 14]
   layer: 2
+- tile: 23614
+  at: [25, 14]
+  layer: 0
 - tile: 23615
-  at: [25, 15]
+  at: [26, 14]
   layer: 2
 - tile: 23616
-  at: [26, 15]
+  at: [27, 14]
   layer: 2
 - tile: 23617
-  at: [27, 15]
+  at: [28, 14]
   layer: 2
 - tile: 23618
-  at: [4, 16]
+  at: [3, 15]
   layer: 2
 - tile: 23619
-  at: [5, 16]
+  at: [4, 15]
   layer: 2
 - tile: 23620
-  at: [6, 16]
-  layer: 2
+  at: [5, 15]
+  layer: 0
+- tile: 23532
+  at: [6, 15]
+  layer: 0
 - tile: 23621
-  at: [7, 16]
-  layer: 2
+  at: [7, 15]
+  layer: 0
 - tile: 23622
-  at: [8, 16]
-  layer: 2
+  at: [8, 15]
+  layer: 0
 - tile: 23623
-  at: [9, 16]
+  at: [8, 15]
   layer: 2
 - tile: 23624
-  at: [10, 16]
-  layer: 2
+  at: [9, 15]
+  layer: 0
 - tile: 23625
-  at: [11, 16]
+  at: [9, 15]
   layer: 2
+- tile: 23621
+  at: [10, 15]
+  layer: 0
+- tile: 23622
+  at: [11, 15]
+  layer: 0
+- tile: 23424
+  at: [11, 15]
+  layer: 2
+- tile: 23401
+  at: [12, 15]
+  layer: 0
 - tile: 23626
-  at: [12, 16]
+  at: [12, 15]
   layer: 2
+- tile: 23621
+  at: [13, 15]
+  layer: 0
 - tile: 23627
-  at: [13, 16]
+  at: [13, 15]
   layer: 2
+- tile: 23622
+  at: [14, 15]
+  layer: 0
+- tile: 23401
+  at: [15, 15]
+  layer: 0
+- tile: 23621
+  at: [16, 15]
+  layer: 0
+- tile: 23622
+  at: [17, 15]
+  layer: 0
+- tile: 23401
+  at: [18, 15]
+  layer: 0
+- tile: 23621
+  at: [19, 15]
+  layer: 0
+- tile: 23623
+  at: [19, 15]
+  layer: 2
+- tile: 23622
+  at: [20, 15]
+  layer: 0
+- tile: 23625
+  at: [20, 15]
+  layer: 2
+- tile: 23401
+  at: [21, 15]
+  layer: 0
 - tile: 23628
-  at: [14, 16]
+  at: [22, 15]
+  layer: 0
+- tile: 23427
+  at: [22, 15]
   layer: 2
 - tile: 23629
-  at: [15, 16]
-  layer: 2
+  at: [23, 15]
+  layer: 0
 - tile: 23630
-  at: [16, 16]
+  at: [24, 15]
   layer: 2
 - tile: 23631
-  at: [17, 16]
+  at: [25, 15]
   layer: 2
 - tile: 23632
-  at: [18, 16]
+  at: [26, 15]
   layer: 2
 - tile: 23633
-  at: [19, 16]
+  at: [27, 15]
   layer: 2
 - tile: 23634
-  at: [20, 16]
-  layer: 2
-- tile: 23632
-  at: [21, 16]
+  at: [4, 16]
   layer: 2
 - tile: 23635
-  at: [22, 16]
+  at: [5, 16]
   layer: 2
 - tile: 23636
-  at: [23, 16]
+  at: [6, 16]
   layer: 2
 - tile: 23637
-  at: [24, 16]
+  at: [7, 16]
   layer: 2
 - tile: 23638
-  at: [25, 16]
+  at: [8, 16]
   layer: 2
 - tile: 23639
-  at: [26, 16]
+  at: [9, 16]
   layer: 2
 - tile: 23640
-  at: [5, 17]
+  at: [10, 16]
   layer: 2
 - tile: 23641
-  at: [6, 17]
+  at: [11, 16]
   layer: 2
 - tile: 23642
-  at: [7, 17]
+  at: [12, 16]
   layer: 2
 - tile: 23643
-  at: [8, 17]
+  at: [13, 16]
   layer: 2
 - tile: 23644
-  at: [9, 17]
+  at: [14, 16]
   layer: 2
 - tile: 23645
-  at: [10, 17]
+  at: [15, 16]
   layer: 2
 - tile: 23646
-  at: [11, 17]
-  layer: 2
-- tile: 23642
-  at: [12, 17]
-  layer: 2
-- tile: 23643
-  at: [13, 17]
-  layer: 2
-- tile: 23644
-  at: [14, 17]
-  layer: 2
-- tile: 23645
-  at: [15, 17]
+  at: [16, 16]
   layer: 2
 - tile: 23647
-  at: [16, 17]
-  layer: 2
-- tile: 23642
-  at: [17, 17]
-  layer: 2
-- tile: 23643
-  at: [18, 17]
-  layer: 2
-- tile: 23644
-  at: [19, 17]
-  layer: 2
-- tile: 23645
-  at: [20, 17]
-  layer: 2
-- tile: 23647
-  at: [21, 17]
+  at: [17, 16]
   layer: 2
 - tile: 23648
-  at: [22, 17]
+  at: [18, 16]
   layer: 2
 - tile: 23649
-  at: [23, 17]
+  at: [19, 16]
   layer: 2
 - tile: 23650
+  at: [20, 16]
+  layer: 2
+- tile: 23648
+  at: [21, 16]
+  layer: 2
+- tile: 23651
+  at: [22, 16]
+  layer: 2
+- tile: 23652
+  at: [23, 16]
+  layer: 2
+- tile: 23653
+  at: [24, 16]
+  layer: 2
+- tile: 23654
+  at: [25, 16]
+  layer: 2
+- tile: 23655
+  at: [26, 16]
+  layer: 2
+- tile: 23656
+  at: [5, 17]
+  layer: 2
+- tile: 23657
+  at: [6, 17]
+  layer: 2
+- tile: 23658
+  at: [7, 17]
+  layer: 2
+- tile: 23659
+  at: [8, 17]
+  layer: 2
+- tile: 23660
+  at: [9, 17]
+  layer: 2
+- tile: 23661
+  at: [10, 17]
+  layer: 2
+- tile: 23662
+  at: [11, 17]
+  layer: 2
+- tile: 23658
+  at: [12, 17]
+  layer: 2
+- tile: 23659
+  at: [13, 17]
+  layer: 2
+- tile: 23660
+  at: [14, 17]
+  layer: 2
+- tile: 23661
+  at: [15, 17]
+  layer: 2
+- tile: 23663
+  at: [16, 17]
+  layer: 2
+- tile: 23658
+  at: [17, 17]
+  layer: 2
+- tile: 23659
+  at: [18, 17]
+  layer: 2
+- tile: 23660
+  at: [19, 17]
+  layer: 2
+- tile: 23661
+  at: [20, 17]
+  layer: 2
+- tile: 23663
+  at: [21, 17]
+  layer: 2
+- tile: 23664
+  at: [22, 17]
+  layer: 2
+- tile: 23665
+  at: [23, 17]
+  layer: 2
+- tile: 23666
   at: [24, 17]
   layer: 2
 tileblocks: []
