@@ -1,0 +1,299 @@
+0|PkMnTRAINER_Male|PkMn Trainer|
+1|PkMnTRAINER_Female|PkMn Trainer|
+2|Punk|Punk|trchar122.png
+3|YOUNGSTER|Youngster|trchar019.png
+4|HIKER|Hiker|trchar004.png
+5|BEAUTY|Posh|trchar056.png
+6|FISHERMAN|Fisherman|trchar006.png
+7|LADY|Lady|trchar007.png
+8|NatureGirl|Nature Girl|trchar034.png
+9|Exleader|Igneous|
+10|Doxy|Doxy|trchar121.png
+11|Solaris|Meteor Leader|
+12|BUGCATCHER|Pokemon|
+13|AYA|Wasteland Punk|
+14|DOCTOR|Dr.|
+15|Sirius|Meteor Admin|
+16|BLACKBELT|Black Belt|trchar016.png
+17|RANGERF|Ranger|trchar050.png
+18|BENNETT|Lepidopterist|
+19|EL|Parson|
+20|SERRA|Beauty Queen|
+21|Steelix|Pokemon|
+22|NOEL|Prodigy|
+23|RADOMUS|Grandmaster|
+24|PkMnTRAINER_Male2|PkMn Trainer|
+25|PkMnTRAINER_Female2|PkMn Trainer|
+26|PANGORO|Pokemon|
+27|KLINKLANG|Pokemon|
+28|GENTLEMAN|Gentleman|trchar028.png
+29|HARRIDAN|Harridan|
+30|Cultist|Acolyte|trchar110.png
+31|Maxwell|Magma Kingpin|
+32|Archer|Aqua Mastermind|
+33|BATTLEGIRL|Battle Girl|trchar002.png
+34|LUNA|Dark Dreamer|
+35|MAGMA2|Magma Gang|trchar125.png
+36|BEARTIC|Pokemon|
+37|EXPERT_Male|Elder|trchar037.png
+38|Clown|Clown|trchar119.png
+39|SAMSON|Strongman|
+40|AQUA2|Aqua Gang|trchar126.png
+41|AQUA1|Aqua Gang|trchar123.png
+42|MAGMA1|Magma Gang|trchar124.png
+43|HAXORUS|Pokemon|
+44|AsterKnight|Meteor Private|
+45|EclipseDame|Meteor Private|
+46|AceTrainerF|Ace Trainer|trchar131.png
+47|AceTrainerM|Ace Trainer|trchar130.png
+48|CHARLOTTE|Firebug|
+49|PkMnRANGER_Male|Ranger|trchar049.png
+50|PkMnRANGER_Female|Ranger|
+51|AVALUGG|Pokemon|
+52|PkMnTRAINER_NB|PkMn Trainer|
+53|PkMnTRAINER_NB2|PkMn Trainer|
+54|REBORN|Reborn|
+55|COOLTRAINER_Male|Hotshot|trchar120.png
+56|COOLTRAINER_Female|Arcade Star|trchar044.png
+57|MeteorAceM|Meteor Ace|
+58|MeteorAceF|Meteor Ace|
+59|AsterAce|Meteor Ace|
+60|BLAKE|Agent|
+61|PSYCHIC_Male|Psychic|trchar180.png
+62|PSYCHIC_Female|Psychic|trchar181.png
+63|GLITCH1|MIS5INGN0|
+64|GLITCH2|PKMNPKMNT|
+65|GLITCH3|OPKMN4X|
+66|GLITCH4|M1SS1NGO|
+67|LUCARIO|Pokemon|
+68|TERRA|M3G4|
+69|NWCultist|New World Cultist|
+70|NWOrderly|New World Orderly|
+71|MIGHTYENA|Pokemon|
+72|TITANIA|Guardian|
+73|SWALOT|Pokemon|
+74|CIEL|Skydancer|
+75|NWOrderlyF|New World Orderly|
+76|OrderlyF|Orderly|trchar140.png
+77|NWCultistF|New World Cultist|
+78|CultistF|Acolyte|trchar141.png
+79|SAMUROTT|Pokemon|
+80|CUEBALL|Q Gang|trchar143.png
+81|MASTERMIND|Mastermind|
+82|KECLEON|Purple|
+83|Cain|Pretty Boy|
+84|Victoria|Apprentice|
+85|TechNerd|Techie|trchar008.png
+86|StreetRat|Street Rat|trchar035.png
+87|PoliceOfficer|Police Officer|trchar009.png
+88|Casanova|Casanova|trchar014.png
+89|MeteorGrunt|Meteor Grunt|
+90|MeteorGrunt_090|Meteor Grunt|
+91|Hotshot|Swag Jockey|
+92|MeteorGrunts|Meteor Privates|
+93|JULIA|Cheer Captain|
+94|Pokemon|Pokemon|
+95|ZEL|Meteor Admin|
+96|FLORINIA|Head Instructor|
+97|Taka|Meteor Admin|
+98|Corey|Agent|
+99|Swarm|Pokemon|
+100|Orderly|Orderly|trchar086.png
+101|SHELLY|Bookworm|
+102|Tribe|Pokemon|
+103|SHADE|Entity|
+104|Fiancee|Beau|
+105|MeteorKnight|Meteor Knight|
+106|MeteorDame|Meteor Dame|
+107|Sensei|Sensei|
+108|Spectral|Spectral|
+109|KECLEONS|Kecleon|
+110|ARCLIGHT|DJ|
+111|ADRIENN|Visionary|
+112|TEST|Test Train|
+113|PREDATORS|Pokemon|
+114|CORINROUGE|Dashing Rogue|
+115|KNIGHT|Knight|trchar148.png
+116|STATRESHIRAM|The Legendary|
+117|STATZEKROM|The Legendary|
+118|TITANIA1|Guardian Princess|
+119|TITANIA2|Guardian Exile|
+120|AMARIA1|Flotsam|
+121|AMARIA2|Jetsam|
+122|GARCHOMP|Pokemon|
+123|Taka2|Vagrant Scion|
+124|BRELOOM|BreloomBot|
+125|Victoria2|Sensei|
+126|VOLCARONA|Pokemon|
+127|PYUKMUK|High King|
+128|QMARK|???|
+129|SANDY|Activist|
+130|HARDHAT|Hard Hat|trchar144.png
+131|HARDY|Rockstar|
+132|AGGRON|Pokemon|
+133|GULPIN|Pokemon|
+134|GUITARIST|Guitarist|trchar204.png
+135|ZEL2|Meteor Grunt|
+136|FRIEND|Dr.|
+137|MIME|Master|
+138|LUMI|Snow Angel|
+139|EVE|Sunray|
+140|SAPHIRA|Keeper|
+141|SPIRITM|Wandering Spirit|
+142|SPIRITF|Wandering Spirit|
+143|PGB|Post-Game Battle|
+144|Developer|Developer|
+145|HEATHER|Elite Four Wind Maiden|
+146|BENNETTLAURA|Elite Four Tag Team|
+147|ELIAS|Elite Four Agent|
+148|ANNA|Elite Four Starcrosser|
+149|LIN|Meteor Champion|
+150|CHILDLIN|Mordant Urchin|
+151|LAURA|Elite Four Floral Artist|
+152|SHIINOTIC|Creeping|
+153|CRESSELIA|Anomaly|
+154|SWIMMERBOI|Swimmer|trchar166b.png
+155|SWIMMERGRIL|Swimmer|trchar167b.png
+156|RAIKOU|Anomaly|
+157|ENTEI|Anomaly|
+158|SUICUNE|Anomaly|
+159|CASS|Friendly Local|
+160|ASTER|Hotshot|
+161|SIMON|Ace Trainer|
+162|RANDALL|Street Rat|
+163|SEACREST|Elder|
+164|RINGMASTER|Ringmaster|
+165|MARCELLO|Not a Child; Just Short|
+166|SMEARGLE|Wandering Artist|
+167|SEER|Posh|
+168|PIKANYU|Pokefan|
+169|INDRA|Clown|
+170|MCKREZZY|Guitarist|
+171|CHIEF|Police Chief|
+172|MISSDIRECTION|Miss|
+173|MEGANIUM|Madame|
+174|MURMINA|Doxy|
+175|KANAYA|Lone Wolf|
+176|BEE|Ranger|
+177|BUFF|Bouffalant|
+178|EUROPA|Ranger|
+179|LAHVER|Mr.|
+180|MAEL|Inspector|
+181|AME|League Manager|
+182|REGIS|Golem|
+183|MUSKETEER1|Anomaly|
+184|MUSKETEER2|All|
+185|KELDEO|Anomaly|
+186|MUSKETEER3|the Spectral|
+187|UMBSAMSON|Umbral|
+188|REGIGIGAS|Anomaly|
+189|GENIES|Djinn|
+190|UMBCIEL|Umbral|
+191|ZEL3|Rogue|
+192|BENNETT2|Elite Four Imago|
+193|FLORA|Axis High Senior|
+194|VOLCANION|Anomaly|
+195|POACHERM|Poacher|trchar185.png
+196|POACHERF|Poacher|trchar186.png
+197|POACHERB|Poacher|
+198|SHANNON|Commissioner|
+199|SIGMUND|Schoolboy|
+200|EUPHIE|Umbral|
+201|JIRACHI|Anomaly|
+202|ANTICS|Her|
+203|TAPUKOKO|Anomaly|
+204|TAPULELE|Anomaly|
+205|TAPUBULU|Anomaly|
+206|TAPUFINI|Anomaly|
+207|LATIAS|Anomaly|
+208|LATIOS|Anomaly|
+209|DIANCIE|Anomaly|
+210|DIASWORD|the Crystal|
+211|UMBCAIN|Umbral|
+212|UMBTERRA|Umbral|
+213|HOOPA|Anomaly|
+214|TAUBE|Guiding Star|
+215|ELENA|Elite Four Skyspectre|
+216|FUTURESHELLY|Reborn Champion|
+217|MELOETTA|Anomaly|
+218|PALKIA|Anomaly|
+219|DIALGA|Anomaly|
+220|UMBTAKA|Umbral|
+221|HEATRAN|Anomaly|
+222|MANAPHY|Anomaly|
+223|CELEBI|Anomaly|
+224|ACECLUBS|Meteor Manager|
+225|ACEDIAMONDS|Meteor Agent|
+226|ACEHEARTS|Meteor Agent|
+227|ACESPADES|Meteor Agent|
+228|UMBKIKI|Umbral|
+229|FERN2|Swag Jockey|
+230|MEWTWO|Anomaly|
+231|ZTAKA2|Vagrant Scion|
+232|GENESECT|Anomaly|
+233|HOOH|Anomaly|
+234|LUGIA|Anomaly|
+235|UMBTITANIA|Umbral|
+236|UMBAMARIA|Umbral|
+237|DEOXYS|Anomaly|
+238|ZINA|Lost Starscaper|
+239|SHAYMIN1|Anomaly|
+240|SHAYMIN2|Gracidea|
+241|UMBRADOMUS|Umbral|
+242|ANOMGARDEVOIR|Anomaly|
+243|MAGEARNA|Anomaly|
+244|NAGANADEL|Anomaly|
+245|RESHIRAM|Anomaly|
+246|ZEKROM|Anomaly|
+247|KYUREM1|Anomaly|
+248|KYUREM2|Multi-iterative|
+249|UMBACE|Umbral Agent|
+250|GIRATINA|Anomalized|
+251|ZYGARDE|Anomalized|
+252|RAYQUAZA|Anomaly|
+253|HYPNO|PULSE|
+254|TANGROWTH|PULSE|
+255|CAMERUPT|PULSE|
+256|SHIV|Dreamer|
+257|UMBCOREY|Umbral|
+258|DARKRAI|Anomaly|
+259|HYPNO2|PULSE|
+260|MIME2|Master|
+261|KYOGRE|Anomaly|
+262|GROUDON|Anomaly|
+263|YVELTAL|Anomaly|
+264|XERNEAS|Anomaly|
+265|NOEL2|Prodigy|
+266|UMBECLIPSE|Umbral|
+267|UMBNOEL|Umbral|
+268|NECROZMA|Anomaly|
+269|MEW|Anomaly|
+270|ALTVERO|Alter|
+271|ALTALICE|Alter|
+272|ALTKURO|Alter|
+273|ALTLUCIA|Alter|
+274|ALTARI|Alter|
+275|ALTDECIBEL|Alter|
+276|UMBFERN|Umbral|
+277|ANAMSHADE|Anamnestic|
+278|ANAMTERRA|Anamnestic|
+279|ANNA2|Dreamsick|
+280|ARCEUS|Anomaly|
+281|DEFNOT|Definitely Not|
+282|OLDCAL|Volcanic|
+283|ARCLIGHT2|DJ|
+284|ACEALLSUITS|Meteor Agent|
+285|IKARU|Starchaser|
+286|CRIM|Daydreamer|
+287|AUTUMN|Buttercups and Butterflies|
+288|VULPES|Emerging Violet|
+289|KUROTSUNE|Illusory Spirit|
+290|JAN|Intern|
+291|PERRY|Held at Gunpoint|
+292|AZZIE|Storyteller|
+293|ANNA3|Starcrosser|
+294|KYRA|Brat Child|
+295|RAINBOWSWARM|Pokémon|
+296|QCHAMP|Q Gang|
+297|QSAWK|Q Gang|
+298|QTHROH|Q Gang|

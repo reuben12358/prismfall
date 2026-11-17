@@ -67,7 +67,7 @@ def build(preview=None):
             west = x < 3 + 3 * vnoise(0, y, 12, 4.0) and y < 25
             if nw or ne or east or west: m.cls[y, x] = 'T'
     # ---------------------------------------------------------------- streets (orthogonal, Goldenleaf style)
-    m.street([(33, 0), (33, 24)], 4)                                   # Route 1 lane -> square
+    m.rect(32, 0, 5, 25, 'g')                                          # Route 1 lane (x 33-36 at the edge) -> square
     m.rect(26, 24, 17, 7, 'g')                                         # the square
     m.street([(33, 30), (33, 37)], 3)                                  # down to the quay stairs
     m.street([(9, 19), (32, 19)], 3)                                   # upper street (Poke Center)

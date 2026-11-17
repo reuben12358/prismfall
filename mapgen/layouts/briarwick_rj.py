@@ -81,7 +81,7 @@ def build(preview=None):
     # ---------------------------------------------------------------- lanes (Sheridan dirt, orthogonal with soft bends)
     m.street([(35, 63), (35, 52), (40, 52), (40, 38)], 3, 'd', only='.T')       # from Gossamer Wood up to the green
     m.rect(34, 29, 15, 9, 'd', '.')                                              # the green (Tamsin's square)
-    m.street([(0, 30), (34, 30)], 2, 'd', only='.T')                             # Route 3 road from the west edge
+    m.street([(0, 31), (34, 31)], 2, 'd', only='.T')                             # Route 3 road (rows 30-31) from the west edge
     m.street([(48, 31), (71, 31)], 3, 'd', only='.T')                            # east lane to the pylon
     m.street([(36, 19), (36, 29)], 3, 'd', only='.')                             # stairs down from the Loomhouse
     m.street([(22, 14), (22, 19), (36, 19)], 2, 'd', only='.T')                  # shrine stairs path
@@ -89,7 +89,7 @@ def build(preview=None):
     m.street([(45, 25), (45, 29)], 2, 'd', only='.')
     m.street([(56, 25), (56, 30)], 2, 'd', only='.')
     m.street([(27, 41), (27, 37), (34, 37)], 2, 'd', only='.')
-    m.street([(58, 42), (58, 45), (51, 45)], 2, 'd', only='.')
+    m.street([(63, 43), (63, 46), (51, 46)], 2, 'd', only='.')
     m.street([(42, 51), (42, 52)], 2, 'd', only='.')
     m.street([(48, 37), (55, 46), (55, 49)], 2, 'd', only='.')
     m.stairs(35, 14, w=3, kit_rows=4)

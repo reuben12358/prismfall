@@ -43,7 +43,12 @@ def system_names():
             if m:
                 names[m.group(1)][int(m.group(2))] = m.group(3)
     for p in glob.glob(os.path.join(OUT, 'Data', 'Map*.rxdata')):
-        for ev in M.load_file(p).events.values():
+        try:
+            m = M.load_file(p)
+        except ValueError:
+            print('WARN %s is not a Marshal file (being rebuilt?): skipped' % os.path.basename(p))
+            continue
+        for ev in m.events.values():
             for pg in ev.pages:
                 c = pg.condition
                 used = [('S', c.switch1_id) if c.switch1_valid else None, ('S', c.switch2_id) if c.switch2_valid else None,
@@ -119,7 +124,11 @@ def check_maps(tilesets):
                 if n and not any(os.path.exists(os.path.join(d, 'Graphics', sub, n + '.png')) for d in (OUT, REF_BASE)):
                     warns.append('tileset %d: Graphics/%s/%s.png is in neither maps_out nor the base project' % (i, sub, n))
     for p in sorted(glob.glob(os.path.join(OUT, 'Data', 'Map*.rxdata'))):
-        m = M.load_file(p)
+        try:
+            m = M.load_file(p)
+        except ValueError:
+            warns.append('%s is not a Marshal file (being rebuilt?)' % os.path.basename(p))
+            continue
         ts = tilesets.get(m.tileset_id)
         if ts is not None and int(m.data.data.max()) >= ts.passages.xsize:
             warns.append('%s uses tile %d but tileset %d has %d ids (rebuild maps and tileset together)'

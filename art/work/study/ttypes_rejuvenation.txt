@@ -1,0 +1,328 @@
+0|CHILDOFLIGHT|Child of Light|
+1|TRAINER_AEVIS|Pokémon Trainer|
+2|TRAINER_AEVIA|Pokémon Trainer|
+3|TRAINER_ARIA|Pokémon Trainer|
+4|TRAINER_AXEL|Pokémon Trainer|
+5|TRAINER_ALAIN|Pokémon Trainer|
+6|TRAINER_AERO|Pokémon Trainer|
+7|TRAINER_ANA|Pokémon Trainer|
+8|TRAINER_REN|Pokémon Trainer|
+9|TRAINER_MELIA1|Pre-Leader|
+10|TRAINER_AMANDA|League Scout|
+11|OPT|Optimist|
+12|AROMALADY|Fragrant Lady|
+13|BEAUTY|Prima Donna|
+14|COOLGUY|Cool Guy|
+15|CHANELLER|Old Lady|
+16|CUEBALL|Gang Member|
+17|TECH|Technician|
+18|BUGCATCHER|Bug Catcher|
+19|FISHERMAN|Fisherman|
+20|CHARMER|Charmer|
+21|HIKER|Hiker|
+22|LADY|Mistress|
+23|ROCKER|Punk|
+24|YOUNGSTER|Youngster|
+25|POKEBREEDER_F|Pokémon Caretaker|
+26|POKEBREEDER_M|Pokémon Caretaker|
+27|BLACKBELT|Battle Boy|
+28|COOLTRAINER_M|Hardcore Trainer|
+29|COOLTRAINER_F|Hardcore Trainer|
+30|KIMONOGIRL|Yukata Girl|
+31|KIMONOGIRL2|Kimono Girl|
+32|GUITARIST|Guitarist|
+33|WORKERF|Clerk|
+34|WORKERM|Clerk|
+35|OFFICER|Police Officer|
+36|SCIENTIST|Scientist|
+37|LASS|Enthusiast|
+38|POKEMONRANGER_M|Pokémon Ranger|
+39|POKEMONRANGER_F|Pokémon Ranger|
+40|CRUSHGIRL|Battle Girl|
+41|CAMPER|Schoolboy|
+42|PICNICKER|Schoolgirl|
+43|FAIRYGIRL|Fairy Girl|
+44|TOURIST|Tourist|
+45|XENANALYST_M|Xen Analyst|
+46|COOLCOUPLE1|Cool Couple|
+47|DESERTDWELLER_MW|Desert Dweller|
+48|DESERTDWELLER_MB|Desert Dweller|
+49|DESERTDWELLER_FW|Desert Dweller|
+50|DESERTDWELLER_FB|Desert Dweller|
+60|NEWREP|News Crew|
+61|POKEGANG2|Poke Gang|
+62|MERCH|Merchant|
+63|BEAST|Ancient Leviathan|
+64|LUNA|Chaotic Fusion|
+65|POKEGANG|PokeGang|
+66|RENEGADE|Renegade|
+67|CHALLENGER|Challenger|
+68|GHOSTGIRL|Ghost Girl|
+69|GHOSTGUY|Ghost Guy|
+70|GANGLEADER|Gang Leader|
+71|POKEGANG_1|PokeGang|
+72|BUGCATCH|Bug Catcher|
+73|WITCH|Spellcaster|
+74|YOUNGMONEY|YOUNGSTER|
+75|LADYGIRL|Lady|
+76|SUPERSTAR|Lingering Regret|
+77|SECURITYBOT|Security Bot|
+78|GARBODOR|Garbodor|
+79|DISCOTEEN|Dance Prodigy|
+80|ANCIENT|Ancient Guard|
+81|WANDERER|Wanderer|
+82|SENSEI_1|Sensei|
+83|POKEGANG3|PokeGang|
+84|POKEGANG4|PokeGang|
+85|POKEGANG5|Island Deity|
+86|POKEMONRANGER_M1|Pokémon Ranger|
+87|POKEMONRANGER_F1|Pokémon Ranger|
+88|MADSCIENTIST|Mad Scientist|
+90|STUDENT|Student|
+91|STUDENT_2|Student|
+92|ENIGMA|Pokémon Trainer|
+93|APPRENTICE|Apprentice|
+94|ROGUEAPP|Rogue Apprentice|
+95|CANDIDGIRL|Candid Girl|
+96|OUTCAST|Outcast|
+97|RUNAWAYGIRL|Runaway|
+98|XENDEATHWING_M|Deathwing|
+99|XENDEATHWING_F|Deathwing|
+100|XENGRUNT_M|Team Xen|
+101|XENGRUNT_F|Team Xen|
+102|XENEXECUTIVE_1|Xen Executive|
+103|XENEXECUTIVE_2|Xen Executive|
+104|XENEXECUTIVE_3|Xen Executive|
+105|XENEXECUTIVE_4|Xen Executive|
+106|MISFORTUNATEDUO|Misfortunate Duo|
+107|DNACLONE|DNA Clone|
+108|SERVANT|Servant|
+109|SECURITYSYSTEM|Security Component|
+110|DOCTOR|Doctor|
+111|HOOD|Mystery Girl|
+112|XENDICTATOR|Xen Dictator|
+113|TEAMAA_F|Team Anti-Assist|
+114|TEAMAA_M|Team Anti-Assist|
+115|BLADESTAR_F|Bladestar|
+116|BLADESTAR_M|Bladestar|
+117|CAPTAIN|Captain|
+118|SURVIVOR|Survivor|
+119|SPELUNKER_BLADEM|Spelunker Grunt|
+120|PRISONGUARD|Prison Guard|
+121|XENANALYST_F|Xen Analyst|
+122|DIMENSIONALRIFT|Dimensional Rift|
+124|RENEGADEM|Pyriah|
+125|RENEGADEF|Pyriah|
+126|FAITHFUL|Angie's Right Hand|
+127|HOOD1|Hooded Boy|
+128|BLADESTAR_F1|Bladestar Admin|
+129|BLADESTAR_M1|Bladestar Admin|
+130|LEADER_VENAM|Punk Girl|
+131|LEADER_VENAM2|Punk Girl|
+132|LEADER_KETA|Sensei|
+133|LEADER_KETA2|Sensei|
+134|LEADER_MARIANETTE|Child of Light|
+135|LEADER_NARCISSA|Actress|
+136|LEADER_VALARIE|Water Show Performer|
+137|LEADER_CRAWLI|Head Ranger|
+138|LEADER_CRAWLI2|International Police|
+139|LEADER_ANGIE|Faithful Servant|
+140|LEADER_TEXEN|Pseudo Sensei|
+141|LEADER_AMBER|Music Enthusiast|
+142|LEADER_ERICK|Electrical Engineer|
+143|LEADER_FLORA|Botanist|
+144|LEADER_FLORIN|Botanist|
+145|LEADER_PUPPET1|Puppet Master|
+146|LEADER_PUPPET2|Puppet Master|
+147|LEADER_SOUTA|Spiritual Healer|
+148|LEADER_SPECTOR|Ghost Kid|
+149|LEADER_SAKI|Ultimate Engineer|
+150|LEADER_SAKI2|Ultimate Engineer|
+151|LEADER_RYLAND|Forgotten Prince|
+152|LEADER_LAVENDER|Psychologist|
+153|UNKNOWN_1|???|
+154|UNKNOWN_2|???|
+155|RECO_F|Rejuv Co. Employee|
+156|RECO_M|Rejuv Co. Employee|
+157|OPTKID|Optimistic Guy|
+158|OPTKID_1|Optimistic Guy|
+159|TRENDYGIRL|Trendy Girl|
+160|TRENDYGIRL_1|Trendy Girl|
+161|LEADER_ADAM|Aevium Sensation|
+162|LEADER_ADAM1|Ruin Maniac|
+163|ANGELOFDEATH|Angel of Death|
+164|OPTKID_2|Servant|
+165|ENIGMA_2|Pokémon Trainer|
+166|WPUNK|Wasteland Punk|
+168|POKEGANG6|PokeGang|
+169|POPSTAR|Popstar|
+170|ROGPSYCHIC|Rogue Psychic|
+171|STUDENT_3|Leader|
+172|HERO|Eventual Hero|
+173|POKEGANG7|Tormented Leviathan|
+174|HERO1|Hero of Goomidra|
+175|GAUNTLET|Guardian Spectre|
+176|DEFENSEMECH|Defense|
+177|NANO|Android Girl|
+178|POKEGANG8|Temple|
+179|LEADER_VENAM3|Punk Girl|
+180|ENIGMA_1|Pokémon Trainer|
+181|LEADER_ANGIE2|Faithful Servant|
+182|AXISSTUDENT_MW|Axis High Student|
+183|AXISSTUDENT_MB|Axis High Student|
+184|AXISSTUDENT_FW|Axis High Student|
+185|AXISSTUDENT_FB|Axis High Student|
+186|LEADER_AMBER2|Music Enthusiast|
+187|MASKEDMAN|Masked Individual|
+188|MYSTSTUDENT|Mysterious Student|
+189|XENADMIN_1|Xen Admin|
+190|ELITE_KAREN|Elite Eight|
+191|ROGUEHERO|Rogue Hero|
+192|LITTLEDEMON|Little Demon|
+193|LEADER_DAMIEN|Enforcer|
+194|CANDIDGIRL2|Strategist|
+195|ICESOLDIERS|Ice Soldiers|
+196|MYSTMAGE|Arrogant Scholar|
+197|XENEXECUTIVE_5|Xen Executive|
+198|ELITE_ALEXANDRA|Elite Eight|
+199|PRINCESS_ODESSA|Kristilian Princess|
+200|LEADER_TALON|Cartographer|
+201|MASKEDDUO|Mystery Duo|
+202|INTERCEPTOR|Interceptor|
+203|TREAT_01|Inevitable Grief|
+204|TREAT_02|Inevitable Grief|
+205|TREAT_03|Inevitable Grief|
+206|XENMAGE_M|Xen Mage|
+207|XENMAGE_F|Xen Mage|
+208|XG_SABER|Trainer|
+209|XG_WYNN|Neighbor|
+210|XG_ENYA|Firebrand|
+211|XG_ADELINDE|Serenity|
+212|XG_LUCILE|Mayor|
+213|XG_GRUNTM|Splicer Grunt|
+214|XG_GRUNTF|Splicer Grunt|
+215|XG_SIERRA|Splicer Admin|
+216|POKEGANG9|Garbage Gang|
+217|STEELRESERVE|Steel Reserve|
+218|ICEHEIRESS|Ice Heiress|
+219|LEADER_RYLAND1|Forgotten Prince|
+220|TRAINER_M2|Fallen Goddess|
+221|GIRLSCOUTS|Girl Scouts|
+222|DON|Don|
+223|LEADER_TALON_1|Cartographer|
+224|LEADER_ALICE|Gym Leader|
+225|SASHILAWARRIORM_1|Sashilan Warrior|
+226|SASHILAWARRIORM_2|Sashilan Warrior|
+227|SASHILAWARRIORF_1|Sashilan Warrior|
+228|SASHILAWARRIORF_2|Sashilan Warrior|
+229|DIABOLICALGENIUS|Diabolical Evil Genius|
+230|INTERCEPTORV|Interceptor|
+231|MELIA_AWAKEN|Awakened Goddess|
+232|PROFJENNER|Professor|
+233|COMMANDER|Commander|
+234|SPIRITJENNER|Spirit|
+235|LEADER_SPECTOR2|Ghost Kid|
+236|SPIRITXARA|Spirit|
+237|SPIRITJEAN|Spirit|
+238|XENNEVED|Xen Executive|
+239|XENMADELIS|Xen Executive|
+240|XENGEARA|Xen Executive|
+241|MSHOGUN|Catalyst|
+242|RUINEDWAR|Ruined Warrior|
+243|LIN|Reborn Champion|
+244|LEADER_ALLEN|Gym Leader|
+245|EIZEN|Inconsistent Man|
+246|HOODEDGIRL|Hooded Girl|
+247|BLADESTAR_FLORA|Star Blade|
+248|QUEENANGELICA|Queen|
+249|EONEMPLOYEE|EON Employee|
+250|EONREP|EON Representitive|
+251|CASTLEOFFICER|Castle Officer|
+252|LEADER_ALLEN2|Limitless|
+253|FIELDTRAINER|Field Trainer|
+254|XENMELIA|Xen Grunt|
+255|TRAINER_KANON|Garufan Mage|
+256|TRAINER_M2_1|Fallen Goddess|
+257|FORTUNATEWINGS|Fortunate Wings|
+258|SHOOTINGSTAR|Shooting Star|
+259|GEISHA|Manor Geisha|
+260|ASPECTVITUS|Aspect of Endings|
+261|ENDBRINGER|Endbringer|
+262|WITCHOFTHEEND|Witch of the End|
+263|INTERCEPTORARMOR|Interceptor|
+264|INTERCEPTORARMOR_1|Corrupted Interceptor|
+265|INTERTWINEDFATE|Intertwined Fate|
+266|XENEX_M|Xen Executioner|
+267|XENEX_F|Xen Executioner|
+268|XENNASTASIA|Xen Admin|
+269|XENPERCIVAL|the Unmerciful|
+270|SWIMMER_M|Swimmer|
+271|SWIMMER_F|Swimmer|
+272|SHADEWITCH|The Obscured Witch|
+300|JOHTO_1|Gym Leader|
+301|JOHTO_2|Gym Leader|
+302|JOHTO_3|Gym Leader|
+303|JOHTO_4|Gym Leader|
+304|JOHTO_5|Gym Leader|
+305|JOHTO_6|Gym Leader|
+306|JOHTO_7|Gym Leader|
+307|JOHTO_8|Gym Leader|
+308|JOHTO_9|Elite Four|
+309|JOHTO_10|Elite Four|
+310|JOHTO_11|Elite Four|
+311|JOHTO_12|Elite Four|
+312|JOHTO_13|Champion|
+313|JOHTO_0M|Trainer|
+314|JOHTO_0F|Trainer|
+315|ARCHSERVANT|Archservant|
+316|PROTECTOR_HAZUKI|Protector of Aevium|
+317|PROTECTOR_ANJU|Protector of Aevium|
+318|STORMNYM|Karma's Left Eye|
+319|CHAMPIONLIN|Forsaken Memory|
+320|DREAMERSHIV|Forsaken Memory|
+321|DREAMERNOVA|Forsaken Memory|
+322|LEADER_DEAGAN|Forsaken Memory|
+323|XENHORDE|Xen Horde|
+324|POKEHORDE|Pokémon Horde|
+325|FORTUNATEDUO|Most Fortunate Duo|
+326|DUSKWOLVES|Wolves of Dusk|
+327|KING_VITUS|Father of Kingdoms|
+328|QUEEN_NYMIERA|Mother of Beasts|
+329|ISHADEV|League Developer|
+330|PROTECTOR_NYMIERA|Protector of Aevium|
+331|WORLDSHATTERER|World Shatterer|
+332|KINGANDQUEEN|King of Kings and Queen of Beasts|
+333|CANDIDGIRL3|Candid Girl|
+334|LEADER_FLORIN2|Botanist|
+335|CANDIDGIRL4|Dark Mage|
+336|JOHTO_0NB|Trainer|
+337|OPTKID_3|Optimistic Guy|
+338|ALGRISELDA|Taken Tyrant|
+339|ACTIVIST|Pokémon Activist|
+340|CANDIDGIRL5|Strategist|
+341|SPECTRALKNIGHT|Ghovoran Knight|
+342|MSHOGUN2|Catalyst|
+343|CLEARISA|Popstar?|
+344|CASSANDRAPURGATORIUM|Coven Witch|
+900|RUINMANIAC|Ruin Maniac|
+901|POKEMANIAC|Poké Maniac|
+902|POKEMONBREEDER|Pokémon Breeder|
+903|JUGGLER|Juggler|
+904|GAMBLER|Gambler|
+905|SUPERNERD|Super Nerd|
+906|TAMER|Tamer|
+909|TUBER_M|Tuber|
+910|TUBER_F|Tuber|
+911|TEAMROCKET_M|Team Rocket|
+912|TEAMROCKET_F|Team Rocket|
+913|PSYCHIC_M|Psychic|
+914|PSYCHIC_F|Psychic|
+915|TWINS|Twins|
+916|COOLCOUPLE|Cool Couple|
+917|CRUSHKIN|Crush Kin|
+918|SISANDBRO|Sis and Bro|
+919|BIKER|Biker|
+920|SAILOR|Sailor|
+921|GENTLEMAN|Sailor|
+998|BOSSPOKEMON|Boss Pokemon Class|
+999|TEST|Test Trainer|

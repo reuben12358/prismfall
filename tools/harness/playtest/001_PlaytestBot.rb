@@ -31,7 +31,7 @@ module PlayBot
     [:goto, 109, 11, 6],           # rail again: Voss, docking
     [:goto, 109, 9, 15],           # gangway -> Ferrow's Landing
     [:goto, 100, 34, 47],          # Edda's last call (34,51), customs gate NULL scan
-    [:bump, 100, 47, 10],          # Larch Research Station door -> 103
+    [:bump, 100, 53, 11],          # Larch Research Station door -> 103 (Rejuvenation-tileset rebuild of 100)
     [:talk, 103, 20, 10],          # starter table
     [:goto, 103, 14, 15],          # exit -> K1 autorun at the lab gate
     [:edge, 100, 34, 0, 8],        # north lane -> Route 1

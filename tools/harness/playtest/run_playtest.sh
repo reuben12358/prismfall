@@ -13,7 +13,8 @@
 # Needs the mkxp-z build from tools/harness/visual/run_engine_capture.sh (build step).
 # Test-copy-only changes: the bot plugin, mkxp.json (Ruby stdlib path, no vsync, own
 # save folder "Prismfall Playtest") and the Linux engine binary. Nothing else is patched.
-# The engine runs with TZ=Asia/Dubai (override: PLAY_TZ) so Essentials' day/night tint shows the maps by day.
+# The engine runs with TZ=Asia/Dubai (override: PLAY_TZ) so Essentials' day/night tint shows the maps by day,
+# on its own Xvfb display :147 (override: PLAY_DISPLAY) so it never collides with other engine runs.
 #===============================================================================
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -49,7 +50,7 @@ session() {
   rm -f "$SAVE_DIR"/Game*.rxdata                         # New Game must be the first load-screen entry
   rm -rf "$GAME/Playtest"; mkdir -p "$RUN/playtest_out"
   (cd "$GAME" && PLAYBOT_SESSION="$1" TZ="${PLAY_TZ:-Asia/Dubai}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
-     xvfb-run -a -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/playtest_$1_stdout.txt" 2>&1) || true
+     xvfb-run -n "${PLAY_DISPLAY:-147}" -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/playtest_$1_stdout.txt" 2>&1) || true
   rm -rf "$RUN/playtest_out/$1"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$1" 2>/dev/null || true
   [[ -f "$SAVE_DIR/errorlog.txt" ]] && cp "$SAVE_DIR/errorlog.txt" "$RUN/playtest_out/$1/" || true
   grep -E "FATAL|STUCK|bot error|installer|plan done|finished" "$RUN/playtest_out/$1/bot.log" || true
