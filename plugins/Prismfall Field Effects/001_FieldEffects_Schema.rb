@@ -33,8 +33,8 @@ module FieldEffects
   } unless const_defined?(:ENCOUNTER_FIELDS, false)
   # Fields that already ARE the right place for that encounter (no override).
   ENCOUNTER_KEEP_FIELDS = {
-    :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :STEAM_CALDERA, :BLEED, :PRISM_ARENA],
-    :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :STEAM_CALDERA, :FROZEN_LAKE, :BEACH, :BLEED]
+    :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :BLEED, :PRISM_ARENA],
+    :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :FROZEN_LAKE, :BEACH, :BLEED]
   } unless const_defined?(:ENCOUNTER_KEEP_FIELDS, false)
   # Any battle while diving is underwater; while surfing, on the water.
   DIVING_FIELD  = :UNDERWATER
@@ -62,7 +62,7 @@ module FieldEffects
 
   # Fields added after the SPINE roster (Revision 10). Valid transition targets
   # and listed after the roster in Field Notes.
-  EXTRA_FIELDS = [:STEAM_CALDERA, :WILDFIRE, :MEADOW].freeze
+  EXTRA_FIELDS = [:WILDFIRE, :MEADOW].freeze
   KNOWN_FIELDS = (ROSTER + EXTRA_FIELDS).freeze
 
   SEED_ITEMS = [:ELEMENTALSEED, :MAGICALSEED, :TELLURICSEED, :SYNTHETICSEED].freeze

@@ -74,7 +74,7 @@
  "DRAGONS_DEN": [
   [
    "Pok\u00e9mon Reborn (Reborn Team)",
-   "battlebgDragonsDen (gradient-mapped violet/orange, extended)"
+   "battlebgDragonsDen (gradient-mapped violet/orange, extended) as the cavern glow"
   ],
   [
    "Elite Battle: DX stock elements (Luka S.J.)",
@@ -82,7 +82,7 @@
   ],
   [
    "Prismfall (procedural, art/battlebacks/*.py)",
-   "cavern mouth, wyrm statues, dragon skull, gold hoard, platforms, glows"
+   "cave walls and stalactites, magma-cracked floor, wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"
   ]
  ],
  "FROZEN_LAKE": [

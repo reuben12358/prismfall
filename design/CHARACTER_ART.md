@@ -2,6 +2,19 @@
 
 Owner: Character Artist. Status date: 2026-11-16.
 
+## 0. Design study and Juno concepts (2026-11-17): WAITING FOR THE USER TO PICK A DIRECTION
+
+- **User verdict on v4:** technically clean but "soulless", "a recolor gender swap of Sword/Shield's grass gym leader [Milo]". The
+  fault is the *design* (role costume + type colour + stock pose + neutral face), not the pixels.
+- **Study:** `design/CHARACTER_DESIGN_STUDY.md`. It covers about 1,300 reference sprites, VS busts and portraits across
+  Rejuvenation, Reborn, Desolation, official Gen 4/5 and other pixel casts, with annotated plates in `art/work/study/plates/`.
+  It also has a cliché list (§5) and the pre-drawing checklist (§6). **Apply §6 before drawing any character.**
+- **Juno concepts:** `art/previews/08_juno_concepts.png`: 1 UNDER GLASS (walking greenhouse; recommended), 2 ROT & BLOOM
+  (compost forager / toadstool), 3 SEED BOMBER (guerrilla gardener), 4 EVER-BLOOM (Bride Tree flower girl). Quick block-ins
+  only; the portrait is for concept 1. Scripts are in `art/tools/concepts/`, outputs and `.spr` files in `art/work/concepts/`.
+- **Consequence for §8:** the JUNO row (green dungarees + marigold, hair cloud, seed packets) is superseded by whichever concept the
+  user picks. Do not polish anything, or redraw Juno's overworld or portraits, until the user has chosen.
+
 ## 0a. v4 (2026-11-17): Juno drawn from scratch, pixel by pixel
 
 - **Method:** read tutorials and dumped the references pixel by pixel, written up as a checklist in `design/PIXEL_ART_NOTES.md`. Then a

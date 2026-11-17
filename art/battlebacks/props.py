@@ -579,3 +579,63 @@ def cone(size, apex, spread, length, color, alpha=90, levels=6, angle=90):
     out[..., 0], out[..., 1], out[..., 2] = color
     out[..., 3] = v * alpha
     return img(out)
+
+
+def side_walls(size, inner_x=(170, 700), top_y=0, bottom_y=693, color=(20, 10, 26), rim=(255, 130, 60),
+               seed=0, jag=26, rim_w=2, ceiling=60):
+    """Dark rock masses closing in from both sides and the ceiling (a cave mouth frame)."""
+    w, h = size
+    rng = np.random.RandomState(seed)
+    ys = np.arange(h)
+    n1 = noise((1, h), 5, seed, 3)[:, 0] if False else noise((h, 1), 4, seed, 3)[:, 0]
+    n2 = noise((h, 1), 4, seed + 1, 3)[:, 0]
+    t = ys / float(h)
+    # walls bulge in toward the middle height
+    lx = inner_x[0] * (0.35 + 0.65 * np.sin(np.clip(t, 0, 1) * np.pi) ** 0.6) + (n1 - 0.5) * jag * 2
+    rx = w - (w - inner_x[1]) * (0.35 + 0.65 * np.sin(np.clip(t, 0, 1) * np.pi) ** 0.6) + (n2 - 0.5) * jag * 2
+    xs = np.arange(w)
+    nc = noise((w, 1), 5, seed + 2, 3)[:, 0] if False else noise((1, w), 5, seed + 2, 3)[0]
+    ceil = ceiling * (1 - np.sin(np.clip(xs / w, 0, 1) * np.pi) ** 0.5 * 0.6) + (nc - 0.5) * jag * 2
+    a = np.zeros((h, w, 4), np.float32)
+    X, Y = np.meshgrid(xs, ys)
+    m = (X < lx[:, None]) | (X > rx[:, None]) | (Y < ceil[None, :])
+    a[m] = [color[0], color[1], color[2], 255]
+    # rim light on the inner edges
+    mi = Image.fromarray((m * 255).astype(np.uint8))
+    er = np.asarray(mi.filter(ImageFilter.MinFilter(rim_w * 2 + 1)), np.float32) > 0
+    edge = m & ~er
+    a[edge] = [rim[0], rim[1], rim[2], 255]
+    er2 = np.asarray(mi.filter(ImageFilter.MinFilter(rim_w * 4 + 3)), np.float32) > 0
+    e2 = er & ~er2
+    mid = [int(color[0] * 0.5 + rim[0] * 0.5), int(color[1] * 0.5 + rim[1] * 0.5), int(color[2] * 0.5 + rim[2] * 0.5)]
+    a[e2] = [mid[0], mid[1], mid[2], 255]
+    return img(a)
+
+
+def ground_plane(size, horizon, near, far, seed=0, cracks=None, crack_n=24, vanish_x=512, grain=4):
+    """Rocky perspective floor from `horizon` down: far colour -> near colour, with optional cracks."""
+    w, h = size
+    ys = np.arange(h)[:, None].astype(np.float32)
+    t = np.clip((ys - horizon) / (h - horizon), 0, 1)
+    n = noise(size, grain, seed, 3)
+    a = np.zeros((h, w, 4), np.float32)
+    for c in range(3):
+        a[..., c] = far[c] + (near[c] - far[c]) * t + (n - 0.5) * 40 * (0.3 + t)
+    a[..., 3] = np.where(ys >= horizon, 255, 0) * np.ones((1, w))
+    im = quantize_rgb(img(a), 10)
+    crack_img = None
+    if cracks:
+        crack_img = Image.new("RGBA", size, (0, 0, 0, 0))
+        d = ImageDraw.Draw(crack_img)
+        rng = random.Random(seed)
+        for i in range(crack_n):
+            ang = rng.uniform(0.15, math.pi - 0.15)
+            x, y = vanish_x + math.cos(ang) * 30, horizon + 4
+            L = rng.uniform(80, 400)
+            pts = [(x, y)]
+            for k in range(8):
+                x += math.cos(ang) * L / 8 + rng.uniform(-8, 8)
+                y += abs(math.sin(ang)) * L / 8 * (0.4 + k / 8.0)
+                pts.append((x, y))
+            d.line(pts, fill=C(cracks), width=1)
+    return im, crack_img

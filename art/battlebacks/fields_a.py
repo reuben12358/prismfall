@@ -90,7 +90,7 @@ def ashen_waste():
     edge = np.asarray(Image.fromarray((lava * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3)), np.float32) / 255
     rimm = np.clip(edge - lava, 0, 1)[..., None]
     a = a * (1 - lm) + np.array([40, 36, 42, 255], np.float32) * lm
-    a = a * (1 - rimm) + np.array([110, 104, 108, 255], np.float32) * rimm
+    a = a * (1 - rimm) + np.array([74, 68, 74, 255], np.float32) * rimm
     hd = img(a)
     hd = blend(hd, vgradient(HD, [(0, (150, 170, 200, 0)), (0.4, (150, 170, 200, 50)), (1, (40, 40, 60, 70))]),
                "softlight")
@@ -167,45 +167,52 @@ def hoard(w, h, seed=0, gold=(232, 182, 60), dark=(150, 96, 30), light=(255, 236
 
 def dragons_den():
     F = "dragons_den"
-    hd = vanilla("reborn", "DragonsDen")
-    hd = gradient_map(hd, [(0.0, (12, 6, 18)), (0.2, (40, 16, 52)), (0.42, (92, 34, 96)),
-                           (0.65, (196, 70, 70)), (0.85, (250, 140, 60)), (1.0, (255, 220, 140))])
-    # cavern mouth: dark rock framing top corners
-    W, H = HD
-    n = noise((W, 1), 6, 5, 3)[0]
-    xs = np.arange(W)
-    archtop = 60 + 180 * (np.abs(xs - 500) / 500.0) ** 2.2 + n * 40
-    rock = np.zeros((H, W, 4), np.float32)
-    ys = np.arange(H)[:, None]
-    m = ys < (300 - archtop)[None, :] * 0 + (np.clip(archtop * 0.0 + (np.abs(xs - 512) / 512.0) ** 1.8 * 330 + n * 30 - 20, 0, 400))[None, :]
-    rock[m] = [14, 8, 18, 255]
-    edge = m & ~np.vstack([m[1:], m[-1:]])
-    rock[edge] = [80, 40, 90, 255]
-    hd.alpha_composite(img(rock))
-    # wyrm statues flanking the lair
-    for x, flip in ((360, False), (690, True)):
-        pillar(hd, x, 150, 318, 22, (52, 30, 60), (96, 62, 104), (26, 14, 32), (10, 4, 12),
+    hd = vanilla("reborn", "DragonsDen", base=False)
+    hd = gradient_map(hd, [(0.0, (10, 4, 16)), (0.18, (34, 12, 46)), (0.4, (86, 30, 92)),
+                           (0.62, (200, 70, 70)), (0.82, (255, 140, 60)), (1.0, (255, 220, 140))])
+    hz = 300
+    back = mountains((864, 693), hz + 6, 46, (30, 12, 38), seed=51, rough=0.9, peaks=8, outline=(255, 130, 60))
+    hd.alpha_composite(back)
+    floor, cracks = ground_plane(HD, hz + 4, (62, 30, 58), (34, 16, 40), seed=52, cracks=(255, 120, 50),
+                                 crack_n=30, vanish_x=520)
+    hd.alpha_composite(floor)
+    hd.alpha_composite(cracks)
+    # wyrm statues flanking the hoard
+    for x, flip in ((352, False), (700, True)):
+        pillar(hd, x, 170, 316, 22, (52, 30, 60), (96, 62, 104), (26, 14, 32), (10, 4, 12),
                rim=(255, 140, 70), rim_side=-1 if flip else 1)
-        sk = dragon_skull(0.42, bone=(80, 54, 92), shade=(54, 34, 64), outline=(14, 6, 18))
+        sk = dragon_skull(0.42, bone=(96, 64, 108), shade=(60, 38, 70), outline=(14, 6, 18))
         if flip:
             sk = sk.transpose(Image.FLIP_LEFT_RIGHT)
-        paste(hd, sk, x, 152, "bottom")
-    # bones and hoard
-    paste(hd, hoard(190, 70, seed=2), 610, 330, "bottom")
-    paste(hd, hoard(150, 56, seed=5), 420, 322, "bottom")
-    paste(hd, hoard(260, 90, seed=8), 120, 560, "bottom")
-    paste(hd, dragon_skull(0.9), 770, 330, "bottom")
+        paste(hd, sk, x, 174, "bottom")
+    walls = side_walls(HD, inner_x=(200, 700), color=(18, 8, 24), rim=(200, 80, 120), seed=53, ceiling=90)
+    hd.alpha_composite(walls)
+    d = ImageDraw.Draw(hd)
+    rng = random.Random(54)
+    for _ in range(22):
+        x = rng.uniform(170, 740); L = rng.uniform(16, 60); wd = rng.uniform(5, 13); y0 = rng.uniform(40, 120)
+        d.polygon([(x - wd, y0), (x + wd, y0), (x, y0 + L)], fill=C((24, 10, 30)), outline=C((10, 4, 14)))
+        d.line([(x + wd - 2, y0 + 2), (x + 1, y0 + L - 4)], fill=C((150, 60, 90)))
+    paste(hd, hoard(210, 70, seed=2), 680, 336, "bottom")
+    paste(hd, hoard(170, 58, seed=5), 380, 328, "bottom")
+    paste(hd, hoard(300, 96, seed=8), 120, 600, "bottom")
+    paste(hd, dragon_skull(0.75), 250, 344, "bottom")
+    rib = Image.new("RGBA", (120, 60), (0, 0, 0, 0)); rd = ImageDraw.Draw(rib)
+    for i in range(5):
+        rd.arc([i * 18, 4, i * 18 + 50, 110], 200, 300, fill=C((214, 200, 170)), width=4)
+        rd.arc([i * 18, 4, i * 18 + 50, 110], 200, 300, fill=C((30, 20, 26)), width=1)
+    paste(hd, rib, 790, 560, "bottom")
     platform(hd, FOE, 116, 25, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16))
     ring_stones(hd, FOE, 116, 25, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=26, size=(5, 8), seed=4)
     platform(hd, PLAYER, 232, 50, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16), thick=12)
     ring_stones(hd, PLAYER, 232, 50, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=34, size=(8, 13), seed=9)
-    hot = mask_from(hd, lambda r, g, b: (r > 230) & (g > 110) & (b < 110))
     save_room("field_dragons_den", hd)
+    cm = np.asarray(cracks, np.float32)[..., 3] / 255.0
     gold = mask_from(hd, lambda r, g, b: (r > 225) & (g > 170) & (b < 120))
     layers = [
-        layer(F, "magma", glow_from_mask(hot, (255, 120, 60), radius=10, gain=1.3), z=1, blend=1, opacity=140,
-              anim=S("pulse"), min=50, max=150, period=130),
-        layer(F, "violet", soft_glow((520, 290), 330, (170, 60, 255), alpha=110, squash=0.45), z=1, blend=1,
+        layer(F, "magma", glow_from_mask(cm, (255, 110, 50), radius=5, gain=1.3, core=0.8), z=1, blend=1,
+              opacity=140, anim=S("pulse"), min=50, max=170, period=130),
+        layer(F, "violet", soft_glow((520, 260), 330, (170, 60, 255), alpha=110, squash=0.45), z=1, blend=1,
               anim=S("pulse"), min=30, max=110, period=190, phase=1.5),
         layer(F, "goldglint", glow_from_mask(gold, (255, 220, 120), radius=3, gain=0.8, core=0.4), z=1, blend=1,
               opacity=120, anim=S("pulse"), min=40, max=150, period=70),
@@ -215,9 +222,10 @@ def dragons_den():
                                    opacity=90),
               "img003": strip(F, "haze", haze, 230, speed=0.5, direction=-1, z=4)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
-            "origins": [[REB, "battlebgDragonsDen (gradient-mapped violet/orange, extended)"],
+            "origins": [[REB, "battlebgDragonsDen (gradient-mapped violet/orange, extended) as the cavern glow"],
                         [EBDX, "decor009"],
-                        [OWN, "cavern mouth, wyrm statues, dragon skull, gold hoard, platforms, glows"]]}
+                        [OWN, "cave walls and stalactites, magma-cracked floor, wyrm statues, dragon skull and "
+                              "ribs, gold hoard, coin-ringed platforms, glows"]]}
 
 
 #---------------------------------------------------------------------------------------------
@@ -249,9 +257,9 @@ def desert():
     d = ImageDraw.Draw(hd)
     d.line([(334, 282), (300, 252)], fill=C((90, 58, 30)), width=1)
     plat_pair(hd, (222, 178, 112), (160, 112, 64), speckle=([(200, 150, 90), (240, 210, 150)], 160))
-    for (cx, cy, rx) in ((FOE[0], FOE[1], 118), (PLAYER[0], PLAYER[1], 236)):
-        for k in range(-2, 3):
-            d.line([(cx + k * rx * 0.3, cy - 4), (cx + k * rx * 0.32 + 6, cy + 6)], fill=C((170, 126, 76)))
+    # broken arch on the far dune
+    shade_rect(d, 262, 196, 380, 214, C((214, 168, 104)), C((240, 212, 150)), C((150, 106, 62)), C((90, 58, 30)))
+    d.polygon([(380, 196), (396, 204), (380, 214)], fill=C((150, 106, 62)), outline=C((90, 58, 30)))
     hd = blend(hd, vgradient(HD, [(0, (255, 250, 220, 120)), (0.35, (255, 240, 200, 0)), (1, (0, 0, 0, 0))]), "screen")
     save_room("field_desert", hd)
     sun = soft_glow((720, 120), 260, (255, 250, 210), alpha=170, squash=1.0)
@@ -526,10 +534,19 @@ def snowy_mountain():
     hz = 150 + 80
     far = mountains((864, 693), hz + 10, 130, (176, 196, 222), seed=21, rough=0.7, peaks=3, snow=(250, 252, 255))
     hd.alpha_composite(far)
-    near = mountains((864, 693), hz + 70, 120, (226, 236, 246), seed=22, rough=0.8, peaks=5,
-                     outline=(150, 170, 200))
-    a = arr(near)
+    near = mountains((864, 693), hz + 70, 120, (206, 220, 240), seed=22, rough=0.8, peaks=5,
+                     outline=(120, 140, 180))
     hd.alpha_composite(near)
+    d = ImageDraw.Draw(hd)
+    rng0 = random.Random(23)
+    for _ in range(14):
+        x = rng0.uniform(0, 864); y = rng0.uniform(hz - 10, hz + 60)
+        if not (arr(near)[int(min(y, 692)), int(min(x, 863)), 3] > 0):
+            continue
+        w0 = rng0.uniform(10, 28)
+        d.polygon([(x - w0, y + 8), (x - w0 * 0.3, y - 6), (x + w0 * 0.5, y - 2), (x + w0, y + 8)],
+                  fill=C((70, 80, 100)), outline=C((40, 46, 62)))
+        d.line([(x - w0 * 0.3, y - 5), (x + w0 * 0.5, y - 1)], fill=C((240, 246, 255)), width=2)
     rng = random.Random(3)
     for i in range(10):
         x = rng.uniform(0, 864)
@@ -539,8 +556,7 @@ def snowy_mountain():
               x, hz + 90 + rng.uniform(0, 30), "bottom")
     if not has_game_img("reborn", "enemybaseSnowyMountain"):
         plat_pair(hd, (236, 242, 250), (170, 186, 210))
-    hd = blend(hd, vgradient(HD, [(0, (200, 210, 230, 90)), (0.5, (220, 230, 245, 30)), (1, (0, 0, 0, 0))]),
-               "screen")
+    hd = grade(hd, mul=(0.9, 0.95, 1.04), contrast=1.08)
     save_room("field_snowy_mountain", hd)
     flags = prayer_flags(420, 40, [(220, 40, 40), (250, 210, 60), (60, 160, 80), (250, 250, 250), (50, 90, 200)])
     layers = [layer(F, "flags", onto(flags, 420, 168), anchor=(630, 170), z=2, anim=S("sway"), amp=1.2,
@@ -566,13 +582,23 @@ def frozen_lake(night=False):
     F = "frozen_lake"
     hd = vanilla("rejuvenation", "Frozen", base="Frozen")
     hz = 150 + 128
-    cl = mountains((864, 693), hz + 4, 150, (120, 140, 170), seed=31, rough=0.8, peaks=3,
-                   snow=(236, 244, 252), outline=(80, 96, 130))
-    a = arr(cl)
     xs = np.arange(864)
-    # fjord: cliffs only at the sides
-    side = np.clip((np.abs(xs - 470) - 140) / 120.0, 0, 1)
-    a[..., 3] *= side[None, :]
+    nn = noise((1, 864), 3, 31, 3)[0]
+    rise = np.clip((np.abs(xs - 470) - 150) / 160.0, 0, 1) ** 0.7
+    tops = hz + 2 - rise * 190 - nn * 18 * (rise > 0) - 6
+    a = np.zeros((693, 864, 4), np.float32)
+    ys = np.arange(693)[:, None]
+    m = (ys >= tops[None, :]) & (ys <= hz + 4)
+    a[m] = [92, 108, 140, 255]
+    # snow on ledges + light faces
+    ledge = m & ~np.vstack([m[:1] * 0, m[:-1]]).astype(bool)
+    shade = noise((864, 693), 6, 32, 2)
+    a[m & (shade > 0.58)] = [128, 146, 176, 255]
+    a[m & (shade > 0.7)] = [228, 238, 250, 255]
+    edge = np.zeros_like(m); edge[1:] = m[1:] & ~m[:-1]
+    for k in range(3):
+        e = np.roll(edge, k, axis=0)
+        a[e & m] = [244, 248, 255, 255]
     hd.alpha_composite(img(a))
     rng = random.Random(9)
     for i in range(26):
@@ -585,8 +611,8 @@ def frozen_lake(night=False):
         x, y = rng.uniform(160, 760), rng.uniform(hz + 30, 680)
         for k in range(4):
             nx, ny = x + rng.uniform(-60, 60), y + rng.uniform(-12, 12)
-            d.line([(x, y), (nx, ny)], fill=C((230, 250, 255)), width=1)
-            d.line([(x, y + 1), (nx, ny + 1)], fill=C((70, 150, 190)), width=1)
+            d.line([(x, y), (nx, ny)], fill=C((240, 252, 255)), width=2)
+            d.line([(x, y + 2), (nx, ny + 2)], fill=C((40, 120, 170)), width=1)
             x, y = nx, ny
     eb = game_img("rejuvenation", "enemybaseFrozen")
     place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
@@ -625,15 +651,17 @@ def frozen_lake_all():
 #---------------------------------------------------------------------------------------------
 # WASTELAND: Bleed-scarred dump under a jaundiced sky
 #---------------------------------------------------------------------------------------------
-def barrel(color=(120, 70, 40), outline=(26, 14, 8), tipped=False):
-    im = Image.new("RGBA", (30, 40), (0, 0, 0, 0))
+def barrel(color=(120, 70, 40), outline=(26, 14, 8), tipped=False, k=1.6):
+    W, H = int(30 * k), int(40 * k)
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    d.rectangle([3, 4, 26, 37], fill=C(color), outline=C(outline))
-    d.ellipse([3, 0, 26, 8], fill=C(lighter(color, 0.2)), outline=C(outline))
-    for y in (12, 26):
-        d.line([3, y, 26, y], fill=C(darker(color, 0.6)), width=2)
-    d.line([6, 6, 6, 36], fill=C(lighter(color, 0.3)))
-    d.rectangle([20, 18, 24, 24], fill=C((150, 220, 70)))   # hazard label
+    d.rectangle([3, 4 * k, W - 4, H - 3], fill=C(color), outline=C(outline))
+    d.ellipse([3, 0, W - 4, 8 * k], fill=C(lighter(color, 0.2)), outline=C(outline))
+    d.ellipse([8, 2 * k, W - 9, 6 * k], fill=C(darker(color, 0.5)))
+    for y in (12 * k, 26 * k):
+        d.line([3, y, W - 4, y], fill=C(darker(color, 0.6)), width=3)
+    d.line([7, 6 * k, 7, H - 4], fill=C(lighter(color, 0.3)), width=2)
+    d.rectangle([W * 0.55, H * 0.45, W * 0.8, H * 0.62], fill=C((150, 220, 70)), outline=C(outline))
     return im.rotate(80, expand=True) if tipped else im
 
 
@@ -661,8 +689,8 @@ def wasteland():
         d.ellipse([x - rx, y - ry, x + rx, y + ry], fill=C((90, 170, 60)), outline=C((30, 50, 20)))
         d.ellipse([x - rx * 0.6, y - ry * 0.6, x + rx * 0.3, y + ry * 0.2], fill=C((150, 220, 90)))
         pd.ellipse([x - rx - 20, y - ry - 12, x + rx + 20, y + ry + 12], fill=(140, 255, 90, 255))
-    eb = game_img("reborn", "enemybaseWasteland")
-    place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
+    plat_pair(hd, (74, 66, 66), (40, 34, 38), outline=(16, 12, 14),
+              speckle=([(110, 100, 90), (50, 44, 46), (130, 160, 70)], 220))
     save_room("field_wasteland", hd)
     pg = pools.filter(ImageFilter.GaussianBlur(10))
     layers = [layer(F, "pools", posterize_alpha(pg, 6), z=1, blend=1, opacity=110, anim=S("pulse"), min=40,

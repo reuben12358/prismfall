@@ -32,13 +32,36 @@ def main(argv):
     for fid in sorted(REGISTRY):
         if fid in want:
             print("building", fid)
+            import paint
+            paint.PREVIEW.clear()
             res = REGISTRY[fid]()
+            write_preview(fid, res)
             profiles[fid] = res["profile"]
             origins[fid] = res["origins"]
         elif fid in prev:
             profiles[fid] = None   # keep the previously generated text
     write_ruby(profiles, prev)
     json.dump(origins, open(ORIGINS, "w"), indent=1, sort_keys=True)
+
+
+PREV_DIR = "/tmp/bd/prev"
+
+
+def write_preview(fid, res):
+    """Room + recorded layers composited (static frame) for quick offline review."""
+    import paint
+    os.makedirs(PREV_DIR, exist_ok=True)
+    name = res.get("room", "field_" + fid.lower())
+    p = os.path.join(OUT, "battlebg", name + "_hd.png")
+    if not os.path.exists(p):
+        return
+    hd = Image.open(p).convert("RGBA")
+    for im, (x, y), bl, op, frames in paint.PREVIEW:
+        if frames > 1:
+            im = im.crop((0, 0, im.width // frames, im.height))
+        top = blank(); top.alpha_composite(im, (int(x), int(y)))
+        hd = blend(hd, top, "add" if bl == 1 else "normal", (op or 255) / 255.0)
+    hd.save(os.path.join(PREV_DIR, name + ".png"))
 
 
 def load_previous_profiles():

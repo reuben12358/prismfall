@@ -6,6 +6,7 @@ from bblib import *
 from rubygen import S
 
 INV = 1.0 / 2.25   # exact: drawn at 1:1 on screen at the default camera
+PREVIEW = []       # (image, (x, y) HD top-left, blend, opacity) recorded for offline previews
 
 
 def blank(size=HD):
@@ -28,6 +29,8 @@ def layer(field, tag, im, anchor=None, z=1, crop=True, **kw):
             im = im.crop(bb)
             x0, y0 = bb[0], bb[1]
     save_element(name, im)
+    op = kw.get("max", kw.get("opacity", 255))
+    PREVIEW.append((im, (x0, y0), kw.get("blend", 0), op, kw.get("frames", 1)))
     if anchor is None:
         anchor = (x0, y0)
     spec = {S("bitmap"): name, S("hd"): True,
@@ -42,6 +45,7 @@ def strip(field, tag, im, y_hd, speed=0.5, direction=1, z=3, opacity=255, vertic
     """Save a horizontally tileable HD strip and return an EBDX scrolling img entry."""
     name = "pf_%s_%s" % (field, tag)
     save_element(name, im)
+    PREVIEW.append((im, (0, y_hd), 0, opacity, 1))
     d = {S("bitmap"): name, S("scrolling"): True, S("speed"): speed, S("direction"): direction,
          S("flat"): True, S("ox"): 0, S("oy"): 0, S("x"): 0, S("y"): round(y_hd / 2.25, 2),
          S("zoom_x"): INV, S("zoom_y"): INV, S("z"): z}

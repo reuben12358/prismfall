@@ -8,8 +8,10 @@ D = OUT
 
 
 def compose(name):
-    hd = Image.open(os.path.join(D, "battlebg", name + "_hd.png")).convert("RGBA")
-    return hd
+    pv = os.path.join("/tmp/bd/prev", name + ".png")
+    if os.path.exists(pv):
+        return Image.open(pv).convert("RGBA")
+    return Image.open(os.path.join(D, "battlebg", name + "_hd.png")).convert("RGBA")
 
 
 def main(out, names, cols=4, scale=0.5, full=False):
