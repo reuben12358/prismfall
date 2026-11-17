@@ -129,6 +129,19 @@ draw16(3, 2, pool, 0, 15, 0, 0); draw16(2, 2, loom, 3, 15); draw16(2, 2, netrack
 pri[15 * 8 + 7] = 5; pas[15 * 8 + 7] = 0; pri[15 * 8 + 3] = pri[15 * 8 + 4] = 5; pas[15 * 8 + 3] = pas[15 * 8 + 4] = 0
 pri[15 * 8 + 5] = pri[15 * 8 + 6] = 5; pas[15 * 8 + 5] = pas[15 * 8 + 6] = 0
 draw16(3, 1, awning, 1, 17, 0, 5)
+
+
+def oil_lamp(lit):
+    def f(d, im):       # an old quay oil lamp on an iron post (16-px art); `lit` adds the flame and a warm halo
+        if lit: d.ellipse([2, 0, 13, 9], fill=(255, 226, 140, 90))
+        d.rectangle([7, 7, 8, 15], fill=(58, 58, 66, 255)); d.rectangle([5, 14, 10, 15], fill=(58, 58, 66, 255))
+        d.rectangle([5, 2, 10, 7], fill=(250, 214, 110, 255) if lit else (92, 104, 112, 255), outline=(40, 40, 48, 255))
+        d.line([5, 1, 10, 1], fill=(40, 40, 48, 255)); d.point([7, 0], fill=(40, 40, 48, 255))
+        if lit: d.rectangle([7, 4, 8, 6], fill=(255, 255, 230, 255))
+    return f
+
+
+draw16(1, 1, oil_lamp(False), 6, 20, 0, 0); draw16(1, 1, oil_lamp(True), 7, 20, 0, 0)   # quay lamps (events draw them)
 crown(4, 3, 23, 4, 17)
 crown(6, 4, 31, 0, 20)
 os.makedirs(os.path.join(HERE, 'custom'), exist_ok=True)

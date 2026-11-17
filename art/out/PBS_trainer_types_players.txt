@@ -1,0 +1,37 @@
+# Prismfall player trainer types, from the Character Artist, for the trainer/PBS owner to merge into
+# pbs/trainer_types.txt (Essentials v21.1 format, mirroring the stock POKEMONTRAINER_Red / _Leaf entries).
+# Art: Graphics/Trainers/PLAYER_A.png, PLAYER_A_back.png, Graphics/Characters/trainer_PLAYER_A.png (same for _B).
+# Gender here only sets the default pronoun/flag for the look; the player picks the look in the intro.
+#-------------------------------
+[PLAYER_A]
+Name = Pokémon Trainer
+Gender = Male
+BaseMoney = 60
+#-------------------------------
+[PLAYER_B]
+Name = Pokémon Trainer
+Gender = Female
+BaseMoney = 60
+#
+# Matching metadata.txt player entries (also for the PBS owner; the run/bike/surf/fish sets are
+# still the stock boy_*/girl_* charsets until Prismfall versions exist):
+#
+# [1]
+# TrainerType = PLAYER_A
+# WalkCharset = trainer_PLAYER_A
+# RunCharset = boy_run
+# CycleCharset = boy_bike
+# SurfCharset = boy_surf
+# DiveCharset = boy_surf
+# FishCharset = boy_fish_offset
+# SurfFishCharset = boy_fish_offset
+#
+# [2]
+# TrainerType = PLAYER_B
+# WalkCharset = trainer_PLAYER_B
+# RunCharset = girl_run
+# CycleCharset = girl_bike
+# SurfCharset = girl_surf
+# DiveCharset = girl_surf
+# FishCharset = girl_fish_offset
+# SurfFishCharset = girl_fish_offset

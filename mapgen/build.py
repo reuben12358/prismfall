@@ -181,6 +181,16 @@ def prepare(spec, ctx):
             if te is None:
                 ctx.warn(mid, 'take_events: no %r in template %s' % (tk['name'], tk['template'])); continue
             te.ivars['x'], te.ivars['y'] = tk['at']
+            for pg in te.ivars['pages'][:1] if (tk.get('prepend') or tk.get('replace_text')) else []:
+                L = pg.ivars['list']
+                for c in L:
+                    pr = c.ivars['parameters']
+                    if c.ivars['code'] in (101, 401) and pr and pr[0] in (tk.get('replace_text') or {}):
+                        pr[0] = tk['replace_text'][pr[0]]
+                if tk.get('prepend'):
+                    pre = G.compile_cmds(tk['prepend'])
+                    i0 = next((i for i, c in enumerate(L) if c.ivars['code'] not in (108, 408, 355)), 0)
+                    L[i0:i0] = pre
             spec['_tevents'].append(te)
     if 'tileset' in spec:
         ts = spec['tileset']
@@ -213,6 +223,13 @@ def pages_from(e, ctx, mid):
         tgt = resolve_target(e, ctx, mid, door=True)
         char, pat, d = e.get('gfx', ['doors1', 0, 2])
         pg = G.door_pages(char, pat, d, tgt)
+        if e.get('locked'):     # {until: SWITCH, text: ...}: a locked page first, the door opens once SWITCH is on
+            lk = e['locked']; sw = flag(lk['until'], 'switches')
+            for p in pg:
+                c = p.ivars['condition'].ivars
+                if c['switch1_valid']: c['switch2_valid'], c['switch2_id'] = True, sw
+                else: c['switch1_valid'], c['switch1_id'] = True, sw
+            pg = [G.page(gfx=G.graphic(char, d, pat), cmds=G.compile_cmds(lk.get('commands') or [lk['text']]))] + pg
         return pg
     if t in ('exit', 'warp'):
         tgt = resolve_target(e, ctx, mid, door=False)
@@ -310,6 +327,13 @@ def build_map(spec, ctx):
         nid = max(nid, ev.id + 1)
     occupied = {(ev.x, ev.y): ev.id for ev in tev}
     pal = ctx.palette(spec.get('palette', 'outside')) if 'map' in spec else None
+    G.EVMAP.clear()                     # event names -> ids, so commands can say who: "Name" / %EV[Name]%
+    for ev in tev: G.EVMAP.setdefault(ev.name, ev.id)
+    k = nid
+    for e in spec['events']:
+        x, y = e['at']
+        if 0 <= x < W and 0 <= y < H:
+            G.EVMAP.setdefault(e.get('name') or default_name(e), k); k += 1
     for e in spec['events']:
         x, y = e['at']
         if not (0 <= x < W and 0 <= y < H):
@@ -487,6 +511,7 @@ def main():
     built = {s['id']: s['name'] for s in specs}
     os.makedirs(os.path.join(OUT, 'Data'), exist_ok=True)
     os.makedirs(os.path.join(OUT, 'previews'), exist_ok=True)
+    os.makedirs(os.path.join(OUT, 'previews', 'mood'), exist_ok=True)
     os.makedirs(os.path.join(OUT, 'PBS'), exist_ok=True)
     selected = [s for s in specs if not args or str(s['id']) in args or s['_file'] in args]
     mapinfos = []
@@ -501,6 +526,9 @@ def main():
         if '--no-preview' not in sys.argv:
             import render as R
             img = R.render(m2, grid='--grid' in sys.argv)
+            if '--mood' in sys.argv and (s.get('tone') or s.get('fog')):   # second preview with tone + fog applied
+                R.mood(img, s.get('tone'), s.get('fog')).convert('RGB').save(
+                    os.path.join(OUT, 'previews', 'mood', '%03d_%s.png' % (s['id'], slug(s['name']))))
             img.convert('RGB').save(os.path.join(OUT, 'previews', '%03d_%s.png' % (s['id'], slug(s['name']))))
         print('built %3d %-34s %dx%d ts=%d events=%d' % (s['id'], s['name'], m.width, m.height, m.tileset_id, len(m.events)))
     # PBS
@@ -540,13 +568,30 @@ def main():
         if s.get('tone'):
             rb.append('    %d => [%s],   # %s' % (s['id'], ', '.join(str(int(v)) for v in s['tone']), s['name']))
     rb += ['  }', '',
+           '  # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)',
+           '  MAP_FOGS = {']
+    for s in specs:
+        f = s.get('fog')
+        if f:
+            rb.append('    %d => ["%s", %d, %d, %d, %d, %d, %d],   # %s' % (s['id'], f['name'], f.get('hue', 0), f.get('opacity', 60),
+                      f.get('blend', 0), f.get('zoom', 100), f.get('sx', 2), f.get('sy', 0), s['name']))
+    rb += ['  }', '',
+           '  def self.apply_map_fog',
+           '    return if !$game_map',
+           '    f = MAP_FOGS[$game_map.map_id]',
+           '    return if !f',
+           '    $game_map.fog_name, $game_map.fog_hue, $game_map.fog_opacity, $game_map.fog_blend_type, $game_map.fog_zoom, $game_map.fog_sx, $game_map.fog_sy = *f',
+           '  end', '',
            '  def self.apply_map_tone', '    return if !$game_map || !$game_screen',
            '    t = MAP_TONES[$game_map.map_id]', '    tone = (t) ? Tone.new(*t) : Tone.new(0, 0, 0, 0)',
            '    return if @last_tone_map == $game_map.map_id', '    @last_tone_map = $game_map.map_id',
            '    $game_screen.start_tone_change(tone, 0) if t || @tone_was_set', '    @tone_was_set = !t.nil?', '  end', 'end', '',
-           'EventHandlers.add(:on_enter_map, :prismfall_map_tone,', '  proc { |_old_map_id| PrismfallMaps.apply_map_tone }', ')']
+           'EventHandlers.add(:on_enter_map, :prismfall_map_tone,', '  proc { |_old_map_id| PrismfallMaps.apply_map_tone; PrismfallMaps.apply_map_fog }', ')']
     pdir0 = os.path.join(OUT, 'Plugins', 'Prismfall Maps')
     open(os.path.join(pdir0, '005_MapAtmosphere.rb'), 'w', encoding='utf-8').write('\n'.join(rb) + '\n')
+    # hand-written runtime helpers used by the story events (pfm_* flags, story items, quest log, title cards)
+    for rbf in sorted(glob.glob(os.path.join(HERE, 'ruby', '*.rb'))):
+        shutil.copyfile(rbf, os.path.join(pdir0, os.path.basename(rbf)))
     bosses = yaml.safe_load(open(os.path.join(HERE, 'bosses.yaml'))) or {}
     rb = ['# GENERATED by mapgen/build.py from mapgen/bosses.yaml - do not edit. Story bosses used by the generated maps.',
           'if defined?(Prismfall::Bosses)']

@@ -673,7 +673,7 @@
  },
  "custom": {
   "offset": 22528,
-  "tiles": 264,
+  "tiles": 320,
   "names": {
    "strand_h": 22528,
    "strand_v": 22536,
@@ -690,9 +690,12 @@
    "curtain": 22664,
    "shaft": 22680,
    "shade": 22712,
-   "survey_flag": 22728,
-   "silk_tree": 22744,
-   "crystal_tree": 22768
+   "veil": 22728,
+   "survey_flag": 22736,
+   "silk_tree": 22752,
+   "crystal_tree": 22776,
+   "web_big": 22800,
+   "loom": 22824
   }
  }
 }

@@ -78,6 +78,22 @@ def main():
         e = IT.build_entry(d); im = Image.open(d['graphic']).convert('RGBA'); n = im.height // 32 * 8
         offs['pf_' + key] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [d['id']]}
         pas += e['passages'][384:384 + n]; pri += e['priorities'][384:384 + n]; tag += [0] * n; ims.append(im)
+    # red-roofed timber (appended last so every earlier offset stays put): Poké Centers in the timber villages
+    im = src.copy(); px = im.load(); cache = {}; n = src.height // 32 * 8
+    for y in range(im.height):
+        for x in range(256):
+            r, g, b, a = px[x, y]
+            if a == 0: continue
+            k = (r, g, b)
+            if k not in cache:
+                h, s_, v = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)
+                if 0.0 <= h <= 0.11 and s_ > 0.3 and v < 0.8:
+                    cache[k] = tuple(int(c * 255) for c in colorsys.hsv_to_rgb(0.995, min(1.0, s_ * 1.15), v * 1.02))
+                else: cache[k] = k
+            px[x, y] = cache[k] + (a,)
+    offs['sheridan_red'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [37]}
+    p = [int(v) for v in st.passages.data.reshape(-1)][384:384 + n]; q = [int(v) for v in st.priorities.data.reshape(-1)][384:384 + n]
+    pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n; ims.append(im)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

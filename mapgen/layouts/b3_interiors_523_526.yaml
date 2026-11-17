@@ -1,0 +1,169 @@
+# Builder 3's versions of 523 Hale Farmhouse and 526 Woodward's Hut (story/20_SCRIPT_CH0-2.md), kept OUTSIDE specs/ so they
+# don't duplicate the copies carried in specs/121_briarwick_interiors.yaml. Towns builder: please have layouts/early_interiors.py
+# load these two docs instead of the carried-over ones (see mapgen/REQUESTS.md). Still on the stock 'house'/'house2' templates.
+id: 523
+name: Hale Farmhouse
+parent: 521
+template: house
+exit_link: R2_FARM
+drop_template_events:
+- Daisy
+- Dr Footstep
+- Effort ribbon giver
+- Contest ribbon giver
+- Stats judge
+bgm: Route 2
+metadata:
+  MapPosition:
+  - 0
+  - 14
+  - 23
+events:
+- type: sign
+  at:
+  - 6
+  - 4
+  post: false
+  name: Kitchen table
+  text: Six chairs. One has "JUNO" carved in it. One newer carving beside it says "\PN". The knife is still on the table.
+- type: event
+  name: Wenna
+  at:
+  - 4
+  - 4
+  pages:
+  - graphic:
+      sprite: NPC 16
+      dir: right
+    commands:
+    - '\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.'
+  - cond:
+      switch: CH1_ORCHARD_DONE
+    graphic:
+      sprite: NPC 16
+      dir: right
+    commands:
+    - if: $game_self_switches[[523, 0, 'BISCUIT']]
+      then:
+      - '\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.'
+      else:
+      - (Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
+      - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here - and another tart, for the nerves. Mine.'
+      - script: pbReceiveItem(:ORANBERRY, 3)
+      - 'QUEST COMPLETE: "Biscuit".'
+      - script: $game_self_switches[[523, 0, 'BISCUIT']] = true
+- type: npc
+  name: Farmer Hale
+  at:
+  - 9
+  - 5
+  sprite: NPC 25
+  dir: left
+  text: 'Farmer Hale: Juno''s dad. Coll''s out in the yard teaching headbutts again. Mind the apple trees, and mind Coll.'
+- type: sign
+  at:
+  - 11
+  - 2
+  post: false
+  name: Bookshelf
+  text: '"Berries of the South Coast", annotated in tiny handwriting: "WRONG." "ALSO WRONG." "Ask Uncle Rowan."'
+- type: sign
+  at:
+  - 9
+  - 1
+  post: false
+  name: Juno's seed packets
+  text: Seed packets pinned to the wall like butterflies. One is labeled "MYSTERY (do not eat) (I ate one) (do NOT eat)".
+- type: event
+  name: Bed
+  at:
+  - 1
+  - 5
+  pages:
+  - commands:
+    - You could rest here.
+    - choices:
+      - Rest
+      - Not now
+      cancel: 2
+      branches:
+      - - tone:
+          - -255
+          - -255
+          - -255
+          - 0
+          - 16
+        - wait: 20
+        - heal: true
+        - tone:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 16
+        - if: $game_switches[105] && $game_variables[102] < 2
+          then:
+          - tone:
+            - -255
+            - -255
+            - -255
+            - 0
+            - 20
+          - wait: 24
+          - (Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.)
+          - '"Subject reads NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred."'
+          - '"Second such reading in my life."'
+          - '"The first was in Crownhaven, AF 290."'
+          - '"God help us, Ines."'
+          - (She closes the notebook. Across the harbor the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat stands
+            on the gallery, looking at the station.)
+          - var:
+            - STORY_CHAPTER
+            - 2
+          - tone:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 20
+          else: []
+      - []
+---
+id: 526
+name: Woodward's Hut
+parent: 524
+template: house2
+exit_link: WOOD_HUT
+drop_template_events:
+- Kurt
+bgm: Route 3
+metadata:
+  MapPosition:
+  - 0
+  - 13
+  - 23
+events:
+- type: event
+  name: Woodward
+  at:
+  - 7
+  - 4
+  pages:
+  - graphic:
+      sprite: trainer_HIKER
+      dir: down
+    commands:
+    - 'Woodward: Past my hut it''s all glass. I''ve stopped chopping. You can''t burn it and it cuts the axe.'
+    - if: $game_self_switches[[526, 0, 'POTIONS']]
+      then: []
+      else:
+      - 'Woodward: Here. For whatever you think you''re doing.'
+      - script: pbReceiveItem(:POTION, 3)
+      - script: $game_self_switches[[526, 0, 'POTIONS']] = true
+- type: sign
+  at:
+  - 3
+  - 1
+  post: false
+  name: Bookshelf
+  text: '"Tally of the east trees. Midwinter: 0 glass. Thaw: 40. Spring: 300. I have stopped counting. - W."'

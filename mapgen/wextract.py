@@ -41,7 +41,7 @@ def main():
             doors.sort(key=lambda d: (-d[1], d[0])); st['door'] = list(doors[0]); st['doors'] = [list(d) for d in doors]
             st['door_gfx'] = ['', 0, 2]
         out[name] = st
-        for suf, key in (('_s', 'sheridan_slate'), ('_m', 'sheridan_moss')):      # recoloured variants
+        for suf, key in (('_s', 'sheridan_slate'), ('_m', 'sheridan_moss'), ('_r', 'sheridan_red')):      # recoloured variants
             if grp['sheet'] == 'sheridan' and key in offs:
                 dlt = offs[key]['offset'] - offs['sheridan']['offset']
                 v = dict(st); v['layers'] = np.where(lay > 0, lay + dlt, 0).tolist(); out[name + suf] = v

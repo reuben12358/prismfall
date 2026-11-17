@@ -66,6 +66,9 @@ for key, pre in (('town_props', 'tp_'), ('houses', 'hs_'), ('forest', 'fo_')):  
         x, y, w, h = st['tile_rect']
         rows = [[base + 384 + (y + r) * 8 + x + c for c in range(w)] for r in range(h)]
         V[pre + st['name']] = mk(rows, top=(h - 1 if st.get('kind') != 'house' else (1 if h >= 4 else 0)))
+if 'hs_jonquil_08' in V:      # Ferrow's lighthouse: the octagonal tower of jonquil_08 without its loose base pieces
+    L = V['hs_jonquil_08']['layers']; rows = [[L[1][y][x] or L[2][y][x] for x in range(5)] for y in range(9)]
+    V['lh_ferrow'] = mk(rows, top=6)
 json.dump(V, open(os.path.join(HERE, 'data', 'stamps_v.json'), 'w'))
 STAMPS.update(V)
 citykit.DOORS.update({'g_tree6': (4, 7), 'g_tree4': (2, 6)})

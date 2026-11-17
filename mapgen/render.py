@@ -171,6 +171,34 @@ def render(m, events=True, grid=False, ts=None):
     return img
 
 
+def mood(img, tone=None, fog=None):
+    """Approximate the in-game look: RMXP screen tone (r, g, b added, gray desaturates) and a fog picture tiled over
+    the map at its opacity / blend (0 normal, 1 add, 2 subtract). Fog files: maps_out/Graphics/Fogs, then GFX/Fogs."""
+    import numpy as np
+    a = np.asarray(img.convert('RGB')).astype(np.float32)
+    if fog:
+        fp = next((p for p in (os.path.join(OUT_GFX, 'Fogs', fog['name'] + '.png'), os.path.join(GFX, 'Fogs', fog['name'] + '.png'))
+                   if os.path.exists(p)), None)
+        if fp:
+            f = Image.open(fp).convert('RGBA'); z = fog.get('zoom', 100) / 100.0
+            if z != 1: f = f.resize((max(1, int(f.width * z)), max(1, int(f.height * z))))
+            tile = Image.new('RGBA', img.size)
+            for y in range(0, img.height, f.height):
+                for x in range(0, img.width, f.width):
+                    tile.paste(f, (x, y))
+            t = np.asarray(tile).astype(np.float32); al = t[..., 3:4] / 255.0 * fog.get('opacity', 60) / 255.0
+            b = fog.get('blend', 0)
+            if b == 1: a = a + t[..., :3] * al
+            elif b == 2: a = a - t[..., :3] * al
+            else: a = a * (1 - al) + t[..., :3] * al
+    if tone:
+        r, g, b_, gray = (list(tone) + [0, 0, 0, 0])[:4]
+        if gray:
+            l = a.mean(axis=2, keepdims=True); a = a + (l - a) * (gray / 255.0)
+        a = a + np.array([r, g, b_], dtype=np.float32)
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+
 def main():
     a = sys.argv[1:]
     m = M.load_file(a[0])

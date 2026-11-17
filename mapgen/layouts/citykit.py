@@ -139,7 +139,7 @@ class City:
         st = STAMPS[name]; w, h = st['w'], st['h']
         if not force and not self.free(x - pad, y, w + 2 * pad, h, on): return None
         d = {'stamp': name, 'at': [x, y]}
-        dd = door or DOORS.get(name) or DOORS.get(name[:-2] if name[-2:] in ('_s', '_m') else name)
+        dd = door or DOORS.get(name) or DOORS.get(name[:-2] if name[-2:] in ('_s', '_m', '_r') else name)
         if link:
             d.update({'link': link, 'name': dname or name, 'door': list(dd)})
         self.stamps.append(d)
@@ -248,7 +248,7 @@ class City:
 
     def front_place(self, name, near, link=None, dname=None, street='kbco', r=14):
         """Put a named building on the street frontage nearest to `near` (its door row sits just above street cells)."""
-        st = STAMPS[name]; w, h = st['w'], st['h']; dd = DOORS.get(name, (w // 2, h - 1))
+        st = STAMPS[name]; w, h = st['w'], st['h']; dd = DOORS.get(name) or DOORS.get(name[:-2] if name[-2:] in ('_s', '_m', '_r') else name, (w // 2, h - 1))
         cand = []
         for y in range(max(h, near[1] - r), min(self.H - 1, near[1] + r)):
             for x in range(max(0, near[0] - r), min(self.W - w, near[0] + r)):

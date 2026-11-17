@@ -64,7 +64,7 @@ OBJ = {
     # custom strip
     'cocoon': (CU['cocoon'], 1, 2, 1), 'cocoon_big': (CU['cocoon_big'], 2, 3, 2), 'cocoon_low': (CU['cocoon_low'], 1, 1, 1),
     'curtain': (CU['curtain'], 1, 2, 1), 'shaft': (CU['shaft'], 2, 4, 0), 'shade': (CU['shade'], 2, 2, 4),
-    'survey_flag': (CU['survey_flag'], 1, 2, 1), 'barrier': (3293, 2, 1, 1),
+    'survey_flag': (CU['survey_flag'], 1, 2, 1), 'web_big': (CU.get('web_big', CU['web_nw']), 3, 3, 0), 'veil': (CU['veil'], 1, 1, 0), 'barrier': (3293, 2, 1, 1),
     'silk_tree': (CU['silk_tree'], 2, 3, 1), 'crystal_tree': (CU['crystal_tree'], 2, 3, 1),
 }
 for _k, (_t, _w, _h, _kind) in PF.items():
@@ -212,6 +212,28 @@ class Wild(City):
         for _, dx, dy in cand:
             if self.obj(name, x + dx, y + dy, on, bleed): return (x + dx, y + dy)
         print('  landmark %s could not be placed near %d,%d' % (name, x, y)); return None
+
+    def overhang(self, p=0.5, seed=0, bleed=False):
+        """Canopy hanging over the trail: walkable cells beside forest get a tree-top tile overhead (walk-under)."""
+        import random as _r
+        r = _r.Random(self.seed * 11 + seed); sh = B if bleed else 0
+        tops = [(401, 402), (405, 406), (605, 606), (688, 689)]
+        for y in range(1, self.H - 1):
+            for x in range(1, self.W - 1):
+                if self.o[2][y][x] or not self.walkable(x, y): continue
+                if self.g[y][x - 1] in 'TU' and r.random() < p:
+                    self.o[2][y][x] = r.choice(tops)[1] + sh
+                elif self.g[y][x + 1] in 'TU' and r.random() < p:
+                    self.o[2][y][x] = r.choice(tops)[0] + sh
+                elif self.g[y - 1][x] in 'TU' and r.random() < p * 0.5:
+                    self.o[2][y][x] = r.choice(tops)[r.randint(0, 1)] + sh
+
+    def keep_clear(self, cells, r=2):
+        """Reserve ground around gates and warps so no tree or prop crowds them."""
+        for cx, cy in cells:
+            for y in range(cy - r, cy + r + 1):
+                for x in range(cx - r, cx + r + 1):
+                    if self.inb(x, y) and self.g[y][x] in WALK: self.taken[y][x] = True
 
     def seal(self):
         """Call once the terrain is final: from here on no prop may strand walkable ground."""

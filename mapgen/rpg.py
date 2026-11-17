@@ -135,13 +135,26 @@ def _f(v, kind):
 import re as _re
 
 
+EVMAP = {}       # set by build.py per map: event name -> event id (for `who: "Name"` and %EV[Name]% in scripts)
+
+
+def ev_id(who):
+    if isinstance(who, int): return who
+    if who == 'player': return -1
+    if who == 'self': return 0
+    if who not in EVMAP: raise ValueError('no event named %r on this map' % who)
+    return EVMAP[who]
+
+
 def subst(text):
-    """@@NAME in scripts/conditions -> the switch/variable id from flags.yaml (variables first)."""
+    """@@NAME in scripts/conditions -> the switch/variable id from flags.yaml (variables first);
+    %EV[Name]% -> the id of the event called Name on the map being built."""
     def rep(m):
         try:
             return str(_f(m.group(1), 'variables'))
         except ValueError:
             return str(_f(m.group(1), 'switches'))
+    text = _re.sub(r'%EV\[([^\]]+)\]%', lambda m: str(ev_id(m.group(1))), text)
     return _re.sub(r'@@([A-Z][A-Z0-9_]*)', rep, text)
 
 
@@ -225,8 +238,10 @@ def compile_cmds(items, indent=0, ctx=None):
         elif k == 'jump_label': out.append(ev_cmd(119, indent, [v]))
         elif k == 'common_event': out.append(ev_cmd(117, indent, [int(v)]))
         elif k == 'move':
-            push_move(out, v.get('who', 0), route_cmds(v['route']), indent, v.get('wait', True),
+            push_move(out, ev_id(v.get('who', 0)), route_cmds(v['route']), indent, v.get('wait', True),
                       v.get('repeat', False), v.get('skippable', True))
+        elif k == 'anim':      # show animation on a character: {anim: [who, animation_id]} (Essentials: 3 = "!")
+            out.append(ev_cmd(207, indent, [ev_id(v[0]), int(v[1])]))
         elif k == 'raw':
             out.append(ev_cmd(v[0], indent, v[1]))
         else:

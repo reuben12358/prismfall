@@ -1,13 +1,58 @@
 #!/usr/bin/env python3
 """Writes specs/130_loomhouse_gym.yaml (Gym 1, rooms 130-133) from design/GYM_PUZZLES.md 'Gym 1'.
 The puzzle events are repetitive, so they are generated here; edit this script, then run build.py."""
-import os
+import os, json, random
 import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 V_A, V_B, V_C = 305, 306, 307           # = flags.yaml GYM1_A/B/C           # heddle variables (gym 1 block 305-309)
 S_ALPHA, S_BETA, S_GAMMA = 305, 306, 307  # cord switches for the Canopy Lofts
 FIELD_RULE = 'setBattleRule("field", :SILKWOOD)'
+
+
+CU = json.load(open(os.path.join(HERE, 'data', 'compose_wilds_offsets.json')))['custom']['names']
+PLANK = 3807                      # cross-board walkway tile (passable, priority 0) used as the plank event graphic
+
+
+def say(who, expr, text):
+    return '\\pf[%s,%s]%s: %s' % (who.upper(), expr, who.capitalize(), text)
+
+
+def key(m, k): return "$game_self_switches[[%d, 0, '%s']]" % (m, k)
+
+
+def decorate(rows, seed, extra=()):
+    """Builder 3: canopy-gym dressing on tileset 40 for a glyph grid (palettes/loom.yaml).
+    Deck lips on the drop below every deck edge, treetops far below in the dark, silk webs in the corners,
+    curtains on 'o' cells. Returns a `tiles:` list."""
+    r = random.Random(seed); g = [list(l) for l in rows]; H, W = len(g), len(g[0]); out = []; used = set()
+    walk = lambda x, y: 0 <= x < W and 0 <= y < H and g[y][x] in '._o'
+    def put(t, x, y, z):
+        if (x, y, z) in used or not (0 <= x < W and 0 <= y < H): return
+        used.add((x, y, z)); out.append({'tile': t, 'at': [x, y], 'layer': z})
+    for y in range(H):
+        for x in range(W):
+            c = g[y][x]
+            if c == 'o':
+                put(CU['curtain'] + 8, x, y, 1)
+                if y > 0 and g[y - 1][x] != 'o': put(CU['curtain'], x, y - 1, 2)
+            elif c in 'v#':
+                if walk(x, y - 1):                                   # the deck's front lip with its posts
+                    put(3811 if not walk(x - 1, y - 1) else (3813 if not walk(x + 1, y - 1) else 3812), x, y, 1)
+                elif r.random() < 0.06:
+                    put(CU['strand_h'] if r.random() < 0.5 else CU['strand_d1'], x, y, 2)
+            elif c in '._' and r.random() < 0.05:
+                put(r.choice([1164, 1172, 8136]) if c == '.' else 1164, x, y, 1)
+    for y in range(H):                                              # web fans where the deck meets the drop at corners
+        for x in range(W):
+            if g[y][x] in '._' and not walk(x - 1, y) and not walk(x, y - 1) and r.random() < 0.6: put(CU['web_nw'], x, y, 2)
+            elif g[y][x] in '._' and not walk(x + 1, y) and not walk(x, y - 1) and r.random() < 0.6: put(CU['web_ne'], x, y, 2)
+    for name, x, y in extra:                                         # looms, cocoons: multi-tile custom objects
+        w, h, base = {'loom': (3, 3, 1), 'cocoon': (1, 2, 1), 'cocoon_big': (2, 3, 2), 'web_big': (3, 3, 0), 'shaft': (2, 4, 0)}[name]
+        for dy in range(h):
+            for dx in range(w):
+                put(CU[name] + dy * 8 + dx, x + dx, y + dy, 1 if (dy >= h - base and base) else 2)
+    return out
 
 
 def grid(rows, w):
@@ -36,7 +81,7 @@ def plank_events(var, rows, prefix):
     evs = []
     for k, x in enumerate((3, 12, 21)):
         for y in rows:
-            pages = [{'cond': ({'var': [var, k]} if k else None), 'graphic': {'tile': 452}}]
+            pages = [{'cond': ({'var': [var, k]} if k else None), 'graphic': {'tile': PLANK}}]
             if pages[0]['cond'] is None:
                 del pages[0]['cond']
             if k < 2:
@@ -95,81 +140,205 @@ def canopy_lofts():
                 {'tone': [0, 0, 0, 0, 8]}], []]}]}]})
     evs.append({'type': 'warp', 'name': 'Down to Weaving Hall', 'at': [1, 23], 'to': {'map': 131, 'x': 12, 'y': 1, 'dir': 'down'}})
     evs.append({'type': 'warp', 'name': 'To the Spindle', 'at': [22, 2], 'link': 'GYM1_SPINDLE',
-                'to': {'map': 133, 'x': 6, 'y': 11, 'dir': 'up'}, 'arrive': [21, 3, 'down']})
+                'to': {'map': 133, 'x': 8, 'y': 13, 'dir': 'up'}, 'arrive': [21, 3, 'down']})
     evs.append({'type': 'item', 'at': [13, 5], 'item': 'SILVERPOWDER'})
     evs.append(trainer((13, 21), 'BUGCATCHER', 'Hollis', 3, 'left'))
     evs.append(trainer((20, 15), 'POKEMONRANGER_M', 'Ash', 3, 'left'))
     return '\n'.join(''.join(r) for r in g), evs
 
 
-def trainer(at, ttype, name, sight, d):
-    return {'type': 'trainer', 'at': list(at), 'sight': sight, 'dir': d, 'sprite': 'trainer_' + ttype,
+def trainer(at, ttype, name, sight, d, intro=None, after=None, sprite=None):
+    return {'type': 'trainer', 'at': list(at), 'sight': sight, 'dir': d, 'sprite': sprite or 'trainer_' + ttype,
             'trainer': [ttype, name], 'rules': [FIELD_RULE],
-            'intro': '[TODO story] Every thread has its place. Let me show you mine!',
-            'after': '[TODO story] The Warden says the loom remembers every knot.'}
+            'intro': intro or 'Every thread has its place. Let me show you mine!',
+            'after': after or 'The Warden says the loom remembers every knot.'}
+
+
+def reveal_if(cond, names):
+    """Parallel helper: once per map load, if `cond` holds, switch on self switch A of the named events (they appear)."""
+    rb = ("%%w[%s].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n"
+          "  $game_self_switches[[$game_map.map_id, ev.id, 'A']] = true if ev\nend\n$game_map.need_refresh = true") % ' '.join(names)
+    return {'type': 'event', 'name': 'Reveal helper', 'at': [0, 0], 'pages': [
+        {'trigger': 'parallel', 'commands': [{'if': cond, 'then': [{'script': rb}], 'else': []}, {'selfswitch': ['A', True]}]},
+        {'cond': {'self': 'A'}}]}
+
+
+FOYER = ["vvvvvvvvvvvvvvv",
+         "vvvvvv...vvvvvv",
+         "vvv.........vvv",
+         "vv...........vv",
+         "v.............v",
+         "v.............v",
+         "v......._.....v",
+         "v......._.....v",
+         "vv......_....vv",
+         "vv......_....vv",
+         "vvv....._...vvv",
+         "vvvvvv..._vvvvv",
+         "vvvvvvv...vvvvv"]
+SPINDLE = ["vvvvvvvvvvvvvvv",
+           "vvvvv.....vvvvv",
+           "vvv.........vvv",
+           "vv...........vv",
+           "vv...........vv",
+           "v.............v",
+           "v.............v",
+           "v.............v",
+           "vv...........vv",
+           "vv...........vv",
+           "vvv.........vvv",
+           "vvvvv.....vvvvv",
+           "vvvvvv._._vvvvv",
+           "vvvvvvv_._vvvvv",
+           "vvvvvvv...vvvvv"]
 
 
 def main():
     docs = []
-    docs.append({'id': 130, 'name': 'Loomhouse Gym - Foyer', 'parent': 120, 'template': 'gym', 'exit_link': 'BW_GYM',
-                 'drop_template_events': ['Brock', 'Trainer(3)', 'Gym Guy'], 'bgm': 'Gym', 'field': 'SILKWOOD',
-                 'metadata': {'MapPosition': [0, 12, 22]},
+    M = {'MapPosition': [0, 12, 22]}
+    # ---------------------------------------------------------------- 130 Foyer
+    spiral = [
+        say('TAMSIN', 'panic', "Sorry — the gym's a bit tangled today — sorry —"),
+        {'choices': ["It's fine.", "Stop apologizing."], 'cancel': 1, 'branches': [
+            ["\\pf[TAMSIN,panic,sweat]Tamsin: Sorry for saying sorry so much. That's annoying. Sorry."],
+            ["\\pf[TAMSIN,shocked,shock]Tamsin: Right! Yes! Sorr—", say('TAMSIN', 'panic', "I nearly did it again. I'm so sorry.")]]},
+        say('TAMSIN', 'sad', "..."),
+        say('TAMSIN', 'deadpan', "I'm going to go and stand in the web now."),
+        {'move': {'who': 0, 'route': ['up', 'up', 'up', 'up', 'up']}}, {'selfswitch': ['A', True]}]
+    docs.append({'id': 130, 'name': 'Loomhouse Gym - Foyer', 'parent': 120, 'palette': 'loom', 'bgm': 'Gym', 'field': 'SILKWOOD',
+                 'rubric': True, 'tone': [-10, -6, -18, 10], 'metadata': M, 'map': '\n'.join(FOYER),
+                 'tiles': decorate(FOYER, 130, [('loom', 2, 3), ('loom', 10, 3), ('cocoon', 1, 4), ('cocoon', 13, 4), ('web_big', 6, 0)]),
                  'events': [
-                     {'type': 'npc', 'name': 'Gym guide', 'at': [7, 12], 'sprite': 'NPC 01', 'dir': 'down', 'commands': [
-                         '[TODO story] The Warden weaves her puzzles like cloth. Here, take this pattern card.',
-                         'The card reads: "Red lifts the warp and the weft. Gold lifts the weft and the woof. '
-                         'Green lifts the woof and the warp."']},
-                     {'type': 'warp', 'name': 'To Weaving Hall', 'at': [6, 5], 'link': 'GYM1_HALL',
-                      'to': {'map': 131, 'x': 12, 'y': 19, 'dir': 'up'}, 'arrive': [6, 6, 'down']}]})
+                     {'type': 'exit', 'at': [8, 12], 'link': 'BW_GYM', 'se': 'Door exit'},
+                     {'type': 'npc', 'name': 'Gym guide', 'at': [10, 8], 'sprite': 'NPC 01', 'dir': 'left', 'commands': [
+                         "Gym Guide: Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does not. "
+                         "I say this to everyone and half of them bring a Bulbasaur.",
+                         "Gym Guide: The puzzle: three looms, three colors of plank. Pull a shuttle and one color extends while another retracts. "
+                         "Old Mother Loom built it to teach patience. Tamsin added the safety nets. And the apology cards.",
+                         "The pattern card reads: \"Red lifts the warp and the weft. Gold lifts the weft and the woof. Green lifts the woof and the warp.\""]},
+                     {'type': 'sign', 'at': [4, 9], 'name': 'Apology card',
+                      'text': "A card pinned by the trapdoor: \"If you have fallen, I'm so sorry. Stairs are to your left. — T.L.\""},
+                     {'type': 'sign', 'at': [12, 6], 'name': 'Portrait',
+                      'text': "A fierce old woman at a loom. Brass plate: \"Mother Loom, Warden AF 247–299. 'Twist it or lose it.'\""},
+                     {'type': 'event', 'name': 'Tamsin', 'at': [7, 4], 'pages': [
+                         {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': spiral},
+                         {'cond': {'self': 'A'}}]},
+                     {'type': 'warp', 'name': 'To Weaving Hall', 'at': [7, 1], 'link': 'GYM1_HALL',
+                      'to': {'map': 131, 'x': 12, 'y': 19, 'dir': 'up'}, 'arrive': [7, 2, 'down']}]})
+    # ---------------------------------------------------------------- 131 Weaving Hall (heddle bridges)
     hall_events = plank_events(V_A, range(3, 7), 'A') + plank_events(V_B, range(9, 12), 'B') + \
         plank_events(V_C, range(14, 18), 'C')
+    juno_hall = ("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[131, e.id, 'A']] } >= 2")
     hall_events += [lever('Red lever', 3, 18, V_A, V_B, 'red'), lever('Gold lever', 12, 18, V_B, V_C, 'gold'),
                     lever('Green lever', 21, 18, V_C, V_A, 'green'),
-                    {'type': 'warp', 'name': 'Back to Foyer', 'at': [12, 20], 'to': {'map': 130, 'x': 6, 'y': 6, 'dir': 'down'}},
+                    {'type': 'warp', 'name': 'Back to Foyer', 'at': [12, 20], 'to': {'map': 130, 'x': 7, 'y': 2, 'dir': 'down'}},
                     {'type': 'warp', 'name': 'Up to Canopy Lofts', 'at': [12, 0], 'to': {'map': 132, 'x': 2, 'y': 22, 'dir': 'up'}},
-                    trainer((12, 13), 'BUGCATCHER', 'Milo', 3, 'down'),
-                    trainer((21, 7), 'LASS', 'Fern', 3, 'down')]
-    docs.append({'id': 131, 'name': 'Loomhouse Gym - Weaving Hall', 'parent': 130, 'palette': 'gym_rock', 'bgm': 'Gym',
-                 'field': 'SILKWOOD', 'metadata': {'MapPosition': [0, 12, 22]}, 'map': weaving_hall(),
+                    trainer((12, 13), 'BUGCATCHER', 'Nell', 3, 'down', "A thread alone is just string!", "Two of us would've had you."),
+                    trainer((21, 7), 'LASS', 'Orla', 3, 'down', "I pulled the red shuttle. Don't pull the red shuttle first.",
+                            "...Did you pull the red shuttle?"),
+                    trainer((3, 1), 'GENTLEMAN', 'Bram', 3, 'down', "Granny Loom taught me this hall. Tamsin taught me to say sorry when I win.",
+                            "I don't need to say it, then."),
+                    {'type': 'sign', 'at': [14, 19], 'name': 'Safety net',
+                     'text': "A safety net is strung under the ledge. A card is pinned to it: \"Sorry! — T.L.\""},
+                    reveal_if(juno_hall, ['Juno']),
+                    {'type': 'event', 'name': 'Juno', 'at': [11, 19], 'pages': [
+                        {'commands': []},
+                        {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
+                            {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on! I'm being loud! In my head!")],
+                             'else': ["(Juno is at the hall's entrance, eating a honey-silk bun.)",
+                                      say('JUNO', 'happy', "I made it! Go on! I'll be loud!"), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
+    hall = weaving_hall()
+    docs.append({'id': 131, 'name': 'Loomhouse Gym - Weaving Hall', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'rubric': True,
+                 'field': 'SILKWOOD', 'tone': [-10, -6, -18, 10], 'metadata': M, 'map': hall,
+                 'tiles': decorate(hall.split('\n'), 131, [('loom', 15, 0), ('loom', 6, 0), ('cocoon', 1, 7), ('cocoon', 23, 12), ('shaft', 9, 13)]),
                  'events': hall_events})
+    # ---------------------------------------------------------------- 132 Canopy Lofts (spool ziplines)
     lofts, loft_events = canopy_lofts()
-    docs.append({'id': 132, 'name': 'Loomhouse Gym - Canopy Lofts', 'parent': 130, 'palette': 'gym_rock', 'bgm': 'Gym',
-                 'field': 'SILKWOOD', 'metadata': {'MapPosition': [0, 12, 22]}, 'map': lofts, 'events': loft_events})
-    win = ['Tamsin: ...It held. You held. Granny Loom would have liked you.',
-           {'script': 'Prismfall.award_badge(1)'},
-           'The badge settles into the case - and the case hums, faintly, as if something inside woke up.',
-           {'script': 'pbReceiveItem(:TM89)'},
-           'Tamsin: That\'s U-turn. Hit, then get out. ...I wish I were better at the second part.',
-           {'selfswitch': ['A', True]}]
-    confess = [
-        "Tamsin: Can I... tell you something? Not as a Warden. Just as me.",
-        "Tamsin: Briarwick is bankrupt. I signed the Lattice contract. Alone. Nobody else knows.",
-        "Tamsin: And the Glasswood grows fastest along the Lattice line. Thistle was right.",
-        {'choices': ['Tell the village yourself', 'Tell them at the meeting', 'Keep it secret'], 'cancel': 0, 'branches': [
-            [{'script': 'pf_choose(:ch2_tamsin, :help_confess)'},
-             "Tamsin: ...Myself. Yes. It should be me. Thank you for not making it easy."],
-            [{'script': 'pf_choose(:ch2_tamsin, :expose)'},
-             "Tamsin: You'd tell them? ...Then I suppose I can't hide behind the loom any more."],
-            [{'script': 'pf_choose(:ch2_tamsin, :keep_secret)'},
-             "Tamsin: You'd keep it? I... thank you. I'll find a way to fix this. I will."]]},
-        "Tamsin: The Glasswood's heart is Cocoonfall Hollow, west of here past Route 3. I can't cross a Veil. You can.",
-        "Tamsin: Take Granny's shuttle. For luck.",
-        {'selfswitch': ['B', True]}]
-    docs.append({'id': 133, 'name': 'Loomhouse Gym - The Spindle', 'parent': 130, 'template': 'arena',
-                 'drop_template_events': ['Champion', 'Door', 'Entrance'], 'bgm': 'Gym', 'field': 'SILKWOOD',
-                 'metadata': {'MapPosition': [0, 12, 22]},
+    plats = {1: (2, 22), 2: (12, 20), 3: (4, 12), 4: (19, 14), 5: (12, 6), 6: (20, 3)}
+    lrows = lofts.split('\n'); zip_tiles = []; seen = set()
+    for a, b in ((1, 2), (1, 3), (2, 4), (3, 5), (3, 4), (4, 2), (4, 6), (5, 3), (5, 6)):     # every spool route (GYM_PUZZLES table)
+        (x0, y0), (x1, y1) = plats[a], plats[b]
+        n = max(abs(x1 - x0), abs(y1 - y0))
+        for i in range(1, n):
+            x = round(x0 + (x1 - x0) * i / n) + 1; y = round(y0 + (y1 - y0) * i / n)
+            if lrows[y][x] != 'v' or (x, y) in seen: continue
+            dx, dy = x1 - x0, y1 - y0
+            t = CU['strand_h'] if abs(dx) > 2 * abs(dy) else (CU['strand_v'] if abs(dy) > 2 * abs(dx) else (CU['strand_d1'] if dx * dy > 0 else CU['strand_d2']))
+            seen.add((x, y)); zip_tiles.append({'tile': t, 'at': [x, y], 'layer': 2})
+    for e in loft_events:
+        if e.get('type') == 'trainer' and e['trainer'][1] == 'Hollis':
+            e.update(intro="Ride the spools wrong and you go in circles. I've been going in circles since lunch.",
+                     after="...Lunch was a while ago.")
+        if e.get('type') == 'trainer' and e['trainer'][1] == 'Ash':
+            e.update(intro="Rangers learn the high lines first. Let's see if you can keep your feet up here.",
+                     after="You've got canopy legs. Tamsin'll like that.")
+    docs.append({'id': 132, 'name': 'Loomhouse Gym - Canopy Lofts', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'rubric': True,
+                 'field': 'SILKWOOD', 'tone': [-14, -8, -20, 15], 'metadata': M, 'map': lofts,
+                 'tiles': zip_tiles + decorate(lofts.split('\n'), 132, [('web_big', 7, 9), ('web_big', 15, 17), ('web_big', 5, 2), ('web_big', 16, 9), ('web_big', 1, 16), ('shaft', 16, 7)]), 'events': loft_events})
+    # ---------------------------------------------------------------- 133 The Spindle (Warden battle, confession)
+    win = [
+        say('TAMSIN', 'shocked', "...It held, and you still came through it."),
+        say('TAMSIN', 'happy', "That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one."),
+        {'script': 'Prismfall.award_badge(1)'},
+        "(You open the Badge Case and set the badge in. A faint hum: one clear note.)",
+        "\\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?",
+        say('TAMSIN', 'neutral', "I don't think they do that. ...Do they do that?"),
+        {'script': 'pbReceiveItem(:TM89)'},
+        say('TAMSIN', 'neutral', "That's the Accord's word that you may use Cut, and that Pokémon up to level nineteen will heed you."),
+        say('TAMSIN', 'sad', "\\PN... could you come up to the loft? There's something I should say to someone, and you've an honest sort of silence."),
+        {'tone': [-255, -255, -255, 0, 12]}, {'wait': 14}, {'tone': [-30, -20, -10, 30, 12]},
+        "(The loft above the Spindle: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)",
+        say('TAMSIN', 'sad', "That masked woman at the pylon. She was right. I signed it."),
+        say('TAMSIN', 'sad', "Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her."),
+        say('TAMSIN', 'sad', "Meridian offered four hundred thousand for \"stewardship rights\". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was."),
+        say('TAMSIN', 'crying', "And now the Glasswood's walking up the survey line like it was invited. Fourteen moths this week. I count them. I count them every morning."),
+        say('TAMSIN', 'sad', "The guild meets tonight. Tell me what to do. Please. I've run out of thread."),
+        {'if': 'pf_choice(:ch2_tamsin)', 'then': ["(You've already given her your answer.)"], 'else': [
+            {'choices': ["Tell them the truth. I'll stand next to you.", "They deserve to know. If you won't say it, I will.", "It's your secret. I won't tell."],
+             'cancel': 0, 'branches': [
+                [{'script': 'pf_choose(:ch2_tamsin, :help_confess)'},
+                 say('TAMSIN', 'shocked', "Next to me. Not in front?"),
+                 say('TAMSIN', 'neutral', "...A thread holds because it's twisted with others. I've had that on the SIGN."),
+                 "(That night, at the guild meeting, Tamsin speaks. Her voice cracks twice. Hett stands up first: \"Then we sign it WITH you, girl, and then we tear it up together.\" The contract is renegotiated: a smaller pylon, off the grove.)"],
+                [{'script': 'pf_choose(:ch2_tamsin, :expose)'},
+                 say('TAMSIN', 'panic', "No— wait— not like—"),
+                 "(At the guild meeting you lay the contract on the table. Uproar. The looms stop. Tamsin stands very still, then tears the contract in half herself, in front of them.)",
+                 say('TAMSIN', 'sad', "I'm sorry. I'm so sorry. That's the last time I'll say it tonight.")],
+                [{'script': 'pf_choose(:ch2_tamsin, :keep_secret)'},
+                 say('TAMSIN', 'sad', "...Thank you. I think. I'll fix it quietly. I'll find the money somewhere."),
+                 "(No meeting. Within the week, the pylon is finished.)"]]}]},
+        say('TAMSIN', 'neutral', "Whatever's making the wood ring, it's in Cocoonfall Hollow, at the Glasswood's heart. I can't cross the Veil. Nobody can."),
+        "\\pf[JUNO,neutral,dots]Juno: (from the stairs) ...They can.",
+        "\\pf[TAMSIN,shocked,shock]Tamsin: What?",
+        say('TAMSIN', 'neutral', "Then take this. It was Gran's shuttle. It's only wood. But she never dropped a thread while she held it."),
+        {'if': 'GameData::Item.exists?(:MOTHERLOOMSSHUTTLE)', 'then': [{'script': 'pbReceiveItem(:MOTHERLOOMSSHUTTLE)'}],
+         'else': ["\\me[Key item get]You received MOTHER LOOM'S SHUTTLE!\\nWorn smooth by fifty years of one hand."]},
+        "QUEST: \"The Ringing Wood\" - Cut through the Deepwood to Cocoonfall Hollow.",
+        {'tone': [0, 0, 0, 0, 20]}, {'selfswitch': ['A', True]}]
+    tamsin_fight = [
+        {'if': key(133, 'TRIED'), 'then': [say('TAMSIN', 'neutral', "Again? Good. I mean— sorry. I mean good.")], 'else': [
+            "(Tamsin stands at the great loom at the hall's end. She has stopped fidgeting.)",
+            say('TAMSIN', 'neutral', "My grandmother wove this room. Every plank, every web. She held this village together for fifty years with thread and shouting."),
+            say('TAMSIN', 'sad', "I've had it since spring. I can't shout."),
+            say('TAMSIN', 'angry', "But I can weave. Granny Loom wove this room. Don't you dare tear it.")]},
+        {'script': key(133, 'TRIED') + ' = true'},
+        {'if': 'Prismfall.gym_battle(1)', 'then': win}]
+    docs.append({'id': 133, 'name': 'Loomhouse Gym - The Spindle', 'parent': 130, 'palette': 'loom', 'bgm': 'Gym', 'field': 'SILKWOOD',
+                 'rubric': True, 'tone': [-16, -10, -20, 15], 'metadata': M, 'map': '\n'.join(SPINDLE),
+                 'tiles': decorate(SPINDLE, 133, [('loom', 6, 1), ('cocoon_big', 2, 3), ('cocoon_big', 11, 3), ('web_big', 1, 6), ('web_big', 11, 6), ('shaft', 6, 5)]),
                  'events': [
-                     {'type': 'exit', 'at': [6, 12], 'link': 'GYM1_SPINDLE', 'se': 'Door exit'},
-                     {'type': 'event', 'name': 'Tamsin', 'at': [6, 5], 'pages': [
-                         {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
-                             'Tamsin: Every thread has to line up. You made it through the loom, so... so now it\'s me.',
-                             "Tamsin: Granny Loom wove this room. Don't you dare tear it.",
-                             {'if': 'Prismfall.gym_battle(1)', 'then': win}]},
-                         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': confess},
-                         {'cond': {'self': 'B'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
-                             'Tamsin: The Cutter in town owes me a favour. Tell him I sent you.']}]}]})
+                     {'type': 'exit', 'at': [8, 14], 'link': 'GYM1_SPINDLE', 'se': 'Door exit'},
+                     {'type': 'event', 'name': 'Tamsin', 'at': [7, 5], 'pages': [
+                         {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': tamsin_fight},
+                         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
+                             say('TAMSIN', 'neutral', "The Cutter in town owes me a favour. Tell him I sent you. And— thank you. Not sorry. Thank you.")]}]},
+                     reveal_if(key(131, 'JUNO'), ['Juno']),
+                     {'type': 'event', 'name': 'Juno', 'at': [10, 9], 'pages': [
+                         {'commands': []},
+                         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'left'},
+                          'commands': [say('JUNO', 'happy', "I'm being SO quiet. Look at me. Quiet.")]}]}]})
     with open(os.path.join(HERE, 'specs', '130_loomhouse_gym.yaml'), 'w') as f:
-        f.write('# GENERATED by gen_gym1.py from design/GYM_PUZZLES.md (Gym 1). Edit the script, then run build.py.\n')
+        f.write('# GENERATED by gen_gym1.py from design/GYM_PUZZLES.md + story/20_SCRIPT_CH0-2.md (Gym 1; builder 3: canopy look on tileset 40, palettes/loom.yaml). Edit the script, then run build.py.\n')
         yaml.safe_dump_all(docs, f, sort_keys=False, allow_unicode=True, width=120)
     print('wrote specs/130_loomhouse_gym.yaml')
 

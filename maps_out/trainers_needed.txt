@@ -1,3 +1,2 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-520	:LASS, "Dory"
-520	:YOUNGSTER, "Pim"
+100	Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, can_lose: true)

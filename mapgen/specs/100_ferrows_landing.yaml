@@ -1,104 +1,97 @@
 # Ferrow's Landing (100). WRITTEN BY layouts/ferrow.py - edit that script.
 id: 100
 name: Ferrow's Landing
-palette: village
-bgm: Lappet Town
 parent: 0
+bgm: Lappet Town
+palette: village
+rubric: true
+yards_ok: true
 metadata:
   Outdoor: true
   ShowArea: true
   MapPosition: [0, 14, 26]
   BattleBack: field
+tone: [6, 2, -10, 0]
+fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 100, sx: 2, sy: 0}
 connections:
 - {dir: N, offset: 28, to: 520, to_offset: 10}
-rubric: true
-yards_ok: true
-tone: [6, 2, -10, 0]
 map: |
-  TTTTtTTCTTttTTT.....TTTTCTTTTTTTTdddttTTTTtTTTTTT.....TTtttttttttttt
-  TTTTTTTCTTttTTT......TTTCTTTTTTTTdddtTT,,,TTTTTTTTTTTTTTtttttt,,,ttT
-  TTTTTTTCtttT,,.h......TTCTwTTTTT.dddTTT,,,TwTTTTTTTTTTTTTttttt,,,TTT
-  TTTTTCCCtt.T,,h..h.....TCTwTTTTT.dddTTT,,,TwTTTTTTTTTTTTT,,Ttt,,,TTT
-  tTTCCCttt...T..........TCCwTtT,,.dddTTT...T,,TTTTT,,TTTTT,,TTtttTTTT
-  TTCCTTttt........,,...TTTCCCtT,,.dddTTTT,TT,,TT,,,,,TTTTttTTTTTTTTTT
-  CCCTTTtttT,,,.,..,,,,,,TTTwCCTT..dddTTTTTHHwTHTTTTTTTTTttt,,,TTTTTTT
-  TTTTTttttTT,,.H.HHHTTTTTTTwtCCC.dddd.TtH####H####t,,,TTttt,,,TT,,TTT
-  ..TTTTTtTTTH#########,,,,,wTHTCCdddd..TT####,####TTTTT..t.,,,Th,,.TT
-  TTTTTTTT,,,,#########,,,,,####HCCdddhTTT####T####TTTTT,,,..tTTT...TT
-  TTTTTTTTTT,.#########,,,T,####H,CdddTTTT####T####TTTTT,,,..ttTTTTTTT
-  TTTTT,,TTTTH#########HTTT,####TTCdddTTT.####T########......tt,,,TTTT
-  TTTTT,,TTT,,#########,.TTH####,dCCdd,TT.####w########......TT,,,TTT.
-  CCCTTTTTTT,,#########HtTTH####tdCCddT#####,,####,####,,,,...T,,,TTTT
-  CCCCCTTTTTTT#########HtttH####tCCCddT#####HH####T####TTTTT,,...TTTTT
-  CCCCCTTTTT,,#########T,,tt,,,CCCCdddT#####.H####,####TTTTT,.HH....TT
-  ..CCCCCTTT,H#########T,,ttTTCCCCCdd..#####.H####H####,T#######....TT
-  ..,,CCCTTTTcccccccccccTTttCCCCCCddd.,#####Ht####.,,,,TH#######H.,,TT
-  .T,,CCCCHHHcccccccccccTTTCCCCCddddddd#####T,####H..TTTH#######H.,,TT
-  TT####CC###cccccccccccTTTCCCCTdddddddd,,,,TT,dddddddddddd#####Ht...T
-  TT####CC###ccccccccccc..CCC,,,ddddddddddddddddddddddddddd#####tt....
-  TT#####CCCCCCCcccccCCCCCCCT,,,TdddTdddddddddddd.ddddddddd#####Ht...T
-  h.#####CCCCCCCC###CCCCCCCCT,,,TdddTTTddddddTTTTT......ddd#####Ht...T
-  ..#####CCCCCCCC###CCCCCCC##,,TTdddTT.TTT,TTTTTTTT.....T#######H,,..T
-  ..##########HCCdddCCTT#####,,.TdddTt.TT.####TTTTTt....H#######H,,..T
-  .,##########H,,ddddTTT#####HT.ddddTtTTTT####TTTTTtttttt#######TT.TTT
-  .,##########T,,ddddddd#####HdddddddddTTH####TTTTddddd..#######HTTTTT
-  .,##########TTTdddddddddd#dddddddddddddT####Tdddddddd..#######T,,,TT
-  TH##########TTT,..TTddddddddddddddddddddddddddddddddd..#######HTTTTT
-  tT#####ddddddddddTTTTTTTdddddcccccccddddddddddddddTT..H#######H,,TTT
-  tT,,,,,ddddddddddddddddddddddcccccccdddddddddddTTH.,HHH#######T,,TTT
-  tTTTTTT,t.dddddddddddddddddddccccccdddddd####oo.######H#######HTTTTT
-  tTTTTTTt..dddTddddd######dddddddcdddddddd####ooo######,#######H,,,TT
-  tTTwwwwwwwdddTTTH##########ddddddddddddd######oo######H#######TTTTTT
-  TTTToooTTTdddTTTH###########,TTTdddddd.H######oo######H,,,,,,,TtTTTT
-  TTTToooooodddoooo###########HTTTTdddTTT.######ooo#####H...TTTTt,,TTT
-  TTTToooooodddooooooooooooooooooTTdddTTTH######oooooo##,...TTTTT,,TT.
-  tTTTToooTodddooooooooooooooooooTTdddTTT.,,d,,,Toooooo,,,,TTTTTTTTTTT
-  ttTTTTTTTTdddTooooooTTTTCCCCCCCCTdddTCCCCCCCCCCCTToooTT,,TTTTTTTTTTT
-  tttTTTTT.TdddTTCCCCCCCCCCCCCCCCCTdddTCCCCCCCCCCCCTTTTTTTTTTT,,TTTCCC
-  CCCCCCCCCCdddCCCCCCCCCCCCCCCCCCCCdddCCCCCCCCCCCCCTTTTTTTTTTT,,TTTCCC
-  CCCCCCCCCCsssCCCCCCCCCCCCssssssCCsssCCsssssssssCCTTTTTTTTTTTTTTTTCCC
-  CCCCCCCCCCsssCCCsssssssssssssssCCsssCCssssssssssCTTTTTTTTTTTTTTTTCsC
-  ssssssssssssssssssssssssssssssssssssssssssssssssCCTTT,,TTT,,,TTTTCss
-  sssssssssssssssssssssssssssssssss===ssssssssssssCCTTT,,T.T,,,TTTCCss
-  ssssssssssssssssssssss==ssssss~~~===~~~sssssssssCCCTTTTTTT,,,TTTCCss
-  ~sssssssssss==ssssssss==ss~~~~~~~===~~~~~~~ssssssCCCTTTTTTTTtTTTCCs~
-  ~~~~ssssssss==ssss~~~~==~~~~~~~~~===~~~~~~~~~ssssCCCTTTTTTTTTTTTC~~~
-  ~~~~~~~~~~~~==~~~~~~~~==~~~~~~~~~===~~~~~~~~~~~~~~~CCTTTT,,TTTTCC~~~
-  ~~~~~~~~~~~~==~~~~~~~~==~~~~~~~~~===~~~~~~~~~~~~~~~~CTTTT,,TTTCC~~~~
-  ~~~~~~~~~~~~==~~~~~~~~==~~~~~~~~~===~~~~~~~~~~~~~~~~CCTTTTTTTTC~~~~~
-  ~~~~~~~~~~~~==~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~CCTTTTTTCC~~~~~
-  ~~~~~~~~~~~~==~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~CCCC..CC~~~~~~
-  ~~~~~~~~~~~~==~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~CCCC~~~~~~~
-  ~~~~~~~~~~~~==~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  TTTTtTTTTCCtTTT.....TTTTTTTTTTTTTdddttTTTtttTTTTTT...TTttttttttttttt
+  TTTTCCCCCCCCCCCC.....TTT,,TT,,TTTddttTTTTTTTTCCCCCCCCCCCtttttttt,,,T
+  TTTCCTTttttTTTTCC....TTT,,wT,,TTTddtTTTTTCCCCCTTTTTTTTTCCCCCCttt,,,T
+  CCCCTT,,ttTTTTh.CCC...TTTTwTTTT..ddtT.TCCCTTTT,,T,TTTTTTTwTtCCtt,,,T
+  tTTTTT,,tt..T.h..hCC..TTTTwTtTTThdd..TCC..T,,T,,T,HTHHTTTwTTtCCtTTTT
+  TTTTTTttt..TT......C.TTTTTwTt.,..ddTTCCT.TT,,#########T,,,TTTTCCCTTT
+  TTTTTTtttTT,,.....CCT,,TTT,,t,,,.dddTCTTTTTTT#########T,,,,TTTTTCTTT
+  CCCTTttttTT,,...,CCCT,,TTT,,t,,,.ddddCttT,,TH#########T,,,tTTTTTCTTT
+  CCCCCTTtTTTT..HH,CCCTTTTTTwTtTT..ddddCCTT,,T,#########T.tw.TTTT.C.TT
+  CCCCCCCCTTTCCC###CCTTTTTTTwTt.,..ddddCCCTTTTT#########T#.,,,TTTTCTTT
+  TTCCCCCCCCCCCC###CTTTtTTTTwTT,,,TTdddCCCCTT,T####dddd#.#.w.ttTCCCTTT
+  TTTTCCCCCCCCCCdd#CTTT.,.TTTTt,,,TTdddTCCCdddddddddddd,.,.w.CCCCCCTTT
+  TTTTTTTCCCCC..dd#HT..,,,T,,,tttTTTdddTTCCdddddddddddd...CCCCCCCCCTTT
+  TTT,,TTTTTTTTTdddTTtt,,,T,,,ttttttdddTTTCTTHTTTTCCCCCCCCCCCCCCCTTTTT
+  t,,,,,,,,,,,,,ddddddttttt,,,t.,.ttdddTTTC###CCCCCCCCCCCCCCCC..TTTHHT
+  T,,,,,TTHTT,Htdddddddddtttttt,,,TdddddddCdd#CCCCCCCCCCCCCTTh.hH####T
+  .TH##########,dddddddddddtTTT,,,TdddddddCdd#CCCCC.T,,,,,TTT...H####T
+  .TT##########TTTTTddddddddddTTTTTddd,,,tH###ww,,wwwww######,,,,####T
+  TTT##########TTTTTTTddddddddddTTdddd,,,tt,,,tt,,HHHHH######T..H####T
+  TTT##########,,TTHH,HTTddddddddddddT,,,TTT,,TH######.######HTTH####T
+  TTT##########,,TH########dddddddddTT,THHT,,,,H######.######HHHt####T
+  TTH##########,,tH###########ddddddTT,T######HH######,##########,,,,T
+  ..T##########,,tH###########TTdddTTTTT######HH######H##############T
+  .,,##########,,,,###########HTdddTTTTT######TH######H####,,########T
+  .,,##########Tt.H###########HTddTTTtTT######T,######.####tT########T
+  .,,##########,,TH#####,#####TdddTTTtTH####,#TT,,####,####TT########T
+  ..H#######dd#,,,H#####,#####dddddTTTT,####,#TTT,####t####TT########T
+  T,t,,,,,,,dd,TTT.,,d,,,,,,ddddddddTTT,,,d,,,########.####TTddd,####T
+  tttttttt,,dddTTT.,TdTT,T,ddddkkkdddddTTTdT##########H####dddddH,,,,T
+  t,,,wwwwwTdddTTTTTtdddddddddkkkkkddddddddT##########T,ddddddd####HTT
+  tTTTTTtt,TTddTTdddddddddddddkkkkkdddddddddd#########ddddddTTH####,TT
+  tH#####,tTTdddddddddddddTTdddddddTTtTddddddddd##ddddddddtTTTH####HTT
+  tT#####dddddddddddddd....TTTTTddTTtt..ddddddddddddddd..ttTTTT####TTT
+  tH###dddddddTTTTTTTTTt..CCCCCCCCdTTtTT....,,ddddddddTTT.,.TTT####TTT
+  TT##dddddTTTTTTCCCCCCCCCCCCCCCCCddTtTTT.,..TdTdddddddTT,,,TTT####TTT
+  TH##dddTTTTTTTTCCCCCCCCCCCCCCCCCddTtTTT...TTwTTTdddddTT,,,TTT,,,,,,T
+  TT#####HTTTTTTTCCCCCCCCCCssssssCdddHTCCCCCCCCCCCCCCddTT...TTTT,,,,,T
+  tT#####H,,,TTTTCsssssssssssssssCCdd#CCCCCCCCCCCCCCCddHCCCCTTTT,,,TTT
+  tH#####HTTTTTTTCsssssssssssssssCCsssCCCCCCCCCCCCCCCdd#CCCCTTTT,,,TTT
+  tH#####H,TT,,TCCsssssssssssssssCCsssCCssssssssssssCsssCCCCTTTCCCCCCC
+  tt,,,,,...T,,TCCsssssssssskkkkkkkkkkkkkkksssssssssCsssCssCCCCCCCCCCC
+  ttTTTTT,,TTTTTCCssssssssskkkkkkkkkkkkkkkkkkksssssssssssssCCCCCCCCCCC
+  t,,TTTT,,T,,TtCsssssssskkkkkkkkkkkkkkkkkkkkkkksssssssssssCCCCCssssss
+  t,,TTTTTTT,,TTCssssskkkkkkkkkkkkkkkkkkkkkkkkkkksssssssssssssssssssss
+  TTTTTTTTTTTTTCCsssskkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssssssssss
+  TTT,,TTTTTTTTCCssskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkssssssssssssssssssss
+  TTT,,TTTTTttCCCsskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssssssssss~~~~
+  TTTTTTTTTTTCCCssskkk~~kkkkkkkkkkkkkkkkkkkkkkkkkkkksssssssss~~~~~~~~~
+  TTTT,,TTTT.CCCss~~==~~~~~~~~~~~~~===~~~~~~~~~~~~ssssss~~~~~~~~~~~~~~
+  CCTT,,TTTTCC~~~~~~==~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~CCTTTTTTCC~~~~~~~==~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
+  ~~CCCTTCCC~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
+  ~~~~CCCC~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDDDw~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~wDDDDDDDDDDDDDDDww~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~==~~~~~~~~~~~~~===~~wDDDDDDDDDDDwww~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~wwwwwwwwwww~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 heights: |
-  11111112222222222222222221111111111111111111111111111111111111111111
-  11111112222222222222222221111111111111111111111111111111111111111111
-  11111112222222222222222221111111111111111111111111111111111111111111
-  11111222222222222222222221111111111111111111111111111111111111111111
-  11122222222222222222222222111111111111111111111111111111111111111111
-  11222222222222222222222222221111111111111111111111111111111111111111
-  22222222222222222222222222222111111111111111111111111111111111111111
-  22222222222222222222222222222221111111111111111111111111111111111111
-  22222222222222222222222222222222111111111111111111111111111111111111
-  22222222222222222222222222222222211111111111111111111111111111111111
-  22222222222222222222222222222222211111111111111111111111111111111111
-  22222222222222222222222222222222211111111111111111111111111111111111
-  22222222222222222222222222222222221111111111111111111111111111111111
-  22222222222222222222222222222222211111111111111111111111111111111111
-  11222222222222222222222222222222211111111111111111111111111111111111
-  11112222222222222222222222222222111111111111111111111111111111111111
-  11112222222222222222222222222211111111111111111111111111111111111111
-  11111122222222222222222222222111111111111111111111111111111111111111
-  11111122222222222222222222211111111111111111111111111111111111111111
-  11111112222222222222222222111111111111111111111111111111111111111111
-  11111112222222222222222222111111111111111111111111111111111111111111
-  11111112222222222222222221111111111111111111111111111111111111111111
-  11111111111112222222111111111111111111111111111111111111111111111111
+  11111111122111111111111111111111111111111111111111111111111111111111
+  11112222222222221111111111111111111111111111122222222222111111111111
+  11122222222222222111111111111111111111111222222222222222222221111111
+  22222222222222222221111111111111111111122222222222222222222222111111
+  22222222222222222222111111111111111111222222222222222222222222211111
+  22222222222222222222111111111111111112222222222222222222222222222111
+  22222222222222222222111111111111111112222222222222222222222222222111
+  22222222222222222221111111111111111112222222222222222222222222222111
+  11222222222222222211111111111111111112222222222222222222222222222111
+  11112222222222222211111111111111111111222222222222222222222222222111
+  11111112222211111111111111111111111111122222222222222222222222222111
+  11111111111111111111111111111111111111112222222222222222222222211111
+  11111111111111111111111111111111111111112222222222222222222211111111
+  11111111111111111111111111111111111111112222222222222222211111111111
+  11111111111111111111111111111111111111112222222221111111111111111111
   11111111111111111111111111111111111111111111111111111111111111111111
   11111111111111111111111111111111111111111111111111111111111111111111
   11111111111111111111111111111111111111111111111111111111111111111111
@@ -115,21 +108,29 @@ heights: |
   11111111111111111111111111111111111111111111111111111111111111111111
   11111111111111111111111111111111111111111111111111111111111111111111
   11111111111111111111111111111111111111111111111111111111111111111111
-  11111111111111111111111110000001111111000000000111111111111111111111
-  11111111111111110000000000000001111111000000000011111111111111111101
-  00000000000000000000000000000000000000000000000011111111111111111100
-  00000000000000000000000000000000000000000000000011111111111111111100
-  00000000000000000000000000000000000000000000000011111111111111111100
-  00000000000000000000000000000000000000000000000001111111111111111100
-  00000000000000000000000000000000000000000000000001111111111111111000
-  00000000000000000000000000000000000000000000000000111111111111111000
-  00000000000000000000000000000000000000000000000000011111111111111000
-  00000000000000000000000000000000000000000000000000011111111111111000
-  00000000000000000000000000000000000000000000000000001111111111110000
-  00000000000000000000000000000000000000000000000000001111111111100000
-  00000000000000000000000000000000000000000000000000000111111111100000
-  00000000000000000000000000000000000000000000000000000011111111000000
-  00000000000000000000000000000000000000000000000000000000011110000000
+  11111111111111111111111111111111111111111111111111111111111111111111
+  11111111111111111111111111111111111111111111111111111111111111111111
+  11111111111111111111111111111111111111111111111111111111111111111111
+  11111111111111111111111110000001111111111111111111111111111111111111
+  11111111111111110000000000000001111111111111111111111111111111111111
+  11111111111111110000000000000001111111111111111111111111111111111111
+  11111111111111110000000000000001111111000000000000111111111111111111
+  11111111111111110000000000000000000000000000000000111110011111111111
+  11111111111111110000000000000000000000000000000000000000011111111111
+  11111111111111100000000000000000000000000000000000000000011111000000
+  11111111111111100000000000000000000000000000000000000000000000000000
+  11111111111111100000000000000000000000000000000000000000000000000000
+  11111111111111100000000000000000000000000000000000000000000000000000
+  11111111111111100000000000000000000000000000000000000000000000000000
+  11111111111111000000000000000000000000000000000000000000000000000000
+  11111111111111000000000000000000000000000000000000000000000000000000
+  11111111111110000000000000000000000000000000000000000000000000000000
+  11111111111100000000000000000000000000000000000000000000000000000000
+  11111111111100000000000000000000000000000000000000000000000000000000
+  01111111111000000000000000000000000000000000000000000000000000000000
+  00111111110000000000000000000000000000000000000000000000000000000000
+  00001111000000000000000000000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000000000000000000000
   00000000000000000000000000000000000000000000000000000000000000000000
@@ -138,220 +139,403 @@ heights: |
   00000000000000000000000000000000000000000000000000000000000000000000
 stamps:
 - stamp: t_stairs
-  at: [15, 22]
+  at: [33, 37]
 - stamp: t_stairs
-  at: [33, 40]
+  at: [41, 14]
 - stamp: t_stairs
-  at: [10, 40]
-- stamp: h_dome
-  at: [12, 8]
+  at: [51, 38]
+- stamp: t_stairs
+  at: [14, 9]
+- stamp: hs_jonquil_12
+  at: [39, 51]
+- stamp: p_crates
+  at: [43, 51]
+- stamp: tp_barrel_06
+  at: [46, 52]
+- stamp: tp_barrel_02
+  at: [47, 51]
+- stamp: tp_stall_13
+  at: [42, 54]
+- stamp: hs_jonquil_07
+  at: [50, 52]
+- stamp: p_banner3
+  at: [45, 52]
+- stamp: tp_barrel_09
+  at: [49, 54]
+- stamp: w_house_m
+  at: [45, 5]
   link: FL_LAB
   name: Lab door
-  door: [4, 8]
-- stamp: t_pokecenter
-  at: [22, 23]
+  door: [2, 5]
+- stamp: hs_jonquil_11
+  at: [51, 5]
+- stamp: hs_jonquil_09
+  at: [55, 9]
+- stamp: w_longhouse_r
+  at: [17, 20]
   link: FL_PC
   name: Poke Center door
-  door: [2, 4]
-- stamp: t_mart
-  at: [40, 24]
+  door: [2, 6]
+- stamp: w_house_s
+  at: [38, 21]
   link: FL_MART
   name: Mart door
-  door: [1, 3]
+  door: [2, 5]
 - stamp: w_ell_a
-  at: [2, 19]
+  at: [3, 16]
   link: FL_INN
   name: Inn door
   door: [7, 7]
 - stamp: w_longhouse_s
-  at: [17, 30]
+  at: [19, 38]
   link: FL_CUSTOMS
   name: Customs door
   door: [2, 6]
-- stamp: w_house_m
-  at: [40, 31]
+- stamp: w_house
+  at: [42, 27]
   link: FL_DOCK
   name: Dockmaster door
   door: [2, 5]
-- stamp: t_lighthouse
-  at: [55, 16]
-- stamp: w_house
-  at: [48, 31]
-  link: FL_LIGHT
-  name: Lighthouse door
-  door: [2, 5]
+- stamp: lh_ferrow
+  at: [2, 31]
 - stamp: t_stall
-  at: [37, 13]
-- stamp: t_ship
-  at: [36, 50]
+  at: [41, 40]
+- stamp: hs_jonquil_16
+  at: [32, 45]
+- stamp: hs_jonquil_16
+  at: [36, 45]
+- stamp: p_banner
+  at: [22, 25]
+- stamp: p_banner
+  at: [42, 25]
+- stamp: w_cot
+  at: [48, 25]
 - stamp: w_cot_s
-  at: [44, 13]
-- stamp: w_cot
-  at: [49, 11]
+  at: [59, 21]
 - stamp: w_cot_s
-  at: [26, 9]
+  at: [61, 29]
 - stamp: w_cot
-  at: [40, 7]
+  at: [53, 23]
 - stamp: w_cot
-  at: [45, 7]
-- stamp: hs_jonquil_29
-  at: [44, 44]
-- stamp: hs_jonquil_26
-  at: [2, 44]
-- stamp: hs_jonquil_33
-  at: [6, 45]
-- stamp: hs_jonquil_29
-  at: [18, 43]
-- stamp: p_net
-  at: [28, 42]
-- stamp: t_barrel2
-  at: [42, 43]
+  at: [63, 22]
+- stamp: w_house_s
+  at: [46, 19]
+- stamp: w_house
+  at: [53, 17]
+- stamp: w_cot_s
+  at: [63, 15]
+- stamp: tp_barrel_09
+  at: [34, 42]
+- stamp: hs_jonquil_36
+  at: [17, 41]
+- stamp: hs_jonquil_36
+  at: [53, 44]
 - stamp: p_stump
-  at: [44, 42]
+  at: [57, 44]
+- stamp: t_barrel
+  at: [51, 44]
+- stamp: tp_barrel_06
+  at: [63, 44]
+- stamp: tp_barrel_06
+  at: [48, 42]
 - stamp: p_stump
-  at: [14, 44]
+  at: [60, 45]
+- stamp: p_stump
+  at: [55, 46]
+- stamp: tp_barrel_09
+  at: [32, 42]
+- stamp: tp_barrel_09
+  at: [50, 47]
+- stamp: hs_jonquil_36
+  at: [36, 42]
+- stamp: t_barrel
+  at: [34, 44]
+- stamp: tp_barrel_06
+  at: [17, 46]
 - stamp: p_laundry
-  at: [50, 7]
+  at: [8, 37]
 - stamp: p_laundry
-  at: [47, 5]
+  at: [6, 14]
 - stamp: p_laundry
-  at: [19, 6]
-- stamp: tp_stall_08
-  at: [54, 9]
+  at: [1, 29]
 - stamp: p_laundry
-  at: [63, 27]
+  at: [55, 5]
 - stamp: p_laundry
-  at: [63, 32]
-- stamp: tp_stall_01
-  at: [8, 9]
+  at: [57, 9]
+- stamp: p_laundry
+  at: [55, 7]
+- stamp: p_bush_r
+  at: [15, 26]
+- stamp: tp_barrel_01
+  at: [36, 20]
+- stamp: tp_garden_09
+  at: [3, 13]
+- stamp: t_barrel
+  at: [37, 26]
+- stamp: tp_stall_16
+  at: [13, 19]
+- stamp: p_bush_w
+  at: [42, 19]
 - stamp: p_bush_r
   at: [1, 27]
-- stamp: tp_stall_16
-  at: [63, 29]
+- stamp: tp_stall_01
+  at: [55, 6]
 - stamp: p_pinkbush
   at: [43, 4]
+- stamp: tp_stall_16
+  at: [46, 3]
+- stamp: p_bush_g
+  at: [13, 21]
 - stamp: p_bush_r
-  at: [36, 17]
+  at: [24, 28]
+- stamp: tp_stall_01
+  at: [13, 23]
 - stamp: tp_stall_16
   at: [11, 6]
-- stamp: p_pinkbush
-  at: [63, 23]
-- stamp: p_bush_r
-  at: [10, 6]
-- stamp: p_pot
-  at: [14, 6]
+- stamp: tp_stall_01
+  at: [52, 16]
+- stamp: tp_stall_01
+  at: [10, 14]
+- stamp: p_bush_w
+  at: [65, 35]
 - stamp: p_stump
   at: [11, 15]
-- stamp: p_stump
-  at: [54, 32]
-- stamp: p_bush_g
-  at: [2, 17]
-- stamp: p_bush_g
-  at: [10, 12]
 - stamp: p_pot
   at: [44, 8]
 - stamp: p_bush_g
   at: [13, 25]
-- stamp: tp_stall_16
-  at: [50, 4]
-- stamp: p_bush_r
-  at: [10, 15]
-- stamp: tp_stall_16
-  at: [27, 23]
-- stamp: p_bush_w
-  at: [24, 8]
-- stamp: p_crates
-  at: [27, 20]
-- stamp: tp_stall_16
-  at: [17, 5]
-- stamp: p_stump
-  at: [10, 10]
-- stamp: p_stump
-  at: [22, 6]
-- stamp: t_barrel
-  at: [1, 25]
-- stamp: t_barrel
-  at: [58, 14]
-- stamp: p_bush_r
-  at: [21, 12]
-- stamp: p_stump
-  at: [28, 34]
-- stamp: p_pot
-  at: [48, 15]
-- stamp: t_barrel
-  at: [25, 10]
-- stamp: tp_stall_16
-  at: [22, 15]
-- stamp: p_bush_r
-  at: [30, 12]
-- stamp: p_pot
-  at: [53, 16]
 - stamp: tp_stall_01
-  at: [53, 13]
+  at: [59, 17]
+- stamp: tp_garden_09
+  at: [1, 23]
 - stamp: t_barrel
-  at: [54, 36]
-- stamp: p_bush_r
-  at: [43, 18]
-- stamp: p_bush_r
-  at: [40, 5]
-- stamp: tp_stall_16
-  at: [55, 37]
-- stamp: p_bush_r
-  at: [10, 16]
-- stamp: p_crates
-  at: [21, 8]
-- stamp: p_bush_r
-  at: [59, 14]
-- stamp: p_bush_r
-  at: [36, 12]
-- stamp: p_bush_g
-  at: [63, 35]
-- stamp: p_stump
-  at: [51, 30]
+  at: [5, 14]
 - stamp: p_pot
-  at: [40, 23]
+  at: [22, 28]
+- stamp: p_pot
+  at: [41, 20]
+- stamp: p_crates
+  at: [62, 36]
 - stamp: p_bush_w
-  at: [5, 11]
+  at: [1, 14]
+- stamp: p_stump
+  at: [8, 28]
+- stamp: p_bush_r
+  at: [43, 10]
+- stamp: p_bush_g
+  at: [7, 41]
+- stamp: p_bush_r
+  at: [19, 19]
+- stamp: p_bush_g
+  at: [46, 17]
+- stamp: p_pot
+  at: [49, 3]
+- stamp: p_bush_r
+  at: [8, 39]
+- stamp: t_barrel
+  at: [16, 7]
+- stamp: p_bush_r
+  at: [47, 26]
+- stamp: p_crates
+  at: [36, 17]
+- stamp: p_bush_r
+  at: [13, 16]
+- stamp: p_pot
+  at: [9, 14]
+- stamp: p_bush_r
+  at: [51, 16]
+- stamp: p_pot
+  at: [17, 28]
+- stamp: p_pot
+  at: [44, 20]
+- stamp: p_stump
+  at: [52, 25]
+- stamp: p_bush_r
+  at: [45, 24]
+- stamp: p_bush_r
+  at: [55, 11]
+- stamp: p_bush_r
+  at: [52, 21]
+- stamp: p_pot
+  at: [9, 28]
+- stamp: p_pot
+  at: [8, 30]
+- stamp: p_pot
+  at: [49, 4]
+- stamp: p_stump
+  at: [65, 30]
+- stamp: p_lantern
+  at: [29, 14]
+- stamp: p_lantern
+  at: [55, 33]
+- stamp: p_lantern
+  at: [29, 9]
+- stamp: p_lantern
+  at: [29, 5]
+- stamp: p_lantern
+  at: [21, 11]
+- stamp: p_bush_w
+  at: [6, 3]
+- stamp: p_pinkbush
+  at: [3, 45]
+- stamp: p_pinkbush
+  at: [21, 6]
+- stamp: p_pinkbush
+  at: [1, 42]
+- stamp: p_bush_w
+  at: [24, 1]
+- stamp: p_pinkbush
+  at: [41, 7]
 - stamp: p_rocks
-  at: [58, 6]
-- stamp: p_bush_w
-  at: [57, 48]
+  at: [25, 12]
+- stamp: p_pinkbush
+  at: [10, 42]
 - stamp: p_cherry
-  at: [62, 1]
-- stamp: p_pinkbush
-  at: [63, 7]
+  at: [64, 1]
 - stamp: p_bush_w
-  at: [64, 17]
+  at: [4, 48]
 - stamp: p_pinkbush
-  at: [57, 3]
+  at: [11, 39]
 - stamp: p_pinkbush
-  at: [53, 43]
-- stamp: p_pinkbush
-  at: [60, 39]
-- stamp: p_cherry
-  at: [58, 43]
-- stamp: p_cherry
-  at: [61, 11]
+  at: [28, 1]
 - stamp: p_bush_w
-  at: [12, 2]
-- stamp: p_rocks
-  at: [39, 1]
-- stamp: p_bush_w
-  at: [30, 4]
+  at: [26, 6]
+- stamp: p_sign
+  at: [40, 34]
 - stamp: p_sign
   at: [7, 31]
-- stamp: p_sign
-  at: [15, 28]
-- stamp: p_sign
-  at: [31, 10]
-- stamp: t_bench
-  at: [15, 20]
 tiles:
+- tile: 3831
+  at: [39, 50]
+  layer: 0
+- tile: 3831
+  at: [40, 50]
+  layer: 0
+- tile: 3831
+  at: [41, 50]
+  layer: 0
+- tile: 3831
+  at: [42, 50]
+  layer: 0
+- tile: 3831
+  at: [43, 50]
+  layer: 0
+- tile: 3831
+  at: [44, 50]
+  layer: 0
+- tile: 3831
+  at: [45, 50]
+  layer: 0
+- tile: 3831
+  at: [46, 50]
+  layer: 0
+- tile: 3831
+  at: [47, 50]
+  layer: 0
+- tile: 3831
+  at: [48, 50]
+  layer: 0
+- tile: 3831
+  at: [49, 50]
+  layer: 0
+- tile: 3831
+  at: [38, 51]
+  layer: 0
+- tile: 3831
+  at: [50, 51]
+  layer: 0
+- tile: 3831
+  at: [51, 51]
+  layer: 0
+- tile: 3831
+  at: [52, 51]
+  layer: 0
+- tile: 3831
+  at: [37, 52]
+  layer: 0
+- tile: 3831
+  at: [53, 52]
+  layer: 0
+- tile: 3831
+  at: [54, 52]
+  layer: 0
+- tile: 3831
+  at: [37, 53]
+  layer: 0
+- tile: 3831
+  at: [55, 53]
+  layer: 0
+- tile: 3831
+  at: [37, 54]
+  layer: 0
+- tile: 3831
+  at: [53, 54]
+  layer: 0
+- tile: 3831
+  at: [54, 54]
+  layer: 0
+- tile: 3831
+  at: [38, 55]
+  layer: 0
+- tile: 3831
+  at: [50, 55]
+  layer: 0
+- tile: 3831
+  at: [51, 55]
+  layer: 0
+- tile: 3831
+  at: [52, 55]
+  layer: 0
+- tile: 3831
+  at: [39, 56]
+  layer: 0
+- tile: 3831
+  at: [40, 56]
+  layer: 0
+- tile: 3831
+  at: [41, 56]
+  layer: 0
+- tile: 3831
+  at: [42, 56]
+  layer: 0
+- tile: 3831
+  at: [43, 56]
+  layer: 0
+- tile: 3831
+  at: [44, 56]
+  layer: 0
+- tile: 3831
+  at: [45, 56]
+  layer: 0
+- tile: 3831
+  at: [46, 56]
+  layer: 0
+- tile: 3831
+  at: [47, 56]
+  layer: 0
+- tile: 3831
+  at: [48, 56]
+  layer: 0
+- tile: 3831
+  at: [49, 56]
+  layer: 0
+- tile: 20193
+  at: [20, 25]
+  layer: 2
+- tile: 20193
+  at: [41, 25]
+  layer: 2
 - tile: 1555
   at: [22, 57]
   layer: 2
 - tile: 1563
   at: [22, 58]
+  layer: 2
+- tile: 1554
+  at: [28, 51]
+  layer: 2
+- tile: 1562
+  at: [28, 52]
   layer: 2
 - tile: 1555
   at: [64, 55]
@@ -359,17 +543,17 @@ tiles:
 - tile: 1563
   at: [64, 56]
   layer: 2
-- tile: 1554
-  at: [19, 55]
+- tile: 1552
+  at: [10, 53]
   layer: 2
-- tile: 1562
-  at: [19, 56]
+- tile: 1553
+  at: [11, 53]
   layer: 2
-- tile: 1554
-  at: [56, 57]
+- tile: 1560
+  at: [10, 54]
   layer: 2
-- tile: 1562
-  at: [56, 58]
+- tile: 1561
+  at: [11, 54]
   layer: 2
 - tile: 1554
   at: [22, 52]
@@ -384,22 +568,28 @@ tiles:
   at: [10, 58]
   layer: 2
 - tile: 1555
-  at: [3, 52]
+  at: [14, 54]
   layer: 2
 - tile: 1563
-  at: [3, 53]
+  at: [14, 55]
   layer: 2
 - tile: 1555
-  at: [17, 50]
+  at: [26, 54]
   layer: 2
 - tile: 1563
-  at: [17, 51]
+  at: [26, 55]
   layer: 2
-- tile: 1554
-  at: [25, 56]
+- tile: 1552
+  at: [58, 55]
   layer: 2
-- tile: 1562
-  at: [25, 57]
+- tile: 1553
+  at: [59, 55]
+  layer: 2
+- tile: 1560
+  at: [58, 56]
+  layer: 2
+- tile: 1561
+  at: [59, 56]
   layer: 2
 - tile: 1552
   at: [6, 54]
@@ -413,11 +603,47 @@ tiles:
 - tile: 1561
   at: [7, 55]
   layer: 2
+- tile: 1552
+  at: [58, 52]
+  layer: 2
+- tile: 1553
+  at: [59, 52]
+  layer: 2
+- tile: 1560
+  at: [58, 53]
+  layer: 2
+- tile: 1561
+  at: [59, 53]
+  layer: 2
+- tile: 1552
+  at: [13, 51]
+  layer: 2
+- tile: 1553
+  at: [14, 51]
+  layer: 2
+- tile: 1560
+  at: [13, 52]
+  layer: 2
+- tile: 1561
+  at: [14, 52]
+  layer: 2
 - tile: 1554
-  at: [7, 50]
+  at: [24, 49]
   layer: 2
 - tile: 1562
-  at: [7, 51]
+  at: [24, 50]
+  layer: 2
+- tile: 1552
+  at: [63, 50]
+  layer: 2
+- tile: 1553
+  at: [64, 50]
+  layer: 2
+- tile: 1560
+  at: [63, 51]
+  layer: 2
+- tile: 1561
+  at: [64, 51]
   layer: 2
 - tile: 1555
   at: [2, 55]
@@ -425,317 +651,1259 @@ tiles:
 - tile: 1563
   at: [2, 56]
   layer: 2
-- tile: 1552
-  at: [59, 55]
-  layer: 2
-- tile: 1553
-  at: [60, 55]
-  layer: 2
-- tile: 1560
-  at: [59, 56]
-  layer: 2
-- tile: 1561
-  at: [60, 56]
-  layer: 2
-- tile: 1554
-  at: [1, 49]
-  layer: 2
-- tile: 1562
-  at: [1, 50]
-  layer: 2
-- tile: 1552
-  at: [65, 51]
-  layer: 2
-- tile: 1553
-  at: [66, 51]
-  layer: 2
-- tile: 1560
-  at: [65, 52]
-  layer: 2
-- tile: 1561
-  at: [66, 52]
-  layer: 2
 - tile: 1555
-  at: [9, 54]
+  at: [57, 49]
   layer: 2
 - tile: 1563
-  at: [9, 55]
+  at: [57, 50]
+  layer: 2
+- tile: 1555
+  at: [27, 57]
+  layer: 2
+- tile: 1563
+  at: [27, 58]
+  layer: 2
+- tile: 1555
+  at: [29, 54]
+  layer: 2
+- tile: 1563
+  at: [29, 55]
   layer: 2
 tileblocks: []
 events:
-- type: sign
-  at: [33, 4]
-  text: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
-- type: sign
-  at: [30, 29]
-  post: false
-  name: Accord plaque
-  text: 'An old bronze Accord plaque: "Eighteen in Concord, One in Keeping."'
 - type: event
-  name: Customs scan
-  at: [33, 44]
-  pages: &id001
-  - cond: {switch: PRO_FERRY_DONE}
-    trigger: touch
-    commands:
-    - 'Calla Wren: Next! Meridian customs. Hold still for the Imprint scan.'
-    - {se: Battle ball shake}
-    - 'Every passenger before you got a colored tint bar. Yours reads blank: NULL.'
-    - 'Calla Wren: ...That''s not right. Again.'
-    - {se: Battle ball shake}
+  name: Customs gate 1
+  pages:
+  - commands:
+    - '\pf[CALLA,neutral,,Calla]Calla: Next, please. Hold still.'
+    - {se: Pkmn exp full}
+    - {wait: 20}
+    - The bar stays dark.
+    - {wait: 40}
+    - '\pf[CALLA,neutral,,Calla]Calla: One moment.'
+    - {se: GUI sel buzzer}
+    - 'The bar flickers, and a word scrolls across it: NULL.'
+    - '\pf[CALLA,shocked,question,Calla]Calla: ...That''s not a tint.'
+    - '\pf[CALLA,neutral,,Calla]Calla: I''m sorry, could you step out and in again?'
+    - move:
+        who: player
+        route: [backward, forward]
+        wait: true
+    - {se: GUI sel buzzer}
     - NULL.
-    - 'Aurelian Voss: Faulty unit. These things hate sea air. Let them through, Calla.'
-    - He glances back at you, once.
+    - 'Boy: Mum, that one''s got no color!'
+    - 'Boy''s Mother: Don''t point.'
+    - The queue behind you murmurs.
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, up, up, turn_up, through_off]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: Faulty unit. These things hate sea air.'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: Let them through, Calla.'
+    - '\pf[CALLA,neutral,,Calla]Calla: Sir, the protocol says—'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: The protocol was written by me, on a train. Let them through.'
+    - '\pf[CALLA,neutral,,Calla]Calla: ...Yes, sir. Welcome to Velmora.'
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, turn_left]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: There. Ordinary as anyone. Enjoy the Landing. Try the bramble tarts.'
+    - move:
+        who: Aurelian Voss (dock)
+        route:
+        - up
+        - up
+        - turn_down
+        - wait 30
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: Calla
+        route: [turn_right, wait 10]
+        wait: true
+    - {se: Voltorb Flip tile}
+    - {wait: 20}
     - switch: [PRO_SCANNED_NULL, true]
+    - The ship's horn sounds, long. Behind you the Dovetail pulls back from the pier and stops. A chain is drawn across the harbor mouth.
+    - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
     - var: [STORY_ACT, 1]
     - var: [STORY_CHAPTER, 1]
-  - cond: {switch: PRO_SCANNED_NULL}
+    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [33, 47]
 - type: event
-  name: Customs scan 2
-  at: [34, 44]
-  pages: *id001
-- type: event
-  name: Customs scan 3
-  at: [35, 44]
-  pages: *id001
-- type: event
-  name: Calla Wren
-  at: [32, 43]
+  name: Customs gate 2
   pages:
-  - graphic: {sprite: trainer_SCIENTIST, dir: right}
-    commands: ['Calla Wren: Meridian customs. Everyone gets scanned. Everyone.']
-  - cond: {switch: PRO_SCANNED_NULL}
-    graphic: {sprite: trainer_SCIENTIST, dir: right}
-    commands: ['Calla Wren: Faulty unit, he says. Sure.', (She's looking at something on her screen.)]
+  - commands:
+    - '\pf[CALLA,neutral,,Calla]Calla: Next, please. Hold still.'
+    - {se: Pkmn exp full}
+    - {wait: 20}
+    - The bar stays dark.
+    - {wait: 40}
+    - '\pf[CALLA,neutral,,Calla]Calla: One moment.'
+    - {se: GUI sel buzzer}
+    - 'The bar flickers, and a word scrolls across it: NULL.'
+    - '\pf[CALLA,shocked,question,Calla]Calla: ...That''s not a tint.'
+    - '\pf[CALLA,neutral,,Calla]Calla: I''m sorry, could you step out and in again?'
+    - move:
+        who: player
+        route: [backward, forward]
+        wait: true
+    - {se: GUI sel buzzer}
+    - NULL.
+    - 'Boy: Mum, that one''s got no color!'
+    - 'Boy''s Mother: Don''t point.'
+    - The queue behind you murmurs.
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, up, up, turn_up, through_off]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: Faulty unit. These things hate sea air.'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: Let them through, Calla.'
+    - '\pf[CALLA,neutral,,Calla]Calla: Sir, the protocol says—'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: The protocol was written by me, on a train. Let them through.'
+    - '\pf[CALLA,neutral,,Calla]Calla: ...Yes, sir. Welcome to Velmora.'
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, turn_left]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: There. Ordinary as anyone. Enjoy the Landing. Try the bramble tarts.'
+    - move:
+        who: Aurelian Voss (dock)
+        route:
+        - up
+        - up
+        - turn_down
+        - wait 30
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: Calla
+        route: [turn_right, wait 10]
+        wait: true
+    - {se: Voltorb Flip tile}
+    - {wait: 20}
+    - switch: [PRO_SCANNED_NULL, true]
+    - The ship's horn sounds, long. Behind you the Dovetail pulls back from the pier and stops. A chain is drawn across the harbor mouth.
+    - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
+    - var: [STORY_ACT, 1]
+    - var: [STORY_CHAPTER, 1]
+    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [34, 47]
+- type: event
+  name: Customs gate 3
+  pages:
+  - commands:
+    - '\pf[CALLA,neutral,,Calla]Calla: Next, please. Hold still.'
+    - {se: Pkmn exp full}
+    - {wait: 20}
+    - The bar stays dark.
+    - {wait: 40}
+    - '\pf[CALLA,neutral,,Calla]Calla: One moment.'
+    - {se: GUI sel buzzer}
+    - 'The bar flickers, and a word scrolls across it: NULL.'
+    - '\pf[CALLA,shocked,question,Calla]Calla: ...That''s not a tint.'
+    - '\pf[CALLA,neutral,,Calla]Calla: I''m sorry, could you step out and in again?'
+    - move:
+        who: player
+        route: [backward, forward]
+        wait: true
+    - {se: GUI sel buzzer}
+    - NULL.
+    - 'Boy: Mum, that one''s got no color!'
+    - 'Boy''s Mother: Don''t point.'
+    - The queue behind you murmurs.
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, up, up, turn_up, through_off]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: Faulty unit. These things hate sea air.'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: Let them through, Calla.'
+    - '\pf[CALLA,neutral,,Calla]Calla: Sir, the protocol says—'
+    - '\pf[VOSS,neutral,,Aurelian Voss (dock)]Voss: The protocol was written by me, on a train. Let them through.'
+    - '\pf[CALLA,neutral,,Calla]Calla: ...Yes, sir. Welcome to Velmora.'
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    - move:
+        who: Aurelian Voss (dock)
+        route: [through_on, up, turn_left]
+        wait: true
+    - '\pf[VOSS,happy,,Aurelian Voss (dock)]Voss: There. Ordinary as anyone. Enjoy the Landing. Try the bramble tarts.'
+    - move:
+        who: Aurelian Voss (dock)
+        route:
+        - up
+        - up
+        - turn_down
+        - wait 30
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: true
+    - move:
+        who: Calla
+        route: [turn_right, wait 10]
+        wait: true
+    - {se: Voltorb Flip tile}
+    - {wait: 20}
+    - switch: [PRO_SCANNED_NULL, true]
+    - The ship's horn sounds, long. Behind you the Dovetail pulls back from the pier and stops. A chain is drawn across the harbor mouth.
+    - 'Harbor Crier: By order of the Concert of Regions, the Hallow Strait is closed! The Hallow Strait is closed!'
+    - var: [STORY_ACT, 1]
+    - var: [STORY_CHAPTER, 1]
+    - {script: 'pfm_card(:PF_ACT1_TITLE, "ACT I — THE LAST FERRY")'}
+    - {script: 'pfm_quest(:mums_letter, "Mum''s Letter", "Find Imelda Larch at the research station on the headland.")'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [35, 47]
+- type: event
+  name: Edda's last call 1
+  pages:
+  - commands:
+    - if: '!pfm?(:edda_lastcall)'
+      then:
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: That''s it, then. Once I cast off the Concert''s cutters won''t let me back across.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Last chance, sprog. Anyone who wants off this rock rides with me now.'
+      - choices: [I'm staying., I want to go back.]
+        branches:
+        - ['\pf[EDDA,happy,,Captain Edda]Edda: Thought so. Go on. Mind the gap.']
+        - - '\pf[EDDA,neutral,,Captain Edda]Edda: ...You sure? I''ll ask once more, because nobody asked her. Once I cast off, that''s it.'
+          - choices: [I'm staying., Take me back.]
+            branches:
+            - ['\pf[EDDA,happy,,Captain Edda]Edda: Good. Stars. Don''t frighten an old woman.']
+            - - '\pf[EDDA,sad,,Captain Edda]Edda: Right. Get aboard, then.'
+              - tone: [-255, -255, -255, 0, 30]
+              - The horn. The eighteen lights recede.
+              - {script: 'Prismfall.game_over(:GO_HOMEWARD)'}
+            cancel: 0
+        cancel: 0
+      - {script: 'pfm_set(:edda_lastcall)'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [33, 51]
+- type: event
+  name: Edda's last call 2
+  pages:
+  - commands:
+    - if: '!pfm?(:edda_lastcall)'
+      then:
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: That''s it, then. Once I cast off the Concert''s cutters won''t let me back across.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Last chance, sprog. Anyone who wants off this rock rides with me now.'
+      - choices: [I'm staying., I want to go back.]
+        branches:
+        - ['\pf[EDDA,happy,,Captain Edda]Edda: Thought so. Go on. Mind the gap.']
+        - - '\pf[EDDA,neutral,,Captain Edda]Edda: ...You sure? I''ll ask once more, because nobody asked her. Once I cast off, that''s it.'
+          - choices: [I'm staying., Take me back.]
+            branches:
+            - ['\pf[EDDA,happy,,Captain Edda]Edda: Good. Stars. Don''t frighten an old woman.']
+            - - '\pf[EDDA,sad,,Captain Edda]Edda: Right. Get aboard, then.'
+              - tone: [-255, -255, -255, 0, 30]
+              - The horn. The eighteen lights recede.
+              - {script: 'Prismfall.game_over(:GO_HOMEWARD)'}
+            cancel: 0
+        cancel: 0
+      - {script: 'pfm_set(:edda_lastcall)'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [34, 51]
+- type: event
+  name: Edda's last call 3
+  pages:
+  - commands:
+    - if: '!pfm?(:edda_lastcall)'
+      then:
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: That''s it, then. Once I cast off the Concert''s cutters won''t let me back across.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Last chance, sprog. Anyone who wants off this rock rides with me now.'
+      - choices: [I'm staying., I want to go back.]
+        branches:
+        - ['\pf[EDDA,happy,,Captain Edda]Edda: Thought so. Go on. Mind the gap.']
+        - - '\pf[EDDA,neutral,,Captain Edda]Edda: ...You sure? I''ll ask once more, because nobody asked her. Once I cast off, that''s it.'
+          - choices: [I'm staying., Take me back.]
+            branches:
+            - ['\pf[EDDA,happy,,Captain Edda]Edda: Good. Stars. Don''t frighten an old woman.']
+            - - '\pf[EDDA,sad,,Captain Edda]Edda: Right. Get aboard, then.'
+              - tone: [-255, -255, -255, 0, 30]
+              - The horn. The eighteen lights recede.
+              - {script: 'Prismfall.game_over(:GO_HOMEWARD)'}
+            cancel: 0
+        cancel: 0
+      - {script: 'pfm_set(:edda_lastcall)'}
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [35, 51]
+- type: event
+  name: Docking
+  pages:
+  - commands:
+    - The gangway is down. Passengers queue toward a brass-and-glass gate bolted to the old stone pier. Beside it stands a green bronze plaque.
+    - '\pf[CALLA,neutral,,Calla]Calla: Welcome to Velmora. Step through one at a time, please. Hold still. It doesn''t hurt.'
+    - move:
+        who: Boy (pier)
+        route: [up, up]
+        wait: true
+    - {se: Pkmn exp full}
+    - A bar on the gate glows green.
+    - '\pf[CALLA,neutral,,Calla]Calla: Insect tint. Briarwick. Thank you.'
+    - move:
+        who: Boy (pier)
+        route: [up, turn_down]
+        wait: false
+    - 'Boy: MUM. I''M GREEN.'
+    - 'Boy''s Mother: I know, love.'
+    - move:
+        who: Boy's Mother (pier)
+        route: [up, up, up]
+        wait: true
+    - move:
+        who: Woman with crate (pier)
+        route: [up, up]
+        wait: true
+    - {se: Pkmn exp full}
+    - The bar glows white.
+    - '\pf[CALLA,neutral,,Calla]Calla: Blank tint. Saltmere. Welcome home.'
+    - move:
+        who: Woman with crate (pier)
+        route: [up, up, up]
+        wait: true
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [1, 58]
+- type: event
+  name: Calla
+  pages:
+  - commands: ['\pf[CALLA,neutral]Calla: One at a time, please. Hold still.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+  - commands:
+    - '\pf[CALLA,neutral]Calla: The unit''s been logged as faulty. Please don''t worry about it.'
+    - '\pf[CALLA,neutral]Calla: ...Are you feeling well? No fatigue? No pallor?'
+    - choices: [I'm fine., 'Why?']
+      branches:
+      - ['\pf[CALLA,neutral]Calla: Good. That''s good. Welcome to Velmora.']
+      - ['\pf[CALLA,panic,sweat]Calla: No reason! It''s a standard question. It''s on the form.']
+      cancel: 1
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [31, 47]
 - type: event
   name: Captain Edda
-  at: [35, 56]
   pages:
-  - cond: {switch: PRO_FERRY_DONE}
-    graphic: {sprite: trainer_SAILOR, dir: left}
-    commands:
-    - 'Captain Edda Morrow: That''s the last of you. The Dovetail sails back at dusk, empty.'
-    - choices: ['Good luck, Captain', Take me back with you]
-      cancel: 1
-      branches:
-      - ['Captain Edda Morrow: Luck''s for people who don''t check their knots. Off with you, sprog.']
-      - - 'Captain Edda Morrow: Last chance, sprog. Once I cast off, that''s it.'
-        - choices: ['...Never mind', Take me home]
-          cancel: 1
-          branches:
-          - ['Captain Edda Morrow: Thought so.']
-          - - {script: 'Prismfall.game_over(:GO_HOMEWARD)'}
+  - commands: ['\pf[EDDA,neutral]Edda: Go on, sprog. Through the gate. I''ll be here till they chain her.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 14, dir: left}
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: ['\pf[EDDA,angry,anger]Edda: Impounded! Thirty-one years and they chain her up like a stray Growlithe!', '\pf[EDDA,deadpan]Edda: I''m told
+        I may apply for compensation. In writing. To the people who did it.', '\pf[EDDA,neutral]Edda: ...You''ve somewhere to go, sprog? Larch? Good. Up
+        the headland. She''ll feed you something terrible.', '\pf[EDDA,sad]Edda: You stand at the rail like somebody I used to know. That''s all. Go on.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 14, dir: left}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [35, 53]
 - type: event
-  name: Fisherman
-  at: [33, 51]
+  name: Aurelian Voss (dock)
   pages:
-  - graphic: {sprite: trainer_FISHERMAN, dir: left}
-    commands:
-    - 'Fisherman: The ferry won''t sail again. Fish don''t care, though. Here - every coast kid needs one.'
-    - {script: 'pbReceiveItem(:OLDROD)'}
-    - selfswitch: [A, true]
-  - cond: {self: A}
+  - commands: ['A man in a good coat waits at the back of the queue, mug in hand.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: up}
+    cond: {switch: PRO_FERRY_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [33, 54]
+- type: event
+  name: Boy (pier)
+  pages:
+  - commands: ['Boy: I''m going to be red. I''ve decided.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 02, dir: up}
+    cond: {switch: PRO_FERRY_DONE}
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [34, 48]
+- type: event
+  name: Boy's Mother (pier)
+  pages:
+  - commands: ['Boy''s Mother: Stay in the queue, love.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 04, dir: up}
+    cond: {switch: PRO_FERRY_DONE}
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [33, 49]
+- type: event
+  name: Woman with crate (pier)
+  pages:
+  - commands: ['Woman with crate: Home. Already I feel less grey.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 22, dir: up}
+    cond: {switch: PRO_FERRY_DONE}
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [35, 49]
+- type: sign
+  name: Accord plaque
+  post: true
+  text: 'A bronze plaque, green with age.
+
+    "EIGHTEEN IN CONCORD, ONE IN KEEPING."
+
+    — The Accord of Velmora, AF 4
+
+    Someone has bolted a Meridian sunburst to the post beside it. The bolts are new.'
+  at: [37, 47]
+- type: event
+  name: Odo
+  pages:
+  - commands:
+    - if: '!pfm?(:odo_rod)'
+      then:
+      - 'Odo: You fish? No? Everybody fishes. You just haven''t yet.'
+      - {script: 'pfm_item(:OLDROD, 1)'}
+      - 'Odo: Catch a Magikarp, throw it back, feel superior. That''s the whole sport.'
+      - {script: 'pfm_set(:odo_rod)'}
+      else: ['Odo: Catch a Magikarp, throw it back, feel superior. That''s the whole sport.']
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_FISHERMAN, dir: left}
-    commands: ['Fisherman: Cast off the end of the pier. Tentacool bite at dusk.']
-- type: event
-  name: Coll Hale
-  at: [38, 19]
-  pages:
-  - graphic: {sprite: NPC 03, dir: down}
-    commands: ['Coll Hale: You''re the Larch kid? Eat this. You''re too thin.', He hands you a bramble tart. It's still warm.]
-- type: event
-  name: Wenna Hale
-  at: [40, 19]
-  pages:
-  - graphic: {sprite: NPC 11, dir: down}
-    commands:
-    - 'Wenna Hale: Juno''s at the Station with the Professor. Tell her to come home for supper. She won''t.'
-    - 'Wenna Hale: Here - Juno''s old Pokégear. She upgraded. You''ll want a map and a phone in this place.'
-    - {script: $player.has_pokegear = true}
-    - \PN received a Pokégear!
-    - selfswitch: [A, true]
-  - cond: {self: A}
-    graphic: {sprite: NPC 11, dir: down}
-    commands: ['Wenna Hale: Juno''s at the Station with the Professor. Tell her to come home for supper. She won''t.']
+  - commands:
+    - if: '!pfm?(:odo_rod)'
+      then:
+      - 'Odo: You fish? No? Everybody fishes. You just haven''t yet.'
+      - {script: 'pfm_item(:OLDROD, 1)'}
+      - {script: 'pfm_set(:odo_rod)'}
+    - 'Odo: Heard the gate went quiet on you. My rod goes quiet on me all the time. Doesn''t mean there''s nothing there.'
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_FISHERMAN, dir: left}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [34, 58]
+- type: door
+  name: Lighthouse door
+  link: FL_LIGHT
+  locked: {until: CH1_ORCHARD_DONE, text: 'Locked. A note: "KESTREL. NO."'}
+  at: [4, 39]
 - type: event
   name: Kestrel K1
-  at: [16, 27]
   pages:
-  - cond: {switch: CH1_STARTER_GOT}
-    trigger: autorun
-    graphic: {sprite: trainer_RIVAL1, dir: up}
-    commands:
-    - 'Kestrel: Hey. Tourist. Let''s see if you can actually use that thing.'
+  - commands:
+    - move:
+        who: Kestrel K1
+        route: [face_player]
+        wait: true
+    - '\pf[KESTREL,neutral,,Kestrel K1]Kestrel: You came in on the last ferry? Great. Velmora''s sinking and they''re still letting tourists on.'
+    - choices: [I was born here., I'm not a tourist., '...']
+      branches:
+      - ['\pf[KESTREL,shocked,question,Kestrel K1]Kestrel: ...Then you left, and came BACK? That''s worse.']
+      - ['\pf[KESTREL,smug,,Kestrel K1]Kestrel: Prove it.']
+      - ['\pf[KESTREL,angry,anger,Kestrel K1]Kestrel: Say something! Gran does that. The staring. I hate the staring.']
+      cancel: 3
     - if: 'Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, can_lose: true)'
-      then: ['Kestrel: ...Tch. Beginner''s luck.']
-      else: ['Kestrel: Figures.']
+      then:
+      - '\pf[KESTREL,shocked,shock,Kestrel K1]Kestrel: ...With the type disadvantage.'
+      - '\pf[KESTREL,angry,,Kestrel K1]Kestrel: Fine. You''re not a tourist. You''re a problem.'
+      - {script: 'pf_bond_add(:KESTREL, 1)'}
+      else: ['\pf[KESTREL,smug,,Kestrel K1]Kestrel: Boat fare: wasted.', '\pf[KESTREL,neutral,,Kestrel K1]Kestrel: ...Your partner didn''t quit, though.
+          Mine would''ve bitten me. Huh.']
     - {heal: true}
-    - 'Kestrel: You came in on the last ferry? Great. Velmora''s sinking and they''re still letting tourists on.'
+    - move:
+        who: Juno (lab yard)
+        route:
+        - graphic: [trainer_RIVAL2, 0, 2, 0]
+        - {opacity: 255}
+        - through_on
+        - down
+        - down
+        - through_off
+        - face_player
+        wait: true
+    - '\pf[JUNO,happy,sparkle,Juno (lab yard)]Juno: That was amazing! Both of you! We should have a team name!'
+    - '\pf[KESTREL,deadpan,,Kestrel K1]Kestrel: There''s no team.'
+    - '\pf[JUNO,happy,,Juno (lab yard)]Juno: Team Compost! Because we break things down and make them better!'
+    - '\pf[KESTREL,deadpan,,Kestrel K1]Kestrel: I''m not in it.'
+    - '\pf[JUNO,happy,,Juno (lab yard)]Juno: He''s in it.'
+    - anim: [Kestrel K1, 3]
+    - move:
+        who: Kestrel K1
+        route:
+        - through_on
+        - left
+        - left
+        - left
+        - left
+        - left
+        - left
+        - {opacity: 0}
+        wait: true
     - switch: [CH1_K1_DONE, true]
-  - cond: {switch: CH1_K1_DONE}
-- type: item
-  at: [5, 34]
-  item: POTION
-- type: item
-  at: [52, 38]
-  item: POKEBALL
-  hidden: true
+    trigger: autorun
+    move: fixed
+    graphic: {sprite: trainer_RIVAL1, dir: up}
+    cond: {switch: CH1_STARTER_GOT}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_K1_DONE}
+  at: [45, 12]
 - type: event
-  name: Crier
-  at: [28, 30]
+  name: Juno (lab yard)
   pages:
-  - graphic: {sprite: NPC 14, dir: down}
-    move: random
-    commands: ['Crier: Hear ye! The Strait is closed! The Festival of Champions proceeds as planned, in the autumn, by grace of the Sovereign!', 'Crier:
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_STARTER_GOT}
+    through: true
+  - commands:
+    - if: '!pfm?(:juno_errand)'
+      then:
+      - '\pf[JUNO,panic,,Juno (lab yard)]Juno: \PN! Mum''s Skwovet''s got out again. Biscuit. He''s gone to the Pruett orchard and I''m not— nobody''s supposed
+        to go in there.'
+      - '\pf[JUNO,neutral,,Juno (lab yard)]Juno: Will you come and look? Just LOOK. From the outside. I''ll show you the way.'
+      - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on Route 1.")'}
+      - '\pf[JUNO,happy,,Juno (lab yard)]Juno: Up the lane, past the stile! I''ll be right behind you. Probably in front of you.'
+      - {script: 'pfm_set(:juno_errand)'}
+      else: ['\pf[JUNO,happy]Juno: Up the lane, past the stile! Biscuit won''t wait. Biscuit never waits.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_RIVAL2, dir: down}
+    cond: {switch: CH1_K1_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_ORCHARD_DONE}
+  at: [47, 11]
+- type: event
+  name: Sendoff 1
+  pages:
+  - commands:
+    - if: '!pfm?(:ch2_sendoff)'
+      then:
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
+        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
+        by post.'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - {script: 'pfm_item(:TOWNMAP, 1)'}
+      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
+      - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 2]
+  at: [33, 4]
+- type: event
+  name: Sendoff 2
+  pages:
+  - commands:
+    - if: '!pfm?(:ch2_sendoff)'
+      then:
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
+        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
+        by post.'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - {script: 'pfm_item(:TOWNMAP, 1)'}
+      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
+      - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 2]
+  at: [34, 4]
+- type: event
+  name: Sendoff 3
+  pages:
+  - commands:
+    - if: '!pfm?(:ch2_sendoff)'
+      then:
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
+        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
+        by post.'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - {script: 'pfm_item(:TOWNMAP, 1)'}
+      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
+      - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 2]
+  at: [35, 4]
+- type: event
+  name: Sendoff 4
+  pages:
+  - commands:
+    - if: '!pfm?(:ch2_sendoff)'
+      then:
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
+        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
+        by post.'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - {script: 'pfm_item(:TOWNMAP, 1)'}
+      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
+      - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+    trigger: touch
+    move: fixed
+    cond:
+      var: [STORY_CHAPTER, 2]
+  at: [36, 4]
+- type: event
+  name: Larch (sendoff)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['\pf[LARCH,neutral]Larch: Off you go. Lecture Two is already drafted.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_PROFESSOR, dir: down}
+    cond:
+      var: [STORY_CHAPTER, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [37, 3]
+- type: event
+  name: Juno (sendoff)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['\pf[JUNO,happy]Juno: Briarwick! Silk-moth eggs! A GYM!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_RIVAL2, dir: down}
+    cond:
+      var: [STORY_CHAPTER, 2]
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [31, 3]
+- type: event
+  name: Wenna Hale
+  pages:
+  - commands:
+    - if: '!pfm?(:wenna_tart)'
+      then: &id001
+      - '\pf[WENNA,happy]Wenna: Tarts! Bramble tarts! Last of the— oh. You came off the ferry.'
+      - '\pf[WENNA,shocked]Wenna: You''re the one Imelda''s been pacing about. Look at you. You''re a coat hanger with a bag.'
+      - '\pf[WENNA,happy]Wenna: Eat this. No, don''t pay me. Eat it where I can see you.'
+      - {script: 'pfm_item(:BRAMBLETART, 1, "Bramble Tart")'}
+      - Restores 30 HP. Still warm. Tastes like somebody's kitchen.
+      - '\pf[WENNA,neutral]Wenna: My Juno works up at the station. Talks like a kettle. You''ll like her. Everyone does, it''s exhausting.'
+      - '\pf[WENNA,neutral]Wenna: And take Juno''s old Pokégear. She''s upgraded. You''ll want a map and a phone in this place.'
+      - {script: $player.has_pokegear = true}
+      - \PN received a Pokégear!
+      - {script: 'pfm_set(:wenna_tart)'}
+      else: ['\pf[WENNA,neutral]Wenna: My Juno works up at the station. Talks like a kettle. You''ll like her. Everyone does, it''s exhausting.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 19, dir: down}
+  - commands:
+    - if: '!pfm?(:wenna_tart)'
+      then: *id001
+      else: ['\pf[WENNA,happy]Wenna: She named your little group? Of course she did. She named the kettle.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 19, dir: down}
+    cond: {switch: CH1_STARTER_GOT}
+  - commands:
+    - if: '!pfm?(:wenna_tart)'
+      then: *id001
+    - if: '!pfm?(:biscuit_reward)'
+      then:
+      - '\pf[WENNA,happy]Wenna: Biscuit''s home, rattling like a money box. Here. And another tart, for the nerves. Mine.'
+      - {script: 'pfm_item(:ORANBERRY, 3)'}
+      - {script: 'pfm_item(:BRAMBLETART, 1, "Bramble Tart")'}
+      - {script: 'pfm_quest_done(:biscuit)'}
+      - {script: 'pfm_set(:biscuit_reward)'}
+      else: ['\pf[WENNA,sad]Wenna: She told me about the orchard. That was the Pruetts'' place. They had apples when I was a girl.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 19, dir: down}
+    cond: {switch: CH1_ORCHARD_DONE}
+  at: [46, 43]
+- type: event
+  name: Coll Hale
+  pages:
+  - commands: ['\pf[COLL,neutral]Coll: Mm. Ferry child.', '\pf[COLL,neutral]Coll: Farm''s up the lane if you need a bed. Wenna''ll say the same but with
+        more words.', '\pf[COLL,deadpan]Coll: ...Did she give you a tart? Then you''re family. That''s how it works. I didn''t make the rules.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 03, dir: down}
+  - commands: ['\pf[COLL,neutral]Coll: Orchard went glass the same week my hens stopped laying. Don''t know that it''s connected. Don''t know that it isn''t.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 03, dir: down}
+    cond: {switch: CH1_ORCHARD_DONE}
+  at: [47, 45]
+- type: event
+  name: HiddenItem tart stall
+  pages:
+  - commands:
+    - if: pbItemBall(:ORANBERRY)
+      then:
+      - It rolled off the stall. Finders keepers is an old harbor law.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [40, 41]
+- type: event
+  name: HiddenItem breakwater
+  pages:
+  - commands:
+    - if: pbItemBall(:PEARL)
+      then:
+      - Stuck in a mooring ring. The sea was saving it.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [18, 55]
+- type: event
+  name: Wingull (rocks)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - The Wingull eyes you. It has a bottle cap in its beak and is very proud of it.
+    - choices: [Hold out a Bramble Tart crumb., Just pick it up.]
+      branches:
+      - [It hops onto your arm. It keeps the bottle cap.]
+      - [It bites you. Then it hops onto your arm anyway.]
+      cancel: 0
+    - {script: 'pfm_set(:wingull_found)'}
+    - selfswitch: [B, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: Followers/WINGULL, dir: down}
+    cond: {self: A}
+    step_anime: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: B}
+  at: [10, 48]
+- type: event
+  name: Girl with Wingull
+  pages:
+  - commands:
+    - if: pfm?(:wingull_back)
+      then: ['Girl: Captain Edda''s grounded. She doesn''t know what that means. Neither do I.']
+      else:
+      - if: pfm?(:wingull_found)
+        then:
+        - 'Girl: CAPTAIN! You''re in so much trouble. Here, ferry person, she wants you to have this.'
+        - The Wingull drops the bottle cap at your feet, then changes its mind and takes it back.
+        - {script: 'pfm_item(:SHARPBEAK, 1)'}
+        - A Wingull's idea of a fair trade.
+        - '\pf[EDDA,deadpan,,Captain Edda]Edda: ...What did she call that bird?'
+        - {script: 'pfm_set(:wingull_back)'}
+        - {script: 'pfm_quest_done(:wingull)'}
+        - {script: 'pbSetSelfSwitch(%EV[Wingull (with girl)]%, "A", true)'}
+        else:
+        - if: pfm_quest?(:wingull)
+          then: ['Girl: She''s on the lighthouse rocks! I''m not allowed there! You''re allowed everywhere, you''re a ferry person!']
+          else:
+          - if: $game_switches[@@PRO_SCANNED_NULL] && pfm?(:wingull_talked)
+            then:
+            - 'Girl: Captain Edda flew off! The gate went BING and she got scared! She''s on the lighthouse rocks and I''m not allowed there!'
+            - {script: 'pfm_quest(:wingull, "Captain Edda", "Find the Wingull on the lighthouse rocks.")'}
+            - {script: 'pbSetSelfSwitch(%EV[Wingull (rocks)]%, "A", true)'}
+            else:
+            - 'Girl: She''s called Captain Edda. The real Captain Edda doesn''t know. Don''t tell her.'
+            - {script: 'pfm_set(:wingull_talked)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 16, dir: down}
+  at: [26, 45]
+- type: event
+  name: Wingull (with girl)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: [The Wingull has a bottle cap. It is not sharing.]
+    trigger: action
+    move: fixed
+    graphic: {sprite: Followers/WINGULL, dir: left}
+    cond: {self: A}
+    step_anime: true
+  at: [27, 45]
+- type: event
+  name: Lamplighter
+  pages:
+  - commands:
+    - if: pfm?(:lamps_done)
+      then: ['Lamplighter: Forty years. And the gulls came to mine. That''ll do.']
+      else:
+      - if: pfm_count(:lamps) >= 6
+        then:
+        - {script: pfm_dusk(30)}
+        - Dusk. Above the six small yellow flames, the Meridian lamps switch on, white and humming.
+        - 'Lamplighter: There. Look at that. You can hardly see mine under theirs.'
+        - 'Lamplighter: ...But the gulls came to mine. Did you see? Here. I won''t need it.'
+        - {script: 'pfm_item(:CHARCOAL, 1)'}
+        - It kept a harbor lit for forty years.
+        - {script: pfm_day(30)}
+        - {script: 'pfm_set(:lamps_done)'}
+        - {script: 'pfm_quest_done(:last_round)'}
+        else:
+        - if: pfm_quest?(:last_round)
+          then:
+          - 'Lamplighter: Six lamps on the quay. The proper way. Off you go.'
+          - {script: 'pbMessage(_INTL("({1} of 6 lit.)", pfm_count(:lamps)))'}
+          else:
+          - if: pfm?(:lamp_talked)
+            then:
+            - 'Lamplighter: The pole lights itself tonight. Do an old man a kindness? Light the six quay lamps by hand, the proper way. Last time anyone
+              will.'
+            - {script: 'pfm_item(:LAMPTAPER, 1, "Lamplighter''s Taper")'}
+            - {script: 'pfm_quest(:last_round, "The Last Round", "Light the six old lamps along the quay (0/6).")'}
+            else:
+            - 'Lamplighter: Forty years I''ve lit this quay. Now a pole does it. The pole doesn''t know the fishwives'' names.'
+            - {script: 'pfm_set(:lamp_talked)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 10, dir: down}
+  at: [29, 46]
+- type: event
+  name: Quay lamp 1
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [24, 45]
+- type: event
+  name: Quay lamp 2
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [30, 42]
+- type: event
+  name: Quay lamp 3
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [38, 42]
+- type: event
+  name: Quay lamp 4
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [45, 47]
+- type: event
+  name: Quay lamp 5
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [49, 45]
+- type: event
+  name: Quay lamp 6
+  pages:
+  - commands:
+    - if: pfm_has?(:LAMPTAPER) && !pfm?(:lamps_done)
+      then:
+      - You light it. The flame is small and yellow and smells of whale oil.
+      - selfswitch: [A, true]
+      - {script: 'n = pfm_add(:lamps)
+
+          pbMessage(_INTL("({1} of 6 lit.)", n))'}
+      else: [An old oil lamp on an iron post. Cold. The new Meridian pole beside it hums.]
+    trigger: action
+    move: fixed
+    graphic: {tile: 18126, dir: down}
+  - commands: ['The old lamp burns, small and yellow.']
+    trigger: action
+    move: fixed
+    cond: {self: A}
+    graphic: {tile: 18127, dir: down}
+  at: [55, 44]
+- type: event
+  name: Harbor Crier
+  pages:
+  - commands: ['Crier: Hear ye! The Strait is closed! The Festival of Champions proceeds as planned, in the autumn, by grace of the Sovereign!', 'Crier:
         ...I don''t know how both of those are true either. I just read the card.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 01, dir: down}
+  at: [30, 28]
+- type: sign
+  name: Town sign
+  post: true
+  text: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
+  at: [34, 2]
+- type: sign
+  name: Lane sign
+  post: true
+  text: ↑ Tidewatch Station (Prof. I. Larch) · → Hale's Bramble · ← Lighthouse (KEEP OUT. THIS MEANS YOU, KESTREL.)
+  at: [32, 26]
+- type: sign
+  name: Notice board
+  post: false
+  text: '"LOST: one Skwovet, answers to Biscuit. Last seen heading for the old Pruett orchard. Do NOT follow it in. — W. Hale"'
+  at: [28, 26]
+- type: sign
+  name: Festival poster
+  post: false
+  text: '"THE FESTIVAL OF CHAMPIONS, AF 300. All Kingdoms. One Blessing." A painted crown floats over eighteen colored banners. The stone in the crown has
+    a tiny dark fleck. Probably a printing fault.'
+  at: [27, 31]
+- type: sign
+  name: Fish barrels
+  post: false
+  text: Magikarp. They look resigned.
+  at: [44, 46]
 - type: event
   name: Rope-skipping Girl 1
-  at: [36, 30]
   pages:
-  - graphic: &id002 {sprite: NPC 29, dir: down}
-    move: fixed
-    commands:
+  - commands:
     - 'Rope-skipping Girl 1: One for the weaver, two for the stage,'
     - 'Rope-skipping Girl 2: three for the river that won''t turn its page!'
     - 'Rope-skipping Girl 1: Four for the lantern, five for the dune,'
     - 'Rope-skipping Girl 2: six for the fen and its poison-blue moon!'
     - selfswitch: [A, true]
-  - cond: {self: A}
-    graphic: *id002
+    trigger: action
     move: fixed
-    commands: ['Rope-skipping Girl 1: ...and none for the cage, and none for the king! You''re out!', 'Rope-skipping Girl 2: I''m NOT out, you said "king"
+    graphic: {sprite: NPC 29, dir: down}
+  - commands: ['Rope-skipping Girl 1: ...and none for the cage, and none for the king! You''re out!', 'Rope-skipping Girl 2: I''m NOT out, you said "king"
         too fast!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 29, dir: down}
+    cond: {self: A}
+  at: [26, 29]
+- type: event
+  name: Rope-skipping Girl 2
+  pages:
+  - commands:
+    - 'Rope-skipping Girl 1: One for the weaver, two for the stage,'
+    - 'Rope-skipping Girl 2: three for the river that won''t turn its page!'
+    - 'Rope-skipping Girl 1: Four for the lantern, five for the dune,'
+    - 'Rope-skipping Girl 2: six for the fen and its poison-blue moon!'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 29, dir: down}
+  - commands: ['Rope-skipping Girl 1: ...and none for the cage, and none for the king! You''re out!', 'Rope-skipping Girl 2: I''m NOT out, you said "king"
+        too fast!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 29, dir: down}
+    cond: {self: A}
+  at: [27, 29]
 - type: event
   name: Kelp-drier
-  at: [33, 22]
   pages:
-  - graphic: {sprite: NPC 22, dir: down}
+  - commands: ['Kelp-drier: Kelp for the Professor''s tea. I''ve offered to stop. She says no. I''ve offered to pay HER.']
+    trigger: action
     move: fixed
-    commands: ['Kelp-drier: Kelp for the Professor''s tea. I''ve offered to stop. She says no. I''ve offered to pay HER.']
+    graphic: {sprite: NPC 22, dir: down}
+  at: [38, 45]
 - type: event
   name: Old Sailor
-  at: [45, 29]
   pages:
-  - graphic: {sprite: trainer_SAILOR, dir: down}
-    move: random
-    commands: ['Old Sailor: That chain across the harbor? My grandfather forged the links. He''d be proud and furious.']
+  - commands: ['Old Sailor: That chain across the harbor? My grandfather forged the links. He''d be proud and furious.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SAILOR, dir: down}
+  at: [30, 45]
 - type: event
   name: Meridian Linesman
-  at: [20, 28]
   pages:
-  - graphic: &id003 {sprite: trainer_SCIENTIST, dir: down}
-    move: fixed
-    commands:
+  - commands:
     - 'Meridian Linesman: Don''t mind the gate, it''s just for counting. We''re putting lamps along the quay next month. Free light. You''ll like it.'
     - selfswitch: [A, true]
-  - cond: {self: A}
-    graphic: *id003
+    trigger: action
     move: fixed
-    commands: ['Meridian Linesman: The old lamplighter? He''s got a pension. ...I think he''s got a pension.']
-- type: event
-  name: Lamplighter
-  at: [34, 37]
-  pages:
-  - graphic: {sprite: NPC 26, dir: down}
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+  - commands: ['Meridian Linesman: The old lamplighter? He''s got a pension. ...I think he''s got a pension.']
+    trigger: action
     move: fixed
-    commands: ['Lamplighter: Forty years I''ve lit this quay. Now a pole does it. The pole doesn''t know the fishwives'' names.']
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+    cond: {self: A}
+  at: [25, 45]
 - type: event
   name: Fishwife
-  at: [12, 33]
   pages:
-  - graphic: {sprite: trainer_FISHERMAN, dir: down}
-    move: random
-    commands: ['Fishwife: The ferry child! Is it true you''ve no tint at all? Let me see your eyes. ...Huh. Like rain.']
+  - commands: ['Fishwife: The ferry child! Is it true you''ve no tint at all? Let me see your eyes. ...Huh. Like rain.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_FISHERMAN, dir: down}
+  at: [46, 44]
 - type: event
   name: Woman hanging washing
-  at: [48, 21]
   pages:
-  - graphic: {sprite: NPC 14, dir: down}
+  - commands: ['Woman hanging washing: I went to my cousin''s wedding across the strait. Nine days. Came back grey. Never again. I''ll send a card.']
+    trigger: action
     move: fixed
-    commands: ['Woman hanging washing: I went to my cousin''s wedding across the strait. Nine days. Came back grey. Never again. I''ll send a card.']
+    graphic: {sprite: NPC 14, dir: down}
+  at: [12, 32]
 - type: event
   name: Boy with toy boat
-  at: [35, 12]
   pages:
-  - graphic: {sprite: NPC 22, dir: down}
-    move: fixed
-    commands: ['Boy with toy boat: When I''m big I''m getting all eighteen badges. Then I''ll be Sovereign and make it illegal to have baths.']
-- type: event
-  name: Girl with Wingull
-  at: [26, 43]
-  pages:
-  - graphic: {sprite: NPC 29, dir: down}
+  - commands: ['Boy with toy boat: When I''m big I''m getting all eighteen badges. Then I''ll be Sovereign and make it illegal to have baths.']
+    trigger: action
     move: random
-    commands: ['Girl with Wingull: She''s called Captain Edda. The real Captain Edda doesn''t know. Don''t tell her.']
+    graphic: {sprite: NPC 22, dir: down}
+  at: [22, 45]
 - type: event
   name: Accord Clerk
-  at: [40, 43]
   pages:
-  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
+  - commands: ['Accord Clerk: Quarantine notices, form nine. You don''t need one. Nobody needs one. I have four hundred.']
+    trigger: action
     move: fixed
-    commands: ['Accord Clerk: Quarantine notices, form nine. You don''t need one. Nobody needs one. I have four hundred.']
+    graphic: {sprite: trainer_GENTLEMAN, dir: down}
+  at: [24, 37]
 - type: event
   name: Drunk on the steps
-  at: [16, 44]
   pages:
-  - graphic: {sprite: NPC 02, dir: down}
+  - commands: ['Drunk on the steps: They closed the sea. You can''t close the sea. I''ve seen it. It''s enormous.']
+    trigger: action
     move: fixed
-    commands: ['Drunk on the steps: They closed the sea. You can''t close the sea. I''ve seen it. It''s enormous.']
+    graphic: {sprite: NPC 02, dir: down}
+  at: [38, 39]
 - type: event
   name: Old Woman on bench
-  at: [33, 48]
   pages:
-  - graphic: {sprite: NPC 17, dir: down}
-    move: random
-    commands: ['Old Woman on bench: The Festival poster''s up already. They always paint the Sovereign''s Crown a bit wrong these days. Fewer sparkles.']
+  - commands: ['Old Woman on bench: The Festival poster''s up already. They always paint the Sovereign''s Crown a bit wrong these days. Fewer sparkles.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 17, dir: down}
+  at: [32, 31]
 - type: event
   name: Net-mender
-  at: [10, 44]
   pages:
-  - graphic: {sprite: trainer_FISHERMAN, dir: down}
+  - commands: ['Net-mender: Two ferry-loads of folk came home this month who swore they''d never. You can run from Velmora. You just can''t stay run.']
+    trigger: action
     move: fixed
-    commands: ['Net-mender: Two ferry-loads of folk came home this month who swore they''d never. You can run from Velmora. You just can''t stay run.']
+    graphic: {sprite: trainer_FISHERMAN, dir: down}
+  at: [16, 44]
 - type: event
   name: Twin 1
-  at: [30, 26]
   pages:
-  - graphic: {sprite: NPC 18, dir: down}
+  - commands: ['Twin 1: We''re the same tint!', 'Twin 2: We''re the same EVERYTHING.', 'Twin 1: I''m taller.', 'Twin 2: By a HAT.']
+    trigger: action
     move: fixed
-    commands: ['Twin 1: We''re the same tint!', 'Twin 2: We''re the same EVERYTHING.', 'Twin 1: I''m taller.', 'Twin 2: By a HAT.']
+    graphic: {sprite: NPC 18, dir: down}
+  at: [45, 33]
+- type: event
+  name: Twin 2
+  pages:
+  - commands: ['Twin 1: We''re the same tint!', 'Twin 2: We''re the same EVERYTHING.', 'Twin 1: I''m taller.', 'Twin 2: By a HAT.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 18, dir: down}
+  at: [48, 31]
 - type: event
   name: Meridian Recruiter
-  at: [50, 38]
   pages:
-  - graphic: {sprite: trainer_SCIENTIST, dir: down}
-    move: random
-    commands: ['Meridian Recruiter: Fellowship cards for promising trainers! Oh, you have one. From whom? ...HIM? Personally?  Excuse me, I need to sit
+  - commands: ['Meridian Recruiter: Fellowship cards for promising trainers! Oh, you have one. From whom? ...HIM? Personally?  Excuse me, I need to sit
         down.']
-- type: sign
-  name: Festival Poster
-  at: [29, 25]
-  post: true
-  text: '"THE FESTIVAL OF CHAMPIONS, AF 300. All Kingdoms. One Blessing." A painted crown floats over eighteen colored banners. The stone in the crown has
-    a tiny dark fleck. Probably a printing fault.'
-- type: sign
-  name: Lane Sign
-  at: [36, 24]
-  post: true
-  text: ↑ Tidewatch Station (Prof. I. Larch) · → Hale's Bramble · ← Lighthouse (KEEP OUT. THIS MEANS YOU, KESTREL.)
-- type: sign
-  name: Notice Board
-  at: [42, 16]
-  post: true
-  text: '"LOST: one Skwovet, answers to Biscuit. Last seen heading for the old Pruett orchard. Do NOT follow it in. — W. Hale"'
-- type: sign
-  name: Fish Barrels
-  at: [22, 44]
-  post: true
-  text: Magikarp. They look resigned.
-- type: item
-  item: ORANBERRY
-  hidden: true
-  at: [39, 11]
-- type: item
-  item: PEARL
-  hidden: true
-  at: [34, 57]
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+  at: [36, 30]
+- type: event
+  name: Boy (town)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Boy: I''M GREEN. Did you see? Mum says I can''t be red as well. I''m going to be red on Saturdays.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 02, dir: down}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [31, 24]
+- type: event
+  name: Boy's Mother (town)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Boy''s Mother: Two more hours on the road to Briarwick. He''ll be green the whole way, and loud about it.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 04, dir: down}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [32, 23]
+- type: event
+  name: Woman with crate (town)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['Woman with crate: Home. Already I feel less grey. Don''t tell my sister.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 22, dir: left}
+    cond: {switch: PRO_SCANNED_NULL}
+  at: [41, 30]

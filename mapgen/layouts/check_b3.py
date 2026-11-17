@@ -25,7 +25,7 @@ def check(mid, start=None):
     bad = []
     for e in m.events.values():
         if not any(c.code != 0 for p in e.pages for c in p.list): continue
-        if e.pages[0].trigger in (3, 4) and e.x == 0 and e.y == 0: continue          # atmosphere event
+        if all(p.trigger in (3, 4) for p in e.pages if any(c.code != 0 for c in p.list)) and not e.pages[0].graphic.character_name: continue  # autorun/parallel helpers
         if not any(0 <= e.x + dx < W and 0 <= e.y + dy < H and seen[e.y + dy, e.x + dx] for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0))):
             bad.append('%s (%d,%d)' % (e.name, e.x, e.y))
     stranded = int((ok & ~seen).sum())

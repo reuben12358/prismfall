@@ -9,7 +9,7 @@ passages, priorities and tags), then a small custom strip drawn here on the 16-p
 Autotile slots: Waterfall2, Tall Grass, Bleed water (custom), Tall Grass Flowers 1, Tall Grass Flowers 2, water2,
 Bleed grass (custom) - slots 1, 2, 4, 5, 6 match tilesets 30/33.
 Offsets and custom tile names -> data/compose_wilds_offsets.json.   Run: python3 -I compose_wilds.py"""
-import os, sys, json, colorsys, random
+import os, sys, json, colorsys, random, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageDraw
 import rmarshal as M
@@ -27,9 +27,9 @@ def ramp(stops, t):
 
 
 GLASS = [(22, 20, 54), (52, 46, 118), (96, 92, 190), (150, 160, 232), (214, 226, 250)]       # foliage -> blue-violet glass
-ROSE = [(40, 14, 44), (104, 36, 92), (176, 80, 140), (232, 160, 196), (255, 226, 236)]         # wood, earth -> rose quartz
+ROSE = [(34, 26, 46), (78, 66, 96), (128, 114, 146), (184, 172, 200), (236, 230, 244)]       # wood, earth -> ashen mauve-grey
 ASH = [(60, 54, 78), (120, 112, 140), (176, 170, 192), (214, 210, 226), (240, 238, 246)]       # ground grass -> ashen lilac
-GALL = [(30, 8, 40), (92, 20, 96), (170, 44, 150), (236, 110, 200), (255, 200, 240)]           # water -> gall pink
+GALL = [(16, 10, 38), (44, 30, 92), (88, 70, 156), (160, 146, 218), (232, 224, 255)]          # water -> still violet
 
 
 def bleed_colour(rgb, ground=False):
@@ -44,7 +44,7 @@ def bleed_colour(rgb, ground=False):
         return ramp(ROSE, lum * 1.05)
     if 0.47 < h < 0.72:
         return ramp(GALL, lum * 1.05)
-    return rgb
+    return ramp(ROSE, lum * 1.05)                     # magenta / purple: same ashen ramp as wood and earth
 
 
 def recolour(im, ground_rows=()):
@@ -178,6 +178,19 @@ def draw_custom():
             r = ((x - 15.5) / 15.0) ** 2 + ((y - 15.5) / 13.0) ** 2
             if r < 1.0 and (x * 5 + y * 3) % 4 != 0: px[x, y] = (16, 40, 34, int(80 * (1 - r) + 16))
     S.add('shade', dbl(sd), 0, 0)
+    # --- the Bleed Veil: a vertically tileable shimmer (translucent, overhead, passable) ---
+    vl = canvas(1, 1); px = vl.load()
+    for y in range(16):
+        for x in range(16):
+            wv = 7.5 + 3.0 * math.sin((y + 0.5) / 16.0 * 2 * math.pi) + 1.2 * math.sin((y + 3) / 16.0 * 6 * math.pi)
+            dist = abs(x - wv)
+            if dist < 5.5:
+                a = int(120 * (1 - dist / 5.5)) + (40 if (x + 2 * y) % 7 == 0 else 0)
+                col = (236, 228, 255) if dist < 1.2 else ((200, 180, 255) if (x + y) % 3 else (255, 210, 245))
+                px[x, y] = col + (min(200, a),)
+    for y, x in ((2, 9), (7, 5), (11, 10), (14, 7)):
+        px[x, y] = (255, 255, 255, 230)
+    S.add('veil', dbl(vl), 0, 5)
     # --- Meridian survey flag (1x2): stake (solid) with an orange pennant overhead ---
     fl = canvas(1, 2); d = ImageDraw.Draw(fl)
     d.line([(7, 3), (7, 29)], fill=(92, 70, 52, 255)); d.line([(8, 3), (8, 29)], fill=(140, 108, 78, 255))
@@ -189,6 +202,30 @@ def draw_custom():
     for name, fn in (('silk_tree', 'silk_tree_2x3.png'), ('crystal_tree', 'crystal_tree_2x3.png')):
         im = Image.open(os.path.join(CUSTOM, fn)).convert('RGBA')
         S.add(name, im, [[0, 0], [15, 15], [15, 15]], [[2, 2], [1, 1], [0, 0]])
+    # --- big orb web (3x3, overhead, passable): spokes and rings, strung between trunks ---
+    wb = canvas(3, 3); d = ImageDraw.Draw(wb); cx, cy = 24, 22
+    spokes = [(0, 0), (24, 0), (47, 2), (47, 26), (45, 47), (22, 47), (0, 44), (0, 20)]
+    for ex, ey in spokes: d.line([(cx, cy), (ex, ey)], fill=SILK[1][:3] + (210,))
+    for rr in (5, 9, 13, 17, 21):
+        pts = [(cx + int((ex - cx) * rr / 24.0), cy + int((ey - cy) * rr / 24.0)) for ex, ey in spokes] + [None]
+        pts[-1] = pts[0]
+        d.line(pts, fill=(SILK[0] if rr % 2 else SILK[2])[:3] + (200,))
+    for x, y in ((cx - 6, cy + 3), (cx + 8, cy - 5), (cx + 2, cy + 12)): d.point((x, y), fill=(255, 255, 255, 255))
+    S.add('web_big', dbl(wb), 0, 5)
+    # --- a great loom (3x3): timber frame, white warp threads, a half-woven band of cloth, the breast beam in front ---
+    lm = canvas(3, 3); d = ImageDraw.Draw(lm)
+    WD = [(70, 44, 30, 255), (112, 74, 46, 255), (152, 108, 68, 255), (190, 146, 98, 255)]
+    d.rectangle((3, 2, 6, 44), fill=WD[1]); d.rectangle((41, 2, 44, 44), fill=WD[1])          # posts
+    d.line([(4, 2), (4, 44)], fill=WD[2]); d.line([(42, 2), (42, 44)], fill=WD[2])
+    d.rectangle((1, 1, 46, 5), fill=WD[1]); d.line([(1, 2), (46, 2)], fill=WD[3]); d.line([(1, 5), (46, 5)], fill=WD[0])   # top beam
+    for x in range(8, 40, 2):                                                                    # warp threads
+        d.line([(x, 6), (x, 27)], fill=(236, 238, 250, 255) if x % 4 else (196, 200, 222, 255))
+    for i, col in enumerate(((176, 60, 70), (224, 176, 64), (82, 140, 92), (176, 60, 70), (236, 230, 214))):
+        d.rectangle((7, 27 + i * 2, 40, 28 + i * 2), fill=col + (255,))                          # woven cloth
+    d.rectangle((1, 37, 46, 41), fill=WD[1]); d.line([(1, 38), (46, 38)], fill=WD[3]); d.line([(1, 41), (46, 41)], fill=WD[0])  # breast beam
+    d.rectangle((14, 15, 33, 17), fill=WD[2]); d.line([(14, 15), (33, 15)], fill=WD[3])        # the heddle bar
+    d.ellipse((6, 43, 41, 47), fill=(20, 30, 20, 80))
+    S.add('loom', dbl(lm), [[15, 15, 15], [15, 15, 15], [15, 15, 15]], [[2, 2, 2], [1, 1, 1], [0, 0, 0]])
     S.pad()
     return S
 

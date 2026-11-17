@@ -18,6 +18,10 @@ module PrismfallMaps
     123 => [10, 4, -12, 0],   # Weavers' Guildhall
     124 => [10, 4, -12, 0],   # Treetop House
     125 => [10, 4, -12, 0],   # Cutter's House
+    130 => [-10, -6, -18, 10],   # Loomhouse Gym - Foyer
+    131 => [-10, -6, -18, 10],   # Loomhouse Gym - Weaving Hall
+    132 => [-14, -8, -20, 15],   # Loomhouse Gym - Canopy Lofts
+    133 => [-16, -10, -20, 15],   # Loomhouse Gym - The Spindle
     140 => [10, 4, -14, 0],   # Saltmere
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
@@ -27,7 +31,24 @@ module PrismfallMaps
     287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
     295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
     520 => [4, 6, -8, 0],   # Route 1
+    521 => [8, 4, -10, 0],   # Route 2
+    522 => [-18, -22, 26, 70],   # The Glassed Orchard
+    524 => [-28, -8, -30, 25],   # Gossamer Wood
+    525 => [-40, -24, -30, 40],   # Gossamer Deepwood
+    548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
   }
+
+  # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
+  MAP_FOGS = {
+    100 => ["prismfall_seamist", 0, 40, 0, 100, 2, 0],   # Ferrow's Landing
+  }
+
+  def self.apply_map_fog
+    return if !$game_map
+    f = MAP_FOGS[$game_map.map_id]
+    return if !f
+    $game_map.fog_name, $game_map.fog_hue, $game_map.fog_opacity, $game_map.fog_blend_type, $game_map.fog_zoom, $game_map.fog_sx, $game_map.fog_sy = *f
+  end
 
   def self.apply_map_tone
     return if !$game_map || !$game_screen
@@ -41,5 +62,5 @@ module PrismfallMaps
 end
 
 EventHandlers.add(:on_enter_map, :prismfall_map_tone,
-  proc { |_old_map_id| PrismfallMaps.apply_map_tone }
+  proc { |_old_map_id| PrismfallMaps.apply_map_tone; PrismfallMaps.apply_map_fog }
 )

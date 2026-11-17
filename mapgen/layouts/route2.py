@@ -14,12 +14,11 @@ def build():
     c = Wild(W, H, 521)
     # ---- heights: the farm hollow (0) in the south-west, the terrace (1) across the north, the orchard rise (2) east
     def hf(x, y):
-        if x > 47 + 3 * math.sin(y / 5.0) + 2 * (vnoise(x, y, 4, 4.0) - 0.5) and 12 <= y <= 34: return 2
+        if x > 46 + 3 * math.sin(y / 5.0) + 2 * (vnoise(x, y, 4, 4.0) - 0.5) and y <= 32: return 1
         if y < 27 + 3.0 * math.sin(x / 7.0) + 2.0 * (vnoise(x, 1, 6, 4.0) - 0.5): return 1
         return 0
     c.set_heights(hf)
     c.notch(39, 41, 24, 1, depth=6)          # lane stairs from the farm up to the terrace
-    c.notch(46, 48, 26, 2, depth=4)          # farm track up onto the orchard rise
     # ---- water: a brook off the terrace into the farm pond
     c.stream([(30, 0), (29, 6), (25, 12), (22, 18), (21, 24), (19, 30)], 2, 7)
     c.pond(16, 34, 4.5, 3.0, 8)
@@ -28,8 +27,6 @@ def build():
     c.path([(40, 22), (37, 18), (30, 14), (22, 11), (12, 10), (0, 10)], 2, 'd', 2, only='.~')    # terrace -> west road
     c.path([(40, 22), (47, 21), (53, 22), (61, 23)], 2, 'd', 3, only='.')                   # east road to the orchard gate
     c.path([(38, 36), (31, 36), (27, 38)], 2, 'd', 4, only='.')                            # farmyard
-    c.path([(47, 31), (47, 29)], 2, 'd', 5, only='.')
-    c.path([(47, 23), (50, 26)], 2, 'd', 6, only='.')
     for y in range(H):
         for x in range(W):
             if c.g[y][x] == 'd' and c.ht[y][x] < 0: c.g[y][x] = '='
@@ -38,7 +35,7 @@ def build():
         for x in range(W):
             if c.g[y][x] == '~' and c.g[y][x - 1 if x else 0] == '=' or (c.g[y][x] == '~' and 9 <= y <= 12 and 20 <= x <= 32):
                 c.g[y][x] = '='
-    c.stairs(39, 24); c.stairs(46, 26)
+    c.stairs(39, 24)
     c.cliffs(face=2, keep='~=')
     # ---- the glass creep: ashen ground and a crystal hedge around the orchard gate
     for y in range(H):
@@ -61,13 +58,14 @@ def build():
     P = {'wim': c.spot(31, 16, 'd.'), 'ada': c.spot(52, 20, 'd.'), 'joss': c.spot(10, 12, 'd.'), 'sign': c.spot(43, 44, '.'),
          'surveyor': c.spot(35, 19, '.'), 'driver': c.spot(54, 24, 'aD.'), 'tutor': c.spot(33, 39, '.d'),
          'guard2': c.spot(5, 8, '.'), 'ball': c.spot(9, 37, '.'), 'berry': c.spot(26, 41, '.'), 'shrine': c.spot(14, 5, '.')}
-    c.need(gate_s, west, east, (47, 30))
+    c.need(gate_s, west, east)
+    c.keep_clear([(0, 9), (0, 10), (0, 11), (1, 10), (61, 22), (61, 23), (41, 47)], 2)
     c.grassfill([(12, 15, 4, 2.5), (33, 26, 4, 2), (50, 13, 4, 3), (8, 42, 3, 3), (56, 37, 3, 3), (24, 22, 3, 2.5), (45, 6, 4, 2.5)])
     c.seal()
     # ---- the farmstead: farmhouse (door south onto the yard), barn, fields, hives, hay, a well, a duck pond
     fh = c.stamp('t_house_orange', 29, 31, 'R2_FARM', 'Farmhouse door', door=(1, 4))
     c.stamp('h_long_g', 22, 31)
-    c.fence_ring(43, 34, 12, 8, gaps={(47, 34), (48, 34)})
+    c.fence_ring(43, 34, 12, 8, gaps={(43, 37), (43, 38)})
     for y in range(36, 41):
         for x in range(45, 53):
             if (x + y) % 2 == 0: c.obj('crop', x, y - 1, check=False)
@@ -112,8 +110,8 @@ def build():
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 521")
     E = []
     E.append({'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 10], 'link': 'R2_WOOD', 'arrive': [1, 10, 'right']})
-    E.append({'type': 'warp', 'name': 'To Gossamer Wood 2', 'at': [0, 9], 'to': {'map': 524, 'x': 22, 'y': 54, 'dir': 'up'}})
-    E.append({'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 24, 'y': 54, 'dir': 'up'}})
+    E.append({'type': 'warp', 'name': 'To Gossamer Wood 2', 'at': [0, 9], 'to': {'map': 524, 'x': 22, 'y': 56, 'dir': 'up'}})
+    E.append({'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 24, 'y': 56, 'dir': 'up'}})
     E.append({'type': 'warp', 'name': 'To the Glassed Orchard', 'at': [61, 23], 'link': 'R2_ORCHARD', 'arrive': [60, 23, 'left']})
     E.append({'type': 'warp', 'name': 'To the Glassed Orchard 2', 'at': [61, 22], 'to': {'map': 522, 'x': 2, 'y': 37, 'dir': 'right'}})
     E.append({'type': 'sign', 'at': P['sign'], 'text': "ROUTE 2\nBriarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown's forest and the Warden's care. Litterers will be woven into something."})
@@ -132,15 +130,16 @@ def build():
                              'commands': [{'comment': 'gone once the barrier is lifted (see page 4 script condition)'}]}]})
     # page selection by the shared key: a parallel guard event flips each barrier's self switch A once the barrier is lifted
     E.append({'type': 'event', 'name': 'Accord guard', 'at': [4, 8], 'pages': [
-        {'graphic': {'sprite': 'trainer_POLICEMAN', 'dir': 'down'}, 'commands': [hold]},
-        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_POLICEMAN', 'dir': 'down'}, 'commands': lifted[:3]}]})
+        {'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': [hold]},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': lifted[:3]}]})
     E.append({'type': 'event', 'name': 'Accord guard (aside)', 'at': P['guard2'], 'pages': [
-        {'graphic': {'sprite': 'trainer_POLICEMAN', 'dir': 'right'}, 'commands': ["Second Guard: Nobody past. Orders came down this morning."]},
-        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_POLICEMAN', 'dir': 'right'}, 'commands': [
-            "\\pf[NOBODY,deadpan,sweat,,]Second Guard: (low) That's the null one from the dock. Captain said let them through, whatever happens.",
+        {'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': ["Second Guard: Nobody past. Orders came down this morning."]},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+            "Second Guard: (low) That's the null one from the dock. Captain said let them through, whatever happens.",
             "Accord Guard: Which captain?",
             "Second Guard: Didn't say. Came down from Crownhaven with a white seal on it.",
-            {'comment': 'both guards: sweat drop emote (Cutscenes plugin)'}, {'script': "pf_emote(:sweat) rescue nil"},
+            "\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)",
+            "\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard (aside)](Both of them, very interested in the sky.)",
             "Accord Guard: Lovely weather."]}]})
     E.append(trainer(P['wim'], 'BUGCATCHER', 'Wim', 'trainer_BUGCATCHER', 'down', 4, "I'm going to be Warden of Briarwick!", "...Assistant Warden."))
     E.append(trainer(P['ada'], 'PICNICKER', 'Ada', 'trainer_PICNICKER', 'left', 4, "My Budew sneezes pollen when it's nervous. It's nervous now.", "Bless you. Bless both of us."))

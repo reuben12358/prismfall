@@ -132,6 +132,23 @@ def build():
     E.append({'type': 'item', 'at': P['cache'], 'item': 'REPEL', 'hidden': True, 'name': 'Cliff-foot cache'})
     E.append({'type': 'berry', 'at': P['berry'], 'berry': 'ORANBERRY'})
     E.append(c.fog_event('prismfall_seamist', 36, 0, 200, 1, 0))
+    # Chapter 2 opener (story/20_SCRIPT_CH0-2.md, "CHAPTER 2"): Larch sees the PC off at the stile
+    ch2 = [say('LARCH', 'neutral', "Eighteen gyms. Briarwick's first, up through the Gossamer Wood. The Warden's a girl called Tamsin Loom. Go easy on her, she inherited the seat in spring and hasn't slept since."),
+           say('LARCH', 'neutral', "Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post."),
+           say('JUNO', 'happy', "I'm coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!"),
+           {'script': 'pbReceiveItem(:TOWNMAP)'},
+           "(Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)",
+           "QUEST: \"Eighteen Roads\" - Earn the first badge in Briarwick.",
+           {'script': '$game_variables[102] = 2 if $game_variables[102] < 2'},
+           {'script': "ev = $game_map.events.values.find { |e| e.name == 'Professor Larch' }\n$game_self_switches[[520, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}]
+    lx, ly = P['stile']
+    E.append({'type': 'event', 'name': 'Professor Larch', 'at': c.spot(lx + 3, ly - 1, '.d', r=3), 'pages': [
+        {'commands': []},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_PROFESSOR', 'dir': 'down'}, 'commands': once(520, 'CH2', ch2)},
+        {'cond': {'self': 'A'}, 'commands': []}]})
+    for i, x in enumerate(x for x in range(8, 22) if c.g[ly + 3][x] in 'd' and not c.sol[ly + 3][x]):
+        E.append({'type': 'event', 'name': 'Stile send-off %d' % (i + 1), 'at': [x, ly + 3], 'pages': [
+            {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'trigger': 'touch', 'commands': once(520, 'CH2', ch2)}]})
     c.events = E
     
     head = {'id': 520, 'name': 'Route 1', 'bgm': 'Route 1', 'parent': 0, 'tone': [4, 6, -8, 0],
