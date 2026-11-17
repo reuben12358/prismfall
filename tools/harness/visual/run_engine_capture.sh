@@ -115,8 +115,19 @@ PY
 run_plan() {
   plan="${1:-volcanic}"
   rm -rf "$RUN/game/Captures"; mkdir -p "$RUN/game/Captures" "$RUN/captures_keep"
-  (cd "$RUN/game" && DEMO_PLAN="$plan" ALSOFT_DRIVERS=null timeout "${RUN_TIMEOUT:-1500}" \
-     xvfb-run -a -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/engine_stdout.txt" 2>&1) || true
+  if [[ "${ISOLATE:-0}" == "1" ]]; then
+    # Own display + renamed process names, so other tools' `pkill Xvfb` / `pkill mkxp` can't hit this run.
+    mkdir -p "$RUN/bin"; cp /usr/bin/Xvfb "$RUN/bin/pfcap-display"; cp "$RUN/game/mkxp-z.x86_64" "$RUN/game/pfcap-engine"
+    dn="${DISPLAY_NUM:-87}"
+    "$RUN/bin/pfcap-display" ":$dn" -screen 0 1024x768x24 -nolisten tcp > "$RUN/display.log" 2>&1 &
+    dpid=$!; sleep 2
+    (cd "$RUN/game" && DISPLAY=":$dn" DEMO_PLAN="$plan" ALSOFT_DRIVERS=null timeout "${RUN_TIMEOUT:-1500}" \
+       ./pfcap-engine debug > "$RUN/engine_stdout.txt" 2>&1) || true
+    kill "$dpid" 2>/dev/null || true
+  else
+    (cd "$RUN/game" && DEMO_PLAN="$plan" ALSOFT_DRIVERS=null timeout "${RUN_TIMEOUT:-1500}" \
+       xvfb-run -a -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/engine_stdout.txt" 2>&1) || true
+  fi
   cat "$RUN/game/Captures/demo.log"
   for d in "$RUN"/game/Captures/*/; do n="$(basename "$d")"; rm -rf "$RUN/captures_keep/$n"; cp -r "$d" "$RUN/captures_keep/$n"; done
   cp "$RUN/game/Captures/demo.log" "$RUN/captures_keep/${plan//,/_}_demo.log"

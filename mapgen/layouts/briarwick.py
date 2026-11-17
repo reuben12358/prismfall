@@ -168,7 +168,7 @@ def build():
     c.dress(['p_vat_b', 'p_vat_r', 'p_vat_y'], 9, '.', 1, (12, 33, 22, 44), pad=0)
     c.dress(['tp_stall_05', 'tp_stall_06', 'tp_stall_20', 'tp_stall_21', 'p_laundry', 'tp_stall_08'], 8, '.', 2, (12, 18, 34, 50))
     for x, y in ((29, 27), (25, 29)): c.stamp('p_loom', x, y, force=True)
-    for x, y in ((52, 51), (61, 52), (64, 51)): c.stamp('p_lantern', x - 1, y, force=True); glow(c, x, y + 2)
+    for x, y in ((52, 51), (61, 52), (64, 51)): c.stamp('p_lantern', x - 1, y, force=True); glow(c, x, y + 4)
     for nm, x, y in (('tp_stall_13', 54, 52), ('t_barrel', 50, 52), ('tp_barrel_06', 62, 53), ('p_silk', 65, 51), ('logbench@33', 56, 53),
                      ('tp_stall_05', 26, 26), ('tp_barrel_06', 30, 29), ('tp_garden_09', 41, 35)):
         c.stamp(nm, x, y, force=True)        # life on the decks; the well on the green
@@ -176,7 +176,7 @@ def build():
     c.dress(['p_web', 'p_web1'], 14, '.T', 5, pad=0)
     c.dress(['p_lantern'], 34, '.', 6, near='dk')
     for st in list(c.stamps):
-        if st['stamp'] == 'p_lantern': glow(c, st['at'][0] + 1, st['at'][1] + 2)
+        if st['stamp'] == 'p_lantern': glow(c, st['at'][0] + 1, st['at'][1] + 4)
     c.dress(GARDEN + ['p_crates', 'tp_stall_13', 't_barrel', 'tp_stall_01', 'fo_rustic_20', 'fo_rustic_22'], 30, '.', 7, pad=0)
     c.dress(['p_cherry', 'p_pinkbush', 'p_pinkbush2', 'fo_fairy_05'], 10, '.', 8)
     c.dress(['logbench@33'], 3, 'k', 9, pad=0); c.dress(['p_banner3', 'p_banner'], 5, '.', 10, near='d', pad=0)

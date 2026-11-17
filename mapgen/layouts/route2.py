@@ -106,7 +106,7 @@ def build():
     c.edge_decor(MUSH, 0.10, by='T', seed=1)
     c.edge_decor([950, 958, 1180], 0.35, by='~', seed=2)
     c.water_decor(0.18)
-    c.path_decor([1164, 1171], 0.04)
+    c.path_decor([1164], 0.015)
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 521")
     E = []
     E.append({'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 10], 'link': 'R2_WOOD', 'arrive': [1, 10, 'right']})

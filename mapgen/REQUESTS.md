@@ -64,3 +64,10 @@ Nothing here blocks me; each item has a workaround in place that touches no shar
   `{if: 'pfm_quest?(:locked_ledger) && !pfm_has?(:LEDGERKEY)', then: ['A small brass key is tied into the very first warp thread.',
   {script: 'pfm_item(:LEDGERKEY, 1, "Ledger Key")'}], else: [...your loom text...]}` (helpers in `mapgen/ruby/006_MapStory.rb`).
 - Item ids: I give `:MOTHERLOOMSSHUTTLE` (your spelling) in the loft scene.
+
+## Builder 3 now owns the shared tooling (towns builder's session ended), 2026-11-16
+- Done for the towns builder's open request: map 130's first loom gives the Ledger Key (`pfm_quest?(:locked_ledger)`).
+- New shared pieces: material check in build.py (`biome:`, `--strict`), `data/materials.yaml`, `material_art.py`,
+  `ship_art.py`, `data/stamps_m.json`; citykit loads `stamps_m.json` and has `stair_kind`. See MAPGEN 2g.
+- Waiting on `art/tilesets/GAMES_READY.md` (Rejuvenation/Reborn full games) to import their tilesets.
+- Queued next: borderlands Elowen -> Isenmar (560 -> 570 (571-576) -> 562/563 -> 561 -> 564/565), relinking 560's west edge.

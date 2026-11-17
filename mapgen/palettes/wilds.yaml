@@ -29,14 +29,14 @@ classes:
   bgrass:   {kind: autotile, id: 336, layer: 1}
   fence:    {kind: learned, table: fence, layer: 2}
   cstairs:  {kind: ground}
-  forest:   {kind: forest, patch: 6.0, mix: 0.3, under_p: 0.8,
+  forest:   {kind: forest, patch: 3.5, mix: 0.55, under_p: 0.92,
              species: [{top: [401, 402], mid: [409, 410], bot: [417, 418]},
                        {top: [405, 406], mid: [413, 414], bot: [421, 422]},
                        {top: [605, 606], mid: [613, 614], bot: [621, 622]},
                        {top: [688, 689], mid: [696, 697], bot: [704, 705]},
                        {top: [768, 769], mid: [736, 737], bot: [744, 745]},
                        {top: [732, 733], mid: [740, 741], bot: [748, 749]}],
-             under: [947, 947, 939, 1164, 1172, 1180, 1189, 1188, 955, 1048, 1057]}
+             under: [947, 939, 955, 1164, 1172, 1180, 1189, 1188, 1048, 1057, 1056, 1263, 1148, 1158, 950, 958, 1171, 1162]}
   bforest:  {kind: forest, patch: 6.0, mix: 0.3, under_p: 0.8,
              species: [{top: [14313, 14314], mid: [14321, 14322], bot: [14329, 14330]},
                        {top: [14317, 14318], mid: [14325, 14326], bot: [14333, 14334]},

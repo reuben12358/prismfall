@@ -12,7 +12,7 @@ module PrismfallMaps
     108 => [10, 4, -12, 0],   # Quarantine Customs Hall
     109 => [14, -4, -24, 10],   # The Dovetail - Deck
     110 => [10, 4, -12, 0],   # The Dovetail - Cabin
-    120 => [-18, -30, 4, 12],   # Briarwick
+    120 => [-10, -22, 2, 4],   # Briarwick
     121 => [10, 4, -12, 0],   # Briarwick Pokémon Center
     122 => [10, 4, -12, 0],   # Briarwick Mart
     123 => [10, 4, -12, 0],   # Weavers' Guildhall

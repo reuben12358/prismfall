@@ -1070,7 +1070,6 @@ tiles:
 - {tile: 1580, at: [36, 5], layer: 2}
 - {tile: 732, at: [21, 6], layer: 2}
 - {tile: 733, at: [22, 6], layer: 2}
-- {tile: 1170, at: [26, 6], layer: 2}
 - {tile: 732, at: [29, 6], layer: 2}
 - {tile: 733, at: [30, 6], layer: 2}
 - {tile: 732, at: [31, 6], layer: 2}
@@ -1121,7 +1120,6 @@ tiles:
 - {tile: 8644, at: [22, 13], layer: 2}
 - {tile: 8645, at: [23, 13], layer: 2}
 - {tile: 8646, at: [24, 13], layer: 2}
-- {tile: 1171, at: [27, 13], layer: 2}
 - {tile: 8652, at: [29, 13], layer: 2}
 - {tile: 8653, at: [30, 13], layer: 2}
 - {tile: 8654, at: [31, 13], layer: 2}
@@ -1140,7 +1138,6 @@ tiles:
 - {tile: 1366, at: [33, 15], layer: 2}
 - {tile: 1367, at: [34, 15], layer: 2}
 - {tile: 1068, at: [9, 16], layer: 2}
-- {tile: 1171, at: [10, 17], layer: 2}
 - {tile: 8665, at: [17, 17], layer: 2}
 - {tile: 688, at: [20, 17], layer: 2}
 - {tile: 689, at: [21, 17], layer: 2}
@@ -1175,7 +1172,6 @@ tiles:
 - {tile: 8869, at: [6, 22], layer: 2}
 - {tile: 732, at: [7, 22], layer: 2}
 - {tile: 733, at: [8, 22], layer: 2}
-- {tile: 1164, at: [21, 22], layer: 2}
 - {tile: 8637, at: [26, 22], layer: 2}
 - {tile: 1052, at: [28, 22], layer: 2}
 - {tile: 22940, at: [33, 22], layer: 2}
@@ -1213,6 +1209,7 @@ tiles:
 - {tile: 1176, at: [25, 26], layer: 2}
 - {tile: 1177, at: [26, 26], layer: 2}
 - {tile: 8833, at: [31, 26], layer: 2}
+- {tile: 1164, at: [27, 27], layer: 2}
 - {tile: 1062, at: [29, 27], layer: 2}
 - {tile: 8840, at: [30, 27], layer: 2}
 - {tile: 8841, at: [31, 27], layer: 2}
@@ -1283,21 +1280,20 @@ tiles:
 - {tile: 8649, at: [11, 36], layer: 2}
 - {tile: 8650, at: [12, 36], layer: 2}
 - {tile: 8651, at: [13, 36], layer: 2}
-- {tile: 1171, at: [17, 36], layer: 2}
+- {tile: 1164, at: [22, 36], layer: 2}
 - {tile: 732, at: [30, 36], layer: 2}
 - {tile: 733, at: [31, 36], layer: 2}
 - {tile: 14193, at: [13, 37], layer: 2}
 - {tile: 14194, at: [14, 37], layer: 2}
 - {tile: 14195, at: [15, 37], layer: 2}
-- {tile: 1170, at: [21, 37], layer: 2}
 - {tile: 605, at: [24, 37], layer: 2}
 - {tile: 606, at: [25, 37], layer: 2}
+- {tile: 1164, at: [28, 37], layer: 2}
 - {tile: 401, at: [33, 37], layer: 2}
 - {tile: 402, at: [34, 37], layer: 2}
 - {tile: 14201, at: [13, 38], layer: 2}
 - {tile: 14202, at: [14, 38], layer: 2}
 - {tile: 14203, at: [15, 38], layer: 2}
-- {tile: 1164, at: [16, 38], layer: 2}
 - {tile: 605, at: [26, 38], layer: 2}
 - {tile: 606, at: [27, 38], layer: 2}
 - {tile: 8904, at: [30, 38], layer: 2}
@@ -1314,10 +1310,9 @@ tiles:
 - {tile: 8920, at: [30, 40], layer: 2}
 - {tile: 8921, at: [31, 40], layer: 2}
 - {tile: 8922, at: [32, 40], layer: 2}
-- {tile: 1171, at: [11, 41], layer: 2}
-- {tile: 1171, at: [22, 41], layer: 2}
 - {tile: 768, at: [5, 42], layer: 2}
 - {tile: 769, at: [6, 42], layer: 2}
+- {tile: 1164, at: [10, 43], layer: 2}
 - {tile: 8833, at: [19, 44], layer: 2}
 - {tile: 1068, at: [25, 44], layer: 2}
 - {tile: 8840, at: [18, 45], layer: 2}
@@ -1420,7 +1415,6 @@ tiles:
 - {tile: 8682, at: [33, 57], layer: 2}
 - {tile: 8843, at: [11, 58], layer: 2}
 - {tile: 8844, at: [12, 58], layer: 2}
-- {tile: 1170, at: [13, 58], layer: 2}
 - {tile: 8848, at: [19, 58], layer: 2}
 - {tile: 8849, at: [20, 58], layer: 2}
 - {tile: 8850, at: [21, 58], layer: 2}

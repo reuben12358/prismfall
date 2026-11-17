@@ -47,6 +47,21 @@ def decorate(rows, seed, extra=()):
         for x in range(W):
             if g[y][x] in '._' and not walk(x - 1, y) and not walk(x, y - 1) and r.random() < 0.6: put(CU['web_nw'], x, y, 2)
             elif g[y][x] in '._' and not walk(x + 1, y) and not walk(x, y - 1) and r.random() < 0.6: put(CU['web_ne'], x, y, 2)
+    MAT = json.load(open(os.path.join(HERE, 'data', 'compose_wilds_offsets.json')))['materials']
+    LANT, GLOW = MAT['offset'] + MAT['names']['lantern'], MAT['offset'] + MAT['names']['glow']
+    for y in range(2, H - 1):                                        # lantern posts on outer deck corners, a warm pool beside each
+        for x in range(1, W - 1):
+            corner = g[y][x] == '.' and g[y + 1][x] in 'v#' and (g[y][x - 1] in 'v#' or g[y][x + 1] in 'v#')
+            if corner and g[y - 1][x] == '.' and g[y - 2][x] in '.v#' and (x, y, 1) not in used and r.random() < 0.8:
+                put(LANT + 16, x, y, 1); put(LANT + 8, x, y - 1, 2); put(LANT, x, y - 2, 2)
+                gx = x + 1 if g[y][x + 1] == '.' else x - 2
+                for dx in (0, 1):
+                    for dy in (0, 1):
+                        if 0 <= gx + dx < W and g[y - 1 + dy][gx + dx] in '._': put(GLOW + dy * 8 + dx, gx + dx, y - 1 + dy, 2)
+    for y in range(1, H - 1):                                        # sacks of raw silk, jars of dye, spare cocoons along the deck edges
+        for x in range(1, W - 1):
+            if g[y][x] == '.' and (g[y - 1][x] in 'v#') and (x, y, 1) not in used and r.random() < 0.18:
+                put(r.choice([3507, 3521, 3523, 3507, CU['cocoon_low']]), x, y, 1)
     for name, x, y in extra:                                         # looms, cocoons: multi-tile custom objects
         w, h, base = {'loom': (3, 3, 1), 'cocoon': (1, 2, 1), 'cocoon_big': (2, 3, 2), 'web_big': (3, 3, 0), 'shaft': (2, 4, 0)}[name]
         for dy in range(h):
@@ -223,6 +238,10 @@ def main():
                      {'type': 'event', 'name': 'Tamsin', 'at': [7, 4], 'pages': [
                          {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': spiral},
                          {'cond': {'self': 'A'}}]},
+                     {'type': 'event', 'name': 'First loom', 'at': [3, 5], 'pages': [{'commands': [
+                         {'if': 'pfm_quest?(:locked_ledger) && !pfm_has?(:LEDGERKEY)',
+                          'then': ['A small brass key is tied into the very first warp thread.', {'script': 'pfm_item(:LEDGERKEY, 1, "Ledger Key")'}],
+                          'else': ["Mother Loom's first loom. The warp is still strung, and the pattern stops mid-row, as if she meant to come back to it."]}]}]},
                      {'type': 'warp', 'name': 'To Weaving Hall', 'at': [7, 1], 'link': 'GYM1_HALL',
                       'to': {'map': 131, 'x': 12, 'y': 19, 'dir': 'up'}, 'arrive': [7, 2, 'down']}]})
     # ---------------------------------------------------------------- 131 Weaving Hall (heddle bridges)

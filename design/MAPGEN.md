@@ -241,6 +241,24 @@ does not), the ledger key in the Loomhouse foyer (map 130, builder 3: see REQUES
 farmhouse bed (523's own event does it). Items without PBS data are given by `pfm_item` (BADGECASE, FELLOWSHIPCARD,
 OLDCHOWDER, BRAMBLETART, LAMPTAPER, BARKMASK, DUSKPETAL, KELPTEABAG, MOTHERLOOMSSHUTTLE, LEDGERKEY, TMSTRINGSHOT).
 
+## 2g. Material coherence (biomes), per-biome variants, the Dovetail ship
+- **Every map declares `biome:`** (forest, route, village, harbour, bleed, canopy_gym, city, interior). `data/materials.yaml`
+  tags tile-id ranges with a material (wood, stone, iron, metal, concrete, modern, fabric, crystal...; `shared` = the
+  Tectonic part of tilesets 30/33/40, plus per-tileset ranges) and lists what each biome forbids. `build.py` warns
+  `MATERIAL <mat> in a <biome> map` for map tiles and tile-graphic events; `build.py --strict` fails. Untagged tiles pass:
+  tag new families as you meet them. All early maps pass `--strict`.
+- **Variants** (`material_art.py`, appended last to tilesets 33 and 40 as part `materials`; stamps `<name>@33` / `<name>@40`
+  in `data/stamps_m.json`, rewrite with `material_art.write_stamps()` after composing): `stairs_log` (earth-cut steps,
+  log risers), `stairs_stone` (worn, mossy), `stairs_plank` (between log posts), `signpost`, `lantern`, `logbench`,
+  `barricade`, deck `rail_h/w/e/nw/ne` (layer 3, priority 1, passage 0: the deck edge keeps its passages), `glow` (2x2 warm pool).
+  `City.stair_kind` picks the stair per map (Wild default `stairs_log@40`); palettes village/wilds/bleed/loom use the
+  wooden signpost for sign events. The blue-railed metal `t_stairs` (1389-1415) is tagged metal and banned outside cities.
+- **The Dovetail** (`ship_art.py`, configs `dovetail` for 109 and `moored` for Ferrow's pier): painted hull with wale and
+  waterline, bulwark, deck planking, bow with bowsprit, transom, two masts with crow's nests, furled sails on yards,
+  shrouds and stays; sliced to tileset 33 parts `dovetail` / `ship_moored`, placements in `data/ship_*.json`.
+- **Readability** (top-down contrast rule): paths carry almost no decals (`path_decor` <= 0.015); texture and contrast live
+  in borders, undergrowth and props; wilds forest mixes species in small patches with dense layered undergrowth.
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen

@@ -102,7 +102,7 @@ def build():
     c.edge_decor([1685, 950, 958, 1180], 0.35, by='~', seed=2)
     c.water_decor(0.14, where=lambda x, y: x < coast(y) - 4)
     c.sea_rocks(9)
-    c.path_decor([1170, 1164, 1170, 1171], 0.05)
+    c.path_decor([1164], 0.015)
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 520")
     E = []
     E.append({'type': 'sign', 'at': P['sign'], 'text': "ROUTE 1\nFerrow's Landing - Hale's Bramble - Route 2.\nMind the hedges. The hedges mind you."})

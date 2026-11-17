@@ -163,6 +163,201 @@ tiles:
   - 13
   - 4
   layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 7
+  layer: 1
+- tile: 22948
+  at:
+  - 1
+  - 6
+  layer: 2
+- tile: 22940
+  at:
+  - 1
+  - 5
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 6
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 7
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 6
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 7
+  layer: 2
+- tile: 22956
+  at:
+  - 13
+  - 7
+  layer: 1
+- tile: 22948
+  at:
+  - 13
+  - 6
+  layer: 2
+- tile: 22940
+  at:
+  - 13
+  - 5
+  layer: 2
+- tile: 22968
+  at:
+  - 11
+  - 6
+  layer: 2
+- tile: 22976
+  at:
+  - 11
+  - 7
+  layer: 2
+- tile: 22969
+  at:
+  - 12
+  - 6
+  layer: 2
+- tile: 22977
+  at:
+  - 12
+  - 7
+  layer: 2
+- tile: 22956
+  at:
+  - 12
+  - 9
+  layer: 1
+- tile: 22948
+  at:
+  - 12
+  - 8
+  layer: 2
+- tile: 22968
+  at:
+  - 10
+  - 8
+  layer: 2
+- tile: 22976
+  at:
+  - 10
+  - 9
+  layer: 2
+- tile: 22969
+  at:
+  - 11
+  - 8
+  layer: 2
+- tile: 22977
+  at:
+  - 11
+  - 9
+  layer: 2
+- tile: 22956
+  at:
+  - 3
+  - 10
+  layer: 1
+- tile: 22948
+  at:
+  - 3
+  - 9
+  layer: 2
+- tile: 22940
+  at:
+  - 3
+  - 8
+  layer: 2
+- tile: 22968
+  at:
+  - 4
+  - 9
+  layer: 2
+- tile: 22976
+  at:
+  - 4
+  - 10
+  layer: 2
+- tile: 22969
+  at:
+  - 5
+  - 9
+  layer: 2
+- tile: 22977
+  at:
+  - 5
+  - 10
+  layer: 2
+- tile: 22956
+  at:
+  - 11
+  - 10
+  layer: 1
+- tile: 22968
+  at:
+  - 9
+  - 9
+  layer: 2
+- tile: 22976
+  at:
+  - 9
+  - 10
+  layer: 2
+- tile: 22977
+  at:
+  - 10
+  - 10
+  layer: 2
+- tile: 22956
+  at:
+  - 6
+  - 11
+  layer: 1
+- tile: 22948
+  at:
+  - 6
+  - 10
+  layer: 2
+- tile: 22940
+  at:
+  - 6
+  - 9
+  layer: 2
+- tile: 22968
+  at:
+  - 7
+  - 10
+  layer: 2
+- tile: 22976
+  at:
+  - 7
+  - 11
+  layer: 2
+- tile: 22969
+  at:
+  - 8
+  - 10
+  layer: 2
+- tile: 22977
+  at:
+  - 8
+  - 11
+  layer: 2
+- tile: 3507
+  at:
+  - 4
+  - 2
+  layer: 1
 - tile: 22825
   at:
   - 3
@@ -360,6 +555,20 @@ events:
       - true
   - cond:
       self: A
+- type: event
+  name: First loom
+  at:
+  - 3
+  - 5
+  pages:
+  - commands:
+    - if: pfm_quest?(:locked_ledger) && !pfm_has?(:LEDGERKEY)
+      then:
+      - A small brass key is tied into the very first warp thread.
+      - script: pfm_item(:LEDGERKEY, 1, "Ledger Key")
+      else:
+      - Mother Loom's first loom. The warp is still strung, and the pattern stops mid-row, as if she meant to come back to
+        it.
 - type: warp
   name: To Weaving Hall
   at:
@@ -1196,6 +1405,251 @@ tiles:
   - 1
   - 18
   layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 2
+  layer: 1
+- tile: 22940
+  at:
+  - 1
+  - 0
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 1
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 2
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 1
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 2
+  layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 8
+  layer: 1
+- tile: 22948
+  at:
+  - 1
+  - 7
+  layer: 2
+- tile: 22940
+  at:
+  - 1
+  - 6
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 7
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 8
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 7
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 8
+  layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 13
+  layer: 1
+- tile: 22940
+  at:
+  - 1
+  - 11
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 12
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 13
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 12
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 13
+  layer: 2
+- tile: 22956
+  at:
+  - 23
+  - 13
+  layer: 1
+- tile: 22940
+  at:
+  - 23
+  - 11
+  layer: 2
+- tile: 22968
+  at:
+  - 21
+  - 12
+  layer: 2
+- tile: 22976
+  at:
+  - 21
+  - 13
+  layer: 2
+- tile: 22969
+  at:
+  - 22
+  - 12
+  layer: 2
+- tile: 22977
+  at:
+  - 22
+  - 13
+  layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 19
+  layer: 1
+- tile: 22940
+  at:
+  - 1
+  - 17
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 18
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 19
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 18
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 19
+  layer: 2
+- tile: 22956
+  at:
+  - 23
+  - 19
+  layer: 1
+- tile: 22948
+  at:
+  - 23
+  - 18
+  layer: 2
+- tile: 22940
+  at:
+  - 23
+  - 17
+  layer: 2
+- tile: 22968
+  at:
+  - 21
+  - 18
+  layer: 2
+- tile: 22976
+  at:
+  - 21
+  - 19
+  layer: 2
+- tile: 22969
+  at:
+  - 22
+  - 18
+  layer: 2
+- tile: 22977
+  at:
+  - 22
+  - 19
+  layer: 2
+- tile: 3507
+  at:
+  - 1
+  - 1
+  layer: 1
+- tile: 3507
+  at:
+  - 4
+  - 1
+  layer: 1
+- tile: 3523
+  at:
+  - 16
+  - 7
+  layer: 1
+- tile: 3507
+  at:
+  - 5
+  - 12
+  layer: 1
+- tile: 3507
+  at:
+  - 7
+  - 12
+  layer: 1
+- tile: 3507
+  at:
+  - 9
+  - 12
+  layer: 1
+- tile: 3507
+  at:
+  - 13
+  - 12
+  layer: 1
+- tile: 22656
+  at:
+  - 23
+  - 12
+  layer: 1
+- tile: 22656
+  at:
+  - 8
+  - 18
+  layer: 1
+- tile: 3507
+  at:
+  - 12
+  - 18
+  layer: 1
+- tile: 3521
+  at:
+  - 22
+  - 18
+  layer: 1
 - tile: 22824
   at:
   - 15
@@ -1275,21 +1729,6 @@ tiles:
   at:
   - 8
   - 2
-  layer: 1
-- tile: 22616
-  at:
-  - 1
-  - 7
-  layer: 2
-- tile: 22624
-  at:
-  - 1
-  - 8
-  layer: 1
-- tile: 22624
-  at:
-  - 23
-  - 13
   layer: 1
 - tile: 22680
   at:
@@ -2525,6 +2964,266 @@ tiles:
   - 4
   - 21
   layer: 2
+- tile: 22956
+  at:
+  - 22
+  - 4
+  layer: 1
+- tile: 22948
+  at:
+  - 22
+  - 3
+  layer: 2
+- tile: 22968
+  at:
+  - 20
+  - 3
+  layer: 2
+- tile: 22976
+  at:
+  - 20
+  - 4
+  layer: 2
+- tile: 22969
+  at:
+  - 21
+  - 3
+  layer: 2
+- tile: 22977
+  at:
+  - 21
+  - 4
+  layer: 2
+- tile: 22956
+  at:
+  - 14
+  - 7
+  layer: 1
+- tile: 22948
+  at:
+  - 14
+  - 6
+  layer: 2
+- tile: 22940
+  at:
+  - 14
+  - 5
+  layer: 2
+- tile: 22968
+  at:
+  - 12
+  - 6
+  layer: 2
+- tile: 22976
+  at:
+  - 12
+  - 7
+  layer: 2
+- tile: 22969
+  at:
+  - 13
+  - 6
+  layer: 2
+- tile: 22977
+  at:
+  - 13
+  - 7
+  layer: 2
+- tile: 22956
+  at:
+  - 3
+  - 13
+  layer: 1
+- tile: 22948
+  at:
+  - 3
+  - 12
+  layer: 2
+- tile: 22968
+  at:
+  - 4
+  - 12
+  layer: 2
+- tile: 22976
+  at:
+  - 4
+  - 13
+  layer: 2
+- tile: 22969
+  at:
+  - 5
+  - 12
+  layer: 2
+- tile: 22977
+  at:
+  - 5
+  - 13
+  layer: 2
+- tile: 22956
+  at:
+  - 6
+  - 13
+  layer: 1
+- tile: 22948
+  at:
+  - 6
+  - 12
+  layer: 2
+- tile: 22956
+  at:
+  - 21
+  - 15
+  layer: 1
+- tile: 22948
+  at:
+  - 21
+  - 14
+  layer: 2
+- tile: 22940
+  at:
+  - 21
+  - 13
+  layer: 2
+- tile: 22968
+  at:
+  - 19
+  - 14
+  layer: 2
+- tile: 22976
+  at:
+  - 19
+  - 15
+  layer: 2
+- tile: 22969
+  at:
+  - 20
+  - 14
+  layer: 2
+- tile: 22977
+  at:
+  - 20
+  - 15
+  layer: 2
+- tile: 22956
+  at:
+  - 11
+  - 21
+  layer: 1
+- tile: 22948
+  at:
+  - 11
+  - 20
+  layer: 2
+- tile: 22940
+  at:
+  - 11
+  - 19
+  layer: 2
+- tile: 22968
+  at:
+  - 12
+  - 20
+  layer: 2
+- tile: 22976
+  at:
+  - 12
+  - 21
+  layer: 2
+- tile: 22969
+  at:
+  - 13
+  - 20
+  layer: 2
+- tile: 22977
+  at:
+  - 13
+  - 21
+  layer: 2
+- tile: 22956
+  at:
+  - 14
+  - 21
+  layer: 1
+- tile: 22948
+  at:
+  - 14
+  - 20
+  layer: 2
+- tile: 22940
+  at:
+  - 14
+  - 19
+  layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 23
+  layer: 1
+- tile: 22948
+  at:
+  - 1
+  - 22
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 22
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 23
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 22
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 23
+  layer: 2
+- tile: 22956
+  at:
+  - 4
+  - 23
+  layer: 1
+- tile: 22948
+  at:
+  - 4
+  - 22
+  layer: 2
+- tile: 3523
+  at:
+  - 21
+  - 2
+  layer: 1
+- tile: 3507
+  at:
+  - 4
+  - 11
+  layer: 1
+- tile: 3521
+  at:
+  - 21
+  - 13
+  layer: 1
+- tile: 3507
+  at:
+  - 14
+  - 19
+  layer: 1
+- tile: 3521
+  at:
+  - 1
+  - 21
+  layer: 1
+- tile: 22656
+  at:
+  - 4
+  - 21
+  layer: 1
 - tile: 22800
   at:
   - 7
@@ -3372,6 +4071,216 @@ tiles:
   - 13
   - 5
   layer: 2
+- tile: 22956
+  at:
+  - 1
+  - 7
+  layer: 1
+- tile: 22948
+  at:
+  - 1
+  - 6
+  layer: 2
+- tile: 22940
+  at:
+  - 1
+  - 5
+  layer: 2
+- tile: 22968
+  at:
+  - 2
+  - 6
+  layer: 2
+- tile: 22976
+  at:
+  - 2
+  - 7
+  layer: 2
+- tile: 22969
+  at:
+  - 3
+  - 6
+  layer: 2
+- tile: 22977
+  at:
+  - 3
+  - 7
+  layer: 2
+- tile: 22956
+  at:
+  - 13
+  - 7
+  layer: 1
+- tile: 22948
+  at:
+  - 13
+  - 6
+  layer: 2
+- tile: 22968
+  at:
+  - 11
+  - 6
+  layer: 2
+- tile: 22976
+  at:
+  - 11
+  - 7
+  layer: 2
+- tile: 22969
+  at:
+  - 12
+  - 6
+  layer: 2
+- tile: 22977
+  at:
+  - 12
+  - 7
+  layer: 2
+- tile: 22956
+  at:
+  - 2
+  - 9
+  layer: 1
+- tile: 22948
+  at:
+  - 2
+  - 8
+  layer: 2
+- tile: 22968
+  at:
+  - 3
+  - 8
+  layer: 2
+- tile: 22976
+  at:
+  - 3
+  - 9
+  layer: 2
+- tile: 22969
+  at:
+  - 4
+  - 8
+  layer: 2
+- tile: 22977
+  at:
+  - 4
+  - 9
+  layer: 2
+- tile: 22956
+  at:
+  - 12
+  - 9
+  layer: 1
+- tile: 22948
+  at:
+  - 12
+  - 8
+  layer: 2
+- tile: 22968
+  at:
+  - 10
+  - 8
+  layer: 2
+- tile: 22976
+  at:
+  - 10
+  - 9
+  layer: 2
+- tile: 22969
+  at:
+  - 11
+  - 8
+  layer: 2
+- tile: 22977
+  at:
+  - 11
+  - 9
+  layer: 2
+- tile: 22956
+  at:
+  - 3
+  - 10
+  layer: 1
+- tile: 22976
+  at:
+  - 4
+  - 10
+  layer: 2
+- tile: 22969
+  at:
+  - 5
+  - 9
+  layer: 2
+- tile: 22977
+  at:
+  - 5
+  - 10
+  layer: 2
+- tile: 22956
+  at:
+  - 11
+  - 10
+  layer: 1
+- tile: 22968
+  at:
+  - 9
+  - 9
+  layer: 2
+- tile: 22976
+  at:
+  - 9
+  - 10
+  layer: 2
+- tile: 22977
+  at:
+  - 10
+  - 10
+  layer: 2
+- tile: 22956
+  at:
+  - 5
+  - 11
+  layer: 1
+- tile: 22968
+  at:
+  - 6
+  - 10
+  layer: 2
+- tile: 22976
+  at:
+  - 6
+  - 11
+  layer: 2
+- tile: 22969
+  at:
+  - 7
+  - 10
+  layer: 2
+- tile: 22977
+  at:
+  - 7
+  - 11
+  layer: 2
+- tile: 22956
+  at:
+  - 6
+  - 12
+  layer: 1
+- tile: 22969
+  at:
+  - 5
+  - 11
+  layer: 2
+- tile: 22656
+  at:
+  - 1
+  - 5
+  layer: 1
+- tile: 3507
+  at:
+  - 13
+  - 5
+  layer: 1
 - tile: 22824
   at:
   - 6
@@ -3472,34 +4381,9 @@ tiles:
   - 12
   - 5
   layer: 1
-- tile: 22800
-  at:
-  - 1
-  - 6
-  layer: 2
-- tile: 22801
-  at:
-  - 2
-  - 6
-  layer: 2
-- tile: 22802
-  at:
-  - 3
-  - 6
-  layer: 2
 - tile: 22808
   at:
   - 1
-  - 7
-  layer: 2
-- tile: 22809
-  at:
-  - 2
-  - 7
-  layer: 2
-- tile: 22810
-  at:
-  - 3
   - 7
   layer: 2
 - tile: 22816
@@ -3507,55 +4391,10 @@ tiles:
   - 1
   - 8
   layer: 2
-- tile: 22817
-  at:
-  - 2
-  - 8
-  layer: 2
-- tile: 22818
-  at:
-  - 3
-  - 8
-  layer: 2
-- tile: 22800
-  at:
-  - 11
-  - 6
-  layer: 2
-- tile: 22801
-  at:
-  - 12
-  - 6
-  layer: 2
-- tile: 22802
-  at:
-  - 13
-  - 6
-  layer: 2
-- tile: 22808
-  at:
-  - 11
-  - 7
-  layer: 2
-- tile: 22809
-  at:
-  - 12
-  - 7
-  layer: 2
 - tile: 22810
   at:
   - 13
   - 7
-  layer: 2
-- tile: 22816
-  at:
-  - 11
-  - 8
-  layer: 2
-- tile: 22817
-  at:
-  - 12
-  - 8
   layer: 2
 - tile: 22818
   at:

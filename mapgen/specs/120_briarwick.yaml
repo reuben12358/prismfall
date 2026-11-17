@@ -1144,76 +1144,76 @@ tiles:
   at: [24, 14]
   layer: 1
 - tile: 23368
-  at: [51, 52]
+  at: [51, 54]
   layer: 2
 - tile: 23376
-  at: [51, 53]
+  at: [51, 55]
   layer: 2
 - tile: 23369
-  at: [52, 52]
+  at: [52, 54]
   layer: 2
 - tile: 23377
-  at: [52, 53]
+  at: [52, 55]
   layer: 2
 - tile: 23368
-  at: [60, 53]
+  at: [60, 55]
   layer: 2
 - tile: 23376
-  at: [60, 54]
+  at: [60, 56]
   layer: 2
 - tile: 23369
-  at: [61, 53]
+  at: [61, 55]
   layer: 2
 - tile: 23377
-  at: [61, 54]
+  at: [61, 56]
   layer: 2
 - tile: 23368
-  at: [63, 52]
+  at: [63, 54]
   layer: 2
 - tile: 23376
-  at: [63, 53]
+  at: [63, 55]
   layer: 2
 - tile: 23369
-  at: [64, 52]
+  at: [64, 54]
   layer: 2
 - tile: 23377
-  at: [64, 53]
+  at: [64, 55]
   layer: 2
 - tile: 23368
-  at: [51, 52]
+  at: [51, 54]
   layer: 2
 - tile: 23376
-  at: [51, 53]
+  at: [51, 55]
   layer: 2
 - tile: 23369
-  at: [52, 52]
+  at: [52, 54]
   layer: 2
 - tile: 23377
-  at: [52, 53]
+  at: [52, 55]
   layer: 2
 - tile: 23368
-  at: [60, 53]
+  at: [60, 55]
   layer: 2
 - tile: 23376
-  at: [60, 54]
+  at: [60, 56]
   layer: 2
 - tile: 23369
-  at: [61, 53]
+  at: [61, 55]
   layer: 2
 - tile: 23377
-  at: [61, 54]
+  at: [61, 56]
   layer: 2
 - tile: 23368
-  at: [63, 52]
+  at: [63, 54]
   layer: 2
 - tile: 23376
-  at: [63, 53]
+  at: [63, 55]
   layer: 2
 - tile: 23369
-  at: [64, 52]
+  at: [64, 54]
   layer: 2
 - tile: 23377
-  at: [64, 53]
+  at: [64, 55]
   layer: 2
 - tile: 23178
   at: [31, 33]
