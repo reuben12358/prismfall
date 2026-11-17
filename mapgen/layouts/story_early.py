@@ -188,7 +188,7 @@ add(109,
        page([], cond={'switch': 'PRO_FERRY_DONE'})),
     ev('Mug ring', page([]), page(['A ring of cold tea. He drank it black.'], cond={'switch': 'PRO_FERRY_DONE'})),
     ev('Gangway',
-       page(["The gangway is roped off. It's a sailor's knot. It's a good knot."]),
+       page(["The gangway is roped off. It's a sailor's knot. It's a good knot.", MV('player', ['up'])], trigger='touch'),
        page([{'se': 'Door exit'}, {'tone': [-255, -255, -255, 0, 12]}, {'wait': 14},
              {'transfer': {'map': 100, 'x': 34, 'y': 55, 'dir': 'up'}}, {'tone': [0, 0, 0, 0, 12]}],
             cond={'switch': 'PRO_FERRY_DONE'}, trigger='touch')),
@@ -399,9 +399,10 @@ add(100,
            SPR['WENNA'], 'down'),
        page([IF('!pfm?(:wenna_tart)', WENNA_FIRST, [
            P('WENNA', 'happy', 'She named your little group? Of course she did. She named the kettle.')])], SPR['WENNA'], 'down', cond={'switch': 'CH1_STARTER_GOT'}),
-       page([IF('!pfm?(:wenna_tart)', WENNA_FIRST), IF('!pfm?(:biscuit_reward)', [
+       page([IF('!pfm?(:wenna_tart)', WENNA_FIRST), IF("!pfm?(:biscuit_reward) && !$game_self_switches[[523, 0, 'BISCUIT']]", [
            P('WENNA', 'happy', "Biscuit's home, rattling like a money box. Here. And another tart, for the nerves. Mine."),
-           ITEM('ORANBERRY', 3), ITEM('BRAMBLETART', 1, 'Bramble Tart'), S('pfm_quest_done(:biscuit)'), S('pfm_set(:biscuit_reward)')], [
+           ITEM('ORANBERRY', 3), ITEM('BRAMBLETART', 1, 'Bramble Tart'), S('pfm_quest_done(:biscuit)'), S('pfm_set(:biscuit_reward)'),
+           S("$game_self_switches[[523, 0, 'BISCUIT']] = true")], [
            P('WENNA', 'sad', "She told me about the orchard. That was the Pruetts' place. They had apples when I was a girl.")])],
            SPR['WENNA'], 'down', cond={'switch': 'CH1_ORCHARD_DONE'})),
     talk('Coll Hale', SPR['COLL'], 'down',
@@ -756,8 +757,8 @@ add(120,
     sign('Loyal Three shrine', 'A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. Someone keeps it swept.', post=False),
     hidden('HiddenItem rope bridge', 'XATTACK', 'It fell out of someone\'s pocket mid-bwoing.'),
     hidden('HiddenItem dye vats', 'TINYMUSHROOM', 'Dyed Elowen green. Still a mushroom.'),
-    warp('To Gossamer Wood', to={'map': 524, 'x': 24, 'y': 1, 'dir': 'down'}),
-    warp('To Gossamer Wood b', to={'map': 524, 'x': 24, 'y': 1, 'dir': 'down'}))
+    warp('To Gossamer Wood', link='WOOD_BRIAR', arrive=[35, 62, 'up']),
+    warp('To Gossamer Wood b', to={'map': 524, 'x': 25, 'y': 1, 'dir': 'down'}))
 
 _bt, _, _ = parsed(r'^### Flavor townsfolk$', r'^\*\[after gym, village-wide')
 AFTER_GYM = {'Weaver at loom': LOOM_WEAVER_AFTER, 'Dyer': [N('Dyer', "Contract's a contract, says the linesman. So's a pitchfork, says I.")],
@@ -831,7 +832,7 @@ CONFESS = [
     P('JUNO', 'neutral', '...They can.', '', 'Juno (loft)'),
     P('TAMSIN', 'shocked', 'What?', 'shock', 'Tamsin (loft)'),
     P('TAMSIN', 'neutral', "Then take this. It was Gran's shuttle. It's only wood. But she never dropped a thread while she held it.", '', 'Tamsin (loft)'),
-    ITEM('LOOMSHUTTLE', 1, "Mother Loom's Shuttle"), 'Worn smooth by fifty years of one hand.',
+    ITEM('MOTHERLOOMSSHUTTLE', 1, "Mother Loom's Shuttle"), 'Worn smooth by fifty years of one hand.',
     QUEST('ringing_wood', 'The Ringing Wood', 'Cut through the Deepwood to Cocoonfall Hollow.'),
     {'selfswitch': ['B', True]}]
 

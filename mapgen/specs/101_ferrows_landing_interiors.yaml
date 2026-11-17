@@ -4,11 +4,13 @@ name: Ferrow's Landing Pokémon Center
 parent: 100
 bgm: Poke Center
 metadata:
-  HealingSpot: [100, 24, 28]
+  HealingSpot: [100, 19, 27]
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
 palette: interior
 map: '....................
+
+  ....................
 
   ....................
 
@@ -66,8 +68,11 @@ tiles:
 - tile: 5360
   at: [3, 11]
   layer: 0
-- tile: 5550
+- tile: 5360
   at: [3, 12]
+  layer: 0
+- tile: 5550
+  at: [3, 13]
   layer: 0
 - tile: 5534
   at: [4, 2]
@@ -99,8 +104,11 @@ tiles:
 - tile: 5361
   at: [4, 11]
   layer: 0
-- tile: 5550
+- tile: 5361
   at: [4, 12]
+  layer: 0
+- tile: 5550
+  at: [4, 13]
   layer: 0
 - tile: 5534
   at: [5, 2]
@@ -126,8 +134,11 @@ tiles:
 - tile: 5362
   at: [5, 11]
   layer: 0
-- tile: 5550
+- tile: 5362
   at: [5, 12]
+  layer: 0
+- tile: 5550
+  at: [5, 13]
   layer: 0
 - tile: 5534
   at: [6, 2]
@@ -159,8 +170,11 @@ tiles:
 - tile: 5363
   at: [6, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [6, 12]
+  layer: 0
+- tile: 5550
+  at: [6, 13]
   layer: 0
 - tile: 5534
   at: [7, 2]
@@ -192,6 +206,9 @@ tiles:
 - tile: 5361
   at: [7, 11]
   layer: 0
+- tile: 5361
+  at: [7, 12]
+  layer: 0
 - tile: 5534
   at: [8, 2]
   layer: 0
@@ -221,6 +238,9 @@ tiles:
   layer: 0
 - tile: 5362
   at: [8, 11]
+  layer: 0
+- tile: 5362
+  at: [8, 12]
   layer: 0
 - tile: 5534
   at: [9, 2]
@@ -252,6 +272,9 @@ tiles:
 - tile: 5363
   at: [9, 11]
   layer: 0
+- tile: 5363
+  at: [9, 12]
+  layer: 0
 - tile: 5534
   at: [10, 2]
   layer: 0
@@ -281,6 +304,9 @@ tiles:
   layer: 0
 - tile: 5361
   at: [10, 11]
+  layer: 0
+- tile: 5361
+  at: [10, 12]
   layer: 0
 - tile: 5534
   at: [11, 2]
@@ -312,6 +338,9 @@ tiles:
 - tile: 5362
   at: [11, 11]
   layer: 0
+- tile: 5362
+  at: [11, 12]
+  layer: 0
 - tile: 5534
   at: [12, 2]
   layer: 0
@@ -342,8 +371,11 @@ tiles:
 - tile: 5363
   at: [12, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [12, 12]
+  layer: 0
+- tile: 5550
+  at: [12, 13]
   layer: 0
 - tile: 5534
   at: [13, 2]
@@ -369,8 +401,11 @@ tiles:
 - tile: 5361
   at: [13, 11]
   layer: 0
-- tile: 5550
+- tile: 5361
   at: [13, 12]
+  layer: 0
+- tile: 5550
+  at: [13, 13]
   layer: 0
 - tile: 5534
   at: [14, 2]
@@ -402,8 +437,11 @@ tiles:
 - tile: 5362
   at: [14, 11]
   layer: 0
-- tile: 5550
+- tile: 5362
   at: [14, 12]
+  layer: 0
+- tile: 5550
+  at: [14, 13]
   layer: 0
 - tile: 5534
   at: [15, 2]
@@ -429,8 +467,11 @@ tiles:
 - tile: 5363
   at: [15, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [15, 12]
+  layer: 0
+- tile: 5550
+  at: [15, 13]
   layer: 0
 - tile: 5541
   at: [2, 3]
@@ -486,6 +527,12 @@ tiles:
 - tile: 5543
   at: [16, 11]
   layer: 0
+- tile: 5541
+  at: [2, 12]
+  layer: 0
+- tile: 5543
+  at: [16, 12]
+  layer: 0
 - tile: 5533
   at: [2, 2]
   layer: 0
@@ -493,10 +540,10 @@ tiles:
   at: [16, 2]
   layer: 0
 - tile: 5549
-  at: [2, 12]
+  at: [2, 13]
   layer: 0
 - tile: 5551
-  at: [16, 12]
+  at: [16, 13]
   layer: 0
 - tile: 5563
   at: [3, 3]
@@ -511,43 +558,43 @@ tiles:
   at: [15, 4]
   layer: 0
 - tile: 5361
-  at: [8, 12]
-  layer: 0
-- tile: 5550
   at: [8, 13]
   layer: 0
+- tile: 5550
+  at: [8, 14]
+  layer: 0
 - tile: 5512
-  at: [8, 12]
+  at: [8, 13]
   layer: 1
 - tile: 5362
-  at: [9, 12]
-  layer: 0
-- tile: 5550
   at: [9, 13]
   layer: 0
+- tile: 5550
+  at: [9, 14]
+  layer: 0
 - tile: 5513
-  at: [9, 12]
+  at: [9, 13]
   layer: 1
 - tile: 5363
-  at: [10, 12]
-  layer: 0
-- tile: 5550
   at: [10, 13]
   layer: 0
+- tile: 5550
+  at: [10, 14]
+  layer: 0
 - tile: 5514
-  at: [10, 12]
+  at: [10, 13]
   layer: 1
 - tile: 5554
-  at: [7, 12]
-  layer: 0
-- tile: 5553
-  at: [11, 12]
-  layer: 0
-- tile: 5549
   at: [7, 13]
   layer: 0
-- tile: 5551
+- tile: 5553
   at: [11, 13]
+  layer: 0
+- tile: 5549
+  at: [7, 14]
+  layer: 0
+- tile: 5551
+  at: [11, 14]
   layer: 0
 - tile: 5544
   at: [5, 3]
@@ -627,96 +674,142 @@ tiles:
 - tile: 5558
   at: [15, 6]
   layer: 2
-- tile: 5581
-  at: [3, 9]
+- tile: 5411
+  at: [7, 8]
   layer: 1
-- tile: 5582
-  at: [4, 9]
+- tile: 5412
+  at: [8, 8]
   layer: 1
-- tile: 5582
-  at: [5, 9]
+- tile: 5412
+  at: [9, 8]
   layer: 1
-- tile: 5582
-  at: [6, 9]
+- tile: 5412
+  at: [10, 8]
   layer: 1
-- tile: 5583
+- tile: 5413
+  at: [11, 8]
+  layer: 1
+- tile: 5419
   at: [7, 9]
   layer: 1
-- tile: 5589
-  at: [3, 10]
+- tile: 5420
+  at: [8, 9]
   layer: 1
-- tile: 5590
-  at: [4, 10]
+- tile: 5420
+  at: [9, 9]
   layer: 1
-- tile: 5590
-  at: [5, 10]
+- tile: 5420
+  at: [10, 9]
   layer: 1
-- tile: 5590
-  at: [6, 10]
+- tile: 5421
+  at: [11, 9]
   layer: 1
-- tile: 5591
+- tile: 5427
   at: [7, 10]
   layer: 1
-- tile: 5531
-  at: [12, 8]
+- tile: 5428
+  at: [8, 10]
   layer: 1
-- tile: 5532
-  at: [13, 8]
+- tile: 5428
+  at: [9, 10]
   layer: 1
-- tile: 5539
-  at: [12, 9]
+- tile: 5428
+  at: [10, 10]
   layer: 1
-- tile: 5540
-  at: [13, 9]
+- tile: 5429
+  at: [11, 10]
   layer: 1
-- tile: 5558
-  at: [12, 9]
+- tile: 3466
+  at: [8, 9]
   layer: 2
-- tile: 5438
+- tile: 3467
+  at: [9, 9]
+  layer: 2
+- tile: 3474
+  at: [8, 10]
+  layer: 2
+- tile: 3475
+  at: [9, 10]
+  layer: 2
+- tile: 4109
+  at: [3, 8]
+  layer: 2
+- tile: 4117
+  at: [3, 9]
+  layer: 1
+- tile: 4125
+  at: [3, 10]
+  layer: 1
+- tile: 4109
+  at: [15, 8]
+  layer: 2
+- tile: 4117
   at: [15, 9]
   layer: 1
-- tile: 5566
+- tile: 4125
   at: [15, 10]
   layer: 1
-- tile: 5558
-  at: [15, 9]
+- tile: 3295
+  at: [12, 4]
   layer: 2
-- tile: 4085
-  at: [11, 10]
+- tile: 3303
+  at: [12, 5]
+  layer: 1
+- tile: 3293
+  at: [14, 11]
   layer: 2
-- tile: 4093
-  at: [11, 11]
+- tile: 3301
+  at: [14, 12]
   layer: 1
-- tile: 5472
-  at: [13, 10]
+- tile: 3614
+  at: [4, 11]
   layer: 1
-- tile: 5474
-  at: [14, 10]
+- tile: 3369
+  at: [10, 3]
+  layer: 1
+- tile: 3370
+  at: [11, 3]
+  layer: 1
+- tile: 3377
+  at: [10, 4]
+  layer: 1
+- tile: 3378
+  at: [11, 4]
+  layer: 1
+- tile: 4077
+  at: [13, 9]
+  layer: 1
+- tile: 4077
+  at: [14, 9]
   layer: 1
 events:
 - type: exit
-  at: [9, 12]
+  at: [9, 13]
   link: FL_PC
-- type: npc
-  name: Local
-  at: [13, 9]
-  sprite: NPC 05
-  dir: left
-  commands: ['Trainer at PC: They put a scanner on our door last week too. Mine says "Insect, Briarwick" every time I come in. I KNOW, door.']
+- type: event
+  name: Trainer at PC
+  pages:
+  - commands: ['Trainer: They put a scanner on our door last week too. Mine says "Insect, Briarwick" every time I come in. I KNOW, door.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 17, dir: down}
+  at: [13, 10]
 take_events:
 - template: pokecenter
   name: Nurse
   at: [9, 5]
+  replace_text: {'\rHello, and welcome to the Pokémon Center.': '\rWelcome! We heal Pokémon for free. We can''t do anything about feelings, but there''s tea.'}
+  prepend:
+  - if: $player.party_count == 0
+    then:
+    - \rOh, you don't have one yet! Come back when you do. I'll act surprised.
+    - {exit: true}
 - template: pokecenter
   name: Healing balls
   at: [7, 5]
 - template: pokecenter
   name: PC
   at: [13, 5]
-anchors:
-- [5, 8]
-- [9, 9]
-- [14, 7]
 
 ---
 id: 102
@@ -1325,20 +1418,55 @@ tiles:
 - tile: 5558
   at: [3, 10]
   layer: 2
+- tile: 4058
+  at: [6, 4]
+  layer: 2
+- tile: 4059
+  at: [7, 4]
+  layer: 2
+- tile: 4066
+  at: [6, 5]
+  layer: 1
+- tile: 4067
+  at: [7, 5]
+  layer: 1
+- tile: 4101
+  at: [7, 8]
+  layer: 1
+- tile: 4823
+  at: [10, 10]
+  layer: 2
+- tile: 4831
+  at: [10, 11]
+  layer: 1
 events:
 - type: exit
   at: [8, 12]
   link: FL_MART
-- type: npc
+- type: event
   name: Shopper
+  pages:
+  - commands: ['Shopper: Synthetic Seeds, a copper each. I bought six. I have not planted them. I look at them.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 24, dir: up}
   at: [10, 10]
-  sprite: NPC 11
-  dir: up
-  text: '[TODO story] Supplies come in by ferry. Or they did, before the quarantine.'
 take_events:
 - template: mart
   name: Mart
   at: [4, 5]
+  prepend:
+  - if: pfm?(:fellowship_off) && !pfm?(:fellowship_on)
+    then:
+    - 'Mart Clerk: Want me to switch that card on? ...Signed by WHO?'
+    - anim: [0, 3]
+    - {script: pfm_money(3000)}
+    - {script: 'pfm_set(:fellowship_on)'}
+  - if: '!pfm?(:fl_mart_hi)'
+    then:
+    - 'Mart Clerk: Potions, Poké Balls, Synthetic Seeds. The Seeds are new. Meridian grows them in a lab. Don''t plant one. A man planted one. We don''t talk about
+      his garden.'
+    - {script: 'pfm_set(:fl_mart_hi)'}
 
 ---
 id: 103
@@ -1351,43 +1479,43 @@ metadata:
   MapPosition: [0, 14, 26]
 tone: [10, 4, -12, 0]
 palette: interior
-map: '.......................
+map: '............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
-  .......................
+  ............................
 
   '
 tiles:
@@ -1514,12 +1642,6 @@ tiles:
 - tile: 5534
   at: [6, 2]
   layer: 0
-- tile: 5547
-  at: [6, 3]
-  layer: 0
-- tile: 5555
-  at: [6, 4]
-  layer: 0
 - tile: 5355
   at: [6, 5]
   layer: 0
@@ -1598,6 +1720,12 @@ tiles:
 - tile: 5534
   at: [8, 2]
   layer: 0
+- tile: 5547
+  at: [8, 3]
+  layer: 0
+- tile: 5555
+  at: [8, 4]
+  layer: 0
 - tile: 5354
   at: [8, 5]
   layer: 0
@@ -1670,6 +1798,9 @@ tiles:
 - tile: 5363
   at: [9, 14]
   layer: 0
+- tile: 5550
+  at: [9, 15]
+  layer: 0
 - tile: 5534
   at: [10, 2]
   layer: 0
@@ -1708,6 +1839,9 @@ tiles:
   layer: 0
 - tile: 5361
   at: [10, 14]
+  layer: 0
+- tile: 5550
+  at: [10, 15]
   layer: 0
 - tile: 5534
   at: [11, 2]
@@ -1748,14 +1882,11 @@ tiles:
 - tile: 5362
   at: [11, 14]
   layer: 0
+- tile: 5550
+  at: [11, 15]
+  layer: 0
 - tile: 5534
   at: [12, 2]
-  layer: 0
-- tile: 5547
-  at: [12, 3]
-  layer: 0
-- tile: 5555
-  at: [12, 4]
   layer: 0
 - tile: 5355
   at: [12, 5]
@@ -1829,6 +1960,12 @@ tiles:
 - tile: 5534
   at: [14, 2]
   layer: 0
+- tile: 5547
+  at: [14, 3]
+  layer: 0
+- tile: 5555
+  at: [14, 4]
+  layer: 0
 - tile: 5354
   at: [14, 5]
   layer: 0
@@ -1858,9 +1995,6 @@ tiles:
   layer: 0
 - tile: 5362
   at: [14, 14]
-  layer: 0
-- tile: 5550
-  at: [14, 15]
   layer: 0
 - tile: 5534
   at: [15, 2]
@@ -1901,9 +2035,6 @@ tiles:
 - tile: 5363
   at: [15, 14]
   layer: 0
-- tile: 5550
-  at: [15, 15]
-  layer: 0
 - tile: 5534
   at: [16, 2]
   layer: 0
@@ -1913,77 +2044,8 @@ tiles:
 - tile: 5555
   at: [16, 4]
   layer: 0
-- tile: 5353
-  at: [16, 5]
-  layer: 0
-- tile: 5361
-  at: [16, 6]
-  layer: 0
-- tile: 5361
-  at: [16, 7]
-  layer: 0
-- tile: 5361
-  at: [16, 8]
-  layer: 0
-- tile: 5361
-  at: [16, 9]
-  layer: 0
-- tile: 5361
-  at: [16, 10]
-  layer: 0
-- tile: 5361
-  at: [16, 11]
-  layer: 0
-- tile: 5361
-  at: [16, 12]
-  layer: 0
-- tile: 5361
-  at: [16, 13]
-  layer: 0
-- tile: 5361
-  at: [16, 14]
-  layer: 0
-- tile: 5550
-  at: [16, 15]
-  layer: 0
 - tile: 5534
   at: [17, 2]
-  layer: 0
-- tile: 5547
-  at: [17, 3]
-  layer: 0
-- tile: 5555
-  at: [17, 4]
-  layer: 0
-- tile: 5354
-  at: [17, 5]
-  layer: 0
-- tile: 5362
-  at: [17, 6]
-  layer: 0
-- tile: 5362
-  at: [17, 7]
-  layer: 0
-- tile: 5362
-  at: [17, 8]
-  layer: 0
-- tile: 5362
-  at: [17, 9]
-  layer: 0
-- tile: 5362
-  at: [17, 10]
-  layer: 0
-- tile: 5362
-  at: [17, 11]
-  layer: 0
-- tile: 5362
-  at: [17, 12]
-  layer: 0
-- tile: 5362
-  at: [17, 13]
-  layer: 0
-- tile: 5362
-  at: [17, 14]
   layer: 0
 - tile: 5550
   at: [17, 15]
@@ -1997,158 +2059,152 @@ tiles:
 - tile: 5555
   at: [18, 4]
   layer: 0
-- tile: 5355
-  at: [18, 5]
-  layer: 0
-- tile: 5363
-  at: [18, 6]
-  layer: 0
-- tile: 5363
-  at: [18, 7]
-  layer: 0
-- tile: 5363
-  at: [18, 8]
-  layer: 0
-- tile: 5363
-  at: [18, 9]
-  layer: 0
-- tile: 5363
-  at: [18, 10]
-  layer: 0
-- tile: 5363
-  at: [18, 11]
-  layer: 0
-- tile: 5363
-  at: [18, 12]
-  layer: 0
-- tile: 5363
-  at: [18, 13]
-  layer: 0
-- tile: 5363
-  at: [18, 14]
-  layer: 0
 - tile: 5550
   at: [18, 15]
   layer: 0
 - tile: 5534
   at: [19, 2]
   layer: 0
-- tile: 5353
-  at: [19, 5]
+- tile: 5547
+  at: [19, 3]
   layer: 0
-- tile: 5361
-  at: [19, 6]
-  layer: 0
-- tile: 5361
-  at: [19, 7]
-  layer: 0
-- tile: 5361
-  at: [19, 8]
-  layer: 0
-- tile: 5361
-  at: [19, 9]
-  layer: 0
-- tile: 5361
-  at: [19, 10]
-  layer: 0
-- tile: 5361
-  at: [19, 11]
-  layer: 0
-- tile: 5361
-  at: [19, 12]
-  layer: 0
-- tile: 5361
-  at: [19, 13]
-  layer: 0
-- tile: 5361
-  at: [19, 14]
+- tile: 5555
+  at: [19, 4]
   layer: 0
 - tile: 5550
   at: [19, 15]
+  layer: 0
+- tile: 5534
+  at: [20, 2]
+  layer: 0
+- tile: 5547
+  at: [20, 3]
+  layer: 0
+- tile: 5555
+  at: [20, 4]
+  layer: 0
+- tile: 5550
+  at: [20, 15]
+  layer: 0
+- tile: 5534
+  at: [21, 2]
+  layer: 0
+- tile: 5547
+  at: [21, 3]
+  layer: 0
+- tile: 5555
+  at: [21, 4]
+  layer: 0
+- tile: 5550
+  at: [21, 15]
+  layer: 0
+- tile: 5534
+  at: [22, 2]
+  layer: 0
+- tile: 5550
+  at: [22, 15]
+  layer: 0
+- tile: 5534
+  at: [23, 2]
+  layer: 0
+- tile: 5547
+  at: [23, 3]
+  layer: 0
+- tile: 5555
+  at: [23, 4]
+  layer: 0
+- tile: 5550
+  at: [23, 15]
+  layer: 0
+- tile: 5534
+  at: [24, 2]
+  layer: 0
+- tile: 5550
+  at: [24, 15]
   layer: 0
 - tile: 5541
   at: [2, 3]
   layer: 0
 - tile: 5543
-  at: [20, 3]
+  at: [25, 3]
   layer: 0
 - tile: 5541
   at: [2, 4]
   layer: 0
 - tile: 5543
-  at: [20, 4]
+  at: [25, 4]
   layer: 0
 - tile: 5541
   at: [2, 5]
   layer: 0
 - tile: 5543
-  at: [20, 5]
+  at: [25, 5]
   layer: 0
 - tile: 5541
   at: [2, 6]
   layer: 0
 - tile: 5543
-  at: [20, 6]
+  at: [25, 6]
   layer: 0
 - tile: 5541
   at: [2, 7]
   layer: 0
 - tile: 5543
-  at: [20, 7]
+  at: [25, 7]
   layer: 0
 - tile: 5541
   at: [2, 8]
   layer: 0
 - tile: 5543
-  at: [20, 8]
+  at: [25, 8]
   layer: 0
 - tile: 5541
   at: [2, 9]
   layer: 0
 - tile: 5543
-  at: [20, 9]
+  at: [25, 9]
   layer: 0
 - tile: 5541
   at: [2, 10]
   layer: 0
 - tile: 5543
-  at: [20, 10]
+  at: [25, 10]
   layer: 0
 - tile: 5541
   at: [2, 11]
   layer: 0
 - tile: 5543
-  at: [20, 11]
+  at: [25, 11]
   layer: 0
 - tile: 5541
   at: [2, 12]
   layer: 0
 - tile: 5543
-  at: [20, 12]
+  at: [25, 12]
   layer: 0
 - tile: 5541
   at: [2, 13]
   layer: 0
 - tile: 5543
-  at: [20, 13]
+  at: [25, 13]
   layer: 0
 - tile: 5541
   at: [2, 14]
   layer: 0
 - tile: 5543
-  at: [20, 14]
+  at: [25, 14]
   layer: 0
 - tile: 5533
   at: [2, 2]
   layer: 0
 - tile: 5535
-  at: [20, 2]
+  at: [25, 2]
   layer: 0
 - tile: 5549
   at: [2, 15]
   layer: 0
 - tile: 5551
-  at: [20, 15]
+  at: [25, 15]
   layer: 0
 - tile: 5563
   at: [3, 3]
@@ -2157,61 +2213,343 @@ tiles:
   at: [3, 4]
   layer: 0
 - tile: 5564
-  at: [19, 3]
+  at: [24, 3]
   layer: 0
 - tile: 5572
-  at: [19, 4]
+  at: [24, 4]
   layer: 0
 - tile: 5361
-  at: [10, 15]
-  layer: 0
-- tile: 5550
-  at: [10, 16]
-  layer: 0
-- tile: 5512
-  at: [10, 15]
-  layer: 1
-- tile: 5362
-  at: [11, 15]
-  layer: 0
-- tile: 5550
-  at: [11, 16]
-  layer: 0
-- tile: 5513
-  at: [11, 15]
-  layer: 1
-- tile: 5363
-  at: [12, 15]
-  layer: 0
-- tile: 5550
-  at: [12, 16]
-  layer: 0
-- tile: 5514
-  at: [12, 15]
-  layer: 1
-- tile: 5554
-  at: [9, 15]
-  layer: 0
-- tile: 5553
   at: [13, 15]
   layer: 0
-- tile: 5549
-  at: [9, 16]
-  layer: 0
-- tile: 5551
+- tile: 5550
   at: [13, 16]
   layer: 0
+- tile: 5512
+  at: [13, 15]
+  layer: 1
+- tile: 5362
+  at: [14, 15]
+  layer: 0
+- tile: 5550
+  at: [14, 16]
+  layer: 0
+- tile: 5513
+  at: [14, 15]
+  layer: 1
+- tile: 5363
+  at: [15, 15]
+  layer: 0
+- tile: 5550
+  at: [15, 16]
+  layer: 0
+- tile: 5514
+  at: [15, 15]
+  layer: 1
+- tile: 5554
+  at: [12, 15]
+  layer: 0
+- tile: 5553
+  at: [16, 15]
+  layer: 0
+- tile: 5549
+  at: [12, 16]
+  layer: 0
+- tile: 5551
+  at: [16, 16]
+  layer: 0
 - tile: 5544
-  at: [8, 3]
+  at: [6, 3]
   layer: 0
 - tile: 5552
-  at: [8, 4]
+  at: [6, 4]
   layer: 0
 - tile: 5544
-  at: [14, 3]
+  at: [12, 3]
   layer: 0
 - tile: 5552
-  at: [14, 4]
+  at: [12, 4]
+  layer: 0
+- tile: 5544
+  at: [17, 3]
+  layer: 0
+- tile: 5552
+  at: [17, 4]
+  layer: 0
+- tile: 5544
+  at: [22, 3]
+  layer: 0
+- tile: 5552
+  at: [22, 4]
+  layer: 0
+- tile: 501
+  at: [16, 5]
+  layer: 0
+- tile: 501
+  at: [17, 5]
+  layer: 0
+- tile: 501
+  at: [18, 5]
+  layer: 0
+- tile: 501
+  at: [19, 5]
+  layer: 0
+- tile: 501
+  at: [20, 5]
+  layer: 0
+- tile: 501
+  at: [21, 5]
+  layer: 0
+- tile: 501
+  at: [22, 5]
+  layer: 0
+- tile: 501
+  at: [23, 5]
+  layer: 0
+- tile: 501
+  at: [24, 5]
+  layer: 0
+- tile: 501
+  at: [16, 6]
+  layer: 0
+- tile: 501
+  at: [17, 6]
+  layer: 0
+- tile: 501
+  at: [18, 6]
+  layer: 0
+- tile: 501
+  at: [19, 6]
+  layer: 0
+- tile: 501
+  at: [20, 6]
+  layer: 0
+- tile: 501
+  at: [21, 6]
+  layer: 0
+- tile: 501
+  at: [22, 6]
+  layer: 0
+- tile: 501
+  at: [23, 6]
+  layer: 0
+- tile: 501
+  at: [24, 6]
+  layer: 0
+- tile: 501
+  at: [16, 7]
+  layer: 0
+- tile: 501
+  at: [17, 7]
+  layer: 0
+- tile: 501
+  at: [18, 7]
+  layer: 0
+- tile: 501
+  at: [19, 7]
+  layer: 0
+- tile: 501
+  at: [20, 7]
+  layer: 0
+- tile: 501
+  at: [21, 7]
+  layer: 0
+- tile: 501
+  at: [22, 7]
+  layer: 0
+- tile: 501
+  at: [23, 7]
+  layer: 0
+- tile: 501
+  at: [24, 7]
+  layer: 0
+- tile: 501
+  at: [16, 8]
+  layer: 0
+- tile: 501
+  at: [17, 8]
+  layer: 0
+- tile: 501
+  at: [18, 8]
+  layer: 0
+- tile: 501
+  at: [19, 8]
+  layer: 0
+- tile: 501
+  at: [20, 8]
+  layer: 0
+- tile: 501
+  at: [21, 8]
+  layer: 0
+- tile: 501
+  at: [22, 8]
+  layer: 0
+- tile: 501
+  at: [23, 8]
+  layer: 0
+- tile: 501
+  at: [24, 8]
+  layer: 0
+- tile: 501
+  at: [16, 9]
+  layer: 0
+- tile: 501
+  at: [17, 9]
+  layer: 0
+- tile: 501
+  at: [18, 9]
+  layer: 0
+- tile: 501
+  at: [19, 9]
+  layer: 0
+- tile: 501
+  at: [20, 9]
+  layer: 0
+- tile: 501
+  at: [21, 9]
+  layer: 0
+- tile: 501
+  at: [22, 9]
+  layer: 0
+- tile: 501
+  at: [23, 9]
+  layer: 0
+- tile: 501
+  at: [24, 9]
+  layer: 0
+- tile: 501
+  at: [16, 10]
+  layer: 0
+- tile: 501
+  at: [17, 10]
+  layer: 0
+- tile: 501
+  at: [18, 10]
+  layer: 0
+- tile: 501
+  at: [19, 10]
+  layer: 0
+- tile: 501
+  at: [20, 10]
+  layer: 0
+- tile: 501
+  at: [21, 10]
+  layer: 0
+- tile: 501
+  at: [22, 10]
+  layer: 0
+- tile: 501
+  at: [23, 10]
+  layer: 0
+- tile: 501
+  at: [24, 10]
+  layer: 0
+- tile: 501
+  at: [16, 11]
+  layer: 0
+- tile: 501
+  at: [17, 11]
+  layer: 0
+- tile: 501
+  at: [18, 11]
+  layer: 0
+- tile: 501
+  at: [19, 11]
+  layer: 0
+- tile: 501
+  at: [20, 11]
+  layer: 0
+- tile: 501
+  at: [21, 11]
+  layer: 0
+- tile: 501
+  at: [22, 11]
+  layer: 0
+- tile: 501
+  at: [23, 11]
+  layer: 0
+- tile: 501
+  at: [24, 11]
+  layer: 0
+- tile: 501
+  at: [16, 12]
+  layer: 0
+- tile: 501
+  at: [17, 12]
+  layer: 0
+- tile: 501
+  at: [18, 12]
+  layer: 0
+- tile: 501
+  at: [19, 12]
+  layer: 0
+- tile: 501
+  at: [20, 12]
+  layer: 0
+- tile: 501
+  at: [21, 12]
+  layer: 0
+- tile: 501
+  at: [22, 12]
+  layer: 0
+- tile: 501
+  at: [23, 12]
+  layer: 0
+- tile: 501
+  at: [24, 12]
+  layer: 0
+- tile: 501
+  at: [16, 13]
+  layer: 0
+- tile: 501
+  at: [17, 13]
+  layer: 0
+- tile: 501
+  at: [18, 13]
+  layer: 0
+- tile: 501
+  at: [19, 13]
+  layer: 0
+- tile: 501
+  at: [20, 13]
+  layer: 0
+- tile: 501
+  at: [21, 13]
+  layer: 0
+- tile: 501
+  at: [22, 13]
+  layer: 0
+- tile: 501
+  at: [23, 13]
+  layer: 0
+- tile: 501
+  at: [24, 13]
+  layer: 0
+- tile: 501
+  at: [16, 14]
+  layer: 0
+- tile: 501
+  at: [17, 14]
+  layer: 0
+- tile: 501
+  at: [18, 14]
+  layer: 0
+- tile: 501
+  at: [19, 14]
+  layer: 0
+- tile: 501
+  at: [20, 14]
+  layer: 0
+- tile: 501
+  at: [21, 14]
+  layer: 0
+- tile: 501
+  at: [22, 14]
+  layer: 0
+- tile: 501
+  at: [23, 14]
+  layer: 0
+- tile: 501
+  at: [24, 14]
   layer: 0
 - tile: 5350
   at: [3, 3]
@@ -2237,125 +2575,98 @@ tiles:
 - tile: 5375
   at: [4, 6]
   layer: 1
-- tile: 5350
+- tile: 3309
   at: [5, 3]
-  layer: 1
-- tile: 5351
+  layer: 2
+- tile: 3310
   at: [6, 3]
-  layer: 1
-- tile: 5358
+  layer: 2
+- tile: 3317
   at: [5, 4]
   layer: 1
-- tile: 5359
+- tile: 3318
   at: [6, 4]
   layer: 1
-- tile: 5366
-  at: [5, 5]
+- tile: 3429
+  at: [8, 3]
   layer: 1
-- tile: 5367
-  at: [6, 5]
+- tile: 3430
+  at: [9, 3]
   layer: 1
-- tile: 5374
-  at: [5, 6]
-  layer: 1
-- tile: 5375
-  at: [6, 6]
+- tile: 3431
+  at: [10, 3]
   layer: 1
 - tile: 4779
-  at: [10, 4]
-  layer: 2
-- tile: 4780
   at: [11, 4]
   layer: 2
-- tile: 4781
+- tile: 4780
   at: [12, 4]
   layer: 2
+- tile: 4781
+  at: [13, 4]
+  layer: 2
 - tile: 4787
-  at: [10, 5]
-  layer: 1
-- tile: 4788
   at: [11, 5]
   layer: 1
-- tile: 4789
+- tile: 4788
   at: [12, 5]
   layer: 1
-- tile: 4784
+- tile: 4789
+  at: [13, 5]
+  layer: 1
+- tile: 2448
+  at: [13, 4]
+  layer: 2
+- tile: 2449
+  at: [14, 4]
+  layer: 2
+- tile: 2450
+  at: [15, 4]
+  layer: 2
+- tile: 2451
   at: [16, 4]
   layer: 2
-- tile: 4785
-  at: [17, 4]
-  layer: 2
-- tile: 4792
+- tile: 2456
+  at: [13, 5]
+  layer: 1
+- tile: 2457
+  at: [14, 5]
+  layer: 1
+- tile: 2458
+  at: [15, 5]
+  layer: 1
+- tile: 2459
   at: [16, 5]
-  layer: 2
-- tile: 4793
-  at: [17, 5]
-  layer: 2
-- tile: 4800
-  at: [16, 6]
-  layer: 1
-- tile: 4801
-  at: [17, 6]
-  layer: 1
-- tile: 4808
-  at: [16, 7]
-  layer: 1
-- tile: 4809
-  at: [17, 7]
-  layer: 1
-- tile: 4784
-  at: [18, 4]
-  layer: 2
-- tile: 4785
-  at: [19, 4]
-  layer: 2
-- tile: 4792
-  at: [18, 5]
-  layer: 2
-- tile: 4793
-  at: [19, 5]
-  layer: 2
-- tile: 4800
-  at: [18, 6]
-  layer: 1
-- tile: 4801
-  at: [19, 6]
-  layer: 1
-- tile: 4808
-  at: [18, 7]
-  layer: 1
-- tile: 4809
-  at: [19, 7]
   layer: 1
 - tile: 5472
-  at: [9, 8]
+  at: [7, 7]
   layer: 1
 - tile: 5473
-  at: [10, 8]
+  at: [8, 7]
   layer: 1
 - tile: 5473
-  at: [11, 8]
+  at: [9, 7]
   layer: 1
 - tile: 5473
-  at: [12, 8]
+  at: [10, 7]
   layer: 1
 - tile: 5474
-  at: [13, 8]
+  at: [11, 7]
   layer: 1
 - tile: 5488
-  at: [9, 9]
+  at: [7, 8]
   layer: 1
 - tile: 5489
-  at: [10, 9]
+  at: [8, 8]
   layer: 1
 - tile: 5489
-  at: [11, 9]
+  at: [9, 8]
   layer: 1
 - tile: 5489
-  at: [12, 9]
+  at: [10, 8]
   layer: 1
 - tile: 5490
-  at: [13, 9]
+  at: [11, 8]
   layer: 1
 - tile: 2512
   at: [3, 10]
@@ -2381,51 +2692,6 @@ tiles:
 - tile: 2524
   at: [4, 14]
   layer: 1
-- tile: 5406
-  at: [14, 11]
-  layer: 1
-- tile: 5472
-  at: [15, 11]
-  layer: 1
-- tile: 5473
-  at: [16, 11]
-  layer: 1
-- tile: 5474
-  at: [17, 11]
-  layer: 1
-- tile: 5407
-  at: [18, 11]
-  layer: 1
-- tile: 5406
-  at: [14, 12]
-  layer: 1
-- tile: 5488
-  at: [15, 12]
-  layer: 1
-- tile: 5489
-  at: [16, 12]
-  layer: 1
-- tile: 5490
-  at: [17, 12]
-  layer: 1
-- tile: 5407
-  at: [18, 12]
-  layer: 1
-- tile: 5357
-  at: [16, 11]
-  layer: 2
-- tile: 5422
-  at: [19, 8]
-  layer: 1
-- tile: 5430
-  at: [19, 9]
-  layer: 1
-- tile: 5438
-  at: [19, 10]
-  layer: 1
-- tile: 5558
-  at: [19, 10]
-  layer: 2
 - tile: 4170
   at: [6, 13]
   layer: 2
@@ -2438,119 +2704,514 @@ tiles:
 - tile: 4179
   at: [7, 14]
   layer: 1
-- tile: 2539
-  at: [8, 3]
-  layer: 2
-- tile: 2547
-  at: [8, 4]
-  layer: 2
-- tile: 2555
-  at: [8, 5]
-  layer: 1
-- tile: 5531
-  at: [16, 9]
-  layer: 1
-- tile: 5532
-  at: [17, 9]
-  layer: 1
-- tile: 5539
-  at: [16, 10]
-  layer: 1
-- tile: 5540
-  at: [17, 10]
-  layer: 1
-- tile: 5558
-  at: [16, 10]
-  layer: 2
 - tile: 4823
-  at: [19, 13]
+  at: [14, 13]
   layer: 2
 - tile: 4831
+  at: [14, 14]
+  layer: 1
+- tile: 5411
+  at: [7, 10]
+  layer: 1
+- tile: 5412
+  at: [8, 10]
+  layer: 1
+- tile: 5412
+  at: [9, 10]
+  layer: 1
+- tile: 5412
+  at: [10, 10]
+  layer: 1
+- tile: 5413
+  at: [11, 10]
+  layer: 1
+- tile: 5419
+  at: [7, 11]
+  layer: 1
+- tile: 5420
+  at: [8, 11]
+  layer: 1
+- tile: 5420
+  at: [9, 11]
+  layer: 1
+- tile: 5420
+  at: [10, 11]
+  layer: 1
+- tile: 5421
+  at: [11, 11]
+  layer: 1
+- tile: 5427
+  at: [7, 12]
+  layer: 1
+- tile: 5428
+  at: [8, 12]
+  layer: 1
+- tile: 5428
+  at: [9, 12]
+  layer: 1
+- tile: 5428
+  at: [10, 12]
+  layer: 1
+- tile: 5429
+  at: [11, 12]
+  layer: 1
+- tile: 3408
+  at: [8, 10]
+  layer: 2
+- tile: 3409
+  at: [9, 10]
+  layer: 2
+- tile: 3416
+  at: [8, 11]
+  layer: 2
+- tile: 3417
+  at: [9, 11]
+  layer: 2
+- tile: 4077
+  at: [10, 11]
+  layer: 2
+- tile: 3428
+  at: [7, 11]
+  layer: 2
+- tile: 3633
+  at: [14, 6]
+  layer: 2
+- tile: 3641
+  at: [14, 7]
+  layer: 2
+- tile: 3649
+  at: [14, 8]
+  layer: 1
+- tile: 5675
+  at: [12, 10]
+  layer: 1
+- tile: 5676
+  at: [13, 10]
+  layer: 1
+- tile: 5677
+  at: [14, 10]
+  layer: 1
+- tile: 5683
+  at: [12, 11]
+  layer: 1
+- tile: 5684
+  at: [13, 11]
+  layer: 1
+- tile: 5685
+  at: [14, 11]
+  layer: 1
+- tile: 5691
+  at: [12, 12]
+  layer: 1
+- tile: 5692
+  at: [13, 12]
+  layer: 1
+- tile: 5693
+  at: [14, 12]
+  layer: 1
+- tile: 5699
+  at: [12, 13]
+  layer: 1
+- tile: 5700
+  at: [13, 13]
+  layer: 1
+- tile: 5701
+  at: [14, 13]
+  layer: 1
+- tile: 3293
+  at: [16, 4]
+  layer: 2
+- tile: 3301
+  at: [16, 5]
+  layer: 1
+- tile: 3293
+  at: [24, 4]
+  layer: 2
+- tile: 3301
+  at: [24, 5]
+  layer: 1
+- tile: 3293
+  at: [16, 12]
+  layer: 2
+- tile: 3301
+  at: [16, 13]
+  layer: 1
+- tile: 3293
+  at: [24, 12]
+  layer: 2
+- tile: 3301
+  at: [24, 13]
+  layer: 1
+- tile: 2539
+  at: [19, 12]
+  layer: 2
+- tile: 2547
+  at: [19, 13]
+  layer: 2
+- tile: 2555
   at: [19, 14]
+  layer: 1
+- tile: 2539
+  at: [22, 7]
+  layer: 2
+- tile: 2547
+  at: [22, 8]
+  layer: 2
+- tile: 2555
+  at: [22, 9]
+  layer: 1
+- tile: 4784
+  at: [18, 4]
+  layer: 2
+- tile: 4785
+  at: [19, 4]
+  layer: 2
+- tile: 4792
+  at: [18, 5]
+  layer: 2
+- tile: 4793
+  at: [19, 5]
+  layer: 2
+- tile: 4800
+  at: [18, 6]
+  layer: 1
+- tile: 4801
+  at: [19, 6]
+  layer: 1
+- tile: 4808
+  at: [18, 7]
+  layer: 1
+- tile: 4809
+  at: [19, 7]
+  layer: 1
+- tile: 4085
+  at: [21, 4]
+  layer: 2
+- tile: 4093
+  at: [21, 5]
+  layer: 1
+- tile: 5422
+  at: [16, 8]
+  layer: 1
+- tile: 5430
+  at: [16, 9]
+  layer: 1
+- tile: 5438
+  at: [16, 10]
+  layer: 1
+- tile: 5431
+  at: [16, 10]
+  layer: 2
+- tile: 5446
+  at: [17, 10]
+  layer: 2
+- tile: 5447
+  at: [18, 10]
+  layer: 2
+- tile: 4085
+  at: [24, 9]
+  layer: 2
+- tile: 4093
+  at: [24, 10]
+  layer: 1
+- tile: 3391
+  at: [23, 11]
+  layer: 1
+- tile: 3466
+  at: [19, 9]
+  layer: 2
+- tile: 3467
+  at: [20, 9]
+  layer: 2
+- tile: 3474
+  at: [19, 10]
+  layer: 1
+- tile: 3475
+  at: [20, 10]
+  layer: 1
+- tile: 4824
+  at: [22, 12]
+  layer: 1
+- tile: 4825
+  at: [23, 12]
+  layer: 1
+- tile: 4832
+  at: [22, 13]
+  layer: 1
+- tile: 4833
+  at: [23, 13]
+  layer: 1
+- tile: 4101
+  at: [17, 12]
   layer: 1
 events:
 - type: exit
-  at: [11, 15]
+  at: [14, 15]
   link: FL_LAB
 - type: event
   name: Professor Larch
-  at: [11, 6]
   pages:
-  - cond: {switch: LARCH_AT_TIDEWATCH}
+  - commands: ['\pf[LARCH,neutral]Larch: Customs first, child. Meridian gets cross if anyone skips the queue.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_PROFESSOR, dir: up}
+    cond: {switch: LARCH_AT_TIDEWATCH}
+  - commands:
+    - 'A cluttered station: tide charts, brass instruments, a stove with a blackened kettle. Juno is at a bench, labeling seed packets, back turned.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: If that''s the kelp man, the answer is still yes, and I don''t care what he''s offering.'
+    - move:
+        who: Professor Larch
+        route: [turn_down]
+        wait: true
+    - {wait: 40}
+    - '\pf[LARCH,shocked,,Professor Larch]Larch: ...Oh.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: You''ve got her chin. Give me the letter.'
+    - You hand over Mum's letter. Larch reads it.
+    - {wait: 90}
+    - She folds it very carefully and puts it on the bench.
+    - '\pf[LARCH,sad,,Professor Larch]Larch: Last winter. And nobody told me until you were already on a boat.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: Your mother was the bravest coward I ever knew. Sit.'
+    - Larch pours two cups from the kettle. The liquid is dark green.
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: Drink. It''s disgusting.'
+    - choices: [Drink it., Pretend to drink it., '...']
+      branches:
+      - [It tastes like a harbor at low tide. You keep it down. Barely., '\pf[LARCH,happy,,Professor Larch]Larch: Ha! Nobody finishes the first one. Ines didn''t.']
+      - ['\pf[LARCH,deadpan,,Professor Larch]Larch: I''ve watched forty people pretend. You''re the worst at it.']
+      - ['\pf[LARCH,deadpan,,Professor Larch]Larch: It doesn''t get better if you stare at it. I''ve tried.']
+      cancel: 3
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: She told you nothing, I take it. "Go to Imelda." That''s Ines. Hand me a child and a mystery and die before I can
+      shout at her.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: Did they scan you at the dock?'
+    - choices: [Yes., It said NULL.]
+      branches:
+      - ['\pf[LARCH,angry,anger,Professor Larch]Larch: She wrote ONE instruction about that. ...Not your fault. What did it say?']
+      - ['\pf[LARCH,neutral,,Professor Larch]Larch: ...']
+      cancel: 0
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: Null. Right. Well. That''s that, then.'
+    - move:
+        who: Juno
+        route: [turn_down]
+        wait: true
+    - A seed packet slides off the bench.
+    - '\pf[JUNO,shocked,,Juno]Juno: Professor, is this— are they— is this the ferry person?!'
+    - '\pf[LARCH,deadpan,,Professor Larch]Larch: This is \PN. \PN, this is Juno Hale, my assistant. She''ll tell you about larches now. I can''t stop her. Nobody
+      can.'
+    - '\pf[JUNO,happy,,Juno]Juno: Did you know larches are the only conifers that drop their needles? Every winter they look dead. They''re not!'
+    - '\pf[JUNO,happy,,Juno]Juno: They''re just letting go so they don''t snap. Professor says it''s the most sensible thing a tree''s ever done.'
+    - '\pf[LARCH,deadpan,,Professor Larch]Larch: I said it once. In 296.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: Right. You can''t walk Velmora with empty pockets. Come through to the Sanctuary. Both of you.'
+    - move:
+        who: Professor Larch
+        route: [through_on, right, right, right, right, right, right, through_off, turn_down]
+        wait: true
+    - {script: 'pfm_quest_done(:mums_letter)'}
+    - {script: 'pbSetSelfSwitch(%EV[Starter table]%, "A", true)'}
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    graphic: {sprite: trainer_PROFESSOR, dir: up}
+    cond: {switch: PRO_SCANNED_NULL}
+  - commands: ['\pf[LARCH,neutral]Larch: Through here. The Sanctuary. Pick a partner, I''ve got kelp boiling.']
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_PROFESSOR, dir: down}
-    commands: ['Professor Larch: Customs first, child. Meridian gets cross if anyone skips the queue.']
-  - cond: {switch: LARCH_AT_TIDEWATCH, switch2: PRO_SCANNED_NULL}
+    cond: {self: A}
+  - commands: ['\pf[LARCH,neutral]Larch: Look after that one. And mind Kestrel. He bites, but only when he''s frightened.']
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_PROFESSOR, dir: down}
-    commands: ['You hand over your mother''s letter. Professor Imelda Larch reads it, and sets it down very carefully.', She pours two cups of kelp tea., 'Professor
-        Larch: Your mother was the bravest coward I ever knew. Drink. It''s disgusting.', She doesn't explain., 'Professor Larch: The Wayfarer Sanctuary keeps partners
-        for people who arrive with nothing. Choose one from the table.']
-  - cond: {switch: LARCH_AT_TIDEWATCH, switch2: CH1_STARTER_GOT}
+    cond: {switch: CH1_STARTER_GOT}
+  - commands: ['\pf[LARCH,neutral]Larch: Lecture One. I''m numbering them. Sit down before you fall down.']
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_PROFESSOR, dir: down}
-    commands: ['Professor Larch: Look after that one. And mind Kestrel - he bites, but only when he''s frightened.']
+    cond: {switch: CH1_ORCHARD_DONE}
+  at: [9, 6]
 - type: event
   name: Juno
-  at: [7, 8]
   pages:
-  - graphic: {sprite: trainer_RIVAL2, dir: right}
-    commands: ['Juno: You''re the one off the last ferry! I''m Juno - the Professor''s assistant. Mostly I water things.', 'Juno: We''re going to be friends, I can
-        tell. I have a nose for it.']
-  - cond: {switch: CH1_K1_DONE}
+  - commands: ['\pf[JUNO,happy]Juno: Seed packets! Every one labelled! Mostly correctly!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_RIVAL2, dir: up}
+  - commands: ['\pf[JUNO,happy]Juno: You''ve got a partner! I''ve got a partner! Everyone''s got a partner except the kettle!']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_RIVAL2, dir: down}
+    cond: {switch: CH1_STARTER_GOT}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_K1_DONE}
+  at: [8, 9]
+- type: event
+  name: Kestrel (loft)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_STARTER_GOT}
+  at: [13, 8]
 - type: event
   name: Starter table
-  at: [11, 9]
-  pages: &id001
-  - graphic: {sprite: Object ball}
-    commands: [Three Poké Balls rest on a velvet tray. Better wait for the Professor.]
-  - cond: {switch: PRO_SCANNED_NULL}
-    graphic: {sprite: Object ball}
-    commands:
-    - {script: "gens = (1..9).to_a\ng = pbMessage(_INTL(\"Which region's partners?\"), gens.map { |n| _INTL(\"Generation {1}\", n) }, -1)\nif g >= 0\n  gen = gens[g]\n\
-        \  lines = (0..2).map { |s| Prismfall::Rival.line(gen, s) }\n  names = lines.map { |l| GameData::Species.get(l[0]).name }\n  s = pbMessage(_INTL(\"Choose\
-        \ your partner!\"), names + [_INTL(\"Back\")], 3)\n  if s >= 0 && s < 3 && pbAddPokemon(lines[s][0], 5)\n    Prismfall.record_starter($player.party[-1], gen:\
-        \ gen, slot: s)\n    $game_switches[@@CH1_STARTER_GOT] = true\n  end\nend\n"}
-    - if: $game_switches[@@CH1_STARTER_GOT]
+  pages:
+  - commands: ['Small Pokémon from every corner of the world, in pens and on perches. Better wait for the Professor.']
+    trigger: action
+    move: fixed
+  - commands:
+    - if: '!pfm?(:sanctuary_speech)'
       then:
-      - Juno bounces in, kerchief askew, seed packets everywhere.
-      - {script: 'sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:JUNO)).name
+      - {script: 'pfm_set(:sanctuary_speech)'}
+      - A glasshouse full of small Pokémon from every corner of the world, in pens and on perches.
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: The Wayfarer Sanctuary. Twenty years of colleagues abroad sending me Pokémon that weren''t born here, so I could
+        watch how the Imprints take hold of them.'
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: They all pick up a tint in a few weeks. Every one. I''ve never had one that didn''t.'
+      - '\pf[LARCH,neutral,dots,Professor Larch]Larch: ...Never had one.'
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: Pick a partner. Any of them. Take your time, it''s the only decision today I trust you with.'
+    - {script: "gens = (1..9).to_a\ng = pbMessage(_INTL(\"Which region's partners?\"), gens.map { |n| _INTL(\"Generation {1}\", n) }, -1)\nif g >= 0\n  gen = gens[g]\n\
+        \  lines = (0..2).map { |s| Prismfall::Rival.line(gen, s) }\n  names = lines.each_with_index.map { |l, i| [_INTL(\"Grass: \"), _INTL(\"Fire: \"), _INTL(\"\
+        Water: \")][i] + GameData::Species.get(l[0]).name }\n  s = pbMessage(_INTL(\"Pick a partner.\"), names + [_INTL(\"Back\")], 3)\n  if s >= 0 && s < 3 && pbAddPokemon(lines[s][0],\
+        \ 5)\n    Prismfall.record_starter($player.party[-1], gen: gen, slot: s)\n    pfm_set(:starter_picked)\n  end\nend\n"}
+    - if: '!pfm?(:starter_picked)'
+      then:
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: Take your time. They''re not going anywhere. Most of them can''t.'
+      - {exit: true}
+    - '\pf[LARCH,happy,,Professor Larch]Larch: Good. It liked you before you chose it. I was watching.'
+    - {script: $player.has_pokedex = true}
+    - \me[Key item get]\PN received the Pokédex!
+    - Fitted with a Meridian Imprint Reader. Larch has put tape over half of it.
+    - '\pf[JUNO,happy,,Juno]Juno: My turn! Um. Um um um.'
+    - move:
+        who: Juno
+        route: [right, right, turn_up, wait 10, right, turn_up]
+        wait: true
+    - {script: 'sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:JUNO)).name
 
-          pbMessage(_INTL("Juno: Ooh, I''ll take {1}! It was looking at me. Also, underdogs.", sp))
+        pbMessage("\\pf[JUNO,happy,,Juno]Juno: " + _INTL("This one. {1}. It was looking at me.", sp))'}
+    - '\pf[LARCH,deadpan,,Professor Larch]Larch: That one''s at a disadvantage against \PN''s, Juno.'
+    - '\pf[JUNO,happy,,Juno]Juno: Somebody should give the underdog a chance! Also it was LOOKING at me.'
+    - {se: Player fall}
+    - A crash from the loft. Hay falls.
+    - move:
+        who: Kestrel (loft)
+        route:
+        - graphic: [trainer_RIVAL1, 0, 2, 0]
+        - {opacity: 255}
+        - through_on
+        - down
+        - down
+        - through_off
+        wait: true
+    - '\pf[LARCH,angry,shock,Professor Larch]Larch: Kestrel Vane. How long have you been sleeping in my hayloft?'
+    - '\pf[KESTREL,deadpan,,Kestrel (loft)]Kestrel: Since Gran changed the lighthouse lock. So, Tuesday.'
+    - '\pf[KESTREL,neutral,,Kestrel (loft)]Kestrel: You''re handing out partners to ferry tourists now? I''ve asked you for one for two years.'
+    - '\pf[LARCH,neutral,,Professor Larch]Larch: You asked me twice, and both times you''d just set something on fire.'
+    - '\pf[KESTREL,smug,,Kestrel (loft)]Kestrel: One of those was an accident.'
+    - move:
+        who: Kestrel (loft)
+        route: [down, right, turn_up]
+        wait: true
+    - {script: 'sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:KESTREL)).name
 
-          '}
-      - A door bangs. A boy with hay in his hair drops down from the loft.
-      - {script: 'sp = GameData::Species.get(Prismfall::Rival.rival_starter_species(:KESTREL)).name
-
-          pbMessage(_INTL("Kestrel: I''ll have {1}. Fair fights are for people who can afford to lose.", sp))
-
-          '}
-      - Professor Larch lets him take it, with a look that says she has history with this family.
-      - 'Kestrel: See you outside, tourist.'
-      - 'Professor Larch: And this. A Pokédex. Your mother would have wanted you to look at things properly.'
-      - {script: $player.has_pokedex = true}
-      - \PN received a Pokédex!
-  - cond: {switch: CH1_STARTER_GOT}
-    commands: [The tray is empty now.]
-- type: event
-  name: Starter ball L
-  at: [10, 9]
-  pages: *id001
-- type: event
-  name: Starter ball R
-  at: [12, 9]
-  pages: *id001
+        pbMessage("\\pf[KESTREL,smug,,Kestrel (loft)]Kestrel: " + _INTL("This one. {1}.", sp))'}
+    - '\pf[JUNO,angry,,Juno]Juno: You only picked that because it beats theirs!'
+    - '\pf[KESTREL,deadpan,,Kestrel (loft)]Kestrel: Yes. Fair fights are for people who can afford to lose.'
+    - anim: [Professor Larch, 3]
+    - {wait: 30}
+    - '\pf[LARCH,sad,dots,Professor Larch]Larch: ...Take it. Your mother would''ve done the same thing, with the same face.'
+    - '\pf[KESTREL,angry,anger,Kestrel (loft)]Kestrel: Don''t talk about her.'
+    - move:
+        who: Kestrel (loft)
+        route: [through_on, down, down, down, left, left, left, left, left, left, left, down, down, turn_up]
+        wait: true
+    - '\pf[KESTREL,neutral,,Kestrel (loft)]Kestrel: Ferry kid. Outside. Let''s see if you''re worth the boat fare.'
+    - move:
+        who: Kestrel (loft)
+        route:
+        - down
+        - {opacity: 0}
+        wait: true
+    - switch: [CH1_STARTER_GOT, true]
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  - commands: [The pens are quieter now. One of the little ones keeps looking at the door.]
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_STARTER_GOT}
+  at: [20, 10]
 - type: event
   name: Rowan Ashby
-  at: [6, 11]
   pages:
-  - cond: {switch: CH1_K1_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: '!pfm?(:rowan_met)'
+      then:
+      - A tall, weathered man is sorting seed trays. Soil under his nails. A small, sickly Phantump sits on his shoulder.
+      - '\pf[JUNO,happy,,Juno (station)]Juno: Uncle Rowan! This is \PN! They came on the ferry and they beat Kestrel — or nearly — and we''re a team now!'
+      - '\pf[ROWAN,happy,,Rowan Ashby]Rowan: Are you, now. Rowan Ashby. I keep the garden at Verdance, and this one''s aunt kept me.'
+      - '\pf[ROWAN,neutral,,Rowan Ashby]Rowan: I came down for seed stock. And to check on the Professor''s tea plants. They''re thriving. I can''t account for it.'
+      - '\pf[LARCH,deadpan,,Professor Larch]Larch: Spite.'
+      - '\pf[ROWAN,neutral,,Rowan Ashby]Rowan: This is a Phantump. I found it up past Briarwick, in a wood that''s gone to glass. It was sitting in a glass tree,
+        crying.'
+      - '\pf[ROWAN,sad,,Rowan Ashby]Rowan: Its tree couldn''t die properly, you see. So it couldn''t either.'
+      - '\pf[JUNO,sad,,Juno (station)]Juno: That''s so sad...'
+      - '\pf[ROWAN,neutral,,Rowan Ashby]Rowan: It''s not sad that things die, Juno. Everything that grows must be allowed to. That''s what makes room.'
+      - '\pf[ROWAN,neutral,,Rowan Ashby]Rowan: What''s sad is when they''re not let.'
+      - The Phantump drifts off his shoulder and hovers in front of you. It stops shivering.
+      - '\pf[ROWAN,shocked,,Rowan Ashby]Rowan: ...Well. It hasn''t gone near anyone but me in a month.'
+      - '\pf[ROWAN,neutral,,Rowan Ashby]Rowan: She''d have liked you.'
+      - choices: ['Who?', '...']
+        branches:
+        - ['\pf[ROWAN,sad,,Rowan Ashby]Rowan: My wife. Elin. ...She''s still in the garden. Come and see it someday.']
+        - ['\pf[ROWAN,neutral,,Rowan Ashby]Rowan: Hm. You''re a good listener. It''s rarer than badges.']
+        cancel: 2
+      - {script: 'pfm_item(:MIRACLESEED, 1)'}
+      - From the Warden of Verdance's own stock.
+      - {script: 'pfm_set(:rowan_met)'}
+      else: ['\pf[ROWAN,neutral]Rowan: The gate at the dock gave me green, same as every year. Twenty-four years of green. A man could get tired of a color.']
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_POKEMONRANGER_M, dir: right}
-    commands: ['Rowan Ashby: Juno''s uncle - Rowan. Grass Warden, when Verdance lets me out. I''m down for seed stock.', He shows you a sickly Phantump curled in
-        his coat., 'Rowan Ashby: Found it in the Glasswood past Briarwick. Sitting in a tree that had turned to glass, crying.', 'Rowan Ashby: Everything that grows
-        must be allowed to die. That''s not sad. That''s what makes room.', 'Rowan Ashby: ...She''d have liked you. My wife, I mean.']
+    cond: {switch: CH1_K1_DONE}
+  at: [17, 10]
+- type: event
+  name: Juno (station)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: ['\pf[JUNO,happy]Juno: Uncle Rowan says the Phantump likes you. It only likes him and compost.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_RIVAL2, dir: left}
+    cond: {switch: CH1_K1_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH1_ORCHARD_DONE}
+  at: [19, 11]
 - type: sign
-  at: [11, 5]
+  name: Station bookshelf
   post: false
+  text: '"Field safety, rule one, underlined three times: NEVER TAKE A TINTED PERSON PAST A VEIL."'
+  at: [4, 5]
+- type: sign
   name: Imprint scanner
+  post: false
   text: 'An Imprint scanner hums quietly. Its last reading: NULL.'
+  at: [12, 5]
+- type: sign
+  name: Kettle
+  post: false
+  text: A blackened kettle. Something dark green is stewing in it. It smells like low tide, on purpose.
+  at: [14, 5]
 
 ---
 id: 104
@@ -3037,12 +3698,6 @@ tiles:
 - tile: 5534
   at: [15, 2]
   layer: 0
-- tile: 5547
-  at: [15, 3]
-  layer: 0
-- tile: 5555
-  at: [15, 4]
-  layer: 0
 - tile: 5355
   at: [15, 5]
   layer: 0
@@ -3286,6 +3941,12 @@ tiles:
 - tile: 5552
   at: [11, 4]
   layer: 0
+- tile: 5544
+  at: [15, 3]
+  layer: 0
+- tile: 5552
+  at: [15, 4]
+  layer: 0
 - tile: 2716
   at: [3, 7]
   layer: 1
@@ -3321,36 +3982,6 @@ tiles:
   layer: 1
 - tile: 2459
   at: [16, 5]
-  layer: 1
-- tile: 5472
-  at: [8, 9]
-  layer: 1
-- tile: 5473
-  at: [9, 9]
-  layer: 1
-- tile: 5473
-  at: [10, 9]
-  layer: 1
-- tile: 5473
-  at: [11, 9]
-  layer: 1
-- tile: 5474
-  at: [12, 9]
-  layer: 1
-- tile: 5488
-  at: [8, 10]
-  layer: 1
-- tile: 5489
-  at: [9, 10]
-  layer: 1
-- tile: 5489
-  at: [10, 10]
-  layer: 1
-- tile: 5489
-  at: [11, 10]
-  layer: 1
-- tile: 5490
-  at: [12, 10]
   layer: 1
 - tile: 5597
   at: [15, 8]
@@ -3425,31 +4056,31 @@ tiles:
   at: [4, 12]
   layer: 1
 - tile: 2557
-  at: [9, 5]
+  at: [9, 4]
   layer: 2
 - tile: 2558
-  at: [10, 5]
+  at: [10, 4]
   layer: 2
 - tile: 2565
-  at: [9, 6]
+  at: [9, 5]
   layer: 1
 - tile: 2566
-  at: [10, 6]
+  at: [10, 5]
   layer: 1
 - tile: 2573
-  at: [9, 7]
+  at: [9, 6]
   layer: 1
 - tile: 2574
-  at: [10, 7]
+  at: [10, 6]
   layer: 1
 - tile: 5438
-  at: [17, 6]
+  at: [17, 5]
   layer: 1
 - tile: 5566
-  at: [17, 7]
+  at: [17, 6]
   layer: 1
 - tile: 5558
-  at: [17, 6]
+  at: [17, 5]
   layer: 2
 - tile: 5422
   at: [8, 4]
@@ -3487,29 +4118,226 @@ tiles:
 - tile: 5594
   at: [7, 13]
   layer: 1
+- tile: 5411
+  at: [7, 8]
+  layer: 1
+- tile: 5412
+  at: [8, 8]
+  layer: 1
+- tile: 5412
+  at: [9, 8]
+  layer: 1
+- tile: 5412
+  at: [10, 8]
+  layer: 1
+- tile: 5412
+  at: [11, 8]
+  layer: 1
+- tile: 5412
+  at: [12, 8]
+  layer: 1
+- tile: 5413
+  at: [13, 8]
+  layer: 1
+- tile: 5419
+  at: [7, 9]
+  layer: 1
+- tile: 5420
+  at: [8, 9]
+  layer: 1
+- tile: 5420
+  at: [9, 9]
+  layer: 1
+- tile: 5420
+  at: [10, 9]
+  layer: 1
+- tile: 5420
+  at: [11, 9]
+  layer: 1
+- tile: 5420
+  at: [12, 9]
+  layer: 1
+- tile: 5421
+  at: [13, 9]
+  layer: 1
+- tile: 5419
+  at: [7, 10]
+  layer: 1
+- tile: 5420
+  at: [8, 10]
+  layer: 1
+- tile: 5420
+  at: [9, 10]
+  layer: 1
+- tile: 5420
+  at: [10, 10]
+  layer: 1
+- tile: 5420
+  at: [11, 10]
+  layer: 1
+- tile: 5420
+  at: [12, 10]
+  layer: 1
+- tile: 5421
+  at: [13, 10]
+  layer: 1
+- tile: 5427
+  at: [7, 11]
+  layer: 1
+- tile: 5428
+  at: [8, 11]
+  layer: 1
+- tile: 5428
+  at: [9, 11]
+  layer: 1
+- tile: 5428
+  at: [10, 11]
+  layer: 1
+- tile: 5428
+  at: [11, 11]
+  layer: 1
+- tile: 5428
+  at: [12, 11]
+  layer: 1
+- tile: 5429
+  at: [13, 11]
+  layer: 1
+- tile: 2360
+  at: [9, 8]
+  layer: 2
+- tile: 2361
+  at: [10, 8]
+  layer: 2
+- tile: 2362
+  at: [11, 8]
+  layer: 2
+- tile: 2368
+  at: [9, 9]
+  layer: 2
+- tile: 2369
+  at: [10, 9]
+  layer: 2
+- tile: 2370
+  at: [11, 9]
+  layer: 2
+- tile: 2416
+  at: [9, 10]
+  layer: 2
+- tile: 2417
+  at: [10, 10]
+  layer: 2
+- tile: 2418
+  at: [11, 10]
+  layer: 2
+- tile: 2424
+  at: [9, 11]
+  layer: 2
+- tile: 2425
+  at: [10, 11]
+  layer: 2
+- tile: 2426
+  at: [11, 11]
+  layer: 2
+- tile: 3633
+  at: [7, 3]
+  layer: 2
+- tile: 3641
+  at: [7, 4]
+  layer: 2
+- tile: 3649
+  at: [7, 5]
+  layer: 1
+- tile: 3398
+  at: [4, 3]
+  layer: 1
+- tile: 3399
+  at: [5, 3]
+  layer: 1
+- tile: 3406
+  at: [4, 4]
+  layer: 1
+- tile: 3407
+  at: [5, 4]
+  layer: 1
+- tile: 4170
+  at: [13, 12]
+  layer: 2
+- tile: 4171
+  at: [14, 12]
+  layer: 2
+- tile: 4178
+  at: [13, 13]
+  layer: 1
+- tile: 4179
+  at: [14, 13]
+  layer: 1
+- tile: 4077
+  at: [7, 9]
+  layer: 2
+- tile: 4077
+  at: [12, 10]
+  layer: 2
+- tile: 4058
+  at: [5, 4]
+  layer: 2
+- tile: 4059
+  at: [6, 4]
+  layer: 2
+- tile: 4066
+  at: [5, 5]
+  layer: 1
+- tile: 4067
+  at: [6, 5]
+  layer: 1
 events:
 - type: exit
   at: [10, 14]
   link: FL_INN
-- name: Innkeeper
-  type: npc
+- type: event
+  name: Innkeeper
+  pages:
+  - commands:
+    - if: $game_switches[@@CH1_ORCHARD_DONE] && $game_variables[@@STORY_CHAPTER] < 2
+      then:
+      - 'Innkeeper: You look like you''ve walked through a wall. One room''s free. Don''t ask whose it was.'
+      - choices: [Rest., Not yet.]
+        branches:
+        - - tone: [-255, -255, -255, 0, 20]
+          - {wait: 24}
+          - {heal: true}
+          - {me: Pkmn healing}
+          - {wait: 40}
+          - {script: 'pfm_card(:PF_CH1_NOTEBOOK, "Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.", "Subject reads
+              NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred.", "Second such reading in my life.", "The first
+              was in Crownhaven, AF 290.", "God help us, Ines.")'}
+          - She closes the notebook. Outside the window, far across the harbor, the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat
+            is standing on the gallery, looking at the station.
+          - var: [STORY_CHAPTER, 2]
+          - tone: [10, 4, -12, 0, 30]
+          - Morning.
+        - []
+        cancel: 2
+      else: ['Innkeeper: Rooms are full of people who came home on the last boat with nowhere to be. First time I''ve been full since the wedding of ''91.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 21, dir: down}
   at: [4, 6]
-  sprite: NPC 28
-  commands: ['Innkeeper: Rooms are full of people who came home on the last boat with nowhere to be. First time I''ve been full since the wedding of ''91.']
 - type: event
   name: Inn Guest
-  at: [10, 11]
   pages:
-  - graphic: {sprite: NPC 17, dir: down}
+  - commands: ['Inn Guest: I left Velmora nine years ago to be a famous painter. I''m back to be a tired one.']
+    trigger: action
     move: fixed
-    commands: ['Inn Guest: I left Velmora nine years ago to be a famous painter. I''m back to be a tired one.']
+    graphic: {sprite: NPC 26, dir: right}
+  at: [8, 11]
 - type: event
   name: Inn Guest 2
-  at: [13, 7]
   pages:
-  - graphic: {sprite: NPC 13, dir: down}
+  - commands: ['Inn Guest 2: The Concert says we carry the Bleed. We don''t carry it. It''s not a cold. It''s the ground.']
+    trigger: action
     move: fixed
-    commands: ['Inn Guest 2: The Concert says we carry the Bleed. We don''t carry it. It''s not a cold. It''s the ground.']
+    graphic: {sprite: NPC 13, dir: left}
+  at: [13, 7]
 
 ---
 id: 105
@@ -4043,11 +4871,65 @@ tiles:
 - tile: 4177
   at: [11, 11]
   layer: 1
-- tile: 5472
+- tile: 3408
+  at: [6, 8]
+  layer: 2
+- tile: 3409
+  at: [7, 8]
+  layer: 2
+- tile: 3416
+  at: [6, 9]
+  layer: 1
+- tile: 3417
+  at: [7, 9]
+  layer: 1
+- tile: 5411
+  at: [5, 8]
+  layer: 1
+- tile: 5412
   at: [6, 8]
   layer: 1
-- tile: 5474
+- tile: 5412
   at: [7, 8]
+  layer: 1
+- tile: 5413
+  at: [8, 8]
+  layer: 1
+- tile: 5419
+  at: [5, 9]
+  layer: 1
+- tile: 5420
+  at: [6, 9]
+  layer: 1
+- tile: 5420
+  at: [7, 9]
+  layer: 1
+- tile: 5421
+  at: [8, 9]
+  layer: 1
+- tile: 5427
+  at: [5, 10]
+  layer: 1
+- tile: 5428
+  at: [6, 10]
+  layer: 1
+- tile: 5428
+  at: [7, 10]
+  layer: 1
+- tile: 5429
+  at: [8, 10]
+  layer: 1
+- tile: 4060
+  at: [11, 7]
+  layer: 2
+- tile: 4068
+  at: [11, 8]
+  layer: 1
+- tile: 4077
+  at: [8, 9]
+  layer: 2
+- tile: 4101
+  at: [3, 11]
   layer: 1
 events:
 - type: exit
@@ -4059,12 +4941,30 @@ events:
   to: {map: 106, x: 4, y: 8, dir: down}
   se: Door exit
   arrive: [10, 7, down]
-- type: npc
-  name: Keeper
-  at: [6, 9]
-  sprite: NPC 25
-  dir: down
-  text: The lamp hasn't been lit since the Concert closed the strait. Old Hesper still climbs up there every night.
+- type: sign
+  name: Rope coils
+  post: false
+  text: Coils of rope, older than you. Somebody has spliced every frayed end.
+  at: [10, 10]
+- type: sign
+  name: Cot
+  post: false
+  text: A cot with a boy's coat on it. The coat is much too big for the cot.
+  at: [3, 6]
+- type: event
+  name: Cracked mirror
+  pages:
+  - commands:
+    - Your reflection, split down the middle by an old crack.
+    - {script: 'pfm_set(:saw_mirror)'}
+    trigger: action
+    move: fixed
+  at: [5, 5]
+- type: sign
+  name: Trunk
+  post: false
+  text: Locked. A black lace veil is caught in the lid.
+  at: [8, 10]
 
 ---
 id: 106
@@ -4425,17 +5325,29 @@ tiles:
 - tile: 4831
   at: [9, 6]
   layer: 1
-- tile: 2704
+- tile: 4784
   at: [6, 4]
   layer: 2
-- tile: 2705
+- tile: 4785
   at: [7, 4]
   layer: 2
-- tile: 2712
+- tile: 4792
   at: [6, 5]
-  layer: 1
-- tile: 2713
+  layer: 2
+- tile: 4793
   at: [7, 5]
+  layer: 2
+- tile: 4800
+  at: [6, 6]
+  layer: 1
+- tile: 4801
+  at: [7, 6]
+  layer: 1
+- tile: 4808
+  at: [6, 7]
+  layer: 1
+- tile: 4809
+  at: [7, 7]
   layer: 1
 - tile: 4824
   at: [8, 9]
@@ -4449,6 +5361,18 @@ tiles:
 - tile: 4833
   at: [9, 10]
   layer: 1
+- tile: 4118
+  at: [4, 3]
+  layer: 1
+- tile: 4119
+  at: [5, 3]
+  layer: 1
+- tile: 4126
+  at: [4, 4]
+  layer: 1
+- tile: 4127
+  at: [5, 4]
+  layer: 1
 events:
 - type: warp
   at: [4, 9]
@@ -4456,11 +5380,46 @@ events:
   se: Door exit
 - type: event
   name: Hesper Vane
-  at: [6, 7]
   pages:
-  - graphic: {sprite: NPC 28, dir: up}
-    commands: ['Hesper Vane: KESTREL! If you''re sleeping in Larch''s loft again, don''t bother coming home!', 'The old woman turns, sees you, and drops her lamp-rag.',
-      'Hesper Vane: ...You''d better go. Before I say something foolish.']
+  - commands:
+    - An old woman is polishing the great lamp with a rag. She is shouting down the stairwell.
+    - '\pf[HESPER,angry,,Hesper Vane]Hesper: —and if I find straw in my good boots AGAIN, Kestrel Vane, I''ll—'
+    - move:
+        who: Hesper Vane
+        route: [turn_down]
+        wait: true
+    - anim: [Hesper Vane, 3]
+    - The rag drops.
+    - {wait: 60}
+    - '\pf[HESPER,shocked,shock,Hesper Vane]Hesper: ...'
+    - '\pf[HESPER,angry,,Hesper Vane]Hesper: Who let you up here? Get out. Lighthouse is closed. Sea''s closed. Everything''s closed.'
+    - choices: ['Do you know me?', I'm sorry., '...']
+      branches:
+      - ['\pf[HESPER,angry,,Hesper Vane]Hesper: I don''t know anybody. I''m seventy-eight. I''ve forgotten more people than you''ve met.']
+      - ['\pf[HESPER,sad,,Hesper Vane]Hesper: ...Don''t be sorry. Sorry''s no use to a lamp.']
+      - ['\pf[HESPER,sad,,Hesper Vane]Hesper: Stars. You even stand like— no.']
+      cancel: 3
+    - '\pf[HESPER,neutral,,Hesper Vane]Hesper: You''re the one the boy fought on the quay. He came home swearing. That means he liked it.'
+    - '\pf[HESPER,neutral,,Hesper Vane]Hesper: Keep away from him. Everyone who gets near that boy''s mother''s ghost gets hurt.'
+    - move:
+        who: Hesper Vane
+        route: [turn_up]
+        wait: true
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+    graphic: {sprite: NPC 11, dir: up}
+  - commands:
+    - if: pfm?(:saw_mirror) && !pfm?(:hesper_mirror)
+      then:
+      - '\pf[HESPER,angry]Hesper: Leave it. It shows the truth crooked, same as everything.'
+      - {script: 'pfm_set(:hesper_mirror)'}
+      else: ['\pf[HESPER,angry]Hesper: Lighthouse is closed. Sea''s closed. Everything''s closed.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 11, dir: up}
+    cond: {self: A}
+  at: [6, 7]
 
 ---
 id: 107
@@ -5096,22 +6055,88 @@ tiles:
 - tile: 5558
   at: [13, 10]
   layer: 2
+- tile: 3429
+  at: [8, 3]
+  layer: 1
+- tile: 3430
+  at: [9, 3]
+  layer: 1
+- tile: 3431
+  at: [10, 3]
+  layer: 1
+- tile: 5411
+  at: [7, 8]
+  layer: 1
+- tile: 5412
+  at: [8, 8]
+  layer: 1
+- tile: 5412
+  at: [9, 8]
+  layer: 1
+- tile: 5413
+  at: [10, 8]
+  layer: 1
+- tile: 5419
+  at: [7, 9]
+  layer: 1
+- tile: 5420
+  at: [8, 9]
+  layer: 1
+- tile: 5420
+  at: [9, 9]
+  layer: 1
+- tile: 5421
+  at: [10, 9]
+  layer: 1
+- tile: 5427
+  at: [7, 10]
+  layer: 1
+- tile: 5428
+  at: [8, 10]
+  layer: 1
+- tile: 5428
+  at: [9, 10]
+  layer: 1
+- tile: 5429
+  at: [10, 10]
+  layer: 1
+- tile: 3408
+  at: [8, 8]
+  layer: 2
+- tile: 3409
+  at: [9, 8]
+  layer: 2
+- tile: 3416
+  at: [8, 9]
+  layer: 2
+- tile: 3417
+  at: [9, 9]
+  layer: 2
+- tile: 4060
+  at: [10, 10]
+  layer: 2
+- tile: 4068
+  at: [10, 11]
+  layer: 1
 events:
 - type: exit
   at: [8, 12]
   link: FL_DOCK
-- type: npc
+- type: event
   name: Dockmaster
+  pages:
+  - commands: ['Dockmaster: Thirty ferries a month, then one, then none. I''m the Dockmaster of a dock that''s master of nothing.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 12, dir: down}
   at: [5, 7]
-  sprite: trainer_SAILOR
-  dir: down
-  commands: ['Dockmaster: Thirty ferries a month, then one, then none. I''m the Dockmaster of a dock that''s master of nothing.']
 - type: sign
-  name: Dockmaster'S Ledger
-  at: [6, 6]
+  name: Dockmaster's ledger
   post: false
-  text: '"AF 290, night crossing, unscheduled. Capt. Morrow. Two passengers, one a child. Fare: paid in kind." The entry has been crossed out twice. You can still
-    read it.'
+  text: '"AF 290, night crossing, unscheduled. Capt. Morrow. Two passengers, one a child. Fare: paid in kind."
+
+    The entry has been crossed out twice. You can still read it.'
+  at: [7, 5]
 
 ---
 id: 108
@@ -6245,6 +7270,66 @@ tiles:
 - tile: 5558
   at: [21, 11]
   layer: 2
+- tile: 5411
+  at: [10, 9]
+  layer: 1
+- tile: 5412
+  at: [11, 9]
+  layer: 1
+- tile: 5412
+  at: [12, 9]
+  layer: 1
+- tile: 5412
+  at: [13, 9]
+  layer: 1
+- tile: 5413
+  at: [14, 9]
+  layer: 1
+- tile: 5427
+  at: [10, 10]
+  layer: 1
+- tile: 5428
+  at: [11, 10]
+  layer: 1
+- tile: 5428
+  at: [12, 10]
+  layer: 1
+- tile: 5428
+  at: [13, 10]
+  layer: 1
+- tile: 5429
+  at: [14, 10]
+  layer: 1
+- tile: 3429
+  at: [8, 3]
+  layer: 1
+- tile: 3430
+  at: [9, 3]
+  layer: 1
+- tile: 3431
+  at: [10, 3]
+  layer: 1
+- tile: 3633
+  at: [15, 3]
+  layer: 2
+- tile: 3641
+  at: [15, 4]
+  layer: 2
+- tile: 3649
+  at: [15, 5]
+  layer: 1
+- tile: 4109
+  at: [21, 11]
+  layer: 2
+- tile: 4117
+  at: [21, 12]
+  layer: 1
+- tile: 4125
+  at: [21, 13]
+  layer: 1
+- tile: 4077
+  at: [7, 10]
+  layer: 1
 events:
 - type: exit
   at: [12, 15]

@@ -94,6 +94,11 @@ def main():
     offs['sheridan_red'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': [37]}
     p = [int(v) for v in st.passages.data.reshape(-1)][384:384 + n]; q = [int(v) for v in st.priorities.data.reshape(-1)][384:384 + n]
     pas += p + [0] * (n - len(p)); pri += q + [0] * (n - len(q)); tag += [0] * n; ims.append(im)
+    c3 = os.path.join(HERE, 'custom', 'prismfall_custom3.png')      # elder tree, silk garlands (make_custom.py), appended last
+    if os.path.exists(c3):
+        im = Image.open(c3).convert('RGBA'); n = im.height // 32 * 8; meta = json.load(open(c3[:-4] + '.json'))
+        offs['custom3'] = {'offset': len(pas), 'tiles': n, 'src_tilesets': []}
+        pas += [int(v) for v in meta['passages']]; pri += [int(v) for v in meta['priorities']]; tag += [0] * n; ims.append(im)
     sheet = Image.new('RGBA', (256, sum(i.height for i in ims)), (0, 0, 0, 0)); y = 0
     for i in ims:
         sheet.paste(i, (0, y)); y += i.height

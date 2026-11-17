@@ -9,7 +9,7 @@ BattleBack = field
 #-------------------------------
 [101]   # Ferrow's Landing Pokémon Center
 Name = Ferrow's Landing Pokémon Center
-HealingSpot = 100,24,28
+HealingSpot = 100,19,27
 MapPosition = 0,14,26
 #-------------------------------
 [102]   # Ferrow's Landing Mart
@@ -57,7 +57,7 @@ BattleBack = field
 #-------------------------------
 [121]   # Briarwick Pokémon Center
 Name = Briarwick Pokémon Center
-HealingSpot = 120,28,29
+HealingSpot = 120,44,27
 MapPosition = 0,12,22
 #-------------------------------
 [122]   # Briarwick Mart
@@ -76,13 +76,13 @@ MapPosition = 0,12,22
 Name = Cutter's House
 MapPosition = 0,12,22
 #-------------------------------
-[526]   # Woodward's Hut
-Name = Woodward's Hut
-MapPosition = 0,13,23
-#-------------------------------
 [523]   # Hale Farmhouse
 Name = Hale Farmhouse
 MapPosition = 0,14,23
+#-------------------------------
+[526]   # Woodward's Hut
+Name = Woodward's Hut
+MapPosition = 0,13,23
 #-------------------------------
 [130]   # Loomhouse Gym - Foyer
 Name = Loomhouse Gym - Foyer

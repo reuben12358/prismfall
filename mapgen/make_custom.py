@@ -149,3 +149,42 @@ sheet.save(os.path.join(HERE, 'custom', 'prismfall_custom2.png'))
 json.dump({'passages': pas, 'priorities': pri}, open(os.path.join(HERE, 'custom', 'prismfall_custom2.json'), 'w'))
 bg = Image.new('RGBA', sheet.size, (120, 170, 110, 255)); bg.alpha_composite(sheet); bg.convert('RGB').save('/tmp/w/custom2.png')
 print('custom2', sheet.size)
+
+
+# ------------------------------------------------------------------------------------------------ custom3 (appended LAST to
+# tileset 33 so no earlier offset moves): Briarwick's elder tree, overhead silk garlands and hanging lanterns.
+#   rows 0-7   elder crown 12 wide? no: the sheet is 8 wide, so the crown is two 6x8 halves side by side (cols 0-5 | rows 8-15)
+#   see ELDER below for the exact cells; ids = compose offset 'custom3' + row*8 + col
+ROWS = 32
+sheet = Image.new('RGBA', (256, ROWS * 32), (0, 0, 0, 0))
+pas = [15] * (ROWS * 8); pri = [0] * (ROWS * 8)
+big = Image.new('RGBA', (12 * 32, 8 * 32), (0, 0, 0, 0))
+_s, _p, _q = sheet, pas, pri
+sheet = Image.new('RGBA', (12 * 32, 8 * 32), (0, 0, 0, 0)); pas = [15] * 96; pri = [0] * 96
+crown(12, 8, 77, 0, 0)                       # an elder crown: 12 x 8 tiles of mixed canopy
+big = sheet; sheet, pas, pri = _s, _p, _q
+sheet.alpha_composite(big.crop((0, 0, 192, 256)), (0, 0)); setp(0, 0, 6, 8, 0, 5)       # left half  -> rows 0-7,  cols 0-5
+sheet.alpha_composite(big.crop((192, 0, 384, 256)), (0, 256)); setp(0, 8, 6, 8, 0, 5)   # right half -> rows 8-15, cols 0-5
+bole(8, 7, 0, 16, door=4, window=2)          # elder bole: rows 16-22, door at col 4
+sheet.alpha_composite(tt(S, 522), (6 * 32, (16 + 7 - 3) * 32))                           # second window
+
+
+def garland(kind):
+    def f(d, im):
+        d.line([0, 3, 4, 5, 8, 6, 12, 5, 15, 3], fill=(236, 238, 244, 255))
+        if kind == 'flags':
+            for x, col in ((3, (232, 160, 180)), (11, (170, 200, 236))):
+                d.polygon([(x - 2, 5), (x + 2, 5), (x, 9)], fill=col + (255,), outline=(150, 160, 176, 255))
+        if kind == 'lantern':
+            d.line([8, 6, 8, 8], fill=(150, 160, 176, 255)); d.ellipse([3, 6, 13, 16], fill=(255, 226, 140, 80))
+            d.rectangle([6, 8, 10, 13], fill=(255, 214, 120, 255), outline=(120, 80, 50, 255)); d.point([8, 10], fill=(255, 255, 230, 255))
+        if kind == 'tufts':
+            for x in (4, 12): d.ellipse([x - 1, 4, x + 1, 7], fill=(250, 250, 255, 255))
+    return f
+
+
+draw16(1, 1, garland('plain'), 0, 23, 0, 5); draw16(1, 1, garland('flags'), 1, 23, 0, 5)
+draw16(1, 1, garland('lantern'), 2, 23, 0, 5); draw16(1, 1, garland('tufts'), 3, 23, 0, 5)
+sheet.save(os.path.join(HERE, 'custom', 'prismfall_custom3.png'))
+json.dump({'passages': pas, 'priorities': pri}, open(os.path.join(HERE, 'custom', 'prismfall_custom3.json'), 'w'))
+print('custom3', sheet.size)

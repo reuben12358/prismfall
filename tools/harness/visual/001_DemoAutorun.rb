@@ -7,7 +7,7 @@ module DemoRun
   ROOT = "Captures"
   @rec = nil; @frame = 0; @shots = 0; @every = 3; @auto = false
   class << self
-    attr_accessor :every, :auto, :plan, :turn_limit, :script
+    attr_accessor :every, :auto, :plan, :turn_limit, :script, :started
     def log(msg)
       File.open("#{ROOT}/demo.log", "a") { |f| f.puts(msg) }
     end
@@ -62,9 +62,14 @@ module DemoRun
     end
 
     def run
+      self.started = true
       File.write("#{ROOT}/demo.log", "") rescue Dir.mkdir(ROOT)
       log("boot ok: plugins #{PluginManager.plugins.inspect}")
       Graphics.transition(0)            # Main leaves the screen frozen for the title scene
+      # Battle captures must not depend on the overworld map pipeline: start on the base project's
+      # own start map instead of Prismfall Maps' PRISMFALL_START (those maps need the custom tilesets
+      # installed by mapgen/merge_tilesets.py). Done here because Prismfall Maps loads after this plugin.
+      PrismfallMaps.define_singleton_method(:apply_start_position) { false } if defined?(PrismfallMaps)
       Game.start_new
       $scene.createSpritesets           # what Scene_Map#main would do; EBDX intros snapshot the map
       30.times { Graphics.update; $scene.miniupdate }
@@ -113,12 +118,13 @@ module Graphics
   end
 end
 
-# Auto-advance message boxes: "press" Use every 24th frame while a demo battle runs.
+# Auto-advance message boxes: "press" Use every 24th frame while a demo battle runs, and
+# during boot (first boot of a fresh copy shows Essentials' "N new map(s) ... imported" box).
 module Input
   class << self
     alias demo_autorun_trigger? trigger? unless method_defined?(:demo_autorun_trigger?)
     def trigger?(button)
-      return true if DemoRun.auto && button == Input::USE && DemoRun.frame % 24 == 0
+      return true if (DemoRun.auto || !DemoRun.started) && button == Input::USE && DemoRun.frame % 24 == 0
       return demo_autorun_trigger?(button)
     end
   end

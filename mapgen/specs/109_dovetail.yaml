@@ -1,30 +1,31 @@
 # The Dovetail - Deck (109). WRITTEN BY layouts/dovetail.py.
 id: 109
 name: The Dovetail - Deck
+parent: 0
 bgm: Islands
-parent: 100
+palette: village
+tone: [14, -4, -24, 10]
+fog: {name: prismfall_seamist, opacity: 55, blend: 0, zoom: 100, sx: 3, sy: 0}
 metadata:
   Name: The Dovetail
   MapPosition: [0, 14, 27]
-palette: village
-tone: [14, -4, -24, 10]
 map: |
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~~~wwwwwwwwwwwwwwwwwwwww~~~~~~~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDww~~~~~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDDDw~~~~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDDDDww~~~~~
+  ~~~~~~wwwwwwwwwwwwwwwwww~~~~~~~~~~
+  ~~~~~wDDDDDDDDDDDDDDDDDDww~~~~~~~~
+  ~~~~wDDDDDDDDDDDDDDDDDDDDDw~~~~~~~
+  ~~~~wDDDDDDDDDDDDDDDDDDDDDDww~~~~~
   ~~~wDDDDDDDDDDDDDDDDDDDDDDDDDw~~~~
   ~~~wDDDDDDDDDDDDDDDDDDDDDDDDDDw~~~
   ~~~wDDDDDDDDDDDDDDDDDDDDDDDDDw~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDDDDww~~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDDDw~~~~~~~
-  ~~~wDDDDDDDDDDDDDDDDDDDDww~~~~~~~~
-  ~~~wwwwwwwwwwwwwwwwwwwww~~~~~~~~~~
+  ~~~~wDDDDDDDDDDDDDDDDDDDDDDww~~~~~
+  ~~~~wDDDDDDDDDDDDDDDDDDDDDw~~~~~~~
+  ~~~~~wDDDDDDDDDDDDDDDDDDww~~~~~~~~
+  ~~~~~~wwwDwwwwwwwwwwwwww~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,42 +56,41 @@ heights: |
   0000000000000000000000000000000000
   0000000000000000000000000000000000
 stamps:
-- stamp: p_crates
+- stamp: hs_jonquil_12
   at: [4, 6]
 - stamp: p_crates
-  at: [17, 6]
+  at: [18, 11]
+- stamp: p_crates
+  at: [21, 11]
 - stamp: hs_jonquil_36
-  at: [8, 6]
-- stamp: hs_jonquil_37
   at: [9, 6]
+- stamp: hs_jonquil_37
+  at: [8, 6]
 - stamp: t_barrel
   at: [20, 13]
 - stamp: t_barrel2
   at: [21, 13]
 - stamp: tp_stall_13
-  at: [11, 13]
+  at: [11, 12]
 - stamp: p_lantern
-  at: [12, 6]
+  at: [23, 6]
 - stamp: p_lantern
-  at: [23, 11]
+  at: [7, 12]
 - stamp: tp_stall_01
-  at: [4, 14]
+  at: [12, 14]
 - stamp: hs_jonquil_35
   at: [18, 13]
 - stamp: p_net
   at: [24, 8]
 - stamp: t_crate_pair
-  at: [5, 9]
+  at: [5, 13]
+- stamp: p_banner3
+  at: [19, 8]
+- stamp: hs_jonquil_07
+  at: [28, 9]
+- stamp: tp_barrel_06
+  at: [25, 11]
 tiles:
-- tile: 3831
-  at: [3, 5]
-  layer: 0
-- tile: 3831
-  at: [4, 5]
-  layer: 0
-- tile: 3831
-  at: [5, 5]
-  layer: 0
 - tile: 3831
   at: [6, 5]
   layer: 0
@@ -146,7 +146,7 @@ tiles:
   at: [23, 5]
   layer: 0
 - tile: 3831
-  at: [3, 6]
+  at: [5, 6]
   layer: 0
 - tile: 3831
   at: [24, 6]
@@ -155,13 +155,13 @@ tiles:
   at: [25, 6]
   layer: 0
 - tile: 3831
-  at: [3, 7]
+  at: [4, 7]
   layer: 0
 - tile: 3831
   at: [26, 7]
   layer: 0
 - tile: 3831
-  at: [3, 8]
+  at: [4, 8]
   layer: 0
 - tile: 3831
   at: [27, 8]
@@ -188,7 +188,7 @@ tiles:
   at: [29, 11]
   layer: 0
 - tile: 3831
-  at: [3, 12]
+  at: [4, 12]
   layer: 0
 - tile: 3831
   at: [27, 12]
@@ -197,28 +197,19 @@ tiles:
   at: [28, 12]
   layer: 0
 - tile: 3831
-  at: [3, 13]
+  at: [4, 13]
   layer: 0
 - tile: 3831
   at: [26, 13]
   layer: 0
 - tile: 3831
-  at: [3, 14]
+  at: [5, 14]
   layer: 0
 - tile: 3831
   at: [24, 14]
   layer: 0
 - tile: 3831
   at: [25, 14]
-  layer: 0
-- tile: 3831
-  at: [3, 15]
-  layer: 0
-- tile: 3831
-  at: [4, 15]
-  layer: 0
-- tile: 3831
-  at: [5, 15]
   layer: 0
 - tile: 3831
   at: [6, 15]
@@ -278,99 +269,787 @@ tileblocks: []
 events:
 - type: event
   name: Prologue intro
-  at: [1, 1]
   pages:
-  - trigger: autorun
-    commands:
+  - commands:
     - tone: [-255, -255, -255, 0, 0]
-    - A ship's horn, somewhere in the dark.
-    - Spring, AF 300. The Concert of Regions has sealed the borders of Velmora.
-    - This is the final civilian crossing.
-    - The cabin lamp flickers on. In the black porthole glass, a reflection looks back at you.
+    - {script: 'pfm_card(:PF_PROLOGUE_CARD, "Spring, AF 300.", "The Concert of Regions has sealed the borders of Velmora.", "This is the final civilian
+        crossing.")'}
+    - In the black porthole glass, a reflection looks back at you.
     - choices: [That's me. (Style A), That's me. (Style B)]
-      cancel: 0
       branches:
       - - {script: pbChangePlayer(1)}
       - - {script: pbChangePlayer(2)}
-    - tone: [-40, -55, -20, 40, 30]
+      cancel: 0
+    - tone: [14, -4, -24, 10, 30]
     - {wait: 30}
-    - Up on deck, the dusk is cold and salt-bright. You stand at the rail with one bag and your mother's letter.
-    - 'Captain Edda Morrow: Don''t lean on my rail like that, sprog - you''ll - huh.'
-    - She stares a beat too long.
-    - 'Captain Edda Morrow: ...Never mind. Name for the manifest? Last crossing. I''m not losing anybody off my books.'
+    - The deck. You stand at the port rail, one bag at your feet. Gulls. On the horizon, a low line of eighteen colored glows.
+    - 'Deckhand: Twenty minutes to the Landing! Mind your bags, mind your feet, mind the Captain!'
+    - 'Deckhand: And the manifest. Captain''s orders: last crossing, nobody goes missing off her books. Name?'
     - {label: Manifest name}
     - {script: pbTrainerName}
-    - 'Captain Edda Morrow: \PN. That right?'
-    - choices: [That's right, 'No, let me spell it']
-      cancel: 0
+    - 'Deckhand: \PN. That right?'
+    - choices: [That's right., 'No, let me spell it.']
       branches:
       - []
       - - {jump_label: Manifest name}
-    - 'Captain Edda Morrow: \PN it is. Mind the gap when we dock.'
+      cancel: 0
+    - move:
+        who: Deckhand
+        route: [left, left, left]
+        wait: true
     - {script: $player.has_running_shoes = true}
     - {script: Prismfall.choose_difficulty}
     - switch: [LARCH_AT_TIDEWATCH, true]
     - var: [STORY_ACT, 0]
     - var: [STORY_CHAPTER, 0]
     - selfswitch: [A, true]
-  - cond: {self: A}
-- type: npc
-  name: Captain Edda
-  at: [10, 7]
-  sprite: trainer_SAILOR
-  dir: down
-  text: 'Captain Edda Morrow: Last crossing I''ll ever make. Thirty years on this strait. Mind the rail, sprog.'
-- type: npc
-  name: Deckhand
-  at: [6, 13]
-  sprite: trainer_SAILOR
-  dir: right
-  move: random
-  text: 'When I was a lad you could only see the Imprints on a clear night.
-
-    Now you see ''em through fog.'
+    trigger: autorun
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [16, 13]
 - type: sign
-  at: [27, 10]
-  post: false
-  name: Horizon
-  text: On the horizon, eighteen colored glows sit low over the sea.
+  name: Rail sign
+  post: true
+  text: DO NOT LEAN ON RAIL.
+  commands:
+  - DO NOT LEAN ON RAIL. — Capt. E. Morrow
+  - if: $game_player.direction == 8
+    then: [You are leaning on it.]
+  at: [12, 5]
+- type: event
+  name: Mug ring
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands: [A ring of cold tea. He drank it black.]
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [13, 5]
+- type: event
+  name: Rail watch 1
+  pages:
+  - commands:
+    - else:
+      - if: '!pfm?(:dove_voss)'
+        then:
+        - move:
+            route: [toward_player, toward_player, toward_player, face_player]
+            wait: true
+            who: Aurelian Voss
+        - He leans on the rail right next to the sign. He holds a chipped white mug with a faded sunburst.
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: First crossing? Everyone goes quiet when they see the lights.'
+        - '\pf[EDDA,angry,anger,Captain Edda]Edda: RAIL!'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: I believe the rail has no objection, Captain.'
+        - '\pf[EDDA,angry,,Captain Edda]Edda: Nobody asked the passengers in the nice coats!'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: She''s been shouting at me since I was a linesman. It''s how I know I''m home.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: I''ve spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: So. You''re coming in on the day everyone else wishes they could get out. That takes nerve or bad luck.'
+        - branches:
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Good. Velmora runs on it.']
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Then you''ll fit right in.']
+          - ['\pf[VOSS,neutral,,Aurelian Voss]Voss: Or grief. Forgive me. I shouldn''t guess.']
+          cancel: 3
+          choices: [Nerve., Bad luck., '...']
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Are you challenging the gyms? You''ve got the look. Eighteen Wardens, eighteen badges. Nobody''s done all
+          eighteen in ten years.'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: Here. You''ll want one of these.'
+        - {script: 'pfm_item(:BADGECASE, 1, "Badge Case")'}
+        - 'A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: We make them for the League anyway. Call it a welcome from a fellow traveler.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: And this, if you''ll take it. A Meridian Fellowship. A little money each month, a discount at any Mart.
+          We give them to young trainers with promise.'
+        - branches:
+          - - {script: 'pf_choose(:pro_fellowship, :accept)'}
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - {script: pfm_money(3000)}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: No, I insist. Somebody should be kind to you on a day like this.'
+          - - {script: 'pf_choose(:pro_fellowship, :decline)'}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: Independent. Good. Keep that. It''s worth more than the card.'
+          - - {script: 'pf_choose(:pro_fellowship, :silent)'}
+            - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Think about it.'
+            - He sets the card on the rail.
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - It is not activated. A Mart clerk could switch it on.
+            - {script: 'pfm_set(:fellowship_off)'}
+          cancel: 0
+          choices: [Thank you., 'No, thank you.', '...']
+        - The ship's horn sounds, long and low.
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: That''s the Landing. Aurelian Voss. If you ever need anything in Lumen City, ask for me by name. They''ll
+          laugh, and then they''ll fetch me.'
+        - move:
+            route:
+            - through_on
+            - away_player
+            - away_player
+            - away_player
+            - turn_180
+            - wait 20
+            - turn_180
+            - away_player
+            - away_player
+            - {opacity: 0}
+            wait: true
+            who: Aurelian Voss
+        - {script: 'pfm_set(:dove_voss)'}
+        - switch: [PRO_FERRY_DONE, true]
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The Dovetail noses in against an old stone pier. Ropes thump. The gangway clatters down aft.
+        - tone: [14, -4, -24, 10, 20]
+        - {wait: 20}
+        - {script: Prismfall.checkpoint}
+      if: '!pfm?(:dove_edda)'
+      then:
+      - move:
+          route: [toward_player, toward_player]
+          wait: true
+          who: Captain Edda
+      - '\pf[EDDA,angry,anger,Captain Edda]Edda: Oi! Sprog! Can you read?'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Then you''re doing it on purpose. That''s worse.']
+        - ['\pf[EDDA,shocked,sweat,Captain Edda]Edda: ...Oh. Oh, stars. Right. That''s a D. That one''s an O.']
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Strong silent type. Wonderful. I''ll just talk to the rail, shall I?', '\pf[EDDA,angry,,Captain Edda]Edda:
+            Rail! Tell the sprog to get off you!']
+        cancel: 3
+        choices: [Yes., No., '...']
+      - move:
+          route: [toward_player]
+          wait: true
+          who: Captain Edda
+      - anim: [Captain Edda, 3]
+      - {wait: 40}
+      - '\pf[EDDA,shocked,dots,Captain Edda]Edda: Don''t lean on my rail like that, you''ll— huh.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: ...Never mind. You stand how you like.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Mind the gap when we dock. And don''t look down at the water after dark.'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Because I said, and it''s my boat.']
+        - ['\pf[EDDA,sad,,Captain Edda]Edda: ...Good. Somebody used to ask me that every crossing.']
+        cancel: 2
+        choices: ['Why not?', '...']
+      - move:
+          route:
+          - through_on
+          - {script: 'moveto(6, 9)'}
+          - through_off
+          - turn_down
+          wait: true
+          who: Captain Edda
+      - {script: 'pfm_set(:dove_edda)'}
+    move: fixed
+    trigger: touch
+  - commands: []
+    cond: {switch: PRO_FERRY_DONE}
+    move: fixed
+    trigger: action
+  at: [10, 6]
+- type: event
+  name: Rail watch 2
+  pages:
+  - commands:
+    - else:
+      - if: '!pfm?(:dove_voss)'
+        then:
+        - move:
+            route: [toward_player, toward_player, toward_player, face_player]
+            wait: true
+            who: Aurelian Voss
+        - He leans on the rail right next to the sign. He holds a chipped white mug with a faded sunburst.
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: First crossing? Everyone goes quiet when they see the lights.'
+        - '\pf[EDDA,angry,anger,Captain Edda]Edda: RAIL!'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: I believe the rail has no objection, Captain.'
+        - '\pf[EDDA,angry,,Captain Edda]Edda: Nobody asked the passengers in the nice coats!'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: She''s been shouting at me since I was a linesman. It''s how I know I''m home.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: I''ve spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: So. You''re coming in on the day everyone else wishes they could get out. That takes nerve or bad luck.'
+        - branches:
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Good. Velmora runs on it.']
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Then you''ll fit right in.']
+          - ['\pf[VOSS,neutral,,Aurelian Voss]Voss: Or grief. Forgive me. I shouldn''t guess.']
+          cancel: 3
+          choices: [Nerve., Bad luck., '...']
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Are you challenging the gyms? You''ve got the look. Eighteen Wardens, eighteen badges. Nobody''s done all
+          eighteen in ten years.'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: Here. You''ll want one of these.'
+        - {script: 'pfm_item(:BADGECASE, 1, "Badge Case")'}
+        - 'A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: We make them for the League anyway. Call it a welcome from a fellow traveler.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: And this, if you''ll take it. A Meridian Fellowship. A little money each month, a discount at any Mart.
+          We give them to young trainers with promise.'
+        - branches:
+          - - {script: 'pf_choose(:pro_fellowship, :accept)'}
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - {script: pfm_money(3000)}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: No, I insist. Somebody should be kind to you on a day like this.'
+          - - {script: 'pf_choose(:pro_fellowship, :decline)'}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: Independent. Good. Keep that. It''s worth more than the card.'
+          - - {script: 'pf_choose(:pro_fellowship, :silent)'}
+            - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Think about it.'
+            - He sets the card on the rail.
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - It is not activated. A Mart clerk could switch it on.
+            - {script: 'pfm_set(:fellowship_off)'}
+          cancel: 0
+          choices: [Thank you., 'No, thank you.', '...']
+        - The ship's horn sounds, long and low.
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: That''s the Landing. Aurelian Voss. If you ever need anything in Lumen City, ask for me by name. They''ll
+          laugh, and then they''ll fetch me.'
+        - move:
+            route:
+            - through_on
+            - away_player
+            - away_player
+            - away_player
+            - turn_180
+            - wait 20
+            - turn_180
+            - away_player
+            - away_player
+            - {opacity: 0}
+            wait: true
+            who: Aurelian Voss
+        - {script: 'pfm_set(:dove_voss)'}
+        - switch: [PRO_FERRY_DONE, true]
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The Dovetail noses in against an old stone pier. Ropes thump. The gangway clatters down aft.
+        - tone: [14, -4, -24, 10, 20]
+        - {wait: 20}
+        - {script: Prismfall.checkpoint}
+      if: '!pfm?(:dove_edda)'
+      then:
+      - move:
+          route: [toward_player, toward_player]
+          wait: true
+          who: Captain Edda
+      - '\pf[EDDA,angry,anger,Captain Edda]Edda: Oi! Sprog! Can you read?'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Then you''re doing it on purpose. That''s worse.']
+        - ['\pf[EDDA,shocked,sweat,Captain Edda]Edda: ...Oh. Oh, stars. Right. That''s a D. That one''s an O.']
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Strong silent type. Wonderful. I''ll just talk to the rail, shall I?', '\pf[EDDA,angry,,Captain Edda]Edda:
+            Rail! Tell the sprog to get off you!']
+        cancel: 3
+        choices: [Yes., No., '...']
+      - move:
+          route: [toward_player]
+          wait: true
+          who: Captain Edda
+      - anim: [Captain Edda, 3]
+      - {wait: 40}
+      - '\pf[EDDA,shocked,dots,Captain Edda]Edda: Don''t lean on my rail like that, you''ll— huh.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: ...Never mind. You stand how you like.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Mind the gap when we dock. And don''t look down at the water after dark.'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Because I said, and it''s my boat.']
+        - ['\pf[EDDA,sad,,Captain Edda]Edda: ...Good. Somebody used to ask me that every crossing.']
+        cancel: 2
+        choices: ['Why not?', '...']
+      - move:
+          route:
+          - through_on
+          - {script: 'moveto(6, 9)'}
+          - through_off
+          - turn_down
+          wait: true
+          who: Captain Edda
+      - {script: 'pfm_set(:dove_edda)'}
+    move: fixed
+    trigger: touch
+  - commands: []
+    cond: {switch: PRO_FERRY_DONE}
+    move: fixed
+    trigger: action
+  at: [11, 6]
+- type: event
+  name: Rail watch 3
+  pages:
+  - commands:
+    - else:
+      - if: '!pfm?(:dove_voss)'
+        then:
+        - move:
+            route: [toward_player, toward_player, toward_player, face_player]
+            wait: true
+            who: Aurelian Voss
+        - He leans on the rail right next to the sign. He holds a chipped white mug with a faded sunburst.
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: First crossing? Everyone goes quiet when they see the lights.'
+        - '\pf[EDDA,angry,anger,Captain Edda]Edda: RAIL!'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: I believe the rail has no objection, Captain.'
+        - '\pf[EDDA,angry,,Captain Edda]Edda: Nobody asked the passengers in the nice coats!'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: She''s been shouting at me since I was a linesman. It''s how I know I''m home.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: I''ve spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: So. You''re coming in on the day everyone else wishes they could get out. That takes nerve or bad luck.'
+        - branches:
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Good. Velmora runs on it.']
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Then you''ll fit right in.']
+          - ['\pf[VOSS,neutral,,Aurelian Voss]Voss: Or grief. Forgive me. I shouldn''t guess.']
+          cancel: 3
+          choices: [Nerve., Bad luck., '...']
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Are you challenging the gyms? You''ve got the look. Eighteen Wardens, eighteen badges. Nobody''s done all
+          eighteen in ten years.'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: Here. You''ll want one of these.'
+        - {script: 'pfm_item(:BADGECASE, 1, "Badge Case")'}
+        - 'A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: We make them for the League anyway. Call it a welcome from a fellow traveler.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: And this, if you''ll take it. A Meridian Fellowship. A little money each month, a discount at any Mart.
+          We give them to young trainers with promise.'
+        - branches:
+          - - {script: 'pf_choose(:pro_fellowship, :accept)'}
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - {script: pfm_money(3000)}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: No, I insist. Somebody should be kind to you on a day like this.'
+          - - {script: 'pf_choose(:pro_fellowship, :decline)'}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: Independent. Good. Keep that. It''s worth more than the card.'
+          - - {script: 'pf_choose(:pro_fellowship, :silent)'}
+            - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Think about it.'
+            - He sets the card on the rail.
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - It is not activated. A Mart clerk could switch it on.
+            - {script: 'pfm_set(:fellowship_off)'}
+          cancel: 0
+          choices: [Thank you., 'No, thank you.', '...']
+        - The ship's horn sounds, long and low.
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: That''s the Landing. Aurelian Voss. If you ever need anything in Lumen City, ask for me by name. They''ll
+          laugh, and then they''ll fetch me.'
+        - move:
+            route:
+            - through_on
+            - away_player
+            - away_player
+            - away_player
+            - turn_180
+            - wait 20
+            - turn_180
+            - away_player
+            - away_player
+            - {opacity: 0}
+            wait: true
+            who: Aurelian Voss
+        - {script: 'pfm_set(:dove_voss)'}
+        - switch: [PRO_FERRY_DONE, true]
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The Dovetail noses in against an old stone pier. Ropes thump. The gangway clatters down aft.
+        - tone: [14, -4, -24, 10, 20]
+        - {wait: 20}
+        - {script: Prismfall.checkpoint}
+      if: '!pfm?(:dove_edda)'
+      then:
+      - move:
+          route: [toward_player, toward_player]
+          wait: true
+          who: Captain Edda
+      - '\pf[EDDA,angry,anger,Captain Edda]Edda: Oi! Sprog! Can you read?'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Then you''re doing it on purpose. That''s worse.']
+        - ['\pf[EDDA,shocked,sweat,Captain Edda]Edda: ...Oh. Oh, stars. Right. That''s a D. That one''s an O.']
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Strong silent type. Wonderful. I''ll just talk to the rail, shall I?', '\pf[EDDA,angry,,Captain Edda]Edda:
+            Rail! Tell the sprog to get off you!']
+        cancel: 3
+        choices: [Yes., No., '...']
+      - move:
+          route: [toward_player]
+          wait: true
+          who: Captain Edda
+      - anim: [Captain Edda, 3]
+      - {wait: 40}
+      - '\pf[EDDA,shocked,dots,Captain Edda]Edda: Don''t lean on my rail like that, you''ll— huh.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: ...Never mind. You stand how you like.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Mind the gap when we dock. And don''t look down at the water after dark.'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Because I said, and it''s my boat.']
+        - ['\pf[EDDA,sad,,Captain Edda]Edda: ...Good. Somebody used to ask me that every crossing.']
+        cancel: 2
+        choices: ['Why not?', '...']
+      - move:
+          route:
+          - through_on
+          - {script: 'moveto(6, 9)'}
+          - through_off
+          - turn_down
+          wait: true
+          who: Captain Edda
+      - {script: 'pfm_set(:dove_edda)'}
+    move: fixed
+    trigger: touch
+  - commands: []
+    cond: {switch: PRO_FERRY_DONE}
+    move: fixed
+    trigger: action
+  at: [12, 6]
+- type: event
+  name: Rail watch 4
+  pages:
+  - commands:
+    - else:
+      - if: '!pfm?(:dove_voss)'
+        then:
+        - move:
+            route: [toward_player, toward_player, toward_player, face_player]
+            wait: true
+            who: Aurelian Voss
+        - He leans on the rail right next to the sign. He holds a chipped white mug with a faded sunburst.
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: First crossing? Everyone goes quiet when they see the lights.'
+        - '\pf[EDDA,angry,anger,Captain Edda]Edda: RAIL!'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: I believe the rail has no objection, Captain.'
+        - '\pf[EDDA,angry,,Captain Edda]Edda: Nobody asked the passengers in the nice coats!'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: She''s been shouting at me since I was a linesman. It''s how I know I''m home.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: I''ve spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: So. You''re coming in on the day everyone else wishes they could get out. That takes nerve or bad luck.'
+        - branches:
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Good. Velmora runs on it.']
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Then you''ll fit right in.']
+          - ['\pf[VOSS,neutral,,Aurelian Voss]Voss: Or grief. Forgive me. I shouldn''t guess.']
+          cancel: 3
+          choices: [Nerve., Bad luck., '...']
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Are you challenging the gyms? You''ve got the look. Eighteen Wardens, eighteen badges. Nobody''s done all
+          eighteen in ten years.'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: Here. You''ll want one of these.'
+        - {script: 'pfm_item(:BADGECASE, 1, "Badge Case")'}
+        - 'A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: We make them for the League anyway. Call it a welcome from a fellow traveler.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: And this, if you''ll take it. A Meridian Fellowship. A little money each month, a discount at any Mart.
+          We give them to young trainers with promise.'
+        - branches:
+          - - {script: 'pf_choose(:pro_fellowship, :accept)'}
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - {script: pfm_money(3000)}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: No, I insist. Somebody should be kind to you on a day like this.'
+          - - {script: 'pf_choose(:pro_fellowship, :decline)'}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: Independent. Good. Keep that. It''s worth more than the card.'
+          - - {script: 'pf_choose(:pro_fellowship, :silent)'}
+            - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Think about it.'
+            - He sets the card on the rail.
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - It is not activated. A Mart clerk could switch it on.
+            - {script: 'pfm_set(:fellowship_off)'}
+          cancel: 0
+          choices: [Thank you., 'No, thank you.', '...']
+        - The ship's horn sounds, long and low.
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: That''s the Landing. Aurelian Voss. If you ever need anything in Lumen City, ask for me by name. They''ll
+          laugh, and then they''ll fetch me.'
+        - move:
+            route:
+            - through_on
+            - away_player
+            - away_player
+            - away_player
+            - turn_180
+            - wait 20
+            - turn_180
+            - away_player
+            - away_player
+            - {opacity: 0}
+            wait: true
+            who: Aurelian Voss
+        - {script: 'pfm_set(:dove_voss)'}
+        - switch: [PRO_FERRY_DONE, true]
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The Dovetail noses in against an old stone pier. Ropes thump. The gangway clatters down aft.
+        - tone: [14, -4, -24, 10, 20]
+        - {wait: 20}
+        - {script: Prismfall.checkpoint}
+      if: '!pfm?(:dove_edda)'
+      then:
+      - move:
+          route: [toward_player, toward_player]
+          wait: true
+          who: Captain Edda
+      - '\pf[EDDA,angry,anger,Captain Edda]Edda: Oi! Sprog! Can you read?'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Then you''re doing it on purpose. That''s worse.']
+        - ['\pf[EDDA,shocked,sweat,Captain Edda]Edda: ...Oh. Oh, stars. Right. That''s a D. That one''s an O.']
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Strong silent type. Wonderful. I''ll just talk to the rail, shall I?', '\pf[EDDA,angry,,Captain Edda]Edda:
+            Rail! Tell the sprog to get off you!']
+        cancel: 3
+        choices: [Yes., No., '...']
+      - move:
+          route: [toward_player]
+          wait: true
+          who: Captain Edda
+      - anim: [Captain Edda, 3]
+      - {wait: 40}
+      - '\pf[EDDA,shocked,dots,Captain Edda]Edda: Don''t lean on my rail like that, you''ll— huh.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: ...Never mind. You stand how you like.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Mind the gap when we dock. And don''t look down at the water after dark.'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Because I said, and it''s my boat.']
+        - ['\pf[EDDA,sad,,Captain Edda]Edda: ...Good. Somebody used to ask me that every crossing.']
+        cancel: 2
+        choices: ['Why not?', '...']
+      - move:
+          route:
+          - through_on
+          - {script: 'moveto(6, 9)'}
+          - through_off
+          - turn_down
+          wait: true
+          who: Captain Edda
+      - {script: 'pfm_set(:dove_edda)'}
+    move: fixed
+    trigger: touch
+  - commands: []
+    cond: {switch: PRO_FERRY_DONE}
+    move: fixed
+    trigger: action
+  at: [13, 6]
+- type: event
+  name: Rail watch 5
+  pages:
+  - commands:
+    - else:
+      - if: '!pfm?(:dove_voss)'
+        then:
+        - move:
+            route: [toward_player, toward_player, toward_player, face_player]
+            wait: true
+            who: Aurelian Voss
+        - He leans on the rail right next to the sign. He holds a chipped white mug with a faded sunburst.
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: First crossing? Everyone goes quiet when they see the lights.'
+        - '\pf[EDDA,angry,anger,Captain Edda]Edda: RAIL!'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: I believe the rail has no objection, Captain.'
+        - '\pf[EDDA,angry,,Captain Edda]Edda: Nobody asked the passengers in the nice coats!'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: She''s been shouting at me since I was a linesman. It''s how I know I''m home.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: I''ve spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: So. You''re coming in on the day everyone else wishes they could get out. That takes nerve or bad luck.'
+        - branches:
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Good. Velmora runs on it.']
+          - ['\pf[VOSS,happy,,Aurelian Voss]Voss: Then you''ll fit right in.']
+          - ['\pf[VOSS,neutral,,Aurelian Voss]Voss: Or grief. Forgive me. I shouldn''t guess.']
+          cancel: 3
+          choices: [Nerve., Bad luck., '...']
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Are you challenging the gyms? You''ve got the look. Eighteen Wardens, eighteen badges. Nobody''s done all
+          eighteen in ten years.'
+        - '\pf[VOSS,happy,,Aurelian Voss]Voss: Here. You''ll want one of these.'
+        - {script: 'pfm_item(:BADGECASE, 1, "Badge Case")'}
+        - 'A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: We make them for the League anyway. Call it a welcome from a fellow traveler.'
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: And this, if you''ll take it. A Meridian Fellowship. A little money each month, a discount at any Mart.
+          We give them to young trainers with promise.'
+        - branches:
+          - - {script: 'pf_choose(:pro_fellowship, :accept)'}
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - {script: pfm_money(3000)}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: No, I insist. Somebody should be kind to you on a day like this.'
+          - - {script: 'pf_choose(:pro_fellowship, :decline)'}
+            - '\pf[VOSS,happy,,Aurelian Voss]Voss: Independent. Good. Keep that. It''s worth more than the card.'
+          - - {script: 'pf_choose(:pro_fellowship, :silent)'}
+            - '\pf[VOSS,neutral,,Aurelian Voss]Voss: Think about it.'
+            - He sets the card on the rail.
+            - {script: 'pfm_item(:FELLOWSHIPCARD, 1, "Fellowship Card")'}
+            - It is not activated. A Mart clerk could switch it on.
+            - {script: 'pfm_set(:fellowship_off)'}
+          cancel: 0
+          choices: [Thank you., 'No, thank you.', '...']
+        - The ship's horn sounds, long and low.
+        - '\pf[VOSS,neutral,,Aurelian Voss]Voss: That''s the Landing. Aurelian Voss. If you ever need anything in Lumen City, ask for me by name. They''ll
+          laugh, and then they''ll fetch me.'
+        - move:
+            route:
+            - through_on
+            - away_player
+            - away_player
+            - away_player
+            - turn_180
+            - wait 20
+            - turn_180
+            - away_player
+            - away_player
+            - {opacity: 0}
+            wait: true
+            who: Aurelian Voss
+        - {script: 'pfm_set(:dove_voss)'}
+        - switch: [PRO_FERRY_DONE, true]
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The Dovetail noses in against an old stone pier. Ropes thump. The gangway clatters down aft.
+        - tone: [14, -4, -24, 10, 20]
+        - {wait: 20}
+        - {script: Prismfall.checkpoint}
+      if: '!pfm?(:dove_edda)'
+      then:
+      - move:
+          route: [toward_player, toward_player]
+          wait: true
+          who: Captain Edda
+      - '\pf[EDDA,angry,anger,Captain Edda]Edda: Oi! Sprog! Can you read?'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Then you''re doing it on purpose. That''s worse.']
+        - ['\pf[EDDA,shocked,sweat,Captain Edda]Edda: ...Oh. Oh, stars. Right. That''s a D. That one''s an O.']
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Strong silent type. Wonderful. I''ll just talk to the rail, shall I?', '\pf[EDDA,angry,,Captain Edda]Edda:
+            Rail! Tell the sprog to get off you!']
+        cancel: 3
+        choices: [Yes., No., '...']
+      - move:
+          route: [toward_player]
+          wait: true
+          who: Captain Edda
+      - anim: [Captain Edda, 3]
+      - {wait: 40}
+      - '\pf[EDDA,shocked,dots,Captain Edda]Edda: Don''t lean on my rail like that, you''ll— huh.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: ...Never mind. You stand how you like.'
+      - '\pf[EDDA,neutral,,Captain Edda]Edda: Mind the gap when we dock. And don''t look down at the water after dark.'
+      - branches:
+        - ['\pf[EDDA,deadpan,,Captain Edda]Edda: Because I said, and it''s my boat.']
+        - ['\pf[EDDA,sad,,Captain Edda]Edda: ...Good. Somebody used to ask me that every crossing.']
+        cancel: 2
+        choices: ['Why not?', '...']
+      - move:
+          route:
+          - through_on
+          - {script: 'moveto(6, 9)'}
+          - through_off
+          - turn_down
+          wait: true
+          who: Captain Edda
+      - {script: 'pfm_set(:dove_edda)'}
+    move: fixed
+    trigger: touch
+  - commands: []
+    cond: {switch: PRO_FERRY_DONE}
+    move: fixed
+    trigger: action
+  at: [14, 6]
+- type: event
+  name: Captain Edda
+  pages:
+  - commands: ['\pf[EDDA,neutral]Edda: Thirty-one years on this strait. Never thought I''d see them close it.', '\pf[EDDA,deadpan]Edda: Don''t touch the
+        wheel. Don''t touch the rail. Touch the horizon if you like, it''s free.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 14, dir: down}
+  - commands: ['\pf[EDDA,neutral]Edda: That''s the Landing. Down the gangway, sprog. Mind the gap.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 14, dir: down}
+    cond: {switch: PRO_FERRY_DONE}
+  at: [6, 9]
 - type: event
   name: Aurelian Voss
-  at: [22, 8]
   pages:
-  - graphic: {sprite: trainer_GENTLEMAN, dir: left}
-    commands:
-    - A man in a plain coat leans on the rail, holding a chipped Meridian mug.
-    - 'Man: First crossing? Everyone gets quiet when they see the lights.'
-    - 'Aurelian Voss: Aurelian. I''ve just come from the Concert summit - I begged them to keep Velmora''s trade open. They didn''t listen.'
-    - 'Aurelian Voss: Here. We make these for the League anyway. Call it a welcome from a fellow traveler.'
-    - You received a Meridian badge case!
-    - 'Aurelian Voss: And a Meridian Fellowship card - a small stipend, a discount at any Mart. No strings.'
-    - choices: [Accept the Fellowship, Politely decline, Say nothing]
-      cancel: 0
-      branches:
-      - - {script: 'pf_choose(:pro_fellowship, :accept)
-
-            $player.money += 1000'}
-        - 'Aurelian Voss: Good. Velmora needs people who say yes to things.'
-        - You received a Fellowship stipend of $1000!
-      - - {script: 'pf_choose(:pro_fellowship, :decline)'}
-        - 'Aurelian Voss: Independent. Good.'
-      - - {script: 'pf_choose(:pro_fellowship, :silent)'}
-        - He smiles, and leaves the card on the rail anyway.
-    - A long horn. The lights of Ferrow's Landing slide out of the fog.
-    - switch: [PRO_FERRY_DONE, true]
-    - tone: [-255, -255, -255, 0, 20]
-    - {wait: 20}
+  - commands: [A man in a good coat watches the lights over the rim of a chipped mug. He hasn't noticed you yet.]
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: left}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [21, 8]
+- type: event
+  name: Gangway
+  pages:
+  - commands:
+    - The gangway is roped off. It's a sailor's knot. It's a good knot.
+    - move:
+        who: player
+        route: [up]
+        wait: true
+    trigger: touch
+    move: fixed
+  - commands:
+    - {se: Door exit}
+    - tone: [-255, -255, -255, 0, 12]
+    - {wait: 14}
     - transfer: {map: 100, x: 34, y: 55, dir: up}
-    - tone: [0, 0, 0, 0, 20]
-  - cond: {switch: PRO_FERRY_DONE}
+    - tone: [0, 0, 0, 0, 12]
+    trigger: touch
+    move: fixed
+    cond: {switch: PRO_FERRY_DONE}
+  at: [9, 15]
+- type: sign
+  name: Horizon
+  post: false
+  text: 'Eighteen lights sit low over the sea, each a different color.
+
+    One of them, far to the north, flickers.'
+  at: [30, 10]
+- type: event
+  name: HiddenItem coiled rope
+  pages:
+  - commands:
+    - if: pbItemBall(:POTION)
+      then:
+      - Someone's seasick remedy. It's just a Potion with a lemon drawn on it.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [27, 12]
+- type: event
+  name: Deckhand
+  pages:
+  - commands: ['Deckhand: Twenty minutes, I said! It''s been twenty minutes for an hour. The Captain''s going slow on purpose.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 15, dir: right}
+  at: [8, 12]
+- type: event
+  name: Old Man
+  pages:
+  - commands: ['Old Man: See the colors on the skyline? Eighteen of ''em. That''s Velmora.', 'Old Man: When I was a lad you only saw the Imprints on a clear
+        night. Now you see ''em through fog.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 06, dir: up}
+  at: [18, 6]
+- type: event
+  name: Woman with crate
+  pages:
+  - commands: ['Woman with crate: I''m going home to Saltmere. My sister says don''t. I said, where else would I go? I get ill anywhere else.', 'Woman with
+        crate: Three weeks abroad and I was grey as dishwater. They call it wilting. You''ll see.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 22, dir: down}
+  at: [24, 13]
+- type: event
+  name: Boy
+  pages:
+  - commands: ['Boy: Mum says when we land a machine tells you what color you are! I want to be red.', 'Boy''s Mother: You''ll be green like the rest of
+        us, love. We''re Briarwick.', 'Boy: ...Can I be green AND red?']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 02, dir: up}
+  at: [16, 7]
+- type: event
+  name: Boy's Mother
+  pages:
+  - commands: ['Boy''s Mother: You''ll be green like the rest of us, love. We''re Briarwick.', 'Boy: ...Can I be green AND red?']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 04, dir: left}
+  at: [17, 8]
+- type: event
+  name: Sailor
+  pages:
+  - commands: ['Sailor: Last crossing. After tonight the Concert''s cutters turn back anything bigger than a gull.', 'Sailor: Captain says she''ll tie up
+        at the Landing and learn to knit. She won''t.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SAILOR, dir: down}
+  at: [26, 9]
+- type: event
+  name: Seasick Man
+  pages:
+  - commands: ['Seasick Man: Don''t talk to me. If I open my mouth, more than words come out.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 05, dir: right}
+  at: [4, 11]
 - type: warp
   name: Cabin hatch
-  at: [15, 10]
   link: DOVE_CABIN
-  arrive: [15, 11, down]
   se: Door exit
+  at: [15, 10]
+  arrive: [15, 11, down]
 ---
 id: 110
 name: The Dovetail - Cabin
@@ -722,39 +1401,24 @@ tiles:
 - tile: 5571
   at: [3, 4]
   layer: 0
-- tile: 5564
-  at: [11, 3]
-  layer: 0
-- tile: 5572
-  at: [11, 4]
-  layer: 0
 - tile: 5361
   at: [6, 11]
   layer: 0
 - tile: 5550
   at: [6, 12]
   layer: 0
-- tile: 5512
-  at: [6, 11]
-  layer: 1
 - tile: 5362
   at: [7, 11]
   layer: 0
 - tile: 5550
   at: [7, 12]
   layer: 0
-- tile: 5513
-  at: [7, 11]
-  layer: 1
 - tile: 5363
   at: [8, 11]
   layer: 0
 - tile: 5550
   at: [8, 12]
   layer: 0
-- tile: 5514
-  at: [8, 11]
-  layer: 1
 - tile: 5554
   at: [5, 11]
   layer: 0
@@ -803,17 +1467,29 @@ tiles:
 - tile: 4159
   at: [6, 7]
   layer: 1
-- tile: 2512
+- tile: 2448
+  at: [8, 4]
+  layer: 2
+- tile: 2449
+  at: [9, 4]
+  layer: 2
+- tile: 2450
+  at: [10, 4]
+  layer: 2
+- tile: 2451
+  at: [11, 4]
+  layer: 2
+- tile: 2456
   at: [8, 5]
-  layer: 2
-- tile: 2513
-  at: [9, 5]
-  layer: 2
-- tile: 2520
-  at: [8, 6]
   layer: 1
-- tile: 2521
-  at: [9, 6]
+- tile: 2457
+  at: [9, 5]
+  layer: 1
+- tile: 2458
+  at: [10, 5]
+  layer: 1
+- tile: 2459
+  at: [11, 5]
   layer: 1
 - tile: 4170
   at: [10, 9]
@@ -827,12 +1503,6 @@ tiles:
 - tile: 4179
   at: [11, 10]
   layer: 1
-- tile: 4822
-  at: [11, 5]
-  layer: 2
-- tile: 4830
-  at: [11, 6]
-  layer: 1
 - tile: 4118
   at: [7, 3]
   layer: 1
@@ -845,20 +1515,115 @@ tiles:
 - tile: 4127
   at: [8, 4]
   layer: 1
+- tile: 5544
+  at: [11, 3]
+  layer: 0
+- tile: 5552
+  at: [11, 4]
+  layer: 0
+- tile: 3295
+  at: [7, 4]
+  layer: 2
+- tile: 3303
+  at: [7, 5]
+  layer: 1
+- tile: 5411
+  at: [5, 8]
+  layer: 1
+- tile: 5412
+  at: [6, 8]
+  layer: 1
+- tile: 5412
+  at: [7, 8]
+  layer: 1
+- tile: 5413
+  at: [8, 8]
+  layer: 1
+- tile: 5427
+  at: [5, 9]
+  layer: 1
+- tile: 5428
+  at: [6, 9]
+  layer: 1
+- tile: 5428
+  at: [7, 9]
+  layer: 1
+- tile: 5429
+  at: [8, 9]
+  layer: 1
+- tile: 3408
+  at: [6, 8]
+  layer: 2
+- tile: 3409
+  at: [7, 8]
+  layer: 2
+- tile: 3416
+  at: [6, 9]
+  layer: 2
+- tile: 3417
+  at: [7, 9]
+  layer: 2
+- tile: 4822
+  at: [3, 9]
+  layer: 2
+- tile: 4830
+  at: [3, 10]
+  layer: 1
 events:
 - type: warp
   name: Up to deck
-  at: [7, 11]
   link: DOVE_CABIN
-  arrive: [7, 10, up]
   se: Door exit
+  at: [7, 11]
+  arrive: [7, 10, up]
 - type: sign
-  at: [8, 6]
-  post: false
-  name: Ines's letter
-  text: 'Your mother''s letter. Her handwriting slants when she''s frightened. [TODO story: Ines''s letter text]'
-- type: sign
-  at: [3, 7]
-  post: false
   name: Bunk
-  text: Your bunk. You haven't slept since the crossing began.
+  post: false
+  text: Your bunk. You didn't sleep in it.
+  at: [3, 7]
+- type: sign
+  name: Porthole
+  post: false
+  text: Dark water. Far down, for a moment, something glows. Then it doesn't.
+  at: [11, 5]
+- type: event
+  name: Cook
+  pages:
+  - commands:
+    - 'Cook: Last bowl of chowder on the last ferry. Historic chowder. Eat it slow.'
+    - {script: 'pfm_item(:OLDCHOWDER, 1, "Old Chowder")'}
+    - Restores 20 HP. Tastes like the end of an era.
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 09, dir: down}
+  - commands: ['Cook: Last bowl on the last ferry. You had it. Historic.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 09, dir: down}
+    cond: {self: A}
+  at: [9, 7]
+- type: sign
+  name: Bookshelf
+  post: false
+  text: '"Passenger Notice: Persons of Velmoran birth are advised that prolonged absence from one''s home Imprint may cause fatigue, pallor and low spirits. The line
+    accepts no liability for wilting."'
+  at: [7, 5]
+- type: sign
+  name: Locked trunk
+  post: false
+  text: 'It''s locked. Scratched into the lid, very small: I.A. + child, night crossing, 290. Paid in full.'
+  at: [10, 8]
+- type: sign
+  name: Mum's letter
+  post: false
+  text: 'A letter in your mother''s handwriting. The ink runs where the sea got at it.
+
+    "Go to Imelda Larch at Ferrow''s Landing, before they close the strait.
+
+    Don''t let anyone scan you. Don''t go to Crownhaven.
+
+    I''m sorry I never told you why. I wanted one of us to have an ordinary life.
+
+    — Mum."'
+  at: [4, 7]

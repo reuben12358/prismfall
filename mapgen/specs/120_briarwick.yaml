@@ -1,105 +1,106 @@
 # Briarwick (120). WRITTEN BY layouts/briarwick.py - edit that script.
 id: 120
 name: Briarwick
-palette: village
-bgm: Lerucean Town
 parent: 0
+bgm: Lerucean Town
+palette: village
+rubric: true
+yards_ok: true
 metadata:
   Outdoor: true
   ShowArea: true
   MapPosition: [0, 12, 22]
   BattleBack: field
+tone: [-18, -30, 4, 12]
+fog: {name: prismfall_spores, opacity: 46, blend: 1, zoom: 100, sx: 1, sy: -1}
 connections:
 - {dir: W, offset: 29, to: 540, to_offset: 10}
-rubric: true
-yards_ok: true
-tone: [-8, 8, -18, 0]
 map: |
-  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTT,,,TTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTT,,,TTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTT...TTT~~~TTTTTTTTT,TTCCCCCCCCCCCCCCCCCTT....h####.TTTTTT...TTTTTT
-  TTTTTTTT.....~~~hTT......,TTCTTTTTTTTTT.....C......t####TTTTTTT...TTTTTT
-  TTTTTTTT,....~~~##........CCCTT.########T...C....,,.####TTTTTTT...TTTTTT
-  TTTTTTTTT....~~~##....h..CC#################CCC.....####TTT,T,T..tTTTTTT
-  TT,,,TTTT...,~~~##..TTTTCC####################CCCTTT####tTTTTTT..tTTTTTT
-  TT,,,TTTT.,,,~~~##TTTTTCCT####################t,CTTT####tTTT,TTT.tTT,,,T
-  TTTT####TT,,.~~~##TT###CTT####################,,CTTT,,,,tTTT,TT,T.TT,,,T
-  TTTT####..ttT~~~##TT###CTT#########,,,########TTCtTTTT,TTTTTTTT..hTTTTTT
-  TTTT####.tttT~~~,,TT###CCT######################C#tttttTTTT.######TTTTTT
-  TTTT####..TT~~~TTTTT###CCT#####################CCoo..,..T..,######TTTTTT
-  TTTT####..TT~~~T,,,T###CCCo,,,,,ccccccccc,,,,,CCCooo.....,..######TTTTTT
-  TTTT####.T,T~~~T,,,.####CCCC..TTcccccccccTT.CCCCC#ooo...,,,.######TTTTTT
-  TTTTTT,,TT,~~~TT,,,h,,,oCCCCCCCCCCccccccCCCCCCCC##Tooo.t,,,T######TTTTTT
-  TTTTTTTTTTT~~~.#######oooCCCCCCCCCCdddCCCCCCCCC###Tooo.tttTT######TTTTTT
-  TTTTTTTTTTT~~~h#######ooo..CCCCCCCCdddCCCCCCCT,,,,T.ooott.TT######TTTTTT
-  TTTTTTTTT,T~~~t######ooo..h.h.TTTCCdddCCC.TT,TTTTTtttooot.TT,,,,TTTTTTTT
-  TTT######,~~~TT######ootth.....TTTdddd....,,TTTT.,...ooot.TTTTTT.TTTTTTT
-  TTT######T~~~TT######oottt........dddd....,,,,,T,,,.#ooo##TTTTTTTTTTTTTT
-  TTT######T~~~TT###,,,oottt#####.,.dddd,...TTTTTT,,,.#ooo##TTTTTTTTTTTTTT
-  TTT######~~~TTT######oo.tt#####t,hddddT..,TTTTTTTTTT#ooo##TTTTTtTTTTTTTT
-  TTT######~~~T,,######oo.tt#####t.TddddTT.TT,T####TTT#ooo######.t.TTTTTTT
-  TTT######~~~,,,,,,,d,oo,,t#####,,TddddTTTTTT.####TT,#ooo######.ttTTTTTTT
-  TTT######~~~tttT...dToo,,t#####,,Tdddd,,TTT..####TT,#oo#######.ttT####TT
-  TTTTTTdddd~~ttdddddddoottt,,d,,TT,ddddddTTT..####TT,#oo#######...T####TT
-  ddddddddddddddddddddddddddd,dTddd.ddddddddd..,d,,TTT,oo,,,####..,T####TT
-  ddddddddddddddddddddddddddddddddddddddddddddh.d.dddddddddT####..,T####TT
-  TTTTTTTT~~~ttoo,..ddddddddddddddddcccccddddddddddddddddddddddddddT####TT
-  TTTTTTTT~~~ttooo,,,,Toooh.TTTTddddcccccddddddddddtTToooodddddddddh####TT
-  TTTTTTTT~~~ttooo.,,,Tooo.,,,TdddddcccccdddddtTTTTtT,ooooTTTTTdddd.TTTTTT
-  TTTTTTTTT~~~tooo....,ooo.,,,TTddddddddddddddttttttT,ToooTTTTTT....TTTTTT
-  TTTTTTTTT~~~.oooo,..,oooTTTTTTT,..ddddddddddT.,.TTT,.oooTT######..TTTTTT
-  TTTTTTTTT~~~.oooo...,ooo######T,,TddddddddTTT,,,TTT,,ooooT######.tTTTTTT
-  TTTTT####~~~Tooooo.,..oo######T,,TTddTTTTTT,T,,,.TT,,ooooT######,TTTTTTT
-  TTTTT####~~~TTooooooo.ooo#####T,TTTddT.,.T,,...h..,TTooooT######tTTTTTTT
-  TTTTT####~~~T,T..oooo..oo#########TddT,,,.,,######TTTToooT######TTTTTTTT
-  TTTTT####T~~~TT,Toooo.,oo#########TddT,,,.,.######TTTToooh######TTTTTTTT
-  TTTTT####T~~~T,TT,ooo..oooo#######dddTTTT.t.######TTTTooot######TTTTTTTT
-  TTTTT####T~~~T~~~~~~T...oooo######dddTTTT.t.######TTToooot,,,,,TTTTTTTTT
-  TTTTTTTT,T~~~~~~~~~~~~..ooooo,####ddd,TT#####,,,##TTToooot.....TTTTTTTTT
-  TTTTTTTTTTT~~~~~~~~~~~...ooooo####tdd,TT##########ooooooot....,TTTTTTTTT
-  T,,TTTTTTTt~~~~~~~~~~~~...oooo,,,,tdd.TT########ooooooTT,,T,..######TTTT
-  TTTTTTT..tt~~~~~~~~~~~.TTT.oooooTTtdd.,T####,,d,ooooo.TT,,TTTT######TTTT
-  TTTTTTT.,,t~~~~~~~~~~~.TttT..oooooodd.oooooooooooooo...TTT,,,T######TTTT
-  TTTTTTT.,,tt~~~~~~~~,,,TttT...oooodddoooooooooooooo....TTT,,,T######TTTT
-  TTTTTTTT,,,t~~~TTTTT,,,T,######..odddoooooo,TTTT,,,,.h.TTTTTT.######TTTT
-  TTTTTTTT,,,,~~~tTTTT,,,T,######.h.dd,TTTTTTTTT########..T,,,..######TTTT
-  TTTTTTTT,,,,t~~~.TTTT,,,T######...dd,TTTTtt,,T########..T,,,..######TTTT
-  TTTTTTTTTTttt~~~.TTTT,,,T######,..dd,TTTTTT,,T########..,,,,.,,,TTTTTTTT
-  TTTTTTTTTt,tt~~~TTT,TTTT.######,.,ddd,TT,TTTTT########.,,...T,..TTTTTTTT
-  TTTTTTTT.t,tT~~~TTTTTTT..######...ddd,T.,.TTTT########..,..TTTTTTTTTTTTT
-  TTTTTTTTttttT~~~TTTTTT#########...dddT####TTTT########TTt..TTTTT####TTTT
-  TTTTTTTTTTttTT~~~TTTTT####TTTTTT..dddT####TTTT########T,,TTTTTTT####TTTT
-  TTTTTTTTTTTTTT~~~TTTTT####TTTTTTTTddTT####TTTT########TTTTTTTTTT####TTTT
-  TT,,,TTTTTTTTT~~~TTTTT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
-  TT,,,,,TTTTTT~~~T,,,TT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
-  TTTTTTTTTTTTT~~~T,,,TT####TTTTTTTTddTT####TTTTTTTTTTTTTTTTTTTTTT####TTTT
-  TTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-  TTTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTT,,,TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTT,,,TT~~~TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTT.TTTT~~~TTTTTTTTTTTTTTTCC###########TCCTTTT....h,.h.TTTTT....TTTTT
+  TTTTTT...hh~~~.,.TT.....####CC############.#CC###...t.....TTTTT....TTTTT
+  TTTTTT......~~~,........###CC#############.##CC##..ttt...TTTTT...htTTTTT
+  TTTTTT......~~~..h......##CC##############.###CC#,,.,.hTTTTTTT....,TTTTT
+  TTTTTT......~~~....h######C###############.####CC......TTTT########TTTTT
+  TT,,,TT,....~~~.....######C###############.#####CT....TTtTT########TTTTT
+  TT,,,TT....~~~t.h...######C###############T####CCTTTTTTTtTT########T,,,T
+  TTTTTTT,h..~~~TTTTTT######CC#####d########T###CCCTTTTTTTtTT########T,,,T
+  TTTTTTT,..t~~~,TTTTT#####,CCCdddddd#######T,,,CCCtTT..TTTTT########TTTTT
+  TTTTTTTh.tt~~~TTTTTT##d##dCCCCCCdd########Th..CC###tttt.TTh########TTTTT
+  TTTTTT,...~~~TTTTTTT,,,ddddCCCCCCCkkkkkkk#T,CCC####..,,,,..########TTTTT
+  TTTTTT,...~~~TTT,,T...TTTTThCCCCCCCkkkCCCCCCCCC####...,,,t.########TTTTT
+  TTTTTT....~~~TTT,,T..t.,,T....TCCCC###CCCCCCCCC####.,,..ttt,,,,,,TTTTTTT
+  TTTTTThTT~~~.TTTTT...t..T.,,,,,TtCC###CCCCCCC.T####.,,.tttt.,.tttTTTTTTT
+  TTTTTTTTT~~~...########...,,,,,TTTC###CT...h.TT####....tttTT,T.h.TTTTTTT
+  TTTTTTTT~~~h...########.......,TTTT###......TTT,,,,.tt,tt.TTTTT..TTTTTTT
+  TTTT####~~~...t########t......,TTT,,dd...h######TTtt######T,,,Th..TTTTTT
+  TTTT####~~~TT..########tt....####T,,dd.h..######TTT.######T,,,T...TTTTTT
+  TTTT###~~~TTTTT########t.t...####..Tdd....######TTT.######T,,,TT.,TTTTTT
+  TTTT###~~~TTTTT###,,,##tttttt####..Tdd,...######TTT.######.TTTTT####TTTT
+  TTTT###~~~TTTTT########tttttt####..,dd....####,#,TT.#,,,##.TTTTt####TTTT
+  TTTT##~~~#TTT,T####dd##t,,,,,,,##.TTddT...####,#,TTT######....,t####TTTT
+  TTTT##~~~#TT,TT,,,,ddd,t,,,,,,,##TTTdddTTT,,ddd,TTTT######.....t####TTTT
+  TTTTTT~~~,ttttt....dddtt,,,,,,,,,TTTTddTTT..ddd.TTTT,,d,,,###.ht####TTTT
+  dddTTT~~~Ttttt...h.ddd,t,,,,,,,TT,TTTddTTT..dd..TT,T,TdTT####...####TTTT
+  ddd,,,~~~,,,t..d...ddd,t,,,,,,,TT####dddTT..d...TTTT,TTTT####..dddddddTT
+  ddd,,,~~~,,,,,dddddTddtt##,,###TT####TddTT.dd...TTddTTTTT###dddddddddddT
+  ddd###~~~###,,.dddddddttttT,TTTTT####.ddTTdd...ddddddddddddddddd...TddTT
+  TTTTTT~~~tttth...,.dddd...T,,TTTT####ddddddddddddddddddddddddh.....TTTTT
+  TTTTTT~~~Tttt..,.,..ddddd.TTTTTTT###dddddddddddTTtT,TTTTdd,,,T,...tTTTTT
+  TTTTTTT~~~.tttt.,..,,t,ddd,TT,,,T##ddddkkkkddddtttT,TT,TTTTTTT,,,..TTTTT
+  TTTTTTT~~~,,....h..,,,..dddTTTT..,,ddddkkkkkdddTTT.,.,,TTTTTTT,...tTTTTT
+  TTTTTTT~~~,,..h,....,,.##ddd#TT.,.TTddddkkkkdddT...,,,T######T.####TTTTT
+  TTTTTTTT~~~TT..####..,h###ddd.TT,TTTdddddddddd....T,,TT######..####TTTTT
+  TTTTTTT.~~~TTTT####..,h####ddd.TTTTdddddddddd.....,TTTT######..####TTTTT
+  TTTTTTT.~~~TTTT####.h..#####dddTTTddddTT.......,..dTTTT####,#..####TTTTT
+  TTTTTTT.#~~~##T####,,.,####,#dddTdddTTT,..t....,.dddddT####,#..####TTTTT
+  TTTTTTTt#~~~##T####TT..####,#.d.dddTTTTT..t......hdddddd###,#..####TTTTT
+  TTTTTTTt#~~~##T####TT..,,d,,,h.ddd.tTT######......TTdddddd,,,..,TTTTTTTT
+  TTTTTTTT##~~~#~~~~~TT..h.d.....dd..t.T######.hhh..#####dddd..######TTTTT
+  TTTTTTTT##~~~~~~~~~~~.........dd,,t,,.######..,...#######dd..######TTTTT
+  T,,TTThT##~~~~~~~~~~~..,,h....dd,,tt..######.h,...########dd.######TTTTT
+  TTTTTT..##~~~~~~~~~~~~.,,.###dddT.tt..#,,,######..########TdT######TTTTT
+  TTTTTT..,,,~~~~~~~~~~~.Ttt###ddTTTtt..##########..########,,,######TTTTT
+  TTTTTT..ttt~~~~~~~~~~..Ttt###dddT..t..#ddd######..########,,,######TTTTT
+  TTTTTTTTTtt~~~~~~~~TTTTT,T###ddddddddddddd,,####T.########TTT######TTTTT
+  TTTTTTTTTtt~~~tt.TTTTTTT,T####ddddddddddddTT####Tt,,,,,,,#..,,,,,,TTTTTT
+  TTTTTTTTTTt~~~tt..TT####TT####dd...TdTTTTtt,####Tt,,,,,,,,,,,,,,,,TTTTTT
+  TTTTTTTT,,t~~~t,,TTT####..,,,,ddd..TTTTTTTT,,,,,Tt,,,,,,,,,,,,,,,,TTTTTT
+  TTTTTTTT,,t~~~T,,TT,####..TTTThdd..TT,TT,######Ttt,,,,,,,###,,,,,,TTTTTT
+  TTTTTTT..tt~~~TTTTTT####..TTTT..dd.TT,T.,######Ttt##,,###...######TTTTTT
+  TTTTTTT.ttt~~~,,TTTT####..TTTTThdddTTT...######tttttttttth..TTTTTTTTTTTT
+  TTTTTTTh.ht~~~,,TTTT####TTT,TTT..dddTT...######TTTTTTTT,,h..TTTTTTTTTTTT
+  TTTTTTTTTTT~~~TTTTTTTTTTTTTTTTTTT.dddTTTT######TTTTTTTTTTTTTTTTTTTTTTTTT
+  TT,,,TTTTT~~~TTTTTTTTTTTTTTTTTTTTTTddTTTT######TTTTTTTTTTTTTTTTTTTTTTTTT
+  TT,,,,,TTT~~~TTTT,,,TTTTTTTTTTTTTTddddTTT######TTTTTTTTT,,TTTTTTTTTTTTTT
+  TTTTTTTTTT~~~TTTT,,,TTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+  TTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTTddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 heights: |
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
+  000000000000000000000000000000000001000000000000000000000000000000000000
+  000000000000000000000000000000111111111111110000000000000000000000000000
+  000000000000000000000000000001111111111111111000000000000000000000000000
+  000000000000000000000000000011111111111111111100000000000000000000000000
+  000000000000000000000000000111111111111111111110000000000000000000000000
+  000000000000000000000000001111111111111111111111000000000000000000000000
+  000000000000000000000000001111111111111111111111100000000000000000000000
+  000000000000000000000000001111111111111111111111100000000000000000000000
+  000000000000000000000000001111111111111111111111100000000000000000000000
+  000000000000000000000000001111111111111111111111000000000000000000000000
+  000000000000000000000000000111111111111111111110000000000000000000000000
+  000000000000000000000000000011111111111111111110000000000000000000000000
+  000000000000000000000000000000011111111111111110000000000000000000000000
+  000000000000000000000000000000000111111111111000000000000000000000000000
+  000000000000000000000000000000000011111000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000000000000000000000000000000000000000000000000
-  000000000000000000000000000011111111111111111000000000000000000000000000
-  000000000000000000000000000011111111111111111000000000000000000000000000
-  000000000000000000000000001111111111111111111000000000000000000000000000
-  000000000000000000000000011111111111111111111110000000000000000000000000
-  000000000000000000000000111111111111111111111111100000000000000000000000
-  000000000000000000000001111111111111111111111111100000000000000000000000
-  000000000000000000000001111111111111111111111111100000000000000000000000
-  000000000000000000000001111111111111111111111111100000000000000000000000
-  000000000000000000000001111111111111111111111111100000000000000000000000
-  000000000000000000000000111111111111111111111111100000000000000000000000
-  000000000000000000000000111111111111111111111111000000000000000000000000
-  000000000000000000000000011111111111111111111110000000000000000000000000
-  000000000000000000000000000111111111111111111000000000000000000000000000
-  000000000000000000000000000000000111111110000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
   000000000000000000000000000000000000000000000000000000000000000000000000
@@ -146,185 +147,198 @@ heights: |
   000000000000000000000000000000000000000000000000000000000000000000000000
 stamps:
 - stamp: t_stairs
-  at: [35, 19]
-- stamp: g_tree6
-  at: [32, 8]
+  at: [35, 17]
+- stamp: g_elder
+  at: [30, 4]
   link: BW_GYM
   name: Gym door
-  door: [4, 7]
-- stamp: g_tree4p
-  at: [26, 9]
-- stamp: g_tree4p
-  at: [40, 9]
+  door: [6, 11]
 - stamp: g_tree6
   at: [15, 19]
   link: BW_GUILD
   name: Guildhall door
   door: [4, 7]
 - stamp: g_tree4
-  at: [52, 23]
+  at: [52, 21]
   link: BW_HOUSE1
   name: Treetop House door
   door: [2, 6]
 - stamp: g_tree4
-  at: [44, 40]
+  at: [38, 43]
   link: BW_HOUSE2
   name: Cutter's House door
   door: [2, 6]
-- stamp: t_pokecenter
-  at: [26, 24]
+- stamp: w_house_r
+  at: [42, 21]
   link: BW_PC
   name: Poke Center door
-  door: [2, 4]
-- stamp: t_mart
-  at: [45, 26]
+  door: [2, 5]
+- stamp: w_house_s
+  at: [23, 37]
   link: BW_MART
   name: Mart door
-  door: [1, 3]
-- stamp: g_tree4
-  at: [24, 37]
-- stamp: g_tree4
-  at: [58, 36]
-- stamp: g_tree4
-  at: [25, 50]
+  door: [2, 5]
+- stamp: w_house_m
+  at: [55, 37]
+  link: BW_CHAPEL
+  name: Chapel door
+  door: [2, 5]
+- stamp: g_tree4p
+  at: [24, 6]
+- stamp: g_tree4p
+  at: [43, 6]
 - stamp: g_tree6
-  at: [46, 51]
+  at: [59, 9]
 - stamp: g_tree4
-  at: [60, 14]
+  at: [4, 21]
+- stamp: g_tree6
+  at: [50, 44]
 - stamp: g_tree4p
-  at: [3, 22]
+  at: [61, 44]
+- stamp: g_tree2
+  at: [26, 47]
+- stamp: g_tree2
+  at: [44, 47]
+- stamp: g_tree2
+  at: [20, 52]
 - stamp: g_tree4p
-  at: [62, 46]
+  at: [41, 54]
 - stamp: g_tree2
-  at: [46, 14]
+  at: [47, 14]
 - stamp: g_tree2
-  at: [20, 12]
+  at: [20, 9]
 - stamp: g_tree2
-  at: [40, 44]
+  at: [64, 24]
 - stamp: g_tree2
-  at: [30, 40]
+  at: [15, 38]
 - stamp: g_tree2
-  at: [58, 26]
+  at: [57, 28]
 - stamp: g_tree2
-  at: [22, 56]
+  at: [29, 22]
+- stamp: g_tree4p
+  at: [8, 41]
 - stamp: g_tree2
-  at: [66, 28]
+  at: [63, 37]
 - stamp: g_tree2
-  at: [5, 38]
-- stamp: g_tree2
-  at: [52, 6]
-- stamp: g_tree2
-  at: [14, 8]
-- stamp: g_tree2
-  at: [64, 56]
-- stamp: g_tree2
-  at: [4, 12]
-- stamp: g_tree2
-  at: [38, 56]
-- stamp: p_awning
-  at: [35, 13]
+  at: [33, 30]
+- stamp: p_banner
+  at: [46, 25]
+- stamp: p_banner
+  at: [27, 41]
+- stamp: p_banner3
+  at: [59, 40]
 - stamp: p_awning
   at: [18, 24]
 - stamp: p_awning
-  at: [53, 27]
+  at: [53, 25]
 - stamp: p_awning
-  at: [45, 44]
-- stamp: p_vat_r
-  at: [19, 38]
+  at: [39, 47]
 - stamp: p_vat_y
-  at: [20, 35]
+  at: [19, 36]
 - stamp: p_vat_y
-  at: [16, 33]
+  at: [15, 34]
 - stamp: p_vat_b
-  at: [14, 42]
-- stamp: p_vat_b
-  at: [13, 40]
+  at: [21, 39]
 - stamp: p_vat_y
-  at: [15, 41]
+  at: [22, 35]
+- stamp: p_vat_y
+  at: [22, 41]
+- stamp: p_vat_r
+  at: [15, 37]
+- stamp: p_vat_r
+  at: [20, 41]
 - stamp: p_vat_b
-  at: [17, 36]
+  at: [16, 35]
 - stamp: p_vat_r
-  at: [15, 32]
-- stamp: p_vat_r
-  at: [17, 42]
-- stamp: tp_stall_21
-  at: [25, 34]
+  at: [19, 35]
+- stamp: tp_stall_20
+  at: [26, 18]
+- stamp: p_laundry
+  at: [29, 35]
 - stamp: p_loom
-  at: [31, 27]
+  at: [29, 27]
 - stamp: p_loom
-  at: [23, 27]
-- stamp: p_loom
-  at: [18, 33]
-- stamp: p_loom
-  at: [13, 26]
+  at: [25, 29]
+- stamp: p_lantern
+  at: [51, 51]
+- stamp: p_lantern
+  at: [60, 52]
+- stamp: p_lantern
+  at: [63, 51]
+- stamp: tp_stall_13
+  at: [54, 52]
+- stamp: t_barrel
+  at: [50, 52]
+- stamp: tp_barrel_06
+  at: [62, 53]
 - stamp: p_silk
-  at: [9, 21]
+  at: [65, 51]
+- stamp: t_bench
+  at: [56, 53]
+- stamp: tp_stall_05
+  at: [26, 26]
+- stamp: tp_barrel_06
+  at: [30, 29]
+- stamp: tp_garden_09
+  at: [41, 35]
 - stamp: p_silk1
   at: [19, 54]
 - stamp: p_silk
   at: [43, 52]
-- stamp: p_strand_w
-  at: [44, 52]
 - stamp: p_strand_p
   at: [37, 54]
 - stamp: p_silk1
   at: [53, 15]
+- stamp: p_strand_p
+  at: [7, 12]
 - stamp: p_silk1
-  at: [59, 46]
+  at: [7, 10]
 - stamp: p_silk1
-  at: [27, 30]
+  at: [54, 20]
+- stamp: p_strand_p
+  at: [30, 18]
 - stamp: p_silk
-  at: [11, 51]
+  at: [29, 18]
+- stamp: p_silk
+  at: [30, 20]
 - stamp: p_silk1
   at: [51, 34]
 - stamp: p_silk1
   at: [12, 27]
 - stamp: p_silk1
-  at: [59, 9]
+  at: [35, 22]
 - stamp: p_silk
   at: [40, 54]
 - stamp: p_strand_w
   at: [17, 33]
+- stamp: p_strand_p
+  at: [48, 25]
+- stamp: p_strand_w
+  at: [53, 36]
 - stamp: p_silk1
-  at: [56, 53]
-- stamp: p_silk1
-  at: [43, 38]
-- stamp: p_silk1
-  at: [43, 26]
-- stamp: p_silk
-  at: [60, 11]
-- stamp: p_silk1
-  at: [56, 55]
+  at: [35, 45]
+- stamp: p_strand_p
+  at: [46, 45]
 - stamp: p_strand_p
   at: [24, 50]
-- stamp: p_silk1
-  at: [46, 12]
 - stamp: p_silk
-  at: [64, 30]
-- stamp: p_strand_w
-  at: [25, 6]
+  at: [6, 15]
+- stamp: p_strand_p
+  at: [27, 32]
 - stamp: p_silk1
-  at: [22, 41]
+  at: [36, 45]
 - stamp: p_silk1
   at: [38, 24]
+- stamp: p_silk
+  at: [47, 40]
 - stamp: p_strand_p
   at: [20, 36]
-- stamp: p_strand_w
-  at: [10, 17]
-- stamp: p_silk
-  at: [10, 54]
-- stamp: p_strand_w
-  at: [12, 10]
-- stamp: p_silk1
-  at: [41, 25]
 - stamp: p_web
   at: [2, 59]
 - stamp: p_web1
   at: [55, 57]
 - stamp: p_web
   at: [58, 48]
-- stamp: p_web1
-  at: [44, 23]
 - stamp: p_web1
   at: [1, 46]
 - stamp: p_web1
@@ -336,434 +350,1618 @@ stamps:
 - stamp: p_web
   at: [5, 1]
 - stamp: p_web
-  at: [21, 52]
-- stamp: p_web1
-  at: [38, 28]
-- stamp: p_web
   at: [17, 60]
 - stamp: p_web
   at: [2, 10]
+- stamp: p_web
+  at: [54, 15]
 - stamp: p_web1
-  at: [55, 54]
-- stamp: p_lantern
-  at: [45, 36]
-- stamp: p_lantern
-  at: [38, 39]
-- stamp: p_lantern
-  at: [56, 16]
-- stamp: p_lantern
-  at: [48, 22]
-- stamp: p_pinkbush
-  at: [42, 39]
-- stamp: p_pot
-  at: [61, 9]
+  at: [63, 35]
+- stamp: p_web1
+  at: [56, 60]
+- stamp: p_web1
+  at: [23, 17]
 - stamp: p_bush_r
-  at: [46, 23]
+  at: [52, 8]
+- stamp: p_bush_r
+  at: [13, 26]
+- stamp: p_bush_r
+  at: [14, 13]
+- stamp: p_pot
+  at: [27, 57]
+- stamp: p_bush_r
+  at: [19, 41]
+- stamp: p_bush_r
+  at: [39, 41]
+- stamp: fo_rustic_20
+  at: [60, 18]
+- stamp: p_stump
+  at: [65, 23]
+- stamp: fo_rustic_20
+  at: [15, 6]
+- stamp: p_bush_g
+  at: [10, 36]
+- stamp: fo_rustic_22
+  at: [50, 29]
 - stamp: tp_stall_13
-  at: [42, 22]
-- stamp: p_crates
-  at: [20, 49]
-- stamp: tp_stall_01
-  at: [48, 50]
+  at: [52, 17]
+- stamp: p_stump
+  at: [20, 35]
+- stamp: p_bush_r
+  at: [43, 15]
+- stamp: t_barrel
+  at: [34, 21]
+- stamp: p_bush_r
+  at: [66, 8]
 - stamp: p_bush_g
   at: [51, 37]
+- stamp: fo_rustic_22
+  at: [62, 26]
+- stamp: p_bush_g
+  at: [14, 56]
+- stamp: p_pot
+  at: [35, 25]
+- stamp: p_pinkbush
+  at: [12, 31]
 - stamp: t_barrel
-  at: [31, 53]
-- stamp: p_bush_r
-  at: [38, 47]
-- stamp: p_stump
-  at: [62, 45]
-- stamp: p_bush_r
-  at: [63, 12]
+  at: [52, 29]
 - stamp: p_pot
   at: [33, 29]
 - stamp: p_bush_r
-  at: [44, 21]
-- stamp: p_crates
-  at: [16, 16]
+  at: [28, 33]
+- stamp: p_bush_g
+  at: [32, 45]
+- stamp: p_bush_r
+  at: [26, 35]
 - stamp: p_stump
   at: [50, 39]
+- stamp: p_pot
+  at: [54, 5]
 - stamp: t_barrel
   at: [51, 35]
-- stamp: p_bush_r
-  at: [59, 15]
-- stamp: p_bush_r
-  at: [42, 41]
+- stamp: p_crates
+  at: [59, 21]
+- stamp: p_pinkbush2
+  at: [8, 53]
 - stamp: p_pinkbush
-  at: [8, 48]
-- stamp: p_crates
-  at: [57, 51]
-- stamp: p_pot
-  at: [8, 8]
-- stamp: p_bush_r
-  at: [54, 13]
-- stamp: p_pot
-  at: [33, 54]
-- stamp: p_pot
-  at: [64, 38]
-- stamp: p_crates
-  at: [8, 50]
-- stamp: t_barrel
-  at: [61, 53]
-- stamp: tp_stall_13
-  at: [10, 11]
-- stamp: tp_stall_13
-  at: [56, 46]
-- stamp: t_barrel
-  at: [47, 11]
-- stamp: p_stump
-  at: [31, 36]
-- stamp: t_bench
-  at: [36, 33]
-- stamp: p_banner
-  at: [37, 44]
+  at: [23, 46]
+- stamp: p_pinkbush
+  at: [16, 16]
+- stamp: p_pinkbush
+  at: [15, 53]
+- stamp: p_banner3
+  at: [21, 36]
 - stamp: p_banner
   at: [32, 37]
-- stamp: p_banner3
-  at: [51, 27]
 - stamp: p_banner
-  at: [32, 24]
+  at: [54, 35]
+- stamp: p_banner
+  at: [22, 29]
 - stamp: p_banner3
-  at: [31, 37]
-- stamp: p_banner3
-  at: [36, 51]
+  at: [62, 34]
 tiles:
-- tile: 18075
-  at: [31, 11]
-  layer: 2
-- tile: 18075
-  at: [32, 11]
-  layer: 2
-- tile: 18075
-  at: [39, 11]
-  layer: 2
-- tile: 18075
-  at: [40, 11]
-  layer: 2
-- tile: 18075
-  at: [23, 21]
-  layer: 2
-- tile: 18075
-  at: [24, 21]
-  layer: 2
-- tile: 18075
-  at: [25, 21]
-  layer: 2
-- tile: 18075
-  at: [46, 25]
-  layer: 2
-- tile: 18075
-  at: [47, 25]
-  layer: 2
-- tile: 18075
-  at: [48, 25]
-  layer: 2
-- tile: 18075
-  at: [49, 25]
-  layer: 2
-- tile: 18075
-  at: [50, 25]
-  layer: 2
-- tile: 18075
-  at: [51, 25]
-  layer: 2
-- tile: 18075
-  at: [50, 38]
-  layer: 2
-- tile: 18075
-  at: [51, 38]
-  layer: 2
-- tile: 18075
-  at: [52, 38]
-  layer: 2
-- tile: 18075
-  at: [53, 38]
-  layer: 2
-- tile: 18075
-  at: [54, 38]
-  layer: 2
-- tile: 18075
-  at: [55, 38]
-  layer: 2
-- tile: 18075
-  at: [56, 38]
-  layer: 2
-- tile: 18075
-  at: [57, 38]
-  layer: 2
-- tile: 18075
-  at: [34, 46]
-  layer: 2
-- tile: 18075
-  at: [35, 46]
-  layer: 2
-- tile: 18075
-  at: [36, 46]
-  layer: 2
-- tile: 18075
-  at: [37, 46]
-  layer: 2
-- tile: 18075
-  at: [38, 46]
-  layer: 2
-- tile: 18075
-  at: [39, 46]
-  layer: 2
-- tile: 18075
+- tile: 8721
+  at: [3, 30]
+  layer: 1
+- tile: 8737
+  at: [3, 31]
+  layer: 1
+- tile: 8756
+  at: [3, 32]
+  layer: 1
+- tile: 8721
+  at: [4, 30]
+  layer: 1
+- tile: 8737
+  at: [4, 31]
+  layer: 1
+- tile: 8756
+  at: [4, 32]
+  layer: 1
+- tile: 8721
+  at: [5, 30]
+  layer: 1
+- tile: 8737
+  at: [5, 31]
+  layer: 1
+- tile: 8756
+  at: [5, 32]
+  layer: 1
+- tile: 8721
+  at: [6, 30]
+  layer: 1
+- tile: 8737
+  at: [6, 31]
+  layer: 1
+- tile: 8721
+  at: [7, 30]
+  layer: 1
+- tile: 8737
+  at: [7, 31]
+  layer: 1
+- tile: 8721
+  at: [8, 30]
+  layer: 1
+- tile: 8737
+  at: [8, 31]
+  layer: 1
+- tile: 8721
+  at: [9, 30]
+  layer: 1
+- tile: 8737
+  at: [9, 31]
+  layer: 1
+- tile: 8756
+  at: [9, 32]
+  layer: 1
+- tile: 8721
+  at: [10, 30]
+  layer: 1
+- tile: 8737
+  at: [10, 31]
+  layer: 1
+- tile: 8756
+  at: [10, 32]
+  layer: 1
+- tile: 8721
+  at: [11, 30]
+  layer: 1
+- tile: 8737
+  at: [11, 31]
+  layer: 1
+- tile: 8756
+  at: [11, 32]
+  layer: 1
+- tile: 8720
+  at: [24, 26]
+  layer: 1
+- tile: 8721
+  at: [25, 26]
+  layer: 1
+- tile: 8721
+  at: [26, 26]
+  layer: 1
+- tile: 8721
+  at: [27, 26]
+  layer: 1
+- tile: 8721
+  at: [28, 26]
+  layer: 1
+- tile: 8721
+  at: [29, 26]
+  layer: 1
+- tile: 8722
+  at: [30, 26]
+  layer: 1
+- tile: 8728
+  at: [24, 27]
+  layer: 1
+- tile: 8729
+  at: [25, 27]
+  layer: 1
+- tile: 8729
+  at: [26, 27]
+  layer: 1
+- tile: 8729
+  at: [27, 27]
+  layer: 1
+- tile: 8729
+  at: [28, 27]
+  layer: 1
+- tile: 8729
+  at: [29, 27]
+  layer: 1
+- tile: 8730
+  at: [30, 27]
+  layer: 1
+- tile: 8728
+  at: [24, 28]
+  layer: 1
+- tile: 8729
+  at: [25, 28]
+  layer: 1
+- tile: 8729
+  at: [26, 28]
+  layer: 1
+- tile: 8729
+  at: [27, 28]
+  layer: 1
+- tile: 8729
+  at: [28, 28]
+  layer: 1
+- tile: 8729
+  at: [29, 28]
+  layer: 1
+- tile: 8730
+  at: [30, 28]
+  layer: 1
+- tile: 8728
+  at: [24, 29]
+  layer: 1
+- tile: 8729
+  at: [25, 29]
+  layer: 1
+- tile: 8729
+  at: [26, 29]
+  layer: 1
+- tile: 8729
+  at: [27, 29]
+  layer: 1
+- tile: 8729
+  at: [28, 29]
+  layer: 1
+- tile: 8729
+  at: [29, 29]
+  layer: 1
+- tile: 8730
+  at: [30, 29]
+  layer: 1
+- tile: 8736
+  at: [24, 30]
+  layer: 1
+- tile: 8737
+  at: [25, 30]
+  layer: 1
+- tile: 8729
+  at: [26, 30]
+  layer: 1
+- tile: 8729
+  at: [27, 30]
+  layer: 1
+- tile: 8737
+  at: [28, 30]
+  layer: 1
+- tile: 8737
+  at: [29, 30]
+  layer: 1
+- tile: 8738
+  at: [30, 30]
+  layer: 1
+- tile: 8755
+  at: [24, 31]
+  layer: 1
+- tile: 8756
+  at: [25, 31]
+  layer: 1
+- tile: 8776
+  at: [26, 31]
+  layer: 1
+- tile: 8776
+  at: [27, 31]
+  layer: 1
+- tile: 8756
+  at: [28, 31]
+  layer: 1
+- tile: 8756
+  at: [29, 31]
+  layer: 1
+- tile: 8757
+  at: [30, 31]
+  layer: 1
+- tile: 8720
+  at: [50, 51]
+  layer: 1
+- tile: 8721
+  at: [51, 51]
+  layer: 1
+- tile: 8721
+  at: [52, 51]
+  layer: 1
+- tile: 8721
+  at: [53, 51]
+  layer: 1
+- tile: 8721
+  at: [54, 51]
+  layer: 1
+- tile: 8721
+  at: [55, 51]
+  layer: 1
+- tile: 8721
+  at: [56, 51]
+  layer: 1
+- tile: 8728
+  at: [50, 52]
+  layer: 1
+- tile: 8729
+  at: [51, 52]
+  layer: 1
+- tile: 8729
+  at: [52, 52]
+  layer: 1
+- tile: 8729
+  at: [53, 52]
+  layer: 1
+- tile: 8729
+  at: [54, 52]
+  layer: 1
+- tile: 8729
+  at: [55, 52]
+  layer: 1
+- tile: 8729
+  at: [56, 52]
+  layer: 1
+- tile: 8728
+  at: [50, 53]
+  layer: 1
+- tile: 8729
+  at: [51, 53]
+  layer: 1
+- tile: 8729
+  at: [52, 53]
+  layer: 1
+- tile: 8729
+  at: [53, 53]
+  layer: 1
+- tile: 8729
   at: [54, 53]
-  layer: 2
-- tile: 18075
+  layer: 1
+- tile: 8729
   at: [55, 53]
-  layer: 2
-- tile: 18075
+  layer: 1
+- tile: 8729
   at: [56, 53]
-  layer: 2
-- tile: 18075
+  layer: 1
+- tile: 8736
+  at: [50, 54]
+  layer: 1
+- tile: 8737
+  at: [51, 54]
+  layer: 1
+- tile: 8729
+  at: [52, 54]
+  layer: 1
+- tile: 8729
+  at: [53, 54]
+  layer: 1
+- tile: 8737
+  at: [54, 54]
+  layer: 1
+- tile: 8737
+  at: [55, 54]
+  layer: 1
+- tile: 8737
+  at: [56, 54]
+  layer: 1
+- tile: 8755
+  at: [50, 55]
+  layer: 1
+- tile: 8756
+  at: [51, 55]
+  layer: 1
+- tile: 8776
+  at: [52, 55]
+  layer: 1
+- tile: 8776
+  at: [53, 55]
+  layer: 1
+- tile: 8756
+  at: [54, 55]
+  layer: 1
+- tile: 8756
+  at: [55, 55]
+  layer: 1
+- tile: 8757
+  at: [56, 55]
+  layer: 1
+- tile: 8721
+  at: [57, 52]
+  layer: 1
+- tile: 8737
   at: [57, 53]
+  layer: 1
+- tile: 8756
+  at: [57, 54]
+  layer: 1
+- tile: 8721
+  at: [58, 52]
+  layer: 1
+- tile: 8737
+  at: [58, 53]
+  layer: 1
+- tile: 8756
+  at: [58, 54]
+  layer: 1
+- tile: 8721
+  at: [59, 52]
+  layer: 1
+- tile: 8737
+  at: [59, 53]
+  layer: 1
+- tile: 8756
+  at: [59, 54]
+  layer: 1
+- tile: 8721
+  at: [60, 51]
+  layer: 1
+- tile: 8721
+  at: [61, 51]
+  layer: 1
+- tile: 8721
+  at: [62, 51]
+  layer: 1
+- tile: 8721
+  at: [63, 51]
+  layer: 1
+- tile: 8721
+  at: [64, 51]
+  layer: 1
+- tile: 8722
+  at: [65, 51]
+  layer: 1
+- tile: 8729
+  at: [60, 52]
+  layer: 1
+- tile: 8729
+  at: [61, 52]
+  layer: 1
+- tile: 8729
+  at: [62, 52]
+  layer: 1
+- tile: 8729
+  at: [63, 52]
+  layer: 1
+- tile: 8729
+  at: [64, 52]
+  layer: 1
+- tile: 8730
+  at: [65, 52]
+  layer: 1
+- tile: 8729
+  at: [60, 53]
+  layer: 1
+- tile: 8729
+  at: [61, 53]
+  layer: 1
+- tile: 8729
+  at: [62, 53]
+  layer: 1
+- tile: 8729
+  at: [63, 53]
+  layer: 1
+- tile: 8729
+  at: [64, 53]
+  layer: 1
+- tile: 8730
+  at: [65, 53]
+  layer: 1
+- tile: 8737
+  at: [60, 54]
+  layer: 1
+- tile: 8737
+  at: [61, 54]
+  layer: 1
+- tile: 8737
+  at: [62, 54]
+  layer: 1
+- tile: 8737
+  at: [63, 54]
+  layer: 1
+- tile: 8737
+  at: [64, 54]
+  layer: 1
+- tile: 8738
+  at: [65, 54]
+  layer: 1
+- tile: 8755
+  at: [60, 55]
+  layer: 1
+- tile: 8756
+  at: [61, 55]
+  layer: 1
+- tile: 8756
+  at: [62, 55]
+  layer: 1
+- tile: 8756
+  at: [63, 55]
+  layer: 1
+- tile: 8756
+  at: [64, 55]
+  layer: 1
+- tile: 8757
+  at: [65, 55]
+  layer: 1
+- tile: 20193
+  at: [45, 25]
+  layer: 2
+- tile: 20193
+  at: [26, 41]
   layer: 2
 - tile: 18075
-  at: [21, 39]
+  at: [41, 10]
   layer: 2
 - tile: 18075
-  at: [22, 39]
+  at: [42, 10]
   layer: 2
 - tile: 18075
-  at: [23, 39]
+  at: [28, 10]
   layer: 2
-- tile: 1554
-  at: [13, 47]
+- tile: 18075
+  at: [29, 10]
   layer: 2
-- tile: 1562
-  at: [13, 48]
+- tile: 18075
+  at: [23, 22]
   layer: 2
-- tile: 1555
-  at: [18, 45]
+- tile: 18075
+  at: [24, 22]
   layer: 2
-- tile: 1563
-  at: [18, 46]
+- tile: 18075
+  at: [25, 22]
+  layer: 2
+- tile: 18075
+  at: [26, 22]
+  layer: 2
+- tile: 18075
+  at: [58, 46]
+  layer: 2
+- tile: 18075
+  at: [59, 46]
+  layer: 2
+- tile: 18075
+  at: [60, 46]
+  layer: 2
+- tile: 18075
+  at: [61, 46]
+  layer: 2
+- tile: 18075
+  at: [47, 46]
+  layer: 2
+- tile: 18075
+  at: [48, 46]
+  layer: 2
+- tile: 18075
+  at: [49, 46]
+  layer: 2
+- tile: 18075
+  at: [50, 46]
+  layer: 2
+- tile: 8288
+  at: [23, 12]
+  layer: 2
+- tile: 8289
+  at: [24, 12]
+  layer: 2
+- tile: 8296
+  at: [23, 13]
+  layer: 1
+- tile: 8297
+  at: [24, 13]
+  layer: 1
+- tile: 8304
+  at: [23, 14]
+  layer: 1
+- tile: 8305
+  at: [24, 14]
+  layer: 1
+- tile: 23178
+  at: [31, 33]
+  layer: 2
+- tile: 23177
+  at: [32, 33]
+  layer: 2
+- tile: 23178
+  at: [33, 33]
+  layer: 2
+- tile: 23179
+  at: [34, 33]
+  layer: 2
+- tile: 23176
+  at: [35, 33]
+  layer: 2
+- tile: 23178
+  at: [36, 33]
+  layer: 2
+- tile: 23178
+  at: [37, 33]
+  layer: 2
+- tile: 23179
+  at: [38, 33]
+  layer: 2
+- tile: 23176
+  at: [39, 33]
+  layer: 2
+- tile: 23177
+  at: [40, 33]
+  layer: 2
+- tile: 23178
+  at: [41, 33]
+  layer: 2
+- tile: 23179
+  at: [42, 33]
+  layer: 2
+- tile: 23176
+  at: [43, 33]
+  layer: 2
+- tile: 23177
+  at: [44, 33]
+  layer: 2
+- tile: 23178
+  at: [45, 33]
+  layer: 2
+- tile: 23178
+  at: [46, 33]
+  layer: 2
+- tile: 23176
+  at: [47, 33]
+  layer: 2
+- tile: 23177
+  at: [27, 44]
+  layer: 2
+- tile: 23178
+  at: [28, 44]
+  layer: 2
+- tile: 23179
+  at: [29, 44]
+  layer: 2
+- tile: 23176
+  at: [30, 44]
+  layer: 2
+- tile: 23178
+  at: [31, 44]
+  layer: 2
+- tile: 23178
+  at: [32, 44]
+  layer: 2
+- tile: 23179
+  at: [33, 44]
+  layer: 2
+- tile: 23176
+  at: [34, 44]
+  layer: 2
+- tile: 23177
+  at: [35, 44]
+  layer: 2
+- tile: 23178
+  at: [40, 26]
+  layer: 2
+- tile: 23179
+  at: [41, 26]
+  layer: 2
+- tile: 23176
+  at: [42, 26]
+  layer: 2
+- tile: 23178
+  at: [43, 26]
+  layer: 2
+- tile: 23178
+  at: [44, 26]
+  layer: 2
+- tile: 23179
+  at: [45, 26]
+  layer: 2
+- tile: 23176
+  at: [46, 26]
+  layer: 2
+- tile: 23177
+  at: [47, 26]
+  layer: 2
+- tile: 23178
+  at: [48, 26]
+  layer: 2
+- tile: 23179
+  at: [49, 26]
+  layer: 2
+- tile: 23179
+  at: [17, 29]
+  layer: 2
+- tile: 23176
+  at: [18, 29]
+  layer: 2
+- tile: 23178
+  at: [19, 29]
+  layer: 2
+- tile: 23178
+  at: [20, 29]
+  layer: 2
+- tile: 23179
+  at: [21, 29]
+  layer: 2
+- tile: 23176
+  at: [22, 29]
+  layer: 2
+- tile: 23177
+  at: [23, 29]
+  layer: 2
+- tile: 23177
+  at: [52, 35]
+  layer: 2
+- tile: 23178
+  at: [53, 35]
+  layer: 2
+- tile: 23179
+  at: [54, 35]
+  layer: 2
+- tile: 23176
+  at: [55, 35]
+  layer: 2
+- tile: 23178
+  at: [56, 35]
+  layer: 2
+- tile: 23178
+  at: [57, 35]
+  layer: 2
+- tile: 23179
+  at: [58, 35]
+  layer: 2
+- tile: 23176
+  at: [59, 35]
+  layer: 2
+- tile: 23177
+  at: [60, 35]
+  layer: 2
+- tile: 23178
+  at: [61, 35]
+  layer: 2
+- tile: 23179
+  at: [62, 35]
+  layer: 2
+- tile: 23178
+  at: [29, 57]
+  layer: 2
+- tile: 23179
+  at: [30, 57]
+  layer: 2
+- tile: 23176
+  at: [31, 57]
+  layer: 2
+- tile: 23178
+  at: [32, 57]
+  layer: 2
+- tile: 23178
+  at: [33, 57]
+  layer: 2
+- tile: 23179
+  at: [34, 57]
+  layer: 2
+- tile: 23176
+  at: [35, 57]
+  layer: 2
+- tile: 23177
+  at: [36, 57]
+  layer: 2
+- tile: 23178
+  at: [37, 57]
+  layer: 2
+- tile: 23179
+  at: [38, 57]
+  layer: 2
+- tile: 23176
+  at: [39, 57]
+  layer: 2
+- tile: 23179
+  at: [49, 40]
+  layer: 2
+- tile: 23176
+  at: [50, 40]
+  layer: 2
+- tile: 23178
+  at: [51, 40]
+  layer: 2
+- tile: 23178
+  at: [52, 40]
+  layer: 2
+- tile: 23179
+  at: [53, 40]
+  layer: 2
+- tile: 23176
+  at: [54, 40]
+  layer: 2
+- tile: 23177
+  at: [55, 40]
+  layer: 2
+- tile: 23178
+  at: [56, 40]
+  layer: 2
+- tile: 23179
+  at: [57, 40]
+  layer: 2
+- tile: 23178
+  at: [31, 19]
+  layer: 2
+- tile: 23177
+  at: [32, 19]
+  layer: 2
+- tile: 23178
+  at: [33, 19]
+  layer: 2
+- tile: 23179
+  at: [34, 19]
+  layer: 2
+- tile: 23176
+  at: [35, 19]
+  layer: 2
+- tile: 23178
+  at: [36, 19]
+  layer: 2
+- tile: 23178
+  at: [37, 19]
+  layer: 2
+- tile: 23179
+  at: [38, 19]
+  layer: 2
+- tile: 23176
+  at: [39, 19]
+  layer: 2
+- tile: 23177
+  at: [40, 19]
+  layer: 2
+- tile: 23178
+  at: [41, 19]
+  layer: 2
+- tile: 1552
+  at: [15, 46]
+  layer: 2
+- tile: 1553
+  at: [16, 46]
+  layer: 2
+- tile: 1560
+  at: [15, 47]
+  layer: 2
+- tile: 1561
+  at: [16, 47]
   layer: 2
 tileblocks: []
 events:
 - type: warp
   name: To Gossamer Wood
-  at: [35, 63]
   link: WOOD_BRIAR
   arrive: [35, 62, up]
-- type: sign
-  at: [38, 17]
-  post: false
-  name: Gym sign
-  text: 'LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM. "A thread holds because it''s twisted with others."'
-- type: sign
-  at: [20, 32]
-  post: false
-  name: Gym sign
-  text: 'BRIARWICK — Where the Thread Never Tangles. (Carved under it, smaller: "Unlike the Guild Accounts.")'
-- type: sign
-  at: [38, 31]
-  name: Loyal Three shrine
-  text: A shrine to the Loyal Three, "who drove the Gossamer Ogre from the wood." Carved ogre masks hang from the eaves.
-- type: sign
-  at: [33, 30]
-  name: Festival poster
-  text: 'The same poster as the Landing. Here the dark fleck in the Crown''s stone has been circled in charcoal. Someone has written: "SEE CHAPEL."'
-- type: event
-  name: Pallbearer Thistle
-  at: [63, 33]
-  pages:
-  - graphic: {sprite: trainer_BURGLAR, dir: left}
-    commands:
-    - A masked figure is cutting Meridian's orange survey flags, one by one.
-    - 'Thistle: You''ll stop me? Lowmarsh had looms too, once.'
-    - if: TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")
-      then:
-      - 'Thistle: ...Ask your Warden what she signed.'
-      - The Hollow pallbearer slips away between the trees.
-      - switch: [CH2_THISTLE_DONE, true]
-      - selfswitch: [A, true]
-  - cond: {self: A}
-- type: sign
-  at: [65, 32]
-  name: Lattice pylon
-  text: 'Half a brass pylon. A plate reads: MERIDIAN CONCORD — LATTICE 15 (BRIARWICK) — "Light for Everyone." It is faintly warm, and the grass around it
-    is stiff, like spun sugar.'
-- type: event
-  name: Old woman at the shrine
-  at: [39, 32]
-  pages:
-  - cond: {switch: GLOAMING_DISGUISED_CELESTINE}
-    graphic: {sprite: NPC 28, dir: up}
-    commands: ['An old woman sings softly to the shrine:', '"Three loyal hounds and an ogre so bold - but who was the thief, when the story was told?"',
-      She doesn't turn around.]
-- type: npc
-  name: Gym guide
-  at: [34, 17]
-  sprite: NPC 01
-  dir: down
-  text: The Loomhouse is all silk and string. Threads that hold only when twisted together - that's the Warden's whole puzzle.
-- type: npc
-  name: Meridian liaison
-  at: [50, 32]
-  sprite: trainer_GENTLEMAN
-  dir: left
-  text: 'Meridian liaison: Meridian has... arrangements with the Warden. The Lattice will save these groves. Eventually.'
+  at: [35, 63]
 - type: warp
   name: To Gossamer Wood b
+  to: {map: 524, x: 25, y: 1, dir: down}
   at: [36, 63]
-  to: {map: 524, x: 24, y: 1, dir: down}
 - type: event
-  name: Finch
-  at: [22, 30]
+  name: Arrival
   pages:
-  - graphic: {sprite: NPC 13, dir: down}
-    move: random
-    commands: ['Finch: Fourteen dead this week. They fly east at dusk and come back with glass on their wings. Then they don''t come back.', 'Finch: Meridian
-        says the Lattice will "stabilize" it. The line they''ve drawn for it goes straight through my grove.']
+  - commands:
+    - 'A village lashed between tree trunks: rope bridges, treetop houses, bolts of silk drying like flags. At the east edge, orange survey flags march
+      to a half-built brass pylon.'
+    - move:
+        who: Juno (arrival)
+        route:
+        - graphic: [trainer_RIVAL2, 0, 8, 0]
+        - {opacity: 255}
+        wait: true
+    - '\pf[JUNO,happy,sparkle,Juno (arrival)]Juno: Briarwick! Smell that? That''s mulberry and lanolin and— oh, the egg-seller''s open. I''ll find you at
+      the gym! Don''t start without me! Or do! I''ll catch up!'
+    - move:
+        who: Juno (arrival)
+        route:
+        - through_on
+        - up
+        - up
+        - up
+        - up
+        - up
+        - up
+        - {opacity: 0}
+        wait: true
+    - if: $player.badge_count == 0
+      then:
+      - switch: [GLOAMING_DISGUISED_CELESTINE, true]
+    - selfswitch: [A, true]
+    trigger: autorun
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [34, 62]
+- type: event
+  name: Juno (arrival)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [36, 61]
+- type: event
+  name: Stage manager
+  pages:
+  - commands:
+    - {script: "if $player.badge_count >= 1\n  $game_switches[@@GLOAMING_DISGUISED_CELESTINE] = false if $game_switches[@@GLOAMING_DISGUISED_CELESTINE]\n\
+        \  pbSetSelfSwitch(%EV[Dusk petal]%, \"A\", true)\nend\npbSetSelfSwitch(%EV[Charcoal child]%, \"A\", true) if $game_switches[@@CH2_MATRIARCH_DONE]\
+        \ && !pfm?(:ch2_close)"}
+    - {erase: true}
+    trigger: parallel
+    move: fixed
+  at: [37, 62]
+- type: sign
+  name: Loomhouse sign
+  post: true
+  text: 'LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM.
+
+    "A thread holds because it''s twisted with others."'
+  at: [38, 16]
+- type: event
+  name: Old woman at the shrine
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands:
+    - 'A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. An old woman in a grey shawl is sweeping it.
+      She is barefoot.'
+    - 'Old Woman: Three loyal hounds and an ogre so bold...'
+    - 'Old Woman: ...but who was the thief, when the story was told?'
+    - choices: ['Who was?', That's not how the story goes., '...']
+      branches:
+      - ['Old Woman: Oh, I couldn''t say. I could sing it, but I couldn''t say.']
+      - ['Old Woman: Isn''t it? I''ve only ever told it true. That''s the trouble with me.']
+      - ['Old Woman: Quiet. Good. You''ll hear more that way. Most of it''s under the floor.']
+      cancel: 3
+    - 'Old Woman: You''ve no color on you, child. Did you know? Like water in a glass.'
+    - 'Old Woman: Walk carefully. Eighteen roads is a long way, and people will want to carry you.'
+    - She goes back to sweeping.
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 28, dir: up}
+    cond: {switch: GLOAMING_DISGUISED_CELESTINE}
+  at: [24, 15]
+- type: sign
+  name: Loyal Three shrine
+  post: false
+  text: 'A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. Someone keeps it swept.'
+  at: [23, 14]
+- type: event
+  name: Dusk petal
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - if: '!pfm?(:dusk_petal)'
+      then:
+      - A single dusk-colored flower lies on the shrine.
+      - {script: 'pfm_item(:DUSKPETAL, 1, "Dusk Petal")'}
+      - It's only open at twilight. It's open now. It's noon.
+      - {script: 'pfm_set(:dusk_petal)'}
+      else: [The old woman is gone. The shrine has been swept very clean.]
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [25, 14]
+- type: event
+  name: Lattice pylon
+  pages:
+  - commands:
+    - if: pf_choice(:ch2_tamsin) == :keep_secret
+      then: ['A finished brass pylon, humming. A plate reads: MERIDIAN CONCORD — LATTICE 15 (BRIARWICK) — "Light for Everyone." The grass around it has
+          gone stiff as spun sugar for three yards.']
+      else:
+      - if: pf_choice(:ch2_tamsin)
+        then: ['The half-built pylon stands where it stood. A new chalk line marks a smaller footing, well off the grove.']
+        else: ['Half a brass pylon. A plate reads: MERIDIAN CONCORD — LATTICE 15 (BRIARWICK) — "Light for Everyone." It is faintly warm, and the grass around
+            it is stiff, like spun sugar.']
+    trigger: action
+    move: fixed
+  at: [68, 30]
+- type: sign
+  name: Survey flags
+  post: false
+  text: Orange cloth on stakes. Four of the stakes have been neatly cut. The cuts are very clean. A weaver's shears.
+  at: [66, 33]
+- type: event
+  name: Pylon watch 1
+  pages:
+  - commands:
+    - if: pfm?(:met_tamsin) && !$game_switches[@@CH2_THISTLE_DONE]
+      then:
+      - {script: pfm_dusk(30)}
+      - Night. Two grey-cowled figures in carved bark masks are cutting survey stakes with shears. A third stands at the pylon with a hand flat on the brass.
+      - move:
+          who: Bereaved 1
+          route:
+          - graphic: [trainer_CHANNELER, 0, 4, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Bereaved 2
+          route:
+          - graphic: [trainer_CHANNELER, 0, 6, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Pallbearer Thistle
+          route:
+          - graphic: [trainer_BURGLAR, 0, 8, 0]
+          - {opacity: 255}
+          wait: true
+      - 'Bereaved: That''s the last of the south line.'
+      - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Leave soil where they stood. Bare. Let something rot there for once.'
+      - {se: Voltorb Flip mark}
+      - Snap. A twig, under your foot.
+      - anim: [Bereaved 1, 3]
+      - anim: [Bereaved 2, 3]
+      - move:
+          who: Pallbearer Thistle
+          route: [face_player]
+          wait: true
+      - '\pf[THISTLE,angry,shock,Pallbearer Thistle]Thistle: A watcher. Meridian''s, or the Warden''s?'
+      - choices: [Neither., 'Who are you?', '...']
+        branches:
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Everyone''s somebody''s. You just haven''t been told whose yet.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: The Hollow. We mourn what this land was. Somebody has to.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: No answer. Then I''ll assume the worst. It saves time.']
+        cancel: 3
+      - '\pf[THISTLE,sad,,Pallbearer Thistle]Thistle: I was a weaver once. Lowmarsh. You won''t find it on a map now. It had looms too.'
+      - '\pf[THISTLE,angry,,Pallbearer Thistle]Thistle: Ask your Warden what she signed!'
+      - {script: setBattleRule("cannotRun")}
+      - if: TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")
+        then:
+        - '\pf[THISTLE,shocked,,Pallbearer Thistle]Thistle: ...Your partner doesn''t fight like the Wood''s got hold of it. It fights like it''s standing
+          nowhere at all.'
+        - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Let the land grieve, child. And look at the grass by that pylon in daylight.'
+        - move:
+            who: Bereaved 1
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Bereaved 2
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Pallbearer Thistle
+            route:
+            - through_on
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: true
+        - The three vanish into the trees. A bark mask is left on the ground.
+        - {script: 'pfm_item(:BARKMASK, 1, "Bark Mask")'}
+        - Carved to look like the Gossamer Ogre. It does look sad.
+        - switch: [CH2_THISTLE_DONE, true]
+        - {script: pfm_day(30)}
+        else:
+        - {script: pfm_day(10)}
+    trigger: touch
+    move: fixed
+  at: [63, 30]
+- type: event
+  name: Pylon watch 2
+  pages:
+  - commands:
+    - if: pfm?(:met_tamsin) && !$game_switches[@@CH2_THISTLE_DONE]
+      then:
+      - {script: pfm_dusk(30)}
+      - Night. Two grey-cowled figures in carved bark masks are cutting survey stakes with shears. A third stands at the pylon with a hand flat on the brass.
+      - move:
+          who: Bereaved 1
+          route:
+          - graphic: [trainer_CHANNELER, 0, 4, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Bereaved 2
+          route:
+          - graphic: [trainer_CHANNELER, 0, 6, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Pallbearer Thistle
+          route:
+          - graphic: [trainer_BURGLAR, 0, 8, 0]
+          - {opacity: 255}
+          wait: true
+      - 'Bereaved: That''s the last of the south line.'
+      - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Leave soil where they stood. Bare. Let something rot there for once.'
+      - {se: Voltorb Flip mark}
+      - Snap. A twig, under your foot.
+      - anim: [Bereaved 1, 3]
+      - anim: [Bereaved 2, 3]
+      - move:
+          who: Pallbearer Thistle
+          route: [face_player]
+          wait: true
+      - '\pf[THISTLE,angry,shock,Pallbearer Thistle]Thistle: A watcher. Meridian''s, or the Warden''s?'
+      - choices: [Neither., 'Who are you?', '...']
+        branches:
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Everyone''s somebody''s. You just haven''t been told whose yet.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: The Hollow. We mourn what this land was. Somebody has to.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: No answer. Then I''ll assume the worst. It saves time.']
+        cancel: 3
+      - '\pf[THISTLE,sad,,Pallbearer Thistle]Thistle: I was a weaver once. Lowmarsh. You won''t find it on a map now. It had looms too.'
+      - '\pf[THISTLE,angry,,Pallbearer Thistle]Thistle: Ask your Warden what she signed!'
+      - {script: setBattleRule("cannotRun")}
+      - if: TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")
+        then:
+        - '\pf[THISTLE,shocked,,Pallbearer Thistle]Thistle: ...Your partner doesn''t fight like the Wood''s got hold of it. It fights like it''s standing
+          nowhere at all.'
+        - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Let the land grieve, child. And look at the grass by that pylon in daylight.'
+        - move:
+            who: Bereaved 1
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Bereaved 2
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Pallbearer Thistle
+            route:
+            - through_on
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: true
+        - The three vanish into the trees. A bark mask is left on the ground.
+        - {script: 'pfm_item(:BARKMASK, 1, "Bark Mask")'}
+        - Carved to look like the Gossamer Ogre. It does look sad.
+        - switch: [CH2_THISTLE_DONE, true]
+        - {script: pfm_day(30)}
+        else:
+        - {script: pfm_day(10)}
+    trigger: touch
+    move: fixed
+  at: [63, 31]
+- type: event
+  name: Pylon watch 3
+  pages:
+  - commands:
+    - if: pfm?(:met_tamsin) && !$game_switches[@@CH2_THISTLE_DONE]
+      then:
+      - {script: pfm_dusk(30)}
+      - Night. Two grey-cowled figures in carved bark masks are cutting survey stakes with shears. A third stands at the pylon with a hand flat on the brass.
+      - move:
+          who: Bereaved 1
+          route:
+          - graphic: [trainer_CHANNELER, 0, 4, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Bereaved 2
+          route:
+          - graphic: [trainer_CHANNELER, 0, 6, 0]
+          - {opacity: 255}
+          wait: false
+      - move:
+          who: Pallbearer Thistle
+          route:
+          - graphic: [trainer_BURGLAR, 0, 8, 0]
+          - {opacity: 255}
+          wait: true
+      - 'Bereaved: That''s the last of the south line.'
+      - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Leave soil where they stood. Bare. Let something rot there for once.'
+      - {se: Voltorb Flip mark}
+      - Snap. A twig, under your foot.
+      - anim: [Bereaved 1, 3]
+      - anim: [Bereaved 2, 3]
+      - move:
+          who: Pallbearer Thistle
+          route: [face_player]
+          wait: true
+      - '\pf[THISTLE,angry,shock,Pallbearer Thistle]Thistle: A watcher. Meridian''s, or the Warden''s?'
+      - choices: [Neither., 'Who are you?', '...']
+        branches:
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Everyone''s somebody''s. You just haven''t been told whose yet.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: The Hollow. We mourn what this land was. Somebody has to.']
+        - ['\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: No answer. Then I''ll assume the worst. It saves time.']
+        cancel: 3
+      - '\pf[THISTLE,sad,,Pallbearer Thistle]Thistle: I was a weaver once. Lowmarsh. You won''t find it on a map now. It had looms too.'
+      - '\pf[THISTLE,angry,,Pallbearer Thistle]Thistle: Ask your Warden what she signed!'
+      - {script: setBattleRule("cannotRun")}
+      - if: TrainerBattle.start(:HOLLOW_THISTLE, "Thistle")
+        then:
+        - '\pf[THISTLE,shocked,,Pallbearer Thistle]Thistle: ...Your partner doesn''t fight like the Wood''s got hold of it. It fights like it''s standing
+          nowhere at all.'
+        - '\pf[THISTLE,neutral,,Pallbearer Thistle]Thistle: Let the land grieve, child. And look at the grass by that pylon in daylight.'
+        - move:
+            who: Bereaved 1
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Bereaved 2
+            route:
+            - through_on
+            - right
+            - right
+            - {opacity: 0}
+            wait: false
+        - move:
+            who: Pallbearer Thistle
+            route:
+            - through_on
+            - right
+            - right
+            - right
+            - {opacity: 0}
+            wait: true
+        - The three vanish into the trees. A bark mask is left on the ground.
+        - {script: 'pfm_item(:BARKMASK, 1, "Bark Mask")'}
+        - Carved to look like the Gossamer Ogre. It does look sad.
+        - switch: [CH2_THISTLE_DONE, true]
+        - {script: pfm_day(30)}
+        else:
+        - {script: pfm_day(10)}
+    trigger: touch
+    move: fixed
+  at: [63, 32]
+- type: event
+  name: Pallbearer Thistle
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH2_THISTLE_DONE}
+  at: [66, 31]
+- type: event
+  name: Bereaved 1
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH2_THISTLE_DONE}
+  at: [65, 29]
+- type: event
+  name: Bereaved 2
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {switch: CH2_THISTLE_DONE}
+  at: [66, 32]
+- type: event
+  name: Tamsin (square)
+  pages:
+  - commands:
+    - move:
+        who: Tamsin (square)
+        route: [toward_player]
+        wait: true
+    - {se: Player bump}
+    - Silk everywhere.
+    - anim: [Tamsin (square), 3]
+    - '\pf[TAMSIN,panic,shock,Tamsin (square)]Tamsin: Sorry! Sorry — I wasn''t — are you hurt? You''re not hurt. Sorry.'
+    - '\pf[TAMSIN,neutral,,Tamsin (square)]Tamsin: You''ve a Badge Case. Oh. Oh no. You''re a challenger. TODAY?'
+    - '\pf[TAMSIN,panic,sweat,Tamsin (square)]Tamsin: It''s fine! It''s fine. The gym''s open. It''s just a bit— the moths are— there was a meeting.'
+    - '\pf[TAMSIN,neutral,,Tamsin (square)]Tamsin: I''m Tamsin. Loom. The Warden. Since spring. Come to the Loomhouse when you''re ready. Take your time.
+      Please take your time.'
+    - move:
+        who: Tamsin (square)
+        route:
+        - through_on
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - right
+        - {opacity: 0}
+        wait: true
+    - {script: 'pfm_set(:met_tamsin)'}
+    - selfswitch: [A, true]
+    trigger: event_touch
+    move: fixed
+    graphic: {sprite: trainer_LASS, dir: left}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [43, 35]
+- type: sign
+  name: Festival poster
+  post: false
+  text: 'The same poster as the Landing. Here the dark fleck in the Crown''s stone has been circled in charcoal. Someone has written: "SEE CHAPEL."'
+  at: [40, 34]
+- type: event
+  name: Charcoal child
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - 'Child: I circled it. The Crown in the chapel''s got a whole stone. This one''s got a bit gone. See?'
+    - 'Child: Mum says the Crown got hurt once.'
+    - 'Child: How do you hurt a crown?'
+    - {wait: 20}
+    - Your hand moves, unprompted, to your chest.
+    - {wait: 40}
+    - {script: 'pfm_set(:ch2_close)'}
+    - selfswitch: [B, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 08, dir: up}
+    cond: {self: A}
+  - commands: ['Child: How do you hurt a crown? Nobody will tell me.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 08, dir: up}
+    cond: {self: B}
+  at: [40, 35]
 - type: event
   name: Weaver at loom
-  at: [16, 36]
   pages:
-  - graphic: &id001 {sprite: NPC 16, dir: down}
+  - commands:
+    - if: $player.badge_count >= 1
+      then: &id001 ['Weaver at loom: She told us. All of it, or you did. Either way the looms stopped for a whole minute. First time since the funeral.']
+      else:
+      - 'Weaver at loom: Clack-clack. Sixty picks a minute. Don''t talk to me on the downstroke.'
+      - selfswitch: [A, true]
+    trigger: action
     move: fixed
-    commands:
-    - 'Weaver at loom: Clack-clack. Sixty picks a minute. Don''t talk to me on the downstroke.'
-    - selfswitch: [A, true]
-  - cond: {self: A}
-    graphic: *id001
+    graphic: {sprite: NPC 16, dir: down}
+  - commands:
+    - if: $player.badge_count >= 1
+      then: *id001
+      else: ['Weaver at loom: That was the downstroke.']
+    trigger: action
     move: fixed
-    commands: ['Weaver at loom: That was the downstroke.']
+    graphic: {sprite: NPC 16, dir: down}
+    cond: {self: A}
+  at: [28, 28]
+- type: sign
+  name: Silk racks
+  post: false
+  text: The silk moves in no wind at all.
+  at: [25, 27]
 - type: event
-  name: Dyer
-  at: [19, 28]
+  name: HiddenItem rope bridge
   pages:
-  - graphic: {sprite: NPC 15, dir: down}
+  - commands:
+    - if: pbItemBall(:XATTACK)
+      then:
+      - It fell out of someone's pocket mid-bwoing.
+      - selfswitch: [A, true]
+    trigger: action
     move: fixed
-    commands: ['Dyer: Elowen green, that''s my vat. The Queen''s own shade. She''s never paid for a yard of it. "The Crown''s by right of soil," says the
-        taxman. So''s the mud, I said.']
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [24, 23]
 - type: event
-  name: Apprentice
-  at: [39, 48]
+  name: HiddenItem dye vats
   pages:
-  - graphic: {sprite: NPC 17, dir: down}
-    move: random
-    commands: ['Apprentice: I wove my first scarf! It''s got eleven mistakes. Tamsin found a twelfth and then apologized for an hour.']
+  - commands:
+    - if: pbItemBall(:TINYMUSHROOM)
+      then:
+      - Dyed Elowen green. Still a mushroom.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [13, 36]
+- type: sign
+  name: Town sign
+  post: true
+  text: 'BRIARWICK — Where the Thread Never Tangles.
+
+    (Carved under it, smaller: "Unlike the Guild Accounts.")'
+  at: [34, 58]
+- type: event
+  name: Finch
+  pages:
+  - commands: ['Finch: Fourteen dead this week. They fly east at dusk and come back with glass on their wings. Then they don''t come back.', 'Finch: Meridian
+        says the Lattice will "stabilize" it. The line they''ve drawn for it goes straight through my grove.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 07, dir: right}
+  - commands: ['Finch: The ringing''s stopped. The moths flew east at dusk and came back clean. Whatever you did in there: thank you. And don''t tell me.
+        I don''t want to know.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 07, dir: right}
+    cond: {switch: CH2_MATRIARCH_DONE}
+  at: [57, 34]
 - type: event
   name: Rope-bridge Boy
-  at: [30, 33]
   pages:
-  - graphic: {sprite: NPC 10, dir: down}
+  - commands:
+    - 'Boy: If you jump on the bridge it goes BWOING. I''m not allowed. You''re a grown-up. YOU do it.'
+    - choices: [Jump., Don't.]
+      branches:
+      - - {se: Player jump}
+        - Bwoing.
+        - 'Boy: HA!'
+        - 'Voice below: WHO''S JUMPING?!'
+      - ['Boy: Coward.']
+      cancel: 2
+    trigger: action
     move: fixed
-    commands: ['Rope-bridge Boy: If you jump on the bridge it goes BWOING. I''m not allowed. You''re a grown-up. YOU do it.', 'Boy: HA!', 'Voice below:
-        WHO''S JUMPING?!', 'Boy: Coward.']
+    graphic: {sprite: NPC 02, dir: down}
+  at: [24, 34]
 - type: event
   name: Grandmother knitting
-  at: [48, 32]
   pages:
-  - graphic: {sprite: NPC 02, dir: down}
+  - commands:
+    - if: pfm?(:sleeves_done)
+      then: ['Grandmother: Sixteen sleeves. I''m on the fifth. Don''t rush me.']
+      else:
+      - if: pfm_quest?(:sixteen_sleeves)
+        then:
+        - if: $bag.quantity(:TINYMUSHROOM) >= 3
+          then:
+          - {script: '$bag.remove(:TINYMUSHROOM, 3)'}
+          - You hand over three Tiny Mushrooms.
+          - 'Grandmother: Lovely. Smells dreadful. Here, I made this one first. It was meant for a Weedle. He evolved. Ungrateful.'
+          - {script: 'pfm_item(:SILKSCARF, 1)'}
+          - Two sleeves. A Kakuna has no use for it.
+          - {script: 'pfm_set(:sleeves_done)'}
+          - {script: 'pfm_quest_done(:sixteen_sleeves)'}
+          else:
+          - 'Grandmother: Three Tiny Mushrooms. From the wood. Green dye doesn''t boil itself.'
+          - {script: 'pbMessage(_INTL("({1} of 3.)", [$bag.quantity(:TINYMUSHROOM), 3].min))'}
+        else:
+        - if: pfm?(:gran_talked)
+          then:
+          - 'Grandmother: I''ve run out of green. The dyer won''t sell me less than a bolt. Fetch me three Tiny Mushrooms from the wood and I''ll boil my
+            own.'
+          - {script: 'pfm_quest(:sixteen_sleeves, "Sixteen Sleeves", "Bring three Tiny Mushrooms (0/3).")'}
+          else:
+          - 'Grandmother: It''s a jumper for my Caterpie. Sixteen sleeves. I''m on the fourth. Don''t rush me.'
+          - {script: 'pfm_set(:gran_talked)'}
+    trigger: action
     move: fixed
-    commands: ['Grandmother knitting: It''s a jumper for my Caterpie. Sixteen sleeves. I''m on the fourth. Don''t rush me.']
+    graphic: {sprite: NPC 11, dir: down}
+  at: [45, 38]
+- type: event
+  name: Dyer
+  pages:
+  - commands:
+    - if: $player.badge_count >= 1
+      then: ['Dyer: Contract''s a contract, says the linesman. So''s a pitchfork, says I.']
+      else: ['Dyer: Elowen green, that''s my vat. The Queen''s own shade. She''s never paid for a yard of it. "The Crown''s by right of soil," says the
+          taxman. So''s the mud, I said.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 15, dir: down}
+  at: [16, 32]
+- type: event
+  name: Apprentice
+  pages:
+  - commands: ['Apprentice: I wove my first scarf! It''s got eleven mistakes. Tamsin found a twelfth and then apologized for an hour.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 17, dir: down}
+  at: [21, 30]
 - type: event
   name: Silk Merchant
-  at: [60, 33]
   pages:
-  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
-    move: random
-    commands: ['Silk Merchant: Briarwick silk never tangles and never rots. That''s why nobody ever buys a second one. Terrible business. Wonderful product.']
+  - commands: ['Silk Merchant: Briarwick silk never tangles and never rots. That''s why nobody ever buys a second one. Terrible business. Wonderful product.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: down}
+  at: [38, 39]
 - type: event
   name: Meridian Linesman
-  at: [36, 26]
   pages:
-  - graphic: &id002 {sprite: trainer_SCIENTIST, dir: down}
-    move: fixed
-    commands:
+  - commands:
     - 'Meridian Linesman: Pylon''ll be humming by month''s end. Free light for the looms! Folk here look at me like I''m selling plague.'
     - selfswitch: [A, true]
-  - cond: {self: A}
-    graphic: *id002
+    trigger: action
     move: fixed
-    commands: ['Meridian Linesman: Truth is, I don''t know what it does to the wood. I just bolt the brass.']
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+  - commands: ['Meridian Linesman: Truth is, I don''t know what it does to the wood. I just bolt the brass.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+    cond: {self: A}
+  at: [61, 32]
 - type: event
   name: Tired Mother
-  at: [44, 48]
   pages:
-  - graphic: {sprite: NPC 17, dir: down}
+  - commands:
+    - if: $player.badge_count >= 1
+      then: ['Tired Mother: Still sleeping well.']
+      else: ['Tired Mother: Three nights running somebody''s cut the survey flags. I''m not saying who. I''m saying I slept very well through it.']
+    trigger: action
     move: fixed
-    commands: ['Tired Mother: Three nights running somebody''s cut the survey flags. I''m not saying who. I''m saying I slept very well through it.']
+    graphic: {sprite: NPC 17, dir: down}
+  at: [31, 47]
 - type: event
   name: Old Man on bridge
-  at: [34, 34]
   pages:
-  - graphic: {sprite: NPC 09, dir: down}
-    move: random
-    commands: ['Old Man on bridge: The Loyal Three drove the Ogre out of this wood. My grandfather told me. His grandfather told him. Nobody''s grandfather
+  - commands: ['Old Man on bridge: The Loyal Three drove the Ogre out of this wood. My grandfather told me. His grandfather told him. Nobody''s grandfather
         SAW it, mind.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 09, dir: down}
+  at: [2, 31]
 - type: event
   name: Girl in ogre mask
-  at: [36, 44]
   pages:
-  - graphic: {sprite: NPC 16, dir: down}
-    move: fixed
-    commands: ['Girl in ogre mask: RAAH! I''m the Gossamer Ogre! I steal children and eat looms!', 'Boy in dog mask: And I''m a Loyal Hound and I bite you!
+  - commands: ['Girl in ogre mask: RAAH! I''m the Gossamer Ogre! I steal children and eat looms!', 'Boy in dog mask: And I''m a Loyal Hound and I bite you!
         ...Why does the Ogre mask look sad?']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 16, dir: down}
+  at: [35, 36]
+- type: event
+  name: Boy in dog mask
+  pages:
+  - commands: ['Girl in ogre mask: RAAH! I''m the Gossamer Ogre! I steal children and eat looms!', 'Boy in dog mask: And I''m a Loyal Hound and I bite you!
+        ...Why does the Ogre mask look sad?']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 02, dir: down}
+  at: [36, 38]
 - type: event
   name: Egg-seller
-  at: [28, 46]
   pages:
-  - graphic: {sprite: NPC 22, dir: down}
+  - commands: ['Egg-seller: Silk-moth eggs, a copper each. That loud girl bought forty. FORTY. For her uncle, she says.']
+    trigger: action
     move: fixed
-    commands: ['Egg-seller: Silk-moth eggs, a copper each. That loud girl bought forty. FORTY. For her uncle, she says.']
+    graphic: {sprite: NPC 22, dir: down}
+  at: [43, 38]
 - type: event
   name: Tax-barge Deserter
-  at: [39, 30]
   pages:
-  - graphic: {sprite: trainer_SAILOR, dir: down}
-    move: random
-    commands: ['Tax-barge Deserter: I rowed the Queen''s tax-barge. Jumped off at Saltmere when they booed us. Weaving''s quieter. Nobody boos a scarf.']
+  - commands: ['Tax-barge Deserter: I rowed the Queen''s tax-barge. Jumped off at Saltmere when they booed us. Weaving''s quieter. Nobody boos a scarf.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SAILOR, dir: down}
+  at: [32, 54]
 - type: event
   name: Accord Chaplain
-  at: [34, 18]
   pages:
-  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
-    move: fixed
-    commands: ['Accord Chaplain: The chapel''s open. The mural''s older than the looms. Mind the Crown in it — people say it''s painted wrong. It isn''t.
+  - commands: ['Accord Chaplain: The chapel''s open. The mural''s older than the looms. Mind the Crown in it — people say it''s painted wrong. It isn''t.
         It''s painted *before*.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_GENTLEMAN, dir: down}
+  at: [56, 43]
 - type: event
   name: Youngster
-  at: [56, 40]
   pages:
-  - graphic: {sprite: trainer_YOUNGSTER, dir: down}
-    move: fixed
-    commands: ['Youngster: The Warden cries in the gym at night. I heard her through the wall. Then she apologized to the wall.']
+  - commands: ['Youngster: The Warden cries in the gym at night. I heard her through the wall. Then she apologized to the wall.']
+    trigger: action
+    move: random
+    graphic: {sprite: trainer_YOUNGSTER, dir: down}
+  at: [47, 32]
 - type: event
   name: Woman with basket
-  at: [50, 45]
   pages:
-  - graphic: {sprite: NPC 17, dir: down}
-    move: random
-    commands: ['Woman with basket: East wood rings like a bell now. My mother says a ringing wood means a wedding. I don''t think this is a wedding.']
+  - commands: ['Woman with basket: East wood rings like a bell now. My mother says a ringing wood means a wedding. I don''t think this is a wedding.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 17, dir: down}
+  at: [49, 41]
 - type: event
   name: Cutter's Wife
-  at: [23, 21]
   pages:
-  - graphic: {sprite: NPC 13, dir: down}
-    move: fixed
-    commands: ['Cutter''s Wife: You''ll want my husband if there''s a tree in your way. He''ll say no first. He always says no first. Wait for the second
+  - commands: ['Cutter''s Wife: You''ll want my husband if there''s a tree in your way. He''ll say no first. He always says no first. Wait for the second
         answer.']
-- type: sign
-  name: Survey Flags
-  at: [62, 30]
-  post: true
-  text: Orange cloth on stakes. Four of the stakes have been neatly cut. The cuts are very clean. A weaver's shears.
-- type: sign
-  name: Silk Racks
-  at: [23, 26]
-  post: true
-  text: The silk moves in no wind at all.
-- type: item
-  item: XATTACK
-  hidden: true
-  at: [37, 47]
-- type: item
-  item: TINYMUSHROOM
-  hidden: true
-  at: [15, 40]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 13, dir: down}
+  at: [38, 51]

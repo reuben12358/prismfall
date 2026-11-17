@@ -1420,13 +1420,14 @@ events:
   - commands:
     - if: '!pfm?(:wenna_tart)'
       then: *id001
-    - if: '!pfm?(:biscuit_reward)'
+    - if: '!pfm?(:biscuit_reward) && !$game_self_switches[[523, 0, ''BISCUIT'']]'
       then:
       - '\pf[WENNA,happy]Wenna: Biscuit''s home, rattling like a money box. Here. And another tart, for the nerves. Mine.'
       - {script: 'pfm_item(:ORANBERRY, 3)'}
       - {script: 'pfm_item(:BRAMBLETART, 1, "Bramble Tart")'}
       - {script: 'pfm_quest_done(:biscuit)'}
       - {script: 'pfm_set(:biscuit_reward)'}
+      - {script: '$game_self_switches[[523, 0, ''BISCUIT'']] = true'}
       else: ['\pf[WENNA,sad]Wenna: She told me about the orchard. That was the Pruetts'' place. They had apples when I was a girl.']
     trigger: action
     move: fixed

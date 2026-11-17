@@ -265,7 +265,7 @@ class Painter:
             L[0, y, x] = c.get('floor', L[0, y, x])
 
     def k_forest(self, n, c, own, same):
-        """Mixed forest: 2-wide, 3-tall trees (canopy on layer 2) in staggered rows 2 apart, species picked in
+        """Mixed forest: 2-wide, 3-tall trees (canopy on layer 3) in staggered rows 2 apart, species picked in
         noise patches, undergrowth in the gaps."""
         H, W = own.shape; L = self.layers
         sp = c['species']; seed = self.rng.randint(0, 9999)
@@ -280,7 +280,7 @@ class Painter:
                 k = sp[max(0, min(len(sp) - 1, int(vnoise(abs(x), abs(y), seed, c.get('patch', 6.0)) * len(sp) * 0.999)))]
                 if self.rng.random() < c.get('mix', 0.25):
                     k = self.rng.choice(sp)
-                L[1, y + 1, x], L[1, y + 1, x + 1] = k['mid']
+                L[2, y + 1, x], L[2, y + 1, x + 1] = k['mid']      # canopy body walk-behind (rubric 5: canopies on layer 3)
                 L[1, y + 2, x], L[1, y + 2, x + 1] = k['bot']
                 if y >= 0:
                     L[2, y, x], L[2, y, x + 1] = k['top']

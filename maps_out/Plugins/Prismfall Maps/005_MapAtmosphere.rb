@@ -12,12 +12,14 @@ module PrismfallMaps
     108 => [10, 4, -12, 0],   # Quarantine Customs Hall
     109 => [14, -4, -24, 10],   # The Dovetail - Deck
     110 => [10, 4, -12, 0],   # The Dovetail - Cabin
-    120 => [-8, 8, -18, 0],   # Briarwick
+    120 => [-18, -30, 4, 12],   # Briarwick
     121 => [10, 4, -12, 0],   # Briarwick Pokémon Center
     122 => [10, 4, -12, 0],   # Briarwick Mart
     123 => [10, 4, -12, 0],   # Weavers' Guildhall
     124 => [10, 4, -12, 0],   # Treetop House
     125 => [10, 4, -12, 0],   # Cutter's House
+    523 => [10, 4, -12, 0],   # Hale Farmhouse
+    526 => [10, 4, -12, 0],   # Woodward's Hut
     130 => [-10, -6, -18, 10],   # Loomhouse Gym - Foyer
     131 => [-10, -6, -18, 10],   # Loomhouse Gym - Weaving Hall
     132 => [-14, -8, -20, 15],   # Loomhouse Gym - Canopy Lofts
@@ -41,6 +43,8 @@ module PrismfallMaps
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
   MAP_FOGS = {
     100 => ["prismfall_seamist", 0, 40, 0, 100, 2, 0],   # Ferrow's Landing
+    109 => ["prismfall_seamist", 0, 55, 0, 100, 3, 0],   # The Dovetail - Deck
+    120 => ["prismfall_spores", 0, 46, 1, 100, 1, -1],   # Briarwick
   }
 
   def self.apply_map_fog

@@ -223,6 +223,8 @@ if !ONLY
   md << ""
   md << "Regenerate with `ruby tools/harness/run_all.rb` then `python3 -I tools/harness/render_cards.py`."
   md << ""
+  md << "**Real-engine footage** (mkxp-z + Elite Battle: DX + these plugins, AI vs AI): see `engine/README.md`."
+  md << ""
   md << "## What loaded"
   md << "- Engine: #{boot[:engine_scripts]} script sections of the base project (Essentials v21.1), in order."
   md << "- Plugins, in PluginManager order: #{boot[:plugins].join(', ')}."

@@ -1,14 +1,16 @@
-# Briarwick interiors (121-125). WRITTEN BY layouts/early_interiors.py. 526 / 523 below are carried over.
+# Briarwick interiors (121-125) + 523 / 526 (events from layouts/b3_interiors_523_526.yaml). WRITTEN BY layouts/early_interiors.py.
 id: 121
 name: Briarwick Pokémon Center
 parent: 120
 bgm: Poke Center
 metadata:
-  HealingSpot: [120, 28, 29]
+  HealingSpot: [120, 44, 27]
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
 palette: interior
 map: '....................
+
+  ....................
 
   ....................
 
@@ -66,8 +68,11 @@ tiles:
 - tile: 5360
   at: [3, 11]
   layer: 0
-- tile: 5550
+- tile: 5360
   at: [3, 12]
+  layer: 0
+- tile: 5550
+  at: [3, 13]
   layer: 0
 - tile: 5534
   at: [4, 2]
@@ -99,8 +104,11 @@ tiles:
 - tile: 5361
   at: [4, 11]
   layer: 0
-- tile: 5550
+- tile: 5361
   at: [4, 12]
+  layer: 0
+- tile: 5550
+  at: [4, 13]
   layer: 0
 - tile: 5534
   at: [5, 2]
@@ -126,8 +134,11 @@ tiles:
 - tile: 5362
   at: [5, 11]
   layer: 0
-- tile: 5550
+- tile: 5362
   at: [5, 12]
+  layer: 0
+- tile: 5550
+  at: [5, 13]
   layer: 0
 - tile: 5534
   at: [6, 2]
@@ -159,8 +170,11 @@ tiles:
 - tile: 5363
   at: [6, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [6, 12]
+  layer: 0
+- tile: 5550
+  at: [6, 13]
   layer: 0
 - tile: 5534
   at: [7, 2]
@@ -192,6 +206,9 @@ tiles:
 - tile: 5361
   at: [7, 11]
   layer: 0
+- tile: 5361
+  at: [7, 12]
+  layer: 0
 - tile: 5534
   at: [8, 2]
   layer: 0
@@ -221,6 +238,9 @@ tiles:
   layer: 0
 - tile: 5362
   at: [8, 11]
+  layer: 0
+- tile: 5362
+  at: [8, 12]
   layer: 0
 - tile: 5534
   at: [9, 2]
@@ -252,6 +272,9 @@ tiles:
 - tile: 5363
   at: [9, 11]
   layer: 0
+- tile: 5363
+  at: [9, 12]
+  layer: 0
 - tile: 5534
   at: [10, 2]
   layer: 0
@@ -281,6 +304,9 @@ tiles:
   layer: 0
 - tile: 5361
   at: [10, 11]
+  layer: 0
+- tile: 5361
+  at: [10, 12]
   layer: 0
 - tile: 5534
   at: [11, 2]
@@ -312,6 +338,9 @@ tiles:
 - tile: 5362
   at: [11, 11]
   layer: 0
+- tile: 5362
+  at: [11, 12]
+  layer: 0
 - tile: 5534
   at: [12, 2]
   layer: 0
@@ -342,8 +371,11 @@ tiles:
 - tile: 5363
   at: [12, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [12, 12]
+  layer: 0
+- tile: 5550
+  at: [12, 13]
   layer: 0
 - tile: 5534
   at: [13, 2]
@@ -369,8 +401,11 @@ tiles:
 - tile: 5361
   at: [13, 11]
   layer: 0
-- tile: 5550
+- tile: 5361
   at: [13, 12]
+  layer: 0
+- tile: 5550
+  at: [13, 13]
   layer: 0
 - tile: 5534
   at: [14, 2]
@@ -402,8 +437,11 @@ tiles:
 - tile: 5362
   at: [14, 11]
   layer: 0
-- tile: 5550
+- tile: 5362
   at: [14, 12]
+  layer: 0
+- tile: 5550
+  at: [14, 13]
   layer: 0
 - tile: 5534
   at: [15, 2]
@@ -429,8 +467,11 @@ tiles:
 - tile: 5363
   at: [15, 11]
   layer: 0
-- tile: 5550
+- tile: 5363
   at: [15, 12]
+  layer: 0
+- tile: 5550
+  at: [15, 13]
   layer: 0
 - tile: 5541
   at: [2, 3]
@@ -486,6 +527,12 @@ tiles:
 - tile: 5543
   at: [16, 11]
   layer: 0
+- tile: 5541
+  at: [2, 12]
+  layer: 0
+- tile: 5543
+  at: [16, 12]
+  layer: 0
 - tile: 5533
   at: [2, 2]
   layer: 0
@@ -493,10 +540,10 @@ tiles:
   at: [16, 2]
   layer: 0
 - tile: 5549
-  at: [2, 12]
+  at: [2, 13]
   layer: 0
 - tile: 5551
-  at: [16, 12]
+  at: [16, 13]
   layer: 0
 - tile: 5563
   at: [3, 3]
@@ -511,43 +558,43 @@ tiles:
   at: [15, 4]
   layer: 0
 - tile: 5361
-  at: [8, 12]
-  layer: 0
-- tile: 5550
   at: [8, 13]
   layer: 0
+- tile: 5550
+  at: [8, 14]
+  layer: 0
 - tile: 5512
-  at: [8, 12]
+  at: [8, 13]
   layer: 1
 - tile: 5362
-  at: [9, 12]
-  layer: 0
-- tile: 5550
   at: [9, 13]
   layer: 0
+- tile: 5550
+  at: [9, 14]
+  layer: 0
 - tile: 5513
-  at: [9, 12]
+  at: [9, 13]
   layer: 1
 - tile: 5363
-  at: [10, 12]
-  layer: 0
-- tile: 5550
   at: [10, 13]
   layer: 0
+- tile: 5550
+  at: [10, 14]
+  layer: 0
 - tile: 5514
-  at: [10, 12]
+  at: [10, 13]
   layer: 1
 - tile: 5554
-  at: [7, 12]
-  layer: 0
-- tile: 5553
-  at: [11, 12]
-  layer: 0
-- tile: 5549
   at: [7, 13]
   layer: 0
-- tile: 5551
+- tile: 5553
   at: [11, 13]
+  layer: 0
+- tile: 5549
+  at: [7, 14]
+  layer: 0
+- tile: 5551
+  at: [11, 14]
   layer: 0
 - tile: 5544
   at: [5, 3]
@@ -627,102 +674,166 @@ tiles:
 - tile: 5558
   at: [3, 6]
   layer: 2
-- tile: 5581
+- tile: 5411
+  at: [7, 8]
+  layer: 1
+- tile: 5412
+  at: [8, 8]
+  layer: 1
+- tile: 5412
+  at: [9, 8]
+  layer: 1
+- tile: 5412
+  at: [10, 8]
+  layer: 1
+- tile: 5413
+  at: [11, 8]
+  layer: 1
+- tile: 5419
+  at: [7, 9]
+  layer: 1
+- tile: 5420
+  at: [8, 9]
+  layer: 1
+- tile: 5420
+  at: [9, 9]
+  layer: 1
+- tile: 5420
+  at: [10, 9]
+  layer: 1
+- tile: 5421
   at: [11, 9]
   layer: 1
-- tile: 5582
-  at: [12, 9]
+- tile: 5427
+  at: [7, 10]
   layer: 1
-- tile: 5582
-  at: [13, 9]
+- tile: 5428
+  at: [8, 10]
   layer: 1
-- tile: 5582
-  at: [14, 9]
+- tile: 5428
+  at: [9, 10]
   layer: 1
-- tile: 5583
-  at: [15, 9]
+- tile: 5428
+  at: [10, 10]
   layer: 1
-- tile: 5589
+- tile: 5429
   at: [11, 10]
   layer: 1
-- tile: 5590
-  at: [12, 10]
+- tile: 3466
+  at: [9, 9]
+  layer: 2
+- tile: 3467
+  at: [10, 9]
+  layer: 2
+- tile: 3474
+  at: [9, 10]
+  layer: 2
+- tile: 3475
+  at: [10, 10]
+  layer: 2
+- tile: 4109
+  at: [15, 8]
+  layer: 2
+- tile: 4117
+  at: [15, 9]
   layer: 1
-- tile: 5590
-  at: [13, 10]
-  layer: 1
-- tile: 5590
-  at: [14, 10]
-  layer: 1
-- tile: 5591
+- tile: 4125
   at: [15, 10]
   layer: 1
-- tile: 5531
-  at: [5, 8]
-  layer: 1
-- tile: 5532
-  at: [6, 8]
-  layer: 1
-- tile: 5539
-  at: [5, 9]
-  layer: 1
-- tile: 5540
-  at: [6, 9]
-  layer: 1
-- tile: 5558
-  at: [5, 9]
+- tile: 4109
+  at: [3, 8]
   layer: 2
-- tile: 5438
+- tile: 4117
   at: [3, 9]
   layer: 1
-- tile: 5566
+- tile: 4125
   at: [3, 10]
   layer: 1
-- tile: 5558
-  at: [3, 9]
+- tile: 3295
+  at: [6, 4]
   layer: 2
-- tile: 4085
-  at: [7, 10]
+- tile: 3303
+  at: [6, 5]
+  layer: 1
+- tile: 3293
+  at: [4, 11]
   layer: 2
-- tile: 4093
-  at: [7, 11]
+- tile: 3301
+  at: [4, 12]
   layer: 1
-- tile: 5472
-  at: [4, 10]
+- tile: 3614
+  at: [14, 11]
   layer: 1
-- tile: 5474
-  at: [5, 10]
+- tile: 3369
+  at: [7, 3]
+  layer: 1
+- tile: 3370
+  at: [8, 3]
+  layer: 1
+- tile: 3377
+  at: [7, 4]
+  layer: 1
+- tile: 3378
+  at: [8, 4]
+  layer: 1
+- tile: 4077
+  at: [5, 9]
+  layer: 1
+- tile: 4077
+  at: [4, 9]
   layer: 1
 events:
 - type: exit
-  at: [9, 12]
+  at: [9, 13]
   link: BW_PC
-- type: npc
+- type: event
   name: Trainer
-  at: [5, 9]
-  sprite: NPC 08
-  dir: left
-  commands: ['Trainer: The gym''s all planks and looms. Pull the wrong lever and the floor leaves. I''ve met the basement twice.']
-- type: sign
-  name: Gale Post Desk
+  pages:
+  - commands: ['Trainer: The gym''s all planks and looms. Pull the wrong lever and the floor leaves. I''ve met the basement twice.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 20, dir: down}
   at: [5, 10]
-  post: false
-  text: 'A letter is waiting. "Lecture Two is drafted. Do not make me send it. Eat something. — I.L." (Received: POTION ×2, and a tea bag. ITEM: KELP TEA BAG. "You
-    could throw it away. You don''t.")'
+- type: event
+  name: Gale Post desk
+  pages:
+  - commands:
+    - if: $game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ch2_close) && !pfm?(:gale2)
+      then:
+      - GALE POST. A letter is waiting.
+      - '"Heard about the Hollow. Lecture Two enclosed. It is nine pages. Page nine says I''m proud of you. Do not skip to page nine. — I.L."'
+      - {script: 'pfm_set(:gale2)'}
+      - var: [STORY_CHAPTER, 3]
+      else:
+      - if: '!pfm?(:gale1)'
+        then:
+        - GALE POST. A letter is waiting.
+        - '"Lecture Two is drafted. Do not make me send it. Eat something. — I.L."'
+        - {script: 'pfm_item(:POTION, 2)'}
+        - {script: 'pfm_item(:KELPTEABAG, 1, "Kelp Tea Bag")'}
+        - You could throw it away. You don't.
+        - {script: 'pfm_set(:gale1)'}
+        else: ['GALE POST. Write to Tidewatch Station, Ferrow''s Landing. Larch reads every letter twice and answers half.']
+    trigger: action
+    move: fixed
+  at: [6, 6]
 take_events:
 - template: pokecenter
   name: Nurse
   at: [9, 5]
+  replace_text: {'\rHello, and welcome to the Pokémon Center.': '\rWe heal for free. The scanner at the door is new. It told me I''m "Insect, Briarwick". I''ve lived
+      here forty years, I''d worked it out.'}
+  prepend:
+  - if: $player.party_count == 0
+    then:
+    - \rOh, you don't have one yet! Come back when you do. I'll act surprised.
+    - {exit: true}
 - template: pokecenter
   name: Healing balls
   at: [11, 5]
 - template: pokecenter
   name: PC
   at: [5, 5]
-anchors:
-- [5, 8]
-- [9, 9]
-- [14, 7]
 
 ---
 id: 122
@@ -1331,21 +1442,48 @@ tiles:
 - tile: 5558
   at: [13, 10]
   layer: 2
+- tile: 4058
+  at: [9, 4]
+  layer: 2
+- tile: 4059
+  at: [10, 4]
+  layer: 2
+- tile: 4066
+  at: [9, 5]
+  layer: 1
+- tile: 4067
+  at: [10, 5]
+  layer: 1
+- tile: 4101
+  at: [9, 8]
+  layer: 1
+- tile: 4823
+  at: [6, 10]
+  layer: 2
+- tile: 4831
+  at: [6, 11]
+  layer: 1
 events:
 - type: exit
   at: [8, 12]
   link: BW_MART
 - type: event
   name: Customer
-  at: [6, 10]
   pages:
-  - graphic: {sprite: NPC 23, dir: down}
+  - commands: ['Customer: I asked for a Synthetic Seed and the old ladies in the queue went silent. I put it back.']
+    trigger: action
     move: fixed
-    commands: ['Customer: I asked for a Synthetic Seed and the old ladies in the queue went silent. I put it back.']
+    graphic: {sprite: NPC 23, dir: up}
+  at: [6, 10]
 take_events:
 - template: mart
   name: Mart
   at: [12, 5]
+  prepend:
+  - if: '!pfm?(:bw_mart_hi)'
+    then:
+    - 'Clerk: Antidotes go fast here. The moths don''t mean it.'
+    - {script: 'pfm_set(:bw_mart_hi)'}
 
 ---
 id: 123
@@ -1356,41 +1494,41 @@ metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
 palette: interior
-map: '.....................
+map: '.........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
-  .....................
+  .........................................
 
   '
 tiles:
@@ -2105,30 +2243,6 @@ tiles:
 - tile: 5375
   at: [4, 6]
   layer: 1
-- tile: 5350
-  at: [16, 3]
-  layer: 1
-- tile: 5351
-  at: [17, 3]
-  layer: 1
-- tile: 5358
-  at: [16, 4]
-  layer: 1
-- tile: 5359
-  at: [17, 4]
-  layer: 1
-- tile: 5366
-  at: [16, 5]
-  layer: 1
-- tile: 5367
-  at: [17, 5]
-  layer: 1
-- tile: 5374
-  at: [16, 6]
-  layer: 1
-- tile: 5375
-  at: [17, 6]
-  layer: 1
 - tile: 5472
   at: [5, 8]
   layer: 1
@@ -2207,39 +2321,48 @@ tiles:
 - tile: 5594
   at: [5, 13]
   layer: 1
-- tile: 5584
-  at: [15, 12]
+- tile: 4080
+  at: [5, 4]
+  layer: 2
+- tile: 4081
+  at: [6, 4]
+  layer: 2
+- tile: 4088
+  at: [5, 5]
   layer: 1
-- tile: 5585
-  at: [16, 12]
+- tile: 4089
+  at: [6, 5]
   layer: 1
-- tile: 5586
-  at: [17, 12]
+- tile: 5411
+  at: [8, 11]
   layer: 1
-- tile: 5592
-  at: [15, 13]
-  layer: 1
-- tile: 5593
-  at: [16, 13]
-  layer: 1
-- tile: 5594
-  at: [17, 13]
-  layer: 1
-- tile: 5531
+- tile: 5412
   at: [9, 11]
   layer: 1
-- tile: 5532
+- tile: 5412
   at: [10, 11]
   layer: 1
-- tile: 5539
+- tile: 5412
+  at: [11, 11]
+  layer: 1
+- tile: 5413
+  at: [12, 11]
+  layer: 1
+- tile: 5427
+  at: [8, 12]
+  layer: 1
+- tile: 5428
   at: [9, 12]
   layer: 1
-- tile: 5540
+- tile: 5428
   at: [10, 12]
   layer: 1
-- tile: 5558
-  at: [9, 12]
-  layer: 2
+- tile: 5428
+  at: [11, 12]
+  layer: 1
+- tile: 5429
+  at: [12, 12]
+  layer: 1
 - tile: 5422
   at: [10, 4]
   layer: 1
@@ -2264,35 +2387,845 @@ tiles:
 - tile: 4181
   at: [8, 13]
   layer: 1
-- tile: 4080
-  at: [5, 4]
-  layer: 2
-- tile: 4081
-  at: [6, 4]
-  layer: 2
-- tile: 4088
-  at: [5, 5]
+- tile: 5675
+  at: [15, 3]
   layer: 1
-- tile: 4089
-  at: [6, 5]
+- tile: 5676
+  at: [16, 3]
+  layer: 1
+- tile: 5677
+  at: [17, 3]
+  layer: 1
+- tile: 5683
+  at: [15, 4]
+  layer: 1
+- tile: 5684
+  at: [16, 4]
+  layer: 1
+- tile: 5685
+  at: [17, 4]
+  layer: 1
+- tile: 5691
+  at: [15, 5]
+  layer: 1
+- tile: 5692
+  at: [16, 5]
+  layer: 1
+- tile: 5693
+  at: [17, 5]
+  layer: 1
+- tile: 5699
+  at: [15, 6]
+  layer: 1
+- tile: 5700
+  at: [16, 6]
+  layer: 1
+- tile: 5701
+  at: [17, 6]
+  layer: 1
+- tile: 3305
+  at: [13, 4]
+  layer: 2
+- tile: 3313
+  at: [13, 5]
+  layer: 1
+- tile: 4056
+  at: [9, 4]
+  layer: 2
+- tile: 4057
+  at: [10, 4]
+  layer: 2
+- tile: 4064
+  at: [9, 5]
+  layer: 1
+- tile: 4065
+  at: [10, 5]
+  layer: 1
+- tile: 4077
+  at: [7, 7]
+  layer: 1
+- tile: 4077
+  at: [13, 7]
+  layer: 1
+- tile: 4101
+  at: [12, 12]
+  layer: 2
+- tile: 5534
+  at: [24, 2]
+  layer: 0
+- tile: 5352
+  at: [24, 5]
+  layer: 0
+- tile: 5360
+  at: [24, 6]
+  layer: 0
+- tile: 5360
+  at: [24, 7]
+  layer: 0
+- tile: 5360
+  at: [24, 8]
+  layer: 0
+- tile: 5360
+  at: [24, 9]
+  layer: 0
+- tile: 5360
+  at: [24, 10]
+  layer: 0
+- tile: 5360
+  at: [24, 11]
+  layer: 0
+- tile: 5550
+  at: [24, 12]
+  layer: 0
+- tile: 5534
+  at: [25, 2]
+  layer: 0
+- tile: 5547
+  at: [25, 3]
+  layer: 0
+- tile: 5555
+  at: [25, 4]
+  layer: 0
+- tile: 5353
+  at: [25, 5]
+  layer: 0
+- tile: 5361
+  at: [25, 6]
+  layer: 0
+- tile: 5361
+  at: [25, 7]
+  layer: 0
+- tile: 5361
+  at: [25, 8]
+  layer: 0
+- tile: 5361
+  at: [25, 9]
+  layer: 0
+- tile: 5361
+  at: [25, 10]
+  layer: 0
+- tile: 5361
+  at: [25, 11]
+  layer: 0
+- tile: 5550
+  at: [25, 12]
+  layer: 0
+- tile: 5534
+  at: [26, 2]
+  layer: 0
+- tile: 5547
+  at: [26, 3]
+  layer: 0
+- tile: 5555
+  at: [26, 4]
+  layer: 0
+- tile: 5354
+  at: [26, 5]
+  layer: 0
+- tile: 5362
+  at: [26, 6]
+  layer: 0
+- tile: 5362
+  at: [26, 7]
+  layer: 0
+- tile: 5362
+  at: [26, 8]
+  layer: 0
+- tile: 5362
+  at: [26, 9]
+  layer: 0
+- tile: 5362
+  at: [26, 10]
+  layer: 0
+- tile: 5362
+  at: [26, 11]
+  layer: 0
+- tile: 5550
+  at: [26, 12]
+  layer: 0
+- tile: 5534
+  at: [27, 2]
+  layer: 0
+- tile: 5547
+  at: [27, 3]
+  layer: 0
+- tile: 5555
+  at: [27, 4]
+  layer: 0
+- tile: 5355
+  at: [27, 5]
+  layer: 0
+- tile: 5363
+  at: [27, 6]
+  layer: 0
+- tile: 5363
+  at: [27, 7]
+  layer: 0
+- tile: 5363
+  at: [27, 8]
+  layer: 0
+- tile: 5363
+  at: [27, 9]
+  layer: 0
+- tile: 5363
+  at: [27, 10]
+  layer: 0
+- tile: 5363
+  at: [27, 11]
+  layer: 0
+- tile: 5534
+  at: [28, 2]
+  layer: 0
+- tile: 5547
+  at: [28, 3]
+  layer: 0
+- tile: 5555
+  at: [28, 4]
+  layer: 0
+- tile: 5353
+  at: [28, 5]
+  layer: 0
+- tile: 5361
+  at: [28, 6]
+  layer: 0
+- tile: 5361
+  at: [28, 7]
+  layer: 0
+- tile: 5361
+  at: [28, 8]
+  layer: 0
+- tile: 5361
+  at: [28, 9]
+  layer: 0
+- tile: 5361
+  at: [28, 10]
+  layer: 0
+- tile: 5361
+  at: [28, 11]
+  layer: 0
+- tile: 5534
+  at: [29, 2]
+  layer: 0
+- tile: 5354
+  at: [29, 5]
+  layer: 0
+- tile: 5362
+  at: [29, 6]
+  layer: 0
+- tile: 5362
+  at: [29, 7]
+  layer: 0
+- tile: 5362
+  at: [29, 8]
+  layer: 0
+- tile: 5362
+  at: [29, 9]
+  layer: 0
+- tile: 5362
+  at: [29, 10]
+  layer: 0
+- tile: 5362
+  at: [29, 11]
+  layer: 0
+- tile: 5534
+  at: [30, 2]
+  layer: 0
+- tile: 5547
+  at: [30, 3]
+  layer: 0
+- tile: 5555
+  at: [30, 4]
+  layer: 0
+- tile: 5355
+  at: [30, 5]
+  layer: 0
+- tile: 5363
+  at: [30, 6]
+  layer: 0
+- tile: 5363
+  at: [30, 7]
+  layer: 0
+- tile: 5363
+  at: [30, 8]
+  layer: 0
+- tile: 5363
+  at: [30, 9]
+  layer: 0
+- tile: 5363
+  at: [30, 10]
+  layer: 0
+- tile: 5363
+  at: [30, 11]
+  layer: 0
+- tile: 5534
+  at: [31, 2]
+  layer: 0
+- tile: 5547
+  at: [31, 3]
+  layer: 0
+- tile: 5555
+  at: [31, 4]
+  layer: 0
+- tile: 5353
+  at: [31, 5]
+  layer: 0
+- tile: 5361
+  at: [31, 6]
+  layer: 0
+- tile: 5361
+  at: [31, 7]
+  layer: 0
+- tile: 5361
+  at: [31, 8]
+  layer: 0
+- tile: 5361
+  at: [31, 9]
+  layer: 0
+- tile: 5361
+  at: [31, 10]
+  layer: 0
+- tile: 5361
+  at: [31, 11]
+  layer: 0
+- tile: 5534
+  at: [32, 2]
+  layer: 0
+- tile: 5547
+  at: [32, 3]
+  layer: 0
+- tile: 5555
+  at: [32, 4]
+  layer: 0
+- tile: 5354
+  at: [32, 5]
+  layer: 0
+- tile: 5362
+  at: [32, 6]
+  layer: 0
+- tile: 5362
+  at: [32, 7]
+  layer: 0
+- tile: 5362
+  at: [32, 8]
+  layer: 0
+- tile: 5362
+  at: [32, 9]
+  layer: 0
+- tile: 5362
+  at: [32, 10]
+  layer: 0
+- tile: 5362
+  at: [32, 11]
+  layer: 0
+- tile: 5550
+  at: [32, 12]
+  layer: 0
+- tile: 5534
+  at: [33, 2]
+  layer: 0
+- tile: 5547
+  at: [33, 3]
+  layer: 0
+- tile: 5555
+  at: [33, 4]
+  layer: 0
+- tile: 5355
+  at: [33, 5]
+  layer: 0
+- tile: 5363
+  at: [33, 6]
+  layer: 0
+- tile: 5363
+  at: [33, 7]
+  layer: 0
+- tile: 5363
+  at: [33, 8]
+  layer: 0
+- tile: 5363
+  at: [33, 9]
+  layer: 0
+- tile: 5363
+  at: [33, 10]
+  layer: 0
+- tile: 5363
+  at: [33, 11]
+  layer: 0
+- tile: 5550
+  at: [33, 12]
+  layer: 0
+- tile: 5534
+  at: [34, 2]
+  layer: 0
+- tile: 5353
+  at: [34, 5]
+  layer: 0
+- tile: 5361
+  at: [34, 6]
+  layer: 0
+- tile: 5361
+  at: [34, 7]
+  layer: 0
+- tile: 5361
+  at: [34, 8]
+  layer: 0
+- tile: 5361
+  at: [34, 9]
+  layer: 0
+- tile: 5361
+  at: [34, 10]
+  layer: 0
+- tile: 5361
+  at: [34, 11]
+  layer: 0
+- tile: 5550
+  at: [34, 12]
+  layer: 0
+- tile: 5541
+  at: [23, 3]
+  layer: 0
+- tile: 5543
+  at: [35, 3]
+  layer: 0
+- tile: 5541
+  at: [23, 4]
+  layer: 0
+- tile: 5543
+  at: [35, 4]
+  layer: 0
+- tile: 5541
+  at: [23, 5]
+  layer: 0
+- tile: 5543
+  at: [35, 5]
+  layer: 0
+- tile: 5541
+  at: [23, 6]
+  layer: 0
+- tile: 5543
+  at: [35, 6]
+  layer: 0
+- tile: 5541
+  at: [23, 7]
+  layer: 0
+- tile: 5543
+  at: [35, 7]
+  layer: 0
+- tile: 5541
+  at: [23, 8]
+  layer: 0
+- tile: 5543
+  at: [35, 8]
+  layer: 0
+- tile: 5541
+  at: [23, 9]
+  layer: 0
+- tile: 5543
+  at: [35, 9]
+  layer: 0
+- tile: 5541
+  at: [23, 10]
+  layer: 0
+- tile: 5543
+  at: [35, 10]
+  layer: 0
+- tile: 5541
+  at: [23, 11]
+  layer: 0
+- tile: 5543
+  at: [35, 11]
+  layer: 0
+- tile: 5533
+  at: [23, 2]
+  layer: 0
+- tile: 5535
+  at: [35, 2]
+  layer: 0
+- tile: 5549
+  at: [23, 12]
+  layer: 0
+- tile: 5551
+  at: [35, 12]
+  layer: 0
+- tile: 5563
+  at: [24, 3]
+  layer: 0
+- tile: 5571
+  at: [24, 4]
+  layer: 0
+- tile: 5564
+  at: [34, 3]
+  layer: 0
+- tile: 5572
+  at: [34, 4]
+  layer: 0
+- tile: 5361
+  at: [28, 12]
+  layer: 0
+- tile: 5550
+  at: [28, 13]
+  layer: 0
+- tile: 5512
+  at: [28, 12]
+  layer: 1
+- tile: 5362
+  at: [29, 12]
+  layer: 0
+- tile: 5550
+  at: [29, 13]
+  layer: 0
+- tile: 5513
+  at: [29, 12]
+  layer: 1
+- tile: 5363
+  at: [30, 12]
+  layer: 0
+- tile: 5550
+  at: [30, 13]
+  layer: 0
+- tile: 5514
+  at: [30, 12]
+  layer: 1
+- tile: 5554
+  at: [27, 12]
+  layer: 0
+- tile: 5553
+  at: [31, 12]
+  layer: 0
+- tile: 5549
+  at: [27, 13]
+  layer: 0
+- tile: 5551
+  at: [31, 13]
+  layer: 0
+- tile: 5544
+  at: [29, 3]
+  layer: 0
+- tile: 5552
+  at: [29, 4]
+  layer: 0
+- tile: 5411
+  at: [27, 7]
+  layer: 1
+- tile: 5412
+  at: [28, 7]
+  layer: 1
+- tile: 5412
+  at: [29, 7]
+  layer: 1
+- tile: 5412
+  at: [30, 7]
+  layer: 1
+- tile: 5413
+  at: [31, 7]
+  layer: 1
+- tile: 5419
+  at: [27, 8]
+  layer: 1
+- tile: 5420
+  at: [28, 8]
+  layer: 1
+- tile: 5420
+  at: [29, 8]
+  layer: 1
+- tile: 5420
+  at: [30, 8]
+  layer: 1
+- tile: 5421
+  at: [31, 8]
+  layer: 1
+- tile: 5427
+  at: [27, 9]
+  layer: 1
+- tile: 5428
+  at: [28, 9]
+  layer: 1
+- tile: 5428
+  at: [29, 9]
+  layer: 1
+- tile: 5428
+  at: [30, 9]
+  layer: 1
+- tile: 5429
+  at: [31, 9]
+  layer: 1
+- tile: 3299
+  at: [28, 7]
+  layer: 2
+- tile: 3300
+  at: [29, 7]
+  layer: 2
+- tile: 3307
+  at: [28, 8]
+  layer: 2
+- tile: 3308
+  at: [29, 8]
+  layer: 2
+- tile: 3309
+  at: [24, 3]
+  layer: 2
+- tile: 3310
+  at: [25, 3]
+  layer: 2
+- tile: 3317
+  at: [24, 4]
+  layer: 1
+- tile: 3318
+  at: [25, 4]
+  layer: 1
+- tile: 3295
+  at: [26, 4]
+  layer: 2
+- tile: 3303
+  at: [26, 5]
+  layer: 1
+- tile: 3633
+  at: [33, 3]
+  layer: 2
+- tile: 3641
+  at: [33, 4]
+  layer: 2
+- tile: 3649
+  at: [33, 5]
+  layer: 1
+- tile: 4136
+  at: [32, 9]
+  layer: 2
+- tile: 4137
+  at: [33, 9]
+  layer: 2
+- tile: 4138
+  at: [34, 9]
+  layer: 2
+- tile: 4144
+  at: [32, 10]
+  layer: 1
+- tile: 4145
+  at: [33, 10]
+  layer: 1
+- tile: 4146
+  at: [34, 10]
+  layer: 1
+- tile: 4152
+  at: [32, 11]
+  layer: 1
+- tile: 4153
+  at: [33, 11]
+  layer: 1
+- tile: 4154
+  at: [34, 11]
+  layer: 1
+- tile: 4077
+  at: [30, 8]
+  layer: 2
+- tile: 3391
+  at: [34, 6]
+  layer: 1
+- tile: 5675
+  at: [24, 8]
+  layer: 1
+- tile: 5676
+  at: [25, 8]
+  layer: 1
+- tile: 5677
+  at: [26, 8]
+  layer: 1
+- tile: 5683
+  at: [24, 9]
+  layer: 1
+- tile: 5684
+  at: [25, 9]
+  layer: 1
+- tile: 5685
+  at: [26, 9]
+  layer: 1
+- tile: 5691
+  at: [24, 10]
+  layer: 1
+- tile: 5692
+  at: [25, 10]
+  layer: 1
+- tile: 5693
+  at: [26, 10]
+  layer: 1
+- tile: 5699
+  at: [24, 11]
+  layer: 1
+- tile: 5700
+  at: [25, 11]
+  layer: 1
+- tile: 5701
+  at: [26, 11]
   layer: 1
 events:
 - type: exit
   at: [10, 14]
   link: BW_GUILD
-- type: npc
-  name: Guild master
+- type: event
+  name: Hett
+  pages:
+  - commands:
+    - if: $game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ledger_read) && !pfm?(:hett_reward)
+      then:
+      - 'Hett: From the guild''s teaching chest. Old Mother Loom would''ve wanted a stranger to have it. She never trusted us with it.'
+      - {script: pfm_money(2000)}
+      - {script: 'pfm_item(:TMSTRINGSHOT, 1, "TM String Shot")'}
+      - {script: 'pfm_set(:hett_reward)'}
+      - {script: 'pfm_quest_done(:locked_ledger)'}
+      else:
+      - if: $player.badge_count >= 1
+        then: ['Hett: She signed WHAT? Alone? ...Poor fool child. Her gran would''ve made the whole village sign it with her, and then it''d be all our fault. That''s
+            what a guild''s FOR.']
+        else:
+        - if: pfm?(:ledger_read) && !pfm?(:ledger_told)
+          then:
+          - 'Hett: ...Alone. She signed it alone. Don''t say anything yet. Let me think how to say it kindly. I''m out of practice.'
+          - {script: 'pfm_set(:ledger_told)'}
+          else:
+          - if: pfm?(:hett_talked) && !pfm_quest?(:locked_ledger)
+            then:
+            - 'Hett: You''re a stranger, so you can do what I can''t. The guild ledger''s in the Warden''s loft and it''s locked. Old Mother Loom kept the key in
+              the gym. "Where the first thread starts," she used to say.'
+            - {script: 'pfm_quest(:locked_ledger, "The Locked Ledger", "Find the ledger key in the Loomhouse.")'}
+            else:
+            - if: pfm_quest?(:locked_ledger)
+              then: ['Hett: Where the first thread starts. In the Loomhouse. Mind the planks.']
+              else:
+              - 'Hett: Old Mother Loom ran this guild forty years and never once missed a moth-count. The girl''s missed three.'
+              - 'Hett: I''m not saying she''s hiding something. I''m saying the ledger''s locked and it never used to be.'
+              - {script: 'pfm_set(:hett_talked)'}
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 14, dir: down}
   at: [8, 7]
-  sprite: NPC 25
-  dir: down
-  text: '[TODO story] The Guild spun silk for the Crown long before there was a Warden. Tamsin forgets that.'
-- type: npc
-  name: Apprentice
+- type: event
+  name: Apprentice (guild)
+  pages:
+  - commands: ['Apprentice: The loft is the Warden''s. We''re not to go up. I go up to look at the moths'' tally board. Don''t tell Hett.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 24, dir: right}
   at: [12, 10]
-  sprite: NPC 07
-  dir: left
-  move: random
-  text: '[TODO story] (whispering) The new loom wire hums at night. Meridian brought it.'
+- type: sign
+  name: Moth tally board
+  post: false
+  text: A board of chalk tallies, one column per morning. The last column has fourteen strokes, and then the chalk was pressed so hard it snapped.
+  at: [4, 5]
+- type: sign
+  name: Silk bolts
+  post: false
+  text: Bolts of Briarwick silk, every shade of green. None of them has ever tangled. Somebody has labelled one "THE QUEEN'S (UNPAID)".
+  at: [3, 11]
+- type: event
+  name: Loft manager
+  pages:
+  - commands:
+    - {script: 'pbSetSelfSwitch(%EV[Tamsin (loft)]%, "A", true) if $player.badge_count >= 1 && pf_choice(:ch2_tamsin).nil?'}
+    - {erase: true}
+    trigger: parallel
+    move: fixed
+  at: [17, 12]
+- type: event
+  name: Guild ledger
+  pages:
+  - commands:
+    - if: pfm?(:ledger_read)
+      then: ['The last page: "Received of the Meridian Concord, for stewardship rights, Lattice 15: ₽400,000. Signed, T. Loom, Warden." The line for "Guild witnesses"
+          is blank.']
+      else:
+      - if: pfm_has?(:LEDGERKEY)
+        then:
+        - The brass key turns.
+        - 'LEDGER, last page: "Received of the Meridian Concord, for stewardship rights, Lattice 15: ₽400,000. Signed, T. Loom, Warden."'
+        - One signature. The line for "Guild witnesses" is blank.
+        - {script: 'pfm_set(:ledger_read)'}
+        else: [The guild ledger. It's locked. It never used to be.]
+    trigger: action
+    move: fixed
+  at: [28, 6]
+- type: event
+  name: Tamsin (loft)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+  - commands:
+    - 'The loft: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won''t sit.'
+    - if: pfm?(:ledger_read)
+      then: ['\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: You''ve read it. Hett has too. I can tell by how gently she''s speaking to me.']
+    - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: That masked woman at the pylon. She was right. I signed it.'
+    - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: Briarwick''s bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her.'
+    - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I signed it by myself, at night,
+      so nobody would have to know how bad it was.'
+    - '\pf[TAMSIN,crying,,Tamsin (loft)]Tamsin: And now the Glasswood''s walking up the survey line like it was invited. Fourteen moths this week. I count them. I
+      count them every morning.'
+    - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: The guild meets tonight. Tell me what to do. Please. I''ve run out of thread.'
+    - choices: [Tell them the truth. I'll stand next to you., 'They deserve to know. If you won''t say it, I will.', It's your secret. I won't tell.]
+      branches:
+      - - {script: 'pf_choose(:ch2_tamsin, :help_confess)'}
+        - '\pf[TAMSIN,shocked,,Tamsin (loft)]Tamsin: Next to me. Not in front?'
+        - '\pf[TAMSIN,neutral,,Tamsin (loft)]Tamsin: ...A thread holds because it''s twisted with others. I''ve had that on the SIGN.'
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The guild meeting. Tamsin speaks. Her voice cracks twice.
+        - 'Hett: Then we sign it WITH you, girl, and then we tear it up together.'
+        - 'The contract is renegotiated: a smaller pylon, off the grove.'
+        - tone: [-8, 8, -18, 0, 20]
+        - {wait: 20}
+      - - {script: 'pf_choose(:ch2_tamsin, :expose)'}
+        - '\pf[TAMSIN,panic,,Tamsin (loft)]Tamsin: No— wait— not like—'
+        - tone: [-255, -255, -255, 0, 20]
+        - {wait: 24}
+        - The guild meeting. You lay the contract on the table. Uproar. The looms stop.
+        - Tamsin stands very still, then tears the contract in half herself, in front of them.
+        - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: I''m sorry. I''m so sorry. That''s the last time I''ll say it tonight.'
+        - tone: [-8, 8, -18, 0, 20]
+        - {wait: 20}
+      - - {script: 'pf_choose(:ch2_tamsin, :keep_secret)'}
+        - '\pf[TAMSIN,sad,,Tamsin (loft)]Tamsin: ...Thank you. I think. I''ll fix it quietly. I''ll find the money somewhere.'
+      cancel: 0
+    - '\pf[TAMSIN,neutral,,Tamsin (loft)]Tamsin: Whatever''s making the wood ring, it''s in Cocoonfall Hollow, at the Glasswood''s heart. I can''t cross the Veil.
+      Nobody can.'
+    - move:
+        who: Juno (loft)
+        route:
+        - graphic: [trainer_RIVAL2, 0, 8, 0]
+        - {opacity: 255}
+        wait: true
+    - '\pf[JUNO,neutral,,Juno (loft)]Juno: ...They can.'
+    - '\pf[TAMSIN,shocked,shock,Tamsin (loft)]Tamsin: What?'
+    - '\pf[TAMSIN,neutral,,Tamsin (loft)]Tamsin: Then take this. It was Gran''s shuttle. It''s only wood. But she never dropped a thread while she held it.'
+    - {script: 'pfm_item(:MOTHERLOOMSSHUTTLE, 1, "Mother Loom''s Shuttle")'}
+    - Worn smooth by fifty years of one hand.
+    - {script: 'pfm_quest(:ringing_wood, "The Ringing Wood", "Cut through the Deepwood to Cocoonfall Hollow.")'}
+    - selfswitch: [B, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_LASS, dir: down}
+    cond: {self: A}
+  - commands: ['\pf[TAMSIN,neutral]Tamsin: Cocoonfall Hollow. Through the Deepwood. The Cutter will open the way. ...Come back, will you?']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_LASS, dir: down}
+    cond: {self: B}
+  at: [30, 6]
+- type: event
+  name: Juno (loft)
+  pages:
+  - commands: []
+    trigger: action
+    move: fixed
+    through: true
+  at: [26, 10]
+- type: warp
+  name: Loft stairs up
+  at: [16, 6]
+  to: {map: 123, x: 26, y: 9, dir: right}
+  se: Door exit
+- type: warp
+  name: Loft stairs down
+  at: [25, 9]
+  to: {map: 123, x: 15, y: 7, dir: down}
+  se: Door exit
 
 ---
 id: 124
@@ -2303,37 +3236,41 @@ metadata:
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
 palette: interior
-map: '....................
+map: '........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
 
-  ....................
+  ........................................
+
+  ........................................
+
+  ........................................
 
   '
 tiles:
@@ -2775,12 +3712,6 @@ tiles:
 - tile: 5375
   at: [10, 6]
   layer: 1
-- tile: 5472
-  at: [6, 8]
-  layer: 1
-- tile: 5474
-  at: [7, 8]
-  layer: 1
 - tile: 5422
   at: [11, 6]
   layer: 1
@@ -2792,21 +3723,6 @@ tiles:
   layer: 1
 - tile: 5558
   at: [11, 8]
-  layer: 2
-- tile: 5531
-  at: [7, 10]
-  layer: 1
-- tile: 5532
-  at: [8, 10]
-  layer: 1
-- tile: 5539
-  at: [7, 11]
-  layer: 1
-- tile: 5540
-  at: [8, 11]
-  layer: 1
-- tile: 5558
-  at: [7, 11]
   layer: 2
 - tile: 2488
   at: [6, 4]
@@ -2826,22 +3742,1001 @@ tiles:
 - tile: 2498
   at: [8, 5]
   layer: 1
+- tile: 5411
+  at: [5, 8]
+  layer: 1
+- tile: 5412
+  at: [6, 8]
+  layer: 1
+- tile: 5412
+  at: [7, 8]
+  layer: 1
+- tile: 5412
+  at: [8, 8]
+  layer: 1
+- tile: 5413
+  at: [9, 8]
+  layer: 1
+- tile: 5419
+  at: [5, 9]
+  layer: 1
+- tile: 5420
+  at: [6, 9]
+  layer: 1
+- tile: 5420
+  at: [7, 9]
+  layer: 1
+- tile: 5420
+  at: [8, 9]
+  layer: 1
+- tile: 5421
+  at: [9, 9]
+  layer: 1
+- tile: 5427
+  at: [5, 10]
+  layer: 1
+- tile: 5428
+  at: [6, 10]
+  layer: 1
+- tile: 5428
+  at: [7, 10]
+  layer: 1
+- tile: 5428
+  at: [8, 10]
+  layer: 1
+- tile: 5429
+  at: [9, 10]
+  layer: 1
+- tile: 3466
+  at: [6, 8]
+  layer: 2
+- tile: 3467
+  at: [7, 8]
+  layer: 2
+- tile: 3474
+  at: [6, 9]
+  layer: 2
+- tile: 3475
+  at: [7, 9]
+  layer: 2
+- tile: 4077
+  at: [9, 9]
+  layer: 2
+- tile: 3305
+  at: [3, 9]
+  layer: 2
+- tile: 3313
+  at: [3, 10]
+  layer: 1
+- tile: 3391
+  at: [11, 10]
+  layer: 1
+- tile: 4101
+  at: [4, 10]
+  layer: 1
+- tile: 5534
+  at: [23, 2]
+  layer: 0
+- tile: 5352
+  at: [23, 5]
+  layer: 0
+- tile: 5360
+  at: [23, 6]
+  layer: 0
+- tile: 5360
+  at: [23, 7]
+  layer: 0
+- tile: 5360
+  at: [23, 8]
+  layer: 0
+- tile: 5360
+  at: [23, 9]
+  layer: 0
+- tile: 5360
+  at: [23, 10]
+  layer: 0
+- tile: 5360
+  at: [23, 11]
+  layer: 0
+- tile: 5360
+  at: [23, 12]
+  layer: 0
+- tile: 5360
+  at: [23, 13]
+  layer: 0
+- tile: 5550
+  at: [23, 14]
+  layer: 0
+- tile: 5534
+  at: [24, 2]
+  layer: 0
+- tile: 5547
+  at: [24, 3]
+  layer: 0
+- tile: 5555
+  at: [24, 4]
+  layer: 0
+- tile: 5353
+  at: [24, 5]
+  layer: 0
+- tile: 5361
+  at: [24, 6]
+  layer: 0
+- tile: 5361
+  at: [24, 7]
+  layer: 0
+- tile: 5361
+  at: [24, 8]
+  layer: 0
+- tile: 5361
+  at: [24, 9]
+  layer: 0
+- tile: 5361
+  at: [24, 10]
+  layer: 0
+- tile: 5361
+  at: [24, 11]
+  layer: 0
+- tile: 5361
+  at: [24, 12]
+  layer: 0
+- tile: 5361
+  at: [24, 13]
+  layer: 0
+- tile: 5550
+  at: [24, 14]
+  layer: 0
+- tile: 5534
+  at: [25, 2]
+  layer: 0
+- tile: 5354
+  at: [25, 5]
+  layer: 0
+- tile: 5362
+  at: [25, 6]
+  layer: 0
+- tile: 5362
+  at: [25, 7]
+  layer: 0
+- tile: 5362
+  at: [25, 8]
+  layer: 0
+- tile: 5362
+  at: [25, 9]
+  layer: 0
+- tile: 5362
+  at: [25, 10]
+  layer: 0
+- tile: 5362
+  at: [25, 11]
+  layer: 0
+- tile: 5362
+  at: [25, 12]
+  layer: 0
+- tile: 5362
+  at: [25, 13]
+  layer: 0
+- tile: 5550
+  at: [25, 14]
+  layer: 0
+- tile: 5534
+  at: [26, 2]
+  layer: 0
+- tile: 5547
+  at: [26, 3]
+  layer: 0
+- tile: 5555
+  at: [26, 4]
+  layer: 0
+- tile: 5355
+  at: [26, 5]
+  layer: 0
+- tile: 5363
+  at: [26, 6]
+  layer: 0
+- tile: 5363
+  at: [26, 7]
+  layer: 0
+- tile: 5363
+  at: [26, 8]
+  layer: 0
+- tile: 5363
+  at: [26, 9]
+  layer: 0
+- tile: 5363
+  at: [26, 10]
+  layer: 0
+- tile: 5363
+  at: [26, 11]
+  layer: 0
+- tile: 5363
+  at: [26, 12]
+  layer: 0
+- tile: 5363
+  at: [26, 13]
+  layer: 0
+- tile: 5550
+  at: [26, 14]
+  layer: 0
+- tile: 5534
+  at: [27, 2]
+  layer: 0
+- tile: 5547
+  at: [27, 3]
+  layer: 0
+- tile: 5555
+  at: [27, 4]
+  layer: 0
+- tile: 5353
+  at: [27, 5]
+  layer: 0
+- tile: 5361
+  at: [27, 6]
+  layer: 0
+- tile: 5361
+  at: [27, 7]
+  layer: 0
+- tile: 5361
+  at: [27, 8]
+  layer: 0
+- tile: 5361
+  at: [27, 9]
+  layer: 0
+- tile: 5361
+  at: [27, 10]
+  layer: 0
+- tile: 5361
+  at: [27, 11]
+  layer: 0
+- tile: 5361
+  at: [27, 12]
+  layer: 0
+- tile: 5361
+  at: [27, 13]
+  layer: 0
+- tile: 5534
+  at: [28, 2]
+  layer: 0
+- tile: 5547
+  at: [28, 3]
+  layer: 0
+- tile: 5555
+  at: [28, 4]
+  layer: 0
+- tile: 5354
+  at: [28, 5]
+  layer: 0
+- tile: 5362
+  at: [28, 6]
+  layer: 0
+- tile: 5362
+  at: [28, 7]
+  layer: 0
+- tile: 5362
+  at: [28, 8]
+  layer: 0
+- tile: 5362
+  at: [28, 9]
+  layer: 0
+- tile: 5362
+  at: [28, 10]
+  layer: 0
+- tile: 5362
+  at: [28, 11]
+  layer: 0
+- tile: 5362
+  at: [28, 12]
+  layer: 0
+- tile: 5362
+  at: [28, 13]
+  layer: 0
+- tile: 5534
+  at: [29, 2]
+  layer: 0
+- tile: 5355
+  at: [29, 5]
+  layer: 0
+- tile: 5363
+  at: [29, 6]
+  layer: 0
+- tile: 5363
+  at: [29, 7]
+  layer: 0
+- tile: 5363
+  at: [29, 8]
+  layer: 0
+- tile: 5363
+  at: [29, 9]
+  layer: 0
+- tile: 5363
+  at: [29, 10]
+  layer: 0
+- tile: 5363
+  at: [29, 11]
+  layer: 0
+- tile: 5363
+  at: [29, 12]
+  layer: 0
+- tile: 5363
+  at: [29, 13]
+  layer: 0
+- tile: 5534
+  at: [30, 2]
+  layer: 0
+- tile: 5547
+  at: [30, 3]
+  layer: 0
+- tile: 5555
+  at: [30, 4]
+  layer: 0
+- tile: 5353
+  at: [30, 5]
+  layer: 0
+- tile: 5361
+  at: [30, 6]
+  layer: 0
+- tile: 5361
+  at: [30, 7]
+  layer: 0
+- tile: 5361
+  at: [30, 8]
+  layer: 0
+- tile: 5361
+  at: [30, 9]
+  layer: 0
+- tile: 5361
+  at: [30, 10]
+  layer: 0
+- tile: 5361
+  at: [30, 11]
+  layer: 0
+- tile: 5361
+  at: [30, 12]
+  layer: 0
+- tile: 5361
+  at: [30, 13]
+  layer: 0
+- tile: 5534
+  at: [31, 2]
+  layer: 0
+- tile: 5547
+  at: [31, 3]
+  layer: 0
+- tile: 5555
+  at: [31, 4]
+  layer: 0
+- tile: 5354
+  at: [31, 5]
+  layer: 0
+- tile: 5362
+  at: [31, 6]
+  layer: 0
+- tile: 5362
+  at: [31, 7]
+  layer: 0
+- tile: 5362
+  at: [31, 8]
+  layer: 0
+- tile: 5362
+  at: [31, 9]
+  layer: 0
+- tile: 5362
+  at: [31, 10]
+  layer: 0
+- tile: 5362
+  at: [31, 11]
+  layer: 0
+- tile: 5362
+  at: [31, 12]
+  layer: 0
+- tile: 5362
+  at: [31, 13]
+  layer: 0
+- tile: 5534
+  at: [32, 2]
+  layer: 0
+- tile: 5547
+  at: [32, 3]
+  layer: 0
+- tile: 5555
+  at: [32, 4]
+  layer: 0
+- tile: 5355
+  at: [32, 5]
+  layer: 0
+- tile: 5363
+  at: [32, 6]
+  layer: 0
+- tile: 5363
+  at: [32, 7]
+  layer: 0
+- tile: 5363
+  at: [32, 8]
+  layer: 0
+- tile: 5363
+  at: [32, 9]
+  layer: 0
+- tile: 5363
+  at: [32, 10]
+  layer: 0
+- tile: 5363
+  at: [32, 11]
+  layer: 0
+- tile: 5363
+  at: [32, 12]
+  layer: 0
+- tile: 5363
+  at: [32, 13]
+  layer: 0
+- tile: 5550
+  at: [32, 14]
+  layer: 0
+- tile: 5534
+  at: [33, 2]
+  layer: 0
+- tile: 5353
+  at: [33, 5]
+  layer: 0
+- tile: 5361
+  at: [33, 6]
+  layer: 0
+- tile: 5361
+  at: [33, 7]
+  layer: 0
+- tile: 5361
+  at: [33, 8]
+  layer: 0
+- tile: 5361
+  at: [33, 9]
+  layer: 0
+- tile: 5361
+  at: [33, 10]
+  layer: 0
+- tile: 5361
+  at: [33, 11]
+  layer: 0
+- tile: 5361
+  at: [33, 12]
+  layer: 0
+- tile: 5361
+  at: [33, 13]
+  layer: 0
+- tile: 5550
+  at: [33, 14]
+  layer: 0
+- tile: 5534
+  at: [34, 2]
+  layer: 0
+- tile: 5547
+  at: [34, 3]
+  layer: 0
+- tile: 5555
+  at: [34, 4]
+  layer: 0
+- tile: 5354
+  at: [34, 5]
+  layer: 0
+- tile: 5362
+  at: [34, 6]
+  layer: 0
+- tile: 5362
+  at: [34, 7]
+  layer: 0
+- tile: 5362
+  at: [34, 8]
+  layer: 0
+- tile: 5362
+  at: [34, 9]
+  layer: 0
+- tile: 5362
+  at: [34, 10]
+  layer: 0
+- tile: 5362
+  at: [34, 11]
+  layer: 0
+- tile: 5362
+  at: [34, 12]
+  layer: 0
+- tile: 5362
+  at: [34, 13]
+  layer: 0
+- tile: 5550
+  at: [34, 14]
+  layer: 0
+- tile: 5534
+  at: [35, 2]
+  layer: 0
+- tile: 5355
+  at: [35, 5]
+  layer: 0
+- tile: 5363
+  at: [35, 6]
+  layer: 0
+- tile: 5363
+  at: [35, 7]
+  layer: 0
+- tile: 5363
+  at: [35, 8]
+  layer: 0
+- tile: 5363
+  at: [35, 9]
+  layer: 0
+- tile: 5363
+  at: [35, 10]
+  layer: 0
+- tile: 5363
+  at: [35, 11]
+  layer: 0
+- tile: 5363
+  at: [35, 12]
+  layer: 0
+- tile: 5363
+  at: [35, 13]
+  layer: 0
+- tile: 5550
+  at: [35, 14]
+  layer: 0
+- tile: 5541
+  at: [22, 3]
+  layer: 0
+- tile: 5543
+  at: [36, 3]
+  layer: 0
+- tile: 5541
+  at: [22, 4]
+  layer: 0
+- tile: 5543
+  at: [36, 4]
+  layer: 0
+- tile: 5541
+  at: [22, 5]
+  layer: 0
+- tile: 5543
+  at: [36, 5]
+  layer: 0
+- tile: 5541
+  at: [22, 6]
+  layer: 0
+- tile: 5543
+  at: [36, 6]
+  layer: 0
+- tile: 5541
+  at: [22, 7]
+  layer: 0
+- tile: 5543
+  at: [36, 7]
+  layer: 0
+- tile: 5541
+  at: [22, 8]
+  layer: 0
+- tile: 5543
+  at: [36, 8]
+  layer: 0
+- tile: 5541
+  at: [22, 9]
+  layer: 0
+- tile: 5543
+  at: [36, 9]
+  layer: 0
+- tile: 5541
+  at: [22, 10]
+  layer: 0
+- tile: 5543
+  at: [36, 10]
+  layer: 0
+- tile: 5541
+  at: [22, 11]
+  layer: 0
+- tile: 5543
+  at: [36, 11]
+  layer: 0
+- tile: 5541
+  at: [22, 12]
+  layer: 0
+- tile: 5543
+  at: [36, 12]
+  layer: 0
+- tile: 5541
+  at: [22, 13]
+  layer: 0
+- tile: 5543
+  at: [36, 13]
+  layer: 0
+- tile: 5533
+  at: [22, 2]
+  layer: 0
+- tile: 5535
+  at: [36, 2]
+  layer: 0
+- tile: 5549
+  at: [22, 14]
+  layer: 0
+- tile: 5551
+  at: [36, 14]
+  layer: 0
+- tile: 5563
+  at: [23, 3]
+  layer: 0
+- tile: 5571
+  at: [23, 4]
+  layer: 0
+- tile: 5564
+  at: [35, 3]
+  layer: 0
+- tile: 5572
+  at: [35, 4]
+  layer: 0
+- tile: 5361
+  at: [28, 14]
+  layer: 0
+- tile: 5550
+  at: [28, 15]
+  layer: 0
+- tile: 5512
+  at: [28, 14]
+  layer: 1
+- tile: 5362
+  at: [29, 14]
+  layer: 0
+- tile: 5550
+  at: [29, 15]
+  layer: 0
+- tile: 5513
+  at: [29, 14]
+  layer: 1
+- tile: 5363
+  at: [30, 14]
+  layer: 0
+- tile: 5550
+  at: [30, 15]
+  layer: 0
+- tile: 5514
+  at: [30, 14]
+  layer: 1
+- tile: 5554
+  at: [27, 14]
+  layer: 0
+- tile: 5553
+  at: [31, 14]
+  layer: 0
+- tile: 5549
+  at: [27, 15]
+  layer: 0
+- tile: 5551
+  at: [31, 15]
+  layer: 0
+- tile: 5544
+  at: [25, 3]
+  layer: 0
+- tile: 5552
+  at: [25, 4]
+  layer: 0
+- tile: 5544
+  at: [29, 3]
+  layer: 0
+- tile: 5552
+  at: [29, 4]
+  layer: 0
+- tile: 5544
+  at: [33, 3]
+  layer: 0
+- tile: 5552
+  at: [33, 4]
+  layer: 0
+- tile: 3571
+  at: [24, 8]
+  layer: 2
+- tile: 3572
+  at: [25, 8]
+  layer: 2
+- tile: 3573
+  at: [26, 8]
+  layer: 2
+- tile: 3574
+  at: [27, 8]
+  layer: 2
+- tile: 3579
+  at: [24, 9]
+  layer: 1
+- tile: 3580
+  at: [25, 9]
+  layer: 1
+- tile: 3581
+  at: [26, 9]
+  layer: 1
+- tile: 3582
+  at: [27, 9]
+  layer: 1
+- tile: 3571
+  at: [31, 8]
+  layer: 2
+- tile: 3572
+  at: [32, 8]
+  layer: 2
+- tile: 3573
+  at: [33, 8]
+  layer: 2
+- tile: 3574
+  at: [34, 8]
+  layer: 2
+- tile: 3579
+  at: [31, 9]
+  layer: 1
+- tile: 3580
+  at: [32, 9]
+  layer: 1
+- tile: 3581
+  at: [33, 9]
+  layer: 1
+- tile: 3582
+  at: [34, 9]
+  layer: 1
+- tile: 3571
+  at: [24, 10]
+  layer: 2
+- tile: 3572
+  at: [25, 10]
+  layer: 2
+- tile: 3573
+  at: [26, 10]
+  layer: 2
+- tile: 3574
+  at: [27, 10]
+  layer: 2
+- tile: 3579
+  at: [24, 11]
+  layer: 1
+- tile: 3580
+  at: [25, 11]
+  layer: 1
+- tile: 3581
+  at: [26, 11]
+  layer: 1
+- tile: 3582
+  at: [27, 11]
+  layer: 1
+- tile: 3571
+  at: [31, 10]
+  layer: 2
+- tile: 3572
+  at: [32, 10]
+  layer: 2
+- tile: 3573
+  at: [33, 10]
+  layer: 2
+- tile: 3574
+  at: [34, 10]
+  layer: 2
+- tile: 3579
+  at: [31, 11]
+  layer: 1
+- tile: 3580
+  at: [32, 11]
+  layer: 1
+- tile: 3581
+  at: [33, 11]
+  layer: 1
+- tile: 3582
+  at: [34, 11]
+  layer: 1
+- tile: 3571
+  at: [24, 12]
+  layer: 2
+- tile: 3572
+  at: [25, 12]
+  layer: 2
+- tile: 3573
+  at: [26, 12]
+  layer: 2
+- tile: 3574
+  at: [27, 12]
+  layer: 2
+- tile: 3579
+  at: [24, 13]
+  layer: 1
+- tile: 3580
+  at: [25, 13]
+  layer: 1
+- tile: 3581
+  at: [26, 13]
+  layer: 1
+- tile: 3582
+  at: [27, 13]
+  layer: 1
+- tile: 3571
+  at: [31, 12]
+  layer: 2
+- tile: 3572
+  at: [32, 12]
+  layer: 2
+- tile: 3573
+  at: [33, 12]
+  layer: 2
+- tile: 3574
+  at: [34, 12]
+  layer: 2
+- tile: 3579
+  at: [31, 13]
+  layer: 1
+- tile: 3580
+  at: [32, 13]
+  layer: 1
+- tile: 3581
+  at: [33, 13]
+  layer: 1
+- tile: 3582
+  at: [34, 13]
+  layer: 1
+- tile: 5411
+  at: [28, 6]
+  layer: 1
+- tile: 5412
+  at: [29, 6]
+  layer: 1
+- tile: 5413
+  at: [30, 6]
+  layer: 1
+- tile: 5419
+  at: [28, 7]
+  layer: 1
+- tile: 5420
+  at: [29, 7]
+  layer: 1
+- tile: 5421
+  at: [30, 7]
+  layer: 1
+- tile: 5419
+  at: [28, 8]
+  layer: 1
+- tile: 5420
+  at: [29, 8]
+  layer: 1
+- tile: 5421
+  at: [30, 8]
+  layer: 1
+- tile: 5419
+  at: [28, 9]
+  layer: 1
+- tile: 5420
+  at: [29, 9]
+  layer: 1
+- tile: 5421
+  at: [30, 9]
+  layer: 1
+- tile: 5419
+  at: [28, 10]
+  layer: 1
+- tile: 5420
+  at: [29, 10]
+  layer: 1
+- tile: 5421
+  at: [30, 10]
+  layer: 1
+- tile: 5419
+  at: [28, 11]
+  layer: 1
+- tile: 5420
+  at: [29, 11]
+  layer: 1
+- tile: 5421
+  at: [30, 11]
+  layer: 1
+- tile: 5419
+  at: [28, 12]
+  layer: 1
+- tile: 5420
+  at: [29, 12]
+  layer: 1
+- tile: 5421
+  at: [30, 12]
+  layer: 1
+- tile: 5427
+  at: [28, 13]
+  layer: 1
+- tile: 5428
+  at: [29, 13]
+  layer: 1
+- tile: 5429
+  at: [30, 13]
+  layer: 1
+- tile: 3376
+  at: [29, 4]
+  layer: 2
+- tile: 3384
+  at: [29, 5]
+  layer: 1
+- tile: 3391
+  at: [27, 5]
+  layer: 1
+- tile: 3391
+  at: [31, 5]
+  layer: 1
+- tile: 3373
+  at: [23, 3]
+  layer: 1
+- tile: 3374
+  at: [24, 3]
+  layer: 1
+- tile: 3381
+  at: [23, 4]
+  layer: 1
+- tile: 3382
+  at: [24, 4]
+  layer: 1
+- tile: 3414
+  at: [34, 3]
+  layer: 1
+- tile: 3415
+  at: [35, 3]
+  layer: 1
+- tile: 3422
+  at: [34, 4]
+  layer: 1
+- tile: 3423
+  at: [35, 4]
+  layer: 1
+- tile: 2539
+  at: [23, 5]
+  layer: 2
+- tile: 2547
+  at: [23, 6]
+  layer: 2
+- tile: 2555
+  at: [23, 7]
+  layer: 1
+- tile: 2539
+  at: [35, 5]
+  layer: 2
+- tile: 2547
+  at: [35, 6]
+  layer: 2
+- tile: 2555
+  at: [35, 7]
+  layer: 1
 events:
 - type: exit
   at: [7, 12]
   link: BW_HOUSE1
-- type: npc
-  name: Grandmother
+- type: exit
+  at: [29, 14]
+  link: BW_CHAPEL
+- type: event
+  name: Retired Weaver
+  pages:
+  - commands: ['Retired Weaver: I wove Old Mother Loom''s shroud. She''d picked the pattern at thirty. "Plan ahead," she said. Tamsin plans ahead too. She plans for
+        everything to go wrong.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 10, dir: down}
   at: [8, 8]
-  sprite: NPC 28
-  dir: down
-  commands: ['Retired Weaver: I wove Old Mother Loom''s shroud. She''d picked the pattern at thirty. "Plan ahead," she said. Tamsin plans ahead too. She plans for
-      everything to go wrong.']
 - type: sign
   name: Bookshelf
-  at: [9, 6]
   post: false
   text: '"A Child''s Pageant of the Loyal Three." The last page, where the Ogre is driven out, has been torn away. Someone has drawn the Ogre a little house instead.'
+  at: [9, 5]
+- type: sign
+  name: Loom
+  post: false
+  text: A narrow tape loom, threaded with a shroud pattern half a century old. Nobody has woven on it since spring.
+  at: [3, 8]
+- type: sign
+  name: Chapel mural
+  post: false
+  text: Eighteen colored stones falling from a white sky into green land. Above them, a silver crown with one clear stone. The stone is whole.
+  at: [29, 5]
+- type: event
+  name: Child in pew
+  pages:
+  - commands: ['Child: Mum says the Crown got hurt once. She says don''t ask the chaplain. So I''m asking you.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 07, dir: up}
+  at: [28, 9]
+- type: sign
+  name: Chapel window
+  post: false
+  text: Eighteen panes of colored glass around one clear pane. The clear one has no lead around it, as if it were added first.
+  at: [33, 5]
 
 ---
 id: 125
@@ -3360,47 +5255,1692 @@ tiles:
 - tile: 4105
   at: [11, 11]
   layer: 1
+- tile: 5411
+  at: [5, 8]
+  layer: 1
+- tile: 5412
+  at: [6, 8]
+  layer: 1
+- tile: 5412
+  at: [7, 8]
+  layer: 1
+- tile: 5413
+  at: [8, 8]
+  layer: 1
+- tile: 5427
+  at: [5, 9]
+  layer: 1
+- tile: 5428
+  at: [6, 9]
+  layer: 1
+- tile: 5428
+  at: [7, 9]
+  layer: 1
+- tile: 5429
+  at: [8, 9]
+  layer: 1
+- tile: 3408
+  at: [6, 8]
+  layer: 2
+- tile: 3409
+  at: [7, 8]
+  layer: 2
+- tile: 3416
+  at: [6, 9]
+  layer: 2
+- tile: 3417
+  at: [7, 9]
+  layer: 2
+- tile: 4077
+  at: [8, 9]
+  layer: 2
+- tile: 4101
+  at: [11, 8]
+  layer: 1
+- tile: 4056
+  at: [5, 4]
+  layer: 2
+- tile: 4057
+  at: [6, 4]
+  layer: 2
+- tile: 4064
+  at: [5, 5]
+  layer: 1
+- tile: 4065
+  at: [6, 5]
+  layer: 1
 events:
 - type: exit
   at: [7, 12]
   link: BW_HOUSE2
-- name: Cutter
-  type: event
-  at: [8, 8]
+- type: event
+  name: Cutter
   pages:
-  - graphic: {sprite: trainer_HIKER, dir: down}
-    commands:
-    - if: Prismfall.has_badge?(1)
-      then:
-      - '[TODO story] Tamsin sent you? Then take this - every forester in Elowen should have one.'
-      - {script: 'pbReceiveItem(:HM01)'}
-      - selfswitch: [A, true]
-      else: ['[TODO story] Come back with the Warden''s badge and I''ll teach you to clear a path.']
-  - cond: {self: A}
+  - commands:
+    - 'Cutter: No.'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
     graphic: {sprite: trainer_HIKER, dir: down}
-    commands: ['[TODO story] Cut clears small trees. Mind the old ones.']
----
-id: 526
-name: Woodward's Hut
-parent: 524
-template: house2
-exit_link: WOOD_HUT
-drop_template_events: [Kurt]
-bgm: Route 3
-metadata: {MapPosition: [0, 13, 23]}
-events:
-  - {type: npc, name: Woodward, at: [7, 4], sprite: trainer_HIKER, dir: down,
-     text: "[TODO story] Rest by the fire. The wood's been restless since the glass came to the orchard."}
+  - commands:
+    - 'Cutter: ...What''s the tree?'
+    - if: $player.badge_count >= 1
+      then:
+      - if: '!pfm?(:hm_cut)'
+        then:
+        - 'Cutter: Right. Here. Cut the dead ones. If you cut a live one I''ll know. I won''t know how. I''ll just know.'
+        - {script: 'pfm_item(:HM01, 1)'}
+        - {script: 'pfm_set(:hm_cut)'}
+        else: ['Cutter: Dead ones only. I''ll know.']
+      else: ['Cutter: Come back with the Warden''s badge. I don''t hand Cut to people the wood hasn''t met.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_HIKER, dir: down}
+    cond: {self: A}
+  at: [8, 8]
+- type: sign
+  name: Axe rack
+  post: false
+  text: Four axes, sharpened to different moods.
+  at: [6, 5]
+
 ---
 id: 523
 name: Hale Farmhouse
 parent: 521
-template: house
-exit_link: R2_FARM
-drop_template_events: [Daisy, Dr Footstep, Effort ribbon giver, Contest ribbon giver, Stats judge]
 bgm: Route 2
-metadata: {MapPosition: [0, 14, 23]}
-events:
-  - {type: npc, name: Farmer Hale, at: [5, 4], sprite: NPC 25, dir: down,
-     text: "[TODO story] Juno's dad here. Headbutt the apple trees and see what falls out! (Headbutt tutor TODO)"}
+metadata:
+  MapPosition: [0, 14, 23]
+tone: [10, 4, -12, 0]
+palette: interior
+map: '.....................
 
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  .....................
+
+  '
+tiles:
+- tile: 5534
+  at: [3, 2]
+  layer: 0
+- tile: 5352
+  at: [3, 5]
+  layer: 0
+- tile: 5360
+  at: [3, 6]
+  layer: 0
+- tile: 5360
+  at: [3, 7]
+  layer: 0
+- tile: 5360
+  at: [3, 8]
+  layer: 0
+- tile: 5360
+  at: [3, 9]
+  layer: 0
+- tile: 5360
+  at: [3, 10]
+  layer: 0
+- tile: 5360
+  at: [3, 11]
+  layer: 0
+- tile: 5360
+  at: [3, 12]
+  layer: 0
+- tile: 5550
+  at: [3, 13]
+  layer: 0
+- tile: 5534
+  at: [4, 2]
+  layer: 0
+- tile: 5547
+  at: [4, 3]
+  layer: 0
+- tile: 5555
+  at: [4, 4]
+  layer: 0
+- tile: 5353
+  at: [4, 5]
+  layer: 0
+- tile: 5361
+  at: [4, 6]
+  layer: 0
+- tile: 5361
+  at: [4, 7]
+  layer: 0
+- tile: 5361
+  at: [4, 8]
+  layer: 0
+- tile: 5361
+  at: [4, 9]
+  layer: 0
+- tile: 5361
+  at: [4, 10]
+  layer: 0
+- tile: 5361
+  at: [4, 11]
+  layer: 0
+- tile: 5361
+  at: [4, 12]
+  layer: 0
+- tile: 5550
+  at: [4, 13]
+  layer: 0
+- tile: 5534
+  at: [5, 2]
+  layer: 0
+- tile: 5547
+  at: [5, 3]
+  layer: 0
+- tile: 5555
+  at: [5, 4]
+  layer: 0
+- tile: 5354
+  at: [5, 5]
+  layer: 0
+- tile: 5362
+  at: [5, 6]
+  layer: 0
+- tile: 5362
+  at: [5, 7]
+  layer: 0
+- tile: 5362
+  at: [5, 8]
+  layer: 0
+- tile: 5362
+  at: [5, 9]
+  layer: 0
+- tile: 5362
+  at: [5, 10]
+  layer: 0
+- tile: 5362
+  at: [5, 11]
+  layer: 0
+- tile: 5362
+  at: [5, 12]
+  layer: 0
+- tile: 5550
+  at: [5, 13]
+  layer: 0
+- tile: 5534
+  at: [6, 2]
+  layer: 0
+- tile: 5355
+  at: [6, 5]
+  layer: 0
+- tile: 5363
+  at: [6, 6]
+  layer: 0
+- tile: 5363
+  at: [6, 7]
+  layer: 0
+- tile: 5363
+  at: [6, 8]
+  layer: 0
+- tile: 5363
+  at: [6, 9]
+  layer: 0
+- tile: 5363
+  at: [6, 10]
+  layer: 0
+- tile: 5363
+  at: [6, 11]
+  layer: 0
+- tile: 5363
+  at: [6, 12]
+  layer: 0
+- tile: 5550
+  at: [6, 13]
+  layer: 0
+- tile: 5534
+  at: [7, 2]
+  layer: 0
+- tile: 5547
+  at: [7, 3]
+  layer: 0
+- tile: 5555
+  at: [7, 4]
+  layer: 0
+- tile: 5353
+  at: [7, 5]
+  layer: 0
+- tile: 5361
+  at: [7, 6]
+  layer: 0
+- tile: 5361
+  at: [7, 7]
+  layer: 0
+- tile: 5361
+  at: [7, 8]
+  layer: 0
+- tile: 5361
+  at: [7, 9]
+  layer: 0
+- tile: 5361
+  at: [7, 10]
+  layer: 0
+- tile: 5361
+  at: [7, 11]
+  layer: 0
+- tile: 5361
+  at: [7, 12]
+  layer: 0
+- tile: 5550
+  at: [7, 13]
+  layer: 0
+- tile: 5534
+  at: [8, 2]
+  layer: 0
+- tile: 5547
+  at: [8, 3]
+  layer: 0
+- tile: 5555
+  at: [8, 4]
+  layer: 0
+- tile: 5354
+  at: [8, 5]
+  layer: 0
+- tile: 5362
+  at: [8, 6]
+  layer: 0
+- tile: 5362
+  at: [8, 7]
+  layer: 0
+- tile: 5362
+  at: [8, 8]
+  layer: 0
+- tile: 5362
+  at: [8, 9]
+  layer: 0
+- tile: 5362
+  at: [8, 10]
+  layer: 0
+- tile: 5362
+  at: [8, 11]
+  layer: 0
+- tile: 5362
+  at: [8, 12]
+  layer: 0
+- tile: 5534
+  at: [9, 2]
+  layer: 0
+- tile: 5547
+  at: [9, 3]
+  layer: 0
+- tile: 5555
+  at: [9, 4]
+  layer: 0
+- tile: 5355
+  at: [9, 5]
+  layer: 0
+- tile: 5363
+  at: [9, 6]
+  layer: 0
+- tile: 5363
+  at: [9, 7]
+  layer: 0
+- tile: 5363
+  at: [9, 8]
+  layer: 0
+- tile: 5363
+  at: [9, 9]
+  layer: 0
+- tile: 5363
+  at: [9, 10]
+  layer: 0
+- tile: 5363
+  at: [9, 11]
+  layer: 0
+- tile: 5363
+  at: [9, 12]
+  layer: 0
+- tile: 5534
+  at: [10, 2]
+  layer: 0
+- tile: 5547
+  at: [10, 3]
+  layer: 0
+- tile: 5555
+  at: [10, 4]
+  layer: 0
+- tile: 5353
+  at: [10, 5]
+  layer: 0
+- tile: 5361
+  at: [10, 6]
+  layer: 0
+- tile: 5361
+  at: [10, 7]
+  layer: 0
+- tile: 5361
+  at: [10, 8]
+  layer: 0
+- tile: 5361
+  at: [10, 9]
+  layer: 0
+- tile: 5361
+  at: [10, 10]
+  layer: 0
+- tile: 5361
+  at: [10, 11]
+  layer: 0
+- tile: 5361
+  at: [10, 12]
+  layer: 0
+- tile: 5534
+  at: [11, 2]
+  layer: 0
+- tile: 5547
+  at: [11, 3]
+  layer: 0
+- tile: 5555
+  at: [11, 4]
+  layer: 0
+- tile: 5354
+  at: [11, 5]
+  layer: 0
+- tile: 5362
+  at: [11, 6]
+  layer: 0
+- tile: 5362
+  at: [11, 7]
+  layer: 0
+- tile: 5362
+  at: [11, 8]
+  layer: 0
+- tile: 5362
+  at: [11, 9]
+  layer: 0
+- tile: 5362
+  at: [11, 10]
+  layer: 0
+- tile: 5362
+  at: [11, 11]
+  layer: 0
+- tile: 5362
+  at: [11, 12]
+  layer: 0
+- tile: 5534
+  at: [12, 2]
+  layer: 0
+- tile: 5355
+  at: [12, 5]
+  layer: 0
+- tile: 5363
+  at: [12, 6]
+  layer: 0
+- tile: 5363
+  at: [12, 7]
+  layer: 0
+- tile: 5363
+  at: [12, 8]
+  layer: 0
+- tile: 5363
+  at: [12, 9]
+  layer: 0
+- tile: 5363
+  at: [12, 10]
+  layer: 0
+- tile: 5363
+  at: [12, 11]
+  layer: 0
+- tile: 5363
+  at: [12, 12]
+  layer: 0
+- tile: 5534
+  at: [13, 2]
+  layer: 0
+- tile: 5547
+  at: [13, 3]
+  layer: 0
+- tile: 5555
+  at: [13, 4]
+  layer: 0
+- tile: 5353
+  at: [13, 5]
+  layer: 0
+- tile: 5361
+  at: [13, 6]
+  layer: 0
+- tile: 5361
+  at: [13, 7]
+  layer: 0
+- tile: 5361
+  at: [13, 8]
+  layer: 0
+- tile: 5361
+  at: [13, 9]
+  layer: 0
+- tile: 5361
+  at: [13, 10]
+  layer: 0
+- tile: 5361
+  at: [13, 11]
+  layer: 0
+- tile: 5361
+  at: [13, 12]
+  layer: 0
+- tile: 5550
+  at: [13, 13]
+  layer: 0
+- tile: 5534
+  at: [14, 2]
+  layer: 0
+- tile: 5547
+  at: [14, 3]
+  layer: 0
+- tile: 5555
+  at: [14, 4]
+  layer: 0
+- tile: 5354
+  at: [14, 5]
+  layer: 0
+- tile: 5362
+  at: [14, 6]
+  layer: 0
+- tile: 5362
+  at: [14, 7]
+  layer: 0
+- tile: 5362
+  at: [14, 8]
+  layer: 0
+- tile: 5362
+  at: [14, 9]
+  layer: 0
+- tile: 5362
+  at: [14, 10]
+  layer: 0
+- tile: 5362
+  at: [14, 11]
+  layer: 0
+- tile: 5362
+  at: [14, 12]
+  layer: 0
+- tile: 5550
+  at: [14, 13]
+  layer: 0
+- tile: 5534
+  at: [15, 2]
+  layer: 0
+- tile: 5547
+  at: [15, 3]
+  layer: 0
+- tile: 5555
+  at: [15, 4]
+  layer: 0
+- tile: 5355
+  at: [15, 5]
+  layer: 0
+- tile: 5363
+  at: [15, 6]
+  layer: 0
+- tile: 5363
+  at: [15, 7]
+  layer: 0
+- tile: 5363
+  at: [15, 8]
+  layer: 0
+- tile: 5363
+  at: [15, 9]
+  layer: 0
+- tile: 5363
+  at: [15, 10]
+  layer: 0
+- tile: 5363
+  at: [15, 11]
+  layer: 0
+- tile: 5363
+  at: [15, 12]
+  layer: 0
+- tile: 5550
+  at: [15, 13]
+  layer: 0
+- tile: 5534
+  at: [16, 2]
+  layer: 0
+- tile: 5547
+  at: [16, 3]
+  layer: 0
+- tile: 5555
+  at: [16, 4]
+  layer: 0
+- tile: 5353
+  at: [16, 5]
+  layer: 0
+- tile: 5361
+  at: [16, 6]
+  layer: 0
+- tile: 5361
+  at: [16, 7]
+  layer: 0
+- tile: 5361
+  at: [16, 8]
+  layer: 0
+- tile: 5361
+  at: [16, 9]
+  layer: 0
+- tile: 5361
+  at: [16, 10]
+  layer: 0
+- tile: 5361
+  at: [16, 11]
+  layer: 0
+- tile: 5361
+  at: [16, 12]
+  layer: 0
+- tile: 5550
+  at: [16, 13]
+  layer: 0
+- tile: 5534
+  at: [17, 2]
+  layer: 0
+- tile: 5354
+  at: [17, 5]
+  layer: 0
+- tile: 5362
+  at: [17, 6]
+  layer: 0
+- tile: 5362
+  at: [17, 7]
+  layer: 0
+- tile: 5362
+  at: [17, 8]
+  layer: 0
+- tile: 5362
+  at: [17, 9]
+  layer: 0
+- tile: 5362
+  at: [17, 10]
+  layer: 0
+- tile: 5362
+  at: [17, 11]
+  layer: 0
+- tile: 5362
+  at: [17, 12]
+  layer: 0
+- tile: 5550
+  at: [17, 13]
+  layer: 0
+- tile: 5541
+  at: [2, 3]
+  layer: 0
+- tile: 5543
+  at: [18, 3]
+  layer: 0
+- tile: 5541
+  at: [2, 4]
+  layer: 0
+- tile: 5543
+  at: [18, 4]
+  layer: 0
+- tile: 5541
+  at: [2, 5]
+  layer: 0
+- tile: 5543
+  at: [18, 5]
+  layer: 0
+- tile: 5541
+  at: [2, 6]
+  layer: 0
+- tile: 5543
+  at: [18, 6]
+  layer: 0
+- tile: 5541
+  at: [2, 7]
+  layer: 0
+- tile: 5543
+  at: [18, 7]
+  layer: 0
+- tile: 5541
+  at: [2, 8]
+  layer: 0
+- tile: 5543
+  at: [18, 8]
+  layer: 0
+- tile: 5541
+  at: [2, 9]
+  layer: 0
+- tile: 5543
+  at: [18, 9]
+  layer: 0
+- tile: 5541
+  at: [2, 10]
+  layer: 0
+- tile: 5543
+  at: [18, 10]
+  layer: 0
+- tile: 5541
+  at: [2, 11]
+  layer: 0
+- tile: 5543
+  at: [18, 11]
+  layer: 0
+- tile: 5541
+  at: [2, 12]
+  layer: 0
+- tile: 5543
+  at: [18, 12]
+  layer: 0
+- tile: 5533
+  at: [2, 2]
+  layer: 0
+- tile: 5535
+  at: [18, 2]
+  layer: 0
+- tile: 5549
+  at: [2, 13]
+  layer: 0
+- tile: 5551
+  at: [18, 13]
+  layer: 0
+- tile: 5563
+  at: [3, 3]
+  layer: 0
+- tile: 5571
+  at: [3, 4]
+  layer: 0
+- tile: 5564
+  at: [17, 3]
+  layer: 0
+- tile: 5572
+  at: [17, 4]
+  layer: 0
+- tile: 5361
+  at: [9, 13]
+  layer: 0
+- tile: 5550
+  at: [9, 14]
+  layer: 0
+- tile: 5512
+  at: [9, 13]
+  layer: 1
+- tile: 5362
+  at: [10, 13]
+  layer: 0
+- tile: 5550
+  at: [10, 14]
+  layer: 0
+- tile: 5513
+  at: [10, 13]
+  layer: 1
+- tile: 5363
+  at: [11, 13]
+  layer: 0
+- tile: 5550
+  at: [11, 14]
+  layer: 0
+- tile: 5514
+  at: [11, 13]
+  layer: 1
+- tile: 5554
+  at: [8, 13]
+  layer: 0
+- tile: 5553
+  at: [12, 13]
+  layer: 0
+- tile: 5549
+  at: [8, 14]
+  layer: 0
+- tile: 5551
+  at: [12, 14]
+  layer: 0
+- tile: 5544
+  at: [6, 3]
+  layer: 0
+- tile: 5552
+  at: [6, 4]
+  layer: 0
+- tile: 5544
+  at: [12, 3]
+  layer: 0
+- tile: 5552
+  at: [12, 4]
+  layer: 0
+- tile: 2448
+  at: [3, 4]
+  layer: 2
+- tile: 2449
+  at: [4, 4]
+  layer: 2
+- tile: 2450
+  at: [5, 4]
+  layer: 2
+- tile: 2451
+  at: [6, 4]
+  layer: 2
+- tile: 2456
+  at: [3, 5]
+  layer: 1
+- tile: 2457
+  at: [4, 5]
+  layer: 1
+- tile: 2458
+  at: [5, 5]
+  layer: 1
+- tile: 2459
+  at: [6, 5]
+  layer: 1
+- tile: 4058
+  at: [7, 4]
+  layer: 2
+- tile: 4059
+  at: [8, 4]
+  layer: 2
+- tile: 4066
+  at: [7, 5]
+  layer: 1
+- tile: 4067
+  at: [8, 5]
+  layer: 1
+- tile: 5411
+  at: [7, 7]
+  layer: 1
+- tile: 5412
+  at: [8, 7]
+  layer: 1
+- tile: 5412
+  at: [9, 7]
+  layer: 1
+- tile: 5412
+  at: [10, 7]
+  layer: 1
+- tile: 5412
+  at: [11, 7]
+  layer: 1
+- tile: 5413
+  at: [12, 7]
+  layer: 1
+- tile: 5419
+  at: [7, 8]
+  layer: 1
+- tile: 5420
+  at: [8, 8]
+  layer: 1
+- tile: 5420
+  at: [9, 8]
+  layer: 1
+- tile: 5420
+  at: [10, 8]
+  layer: 1
+- tile: 5420
+  at: [11, 8]
+  layer: 1
+- tile: 5421
+  at: [12, 8]
+  layer: 1
+- tile: 5419
+  at: [7, 9]
+  layer: 1
+- tile: 5420
+  at: [8, 9]
+  layer: 1
+- tile: 5420
+  at: [9, 9]
+  layer: 1
+- tile: 5420
+  at: [10, 9]
+  layer: 1
+- tile: 5420
+  at: [11, 9]
+  layer: 1
+- tile: 5421
+  at: [12, 9]
+  layer: 1
+- tile: 5427
+  at: [7, 10]
+  layer: 1
+- tile: 5428
+  at: [8, 10]
+  layer: 1
+- tile: 5428
+  at: [9, 10]
+  layer: 1
+- tile: 5428
+  at: [10, 10]
+  layer: 1
+- tile: 5428
+  at: [11, 10]
+  layer: 1
+- tile: 5429
+  at: [12, 10]
+  layer: 1
+- tile: 2360
+  at: [8, 7]
+  layer: 2
+- tile: 2361
+  at: [9, 7]
+  layer: 2
+- tile: 2362
+  at: [10, 7]
+  layer: 2
+- tile: 2368
+  at: [8, 8]
+  layer: 2
+- tile: 2369
+  at: [9, 8]
+  layer: 2
+- tile: 2370
+  at: [10, 8]
+  layer: 2
+- tile: 2416
+  at: [8, 9]
+  layer: 2
+- tile: 2417
+  at: [9, 9]
+  layer: 2
+- tile: 2418
+  at: [10, 9]
+  layer: 2
+- tile: 2424
+  at: [8, 10]
+  layer: 2
+- tile: 2425
+  at: [9, 10]
+  layer: 2
+- tile: 2426
+  at: [10, 10]
+  layer: 2
+- tile: 3633
+  at: [14, 3]
+  layer: 2
+- tile: 3641
+  at: [14, 4]
+  layer: 2
+- tile: 3649
+  at: [14, 5]
+  layer: 1
+- tile: 5597
+  at: [15, 5]
+  layer: 1
+- tile: 5598
+  at: [16, 5]
+  layer: 1
+- tile: 5599
+  at: [17, 5]
+  layer: 1
+- tile: 5605
+  at: [15, 6]
+  layer: 1
+- tile: 5606
+  at: [16, 6]
+  layer: 1
+- tile: 5607
+  at: [17, 6]
+  layer: 1
+- tile: 5613
+  at: [15, 7]
+  layer: 1
+- tile: 5614
+  at: [16, 7]
+  layer: 1
+- tile: 5615
+  at: [17, 7]
+  layer: 1
+- tile: 3309
+  at: [13, 3]
+  layer: 2
+- tile: 3310
+  at: [14, 3]
+  layer: 2
+- tile: 3317
+  at: [13, 4]
+  layer: 1
+- tile: 3318
+  at: [14, 4]
+  layer: 1
+- tile: 5422
+  at: [15, 10]
+  layer: 1
+- tile: 5430
+  at: [15, 11]
+  layer: 1
+- tile: 5438
+  at: [15, 12]
+  layer: 1
+- tile: 5431
+  at: [15, 12]
+  layer: 2
+- tile: 5446
+  at: [16, 12]
+  layer: 2
+- tile: 5447
+  at: [17, 12]
+  layer: 2
+- tile: 4822
+  at: [3, 11]
+  layer: 2
+- tile: 4830
+  at: [3, 12]
+  layer: 1
+- tile: 4170
+  at: [4, 11]
+  layer: 2
+- tile: 4171
+  at: [5, 11]
+  layer: 2
+- tile: 4178
+  at: [4, 12]
+  layer: 1
+- tile: 4179
+  at: [5, 12]
+  layer: 1
+- tile: 2328
+  at: [3, 7]
+  layer: 2
+- tile: 2329
+  at: [4, 7]
+  layer: 2
+- tile: 2330
+  at: [5, 7]
+  layer: 2
+- tile: 2336
+  at: [3, 8]
+  layer: 1
+- tile: 2337
+  at: [4, 8]
+  layer: 1
+- tile: 2338
+  at: [5, 8]
+  layer: 1
+- tile: 2344
+  at: [3, 9]
+  layer: 1
+- tile: 2345
+  at: [4, 9]
+  layer: 1
+- tile: 2346
+  at: [5, 9]
+  layer: 1
+- tile: 4077
+  at: [12, 8]
+  layer: 2
+- tile: 3369
+  at: [9, 3]
+  layer: 1
+- tile: 3370
+  at: [10, 3]
+  layer: 1
+- tile: 3377
+  at: [9, 4]
+  layer: 1
+- tile: 3378
+  at: [10, 4]
+  layer: 1
+- tile: 4101
+  at: [14, 11]
+  layer: 1
+events:
+- type: exit
+  at: [10, 13]
+  link: R2_FARM
+- type: sign
+  at: [9, 6]
+  post: false
+  name: Kitchen table
+  text: Six chairs. One has "JUNO" carved in it. One newer carving beside it says "\PN". The knife is still on the table.
+- type: event
+  name: Wenna
+  at: [7, 8]
+  pages:
+  - graphic: {sprite: NPC 16, dir: right}
+    commands: ['\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 16, dir: right}
+    commands:
+    - if: $game_self_switches[[523, 0, 'BISCUIT']]
+      then: ['\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.']
+      else:
+      - (Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
+      - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here - and another tart, for the nerves. Mine.'
+      - {script: 'pbReceiveItem(:ORANBERRY, 3)'}
+      - 'QUEST COMPLETE: "Biscuit".'
+      - {script: '$game_self_switches[[523, 0, ''BISCUIT'']] = true'}
+- type: npc
+  name: Farmer Hale
+  at: [13, 10]
+  sprite: NPC 25
+  dir: left
+  text: 'Farmer Hale: Juno''s dad. Coll''s out in the yard teaching headbutts again. Mind the apple trees, and mind Coll.'
+- type: sign
+  at: [13, 5]
+  post: false
+  name: Bookshelf
+  text: '"Berries of the South Coast", annotated in tiny handwriting: "WRONG." "ALSO WRONG." "Ask Uncle Rowan."'
+- type: sign
+  at: [11, 5]
+  post: false
+  name: Juno's seed packets
+  text: Seed packets pinned to the wall like butterflies. One is labeled "MYSTERY (do not eat) (I ate one) (do NOT eat)".
+- type: event
+  name: Bed
+  at: [15, 8]
+  pages:
+  - commands:
+    - You could rest here.
+    - choices: [Rest, Not now]
+      cancel: 2
+      branches:
+      - - tone: [-255, -255, -255, 0, 16]
+        - {wait: 20}
+        - {heal: true}
+        - tone: [0, 0, 0, 0, 16]
+        - if: $game_switches[105] && $game_variables[102] < 2
+          then:
+          - tone: [-255, -255, -255, 0, 20]
+          - {wait: 24}
+          - (Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.)
+          - '"Subject reads NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred."'
+          - '"Second such reading in my life."'
+          - '"The first was in Crownhaven, AF 290."'
+          - '"God help us, Ines."'
+          - (She closes the notebook. Across the harbor the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat stands on the gallery, looking
+            at the station.)
+          - var: [STORY_CHAPTER, 2]
+          - tone: [0, 0, 0, 0, 20]
+          else: []
+      - []
+
+---
+id: 526
+name: Woodward's Hut
+parent: 524
+bgm: Route 3
+metadata:
+  MapPosition: [0, 13, 23]
+tone: [10, 4, -12, 0]
+palette: interior
+map: '....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  ....................
+
+  '
+tiles:
+- tile: 5534
+  at: [3, 2]
+  layer: 0
+- tile: 5352
+  at: [3, 5]
+  layer: 0
+- tile: 5360
+  at: [3, 6]
+  layer: 0
+- tile: 5360
+  at: [3, 7]
+  layer: 0
+- tile: 5360
+  at: [3, 8]
+  layer: 0
+- tile: 5360
+  at: [3, 9]
+  layer: 0
+- tile: 5360
+  at: [3, 10]
+  layer: 0
+- tile: 5360
+  at: [3, 11]
+  layer: 0
+- tile: 5550
+  at: [3, 12]
+  layer: 0
+- tile: 5534
+  at: [4, 2]
+  layer: 0
+- tile: 5547
+  at: [4, 3]
+  layer: 0
+- tile: 5555
+  at: [4, 4]
+  layer: 0
+- tile: 5353
+  at: [4, 5]
+  layer: 0
+- tile: 5361
+  at: [4, 6]
+  layer: 0
+- tile: 5361
+  at: [4, 7]
+  layer: 0
+- tile: 5361
+  at: [4, 8]
+  layer: 0
+- tile: 5361
+  at: [4, 9]
+  layer: 0
+- tile: 5361
+  at: [4, 10]
+  layer: 0
+- tile: 5361
+  at: [4, 11]
+  layer: 0
+- tile: 5550
+  at: [4, 12]
+  layer: 0
+- tile: 5534
+  at: [5, 2]
+  layer: 0
+- tile: 5354
+  at: [5, 5]
+  layer: 0
+- tile: 5362
+  at: [5, 6]
+  layer: 0
+- tile: 5362
+  at: [5, 7]
+  layer: 0
+- tile: 5362
+  at: [5, 8]
+  layer: 0
+- tile: 5362
+  at: [5, 9]
+  layer: 0
+- tile: 5362
+  at: [5, 10]
+  layer: 0
+- tile: 5362
+  at: [5, 11]
+  layer: 0
+- tile: 5534
+  at: [6, 2]
+  layer: 0
+- tile: 5547
+  at: [6, 3]
+  layer: 0
+- tile: 5555
+  at: [6, 4]
+  layer: 0
+- tile: 5355
+  at: [6, 5]
+  layer: 0
+- tile: 5363
+  at: [6, 6]
+  layer: 0
+- tile: 5363
+  at: [6, 7]
+  layer: 0
+- tile: 5363
+  at: [6, 8]
+  layer: 0
+- tile: 5363
+  at: [6, 9]
+  layer: 0
+- tile: 5363
+  at: [6, 10]
+  layer: 0
+- tile: 5363
+  at: [6, 11]
+  layer: 0
+- tile: 5534
+  at: [7, 2]
+  layer: 0
+- tile: 5547
+  at: [7, 3]
+  layer: 0
+- tile: 5555
+  at: [7, 4]
+  layer: 0
+- tile: 5353
+  at: [7, 5]
+  layer: 0
+- tile: 5361
+  at: [7, 6]
+  layer: 0
+- tile: 5361
+  at: [7, 7]
+  layer: 0
+- tile: 5361
+  at: [7, 8]
+  layer: 0
+- tile: 5361
+  at: [7, 9]
+  layer: 0
+- tile: 5361
+  at: [7, 10]
+  layer: 0
+- tile: 5361
+  at: [7, 11]
+  layer: 0
+- tile: 5534
+  at: [8, 2]
+  layer: 0
+- tile: 5547
+  at: [8, 3]
+  layer: 0
+- tile: 5555
+  at: [8, 4]
+  layer: 0
+- tile: 5354
+  at: [8, 5]
+  layer: 0
+- tile: 5362
+  at: [8, 6]
+  layer: 0
+- tile: 5362
+  at: [8, 7]
+  layer: 0
+- tile: 5362
+  at: [8, 8]
+  layer: 0
+- tile: 5362
+  at: [8, 9]
+  layer: 0
+- tile: 5362
+  at: [8, 10]
+  layer: 0
+- tile: 5362
+  at: [8, 11]
+  layer: 0
+- tile: 5534
+  at: [9, 2]
+  layer: 0
+- tile: 5547
+  at: [9, 3]
+  layer: 0
+- tile: 5555
+  at: [9, 4]
+  layer: 0
+- tile: 5355
+  at: [9, 5]
+  layer: 0
+- tile: 5363
+  at: [9, 6]
+  layer: 0
+- tile: 5363
+  at: [9, 7]
+  layer: 0
+- tile: 5363
+  at: [9, 8]
+  layer: 0
+- tile: 5363
+  at: [9, 9]
+  layer: 0
+- tile: 5363
+  at: [9, 10]
+  layer: 0
+- tile: 5363
+  at: [9, 11]
+  layer: 0
+- tile: 5534
+  at: [10, 2]
+  layer: 0
+- tile: 5547
+  at: [10, 3]
+  layer: 0
+- tile: 5555
+  at: [10, 4]
+  layer: 0
+- tile: 5353
+  at: [10, 5]
+  layer: 0
+- tile: 5361
+  at: [10, 6]
+  layer: 0
+- tile: 5361
+  at: [10, 7]
+  layer: 0
+- tile: 5361
+  at: [10, 8]
+  layer: 0
+- tile: 5361
+  at: [10, 9]
+  layer: 0
+- tile: 5361
+  at: [10, 10]
+  layer: 0
+- tile: 5361
+  at: [10, 11]
+  layer: 0
+- tile: 5550
+  at: [10, 12]
+  layer: 0
+- tile: 5534
+  at: [11, 2]
+  layer: 0
+- tile: 5354
+  at: [11, 5]
+  layer: 0
+- tile: 5362
+  at: [11, 6]
+  layer: 0
+- tile: 5362
+  at: [11, 7]
+  layer: 0
+- tile: 5362
+  at: [11, 8]
+  layer: 0
+- tile: 5362
+  at: [11, 9]
+  layer: 0
+- tile: 5362
+  at: [11, 10]
+  layer: 0
+- tile: 5362
+  at: [11, 11]
+  layer: 0
+- tile: 5550
+  at: [11, 12]
+  layer: 0
+- tile: 5541
+  at: [2, 3]
+  layer: 0
+- tile: 5543
+  at: [12, 3]
+  layer: 0
+- tile: 5541
+  at: [2, 4]
+  layer: 0
+- tile: 5543
+  at: [12, 4]
+  layer: 0
+- tile: 5541
+  at: [2, 5]
+  layer: 0
+- tile: 5543
+  at: [12, 5]
+  layer: 0
+- tile: 5541
+  at: [2, 6]
+  layer: 0
+- tile: 5543
+  at: [12, 6]
+  layer: 0
+- tile: 5541
+  at: [2, 7]
+  layer: 0
+- tile: 5543
+  at: [12, 7]
+  layer: 0
+- tile: 5541
+  at: [2, 8]
+  layer: 0
+- tile: 5543
+  at: [12, 8]
+  layer: 0
+- tile: 5541
+  at: [2, 9]
+  layer: 0
+- tile: 5543
+  at: [12, 9]
+  layer: 0
+- tile: 5541
+  at: [2, 10]
+  layer: 0
+- tile: 5543
+  at: [12, 10]
+  layer: 0
+- tile: 5541
+  at: [2, 11]
+  layer: 0
+- tile: 5543
+  at: [12, 11]
+  layer: 0
+- tile: 5533
+  at: [2, 2]
+  layer: 0
+- tile: 5535
+  at: [12, 2]
+  layer: 0
+- tile: 5549
+  at: [2, 12]
+  layer: 0
+- tile: 5551
+  at: [12, 12]
+  layer: 0
+- tile: 5563
+  at: [3, 3]
+  layer: 0
+- tile: 5571
+  at: [3, 4]
+  layer: 0
+- tile: 5564
+  at: [11, 3]
+  layer: 0
+- tile: 5572
+  at: [11, 4]
+  layer: 0
+- tile: 5361
+  at: [6, 12]
+  layer: 0
+- tile: 5550
+  at: [6, 13]
+  layer: 0
+- tile: 5512
+  at: [6, 12]
+  layer: 1
+- tile: 5362
+  at: [7, 12]
+  layer: 0
+- tile: 5550
+  at: [7, 13]
+  layer: 0
+- tile: 5513
+  at: [7, 12]
+  layer: 1
+- tile: 5363
+  at: [8, 12]
+  layer: 0
+- tile: 5550
+  at: [8, 13]
+  layer: 0
+- tile: 5514
+  at: [8, 12]
+  layer: 1
+- tile: 5554
+  at: [5, 12]
+  layer: 0
+- tile: 5553
+  at: [9, 12]
+  layer: 0
+- tile: 5549
+  at: [5, 13]
+  layer: 0
+- tile: 5551
+  at: [9, 13]
+  layer: 0
+- tile: 5544
+  at: [5, 3]
+  layer: 0
+- tile: 5552
+  at: [5, 4]
+  layer: 0
+- tile: 4082
+  at: [3, 5]
+  layer: 2
+- tile: 4083
+  at: [4, 5]
+  layer: 2
+- tile: 4084
+  at: [5, 5]
+  layer: 2
+- tile: 4090
+  at: [3, 6]
+  layer: 1
+- tile: 4091
+  at: [4, 6]
+  layer: 1
+- tile: 4092
+  at: [5, 6]
+  layer: 1
+- tile: 4136
+  at: [9, 5]
+  layer: 2
+- tile: 4137
+  at: [10, 5]
+  layer: 2
+- tile: 4138
+  at: [11, 5]
+  layer: 2
+- tile: 4144
+  at: [9, 6]
+  layer: 1
+- tile: 4145
+  at: [10, 6]
+  layer: 1
+- tile: 4146
+  at: [11, 6]
+  layer: 1
+- tile: 4152
+  at: [9, 7]
+  layer: 1
+- tile: 4153
+  at: [10, 7]
+  layer: 1
+- tile: 4154
+  at: [11, 7]
+  layer: 1
+- tile: 4140
+  at: [7, 5]
+  layer: 2
+- tile: 4141
+  at: [8, 5]
+  layer: 2
+- tile: 4148
+  at: [7, 6]
+  layer: 1
+- tile: 4149
+  at: [8, 6]
+  layer: 1
+- tile: 4156
+  at: [7, 7]
+  layer: 1
+- tile: 4157
+  at: [8, 7]
+  layer: 1
+- tile: 5411
+  at: [5, 8]
+  layer: 1
+- tile: 5412
+  at: [6, 8]
+  layer: 1
+- tile: 5412
+  at: [7, 8]
+  layer: 1
+- tile: 5413
+  at: [8, 8]
+  layer: 1
+- tile: 5427
+  at: [5, 9]
+  layer: 1
+- tile: 5428
+  at: [6, 9]
+  layer: 1
+- tile: 5428
+  at: [7, 9]
+  layer: 1
+- tile: 5429
+  at: [8, 9]
+  layer: 1
+- tile: 3408
+  at: [6, 8]
+  layer: 2
+- tile: 3409
+  at: [7, 8]
+  layer: 2
+- tile: 3416
+  at: [6, 9]
+  layer: 2
+- tile: 3417
+  at: [7, 9]
+  layer: 2
+- tile: 4060
+  at: [11, 8]
+  layer: 2
+- tile: 4068
+  at: [11, 9]
+  layer: 1
+- tile: 4101
+  at: [3, 10]
+  layer: 1
+- tile: 4077
+  at: [8, 9]
+  layer: 2
+- tile: 4824
+  at: [10, 10]
+  layer: 1
+- tile: 4825
+  at: [11, 10]
+  layer: 1
+- tile: 4832
+  at: [10, 11]
+  layer: 1
+- tile: 4833
+  at: [11, 11]
+  layer: 1
+events:
+- type: exit
+  at: [7, 12]
+  link: WOOD_HUT
+- type: event
+  name: Woodward
+  at: [8, 8]
+  pages:
+  - graphic: {sprite: trainer_HIKER, dir: down}
+    commands:
+    - 'Woodward: Past my hut it''s all glass. I''ve stopped chopping. You can''t burn it and it cuts the axe.'
+    - if: $game_self_switches[[526, 0, 'POTIONS']]
+      then: []
+      else:
+      - 'Woodward: Here. For whatever you think you''re doing.'
+      - {script: 'pbReceiveItem(:POTION, 3)'}
+      - {script: '$game_self_switches[[526, 0, ''POTIONS'']] = true'}
+- type: sign
+  at: [5, 5]
+  post: false
+  name: Bookshelf
+  text: '"Tally of the east trees. Midwinter: 0 glass. Thaw: 40. Spring: 300. I have stopped counting. - W."'

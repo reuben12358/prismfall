@@ -7,6 +7,8 @@
 
 Regenerate with `ruby tools/harness/run_all.rb` then `python3 -I tools/harness/render_cards.py`.
 
+**Real-engine footage** (mkxp-z + Elite Battle: DX + these plugins, AI vs AI): see `engine/README.md`.
+
 ## What loaded
 - Engine: 313 script sections of the base project (Essentials v21.1), in order.
 - Plugins, in PluginManager order: v21.1 Hotfixes, Generation 9 Pack, Prismfall Core, Prismfall Field Effects, Prismfall Bosses.

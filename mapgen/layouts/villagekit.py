@@ -66,12 +66,19 @@ for key, pre in (('town_props', 'tp_'), ('houses', 'hs_'), ('forest', 'fo_')):  
         x, y, w, h = st['tile_rect']
         rows = [[base + 384 + (y + r) * 8 + x + c for c in range(w)] for r in range(h)]
         V[pre + st['name']] = mk(rows, top=(h - 1 if st.get('kind') != 'house' else (1 if h >= 4 else 0)))
+C3 = OFF['custom3']['offset'] if 'custom3' in OFF else None
+if C3:                        # Briarwick's elder tree (make_custom.py custom3): 12-wide crown over an 8-wide bole, door at (6, 11)
+    crownL = blk(C3, 6, 8); crownR = blk(C3 + 64, 6, 8)
+    V['g_elder'] = overlay(12, 12, [(1, 2, 5, blk(C3 + 128, 8, 7)), (2, 0, 0, crownL), (2, 6, 0, crownR)])
+SHD = SH                      # Sheridan raised timber deck: 9-slice with edge passages, solid stilts, plank stairs
+DECK = {'TL': SH + 104, 'T': SH + 105, 'TR': SH + 106, 'L': SH + 112, 'C': SH + 113, 'R': SH + 114, 'BL': SH + 120, 'B': SH + 121,
+        'BR': SH + 122, 'legL': SH + 139, 'leg': SH + 140, 'legR': SH + 141, 'stair': SH + 160, 'stair2': SH + 161}
 if 'hs_jonquil_08' in V:      # Ferrow's lighthouse: the octagonal tower of jonquil_08 without its loose base pieces
     L = V['hs_jonquil_08']['layers']; rows = [[L[1][y][x] or L[2][y][x] for x in range(5)] for y in range(9)]
     V['lh_ferrow'] = mk(rows, top=6)
 json.dump(V, open(os.path.join(HERE, 'data', 'stamps_v.json'), 'w'))
 STAMPS.update(V)
-citykit.DOORS.update({'g_tree6': (4, 7), 'g_tree4': (2, 6)})
+citykit.DOORS.update({'g_tree6': (4, 7), 'g_tree4': (2, 6), 'g_elder': (6, 11)})
 WS = [n + s for n in ('w_longhouse', 'w_cot', 'w_ell_a', 'w_manor_a', 'w_manor_b', 'w_ell_b', 'w_house') for s in ('', '_s', '_m')]
 GARDEN = ['p_bush_w', 'p_bush_g', 'p_bush_r', 'p_pot', 'p_pinkbush', 'p_bush_r', 'p_pot', 'p_stump']
 
