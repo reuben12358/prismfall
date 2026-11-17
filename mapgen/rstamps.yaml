@@ -18,3 +18,12 @@ sh_small:  {game: rejuvenation, map: 423, rect: [14, 25, 6, 7], rows: [[0, 22], 
 sh_shop:   {game: rejuvenation, map: 423, rect: [12, 38, 12, 13], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [20, 46]}
 sh_ell:    {game: rejuvenation, map: 423, rect: [33, 40, 11, 12], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [36, 46]}
 sh_cot:    {game: rejuvenation, map: 423, rect: [49, 40, 8, 8], rows: [[0, 22], [110, 139], [160, 175]], l0: true, door: [52, 46]}
+# sheet stamps: trees, pier, lighthouse, props (part, [col, src row], size, top rows on layer 3)
+tr_oak:    {sheet: sh, at: [0, 26], size: [3, 4], top: 2}
+tr_oak2:   {sheet: sh, at: [0, 140], size: [3, 4], top: 2}
+tr_pine:   {sheet: sh, at: [3, 26], size: [2, 3], top: 2}
+tr_pine2:  {sheet: sh, at: [3, 140], size: [2, 3], top: 2}
+tr_teal:   {sheet: ak, at: [0, 94], size: [3, 4], top: 3}
+tr_pink:   {sheet: ak, at: [4, 94], size: [3, 4], top: 3}
+lighthouse: {sheet: ap, at: [0, 367], size: [5, 16], top: 12, door: [2, 15]}
+gl_lamp:   {sheet: gl, at: [7, 357], size: [1, 2], top: 1}

@@ -26,13 +26,13 @@ for f in "$ROOT"/pbs/*.txt; do
 done
 [[ -d "$ROOT/maps_out/PBS" ]] && cp "$ROOT"/maps_out/PBS/*.txt "$OUT/PBS/"
 
-# Data: generated maps + the MapInfos entry list + our RPG::Tileset entries (both merged in-game by
-# Debug > Files > Install Prismfall maps; we never ship MapInfos.rxdata or Tilesets.rxdata)
+# Data: generated maps + the MapInfos entry list + our RPG::Tileset entries + our switch/variable names (merged
+# in-game by Debug > Files > Install Prismfall maps; we never ship MapInfos, Tilesets or System.rxdata)
 cp "$ROOT"/maps_out/Data/Map*.rxdata "$OUT/Data/" 2>/dev/null || true
 [[ -f "$ROOT/maps_out/Data/mapinfos_prismfall.txt" ]] && cp "$ROOT/maps_out/Data/mapinfos_prismfall.txt" "$OUT/Data/"
 if [[ -f "$ROOT/maps_out/tilesets_prismfall.json" ]]; then
   python3 -I "$ROOT/mapgen/export_tilesets_rxdata.py"     # refresh from the registry (needs numpy here only)
-  cp "$ROOT/maps_out/Data/Tilesets_prismfall.rxdata" "$OUT/Data/"
+  cp "$ROOT/maps_out/Data/Tilesets_prismfall.rxdata" "$ROOT/maps_out/Data/system_prismfall.txt" "$OUT/Data/"
 fi
 
 # Graphics the maps need: our tileset sheets, autotiles and fog pictures (new file names only)

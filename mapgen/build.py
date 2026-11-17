@@ -122,6 +122,13 @@ def prepare(spec, ctx):
                 ee = {'type': 'exit', 'at': [ex.x, ex.y], 'link': spec['exit_link']}
                 if 'exit_arrive' in spec: ee['arrive'] = spec['exit_arrive']
                 spec['events'].insert(0, ee)
+    elif 'raw' in spec:             # MAPGEN 2h: layers painted by a layout script (layouts/rkit.py), ids already final
+        layers = np.load(os.path.join(HERE, spec['raw'])).astype(np.int32)
+        for ed in spec.get('tile_edits', []):
+            if len(ed) == 4: layers[ed[0], ed[2], ed[1]] = ed[3]
+        spec['_layers'] = layers
+        spec['_tevents'] = []
+        spec['_tileset'] = spec['tileset']
     else:
         pal = ctx.palette(spec.get('palette', 'outside'))
         lines = [l for l in spec['map'].strip('\n').split('\n')]

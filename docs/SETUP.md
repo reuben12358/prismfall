@@ -111,17 +111,21 @@ Close RPG Maker XP first: it overwrites `Data/*.rxdata` when it saves. Back up t
    so fields are playable on day one.
 4. **Maps and tilesets.**
    1. Close RMXP and back up `Data/`.
-   2. Copy the kit's `Data/` (the `MapNNN.rxdata` files, IDs 100+, plus `mapinfos_prismfall.txt` and
-      `Tilesets_prismfall.rxdata`) and `Graphics/` (`Tilesets/`, `Autotiles/`, `Fogs/`: new file names only;
+   2. Copy the kit's `Data/` (the `MapNNN.rxdata` files, IDs 100+, plus `mapinfos_prismfall.txt`,
+      `Tilesets_prismfall.rxdata` and `system_prismfall.txt`) and `Graphics/` (`Tilesets/`, `Autotiles/`, `Fogs/`: new file names only;
       `Autotiles/Dirt.png` is byte-identical to the stock file) into the project.
    3. Launch in Debug mode (§4) and start a **New Game**. The first time, it asks to install the Prismfall tilesets and
       maps: say Yes and the game carries on into the prologue. The same installer is **Debug → Files options → Install
       Prismfall maps**; running it again changes nothing. It:
-      - backs up `Data/Tilesets.rxdata` and `Data/MapInfos.rxdata` once (`*.prismfall-bak`);
+      - backs up `Data/Tilesets.rxdata`, `Data/MapInfos.rxdata` and `Data/System.rxdata` once (`*.prismfall-bak`);
       - writes our tilesets (IDs 30, 33, 34, 40) into `Tilesets.rxdata`, padding the empty slots below them, and never
         overwrites a differently named tileset at the same ID (it reports it instead);
       - adds our maps to `MapInfos.rxdata` with their names and tree, including renaming the `MAP100`-style entries that
         Essentials' compiler makes for new map files on every Debug boot. Other existing entries are never changed.
+      - names our Game Switches and Variables (S101+, V101+, from `Data/system_prismfall.txt`) in `System.rxdata`,
+        raising RMXP's maximum. This is required, not cosmetic: Essentials v21.1 ignores an event page's switch condition
+        when `System.rxdata` has no entry for that switch, and the base projects define only 100. Names you already gave
+        an ID are kept and reported.
    4. Reopen RMXP: the new maps appear in the map tree with their tilesets.
    - Tilesets 33 and 40 are tall sheets (about 90,000 px). Essentials wraps them into columns; that needs a GPU whose
      maximum texture size is at least 8192 (any current GPU; very old integrated graphics stop with "Tileset is too long").

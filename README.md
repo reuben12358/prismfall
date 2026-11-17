@@ -14,7 +14,8 @@ This kit is an **overlay**: copy its folders into an Essentials + EBDX project. 
    click through. If the boot used to stop with "superclass mismatch for class PokemonSprite", that is a base-project
    bug: the kit's `Plugins/~Prismfall Base Fixes` works around it (details and the manual fix: `Docs/SETUP.md` §6).
 4. Start a **New Game**. The first time, it asks to install the Prismfall tilesets and maps: say **Yes**. It backs up
-   `Data/Tilesets.rxdata` and `Data/MapInfos.rxdata`, adds our tilesets and map tree, and carries on into the prologue.
+   `Data/Tilesets.rxdata`, `MapInfos.rxdata` and `System.rxdata`, adds our tilesets, map tree and switch/variable names
+   (needed: Essentials ignores event pages on unnamed switches above 100), and carries on into the prologue.
    The same installer is **Debug → Files options → Install Prismfall maps** (safe to re-run: it changes nothing twice).
 5. New games start on the Dovetail's deck (`Plugins/Prismfall Maps/004_NewGameStart.rb`), so RMXP's
    "Set Starting Position" isn't needed. RPG Maker XP shows the maps and tilesets the next time you open the project.
@@ -33,7 +34,7 @@ This kit is an **overlay**: copy its folders into an Essentials + EBDX project. 
 | `Plugins/Prismfall Map*` | Map + tileset installer, New Game start, per-map default fields, tones, fogs, story helpers |
 | `Plugins/~Prismfall Base Fixes` | Loads first: works around the EBDX base projects' `PokemonSprite` boot error (SETUP §6) |
 | `PBS/*_prismfall.txt` | Trainers (Wardens ×3 difficulties, rivals, Festival), trainer types, seed items, encounters, map metadata/connections |
-| `Data/Map*.rxdata` | Generated maps (Act I slice in progress + Test Arena), plus `mapinfos_prismfall.txt` and `Tilesets_prismfall.rxdata` for the installer |
+| `Data/Map*.rxdata` | Generated maps (Act I slice in progress + Test Arena), plus `mapinfos_prismfall.txt`, `Tilesets_prismfall.rxdata` and `system_prismfall.txt` for the installer |
 | `Graphics/Tilesets`, `Autotiles`, `Fogs` | The maps' tileset sheets (IDs 30, 33, 34, 40), their autotiles and fog pictures |
 | `Design/`, `Story/`, `Docs/` | Spine, story bible, choices/endings, world & gym puzzles, field compendium, systems docs, art asset list, setup, map previews |
 | `Tools/` | Validators, standalone map merge tool, map generator specs |

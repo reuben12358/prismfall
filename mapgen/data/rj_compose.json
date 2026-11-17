@@ -45,8 +45,8 @@
   },
   "pf": {
    "offset": 17744,
-   "tiles": 512
+   "tiles": 768
   }
  },
- "n_tiles": 18256
+ "n_tiles": 18512
 }

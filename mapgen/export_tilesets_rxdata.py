@@ -9,6 +9,10 @@ Debug > Files > Install Prismfall maps) merges it into the project's own Data/Ti
 Marshal, so Windows users need neither Python nor numpy. tools/package.sh runs this before packaging.
 Entries are built with merge_tilesets.tileset_obj, so both install paths write the same RPG::Tileset.
 --check only reports whether the file on disk matches the registry.
+Also writes maps_out/Data/system_prismfall.txt (kind<TAB>id<TAB>name: our Game Switch / Variable names from
+design/FLAGS.md and flags.yaml, plus any other ID above 100 the maps use). Essentials v21.1 treats an event page's
+switch condition as false when System.rxdata has no entry for that switch (Game_Event#switchIsOn?), and the base
+projects define only 100, so the installer adds these entries.
 Also warns (kit sanity, read-only) when a map on one of these tilesets uses a tile ID the tileset doesn't have
 (maps and tileset built at different times), or when the New Game start tile (004_NewGameStart.rb) is boxed in."""
 import sys, os, json, re, glob
@@ -19,6 +23,53 @@ from merge_tilesets import tileset_obj
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(HERE), 'maps_out')
 DEST = os.path.join(OUT, 'Data', 'Tilesets_prismfall.rxdata')
+SYSTEM_DEST = os.path.join(OUT, 'Data', 'system_prismfall.txt')
+ROOT = os.path.dirname(HERE)
+
+
+def system_names():
+    """{'S': {id: name}, 'V': {id: name}} from design/FLAGS.md (| S101 | NAME |) and mapgen/flags.yaml (same rules as
+    build.py's load_flags), plus unnamed IDs > 100 used by the generated maps."""
+    import yaml
+    names = {'S': {}, 'V': {}}
+    f = yaml.safe_load(open(os.path.join(HERE, 'flags.yaml'), encoding='utf-8')) or {}
+    for kind, key in (('S', 'switches'), ('V', 'variables')):
+        for name, i in (f.get(key) or {}).items():
+            names[kind][int(i)] = name
+    md = os.path.join(ROOT, 'design', 'FLAGS.md')
+    if os.path.exists(md):
+        for line in open(md, encoding='utf-8'):
+            m = re.match(r'\|\s*([SV])(\d+)\s*\|\s*([A-Z][A-Z0-9_]+)\s*\|', line)
+            if m:
+                names[m.group(1)][int(m.group(2))] = m.group(3)
+    for p in glob.glob(os.path.join(OUT, 'Data', 'Map*.rxdata')):
+        for ev in M.load_file(p).events.values():
+            for pg in ev.pages:
+                c = pg.condition
+                used = [('S', c.switch1_id) if c.switch1_valid else None, ('S', c.switch2_id) if c.switch2_valid else None,
+                        ('V', c.variable_id) if c.variable_valid else None]
+                for cmd in pg.list:
+                    if cmd.code in (121, 122):
+                        used += [('S' if cmd.code == 121 else 'V', i) for i in range(cmd.parameters[0], cmd.parameters[1] + 1)]
+                    elif cmd.code == 111 and cmd.parameters[0] in (0, 1):
+                        used.append(('S' if cmd.parameters[0] == 0 else 'V', cmd.parameters[1]))
+                for u in used:
+                    if u and u[1] > 100 and u[1] not in names[u[0]]:
+                        names[u[0]][u[1]] = 'PRISMFALL_%s%d' % u
+    return names
+
+
+def write_system_names():
+    names = system_names()
+    lines = ['# kind<TAB>id<TAB>name  Game Switch (S) / Variable (V) names the Prismfall maps and plugins use (from',
+             '# design/FLAGS.md + mapgen/flags.yaml; written by mapgen/export_tilesets_rxdata.py). The in-game installer',
+             '# adds them to Data/System.rxdata: Essentials ignores page conditions on switches System.rxdata lacks.']
+    for kind in ('S', 'V'):
+        for i in sorted(names[kind]):
+            lines.append('%s\t%d\t%s' % (kind, i, names[kind][i]))
+    with open(SYSTEM_DEST, 'w', encoding='utf-8', newline='\n') as f:
+        f.write('\n'.join(lines) + '\n')
+    print('wrote %s: %d switches, %d variables' % (SYSTEM_DEST, len(names['S']), len(names['V'])))
 
 
 def build():
@@ -57,8 +108,16 @@ def _leaves(m, ts, x, y):
     return False
 
 
+REF_BASE = '/home/claude/ref/ebdx_renovation'   # stock graphics, when this machine has the base project
+
+
 def check_maps(tilesets):
     warns = []
+    for i, ts in sorted(tilesets.items()):
+        for sub, names in (('Tilesets', [ts.tileset_name]), ('Autotiles', ts.autotile_names)):
+            for n in names:
+                if n and not any(os.path.exists(os.path.join(d, 'Graphics', sub, n + '.png')) for d in (OUT, REF_BASE)):
+                    warns.append('tileset %d: Graphics/%s/%s.png is in neither maps_out nor the base project' % (i, sub, n))
     for p in sorted(glob.glob(os.path.join(OUT, 'Data', 'Map*.rxdata'))):
         m = M.load_file(p)
         ts = tilesets.get(m.tileset_id)
@@ -90,6 +149,7 @@ def main():
         f.write(data)
     chk = M.load_file(DEST)
     print('wrote %s: tilesets %s (%d bytes)' % (DEST, sorted(chk), len(data)))
+    write_system_names()
     check_maps(chk)
 
 

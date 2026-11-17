@@ -1,0 +1,14 @@
+# Round 6c: hair behind the fist (gaps left where the old glove was)
+19: 25 h
+20: 26 h
+21: 27 r
+22: 27 r
+23: 27 Hh
+24: 28 h
+25: 28 h
+26: 27 Rr
+27: 27 Rr
+28: 28 R
+29: 28 RR
+30: 29 R | 31 v
+31: 29 RRv

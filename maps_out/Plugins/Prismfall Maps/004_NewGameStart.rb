@@ -14,21 +14,37 @@ module PrismfallMaps
     st = PRISMFALL_START
     return false if !st
     return false if !pbRgssExists?(sprintf("Data/Map%03d.rxdata", st[0]))
-    if !start_tileset_installed?(st[0])
-      # Without our tilesets Game_Map#setup crashes (tileset_name for nil). In Debug mode, offer the installer
-      # (same as Debug > Files > Install Prismfall maps); otherwise start on RMXP's own starting position.
+    if !installed?(st[0])
+      # Without our tilesets Game_Map#setup crashes (tileset_name for nil), and without our switch entries in
+      # System.rxdata the story events never change page. In Debug mode, offer the installer (same as
+      # Debug > Files > Install Prismfall maps); otherwise start on RMXP's own starting position.
       if $DEBUG && defined?(PrismfallMapInstaller) &&
          pbConfirmMessage(_INTL("The Prismfall tilesets and maps aren't installed in this project yet. Install them now?"))
         PrismfallMapInstaller.install(new_game: true)
       end
-      if !start_tileset_installed?(st[0])
-        echoln("[Prismfall Maps] The start map's tileset is not installed: run Debug > Files > Install Prismfall maps.")
+      if !installed?(st[0])
+        echoln("[Prismfall Maps] Not installed (tilesets or switch names): run Debug > Files > Install Prismfall maps.")
         return false
       end
     end
     $data_system.start_map_id = st[0]
     $data_system.start_x      = st[1]
     $data_system.start_y      = st[2]
+    return true
+  end
+
+  def self.installed?(map_id)
+    return start_tileset_installed?(map_id) && switch_names_installed?
+  end
+
+  # Game_Event#switchIsOn? needs an entry in System.rxdata for every switch a page condition uses
+  def self.switch_names_installed?
+    file = "Data/system_prismfall.txt"
+    return true if !FileTest.exist?(file) || !$data_system
+    top = 0
+    File.foreach(file) { |line| top = [top, $1.to_i].max if line =~ /\AS\t(\d+)\t/ }
+    return $data_system.switches.length > top
+  rescue StandardError
     return true
   end
 

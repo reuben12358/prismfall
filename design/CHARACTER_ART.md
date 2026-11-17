@@ -2,6 +2,24 @@
 
 Owner: Character Artist. Status date: 2026-11-16.
 
+## 0a. v4 (2026-11-17): Juno drawn from scratch, pixel by pixel
+
+- **Method:** read tutorials and dumped the references pixel by pixel, written up as a checklist in `design/PIXEL_ART_NOTES.md`. Then a
+  flat block-in for pose and proportion (`art/tools/v4/juno_block.py`), a directional underpaint as a starting point (`underpaint.py`),
+  and 9 rounds of hand edits. Every pixel was placed through patches (`art/work/v4/pat_r*.txt`) on a text canvas
+  (`art/work/v4/juno.spr`, one char per pixel, rows numbered). Toolkit: `art/tools/v4/px4.py` (render beside references, lint, grid,
+  patch).
+- **Format:** 80×80 native (Reborn's size), stored doubled at 160×160, 25 colours, selective outlines, light from the upper left.
+- **Design change:** bare hands, with the gardening gloves clipped to the waistband, as `story/03_CAST.md` says. Oversized gloves on the
+  ball hand read as an ice-cream cone or a trophy at 80 px (rounds 5–6).
+- **Files:** `art/out/v4/Trainers/JUNO_v4.png` (160×160) and `JUNO_v4_native80.png`. **Not installed**: `RIVAL_JUNO.png` is still v3.
+  The v4 file is 160×160 while the current slots are 128×128, so check EBDX's on-screen size and alignment before swapping.
+- **Review sheets:** `art/previews/07_v4_juno_final.png`, `art/previews/v4_rounds/` (every round, `progression_juno_v4.png`, and
+  `test_rejuv_edit.png`).
+- **Rejuvenation-edit test** (`art/tools/v4/rejuv_edit_test.py`): Rejuvenation `trainer002`, recoloured to Juno's palette, with the v4
+  head. The body gains their more dynamic arms and sleeve folds, but it is recognisably trainer002's pose and outfit, the same
+  problem as v2. Use their sprites as traced pose underdrawings, not as bases.
+
 ## 0. Status (v3, 2026-11-16)
 
 User direction: stock sprites are **pose skeletons only**. Each character is redrawn to its design sheet (§8): head, face, hair,

@@ -1,0 +1,41 @@
+# Round 6b: bare hands (story/03_CAST.md: gloves clipped to her belt). Ball in a fist, gloves hanging from the waistband clip.
+# ---- ball + fist (x18..29); '~' keeps the hair behind
+17: 18 ~~~~~~~~~~~~
+18: 18 ....~~~~~~~~
+19: 18 ....KKK~~~~~
+20: 18 ...KXPPK~~~~
+21: 18 ..KPPPPpK~~~
+22: 18 .rSKKXKKK~~~
+23: 18 .rSXXKXxK~~~
+24: 18 ..rSSsSSsr~~
+25: 18 ..rSsSSssr~~
+26: 18 ...rSSSsr~~~
+27: 18 ....rSSsr~~~
+28: 18 .....rSSsK~~
+29: 18 .....rSSsK~~
+30: 18 ......KSSsK~
+31: 18 ......KSSsK~
+# old glove pixels that sat left/below the new fist
+24: 18 ..
+25: 18 ..
+26: 18 ...
+27: 18 ....
+28: 18 .....
+29: 18 .....
+30: 18 ......
+31: 18 ......
+# ---- satchel hand (bare), flap, buckle
+39: 46 .dd | 53 ddddd
+40: 46 dBBrSsKBBBBBd
+41: 46 dbbrSSsKbbbbd
+42: 46 dbrSSSsKbbbbd
+43: 46 dbrSsSsKbbYbd
+44: 46 dbbrrrrbbbYbd
+45: 46 ddddddddddddd
+# ---- gardening gloves hanging from the waistband clip (near hip)
+42: 31 .bTTb
+43: 31 bTTTob
+44: 31 bTTTob
+45: 31 bToTob
+46: 31 bTbTbo
+47: 31 .b.b.

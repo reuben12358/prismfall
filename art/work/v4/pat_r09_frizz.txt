@@ -1,0 +1,8 @@
+# Round 9a: frizz bumps on the hair silhouette
+1: 34 R
+2: 34 h
+15: 22 RH
+16: 22 RH
+16: 59 rR
+17: 59 rR
+21: 58 rR

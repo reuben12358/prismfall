@@ -1,0 +1,19 @@
+# Round 8: cleanup from lint + review: outline gaps, holes, doubled outlines, stray pixels.
+# torso left outline under the raised arm
+37: 33 v
+38: 33 v
+39: 33 v
+40: 33 v
+# far side: torso/sleeve separation, stray v, hole at the satchel corner
+32: 46 v
+34: 52 .
+39: 46 wdd
+# hip behind the hanging gloves
+47: 32 bEbGg
+# doubled hip outline
+49: 32 .E
+# far cuff top-right
+62: 51 E
+# kerchief knot strays
+7: 49 r
+8: 49 r

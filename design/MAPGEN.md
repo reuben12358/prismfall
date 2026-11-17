@@ -69,7 +69,10 @@ The stock intro's controls tutorial is not reproduced.
   - Gym 2 actor-beaten flags are self switches B/C/D on the wheel event.
   - Gym 3: S315 tide bell (ON = currents run inland/north). Water level = which variant map you're on (no variable).
   - Story IDs also used now: S111 CH4_K2_DONE, S112 CH4_TEO_MET, V114 KESTREL_STAGE (set to 1 after K2).
-- The base project's System.rxdata defines 100 switches and 100 variables. Raise the maximum in Database → System to see names for the higher IDs.
+- The base project's System.rxdata defines 100 switches and 100 variables. That is **not cosmetic**: Essentials v21.1's
+  `Game_Event#switchIsOn?` treats a page condition on a switch with no System.rxdata entry as false, so pages on S101+ never
+  turn on. The in-game installer adds our names from `Data/system_prismfall.txt` (written by `mapgen/export_tilesets_rxdata.py`
+  from FLAGS.md + flags.yaml) and raises the maximum; projects you build by hand need the same.
 
 **Narrative keys** follow design/NARRATIVE_KEYS.md and use the canonical lowercase choice keys:
 `:pro_fellowship`, `:ch2_tamsin`, `:ch3_juno_talk`, `:ch4_kestrel_mourner`, `:ch4_teo`.

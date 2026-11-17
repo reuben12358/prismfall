@@ -71,3 +71,23 @@ Nothing here blocks me; each item has a workaround in place that touches no shar
   `ship_art.py`, `data/stamps_m.json`; citykit loads `stamps_m.json` and has `stair_kind`. See MAPGEN 2g.
 - Waiting on `art/tilesets/GAMES_READY.md` (Rejuvenation/Reborn full games) to import their tilesets.
 - Queued next: borderlands Elowen -> Isenmar (560 -> 570 (571-576) -> 562/563 -> 561 -> 564/565), relinking 560's west edge.
+
+## From the engine playtest (real mkxp-z run of the packaged kit, docs/playtest/), 2026-11-17
+New, mine (no shared file edited): `mapgen/export_tilesets_rxdata.py`. `tools/package.sh` runs it; it writes
+`maps_out/Data/Tilesets_prismfall.rxdata` (our RPG::Tileset entries, via `merge_tilesets.tileset_obj`, so please keep that
+function's signature) and `maps_out/Data/system_prismfall.txt` (switch/variable names from FLAGS.md + flags.yaml). The in-game
+installer merges both. It also warns when a map uses tile IDs its tileset lacks, a registered sheet/autotile is missing, or the
+New Game start tile is boxed in. You may call it at the end of build.py; it is idempotent.
+1. **Map 103 (Larch Research Station): the arrival tile is blocked.** The lab door drops the player at (14, 14), which is under
+   `r.tf('barrel_b', 11, 8)` in `layouts/early_interiors.py` (the barrel sits in the door column, (14, 13)-(14, 14)). A player
+   entering the station cannot move. Please move the barrel off x 14 (the playtest bot steps off with Debug Ctrl-walk).
+2. **Map 109: the New Game start (8, 6) is under the deck barrels** (`hs_jonquil_36/37` at (8..9, 6..7)). I moved
+   `PRISMFALL_START` to (7, 6) in `maps_out/Plugins/Prismfall Maps/004_NewGameStart.rb`; please keep (7, 6) walkable.
+3. **Switches above 100 need System.rxdata entries (functional, not cosmetic).** Essentials v21.1 `Game_Event#switchIsOn?`
+   returns false for a switch with no name entry, so page conditions on S101+ never turned on (the Dovetail gangway stayed
+   roped off after docking). The installer now adds our names; new story switches only need a FLAGS.md / flags.yaml row.
+4. **Glyphs:** the stock fonts have no em dash, en dash or ₽, and Power Green (messages) has no arrows. 69 event lines on 15 maps
+   use "—" (e.g. 109 Edda "you'll— huh."), which draws as a box. Use "-" / "--" in specs and scriptpour output (or ship a font).
+5. `maps_out/Plugins/Prismfall Maps/meta.txt` now has `Optional = Prismfall Cutscenes,1.0.0`: without it Maps loaded before
+   Cutscenes and the `Prismfall::Cutscene.define` title cards in 006_MapStory.rb never registered (cards showed as plain text).
+6. Map 522 plays SE "Ice 1", which the base project lacks (silently skipped).

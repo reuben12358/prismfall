@@ -11,6 +11,11 @@
 #    Entries Essentials' compiler made for our map files ("MAP100" etc., added on
 #    every Debug boot for map files without an entry) get our name and parent.
 #    Any other entry is kept; an ID used by a differently named map is reported.
+# 3. Switch / variable names: Data/system_prismfall.txt (kind<TAB>id<TAB>name) names
+#    our Game Switches and Variables in Data/System.rxdata, raising RMXP's maximum
+#    as needed. This is not cosmetic: Game_Event#switchIsOn? treats a page's
+#    switch condition as false when System.rxdata has no entry for that switch,
+#    and the base projects define only 100. Names the project already has stay.
 # Each file is backed up once (*.prismfall-bak) before its first change. Running
 # the installer again changes nothing unless the kit's files changed.
 # Close RPG Maker XP before running it (RMXP rewrites these files when it saves).
@@ -20,6 +25,8 @@ module PrismfallMapInstaller
   INFOS         = "Data/MapInfos.rxdata"
   TILESETS_FILE = "Data/Tilesets_prismfall.rxdata"
   TILESETS      = "Data/Tilesets.rxdata"
+  SYSTEM_FILE   = "Data/system_prismfall.txt"
+  SYSTEM        = "Data/System.rxdata"
   BACKUP_SUFFIX = ".prismfall-bak"
 
   module_function
@@ -86,6 +93,55 @@ module PrismfallMapInstaller
       $data_tilesets = tilesets if $data_tilesets
     end
     return installed, updated, collisions
+  end
+
+  def system_entries
+    ret = []
+    File.open(SYSTEM_FILE, "rb") do |f|
+      f.each_line do |line|
+        line = line.force_encoding(Encoding::UTF_8).chomp
+        next if line.strip.empty? || line.start_with?("#")
+        kind, id, name = line.split("\t", 3)
+        ret.push([kind, id.to_i, name]) if ["S", "V"].include?(kind) && id.to_i > 0 && name
+      end
+    end
+    return ret
+  end
+
+  # -> [names added, collision strings], or nil without the kit file
+  def install_system
+    return nil if !FileTest.exist?(SYSTEM_FILE)
+    sys = load_data(SYSTEM)
+    list = system_entries
+    added = 0
+    grown = false
+    collisions = []
+    [["S", sys.switches], ["V", sys.variables]].each do |kind, names|
+      ours = list.select { |e| e[0] == kind }
+      next if ours.empty?
+      top = ((ours.map { |e| e[1] }.max + 99) / 100) * 100   # RMXP's "maximum", in hundreds
+      if names.length <= top
+        (names.length..top).each { |i| names[i] = "" }
+        grown = true
+      end
+      ours.each do |_kind, id, name|
+        if names[id].to_s.empty?
+          names[id] = name
+          added += 1
+        elsif names[id] != name
+          collisions.push(sprintf("%s%03d %s (existing: %s)", kind, id, name, names[id]))
+        end
+      end
+    end
+    if added > 0 || grown
+      backup(SYSTEM)
+      save_data(sys, SYSTEM)
+      if $data_system
+        $data_system.switches  = sys.switches
+        $data_system.variables = sys.variables
+      end
+    end
+    return added, collisions
   end
 
   # Our maps in tree order (parents before children), so RMXP's map tree nests them
@@ -156,13 +212,21 @@ module PrismfallMapInstaller
       msg.push(_INTL("Tileset ID collisions skipped: {1}", ts[2].length)) if ts[2].length > 0
       ts[2].each { |c| echoln("[Prismfall Maps] Tileset ID collision: " + c) }
     end
+    sy = install_system
+    if sy.nil?
+      msg.push(_INTL("Switch names: {1} not found.", SYSTEM_FILE))
+    else
+      msg.push(_INTL("Switch and variable names: {1} added.", sy[0]))
+      msg.push(_INTL("Names kept (ID already named): {1}", sy[1].length)) if sy[1].length > 0
+      sy[1].each { |c| echoln("[Prismfall Maps] Switch/variable ID already named: " + c) }
+    end
     added, renamed, collisions, missing_files = install_mapinfos
     msg.push(_INTL("Maps: {1} added to MapInfos, {2} renamed.", added, renamed))
     msg.push(_INTL("Map ID collisions skipped: {1}", collisions.length)) if collisions.length > 0
     msg.push(_INTL("Missing map files: {1}", missing_files.length)) if missing_files.length > 0
     collisions.each { |c| echoln("[Prismfall Maps] Map ID collision: " + c) }
     missing_files.each { |m| echoln(sprintf("[Prismfall Maps] Data/Map%03d.rxdata missing", m)) }
-    changed = (ts && ts[0].length + ts[1].length > 0) || added + renamed > 0
+    changed = (ts && ts[0].length + ts[1].length > 0) || (sy && sy[0] > 0) || added + renamed > 0
     if !changed
       msg.push(_INTL("Everything was already installed."))
     elsif !new_game
@@ -176,6 +240,6 @@ end
 MenuHandlers.add(:debug_menu, :prismfall_install_maps, {
   "name"        => _INTL("Install Prismfall maps"),
   "parent"      => :files_menu,
-  "description" => _INTL("Add the Prismfall tilesets and maps to Tilesets.rxdata and MapInfos.rxdata (close RPG Maker XP first)."),
+  "description" => _INTL("Add the Prismfall tilesets, maps and switch names to Tilesets, MapInfos and System.rxdata (close RPG Maker XP first)."),
   "effect"      => proc { PrismfallMapInstaller.install }
 })

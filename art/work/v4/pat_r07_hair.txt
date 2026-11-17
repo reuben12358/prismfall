@@ -1,0 +1,40 @@
+# Round 7: hair redrawn as fewer, bigger lobes. Lit lobes (top, left): H arc on the upper-left rim, h body, r under-crescent.
+# Shadow-side lobes (right): h crescent on r body. R only for the outline and lobe-to-lobe crevices.
+# ---- top (x22..48), rows 0..8
+0: 22 ................RRRRR......
+1: 22 .......RRRRR..RRHHHhhRR.RRR
+2: 22 .....RRHHHhhRRHHhhhhhhRRHHh
+3: 22 ....RHHhhhhhrRhhhhhhhrrRhhh
+4: 22 ...RHhhhhhhhrRrhhhhhrrrRhhh
+5: 22 ..RHhhhhhhhrrRrrhhhrrrRrhhr
+6: 22 .RHhhhhhhhrrrRRrrhhrrrRrhrr
+7: 22 RHhhhhhhhhrrrRrrrrrrrRrrrrr
+8: 22 RHhhhhhhhhrrRrrrrrrrrrrrrrr
+# ---- left (x22..33), rows 9..18; '~' keeps the band end and the side lock
+9: 22 .RHhhhhhhrrr
+10: 22 RHhhhhhhrrrr
+11: 22 RHhhhhhrrr
+12: 22 Rrhhhhrr
+13: 22 .RHHhhh
+14: 22 .RHhhhh
+15: 22 .RHhhhr
+16: 22 .RHhhhrr
+17: 22 .RHhhhhr
+18: 22 .RHhhhrr
+# ---- right (x45..59), rows 13..28
+13: 45 hhrRRrhhhhhrrR.
+14: 45 hhrRrhhhhhhhrrR
+15: 45 hhrRrhhhhhhrrrR
+16: 45 hrrRrhhhrrrrrrR
+17: 45 hrrRrrrrrrrrrrR
+18: 45 hrRrrrrRRRRrrR.
+19: 45 hrRrrRRhhhhrrR.
+20: 45 rrRrRhhhhhhhrR.
+21: 45 rRrrRhhhhhrrrR.
+22: 45 rRrrRhhrrrrrrR.
+23: 45 RrrrRrrrrrrrRR.
+24: 45 rRRRRrrrrrRRR..
+25: 45 RrhhhhRRRRR....
+26: 45 RhhhhrrrrR.....
+27: 45 RhhrrrrrrR.....
+28: 44 RrrrrrrrRR
