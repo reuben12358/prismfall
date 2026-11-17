@@ -12,7 +12,7 @@ PATHS = {
     'rejuv': '/home/claude/ref/games/rejuvenation/Graphics/Characters/trainer%s.png',
     'reborn': '/home/claude/ref/games/reborn/Graphics/Characters/trainer%s.png',
     'deso': '/home/claude/ref/games/desolation/Graphics/Characters/trainer%s.png',
-    'sd': '/home/claude/ref/dl_showdown_all/%s.png',
+    'sd': '/home/claude/ref/art/sprites_showdown/trainers/%s.png',
     'wll': '/home/claude/ref/art/wll/Changed Files/Graphics/Characters/trainer%s.png',
     'rjface': '/home/claude/ref/games/rejuvenation/Graphics/Faces/%s.png',
     'dsface': '/home/claude/ref/games/desolation/Graphics/Faces/%s.png',

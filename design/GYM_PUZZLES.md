@@ -130,7 +130,8 @@ current map and find events by name. Each must be Ruby 3.1-safe and use only v21
 | `pfp_flip(sw)` / `pfp_flip_self(names, ch = "A")` | toggle a switch / the self switch of each named event |
 | `pfp_save(key, names)` / `pfp_load(key)` | store / restore x, y and direction of the named events in `pfm` flags (Coral pattern) |
 | `pfp_restore!` | called by each puzzle map's one-shot **Restorer** (a `par` event that runs once per map load, then sets its own self switch). Re-applies saved positions, directions and graphics |
-| `pfp_rotate(name, dir = :cw)` | turn a direction-encoded event 90° (charset rows = 4 rotations) and save it |
+| `pfp_state(name, k)` / `pfp_state_of(name)` | **one-hot multi-state events**: state 0 = no self switch, 1–4 = only self A/B/C/D on. Pages: P0 [—] state 0 · P1 [self A] · P2 [self B] · P3 [self C] · P4 [self D]. Saved, survives map loads, costs no IDs. Used for rotations, plot growth, statue facings |
+| `pfp_rotate(name, n = 4)` | `pfp_state(name, (pfp_state_of(name) + 1) % n)`: a quarter-turn for one-hot rotation events |
 | `pfp_swap_map(map_id, fix = {})` | fade-transfer to the same x,y on a twin map. `fix` maps landing squares that are solid on the twin to safe squares |
 | `pfp_ride(dest_x, dest_y)` | jump the player along a line (Through ON, jump, Through OFF) |
 | `pfp_push_line(dir, kind)` | forced movement: move the player while the tile ahead holds an event of `kind` (belt, wind, current), or while the tile being left is ice |
@@ -315,7 +316,7 @@ y8   ######@######     @ (6,8) ← door D
   "Twist it or lose it."
 - **Reset:** the "Re-thread" lever lowers every thread.
 
-**Gym 1 trainers (4):** Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
+**Gym 1 trainers (5):** Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
 (12–13), Pokémon Ranger ♂ Ash (13–14). Nell and Bram are optional.
 
 ---

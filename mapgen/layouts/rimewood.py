@@ -20,16 +20,38 @@ CAVE = [[624, 625, 626], [632, 633, 634], [640, 641, 642]]
 
 
 def snowmap(W, H, mid, kit='shs', sea=False):
+    """a PF Rejuv Snow map: plain Kristiline snow ground (texture lives in decor, not in noisy ground), packed-snow
+    lanes (class d, PF Packed Snow), exposed earth only where feet wear it through (class e, KristilineDirt: door
+    aprons, stalls), frozen ponds you slide on (class p, PF Frozen Pond, terrain tag 12), Kristiline's frozen sea
+    (o / I), the snow lattice forest"""
     m = K.RMap(W, H, 52, mid, water='Still water snow', kit=kit, grass=K.SNOW_GROUND, decor=K.DECOR_SNOW)
     m.tall = K.SNOW_TALL
-    m.grass2 = [[K.SN('grass_sh', 647), K.SN('grass_sh', 646)], [K.SN('grass_sh', 655), K.SN('grass_sh', 654)]]
+    m.grass2 = None
     m.lattice = K.RMap.TREES_SNOW
-    m.auto = {'d': ('KristilineDirt', 'rejuvenation'), 'w': ('Still water snow', 'reborn'),
-              'o': ('KristilineWatersFrozen', 'rejuvenation'), 'S': ('Sand shore(Terajuma)', 'rejuvenation'),
-              'W': ('Sea deep', 'rejuvenation')}
+    m.auto = {'d': ('Packed Snow', 'pf'), 'e': ('KristilineDirt', 'rejuvenation'), 'w': ('Still water snow', 'reborn'),
+              'o': ('KristilineWatersFrozen', 'rejuvenation'), 'p': ('Frozen Pond', 'pf'), 'W': ('Sea deep', 'rejuvenation')}
     if sea: m.auto['w'] = ('Sea deep', 'rejuvenation'); m.auto.pop('W')
-    m.JOIN = dict(K.RMap.JOIN, o='o', S='S'); m.AUTO_Z = dict(K.RMap.AUTO_Z, o=0, S=1)
+    m.JOIN = dict(K.RMap.JOIN, o='o', p='p', e='e'); m.AUTO_Z = dict(K.RMap.AUTO_Z, o=0, p=0, e=1)
     return m
+
+
+def apron(m, door, w=3, h=2):
+    """exposed earth worn through the snow in front of a door (class e), w wide, h deep"""
+    x, y = door
+    for yy in range(y + 1, y + 1 + h):
+        for xx in range(x - w // 2, x - w // 2 + w):
+            if m.inb(xx, yy) and m.cls[yy, xx] in '.dt' and not m.taken[yy, xx]: m.cls[yy, xx] = 'e'
+
+
+def smooth(m, c, into='.', passes=2, only=None):
+    """majority-smooth a class region (no 1-cell spurs or notches) so autotile shorelines read as natural curves"""
+    for _ in range(passes):
+        cur = (m.cls == c)
+        pad = np.pad(cur, 1)
+        n = sum(np.roll(np.roll(pad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) - cur
+        grow = ~cur & (n >= 5); shrink = cur & (n <= 3)
+        if only is not None: grow &= np.isin(m.cls, list(only))
+        m.cls[grow] = c; m.cls[shrink] = into
 
 
 def ice_over(m, cls='w', edge=True):

@@ -11,7 +11,7 @@ import os, sys, json, colorsys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from PIL import Image
-import render as R, rcompose as RC
+import render as R, rcompose as RC, rdraw
 HERE = os.path.dirname(os.path.abspath(__file__))
 OFF33 = json.load(open(os.path.join(HERE, 'data', 'compose_offsets.json')))
 C2, C3 = OFF33['custom2']['offset'], OFF33['custom3']['offset']
@@ -126,6 +126,24 @@ def main():
         sheet.paste(snowify(im.copy(), 'tree'), ((k % 8) * 32, (k // 8) * 32))
         props[k] = props[idmap[t]]; tree_snow[t] = k; k += 1
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
+    # hand-drawn pieces (rdraw.py): Frostwick's whalebone longhouses, rib gate, walkways, smoke, stalls, props, the
+    # frozen fall.  Appended after everything above, so earlier ids never move.
+    drawn = {}
+    for n, (im, code, door) in rdraw.pieces().items():
+        big = im.resize((im.width * 2, im.height * 2), Image.NEAREST)
+        h, w = len(code), len(code[0])
+        lay = [[[0] * w for _ in range(h)] for _ in range(3)]
+        for ty in range(h):
+            for tx in range(w):
+                c = code[ty][tx]
+                if c == '.': continue
+                tile = big.crop((tx * 32, ty * 32, tx * 32 + 32, ty * 32 + 32))
+                if tile.getbbox() is None: continue
+                z, p_, q_ = rdraw.CODE[c]
+                sheet.paste(tile, ((k % 8) * 32, (k // 8) * 32))
+                props[k] = (p_, q_, 0); lay[z][ty][tx] = k; k += 1
+        drawn[n] = (w, h, lay, door)
+    if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
                'singles': {k: idmap[v] for k, v in SINGLES.items()}, 'snow': snow}, open(os.path.join(HERE, 'data', 'rj_custom.json'), 'w'))
@@ -145,6 +163,10 @@ def main():
         L2 = np.where(L >= 384, np.vectorize(lambda t: base + tree_snow.get(int(t), idmap.get(int(t), 0)) if t >= 384 else 0)(L), 0)
         d = dict(out['pf_' + n]); d['layers'] = L2.tolist(); d['src'] = ['pf33-snow', n]
         out['pf_' + n + '_ice'] = d
+    for n, (w, h, lay, door) in drawn.items():
+        d = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['rdraw', n])
+        if door: d['door'] = list(door)
+        out[n] = d
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}
     out['_singles'] = {k: base + idmap[v] for k, v in SINGLES.items()}

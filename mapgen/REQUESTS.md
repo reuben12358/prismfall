@@ -91,3 +91,12 @@ New Game start tile is boxed in. You may call it at the end of build.py; it is i
 5. `maps_out/Plugins/Prismfall Maps/meta.txt` now has `Optional = Prismfall Cutscenes,1.0.0`: without it Maps loaded before
    Cutscenes and the `Prismfall::Cutscene.define` title cards in 006_MapStory.rb never registered (cards showed as plain text).
 6. Map 522 plays SE "Ice 1", which the base project lacks (silently skipped).
+7. **Map 100 on tileset 51 (Rejuvenation rebuild): all 7 door tiles are fully impassable** (e.g. 3387 at the lab door
+   (53, 11), passage 15). Interior exits land on the door tile, so leaving any building strands the player there (the
+   door's exit step can't move off it). Door tiles need passage 0 (or "up" blocked only), as on tileset 33.
+8. **Trainers used by maps but missing from PBS** (crash when they battle; Debug mode offers to create them):
+   131 BUGCATCHER Nell, LASS Orla, GENTLEMAN Bram; 521 BUGCATCHER Wim, PICNICKER Ada; 524 TWINS "Mo & Jo";
+   525 POKEMANIAC Ferris; 560 LASS Tilde, SAILOR Haakon, BIRDKEEPER Ailsa; 562 BUGCATCHER Pell, POKEMONRANGER_F Orla,
+   HIKER Ulf, CAMPER Rook, TWINS "Ana & Ida"; 563 POKEMONRANGER_M Sigurd. Route 1's Pim and Dory are now in pbs/trainers.txt.
+   `trainers_needed.txt` lists only the maps of the last (partial) build, so these slipped past it.
+9. `mapgen/ruby/006_MapStory.rb` `pfm_quest` formats "QUEST LOG: "{1}" — {2}" with an em dash: shows a box on every quest.

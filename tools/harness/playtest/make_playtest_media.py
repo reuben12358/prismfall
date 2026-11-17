@@ -9,6 +9,7 @@ FILE is a name in RUN_OUT_DIR/shots/ or RUN_OUT_DIR/frames/; START-END are indic
 """
 import argparse
 import os
+import re
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -80,11 +81,13 @@ def main():
     ap.add_argument("--ms", type=int, default=200, help="ms per GIF frame (frames are every 6th engine frame)")
     ap.add_argument("--colors", type=int, default=128)
     ap.add_argument("--name", default="first_minutes")
+    ap.add_argument("--first", type=int, default=1, help="number of the first key shot")
     a = ap.parse_args()
     os.makedirs(a.docs, exist_ok=True)
-    for n, spec in enumerate(a.shot, 1):
+    for n, spec in enumerate(a.shot, a.first):
         name, cap = spec.split(":", 1)
-        out = os.path.join(a.docs, "%02d_%s" % (n, os.path.basename(name).split("_", 1)[-1]))
+        slug = re.sub(r"[^a-z0-9_]", "", cap.split(":")[0].lower().replace(" ", "_"))[:40]
+        out = os.path.join(a.docs, "%02d_%s.png" % (n, slug))
         captioned(Image.open(find(a.run, name)).convert("RGB"), cap).save(out)
         print("wrote", out)
     if not a.gif:
