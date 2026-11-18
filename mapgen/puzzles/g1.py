@@ -24,15 +24,13 @@ FOYER = ["####################",
          "########.###########",
          "####################"]
 FOYER_PLANKS = {0: 3, 1: 8, 2: 13}          # V308 -> plank column (rows 6-7)
-FOYER_SOLID = [(14, 10), (15, 10), (15, 11), (14, 11), (1, 12), (2, 12), (1, 13), (2, 13), (16, 8), (16, 9), (16, 12), (1, 8), (16, 11),
-               (12, 12), (12, 13), (13, 13), (4, 8), (6, 13), (11, 13)]      # looms, vats, plants, silk bales, lantern feet (gen_gym1.py decor)
 FOYER_AT = dict(heddle=(3, 10), exit=(8, 14), stair=(13, 2), pim=(9, 12), guide=(11, 10), tamsin=(8, 9), loom=(14, 11),
                 item=(2, 4), card_b=(8, 3), card_s=(12, 3), portrait=(3, 3), start=(8, 13))
 
 
 def foyer_model():
     cells, _ = grid_cells(130, FOYER, '#W')
-    solid = {FOYER_AT[k] for k in ('heddle', 'pim', 'guide', 'loom', 'item', 'tamsin')} | set(FOYER_SOLID)
+    solid = {FOYER_AT[k] for k in ('heddle', 'pim', 'guide', 'loom', 'item', 'tamsin')} | {(14, 10), (15, 10), (15, 11)}
     cells -= {(130, x, y) for x, y in solid}
 
     def passable(c, v):
@@ -41,8 +39,10 @@ def foyer_model():
         return True
     hx, hy = FOYER_AT['heddle']
     dev = [Device('Training heddle', [c for c in around(130, hx, hy) if c in cells], lambda v, c: (((v[0] + 1) % 3,), c))]
-    return Model('g1_foyer (130)', cells, passable, (130,) + FOYER_AT['start'], (0,), dev, [(130,) + FOYER_AT['stair']],
-                 resets=around(130, *FOYER_AT['pim']))
+    m = Model('g1_foyer (130)', cells, passable, (130,) + FOYER_AT['start'], (0,), dev, [(130,) + FOYER_AT['stair']],
+              resets=around(130, *FOYER_AT['pim']))
+    m.game = lambda v: ({V_FOYER: v[0]}, {})
+    return m
 
 
 # ------------------------------------------------------------------------------------------------ 131 Weaving Hall
@@ -82,8 +82,10 @@ def hall_model():
             return tuple(v), c
         return act
     dev = [Device('%s heddle' % n, [c for c in around(131, *pos) if c in cells], pull(*vs), n) for n, (pos, vs, _) in HALL_HEDDLES.items()]
-    return Model('g1_hall (131)', cells, passable, (131,) + HALL_AT['start'], (0, 0, 0), dev, [(131,) + HALL_AT['stair']],
-                 resets=around(131, *HALL_AT['pim']))
+    m = Model('g1_hall (131)', cells, passable, (131,) + HALL_AT['start'], (0, 0, 0), dev, [(131,) + HALL_AT['stair']],
+              resets=around(131, *HALL_AT['pim']))
+    m.game = lambda v: ({V_A: v[0], V_B: v[1], V_C: v[2]}, {})
+    return m
 
 
 # ------------------------------------------------------------------------------------------------ 132 Canopy Lofts
@@ -139,8 +141,11 @@ def lofts_model():
     dev += [Device('Spool ' + n, [c for c in around(132, *s[0]) if c in cells], spool(n), n) for n, s in SPOOLS.items()]
     dev += [Device('Ladder P%d' % p, [c for c in around(132, *pos) if c in cells], lambda v, c: (v, (132,) + CENTRE[1]), 'ladder P%d' % p)
             for p, pos in LADDERS.items()]
-    return Model('g1_lofts (132)', cells, passable, (132,) + LOFT_AT['arrive'], (0, 0, 0, 0), dev, [(132,) + LOFT_AT['warp']],
-                 resets=around(132, *LOFT_AT['mossy']))
+    m = Model('g1_lofts (132)', cells, passable, (132,) + LOFT_AT['arrive'], (0, 0, 0, 0), dev, [(132,) + LOFT_AT['warp']],
+              resets=around(132, *LOFT_AT['mossy']))
+    m.game = lambda v: ({V_BRIDGE: v[3]}, {S_ALPHA: bool(v[0]), S_BRASS: bool(v[1]), S_GAMMA: bool(v[2])})
+    m.exits = [(132,) + LOFT_AT['down'], (132,) + LOFT_AT['door']]
+    return m
 
 
 # ------------------------------------------------------------------------------------------------ 134 Granny's Knot

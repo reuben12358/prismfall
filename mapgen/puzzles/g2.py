@@ -33,8 +33,10 @@ def foyer_model():
     cells -= {(150,) + FOYER_AT[k] for k in ('usher', 'script', 'wren', 'lady')}
     passable = lambda c, v: FOYER[c[2]][c[1]] != 'h' or v[0] == 1
     dev = [Device('Cue: Overture', [c for c in around(150, *FOYER_AT['rope']) if c in cells], lambda v, c: ((1 - v[0],), c))]
-    return Model('g2_foyer (150)', cells, passable, (150,) + FOYER_AT['start'], (0,), dev, [(150,) + FOYER_AT['stair']],
-                 resets=around(150, *FOYER_AT['wren']))
+    m = Model('g2_foyer (150)', cells, passable, (150,) + FOYER_AT['start'], (0,), dev, [(150,) + FOYER_AT['stair']],
+              resets=around(150, *FOYER_AT['wren']))
+    m.game = lambda v: ({V_OVERTURE: v[0]}, {})
+    return m
 
 
 # ------------------------------------------------------------------------------------------------ 151 + 152
@@ -128,6 +130,8 @@ def stage_model(with_loft=True, actors=True):
             dev.append(Device('Loft rope %d %s' % (n, side), [c for c in around(152, rx, ry) if c in cells], pull, 'loft rope %d (%s rail)' % (n, side)))
     m = Model('g2_stage (151+152)', cells, passable, (151,) + STAGE_AT['start'], (0, False, False, False), dev,
               [(151,) + STAGE_AT['goal']], links=links, resets=around(151, *STAGE_AT['pip']) + around(152, *LOFT_AT['dot']))
+    m.game = lambda v: ({V_SCENE: v[0]}, {S_A: v[1], S_B: v[2], S_C: v[3]})
+    m.exits = [(152,) + LOFT_AT['trap']]
     return m
 
 
@@ -188,8 +192,11 @@ def trap_model():
         return ((v[0] + 1) % 4,), (153, cx - dy, cy + dx)
     dev = [Device('Crank', around(153, cx, cy), crank, 'crank')]
     gx, gy = TRAP_AT['chest']
-    return Model('g2_trap (153)', cells, passable, (153,) + TRAP_AT['start'], (0,), dev, [(153, gx, gy + 1)],
-                 resets=around(153, *TRAP_AT['joss']))
+    m = Model('g2_trap (153)', cells, passable, (153,) + TRAP_AT['start'], (0,), dev, [(153, gx, gy + 1)],
+              resets=around(153, *TRAP_AT['joss']))
+    m.game = lambda v: ({V_TURN: v[0]}, {})
+    m.offset = TRAP_OFF                  # board coordinates -> map coordinates
+    return m
 
 
 CHECKS = [(foyer_model, dict(moves=1)), (stage_model, dict(moves=5)), (trap_model, dict(moves=3))]

@@ -32,6 +32,15 @@ def run_all(verbose=True):
     return bad, lines
 
 
+def run_built(verbose=True):
+    """Engine-level proofs on maps_out/Data (see built.py)."""
+    from . import built
+    bad, lines = built.run(modules())
+    if verbose:
+        for l in lines: print('PUZZLE', l)
+    return bad, lines
+
+
 def rb(v, ind=0):
     """Python literal -> Ruby literal (dict keys: int stay ints, str become strings; top-level names use symbols)."""
     if isinstance(v, bool): return 'true' if v else 'false'

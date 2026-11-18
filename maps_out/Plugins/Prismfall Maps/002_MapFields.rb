@@ -22,6 +22,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Gym - Weaving Hall
   FieldEffects::MAP_FIELDS[132] = :SILKWOOD   # Loomhouse Gym - Canopy Lofts
   FieldEffects::MAP_FIELDS[133] = :SILKWOOD   # Loomhouse Gym - The Spindle
+  FieldEffects::MAP_FIELDS[134] = :SILKWOOD   # Loomhouse Gym - Granny's Knot
   FieldEffects::MAP_FIELDS[140] = :BEACH   # Saltmere
   FieldEffects::MAP_FIELDS[141] = :NONE   # Saltmere Pokémon Center
   FieldEffects::MAP_FIELDS[142] = :NONE   # Saltmere Mart

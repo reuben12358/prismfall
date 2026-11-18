@@ -543,6 +543,7 @@ def main():
     # spec generators (gen_*.py) write some specs (test arena, gym puzzles): run them first
     import importlib
     for g in sorted(glob.glob(os.path.join(HERE, 'gen_*.py'))):
+        if not os.path.basename(g)[:-3].isidentifier(): continue      # staging copies such as gen_gym1.new.py are not generators
         importlib.import_module(os.path.basename(g)[:-3]).main()
     files = sorted(glob.glob(os.path.join(HERE, 'specs', '*.yaml')))
     ctx = Ctx()

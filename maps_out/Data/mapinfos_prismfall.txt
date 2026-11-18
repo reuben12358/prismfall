@@ -20,6 +20,7 @@
 131	130	Loomhouse Gym - Weaving Hall
 132	130	Loomhouse Gym - Canopy Lofts
 133	130	Loomhouse Gym - The Spindle
+134	130	Loomhouse Gym - Granny's Knot
 140	0	Saltmere
 141	140	Saltmere Pokémon Center
 142	140	Saltmere Mart
