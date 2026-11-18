@@ -36,17 +36,17 @@ events:
   name: Exchange door
   link: FW_EXCH
 - type: door
-  at: [49, 21]
+  at: [48, 21]
   gfx: ['', 0, 2]
   name: Border House door
   link: FW_BORDER
 - type: door
-  at: [6, 35]
+  at: [6, 34]
   gfx: ['', 0, 2]
   name: Poke Center door
   link: FW_PC
 - type: door
-  at: [55, 35]
+  at: [55, 34]
   gfx: ['', 0, 2]
   name: Smokehouse door
   link: FW_SMOKE

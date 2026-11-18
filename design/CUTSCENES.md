@@ -236,6 +236,12 @@ These come from how those games actually build their scenes (design/CUTSCENE_RES
 | `follow :id, smooth: 0.15` / `follow off: true` | Camera keeps tracking an actor; `cut`, `pan`, `camera` end it |
 | `fade_in steps: 5`, `fade_out steps: 5`, `fade :id, to: 0, steps: 5`, `ease: :step3`..`:step8` | Stepped (pixel-art) fades |
 
+| `fx_sheet "Graphics/Animations/X", grid: [5, 4], frames: 0..3, at: point, hold: 0.08, loops: true, id: :fire1` | Looping or held effect cell (`blend:`, `scale:`, `z:`); end it with `stop_fx :fire1` |
+| `shadow :id, size: 30, ground: 420` | Dithered ground shadow under a flying actor |
+| `submerge :id, to: 0.6, duration: 1` | Sink an actor into the water line |
+| `idle :id, frames: [0, 1], hold: 0.3` | Background loop that a `flipbook`/`pose` interrupts |
+| `beam_clash style: :sheet, a: { sheet:, flare: {..} }, b: {..}, core: [..], burst: {..}, steam: {..}` | Beams built from tileable sheet segments and effect cells instead of code-drawn beams. All other `beam_clash` options still apply; `rings: true` re-enables code rings |
+
 **On-map scenes:** `define(:ID, on_map: true) { ... }` plays over the live map. There is no black curtain, the map
 keeps updating underneath and no background is needed. Actors can follow map events with `actor :x, ..., event: 12`
 (or `event: :player`), plus `offset: [dx, dy]`.
@@ -277,7 +283,22 @@ Differences from the storyboard, all because of engine limits:
 - Shot 14's ridge is the same backdrop far to the side. A dedicated backdrop image would be better.
 - **To confirm with the story team:** I read "`:war_legend` kept the legendaries away" as the `:neither` choice.
 
-### Legendary acting sheets (war climax)
+### On-map staging (current `:WAR_CLIMAX`)
+`013_Scenes_War_OnMap.rb` stages the scene the way Rejuvenation/Reborn do: an overworld map, overworld-scale
+legendaries acting through sheet frames, armies as charset sprites, effect sheets along the beam path.
+- Art lives in the plugin overlay `Plugins/Prismfall Cutscenes/Graphics/{Characters,Animations,Pictures}/pfw_*`.
+  The loader looks there after the game's own `Graphics/`, so nothing needs copying. Rebuild it with
+  `python3 -I tools/build_war_assets.py` (reads /home/claude/ref/games, origins in docs/CREDITS.md).
+- The stage is a picture, `Graphics/Pictures/pfw_shattered_ice.png` (64×24 tiles, Rejuvenation's frozen Kristiline
+  tileset). When map 926 exists, export it to that file name or change `WAR_STAGE` and the coordinates at the top
+  of the scene (`water_at`, `fire_at`, `clash_c`, `ground`).
+- Kyogre: `pfw_kyogre_rise` (emerge/sink flipbooks) then `pfw_kyogre_primal` (front-facing, markings glow).
+  Reshiram: `pfw_reshiram` charset, descends walking left. No battle sprites are used.
+- If the stage picture is missing, `:WAR_CLIMAX` plays `:WAR_CLIMAX_PROCEDURAL` (the older code-drawn version; the
+  storyboard differences listed above and the section below describe that one).
+- Previews: docs/cutscene_previews/war_climax_onmap_sheet.png and war_climax_onmap_clash.gif.
+
+### Legendary acting sheets (procedural version)
 If `Graphics/Characters/pkmn_kyogre_war.png` / `pkmn_reshiram_war.png` exist (named after the species in use), the war
 climax uses them instead of battle sprites. The spec:
 - 4×4 cells of about 140×100 px each, shown at 2×.

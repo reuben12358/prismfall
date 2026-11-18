@@ -24,6 +24,7 @@ REG = os.path.join(OUT, 'tilesets_prismfall.json')
 TID, NAME = 54, 'PF Rejuv Halls'
 MI = ('rejuvenation', 17, 'Multi-Interiors', (7, 17, 220))
 MG = ('rejuvenation', 120, 'Multi-Gym Interior', (400, 401))
+SOLID_PF = (17876, 17877)      # the loom's upper row: looms are walls between the Weaving Hall's walkways
 PF_STAMPS = ['pf_p_lantern', 'pf_p_silk', 'pf_p_silk1', 'pf_p_strand_w', 'pf_p_strand_p', 'pf_p_web', 'pf_p_web1', 'pf_p_loom',
              'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y', 'pf_p_laundry', 'pf_p_awning', 'pf_lantern']
 
@@ -179,7 +180,7 @@ def main():
     ids = sorted({int(t) for n in PF_STAMPS for t in np.array(st[n]['layers']).reshape(-1) if t})
     cells = []
     for t in ids:
-        k = t - 384; cells.append((pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32)), t50['passages'][t], t50['priorities'][t], ('pf', str(t))))
+        k = t - 384; cells.append((pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32)), 15 if t in SOLID_PF else t50['passages'][t], t50['priorities'][t], ('pf', str(t))))
 
     def src(key, sid):
         nid = data[key][str(sid)] - 384; imall = Image.new('RGBA', (256, sum(p.height for p in parts)))
@@ -197,7 +198,7 @@ def main():
         add('post_' + n, post(c, c), 15)
         for k in ('v', 'h', 'ne', 'nw', 'se', 'sw'): add('thread_%s_%s' % (n, k), thread(c, k))
     add('mark', mark())
-    add('treadle_up', treadle(True)); add('treadle_down', treadle(False))
+    add('treadle_up', treadle(True), 15); add('treadle_down', treadle(False), 15)
     add('knot_up', knot(True), 15); add('knot_down', knot(False), 15)
     add('gear', gear(), 15); add('spool', spool(), 15)
     # scenery drops: the theatre's own curtain tiles re-dyed, each with a shape label (wave / leaf / crown)

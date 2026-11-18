@@ -33,6 +33,19 @@ module PrismfallMaps
     return true
   end
 
+  # Blacking out before the first Poke Center visit would send the player to the base project's Home (its sample
+  # house). Use the first town's HealingSpot (map_metadata_prismfall.txt) until a Poke Center is used.
+  FIRST_RESPAWN_MAP = 100   # Ferrow's Landing
+
+  def self.set_first_respawn
+    spot = GameData::MapMetadata.try_get(FIRST_RESPAWN_MAP)&.teleport_destination
+    return if !spot || !$PokemonGlobal
+    $PokemonGlobal.pokecenterMapId     = spot[0]
+    $PokemonGlobal.pokecenterX         = spot[1]
+    $PokemonGlobal.pokecenterY         = spot[2]
+    $PokemonGlobal.pokecenterDirection = 2
+  end
+
   def self.installed?(map_id)
     return start_tileset_installed?(map_id) && switch_names_installed?
   end
@@ -62,8 +75,9 @@ module Game
     alias prismfall_maps_start_new start_new unless method_defined?(:prismfall_maps_start_new)
 
     def start_new
-      PrismfallMaps.apply_start_position
+      ours = PrismfallMaps.apply_start_position
       prismfall_maps_start_new
+      PrismfallMaps.set_first_respawn if ours
     end
   end
 end

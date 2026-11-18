@@ -86,7 +86,7 @@ def icicles(im, x0, x1, y, seed=2, step=3):
 
 
 # --------------------------------------------------------------------------------------------- the longhouse kit
-def longhouse(W, H=6, door=None, windows=(), shields=(), chimneys=(), seed=3, banners=()):
+def longhouse(W, H=6, door=None, windows=(), shields=(), chimneys=(), seed=3, banners=(), porch=False, pc=False, skull=False, patch=()):
     """An Isenmar longhouse, W tiles wide, H tall: a long sway-backed turf roof under deep snow with whale-rib crosses
     at both gable ends, a stave wall on a stone footing, a whale-rib arch round the door, warm windows, round shields."""
     im, d = canvas(W, H)
@@ -180,6 +180,28 @@ def longhouse(W, H=6, door=None, windows=(), shields=(), chimneys=(), seed=3, ba
         cx = door * 16 + 8
         bone(im, bez((cx - 9, h - 1), (cx - 10, wall_top - 10), (cx + 1, wall_top - 13)), 1.8)
         bone(im, bez((cx + 9, h - 1), (cx + 10, wall_top - 10), (cx - 1, wall_top - 13)), 1.8)
+    if porch and door is not None:                         # a plank porch roof on two posts over the door, snow on top
+        cx = door * 16 + 8
+        d.rectangle([cx - 15, wall_top - 1, cx + 14, wall_top + 3], fill=WOOD[2], outline=OUT)
+        for x in range(cx - 13, cx + 14, 4): d.line([x, wall_top, x, wall_top + 2], fill=WOOD[3])
+        snow_cap(im, cx - 15, cx + 14, wall_top - 4, 3, seed + 9); icicles(im, cx - 13, cx + 12, wall_top + 4, seed + 4, 4)
+        for x in (cx - 14, cx + 12): d.rectangle([x, wall_top + 4, x + 1, h - 1], fill=WOOD[1], outline=OUT)
+    if pc and door is not None:                            # the Center's sign: a Poke Ball roundel over the arch, red cloth
+        cx = door * 16 + 8; cy = wall_top - 17
+        disc(im, cx, cy, 6.4, OUT); disc(im, cx, cy, 5.5, (236, 236, 240, 255))
+        for y in range(int(cy - 6), int(cy)):
+            for x in range(int(cx - 6), int(cx + 7)):
+                if (x + 0.5 - cx) ** 2 + (y + 0.5 - cy) ** 2 <= 5.5 ** 2: P(im, x, y, (216, 60, 56, 255))
+        d.line([cx - 5, cy, cx + 5, cy], fill=OUT); disc(im, cx, cy, 1.8, OUT); disc(im, cx, cy, 0.9, (248, 248, 252, 255))
+    if skull and door is not None:                         # a whale vertebra hung over the door
+        cx = door * 16 + 8; cy = wall_top - 15
+        d.ellipse([cx - 5, cy - 3, cx + 4, cy + 3], fill=BONE[2], outline=BONE[0]); d.ellipse([cx - 2, cy - 1, cx + 1, cy + 1], fill=BONE[0])
+        d.line([cx - 8, cy - 2, cx - 5, cy], fill=BONE[2]); d.line([cx + 4, cy, cx + 7, cy - 2], fill=BONE[2])
+    for px, pw in patch:                                   # bare turf where the snow has slid off
+        for x in range(px, px + pw):
+            for y in range(eave - 14 - (x * 7 % 3), eave - 5):
+                if x in tops and y > tops[x] + 4: P(im, x, y, SOD[3] if (x + y) % 4 == 0 else SOD[1] if (x * 3 + y) % 5 else SOD[2])
+        snow_cap(im, px, px + pw - 1, eave - 17, 2, px)
     # whale-rib crosses at the gable ends
     for gx, s in ((8, 1), (w - 9, -1)):
         gy = int(ridge(6)) + 6
@@ -496,32 +518,101 @@ def hearth_stone():
 BARK = [(56, 58, 76, 255), (88, 94, 118, 255), (122, 130, 156, 255), (164, 174, 198, 255)]
 
 
+BROWN = [(64, 46, 40, 255), (104, 78, 62, 255), (138, 108, 84, 255), (172, 142, 112, 255)]
+
+
 def fallen_log(part):
-    """the fallen giant over the Rimewood ravine, lying north-south, glazed in ice: 2 tiles wide.  part 'n' the root
-    plate end, 'm' a trunk segment (repeats), 's' the snapped crown end.  Walkable (it is the bridge)."""
+    """the fallen giant over the Rimewood ravine, lying north-south: brown furrowed bark with snow along its upper
+    (west) flank and moss on the lee side; 2 tiles wide.  'n' is the torn-up root plate with roots splayed and earth
+    in them, 'm' a trunk segment (repeats), 's' the shattered crown end with snapped limbs.  Walkable: it is the bridge."""
     im, d = canvas(2, 1)
+    def trunk(y0, y1):
+        for y in range(y0, y1 + 1):
+            for x in range(4, 28):
+                f = (x - 4) / 23.0
+                c = BROWN[3] if f < 0.2 else BROWN[2] if f < 0.6 else BROWN[1]
+                if (x * 5 + (y // 2) * 3) % 7 == 0: c = BROWN[0]                       # bark furrows run along the trunk
+                if (x + y // 3) % 9 == 4 and f > 0.5: c = (86, 110, 78, 255)            # moss
+                P(im, x, y, c)
+            P(im, 3, y, OUT); P(im, 28, y, OUT); P(im, 29, y, (90, 100, 130, 150)); P(im, 30, y, (90, 100, 130, 80))
+            for x in range(5, 12):                                                      # snow lying along the west flank
+                if (x * 3 + y * 5) % 11 < 7 - (x - 5): P(im, x, y, SNOW[3] if x < 9 else SNOW[2])
     if part == 'm':
-        d.rectangle([3, 0, 28, 15], fill=BARK[1])
-        for x in range(4, 28, 3):
-            for y in range(16):
-                if (y + x * 3) % 7 < 4: P(im, x, y, BARK[2])
-        d.line([3, 0, 3, 15], fill=BARK[0]); d.line([28, 0, 28, 15], fill=BARK[0])
-        d.line([5, 0, 5, 15], fill=BARK[3]); d.line([6, 0, 6, 15], fill=ICE[2])
-        for y in (3, 11): P(im, 14, y, ICE[3]); P(im, 15, y, ICE[2])
-        d.line([2, 0, 2, 15], fill=(90, 100, 130, 110)); d.line([29, 0, 29, 15], fill=(90, 100, 130, 160))
-        for y in range(0, 16, 5): P(im, 10, y, SNOW[3]); P(im, 11, y, SNOW[3]); P(im, 20, y + 2, SNOW[3])
+        trunk(0, 15)
+        d.ellipse([15, 5, 20, 10], fill=BROWN[0]); d.ellipse([16, 6, 19, 9], fill=(40, 30, 28, 255))   # a knot hole
+        d.line([28, 3, 31, 1], fill=OUT); d.line([28, 4, 31, 2], fill=BROWN[1])                            # a branch stub
     elif part == 'n':
-        d.ellipse([0, 1, 31, 15], fill=BARK[0])
-        d.ellipse([2, 3, 29, 14], fill=(110, 84, 64, 255)); d.ellipse([7, 5, 24, 13], fill=(140, 108, 80, 255))
-        for k in range(4): d.arc([7 + k * 2, 5 + k, 24 - k * 2, 13 - k], 0, 360, fill=(120, 90, 66, 255))
-        d.rectangle([3, 12, 28, 15], fill=BARK[1]); d.line([5, 12, 5, 15], fill=BARK[3])
-        snow_cap(im, 4, 26, 1, 2, 40)
+        trunk(9, 15)
+        for (x0, y0, x1, y1, cx) in ((6, 10, 0, 2, 2), (11, 9, 7, 0, 8), (16, 9, 16, 1, 15), (21, 9, 25, 0, 24), (26, 10, 31, 3, 30)):
+            pts = bez((x0, y0), (cx, (y0 + y1) / 2.0), (x1, y1), 14)
+            for (x, y) in pts: disc(im, x, y, 1.6, OUT)
+            for (x, y) in pts: disc(im, x, y, 0.9, BROWN[2])
+        d.ellipse([7, 6, 25, 12], fill=(92, 70, 52, 255), outline=OUT)                                    # the earth-caked root plate
+        for x, y in ((10, 8), (14, 10), (19, 8), (22, 10), (16, 7)): P(im, x, y, (132, 104, 76, 255))
+        snow_cap(im, 9, 23, 4, 2, 44)
     else:
-        d.rectangle([3, 0, 28, 8], fill=BARK[1]); d.line([3, 0, 3, 8], fill=BARK[0]); d.line([28, 0, 28, 8], fill=BARK[0])
-        d.line([5, 0, 5, 8], fill=BARK[3])
-        d.polygon([(3, 8), (8, 13), (12, 9), (16, 14), (20, 9), (24, 13), (28, 8)], fill=(150, 116, 86, 255), outline=BARK[0])
-        d.line([8, 2, 4, 0], fill=BARK[0])
+        trunk(0, 7)
+        d.polygon([(3, 7), (7, 12), (10, 8), (13, 14), (17, 9), (21, 13), (24, 8), (28, 7)], fill=(196, 160, 118, 255), outline=OUT)
+        for (x0, y0, x1, y1) in ((6, 9, 1, 15), (26, 9, 31, 14), (15, 11, 15, 15)):                        # snapped limbs
+            d.line([x0, y0, x1, y1], fill=OUT, width=3); d.line([x0, y0, x1, y1], fill=BROWN[2])
+        P(im, 2, 14, SNOW[3]); P(im, 30, 13, SNOW[3])
     return im
+
+
+def snow_stairs(part):
+    """timber stairs cut into a snowy bank (1x1, repeats down the flight): split-log treads with snow lying on each,
+    a dark riser shadow, and a post-and-rope rail on the outer pieces.  part: l / m / r"""
+    im, d = canvas(1, 1)
+    for k in range(4):
+        y = k * 4
+        d.rectangle([0, y, 15, y + 1], fill=SNOW[3]); d.line([0, y + 1, 15, y + 1], fill=SNOW[2])
+        d.line([0, y + 2, 15, y + 2], fill=WOOD[3]); d.line([0, y + 3, 15, y + 3], fill=WOOD[0])
+        for x in range(2 + k % 2 * 3, 16, 6): P(im, x, y + 2, WOOD[2]); P(im, x + 1, y, SNOW[1])
+    if part in 'lr':
+        x = 0 if part == 'l' else 13
+        d.rectangle([x, 0, x + 2, 15], fill=WOOD[1], outline=OUT); d.line([x + 1, 0, x + 1, 15], fill=WOOD[3])
+        for y in (2, 10): P(im, x + 1, y, ROPE); d.line([x, y + 1, x + 2, y + 1], fill=ROPED)
+        P(im, x + 1, 0, SNOW[3]); P(im, x + 1, 8, SNOW[3])
+    return im
+
+
+SOFT = [(170, 204, 230, 255), (196, 222, 240, 255), (216, 234, 246, 255), (236, 244, 250, 255)]
+
+
+def soft_ice(v):
+    """lagoon / brook ice in the snow palette: pale blue-white with faint wind streaks and a few snow patches (4
+    variants, each tiles on itself), replacing Kristiline's saturated cyan stripes on our maps.  Terrain tag 12."""
+    im, d = canvas(1, 1)
+    rng = random.Random(90 + v)
+    d.rectangle([0, 0, 15, 15], fill=SOFT[2])
+    for k in range(3 + v % 2):
+        y = rng.randrange(1, 15); x0 = rng.randrange(1, 9); L = rng.randrange(3, 7)
+        for x in range(x0, x0 + L): P(im, x, y - (x - x0) // 3, SOFT[3])
+    if v >= 2:
+        cx, cy = rng.randrange(4, 12), rng.randrange(4, 12)
+        for _ in range(9): P(im, cx + rng.randrange(-3, 4), cy + rng.randrange(-2, 3), SOFT[1] if v == 2 else SNOW[3])
+    if v == 1: d.line([3, 11, 8, 9], fill=SOFT[0]); d.line([8, 9, 12, 10], fill=SOFT[0])
+    return im
+
+
+def boat(up):
+    """a clinker-built fishing boat, 3x2: hauled out on the ice (upright, with oars and a net) or turned over for the
+    winter with snow on the keel"""
+    im, d = canvas(3, 2)
+    if up:
+        d.polygon([(2, 12), (10, 8), (38, 8), (46, 12), (40, 24), (8, 24)], fill=WOOD[1], outline=OUT)
+        d.polygon([(6, 12), (11, 10), (37, 10), (42, 12), (38, 20), (10, 20)], fill=WOOD[3])
+        for x in (16, 24, 32): d.line([x, 10, x, 20], fill=WOOD[1])
+        for y in (22,): d.line([9, y, 39, y], fill=WOOD[2])
+        d.line([12, 14, 36, 17], fill=BONE[2]); d.line([12, 15, 36, 18], fill=BONE[0])           # an oar
+        d.rectangle([26, 11, 34, 14], fill=(120, 132, 126, 255)); P(im, 28, 12, (170, 180, 172, 255))  # a net
+        snow_cap(im, 4, 44, 24, 2, 61)
+    else:
+        d.polygon([(2, 24), (8, 12), (24, 8), (40, 12), (46, 24)], fill=WOOD[2], outline=OUT)
+        for y in (14, 18, 22): d.arc([4, y - 8, 44, y + 6], 200, 340, fill=WOOD[0])
+        d.line([8, 12, 40, 12], fill=WOOD[3]); d.line([24, 8, 24, 24], fill=WOOD[1])
+        snow_cap(im, 10, 38, 8, 3, 62); snow_cap(im, 2, 46, 23, 3, 63)
+    return im, ['OOO', 'WWW']
 
 
 def peg():
@@ -626,12 +717,16 @@ def anchor_monument():
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
-    out['wb_long'] = (longhouse(9, 6, door=4, windows=(2, 6), shields=(1, 7), chimneys=((5, 'stone'),), seed=3), code_house(9, 6, 4), (4, 5))
-    out['wb_long2'] = (longhouse(8, 6, door=3, windows=(1, 5), shields=(6,), chimneys=((5, 'stone'),), seed=5), code_house(8, 6, 3), (3, 5))
-    out['wb_short'] = (longhouse(6, 6, door=2, windows=(4,), shields=(), chimneys=((3, 'stone'),), seed=7), code_house(6, 6, 2), (2, 5))
+    out['wb_long'] = (longhouse(9, 6, door=4, windows=(2, 6), shields=(1, 7), chimneys=((6, 'stone'),), seed=3, porch=True), code_house(9, 6, 4), (4, 5))
+    out['wb_long2'] = (longhouse(8, 6, door=2, windows=(4, 6), shields=(0,), chimneys=((5, 'stone'),), seed=5, skull=True, patch=((78, 22),)), code_house(8, 6, 2), (2, 5))
+    out['wb_long3'] = (longhouse(11, 6, door=7, windows=(1, 3, 5, 9), shields=(2, 4), chimneys=((2, 'stone'), (8, 'stone')), seed=17, porch=True, patch=((20, 18),)), code_house(11, 6, 7), (7, 5))
+    out['wb_short'] = (longhouse(6, 6, door=3, windows=(1,), shields=(5,), chimneys=((1, 'stone'),), seed=7, skull=True), code_house(6, 6, 3), (3, 5))
+    out['wb_hut'] = (longhouse(5, 5, door=2, windows=(), shields=(0, 4), chimneys=((3, 'stone'),), seed=19, patch=((52, 14),)), code_house(5, 5, 2), (2, 4))
     out['wb_inn'] = (longhouse(12, 6, door=6, windows=(2, 4, 8, 10), shields=(), chimneys=((3, 'stone'), (9, 'timber')), seed=11,
-                              banners=((1, TEAL), (5, SLATE), (7, ROSE), (11, GREEN))), code_house(12, 6, 6), (6, 5))
-    out['wb_smoke'] = (longhouse(7, 6, door=3, windows=(5,), shields=(1,), chimneys=((2, 'stone'), (5, 'stone')), seed=13), code_house(7, 6, 3), (3, 5))
+                              banners=((1, TEAL), (5, SLATE), (7, ROSE), (11, GREEN)), porch=True), code_house(12, 6, 6), (6, 5))
+    out['wb_smoke'] = (longhouse(7, 6, door=3, windows=(5,), shields=(1,), chimneys=((2, 'stone'), (5, 'stone')), seed=13, patch=((60, 16),)), code_house(7, 6, 3), (3, 5))
+    out['wb_pc'] = (longhouse(9, 6, door=4, windows=(1, 2, 6, 7), shields=(), chimneys=((7, 'timber'),), seed=23, porch=True, pc=True,
+                              banners=((3, ((140, 40, 44, 255), (216, 60, 56, 255), (244, 130, 120, 255))), (5, ((140, 40, 44, 255), (216, 60, 56, 255), (244, 130, 120, 255))))), code_house(9, 6, 4), (4, 5))
     g, c = rib_gate(); out['wb_gate'] = (g, c, None)
     out['fw_walk_h'] = (walkway_h(), ['O'], None)
     out['fw_walk_v'] = (walkway_v(), ['O'], None)
@@ -651,6 +746,10 @@ def pieces():
     out['fw_hole_t'] = (fishing_hole(True), ['F'], None)
     out['fw_pal_h'] = (palisade('h'), ['W'], None)
     out['fw_peg'] = (peg(), ['W'], None)
+    for k in 'lmr': out['fw_stair_' + k] = (snow_stairs(k), ['F'], None)
+    for v in range(4): out['fw_ice%d' % v] = (soft_ice(v), ['I'], None)
+    im, c = boat(True); out['fw_boat'] = (im, c, None)
+    im, c = boat(False); out['fw_boat_over'] = (im, c, None)
     for i in range(2): out['fw_reeds%d' % i] = (reeds(i + 3), ['O', 'F'], None)
     for i in range(3): out['fw_crack%d' % i] = (crack(i + 1), ['F'], None)
     for i in range(2): out['fw_floe%d' % i] = (floe(i + 5), ['F'], None)
@@ -663,7 +762,7 @@ def pieces():
     return out
 
 
-CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (1, 0, 0), 'O': (2, 0, 2)}   # layer, passage, priority
+CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (1, 0, 0), 'O': (2, 0, 2), 'I': (1, 0, 0, 12)}   # layer, passage, priority
 
 
 if __name__ == '__main__':

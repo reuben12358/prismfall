@@ -53,7 +53,7 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
 def _ice(x, y):
     """16-periodic ice texture on the 16-px logical grid (safe under RMXP's quarter-tile autotile assembly): Kristiline's
     two ice tones in broad diagonal bands"""
-    return (208, 248, 248) if ((x // 2) + (y // 2)) % 8 < 3 else (160, 238, 248)
+    return (236, 244, 250) if ((x // 2) + (y // 2)) % 8 < 2 else (216, 234, 246)       # the snow palette's ice (rdraw.SOFT)
 
 
 # derived autotiles: name -> (source game, source name, colour map, extra).  extra: fn {colour: f(x, y)} per-pixel
@@ -70,7 +70,7 @@ DERIVED = {'Gravel Spring': ('rejuvenation', 'Gravel(G)', {(213, 184, 68): (168,
                            {(123, 134, 142): (212, 216, 234), (88, 105, 121): (178, 188, 216), (84, 105, 120): (178, 188, 216),
                             (132, 151, 159): (196, 204, 228), (92, 109, 122): (184, 194, 220), (170, 170, 197): (200, 206, 230)}, {}),
            'Frozen Pond': ('reborn', 'Still water snow',
-                           {(48, 96, 160): (128, 206, 236), (63, 66, 80): (116, 136, 184), (92, 94, 102): (150, 166, 204),
+                           {(48, 96, 160): (176, 208, 232), (63, 66, 80): (116, 136, 184), (92, 94, 102): (150, 166, 204),
                             (120, 121, 130): (184, 196, 226), (155, 156, 166): (210, 218, 238), (183, 185, 195): (226, 230, 244),
                             (230, 233, 234): (240, 242, 250)},
                            {'fn': {(96, 160, 216): _ice}, 'tag': 12, 'pas': 0})}

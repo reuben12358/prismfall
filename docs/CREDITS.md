@@ -213,3 +213,36 @@ Nintendo / Game Freak / Creatures Inc.; arrangers are credited for their arrange
 ### Thanks
 Team Aqua's Hideout for the open asset repo; the Pokémon Tectonic team for open-sourcing their game.
 
+## War climax cutscene art (temporary, personal build only)
+
+Files under `plugins/Prismfall Cutscenes/Graphics/` (prefix `pfw_`), copied or recoloured from the reference games by
+`plugins/Prismfall Cutscenes/tools/build_war_assets.py`. Pokémon Rejuvenation (Jan and team) and Pokémon Reborn (Amethyst and
+team); the `PRAS-` animation sheets are from the Pokémon Reborn Animation Squad. These are stand-ins for a private hobby
+build and should be replaced or cleared with their authors before any release.
+
+| File | Source | Changes |
+|---|---|---|
+| `Characters/pfw_kyogre_rise.png` | Rejuvenation: Graphics/Characters/pkmn_kyogre2.png | 4x4: emerge from the water (0-5), sink (6-7), splashes (8-15) |
+| `Characters/pfw_kyogre_primal.png` | Rejuvenation: Graphics/Characters/pkmn_kyogre.png | 4x4: Primal Kyogre facing the camera; row 3 = markings glow layers |
+| `Characters/pfw_kyogre.png` | Reborn: Graphics/Characters/pkmn_kyogre.png | 4x4 overworld charset (row 2 faces right) |
+| `Characters/pfw_reshiram.png` | Reborn: Graphics/Characters/pkmn_reshiram.png | 4x4 overworld charset (row 1 faces left, turbine lit) |
+| `Characters/pfw_reshiram_hover.png` | Reborn: Graphics/Characters/pkmn_reshiram1.png | 4x4 front-facing hover / wingbeats |
+| `Characters/pfw_walrein.png` | Reborn: Graphics/Characters/pkmn_walrein.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_sealeo.png` | Rejuvenation: Graphics/Characters/pkmn_sealeo.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_beartic.png` | Reborn: Graphics/Characters/pkmn_beartic.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_houndoom.png` | Rejuvenation: Graphics/Characters/pkmn_houndoom.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_camerupt.png` | Reborn: Graphics/Characters/pkmn_camerupt.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_charizard.png` | Reborn: Graphics/Characters/pkmn_charizard.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_salamence.png` | Reborn: Graphics/Characters/pkmn_salamence.png | 4x4 overworld follower sprite (army unit) |
+| `Characters/pfw_soldier_isenmar.png` | Rejuvenation: Graphics/Characters/Grunt_1.png | recoloured icy blue (Isenmar soldier) |
+| `Characters/pfw_soldier_ashkaar.png` | Rejuvenation: Graphics/Characters/Grunt_1.png | recoloured crimson (Ashkaar soldier) |
+| `Characters/pfw_eirik.png` | Rejuvenation: Graphics/Characters/knight.png | recoloured pale blue (Thane Eirik stand-in) |
+| `Characters/pfw_hrothgar.png` | Rejuvenation: Graphics/Characters/knight.png | recoloured red-gold (Dominar Hrothgar stand-in) |
+| `Characters/pfw_beam_sea.png` | Rejuvenation: Graphics/Characters/anim_beam.png | recoloured, turned 90 degrees (head points right), half thickness, 1px outline; 4x4 cells of 64x48 |
+| `Characters/pfw_beam_fire.png` | Rejuvenation: Graphics/Characters/anim_beam.png | recoloured, turned 90 degrees (head points right), half thickness, 1px outline; 4x4 cells of 64x48 |
+| `Animations/pfw_fx_explosions.png` | Rejuvenation: Graphics/Animations/PRAS- Explosions.png | 4x3 cells of 192: burst 0-3, flash+smoke 4-7 |
+| `Animations/pfw_fx_steam.png` | Rejuvenation: Graphics/Animations/PRAS- Steam Eruption.png | 5x4 cells of 192: geyser 0-4, steam 5-9, icy burst 9 |
+| `Animations/pfw_fx_origin_pulse.png` | Rejuvenation: Graphics/Animations/PRAS- Origin Pulse.png | 5x3 cells of 192: water orb 0-3, geyser 5-9 |
+| `Animations/pfw_fx_fusion_flare.png` | Rejuvenation: Graphics/Animations/PRAS- Fusion Flare.png | 5x5 cells of 192: sun 0, flame swirls, suns 11-12 |
+| `Animations/pfw_fx_sky_burn.png` | Rejuvenation: Graphics/Animations/PRAS- Light that Burns the Sky.png | 5x5 cells of 192: flame grow 5-9, die 10-12 |
+| `Pictures/pfw_shattered_ice.png` | Rejuvenation: tileset 'Kristiline Town (Frozen)' + autotiles, tiles from Map328 (Kristiline Town) | composed 64x24-tile frozen strait (temporary stage for :WAR_CLIMAX until map 926 exists) |

@@ -417,6 +417,20 @@ Snow maps have no second ground tone any more. `rcompose.DERIVED` entries take `
 nothing from NEW_SOURCES.md is imported yet (carchagui chalets and Magiscarf snow-capped trees are the candidates; both
 are 16-px sheets with a baked checker background that needs keying). Gym and dungeon interiors belong to the puzzle engineer.
 
+## 2j. Second polish round (2026-11-18)
+- **Fields:** `build.py` reads `design/FIELD_DEFAULTS.yaml` (source of truth; a spec `field:` only fills gaps) and writes
+  all 424 `MAP_FIELDS` entries, `:NONE` included, plus `MAP_WILD_FIELDS` from `wild:`. Test arena 990 has Wildfire and Meadow.
+- **rdraw additions:** `fw_stair_l/m/r` snowy timber stairs (snow maps set `m.STAIRS`), `fw_ice0-3` soft lagoon ice
+  (terrain tag 12 through code `I`; `rimewood.ice_at`), `fw_boat`, `fw_boat_over`, brown-bark `fw_log_*` with a root
+  plate and a snapped crown, longhouse options `porch / pc / skull / patch` and the stamps `wb_long3`, `wb_hut`, `wb_pc`.
+  `PF Frozen Pond` uses the same soft ice tones.
+- **570:** curved lanes of varying width into one plaza (`lane` + `blob` + `smooth`), `doorstep()` runs a trodden line
+  from each door to the nearest lane, the Center is a longhouse (`wb_pc`), five different longhouse shapes, boats, the
+  brook and lagoon ice dressed with cracks and drifts. Doors: loft (5,9), inn (19,21), Exchange (40,21), Border House
+  (48,21), PC (6,34), Smokehouse (55,34).
+- **562:** ravine banks smoothed and opened (`smooth` x3, ragged bank clearing), floes and reeds along them.
+- **Still open:** Ferrow / Briarwick street plans, NEW_SOURCES imports, interior / Dovetail / 522 / 548 re-skins.
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen

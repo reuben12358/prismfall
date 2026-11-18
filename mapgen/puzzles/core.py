@@ -131,3 +131,35 @@ def grid_cells(mid, rows, solid='#'):
 
 def around(mid, x, y):
     return [(mid, x + dx, y + dy) for dx, dy in DIRS]
+
+
+def machine(name, start, actions, goal, moves=None, invariant=None):
+    """Proof for a puzzle with no walking in it (chimes, anchors): a plain state machine.
+    actions(state) -> [(label, state)]; goal(state) -> bool; invariant(state) -> bool must hold everywhere."""
+    dist = {start: 0}; prev = {start: None}; q = deque([start]); edges = {}
+    while q:
+        s = q.popleft(); edges[s] = []
+        for label, t in actions(s):
+            edges[s].append(t)
+            if t not in dist: dist[t] = dist[s] + 1; prev[t] = (s, label); q.append(t)
+    goals = [s for s in dist if goal(s)]
+    if not goals: return False, ['FAIL %s: goal unreachable (%d states)' % (name, len(dist))]
+    best = min(goals, key=lambda s: dist[s]); path = []; s = best
+    while prev[s]: path.append(prev[s][1]); s = prev[s][0]
+    path = path[::-1]; ok = True; out = []
+    if moves is not None and len(path) != moves:
+        ok = False; out.append('FAIL %s: shortest is %d moves, design says %d' % (name, len(path), moves))
+    good = set(goals); rev = {}
+    for s, ns in edges.items():
+        for n in ns: rev.setdefault(n, []).append(s)
+    st = list(good)
+    while st:
+        s = st.pop()
+        for p in rev.get(s, []):
+            if p not in good: good.add(p); st.append(p)
+    if len(good) != len(dist):
+        ok = False; out.append('FAIL %s: %d soft-locked states' % (name, len(dist) - len(good)))
+    if invariant and not all(invariant(s) for s in dist):
+        ok = False; out.append('FAIL %s: invariant broken' % name)
+    out.insert(0, '%s %s: %d reachable states, shortest solution %d moves: %s' % ('ok  ' if ok else 'FAIL', name, len(dist), len(path), ' > '.join(path)))
+    return ok, out

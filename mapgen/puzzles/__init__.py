@@ -2,7 +2,7 @@
 engine (GYM_PUZZLES section 4 item 10).  build.py calls run_all() and (with --strict) fails the build when a room is
 unsolvable, can soft-lock, or its shortest solution is not the designed one.
 
-    python3 -I -m puzzles          # from mapgen/: print every proof"""
+    python3 -I mapgen/puzzle_check.py     # print every proof"""
 import importlib
 
 MODULES = ['g1', 'g2', 'dungeons']

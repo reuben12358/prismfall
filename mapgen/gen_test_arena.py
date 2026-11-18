@@ -18,7 +18,8 @@ FIELDS = [  # (field id, display name, wild species for the test battle)
     ('BEACH', 'Beach', 'WINGULL'), ('UNDERWATER', 'Underwater', 'CHINCHOU'), ('RAINBOW', 'Rainbow', 'SWABLU'),
     ('WASTELAND', 'Wasteland', 'TRUBBISH'), ('ASHEN_WASTE', 'Ashen Waste', 'NUMEL'),
     ('DARK_CRYSTAL', 'Dark Crystal', 'SABLEYE'), ('SCRAPYARD', 'Scrapyard', 'KLINK'),
-    ('INVERSE', 'Inverse', 'INKAY'), ('BLEED', 'Bleed', 'PORYGON'), ('PRISM_ARENA', 'Prism Arena', 'EEVEE')]
+    ('INVERSE', 'Inverse', 'INKAY'), ('BLEED', 'Bleed', 'PORYGON'), ('PRISM_ARENA', 'Prism Arena', 'EEVEE'),
+    ('WILDFIRE', 'Wildfire', 'GROWLITHE'), ('MEADOW', 'Meadow', 'DEERLING')]
 SPRITES = ['trainer_YOUNGSTER', 'trainer_LASS', 'trainer_BUGCATCHER', 'trainer_PICNICKER', 'trainer_HIKER',
            'trainer_SWIMMER_F', 'trainer_SCIENTIST', 'trainer_BLACKBELT', 'trainer_AROMALADY', 'trainer_POKEMANIAC',
            'trainer_BIRDKEEPER', 'trainer_PSYCHIC_F', 'trainer_RUINMANIAC', 'trainer_CHANNELER', 'trainer_ENGINEER',

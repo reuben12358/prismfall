@@ -15,7 +15,13 @@ import rkit as K
 from rkit import C, STAMPS
 from terrain import vnoise
 HERE = K.HERE
-ICE = C('kf', 2476)                                  # walkable ice, terrain tag 12 (slides)
+ICES = [STAMPS['fw_ice%d' % v]['layers'][1][0][0] for v in range(4)]   # soft lagoon ice (rdraw.soft_ice), terrain tag 12
+ICE = ICES[0]
+
+
+def ice_at(x, y):
+    n = vnoise(x, y, 77, 1.7)
+    return ICES[0] if n < 0.45 else ICES[1] if n < 0.62 else ICES[2] if n < 0.82 else ICES[3]
 CAVE = [[624, 625, 626], [632, 633, 634], [640, 641, 642]]
 
 
@@ -26,6 +32,7 @@ def snowmap(W, H, mid, kit='shs', sea=False):
     (o / I), the snow lattice forest"""
     m = K.RMap(W, H, 52, mid, water='Still water snow', kit=kit, grass=K.SNOW_GROUND, decor=K.DECOR_SNOW)
     m.tall = K.SNOW_TALL
+    m.STAIRS = tuple(STAMPS['fw_stair_' + k]['layers'][1][0][0] for k in 'lmr')      # snowy timber stairs (rdraw)
     m.grass2 = None
     m.lattice = K.RMap.TREES_SNOW
     m.auto = {'d': ('Packed Snow', 'pf'), 'e': ('KristilineDirt', 'rejuvenation'), 'w': ('Still water snow', 'reborn'),
@@ -41,6 +48,17 @@ def apron(m, door, w=3, h=2):
     for yy in range(y + 1, y + 1 + h):
         for xx in range(x - w // 2, x - w // 2 + w):
             if m.inb(xx, yy) and m.cls[yy, xx] in '.dt' and not m.taken[yy, xx]: m.cls[yy, xx] = 'e'
+
+
+def doorstep(m, door, depth=6):
+    """earth at the doorstep, then packed snow straight down to the nearest lane"""
+    x, y = door
+    for k in range(1, depth + 1):
+        yy = y + k
+        if not m.inb(x, yy) or m.cls[yy, x] in 'dep' or m.taken[yy, x]: break
+        if m.cls[yy, x] in '.tT':
+            for xx in ((x - 1, x, x + 1) if k == 1 else (x, x + (1 if (x + y) % 2 else -1))):
+                if m.inb(xx, yy) and m.cls[yy, xx] in '.tT' and not m.taken[yy, xx]: m.cls[yy, xx] = 'e' if k == 1 else 'd'
 
 
 def smooth(m, c, into='.', passes=2, only=None):
@@ -61,7 +79,7 @@ def ice_over(m, cls='w', edge=True):
             if m.cls[y, x] != cls: continue
             nb = [(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)]
             if not edge or all(not m.inb(a, b) or m.cls[b, a] == cls for a, b in nb):
-                m.L[1, y, x] = ICE
+                m.L[1, y, x] = ice_at(x, y)
 
 
 def cave_mouth(m, x, y):
@@ -229,7 +247,7 @@ def route5(prev=None):
     for x, y in ((14, 23), (18, 22)):                                              # stoppers on the first slide
         if m.cls[y, x] == 'p': m.L[1, y, x] = 10371
     for y, x in np.argwhere(m.cls == 'w'):                                         # salt crust on the brine pans
-        if vnoise(x, y, 61, 2.0) > 0.62: m.L[1, y, x] = K.C('kf', 2476)
+        if vnoise(x, y, 61, 2.0) > 0.62: m.L[1, y, x] = ice_at(x, y)
     m.scatter(16, seed=5)
     icy_faces(m, 0.6, seed=560)
     dress_ice(m, 0.75, seed=560)
@@ -248,7 +266,7 @@ def route5(prev=None):
 def ice(m):
     """class i / I: walkable ice ground (slides); class w interiors iced over"""
     for y, x in np.argwhere(np.isin(m.cls, ['i', 'I'])):
-        m.L[0, y, x] = ICE
+        m.L[0, y, x] = ice_at(x, y)
     ice_over(m, 'w')
 
 
@@ -297,7 +315,7 @@ def frostwick(prev=None):
     for y in range(40, H):                                                   # the salt lagoon, frozen (Kristiline sea ice)
         for x in range(W):
             if y >= 40 + 2 * vnoise(x, 0, 4, 6.0): m.cls[y, x] = 'o'
-    lagoon(m, 0.55)
+    lagoon(m, 0.66)
     for y in range(H):                                                       # the Rimewood: north band, NE bench, west edge
         for x in range(W):
             if m.cls[y, x] != '.': continue
@@ -307,19 +325,23 @@ def frostwick(prev=None):
     for y in range(0, 3):                                                    # NW terrace: woods along its back
         for x in range(0, 25):
             if m.cls[y, x] == '.': m.cls[y, x] = 'T'
-    # ------------------------------------------------------------------ streets (packed snow)
+    # ------------------------------------------------------------------ streets (packed snow): curved lanes of varying
+    # width feeding one real plaza round the Hearth Stone and the Elder, not a grid
     m.rect(26, 0, 3, NL, 'd', only='.T')                                     # the path from the Rimewood (x 26-28)
     m.stairs(26, NL, w=3, kit_rows=4)
-    m.rect(26, NL + 4, 3, SQ0 - NL - 4, 'd', only='.T')
-    m.rect(6, SQ0, 25, SQ1 - SQ0 + 1, 'd', only='.T')                        # the square, west of the brook
-    m.rect(34, SQ0, 13, SQ1 - SQ0 + 2, 'd', only='.T')                       # ... and east of it, under the Hearth Elder
-    m.rect(46, ROAD[0], 14, 3, 'd', only='.T')                               # the Hearth Road to the gate
-    m.rect(3, TL - 2, 20, 2, 'd', only='.T')                                 # the terrace walk under the treehouses
+    m.lane([(27.5, NL + 4), (26.6, 15), (25.4, 18), (24.5, 22)], 'd', 2.6, seed=71, wobble=0.5)
+    m.blob(19.5, 25.6, 12.0, 4.3, 'd', seed=72, rough=0.35, only='.T')       # the plaza, west of the brook
+    m.blob(40.5, 26.2, 7.6, 4.2, 'd', seed=73, rough=0.35, only='.T')        # ... and its east half under the Hearth Elder
+    m.lane([(46, 25.2), (51, 24), (55, 24.2), (60, 24)], 'd', 3.0, seed=74, wobble=0.4)   # the Hearth Road to the gate
+    m.rect(56, ROAD[0], 4, 3, 'd', only='.T')
+    m.lane([(3, TL - 1.2), (9, TL - 1.6), (15, TL - 1.0), (23, TL - 1.5)], 'd', 1.9, seed=75, wobble=0.3)   # the terrace walk
+    m.rect(9, TL - 1, 3, 1, 'd', only='.T')
     m.stairs(9, TL, w=3, kit_rows=4)
-    m.rect(9, TL + 4, 3, SQ0 - TL - 4, 'd', only='.T')
-    m.rect(3, LANE[0], 52, 3, 'd', only='.T')                                # the south lane along the lagoon
-    m.rect(26, SQ1 + 1, 3, LANE[0] - SQ1 - 1, 'd', only='.T')                # square -> south lane
-    m.rect(44, LANE[1] + 1, 3, 5, 'd', only='.T')                            # down to the jetty
+    m.lane([(10.5, TL + 4), (9.2, 18.5), (10.5, 22)], 'd', 2.3, seed=76, wobble=0.5)
+    m.lane([(2, 37.2), (11, 37.6), (21, 36.6), (29, 37.4), (40, 37.6), (50, 36.8), (57, 37.2)], 'd', 2.5, seed=77, wobble=0.7)   # the shore lane
+    m.lane([(26.5, 29), (27.6, 32.5), (26.6, 36.5)], 'd', 2.2, seed=78, wobble=0.5)
+    m.lane([(45, 38), (45.5, 41)], 'd', 2.6, seed=79, wobble=0.2)             # down to the jetty
+    smooth(m, 'd', into='.', passes=1)
     # ------------------------------------------------------------------ the frozen fall (the brook leaves the north band)
     m.stamp('fw_fall', fw_bx(NL), NL - 1)
     # ------------------------------------------------------------------ buildings
@@ -331,13 +353,14 @@ def frostwick(prev=None):
     d['exch'] = m.stamp('pf_g_elder_ice', 34, SQ0 - 12, 'FW_EXCH', 'Exchange door')
     d['border'] = m.stamp('wb_long2', 46, SQ0 - 6, 'FW_BORDER', 'Border House door')
     m.stamp('wb_gate', 54, ROAD[1] - 4)
-    d['pc'] = m.stamp('kf_aframe2', 2, LANE[0] - 7, 'FW_PC', 'Poke Center door')
-    m.stamp('wb_long2', 13, LANE[0] - 6)
-    m.stamp('wb_long', 35, LANE[0] - 6)
-    m.stamp('wb_short', 45, LANE[0] - 6)
-    d['smoke'] = m.stamp('wb_smoke', 52, LANE[0] - 6, 'FW_SMOKE', 'Smokehouse door')
-    for k, (dx, dy) in d.items():                                            # earth worn through at the doorsteps
-        apron(m, (dx, dy), 3 if k != 'loft' else 2, 1)
+    d['pc'] = m.stamp('wb_pc', 2, LANE[0] - 7, 'FW_PC', 'Poke Center door')   # the Center keeps house the local way
+    extra = [m.stamp('wb_hut', 14, LANE[0] - 6, None, 'x'), m.stamp('wb_long3', 33, LANE[0] - 7, None, 'x'),
+             m.stamp('wb_short', 45, LANE[0] - 6, None, 'x')]
+    d['smoke'] = m.stamp('wb_smoke', 52, LANE[0] - 7, 'FW_SMOKE', 'Smokehouse door')
+    m.events = [e for e in m.events if e.get('name') != 'x']
+    for k, (dx, dy) in d.items(): doorstep(m, (dx, dy))                      # earth at the doorsteps, a trodden line to the lane
+    for nm, hx, hy in (('wb_hut', 14, LANE[0] - 6), ('wb_long3', 33, LANE[0] - 7), ('wb_short', 45, LANE[0] - 6)):
+        dd = STAMPS[nm]['door']; doorstep(m, (hx + dd[0], hy + dd[1]))
     for y in range(7, 40):                                                   # the palisade along the east edge
         if not (ROAD[0] - 4 <= y <= ROAD[1]) and m.cls[y, 58] in '.T' and m.ht[y, 58] == 0 and not m.taken[y, 58]:
             m.stamp('fw_pal_v', 58, y, mark='B')
@@ -350,7 +373,7 @@ def frostwick(prev=None):
                      ('sh_crates', 45, 26), ('fw_wood', 34, 28), ('pf_logbench', 36, 28)):
         if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.d'): m.stamp(nm, x, y)
         else: print('  (frostwick: no room for %s at %d,%d)' % (nm, x, y))
-    for x, y in ((21, 23), (29, 26), (35, 23), (45, 24)): m.stamp('fw_brazier', x, y)
+    for x, y in ((21, 23), (13, 28), (35, 23), (45, 24)): m.stamp('fw_brazier', x, y)
     for nm, x, y in (('fw_ban_e', 12, 21), ('fw_ban_i', 23, 21), ('fw_ban_e', 52, 21), ('fw_ban_i', 47, 26)):
         if m.free(x, y, 1, 2, on='.d'): m.stamp(nm, x, y)
     E = []
@@ -391,6 +414,8 @@ def frostwick(prev=None):
                      ('pf_lantern', 8, 20), ('pf_lantern', 25, 19), ('pf_lantern', 47, 22), ('pf_lantern', 12, 37), ('pf_lantern', 33, 35),
                      ('pf_lantern', 51, 35), ('pf_lantern', 4, 9), ('pf_lantern', 20, 9)):
         m.near(nm, x, y, on='.', r=3)
+    m.stamp('fw_boat', 38, 42); m.stamp('fw_boat', 49, 43)                    # boats frozen in at the jetty
+    for nm, x, y in (('fw_boat_over', 15, 39), ('fw_boat_over', 52, 39)): m.near(nm, x, y, on='.', r=3)
     for y in range(LANE[1] + 1, 46):                                         # the jetty out onto the ice (Akuwa pier planks)
         for i, x in enumerate((44, 45, 46)):
             m.tile(C('ak', (1516 if y == LANE[1] + 1 else 1524) + i), x, y, 1); m.cls[y, x] = 'D'
@@ -406,7 +431,7 @@ def frostwick(prev=None):
     for i, (x, y) in enumerate(((31, 16), (30, 19), (32, 29), (30, 33), (31, 40))):   # fishing holes in the brook ice
         if m.cls[y, x] == 'p' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0: m.L[1, y, x] = holet if i % 2 == 0 else hole
     for y, x in np.argwhere(m.cls == 'I'):                                   # ... and out on the lagoon
-        if vnoise(x, y, 43, 2.0) > 0.86 and m.L[1, y, x] == K.C('kf', 2476): m.L[1, y, x] = holet if (x + y) % 3 == 0 else hole
+        if vnoise(x, y, 43, 2.0) > 0.86 and m.L[1, y, x] in ICES: m.L[1, y, x] = holet if (x + y) % 3 == 0 else hole
     # rope walkways between the treehouse boles (high overhead), with lanterns at the lashings
     for x0, x1, y in ((8, 11, 7), (16, 18, 7)):
         for x in range(x0, x1 + 1):
@@ -418,7 +443,12 @@ def frostwick(prev=None):
         over_tiles(m, nm, x, y)
     rime_silk(m, ((3, 2), (9, 3), (17, 2), (23, 3), (35, 11), (45, 11)))
     m.scatter(6, seed=8)
-    drifts(m, 0.05, seed=570)
+    dress_ice(m, 0.30, seed=570)
+    for y, x in np.argwhere(m.cls == 'p'):                                   # the brook ice: cracks and drifts, not a stripe
+        if m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and vnoise(x, y, 91, 1.5) > 0.6:
+            m.L[1, y, x] = STAMPS['fw_crack%d' % ((x + y) % 3)]['layers'][1][0][0] if (x * 3 + y) % 2 else STAMPS['fw_drift%d' % ((x + y) % 3)]['layers'][1][0][0]
+    road_tracks(m, 0.07, seed=570)
+    drifts(m, 0.07, seed=570)
     if prev: m.preview(prev, 0.5)
     m.write(570, head(570, 'Frostwick', biome='village', bgm='Lerucean Town',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 21], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},
@@ -548,7 +578,11 @@ def rimewood(prev=None):
         hw = 1.2 + 1.3 * vnoise(x, 0, 10, 4.0) + (0.8 if 20 <= x <= 29 else 0)
         for y in range(int(c - hw), int(round(c + hw)) + 1):
             if 0 <= y < m.H and m.cls[y, x] in '.dT': m.cls[y, x] = 'o'
-    smooth(m, 'o', into='T', passes=1)
+    smooth(m, 'o', into='T', passes=3)
+    bank = np.zeros((m.H, m.W), bool)                                          # a ragged open bank, not trees to the brink
+    for y, x in np.argwhere(m.cls == 'o'): bank[max(0, y - 2):y + 3, max(0, x - 1):x + 2] = True
+    for y, x in np.argwhere(bank & (m.cls == 'T')):
+        if vnoise(x, y, 12, 2.5) > 0.42: m.cls[y, x] = '.'
     # the frozen Hoar Pond: an irregular pond (PF Frozen Pond, terrain tag 12) on the Hoar Brook, smoothed so the snow-bank
     # shoreline curves; a snowy islet in the middle holds the prize; ice blocks are the stoppers (slide_puzzle)
     for cx, cy, rx, ry, sd in ((22.5, 33.4, 6.2, 3.4, 19), (28.8, 34.8, 4.0, 2.6, 21), (17.6, 31.4, 2.8, 2.0, 23),
@@ -616,6 +650,7 @@ def rimewood(prev=None):
     m.L[2, 0:4, 22:30][m.L[2, 0:4, 22:30] == 0] = 0
     rime_silk(m, ((6, 8), (12, 20), (30, 30), (40, 20), (20, 44), (34, 50)))
     m.scatter(8, seed=6)
+    dress_ice(m, 0.25, seed=562); reed_beds(m, 45, seed=562); drifts(m, 0.08, seed=562)
     if prev: m.preview(prev, 0.5)
     m.write(562, head(562, 'The Rimewood', biome='forest', bgm='Natural Park',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 20], 'BattleBack': 'snow', 'Weather': ['Snow', 30]},
@@ -689,7 +724,7 @@ def slide_puzzle(m, cells, islet, item_at, n_rocks=(6, 9), tries=4000, seed=7):
 
 def ice_floor(m, cls):
     for y, x in np.argwhere(m.cls == cls):
-        m.L[0, y, x] = ICE; m.L[1, y, x] = 0
+        m.L[0, y, x] = ice_at(x, y); m.L[1, y, x] = 0
 
 
 # =================================================================================================== 563 Rimewood Glade
@@ -795,7 +830,7 @@ def route6(prev=None):
     for y, x in np.argwhere(m.cls == 'B'):
         if 28 <= y <= 32: m.L[1, y, x] = 10371 if (x + y) % 3 else 10551
     for y, x in np.argwhere(m.cls == 'w'):                        # drift-ice floes
-        if vnoise(x, y, 7, 3.0) > 0.55 and m.L[1, y, x] == 0: m.L[1, y, x] = C('kf', 2476)
+        if vnoise(x, y, 7, 3.0) > 0.55 and m.L[1, y, x] == 0: m.L[1, y, x] = ice_at(x, y)
     m.scatter(10, seed=7)
     if prev: m.preview(prev, 0.5)
     h = head(561, 'Route 6', biome='route', display_name='Route 6 - Gullcry Cliffs', bgm='Route 3',

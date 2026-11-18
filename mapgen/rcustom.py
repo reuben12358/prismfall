@@ -139,9 +139,9 @@ def main():
                 if c == '.': continue
                 tile = big.crop((tx * 32, ty * 32, tx * 32 + 32, ty * 32 + 32))
                 if tile.getbbox() is None: continue
-                z, p_, q_ = rdraw.CODE[c]
+                z, p_, q_ = rdraw.CODE[c][:3]
                 sheet.paste(tile, ((k % 8) * 32, (k // 8) * 32))
-                props[k] = (p_, q_, 0); lay[z][ty][tx] = k; k += 1
+                props[k] = (p_, q_, rdraw.CODE[c][3] if len(rdraw.CODE[c]) > 3 else 0); lay[z][ty][tx] = k; k += 1
         drawn[n] = (w, h, lay, door)
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))

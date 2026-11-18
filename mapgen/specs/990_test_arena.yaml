@@ -949,9 +949,69 @@ events:
           $player.heal_party'
     - []
 - type: npc
-  name: Healer
+  name: Field WILDFIRE
   at:
   - 2
+  - 8
+  sprite: trainer_CHANNELER
+  dir: down
+  commands:
+  - 'Test field: Wildfire (:WILDFIRE).'
+  - choices:
+    - Wild battle
+    - Trainer battle
+    - Cancel
+    cancel: 3
+    branches:
+    - - script: 'setBattleRule("field", :WILDFIRE)
+
+          setBattleRule("canLose")
+
+          WildBattle.start(:GROWLITHE, 20)
+
+          $player.heal_party'
+    - - script: 'setBattleRule("field", :WILDFIRE)
+
+          setBattleRule("canLose")
+
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
+
+          $player.heal_party'
+    - []
+- type: npc
+  name: Field MEADOW
+  at:
+  - 3
+  - 8
+  sprite: trainer_ENGINEER
+  dir: down
+  commands:
+  - 'Test field: Meadow (:MEADOW).'
+  - choices:
+    - Wild battle
+    - Trainer battle
+    - Cancel
+    cancel: 3
+    branches:
+    - - script: 'setBattleRule("field", :MEADOW)
+
+          setBattleRule("canLose")
+
+          WildBattle.start(:DEERLING, 20)
+
+          $player.heal_party'
+    - - script: 'setBattleRule("field", :MEADOW)
+
+          setBattleRule("canLose")
+
+          TrainerBattle.start(:YOUNGSTER, "Prismtest")
+
+          $player.heal_party'
+    - []
+- type: npc
+  name: Healer
+  at:
+  - 4
   - 8
   sprite: NPC 16
   dir: down

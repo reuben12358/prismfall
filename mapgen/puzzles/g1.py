@@ -24,13 +24,15 @@ FOYER = ["####################",
          "########.###########",
          "####################"]
 FOYER_PLANKS = {0: 3, 1: 8, 2: 13}          # V308 -> plank column (rows 6-7)
+FOYER_SOLID = [(14, 10), (15, 10), (15, 11), (14, 11), (1, 12), (2, 12), (1, 13), (2, 13), (16, 8), (16, 9), (16, 12), (1, 8), (16, 11),
+               (12, 12), (12, 13), (13, 13), (4, 8), (6, 13), (11, 13)]      # looms, vats, plants, silk bales, lantern feet (gen_gym1.py decor)
 FOYER_AT = dict(heddle=(3, 10), exit=(8, 14), stair=(13, 2), pim=(9, 12), guide=(11, 10), tamsin=(8, 9), loom=(14, 11),
-                item=(2, 4), card_b=(9, 4), card_s=(5, 12), portrait=(8, 3), start=(8, 13))
+                item=(2, 4), card_b=(8, 3), card_s=(12, 3), portrait=(3, 3), start=(8, 13))
 
 
 def foyer_model():
     cells, _ = grid_cells(130, FOYER, '#W')
-    solid = {FOYER_AT[k] for k in ('heddle', 'pim', 'guide', 'loom', 'item', 'card_b', 'card_s')} | {(14, 10), (15, 10), (15, 11)}
+    solid = {FOYER_AT[k] for k in ('heddle', 'pim', 'guide', 'loom', 'item', 'tamsin')} | set(FOYER_SOLID)
     cells -= {(130, x, y) for x, y in solid}
 
     def passable(c, v):
@@ -58,12 +60,12 @@ HALL_COLS = (3, 12, 21)
 HALL_GAPS = {'A': (range(5, 9), V_A, (3, 12, 21)), 'B': (range(11, 14), V_B, (None, 12, 21)), 'C': (range(16, 20), V_C, (3, 12, 21))}
 HALL_HEDDLES = {'Red': ((1, 21), (V_A, V_B), 'A and B'), 'Gold': ((9, 21), (V_B, V_C), 'B and C'), 'Green': ((23, 21), (V_C, V_A), 'C and A')}
 HALL_AT = dict(stair=(12, 1), entrance=(12, 22), start=(12, 21), pim=(15, 21), bram=(2, 3), orla=(22, 9), nell=(11, 15),
-               sign=(2, 10), juno=(10, 21), net=(17, 21))
+               sign=(2, 10), juno=(10, 21))
 
 
 def hall_model():
     cells, _ = grid_cells(131, HALL, '#Wo')
-    solid = {HALL_AT[k] for k in ('pim', 'bram', 'orla', 'nell', 'sign', 'juno', 'net')} | {h[0] for h in HALL_HEDDLES.values()}
+    solid = {HALL_AT[k] for k in ('pim', 'bram', 'orla', 'nell', 'sign', 'juno')} | {h[0] for h in HALL_HEDDLES.values()}
     cells -= {(131, x, y) for x, y in solid}
     idx = {V_A: 0, V_B: 1, V_C: 2}
 

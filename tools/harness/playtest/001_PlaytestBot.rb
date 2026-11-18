@@ -42,7 +42,7 @@ module PlayBot
     [:edge, 520, 26, 0, 8],        # north edge -> Route 2
     [:goto, 521, 61, 23],          # east edge -> the Glassed Orchard (arrival scene, the Veil)
     [:talk, 522, 24, 18],          # the Glassed Wurmple (Bleed field)
-    [:talk, 522, 11, 13],          # Biscuit
+    [:talk, 522, "Lost Skwovet"],  # Biscuit (he wanders)
     [:goto, 522, 4, 36],           # back through the Veil: Larch, Lecture One (S105)
     [:goto, 522, 0, 37],           # -> Route 2
     [:goto, 521, 57, 21],          # Juno's flags
@@ -436,6 +436,11 @@ module PlayBot
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]
+        if x.is_a?(String)             # an event by name (it may wander)
+          ev = $game_map.events.values.find { |e| e.name == x }
+          return stuck("no event named #{x}") if !ev
+          x, y = ev.x, ev.y
+        end
         return ctrl_step($game_player.x, $game_player.y) if !$game_player.moving? && boxed_in?($game_player.x, $game_player.y)
         case kind
         when :goto
@@ -744,11 +749,12 @@ module Game
           $game_variables[101] = $game_variables[102] = 1
           $player.has_pokedex = true
           Prismfall.record_starter(:MUDKIP, gen: 3, slot: 2)
+          PrismfallMaps.set_first_respawn
           pfm_set(:starter_picked); pfm_set(:juno_errand)
         end
         $player.name = PlayBot::NAME
         $player.has_running_shoes = true
-        $player.party = [Pokemon.new(:MUDKIP, 7)]
+        $player.party = [Pokemon.new(:MUDKIP, (PlayBot::SESSION == "ch1") ? 10 : 7)]
         $player.party.push(Pokemon.new(:STARLY, 7)) if PlayBot::SESSION == "checks"   # doubles need two
         $game_switches[103] = $game_switches[104] = true
         $game_map.need_refresh = true
