@@ -53,11 +53,11 @@ events:
   name: Accord barrier 1
   at: [3, 9]
   pages:
-  - graphic: {tile: 22960}
+  - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 22960}
+    graphic: {tile: 18119}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
@@ -74,11 +74,11 @@ events:
   name: Accord barrier 2
   at: [3, 10]
   pages:
-  - graphic: {tile: 22960}
+  - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 22960}
+    graphic: {tile: 18119}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'
@@ -95,11 +95,11 @@ events:
   name: Accord barrier 3
   at: [3, 11]
   pages:
-  - graphic: {tile: 22960}
+  - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
   - cond: {switch: CH1_ORCHARD_DONE}
-    graphic: {tile: 22960}
+    graphic: {tile: 18119}
     trigger: action
     commands:
     - 'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.'

@@ -346,7 +346,7 @@ Rejuvenation's asset rules forbid copying its maps.
   - Route 3 road on rows 30–31 over the stream walkway. HealingSpot is [120, 45, 24].
 - **Borderland A** (`layouts/rimewood.py` + `rimewood_interiors.py`, tileset 52 / interiors on 34): 560 (64×30), 570 Frostwick (60×48), 562 (48×56), 563 (34×30), 561 (30×60), 571–576.
   - Fixed: 560's west edge now joins **570** (offset 10/18), no longer 561.
-  - Edges: 570 N(20) ↔ 562 S(22); 562 N(12) ↔ 561 S(10); 561 N(12) ↔ 160; 560 E(12) ↔ 140 W(32).
+  - Edges: 570 N(20) ↔ 562 S(22); 562 N(12) ↔ 561 S(10); 561 N(12) ↔ 160; 560 E(12) ↔ 140 W(32); 560 W(10) ↔ 570 E(21) (see 2i).
   - 561's Gullcry mouths are now arches in south-facing outcrop faces at (5,22) and (5,37). The links are unchanged.
   - Old specs live in `layouts/old_560_route5_route6.yaml`, `old_561.yaml` and `specs/564_gullcry_caves.yaml`.
 - **Re-skins** (`layouts/reskin.py`, tileset 53): 520, 521, 524, 525.
@@ -368,6 +368,54 @@ Rejuvenation's asset rules forbid copying its maps.
   python3 -I build.py --strict
   ```
   Install tilesets 50–53 with `merge_tilesets.py`. The `PF Rejuv` sheet is 256×75840 px.
+
+## 2i. Fix round after the first engine playtest and preview review (2026-11-18)
+**Playtest blockers (all fixed; `build.py --strict` now fails on them):**
+- *Door tiles.* Rejuvenation-family door tiles are solid in their own tilesets, but our interior exits land the player ON
+  the door tile. `rcompose.door_tiles()` / `patch_doors()` set passage 0 on the top tile of every stamp's door cell
+  (shared wall pieces under it stay solid; `DOOR_FORCE` for sh_big's second door, which gets a "barred" sign through
+  `rkit.EXTRA_DOORS`). `rstamps.py` re-applies it. Tileset 33 has the same fix as `compose_tileset.DOOR33`.
+- *Arrival check.* `build.check_arrivals`: every Transfer Player of every built map must land on a passable tile that no
+  solid event or decor covers, and when it lands on a door the tile below must be free (ARRIVAL warnings).
+  `rkit.incoming(mid)` gives a layout the cells other specs warp onto; `reskin.py` keeps them bare. `scatter` never puts
+  decor on an event's four neighbours.
+- 100's north lane is Route 1's dirt (x 32-34) for 7 rows before the gravel street; 103 barrel, 123 loft arrival, 521
+  arrival, 145/154 arena front wall (`tile_edits`).
+
+**Crowns (the "box" bug).** `RMap.stamp` keeps the overhead-only cells of tree-like stamps (`TREELIKE`) free: masks
+`overm` (crown) / `bodym`; greenfill and the lattice grow under crowns, `blend=True` turns crown cells into forest,
+`put_stamps` no longer deletes lattice trunks under a crown. `free()` / `snap()` / `can_tree()` treat crowns as occupied
+for props, events and yard trees. Every ported piece was checked on a transparent board: none carries ground tiles.
+
+**Snow autotiles (tileset 52 slots 4 and 5, both were unused):** `PF Packed Snow` (Terajuma DirtSnow re-graded to trodden
+snow; class `d` on snow maps) and `PF Frozen Pond` (Reborn Still water snow frozen: 16-periodic ice bands, snow-bank rim,
+terrain tag 12, passable; class `p`). Class `e` is exposed earth (KristilineDirt) for doorsteps (`rimewood.apron`).
+Snow maps have no second ground tone any more. `rcompose.DERIVED` entries take `fn` / `tag` / `pas`.
+
+**`rdraw.py` (new): hand-drawn pieces on the 16-px grid, appended to the `pf` part by rcustom (CUSTOM_ROWS 300).**
+`wb_long / wb_long2 / wb_short / wb_inn / wb_smoke` whalebone longhouses (turf under snow, rib crosses, rib door arch),
+`wb_gate` briar-wrapped rib gate, `fw_walk_*` rope walkways, `fw_smoke_a/w`, `fw_stall_e/i`, `fw_rack`, `fw_sled`,
+`fw_skull`, `fw_wood`, `fw_brazier`, `fw_stone`, `fw_ban_e/i`, `fw_drift*`, `fw_hole(_t)`, `fw_pal_h/v`, `fw_peg`,
+`fw_reeds*`, `fw_crack*`, `fw_floe*`, `fw_icy*`, `fw_tracks*`, `fw_fall` (frozen waterfall 4x5), `fw_log_n/m/s`,
+`pf_anchor`. `python3 -I rdraw.py out.png` draws a contact sheet.
+
+**Maps.**
+- **570 Frostwick** rebuilt: Elowen treehouse terrace (NW, lip row 12) with rope walkways; the north band (lip 8) with
+  the frozen fall beside the stairs; the Hearth Elder (Exchange door) on the square with two stall rows and the Hearth
+  Stone; five longhouses; rib gate; palisade; jetty. Doors: loft (5,9), inn (19,21), Exchange (40,21), Border House
+  (49,21), PC (6,35), Smokehouse (55,35). The Hearth Road is rows 23-25, so **570 E offset is 21** (560 W 10).
+- **562**: the slide is the Hoar Pond (lobed blob, smoothed; islet with an Ice Stone). `slide_puzzle` searches stopper
+  layouts with `slide_solve` (Essentials ice rules) until the islet needs >= 4 slides and can be left again. The ravine
+  is irregular and the bridge is the fallen giant (`fw_log_*`).
+- **560** rebuilt as a raised causeway (embankment, three stair flights, jog), brine pans, frost-pans, pegs, reeds; sea
+  ice is dressed with decals (`dress_ice`), never filled. **520**: denser heath and sea rocks (`reskin.DENSE`).
+- **100**: anchor monument in the square, greenfill 2. `RMap.frontage()` (house infill along streets) exists but found no
+  free frontage: the plan is full. **120**: pale Goldenleaf decks with back rails, shrine stairs on the right lip row.
+
+**Open.** Ferrow and Briarwick still have a cross-shaped street plan and no new terrace tier; interiors 101-108,
+121-125, 523, 526, the Dovetail 109/110 and 522/548 are not re-skinned; `design/FIELD_DEFAULTS.yaml` did not exist;
+nothing from NEW_SOURCES.md is imported yet (carchagui chalets and Magiscarf snow-capped trees are the candidates; both
+are 16-px sheets with a baked checker background that needs keying). Gym and dungeon interiors belong to the puzzle engineer.
 
 ## 3. Regenerating
 ```

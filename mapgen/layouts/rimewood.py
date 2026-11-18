@@ -232,7 +232,7 @@ def route5(prev=None):
         if vnoise(x, y, 61, 2.0) > 0.62: m.L[1, y, x] = K.C('kf', 2476)
     m.scatter(16, seed=5)
     icy_faces(m, 0.6, seed=560)
-    dress_ice(m, 0.62, seed=560)
+    dress_ice(m, 0.75, seed=560)
     reed_beds(m, 130, seed=561)
     road_tracks(m, 0.10, seed=560)
     drifts(m, 0.16, seed=560)
@@ -697,7 +697,7 @@ def glade(prev=None):
     W, H = 34, 30
     m = snowmap(W, H, 563)
     m.cls[:, :] = 'T'
-    m.blob(18, 16, 14.5, 12.0, '.', seed=2, only='T', rough=0.9)
+    m.blob(16.5, 16, 13.5, 12.0, '.', seed=2, only='T', rough=0.9)
     m.lane([(0, 15), (6, 15), (8, 21), (14, 25), (24, 25), (28, 21)], 'd', 2.0, seed=3, only='.T')
     m.rect(0, 14, 3, 3, 'd', only='.T')
     m.blob(19, 14, 8.0, 5.0, 'i', seed=4, only='.', rough=0.55)                # the frozen pond (slide puzzle)
@@ -706,6 +706,7 @@ def glade(prev=None):
     for y in range(0, 9):
         for x in range(17, 23): m.cls[y, x] = 'f'
     m.rect(2, 22, 10, 6, 't', only='.')
+    m.blob(27, 10, 3.5, 2.2, 't', seed=8, only='.', rough=0.6); m.blob(7, 9, 2.5, 2.0, 'p', seed=9, only='.T', rough=0.3)   # break the symmetry
     E = [trainer((20, 24), 'POKEMONRANGER_M', 'Sigurd', "Isenmar ranger. Nobody finds this glade by accident.", "...So you cut your way in. Fair.", 'left'),
          item((19, 14), 'NEVERMELTICE'), item((30, 3), 'REVIVE', True),
          sign((28, 21), 'Snowveil Shrine', "THE SNOWVEIL SHRINE\nA pot of honey and a smoked eel sit side by side on the altar.\nNeither has been touched by the other."),
@@ -730,7 +731,8 @@ def glade(prev=None):
     for y in range(0, 9):                                                   # frozen silk over the fall
         for x in range(17, 23):
             if (x + y) % 2 == 0: m.L[2, y, x] = STAMPS['pf_p_strand_w']['layers'][1][0][0] or m.L[2, y, x]
-    m.scatter(10, seed=9)
+    m.scatter(14, seed=12)
+    drifts(m, 0.14, seed=564)
     if prev: m.preview(prev, 0.5)
     m.write(563, head(563, 'Rimewood Glade', biome='forest', parent=562, bgm='Natural Park',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 8, 20], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},

@@ -60,6 +60,11 @@ def reskin(d, preview=None):
     m.events = [e for e in m.events if e['type'] == 'door'] + list(d.get('events', []))
     for e in m.events:
         if e.get('type') == 'sign': e['post'] = False; m.tile(4847, e['at'][0], e['at'][1], 1)
+        for pg in e.get('pages', []) or []:                    # tile-graphic events still carried tileset-40 ids
+            g = pg.get('graphic') or {}
+            if isinstance(g.get('tile'), int) and g['tile'] >= 19000:
+                nm = 'pf_barricade' if 'barrier' in e.get('name', '').lower() else 'pf_p_silk'
+                g['tile'] = int(np.array(STAMPS[nm]['layers']).max())
     keep = np.zeros((H, W), bool)                              # events keep a free ring (trees may not wall them in)
     for x, y in [e['at'] for e in m.events] + K.incoming(mid):
         keep[max(0, y - 2):y + 3, max(0, x - 2):x + 3] = True

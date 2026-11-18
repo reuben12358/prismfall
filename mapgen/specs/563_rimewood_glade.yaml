@@ -28,7 +28,7 @@ events:
   at: [19, 14]
   item: NEVERMELTICE
 - type: item
-  at: [29, 10]
+  at: [28, 10]
   item: REVIVE
   hidden: true
 - type: sign

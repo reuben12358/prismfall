@@ -40,7 +40,7 @@ events:
   name: Crystal silk
   at: [41, 20]
   pages:
-  - graphic: {tile: 22672}
+  - graphic: {tile: 17753}
     commands:
     - if: pf_choice(:ch2_tamsin)
       then:

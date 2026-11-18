@@ -6,6 +6,31 @@ You can source or commission it all from this list.
 particle FX (`Plugins/Prismfall EBDX Bridge/001_Bridge_Config.rb`, `:fallback` + `:tone`).
 Add art in any order.
 
+## 0. Status (Revision 10): every field and stage has shipped art
+
+All 33 fields and their stages (50 rooms) have finished backdrops. They live in the kit folder
+**`graphics/EBDX/Battlebacks/`** (`battlebg/` rooms, `elements/` animated layers), which `tools/package.sh` copies to
+`Graphics/EBDX/Battlebacks/` in the dev kit. Real-engine stills: `docs/battle_captures/backdrops/contact_sheet.png`.
+
+- **Build:** `python3 -I art/battlebacks/build_backdrops.py [FIELD ...]` composes every room from the Rejuvenation /
+  Reborn / Desolation battlebacks plus procedural props, and writes the generated bridge file
+  `Plugins/Prismfall EBDX Bridge/006_Bridge_Art.rb` and the per-file table in `docs/CREDITS.md`.
+- **HD rooms:** each room also ships as `battlebg/<bd>_hd.png`, **864 x 693** (the room at EBDX's 2.25 scale). The
+  bridge draws it as a flat EBDX layer at 1/2.25 zoom, so the default camera shows it 1:1 (crisp pixel art). The
+  default camera shows HD x 158-670, y 150-534; the foe stands at HD (526, 342), the player at (261, 567).
+  `<bd>.png` (384 x 308) is the same picture downscaled (EBDX void colours, fallback).
+- **Animated layers:** per field, EBDX's own keys (scrolling strips, bubbles, lights, vacuum rings) under
+  `:art_extras`, and bridge layers under `:layers` (pulse / flicker / sway / rotate / bob / drift / sheet frames),
+  plus particle emitters (`:fx`, including `:puff` steam and smoke). Keys are documented in `001_Bridge_Config.rb`.
+- **Stage keys with art:** `field_flower_garden_2..5`, `field_grand_stage_2/_3`, `field_neon_grid_blackout`,
+  `field_desert_bloom`, `field_mindscape_nightmare`, `field_hollow_cathedral_consecrated`, `field_new_moon_abyss`,
+  `field_new_moon_lamplight`, `field_dragons_den_wyrmfire`, `field_wildfire_embers`. New fields: `field_wildfire`,
+  `field_meadow`. `field_ashen_waste` is now **Cinderglass** (Volcanic's layout quenched to black glass).
+  CAVE 2 and COLOSSEUM 2 reuse their stage-1 rooms. `field_frozen_lake_night` (aurora) is the only night variant.
+- **Not made:** vanilla (non-EBDX) `_bg/_base0/_base1/_message` sets.
+
+The sections below are the original brief, kept for anyone repainting a room by hand.
+
 ## 1. Formats
 
 ### EBDX (primary — this is what players see)
