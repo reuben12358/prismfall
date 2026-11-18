@@ -61,7 +61,7 @@ def run(F, x0, y0, x1, y1, col):
             err += dx; y0 += sy
 
 
-def build(size=(80, 80), fx0=16, fx1=42, eave=21, base=43, dep=(-4, -2), contents=True):
+def build(size=(80, 80), fx0=16, fx1=42, eave=21, base=43, dep=(-4, -2), contents=True, ncol=22):
     W, Hh = size
     cx = (fx0 + fx1) // 2
     peak = eave - (cx - fx0)          # 1:1 gable
@@ -96,7 +96,7 @@ def build(size=(80, 80), fx0=16, fx1=42, eave=21, base=43, dep=(-4, -2), content
                     a = 0.12
                 op[x, y] = mat.blend(c, tone, a) if c[3] else tone
     # keep the glass+contents to a small palette (no blend noise)
-    out = mat.reduce_colours(out, 22)
+    out = mat.reduce_colours(out, ncol)
     op = out.load()
     # glints: 45-degree streaks on the front panes and the lit side
     for (gx, gy, n) in [(fx0 + 6, eave + 2, 5), (fx0 + 8, eave + 2, 2), (cx + 7, eave + 2, 5), (cx + 9, eave + 2, 2),

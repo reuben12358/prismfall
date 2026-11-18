@@ -190,6 +190,28 @@ class RMap:
         st = STAMPS[name]; ox, oy = st['door']
         return self.stamp(name, dx - ox, dy - oy, link, dname or (name + ' door'), **kw)
 
+    def frontage(self, names, n=6, streets='gd', on='.', gap=1, seed=5, margin=1, apron='d'):
+        """Goldenleaf habit: pack houses shoulder to shoulder along the north side of the streets.  Scans street cells,
+        seats a house (door `gap`+1 rows above the street, a doorstep lane between) wherever its footprint plus a
+        1-cell margin is free and level; returns the houses placed."""
+        rng = random.Random(self.seed * 7 + seed); placed = []
+        cells = [(x, y) for y in range(2, self.H) for x in range(self.W) if self.cls[y, x] in streets and self.cls[y - 1, x] in on]
+        rng.shuffle(cells)
+        for x, y in cells:
+            if len(placed) >= n: break
+            nm = rng.choice(names); st = STAMPS[nm]; ox, oy = st['door']
+            x0, y0 = x - ox, y - 1 - gap - oy
+            if x0 - margin < 0 or y0 < 0 or x0 + st['w'] + margin > self.W: continue
+            if not self.free(x0 - margin, y0, st['w'] + 2 * margin, st['h'] + gap, on=on): continue
+            sub = self.ht[y0:y + 1, x0:x0 + st['w']]
+            if sub.min() != sub.max() or self.cliff[y0:y + 1, x0 - margin:x0 + st['w'] + margin].any(): continue
+            if y0 + st['h'] + 4 <= self.H and (self.ht[y0 - 4 if y0 >= 4 else 0:y0, x0:x0 + st['w']] > sub.max()).any(): continue
+            self.stamp(nm, x0, y0)
+            for yy in range(y - gap, y):
+                if self.cls[yy, x] in on: self.cls[yy, x] = apron
+            placed.append((nm, x0, y0))
+        return placed
+
     def near(self, name, x, y, on='.', r=3):
         """place a prop stamp at the free spot nearest (x, y) (within r); returns True if placed"""
         st = STAMPS[name]

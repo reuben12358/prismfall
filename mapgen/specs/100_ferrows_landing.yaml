@@ -1072,7 +1072,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 01, dir: down}
-  at: [31, 26]
+  at: [30, 26]
 - type: sign
   name: Town sign
   post: false

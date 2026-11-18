@@ -13,3 +13,6 @@ JUNO_v3_rotbloom	/home/claude/ref/games/reborn/Graphics/Battlers/shiinotic.png	c
 JUNO_v3_rotbloom	(hand-placed, juno_v3_rotbloom.py)	6 cream cap spots (2x2)	ASCII patches	Prismfall
 JUNO_happy (portrait)	/home/claude/ref/games/desolation/Graphics/Faces/08a.png	whole face (48-px art)	hair->auburn, irises->green, flower->leaf sprig, collar->knit; freckles + strap by hand	Desolation
 JUNO_happy (portrait)	/home/claude/ref/games/desolation/Graphics/Faces/08e.png	brow rows (y 9-14)	composited onto 08a	Desolation
+JUNO_v1_underglass_p2	/home/claude/ref/art/sprites_showdown/trainers/sonia.png	curled side ponytail (x 44-61, y 0-24), flipped	repainted to the auburn ramp, replaces the Backpacker ponytail	see sprites_showdown/credits.tsv
+JUNO_v3_rotbloom_p2	/home/claude/ref/art/sprites_showdown/trainers/lass.png	head, long hair, laughing face	replaces the Parasol Lady head (offset +5,0); hair repainted	official BW
+JUNO_happy_p2 (portrait)	/home/claude/ref/games/desolation/Graphics/Faces/13.png	teeth + lip line of the open smile	skin dropped, composited over 08a's mouth	Desolation

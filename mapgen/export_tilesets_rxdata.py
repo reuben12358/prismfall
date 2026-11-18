@@ -130,6 +130,12 @@ def check_maps(tilesets):
             warns.append('%s is not a Marshal file (being rebuilt?)' % os.path.basename(p))
             continue
         ts = tilesets.get(m.tileset_id)
+        for ev in (m.events.values() if ts is not None else []):   # the engine raises on these when the map is drawn
+            for pg in ev.pages:
+                if pg.graphic.tile_id >= ts.passages.xsize:
+                    warns.append('%s event %d "%s": tile graphic %d is beyond tileset %d (%d ids)' % (
+                        os.path.basename(p), ev.id, ev.name, pg.graphic.tile_id, m.tileset_id, ts.passages.xsize))
+                    break
         if ts is not None and int(m.data.data.max()) >= ts.passages.xsize:
             warns.append('%s uses tile %d but tileset %d has %d ids (rebuild maps and tileset together)'
                          % (os.path.basename(p), int(m.data.data.max()), m.tileset_id, ts.passages.xsize))

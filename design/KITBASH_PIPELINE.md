@@ -65,3 +65,17 @@ curly hair `shauna`, `burgh`, `lenora`, `hapu`.
 - Grafting hair from another head needs a matching head angle and a hand-fixed join; the Shauna curl graft floated and was dropped.
 - A recipe that only swaps one prop and repaints (V3) is still close to a recolour. Swap the head or hair as well.
 - The portrait recipe is a repaint of one face set. A real kitbash needs a second hair donor at 48-px density, which we lack.
+
+## 6. Pass 2 (2026-11-18)
+
+Sheet: `art/previews/10_juno_kitbash_pass2.png`. Scripts: `juno_v1_p2.py`, `juno_v2_p2.py`, `juno_v3_p2.py`, `juno_portrait_p2.py`,
+`sheet10.py`. Exports carry `_p2`; pass-1 files are untouched.
+
+- **Hair grafts work when the donor is flipped to match the head angle and the figure is drawn on top**: Sonia's ponytail on the
+  Backpacker head, the Lass's whole head on the Parasol Lady body (offset found by lining up the eyes).
+- **Translucency:** where a sheer layer crosses hair, blend 50% and re-run `reduce_colours`. A hand-built polygon veil looked like a
+  stiff cone and was dropped for two lengths of the donor tail.
+- **Expression lifts:** copy only teeth and lip-line colours from another face set; drop its skin.
+- **Slot size:** EBDX draws trainers at `TRAINER_SPRITE_SCALE = 1`, anchored bottom-centre, with an optional per-trainer `SpriteScale`
+  in `PBS/EBDX/trainers.txt`. A 160x160 front therefore shows 25% larger than the 128x128 stock fronts and keeps its feet on the
+  base. Read from code only: no engine screenshot was taken, because the capture rig was running another job.

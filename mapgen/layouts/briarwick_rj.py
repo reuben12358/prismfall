@@ -19,6 +19,7 @@ DECK = {k: C('sh', v) for k, v in dict(TL=488, T=489, TR=490, L=496, C=497, R=49
                                         legL=523, leg=524, legR=525).items()}
 TREES = ['tr_oak', 'tr_oak2', 'tr_pine', 'tr_pine2', 'tr_oak2']
 GARL = None
+PALE = 3402                                # Goldenleaf pale deck plank (gl part: composite id = source id)
 
 
 def sx(y):
@@ -38,7 +39,9 @@ def deck(m, x0, y0, w, h, stairs=None):
         for x in range(x0, x0 + w):
             k = ('T' if y == y0 else 'B' if y == y0 + h - 1 else '') + ('L' if x == x0 else 'R' if x == x0 + w - 1 else '')
             k = {'': 'C', 'T': 'T', 'B': 'B', 'L': 'L', 'R': 'R'}.get(k, k)
-            m.tile(DECK[k], x, y, 1); m.cls[y, x] = 'D'
+            m.tile(PALE, x, y, 1); m.cls[y, x] = 'D'               # Goldenleaf's pale porch planks: lighter than Sheridan's
+    if all(m.inb(x, y0 - 1) and m.cls[y0 - 1, x] in '.t' and not m.taken[y0 - 1, x] for x in range(x0, x0 + w)):
+        m.fence(x0, x0 + w - 1, y0 - 1)                              # a back rail
     for x in range(x0, x0 + w):
         if stairs is not None and x in (stairs, stairs + 1): continue
         m.tile(DECK['legL' if x == x0 else 'legR' if x == x0 + w - 1 else 'leg'], x, y0 + h, 1); m.cls[y0 + h, x] = 'B'
@@ -50,7 +53,7 @@ def deck(m, x0, y0, w, h, stairs=None):
 def walkway(m, x0, x1, y):
     """2-wide plank walkway (rows y, y+1) between x0..x1, open at both ends, stilts below where not water"""
     for x in range(x0, x1 + 1):
-        m.tile(DECK['T'], x, y, 1); m.tile(DECK['B'], x, y + 1, 1); m.cls[y, x] = m.cls[y + 1, x] = 'D'
+        m.tile(PALE, x, y, 1); m.tile(PALE, x, y + 1, 1); m.cls[y, x] = m.cls[y + 1, x] = 'D'
         m.taken[y, x] = m.taken[y + 1, x] = True
 
 

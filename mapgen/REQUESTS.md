@@ -104,3 +104,7 @@ New Game start tile is boxed in. You may call it at the end of build.py; it is i
 9. `mapgen/ruby/006_MapStory.rb` `pfm_quest` formats "QUEST LOG: "{1}" — {2}" with an em dash: shows a box on every quest.
    **Items 4 and 9 done at display time:** `Plugins/~Prismfall Base Fixes/002_Font_Glyphs.rb` draws — as "--", – as "-",
    ₽ as "$" and arrows as ->, <-, ^, v in every text (Bitmap#draw_text / text_size). Keep writing "—" freely.
+10. **Crash (2026-11-18): event tile graphics beyond the tileset.** Map 521 events 8-10 "Accord barrier" use tile 22960 and
+    map 525 event 4 "Crystal silk" tile 22672 (tileset-40 ids), but both maps are now on tileset 53 (20144 ids). Essentials
+    raises "Event's graphic is an out-of-range tile" as soon as Route 2 is drawn (also from Route 1, which connects to it).
+    `export_tilesets_rxdata.py` now warns about these. The playtest bot blanks them in its test copy only.

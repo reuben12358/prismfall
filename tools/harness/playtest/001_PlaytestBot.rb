@@ -760,6 +760,19 @@ module Game
   end
 end
 
+# Test copy only: an event whose tile graphic is beyond its tileset stops the engine ("out-of-range tile", maps 521 and
+# 525 after the tileset-53 rebuild, reported in mapgen/REQUESTS.md item 10). Draw nothing there and log it once.
+class Game_Character
+  alias playbot_screen_z screen_z unless method_defined?(:playbot_screen_z)
+  def screen_z(height = 0)
+    if @tile_id.to_i > 0 && self.map && @tile_id >= self.map.priorities.xsize
+      PlayBot.log("MAP BUG: map #{self.map.map_id} event #{(@id rescue '?')} tile graphic #{@tile_id} is beyond the tileset; blanked")
+      @tile_id = 0
+    end
+    return playbot_screen_z(height)
+  end
+end
+
 # AI plays the player's side (the Dovetail prologue never needs a human in battle)
 module BattleCreationHelperMethods
   class << self

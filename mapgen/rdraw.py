@@ -599,6 +599,30 @@ def tracks(kind):
     return im
 
 
+IRON = [(40, 44, 56, 255), (74, 82, 98, 255), (112, 122, 140, 255), (160, 170, 186, 255)]
+
+
+def anchor_monument():
+    """Ferrow's harbour monument, 3x4: the Dovetail line's first anchor, tarred iron gone green at the flukes, set upright
+    on a stepped sandstone plinth with the bronze Accord plaque; rope coiled round the shank, gull droppings and all."""
+    im, d = canvas(3, 4)
+    SAND = [(120, 100, 76, 255), (176, 152, 112, 255), (212, 190, 146, 255), (236, 220, 180, 255)]
+    for (x0, x1, y0, y1) in ((2, 45, 50, 63), (7, 40, 40, 51)):                  # two plinth steps
+        d.rectangle([x0, y0, x1, y1], fill=SAND[1], outline=OUT)
+        d.line([x0 + 1, y0 + 1, x1 - 1, y0 + 1], fill=SAND[3]); d.line([x0 + 1, y0 + 2, x1 - 1, y0 + 2], fill=SAND[2])
+        for x in range(x0 + 6, x1, 9): d.line([x, y0 + 3, x, y1 - 1], fill=SAND[0])
+    d.rectangle([17, 54, 30, 60], fill=GOLD[0], outline=OUT); d.line([19, 56, 28, 56], fill=GOLD[2]); d.line([19, 58, 26, 58], fill=GOLD[1])
+    d.rectangle([22, 8, 25, 41], fill=IRON[1], outline=IRON[0]); d.line([23, 9, 23, 40], fill=IRON[3])      # shank
+    d.ellipse([19, 1, 28, 9], outline=IRON[0], width=2); d.ellipse([21, 3, 26, 7], outline=IRON[2])           # ring
+    d.rectangle([12, 11, 35, 13], fill=IRON[1], outline=IRON[0]); d.line([13, 12, 34, 12], fill=IRON[3])     # stock
+    d.arc([6, 16, 41, 42], 0, 180, fill=IRON[0], width=4); d.arc([7, 17, 40, 41], 10, 170, fill=IRON[2], width=1)   # arms
+    for fx, s_ in ((6, 1), (41, -1)):                                                                       # flukes, verdigris
+        d.polygon([(fx, 30), (fx - 4 * s_, 22), (fx + 5 * s_, 25)], fill=(74, 130, 120, 255), outline=IRON[0])
+    for y in range(18, 34, 3): d.line([21, y, 26, y + 2], fill=(196, 172, 120, 255)); d.line([21, y + 1, 26, y + 3], fill=(128, 104, 70, 255))
+    P(im, 14, 10, SNOW[3]); P(im, 15, 10, SNOW[3]); P(im, 31, 10, SNOW[2])
+    return im, ['OOO', 'OOO', 'WWW', 'WWW']
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -632,6 +656,7 @@ def pieces():
     for i in range(2): out['fw_floe%d' % i] = (floe(i + 5), ['F'], None)
     for i in range(3): out['fw_icy%d' % i] = (face_icicles(i + 11), ['O'], None)
     for i in range(2): out['fw_tracks%d' % i] = (tracks(i), ['F'], None)
+    im, c = anchor_monument(); out['pf_anchor'] = (im, c, None)
     out['fw_pal_v'] = (palisade('v'), ['W'], None)
     im, c = frozen_fall(4, 5); out['fw_fall'] = (im, c, None)
     for k in 'nms': out['fw_log_' + k] = (fallen_log(k), ['FF'], None)

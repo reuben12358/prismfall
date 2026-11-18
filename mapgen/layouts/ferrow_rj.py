@@ -84,6 +84,7 @@ def build(preview=None):
     m.stairs(48, 37, w=3, kit_rows=3)
     for y in range(SHORE, H):
         for x in range(PIER[0], PIER[1] + 1): m.cls[y, x] = 'w'
+    m.stamp('pf_anchor', 33, 25)                                       # the square's landmark: the old anchor monument
     E = []
     P = lambda n, at, **kw: E.append(SE.place(100, n, at, **kw))
     # ---------------------------------------------------------------- buildings (doors on the streets)
@@ -102,6 +103,8 @@ def build(preview=None):
     for k, (dx, dy) in d.items():
         for yy in (dy + 1, dy + 2):
             if m.cls[yy, dx] in '.tT' and m.ht[yy, dx] == m.ht[dy, dx] and (yy + 1 >= H or m.ht[yy + 1, dx] == m.ht[dy, dx]): m.cls[yy, dx] = 'd'
+    more = m.frontage(['gl_shed', 'gl_cot', 'gl_flat1', 'gl_flat2', 'gl_shed'], n=7, seed=3)   # shoulder-to-shoulder infill
+    print('  infill houses', more)
     # ---------------------------------------------------------------- events (seated by name)
     for i, x in enumerate(range(PIER[0], PIER[1] + 1)): P('Customs gate %d' % (i + 1), (x, SHORE - 1))
     for i, x in enumerate(range(PIER[0], PIER[1] + 1)): P("Edda's last call %d" % (i + 1), (x, SHORE + 3))
@@ -126,7 +129,7 @@ def build(preview=None):
     def S(n, ax, ay, on='.gds', r=8):
         e = SE.place(100, n, m.snap(ax, ay, on, r=r)); E.append(e); m.taken[e['at'][1], e['at'][0]] = True
     S('Girl with Wingull', 27, 47, 's', 4); S('Wingull (with girl)', 28, 47, 's', 3); S('Lamplighter', 30, 43, 's', 3)
-    S('Harbor Crier', 31, 26); S('Town sign', 37, 2, '.'); S('Lane sign', 31, 34); S('Notice board', 27, 24)
+    S('Harbor Crier', 30, 26); S('Town sign', 37, 2, '.'); S('Lane sign', 31, 34); S('Notice board', 27, 24)
     S('Festival poster', 36, 24); S('Fish barrels', 47, 44, 's')
     town = [('Rope-skipping Girl 1', 29, 27), ('Rope-skipping Girl 2', 30, 27), ('Kelp-drier', 27, 42), ('Old Sailor', 36, 44),
             ('Meridian Linesman', 29, 47), ('Fishwife', 48, 45), ('Woman hanging washing', 14, 37), ('Boy with toy boat', 31, 47),
@@ -153,10 +156,12 @@ def build(preview=None):
         if m.free(x, y - 1, 1, 2, on='.'): m.stamp('gl_lamp', x, y - 1)
     dress_beach(m)
     dress_square(m)
+    for x, y in ((31, 27), (37, 27), (31, 29), (37, 29)):      # tubs and benches round the monument
+        if m.free(x, y, 1, 1, on='g'): m.tile(m.rng.choice(m.decor['flowers']), x, y, 1)
     m.fence(9, 18, 31, gaps=((11, 11),))                       # the inn's front garden
     m.fence(45, 51, 31, gaps=((48, 48),)); m.fence(54, 61, 31, gaps=((58, 58),))
     m.beds()
-    m.greenfill(3)
+    m.greenfill(2)
     # ---------------------------------------------------------------- paint
     m.paint()
     pier_paint(m)

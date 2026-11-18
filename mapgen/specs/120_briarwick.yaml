@@ -43,6 +43,11 @@ events:
   gfx: ['', 0, 2]
   name: Mart door
   link: BW_MART
+- type: sign
+  name: Locked door
+  at: [58, 42]
+  post: false
+  text: The door is barred from the inside.
 - type: door
   at: [63, 42]
   gfx: ['', 0, 2]

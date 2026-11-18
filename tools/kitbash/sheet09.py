@@ -27,6 +27,8 @@ FINAL = [
 ]
 REFS = [('sd:bianca', 'Bianca (official BW)'), ('rejuv:139', 'Angie (Rejuvenation)'), ('reborn:093', 'Julia (Reborn)')]
 
+CELL = 80
+PNOTES = ['base: Desolation Faces/08a, brows from 08e;', 'repaint: auburn hair, green irises, leaf sprig,', 'knit collar + harness strap; hand: 6 freckles']
 BG = (40, 42, 50, 255)
 PANEL = (58, 61, 72, 255)
 STAGE = (152, 160, 172, 255)
@@ -113,7 +115,7 @@ def main():
         for spec, part in donors:
             dn = donor_img(spec)
             k = 1
-            cell = max(dn.size[0] + 8, 80)
+            cell = max(dn.size[0] + 8, CELL)
             s = stage(dn, k, STAGE, cell, 92)
             sh.alpha_composite(s, (dx, dy))
             src = spec.replace('B:', 'Reborn battler:').replace('I:', 'Reborn icon:').replace('sd:', 'BW/showdown:')
@@ -148,9 +150,8 @@ def main():
     sh.alpha_composite(b, (rx + 420, py + 40))
     wrap(d, '[portrait: JUNO, happy] "Did you know larches drop every needle each winter? They look dead. They are NOT!"',
          (rx + 420, py + 172), 360, f11, TXT)
-    d.text((rx + 420, py + 230), 'base: Desolation Faces/08a, brows from 08e;', font=f10, fill=DIM)
-    d.text((rx + 420, py + 242), 'repaint: auburn hair, green irises, leaf sprig,', font=f10, fill=DIM)
-    d.text((rx + 420, py + 254), 'knit collar + harness strap; hand: 6 freckles', font=f10, fill=DIM)
+    for i, t in enumerate(PNOTES):
+        d.text((rx + 420, py + 230 + 12 * i), t, font=f10, fill=DIM)
     sh.save(OUTSHEET)
     print(OUTSHEET, sh.size)
 

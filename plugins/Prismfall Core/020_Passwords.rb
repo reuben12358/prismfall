@@ -44,6 +44,10 @@ module Prismfall
                          :description => "The Ties page shows numbers next to each tier." },
       "colorless"   => { :id => :COLORLESS, :name => "Colorless",
                          :description => "Every Resonance swing is halved. Harmony and Ruin are both harder to reach." },
+      # GYM_PUZZLES section 4 item 12: apprentices offer "Skip this room" (Reborn's Puzzle Skip). Mirrors Game Switch 301.
+      "puzzleskip"  => { :id => :PUZZLE_SKIP, :name => "Puzzle Skip", :aliases => ["skippuzzles"],
+                         :description => "Gym apprentices can solve a puzzle room for you.",
+                         :apply => proc { $game_switches[301] = true if $game_switches } },
       "secondferry" => { :id => :SECOND_FERRY, :name => "The Second Ferry",
                          :description => "New Game+: carry over what the Ledger remembers.",
                          :requires => proc { !Prismfall::Ledger.endings_seen.empty? },
