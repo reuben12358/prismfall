@@ -1,12 +1,14 @@
-# Prismfall Field Effects — DSL & API Reference (v1.0)
+# Prismfall Field Effects — DSL & API Reference (v1.1)
 
 Plugin: `plugins/Prismfall Field Effects/` (Essentials v21.1). Core engine = files `001_`–`009_` (009 = Field Notes
 encyclopedia: records each field the player battles on in save data `:prismfall_field_notes`; pause-menu entry "Field Notes").
 **Each field lives in its own file `1xx_Field_<Name>.rb` that only calls `FieldEffects.register`.**
 Never edit the core files to add a field. Validate with `ruby tools/validate_fields.rb` (must print 0 errors).
 
-Implemented reference fields (copy their style): `101_Field_Silkwood.rb` … `111_Field_Bleed.rb`.
-File numbers already used: 101–111. Pick a free number ≥ 112 for new fields (gym fields 112–129, story fields 130+).
+Implemented fields: 33 (`101_Field_Silkwood.rb` … `138_Field_Meadow.rb`; the 31 SPINE roster fields plus `:WILDFIRE` and
+`:MEADOW`, listed in `FieldEffects::EXTRA_FIELDS`). File numbers used: 101–118, 120–125, 130–138. Next free: 139.
+`010_` = v1.1 extensions, `011_` = generated map defaults (do not edit; see §12.6). **v1.1 additions are in §12.**
+Design background: `design/FIELD_RESEARCH.md`.
 
 ---------------------------------------------------------------------------------------------------
 ## 1. Integration contract (LOCKED, from SPINE)
@@ -374,7 +376,65 @@ moves with `:move_stat_boosts`. Use `:ai_score` for anything else.
 ## 11. Checklist for a new field file
 1. `1NN_Field_<Name>.rb`, only `FieldEffects.register(:ID, {...})` (ID from the SPINE roster).
 2. `:name`, `:backdrop` (`"field_<snake_name>"`), `:intro_message`, `:description`.
-3. 10–25 interactions; thematic transitions listed in SPINE; a `:seed` entry; `:nature_power`, `:camouflage`.
-4. Messages: short, evocative, one sentence. Only on notable boosts (not every 1.2× tweak).
+3. 15–30 interactions; a `:family`; a `:seed` entry for the family's seed (a boost with a trade-off); `:notes` for
+   Field Notes; `:nature_power`, `:camouflage`. Every transition must lead to a field as interesting as this one.
+4. Messages: short, one sentence, only on notable boosts. **Voice rule:** the Pokémon is the subject and it uses the
+   place ("{1} rode the updraft!"). Never write Pokémon as victims of the scenery (no choking, gagging, suffocating).
 5. `ruby -c` the file, then `ruby tools/validate_fields.rb` → 0 errors.
 6. Add a section to `design/FIELDS.md` (player-facing: boosts, nerfs, transitions, seed).
+
+---------------------------------------------------------------------------------------------------
+## 12. v1.1 additions (Revision 10)
+Everything in §1–§11 still works unchanged. New keys are optional.
+
+### 12.1 New top-level keys
+| Key | Format | Effect |
+|---|---|---|
+| `:family` | `:elemental` `:telluric` `:synthetic` `:magical` | Reborn-style field family. The family's seed (`FAMILY_SEEDS`) is the one the field should define in `:seed`. Shown in Field Notes |
+| `:activate_abilities` | [ability IDs] from `ACTIVATABLE_ABILITIES` | the ability works as if its condition were met: pinch abilities (Blaze, Overgrow, Torrent, Swarm: ×1.5 at any HP), speed abilities (Swift Swim, Chlorophyll, Sand Rush, Slush Rush, Surge Surfer ×2; Quick Feet ×1.5), Sand Veil / Snow Cloak (evasion ×1.25), Sand Force, Solar Power, Flower Gift, Toxic Boost, Flare Boost, Guts, Marvel Scale, Grass Pelt, Rain Dish, Ice Body, Dry Skin (heal), Hydration, Leaf Guard |
+| `:status_immunity` | rules `{ :battlers => matcher, :status => [statuses] (default all), :message }` | matching battlers can't get those statuses (self-inflicted Rest excepted). `{1}` battler |
+| `:effect_durations` | `{ MOVE => turns }` or `{ MOVE => [turns, "message"] }`; moves from `DURATION_MOVES` | the move's effect (screens, Tailwind, Safeguard, Mist, Lucky Chant, Trick Room, weather and terrain moves...) lasts that many turns when set on this field |
+
+All three can be borrowed (§8).
+
+### 12.2 New matcher and rule keys
+* Move matcher: `:in_weather => [ids]`, `:on_terrain => [ids]` (the weather / terrain currently up).
+* Battler matcher: `:hp_below => fraction`, `:hp_above => fraction`, `:in_weather`, `:on_terrain`.
+* `:effectiveness_mods` rules accept `:user` and `:target` battler matchers.
+* Battler-effect rules (§4.6, seeds): `:add_type => TYPE` adds a third type (default message "{1} became part {2} type!").
+  New named `:effects`: `:tailwind :safeguard :mist :lucky_chant :reflect :light_screen :wish :taunt :stealth_rock
+  :spikes :toxic_spikes :sticky_web` (side effects go to the battler's own side; hazards and `:taunt` are for
+  trade-off seeds and hooks).
+* Transitions: `:boost => false` switches off the transform strike (§12.3) for that rule; `:boost => true` switches it on for a stage rule.
+
+### 12.3 Transform strike
+The move that completes a transition to another field (or a stage rule marked `:boost => true`) gets ×1.3 power (`TRANSFORM_BOOST`), as in Reborn.
+The AI knows this (§12.5).
+
+### 12.4 Natural type and field memory
+* A field's `:camouflage` type is also its **natural type**: Mimicry takes it on entry, and Terrain Pulse becomes
+  that type with doubled power for grounded users when no terrain is up.
+* `FieldEffects.previous_field(battle, default = nil)` — the field before the current one. Used by fields that
+  "return" (Rainbow fading, Inverse flipping back). `FieldEffects.base_field(battle)` — the field the map gave.
+
+### 12.5 AI
+`FieldEffects::AIField` scores every field the battle could change to: it compares how well each side's Pokémon and
+moves fit the current and the target field, and adds −25…+25 to a move that would advance or complete a transition.
+So Wardens push toward fields that suit them and avoid breaking a field they built for.
+
+### 12.6 Every battle has a field (default resolution)
+`FieldEffects.default_field_for_battle(battle)`; the first answer wins:
+1. `setBattleRule("field", X)` (`"none"` = no field).
+2. Diving → `DIVING_FIELD` (`:UNDERWATER`).
+3. Trainer battles: `TRAINER_FIELDS[[trainer_type, version]]` or `[trainer_type]` (tutorial and special fights; `:NONE` = no field).
+4. Wild battles: `ENCOUNTER_FIELDS` by encounter type (`:water`/`:fishing` → `:WATER_SURFACE`, `:contest` → `:MEADOW`)
+   unless the map's field is in `ENCOUNTER_KEEP_FIELDS`; then `MAP_WILD_FIELDS[map_id]`; then, on maps with no field,
+   `ENCOUNTER_FALLBACK_FIELDS` (`:cave` → `:CAVE`).
+5. Surfing (trainer battles on the water) → `SURFING_FIELD` unless the map field is in the `:water` keep list.
+6. `MAP_FIELDS[map_id]` (written by mapgen), else `MAP_DEFAULT_FIELDS[map_id]`. `:NONE` = deliberately field-free.
+7. `ENVIRONMENT_FIELDS[battle.environment]`, else no field.
+
+The data lives in `design/FIELD_DEFAULTS.yaml` (all 424 maps, encounter rules, kingdom and borderland fallbacks,
+exceptions). `ruby tools/field_defaults_to_rb.rb` turns it into `011_FieldEffects_MapDefaults.rb`
+(`MAP_DEFAULT_FIELDS`, `MAP_DEFAULT_WILD_FIELDS`, `TRAINER_FIELDS`); `--check` reports if that file is stale.
+mapgen's `MAP_FIELDS` / `MAP_WILD_FIELDS` always win over the generated defaults.

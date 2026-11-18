@@ -380,6 +380,7 @@ module PlayBot
     def plan
       return ROUTE1_PLAN if SESSION == "route1"
       return CHECKS_PLAN if SESSION == "checks"
+      return PLAN[PLAN.index { |st| st[1] == 520 }..] if SESSION == "ch1"   # resume at Route 1, state as after K1
       return PLAN
     end
 
@@ -729,15 +730,22 @@ module Game
     alias playbot_start_new start_new unless method_defined?(:playbot_start_new)
     def start_new
       PlayBot.log("New Game (session #{PlayBot::SESSION}); plugins: #{PluginManager.plugins.inspect}")
-      PlayBot.recording = (PlayBot::SESSION == "play")
-      if ["route1", "checks"].include?(PlayBot::SESSION)   # dev shortcut: begin on Route 1's south edge, as after K1
+      PlayBot.recording = ["play", "ch1"].include?(PlayBot::SESSION)
+      if ["route1", "checks", "ch1"].include?(PlayBot::SESSION)   # dev shortcut: begin on Route 1's south edge, as after K1
         PrismfallMaps.define_singleton_method(:apply_start_position) do
           $data_system.start_map_id, $data_system.start_x, $data_system.start_y = 520, 16, 67
           true
         end
       end
       playbot_start_new
-      if ["route1", "checks"].include?(PlayBot::SESSION)
+      if ["route1", "checks", "ch1"].include?(PlayBot::SESSION)
+        if PlayBot::SESSION == "ch1"   # what the prologue run had set by the time it reached Route 1
+          [101, 102, 161].each { |i| $game_switches[i] = true }
+          $game_variables[101] = $game_variables[102] = 1
+          $player.has_pokedex = true
+          Prismfall.record_starter(:MUDKIP, gen: 3, slot: 2)
+          pfm_set(:starter_picked); pfm_set(:juno_errand)
+        end
         $player.name = PlayBot::NAME
         $player.has_running_shoes = true
         $player.party = [Pokemon.new(:MUDKIP, 7)]

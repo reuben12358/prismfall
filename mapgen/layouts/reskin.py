@@ -66,7 +66,8 @@ def reskin(d, preview=None):
     m.taken |= keep
     import random
     rng = random.Random(mid)
-    for _ in range(W * H // 90):                               # yard trees and copses in the open
+    DENSE = mid in (520,)                                      # coastal heath: gorse, copses and sea rocks, not lawn
+    for _ in range(W * H // (45 if DENSE else 90)):            # yard trees and copses in the open
         m.trees(rng.randrange(W), rng.randrange(H), rng.choice((1, 2, 3)), ['tr_oak', 'tr_oak2', 'tr_pine', 'tr_pine2'], r=3,
                 seed=rng.randrange(999))
     if d.get('field') == 'SILKWOOD':                           # the Gossamer identity: webs and silk strands at the woods' edge
@@ -80,11 +81,26 @@ def reskin(d, preview=None):
         if m.inb(x, y): m.taken[y, x] = True
     m.paint()
     for y, x in deck: m.L[1, y, x] = C('sh', 497)
-    m.scatter(8, seed=mid)
+    m.scatter(26 if DENSE else 8, seed=mid)
+    if DENSE: sea_rocks(m, mid)
     if preview: m.preview(preview, 0.5)
     h = {k: v for k, v in d.items() if k not in ('map', 'heights', 'stamps', 'tiles', 'tileblocks', 'events', 'palette')}
     h['_file'] = SPECS[mid] if len(load(mid)[0]) == 1 else '%d_reskin.yaml' % mid
     return m, h
+
+
+def sea_rocks(m, seed):
+    """Akuwa's offshore rocks (2x2) and single stones on the sea: the water stays open, the surface is not blank"""
+    import random
+    rng = random.Random(seed)
+    small = [[[C('ak', 1644), C('ak', 1645)], [C('ak', 1652), C('ak', 1653)]], [[C('ak', 1646), C('ak', 1647)], [C('ak', 1654), C('ak', 1655)]]]
+    water = m.cls == 'w'
+    for _ in range(int(water.sum()) // 9):
+        x, y = rng.randrange(m.W - 1), rng.randrange(m.H - 1)
+        if water[y:y + 2, x:x + 2].all() and (m.L[2, y:y + 2, x:x + 2] == 0).all() and (m.L[1, y:y + 2, x:x + 2] == 0).all():
+            r = rng.choice(small)
+            for j in range(2):
+                for i in range(2): m.L[2, y + j, x + i] = r[j][i]
 
 
 def main():

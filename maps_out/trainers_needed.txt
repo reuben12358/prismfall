@@ -1,6 +1,3 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-560	:BIRDKEEPER, "Ailsa"
-560	:HIKER, "Torvald"
-560	:LASS, "Tilde"
-560	:PICNICKER, "Sela"
-560	:SAILOR, "Haakon"
+520	:LASS, "Dory"
+520	:YOUNGSTER, "Pim"

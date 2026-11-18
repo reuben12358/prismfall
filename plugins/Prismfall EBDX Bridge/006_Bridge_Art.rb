@@ -13,7 +13,7 @@ module PrismfallEBDX
     # >>> ASHEN_WASTE
     :ASHEN_WASTE => {
       :art_extras => {
-        "img001" => { :bitmap => "decor006", :scrolling => true, :speed => 2, :direction => -1, :oy => 0, :z => 3, :flat => true, :opacity => 110 },
+        "img001" => { :bitmap => "decor006", :scrolling => true, :speed => 2, :direction => -1, :oy => 0, :z => 3, :flat => true, :opacity => 120 },
         "img003" => {
           :bitmap => "pf_ashen_waste_steam",
           :scrolling => true,
@@ -23,28 +23,40 @@ module PrismfallEBDX
           :ox => 0,
           :oy => 0,
           :x => 0,
-          :y => 88.89,
+          :y => 102.22,
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
-          :z => 4,
-          :opacity => 150
+          :z => 4
         }
       },
       :layers => [
         {
-          :bitmap => "pf_ashen_waste_embers",
+          :bitmap => "pf_ashen_waste_seams",
           :hd => true,
-          :x => 56.89,
-          :y => 19.56,
+          :x => 53.78,
+          :y => 16.89,
           :ox => 0,
           :oy => 0,
           :z => 1,
           :blend => 1,
-          :opacity => 150,
           :anim => :pulse,
-          :min => 40,
-          :max => 170,
-          :period => 150
+          :min => 70,
+          :max => 200,
+          :period => 100
+        },
+        {
+          :bitmap => "pf_ashen_waste_sheen",
+          :hd => true,
+          :x => 105.33,
+          :y => 149.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 30,
+          :max => 90,
+          :period => 180
         },
         {
           :bitmap => "pf_ashen_waste_banner0",
@@ -55,8 +67,8 @@ module PrismfallEBDX
           :oy => 3,
           :z => 2,
           :anim => :sway,
-          :amp => 1.4,
-          :period => 170
+          :amp => 1.8,
+          :period => 160
         },
         {
           :bitmap => "pf_ashen_waste_banner1",
@@ -67,42 +79,115 @@ module PrismfallEBDX
           :oy => 3,
           :z => 2,
           :anim => :sway,
-          :amp => 1.4,
-          :period => 199
+          :amp => 1.8,
+          :period => 189
+        },
+        {
+          :bitmap => "pf_ashen_waste_geyser0",
+          :hd => true,
+          :x => 117.78,
+          :y => 32.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 3,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 150,
+          :chance => 0.006,
+          :dropout => 22
+        },
+        {
+          :bitmap => "pf_ashen_waste_geyser1",
+          :hd => true,
+          :x => 243.11,
+          :y => 30.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 3,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 150,
+          :chance => 0.006,
+          :dropout => 22
+        },
+        {
+          :bitmap => "pf_ashen_waste_geyser2",
+          :hd => true,
+          :x => 73.33,
+          :y => 105.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 23,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 150,
+          :chance => 0.006,
+          :dropout => 22
+        },
+        {
+          :bitmap => "pf_ashen_waste_geyser3",
+          :hd => true,
+          :x => 291.11,
+          :y => 128.0,
+          :ox => 0,
+          :oy => 0,
+          :z => 23,
+          :anim => :flicker,
+          :opacity => 0,
+          :min => 150,
+          :chance => 0.006,
+          :dropout => 22
         }
       ],
       :fx => [
         {
-          :type => :fall,
-          :count => 30,
+          :type => :twinkle,
+          :count => 22,
+          :shape => :spark,
+          :size => 7,
+          :colors => [
+            [255, 255, 255],
+            [200, 180, 255],
+            [255, 200, 150]
+          ],
+          :area => [0, 110, 384, 308],
+          :speed => [4, 8],
+          :zoom => [0.4, 0.9],
+          :opacity => [170, 255],
+          :layers => [:back, :mid],
+          :blend => 1
+        },
+        {
+          :type => :drift,
+          :count => 10,
           :shape => :dot,
-          :size => 3,
+          :size => 2,
           :colors => [
-            [110, 110, 110],
-            [150, 140, 130],
-            [80, 80, 85]
+            [200, 180, 255],
+            [255, 255, 255]
           ],
-          :speed => [0.3, 0.8],
-          :sway => 16,
-          :zoom => [0.4, 0.8],
-          :opacity => [140, 220],
-          :layers => [:back, :mid, :front]
+          :speed => [0.3, 0.7],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :opacity => [110, 190],
+          :layers => [:mid, :front],
+          :blend => 1
         },
         {
           :type => :rise,
           :count => 6,
           :shape => :puff,
-          :size => 18,
+          :size => 20,
           :colors => [
             [235, 235, 238],
             [205, 210, 215]
           ],
-          :area => [141.7, 53.3, 151.7, 133.3],
-          :speed => [0.25, 0.5],
+          :area => [141.7, 25.1, 151.7, 135.1],
+          :speed => [0.5, 1.0],
           :sway => 6,
           :zoom => [0.5, 0.8],
           :grow => 1.6,
-          :opacity => [50, 95],
+          :opacity => [70, 130],
           :layers => [:back],
           :blend => 0
         },
@@ -110,17 +195,17 @@ module PrismfallEBDX
           :type => :rise,
           :count => 6,
           :shape => :puff,
-          :size => 18,
+          :size => 20,
           :colors => [
             [235, 235, 238],
             [205, 210, 215]
           ],
-          :area => [263.4, 51.6, 273.4, 131.6],
-          :speed => [0.25, 0.5],
+          :area => [267.0, 23.3, 277.0, 133.3],
+          :speed => [0.5, 1.0],
           :sway => 6,
           :zoom => [0.5, 0.8],
           :grow => 1.6,
-          :opacity => [50, 95],
+          :opacity => [70, 130],
           :layers => [:back],
           :blend => 0
         },
@@ -128,17 +213,17 @@ module PrismfallEBDX
           :type => :rise,
           :count => 6,
           :shape => :puff,
-          :size => 18,
+          :size => 20,
           :colors => [
             [235, 235, 238],
             [205, 210, 215]
           ],
-          :area => [106.1, 122.2, 116.1, 202.2],
-          :speed => [0.25, 0.5],
+          :area => [97.2, 98.9, 107.2, 208.9],
+          :speed => [0.5, 1.0],
           :sway => 6,
           :zoom => [0.5, 0.8],
           :grow => 1.6,
-          :opacity => [50, 95],
+          :opacity => [70, 130],
           :layers => [:back],
           :blend => 0
         },
@@ -146,17 +231,17 @@ module PrismfallEBDX
           :type => :rise,
           :count => 6,
           :shape => :puff,
-          :size => 18,
+          :size => 20,
           :colors => [
             [235, 235, 238],
             [205, 210, 215]
           ],
-          :area => [306.1, 151.1, 316.1, 231.1],
-          :speed => [0.25, 0.5],
+          :area => [315.0, 121.1, 325.0, 231.1],
+          :speed => [0.5, 1.0],
           :sway => 6,
           :zoom => [0.5, 0.8],
           :grow => 1.6,
-          :opacity => [50, 95],
+          :opacity => [70, 130],
           :layers => [:back],
           :blend => 0
         }

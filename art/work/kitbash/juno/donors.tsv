@@ -1,0 +1,15 @@
+output	donor_file	part_used	how	credit
+JUNO_v1_underglass	/home/claude/ref/art/sprites_showdown/trainers/backpackerf.png	whole figure minus the pack: pose, head, ponytail, arm, legs	pack cut by polygon; hair/shirt/shorts/boots/strap repainted by region	official BW (Nintendo/Game Freak)
+JUNO_v1_underglass	/home/claude/ref/games/reborn/Graphics/Battlers/exeggutor.png	palm fronds (front frame, green pixels only)	placed behind glass, glass-tinted, palette-reduced	Reborn battler pack
+JUNO_v1_underglass	/home/claude/ref/games/reborn/Graphics/Battlers/oddish.png	leaf tuft (top 17 rows)	placed behind glass, glass-tinted	Reborn battler pack
+JUNO_v1_underglass	/home/claude/ref/games/reborn/Graphics/Icons/bounsweet.png	whole icon (32-px art)	placed in lower-left pane, light tint	Reborn icon pack
+JUNO_v1_underglass	(hand-built, tools/kitbash/wardian2.py)	brass frame, walnut base, glass tints, glints, carry ring, label, crack	straight pixel runs, then 1:5 row-shear lean	Prismfall
+JUNO_v2_everbloom	/home/claude/ref/art/sprites_showdown/trainers/lady.png	body, pose, head, long hair, dress (hat and ribbons erased)	hair/dress/sleeves repainted; figure shifted 8 px left	official BW
+JUNO_v2_everbloom	/home/claude/ref/art/sprites_showdown/trainers/miku-flying.png	lower twin-tail (flipped)	repainted as sheer veil, placed behind head	see sprites_showdown/credits.tsv
+JUNO_v2_everbloom	/home/claude/ref/games/reborn/Graphics/Battlers/comfey.png	one red flower (hue-isolated)	repainted pink (wreath) and white (bouquet)	Reborn battler pack
+JUNO_v2_everbloom	(hand-placed stamps, juno_v2_everbloom.py)	5-px blossoms, 3-px buds, leaves, ribbon tails	ASCII patches	Prismfall
+JUNO_v3_rotbloom	/home/claude/ref/art/sprites_showdown/trainers/parasollady.png	body, pose, head, parasol handle (canopy erased)	hair/coat/boots repainted; collar -> violet neckerchief	official BW
+JUNO_v3_rotbloom	/home/claude/ref/games/reborn/Graphics/Battlers/shiinotic.png	cap (top 29 rows; face removed, gills patched from its own left side)	repainted spore-violet, placed behind head	Reborn battler pack
+JUNO_v3_rotbloom	(hand-placed, juno_v3_rotbloom.py)	6 cream cap spots (2x2)	ASCII patches	Prismfall
+JUNO_happy (portrait)	/home/claude/ref/games/desolation/Graphics/Faces/08a.png	whole face (48-px art)	hair->auburn, irises->green, flower->leaf sprig, collar->knit; freckles + strap by hand	Desolation
+JUNO_happy (portrait)	/home/claude/ref/games/desolation/Graphics/Faces/08e.png	brow rows (y 9-14)	composited onto 08a	Desolation

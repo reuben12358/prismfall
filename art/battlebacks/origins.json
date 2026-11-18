@@ -5,13 +5,18 @@
    "battlebg/field_ashen_waste_hd.png",
    "elements/pf_ashen_waste_banner0.png",
    "elements/pf_ashen_waste_banner1.png",
-   "elements/pf_ashen_waste_embers.png",
+   "elements/pf_ashen_waste_geyser0.png",
+   "elements/pf_ashen_waste_geyser1.png",
+   "elements/pf_ashen_waste_geyser2.png",
+   "elements/pf_ashen_waste_geyser3.png",
+   "elements/pf_ashen_waste_seams.png",
+   "elements/pf_ashen_waste_sheen.png",
    "elements/pf_ashen_waste_steam.png"
   ],
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgVolcano, enemybaseVolcano (cooled: gradient-mapped, lava crusted over)"
+    "battlebgVolcano, enemybaseVolcano (Volcanic's layout quenched to black glass: gradient-mapped violet-black, flows glassed over with hot seams)"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
@@ -19,7 +24,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "quench recolour, ember cracks, steam vents, soot-stained banners"
+    "Cinderglass: glass sheen streaks, obsidian shards, seam glow, steam geysers with bursts, glass glints, violet banners"
    ]
   ]
  },

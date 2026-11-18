@@ -95,7 +95,7 @@ def main():
     sh = Image.new('RGBA', (W, H), BG); d = ImageDraw.Draw(sh)
     f16, f13, f11, f10 = kb.font(17), kb.font(13), kb.font(11), kb.font(10)
     d.text((16, 10), 'JUNO HALE - kitbash pass (frankensprites from professional donors). 80-px art, stored 160x160 like Reborn/EBDX fronts. '
-                     'Left: 2x review size. Below: 1x in battle. Right: references at the same density.', font=f13, fill=TXT)
+                     'Top: 4x. Below: 2x and 1x in battle. Right: references at the same density (2x, 1x).', font=f13, fill=TXT)
     colw = 360; x0 = 16; y0 = 40
     for i, (src, name, title, pitch, donors, hand) in enumerate(FINAL):
         x = x0 + i * (colw + 14)

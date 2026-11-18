@@ -9,6 +9,7 @@
 #   bash run_playtest.sh install    # 1st Debug boot (compiles), New Game -> install offer -> quit
 #   bash run_playtest.sh play       # restart, New Game, Debug > Files > Install (no-op), prologue
 #   bash run_playtest.sh route1     # dev shortcut: start on Route 1 after K1, walk into its trainers
+#   bash run_playtest.sh ch1        # resume at Route 1 (state as after K1) and play Chapter 1 to Briarwick
 #   bash run_playtest.sh checks     # dev shortcut: glyph lines + quest log + every trainer added 2026-11-17
 #   python3 make_playtest_media.py  # shots + GIF -> docs/playtest/
 #
@@ -75,6 +76,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|play|route1|checks) session "$1" ;;
-  *) echo "usage: $0 assemble | install | play | route1 | checks | stop"; exit 1 ;;
+  install|play|route1|checks|ch1) session "$1" ;;
+  *) echo "usage: $0 assemble | install | play | route1 | checks | ch1 | stop"; exit 1 ;;
 esac

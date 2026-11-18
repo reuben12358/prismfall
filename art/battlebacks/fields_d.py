@@ -445,20 +445,64 @@ def wildfire():
 # Reworks: ASHEN_WASTE (ash-covered floor, more contrast) and INVERSE (hanging negative world)
 #---------------------------------------------------------------------------------------------
 def ashen_rework():
-    hd, res = capture(fields_a.ashen_waste, fields_a)
-    # ash settles on the floor: pale drifts below the back wall line, broken by noise
+    """ASHEN_WASTE is 'Cinderglass' since the Revision 10 redesign: the Volcanic caldera (same layout) quenched
+    into black volcanic glass with hot seams, glints and steam geysers."""
+    F = "ashen_waste"
+    hd = fields_a._caldera_base()
+    lava = mask_from(hd, lambda r, g, b: (r > 200) & (g > 70) & (b < 120))
+    pivots = fields_a._obsidian_pillars(hd, rim=(190, 150, 255, 255))
+    hd = gradient_map(hd, [(0.0, (6, 4, 14)), (0.2, (22, 14, 44)), (0.38, (48, 30, 88)), (0.55, (84, 60, 140)),
+                           (0.75, (150, 130, 220)), (1.0, (236, 228, 255))])
+    # glassy sheen: hard specular streaks across the floor
     ys = np.arange(693)[:, None]
-    floor = np.clip((ys - 286) / 40.0, 0, 1)
-    ashm = (floor * np.ones((1, 864)))[..., None] * 0.5
+    n = noise(HD, 60, 501, 1)
+    streak = ((np.sin((np.arange(864)[None, :] * 0.5 + ys * 1.4) / 26.0 + n * 6) > 0.93) & (ys > 300))
     a = arr(hd)
-    ash = np.array([170, 166, 162, 255], np.float32)
-    a = a * (1 - ashm) + (a * 0.55 + ash * 0.45) * ashm
-    hd = grade(img(a), contrast=1.3, mul=(1.0, 1.0, 1.05))
+    a[streak] = a[streak] * 0.5 + np.array([200, 190, 255, 255], np.float32) * 0.5
+    lm = Image.fromarray((lava * 255).astype(np.uint8))
+    inner = np.asarray(lm.filter(ImageFilter.MinFilter(5)), np.float32) / 255
+    a[lava > 0] = [14, 8, 26, 255]                    # flows frozen to black glass
+    a[inner > 0] = [255, 130, 40, 255]                # ...with hot seams still alive inside
+    core = np.asarray(lm.filter(ImageFilter.MinFilter(9)), np.float32) / 255
+    a[core > 0] = [255, 220, 130, 255]
+    hd = img(a)
+    # obsidian shards standing in the glass
+    for foot, sc, seed in (((250, 330), 60, 1), ((716, 322), 70, 2), ((110, 590), 150, 3), ((800, 620), 130, 4)):
+        crystal_cluster(hd, foot, sc, [(30, 20, 56), (60, 40, 110), (16, 10, 30), (110, 90, 180)], seed=seed, n=4,
+                        outline=(4, 2, 10))
     fields_a.save_room("field_ashen_waste", hd)
-    prof = res["profile"]
-    ex = prof[S("art_extras")]
-    ex["img003"][S("opacity")] = 150
-    return res
+    layers = [layer(F, "seams", glow_from_mask(inner, (255, 120, 40), radius=7, gain=1.5), z=1, blend=1,
+                    anim=S("pulse"), min=70, max=200, period=100),
+              layer(F, "sheen", soft_glow((500, 430), 380, (150, 110, 255), alpha=90, squash=0.35), z=1, blend=1,
+                    anim=S("pulse"), min=30, max=90, period=180)]
+    for i, (x, y) in enumerate(pivots):
+        b = banner(26, 104, (60, 40, 100, 255), (190, 170, 240, 255), (220, 200, 255, 255))
+        layers.append(layer(F, "banner%d" % i, onto(b, x - b.width / 2, y), anchor=(x, y + 4), z=2,
+                            anim=S("sway"), amp=1.8, period=160 + i * 29))
+    geysers = [(330, 304), (612, 300), (230, 470), (720, 520)]
+    for i, (vx, vy) in enumerate(geysers):     # geyser bursts: a tall plume that flares up now and then
+        pl = blank(); pl.alpha_composite(soft_glow((vx, vy - 90), 70, (236, 238, 248), alpha=200, squash=2.2,
+                                                   power=1.2))
+        layers.append(layer(F, "geyser%d" % i, pl, z=3 if vy < 400 else 23, anim=S("flicker"), opacity=0,
+                            min=150, chance=0.006, dropout=22))
+    extras = {"img001": ebdx_stock("decor006", scrolling=True, speed=2, direction=-1, oy=0, z=3, flat=True,
+                                   opacity=120),
+              "img003": strip(F, "steam", fog_strip(864, 160, (220, 220, 240), seed=9, scale=34, density=0.5,
+                                                    alpha=70), 230, speed=0.5, direction=1, z=4)}
+    fx = [P(type=":twinkle", count=22, shape=":spark", size=7, colors=[[255, 255, 255], [200, 180, 255],
+                                                                       [255, 200, 150]],
+            area=[0, 110, 384, 308], speed=[4, 8], zoom=[0.4, 0.9], opacity=[170, 255], layers=[":back", ":mid"],
+            blend=1),
+          P(type=":drift", count=10, shape=":dot", size=2, colors=[[200, 180, 255], [255, 255, 255]],
+            speed=[0.3, 0.7], sway=6, zoom=[0.5, 0.8], opacity=[110, 190], layers=[":mid", ":front"], blend=1)]
+    for (vx, vy) in geysers:
+        fx.append(vent(vx, vy, count=6, rise=110, size=20, speed=(0.5, 1.0), opacity=(70, 130)))
+    return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
+            "origins": [[REJ, "battlebgVolcano, enemybaseVolcano (Volcanic's layout quenched to black glass: "
+                              "gradient-mapped violet-black, flows glassed over with hot seams)"],
+                        [EBDX, "decor006"],
+                        [OWN, "Cinderglass: glass sheen streaks, obsidian shards, seam glow, steam geysers with "
+                              "bursts, glass glints, violet banners"]]}
 
 
 def inverse_rework():
