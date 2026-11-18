@@ -45,7 +45,7 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
 --- Turn 3 ---
   [Garchomp 186/214 | Bronzong 113/171]
   The opposing Bronzong used Extrasensory!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Bronzong's thoughts real shape!
     HP Garchomp (player): 186 -> 77 / 214
     (anim: Confusion)
   Garchomp is confused!
@@ -57,7 +57,7 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
 --- Turn 4 ---
   [Garchomp 77/214 | Bronzong 50/171]
   The opposing Bronzong used Extrasensory!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Bronzong's thoughts real shape!
     HP Garchomp (player): 77 -> 0 / 214
   Garchomp fainted!
     xx fainted: Garchomp (player)
@@ -70,7 +70,7 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
 --- Turn 5 ---
   [Magnezone 158/169 | Bronzong 50/171]
   The opposing Bronzong used Extrasensory!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Bronzong's thoughts real shape!
     HP Magnezone (player): 158 -> 109 / 169
   It's not very effective...
   Magnezone used Thunderbolt!
@@ -123,7 +123,7 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
   Lucario used Flash Cannon!
     HP Reuniclus (foe): 141 -> 73 / 224
   The opposing Reuniclus used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Reuniclus's thoughts real shape!
     HP Lucario (player): 164 -> 0 / 169
   Lucario fainted!
     xx fainted: Lucario (player)
@@ -138,7 +138,7 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
   Togekiss used Air Slash!
     HP Reuniclus (foe): 73 -> 10 / 224
   The opposing Reuniclus used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Reuniclus's thoughts real shape!
     HP Togekiss (player): 140 -> 0 / 187
   Togekiss fainted!
     xx fainted: Togekiss (player)
@@ -169,13 +169,12 @@ Mindscape [MINDSCAPE] - Gym 12 Warden Ilsa vs challenger (Lv.59)
   Charizard used Air Slash!
     HP Reuniclus (foe): 106 -> 45 / 224
   The opposing Reuniclus used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Reuniclus's thoughts real shape!
     HP Charizard (player): 89 -> 0 / 179
   Charizard fainted!
     xx fainted: Charizard (player)
   You have no more Pokémon that can fight!
   You lost against Warden Ilsa!
-  You gave $1,244 to the winner...
   battle result code: 2
   
 RESULT: player lost after 12 turn(s)

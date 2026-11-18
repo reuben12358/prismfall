@@ -23,26 +23,25 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 1 ---
   [Magmar 101/101 POISON | Weezing 95/95]
   Magmar used Lava Plume!
-    HP Weezing (foe): 95 -> 24 / 95
-  The toxic fumes ignited in an explosion!
-    HP Weezing (foe): 24 -> 13 / 95
-  The opposing Weezing was caught in the blast!
+  The marsh gas flared up with the flames!
+    HP Weezing (foe): 95 -> 3 / 95
+  The marsh gas is burning off... (1 more)
   The opposing Weezing used Toxic Spikes!
   Poison spikes were scattered all around your team's feet!
   (end of round)
     (anim: UseItem)
-    HP Weezing (foe): 13 -> 18 / 95
+    HP Weezing (foe): 3 -> 8 / 95
   The opposing Weezing restored a little HP using its Black Sludge!
     (anim: Poison)
     HP Magmar (player): 101 -> 89 / 101
   Magmar was hurt by poison!
   The mire nourished the opposing Weezing.
-    HP Weezing (foe): 18 -> 24 / 95
+    HP Weezing (foe): 8 -> 14 / 95
 
 --- Turn 2 ---
-  [Magmar 89/101 POISON | Weezing 24/95]
+  [Magmar 89/101 POISON | Weezing 14/95]
   Warden Corvin used a Hyper Potion.
-    HP Weezing (foe): 24 -> 95 / 95
+    HP Weezing (foe): 14 -> 95 / 95
   The opposing Weezing's HP was restored.
   Magmar used Thunder Punch!
     HP Weezing (foe): 95 -> 69 / 95
@@ -59,14 +58,12 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 3 ---
   [Magmar 77/101 POISON | Weezing 80/95]
   Magmar used Lava Plume!
-    HP Weezing (foe): 80 -> 2 / 95
-  The toxic fumes ignited in an explosion!
-    HP Weezing (foe): 2 -> 0 / 95
-  The opposing Weezing was caught in the blast!
+  The marsh gas flared up with the flames!
+    HP Weezing (foe): 80 -> 0 / 95
   The opposing Weezing fainted!
     xx fainted: Weezing (foe)
 ## FIELD CHANGE: CORROSIVE_MIRE -> WASTELAND
-  The flames consumed the mire, leaving a blasted wasteland!
+  The marsh gas burned off in one roaring flare! Scorched slag is all that's left!
   Magmar is at the level cap (Lv. 35) and can't gain Exp. Points.
   (end of round)
     (anim: Poison)
@@ -166,7 +163,7 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 10 ---
   [Pidgeot 113/113 | Crobat 69/109]
   The opposing Crobat used Cross Poison!
-  Toxic slag bubbled up from the ground!
+  Toxic slag bubbled up with Cross Poison!
     HP Pidgeot (player): 113 -> 73 / 113
   Pidgeot used Facade!
     HP Crobat (foe): 69 -> 37 / 109
@@ -175,7 +172,7 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 11 ---
   [Pidgeot 73/113 | Crobat 37/109]
   The opposing Crobat used Cross Poison!
-  Toxic slag bubbled up from the ground!
+  Toxic slag bubbled up with Cross Poison!
     HP Pidgeot (player): 73 -> 31 / 113
   Pidgeot used Aerial Ace!
     HP Crobat (foe): 37 -> 8 / 109
@@ -193,7 +190,7 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 13 ---
   [Pidgeot 31/113 | Crobat 76/109]
   The opposing Crobat used Cross Poison!
-  Toxic slag bubbled up from the ground!
+  Toxic slag bubbled up with Cross Poison!
     HP Pidgeot (player): 31 -> 0 / 113
   Pidgeot fainted!
     xx fainted: Pidgeot (player)
@@ -239,7 +236,7 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
     HP Amoonguss (foe): 131 -> 104 / 131
   It's not very effective...
   The opposing Amoonguss used Venoshock!
-  Toxic slag bubbled up from the ground!
+  Toxic slag bubbled up with Venoshock!
     HP Vaporeon (player): 54 -> 0 / 146
   Vaporeon fainted!
     xx fainted: Vaporeon (player)
@@ -259,7 +256,6 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
   Graveler used Rock Slide!
     HP Amoonguss (foe): 112 -> 67 / 131
   The opposing Amoonguss used Giga Drain!
-  The blighted soil sapped the plant life...
     HP Graveler (player): 93 -> 0 / 94
   It's super effective!
   Graveler fainted!
@@ -271,7 +267,7 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
     HP Amoonguss (foe): 114 -> 122 / 131
   The opposing Amoonguss restored a little HP using its Black Sludge!
   Go for it, Hariyama!
-    >> sent out (player): Hariyama Lv.35 [GUTS]
+    >> sent out (player): Hariyama Lv.35 [THICKFAT]
     (anim: Poison)
   Hariyama was poisoned by the poison spikes!
     HP Hariyama (player): 156 -> 146 / 156
@@ -280,26 +276,23 @@ Corrosive Mire [CORROSIVE_MIRE] - Gym 6 Warden Corvin vs challenger (Lv.35)
 --- Turn 18 ---
   [Hariyama 146/156 POISON | Amoonguss 122/131]
   Hariyama used Knock Off!
-    HP Amoonguss (foe): 122 -> 56 / 131
+    HP Amoonguss (foe): 122 -> 81 / 131
   The opposing Amoonguss dropped its Black Sludge!
   The opposing Amoonguss used Venoshock!
-  Toxic slag bubbled up from the ground!
-    HP Hariyama (player): 146 -> 55 / 156
+  Toxic slag bubbled up with Venoshock!
+    HP Hariyama (player): 146 -> 59 / 156
   (end of round)
     (anim: Poison)
-    HP Hariyama (player): 55 -> 36 / 156
+    HP Hariyama (player): 59 -> 40 / 156
   Hariyama was hurt by poison!
 
 --- Turn 19 ---
-  [Hariyama 36/156 POISON | Amoonguss 56/131]
-  Hariyama used Wake-Up Slap!
-    HP Amoonguss (foe): 56 -> 19 / 131
-  It's not very effective...
-    [ability: Amoonguss (foe)'s Effect Spore]
-  It doesn't affect Hariyama...
+  [Hariyama 40/156 POISON | Amoonguss 81/131]
+  Hariyama used Knock Off!
+    HP Amoonguss (foe): 81 -> 51 / 131
   The opposing Amoonguss used Venoshock!
-  Toxic slag bubbled up from the ground!
-    HP Hariyama (player): 36 -> 0 / 156
+  Toxic slag bubbled up with Venoshock!
+    HP Hariyama (player): 40 -> 0 / 156
   Hariyama fainted!
     xx fainted: Hariyama (player)
   You have no more Pokémon that can fight!

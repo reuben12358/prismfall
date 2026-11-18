@@ -1,0 +1,310 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for MEADOW: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+MEADOW probe: boosted move ENERGYBALL (on field)
+================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+  The whole meadow swayed with Energy Ball!
+    HP Snorlax (foe): 461 -> 382 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 382/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MEADOW probe: boosted move ENERGYBALL (baseline, no field)
+==========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Energy Ball!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MEADOW probe: transition [stage 1: types FIRE, category damaging, condition proc x2 -> WILDFIRE] using FLAMETHROWER, FLAMETHROWER
+=================================================================================================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 396 / 461
+  Sparks are catching in the dry grass... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 396 -> 306 / 461
+## FIELD CHANGE: MEADOW -> WILDFIRE
+  The dry grass went up in flames! The meadow is ablaze!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 306/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 306/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MEADOW probe: transition [stage 1: types FIRE, category damaging -> WILDFIRE] using SUNNYDAY, FLAMETHROWER
+==========================================================================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 341 / 461
+## FIELD CHANGE: MEADOW -> WILDFIRE
+  The sun-baked grass went up in a flash! The meadow is ablaze!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 341/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 341/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MEADOW probe: transition [stage 1: terrain Grassy -> FLOWER_GARDEN] using GRASSYTERRAIN
+=======================================================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD CHANGE: MEADOW -> FLOWER_GARDEN
+  Wildflowers burst open everywhere! The meadow became a garden!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+MEADOW probe: transition [stage 1: moves GROWTH/ROTOTILLER/FLOWERSHIELD... x2 -> FLOWER_GARDEN] using GROWTH, GROWTH
+====================================================================================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+  Buds are opening all across the meadow... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+## FIELD CHANGE: MEADOW -> FLOWER_GARDEN
+  Wildflowers burst open everywhere! The meadow became a garden!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MEADOW probe: Telluric Seed held on entry
+=========================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+    (anim: UseItem)
+  Mew's Telluric Seed let it vanish into the tall grass!
+    (anim: StatUp)
+  Mew's evasiveness rose!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    HP Mew (player): 170 -> 191 / 341
+  Mew absorbed nutrients with its roots!
+
+--- Turn 2 ---
+  [Mew 191/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+MEADOW probe: end-of-round rule 1: heal on {:abilities=>[:SAPSIPPER]} [subject Florges]
+=======================================================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [SAPSIPPER]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+  Florges munched on the meadow grass!
+    (anim: StatUp)
+  Florges's Attack rose!
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges grazed on the meadow.
+    HP Florges (player): 148 -> 167 / 297
+
+--- Turn 2 ---
+  [Florges 167/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges grazed on the meadow.
+    HP Florges (player): 167 -> 186 / 297
+
+--- Turn 3 ---
+  [Florges 186/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)

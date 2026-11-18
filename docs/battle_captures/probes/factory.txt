@@ -15,14 +15,14 @@ FACTORY probe: boosted move FLASHCANNON (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flash Cannon!
-  The foundry's machinery roared!
-    HP Snorlax (foe): 461 -> 374 / 461
+  Mew meshed with the foundry's machinery!
+    HP Snorlax (foe): 461 -> 348 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 374/461]
+  [Mew 341/341 | Snorlax 348/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -66,16 +66,18 @@ FACTORY probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION.
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Explosion!
-    HP Snorlax (foe): 461 -> 106 / 461
+    HP Snorlax (foe): 461 -> 0 / 461
     HP Mew (player): 341 -> 0 / 341
   Mew fainted!
     xx fainted: Mew (player)
+  The wild Snorlax fainted!
+    xx fainted: Snorlax (foe)
 ## FIELD CHANGE: FACTORY -> SCRAPYARD
   The blast tore the foundry apart! Only scrap remains.
   You have no more Pokémon that can fight!
-  battle result code: 2
+  battle result code: 5
   
-RESULT: player lost after 0 turn(s)
+RESULT: draw after 0 turn(s)
 
 
 FACTORY probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> SCRAPYARD] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
@@ -110,7 +112,7 @@ FACTORY probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 ->
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 235/461]
   Mew used Earthquake!
-    HP Snorlax (foe): 235 -> 122 / 461
+    HP Snorlax (foe): 235 -> 89 / 461
 ## FIELD CHANGE: FACTORY -> SCRAPYARD
   The catwalks came crashing down! The foundry is reduced to scrap.
   The wild Snorlax used Splash!
@@ -118,7 +120,7 @@ FACTORY probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 ->
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 122/461]
+  [Mew 341/341 | Snorlax 89/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -126,7 +128,7 @@ FACTORY probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 ->
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 122/461]
+  [Mew 341/341 | Snorlax 89/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)

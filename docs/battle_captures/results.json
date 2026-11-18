@@ -11,7 +11,7 @@
     "species": 1420,
     "moves": 832,
     "trainers": 496,
-    "fields": 31
+    "fields": 33
   },
   "battles": [
     {
@@ -20,7 +20,7 @@
       "level": 15,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 2,
+      "turns": 5,
       "errors": 0,
       "field_changes": [
         [
@@ -30,18 +30,19 @@
         ],
         [
           "SILKWOOD",
-          "ASHEN_WASTE",
+          "WILDFIRE",
           1
         ]
       ],
       "field_messages": [
         "Giant webs glisten between the ancient trees...",
-        "The Silkwood hums with chittering life!",
         "The flames raced along the silk!",
-        "{1} blundered into a sticky web!",
-        "Embers smoulder in the silk... ({1} more)",
-        "The webs went up in flames! The Silkwood burned down to ash!",
-        "{1}'s {2} sprouted silk-threaded roots!"
+        "{1} stepped into a curtain of sticky silk!",
+        "{1} sipped nectar from the silk-hung blossoms.",
+        "Embers are catching in the silk... ({1} more)",
+        "The silk caught! Flames leap from web to web - the Silkwood is ablaze!",
+        "{1}'s {2} spun a silk cocoon around it!",
+        "{1} drew the wildfire into its attack!"
       ],
       "log": "logs/01_silkwood.txt"
     },
@@ -51,20 +52,32 @@
       "level": 19,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 16,
+      "turns": 13,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "GRAND_STAGE",
           1
+        ],
+        [
+          "GRAND_STAGE",
+          "GRAND_STAGE",
+          2
+        ],
+        [
+          "GRAND_STAGE",
+          "GRAND_STAGE",
+          3
         ]
       ],
       "field_messages": [
         "The curtain rises! The spotlight blazes over the stage!",
         "The crowd roared for {1}!",
-        "{2} resonated through the theater!",
-        "{1}'s {2} cast a spotlight on it!"
+        "{2} rang through the opera house!",
+        "{1} was dazzled by the roar of the crowd!",
+        "{1}'s {2} put it in the spotlight! It's here to perform!",
+        "{1} basked in the applause."
       ],
       "log": "logs/02_grand_stage.txt"
     },
@@ -74,7 +87,7 @@
       "level": 23,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 20,
+      "turns": 21,
       "errors": 0,
       "field_changes": [
         [
@@ -85,10 +98,8 @@
       ],
       "field_messages": [
         "The battle is taking place on the open water!",
-        "The waves amplified the attack!",
-        "The water doused the flames...",
+        "{1} rode the waves into the attack!",
         "The current raced across the water!",
-        "{1} was swept up by the current!",
         "{1}'s {2} wrapped it in a veil of seawater!"
       ],
       "log": "logs/03_water_surface.txt"
@@ -99,7 +110,7 @@
       "level": 27,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 16,
+      "turns": 15,
       "errors": 0,
       "field_changes": [
         [
@@ -109,16 +120,17 @@
         ],
         [
           "NEON_GRID",
-          "NONE",
-          1
+          "NEON_GRID",
+          2
         ]
       ],
       "field_messages": [
         "Neon circuitry hums beneath your feet!",
-        "The neon grid surged!",
+        "{1} drew power straight from the grid!",
         "The grid flickers and sparks... ({1} more)",
-        "The grid shorted out! The neon lights went dark.",
-        "{1}'s {2} magnetized it above the grid!"
+        "The grid shorted out! The neon lights died - only sparks light the dark!",
+        "{1}'s {2} magnetized it above the grid!",
+        "{1} flickered through the dead circuitry!"
       ],
       "log": "logs/04_neon_grid.txt"
     },
@@ -126,9 +138,9 @@
       "field": "DESERT",
       "label": "Gym 5 Warden Sahar",
       "level": 31,
-      "outcome": 1,
-      "outcome_text": "player won",
-      "turns": 11,
+      "outcome": 2,
+      "outcome_text": "player lost",
+      "turns": 14,
       "errors": 0,
       "field_changes": [
         [
@@ -139,11 +151,12 @@
       ],
       "field_messages": [
         "Heat shimmers over the endless dunes...",
-        "The shifting sands surged!",
-        "The desert heat evaporated some of the water...",
-        "The sands swallowed the foe whole!",
-        "{1} got sand in its eyes!",
-        "{1}'s {2} encased it in hardened sand!"
+        "The dunes shifted under {1}'s command!",
+        "The thirsty dunes drank up some of the water...",
+        "The dunes swallowed the foe whole!",
+        "{1} swam through the soft sand!",
+        "{1} got a faceful of sand!",
+        "{1}'s {2} half-buried it in hardened sand!"
       ],
       "log": "logs/05_desert.txt"
     },
@@ -169,11 +182,12 @@
       ],
       "field_messages": [
         "Toxic sludge bubbles underfoot... the air reeks of corrosion.",
+        "The marsh gas flared up with the flames!",
         "The mire nourished {1}.",
-        "The flames consumed the mire, leaving a blasted wasteland!",
+        "The marsh gas is burning off... ({1} more)",
+        "The marsh gas burned off in one roaring flare! Scorched slag is all that's left!",
         "{1}'s {2} filled it with corrosive vigor!",
-        "Toxic slag bubbled up from the ground!",
-        "The blighted soil sapped the plant life...",
+        "Toxic slag bubbled up with {2}!",
         "The corroded spikes ate into {1}!"
       ],
       "log": "logs/06_corrosive_mire.txt"
@@ -182,9 +196,9 @@
       "field": "VOLCANIC",
       "label": "Gym 7 Warden Brann",
       "level": 39,
-      "outcome": 2,
-      "outcome_text": "player lost",
-      "turns": 13,
+      "outcome": 1,
+      "outcome_text": "player won",
+      "turns": 6,
       "errors": 0,
       "field_changes": [
         [
@@ -195,11 +209,12 @@
       ],
       "field_messages": [
         "Magma churns across the battlefield!",
-        "The magma roared!",
-        "The lava surged!",
+        "{1} drew fire up from the magma!",
+        "The lava surged up with {1}!",
+        "{1} crashed down like a lava bomb!",
         "The magma brought the water to a boil!",
-        "{1} was scorched by the magma!",
-        "{1}'s {2} ignited, searing it with volcanic power!"
+        "The rocks came out superheated!",
+        "{1}'s {2} ignited, filling it with volcanic power!"
       ],
       "log": "logs/07_volcanic.txt"
     },
@@ -209,19 +224,28 @@
       "level": 43,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 9,
+      "turns": 8,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "COLOSSEUM",
           1
+        ],
+        [
+          "COLOSSEUM",
+          "COLOSSEUM",
+          2
         ]
       ],
       "field_messages": [
         "The crowd roars as the fighters enter the pit!",
+        "The pit erupted as {1} pressed the attack!",
         "The crowd rallied behind {1}!",
-        "{1}'s {2} fired it up to the roar of the crowd!"
+        "The crowd chanted for {1}!",
+        "Two down! The crowd is in a frenzy!",
+        "{1}'s {2} fired it up to the roar of the crowd!",
+        "The crowd is in a frenzy!"
       ],
       "log": "logs/08_colosseum.txt"
     },
@@ -231,7 +255,7 @@
       "level": 47,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 16,
+      "turns": 18,
       "errors": 0,
       "field_changes": [
         [
@@ -247,6 +271,16 @@
         [
           "FLOWER_GARDEN",
           "FLOWER_GARDEN",
+          3
+        ],
+        [
+          "FLOWER_GARDEN",
+          "FLOWER_GARDEN",
+          2
+        ],
+        [
+          "FLOWER_GARDEN",
+          "FLOWER_GARDEN",
           1
         ],
         [
@@ -267,35 +301,16 @@
         [
           "FLOWER_GARDEN",
           "FLOWER_GARDEN",
-          3
-        ],
-        [
-          "FLOWER_GARDEN",
-          "FLOWER_GARDEN",
-          4
-        ],
-        [
-          "FLOWER_GARDEN",
-          "FLOWER_GARDEN",
-          3
-        ],
-        [
-          "FLOWER_GARDEN",
-          "FLOWER_GARDEN",
-          2
+          1
         ]
       ],
       "field_messages": [
         "Tiny buds dot the garden beds.",
         "Sprouts pushed up through the soil!",
-        "The flames scorched the garden!",
+        "The flames scorched the garden back!",
+        "The garden was cut back!",
         "{1}'s {2} took root in the garden!",
-        "The garden burst into bloom!",
-        "The blooming garden empowered the attack!",
-        "{1} drank from the blooming garden.",
-        "The garden is in full flower!",
-        "The flowering garden empowered the attack!",
-        "The dry petals fed the flames!"
+        "The garden burst into bloom!"
       ],
       "log": "logs/09_flower_garden.txt"
     },
@@ -303,33 +318,25 @@
       "field": "FROZEN_LAKE",
       "label": "Gym 10 Warden Anja",
       "level": 51,
-      "outcome": 1,
-      "outcome_text": "player won",
-      "turns": 11,
+      "outcome": 2,
+      "outcome_text": "player lost",
+      "turns": 14,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "FROZEN_LAKE",
           1
-        ],
-        [
-          "FROZEN_LAKE",
-          "WATER_SURFACE",
-          1
         ]
       ],
       "field_messages": [
         "The battle is taking place on a frozen lake!",
-        "The frozen lake chilled the attack!",
+        "The frozen lake lent its cold to {2}!",
+        "{1} slid across the ice!",
+        "{1} settled comfortably onto the ice!",
         "The lake ice groaned and cracked! ({1} more)",
-        "The ice gave way! The battle plunged into the freezing lake!",
         "The cold sealed the cracks in the ice!",
-        "{1}'s {2} encased it in a skin of frost!",
-        "The waves amplified the attack!",
-        "The water doused the flames...",
-        "The current raced across the water!",
-        "Ice spreads across the water... ({1} more)"
+        "{1}'s {2} sent it skating at full speed - straight across the jagged ice!"
       ],
       "log": "logs/10_frozen_lake.txt"
     },
@@ -350,7 +357,8 @@
       ],
       "field_messages": [
         "Gale-force winds howl across the airship deck!",
-        "The storm supercharged the attack!",
+        "The storm supercharged {2}!",
+        "{1} rode the gale into the attack!",
         "The gale whipped {2} into a frenzy!",
         "{1}'s {2} crackled with storm energy!"
       ],
@@ -373,7 +381,7 @@
       ],
       "field_messages": [
         "The world dissolves into a sea of drifting thoughts...",
-        "The Mindscape amplified the thought!",
+        "The Mindscape gave {1}'s thoughts real shape!",
         "{1}'s {2} flooded its mind with thoughts!"
       ],
       "log": "logs/12_mindscape.txt"
@@ -384,7 +392,7 @@
       "level": 63,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 14,
+      "turns": 17,
       "errors": 0,
       "field_changes": [
         [
@@ -395,12 +403,11 @@
       ],
       "field_messages": [
         "Prismatic crystals glitter all around!",
-        "The crystals resonated with the attack!",
+        "The crystals resonated with {2}!",
         "The crystals refracted the light into a dazzling beam!",
-        "The red crystals set the rock ablaze!",
-        "The green crystals wreathed the rock in vines!",
+        "The amethyst crystals charged the rock with psychic power!",
         "The crystals are cracking! ({1} more)",
-        "{1}'s {2} grew a crystal shell around it!"
+        "{1}'s {2} refracted the crystals' light around it!"
       ],
       "log": "logs/13_crystal_cavern.txt"
     },
@@ -421,7 +428,7 @@
       ],
       "field_messages": [
         "Candles gutter in the ruined nave... Restless spirits stir in the gloom.",
-        "The restless spirits howled!",
+        "The restless spirits rose up behind {1}!",
         "Light streamed through the stained glass!",
         "The flames burned with an eerie ghostfire!",
         "{1} is at home among the restless dead.",
@@ -447,7 +454,7 @@
       ],
       "field_messages": [
         "Gears grind and molten steel pours... The foundry roars to life!",
-        "The foundry's machinery roared!",
+        "{1} meshed with the foundry's machinery!",
         "The crucibles flared white-hot!",
         "The factory gears ground together!",
         "The factory's gears meshed with {1}'s!",
@@ -462,22 +469,37 @@
       "level": 75,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 22,
+      "turns": 19,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "NEW_MOON",
           1
+        ],
+        [
+          "NEW_MOON",
+          "NEW_MOON",
+          2
+        ],
+        [
+          "NEW_MOON",
+          "NEW_MOON",
+          1
         ]
       ],
       "field_messages": [
         "The moon has gone dark over Underveil... Something moves in the shadows.",
-        "The darkness of the new moon deepened!",
+        "{1} struck from the depths of the new moon!",
+        "The shadows gathered around {2}!",
         "{2} pierced the darkness!",
         "{1}'s glow lit up the darkness!",
+        "The shadows grow... ({1} more)",
         "Light pierces the darkness... ({1} more)",
-        "{1}'s {2} sharpened its night vision!"
+        "{1}'s {2} sharpened its night vision!",
+        "The abyss swallowed most of the light...",
+        "A single ray of light makes its way... ({1} more)",
+        "The shadows retreat! The stars glimmer over Underveil again."
       ],
       "log": "logs/16_new_moon.txt"
     },
@@ -487,7 +509,7 @@
       "level": 80,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 14,
+      "turns": 13,
       "errors": 0,
       "field_changes": [
         [
@@ -498,10 +520,10 @@
       ],
       "field_messages": [
         "Once upon a time, in a castle deep in the forest... the story begins!",
-        "The storybook's magic sparkled!",
+        "The storybook's magic sparkled through {2}!",
         "{1} charged in like a knight in shining armor!",
+        "{1} breathed searing dragonfire!",
         "{1} wielded {2} like a true knight!",
-        "The dragon breathed fire!",
         "{1}'s {2} granted it a fairy godmother's blessing!"
       ],
       "log": "logs/17_fairy_tale.txt"
@@ -512,31 +534,23 @@
       "level": 85,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 13,
+      "turns": 14,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "DRAGONS_DEN",
           1
-        ],
-        [
-          "DRAGONS_DEN",
-          "DRAGONS_DEN",
-          2
         ]
       ],
       "field_messages": [
         "Magma glows beneath a dragon's hoard... Ancient wyrms watch from the stone.",
-        "The ancient wyrms roared in answer!",
-        "The magma-lit den blazed!",
+        "The ancient wyrms roared in answer to {1}!",
+        "The magma-lit den blazed with {2}!",
+        "The lair's heat sapped the cold...",
         "Steam hisses from the cooling magma... ({1} more)",
         "The wyrm statues' eyes begin to glow... ({1} more)",
-        "The den has awoken! Wyrmfire surges through the lair!",
-        "{1}'s {2} kindled dragonfire within it!",
-        "Wyrmfire engulfed the attack!",
-        "The wyrmfire melted the ice away...",
-        "{1} was scorched by the wyrmfire!"
+        "{1}'s {2} kindled dragonfire within it!"
       ],
       "log": "logs/18_dragons_den.txt"
     },
@@ -546,7 +560,7 @@
       "level": 18,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 8,
+      "turns": 4,
       "errors": 0,
       "field_changes": [
         [
@@ -557,9 +571,7 @@
       ],
       "field_messages": [
         "Blue silence presses in from every side... The battle is underwater!",
-        "The water's resistance slowed {1}'s attack!",
-        "{1} is struggling for air!",
-        "{1}'s {2} released a bubble of air around it!"
+        "{1}'s {2} released a shimmering bubble of air around it!"
       ],
       "log": "logs/19_underwater.txt"
     },
@@ -579,10 +591,9 @@
         ]
       ],
       "field_messages": [
-        "Grey ash drifts over the cooled crust...",
-        "The ash smothered the flames...",
-        "{1} is choking on the ash!",
-        "{1}'s {2} cloaked it in ash!"
+        "The magma has set into black glass... and steam roars from every crack!",
+        "The heat beneath the glass flared up with {2}!",
+        "{1}'s {2} wrapped it in a cloak of steam!"
       ],
       "log": "logs/20_ashen_waste.txt"
     },
@@ -615,7 +626,7 @@
       "level": 15,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 13,
+      "turns": 9,
       "errors": 0,
       "field_changes": [
         [
@@ -638,18 +649,25 @@
       "level": 21,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 7,
+      "turns": 5,
       "errors": 0,
       "field_changes": [
         [
           "NONE",
           "DARK_CRYSTAL",
           1
+        ],
+        [
+          "DARK_CRYSTAL",
+          "CRYSTAL_CAVERN",
+          1
         ]
       ],
       "field_messages": [
         "Darkness fills the cavern. The crystals have gone black...",
-        "The darkness gave the attack teeth!",
+        "The darkness gave {1}'s attack teeth!",
+        "A faint glow stirs within the crystals... ({1} more)",
+        "Light flooded the crystals! The cavern glitters once more!",
         "{1}'s {2} drank in the darkness!"
       ],
       "log": "logs/23_dark_crystal.txt"
@@ -658,9 +676,9 @@
       "field": "SCRAPYARD",
       "label": "Meridian Director Sabine",
       "level": 97,
-      "outcome": 2,
-      "outcome_text": "player lost",
-      "turns": 8,
+      "outcome": 1,
+      "outcome_text": "player won",
+      "turns": 10,
       "errors": 0,
       "field_changes": [
         [
@@ -671,7 +689,7 @@
       ],
       "field_messages": [
         "Jagged scrap and leaking chemicals litter the ground...",
-        "{1} was cut by jagged scrap!",
+        "Burning oil splashed over {1}!",
         "{1}'s {2} bolted scrap armor onto it!"
       ],
       "log": "logs/24_scrapyard.txt"
@@ -693,7 +711,7 @@
       ],
       "field_messages": [
         "The cave walls loom close... every sound echoes.",
-        "The cavern rumbled!",
+        "The cavern rumbled with {1}'s power!",
         "Loose rocks rained down on {1}!",
         "{1}'s {2} shook stones loose from the ceiling!"
       ],
@@ -705,7 +723,7 @@
       "level": 16,
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 6,
+      "turns": 5,
       "errors": 0,
       "field_changes": [
         [
@@ -725,9 +743,9 @@
       "field": "SNOWY_MOUNTAIN",
       "label": "Champion Shelly",
       "level": 17,
-      "outcome": 1,
-      "outcome_text": "player won",
-      "turns": 13,
+      "outcome": 2,
+      "outcome_text": "player lost",
+      "turns": 16,
       "errors": 0,
       "field_changes": [
         [
@@ -739,6 +757,7 @@
       "field_messages": [
         "A blizzard rages over the snowbound peak!",
         "The bitter cold dulled the flames...",
+        "The boulders came down frozen solid!",
         "{1}'s {2} packed it in a shell of snow!"
       ],
       "log": "logs/27_snowy_mountain.txt"
@@ -770,7 +789,7 @@
       "level": 78,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 16,
+      "turns": 15,
       "errors": 0,
       "field_changes": [
         [
@@ -781,8 +800,8 @@
       ],
       "field_messages": [
         "A brilliant rainbow arcs over the battlefield!",
-        "The rainbow's light poured into the attack!",
-        "{1}'s {2} shimmered in every color!"
+        "The rainbow's light poured into {2}!",
+        "{1}'s {2} shimmered in every colour!"
       ],
       "log": "logs/29_rainbow.txt"
     },
@@ -803,6 +822,7 @@
       ],
       "field_messages": [
         "Poisoned slag and dead trees stretch to a jaundiced horizon...",
+        "The slag heaps soaked up the shock...",
         "{1}'s {2} drew power from the tainted ground!"
       ],
       "log": "logs/30_wasteland.txt"
@@ -813,7 +833,7 @@
       "level": 96,
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 17,
+      "turns": 18,
       "errors": 0,
       "field_changes": [
         [
@@ -827,6 +847,49 @@
         "{1}'s {2} refracted the light of the Plates!"
       ],
       "log": "logs/31_prism_arena.txt"
+    },
+    {
+      "field": "WILDFIRE",
+      "label": "Hiker Ford",
+      "level": 19,
+      "outcome": 1,
+      "outcome_text": "player won",
+      "turns": 0,
+      "errors": 0,
+      "field_changes": [
+        [
+          "NONE",
+          "WILDFIRE",
+          1
+        ]
+      ],
+      "field_messages": [
+        "The battlefield is ablaze! Flames leap from tree to tree!",
+        "{1} drew the wildfire into its attack!",
+        "{1}'s {2} caught the blaze inside it!"
+      ],
+      "log": "logs/32_wildfire.txt"
+    },
+    {
+      "field": "MEADOW",
+      "label": "Hiker Ford",
+      "level": 19,
+      "outcome": 1,
+      "outcome_text": "player won",
+      "turns": 2,
+      "errors": 0,
+      "field_changes": [
+        [
+          "NONE",
+          "MEADOW",
+          1
+        ]
+      ],
+      "field_messages": [
+        "Tall grass ripples in the breeze across the meadow.",
+        "{1}'s {2} let it vanish into the tall grass!"
+      ],
+      "log": "logs/33_meadow.txt"
     }
   ],
   "probes": {
@@ -841,26 +904,34 @@
       },
       "transitions": [
         {
-          "desc": "stage 1: types FIRE, category damaging x3 -> ASHEN_WASTE",
+          "desc": "stage 1: types FIRE, category damaging, condition proc x3 -> WILDFIRE",
           "ok": true,
           "forced": true,
           "move": "FLAMETHROWER",
           "rule_id": null,
           "detail": "fired with Flamethrower, Flamethrower, Flamethrower"
+        },
+        {
+          "desc": "stage 1: types FIRE, category damaging x2 -> WILDFIRE",
+          "ok": true,
+          "forced": true,
+          "move": "FLAMETHROWER",
+          "rule_id": null,
+          "detail": "fired with Sunny Day, Flamethrower, Flamethrower"
         }
       ],
       "seeds": [
         {
           "desc": "TELLURICSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Telluric Seed sprouted silk-threaded roots!\""
+          "detail": "consumed; \"Mew's Telluric Seed spun a silk cocoon around it!\""
         }
       ],
       "eor": [
         {
           "desc": "rule 1: heal on {:types=>[:BUG]}",
           "ok": true,
-          "detail": "Pinsir: \"Pinsir fed on the forest's nectar.\""
+          "detail": "Pinsir: \"Pinsir sipped nectar from the silk-hung blossoms.\""
         }
       ]
     },
@@ -868,19 +939,74 @@
       "boost": {
         "ok": true,
         "move": "SWIFT",
-        "with": 66,
+        "with": 58,
         "without": 45,
-        "ratio": 1.47,
-        "detail": "Swift: 66 dmg on field vs 45 without (NORMAL-type moves x1.5)"
+        "ratio": 1.29,
+        "detail": "Swift: 58 dmg on field vs 45 without (NORMAL-type moves x1.3)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: flags Dance x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "QUIVERDANCE",
+          "rule_id": null,
+          "detail": "fired with Quiver Dance, Quiver Dance"
+        },
+        {
+          "desc": "stage 1: flags Sound, category damaging x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "OVERDRIVE",
+          "rule_id": null,
+          "detail": "fired with Overdrive, Overdrive"
+        },
+        {
+          "desc": "stage 1: moves CELEBRATE/ENCORE/FAKEOUT... x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "CELEBRATE",
+          "rule_id": null,
+          "detail": "fired with Celebrate, Celebrate"
+        },
+        {
+          "desc": "stage 1: moves PROTECT/DETECT/SUBSTITUTE... -> stage -1",
+          "ok": true,
+          "forced": true,
+          "move": "PROTECT",
+          "rule_id": null,
+          "detail": "fired with Protect"
+        },
+        {
+          "desc": "stage 2: flags Dance x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "QUIVERDANCE",
+          "rule_id": null,
+          "detail": "fired with Quiver Dance, Quiver Dance"
+        },
+        {
+          "desc": "stage 2: flags Sound, category damaging x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "OVERDRIVE",
+          "rule_id": null,
+          "detail": "fired with Overdrive, Overdrive"
+        },
+        {
+          "desc": "stage 2: moves CELEBRATE/ENCORE/FAKEOUT... x2 -> stage +1",
+          "ok": true,
+          "forced": true,
+          "move": "CELEBRATE",
+          "rule_id": null,
+          "detail": "fired with Celebrate, Celebrate"
+        }
       ],
       "seeds": [
         {
-          "desc": "MAGICALSEED",
+          "desc": "SYNTHETICSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Magical Seed cast a spotlight on it!\""
+          "detail": "consumed; \"Mew's Synthetic Seed put it in the spotlight! It's here to perform!\""
         }
       ],
       "eor": [
@@ -906,12 +1032,28 @@
           "detail": "fired with Dive"
         },
         {
+          "desc": "stage 1: moves GRAVITY -> UNDERWATER",
+          "ok": true,
+          "forced": true,
+          "move": "GRAVITY",
+          "rule_id": null,
+          "detail": "fired with Gravity"
+        },
+        {
           "desc": "stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x3 -> FROZEN_LAKE",
           "ok": true,
           "forced": true,
           "move": "GLACIATE",
           "rule_id": null,
           "detail": "fired with Glaciate, Glaciate, Glaciate"
+        },
+        {
+          "desc": "stage 1: moves SLUDGEWAVE/TOXIC/ACIDSPRAY x2 -> CORROSIVE_MIRE",
+          "ok": true,
+          "forced": true,
+          "move": "SLUDGEWAVE",
+          "rule_id": null,
+          "detail": "fired with Sludge Wave, Sludge Wave"
         }
       ],
       "seeds": [
@@ -928,12 +1070,7 @@
           "detail": "Florges: \"The cool water soothed Florges's burn!\""
         },
         {
-          "desc": "rule 2: cure_status on {:abilities=>[:HYDRATION]}",
-          "ok": true,
-          "detail": "Florges: \"HP Florges (player): 148 -> 130 / 297\""
-        },
-        {
-          "desc": "rule 3: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]}",
+          "desc": "rule 2: heal on {:abilities=>[:WATERABSORB]}",
           "ok": true,
           "detail": "Florges: \"Florges soaked up the spray.\""
         }
@@ -943,36 +1080,39 @@
       "boost": {
         "ok": true,
         "move": "WATERPULSE",
-        "with": 86,
+        "with": 99,
         "without": 45,
-        "ratio": 1.91,
-        "detail": "Water Pulse: 86 dmg on field vs 45 without (WATER-type moves x1.5)"
+        "ratio": 2.2,
+        "detail": "Water Pulse: 99 dmg on field vs 45 without (WATER-type moves x1.5)"
       },
       "transitions": [
         {
-          "desc": "stage 1: moves DIVE/BOUNCE -> WATER_SURFACE",
+          "desc": "stage 1: moves DIVE/BOUNCE/FLY... -> WATER_SURFACE",
           "ok": true,
           "forced": true,
           "move": "DIVE",
           "rule_id": null,
           "detail": "fired with Dive"
+        },
+        {
+          "desc": "stage 1: moves SLUDGEWAVE x2 -> CORROSIVE_MIRE",
+          "ok": true,
+          "forced": true,
+          "move": "SLUDGEWAVE",
+          "rule_id": null,
+          "detail": "fired with Sludge Wave, Sludge Wave"
         }
       ],
       "seeds": [
         {
           "desc": "ELEMENTALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Elemental Seed released a bubble of air around it!\""
+          "detail": "consumed; \"Mew's Elemental Seed released a shimmering bubble of air around it!\""
         }
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:not_types=>[:WATER], :not_abilities=>[:WATERABSORB, :DRYSKIN, :STORMDRAIN, :SWIFTSWIM, :WATERVEIL]}",
-          "ok": true,
-          "detail": "Florges: \"Florges is struggling for air!\""
-        },
-        {
-          "desc": "rule 2: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]}",
+          "desc": "rule 1: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]}",
           "ok": true,
           "detail": "Florges: \"Florges drank in the sea.\""
         }
@@ -989,12 +1129,44 @@
       },
       "transitions": [
         {
-          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 -> NONE",
+          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 -> stage 2",
           "ok": true,
           "forced": true,
           "move": "EARTHQUAKE",
           "rule_id": null,
           "detail": "fired with Earthquake, Earthquake"
+        },
+        {
+          "desc": "stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x2 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "SURF",
+          "rule_id": null,
+          "detail": "fired with Surf, Surf"
+        },
+        {
+          "desc": "stage 1: moves MUDSPORT -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "MUDSPORT",
+          "rule_id": null,
+          "detail": "fired with Mud Sport"
+        },
+        {
+          "desc": "stage 2: moves CHARGE/DISCHARGE/PARABOLICCHARGE... x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "CHARGE",
+          "rule_id": null,
+          "detail": "fired with Charge, Charge"
+        },
+        {
+          "desc": "stage 2: terrain Electric -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "ELECTRICTERRAIN",
+          "rule_id": null,
+          "detail": "fired with Electric Terrain"
         }
       ],
       "seeds": [
@@ -1006,9 +1178,9 @@
       ],
       "eor": [
         {
-          "desc": "rule 1: status on {:grounded=>true, :not_types=>[:ELECTRIC, :GROUND]}",
+          "desc": "rule 1: stats on {:abilities=>[:MOTORDRIVE], :grounded=>true}",
           "ok": true,
-          "detail": "Snorlax: \"The wild Snorlax was jolted by a stray current!\""
+          "detail": "Florges: \"Florges drew current from the grid!\""
         },
         {
           "desc": "rule 2: heal on {:abilities=>[:VOLTABSORB]}",
@@ -1027,25 +1199,64 @@
         "detail": "Earth Power: 79 dmg on field vs 66 without (GROUND-type moves x1.2)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: weather Rain/HeavyRain -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "RAINDANCE",
+          "rule_id": null,
+          "detail": "fired with Rain Dance"
+        },
+        {
+          "desc": "stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "SURF",
+          "rule_id": null,
+          "detail": "fired with Surf, Surf, Surf"
+        },
+        {
+          "desc": "stage 1: moves ERUPTION/BLASTBURN/FUSIONFLARE... x2 -> ASHEN_WASTE",
+          "ok": true,
+          "forced": true,
+          "move": "ERUPTION",
+          "rule_id": null,
+          "detail": "fired with Eruption, Eruption"
+        },
+        {
+          "desc": "stage 2: weather Sun/HarshSun/Sandstorm -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "SUNNYDAY",
+          "rule_id": null,
+          "detail": "fired with Sunny Day"
+        },
+        {
+          "desc": "stage 2: types FIRE, category damaging x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "FLAMETHROWER",
+          "rule_id": null,
+          "detail": "fired with Flamethrower, Flamethrower"
+        }
       ],
       "seeds": [
         {
           "desc": "TELLURICSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Telluric Seed encased it in hardened sand!\""
+          "detail": "consumed; \"Mew's Telluric Seed half-buried it in hardened sand!\""
         }
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:abilities=>[:DRYSKIN, :SOLARPOWER]}",
+          "desc": "rule 1: heal on {:abilities=>[:EARTHEATER]}",
           "ok": true,
-          "detail": "Florges: \"The scorching sun beat down on Florges!\""
+          "detail": "Florges: \"Florges ate into the dunes.\""
         },
         {
-          "desc": "rule 2: damage on {:types=>[:ICE]}",
+          "desc": "rule 2: damage on {:abilities=>[:DRYSKIN]}",
           "ok": true,
-          "detail": "Glalie: \"Glalie is wilting in the desert heat!\""
+          "detail": "Florges: \"Florges's skin dried out in the desert heat.\""
         }
       ]
     },
@@ -1098,14 +1309,9 @@
           "detail": "Muk: \"The mire nourished Muk.\""
         },
         {
-          "desc": "rule 2: damage on {:grounded=>true, :types=>[:STEEL], :not_types=>[:POISON]}",
+          "desc": "rule 2: proc on {:types=>[:POISON]}",
           "ok": true,
-          "detail": "Klinklang: \"The mire is corroding Klinklang's metal!\""
-        },
-        {
-          "desc": "rule 3: status on {:grounded=>true, :not_types=>[:POISON, :STEEL]}",
-          "ok": true,
-          "detail": "Arcanine: \"Arcanine was poisoned by the corrosive mire!\""
+          "detail": "Muk: \"The mire nourished Muk.\""
         }
       ]
     },
@@ -1134,51 +1340,51 @@
           "move": "RAINDANCE",
           "rule_id": null,
           "detail": "fired with Rain Dance"
+        },
+        {
+          "desc": "stage 1: weather Sandstorm -> ASHEN_WASTE",
+          "ok": true,
+          "forced": true,
+          "move": "SANDSTORM",
+          "rule_id": null,
+          "detail": "fired with Sandstorm"
         }
       ],
       "seeds": [
         {
           "desc": "ELEMENTALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Elemental Seed ignited, searing it with volcanic power!\""
+          "detail": "consumed; \"Mew's Elemental Seed ignited, filling it with volcanic power!\""
         }
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:grounded=>true, :not_types=>[:FIRE], :not_abilities=>[:FLASHFIRE, :MAGMAARMOR, :WATERVEIL, :HEATPROOF, :WELLBAKEDBODY]}",
+          "desc": "rule 1: heal on {:abilities=>[:MAGMAARMOR]}",
           "ok": true,
-          "detail": "Florges: \"Florges was scorched by the magma!\""
+          "detail": "Florges: \"Florges basked in the magma.\""
         },
         {
           "desc": "rule 2: cure_status on {:status=>[:FROZEN]}",
           "ok": true,
-          "detail": "Florges: \"HP Florges (player): 148 -> 129 / 297\""
+          "detail": "Florges: \"Florges thawed out!\""
         },
         {
-          "desc": "rule 3: heal on {:abilities=>[:MAGMAARMOR]}",
-          "ok": true,
-          "detail": "Florges: \"Florges basked in the magma.\""
+          "desc": "end_of_round hook",
+          "ok": false,
+          "detail": "hook ran for 7 rounds without visible output"
         }
       ]
     },
     "ASHEN_WASTE": {
       "boost": {
         "ok": true,
-        "move": "EARTHPOWER",
-        "with": 79,
-        "without": 66,
-        "ratio": 1.2,
-        "detail": "Earth Power: 79 dmg on field vs 66 without (GROUND-type moves x1.2)"
+        "move": "POWERGEM",
+        "with": 99,
+        "without": 59,
+        "ratio": 1.68,
+        "detail": "Power Gem: 99 dmg on field vs 59 without (ROCK-type moves x1.3)"
       },
       "transitions": [
-        {
-          "desc": "stage 1: moves DEFOG -> NONE",
-          "ok": true,
-          "forced": true,
-          "move": "DEFOG",
-          "rule_id": null,
-          "detail": "fired with Defog"
-        },
         {
           "desc": "stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x3 -> VOLCANIC",
           "ok": true,
@@ -1186,20 +1392,41 @@
           "move": "ERUPTION",
           "rule_id": null,
           "detail": "fired with Eruption, Eruption, Eruption"
+        },
+        {
+          "desc": "stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x3 -> WATER_SURFACE",
+          "ok": true,
+          "forced": true,
+          "move": "SURF",
+          "rule_id": null,
+          "detail": "fired with Surf, Surf, Surf"
+        },
+        {
+          "desc": "stage 1: weather HeavyRain -> WATER_SURFACE",
+          "ok": true,
+          "forced": true,
+          "move": "SPLASH",
+          "rule_id": null,
+          "detail": "fired with Splash"
         }
       ],
       "seeds": [
         {
-          "desc": "TELLURICSEED",
+          "desc": "ELEMENTALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Telluric Seed cloaked it in ash!\""
+          "detail": "consumed; \"Mew's Elemental Seed wrapped it in a cloak of steam!\""
         }
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:not_types=>[:FIRE, :GROUND, :ROCK, :STEEL], :not_abilities=>[:OVERCOAT, :SANDVEIL, :SANDRUSH, :SANDFORCE], :not_items=>[:SAFETYGOGGLES]}",
+          "desc": "rule 1: stats on {:abilities=>[:STEAMENGINE]}",
           "ok": true,
-          "detail": "Snorlax: \"The wild Snorlax is choking on the ash!\""
+          "detail": "Florges: \"Florges drew power from the steam vents!\""
+        },
+        {
+          "desc": "end_of_round hook",
+          "ok": true,
+          "detail": "\"The ground hisses... the geysers will blow next turn! / Geysers of steam blast up through the glass!\""
         }
       ]
     },
@@ -1213,7 +1440,14 @@
         "detail": "Shadow Ball: 63 dmg on field vs 53 without (GHOST-type moves x1.2)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: moves TOPSYTURVY -> (proc)",
+          "ok": true,
+          "forced": true,
+          "move": "TOPSYTURVY",
+          "rule_id": null,
+          "detail": "fired with Growl, Topsy-Turvy"
+        }
       ],
       "seeds": [
         {
@@ -1229,10 +1463,11 @@
     "BLEED": {
       "boost": {
         "ok": true,
-        "move": "PSYCHIC",
-        "with": 133,
-        "without": 89,
-        "detail": "Psychic while borrowing MINDSCAPE: 133 dmg vs 89 with no field"
+        "move": "JUDGMENT",
+        "with": 113,
+        "without": 73,
+        "ratio": 1.55,
+        "detail": "Judgment: 113 dmg on field vs 73 without (Judgment x1.3)"
       },
       "transitions": [
 
@@ -1267,13 +1502,36 @@
         "detail": "Aura Sphere: 63 dmg on field vs 53 without (FIGHTING-type moves x1.2)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: check proc -> stage 2",
+          "ok": false,
+          "forced": true,
+          "move": "SPLASH",
+          "rule_id": null,
+          "detail": "did NOT fire with GROWL, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH"
+        },
+        {
+          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE",
+          "ok": true,
+          "forced": true,
+          "move": "EARTHQUAKE",
+          "rule_id": null,
+          "detail": "fired with Earthquake, Earthquake, Earthquake"
+        },
+        {
+          "desc": "stage 2: moves PROTECT/DETECT/REST... x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "PROTECT",
+          "rule_id": null,
+          "detail": "fired with Protect, Protect"
+        }
       ],
       "seeds": [
         {
-          "desc": "TELLURICSEED",
+          "desc": "SYNTHETICSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Telluric Seed fired it up to the roar of the crowd!\""
+          "detail": "consumed; \"Mew's Synthetic Seed fired it up to the roar of the crowd!\""
         }
       ],
       "eor": [
@@ -1331,12 +1589,12 @@
           "detail": "fired with Flamethrower"
         },
         {
-          "desc": "stage 1: flags Slicing, category damaging -> stage -1",
+          "desc": "stage 1: moves CUT/FURYCUTTER/SLASH... -> stage -1",
           "ok": true,
           "forced": true,
-          "move": "AQUACUTTER",
+          "move": "CUT",
           "rule_id": null,
-          "detail": "fired with Aqua Cutter"
+          "detail": "fired with Cut"
         },
         {
           "desc": "stage 1: weather Hail -> stage -1",
@@ -1345,6 +1603,14 @@
           "move": "HAIL",
           "rule_id": null,
           "detail": "fired with Hail"
+        },
+        {
+          "desc": "stage 1: moves ACIDSPRAY/SLUDGEWAVE/CORROSIVEGAS... -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "ACIDSPRAY",
+          "rule_id": null,
+          "detail": "fired with Acid Spray"
         },
         {
           "desc": "stage 2: moves GROWTH/ROTOTILLER/FLOWERSHIELD... -> stage +1",
@@ -1443,7 +1709,7 @@
           "detail": "fired with Energy Ball, Energy Ball"
         },
         {
-          "desc": "stage 5: types FIRE, category damaging x2 -> ASHEN_WASTE",
+          "desc": "stage 5: types FIRE, category damaging x2 -> WILDFIRE",
           "ok": true,
           "forced": true,
           "move": "FLAMETHROWER",
@@ -1501,15 +1767,11 @@
         {
           "desc": "ELEMENTALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Elemental Seed encased it in a skin of frost!\""
+          "detail": "consumed; \"Mew's Elemental Seed sent it skating at full speed - straight across the jagged ice!\""
         }
       ],
       "eor": [
-        {
-          "desc": "rule 1: heal on {:abilities=>[:ICEBODY]} +condition",
-          "ok": true,
-          "detail": "Florges: \"Florges drew strength from the ice.\""
-        }
+
       ]
     },
     "STORMFRONT": {
@@ -1522,7 +1784,14 @@
         "detail": "Air Slash: 66 dmg on field vs 56 without (FLYING-type moves x1.2)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: moves SUNNYDAY x2 -> RAINBOW",
+          "ok": true,
+          "forced": true,
+          "move": "SUNNYDAY",
+          "rule_id": null,
+          "detail": "fired with Sunny Day, Sunny Day"
+        }
       ],
       "seeds": [
         {
@@ -1533,22 +1802,27 @@
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:grounded=>false, :not_abilities=>[:LIGHTNINGROD, :VOLTABSORB, :MOTORDRIVE]} +condition",
+          "desc": "rule 1: damage on {:grounded=>false, :in_weather=>[:Rain, :HeavyRain], :not_types=>[:ELECTRIC], :not_abilities=>[:LIGHTNINGROD, :VOLTABSORB, :MOTORDRIVE]}",
           "ok": true,
-          "detail": "Tornadus (RAINDANCE): \"Lightning struck Tornadus!\""
+          "detail": "Tornadus (RAINDANCE): \"Lightning arced down at Tornadus!\""
         },
         {
-          "desc": "rule 2: stats on {:abilities=>[:LIGHTNINGROD]} +condition",
+          "desc": "rule 2: stats on {:grounded=>false, :in_weather=>[:Rain, :HeavyRain], :types=>[:ELECTRIC], :not_abilities=>[:LIGHTNINGROD, :VOLTABSORB, :MOTORDRIVE]}",
+          "ok": false,
+          "detail": "no end-of-round effect seen (tried Ampharos)"
+        },
+        {
+          "desc": "rule 3: stats on {:abilities=>[:LIGHTNINGROD], :in_weather=>[:Rain, :HeavyRain]}",
           "ok": true,
           "detail": "Florges (RAINDANCE): \"Florges drew a lightning bolt!\""
         },
         {
-          "desc": "rule 3: stats on {:abilities=>[:MOTORDRIVE]} +condition",
+          "desc": "rule 4: stats on {:abilities=>[:MOTORDRIVE], :in_weather=>[:Rain, :HeavyRain]}",
           "ok": true,
           "detail": "Florges (RAINDANCE): \"Florges drew a lightning bolt!\""
         },
         {
-          "desc": "rule 4: heal on {:abilities=>[:VOLTABSORB]} +condition",
+          "desc": "rule 5: heal on {:abilities=>[:VOLTABSORB], :in_weather=>[:Rain, :HeavyRain]}",
           "ok": true,
           "detail": "Florges (RAINDANCE): \"Florges drew a lightning bolt!\""
         }
@@ -1565,12 +1839,20 @@
       },
       "transitions": [
         {
-          "desc": "stage 1: flags Sound, category damaging x3 -> NONE",
+          "desc": "stage 1: moves DARKVOID/NIGHTMARE/SPITE -> stage 2",
           "ok": true,
           "forced": true,
-          "move": "OVERDRIVE",
+          "move": "DARKVOID",
           "rule_id": null,
-          "detail": "fired with Overdrive, Overdrive, Overdrive"
+          "detail": "fired with Dark Void"
+        },
+        {
+          "desc": "stage 1: types DARK, category damaging x3 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "DARKPULSE",
+          "rule_id": null,
+          "detail": "fired with Dark Pulse, Dark Pulse, Dark Pulse"
         },
         {
           "desc": "stage 1: moves TOPSYTURVY -> INVERSE",
@@ -1579,6 +1861,22 @@
           "move": "TOPSYTURVY",
           "rule_id": null,
           "detail": "fired with Growl, Topsy-Turvy"
+        },
+        {
+          "desc": "stage 1: flags Sound, category damaging x3 -> INVERSE",
+          "ok": true,
+          "forced": true,
+          "move": "OVERDRIVE",
+          "rule_id": null,
+          "detail": "fired with Overdrive, Overdrive, Overdrive"
+        },
+        {
+          "desc": "stage 2: moves CALMMIND/AROMATHERAPY/HEALBELL... x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "CALMMIND",
+          "rule_id": null,
+          "detail": "fired with Calm Mind, Calm Mind"
         }
       ],
       "seeds": [
@@ -1623,7 +1921,7 @@
           "detail": "fired with Sandstorm"
         },
         {
-          "desc": "stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> (proc)",
+          "desc": "stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> CAVE",
           "ok": true,
           "forced": true,
           "move": "EXPLOSION",
@@ -1631,7 +1929,7 @@
           "detail": "fired with Explosion"
         },
         {
-          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> (proc)",
+          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE",
           "ok": true,
           "forced": true,
           "move": "EARTHQUAKE",
@@ -1641,9 +1939,9 @@
       ],
       "seeds": [
         {
-          "desc": "TELLURICSEED",
+          "desc": "MAGICALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Telluric Seed grew a crystal shell around it!\""
+          "detail": "consumed; \"Mew's Magical Seed refracted the crystals' light around it!\""
         }
       ],
       "eor": [
@@ -1665,12 +1963,12 @@
       },
       "transitions": [
         {
-          "desc": "stage 1: moves FLASH/DAZZLINGGLEAM/FLASHCANNON... x2 -> CRYSTAL_CAVERN",
+          "desc": "stage 1: moves AURORABEAM/SIGNALBEAM/FLASHCANNON... x2 -> CRYSTAL_CAVERN",
           "ok": true,
           "forced": true,
-          "move": "FLASH",
+          "move": "AURORABEAM",
           "rule_id": null,
-          "detail": "fired with Flash, Flash"
+          "detail": "fired with Aurora Beam, Aurora Beam"
         },
         {
           "desc": "stage 1: weather Sun/HarshSun -> CRYSTAL_CAVERN",
@@ -1681,7 +1979,7 @@
           "detail": "fired with Sunny Day"
         },
         {
-          "desc": "stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> (proc)",
+          "desc": "stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> CAVE",
           "ok": true,
           "forced": true,
           "move": "EXPLOSION",
@@ -1689,7 +1987,7 @@
           "detail": "fired with Explosion"
         },
         {
-          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> (proc)",
+          "desc": "stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE",
           "ok": true,
           "forced": true,
           "move": "EARTHQUAKE",
@@ -1719,6 +2017,14 @@
       },
       "transitions": [
         {
+          "desc": "stage 1: moves SACREDFIRE/SACREDSWORD/JUDGMENT... x3 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "SACREDFIRE",
+          "rule_id": null,
+          "detail": "fired with Sacred Fire, Sacred Fire, Sacred Fire"
+        },
+        {
           "desc": "stage 1: moves TOPSYTURVY -> INVERSE",
           "ok": true,
           "forced": true,
@@ -1735,20 +2041,12 @@
           "detail": "fired with Boomburst, Boomburst"
         },
         {
-          "desc": "stage 1: moves SACREDFIRE/SACREDSWORD/JUDGMENT... x3 -> stage 2",
-          "ok": true,
-          "forced": true,
-          "move": "SACREDFIRE",
-          "rule_id": null,
-          "detail": "fired with Sacred Fire, Sacred Fire, Sacred Fire"
-        },
-        {
           "desc": "stage 2: moves CURSE/SPITE/GRUDGE... x2 -> stage 1",
           "ok": true,
           "forced": true,
-          "move": "SPITE",
+          "move": "CURSE",
           "rule_id": null,
-          "detail": "fired with Spite, Spite"
+          "detail": "fired with Curse, Curse"
         }
       ],
       "seeds": [
@@ -1759,21 +2057,17 @@
         }
       ],
       "eor": [
-        {
-          "desc": "rule 1: damage on {:status=>[:SLEEP], :not_types=>[:GHOST]}",
-          "ok": true,
-          "detail": "Florges: \"Florges is tormented by spirits in its sleep!\""
-        }
+
       ]
     },
     "FACTORY": {
       "boost": {
         "ok": true,
         "move": "FLASHCANNON",
-        "with": 87,
+        "with": 113,
         "without": 59,
-        "ratio": 1.47,
-        "detail": "Flash Cannon: 87 dmg on field vs 59 without (STEEL-type moves x1.5)"
+        "ratio": 1.92,
+        "detail": "Flash Cannon: 113 dmg on field vs 59 without (STEEL-type moves x1.5)"
       },
       "transitions": [
         {
@@ -1818,7 +2112,22 @@
         "detail": "Flash Cannon: 71 dmg on field vs 59 without (STEEL-type moves x1.2)"
       },
       "transitions": [
-
+        {
+          "desc": "stage 1: moves CHARGE/DISCHARGE/PARABOLICCHARGE... x3 -> FACTORY",
+          "ok": true,
+          "forced": true,
+          "move": "CHARGE",
+          "rule_id": null,
+          "detail": "fired with Charge, Charge, Charge"
+        },
+        {
+          "desc": "stage 1: moves ACIDSPRAY/SLUDGEWAVE/CORROSIVEGAS... x2 -> WASTELAND",
+          "ok": true,
+          "forced": true,
+          "move": "ACIDSPRAY",
+          "rule_id": null,
+          "detail": "fired with Acid Spray, Acid Spray"
+        }
       ],
       "seeds": [
         {
@@ -1828,30 +2137,58 @@
         }
       ],
       "eor": [
-        {
-          "desc": "rule 1: damage on {:types=>[:STEEL]} +condition",
-          "ok": true,
-          "detail": "Klinklang (RAINDANCE): \"Klinklang is rusting in the rain!\""
-        }
+
       ]
     },
     "NEW_MOON": {
       "boost": {
         "ok": true,
         "move": "DARKPULSE",
-        "with": 87,
+        "with": 105,
         "without": 59,
-        "ratio": 1.47,
-        "detail": "Dark Pulse: 87 dmg on field vs 59 without (DARK-type moves x1.5)"
+        "ratio": 1.78,
+        "detail": "Dark Pulse: 105 dmg on field vs 59 without (DARK-type moves x1.5)"
       },
       "transitions": [
         {
-          "desc": "stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 -> NONE",
+          "desc": "stage 1: moves DARKVOID -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "DARKVOID",
+          "rule_id": null,
+          "detail": "fired with Dark Void"
+        },
+        {
+          "desc": "stage 1: moves DARKPULSE/NIGHTDAZE/MOONGEISTBEAM... x3 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "MOONGEISTBEAM",
+          "rule_id": null,
+          "detail": "fired with Moongeist Beam, Moongeist Beam, Moongeist Beam"
+        },
+        {
+          "desc": "stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 -> stage 3",
           "ok": true,
           "forced": true,
           "move": "FLASH",
           "rule_id": null,
           "detail": "fired with Flash, Flash, Flash"
+        },
+        {
+          "desc": "stage 2: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "FLASH",
+          "rule_id": null,
+          "detail": "fired with Flash, Flash"
+        },
+        {
+          "desc": "stage 3: types DARK, category damaging x3 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "DARKPULSE",
+          "rule_id": null,
+          "detail": "fired with Dark Pulse, Dark Pulse, Dark Pulse"
         }
       ],
       "seeds": [
@@ -1918,20 +2255,20 @@
           "detail": "fired with Water Pulse, Water Pulse, Water Pulse"
         },
         {
+          "desc": "stage 1: types FAIRY, category damaging x3 -> FAIRY_TALE",
+          "ok": true,
+          "forced": true,
+          "move": "MOONBLAST",
+          "rule_id": null,
+          "detail": "fired with Moonblast, Moonblast, Moonblast"
+        },
+        {
           "desc": "stage 1: types DRAGON, category damaging x4 -> stage 2",
           "ok": true,
           "forced": true,
           "move": "DRAGONPULSE",
           "rule_id": null,
           "detail": "fired with Dragon Pulse, Dragon Pulse, Dragon Pulse, Dragon Pulse"
-        },
-        {
-          "desc": "stage 2: types WATER/ICE, category damaging x3 -> CAVE",
-          "ok": true,
-          "forced": true,
-          "move": "WATERPULSE",
-          "rule_id": null,
-          "detail": "fired with Water Pulse, Water Pulse, Water Pulse"
         }
       ],
       "seeds": [
@@ -1942,11 +2279,7 @@
         }
       ],
       "eor": [
-        {
-          "desc": "rule 1: cure_status on {:status=>[:FROZEN]}",
-          "ok": true,
-          "detail": "Florges: \"The den's heat thawed Florges out!\""
-        }
+
       ]
     },
     "CAVE": {
@@ -1966,6 +2299,38 @@
           "move": "EARTHQUAKE",
           "rule_id": null,
           "detail": "fired with Earthquake"
+        },
+        {
+          "desc": "stage 1: moves POWERGEM/DIAMONDSTORM x2 -> CRYSTAL_CAVERN",
+          "ok": true,
+          "forced": true,
+          "move": "POWERGEM",
+          "rule_id": null,
+          "detail": "fired with Power Gem, Power Gem"
+        },
+        {
+          "desc": "stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x2 -> VOLCANIC",
+          "ok": true,
+          "forced": true,
+          "move": "ERUPTION",
+          "rule_id": null,
+          "detail": "fired with Eruption, Eruption"
+        },
+        {
+          "desc": "stage 1: moves DRACOMETEOR -> DRAGONS_DEN",
+          "ok": true,
+          "forced": true,
+          "move": "DRACOMETEOR",
+          "rule_id": null,
+          "detail": "fired with Draco Meteor"
+        },
+        {
+          "desc": "stage 1: moves DRAGONPULSE/DRAGONENERGY/CLANGINGSCALES x2 -> DRAGONS_DEN",
+          "ok": true,
+          "forced": true,
+          "move": "DRAGONPULSE",
+          "rule_id": null,
+          "detail": "fired with Dragon Pulse, Dragon Pulse"
         },
         {
           "desc": "stage 2: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage 1",
@@ -2012,13 +2377,21 @@
           "move": "BLIZZARD",
           "rule_id": null,
           "detail": "fired with Blizzard, Blizzard"
+        },
+        {
+          "desc": "stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x2 -> VOLCANIC",
+          "ok": true,
+          "forced": true,
+          "move": "ERUPTION",
+          "rule_id": null,
+          "detail": "fired with Eruption, Eruption"
         }
       ],
       "seeds": [
         {
-          "desc": "ELEMENTALSEED",
+          "desc": "TELLURICSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Elemental Seed caught the mountain wind!\""
+          "detail": "consumed; \"Mew's Telluric Seed caught the mountain wind!\""
         }
       ],
       "eor": [
@@ -2036,6 +2409,14 @@
       },
       "transitions": [
         {
+          "desc": "stage 1: moves ERUPTION/MAGMASTORM x2 -> VOLCANIC",
+          "ok": true,
+          "forced": true,
+          "move": "ERUPTION",
+          "rule_id": null,
+          "detail": "fired with Eruption, Eruption"
+        },
+        {
           "desc": "stage 1: weather Sun/HarshSun -> MOUNTAIN",
           "ok": true,
           "forced": true,
@@ -2044,7 +2425,7 @@
           "detail": "fired with Sunny Day"
         },
         {
-          "desc": "stage 1: moves HEATWAVE/ERUPTION/LAVAPLUME... x2 -> MOUNTAIN",
+          "desc": "stage 1: moves HEATWAVE/LAVAPLUME/FIREPLEDGE... x2 -> MOUNTAIN",
           "ok": true,
           "forced": true,
           "move": "HEATWAVE",
@@ -2061,12 +2442,7 @@
       ],
       "eor": [
         {
-          "desc": "rule 1: heal on {:abilities=>[:ICEBODY]}",
-          "ok": true,
-          "detail": "Florges: \"Florges absorbed the falling snow.\""
-        },
-        {
-          "desc": "rule 2: cure_status on {:grounded=>true, :status=>[:BURN]}",
+          "desc": "rule 1: cure_status on {:grounded=>true, :status=>[:BURN]}",
           "ok": true,
           "detail": "Florges: \"The deep snow soothed Florges's burn!\""
         }
@@ -2130,7 +2506,7 @@
       },
       "transitions": [
         {
-          "desc": "stage 1: weather Sandstorm/Hail -> NONE",
+          "desc": "stage 1: weather Sandstorm/Hail -> (proc)",
           "ok": true,
           "forced": true,
           "move": "SANDSTORM",
@@ -2138,7 +2514,7 @@
           "detail": "fired with Sandstorm"
         },
         {
-          "desc": "stage 1: moves DEFOG -> NONE",
+          "desc": "stage 1: moves DEFOG -> (proc)",
           "ok": true,
           "forced": true,
           "move": "DEFOG",
@@ -2150,7 +2526,7 @@
         {
           "desc": "MAGICALSEED",
           "ok": true,
-          "detail": "consumed; \"Mew's Magical Seed shimmered in every color!\""
+          "detail": "consumed; \"Mew's Magical Seed shimmered in every colour!\""
         }
       ],
       "eor": [
@@ -2158,6 +2534,11 @@
           "desc": "rule 1: heal on {:status=>[:SLEEP]}",
           "ok": true,
           "detail": "Florges: \"Florges is having sweet dreams beneath the rainbow.\""
+        },
+        {
+          "desc": "rule 2: proc on {:abilities=>[:CLOUDNINE]}",
+          "ok": true,
+          "detail": "Florges: \"Florges's Defense rose!\""
         }
       ]
     },
@@ -2165,10 +2546,10 @@
       "boost": {
         "ok": true,
         "move": "SLUDGEBOMB",
-        "with": 79,
+        "with": 95,
         "without": 66,
-        "ratio": 1.2,
-        "detail": "Sludge Bomb: 79 dmg on field vs 66 without (POISON-type moves x1.2)"
+        "ratio": 1.44,
+        "detail": "Sludge Bomb: 95 dmg on field vs 66 without (POISON-type moves x1.2)"
       },
       "transitions": [
         {
@@ -2180,7 +2561,7 @@
           "detail": "fired with Grassy Terrain"
         },
         {
-          "desc": "stage 1: moves PURIFY x2 -> NONE",
+          "desc": "stage 1: moves PURIFY x2 -> MEADOW",
           "ok": true,
           "forced": true,
           "move": "PURIFY",
@@ -2197,12 +2578,7 @@
       ],
       "eor": [
         {
-          "desc": "rule 1: damage on {:not_types=>[:POISON, :STEEL], :not_abilities=>[:OVERCOAT]} +condition",
-          "ok": true,
-          "detail": "Snorlax (RAINDANCE): \"The acid rain burned the wild Snorlax!\""
-        },
-        {
-          "desc": "rule 2: heal on {:abilities=>[:POISONHEAL], :status=>[:POISON]}",
+          "desc": "rule 1: heal on {:abilities=>[:POISONHEAL], :status=>[:POISON]}",
           "ok": true,
           "detail": "Florges: \"Florges thrived on the toxic wastes.\""
         }
@@ -2239,6 +2615,162 @@
           "detail": "\"The Flame Plate begins to glow... After the next turn, the arena becomes the Volcanic Field! / The Plates turn! The Flame Plate blazes, and the arena becomes the Volcanic Field!\""
         }
       ]
+    },
+    "WILDFIRE": {
+      "boost": {
+        "ok": true,
+        "move": "FLAMETHROWER",
+        "with": 99,
+        "without": 66,
+        "ratio": 1.5,
+        "detail": "Flamethrower: 99 dmg on field vs 66 without (FIRE-type moves x1.5)"
+      },
+      "transitions": [
+        {
+          "desc": "stage 1: check proc -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "SPLASH",
+          "rule_id": null,
+          "detail": "fired with Splash, Splash, Splash, Splash, Splash, Splash, Splash, Splash"
+        },
+        {
+          "desc": "stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x2 -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "SURF",
+          "rule_id": null,
+          "detail": "fired with Surf, Surf"
+        },
+        {
+          "desc": "stage 1: moves DEFOG/WHIRLWIND/TAILWIND -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "DEFOG",
+          "rule_id": null,
+          "detail": "fired with Defog"
+        },
+        {
+          "desc": "stage 1: weather Rain/HeavyRain/Sandstorm -> stage 2",
+          "ok": true,
+          "forced": true,
+          "move": "RAINDANCE",
+          "rule_id": null,
+          "detail": "fired with Rain Dance"
+        },
+        {
+          "desc": "stage 2: moves ERUPTION/LAVAPLUME/HEATWAVE... x2 -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "ERUPTION",
+          "rule_id": null,
+          "detail": "fired with Eruption, Eruption"
+        },
+        {
+          "desc": "stage 2: weather Sun/HarshSun -> stage 1",
+          "ok": true,
+          "forced": true,
+          "move": "SUNNYDAY",
+          "rule_id": null,
+          "detail": "fired with Sunny Day"
+        },
+        {
+          "desc": "stage 2: weather Rain/HeavyRain -> MEADOW",
+          "ok": true,
+          "forced": true,
+          "move": "RAINDANCE",
+          "rule_id": null,
+          "detail": "fired with Rain Dance"
+        },
+        {
+          "desc": "stage 2: terrain Grassy -> MEADOW",
+          "ok": true,
+          "forced": true,
+          "move": "GRASSYTERRAIN",
+          "rule_id": null,
+          "detail": "fired with Grassy Terrain"
+        },
+        {
+          "desc": "stage 2: moves GROWTH/INGRAIN/GRASSPLEDGE... x2 -> MEADOW",
+          "ok": true,
+          "forced": true,
+          "move": "GROWTH",
+          "rule_id": null,
+          "detail": "fired with Growth, Growth"
+        }
+      ],
+      "seeds": [
+        {
+          "desc": "ELEMENTALSEED",
+          "ok": true,
+          "detail": "consumed; \"Mew's Elemental Seed caught the blaze inside it!\""
+        }
+      ],
+      "eor": [
+        {
+          "desc": "end_of_round hook",
+          "ok": true,
+          "detail": "\"The wildfire is starting to burn itself out... / ## FIELD STAGE: WILDFIRE is now stage 2\""
+        }
+      ]
+    },
+    "MEADOW": {
+      "boost": {
+        "ok": true,
+        "move": "ENERGYBALL",
+        "with": 79,
+        "without": 66,
+        "ratio": 1.2,
+        "detail": "Energy Ball: 79 dmg on field vs 66 without (GRASS-type moves x1.2)"
+      },
+      "transitions": [
+        {
+          "desc": "stage 1: types FIRE, category damaging, condition proc x2 -> WILDFIRE",
+          "ok": true,
+          "forced": true,
+          "move": "FLAMETHROWER",
+          "rule_id": null,
+          "detail": "fired with Flamethrower, Flamethrower"
+        },
+        {
+          "desc": "stage 1: types FIRE, category damaging -> WILDFIRE",
+          "ok": true,
+          "forced": true,
+          "move": "FLAMETHROWER",
+          "rule_id": null,
+          "detail": "fired with Sunny Day, Flamethrower"
+        },
+        {
+          "desc": "stage 1: terrain Grassy -> FLOWER_GARDEN",
+          "ok": true,
+          "forced": true,
+          "move": "GRASSYTERRAIN",
+          "rule_id": null,
+          "detail": "fired with Grassy Terrain"
+        },
+        {
+          "desc": "stage 1: moves GROWTH/ROTOTILLER/FLOWERSHIELD... x2 -> FLOWER_GARDEN",
+          "ok": true,
+          "forced": true,
+          "move": "GROWTH",
+          "rule_id": null,
+          "detail": "fired with Growth, Growth"
+        }
+      ],
+      "seeds": [
+        {
+          "desc": "TELLURICSEED",
+          "ok": true,
+          "detail": "consumed; \"Mew's Telluric Seed let it vanish into the tall grass!\""
+        }
+      ],
+      "eor": [
+        {
+          "desc": "rule 1: heal on {:abilities=>[:SAPSIPPER]}",
+          "ok": true,
+          "detail": "Florges: \"Florges grazed on the meadow.\""
+        }
+      ]
     }
   },
   "bosses": [
@@ -2246,7 +2778,7 @@
       "name": "BOSS Zekrom (ZEKROM_ENGINE, 3 bars, FACTORY -> SCRAPYARD) vs over-levelled Lv.100 party",
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 4,
+      "turns": 5,
       "bar_breaks": [
         [
           "ZEKROM_ENGINE",
@@ -2278,7 +2810,7 @@
       "name": "BOSS Kyogre (KYOGRE_ISENMAR, 3 bars, FROZEN_LAKE -> WATER_SURFACE) vs over-levelled Lv.100 party",
       "outcome": 1,
       "outcome_text": "player won",
-      "turns": 2,
+      "turns": 7,
       "bar_breaks": [
         [
           "KYOGRE_ISENMAR",
@@ -2301,6 +2833,11 @@
           "FROZEN_LAKE",
           "WATER_SURFACE",
           1
+        ],
+        [
+          "WATER_SURFACE",
+          "FROZEN_LAKE",
+          1
         ]
       ],
       "result": "{:id=>:KYOGRE_ISENMAR, :bars=>3, :bars_left=>0, :breaks=>2, :defeated=>true, :result=>:defeated, :overflow=>0, :decision=>1, :all=>[{:id=>:KYOGRE_ISENMAR, :bars=>3, :bars_left=>0, :breaks=>2, :defeated=>true, :result=>:defeated, :overflow=>0, :decision=>1}]}",
@@ -2310,7 +2847,7 @@
       "name": "BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party",
       "outcome": 2,
       "outcome_text": "player lost",
-      "turns": 9,
+      "turns": 8,
       "bar_breaks": [
 
       ],

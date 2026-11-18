@@ -10,15 +10,12 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
   Champion Shelly sent out Masquerain!
     >> sent out (foe): Masquerain Lv.16 @SITRUSBERRY [INTIMIDATE]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.17 @TELLURICSEED [INTIMIDATE]
+    >> sent out (player): Growlithe Lv.17 @TELLURICSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> SNOWY_MOUNTAIN
   A blizzard rages over the snowbound peak!
     [ability: Masquerain (foe)'s Intimidate]
     (anim: StatDown)
   Growlithe's Attack fell!
-    [ability: Growlithe (player)'s Intimidate]
-    (anim: StatDown)
-  The opposing Masquerain's Attack fell!
     (anim: UseItem)
   Growlithe's Telluric Seed packed it in a shell of snow!
     (anim: StatUp)
@@ -133,7 +130,7 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
     xx fainted: Staravia (player)
   (end of round)
   Go for it, Roggenrola!
-    >> sent out (player): Roggenrola Lv.17 [STURDY]
+    >> sent out (player): Roggenrola Lv.17 [WEAKARMOR]
   Roggenrola was caught in a sticky web!
     (anim: StatDown)
   Roggenrola's Speed fell!
@@ -144,6 +141,7 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
     (anim: Paralysis)
   Roggenrola is paralyzed! It may be unable to move!
   Roggenrola used Rock Blast!
+  The boulders came down frozen solid!
     HP Joltik (foe): 26 -> 0 / 44
   The opposing Joltik fainted!
     xx fainted: Joltik (foe)
@@ -162,71 +160,106 @@ Snowy Mountain [SNOWY_MOUNTAIN] - Champion Shelly vs challenger (Lv.17)
     (anim: StatDown)
   Roggenrola's Special Attack fell!
   Roggenrola used Rock Blast!
-    HP Larvesta (foe): 48 -> 2 / 48
+  The boulders came down frozen solid!
+    HP Larvesta (foe): 48 -> 25 / 48
+    HP Larvesta (foe): 25 -> 2 / 48
     (anim: EatBerry)
     HP Larvesta (foe): 2 -> 12 / 48
   The opposing Larvesta restored a little HP using its Oran Berry!
+  It's super effective!
+  Hit 2 times!
+  (end of round)
+
+--- Turn 11 ---
+  [Roggenrola 31/50 PARALYSIS | Larvesta 12/48]
+  The opposing Larvesta used Struggle Bug!
+    HP Roggenrola (player): 31 -> 11 / 50
+    (anim: StatDown)
+  Roggenrola's Special Attack fell!
+  Roggenrola used Headbutt!
     HP Larvesta (foe): 12 -> 0 / 48
   The opposing Larvesta fainted!
     xx fainted: Larvesta (foe)
-  It's super effective!
-  Hit 2 times!
   (end of round)
   Champion Shelly is about to send out Scyther. Will you switch your Pokémon?  [auto: No]
   Champion Shelly sent out Scyther!
     >> sent out (foe): Scyther Lv.17 @EVIOLITE [TECHNICIAN]
 
---- Turn 11 ---
-  [Roggenrola 31/50 PARALYSIS | Scyther 53/53]
-  The opposing Scyther used Fury Cutter!
-    HP Roggenrola (player): 31 -> 12 / 50
-  Roggenrola used Smack Down!
-    HP Scyther (foe): 53 -> 6 / 53
-  It's super effective!
-  The opposing Scyther fell straight down!
-  (end of round)
-
 --- Turn 12 ---
-  [Roggenrola 12/50 PARALYSIS | Scyther 6/53]
+  [Roggenrola 11/50 PARALYSIS | Scyther 53/53]
   The opposing Scyther used Fury Cutter!
-    HP Roggenrola (player): 12 -> 0 / 50
-  A critical hit!
+    HP Roggenrola (player): 11 -> 0 / 50
   Roggenrola fainted!
     xx fainted: Roggenrola (player)
   (end of round)
-  Your opponent's weak! Get 'em, Mareep!
+  You're in charge, Mareep!
     >> sent out (player): Mareep Lv.17 [STATIC]
   Mareep was caught in a sticky web!
     (anim: StatDown)
   Mareep's Speed fell!
 
 --- Turn 13 ---
-  [Mareep 50/50 | Scyther 6/53]
+  [Mareep 50/50 | Scyther 53/53]
+  The opposing Scyther used Focus Energy!
+  The opposing Scyther is getting pumped!
+  Mareep used Charge Beam!
+    HP Scyther (foe): 53 -> 38 / 53
+  It's super effective!
+    (anim: StatUp)
+  Mareep's Special Attack rose!
+  (end of round)
+
+--- Turn 14 ---
+  [Mareep 50/50 | Scyther 38/53]
   The opposing Scyther used Fury Cutter!
-    HP Mareep (player): 50 -> 0 / 50
+    HP Mareep (player): 50 -> 8 / 50
+  A critical hit!
+  Mareep used Charge Beam!
+    HP Scyther (foe): 38 -> 15 / 53
+  It's super effective!
+    (anim: StatUp)
+  Mareep's Special Attack rose!
+  (end of round)
+
+--- Turn 15 ---
+  [Mareep 8/50 | Scyther 15/53]
+  The opposing Scyther used Fury Cutter!
+    HP Mareep (player): 8 -> 0 / 50
   Mareep fainted!
     xx fainted: Mareep (player)
   (end of round)
-  Your opponent's weak! Get 'em, Machop!
+  Just a little more! Hang in there, Machop!
     >> sent out (player): Machop Lv.17 [GUTS]
   Machop was caught in a sticky web!
     (anim: StatDown)
   Machop's Speed fell!
 
---- Turn 14 ---
-  [Machop 56/56 | Scyther 6/53]
+--- Turn 16 ---
+  [Machop 56/56 | Scyther 15/53]
+  The opposing Scyther used Wing Attack!
+    HP Machop (player): 56 -> 0 / 56
+  A critical hit!
+  It's super effective!
+  Machop fainted!
+    xx fainted: Machop (player)
+  (end of round)
+  Just a little more! Hang in there, Lombre!
+    >> sent out (player): Lombre Lv.17 [RAINDISH]
+  Lombre was caught in a sticky web!
+    (anim: StatDown)
+  Lombre's Speed fell!
+
+--- Turn 17 ---
+  [Lombre 52/52 | Scyther 15/53]
   The opposing Scyther used Fury Cutter!
-    HP Machop (player): 56 -> 23 / 56
-  It's not very effective...
-  Machop used Knock Off!
-    HP Scyther (foe): 6 -> 0 / 53
-  The opposing Scyther fainted!
-    xx fainted: Scyther (foe)
-  The opposing Scyther dropped its Eviolite!
-  Machop is at the level cap (Lv. 17) and can't gain Exp. Points.
-  You defeated Champion Shelly!
-  S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
-  You got $2,550 for winning!
-  battle result code: 1
+    HP Lombre (player): 52 -> 0 / 52
+  A critical hit!
+  It's super effective!
+  Lombre fainted!
+    xx fainted: Lombre (player)
+  You have no more Pokémon that can fight!
+  You lost against Champion Shelly!
+  You gave $2,040 to the winner...
+  battle result code: 2
   
-RESULT: player won after 13 turn(s)
+RESULT: player lost after 16 turn(s)

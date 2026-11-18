@@ -1,7 +1,7 @@
 LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
 Not a game screenshot: no EBDX visuals were rendered.
 
-Ashen Waste [ASHEN_WASTE] - Hiker Ford vs challenger (Lv.19)
+Cinderglass [ASHEN_WASTE] - Hiker Ford vs challenger (Lv.19)
 ============================================================
 
 --- Battle start ---
@@ -10,60 +10,62 @@ Ashen Waste [ASHEN_WASTE] - Hiker Ford vs challenger (Lv.19)
   Hiker Ford sent out Machop!
     >> sent out (foe): Machop Lv.19 [GUTS]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.19 @TELLURICSEED [FLASHFIRE]
+    >> sent out (player): Growlithe Lv.19 @ELEMENTALSEED [INTIMIDATE]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
+  The magma has set into black glass... and steam roars from every crack!
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Machop's Attack fell!
     (anim: UseItem)
-  Growlithe's Telluric Seed cloaked it in ash!
+  Growlithe's Elemental Seed wrapped it in a cloak of steam!
     (anim: StatUp)
-  Growlithe's Defense rose!
+  Growlithe's Speed rose!
   Growlithe's evasiveness rose!
+  Growlithe's accuracy fell!
 
 --- Turn 1 ---
   [Growlithe 55/55 | Machop 58/58]
   Growlithe used Ember!
-  The ash smothered the flames...
-    HP Machop (foe): 58 -> 42 / 58
+  The heat beneath the glass flared up with Ember!
+    HP Machop (foe): 58 -> 35 / 58
   The opposing Machop used Focus Energy!
   The opposing Machop is getting pumped!
   (end of round)
-    HP Machop (foe): 42 -> 38 / 58
-  The opposing Machop is choking on the ash!
 
 --- Turn 2 ---
-  [Growlithe 55/55 | Machop 38/58]
+  [Growlithe 55/55 | Machop 35/58]
   Growlithe used Bite!
-    HP Machop (foe): 38 -> 31 / 58
+    HP Machop (foe): 35 -> 29 / 58
   It's not very effective...
-  The opposing Machop used Knock Off!
-    HP Growlithe (player): 55 -> 43 / 55
+  The opposing Machop flinched and couldn't move!
   (end of round)
-    HP Machop (foe): 31 -> 27 / 58
-  The opposing Machop is choking on the ash!
+  The ground hisses... the geysers will blow next turn!
 
 --- Turn 3 ---
-  [Growlithe 43/55 | Machop 27/58]
-  Growlithe used Ember!
-  The ash smothered the flames...
-    HP Machop (foe): 27 -> 9 / 58
+  [Growlithe 55/55 | Machop 29/58]
+  Growlithe used Bite!
+    HP Machop (foe): 29 -> 23 / 58
+  It's not very effective...
   The opposing Machop used Revenge!
-    HP Growlithe (player): 43 -> 0 / 55
+    HP Growlithe (player): 55 -> 0 / 55
   A critical hit!
   Growlithe fainted!
     xx fainted: Growlithe (player)
   (end of round)
-    HP Machop (foe): 9 -> 5 / 58
-  The opposing Machop is choking on the ash!
-  Your opponent's weak! Get 'em, Staravia!
+  Geysers of steam blast up through the glass!
+    HP Machop (foe): 23 -> 16 / 58
+  A geyser erupted right beneath the opposing Machop!
+  Just a little more! Hang in there, Staravia!
     >> sent out (player): Staravia Lv.19 [INTIMIDATE]
     [ability: Staravia (player)'s Intimidate]
     (anim: StatDown)
   The opposing Machop's Attack fell!
 
 --- Turn 4 ---
-  [Staravia 55/55 | Machop 5/58]
-  Staravia used Quick Attack!
-    HP Machop (foe): 5 -> 0 / 58
+  [Staravia 55/55 | Machop 16/58]
+  Staravia used Aerial Ace!
+    HP Machop (foe): 16 -> 0 / 58
+  It's super effective!
   The opposing Machop fainted!
     xx fainted: Machop (foe)
   Staravia is at the level cap (Lv. 19) and can't gain Exp. Points.

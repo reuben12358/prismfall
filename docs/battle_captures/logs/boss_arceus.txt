@@ -49,7 +49,7 @@ BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
 --- Turn 4 ---
   [Garchomp 63/357 | Arceus 204/382]
   The wild Arceus used Judgment!
-  The magma roared!
+  The wild Arceus drew fire up from the magma!
     HP Garchomp (player): 63 -> 0 / 357
   It's not very effective...
   Garchomp fainted!
@@ -70,8 +70,13 @@ BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
   It's super effective!
   Lucario fainted!
     xx fainted: Lucario (player)
+  The ground heaves... the volcano is about to erupt!
   (end of round)
   The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
+  The volcano erupted!
+  The wild Arceus rode the eruption!
+    (anim: StatUp)
+  The wild Arceus's Special Attack rose!
   Use next Pokémon?  [auto: Yes]
   Just a little more! Hang in there, Charizard!
     >> sent out (player): Charizard Lv.100 [BLAZE]
@@ -79,45 +84,34 @@ BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
 --- Turn 6 ---
   [Charizard 297/297 | Arceus 130/382]
   The wild Arceus used Judgment!
-  The magma roared!
-    HP Charizard (player): 297 -> 10 / 297
+  The wild Arceus drew fire up from the magma!
+    HP Charizard (player): 297 -> 0 / 297
   It's not very effective...
-  Charizard used Flamethrower!
-  The magma roared!
-    HP Arceus (foe): 130 -> 38 / 382
-  It's not very effective...
+  Charizard fainted!
+    xx fainted: Charizard (player)
   (end of round)
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
   The wild Arceus's Multitype resonated with the Splash Plate! It became the Water type!
   The wild Arceus took on the Water type!
-
---- Turn 7 ---
-  [Charizard 10/297 | Arceus 38/382]
-  The wild Arceus used Ice Beam!
-    HP Charizard (player): 10 -> 0 / 297
-  Charizard fainted!
-    xx fainted: Charizard (player)
-  (end of round)
   Use next Pokémon?  [auto: Yes]
-  Your opponent's weak! Get 'em, Magnezone!
+  Just a little more! Hang in there, Magnezone!
     >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
 
---- Turn 8 ---
-  [Magnezone 281/281 | Arceus 38/382]
+--- Turn 7 ---
+  [Magnezone 281/281 | Arceus 130/382]
   The wild Arceus used Judgment!
-  The waves amplified the attack!
+  The wild Arceus rode the waves into the attack!
     HP Magnezone (player): 281 -> 0 / 281
   Magnezone fainted!
     xx fainted: Magnezone (player)
   (end of round)
-  The Meadow Plate begins to glow... After the next turn, the arena becomes the Flower Garden!
   Use next Pokémon?  [auto: Yes]
-  Your opponent's weak! Get 'em, Starmie!
-    >> sent out (player): Starmie Lv.100 [ILLUMINATE]
+  Just a little more! Hang in there, Starmie!
+    >> sent out (player): Starmie Lv.100 [NATURALCURE]
 
---- Turn 9 ---
-  [Starmie 261/261 | Arceus 38/382]
+--- Turn 8 ---
+  [Starmie 261/261 | Arceus 130/382]
   The wild Arceus used Thunderbolt!
   Thunderbolt struck a dissonant chord with the ascendant Plate!
   The current raced across the water!
@@ -126,17 +120,14 @@ BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
   Starmie fainted!
     xx fainted: Starmie (player)
   (end of round)
-  The Plates turn! The Meadow Plate blazes, and the arena becomes the Flower Garden!
-## FIELD OVERLAY: PRISM_ARENA now borrows [:FLOWER_GARDEN] (was [:WATER_SURFACE])
-  The wild Arceus's Multitype resonated with the Meadow Plate! It became the Grass type!
-  The wild Arceus took on the Grass type!
+  The Meadow Plate begins to glow... After the next turn, the arena becomes the Flower Garden!
   Use next Pokémon?  [auto: Yes]
-  Your opponent's weak! Get 'em, Togekiss!
+  Just a little more! Hang in there, Togekiss!
     >> sent out (player): Togekiss Lv.100 [SERENEGRACE]
 
---- Turn 10 ---
-  [Togekiss 311/311 | Arceus 38/382]
-  The wild Arceus used Sludge Bomb!
+--- Turn 9 ---
+  [Togekiss 311/311 | Arceus 130/382]
+  The wild Arceus used Ice Beam!
     HP Togekiss (player): 311 -> 0 / 311
   It's super effective!
   Togekiss fainted!
@@ -144,4 +135,4 @@ BOSS Arceus (ARCEUS_FINALE on PRISM_ARENA) vs Lv.100 party
   You have no more Pokémon that can fight!
   battle result code: 2
   
-RESULT: player lost after 9 turn(s)
+RESULT: player lost after 8 turn(s)

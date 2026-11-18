@@ -24,7 +24,7 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
   [Growlithe 46/46 | Morelull 35/35]
   Growlithe used Bite!
   The Bleed warped Bite into something stronger!
-  The water's resistance slowed Growlithe's attack!
+  The water slowed Growlithe's strike...
     HP Morelull (foe): 35 -> 31 / 35
   It's not very effective...
     [ability: Morelull (foe)'s Effect Spore]
@@ -37,239 +37,151 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
     (anim: Poison)
     HP Growlithe (player): 46 -> 41 / 46
   Growlithe was hurt by poison!
-    HP Growlithe (player): 41 -> 35 / 46
-  Growlithe is struggling for air!
-    HP Morelull (foe): 31 -> 30 / 35
-  The opposing Morelull is struggling for air!
 
 --- Turn 2 ---
-  [Growlithe 35/46 POISON | Morelull 30/35]
+  [Growlithe 41/46 POISON | Morelull 31/35]
     (anim: Confusion)
   Growlithe is confused!
-  The water's resistance slowed Growlithe's attack!
-    HP Growlithe (player): 35 -> 29 / 46
+  The water slowed Growlithe's strike...
+    HP Growlithe (player): 41 -> 35 / 46
   It hurt itself in its confusion!
   The opposing Morelull used Ingrain!
   The opposing Morelull planted its roots!
   (end of round)
-    HP Morelull (foe): 30 -> 32 / 35
+    HP Morelull (foe): 31 -> 33 / 35
   The opposing Morelull absorbed nutrients with its roots!
     (anim: Poison)
-    HP Growlithe (player): 29 -> 24 / 46
+    HP Growlithe (player): 35 -> 30 / 46
   Growlithe was hurt by poison!
-    HP Growlithe (player): 24 -> 18 / 46
-  Growlithe is struggling for air!
-    HP Morelull (foe): 32 -> 31 / 35
-  The opposing Morelull is struggling for air!
 
 --- Turn 3 ---
-  [Growlithe 18/46 POISON | Morelull 31/35]
+  [Growlithe 30/46 POISON | Morelull 33/35]
     (anim: Confusion)
   Growlithe is confused!
   Growlithe used Bite!
   The Bleed warped Bite into something stronger!
-  The water's resistance slowed Growlithe's attack!
-    HP Morelull (foe): 31 -> 26 / 35
+  The water slowed Growlithe's strike...
+    HP Morelull (foe): 33 -> 28 / 35
   It's not very effective...
   The opposing Morelull flinched and couldn't move!
   (end of round)
-    HP Morelull (foe): 26 -> 28 / 35
+    HP Morelull (foe): 28 -> 30 / 35
   The opposing Morelull absorbed nutrients with its roots!
     (anim: Poison)
-    HP Growlithe (player): 18 -> 13 / 46
+    HP Growlithe (player): 30 -> 25 / 46
   Growlithe was hurt by poison!
-    HP Growlithe (player): 13 -> 7 / 46
-  Growlithe is struggling for air!
-    HP Morelull (foe): 28 -> 27 / 35
-  The opposing Morelull is struggling for air!
   The Bleed convulses... echoes of the Cave tear through the battlefield!
 ## FIELD OVERLAY: BLEED now borrows [:CAVE] (was [:UNDERWATER])
 
 --- Turn 4 ---
-  [Growlithe 7/46 POISON | Morelull 27/35]
+  [Growlithe 25/46 POISON | Morelull 30/35]
     (anim: Confusion)
   Growlithe is confused!
-    HP Growlithe (player): 7 -> 0 / 46
+    HP Growlithe (player): 25 -> 15 / 46
   It hurt itself in its confusion!
-  Growlithe fainted!
-    xx fainted: Growlithe (player)
   The opposing Morelull used Astonish!
-  But there was no target...
+  The Bleed warped Astonish into something stronger!
+    HP Growlithe (player): 15 -> 8 / 46
+  A critical hit!
   (end of round)
-    HP Morelull (foe): 27 -> 29 / 35
+    HP Morelull (foe): 30 -> 32 / 35
   The opposing Morelull absorbed nutrients with its roots!
+    (anim: Poison)
+    HP Growlithe (player): 8 -> 3 / 46
+  Growlithe was hurt by poison!
+
+--- Turn 5 ---
+  [Growlithe 3/46 POISON | Morelull 32/35]
+  Good job, Growlithe! Come back!
+    << recalled: Growlithe (player)
   Go for it, Staravia!
     >> sent out (player): Staravia Lv.15 [INTIMIDATE]
     [ability: Staravia (player)'s Intimidate]
     (anim: StatDown)
   The opposing Morelull's Attack fell!
+  The opposing Morelull used Astonish!
+  It doesn't affect Staravia...
+  (end of round)
+    HP Morelull (foe): 32 -> 34 / 35
+  The opposing Morelull absorbed nutrients with its roots!
 
---- Turn 5 ---
-  [Staravia 46/46 | Morelull 29/35]
+--- Turn 6 ---
+  [Staravia 46/46 | Morelull 34/35]
   Staravia used Aerial Ace!
-    HP Morelull (foe): 29 -> 0 / 35
+    HP Morelull (foe): 34 -> 0 / 35
+  A critical hit!
   It's super effective!
-    [ability: Morelull (foe)'s Effect Spore]
-    (anim: Sleep)
-  Staravia fell asleep!
   The opposing Morelull fainted!
     xx fainted: Morelull (foe)
+  Growlithe is at the level cap (Lv. 15) and can't gain Exp. Points.
   Staravia is at the level cap (Lv. 15) and can't gain Exp. Points.
   (end of round)
+  The Bleed convulses... echoes of the Dark Crystal Cavern tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:DARK_CRYSTAL] (was [:CAVE])
   Hollow Keeper Thistle is about to send out Foongus. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Thistle sent out Foongus!
     >> sent out (foe): Foongus Lv.14 @ORANBERRY [EFFECTSPORE]
 
---- Turn 6 ---
-  [Staravia 46/46 SLEEP | Foongus 45/45]
-    (anim: Sleep)
-  Staravia is fast asleep.
-  The opposing Foongus used Growth!
-    (anim: StatUp)
-  The opposing Foongus's Attack rose!
-  The opposing Foongus's Special Attack rose!
-  (end of round)
-  The Bleed convulses... echoes of the Volcanic Field tear through the battlefield!
-## FIELD OVERLAY: BLEED now borrows [:VOLCANIC] (was [:CAVE])
-
 --- Turn 7 ---
-  [Staravia 46/46 SLEEP | Foongus 45/45]
-    (anim: Sleep)
-  Staravia is fast asleep.
+  [Staravia 46/46 | Foongus 45/45]
+  Staravia used Wing Attack!
+    HP Foongus (foe): 45 -> 1 / 45
+  It's super effective!
+    (anim: EatBerry)
+    HP Foongus (foe): 1 -> 11 / 45
+  The opposing Foongus restored a little HP using its Oran Berry!
   The opposing Foongus used Growth!
     (anim: StatUp)
   The opposing Foongus's Attack rose!
   The opposing Foongus's Special Attack rose!
   (end of round)
-    HP Foongus (foe): 45 -> 39 / 45
-  The opposing Foongus was scorched by the magma!
 
 --- Turn 8 ---
-  [Staravia 46/46 SLEEP | Foongus 39/45]
-    (anim: Sleep)
-  Staravia is fast asleep.
-  The opposing Foongus used Mega Drain!
-    HP Staravia (player): 46 -> 38 / 46
-  It's not very effective...
-  Staravia had its energy drained!
-    HP Foongus (foe): 39 -> 43 / 45
-  (end of round)
-  The Bleed warped Staravia's power!
-    (anim: StatUp)
-  Staravia's Defense rose!
-  Staravia's Attack fell!
-    HP Foongus (foe): 43 -> 37 / 45
-  The opposing Foongus was scorched by the magma!
-
---- Turn 9 ---
-  [Staravia 38/46 SLEEP | Foongus 37/45]
-  Staravia woke up!
-  Staravia used Wing Attack!
-    HP Foongus (foe): 37 -> 6 / 45
-  It's super effective!
-    [ability: Foongus (foe)'s Effect Spore]
-    (anim: Paralysis)
-  Staravia is paralyzed! It may be unable to move!
-    (anim: EatBerry)
-    HP Foongus (foe): 6 -> 16 / 45
-  The opposing Foongus restored a little HP using its Oran Berry!
-  The opposing Foongus used Mega Drain!
-    HP Staravia (player): 38 -> 29 / 46
-  It's not very effective...
-  Staravia had its energy drained!
-    HP Foongus (foe): 16 -> 21 / 45
-  (end of round)
-  The Bleed warped Staravia's power!
-    (anim: StatUp)
-  Staravia's Attack rose!
-  Staravia's Defense fell!
-    HP Foongus (foe): 21 -> 15 / 45
-  The opposing Foongus was scorched by the magma!
-  The Bleed convulses... echoes of the Underwater tear through the battlefield!
-## FIELD OVERLAY: BLEED now borrows [:UNDERWATER] (was [:VOLCANIC])
-
---- Turn 10 ---
-  [Staravia 29/46 PARALYSIS | Foongus 15/45]
-  Staravia used Quick Attack!
-  The water's resistance slowed Staravia's attack!
-    HP Foongus (foe): 15 -> 4 / 45
-  The opposing Foongus used Mega Drain!
-    HP Staravia (player): 29 -> 21 / 46
-  It's not very effective...
-  Staravia had its energy drained!
-    HP Foongus (foe): 4 -> 8 / 45
-  (end of round)
-  The Bleed warped Staravia's power!
-    (anim: StatUp)
-  Staravia's Speed rose!
-  Staravia's Defense fell!
-    HP Staravia (player): 21 -> 18 / 46
-  Staravia is struggling for air!
-    HP Foongus (foe): 8 -> 7 / 45
-  The opposing Foongus is struggling for air!
-
---- Turn 11 ---
-  [Staravia 18/46 PARALYSIS | Foongus 7/45]
+  [Staravia 46/46 | Foongus 11/45]
   Hollow Keeper Thistle used a Super Potion.
-    HP Foongus (foe): 7 -> 45 / 45
+    HP Foongus (foe): 11 -> 45 / 45
   The opposing Foongus's HP was restored.
   Staravia used Aerial Ace!
-  There's no air to ride down here...
-  The water's resistance slowed Staravia's attack!
-    HP Foongus (foe): 45 -> 31 / 45
+    HP Foongus (foe): 45 -> 0 / 45
   It's super effective!
     [ability: Foongus (foe)'s Effect Spore]
-  It doesn't affect Staravia...
-  (end of round)
-  The Bleed warped the opposing Foongus's power!
-    (anim: StatUp)
-  The opposing Foongus's Speed rose!
-  The opposing Foongus's Defense fell!
-    HP Staravia (player): 18 -> 15 / 46
-  Staravia is struggling for air!
-    HP Foongus (foe): 31 -> 30 / 45
-  The opposing Foongus is struggling for air!
-
---- Turn 12 ---
-  [Staravia 15/46 PARALYSIS | Foongus 30/45]
-  Staravia used Aerial Ace!
-  There's no air to ride down here...
-  The water's resistance slowed Staravia's attack!
-    HP Foongus (foe): 30 -> 10 / 45
-  It's super effective!
-  The opposing Foongus used Mega Drain!
-    HP Staravia (player): 15 -> 6 / 46
-  It's not very effective...
-  Staravia had its energy drained!
-    HP Foongus (foe): 10 -> 15 / 45
-  (end of round)
-  The Bleed warped the opposing Foongus's power!
-    (anim: StatUp)
-  The opposing Foongus's Special Defense rose!
-  The opposing Foongus's Speed fell!
-    HP Staravia (player): 6 -> 3 / 46
-  Staravia is struggling for air!
-    HP Foongus (foe): 15 -> 14 / 45
-  The opposing Foongus is struggling for air!
-  The Bleed convulses... echoes of the Volcanic Field tear through the battlefield!
-## FIELD OVERLAY: BLEED now borrows [:VOLCANIC] (was [:UNDERWATER])
-
---- Turn 13 ---
-  [Staravia 3/46 PARALYSIS | Foongus 14/45]
-  Staravia used Aerial Ace!
-    HP Foongus (foe): 14 -> 0 / 45
-  It's super effective!
+    (anim: Poison)
+  Staravia was poisoned!
   The opposing Foongus fainted!
     xx fainted: Foongus (foe)
   (end of round)
+    (anim: Poison)
+    HP Staravia (player): 46 -> 41 / 46
+  Staravia was hurt by poison!
   Hollow Keeper Thistle is about to send out Lowmarsh. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Thistle sent out Lowmarsh!
     >> sent out (foe): Lowmarsh Lv.15 @SITRUSBERRY [NATURALCURE]
 
---- Turn 14 ---
-  [Staravia 3/46 PARALYSIS | Lowmarsh 40/40]
-  Staravia used Wing Attack!
-    HP Lowmarsh (foe): 40 -> 0 / 40
+--- Turn 9 ---
+  [Staravia 41/46 POISON | Lowmarsh 40/40]
+  Staravia used Aerial Ace!
+    HP Lowmarsh (foe): 40 -> 4 / 40
+  It's super effective!
+    (anim: EatBerry)
+    HP Lowmarsh (foe): 4 -> 14 / 40
+  The opposing Lowmarsh restored its health using its Sitrus Berry!
+  The opposing Lowmarsh used Leech Seed!
+  Staravia was seeded!
+  (end of round)
+    (anim: LeechSeed)
+    HP Staravia (player): 41 -> 36 / 46
+  Staravia's health is sapped by Leech Seed!
+    HP Lowmarsh (foe): 14 -> 19 / 40
+    (anim: Poison)
+    HP Staravia (player): 36 -> 31 / 46
+  Staravia was hurt by poison!
+  The Bleed convulses... echoes of the Mindscape tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:MINDSCAPE] (was [:DARK_CRYSTAL])
+
+--- Turn 10 ---
+  [Staravia 31/46 POISON | Lowmarsh 19/40]
+  Staravia used Aerial Ace!
+    HP Lowmarsh (foe): 19 -> 0 / 40
   It's super effective!
   The opposing Lowmarsh fainted!
     xx fainted: Lowmarsh (foe)
@@ -278,4 +190,4 @@ The Bleed [BLEED] - Hollow Keeper Thistle vs challenger (Lv.15)
   You got $1,200 for winning!
   battle result code: 1
   
-RESULT: player won after 13 turn(s)
+RESULT: player won after 9 turn(s)

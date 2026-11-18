@@ -15,18 +15,14 @@ VOLCANIC probe: boosted move FLAMETHROWER (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
-  The magma roared!
+  Mew drew fire up from the magma!
     HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 362 -> 333 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 333/461]
+  [Mew 341/341 | Snorlax 362/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -71,43 +67,32 @@ VOLCANIC probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x2 -> A
   [Mew 341/341 | Snorlax 461/461]
   Mew used Surf!
     HP Snorlax (foe): 461 -> 396 / 461
-  Steam hisses from the cooling magma... (1 more)
+  Steam roars up from the cooling magma... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 396 -> 367 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 367/461]
+  [Mew 341/341 | Snorlax 396/461]
   Mew used Surf!
-    HP Snorlax (foe): 367 -> 299 / 461
+    HP Snorlax (foe): 396 -> 308 / 461
 ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
-  The water quenched the magma! Ash settles over the battlefield.
+  The magma was quenched! It set into black glass, and steam roars from every crack!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 320 -> 299 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 299 -> 270 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 3 ---
-  [Mew 299/341 | Snorlax 270/461]
+  [Mew 341/341 | Snorlax 308/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 299 -> 278 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 270 -> 241 / 461
-  The wild Snorlax is choking on the ash!
+  The ground hisses... the geysers will blow next turn!
 
 --- Turn 4 ---
-  [Mew 278/341 | Snorlax 241/461]
+  [Mew 341/341 | Snorlax 308/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
@@ -129,19 +114,15 @@ VOLCANIC probe: transition [stage 1: weather Rain/HeavyRain -> ASHEN_WASTE] usin
   Mew used Rain Dance!
   It started to rain!
 ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
-  The rain cooled the magma into ash!
+  The rain quenched the magma into black glass! Steam roars from every crack!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
     (anim: Rain)
   Rain continues to fall.
-    HP Mew (player): 341 -> 320 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 432/461]
+  [Mew 341/341 | Snorlax 461/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -149,13 +130,59 @@ VOLCANIC probe: transition [stage 1: weather Rain/HeavyRain -> ASHEN_WASTE] usin
   (end of round)
     (anim: Rain)
   Rain continues to fall.
-    HP Mew (player): 320 -> 299 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 432 -> 403 / 461
-  The wild Snorlax is choking on the ash!
+  The ground hisses... the geysers will blow next turn!
 
 --- Turn 3 ---
-  [Mew 299/341 | Snorlax 403/461]
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+VOLCANIC probe: transition [stage 1: weather Sandstorm -> ASHEN_WASTE] using SANDSTORM
+======================================================================================
+
+--- Battle start ---
+  field: VOLCANIC | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> VOLCANIC
+  Magma churns across the battlefield!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sandstorm!
+  A sandstorm brewed!
+## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
+  The sandstorm buried the magma! It cooled into black, glassy dunes!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Mew is buffeted by the sandstorm!
+    HP Mew (player): 341 -> 320 / 341
+  The wild Snorlax is buffeted by the sandstorm!
+    HP Snorlax (foe): 461 -> 433 / 461
+
+--- Turn 2 ---
+  [Mew 320/341 | Snorlax 433/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sandstorm)
+  The sandstorm is raging.
+  Mew is buffeted by the sandstorm!
+    HP Mew (player): 320 -> 299 / 341
+  The wild Snorlax is buffeted by the sandstorm!
+    HP Snorlax (foe): 433 -> 405 / 461
+  The ground hisses... the geysers will blow next turn!
+
+--- Turn 3 ---
+  [Mew 299/341 | Snorlax 405/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
@@ -173,7 +200,7 @@ VOLCANIC probe: Elemental Seed held on entry
   Magma churns across the battlefield!
     (anim: UseItem)
     (anim: Burn)
-  Mew's Elemental Seed ignited, searing it with volcanic power!
+  Mew's Elemental Seed ignited, filling it with volcanic power!
     (anim: StatUp)
   Mew's Attack rose!
   Mew's Special Attack rose!
@@ -189,28 +216,27 @@ VOLCANIC probe: Elemental Seed held on entry
     (anim: Burn)
     HP Mew (player): 170 -> 149 / 341
   Mew was hurt by its burn!
-    HP Mew (player): 149 -> 128 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 2 ---
-  [Mew 128/341 BURN | Snorlax 432/461]
+  [Mew 149/341 BURN | Snorlax 461/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
 
 
-VOLCANIC probe: end-of-round rule 1: damage on {:grounded=>true, :not_types=>[:FIRE], :not_abilities=>[:FLASHFIRE, :MAGMAARMOR, :WATERVEIL, :HEATPROOF, :WELLBAKEDBODY]} [subject Florges]
-==========================================================================================================================================================================================
+VOLCANIC probe: end-of-round rule 1: heal on {:abilities=>[:MAGMAARMOR]} [subject Florges]
+==========================================================================================
 
 --- Battle start ---
   field: VOLCANIC | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Florges!
-    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
+    >> sent out (player): Florges Lv.100 [MAGMAARMOR]
 ## FIELD CHANGE: NONE -> VOLCANIC
   Magma churns across the battlefield!
+  Florges's armor hardened in the magma!
+    (anim: StatUp)
+  Florges's Defense rose!
 
 --- Turn 1 ---
   [Florges 148/297 | Snorlax 230/461]
@@ -219,25 +245,21 @@ VOLCANIC probe: end-of-round rule 1: damage on {:grounded=>true, :not_types=>[:F
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Florges (player): 148 -> 129 / 297
-  Florges was scorched by the magma!
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was scorched by the magma!
+  Florges basked in the magma.
+    HP Florges (player): 148 -> 167 / 297
 
 --- Turn 2 ---
-  [Florges 129/297 | Snorlax 201/461]
+  [Florges 167/297 | Snorlax 230/461]
   Florges used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Florges (player): 129 -> 110 / 297
-  Florges was scorched by the magma!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax was scorched by the magma!
+  Florges basked in the magma.
+    HP Florges (player): 167 -> 186 / 297
 
 --- Turn 3 ---
-  [Florges 110/297 | Snorlax 172/461]
+  [Florges 186/297 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
@@ -261,71 +283,92 @@ VOLCANIC probe: end-of-round rule 2: cure_status on {:status=>[:FROZEN]} [subjec
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Florges (player): 148 -> 129 / 297
-  Florges was scorched by the magma!
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was scorched by the magma!
   Florges thawed out!
 
 --- Turn 2 ---
-  [Florges 129/297 | Snorlax 201/461]
-  Florges used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    HP Florges (player): 129 -> 110 / 297
-  Florges was scorched by the magma!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax was scorched by the magma!
-
---- Turn 3 ---
-  [Florges 110/297 | Snorlax 172/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)
-
-
-VOLCANIC probe: end-of-round rule 3: heal on {:abilities=>[:MAGMAARMOR]} [subject Florges]
-==========================================================================================
-
---- Battle start ---
-  field: VOLCANIC | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Florges!
-    >> sent out (player): Florges Lv.100 [MAGMAARMOR]
-## FIELD CHANGE: NONE -> VOLCANIC
-  Magma churns across the battlefield!
-  Florges's armor hardened in the magma!
-    (anim: StatUp)
-  Florges's Defense rose!
-
---- Turn 1 ---
   [Florges 148/297 | Snorlax 230/461]
   Florges used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was scorched by the magma!
-  Florges basked in the magma.
-    HP Florges (player): 148 -> 167 / 297
 
---- Turn 2 ---
-  [Florges 167/297 | Snorlax 201/461]
-  Florges used Splash!
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+VOLCANIC probe: :end_of_round hook over 7 rounds
+================================================
+
+--- Battle start ---
+  field: VOLCANIC | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> VOLCANIC
+  Magma churns across the battlefield!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax was scorched by the magma!
-  Florges basked in the magma.
-    HP Florges (player): 167 -> 186 / 297
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
 
 --- Turn 3 ---
-  [Florges 186/297 | Snorlax 172/461]
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 6 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 7 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 170/341 | Snorlax 230/461]
   battle result code: 3
   
-RESULT: fled/forfeit after 2 turn(s)
+RESULT: fled/forfeit after 7 turn(s)

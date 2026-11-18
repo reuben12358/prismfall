@@ -65,37 +65,35 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
   The opposing Bronzong used Psychic!
     HP Garchomp (player): 343 -> 283 / 343
   Garchomp used Fire Fang!
-  The magma roared!
+  Garchomp drew fire up from the magma!
     HP Bronzong (foe): 189 -> 33 / 273
   It's super effective!
   (end of round)
     (anim: UseItem)
     HP Bronzong (foe): 33 -> 50 / 273
   The opposing Bronzong restored a little HP using its Leftovers!
-    HP Garchomp (player): 283 -> 272 / 343
-  Garchomp was scorched by the magma!
 
 --- Turn 5 ---
-  [Garchomp 272/343 | Bronzong 50/273]
+  [Garchomp 283/343 | Bronzong 50/273]
   Sovereign Valen used a Full Restore.
     HP Bronzong (foe): 50 -> 273 / 273
   The opposing Bronzong's HP was restored.
   Garchomp used Fire Fang!
-  The magma roared!
+  Garchomp drew fire up from the magma!
     HP Bronzong (foe): 273 -> 123 / 273
   It's super effective!
   (end of round)
     (anim: UseItem)
     HP Bronzong (foe): 123 -> 140 / 273
   The opposing Bronzong restored a little HP using its Leftovers!
-    HP Garchomp (player): 272 -> 261 / 343
-  Garchomp was scorched by the magma!
   The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
 
 --- Turn 6 ---
-  [Garchomp 261/343 | Bronzong 140/273]
+  [Garchomp 283/343 | Bronzong 140/273]
+  The opposing Bronzong used Psychic!
+    HP Garchomp (player): 283 -> 215 / 343
   Garchomp used Fire Fang!
-  The magma roared!
+  Garchomp drew fire up from the magma!
     HP Bronzong (foe): 140 -> 0 / 273
   It's super effective!
   The opposing Bronzong fainted!
@@ -103,8 +101,6 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
   Garchomp is at the level cap (Lv. 96) and can't gain Exp. Points.
   (end of round)
   The twisted dimensions returned to normal!
-    HP Garchomp (player): 261 -> 250 / 343
-  Garchomp was scorched by the magma!
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
   Sovereign Valen is about to send out Kingdra. Will you switch your Pokémon?  [auto: No]
@@ -112,16 +108,15 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
     >> sent out (foe): Kingdra Lv.94 @SCOPELENS [SNIPER]
 
 --- Turn 7 ---
-  [Garchomp 250/343 | Kingdra 293/293]
+  [Garchomp 215/343 | Kingdra 293/293]
   The opposing Kingdra used Ice Beam!
-    HP Garchomp (player): 250 -> 0 / 343
-  A critical hit!
+    HP Garchomp (player): 215 -> 0 / 343
   It's super effective!
   Garchomp fainted!
     xx fainted: Garchomp (player)
   (end of round)
   You're in charge, Lucario!
-    >> sent out (player): Lucario Lv.96 [INNERFOCUS]
+    >> sent out (player): Lucario Lv.96 [STEADFAST]
     HP Lucario (player): 270 -> 262 / 270
   Pointed stones dug into Lucario!
 
@@ -199,7 +194,7 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
   The Plates turn! The Zap Plate blazes, and the arena becomes the Neon Grid!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:NEON_GRID] (was [:FLOWER_GARDEN])
   Go for it, Togekiss!
-    >> sent out (player): Togekiss Lv.96 [SERENEGRACE]
+    >> sent out (player): Togekiss Lv.96 [HUSTLE]
     HP Togekiss (player): 298 -> 223 / 298
   Pointed stones dug into Togekiss!
 
@@ -209,8 +204,7 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
     HP Togekiss (player): 223 -> 82 / 298
     HP Gallade (foe): 140 -> 112 / 280
   The opposing Gallade lost some of its HP!
-  Togekiss used Dazzling Gleam!
-  The neon light intensified Dazzling Gleam!
+  Togekiss used Air Slash!
     HP Gallade (foe): 112 -> 0 / 280
   It's super effective!
   The opposing Gallade fainted!
@@ -226,7 +220,7 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
   Togekiss used Flamethrower!
     HP Ferry (foe): 393 -> 341 / 393
   The opposing Ferry used Thunderbolt!
-  The neon grid surged!
+  The opposing Ferry drew power straight from the grid!
     HP Togekiss (player): 82 -> 0 / 298
   It's super effective!
   Togekiss fainted!
@@ -234,58 +228,70 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
   (end of round)
   The Icicle Plate begins to glow... After the next turn, the arena becomes the Frozen Lake!
   Go for it, Magnezone!
-    >> sent out (player): Magnezone Lv.96 [MAGNETPULL]
+    >> sent out (player): Magnezone Lv.96 [STURDY]
     HP Magnezone (player): 270 -> 253 / 270
   Pointed stones dug into Magnezone!
 
 --- Turn 15 ---
   [Magnezone 253/270 | Ferry 341/393]
   The opposing Ferry used Freeze-Dry!
-    HP Magnezone (player): 253 -> 211 / 270
-  It's not very effective...
-  Magnezone used Flash Cannon!
-  The charged metal crackled with electricity!
-  The neon light intensified Flash Cannon!
-    HP Ferry (foe): 341 -> 0 / 393
+    HP Magnezone (player): 253 -> 185 / 270
   A critical hit!
+  It's not very effective...
+  Magnezone used Thunderbolt!
+  Magnezone drew power straight from the grid!
+    HP Ferry (foe): 341 -> 79 / 393
+  It's super effective!
+  (end of round)
+  The Plates turn! The Icicle Plate blazes, and the arena becomes the Frozen Lake!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:FROZEN_LAKE] (was [:NEON_GRID])
+
+--- Turn 16 ---
+  [Magnezone 185/270 | Ferry 79/393]
+  The opposing Ferry used Freeze-Dry!
+  The frozen lake lent its cold to Freeze-Dry!
+    HP Magnezone (player): 185 -> 117 / 270
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Ferry (foe): 79 -> 0 / 393
   It's super effective!
   The opposing Ferry fainted!
     xx fainted: Ferry (foe)
   Magnezone is at the level cap (Lv. 96) and can't gain Exp. Points.
   (end of round)
-  The Plates turn! The Icicle Plate blazes, and the arena becomes the Frozen Lake!
-## FIELD OVERLAY: PRISM_ARENA now borrows [:FROZEN_LAKE] (was [:NEON_GRID])
   Sovereign Valen is about to send out Volcarona. Will you switch your Pokémon?  [auto: No]
   Sovereign Valen sent out Volcarona!
     >> sent out (foe): Volcarona Lv.95 @HEAVYDUTYBOOTS [FLAMEBODY]
 
---- Turn 16 ---
-  [Magnezone 211/270 | Volcarona 315/315]
+--- Turn 17 ---
+  [Magnezone 117/270 | Volcarona 315/315]
   The opposing Volcarona used Fiery Dance!
-    HP Magnezone (player): 211 -> 0 / 270
+    HP Magnezone (player): 117 -> 0 / 270
   It's super effective!
   Magnezone fainted!
     xx fainted: Magnezone (player)
   (end of round)
+  The Fist Plate begins to glow... After the next turn, the arena becomes the Colosseum!
   You're in charge, Charizard!
     >> sent out (player): Charizard Lv.96 [BLAZE]
     HP Charizard (player): 285 -> 142 / 285
   Pointed stones dug into Charizard!
 
---- Turn 17 ---
+--- Turn 18 ---
   [Charizard 142/285 | Volcarona 315/315]
   The opposing Volcarona used Fiery Dance!
     HP Charizard (player): 142 -> 69 / 285
   It's not very effective...
     (anim: StatUp)
   The opposing Volcarona's Special Attack rose!
-  Charizard used Earthquake!
-    HP Volcarona (foe): 315 -> 226 / 315
+  Charizard used Flamethrower!
+    HP Volcarona (foe): 315 -> 166 / 315
   (end of round)
-  The Fist Plate begins to glow... After the next turn, the arena becomes the Colosseum!
+  The Plates turn! The Fist Plate blazes, and the arena becomes the Colosseum!
+## FIELD OVERLAY: PRISM_ARENA now borrows [:COLOSSEUM] (was [:FROZEN_LAKE])
 
---- Turn 18 ---
-  [Charizard 69/285 | Volcarona 226/315]
+--- Turn 19 ---
+  [Charizard 69/285 | Volcarona 166/315]
   The opposing Volcarona used Fiery Dance!
     HP Charizard (player): 69 -> 0 / 285
   It's not very effective...
@@ -293,8 +299,11 @@ Prism Arena [PRISM_ARENA] - Sovereign Valen vs challenger (Lv.96)
     xx fainted: Charizard (player)
     (anim: StatUp)
   The opposing Volcarona's Special Attack rose!
+  The crowd went wild for the opposing Volcarona!
+    (anim: StatUp)
+  The opposing Volcarona's Special Attack rose!
   You have no more Pokémon that can fight!
   You lost against Sovereign Valen!
   battle result code: 2
   
-RESULT: player lost after 17 turn(s)
+RESULT: player lost after 18 turn(s)

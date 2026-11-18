@@ -10,9 +10,12 @@ Beach [BEACH] - Picnicker Susie vs challenger (Lv.18)
   Picnicker Susie sent out Meowth!
     >> sent out (foe): Meowth Lv.18 [PICKUP]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.18 @TELLURICSEED [FLASHFIRE]
+    >> sent out (player): Growlithe Lv.18 @TELLURICSEED [INTIMIDATE]
 ## FIELD CHANGE: NONE -> BEACH
   Waves lap at the sandy shore...
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Meowth's Attack fell!
     (anim: UseItem)
   Growlithe's Telluric Seed buried it in cool, wet sand!
     (anim: StatUp)
@@ -21,28 +24,28 @@ Beach [BEACH] - Picnicker Susie vs challenger (Lv.18)
 --- Turn 1 ---
   [Growlithe 53/53 | Meowth 45/45]
   The opposing Meowth used Bite!
-    HP Growlithe (player): 53 -> 46 / 53
+    HP Growlithe (player): 53 -> 48 / 53
   Growlithe used Flame Wheel!
     HP Meowth (foe): 45 -> 19 / 45
   (end of round)
-    HP Growlithe (player): 46 -> 49 / 53
+    HP Growlithe (player): 48 -> 51 / 53
   Aqua Ring restored Growlithe's HP!
     [ability: Meowth (foe)'s Pickup]
   The opposing Meowth found one Telluric Seed!
 
 --- Turn 2 ---
-  [Growlithe 49/53 | Meowth 19/45]
+  [Growlithe 51/53 | Meowth 19/45]
   The opposing Meowth used Bite!
-    HP Growlithe (player): 49 -> 43 / 53
+    HP Growlithe (player): 51 -> 46 / 53
   Growlithe flinched and couldn't move!
   (end of round)
-    HP Growlithe (player): 43 -> 46 / 53
+    HP Growlithe (player): 46 -> 49 / 53
   Aqua Ring restored Growlithe's HP!
 
 --- Turn 3 ---
-  [Growlithe 46/53 | Meowth 19/45]
+  [Growlithe 49/53 | Meowth 19/45]
   The opposing Meowth used Scratch!
-    HP Growlithe (player): 46 -> 39 / 53
+    HP Growlithe (player): 49 -> 43 / 53
   Growlithe used Flame Wheel!
     HP Meowth (foe): 19 -> 0 / 45
   The opposing Meowth fainted!

@@ -1,54 +1,56 @@
 LOGIC-TEST OUTPUT (headless harness). Scripted probes for BLEED: the player's moves are scripted,
 the foe only uses Splash. Not a game screenshot.
 
-BLEED probe: boosted move through a borrowed field
-==================================================
+BLEED probe: boosted move JUDGMENT (on field)
+=============================================
 
 --- Battle start ---
   field: BLEED | weather: None | terrain: None
-  Oh! A wild Milotic appeared!
+  Oh! A wild Snorlax appeared!
   Go! Mew!
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> BLEED
   Reality frays at the edges... The Bleed is spreading!
-  The Bleed convulses... echoes of the Mindscape tear through the battlefield!
-## FIELD OVERLAY: BLEED now borrows [:MINDSCAPE] (was [])
+  The Bleed convulses... echoes of the Crystal Cavern tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:CRYSTAL_CAVERN] (was [])
 
 --- Turn 1 ---
-  [Mew 341/341 | Milotic 331/331]
-  Mew used Psychic!
-  The Mindscape amplified the thought!
-    HP Milotic (foe): 331 -> 198 / 331
-  The wild Milotic used Splash!
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Judgment!
+  The raw Imprints poured into Judgment!
+  The Bleed warped Judgment into something stronger!
+    HP Snorlax (foe): 461 -> 348 / 461
+  The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
+  The crystals shifted to ocean blue!
 
 --- Turn 2 ---
-  [Mew 341/341 | Milotic 198/331]
+  [Mew 341/341 | Snorlax 348/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
 
 
-BLEED probe: baseline (no field) for PSYCHIC
-============================================
+BLEED probe: boosted move JUDGMENT (baseline, no field)
+=======================================================
 
 --- Battle start ---
   field: NONE | weather: None | terrain: None
-  Oh! A wild Milotic appeared!
+  Oh! A wild Snorlax appeared!
   Go! Mew!
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 
 --- Turn 1 ---
-  [Mew 341/341 | Milotic 331/331]
-  Mew used Psychic!
-    HP Milotic (foe): 331 -> 242 / 331
-  The wild Milotic used Splash!
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Judgment!
+    HP Snorlax (foe): 461 -> 388 / 461
+  The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Milotic 242/331]
+  [Mew 341/341 | Snorlax 388/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -139,10 +141,10 @@ BLEED probe: end-of-round rule 1: proc on {} [subject Florges]
   Reality frays at the edges... The Bleed is spreading!
   The Bleed convulses... echoes of the Silkwood tear through the battlefield!
 ## FIELD OVERLAY: BLEED now borrows [:SILKWOOD] (was [])
-  Florges blundered into a sticky web!
+  Florges stepped into a curtain of sticky silk!
     (anim: StatDown)
   Florges's Speed fell!
-  The wild Snorlax blundered into a sticky web!
+  The wild Snorlax stepped into a curtain of sticky silk!
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 

@@ -475,6 +475,10 @@ class RMap:
         Rejuvenation's mappers dress the foot of things; flowers drift in noise patches; a few rare props."""
         groups = groups or self.decor
         open_ = (self.cls == '.') & ~self.taken & ~self.cliff & (self.L[1] == 0) & (self.L[2] == 0)
+        for e in self.events:                      # never box an event in with solid decor: its 4 neighbours stay bare
+            ex, ey = e['at']
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                if self.inb(ex + dx, ey + dy): open_[ey + dy, ex + dx] = False
         pad = np.pad(open_, 1, constant_values=True)
         for y in range(self.H):
             for x in range(self.W):

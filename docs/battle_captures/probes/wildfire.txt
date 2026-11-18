@@ -1,0 +1,603 @@
+LOGIC-TEST OUTPUT (headless harness). Scripted probes for WILDFIRE: the player's moves are scripted,
+the foe only uses Splash. Not a game screenshot.
+
+WILDFIRE probe: boosted move FLAMETHROWER (on field)
+====================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+  Mew drew the wildfire into its attack!
+    HP Snorlax (foe): 461 -> 362 / 461
+  The flames roared higher!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 362/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WILDFIRE probe: boosted move FLAMETHROWER (baseline, no field)
+==============================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+    HP Snorlax (foe): 461 -> 395 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 395/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WILDFIRE probe: transition [stage 1: check proc -> stage 2] using SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH
+================================================================================================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The wildfire is starting to burn itself out...
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+## FIELD STAGE: WILDFIRE is now stage 2
+  The wildfire has burned itself down to glowing embers.
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 6 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 7 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 9 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 10 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 9 turn(s)
+
+
+WILDFIRE probe: transition [stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x2 -> stage 2] using SURF, SURF
+=======================================================================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Surf!
+    HP Snorlax (foe): 461 -> 396 / 461
+  Steam hisses as the flames die back... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Surf!
+    HP Snorlax (foe): 396 -> 328 / 461
+## FIELD STAGE: WILDFIRE is now stage 2
+  The wildfire was beaten down to smouldering embers!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 328/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 328/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+WILDFIRE probe: transition [stage 1: moves DEFOG/WHIRLWIND/TAILWIND -> stage 2] using DEFOG
+===========================================================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Defog!
+    (anim: StatDown)
+  The wild Snorlax's evasiveness fell!
+## FIELD STAGE: WILDFIRE is now stage 2
+  The gale blew the flames down to embers!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WILDFIRE probe: transition [stage 1: weather Rain/HeavyRain/Sandstorm -> stage 2] using RAINDANCE
+=================================================================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Rain Dance!
+  It started to rain!
+## FIELD STAGE: WILDFIRE is now stage 2
+  The flames died down to glowing embers!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WILDFIRE probe: transition [stage 2: moves ERUPTION/LAVAPLUME/HEATWAVE... x2 -> stage 1] using ERUPTION, ERUPTION
+=================================================================================================================
+
+--- Battle start ---
+  field: WILDFIRE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  Embers glow beneath drifting ash...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Eruption!
+  The embers flared up with Eruption!
+    HP Snorlax (foe): 461 -> 333 / 461
+  The embers are glowing brighter... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 333/461]
+  Mew used Eruption!
+  The embers flared up with Eruption!
+    HP Snorlax (foe): 333 -> 198 / 461
+## FIELD STAGE: WILDFIRE is now stage 1
+  The embers roared back into a blaze!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 198/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 198/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+WILDFIRE probe: transition [stage 2: weather Sun/HarshSun -> stage 1] using SUNNYDAY
+====================================================================================
+
+--- Battle start ---
+  field: WILDFIRE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  Embers glow beneath drifting ash...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+## FIELD STAGE: WILDFIRE is now stage 1
+  The sun dried the ash - and the embers roared back into a blaze!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WILDFIRE probe: transition [stage 2: weather Rain/HeavyRain -> MEADOW] using RAINDANCE
+======================================================================================
+
+--- Battle start ---
+  field: WILDFIRE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  Embers glow beneath drifting ash...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Rain Dance!
+  It started to rain!
+## FIELD CHANGE: WILDFIRE -> MEADOW
+  Rain soaked the ash, and green shoots burst through! Life returns!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WILDFIRE probe: transition [stage 2: terrain Grassy -> MEADOW] using GRASSYTERRAIN
+==================================================================================
+
+--- Battle start ---
+  field: WILDFIRE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  Embers glow beneath drifting ash...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Grassy Terrain!
+    (anim: GrassyTerrain)
+  Grass grew to cover the battlefield!
+## FIELD CHANGE: WILDFIRE -> MEADOW
+  Grass rushed over the ash! Life returns!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: GrassyTerrain)
+  Grass is covering the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+WILDFIRE probe: transition [stage 2: moves GROWTH/INGRAIN/GRASSPLEDGE... x2 -> MEADOW] using GROWTH, GROWTH
+===========================================================================================================
+
+--- Battle start ---
+  field: WILDFIRE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  Embers glow beneath drifting ash...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+  Mew drew strength from the fertile ash!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Green shoots are pushing up through the ash... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growth!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+  Mew drew strength from the fertile ash!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+## FIELD CHANGE: WILDFIRE -> MEADOW
+  The ash bloomed into a sea of new grass! Life returns!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+WILDFIRE probe: Elemental Seed held on entry
+============================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+    (anim: UseItem)
+    (anim: Burn)
+  Mew's Elemental Seed caught the blaze inside it!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack rose!
+
+--- Turn 1 ---
+  [Mew 170/341 BURN | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Burn)
+    HP Mew (player): 170 -> 149 / 341
+  Mew was hurt by its burn!
+
+--- Turn 2 ---
+  [Mew 149/341 BURN | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 1 turn(s)
+
+
+WILDFIRE probe: :end_of_round hook over 7 rounds
+================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The wildfire is starting to burn itself out...
+
+--- Turn 4 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+## FIELD STAGE: WILDFIRE is now stage 2
+  The wildfire has burned itself down to glowing embers.
+
+--- Turn 5 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 6 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 7 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 170/341 | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 7 turn(s)

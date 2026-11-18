@@ -104,7 +104,7 @@ Inverse Field [INVERSE] - Echo of the Ghost Warden Morwen vs challenger (Lv.90)
     HP Spiritomb (foe): 149 -> 163 / 226
   The opposing Spiritomb restored a little HP using its Leftovers!
   Go for it, Togekiss!
-    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+    >> sent out (player): Togekiss Lv.90 [SERENEGRACE]
 
 --- Turn 6 ---
   [Togekiss 280/280 | Spiritomb 163/226]
@@ -147,7 +147,7 @@ Inverse Field [INVERSE] - Echo of the Ghost Warden Morwen vs challenger (Lv.90)
     HP Spiritomb (foe): 48 -> 62 / 226
   The opposing Spiritomb restored a little HP using its Leftovers!
   Just a little more! Hang in there, Togekiss!
-    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+    >> sent out (player): Togekiss Lv.90 [SERENEGRACE]
 
 --- Turn 9 ---
   [Togekiss 108/280 | Spiritomb 62/226]
@@ -285,7 +285,7 @@ Inverse Field [INVERSE] - Echo of the Ghost Warden Morwen vs challenger (Lv.90)
   Good job, Starmie! Come back!
     << recalled: Starmie (player)
   You're in charge, Togekiss!
-    >> sent out (player): Togekiss Lv.90 [HUSTLE]
+    >> sent out (player): Togekiss Lv.90 [SERENEGRACE]
   The opposing Jellicent used Scald!
     HP Togekiss (player): 108 -> 10 / 280
   A critical hit!

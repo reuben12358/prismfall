@@ -15,7 +15,7 @@ MINDSCAPE probe: boosted move PSYCHIC (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave Mew's thoughts real shape!
     HP Snorlax (foe): 461 -> 313 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -52,8 +52,8 @@ MINDSCAPE probe: boosted move PSYCHIC (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-MINDSCAPE probe: transition [stage 1: flags Sound, category damaging x3 -> NONE] using OVERDRIVE, OVERDRIVE, OVERDRIVE
-======================================================================================================================
+MINDSCAPE probe: transition [stage 1: moves DARKVOID/NIGHTMARE/SPITE -> stage 2] using DARKVOID
+===============================================================================================
 
 --- Battle start ---
   field: MINDSCAPE | weather: None | terrain: None
@@ -65,37 +65,73 @@ MINDSCAPE probe: transition [stage 1: flags Sound, category damaging x3 -> NONE]
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
-  Mew used Overdrive!
-  Overdrive reverberated through the dreamscape!
+  Mew used Dark Void!
+  But Mew can't use the move!
+## FIELD STAGE: MINDSCAPE is now stage 2
+  The dream curdled into a nightmare!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+MINDSCAPE probe: transition [stage 1: types DARK, category damaging x3 -> stage 2] using DARKPULSE, DARKPULSE, DARKPULSE
+========================================================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dark Pulse!
+  A nightmare took shape around Dark Pulse!
     HP Snorlax (foe): 461 -> 392 / 461
-  The dreamscape trembles at the noise... (2 more)
+  Shadows are creeping into the dream... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 392/461]
-  Mew used Overdrive!
-  Overdrive reverberated through the dreamscape!
-    HP Snorlax (foe): 392 -> 319 / 461
-  The dreamscape trembles at the noise... (1 more)
+  Mew used Dark Pulse!
+  A nightmare took shape around Dark Pulse!
+    HP Snorlax (foe): 392 -> 318 / 461
+  Shadows are creeping into the dream... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 319/461]
-  Mew used Overdrive!
-  Overdrive reverberated through the dreamscape!
-    HP Snorlax (foe): 319 -> 248 / 461
-## FIELD CHANGE: MINDSCAPE -> NONE
-  The noise jolted everyone awake! The Mindscape collapsed.
+  [Mew 341/341 | Snorlax 318/461]
+  Mew used Dark Pulse!
+  A nightmare took shape around Dark Pulse!
+    HP Snorlax (foe): 318 -> 244 / 461
+## FIELD STAGE: MINDSCAPE is now stage 2
+  The dream curdled into a nightmare!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 248/461]
+  [Mew 341/341 | Snorlax 244/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -103,7 +139,7 @@ MINDSCAPE probe: transition [stage 1: flags Sound, category damaging x3 -> NONE]
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 248/461]
+  [Mew 341/341 | Snorlax 244/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
@@ -135,6 +171,112 @@ MINDSCAPE probe: transition [stage 1: moves TOPSYTURVY -> INVERSE] using GROWL, 
   The wild Snorlax's stats were reversed!
 ## FIELD CHANGE: MINDSCAPE -> INVERSE
   The Mindscape turned inside out, into the world behind the glass!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MINDSCAPE probe: transition [stage 1: flags Sound, category damaging x3 -> INVERSE] using OVERDRIVE, OVERDRIVE, OVERDRIVE
+=========================================================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 461 -> 392 / 461
+  The dream rings like glass at the noise... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 392/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 392 -> 319 / 461
+  The dream rings like glass at the noise... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 319/461]
+  Mew used Overdrive!
+  Overdrive reverberated through the dreamscape!
+    HP Snorlax (foe): 319 -> 228 / 461
+## FIELD CHANGE: MINDSCAPE -> INVERSE
+  The noise cracked the dream like glass! Behind it lies the world behind the glass!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 228/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 228/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+MINDSCAPE probe: transition [stage 2: moves CALMMIND/AROMATHERAPY/HEALBELL... x2 -> stage 1] using CALMMIND, CALMMIND
+=====================================================================================================================
+
+--- Battle start ---
+  field: MINDSCAPE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The dream has curdled into a nightmare...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Calm Mind!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  The nightmare is softening... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Calm Mind!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+## FIELD STAGE: MINDSCAPE is now stage 1
+  The nightmare melted back into a gentle dream.
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)

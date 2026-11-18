@@ -17,7 +17,6 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
   Garchomp's Magical Seed let a wandering spirit possess it!
     (anim: StatUp)
   Garchomp's Special Defense rose!
-  Garchomp became part Ghost type!
 
 --- Turn 1 ---
   [Garchomp 242/242 | Sableye 171/171]
@@ -57,9 +56,9 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
   Good job, Garchomp! Come back!
     << recalled: Garchomp (player)
   Go for it, Togekiss!
-    >> sent out (player): Togekiss Lv.67 [SERENEGRACE]
+    >> sent out (player): Togekiss Lv.67 [HUSTLE]
   The opposing Sableye used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Sableye!
     HP Togekiss (player): 211 -> 168 / 211
   (end of round)
     (anim: UseItem)
@@ -109,9 +108,9 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
   Good job, Garchomp! Come back!
     << recalled: Garchomp (player)
   Go for it, Starmie!
-    >> sent out (player): Starmie Lv.67 [ILLUMINATE]
+    >> sent out (player): Starmie Lv.67 [NATURALCURE]
   The opposing Gengar used Shadow Ball!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Gengar!
     HP Starmie (player): 178 -> 0 / 178
   It's super effective!
   Starmie fainted!
@@ -145,7 +144,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
 --- Turn 8 ---
   [Charizard 55/202 | Dusknoir 167/167]
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Charizard (player): 55 -> 0 / 202
   Charizard fainted!
     xx fainted: Charizard (player)
@@ -156,7 +155,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
 --- Turn 9 ---
   [Garchomp 20/242 BURN | Dusknoir 167/167]
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Garchomp (player): 20 -> 0 / 242
   Garchomp fainted!
     xx fainted: Garchomp (player)
@@ -241,7 +240,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
 --- Turn 16 ---
   [Magnezone 99/191 FROZEN | Dusknoir 107/167]
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Magnezone (player): 99 -> 56 / 191
     (anim: Frozen)
   Magnezone is frozen solid!
@@ -253,7 +252,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
 --- Turn 17 ---
   [Magnezone 56/191 FROZEN | Dusknoir 117/167]
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Magnezone (player): 56 -> 11 / 191
     (anim: Frozen)
   Magnezone is frozen solid!
@@ -265,7 +264,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
 --- Turn 18 ---
   [Magnezone 11/191 FROZEN | Dusknoir 127/167]
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Magnezone (player): 11 -> 0 / 191
   Magnezone fainted!
     xx fainted: Magnezone (player)
@@ -274,7 +273,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
     HP Dusknoir (foe): 127 -> 137 / 167
   The opposing Dusknoir restored a little HP using its Leftovers!
   Go for it, Lucario!
-    >> sent out (player): Lucario Lv.67 [INNERFOCUS]
+    >> sent out (player): Lucario Lv.67 [STEADFAST]
 
 --- Turn 19 ---
   [Lucario 191/191 | Dusknoir 137/167]
@@ -331,7 +330,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
   Lucario used Extreme Speed!
     HP Dusknoir (foe): 84 -> 50 / 167
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Lucario (player): 94 -> 30 / 191
   (end of round)
     (anim: UseItem)
@@ -343,7 +342,7 @@ Hollow Cathedral [HOLLOW_CATHEDRAL] - Gym 14 Warden Ysolde vs challenger (Lv.67)
   Lucario used Extreme Speed!
     HP Dusknoir (foe): 60 -> 27 / 167
   The opposing Dusknoir used Shadow Sneak!
-  The restless spirits howled!
+  The restless spirits rose up behind the opposing Dusknoir!
     HP Lucario (player): 30 -> 0 / 191
   A critical hit!
   Lucario fainted!

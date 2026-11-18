@@ -129,44 +129,32 @@ PRISM_ARENA probe: end-of-round rule 1: heal on {} +condition [subject Snorlax, 
   (end of round)
   Snorlax's Plate resonated with the arena!
     HP Snorlax (player): 230 -> 259 / 461
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was scorched by the magma!
-    HP Snorlax (player): 259 -> 230 / 461
-  Snorlax was scorched by the magma!
 
 --- Turn 5 ---
-  [Snorlax 230/461 | Snorlax 201/461]
+  [Snorlax 259/461 | Snorlax 230/461]
   The wild Snorlax used Splash!
   But nothing happened!
   Snorlax used Splash!
   But nothing happened!
   (end of round)
   Snorlax's Plate resonated with the arena!
-    HP Snorlax (player): 230 -> 259 / 461
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax was scorched by the magma!
-    HP Snorlax (player): 259 -> 230 / 461
-  Snorlax was scorched by the magma!
+    HP Snorlax (player): 259 -> 288 / 461
   The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
 
 --- Turn 6 ---
-  [Snorlax 230/461 | Snorlax 172/461]
+  [Snorlax 288/461 | Snorlax 230/461]
   The wild Snorlax used Splash!
   But nothing happened!
   Snorlax used Splash!
   But nothing happened!
   (end of round)
   Snorlax's Plate resonated with the arena!
-    HP Snorlax (player): 230 -> 259 / 461
-    HP Snorlax (foe): 172 -> 143 / 461
-  The wild Snorlax was scorched by the magma!
-    HP Snorlax (player): 259 -> 230 / 461
-  Snorlax was scorched by the magma!
+    HP Snorlax (player): 288 -> 317 / 461
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
 
 --- Turn 7 ---
-  [Snorlax 230/461 | Snorlax 143/461]
+  [Snorlax 317/461 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 6 turn(s)
@@ -217,40 +205,28 @@ PRISM_ARENA probe: :end_of_round hook over 7 rounds
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 170 -> 149 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 5 ---
-  [Mew 149/341 | Snorlax 201/461]
+  [Mew 170/341 | Snorlax 230/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 149 -> 128 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax was scorched by the magma!
   The Splash Plate begins to glow... After the next turn, the arena becomes the Water Surface!
 
 --- Turn 6 ---
-  [Mew 128/341 | Snorlax 172/461]
+  [Mew 170/341 | Snorlax 230/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 128 -> 107 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 172 -> 143 / 461
-  The wild Snorlax was scorched by the magma!
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
 ## FIELD OVERLAY: PRISM_ARENA now borrows [:WATER_SURFACE] (was [:VOLCANIC])
 
 --- Turn 7 ---
-  [Mew 107/341 | Snorlax 143/461]
+  [Mew 170/341 | Snorlax 230/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -258,7 +234,7 @@ PRISM_ARENA probe: :end_of_round hook over 7 rounds
   (end of round)
 
 --- Turn 8 ---
-  [Mew 107/341 | Snorlax 143/461]
+  [Mew 170/341 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 7 turn(s)

@@ -15,7 +15,7 @@ CORROSIVE_MIRE probe: boosted move SLUDGEBOMB (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Sludge Bomb!
-  The toxic sludge bubbled up!
+  Mew drew the mire's poison into the attack!
     HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -118,7 +118,7 @@ CORROSIVE_MIRE probe: transition [stage 1: moves PURIFY x2 -> WATER_SURFACE] usi
   Mew used Purify!
   Mew's HP is full!
 ## FIELD CHANGE: CORROSIVE_MIRE -> WATER_SURFACE
-  The mire was purified into clear water!
+  The mire was purified into clear, open water!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -152,33 +152,32 @@ CORROSIVE_MIRE probe: transition [stage 1: types FIRE, category damaging x2 -> W
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
-    HP Snorlax (foe): 461 -> 396 / 461
-  The toxic fumes ignited in an explosion!
-    HP Mew (player): 341 -> 299 / 341
-  Mew was caught in the blast!
-    HP Snorlax (foe): 396 -> 339 / 461
-  The wild Snorlax was caught in the blast!
+  The marsh gas flared up with the flames!
+    HP Snorlax (foe): 461 -> 377 / 461
+  Mew ignited the marsh gas around its foes!
+    HP Snorlax (foe): 377 -> 320 / 461
+  Flames burst up around the wild Snorlax!
+  The marsh gas is burning off... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 299/341 | Snorlax 339/461]
+  [Mew 341/341 | Snorlax 320/461]
   Mew used Flamethrower!
-    HP Snorlax (foe): 339 -> 273 / 461
-  The toxic fumes ignited in an explosion!
-    HP Mew (player): 299 -> 257 / 341
-  Mew was caught in the blast!
-    HP Snorlax (foe): 273 -> 216 / 461
-  The wild Snorlax was caught in the blast!
+  The marsh gas flared up with the flames!
+    HP Snorlax (foe): 320 -> 203 / 461
+  Mew ignited the marsh gas around its foes!
+    HP Snorlax (foe): 203 -> 146 / 461
+  Flames burst up around the wild Snorlax!
 ## FIELD CHANGE: CORROSIVE_MIRE -> WASTELAND
-  The flames consumed the mire, leaving a blasted wasteland!
+  The marsh gas burned off in one roaring flare! Scorched slag is all that's left!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 3 ---
-  [Mew 257/341 | Snorlax 216/461]
+  [Mew 341/341 | Snorlax 146/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -186,7 +185,7 @@ CORROSIVE_MIRE probe: transition [stage 1: types FIRE, category damaging x2 -> W
   (end of round)
 
 --- Turn 4 ---
-  [Mew 257/341 | Snorlax 216/461]
+  [Mew 341/341 | Snorlax 146/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
@@ -265,81 +264,39 @@ CORROSIVE_MIRE probe: end-of-round rule 1: heal on {:types=>[:POISON]} [subject 
 RESULT: fled/forfeit after 2 turn(s)
 
 
-CORROSIVE_MIRE probe: end-of-round rule 2: damage on {:grounded=>true, :types=>[:STEEL], :not_types=>[:POISON]} [subject Klinklang]
-===================================================================================================================================
+CORROSIVE_MIRE probe: end-of-round rule 2: proc on {:types=>[:POISON]} [subject Muk]
+====================================================================================
 
 --- Battle start ---
   field: CORROSIVE_MIRE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
-  Go! Klinklang!
-    >> sent out (player): Klinklang Lv.100 [PLUS]
+  Go! Muk!
+    >> sent out (player): Muk Lv.100 [STENCH]
 ## FIELD CHANGE: NONE -> CORROSIVE_MIRE
   Toxic sludge bubbles underfoot... the air reeks of corrosion.
 
 --- Turn 1 ---
-  [Klinklang 130/261 | Snorlax 230/461]
-  Klinklang used Splash!
+  [Muk 175/351 | Snorlax 230/461]
+  Muk used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Klinklang (player): 130 -> 114 / 261
-  The mire is corroding Klinklang's metal!
+  The mire nourished Muk.
+    HP Muk (player): 175 -> 197 / 351
 
 --- Turn 2 ---
-  [Klinklang 114/261 | Snorlax 230/461]
-  Klinklang used Splash!
+  [Muk 197/351 | Snorlax 230/461]
+  Muk used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Klinklang (player): 114 -> 98 / 261
-  The mire is corroding Klinklang's metal!
+  The mire nourished Muk.
+    HP Muk (player): 197 -> 219 / 351
 
 --- Turn 3 ---
-  [Klinklang 98/261 | Snorlax 230/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)
-
-
-CORROSIVE_MIRE probe: end-of-round rule 3: status on {:grounded=>true, :not_types=>[:POISON, :STEEL]} [subject Arcanine]
-========================================================================================================================
-
---- Battle start ---
-  field: CORROSIVE_MIRE | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Arcanine!
-    >> sent out (player): Arcanine Lv.100 [INTIMIDATE]
-## FIELD CHANGE: NONE -> CORROSIVE_MIRE
-  Toxic sludge bubbles underfoot... the air reeks of corrosion.
-    [ability: Arcanine (player)'s Intimidate]
-    (anim: StatDown)
-  The wild Snorlax's Attack fell!
-
---- Turn 1 ---
-  [Arcanine 160/321 | Snorlax 230/461]
-  Arcanine used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Poison)
-  Arcanine was poisoned by the corrosive mire!
-
---- Turn 2 ---
-  [Arcanine 160/321 POISON | Snorlax 230/461]
-  Arcanine used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Poison)
-    HP Arcanine (player): 160 -> 120 / 321
-  Arcanine was hurt by poison!
-
---- Turn 3 ---
-  [Arcanine 120/321 POISON | Snorlax 230/461]
+  [Muk 219/351 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)

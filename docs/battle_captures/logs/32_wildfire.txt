@@ -1,0 +1,37 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Wildfire [WILDFIRE] - Hiker Ford vs challenger (Lv.19)
+======================================================
+
+--- Battle start ---
+  field: WILDFIRE | weather: None | terrain: None
+  You are challenged by Hiker Ford!
+  Hiker Ford sent out Machop!
+    >> sent out (foe): Machop Lv.19 [GUTS]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.19 @ELEMENTALSEED [FLASHFIRE]
+## FIELD CHANGE: NONE -> WILDFIRE
+  The battlefield is ablaze! Flames leap from tree to tree!
+  The power of Growlithe's Fire-type moves rose!
+    (anim: UseItem)
+  Growlithe's Elemental Seed caught the blaze inside it!
+    (anim: StatUp)
+  Growlithe's Attack rose!
+  Growlithe's Special Attack rose!
+
+--- Turn 1 ---
+  [Growlithe 55/55 | Machop 58/58]
+  Growlithe used Ember!
+  Growlithe drew the wildfire into its attack!
+    HP Machop (foe): 58 -> 0 / 58
+  The opposing Machop fainted!
+    xx fainted: Machop (foe)
+  The flames roared higher!
+  Growlithe is at the level cap (Lv. 19) and can't gain Exp. Points.
+  You defeated Hiker Ford!
+  You're too good for me!
+  You got $608 for winning!
+  battle result code: 1
+  
+RESULT: player won after 0 turn(s)

@@ -17,6 +17,8 @@ New Moon [NEW_MOON] - Gym 16 Warden Nyx vs challenger (Lv.75)
   Garchomp's Magical Seed sharpened its night vision!
     (anim: StatUp)
   Garchomp's accuracy rose!
+## FIELD STAGE: NEW_MOON is now stage 2
+  The seed drew the shadows in! The darkness deepens into an abyss!
 
 --- Turn 1 ---
   [Garchomp 270/270 | Grimmsnarl 259/259]
@@ -58,245 +60,221 @@ New Moon [NEW_MOON] - Gym 16 Warden Nyx vs challenger (Lv.75)
     HP Grimmsnarl (foe): 24 -> 259 / 259
   The opposing Grimmsnarl's HP was restored.
   Magnezone used Tri Attack!
-    HP Grimmsnarl (foe): 259 -> 193 / 259
+    HP Grimmsnarl (foe): 259 -> 191 / 259
+    (anim: Paralysis)
+  The opposing Grimmsnarl is paralyzed! It may be unable to move!
   (end of round)
 
 --- Turn 5 ---
-  [Magnezone 213/213 | Grimmsnarl 193/259]
-  The opposing Grimmsnarl used Light Screen!
-  Light Screen raised the opposing team's Special Defense!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 193 -> 140 / 259
+  [Magnezone 213/213 | Grimmsnarl 191/259 PARALYSIS]
+  Magnezone used Flash Cannon!
+  Magnezone's attack missed!
+  A single ray of light makes its way... (1 more)
+    (anim: Paralysis)
+  The opposing Grimmsnarl is paralyzed! It can't move!
   (end of round)
 
 --- Turn 6 ---
-  [Magnezone 213/213 | Grimmsnarl 140/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 213 -> 176 / 213
-  It's not very effective...
-    (anim: StatDown)
-  Magnezone's Special Attack fell!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 140 -> 104 / 259
+  [Magnezone 213/213 | Grimmsnarl 191/259 PARALYSIS]
+    (anim: Paralysis)
+  The opposing Grimmsnarl is paralyzed! It can't move!
+  Magnezone used Flash Cannon!
+  The abyss swallowed most of the light...
+    HP Grimmsnarl (foe): 191 -> 34 / 259
+  It's super effective!
+## FIELD STAGE: NEW_MOON is now stage 1
+  The shadows retreat! The stars glimmer over Underveil again.
   (end of round)
 
 --- Turn 7 ---
-  [Magnezone 176/213 | Grimmsnarl 104/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 176 -> 139 / 213
-  It's not very effective...
-    (anim: StatDown)
-  Magnezone's Special Attack fell!
+  [Magnezone 213/213 | Grimmsnarl 34/259 PARALYSIS]
+  Warden Nyx used a Full Restore.
+    HP Grimmsnarl (foe): 34 -> 259 / 259
+  The opposing Grimmsnarl's HP was restored.
   Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 104 -> 76 / 259
+    HP Grimmsnarl (foe): 259 -> 149 / 259
   (end of round)
 
 --- Turn 8 ---
-  [Magnezone 139/213 | Grimmsnarl 76/259]
-  Warden Nyx used a Full Restore.
-    HP Grimmsnarl (foe): 76 -> 259 / 259
-  The opposing Grimmsnarl's HP was restored.
-  Magnezone used Volt Switch!
-    HP Grimmsnarl (foe): 259 -> 236 / 259
-  Magnezone went back to Tester!
-    << recalled: Magnezone (player)
-  Go for it, Lucario!
-    >> sent out (player): Lucario Lv.75 [STEADFAST]
+  [Magnezone 213/213 | Grimmsnarl 149/259]
+  The opposing Grimmsnarl used Light Screen!
+  Light Screen raised the opposing team's Special Defense!
+  Magnezone used Thunderbolt!
+    HP Grimmsnarl (foe): 149 -> 95 / 259
+    (anim: Paralysis)
+  The opposing Grimmsnarl is paralyzed! It may be unable to move!
   (end of round)
   The opposing team's Reflect wore off!
 
 --- Turn 9 ---
-  [Lucario 213/213 | Grimmsnarl 236/259]
-  The opposing Grimmsnarl used Thunder Wave!
-    (anim: Paralysis)
-  Lucario is paralyzed! It may be unable to move!
-    (anim: Paralysis)
-  Lucario is paralyzed! It can't move!
-  (end of round)
-
---- Turn 10 ---
-  [Lucario 213/213 PARALYSIS | Grimmsnarl 236/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Lucario (player): 213 -> 60 / 213
-  A critical hit!
-    (anim: StatDown)
-  Lucario's Special Attack fell!
-  Lucario used Flash Cannon!
+  [Magnezone 213/213 | Grimmsnarl 95/259 PARALYSIS]
+  Magnezone used Flash Cannon!
   Flash Cannon pierced the darkness!
-    HP Grimmsnarl (foe): 236 -> 166 / 259
-  It's super effective!
-  Light pierces the darkness... (2 more)
-  (end of round)
-
---- Turn 11 ---
-  [Lucario 60/213 PARALYSIS | Grimmsnarl 166/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Lucario (player): 60 -> 0 / 213
-  Lucario fainted!
-    xx fainted: Lucario (player)
-  (end of round)
-  Go for it, Magnezone!
-    >> sent out (player): Magnezone Lv.75 [MAGNETPULL]
-
---- Turn 12 ---
-  [Magnezone 139/213 | Grimmsnarl 166/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 139 -> 102 / 213
-  It's not very effective...
-    (anim: StatDown)
-  Magnezone's Special Attack fell!
-  Magnezone used Tri Attack!
-  Magnezone's attack missed!
-  (end of round)
-  The opposing team's Light Screen wore off!
-
---- Turn 13 ---
-  [Magnezone 102/213 | Grimmsnarl 166/259]
-  The opposing Grimmsnarl used Light Screen!
-  Light Screen raised the opposing team's Special Defense!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 166 -> 129 / 259
-  (end of round)
-
---- Turn 14 ---
-  [Magnezone 102/213 | Grimmsnarl 129/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 102 -> 68 / 213
-  It's not very effective...
-    (anim: StatDown)
-  Magnezone's Special Attack fell!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 129 -> 103 / 259
-  (end of round)
-
---- Turn 15 ---
-  [Magnezone 68/213 | Grimmsnarl 103/259]
-  The opposing Grimmsnarl used Reflect!
-  Reflect raised the opposing team's Defense!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 103 -> 74 / 259
-  (end of round)
-
---- Turn 16 ---
-  [Magnezone 68/213 | Grimmsnarl 74/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 68 -> 34 / 213
-  It's not very effective...
-    (anim: StatDown)
-  Magnezone's Special Attack fell!
-  Magnezone used Thunderbolt!
-    HP Grimmsnarl (foe): 74 -> 53 / 259
-  (end of round)
-
---- Turn 17 ---
-  [Magnezone 34/213 | Grimmsnarl 53/259]
-  The opposing Grimmsnarl used Spirit Break!
-    HP Magnezone (player): 34 -> 0 / 213
-  It's not very effective...
-  Magnezone fainted!
-    xx fainted: Magnezone (player)
-  (end of round)
-  Your opponent's weak! Get 'em, Togekiss!
-    >> sent out (player): Togekiss Lv.75 [HUSTLE]
-
---- Turn 18 ---
-  [Togekiss 235/235 | Grimmsnarl 53/259]
-  The opposing Grimmsnarl used Thunder Wave!
-    (anim: Paralysis)
-  Togekiss is paralyzed! It may be unable to move!
-  Togekiss used Dazzling Gleam!
-  Dazzling Gleam pierced the darkness!
-    HP Grimmsnarl (foe): 53 -> 0 / 259
+    HP Grimmsnarl (foe): 95 -> 0 / 259
   It's super effective!
   The opposing Grimmsnarl fainted!
     xx fainted: Grimmsnarl (foe)
-  Light pierces the darkness... (1 more)
-  Togekiss is at the level cap (Lv. 75) and can't gain Exp. Points.
+  Light pierces the darkness... (2 more)
+  Magnezone is at the level cap (Lv. 75) and can't gain Exp. Points.
   (end of round)
-  Warden Nyx is about to send out Weavile. Will you switch your Pokémon?  [auto: No]
-  Warden Nyx sent out Weavile!
-    >> sent out (foe): Weavile Lv.73 @LIFEORB [PRESSURE]
-    [ability: Weavile (foe)'s Pressure]
-  The opposing Weavile is exerting its pressure!
+  Warden Nyx is about to send out Honchkrow. Will you switch your Pokémon?  [auto: No]
+  Warden Nyx sent out Honchkrow!
+    >> sent out (foe): Nobody Lv.75 @LIFEORB [ILLUSION]
 
---- Turn 19 ---
-  [Togekiss 235/235 PARALYSIS | Weavile 223/223]
-  The opposing Weavile used Icicle Crash!
-    HP Togekiss (player): 235 -> 0 / 235
-  It's super effective!
-  Togekiss fainted!
-    xx fainted: Togekiss (player)
-    HP Weavile (foe): 223 -> 201 / 223
-  The opposing Weavile lost some of its HP!
+--- Turn 10 ---
+  [Magnezone 213/213 | Honchkrow 214/214]
+  The opposing Honchkrow used Focus Blast!
+  The opposing Honchkrow's attack missed!
+  Magnezone used Thunderbolt!
+    HP Honchkrow (foe): 214 -> 24 / 214
+  A critical hit!
+  The opposing Nobody's illusion wore off!
   (end of round)
-  Go for it, Charizard!
-    >> sent out (player): Charizard Lv.75 [BLAZE]
 
---- Turn 20 ---
-  [Charizard 225/225 | Weavile 201/223]
-  The opposing Weavile used Swords Dance!
-    (anim: StatUp)
-  The opposing Weavile's Attack rose sharply!
-  Charizard used Flamethrower!
-    HP Weavile (foe): 201 -> 106 / 223
-  It's super effective!
-    (anim: Burn)
-  The opposing Weavile was burned!
+--- Turn 11 ---
+  [Magnezone 213/213 | Nobody 24/214]
+  The opposing Nobody used Night Daze!
+  The opposing Nobody struck from the depths of the new moon!
+  The shadows gathered around Night Daze!
+    HP Magnezone (player): 213 -> 0 / 213
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  The shadows grow... (2 more)
+    HP Nobody (foe): 24 -> 3 / 214
+  The opposing Nobody lost some of its HP!
   (end of round)
-    (anim: Burn)
-    HP Weavile (foe): 106 -> 93 / 223
-  The opposing Weavile was hurt by its burn!
-  The opposing team's Light Screen wore off!
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.75 [STEADFAST]
 
---- Turn 21 ---
-  [Charizard 225/225 | Weavile 93/223 BURN]
-  The opposing Weavile used Icicle Crash!
-    HP Charizard (player): 225 -> 80 / 225
-    HP Weavile (foe): 93 -> 71 / 223
-  The opposing Weavile lost some of its HP!
-  Charizard used Flamethrower!
-    HP Weavile (foe): 71 -> 0 / 223
-  It's super effective!
-  The opposing Weavile fainted!
-    xx fainted: Weavile (foe)
-  Charizard is at the level cap (Lv. 75) and can't gain Exp. Points.
+--- Turn 12 ---
+  [Lucario 213/213 | Nobody 3/214]
+  Lucario used Extreme Speed!
+    HP Nobody (foe): 3 -> 0 / 214
+  The opposing Nobody fainted!
+    xx fainted: Nobody (foe)
+  Lucario is at the level cap (Lv. 75) and can't gain Exp. Points.
   (end of round)
   Warden Nyx is about to send out Malamar. Will you switch your Pokémon?  [auto: No]
   Warden Nyx sent out Malamar!
     >> sent out (foe): Malamar Lv.74 @LEFTOVERS [CONTRARY]
 
---- Turn 22 ---
-  [Charizard 80/225 | Malamar 249/249]
-  Charizard used Flamethrower!
-    HP Malamar (foe): 249 -> 147 / 249
+--- Turn 13 ---
+  [Lucario 213/213 | Malamar 249/249]
+  Lucario used Extreme Speed!
+    HP Malamar (foe): 249 -> 194 / 249
+  The opposing Malamar used Superpower!
+    HP Lucario (player): 213 -> 0 / 213
+  It's super effective!
+    (anim: StatUp)
+  The opposing Malamar's Attack rose!
+  The opposing Malamar's Defense rose!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+    (anim: UseItem)
+    HP Malamar (foe): 194 -> 209 / 249
+  The opposing Malamar restored a little HP using its Leftovers!
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.75 [HUSTLE]
+
+--- Turn 14 ---
+  [Togekiss 235/235 | Malamar 209/249]
   The opposing Malamar used Knock Off!
-  The darkness of the new moon deepened!
-    HP Charizard (player): 80 -> 0 / 225
+  The opposing Malamar struck from the depths of the new moon!
+    HP Togekiss (player): 235 -> 160 / 235
+  It's not very effective...
+  Togekiss used Flamethrower!
+    HP Malamar (foe): 209 -> 173 / 249
+  (end of round)
+    (anim: UseItem)
+    HP Malamar (foe): 173 -> 188 / 249
+  The opposing Malamar restored a little HP using its Leftovers!
+
+--- Turn 15 ---
+  [Togekiss 160/235 | Malamar 188/249]
+  The opposing Malamar used Psycho Cut!
+    HP Togekiss (player): 160 -> 58 / 235
+  Togekiss used Flamethrower!
+    HP Malamar (foe): 188 -> 150 / 249
+  (end of round)
+    (anim: UseItem)
+    HP Malamar (foe): 150 -> 165 / 249
+  The opposing Malamar restored a little HP using its Leftovers!
+  The opposing team's Light Screen wore off!
+
+--- Turn 16 ---
+  [Togekiss 58/235 | Malamar 165/249]
+  The opposing Malamar used Psycho Cut!
+    HP Togekiss (player): 58 -> 0 / 235
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  (end of round)
+    (anim: UseItem)
+    HP Malamar (foe): 165 -> 180 / 249
+  The opposing Malamar restored a little HP using its Leftovers!
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.75 [BLAZE]
+
+--- Turn 17 ---
+  [Charizard 225/225 | Malamar 180/249]
+  Charizard used Flamethrower!
+    HP Malamar (foe): 180 -> 86 / 249
+  The opposing Malamar used Superpower!
+    HP Charizard (player): 225 -> 116 / 225
+  A critical hit!
+  It's not very effective...
+    (anim: StatUp)
+  The opposing Malamar's Attack rose!
+  The opposing Malamar's Defense rose!
+  (end of round)
+    (anim: UseItem)
+    HP Malamar (foe): 86 -> 101 / 249
+  The opposing Malamar restored a little HP using its Leftovers!
+
+--- Turn 18 ---
+  [Charizard 116/225 | Malamar 101/249]
+  Charizard used Flamethrower!
+    HP Malamar (foe): 101 -> 8 / 249
+  The opposing Malamar used Knock Off!
+  The opposing Malamar struck from the depths of the new moon!
+    HP Charizard (player): 116 -> 0 / 225
   Charizard fainted!
     xx fainted: Charizard (player)
   (end of round)
     (anim: UseItem)
-    HP Malamar (foe): 147 -> 162 / 249
+    HP Malamar (foe): 8 -> 23 / 249
   The opposing Malamar restored a little HP using its Leftovers!
-  The opposing team's Reflect wore off!
-  Go for it, Starmie!
+  Your opponent's weak! Get 'em, Starmie!
     >> sent out (player): Starmie Lv.75 [ILLUMINATE]
   Starmie's glow lit up the darkness!
     (anim: StatUp)
   Starmie's accuracy rose!
 
---- Turn 23 ---
-  [Starmie 198/198 | Malamar 162/249]
-  Starmie used Surf!
-    HP Malamar (foe): 162 -> 62 / 249
-  The opposing Malamar used Knock Off!
-  The darkness of the new moon deepened!
+--- Turn 19 ---
+  [Starmie 198/198 | Malamar 23/249]
+  Starmie used Thunderbolt!
+    HP Malamar (foe): 23 -> 0 / 249
+  The opposing Malamar fainted!
+    xx fainted: Malamar (foe)
+  Starmie is at the level cap (Lv. 75) and can't gain Exp. Points.
+  (end of round)
+  Warden Nyx sent out Weavile!
+    >> sent out (foe): Weavile Lv.73 @LIFEORB [PRESSURE]
+    [ability: Weavile (foe)'s Pressure]
+  The opposing Weavile is exerting its pressure!
+
+--- Turn 20 ---
+  [Starmie 198/198 | Weavile 223/223]
+  The opposing Weavile used Knock Off!
+  The opposing Weavile struck from the depths of the new moon!
     HP Starmie (player): 198 -> 0 / 198
   It's super effective!
   Starmie fainted!
     xx fainted: Starmie (player)
+    HP Weavile (foe): 223 -> 201 / 223
+  The opposing Weavile lost some of its HP!
   You have no more Pokémon that can fight!
   You lost against Warden Nyx!
   battle result code: 2
   
-RESULT: player lost after 22 turn(s)
+RESULT: player lost after 19 turn(s)

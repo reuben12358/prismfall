@@ -28,7 +28,7 @@ Neon Grid [NEON_GRID] - Gym 4 Warden Rook vs challenger (Lv.27)
     (anim: Burn)
   The opposing Luxio was burned!
   The opposing Luxio used Spark!
-  The neon grid surged!
+  The opposing Luxio drew power straight from the grid!
     HP Magmar (player): 80 -> 53 / 80
   (end of round)
     (anim: Burn)
@@ -49,7 +49,7 @@ Neon Grid [NEON_GRID] - Gym 4 Warden Rook vs challenger (Lv.27)
     HP Toxtricity (foe): 23 -> 33 / 82
   The opposing Toxtricity restored a little HP using its Oran Berry!
   The opposing Toxtricity used Spark!
-  The neon grid surged!
+  The opposing Toxtricity drew power straight from the grid!
     HP Magmar (player): 53 -> 10 / 80
   (end of round)
 
@@ -103,132 +103,114 @@ Neon Grid [NEON_GRID] - Gym 4 Warden Rook vs challenger (Lv.27)
   It's super effective!
     (anim: StatDown)
   Graveler's Speed fell!
-  Graveler used Fire Punch!
-    HP Electabuzz (foe): 26 -> 5 / 74
-    [ability: Electabuzz (foe)'s Static]
-    (anim: Paralysis)
-  Graveler is paralyzed! It may be unable to move!
-  (end of round)
-
---- Turn 8 ---
-  [Graveler 30/75 PARALYSIS | Electabuzz 5/74]
-  Warden Rook used a Super Potion.
-    HP Electabuzz (foe): 5 -> 65 / 74
-  The opposing Electabuzz's HP was restored.
-  Graveler used Fire Punch!
-    HP Electabuzz (foe): 65 -> 46 / 74
-    (anim: Burn)
-  The opposing Electabuzz was burned!
-  (end of round)
-    (anim: Burn)
-    HP Electabuzz (foe): 46 -> 42 / 74
-  The opposing Electabuzz was hurt by its burn!
-
---- Turn 9 ---
-  [Graveler 30/75 PARALYSIS | Electabuzz 42/74 BURN]
-  The opposing Electabuzz used Low Sweep!
-    HP Graveler (player): 30 -> 7 / 75
-  It's super effective!
-    (anim: StatDown)
-  Graveler's Speed fell!
   Graveler used Bulldoze!
-    HP Electabuzz (foe): 42 -> 0 / 74
+    HP Electabuzz (foe): 26 -> 0 / 74
   It's super effective!
   The opposing Electabuzz fainted!
     xx fainted: Electabuzz (foe)
-## FIELD CHANGE: NEON_GRID -> NONE
-  The grid shorted out! The neon lights went dark.
+## FIELD STAGE: NEON_GRID is now stage 2
+  The grid shorted out! The neon lights died - only sparks light the dark!
   Graveler is at the level cap (Lv. 27) and can't gain Exp. Points.
   (end of round)
   Warden Rook is about to send out Camera. Will you switch your Pokémon?  [auto: No]
   Warden Rook sent out Camera!
     >> sent out (foe): Camera Lv.27 @SITRUSBERRY [LEVITATE]
 
---- Turn 10 ---
-  [Graveler 7/75 PARALYSIS | Camera 71/71]
-  Good job, Graveler! Come back!
-    << recalled: Graveler (player)
-  You're in charge, Ampharos!
-    >> sent out (player): Ampharos Lv.27 [STATIC]
+--- Turn 8 ---
+  [Graveler 30/75 | Camera 71/71]
   The opposing Camera used Hex!
-    HP Ampharos (player): 93 -> 75 / 93
+  The opposing Camera flickered through the dead circuitry!
+    HP Graveler (player): 30 -> 0 / 75
+  Graveler fainted!
+    xx fainted: Graveler (player)
+  (end of round)
+  You're in charge, Pidgeot!
+    >> sent out (player): Pidgeot Lv.27 [TANGLEDFEET]
+
+--- Turn 9 ---
+  [Pidgeot 90/90 | Camera 71/71]
+  Pidgeot used Facade!
+    HP Camera (foe): 71 -> 50 / 71
+  The opposing Camera used Thunder Wave!
+  The opposing Camera's attack missed!
+  (end of round)
+
+--- Turn 10 ---
+  [Pidgeot 90/90 | Camera 50/71]
+  Pidgeot, come back!
+    << recalled: Pidgeot (player)
+  Go for it, Ampharos!
+    >> sent out (player): Ampharos Lv.27 [STATIC]
+  The opposing Camera used Thunder Wave!
+  It doesn't affect Ampharos...
   (end of round)
 
 --- Turn 11 ---
-  [Ampharos 75/93 | Camera 71/71]
-  The opposing Camera used Hex!
-    HP Ampharos (player): 75 -> 54 / 93
-  Ampharos used Signal Beam!
-    HP Camera (foe): 71 -> 53 / 71
+  [Ampharos 93/93 | Camera 50/71]
+  Ampharos, switch out! Come back!
+    << recalled: Ampharos (player)
+  Go for it, Pidgeot!
+    >> sent out (player): Pidgeot Lv.27 [TANGLEDFEET]
+  The opposing Camera used Hydro Pump!
+  The opposing Camera's attack missed!
   (end of round)
 
 --- Turn 12 ---
-  [Ampharos 54/93 | Camera 53/71]
-  The opposing Camera used Hydro Pump!
-  The opposing Camera's attack missed!
-  Ampharos used Signal Beam!
-    HP Camera (foe): 53 -> 35 / 71
-    (anim: EatBerry)
-    HP Camera (foe): 35 -> 52 / 71
-  The opposing Camera restored its health using its Sitrus Berry!
+  [Pidgeot 90/90 | Camera 50/71]
+  Pidgeot used Aerial Ace!
+    HP Camera (foe): 50 -> 40 / 71
+  It's not very effective...
+  The opposing Camera used Thunder Wave!
+    (anim: Paralysis)
+  Pidgeot is paralyzed! It may be unable to move!
   (end of round)
 
 --- Turn 13 ---
-  [Ampharos 54/93 | Camera 52/71]
+  [Pidgeot 90/90 PARALYSIS | Camera 40/71]
   The opposing Camera used Hydro Pump!
-    HP Ampharos (player): 54 -> 5 / 93
-  Ampharos used Signal Beam!
-    HP Camera (foe): 52 -> 31 / 71
-    (anim: Confusion)
-  The opposing Camera became confused!
+    HP Pidgeot (player): 90 -> 38 / 90
+  Pidgeot used Facade!
+    HP Camera (foe): 40 -> 4 / 71
+    (anim: EatBerry)
+    HP Camera (foe): 4 -> 21 / 71
+  The opposing Camera restored its health using its Sitrus Berry!
   (end of round)
 
 --- Turn 14 ---
-  [Ampharos 5/93 | Camera 31/71]
-  Good job, Ampharos! Come back!
-    << recalled: Ampharos (player)
-  Just a little more! Hang in there, Vaporeon!
-    >> sent out (player): Vaporeon Lv.27 [WATERABSORB]
-    (anim: Confusion)
-  The opposing Camera is confused!
-    HP Camera (foe): 31 -> 24 / 71
-  It hurt itself in its confusion!
+  [Pidgeot 38/90 PARALYSIS | Camera 21/71]
+  OK, Pidgeot! Come back!
+    << recalled: Pidgeot (player)
+  Just a little more! Hang in there, Ampharos!
+    >> sent out (player): Ampharos Lv.27 [STATIC]
+  The opposing Camera used Hydro Pump!
+    HP Ampharos (player): 93 -> 42 / 93
   (end of round)
 
 --- Turn 15 ---
-  [Vaporeon 115/115 | Camera 24/71]
-  The opposing Camera snapped out of its confusion.
+  [Ampharos 42/93 | Camera 21/71]
+  The opposing Camera used Hydro Pump!
+    HP Ampharos (player): 42 -> 0 / 93
+  Ampharos fainted!
+    xx fainted: Ampharos (player)
+  (end of round)
+  Just a little more! Hang in there, Vaporeon!
+    >> sent out (player): Vaporeon Lv.27 [WATERABSORB]
+
+--- Turn 16 ---
+  [Vaporeon 115/115 | Camera 21/71]
   The opposing Camera used Thunder Wave!
     (anim: Paralysis)
   Vaporeon is paralyzed! It may be unable to move!
-    (anim: Paralysis)
-  Vaporeon is paralyzed! It can't move!
-  (end of round)
-
---- Turn 16 ---
-  [Vaporeon 115/115 PARALYSIS | Camera 24/71]
-  The opposing Camera used Shock Wave!
-    HP Vaporeon (player): 115 -> 67 / 115
-  It's super effective!
   Vaporeon used Shadow Ball!
-    HP Camera (foe): 24 -> 6 / 71
-  (end of round)
-
---- Turn 17 ---
-  [Vaporeon 67/115 PARALYSIS | Camera 6/71]
-  The opposing Camera used Shock Wave!
-    HP Vaporeon (player): 67 -> 17 / 115
-  It's super effective!
-  Vaporeon used Scald!
-    HP Camera (foe): 6 -> 0 / 71
-  It's not very effective...
+  Vaporeon flickered through the dead circuitry!
+    HP Camera (foe): 21 -> 0 / 71
   The opposing Camera fainted!
     xx fainted: Camera (foe)
-  Ampharos is at the level cap (Lv. 27) and can't gain Exp. Points.
+  Pidgeot is at the level cap (Lv. 27) and can't gain Exp. Points.
   Vaporeon is at the level cap (Lv. 27) and can't gain Exp. Points.
   You defeated Warden Rook!
   Cut! ...Okay, okay, that's going in the highlight reel. You earned it.
   You got $2,700 for winning!
   battle result code: 1
   
-RESULT: player won after 16 turn(s)
+RESULT: player won after 15 turn(s)

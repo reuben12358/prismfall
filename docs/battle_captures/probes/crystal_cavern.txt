@@ -17,7 +17,7 @@ CRYSTAL_CAVERN probe: boosted move POWERGEM (on field)
   [Mew 341/341 | Snorlax 461/461]
   Mew used Power Gem!
   The green crystals wreathed the rock in vines!
-  The crystals resonated with the attack!
+  The crystals resonated with Power Gem!
   The crystals refracted the light into a dazzling beam!
     HP Snorlax (foe): 461 -> 348 / 461
   The wild Snorlax used Splash!
@@ -71,7 +71,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves DARKPULSE/NIGHTDAZE/DARKVOID...
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Dark Pulse!
-    HP Snorlax (foe): 461 -> 406 / 461
+    HP Snorlax (foe): 461 -> 390 / 461
 ## FIELD CHANGE: CRYSTAL_CAVERN -> DARK_CRYSTAL
   Darkness swallowed the crystals' light!
   The wild Snorlax used Splash!
@@ -79,7 +79,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves DARKPULSE/NIGHTDAZE/DARKVOID...
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 406/461]
+  [Mew 341/341 | Snorlax 390/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -87,7 +87,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves DARKPULSE/NIGHTDAZE/DARKVOID...
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 406/461]
+  [Mew 341/341 | Snorlax 390/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
@@ -110,7 +110,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: weather Sandstorm -> DARK_CRYSTAL] us
   Mew used Sandstorm!
   A sandstorm brewed!
 ## FIELD CHANGE: CRYSTAL_CAVERN -> DARK_CRYSTAL
-  The sandstorm choked out the crystals' light!
+  The sandstorm smothered the crystals' light!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -142,8 +142,8 @@ CRYSTAL_CAVERN probe: transition [stage 1: weather Sandstorm -> DARK_CRYSTAL] us
 RESULT: fled/forfeit after 2 turn(s)
 
 
-CRYSTAL_CAVERN probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> (proc)] using EXPLOSION
-=================================================================================================================
+CRYSTAL_CAVERN probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> CAVE] using EXPLOSION
+===============================================================================================================
 
 --- Battle start ---
   field: CRYSTAL_CAVERN | weather: None | terrain: None
@@ -157,7 +157,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXP
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Explosion!
-    HP Snorlax (foe): 461 -> 200 / 461
+    HP Snorlax (foe): 461 -> 122 / 461
     HP Mew (player): 341 -> 0 / 341
   Mew fainted!
     xx fainted: Mew (player)
@@ -169,8 +169,8 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXP
 RESULT: player lost after 0 turn(s)
 
 
-CRYSTAL_CAVERN probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> (proc)] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
-========================================================================================================================================
+CRYSTAL_CAVERN probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
+======================================================================================================================================
 
 --- Battle start ---
   field: CRYSTAL_CAVERN | weather: None | terrain: None
@@ -204,7 +204,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE..
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 237/461]
   Mew used Earthquake!
-    HP Snorlax (foe): 237 -> 118 / 461
+    HP Snorlax (foe): 237 -> 83 / 461
 ## FIELD CHANGE: CRYSTAL_CAVERN -> CAVE
   The quakes shattered the crystals!
   The wild Snorlax used Splash!
@@ -212,7 +212,7 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE..
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 118/461]
+  [Mew 341/341 | Snorlax 83/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -220,28 +220,27 @@ CRYSTAL_CAVERN probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE..
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 118/461]
+  [Mew 341/341 | Snorlax 83/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
 
 
-CRYSTAL_CAVERN probe: Telluric Seed held on entry
-=================================================
+CRYSTAL_CAVERN probe: Magical Seed held on entry
+================================================
 
 --- Battle start ---
   field: CRYSTAL_CAVERN | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Mew!
-    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> CRYSTAL_CAVERN
   Prismatic crystals glitter all around!
   The crystals glow a vivid green.
     (anim: UseItem)
-  Mew's Telluric Seed grew a crystal shell around it!
+  Mew's Magical Seed refracted the crystals' light around it!
     (anim: StatUp)
-  Mew's Defense rose!
-  Mew's Special Defense rose!
+  Mew's Special Attack rose!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]

@@ -18,9 +18,20 @@ BOSS Kyogre (KYOGRE_ISENMAR, 3 bars, FROZEN_LAKE -> WATER_SURFACE) vs over-level
 
 --- Turn 1 ---
   [Garchomp 357/357 | Kyogre 226/226]
-  Garchomp used Earthquake!
-    HP Kyogre (foe): 226 -> 1 / 226
-  The lake ice groaned and cracked! (2 more)
+  Garchomp used Dragon Claw!
+    HP Kyogre (foe): 226 -> 2 / 226
+  The wild Kyogre used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Garchomp (player): 357 -> 45 / 357
+  It's super effective!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Garchomp 45/357 | Kyogre 2/226]
+  Garchomp used Dragon Claw!
+    HP Kyogre (foe): 2 -> 1 / 226
   The wild Kyogre's shield shattered!
     HP Kyogre (foe): 1 -> 226 / 226
   Kyogre thrashes, and the ice beneath it splinters!
@@ -31,17 +42,50 @@ BOSS Kyogre (KYOGRE_ISENMAR, 3 bars, FROZEN_LAKE -> WATER_SURFACE) vs over-level
   The frozen lake cracked apart into open water!
 ## BOSS BAR BROKEN: KYOGRE_ISENMAR bar 1 depleted, 2 bar(s) left (Kyogre HP 226/226, field WATER_SURFACE)
   The wild Kyogre used Ice Beam!
-    HP Garchomp (player): 357 -> 45 / 357
+    HP Garchomp (player): 45 -> 0 / 357
   It's super effective!
-  Ice spreads across the water... (2 more)
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  Ice is spreading across the water... (2 more)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
+
+--- Turn 3 ---
+  [Magnezone 281/281 | Kyogre 226/226]
+  The wild Kyogre used Water Spout!
+  The wild Kyogre rode the waves into the attack!
+    HP Magnezone (player): 281 -> 0 / 281
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Starmie!
+    >> sent out (player): Starmie Lv.100 [NATURALCURE]
+
+--- Turn 4 ---
+  [Starmie 261/261 | Kyogre 226/226]
+  Starmie used Psychic!
+    HP Kyogre (foe): 226 -> 1 / 226
+  A critical hit!
+  The wild Kyogre used Calm Mind!
+    (anim: StatUp)
+  The wild Kyogre's Special Attack rose!
+  The wild Kyogre's Special Defense rose!
   (end of round)
     (anim: Rain)
   Rain continues to fall.
 
---- Turn 2 ---
-  [Garchomp 45/357 | Kyogre 226/226]
-  Garchomp used Dragon Claw!
-    HP Kyogre (foe): 226 -> 1 / 226
+--- Turn 5 ---
+  [Starmie 261/261 | Kyogre 1/226]
+  Starmie used Ice Beam!
+  It's not very effective...
+  Ice is spreading across the water... (1 more)
   The wild Kyogre's shield shattered!
     HP Kyogre (foe): 1 -> 226 / 226
   The Icicle Plate's hold on the sea shatters!
@@ -54,34 +98,58 @@ BOSS Kyogre (KYOGRE_ISENMAR, 3 bars, FROZEN_LAKE -> WATER_SURFACE) vs over-level
   A heavy rain began to fall!
 ## BOSS BAR BROKEN: KYOGRE_ISENMAR bar 2 depleted, 1 bar(s) left (Kyogre HP 226/226, field WATER_SURFACE)
   The wild Kyogre used Ice Beam!
-    HP Garchomp (player): 45 -> 0 / 357
+    HP Starmie (player): 261 -> 186 / 261
+  It's not very effective...
+## FIELD CHANGE: WATER_SURFACE -> FROZEN_LAKE
+  The water froze solid! The battle is on the ice now!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 6 ---
+  [Starmie 186/261 | Kyogre 226/226]
+  Starmie used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Kyogre (foe): 226 -> 186 / 226
+  It's not very effective...
+  The wild Kyogre used Thunder!
+    HP Starmie (player): 186 -> 0 / 261
   It's super effective!
-  Garchomp fainted!
-    xx fainted: Garchomp (player)
-  Ice spreads across the water... (1 more)
+  Starmie fainted!
+    xx fainted: Starmie (player)
   (end of round)
     (anim: HeavyRain)
   It is raining heavily.
   Use next Pokémon?  [auto: Yes]
-  You're in charge, Magnezone!
-    >> sent out (player): Magnezone Lv.100 [STURDY]
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.100 [STEADFAST]
 
---- Turn 3 ---
-  [Magnezone 281/281 | Kyogre 226/226]
-  The wild Kyogre used Origin Pulse!
-  The waves amplified the attack!
-    HP Magnezone (player): 281 -> 1 / 281
-    [ability: Magnezone (player)'s Sturdy]
-  Magnezone endured the hit!
-  Magnezone used Thunderbolt!
-  The current raced across the water!
-    HP Kyogre (foe): 226 -> 0 / 226
-  It's super effective!
+--- Turn 7 ---
+  [Lucario 281/281 | Kyogre 186/226]
+  Lucario used Flash Cannon!
+    HP Kyogre (foe): 186 -> 90 / 226
+  A critical hit!
+  It's not very effective...
+    (anim: StatDown)
+  The wild Kyogre's Special Defense fell!
+  The wild Kyogre used Thunder!
+    HP Lucario (player): 281 -> 129 / 281
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 8 ---
+  [Lucario 129/281 | Kyogre 90/226]
+  Lucario used Extreme Speed!
+    HP Kyogre (foe): 90 -> 0 / 226
   The wild Kyogre sank back beneath the waves...
   The wild Kyogre fainted!
     xx fainted: Kyogre (foe)
   The heavy rain has lifted!
-  Magnezone is at the level cap (Lv. 100) and can't gain Exp. Points.
+  Lucario slid across the ice!
+    (anim: StatUp)
+  Lucario's Speed rose!
+  Lucario is at the level cap (Lv. 100) and can't gain Exp. Points.
   battle result code: 1
   
-RESULT: player won after 2 turn(s)
+RESULT: player won after 7 turn(s)

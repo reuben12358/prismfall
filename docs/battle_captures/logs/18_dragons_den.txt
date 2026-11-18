@@ -22,7 +22,7 @@ Dragon's Den [DRAGONS_DEN] - Gym 18 Warden Sigrun vs challenger (Lv.85)
 --- Turn 1 ---
   [Garchomp 304/304 | Flygon 268/268]
   The opposing Flygon used Outrage!
-  The ancient wyrms roared in answer!
+  The ancient wyrms roared in answer to the opposing Flygon!
     HP Garchomp (player): 304 -> 0 / 304
   It's super effective!
   Garchomp fainted!
@@ -30,43 +30,43 @@ Dragon's Den [DRAGONS_DEN] - Gym 18 Warden Sigrun vs challenger (Lv.85)
   The wyrm statues' eyes begin to glow... (3 more)
   (end of round)
   You're in charge, Togekiss!
-    >> sent out (player): Togekiss Lv.85 [HUSTLE]
+    >> sent out (player): Togekiss Lv.85 [SERENEGRACE]
 
 --- Turn 2 ---
   [Togekiss 265/265 | Flygon 268/268]
   The opposing Flygon used Outrage!
   It doesn't affect Togekiss...
   Togekiss used Flamethrower!
-  The magma-lit den blazed!
-    HP Flygon (foe): 268 -> 219 / 268
+  The magma-lit den blazed with Flamethrower!
+    HP Flygon (foe): 268 -> 227 / 268
   It's not very effective...
   (end of round)
 
 --- Turn 3 ---
-  [Togekiss 265/265 | Flygon 219/268]
+  [Togekiss 265/265 | Flygon 227/268]
   Warden Sigrun withdrew Flygon!
     << recalled: Flygon (foe)
   Warden Sigrun sent out Goodra!
     >> sent out (foe): Goodra Lv.84 @ASSAULTVEST [SAPSIPPER]
   Togekiss used Flamethrower!
-  The magma-lit den blazed!
-    HP Goodra (foe): 288 -> 269 / 288
+  The magma-lit den blazed with Flamethrower!
+    HP Goodra (foe): 288 -> 272 / 288
   It's not very effective...
   (end of round)
 
 --- Turn 4 ---
-  [Togekiss 265/265 | Goodra 269/288]
+  [Togekiss 265/265 | Goodra 272/288]
   The opposing Goodra used Sludge Bomb!
     HP Togekiss (player): 265 -> 129 / 265
   It's super effective!
   Togekiss used Flamethrower!
-  The magma-lit den blazed!
-    HP Goodra (foe): 269 -> 249 / 288
+  The magma-lit den blazed with Flamethrower!
+    HP Goodra (foe): 272 -> 255 / 288
   It's not very effective...
   (end of round)
 
 --- Turn 5 ---
-  [Togekiss 129/265 | Goodra 249/288]
+  [Togekiss 129/265 | Goodra 255/288]
   The opposing Goodra used Sludge Bomb!
     HP Togekiss (player): 129 -> 0 / 265
   It's super effective!
@@ -74,14 +74,14 @@ Dragon's Den [DRAGONS_DEN] - Gym 18 Warden Sigrun vs challenger (Lv.85)
     xx fainted: Togekiss (player)
   (end of round)
   Go for it, Lucario!
-    >> sent out (player): Lucario Lv.85 [STEADFAST]
+    >> sent out (player): Lucario Lv.85 [INNERFOCUS]
 
 --- Turn 6 ---
-  [Lucario 240/240 | Goodra 249/288]
+  [Lucario 240/240 | Goodra 255/288]
   Lucario used Flash Cannon!
-    HP Goodra (foe): 249 -> 208 / 288
+    HP Goodra (foe): 255 -> 220 / 288
   The opposing Goodra used Fire Blast!
-  The magma-lit den blazed!
+  The magma-lit den blazed with Fire Blast!
     HP Lucario (player): 240 -> 0 / 240
   It's super effective!
   Lucario fainted!
@@ -91,115 +91,102 @@ Dragon's Den [DRAGONS_DEN] - Gym 18 Warden Sigrun vs challenger (Lv.85)
     >> sent out (player): Charizard Lv.85 [BLAZE]
 
 --- Turn 7 ---
-  [Charizard 253/253 | Goodra 208/288]
-  Charizard used Dragon Pulse!
-  The ancient wyrms roared in answer!
-    HP Goodra (foe): 208 -> 119 / 288
-  It's super effective!
-  The wyrm statues' eyes begin to glow... (2 more)
+  [Charizard 253/253 | Goodra 220/288]
+  Charizard used Earthquake!
+    HP Goodra (foe): 220 -> 158 / 288
   The opposing Goodra used Sludge Bomb!
     HP Charizard (player): 253 -> 170 / 253
   (end of round)
 
 --- Turn 8 ---
-  [Charizard 170/253 | Goodra 119/288]
-  Warden Sigrun used a Full Restore.
-    HP Goodra (foe): 119 -> 288 / 288
-  The opposing Goodra's HP was restored.
-  Charizard used Dragon Pulse!
-  The ancient wyrms roared in answer!
-    HP Goodra (foe): 288 -> 196 / 288
+  [Charizard 170/253 | Goodra 158/288]
+  Charizard used Earthquake!
+    HP Goodra (foe): 158 -> 101 / 288
+  The opposing Goodra used Thunderbolt!
+    HP Charizard (player): 170 -> 8 / 253
   It's super effective!
-  The wyrm statues' eyes begin to glow... (1 more)
   (end of round)
 
 --- Turn 9 ---
-  [Charizard 170/253 | Goodra 196/288]
-  Charizard used Dragon Pulse!
-  The ancient wyrms roared in answer!
-    HP Goodra (foe): 196 -> 112 / 288
-  It's super effective!
-## FIELD STAGE: DRAGONS_DEN is now stage 2
-  The den has awoken! Wyrmfire surges through the lair!
+  [Charizard 8/253 | Goodra 101/288]
+  Good job, Charizard! Come back!
+    << recalled: Charizard (player)
+  Just a little more! Hang in there, Magnezone!
+    >> sent out (player): Magnezone Lv.85 [STURDY]
   The opposing Goodra used Thunderbolt!
-    HP Charizard (player): 170 -> 0 / 253
+    HP Magnezone (player): 240 -> 202 / 240
+  It's not very effective...
+  (end of round)
+
+--- Turn 10 ---
+  [Magnezone 202/240 | Goodra 101/288]
+  The opposing Goodra used Fire Blast!
+  The opposing Goodra's attack missed!
+  Magnezone used Flash Cannon!
+    HP Goodra (foe): 101 -> 62 / 288
+  (end of round)
+
+--- Turn 11 ---
+  [Magnezone 202/240 | Goodra 62/288]
+  Warden Sigrun used a Full Restore.
+    HP Goodra (foe): 62 -> 288 / 288
+  The opposing Goodra's HP was restored.
+  Magnezone used Thunderbolt!
+    HP Goodra (foe): 288 -> 253 / 288
+  A critical hit!
+  It's not very effective...
+  (end of round)
+
+--- Turn 12 ---
+  [Magnezone 202/240 | Goodra 253/288]
+  The opposing Goodra used Fire Blast!
+  The magma-lit den blazed with Fire Blast!
+    HP Magnezone (player): 202 -> 0 / 240
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.85 [BLAZE]
+
+--- Turn 13 ---
+  [Charizard 8/253 | Goodra 253/288]
+  Charizard used Flamethrower!
+  The magma-lit den blazed with Flamethrower!
+    HP Goodra (foe): 253 -> 217 / 288
+  It's not very effective...
+  The opposing Goodra used Thunderbolt!
+    HP Charizard (player): 8 -> 0 / 253
   It's super effective!
   Charizard fainted!
     xx fainted: Charizard (player)
   (end of round)
-  Just a little more! Hang in there, Magnezone!
-    >> sent out (player): Magnezone Lv.85 [STURDY]
-
---- Turn 10 ---
-  [Magnezone 240/240 | Goodra 112/288]
-  The opposing Goodra used Fire Blast!
-  The opposing Goodra's attack missed!
-  Magnezone used Volt Switch!
-    HP Goodra (foe): 112 -> 90 / 288
-  It's not very effective...
-  Magnezone went back to Tester!
-    << recalled: Magnezone (player)
-  Just a little more! Hang in there, Starmie!
+  Go for it, Starmie!
     >> sent out (player): Starmie Lv.85 [ILLUMINATE]
-  (end of round)
-    HP Starmie (player): 223 -> 216 / 223
-  Starmie was scorched by the wyrmfire!
 
---- Turn 11 ---
-  [Starmie 216/223 | Goodra 90/288]
-  Warden Sigrun used a Full Restore.
-    HP Goodra (foe): 90 -> 288 / 288
-  The opposing Goodra's HP was restored.
-  Starmie used Psychic!
-    HP Goodra (foe): 288 -> 245 / 288
-  (end of round)
-    HP Starmie (player): 216 -> 209 / 223
-  Starmie was scorched by the wyrmfire!
-
---- Turn 12 ---
-  [Starmie 209/223 | Goodra 245/288]
-  Starmie used Psychic!
-    HP Goodra (foe): 245 -> 200 / 288
-  The opposing Goodra used Sludge Bomb!
-    HP Starmie (player): 209 -> 124 / 223
-  (end of round)
-    HP Starmie (player): 124 -> 117 / 223
-  Starmie was scorched by the wyrmfire!
-
---- Turn 13 ---
-  [Starmie 117/223 | Goodra 200/288]
+--- Turn 14 ---
+  [Starmie 223/223 | Goodra 217/288]
   Starmie used Ice Beam!
-  The wyrmfire melted the ice away...
-    HP Goodra (foe): 200 -> 171 / 288
+  The lair's heat sapped the cold...
+    HP Goodra (foe): 217 -> 183 / 288
   It's super effective!
   Steam hisses from the cooling magma... (2 more)
   The opposing Goodra used Thunderbolt!
-    HP Starmie (player): 117 -> 0 / 223
+    HP Starmie (player): 223 -> 59 / 223
   It's super effective!
+  (end of round)
+
+--- Turn 15 ---
+  [Starmie 59/223 | Goodra 183/288]
+  Starmie used Thunderbolt!
+    HP Goodra (foe): 183 -> 171 / 288
+  It's not very effective...
+  The opposing Goodra used Sludge Bomb!
+    HP Starmie (player): 59 -> 0 / 223
   Starmie fainted!
     xx fainted: Starmie (player)
-  (end of round)
-  Go for it, Magnezone!
-    >> sent out (player): Magnezone Lv.85 [STURDY]
-
---- Turn 14 ---
-  [Magnezone 240/240 | Goodra 171/288]
-  The opposing Goodra used Fire Blast!
-  Wyrmfire engulfed the attack!
-    HP Magnezone (player): 240 -> 1 / 240
-  It's super effective!
-    [ability: Magnezone (player)'s Sturdy]
-  Magnezone endured the hit!
-  Magnezone used Thunderbolt!
-    HP Goodra (foe): 171 -> 146 / 288
-  It's not very effective...
-  (end of round)
-    HP Magnezone (player): 1 -> 0 / 240
-  Magnezone was scorched by the wyrmfire!
-  Magnezone fainted!
-    xx fainted: Magnezone (player)
   You have no more Pokémon that can fight!
   You lost against Warden Sigrun!
   battle result code: 2
   
-RESULT: player lost after 13 turn(s)
+RESULT: player lost after 14 turn(s)

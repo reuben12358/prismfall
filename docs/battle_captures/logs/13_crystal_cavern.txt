@@ -10,15 +10,14 @@ Crystal Cavern [CRYSTAL_CAVERN] - Gym 13 Warden Bastian vs challenger (Lv.63)
   Warden Bastian sent out Carbink!
     >> sent out (foe): Carbink Lv.61 @LIGHTCLAY [STURDY]
   Go! Garchomp!
-    >> sent out (player): Garchomp Lv.63 @TELLURICSEED [SANDVEIL]
+    >> sent out (player): Garchomp Lv.63 @MAGICALSEED [SANDVEIL]
 ## FIELD CHANGE: NONE -> CRYSTAL_CAVERN
   Prismatic crystals glitter all around!
   The crystals glow a vivid green.
     (anim: UseItem)
-  Garchomp's Telluric Seed grew a crystal shell around it!
+  Garchomp's Magical Seed refracted the crystals' light around it!
     (anim: StatUp)
-  Garchomp's Defense rose!
-  Garchomp's Special Defense rose!
+  Garchomp's Special Attack rose!
 
 --- Turn 1 ---
   [Garchomp 228/228 | Carbink 161/161]
@@ -39,7 +38,7 @@ Crystal Cavern [CRYSTAL_CAVERN] - Gym 13 Warden Bastian vs challenger (Lv.63)
   The opposing Carbink was burned!
   The opposing Carbink used Reflect!
   Reflect raised the opposing team's Defense!
-  The crystals reflected the barrier, strengthening it!
+  The crystals mirrored the barrier, strengthening it!
   (end of round)
     (anim: Burn)
     HP Carbink (foe): 136 -> 126 / 161
@@ -52,7 +51,7 @@ Crystal Cavern [CRYSTAL_CAVERN] - Gym 13 Warden Bastian vs challenger (Lv.63)
     HP Carbink (foe): 126 -> 118 / 161
   It's not very effective...
   The opposing Carbink used Moonblast!
-    HP Garchomp (player): 228 -> 157 / 228
+    HP Garchomp (player): 228 -> 176 / 228
   It's super effective!
   (end of round)
     (anim: Burn)
@@ -61,12 +60,12 @@ Crystal Cavern [CRYSTAL_CAVERN] - Gym 13 Warden Bastian vs challenger (Lv.63)
   The crystals shifted to ocean blue!
 
 --- Turn 4 ---
-  [Garchomp 157/228 | Carbink 108/161 BURN]
+  [Garchomp 176/228 | Carbink 108/161 BURN]
   Garchomp used Fire Fang!
     HP Carbink (foe): 108 -> 102 / 161
   It's not very effective...
   The opposing Carbink used Moonblast!
-    HP Garchomp (player): 157 -> 89 / 228
+    HP Garchomp (player): 176 -> 126 / 228
   It's super effective!
   (end of round)
     (anim: Burn)
@@ -75,186 +74,220 @@ Crystal Cavern [CRYSTAL_CAVERN] - Gym 13 Warden Bastian vs challenger (Lv.63)
   The crystals shifted to vivid green!
 
 --- Turn 5 ---
-  [Garchomp 89/228 | Carbink 92/161 BURN]
-  Garchomp used Stone Edge!
-  The green crystals wreathed the rock in vines!
-  The crystals resonated with the attack!
-    HP Carbink (foe): 92 -> 38 / 161
-  It's super effective!
-  The opposing Carbink used Moonblast!
-    HP Garchomp (player): 89 -> 0 / 228
-  A critical hit!
-  It's super effective!
-  Garchomp fainted!
-    xx fainted: Garchomp (player)
+  [Garchomp 126/228 | Carbink 92/161 BURN]
+  Garchomp used Fire Fang!
+    HP Carbink (foe): 92 -> 86 / 161
+  It's not very effective...
+  The opposing Carbink flinched and couldn't move!
   (end of round)
     (anim: Burn)
-    HP Carbink (foe): 38 -> 28 / 161
+    HP Carbink (foe): 86 -> 76 / 161
   The opposing Carbink was hurt by its burn!
+  Your team's Light Screen wore off!
   The crystals shifted to amethyst!
-  Your opponent's weak! Get 'em, Magnezone!
-    >> sent out (player): Magnezone Lv.63 [MAGNETPULL]
-    HP Magnezone (player): 180 -> 169 / 180
-  Pointed stones dug into Magnezone!
 
 --- Turn 6 ---
-  [Magnezone 169/180 | Carbink 28/161 BURN]
+  [Garchomp 126/228 | Carbink 76/161 BURN]
   Warden Bastian used a Full Restore.
-    HP Carbink (foe): 28 -> 161 / 161
+    HP Carbink (foe): 76 -> 161 / 161
   The opposing Carbink's HP was restored.
-  Magnezone used Flash Cannon!
-  The crystals refracted the light into a dazzling beam!
-    HP Carbink (foe): 161 -> 1 / 161
-  It's super effective!
-    [ability: Carbink (foe)'s Sturdy]
-  The opposing Carbink endured the hit!
+  Garchomp used Fire Fang!
+    HP Carbink (foe): 161 -> 155 / 161
+  It's not very effective...
   (end of round)
   The crystals flared a fiery red!
 
 --- Turn 7 ---
-  [Magnezone 169/180 | Carbink 1/161]
-  Warden Bastian used a Full Restore.
-    HP Carbink (foe): 1 -> 161 / 161
-  The opposing Carbink's HP was restored.
-  Magnezone used Thunderbolt!
-    HP Carbink (foe): 161 -> 101 / 161
+  [Garchomp 126/228 | Carbink 155/161]
+  Garchomp used Fire Fang!
+    HP Carbink (foe): 155 -> 147 / 161
+  It's not very effective...
+  The opposing Carbink used Moonblast!
+    HP Garchomp (player): 126 -> 21 / 228
+  It's super effective!
   (end of round)
   The crystals shifted to ocean blue!
 
 --- Turn 8 ---
-  [Magnezone 169/180 | Carbink 101/161]
+  [Garchomp 21/228 | Carbink 147/161]
+  Garchomp used Fire Fang!
+    HP Carbink (foe): 147 -> 141 / 161
+  It's not very effective...
+  The opposing Carbink used Moonblast!
+    HP Garchomp (player): 21 -> 0 / 228
+  It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  The crystals shifted to vivid green!
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.63 [MAGNETPULL]
+    HP Magnezone (player): 180 -> 169 / 180
+  Pointed stones dug into Magnezone!
+    HP Magnezone (player): 169 -> 163 / 180
+  The crystal shards flared Grass as they struck Magnezone!
+
+--- Turn 9 ---
+  [Magnezone 163/180 | Carbink 141/161]
   Magnezone used Flash Cannon!
   The crystals refracted the light into a dazzling beam!
-    HP Carbink (foe): 101 -> 0 / 161
+    HP Carbink (foe): 141 -> 0 / 161
   It's super effective!
   The opposing Carbink fainted!
     xx fainted: Carbink (foe)
   Magnezone is at the level cap (Lv. 63) and can't gain Exp. Points.
   (end of round)
-  The crystals shifted to vivid green!
+  The crystals shifted to amethyst!
   Warden Bastian is about to send out Golem. Will you switch your Pokémon?  [auto: No]
   Warden Bastian sent out Golem!
     >> sent out (foe): Golem Lv.61 @SITRUSBERRY [GALVANIZE]
 
---- Turn 9 ---
-  [Magnezone 169/180 | Golem 198/198]
+--- Turn 10 ---
+  [Magnezone 163/180 | Golem 198/198]
   Magnezone used Flash Cannon!
   The crystals refracted the light into a dazzling beam!
-    HP Golem (foe): 198 -> 54 / 198
+    HP Golem (foe): 198 -> 47 / 198
     (anim: EatBerry)
-    HP Golem (foe): 54 -> 103 / 198
+    HP Golem (foe): 47 -> 96 / 198
   The opposing Golem restored its health using its Sitrus Berry!
-    (anim: StatDown)
-  The opposing Golem's Special Defense fell!
   The opposing Golem used Earthquake!
-    HP Magnezone (player): 169 -> 0 / 180
+    HP Magnezone (player): 163 -> 0 / 180
   It's super effective!
   Magnezone fainted!
     xx fainted: Magnezone (player)
   The crystals are cracking! (2 more)
   (end of round)
-  The crystals shifted to amethyst!
-  Go for it, Charizard!
+  The crystals flared a fiery red!
+  Just a little more! Hang in there, Charizard!
     >> sent out (player): Charizard Lv.63 [BLAZE]
     HP Charizard (player): 190 -> 95 / 190
   Pointed stones dug into Charizard!
+    HP Charizard (player): 95 -> 89 / 190
+  The crystal shards flared Fire as they struck Charizard!
 
---- Turn 10 ---
-  [Charizard 95/190 | Golem 103/198]
+--- Turn 11 ---
+  [Charizard 89/190 | Golem 96/198]
   Charizard used Flamethrower!
-    HP Golem (foe): 103 -> 36 / 198
+    HP Golem (foe): 96 -> 34 / 198
   It's not very effective...
   The opposing Golem used Double-Edge!
-    HP Charizard (player): 95 -> 0 / 190
+    HP Charizard (player): 89 -> 0 / 190
   It's super effective!
   Charizard fainted!
     xx fainted: Charizard (player)
-    HP Golem (foe): 36 -> 4 / 198
+    HP Golem (foe): 34 -> 4 / 198
   The opposing Golem is damaged by recoil!
   (end of round)
-  The crystals flared a fiery red!
+  The opposing team's Reflect wore off!
+  The crystals shifted to ocean blue!
   Your opponent's weak! Get 'em, Lucario!
     >> sent out (player): Lucario Lv.63 [STEADFAST]
     HP Lucario (player): 180 -> 174 / 180
   Pointed stones dug into Lucario!
+    HP Lucario (player): 174 -> 163 / 180
+  The crystal shards flared Water as they struck Lucario!
 
---- Turn 11 ---
-  [Lucario 174/180 | Golem 4/198]
-  Lucario used Extreme Speed!
-    HP Golem (foe): 4 -> 0 / 198
-  It's not very effective...
+--- Turn 12 ---
+  [Lucario 163/180 | Golem 4/198]
+  Warden Bastian used a Full Restore.
+    HP Golem (foe): 4 -> 198 / 198
+  The opposing Golem's HP was restored.
+  Lucario used Flash Cannon!
+  The crystals refracted the light into a dazzling beam!
+    HP Golem (foe): 198 -> 61 / 198
+  (end of round)
+  The crystals shifted to vivid green!
+
+--- Turn 13 ---
+  [Lucario 163/180 | Golem 61/198]
+  Lucario used Flash Cannon!
+  The crystals refracted the light into a dazzling beam!
+    HP Golem (foe): 61 -> 0 / 198
   The opposing Golem fainted!
     xx fainted: Golem (foe)
   Lucario is at the level cap (Lv. 63) and can't gain Exp. Points.
   (end of round)
-  The opposing team's Reflect wore off!
-  The crystals shifted to ocean blue!
+  The crystals shifted to amethyst!
   Warden Bastian is about to send out Rhyperior. Will you switch your Pokémon?  [auto: No]
   Warden Bastian sent out Rhyperior!
     >> sent out (foe): Rhyperior Lv.62 @ASSAULTVEST [SOLIDROCK]
 
---- Turn 12 ---
-  [Lucario 174/180 | Rhyperior 244/244]
+--- Turn 14 ---
+  [Lucario 163/180 | Rhyperior 244/244]
   Lucario used Flash Cannon!
   The crystals refracted the light into a dazzling beam!
-    HP Rhyperior (foe): 244 -> 105 / 244
+    HP Rhyperior (foe): 244 -> 97 / 244
   It's super effective!
   The opposing Rhyperior used Earthquake!
-    HP Lucario (player): 174 -> 0 / 180
+    HP Lucario (player): 163 -> 0 / 180
   It's super effective!
   Lucario fainted!
     xx fainted: Lucario (player)
   The crystals are cracking! (1 more)
   (end of round)
-  The crystals shifted to vivid green!
+  The crystals flared a fiery red!
   Just a little more! Hang in there, Starmie!
     >> sent out (player): Starmie Lv.63 [NATURALCURE]
     HP Starmie (player): 168 -> 147 / 168
   Pointed stones dug into Starmie!
+    HP Starmie (player): 147 -> 142 / 168
+  The crystal shards flared Fire as they struck Starmie!
 
---- Turn 13 ---
-  [Starmie 147/168 | Rhyperior 105/244]
+--- Turn 15 ---
+  [Starmie 142/168 | Rhyperior 97/244]
   Starmie used Surf!
-    HP Rhyperior (foe): 105 -> 0 / 244
+    HP Rhyperior (foe): 97 -> 0 / 244
   It's super effective!
   The opposing Rhyperior fainted!
     xx fainted: Rhyperior (foe)
   Starmie is at the level cap (Lv. 63) and can't gain Exp. Points.
   (end of round)
-  The crystals shifted to amethyst!
+  The crystals shifted to ocean blue!
   Warden Bastian is about to send out Lycanroc. Will you switch your Pokémon?  [auto: No]
   Warden Bastian sent out Lycanroc!
     >> sent out (foe): Lycanroc Lv.62 @LIFEORB [TOUGHCLAWS]
 
---- Turn 14 ---
-  [Starmie 147/168 | Lycanroc 195/195]
+--- Turn 16 ---
+  [Starmie 142/168 | Lycanroc 195/195]
   The opposing Lycanroc used Crunch!
-    HP Starmie (player): 147 -> 0 / 168
+    HP Starmie (player): 142 -> 0 / 168
   It's super effective!
   Starmie fainted!
     xx fainted: Starmie (player)
     HP Lycanroc (foe): 195 -> 176 / 195
   The opposing Lycanroc lost some of its HP!
   (end of round)
-  The crystals flared a fiery red!
+  The crystals shifted to vivid green!
   Go for it, Togekiss!
     >> sent out (player): Togekiss Lv.63 [SERENEGRACE]
     HP Togekiss (player): 199 -> 149 / 199
   Pointed stones dug into Togekiss!
+    HP Togekiss (player): 149 -> 143 / 199
+  The crystal shards flared Grass as they struck Togekiss!
 
---- Turn 15 ---
-  [Togekiss 149/199 | Lycanroc 176/195]
+--- Turn 17 ---
+  [Togekiss 143/199 | Lycanroc 176/195]
+  The opposing Lycanroc used Stone Edge!
+  The opposing Lycanroc's attack missed!
+  Togekiss used Flamethrower!
+    HP Lycanroc (foe): 176 -> 142 / 195
+  It's not very effective...
+  (end of round)
+  The crystals shifted to amethyst!
+
+--- Turn 18 ---
+  [Togekiss 143/199 | Lycanroc 142/195]
   The opposing Lycanroc used Accelerock!
-  The red crystals set the rock ablaze!
-  The crystals resonated with the attack!
-    HP Togekiss (player): 149 -> 0 / 199
+  The amethyst crystals charged the rock with psychic power!
+  The crystals resonated with Accelerock!
+    HP Togekiss (player): 143 -> 0 / 199
   It's super effective!
   Togekiss fainted!
     xx fainted: Togekiss (player)
-    HP Lycanroc (foe): 176 -> 157 / 195
+    HP Lycanroc (foe): 142 -> 123 / 195
   The opposing Lycanroc lost some of its HP!
   You have no more Pokémon that can fight!
   You lost against Warden Bastian!
   battle result code: 2
   
-RESULT: player lost after 14 turn(s)
+RESULT: player lost after 17 turn(s)

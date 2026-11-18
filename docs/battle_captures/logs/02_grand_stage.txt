@@ -10,38 +10,42 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
   Warden Dorian sent out Chatot!
     >> sent out (foe): Chatot Lv.17 @ORANBERRY [BIGPECKS]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.19 @MAGICALSEED [FLASHFIRE]
+    >> sent out (player): Growlithe Lv.19 @SYNTHETICSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
   The curtain rises! The spotlight blazes over the stage!
     (anim: UseItem)
-  Growlithe's Magical Seed cast a spotlight on it!
+  Growlithe's Synthetic Seed put it in the spotlight! It's here to perform!
     (anim: StatUp)
   Growlithe's Speed rose!
 
 --- Turn 1 ---
   [Growlithe 55/55 | Chatot 55/55]
   Growlithe used Ember!
-    HP Chatot (foe): 55 -> 26 / 55
+    HP Chatot (foe): 55 -> 25 / 55
   A critical hit!
     (anim: EatBerry)
-    HP Chatot (foe): 26 -> 36 / 55
+    HP Chatot (foe): 25 -> 35 / 55
   The opposing Chatot restored a little HP using its Oran Berry!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  What a hit! The audience leaps to its feet!
   The opposing Chatot used Chatter!
-  Chatter resonated through the theater!
-    HP Growlithe (player): 55 -> 24 / 55
+  Chatter rang through the opera house!
+    HP Growlithe (player): 55 -> 23 / 55
     (anim: Confusion)
   Growlithe became confused!
   (end of round)
 
 --- Turn 2 ---
-  [Growlithe 24/55 | Chatot 36/55]
+  [Growlithe 23/55 | Chatot 35/55]
     (anim: Confusion)
   Growlithe is confused!
   Growlithe used Flame Wheel!
-    HP Chatot (foe): 36 -> 0 / 55
+    HP Chatot (foe): 35 -> 0 / 55
   A critical hit!
   The opposing Chatot fainted!
     xx fainted: Chatot (foe)
+## FIELD STAGE: GRAND_STAGE is now stage 3
+  A breathtaking hit! Standing ovation!
   Growlithe is at the level cap (Lv. 19) and can't gain Exp. Points.
   (end of round)
   Warden Dorian is about to send out Kecleon. Will you switch your Pokémon?  [auto: No]
@@ -49,41 +53,33 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
     >> sent out (foe): Kecleon Lv.19 @SITRUSBERRY [COLORCHANGE]
 
 --- Turn 3 ---
-  [Growlithe 24/55 | Kecleon 55/55]
+  [Growlithe 23/55 | Kecleon 55/55]
   The opposing Kecleon used Feint!
   The crowd roared for the opposing Kecleon!
-    HP Growlithe (player): 24 -> 5 / 55
-    (anim: Confusion)
-  Growlithe is confused!
-  Growlithe used Flame Wheel!
-    HP Kecleon (foe): 55 -> 36 / 55
-    [ability: Kecleon (foe)'s Color Change]
-  The opposing Kecleon's type changed to Fire because of its Color Change!
-  (end of round)
-
---- Turn 4 ---
-  [Growlithe 5/55 | Kecleon 36/55]
-    (anim: Confusion)
-  Growlithe is confused!
-  Growlithe used Bite!
-    HP Kecleon (foe): 36 -> 25 / 55
-    (anim: EatBerry)
-    HP Kecleon (foe): 25 -> 38 / 55
-  The opposing Kecleon restored its health using its Sitrus Berry!
-    [ability: Kecleon (foe)'s Color Change]
-  The opposing Kecleon's type changed to Dark because of its Color Change!
-  The opposing Kecleon used Psybeam!
-    HP Growlithe (player): 5 -> 0 / 55
+    HP Growlithe (player): 23 -> 0 / 55
+  A critical hit!
   Growlithe fainted!
     xx fainted: Growlithe (player)
   (end of round)
-  Go for it, Machop!
+  You're in charge, Machop!
     >> sent out (player): Machop Lv.19 [NOGUARD]
 
+--- Turn 4 ---
+  [Machop 61/61 | Kecleon 55/55]
+  Machop used Knock Off!
+    HP Kecleon (foe): 55 -> 35 / 55
+  The opposing Kecleon dropped its Sitrus Berry!
+    [ability: Kecleon (foe)'s Color Change]
+  The opposing Kecleon's type changed to Dark because of its Color Change!
+  The opposing Kecleon used Psybeam!
+    HP Machop (player): 61 -> 35 / 61
+  It's super effective!
+  (end of round)
+
 --- Turn 5 ---
-  [Machop 61/61 | Kecleon 38/55]
+  [Machop 35/61 | Kecleon 35/55]
   Machop used Low Sweep!
-    HP Kecleon (foe): 38 -> 0 / 55
+    HP Kecleon (foe): 35 -> 0 / 55
   It's super effective!
   The opposing Kecleon fainted!
     xx fainted: Kecleon (foe)
@@ -94,57 +90,73 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
     >> sent out (foe): Loudred Lv.18 @SITRUSBERRY [SCRAPPY]
 
 --- Turn 6 ---
-  [Machop 61/61 | Loudred 61/61]
+  [Machop 35/61 | Loudred 61/61]
   The opposing Loudred used Uproar!
   The crowd roared for the opposing Loudred!
-  Uproar resonated through the theater!
-    HP Machop (player): 61 -> 0 / 61
+  Uproar rang through the opera house!
+    HP Machop (player): 35 -> 0 / 61
   Machop fainted!
     xx fainted: Machop (player)
   The opposing Loudred caused an uproar!
   (end of round)
   The opposing Loudred is making an uproar!
   You're in charge, Roggenrola!
-    >> sent out (player): Roggenrola Lv.19 [STURDY]
+    >> sent out (player): Roggenrola Lv.19 [WEAKARMOR]
 
 --- Turn 7 ---
   [Roggenrola 55/55 | Loudred 61/61]
   The opposing Loudred used Uproar!
   The crowd roared for the opposing Loudred!
-  Uproar resonated through the theater!
-    HP Roggenrola (player): 55 -> 10 / 55
+  Uproar rang through the opera house!
+    HP Roggenrola (player): 55 -> 9 / 55
   It's not very effective...
+  Roggenrola was dazzled by the roar of the crowd!
+    (anim: Confusion)
+  Roggenrola became confused!
+    (anim: Confusion)
+  Roggenrola is confused!
   Roggenrola used Rock Blast!
-    HP Loudred (foe): 61 -> 49 / 61
-    HP Loudred (foe): 49 -> 37 / 61
+    HP Loudred (foe): 61 -> 42 / 61
+  A critical hit!
+    HP Loudred (foe): 42 -> 29 / 61
+    (anim: EatBerry)
+    HP Loudred (foe): 29 -> 44 / 61
+  The opposing Loudred restored its health using its Sitrus Berry!
   Hit 2 times!
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 44 -> 48 / 61
   The opposing Loudred is making an uproar!
 
 --- Turn 8 ---
-  [Roggenrola 10/55 | Loudred 37/61]
+  [Roggenrola 9/55 | Loudred 48/61]
   The opposing Loudred used Uproar!
   The crowd roared for the opposing Loudred!
-  Uproar resonated through the theater!
-    HP Roggenrola (player): 10 -> 0 / 55
+  Uproar rang through the opera house!
+    HP Roggenrola (player): 9 -> 0 / 55
   It's not very effective...
   Roggenrola fainted!
     xx fainted: Roggenrola (player)
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 48 -> 52 / 61
   The opposing Loudred calmed down.
   Go for it, Mareep!
     >> sent out (player): Mareep Lv.19 [STATIC]
 
 --- Turn 9 ---
-  [Mareep 55/55 | Loudred 37/61]
+  [Mareep 55/55 | Loudred 52/61]
   The opposing Loudred used Uproar!
   The crowd roared for the opposing Loudred!
-  Uproar resonated through the theater!
+  Uproar rang through the opera house!
     HP Mareep (player): 55 -> 0 / 55
+  A critical hit!
   Mareep fainted!
     xx fainted: Mareep (player)
   The opposing Loudred caused an uproar!
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 52 -> 56 / 61
   The opposing Loudred is making an uproar!
   Go for it, Staravia!
     >> sent out (player): Staravia Lv.19 [INTIMIDATE]
@@ -153,93 +165,78 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
   The opposing Loudred's Attack cannot be lowered!
 
 --- Turn 10 ---
-  [Staravia 55/55 | Loudred 37/61]
-  Staravia used Aerial Ace!
-    HP Loudred (foe): 37 -> 10 / 61
-    (anim: EatBerry)
-    HP Loudred (foe): 10 -> 25 / 61
-  The opposing Loudred restored its health using its Sitrus Berry!
+  [Staravia 55/55 | Loudred 56/61]
+  Staravia used Quick Attack!
+  The crowd roared for Staravia!
+    HP Loudred (foe): 56 -> 28 / 61
   The opposing Loudred used Uproar!
   The crowd roared for the opposing Loudred!
-  Uproar resonated through the theater!
+  Uproar rang through the opera house!
     HP Staravia (player): 55 -> 0 / 55
+  A critical hit!
   Staravia fainted!
     xx fainted: Staravia (player)
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 28 -> 32 / 61
   The opposing Loudred is making an uproar!
-  Just a little more! Hang in there, Lombre!
+  Go for it, Lombre!
     >> sent out (player): Lombre Lv.19 [RAINDISH]
 
 --- Turn 11 ---
-  [Lombre 57/57 | Loudred 25/61]
+  [Lombre 57/57 | Loudred 32/61]
   Lombre used Bubble Beam!
-    HP Loudred (foe): 25 -> 0 / 61
-  The opposing Loudred fainted!
-    xx fainted: Loudred (foe)
-  Lombre is at the level cap (Lv. 19) and can't gain Exp. Points.
+    HP Loudred (foe): 32 -> 7 / 61
+    (anim: StatDown)
+  The opposing Loudred's Speed fell!
+  The opposing Loudred used Uproar!
+  The crowd roared for the opposing Loudred!
+  Uproar rang through the opera house!
+    HP Lombre (player): 57 -> 1 / 57
   (end of round)
-  Warden Dorian sent out Ambipom!
-    >> sent out (foe): Ambipom Lv.18 @SILKSCARF [TECHNICIAN]
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 7 -> 11 / 61
+  The opposing Loudred calmed down.
 
 --- Turn 12 ---
-  [Lombre 57/57 | Ambipom 58/58]
-  The opposing Ambipom used Tickle!
-    (anim: StatDown)
-  Lombre's Attack fell!
-  Lombre's Defense fell!
-  Lombre used Bubble Beam!
-    HP Ambipom (foe): 58 -> 29 / 58
-  A critical hit!
+  [Lombre 1/57 | Loudred 11/61]
+  Warden Dorian used a Super Potion.
+    HP Loudred (foe): 11 -> 61 / 61
+  The opposing Loudred's HP was restored.
+  Lombre used Mega Drain!
+    HP Loudred (foe): 61 -> 43 / 61
+  The opposing Loudred had its energy drained!
+    HP Lombre (player): 1 -> 10 / 57
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 43 -> 47 / 61
 
 --- Turn 13 ---
-  [Lombre 57/57 | Ambipom 29/58]
-  The opposing Ambipom used Astonish!
-    HP Lombre (player): 57 -> 38 / 57
+  [Lombre 10/57 | Loudred 47/61]
   Lombre used Mega Drain!
-    HP Ambipom (foe): 29 -> 11 / 58
+    HP Loudred (foe): 47 -> 24 / 61
   A critical hit!
-  The opposing Ambipom had its energy drained!
-    HP Lombre (player): 38 -> 47 / 57
+  The opposing Loudred had its energy drained!
+    HP Lombre (player): 10 -> 22 / 57
+  The opposing Loudred used Bite!
+    HP Lombre (player): 22 -> 11 / 57
   (end of round)
+  The opposing Loudred basked in the applause.
+    HP Loudred (foe): 24 -> 28 / 61
 
 --- Turn 14 ---
-  [Lombre 47/57 | Ambipom 11/58]
-  Warden Dorian used a Super Potion.
-    HP Ambipom (foe): 11 -> 58 / 58
-  The opposing Ambipom's HP was restored.
-  Lombre used Mega Drain!
-    HP Ambipom (foe): 58 -> 45 / 58
-  The opposing Ambipom had its energy drained!
-    HP Lombre (player): 47 -> 54 / 57
-  (end of round)
-
---- Turn 15 ---
-  [Lombre 54/57 | Ambipom 45/58]
-  The opposing Ambipom used Swift!
-  The crowd roared for the opposing Ambipom!
-    HP Lombre (player): 54 -> 24 / 57
+  [Lombre 11/57 | Loudred 28/61]
   Lombre used Bubble Beam!
-    HP Ambipom (foe): 45 -> 26 / 58
-  (end of round)
-
---- Turn 16 ---
-  [Lombre 24/57 | Ambipom 26/58]
-  The opposing Ambipom used Astonish!
-    HP Lombre (player): 24 -> 7 / 57
-  Lombre flinched and couldn't move!
-  (end of round)
-
---- Turn 17 ---
-  [Lombre 7/57 | Ambipom 26/58]
-  The opposing Ambipom used Dual Chop!
-    HP Lombre (player): 7 -> 0 / 57
+    HP Loudred (foe): 28 -> 4 / 61
+  The opposing Loudred used Echoed Voice!
+  The crowd roared for the opposing Loudred!
+  Echoed Voice rang through the opera house!
+    HP Lombre (player): 11 -> 0 / 57
   Lombre fainted!
     xx fainted: Lombre (player)
-  Hit 1 time!
   You have no more Pokémon that can fight!
   You lost against Warden Dorian!
   You gave $304 to the winner...
   battle result code: 2
   
-RESULT: player lost after 16 turn(s)
+RESULT: player lost after 13 turn(s)

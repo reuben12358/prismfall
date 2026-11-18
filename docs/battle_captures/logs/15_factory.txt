@@ -56,7 +56,7 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
     (anim: Burn)
   The opposing Kingambit was burned!
   The opposing Kingambit used Iron Head!
-  The foundry's machinery roared!
+  The opposing Kingambit meshed with the foundry's machinery!
     HP Garchomp (player): 182 -> 23 / 256
   (end of round)
     (anim: Burn)
@@ -79,7 +79,7 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 5 ---
   [Garchomp 23/256 | Scizor 212/212]
   The opposing Scizor used Bullet Punch!
-  The foundry's machinery roared!
+  The opposing Scizor meshed with the foundry's machinery!
     HP Garchomp (player): 23 -> 0 / 256
   Garchomp fainted!
     xx fainted: Garchomp (player)
@@ -135,11 +135,11 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 9 ---
   [Charizard 213/213 | Mark One 53/198]
   The opposing Mark One used Gear Grind!
-  The foundry's machinery roared!
+  The opposing Mark One meshed with the foundry's machinery!
   The factory gears ground together!
-    HP Charizard (player): 213 -> 61 / 213
+    HP Charizard (player): 213 -> 11 / 213
   A critical hit!
-    HP Charizard (player): 61 -> 0 / 213
+    HP Charizard (player): 11 -> 0 / 213
   Charizard fainted!
     xx fainted: Charizard (player)
   It's not very effective...
@@ -151,10 +151,10 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 10 ---
   [Lucario 202/202 | Mark One 53/198]
   The opposing Mark One used Gear Grind!
-  The foundry's machinery roared!
+  The opposing Mark One meshed with the foundry's machinery!
   The factory gears ground together!
-    HP Lucario (player): 202 -> 99 / 202
-    HP Lucario (player): 99 -> 0 / 202
+    HP Lucario (player): 202 -> 65 / 202
+    HP Lucario (player): 65 -> 0 / 202
   A critical hit!
   Lucario fainted!
     xx fainted: Lucario (player)
@@ -167,10 +167,10 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 11 ---
   [Starmie 188/188 | Mark One 53/198]
   The opposing Mark One used Gear Grind!
-  The foundry's machinery roared!
+  The opposing Mark One meshed with the foundry's machinery!
   The factory gears ground together!
-    HP Starmie (player): 188 -> 99 / 188
-    HP Starmie (player): 99 -> 0 / 188
+    HP Starmie (player): 188 -> 69 / 188
+    HP Starmie (player): 69 -> 0 / 188
   Starmie fainted!
     xx fainted: Starmie (player)
   It's not very effective...
@@ -204,7 +204,7 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 14 ---
   [Togekiss 223/223 | Mark One 44/198]
   The opposing Mark One used Gear Grind!
-  The foundry's machinery roared!
+  The opposing Mark One meshed with the foundry's machinery!
   The factory gears ground together!
     HP Togekiss (player): 223 -> 0 / 223
   Togekiss fainted!
@@ -218,10 +218,10 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
 --- Turn 15 ---
   [Magnezone 202/202 | Mark One 44/198]
   The opposing Mark One used Gear Grind!
-  The foundry's machinery roared!
+  The opposing Mark One meshed with the foundry's machinery!
   The factory gears ground together!
-    HP Magnezone (player): 202 -> 167 / 202
-    HP Magnezone (player): 167 -> 128 / 202
+    HP Magnezone (player): 202 -> 155 / 202
+    HP Magnezone (player): 155 -> 104 / 202
   It's not very effective...
   Hit 2 times!
   Magnezone used Thunderbolt!
@@ -234,9 +234,9 @@ Factory [FACTORY] - Gym 15 Warden Magnus vs challenger (Lv.71)
     >> sent out (foe): Engine Lv.71 @ASSAULTVEST [CLEARBODY]
 
 --- Turn 16 ---
-  [Magnezone 128/202 | Engine 229/229]
+  [Magnezone 104/202 | Engine 229/229]
   The opposing Engine used Earthquake!
-    HP Magnezone (player): 128 -> 0 / 202
+    HP Magnezone (player): 104 -> 0 / 202
   It's super effective!
   Magnezone fainted!
     xx fainted: Magnezone (player)

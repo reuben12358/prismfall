@@ -15,6 +15,7 @@ BEACH probe: boosted move WATERPULSE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Water Pulse!
+  Mew rode the surf into the attack!
     HP Snorlax (foe): 461 -> 408 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -108,6 +109,7 @@ BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATE
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Surf!
+  Mew rode the surf into the attack!
     HP Snorlax (foe): 461 -> 384 / 461
   The tide is rising... (2 more)
   The wild Snorlax used Splash!
@@ -117,6 +119,7 @@ BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATE
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 384/461]
   Mew used Surf!
+  Mew rode the surf into the attack!
     HP Snorlax (foe): 384 -> 302 / 461
   The tide is rising... (1 more)
   The wild Snorlax used Splash!
@@ -126,7 +129,8 @@ BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATE
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 302/461]
   Mew used Surf!
-    HP Snorlax (foe): 302 -> 223 / 461
+  Mew rode the surf into the attack!
+    HP Snorlax (foe): 302 -> 200 / 461
 ## FIELD CHANGE: BEACH -> WATER_SURFACE
   The tide rolled in and swallowed the beach!
   The wild Snorlax used Splash!
@@ -134,7 +138,7 @@ BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATE
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 223/461]
+  [Mew 341/341 | Snorlax 200/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -142,7 +146,7 @@ BEACH probe: transition [stage 1: moves SURF/MUDDYWATER/WATERSPOUT... x3 -> WATE
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 223/461]
+  [Mew 341/341 | Snorlax 200/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)

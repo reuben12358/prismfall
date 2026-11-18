@@ -15,7 +15,7 @@ RAINBOW probe: boosted move SWIFT (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Swift!
-  The rainbow's light poured into the attack!
+  The rainbow's light poured into Swift!
     HP Snorlax (foe): 461 -> 395 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -52,8 +52,8 @@ RAINBOW probe: boosted move SWIFT (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-RAINBOW probe: transition [stage 1: weather Sandstorm/Hail -> NONE] using SANDSTORM
-===================================================================================
+RAINBOW probe: transition [stage 1: weather Sandstorm/Hail -> (proc)] using SANDSTORM
+=====================================================================================
 
 --- Battle start ---
   field: RAINBOW | weather: None | terrain: None
@@ -67,8 +67,8 @@ RAINBOW probe: transition [stage 1: weather Sandstorm/Hail -> NONE] using SANDST
   [Mew 341/341 | Snorlax 461/461]
   Mew used Sandstorm!
   A sandstorm brewed!
-## FIELD CHANGE: RAINBOW -> NONE
-  The storm blotted out the rainbow...
+## FIELD CHANGE: RAINBOW -> MEADOW
+  The storm blotted out the rainbow, revealing the land beneath...
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -100,8 +100,8 @@ RAINBOW probe: transition [stage 1: weather Sandstorm/Hail -> NONE] using SANDST
 RESULT: fled/forfeit after 2 turn(s)
 
 
-RAINBOW probe: transition [stage 1: moves DEFOG -> NONE] using DEFOG
-====================================================================
+RAINBOW probe: transition [stage 1: moves DEFOG -> (proc)] using DEFOG
+======================================================================
 
 --- Battle start ---
   field: RAINBOW | weather: None | terrain: None
@@ -116,8 +116,8 @@ RAINBOW probe: transition [stage 1: moves DEFOG -> NONE] using DEFOG
   Mew used Defog!
     (anim: StatDown)
   The wild Snorlax's evasiveness fell!
-## FIELD CHANGE: RAINBOW -> NONE
-  The mist cleared, and the rainbow faded away...
+## FIELD CHANGE: RAINBOW -> MEADOW
+  The mist cleared, and the rainbow faded over the land below...
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -148,10 +148,9 @@ RAINBOW probe: Magical Seed held on entry
 ## FIELD CHANGE: NONE -> RAINBOW
   A brilliant rainbow arcs over the battlefield!
     (anim: UseItem)
-  Mew's Magical Seed shimmered in every color!
+  Mew's Magical Seed shimmered in every colour!
     (anim: StatUp)
   Mew's Special Attack rose!
-  Mew's Special Defense rose!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
@@ -201,6 +200,48 @@ RAINBOW probe: end-of-round rule 1: heal on {:status=>[:SLEEP]} [subject Florges
 
 --- Turn 3 ---
   [Florges 186/297 SLEEP | Snorlax 230/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+RAINBOW probe: end-of-round rule 2: proc on {:abilities=>[:CLOUDNINE]} [subject Florges]
+========================================================================================
+
+--- Battle start ---
+  field: RAINBOW | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [CLOUDNINE]
+## FIELD CHANGE: NONE -> RAINBOW
+  A brilliant rainbow arcs over the battlefield!
+    [ability: Florges (player)'s Cloud Nine]
+  The effects of the weather disappeared.
+
+--- Turn 1 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges floated up on the rainbow's clouds!
+    (anim: StatUp)
+  Florges's Defense rose!
+
+--- Turn 2 ---
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Florges floated up on the rainbow's clouds!
+    (anim: StatUp)
+  Florges's Special Attack rose!
+
+--- Turn 3 ---
+  [Florges 148/297 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)

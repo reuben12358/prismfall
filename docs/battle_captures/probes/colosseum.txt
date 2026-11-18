@@ -15,6 +15,7 @@ COLOSSEUM probe: boosted move AURASPHERE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Milotic 331/331]
   Mew used Aura Sphere!
+  The pit erupted as Mew pressed the attack!
     HP Milotic (foe): 331 -> 268 / 331
   The wild Milotic used Splash!
   But nothing happened!
@@ -51,25 +52,221 @@ COLOSSEUM probe: boosted move AURASPHERE (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-COLOSSEUM probe: Telluric Seed held on entry
-============================================
+COLOSSEUM probe: transition [stage 1: check proc -> stage 2] using GROWL, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH, SPLASH
+========================================================================================================================================
 
 --- Battle start ---
   field: COLOSSEUM | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Mew!
-    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd roars as the fighters enter the pit!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growl!
+    (anim: StatDown)
+  The wild Snorlax's Attack fell!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 6 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 7 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 9 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 10 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 11 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 10 turn(s)
+
+
+COLOSSEUM probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
+=================================================================================================================================
+
+--- Battle start ---
+  field: COLOSSEUM | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd roars as the fighters enter the pit!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 461 -> 351 / 461
+  Dust rains from the old mine shaft... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 351/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 351 -> 235 / 461
+  Dust rains from the old mine shaft... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 235/461]
+  Mew used Earthquake!
+    HP Snorlax (foe): 235 -> 89 / 461
+## FIELD CHANGE: COLOSSEUM -> CAVE
+  The old mine shaft gave way! The pit caved in!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 89/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 89/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+COLOSSEUM probe: transition [stage 2: moves PROTECT/DETECT/REST... x2 -> stage 1] using PROTECT, PROTECT
+========================================================================================================
+
+--- Battle start ---
+  field: COLOSSEUM (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> COLOSSEUM
+  The crowd is in a frenzy!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Protect!
+  Mew protected itself!
+  The crowd is losing interest... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Protect!
+  But it failed!
+## FIELD STAGE: COLOSSEUM is now stage 1
+  The crowd settled back into its seats.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+COLOSSEUM probe: Synthetic Seed held on entry
+=============================================
+
+--- Battle start ---
+  field: COLOSSEUM | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> COLOSSEUM
   The crowd roars as the fighters enter the pit!
     (anim: UseItem)
-  Mew's Telluric Seed fired it up to the roar of the crowd!
+  Mew's Synthetic Seed fired it up to the roar of the crowd!
     (anim: StatUp)
   Mew's Attack rose!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
-  Mew used Splash!
-  But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)

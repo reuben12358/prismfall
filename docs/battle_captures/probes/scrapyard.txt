@@ -11,21 +11,17 @@ SCRAPYARD probe: boosted move FLASHCANNON (on field)
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> SCRAPYARD
   Jagged scrap and leaking chemicals litter the ground...
-    HP Mew (player): 341 -> 320 / 341
-  Mew was cut by jagged scrap!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax was cut by jagged scrap!
 
 --- Turn 1 ---
-  [Mew 320/341 | Snorlax 432/461]
+  [Mew 341/341 | Snorlax 461/461]
   Mew used Flash Cannon!
-    HP Snorlax (foe): 432 -> 361 / 461
+    HP Snorlax (foe): 461 -> 390 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 361/461]
+  [Mew 341/341 | Snorlax 390/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -55,6 +51,117 @@ SCRAPYARD probe: boosted move FLASHCANNON (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
+SCRAPYARD probe: transition [stage 1: moves CHARGE/DISCHARGE/PARABOLICCHARGE... x3 -> FACTORY] using CHARGE, CHARGE, CHARGE
+===========================================================================================================================
+
+--- Battle start ---
+  field: SCRAPYARD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SCRAPYARD
+  Jagged scrap and leaking chemicals litter the ground...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Charge!
+  Mew began charging power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+  The machines sputter and twitch... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Charge!
+  Mew began charging power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+  The machines sputter and twitch... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Charge!
+  Mew began charging power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+## FIELD CHANGE: SCRAPYARD -> FACTORY
+  The machines roared back to life! The foundry line is running again!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+SCRAPYARD probe: transition [stage 1: moves ACIDSPRAY/SLUDGEWAVE/CORROSIVEGAS... x2 -> WASTELAND] using ACIDSPRAY, ACIDSPRAY
+============================================================================================================================
+
+--- Battle start ---
+  field: SCRAPYARD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SCRAPYARD
+  Jagged scrap and leaking chemicals litter the ground...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Acid Spray!
+  Chemicals leaking from the scrap fed Acid Spray!
+    HP Snorlax (foe): 461 -> 426 / 461
+    (anim: StatDown)
+  The wild Snorlax's Special Defense harshly fell!
+  Chemicals are seeping into the ground... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 426/461]
+  Mew used Acid Spray!
+  Chemicals leaking from the scrap fed Acid Spray!
+    HP Snorlax (foe): 426 -> 330 / 461
+    (anim: StatDown)
+  The wild Snorlax's Special Defense harshly fell!
+## FIELD CHANGE: SCRAPYARD -> WASTELAND
+  The chemicals leached into the ground! The yard became a blighted wasteland!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 330/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 330/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
 SCRAPYARD probe: Synthetic Seed held on entry
 =============================================
 
@@ -65,19 +172,15 @@ SCRAPYARD probe: Synthetic Seed held on entry
     >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> SCRAPYARD
   Jagged scrap and leaking chemicals litter the ground...
-    HP Mew (player): 170 -> 149 / 341
-  Mew was cut by jagged scrap!
     (anim: UseItem)
   Mew's Synthetic Seed bolted scrap armor onto it!
     (anim: StatUp)
   Mew's Defense rose!
   Mew's Special Defense rose!
   Mew's Speed fell!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax was cut by jagged scrap!
 
 --- Turn 1 ---
-  [Mew 149/341 | Snorlax 432/461]
+  [Mew 170/341 | Snorlax 461/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -85,65 +188,7 @@ SCRAPYARD probe: Synthetic Seed held on entry
   (end of round)
 
 --- Turn 2 ---
-  [Mew 149/341 | Snorlax 432/461]
+  [Mew 170/341 | Snorlax 461/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
-
-
-SCRAPYARD probe: end-of-round rule 1: damage on {:types=>[:STEEL]} +condition [subject Klinklang, after RAINDANCE]
-==================================================================================================================
-
---- Battle start ---
-  field: SCRAPYARD | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Klinklang!
-    >> sent out (player): Klinklang Lv.100 [PLUS]
-## FIELD CHANGE: NONE -> SCRAPYARD
-  Jagged scrap and leaking chemicals litter the ground...
-    HP Klinklang (player): 130 -> 122 / 261
-  Klinklang was cut by jagged scrap!
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax was cut by jagged scrap!
-
---- Turn 1 ---
-  [Klinklang 122/261 | Snorlax 201/461]
-  Klinklang used Rain Dance!
-  It started to rain!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Klinklang (player): 122 -> 106 / 261
-  Klinklang is rusting in the rain!
-
---- Turn 2 ---
-  [Klinklang 106/261 | Snorlax 201/461]
-  Klinklang used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Klinklang (player): 106 -> 90 / 261
-  Klinklang is rusting in the rain!
-
---- Turn 3 ---
-  [Klinklang 90/261 | Snorlax 201/461]
-  Klinklang used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Klinklang (player): 90 -> 74 / 261
-  Klinklang is rusting in the rain!
-
---- Turn 4 ---
-  [Klinklang 74/261 | Snorlax 201/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 3 turn(s)

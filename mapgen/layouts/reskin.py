@@ -81,7 +81,7 @@ def reskin(d, preview=None):
         if m.inb(x, y): m.taken[y, x] = True
     m.paint()
     for y, x in deck: m.L[1, y, x] = C('sh', 497)
-    m.scatter(26 if DENSE else 8, seed=mid)
+    m.scatter(30 if DENSE else 8, seed=mid)
     if DENSE: sea_rocks(m, mid)
     if preview: m.preview(preview, 0.5)
     h = {k: v for k, v in d.items() if k not in ('map', 'heights', 'stamps', 'tiles', 'tileblocks', 'events', 'palette')}

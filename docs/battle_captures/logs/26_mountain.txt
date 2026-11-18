@@ -10,17 +10,13 @@ Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
   Black Belt Taro sent out Machop!
     >> sent out (foe): Machop Lv.15 [GUTS]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.16 @ELEMENTALSEED [INTIMIDATE]
+    >> sent out (player): Growlithe Lv.16 @TELLURICSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> MOUNTAIN
   The wind howls across the mountain ridge!
-    [ability: Growlithe (player)'s Intimidate]
-    (anim: StatDown)
-  The opposing Machop's Attack fell!
     (anim: UseItem)
-  Growlithe's Elemental Seed caught the mountain wind!
+  Growlithe's Telluric Seed caught the mountain wind!
     (anim: StatUp)
   Growlithe's Speed rose!
-  The Tailwind blew from behind your team!
 
 --- Turn 1 ---
   [Growlithe 48/48 | Machop 47/47]
@@ -73,22 +69,16 @@ Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
     xx fainted: Growlithe (player)
   (end of round)
   Go for it, Machop!
-    >> sent out (player): Machop Lv.16 [GUTS]
+    >> sent out (player): Machop Lv.16 [NOGUARD]
 
 --- Turn 6 ---
   [Machop 53/53 | Timburr 33/52]
   The opposing Timburr used Rock Throw!
-  The opposing Timburr's attack missed!
+  Boulders tumbled down the mountainside!
+    HP Machop (player): 53 -> 45 / 53
+  It's not very effective...
   Machop used Revenge!
-    HP Timburr (foe): 33 -> 12 / 52
-  (end of round)
-
---- Turn 7 ---
-  [Machop 53/53 | Timburr 12/52]
-  The opposing Timburr used Low Kick!
-    HP Machop (player): 53 -> 40 / 53
-  Machop used Revenge!
-    HP Timburr (foe): 12 -> 0 / 52
+    HP Timburr (foe): 33 -> 0 / 52
   The opposing Timburr fainted!
     xx fainted: Timburr (foe)
   Machop is at the level cap (Lv. 16) and can't gain Exp. Points.
@@ -97,4 +87,4 @@ Mountain [MOUNTAIN] - Black Belt Taro vs challenger (Lv.16)
   You got $512 for winning!
   battle result code: 1
   
-RESULT: player won after 6 turn(s)
+RESULT: player won after 5 turn(s)

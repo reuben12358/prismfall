@@ -20,7 +20,7 @@ BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs ov
     HP Bronzong (foe): 200 -> 46 / 200
   It's super effective!
   The opposing Bronzong used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Bronzong's thoughts real shape!
     HP Garchomp (player): 357 -> 304 / 357
   (end of round)
 
@@ -54,7 +54,7 @@ BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs ov
   Garchomp used Fire Fang!
     HP Musharna (foe): 257 -> 135 / 257
   The opposing Musharna used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Musharna's thoughts real shape!
     HP Garchomp (player): 304 -> 205 / 357
   (end of round)
     (anim: UseItem)
@@ -96,7 +96,7 @@ BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs ov
   Garchomp used Fire Fang!
     HP Gothitelle (foe): 207 -> 86 / 207
   The opposing Gothitelle used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Gothitelle's thoughts real shape!
     HP Garchomp (player): 205 -> 123 / 357
   (end of round)
     (anim: UseItem)
@@ -118,7 +118,7 @@ BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs ov
   Garchomp used Fire Fang!
     HP Hush (foe): 191 -> 83 / 191
   The opposing Hush used Psychic!
-  The Mindscape amplified the thought!
+  The Mindscape gave the opposing Hush's thoughts real shape!
     HP Garchomp (player): 123 -> 0 / 357
   Garchomp fainted!
     xx fainted: Garchomp (player)
@@ -126,7 +126,7 @@ BOSS Hard-mode Warden Ilsa via Prismfall.gym_battle(12) (ace = 2-bar boss) vs ov
   The opposing Hush lost some of its HP!
   (end of round)
   Just a little more! Hang in there, Magnezone!
-    >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
+    >> sent out (player): Magnezone Lv.100 [STURDY]
 
 --- Turn 11 ---
   [Magnezone 281/281 | Hush 64/191]

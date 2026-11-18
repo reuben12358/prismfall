@@ -1,8 +1,8 @@
 LOGIC-TEST OUTPUT (headless harness). Scripted probes for ASHEN_WASTE: the player's moves are scripted,
 the foe only uses Splash. Not a game screenshot.
 
-ASHEN_WASTE probe: boosted move EARTHPOWER (on field)
-=====================================================
+ASHEN_WASTE probe: boosted move POWERGEM (on field)
+===================================================
 
 --- Battle start ---
   field: ASHEN_WASTE | weather: None | terrain: None
@@ -10,29 +10,26 @@ ASHEN_WASTE probe: boosted move EARTHPOWER (on field)
   Go! Mew!
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
+  The magma has set into black glass... and steam roars from every crack!
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
-  Mew used Earth Power!
-    HP Snorlax (foe): 461 -> 382 / 461
+  Mew used Power Gem!
+  Mew hurled shards of razor-edged obsidian!
+    HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 382 -> 353 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 353/461]
+  [Mew 341/341 | Snorlax 362/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
 
 
-ASHEN_WASTE probe: boosted move EARTHPOWER (baseline, no field)
-===============================================================
+ASHEN_WASTE probe: boosted move POWERGEM (baseline, no field)
+=============================================================
 
 --- Battle start ---
   field: NONE | weather: None | terrain: None
@@ -42,54 +39,17 @@ ASHEN_WASTE probe: boosted move EARTHPOWER (baseline, no field)
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
-  Mew used Earth Power!
-    HP Snorlax (foe): 461 -> 395 / 461
+  Mew used Power Gem!
+    HP Snorlax (foe): 461 -> 402 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 395/461]
+  [Mew 341/341 | Snorlax 402/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
-
-
-ASHEN_WASTE probe: transition [stage 1: moves DEFOG -> NONE] using DEFOG
-========================================================================
-
---- Battle start ---
-  field: ASHEN_WASTE | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Mew!
-    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
-## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
-
---- Turn 1 ---
-  [Mew 341/341 | Snorlax 461/461]
-  Mew used Defog!
-    (anim: StatDown)
-  The wild Snorlax's evasiveness fell!
-## FIELD CHANGE: ASHEN_WASTE -> NONE
-  The wind cleared the ash from the battlefield!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-
---- Turn 2 ---
-  [Mew 341/341 | Snorlax 461/461]
-  Mew used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-
---- Turn 3 ---
-  [Mew 341/341 | Snorlax 461/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)
 
 
 ASHEN_WASTE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x3 -> VOLCANIC] using ERUPTION, ERUPTION, ERUPTION
@@ -101,85 +61,179 @@ ASHEN_WASTE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x
   Go! Mew!
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
+  The magma has set into black glass... and steam roars from every crack!
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Eruption!
-  The ash smothered the flames...
-    HP Snorlax (foe): 461 -> 375 / 461
-  The crust glows red beneath the ash... (2 more)
+  The heat beneath the glass flared up with Eruption!
+    HP Snorlax (foe): 461 -> 333 / 461
+  The glass is glowing red again... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 375 -> 346 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 346/461]
+  [Mew 341/341 | Snorlax 333/461]
   Mew used Eruption!
-  The ash smothered the flames...
-    HP Snorlax (foe): 346 -> 262 / 461
-  The crust glows red beneath the ash... (1 more)
+  The heat beneath the glass flared up with Eruption!
+    HP Snorlax (foe): 333 -> 198 / 461
+  The glass is glowing red again... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 320 -> 299 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 262 -> 233 / 461
-  The wild Snorlax is choking on the ash!
+  The ground hisses... the geysers will blow next turn!
 
 --- Turn 3 ---
-  [Mew 299/341 | Snorlax 233/461]
+  [Mew 341/341 | Snorlax 198/461]
   Mew used Eruption!
-  The ash smothered the flames...
-    HP Snorlax (foe): 233 -> 156 / 461
+  The heat beneath the glass flared up with Eruption!
+    HP Snorlax (foe): 198 -> 28 / 461
 ## FIELD CHANGE: ASHEN_WASTE -> VOLCANIC
-  The magma reawakened beneath the ash!
+  The glass cracked open and magma welled up! The volcano lives again!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 299 -> 278 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 156 -> 127 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 4 ---
-  [Mew 278/341 | Snorlax 127/461]
+  [Mew 341/341 | Snorlax 28/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 278 -> 257 / 341
-  Mew was scorched by the magma!
-    HP Snorlax (foe): 127 -> 98 / 461
-  The wild Snorlax was scorched by the magma!
 
 --- Turn 5 ---
-  [Mew 257/341 | Snorlax 98/461]
+  [Mew 341/341 | Snorlax 28/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
 
 
-ASHEN_WASTE probe: Telluric Seed held on entry
-==============================================
+ASHEN_WASTE probe: transition [stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x3 -> WATER_SURFACE] using SURF, SURF, SURF
+======================================================================================================================
 
 --- Battle start ---
   field: ASHEN_WASTE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Mew!
-    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
+  The magma has set into black glass... and steam roars from every crack!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Surf!
+    HP Snorlax (foe): 461 -> 396 / 461
+  The water flashed into steam on the hot glass!
+    (anim: StatDown)
+  Mew's accuracy fell!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  Hot water is pooling in the caldera... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Surf!
+  The wild Snorlax avoided the attack!
+  Hot water is pooling in the caldera... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The ground hisses... the geysers will blow next turn!
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Surf!
+    HP Snorlax (foe): 396 -> 310 / 461
+  The water flashed into steam on the hot glass!
+    (anim: StatDown)
+  Mew's accuracy fell!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+## FIELD CHANGE: ASHEN_WASTE -> WATER_SURFACE
+  The caldera flooded into a steaming hot-spring lake!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 310/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 310/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+ASHEN_WASTE probe: transition [stage 1: weather HeavyRain -> WATER_SURFACE] using SPLASH
+========================================================================================
+
+--- Battle start ---
+  field: ASHEN_WASTE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [PRIMORDIALSEA]
+## FIELD CHANGE: NONE -> ASHEN_WASTE
+  The magma has set into black glass... and steam roars from every crack!
+    [ability: Mew (player)'s Primordial Sea]
+    (anim: HeavyRain)
+  A heavy rain began to fall!
+## FIELD CHANGE: ASHEN_WASTE -> WATER_SURFACE
+  The downpour flooded the caldera into a steaming lake!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+ASHEN_WASTE probe: Elemental Seed held on entry
+===============================================
+
+--- Battle start ---
+  field: ASHEN_WASTE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> ASHEN_WASTE
+  The magma has set into black glass... and steam roars from every crack!
     (anim: UseItem)
-  Mew's Telluric Seed cloaked it in ash!
+  Mew's Elemental Seed wrapped it in a cloak of steam!
     (anim: StatUp)
-  Mew's Defense rose!
+  Mew's Speed rose!
   Mew's evasiveness rose!
+  Mew's accuracy fell!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
@@ -188,55 +242,139 @@ ASHEN_WASTE probe: Telluric Seed held on entry
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 170 -> 149 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 2 ---
-  [Mew 149/341 | Snorlax 432/461]
+  [Mew 170/341 | Snorlax 461/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
 
 
-ASHEN_WASTE probe: end-of-round rule 1: damage on {:not_types=>[:FIRE, :GROUND, :ROCK, :STEEL], :not_abilities=>[:OVERCOAT, :SANDVEIL, :SANDRUSH, :SANDFORCE], :not_items=>[:SAFETYGOGGLES]} [subject Snorlax]
-==============================================================================================================================================================================================================
+ASHEN_WASTE probe: end-of-round rule 1: stats on {:abilities=>[:STEAMENGINE]} [subject Florges]
+===============================================================================================
 
 --- Battle start ---
   field: ASHEN_WASTE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
-  Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [STEAMENGINE]
 ## FIELD CHANGE: NONE -> ASHEN_WASTE
-  Grey ash drifts over the cooled crust...
+  The magma has set into black glass... and steam roars from every crack!
+  Florges fired up on the steam vents!
+    (anim: StatUp)
+  Florges's Speed rose!
 
 --- Turn 1 ---
-  [Snorlax 230/461 | Snorlax 230/461]
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
-  Snorlax used Splash!
-  But nothing happened!
   (end of round)
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax is choking on the ash!
-    HP Snorlax (player): 230 -> 201 / 461
-  Snorlax is choking on the ash!
+  Florges drew power from the steam vents!
+    (anim: StatUp)
+  Florges's Speed rose!
 
 --- Turn 2 ---
-  [Snorlax 201/461 | Snorlax 201/461]
-  Snorlax used Splash!
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Snorlax (player): 201 -> 172 / 461
-  Snorlax is choking on the ash!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax is choking on the ash!
+  Florges drew power from the steam vents!
+    (anim: StatUp)
+  Florges's Speed rose!
+  The ground hisses... the geysers will blow next turn!
 
 --- Turn 3 ---
-  [Snorlax 172/461 | Snorlax 172/461]
+  [Florges 148/297 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
+
+
+ASHEN_WASTE probe: :end_of_round hook over 7 rounds
+===================================================
+
+--- Battle start ---
+  field: ASHEN_WASTE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> ASHEN_WASTE
+  The magma has set into black glass... and steam roars from every crack!
+
+--- Turn 1 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The ground hisses... the geysers will blow next turn!
+
+--- Turn 3 ---
+  [Mew 170/341 | Snorlax 230/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Geysers of steam blast up through the glass!
+    HP Mew (player): 170 -> 127 / 341
+  A geyser erupted right beneath Mew!
+    HP Snorlax (foe): 230 -> 172 / 461
+  A geyser erupted right beneath the wild Snorlax!
+
+--- Turn 4 ---
+  [Mew 127/341 | Snorlax 172/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 127/341 | Snorlax 172/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The ground hisses... the geysers will blow next turn!
+
+--- Turn 6 ---
+  [Mew 127/341 | Snorlax 172/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  Geysers of steam blast up through the glass!
+    HP Mew (player): 127 -> 84 / 341
+  A geyser erupted right beneath Mew!
+    HP Snorlax (foe): 172 -> 114 / 461
+  A geyser erupted right beneath the wild Snorlax!
+
+--- Turn 7 ---
+  [Mew 84/341 | Snorlax 114/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 84/341 | Snorlax 114/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 7 turn(s)

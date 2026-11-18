@@ -230,7 +230,7 @@ FLOWER_GARDEN probe: transition [stage 1: types FIRE, category damaging -> stage
   Mew used Flamethrower!
     HP Snorlax (foe): 461 -> 396 / 461
 ## FIELD STAGE: FLOWER_GARDEN is now stage 1
-  The flames scorched the garden!
+  The flames scorched the garden back!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -250,8 +250,8 @@ FLOWER_GARDEN probe: transition [stage 1: types FIRE, category damaging -> stage
 RESULT: fled/forfeit after 2 turn(s)
 
 
-FLOWER_GARDEN probe: transition [stage 1: flags Slicing, category damaging -> stage -1] using AQUACUTTER
-========================================================================================================
+FLOWER_GARDEN probe: transition [stage 1: moves CUT/FURYCUTTER/SLASH... -> stage -1] using CUT
+==============================================================================================
 
 --- Battle start ---
   field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
@@ -263,8 +263,9 @@ FLOWER_GARDEN probe: transition [stage 1: flags Slicing, category damaging -> st
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
-  Mew used Aqua Cutter!
-    HP Snorlax (foe): 461 -> 384 / 461
+  Mew used Cut!
+  Mew pruned with a gardener's precision!
+    HP Snorlax (foe): 461 -> 378 / 461
 ## FIELD STAGE: FLOWER_GARDEN is now stage 1
   The garden was cut back!
   The wild Snorlax used Splash!
@@ -272,7 +273,7 @@ FLOWER_GARDEN probe: transition [stage 1: flags Slicing, category damaging -> st
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 384/461]
+  [Mew 341/341 | Snorlax 378/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -280,7 +281,7 @@ FLOWER_GARDEN probe: transition [stage 1: flags Slicing, category damaging -> st
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 384/461]
+  [Mew 341/341 | Snorlax 378/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
@@ -302,7 +303,7 @@ FLOWER_GARDEN probe: transition [stage 1: weather Hail -> stage -1] using HAIL
   Mew used Hail!
   It started to snow!
 ## FIELD STAGE: FLOWER_GARDEN is now stage 1
-  The frost withered the garden!
+  The frost nipped the garden back!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -319,6 +320,44 @@ FLOWER_GARDEN probe: transition [stage 1: weather Hail -> stage -1] using HAIL
 
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+FLOWER_GARDEN probe: transition [stage 1: moves ACIDSPRAY/SLUDGEWAVE/CORROSIVEGAS... -> stage 1] using ACIDSPRAY
+================================================================================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Green sprouts carpet the garden beds.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Acid Spray!
+    HP Snorlax (foe): 461 -> 432 / 461
+    (anim: StatDown)
+  The wild Snorlax's Special Defense harshly fell!
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The acid burned the garden back to its roots!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 432/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 432/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)
@@ -624,7 +663,7 @@ FLOWER_GARDEN probe: transition [stage 3: types GRASS, category damaging x2 -> s
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Energy Ball!
-  The blooming garden empowered the attack!
+  The blooming garden poured its strength into Energy Ball!
     HP Snorlax (foe): 461 -> 377 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -633,7 +672,7 @@ FLOWER_GARDEN probe: transition [stage 3: types GRASS, category damaging x2 -> s
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 377/461]
   Mew used Energy Ball!
-  The blooming garden empowered the attack!
+  The blooming garden poured its strength into Energy Ball!
     HP Snorlax (foe): 377 -> 287 / 461
 ## FIELD STAGE: FLOWER_GARDEN is now stage 4
   The garden is in full flower!
@@ -793,7 +832,7 @@ FLOWER_GARDEN probe: transition [stage 4: types GRASS, category damaging x2 -> s
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Energy Ball!
-  The flowering garden empowered the attack!
+  The flowering garden poured its strength into Energy Ball!
     HP Snorlax (foe): 461 -> 365 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -802,7 +841,7 @@ FLOWER_GARDEN probe: transition [stage 4: types GRASS, category damaging x2 -> s
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 365/461]
   Mew used Energy Ball!
-  The flowering garden empowered the attack!
+  The flowering garden poured its strength into Energy Ball!
     HP Snorlax (foe): 365 -> 261 / 461
 ## FIELD STAGE: FLOWER_GARDEN is now stage 5
   The garden overflowed into a riot of blossoms!
@@ -825,8 +864,8 @@ FLOWER_GARDEN probe: transition [stage 4: types GRASS, category damaging x2 -> s
 RESULT: fled/forfeit after 3 turn(s)
 
 
-FLOWER_GARDEN probe: transition [stage 5: types FIRE, category damaging x2 -> ASHEN_WASTE] using FLAMETHROWER, FLAMETHROWER
-===========================================================================================================================
+FLOWER_GARDEN probe: transition [stage 5: types FIRE, category damaging x2 -> WILDFIRE] using FLAMETHROWER, FLAMETHROWER
+========================================================================================================================
 
 --- Battle start ---
   field: FLOWER_GARDEN (stage 5) | weather: None | terrain: None
@@ -850,31 +889,23 @@ FLOWER_GARDEN probe: transition [stage 5: types FIRE, category damaging x2 -> AS
   [Mew 341/341 | Snorlax 365/461]
   Mew used Flamethrower!
   The overgrowth went up like tinder!
-    HP Snorlax (foe): 365 -> 261 / 461
-## FIELD CHANGE: FLOWER_GARDEN -> ASHEN_WASTE
-  The garden went up in flames! Only ash remains...
+    HP Snorlax (foe): 365 -> 230 / 461
+## FIELD CHANGE: FLOWER_GARDEN -> WILDFIRE
+  The overgrowth went up like tinder! The garden is ablaze!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 261 -> 232 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 3 ---
-  [Mew 320/341 | Snorlax 232/461]
+  [Mew 341/341 | Snorlax 230/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 320 -> 299 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 232 -> 203 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 4 ---
-  [Mew 299/341 | Snorlax 203/461]
+  [Mew 341/341 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)

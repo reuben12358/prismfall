@@ -17,7 +17,6 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
   Growlithe's Telluric Seed shook stones loose from the ceiling!
     (anim: StatUp)
   Growlithe's Defense rose!
-  Pointed stones float in the air around the opposing team!
 
 --- Turn 1 ---
   [Growlithe 36/36 | Diglett 22/22]
@@ -40,7 +39,7 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
   Growlithe used Bite!
     HP Bonsly (foe): 24 -> 16 / 32
   The opposing Bonsly used Rock Throw!
-  The cavern rumbled!
+  The cavern rumbled with the opposing Bonsly's power!
     HP Growlithe (player): 36 -> 14 / 36
   It's super effective!
   (end of round)
@@ -62,14 +61,14 @@ Cave [CAVE] - Camper Liam vs challenger (Lv.11)
     HP Bonsly (foe): 10 -> 2 / 32
   It's not very effective...
   The opposing Bonsly used Rock Throw!
-  The cavern rumbled!
+  The cavern rumbled with the opposing Bonsly's power!
     HP Growlithe (player): 14 -> 0 / 36
   It's super effective!
   Growlithe fainted!
     xx fainted: Growlithe (player)
   (end of round)
   Your opponent's weak! Get 'em, Machop!
-    >> sent out (player): Machop Lv.11 [NOGUARD]
+    >> sent out (player): Machop Lv.11 [GUTS]
 
 --- Turn 5 ---
   [Machop 39/39 | Bonsly 2/32]

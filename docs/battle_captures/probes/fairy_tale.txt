@@ -15,7 +15,7 @@ FAIRY_TALE probe: boosted move MOONBLAST (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Moonblast!
-  The storybook's magic sparkled!
+  The storybook's magic sparkled through Moonblast!
     HP Snorlax (foe): 461 -> 357 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -87,7 +87,7 @@ FAIRY_TALE probe: transition [stage 1: types DRAGON, category damaging x3 -> DRA
   [Mew 341/341 | Snorlax 272/461]
   Mew used Dragon Pulse!
   A dragon's roar shook the castle!
-    HP Snorlax (foe): 272 -> 178 / 461
+    HP Snorlax (foe): 272 -> 151 / 461
 ## FIELD CHANGE: FAIRY_TALE -> DRAGONS_DEN
   The dragon has awoken! Dragonfire swallows the storybook castle...
   The wild Snorlax used Splash!
@@ -95,7 +95,7 @@ FAIRY_TALE probe: transition [stage 1: types DRAGON, category damaging x3 -> DRA
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 178/461]
+  [Mew 341/341 | Snorlax 151/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -103,7 +103,7 @@ FAIRY_TALE probe: transition [stage 1: types DRAGON, category damaging x3 -> DRA
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 178/461]
+  [Mew 341/341 | Snorlax 151/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)

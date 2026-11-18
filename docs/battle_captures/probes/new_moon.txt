@@ -15,14 +15,16 @@ NEW_MOON probe: boosted move DARKPULSE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Dark Pulse!
-  The darkness of the new moon deepened!
-    HP Snorlax (foe): 461 -> 374 / 461
+  Mew struck from the depths of the new moon!
+  The shadows gathered around Dark Pulse!
+    HP Snorlax (foe): 461 -> 356 / 461
+  The shadows grow... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 374/461]
+  [Mew 341/341 | Snorlax 356/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -52,8 +54,101 @@ NEW_MOON probe: boosted move DARKPULSE (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-NEW_MOON probe: transition [stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 -> NONE] using FLASH, FLASH, FLASH
-================================================================================================================
+NEW_MOON probe: transition [stage 1: moves DARKVOID -> stage 2] using DARKVOID
+==============================================================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dark Void!
+  But Mew can't use the move!
+## FIELD STAGE: NEW_MOON is now stage 2
+  Straight into the abyss! The darkness swallows everything!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+NEW_MOON probe: transition [stage 1: moves DARKPULSE/NIGHTDAZE/MOONGEISTBEAM... x3 -> stage 2] using MOONGEISTBEAM, MOONGEISTBEAM, MOONGEISTBEAM
+================================================================================================================================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  Oh! A wild Milotic appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+
+--- Turn 1 ---
+  [Mew 341/341 | Milotic 331/331]
+  Mew used Moongeist Beam!
+  The shadows gathered around Moongeist Beam!
+    HP Milotic (foe): 331 -> 254 / 331
+  The shadows grow... (2 more)
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Milotic 254/331]
+  Mew used Moongeist Beam!
+  The shadows gathered around Moongeist Beam!
+    HP Milotic (foe): 254 -> 172 / 331
+  The shadows grow... (1 more)
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Milotic 172/331]
+  Mew used Moongeist Beam!
+  The shadows gathered around Moongeist Beam!
+    HP Milotic (foe): 172 -> 93 / 331
+## FIELD STAGE: NEW_MOON is now stage 2
+  The shadows swallowed the stars! The new moon deepened into an abyss!
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Milotic 93/331]
+  Mew used Splash!
+  But nothing happened!
+  The wild Milotic used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Milotic 93/331]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+NEW_MOON probe: transition [stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 -> stage 3] using FLASH, FLASH, FLASH
+===================================================================================================================
 
 --- Battle start ---
   field: NEW_MOON | weather: None | terrain: None
@@ -97,8 +192,8 @@ NEW_MOON probe: transition [stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 ->
   The sudden flash was blinding in the dark!
     (anim: StatDown)
   The wild Snorlax's accuracy fell!
-## FIELD CHANGE: NEW_MOON -> NONE
-  Light floods the Underveil! The lamps of Nadir flicker back to life.
+## FIELD STAGE: NEW_MOON is now stage 3
+  Light floods the Underveil! The gaslamps of Nadir flicker back to life!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -118,6 +213,116 @@ NEW_MOON probe: transition [stage 1: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x3 ->
 RESULT: fled/forfeit after 4 turn(s)
 
 
+NEW_MOON probe: transition [stage 2: moves FLASH/TAILGLOW/DAZZLINGGLEAM... x2 -> stage 1] using FLASH, FLASH
+============================================================================================================
+
+--- Battle start ---
+  field: NEW_MOON (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  In an endless sea of darkness, even the stars have gone out...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  The sudden flash was blinding in the dark!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  A single ray of light makes its way... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flash!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+  The sudden flash was blinding in the dark!
+    (anim: StatDown)
+  The wild Snorlax's accuracy fell!
+## FIELD STAGE: NEW_MOON is now stage 1
+  The shadows retreat! The stars glimmer over Underveil again.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+NEW_MOON probe: transition [stage 3: types DARK, category damaging x3 -> stage 1] using DARKPULSE, DARKPULSE, DARKPULSE
+=======================================================================================================================
+
+--- Battle start ---
+  field: NEW_MOON (stage 3) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The gaslamps of Nadir burn in the dark...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dark Pulse!
+  Mew slipped through the shadows between the lamps!
+    HP Snorlax (foe): 461 -> 392 / 461
+  The lamps are guttering... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 392/461]
+  Mew used Dark Pulse!
+  Mew slipped through the shadows between the lamps!
+    HP Snorlax (foe): 392 -> 318 / 461
+  The lamps are guttering... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 318/461]
+  Mew used Dark Pulse!
+  Mew slipped through the shadows between the lamps!
+    HP Snorlax (foe): 318 -> 244 / 461
+## FIELD STAGE: NEW_MOON is now stage 1
+  The lamps went out one by one... The new moon reclaims Underveil.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 244/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 244/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
 NEW_MOON probe: Magical Seed held on entry
 ==========================================
 
@@ -132,6 +337,8 @@ NEW_MOON probe: Magical Seed held on entry
   Mew's Magical Seed sharpened its night vision!
     (anim: StatUp)
   Mew's accuracy rose!
+## FIELD STAGE: NEW_MOON is now stage 2
+  The seed drew the shadows in! The darkness deepens into an abyss!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]

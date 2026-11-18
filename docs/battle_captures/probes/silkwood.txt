@@ -11,17 +11,17 @@ SILKWOOD probe: boosted move BUGBUZZ (on field)
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-  Mew blundered into a sticky web!
+  Mew stepped into a curtain of sticky silk!
     (anim: StatDown)
   Mew's Speed fell!
-  The wild Snorlax blundered into a sticky web!
+  The wild Snorlax stepped into a curtain of sticky silk!
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Bug Buzz!
-  The Silkwood hums with chittering life!
+  The whole canopy thrummed with Mew's swarm!
     HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -58,8 +58,8 @@ SILKWOOD probe: boosted move BUGBUZZ (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-SILKWOOD probe: transition [stage 1: types FIRE, category damaging x3 -> ASHEN_WASTE] using FLAMETHROWER, FLAMETHROWER, FLAMETHROWER
-====================================================================================================================================
+SILKWOOD probe: transition [stage 1: types FIRE, category damaging, condition proc x3 -> WILDFIRE] using FLAMETHROWER, FLAMETHROWER, FLAMETHROWER
+=================================================================================================================================================
 
 --- Battle start ---
   field: SILKWOOD | weather: None | terrain: None
@@ -68,10 +68,10 @@ SILKWOOD probe: transition [stage 1: types FIRE, category damaging x3 -> ASHEN_W
     >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-  Mew blundered into a sticky web!
+  Mew stepped into a curtain of sticky silk!
     (anim: StatDown)
   Mew's Speed fell!
-  The wild Snorlax blundered into a sticky web!
+  The wild Snorlax stepped into a curtain of sticky silk!
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 
@@ -79,51 +79,112 @@ SILKWOOD probe: transition [stage 1: types FIRE, category damaging x3 -> ASHEN_W
   [Mew 341/341 | Snorlax 461/461]
   Mew used Flamethrower!
   The flames raced along the silk!
-    HP Snorlax (foe): 461 -> 377 / 461
-  Embers smoulder in the silk... (2 more)
+    HP Snorlax (foe): 461 -> 384 / 461
+  Embers are catching in the silk... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 377/461]
+  [Mew 341/341 | Snorlax 384/461]
   Mew used Flamethrower!
   The flames raced along the silk!
-    HP Snorlax (foe): 377 -> 287 / 461
-  Embers smoulder in the silk... (1 more)
+    HP Snorlax (foe): 384 -> 301 / 461
+  Embers are catching in the silk... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 287/461]
+  [Mew 341/341 | Snorlax 301/461]
   Mew used Flamethrower!
   The flames raced along the silk!
-    HP Snorlax (foe): 287 -> 197 / 461
-## FIELD CHANGE: SILKWOOD -> ASHEN_WASTE
-  The webs went up in flames! The Silkwood burned down to ash!
+    HP Snorlax (foe): 301 -> 193 / 461
+## FIELD CHANGE: SILKWOOD -> WILDFIRE
+  The silk caught! Flames leap from web to web - the Silkwood is ablaze!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 197 -> 168 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 4 ---
-  [Mew 320/341 | Snorlax 168/461]
+  [Mew 341/341 | Snorlax 193/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 320 -> 299 / 341
-  Mew is choking on the ash!
-    HP Snorlax (foe): 168 -> 139 / 461
-  The wild Snorlax is choking on the ash!
 
 --- Turn 5 ---
-  [Mew 299/341 | Snorlax 139/461]
+  [Mew 341/341 | Snorlax 193/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)
+
+
+SILKWOOD probe: transition [stage 1: types FIRE, category damaging x2 -> WILDFIRE] using SUNNYDAY, FLAMETHROWER, FLAMETHROWER
+=============================================================================================================================
+
+--- Battle start ---
+  field: SILKWOOD | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> SILKWOOD
+  Giant webs glisten between the ancient trees...
+  Mew stepped into a curtain of sticky silk!
+    (anim: StatDown)
+  Mew's Speed fell!
+  The wild Snorlax stepped into a curtain of sticky silk!
+    (anim: StatDown)
+  The wild Snorlax's Speed fell!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sunny Day!
+  The sunlight turned harsh!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Flamethrower!
+  The flames raced along the silk!
+    HP Snorlax (foe): 461 -> 350 / 461
+  The sun-dried silk is smouldering... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 350/461]
+  Mew used Flamethrower!
+  The flames raced along the silk!
+    HP Snorlax (foe): 350 -> 197 / 461
+## FIELD CHANGE: SILKWOOD -> WILDFIRE
+  The sun-dried silk went up in a flash - the Silkwood is ablaze!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 197/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 5 ---
+  [Mew 341/341 | Snorlax 197/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
@@ -139,14 +200,16 @@ SILKWOOD probe: Telluric Seed held on entry
     >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-  Mew blundered into a sticky web!
+  Mew stepped into a curtain of sticky silk!
     (anim: StatDown)
   Mew's Speed fell!
     (anim: UseItem)
-  Mew's Telluric Seed sprouted silk-threaded roots!
+  Mew's Telluric Seed spun a silk cocoon around it!
     (anim: StatUp)
   Mew's Defense rose!
-  The wild Snorlax blundered into a sticky web!
+  Mew's Special Defense rose!
+  Mew's Speed fell!
+  The wild Snorlax stepped into a curtain of sticky silk!
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 
@@ -157,11 +220,9 @@ SILKWOOD probe: Telluric Seed held on entry
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 170 -> 191 / 341
-  Mew absorbed nutrients with its roots!
 
 --- Turn 2 ---
-  [Mew 191/341 | Snorlax 461/461]
+  [Mew 170/341 | Snorlax 461/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -177,7 +238,7 @@ SILKWOOD probe: end-of-round rule 1: heal on {:types=>[:BUG]} [subject Pinsir]
     >> sent out (player): Pinsir Lv.100 [HYPERCUTTER]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-  The wild Snorlax blundered into a sticky web!
+  The wild Snorlax stepped into a curtain of sticky silk!
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 
@@ -188,7 +249,7 @@ SILKWOOD probe: end-of-round rule 1: heal on {:types=>[:BUG]} [subject Pinsir]
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-  Pinsir fed on the forest's nectar.
+  Pinsir sipped nectar from the silk-hung blossoms.
     HP Pinsir (player): 135 -> 152 / 271
 
 --- Turn 2 ---
@@ -198,7 +259,7 @@ SILKWOOD probe: end-of-round rule 1: heal on {:types=>[:BUG]} [subject Pinsir]
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-  Pinsir fed on the forest's nectar.
+  Pinsir sipped nectar from the silk-hung blossoms.
     HP Pinsir (player): 152 -> 169 / 271
 
 --- Turn 3 ---

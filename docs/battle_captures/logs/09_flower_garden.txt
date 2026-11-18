@@ -24,70 +24,23 @@ Flower Garden [FLOWER_GARDEN] - Gym 9 Warden Juno vs challenger (Lv.47)
   [Magmar 132/132 | Whimsicott 127/127]
   The opposing Whimsicott used Leech Seed!
   Magmar was seeded!
+## FIELD STAGE: FLOWER_GARDEN is now stage 3
+  The garden burst into bloom!
   Magmar used Lava Plume!
-    HP Whimsicott (foe): 127 -> 10 / 127
-  It's super effective!
-    (anim: Burn)
-  The opposing Whimsicott was burned!
-## FIELD STAGE: FLOWER_GARDEN is now stage 1
-  The flames scorched the garden!
-  (end of round)
-    (anim: UseItem)
-    HP Whimsicott (foe): 10 -> 17 / 127
-  The opposing Whimsicott restored a little HP using its Leftovers!
-    (anim: LeechSeed)
-    HP Magmar (player): 132 -> 116 / 132
-  Magmar's health is sapped by Leech Seed!
-    HP Whimsicott (foe): 17 -> 33 / 127
-    (anim: Burn)
-    HP Whimsicott (foe): 33 -> 26 / 127
-  The opposing Whimsicott was hurt by its burn!
-
---- Turn 2 ---
-  [Magmar 116/132 | Whimsicott 26/127 BURN]
-  Warden Juno used a Hyper Potion.
-    HP Whimsicott (foe): 26 -> 127 / 127
-  The opposing Whimsicott's HP was restored.
-  Magmar used Lava Plume!
-    HP Whimsicott (foe): 127 -> 19 / 127
-  It's super effective!
-  (end of round)
-    (anim: UseItem)
-    HP Whimsicott (foe): 19 -> 26 / 127
-  The opposing Whimsicott restored a little HP using its Leftovers!
-    HP Magmar (player): 116 -> 124 / 132
-  Magmar absorbed nutrients with its roots!
-    (anim: LeechSeed)
-    HP Magmar (player): 124 -> 108 / 132
-  Magmar's health is sapped by Leech Seed!
-    HP Whimsicott (foe): 26 -> 42 / 127
-    (anim: Burn)
-    HP Whimsicott (foe): 42 -> 35 / 127
-  The opposing Whimsicott was hurt by its burn!
-
---- Turn 3 ---
-  [Magmar 108/132 | Whimsicott 35/127 BURN]
-  The opposing Whimsicott used Growth!
-    (anim: StatUp)
-  The opposing Whimsicott's Attack rose!
-  The opposing Whimsicott's Special Attack rose!
-## FIELD STAGE: FLOWER_GARDEN is now stage 2
-  Sprouts pushed up through the soil!
-  Magmar used Clear Smog!
-    HP Whimsicott (foe): 35 -> 0 / 127
+    HP Whimsicott (foe): 127 -> 0 / 127
   It's super effective!
   The opposing Whimsicott fainted!
     xx fainted: Whimsicott (foe)
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  The flames scorched the garden back!
   Magmar is at the level cap (Lv. 47) and can't gain Exp. Points.
   (end of round)
-    HP Magmar (player): 108 -> 116 / 132
-  Magmar absorbed nutrients with its roots!
   Warden Juno is about to send out Venusaur. Will you switch your Pokémon?  [auto: No]
   Warden Juno sent out Venusaur!
     >> sent out (foe): Venusaur Lv.46 @SITRUSBERRY [OVERGROW]
 
---- Turn 4 ---
-  [Magmar 116/132 | Venusaur 148/148]
+--- Turn 2 ---
+  [Magmar 132/132 | Venusaur 148/148]
   Magmar used Lava Plume!
     HP Venusaur (foe): 148 -> 53 / 148
   It's super effective!
@@ -97,225 +50,259 @@ Flower Garden [FLOWER_GARDEN] - Gym 9 Warden Juno vs challenger (Lv.47)
     (anim: Burn)
   The opposing Venusaur was burned!
 ## FIELD STAGE: FLOWER_GARDEN is now stage 1
-  The flames scorched the garden!
-  The opposing Venusaur used Sludge Bomb!
-    HP Magmar (player): 116 -> 72 / 132
+  The flames scorched the garden back!
+  The opposing Venusaur used Growth!
+    (anim: StatUp)
+  The opposing Venusaur's Attack rose!
+  The opposing Venusaur's Special Attack rose!
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
   (end of round)
-    HP Magmar (player): 72 -> 80 / 132
-  Magmar absorbed nutrients with its roots!
     (anim: LeechSeed)
-    HP Magmar (player): 80 -> 64 / 132
+    HP Magmar (player): 132 -> 116 / 132
   Magmar's health is sapped by Leech Seed!
     HP Venusaur (foe): 90 -> 106 / 148
     (anim: Burn)
     HP Venusaur (foe): 106 -> 97 / 148
   The opposing Venusaur was hurt by its burn!
 
---- Turn 5 ---
-  [Magmar 64/132 | Venusaur 97/148 BURN]
+--- Turn 3 ---
+  [Magmar 116/132 | Venusaur 97/148 BURN]
   Magmar used Fire Punch!
-    HP Venusaur (foe): 97 -> 9 / 148
+    HP Venusaur (foe): 97 -> 1 / 148
   It's super effective!
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The flames scorched the garden back!
   The opposing Venusaur used Sludge Bomb!
-    HP Magmar (player): 64 -> 23 / 132
+    HP Magmar (player): 116 -> 53 / 132
+    (anim: Poison)
+  Magmar was poisoned!
   (end of round)
-    HP Magmar (player): 23 -> 31 / 132
+    HP Magmar (player): 53 -> 61 / 132
   Magmar absorbed nutrients with its roots!
     (anim: LeechSeed)
-    HP Magmar (player): 31 -> 15 / 132
+    HP Magmar (player): 61 -> 45 / 132
   Magmar's health is sapped by Leech Seed!
-    HP Venusaur (foe): 9 -> 25 / 148
+    HP Venusaur (foe): 1 -> 17 / 148
+    (anim: Poison)
+    HP Magmar (player): 45 -> 29 / 132
+  Magmar was hurt by poison!
     (anim: Burn)
-    HP Venusaur (foe): 25 -> 16 / 148
+    HP Venusaur (foe): 17 -> 8 / 148
   The opposing Venusaur was hurt by its burn!
 
---- Turn 6 ---
-  [Magmar 15/132 | Venusaur 16/148 BURN]
+--- Turn 4 ---
+  [Magmar 29/132 POISON | Venusaur 8/148 BURN]
   Warden Juno used a Hyper Potion.
-    HP Venusaur (foe): 16 -> 136 / 148
+    HP Venusaur (foe): 8 -> 128 / 148
   The opposing Venusaur's HP was restored.
   Magmar used Fire Punch!
-    HP Venusaur (foe): 136 -> 38 / 148
+    HP Venusaur (foe): 128 -> 35 / 148
   It's super effective!
   (end of round)
-    HP Magmar (player): 15 -> 23 / 132
+    HP Magmar (player): 29 -> 37 / 132
   Magmar absorbed nutrients with its roots!
     (anim: LeechSeed)
-    HP Magmar (player): 23 -> 7 / 132
+    HP Magmar (player): 37 -> 21 / 132
   Magmar's health is sapped by Leech Seed!
-    HP Venusaur (foe): 38 -> 54 / 148
+    HP Venusaur (foe): 35 -> 51 / 148
+    (anim: Poison)
+    HP Magmar (player): 21 -> 5 / 132
+  Magmar was hurt by poison!
     (anim: Burn)
-    HP Venusaur (foe): 54 -> 45 / 148
+    HP Venusaur (foe): 51 -> 42 / 148
   The opposing Venusaur was hurt by its burn!
 
---- Turn 7 ---
-  [Magmar 7/132 | Venusaur 45/148 BURN]
+--- Turn 5 ---
+  [Magmar 5/132 POISON | Venusaur 42/148 BURN]
   Magmar used Fire Punch!
-    HP Venusaur (foe): 45 -> 0 / 148
+    HP Venusaur (foe): 42 -> 0 / 148
   It's super effective!
   The opposing Venusaur fainted!
     xx fainted: Venusaur (foe)
   (end of round)
-    HP Magmar (player): 7 -> 15 / 132
+    HP Magmar (player): 5 -> 13 / 132
   Magmar absorbed nutrients with its roots!
-  Warden Juno is about to send out Lilligant. Will you switch your Pokémon?  [auto: No]
-  Warden Juno sent out Lilligant!
-    >> sent out (foe): Lilligant Lv.46 @MIRACLESEED [OWNTEMPO]
-
---- Turn 8 ---
-  [Magmar 15/132 | Lilligant 139/139]
-  Magmar used Fire Punch!
-    HP Lilligant (foe): 139 -> 44 / 139
-  It's super effective!
-  The opposing Lilligant used Quiver Dance!
-    (anim: StatUp)
-  The opposing Lilligant's Special Attack rose!
-  The opposing Lilligant's Special Defense rose!
-  The opposing Lilligant's Speed rose!
-  (end of round)
-    HP Magmar (player): 15 -> 23 / 132
-  Magmar absorbed nutrients with its roots!
-    (anim: LeechSeed)
-    HP Magmar (player): 23 -> 7 / 132
-  Magmar's health is sapped by Leech Seed!
-    HP Lilligant (foe): 44 -> 60 / 139
-
---- Turn 9 ---
-  [Magmar 7/132 | Lilligant 60/139]
-  The opposing Lilligant used Petal Dance!
-    HP Magmar (player): 7 -> 0 / 132
-  A critical hit!
-  It's not very effective...
+    (anim: Poison)
+    HP Magmar (player): 13 -> 0 / 132
+  Magmar was hurt by poison!
   Magmar fainted!
     xx fainted: Magmar (player)
+  You're in charge, Pidgeot!
+    >> sent out (player): Pidgeot Lv.47 [TANGLEDFEET]
+  Warden Juno sent out Shiinotic!
+    >> sent out (foe): Shiinotic Lv.45 @SITRUSBERRY [EFFECTSPORE]
+
+--- Turn 6 ---
+  [Pidgeot 149/149 | Shiinotic 127/127]
+  Pidgeot used Air Slash!
+    HP Shiinotic (foe): 127 -> 61 / 127
+  It's super effective!
+    (anim: EatBerry)
+    HP Shiinotic (foe): 61 -> 92 / 127
+  The opposing Shiinotic restored its health using its Sitrus Berry!
+  The opposing Shiinotic used Moonblast!
+    HP Pidgeot (player): 149 -> 84 / 149
+  (end of round)
+
+--- Turn 7 ---
+  [Pidgeot 84/149 | Shiinotic 92/127]
+  Pidgeot used Aerial Ace!
+    HP Shiinotic (foe): 92 -> 21 / 127
+  It's super effective!
+    [ability: Shiinotic (foe)'s Effect Spore]
+    (anim: Poison)
+  Pidgeot was poisoned!
+  The opposing Shiinotic used Moonblast!
+    HP Pidgeot (player): 84 -> 22 / 149
+  (end of round)
+    (anim: Poison)
+    HP Pidgeot (player): 22 -> 4 / 149
+  Pidgeot was hurt by poison!
+
+--- Turn 8 ---
+  [Pidgeot 4/149 POISON | Shiinotic 21/127]
+  Good job, Pidgeot! Come back!
+    << recalled: Pidgeot (player)
+  Your opponent's weak! Get 'em, Vaporeon!
+    >> sent out (player): Vaporeon Lv.47 [WATERABSORB]
+  Warden Juno used a Hyper Potion.
+    HP Shiinotic (foe): 21 -> 127 / 127
+  The opposing Shiinotic's HP was restored.
+  (end of round)
+
+--- Turn 9 ---
+  [Vaporeon 193/193 | Shiinotic 127/127]
+  Vaporeon used Water Pulse!
+    HP Shiinotic (foe): 127 -> 109 / 127
+  It's not very effective...
+  The opposing Shiinotic used Moonblast!
+    HP Vaporeon (player): 193 -> 143 / 193
+  (end of round)
+
+--- Turn 10 ---
+  [Vaporeon 143/193 | Shiinotic 109/127]
+  Vaporeon used Scald!
+    HP Shiinotic (foe): 109 -> 87 / 127
+  It's not very effective...
+  The opposing Shiinotic used Moonblast!
+    HP Vaporeon (player): 143 -> 89 / 193
+  (end of round)
+
+--- Turn 11 ---
+  [Vaporeon 89/193 | Shiinotic 87/127]
+  Vaporeon used Water Pulse!
+    HP Shiinotic (foe): 87 -> 69 / 127
+  It's not very effective...
+  The opposing Shiinotic used Giga Drain!
+    HP Vaporeon (player): 89 -> 0 / 193
+  It's super effective!
+  Vaporeon fainted!
+    xx fainted: Vaporeon (player)
+  Vaporeon had its energy drained!
+    HP Shiinotic (foe): 69 -> 114 / 127
+  (end of round)
+  Go for it, Pidgeot!
+    >> sent out (player): Pidgeot Lv.47 [TANGLEDFEET]
+
+--- Turn 12 ---
+  [Pidgeot 4/149 POISON | Shiinotic 114/127]
+  Good job, Pidgeot! Come back!
+    << recalled: Pidgeot (player)
+  Go for it, Ampharos!
+    >> sent out (player): Ampharos Lv.47 [STATIC]
+  The opposing Shiinotic used Moonblast!
+    HP Ampharos (player): 156 -> 105 / 156
+  (end of round)
+
+--- Turn 13 ---
+  [Ampharos 105/156 | Shiinotic 114/127]
+  Ampharos used Signal Beam!
+    HP Shiinotic (foe): 114 -> 85 / 127
+  The opposing Shiinotic used Moonblast!
+    HP Ampharos (player): 105 -> 47 / 156
+  (end of round)
+
+--- Turn 14 ---
+  [Ampharos 47/156 | Shiinotic 85/127]
+  Ampharos used Signal Beam!
+    HP Shiinotic (foe): 85 -> 56 / 127
+  The opposing Shiinotic used Moonblast!
+    HP Ampharos (player): 47 -> 0 / 156
+  Ampharos fainted!
+    xx fainted: Ampharos (player)
   (end of round)
   Just a little more! Hang in there, Pidgeot!
     >> sent out (player): Pidgeot Lv.47 [TANGLEDFEET]
 
---- Turn 10 ---
-  [Pidgeot 149/149 | Lilligant 60/139]
-  The opposing Lilligant used Petal Dance!
-    HP Pidgeot (player): 149 -> 46 / 149
-  It's not very effective...
-## FIELD STAGE: FLOWER_GARDEN is now stage 2
-  Sprouts pushed up through the soil!
-  Pidgeot used Air Slash!
-    HP Lilligant (foe): 60 -> 5 / 139
-  It's super effective!
-  (end of round)
-
---- Turn 11 ---
-  [Pidgeot 46/149 | Lilligant 5/139]
-  The opposing Lilligant used Petal Dance!
-    HP Pidgeot (player): 46 -> 0 / 149
-  A critical hit!
-  It's not very effective...
-  Pidgeot fainted!
-    xx fainted: Pidgeot (player)
-  (end of round)
-  Your opponent's weak! Get 'em, Ampharos!
-    >> sent out (player): Ampharos Lv.47 [STATIC]
-
---- Turn 12 ---
-  [Ampharos 156/156 | Lilligant 5/139]
-  The opposing Lilligant used Giga Drain!
-    HP Ampharos (player): 156 -> 44 / 156
-  Ampharos had its energy drained!
-    HP Lilligant (foe): 5 -> 61 / 139
-## FIELD STAGE: FLOWER_GARDEN is now stage 3
-  The garden burst into bloom!
-  Ampharos used Discharge!
-    HP Lilligant (foe): 61 -> 40 / 139
-  It's not very effective...
-    (anim: Paralysis)
-  The opposing Lilligant is paralyzed! It may be unable to move!
-  (end of round)
-  The opposing Lilligant drank from the blooming garden.
-    HP Lilligant (foe): 40 -> 49 / 139
-
---- Turn 13 ---
-  [Ampharos 44/156 | Lilligant 49/139 PARALYSIS]
-  The opposing Lilligant used Giga Drain!
-  The blooming garden empowered the attack!
-    HP Ampharos (player): 44 -> 0 / 156
-  Ampharos fainted!
-    xx fainted: Ampharos (player)
-  Ampharos had its energy drained!
-    HP Lilligant (foe): 49 -> 71 / 139
-  (end of round)
-  The opposing Lilligant drank from the blooming garden.
-    HP Lilligant (foe): 71 -> 80 / 139
-  Go for it, Hariyama!
-    >> sent out (player): Hariyama Lv.47 [THICKFAT]
-
---- Turn 14 ---
-  [Hariyama 206/206 | Lilligant 80/139 PARALYSIS]
-  The opposing Lilligant used Petal Dance!
-  The blooming garden empowered the attack!
-    HP Hariyama (player): 206 -> 0 / 206
-  Hariyama fainted!
-    xx fainted: Hariyama (player)
-## FIELD STAGE: FLOWER_GARDEN is now stage 4
-  The garden is in full flower!
-  (end of round)
-  The opposing Lilligant drank from the blooming garden.
-    HP Lilligant (foe): 80 -> 89 / 139
-  Go for it, Vaporeon!
-    >> sent out (player): Vaporeon Lv.47 [WATERABSORB]
-
 --- Turn 15 ---
-  [Vaporeon 193/193 | Lilligant 89/139 PARALYSIS]
-  Vaporeon used Shadow Ball!
-    HP Lilligant (foe): 89 -> 63 / 139
-  The opposing Lilligant used Petal Dance!
-  The flowering garden empowered the attack!
-    HP Vaporeon (player): 193 -> 0 / 193
-  It's super effective!
-  Vaporeon fainted!
-    xx fainted: Vaporeon (player)
-  (end of round)
-  The opposing Lilligant drank from the blooming garden.
-    HP Lilligant (foe): 63 -> 72 / 139
-  Go for it, Graveler!
+  [Pidgeot 4/149 POISON | Shiinotic 56/127]
+  Good job, Pidgeot! Come back!
+    << recalled: Pidgeot (player)
+  Just a little more! Hang in there, Graveler!
     >> sent out (player): Graveler Lv.47 [ROCKHEAD]
-
---- Turn 16 ---
-  [Graveler 123/123 | Lilligant 72/139 PARALYSIS]
-    (anim: Paralysis)
-  The opposing Lilligant is paralyzed! It can't move!
-  Graveler used Fire Punch!
-  The dry petals fed the flames!
-    HP Lilligant (foe): 72 -> 0 / 139
-  It's super effective!
-  The opposing Lilligant fainted!
-    xx fainted: Lilligant (foe)
-## FIELD STAGE: FLOWER_GARDEN is now stage 3
-  The flames scorched the garden!
-  Graveler is at the level cap (Lv. 47) and can't gain Exp. Points.
-  (end of round)
-  Warden Juno sent out Shiinotic!
-    >> sent out (foe): Shiinotic Lv.45 @SITRUSBERRY [EFFECTSPORE]
-
---- Turn 17 ---
-  [Graveler 123/123 | Shiinotic 127/127]
-  Graveler used Fire Punch!
-    HP Shiinotic (foe): 127 -> 59 / 127
-  It's super effective!
-    (anim: EatBerry)
-    HP Shiinotic (foe): 59 -> 90 / 127
-  The opposing Shiinotic restored its health using its Sitrus Berry!
-## FIELD STAGE: FLOWER_GARDEN is now stage 2
-  The flames scorched the garden!
   The opposing Shiinotic used Giga Drain!
     HP Graveler (player): 123 -> 0 / 123
   It's super effective!
   Graveler fainted!
     xx fainted: Graveler (player)
   Graveler had its energy drained!
-    HP Shiinotic (foe): 90 -> 127 / 127
+    HP Shiinotic (foe): 56 -> 118 / 127
+## FIELD STAGE: FLOWER_GARDEN is now stage 2
+  Sprouts pushed up through the soil!
+  (end of round)
+  Go for it, Pidgeot!
+    >> sent out (player): Pidgeot Lv.47 [TANGLEDFEET]
+
+--- Turn 16 ---
+  [Pidgeot 4/149 POISON | Shiinotic 118/127]
+  Pidgeot used Air Slash!
+    HP Shiinotic (foe): 118 -> 57 / 127
+  It's super effective!
+## FIELD STAGE: FLOWER_GARDEN is now stage 1
+  The garden was cut back!
+  The opposing Shiinotic flinched and couldn't move!
+  (end of round)
+    (anim: Poison)
+    HP Pidgeot (player): 4 -> 0 / 149
+  Pidgeot was hurt by poison!
+  Pidgeot fainted!
+    xx fainted: Pidgeot (player)
+  Just a little more! Hang in there, Hariyama!
+    >> sent out (player): Hariyama Lv.47 [GUTS]
+
+--- Turn 17 ---
+  [Hariyama 206/206 | Shiinotic 57/127]
+  Hariyama used Bullet Punch!
+    HP Shiinotic (foe): 57 -> 15 / 127
+  It's super effective!
+  The opposing Shiinotic used Moonblast!
+    HP Hariyama (player): 206 -> 47 / 206
+  It's super effective!
+  (end of round)
+
+--- Turn 18 ---
+  [Hariyama 47/206 | Shiinotic 15/127]
+  Hariyama used Force Palm!
+    HP Shiinotic (foe): 15 -> 0 / 127
+  It's not very effective...
+  The opposing Shiinotic fainted!
+    xx fainted: Shiinotic (foe)
+  Hariyama is at the level cap (Lv. 47) and can't gain Exp. Points.
+  (end of round)
+  Warden Juno sent out Lilligant!
+    >> sent out (foe): Lilligant Lv.46 @MIRACLESEED [OWNTEMPO]
+
+--- Turn 19 ---
+  [Hariyama 47/206 | Lilligant 139/139]
+  The opposing Lilligant used Giga Drain!
+    HP Hariyama (player): 47 -> 0 / 206
+  Hariyama fainted!
+    xx fainted: Hariyama (player)
+  Hariyama had its energy drained!
   You have no more Pokémon that can fight!
   You lost against Warden Juno!
   You gave $5,640 to the winner...
   battle result code: 2
   
-RESULT: player lost after 16 turn(s)
+RESULT: player lost after 18 turn(s)

@@ -17,20 +17,20 @@ Frozen Lake [FROZEN_LAKE] - Gym 10 Warden Anja vs challenger (Lv.51)
     (anim: Hail)
   It started to snow!
     (anim: UseItem)
-  Garchomp's Elemental Seed encased it in a skin of frost!
+    HP Garchomp (player): 186 -> 163 / 186
+  Garchomp's Elemental Seed sent it skating at full speed - straight across the jagged ice!
     (anim: StatUp)
-  Garchomp's Defense rose!
-  Garchomp's Speed rose!
+  Garchomp's Speed rose sharply!
 
 --- Turn 1 ---
-  [Garchomp 186/186 | Ninetales 151/151]
+  [Garchomp 163/186 | Ninetales 151/151]
   Garchomp used Fire Fang!
     HP Ninetales (foe): 151 -> 92 / 151
   It's super effective!
   The lake ice groaned and cracked! (2 more)
   The opposing Ninetales used Freeze-Dry!
-  The frozen lake chilled the attack!
-    HP Garchomp (player): 186 -> 0 / 186
+  The frozen lake lent its cold to Freeze-Dry!
+    HP Garchomp (player): 163 -> 0 / 186
   It's super effective!
   Garchomp fainted!
     xx fainted: Garchomp (player)
@@ -43,7 +43,7 @@ Frozen Lake [FROZEN_LAKE] - Gym 10 Warden Anja vs challenger (Lv.51)
 --- Turn 2 ---
   [Lucario 148/148 | Ninetales 92/151]
   The opposing Ninetales used Blizzard!
-  The frozen lake chilled the attack!
+  The frozen lake lent its cold to Blizzard!
     HP Lucario (player): 148 -> 95 / 148
   It's not very effective...
   Lucario used Flash Cannon!
@@ -99,78 +99,64 @@ Frozen Lake [FROZEN_LAKE] - Gym 10 Warden Anja vs challenger (Lv.51)
   It's super effective!
     [ability: Avalugg (foe)'s Sturdy]
   The opposing Avalugg endured the hit!
-  The opposing Avalugg used Body Press!
-    HP Lucario (player): 95 -> 0 / 148
-  It's super effective!
-  Lucario fainted!
-    xx fainted: Lucario (player)
-  The lake ice groaned and cracked! (2 more)
+  The opposing Avalugg used Iron Defense!
+    (anim: StatUp)
+  The opposing Avalugg's Defense rose sharply!
   (end of round)
     (anim: Hail)
-  Your opponent's weak! Get 'em, Togekiss!
-    >> sent out (player): Togekiss Lv.51 [SERENEGRACE]
 
 --- Turn 6 ---
-  [Togekiss 163/163 | Avalugg 1/176]
+  [Lucario 95/148 | Avalugg 1/176]
   Warden Anja used a Full Restore.
     HP Avalugg (foe): 1 -> 176 / 176
   The opposing Avalugg's HP was restored.
-  Togekiss used Air Slash!
-    HP Avalugg (foe): 176 -> 77 / 176
+  Lucario used Flash Cannon!
+    HP Avalugg (foe): 176 -> 1 / 176
+  It's super effective!
+    [ability: Avalugg (foe)'s Sturdy]
+  The opposing Avalugg endured the hit!
   (end of round)
     (anim: Hail)
 
 --- Turn 7 ---
-  [Togekiss 163/163 | Avalugg 77/176]
-  Togekiss used Flamethrower!
-    HP Avalugg (foe): 77 -> 0 / 176
+  [Lucario 95/148 | Avalugg 1/176]
+  Lucario used Flash Cannon!
+    HP Avalugg (foe): 1 -> 0 / 176
   It's super effective!
   The opposing Avalugg fainted!
     xx fainted: Avalugg (foe)
-  The lake ice groaned and cracked! (1 more)
-  Togekiss is at the level cap (Lv. 51) and can't gain Exp. Points.
   (end of round)
     (anim: Hail)
   Warden Anja is about to send out Walrein. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Walrein!
     >> sent out (foe): Walrein Lv.50 @SITRUSBERRY [THICKFAT]
+  The opposing Walrein settled comfortably onto the ice!
+    (anim: StatUp)
+  The opposing Walrein's Defense rose!
 
 --- Turn 8 ---
-  [Togekiss 163/163 | Walrein 191/191]
-  Togekiss used Flamethrower!
-    HP Walrein (foe): 191 -> 166 / 191
-## FIELD CHANGE: FROZEN_LAKE -> WATER_SURFACE
-  The ice gave way! The battle plunged into the freezing lake!
+  [Lucario 95/148 | Walrein 191/191]
+  Lucario used Flash Cannon!
+    HP Walrein (foe): 191 -> 136 / 191
   The opposing Walrein used Blizzard!
-    HP Togekiss (player): 163 -> 25 / 163
-  It's super effective!
-  Ice spreads across the water... (2 more)
+  The frozen lake lent its cold to Blizzard!
+    HP Lucario (player): 95 -> 0 / 148
+  It's not very effective...
+  Lucario fainted!
+    xx fainted: Lucario (player)
   (end of round)
   The snow stopped.
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.51 [STURDY]
 
 --- Turn 9 ---
-  [Togekiss 25/163 | Walrein 166/191]
-  Togekiss used Flamethrower!
-  The water doused the flames...
-    HP Walrein (foe): 166 -> 153 / 191
+  [Magnezone 148/148 | Walrein 136/191]
   The opposing Walrein used Blizzard!
-    HP Togekiss (player): 25 -> 0 / 163
-  It's super effective!
-  Togekiss fainted!
-    xx fainted: Togekiss (player)
-  Ice spreads across the water... (1 more)
-  (end of round)
-  Go for it, Magnezone!
-    >> sent out (player): Magnezone Lv.51 [MAGNETPULL]
-
---- Turn 10 ---
-  [Magnezone 148/148 | Walrein 153/191]
-  The opposing Walrein used Surf!
-  The waves amplified the attack!
-    HP Magnezone (player): 148 -> 52 / 148
+  The frozen lake lent its cold to Blizzard!
+    HP Magnezone (player): 148 -> 89 / 148
+  It's not very effective...
   Magnezone used Thunderbolt!
-  The current raced across the water!
-    HP Walrein (foe): 153 -> 0 / 191
+    HP Walrein (foe): 136 -> 0 / 191
   It's super effective!
   The opposing Walrein fainted!
     xx fainted: Walrein (foe)
@@ -180,20 +166,18 @@ Frozen Lake [FROZEN_LAKE] - Gym 10 Warden Anja vs challenger (Lv.51)
   Warden Anja sent out Cloyster!
     >> sent out (foe): Cloyster Lv.49 @WHITEHERB [SKILLLINK]
 
---- Turn 11 ---
-  [Magnezone 52/148 | Cloyster 128/128]
-  The opposing Cloyster used Shell Smash!
-    (anim: StatDown)
-  The opposing Cloyster's Defense fell!
-  The opposing Cloyster's Special Defense fell!
-    (anim: StatUp)
-  The opposing Cloyster's Attack rose sharply!
-  The opposing Cloyster's Special Attack rose sharply!
-  The opposing Cloyster's Speed rose sharply!
-    (anim: UseItem)
-  The opposing Cloyster returned its status to normal using its White Herb!
+--- Turn 10 ---
+  [Magnezone 89/148 | Cloyster 128/128]
+  The opposing Cloyster used Icicle Spear!
+  The frozen lake lent its cold to Icicle Spear!
+    HP Magnezone (player): 89 -> 78 / 148
+    HP Magnezone (player): 78 -> 68 / 148
+    HP Magnezone (player): 68 -> 57 / 148
+    HP Magnezone (player): 57 -> 45 / 148
+    HP Magnezone (player): 45 -> 34 / 148
+  It's not very effective...
+  Hit 5 times!
   Magnezone used Thunderbolt!
-  The current raced across the water!
     HP Cloyster (foe): 128 -> 0 / 128
   It's super effective!
   The opposing Cloyster fainted!
@@ -202,21 +186,70 @@ Frozen Lake [FROZEN_LAKE] - Gym 10 Warden Anja vs challenger (Lv.51)
   Warden Anja is about to send out Matriarch. Will you switch your Pokémon?  [auto: No]
   Warden Anja sent out Matriarch!
     >> sent out (foe): Matriarch Lv.51 @NEVERMELTICE [THICKFAT]
+  The opposing Matriarch settled comfortably onto the ice!
+    (anim: StatUp)
+  The opposing Matriarch's Defense rose!
+
+--- Turn 11 ---
+  [Magnezone 34/148 | Matriarch 195/195]
+  The opposing Matriarch used Icicle Crash!
+  The frozen lake lent its cold to Icicle Crash!
+    HP Magnezone (player): 34 -> 0 / 148
+  It's not very effective...
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
+  (end of round)
+  You're in charge, Starmie!
+    >> sent out (player): Starmie Lv.51 [ILLUMINATE]
 
 --- Turn 12 ---
-  [Magnezone 52/148 | Matriarch 195/195]
-  The opposing Matriarch used Icicle Crash!
-    HP Magnezone (player): 52 -> 9 / 148
+  [Starmie 138/138 | Matriarch 195/195]
+  Starmie used Psychic!
+    HP Matriarch (foe): 195 -> 118 / 195
+  The opposing Matriarch used Earthquake!
+    HP Starmie (player): 138 -> 30 / 138
+  The quake splintered the ice into jagged spikes!
+  The lake ice groaned and cracked! (2 more)
+  (end of round)
+
+--- Turn 13 ---
+  [Starmie 30/138 | Matriarch 118/195]
+  The opposing Matriarch used Ice Shard!
+  The frozen lake lent its cold to Ice Shard!
+    HP Starmie (player): 30 -> 0 / 138
   It's not very effective...
-  Magnezone used Flash Cannon!
-    HP Matriarch (foe): 195 -> 0 / 195
-  A critical hit!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  The opposing Matriarch slid across the ice!
+    (anim: StatUp)
+  The opposing Matriarch's Speed rose!
+  The cold sealed the cracks in the ice!
+  (end of round)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.51 [BLAZE]
+
+--- Turn 14 ---
+  [Charizard 156/156 | Matriarch 118/195]
+  The opposing Matriarch used Icicle Crash!
+  The frozen lake lent its cold to Icicle Crash!
+    HP Charizard (player): 156 -> 0 / 156
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.51 [SERENEGRACE]
+
+--- Turn 15 ---
+  [Togekiss 163/163 | Matriarch 118/195]
+  The opposing Matriarch used Icicle Crash!
+  The frozen lake lent its cold to Icicle Crash!
+    HP Togekiss (player): 163 -> 0 / 163
   It's super effective!
-  The opposing Matriarch fainted!
-    xx fainted: Matriarch (foe)
-  You defeated Warden Anja!
-  The ice held for you. It doesn't hold for many.
-  You got $5,100 for winning!
-  battle result code: 1
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Anja!
+  You gave $5,176 to the winner...
+  battle result code: 2
   
-RESULT: player won after 11 turn(s)
+RESULT: player lost after 14 turn(s)

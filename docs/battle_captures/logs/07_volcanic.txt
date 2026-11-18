@@ -14,7 +14,7 @@ Volcanic Field [VOLCANIC] - Gym 7 Warden Brann vs challenger (Lv.39)
 ## FIELD CHANGE: NONE -> VOLCANIC
   Magma churns across the battlefield!
     (anim: UseItem)
-  Magmar's Elemental Seed ignited, searing it with volcanic power!
+  Magmar's Elemental Seed ignited, filling it with volcanic power!
     (anim: StatUp)
   Magmar's Attack rose!
   Magmar's Special Attack rose!
@@ -26,16 +26,21 @@ Volcanic Field [VOLCANIC] - Gym 7 Warden Brann vs challenger (Lv.39)
 --- Turn 1 ---
   [Magmar 111/111 | Torkoal 112/112]
   Magmar used Lava Plume!
-  The magma roared!
-  The lava surged!
+  Magmar drew fire up from the magma!
+  The lava surged up with Magmar!
     HP Torkoal (foe): 112 -> 0 / 112
   It's not very effective...
   The opposing Torkoal fainted!
     xx fainted: Torkoal (foe)
+  The ground heaves... the volcano is about to erupt!
   Magmar is at the level cap (Lv. 39) and can't gain Exp. Points.
   (end of round)
     (anim: Sun)
   The sunlight is strong.
+  The volcano erupted!
+  Magmar rode the eruption!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
   Warden Brann is about to send out Camerupt. Will you switch your Pokémon?  [auto: No]
   Warden Brann sent out Camerupt!
     >> sent out (foe): Camerupt Lv.37 @SITRUSBERRY [SOLIDROCK]
@@ -43,15 +48,20 @@ Volcanic Field [VOLCANIC] - Gym 7 Warden Brann vs challenger (Lv.39)
 --- Turn 2 ---
   [Magmar 111/111 | Camerupt 112/112]
   Magmar used Lava Plume!
-  The magma roared!
-  The lava surged!
+  Magmar drew fire up from the magma!
+  The lava surged up with Magmar!
     HP Camerupt (foe): 112 -> 0 / 112
   It's not very effective...
   The opposing Camerupt fainted!
     xx fainted: Camerupt (foe)
+  The ground heaves... the volcano is about to erupt!
   (end of round)
     (anim: Sun)
   The sunlight is strong.
+  The volcano erupted!
+  Magmar rode the eruption!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
   Warden Brann is about to send out Arcanine. Will you switch your Pokémon?  [auto: No]
   Warden Brann sent out Arcanine!
     >> sent out (foe): Arcanine Lv.38 @SITRUSBERRY [INTIMIDATE]
@@ -62,176 +72,103 @@ Volcanic Field [VOLCANIC] - Gym 7 Warden Brann vs challenger (Lv.39)
 --- Turn 3 ---
   [Magmar 111/111 | Arcanine 130/130]
   Magmar used Lava Plume!
-  The magma roared!
-  The lava surged!
-    HP Arcanine (foe): 130 -> 21 / 130
+  Magmar drew fire up from the magma!
+  The lava surged up with Magmar!
+    HP Arcanine (foe): 130 -> 0 / 130
   It's not very effective...
-    (anim: EatBerry)
-    HP Arcanine (foe): 21 -> 53 / 130
-  The opposing Arcanine restored its health using its Sitrus Berry!
-  The opposing Arcanine used Crunch!
-    HP Magmar (player): 111 -> 67 / 111
-    (anim: StatDown)
-  Magmar's Defense fell!
+  The opposing Arcanine fainted!
+    xx fainted: Arcanine (foe)
+  The ground heaves... the volcano is about to erupt!
   (end of round)
     (anim: Sun)
   The sunlight is strong.
+  The volcano erupted!
+  Magmar rode the eruption!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
+  Warden Brann is about to send out Magmortar. Will you switch your Pokémon?  [auto: No]
+  Warden Brann sent out Magmortar!
+    >> sent out (foe): Magmortar Lv.38 @CHARCOAL [FLAMEBODY]
 
 --- Turn 4 ---
-  [Magmar 67/111 | Arcanine 53/130]
-  Warden Brann used a Hyper Potion.
-    HP Arcanine (foe): 53 -> 130 / 130
-  The opposing Arcanine's HP was restored.
-  Magmar used Fire Punch!
-  The magma roared!
-    HP Arcanine (foe): 130 -> 87 / 130
+  [Magmar 111/111 | Magmortar 119/119]
+  Magmar used Lava Plume!
+  Magmar drew fire up from the magma!
+  The lava surged up with Magmar!
+    HP Magmortar (foe): 119 -> 0 / 119
+  It's not very effective...
+  The opposing Magmortar fainted!
+    xx fainted: Magmortar (foe)
+  The ground heaves... the volcano is about to erupt!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  The volcano erupted!
+  Magmar rode the eruption!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
+  Warden Brann is about to send out Anvil. Will you switch your Pokémon?  [auto: No]
+  Warden Brann sent out Anvil!
+    >> sent out (foe): Anvil Lv.39 @SITRUSBERRY [STEAMENGINE]
+
+--- Turn 5 ---
+  [Magmar 111/111 | Anvil 149/149]
+  Magmar used Lava Plume!
+  Magmar drew fire up from the magma!
+  The lava surged up with Magmar!
+    HP Anvil (foe): 149 -> 32 / 149
+  It's not very effective...
+    (anim: EatBerry)
+    HP Anvil (foe): 32 -> 69 / 149
+  The opposing Anvil restored its health using its Sitrus Berry!
+    [ability: Anvil (foe)'s Steam Engine]
+    (anim: StatUp)
+  The opposing Anvil's Speed rose drastically!
+  The ground heaves... the volcano is about to erupt!
+  The opposing Anvil used Heat Crash!
+  The opposing Anvil drew fire up from the magma!
+  The opposing Anvil crashed down like a lava bomb!
+    HP Magmar (player): 111 -> 8 / 111
   It's not very effective...
   (end of round)
     (anim: Sun)
   The sunlight is strong.
+  The volcano erupted!
+  The opposing Anvil rode the eruption!
+    (anim: StatUp)
+  The opposing Anvil's Special Attack rose!
+  Magmar rode the eruption!
+    (anim: StatUp)
+  Magmar's Special Attack rose!
 
---- Turn 5 ---
-  [Magmar 67/111 | Arcanine 87/130]
-  The opposing Arcanine used Extreme Speed!
-    HP Magmar (player): 67 -> 0 / 111
-    [ability: Magmar (player)'s Flame Body]
-  It doesn't affect the opposing Arcanine...
+--- Turn 6 ---
+  [Magmar 8/111 | Anvil 69/149]
+  The opposing Anvil used Rock Slide!
+  The rocks came out superheated!
+    HP Magmar (player): 8 -> 0 / 111
+  A critical hit!
   Magmar fainted!
     xx fainted: Magmar (player)
   (end of round)
     (anim: Sun)
   The sunlight is strong.
-  Go for it, Vaporeon!
+  Just a little more! Hang in there, Vaporeon!
     >> sent out (player): Vaporeon Lv.39 [WATERABSORB]
 
---- Turn 6 ---
-  [Vaporeon 162/162 | Arcanine 87/130]
-  The opposing Arcanine used Crunch!
-    HP Vaporeon (player): 162 -> 93 / 162
-  A critical hit!
-  Vaporeon used Shadow Ball!
-    HP Arcanine (foe): 87 -> 33 / 130
-  A critical hit!
-  (end of round)
-    (anim: Sun)
-  The sunlight is strong.
-    HP Vaporeon (player): 93 -> 88 / 162
-  Vaporeon was scorched by the magma!
-
 --- Turn 7 ---
-  [Vaporeon 88/162 | Arcanine 33/130]
-  Warden Brann used a Hyper Potion.
-    HP Arcanine (foe): 33 -> 130 / 130
-  The opposing Arcanine's HP was restored.
+  [Vaporeon 162/162 | Anvil 69/149]
+  The opposing Anvil used Stealth Rock!
+  Pointed stones float in the air around your team!
   Vaporeon used Scald!
   The magma brought the water to a boil!
-    HP Arcanine (foe): 130 -> 62 / 130
+    HP Anvil (foe): 69 -> 0 / 149
   It's super effective!
-  (end of round)
-    (anim: Sun)
-  The sunlight is strong.
-    HP Vaporeon (player): 88 -> 83 / 162
-  Vaporeon was scorched by the magma!
-
---- Turn 8 ---
-  [Vaporeon 83/162 | Arcanine 62/130]
-  The opposing Arcanine used Flare Blitz!
-  The magma roared!
-    HP Vaporeon (player): 83 -> 0 / 162
-  It's not very effective...
-  Vaporeon fainted!
-    xx fainted: Vaporeon (player)
-    HP Arcanine (foe): 62 -> 34 / 130
-  The opposing Arcanine is damaged by recoil!
-  (end of round)
-    (anim: Sun)
-  The sunlight is strong.
-  Just a little more! Hang in there, Graveler!
-    >> sent out (player): Graveler Lv.39 [ROCKHEAD]
-
---- Turn 9 ---
-  [Graveler 103/103 | Arcanine 34/130]
-  The opposing Arcanine used Flare Blitz!
-  The magma roared!
-    HP Graveler (player): 103 -> 38 / 103
-  It's not very effective...
-    HP Arcanine (foe): 34 -> 12 / 130
-  The opposing Arcanine is damaged by recoil!
-  Graveler used Bulldoze!
-    HP Arcanine (foe): 12 -> 0 / 130
-  It's super effective!
-  The opposing Arcanine fainted!
-    xx fainted: Arcanine (foe)
-  Graveler is at the level cap (Lv. 39) and can't gain Exp. Points.
-  (end of round)
-    (anim: Sun)
-  The sunlight is strong.
-    HP Graveler (player): 38 -> 35 / 103
-  Graveler was scorched by the magma!
-  Warden Brann is about to send out Magmortar. Will you switch your Pokémon?  [auto: No]
-  Warden Brann sent out Magmortar!
-    >> sent out (foe): Magmortar Lv.38 @CHARCOAL [FLAMEBODY]
-
---- Turn 10 ---
-  [Graveler 35/103 | Magmortar 119/119]
-  The opposing Magmortar used Flamethrower!
-  The magma roared!
-    HP Graveler (player): 35 -> 0 / 103
-  It's not very effective...
-  Graveler fainted!
-    xx fainted: Graveler (player)
-  (end of round)
-    (anim: Sun)
-  The sunlight is strong.
-  You're in charge, Ampharos!
-    >> sent out (player): Ampharos Lv.39 [STATIC]
-
---- Turn 11 ---
-  [Ampharos 131/131 | Magmortar 119/119]
-  The opposing Magmortar used Flamethrower!
-  The magma roared!
-    HP Ampharos (player): 131 -> 0 / 131
-  Ampharos fainted!
-    xx fainted: Ampharos (player)
-  (end of round)
-  The sunlight faded.
-  You're in charge, Pidgeot!
-    >> sent out (player): Pidgeot Lv.39 [KEENEYE]
-
---- Turn 12 ---
-  [Pidgeot 125/125 | Magmortar 119/119]
-  Pidgeot used Air Slash!
-    HP Magmortar (foe): 119 -> 91 / 119
-  The opposing Magmortar used Flamethrower!
-  The magma roared!
-    HP Pidgeot (player): 125 -> 0 / 125
-  Pidgeot fainted!
-    xx fainted: Pidgeot (player)
-  (end of round)
-  Go for it, Hariyama!
-    >> sent out (player): Hariyama Lv.39 [GUTS]
-
---- Turn 13 ---
-  [Hariyama 173/173 | Magmortar 91/119]
-  The opposing Magmortar used Flamethrower!
-  The magma roared!
-    HP Hariyama (player): 173 -> 28 / 173
-  Hariyama used Knock Off!
-    HP Magmortar (foe): 91 -> 42 / 119
-  The opposing Magmortar dropped its Charcoal!
-  (end of round)
-    HP Hariyama (player): 28 -> 17 / 173
-  Hariyama was scorched by the magma!
-
---- Turn 14 ---
-  [Hariyama 17/173 | Magmortar 42/119]
-  The opposing Magmortar used Thunderbolt!
-    HP Hariyama (player): 17 -> 0 / 173
-  Hariyama fainted!
-    xx fainted: Hariyama (player)
-  You have no more Pokémon that can fight!
-  You lost against Warden Brann!
-  You gave $3,120 to the winner...
-  battle result code: 2
+  The opposing Anvil fainted!
+    xx fainted: Anvil (foe)
+  Vaporeon is at the level cap (Lv. 39) and can't gain Exp. Points.
+  You defeated Warden Brann!
+  Ha! Tempered steel! That's what you are, aye!
+  You got $3,900 for winning!
+  battle result code: 1
   
-RESULT: player lost after 13 turn(s)
+RESULT: player won after 6 turn(s)

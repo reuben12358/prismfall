@@ -15,7 +15,7 @@ WATER_SURFACE probe: boosted move WATERPULSE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Water Pulse!
-  The waves amplified the attack!
+  Mew rode the waves into the attack!
     HP Snorlax (foe): 461 -> 395 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -72,16 +72,12 @@ WATER_SURFACE probe: transition [stage 1: moves DIVE -> UNDERWATER] using DIVE
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is struggling for air!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax is struggling for air!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 432/461]
+  [Mew 341/341 | Snorlax 461/461]
   Mew used Dive!
-  The deep currents empowered the attack!
-    HP Snorlax (foe): 432 -> 244 / 461
+  Mew surged through the deep!
+    HP Snorlax (foe): 461 -> 217 / 461
 ## FIELD CHANGE: UNDERWATER -> WATER_SURFACE
   The battle burst back up to the surface!
   The wild Snorlax used Splash!
@@ -89,7 +85,7 @@ WATER_SURFACE probe: transition [stage 1: moves DIVE -> UNDERWATER] using DIVE
   (end of round)
 
 --- Turn 3 ---
-  [Mew 320/341 | Snorlax 244/461]
+  [Mew 341/341 | Snorlax 217/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -97,10 +93,41 @@ WATER_SURFACE probe: transition [stage 1: moves DIVE -> UNDERWATER] using DIVE
   (end of round)
 
 --- Turn 4 ---
-  [Mew 320/341 | Snorlax 244/461]
+  [Mew 341/341 | Snorlax 217/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
+
+
+WATER_SURFACE probe: transition [stage 1: moves GRAVITY -> UNDERWATER] using GRAVITY
+====================================================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Gravity!
+  Gravity intensified!
+## FIELD CHANGE: WATER_SURFACE -> UNDERWATER
+  Gravity dragged the whole battle under the surface!
+  The wild Snorlax can't use Splash because of gravity!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
 
 
 WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x3 -> FROZEN_LAKE] using GLACIATE, GLACIATE, GLACIATE
@@ -120,7 +147,7 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
     HP Snorlax (foe): 461 -> 414 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
-  Ice spreads across the water... (2 more)
+  Ice is spreading across the water... (2 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -131,7 +158,7 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
     HP Snorlax (foe): 414 -> 363 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
-  Ice spreads across the water... (1 more)
+  Ice is spreading across the water... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -139,17 +166,17 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 363/461]
   Mew used Glaciate!
-    HP Snorlax (foe): 363 -> 312 / 461
+    HP Snorlax (foe): 363 -> 297 / 461
     (anim: StatDown)
   The wild Snorlax's Speed fell!
 ## FIELD CHANGE: WATER_SURFACE -> FROZEN_LAKE
-  The water froze solid!
+  The water froze solid! The battle is on the ice now!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 312/461]
+  [Mew 341/341 | Snorlax 297/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -157,10 +184,55 @@ WATER_SURFACE probe: transition [stage 1: moves BLIZZARD/SHEERCOLD/GLACIATE... x
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 312/461]
+  [Mew 341/341 | Snorlax 297/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)
+
+
+WATER_SURFACE probe: transition [stage 1: moves SLUDGEWAVE/TOXIC/ACIDSPRAY x2 -> CORROSIVE_MIRE] using SLUDGEWAVE, SLUDGEWAVE
+=============================================================================================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Wave!
+    HP Snorlax (foe): 461 -> 393 / 461
+  Sludge is spreading through the water... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 393/461]
+  Mew used Sludge Wave!
+    HP Snorlax (foe): 393 -> 297 / 461
+## FIELD CHANGE: WATER_SURFACE -> CORROSIVE_MIRE
+  The water turned to bubbling toxic murk!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 297/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 297/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
 
 
 WATER_SURFACE probe: Elemental Seed held on entry
@@ -234,47 +306,8 @@ WATER_SURFACE probe: end-of-round rule 1: cure_status on {:grounded=>true, :stat
 RESULT: fled/forfeit after 2 turn(s)
 
 
-WATER_SURFACE probe: end-of-round rule 2: cure_status on {:abilities=>[:HYDRATION]} [subject Florges]
-=====================================================================================================
-
---- Battle start ---
-  field: WATER_SURFACE | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Florges!
-    >> sent out (player): Florges Lv.100 [HYDRATION]
-## FIELD CHANGE: NONE -> WATER_SURFACE
-  The battle is taking place on the open water!
-
---- Turn 1 ---
-  [Florges 148/297 BURN | Snorlax 230/461]
-  Florges used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Burn)
-    HP Florges (player): 148 -> 130 / 297
-  Florges was hurt by its burn!
-  The cool water soothed Florges's burn!
-  Florges's burn was healed.
-
---- Turn 2 ---
-  [Florges 130/297 | Snorlax 230/461]
-  Florges used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-
---- Turn 3 ---
-  [Florges 130/297 | Snorlax 230/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)
-
-
-WATER_SURFACE probe: end-of-round rule 3: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]} [subject Florges]
-==========================================================================================================
+WATER_SURFACE probe: end-of-round rule 2: heal on {:abilities=>[:WATERABSORB]} [subject Florges]
+================================================================================================
 
 --- Battle start ---
   field: WATER_SURFACE | weather: None | terrain: None

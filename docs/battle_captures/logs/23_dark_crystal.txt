@@ -10,12 +10,9 @@ Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
   Hollow Keeper Teo sent out Carvanha!
     >> sent out (foe): Carvanha Lv.19 @ORANBERRY [ROUGHSKIN]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.21 @MAGICALSEED [INTIMIDATE]
+    >> sent out (player): Growlithe Lv.21 @MAGICALSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> DARK_CRYSTAL
   Darkness fills the cavern. The crystals have gone black...
-    [ability: Growlithe (player)'s Intimidate]
-    (anim: StatDown)
-  The opposing Carvanha's Attack fell!
     (anim: UseItem)
   Growlithe's Magical Seed drank in the darkness!
     (anim: StatUp)
@@ -25,110 +22,98 @@ Dark Crystal Cavern [DARK_CRYSTAL] - Hollow Keeper Teo vs challenger (Lv.21)
 --- Turn 1 ---
   [Growlithe 60/60 | Carvanha 49/49]
   The opposing Carvanha used Poison Fang!
-    HP Growlithe (player): 60 -> 51 / 60
+    HP Growlithe (player): 60 -> 48 / 60
     (anim: Toxic)
   Growlithe was badly poisoned!
   Growlithe used Ember!
-    HP Carvanha (foe): 49 -> 27 / 49
+    HP Carvanha (foe): 49 -> 31 / 49
   It's not very effective...
   (end of round)
     (anim: Toxic)
-    HP Growlithe (player): 51 -> 48 / 60
+    HP Growlithe (player): 48 -> 45 / 60
   Growlithe was hurt by poison!
 
 --- Turn 2 ---
-  [Growlithe 48/60 POISON | Carvanha 27/49]
-  The opposing Carvanha used Bite!
-  The darkness gave the attack teeth!
-    HP Growlithe (player): 48 -> 0 / 60
+  [Growlithe 45/60 POISON | Carvanha 31/49]
+  Growlithe used Flame Wheel!
+    HP Carvanha (foe): 31 -> 0 / 49
   A critical hit!
-  Growlithe fainted!
-    xx fainted: Growlithe (player)
-  (end of round)
-  Go for it, Machop!
-    >> sent out (player): Machop Lv.21 [NOGUARD]
-
---- Turn 3 ---
-  [Machop 66/66 | Carvanha 27/49]
-  The opposing Carvanha used Poison Fang!
-    HP Machop (player): 66 -> 58 / 66
-  Machop used Knock Off!
-  The darkness gave the attack teeth!
-    HP Carvanha (foe): 27 -> 0 / 49
   It's not very effective...
     [ability: Carvanha (foe)'s Rough Skin]
-    HP Machop (player): 58 -> 50 / 66
-  Machop is hurt!
+    HP Growlithe (player): 45 -> 38 / 60
+  Growlithe is hurt!
   The opposing Carvanha fainted!
     xx fainted: Carvanha (foe)
-  The opposing Carvanha dropped its Oran Berry!
-  Machop is at the level cap (Lv. 21) and can't gain Exp. Points.
+  Growlithe is at the level cap (Lv. 21) and can't gain Exp. Points.
   (end of round)
+    (anim: Toxic)
+    HP Growlithe (player): 38 -> 31 / 60
+  Growlithe was hurt by poison!
   Hollow Keeper Teo is about to send out Arrokuda. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Teo sent out Arrokuda!
     >> sent out (foe): Arrokuda Lv.20 @ORANBERRY [SWIFTSWIM]
 
+--- Turn 3 ---
+  [Growlithe 31/60 POISON | Arrokuda 50/50]
+  Growlithe used Bite!
+  The darkness gave Growlithe's attack teeth!
+    HP Arrokuda (foe): 50 -> 9 / 50
+    (anim: EatBerry)
+    HP Arrokuda (foe): 9 -> 19 / 50
+  The opposing Arrokuda restored a little HP using its Oran Berry!
+  The opposing Arrokuda flinched and couldn't move!
+  (end of round)
+    (anim: Toxic)
+    HP Growlithe (player): 31 -> 20 / 60
+  Growlithe was hurt by poison!
+
 --- Turn 4 ---
-  [Machop 50/66 | Arrokuda 50/50]
-  The opposing Arrokuda used Bite!
-  The darkness gave the attack teeth!
-    HP Machop (player): 50 -> 40 / 66
-  It's not very effective...
-  Machop flinched and couldn't move!
+  [Growlithe 20/60 POISON | Arrokuda 19/50]
+  OK, Growlithe! Come back!
+    << recalled: Growlithe (player)
+  Just a little more! Hang in there, Mareep!
+    >> sent out (player): Mareep Lv.21 [STATIC]
+  The opposing Arrokuda used Aqua Jet!
+  The opposing Arrokuda's attack missed!
   (end of round)
 
 --- Turn 5 ---
-  [Machop 40/66 | Arrokuda 50/50]
-  The opposing Arrokuda used Bite!
-  The darkness gave the attack teeth!
-    HP Machop (player): 40 -> 30 / 66
-  It's not very effective...
-  Machop used Knock Off!
-  The darkness gave the attack teeth!
+  [Mareep 60/60 | Arrokuda 19/50]
+  Hollow Keeper Teo used a Super Potion.
+    HP Arrokuda (foe): 19 -> 50 / 50
+  The opposing Arrokuda's HP was restored.
+  Mareep used Charge Beam!
     HP Arrokuda (foe): 50 -> 0 / 50
+  It's super effective!
   The opposing Arrokuda fainted!
     xx fainted: Arrokuda (foe)
-  The opposing Arrokuda dropped its Oran Berry!
+    (anim: StatUp)
+  Mareep's Special Attack rose!
+  A faint glow stirs within the crystals... (1 more)
+  Mareep is at the level cap (Lv. 21) and can't gain Exp. Points.
   (end of round)
   Hollow Keeper Teo is about to send out Snapper. Will you switch your Pokémon?  [auto: No]
   Hollow Keeper Teo sent out Snapper!
     >> sent out (foe): Snapper Lv.21 @SITRUSBERRY [STRONGJAW]
 
 --- Turn 6 ---
-  [Machop 30/66 | Snapper 55/55]
-  The opposing Snapper used Bite!
-  The darkness gave the attack teeth!
-    HP Machop (player): 30 -> 15 / 66
-  It's not very effective...
-  Machop flinched and couldn't move!
-  (end of round)
-
---- Turn 7 ---
-  [Machop 15/66 | Snapper 55/55]
-  The opposing Snapper used Headbutt!
-    HP Machop (player): 15 -> 0 / 66
-  Machop fainted!
-    xx fainted: Machop (player)
-  (end of round)
-  You're in charge, Mareep!
-    >> sent out (player): Mareep Lv.21 [STATIC]
-
---- Turn 8 ---
   [Mareep 60/60 | Snapper 55/55]
   The opposing Snapper used Bite!
-  The darkness gave the attack teeth!
-    HP Mareep (player): 60 -> 4 / 60
-  A critical hit!
-  Mareep used Thunder Shock!
+  The darkness gave the opposing Snapper's attack teeth!
+    HP Mareep (player): 60 -> 27 / 60
+  Mareep used Charge Beam!
     HP Snapper (foe): 55 -> 0 / 55
-  A critical hit!
   It's super effective!
   The opposing Snapper fainted!
     xx fainted: Snapper (foe)
-  Mareep is at the level cap (Lv. 21) and can't gain Exp. Points.
+    (anim: StatUp)
+  Mareep's Special Attack rose!
+## FIELD CHANGE: DARK_CRYSTAL -> CRYSTAL_CAVERN
+  Light flooded the crystals! The cavern glitters once more!
+  The crystals glow amethyst.
   You defeated Hollow Keeper Teo!
   Tell my sister— no. Don't tell her anything.
   You got $1,680 for winning!
   battle result code: 1
   
-RESULT: player won after 7 turn(s)
+RESULT: player won after 5 turn(s)

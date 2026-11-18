@@ -13,16 +13,18 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
     >> sent out (player): Growlithe Lv.15 @TELLURICSEED [INTIMIDATE]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
-  Growlithe blundered into a sticky web!
+  Growlithe stepped into a curtain of sticky silk!
     (anim: StatDown)
   Growlithe's Speed fell!
     [ability: Growlithe (player)'s Intimidate]
     (anim: StatDown)
   The opposing Joltik's Attack fell!
     (anim: UseItem)
-  Growlithe's Telluric Seed sprouted silk-threaded roots!
+  Growlithe's Telluric Seed spun a silk cocoon around it!
     (anim: StatUp)
   Growlithe's Defense rose!
+  Growlithe's Special Defense rose!
+  Growlithe's Speed fell!
 
 --- Turn 1 ---
   [Growlithe 46/46 | Joltik 38/38]
@@ -36,49 +38,84 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
   It's super effective!
   The opposing Joltik fainted!
     xx fainted: Joltik (foe)
-  Embers smoulder in the silk... (2 more)
+  Embers are catching in the silk... (2 more)
   Growlithe is at the level cap (Lv. 15) and can't gain Exp. Points.
   (end of round)
-    HP Growlithe (player): 44 -> 46 / 46
-  Growlithe absorbed nutrients with its roots!
   Warden Tamsin is about to send out Surskit. Will you switch your Pokémon?  [auto: No]
   Warden Tamsin sent out Surskit!
     >> sent out (foe): Surskit Lv.13 @ORANBERRY [SWIFTSWIM]
 
 --- Turn 2 ---
-  [Growlithe 46/46 | Surskit 35/35]
+  [Growlithe 44/46 | Surskit 35/35]
   The opposing Surskit used Sweet Scent!
     (anim: StatDown)
   Growlithe's evasiveness harshly fell!
   Growlithe used Flame Wheel!
   The flames raced along the silk!
-    HP Surskit (foe): 35 -> 0 / 35
-  A critical hit!
+    HP Surskit (foe): 35 -> 3 / 35
+    (anim: EatBerry)
+    HP Surskit (foe): 3 -> 13 / 35
+  The opposing Surskit restored a little HP using its Oran Berry!
+  Embers are catching in the silk... (1 more)
+  (end of round)
+  The opposing Surskit sipped nectar from the silk-hung blossoms.
+    HP Surskit (foe): 13 -> 15 / 35
+
+--- Turn 3 ---
+  [Growlithe 44/46 | Surskit 15/35]
+  Warden Tamsin used a Super Potion.
+    HP Surskit (foe): 15 -> 35 / 35
+  The opposing Surskit's HP was restored.
+  Growlithe used Ember!
+  The flames raced along the silk!
+    HP Surskit (foe): 35 -> 14 / 35
+## FIELD CHANGE: SILKWOOD -> WILDFIRE
+  The silk caught! Flames leap from web to web - the Silkwood is ablaze!
+  (end of round)
+
+--- Turn 4 ---
+  [Growlithe 44/46 | Surskit 14/35]
+  The opposing Surskit used Water Gun!
+    HP Growlithe (player): 44 -> 31 / 46
+  It's super effective!
+  Growlithe used Flame Wheel!
+  Growlithe drew the wildfire into its attack!
+    HP Surskit (foe): 14 -> 0 / 35
   The opposing Surskit fainted!
     xx fainted: Surskit (foe)
-  Embers smoulder in the silk... (1 more)
+  The flames roared higher!
   (end of round)
   Warden Tamsin is about to send out Bobbin. Will you switch your Pokémon?  [auto: No]
   Warden Tamsin sent out Bobbin!
     >> sent out (foe): Bobbin Lv.15 @EVIOLITE [OVERCOAT]
 
---- Turn 3 ---
-  [Growlithe 46/46 | Bobbin 44/44]
+--- Turn 5 ---
+  [Growlithe 31/46 | Bobbin 44/44]
   The opposing Bobbin used Bug Bite!
-  The Silkwood hums with chittering life!
-    HP Growlithe (player): 46 -> 37 / 46
+    HP Growlithe (player): 31 -> 24 / 46
   It's not very effective...
-  Growlithe used Flame Wheel!
-  The flames raced along the silk!
-    HP Bobbin (foe): 44 -> 0 / 44
+  Growlithe used Ember!
+  Growlithe drew the wildfire into its attack!
+    HP Bobbin (foe): 44 -> 1 / 44
+  It's super effective!
+  The flames roared higher!
+  (end of round)
+
+--- Turn 6 ---
+  [Growlithe 24/46 | Bobbin 1/44]
+  The opposing Bobbin used Bug Bite!
+    HP Growlithe (player): 24 -> 18 / 46
+  It's not very effective...
+  Growlithe used Ember!
+  Growlithe drew the wildfire into its attack!
+    HP Bobbin (foe): 1 -> 0 / 44
   It's super effective!
   The opposing Bobbin fainted!
     xx fainted: Bobbin (foe)
-## FIELD CHANGE: SILKWOOD -> ASHEN_WASTE
-  The webs went up in flames! The Silkwood burned down to ash!
+  The flames roared higher!
   You defeated Warden Tamsin!
   Oh! You've unpicked every stitch. Well sewn, challenger.
   You got $1,500 for winning!
   battle result code: 1
   
-RESULT: player won after 2 turn(s)
+RESULT: player won after 5 turn(s)

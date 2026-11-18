@@ -15,18 +15,15 @@ UNDERWATER probe: boosted move WATERPULSE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Water Pulse!
-  The deep currents empowered the attack!
-    HP Snorlax (foe): 461 -> 375 / 461
+  Mew surged through the deep!
+  The pulse rippled out through the deep!
+    HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is struggling for air!
-    HP Snorlax (foe): 375 -> 346 / 461
-  The wild Snorlax is struggling for air!
 
 --- Turn 2 ---
-  [Mew 320/341 | Snorlax 346/461]
+  [Mew 341/341 | Snorlax 362/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -56,8 +53,8 @@ UNDERWATER probe: boosted move WATERPULSE (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-UNDERWATER probe: transition [stage 1: moves DIVE/BOUNCE -> WATER_SURFACE] using DIVE
-=====================================================================================
+UNDERWATER probe: transition [stage 1: moves DIVE/BOUNCE/FLY... -> WATER_SURFACE] using DIVE
+============================================================================================
 
 --- Battle start ---
   field: UNDERWATER | weather: None | terrain: None
@@ -80,32 +77,70 @@ UNDERWATER probe: transition [stage 1: moves DIVE/BOUNCE -> WATER_SURFACE] using
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Dive!
-  The waves amplified the attack!
-    HP Snorlax (foe): 461 -> 297 / 461
+  Mew rode the waves into the attack!
+  Mew burst up from the deep!
+    HP Snorlax (foe): 461 -> 249 / 461
 ## FIELD CHANGE: WATER_SURFACE -> UNDERWATER
   The battle plunged beneath the waves!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 341 -> 320 / 341
-  Mew is struggling for air!
-    HP Snorlax (foe): 297 -> 268 / 461
-  The wild Snorlax is struggling for air!
 
 --- Turn 3 ---
-  [Mew 320/341 | Snorlax 268/461]
+  [Mew 341/341 | Snorlax 249/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Mew (player): 320 -> 299 / 341
-  Mew is struggling for air!
-    HP Snorlax (foe): 268 -> 239 / 461
-  The wild Snorlax is struggling for air!
 
 --- Turn 4 ---
-  [Mew 299/341 | Snorlax 239/461]
+  [Mew 341/341 | Snorlax 249/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+UNDERWATER probe: transition [stage 1: moves SLUDGEWAVE x2 -> CORROSIVE_MIRE] using SLUDGEWAVE, SLUDGEWAVE
+==========================================================================================================
+
+--- Battle start ---
+  field: UNDERWATER | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> UNDERWATER
+  Blue silence presses in from every side... The battle is underwater!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sludge Wave!
+    HP Snorlax (foe): 461 -> 393 / 461
+  A toxic cloud is spreading through the water... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 393/461]
+  Mew used Sludge Wave!
+    HP Snorlax (foe): 393 -> 297 / 461
+## FIELD CHANGE: UNDERWATER -> CORROSIVE_MIRE
+  The water turned black with toxins! The battle surfaced into a bubbling mire!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 297/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 297/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
@@ -122,9 +157,10 @@ UNDERWATER probe: Elemental Seed held on entry
 ## FIELD CHANGE: NONE -> UNDERWATER
   Blue silence presses in from every side... The battle is underwater!
     (anim: UseItem)
-  Mew's Elemental Seed released a bubble of air around it!
+  Mew's Elemental Seed released a shimmering bubble of air around it!
     (anim: StatUp)
-  Mew's Defense rose!
+  Mew's Speed rose!
+  Mew adapted to the deep and became Water type!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
@@ -135,61 +171,15 @@ UNDERWATER probe: Elemental Seed held on entry
   (end of round)
     HP Mew (player): 170 -> 191 / 341
   Aqua Ring restored Mew's HP!
-    HP Mew (player): 191 -> 170 / 341
-  Mew is struggling for air!
-    HP Snorlax (foe): 461 -> 432 / 461
-  The wild Snorlax is struggling for air!
 
 --- Turn 2 ---
-  [Mew 170/341 | Snorlax 432/461]
+  [Mew 191/341 | Snorlax 461/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
 
 
-UNDERWATER probe: end-of-round rule 1: damage on {:not_types=>[:WATER], :not_abilities=>[:WATERABSORB, :DRYSKIN, :STORMDRAIN, :SWIFTSWIM, :WATERVEIL]} [subject Florges]
-========================================================================================================================================================================
-
---- Battle start ---
-  field: UNDERWATER | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Florges!
-    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
-## FIELD CHANGE: NONE -> UNDERWATER
-  Blue silence presses in from every side... The battle is underwater!
-
---- Turn 1 ---
-  [Florges 148/297 | Snorlax 230/461]
-  Florges used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    HP Florges (player): 148 -> 129 / 297
-  Florges is struggling for air!
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax is struggling for air!
-
---- Turn 2 ---
-  [Florges 129/297 | Snorlax 201/461]
-  Florges used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    HP Florges (player): 129 -> 110 / 297
-  Florges is struggling for air!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax is struggling for air!
-
---- Turn 3 ---
-  [Florges 110/297 | Snorlax 172/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)
-
-
-UNDERWATER probe: end-of-round rule 2: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]} [subject Florges]
+UNDERWATER probe: end-of-round rule 1: heal on {:abilities=>[:WATERABSORB, :DRYSKIN]} [subject Florges]
 =======================================================================================================
 
 --- Battle start ---
@@ -207,25 +197,21 @@ UNDERWATER probe: end-of-round rule 2: heal on {:abilities=>[:WATERABSORB, :DRYS
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Snorlax (foe): 230 -> 201 / 461
-  The wild Snorlax is struggling for air!
   Florges drank in the sea.
     HP Florges (player): 148 -> 167 / 297
 
 --- Turn 2 ---
-  [Florges 167/297 | Snorlax 201/461]
+  [Florges 167/297 | Snorlax 230/461]
   Florges used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-    HP Snorlax (foe): 201 -> 172 / 461
-  The wild Snorlax is struggling for air!
   Florges drank in the sea.
     HP Florges (player): 167 -> 186 / 297
 
 --- Turn 3 ---
-  [Florges 186/297 | Snorlax 172/461]
+  [Florges 186/297 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)

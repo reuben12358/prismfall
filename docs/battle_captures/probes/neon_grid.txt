@@ -15,7 +15,7 @@ NEON_GRID probe: boosted move THUNDERBOLT (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Thunderbolt!
-  The neon grid surged!
+  Mew drew power straight from the grid!
     HP Snorlax (foe): 461 -> 362 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -52,8 +52,8 @@ NEON_GRID probe: boosted move THUNDERBOLT (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-NEON_GRID probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 -> NONE] using EARTHQUAKE, EARTHQUAKE
-=====================================================================================================================
+NEON_GRID probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 -> stage 2] using EARTHQUAKE, EARTHQUAKE
+========================================================================================================================
 
 --- Battle start ---
   field: NEON_GRID | weather: None | terrain: None
@@ -75,15 +75,15 @@ NEON_GRID probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 
 --- Turn 2 ---
   [Mew 341/341 | Snorlax 351/461]
   Mew used Earthquake!
-    HP Snorlax (foe): 351 -> 238 / 461
-## FIELD CHANGE: NEON_GRID -> NONE
-  The grid shorted out! The neon lights went dark.
+    HP Snorlax (foe): 351 -> 235 / 461
+## FIELD STAGE: NEON_GRID is now stage 2
+  The grid shorted out! The neon lights died - only sparks light the dark!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 238/461]
+  [Mew 341/341 | Snorlax 235/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -91,10 +91,183 @@ NEON_GRID probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x2 
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 238/461]
+  [Mew 341/341 | Snorlax 235/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
+
+
+NEON_GRID probe: transition [stage 1: moves SURF/MUDDYWATER/HYDROPUMP... x2 -> stage 2] using SURF, SURF
+========================================================================================================
+
+--- Battle start ---
+  field: NEON_GRID | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEON_GRID
+  Neon circuitry hums beneath your feet!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Surf!
+  The current ran straight through Surf!
+    HP Snorlax (foe): 461 -> 396 / 461
+  Water is seeping into the circuits... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 396/461]
+  Mew used Surf!
+  The current ran straight through Surf!
+    HP Snorlax (foe): 396 -> 326 / 461
+## FIELD STAGE: NEON_GRID is now stage 2
+  The flood shorted out the grid! Sparks crackle in the dark!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 326/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 326/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+NEON_GRID probe: transition [stage 1: moves MUDSPORT -> stage 2] using MUDSPORT
+===============================================================================
+
+--- Battle start ---
+  field: NEON_GRID | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEON_GRID
+  Neon circuitry hums beneath your feet!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Mud Sport!
+  Electricity's power was weakened!
+## FIELD STAGE: NEON_GRID is now stage 2
+  Mud fouled the circuits! The grid went dark!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+NEON_GRID probe: transition [stage 2: moves CHARGE/DISCHARGE/PARABOLICCHARGE... x2 -> stage 1] using CHARGE, CHARGE
+===================================================================================================================
+
+--- Battle start ---
+  field: NEON_GRID (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEON_GRID
+  The grid is dark! Live sparks crackle across the floor...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Charge!
+  Mew began charging power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+  The grid flickers with returning power... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Charge!
+  Mew began charging power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+## FIELD STAGE: NEON_GRID is now stage 1
+  Power restored! The Neon Grid hums back to life!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+NEON_GRID probe: transition [stage 2: terrain Electric -> stage 1] using ELECTRICTERRAIN
+========================================================================================
+
+--- Battle start ---
+  field: NEON_GRID (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> NEON_GRID
+  The grid is dark! Live sparks crackle across the floor...
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Electric Terrain!
+    (anim: ElectricTerrain)
+  An electric current runs across the battlefield!
+## FIELD STAGE: NEON_GRID is now stage 1
+  The electrified terrain rebooted the grid!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: ElectricTerrain)
+  An electric current is running across the battlefield.
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: ElectricTerrain)
+  An electric current is running across the battlefield.
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
 
 
 NEON_GRID probe: Synthetic Seed held on entry
@@ -127,39 +300,42 @@ NEON_GRID probe: Synthetic Seed held on entry
 RESULT: fled/forfeit after 1 turn(s)
 
 
-NEON_GRID probe: end-of-round rule 1: status on {:grounded=>true, :not_types=>[:ELECTRIC, :GROUND]} [subject Snorlax]
-=====================================================================================================================
+NEON_GRID probe: end-of-round rule 1: stats on {:abilities=>[:MOTORDRIVE], :grounded=>true} [subject Florges]
+=============================================================================================================
 
 --- Battle start ---
   field: NEON_GRID | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
-  Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+  Go! Florges!
+    >> sent out (player): Florges Lv.100 [MOTORDRIVE]
 ## FIELD CHANGE: NONE -> NEON_GRID
   Neon circuitry hums beneath your feet!
+  Florges soaked up current from the grid!
 
 --- Turn 1 ---
-  [Snorlax 230/461 | Snorlax 230/461]
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
-  Snorlax used Splash!
-  But nothing happened!
   (end of round)
-    (anim: Paralysis)
-  The wild Snorlax was jolted by a stray current!
-    (anim: Paralysis)
-  Snorlax was jolted by a stray current!
+  Florges drew current from the grid!
+    (anim: StatUp)
+  Florges's Speed rose!
 
 --- Turn 2 ---
-  [Snorlax 230/461 PARALYSIS | Snorlax 230/461 PARALYSIS]
-    (anim: Paralysis)
-  The wild Snorlax is paralyzed! It can't move!
-    (anim: Paralysis)
-  Snorlax is paralyzed! It can't move!
+  [Florges 148/297 | Snorlax 230/461]
+  Florges used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
   (end of round)
+  Florges drew current from the grid!
+    (anim: StatUp)
+  Florges's Speed rose!
 
 --- Turn 3 ---
-  [Snorlax 230/461 PARALYSIS | Snorlax 230/461 PARALYSIS]
+  [Florges 148/297 | Snorlax 230/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 2 turn(s)

@@ -115,7 +115,7 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   [Mew 341/341 | Snorlax 359/461]
   Mew used Blizzard!
   The mountain wind howled behind Blizzard!
-    HP Snorlax (foe): 359 -> 249 / 461
+    HP Snorlax (foe): 359 -> 216 / 461
 ## FIELD CHANGE: MOUNTAIN -> SNOWY_MOUNTAIN
   A snowstorm swept over the peaks!
   The wild Snorlax used Splash!
@@ -123,7 +123,7 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 249/461]
+  [Mew 341/341 | Snorlax 216/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -131,27 +131,71 @@ MOUNTAIN probe: transition [stage 1: moves BLIZZARD/MOUNTAINGALE/SHEERCOLD... x2
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 249/461]
+  [Mew 341/341 | Snorlax 216/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
 
 
-MOUNTAIN probe: Elemental Seed held on entry
-============================================
+MOUNTAIN probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x2 -> VOLCANIC] using ERUPTION, ERUPTION
+====================================================================================================================
 
 --- Battle start ---
   field: MOUNTAIN | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Mew!
-    >> sent out (player): Mew Lv.100 @ELEMENTALSEED [SYNCHRONIZE]
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> MOUNTAIN
+  The wind howls across the mountain ridge!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Eruption!
+    HP Snorlax (foe): 461 -> 354 / 461
+  The mountain rumbles from deep within... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 354/461]
+  Mew used Eruption!
+    HP Snorlax (foe): 354 -> 207 / 461
+## FIELD CHANGE: MOUNTAIN -> VOLCANIC
+  The mountain erupted! Magma pours down the slopes!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 207/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 207/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+MOUNTAIN probe: Telluric Seed held on entry
+===========================================
+
+--- Battle start ---
+  field: MOUNTAIN | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @TELLURICSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> MOUNTAIN
   The wind howls across the mountain ridge!
     (anim: UseItem)
-  Mew's Elemental Seed caught the mountain wind!
+  Mew's Telluric Seed caught the mountain wind!
     (anim: StatUp)
   Mew's Speed rose!
-  The Tailwind blew from behind your team!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]

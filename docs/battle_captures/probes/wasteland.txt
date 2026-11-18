@@ -15,14 +15,14 @@ WASTELAND probe: boosted move SLUDGEBOMB (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Sludge Bomb!
-  Toxic slag bubbled up from the ground!
-    HP Snorlax (foe): 461 -> 382 / 461
+  Toxic slag bubbled up with Sludge Bomb!
+    HP Snorlax (foe): 461 -> 366 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 382/461]
+  [Mew 341/341 | Snorlax 366/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -93,8 +93,8 @@ WASTELAND probe: transition [stage 1: terrain Grassy -> FLOWER_GARDEN] using GRA
 RESULT: fled/forfeit after 2 turn(s)
 
 
-WASTELAND probe: transition [stage 1: moves PURIFY x2 -> NONE] using PURIFY, PURIFY
-===================================================================================
+WASTELAND probe: transition [stage 1: moves PURIFY x2 -> MEADOW] using PURIFY, PURIFY
+=====================================================================================
 
 --- Battle start ---
   field: WASTELAND | weather: None | terrain: None
@@ -117,8 +117,8 @@ WASTELAND probe: transition [stage 1: moves PURIFY x2 -> NONE] using PURIFY, PUR
   [Mew 341/341 | Snorlax 461/461]
   Mew used Purify!
   Mew's HP is full!
-## FIELD CHANGE: WASTELAND -> NONE
-  The blight lifted, and the land could breathe again.
+## FIELD CHANGE: WASTELAND -> MEADOW
+  The blight lifted! Grass ripples across land that can breathe again!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -173,67 +173,7 @@ WASTELAND probe: Telluric Seed held on entry
 RESULT: fled/forfeit after 1 turn(s)
 
 
-WASTELAND probe: end-of-round rule 1: damage on {:not_types=>[:POISON, :STEEL], :not_abilities=>[:OVERCOAT]} +condition [subject Snorlax, after RAINDANCE]
-==========================================================================================================================================================
-
---- Battle start ---
-  field: WASTELAND | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Snorlax!
-    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
-## FIELD CHANGE: NONE -> WASTELAND
-  Poisoned slag and dead trees stretch to a jaundiced horizon...
-
---- Turn 1 ---
-  [Snorlax 230/461 | Snorlax 230/461]
-  The wild Snorlax used Splash!
-  But nothing happened!
-  Snorlax used Rain Dance!
-  It started to rain!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Snorlax (foe): 230 -> 201 / 461
-  The acid rain burned the wild Snorlax!
-    HP Snorlax (player): 230 -> 201 / 461
-  The acid rain burned Snorlax!
-
---- Turn 2 ---
-  [Snorlax 201/461 | Snorlax 201/461]
-  Snorlax used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Snorlax (player): 201 -> 172 / 461
-  The acid rain burned Snorlax!
-    HP Snorlax (foe): 201 -> 172 / 461
-  The acid rain burned the wild Snorlax!
-
---- Turn 3 ---
-  [Snorlax 172/461 | Snorlax 172/461]
-  Snorlax used Splash!
-  But nothing happened!
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Rain)
-  Rain continues to fall.
-    HP Snorlax (player): 172 -> 143 / 461
-  The acid rain burned Snorlax!
-    HP Snorlax (foe): 172 -> 143 / 461
-  The acid rain burned the wild Snorlax!
-
---- Turn 4 ---
-  [Snorlax 143/461 | Snorlax 143/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 3 turn(s)
-
-
-WASTELAND probe: end-of-round rule 2: heal on {:abilities=>[:POISONHEAL], :status=>[:POISON]} [subject Florges]
+WASTELAND probe: end-of-round rule 1: heal on {:abilities=>[:POISONHEAL], :status=>[:POISON]} [subject Florges]
 ===============================================================================================================
 
 --- Battle start ---

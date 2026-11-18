@@ -15,7 +15,7 @@ HOLLOW_CATHEDRAL probe: boosted move SHADOWBALL (on field)
 --- Turn 1 ---
   [Mew 341/341 | Milotic 331/331]
   Mew used Shadow Ball!
-  The restless spirits howled!
+  The restless spirits rose up behind Mew!
     HP Milotic (foe): 331 -> 252 / 331
   The wild Milotic used Splash!
   But nothing happened!
@@ -50,6 +50,63 @@ HOLLOW_CATHEDRAL probe: boosted move SHADOWBALL (baseline, no field)
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
+
+
+HOLLOW_CATHEDRAL probe: transition [stage 1: moves SACREDFIRE/SACREDSWORD/JUDGMENT... x3 -> stage 2] using SACREDFIRE, SACREDFIRE, SACREDFIRE
+=============================================================================================================================================
+
+--- Battle start ---
+  field: HOLLOW_CATHEDRAL | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> HOLLOW_CATHEDRAL
+  Candles gutter in the ruined nave... Restless spirits stir in the gloom.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Sacred Fire!
+  The flames burned with an eerie ghostfire!
+  Light streamed through the stained glass!
+    HP Snorlax (foe): 461 -> 318 / 461
+    (anim: Burn)
+  The wild Snorlax was burned!
+  The cathedral bell stirs... (2 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Burn)
+    HP Snorlax (foe): 318 -> 290 / 461
+  The wild Snorlax was hurt by its burn!
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 290/461 BURN]
+  Mew used Sacred Fire!
+  The flames burned with an eerie ghostfire!
+  Light streamed through the stained glass!
+    HP Snorlax (foe): 290 -> 136 / 461
+  The cathedral bell stirs... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Burn)
+    HP Snorlax (foe): 136 -> 108 / 461
+  The wild Snorlax was hurt by its burn!
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 108/461 BURN]
+  Mew used Sacred Fire!
+  The flames burned with an eerie ghostfire!
+  Light streamed through the stained glass!
+    HP Snorlax (foe): 108 -> 0 / 461
+  The wild Snorlax fainted!
+    xx fainted: Snorlax (foe)
+## FIELD STAGE: HOLLOW_CATHEDRAL is now stage 2
+  The bell tolled! Holy light fills the nave and the spirits fall silent.
+  Mew is at the level cap (Lv. 100) and can't gain Exp. Points.
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)
 
 
 HOLLOW_CATHEDRAL probe: transition [stage 1: moves TOPSYTURVY -> INVERSE] using GROWL, TOPSYTURVY
@@ -122,7 +179,7 @@ HOLLOW_CATHEDRAL probe: transition [stage 1: moves BOOMBURST/SHADOWFORCE/HYPERSP
   [Mew 341/341 | Snorlax 332/461]
   Mew used Boomburst!
   Boomburst echoed through the nave!
-    HP Snorlax (foe): 332 -> 196 / 461
+    HP Snorlax (foe): 332 -> 154 / 461
 ## FIELD CHANGE: HOLLOW_CATHEDRAL -> INVERSE
   The mirrored glass shattered! The Kingdom Behind the Glass pours through!
   The wild Snorlax used Splash!
@@ -130,7 +187,7 @@ HOLLOW_CATHEDRAL probe: transition [stage 1: moves BOOMBURST/SHADOWFORCE/HYPERSP
   (end of round)
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 196/461]
+  [Mew 341/341 | Snorlax 154/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -138,70 +195,13 @@ HOLLOW_CATHEDRAL probe: transition [stage 1: moves BOOMBURST/SHADOWFORCE/HYPERSP
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 196/461]
+  [Mew 341/341 | Snorlax 154/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
 
 
-HOLLOW_CATHEDRAL probe: transition [stage 1: moves SACREDFIRE/SACREDSWORD/JUDGMENT... x3 -> stage 2] using SACREDFIRE, SACREDFIRE, SACREDFIRE
-=============================================================================================================================================
-
---- Battle start ---
-  field: HOLLOW_CATHEDRAL | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Mew!
-    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
-## FIELD CHANGE: NONE -> HOLLOW_CATHEDRAL
-  Candles gutter in the ruined nave... Restless spirits stir in the gloom.
-
---- Turn 1 ---
-  [Mew 341/341 | Snorlax 461/461]
-  Mew used Sacred Fire!
-  The flames burned with an eerie ghostfire!
-  Light streamed through the stained glass!
-    HP Snorlax (foe): 461 -> 318 / 461
-    (anim: Burn)
-  The wild Snorlax was burned!
-  The cathedral bell stirs... (2 more)
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Burn)
-    HP Snorlax (foe): 318 -> 290 / 461
-  The wild Snorlax was hurt by its burn!
-
---- Turn 2 ---
-  [Mew 341/341 | Snorlax 290/461 BURN]
-  Mew used Sacred Fire!
-  The flames burned with an eerie ghostfire!
-  Light streamed through the stained glass!
-    HP Snorlax (foe): 290 -> 136 / 461
-  The cathedral bell stirs... (1 more)
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    (anim: Burn)
-    HP Snorlax (foe): 136 -> 108 / 461
-  The wild Snorlax was hurt by its burn!
-
---- Turn 3 ---
-  [Mew 341/341 | Snorlax 108/461 BURN]
-  Mew used Sacred Fire!
-  The flames burned with an eerie ghostfire!
-  Light streamed through the stained glass!
-    HP Snorlax (foe): 108 -> 0 / 461
-  The wild Snorlax fainted!
-    xx fainted: Snorlax (foe)
-## FIELD STAGE: HOLLOW_CATHEDRAL is now stage 2
-  The bell tolled! Holy light fills the nave and the spirits fall silent.
-  Mew is at the level cap (Lv. 100) and can't gain Exp. Points.
-  battle result code: 1
-  
-RESULT: player won after 2 turn(s)
-
-
-HOLLOW_CATHEDRAL probe: transition [stage 2: moves CURSE/SPITE/GRUDGE... x2 -> stage 1] using SPITE, SPITE
+HOLLOW_CATHEDRAL probe: transition [stage 2: moves CURSE/SPITE/GRUDGE... x2 -> stage 1] using CURSE, CURSE
 ==========================================================================================================
 
 --- Battle start ---
@@ -218,31 +218,40 @@ HOLLOW_CATHEDRAL probe: transition [stage 2: moves CURSE/SPITE/GRUDGE... x2 -> s
   [Dusknoir 231/231 | Milotic 331/331]
   The wild Milotic used Splash!
   But nothing happened!
-  Dusknoir used Spite!
-  It reduced the PP of the wild Milotic's Splash by 4!
+  Dusknoir used Curse!
+  Dusknoir cut its own HP and laid a curse on the wild Milotic!
+    HP Dusknoir (player): 231 -> 116 / 231
   The candles flicker and dim... (1 more)
   (end of round)
+    HP Milotic (foe): 331 -> 249 / 331
+  The wild Milotic is afflicted by the curse!
+  The holy light lifted the curse on the wild Milotic!
 
 --- Turn 2 ---
-  [Dusknoir 231/231 | Milotic 331/331]
+  [Dusknoir 116/231 | Milotic 249/331]
   The wild Milotic used Splash!
   But nothing happened!
-  Dusknoir used Spite!
-  It reduced the PP of the wild Milotic's Splash by 4!
+  Dusknoir used Curse!
+  Dusknoir cut its own HP and laid a curse on the wild Milotic!
+    HP Dusknoir (player): 116 -> 1 / 231
 ## FIELD STAGE: HOLLOW_CATHEDRAL is now stage 1
   The candles guttered out! The restless spirits return to the nave.
   (end of round)
+    HP Milotic (foe): 249 -> 167 / 331
+  The wild Milotic is afflicted by the curse!
 
 --- Turn 3 ---
-  [Dusknoir 231/231 | Milotic 331/331]
+  [Dusknoir 1/231 | Milotic 167/331]
   The wild Milotic used Splash!
   But nothing happened!
   Dusknoir used Splash!
   But nothing happened!
   (end of round)
+    HP Milotic (foe): 167 -> 85 / 331
+  The wild Milotic is afflicted by the curse!
 
 --- Turn 4 ---
-  [Dusknoir 231/231 | Milotic 331/331]
+  [Dusknoir 1/231 | Milotic 85/331]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
@@ -262,7 +271,6 @@ HOLLOW_CATHEDRAL probe: Magical Seed held on entry
   Mew's Magical Seed let a wandering spirit possess it!
     (anim: StatUp)
   Mew's Special Defense rose!
-  Mew became part Ghost type!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
@@ -277,41 +285,3 @@ HOLLOW_CATHEDRAL probe: Magical Seed held on entry
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
-
-
-HOLLOW_CATHEDRAL probe: end-of-round rule 1: damage on {:status=>[:SLEEP], :not_types=>[:GHOST]} [subject Florges]
-==================================================================================================================
-
---- Battle start ---
-  field: HOLLOW_CATHEDRAL | weather: None | terrain: None
-  Oh! A wild Snorlax appeared!
-  Go! Florges!
-    >> sent out (player): Florges Lv.100 [FLOWERVEIL]
-## FIELD CHANGE: NONE -> HOLLOW_CATHEDRAL
-  Candles gutter in the ruined nave... Restless spirits stir in the gloom.
-
---- Turn 1 ---
-  [Florges 148/297 SLEEP | Snorlax 230/461]
-    (anim: Sleep)
-  Florges is fast asleep.
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    HP Florges (player): 148 -> 129 / 297
-  Florges is tormented by spirits in its sleep!
-
---- Turn 2 ---
-  [Florges 129/297 SLEEP | Snorlax 230/461]
-    (anim: Sleep)
-  Florges is fast asleep.
-  The wild Snorlax used Splash!
-  But nothing happened!
-  (end of round)
-    HP Florges (player): 129 -> 110 / 297
-  Florges is tormented by spirits in its sleep!
-
---- Turn 3 ---
-  [Florges 110/297 SLEEP | Snorlax 230/461]
-  battle result code: 3
-  
-RESULT: fled/forfeit after 2 turn(s)

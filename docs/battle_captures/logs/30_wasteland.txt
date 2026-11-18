@@ -36,62 +36,63 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
 
 --- Turn 2 ---
   [Garchomp 335/357 POISON | Klinklang 204/271]
-  The opposing Klinklang used Substitute!
-    HP Klinklang (foe): 204 -> 137 / 271
-  The opposing Klinklang put in a substitute!
+  The opposing Klinklang used Shift Gear!
+    (anim: StatUp)
+  The opposing Klinklang's Speed rose sharply!
+  The opposing Klinklang's Attack rose!
   Garchomp used Fire Fang!
-  The substitute took damage for the opposing Klinklang!
+    HP Klinklang (foe): 204 -> 29 / 271
   It's super effective!
-  The opposing Klinklang's substitute faded!
+    (anim: EatBerry)
+    HP Klinklang (foe): 29 -> 96 / 271
+  The opposing Klinklang restored its health using its Sitrus Berry!
   (end of round)
     (anim: Toxic)
     HP Garchomp (player): 335 -> 291 / 357
   Garchomp was hurt by poison!
 
 --- Turn 3 ---
-  [Garchomp 291/357 POISON | Klinklang 137/271]
-  The opposing Klinklang used Shift Gear!
-    (anim: StatUp)
-  The opposing Klinklang's Speed rose sharply!
-  The opposing Klinklang's Attack rose!
+  [Garchomp 291/357 POISON | Klinklang 96/271]
+  Meridian CEO Aurelian used a Full Restore.
+    HP Klinklang (foe): 96 -> 271 / 271
+  The opposing Klinklang's HP was restored.
   Garchomp used Fire Fang!
-    HP Klinklang (foe): 137 -> 0 / 271
+    HP Klinklang (foe): 271 -> 102 / 271
   It's super effective!
-  The opposing Klinklang fainted!
-    xx fainted: Klinklang (foe)
-  Garchomp is at the level cap (Lv. 100) and can't gain Exp. Points.
   (end of round)
     (anim: Toxic)
     HP Garchomp (player): 291 -> 225 / 357
   Garchomp was hurt by poison!
-  Meridian CEO Aurelian is about to send out Porygon-Z. Will you switch your Pokémon?  [auto: No]
-  Meridian CEO Aurelian sent out Porygon-Z!
-    >> sent out (foe): Porygon-Z Lv.99 @CHOICESCARF [ADAPTABILITY]
 
 --- Turn 4 ---
-  [Garchomp 225/357 POISON | Porygon-Z 328/328]
+  [Garchomp 225/357 POISON | Klinklang 102/271]
   Garchomp, come back!
     << recalled: Garchomp (player)
-  You're in charge, Lucario!
+  Just a little more! Hang in there, Lucario!
     >> sent out (player): Lucario Lv.100 [STEADFAST]
-  The opposing Porygon-Z used Ice Beam!
-    HP Lucario (player): 281 -> 217 / 281
+  The opposing Klinklang used Gear Grind!
+    HP Lucario (player): 281 -> 226 / 281
+    HP Lucario (player): 226 -> 172 / 281
   It's not very effective...
+  Hit 2 times!
   (end of round)
 
 --- Turn 5 ---
-  [Lucario 217/281 | Porygon-Z 328/328]
-  The opposing Porygon-Z used Ice Beam!
-    HP Lucario (player): 217 -> 157 / 281
+  [Lucario 172/281 | Klinklang 102/271]
+  The opposing Klinklang used Gear Grind!
+    HP Lucario (player): 172 -> 117 / 281
+    HP Lucario (player): 117 -> 61 / 281
   It's not very effective...
+  Hit 2 times!
   Lucario used Close Combat!
-    HP Porygon-Z (foe): 328 -> 0 / 328
+    HP Klinklang (foe): 102 -> 0 / 271
   It's super effective!
     (anim: StatDown)
   Lucario's Defense fell!
   Lucario's Special Defense fell!
-  The opposing Porygon-Z fainted!
-    xx fainted: Porygon-Z (foe)
+  The opposing Klinklang fainted!
+    xx fainted: Klinklang (foe)
+  Garchomp is at the level cap (Lv. 100) and can't gain Exp. Points.
   Lucario is at the level cap (Lv. 100) and can't gain Exp. Points.
   (end of round)
   Meridian CEO Aurelian is about to send out Gilder. Will you switch your Pokémon?  [auto: No]
@@ -99,31 +100,31 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
     >> sent out (foe): Gilder Lv.97 @LIFEORB [NOGUARD]
 
 --- Turn 6 ---
-  [Lucario 157/281 | Gilder 330/330]
+  [Lucario 61/281 | Gilder 330/330]
   Lucario used Flash Cannon!
-    HP Gilder (foe): 330 -> 215 / 330
+    HP Gilder (foe): 330 -> 206 / 330
   The opposing Gilder used Dynamic Punch!
-    HP Lucario (player): 157 -> 0 / 281
+    HP Lucario (player): 61 -> 0 / 281
   It's super effective!
   Lucario fainted!
     xx fainted: Lucario (player)
-    HP Gilder (foe): 215 -> 182 / 330
+    HP Gilder (foe): 206 -> 173 / 330
   The opposing Gilder lost some of its HP!
   (end of round)
   Go for it, Starmie!
     >> sent out (player): Starmie Lv.100 [NATURALCURE]
 
 --- Turn 7 ---
-  [Starmie 261/261 | Gilder 182/330]
+  [Starmie 261/261 | Gilder 173/330]
   Starmie used Ice Beam!
-    HP Gilder (foe): 182 -> 19 / 330
+    HP Gilder (foe): 173 -> 6 / 330
   It's super effective!
   The opposing Gilder used Dynamic Punch!
-    HP Starmie (player): 261 -> 184 / 261
+    HP Starmie (player): 261 -> 190 / 261
   It's not very effective...
     (anim: Confusion)
   Starmie became confused!
-    HP Gilder (foe): 19 -> 0 / 330
+    HP Gilder (foe): 6 -> 0 / 330
   The opposing Gilder lost some of its HP!
   The opposing Gilder fainted!
     xx fainted: Gilder (foe)
@@ -134,14 +135,14 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
     >> sent out (foe): Magnezone Lv.96 @CHOICESPECS [MAGNETPULL]
 
 --- Turn 8 ---
-  [Starmie 184/261 | Magnezone 290/290]
+  [Starmie 190/261 | Magnezone 290/290]
     (anim: Confusion)
   Starmie is confused!
-  Starmie used Ice Beam!
-    HP Magnezone (foe): 290 -> 256 / 290
+  Starmie used Psychic!
+    HP Magnezone (foe): 290 -> 231 / 290
   It's not very effective...
   The opposing Magnezone used Thunderbolt!
-    HP Starmie (player): 184 -> 0 / 261
+    HP Starmie (player): 190 -> 0 / 261
   It's super effective!
   Starmie fainted!
     xx fainted: Starmie (player)
@@ -150,55 +151,84 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
     >> sent out (player): Garchomp Lv.100 [SANDVEIL]
 
 --- Turn 9 ---
-  [Garchomp 225/357 POISON | Magnezone 256/290]
+  [Garchomp 225/357 POISON | Magnezone 231/290]
   Meridian CEO Aurelian withdrew Magnezone!
     << recalled: Magnezone (foe)
-  Meridian CEO Aurelian sent out Archaludon!
-    >> sent out (foe): Archaludon Lv.97 @POWERHERB [STAMINA]
+  Meridian CEO Aurelian sent out Porygon-Z!
+    >> sent out (foe): Porygon-Z Lv.99 @CHOICESCARF [ADAPTABILITY]
   Garchomp used Earthquake!
-    HP Archaludon (foe): 332 -> 88 / 332
-  It's super effective!
-    [ability: Archaludon (foe)'s Stamina]
-    (anim: StatUp)
-  The opposing Archaludon's Defense rose!
+  The slag heaps soaked up the shock...
+    HP Porygon-Z (foe): 328 -> 242 / 328
   (end of round)
     (anim: Toxic)
     HP Garchomp (player): 225 -> 203 / 357
   Garchomp was hurt by poison!
 
 --- Turn 10 ---
-  [Garchomp 203/357 POISON | Archaludon 88/332]
-  Meridian CEO Aurelian used a Full Restore.
-    HP Archaludon (foe): 88 -> 332 / 332
-  The opposing Archaludon's HP was restored.
-  Garchomp used Earthquake!
-    HP Archaludon (foe): 332 -> 167 / 332
+  [Garchomp 203/357 POISON | Porygon-Z 242/328]
+  The opposing Porygon-Z used Ice Beam!
+    HP Garchomp (player): 203 -> 0 / 357
   It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Go for it, Magnezone!
+    >> sent out (player): Magnezone Lv.100 [MAGNETPULL]
+
+--- Turn 11 ---
+  [Magnezone 281/281 | Porygon-Z 242/328]
+  The opposing Porygon-Z used Ice Beam!
+    HP Magnezone (player): 281 -> 226 / 281
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Porygon-Z (foe): 242 -> 87 / 328
+  (end of round)
+
+--- Turn 12 ---
+  [Magnezone 226/281 | Porygon-Z 87/328]
+  The opposing Porygon-Z used Ice Beam!
+    HP Magnezone (player): 226 -> 177 / 281
+  It's not very effective...
+  Magnezone used Thunderbolt!
+    HP Porygon-Z (foe): 87 -> 0 / 328
+  The opposing Porygon-Z fainted!
+    xx fainted: Porygon-Z (foe)
+  Magnezone is at the level cap (Lv. 100) and can't gain Exp. Points.
+  (end of round)
+  Meridian CEO Aurelian is about to send out Archaludon. Will you switch your Pokémon?  [auto: No]
+  Meridian CEO Aurelian sent out Archaludon!
+    >> sent out (foe): Archaludon Lv.97 @POWERHERB [STAMINA]
+
+--- Turn 13 ---
+  [Magnezone 177/281 | Archaludon 332/332]
+  The opposing Archaludon used Flash Cannon!
+    HP Magnezone (player): 177 -> 141 / 281
+  It's not very effective...
+    (anim: StatDown)
+  Magnezone's Special Defense fell!
+  Magnezone used Thunderbolt!
+    HP Archaludon (foe): 332 -> 243 / 332
+  It's not very effective...
     [ability: Archaludon (foe)'s Stamina]
     (anim: StatUp)
   The opposing Archaludon's Defense rose!
   (end of round)
-    (anim: Toxic)
-    HP Garchomp (player): 203 -> 159 / 357
-  Garchomp was hurt by poison!
 
---- Turn 11 ---
-  [Garchomp 159/357 POISON | Archaludon 167/332]
-  Garchomp used Fire Fang!
-  Garchomp's attack missed!
+--- Turn 14 ---
+  [Magnezone 141/281 | Archaludon 243/332]
   The opposing Archaludon used Body Press!
-    HP Garchomp (player): 159 -> 0 / 357
-  A critical hit!
-  Garchomp fainted!
-    xx fainted: Garchomp (player)
+    HP Magnezone (player): 141 -> 0 / 281
+  It's super effective!
+  Magnezone fainted!
+    xx fainted: Magnezone (player)
   (end of round)
   Go for it, Charizard!
     >> sent out (player): Charizard Lv.100 [BLAZE]
 
---- Turn 12 ---
-  [Charizard 297/297 | Archaludon 167/332]
+--- Turn 15 ---
+  [Charizard 297/297 | Archaludon 243/332]
   Charizard used Flamethrower!
-    HP Archaludon (foe): 167 -> 11 / 332
+    HP Archaludon (foe): 243 -> 96 / 332
     [ability: Archaludon (foe)'s Stamina]
     (anim: StatUp)
   The opposing Archaludon's Defense rose!
@@ -213,50 +243,11 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
   Charizard fainted!
     xx fainted: Charizard (player)
   (end of round)
-  Your opponent's weak! Get 'em, Magnezone!
-    >> sent out (player): Magnezone Lv.100 [STURDY]
-
---- Turn 13 ---
-  [Magnezone 281/281 | Archaludon 11/332]
-  Meridian CEO Aurelian used a Full Restore.
-    HP Archaludon (foe): 11 -> 332 / 332
-  The opposing Archaludon's HP was restored.
-  Magnezone used Thunderbolt!
-    HP Archaludon (foe): 332 -> 245 / 332
-  It's not very effective...
-    [ability: Archaludon (foe)'s Stamina]
-    (anim: StatUp)
-  The opposing Archaludon's Defense rose!
-  (end of round)
-
---- Turn 14 ---
-  [Magnezone 281/281 | Archaludon 245/332]
-  The opposing Archaludon used Body Press!
-    HP Magnezone (player): 281 -> 1 / 281
-  It's super effective!
-    [ability: Magnezone (player)'s Sturdy]
-  Magnezone endured the hit!
-  Magnezone used Thunderbolt!
-    HP Archaludon (foe): 245 -> 154 / 332
-  It's not very effective...
-    [ability: Archaludon (foe)'s Stamina]
-    (anim: StatUp)
-  The opposing Archaludon's Defense rose!
-  (end of round)
-
---- Turn 15 ---
-  [Magnezone 1/281 | Archaludon 154/332]
-  The opposing Archaludon used Body Press!
-    HP Magnezone (player): 1 -> 0 / 281
-  It's super effective!
-  Magnezone fainted!
-    xx fainted: Magnezone (player)
-  (end of round)
   Just a little more! Hang in there, Togekiss!
-    >> sent out (player): Togekiss Lv.100 [HUSTLE]
+    >> sent out (player): Togekiss Lv.100 [SERENEGRACE]
 
 --- Turn 16 ---
-  [Togekiss 311/311 | Archaludon 154/332]
+  [Togekiss 311/311 | Archaludon 96/332]
   The opposing Archaludon used Flash Cannon!
     HP Togekiss (player): 311 -> 0 / 311
   It's super effective!
@@ -264,6 +255,7 @@ Wasteland [WASTELAND] - Meridian CEO Aurelian vs challenger (Lv.100)
     xx fainted: Togekiss (player)
   You have no more Pokémon that can fight!
   You lost against Meridian CEO Aurelian!
+  You gave $216 to the winner...
   battle result code: 2
   
 RESULT: player lost after 15 turn(s)

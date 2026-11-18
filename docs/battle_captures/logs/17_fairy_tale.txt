@@ -22,202 +22,197 @@ Fairy Tale [FAIRY_TALE] - Gym 17 Warden Celestine vs challenger (Lv.80)
 --- Turn 1 ---
   [Garchomp 287/287 | Alcremie 229/229]
   Garchomp used Fire Fang!
-  The dragon breathed fire!
-    HP Alcremie (foe): 229 -> 160 / 229
+  Garchomp breathed searing dragonfire!
+    HP Alcremie (foe): 229 -> 176 / 229
   The opposing Alcremie used Dazzling Gleam!
-  The storybook's magic sparkled!
+  The storybook's magic sparkled through Dazzling Gleam!
     HP Garchomp (player): 287 -> 80 / 287
   It's super effective!
   (end of round)
     (anim: UseItem)
-    HP Alcremie (foe): 160 -> 174 / 229
+    HP Alcremie (foe): 176 -> 190 / 229
   The opposing Alcremie restored a little HP using its Leftovers!
 
 --- Turn 2 ---
-  [Garchomp 80/287 | Alcremie 174/229]
+  [Garchomp 80/287 | Alcremie 190/229]
   Garchomp used Fire Fang!
-  Garchomp's attack missed!
+  Garchomp breathed searing dragonfire!
+    HP Alcremie (foe): 190 -> 131 / 229
+  The opposing Alcremie flinched and couldn't move!
+  (end of round)
+    (anim: UseItem)
+    HP Alcremie (foe): 131 -> 145 / 229
+  The opposing Alcremie restored a little HP using its Leftovers!
+
+--- Turn 3 ---
+  [Garchomp 80/287 | Alcremie 145/229]
+  Garchomp used Fire Fang!
+  Garchomp breathed searing dragonfire!
+    HP Alcremie (foe): 145 -> 87 / 229
   The opposing Alcremie used Dazzling Gleam!
-  The storybook's magic sparkled!
+  The storybook's magic sparkled through Dazzling Gleam!
     HP Garchomp (player): 80 -> 0 / 287
   It's super effective!
   Garchomp fainted!
     xx fainted: Garchomp (player)
   (end of round)
     (anim: UseItem)
-    HP Alcremie (foe): 174 -> 188 / 229
+    HP Alcremie (foe): 87 -> 101 / 229
   The opposing Alcremie restored a little HP using its Leftovers!
-  Go for it, Magnezone!
+  Just a little more! Hang in there, Magnezone!
     >> sent out (player): Magnezone Lv.80 [MAGNETPULL]
 
---- Turn 3 ---
-  [Magnezone 226/226 | Alcremie 188/229]
+--- Turn 4 ---
+  [Magnezone 226/226 | Alcremie 101/229]
   The opposing Alcremie used Mystical Fire!
-    HP Magnezone (player): 226 -> 108 / 226
-  It's super effective!
+  The opposing Alcremie breathed searing dragonfire!
+    HP Magnezone (player): 226 -> 132 / 226
     (anim: StatDown)
   Magnezone's Special Attack fell!
-  Magnezone used Flash Cannon!
-  Magnezone charged in like a knight in shining armor!
-    HP Alcremie (foe): 188 -> 54 / 229
-  It's super effective!
-    (anim: StatDown)
-  The opposing Alcremie's Special Defense fell!
+  Magnezone used Thunderbolt!
+    HP Alcremie (foe): 101 -> 41 / 229
   (end of round)
     (anim: UseItem)
-    HP Alcremie (foe): 54 -> 68 / 229
+    HP Alcremie (foe): 41 -> 55 / 229
   The opposing Alcremie restored a little HP using its Leftovers!
 
---- Turn 4 ---
-  [Magnezone 108/226 | Alcremie 68/229]
+--- Turn 5 ---
+  [Magnezone 132/226 | Alcremie 55/229]
+  Warden Celestine used a Full Restore.
+    HP Alcremie (foe): 55 -> 229 / 229
+  The opposing Alcremie's HP was restored.
+  Magnezone used Thunderbolt!
+    HP Alcremie (foe): 229 -> 167 / 229
+  (end of round)
+    (anim: UseItem)
+    HP Alcremie (foe): 167 -> 181 / 229
+  The opposing Alcremie restored a little HP using its Leftovers!
+
+--- Turn 6 ---
+  [Magnezone 132/226 | Alcremie 181/229]
   The opposing Alcremie used Mystical Fire!
-    HP Magnezone (player): 108 -> 0 / 226
-  It's super effective!
+  The opposing Alcremie breathed searing dragonfire!
+    HP Magnezone (player): 132 -> 46 / 226
+    (anim: StatDown)
+  Magnezone's Special Attack fell!
+  Magnezone used Thunderbolt!
+    HP Alcremie (foe): 181 -> 134 / 229
+  (end of round)
+    (anim: UseItem)
+    HP Alcremie (foe): 134 -> 148 / 229
+  The opposing Alcremie restored a little HP using its Leftovers!
+
+--- Turn 7 ---
+  [Magnezone 46/226 | Alcremie 148/229]
+  The opposing Alcremie used Dazzling Gleam!
+  The storybook's magic sparkled through Dazzling Gleam!
+    HP Magnezone (player): 46 -> 0 / 226
+  It's not very effective...
   Magnezone fainted!
     xx fainted: Magnezone (player)
   (end of round)
     (anim: UseItem)
-    HP Alcremie (foe): 68 -> 82 / 229
+    HP Alcremie (foe): 148 -> 162 / 229
   The opposing Alcremie restored a little HP using its Leftovers!
-  Just a little more! Hang in there, Starmie!
+  Go for it, Starmie!
     >> sent out (player): Starmie Lv.80 [ILLUMINATE]
 
---- Turn 5 ---
-  [Starmie 210/210 | Alcremie 82/229]
-  Starmie used Psychic!
-    HP Alcremie (foe): 82 -> 0 / 229
-  The opposing Alcremie fainted!
-    xx fainted: Alcremie (foe)
-  Starmie is at the level cap (Lv. 80) and can't gain Exp. Points.
-  (end of round)
-  Warden Celestine is about to send out Tinkaton. Will you switch your Pokémon?  [auto: No]
-  Warden Celestine sent out Tinkaton!
-    >> sent out (foe): Tinkaton Lv.79 @SITRUSBERRY [MOLDBREAKER]
-    [ability: Tinkaton (foe)'s Mold Breaker]
-  The opposing Tinkaton breaks the mold!
-
---- Turn 6 ---
-  [Starmie 210/210 | Tinkaton 264/264]
-  Starmie used Thunderbolt!
-    HP Tinkaton (foe): 264 -> 210 / 264
-  The opposing Tinkaton used Stealth Rock!
-  Pointed stones float in the air around your team!
-  (end of round)
-
---- Turn 7 ---
-  [Starmie 210/210 | Tinkaton 210/264]
-  Starmie used Surf!
-    HP Tinkaton (foe): 210 -> 134 / 264
-  The opposing Tinkaton used Play Rough!
-  The storybook's magic sparkled!
-    HP Starmie (player): 210 -> 79 / 210
-  (end of round)
-
 --- Turn 8 ---
-  [Starmie 79/210 | Tinkaton 134/264]
+  [Starmie 210/210 | Alcremie 162/229]
+  Starmie used Psychic!
+    HP Alcremie (foe): 162 -> 91 / 229
+  The opposing Alcremie used Dazzling Gleam!
+  The storybook's magic sparkled through Dazzling Gleam!
+    HP Starmie (player): 210 -> 53 / 210
+  (end of round)
+    (anim: UseItem)
+    HP Alcremie (foe): 91 -> 105 / 229
+  The opposing Alcremie restored a little HP using its Leftovers!
+
+--- Turn 9 ---
+  [Starmie 53/210 | Alcremie 105/229]
   Starmie used Thunderbolt!
-    HP Tinkaton (foe): 134 -> 82 / 264
-    (anim: EatBerry)
-    HP Tinkaton (foe): 82 -> 148 / 264
-  The opposing Tinkaton restored its health using its Sitrus Berry!
-  The opposing Tinkaton used Knock Off!
-    HP Starmie (player): 79 -> 0 / 210
-  It's super effective!
+    HP Alcremie (foe): 105 -> 56 / 229
+  The opposing Alcremie used Dazzling Gleam!
+  The storybook's magic sparkled through Dazzling Gleam!
+    HP Starmie (player): 53 -> 0 / 210
   Starmie fainted!
     xx fainted: Starmie (player)
   (end of round)
-  Go for it, Lucario!
-    >> sent out (player): Lucario Lv.80 [STEADFAST]
-    HP Lucario (player): 226 -> 219 / 226
-  Pointed stones dug into Lucario!
-
---- Turn 9 ---
-  [Lucario 219/226 | Tinkaton 148/264]
-  The opposing Tinkaton used Play Rough!
-  The storybook's magic sparkled!
-    HP Lucario (player): 219 -> 77 / 226
-  Lucario used Flash Cannon!
-  Lucario charged in like a knight in shining armor!
-    HP Tinkaton (foe): 148 -> 47 / 264
-    (anim: StatDown)
-  The opposing Tinkaton's Special Defense fell!
-  (end of round)
+    (anim: UseItem)
+    HP Alcremie (foe): 56 -> 70 / 229
+  The opposing Alcremie restored a little HP using its Leftovers!
+  Just a little more! Hang in there, Charizard!
+    >> sent out (player): Charizard Lv.80 [BLAZE]
 
 --- Turn 10 ---
-  [Lucario 77/226 | Tinkaton 47/264]
-  Warden Celestine used a Full Restore.
-    HP Tinkaton (foe): 47 -> 264 / 264
-  The opposing Tinkaton's HP was restored.
-  Lucario used Aura Sphere!
-    HP Tinkaton (foe): 264 -> 157 / 264
-  (end of round)
-
---- Turn 11 ---
-  [Lucario 77/226 | Tinkaton 157/264]
-  The opposing Tinkaton used Play Rough!
-  The storybook's magic sparkled!
-    HP Lucario (player): 77 -> 0 / 226
-  Lucario fainted!
-    xx fainted: Lucario (player)
-  (end of round)
-  Go for it, Charizard!
-    >> sent out (player): Charizard Lv.80 [BLAZE]
-    HP Charizard (player): 239 -> 119 / 239
-  Pointed stones dug into Charizard!
-
---- Turn 12 ---
-  [Charizard 119/239 | Tinkaton 157/264]
-  The opposing Tinkaton used Play Rough!
-  The storybook's magic sparkled!
-    HP Charizard (player): 119 -> 47 / 239
-  It's not very effective...
-  Charizard used Flamethrower!
-    HP Tinkaton (foe): 157 -> 0 / 264
-  It's super effective!
-  The opposing Tinkaton fainted!
-    xx fainted: Tinkaton (foe)
+  [Charizard 239/239 | Alcremie 70/229]
+  Charizard used Air Slash!
+  Charizard wielded Air Slash like a true knight!
+    HP Alcremie (foe): 70 -> 0 / 229
+  The opposing Alcremie fainted!
+    xx fainted: Alcremie (foe)
   Charizard is at the level cap (Lv. 80) and can't gain Exp. Points.
   (end of round)
   Warden Celestine is about to send out Azumarill. Will you switch your Pokémon?  [auto: No]
   Warden Celestine sent out Azumarill!
     >> sent out (foe): Azumarill Lv.79 @SITRUSBERRY [HUGEPOWER]
 
---- Turn 13 ---
-  [Charizard 47/239 | Azumarill 288/288]
-  The opposing Azumarill used Aqua Jet!
-    HP Charizard (player): 47 -> 0 / 239
+--- Turn 11 ---
+  [Charizard 239/239 | Azumarill 288/288]
+  Charizard used Flamethrower!
+  Charizard breathed searing dragonfire!
+    HP Azumarill (foe): 288 -> 236 / 288
+  It's not very effective...
+  The opposing Azumarill used Liquidation!
+    HP Charizard (player): 239 -> 0 / 239
   It's super effective!
   Charizard fainted!
     xx fainted: Charizard (player)
   (end of round)
-  You're in charge, Togekiss!
-    >> sent out (player): Togekiss Lv.80 [HUSTLE]
-    HP Togekiss (player): 250 -> 187 / 250
-  Pointed stones dug into Togekiss!
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.80 [INNERFOCUS]
 
---- Turn 14 ---
-  [Togekiss 187/250 | Azumarill 288/288]
-  Togekiss used Air Slash!
-  Togekiss wielded Air Slash like a true knight!
-    HP Azumarill (foe): 288 -> 176 / 288
-  The opposing Azumarill flinched and couldn't move!
-  (end of round)
-
---- Turn 15 ---
-  [Togekiss 187/250 | Azumarill 176/288]
-  Togekiss used Flamethrower!
-    HP Azumarill (foe): 176 -> 138 / 288
-  It's not very effective...
+--- Turn 12 ---
+  [Lucario 226/226 | Azumarill 236/288]
+  Lucario used Flash Cannon!
+  Lucario charged in like a knight in shining armor!
+    HP Azumarill (foe): 236 -> 121 / 288
     (anim: EatBerry)
-    HP Azumarill (foe): 138 -> 210 / 288
+    HP Azumarill (foe): 121 -> 193 / 288
   The opposing Azumarill restored its health using its Sitrus Berry!
   The opposing Azumarill used Play Rough!
-  The storybook's magic sparkled!
-    HP Togekiss (player): 187 -> 0 / 250
+  The storybook's magic sparkled through Play Rough!
+    HP Lucario (player): 226 -> 0 / 226
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  Go for it, Togekiss!
+    >> sent out (player): Togekiss Lv.80 [SERENEGRACE]
+
+--- Turn 13 ---
+  [Togekiss 250/250 | Azumarill 193/288]
+  Togekiss used Flamethrower!
+  Togekiss breathed searing dragonfire!
+    HP Azumarill (foe): 193 -> 159 / 288
+  It's not very effective...
+  The opposing Azumarill used Liquidation!
+    HP Togekiss (player): 250 -> 136 / 250
+  (end of round)
+
+--- Turn 14 ---
+  [Togekiss 136/250 | Azumarill 159/288]
+  Togekiss used Flamethrower!
+  Togekiss breathed searing dragonfire!
+    HP Azumarill (foe): 159 -> 124 / 288
+  It's not very effective...
+  The opposing Azumarill used Play Rough!
+  The storybook's magic sparkled through Play Rough!
+    HP Togekiss (player): 136 -> 0 / 250
   Togekiss fainted!
     xx fainted: Togekiss (player)
   You have no more Pokémon that can fight!
   You lost against Warden Celestine!
   battle result code: 2
   
-RESULT: player lost after 14 turn(s)
+RESULT: player lost after 13 turn(s)

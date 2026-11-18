@@ -62,7 +62,7 @@ PRISM_ARENA rotation: Lv.25 Arceus (Multitype) for 20 rounds, Judgment every 3rd
   The wild Cresselia used Splash!
   But nothing happened!
   Arceus used Judgment!
-  The magma roared!
+  Arceus drew fire up from the magma!
     HP Cresselia (foe): 372 -> 358 / 381
   (end of round)
   The Plates turn! The Splash Plate blazes, and the arena becomes the Water Surface!
@@ -91,7 +91,7 @@ PRISM_ARENA rotation: Lv.25 Arceus (Multitype) for 20 rounds, Judgment every 3rd
   The wild Cresselia used Splash!
   But nothing happened!
   Arceus used Judgment!
-  The waves amplified the attack!
+  Arceus rode the waves into the attack!
     HP Cresselia (foe): 358 -> 345 / 381
   (end of round)
   The Plates turn! The Meadow Plate blazes, and the arena becomes the Flower Garden!
@@ -148,7 +148,7 @@ PRISM_ARENA rotation: Lv.25 Arceus (Multitype) for 20 rounds, Judgment every 3rd
   The wild Cresselia used Splash!
   But nothing happened!
   Arceus used Judgment!
-  The neon grid surged!
+  Arceus drew power straight from the grid!
     HP Cresselia (foe): 334 -> 315 / 381
   A critical hit!
   (end of round)
@@ -178,7 +178,7 @@ PRISM_ARENA rotation: Lv.25 Arceus (Multitype) for 20 rounds, Judgment every 3rd
   The wild Cresselia used Splash!
   But nothing happened!
   Arceus used Judgment!
-  The frozen lake chilled the attack!
+  The frozen lake lent its cold to Judgment!
     HP Cresselia (foe): 315 -> 302 / 381
   (end of round)
   The Plates turn! The Fist Plate blazes, and the arena becomes the Colosseum!

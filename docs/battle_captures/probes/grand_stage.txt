@@ -16,13 +16,13 @@ GRAND_STAGE probe: boosted move SWIFT (on field)
   [Mew 341/341 | Snorlax 461/461]
   Mew used Swift!
   The crowd roared for Mew!
-    HP Snorlax (foe): 461 -> 395 / 461
+    HP Snorlax (foe): 461 -> 403 / 461
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 395/461]
+  [Mew 341/341 | Snorlax 403/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 1 turn(s)
@@ -52,25 +52,385 @@ GRAND_STAGE probe: boosted move SWIFT (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-GRAND_STAGE probe: Magical Seed held on entry
-=============================================
+GRAND_STAGE probe: transition [stage 1: flags Dance x2 -> stage +1] using QUIVERDANCE, QUIVERDANCE
+==================================================================================================
 
 --- Battle start ---
   field: GRAND_STAGE | weather: None | terrain: None
   Oh! A wild Snorlax appeared!
   Go! Mew!
-    >> sent out (player): Mew Lv.100 @MAGICALSEED [SYNCHRONIZE]
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Quiver Dance!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The audience cheered Mew's performance!
+    (anim: StatUp)
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Quiver Dance!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The audience cheered Mew's performance!
+    (anim: StatUp)
+  Mew's Speed rose!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  The audience is warming up! Encore!
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 1: flags Sound, category damaging x2 -> stage +1] using OVERDRIVE, OVERDRIVE
+=================================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Overdrive!
+  Overdrive rang through the opera house!
+    HP Snorlax (foe): 461 -> 386 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 386/461]
+  Mew used Overdrive!
+  Overdrive rang through the opera house!
+    HP Snorlax (foe): 386 -> 306 / 461
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  The audience is warming up! Encore!
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 306/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 306/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 1: moves CELEBRATE/ENCORE/FAKEOUT... x2 -> stage +1] using CELEBRATE, CELEBRATE
+====================================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Celebrate!
+  Congratulations, Tester!
+  A standing ovation for Mew!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Defense rose!
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Celebrate!
+  Congratulations, Tester!
+  A standing ovation for Mew!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Defense rose!
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  The audience is warming up! Encore!
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 1: moves PROTECT/DETECT/SUBSTITUTE... -> stage -1] using PROTECT
+=====================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The audience calls for an encore!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Protect!
+  Mew protected itself!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 2: flags Dance x2 -> stage +1] using QUIVERDANCE, QUIVERDANCE
+==================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The audience calls for an encore!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Quiver Dance!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The audience cheered Mew's performance!
+    (anim: StatUp)
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Quiver Dance!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The audience cheered Mew's performance!
+    (anim: StatUp)
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 2: flags Sound, category damaging x2 -> stage +1] using OVERDRIVE, OVERDRIVE
+=================================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The audience calls for an encore!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Overdrive!
+  Overdrive rang through the opera house!
+    HP Snorlax (foe): 461 -> 381 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 381/461]
+  Mew used Overdrive!
+  Overdrive rang through the opera house!
+    HP Snorlax (foe): 381 -> 301 / 461
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 301/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 301/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: transition [stage 2: moves CELEBRATE/ENCORE/FAKEOUT... x2 -> stage +1] using CELEBRATE, CELEBRATE
+====================================================================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE (stage 2) | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The audience calls for an encore!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Celebrate!
+  Congratulations, Tester!
+  A standing ovation for Mew!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Defense rose!
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+## FIELD STAGE: GRAND_STAGE is now stage 1
+  The audience is getting restless...
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Celebrate!
+  Congratulations, Tester!
+  A standing ovation for Mew!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Defense rose!
+  Mew's Special Attack rose!
+  Mew's Special Defense rose!
+  Mew's Speed rose!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+GRAND_STAGE probe: Synthetic Seed held on entry
+===============================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 @SYNTHETICSEED [SYNCHRONIZE]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
   The curtain rises! The spotlight blazes over the stage!
     (anim: UseItem)
-  Mew's Magical Seed cast a spotlight on it!
+  Mew's Synthetic Seed put it in the spotlight! It's here to perform!
     (anim: StatUp)
   Mew's Speed rose!
 
 --- Turn 1 ---
   [Mew 170/341 | Snorlax 461/461]
-  Mew used Splash!
-  But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)

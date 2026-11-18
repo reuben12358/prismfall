@@ -27,6 +27,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
     HP Pelipper (foe): 151 -> 142 / 151
   It's not very effective...
   The opposing Pelipper used Hurricane!
+  The opposing Pelipper rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Garchomp (player): 200 -> 81 / 200
   (end of round)
@@ -56,6 +57,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 3 ---
   [Magnezone 159/159 | Pelipper 124/151 BURN]
   The opposing Pelipper used Hurricane!
+  The opposing Pelipper rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Magnezone (player): 159 -> 129 / 159
   It's not very effective...
@@ -79,7 +81,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
     (anim: Confusion)
   Magnezone is confused!
   Magnezone used Thunderbolt!
-  The storm supercharged the attack!
+  The storm supercharged Thunderbolt!
     HP Pelipper (foe): 115 -> 0 / 151
   It's super effective!
   The opposing Pelipper fainted!
@@ -110,6 +112,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 6 ---
   [Starmie 148/148 | Noivern 163/181]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Starmie (player): 148 -> 0 / 148
   Starmie fainted!
@@ -125,6 +128,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 7 ---
   [Togekiss 175/175 | Noivern 145/181]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Togekiss (player): 175 -> 48 / 175
     (anim: Confusion)
@@ -134,6 +138,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
     (anim: Confusion)
   Togekiss is confused!
   Togekiss used Air Slash!
+  Togekiss rode the gale into the attack!
     HP Noivern (foe): 127 -> 50 / 181
   (end of round)
     (anim: Rain)
@@ -142,6 +147,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 8 ---
   [Togekiss 48/175 | Noivern 50/181]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Togekiss (player): 48 -> 0 / 175
   Togekiss fainted!
@@ -171,6 +177,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 10 ---
   [Charizard 167/167 | Noivern 136/181 BURN]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Charizard (player): 167 -> 4 / 167
     (anim: Confusion)
@@ -180,6 +187,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
     (anim: Confusion)
   Charizard is confused!
   Charizard used Air Slash!
+  Charizard rode the gale into the attack!
     HP Noivern (foe): 118 -> 47 / 181
   (end of round)
     (anim: Burn)
@@ -194,12 +202,14 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
     (anim: Confusion)
   Charizard is confused!
   Charizard used Air Slash!
+  Charizard rode the gale into the attack!
     HP Noivern (foe): 181 -> 106 / 181
   (end of round)
 
 --- Turn 12 ---
   [Charizard 4/167 | Noivern 106/181]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Charizard (player): 4 -> 0 / 167
   Charizard fainted!
@@ -213,6 +223,7 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
 --- Turn 13 ---
   [Lucario 159/159 | Noivern 88/181]
   The opposing Noivern used Hurricane!
+  The opposing Noivern rode the gale into the attack!
   The gale whipped Hurricane into a frenzy!
     HP Lucario (player): 159 -> 0 / 159
   Lucario fainted!
@@ -221,7 +232,6 @@ Stormfront [STORMFRONT] - Gym 11 Warden Odessa vs challenger (Lv.55)
   The opposing Noivern lost some of its HP!
   You have no more Pokémon that can fight!
   You lost against Warden Odessa!
-  You gave $6,600 to the winner...
   battle result code: 2
   
 RESULT: player lost after 12 turn(s)

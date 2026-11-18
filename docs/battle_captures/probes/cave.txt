@@ -15,8 +15,9 @@ CAVE probe: boosted move POWERGEM (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Power Gem!
-  The cavern rumbled!
+  The cavern rumbled with Mew's power!
     HP Snorlax (foe): 461 -> 374 / 461
+  Crystals are sprouting from the cave walls... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
@@ -88,6 +89,184 @@ CAVE probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage
 RESULT: fled/forfeit after 2 turn(s)
 
 
+CAVE probe: transition [stage 1: moves POWERGEM/DIAMONDSTORM x2 -> CRYSTAL_CAVERN] using POWERGEM, POWERGEM
+===========================================================================================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Power Gem!
+  The cavern rumbled with Mew's power!
+    HP Snorlax (foe): 461 -> 375 / 461
+  Crystals are sprouting from the cave walls... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 375/461]
+  Mew used Power Gem!
+  The cavern rumbled with Mew's power!
+    HP Snorlax (foe): 375 -> 258 / 461
+## FIELD CHANGE: CAVE -> CRYSTAL_CAVERN
+  The cave walls bloomed into glittering crystal!
+  The crystals glow a deep ocean blue.
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The crystals shifted to vivid green!
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 258/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The crystals shifted to amethyst!
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 258/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+CAVE probe: transition [stage 1: moves ERUPTION/LAVAPLUME/MAGMASTORM... x2 -> VOLCANIC] using ERUPTION, ERUPTION
+================================================================================================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Eruption!
+    HP Snorlax (foe): 461 -> 354 / 461
+  The cave is heating up... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 354/461]
+  Mew used Eruption!
+    HP Snorlax (foe): 354 -> 207 / 461
+## FIELD CHANGE: CAVE -> VOLCANIC
+  Magma broke through the cave floor!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 207/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 207/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
+CAVE probe: transition [stage 1: moves DRACOMETEOR -> DRAGONS_DEN] using DRACOMETEOR
+====================================================================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Draco Meteor!
+    HP Snorlax (foe): 461 -> 341 / 461
+    (anim: StatDown)
+  Mew's Special Attack harshly fell!
+## FIELD CHANGE: CAVE -> DRAGONS_DEN
+  The meteor tore open a dragon's lair hidden in the deep!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 341/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 341/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 2 turn(s)
+
+
+CAVE probe: transition [stage 1: moves DRAGONPULSE/DRAGONENERGY/CLANGINGSCALES x2 -> DRAGONS_DEN] using DRAGONPULSE, DRAGONPULSE
+================================================================================================================================
+
+--- Battle start ---
+  field: CAVE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> CAVE
+  The cave walls loom close... every sound echoes.
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Dragon Pulse!
+    HP Snorlax (foe): 461 -> 400 / 461
+  Draconic energy seeps in from the deep... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 400/461]
+  Mew used Dragon Pulse!
+    HP Snorlax (foe): 400 -> 316 / 461
+## FIELD CHANGE: CAVE -> DRAGONS_DEN
+  The cave opened into an ancient dragon's lair!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 316/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 316/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
 CAVE probe: transition [stage 2: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage 1] using EARTHQUAKE
 ====================================================================================================
 
@@ -105,9 +284,9 @@ CAVE probe: transition [stage 2: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... -> stage
     HP Snorlax (foe): 461 -> 351 / 461
   The cracked ceiling gave way! Rocks rained down!
     HP Mew (player): 341 -> 298 / 341
-  Mew was struck by falling rocks!
+  Falling rocks crashed down around Mew!
     HP Snorlax (foe): 351 -> 293 / 461
-  The wild Snorlax was struck by falling rocks!
+  Falling rocks crashed down around the wild Snorlax!
 ## FIELD STAGE: CAVE is now stage 1
   The dust slowly settles over the rubble.
   The wild Snorlax used Splash!
@@ -143,7 +322,6 @@ CAVE probe: Telluric Seed held on entry
   Mew's Telluric Seed shook stones loose from the ceiling!
     (anim: StatUp)
   Mew's Defense rose!
-  Pointed stones float in the air around the opposing team!
     HP Snorlax (foe): 461 -> 403 / 461
   Pointed stones dug into The wild Snorlax!
     HP Snorlax (foe): 403 -> 345 / 461

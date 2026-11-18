@@ -1,0 +1,61 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+Meadow [MEADOW] - Hiker Ford vs challenger (Lv.19)
+==================================================
+
+--- Battle start ---
+  field: MEADOW | weather: None | terrain: None
+  You are challenged by Hiker Ford!
+  Hiker Ford sent out Machop!
+    >> sent out (foe): Machop Lv.19 [GUTS]
+  Go! Growlithe!
+    >> sent out (player): Growlithe Lv.19 @TELLURICSEED [FLASHFIRE]
+## FIELD CHANGE: NONE -> MEADOW
+  Tall grass ripples in the breeze across the meadow.
+    (anim: UseItem)
+  Growlithe's Telluric Seed let it vanish into the tall grass!
+    (anim: StatUp)
+  Growlithe's evasiveness rose!
+
+--- Turn 1 ---
+  [Growlithe 55/55 | Machop 58/58]
+  Growlithe used Bite!
+    HP Machop (foe): 58 -> 51 / 58
+  It's not very effective...
+  The opposing Machop used Revenge!
+    HP Growlithe (player): 55 -> 13 / 55
+  (end of round)
+    HP Growlithe (player): 13 -> 16 / 55
+  Growlithe absorbed nutrients with its roots!
+
+--- Turn 2 ---
+  [Growlithe 16/55 | Machop 51/58]
+  Growlithe used Bite!
+    HP Machop (foe): 51 -> 44 / 58
+  It's not very effective...
+  The opposing Machop used Revenge!
+    HP Growlithe (player): 16 -> 0 / 55
+  Growlithe fainted!
+    xx fainted: Growlithe (player)
+  (end of round)
+  Go for it, Staravia!
+    >> sent out (player): Staravia Lv.19 [INTIMIDATE]
+    [ability: Staravia (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Machop's Attack fell!
+
+--- Turn 3 ---
+  [Staravia 55/55 | Machop 44/58]
+  Staravia used Aerial Ace!
+    HP Machop (foe): 44 -> 0 / 58
+  It's super effective!
+  The opposing Machop fainted!
+    xx fainted: Machop (foe)
+  Staravia is at the level cap (Lv. 19) and can't gain Exp. Points.
+  You defeated Hiker Ford!
+  You're too good for me!
+  You got $608 for winning!
+  battle result code: 1
+  
+RESULT: player won after 2 turn(s)

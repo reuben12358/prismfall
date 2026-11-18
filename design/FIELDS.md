@@ -8,8 +8,7 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
 ## What changed in the redesign
 
 - **Voice.** Pokémon use the place. Messages have the Pokémon as the actor ("rode the updraft", "drank from the
-  geyser"). No field describes Pokémon choking or suffocating, and no field deals passive damage just for being there
-  without giving matching types something to do with it.
+  geyser"). No field describes Pokémon as helpless against the scenery; hazards are things matching types exploit.
 - **Depth, in the Reborn style.** Each field has 15–30 interactions: type and move boosts, abilities that are always
   active, status immunities, longer screens and weather, changed secondary effects, a seed with a trade-off, a
   natural type (Camouflage, Mimicry, Terrain Pulse, Nature Power) and a family (elemental, telluric, synthetic, magical).
@@ -54,7 +53,7 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
 | Colosseum | Frenzy stage (knockouts); Cave (quakes ×3: the arena floor gives way) |
 | Fairy Tale | Dragon's Den (Dragon moves ×3) |
 | Dragon's Den | Awakened stage (Dragon ×4); Cave (Water/Ice ×3); Fairy Tale (Fairy ×3) |
-| Mindscape | Nightmare stage; Inverse (Topsy-Turvy, reality-bending moves ×3) |
+| Mindscape | Nightmare stage; Inverse (Topsy-Turvy, damaging sound moves ×3 crack the dream) |
 | Hollow Cathedral | Consecrated stage (holy moves ×3); Inverse (Topsy-Turvy, Boomburst/Shadow Force ×2) |
 | Inverse | the field it came from, else Mindscape (Topsy-Turvy) |
 | The Bleed, Prism Arena | none (they borrow other fields' effects in rotation) |
@@ -104,11 +103,13 @@ An opera house that plays to the crowd: songs, dances and showpieces build appla
 - Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.
 
 **Changes:**
-- any showpiece move x2 → stage +1
+- Dance moves x2 → stage +1
+- Sound moves x2 → stage +1
 - CELEBRATE, ENCORE, FAKEOUT, ACROBATICS, LASTRESORT +6 more x2 → stage +1
 - PROTECT, DETECT, SUBSTITUTE, REST, RECOVER +9 more → stage -1
 - *Stage 2* (`field_grand_stage_2`): 
-  - any showpiece move x2 → stage +1
+  - Dance moves x2 → stage +1
+  - Sound moves x2 → stage +1
   - CELEBRATE, ENCORE, FAKEOUT, ACROBATICS, LASTRESORT +6 more x2 → stage +1
   - PROTECT, DETECT, SUBSTITUTE, REST, RECOVER +9 more → stage -1
 - *Stage 3* (`field_grand_stage_3`): 
@@ -452,7 +453,7 @@ Skaters glide and build speed, boulders freeze, quakes splinter the ice into spi
 - Elemental Seed: +2 Speed - but the holder skates straight across the jagged ice (1/8 HP).
 
 **Changes:**
-- any showpiece move x3 → **Water Surface**
+- a field-specific move condition (see notes) x3 → **Water Surface**
 - ICE-type moves → rewinds progress
 - weather Sun/HarshSun → **Water Surface**
 
@@ -503,11 +504,11 @@ Thought is made real: Psychic surges, nightmares take shape, rooms fold longer, 
 - DARKVOID, NIGHTMARE, SPITE → stage 2
 - DARK-type moves x3 → stage 2
 - TOPSYTURVY → **Inverse Field**
-- any showpiece move x3 → **Inverse Field**
+- Sound moves x3 → **Inverse Field**
 - *Stage 2* (`field_mindscape_nightmare`): Nightmare: shadows feed on dread and grow strong; light falters. Soothing moves calm it back into a dream.
   - CALMMIND, AROMATHERAPY, HEALBELL, SWEETKISS, LUNARBLESSING +2 more x2 → stage 1
   - TOPSYTURVY → **Inverse Field**
-  - any showpiece move x3 → **Inverse Field**
+  - Sound moves x3 → **Inverse Field**
 
 **Seed (MAGICALSEED):** SPECIAL_ATTACK +2.
 

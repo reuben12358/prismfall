@@ -15,7 +15,7 @@ DARK_CRYSTAL probe: boosted move DARKPULSE (on field)
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Dark Pulse!
-  The darkness gave the attack teeth!
+  The darkness gave Mew's attack teeth!
     HP Snorlax (foe): 461 -> 374 / 461
   The wild Snorlax used Splash!
   But nothing happened!
@@ -52,8 +52,8 @@ DARK_CRYSTAL probe: boosted move DARKPULSE (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
-DARK_CRYSTAL probe: transition [stage 1: moves FLASH/DAZZLINGGLEAM/FLASHCANNON... x2 -> CRYSTAL_CAVERN] using FLASH, FLASH
-==========================================================================================================================
+DARK_CRYSTAL probe: transition [stage 1: moves AURORABEAM/SIGNALBEAM/FLASHCANNON... x2 -> CRYSTAL_CAVERN] using AURORABEAM, AURORABEAM
+======================================================================================================================================
 
 --- Battle start ---
   field: DARK_CRYSTAL | weather: None | terrain: None
@@ -65,44 +65,36 @@ DARK_CRYSTAL probe: transition [stage 1: moves FLASH/DAZZLINGGLEAM/FLASHCANNON..
 
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
-  Mew used Flash!
-    (anim: StatDown)
-  The wild Snorlax's accuracy fell!
-  The sudden flash was blinding in the dark!
-    (anim: StatDown)
-  The wild Snorlax's accuracy fell!
+  Mew used Aurora Beam!
+    HP Snorlax (foe): 461 -> 405 / 461
   A faint glow stirs within the crystals... (1 more)
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
 
 --- Turn 2 ---
-  [Mew 341/341 | Snorlax 461/461]
-  Mew used Flash!
-    (anim: StatDown)
-  The wild Snorlax's accuracy fell!
-  The sudden flash was blinding in the dark!
-    (anim: StatDown)
-  The wild Snorlax's accuracy fell!
+  [Mew 341/341 | Snorlax 405/461]
+  Mew used Aurora Beam!
+    HP Snorlax (foe): 405 -> 327 / 461
 ## FIELD CHANGE: DARK_CRYSTAL -> CRYSTAL_CAVERN
   Light flooded the crystals! The cavern glitters once more!
-  The crystals glow a vivid green.
+  The crystals glow a fiery red.
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-  The crystals shifted to amethyst!
+  The crystals shifted to ocean blue!
 
 --- Turn 3 ---
-  [Mew 341/341 | Snorlax 461/461]
+  [Mew 341/341 | Snorlax 327/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
   But nothing happened!
   (end of round)
-  The crystals flared a fiery red!
+  The crystals shifted to vivid green!
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 461/461]
+  [Mew 341/341 | Snorlax 327/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 3 turn(s)
@@ -151,8 +143,8 @@ DARK_CRYSTAL probe: transition [stage 1: weather Sun/HarshSun -> CRYSTAL_CAVERN]
 RESULT: fled/forfeit after 2 turn(s)
 
 
-DARK_CRYSTAL probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> (proc)] using EXPLOSION
-===============================================================================================================
+DARK_CRYSTAL probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLOSION -> CAVE] using EXPLOSION
+=============================================================================================================
 
 --- Battle start ---
   field: DARK_CRYSTAL | weather: None | terrain: None
@@ -165,7 +157,7 @@ DARK_CRYSTAL probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLO
 --- Turn 1 ---
   [Mew 341/341 | Snorlax 461/461]
   Mew used Explosion!
-    HP Snorlax (foe): 461 -> 188 / 461
+    HP Snorlax (foe): 461 -> 106 / 461
     HP Mew (player): 341 -> 0 / 341
   Mew fainted!
     xx fainted: Mew (player)
@@ -177,8 +169,8 @@ DARK_CRYSTAL probe: transition [stage 1: moves EXPLOSION/SELFDESTRUCT/MISTYEXPLO
 RESULT: player lost after 0 turn(s)
 
 
-DARK_CRYSTAL probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> (proc)] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
-======================================================================================================================================
+DARK_CRYSTAL probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... x3 -> CAVE] using EARTHQUAKE, EARTHQUAKE, EARTHQUAKE
+====================================================================================================================================
 
 --- Battle start ---
   field: DARK_CRYSTAL | weather: None | terrain: None
@@ -209,7 +201,7 @@ DARK_CRYSTAL probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... 
 --- Turn 3 ---
   [Mew 341/341 | Snorlax 235/461]
   Mew used Earthquake!
-    HP Snorlax (foe): 235 -> 122 / 461
+    HP Snorlax (foe): 235 -> 89 / 461
 ## FIELD CHANGE: DARK_CRYSTAL -> CAVE
   The quakes shattered the dead crystals!
   The wild Snorlax used Splash!
@@ -217,7 +209,7 @@ DARK_CRYSTAL probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... 
   (end of round)
 
 --- Turn 4 ---
-  [Mew 341/341 | Snorlax 122/461]
+  [Mew 341/341 | Snorlax 89/461]
   Mew used Splash!
   But nothing happened!
   The wild Snorlax used Splash!
@@ -225,7 +217,7 @@ DARK_CRYSTAL probe: transition [stage 1: moves EARTHQUAKE/MAGNITUDE/BULLDOZE... 
   (end of round)
 
 --- Turn 5 ---
-  [Mew 341/341 | Snorlax 122/461]
+  [Mew 341/341 | Snorlax 89/461]
   battle result code: 3
   
 RESULT: fled/forfeit after 4 turn(s)

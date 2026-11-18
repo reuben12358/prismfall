@@ -10,11 +10,11 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
   Warden Kaito sent out Hawlucha!
     >> sent out (foe): Hawlucha Lv.41 @SITRUSBERRY [UNBURDEN]
   Go! Magmar!
-    >> sent out (player): Magmar Lv.43 @TELLURICSEED [FLAMEBODY]
+    >> sent out (player): Magmar Lv.43 @SYNTHETICSEED [FLAMEBODY]
 ## FIELD CHANGE: NONE -> COLOSSEUM
   The crowd roars as the fighters enter the pit!
     (anim: UseItem)
-  Magmar's Telluric Seed fired it up to the roar of the crowd!
+  Magmar's Synthetic Seed fired it up to the roar of the crowd!
     (anim: StatUp)
   Magmar's Attack rose!
 
@@ -37,6 +37,9 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
   Warden Kaito is about to send out Machamp. Will you switch your Pokémon?  [auto: No]
   Warden Kaito sent out Machamp!
     >> sent out (foe): Machamp Lv.42 @SITRUSBERRY [NOGUARD]
+  The crowd chanted for the opposing Machamp!
+    (anim: StatUp)
+  The opposing Machamp's Attack rose!
 
 --- Turn 2 ---
   [Magmar 122/122 | Machamp 143/143]
@@ -46,6 +49,7 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
     HP Machamp (foe): 36 -> 71 / 143
   The opposing Machamp restored its health using its Sitrus Berry!
   The opposing Machamp used Dynamic Punch!
+  The pit erupted as the opposing Machamp pressed the attack!
     HP Magmar (player): 122 -> 0 / 122
   Magmar fainted!
     xx fainted: Magmar (player)
@@ -53,6 +57,8 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
     (anim: StatUp)
   The opposing Machamp's Attack rose!
   (end of round)
+## FIELD STAGE: COLOSSEUM is now stage 2
+  Two down! The crowd is in a frenzy!
   Go for it, Pidgeot!
     >> sent out (player): Pidgeot Lv.43 [KEENEYE]
 
@@ -119,15 +125,8 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
 --- Turn 7 ---
   [Pidgeot 137/137 | Hitmontop 110/110]
   Pidgeot used Air Slash!
-    HP Hitmontop (foe): 110 -> 29 / 110
-  It's super effective!
-  The opposing Hitmontop flinched and couldn't move!
-  (end of round)
-
---- Turn 8 ---
-  [Pidgeot 137/137 | Hitmontop 29/110]
-  Pidgeot used Air Slash!
-    HP Hitmontop (foe): 29 -> 0 / 110
+    HP Hitmontop (foe): 110 -> 0 / 110
+  A critical hit!
   It's super effective!
   The opposing Hitmontop fainted!
     xx fainted: Hitmontop (foe)
@@ -139,30 +138,30 @@ Colosseum [COLOSSEUM] - Gym 8 Warden Kaito vs challenger (Lv.43)
   Warden Kaito sent out Memory!
     >> sent out (foe): Memory Lv.43 @LIFEORB [INNERFOCUS]
 
---- Turn 9 ---
+--- Turn 8 ---
   [Pidgeot 137/137 | Memory 130/130]
   Pidgeot used Air Slash!
-    HP Memory (foe): 130 -> 39 / 130
+    HP Memory (foe): 130 -> 41 / 130
   The opposing Memory used Flash Cannon!
   The crowd rallied behind the opposing Memory!
-    HP Pidgeot (player): 137 -> 29 / 137
-    HP Memory (foe): 39 -> 26 / 130
+    HP Pidgeot (player): 137 -> 21 / 137
+    HP Memory (foe): 41 -> 28 / 130
   The opposing Memory lost some of its HP!
   (end of round)
 
---- Turn 10 ---
-  [Pidgeot 29/137 | Memory 26/130]
-  Pidgeot used Air Slash!
+--- Turn 9 ---
+  [Pidgeot 21/137 | Memory 28/130]
+  Pidgeot used Aerial Ace!
   The crowd rallied behind Pidgeot!
-    HP Memory (foe): 26 -> 0 / 130
+    HP Memory (foe): 28 -> 0 / 130
   The opposing Memory fainted!
     xx fainted: Memory (foe)
   The crowd went wild for Pidgeot!
     (anim: StatUp)
-  Pidgeot's Special Attack rose!
+  Pidgeot's Attack rose!
   You defeated Warden Kaito!
   ...Good. Your Pokémon fight like they remember why.
   You got $4,300 for winning!
   battle result code: 1
   
-RESULT: player won after 9 turn(s)
+RESULT: player won after 8 turn(s)

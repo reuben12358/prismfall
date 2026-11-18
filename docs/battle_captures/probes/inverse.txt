@@ -52,6 +52,54 @@ INVERSE probe: boosted move SHADOWBALL (baseline, no field)
 RESULT: fled/forfeit after 1 turn(s)
 
 
+INVERSE probe: transition [stage 1: moves TOPSYTURVY -> (proc)] using GROWL, TOPSYTURVY
+=======================================================================================
+
+--- Battle start ---
+  field: INVERSE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.100 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> INVERSE
+  The world turns inside out... Type matchups are reversed!
+
+--- Turn 1 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Growl!
+    (anim: StatDown)
+  The wild Snorlax's Attack fell!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 2 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Topsy-Turvy!
+  The wild Snorlax's stats were reversed!
+  Mew moves freely in the upside-down world!
+    (anim: StatUp)
+  Mew's Speed rose!
+## FIELD CHANGE: INVERSE -> MINDSCAPE
+  The world flipped right side up again!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 3 ---
+  [Mew 341/341 | Snorlax 461/461]
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 4 ---
+  [Mew 341/341 | Snorlax 461/461]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 3 turn(s)
+
+
 INVERSE probe: Magical Seed held on entry
 =========================================
 
