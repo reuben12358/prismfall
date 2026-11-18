@@ -14,7 +14,11 @@ SETS = {
     'reborn': '/home/claude/ref/games/reborn/Graphics/Characters/trainer*.png',
     'deso': '/home/claude/ref/games/desolation/Graphics/Characters/trainer*.png',
     'wll': '/home/claude/ref/art/wll/**/[Tt]rainer*.png',
-    'showdown': '/home/claude/ref/charrefs/showdown/*.png',
+    'showdown': '/home/claude/ref/art/sprites_showdown/trainers/*.png',
+    'kyledove_xy': '/home/claude/ref/art/sprites_kyledove_xy/sprites/*.png',
+    'kyledove_oras': '/home/claude/ref/art/sprites_kyledove_oras/sprites/*.png',
+    'kyledove_swsh': '/home/claude/ref/art/sprites_kyledove_swsh/sprites/*.png',
+    'muffyang': '/home/claude/ref/art/sprites_muffyang/extracted/**/*.png',
     'ebdx': '/home/claude/ref/ebdx_renovation/Graphics/Trainers/*.png',
 }
 
@@ -24,6 +28,8 @@ def main():
     for s, pat in SETS.items():
         files = sorted(glob.glob(pat, recursive=True))
         for f in files:
+            if s == 'showdown' and any(t in os.path.basename(f) for t in ('-gen1', '-gen2', '-gen3')):
+                continue   # off-style (smaller density)
             try:
                 im = kb.load(f)
             except Exception as e:

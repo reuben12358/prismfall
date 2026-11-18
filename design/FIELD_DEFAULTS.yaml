@@ -1,0 +1,568 @@
+# FIELD_DEFAULTS.yaml - the default battle field of every map (Prismfall Field Effects v1.1).
+# Owner: field-effects workstream. Consumers: mapgen (writes FieldEffects::MAP_FIELDS /
+# MAP_WILD_FIELDS into Plugins/Prismfall Maps/002_MapFields.rb) and
+# tools/field_defaults_to_rb.rb (interim fallback tables in the field plugin).
+# Regenerate the maps: section after editing design/maps.json; hand edits to a map entry
+# should set source: hand so they are kept.
+#
+# Field IDs are FieldEffects IDs (design/FIELDS.md). NONE = deliberately no field.
+# stage: starting stage (1 if omitted). wild: field for wild battles on this map if it
+# differs from field (surfing / fishing / diving still apply on top, see below).
+
+schema: 1
+field_plugin_version: "1.1.0"
+
+# How the engine picks a battle's field (FieldEffects.default_field_for_battle).
+# The first rule that gives an answer wins.
+resolution:
+  - "setBattleRule(\"field\", X) in the event (gyms, bosses, set pieces; \"none\" = no field)"
+  - "diving -> movement.diving"
+  - "trainer battles: exceptions.trainers (tutorial and special fights, matched by trainer type + version)"
+  - "wild battles: encounter_overrides for the encounter type (surf, rods, contest) unless the map's field is in that type's keep list"
+  - "wild battles: maps.<id>.wild"
+  - "wild battles on maps with no field: encounter_fallbacks (cave encounters -> CAVE)"
+  - "surfing (trainer battle on the water) -> movement.surfing unless the map field is in encounter_overrides.water.keep"
+  - "maps.<id>.field (+ stage)"
+  - "environment_fallbacks[battle environment] (map metadata BattleEnvironment) for maps missing from maps:"
+  - "NONE"
+
+movement:
+  diving: UNDERWATER
+  surfing: WATER_SURFACE
+
+# Wild battles, keyed by GameData::EncounterType#type (Land/Cave/Water/OldRod... map to land/cave/water/fishing).
+encounter_overrides:
+  water:     # surfing encounters
+    field: WATER_SURFACE
+    keep: [WATER_SURFACE, UNDERWATER, CORROSIVE_MIRE, BLEED, PRISM_ARENA, RAINBOW]
+  fishing:   # Old/Good/Super Rod
+    field: WATER_SURFACE
+    keep: [WATER_SURFACE, UNDERWATER, CORROSIVE_MIRE, FROZEN_LAKE, BEACH, BLEED, RAINBOW]
+  contest:   # bug-catching style contests
+    field: MEADOW
+    keep: []
+encounter_fallbacks:   # only on maps whose own field is missing or NONE
+  cave: CAVE
+
+# Battle environment (map metadata BattleEnvironment) -> field, for maps not listed below.
+environment_fallbacks:
+  Grass: MEADOW
+  TallGrass: MEADOW
+  Puddle: MEADOW
+  Forest: SILKWOOD
+  ForestGrass: SILKWOOD
+  MovingWater: WATER_SURFACE
+  StillWater: WATER_SURFACE
+  Underwater: UNDERWATER
+  Cave: CAVE
+  Rock: MOUNTAIN
+  Sand: BEACH
+  Snow: SNOWY_MOUNTAIN
+  Ice: FROZEN_LAKE
+  Volcano: VOLCANIC
+  Graveyard: HOLLOW_CATHEDRAL
+  Sky: STORMFRONT
+  Space: MINDSCAPE
+  UltraSpace: INVERSE
+  None: NONE
+
+# Biome fallbacks for NEW maps the pipeline adds before this file lists them:
+# 1) kind bleed_zone -> BLEED; 2) name_rules (first match; per-kingdom variants);
+# 3) kind interior -> NONE; 4) borderland_fallbacks; 5) kingdom_fallbacks[kingdom][kind];
+# 6) at sea -> WATER_SURFACE; 7) gym -> GRAND_STAGE; 8) MEADOW.
+kingdom_fallbacks:
+  "Elowen": {town: MEADOW, route: MEADOW, dungeon: SILKWOOD}
+  "Isenmar": {town: BEACH, route: SNOWY_MOUNTAIN, dungeon: CAVE}
+  "Zenith": {town: NEON_GRID, route: MOUNTAIN, dungeon: FACTORY}
+  "Nadir": {town: [NEW_MOON, 3], route: CORROSIVE_MIRE, dungeon: SCRAPYARD}
+  "Ashkaar": {town: ASHEN_WASTE, route: MOUNTAIN, dungeon: VOLCANIC}
+  "Ossaria": {town: DESERT, route: DESERT, dungeon: CAVE}
+  "Antumbra": {town: MINDSCAPE, route: INVERSE, dungeon: INVERSE}
+  "Crownhaven": {town: GRAND_STAGE, route: MEADOW, dungeon: CAVE}
+  "Ruin Route": {town: BLEED, route: BLEED, dungeon: BLEED}
+borderland_fallbacks:   # "Borderland (A/B)" -> blended field
+  "Elowen/Isenmar": SNOWY_MOUNTAIN
+  "Isenmar/Zenith": SNOWY_MOUNTAIN
+  "Zenith/Ossaria": DESERT
+  "Ossaria/Zenith": DESERT
+  "Ossaria/Nadir": WASTELAND
+  "Nadir/Ashkaar": ASHEN_WASTE
+  "Ashkaar/Nadir": ASHEN_WASTE
+  "Ashkaar/Ossaria": ASHEN_WASTE
+  "Nadir/Elowen": CAVE
+  "Zenith/Elowen": SILKWOOD
+  "Elowen/Antumbra": MINDSCAPE
+  "Antumbra/Ossaria": HOLLOW_CATHEDRAL
+  "Zenith/Nadir": SCRAPYARD
+  "Elowen/Ashkaar": MOUNTAIN
+  "Ashkaar/Crownhaven": MOUNTAIN
+  "Elowen/Ossaria": BEACH
+  "islands": BEACH
+  "sea": WATER_SURFACE
+name_rules:   # regex on the map name (case-insensitive) -> field; by_kingdom overrides
+  - {match: "Pok[eé]mon Center|\\bMart\\b|Rest House|\\bInn\\b|Cabin|Hut\\b|\\bHouse\\b|\\bHome\\b|Office|Shop\\b|Boutique|Bakery|Tavern|Bedroom|Dorm|Infirmary|Hospice|Customs|Lobby|Apartment|Dept\\. Store", field: NONE}
+  - {match: "Theat(re|er)|Opera|Playhouse|Stage|Concert|Ballroom", field: GRAND_STAGE}
+  - {match: "Cathedral|Chapel|Church|Abbey|Shrine|Temple|Sanctum|Sanctuary", field: [HOLLOW_CATHEDRAL, 2], by_kingdom: {"Antumbra": HOLLOW_CATHEDRAL}}
+  - {match: "Manor|Crypt|Graveyard|Cemetery|Catacomb|Tomb|Necropolis|Barrow|Ossuary|Mausoleum", field: HOLLOW_CATHEDRAL}
+  - {match: "Arena|Pit\\b|Ring\\b|Colosseum|Fight", field: COLOSSEUM, by_kingdom: {"Crownhaven": GRAND_STAGE}}
+  - {match: "Throne|Great Hall|Palace|Castle|Keep\\b|Court\\b|Briar Hall", field: FAIRY_TALE, by_kingdom: {"Antumbra": INVERSE, "Ashkaar": DRAGONS_DEN, "Isenmar": FROZEN_LAKE, "Zenith": NEON_GRID, "Crownhaven": GRAND_STAGE, "Ossaria": DESERT, "Nadir": [NEW_MOON, 3]}}
+  - {match: "Library|Archive|Observatory|Academy|Athenaeum|Stacks", field: MINDSCAPE}
+  - {match: "Factory|Foundry|Works\\b|Forge|Mill|Plant|Refinery|Sluice|Turbine|Engine", field: FACTORY, by_kingdom: {"Ashkaar": VOLCANIC}}
+  - {match: "Scrap|Junk|Dump|Salvage|Slag", field: SCRAPYARD}
+  - {match: "Lab\\b|Laboratory|Research", field: NONE}
+  - {match: "Sewer|Sump|Marsh|Bog|Swamp|Mire|Fen\\b|Drain", field: CORROSIVE_MIRE, by_kingdom: {"Elowen": BEACH}}
+  - {match: "Airship|Sky|Deck|Cloud|Aerie|Gantr", field: STORMFRONT, by_kingdom: {"Elowen": NONE}}
+  - {match: "Volcano|Caldera|Magma|Lava|Cinder|Ember", field: VOLCANIC}
+  - {match: "Glacier|Icefall|Frost|Rime|Snow", field: SNOWY_MOUNTAIN}
+  - {match: "Lake|Mere|Pond|Lagoon|Loch", field: WATER_SURFACE, by_kingdom: {"Isenmar": FROZEN_LAKE}}
+  - {match: "Beach|Shore|Coast|Harbou?r|Pier|Dock|Port\\b|Quay|Strand|Cove|Breakwater|Promenade", field: BEACH}
+  - {match: "Sea\\b|Strait|Ocean|Bay\\b|Channel|Reef", field: WATER_SURFACE}
+  - {match: "Crystal|Geode|Gem|Amethyst|Quartz", field: CRYSTAL_CAVERN}
+  - {match: "Darkglass|Lightless|Obsidian", field: DARK_CRYSTAL}
+  - {match: "Cave|Caves|Cavern|Mine\\b|Tunnel|Grotto|Burrow|Depths|Undercroft|Cellar|Vault", field: CAVE}
+  - {match: "Desert|Dune|Sands|Mesa|Canyon|Badlands", field: DESERT, by_kingdom: {"Nadir": WASTELAND}}
+  - {match: "Peak|Mount\\b|Mt\\.|Summit|Ridge|Pass\\b|Cliffs?|Crag|Highlands?|Stair", field: MOUNTAIN, by_kingdom: {"Isenmar": SNOWY_MOUNTAIN}}
+  - {match: "Garden|Glasshouse|Greenhouse|Orchard|Meadow|Heath|Farm|Field", field: MEADOW, by_kingdom: {"Ossaria": DESERT}}
+  - {match: "Forest|Wood|Grove|Thicket|Wilds", field: SILKWOOD, by_kingdom: {"Isenmar": SNOWY_MOUNTAIN, "Antumbra": MINDSCAPE}}
+
+# Battles that ignore the map default.
+exceptions:
+  trainers:   # FieldEffects::TRAINER_FIELDS - matched on the first opponent
+    - {trainer: RIVAL_KESTREL, versions: [10, 11, 12], field: NONE, why: "K1 at Ferrow's Landing is the tutorial battle: learn the basics before fields"}
+  scripted:   # set by the event or a helper, not by this file
+    gyms: "Prismfall.gym_battle(n) sets each Warden's field from GYMS (Core 003_Badges_Gyms.rb); gym-map defaults below match, so gym trainers fight on the same field"
+    bosses: "Prismfall::Bosses set their own field (Zekrom FACTORY, Kyogre FROZEN_LAKE, Arceus PRISM_ARENA, ...); Bleed-zone boss events set BLEED"
+    festival: "Festival bracket rounds use :field => nil (Core 008_Festival_Data.rb), so they get the Temple-Arena default (490: GRAND_STAGE); the Hijack is PRISM_ARENA"
+    cameos: "Prismfall.cameo_battle(..., field: X) may set a field; without one the map default applies"
+    safari: "Safari-style battles (Royal Chase 682) are not move battles, so no field applies there"
+    test_arena: "map 990 (mapgen/gen_test_arena.py) sets a field per NPC; not listed here"
+    indoor: "Poke Centers, Marts, houses, offices and other no-battle interiors are NONE; an interior that hosts a fight gets a field (e.g. 123 Weavers' Guildhall SILKWOOD, 163 Anglers' Guild WATER_SURFACE, 166 Hollow cell CAVE). A story fight inside a NONE room should use setBattleRule(\"field\", X) or a TRAINER_FIELDS entry"
+
+# Every map in design/maps.json. built: in maps_out/manifest.json. battles: what the built
+# map's events / PBS encounters contain (trainer, wild, encounters: [types]).
+# source: spec (maps.json field), hand (reviewed), name/kingdom/borderland/rule (fallbacks above).
+maps:
+  100: {name: "Ferrow's Landing", kind: town, field: BEACH, built: true, battles: [trainer], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "fishing village on the south shore: sand, pier, tide (Rival K1 here is the tutorial: no field, see exceptions)"}
+  101: {name: "Ferrow's Landing Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center: no battles"}
+  102: {name: "Ferrow's Landing Mart", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Mart: no battles"}
+  103: {name: "Larch Research Station", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "starter lab: no battles (starter ceremony)"}
+  104: {name: "Tidewater Inn", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "inn: no battles"}
+  105: {name: "Ferrow Lighthouse 1F", kind: interior, field: BEACH, built: true, battles: [], source: hand, why: "lighthouse ground floor on the headland: the sea is right outside"}
+  106: {name: "Ferrow Lighthouse Lamp Room", kind: interior, field: STORMFRONT, built: true, battles: [], source: hand, why: "lighthouse lamp room: wind and storm around the lamp (any battle up here)"}
+  107: {name: "Dockmaster's House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house: no battles"}
+  108: {name: "Quarantine Customs Hall", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "customs hall: story scene, no battles"}
+  109: {name: "The Dovetail - Deck", kind: interior, field: WATER_SURFACE, built: true, battles: [], source: hand, why: "ferry deck at sea (any battle on deck is on open water)"}
+  110: {name: "The Dovetail - Cabin", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "cabin: no battles"}
+  120: {name: "Briarwick", kind: town, field: SILKWOOD, built: true, battles: [trainer], source: hand, why: "tree town of the Bug Warden: silk banners and rope bridges between giant trunks"}
+  121: {name: "Briarwick Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center"}
+  122: {name: "Briarwick Mart", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Mart"}
+  123: {name: "Weavers' Guildhall", kind: interior, field: SILKWOOD, built: true, battles: [], source: hand, why: "Weavers' Guildhall: looms and silk everywhere (guild trainers)"}
+  124: {name: "Treetop House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
+  125: {name: "Cutter's House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
+  130: {name: "Loomhouse Gym - Foyer", kind: gym, field: SILKWOOD, built: true, battles: [], source: spec, why: "world spec"}
+  131: {name: "Loomhouse Gym - Weaving Hall", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
+  132: {name: "Loomhouse Gym - Canopy Lofts", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
+  133: {name: "Loomhouse Gym - The Spindle", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
+  140: {name: "Saltmere - Promenade & Market", kind: town, field: BEACH, built: true, battles: [trainer], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "Saltmere's promenade on the salt lagoon"}
+  141: {name: "Saltmere Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center"}
+  142: {name: "Saltmere Mart", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Mart"}
+  143: {name: "Saltmere Harbour Office", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "office"}
+  144: {name: "Saltwife's House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
+  145: {name: "Lantern Theatre", kind: interior, field: GRAND_STAGE, built: true, battles: [trainer], source: hand, why: "the Lantern Theatre (pageant hijack set piece)"}
+  146: {name: "Saltmere - Harbour & Breakwater", kind: town, field: BEACH, built: true, battles: [], source: hand, why: "harbour and breakwater"}
+  147: {name: "Saltmere - Old Town", kind: town, field: GRAND_STAGE, built: true, battles: [], source: hand, why: "Old Town: streets of theatres and lantern masts (street performers)"}
+  150: {name: "Pell Playhouse - Foyer", kind: gym, field: GRAND_STAGE, built: true, battles: [], source: spec, why: "world spec"}
+  151: {name: "Pell Playhouse - Revolving Stage", kind: gym, field: GRAND_STAGE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  152: {name: "Pell Playhouse - Fly Loft", kind: gym, field: GRAND_STAGE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  153: {name: "Pell Playhouse - Dressing Rooms", kind: gym, field: GRAND_STAGE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  154: {name: "Pell Playhouse - The Grand Stage", kind: gym, field: GRAND_STAGE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  160: {name: "Ebbmouth", kind: town, field: WATER_SURFACE, built: true, battles: [trainer], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "Ebbmouth: canals and a two-way river through the town - street battles happen on the canal-side boardwalks"}
+  161: {name: "Ebbmouth Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center"}
+  162: {name: "Ebbmouth Mart", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Mart"}
+  163: {name: "Anglers' Guild", kind: interior, field: WATER_SURFACE, built: true, battles: [], source: hand, why: "Anglers' Guild: dock-side hall over the water (angler trainers)"}
+  164: {name: "Reyes House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
+  165: {name: "Net-mender's House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
+  166: {name: "Reyes Cellar (Hollow cell)", kind: interior, field: CAVE, source: hand, why: "Hollow cell in a stone cellar under the river (two trainers)"}
+  167: {name: "Ebbmouth - Mill Quay", kind: town, field: WATER_SURFACE, source: hand, why: "Ebbmouth's mill quay on the two-way river"}
+  170: {name: "Tidelock Gym - Lock Hall", kind: gym, field: WATER_SURFACE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  171: {name: "Tidelock Gym - Basins (Low Water)", kind: gym, field: WATER_SURFACE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  172: {name: "Tidelock Gym - Basins (Mid Water)", kind: gym, field: WATER_SURFACE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  173: {name: "Tidelock Gym - Basins (High Water)", kind: gym, field: WATER_SURFACE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  174: {name: "Tidelock Gym - Warden's Pool", kind: gym, field: WATER_SURFACE, built: true, battles: [trainer], source: spec, why: "world spec"}
+  180: {name: "Lumen City - Concourse", kind: town, field: NEON_GRID, source: kingdom, why: "Zenith town default"}
+  181: {name: "Lumen City - Lowlight", kind: town, field: NEON_GRID, source: kingdom, why: "Zenith town default"}
+  182: {name: "Lumen City Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  183: {name: "Lumen Arcade Dept. Store 1F", kind: interior, field: NONE, source: name, why: "name: \"Dept. Store\""}
+  184: {name: "Lumen Arcade Dept. Store 2F", kind: interior, field: NONE, source: name, why: "name: \"Dept. Store\""}
+  185: {name: "Meridian Spire - Lobby", kind: interior, field: NEON_GRID, source: hand, why: "Meridian Spire: corporate tech tower"}
+  186: {name: "Meridian Spire - Gala Hall", kind: interior, field: NEON_GRID, source: hand, why: "Meridian gala hall (Voss gala set piece)"}
+  187: {name: "Glide Cycle Shop", kind: interior, field: NONE, source: name, why: "name: \"Shop\""}
+  188: {name: "Lumen Fossil Lab", kind: interior, field: NONE, source: name, why: "name: \"Lab\""}
+  189: {name: "Lumen Apartment", kind: interior, field: NONE, source: name, why: "name: \"Apartment\""}
+  190: {name: "Circuit Gym - Switchroom", kind: gym, field: NEON_GRID, source: spec, why: "world spec"}
+  191: {name: "Circuit Gym - Breadboard Hall", kind: gym, field: NEON_GRID, source: spec, why: "world spec"}
+  192: {name: "Circuit Gym - Blackout Grid", kind: gym, field: NEON_GRID, source: spec, why: "world spec"}
+  193: {name: "Circuit Gym - Core", kind: gym, field: NEON_GRID, source: spec, why: "world spec"}
+  194: {name: "Lumen City - Council Ward", kind: town, field: NEON_GRID, source: kingdom, why: "Zenith town default"}
+  195: {name: "Lumen City - Spire District", kind: town, field: NEON_GRID, source: hand, why: "Lumen City spire district"}
+  196: {name: "Lumen City - Skyport Terrace", kind: town, field: STORMFRONT, source: name, why: "name: \"Sky\""}
+  197: {name: "Zenith Council Hall - Council Chamber", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  198: {name: "Meridian Spire - Executive Gallery", kind: interior, field: NEON_GRID, source: hand, why: "Meridian executive gallery"}
+  199: {name: "Meridian Spire - Dark Stone Core", kind: interior, field: FACTORY, source: hand, why: "Dark Stone core machinery (the Zekrom engine boss sets FACTORY itself)"}
+  200: {name: "Duneholt - Terrace Bazaar", kind: town, field: DESERT, battles: [], encounters: [GoodRod, OldRod, SuperRod, Water], source: name, why: "name: \"Dune\""}
+  201: {name: "Duneholt Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  202: {name: "Duneholt Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  203: {name: "Duneholt - Sandgate", kind: town, field: DESERT, source: name, why: "name: \"Dune\""}
+  204: {name: "Duneholt - Aquifer Quarter", kind: town, field: DESERT, source: name, why: "name: \"Dune\""}
+  205: {name: "Elector's Palace - Courtyard", kind: town, field: DESERT, source: hand, why: "Elector's Palace courtyard under the desert sun"}
+  206: {name: "Elector's Palace - Hall of Audience", kind: interior, field: NONE, source: hand, why: "audience hall: no battles in spec"}
+  207: {name: "Elector's Palace - Mural Gallery", kind: interior, field: NONE, source: hand, why: "mural gallery: no battles in spec"}
+  208: {name: "Necropolis of the Electors", kind: dungeon, field: HOLLOW_CATHEDRAL, source: name, why: "name: \"Necropolis\""}
+  209: {name: "Sahar's Dig Lab", kind: interior, field: NONE, source: name, why: "name: \"Lab\""}
+  210: {name: "Duneholt Gym - Entrance", kind: gym, field: DESERT, source: spec, why: "world spec"}
+  211: {name: "Duneholt Gym - Puzzle Room 1", kind: gym, field: DESERT, source: spec, why: "world spec"}
+  212: {name: "Duneholt Gym - Puzzle Room 2", kind: gym, field: DESERT, source: spec, why: "world spec"}
+  213: {name: "Duneholt Gym - Warden Arena", kind: gym, field: DESERT, source: spec, why: "world spec"}
+  214: {name: "Duneholt - Sinkwells", kind: town, field: DESERT, source: name, why: "name: \"Dune\""}
+  220: {name: "Mirefen", kind: town, field: CORROSIVE_MIRE, battles: [], encounters: [GoodRod, OldRod, SuperRod, Water], source: name, why: "name: \"Mire\""}
+  221: {name: "Mirefen Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  222: {name: "Mirefen Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  223: {name: "Corvin Mott's Infirmary", kind: interior, field: NONE, source: name, why: "name: \"Infirmary\""}
+  230: {name: "Mirefen Gym - Entrance", kind: gym, field: CORROSIVE_MIRE, source: spec, why: "world spec"}
+  231: {name: "Mirefen Gym - Puzzle Room 1", kind: gym, field: CORROSIVE_MIRE, source: spec, why: "world spec"}
+  232: {name: "Mirefen Gym - Puzzle Room 2", kind: gym, field: CORROSIVE_MIRE, source: spec, why: "world spec"}
+  233: {name: "Mirefen Gym - Warden Arena", kind: gym, field: CORROSIVE_MIRE, source: spec, why: "world spec"}
+  240: {name: "Cindervault - Forge Terraces", kind: town, field: VOLCANIC, source: name, why: "name: \"Forge\" (Ashkaar)"}
+  241: {name: "Cindervault Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  242: {name: "Cindervault Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  243: {name: "Cindervault - Caldera Gate", kind: town, field: VOLCANIC, source: name, why: "name: \"Cinder\""}
+  244: {name: "Hearthguild Hall", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  245: {name: "Pyre Keep - Rampart", kind: town, field: DRAGONS_DEN, source: name, why: "name: \"Keep\" (Ashkaar)"}
+  246: {name: "Pyre Keep - Ember Throne", kind: interior, field: DRAGONS_DEN, source: name, why: "name: \"Keep\" (Ashkaar)"}
+  247: {name: "Pyre Keep - Hall of Oaths", kind: interior, field: DRAGONS_DEN, source: name, why: "name: \"Keep\" (Ashkaar)"}
+  248: {name: "Pyre Keep - Dragon Roosts", kind: town, field: DRAGONS_DEN, source: name, why: "name: \"Keep\" (Ashkaar)"}
+  249: {name: "Cindervault - Slag Ward", kind: town, field: SCRAPYARD, source: name, why: "name: \"Slag\""}
+  250: {name: "Cindervault Gym - Entrance", kind: gym, field: VOLCANIC, source: spec, why: "world spec"}
+  251: {name: "Cindervault Gym - Puzzle Room 1", kind: gym, field: VOLCANIC, source: spec, why: "world spec"}
+  252: {name: "Cindervault Gym - Puzzle Room 2", kind: gym, field: VOLCANIC, source: spec, why: "world spec"}
+  253: {name: "Cindervault Gym - Warden Arena", kind: gym, field: VOLCANIC, source: spec, why: "world spec"}
+  254: {name: "Pyre Keep - Ancestor Crypts", kind: dungeon, field: HOLLOW_CATHEDRAL, source: name, why: "name: \"Crypt\""}
+  260: {name: "Ironreach", kind: town, field: NEW_MOON, stage: 3, source: kingdom, why: "Nadir town default"}
+  261: {name: "Ironreach Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  262: {name: "Ironreach Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  263: {name: "The Iron Pit", kind: dungeon, field: COLOSSEUM, source: name, why: "name: \"Pit\""}
+  270: {name: "Ironreach Gym - Entrance", kind: gym, field: COLOSSEUM, source: spec, why: "world spec"}
+  271: {name: "Ironreach Gym - Puzzle Room 1", kind: gym, field: COLOSSEUM, source: spec, why: "world spec"}
+  272: {name: "Ironreach Gym - Puzzle Room 2", kind: gym, field: COLOSSEUM, source: spec, why: "world spec"}
+  273: {name: "Ironreach Gym - Puzzle Room 3", kind: gym, field: COLOSSEUM, source: spec, why: "world spec"}
+  274: {name: "Ironreach Gym - Warden Arena", kind: gym, field: COLOSSEUM, source: spec, why: "world spec"}
+  280: {name: "Verdance - Market Terraces", kind: town, field: FLOWER_GARDEN, stage: 2, built: true, battles: [], source: hand, why: "Verdance's market terraces: the whole city is gardens (Gym 9 city)"}
+  281: {name: "Verdance Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center"}
+  282: {name: "Verdance Mart", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Mart"}
+  283: {name: "Verdance - Glasshouse Ward", kind: town, field: FLOWER_GARDEN, stage: 3, source: hand, why: "Verdance's glasshouse ward"}
+  284: {name: "Verdance - Kingsgate Barbican", kind: town, field: FLOWER_GARDEN, source: hand, why: "Verdance barbican: the garden city begins"}
+  285: {name: "Briar Hall - Upper Court", kind: town, field: FLOWER_GARDEN, stage: 3, built: true, battles: [], source: hand, why: "Briar Hall upper court: royal flower terraces"}
+  286: {name: "Briar Hall - Great Hall", kind: interior, field: FAIRY_TALE, built: true, battles: [], source: hand, why: "Briar Hall great hall: the Evergreen Crown at court"}
+  287: {name: "Briar Hall - Throne Room", kind: interior, field: FAIRY_TALE, built: true, battles: [], source: hand, why: "Briar Hall throne room"}
+  288: {name: "Briar Hall - Royal Gallery", kind: interior, field: FAIRY_TALE, source: name, why: "name: \"Briar Hall\""}
+  289: {name: "Briar Hall - Thorn Crypts", kind: dungeon, field: HOLLOW_CATHEDRAL, source: name, why: "name: \"Crypt\""}
+  290: {name: "Verdance Gym - Entrance", kind: gym, field: FLOWER_GARDEN, source: spec, why: "world spec"}
+  291: {name: "Verdance Gym - Puzzle Room 1", kind: gym, field: FLOWER_GARDEN, source: spec, why: "world spec"}
+  292: {name: "Verdance Gym - Puzzle Room 2", kind: gym, field: FLOWER_GARDEN, source: spec, why: "world spec"}
+  293: {name: "Verdance Gym - Warden Arena", kind: gym, field: FLOWER_GARDEN, source: spec, why: "world spec"}
+  294: {name: "The Heartgarden", kind: town, field: FLOWER_GARDEN, stage: 4, source: hand, why: "the Heartgarden around the Bride Tree"}
+  295: {name: "Cathedral of the Evergreen", kind: interior, field: HOLLOW_CATHEDRAL, stage: 2, built: true, battles: [], source: hand, why: "Cathedral of the Evergreen: a consecrated cathedral"}
+  296: {name: "Verdance - Rootward", kind: town, field: FLOWER_GARDEN, source: hand, why: "Verdance rootward"}
+  300: {name: "Rimeholt - Thane's Harbour", kind: town, field: FROZEN_LAKE, battles: [], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "Rimeholt's frozen harbour"}
+  301: {name: "Rimeholt Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  302: {name: "Rimeholt Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  303: {name: "Rimeholt - Icewall Gate", kind: town, field: SNOWY_MOUNTAIN, source: name, why: "name: \"Rime\""}
+  304: {name: "Rimeholt - Sled Market", kind: town, field: SNOWY_MOUNTAIN, source: name, why: "name: \"Rime\""}
+  305: {name: "Whalebone Keep - Bailey", kind: town, field: FROZEN_LAKE, source: name, why: "name: \"Keep\" (Isenmar)"}
+  306: {name: "Whalebone Keep - Mead Hall", kind: interior, field: FROZEN_LAKE, source: name, why: "name: \"Keep\" (Isenmar)"}
+  307: {name: "Whalebone Keep - Thane's Seat", kind: interior, field: FROZEN_LAKE, source: name, why: "name: \"Keep\" (Isenmar)"}
+  308: {name: "Whalebone Keep - Ice Vault", kind: dungeon, field: FROZEN_LAKE, source: name, why: "name: \"Keep\" (Isenmar)"}
+  309: {name: "Rimeholt - Sinking Quarter", kind: town, field: FROZEN_LAKE, source: hand, why: "the sinking quarter, built out on the ice"}
+  310: {name: "Rimeholt Gym - Entrance", kind: gym, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  311: {name: "Rimeholt Gym - Puzzle Room 1", kind: gym, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  312: {name: "Rimeholt Gym - Puzzle Room 2", kind: gym, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  313: {name: "Rimeholt Gym - Warden Arena", kind: gym, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  314: {name: "Rimeholt - Net Row", kind: town, field: SNOWY_MOUNTAIN, source: name, why: "name: \"Rime\""}
+  320: {name: "Skyreach - Mast Ward", kind: town, field: STORMFRONT, source: name, why: "name: \"Sky\""}
+  321: {name: "Skyreach Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  322: {name: "Skyreach Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  323: {name: "Skyreach - Lower Gantries", kind: town, field: STORMFRONT, source: name, why: "name: \"Sky\""}
+  324: {name: "Skyreach - Skybridge Ward", kind: town, field: STORMFRONT, source: name, why: "name: \"Sky\""}
+  325: {name: "Gale Post Hall", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  326: {name: "Skyreach - Smugglers' Gantry", kind: town, field: STORMFRONT, source: name, why: "name: \"Sky\""}
+  330: {name: "Skyreach Gym - Entrance", kind: gym, field: STORMFRONT, source: spec, why: "world spec"}
+  331: {name: "Skyreach Gym - Puzzle Room 1", kind: gym, field: STORMFRONT, source: spec, why: "world spec"}
+  332: {name: "Skyreach Gym - Puzzle Room 2", kind: gym, field: STORMFRONT, source: spec, why: "world spec"}
+  333: {name: "Skyreach Gym - Warden Arena", kind: gym, field: STORMFRONT, source: spec, why: "world spec"}
+  340: {name: "Lucent - Athenaeum Quarter", kind: town, field: MINDSCAPE, source: name, why: "name: \"Athenaeum\""}
+  341: {name: "Lucent Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  342: {name: "Lucent Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  343: {name: "Lucent - Tribunal Ward", kind: town, field: MINDSCAPE, source: kingdom, why: "Antumbra town default"}
+  344: {name: "Lucent Athenaeum - Great Reading Hall", kind: interior, field: MINDSCAPE, source: hand, why: "the Great Reading Hall: thought made real"}
+  345: {name: "Lucent Athenaeum - Sealed Stacks", kind: dungeon, field: MINDSCAPE, source: hand, why: "sealed stacks of the Athenaeum"}
+  346: {name: "The Speculum - Mirror City", kind: town, field: INVERSE, source: hand, why: "the Speculum, the mirror city"}
+  347: {name: "Palace of Glass - Gate of Veils", kind: town, field: INVERSE, source: name, why: "name: \"Palace\" (Antumbra)"}
+  348: {name: "Palace of Glass - Hall of Mirrors", kind: interior, field: INVERSE, source: name, why: "name: \"Palace\" (Antumbra)"}
+  349: {name: "Palace of Glass - Veiled Throne", kind: interior, field: INVERSE, source: name, why: "name: \"Palace\" (Antumbra)"}
+  350: {name: "Lucent Gym - Entrance", kind: gym, field: MINDSCAPE, source: spec, why: "world spec"}
+  351: {name: "Lucent Gym - Puzzle Room 1", kind: gym, field: MINDSCAPE, source: spec, why: "world spec"}
+  352: {name: "Lucent Gym - Puzzle Room 2", kind: gym, field: MINDSCAPE, source: spec, why: "world spec"}
+  353: {name: "Lucent Gym - Puzzle Room 3", kind: gym, field: MINDSCAPE, source: spec, why: "world spec"}
+  354: {name: "Lucent Gym - Warden Arena", kind: gym, field: MINDSCAPE, source: spec, why: "world spec"}
+  355: {name: "Palace of Glass - Undercroft of Echoes", kind: dungeon, field: INVERSE, source: name, why: "name: \"Palace\" (Antumbra)"}
+  360: {name: "Cragholm", kind: town, field: DESERT, source: hand, why: "Cragholm, the canyon city of the Bone Sands"}
+  361: {name: "Cragholm Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  362: {name: "Cragholm Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  363: {name: "Cragholm - Lift Galleries", kind: interior, field: CAVE, source: hand, why: "mine-lift galleries in the canyon walls"}
+  370: {name: "Cragholm Gym - Entrance", kind: gym, field: CRYSTAL_CAVERN, source: spec, why: "world spec"}
+  371: {name: "Cragholm Gym - Puzzle Room 1", kind: gym, field: CRYSTAL_CAVERN, source: spec, why: "world spec"}
+  372: {name: "Cragholm Gym - Puzzle Room 2", kind: gym, field: CRYSTAL_CAVERN, source: spec, why: "world spec"}
+  373: {name: "Cragholm Gym - Warden Arena", kind: gym, field: CRYSTAL_CAVERN, source: spec, why: "world spec"}
+  380: {name: "Gravenmoor", kind: town, field: HOLLOW_CATHEDRAL, source: hand, why: "Gravenmoor, the graveyard city of the Ghost Warden"}
+  381: {name: "Gravenmoor Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  382: {name: "Gravenmoor Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  383: {name: "Vane Hall", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  384: {name: "Lantern Hospice", kind: interior, field: NONE, source: name, why: "name: \"Hospice\""}
+  390: {name: "Gravenmoor Gym - Entrance", kind: gym, field: HOLLOW_CATHEDRAL, source: spec, why: "world spec"}
+  391: {name: "Gravenmoor Gym - Puzzle Room 1", kind: gym, field: HOLLOW_CATHEDRAL, source: spec, why: "world spec"}
+  392: {name: "Gravenmoor Gym - Puzzle Room 2", kind: gym, field: HOLLOW_CATHEDRAL, source: spec, why: "world spec"}
+  393: {name: "Gravenmoor Gym - Puzzle Room 3", kind: gym, field: HOLLOW_CATHEDRAL, source: spec, why: "world spec"}
+  394: {name: "Gravenmoor Gym - Warden Arena", kind: gym, field: HOLLOW_CATHEDRAL, source: spec, why: "world spec"}
+  400: {name: "Cogsworth", kind: town, field: FACTORY, battles: [], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "Cogsworth, the foundry district"}
+  401: {name: "Cogsworth Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  402: {name: "Cogsworth Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  403: {name: "Strade Works - Foundry Floor", kind: dungeon, field: FACTORY, source: name, why: "name: \"Works\""}
+  410: {name: "Cogsworth Gym - Entrance", kind: gym, field: FACTORY, source: spec, why: "world spec"}
+  411: {name: "Cogsworth Gym - Puzzle Room 1", kind: gym, field: FACTORY, source: spec, why: "world spec"}
+  412: {name: "Cogsworth Gym - Puzzle Room 2", kind: gym, field: FACTORY, source: spec, why: "world spec"}
+  413: {name: "Cogsworth Gym - Warden Arena", kind: gym, field: FACTORY, source: spec, why: "world spec"}
+  420: {name: "Underveil - Lantern Tiers", kind: town, field: NEW_MOON, stage: 3, source: kingdom, why: "Nadir town default"}
+  421: {name: "Underveil Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  422: {name: "Underveil Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  423: {name: "Underveil - Moon Market", kind: town, field: NEW_MOON, source: hand, why: "the Moon Market in the dark"}
+  424: {name: "Underveil - Sump Docks", kind: town, field: CORROSIVE_MIRE, source: name, why: "name: \"Sump\""}
+  425: {name: "Underveil - Barons' Stair", kind: town, field: NEW_MOON, stage: 3, source: hand, why: "Barons' Stair: lamplit stairs of the vertical undercity"}
+  426: {name: "Underveil - Bell Tower of Aurel", kind: dungeon, field: HOLLOW_CATHEDRAL, source: hand, why: "bell tower of drowned Aurel"}
+  427: {name: "Nyx's Hall of Whispers", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  429: {name: "Drowned Cathedral of Aurel", kind: interior, field: HOLLOW_CATHEDRAL, source: hand, why: "the drowned cathedral of Aurel"}
+  430: {name: "Underveil Gym - Entrance", kind: gym, field: NEW_MOON, source: spec, why: "world spec"}
+  431: {name: "Underveil Gym - Puzzle Room 1", kind: gym, field: NEW_MOON, source: spec, why: "world spec"}
+  432: {name: "Underveil Gym - Puzzle Room 2", kind: gym, field: NEW_MOON, source: spec, why: "world spec"}
+  433: {name: "Underveil Gym - Warden Arena", kind: gym, field: NEW_MOON, source: spec, why: "world spec"}
+  440: {name: "Gloaming", kind: town, field: FAIRY_TALE, source: hand, why: "Gloaming, the storybook heart of the fairy forest"}
+  441: {name: "Gloaming Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  442: {name: "Gloaming Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  443: {name: "Great Tree Roots", kind: dungeon, field: SILKWOOD, source: kingdom, why: "Elowen dungeon default"}
+  450: {name: "Gloaming Gym - Entrance", kind: gym, field: FAIRY_TALE, source: spec, why: "world spec"}
+  451: {name: "Gloaming Gym - Puzzle Room 1", kind: gym, field: FAIRY_TALE, source: spec, why: "world spec"}
+  452: {name: "Gloaming Gym - Puzzle Room 2", kind: gym, field: FAIRY_TALE, source: spec, why: "world spec"}
+  453: {name: "Gloaming Gym - Puzzle Room 3", kind: gym, field: FAIRY_TALE, source: spec, why: "world spec"}
+  454: {name: "Gloaming Gym - Warden Arena", kind: gym, field: FAIRY_TALE, source: spec, why: "world spec"}
+  460: {name: "Wyrmrest", kind: town, field: ASHEN_WASTE, source: kingdom, why: "Ashkaar town default"}
+  461: {name: "Wyrmrest Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  462: {name: "Wyrmrest Mart", kind: interior, field: NONE, source: name, why: "name: \"Mart\""}
+  470: {name: "Wyrmrest Gym - Entrance", kind: gym, field: DRAGONS_DEN, source: spec, why: "world spec"}
+  471: {name: "Wyrmrest Gym - Puzzle Room 1", kind: gym, field: DRAGONS_DEN, source: spec, why: "world spec"}
+  472: {name: "Wyrmrest Gym - Puzzle Room 2", kind: gym, field: DRAGONS_DEN, source: spec, why: "world spec"}
+  473: {name: "Wyrmrest Gym - Puzzle Room 3", kind: gym, field: DRAGONS_DEN, source: spec, why: "world spec"}
+  474: {name: "Wyrmrest Gym - Warden Arena", kind: gym, field: DRAGONS_DEN, source: spec, why: "world spec"}
+  480: {name: "Lower Crownhaven", kind: town, field: GRAND_STAGE, source: kingdom, why: "Crownhaven town default"}
+  481: {name: "Crownhaven Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  482: {name: "Crownhaven - The Eighteen Gates", kind: town, field: GRAND_STAGE, source: kingdom, why: "Crownhaven town default"}
+  483: {name: "Upper Crownhaven - Basilica Close", kind: town, field: GRAND_STAGE, source: kingdom, why: "Crownhaven town default"}
+  484: {name: "Basilica of First Light", kind: interior, field: HOLLOW_CATHEDRAL, stage: 2, source: hand, why: "Basilica of First Light"}
+  485: {name: "Basilica Crypts", kind: dungeon, field: HOLLOW_CATHEDRAL, source: name, why: "name: \"Crypt\""}
+  486: {name: "Accord Palace - Court of Wardens", kind: town, field: GRAND_STAGE, source: name, why: "name: \"Palace\" (Crownhaven)"}
+  487: {name: "Accord Palace - Sovereign's Throne Room", kind: interior, field: GRAND_STAGE, source: name, why: "name: \"Palace\" (Crownhaven)"}
+  488: {name: "Accord Palace - Gallery of Plates", kind: interior, field: GRAND_STAGE, source: name, why: "name: \"Palace\" (Crownhaven)"}
+  489: {name: "Glassfall Memorial Garden", kind: town, field: FLOWER_GARDEN, stage: 3, source: hand, why: "Glassfall Memorial Garden"}
+  490: {name: "Temple-Arena of the Blessing - Hall of Eighteen Doors", kind: interior, field: GRAND_STAGE, source: hand, why: "Temple-Arena of the Blessing (Festival bracket fallback; see festival note)"}
+  491: {name: "Temple-Arena of the Blessing - Altar Stage", kind: interior, field: PRISM_ARENA, source: spec, why: "world spec"}
+  492: {name: "Accord Palace - Entrance Hall", kind: interior, field: GRAND_STAGE, source: name, why: "name: \"Palace\" (Crownhaven)"}
+  493: {name: "Concordance Spire - Lobby (Battle Tower)", kind: interior, field: NONE, source: hand, why: "Battle Tower lobby"}
+  494: {name: "Concordance Spire - Arena", kind: interior, field: GRAND_STAGE, source: hand, why: "Battle Tower arena (postgame)"}
+  495: {name: "Temple-Arena of the Blessing - Processional Plaza", kind: town, field: GRAND_STAGE, source: hand, why: "Temple-Arena processional (Festival)"}
+  496: {name: "Lower Crownhaven - Market Ring", kind: town, field: GRAND_STAGE, source: name, why: "name: \"Ring\" (Crownhaven)"}
+  497: {name: "Lower Crownhaven - Pilgrims' Quarter", kind: town, field: GRAND_STAGE, source: kingdom, why: "Crownhaven town default"}
+  498: {name: "Concordance Spire - Exterior", kind: town, field: GRAND_STAGE, source: hand, why: "Concordance Spire exterior"}
+  499: {name: "Festival Grounds - Court of Eight Pavilions", kind: town, field: GRAND_STAGE, source: name, why: "name: \"Court\" (Crownhaven)"}
+  520: {name: "Route 1", kind: route, field: MEADOW, built: true, battles: [trainer], encounters: [Land, LandNight], source: hand, why: "coastal heath, gorse and tall grass"}
+  521: {name: "Route 2", kind: route, field: MEADOW, built: true, battles: [trainer], encounters: [HeadbuttHigh, HeadbuttLow, Land, LandNight], source: hand, why: "orchard country, hedgerows"}
+  522: {name: "The Glassed Orchard", kind: bleed_zone, field: BLEED, built: true, battles: [event_wild], source: spec, why: "world spec"}
+  523: {name: "Hale Farmhouse", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "farmhouse: no battles"}
+  524: {name: "Gossamer Wood", kind: dungeon, field: SILKWOOD, built: true, battles: [trainer], encounters: [HeadbuttHigh, HeadbuttLow, Land, LandNight], source: spec, why: "world spec"}
+  525: {name: "Gossamer Deepwood", kind: dungeon, field: SILKWOOD, built: true, battles: [trainer, event_wild], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  526: {name: "Woodward's Hut", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "woodward's hut"}
+  540: {name: "Route 3", kind: route, field: MEADOW, built: true, battles: [trainer], encounters: [GoodRod, Land, LandNight, OldRod, SuperRod, Water], source: hand, why: "river meadows and wildflowers"}
+  541: {name: "Route 4", kind: route, field: BEACH, built: true, battles: [trainer], encounters: [GoodRod, Land, LandNight, OldRod, RockSmash, SuperRod, Water], source: spec, why: "world spec"}
+  542: {name: "Marsh Rest House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "rest house"}
+  544: {name: "Brinecut Mine 1F", kind: dungeon, field: CAVE, built: true, battles: [trainer], encounters: [Cave, RockSmash], source: spec, why: "world spec"}
+  545: {name: "Brinecut Mine B1F", kind: dungeon, field: CAVE, built: true, battles: [trainer], encounters: [Cave, Water], source: spec, why: "world spec"}
+  546: {name: "Thistledown Manor", kind: dungeon, field: HOLLOW_CATHEDRAL, built: true, battles: [trainer, event_wild], encounters: [Cave], source: hand, why: "Thistledown Manor: the optional haunted house"}
+  547: {name: "Thistledown Manor - Attic", kind: interior, field: HOLLOW_CATHEDRAL, built: true, battles: [event_wild], source: hand, why: "manor attic: the haunting is strongest here"}
+  548: {name: "Cocoonfall Hollow", kind: bleed_zone, field: BLEED, built: true, battles: [event_wild], encounters: [Land], source: spec, why: "world spec"}
+  560: {name: "Route 5 - Frostflat Causeway", kind: route, field: SNOWY_MOUNTAIN, built: true, battles: [trainer], encounters: [Land, LandNight], source: hand, why: "Frostflat Causeway: salt turning to frost (borderland Rimewood); the snow weather already matches"}
+  561: {name: "Route 6 - Gullcry Cliffs", kind: route, field: MOUNTAIN, built: true, battles: [trainer], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: hand, why: "Gullcry Cliffs: wind-scoured sea cliffs"}
+  562: {name: "The Rimewood", kind: route, field: SILKWOOD, built: true, battles: [trainer], encounters: [Land, LandNight], source: hand, why: "the Rimewood: giant ice-glazed trunks hung with frozen silk curtains (Elowen x Isenmar); its snow weather comes along"}
+  563: {name: "Rimewood Glade", kind: route, field: FROZEN_LAKE, built: true, battles: [trainer], encounters: [Land], source: hand, why: "Rimewood Glade: the frozen pond under the Silk-fall, ice-slide puzzle"}
+  564: {name: "Gullcry Caves 1F", kind: dungeon, field: CAVE, built: true, battles: [trainer], encounters: [Cave, GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  565: {name: "Gullcry Caves B1F", kind: dungeon, field: CAVE, battles: [], encounters: [Cave, Water], source: spec, why: "world spec"}
+  568: {name: "The Rehearsal", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  570: {name: "Frostwick", kind: town, field: SNOWY_MOUNTAIN, built: true, battles: [], encounters: [GoodRod, OldRod, SuperRod], source: hand, why: "Frostwick: borderland village in the snowbound Rimewood"}
+  571: {name: "Frostwick Pokémon Center", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "Pokemon Center"}
+  572: {name: "The Exchange", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "trading hall: no battles"}
+  573: {name: "The Two Hearths", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "inn"}
+  574: {name: "Rime-silk Loft", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "silk loft: no battles"}
+  575: {name: "Border House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "border office"}
+  576: {name: "Halvard's Smokehouse", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "smokehouse"}
+  580: {name: "Route 7", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Isenmar route default"}
+  581: {name: "Route 8 - Icefall Locks", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land], source: name, why: "name: \"Icefall\""}
+  582: {name: "Lumen South Gate", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  584: {name: "Voltaic Sluiceworks", kind: dungeon, field: SCRAPYARD, battles: [], encounters: [Cave, GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  585: {name: "Sluiceworks Turbine Hall", kind: dungeon, field: SCRAPYARD, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  588: {name: "Ebb Hollow", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  590: {name: "Brassfall", kind: town, field: SNOWY_MOUNTAIN, source: borderland, why: "blend of Isenmar/Zenith"}
+  591: {name: "Brassfall Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  600: {name: "Route 9 - The Brass Dunes", kind: route, field: DESERT, battles: [], encounters: [Land], source: name, why: "name: \"Dune\""}
+  601: {name: "Route 10", kind: route, field: DESERT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  604: {name: "Static Tunnels", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  605: {name: "Static Tunnels Depths", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  608: {name: "The Lowlight (Shattered)", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  610: {name: "Copperdune", kind: town, field: DESERT, source: name, why: "name: \"dune\""}
+  611: {name: "Copperdune Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  620: {name: "Route 11", kind: route, field: DESERT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  621: {name: "Route 12 - The Leach Canyons", kind: route, field: WASTELAND, battles: [], encounters: [Land], source: name, why: "name: \"Canyon\" (Nadir)"}
+  624: {name: "Ossuary of Dunes", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  625: {name: "Ossuary of Dunes - Script Vault", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  628: {name: "Sinkfield", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  630: {name: "Charwell", kind: town, field: WASTELAND, source: borderland, why: "blend of Ossaria/Nadir"}
+  631: {name: "Charwell Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  640: {name: "Route 13", kind: route, field: CORROSIVE_MIRE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Nadir route default"}
+  641: {name: "Route 14 - Sulfur Reach (Lake Sallow)", kind: route, field: ASHEN_WASTE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: hand, why: "Sulfur Reach: steam vents and geysers around the hot-spring lake (surfing -> Water Surface)"}
+  644: {name: "Miasma Caverns", kind: dungeon, field: CORROSIVE_MIRE, battles: [], encounters: [Cave, Water], source: spec, why: "world spec"}
+  645: {name: "Miasma Caverns B1F", kind: dungeon, field: CORROSIVE_MIRE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  648: {name: "The Weeping Fen", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  650: {name: "Scaldwater", kind: town, field: ASHEN_WASTE, source: borderland, why: "blend of Nadir/Ashkaar"}
+  651: {name: "Scaldwater Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  658: {name: "Lantern Isle", kind: route, field: BEACH, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  660: {name: "Route 15", kind: route, field: ASHEN_WASTE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  661: {name: "Route 16 - The Ironway", kind: route, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  662: {name: "Route 15b - The Cinderglass Barrens", kind: route, field: ASHEN_WASTE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  663: {name: "The Petrified Ashwood", kind: route, field: DESERT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  664: {name: "Mt. Cinder 1F", kind: dungeon, field: VOLCANIC, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  665: {name: "Mt. Cinder 2F", kind: dungeon, field: VOLCANIC, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  666: {name: "Mt. Cinder Caldera", kind: dungeon, field: VOLCANIC, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  668: {name: "Emberfall", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  670: {name: "Glasswake", kind: town, field: ASHEN_WASTE, source: borderland, why: "blend of Ashkaar/Ossaria"}
+  671: {name: "Glasswake Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  680: {name: "Route 17 - The Rootdeep", kind: route, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  681: {name: "Route 18 - Prism Falls", kind: route, field: RAINBOW, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  682: {name: "The Royal Chase", kind: route, field: MEADOW, battles: [], encounters: [Land], source: hand, why: "the Royal Chase: a Safari-style reserve (Safari encounters ignore fields; trainer battles here, e.g. the Melia cameo, are on the meadow)"}
+  684: {name: "Grudgestone Quarry", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  685: {name: "Grudgestone Quarry B1F", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  688: {name: "Echo Coliseum", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  690: {name: "Lanternroot", kind: town, field: CAVE, source: borderland, why: "blend of Nadir/Elowen"}
+  691: {name: "Lanternroot Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  698: {name: "Hollow Sanctuary", kind: dungeon, field: SILKWOOD, source: hand, why: "Hollow Sanctuary in the old forest"}
+  699: {name: "Meridian Black Site", kind: dungeon, field: FACTORY, source: hand, why: "Meridian black site laboratories"}
+  700: {name: "Route 19", kind: route, field: MEADOW, battles: [], encounters: [Land], source: kingdom, why: "Elowen route default"}
+  701: {name: "Route 20 - Northern Rimewood", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  703: {name: "Gossamer Heartwood", kind: dungeon, field: SILKWOOD, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  704: {name: "Frostfang Pass", kind: dungeon, field: SNOWY_MOUNTAIN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  705: {name: "Frostfang Pass 2F", kind: dungeon, field: SNOWY_MOUNTAIN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  708: {name: "The Bride Grove", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  710: {name: "Snowbriar", kind: town, field: SNOWY_MOUNTAIN, source: name, why: "name: \"Snow\""}
+  711: {name: "Snowbriar Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  720: {name: "Route 21", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land, Water], source: spec, why: "world spec"}
+  721: {name: "Route 22 - Mast Glacier", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  723: {name: "Ebbmouth Sea Grotto", kind: dungeon, field: CAVE, battles: [], encounters: [Cave, Water], source: spec, why: "world spec"}
+  724: {name: "Cloudstair - Lower", kind: dungeon, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  725: {name: "Cloudstair - Inner", kind: dungeon, field: MOUNTAIN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  726: {name: "Cloudstair - Summit", kind: dungeon, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  728: {name: "Stillwater", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  730: {name: "Anchorhold", kind: town, field: SNOWY_MOUNTAIN, source: borderland, why: "blend of Isenmar/Zenith"}
+  731: {name: "Anchorhold Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  740: {name: "Route 23", kind: route, field: STORMFRONT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  741: {name: "Route 24 - The Wired Wood", kind: route, field: SILKWOOD, battles: [], encounters: [Land], source: name, why: "name: \"Wood\""}
+  742: {name: "Mirror Mere", kind: route, field: MINDSCAPE, battles: [], encounters: [Land, Water], source: hand, why: "Mirror Mere: reflections that disagree"}
+  743: {name: "Antumbra Threshold", kind: dungeon, field: INVERSE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  744: {name: "Stormwatch Spire 1F", kind: dungeon, field: STORMFRONT, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  745: {name: "Stormwatch Spire 2F", kind: dungeon, field: STORMFRONT, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  746: {name: "Stormwatch Spire Roof", kind: dungeon, field: STORMFRONT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  748: {name: "The Shattered Sky", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  750: {name: "Verdigris", kind: town, field: SILKWOOD, source: borderland, why: "blend of Zenith/Elowen"}
+  751: {name: "Verdigris Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  753: {name: "Glassmere", kind: town, field: MINDSCAPE, source: hand, why: "Glassmere's doubled houses"}
+  754: {name: "Glassmere Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  760: {name: "Route 25 - The Obsidian Barrows", kind: route, field: INVERSE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  761: {name: "Route 26", kind: route, field: DESERT, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Ossaria route default"}
+  764: {name: "Geode Hollow", kind: dungeon, field: CRYSTAL_CAVERN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  765: {name: "Geode Hollow B1F", kind: dungeon, field: CRYSTAL_CAVERN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  768: {name: "The Dreaming Quarter", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  770: {name: "Vigil", kind: town, field: HOLLOW_CATHEDRAL, source: borderland, why: "blend of Antumbra/Ossaria"}
+  771: {name: "Vigil Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  780: {name: "Route 27", kind: route, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  781: {name: "Route 28", kind: route, field: INVERSE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Antumbra route default"}
+  783: {name: "Duneholt Undersands", kind: dungeon, field: DESERT, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  784: {name: "Darkglass Mine", kind: dungeon, field: DARK_CRYSTAL, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  785: {name: "Darkglass Mine B1F", kind: dungeon, field: DARK_CRYSTAL, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  788: {name: "Stonesleep", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  800: {name: "Route 29", kind: route, field: INVERSE, battles: [], encounters: [Land], source: kingdom, why: "Antumbra route default"}
+  801: {name: "Route 30 - Slag Mesa", kind: route, field: WASTELAND, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  804: {name: "Barrow of the Wardens", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  805: {name: "Barrow Sanctum", kind: dungeon, field: HOLLOW_CATHEDRAL, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  806: {name: "Giratina's Reverse Depths", kind: dungeon, field: INVERSE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  808: {name: "The Hush", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  820: {name: "Route 31 - The Hanging Stair", kind: route, field: SCRAPYARD, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  821: {name: "Route 32", kind: route, field: WATER_SURFACE, wild: BEACH, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: spec, why: "world spec; wild: Route 32 is open sea with islets: wild battles on the islets are on the shore (surfing/fishing -> Water Surface)"}
+  822: {name: "Route 32 Seabed", kind: dungeon, field: UNDERWATER, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  824: {name: "Aurelia - Drowned Spires", kind: dungeon, field: UNDERWATER, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  825: {name: "Aurelia - Air Halls", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  826: {name: "Aurelia - Gilded Throne Vault", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  828: {name: "Ironbloom", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  830: {name: "Midstair", kind: town, field: SCRAPYARD, source: hand, why: "Midstair on the Hanging Stair (Zenith/Nadir)"}
+  831: {name: "Midstair Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  838: {name: "Accord Archive", kind: interior, field: MINDSCAPE, source: name, why: "name: \"Archive\""}
+  840: {name: "Route 33 - Rootdeep River", kind: route, field: CAVE, battles: [], encounters: [Cave, GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  841: {name: "Route 34 - Gloamwood Verge", kind: route, field: SILKWOOD, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: name, why: "name: \"wood\""}
+  844: {name: "Lightless Deep", kind: dungeon, field: DARK_CRYSTAL, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  845: {name: "Lightless Deep B1F", kind: dungeon, field: NEW_MOON, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  848: {name: "The Inverted Ward", kind: bleed_zone, field: INVERSE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  850: {name: "Mothwell", kind: town, field: CAVE, source: borderland, why: "blend of Nadir/Elowen"}
+  851: {name: "Mothwell Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  860: {name: "Route 35 - Gloamwood", kind: route, field: FAIRY_TALE, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  861: {name: "Route 36 - Thornwar Marches", kind: route, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  864: {name: "Wyrmscar Rift", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  865: {name: "Wyrmscar Depths", kind: dungeon, field: DRAGONS_DEN, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  868: {name: "The Rainbow Scar", kind: bleed_zone, field: RAINBOW, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  870: {name: "Thornwatch", kind: town, field: MOUNTAIN, source: borderland, why: "blend of Elowen/Ashkaar"}
+  871: {name: "Thornwatch Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  880: {name: "Route 37 - Pilgrim Pass", kind: route, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  884: {name: "Sovereign's Ascent 1F", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  885: {name: "Sovereign's Ascent 2F", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
+  886: {name: "Sovereign's Ascent Summit", kind: dungeon, field: MOUNTAIN, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  888: {name: "The Glassfall Scar", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  890: {name: "Pilgrim's Rest", kind: town, field: MOUNTAIN, source: borderland, why: "blend of Ashkaar/Crownhaven"}
+  891: {name: "Pilgrim's Rest Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
+  900: {name: "Hallow Strait", kind: route, field: WATER_SURFACE, battles: [], encounters: [GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}
+  901: {name: "Hallow Strait Seabed", kind: dungeon, field: UNDERWATER, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  905: {name: "Shardfall Isles", kind: route, field: BEACH, battles: [], encounters: [Land], source: borderland, why: "blend of islands"}
+  910: {name: "Antumbra - Distortion Core", kind: dungeon, field: INVERSE, source: spec, why: "world spec"}
+  920: {name: "The Rime Narrows", kind: route, field: SNOWY_MOUNTAIN, source: spec, why: "world spec"}
+  921: {name: "Skaldfast - Outer Walls", kind: town, field: SNOWY_MOUNTAIN, source: spec, why: "world spec"}
+  922: {name: "Skaldfast - Harbour Keep", kind: town, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  923: {name: "Skaldfast - Great Hall", kind: interior, field: FROZEN_LAKE, source: name, why: "name: \"Great Hall\" (Isenmar)"}
+  924: {name: "Ashkaar Siege Camp", kind: town, field: ASHEN_WASTE, source: spec, why: "world spec"}
+  925: {name: "The Steamline", kind: route, field: ASHEN_WASTE, source: spec, why: "world spec"}
+  926: {name: "The Shattered Ice", kind: dungeon, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  927: {name: "Cinder Cape Warfort", kind: town, field: VOLCANIC, source: spec, why: "world spec"}
+  959: {name: "Skyport Customs", kind: interior, field: NONE, source: hand, why: "customs hall"}
+  960: {name: "The Ledger Hall", kind: interior, field: BLEED, source: spec, why: "world spec"}
+  961: {name: "Glassed Orchard - Ruin", kind: bleed_zone, field: BLEED, source: spec, why: "world spec"}
+  962: {name: "Aurelia - Gilded Chain Foundry", kind: dungeon, field: BLEED, source: spec, why: "world spec"}
+  963: {name: "Crownhaven - Ruined Crown", kind: town, field: BLEED, source: spec, why: "world spec"}

@@ -22,7 +22,7 @@ tileset: 52
 events:
 - type: sign
   name: Border Stones
-  at: [33, 11]
+  at: [29, 10]
   text: 'Two old stones. One bears Elowen''s briar crown, the other Isenmar''s whale and axe.
 
     A brass Meridian sunburst has been bolted across both of them. The bolts are new.'
@@ -36,14 +36,14 @@ events:
   post: false
 - type: sign
   name: Old salt road
-  at: [31, 25]
+  at: [32, 25]
   text: 'The old salt road dips toward a drowned pier village. Something replays there, over and over.
 
     [The Rehearsal, map 568: not built yet]'
   post: false
 - type: event
   name: Royal forester
-  at: [32, 8]
+  at: [33, 10]
   pages:
   - graphic: {sprite: NPC 14, dir: down}
     trigger: action
@@ -59,7 +59,7 @@ events:
     commands: [Mind the frost-pans west of here. They're slick as a courtier.]
 - type: event
   name: Fur-trader
-  at: [22, 15]
+  at: [22, 13]
   pages:
   - graphic: {sprite: NPC 22, dir: down}
     trigger: action
@@ -76,14 +76,14 @@ events:
     commands: [Still no sled. Still no Spheal. Still a lovely day.]
 - type: event
   name: Meridian surveyor
-  at: [20, 9]
+  at: [20, 6]
   pages:
   - graphic: {sprite: NPC 16, dir: left}
     trigger: action
     move: fixed
     commands: ['*tink* *tink* Survey peg. Lattice line. Don''t touch.', 'Who authorised it? The Meridian. Who authorised the Meridian? ...Move along, please.']
 - type: trainer
-  at: [50, 9]
+  at: [48, 10]
   sight: 4
   dir: down
   sprite: trainer_PICNICKER
@@ -91,7 +91,7 @@ events:
   intro: Salt-flat picnic! Bring your own shade!
   after: Isenmar's colder than I thought.
 - type: trainer
-  at: [40, 17]
+  at: [41, 20]
   sight: 4
   dir: up
   sprite: trainer_HIKER
@@ -99,7 +99,7 @@ events:
   intro: Thirty years I've carted salt down this road! Show me something new!
   after: Salt in my boots, frost in my beard. Good trade.
 - type: trainer
-  at: [14, 17]
+  at: [9, 21]
   sight: 4
   dir: right
   sprite: trainer_LASS
@@ -107,7 +107,7 @@ events:
   intro: Did you slide here too? Everyone slides here.
   after: My Swinub slid farther than me.
 - type: trainer
-  at: [20, 10]
+  at: [18, 10]
   sight: 4
   dir: down
   sprite: trainer_SAILOR
@@ -115,7 +115,7 @@ events:
   intro: Sealer out of Ebbmouth! The sea's too thick to row, so I walk!
   after: Ice'll break by summer. Probably.
 - type: trainer
-  at: [26, 22]
+  at: [26, 21]
   sight: 4
   dir: up
   sprite: trainer_BIRDKEEPER
@@ -123,15 +123,15 @@ events:
   intro: The gulls change colour past the stones. Watch!
   after: Frostwick's gulls wear little ice hats. Not really.
 - type: item
-  at: [61, 4]
+  at: [62, 5]
   item: SUPERPOTION
 - type: item
-  at: [5, 9]
+  at: [3, 8]
   item: ICEHEAL
 - type: item
-  at: [57, 24]
+  at: [56, 23]
   item: SOFTSAND
   hidden: true
 - type: item
-  at: [46, 22]
+  at: [45, 23]
   item: HEALPOWDER

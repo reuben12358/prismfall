@@ -10,7 +10,7 @@ import kb, mat, show
 from mat import H, BLACK, CLEAR
 from PIL import Image
 
-OUT = kb.WORK + '/juno'
+OUT = kb.WORK + '/passes'
 W = 80
 
 
@@ -70,17 +70,46 @@ def stage_recolour(body):
     return b
 
 
+S_HAIR = [(61, 43, 38, 255), (80, 56, 48, 255), (92, 71, 57, 255), (112, 88, 72, 255), (129, 91, 82, 255),
+          (136, 110, 95, 255), (169, 133, 112, 255)]
+
+
+def frizz_puff():
+    """Shauna's (ZacWeavile, BW-style) curly lower-right pigtail puff, repainted auburn."""
+    n, f = show.get_native('sd:shauna')
+    puff = n.crop((46, 23, 57, 35))
+    keep = set(S_HAIR) | {(0, 0, 0, 255)}
+    p = puff.load()
+    for y in range(puff.size[1]):
+        for x in range(puff.size[0]):
+            if p[x, y][3] and p[x, y] not in keep:
+                p[x, y] = CLEAR
+    puff = mat.recolour(puff, mat.lumrank_map(S_HAIR, [HAIR[0], HAIR[0], HAIR[1], HAIR[1], HAIR[2], HAIR[2], H('f0a060')]))
+    puff = mat.clean_orphans(puff)
+    return puff.crop(kb.bbox(puff))
+
+
+def swap_ponytail(body):
+    reg = mat.region(body.size, [[(36, 2), (50, 2), (50, 12), (47, 14), (45, 16), (36, 16)]])
+    body = mat.erase(body, reg)
+    puff = frizz_puff()
+    body = mat.under(body, puff, 38, 4)
+    body = mat.under(body, mat.flip(puff), 33, 7)
+    return body
+
+
 def compose():
-    import wardian
+    import wardian2
     b, body, pack = stage_cut()
     body = stage_recolour(body)
-    case, top, inside = wardian.build()
-    out = mat.under(body, case, 0, 0)
-    out.alpha_composite(top)
-    return out
+    # body = swap_ponytail(body)   # tried (r9): Shauna curl puff floated off the head; kept the donor ponytail
+    case, _ = wardian2.build(fx0=14, fx1=42)
+    case = mat.shear_rows(case, 49, 5)
+    return mat.under(body, case, 0, 0)
 
 
 if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'compose':
     out = compose()
-    out.save(OUT + '/v1_r1.png')
-    kb.grid(out, 8).save(kb.WORK + '/sheets/v1_r1_grid.png')
+    tag = sys.argv[2] if len(sys.argv) > 2 else 'v1_final'
+    out.save(OUT + '/%s.png' % tag)
+    kb.grid(out, 8).save(kb.WORK + '/sheets/%s_grid.png' % tag)

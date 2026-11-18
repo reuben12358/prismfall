@@ -32,12 +32,12 @@ This kit is an **overlay**: copy its folders into an Essentials + EBDX project. 
 | `Plugins/Prismfall Bosses` | Rejuvenation-style multi-bar boss battles (if present in this build) |
 | `Plugins/Prismfall Debug Tools` | Debug menu shortcuts for testing |
 | `Plugins/Prismfall Map*` | Map + tileset installer, New Game start, per-map default fields, tones, fogs, story helpers |
-| `Plugins/~Prismfall Base Fixes` | Loads first: works around the EBDX base projects' `PokemonSprite` boot error (SETUP §6) |
+| `Plugins/~Prismfall Base Fixes` | Loads first: works around the EBDX base projects' `PokemonSprite` boot error (SETUP §6), and draws characters the stock fonts lack (— – ₽ arrows) as look-alikes |
 | `PBS/*_prismfall.txt` | Trainers (Wardens ×3 difficulties, rivals, Festival), trainer types, seed items, encounters, map metadata/connections |
 | `Data/Map*.rxdata` | Generated maps (Act I slice in progress + Test Arena), plus `mapinfos_prismfall.txt`, `Tilesets_prismfall.rxdata` and `system_prismfall.txt` for the installer |
 | `Graphics/Tilesets`, `Autotiles`, `Fogs` | The maps' tileset sheets (IDs 30, 33, 34, 40), their autotiles and fog pictures |
 | `Design/`, `Story/`, `Docs/` | Spine, story bible, choices/endings, world & gym puzzles, field compendium, systems docs, art asset list, setup, map previews |
-| `Tools/` | Validators, standalone map merge tool, map generator specs |
+| `Tools/` | Validators (incl. `validate_map_trainers.py`: every trainer a map battles exists in PBS), standalone map merge tool, map generator specs |
 
 ## Status
 The packaged kit has now been installed into a fresh copy of the EBDX Renovation base project and played in the real

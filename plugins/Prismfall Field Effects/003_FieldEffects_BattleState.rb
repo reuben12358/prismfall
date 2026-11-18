@@ -393,9 +393,10 @@ module FieldEffects
     end
     if wild
       wid, wstage = self.split_field_entry(map_id ? (MAP_WILD_FIELDS[map_id] || MAP_DEFAULT_WILD_FIELDS[map_id]) : nil)
-      return [wid, wstage] if wid
-      enc = self.encounter_override(map_id_value)
+      # Surfing/fishing still win over a map's land-wild field
+      enc = self.encounter_override(wid || map_id_value)
       return [enc, 1] if enc
+      return [wid, wstage] if wid
     end
     if glob && glob.respond_to?(:surfing) && glob.surfing && SURFING_FIELD &&
        !Array(ENCOUNTER_KEEP_FIELDS[:water]).include?(map_id_value)

@@ -778,3 +778,33 @@ def flowers_scatter(canvas, region, n, colors, seed=0, min_y=None, size=(1, 3)):
         if s > 1.5:
             d.point((x, y), fill=C((255, 240, 150)))
             d.line([(x, y + s), (x, y + s + 2 + s)], fill=C((60, 130, 60)))
+
+
+def grass_tuft(w, h, colors=((70, 150, 60), (100, 180, 70), (140, 200, 90)), outline=(30, 70, 30), seed=0,
+               blades=None):
+    """Tall-grass clump, pivot bottom centre (sways in-engine)."""
+    rng = random.Random(seed)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    n = blades or max(6, w // 3)
+    for i in range(n):
+        x0 = w / 2 + rng.uniform(-w * 0.3, w * 0.3)
+        tip = (x0 + rng.uniform(-w * 0.35, w * 0.35), rng.uniform(0, h * 0.4))
+        mid = ((x0 + tip[0]) / 2 + rng.uniform(-3, 3), (h + tip[1]) / 2)
+        col = rng.choice(colors)
+        d.polygon([(x0 - 2, h), mid, tip, (x0 + 2, h)], fill=C(col), outline=C(outline))
+    return im
+
+
+def orchard_tree(r=16, leaf=(70, 140, 60), fruit=(230, 80, 60), outline=(24, 50, 24), seed=0):
+    rng = random.Random(seed)
+    im = Image.new("RGBA", (r * 2 + 4, r * 3), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    cx = r + 2
+    d.rectangle([cx - 2, r * 1.5, cx + 2, r * 3 - 1], fill=C((90, 64, 40)), outline=C((40, 26, 16)))
+    d.ellipse([2, 2, r * 2 + 2, r * 2 + 2], fill=C(leaf), outline=C(outline))
+    d.ellipse([5, 4, r * 1.4, r * 1.2], fill=C(lighter(leaf, 0.2)))
+    for _ in range(5):
+        x, y = rng.uniform(6, r * 2 - 2), rng.uniform(6, r * 1.8)
+        d.point((x, y), fill=C(fruit)); d.point((x + 1, y), fill=C(fruit))
+    return im

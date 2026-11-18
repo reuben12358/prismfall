@@ -68,6 +68,8 @@ module PrismfallEBDX
     [:SILKWOOD, :WILDFIRE]            => [255, 120, 30],    # the forest catches
     [:FLOWER_GARDEN, :WILDFIRE]       => [255, 120, 30],
     [:WILDFIRE, :ASHEN_WASTE]         => [200, 200, 200],
+    [:MEADOW, :WILDFIRE]              => [255, 120, 30],
+    [:MEADOW, :FLOWER_GARDEN]         => [255, 230, 240],
     [:ANY, :BLEED]                    => :distortion,
     [:BLEED, :ANY]                    => :white
   }
@@ -412,6 +414,16 @@ module PrismfallEBDX
         { :type => :fall, :count => 6, :shape => :dot, :size => 2, :colors => EMBER,
           :area => [60, 0, 324, 220], :speed => [2.0, 3.5], :sway => 3, :zoom => [0.5, 0.8], :opacity => [200, 255],
           :layers => [:back, :mid], :blend => 1 }
+      ]
+    },
+    :MEADOW => {
+      :fallback => :OUTDOOR, :outdoor => true, :tone => [5, 10, -5, 0], :transition => [220, 255, 200],
+      :fallback_extras => { "tallGrass" => { :elements => 7, :x => [124, 274, 204, 62, 248, 275, 182],
+        :y => [160, 140, 140, 185, 246, 174, 170], :z => [2, 1, 2, 17, 27, 17, 17],
+        :zoom => [0.7, 0.35, 0.5, 1, 1.5, 0.7, 1], :mirror => [false, true, false, true, false, true, false] } },
+      :fx => [
+        { :type => :drift, :count => 14, :shape => :dot, :size => 2, :colors => [[255, 255, 240], [250, 240, 200]],
+          :dir => 1, :speed => [0.8, 1.6], :sway => 12, :zoom => [0.5, 0.9], :opacity => [160, 230], :layers => [:back, :mid, :front] }
       ]
     },
     :WILDFIRE => {

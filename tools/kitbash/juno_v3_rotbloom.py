@@ -11,7 +11,7 @@ import kb, mat, show
 from mat import H, BLACK, CLEAR
 from PIL import Image
 
-OUT = kb.WORK + '/juno'
+OUT = kb.WORK + '/passes'
 R = '/home/claude/ref/games/reborn/Graphics/'
 
 P_CANOPY = [(152, 56, 104, 255), (184, 80, 112, 255), (200, 80, 128, 255), (232, 136, 168, 255),
@@ -75,6 +75,8 @@ def recolour(b):
     b = mat.recolour(b, {P_HAIR[0]: HAIR[0], P_HAIR[1]: HAIR[1]}, hair_r)
     body_r = mat.region(b.size, rect=(14, 28, 52, 56))
     b = mat.recolour(b, mat.lumrank_map(P_PINK, LOAM), body_r)
+    # spore-violet neckerchief ties the coat to the cap
+    b = mat.recolour(b, dict(zip(LOAM, [CAP[0], CAP[1], CAP[2], CAP[3], CAP[4]])), mat.region(b.size, rect=(32, 30, 44, 33)))
     legs_r = mat.region(b.size, rect=(20, 56, 60, 80))
     b = mat.recolour(b, mat.lumrank_map(P_PINK, MOSS + [MOSS[2]]), legs_r)
     return b
@@ -93,5 +95,5 @@ def compose():
 
 if __name__ == '__main__':
     out = compose()
-    out.save(OUT + '/v3_r1.png')
-    kb.grid(out, 8).save(kb.WORK + '/sheets/v3_r1_grid.png')
+    out.save(OUT + '/v3_final.png')
+    kb.grid(out, 8).save(kb.WORK + '/sheets/v3_final_grid.png')

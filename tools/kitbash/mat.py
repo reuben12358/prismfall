@@ -243,3 +243,21 @@ def component(im, seed, stop=lambda c: False, outline_cols=((0, 0, 0, 255),)):
                 if 0 <= xx < w and 0 <= yy < h and p[xx, yy] in oc:
                     q[xx, yy] = p[xx, yy]
     return out
+
+
+def reduce_colours(im, n, protect=()):
+    """median-cut the opaque colours of im down to n (no dithering); protected colours are kept exactly."""
+    prot = set(protect)
+    p = im.load(); w, h = im.size
+    pix = [(x, y) for y in range(h) for x in range(w) if p[x, y][3] and p[x, y] not in prot]
+    if not pix:
+        return im
+    strip = Image.new('RGB', (len(pix), 1))
+    sp = strip.load()
+    for i, (x, y) in enumerate(pix):
+        sp[i, 0] = p[x, y][:3]
+    q = strip.quantize(colors=n, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).convert('RGB')
+    qp = q.load(); out = im.copy(); op = out.load()
+    for i, (x, y) in enumerate(pix):
+        op[x, y] = qp[i, 0] + (255,)
+    return out

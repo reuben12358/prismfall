@@ -43,8 +43,8 @@ module FieldEffects
   } unless const_defined?(:ENCOUNTER_FIELDS, false)
   # Fields that already ARE the right place for that encounter (no override).
   ENCOUNTER_KEEP_FIELDS = {
-    :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :BLEED, :PRISM_ARENA],
-    :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :FROZEN_LAKE, :BEACH, :BLEED]
+    :water   => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :BLEED, :PRISM_ARENA, :RAINBOW],
+    :fishing => [:WATER_SURFACE, :UNDERWATER, :CORROSIVE_MIRE, :FROZEN_LAKE, :BEACH, :BLEED, :RAINBOW]
   } unless const_defined?(:ENCOUNTER_KEEP_FIELDS, false)
   # Wild battles on maps with no field of their own (no MAP_FIELDS /
   # MAP_DEFAULT_FIELDS entry, or :NONE): the encounter type supplies one.

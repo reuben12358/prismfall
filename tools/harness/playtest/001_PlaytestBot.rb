@@ -38,6 +38,24 @@ module PlayBot
     [:goto, 520, 12, 54],          # Juno's catching tutorial
     [:goto, 520, 10, 44],          # up the route past the Youngster (Route 1 trainers may spot us)
     [:goto, 520, 16, 38],
+    # Chapter 1: Route 2, the Glassed Orchard, Hale's Bramble, the send-off, Gossamer Wood
+    [:edge, 520, 26, 0, 8],        # north edge -> Route 2
+    [:goto, 521, 61, 23],          # east edge -> the Glassed Orchard (arrival scene, the Veil)
+    [:talk, 522, 24, 18],          # the Glassed Wurmple (Bleed field)
+    [:talk, 522, 11, 13],          # Biscuit
+    [:goto, 522, 4, 36],           # back through the Veil: Larch, Lecture One (S105)
+    [:goto, 522, 0, 37],           # -> Route 2
+    [:goto, 521, 57, 21],          # Juno's flags
+    [:bump, 521, 30, 35],          # Hale Farmhouse door
+    [:talk, 523, 7, 8],            # Wenna: Biscuit home
+    [:goto, 523, 10, 13],          # out
+    [:edge, 521, 41, 47, 2],       # back down to Route 1
+    [:goto, 520, 15, 60],          # the stile send-off (Chapter 1 close, V102 = 2)
+    [:edge, 520, 26, 0, 8],        # north again
+    [:goto, 521, 0, 10],           # the Accord barrier opens after the orchard -> Gossamer Wood
+    [:goto, 524, 20, 33],          # past the Twins (double battle)
+    [:goto, 524, 25, 0],           # -> Briarwick
+    [:arrive, 120],
     [:done]
   ]
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
@@ -270,7 +288,8 @@ module PlayBot
       return :back if @debug_phase == :leaving
       rules = [/^New Game$/, /Style A/, /^Standard$/, /^That's right\.$/, /^Nerve\.$/, /^Thank you\.$/,
                /^I'm staying\.$/, /^Drink it\.$/, /^It said NULL\.$/, /^Generation 3$/, /^Water: /,
-               /^I was born here\.$/, /^Why not\?$/, /^I'm fine\.$/, /^Who\?$/]
+               /^I was born here\.$/, /^Why not\?$/, /^I'm fine\.$/, /^Who\?$/,
+               /^No\. Stay there\.$/, /^It was stuck\.$/]   # never "Take her hand" (Game Over GO_ORCHARD)
       rules.each { |re| i = find.call(re); return i if i }
       if c.length == 2 && c[0] =~ /^Yes$/i && c[1] =~ /^No$/i
         return 0 if t =~ /Play on|install them now|give up|stop trying|stop learning/i
@@ -389,7 +408,7 @@ module PlayBot
         log("step #{@step}: #{step.inspect}")
       end
       @step_frames += 1                # only frames with the map free count (cutscenes can be long)
-      return wait_for_map if ![:done, :debug_install, :run_checks].include?(kind) && $game_map.map_id != map
+      return wait_for_map if ![:done, :debug_install, :run_checks, :arrive].include?(kind) && $game_map.map_id != map
       if @step_frames > 5400
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
@@ -407,6 +426,12 @@ module PlayBot
         debug_install if @idle >= 12
       when :run_checks
         run_checks if @idle >= 30
+      when :arrive
+        return wait_for_map if $game_map.map_id != map
+        if @idle >= 60
+          shot("arrived_map#{map}")
+          next_step
+        end
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]

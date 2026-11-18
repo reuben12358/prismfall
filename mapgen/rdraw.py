@@ -524,6 +524,81 @@ def fallen_log(part):
     return im
 
 
+def peg():
+    """a Meridian survey peg: a short stake with a brass sunburst tag and a red ribbon (1x1, solid)"""
+    im, d = canvas(1, 1)
+    d.rectangle([7, 4, 8, 15], fill=WOOD[2]); d.line([7, 4, 7, 15], fill=WOOD[0])
+    disc(im, 8, 4, 2.2, GOLD[0]); disc(im, 8, 4, 1.4, GOLD[1]); P(im, 7, 3, GOLD[2])
+    d.line([9, 7, 12, 9], fill=(196, 60, 60, 255)); d.line([9, 8, 11, 10], fill=(150, 40, 46, 255))
+    snow_cap(im, 4, 11, 13, 2, 3)
+    return im
+
+
+def reeds(seed):
+    """frosted bulrushes, 1x2: tall stems and seed heads rimed white (top on layer 3, passable)"""
+    im, d = canvas(1, 2)
+    rng = random.Random(seed)
+    for i in range(5):
+        x = 2 + i * 3 + rng.randrange(0, 2); top = 4 + rng.randrange(0, 8)
+        lean = rng.choice((-1, 0, 1))
+        d.line([x, 31, x + lean, top + 4], fill=(150, 128, 92, 255))
+        d.line([x + 1, 31, x + 1 + lean, top + 6], fill=(184, 160, 116, 255))
+        if i % 2 == 0:
+            d.rectangle([x + lean - 1, top, x + lean + 1, top + 5], fill=(120, 86, 60, 255), outline=OUT)
+            P(im, x + lean, top, SNOW[3]); P(im, x + lean - 1, top + 1, SNOW[3])
+    snow_cap(im, 0, 15, 28, 3, seed)
+    return im
+
+
+def crack(seed):
+    """a pressure crack in sea ice with a ridge of broken plates (1x1 decal on ice)"""
+    im, d = canvas(1, 1)
+    rng = random.Random(seed)
+    x, y = rng.randrange(0, 4), rng.randrange(4, 12)
+    for _ in range(9):
+        nx, ny = x + rng.randrange(1, 4), y + rng.randrange(-2, 3)
+        d.line([x, y, nx, ny], fill=ICE[0]); d.line([x, y + 1, nx, ny + 1], fill=ICE[3])
+        x, y = nx, max(1, min(14, ny))
+        if x >= 15: break
+    if seed % 2: P(im, 6, 6, ICE[3]); P(im, 7, 6, ICE[3]); P(im, 6, 7, ICE[1])
+    return im
+
+
+def floe(seed):
+    """a loose ice floe on open water, rimmed in snow (1x1)"""
+    im, d = canvas(1, 1)
+    rng = random.Random(seed)
+    pts = [(8 + (5 + rng.random() * 2) * math.cos(a), 8 + (3.5 + rng.random() * 1.5) * math.sin(a)) for a in [k * math.pi / 4 for k in range(8)]]
+    d.polygon(pts, fill=ICE[2], outline=ICE[0]); d.line([4, 6, 10, 5], fill=SNOW[3]); P(im, 11, 9, ICE[3])
+    return im
+
+
+def face_icicles(seed):
+    """icicles and a rime streak hanging down a snowy cliff face (1x1 overlay, layer 3)"""
+    im, d = canvas(1, 1)
+    rng = random.Random(seed)
+    for x in range(1, 15, 2):
+        if rng.random() < 0.55:
+            L = rng.randrange(3, 13)
+            for k in range(L): P(im, x, k, ICE[3] if k < 2 else ICE[2] if k < L - 2 else ICE[1])
+            if L > 6: P(im, x + 1, 0, ICE[3])
+    return im
+
+
+def tracks(kind):
+    """sled-runner tracks or bootprints pressed into packed snow (1x1 decal; very light, paths stay readable)"""
+    im, d = canvas(1, 1)
+    c = (184, 190, 220, 255)
+    if kind == 0:
+        for x in (4, 10):
+            for y in range(16): P(im, x + (1 if y > 9 else 0), y, c)
+    else:
+        for i, y in enumerate(range(1, 16, 5)):
+            x = 4 if i % 2 else 9
+            d.rectangle([x, y, x + 2, y + 3], fill=c)
+    return im
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -551,6 +626,12 @@ def pieces():
     out['fw_hole'] = (fishing_hole(), ['F'], None)
     out['fw_hole_t'] = (fishing_hole(True), ['F'], None)
     out['fw_pal_h'] = (palisade('h'), ['W'], None)
+    out['fw_peg'] = (peg(), ['W'], None)
+    for i in range(2): out['fw_reeds%d' % i] = (reeds(i + 3), ['O', 'F'], None)
+    for i in range(3): out['fw_crack%d' % i] = (crack(i + 1), ['F'], None)
+    for i in range(2): out['fw_floe%d' % i] = (floe(i + 5), ['F'], None)
+    for i in range(3): out['fw_icy%d' % i] = (face_icicles(i + 11), ['O'], None)
+    for i in range(2): out['fw_tracks%d' % i] = (tracks(i), ['F'], None)
     out['fw_pal_v'] = (palisade('v'), ['W'], None)
     im, c = frozen_fall(4, 5); out['fw_fall'] = (im, c, None)
     for k in 'nms': out['fw_log_' + k] = (fallen_log(k), ['FF'], None)

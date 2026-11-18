@@ -78,9 +78,9 @@ events:
   intro: Isenmar breeds tough trainers. Let me show you.
   after: Ebbmouth's just north. Smell the eel?
 - type: trainer
-  at: [19, 16]
+  at: [13, 20]
   sight: 4
-  dir: left
+  dir: right
   sprite: trainer_FISHERMAN
   trainer: [FISHERMAN, Kjell]
   intro: Sea-cliff fishing is an art!

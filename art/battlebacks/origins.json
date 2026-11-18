@@ -443,6 +443,32 @@
    ]
   ]
  },
+ "MEADOW": {
+  "files": [
+   "battlebg/field_meadow.png",
+   "battlebg/field_meadow_hd.png",
+   "elements/pf_meadow_breeze.png",
+   "elements/pf_meadow_clouds.png",
+   "elements/pf_meadow_grass0.png",
+   "elements/pf_meadow_grass1.png",
+   "elements/pf_meadow_grass2.png",
+   "elements/pf_meadow_grass3.png",
+   "elements/pf_meadow_grass4.png",
+   "elements/pf_meadow_grass5.png",
+   "elements/pf_meadow_grass6.png",
+   "elements/pf_meadow_grass7.png"
+  ],
+  "sources": [
+   [
+    "Pok\u00e9mon Reborn (Reborn Team)",
+    "battlebgField, enemybaseFieldGrass"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "rolling hills, hedgerows, orchard rows, river ribbon, wildflowers, swaying tall-grass clumps, clouds, breeze"
+   ]
+  ]
+ },
  "MINDSCAPE": {
   "files": [
    "battlebg/field_mindscape.png",

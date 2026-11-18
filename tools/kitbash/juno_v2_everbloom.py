@@ -12,7 +12,7 @@ import kb, mat, show
 from mat import H, BLACK, CLEAR
 from PIL import Image
 
-OUT = kb.WORK + '/juno'
+OUT = kb.WORK + '/passes'
 R = '/home/claude/ref/games/reborn/Graphics/'
 
 # donor colours (sd:idol)
@@ -160,7 +160,7 @@ def compose(stage='all'):
     b = mat.recolour(b, {L_HAIR[0]: HAIR[0], L_HAIR[1]: HAIR[1], L_HAIR[2]: HAIR[2]},
                      mat.mask_and(hair_r, mat.mask_not(mat.region(b.size, rect=(36, 14, 52, 36)))))
     b = mat.recolour(b, {L_HAIR[0]: HAIR[0], L_HAIR[2]: HAIR[2]}, mat.region(b.size, rect=(40, 6, 60, 14)))
-    dress_r = mat.mask_not(mat.region(b.size, rect=(36, 6, 58, 34)))
+    dress_r = mat.mask_not(mat.region(b.size, rect=(30, 6, 58, 30)))
     b = mat.recolour(b, dict(zip(L_DRESS, [H('8a5a6a'), H('d6b4bc'), H('f4e4e2'), H('fffaf6')])), dress_r)
     b = mat.recolour(b, {L_RIB[0]: BLUSH[0], L_RIB[1]: BLUSH[1]})
     # shift the figure left to make room for the train
@@ -178,17 +178,23 @@ def compose(stage='all'):
     for (x, y) in [(31, 5), (36, 3), (41, 2)]:
         out = stamp(out, x, y, F5)
     out = stamp(out, 29, 9, BUD)
-    # bouquet: two big blooms, small ones, leaves, held at the chest
-    out = stamp(out, 18, 33, LEAF)
-    out = stamp(out, 22, 38, ['g....', 'Gg...', 'hGg..', '.gGg.', '..gg.'])
-    out.alpha_composite(fl, (20, 25))
-    out.alpha_composite(ff, (27, 31))
-    for (x, y) in [(19, 36), (31, 24)]:
+    # bouquet held at the chest: one white bloom (the Bride Tree's), small pink blossoms, leaves, ribbon tails
+    white = mat.recolour(fl, {H('c0506e'): H('c48a98'), H('ec8aa2'): H('f2d8dc'), H('fcc8d2'): H('ffffff'),
+                              H('fff8f0'): H('f2c46a')})
+    out = stamp(out, 19, 30, LEAF)
+    out = stamp(out, 30, 38, ['g....', 'Gg...', 'hGg..', '.gGg.', '..gg.'])
+    out = stamp(out, 21, 38, ['..gg', '.gGg', 'gGh.', 'gg..'])
+    for (x, y) in [(22, 27), (31, 29), (20, 34), (29, 35)]:
         out = stamp(out, x, y, F5)
+    out = stamp(out, 27, 26, BUD)
+    out.alpha_composite(white, (24, 29))
+    R2 = {'r': BLUSH[0], 'p': BLUSH[1]}
+    out = mat.patch(out, 30, 42, ['rp..', '.rp.', '.rp.', '..rp', '..r.'], R2)
+    out = mat.patch(out, 27, 42, ['r.', 'pr', 'p.', 'r.'], R2)
     return out
 
 
 if __name__ == '__main__':
     out = compose()
-    out.save(OUT + '/v2_r5.png')
-    kb.grid(out, 8).save(kb.WORK + '/sheets/v2_r5_grid.png')
+    out.save(OUT + '/v2_final.png')
+    kb.grid(out, 8).save(kb.WORK + '/sheets/v2_final_grid.png')

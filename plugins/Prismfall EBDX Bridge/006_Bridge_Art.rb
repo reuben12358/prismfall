@@ -2210,6 +2210,197 @@ module PrismfallEBDX
       ]
     },
     # <<< INVERSE
+    # >>> MEADOW
+    :MEADOW => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_meadow_clouds",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 66.67,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 1
+        },
+        "img002" => {
+          :bitmap => "pf_meadow_breeze",
+          :scrolling => true,
+          :speed => 2,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 133.33,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 3
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_meadow_grass0",
+          :hd => true,
+          :x => 84.44,
+          :y => 146.67,
+          :ox => 25,
+          :oy => 60,
+          :z => 2,
+          :anim => :sway,
+          :amp => 3,
+          :period => 110,
+          :phase => 0.0
+        },
+        {
+          :bitmap => "pf_meadow_grass1",
+          :hd => true,
+          :x => 146.67,
+          :y => 149.33,
+          :ox => 18,
+          :oy => 46,
+          :z => 2,
+          :anim => :sway,
+          :amp => 3,
+          :period => 119,
+          :phase => 0.4
+        },
+        {
+          :bitmap => "pf_meadow_grass2",
+          :hd => true,
+          :x => 320.0,
+          :y => 149.33,
+          :ox => 34,
+          :oy => 60,
+          :z => 2,
+          :anim => :sway,
+          :amp => 3,
+          :period => 128,
+          :phase => 0.8
+        },
+        {
+          :bitmap => "pf_meadow_grass3",
+          :hd => true,
+          :x => 355.56,
+          :y => 146.67,
+          :ox => 27,
+          :oy => 48,
+          :z => 2,
+          :anim => :sway,
+          :amp => 3,
+          :period => 137,
+          :phase => 1.2
+        },
+        {
+          :bitmap => "pf_meadow_grass4",
+          :hd => true,
+          :x => 40.0,
+          :y => 248.89,
+          :ox => 72,
+          :oy => 151,
+          :z => 24,
+          :anim => :sway,
+          :amp => 5,
+          :period => 146,
+          :phase => 1.6
+        },
+        {
+          :bitmap => "pf_meadow_grass5",
+          :hd => true,
+          :x => 71.11,
+          :y => 266.67,
+          :ox => 41,
+          :oy => 122,
+          :z => 24,
+          :anim => :sway,
+          :amp => 5,
+          :period => 155,
+          :phase => 2.0
+        },
+        {
+          :bitmap => "pf_meadow_grass6",
+          :hd => true,
+          :x => 364.44,
+          :y => 266.67,
+          :ox => 74,
+          :oy => 161,
+          :z => 24,
+          :anim => :sway,
+          :amp => 5,
+          :period => 164,
+          :phase => 2.4
+        },
+        {
+          :bitmap => "pf_meadow_grass7",
+          :hd => true,
+          :x => 311.11,
+          :y => 288.89,
+          :ox => 53,
+          :oy => 119,
+          :z => 24,
+          :anim => :sway,
+          :amp => 5,
+          :period => 173,
+          :phase => 2.8
+        }
+      ],
+      :fx => [
+        {
+          :type => :drift,
+          :count => 14,
+          :shape => :dot,
+          :size => 2,
+          :colors => [
+            [255, 255, 240],
+            [250, 240, 200]
+          ],
+          :dir => 1,
+          :speed => [0.8, 1.6],
+          :sway => 12,
+          :zoom => [0.5, 0.9],
+          :opacity => [160, 230],
+          :layers => [:back, :mid, :front]
+        },
+        {
+          :type => :drift,
+          :count => 8,
+          :shape => :dot,
+          :size => 3,
+          :colors => [
+            [255, 200, 220],
+            [255, 240, 140],
+            [210, 170, 255]
+          ],
+          :dir => 1,
+          :speed => [0.6, 1.2],
+          :sway => 16,
+          :zoom => [0.6, 1.0],
+          :opacity => [200, 255],
+          :spin => 6,
+          :layers => [:mid, :front]
+        },
+        {
+          :type => :drift,
+          :count => 3,
+          :shape => :spark,
+          :size => 5,
+          :colors => [
+            [255, 240, 120],
+            [255, 255, 255]
+          ],
+          :speed => [0.3, 0.6],
+          :sway => 20,
+          :zoom => [0.6, 0.9],
+          :opacity => [200, 255],
+          :layers => [:mid]
+        }
+      ]
+    },
+    # <<< MEADOW
     # >>> MINDSCAPE
     :MINDSCAPE => {
       :art_extras => {

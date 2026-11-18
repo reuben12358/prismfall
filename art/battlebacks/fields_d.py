@@ -514,3 +514,68 @@ BUILDERS = {
     "ASHEN_WASTE": ashen_rework,
     "INVERSE": inverse_rework,
 }
+
+
+#---------------------------------------------------------------------------------------------
+# MEADOW (new): Elowen's open countryside
+#---------------------------------------------------------------------------------------------
+def meadow():
+    F = "meadow"
+    hd = vanilla("reborn", "Field", base=False)
+    hz = 150 + 104
+    far = mountains((864, 693), hz + 6, 46, (120, 170, 120), seed=401, rough=0.3, peaks=3)
+    hd.alpha_composite(far)
+    mid = mountains((864, 693), hz + 26, 34, (96, 160, 80), seed=402, rough=0.4, peaks=4, outline=(60, 120, 60))
+    hd.alpha_composite(mid)
+    d = ImageDraw.Draw(hd)
+    # hedgerows along the slope + orchard rows
+    rng = random.Random(403)
+    for row, y in enumerate((hz + 22, hz + 40)):
+        for x in range(-10, 874, 7):
+            r = rng.uniform(4, 7)
+            d.ellipse([x - r, y - r - row * 2, x + r, y + r * 0.6], fill=C((54, 110, 54)), outline=C((30, 70, 30)))
+    for k, y in enumerate((hz + 16, hz + 30)):
+        for x in range(30 + k * 20, 860, 46):
+            if 400 < x < 660 and k == 1:
+                continue
+            paste(hd, orchard_tree(10 + k * 3, seed=x + k), x, y, "bottom")
+    # river meadow: a bright ribbon of water winding across the middle distance
+    pts = [(x, hz + 52 + 8 * math.sin(x / 70.0)) for x in range(0, 870, 6)]
+    d.line(pts, fill=C((140, 200, 230)), width=7)
+    d.line([(x, y - 2) for x, y in pts], fill=C((220, 245, 255)), width=1)
+    flowers_scatter(hd, (0, hz + 60, 864, 693), 900, [(255, 255, 255), (255, 220, 70), (200, 140, 240), (255, 140, 170)],
+                    seed=404, size=(1, 2.5))
+    eb = game_img("reborn", "enemybaseFieldGrass")
+    place_foe_base(hd, eb); place_player_base_scaled(hd, eb)
+    save_room("field_meadow", hd)
+    layers = []
+    for i, (x, y, w, h, z) in enumerate(((190, 330, 60, 60, 2), (330, 336, 50, 44, 2), (720, 336, 64, 58, 2),
+                                         (800, 330, 50, 50, 2), (90, 560, 140, 150, 24), (160, 600, 100, 120, 24),
+                                         (820, 600, 150, 160, 24), (700, 650, 110, 120, 24))):
+        t = grass_tuft(w, h, seed=i)
+        layers.append(layer(F, "grass%d" % i, onto(t, x - w / 2, y - h), anchor=(x, y), z=z, anim=S("sway"),
+                            amp=3 + (z > 10) * 2, period=110 + i * 9, phase=i * 0.4))
+    extras = {"img001": strip(F, "clouds", make_cloud_band(), 150, speed=0.5, direction=1, z=1),
+              "img002": strip(F, "breeze", fog_strip(864, 90, (255, 255, 230), seed=405, scale=14, density=0.4,
+                                                     alpha=50), 300, speed=2, direction=1, z=3)}
+    fx = [P(type=":drift", count=14, shape=":dot", size=2, colors=[[255, 255, 240], [250, 240, 200]], dir=1,
+            speed=[0.8, 1.6], sway=12, zoom=[0.5, 0.9], opacity=[160, 230], layers=[":back", ":mid", ":front"]),
+          P(type=":drift", count=8, shape=":dot", size=3, colors=[[255, 200, 220], [255, 240, 140], [210, 170, 255]],
+            dir=1, speed=[0.6, 1.2], sway=16, zoom=[0.6, 1.0], opacity=[200, 255], spin=6, layers=[":mid", ":front"]),
+          P(type=":drift", count=3, shape=":spark", size=5, colors=[[255, 240, 120], [255, 255, 255]],
+            speed=[0.3, 0.6], sway=20, zoom=[0.6, 0.9], opacity=[200, 255], layers=[":mid"])]
+    return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
+            "origins": [[REB, "battlebgField, enemybaseFieldGrass"],
+                        [OWN, "rolling hills, hedgerows, orchard rows, river ribbon, wildflowers, swaying tall-grass "
+                              "clumps, clouds, breeze"]]}
+
+
+def make_cloud_band():
+    im = cloud_floor(864, 110, 30, color=(255, 255, 255), shade=(220, 232, 246), deep=(200, 216, 236), seed=406,
+                     rmin=12, rmax=26, rows=2)
+    a = arr(im)
+    a[70:, :, 3] = 0
+    return img(a)
+
+
+BUILDERS["MEADOW"] = meadow

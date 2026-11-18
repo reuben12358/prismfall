@@ -134,38 +134,53 @@ def head(mid, name, **kw):
 
 # =================================================================================================== 560 Route 5
 def route5(prev=None):
+    """Route 5, the Frostflat Causeway (560): a raised salt road (h=1, rows 12-14) on one long south-facing embankment,
+    the salt half (east: brine pans with crusted rims, salt-cedars, the overturned salt wagon) turning to the frost half
+    (west: frost-pans you slide on, frosted reeds); the Border Stones flank the road at mid-way under a bolted Meridian
+    sunburst; Meridian survey pegs march across the flats.  The frozen lagoon (south) and the sea-ice (north) stay open."""
     W, H = 64, 30
     m = snowmap(W, H, 560)
-    # north: the sea dyke under reed beds (a snowy bank, h=1) with frozen lagoon behind; south: the brine lagoon, iced
+    rng = random.Random(560)
     for x in range(W):
-        top = 3 + int(round(1.2 * math.sin(x / 7.0) + vnoise(x, 0, 2, 5.0)))
+        top = 2 + int(round(1.0 * math.sin(x / 7.0) + vnoise(x, 0, 2, 5.0)))
         bot = 26 - int(round(1.0 * math.sin(x / 9.0 + 2) + 1.2 * vnoise(x, 0, 3, 6.0)))
         for y in range(H):
-            if y <= top: m.ht[y, x] = 1
-            if y <= top - 2: m.cls[y, x] = 'o'
-            if y >= bot: m.cls[y, x] = 'o' if y >= bot + 1 else 'w'
-    m.lane([(-1, 13), (10, 13), (20, 12.5), (28, 13.5), (40, 13), (52, 12.5), (64, 13)], 'd', 3.2, seed=11, only='.', wobble=0.5)
-    m.rect(0, 12, 2, 3, 'd'); m.rect(W - 2, 12, 2, 3, 'd')          # the edge rows line up with 570 / 140
-    m.street([(30, 14), (30, 27)], 2, 'd', only='.ow')               # spur S to the old salt road (the Rehearsal, 568)
-    m.rect(29, 27, 4, 3, 'd')
-    # east half: salt pans and salt crust; west half: frost pans (ice) and frosted grass
-    for cx, cy, rx, ry in ((40, 6, 3.5, 1.6), (47, 7, 2.6, 1.4), (55, 5, 3.0, 1.3), (44, 20, 3.0, 1.5), (58, 19, 2.6, 1.6), (52, 23, 2.2, 1.0)):
-        m.blob(cx, cy, rx, ry, 't', seed=cx, only='.', rough=0.6)
-    for cx, cy, rx, ry in ((7, 6, 3.0, 1.4), (16, 6, 2.0, 1.0), (22, 19, 2.0, 1.2)):
-        m.blob(cx, cy, rx, ry, 'w', seed=cx + 50, only='.', rough=0.4)
-    m.blob(13, 19.5, 5.5, 2.2, 'i', seed=21, only='.t', rough=0.5)      # the first slide tiles (teaches sliding)
+            if y <= (14 if 8 <= x <= 36 else 15): m.ht[y, x] = 1
+            if y <= top: m.cls[y, x] = 'o'
+            if y >= bot: m.cls[y, x] = 'o'
     lagoon(m, 0.5)
-    for (x0, y0, w, h) in ((42, 4, 10, 5), (48, 20, 10, 5), (10, 4, 8, 6), (6, 22, 10, 4)):
-        m.rect(x0, y0, w, h, 't', only='.')
+    m.rect(0, 12, W, 3, 'd', only='.')                                             # the causeway (rows 12-14 at both edges)
+    m.rect(8, 11, 29, 1, 'd', only='.')                                            # ... riding a row higher mid-way
+    m.rect(27, 11, 13, 1, 'd', only='.')                                           # it widens at the Border Stones
+    for x0, w in ((4, 3), (17, 2), (44, 4), (55, 2)): m.rect(x0, 11, w, 1, 'd', only='.')   # lay-bys where carts pass
+    for sx in (11, 29, 49):
+        m.stairs(sx, 14 if 8 <= sx <= 36 else 15, w=3, kit_rows=4)                                          # three flights down the embankment
+    m.rect(29, 18, 3, 8, 'd', only='.')                                            # the spur south to the old salt road
+    for y in range(19, H):
+        if m.cls[y, 30] in 'oI':
+            for x in (29, 30, 31): m.cls[y, x] = 'D'
+    m.lane([(12, 19), (13, 21), (18, 22)], 'd', 2.0, seed=4, only='.')
+    m.lane([(50, 19), (50, 21), (44, 22)], 'd', 2.0, seed=5, only='.')
+    # north flats (h=1): frost-pans west (slide), brine pans with crusted rims east, reeds between
+    for cx, cy, rx, ry in ((6, 6, 3.4, 1.6), (15, 5, 2.6, 1.3), (21, 8, 2.2, 1.2)):
+        m.blob(cx, cy, rx, ry, 'p', seed=cx + 50, only='.', rough=0.35)
+    for x0, y0, w, h in ((41, 4, 4, 2), (46, 4, 5, 2), (52, 5, 4, 2), (43, 7, 4, 2), (49, 8, 5, 2), (56, 8, 4, 2)):
+        m.rect(x0, y0, w, h, 'w', only='.')                                        # the salt-works' evaporation pans
+    for cx, cy, rx, ry in ((26, 5, 3.0, 1.6), (34, 6, 3.4, 1.4), (11, 9, 2.6, 1.0), (60, 4, 2.0, 1.2)):
+        m.blob(cx, cy, rx, ry, 't', seed=cx, only='.', rough=0.7)
+    # south flats (h=0): the first slide (a frost-pan with two stoppers), salt crust, reeds
+    m.blob(15, 23.0, 6.0, 2.2, 'p', seed=21, only='.', rough=0.35)
+    smooth(m, 'p', into='.', passes=1)
+    for cx, cy, rx, ry in ((40, 21, 3.0, 1.4), (57, 20, 2.6, 1.6), (6, 20, 2.0, 1.2), (23, 20, 2.2, 1.0)):
+        m.blob(cx, cy, rx, ry, 't', seed=cx + 9, only='.', rough=0.6)
     E = []
-    stones = [(30, 10), (36, 10)]                                     # the Border Stones flank the road
-    for x, y in stones: m.stamp('ak_rock2', x - 1, y - 2)
-    E.append(sign((33, 11), 'Border Stones', "Two old stones. One bears Elowen's briar crown, the other Isenmar's whale and axe.\n"
+    m.stamp('fw_stone', 30, 9); m.stamp('fw_stone', 36, 9)                         # the Border Stones
+    E.append(sign((30, 10), 'Border Stones', "Two old stones. One bears Elowen's briar crown, the other Isenmar's whale and axe.\n"
                   "A brass Meridian sunburst has been bolted across both of them. The bolts are new."))
     E.append(sign((60, 11), 'Route sign', "ROUTE 5 - THE FROSTFLAT CAUSEWAY\nW: Frostwick   E: Saltmere"))
-    E.append(sign((31, 26), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
+    E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
                   "[The Rehearsal, map 568: not built yet]"))
-    E += [npc((31, 9), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
+    E += [npc((33, 10), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
                                                      "Elowen ends here, officially. Unofficially it ends wherever the honey runs out."],
               again=["Mind the frost-pans west of here. They're slick as a courtier."]),
           npc((22, 15), 'Fur-trader', 'NPC 22', ["My Spheal pulls the sled. Lovely creature. Round.",
@@ -175,34 +190,52 @@ def route5(prev=None):
           npc((20, 7), 'Meridian surveyor', 'NPC 16', ["*tink* *tink* Survey peg. Lattice line. Don't touch.",
                                                        "Who authorised it? The Meridian. Who authorised the Meridian? ...Move along, please."],
               d='left')]
-    E += [trainer((50, 8), 'PICNICKER', 'Sela', "Salt-flat picnic! Bring your own shade!", "Isenmar's colder than I thought.", 'down'),
-          trainer((40, 17), 'HIKER', 'Torvald', "Thirty years I've carted salt down this road! Show me something new!",
+    E += [trainer((48, 10), 'PICNICKER', 'Sela', "Salt-flat picnic! Bring your own shade!", "Isenmar's colder than I thought.", 'down'),
+          trainer((42, 19), 'HIKER', 'Torvald', "Thirty years I've carted salt down this road! Show me something new!",
                   "Salt in my boots, frost in my beard. Good trade.", 'up'),
-          trainer((14, 17), 'LASS', 'Tilde', "Did you slide here too? Everyone slides here.", "My Swinub slid farther than me.", 'right'),
-          trainer((20, 10), 'SAILOR', 'Haakon', "Sealer out of Ebbmouth! The sea's too thick to row, so I walk!",
+          trainer((9, 21), 'LASS', 'Tilde', "Did you slide here too? Everyone slides here.", "My Swinub slid farther than me.", 'right'),
+          trainer((18, 10), 'SAILOR', 'Haakon', "Sealer out of Ebbmouth! The sea's too thick to row, so I walk!",
                   "Ice'll break by summer. Probably.", 'down'),
-          trainer((26, 22), 'BIRDKEEPER', 'Ailsa', "The gulls change colour past the stones. Watch!",
+          trainer((26, 21), 'BIRDKEEPER', 'Ailsa', "The gulls change colour past the stones. Watch!",
                   "Frostwick's gulls wear little ice hats. Not really.", 'up'),
-          item((62, 4), 'SUPERPOTION'), item((5, 7), 'ICEHEAL'), item((56, 27), 'SOFTSAND', True)]
-    # overturned salt wagon (HEALPOWDER inside), survey pegs, salt cedars, fence posts along the causeway
-    m.near('sh_crates', 44, 20, on='.tS', r=3); m.near('pf_barricade', 46, 21, on='.tS', r=3)
-    E.append(item((45, 22), 'HEALPOWDER'))
-    pegs = [(20, 6), (22, 7), (24, 8), (26, 9), (18, 5), (28, 10)]
-    E = seat(m, E, on='.dtSi')
-    for x, y in pegs:
-        if m.free(x, y, 1, 1, on='.t'): m.tile(4847, x, y, 1)
-    for cx, cy in ((38, 18), (41, 21), (36, 22), (54, 16), (57, 8), (60, 21)):
-        m.trees(cx, cy, 1, ['pine2', 'tr_teal'], r=2, on='.tS', seed=cx)
-    for cx, cy in ((4, 9), (12, 10), (2, 18), (24, 4), (18, 23), (8, 24), (34, 6), (46, 4), (60, 7), (36, 20), (48, 17),
-                   (62, 22), (1, 24), (28, 20), (54, 24)):
-        m.trees(cx, cy, 2, ['pine2', 'kf_tree', 'pine2'], r=3, on='.tS', seed=cx)
-    for cx, cy in ((10, 9), (26, 17), (44, 9), (56, 17), (16, 16), (50, 10)):     # salt cedars and frosted pines along the road
-        m.trees(cx, cy, 1, ['pine2', 'kf_tree', 'tr_teal'], r=2, on='.tS', seed=cx * 5)
+          item((62, 5), 'SUPERPOTION'), item((3, 8), 'ICEHEAL'), item((56, 23), 'SOFTSAND', True)]
+    # the overturned salt wagon (HEALPOWDER inside): crates, a barricade, the sled on its side, spilled salt
+    m.near('sh_crates', 44, 20, on='.t', r=3); m.near('pf_barricade', 46, 21, on='.t', r=3); m.near('fw_sled', 47, 19, on='.t', r=3)
+    E.append(item((45, 23), 'HEALPOWDER'))
+    E = seat(m, E, on='.dt')
     for e in E:
         if e['type'] == 'sign' and e['name'] != 'Border Stones': signboard(m, e)
+    # the causeway's north verge: a rope-and-post rail with gaps where tracks lead onto the flats
+    for x0, x1 in ((1, 7), (13, 19), (23, 26), (41, 46), (51, 58)):
+        for x in range(x0, x1 + 1):
+            vy = 10 if 8 <= x <= 36 else 11
+            if m.cls[vy, x] == '.' and not m.taken[vy, x]: m.stamp('fw_pal_h', x, vy, mark='B')
+    for x, y in ((5, 4), (9, 5), (13, 6), (17, 7), (21, 4), (25, 9), (37, 4), (52, 2 + 1), (55, 17), (36, 20), (20, 18), (8, 18)):
+        if m.free(x, y, 1, 1, on='.t'): m.stamp('fw_peg', x, y)
+    for cx, cy in ((38, 18), (41, 25), (36, 23), (54, 17), (57, 7), (60, 22), (3, 17), (24, 24)):
+        m.trees(cx, cy, 1, ['pine2', 'tr_teal'], r=2, on='.t', seed=cx)
+    for cx, cy in ((4, 9), (2, 18), (24, 4), (18, 24), (8, 25), (34, 6), (46, 2), (60, 8), (48, 17), (62, 22), (1, 24),
+                   (28, 7), (54, 24), (39, 8), (13, 18)):
+        m.trees(cx, cy, 2, ['pine2', 'kf_tree', 'pine2'], r=3, on='.t', seed=cx)
+    for nm, x, y in (('fw_rack', 38, 9), ('fw_wood', 57, 10), ('fw_skull', 14, 9), ('pf_lantern', 27, 9), ('pf_lantern', 39, 9),
+                     ('fw_sled', 7, 10), ('sh_crates', 61, 8), ('fw_brazier', 41, 10)):
+        m.near(nm, x, y, on='.t', r=2)
     m.events = E
     m.greenfill(3, on='.')
-    m.paint(); ice(m); m.scatter(15, seed=5)
+    m.paint(); ice(m)
+    for y in range(19, H):                                                         # the spur's boardwalk over the lagoon ice
+        for i, x in enumerate((29, 30, 31)):
+            if m.cls[y, x] == 'D': m.L[1, y, x] = C('ak', 1524 + i)
+    for x, y in ((14, 23), (18, 22)):                                              # stoppers on the first slide
+        if m.cls[y, x] == 'p': m.L[1, y, x] = 10371
+    for y, x in np.argwhere(m.cls == 'w'):                                         # salt crust on the brine pans
+        if vnoise(x, y, 61, 2.0) > 0.62: m.L[1, y, x] = K.C('kf', 2476)
+    m.scatter(16, seed=5)
+    icy_faces(m, 0.6, seed=560)
+    dress_ice(m, 0.62, seed=560)
+    reed_beds(m, 130, seed=561)
+    road_tracks(m, 0.10, seed=560)
+    drifts(m, 0.16, seed=560)
     if prev: m.preview(prev, 0.5)
     m.write(560, head(560, 'Route 5', biome='route', display_name='Route 5 - Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},
@@ -396,6 +429,58 @@ def frostwick(prev=None):
     return m
 
 
+def dress_ice(m, p=0.2, seed=2):
+    """sea and lagoon ice is not blank: pressure cracks, drifts on the ice, a few fishing holes, frosted reeds where the
+    ice meets the shore, loose floes on the open leads (all decals: nothing is filled in)"""
+    rng = random.Random(seed)
+    one = lambda n: STAMPS[n]['layers'][1][0][0]
+    cracks = [one('fw_crack%d' % i) for i in range(3)]; ds = [one('fw_drift%d' % i) for i in range(3)]
+    floes = [one('fw_floe%d' % i) for i in range(2)]; hole = one('fw_hole')
+    land = ~np.isin(m.cls, ['I', 'o', 'p', 'w', 'W'])
+    pad = np.pad(land, 1)
+    for y, x in np.argwhere(m.cls == 'I'):
+        if m.L[1, y, x] or m.L[2, y, x] or m.taken[y, x]: continue
+        shore = pad[y:y + 3, x:x + 3].any()
+        r = rng.random()
+        if shore and r < 0.35 and m.inb(x, y - 1) and m.L[2, y - 1, x] == 0 and m.cls[y - 1, x] in 'I.t':
+            st = STAMPS['fw_reeds%d' % rng.randrange(2)]['layers']
+            m.L[1, y, x] = st[1][1][0]; m.L[2, y - 1, x] = st[2][0][0]
+        elif r < p * 0.55: m.L[1, y, x] = rng.choice(cracks)
+        elif r < p * 0.9: m.L[1, y, x] = rng.choice(ds)
+        elif r < p: m.L[1, y, x] = hole
+    for y, x in np.argwhere(m.cls == 'o'):
+        if m.L[1, y, x] == 0 and rng.random() < p * 0.35 and not pad[y:y + 3, x:x + 3].any(): m.L[1, y, x] = rng.choice(floes)
+
+
+def icy_faces(m, p=0.45, seed=4):
+    """icicles down the snowy cliff faces (first face row under each lip), so long embankments are not one tile repeated"""
+    rng = random.Random(seed)
+    ic = [STAMPS['fw_icy%d' % i]['layers'][2][0][0] for i in range(3)]
+    for (x, y), (kind, k, h) in getattr(m, 'pieces', {}).items():
+        if kind == 'row' and k == 1 and m.L[2, y, x] == 0 and rng.random() < p: m.L[2, y, x] = rng.choice(ic)
+
+
+def road_tracks(m, p=0.08, seed=5):
+    """sled tracks and bootprints on the packed snow (very light decals; the road stays the clearest thing on the map)"""
+    rng = random.Random(seed)
+    tk = [STAMPS['fw_tracks%d' % i]['layers'][1][0][0] for i in range(2)]
+    for y, x in np.argwhere(m.cls == 'd'):
+        if m.L[2, y, x] == 0 and not m.taken[y, x] and not m.cliff[y, x] and rng.random() < p and m.L[1, y, x] >= 48 * 1:
+            m.L[0, y, x] = m.L[1, y, x]; m.L[1, y, x] = rng.choice(tk)
+
+
+def reed_beds(m, n, seed=3, on='.t'):
+    """clumps of frosted bulrushes on open ground (1x2: seed heads on layer 3)"""
+    rng = random.Random(seed)
+    cells = [tuple(c) for c in np.argwhere((np.isin(m.cls, list(on))) & ~m.taken & (m.L[1] == 0) & (m.L[2] == 0))]
+    rng.shuffle(cells); k = 0
+    for y, x in cells:
+        if k >= n: break
+        if y > 0 and m.L[2, y - 1, x] == 0 and m.L[1, y - 1, x] == 0 and m.cls[y - 1, x] in on and not m.cliff[y, x] and not m.cliff[y - 1, x]:
+            st = STAMPS['fw_reeds%d' % rng.randrange(2)]['layers']
+            m.L[1, y, x] = st[1][1][0]; m.L[2, y - 1, x] = st[2][0][0]; k += 1
+
+
 def drifts(m, p, seed=1):
     """snowdrifts and dry stalks on open snow (ground-layer decals), thicker along walls and woods"""
     rng = random.Random(seed)
@@ -466,10 +551,10 @@ def rimewood(prev=None):
     smooth(m, 'o', into='T', passes=1)
     # the frozen Hoar Pond: an irregular pond (PF Frozen Pond, terrain tag 12) on the Hoar Brook, smoothed so the snow-bank
     # shoreline curves; a snowy islet in the middle holds the prize; ice blocks are the stoppers (slide_puzzle)
-    m.blob(24.5, 33.2, 8.2, 4.6, 'p', seed=19, rough=0.3, only='.dT')
-    m.blob(17.5, 31.0, 2.6, 1.8, 'p', seed=23, rough=0.25, only='.dT')                    # a bay to the north-west
-    m.blob(30.5, 36.0, 2.4, 1.5, 'p', seed=29, rough=0.25, only='.dT')                    # and a tongue south-east
-    smooth(m, 'p', into='.', passes=3)
+    for cx, cy, rx, ry, sd in ((22.5, 33.4, 6.2, 3.4, 19), (28.8, 34.8, 4.0, 2.6, 21), (17.6, 31.4, 2.8, 2.0, 23),
+                               (25.5, 30.7, 3.2, 1.5, 25), (31.5, 32.2, 1.8, 1.4, 27)):   # a kidney of lobes, not a box
+        m.blob(cx, cy, rx, ry, 'p', seed=sd, rough=0.35, only='.dT')
+    smooth(m, 'p', into='.', passes=2)
     ISLET = [(25, 33), (26, 33), (24, 34), (25, 34), (26, 34), (25, 35)]
     for x, y in ISLET: m.cls[y, x] = '.'; m.taken[y, x] = True
     for (x0, y0, w, h) in ((6, 46, 10, 6), (30, 36, 10, 6), (10, 10, 10, 6)):                # frosted fern beds (encounters)
@@ -683,6 +768,7 @@ def route6(prev=None):
         if e.get('name') == 'Gullcry north mouth': e['at'] = [5, 22]; e['arrive'] = [5, 23, 'down']
         elif e.get('name') == 'Gullcry south mouth': e['at'] = [5, 37]; e['arrive'] = [5, 38, 'down']
         elif e.get('name') == 'Trainer(4)': e['at'] = [13, 5]
+        elif e.get('trainer') == ['FISHERMAN', 'Kjell']: e['at'] = [13, 20]; e['dir'] = 'right'      # (20,16) got boxed in by the hut
         elif e['type'] == 'sign' and 'LANDSLIDE' in e.get('text', ''): e['at'] = [10, 34]; e['post'] = False
         E.append(e)
     E += [sign((13, 52), 'Whalebone waymarker', "A whale's rib, stood on end. Notches count the miles to Ebbmouth: four."),
