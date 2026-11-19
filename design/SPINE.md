@@ -243,8 +243,8 @@ objection to `/home/claude/fangame/design/SPINE_FEEDBACK.md` (append, don't over
 ## The 18 Gyms (LOCKED: order, type, city, leader, field ID, level cap)
 | # | Type | City | Warden | Signature field ID | Level cap |
 |---|---|---|---|---|---|
-| 1 | Bug | Briarwick | Tamsin Loom | `:SILKWOOD` | 15 |
-| 2 | Normal | Saltmere | Dorian Pell | `:GRAND_STAGE` | 19 |
+| 1 | Normal | Saltmere | Dorian Pell | `:GRAND_STAGE` | 15 |
+| 2 | Bug | Briarwick | Tamsin Loom | `:SILKWOOD` | 19 |
 | 3 | Water | Ebbmouth | Marisol Reyes | `:WATER_SURFACE` | 23 |
 | 4 | Electric | Lumen City | Rook Calder | `:NEON_GRID` | 27 |
 | 5 | Ground | Duneholt | Sahar Ostrand | `:DESERT` | 31 |
@@ -289,7 +289,7 @@ Other cameo champions are optional exhibition battles during the Festival week.
 
 ## Rival battle slots (LOCKED)
 - Kestrel: K1 intro (lv 6), K2 before Gym 3, K3 after Gym 5, K4 at Gym 8 arc, K5 Gym 11 arc, K6 Gym 14 arc, K7 Gym 17 arc, K8 Festival semifinal.
-- Juno: J1 Gym 2 arc, J2 Gym 6 arc, J3 = Gym 9 leader battle, J4 Festival Round of 16.
+- Juno: J1 Gym 1 arc (Saltmere promenade, before Dorian), J2 Gym 6 arc, J3 = Gym 9 leader battle, J4 Festival Round of 16.
 
 ## Tone
 Reborn/Rejuvenation-style: dark, politically tangled, character-driven, mature themes (loss, corruption, sacrifice)

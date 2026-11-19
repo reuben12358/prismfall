@@ -1,0 +1,422 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
+
+=== 1. Data checks ===
+
+=== 2. The Little Crucible: offer -> 3-bout gauntlet -> boss -> join -> reward ===
+-- AS_LITTLE_CRUCIBLE / offer
+  Sergeant Brakka: In Ashkaar nobody asks who your mother was. They ask how hard you hit.
+  Sergeant Brakka: Saltmere's a free port, so we can hold bouts here. The Elowen crown hates it. That's a bonus.
+  Sergeant Brakka: Writ of Flame: three of my recruits, one after another, no potions between. Then you face Cinderpaw.
+  Ask Brakka something?
+  Take the Writ of Flame?
+  NEW QUEST: "The Little Crucible" Fight the barge's three recruits in a row (no healing between bouts).
+  Sergeant Brakka: Good. HERALD! Ring the pit!
+  Barge herald: BOUT ONE! From the Cinder Cape, with a punch like a bad decision: RECRUIT REKK!
+  Bout 1 of 3!
+  Bout 2 of 3!
+  Bout 3 of 3!
+  Sergeant Brakka: Three for three. You hit like an Ashkaari. That's the nicest thing I know how to say.
+  QUEST LOG: "The Little Crucible" The recruits are beaten. Now face Cinderpaw, the barge's mascot.
+  Barge herald: AND NOW! UNDEFEATED ON THIS DECK! BITER OF OFFICERS! CINDERPAW!
+  Tester obtained Litleo!
+  Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.
+  Sergeant Brakka: Huh. It's picked you. It's never picked anybody. It bit the last person who tried to pick it.
+  Sergeant Brakka: Take it. In the Legion, strength chooses strength. Even the little ones.
+  Sergeant Brakka: One more thing. Recruitment papers. Sign and you're Legion-in-waiting. Means nothing yet. Means something later.
+  Sign the papers?
+  Sergeant Brakka: Ha! Ember-recruit, then. Show that paper in Cindervault and someone will buy you a drink. Or fight you.
+  The Herald strikes the gong. Your brand goes up on the barge's little Wall of the Proven.
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "The Little Crucible"
+  \PN received $1,200!
+  You obtained a Quick Claw!
+  You put the Quick Claw in your Bag's Items pocket.
+  Your standing in The Trial by Flames rose to Ember!
+    | AS_LITTLE_CRUCIBLE/offer
+    | ========================
+    |   (overworld message) Sergeant Brakka: In Ashkaar nobody asks who your mother was. They ask how hard you hit.
+    |   (overworld message) Sergeant Brakka: Saltmere's a free port, so we can hold bouts here. The Elowen crown hates it. That's a bonus.
+    |   (overworld message) Sergeant Brakka: Writ of Flame: three of my recruits, one after another, no potions between. Then you face Cinderpaw.
+    |   (overworld message) Ask Brakka something?
+    |   (overworld message) Take the Writ of Flame?
+    |   (overworld message) NEW QUEST: "The Little Crucible" Fight the barge's three recruits in a row (no healing between bouts).
+    |   (overworld message) Sergeant Brakka: Good. HERALD! Ring the pit!
+    |   (overworld message) Barge herald: BOUT ONE! From the Cinder Cape, with a punch like a bad decision: RECRUIT REKK!
+    |   (overworld message) Bout 1 of 3!
+    | 
+    | --- Battle start ---
+    |   field: COLOSSEUM | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Rekk!
+    |   Ashkaar Soldier Rekk sent out Sizzlipede!
+    |     >> sent out (foe): Sizzlipede Lv.15 [FLASHFIRE]
+    |   Go! Machoke!
+    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    | ## FIELD CHANGE: NONE -> COLOSSEUM
+    |   The crowd roars as the fighters enter the pit!
+    | 
+    | --- Turn 1 ---
+    |   [Machoke 65/65 | Sizzlipede 43/43]
+    |   Machoke used Rock Tomb!
+    |     HP Sizzlipede (foe): 43 -> 0 / 43
+    |   It's super effective!
+    |   The opposing Sizzlipede fainted!
+    |     xx fainted: Sizzlipede (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Rekk is about to send out Rolycoly. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Rekk sent out Rolycoly!
+    |     >> sent out (foe): Rolycoly Lv.15 [STEAMENGINE]
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 65/65 | Rolycoly 37/37]
+    |   Machoke used Karate Chop!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Rolycoly (foe): 37 -> 0 / 37
+    |   It's super effective!
+    |   The opposing Rolycoly fainted!
+    |     xx fainted: Rolycoly (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   You defeated Ashkaar Soldier Rekk!
+    |   Ha! Good hit. Do it again sometime. Not to me.
+    |   You got $720 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 2 of 3!
+    | 
+    | --- Battle start ---
+    |   field: COLOSSEUM | weather: None | terrain: None
+    |   You are challenged by Ashkaar Soldier Vasha!
+    |   Ashkaar Soldier Vasha sent out Capsakid!
+    |     >> sent out (foe): Capsakid Lv.15 [CHLOROPHYLL]
+    |   Go! Machoke!
+    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    | ## FIELD CHANGE: NONE -> COLOSSEUM
+    |   The crowd roars as the fighters enter the pit!
+    | 
+    | --- Turn 1 ---
+    |   [Machoke 65/65 | Capsakid 43/43]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Capsakid (foe): 43 -> 0 / 43
+    |   The opposing Capsakid fainted!
+    |     xx fainted: Capsakid (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   (end of round)
+    |   Ashkaar Soldier Vasha is about to send out Houndour. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Soldier Vasha sent out Houndour!
+    |     >> sent out (foe): Houndour Lv.16 [EARLYBIRD]
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 65/65 | Houndour 43/43]
+    |   The opposing Houndour used Howl!
+    |     (anim: StatUp)
+    |   The opposing Houndour's Attack rose!
+    |   Machoke used Rock Tomb!
+    |     HP Houndour (foe): 43 -> 0 / 43
+    |   It's super effective!
+    |   The opposing Houndour fainted!
+    |     xx fainted: Houndour (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   You defeated Ashkaar Soldier Vasha!
+    |   The Sergeant's going to make me run laps. Worth it.
+    |   You got $768 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 3 of 3!
+    | 
+    | --- Battle start ---
+    |   field: COLOSSEUM | weather: None | terrain: None
+    |   You are challenged by Ashkaar Officer Brakka!
+    |   Ashkaar Officer Brakka sent out Salandit!
+    |     >> sent out (foe): Salandit Lv.16 [CORROSION]
+    |   Go! Machoke!
+    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    | ## FIELD CHANGE: NONE -> COLOSSEUM
+    |   The crowd roars as the fighters enter the pit!
+    | 
+    | --- Turn 1 ---
+    |   [Machoke 65/65 | Salandit 45/45]
+    |   The opposing Salandit used Poison Gas!
+    |     (anim: Poison)
+    |   Machoke was poisoned!
+    |   Machoke used Rock Tomb!
+    |     HP Salandit (foe): 45 -> 0 / 45
+    |   It's super effective!
+    |   The opposing Salandit fainted!
+    |     xx fainted: Salandit (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 65 -> 57 / 65
+    |   Machoke was hurt by poison!
+    |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Brakka sent out Numel!
+    |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 57/65 POISON | Numel 49/49]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Numel (foe): 49 -> 0 / 49
+    |   The opposing Numel fainted!
+    |     xx fainted: Numel (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 57 -> 49 / 65
+    |   Machoke was hurt by poison!
+    | ## FIELD STAGE: COLOSSEUM is now stage 2
+    |   Two down! The crowd is in a frenzy!
+    |   Ashkaar Officer Brakka is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
+    |   Ashkaar Officer Brakka sent out Fletchinder!
+    |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
+    | 
+    | --- Turn 3 ---
+    |   [Machoke 49/65 POISON | Fletchinder 52/52]
+    |   The opposing Fletchinder used Growl!
+    |     (anim: StatDown)
+    |   Machoke's Attack fell!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Fletchinder (foe): 52 -> 0 / 52
+    |   A critical hit!
+    |   It's not very effective...
+    |   The opposing Fletchinder fainted!
+    |     xx fainted: Fletchinder (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   You defeated Ashkaar Officer Brakka!
+    |   Three for three. Honest work.
+    |   You got $1,360 for winning!
+    |   battle result code: 1
+    |   (overworld message) Sergeant Brakka: Three for three. You hit like an Ashkaari. That's the nicest thing I know how to say.
+    |   (overworld message) QUEST LOG: "The Little Crucible" The recruits are beaten. Now face Cinderpaw, the barge's mascot.
+    |   (overworld message) Barge herald: AND NOW! UNDEFEATED ON THIS DECK! BITER OF OFFICERS! CINDERPAW!
+    | 
+    | --- Battle start ---
+    |   field: COLOSSEUM | weather: None | terrain: None
+    |   Oh! A wild Litleo appeared!
+    |   Go! Machoke!
+    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    | ## FIELD CHANGE: NONE -> COLOSSEUM
+    |   The crowd roars as the fighters enter the pit!
+    |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
+    | 
+    | --- Turn 1 ---
+    |   [Machoke 49/65 POISON | Litleo 58/58]
+    |   The wild Litleo used Work Up!
+    |     (anim: StatUp)
+    |   The wild Litleo's Attack rose!
+    |   The wild Litleo's Special Attack rose!
+    |   Machoke used Rock Tomb!
+    |     HP Litleo (foe): 58 -> 1 / 58
+    |   It's super effective!
+    |     (anim: StatDown)
+    |   The wild Litleo's Speed fell!
+    |   The wild Litleo's shield shattered!
+    |     HP Litleo (foe): 1 -> 58 / 58
+    |   The wild Litleo roars, and the crowd roars back!
+    |     (anim: StatUp)
+    |   The wild Litleo's Special Attack rose!
+    |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 49 -> 41 / 65
+    |   Machoke was hurt by poison!
+    | 
+    | --- Turn 2 ---
+    |   [Machoke 41/65 POISON | Litleo 58/58]
+    |   Machoke used Rock Tomb!
+    |     HP Litleo (foe): 58 -> 0 / 58
+    |   It's super effective!
+    |   The wild Litleo fainted!
+    |     xx fainted: Litleo (foe)
+    |   The crowd went wild for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
+    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   battle result code: 1
+    |   (overworld message) Tester obtained Litleo!
+    |   (overworld message) Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.
+    |   (overworld message) Sergeant Brakka: Huh. It's picked you. It's never picked anybody. It bit the last person who tried to pick it.
+    |   (overworld message) Sergeant Brakka: Take it. In the Legion, strength chooses strength. Even the little ones.
+    |   (overworld message) Sergeant Brakka: One more thing. Recruitment papers. Sign and you're Legion-in-waiting. Means nothing yet. Means something later.
+    |   (overworld message) Sign the papers?
+    |   (overworld message) Sergeant Brakka: Ha! Ember-recruit, then. Show that paper in Cindervault and someone will buy you a drink. Or fight you.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the barge's little Wall of the Proven.
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "The Little Crucible"
+    |   (overworld message) \PN received $1,200!
+    |   (overworld message) You obtained a Quick Claw!
+    |   (overworld message) You put the Quick Claw in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Trial by Flames rose to Ember!
+
+=== 3. The Tart Thief: chase, real wild battle, capture branch, bond ===
+-- EL_TART_THIEF / offer
+  Wenna: Twelve tarts this morning. Nine by the time I'd turned round. Six by the time I'd turned back.
+  Wenna: It's not the gulls. Gulls don't take the paper cases with them.
+  Wenna: Watch the stall for me? I'll pay you in tarts. Well. In whatever tarts survive.
+  Watch the stall?
+  NEW QUEST: "The Tart Thief" Wenna's tarts keep vanishing. Watch the stall.
+  Wenna: You're a treasure. Stand by the barrels, look casual. Not that casual.
+-- EL_TART_THIEF / sighting
+  Something small and russet slips out from under the stall with a tart in its jaws.
+  It's a Nickit! It sees you, freezes, and bolts for the kelp racks.
+  QUEST LOG: "The Tart Thief" A Nickit with jam on its whiskers! Follow it round Ferrow's Landing.
+-- EL_TART_THIEF / sighting
+  The Nickit leaves a trail of pastry flakes and vanishes under the pier.
+-- EL_TART_THIEF / sighting
+  Under the pier: crumbs, a paper case, and two bright eyes. The Nickit squeezes out the far side.
+  It scampers up the lighthouse steps.
+-- EL_TART_THIEF / sighting
+  Hesper: THAT ANIMAL IS EATING MY GERANIUMS.
+  The Nickit leaps the lighthouse wall and makes for Tidewatch Station, tail high.
+  QUEST LOG: "The Tart Thief" The crumbs lead up into Tidewatch Station's loft.
+-- EL_TART_THIEF / loft
+  Kestrel: What.
+  Kestrel: ...It brings them. I don't ask it to. It just turns up with pastry like I'm some kind of— don't look at me like that.
+  Kestrel: They're Wenna's? Of course they're Wenna's. Nobody else in this dump can bake.
+  Kestrel has been eating stolen tarts.
+  You hold out a hand. Kestrel stares at it, then puts a tart in it.
+  Kestrel: ...Fine. You're an accessory now.
+  The Nickit plants itself in front of its hoard and growls at you, every hair on end.
+  Kestrel: It thinks you're after the stash. Fight it if you want it. It likes winners.
+  Kestrel: Clearly it has awful taste. It picked me.
+  The Nickit scrambles up into the rafters to sulk. It'll come down when it's hungry.
+  Kestrel: You knocked out the pastry thief. Real heroic.
+    | EL_TART_THIEF/loft
+    | ==================
+    |   (overworld message) Kestrel: What.
+    |   (overworld message) Kestrel: ...It brings them. I don't ask it to. It just turns up with pastry like I'm some kind of— don't look at me like that.
+    |   (overworld message) Kestrel: They're Wenna's? Of course they're Wenna's. Nobody else in this dump can bake.
+    |   (overworld message) Kestrel has been eating stolen tarts.
+    |   (overworld message) You hold out a hand. Kestrel stares at it, then puts a tart in it.
+    |   (overworld message) Kestrel: ...Fine. You're an accessory now.
+    |   (overworld message) The Nickit plants itself in front of its hoard and growls at you, every hair on end.
+    |   (overworld message) Kestrel: It thinks you're after the stash. Fight it if you want it. It likes winners.
+    |   (overworld message) Kestrel: Clearly it has awful taste. It picked me.
+    | 
+    | --- Battle start ---
+    |   field: NONE | weather: None | terrain: None
+    |   Oh! A wild Nickit appeared!
+    |   Go! Quilava!
+    |     >> sent out (player): Quilava Lv.15 [BLAZE]
+    | 
+    | --- Turn 1 ---
+    |   [Quilava 47/47 | Nickit 24/24]
+    |   Quilava used Flame Wheel!
+    |     HP Nickit (foe): 24 -> 0 / 24
+    |   The wild Nickit fainted!
+    |     xx fainted: Nickit (foe)
+    |   Quilava got 34 Exp. Points!
+    |   battle result code: 1
+    |   (overworld message) The Nickit scrambles up into the rafters to sulk. It'll come down when it's hungry.
+    |   (overworld message) Kestrel: You knocked out the pastry thief. Real heroic.
+-- EL_TART_THIEF / loft
+  Kestrel: What.
+  Kestrel: ...It brings them. I don't ask it to. It just turns up with pastry like I'm some kind of— don't look at me like that.
+  Kestrel: They're Wenna's? Of course they're Wenna's. Nobody else in this dump can bake.
+  Kestrel has been eating stolen tarts.
+  You hold out a hand. Kestrel stares at it, then puts a tart in it.
+  Kestrel: ...Fine. You're an accessory now.
+  The Nickit plants itself in front of its hoard and growls at you, every hair on end.
+  Kestrel: It thinks you're after the stash. Fight it if you want it. It likes winners.
+  Kestrel: Clearly it has awful taste. It picked me.
+  Kestrel: Huh. It went with you.
+  Kestrel: Feed it. It gets mean when it's hungry. So do I. Unrelated.
+  QUEST LOG: "The Tart Thief" Tell Wenna what happened to her tarts.
+-- EL_TART_THIEF / return
+  Wenna: Well? Who's my thief?
+  You tell her about the Nickit. Just the Nickit.
+  Wenna: Mm. And this Nickit's about Kestrel's height, is it? Scowls a lot?
+  Wenna: Don't fret, love. I've known for years. I bake two dozen too many on purpose.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Tart Thief"
+  \PN received $200!
+  You obtained 3 Oran Berries!
+  You put the Oran Berries in your Bag's Berries pocket.
+  Wenna: I'll leave a plate by the station door from now on. Nobody has to ask anybody for anything.
+
+=== 4. Gift variant and quiet deeds ===
+-- EL_PAINT_LOFT / offer
+  Marguerite Fane: Eleven weeks, that sky took. Eleven. And a man in a bark mask walks through it like a curtain.
+  Marguerite Fane: Brush won't paint since. Sulks. Look at him.
+  A Smeargle sits in the corner with its tail-brush in its mouth, glaring at the hole.
+  Marguerite Fane: He paints whatever moves him. Nothing's moved him since. Tell him what Saltmere looks like to you. Maybe he'll listen to a stranger.
+  Help pick the colours?
+  NEW QUEST: "A Hole in the Sky" Help Marguerite Fane and her Smeargle choose the colours for the new backdrop.
+  Brush looks at you, tail-brush raised.
+  What does Saltmere look like to you?
+  Brush paints in amber and red. The new sky is the inside of a lantern.
+  Marguerite Fane: He's... he's painted Dorian's face in the corner. He always paints Dorian's face in the corner.
+  Marguerite Fane: That's how I know he's better.
+  Brush finishes, puts down his tail, and walks over to stand beside you. He doesn't walk back.
+  Marguerite Fane: Oh, I see. He's moving on. Painters do.
+  Marguerite Fane: Take him. Saltmere's painted. Paint something bigger.
+  Tester obtained Smeargle!
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "A Hole in the Sky"
+  Your standing in The Quiet Way rose to Sapling!
+-- EL_FIRST_LESSON / offer
+  Brother Teasel is saying something. You can't hear a word of it.
+  Brother Teasel: ...I SAID, WELCOME TO THE QUIET WAY.
+  Brother Teasel: Oh no. Oh, I'm so sorry. That's the loudest I've been in four years.
+  Brother Teasel: I keep the wayshrine. Folk hang their troubles on the rope, and somebody takes one down and makes it lighter.
+  Brother Teasel: But the first lesson isn't on the rope. The first lesson is: do one kind thing nobody asked you to do.
+  Brother Teasel: Then come back. Don't tell me what it was. The Root will have heard.
+  Brother Teasel: Will you take the first lesson?
+  NEW QUEST: "The First Lesson" Do one kind thing nobody asks of you. Don't tell Brother Teasel what it was.
+  Brother Teasel: Go gently. Most people need three goes.
+-- EL_FIRST_LESSON / deed_rope
+  Rope-skipping girl: We need a third to turn the rope. We can't finish the rhyme with two.
+  Turn the rope?
+  You turn the rope. The girls skip all the way through the counting rhyme, to the very last Plate.
+  "...and one that no one counted!" They collapse, laughing.
+  QUEST LOG: "The First Lesson" You did something. Go back to the wayshrine.
+-- EL_FIRST_LESSON / return
+  Brother Teasel: Oh. You did something. You've got the look. Like you just put a stone down.
+  Tell him what you did?
+  You say nothing. Teasel nods as if you'd said a great deal.
+  Brother Teasel: Good. That's the whole lesson. You only needed one go.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The First Lesson"
+  You obtained 2 Oran Berries!
+  You put the Oran Berries in your Bag's Berries pocket.
+  Brother Teasel: The Quiet Way keeps counting, wherever you go. Mother Aldreth in Briarwick keeps the tally. She'll know.
+  Brother Teasel: And the rope's yours now. Anything hanging there, you may take down.
+-- EL_PAINT_LOFT / offer
+  Marguerite Fane: Eleven weeks, that sky took. Eleven. And a man in a bark mask walks through it like a curtain.
+  Marguerite Fane: Brush won't paint since. Sulks. Look at him.
+  A Smeargle sits in the corner with its tail-brush in its mouth, glaring at the hole.
+  Marguerite Fane: He paints whatever moves him. Nothing's moved him since. Tell him what Saltmere looks like to you. Maybe he'll listen to a stranger.
+  Help pick the colours?  [choices: Let's paint. / Not now.]
+  Brush looks at you, tail-brush raised.
+  What does Saltmere look like to you?  [choices: Fog on the breakwater. / Footlights. / The road inland. / After the show.]
+  Brush slaps on grey-blue and white. The new sky is all fog and lamplight.
+  Marguerite Fane: He's... he's painted Dorian's face in the corner. He always paints Dorian's face in the corner.
+  Marguerite Fane: That's how I know he's better.
+  Brush finishes, puts down his tail, and walks over to stand beside you. He doesn't walk back.
+  Marguerite Fane: Oh, I see. He's moving on. Painters do.
+  Marguerite Fane: Take him. Saltmere's painted. Paint something bigger.
+  Tester obtained Smeargle!
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "A Hole in the Sky"
+
+=== 5. Badge-tier encounter swap: the Ferrymen's Mile (520) ===
+  rumour: Big pawprints in the heather on The Ferrymen's Mile. Something's been at the honey pots. At night the Lillipup there act oddly.
+  520 Land after Badge 2: SKWOVET(20) 3-5, LECHONK(15) 3-5, LILLIPUP(15) 3-5, FLETCHLING(10) 3-5, PIKIPEK(10) 4-6, ROLYCOLY(10) 4-6, WOOLOO(10) 4-6, ROOKIDEE(5) 3-5, YUNGOOS(5) 3-5, TEDDIURSA(4) 13-16, MUNCHLAX(3) 13-16, FARFETCHD(4) 17-20, AUDINO(3) 17-20, SWABLU(4) 21-24, HAWLUCHA(2) 21-24
+
+=== 6. Page conditions and save round trip ===

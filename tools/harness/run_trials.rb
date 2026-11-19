@@ -34,6 +34,9 @@ def pbMessage(message, commands = nil, cmd_if_cancel = 0, _skin = nil, default_c
   return 0
 end
 def pbNickname(_pkmn); end                # no naming screen headless
+require "json"
+MAPNAMES = JSON.parse(File.read(File.expand_path("../../design/maps.json", HARNESS_DIR)))["maps"].map { |m| [m["id"], m["name"]] }.to_h
+def pbGetMapNameFromId(id); MAPNAMES[id] || "Map #{id}"; end   # no MapInfos.rxdata headless
 def pbSEPlay(*_a); end
 def pbMEPlay(*_a); end
 
@@ -275,7 +278,7 @@ check("a deed moves First Lesson to :return", tr.at?(:EL_FIRST_LESSON, :return) 
 r0 = Prismfall::Resonance.value
 scene(:EL_FIRST_LESSON, :return, ["Say nothing."])
 check("silence: done, Harmony +1", tr.outcome(:EL_FIRST_LESSON) == :silent && Prismfall::Resonance.value == r0 + 1)
-check("Elowen rank Sapling at 4 points", tr.points(:ELOWEN) == 4 && tr.rank_name(:ELOWEN) == "Sapling", tr.points(:ELOWEN))
+check("Elowen rank Sapling at 5 points (2 + 1 + 2)", tr.points(:ELOWEN) == 5 && tr.rank_name(:ELOWEN) == "Sapling", tr.points(:ELOWEN))
 scene(:EL_PAINT_LOFT, :offer) # done quest: scene still runs, but no second gift via :complete
 check("a done quest can't complete twice", tr.record(:EL_PAINT_LOFT)[:times] >= 1)
 
@@ -298,7 +301,7 @@ Prismfall.award_badge(1, false)
 land1 = species_in.call(:Land)
 night1 = species_in.call(:LandNight)
 check("Badge 1: Teddiursa + Munchlax join Land", land1.include?(:TEDDIURSA) && land1.include?(:MUNCHLAX), (land1 - land0).inspect)
-check("Badge 1: Zorua joins LandNight, and Land overlays feed LandNight too", night1.include?(:ZORUA) && night1.include?(:TEDDIURSA), (night1 - night0).inspect)
+check("Badge 1: the tier's own LandNight (Zorua) is used at night", night1.include?(:ZORUA) && !night1.include?(:TEDDIURSA), (night1 - night0).inspect)
 check("Badge 1: base slots kept", (land0 - land1).empty?)
 check("rumour for [520,1] queued", bt.fresh_rumours.include?([520, 1]))
 TRANSCRIPT << "  rumour: " + bt.rumour_text(520, 1)
@@ -320,6 +323,8 @@ Prismfall.award_badge(2, false)
 land2 = species_in.call(:Land)
 check("Badge 2: Farfetch'd + Audino added, Badge 1 tier kept", land2.include?(:FARFETCHD) && land2.include?(:AUDINO) && land2.include?(:TEDDIURSA))
 check("unlocked tier on 520 is 2", bt.unlocked_tier(520) == 2, bt.unlocked_tier(520))
+Prismfall.award_badge(3, false)
+check("Badge 3: a Land-only tier (Swablu) also feeds LandNight", species_in.call(:LandNight).include?(:SWABLU) && species_in.call(:Land).include?(:SWABLU))
 pe.setup(527)
 check("527 (no base table yet) gets no overlay", tables.call.empty?, tables.call.keys.inspect)
 $PokemonGlobal.encounter_version = 1
@@ -333,27 +338,40 @@ check("Rumours tab lists tier rumours", tr.log_rows(2).any? { |r| r[2] == "Badge
 #-------------------------------------------------------------------------------
 section("6. Page conditions and save round trip")
 #-------------------------------------------------------------------------------
+Cond  = Struct.new(:switch1_valid, :switch2_valid, :variable_valid, :self_switch_valid, :switch1_id, :switch2_id,
+                   :variable_id, :variable_value, :self_switch_ch)
+Gfx   = Struct.new(:tile_id, :character_name, :character_hue, :direction, :pattern, :opacity, :blend_type)
+FPage = Struct.new(:condition, :graphic, :move_type, :move_speed, :move_frequency, :move_route, :walk_anime,
+                   :step_anime, :direction_fix, :through, :always_on_top, :trigger, :list)
+Cmd   = Struct.new(:code, :indent, :parameters)
+FEvent = Struct.new(:id, :pages, :name)
 mkpage = lambda do |text|
-  pg = RPG::Event::Page.new
-  pg.list = [RPG::EventCommand.new(108, 0, [text]), RPG::EventCommand.new(0, 0, [])]
-  pg
+  list = text ? [Cmd.new(108, 0, [text]), Cmd.new(0, 0, [])] : [Cmd.new(0, 0, [])]
+  FPage.new(Cond.new(false, false, false, false, 1, 1, 1, 0, "A"), Gfx.new(0, "", 0, 2, 0, 255, 0),
+            0, 3, 3, nil, true, false, false, false, false, 0, list)
 end
 p_yes = mkpage.call("Condition: quest_done(:AS_LITTLE_CRUCIBLE) && trial_rank(:ASHKAAR) >= 2")
 p_no  = mkpage.call("Condition: quest_step(:EL_TART_THIEF) == :chase")
-p_none = RPG::Event::Page.new
+p_none = mkpage.call(nil)
 check("Condition: comment true -> page allowed", tr::PageConditions.passes?(p_yes))
 check("Condition: comment false -> page skipped", !tr::PageConditions.passes?(p_no))
 check("page without a Condition comment unaffected", tr::PageConditions.passes?(p_none))
-ev = RPG::Event.new(1, 1)
-ev.pages = [RPG::Event::Page.new, p_yes, p_no]
+ev = FEvent.new(1, [p_none, p_yes, p_no], "trial test")
 begin
-  $game_self_switches ||= Game_SelfSwitches.new
-  gev = Game_Event.new(990, ev)
+  gev = Game_Event.allocate   # the real Game_Event#refresh (alias-chained), minus map-only helpers
+  { :@event => ev, :@erased => false, :@map_id => 990, :@page => nil, :@route_erased => false }.each { |k, v| gev.instance_variable_set(k, v) }
+  def gev.calculate_bush_depth; end
+  def gev.check_event_trigger_auto; end
+  gev.refresh
   chosen = ev.pages.index(gev.instance_variable_get(:@page))
   check("Game_Event#refresh picks the last page whose Condition passes", chosen == 1, "page #{chosen.inspect}")
   check("event pages restored after refresh", ev.pages.length == 3)
+  tr.reset(:AS_LITTLE_CRUCIBLE)
+  gev.refresh
+  chosen = ev.pages.index(gev.instance_variable_get(:@page))
+  check("after the quest is reset, refresh falls back to page 0", chosen == 0, "page #{chosen.inspect}")
 rescue StandardError => e
-  check("Game_Event#refresh with Condition pages (engine)", false, "#{e.class}: #{e.message}")
+  check("Game_Event#refresh with Condition pages (engine)", false, "#{e.class}: #{e.message} #{e.backtrace.first(2).join(' ')}")
 end
 dump = Marshal.dump(Prismfall.state)
 back = Marshal.load(dump)
