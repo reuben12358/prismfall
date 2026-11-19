@@ -4,6 +4,7 @@
   python3 -I tools/rename_places.py            dry run: writes tools/worldmap/last_rename.diff and prints a summary
   python3 -I tools/rename_places.py --apply    rewrites the files
   python3 -I tools/rename_places.py --grep     report every "Route <number>" left in the scanned files
+  python3 -I tools/rename_places.py --selftest quoting/skip regression cases (py, yaml, rb, md)
 
 What it rewrites (sources only; generated files are rebuilt by their own tools):
   design/*.md|*.yaml|maps.json, story/*.md, pbs/*.txt, mapgen/specs/*.yaml, mapgen/layouts/*.py|*.yaml,
@@ -14,6 +15,10 @@ FROSTFLAT CAUSEWAY"); (3) the prose forms ("Mt. Cinder" -> "the Cinderhorn"); (4
 shorthand "R5", "R15b" (never on lines about the Festival bracket, the Ruin Route or gym puzzle rooms, and R16 only
 next to "Ironway"). A new name that starts with "The" is lowercased mid-sentence ("on the Ferrymen's Mile").
 Lines that name audio or tilesets (bgm, BGM, GlitchxCity, "Rejuvenation Route 2", "Route 2_new") are never touched.
+Names with an apostrophe (Ferrymen's, Dyers') are escaped inside single-quoted strings: \\' in .py/.rb, '' in YAML.
+Each rewritten .py/.yaml/.json/.rb file is parsed before it is written (a file that would not parse is refused), and
+after --apply every .py in mapgen/ and tools/ (ast) and every .rb in plugins/ and mapgen/ruby (ruby -c) is checked: if
+anything newly fails, every file the run wrote is restored and it exits 1.
 Idempotent: a second run changes nothing.
 """
 import difflib
@@ -160,44 +165,10 @@ NAMES = []
 
 
 def rewrite_line(line, rules, abbr, rel):
+    """one line: untouched if it names audio or a tileset; rewrite_text keeps bgm values (audio file names)"""
     if SKIP_LINE.search(line):
         return line
-    if rel.endswith('.py'):
-        return _py_safe(line, rewrite_text(line, rules, abbr, rel))
     return rewrite_text(line, rules, abbr, rel)
-
-
-def _py_safe(old, new):
-    """escape apostrophes a new name brought into a single-quoted Python string"""
-    if new == old or "'" not in new:
-        return new
-    out, q, i = [], None, 0
-    while i < len(new):
-        ch = new[i]
-        if q is None:
-            if ch == '#':
-                out.append(new[i:])
-                break
-            if ch in '\'"':
-                q = ch
-            out.append(ch)
-        else:
-            if ch == '\\':
-                out.append(new[i:i + 2])
-                i += 2
-                continue
-            if ch == q:
-                # a quote that closes the string only if what follows looks like the end of a literal
-                rest = new[i + 1:i + 2]
-                if q == "'" and rest and (rest.isalpha() or rest == ' ' and new[i + 1:i + 3].strip()[:1].isalpha()
-                                         and not new[i + 1:].lstrip().startswith(('if', 'else', 'for', 'and', 'or', 'in'))):
-                    out.append("\\'")
-                    i += 1
-                    continue
-                q = None
-            out.append(ch)
-        i += 1
-    return ''.join(out)
 
 
 def rewrite_text(line, rules, abbr, rel):
@@ -228,6 +199,184 @@ def _rewrite(line, rules, abbr, rel):
     return line
 
 
+# ----------------------------------------------------------------------------- quoting and validation
+def lang_of(rel):
+    for ext, lang in (('.py', 'py'), ('.rb', 'rb'), ('.yaml', 'yaml'), ('.yml', 'yaml'), ('.json', 'json')):
+        if rel.endswith(ext):
+            return lang
+    return None
+
+
+TRIPLES = ("'" * 3, '"' * 3)
+
+
+def scan_line(line, state, lang):
+    """the quote state before each character of one line, and the state carried to the next line"""
+    st = []
+    i = 0
+    n = len(line)
+    if state == '#':
+        state = ''
+    while i < n:
+        ch = line[i]
+        st.append(state)
+        if state == '':
+            if lang in ('py', 'rb') and ch == '#':
+                state = '#'
+            elif lang == 'yaml' and ch == '#' and (i == 0 or line[i - 1] in ' \t'):
+                state = '#'
+            elif lang == 'py' and line.startswith(TRIPLES, i):
+                state = line[i:i + 3]
+                st += [state, state]
+                i += 3
+                continue
+            elif ch in ('"', "'"):
+                if lang == 'yaml':
+                    before = line[:i].rstrip()
+                    if before == '' or before[-1] in ':-[{,?':
+                        state = ch
+                else:
+                    state = ch
+        elif state in ("'", '"'):
+            if ch == '\\' and (lang != 'yaml' or state == '"'):
+                st.append(state)
+                i += 2
+                continue
+            if ch == state:
+                if lang == 'yaml' and state == "'" and line[i + 1:i + 2] == "'":
+                    st.append(state)
+                    i += 2
+                    continue
+                state = ''
+        elif state in TRIPLES:
+            if line.startswith(state, i):
+                st += [state, state]
+                i += 3
+                state = ''
+                continue
+        i += 1
+    if state == '#' or (state in ("'", '"') and lang in ('py', 'rb')):
+        state = ''          # comments and one-line strings never carry over
+    return st, state
+
+
+def escape_apostrophes(old_lines, new_lines, lang, names):
+    """inside single-quoted strings, write the apostrophe of a newly inserted name as \\' (py/rb) or '' (yaml).
+    Works left to right and rescans after every fix, so one bad quote cannot mislead the rest of the line."""
+    if lang not in ('py', 'rb', 'yaml'):
+        return new_lines
+    rep = "\\'" if lang in ('py', 'rb') else "''"
+    out = []
+    state = ''
+    for a, b in zip(old_lines, new_lines):
+        if a != b and "'" in b:
+            pos = 0
+            while True:
+                st, _ = scan_line(b, state, lang)
+                hit = None
+                for nm in names:
+                    if b.lower().count(nm.lower()) <= a.lower().count(nm.lower()) and nm.lower() in a.lower():
+                        continue
+                    for m in re.finditer(re.escape(nm), b, re.I):
+                        if m.start() < pos:
+                            continue
+                        j = b.index("'", m.start(), m.end()) if "'" in m.group(0) else -1
+                        if j >= 0 and st[m.start()] == "'" and (hit is None or j < hit[0]):
+                            hit = (j, m.end())
+                if hit is None:
+                    break
+                j, end = hit
+                b = b[:j] + rep + b[j + 1:]
+                pos = end + len(rep) - 1
+        _, state = scan_line(b, state, lang)
+        out.append(b)
+    return out
+
+
+def validate(text, lang):
+    """None if the text parses, else the error"""
+    try:
+        if lang == 'py':
+            import ast
+            ast.parse(text)
+        elif lang == 'yaml':
+            import yaml
+            list(yaml.safe_load_all(text))
+        elif lang == 'json':
+            import json
+            json.loads(text)
+        elif lang == 'rb':
+            import subprocess
+            import tempfile
+            with tempfile.NamedTemporaryFile('w', suffix='.rb', delete=False) as t:
+                t.write(text)
+            r = subprocess.run(['ruby', '-c', t.name], capture_output=True, text=True)
+            os.unlink(t.name)
+            if r.returncode != 0:
+                raise SyntaxError(r.stderr.strip()[:200])
+    except Exception as e:
+        return '%s: %s' % (type(e).__name__, str(e).split('\n')[0][:160])
+    return None
+
+
+def code_health():
+    """every .py in mapgen/ and tools/ (ast) and every .rb in plugins/ and mapgen/ruby (ruby -c): the broken ones"""
+    import ast
+    import subprocess
+    bad = set()
+    for f in glob.glob(os.path.join(ROOT, 'mapgen', '**', '*.py'), recursive=True) + \
+            glob.glob(os.path.join(ROOT, 'tools', '**', '*.py'), recursive=True):
+        try:
+            ast.parse(open(f, encoding='utf-8').read())
+        except Exception:
+            bad.add(f)
+    for f in glob.glob(os.path.join(ROOT, 'plugins', '**', '*.rb'), recursive=True) + \
+            glob.glob(os.path.join(ROOT, 'mapgen', 'ruby', '*.rb')):
+        r = subprocess.run(['ruby', '-c', f], capture_output=True, text=True)
+        if r.returncode != 0:
+            bad.add(f)
+    return bad
+
+
+def process(apply, rules, abbr, rows):
+    diffs = []
+    changed = 0
+    nlines = 0
+    apos = sorted({v for _, o, n in rows if "'" in n
+                   for v in (n, n.upper(), ('the ' + n[4:]) if n.startswith('The ') else n)}, key=len, reverse=True)
+    before_bad = code_health() if apply else set()
+    written = {}
+    refused = []
+    for f, rel in files():
+        text = open(f, encoding='utf-8').read()
+        lines = text.split('\n')
+        new = [rewrite_line(l, rules, abbr, rel) for l in lines]
+        if new == lines:
+            continue
+        lang = lang_of(rel)
+        new = escape_apostrophes(lines, new, lang, apos)
+        if lang and validate('\n'.join(new), lang) and not validate(text, lang):
+            refused.append((rel, validate('\n'.join(new), lang)))
+            continue
+        changed += 1
+        nlines += sum(1 for a, b in zip(lines, new) if a != b)
+        diffs.extend(difflib.unified_diff(lines, new, rel, rel, lineterm='', n=0))
+        if apply:
+            written[f] = text
+            open(f, 'w', encoding='utf-8').write('\n'.join(new))
+    if apply and written:
+        broke = sorted(code_health() - before_bad)
+        if broke:
+            for f, text in written.items():
+                open(f, 'w', encoding='utf-8').write(text)
+            print('ROLLED BACK: the rename broke %s; every file this run wrote is restored'
+                  % ', '.join(os.path.relpath(b, ROOT) for b in broke))
+            sys.exit(1)
+    for rel, err in refused:
+        print('REFUSED %s: the renamed file would not parse (%s); left unchanged' % (rel, err))
+    return diffs, changed, nlines
+
+
 def files():
     out = []
     for pat in INCLUDE:
@@ -245,30 +394,38 @@ def main():
     rules = build_rules(rows, prose)
     abbr = abbrev_rules(rows)
     apply = '--apply' in sys.argv
+    if '--selftest' in sys.argv:
+        apos = sorted({v for _, o, n in rows if "'" in n
+                       for v in (n, n.upper(), ('the ' + n[4:]) if n.startswith('The ') else n)}, key=len, reverse=True)
+        cases = [('t.py', ["QUEST('biscuit', 'Biscuit', 'Go to the old orchard on Route 1.')"]),
+                 ('t.py', ["h = {'name': 'Route 1', 'bgm': 'Route 1', 'x': 'Route 1 and Route 1'}  # Route 1"]),
+                 ('t.py', ['"""doc', "Route 1 in 'Route 1'", '"""', "y = 'Route 1'"]),
+                 ('t.yaml', ["text: 'ROUTE 1", "", "    Ferrow''s Landing - Route 3 - Route 1.'"]),
+                 ('t.yaml', ["- {script: 'pfm_quest(:biscuit, \"Biscuit\", \"on Route 1.\")'}"]),
+                 ('t.rb', ["t = \"on Route 15\"; u = 'Route 1' # Route 1"]),
+                 ('t.md', ["| `Route 2_new` (39), `Route 3` (8) |", "GlitchxCity - Route 10 remix", "bgm: Route 2"])]
+        ok = True
+        for rel, lines in cases:
+            new = escape_apostrophes(lines, [rewrite_line(l, rules, abbr, rel) for l in lines], lang_of(rel), apos)
+            err = validate('\n'.join(new), lang_of(rel)) if lang_of(rel) else None
+            if rel == 't.md' and new != lines:
+                err = 'audio/tileset line changed'
+            print('%s %s %s' % ('ok  ' if not err else 'FAIL', rel, err or new))
+            ok = ok and not err
+        sys.exit(0 if ok else 1)
     if '--grep' in sys.argv:
         n = 0
         for f, rel in files():
             for i, line in enumerate(open(f, encoding='utf-8'), 1):
                 if re.search(r'(?<![\w])Route \d', line, re.I):
-                    tag = 'skipped (audio/tileset)' if SKIP_LINE.search(line) else 'LEFT'
+                    rest = BGM_VAL.sub('', line)
+                    tag = 'skipped (audio/tileset)' if SKIP_LINE.search(line) else \
+                        ('bgm file name' if not re.search(r'(?<![\w])Route \d', rest, re.I) else 'LEFT')
                     print('%s:%d: [%s] %s' % (rel, i, tag, line.strip()[:150]))
                     n += 1
         print('%d lines' % n)
         return
-    diffs = []
-    changed = 0
-    nlines = 0
-    for f, rel in files():
-        text = open(f, encoding='utf-8').read()
-        lines = text.split('\n')
-        new = [rewrite_line(l, rules, abbr, rel) for l in lines]
-        if new != lines:
-            changed += 1
-            nl = sum(1 for a, b in zip(lines, new) if a != b)
-            nlines += nl
-            diffs.extend(difflib.unified_diff(lines, new, rel, rel, lineterm='', n=0))
-            if apply:
-                open(f, 'w', encoding='utf-8').write('\n'.join(new))
+    diffs, changed, nlines = process(apply, rules, abbr, rows)
     os.makedirs(os.path.dirname(DIFF_OUT), exist_ok=True)
     open(DIFF_OUT, 'w', encoding='utf-8').write('\n'.join(diffs) + '\n')
     print('%s: %d files, %d lines %s. Diff: %s' % ('APPLIED' if apply else 'DRY RUN', changed, nlines,

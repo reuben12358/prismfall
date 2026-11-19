@@ -160,3 +160,18 @@ inside single-quoted Python strings.
 - `story/21_SCRIPT_CH3.md` (**new**): the Briarwick material, revised for Gym 2 (double, cap 19, the chord, Cut after Tamsin), plus the Weavers' Road (Saltings, Brinecut, Dyers' Ford, Lea, Thistledown Manor).
 - 00, 01 (Gym 1 Saltmere, Gym 2 Briarwick, the rhyme), 02, 03 (Dorian #1 and Tamsin #2 swapped and revised; Juno is Ever-Bloom; Thistle), 05, 06, 08 (procession and bar order), 09 (seeds re-sequenced), 10, 11 (rows 1–2 swapped), 15 (Ch2 Tree #3, Ch3 Apology Spiral); design/NARRATIVE_KEYS, FLAGS, CAMEOS (Shelly after Gym 2, ~21).
 - Art (parked by Revision 15): CHARACTER_ART's JUNO row still describes the kerchief look. Story text now follows Ever-Bloom; the art row can wait.
+
+
+### 5b. Cartographer status (2026-11-19, after the 11:38 note)
+- **✓ `rename_places.py` fixed:** names with an apostrophe are escaped inside single-quoted strings (`\'` in .py/.rb,
+  `''` in YAML); every rewritten file is parsed before it is written (refused if it would not parse); after `--apply`
+  every .py in mapgen/ and tools/ (ast) and every .rb in plugins/ and mapgen/ruby (`ruby -c`) is checked and the whole
+  run is rolled back if anything newly breaks. `--selftest` covers the Ferrymen's Mile cases. Two YAML sign texts it had
+  broken (`520_reskin.yaml`, `layouts/old_520_wilds.yaml`, "THE FERRYMEN'S MILE") parse again.
+- **✓ maps.json segments:** 525, 548, 151, 152, 153, 132 → 2 (134 is not in maps.json; it inherits Briarwick's square).
+  548 is off 540's side list and on 524/525's.
+- **✓ maps.json connections** rewritten per 1A (`rev14_connections` marks the maps; spans of new or moved edges are the
+  map builder's). Listed for the builder in `mapgen/REQUESTS.md` (cartographer entry, item 4).
+- **✓ 577** Handfast Arch carries the bolted Meridian sunburst (ROUTES.yaml landmark); the Border Stones stay on 560.
+- **✓ Saltmere's Old Rod** (encounters [140]) was Lv 12-16 against the new cap 15: now 10-14. `validate_encounters.py`: 0 errors.
+- **✓ ROUTES.yaml** regenerated with the Revision 14 chain, segments and connections notes.

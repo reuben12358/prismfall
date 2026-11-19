@@ -24,13 +24,13 @@ GYM = _gym()
 GYM_PLANKS = {0: (5, 6), 1: (9, 10)}          # V308 -> plank columns (rows 8-9); the aisle is x9-10
 GYM_LOOMS = [(4, 6), (6, 6), (12, 12), (14, 12), (4, 12), (6, 12), (4, 15), (6, 15), (12, 15), (14, 15), (4, 18), (12, 18)]   # 2x2 each
 GYM_AT = dict(heddle=(11, 10), exit=(9, 22), start=(9, 21), stair=(15, 2), pim=(13, 20), guide=(6, 20), tamsin_foyer=(10, 19),
-              nell=(8, 14), orla=(11, 17), juno=(12, 21), first_loom=(4, 19), item=(15, 6),
+              nell=(8, 14), orla=(11, 17), first_loom=(4, 19), item=(15, 6),
               card_a=(5, 3), card_b=(12, 3), portrait=(8, 3))
 
 
 def gym_model():
     cells, _ = grid_cells(130, GYM, '#W')
-    solid = {GYM_AT[k] for k in ('heddle', 'pim', 'guide', 'tamsin_foyer', 'nell', 'orla', 'juno', 'item')}
+    solid = {GYM_AT[k] for k in ('heddle', 'pim', 'guide', 'tamsin_foyer', 'nell', 'orla', 'item')}
     for x, y in GYM_LOOMS: solid |= {(x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)}
     cells -= {(130, x, y) for x, y in solid}
 

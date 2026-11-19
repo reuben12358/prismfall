@@ -69,7 +69,7 @@ module FieldEffects
       :LEADER_CORVIN    => { :TAILWIND => [20, :no_tailwind], :RAGEPOWDER => [15, :partner] },
       :LEADER_ODESSA    => { :TAILWIND => [35, :no_tailwind], :WIDEGUARD => [12, :partner], :HELPINGHAND => [10, :partner] },
       :LEADER_NYX       => { :FAKEOUT => [30, :first_turns], :HELPINGHAND => [10, :partner] },
-      :LEADER_CELESTINE => { :FAKEOUT => [30, :first_turns], :DECORATE => [40, :first_turns], :FOLLOWME => [25, :partner] },
+      :LEADER_CELESTINE => { :FAKEOUT => [30, :first_turns], :HELPINGHAND => [15, :partner], :FOLLOWME => [25, :partner] },
       :OCTAVE_VESPER    => { :HELPINGHAND => [15, :partner] },
       :OCTAVE_SINGER    => { :HELPINGHAND => [15, :partner] },
       :MERIDIAN_MARCHETTI => { :TAILWIND => [20, :no_tailwind] },

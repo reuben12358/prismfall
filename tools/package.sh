@@ -17,6 +17,7 @@ declare -A PBS_MAP=(
   [trainers.txt]=trainers_prismfall.txt
   [items_fields.txt]=items_prismfall.txt
   [encounters.txt]=encounters_prismfall.txt
+  [town_map.txt]=town_map_prismfall.txt   # region 0 Velmora; Prismfall Maps 009_TownMap.rb compiles it instead of the stock file
 )
 for src in "${!PBS_MAP[@]}"; do
   [[ -f "$ROOT/pbs/$src" ]] && cp "$ROOT/pbs/$src" "$OUT/PBS/${PBS_MAP[$src]}"

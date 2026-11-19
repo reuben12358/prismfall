@@ -10,6 +10,7 @@
 #   bash run_playtest.sh play       # restart, New Game, Debug > Files > Install (no-op), prologue
 #   bash run_playtest.sh route1     # dev shortcut: start on Route 1 after K1, walk into its trainers
 #   bash run_playtest.sh ch1        # resume at Route 1 (state as after K1) and play Chapter 1 to Briarwick
+#   bash run_playtest.sh narrative  # Debug > Prismfall Core > Show Core status (Core's narrative self-check)
 #   bash run_playtest.sh checks     # dev shortcut: glyph lines + quest log + every trainer added 2026-11-17
 #   python3 make_playtest_media.py  # shots + GIF -> docs/playtest/
 #
@@ -80,6 +81,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|play|route1|checks|ch1|resume) session "$1" ;;
-  *) echo "usage: $0 assemble | install | play | route1 | checks | ch1 | stop"; exit 1 ;;
+  install|play|route1|checks|ch1|resume|narrative) session "$1" ;;
+  *) echo "usage: $0 assemble | install | play | route1 | checks | ch1 | narrative | resume | stop"; exit 1 ;;
 esac

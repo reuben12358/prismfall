@@ -67,23 +67,28 @@ def main():
         say('TAMSIN', 'sad', "..."),
         say('TAMSIN', 'deadpan', "I'm going to go and stand in the web now."),
         {'move': {'who': 0, 'route': ['up', 'up', 'up', 'up', 'up']}}, {'selfswitch': ['A', True]}]
+    # story/21_SCRIPT_CH3.md, Map 131 (Revision 14 lines)
     win = [
         say('TAMSIN', 'shocked', "...It held, and you still came through it."),
         say('TAMSIN', 'happy', "That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one."),
         {'script': 'Prismfall.award_badge(pfm_gym(:LEADER_TAMSIN))'},
-        "(You open the Badge Case and set the badge in. A faint hum: one clear note.)",
-        "\\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?",
+        "(You open the Badge Case and set the badge beside Dorian's. The first note, then a second, higher, in tune with it. The two hang in the air together.)",
+        "\\pf[JUNO,shocked,shock]Juno: It's doing a CHORD.",
         say('TAMSIN', 'neutral', "I don't think they do that. ...Do they do that?"),
+        say('JUNO', 'happy', "It did one note in Saltmere! Dorian asked it to do it again and it wouldn't!"),
+        say('TAMSIN', 'deadpan', "It's a very sensible box."),
         {'script': 'pbReceiveItem(:TM89)'},
-        say('TAMSIN', 'neutral', "That's the Accord's word that you may use Cut, and that Pokémon up to level nineteen will heed you."),
+        say('TAMSIN', 'neutral', "That's the Accord's word that Pokémon up to level twenty-three will heed you. And the Cutter will give you Cut now. He'll say no first. Wait for the second answer."),
         say('TAMSIN', 'sad', "\\PN... could you come up to the loft? There's something I should say to someone, and you've an honest sort of silence."),
         {'tone': [-255, -255, -255, 0, 12]}, {'wait': 14}, {'tone': [-30, -20, -10, 30, 12]},
-        "(The loft above the Spindle: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)",
-        say('TAMSIN', 'sad', "That masked woman at the pylon. She was right. I signed it."),
+        "(The loft above the hall: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)",
+        say('TAMSIN', 'sad', "That woman at the pylon. With the shears. She was right. I signed it."),
         say('TAMSIN', 'sad', "Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her."),
         say('TAMSIN', 'sad', "Meridian offered four hundred thousand for \"stewardship rights\". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was."),
+        say('TAMSIN', 'neutral', "And it WORKS. That's the thing. The looms ran till midnight for a week. Everyone was so happy. Nobody had been happy since the funeral."),
         say('TAMSIN', 'crying', "And now the Glasswood's walking up the survey line like it was invited. Fourteen moths this week. I count them. I count them every morning."),
-        say('TAMSIN', 'sad', "The guild meets tonight. Tell me what to do. Please. I've run out of thread."),
+        say('TAMSIN', 'sad', "The man in Saltmere told everyone to ask their Warden. Nobody's asked me yet. They're all too kind. The guild meets tonight."),
+        say('TAMSIN', 'sad', "Tell me what to do. Please. I've run out of thread."),
         {'if': 'pf_choice(:ch2_tamsin)', 'then': ["(You've already given her your answer.)"], 'else': [
             {'choices': ["Tell them the truth. I'll stand next to you.", "They deserve to know. If you won't say it, I will.", "It's your secret. I won't tell."],
              'cancel': 0, 'branches': [
@@ -99,20 +104,21 @@ def main():
                  say('TAMSIN', 'sad', "...Thank you. I think. I'll fix it quietly. I'll find the money somewhere."),
                  "(No meeting. Within the week, the pylon is finished.)"]]}]},
         say('TAMSIN', 'neutral', "Whatever's making the wood ring, it's in Cocoonfall Hollow, at the Glasswood's heart. I can't cross the Veil. Nobody can."),
-        "\\pf[JUNO,neutral,dots]Juno: (from the stairs) ...They can.",
+        "\\pf[JUNO,neutral,dots]Juno: (from the stairs, hatbox in her arms) ...They can.",
         "\\pf[TAMSIN,shocked,shock]Tamsin: What?",
         say('TAMSIN', 'neutral', "Then take this. It was Gran's shuttle. It's only wood. But she never dropped a thread while she held it."),
         {'if': 'GameData::Item.exists?(:MOTHERLOOMSSHUTTLE)', 'then': [{'script': 'pbReceiveItem(:MOTHERLOOMSSHUTTLE)'}],
          'else': ["\\me[Key item get]You received MOTHER LOOM'S SHUTTLE!\\nWorn smooth by fifty years of one hand."]},
-        "QUEST: \"The Ringing Wood\" - Cut through the Deepwood to Cocoonfall Hollow.",
+        {'script': 'pfm_quest(:ringing_wood, "The Ringing Wood", "Get Cut from the Cutter, then cut through the Deepwood to Cocoonfall Hollow.")'},
         {'tone': [0, 0, 0, 0, 20]}, {'selfswitch': ['A', True]}]
     tamsin_fight = [
-        {'if': key(133, 'TRIED'), 'then': [say('TAMSIN', 'neutral', "Again? Good. I mean— sorry. I mean good.")], 'else': [
-            "(Tamsin stands at the great loom at the hall's end. She has stopped fidgeting.)",
+        {'if': key(131, 'TRIED'), 'then': [say('TAMSIN', 'neutral', "Again? Good. I mean— sorry. I mean good.")], 'else': [
+            "(Tamsin stands at the great loom on the top ledge. She has stopped fidgeting.)",
             say('TAMSIN', 'neutral', "My grandmother wove this room. Every plank, every web. She held this village together for fifty years with thread and shouting."),
             say('TAMSIN', 'sad', "I've had it since spring. I can't shout."),
+            say('TAMSIN', 'neutral', "Dorian goes first because he makes people brave. I go second because by then you think you know what a gym is."),
             say('TAMSIN', 'angry', "But I can weave. Granny Loom wove this room. Don't you dare tear it.")]},
-        {'script': key(133, 'TRIED') + ' = true'},
+        {'script': key(131, 'TRIED') + ' = true'},
         {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)', 'then': win}]
     A = g1.GYM_AT
     h = K.Hall(g1.GYM, 'loom', CLS, seed=130)
@@ -141,11 +147,12 @@ def main():
         {'type': 'npc', 'name': 'Gym guide', 'at': list(A['guide']), 'sprite': 'NPC 01', 'dir': 'right', 'commands': [
             "Gym Guide: Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does not. "
             "I say this to everyone and half of them bring a Bulbasaur.",
-            "Gym Guide: Every heddle in this house is tied by silk to what it moves, so follow the thread. Up here it's one heddle, "
-            "one plank. Upstairs in the Weaving Hall, each heddle lifts TWO beds. Count lifts, not pulls.",
-            "Gym Guide: And Tamsin fights two at a time. A thread holds because it's twisted with others."]},
+            "Gym Guide: Every heddle in this house is tied by silk to what it moves, so follow the thread. Down here it's one heddle, "
+            "one plank. In the Weaving Hall each heddle lifts TWO beds. Count lifts, not pulls.",
+            "Gym Guide: And Tamsin fights two at a time. A thread holds because it's twisted with others. Old Mother Loom built the room "
+            "to teach patience. Tamsin added the safety nets. And the apology cards."]},
         K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_foyer', "Weaver Pim, loom-minder. Stuck at the loom bed? It happens."),
-        sign('Apology card', A['card_a'], "A card pinned to the wall: \"If the plank is in the wrong place, I'm so sorry. The heddle by the aisle moves it. — T.L.\""),
+        sign('Apology card', A['card_a'], "A card pinned by the loom bed: \"If the plank is in the wrong place, I'm so sorry. The heddle by the aisle moves it. — T.L.\""),
         sign('Apology card B', A['card_b'], "A card: \"The Weaving Hall is upstairs. If you fall, the nets are soft. Sorry! — T.L.\""),
         sign('Portrait', A['portrait'], "A fierce old woman at a loom. Brass plate: \"Mother Loom, Warden AF 247–299. 'Twist it or lose it.'\""),
         {'type': 'item', 'at': list(A['item']), 'item': 'POTION'},
@@ -160,14 +167,7 @@ def main():
              'else': ["Mother Loom's first loom. The warp stops mid-row: up, down, up, down, up - and then nothing, as if she meant "
                       "to come back to it."]}]}]},
         {'type': 'warp', 'name': 'Stairs to the Weaving Hall', 'at': list(A['stair']),
-         'to': {'map': 131, 'x': g1.HALL_AT['start'][0], 'y': g1.HALL_AT['start'][1], 'dir': 'up'}},
-        reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[130, e.id, 'A']] } >= 2", ['Juno']),
-        {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
-            {'commands': []},
-            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
-                {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on! I'm being loud! In my head!")],
-                 'else': ["(Juno is by the door, eating a honey-silk bun.)",
-                          say('JUNO', 'happy', "I made it! Go on! I'll be loud!"), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
+         'to': {'map': 131, 'x': g1.HALL_AT['start'][0], 'y': g1.HALL_AT['start'][1], 'dir': 'up'}}]
     d = head(130, 'Loomhouse Gym - Foyer', 120, [-10, -6, -18, 10]); d.update(h.write(130)); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 131 Weaving Hall (TWIST: two threads per heddle)
@@ -213,7 +213,15 @@ def main():
                 "I don't need to say it, then."),
         sign('Torn-net sign', A['sign'], "A card on a post: \"The left warp of the middle bed snapped. Sorry! Use the other two. — T.L.\"",
              CU('post_silk')),
-        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_hall', "Pim again. I run between rooms. Want it put back, or a nudge?")]
+        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_hall', "Pim again. I run between rooms. Want it put back, or a nudge?"),
+        reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[131, e.id, 'A']] } >= 1", ['Juno']),
+        {'type': 'event', 'name': 'Juno', 'at': [13, 21], 'pages': [
+            {'commands': []},
+            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
+                {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on, I'll be loud. Quietly. I learned that in Saltmere.")],
+                 'else': ["(Juno is at the hall's entrance, holding a hatbox with great care.)",
+                          say('JUNO', 'happy', "Forty eggs! In a hatbox! Don't knock the hatbox!"),
+                          say('JUNO', 'happy', "Go on, I'll be loud. Quietly. I learned that in Saltmere."), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
     d = head(131, 'Loomhouse Gym - Weaving Hall', 130, [-10, -6, -18, 10]); d.update(h.write(131)); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 132 Canopy Lofts (COMBINE: spools, cords, the brass wire)

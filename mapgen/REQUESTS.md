@@ -173,3 +173,64 @@ Full checklist by owner: **`design/SWAP_GYM1_GYM2.md`** (§1 is yours: connectio
    Ford (552) now. The quarantine roadblock moves to the Hale Bell on 520, and 521's forest path becomes the corded forest road.
 3. **Thistle** uses version 0 in the new script (your item 4).
 
+
+## From the Trials / side-quest workstream (SPINE Revisions 13-14), 2026-11-19
+No map file was edited. Everything placeable is in **`design/TRIAL_EVENTS.yaml`** (74 events on 30 maps, keyed by map ID).
+Each event is one call, `{script: 'pf_trial_talk(:KEY)'}`; the plugin (`plugins/Prismfall Trials/150_Trials_Talk.rb`)
+picks the scene, so dialogue changes never need a re-pour. Objects that come and go carry their visibility as a first
+command `{comment: 'Condition: ...'}` (the Trials plugin reads it; put an empty page first so the event is "nothing" while
+false). Existing story NPCs get a branch instead of a new event:
+`{if: 'pf_trial_ready?(:KEY)', then: [{script: 'pf_trial_talk(:KEY)'}], else: [their own lines]}`.
+1. **Three small new interiors** (IDs are suggestions from the free slots in each block):
+   - **148 Saltmere Lantern House** (door on 140 next to the Lantern Theatre; quiet grey room, lantern rope, Sister Hollin).
+   - **126 Briarwick Lantern House** (a hollow-tree room under the Loyal Three shrine; lantern-loom, Mother Aldreth).
+   - **168 the Net Loft**, Ebbmouth (nets, a carved Tally Mast, a long feast table; Bersi Gullsong).
+2. **Exteriors:** a wayshrine with a lantern rope by the Accord plaque on 100; a brass Rotom kiosk in 108, 143 and by the
+   Lattice station on 160; the Legion recruiting barge moored in 146 (rope ring, fire pit, gong); a sea-cave mouth behind
+   the big tide-pool on 527 (opens on `quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)`: 2-3 item balls).
+3. **The Dovetail (109) must be boardable after Chapter 1** (a gangplank event at the berth on 100) for *Master of Nothing*.
+4. **Two shortcut obstacles in Gossamer Wood (524):** a silk wall and a fallen log, each gone on
+   `quest_flag(:EL_HORN_AND_PINCER, :helper)` (`:heracross` tears the wall, `:pinsir` crushes the log).
+5. **Overworld sprites wanted** (stock charsets are fine): Nickit, Sudowoodo, Timburr with a plank, Wattrel in a nest,
+   Crabrawler + Clobbopus, Kecleon-as-lantern, Smeargle, Ralts, Galarian Ponyta, Heracross + Pinsir, Spidops, Combee hive,
+   Bombirdier, a pink-edged wagon/horse/girl for the Rehearsal; NPCs: grey-robed monk (Teasel), nun with a slate (Hollin),
+   blind weaver (Aldreth), legion sergeant (Brakka), skald (Bersi), rune-carver (Ingrith), lantern-sister (Maelon).
+6. **Badge-tier encounters** need no map work. Optional: a "rustling grass" overlay on tier maps (`Condition: tier(map_id) >= 1`).
+7. Trial trainers live in `pbs/trainers_trials.txt` (versions 50-99): `ASHKAAR_SOLDIER_M Rekk`, `ASHKAAR_SOLDIER_F Vasha`,
+   `ASHKAAR_OFFICER Brakka`, `SAILOR Gorm`. They are started by the quest scenes, so they need no trainer events.
+
+## From the world cartographer (names, routes, world map; SPINE Revisions 13-14), 2026-11-19
+Sources: `tools/worldmap/world_data.py` (names, roads, town-map squares) -> `python3 -I tools/worldmap/gen_docs.py` writes
+**`design/ROUTES.yaml`** (your input for every road leg: target size, fill list, landmark, exits, secret, field, segment),
+`design/PLACE_NAMES.md`, WORLD.md section 11, `pbs/town_map.txt`, `mapgen/data/town_map_positions.json` and the maps.json
+updates. Renames in sources: `python3 -I tools/rename_places.py` (dry run; `--apply`; `--grep`; `--selftest`).
+Nothing below needs a shared file edited by me except the two small hooks marked **(done)**.
+1. **Rebuild needed for the renames.** Names, display names and sign texts are already changed in the specs and layouts
+   (520, 521, 522, 524, 525, 540/541/542, 544, 560, 561, 100, 160 and the `old_*.yaml` plans; `bgm:` values are audio
+   file names and were kept). The generated `.rxdata`, `map_metadata_prismfall.txt`, `map_connections_prismfall.txt`,
+   `mapinfos_prismfall.txt` and `002_MapFields.rb` still carry "Route N" until `build.py` runs. A private build of the
+   current tree regenerates all of them with the new names and 0 "Route N" left.
+2. **(done) MapPosition comes from the town map.** `build.py` `metadata_block` now overrides `MapPosition` with
+   `mapgen/data/town_map_positions.json` (every map has a square on the Velmora town map, region 0). Spec values are
+   ignored where the file has an entry; keep writing them for new maps if you like.
+3. **(done) `mapgen/ruby/009_TownMap.rb`** (copied by build.py into Prismfall Maps; already copied to maps_out): when
+   `PBS/town_map_prismfall.txt` exists, only it is compiled, so Velmora replaces Essen as region 0 without editing the
+   stock file. `tools/package.sh` ships `pbs/town_map.txt` as `PBS/town_map_prismfall.txt`; the graphic is
+   `graphics/UI/Town Map/prismfall_velmora.png`. Fly spots are the PC HealingSpots of the six built towns; when you build
+   a town with a PC, re-run gen_docs.py and it gains a fly spot.
+4. **Revision 14 relinks (early chain):** maps.json `connections` now follow SWAP_GYM1_GYM2.md 1A (`rev14_connections`
+   marks them; new or moved edges have no spans: yours). In short: 520 W -> 527 (Hale Bell, quarantine roadblock moves
+   here); 527 <-> 528 <-> 140 East Gate; 140 N (North Gate, S108) -> 541 -> **552** -> 540; 540 E -> **524 W** (was 120);
+   540's R3_COCOON warp removed; 120 W edge removed, **North Gate -> 566** -> 577 -> 570 East Gate; 570 N -> **578** -> 562;
+   570 **South Gate** <-> 560's west end (Essentials edges join opposite sides: turn the Causeway's last stretch north or
+   use a warp); 521's R2_WOOD warp is the corded forest road (open from 524 when V105 >= 1).
+5. **New maps to build** (ROUTES.yaml has everything): 527 Lacecliff Walk 140x64, 528 Marram Down 110x80 (Road 1);
+   552 The Dyers' Ford 80x72 (Road 2); 566 Spinners' Rise 80x120, 577 Frostwick Pass 72x96, 578 Rimewood Path 80x88
+   (Road 3). Later roads add 592, 593, 612, 613, 632, 633, 652, 672, 673, 692, 693, 712, 732, 752, 755, 772, 773, 790,
+   810, 811, 832, 852, 872, 892, 893 (outline).
+6. **Grow the built roads toward their targets** (maps.json `size` = target, `size_was` = old): 520 64x110 (was 44x68),
+   521 120x70 (62x48), 541 70x110 (30x52), 540 130x64 (64x28), 524 90x110 (50x58), 562 96x110 (48x56), 561 64x130
+   (30x60), 560 140x64 (64x30). Each leg's `fill` list in ROUTES.yaml is the density brief (about one feature per 400
+   tiles, no empty corridor longer than 12 tiles, every dead end pays).
+7. **Not mine, noticed:** `build.py --strict` currently stops on the new OLD SLAB STAIRS check (140, 146, 147: 111
+   tiles). The commit before the rename (a36c784) builds strict-green; the slab check was added after it.

@@ -142,6 +142,9 @@ tr.quest(:EL_TART_THIEF, {
           { :chase => :advance }, { :step => :loft }] }
     ],
     :loft => [
+      { :if => "quest_flag(:SELF, :talked)", :then => [
+          "The Nickit peers down from the rafters. Kestrel pretends to be asleep.", { :run => :nickit }, { :end => true }] },
+      { :flag => [:talked, true] },
       { :map => "The Nickit dives into the hay. Kestrel sits up in his bedroll with a bramble tart in each hand." },
       [:KESTREL, :angry, "What."],
       [:KESTREL, :annoyed, "...It brings them. I don't ask it to. It just turns up with pastry like I'm some kind of— don't look at me like that."],
@@ -158,6 +161,9 @@ tr.quest(:EL_TART_THIEF, {
       "The Nickit plants itself in front of its hoard and growls at you, every hair on end.",
       [:KESTREL, :smug, "It thinks you're after the stash. Fight it if you want it. It likes winners."],
       [:KESTREL, :deadpan, "Clearly it has awful taste. It picked me."],
+      { :run => :nickit }
+    ],
+    :nickit => [
       { :event_battle => :EL_NICKIT,
         :caught => [[:KESTREL, :neutral, "Huh. It went with you."],
                     [:KESTREL, :annoyed, "Feed it. It gets mean when it's hungry. So do I. Unrelated."],
@@ -276,6 +282,41 @@ tr.quest(:EL_MASTER_OF_NOTHING, {
       [:DOCKMASTER, :neutral, "'Dovetail. Laid up. Crew discharged. One Wattrel, rehomed.'"],
       [:DOCKMASTER, :happy, "There. The first ledger line I've liked in a year."],
       { :gift => :EL_WATTREL }, { :complete => true }
+    ]
+  }
+})
+
+tr.quest(:EL_LAST_PLANK, {
+  :trial => :ELOWEN, :title => "The Last Plank", :giver => "the lantern rope (Brother Teasel's hand)", :map => 100,
+  :where => "the empty ferry berth", :rank => 1, :points => 2, :rec_level => 6, :chapter => 1,
+  :unlock => "switch(103)", :board => true, :tags => [:kindness, :event_mon],
+  :summary => "Every morning a Timburr carries a plank down to the empty berth and nails it in. Every night the tide takes it. Teasel's note: \"Help it finish.\"",
+  :steps => { :ask => "Find the Timburr at the empty ferry berth at dawn.",
+              :planks => "Carry the three loose planks from the boatyard to the berth.",
+              :finish => "The berth is mended. Tell the Timburr." },
+  :reward => { :items => [[:POTION, 2]] },
+  :touches => "none (Fighting type before the Normal Gym 1)",
+  :scenes => {
+    :berth => [
+      { :map => "Dawn at the empty berth. A Timburr with a plank on its shoulder hammers it into the jetty, steps back, and stares at the sea." },
+      [:DOCKMASTER, :neutral, "The ferry carpenters left it when they went home. It mends the berth for a ferry that isn't coming. Every morning."],
+      [:DOCKMASTER, :sad, "I haven't the heart to tell it. Haven't got the planks either. The boatyard has a few loose ones."],
+      { :choice => "Help the Timburr?", :options => [
+          ["Fetch the planks.", [{ :accept => true }, { :step => :planks }]],
+          ["Not now.", []]] }
+    ],
+    :plank => [
+      { :count => [:planks, 1] },
+      { :if => "quest_count(:SELF, :planks) >= 3",
+        :then => ["That's three. Enough to finish the berth properly, end to end.", { :step => :finish }],
+        :else => ["You heft a loose plank onto your shoulder. The Timburr would do this one-handed."] }
+    ],
+    :finish => [
+      "You and the Timburr nail the last three planks in, end to end. For the first time in a year, the berth is whole.",
+      "The Timburr looks at the sea for a long time. No ferry. It looks at you.",
+      [:DOCKMASTER, :neutral, "It's done. Nothing left to mend here. Except, I suppose, whatever you're off to break."],
+      "The Timburr puts its last plank on its shoulder and falls in beside you.",
+      { :gift => :EL_TIMBURR }, { :complete => true }
     ]
   }
 })
@@ -539,6 +580,8 @@ tr.quest(:EL_GLASS_FOAL, {
     :foal => [
       "A Ponyta stands under the glassed tree. Not a fire Ponyta. Its mane is pale and full of light, like the inside of a soap bubble.",
       "It was born in here. It has never seen a tree that wasn't glass.",
+      { :if => "quest_flag(:SELF, :approached)", :then => ["It lowers its horn again. It remembers you.", { :run => :fight }, { :end => true }] },
+      { :flag => [:approached, true] },
       { :choice => "How do you approach?", :options => [
           ["Slowly, palms open.", ["You walk so slowly it takes a full minute. The Ponyta lets you get close enough to see your face in its eyes... then lowers its horn, curious, testing.",
                                    { :effects => "RES+1" }, { :run => :fight }]],

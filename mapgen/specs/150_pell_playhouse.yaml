@@ -47,9 +47,11 @@ events:
   sprite: NPC 01
   dir: left
   commands:
-  - 'Gym Guide: Your first Warden! Dorian uses Normal-types on the Grand Stage field.'
-  - 'Gym Guide: Here''s the trick of a field: the stage loves a show. Flashy moves - sound moves, dances - get a cheer from
-    the house, and the cheer makes them hit harder. That goes for your side too. Fighting-types are good. Ghosts don''t care.'
+  - 'Gym Guide: Your first Warden! Dorian uses Normal-types, on the Grand Stage field.'
+  - 'Gym Guide: Here''s the trick of a field: the house loves a show. Sound moves and dances get a cheer, and the cheer makes
+    the next move hit harder. It works for you too.'
+  - 'Gym Guide: Normal-types don''t fear much. Fighting-types, they fear. Rock shrugs them off. And Ghosts just don''t care,
+    which Dorian finds very rude.'
 - type: npc
   name: Lady
   at:
@@ -59,13 +61,14 @@ events:
   dir: right
   text: I come every night. Every. Night. He has never once taken a bow the same way twice.
 - type: event
-  name: 'Poster: The Gilded King'
+  name: Old poster
   at:
   - 5
   - 4
   pages:
   - commands:
-    - 'A poster: "THE GILDED KING - closed by order of the Crown." Someone has pasted "TONIGHT" over "closed".'
+    - 'An old poster, under the others. A title has been pasted over, years ago. Where the paste has lifted, two letters show
+      through: "...ED K..."'
 - type: event
   name: 'Poster: The Lady in Red'
   at:
@@ -73,7 +76,16 @@ events:
   - 4
   pages:
   - commands:
-    - 'A poster: "THE LADY IN RED. Dorian Pell, Rosalind Vane. Held over by popular demand."'
+    - 'A poster: "THE LADY IN RED. Dorian Pell, Rosalind Vane. Held over by popular demand." (Popular demand: D. Pell.)'
+- type: event
+  name: 'Poster: The Loyal Three'
+  at:
+  - 17
+  - 4
+  pages:
+  - commands:
+    - 'A poster: "THE LOYAL THREE - the Festival-year companion piece to the Pageant of the Prismfall. Three faithful hounds!
+      One wicked Ogre! Bring the children!"'
 ---
 id: 154
 name: Pell Playhouse - Auditorium
@@ -1520,16 +1532,41 @@ events:
       sprite: trainer_GENTLEMAN
       dir: down
     commands:
-    - 'Dorian Pell: Enter, challenger, to thunderous applause! Your first Warden. Your first field. Your first audience.'
-    - 'Dorian Pell: On my stage the house loves a show: dance, sing, dazzle them, and they''ll lift you. The stage tells the
-      truth the throne won''t.'
+    - if: $game_self_switches[[154, 0, 'TRIED']]
+      then:
+      - '\pf[DORIAN,happy]Dorian: Act Two! I adore an Act Two. Everyone''s warmed up.'
+      else:
+      - (Dorian stands center stage in a single spotlight, cane raised, as if he has been standing there for an hour. He may
+        have.)
+      - '\pf[DORIAN,happy]Dorian: Enter, stage left, our brave challenger! To thunderous applause!'
+      - (The audience applauds, thunderously.)
+      - '\pf[DORIAN,neutral]Dorian: Your first Warden. Your first field. Your first audience. I envy you, darling. You only
+        get one of each.'
+      - '\pf[DORIAN,smug]Dorian: On my stage the house loves a show. Sing, dance, dazzle them, and they''ll carry you. Bore
+        them, and they''ll let you fall.'
+      - '\pf[DORIAN,happy]Dorian: Shall we give them something to remember?'
+    - script: $game_self_switches[[154, 0, 'TRIED']] = true
     - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)'
       then:
-      - 'Dorian Pell: Bravo! BRAVO! The house is on its feet!'
+      - '\pf[DORIAN,shocked]Dorian: ...They''re standing. Look at them. They''re on their FEET.'
+      - '\pf[DORIAN,crying]Dorian: Bravo! BRAVO! Oh, I''m crying, don''t look, it''s the footlights.'
       - script: Prismfall.award_badge(pfm_gym(:LEADER_DORIAN))
+      - '(You open the Badge Case and set the badge in. A faint hum: one clear note. The whole house goes quiet.)'
+      - '\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?'
+      - '\pf[DORIAN,shocked,shock]Dorian: Darling, in Saltmere nothing is supposed to do ANYTHING. That''s the whole charter.'
+      - '\pf[DORIAN,neutral]Dorian: ...'
+      - '\pf[DORIAN,happy]Dorian: Do it again.'
+      - (Nothing. The case is quiet.)
+      - '\pf[DORIAN,deadpan]Dorian: One night only. The best kind.'
       - script: pbReceiveItem(:TM42)
-      - 'Dorian Pell: Facade - the art of turning a bad night into a standing ovation.'
-      - 'Dorian Pell: And one more gift, from the whole troupe. Forty auditions, never cast. You two are a matched set.'
+      - '\pf[DORIAN,neutral]Dorian: Facade. The art of turning a bad night into a standing ovation. You''ll need it more often
+        than you''d think.'
+      - '\pf[DORIAN,neutral]Dorian: That badge is the Accord''s word that Pokémon up to level nineteen will heed you. Briarwick''s
+        will let you cut the dead wood, when you''ve earned it. They have a man for that.'
+      - (The troupe files on from the wings. The smallest actor is carrying an Eevee in a ruff.)
+      - '\pf[DORIAN,happy]Dorian: And one more gift, from the whole company. Forty auditions. Never cast. A tragedy in a ruff.'
+      - '\pf[DORIAN,neutral]Dorian: You came off that ferry with no color at all, I hear, and this one''s never picked one
+        either. You two are a matched set.'
       - script: 'pkmn = Pokemon.new(:EEVEE, 10)
 
           pkmn.name = "Understudy"
@@ -1538,7 +1575,8 @@ events:
       - switch:
         - CH3_UNDERSTUDY_GOT
         - true
-      - 'Dorian Pell: Opening night of the Pageant is at the Hall. Come. Bring Juno. Bring everyone.'
+      - '\pf[DORIAN,happy]Dorian: Rehearsal at the Lantern Theatre this afternoon, opening night at eight. Come to both. Bring
+        Juno. Bring everyone.'
       - selfswitch:
         - A
         - true
@@ -1548,11 +1586,12 @@ events:
       sprite: trainer_GENTLEMAN
       dir: down
     commands:
-    - 'Dorian Pell: The Pageant, darling! The Hall, tonight!'
+    - '\pf[DORIAN,happy]Dorian: Rehearsal at the Lantern Theatre, darling! Opening night at eight!'
     - if: pfm_gym_won?(:LEADER_TAMSIN)
       then:
-      - 'Dorian Pell: And a second badge! Then the old stage-left wing is yours. The revolve back there hasn''t turned since
-        my debut. Get it through all three acts and the old script is yours.'
+      - '\pf[DORIAN,smug]Dorian: And a second badge! Then the old stage-left wing is yours. The revolve back there hasn''t
+        turned since my debut. Get it through all three acts. There''s a prompt-book in the prop room I''d rather you found
+        than the Crown''s inspectors.'
 - type: event
   name: Stage-left wing
   at:
@@ -1575,6 +1614,44 @@ events:
           who: -1
           route:
           - right
+- type: event
+  name: Juno reveal
+  at:
+  - 0
+  - 0
+  pages:
+  - trigger: parallel
+    commands:
+    - if: $game_map.events.values.count { |e| e.name[/^Trainer\(/] && $game_self_switches[[154, e.id, 'A']] } >= 1
+      then:
+      - script: 'ev = $game_map.events.values.find { |e| e.name == ''Juno'' }
+
+          $game_self_switches[[154, ev.id, ''A'']] = true if ev
+
+          $game_map.need_refresh = true'
+    - wait: 20
+- type: event
+  name: Juno
+  at:
+  - 9
+  - 15
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_RIVAL2
+      dir: up
+    commands:
+    - if: $game_self_switches[[154, 0, 'JUNO']]
+      then:
+      - '\pf[JUNO,happy]Juno: (whispering) I''ll be loud quietly.'
+      else:
+      - (Juno is in the stalls with a paper cone of salt-caramel.)
+      - '\pf[JUNO,happy]Juno: I made it! I''m AUDIENCE! Go on! I''ll be loud!'
+      - 'Audience Member: Shh!'
+      - '\pf[JUNO,happy]Juno: (whispering) I''ll be loud quietly.'
+      - script: $game_self_switches[[154, 0, 'JUNO']] = true
 - type: trainer
   at:
   - 11
@@ -2490,8 +2567,9 @@ events:
     commands:
     - if: '!pfm?(:backstage_done)'
       then:
-      - 'Behind the dais, a prop room no one has opened in years. On the throne''s cushion: the Gilded King''s own script,
-        annotated in Dorian''s hand. "The stage tells the truth the throne won''t."'
+      - 'Behind the dais, a prop room no one has opened in years. On the throne''s cushion: an old Pageant prompt-book. Every
+        line about the old capital has been struck out in red. In the margin, in Dorian''s hand: "The stage tells the truth
+        the throne won''t."'
       - script: pfm_item(:MAGICALSEED, 2, "Magical Seed")
       - script: pfm_item(:PPUP, 1, "PP Up")
       - script: pfm_set(:backstage_done)
@@ -3452,8 +3530,8 @@ events:
     commands:
     - script: pfm_item(:MAGICALSEED, 2, "Magical Seed")
     - script: pfm_item(:PPUP, 1, "PP Up")
-    - 'Under the seeds: a dented prop crown. "THE GILDED KING - Act III".'
-    - script: pfm_set(:gilded_crown)
+    - 'Under the seeds: the old Crown prop. Its paste jewels are long gone, but the centre stone is real, and whole.'
+    - script: pfm_set(:old_crown_prop)
     - switch:
       - STAGE_TRAP_DONE
       - true

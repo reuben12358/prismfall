@@ -51,23 +51,23 @@
 286	285	Briar Hall - Great Hall
 287	285	Briar Hall - Throne Room
 295	280	Cathedral of the Evergreen
-520	0	Route 1
-521	0	Route 2
+520	0	The Ferrymen's Mile
+521	0	Windfall Row
 522	521	The Glassed Orchard
 523	521	Hale Farmhouse
 524	0	Gossamer Wood
 525	524	Gossamer Deepwood
 526	524	Woodward's Hut
-540	0	Route 3
-541	0	Route 4
-542	541	Marsh Rest House
+540	0	Thistledown Lea
+541	0	The Grey Saltings
+542	541	The Brinewife's Rest
 544	540	Brinecut Mine 1F
 545	544	Brinecut Mine B1F
 546	540	Thistledown Manor
 547	546	Thistledown Manor - Attic
 548	540	Cocoonfall Hollow
-560	0	Route 5
-561	0	Route 6
+560	0	Frostflat Causeway
+561	0	Gullcry Cliffs
 562	0	The Rimewood
 563	562	Rimewood Glade
 564	561	Gullcry Caves

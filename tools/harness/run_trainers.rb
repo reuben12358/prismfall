@@ -214,7 +214,7 @@ WARDEN_PLAYS = {
   16 => { "Abyss opened by Nyx" => proc { |r| changed?(r, "NEW_MOON:2") },
           "Fake Out / Snarl used" => proc { |r| used?(r, "Fake Out", "Snarl") },
           "Nyx snuffs Lamplight" => proc { |r| changed?(r, "NEW_MOON:1") } },
-  17 => { "Decorate used" => proc { |r| used?(r, "Decorate") }, "Follow Me used" => proc { |r| used?(r, "Follow Me") },
+  17 => { "Fake Out / Helping Hand used" => proc { |r| used?(r, "Fake Out", "Helping Hand") }, "Follow Me used" => proc { |r| used?(r, "Follow Me") },
           "Celestine tames -> Fairy Tale" => proc { |r| changed?(r, "FAIRY_TALE") } },
   18 => { "Dragon Dance used" => proc { |r| used?(r, "Dragon Dance") },
           "Wyrmfire awakened by Sigrun" => proc { |r| changed?(r, "DRAGONS_DEN:2") },
@@ -320,12 +320,14 @@ end
 # the cap, the moves the game gives them at that level, IV 15, no EVs, one Oran Berry. The AI plays both sides, with
 # no bag items for the player and no switching for a type edge, so a careful human should do better than this.
 EARLY = {
-  # SPINE Rev 14 route order. Gym 1 (Dorian, single): Ferrow's Landing -> coast -> Saltmere. Gym 2 (Tamsin, DOUBLE):
+  # SPINE Rev 14 route order (design/SWAP_GYM1_GYM2.md). Gym 1 (Dorian, single): Ch1 catches, Strand Road. Gym 2 (Tamsin, DOUBLE):
   # inland -> Briarwick, with Eevee "Understudy" (gifted after Gym 1). Gym 3 (Marisol): north to Ebbmouth.
   1 => { :cap => 15, :starters => { "Grass starter" => [[:BULBASAUR, 15]], "Fire starter" => [[:CHARMANDER, 15]], "Water starter" => [[:SQUIRTLE, 15]] },
-         :catches => [[:FLETCHLING, 13], [:SHINX, 12], [:LILLIPUP, 12], [:MACHOP, 12]] },
+         # Ch1 catches only (520 Ferrymen's Mile, 521 Windfall Row): no Fighting type exists before Saltmere.
+         :catches => [[:FLETCHLING, 13], [:SHINX, 12], [:ROLYCOLY, 12], [:LITLEO, 12], [:NIDORANmA, 12]] },
   2 => { :cap => 19, :starters => { "Grass starter" => [[:IVYSAUR, 19]], "Fire starter" => [[:CHARMELEON, 19]], "Water starter" => [[:WARTORTLE, 19]] },
-         :catches => [[:FLETCHINDER, 18], [:EEVEE, 17], [:LUXIO, 17], [:MANKEY, 17], [:MACHOP, 17]] },
+         # + Eevee "Understudy" (after Gym 1), the Strand Road and the Weavers' Road (Crabrawler, Machop in Brinecut).
+         :catches => [[:FLETCHINDER, 18], [:EEVEE, 17], [:LUXIO, 17], [:CRABRAWLER, 17], [:MACHOP, 17]] },
   3 => { :cap => 23, :starters => { "Grass starter" => [[:IVYSAUR, 23]], "Fire starter" => [[:CHARMELEON, 23]], "Water starter" => [[:WARTORTLE, 23]] },
          :catches => [[:FLETCHINDER, 21], [:LUXIO, 22], [:EEVEE, 21], [:MANKEY, 21], [:LOMBRE, 21], [:SEWADDLE, 20]] }
 }

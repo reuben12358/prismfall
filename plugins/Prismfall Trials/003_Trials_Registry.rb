@@ -94,7 +94,8 @@ module Prismfall
       :variants,   # { variant => overrides } (e.g. Smeargle palettes)
       # design info (shown by the doc tool, not used by the engine)
       :where, :map, :chapter, :quest, :why, :trigger,
-      :stub        # true = designed only (not placed yet)
+      :stub,       # true = designed only (not placed yet)
+      :special_moves # moves it knows by design though it can't normally learn them (event moves)
     ].freeze
 
     @mons  = {}

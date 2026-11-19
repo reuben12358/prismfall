@@ -151,9 +151,10 @@ events:
   commands:
   - 'Gym Guide: Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does
     not. I say this to everyone and half of them bring a Bulbasaur.'
-  - 'Gym Guide: Every heddle in this house is tied by silk to what it moves, so follow the thread. Up here it''s one heddle,
-    one plank. Upstairs in the Weaving Hall, each heddle lifts TWO beds. Count lifts, not pulls.'
-  - 'Gym Guide: And Tamsin fights two at a time. A thread holds because it''s twisted with others.'
+  - 'Gym Guide: Every heddle in this house is tied by silk to what it moves, so follow the thread. Down here it''s one heddle,
+    one plank. In the Weaving Hall each heddle lifts TWO beds. Count lifts, not pulls.'
+  - 'Gym Guide: And Tamsin fights two at a time. A thread holds because it''s twisted with others. Old Mother Loom built the
+    room to teach patience. Tamsin added the safety nets. And the apology cards.'
 - type: npc
   name: Apprentice Pim
   at:
@@ -170,8 +171,8 @@ events:
   - 3
   pages:
   - commands:
-    - 'A card pinned to the wall: "If the plank is in the wrong place, I''m so sorry. The heddle by the aisle moves it. —
-      T.L."'
+    - 'A card pinned by the loom bed: "If the plank is in the wrong place, I''m so sorry. The heddle by the aisle moves it.
+      — T.L."'
 - type: event
   name: Apology card B
   at:
@@ -279,44 +280,6 @@ events:
     x: 12
     y: 21
     dir: up
-- type: event
-  name: Reveal helper
-  at:
-  - 0
-  - 0
-  pages:
-  - trigger: parallel
-    commands:
-    - if: $game_map.events.values.count { |e| e.name[/^Trainer\(/] && $game_self_switches[[130, e.id, 'A']] } >= 2
-      then:
-      - script: "%w[Juno].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n  $game_self_switches[[$game_map.map_id,\
-          \ ev.id, 'A']] = true if ev\nend\n$game_map.need_refresh = true"
-      else: []
-    - selfswitch:
-      - A
-      - true
-  - cond:
-      self: A
-- type: event
-  name: Juno
-  at:
-  - 12
-  - 21
-  pages:
-  - commands: []
-  - cond:
-      self: A
-    graphic:
-      sprite: trainer_RIVAL2
-      dir: up
-    commands:
-    - if: $game_self_switches[[131, 0, 'JUNO']]
-      then:
-      - '\pf[JUNO,happy]Juno: Go on! I''m being loud! In my head!'
-      else:
-      - (Juno is by the door, eating a honey-silk bun.)
-      - '\pf[JUNO,happy]Juno: I made it! Go on! I''ll be loud!'
-      - script: $game_self_switches[[131, 0, 'JUNO']] = true
 ---
 id: 131
 name: Loomhouse Gym - Weaving Hall
@@ -825,28 +788,33 @@ events:
       sprite: trainer_LASS
       dir: down
     commands:
-    - if: $game_self_switches[[133, 0, 'TRIED']]
+    - if: $game_self_switches[[131, 0, 'TRIED']]
       then:
       - '\pf[TAMSIN,neutral]Tamsin: Again? Good. I mean— sorry. I mean good.'
       else:
-      - (Tamsin stands at the great loom at the hall's end. She has stopped fidgeting.)
+      - (Tamsin stands at the great loom on the top ledge. She has stopped fidgeting.)
       - '\pf[TAMSIN,neutral]Tamsin: My grandmother wove this room. Every plank, every web. She held this village together
         for fifty years with thread and shouting.'
       - '\pf[TAMSIN,sad]Tamsin: I''ve had it since spring. I can''t shout.'
+      - '\pf[TAMSIN,neutral]Tamsin: Dorian goes first because he makes people brave. I go second because by then you think
+        you know what a gym is.'
       - '\pf[TAMSIN,angry]Tamsin: But I can weave. Granny Loom wove this room. Don''t you dare tear it.'
-    - script: $game_self_switches[[133, 0, 'TRIED']] = true
+    - script: $game_self_switches[[131, 0, 'TRIED']] = true
     - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)'
       then:
       - '\pf[TAMSIN,shocked]Tamsin: ...It held, and you still came through it.'
       - '\pf[TAMSIN,happy]Tamsin: That''s allowed. Granny said the room''s meant to lose to the right person. I didn''t think
         I''d ever meet one.'
       - script: Prismfall.award_badge(pfm_gym(:LEADER_TAMSIN))
-      - '(You open the Badge Case and set the badge in. A faint hum: one clear note.)'
-      - '\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?'
+      - (You open the Badge Case and set the badge beside Dorian's. The first note, then a second, higher, in tune with it.
+        The two hang in the air together.)
+      - '\pf[JUNO,shocked,shock]Juno: It''s doing a CHORD.'
       - '\pf[TAMSIN,neutral]Tamsin: I don''t think they do that. ...Do they do that?'
+      - '\pf[JUNO,happy]Juno: It did one note in Saltmere! Dorian asked it to do it again and it wouldn''t!'
+      - '\pf[TAMSIN,deadpan]Tamsin: It''s a very sensible box.'
       - script: pbReceiveItem(:TM89)
-      - '\pf[TAMSIN,neutral]Tamsin: That''s the Accord''s word that you may use Cut, and that Pokémon up to level nineteen
-        will heed you.'
+      - '\pf[TAMSIN,neutral]Tamsin: That''s the Accord''s word that Pokémon up to level twenty-three will heed you. And the
+        Cutter will give you Cut now. He''ll say no first. Wait for the second answer.'
       - '\pf[TAMSIN,sad]Tamsin: \PN... could you come up to the loft? There''s something I should say to someone, and you''ve
         an honest sort of silence.'
       - tone:
@@ -862,15 +830,19 @@ events:
         - -10
         - 30
         - 12
-      - '(The loft above the Spindle: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won''t sit.)'
-      - '\pf[TAMSIN,sad]Tamsin: That masked woman at the pylon. She was right. I signed it.'
+      - '(The loft above the hall: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won''t sit.)'
+      - '\pf[TAMSIN,sad]Tamsin: That woman at the pylon. With the shears. She was right. I signed it.'
       - '\pf[TAMSIN,sad]Tamsin: Briarwick''s bankrupt. It has been for three years. Gran hid it. I found the accounts the
         week I buried her.'
       - '\pf[TAMSIN,sad]Tamsin: Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I
         signed it by myself, at night, so nobody would have to know how bad it was.'
+      - '\pf[TAMSIN,neutral]Tamsin: And it WORKS. That''s the thing. The looms ran till midnight for a week. Everyone was
+        so happy. Nobody had been happy since the funeral.'
       - '\pf[TAMSIN,crying]Tamsin: And now the Glasswood''s walking up the survey line like it was invited. Fourteen moths
         this week. I count them. I count them every morning.'
-      - '\pf[TAMSIN,sad]Tamsin: The guild meets tonight. Tell me what to do. Please. I''ve run out of thread.'
+      - '\pf[TAMSIN,sad]Tamsin: The man in Saltmere told everyone to ask their Warden. Nobody''s asked me yet. They''re all
+        too kind. The guild meets tonight.'
+      - '\pf[TAMSIN,sad]Tamsin: Tell me what to do. Please. I''ve run out of thread.'
       - if: pf_choice(:ch2_tamsin)
         then:
         - (You've already given her your answer.)
@@ -897,7 +869,7 @@ events:
             - (No meeting. Within the week, the pylon is finished.)
       - '\pf[TAMSIN,neutral]Tamsin: Whatever''s making the wood ring, it''s in Cocoonfall Hollow, at the Glasswood''s heart.
         I can''t cross the Veil. Nobody can.'
-      - '\pf[JUNO,neutral,dots]Juno: (from the stairs) ...They can.'
+      - '\pf[JUNO,neutral,dots]Juno: (from the stairs, hatbox in her arms) ...They can.'
       - '\pf[TAMSIN,shocked,shock]Tamsin: What?'
       - '\pf[TAMSIN,neutral]Tamsin: Then take this. It was Gran''s shuttle. It''s only wood. But she never dropped a thread
         while she held it.'
@@ -906,7 +878,8 @@ events:
         - script: pbReceiveItem(:MOTHERLOOMSSHUTTLE)
         else:
         - \me[Key item get]You received MOTHER LOOM'S SHUTTLE!\nWorn smooth by fifty years of one hand.
-      - 'QUEST: "The Ringing Wood" - Cut through the Deepwood to Cocoonfall Hollow.'
+      - script: pfm_quest(:ringing_wood, "The Ringing Wood", "Get Cut from the Cutter, then cut through the Deepwood to Cocoonfall
+          Hollow.")
       - tone:
         - 0
         - 0
@@ -987,6 +960,45 @@ events:
   dir: down
   commands:
   - script: pfp_apprentice(:lh_hall, "Pim", "Pim again. I run between rooms. Want it put back, or a nudge?")
+- type: event
+  name: Reveal helper
+  at:
+  - 0
+  - 0
+  pages:
+  - trigger: parallel
+    commands:
+    - if: $game_map.events.values.count { |e| e.name[/^Trainer\(/] && $game_self_switches[[131, e.id, 'A']] } >= 1
+      then:
+      - script: "%w[Juno].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n  $game_self_switches[[$game_map.map_id,\
+          \ ev.id, 'A']] = true if ev\nend\n$game_map.need_refresh = true"
+      else: []
+    - selfswitch:
+      - A
+      - true
+  - cond:
+      self: A
+- type: event
+  name: Juno
+  at:
+  - 13
+  - 21
+  pages:
+  - commands: []
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_RIVAL2
+      dir: up
+    commands:
+    - if: $game_self_switches[[131, 0, 'JUNO']]
+      then:
+      - '\pf[JUNO,happy]Juno: Go on, I''ll be loud. Quietly. I learned that in Saltmere.'
+      else:
+      - (Juno is at the hall's entrance, holding a hatbox with great care.)
+      - '\pf[JUNO,happy]Juno: Forty eggs! In a hatbox! Don''t knock the hatbox!'
+      - '\pf[JUNO,happy]Juno: Go on, I''ll be loud. Quietly. I learned that in Saltmere.'
+      - script: $game_self_switches[[131, 0, 'JUNO']] = true
 ---
 id: 132
 name: Loomhouse Upper Lofts - Canopy Lofts

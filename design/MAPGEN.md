@@ -12,7 +12,7 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 | 522 | The Glassed Orchard (:BLEED) | Bleed Veil scene with Juno: GO-02 choice, the Wurmple calm, Larch's Field Notes line (S105) |
 | 524–526 | Gossamer Wood, Deepwood, Woodward's Hut (:SILKWOOD) | Silk-wall loop, Cut tree to Deepwood |
 | 120–125 | Briarwick and interiors | Thistle at the pylon (HOLLOW_THISTLE, S106), Loyal Three shrine, poster, Celestine (S170) |
-| 130–133 | Loomhouse Gym (Gym 1) | Heddle planks, spool ziplines, then `Prismfall.gym_battle(1)` → `award_badge(1)`. Tamsin's confession and the `CH2_TAMSIN` choice |
+| 130, 131 (+132, 134) | Loomhouse (**Gym 2** since SPINE Rev 14; tileset 54) | `gen_loomhouse.py` + `puzzles/loomhouse.py`: Foyer (one heddle, Nell, Orla, Tamsin's apology spiral, the Ledger key), Weaving Hall (three linked heddles, Bram, Juno with the hatbox, Tamsin on the top ledge: `gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`, the Weft Badge, TM89, the `:ch2_tamsin` confession, the Shuttle). Optional Upper Lofts after her badge: 132 spools + the brass Meridian wire, 134 Granny's Knot. 133 retired |
 | 540–542, 548 | Thistledown Lea, the Grey Saltings (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
 | 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Thistledown Lea's mine mouth with the Grey Saltings's back door. Salt miner gives TM98 after Badge 2 |
 | 546–547 | Thistledown Manor + Attic (haunted house) | Mansion tileset (`palettes/mansion.yaml`): checker foyer with a grand staircase, arched-window portrait hall, dust-sheeted dining room, ruined cobwebbed attic. DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
@@ -21,7 +21,7 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 | 160–165 | Ebbmouth and interiors | Rain. River Ebb with footbridges, Meridian tidal Lattice. Teo night scene (after K2): HOLLOW_TEO battle, `CH4_TEO` choice, S112. Good Rod (Anglers' Guild). Ice-fishers' whale song. Larch's tide-data revelation after Badge 3 |
 | 170–174 | Tidelock Gym (Gym 3, :WATER_SURFACE) | Harbour tileset (`palettes/harbour.yaml`). Low/Mid/High basin variant maps. Sluice wheels W/C/E transfer to the same x,y on another level. Mid: raft events (passable plank tile) to the bell-rope. High: current lanes (forced moves). The north lane reaches the exit only with the tide bell ON (S315). Marisol `gym_battle(3)` → Badge 3, TM03 |
 | 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
-| 150–154 | Pell Playhouse (Gym 2, :GRAND_STAGE) | Revolving-stage wheel (scene order, actor battles, CUT), fly-loft spotlights with coupled rigging, Comedy door. Dorian double battle → Badge 2, TM42, Eevee "Understudy" (S110) |
+| 150, 154 (+151–153) | Pell Playhouse (**Gym 1** since SPINE Rev 14; tileset 54) | `gen_playhouse.py` + `puzzles/playhouse.py`: Lobby (posters, usher, gym guide), Auditorium (aisle between the seat rows, Florian/Rosalind/Ambrose, Juno in the stalls, ONE curtain rope, Dorian: `gym_battle(pfm_gym(:LEADER_DORIAN), double: false)`, Footlight Badge, TM42, Eevee "Understudy"). Optional Playhouse Backstage (DUNGEON_PUZZLES D9) after Tamsin's badge: 151 old revolve, 152 Fly Loft, 153 Trap Room |
 | 990 | Prismfall Test Arena | One NPC per SPINE field: wild or trainer test battle with `setBattleRule("field", :ID)` |
 
 **New game start:** `Plugins/Prismfall Maps/004_NewGameStart.rb` sets `PrismfallMaps::PRISMFALL_START = [109, 7, 6]`
@@ -463,6 +463,26 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   `hb_*` freight. Event cells and PRISMFALL_START (7,6) unchanged. 110's cabin and the other interiors are unchanged.
 - **570:** the brook bridges use `fw_bridge_*` (rails solid north/south, passage 8 / 1).
 - **build.py:** spec generators whose file name is not an identifier (staging copies like `gen_gym1.new.py`) are skipped.
+
+## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
+- **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
+  own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,
+  plus Prismfall's silk props from PF Rejuv's `pf` part and drawn puzzle pieces (heddle posts in five colours with shape-coded
+  threads, warp beds, planks, scenery drops labelled wave / leaf / crown and flats lettered A/B/C for colour-blind players,
+  marks, treadles, knot threads, gears, spools). 256×8704 px. Seats, curtain fringe, posters and loom tops are made solid.
+- **`layouts/hallkit.py`** paints a glyph grid in three looks (`loom` timber hall, `stage`, `lobby`), with automatic frame
+  edges, wall posts, doors, seat blocks, the stage lip, and helpers for exact-value tile events and the apprentice NPC.
+- **`mapgen/puzzles/`**: the room models (`loomhouse.py`, `playhouse.py`, `dungeons.py`) hold the layouts the generators
+  paint, so map and proof cannot drift. `build.py` runs every proof twice: on the design grid, and on the built
+  `MapNNN.rxdata` with Essentials' passability and event-page rules (`built.py`). It also writes
+  `Plugins/Prismfall Maps/007_PuzzleRooms.rb` (reset / solved state / hints) from the same data, and `--strict` fails on any
+  unsolvable room, soft-lock, wrong minimum, or a room harder than its 1–10 rating. `python3 -I mapgen/puzzle_check.py`
+  runs the design proofs alone. Events laid over maps another script owns (D1's chime rows on 522) come from a module's
+  `EVENTS`, so the layout owner's script is untouched.
+- **Runtime:** `plugins/Prismfall Puzzles/` (the `pfp_*` helpers of GYM_PUZZLES §3); Core's `puzzleskip` password (S301);
+  `mapgen/ruby/008_GymOrder.rb` (`pfm_gym`, `pfm_gym_won?`).
+- **Engine proof:** `tools/harness/playtest/run_puzzles.sh` (own game copy, own display) + `002_PuzzleBot.rb`;
+  media in `docs/playtest/puzzles/`.
 
 ## 3. Regenerating
 ```

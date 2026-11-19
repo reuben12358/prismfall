@@ -115,7 +115,8 @@ ROADS = [
       'Elowen', [(12, 17)], [64, 110], [44, 68], 'MEADOW',
       landmark="The Hale Bell on its post above the sea cliff, and the stile where Larch sees you off.",
       wild="Lillipup, Wooloo, Skwovet, Fletchling, Rookidee, Lechonk, Rolycoly. Night: Hoothoot, Nickit, Tarountula.",
-      exits="S: Ferrow's Landing. N: Windfall Row. W (new, at the bell): Lacecliff Walk.",
+      exits="S: Ferrow's Landing. N: Windfall Row. W (new, at the Hale Bell): Lacecliff Walk, behind the quarantine "
+            "roadblock (Accord guards, moved here from Windfall Row; lifts on S105).",
       fill=["sea-cliff walk on the south-west side with Wingull posts and a view down to the moored Dovetail",
             "Hale's Bramble: six berry terraces and a picking shed (Wenna's cousin sells tarts)",
             "the Minding Hedges: a three-turn hedge maze with a hidden Potion (the sign's joke made real)",
@@ -135,8 +136,9 @@ ROADS = [
       landmark="The Cider Press yard, and the Accord's quarantine cordon across the lane to the Glassed Orchard.",
       wild="Smoliv, Fidough, Bounsweet, Nidoran, Shinx, Litleo, Zigzagoon. Night: Oddish, Nymble, Spinarak. "
            "Headbutt: Combee, Cherubi, Heracross.",
-      exits="S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: Gossamer Wood, behind the "
-            "Accord barrier until Briarwick (it opens from the wood side as the shortcut home). Door: Hale Farmhouse.",
+      exits="S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: the corded forest road to "
+            "Gossamer Wood (never opens from this side; opens from the wood once V105 >= 1, after the Matriarch). "
+            "Door: Hale Farmhouse.",
       fill=["six named orchards in rows (apple, pear, plum, cherry, quince, medlar); every tree a Headbutt tree",
             "the Cider Press yard: press, barrels, a trade NPC, a cellar door",
             "the Nidoran chase: a wild Nidoran runs between three orchards before it can be battled (Rev 13)",
@@ -232,8 +234,9 @@ ROADS = [
       landmark="Thistledown Manor on its hill, and the old stone bridge over the Selvedge.",
       wild="Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. "
            "Water: Marill, Buizel, Psyduck.",
-      exits="W: the Dyers' Ford. E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. "
-            "NW copse: Cocoonfall Hollow. SW cave: Brinecut Mine (the shortcut back to the Saltings).",
+      exits="W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). "
+            "N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall "
+            "Hollow any more: it is entered through the Deepwood.",
       fill=["wildflower meadow in bands of colour, tall grass in four separate fields",
             "the River Selvedge along the south third with two islets (Surf later)",
             "stone bridge with a fisherman and a toll that nobody collects",
@@ -246,14 +249,15 @@ ROADS = [
             "Road Stone II-b"],
       secret="The Ha-ha: a sunken wall runs round the manor hill. Its ditch is a hidden path to the back garden and "
              "a cellar door into the manor's crypt (a second way in, with a Greavard digging there).",
-      side=[546, 547, 548]),
+      side=[546, 547]),
     L(524, None, "Gossamer Wood", "Kept name: the silk forest that gives Briarwick its trade.",
       'Elowen', [(11, 15), (11, 14)], [90, 110], [50, 58], 'SILKWOOD',
       landmark="The Weft Bridge, a rope of spun silk as thick as a road, and Woodward's Hut in the middle clearing.",
       wild="Sewaddle, Scatterbug, Blipbug, Cutiefly, Petilil, Shroomish, Sizzlipede. Night: Morelull, Phantump, Venonat. "
            "Headbutt: Pineco, Heracross, Pinsir.",
-      exits="W: Thistledown Lea (new edge). N: Briarwick. SE: Windfall Row through the Accord barrier (opens from "
-            "this side once you reach Briarwick). E (Cut): Gossamer Deepwood.",
+      exits="W: Thistledown Lea (new edge). N: Briarwick. S: the corded forest road to Windfall Row (opens from this "
+            "side when V105 >= 1, after the Matriarch). E (Cut, after Badge 2): Gossamer Deepwood, and Cocoonfall Hollow "
+            "beyond it.",
       fill=["silk-curtain trail west to north with two side loops",
             "canopy walkways on an upper level (rope bridges between giant trunks)",
             "cocoon grove, silk-harvest racks and three weavers at work",
@@ -265,7 +269,7 @@ ROADS = [
             "TM Giga Drain grove"],
       secret="The Unpicked Seam: one silk wall opens only at night. Behind it a Heracross and a Pinsir are fighting over "
              "a sap tree; whichever you help leaves, and the other can be caught.",
-      side=[525, 526]),
+      side=[525, 526, 548]),
   ]),
   dict(n=3, name="The Hoar Road", frm=120, to=160, chapter="Ch 4", detail='full',
        note="North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) and down Isenmar's cliffs "
@@ -292,7 +296,8 @@ ROADS = [
     L(577, None, "Frostwick Pass",
       "The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut.",
       'Elowen/Isenmar', [(8, 12), (7, 12)], [72, 96], None, 'SNOWY_MOUNTAIN',
-      landmark="The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed.",
+      landmark="The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a "
+               "brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).",
       wild="Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.",
       exits="E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).",
       fill=["the climb through hoar-crusted downs",

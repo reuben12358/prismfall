@@ -39,11 +39,11 @@ puzzle part only.
 
 | Dungeon | Maps | When | Rating | Expected solve | Status |
 |---|---|---|---|---|---|
-| D1 The Glassed Orchard — chime rows | 522 | before Gym 1 | **2** | 3 min | built (events over the Orchard), proven 3 moves / 4 states, engine-run |
-| D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | before / after Gym 1 | **2** | 5 min | proven (2 posts); map events not yet placed |
+| D1 The Glassed Orchard — chime rows | 522 | Ch1, before Gym 1 | **2** | 3 min | built (events over the Orchard), proven 3 moves / 4 states, engine-run |
+| D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | Ch3: before / after Gym 2 | **2** | 5 min | proven (2 posts); map events not yet placed |
 | D3 Cocoonfall Hollow — crystal-silk anchors | 548 | after Gym 2 | **2** | 5 min | proven; **design fix:** start with TWO bridges taut (a, b). The spec's start (one taut) let anchor 2 tighten all three in one pull, so the parity lesson never happened |
-| D4 Brinecut Mine — points and brine | 544, 545 | after Gym 2 | **3** | 10 min | spec |
-| D5 Thistledown Manor — don't turn your back | 546, 547 | Act I | **3** | 10 min | spec (runtime: `pfp_pursue(name, :creep)`) |
+| D4 Brinecut Mine — points and brine | 544, 545 | Ch3 road (after Gym 1) | **3** | 10 min | spec |
+| D5 Thistledown Manor — don't turn your back | 546, 547 | Ch3 road, cap 19 | **3** | 10 min | spec (runtime: `pfp_pursue(name, :creep)`) |
 | D6 Gullcry Caves — the tide counts your steps | 564, 565 | Act I | **4** | 15 min | spec (runtime: `pfp_step_clock`) |
 | D7 The Rimewood + Glade — frost loom, ice slide | 562, 563 | before Gym 3 | **3** | 10 min | spec; the Glade slide (9 slides) is optional 4/10 |
 | D8 The Rehearsal — between the frames | 568 | bonus | **4** | 15 min | spec |
@@ -85,7 +85,7 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
 - **Twist (524 north loops).** Five curtains between the two loops form a one-way maze. Its only route to the Briarwick
   edge (24,0) passes the Bug Catcher and Woodward's hut. The two side loops are shortcuts *back* south: the one-way silk
   makes them free return paths once you're north (shortcut principle).
-- **Combine (525 Deepwood, after Badge 1 and Cut).** The pond hollow is dark (tone −60). Joltik nest on the silk lines.
+- **Combine (525 Deepwood, after Tamsin's badge and Cut).** The pond hollow is dark (tone −60). Joltik nest on the silk lines.
   - Three **lantern cocoons** hang on threads.
   - Touching a thread's anchor post (action) sends a Joltik spark along it (Electroweb runs the threads, the field's own
     rule) and lights every cocoon on that thread. A lit cocoon makes its curtain lean the *other* way (the threads
@@ -98,9 +98,9 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   ("Lost in the Gossamer") is stuck behind curtain 3. Freeing her is the reason most players come.
 
 ## D3 Cocoonfall Hollow (548, 32×28, `:BLEED`, optional) — "the shuttle re-threads"
-**Rule:** Mother Loom's Shuttle (key item, from Tamsin after Badge 1) can **re-thread crystal silk**.
+**Rule:** Mother Loom's Shuttle (key item, from Tamsin after her badge, Gym 2) can **re-thread crystal silk**.
 - Each of three **cocoon anchors** pulls its crystal threads taut or slack. A taut thread is a bridge; slack is void.
-- The coupling is Gym 1's, binary now: **anchor 1** toggles bridges a and b, **anchor 2** toggles b and c, **anchor 3**
+- The coupling is Gym 2's (the Weaving Hall), binary now: **anchor 1** toggles bridges a and b, **anchor 2** toggles b and c, **anchor 3**
   toggles a and c.
 - **Layout:** the hamlet sits on a crater floor. Three bridges cross the glass ravine:
   - **a** to the TM81 cocoon-house (NE);
@@ -133,7 +133,7 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   - **Teach:** the first fork is visible from the depot; P1 alone decides A vs the rest.
   - **Twist:** P2 and P3 are behind the cart's path. You must ride to A, walk back past P2 (on foot through a crawlway),
     set it, then ride again.
-  - The salt miner gives TM98 after Badge 2 (existing).
+  - The salt miner hands TM98 over once you hold Dorian's badge (Gym 1); Rock Smash is usable from Badge 2.
 - **B1F (COMBINE, cross-map).** The salt lake (8–19, 12–19) is brine. A **pump wheel** on B1F lowers it only while the
   1F **cart is parked at end B** (it weighs down the pump lever; S519). The lake then drains to a salt flat, and the path
   to the Old Amber (30,26) appears.
@@ -185,12 +185,12 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
 ## D7 The Rimewood (562, 48×56) and Rimewood Glade (563, 34×30, Cut) — borderland A
 **Rule:** frost holds what silk holds. This is the first ice in the game, a preview of Gym 10, gentler.
 - **The Frost Loom (562 centre).**
-  - A frozen heddle frame (a callback to Gym 1). Three frozen threads hold three icicle curtains over the trail's
+  - A frozen heddle frame (a callback to Gym 2, the Weaving Hall). Three frozen threads hold three icicle curtains over the trail's
     side path.
   - Pulling a thread (action) runs frost along it: it **cracks** each frozen curtain on its line and **refreezes** any
     broken one. **Left** → curtains 1 and 2 · **middle** → 2 and 3 · **right** → 3.
   - **Unique answer: left + right** (verified by hand over Z₂: middle would refreeze curtain 2).
-  - A breather that rewards remembering Gym 1. **State:** S531–S533 = curtains broken.
+  - A breather that rewards remembering Gym 2. **State:** S531–S533 = curtains broken.
   - Reward behind it: the trapper's cache (Snowball ×2).
 - **The frozen Hoar Brook:** an ice slide shortcut (one-way, top to bottom) from the aurora clearing back to Frostwick's
   edge. Shortcut principle.
@@ -227,13 +227,14 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
 
 The Revision 10 Gym 2 puzzle, kept whole when Gym 1 became a walk-through (SPINE Rev 14). Entered by the stage-left wing
 steps on the Gym 1 auditorium's apron (154 (1,9)); the door checks `pfm_gym_won?(:LEADER_TAMSIN)`. Dorian, after Gym 2:
-"The revolve back there hasn't turned since my debut. Get it through all three acts and the old script is yours."
+"The revolve back there hasn't turned since my debut. Get it through all three acts. There's a prompt-book in the prop room I'd rather you found than the Crown's inspectors."
 **Built and proven** (`mapgen/puzzles/playhouse.py`, `mapgen/gen_playhouse.py`): stage + loft 5 moves / 39 states (4/10),
 Script order forced, unsolvable without the loft; Trap Room 3 cranks (3/10) on a new pattern the solver found (the spec's
 pattern opened after one crank). Actors: Juggler Pierrot, Lady Odette, Gentleman Reginald (one per scene). Apprentices Pip,
 Dot and Old Joss (`:pb_stage`, `:pb_loft`, `:pb_trap`). IDs: the Playhouse block, `STAGE_SCENE` V310, `STAGE_FLAT_A/B/C`
-S310–312, `STAGE_TURNTABLE` V312, `STAGE_TRAP_DONE` S314. Reward behind the upstage door: the Gilded King's annotated
-script + Magical Seed ×2 + PP Up; the Trap Room chest keeps its prop crown.
+S310–312, `STAGE_TURNTABLE` V312, `STAGE_TRAP_DONE` S314. Rewards (story editor's ruling: Dorian keeps *The Gilded King*):
+behind the upstage door an old Pageant prompt-book with every line about the old capital struck out in red, + Magical Seed
+×2 + PP Up; the Trap Room chest holds the old Crown prop with its original stone still whole (`pfm?(:old_crown_prop)`).
 
 *Design text (from GYM_PUZZLES Revision 10, coordinates superseded by the module):*
 

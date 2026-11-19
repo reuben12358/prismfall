@@ -448,13 +448,14 @@ warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were rea
       hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,SUPERPOWER"}),
 ])
 warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale turns its final page. Happily, I hope.", [
-    # Lead pair: Tinkaton (Fake Out) + Alcremie (Decorate on Tinkaton).
-    # The knight: Steel x1.3, hammers swing true. Fake Out buys Alcremie's Decorate a turn.
+    # Lead pair: Tinkaton (Fake Out) + Alcremie (Helping Hand on Tinkaton's hammer).
+    # The knight: Steel x1.3, hammers swing true. Fake Out buys Alcremie a turn.
     P("TINKATON", 79, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF", "A",
       casual={"moves": "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK"}),
     # DOUBLE battle (story: "the knight and the dragon").
-    # Magical Seed on Fairy Tale: +1 Sp. Atk, +1 Sp. Def, no cost. Decorate gives the partner +2 Atk and +2 Sp. Atk.
-    P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "DECORATE,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
+    # Magical Seed on Fairy Tale: +1 Sp. Atk, +1 Sp. Def, no cost. Helping Hand for the partner (Decorate was the first
+    # pick, but the v21 AI only aims a NearOther move at foes, so it never decorated its partner in the harness).
+    P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "HELPINGHAND,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
       casual={"item": "LEFTOVERS"}, hard={"moves": "CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER"}),
     P("MIMIKYU", 78, "DISGUISE", "LIFEORB", "JOLLY", "PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE", "A",
       only="nocasual"),
@@ -1137,18 +1138,18 @@ S("Ch17 (if Kroll was beaten publicly in Ch13) - Quent holds the Sun Court inste
 # --- THE EEVEE OCTAVE --------------------------------------------------------------------------------------------
 # Eight Glassfall orphans of the Prism Choir, each raised beside a different Imprint; in-world an Eevee evolves by the
 # Imprint it grows up in, so every singer's partner is at home on exactly one field. Leader: Vesper Lindqvist.
-#   Ch3  (Saltmere, backstage): optional DOUBLE, Vesper's Eevee + Carol's Sylveon on the Grand Stage.
+#   Ch2  (Saltmere, backstage, after Gym 1): optional DOUBLE, Vesper's Eevee + Carol's Sylveon on the Grand Stage.
 #   Ch13 (Lucent cloister): optional DOUBLE vs Vesper alone, on the Mindscape.
 #   Ch20 (Crownhaven Choir gardens): the gauntlet. Singers 1-8, one Eeveelution each, each on its own field
 #        (TRAINER_FIELDS by version), then Vesper (version 2): the field follows whichever Eeveelution is out
 #        (plugins/Prismfall Field Effects/013_FieldEffects_TrainerPlays.rb, ENTRY_FIELDS).
-S("Ch3 - Vesper, backstage at the Lantern Theatre, DOUBLE with Chorister Carol (field :GRAND_STAGE). Two singers: "
+S("Ch2 - Vesper, backstage at the Lantern Theatre after Gym 1, DOUBLE with Chorister Carol (field :GRAND_STAGE). Two singers: "
   "sound moves raise the applause. Her Eevee 'hasn't decided which Imprint it belongs to yet'.",
   "OCTAVE_VESPER", "Vesper", 0, 19, "It hasn't decided yet. ...Neither have you, I think.", [
     P("EEVEE", 18, "ADAPTABILITY", "ORANBERRY", "JOLLY", "SWIFT,QUICKATTACK,BABYDOLLEYES,HELPINGHAND", "A", nick="Amen",
       hard={"item": "EVIOLITE"}),
 ])
-S("Ch3 - Chorister Carol, Vesper's partner in the Saltmere double (field :GRAND_STAGE). Disarming Voice is a spread sound move.",
+S("Ch2 - Chorister Carol, Vesper's partner in the Saltmere double (field :GRAND_STAGE). Disarming Voice is a spread sound move.",
   "OCTAVE_SINGER", "Carol", 0, 19, "Oh! You sing back. Most people don't.", [
     P("SYLVEON", 18, "CUTECHARM", "ORANBERRY", "MODEST", "DISARMINGVOICE,SWIFT,BABYDOLLEYES,QUICKATTACK", "BS"),
 ])

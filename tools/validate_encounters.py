@@ -48,6 +48,11 @@ def cap_for(badges):
 
 
 def segment_from_id(mid):
+    """Fallback for maps missing from maps.json (it reads `segment` first)."""
+    # SPINE Rev 14 (design/SWAP_GYM1_GYM2.md): Saltmere (140-159) holds Gym 1 and Briarwick (120-139) Gym 2, so the two
+    # Act I blocks swap relative to the ID scheme below.
+    if 120 <= mid < 140: return 1
+    if 140 <= mid < 160: return 0
     if 100 <= mid < 480: return max(0, (mid - 100) // 20 - 1)
     if 480 <= mid < 520: return 18
     if 520 <= mid < 900: return (mid - 520) // 20

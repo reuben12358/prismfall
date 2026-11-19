@@ -13,7 +13,7 @@ later.call(:ZE_PORYGON, { :species => :PORYGON, :level => 24, :ability => :DOWNL
   :map => 185, :where => "Meridian Spire lobby", :quest => :ZE_CUSTOMER_SUPPORT, :trigger => "Cancel the form that cancels the form",
   :why => "Download Porygon: the Upgrade and Dubious Disc lines in Zenith, Act I" })
 later.call(:ZE_DEX_PICHU, { :species => :PICHU, :level => 25, :ability => :LIGHTNINGROD, :kind => :gift, :chapter => 6,
-  :moves => [:VOLTTACKLE, :NASTYPLOT, :CHARM, :SWEETKISS], :nickname => "Spark",
+  :moves => [:VOLTTACKLE, :NASTYPLOT, :CHARM, :SWEETKISS], :special_moves => [:VOLTTACKLE], :nickname => "Spark",
   :map => 608, :where => "Dex's shrine in the Shattered Lowlight", :quest => :ZE_LOWLIGHT_LAMPS, :trigger => "Sit with the shrine at dusk",
   :why => "Volt Tackle Pichu (no other source) and the emotional heart of the Lowlight" })
 later.call(:ZE_KLEFKI, { :species => :KLEFKI, :level => 50, :ability => :PRANKSTER, :kind => :gift, :chapter => 12,

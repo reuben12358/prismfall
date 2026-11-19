@@ -157,7 +157,7 @@ def build(preview=None):
     town = [('Dyer', 16, 37), ('Apprentice', 21, 32), ('Silk Merchant', 35, 35), ('Meridian Linesman', 53, 31), ('Tired Mother', 32, 46),
             ('Old Man on bridge', 9, 31), ('Girl in ogre mask', 44, 31), ('Boy in dog mask', 45, 32), ('Egg-seller', 47, 34),
             ('Tax-barge Deserter', 33, 55), ('Accord Chaplain', 60, 47), ('Youngster', 50, 29), ('Woman with basket', 48, 41),
-            ("Cutter's Wife", 44, 52)]
+            ("Cutter's Wife", 44, 52), ('Bun-seller', 40, 40)]
     for n, x, y in town: S(n, x, y)
     for e in E:
         if e.get('type') == 'sign':

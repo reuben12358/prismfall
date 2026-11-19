@@ -84,6 +84,7 @@ if 'qy_lipm0' in STAMPS:
     GRASS_DARK = [[P1('gr_dark00'), P1('gr_dark01')], [P1('gr_dark10'), P1('gr_dark11')]]
     GRASS_WORN = [[P1('gr_worn00'), P1('gr_worn01')], [P1('gr_worn10'), P1('gr_worn11')]]
     CLOVER = [P1('gr_clover0'), P1('gr_clover1')]
+    GRASS_PATCH = [[[P1('gp%d%d_%02d' % (i, j, k)) for k in range(48)] for j in range(2)] for i in range(2)] if 'gp00_00' in STAMPS else None
     TUFTS = [P1('gr_tuft%d' % i) for i in range(3)]
 # the old flat dark-brown plank slab (Sheridan_2 544-546) once used as stairs: build.py --strict now rejects it
 OLD_SLAB = (C('sh', 544), C('sh', 545), C('sh', 546))
@@ -437,14 +438,29 @@ class RMap:
                 x, y = e['at']; walk[min(self.H - 1, y + 1), x] = True
         for sx, sy, sw, sn in self.stairs_at: walk[min(self.H - 1, sy + sn), sx:sx + sw] = True
         wpad = np.pad(walk, 1); wn = sum(np.roll(np.roll(wpad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1))
+        ok = np.isin(self.cls, ['.', 'T']) & np.isin(L[0], list(g))
+        # shade patches: noise blobs (denser beside walls, trees, cliffs), majority-smoothed, drawn with the baked
+        # Grassnone shapes so their edges are soft tufts, never tile squares
+        pm = np.zeros((self.H, self.W), bool)
         for y in range(self.H):
             for x in range(self.W):
-                if self.cls[y, x] not in '.T' or int(L[0, y, x]) not in g: continue
-                n = vnoise(x, y, self.seed + 501, 5.0) + 0.05 * min(6, shade[y, x])
-                if worn and self.cls[y, x] == '.' and wn[y, x] >= 2 and vnoise(x, y, self.seed + 502, 2.0) > 0.45:
-                    L[0, y, x] = GRASS_WORN[y % 2][x % 2]
-                elif n > dark:
-                    L[0, y, x] = GRASS_DARK[y % 2][x % 2]
+                if ok[y, x]: pm[y, x] = vnoise(x, y, self.seed + 501, 6.0) + 0.045 * min(6, shade[y, x]) > dark
+        for _ in range(2):
+            pad = np.pad(pm, 1); n8 = sum(np.roll(np.roll(pad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) - pm
+            pm = (pm & (n8 >= 3)) | (~pm & ok & (n8 >= 6))
+        pm &= ok
+        if GRASS_PATCH:
+            pad = np.pad(pm, 1, constant_values=False)
+            for y, x in np.argwhere(pm):
+                b = 0
+                for dx, dy, bit in ((0, -1, 1), (1, -1, 2), (1, 0, 4), (1, 1, 8), (0, 1, 16), (-1, 1, 32), (-1, 0, 64), (-1, -1, 128)):
+                    if pad[y + 1 + dy, x + 1 + dx]: b |= bit
+                L[0, y, x] = GRASS_PATCH[y % 2][x % 2][NB2AUTO[b]]
+        if worn:                                  # trodden earth only right at doorsteps, stair feet and lane mouths
+            for y in range(self.H):
+                for x in range(self.W):
+                    if ok[y, x] and not pm[y, x] and self.cls[y, x] == '.' and wn[y, x] >= 3 and vnoise(x, y, self.seed + 502, 2.0) > 0.55:
+                        L[0, y, x] = GRASS_WORN[y % 2][x % 2]
 
     # class -> layer of its autotile: water on the ground layer; lanes, streets, beach sand and deep water on layer 2
     AUTO_Z = {'w': 0, 'd': 1, 'g': 1, 's': 1, 'W': 1, 'u': 1, 'c': 1, 'f': 1}

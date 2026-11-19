@@ -1,0 +1,228 @@
+# TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4)
+# Owner: Prismfall Trials (design/TRIALS.md). Consumer: the map builder (design/MAPGEN.md section 4 event DSL).
+# No map file was edited; place these where `near:` says and fill `at:`.
+#
+# How every event works
+#   * Commands are ONE call: {script: 'pf_trial_talk(:KEY)'}. The plugin's TALK table (150_Trials_Talk.rb) picks the
+#     quest scene; all dialogue lives in the plugin (printed in design/TRIALS_QUESTS.md), so maps never need re-pouring
+#     when lines change.
+#   * Objects that come and go (the Nickit, lanterns, a Ralts...) carry their visibility as the FIRST command, a comment:
+#     {comment: 'Condition: <Prismfall::Conditions string>'} (010_Trials_PageConditions.rb). Give such an event a second,
+#     empty page FIRST in the list (no graphic, no commands) so it is "nothing" while the condition is false.
+#   * Existing story NPCs get a branch, not a new event (`patch:`):
+#       {if: 'pf_trial_ready?(:KEY)', then: [{script: 'pf_trial_talk(:KEY)'}], else: [<their existing lines>]}
+#   * Trial halls/boards: a keeper NPC whose TALK entry has a board falls through to pf_trial_board(:TRIAL) when no quest
+#     scene is due. A separate board object can just call pf_trial_board(:TRIAL).
+#   * Story switches used in page conds: CH1_STARTER_GOT (S103), PRO_FERRY_DONE (S101), CH3_PAGEANT_DONE (S108).
+#   * Sprites are descriptions; use whatever the cast/NPC sheets provide.
+maps:
+  100:
+    name: Ferrow's Landing
+    events:
+    - {name: Brother Teasel, key: TEASEL, near: "the wayshrine beside the Accord plaque; a rope of paper lanterns strung over it",
+       sprite: "young monk, grey robe", trigger: action, cond: {switch: CH1_STARTER_GOT},
+       note: "Keeper of the Ferrow's wayshrine (Elowen, the Quiet Way). Falls through to the Elowen board."}
+    - {name: Lantern rope, key: WAYSHRINE_ROPE, near: "over the wayshrine", sprite: "tile: paper lanterns on a rope", trigger: action,
+       cond: {switch: CH1_STARTER_GOT}, commands: ["{script: 'pf_trial_board(:ELOWEN)'}"]}
+    - {name: Wenna Hale, key: WENNA, patch: "existing event 'Wenna Hale' (tart stall)"}
+    - {name: Tart stall (thief), key: TART_STALL, near: "under Wenna's tart stall", sprite: "Nickit, half hidden",
+       trigger: player_touch, condition: "quest_step(:EL_TART_THIEF) == :ask",
+       move_after: "jump away toward the kelp racks, then erase"}
+    - {name: Nickit (kelp racks), key: NICKIT_SIGHTING, near: "the kelp racks", sprite: Nickit, trigger: player_touch,
+       condition: "quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 1", move_after: "dash under the pier, erase"}
+    - {name: Nickit (under the pier), key: NICKIT_SIGHTING, near: "under the pier at the low-tide steps", sprite: Nickit, trigger: player_touch,
+       condition: "quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 2", move_after: "run for the lighthouse, erase"}
+    - {name: Nickit (lighthouse steps), key: NICKIT_SIGHTING, near: "the lighthouse steps; Hesper's geraniums", sprite: Nickit, trigger: player_touch,
+       condition: "quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 3", move_after: "leap the wall toward Tidewatch Station, erase"}
+    - {name: Washing line, key: DEED_WASHING, near: "beside the 'Woman hanging washing'; a shirt wrapped round a kelp rack", trigger: action,
+       condition: "!deed(:fl_washing)"}
+    - {name: Rope-skipping Girl 1, key: DEED_ROPE, patch: "existing event 'Rope-skipping Girl 1': add the branch; it offers the loose rope end"}
+    - {name: Old Sailor, key: DEED_SAILOR, patch: "existing event 'Old Sailor' (faces the empty berth)"}
+    - {name: Tipped kelp basket, key: DEED_KELP, near: "the far end of the kelp racks, away from the Kelp-drier", trigger: action,
+       condition: "!deed(:fl_kelp)"}
+    - {name: Timburr (berth), key: BERTH_TIMBURR, near: "the empty ferry berth", sprite: "Timburr carrying a plank", trigger: action,
+       condition: "!quest_done(:EL_LAST_PLANK)", cond: {switch: CH1_STARTER_GOT}}
+    - {name: Loose plank 1, key: BOATYARD_PLANK, near: "the boatyard by the Dockmaster's House", sprite: "tile: plank", trigger: action,
+       condition: "quest_step(:EL_LAST_PLANK) == :planks", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Loose plank 2, key: BOATYARD_PLANK, near: "the boatyard, against the slipway", same_as: "Loose plank 1"}
+    - {name: Loose plank 3, key: BOATYARD_PLANK, near: "the boatyard, under the upturned skiff", same_as: "Loose plank 1"}
+  103:
+    name: Larch Research Station (Tidewatch Station)
+    events:
+    - {name: Nickit (loft), key: LOFT_NICKIT, near: "the Sanctuary loft, beside 'Kestrel (loft)'", sprite: "Nickit on a hay bale",
+       trigger: action, condition: "quest_step(:EL_TART_THIEF) == :loft",
+       note: "Kestrel's loft event should not also talk while this runs; it can stay as is (the scene speaks for him)."}
+    - {name: Professor Larch, key: LARCH, patch: "existing event 'Professor Larch': the Form 7-C research stamp"}
+  106:
+    name: Ferrow Lighthouse Lamp Room
+    events:
+    - {name: Hesper Vane, key: HESPER, patch: "existing event 'Hesper Vane': the crate by the lamp (ZE_FORM_7B :warm)"}
+  107:
+    name: Dockmaster's House
+    events:
+    - {name: Dockmaster, key: DOCKMASTER, patch: "existing event 'Dockmaster' (Master of Nothing; Form 7-C livestock stamp)"}
+  108:
+    name: Quarantine Customs Hall
+    events:
+    - {name: Grant Kiosk P-3NNY, key: KIOSK_PENNY, near: "by the scanner gates", sprite: "tile: brass ticket kiosk with a Rotom face in the glass",
+       trigger: action, cond: {switch: CH1_STARTER_GOT}, note: "Zenith's Prize Exchange before Lumen; falls through to the Zenith board"}
+    - {name: Crate 7-B, near: "under the kiosk", sprite: "tile: stencilled crate, two small flames between the slats", trigger: action,
+       condition: "!quest_done(:ZE_FORM_7B)", commands: ["'Two small flames flicker between the slats. They are very low.'"]}
+    - {name: Customs officer, key: CUSTOMS_OFFICER, patch: "existing event 'Customs officer' (Form 7-C customs stamp)"}
+  109:
+    name: The Dovetail - Deck
+    events:
+    - {name: Wattrel nest, key: DOVETAIL_NEST, near: "under the furled mainsail", sprite: "Wattrel in a rope-fibre nest", trigger: action,
+       condition: "quest_step(:EL_MASTER_OF_NOTHING) == :ask",
+       request: "the laid-up Dovetail must be boardable after Ch1 (gangplank event at the berth on 100 -> 109)"}
+  521:
+    name: Windfall Row
+    events:
+    - {name: Scarecrow, key: SCARECROW, near: "the plum rows of the Hale orchard (move it between three rows by day of the week if you like)",
+       sprite: "Sudowoodo standing very still", trigger: action, condition: "event_mon(:EL_SUDOWOODO) != :caught"}
+  523:
+    name: Hale Farmhouse
+    events:
+    - {name: Farmer Hale (Coll), key: COLL, patch: "existing event 'Farmer Hale'"}
+  522:
+    name: The Glassed Orchard
+    events:
+    - {name: Glass hoofprints 1, key: ORCHARD_HOOFPRINT, near: "just past the Bleed Veil", sprite: "tile: glinting hoofprints", trigger: player_touch,
+       condition: "quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 0"}
+    - {name: Glass hoofprints 2, key: ORCHARD_HOOFPRINT, near: "the glass hedge maze", trigger: player_touch,
+       condition: "quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 1", note: "show a pale foal sprite trotting off through the hedge"}
+    - {name: Glass hoofprints 3, key: ORCHARD_HOOFPRINT, near: "the ring of prints round the oldest tree", trigger: player_touch,
+       condition: "quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 2"}
+    - {name: Glass foal, key: GLASS_FOAL, near: "under the oldest glassed tree", sprite: "Galarian Ponyta", trigger: action,
+       condition: "quest_step(:EL_GLASS_FOAL) == :foal"}
+  527:
+    name: Lacecliff Walk (the Strand Road)
+    events:
+    - {name: Dobbs the shell-gatherer, key: DOBBS, near: "the shell-gatherers' steps down to the rock pools", sprite: "old woman with a basket", trigger: action}
+    - {name: Tide-pool feud, key: TIDE_POOL, near: "the big flat rock in the largest pool", sprite: "Crabrawler and Clobbopus facing off",
+       trigger: action, condition: "!quest_done(:EL_TIDE_POOL_FEUD)"}
+    - {name: Sea-cave mouth, near: "the cliff behind the flat rock", trigger: player_touch,
+       condition: "quest_flag(:EL_TIDE_POOL_FEUD, :sea_cave)",
+       request: "a small sea-cave (2-3 item balls: Pearl, Big Pearl, Super Potion) or just items in the opened cliff hollow"}
+  140:
+    name: Saltmere - Promenade & Market
+    events:
+    - {name: Lantern House door, request: "a small interior 'Saltmere Lantern House' (suggest map 148), sharing a wall with the Lantern Theatre"}
+    - {name: Caramel seller, key: CARAMEL_SELLER, patch: "existing event 'Caramel seller' (the borrowed display lamp; the shuttered-stall silence at night)"}
+  148:
+    name: Saltmere Lantern House (new interior; suggested ID)
+    events:
+    - {name: Sister Hollin, key: HOLLIN, near: "at a slate by the lantern rope, earplugs in", sprite: "nun in grey with a slate", trigger: action,
+       note: "Saltmere keeper of the Quiet Way; falls through to the Elowen board"}
+  143:
+    name: Saltmere Harbour Office
+    events:
+    - {name: Grant Kiosk P-3NNY/1, key: KIOSK_PENNY_SALTMERE, near: "by the harbourmaster's counter", sprite: "tile: brass kiosk", trigger: action}
+  145:
+    name: Lantern Theatre
+    events:
+    - {name: Prop lantern, key: PROP_LANTERN, near: "the prop room shelf", sprite: "a paper lantern (Kecleon)", trigger: action,
+       condition: "quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :prop_room)"}
+    - {name: Ottilie, key: STAGEHAND, near: "centre stage, after hours", sprite: "young stagehand with a lantern at her feet", trigger: action,
+       condition: "!quest_flag(:EL_LANTERNS, :stagehand) || quest_done(:EL_LANTERNS)"}
+    - {name: Empty stage (silence), key: SILENCE_STAGE, near: "the front row of the empty stalls", trigger: action,
+       condition: "quest_step(:EL_SOUND_OF_SALTMERE) == :ask && !quest_flag(:EL_SOUND_OF_SALTMERE, :stage)"}
+    - {name: Marguerite Fane, key: FANE, near: "the paint loft, under the torn backdrop", sprite: "scene-painter in a smock, Smeargle beside her",
+       trigger: action, cond: {switch: CH3_PAGEANT_DONE}, condition: "quest_state(:EL_PAINT_LOFT) != :done"}
+  146:
+    name: Saltmere - Harbour & Breakwater
+    events:
+    - {name: Boat lantern, key: BOAT_LANTERN, near: "a fishing boat's bow at the harbour wall", sprite: "tile: lantern on a bow", trigger: action,
+       condition: "quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :boat)"}
+    - {name: Breakwater end, key: BREAKWATER_END, near: "the very end of the breakwater", trigger: action,
+       condition: "quest_active(:EL_SOUND_OF_SALTMERE)", note: "show a Ralts sprite only while quest_step == :breakwater"}
+    - {name: Legion recruiting barge, request: "a black-hulled barge moored at the free harbour; deck with a rope ring and fire pit (can be part of 146)"}
+    - {name: Sergeant Brakka, key: BRAKKA, near: "the barge gangplank", sprite: "Ashkaar legion sergeant, ember-red armour", trigger: action,
+       note: "Ashkaar's Trial by Flames outpost; falls through to the Ashkaar board"}
+    - {name: Barge herald, near: "beside the gong", sprite: "herald with a gong", trigger: action,
+       commands: ["'Barge herald: Brand up with the Sergeant. The gong does not ring itself. Well. Once. There was a storm.'"]}
+  147:
+    name: Saltmere - Old Town
+    events:
+    - {name: Ropewalk lantern, key: ROPEWALK_LANTERN, near: "halfway down the ropewalk, on a hook", trigger: action,
+       condition: "quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :ropewalk)"}
+    - {name: Empty ropewalk (silence), key: SILENCE_ROPEWALK, near: "the far end of the ropewalk", trigger: action,
+       condition: "quest_step(:EL_SOUND_OF_SALTMERE) == :ask && !quest_flag(:EL_SOUND_OF_SALTMERE, :ropewalk)"}
+  552:
+    name: The Dyers' Ford (the Weavers' Road)
+    events:
+    - {name: Hound shrine, key: SHRINE_FORD, near: "the stone shrine by the ford, stained blue by the dye runoff", trigger: action}
+  524:
+    name: Gossamer Wood
+    events:
+    - {name: Monkey shrine, key: SHRINE_WOOD, near: "a shrine in a hollow of silk", trigger: action}
+    - {name: Sap tree duel, key: SAP_TREE, near: "the weeping sap tree on the old trail", sprite: "Heracross and Pinsir locked together",
+       trigger: action, condition: "!quest_done(:EL_HORN_AND_PINCER)"}
+    - {name: Silk wall, near: "a shortcut toward Briarwick", condition: "quest_flag(:EL_HORN_AND_PINCER, :helper) != :heracross",
+       note: "impassable silk wall; gone once Heracross tears it down"}
+    - {name: Fallen log, near: "a second shortcut", condition: "quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir",
+       note: "impassable log; gone once Pinsir crushes it"}
+  120:
+    name: Briarwick
+    events:
+    - {name: Lantern House, request: "the Briarwick Lantern House, a hollow-tree interior (suggest map 126)"}
+    - {name: Loyal Three shrine, key: SHRINE_SQUARE, patch: "existing event 'Loyal Three shrine'"}
+  126:
+    name: Briarwick Lantern House (new interior; suggested ID)
+    events:
+    - {name: Mother Aldreth, key: ALDRETH, near: "at a lantern-loom", sprite: "very old blind woman weaving", trigger: action,
+       note: "the oldest Quiet Way house in the south; falls through to the Elowen board"}
+  123:
+    name: Weavers' Guildhall
+    events:
+    - {name: Hett, key: HETT, patch: "existing event 'Hett' (after the locked-ledger lines)"}
+  525:
+    name: Gossamer Deepwood
+    events:
+    - {name: Moth nests, key: MOTH_NESTS, near: "the old silk-moth nests, wrapped in dyed silk", trigger: action,
+       note: "after the outcome :guardian, show a Spidops sitting over the nests"}
+  573:
+    name: The Two Hearths (Frostwick)
+    events:
+    - {name: Ingrith, key: INGRITH, near: "the Half-Tally board, Isenmar side (runes)", sprite: "rune-carver with an adze", trigger: action}
+    - {name: Sister Maelon, key: MAELON, near: "the Half-Tally board, Elowen side (lanterns)", sprite: "lantern-sister in grey", trigger: action}
+    - {name: Brenna and Sigvald, key: BRENNA_SIGVALD, near: "between the two hearths (one event; both portraits speak)", trigger: action}
+  562:
+    name: The Rimewood
+    events:
+    - {name: Frost hive, key: RIMEWOOD_HIVE, near: "a frost-glazed oak", sprite: "tile: hive", trigger: action}
+  576:
+    name: Halvard's Smokehouse
+    events:
+    - {name: Halvard, key: HALVARD, patch: "existing smokehouse NPC"}
+  561:
+    name: Gullcry Cliffs
+    events:
+    - {name: Parcel rattle, key: PARCEL_RATTLE, near: "the cliff path, first bend", trigger: player_touch,
+       condition: "quest_step(:IS_OATH_PARCEL) == :carry && !quest_flag(:IS_OATH_PARCEL, :rattled)"}
+    - {name: Old Asta, key: ASTA, near: "the egg-gatherers' hut", sprite: "old woman with an egg basket", trigger: action}
+    - {name: Egg ledge, key: EGG_LEDGE, near: "the highest ledge (needs the high path)", sprite: Bombirdier, trigger: action,
+       condition: "quest_step(:IS_EGG_THIEF) == :ask"}
+  160:
+    name: Ebbmouth
+    events:
+    - {name: Net Loft door, request: "an interior 'the Net Loft' for skald Bersi Gullsong (suggest map 168); tally mast, nets, a feast table"}
+    - {name: Gorm, key: GORM, near: "his crates on the quay", sprite: "stocky sailor", trigger: action}
+    - {name: Grant Kiosk P-3NNY/2, key: KIOSK_PENNY_EBB, near: "the tidal Lattice station gate", sprite: "tile: brass kiosk", trigger: action}
+    - {name: Upper mill-wheel, key: WHEEL_UPPER, near: "the upper wheel on the Ebb", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :upper)"}
+    - {name: Guild mill-wheel, key: WHEEL_GUILD, near: "the wheel by the Guild hall", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :guild)"}
+  167:
+    name: Ebbmouth - Mill Quay
+    events:
+    - {name: Mill Quay wheel, key: WHEEL_QUAY, near: "the Mill Quay wheel", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :quay)"}
+  168:
+    name: The Net Loft (new interior; suggested ID)
+    events:
+    - {name: Bersi Gullsong, key: BERSI, near: "by the Tally Mast", sprite: "skald with a drum", trigger: action,
+       note: "keeper of the Ebbmouth Tally; falls through to the Isenmar board. The feast scene uses the same room (Marisol at a table)"}
+  568:
+    name: The Rehearsal
+    events:
+    - {name: The loop, key: REHEARSAL_LOOP, near: "the wheel-rut where the wagon tips", sprite: "wagon, horse and girl (one pink edge)", trigger: action,
+       condition: "!quest_done(:EL_REHEARSAL)"}
+    - {name: The girl in the road, key: REHEARSAL_GIRL, near: "in the road", trigger: action, condition: "quest_step(:EL_REHEARSAL) == :finish"}

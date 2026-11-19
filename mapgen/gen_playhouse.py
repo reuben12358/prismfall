@@ -30,6 +30,10 @@ def trainer(at, ttype, name, sight, d, intro, after, cond=None):
     return e
 
 
+def say(who, expr, text):
+    return '\\pf[%s,%s]%s: %s' % (who.upper(), expr, who.capitalize(), text)
+
+
 def sign(name, at, text, tile=None):
     pg = {'commands': [text] if isinstance(text, str) else text}
     if tile: pg['graphic'] = {'tile': tile}
@@ -68,13 +72,16 @@ def main():
               "Usher: Ah, our challenger! Tonight's bill: Dorian Pell, in person. Through the doors, up the aisle, onto the stage.",
               "Usher: The cast may want a word on your way. Actors. They always want a word."]},
           {'type': 'npc', 'name': 'Gym guide', 'at': list(A['guide']), 'sprite': 'NPC 01', 'dir': 'left', 'commands': [
-              "Gym Guide: Your first Warden! Dorian uses Normal-types on the Grand Stage field.",
-              "Gym Guide: Here's the trick of a field: the stage loves a show. Flashy moves - sound moves, dances - get a cheer from "
-              "the house, and the cheer makes them hit harder. That goes for your side too. Fighting-types are good. Ghosts don't care."]},
+              "Gym Guide: Your first Warden! Dorian uses Normal-types, on the Grand Stage field.",
+              "Gym Guide: Here's the trick of a field: the house loves a show. Sound moves and dances get a cheer, and the cheer makes "
+              "the next move hit harder. It works for you too.",
+              "Gym Guide: Normal-types don't fear much. Fighting-types, they fear. Rock shrugs them off. And Ghosts just don't care, "
+              "which Dorian finds very rude."]},
           {'type': 'npc', 'name': 'Lady', 'at': list(A['lady']), 'sprite': 'NPC 11', 'dir': 'right',
            'text': "I come every night. Every. Night. He has never once taken a bow the same way twice."},
-          sign('Poster: The Gilded King', (5, 4), 'A poster: "THE GILDED KING - closed by order of the Crown." Someone has pasted "TONIGHT" over "closed".'),
-          sign('Poster: The Lady in Red', (15, 4), 'A poster: "THE LADY IN RED. Dorian Pell, Rosalind Vane. Held over by popular demand."')]
+          sign('Old poster', (5, 4), 'An old poster, under the others. A title has been pasted over, years ago. Where the paste has lifted, two letters show through: "...ED K..."'),
+          sign('Poster: The Lady in Red', (15, 4), 'A poster: "THE LADY IN RED. Dorian Pell, Rosalind Vane. Held over by popular demand." (Popular demand: D. Pell.)'),
+          sign('Poster: The Loyal Three', (17, 4), 'A poster: "THE LOYAL THREE - the Festival-year companion piece to the Pageant of the Prismfall. Three faithful hounds! One wicked Ogre! Bring the children!"')]
     d = head(150, 'Pell Playhouse - Lobby', 147); d.update(h.write(150)); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 154 Auditorium (GYM 1)
@@ -96,14 +103,24 @@ def main():
         if (x, y) == T['dorian']: continue                            # Dorian's own event wears the curtain until it flies
         t = MG(4697) if y == P.CURTAIN[-1][1] else MG(4689)
         ev.append(K.tile_event('Curtain %d,%d' % (x, y), x, y, [(None, t), ({'var': ['STAGE_CURTAIN', 1]}, None)]))
-    win = ['Dorian Pell: Bravo! BRAVO! The house is on its feet!',
+    win = [say('DORIAN', 'shocked', "...They're standing. Look at them. They're on their FEET."),
+           say('DORIAN', 'crying', "Bravo! BRAVO! Oh, I'm crying, don't look, it's the footlights."),
            {'script': 'Prismfall.award_badge(pfm_gym(:LEADER_DORIAN))'},
+           "(You open the Badge Case and set the badge in. A faint hum: one clear note. The whole house goes quiet.)",
+           "\\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?",
+           "\\pf[DORIAN,shocked,shock]Dorian: Darling, in Saltmere nothing is supposed to do ANYTHING. That's the whole charter.",
+           say('DORIAN', 'neutral', "..."), say('DORIAN', 'happy', "Do it again."),
+           "(Nothing. The case is quiet.)",
+           say('DORIAN', 'deadpan', "One night only. The best kind."),
            {'script': 'pbReceiveItem(:TM42)'},
-           "Dorian Pell: Facade - the art of turning a bad night into a standing ovation.",
-           "Dorian Pell: And one more gift, from the whole troupe. Forty auditions, never cast. You two are a matched set.",
+           say('DORIAN', 'neutral', "Facade. The art of turning a bad night into a standing ovation. You'll need it more often than you'd think."),
+           say('DORIAN', 'neutral', "That badge is the Accord's word that Pokémon up to level nineteen will heed you. Briarwick's will let you cut the dead wood, when you've earned it. They have a man for that."),
+           "(The troupe files on from the wings. The smallest actor is carrying an Eevee in a ruff.)",
+           say('DORIAN', 'happy', "And one more gift, from the whole company. Forty auditions. Never cast. A tragedy in a ruff."),
+           say('DORIAN', 'neutral', "You came off that ferry with no color at all, I hear, and this one's never picked one either. You two are a matched set."),
            {'script': 'pkmn = Pokemon.new(:EEVEE, 10)\npkmn.name = "Understudy"\npbAddPokemon(pkmn)'},
            {'switch': ['CH3_UNDERSTUDY_GOT', True]},
-           "Dorian Pell: Opening night of the Pageant is at the Hall. Come. Bring Juno. Bring everyone.",
+           say('DORIAN', 'happy', "Rehearsal at the Lantern Theatre this afternoon, opening night at eight. Come to both. Bring Juno. Bring everyone."),
            {'selfswitch': ['A', True]}]
     dx, dy = T['dorian']
     ev += [
@@ -121,20 +138,39 @@ def main():
         {'type': 'event', 'name': 'Dorian', 'at': [dx, dy], 'pages': [
             {'graphic': {'tile': MG(4689)}},
             {'cond': {'var': ['STAGE_CURTAIN', 1]}, 'graphic': {'sprite': 'trainer_GENTLEMAN', 'dir': 'down'}, 'commands': [
-                'Dorian Pell: Enter, challenger, to thunderous applause! Your first Warden. Your first field. Your first audience.',
-                "Dorian Pell: On my stage the house loves a show: dance, sing, dazzle them, and they'll lift you. "
-                "The stage tells the truth the throne won't.",
+                {'if': "$game_self_switches[[154, 0, 'TRIED']]", 'then': [say('DORIAN', 'happy', "Act Two! I adore an Act Two. Everyone's warmed up.")], 'else': [
+                    "(Dorian stands center stage in a single spotlight, cane raised, as if he has been standing there for an hour. He may have.)",
+                    say('DORIAN', 'happy', "Enter, stage left, our brave challenger! To thunderous applause!"),
+                    "(The audience applauds, thunderously.)",
+                    say('DORIAN', 'neutral', "Your first Warden. Your first field. Your first audience. I envy you, darling. You only get one of each."),
+                    say('DORIAN', 'smug', "On my stage the house loves a show. Sing, dance, dazzle them, and they'll carry you. Bore them, and they'll let you fall."),
+                    say('DORIAN', 'happy', "Shall we give them something to remember?")]},
+                {'script': "$game_self_switches[[154, 0, 'TRIED']] = true"},
                 {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)', 'then': win}]},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_GENTLEMAN', 'dir': 'down'}, 'commands': [
-                'Dorian Pell: The Pageant, darling! The Hall, tonight!',
+                say('DORIAN', 'happy', "Rehearsal at the Lantern Theatre, darling! Opening night at eight!"),
                 {'if': 'pfm_gym_won?(:LEADER_TAMSIN)', 'then': [
-                    "Dorian Pell: And a second badge! Then the old stage-left wing is yours. The revolve back there hasn't turned "
-                    "since my debut. Get it through all three acts and the old script is yours."]}]}]},
+                    say('DORIAN', 'smug', "And a second badge! Then the old stage-left wing is yours. The revolve back there hasn't turned since "
+                        "my debut. Get it through all three acts. There's a prompt-book in the prop room I'd rather you found than the Crown's inspectors.")]}]}]},
         {'type': 'event', 'name': 'Stage-left wing', 'at': list(T['wing']), 'pages': [{'trigger': 'touch', 'commands': [
             {'if': 'pfm_gym_won?(:LEADER_TAMSIN)', 'then': [
                 {'se': 'Door exit'}, {'transfer': {'map': 151, 'x': P.STAGE_AT['exit'][0], 'y': P.STAGE_AT['exit'][1] - 1, 'dir': 'up'}}],
              'else': ['A door in the wings, chalked: "OLD REVOLVE - CREW ONLY. Come back with a second badge, darling. - D.P."',
                       {'move': {'who': -1, 'route': ['right']}}]}]}]},
+        {'type': 'event', 'name': 'Juno reveal', 'at': [0, 0], 'pages': [   # Juno comes into the stalls once one actor is beaten
+            {'trigger': 'parallel', 'commands': [
+                {'if': "$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[154, e.id, 'A']] } >= 1",
+                 'then': [{'script': "ev = $game_map.events.values.find { |e| e.name == 'Juno' }\n$game_self_switches[[154, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}]},
+                {'wait': 20}]}]},
+        {'type': 'event', 'name': 'Juno', 'at': [9, 15], 'pages': [
+            {},
+            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
+                {'if': "$game_self_switches[[154, 0, 'JUNO']]", 'then': [say('JUNO', 'happy', "(whispering) I'll be loud quietly.")], 'else': [
+                    "(Juno is in the stalls with a paper cone of salt-caramel.)",
+                    say('JUNO', 'happy', "I made it! I'm AUDIENCE! Go on! I'll be loud!"),
+                    "Audience Member: Shh!",
+                    say('JUNO', 'happy', "(whispering) I'll be loud quietly."),
+                    {'script': "$game_self_switches[[154, 0, 'JUNO']] = true"}]}]}]},
         trainer(T['ferdie'], 'JUGGLER', 'Florian', 2, 'right', "A challenger in the aisle! The show starts NOW!",
                 "I'll be in the bar. There is no bar. I'll be in the lobby."),
         trainer(T['rosalind'], 'BEAUTY', 'Rosalind', 2, 'left', "Every great entrance needs a rival. Tonight, that's me.",
@@ -187,8 +223,8 @@ def main():
     ev += [
         {'type': 'event', 'name': 'Upstage door', 'at': list(A['goal']), 'pages': [{'trigger': 'touch', 'commands': [
             {'if': '!pfm?(:backstage_done)', 'then': [
-                "Behind the dais, a prop room no one has opened in years. On the throne's cushion: the Gilded King's own script, "
-                "annotated in Dorian's hand. \"The stage tells the truth the throne won't.\"",
+                "Behind the dais, a prop room no one has opened in years. On the throne's cushion: an old Pageant prompt-book. "
+                "Every line about the old capital has been struck out in red. In the margin, in Dorian's hand: \"The stage tells the truth the throne won't.\"",
                 {'script': 'pfm_item(:MAGICALSEED, 2, "Magical Seed")'}, {'script': 'pfm_item(:PPUP, 1, "PP Up")'},
                 {'script': 'pfm_set(:backstage_done)'}]},
             {'se': 'Door exit'}, {'transfer': {'map': 154, 'x': P.THEATRE_AT['wing'][0] + 1, 'y': P.THEATRE_AT['wing'][1], 'dir': 'right'}}]}]},
@@ -255,7 +291,7 @@ def main():
         {'type': 'event', 'name': 'Prop chest', 'at': [T['chest'][0] + ox, T['chest'][1] + oy], 'pages': [
             {'graphic': {'sprite': 'Object ball'}, 'commands': [
                 {'script': 'pfm_item(:MAGICALSEED, 2, "Magical Seed")'}, {'script': 'pfm_item(:PPUP, 1, "PP Up")'},
-                "Under the seeds: a dented prop crown. \"THE GILDED KING - Act III\".", {'script': 'pfm_set(:gilded_crown)'},
+                "Under the seeds: the old Crown prop. Its paste jewels are long gone, but the centre stone is real, and whole.", {'script': 'pfm_set(:old_crown_prop)'},
                 {'switch': ['STAGE_TRAP_DONE', True]}, {'selfswitch': ['A', True]}]},
             {'cond': {'self': 'A'}}]},
         K.apprentice('Old Joss', 'NPC 11', T['joss'][0] + ox, T['joss'][1] + oy, 'pb_trap', "Old Joss. I built the revolve. Dizzy? I'll wind it back."),

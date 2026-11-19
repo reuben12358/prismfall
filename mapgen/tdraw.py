@@ -353,7 +353,7 @@ def shade_box(im, box, f):
 # ------------------------------------------------------------------ the townhouse
 def townhouse(W, roof_rows, floors, roof='terra', wall=('plaster', 'cream'), door=1, gable=False, seed=1, shop=None,
               wins='sash', ground=None, dormers=0, chim=(), shutters=None, boxes=0.0, sign=None, quoin=True, lit=False,
-              cross=False, hoist=False, bigdoor=False):
+              cross=False, hoist=False, bigdoor=False, lanterns=False, board=None, plaque=None, flag=None):
     """W tiles wide.  roof_rows: roof height in tiles; floors: list of upper-storey heights in px (the ground floor is
     always the bottom 24 px: a door row).  Returns (image, code rows, door cell)."""
     rng = random.Random(seed)
@@ -382,7 +382,7 @@ def townhouse(W, roof_rows, floors, roof='terra', wall=('plaster', 'cream'), doo
         g = Image.new('RGBA', (w, 24), WOOD[2]); gd = ImageDraw.Draw(g)
         for x in range(0, w, 4): gd.line([x, 0, x, 23], fill=WOOD[1]); gd.line([x + 1, 0, x + 1, 23], fill=WOOD[3])
         im.alpha_composite(g, (0, gtop))
-    if kind == 'timber' or cross:                       # half-timbered upper storeys (real Sheridan panels)
+    if kind == 'timber':                                # half-timbered upper storeys (real Sheridan panels)
         for k, fh in enumerate(floors):
             yy = fy + sum(floors[:k])
             band = timber_band(w, min(fh, 16)); im.alpha_composite(band, (0, yy + max(0, fh - 16)))
@@ -413,7 +413,7 @@ def townhouse(W, roof_rows, floors, roof='terra', wall=('plaster', 'cream'), doo
     # ---------------- ground floor: door, shop window, step
     dx = door * 16
     if shop:
-        sx0, sx1 = (2, dx - 3) if door > 0 else (dx + 19, w - 3)
+        sx0, sx1 = (2, dx - 3) if dx - 5 >= (w - 3) - (dx + 19) else (dx + 19, w - 3)
         if sx1 - sx0 >= 8:
             d.rectangle([sx0, gtop + 7, sx1, h - 4], fill=WOOD[1], outline=DKW)
             d.rectangle([sx0 + 1, gtop + 8, sx1 - 1, h - 6], fill=GLASS[1])
@@ -474,8 +474,9 @@ def townhouse(W, roof_rows, floors, roof='terra', wall=('plaster', 'cream'), doo
         d.rectangle([1, ry0 - 2, w - 2, ry0 + 1], fill=shade(rr[3] + (255,), 1.0), outline=OUT)        # ridge cap
         d.line([2, ry0 - 1, w - 3, ry0 - 1], fill=rr[4] + (255,))
         d.line([0, ry0 - 2, 0, ry1], fill=OUT); d.line([w - 1, ry0 - 2, w - 1, ry1], fill=OUT)
-        if cross:                                       # a cross gable over the middle bay
-            gx0, gx1 = w // 2 - 12, w // 2 + 11
+        if cross:                                       # a cross gable over the middle bay (3-4 tiles wide)
+            half_ = 32 if W >= 8 else 24
+            gx0, gx1 = w // 2 - half_, w // 2 + half_ - 1
             gable_front(im, gx0, gx1, ry0 + 3, ry1, rt, roof, wr, kind, col, seed)
         for k in range(dormers):
             cx = int((k + 0.5) * w / dormers)
@@ -493,6 +494,25 @@ def townhouse(W, roof_rows, floors, roof='terra', wall=('plaster', 'cream'), doo
     shade_box(im, (1, fy + 1, w - 1, fy + 4), 0.78); shade_box(im, (1, fy + 4, w - 1, fy + 5), 0.9)
     for c in chim:
         chimney(im, c * 16 + 5, max(0, ry0 - 1 + (rng.randrange(3) if not gable else 6)), 7)
+    if lanterns:                                        # paper lanterns strung under the eave
+        for x in range(4, w - 4):
+            P(im, x, fy + 5 + int(2 * math.sin(math.pi * (x % 24) / 24.0)), (70, 52, 44, 255))
+        for k, x in enumerate(range(8, w - 6, 12)):
+            c = [(232, 70, 60, 255), (250, 200, 90, 255), (240, 130, 70, 255)][k % 3]; y = fy + 6 + int(2 * math.sin(math.pi * (x % 24) / 24.0))
+            d.ellipse([x - 2, y, x + 2, y + 5], fill=c, outline=shade(c, 0.6)); P(im, x - 1, y + 1, (255, 240, 200, 255))
+    if board:                                           # a painted name board over the door
+        bc, txt = board; bx0, bx1 = max(2, dx - 10), min(w - 3, dx + 25)
+        d.rectangle([bx0, gtop - 3, bx1, gtop + 4], fill=bc[1], outline=OUT); d.line([bx0 + 1, gtop - 2, bx1 - 1, gtop - 2], fill=bc[2])
+        for i, x in enumerate(range(bx0 + 3, bx1 - 2, 3)): d.line([x, gtop, x + 1, gtop + 2 - (i % 2)], fill=(244, 236, 214, 255))
+    if plaque == 'ball':                                # the Poke Center's ball plaque above the door
+        cx_ = dx + 8; cy_ = gtop - 8
+        d.ellipse([cx_ - 6, cy_ - 6, cx_ + 6, cy_ + 6], fill=(244, 244, 248, 255), outline=OUT)
+        d.pieslice([cx_ - 6, cy_ - 6, cx_ + 6, cy_ + 6], 180, 360, fill=(216, 60, 56, 255), outline=OUT)
+        d.line([cx_ - 6, cy_, cx_ + 6, cy_], fill=OUT); d.ellipse([cx_ - 2, cy_ - 2, cx_ + 2, cy_ + 2], fill=(244, 244, 248, 255), outline=OUT)
+        P(im, cx_ - 3, cy_ - 4, (250, 150, 140, 255))
+    if flag:                                            # a flag on a staff from the roof
+        fx = w // 2 if gable else w - 12
+        d.line([fx, 0, fx, 14], fill=WOOD[0]); d.rectangle([fx + 1, 1, fx + 10, 7], fill=flag[1], outline=OUT); d.line([fx + 2, 2, fx + 9, 2], fill=flag[2])
     # ---------------- code rows: top row passable overhead, roof solid overhead, walls solid, door cell passable
     code = []
     for ty in range(H):
@@ -643,6 +663,218 @@ def quay(piece, v=0):
     return im
 
 
+def retaining(piece, v=0):
+    """dry retaining-wall kit for terraces on land (same layout as the quay kit): lip = parapet coping (walkable top),
+    f1 = coursed ashlar, f2 = footing course with a plinth and grime where it meets the street"""
+    if piece[:-1] in ('lip', 'f1', 'W', 'E', 'N'): im = quay(piece, v)
+    else:
+        im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(hash((piece, v)) & 0xffff)
+        y = 0; k = 0
+        while y < 11:
+            x = -((k * 3 + v * 5) % 7)
+            while x < 16:
+                bw = 7 + ((x + k * 3 + v) % 3); c = QY[2] if rng.random() < 0.65 else QY[3]
+                d.rectangle([x, y, x + bw - 1, min(10, y + 4)], fill=c + (255,)); d.line([x, y, x + bw - 2, y], fill=QY[4] + (255,))
+                d.line([x + bw - 1, y, x + bw - 1, min(10, y + 4)], fill=QY[0] + (255,)); x += bw
+            d.line([0, min(10, y + 4), 15, min(10, y + 4)], fill=QY[0] + (255,)); y += 5; k += 1
+        d.rectangle([0, 11, 15, 14], fill=QY[1] + (255,)); d.line([0, 11, 15, 11], fill=QY[3] + (255,))
+        for x in range(16):
+            if rng.random() < 0.3: P(im, x, 13 + rng.randrange(2), (88, 104, 76, 255))
+        d.line([0, 15, 15, 15], fill=(0, 0, 0, 70))
+        end = piece[-1]
+        if end in 'we':
+            x = 0 if end == 'w' else 15; d.line([x, 0, x, 14], fill=OUT)
+    return im
+
+
+def salt_flat(v):
+    """crystalline salt crust (1x1 ground, 4 variants): white with grey-blue crazing and glints"""
+    im = Image.new('RGBA', (16, 16), (236, 238, 242, 255)); d = ImageDraw.Draw(im); rng = random.Random(300 + v)
+    for _ in range(3):
+        x, y = rng.randrange(16), rng.randrange(16); L = rng.randrange(3, 7)
+        for k in range(L):
+            P(im, (x + k) % 16, (y + (k * (1 if v % 2 else -1)) // 2) % 16, (198, 206, 218, 255))
+    for _ in range(10): P(im, rng.randrange(16), rng.randrange(16), (250, 252, 255, 255) if rng.random() < 0.6 else (214, 220, 230, 255))
+    if v == 3:
+        for _ in range(5): P(im, rng.randrange(16), rng.randrange(16), (184, 168, 140, 255))
+    return im
+
+
+def brine(v):
+    """a salt pan of standing brine (1x1, framed by its clay bund on the n/s/w/e sides given in v)"""
+    im = Image.new('RGBA', (16, 16), (150, 196, 214, 255)); d = ImageDraw.Draw(im); rng = random.Random(400 + len(v))
+    for _ in range(8): P(im, rng.randrange(16), rng.randrange(16), (186, 220, 232, 255))
+    for _ in range(5): P(im, rng.randrange(16), rng.randrange(16), (244, 248, 250, 255))
+    C1, C2 = (176, 150, 116, 255), (138, 112, 86, 255)
+    if 'n' in v: d.rectangle([0, 0, 15, 2], fill=C1); d.line([0, 2, 15, 2], fill=C2)
+    if 's' in v: d.rectangle([0, 13, 15, 15], fill=C1); d.line([0, 13, 15, 13], fill=(232, 236, 240, 255))
+    if 'w' in v: d.rectangle([0, 0, 2, 15], fill=C1); d.line([2, 0, 2, 15], fill=C2)
+    if 'e' in v: d.rectangle([13, 0, 15, 15], fill=C1); d.line([13, 0, 13, 15], fill=(232, 236, 240, 255))
+    return im
+
+
+def tower(W=3, H=6, roof='slate_t', seed=1, banner=None):
+    """a round wall tower (W x H): ashlar drum with arrow slits and a string course, a conical roof with a finial"""
+    w, h = W * 16, H * 16
+    im = Image.new('RGBA', (w, h), CLEAR); d = ImageDraw.Draw(im)
+    DH = 52 if H >= 6 else 40
+    body_top = h - DH
+    drum = ashlar(w - 4, DH, STONE, seed)
+    m = Image.new('L', (w - 4, DH), 0); ImageDraw.Draw(m).rectangle([0, 0, w - 5, DH - 1], fill=255)
+    im.paste(drum, (2, body_top), m)
+    for x in range(2, w - 2):                         # round shading: lit west, dark east
+        f = 1.12 - 0.36 * (x - 2) / max(1, w - 5)
+        shade_box(im, (x, body_top, x + 1, h), f)
+    d.rectangle([2, body_top, w - 3, h - 1], outline=OUT)
+    for sx in (w // 2 - 1,):
+        d.rectangle([sx, body_top + 10, sx + 1, body_top + 18], fill=(40, 36, 40, 255)); d.rectangle([sx, body_top + 26, sx + 1, body_top + 32], fill=(40, 36, 40, 255))
+    d.line([2, body_top + 22, w - 3, body_top + 22], fill=STONE[4] + (255,)); d.line([2, body_top + 23, w - 3, body_top + 23], fill=STONE[0] + (255,))
+    # cone roof
+    rt = roof_tex(roof); cx = w // 2; apex = 2; base = body_top + 3
+    cone = Image.new('RGBA', im.size, CLEAR); tile_fill(cone, rt, (0, 0, w, h))
+    mask = Image.new('L', im.size, 0); md = ImageDraw.Draw(mask)
+    md.polygon([(0, base), (cx, apex), (w - 1, base)], fill=255); md.pieslice([0, base - 6, w - 1, base + 6], 0, 180, fill=255)
+    for x in range(w):
+        shade_box(cone, (x, 0, x + 1, h), 1.15 - 0.45 * x / max(1, w - 1))
+    im.paste(cone, (0, 0), mask)
+    d.line([0, base, cx, apex], fill=OUT); d.line([w - 1, base, cx, apex], fill=OUT); d.arc([0, base - 6, w - 1, base + 6], 0, 180, fill=OUT)
+    d.line([cx, apex, cx, apex - 2], fill=D.IRON[1]); P(im, cx, 0, D.GOLD[2])
+    if banner:
+        d.line([cx + 2, body_top + 2, cx + 2, body_top + 14], fill=WOOD[0])
+        d.rectangle([cx + 3, body_top + 2, cx + 8, body_top + 10], fill=banner[1], outline=OUT); d.line([cx + 4, body_top + 3, cx + 4, body_top + 9], fill=banner[2])
+    code = ['R' * W] + ['r' * W] * (H - 4) + ['W' * W] * 3
+    return im, code
+
+
+def gatehouse(W=12, H=8, open_w=6, roof='slate_t', seed=3, banner=None):
+    """a town gate: two round towers and an arched gateway between them; the passage (open_w wide) is walkable, the
+    arch and the wall walk above it are overhead"""
+    w, h = W * 16, H * 16
+    im = Image.new('RGBA', (w, h), CLEAR); d = ImageDraw.Draw(im)
+    tw = (W - open_w) // 2
+    x0 = tw * 16; x1 = (tw + open_w) * 16 - 1
+    wall_top = h - 66; arch_y = h - 30
+    g = ashlar(x1 - x0 + 1, arch_y - wall_top + 8, STONE, seed)
+    im.alpha_composite(g, (x0, wall_top))
+    d.rectangle([x0, wall_top, x1, arch_y + 7], outline=OUT)
+    for x in range(x0, x1, 8):                            # crenellations along the wall walk
+        d.rectangle([x, wall_top - 6, x + 4, wall_top], fill=STONE[3] + (255,), outline=OUT)
+    d.line([x0, wall_top + 1, x1, wall_top + 1], fill=STONE[4] + (255,))
+    # the arch: a dark vault under the wall, voussoirs around it
+    g = ashlar(x1 - x0 + 1, h - wall_top, STONE, seed)
+    im.alpha_composite(g, (x0, wall_top)); d.rectangle([x0, wall_top, x1, h - 1], outline=OUT)
+    d.rectangle([x0 + 5, arch_y - 4, x1 - 5, h - 1], fill=(48, 42, 46, 255))
+    d.pieslice([x0 + 5, arch_y - 22, x1 - 5, arch_y + 12], 180, 360, fill=(48, 42, 46, 255))
+    d.arc([x0 + 4, arch_y - 23, x1 - 4, arch_y + 13], 180, 360, fill=STONE[4] + (255,))
+    d.arc([x0 + 3, arch_y - 24, x1 - 3, arch_y + 14], 180, 360, fill=OUT)
+    d.line([x0 + 4, arch_y - 4, x0 + 4, h - 1], fill=OUT); d.line([x1 - 4, arch_y - 4, x1 - 4, h - 1], fill=OUT)
+    for x in range(x0 + 8, x1 - 6, 6): d.line([x, arch_y - 8, x, arch_y - 4], fill=D.IRON[0])        # portcullis teeth
+    d.line([x0 + 6, arch_y - 4, x1 - 6, arch_y - 4], fill=D.IRON[1])
+    for y in range(arch_y, h, 6): d.line([x0 + 6, y, x1 - 6, y], fill=(64, 58, 60, 255))         # the vault's ribs
+    d.rectangle([(x0 + x1) // 2 - 6, wall_top + 6, (x0 + x1) // 2 + 6, wall_top + 16], fill=D.GOLD[1], outline=OUT)
+    d.line([(x0 + x1) // 2 - 3, wall_top + 11, (x0 + x1) // 2 + 3, wall_top + 11], fill=OUT)            # civic plaque
+    for side, tx in ((0, 0), (1, W - tw)):
+        t, c = tower(tw, H, roof, seed + side, banner)
+        im.alpha_composite(t, (tx * 16, 0))
+    code = []
+    for ty in range(H):
+        row = ''
+        for tx in range(W):
+            if tx < tw or tx >= W - tw: row += 'R' if ty == 0 else 'r' if ty < H - 3 else 'W'
+            else: row += 'F' if ty * 16 >= arch_y - 16 else '.' if (ty + 1) * 16 <= wall_top else 'O'   # vault floor under the player
+        code.append(row)
+    return im, code
+
+
+def playhouse():
+    """The Pell Playhouse (map builder 8 rebuild, 16x13): a grand theatre front on its square.  The roof is real
+    Aevium Past barrel tiling in theatre crimson with lit and shaded hips and a gilded ridge; a pedimented centre bay
+    with the comedy/tragedy rose window; a plaster piano nobile with tall lit windows and banners; a stone arcade of
+    playbills, the gilt marquee and red double doors."""
+    W, H = 16, 13
+    w, h = W * 16, H * 16
+    im = Image.new('RGBA', (w, h), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(5)
+    rt = roof_tex('crimson'); rr = RAMPS['crimson']
+    ey = 96                                                    # eave line
+    # hipped main roof: trapezoid, the hips lit (west) and shaded (east)
+    roof = Image.new('RGBA', im.size, CLEAR); tile_fill(roof, rt, (0, 0, w, h))
+    for y in range(0, ey):
+        shade_box(roof, (0, y, w, y + 1), 1.12 - 0.30 * y / ey)
+    mask = Image.new('L', im.size, 0); md = ImageDraw.Draw(mask)
+    md.polygon([(4, ey), (34, 18), (w - 35, 18), (w - 5, ey)], fill=255)
+    im.paste(roof, (0, 0), mask)
+    hip = Image.new('L', im.size, 0); hd = ImageDraw.Draw(hip)
+    hd.polygon([(4, ey), (34, 18), (34, ey)], fill=255); hd2 = Image.new('L', im.size, 0); ImageDraw.Draw(hd2).polygon([(w - 5, ey), (w - 35, 18), (w - 35, ey)], fill=255)
+    lit = im.copy(); shade_box(lit, (0, 0, w, h), 1.10); im.paste(lit, (0, 0), hip)
+    dk = im.copy(); shade_box(dk, (0, 0, w, h), 0.78); im.paste(dk, (0, 0), hd2)
+    d.line([4, ey, 34, 18], fill=OUT); d.line([w - 5, ey, w - 35, 18], fill=OUT); d.line([34, 18, w - 35, 18], fill=OUT)
+    d.line([6, ey - 1, 34, 20], fill=shade(rr[4] + (255,), 1.0)); d.line([w - 36, 19, w - 7, ey - 1], fill=rr[0] + (255,))
+    d.rectangle([35, 15, w - 36, 19], fill=D.GOLD[1], outline=OUT); d.line([36, 16, w - 37, 16], fill=D.GOLD[2])     # gilded ridge
+    for x in range(40, w - 38, 10): d.polygon([(x, 15), (x + 2, 10), (x + 4, 15)], fill=D.GOLD[1], outline=D.GOLD[0])
+    for cx_ in (60, w - 60):                                  # two dormer lanterns on the roof
+        dormer(im, cx_ - 5, 48, rt, WALLS['cream'])
+    # pediment (centre bay) rising in front of the roof
+    cx = w // 2; px0, px1 = cx - 44, cx + 43; py = 22
+    tri = Image.new('L', im.size, 0); ImageDraw.Draw(tri).polygon([(px0, ey + 2), (cx, py), (px1, ey + 2)], fill=255)
+    im.paste(plaster('cream', w, h, 9), (0, 0), tri)
+    d.line([px0, ey + 2, cx, py], fill=OUT); d.line([px1, ey + 2, cx, py], fill=OUT)
+    d.line([px0 + 2, ey + 1, cx, py + 2], fill=STONE[4] + (255,)); d.line([px1 - 2, ey + 1, cx, py + 2], fill=STONE[1] + (255,))
+    d.line([px0 + 8, ey - 2, cx, py + 10], fill=D.GOLD[0]); d.line([px1 - 8, ey - 2, cx, py + 10], fill=D.GOLD[0])
+    d.ellipse([cx - 15, 52, cx + 15, 82], fill=D.GOLD[0], outline=OUT); d.ellipse([cx - 12, 55, cx + 12, 79], fill=(44, 60, 92, 255))
+    for a in range(0, 360, 45):
+        d.line([cx, 67, cx + int(12 * math.cos(math.radians(a))), 67 + int(12 * math.sin(math.radians(a)))], fill=D.GOLD[1])
+    d.ellipse([cx - 10, 60, cx - 1, 71], fill=D.PLASTER[3], outline=OUT); P(im, cx - 8, 64, OUT); P(im, cx - 4, 64, OUT); d.arc([cx - 9, 64, cx - 3, 69], 20, 160, fill=OUT)
+    d.ellipse([cx + 1, 63, cx + 10, 74], fill=D.GOLD[2], outline=OUT); P(im, cx + 3, 67, OUT); P(im, cx + 7, 67, OUT); d.arc([cx + 3, 70, cx + 9, 75], 200, 340, fill=OUT)
+    d.line([cx, py, cx, py - 10], fill=WOOD[0]); d.polygon([(cx + 1, py - 10), (cx + 11, py - 7), (cx + 1, py - 4)], fill=rr[3] + (255,), outline=rr[0] + (255,))
+    # eave cornice
+    d.rectangle([2, ey, w - 3, ey + 4], fill=STONE[3] + (255,), outline=OUT); d.line([3, ey + 1, w - 4, ey + 1], fill=STONE[4] + (255,))
+    for x in range(4, w - 4, 4): P(im, x, ey + 3, STONE[1] + (255,))
+    # piano nobile (y ey+5 .. 148): plaster between pilasters, tall lit windows with red curtains, two banners
+    fy0, fy1 = ey + 5, 150
+    im.alpha_composite(plaster('cream', w - 8, fy1 - fy0, 4), (4, fy0))
+    d.rectangle([4, fy0, w - 5, fy1], outline=OUT)
+    shade_box(im, (5, fy0, w - 5, fy0 + 3), 0.8)
+    for i, px_ in enumerate(range(8, w - 8, 24)):
+        d.rectangle([px_, fy0, px_ + 4, fy1], fill=STONE[3] + (255,), outline=OUT); d.line([px_ + 1, fy0 + 1, px_ + 1, fy1 - 1], fill=STONE[4] + (255,))
+        if px_ + 24 < w - 8:
+            m_ = px_ + 14
+            d.rectangle([m_ - 6, fy0 + 9, m_ + 6, fy0 + 38], fill=(255, 214, 140, 255), outline=DKW)
+            d.pieslice([m_ - 6, fy0 + 3, m_ + 6, fy0 + 15], 180, 360, fill=(255, 214, 140, 255), outline=DKW)
+            d.polygon([(m_ - 5, fy0 + 9), (m_ - 1, fy0 + 9), (m_ - 5, fy0 + 37)], fill=rr[2] + (255,))
+            d.polygon([(m_ + 5, fy0 + 9), (m_ + 1, fy0 + 9), (m_ + 5, fy0 + 37)], fill=rr[2] + (255,))
+            d.line([m_ - 7, fy0 + 39, m_ + 7, fy0 + 39], fill=STONE[4] + (255,))
+    for bx in (cx - 36, cx + 28):
+        d.rectangle([bx, fy0 + 2, bx + 8, fy0 + 40], fill=rr[1] + (255,), outline=OUT); d.line([bx + 1, fy0 + 3, bx + 1, fy0 + 39], fill=rr[3] + (255,))
+        d.polygon([(bx, fy0 + 40), (bx + 4, fy0 + 36), (bx + 8, fy0 + 40), (bx + 8, fy0 + 44), (bx + 4, fy0 + 41), (bx, fy0 + 44)], fill=rr[1] + (255,), outline=OUT)
+        d.ellipse([bx + 1, fy0 + 14, bx + 7, fy0 + 21], fill=D.GOLD[1], outline=D.GOLD[0])
+    # ground floor arcade (y 150 .. h)
+    gy = 150
+    im.alpha_composite(ashlar(w - 8, h - gy, STONE, 11), (4, gy))
+    d.rectangle([4, gy, w - 5, h - 1], outline=OUT); d.rectangle([4, gy, w - 5, gy + 3], fill=STONE[4] + (255,), outline=OUT)
+    k = 0
+    for ax in range(12, w - 22, 26):
+        if abs(ax + 9 - cx) < 30: continue
+        d.rectangle([ax, gy + 14, ax + 18, h - 4], fill=(56, 48, 52, 255), outline=OUT)
+        d.pieslice([ax, gy + 6, ax + 18, gy + 24], 180, 360, fill=(56, 48, 52, 255), outline=OUT)
+        c = [(240, 230, 206, 255), (214, 80, 74, 255), (232, 190, 90, 255), (120, 150, 200, 255)][k % 4]; k += 1
+        d.rectangle([ax + 4, gy + 16, ax + 14, gy + 36], fill=c, outline=shade(c, 0.6))
+        d.rectangle([ax + 5, gy + 18, ax + 13, gy + 25], fill=[(150, 52, 52, 255), (40, 40, 60, 255), (120, 40, 40, 255), (240, 236, 220, 255)][k % 4])
+        d.line([ax + 5, gy + 29, ax + 13, gy + 29], fill=OUT); d.line([ax + 5, gy + 32, ax + 11, gy + 32], fill=(100, 90, 80, 255))
+    d.rectangle([cx - 22, gy + 4, cx + 21, gy + 14], fill=D.GOLD[1], outline=OUT)                    # marquee
+    d.line([cx - 21, gy + 5, cx + 20, gy + 5], fill=D.GOLD[2])
+    for x in range(cx - 18, cx + 18, 4): d.rectangle([x, gy + 8, x + 2, gy + 11], fill=rr[0] + (255,))
+    for x in range(cx - 22, cx + 22, 4): P(im, x, gy + 15, (255, 236, 168, 255))
+    d.rectangle([cx - 14, gy + 20, cx + 13, h - 2], fill=WOOD[0], outline=OUT)
+    d.pieslice([cx - 14, gy + 13, cx + 13, gy + 27], 180, 360, fill=WOOD[0], outline=OUT)
+    for dx in (-12, 1):
+        d.rectangle([cx + dx, gy + 22, cx + dx + 10, h - 3], fill=rr[1] + (255,), outline=OUT); d.line([cx + dx + 1, gy + 23, cx + dx + 1, h - 4], fill=rr[3] + (255,))
+        d.rectangle([cx + dx + 2, gy + 26, cx + dx + 8, gy + 36], outline=D.GOLD[1])
+    for x in (cx - 26, cx + 25):
+        d.rectangle([x - 1, gy + 18, x + 1, gy + 27], fill=D.IRON[1], outline=D.IRON[0]); P(im, x, gy + 21, (255, 214, 120, 255))
+    code = ['R' * W] + ['r' * W] * 7 + ['W' * W] * 4 + [''.join('D' if c == 8 else 'W' for c in range(W))]
+    return im, code
+
+
 def crane():
     """a timber harbour crane (3x5): a plank housing with a treadwheel, a raking jib over the water, rope, hook and a
     slung crate.  Code: housing solid, jib overhead"""
@@ -730,14 +962,15 @@ def fountain():
     # plinth
     d.rectangle([32, 30, 48, 46], fill=QY[2] + (255,), outline=OUT); d.line([33, 31, 47, 31], fill=QY[4] + (255,))
     d.rectangle([34, 24, 46, 32], fill=QY[3] + (255,), outline=OUT)
-    # bronze Wailord on a wave
-    B = [(60, 52, 40, 255), (104, 92, 64, 255), (150, 132, 88, 255), (190, 170, 120, 255)]
-    d.ellipse([28, 6, 52, 26], fill=B[1], outline=OUT); d.chord([28, 6, 52, 26], 200, 340, fill=B[2])
-    d.line([31, 12, 36, 8], fill=B[3]); P(im, 46, 14, OUT); d.arc([36, 16, 50, 24], 10, 170, fill=B[0])
-    d.polygon([(28, 22), (22, 16), (30, 18)], fill=B[1], outline=OUT)
-    for k, (sx, sy) in enumerate(((40, 5), (38, 2), (43, 1), (36, 0), (45, -1))):           # spout
-        if sy >= 0: P(im, sx, sy, W_[3])
-    d.arc([22, -6, 40, 14], 200, 300, fill=W_[3]); d.arc([40, -6, 58, 14], 240, 340, fill=W_[3])
+    # upper bowl on the pillar, a finial with a jet, water sheeting off the bowl's rim into the basin
+    d.rectangle([37, 12, 43, 30], fill=QY[3] + (255,), outline=OUT); d.line([38, 13, 38, 29], fill=QY[5] + (255,))
+    d.ellipse([26, 12, 54, 24], fill=QY[3] + (255,), outline=OUT); d.ellipse([29, 13, 51, 20], fill=W_[1])
+    d.arc([26, 12, 54, 24], 200, 340, fill=QY[5] + (255,)); d.chord([26, 14, 54, 26], 10, 170, fill=QY[1] + (255,)); d.arc([26, 14, 54, 26], 10, 170, fill=OUT)
+    d.rectangle([38, 4, 42, 12], fill=QY[4] + (255,), outline=OUT); d.ellipse([37, 1, 43, 6], fill=QY[4] + (255,), outline=OUT)
+    for x0_, x1_ in ((28, 24), (52, 56)):
+        d.line([x0_, 22, x1_, 34], fill=W_[2]); d.line([x0_ + (1 if x0_ < 40 else -1), 23, x1_ + (1 if x0_ < 40 else -1), 35], fill=W_[3])
+    for x in range(30, 51, 4): d.line([x, 24, x + (x - 40) // 6, 31], fill=W_[2])
+    for k, (sx, sy) in enumerate(((40, 0), (39, 1), (41, 1))): P(im, sx, sy, W_[3])
     for x, y in ((24, 30), (56, 30), (22, 44), (58, 44)): P(im, x, y, W_[3]); P(im, x + 1, y + 1, W_[2])
     d.line([8, 60, 72, 60], fill=(0, 0, 0, 60))
     code = ['.OOO.', 'WWWWW', 'WWWWW', 'WWWWW']
@@ -812,6 +1045,36 @@ def grass_tiles():
     return out
 
 
+PATCH_MAP = {(66, 138, 77): (94, 186, 144), (41, 86, 61): (54, 152, 112), (55, 114, 81): (72, 168, 128), (86, 174, 125): (124, 208, 168)}
+
+
+def grass_patches():
+    """soft shade patches: Rejuvenation's `Grassnone` overlay autotile (tufted edge) re-graded one step darker than
+    Sheridan's grass and baked into its 48 RMXP autotile shapes over each of Sheridan's 4 grass checker tiles, so any
+    PF Rejuv tileset can draw them on the ground layer without an autotile slot.  name gp<i><j>_<shape>"""
+    import rref as RR, render as R
+    a = Image.open(os.path.join(RR.GAMES['rejuvenation'], 'Graphics', 'Autotiles', 'Grassnone.png')).convert('RGBA')
+    px = a.load()
+    for y in range(a.height):
+        for x in range(a.width):
+            p = px[x, y]
+            if p[3] and p[:3] in PATCH_MAP: px[x, y] = PATCH_MAP[p[:3]] + (p[3],)
+    a = a.resize((48, 64), Image.NEAREST)
+    base = [[4832 + 647 - 384, 4832 + 646 - 384], [4832 + 655 - 384, 4832 + 654 - 384]]
+    out = {}
+    for sh in range(48):
+        pat = R.AUTOTILE_PATTERNS[sh >> 3][sh & 7]
+        q = Image.new('RGBA', (16, 16), CLEAR)
+        for i, k in enumerate(pat):
+            k -= 1; sx, sy = (k % 6) * 8, (k // 6) * 8
+            q.paste(a.crop((sx, sy, sx + 8, sy + 8)), ((i % 2) * 8, (i // 2) * 8))
+        for i in range(2):
+            for j in range(2):
+                t = tex(base[i][j]).copy(); t.alpha_composite(q)
+                out['gp%d%d_%02d' % (i, j, sh)] = t
+    return out
+
+
 def clover(v):
     im = Image.new('RGBA', (16, 16), CLEAR); rng = random.Random(40 + v)
     for _ in range(4):
@@ -873,6 +1136,35 @@ def townhouses():
         ('wh_c', 6, 4, [16], 'plank_b', ('timber',), 2, False, dict(ground='timber', bigdoor=True, wins='small', chim=())),
         ('wh_d', 7, 5, [16, 16], 'umber_t', ('stone', 'sand'), 3, True, dict(ground='stone', hoist=True, bigdoor=True, wins='small')),
     ]
+    spec += [  # map builder 8, second batch: more widths and heights so ranks pack shoulder to shoulder
+        ('th_s', 3, 3, [16], 'slate_t', ('plaster', 'ochre'), 1, False, dict(shutters=SHUT[1], boxes=0.6)),
+        ('th_t', 3, 3, [16], 'terra', ('plaster', 'sage'), 1, True, dict(shutters=SHUT[2])),
+        ('th_u', 4, 3, [16], 'crimson', ('plaster', 'white'), 2, False, dict(shutters=SHUT[0], chim=(0,), boxes=0.5)),
+        ('th_v', 5, 3, [16], 'shingle', ('plaster', 'rose'), 2, True, dict(shutters=SHUT[3])),
+        ('th_w', 6, 3, [16], 'terra', ('timber',), 1, False, dict(wins='shlit', ground='stone', chim=(4,), dormers=1)),
+        ('th_x', 7, 4, [16, 16], 'slate_t', ('plaster', 'cream'), 3, False, dict(cross=True, chim=(0, 6), shutters=SHUT[1], boxes=0.4)),
+        ('th_y', 7, 3, [16], 'umber_t', ('stone', 'sand'), 2, False, dict(wins='tall', chim=(1, 5), dormers=2)),
+        ('th_z', 3, 5, [16, 16, 16], 'crimson', ('plaster', 'sky'), 1, True, dict(shutters=SHUT[0], boxes=0.5)),
+        ('th_aa', 4, 5, [16, 16, 16], 'shingle', ('plaster', 'ochre'), 2, False, dict(dormers=1, shutters=SHUT[2], chim=(3,))),
+        ('th_ab', 5, 4, [16, 16, 16], 'terra', ('plaster', 'white'), 2, True, dict(shutters=SHUT[1], boxes=0.5)),
+        ('th_ac', 6, 4, [16, 16, 16], 'shingle_m', ('brick',), 2, False, dict(dormers=2, chim=(0, 5))),
+        ('th_ad', 4, 4, [16, 16], 'teal', ('clap', 'white'), 1, False, dict(chim=(3,), dormers=1)),
+        ('th_ae', 5, 3, [16, 16], 'umber_t', ('plaster', 'lilac'), 3, False, dict(shutters=SHUT[3], chim=(0,), boxes=0.5)),
+        ('th_af', 3, 4, [16, 16], 'slate', ('stone',), 1, True, dict(wins='tall')),
+        ('sp_cafe', 5, 3, [16], 'crimson', ('plaster', 'cream'), 1, False, dict(shop='bread', sign='mug', lanterns=True, chim=(4,))),
+        ('sp_salt', 4, 3, [16], 'shingle', ('clap', 'white'), 0, False, dict(shop='fish', sign='coin')),
+        ('sp_chand', 6, 3, [16, 16], 'umber_t', ('timber',), 1, False, dict(shop='pots', sign='key', ground='stone', wins='shlit', chim=(5,))),
+        ('sp_cost', 4, 4, [16, 16], 'crimson', ('plaster', 'lilac'), 3, True, dict(shop='cloth', sign='mask', boxes=0.5)),
+        ('wh_e', 8, 4, [16, 16], 'shingle', ('brick',), 3, False, dict(ground='stone', bigdoor=True, wins='small', dormers=2, chim=(7,))),
+        ('wh_f', 5, 5, [16, 16], 'terra', ('stone', 'sand'), 2, True, dict(ground='stone', hoist=True, bigdoor=True, wins='small')),
+        # civic fronts (doors linked by the layout)
+        ('cv_pc', 7, 4, [18], 'crimson', ('plaster', 'white'), 3, False, dict(cross=True, plaque='ball', ground='stone', wins='tall', chim=(0, 6), lit=True)),
+        ('cv_mart', 6, 3, [16], 'slate_t', ('plaster', 'sky'), 1, False, dict(shop='pots', board=([(30, 60, 110), (46, 92, 150), (96, 146, 186)], 'MART'), chim=(5,))),
+        ('cv_lantern', 12, 5, [18, 18], 'shingle', ('stone', 'sand'), 6, False, dict(cross=True, dormers=2, wins='tall', ground='stone', lanterns=True, lit=True,
+                       board=([(98, 34, 36), (150, 52, 52), (196, 92, 84)], 'THE LANTERN'), flag=SHUT[2], chim=(0, 11))),
+        ('cv_customs', 10, 4, [18, 18], 'slate_t', ('stone',), 5, False, dict(dormers=3, wins='tall', ground='stone', flag=SHUT[1], chim=(0, 9), board=([(30, 60, 110), (46, 92, 150), (96, 146, 186)], 'HARBOUR'))),
+        ('cv_little', 6, 4, [16], 'teal', ('plaster', 'ochre'), 3, True, dict(lanterns=True, lit=True, board=([(36, 78, 50), (52, 116, 70), (90, 160, 100)], 'LITTLE LANTERN'))),
+    ]
     for i, (n, w, rr, fl, roof, wall, door, gable, ex) in enumerate(spec):
         im, code, dr = townhouse(w, rr, fl, roof=roof, wall=wall, door=door, gable=gable, seed=100 + i * 7, **ex)
         out[n] = (im, code, dr)
@@ -906,8 +1198,20 @@ def city_pieces():
     for v in range(2): out['hb_bollard%d' % v] = (bollard(v), ['W'], None)
     out['hb_rope'] = (rope_coil(), ['W'], None)
     for n, im in grass_tiles().items(): out[n] = (im, ['G'], None)
+    for n, im in grass_patches().items(): out[n] = (im, ['G'], None)
     for v in range(2): out['gr_clover%d' % v] = (clover(v), ['F'], None)
     for v in range(3): out['gr_tuft%d' % v] = (tuft(v), ['F'], None)
+    for kind in ('lip', 'f1', 'f2'):
+        for end in 'wme':
+            out['rw_%s%s0' % (kind, end)] = (retaining(kind + end, 0), ['Q' if kind == 'lip' else 'W'], None)
+    out['rw_lipm1'] = (retaining('lipm', 1), ['Q'], None); out['rw_f1m1'] = (retaining('f1m', 2), ['W'], None)
+    for v in range(4): out['salt%d' % v] = (salt_flat(v), ['G'], None)
+    for v in ('', 'n', 's', 'w', 'e', 'nw', 'ne', 'sw', 'se', 'ns', 'we'):
+        out['brine_' + (v or 'c')] = (brine(v), ['W'], None)
+    im, c = tower(3, 6, 'slate_t', 1, SHUT[1]); out['gt_tower'] = (im, c, None)
+    im, c = gatehouse(12, 8, 6, 'slate_t', 3, SHUT[1]); out['gt_gate6'] = (im, c, None)
+    im, c = gatehouse(10, 8, 4, 'slate_t', 5, SHUT[1]); out['gt_gate4'] = (im, c, None)
+    im, c = playhouse(); out['pf_playhouse2'] = (im, c, (8, 12))
     out.update(townhouses())
     return out
 

@@ -4,97 +4,97 @@
 Name = Ferrow's Landing
 Outdoor = true
 ShowArea = true
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 BattleBack = field
 #-------------------------------
 [101]   # Ferrow's Landing Pokémon Center
 Name = Ferrow's Landing Pokémon Center
 HealingSpot = 100,24,15
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [102]   # Ferrow's Landing Mart
 Name = Ferrow's Landing Mart
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [103]   # Larch Research Station
 Name = Tidewatch Station
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [104]   # Tidewater Inn
 Name = Tidewater Inn
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [105]   # Ferrow Lighthouse 1F
 Name = Ferrow Lighthouse 1F
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [106]   # Ferrow Lighthouse Lamp Room
 Name = Ferrow Lighthouse Lamp Room
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [107]   # Dockmaster's House
 Name = Dockmaster's House
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [108]   # Quarantine Customs Hall
 Name = Quarantine Customs Hall
-MapPosition = 0,14,26
+MapPosition = 0,12,18
 #-------------------------------
 [109]   # The Dovetail - Deck
 Name = The Dovetail
-MapPosition = 0,14,27
+MapPosition = 0,12,19
 #-------------------------------
 [110]   # The Dovetail - Cabin
 Name = The Dovetail
-MapPosition = 0,14,27
+MapPosition = 0,12,19
 #-------------------------------
 [120]   # Briarwick
 Name = Briarwick
 Outdoor = true
 ShowArea = true
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 BattleBack = field
 #-------------------------------
 [121]   # Briarwick Pokémon Center
 Name = Briarwick Pokémon Center
 HealingSpot = 120,47,26
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [122]   # Briarwick Mart
 Name = Briarwick Mart
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [123]   # Weavers' Guildhall
 Name = Weavers' Guildhall
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [124]   # Treetop House
 Name = Treetop House
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [125]   # Cutter's House
 Name = Cutter's House
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [523]   # Hale Farmhouse
 Name = Hale Farmhouse
-MapPosition = 0,14,23
+MapPosition = 0,12,16
 #-------------------------------
 [526]   # Woodward's Hut
 Name = Woodward's Hut
-MapPosition = 0,13,23
+MapPosition = 0,11,14
 #-------------------------------
 [130]   # Loomhouse Gym - Foyer
 Name = Loomhouse Gym - Foyer
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [131]   # Loomhouse Gym - Weaving Hall
 Name = Loomhouse Gym - Weaving Hall
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [132]   # Loomhouse Upper Lofts - Canopy Lofts
 Name = Loomhouse Upper Lofts - Canopy Lofts
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [134]   # Loomhouse Upper Lofts - Granny's Knot
 Name = Loomhouse Upper Lofts - Granny's Knot
@@ -104,36 +104,36 @@ MapPosition = 0,12,22
 Name = Saltmere
 Outdoor = true
 ShowArea = true
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center
 HealingSpot = 140,24,33
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [142]   # Saltmere Mart
 Name = Saltmere Mart
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [143]   # Saltmere Harbour Office
 Name = Saltmere Harbour Office
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [144]   # Saltwife's House
 Name = Saltwife's House
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [145]   # Pageant Hall
 Name = Pageant Hall
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [146]   # Saltmere - Harbour & Breakwater
 Name = Saltmere Harbour
 Outdoor = true
 ShowArea = true
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
 #-------------------------------
@@ -141,206 +141,206 @@ Weather = Rain,10
 Name = Saltmere Old Town
 Outdoor = true
 ShowArea = true
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
 #-------------------------------
 [150]   # Pell Playhouse - Lobby
 Name = Pell Playhouse - Lobby
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [154]   # Pell Playhouse - Auditorium
 Name = Pell Playhouse - Auditorium
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [151]   # Pell Playhouse Backstage - The Old Revolve
 Name = Pell Playhouse Backstage - The Old Revolve
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [152]   # Pell Playhouse Backstage - Fly Loft
 Name = Pell Playhouse Backstage - Fly Loft
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [153]   # Pell Playhouse Backstage - The Trap Room
 Name = Pell Playhouse Backstage - The Trap Room
-MapPosition = 0,10,25
+MapPosition = 0,6,18
 #-------------------------------
 [160]   # Ebbmouth
 Name = Ebbmouth
 Outdoor = true
 ShowArea = true
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 BattleBack = field
 Weather = Rain,30
 #-------------------------------
 [161]   # Ebbmouth Pokémon Center
 Name = Ebbmouth Pokémon Center
 HealingSpot = 160,10,31
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [162]   # Ebbmouth Mart
 Name = Ebbmouth Mart
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [163]   # Anglers' Guild
 Name = Anglers' Guild
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [164]   # Reyes House
 Name = Reyes House
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [165]   # Net-mender's House
 Name = Net-mender's House
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [170]   # Tidelock Gym - Lock Hall
 Name = Tidelock Gym - Lock Hall
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [171]   # Tidelock Gym - Basins (Low Water)
 Name = Tidelock Gym - Basins (Low Water)
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [172]   # Tidelock Gym - Basins (Mid Water)
 Name = Tidelock Gym - Basins (Mid Water)
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [173]   # Tidelock Gym - Basins (High Water)
 Name = Tidelock Gym - Basins (High Water)
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [174]   # Tidelock Gym - Warden's Pool
 Name = Tidelock Gym - Warden's Pool
-MapPosition = 0,8,20
+MapPosition = 0,3,7
 #-------------------------------
 [280]   # Verdance - Market Terraces
 Name = Verdance
 Outdoor = true
 ShowArea = true
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 BattleBack = field
 #-------------------------------
 [281]   # Verdance Pokémon Center
 Name = Verdance Pokémon Center
 HealingSpot = 280,50,66
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 #-------------------------------
 [282]   # Verdance Mart
 Name = Verdance Mart
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 #-------------------------------
 [285]   # Briar Hall - Upper Court
 Name = Briar Hall
 Outdoor = true
 ShowArea = true
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 BattleBack = field
 #-------------------------------
 [286]   # Briar Hall - Great Hall
 Name = Briar Hall
 Outdoor = false
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 #-------------------------------
 [287]   # Briar Hall - Throne Room
 Name = Briar Hall
 Outdoor = false
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 #-------------------------------
 [295]   # Cathedral of the Evergreen
 Name = Cathedral of the Evergreen
 Outdoor = false
-MapPosition = 0,14,12
+MapPosition = 0,9,10
 #-------------------------------
-[520]   # Route 1
-Name = Route 1
+[520]   # The Ferrymen's Mile
+Name = The Ferrymen's Mile
 Outdoor = true
 ShowArea = true
-MapPosition = 0,14,24
+MapPosition = 0,12,17
 BattleBack = field
 #-------------------------------
-[521]   # Route 2
-Name = Route 2
+[521]   # Windfall Row
+Name = Windfall Row
 Outdoor = true
 ShowArea = true
-MapPosition = 0,14,23
+MapPosition = 0,12,16
 BattleBack = field
 #-------------------------------
 [522]   # The Glassed Orchard
 Name = The Glassed Orchard
 ShowArea = true
-MapPosition = 0,15,22
+MapPosition = 0,14,16
 BattleBack = field
 #-------------------------------
 [524]   # Gossamer Wood
 Name = Gossamer Wood
 ShowArea = true
-MapPosition = 0,13,23
+MapPosition = 0,11,15
 BattleBack = forest
 #-------------------------------
 [548]   # Cocoonfall Hollow
 Name = Cocoonfall Hollow
 ShowArea = true
-MapPosition = 0,11,22
+MapPosition = 0,10,14
 BattleBack = forest
 #-------------------------------
 [525]   # Gossamer Deepwood
 Name = Gossamer Deepwood
 ShowArea = true
-MapPosition = 0,13,23
+MapPosition = 0,12,14
 BattleBack = forest
 #-------------------------------
-[540]   # Route 3
-Name = Route 3
+[540]   # Thistledown Lea
+Name = Thistledown Lea
 Outdoor = true
 ShowArea = true
-MapPosition = 0,11,22
+MapPosition = 0,9,15
 BattleBack = field
 #-------------------------------
-[541]   # Route 4
-Name = Route 4
+[541]   # The Grey Saltings
+Name = The Grey Saltings
 Outdoor = true
 ShowArea = true
-MapPosition = 0,11,24
+MapPosition = 0,6,17
 BattleBack = field
 #-------------------------------
-[542]   # Marsh Rest House
-Name = Marsh Rest House
-MapPosition = 0,11,24
+[542]   # The Brinewife's Rest
+Name = The Brinewife's Rest
+MapPosition = 0,6,17
 #-------------------------------
 [544]   # Brinecut Mine 1F
 Name = Brinecut Mine
-MapPosition = 0,11,23
+MapPosition = 0,8,16
 BattleBack = cave1
 #-------------------------------
 [545]   # Brinecut Mine B1F
 Name = Brinecut Mine
-MapPosition = 0,11,23
+MapPosition = 0,8,16
 BattleBack = cave1
 #-------------------------------
 [546]   # Thistledown Manor
 Name = Thistledown Manor
 DarkMap = true
-MapPosition = 0,12,21
+MapPosition = 0,9,14
 #-------------------------------
 [547]   # Thistledown Manor - Attic
 Name = Thistledown Manor - Attic
 DarkMap = true
-MapPosition = 0,12,21
+MapPosition = 0,9,14
 #-------------------------------
-[560]   # Route 5
-Name = Route 5 - Frostflat Causeway
+[560]   # Frostflat Causeway
+Name = Frostflat Causeway
 Outdoor = true
 ShowArea = true
-MapPosition = 0,7,22
+MapPosition = 0,5,17
 BattleBack = snow
 Weather = Snow,10
 #-------------------------------
-[561]   # Route 6
-Name = Route 6 - Gullcry Cliffs
+[561]   # Gullcry Cliffs
+Name = Gullcry Cliffs
 Outdoor = true
 ShowArea = true
-MapPosition = 0,8,21
+MapPosition = 0,3,9
 BattleBack = field
 Weather = Rain,20
 #-------------------------------
@@ -348,7 +348,7 @@ Weather = Rain,20
 Name = The Rimewood
 Outdoor = true
 ShowArea = true
-MapPosition = 0,7,20
+MapPosition = 0,5,10
 BattleBack = snow
 Weather = Snow,30
 #-------------------------------
@@ -356,20 +356,20 @@ Weather = Snow,30
 Name = Rimewood Glade
 Outdoor = true
 ShowArea = true
-MapPosition = 0,8,20
+MapPosition = 0,6,10
 BattleBack = snow
 Weather = Snow,20
 #-------------------------------
 [564]   # Gullcry Caves
 Name = Gullcry Caves
-MapPosition = 0,8,21
+MapPosition = 0,2,8
 BattleBack = cave1
 #-------------------------------
 [570]   # Frostwick
 Name = Frostwick
 Outdoor = true
 ShowArea = true
-MapPosition = 0,7,21
+MapPosition = 0,6,12
 BattleBack = snow
 Weather = Snow,20
 #-------------------------------
@@ -377,26 +377,32 @@ Weather = Snow,20
 Name = Frostwick Pokémon Center
 ShowArea = false
 HealingSpot = 570,13,26
+MapPosition = 0,6,12
 #-------------------------------
 [572]   # The Exchange
 Name = The Exchange
 ShowArea = false
+MapPosition = 0,6,12
 #-------------------------------
 [573]   # The Two Hearths
 Name = The Two Hearths
 ShowArea = false
+MapPosition = 0,6,12
 #-------------------------------
 [574]   # Rime-silk Loft
 Name = Rime-silk Loft
 ShowArea = false
+MapPosition = 0,6,12
 #-------------------------------
 [575]   # Border House
 Name = Border House
 ShowArea = false
+MapPosition = 0,6,12
 #-------------------------------
 [576]   # Halvard's Smokehouse
 Name = Halvard's Smokehouse
 ShowArea = false
+MapPosition = 0,6,12
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

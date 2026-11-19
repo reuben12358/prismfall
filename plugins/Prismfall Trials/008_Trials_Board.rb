@@ -64,6 +64,7 @@ module Prismfall
         if pick(_INTL("Take this request?"), [_INTL("Yes"), _INTL("No")], 1) == 0
           pbMessage(_INTL(t[:accept])) if t[:accept]
           start(id)
+          set_flag(id, :from_board, true) if q[:scenes] && q[:scenes][:offer]
           run_scene_if(id, :accepted)
         end
       end

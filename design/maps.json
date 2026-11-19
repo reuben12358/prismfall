@@ -1240,19 +1240,6 @@
      "link": "WOOD_BRIAR"
     },
     {
-     "type": "edge",
-     "dir": "west",
-     "to": 540,
-     "span": [
-      14,
-      20
-     ],
-     "to_span": [
-      10,
-      16
-     ]
-    },
-    {
      "type": "door",
      "name": "Pok\u00e9mon Center",
      "at": [
@@ -1305,6 +1292,12 @@
       32
      ],
      "link": "BW_HOUSE2"
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 566,
+     "note": "North Gate"
     }
    ],
    "features": [
@@ -1399,7 +1392,8 @@
      "when": "act>=5",
      "change": "half the town cocooned; Loomhouse sealed unless Tamsin redeemed (choice key)"
     }
-   ]
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 121,
@@ -1899,7 +1893,7 @@
    "tileset": "Gyms interior",
    "bgm": "Gym",
    "field": "SILKWOOD",
-   "segment": 1,
+   "segment": 2,
    "puzzle": "GYM_PUZZLES.md#gym-1",
    "connections": [
     {
@@ -2084,7 +2078,8 @@
      "to_span": [
       12,
       18
-     ]
+     ],
+     "note": "North Gate: closed until S108 (Gate Warden event, Chapter 2 close)"
     },
     {
      "type": "edge",
@@ -2097,7 +2092,8 @@
      "to_span": [
       10,
       16
-     ]
+     ],
+     "note": "West Gate: the Frostflat Causeway, chained at the Border Stones until the player reaches Frostwick"
     },
     {
      "type": "door",
@@ -2152,6 +2148,12 @@
       12
      ],
      "link": "SM_PAGEANT"
+    },
+    {
+     "type": "edge",
+     "dir": "east",
+     "to": 528,
+     "note": "East Gate (from Marram Down)"
     }
    ],
    "features": [
@@ -2239,7 +2241,8 @@
      "when": "choice: sided with Hollow in Saltmere",
      "change": "burnt stalls, Hollow graffiti, extra Hollow NPCs"
     }
-   ]
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 141,
@@ -2647,7 +2650,7 @@
    "tileset": "Gyms interior",
    "bgm": "Gym",
    "field": "GRAND_STAGE",
-   "segment": 0,
+   "segment": 2,
    "puzzle": "GYM_PUZZLES.md#gym-2",
    "connections": [
     {
@@ -2762,7 +2765,7 @@
    "tileset": "Gyms interior",
    "bgm": "Gym",
    "field": "GRAND_STAGE",
-   "segment": 0,
+   "segment": 2,
    "puzzle": "GYM_PUZZLES.md#gym-2",
    "connections": [
     {
@@ -2846,7 +2849,7 @@
    "tileset": "Gyms interior",
    "bgm": "Gym",
    "field": "GRAND_STAGE",
-   "segment": 0,
+   "segment": 2,
    "puzzle": "GYM_PUZZLES.md#gym-2",
    "connections": [
     {
@@ -12348,6 +12351,12 @@
       44,
       48
      ]
+    },
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 527,
+     "note": "at the Hale Bell; the quarantine roadblock (Accord guards) moves here from 521 and lifts on S105"
     }
    ],
    "features": [
@@ -12473,7 +12482,7 @@
     "landmark": "The Hale Bell on its post above the sea cliff, and the stile where Larch sees you off.",
     "origin": "The mile the ferrymen walked each dusk to ring the Hale bell once the last boat was in.",
     "wild": "Lillipup, Wooloo, Skwovet, Fletchling, Rookidee, Lechonk, Rolycoly. Night: Hoothoot, Nickit, Tarountula.",
-    "exits": "S: Ferrow's Landing. N: Windfall Row. W (new, at the bell): Lacecliff Walk.",
+    "exits": "S: Ferrow's Landing. N: Windfall Row. W (new, at the Hale Bell): Lacecliff Walk, behind the quarantine roadblock (Accord guards, moved here from Windfall Row; lifts on S105).",
     "fill": [
      "sea-cliff walk on the south-west side with Wingull posts and a view down to the moored Dovetail",
      "Hale's Bramble: six berry terraces and a picking shed (Wenna's cousin sells tarts)",
@@ -12500,7 +12509,8 @@
      12,
      17
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 521,
@@ -12539,7 +12549,7 @@
      ],
      "to": 524,
      "link": "R2_WOOD",
-     "note": "forest path tiles at W edge"
+     "note": "the corded forest road: a \"Forest-road cordon\" event blocks it from this side always, and from 524's side until V105 BRIARWICK_GLASSWOOD >= 1"
     },
     {
      "type": "door",
@@ -12705,7 +12715,7 @@
     "landmark": "The Cider Press yard, and the Accord's quarantine cordon across the lane to the Glassed Orchard.",
     "origin": "Orchard law: a traveller may keep any fruit that has already fallen, and nothing else.",
     "wild": "Smoliv, Fidough, Bounsweet, Nidoran, Shinx, Litleo, Zigzagoon. Night: Oddish, Nymble, Spinarak. Headbutt: Combee, Cherubi, Heracross.",
-    "exits": "S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: Gossamer Wood, behind the Accord barrier until Briarwick (it opens from the wood side as the shortcut home). Door: Hale Farmhouse.",
+    "exits": "S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: the corded forest road to Gossamer Wood (never opens from this side; opens from the wood once V105 >= 1, after the Matriarch). Door: Hale Farmhouse.",
     "fill": [
      "six named orchards in rows (apple, pear, plum, cherry, quince, medlar); every tree a Headbutt tree",
      "the Cider Press yard: press, barrels, a trade NPC, a cellar door",
@@ -12735,7 +12745,8 @@
      12,
      16
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 522,
@@ -12917,7 +12928,8 @@
       47
      ],
      "to": 521,
-     "link": "R2_WOOD"
+     "link": "R2_WOOD",
+     "note": "the corded forest road to Windfall Row: opens from this side when V105 >= 1"
     },
     {
      "type": "warp",
@@ -12936,7 +12948,7 @@
      ],
      "to": 525,
      "link": "WOOD_DEEP",
-     "note": "behind CUT tree (needs 1 badge)"
+     "note": "behind a CUT tree: HM01 from the Cutter after Tamsin's badge (Badge 2)"
     },
     {
      "type": "door",
@@ -12946,6 +12958,12 @@
       24
      ],
      "link": "WOOD_HUT"
+    },
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 540,
+     "note": "from Thistledown Lea"
     }
    ],
    "features": [
@@ -13125,7 +13143,7 @@
     "landmark": "The Weft Bridge, a rope of spun silk as thick as a road, and Woodward's Hut in the middle clearing.",
     "origin": "Kept name: the silk forest that gives Briarwick its trade.",
     "wild": "Sewaddle, Scatterbug, Blipbug, Cutiefly, Petilil, Shroomish, Sizzlipede. Night: Morelull, Phantump, Venonat. Headbutt: Pineco, Heracross, Pinsir.",
-    "exits": "W: Thistledown Lea (new edge). N: Briarwick. SE: Windfall Row through the Accord barrier (opens from this side once you reach Briarwick). E (Cut): Gossamer Deepwood.",
+    "exits": "W: Thistledown Lea (new edge). N: Briarwick. S: the corded forest road to Windfall Row (opens from this side when V105 >= 1, after the Matriarch). E (Cut, after Badge 2): Gossamer Deepwood, and Cocoonfall Hollow beyond it.",
     "fill": [
      "silk-curtain trail west to north with two side loops",
      "canopy walkways on an upper level (rope bridges between giant trunks)",
@@ -13148,7 +13166,8 @@
       14
      ]
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 525,
@@ -13163,7 +13182,7 @@
    "tileset": "Outside",
    "bgm": "Natural Park",
    "field": "SILKWOOD",
-   "segment": 1,
+   "segment": 2,
    "metadata": {
     "outdoor": true,
     "optional": true,
@@ -13392,7 +13411,21 @@
      18
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "east",
+     "to": 520,
+     "note": "the Hale Bell exit"
+    },
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 528
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 528,
@@ -13457,7 +13490,21 @@
      18
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "east",
+     "to": 527
+    },
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 140,
+     "note": "Saltmere East Gate"
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 540,
@@ -13478,28 +13525,22 @@
     {
      "type": "edge",
      "dir": "east",
-     "to": 120,
+     "to": 524,
      "span": [
       10,
       16
      ],
-     "to_span": [
-      14,
-      20
-     ]
+     "note": "the Gossamer's west eaves (replaces the Briarwick edge)"
     },
     {
      "type": "edge",
      "dir": "west",
-     "to": 541,
+     "to": 552,
      "span": [
       8,
       14
      ],
-     "to_span": [
-      2,
-      8
-     ]
+     "note": "replaces the Grey Saltings edge (the built map joins it on its south edge, x 2-9)"
     },
     {
      "type": "warp",
@@ -13510,16 +13551,6 @@
      "to": 546,
      "link": "R3_MANOR",
      "note": "manor gate, optional"
-    },
-    {
-     "type": "warp",
-     "at": [
-      14,
-      3
-     ],
-     "to": 548,
-     "link": "R3_COCOON",
-     "note": "Bleed Veil in a silk-cocooned copse (optional)"
     },
     {
      "type": "warp",
@@ -13694,7 +13725,7 @@
     "landmark": "Thistledown Manor on its hill, and the old stone bridge over the Selvedge.",
     "origin": "The river meadows held by House Thistledown until the house died out. Nobody has mown them since.",
     "wild": "Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. Water: Marill, Buizel, Psyduck.",
-    "exits": "W: the Dyers' Ford. E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. NW copse: Cocoonfall Hollow. SW cave: Brinecut Mine (the shortcut back to the Saltings).",
+    "exits": "W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.",
     "fill": [
      "wildflower meadow in bands of colour, tall grass in four separate fields",
      "the River Selvedge along the south third with two islets (Surf later)",
@@ -13725,7 +13756,8 @@
      9,
      15
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 541,
@@ -13746,14 +13778,10 @@
     {
      "type": "edge",
      "dir": "north",
-     "to": 540,
+     "to": 552,
      "span": [
       2,
       8
-     ],
-     "to_span": [
-      8,
-      14
      ]
     },
     {
@@ -13961,7 +13989,8 @@
      6,
      17
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 542,
@@ -14385,7 +14414,7 @@
    "tileset": "Outside",
    "bgm": "Radio - Lullaby",
    "field": "BLEED",
-   "segment": 1,
+   "segment": 2,
    "metadata": {
     "outdoor": true,
     "optional": true,
@@ -14513,7 +14542,20 @@
      15
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 541
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 540
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 560,
@@ -14547,16 +14589,9 @@
     },
     {
      "type": "edge",
-     "dir": "west",
+     "dir": "north",
      "to": 570,
-     "span": [
-      10,
-      16
-     ],
-     "to_span": [
-      18,
-      24
-     ]
+     "note": "to Frostwick's South Gate: Essentials joins opposite edges, so turn the Causeway's last stretch north (N edge <-> 570 S) or use a warp. The chain at the Border Stones opens from the Frostwick side"
     },
     {
      "type": "warp",
@@ -14904,7 +14939,8 @@
      5,
      17
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 561,
@@ -15211,14 +15247,10 @@
     {
      "type": "edge",
      "dir": "south",
-     "to": 570,
+     "to": 578,
      "span": [
       22,
       28
-     ],
-     "to_span": [
-      20,
-      26
      ]
     },
     {
@@ -15562,7 +15594,8 @@
      5,
      10
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 563,
@@ -15988,7 +16021,21 @@
      12
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 120,
+     "note": "Briarwick North Gate"
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 577
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 568,
@@ -16108,27 +16155,19 @@
     {
      "type": "edge",
      "dir": "east",
-     "to": 560,
+     "to": 577,
      "span": [
       18,
       24
-     ],
-     "to_span": [
-      10,
-      16
      ]
     },
     {
      "type": "edge",
      "dir": "north",
-     "to": 562,
+     "to": 578,
      "span": [
       20,
       26
-     ],
-     "to_span": [
-      22,
-      28
      ]
     },
     {
@@ -16185,6 +16224,36 @@
       10
      ],
      "link": "FW_SMOKE"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 577,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 577,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 577,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 577,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 560,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
     }
    ],
    "features": [
@@ -16356,7 +16425,8 @@
      "when": "Ashkaar-Isenmar war",
      "change": "Isenmar levies drawn from the longhouses; Elowen side stays neutral; refugees at the inn"
     }
-   ]
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 571,
@@ -16813,7 +16883,7 @@
     "road": 3,
     "road_name": "The Hoar Road",
     "role": "main",
-    "landmark": "The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed.",
+    "landmark": "The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).",
     "origin": "The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut.",
     "wild": "Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.",
     "exits": "E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).",
@@ -16849,7 +16919,21 @@
     ]
    },
    "borderland": "The Rimewood",
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 566
+    },
+    {
+     "type": "edge",
+     "dir": "west",
+     "to": 570,
+     "note": "Frostwick East Gate"
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 578,
@@ -16913,7 +16997,21 @@
     ]
    },
    "borderland": "The Rimewood",
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "connections": [
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 570,
+     "note": "Frostwick North Gate"
+    },
+    {
+     "type": "edge",
+     "dir": "north",
+     "to": 562
+    }
+   ],
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 580,

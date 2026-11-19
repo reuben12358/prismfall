@@ -58,8 +58,8 @@ module Prismfall
   FIELD_MOVES_COUNT_BADGES = true
   # Values follow design/WORLD.md section 4 (badge counts).
   FIELD_MOVE_BADGES = {
-    :CUT       => 1,    # HM01, Briarwick Cutter's House
-    :ROCKSMASH => 2,    # TM98, Brinecut miner
+    :CUT       => 2,    # HM01, Briarwick Cutter's House, after Tamsin's badge (SPINE Rev 14)
+    :ROCKSMASH => 2,    # TM98, Brinecut miner (handed over at Badge 1, usable from Badge 2)
     :FLASH     => 4,    # TM70, Rook Calder
     :STRENGTH  => 5,    # HM04, Duneholt excavators
     :SURF      => 6,    # HM03, Mirefen ferrymen

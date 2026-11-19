@@ -606,7 +606,7 @@ events:
       - '\pf[JUNO,panic,,Juno (lab yard)]Juno: \PN! Mum''s Skwovet''s got out again. Biscuit. He''s gone to the Pruett orchard and I''m not— nobody''s supposed
         to go in there.'
       - '\pf[JUNO,neutral,,Juno (lab yard)]Juno: Will you come and look? Just LOOK. From the outside. I''ll show you the way.'
-      - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on the Ferrymen's Mile.")'}
+      - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on Windfall Row.")'}
       - '\pf[JUNO,happy,,Juno (lab yard)]Juno: Up the lane, past the stile! I''ll be right behind you. Probably in front of you.'
       - {script: 'pfm_set(:juno_errand)'}
       else: ['\pf[JUNO,happy]Juno: Up the lane, past the stile! Biscuit won''t wait. Biscuit never waits.']
@@ -1103,8 +1103,8 @@ events:
   name: Rope-skipping Girl 1
   pages:
   - commands:
-    - 'Rope-skipping Girl 1: One for the weaver, two for the stage,'
-    - 'Rope-skipping Girl 2: three for the river that won''t turn its page!'
+    - 'Rope-skipping Girl 1: One for the stage and two for the weave,'
+    - 'Rope-skipping Girl 2: three for the river that won''t take its leave!'
     - 'Rope-skipping Girl 1: Four for the lantern, five for the dune,'
     - 'Rope-skipping Girl 2: six for the fen and its poison-blue moon!'
     - selfswitch: [A, true]
@@ -1122,8 +1122,8 @@ events:
   name: Rope-skipping Girl 2
   pages:
   - commands:
-    - 'Rope-skipping Girl 1: One for the weaver, two for the stage,'
-    - 'Rope-skipping Girl 2: three for the river that won''t turn its page!'
+    - 'Rope-skipping Girl 1: One for the stage and two for the weave,'
+    - 'Rope-skipping Girl 2: three for the river that won''t take its leave!'
     - 'Rope-skipping Girl 1: Four for the lantern, five for the dune,'
     - 'Rope-skipping Girl 2: six for the fen and its poison-blue moon!'
     - selfswitch: [A, true]

@@ -7,25 +7,23 @@ Names that the story team hasn't fixed yet are marked *(prov.)*.
 ---
 ## 1. Region layout: seven kingdoms around Crownhaven
 
+**The region map is `art/previews/world_map.png`** (painted) and the in-game Town Map is
+`graphics/UI/Town Map/prismfall_velmora.png`; the geography in words is **`design/WORLD_MAP.md`**. Both images and the
+town-map squares come from `tools/worldmap/` (Revision 13). Gym numbers below follow Revision 14 (Saltmere 1, Briarwick 2).
 ```
- Schematic, not to scale. Kingdoms touch ONLY through the borderlands in [brackets]; adjacency is authoritative in §10.
-                                            N
- ~~~~~~~~~~~~~~~~~~~~~ FROZEN NORTH SEA (Isenmar waters) ~~~~~~~~~~~~~~~~~~~~~~~~  RIME ISLES (Isenmar): Skaldfast
-  (10)Rimeholt  ~~~~~~~~~~~ sled-road along the north coast ~~~~~~~~~~~~~~~~~~~~~~~  ~~ SHATTERED ICE strait ~~
-     |  \[B2 Mast Glacier: Anchorhold]--(11)Skyreach      (16)Underveil (Nadir, N coast)      Cinder Cape (Ashkaar)
- [A2 N.Rimewood:                          |  ZENITH       [L Hanging Stair: Midstair]               |
-   Snowbriar]          (4)LUMEN CITY ---- [C Brass Dunes: Copperdune] ---- (5)Duneholt       [M Cinderglass Barrens:
-     |       [B Icefall Locks:   |   (15)Cogsworth --[C' Slag Mesa]--+     OSSARIA            Glasswake]
-  ISENMAR      Brassfall]        |   NADIR beneath: (8)Ironreach      |  [D Leach Canyons:      |
- (3)Ebbmouth ---+                |       (6)Mirefen -- Charwell] ------+   (13)Cragholm    ASHKAAR
-     |          [G Wired Wood:   |           \[E Sulfur Reach: Scaldwater]-----------(7)Cindervault
- [A Rimewood:    Verdigris]  [F Rootdeep: Lanternroot / Mothwell]  [I Obsidian Barrows: Vigil] |
-  Frostwick]          |          |                    ((ANTUMBRA)) (12)Lucent (14)Gravenmoor    |
- (1)Saltmere   ELOWEN  [H Looking-Glass Wood: Glassmere] ((gate))      ( CROWNHAVEN )  (18)Wyrmrest
-     |   (9)Verdance              (17)Gloaming --[J Thornwar Marches: Thornwatch]--+   [K Pilgrim Pass:
- (2)Briarwick                                                                          Pilgrim's Rest]
- (0)Ferrow's Landing ~~~~~~~~~~~~~~~~~~~~~~~~~ Hallow Strait (south) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ANTUMBRA (mirror realm) has two stable gates: Mirror Mere (Elowen, border H) and the Grave Glass (Ossaria, border I).
+ Schematic, not to scale (N up). Kingdoms touch ONLY through the borderlands in [brackets]; adjacency is authoritative in §10.
+ ~~~~~~~~~~~~ THE FROZEN NORTH SEA (Isenmar's sea-ice; the Thane's sled-road runs on it) ~~~~~~~~~~~  Rime Isles: Skaldfast
+ (10)Rimeholt  [B2 Anchorhold]  (11)Skyreach  (16)Underveil, Midstair[L]  (15)Cogsworth   (13)Cragholm  ~Shattered Ice~
+   ISENMAR      Frostfang Mts     ZENITH PLATEAU (the City Above)             OSSARIA (the Bone Sands)    Cinder Cape
+ (3)Ebbmouth --[B Brassfall]-- (4)LUMEN CITY --[C Copperdune]-- (5)Duneholt   [I Vigil]  [M Glasswake]   (Ashkaar)
+   [A2 Snowbriar]   [G Verdigris]    NADIR lowlands: (6)Mirefen  [D Charwell]  [E Scaldwater] -- (7)Cindervault
+ [A Rimewood]   (9)Verdance  [H Glassmere] Mirror Mere   (8)Ironreach           ASHKAAR (the Dragonfire Dominion)
+   Frostwick       [F Lanternroot]           ( CROWNHAVEN inside the Crownwall )  [K Pilgrim's Rest]
+ (2)Briarwick (in the Gossamer Wood)  [F Mothwell]                                   (18)Wyrmrest
+ (1)Saltmere ------- (0)Ferrow's Landing      (17)Gloaming --[J Thornwatch]--      [ANTUMBRA, behind the glass:
+ ~~~~~~~~~~~~~~~~~~~~ THE HALLOW STRAIT ~~~~~~~~~~~~~ Shardfall Isles ~~~~~~~~~~~~    (12)Lucent, (14)Gravenmoor]
+ ANTUMBRA (mirror realm) has three stable gates: A Mirror Mere (Elowen, border H), B the Grave Glass at Vigil and
+ C the Obsidian Barrows' east gate (both Ossaria, border I). The map draws it as an inset in the south-east sea.
 ```
 
 | Kingdom | Where | Wild types (~70%) | Visits (gym #) | What changes on return |
@@ -214,6 +212,10 @@ Full Act I spec (Rimewood stretch) is in maps.json (560, 562, 563, 570–576, 56
 ---
 ## 7. Act I map layouts (detail; exact data in maps.json)
 
+> **Revision 13-14 note (cartographer):** the town descriptions below still hold. The *road* maps are superseded by
+> §11 and `design/ROUTES.yaml`: new names, the Saltmere-first order, target sizes 2-4x these, and new legs
+> (527, 528, 552, 566, 577, 578). Where a road paragraph here disagrees with §11, §11 wins.
+
 **Ferrow's Landing (100)**, 40×32, Outside. South coast ferry village, Elowen.
 ```
  TTTTTTTTTTTTTTTTT[N exit to the Ferrymen's Mile]TTTTTTTTT
@@ -296,7 +298,7 @@ Ferrow's Landing west along the chalk coast to the free port. Chapter 1 lives on
 **The Ferrymen's Mile (520)**, Elowen, `:MEADOW`, target **64x110** (was 44x68). 
 *Name:* The mile the ferrymen walked each dusk to ring the Hale bell once the last boat was in.
 - **Landmark:** The Hale Bell on its post above the sea cliff, and the stile where Larch sees you off.
-- **Exits:** S: Ferrow's Landing. N: Windfall Row. W (new, at the bell): Lacecliff Walk.
+- **Exits:** S: Ferrow's Landing. N: Windfall Row. W (new, at the Hale Bell): Lacecliff Walk, behind the quarantine roadblock (Accord guards, moved here from Windfall Row; lifts on S105).
 - **Wild:** Lillipup, Wooloo, Skwovet, Fletchling, Rookidee, Lechonk, Rolycoly. Night: Hoothoot, Nickit, Tarountula.
 - **Fill:** sea-cliff walk on the south-west side with Wingull posts and a view down to the moored Dovetail; Hale's Bramble: six berry terraces and a picking shed (Wenna's cousin sells tarts); the Minding Hedges: a three-turn hedge maze with a hidden Potion (the sign's joke made real); one-way ledge row (the shortcut home); Juno's catching clearing (fenced tutorial grass); sheepfold: herd three stray Wooloo back (the first small Trial-style errand); the old ferry-toll booth with its fare board (lore); Road Stone I: the first of the eighteen milestones (one per Road; take a rubbing of each); 4 trainers: Youngster Pim, Lass Dory, a shepherd, a bell-ringer's apprentice; gorse banks, drystone walls, a duck pond, two farm carts, a scarecrow.
 - **Secret:** The Smuggler's Stair: behind the toll booth a bramble (Cut, after Briarwick) hides steps to the Ferryman's Rest, a sea cave with a rowboat, a Glass Apple and a night-only Nickit den.
@@ -304,7 +306,7 @@ Ferrow's Landing west along the chalk coast to the free port. Chapter 1 lives on
 **Windfall Row (521)**, Elowen, `:MEADOW`, target **120x70** (was 62x48). *Branch road.* 
 *Name:* Orchard law: a traveller may keep any fruit that has already fallen, and nothing else.
 - **Landmark:** The Cider Press yard, and the Accord's quarantine cordon across the lane to the Glassed Orchard.
-- **Exits:** S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: Gossamer Wood, behind the Accord barrier until Briarwick (it opens from the wood side as the shortcut home). Door: Hale Farmhouse.
+- **Exits:** S: the Ferrymen's Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: the corded forest road to Gossamer Wood (never opens from this side; opens from the wood once V105 >= 1, after the Matriarch). Door: Hale Farmhouse.
 - **Wild:** Smoliv, Fidough, Bounsweet, Nidoran, Shinx, Litleo, Zigzagoon. Night: Oddish, Nymble, Spinarak. Headbutt: Combee, Cherubi, Heracross.
 - **Fill:** six named orchards in rows (apple, pear, plum, cherry, quince, medlar); every tree a Headbutt tree; the Cider Press yard: press, barrels, a trade NPC, a cellar door; the Nidoran chase: a wild Nidoran runs between three orchards before it can be battled (Rev 13); beehive wall and a honey errand (Combee); scarecrow field: a Twins double battle; Accord cordon camp: two tents, wardens, the barrier events; windmill on a rise, duck pond, a farm stand selling berries; drystone lanes with carts, ladders against the trees, windfall-fruit items on the ground; 5 trainers: Bug Catcher Wim, Picnicker Ada, the Twins, a cider-maker, an orchard hand.
 - **Secret:** The Thirteenth Row: the plum orchard has twelve rows on the sign and thirteen on the ground. The gap behind the thirteenth leads to a walled garden with a sleeping Applin (event Pokemon) and a Miracle Seed.
@@ -348,7 +350,7 @@ Inland from the port up the River Selvedge to the silk forest: the road Briarwic
 **Thistledown Lea (540)**, Elowen, `:MEADOW`, target **130x64** (was 64x28). 
 *Name:* The river meadows held by House Thistledown until the house died out. Nobody has mown them since.
 - **Landmark:** Thistledown Manor on its hill, and the old stone bridge over the Selvedge.
-- **Exits:** W: the Dyers' Ford. E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. NW copse: Cocoonfall Hollow. SW cave: Brinecut Mine (the shortcut back to the Saltings).
+- **Exits:** W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.
 - **Wild:** Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. Water: Marill, Buizel, Psyduck.
 - **Fill:** wildflower meadow in bands of colour, tall grass in four separate fields; the River Selvedge along the south third with two islets (Surf later); stone bridge with a fisherman and a toll that nobody collects; the manor's ruined wall, gateposts and overgrown topiary garden; Ponyta paddock and a drover who races you along the fence; broken mill and mill-race (Old Rod); mowers' camp with hay-ricks and a cook-fire (heal once); bamboo stand with Pancham; 6 trainers including a double battle; Road Stone II-b.
 - **Secret:** The Ha-ha: a sunken wall runs round the manor hill. Its ditch is a hidden path to the back garden and a cellar door into the manor's crypt (a second way in, with a Greavard digging there).
@@ -356,7 +358,7 @@ Inland from the port up the River Selvedge to the silk forest: the road Briarwic
 **Gossamer Wood (524)**, Elowen, `:SILKWOOD`, target **90x110** (was 50x58). 
 *Name:* Kept name: the silk forest that gives Briarwick its trade.
 - **Landmark:** The Weft Bridge, a rope of spun silk as thick as a road, and Woodward's Hut in the middle clearing.
-- **Exits:** W: Thistledown Lea (new edge). N: Briarwick. SE: Windfall Row through the Accord barrier (opens from this side once you reach Briarwick). E (Cut): Gossamer Deepwood.
+- **Exits:** W: Thistledown Lea (new edge). N: Briarwick. S: the corded forest road to Windfall Row (opens from this side when V105 >= 1, after the Matriarch). E (Cut, after Badge 2): Gossamer Deepwood, and Cocoonfall Hollow beyond it.
 - **Wild:** Sewaddle, Scatterbug, Blipbug, Cutiefly, Petilil, Shroomish, Sizzlipede. Night: Morelull, Phantump, Venonat. Headbutt: Pineco, Heracross, Pinsir.
 - **Fill:** silk-curtain trail west to north with two side loops; canopy walkways on an upper level (rope bridges between giant trunks); cocoon grove, silk-harvest racks and three weavers at work; Woodward's Hut (heal) in the central clearing; fallen giant trunk used as a tunnel; mushroom ring that glows at night; thread-line shortcuts that open from the far side; 6 trainers including Twins Mo & Jo (re-levelled for segment 1); TM Giga Drain grove.
 - **Secret:** The Unpicked Seam: one silk wall opens only at night. Behind it a Heracross and a Pinsir are fighting over a sap tree; whichever you help leaves, and the other can be caught.
@@ -375,7 +377,7 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 
 **Frostwick Pass (577)**, Borderland (Elowen/Isenmar), `:SNOWY_MOUNTAIN`, target **72x96** (new map). 
 *Name:* The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut.
-- **Landmark:** The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed.
+- **Landmark:** The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).
 - **Exits:** E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).
 - **Wild:** Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.
 - **Fill:** the climb through hoar-crusted downs; the wind gap: gust tiles that push you back unless you move between gusts; the empty toll hut with two ledgers, one per kingdom, that disagree; a frozen tarn with an ice-fishing hole (Old Rod); avalanche fences and a snow-buried signpost in two scripts; shepherd's bothy (rest and a hot drink); trappers' drying racks; a row of snowmen built by Frostwick children; one is a Snorunt; 4 trainers: a huscarl, a forester, two sledgers; Road Stone III-b.

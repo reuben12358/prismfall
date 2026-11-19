@@ -118,7 +118,7 @@ em.ids.each do |id|
     movesets.compact.each do |ms|
       ms.each do |m|
         data_errors << "#{id}: unknown move #{m}" if !GameData::Move.exists?(m)
-        next if d[:species] == :SMEARGLE
+        next if d[:species] == :SMEARGLE || (d[:special_moves] || []).include?(m)
         data_errors << "#{id}: #{d[:species]} can't learn #{m}" if GameData::Move.exists?(m) && !legal.call(d[:species], d[:form], m)
       end
     end
@@ -196,6 +196,56 @@ tr.quest_ids.each do |qid|
 end
 tr::RANK_REWARDS.each { |t, h| h.each_value { |rw| (rw[:items] || []).each { |i, _| reward_items << [t, i] }; cmd_errors << "#{t}: rank mon #{rw[:pokemon]}" if rw[:pokemon] && !em.exists?(rw[:pokemon]) } }
 reward_items.each { |who, i| cmd_errors << "#{who}: unknown reward item #{i}" if !GameData::Item.exists?(i) }
+tr::TALK.each do |key, t|
+  cmd_errors << "TALK #{key}: unknown board #{t[:board]}" if t[:board] && !tr::TRIALS[t[:board]]
+  t[:rows].each do |qid, c, sc|
+    q = tr.get(qid)
+    if !q then cmd_errors << "TALK #{key}: unknown quest #{qid}"; next; end
+    cmd_errors << "TALK #{key}: #{qid} has no scene #{sc}" if !(q[:scenes] || {})[sc]
+    begin
+      Prismfall::Conditions.check(c.gsub(":SELF", ":#{qid}"))
+    rescue StandardError => ex
+      cmd_errors << "TALK #{key}: bad condition #{c.inspect} (#{ex.message})"
+    end
+  end
+end
+require "yaml"
+ev_errors = []
+spec = YAML.safe_load(File.read(File.expand_path("../../design/TRIAL_EVENTS.yaml", HARNESS_DIR)))
+n_events = 0
+spec["maps"].each do |mid, m|
+  (m["events"] || []).each do |e|
+    n_events += 1
+    ev_errors << "#{mid} #{e['name']}: unknown TALK key #{e['key']}" if e["key"] && !tr::TALK[e["key"].to_sym]
+    next if !e["condition"]
+    begin
+      Prismfall::Conditions.check(e["condition"])
+    rescue StandardError => ex
+      ev_errors << "#{mid} #{e['name']}: bad condition #{e['condition'].inspect} (#{ex.message})"
+    end
+  end
+end
+used_keys = spec["maps"].values.flat_map { |m| (m["events"] || []).map { |e| e["key"] } }.compact.map(&:to_sym)
+ev_errors << "TALK keys with no map event: #{(tr::TALK.keys - used_keys).inspect}" if !(tr::TALK.keys - used_keys).empty?
+check("design/TRIAL_EVENTS.yaml: #{n_events} events, keys and Condition strings valid", ev_errors.empty?, ev_errors.first(5).join("; "))
+wired_scenes = tr.quest_ids.reject { |id| tr.get(id)[:stub] }.flat_map { |id| (tr.get(id)[:scenes] || {}).keys.map { |s| [id, s] } }
+reachable = tr::TALK.values.flat_map { |t| t[:rows].map { |q, _c, sc| [q, sc] } }
+internal = tr.quest_ids.flat_map do |id|
+  found = []
+  scan = nil
+  scan = lambda do |x|
+    if x.is_a?(Hash)
+      found << [id, x[:run]] if x[:run]
+      x.each_value { |v| scan.call(v) }
+    elsif x.is_a?(Array)
+      x.each { |v| scan.call(v) }
+    end
+  end
+  (tr.get(id)[:scenes] || {}).each_value { |l| scan.call(l) }
+  found
+end
+orphans = wired_scenes - reachable - internal
+check("every wired scene is reachable from a TALK row or another scene", orphans.empty?, orphans.first(6).inspect)
 per_trial = tr::TRIALS.keys.map { |t| [t, tr.quests_for(t).length] }.to_h
 check("quest scenes, conditions, steps, rewards, trainers valid (#{tr.quest_ids.length} quests)", cmd_errors.empty?, cmd_errors.first(8).join("; "))
 check("every Trial has at least 8 quests", per_trial.values.all? { |n| n >= 8 }, per_trial.inspect)
@@ -228,9 +278,9 @@ check("quest done", tr.state(:AS_LITTLE_CRUCIBLE) == :done, tr.state(:AS_LITTLE_
 check("Cinderpaw (Litleo) joined at Lv 15 with Moxie", litleo && litleo.level == 15 && litleo.ability_id == :MOXIE,
       litleo ? "#{litleo.name} Lv#{litleo.level} #{litleo.ability_id}" : "no Litleo")
 check("event mon status :joined", em.status(:AS_LITLEO) == :joined, em.status(:AS_LITLEO))
-check("reward money +1200", $player.money - money0 == 1200, $player.money - money0)
+check("reward money +1200 (plus the three trainers' prize money)", $player.money - money0 >= 1200, "+#{$player.money - money0}")
 check("reward Quick Claw", $bag.has?(:QUICKCLAW))
-check("Ashkaar points 3 (rank Kindling)", tr.points(:ASHKAAR) == 3 && tr.rank(:ASHKAAR) == 2, "#{tr.points(:ASHKAAR)} pts, rank #{tr.rank_name(:ASHKAAR)}")
+check("Ashkaar points 3 (rank 2, Ember)", tr.points(:ASHKAAR) == 3 && tr.rank(:ASHKAAR) == 2, "#{tr.points(:ASHKAAR)} pts, rank #{tr.rank_name(:ASHKAAR)}")
 check("recruited flag", tr.flag(:AS_LITTLE_CRUCIBLE, :recruited) == true)
 check("quest log lists it under Done", tr.log_rows(1).any? { |r| r[0] == "The Little Crucible" })
 
@@ -254,10 +304,11 @@ if first != :caught
   # The headless AI never throws balls: exercise the capture branch by forcing the outcome.
   orig = em.method(:battle)
   em.define_singleton_method(:battle) { |id| set_status(id, :caught); $player.party << build(id); :caught }
-  scene(:EL_TART_THIEF, :loft, ["Split the evidence?"])
+  scene(:EL_TART_THIEF, :loft)   # second visit: no repeat of the Kestrel choice (no double bond)
   em.define_singleton_method(:battle, orig)
 end
 check("capture -> step :return", tr.at?(:EL_TART_THIEF, :return), tr.step(:EL_TART_THIEF))
+check("retrying the loft didn't apply the Kestrel bond twice", Prismfall::Bonds.get(:KESTREL) == k0 + 1, Prismfall::Bonds.get(:KESTREL))
 nickit = $player.party.find { |p| p.isSpecies?(:NICKIT) }
 check("Nickit has Stakeout and Thief", nickit && nickit.ability_id == :STAKEOUT && nickit.hasMove?(:THIEF))
 scene(:EL_TART_THIEF, :return)
@@ -278,7 +329,29 @@ check("a deed moves First Lesson to :return", tr.at?(:EL_FIRST_LESSON, :return) 
 r0 = Prismfall::Resonance.value
 scene(:EL_FIRST_LESSON, :return, ["Say nothing."])
 check("silence: done, Harmony +1", tr.outcome(:EL_FIRST_LESSON) == :silent && Prismfall::Resonance.value == r0 + 1)
-check("Elowen rank Sapling at 5 points (2 + 1 + 2)", tr.points(:ELOWEN) == 5 && tr.rank_name(:ELOWEN) == "Sapling", tr.points(:ELOWEN))
+check("Elowen points 5 (2 + 1 + 2), rank Sapling", tr.points(:ELOWEN) == 5 && tr.rank_name(:ELOWEN) == "Sapling", tr.points(:ELOWEN))
+# The Last Plank, driven only through the map-event router (pf_trial_talk)
+talk = lambda { |key, answers = []| Prismfall::Trials.answers = answers.dup; TRANSCRIPT << "-- talk #{key}"; pf_trial_talk(key) }
+talk.call(:BERTH_TIMBURR, ["Fetch the planks."])
+3.times { talk.call(:BOATYARD_PLANK) }
+check("Last Plank: three planks -> :finish", tr.at?(:EL_LAST_PLANK, :finish), tr.step(:EL_LAST_PLANK))
+talk.call(:BERTH_TIMBURR)
+plank = ($player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }).find { |p| p.isSpecies?(:TIMBURR) }
+check("Last Plank done via pf_trial_talk; Timburr 'Plank' has Mach Punch (Fighting before Gym 1)",
+      tr.done?(:EL_LAST_PLANK) && plank && plank.hasMove?(:MACHPUNCH), plank ? plank.name : "none")
+talk.call(:BERTH_TIMBURR)
+check("after completion the berth event falls back to its idle line", TRANSCRIPT.last.include?("hammers a plank"), TRANSCRIPT.last)
+# A board-accepted quest: Master of Nothing taken from the Ferrow's lantern rope, then the giver's briefing
+$game_switches[101] = true
+lbl = tr.board_label(:EL_MASTER_OF_NOTHING)
+talk.call(:WAYSHRINE_ROPE, [lbl, "Yes", "Leave"])
+check("board: quest accepted from the lantern rope", tr.active?(:EL_MASTER_OF_NOTHING) && tr.flag(:EL_MASTER_OF_NOTHING, :from_board))
+talk.call(:DOCKMASTER, ["I'll look."])
+check("giver still briefs a board-accepted quest once", TRANSCRIPT.any? { |l| l.include?("crackle in the rigging") } && !tr.flag(:EL_MASTER_OF_NOTHING, :from_board))
+talk.call(:DOVETAIL_NEST)
+talk.call(:DOCKMASTER)
+check("Master of Nothing done; Wattrel 'Mast' received", tr.done?(:EL_MASTER_OF_NOTHING) &&
+      ($player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }).any? { |p| p.isSpecies?(:WATTREL) && p.name == "Mast" })
 scene(:EL_PAINT_LOFT, :offer) # done quest: scene still runs, but no second gift via :complete
 check("a done quest can't complete twice", tr.record(:EL_PAINT_LOFT)[:times] >= 1)
 

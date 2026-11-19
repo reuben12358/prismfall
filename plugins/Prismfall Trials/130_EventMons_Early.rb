@@ -45,6 +45,15 @@ em.register(:EL_WATTREL, {
   :why => "Electric/Flying in Chapter 1; Electric is otherwise two families until Ebbmouth"
 })
 
+em.register(:EL_TIMBURR, {
+  :species => :TIMBURR, :level => 8, :ability => :GUTS, :nature => :ADAMANT, :ivs => 20, :nickname => "Plank",
+  :moves => [:LOWKICK, :ROCKTHROW, :LEER, :MACHPUNCH], :obtain_text => "the empty berth, Ferrow's Landing",
+  :kind => :gift,
+  :map => 100, :where => "The empty ferry berth, Ferrow's Landing", :chapter => 1,
+  :quest => :EL_LAST_PLANK, :trigger => "Help the ferry carpenters' Timburr finish the berth it keeps mending",
+  :why => "A Fighting type before the Normal Gym 1 (SPINE Rev 14), with Mach Punch (egg move) and Guts"
+})
+
 #--- Chapter 2: Lacecliff Walk (527), Marram Down (528), Saltmere (140/145/146/147)
 em.register(:EL_TIDE_CRABRAWLER, {
   :species => :CRABRAWLER, :level => 12, :ability => :IRONFIST, :nature => :ADAMANT, :ivs => 20,

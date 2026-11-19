@@ -10,8 +10,8 @@
 module PrismfallDebug
   # Fallback copy of the SPINE gym table: [type, warden name, trainer type, field, cap]
   GYMS_FALLBACK = [
-    [:BUG,      "Tamsin",    :LEADER_TAMSIN,    :SILKWOOD,         15],
-    [:NORMAL,   "Dorian",    :LEADER_DORIAN,    :GRAND_STAGE,      19],
+    [:NORMAL,   "Dorian",    :LEADER_DORIAN,    :GRAND_STAGE,      15],   # SPINE Rev 14: Saltmere first
+    [:BUG,      "Tamsin",    :LEADER_TAMSIN,    :SILKWOOD,         19],
     [:WATER,    "Marisol",   :LEADER_MARISOL,   :WATER_SURFACE,    23],
     [:ELECTRIC, "Rook",      :LEADER_ROOK,      :NEON_GRID,        27],
     [:GROUND,   "Sahar",     :LEADER_SAHAR,     :DESERT,           31],

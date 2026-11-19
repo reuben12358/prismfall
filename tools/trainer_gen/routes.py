@@ -15,23 +15,24 @@ def ROUTES(P):
     # Which map sits on which stretch is PROVISIONAL until design/SWAP_GYM1_GYM2.md lands: edit one row here.
     # Map names change (design/PLACE_NAMES.md); the ids don't, so everything is keyed by map id.
     #   map id: (delta, cap, {OLD_SPECIES: (NEW_SPECIES, NEW_ABILITY or None)})
+    # Final per design/SWAP_GYM1_GYM2.md section 0 ("segment" = badges held when the map is first reachable).
     PLAN = {
-        # Gym 1 stretch, cap 15: route trainers lv 4-12, gym trainers 11-13 (BALANCE 2)
-        520: (0, 15, {}),                                     # coastal heath out of Ferrow's Landing, 4-6
-        541: (-6, 15, {}),                                    # the coast road to Saltmere (beach), 8-10
-        544: (-5, 15, {}), 545: (-5, 15, {}),                 # Brinecut Mine (optional, Rock Smash later), 9-12
-        151: (-5, 15, {"HERDIER": ("LILLIPUP", "VITALSPIRIT")}), 152: (-5, 15, {"HERDIER": ("LILLIPUP", "VITALSPIRIT")}),
-        153: (-5, 15, {}),                                    # Pell Playhouse = Gym 1 actors, 11-13
+        # Segment 0, cap 15. Ch1: 520 Ferrymen's Mile, 521 Windfall Row (keeps its Ch1 trainers at 6-8).
+        # Ch2: 527 Lacecliff Walk / 528 Marram Down (the Strand Road, 8-12), 154 Pell Playhouse auditorium actors (10-13).
+        520: (0, 15, {}), 521: (0, 15, {}), 527: (0, 15, {}), 528: (0, 15, {}),
+        154: (-5, 15, {}),                                    # Florian, Rosalind, Ambrose (written as map 151 before)
+        # Segment 1, cap 19 (Ch2 after Gym 1, and the Ch3 Weavers' Road to Briarwick)
         145: (-1, 19, {}),                                    # Pageant Hall grunts, after Gym 1, 15-16
-        # Gym 2 stretch, cap 19: route trainers 15-17, gym trainers 15-17
-        540: (3, 19, {}),                                     # river meadows inland from Saltmere, 15-17
+        541: (0, 19, {}), 544: (0, 19, {}), 545: (0, 19, {}), # the Grey Saltings, Brinecut Mine (14-17)
+        552: (0, 19, {}),                                     # the Dyers' Ford (15-17)
+        540: (3, 19, {}),                                     # Thistledown Lea, 15-17
         546: (2, 19, {}),                                     # Thistledown Manor (optional), 16-17
-        521: (9, 19, {"SHINX": ("LUXIO", None)}),             # orchard country into the forest, 15-16
         524: (8, 19, {"BLIPBUG": ("DOTTLER", None), "SEEDOT": ("NUZLEAF", None)}),   # Gossamer Wood, 16-18
-        131: (4, 19, {"SPEWPA": ("VIVILLON", "SHIELDDUST"), "TAROUNTULA": ("SPIDOPS", None)}),
-        132: (4, 19, {"TAROUNTULA": ("SPIDOPS", None)}),       # Loomhouse = Gym 2 trainers, 15-17
-        # Gym 3 stretch, cap 23
-        525: (8, 23, {"LEDYBA": ("LEDIAN", None)}),            # Gossamer Deepwood, after Gym 2, 19-20
+        131: (4, 19, {"SPEWPA": ("VIVILLON", "SHIELDDUST"), "TAROUNTULA": ("SPIDOPS", None)}),   # Weaving Hall, 15-17
+        # Segment 2, cap 23 (after Badge 2)
+        132: (8, 23, {"TAROUNTULA": ("SPIDOPS", None)}),       # Loomhouse Upper Lofts (optional), 20-21
+        152: (3, 23, {}), 153: (3, 23, {}),                   # Playhouse Backstage D9 (optional), 20-21
+        525: (8, 23, {"LEDYBA": ("LEDIAN", None)}),            # Gossamer Deepwood, 19-20
     }
     DEFAULT_CAP = 23                                          # 560-564, 170-173: unchanged (Gym 3 stretch)
     def t(note, tt, nm, lose, mons, cap=None):
@@ -65,8 +66,8 @@ def ROUTES(P):
     # holds a Telluric Seed (+1 Def, +1 Sp. Def, -1 Speed) so the player has seen a seed before Tamsin's Swadloon uses one.
     t("Map 131 Loomhouse Gym - Weaving Hall", "BUGCATCHER", "Milo", "Warden Tamsin's going to tie you in knots!", [m("SPEWPA", 11, "SHEDSKIN", "BOLD"), m("KRICKETUNE", 12, "SWARM", "ADAMANT")])
     t("Map 131 Loomhouse Gym - Weaving Hall", "LASS", "Fern", "Ah, you slipped right through my threads.", [m("CUTIEFLY", 11, "SHIELDDUST", "TIMID"), m("SEWADDLE", 12, "SWARM", "ADAMANT")])
-    t("Map 132 Loomhouse Gym - Canopy Lofts", "BUGCATCHER", "Hollis", "My spiders never lose in the lofts... usually.", [m("TAROUNTULA", 12, "INSOMNIA", "ADAMANT"), m("SPINARAK", 12, "SWARM", "ADAMANT")])
-    t("Map 132 Loomhouse Gym - Canopy Lofts", "POKEMONRANGER_M", "Ash", "You read the forest well. The Warden's above.", [m("DOTTLER", 12, "SWARM", "MODEST"), m("BEAUTIFLY", 13, "SWARM", "MODEST", "GUST,BUGBITE,ABSORB,STRINGSHOT", item="TELLURICSEED")])
+    t("Map 132 Loomhouse - Upper Lofts (after Badge 2)", "BUGCATCHER", "Hollis", "My spiders never lose in the lofts... usually.", [m("TAROUNTULA", 12, "INSOMNIA", "ADAMANT"), m("SPINARAK", 12, "SWARM", "ADAMANT")])
+    t("Map 132 Loomhouse - Upper Lofts (after Badge 2)", "POKEMONRANGER_M", "Ash", "You read the forest well. The Warden's above.", [m("DOTTLER", 12, "SWARM", "MODEST"), m("BEAUTIFLY", 13, "SWARM", "MODEST", "GUST,BUGBITE,ABSORB,STRINGSHOT", item="TELLURICSEED")])
     # Map 525 Gossamer Deepwood (lv 11-12) - SILKWOOD: Compound Eyes (x1.1 accuracy here), Swarm; Yanma glides (Bug-type Flying x1.2)
     t("Map 525 Gossamer Deepwood", "BUGCATCHER", "Linden", "The deepwood bugs are tougher than mine...", [m("NINCADA", 11, "COMPOUNDEYES", "ADAMANT"), m("LEDYBA", 11, "SWARM", "JOLLY"), m("RELLOR", 12, "COMPOUNDEYES", "IMPISH")])
     t("Map 525 Gossamer Deepwood", "POKEMONRANGER_F", "Sorrel", "Mind the glass trees. They're spreading.", [m("DEERLING", 11, "SAPSIPPER", "JOLLY"), m("SKIDDO", 12, "SAPSIPPER", "ADAMANT")])
@@ -77,17 +78,19 @@ def ROUTES(P):
     t("Map 540 Thistledown Lea", "YOUNGSTER", "Corin", "My team's the coolest! ...Was.", [m("SENTRET", 12, "RUNAWAY", "JOLLY"), m("BIDOOF", 13, "SIMPLE", "ADAMANT"), m("DODUO", 14, "EARLYBIRD", "JOLLY")])
     # Map 541 The Grey Saltings (beach, lv 14-16) - BEACH: Mud-Slap / Mud Shot x2 (Bunnelby, Nacli), Water x1.2, Sand Rush works in the sand
     t("Map 541 The Grey Saltings", "CAMPER", "Ned", "Sand in my tent AND I lost. Great day.", [m("BUNNELBY", 14, "CHEEKPOUCH", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH")])
-    t("Map 541 The Grey Saltings", "HIKER", "Dunstan", "Ho! Solid as Brinecut stone, you are.", [m("DWEBBLE", 15, "STURDY", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH", "ROCKTHROW,MUDSHOT,SMACKDOWN,HARDEN"), m("CRABRAWLER", 16, "HYPERCUTTER", "ADAMANT")])
+    # Hiker Dunstan walks Lacecliff Walk now (script map 527, Gym 1 stretch). Rolycoly and Nacli resist the Normal gym
+    # ahead; on the Beach Mud-Slap is x2. A gentle cliff-path fight.
+    t("Map 527 Lacecliff Walk", "HIKER", "Dunstan", "Today's a sun day. Lucky you.", [m("ROLYCOLY", 9, "STEAMENGINE", "ADAMANT"), m("NACLI", 10, "PURIFYINGSALT", "IMPISH")])
     t("Map 541 The Grey Saltings", "SAILOR", "Morrow", "Blow me down! The Dovetail crew'll hear of this.", [m("FINNEON", 15, "SWIFTSWIM", "JOLLY"), m("REMORAID", 15, "HUSTLE", "MODEST"), m("CRABRAWLER", 15, "IRONFIST", "ADAMANT")])
     t("Map 541 The Grey Saltings", "TUBER_F", "Pip", "Waaah! My floaty popped!", [m("SURSKIT", 14, "SWIFTSWIM", "TIMID"), m("MINCCINO", 15, "CUTECHARM", "JOLLY")])
     # Map 151-153 Pell Playhouse (Gym 2 actors, lv 15-18) - GRAND_STAGE: sound (Echoed Voice, Disarming Voice), showpieces
     # (Fake Out) and dances (Teeter Dance) raise the applause, so the player sees the stages climb before Dorian
-    t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
-    t("Map 151 Pell Playhouse - Revolving Stage", "BEAUTY", "Rosalind", "The spotlight suits you better, darling.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,ROUND,SING,TAILWHIP"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
-    t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Ambrose", "An encore? No? Fair.", [m("AIPOM", 16, "SKILLLINK", "JOLLY"), m("HERDIER", 17, "INTIMIDATE", "ADAMANT")])
-    t("Map 152 Pell Playhouse - Fly Loft", "GENTLEMAN", "Reginald", "Splendid form. Dorian will be delighted.", [m("HERDIER", 17, "INTIMIDATE", "ADAMANT"), m("FURFROU", 17, "FURCOAT", "JOLLY")])
-    t("Map 153 Pell Playhouse - Dressing Rooms", "JUGGLER", "Pierrot", "...(Pierrot mimes a dramatic faint.)", [m("AIPOM", 17, "PICKUP", "JOLLY"), m("SPINDA", 17, "TANGLEDFEET", "ADAMANT")])
-    t("Map 153 Pell Playhouse - Dressing Rooms", "LADY", "Odette", "My costume is ruined. Worth it.", [m("BUNEARY", 17, "LIMBER", "JOLLY"), m("FURFROU", 18, "FURCOAT", "JOLLY")])
+    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
+    t("Map 154 Pell Playhouse - Auditorium", "BEAUTY", "Rosalind", "The spotlight suits you better, darling.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,ROUND,SING,TAILWHIP"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
+    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Ambrose", "An encore? No? Fair.", [m("AIPOM", 16, "SKILLLINK", "JOLLY"), m("HERDIER", 17, "INTIMIDATE", "ADAMANT")])
+    t("Map 152 Pell Playhouse - Backstage (D9, after Badge 2)", "GENTLEMAN", "Reginald", "Splendid form. Dorian will be delighted.", [m("HERDIER", 17, "INTIMIDATE", "ADAMANT"), m("FURFROU", 17, "FURCOAT", "JOLLY")])
+    t("Map 153 Pell Playhouse - Backstage (D9, after Badge 2)", "JUGGLER", "Pierrot", "...(Pierrot mimes a dramatic faint.)", [m("AIPOM", 17, "PICKUP", "JOLLY"), m("SPINDA", 17, "TANGLEDFEET", "ADAMANT")])
+    t("Map 153 Pell Playhouse - Backstage (D9, after Badge 2)", "LADY", "Odette", "My costume is ruined. Worth it.", [m("BUNEARY", 17, "LIMBER", "JOLLY"), m("FURFROU", 18, "FURCOAT", "JOLLY")])
     # Map 145 Pageant Hall: tag battle vs both grunts (version 0 = this encounter; later grunt battles use 1, 2, ...)
     t("Map 145 Pageant Hall (tag battle with HOLLOW_GRUNT_F)", "HOLLOW_GRUNT_M", "Grunt", "Let the land grieve... ugh, not today.", [m("NICKIT", 16, "UNBURDEN", "JOLLY"), m("FOONGUS", 17, "EFFECTSPORE", "RELAXED")], cap=19)
     t("Map 145 Pageant Hall (tag battle with HOLLOW_GRUNT_M)", "HOLLOW_GRUNT_F", "Grunt", "The Plates are poison. You'll see.", [m("PHANTUMP", 16, "NATURALCURE", "ADAMANT"), m("MORELULL", 17, "EFFECTSPORE", "MODEST")], cap=19)
@@ -138,4 +141,22 @@ def ROUTES(P):
     t("Map 562 The Rimewood", "CAMPER", "Rook", "...Is that what the aurora's for?", [m("CUBCHOO", 18, "SNOWCLOAK", "ADAMANT"), m("SNEASEL", 19, "INNERFOCUS", "JOLLY")])
     t("Map 562 The Rimewood", "TWINS", "Ana & Ida", 'Two of us lost! Two kingdoms of losing!', [m("MORELULL", 19, "EFFECTSPORE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
     t("Map 563 Rimewood Glade", "POKEMONRANGER_M", "Sigurd", '...So you cut your way in. Fair.', [m("STANTLER", 19, "INTIMIDATE", "ADAMANT"), m("CRYOGONAL", 20, "LEVITATE", "CALM", "ICESHARD,RAPIDSPIN,ICYWIND,CONFUSERAY")])  # FROZEN_LAKE: Rapid Spin skates (x1.5), Icy Wind -2 Speed
+    # --- Trainers named in the SPINE Rev 14 scripts (story/20_SCRIPT_CH0-2.md, story/21_SCRIPT_CH3.md) --------------
+    # Map 527 Lacecliff Walk (Strand Road, BEACH, Gym 1 stretch 8-12). Beach: Mud-Slap / Mud Shot x2, Water x1.2.
+    t("Map 527 Lacecliff Walk", "FISHERMAN", "Bryn", "The fish win again.", [m("MAGIKARP", 8, "SWIFTSWIM", "HARDY"), m("FINNEON", 9, "SWIFTSWIM", "TIMID"), m("WINGULL", 9, "KEENEYE", "MODEST")])
+    t("Map 527 Lacecliff Walk", "PICNICKER", "Moll", "She writes every week. She's never once walked over.", [m("BUNNELBY", 9, "PICKUP", "ADAMANT"), m("SANDYGAST", 10, "WATERCOMPACTION", "MODEST")])
+    # Map 528 Marram Down (BEACH). Sea breeze: Gust kicks sand into everyone else's eyes (accuracy -1).
+    t("Map 528 Marram Down", "BIRDKEEPER", "Lark", "My kite won. You beat the kite-flier, which is different.", [m("PIKIPEK", 10, "KEENEYE", "JOLLY"), m("ROOKIDEE", 11, "KEENEYE", "JOLLY")])
+    t("Map 528 Marram Down", "POKEMONRANGER_F", "Sedge", "I'm going to sit down now. That's allowed in a free port.", [m("DWEBBLE", 11, "STURDY", "ADAMANT"), m("NACLI", 11, "PURIFYINGSALT", "IMPISH"), m("WOOLOO", 12, "FLUFFY", "IMPISH")])
+    # Map 528 players' camp: the costume double vs two actors in hound masks (a double battle, one trainer).
+    t("Map 528 Marram Down - players' camp (double battle)", "JUGGLER", "Hounds", "Notes: we were bitten. Again.", [m("LILLIPUP", 11, "VITALSPIRIT", "JOLLY"), m("YAMPER", 11, "BALLFETCH", "JOLLY")])
+    # Map 544/545 Brinecut Mine (CAVE, Gym 2 stretch). Rock x1.5; Rock Head is safe from a cave-in.
+    t("Map 545 Brinecut Mine B1F", "HIKER", "Holt", "It IS a shortcut? To WHERE?", [m("ROGGENROLA", 16, "STURDY", "ADAMANT"), m("NACLI", 16, "PURIFYINGSALT", "IMPISH"), m("WOOBAT", 17, "UNAWARE", "TIMID")])
+    t("Map 544 Brinecut Mine 1F", "BLACKBELT", "Saul", "I need a drink. Not salt.", [m("MACHOP", 16, "GUTS", "ADAMANT"), m("CRABRAWLER", 17, "IRONFIST", "ADAMANT")])
+    # Map 552 The Dyers' Ford (MEADOW, 15-17). Morwenna works the madder vat: her Litleo's Fire moves set the dry Meadow
+    # ablaze (two of them) - a field play for a cap-19 route. Ash's woad-blue Oddish and Marill.
+    t("Map 552 The Dyers' Ford", "PAINTER", "Morwenna", "Look at my hands. They'll be red till Fallmorn.", [m("LEDYBA", 15, "SWARM", "JOLLY"), m("LITLEO", 16, "RIVALRY", "MODEST")])
+    t("Map 552 The Dyers' Ford", "PAINTER", "Ash", "Bill her. Somebody bill her.", [m("ODDISH", 15, "CHLOROPHYLL", "MODEST"), m("MARILL", 16, "HUGEPOWER", "ADAMANT")])
+    # Map 540 Thistledown Lea (MEADOW): Ada's cousin; Budew and Oddish like Ada's, a little grown up.
+    t("Map 540 Thistledown Lea", "PICNICKER", "Edie", "...I'll write to Ada. I'll lie.", [m("ODDISH", 13, "RUNAWAY", "MODEST"), m("BUDEW", 13, "LEAFGUARD", "MODEST"), m("SMOLIV", 14, "EARLYBIRD", "MODEST")])
     return R

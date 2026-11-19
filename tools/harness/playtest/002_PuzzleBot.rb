@@ -51,7 +51,7 @@ module PlayBot
   ]
   # The optional Upper Lofts (after Tamsin's badge): spools + the brass Meridian wire, then Granny's Knot.
   LOFTS_PLAN = [
-    [:goto, 131, 12, 2],
+    [:goto, 131, 12, 2], [:goto, 131, 12, 1],   # the stairs behind Tamsin (a touch event on the top step)
     [:shot, 132, "lf_06_lofts_start"],
     [:talk, 132, 1, 21],                  # alpha cord
     [:ride, 132, 3, 22, 6],               # spool s1 -> west deck

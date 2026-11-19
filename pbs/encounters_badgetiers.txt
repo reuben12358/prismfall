@@ -238,19 +238,19 @@ GoodRod
 [578,103] # Rimewood Path - after Badge 3
 Land
     3,SNORUNT,21,24
-    2,ABSOL,21,24
+    2,SMOOCHUM,21,24
 [578,104] # Rimewood Path - after Badge 4
 Land
     2,CRYOGONAL,25,28
-    2,FRIGIBAX,25,28
+    2,STANTLER,25,28
 [562,103] # The Rimewood - after Badge 3
 Land
     3,SNEASEL,21,24
     2,ABSOL,21,24
 [562,104] # The Rimewood - after Badge 4
 Land
-    2,FRIGIBAX,25,28
-    2,CRYOGONAL,25,28
+    3,CRYOGONAL,25,28
+    2,MILCERY,25,28
 [563,103] # Rimewood Glade - after Badge 3
 Land
     3,MILCERY,21,24
@@ -263,8 +263,8 @@ Land
     3,SNEASEL,21,24
 [560,104] # Frostflat Causeway - after Badge 4
 Land
-    2,FRIGIBAX,25,28
     3,BOUFFALANT,25,28
+    2,ABSOL,25,28
 [568,103] # The Rehearsal (Bleed) - after Badge 3
 Land
     3,IMPIDIMP,21,24

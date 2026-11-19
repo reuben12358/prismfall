@@ -177,8 +177,8 @@ exceptions:
     - {trainer: MERIDIAN_QUENT, versions: [1, 101, 201], field: FACTORY, why: "Ch16: casting-floor tag battle; his Bronzong's Explosion makes it a Scrapyard"}
     - {trainer: MERIDIAN_KROLL, versions: [1, 101, 201], field: CAVE, why: "Ch17: the Sun Court in drowned Aurelia"}
     - {trainer: MERIDIAN_QUENT, versions: [2, 102, 202], field: CAVE, why: "Ch17 alternative: Quent holds the Sun Court"}
-    - {trainer: OCTAVE_VESPER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch3: backstage double with Chorister Carol"}
-    - {trainer: OCTAVE_SINGER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch3: Carol, Vesper's partner in the Saltmere double"}
+    - {trainer: OCTAVE_VESPER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch2: backstage double with Chorister Carol, after Gym 1"}
+    - {trainer: OCTAVE_SINGER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch2: Carol, Vesper's partner in the Saltmere double, after Gym 1"}
     - {trainer: OCTAVE_VESPER, versions: [1, 101, 201], field: MINDSCAPE, why: "Ch13: Lucent Athenaeum cloister double"}
     - {trainer: OCTAVE_SINGER, versions: [1, 101, 201], field: WATER_SURFACE, why: "Ch20 Eevee Octave gauntlet 1/8: the Imprint this singer's Eeveelution was raised beside"}
     - {trainer: OCTAVE_SINGER, versions: [2, 102, 202], field: NEON_GRID, why: "Ch20 Eevee Octave gauntlet 2/8: the Imprint this singer's Eeveelution was raised beside"}

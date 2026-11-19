@@ -775,7 +775,7 @@ events:
 - type: event
   name: Egg-seller
   pages:
-  - commands: ['Egg-seller: Silk-moth eggs, a copper each. That loud girl bought forty. FORTY. For her uncle, she says.']
+  - commands: ['Egg-seller: Silk-moth eggs, a copper each. That loud girl in the flowers bought forty. FORTY. For her uncle, she says. In a hatbox.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
@@ -783,7 +783,8 @@ events:
 - type: event
   name: Tax-barge Deserter
   pages:
-  - commands: ['Tax-barge Deserter: I rowed the Queen''s tax-barge. Jumped off at Saltmere when they booed us. Weaving''s quieter. Nobody boos a scarf.']
+  - commands: ['Tax-barge Deserter: I rowed the Queen''s tax-barge. Jumped off at Saltmere when they booed us. You''ve heard them? Then you know. Weaving''s
+        quieter. Nobody boos a scarf.']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
@@ -822,3 +823,12 @@ events:
     move: fixed
     graphic: {sprite: NPC 13, dir: down}
   at: [44, 52]
+- type: event
+  name: Bun-seller
+  pages:
+  - commands: ['Bun-seller: A boy in a black coat came through yesterday asking about masks. Who carves them, who wears them, who doesn''t take them off.
+        Rude. Bought a bun. Went north.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 15, dir: down}
+  at: [40, 40]

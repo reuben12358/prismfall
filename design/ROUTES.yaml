@@ -11,6 +11,9 @@ notes:
 - 'role: main (on the road), branch (dead-end side road off it), side (an alternative road).'
 - 'segment = badges held on arrival (drives level caps). Revision 14 order: Saltmere is Gym 1, Briarwick Gym 2.'
 - 'town_map: squares on the Velmora town map (region 0); first square = MapPosition.'
+- 'paths: the order of stops as drawn on the maps (style road / side / under / sea / inset; ints are map ids, P:<id> a dungeon
+  square, G:<letter> an Antumbra gate, pts:<name> a polyline in world_geo.py).'
+- connections for the Revision 14 early chain are in design/maps.json (rev14_connections).
 roads:
 - n: 1
   name: The Strand Road
@@ -22,14 +25,18 @@ roads:
   detail: full
   note: Ferrow's Landing west along the chalk coast to the free port. Chapter 1 lives on its first leg and the orchard branch;
     Chapter 2 arrives in Saltmere for Gym 1. Wild Lv 3-12 (Gym 1 cap 15).
-  path:
-  - 100
-  - 520
-  - 527
-  - 528
-  - 140
-  - 520
-  - 521
+  paths:
+  - style: road
+    stops:
+    - 100
+    - 520
+    - 527
+    - 528
+    - 140
+  - style: side
+    stops:
+    - 520
+    - 521
   legs:
   - id: 520
     name: The Ferrymen's Mile
@@ -52,7 +59,8 @@ roads:
       - 17
     landmark: The Hale Bell on its post above the sea cliff, and the stile where Larch sees you off.
     wild: 'Lillipup, Wooloo, Skwovet, Fletchling, Rookidee, Lechonk, Rolycoly. Night: Hoothoot, Nickit, Tarountula.'
-    exits: 'S: Ferrow''s Landing. N: Windfall Row. W (new, at the bell): Lacecliff Walk.'
+    exits: 'S: Ferrow''s Landing. N: Windfall Row. W (new, at the Hale Bell): Lacecliff Walk, behind the quarantine roadblock
+      (Accord guards, moved here from Windfall Row; lifts on S105).'
     fill:
     - sea-cliff walk on the south-west side with Wingull posts and a view down to the moored Dovetail
     - 'Hale''s Bramble: six berry terraces and a picking shed (Wenna''s cousin sells tarts)'
@@ -92,8 +100,8 @@ roads:
     landmark: The Cider Press yard, and the Accord's quarantine cordon across the lane to the Glassed Orchard.
     wild: 'Smoliv, Fidough, Bounsweet, Nidoran, Shinx, Litleo, Zigzagoon. Night: Oddish, Nymble, Spinarak. Headbutt: Combee,
       Cherubi, Heracross.'
-    exits: 'S: the Ferrymen''s Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: Gossamer Wood, behind the Accord
-      barrier until Briarwick (it opens from the wood side as the shortcut home). Door: Hale Farmhouse.'
+    exits: 'S: the Ferrymen''s Mile. NE: the Glassed Orchard (Bleed Veil, Chapter 1). W: the corded forest road to Gossamer
+      Wood (never opens from this side; opens from the wood once V105 >= 1, after the Matriarch). Door: Hale Farmhouse.'
     fill:
     - six named orchards in rows (apple, pear, plum, cherry, quince, medlar); every tree a Headbutt tree
     - 'the Cider Press yard: press, barrels, a trade NPC, a cellar door'
@@ -122,9 +130,7 @@ roads:
     size:
     - 140
     - 64
-    size_was:
-    - 140
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 11
@@ -161,9 +167,7 @@ roads:
     size:
     - 110
     - 80
-    size_was:
-    - 110
-    - 80
+    size_was: null
     built: false
     town_map:
     - - 8
@@ -195,13 +199,15 @@ roads:
   detail: full
   note: 'Inland from the port up the River Selvedge to the silk forest: the road Briarwick''s cloth comes down. Salt marsh,
     then the dyers'' river, then the manor meadows, then the Gossamer Wood. Wild Lv 12-17 (Gym 2 cap 19).'
-  path:
-  - 140
-  - 541
-  - 552
-  - 540
-  - 524
-  - 120
+  paths:
+  - style: road
+    stops:
+    - 140
+    - 541
+    - 552
+    - 540
+    - 524
+    - 120
   legs:
   - id: 541
     name: The Grey Saltings
@@ -257,9 +263,7 @@ roads:
     size:
     - 80
     - 72
-    size_was:
-    - 80
-    - 72
+    size_was: null
     built: false
     town_map:
     - - 8
@@ -306,8 +310,9 @@ roads:
     landmark: Thistledown Manor on its hill, and the old stone bridge over the Selvedge.
     wild: 'Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. Water:
       Marill, Buizel, Psyduck.'
-    exits: 'W: the Dyers'' Ford. E: Gossamer Wood (the wood''s west eaves). N hill: Thistledown Manor. NW copse: Cocoonfall
-      Hollow. SW cave: Brinecut Mine (the shortcut back to the Saltings).'
+    exits: 'W/S: the Dyers'' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood''s west eaves). N hill:
+      Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more:
+      it is entered through the Deepwood.'
     fill:
     - wildflower meadow in bands of colour, tall grass in four separate fields
     - the River Selvedge along the south third with two islets (Surf later)
@@ -324,7 +329,6 @@ roads:
     side_maps:
     - 546
     - 547
-    - 548
   - id: 524
     name: Gossamer Wood
     old_name: null
@@ -349,8 +353,8 @@ roads:
     landmark: The Weft Bridge, a rope of spun silk as thick as a road, and Woodward's Hut in the middle clearing.
     wild: 'Sewaddle, Scatterbug, Blipbug, Cutiefly, Petilil, Shroomish, Sizzlipede. Night: Morelull, Phantump, Venonat.
       Headbutt: Pineco, Heracross, Pinsir.'
-    exits: 'W: Thistledown Lea (new edge). N: Briarwick. SE: Windfall Row through the Accord barrier (opens from this side
-      once you reach Briarwick). E (Cut): Gossamer Deepwood.'
+    exits: 'W: Thistledown Lea (new edge). N: Briarwick. S: the corded forest road to Windfall Row (opens from this side
+      when V105 >= 1, after the Matriarch). E (Cut, after Badge 2): Gossamer Deepwood, and Cocoonfall Hollow beyond it.'
     fill:
     - silk-curtain trail west to north with two side loops
     - canopy walkways on an upper level (rope bridges between giant trunks)
@@ -366,6 +370,7 @@ roads:
     side_maps:
     - 525
     - 526
+    - 548
 - n: 3
   name: The Hoar Road
   from: 120
@@ -376,18 +381,22 @@ roads:
   detail: full
   note: North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) and down Isenmar's cliffs to Ebbmouth.
     Frostflat Causeway becomes the coast road back to Saltmere. Wild Lv 16-21 (Gym 3 cap 23).
-  path:
-  - 120
-  - 566
-  - 577
-  - 570
-  - 578
-  - 562
-  - 561
-  - 160
-  - 140
-  - 560
-  - 570
+  paths:
+  - style: road
+    stops:
+    - 120
+    - 566
+    - 577
+    - 570
+    - 578
+    - 562
+    - 561
+    - 160
+  - style: side
+    stops:
+    - 140
+    - 560
+    - 570
   legs:
   - id: 566
     name: Spinners' Rise
@@ -401,9 +410,7 @@ roads:
     size:
     - 80
     - 120
-    size_was:
-    - 80
-    - 120
+    size_was: null
     built: false
     town_map:
     - - 10
@@ -439,16 +446,15 @@ roads:
     size:
     - 72
     - 96
-    size_was:
-    - 72
-    - 96
+    size_was: null
     built: false
     town_map:
     - - 8
       - 12
     - - 7
       - 12
-    landmark: 'The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed.'
+    landmark: 'The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a brass
+      Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).'
     wild: 'Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.'
     exits: 'E: Spinners'' Rise. W: Frostwick (East Gate, the whale-rib palisade).'
     fill:
@@ -478,9 +484,7 @@ roads:
     size:
     - 80
     - 88
-    size_was:
-    - 80
-    - 88
+    size_was: null
     built: false
     town_map:
     - - 6
@@ -635,14 +639,16 @@ roads:
   chapter: Ch 5
   detail: medium
   note: 'Borderland B, the Icefall Locks: up the River Ebb to the foot of Zenith''s escarpment and up the frozen falls.'
-  path:
-  - 160
-  - 580
-  - 592
-  - 590
-  - 581
-  - 593
-  - 180
+  paths:
+  - style: road
+    stops:
+    - 160
+    - 580
+    - 592
+    - 590
+    - 581
+    - 593
+    - 180
   legs:
   - id: 580
     name: The Reedholms
@@ -692,9 +698,7 @@ roads:
     size:
     - 110
     - 70
-    size_was:
-    - 110
-    - 70
+    size_was: null
     built: false
     town_map:
     - - 6
@@ -758,9 +762,7 @@ roads:
     size:
     - 110
     - 64
-    size_was:
-    - 110
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 10
@@ -788,14 +790,16 @@ roads:
   chapter: Act II
   detail: outline
   note: 'Borderland C, the Brass Dunes: the railway east off the plateau and into the sand that buried it.'
-  path:
-  - 180
-  - 612
-  - 600
-  - 610
-  - 601
-  - 613
-  - 200
+  paths:
+  - style: road
+    stops:
+    - 180
+    - 612
+    - 600
+    - 610
+    - 601
+    - 613
+    - 200
   legs:
   - id: 612
     name: The Meridian Mainline
@@ -809,9 +813,7 @@ roads:
     size:
     - 130
     - 64
-    size_was:
-    - 130
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 13
@@ -892,9 +894,7 @@ roads:
     size:
     - 110
     - 64
-    size_was:
-    - 110
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 20
@@ -916,14 +916,16 @@ roads:
   chapter: Act II
   detail: outline
   note: 'Borderland D, the Leach Canyons: down the poisoned river to Nadir''s marsh.'
-  path:
-  - 200
-  - 620
-  - 632
-  - 621
-  - 630
-  - 633
-  - 220
+  paths:
+  - style: road
+    stops:
+    - 200
+    - 620
+    - 632
+    - 621
+    - 630
+    - 633
+    - 220
   legs:
   - id: 620
     name: The Marrow Road
@@ -966,9 +968,7 @@ roads:
     size:
     - 90
     - 80
-    size_was:
-    - 90
-    - 80
+    size_was: null
     built: false
     town_map:
     - - 21
@@ -1019,9 +1019,7 @@ roads:
     size:
     - 80
     - 96
-    size_was:
-    - 80
-    - 96
+    size_was: null
     built: false
     town_map:
     - - 18
@@ -1043,13 +1041,15 @@ roads:
   chapter: Act II
   detail: outline
   note: 'Borderland E, the Sulfur Reach: marsh causeways, the hot lake, then the Dominion''s first road.'
-  path:
-  - 220
-  - 640
-  - 641
-  - 650
-  - 652
-  - 240
+  paths:
+  - style: road
+    stops:
+    - 220
+    - 640
+    - 641
+    - 650
+    - 652
+    - 240
   legs:
   - id: 640
     name: Leechman's Walk
@@ -1121,9 +1121,7 @@ roads:
     size:
     - 130
     - 70
-    size_was:
-    - 130
-    - 70
+    size_was: null
     built: false
     town_map:
     - - 22
@@ -1145,17 +1143,21 @@ roads:
   chapter: Act II
   detail: outline
   note: West again over the higher pass. The war road north (the Cinderglass Barrens) leaves from the same gate.
-  path:
-  - 240
-  - 660
-  - 661
-  - 672
-  - 260
-  - 240
-  - 662
-  - 670
-  - 673
-  - 927
+  paths:
+  - style: road
+    stops:
+    - 240
+    - 660
+    - 661
+    - 672
+    - 260
+  - style: side
+    stops:
+    - 240
+    - 662
+    - 670
+    - 673
+    - 927
   legs:
   - id: 660
     name: The Ashmarch
@@ -1229,9 +1231,7 @@ roads:
     size:
     - 64
     - 130
-    size_was:
-    - 64
-    - 130
+    size_was: null
     built: false
     town_map:
     - - 18
@@ -1282,9 +1282,7 @@ roads:
     size:
     - 64
     - 120
-    size_was:
-    - 64
-    - 120
+    size_was: null
     built: false
     town_map:
     - - 26
@@ -1306,14 +1304,16 @@ roads:
   chapter: Act III
   detail: outline
   note: 'Borderland F, the Rootdeep: out of the mines through the roots and up into Elowen''s royal country.'
-  path:
-  - 260
-  - 692
-  - 680
-  - 690
-  - 681
-  - 693
-  - 280
+  paths:
+  - style: road
+    stops:
+    - 260
+    - 692
+    - 680
+    - 690
+    - 681
+    - 693
+    - 280
   legs:
   - id: 692
     name: The Tailings
@@ -1327,9 +1327,7 @@ roads:
     size:
     - 100
     - 70
-    size_was:
-    - 100
-    - 70
+    size_was: null
     built: false
     town_map:
     - - 16
@@ -1409,9 +1407,7 @@ roads:
     size:
     - 72
     - 120
-    size_was:
-    - 72
-    - 120
+    size_was: null
     built: false
     town_map:
     - - 10
@@ -1433,14 +1429,16 @@ roads:
   detail: outline
   note: 'Borderland A again, in the north: royal hunting country, the snow-forest, over the Frostfang Pass to the frozen
     sea.'
-  path:
-  - 280
-  - 700
-  - 701
-  - 710
-  - P:704
-  - 712
-  - 300
+  paths:
+  - style: road
+    stops:
+    - 280
+    - 700
+    - 701
+    - 710
+    - P:704
+    - 712
+    - 300
   legs:
   - id: 700
     name: The Hart's Run
@@ -1509,9 +1507,7 @@ roads:
     size:
     - 72
     - 120
-    size_was:
-    - 72
-    - 120
+    size_was: null
     built: false
     town_map:
     - - 4
@@ -1535,14 +1531,16 @@ roads:
   chapter: Act III
   detail: outline
   note: 'Borderland B again, in the north: along the frozen sea, across the Mast Glacier and up the Cloudstair.'
-  path:
-  - 300
-  - 720
-  - 721
-  - 730
-  - P:724
-  - 732
-  - 320
+  paths:
+  - style: road
+    stops:
+    - 300
+    - 720
+    - 721
+    - 730
+    - P:724
+    - 732
+    - 320
   legs:
   - id: 720
     name: The Thane's Sled-Road
@@ -1611,9 +1609,7 @@ roads:
     size:
     - 130
     - 64
-    size_was:
-    - 130
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 8
@@ -1638,17 +1634,21 @@ roads:
   chapter: Act III
   detail: outline
   note: South across the plateau, through borderlands G and H, and through the Mere into the kingdom behind the glass.
-  path:
-  - 320
-  - 740
-  - 741
-  - 750
-  - 752
-  - 753
-  - G:A
-  - G:A
-  - 755
-  - 340
+  paths:
+  - style: road
+    stops:
+    - 320
+    - 740
+    - 741
+    - 750
+    - 752
+    - 753
+    - G:A
+  - style: inset
+    stops:
+    - G:A
+    - 755
+    - 340
   legs:
   - id: 740
     name: Conductors' Causeway
@@ -1720,9 +1720,7 @@ roads:
     size:
     - 100
     - 90
-    size_was:
-    - 100
-    - 90
+    size_was: null
     built: false
     town_map:
     - - 12
@@ -1748,9 +1746,7 @@ roads:
     size:
     - 100
     - 80
-    size_was:
-    - 100
-    - 80
+    size_was: null
     built: false
     town_map:
     - - 26
@@ -1773,16 +1769,20 @@ roads:
   chapter: Act IV
   detail: outline
   note: 'Borderland I, the Obsidian Barrows: out of Antumbra through the tomb-mirrors into Ossaria''s high crags.'
-  path:
-  - 340
-  - 772
-  - G:B
-  - G:C
-  - 760
-  - 770
-  - 761
-  - 773
-  - 360
+  paths:
+  - style: inset
+    stops:
+    - 340
+    - 772
+    - G:B
+  - style: road
+    stops:
+    - G:C
+    - 760
+    - 770
+    - 761
+    - 773
+    - 360
   legs:
   - id: 772
     name: Yesterday's Road
@@ -1796,9 +1796,7 @@ roads:
     size:
     - 110
     - 64
-    size_was:
-    - 110
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 28
@@ -1880,9 +1878,7 @@ roads:
     size:
     - 64
     - 120
-    size_was:
-    - 64
-    - 120
+    size_was: null
     built: false
     town_map:
     - - 24
@@ -1904,15 +1900,19 @@ roads:
   chapter: Act IV
   detail: outline
   note: Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors.
-  path:
-  - 360
-  - 780
-  - 770
-  - G:B
-  - G:B
-  - 781
-  - 790
-  - 380
+  paths:
+  - style: road
+    stops:
+    - 360
+    - 780
+    - 770
+    - G:B
+  - style: inset
+    stops:
+    - G:B
+    - 781
+    - 790
+    - 380
   legs:
   - id: 780
     name: The Jawbone Ridge
@@ -1985,9 +1985,7 @@ roads:
     size:
     - 110
     - 70
-    size_was:
-    - 110
-    - 70
+    size_was: null
     built: false
     town_map:
     - - 26
@@ -2008,16 +2006,20 @@ roads:
   detail: outline
   note: Out of Antumbra by the Barrows' east gate, over Ossaria's dry seabed to the crossroads, then borderland C' to the
     foundries.
-  path:
-  - 380
-  - 800
-  - G:C
-  - G:C
-  - 632
-  - 810
-  - 801
-  - 811
-  - 400
+  paths:
+  - style: inset
+    stops:
+    - 380
+    - 800
+    - G:C
+  - style: road
+    stops:
+    - G:C
+    - 632
+    - 810
+    - 801
+    - 811
+    - 400
   legs:
   - id: 800
     name: The Noonless Road
@@ -2062,9 +2064,7 @@ roads:
     size:
     - 140
     - 72
-    size_was:
-    - 140
-    - 72
+    size_was: null
     built: false
     town_map:
     - - 20
@@ -2116,9 +2116,7 @@ roads:
     size:
     - 120
     - 64
-    size_was:
-    - 120
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 17
@@ -2138,14 +2136,18 @@ roads:
   chapter: Act IV
   detail: outline
   note: 'Borderland L, the Hanging Stair: off the edge of Zenith and down the cliff to the drowned coast.'
-  path:
-  - 400
-  - 832
-  - 820
-  - 830
-  - 830
-  - 821
-  - 420
+  paths:
+  - style: road
+    stops:
+    - 400
+    - 832
+    - 820
+    - 830
+  - style: sea
+    stops:
+    - 830
+    - 821
+    - 420
   legs:
   - id: 832
     name: The Brink
@@ -2159,9 +2161,7 @@ roads:
     size:
     - 130
     - 60
-    size_was:
-    - 130
-    - 60
+    size_was: null
     built: false
     town_map:
     - - 15
@@ -2236,16 +2236,22 @@ roads:
   chapter: Act V
   detail: outline
   note: 'Borderland F again, underground: the river that runs south beneath half the realm and surfaces in Elowen''s twilight.'
-  path:
-  - 420
-  - 852
-  - 852
-  - pts:BLINDWATER
-  - 840
-  - 850
-  - 850
-  - 841
-  - 440
+  paths:
+  - style: road
+    stops:
+    - 420
+    - 852
+  - style: under
+    stops:
+    - 852
+    - pts:BLINDWATER
+    - 840
+    - 850
+  - style: road
+    stops:
+    - 850
+    - 841
+    - 440
   legs:
   - id: 852
     name: The Throat
@@ -2259,9 +2265,7 @@ roads:
     size:
     - 64
     - 110
-    size_was:
-    - 64
-    - 110
+    size_was: null
     built: false
     town_map:
     - - 11
@@ -2338,13 +2342,15 @@ roads:
   chapter: Act V
   detail: outline
   note: 'Borderland J, the Thornwar Marches: twilight forest, burning forest, then the dragon ridge.'
-  path:
-  - 440
-  - 860
-  - 861
-  - 870
-  - 872
-  - 460
+  paths:
+  - style: road
+    stops:
+    - 440
+    - 860
+    - 861
+    - 870
+    - 872
+    - 460
   legs:
   - id: 860
     name: The Gloamwood
@@ -2413,9 +2419,7 @@ roads:
     size:
     - 150
     - 72
-    size_was:
-    - 150
-    - 72
+    size_was: null
     built: false
     town_map:
     - - 22
@@ -2439,14 +2443,16 @@ roads:
   chapter: Act V
   detail: outline
   note: 'Borderland K: the only way overland into the Crown.'
-  path:
-  - 460
-  - 892
-  - 880
-  - 890
-  - P:884
-  - 893
-  - 480
+  paths:
+  - style: road
+    stops:
+    - 460
+    - 892
+    - 880
+    - 890
+    - P:884
+    - 893
+    - 480
   legs:
   - id: 892
     name: Dominar's Toll
@@ -2460,9 +2466,7 @@ roads:
     size:
     - 110
     - 70
-    size_was:
-    - 110
-    - 70
+    size_was: null
     built: false
     town_map:
     - - 23
@@ -2512,9 +2516,7 @@ roads:
     size:
     - 150
     - 64
-    size_was:
-    - 150
-    - 64
+    size_was: null
     built: false
     town_map:
     - - 20

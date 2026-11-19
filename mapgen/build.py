@@ -361,6 +361,7 @@ def build_map(spec, ctx):
     m = G.rmap(spec['_tileset'], W, H, G.table3(layers), events, bgm=bgm, encounter_step=spec.get('encounter_step', 30))
     check_reach(spec, ctx, m)
     ctx.material_bad = getattr(ctx, 'material_bad', 0) + material_check(spec, ctx, layers, spec['_tileset'])
+    ctx.slab_bad = getattr(ctx, 'slab_bad', 0) + slab_check(spec, ctx, layers, spec['_tileset'])
     if spec.get('rubric'):
         walk_check(spec, ctx, m)
         r = rubric(layers)
@@ -451,6 +452,22 @@ def material_check(spec, ctx, layers, tileset_id):
     return sum(len(v) for v in bad.values())
 
 
+# map builder 8: the flat dark-brown plank slab (Sheridan_2 544-546 = PF Rejuv 4992-4994) that early layouts drew as
+# cliff and quay "stairs".  Stairs are now real steps (tdraw st_stair_* / tb_stair_*, rdraw fw_stair_*); the slab must
+# never come back on a PF Rejuv map.
+OLD_SLAB = {4992, 4993, 4994}
+PF_REJUV_TILESETS = (50, 51, 52, 53, 55)
+
+
+def slab_check(spec, ctx, layers, tileset_id):
+    if tileset_id not in PF_REJUV_TILESETS: return 0
+    hit = np.argwhere(np.isin(layers, list(OLD_SLAB)))
+    if len(hit):
+        z, y, x = hit[0]
+        ctx.warn(spec['id'], 'OLD SLAB STAIRS: %d tiles of the flat plank slab (4992-4994), e.g. at %d,%d: use real steps' % (len(hit), x, y))
+    return len(hit)
+
+
 def walk_check(spec, ctx, m):
     """Flood-fill walkable tiles from the first warp/door: warn about cut-off events and stranded areas."""
     import render as R
@@ -506,8 +523,22 @@ def default_name(e):
 
 
 # ----------------------------------------------------------------------------- outputs
+_TOWN_POS = None
+
+
+def town_map_position(mid):
+    """MapPosition from mapgen/data/town_map_positions.json (cartographer, tools/worldmap/gen_docs.py), else None"""
+    global _TOWN_POS
+    if _TOWN_POS is None:
+        p = os.path.join(HERE, 'data', 'town_map_positions.json')
+        _TOWN_POS = json.load(open(p))['positions'] if os.path.exists(p) else {}
+    return _TOWN_POS.get(str(mid))
+
+
 def metadata_block(spec):
-    md = spec.get('metadata') or {}
+    md = dict(spec.get('metadata') or {})
+    if town_map_position(spec['id']):
+        md['MapPosition'] = town_map_position(spec['id'])   # the Velmora town map owns positions (region 0)
     lines = ['#-------------------------------', '[%03d]   # %s' % (spec['id'], spec['name']),
              'Name = %s' % md.get('Name', spec.get('display_name', spec['name']))]
     for k, v in md.items():
@@ -717,6 +748,8 @@ def main():
         sys.exit('--strict: %d puzzle proof(s) failed (see PUZZLE FAIL lines; mapgen/puzzles/)' % ctx.puzzle_bad)
     if '--strict' in sys.argv and getattr(ctx, 'arrival_bad', 0):
         sys.exit('--strict: %d blocked arrival / door tiles (see ARRIVAL warnings)' % ctx.arrival_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'slab_bad', 0):
+        sys.exit('--strict: %d old slab-stair tiles (see OLD SLAB STAIRS warnings)' % ctx.slab_bad)
 
 
 def check_arrivals(selected, specs, ctx):

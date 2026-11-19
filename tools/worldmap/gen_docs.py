@@ -39,6 +39,71 @@ for i in list(range(140, 160)) + [146, 147]:
     SEG_FIX[i] = 0
 for i in list(range(120, 140)) + [524, 526]:
     SEG_FIX[i] = 1
+for i in (525, 548, 151, 152, 153, 132, 134):      # after Tamsin's badge (SWAP_GYM1_GYM2.md section 0)
+    SEG_FIX[i] = 2
+
+E = lambda d, to, note='': dict(type='edge', dir=d, to=to, **({'note': note} if note else {}))
+# Revision 14 connections (SWAP_GYM1_GYM2.md 1A). Edge spans for new or moved edges are left to the map builder.
+REV14 = {
+    520: dict(add=[E('west', 527, 'at the Hale Bell; the quarantine roadblock (Accord guards) moves here from 521 and lifts on S105')]),
+    521: dict(note={'R2_WOOD': 'the corded forest road: a "Forest-road cordon" event blocks it from this side always, and '
+                               'from 524\'s side until V105 BRIARWICK_GLASSWOOD >= 1'}),
+    527: dict(set=[E('east', 520, 'the Hale Bell exit'), E('west', 528)]),
+    528: dict(set=[E('east', 527), E('west', 140, 'Saltmere East Gate')]),
+    140: dict(add=[E('east', 528, 'East Gate (from Marram Down)')],
+              note={541: 'North Gate: closed until S108 (Gate Warden event, Chapter 2 close)',
+                    560: 'West Gate: the Frostflat Causeway, chained at the Border Stones until the player reaches Frostwick'}),
+    541: dict(retarget={540: 552}),
+    552: dict(set=[E('south', 541), E('north', 540)]),
+    540: dict(retarget={541: 552, 120: 524}, drop_links=['R3_COCOON'],
+              note={552: 'replaces the Grey Saltings edge (the built map joins it on its south edge, x 2-9)',
+                    524: "the Gossamer's west eaves (replaces the Briarwick edge)"}),
+    524: dict(add=[E('west', 540, 'from Thistledown Lea')],
+              note={'R2_WOOD': 'the corded forest road to Windfall Row: opens from this side when V105 >= 1',
+                    'WOOD_DEEP': 'behind a CUT tree: HM01 from the Cutter after Tamsin\'s badge (Badge 2)'}),
+    120: dict(drop_to=[540], add=[E('north', 566, 'North Gate')]),
+    566: dict(set=[E('south', 120, 'Briarwick North Gate'), E('north', 577)]),
+    577: dict(set=[E('south', 566), E('west', 570, 'Frostwick East Gate')]),
+    570: dict(retarget={560: 577, 562: 578},
+              add=[E('south', 560, 'South Gate: the Frostflat Causeway, the side road back to Saltmere')]),
+    578: dict(set=[E('south', 570, 'Frostwick North Gate'), E('north', 562)]),
+    562: dict(retarget={570: 578}),
+    560: dict(retarget={570: 570}, redir={570: 'north'},
+              note={570: "to Frostwick's South Gate: Essentials joins opposite edges, so turn the Causeway's last stretch "
+                         "north (N edge <-> 570 S) or use a warp. The chain at the Border Stones opens from the Frostwick side"}),
+}
+
+
+def apply_rev14(by):
+    for mid, r in REV14.items():
+        m = by.get(mid)
+        if m is None:
+            continue
+        cs = list(m.get('connections') or [])
+        if 'set' in r:
+            keep = [c for c in cs if c.get('type') not in ('edge',)]
+            cs = keep + [dict(c) for c in r['set']]
+        for old, new in (r.get('retarget') or {}).items():
+            for c in cs:
+                if c.get('type') == 'edge' and c.get('to') == old:
+                    if new != old:
+                        c['to'] = new
+                        c.pop('to_span', None)
+                    if mid in (r.get('redir') or {}) or old in (r.get('redir') or {}):
+                        c['dir'] = r['redir'][old]
+                        c.pop('span', None)
+                        c.pop('to_span', None)
+        cs = [c for c in cs if not (c.get('type') == 'edge' and c.get('to') in (r.get('drop_to') or []))]
+        cs = [c for c in cs if c.get('link') not in (r.get('drop_links') or [])]
+        for a in r.get('add') or []:
+            if not any(c.get('type') == 'edge' and c.get('to') == a['to'] and c.get('dir') == a['dir'] for c in cs):
+                cs.append(dict(a))
+        for key, note in (r.get('note') or {}).items():
+            for c in cs:
+                if (isinstance(key, int) and c.get('to') == key and c.get('type') == 'edge') or c.get('link') == key:
+                    c['note'] = note
+        m['connections'] = cs
+        m['rev14_connections'] = 'SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder'
 
 
 def kingdom_field(k):
@@ -177,6 +242,14 @@ def fields_by_map():
     return {int(k): v for k, v in (fd.get('maps') or {}).items()}
 
 
+def sizewas(l, m):
+    if l['was']:
+        return list(l['was'])
+    if m is None or m.get('added_by'):
+        return None
+    return m.get('size_was') or m['size']
+
+
 def write_routes_yaml(maps, sq):
     fdm = fields_by_map()
     mj = {m['id']: m for m in maps}
@@ -189,24 +262,24 @@ def write_routes_yaml(maps, sq):
                      'fill = what occupies the space (density list): build every item, then decorate between them.',
                      'role: main (on the road), branch (dead-end side road off it), side (an alternative road).',
                      'segment = badges held on arrival (drives level caps). Revision 14 order: Saltmere is Gym 1, Briarwick Gym 2.',
-                     'town_map: squares on the Velmora town map (region 0); first square = MapPosition.'],
+                     'town_map: squares on the Velmora town map (region 0); first square = MapPosition.',
+                     'paths: the order of stops as drawn on the maps (style road / side / under / sea / inset; ints are map ids, '
+                     'P:<id> a dungeon square, G:<letter> an Antumbra gate, pts:<name> a polyline in world_geo.py).',
+                     'connections for the Revision 14 early chain are in design/maps.json (rev14_connections).'],
            'roads': []}
     for r in W.ROADS:
         R = {'n': r['n'], 'name': r['name'], 'from': r['frm'], 'from_name': W.SETTLEMENTS[r['frm']][0], 'to': r['to'],
              'to_name': W.SETTLEMENTS[r['to']][0], 'chapter': r['chapter'], 'detail': r['detail'], 'note': r['note'],
-             'path': [st for seg in W.ROAD_PATHS[r['n']] for st in seg[1]], 'legs': []}
+             'paths': [{'style': st, 'stops': stops} for st, stops in W.ROAD_PATHS[r['n']]], 'legs': []}
         for l in r['legs']:
             fld = (fdm.get(l['id']) or {}).get('field') or l['field']
             leg = {'id': l['id'], 'name': l['name'], 'old_name': l['old'], 'origin': l['origin'],
                    'kingdom': kingdom_field(l['kingdom']), 'role': l['role'], 'mode': l['mode'],
                    'segment': leg_road_segment(r, l), 'field': fld, 'size': list(l['size']),
-                   'size_was': list(l['was']) if l['was'] else (mj[l['id']]['size'] if l['id'] in mj and
-                                                                mj[l['id']].get('size_was') is None else None),
+                   'size_was': sizewas(l, mj.get(l['id'])),
                    'built': bool(l['id'] in built_ids()), 'town_map': [list(c) for c in l['cells']],
                    'landmark': l['landmark'], 'wild': l['wild'], 'exits': l['exits'], 'fill': l['fill'],
                    'secret': l['secret'], 'side_maps': l['side']}
-            if l['was'] is None and l['id'] in mj and leg['size_was'] is None:
-                leg['size_was'] = mj[l['id']].get('size_was') or mj[l['id']]['size']
             R['legs'].append(leg)
         doc['roads'].append(R)
     with open(os.path.join(ROOT, 'design', 'ROUTES.yaml'), 'w', encoding='utf-8') as f:
@@ -262,6 +335,7 @@ def update_maps_json(sq):
     for i, s in SEG_FIX.items():
         if i in by:
             by[i]['segment'] = s
+    apply_rev14(by)
     for m in maps:
         s = sq.get(m['id'])
         if s:
@@ -489,7 +563,12 @@ def update_world_md(sq):
 
 def main():
     d = load_maps()
-    sq = build_squares(d['maps'] + [{'id': l['id']} for r, l in W.all_legs()])
+    extra = []
+    mi = os.path.join(ROOT, 'maps_out', 'mapinfos_prismfall.txt')
+    if os.path.exists(mi):          # built maps that maps.json does not list (e.g. 134 Granny's Knot)
+        extra = [{'id': int(l.split('\t')[0])} for l in open(mi, encoding='utf-8')
+                 if l.strip() and not l.startswith('#') and int(l.split('\t')[0]) < 990]
+    sq = build_squares(d['maps'] + [{'id': l['id']} for r, l in W.all_legs()] + extra)
     names = name_table(d['maps'])
     write_place_names(d['maps'], names, sq)
     if '--no-maps-json' not in sys.argv:

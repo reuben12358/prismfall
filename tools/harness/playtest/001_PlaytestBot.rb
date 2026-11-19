@@ -66,6 +66,9 @@ module PlayBot
                     [:SAILOR, "Haakon"], [:BIRDKEEPER, "Ailsa"], [:BUGCATCHER, "Pell"], [:POKEMONRANGER_F, "Orla"],
                     [:HIKER, "Ulf"], [:CAMPER, "Rook"], [:TWINS, "Ana & Ida", true], [:POKEMONRANGER_M, "Sigurd"]]
   CHECKS_PLAN = [[:run_checks, 520], [:done]]
+  # PLAYBOT_SESSION=narrative: Debug > Prismfall Core... > Show Core status (runs Prismfall::NarrativeCheck in the engine)
+  NARRATIVE_PLAN = [[:debug_install, 520], [:done]]
+  DEBUG_PATH = (SESSION == "narrative") ? [/^Prismfall Core/, /^Show Core status/] : [/^Files options/, /^Install Prismfall maps/]
 
   @frame = 0; @armed = {}; @live = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
   @cmd = nil; @cmd_seen = -10; @cmd_key = nil; @cmd_target = nil; @cmd_since = 0; @cmd_moved = 0
@@ -270,10 +273,11 @@ module PlayBot
       t = @last_text.to_s
       find = proc { |re| c.index { |x| x =~ re } }
       if [:opening, :open].include?(@debug_phase)
-        @debug_phase = :open if find.call(/^Files options/) || find.call(/^Install Prismfall maps/)
+        menu, entry = DEBUG_PATH
+        @debug_phase = :open if find.call(menu) || find.call(entry)
         if @debug_phase == :open
-          return find.call(/^Files options/) if find.call(/^Files options/) && !@cmd_used[:files]
-          return find.call(/^Install Prismfall maps/) if find.call(/^Install Prismfall maps/) && !@cmd_used[:install]
+          return find.call(menu) if find.call(menu) && !@cmd_used[:files]
+          return find.call(entry) if find.call(entry) && !@cmd_used[:install]
           return :back
         end
       end
@@ -315,8 +319,8 @@ module PlayBot
         (press(B::UP); @cmd_moved = @frame) if (@frame - @cmd_moved) >= 6
       elsif @frame - @cmd_moved >= 14
         label = clean(cmds[@cmd_target])
-        @cmd_used[:files] = true if label =~ /^Files options/ && @debug_phase == :open
-        @cmd_used[:install] = true if label =~ /^Install Prismfall maps/ && @debug_phase == :open
+        @cmd_used[:files] = true if label =~ DEBUG_PATH[0] && @debug_phase == :open
+        @cmd_used[:install] = true if label =~ DEBUG_PATH[1] && @debug_phase == :open
         press(B::USE)
         @cmd_key = nil        # look again if the same window stays (e.g. the Debug menu)
       end
@@ -373,6 +377,7 @@ module PlayBot
       return PLAN if SESSION == "resume"
       return ROUTE1_PLAN if SESSION == "route1"
       return CHECKS_PLAN if SESSION == "checks"
+      return NARRATIVE_PLAN if SESSION == "narrative"
       return PLAN[PLAN.index { |st| st[1] == 520 }..] if SESSION == "ch1"   # resume at Route 1, state as after K1
       return PLAN
     end
@@ -417,7 +422,7 @@ module PlayBot
         log("plan done")
         finish
       when :debug_install
-        return next_step if SESSION != "play" || $game_map.map_id != map
+        return next_step if !["play", "narrative"].include?(SESSION) || $game_map.map_id != map
         debug_install if @idle >= 12
       when :run_checks
         run_checks if @idle >= 30
@@ -925,14 +930,14 @@ module Game
     def start_new
       PlayBot.log("New Game (session #{PlayBot::SESSION}); plugins: #{PluginManager.plugins.inspect}")
       PlayBot.recording = ["play", "ch1"].include?(PlayBot::SESSION)
-      if ["route1", "checks", "ch1"].include?(PlayBot::SESSION)   # dev shortcut: begin on Route 1's south edge, as after K1
+      if ["route1", "checks", "ch1", "narrative"].include?(PlayBot::SESSION)   # dev shortcut: begin on Route 1's south edge, as after K1
         PrismfallMaps.define_singleton_method(:apply_start_position) do
           $data_system.start_map_id, $data_system.start_x, $data_system.start_y = 520, 16, 67
           true
         end
       end
       playbot_start_new
-      if ["route1", "checks", "ch1"].include?(PlayBot::SESSION)
+      if ["route1", "checks", "ch1", "narrative"].include?(PlayBot::SESSION)
         if PlayBot::SESSION == "ch1"   # what the prologue run had set by the time it reached Route 1
           [101, 102, 161].each { |i| $game_switches[i] = true }
           $game_variables[101] = $game_variables[102] = 1
