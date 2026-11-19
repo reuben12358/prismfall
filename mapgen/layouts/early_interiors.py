@@ -129,7 +129,7 @@ def build():
     c110['tiles'] = [t for t in c110['tiles'] if not (t['tile'] in (5512, 5513, 5514))]
     done(110)
     # ------------------------------------------------------------------ Briarwick
-    B = [pc(121, 'BW_PC', [120, 45, 24], SE.NURSE_BW, [lambda r, F: P(121, 'Trainer', r.at(F(10), 5)),
+    B = [pc(121, 'BW_PC', [120, 47, 26], SE.NURSE_BW, [lambda r, F: P(121, 'Trainer', r.at(F(10), 5)),
                                                          lambda r, F: P(121, 'Gale Post desk', r.at(F(9), 1))], flip=True),
          mart(122, 'BW_MART', [lambda r, F: P(122, 'Customer', r.at(F(7), 5))], SE.MART_BW, flip=True)]
     done(121); done(122)

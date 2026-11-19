@@ -523,13 +523,14 @@ def drifts(m, p, seed=1):
 
 
 def bridges(m, rows, cls='w'):
-    """plank bridges where a road crosses the brook: pale Akuwa pier planks (layer 2) over the water / ice"""
-    T, B = C('ak', 1525), C('ak', 1525)
+    """timber bridges where a road crosses the brook: split planks under trodden snow, a snow-capped post-and-beam
+    rail along the north and south edges (rdraw `fw_bridge_*`; the rails block stepping off sideways)"""
+    T = lambda k, x: STAMPS['fw_bridge_%s%d' % (k, x % 2)]['layers'][1][0][0]
     for y0, y1 in rows:
         for y in range(y0, y1 + 1):
             for x in range(m.W):
                 if m.cls[y, x] == cls:
-                    m.L[1, y, x] = C('ak', 1525)
+                    m.L[1, y, x] = T('n' if y == y0 else 's' if y == y1 else 'm', x)
 
 
 def lagoon(m, thr=0.55, seed=12):

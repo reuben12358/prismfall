@@ -112,14 +112,27 @@ module Prismfall
   # Gym battle helper. Event usage:
   #   Prismfall.gym_battle(3)                       -> Marisol on :WATER_SURFACE
   #   Prismfall.gym_battle(9, lose_text: "...")     -> Juno (rival-versioned)
+  #   Prismfall.gym_battle(6)                       -> Corvin, double battle (GYMS :double)
+  #   Prismfall.gym_battle(6, double: false)        -> force a single battle
   # Returns true if the player won.
   #-----------------------------------------------------------------------------
-  def self.gym_battle(n, lose_text: nil, can_lose: false, field: true, outcome_var: nil)
+  # double: nil (default) = follow GYMS[:double] (Gyms 2, 6, 11, 16, 17 are
+  # double battles in the story); true / false force it. An event that already
+  # called setBattleRule("double") / ("single") is left alone when double is nil
+  # or agrees with it, so older events keep working.
+  def self.gym_battle(n, lose_text: nil, can_lose: false, field: true, outcome_var: nil, double: nil)
     g = gym(n)
     raise ArgumentError, "Unknown gym #{n.inspect}" if !g
     setBattleRule("canLose") if can_lose
     setBattleRule("outcomeVar", outcome_var) if outcome_var
     set_field_rule(g[:field]) if field
+    want_double = double.nil? ? g[:double] : double
+    size_set = $game_temp && $game_temp.battle_rules["size"]
+    if double == false
+      setBattleRule("single")
+    elsif want_double && (!size_set || double == true)
+      setBattleRule("double")
+    end
     if g[:rival_battle]
       return Prismfall::Rival.battle(g[:trainer_type], g[:trainer_name], g[:rival_battle],
                                      lose_text: lose_text)

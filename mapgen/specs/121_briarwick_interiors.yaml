@@ -4,7 +4,7 @@ name: Briarwick Pokémon Center
 parent: 120
 bgm: Poke Center
 metadata:
-  HealingSpot: [120, 45, 24]
+  HealingSpot: [120, 47, 26]
   MapPosition: [0, 12, 22]
 tone: [10, 4, -12, 0]
 biome: interior

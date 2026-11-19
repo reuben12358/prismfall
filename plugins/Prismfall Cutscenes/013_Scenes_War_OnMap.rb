@@ -54,27 +54,27 @@ module Prismfall
       background image: WAR_STAGE, parallax: 1.0
       letterbox true, duration: 0
       camera at: [256, 318]
-      tone to: [-34, -40, -6, 60], duration: 0                 # cold pre-dawn
+      tone to: [-30, -32, 0, 30], duration: 0                  # cold pre-dawn
       bgm :bgm_war_field
       bgs :bgs_war, volume: 70
       # Two drilled blocks a side under their banners, the Wardens' Pokemon as a front line, the rulers out ahead.
-      army :isenmar, charsets: ["pfw_soldier_isenmar"], count: 18, rows: 3, blocks: 2, gap: 64,
-           area: [84, 388, 264, 56], facing: :right
+      army :isenmar, charsets: ["pfw_soldier_isenmar"], count: 16, rows: 2, blocks: 2, gap: 56,
+           area: [60, 396, 320, 40], facing: :right
       army :ice_mons, charsets: ["pfw_walrein", "pfw_beartic", "pfw_sealeo", "pfw_walrein"], count: 4, rows: 2,
-           area: [384, 384, 76, 56], facing: :right
-      army :ashkaar, charsets: ["pfw_soldier_ashkaar"], count: 18, rows: 3, blocks: 2, gap: 64,
-           area: [1400, 388, 264, 56], facing: :left
+           area: [408, 388, 76, 52], facing: :right
+      army :ashkaar, charsets: ["pfw_soldier_ashkaar"], count: 16, rows: 2, blocks: 2, gap: 56,
+           area: [1390, 396, 320, 40], facing: :left
       army :fire_mons, charsets: ["pfw_houndoom", "pfw_camerupt", "pfw_camerupt", "pfw_houndoom"], count: 4, rows: 2,
            area: [1290, 384, 76, 56], facing: :left
       army :riders, charsets: ["pfw_charizard", "pfw_salamence"], count: 4, rows: 2,
            area: [1420, 272, 250, 44], facing: :left, walk: true
-      [[76, 372], [240, 372], [404, 366]].each_with_index do |pt, i|
+      [[52, 380], [240, 380], [420, 372]].each_with_index do |pt, i|
         actor :"ban_i#{i}", sheet: ch + "pfw_banner_isenmar", grid: [1, 1], at: pt
       end
-      [[1348, 366], [1512, 372], [1676, 372]].each_with_index do |pt, i|
+      [[1340, 372], [1570, 380], [1730, 380]].each_with_index do |pt, i|
         actor :"ban_a#{i}", sheet: ch + "pfw_banner_ashkaar", grid: [1, 1], at: pt
       end
-      actor :eirik, charset: "pfw_eirik", at: [492, 440], dir: :right
+      actor :eirik, charset: "pfw_eirik", at: [510, 446], dir: :right
       actor :hrothgar, charset: "pfw_hrothgar", at: [1250, 440], dir: :left
       [[1330, 486], [1500, 474], [1690, 490], [1840, 452], [1560, 236], [1880, 240]].each_with_index do |pt, i|
         fx_sheet flames[:sheet], **flames, at: pt, z: 400 + pt[1], id: :"camp#{i}"
@@ -178,7 +178,7 @@ module Prismfall
       bgs_fade 0.8
       stop_emit :rain
       tone to: [-80, -84, -60, 70], duration: 0.6
-      cut at: { actor: :water, part: :mouth, offset: [16, 0] }, zoom: 2.0
+      cut at: { actor: :water, part: :mouth, offset: [-10, 0] }, zoom: (legends) ? 1.5 : 2.0
       idle :water, frames: 4..7, hold: 0.12 if legends          # markings lit
       fx_sheet an + "pfw_fx_origin_pulse", grid: [5, 3], frames: 0..3, hold: 0.06, loops: 6,
                at: { actor: :water, part: :mouth }, blend: :add, scale: 0.8, z: 1200
@@ -204,8 +204,8 @@ module Prismfall
                       flare: { sheet: an + "pfw_fx_origin_pulse", grid: [5, 3], frames: 0..3, scale: 0.55 } },
                  b: { from: :fire, color: :fireclash, width: 20, sheet: ch + "pfw_beam_fire",
                       flare: { sheet: an + "pfw_fx_fusion_flare", grid: [5, 5], frames: [11, 11, 12], scale: 0.45 } },
-                 core: [{ sheet: an + "pfw_fx_steam", grid: [5, 4], frames: [9], scale: 0.95, spin: 50, blend: :normal },
-                        { sheet: an + "pfw_fx_clash_core", grid: [4, 1], frames: 0..3, scale: 0.62, blend: :normal }],
+                 core: [{ sheet: an + "pfw_fx_steam", grid: [5, 4], frames: [9], scale: 0.8, spin: 50, blend: :normal },
+                        { sheet: an + "pfw_fx_clash_core", grid: [4, 1], frames: 0..3, scale: 0.46, blend: :normal }],
                  spray: { every: 0.28, chunks: { sheet: an + "pfw_fx_ice_chunks", grid: [4, 1], frames: 1..3, scale: 0.2 },
                           steam: { sheet: an + "pfw_fx_steam", grid: [5, 4], frames: 5..8, hold: 0.09, scale: 0.5 } },
                  burst: { sheet: an + "pfw_fx_explosions", grid: [4, 3], frames: 0..3, hold: 0.06, blend: :normal },
@@ -216,7 +216,7 @@ module Prismfall
       # 6: impact - white frame, a slow-motion beat, push in on the meeting point; flashes ramp
       impact_frames count: 2
       slowmo 0.2, duration: 0.3
-      fx_sheet an + "pfw_fx_fracture", grid: [4, 1], frames: 0..3, hold: 0.28, stay: :forever, at: [clash_c[0], ground + 6],
+      fx_sheet an + "pfw_fx_fracture", grid: [4, 1], frames: 0..3, hold: 0.28, stay: :forever, at: [clash_c[0], ground - 2],
                z: 460, id: :fracture
       pan to: clash_c, zoom: 2.0, duration: 0.9, ease: :out
       clash_mod :clash, shake: 6

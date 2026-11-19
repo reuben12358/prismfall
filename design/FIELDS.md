@@ -959,4 +959,5 @@ Snowy Mountain, …).
   Borderlands blend their two kingdoms.
 - **Exceptions:** the tutorial battle (Kestrel K1 at Ferrow's Landing) has no field; gyms, bosses and set pieces set
   their own field in the event; Safari-style battles (Royal Chase) have no moves and so no field; Festival bracket
-  rounds use the Temple-Arena's Grand Stage.
+  rounds are fought on the cycling Prism Arena, as the story has them (set per opponent in `FIELD_DEFAULTS.yaml` →
+  `exceptions.trainers`; the Temple-Arena's Grand Stage is only the fallback for an opponent not listed there).

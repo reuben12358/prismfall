@@ -886,7 +886,7 @@ MOVE: The PC steps on a twig. SE: snap. *(shock lines)* ×3.
   [portrait: THISTLE, neutral] No answer. Then I'll assume the worst. It saves time.
 [portrait: THISTLE, sad] I was a weaver once. Lowmarsh. You won't find it on a map now. It had looms too.
 [portrait: THISTLE, angry] Ask your Warden what she signed!
-BATTLE: HOLLOW_THISTLE "Thistle", version 1. (Hollow admin 1; can't be fled.)
+BATTLE: HOLLOW_THISTLE "Thistle", version 0 (her first battle; named admins count rematches from 0, BALANCE.md 4b). Field: Silkwood (map default). (Hollow admin 1; can't be fled.)
 (WIN:)
   [portrait: THISTLE, shocked] ...Your partner doesn't fight like the Wood's got hold of it. It fights like it's standing nowhere at all.
   [portrait: THISTLE, neutral] Let the land grieve, child. And look at the grass by that pylon in daylight.

@@ -22,26 +22,28 @@ module Prismfall
   # :rival_battle => if set, the gym battle uses the rival versioning scheme
   #                  (battle_number * 10 + starter_slot) instead of :version.
   #                  Gym 9 is Juno's J3 battle.
+  # :double       => true = the Warden battle is a double battle (story: Gyms 2,
+  #                  6, 11, 16 and 17). Prismfall.gym_battle sets the rule.
   BADGE_COUNT = 18
 
   GYMS = [
     { index: 1,  type: :BUG,      city: "Briarwick",   warden: "Tamsin Loom",      trainer_name: "Tamsin",    trainer_type: :LEADER_TAMSIN,    field: :SILKWOOD,         cap: 15, version: 0 },
-    { index: 2,  type: :NORMAL,   city: "Saltmere",    warden: "Dorian Pell",      trainer_name: "Dorian",    trainer_type: :LEADER_DORIAN,    field: :GRAND_STAGE,      cap: 19, version: 0 },
+    { index: 2,  type: :NORMAL,   city: "Saltmere",    warden: "Dorian Pell",      trainer_name: "Dorian",    trainer_type: :LEADER_DORIAN,    field: :GRAND_STAGE,      cap: 19, version: 0, double: true },
     { index: 3,  type: :WATER,    city: "Ebbmouth",    warden: "Marisol Reyes",    trainer_name: "Marisol",   trainer_type: :LEADER_MARISOL,   field: :WATER_SURFACE,    cap: 23, version: 0 },
     { index: 4,  type: :ELECTRIC, city: "Lumen City",  warden: "Rook Calder",      trainer_name: "Rook",      trainer_type: :LEADER_ROOK,      field: :NEON_GRID,        cap: 27, version: 0 },
     { index: 5,  type: :GROUND,   city: "Duneholt",    warden: "Sahar Ostrand",    trainer_name: "Sahar",     trainer_type: :LEADER_SAHAR,     field: :DESERT,           cap: 31, version: 0 },
-    { index: 6,  type: :POISON,   city: "Mirefen",     warden: "Corvin Mott",      trainer_name: "Corvin",    trainer_type: :LEADER_CORVIN,    field: :CORROSIVE_MIRE,   cap: 35, version: 0 },
+    { index: 6,  type: :POISON,   city: "Mirefen",     warden: "Corvin Mott",      trainer_name: "Corvin",    trainer_type: :LEADER_CORVIN,    field: :CORROSIVE_MIRE,   cap: 35, version: 0, double: true },
     { index: 7,  type: :FIRE,     city: "Cindervault", warden: "Brann Holloway",   trainer_name: "Brann",     trainer_type: :LEADER_BRANN,     field: :VOLCANIC,         cap: 39, version: 0 },
     { index: 8,  type: :FIGHTING, city: "Ironreach",   warden: "Kaito Ren",        trainer_name: "Kaito",     trainer_type: :LEADER_KAITO,     field: :COLOSSEUM,        cap: 43, version: 0 },
     { index: 9,  type: :GRASS,    city: "Verdance",    warden: "Juno Hale",        trainer_name: "Juno",      trainer_type: :LEADER_JUNO,      field: :FLOWER_GARDEN,    cap: 47, version: 0, rival_battle: 3 },
     { index: 10, type: :ICE,      city: "Rimeholt",    warden: "Anja Sorrel",      trainer_name: "Anja",      trainer_type: :LEADER_ANJA,      field: :FROZEN_LAKE,      cap: 51, version: 0 },
-    { index: 11, type: :FLYING,   city: "Skyreach",    warden: "Odessa Gale",      trainer_name: "Odessa",    trainer_type: :LEADER_ODESSA,    field: :STORMFRONT,       cap: 55, version: 0 },
+    { index: 11, type: :FLYING,   city: "Skyreach",    warden: "Odessa Gale",      trainer_name: "Odessa",    trainer_type: :LEADER_ODESSA,    field: :STORMFRONT,       cap: 55, version: 0, double: true },
     { index: 12, type: :PSYCHIC,  city: "Lucent",      warden: "Ilsa Marr",        trainer_name: "Ilsa",      trainer_type: :LEADER_ILSA,      field: :MINDSCAPE,        cap: 59, version: 0 },
     { index: 13, type: :ROCK,     city: "Cragholm",    warden: "Bastian Ore",      trainer_name: "Bastian",   trainer_type: :LEADER_BASTIAN,   field: :CRYSTAL_CAVERN,   cap: 63, version: 0 },
     { index: 14, type: :GHOST,    city: "Gravenmoor",  warden: "Ysolde Ashgrave",  trainer_name: "Ysolde",    trainer_type: :LEADER_YSOLDE,    field: :HOLLOW_CATHEDRAL, cap: 67, version: 0 },
     { index: 15, type: :STEEL,    city: "Cogsworth",   warden: "Magnus Strade",    trainer_name: "Magnus",    trainer_type: :LEADER_MAGNUS,    field: :FACTORY,          cap: 71, version: 0 },
-    { index: 16, type: :DARK,     city: "Underveil",   warden: "Nyx Calloway",     trainer_name: "Nyx",       trainer_type: :LEADER_NYX,       field: :NEW_MOON,         cap: 75, version: 0 },
-    { index: 17, type: :FAIRY,    city: "Gloaming",    warden: "Celestine Aubade", trainer_name: "Celestine", trainer_type: :LEADER_CELESTINE, field: :FAIRY_TALE,       cap: 80, version: 0 },
+    { index: 16, type: :DARK,     city: "Underveil",   warden: "Nyx Calloway",     trainer_name: "Nyx",       trainer_type: :LEADER_NYX,       field: :NEW_MOON,         cap: 75, version: 0, double: true },
+    { index: 17, type: :FAIRY,    city: "Gloaming",    warden: "Celestine Aubade", trainer_name: "Celestine", trainer_type: :LEADER_CELESTINE, field: :FAIRY_TALE,       cap: 80, version: 0, double: true },
     { index: 18, type: :DRAGON,   city: "Wyrmrest",    warden: "Sigrun Ashfall",   trainer_name: "Sigrun",    trainer_type: :LEADER_SIGRUN,    field: :DRAGONS_DEN,      cap: 85, version: 0 }
   ].each { |g| g.freeze }.freeze
 

@@ -126,6 +126,11 @@ def build(preview=None):
             if 'door' in STAMPS[nm]: dd = STAMPS[nm]['door']; hd.append((x + dd[0], y + dd[1]))
         else: print('  (no room for %s at %d,%d)' % (nm, x, y))
     for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=8)
+    for y in range(58, 63):                                  # a clearing round the weavers' row house: no canopy over its eaves
+        for x in range(20, 34):
+            if m.cls[y, x] == 'T': m.cls[y, x] = '.' if y < 62 else 'T'
+    for x, y in ((38, 31), (39, 33), (43, 31), (42, 33), (44, 32), (37, 32)):     # flowers round the Gathering Tree
+        if m.cls[y, x] == '.' and not m.taken[y, x]: m.tile(m.decor['flowers'][(x * 3 + y) % 6], x, y, 1)
     put = lambda nm, x, y, on='.d': (m.stamp(nm, x, y) if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on=on) and not m.cliff[y:y + STAMPS[nm]['h'], x:x + STAMPS[nm]['w']].any() else print('  (no room for %s at %d,%d)' % (nm, x, y)))
     put('pf_pcsign', 49, 27)
     deck(m, 22, 23, 7, 4, stairs=24)                         # the weavers' deck beside the Guildhall tree
@@ -169,7 +174,7 @@ def build(preview=None):
                      ('pf_logbench', 38, 33), ('pf_logbench', 42, 33), ('hb_tables', 33, 30), ('hb_dyeline', 14, 34), ('hb_rugline', 31, 35),
                      ('hb_boxes', 34, 37), ('hb_cask', 44, 29), ('hb_washline', 62, 26), ('hb_barrel', 53, 26), ('hb_tables', 44, 37),
                      ('pf_logbench', 20, 47), ('hb_keg', 31, 43), ('hb_barrel2', 57, 46), ('hb_rugline2', 20, 28), ('pf_logbench', 47, 44),
-                     ('hb_boxes2', 37, 51), ('hb_cask', 30, 52)):
+                     ('hb_boxes2', 37, 51), ('hb_cask', 31, 54), ('pf_p_awning', 33, 29), ('pf_p_awning', 44, 36), ('hb_fish', 36, 29), ('hb_barrel', 47, 36)):
         st = STAMPS[nm]
         if m.free(x, y, st['w'], st['h'], on='.dD') or all(m.cls[y + j, x + i] == 'D' for i in range(st['w']) for j in range(st['h'])):
             m.over += [(z, x + i, y + j, t) for z in (1, 2) for j in range(st['h']) for i in range(st['w']) for t in [st['layers'][z][j][i]] if t]

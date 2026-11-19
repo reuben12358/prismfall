@@ -72,6 +72,16 @@ def outline_dark(img):
     return Image.fromarray(a)
 
 
+def tint_cloth(img, rgb, amount):
+    """tint(), but skin (warm pixels) and the dark outline keep their colours, so a small figure still reads as a
+    person: grey hair and uniform take the faction colour."""
+    src_a = np.array(img.convert("RGBA")).astype(np.int32)
+    out = np.array(tint(img, rgb, amount))
+    warm = (src_a[:, :, 0] - src_a[:, :, 2] > 40) & (src_a[:, :, 3] > 0)
+    out[warm] = src_a[warm].astype(np.uint8)
+    return Image.fromarray(out)
+
+
 def up2(img):
     return img.resize((img.width * 2, img.height * 2), Image.NEAREST)
 
@@ -203,7 +213,7 @@ def fracture():
                 if wide: d.line([A[0], A[1] + 2, B[0], B[1] + 2], fill=rdraw.ICE[3])
                 d.line([A, B], fill=WATER[0], width=2 if wide else 1)
                 if wide: d.line([A[0], A[1] - 1, B[0], B[1] - 1], fill=WATER[1])
-        r0 = (5, 9, 13, 17)[f]                                                                  # the hole at the centre
+        r0 = (2, 3, 5, 6)[f]                                                                  # the hole at the centre
         d.ellipse([W2 / 2 - r0 * 1.6, H2 / 2 - r0 * 0.7, W2 / 2 + r0 * 1.6, H2 / 2 + r0 * 0.7], fill=WATER[0], outline=rdraw.ICE[3])
         d.ellipse([W2 / 2 - r0, H2 / 2 - r0 * 0.4, W2 / 2 + r0 * 0.6, H2 / 2 + r0 * 0.2], fill=WATER[1])
         prng = random.Random(40)
@@ -279,9 +289,9 @@ def characters():
                             ("reborn", "pkmn_salamence.png", "pfw_salamence")]:
         copy(game, "Characters", name, new, "4x4 overworld follower sprite (army unit)")
     grunt = Image.open(src("rejuvenation", "Characters", "Grunt_1.png")).convert("RGBA")
-    save(outline_dark(tint(grunt, (58, 122, 184), 0.8)), "Characters", "pfw_soldier_isenmar",
+    save(outline_dark(tint_cloth(grunt, (70, 140, 214), 0.8)), "Characters", "pfw_soldier_isenmar",
          "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured Isenmar teal-blue (#3A7AB8 cloth), darker outline")
-    save(outline_dark(tint(grunt, (214, 60, 44), 0.8)), "Characters", "pfw_soldier_ashkaar",
+    save(outline_dark(tint_cloth(grunt, (226, 60, 44), 0.8)), "Characters", "pfw_soldier_ashkaar",
          "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured Ashkaar crimson, darker outline")
     kyogre_side()
     banners()

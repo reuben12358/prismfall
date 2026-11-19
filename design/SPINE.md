@@ -1,5 +1,14 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 13 (user feedback, 2026-11-19) <<<
+1. **Trial Centers replace help centers.** Rejuvenation has Help Centers with many side quests; ours are per-kingdom "Trials" that express each kingdom's culture. Ashkaar: the Trial by Flames, combat-centred (think Noxus in League of Legends). Elowen: spiritual quests (think Ionia). Every other kingdom gets its own flavour. Lots of quests, some random and funny.
+2. **No "Route 1 / Route 2" names.** Name every route the way Game of Thrones names places (the user's examples: "Frostwick Pass", "Rimewood Path").
+3. **Routes are massive.** A route between two places can be split into two or more connected maps/paths.
+4. **A world map of the region** is needed (the in-game Town Map and a design-level map).
+5. **Encounters grow with badges.** Rarer Pokémon start appearing in previously visited areas after badges. Quest-reward and event Pokémon in the style of: chasing the Nidoran around the first town before battling and catching it (Rejuvenation), a Spidops/Litleo for beating boss Pokémon (Rejuvenation), the Pinsir/Heracross fights and the Torchic (Reborn).
+6. **Gym puzzle difficulty curve.** Gym 1 is simple, with a layout like Jasmine's gym in HeartGold/SoulSilver: nothing complicated. From Gym 2 onwards the puzzles get more fun and ramp to Reborn level.
+7. **Juno's portrait was rejected:** "it looks like burgh wore a wig". Portraits must not be one recognizable character repainted; build from female donors and change the features.
+
 ## >>> REVISION 12 (user decision, 2026-11-18) <<<
 Juno's design direction is EVER-BLOOM (user: "everbloom kinda looked cooler ngl"): she wears the never-wilting blossoms of her aunt's Bride Tree, the flower girl of a wedding that never ended. Wreath, long veil-train, bouquet, white dress. Her personality stays warm, chatty and funny; the costume carries the sadness. Under Glass and Rot & Bloom are shelved. Story and script references to Juno's look should follow this.
 
