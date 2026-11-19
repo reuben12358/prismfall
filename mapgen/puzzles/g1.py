@@ -1,4 +1,6 @@
 """Gym 1, the Loomhouse (GYM_PUZZLES 'Gym 1'): layouts, engine-level models and the runtime room registry.
+Revision 13: the gym itself is map 130 (one easy hall).  The linked heddles (131), the spool lofts with the brass
+wire (132) and Granny's Knot (134) are now the OPTIONAL Upper Lofts, opened by Badge 1 (rating 4/10).
 The map generator (gen_gym1.py) draws these same grids, so the proof and the map cannot drift apart.
 Glyphs: # void / wall mass   W wall face   . floor   v loom bed (drop)   S stair cell (floor)   o loom (solid)."""
 from .core import Model, Device, grid_cells, around
@@ -6,42 +8,42 @@ from .core import Model, Device, grid_cells, around
 V_A, V_B, V_C, V_FOYER, V_BRIDGE = 305, 306, 307, 308, 309
 S_ALPHA, S_BRASS, S_GAMMA, S_KNOT = 305, 306, 307, 308
 
-# ------------------------------------------------------------------------------------------------ 130 Foyer
-FOYER = ["####################",
-         "####################",
-         "##WWW##WWW##WSW#####",
-         "##WWW##WWW##WSW#####",
-         "##...##...##...#####",
-         "##...##...##...#####",
-         "#vvvvvvvvvvvvvvvv###",
-         "#vvvvvvvvvvvvvvvv###",
-         "#................###",
-         "#................###",
-         "#................###",
-         "#................###",
-         "#................###",
-         "#................###",
-         "########.###########",
-         "####################"]
-FOYER_PLANKS = {0: 3, 1: 8, 2: 13}          # V308 -> plank column (rows 6-7)
-FOYER_AT = dict(heddle=(3, 10), exit=(8, 14), stair=(13, 2), pim=(9, 12), guide=(11, 10), tamsin=(8, 9), loom=(14, 11),
-                item=(2, 4), card_b=(8, 3), card_s=(12, 3), portrait=(3, 3), start=(8, 13))
+# ------------------------------------------------------------------------------------------------ 130 The Loomhouse
+# SPINE Revision 13 item 6: Gym 1 is a straight, handsome hall in the manner of Jasmine's gym (HGSS): walk up the
+# aisle, two trainers, the Warden at the far end.  ONE gentle interaction: a heddle beside the aisle, tied by a
+# visible silk thread to a plank that sits off to the left of the loom bed; one pull slides it into the aisle.
+def _gym():
+    W = 20
+    wall = '###' + 'W' * 12 + 'SW' + '###'
+    fl, bed = '###' + '.' * 14 + '###', '###' + 'v' * 14 + '###'
+    return ['#' * W, '#' * W, wall, wall] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########', '#' * W]
 
 
-def foyer_model():
-    cells, _ = grid_cells(130, FOYER, '#W')
-    solid = {FOYER_AT[k] for k in ('heddle', 'pim', 'guide', 'loom', 'item', 'tamsin')} | {(14, 10), (15, 10), (15, 11)}
+GYM = _gym()
+GYM_PLANKS = {0: (5, 6), 1: (9, 10)}          # V308 -> plank columns (rows 8-9); the aisle is x9-10
+GYM_LOOMS = [(4, 6), (6, 6), (12, 12), (14, 12), (4, 12), (6, 12), (4, 15), (6, 15), (12, 15), (14, 15), (4, 18), (12, 18)]   # 2x2 each
+GYM_AT = dict(heddle=(11, 10), exit=(9, 22), start=(9, 21), stair=(15, 2), pim=(13, 20), guide=(6, 20), tamsin_foyer=(10, 19),
+              tamsin=(9, 5), goal=(9, 6), nell=(8, 14), orla=(11, 17), juno=(12, 21), first_loom=(4, 19), item=(15, 6),
+              card_a=(5, 3), card_b=(12, 3), portrait=(8, 3))
+
+
+def gym_model():
+    cells, _ = grid_cells(130, GYM, '#W')
+    solid = {GYM_AT[k] for k in ('heddle', 'pim', 'guide', 'tamsin_foyer', 'tamsin', 'nell', 'orla', 'juno', 'item')}
+    for x, y in GYM_LOOMS: solid |= {(x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)}
     cells -= {(130, x, y) for x, y in solid}
+    cells -= {(130,) + GYM_AT['stair'], (130, 15, 3)}
 
     def passable(c, v):
         _, x, y = c
-        if FOYER[y][x] == 'v': return FOYER_PLANKS[v[0]] == x
+        if GYM[y][x] == 'v': return x in GYM_PLANKS[v[0]]
         return True
-    hx, hy = FOYER_AT['heddle']
-    dev = [Device('Training heddle', [c for c in around(130, hx, hy) if c in cells], lambda v, c: (((v[0] + 1) % 3,), c))]
-    m = Model('g1_foyer (130)', cells, passable, (130,) + FOYER_AT['start'], (0,), dev, [(130,) + FOYER_AT['stair']],
-              resets=around(130, *FOYER_AT['pim']))
+    hx, hy = GYM_AT['heddle']
+    dev = [Device('Heddle', [c for c in around(130, hx, hy) if c in cells], lambda v, c: ((1 - v[0],), c))]
+    m = Model('g1_gym (130)', cells, passable, (130,) + GYM_AT['start'], (0,), dev, [(130,) + GYM_AT['goal']],
+              resets=around(130, *GYM_AT['pim']))
     m.game = lambda v: ({V_FOYER: v[0]}, {})
+    m.exits = [(130,) + GYM_AT['stair']]
     return m
 
 
@@ -96,7 +98,7 @@ SPOOLS = {'s1': ((4, 22), 'alpha', 3, 2), 's2': ((14, 20), 'gamma', 5, 4), 's3':
 CORDS = {'alpha': (1, 21), 'gamma': (18, 13), 'brass': (3, 11)}
 LADDERS = {2: (11, 21), 3: (3, 13), 4: (18, 15), 5: (11, 7)}
 BRIDGE = {1: [(x, 5) for x in range(15, 19)], 2: [(20, y) for y in range(6, 13)]}
-LOFT_AT = dict(arrive=(2, 22), down=(2, 24), door=(12, 4), warp=(22, 2), mossy=(1, 23), hollis=(13, 21), ash=(20, 15), item=(11, 5))
+LOFT_AT = dict(arrive=(2, 22), down=(2, 24), warp=(22, 2), mossy=(1, 23), hollis=(13, 21), ash=(20, 15), item=(11, 5))
 
 
 def _lofts():
@@ -108,7 +110,6 @@ def _lofts():
     for cells in BRIDGE.values():
         for x, y in cells: g[y][x] = 'v'
     g[LOFT_AT['down'][1]][LOFT_AT['down'][0]] = 'S'
-    g[LOFT_AT['door'][1]][LOFT_AT['door'][0]] = 'S'
     return [''.join(r) for r in g]
 
 
@@ -119,7 +120,7 @@ def lofts_model():
     cells, _ = grid_cells(132, LOFTS, '#')
     solid = {s[0] for s in SPOOLS.values()} | set(CORDS.values()) | set(LADDERS.values()) | {LOFT_AT[k] for k in ('mossy', 'hollis', 'ash', 'item')}
     cells -= {(132, x, y) for x, y in solid}
-    cells -= {(132,) + LOFT_AT['down'], (132,) + LOFT_AT['door']}      # exits to other rooms: not part of this proof
+    cells -= {(132,) + LOFT_AT['down']}      # exits to other rooms: not part of this proof
     ci = {'alpha': 0, 'brass': 1, 'gamma': 2}
 
     def passable(c, v):
@@ -144,7 +145,7 @@ def lofts_model():
     m = Model('g1_lofts (132)', cells, passable, (132,) + LOFT_AT['arrive'], (0, 0, 0, 0), dev, [(132,) + LOFT_AT['warp']],
               resets=around(132, *LOFT_AT['mossy']))
     m.game = lambda v: ({V_BRIDGE: v[3]}, {S_ALPHA: bool(v[0]), S_BRASS: bool(v[1]), S_GAMMA: bool(v[2])})
-    m.exits = [(132,) + LOFT_AT['down'], (132,) + LOFT_AT['door']]
+    m.exits = [(132,) + LOFT_AT['down']]
     return m
 
 
@@ -212,18 +213,17 @@ def knot_unique():
     return sols
 
 
-CHECKS = [(foyer_model, dict(moves=2)),
+CHECKS = [(gym_model, dict(moves=1)),
           (hall_model, dict(moves=3)),
           (lofts_model, dict(moves=7, without={'the brass wire': ['Cord brass']})),
           (knot_model, dict(moves=3))]
 
 # Runtime registry (emitted as Ruby by puzzles/__init__.py -> Plugins/Prismfall Maps/007_PuzzleRooms.rb)
 ROOMS = {
-    'g1_foyer': dict(name='Loomhouse Foyer', map=130, start=list(FOYER_AT['start']) + [8], reset=dict(vars={V_FOYER: 0}),
-                     solved=dict(vars={V_FOYER: 2}),
-                     hints=["See the silk running up from the heddle? Follow it with your eyes when you pull.",
-                            "One pull moves the plank one balcony along. The stairs are behind the last balcony.",
-                            "Pull the heddle twice. The plank ends up on the right, under the stairs. Walk it."]),
+    'g1_gym': dict(name='The Loomhouse', map=130, start=list(GYM_AT['start']) + [8], reset=dict(vars={V_FOYER: 0}),
+                   solved=dict(vars={V_FOYER: 1}),
+                   hints=["See the silk running from the heddle by the aisle? Follow it with your eyes.",
+                          "Pull the heddle beside the aisle once. The plank slides over from the left, right into your path."]),
     'g1_hall': dict(name='Weaving Hall', map=131, start=list(HALL_AT['start']) + [8], reset=dict(vars={V_A: 0, V_B: 0, V_C: 0}),
                     solved=dict(vars={V_A: 2, V_B: 2, V_C: 2}),
                     hints=["Every heddle lifts two rows. Count lifts, not pulls.",

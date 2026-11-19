@@ -1,6 +1,6 @@
 # Field backdrops: real-engine stills
 
-One still per field and stage (49: 33 fields + 16 extra stages), taken in the real engine (mkxp-z 2.4.2 + Essentials v21.1 + Elite Battle: DX +
+One still per field and stage (49: 33 fields + 16 extra stages; Cave 2 and Colosseum 2 now have their own art), taken in the real engine (mkxp-z 2.4.2 + Essentials v21.1 + Elite Battle: DX +
 the Prismfall plugins): a wild battle started with `setBattleRule("field", ...)`, held on the first command phase
 for 150 frames so the animated layers and particles are running, then `Graphics.screenshot`. Daytime forced.
 `contact_sheet.png` shows them all at half size; `<field>[_s<stage>].png` are the full frames.

@@ -472,6 +472,9 @@ module PlayBot
           @dir = step[4] if !$game_player.moving?
         when :bump, :talk
           ax, ay, d = approach(x, y)
+          if ax.nil? && kind == :talk && (path_dirs(x, y + 2) || [x, y + 2] == [$game_player.x, $game_player.y])
+            ax, ay, d = x, y + 2, 8          # across a counter (Poke Center nurse)
+          end
           return stuck("no tile next to (#{x},#{y})") if ax.nil?
           return walk_to(ax, ay) if $game_player.x != ax || $game_player.y != ay
           return if @idle < 12
@@ -861,7 +864,7 @@ module Game
       end
       $PokemonSystem.textspeed = 2 if $PokemonSystem   # Fast
       $PokemonSystem.runstyle = 1 if $PokemonSystem    # run without holding Back
-      PlayBot.log("started on map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
+      PlayBot.log("started on map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y}); respawn #{$PokemonGlobal.pokecenterMapId.inspect},#{$PokemonGlobal.pokecenterX.inspect},#{$PokemonGlobal.pokecenterY.inspect}; map 100 HealingSpot #{(GameData::MapMetadata.try_get(100)&.teleport_destination).inspect}")
     end
   end
 end

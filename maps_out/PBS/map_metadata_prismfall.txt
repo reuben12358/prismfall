@@ -57,7 +57,7 @@ BattleBack = field
 #-------------------------------
 [121]   # Briarwick Pokémon Center
 Name = Briarwick Pokémon Center
-HealingSpot = 120,45,24
+HealingSpot = 120,47,26
 MapPosition = 0,12,22
 #-------------------------------
 [122]   # Briarwick Mart
