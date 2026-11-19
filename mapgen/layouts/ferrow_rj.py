@@ -20,9 +20,9 @@ PIER = (33, 35)
 
 def lip(x):
     """last row of the village bluff (h=1) in column x: the harbour is a shallow bay cut into the bluff"""
-    if 28 <= x <= 42: return 35
-    if 21 <= x <= 27 or 43 <= x <= 49: return 36
-    if 18 <= x <= 52: return 37
+    if 24 <= x <= 46: return 35
+    if 47 <= x <= 52: return 36
+    if 18 <= x <= 23: return 37
     if x < 18: return 45 + int(round(1.0 * math.sin(x / 3.0)))
     return 43 + int(round(1.5 * math.sin(x / 4.0) + 1.5 * (vnoise(x, 0, 4, 5.0) - 0.5)))
 
@@ -39,8 +39,7 @@ def hill(x, y):
 
 def terrace(x, y):
     """the Center terrace (h=2) in the north-west, a wooded knoll (h=3) behind it"""
-    if x <= 7 and y <= 5: return 3
-    if (x <= 9 and y <= 12) or (10 <= x <= 30 and y <= 20): return 2
+    if (x <= 9 and y <= 18) or (10 <= x <= 30 and y <= 20): return 2
     return 1
 
 
@@ -50,6 +49,7 @@ WHARF = (21, 49, 46, 47)                   # x0, x1, y0, y1: the timber wharf al
 
 def build(preview=None):
     m = K.RMap(W, H, 51, 100, water='Ocean', kit={1: 'ak', 2: 'sh', 3: 'sh'})
+    m.keep_under = 'sgd'
     # ---------------------------------------------------------------- terrain: bluff, hill, terrace, beach, sea
     for x in range(W):
         for y in range(H):
@@ -72,32 +72,32 @@ def build(preview=None):
     # ---------------------------------------------------------------- stairs first (they cut the cliff lines)
     m.stairs(45, 16, w=3, kit_rows=4)                                  # Tidewatch hill
     m.stairs(23, 20, w=3, kit_rows=4)                                  # the Center terrace
-    m.stairs(25, 36, w=3, kit_rows=3)                                  # west quay stairs
+    m.stairs(25, 35, w=3, kit_rows=3)                                  # west quay stairs
     m.stairs(47, 36, w=3, kit_rows=3)                                  # east quay stairs
     m.plan_cliffs()
     # ---------------------------------------------------------------- streets: curved lanes into one plaza
     G = dict(c='g', only='.tT')
     m.rect(32, 0, 3, 7, 'd')                                           # Route 1's dirt lane (520 x 14-16 = our x 32-34)
-    m.lane([(33.5, 6.5), (35.6, 10), (37.4, 14.5), (36.2, 19.5), (33.6, 24.5)], w=3.3, seed=31, wobble=0.5, **G)   # the valley road
+    m.lane([(33.5, 6.5), (37.4, 8.8), (38.6, 13.5), (37, 19.5), (33.8, 24.5)], w=3.3, seed=31, wobble=0.2, **G)   # the valley road
     m.blob(32.5, 29.2, 8.6, 4.3, 'g', seed=32, rough=0.3, only='.tT')  # the plaza above the harbour
     m.rect(29, 31, 9, 3, 'g', only='.tT')                              # ... squared off along the overlook rail
     m.lane([(24.5, 24.5), (25.2, 27), (27, 28.5)], w=3.0, seed=33, wobble=0.3, **G)            # from the terrace stairs
     m.rect(23, 24, 3, 2, 'g', only='.tT')
-    m.lane([(25.5, 30.5), (20, 31.6), (13, 31.2), (9.4, 32.5), (8.6, 36), (8.4, 40), (6, 41.6), (4.5, 41.5)], w=2.7, seed=34, wobble=0.5, **G)  # west lane
+    m.lane([(25.5, 30.5), (20, 31.6), (13, 31.2), (9.4, 32.5), (8.6, 36), (8.4, 40), (6, 41.6), (4.5, 41.5)], w=2.7, seed=34, wobble=0.2, **G)  # west lane
     m.lane([(8.6, 40.5), (11, 43), (15, 43.2), (17.4, 43)], c='d', w=2.1, seed=35, wobble=0.3, only='.tT')       # headland hamlet
-    m.lane([(39.5, 30.4), (45, 31.3), (51, 30.4), (57, 29.6), (63, 30.4)], w=2.9, seed=36, wobble=0.5, **G)      # east lane
-    m.lane([(46.5, 20.5), (45.2, 22), (42.2, 23.6), (40.6, 26.6)], c='d', w=2.3, seed=37, wobble=0.3, only='.tT')  # Tidewatch path
+    m.lane([(39.5, 30.4), (45, 31.3), (51, 30.4), (57, 29.6), (63, 30.4)], w=2.9, seed=36, wobble=0.2, **G)      # east lane
+    m.lane([(46.4, 20.5), (46.2, 22.2), (42.6, 22.6), (41.4, 24), (40.6, 26.6)], c='d', w=2.2, seed=37, wobble=0.2, only='.tT')  # Tidewatch path
     m.rect(45, 20, 3, 1, 'd', only='.tT')
-    m.lane([(26.2, 32.4), (26.4, 35)], w=3.0, seed=38, wobble=0.1, **G); m.rect(25, 33, 3, 3, 'g', only='.tT')   # to the west stairs
+    m.rect(25, 32, 3, 3, 'g', only='.tT')   # to the west stairs
     m.lane([(48.4, 31.5), (48.4, 35)], w=3.0, seed=39, wobble=0.1, **G); m.rect(47, 32, 3, 4, 'g', only='.tT')   # to the east stairs
     m.lane([(59.5, 31), (60.5, 35), (59.6, 39), (55, 39.6), (53.6, 39.4)], c='d', w=2.1, seed=40, wobble=0.3, only='.tT')  # the sea-view loop
     m.lane([(12, 18.6), (18, 18.4), (24, 18.8), (29, 18.5)], c='d', w=2.0, seed=41, wobble=0.25, only='.tT')      # the terrace walk
     m.rect(23, 18, 3, 2, 'd', only='.tTg')
     m.street([(46, 15), (46, 13), (51, 13)], 2, 'd', only='.')         # Tidewatch yard
-    for c in 'gd': m.smooth(c, into='.', passes=1, only='.tT')
+    for c in "gd": m.smooth(c, into=".", passes=2, only=".tT")
     for y in range(SHORE, H):
         for x in range(PIER[0], PIER[1] + 1): m.cls[y, x] = 'w'
-    m.stamp('pf_anchor', 32, 30)                                       # the old anchor at the overlook, on the pier's axis
+    m.stamp('pf_anchor', 32, 29)                                       # the old anchor at the overlook, on the pier's axis
     E = []
     P = lambda n, at, **kw: E.append(SE.place(100, n, at, **kw))
     # ---------------------------------------------------------------- buildings (doors on the lanes)
@@ -111,12 +111,12 @@ def build(preview=None):
     m.stamp('lighthouse', 3, 25)
     light_door = (5, 40)
     m.cls[light_door[1], light_door[0]] = 'B'
-    houses = (('gl_shed', 11, 10), ('gl_shed', 31, 10), ('gl_shed', 19, 25), ('gl_cot', 52, 20), ('gl_shed', 60, 23),
-              ('gl_emblem', 52, 33), ('gl_cot', 11, 34), ('gl_flat2', 36, 2))
+    houses = (('gl_shed', 11, 10), ('gl_shed', 31, 12), ('gl_shed', 19, 25), ('gl_cot', 52, 20), ('gl_shed', 60, 23),
+              ('gl_emblem', 52, 33), ('gl_cot', 11, 34), ('gl_flat2', 36, 1))
     hd = []
     for nm, x, y in houses:
         m.stamp(nm, x, y); dd = STAMPS[nm]['door']; hd.append((x + dd[0], y + dd[1]))
-    for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy))
+    for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=3 if (dx, dy) == (32, 16) else 6)
     # ---------------------------------------------------------------- events (seated by name)
     for i, x in enumerate(range(PIER[0], PIER[1] + 1)): P('Customs gate %d' % (i + 1), (x, SHORE - 1))
     for i, x in enumerate(range(PIER[0], PIER[1] + 1)): P("Edda's last call %d" % (i + 1), (x, SHORE + 3))
@@ -128,7 +128,7 @@ def build(preview=None):
     P('Kestrel K1', (gx - 2, gy + 2)); P('Juno (lab yard)', (gx, gy + 1))
     for i, x in enumerate((32, 33, 34, 35)): P('Sendoff %d' % (i + 1), (x, 4))        # across the dirt lane
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
-    P('Larch (sendoff)', m.snap(37, 5, '.')); P('Juno (sendoff)', m.snap(31, 3, '.'))
+    P('Larch (sendoff)', m.snap(36, 6, '.')); P('Juno (sendoff)', m.snap(31, 3, '.'))
     P('Wenna Hale', (39, 44)); P('Coll Hale', (41, 45)); P('HiddenItem tart stall', (37, 43))
     P('HiddenItem breakwater', (52, 46)); P('Wingull (rocks)', (19, 47))
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
@@ -164,13 +164,16 @@ def build(preview=None):
     for cx, cy, n in ((15, 8, 2), (8, 15, 2), (5, 10, 2), (29, 6, 1), (14, 16, 1), (4, 21, 2), (40, 12, 2), (41, 18, 2), (38, 22, 1),
                       (30, 22, 1), (22, 33, 2), (16, 22, 1), (20, 36, 1), (51, 18, 1), (64, 21, 2), (58, 20, 1), (50, 27, 1),
                       (43, 34, 2), (56, 36, 1), (63, 34, 2), (62, 40, 2), (56, 42, 2), (14, 30, 0), (3, 44, 1), (10, 46, 0),
-                      (60, 8, 2), (58, 14, 1), (46, 4, 1), (42, 9, 1), (20, 22, 0), (36, 34, 0), (52, 11, 0), (8, 22, 1)):
+                      (60, 8, 2), (58, 14, 1), (46, 4, 1), (42, 11, 2), (20, 22, 0), (36, 34, 0), (52, 11, 0), (8, 22, 2), (42, 17, 2),
+                      (3, 30, 1), (22, 38, 1), (50, 36, 1), (64, 37, 2), (57, 33, 0), (33, 20, 1), (6, 46, 1), (20, 12, 0), (13, 5, 2),
+                      (27, 9, 1), (63, 26, 1), (41, 3, 0), (30, 3, 1), (16, 46, 1)):
         if n: m.trees(cx, cy, n, TREES, r=3, seed=cx * 3 + cy)
     for x, y in ((31, 7), (36, 13), (38, 18), (32, 23), (26, 25), (40, 25), (22, 30), (15, 30), (10, 34), (7, 39), (44, 30),
                  (52, 29), (61, 29), (27, 33), (46, 33), (58, 38), (14, 18), (28, 18), (44, 21), (50, 14), (15, 42)):
         if m.free(x, y - 1, 1, 2, on='.') and not m.cliff[y - 1:y + 1, x].any(): m.stamp('gl_lamp', x, y - 1)
     m.beds()
-    m.greenfill(2)
+    print('  street trees', m.autotrees(46, TREES + ['tr_oak2', 'tr_oak'], seed=5, gap=0, box=(0, 0, W, 45)))
+    m.greenfill(1)
     # ---------------------------------------------------------------- paint
     m.paint_ground(); m.autotiles(); m.cliffs(); m.paint_stairs(); m.forest()
     wharf_paint(m)
@@ -178,7 +181,7 @@ def build(preview=None):
     ship(m, 0, 0)
     sea_rocks(m)
     boats(m)
-    m.scatter(7, seed=12)
+    m.scatter(10, seed=12, on=".T")
     if preview: m.preview(preview, 0.5)
     head = {'id': 100, 'biome': 'village', 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 26], 'BattleBack': 'field'},
@@ -203,7 +206,7 @@ def put(m, nm, x, y, on='.', r=2):
 
 def dress_plaza(m):
     """the plaza: the overlook rail with the anchor, a market row under awnings, picnic tables, tubs, notice boards"""
-    m.fence(29, 31, 34); m.fence(35, 41, 34)                   # the overlook rail either side of the anchor
+    m.fence(28, 46, 34)                                        # the overlook rail above the harbour
     for nm, x, y in (('hb_tables', 27, 26), ('hb_tables', 36, 26), ('gl_tables', 39, 27), ('gl_tables', 25, 28),
                      ('sh_crates', 30, 25), ('hb_boxes', 40, 31), ('hb_barrel', 29, 32), ('hb_cask', 38, 32),
                      ('pf_logbench', 36, 32), ('pf_logbench', 29, 30), ('hb_keg', 35, 25)):
@@ -230,13 +233,13 @@ def dress_beach(m):
     """the harbour front: the Hales' tart stall, freight on the wharf, nets and fish tubs, boats hauled out, boulders
     and ferns against the bluff"""
     for nm, x, y in (('pf_p_awning', 36, 41), ('sh_crates', 37, 42), ('sh_crates', 51, 40), ('sh_crates', 28, 40),
-                     ('pf_p_net', 30, 40), ('pf_p_net', 50, 43), ('ak_boulder', 18, 40), ('ak_rock2', 51, 44), ('ak_fern', 39, 39),
-                     ('ak_fern', 33, 39), ('ak_fern', 25, 42), ('pf_p_laundry', 41, 40), ('hb_tubs', 31, 41), ('hb_fish', 42, 45),
-                     ('hb_boat2', 25, 43), ('hb_boat4', 47, 41), ('hb_barrels', 40, 39), ('hb_barrel', 26, 40), ('hb_barrel2', 48, 44),
-                     ('hb_boxes', 35, 39), ('hb_fish', 29, 44), ('hb_crates4', 44, 45), ('hb_boxes2', 23, 46), ('hb_keg', 32, 45)):
+                     ('pf_p_net', 30, 40), ('pf_p_net', 51, 39), ('ak_boulder', 18, 40), ('ak_rock2', 51, 44), ('ak_fern', 39, 39),
+                     ('ak_fern', 33, 39), ('ak_fern', 25, 42), ('pf_p_laundry', 41, 40), ('hb_tubs', 31, 41), ('hb_fish', 40, 42),
+                     ('hb_boat2', 26, 43), ('hb_boat4', 49, 43), ('hb_barrels', 40, 39), ('hb_barrel', 26, 40), ('hb_barrel2', 48, 44),
+                     ('hb_boxes', 35, 39), ('hb_fish', 29, 44), ('hb_crates4', 38, 44), ('hb_boxes2', 23, 44), ('hb_keg', 32, 44)):
         m.near(nm, x, y, on='s', r=3)
     for x in (22, 27, 31, 37, 41, 45, 49):                      # bollards along the wharf edge
-        if not m.taken[47, x] and not m.taken[46, x]: m.stamp('hb_post1' if x % 2 else 'hb_post2', x, 46)
+        if not m.taken[47, x] and not m.taken[46, x] and not m.taken[45, x]: m.stamp('hb_post1' if x % 2 else 'hb_post2', x, 46)
     rng = __import__('random').Random(8)
     for y in range(39, SHORE - 2):
         for x in range(18, 54):
@@ -250,7 +253,7 @@ def wharf_paint(m):
     x0, x1, y0, y1 = WHARF
     for y in range(y0, y1 + 1):
         for x in range(x0, x1 + 1):
-            if m.cls[y, x] not in 'sw': continue
+            if m.eff[y, x] not in 'sw': continue
             row = top if y == y0 else end if (y == y1 and not PIER[0] <= x <= PIER[1]) else body
             m.L[0, y, x] = row[0 if x == x0 else 2 if x == x1 else 1]; m.L[1, y, x] = 0
     for y in range(SHORE, H):

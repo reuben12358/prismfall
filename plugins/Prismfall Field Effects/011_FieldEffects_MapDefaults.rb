@@ -434,5 +434,179 @@ module FieldEffects
     [:RIVAL_KESTREL, 10] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
     [:RIVAL_KESTREL, 11] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
     [:RIVAL_KESTREL, 12] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 110] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 111] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 112] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 210] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 211] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_KESTREL, 212] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas
+    [:RIVAL_JUNO, 10] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 11] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 12] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 110] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 111] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 112] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 210] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 211] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:RIVAL_JUNO, 212] => :MEADOW,   # J1: spar on Saltmere's promenade green; Juno's Grassy Terrai
+    [:HOLLOW_TEO, 0] => :WATER_SURFACE,   # Teo at the stalled mill-race: his Swift Swim cell fights on 
+    [:HOLLOW_TEO, 100] => :WATER_SURFACE,   # Teo at the stalled mill-race: his Swift Swim cell fights on 
+    [:HOLLOW_TEO, 200] => :WATER_SURFACE,   # Teo at the stalled mill-race: his Swift Swim cell fights on 
+    [:RIVAL_KESTREL, 20] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 21] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 22] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 120] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 121] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 122] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 220] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 221] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 222] => :MOUNTAIN,   # K2 on the Gullcry Cliffs (Route 6)
+    [:RIVAL_KESTREL, 30] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 31] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 32] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 130] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 131] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 132] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 230] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 231] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_KESTREL, 232] => :DESERT,   # K3 at the Ossuary exit in the Bone Sands
+    [:RIVAL_JUNO, 20] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 21] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 22] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 120] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 121] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 122] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 220] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 221] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_JUNO, 222] => :CORROSIVE_MIRE,   # J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse
+    [:RIVAL_KESTREL, 40] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 41] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 42] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 140] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 141] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 142] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 240] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 241] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 242] => :COLOSSEUM,   # K4: Ironreach Open final in the Iron Pit
+    [:RIVAL_KESTREL, 50] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 51] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 52] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 150] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 151] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 152] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 250] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 251] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 252] => :STORMFRONT,   # K5 on Skyreach's decks
+    [:RIVAL_KESTREL, 60] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 61] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 62] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 160] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 161] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 162] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 260] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 261] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 262] => :HOLLOW_CATHEDRAL,   # K6 in the Hollow Cathedral (the event may flicker it to BLEE
+    [:RIVAL_KESTREL, 70] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 71] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 72] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 170] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 171] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 172] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 270] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 271] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_KESTREL, 272] => :FAIRY_TALE,   # K7 in Gloaming: the knight and the dragon
+    [:RIVAL_JUNO, 40] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 41] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 42] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 140] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 141] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 142] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 240] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 241] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_JUNO, 242] => :PRISM_ARENA,   # J4, Festival R16: story/08_ACT_V has the bracket on the cycl
+    [:RIVAL_KESTREL, 80] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 81] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 82] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 180] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 181] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 182] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 280] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 281] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 282] => :PRISM_ARENA,   # K8, Festival semifinal
+    [:RIVAL_KESTREL, 90] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 91] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 92] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 190] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 191] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 192] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 290] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 291] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:RIVAL_KESTREL, 292] => :PRISM_ARENA,   # K9 (Fallen), Festival semifinal
+    [:LEADER_MARISOL, 90] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_MARISOL, 190] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_MARISOL, 290] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ANJA, 90] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ANJA, 190] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ANJA, 290] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ROWAN, 90] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ROWAN, 190] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ROWAN, 290] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_CELESTINE, 92] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_CELESTINE, 192] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_CELESTINE, 292] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_SIGRUN, 92] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_SIGRUN, 192] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_SIGRUN, 292] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_KAITO, 92] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_KAITO, 192] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_KAITO, 292] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_YSOLDE, 92] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_YSOLDE, 192] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_YSOLDE, 292] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ODESSA, 92] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ODESSA, 192] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_ODESSA, 292] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_BRANN, 96] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_BRANN, 196] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:LEADER_BRANN, 296] => :PRISM_ARENA,   # Festival bracket draw (version = ace level)
+    [:CHAMPION_VALEN, 0] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:CHAMPION_VALEN, 100] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:CHAMPION_VALEN, 200] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:CHAMPION_VALEN, 1] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:CHAMPION_VALEN, 101] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:CHAMPION_VALEN, 201] => :PRISM_ARENA,   # Festival final: his team is ordered to the arena's Plate cyc
+    [:MERIDIAN_KROLL, 21] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_KROLL, 121] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_KROLL, 221] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_MARCHETTI, 21] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_MARCHETTI, 121] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_MARCHETTI, 221] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_QUENT, 21] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_QUENT, 121] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_QUENT, 221] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_DIRECTORATE, 21] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_DIRECTORATE, 121] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:MERIDIAN_DIRECTORATE, 221] => :PRISM_ARENA,   # Ch21 tag battle on the cracking arena floor
+    [:ARCHSEER_DASK, 92] => :INVERSE,   # Ruin QF: the Synod's champion fights on the Inverse Field (s
+    [:ARCHSEER_DASK, 192] => :INVERSE,   # Ruin QF: the Synod's champion fights on the Inverse Field (s
+    [:ARCHSEER_DASK, 292] => :INVERSE,   # Ruin QF: the Synod's champion fights on the Inverse Field (s
+    [:ECHO_MORWEN, 90] => :HOLLOW_CATHEDRAL,   # Night of Masques exhibition at the Crownhaven Cathedral lant
+    [:ECHO_MORWEN, 190] => :HOLLOW_CATHEDRAL,   # Night of Masques exhibition at the Crownhaven Cathedral lant
+    [:ECHO_MORWEN, 290] => :HOLLOW_CATHEDRAL,   # Night of Masques exhibition at the Crownhaven Cathedral lant
+    [:LEADER_DORIAN, 90] => :GRAND_STAGE,   # Pageant Bout exhibition (Dorian + Rook)
+    [:LEADER_DORIAN, 190] => :GRAND_STAGE,   # Pageant Bout exhibition (Dorian + Rook)
+    [:LEADER_DORIAN, 290] => :GRAND_STAGE,   # Pageant Bout exhibition (Dorian + Rook)
+    [:LEADER_MAGNUS, 1] => :FACTORY,   # Ruin Gym 15 (his lead's Explosion makes it a Scrapyard)
+    [:LEADER_MAGNUS, 101] => :FACTORY,   # Ruin Gym 15 (his lead's Explosion makes it a Scrapyard)
+    [:LEADER_MAGNUS, 201] => :FACTORY,   # Ruin Gym 15 (his lead's Explosion makes it a Scrapyard)
+    [:LEADER_NYX, 1] => :NEW_MOON,   # Ruin Gym 16
+    [:LEADER_NYX, 101] => :NEW_MOON,   # Ruin Gym 16
+    [:LEADER_NYX, 201] => :NEW_MOON,   # Ruin Gym 16
+    [:LEADER_CELESTINE, 1] => :FAIRY_TALE,   # Ruin Gym 17 (the event turns it INVERSE for her last Pokemon
+    [:LEADER_CELESTINE, 101] => :FAIRY_TALE,   # Ruin Gym 17 (the event turns it INVERSE for her last Pokemon
+    [:LEADER_CELESTINE, 201] => :FAIRY_TALE,   # Ruin Gym 17 (the event turns it INVERSE for her last Pokemon
+    [:LEADER_SIGRUN, 1] => :DRAGONS_DEN,   # Ruin Gym 18
+    [:LEADER_SIGRUN, 101] => :DRAGONS_DEN,   # Ruin Gym 18
+    [:LEADER_SIGRUN, 201] => :DRAGONS_DEN,   # Ruin Gym 18
   })
 end

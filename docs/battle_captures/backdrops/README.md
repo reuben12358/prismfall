@@ -11,4 +11,8 @@ python3 -I art/battlebacks/build_backdrops.py            # art -> graphics/EBDX/
 bash tools/harness/visual/backdrops/run_backdrop_stills.sh   # BD_FIELDS=VOLCANIC,NEW_MOON:3  BD_VECTORS=1  BD_TIME=night
 python3 -I tools/harness/visual/backdrops/make_contact_sheet.py <shots> docs/battle_captures/backdrops/contact_sheet.png --cols 6
 ```
-Not verified: Windows / real GPU, double battles, night tint on outdoor rooms, live transitions between every pair.
+Live transitions (`transition_*.gif`, half speed, with `_keys.png` strips): Volcanic -> Cinderglass and
+Meadow -> Wildfire -> Embers, driven by the field plugin's own `Battle#change_field` / `#set_field_stage`
+(`BD_TRANSITIONS="VOLCANIC>ASHEN_WASTE;MEADOW>WILDFIRE>WILDFIRE:2"`), not by moves.
+
+Not verified: Windows / real GPU, double battles, night tint on outdoor rooms; other transition pairs; move-triggered transitions under the redesigned rules.

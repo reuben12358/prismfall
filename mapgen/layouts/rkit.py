@@ -98,6 +98,8 @@ class RMap:
         self.cliff = np.zeros((H, W), bool)
         self.overm = np.zeros((H, W), bool)          # overhead-only crown cells of tree-like stamps (free below)
         self.bodym = np.zeros((H, W), bool)          # every other stamp cell (walls, boles, trunks, props)
+        self.under = np.full((H, W), '', dtype='<U1')  # class a cell had before a stamp / fence marked it 'B'
+        self.keep_under = ''                         # classes whose autotile is still painted under objects (e.g. 'sg')
 
     def inb(self, x, y): return 0 <= x < self.W and 0 <= y < self.H
 
@@ -172,7 +174,9 @@ class RMap:
             ts = self.ts()
             for dy in range(h):
                 for dx in range(w):
-                    if occ[dy, dx] and self.blocked_stack(L[:, dy, dx], ts): self.cls[y + dy, x + dx] = mark
+                    if occ[dy, dx] and self.blocked_stack(L[:, dy, dx], ts):
+                        if mark == 'B' and self.cls[y + dy, x + dx] != 'B': self.under[y + dy, x + dx] = self.cls[y + dy, x + dx]
+                        self.cls[y + dy, x + dx] = mark
         for ex, ey in self.EXTRA_DOORS.get(name, ()):
             self.events.append({'type': 'sign', 'name': 'Locked door', 'at': [x + ex, y + ey], 'post': False,
                                 'text': 'The door is barred from the inside.'})
@@ -321,12 +325,35 @@ class RMap:
                 self.stamp(k, x, y, mark='B'); placed += 1
         return placed
 
+    def autotrees(self, n, kinds, on='.', seed=0, gap=1, box=None):
+        """Goldenleaf habit: single trees packed into every leftover strip of lawn (between houses, along lanes, at
+        cliff feet).  Up to n trees on free cells; `gap` free cells are kept between trunks so yards stay walkable."""
+        rng = random.Random(self.seed * 13 + seed); placed = 0
+        x0, y0, x1, y1 = box or (0, 0, self.W, self.H)
+        cells = [(x, y) for y in range(y0, y1) for x in range(x0, x1)]
+        rng.shuffle(cells)
+        ev = np.zeros((self.H, self.W), bool)
+        for e in self.events:
+            ex, ey = e['at']; ev[max(0, ey - 1):ey + 3, max(0, ex - 1):ex + 2] = True
+        for x, y in cells:
+            if placed >= n: break
+            k = rng.choice(kinds); st = STAMPS[k]; w, h = st['w'], st['h']
+            ty = y - h + 1
+            if ty < 0 or not self.can_tree(k, x, ty, on): continue
+            fx0, fx1, fy0, fy1 = max(0, x - gap), min(self.W, x + w + gap), max(0, y - 1 - gap), min(self.H, y + 1 + gap)
+            if self.bodym[fy0:fy1, fx0:fx1].any() or ev[y - 1:y + 1, x:x + w].any(): continue
+            if np.isin(self.cls[fy0:fy1, fx0:fx1], list('dgsDw')).any() and rng.random() < 0.35: continue
+            self.stamp(k, x, ty, mark='B'); placed += 1
+        return placed
+
     def fence(self, x0, x1, y, gaps=()):
         F = (C('sh', 4875 - 4448), C('sh', 4876 - 4448), C('sh', 4877 - 4448))
         for x in range(x0, x1 + 1):
             if any(a <= x <= b for a, b in gaps) or not self.inb(x, y): continue
             l = x == x0 or any(x == b + 1 for a, b in gaps); r = x == x1 or any(x == a - 1 for a, b in gaps)
-            self.tile(F[0] if l and not r else F[2] if r and not l else F[1], x, y, 1); self.cls[y, x] = 'B'
+            self.tile(F[0] if l and not r else F[2] if r and not l else F[1], x, y, 1)
+            if self.cls[y, x] != 'B': self.under[y, x] = self.cls[y, x]
+            self.cls[y, x] = 'B'
 
     def ts(self):
         return R.tilesets()[self.tid]
@@ -368,13 +395,18 @@ class RMap:
 
     def autotiles(self):
         """Each autotile class on its layer; neighbours of the same class (and the map edge) join."""
-        water = np.isin(self.cls, ['w', 'W'])
+        cls = self.cls
+        if self.keep_under:
+            keep = (self.cls == 'B') & np.isin(self.under, list(self.keep_under))
+            cls = np.where(keep, self.under, self.cls)
+        self.eff = cls
+        water = np.isin(cls, ['w', 'W'])
         for c, (name, game) in self.auto.items():
-            cells = self.cls == c
+            cells = cls == c
             if not cells.any(): continue
             j = self.JOIN.get(c, c)
             if j == 'all': j = None
-            m = ~water if j is None else np.isin(self.cls, list(j))
+            m = ~water if j is None else np.isin(cls, list(j))
             if j is None: m = m | cells
             base = RC.vauto(game, name, 0); z = self.AUTO_Z.get(c, 0)
             pad = np.pad(m, 1, constant_values=True)
@@ -385,12 +417,12 @@ class RMap:
                 self.L[z, y, x] = base + NB2AUTO[b]
         wg, wn = self.auto['w'][1], self.auto['w'][0]
         wbase = RC.vauto(wg, wn, 0)                           # water under the beach and deep band (edges show it)
-        for y, x in np.argwhere(np.isin(self.cls, ['s', 'W'])):
+        for y, x in np.argwhere(np.isin(cls, ['s', 'W'])):
             self.L[0, y, x] = wbase + 0
-        if (self.cls == 's').any() or (self.cls == 'W').any():
-            wm = np.isin(self.cls, ['w', 'W', 's'])
+        if (cls == 's').any() or (cls == 'W').any():
+            wm = np.isin(cls, ['w', 'W', 's'])
             pad = np.pad(wm, 1, constant_values=True)
-            for y, x in np.argwhere(np.isin(self.cls, ['w', 'W', 's'])):
+            for y, x in np.argwhere(np.isin(cls, ['w', 'W', 's'])):
                 b = 0
                 for dx, dy, bit in ((0, -1, 1), (1, -1, 2), (1, 0, 4), (1, 1, 8), (0, 1, 16), (-1, 1, 32), (-1, 0, 64), (-1, -1, 128)):
                     if pad[y + 1 + dy, x + 1 + dx]: b |= bit

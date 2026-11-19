@@ -24,7 +24,7 @@ find "$G/Plugins" -name '__pycache__' -prune -exec rm -rf {} +
 cp "$HERE/002_BackdropStills.rb" "$G/Plugins/ZZ Demo Autorun/"
 rm -rf "$G/Captures/backdrops"
 DEMO_PLAN=backdrops ISOLATE=1 DISPLAY_NUM="${DISPLAY_NUM:-141}" RUN_TIMEOUT="${RUN_TIMEOUT:-2400}" \
-  bash "$VIS/run_engine_capture.sh" run backdrops | grep -E "backdrop still|EXCEPTION|FATAL|Error" || true
+  bash "$VIS/run_engine_capture.sh" run backdrops | grep -E "backdrop still|transition |  now |EXCEPTION|FATAL|Error" || true
 mkdir -p "$RUN/stills"
 cp "$G"/Captures/backdrops/*.png "$RUN/stills/" 2>/dev/null || true
 grep -h "Prismfall EBDX Bridge" "$G"/Data/debuglog.txt 2>/dev/null | tail -20 || true

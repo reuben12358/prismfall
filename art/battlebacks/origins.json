@@ -24,7 +24,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "Cinderglass: glass sheen streaks, obsidian shards, seam glow, steam geysers with bursts, glass glints, violet banners"
+    "Cinderglass: faint glass sheen, obsidian shards, seam glow, steam geysers with bursts, glass glints, violet banners"
    ]
   ]
  },
@@ -73,7 +73,10 @@
  "CAVE": {
   "files": [
    "battlebg/field_cave.png",
+   "battlebg/field_cave_cracked.png",
+   "battlebg/field_cave_cracked_hd.png",
    "battlebg/field_cave_hd.png",
+   "elements/pf_cave_cracked_daylight.png",
    "elements/pf_cave_lantern0.png",
    "elements/pf_cave_lantern1.png",
    "elements/pf_cave_lanternglow0.png",
@@ -91,12 +94,18 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "timber mine supports, stalactites, hanging lanterns, lantern light"
+   ],
+   [
+    "stage 2",
+    "Cracked ceiling (bridge-side key field_cave_cracked): fissures, rubble, a shaft of daylight, falling stones and dust"
    ]
   ]
  },
  "COLOSSEUM": {
   "files": [
    "battlebg/field_colosseum.png",
+   "battlebg/field_colosseum_frenzy.png",
+   "battlebg/field_colosseum_frenzy_hd.png",
    "battlebg/field_colosseum_hd.png",
    "elements/pf_colosseum_cone0.png",
    "elements/pf_colosseum_cone1.png",
@@ -104,6 +113,7 @@
    "elements/pf_colosseum_cone3.png",
    "elements/pf_colosseum_crowd.png",
    "elements/pf_colosseum_fence.png",
+   "elements/pf_colosseum_frenzy_roar.png",
    "elements/pf_colosseum_lamp0.png",
    "elements/pf_colosseum_lamp1.png",
    "elements/pf_colosseum_lamp2.png",
@@ -117,6 +127,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "cheering crowd (2-frame sheet), scaffolding, chain-link fence, hanging work lamps"
+   ],
+   [
+    "stage 2",
+    "Frenzy (bridge-side key field_colosseum_frenzy): hot red light, crowd bouncing fast, swinging lamps, streamers, camera flashes"
    ]
   ]
  },
@@ -158,7 +172,7 @@
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgCrystalCavern, enemybaseCrystalCavern"
+    "battlebgCrystalCavern (mirrored), enemybaseCrystalCavern"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
@@ -176,7 +190,7 @@
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgDarkCrystalCavern, enemybaseDarkCrystalCavern"
+    "battlebgDarkCrystalCavern (mirrored), enemybaseDarkCrystalCavern"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
@@ -194,6 +208,8 @@
    "battlebg/field_desert_bloom.png",
    "battlebg/field_desert_bloom_hd.png",
    "battlebg/field_desert_hd.png",
+   "elements/pf_desert_awning.png",
+   "elements/pf_desert_devil.png",
    "elements/pf_desert_haze.png",
    "elements/pf_desert_haze2.png",
    "elements/pf_desert_sun.png"
@@ -206,6 +222,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "mesas, half-buried sandstone ruins, sandstone slab platforms, sun glare, heat haze"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "sunken temple gate, torn awning (sways), dust devil"
    ],
    [
     "stage 2",
@@ -230,7 +250,7 @@
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"
+    "battlebgVolcano (2x crop of the great wall and lava fall, gradient-mapped violet, lava kept as magma)"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
@@ -325,7 +345,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "flower rings round the platforms (stages 3-5), giant bloom (stage 5), sunbeams"
+    "sunlit bud-filled beds (stages 1-2), flower rings round the platforms, giant bloom (stage 5), sunbeams"
    ]
   ]
  },
@@ -335,7 +355,8 @@
    "battlebg/field_frozen_lake_hd.png",
    "battlebg/field_frozen_lake_night.png",
    "battlebg/field_frozen_lake_night_hd.png",
-   "elements/pf_frozen_lake_mist.png"
+   "elements/pf_frozen_lake_mist.png",
+   "elements/pf_frozen_lake_window.png"
   ],
   "sources": [
    [
@@ -345,6 +366,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "fjord cliffs, far-shore pines, ice cracks, lake mist; night variant with aurora"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "ice-fishing hut with lit window and chimney smoke, ice blocks"
    ]
   ]
  },
@@ -452,6 +477,8 @@
   "files": [
    "battlebg/field_meadow.png",
    "battlebg/field_meadow_hd.png",
+   "battlebg/field_meadow_night.png",
+   "battlebg/field_meadow_night_hd.png",
    "elements/pf_meadow_breeze.png",
    "elements/pf_meadow_clouds.png",
    "elements/pf_meadow_grass0.png",
@@ -461,16 +488,19 @@
    "elements/pf_meadow_grass4.png",
    "elements/pf_meadow_grass5.png",
    "elements/pf_meadow_grass6.png",
-   "elements/pf_meadow_grass7.png"
+   "elements/pf_meadow_sails.png",
+   "elements/pf_meadow_shaft0.png",
+   "elements/pf_meadow_shaft1.png",
+   "elements/pf_meadow_shaft2.png"
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgField, enemybaseFieldGrass"
+    "Magiscarf, 'Fields Backgrounds' (DeviantArt ddejpun; non-commercial, credit)",
+    "day-with-trees panel at 2x (room), night panel (field_meadow_night)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "rolling hills, hedgerows, orchard rows, river ribbon, wildflowers, swaying tall-grass clumps, clouds, breeze"
+    "windmill with turning sails, light shafts, wildflowers, swaying tall-grass clumps, clouds, breeze, pollen"
    ]
   ]
  },
@@ -522,7 +552,9 @@
    "battlebg/field_mountain.png",
    "battlebg/field_mountain_hd.png",
    "elements/pf_mountain_clouds.png",
+   "elements/pf_mountain_hawk.png",
    "elements/pf_mountain_mist.png",
+   "elements/pf_mountain_pennant.png",
    "elements/pf_mountain_pine0.png",
    "elements/pf_mountain_pine1.png"
   ],
@@ -534,6 +566,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "sky, layered snow-capped ridges, pines, clouds, valley mist"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "ridge watchtower with a streaming pennant, circling hawk"
    ]
   ]
  },
@@ -714,6 +750,7 @@
    "elements/pf_snowy_mountain_blizzard.png",
    "elements/pf_snowy_mountain_flags.png",
    "elements/pf_snowy_mountain_flags2.png",
+   "elements/pf_snowy_mountain_lamp.png",
    "elements/pf_snowy_mountain_spindrift.png"
   ],
   "sources": [
@@ -724,6 +761,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "dark crags, summit stupa with a flickering lamp"
    ]
   ]
  },
@@ -803,6 +844,9 @@
   "files": [
    "battlebg/field_wasteland.png",
    "battlebg/field_wasteland_hd.png",
+   "elements/pf_wasteland_fireglow.png",
+   "elements/pf_wasteland_flame.png",
+   "elements/pf_wasteland_hookswing.png",
    "elements/pf_wasteland_pools.png",
    "elements/pf_wasteland_smog.png"
   ],
@@ -814,6 +858,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "derelict crane, burning drum (flame sheet), swinging chain"
    ]
   ]
  },
@@ -822,6 +870,8 @@
    "battlebg/field_water_surface.png",
    "battlebg/field_water_surface_hd.png",
    "elements/pf_water_surface_beacon.png",
+   "elements/pf_water_surface_beam.png",
+   "elements/pf_water_surface_boat.png",
    "elements/pf_water_surface_buoy.png",
    "elements/pf_water_surface_buoy2.png",
    "elements/pf_water_surface_glints.png",
@@ -835,6 +885,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "Ebbmouth harbour and lighthouse silhouette, drowned pilings, buoys, glint strip, spray"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "fishing boat bobbing at anchor, sweeping lighthouse beam"
    ]
   ]
  },
@@ -845,8 +899,11 @@
    "battlebg/field_wildfire_embers_hd.png",
    "battlebg/field_wildfire_hd.png",
    "elements/pf_wildfire_blaze.png",
+   "elements/pf_wildfire_embers_beds.png",
    "elements/pf_wildfire_embers_coals.png",
+   "elements/pf_wildfire_embers_rims.png",
    "elements/pf_wildfire_embers_smoke.png",
+   "elements/pf_wildfire_embers_warmth.png",
    "elements/pf_wildfire_flame.png",
    "elements/pf_wildfire_heat.png",
    "elements/pf_wildfire_smoke.png"
@@ -862,7 +919,7 @@
    ],
    [
     "stage 2",
-    "Embers: same forest charred - charcoal grade, glowing coal beds, ghostly smoke, pioneer sprouts, falling ash"
+    "Embers: warm charcoal grade, ember-lit trunk edges, banked coal beds, rising sparks, first green shoots"
    ]
   ]
  }

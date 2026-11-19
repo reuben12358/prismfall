@@ -94,3 +94,18 @@ the v3 files they replaced are in `art/work/kitbash/passes/replaced_v3/`.
   `SpriteScale` entry is needed. Captured with a private rig copy: `RUN=/home/claude/run_juno` (build symlinked), `PACKAGE=0 …
   assemble`, graphic copied into the copy's `Graphics/Trainers`, a `juno` plan added to the copy's autorun, `ISOLATE=1 DISPLAY_NUM=93 … run juno`.
 - **Overworld:** 30x32-px frames (file 240x256). At that size the wreath is 7 pixels and the veil a sheer strip; keep expectations low.
+
+## 8. Ever-Bloom pass 2 (2026-11-19)
+
+Sheet: `art/previews/12_juno_everbloom_p2.png`, engine frames `art/previews/12_engine_*.png`. Scripts: `juno_everbloom_p2.py`,
+`juno_everbloom_portraits_p2.py`, `juno_everbloom_ow_p2.py`, `sheet12.py`. Installed over pass 1 in `art/out/Graphics/`.
+
+- **Pick the face donor for temperament first.** Desolation's face set 08 is a cool, intense character and no repaint fixes that.
+  The B2W2 VS busts are 128x64 native, so a 48x48 crop at 1:1 is already a portrait in our format. Burgh = warm open beam.
+- **Charset convention is 128x192** (16x24-px frames doubled), as in the base project. Donors: `ebdx_renovation/Graphics/Characters/trainer_*.png`.
+  The Gen 5 rips (30x32 frames) do not fit.
+- **Portrait bubbles work in engine** through `pbMessage("[portrait: JUNO, happy] …")` with files in `Graphics/Portraits/`.
+- **Arm grafts** need a donor arm at the same shoulder angle and sleeve; the Parasol Lady arm on the Lady torso failed.
+- Not verified: charset on a map (setting the player's `character_name` in the autorun was overridden and the rig's start map
+  renders black), and an EBDX VS-bar transition (a `BattleVS = trainerSM` line in the copy's `PBS/EBDX/trainers.txt` had no visible
+  effect; only the default ball wipe played).

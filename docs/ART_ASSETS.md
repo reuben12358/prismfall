@@ -26,7 +26,12 @@ All 33 fields and their stages (49 field/stage rooms, plus one night variant) ha
   `field_desert_bloom`, `field_mindscape_nightmare`, `field_hollow_cathedral_consecrated`, `field_new_moon_abyss`,
   `field_new_moon_lamplight`, `field_dragons_den_wyrmfire`, `field_wildfire_embers`. New fields: `field_wildfire`,
   `field_meadow`. `field_ashen_waste` is now **Cinderglass** (Volcanic's layout quenched to black glass).
-  CAVE 2 and COLOSSEUM 2 reuse their stage-1 rooms. `field_frozen_lake_night` (aurora) is the only night variant.
+  CAVE 2 and COLOSSEUM 2 have bridge-side art (`field_cave_cracked`, `field_colosseum_frenzy`): their field
+  definitions carry no stage key, so the bridge profile names it (`:stages => { 2 => { :backdrop => ... } }`).
+  Night variants: `field_frozen_lake_night` (aurora), `field_meadow_night`.
+- **Sources beyond the three games:** MEADOW is Magiscarf's painted "Fields Backgrounds" at 2x. Packs worth a manual
+  download to replace composed rooms: everblack's "Battlebacks Essentials" (itch.io) and Eevee Expo resources 40,
+  654, 1517, 1668. Already judged off-style in `art/tilesets/NEW_SOURCES.md`: ORAS/XY EBDX packs, Orre battlebacks.
 - **Not made:** vanilla (non-EBDX) `_bg/_base0/_base1/_message` sets.
 
 The sections below are the original brief, kept for anyone repainting a room by hand.

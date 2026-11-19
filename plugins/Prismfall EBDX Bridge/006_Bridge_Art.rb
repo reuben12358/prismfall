@@ -492,7 +492,129 @@ module PrismfallEBDX
           :opacity => [120, 200],
           :layers => [:back, :mid]
         }
-      ]
+      ],
+      :stages => {
+        2 => {
+          :backdrop => "field_cave_cracked",
+          :layers => [
+            { :bitmap => "pf_cave_lantern0", :hd => true, :x => 160.0, :y => 69.33, :ox => 11, :oy => 2, :z => 3, :anim => :sway, :amp => 3, :period => 160 },
+            {
+              :bitmap => "pf_cave_lanternglow0",
+              :hd => true,
+              :x => 135.56,
+              :y => 60.0,
+              :ox => 0,
+              :oy => 0,
+              :z => 3,
+              :blend => 1,
+              :anim => [:pulse, :flicker],
+              :min => 90,
+              :max => 150,
+              :period => 50,
+              :chance => 0.01,
+              :dropout => 3
+            },
+            { :bitmap => "pf_cave_lantern1", :hd => true, :x => 62.22, :y => 11.56, :ox => 11, :oy => 2, :z => 30, :anim => :sway, :amp => 3, :period => 200 },
+            {
+              :bitmap => "pf_cave_lanternglow1",
+              :hd => true,
+              :x => 24.0,
+              :y => 0.0,
+              :ox => 0,
+              :oy => 0,
+              :z => 30,
+              :blend => 1,
+              :anim => [:pulse, :flicker],
+              :min => 90,
+              :max => 150,
+              :period => 50,
+              :chance => 0.01,
+              :dropout => 3
+            },
+            {
+              :bitmap => "pf_cave_cracked_daylight",
+              :hd => true,
+              :x => 179.56,
+              :y => 66.22,
+              :ox => 0,
+              :oy => 0,
+              :z => 2,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 60,
+              :max => 120,
+              :period => 130
+            }
+          ],
+          :fx => [
+            {
+              :type => :drift,
+              :count => 12,
+              :shape => :dot,
+              :size => 2,
+              :colors => [
+                [230, 220, 190],
+                [255, 245, 220]
+              ],
+              :speed => [0.1, 0.3],
+              :sway => 5,
+              :zoom => [0.5, 0.8],
+              :opacity => [70, 140],
+              :layers => [:back, :mid]
+            },
+            {
+              :type => :fall,
+              :count => 4,
+              :shape => :rect,
+              :w => 1,
+              :h => 3,
+              :colors => [
+                [170, 200, 230]
+              ],
+              :area => [60, 60, 330, 240],
+              :speed => [2.0, 3.0],
+              :sway => 0,
+              :zoom => [0.6, 0.9],
+              :opacity => [120, 200],
+              :layers => [:back, :mid]
+            },
+            {
+              :type => :fall,
+              :count => 10,
+              :shape => :dot,
+              :size => 3,
+              :colors => [
+                [120, 100, 84],
+                [80, 64, 54]
+              ],
+              :area => [60, 60, 330, 250],
+              :speed => [2.5, 4.0],
+              :sway => 0,
+              :zoom => [0.5, 1.0],
+              :opacity => [220, 255],
+              :layers => [:back, :mid, :front]
+            },
+            {
+              :type => :rise,
+              :count => 4,
+              :shape => :puff,
+              :size => 18,
+              :colors => [
+                [230, 220, 190],
+                [255, 245, 220]
+              ],
+              :area => [203.9, 91.1, 213.9, 151.1],
+              :speed => [0.25, 0.5],
+              :sway => 6,
+              :zoom => [0.5, 0.8],
+              :grow => 1.6,
+              :opacity => [40, 80],
+              :layers => [:back],
+              :blend => 0
+            }
+          ]
+        }
+      }
     },
     # <<< CAVE
     # >>> COLOSSEUM
@@ -578,7 +700,130 @@ module PrismfallEBDX
           :layers => [:back, :mid, :front]
         },
         { :type => :flash, :color => [255, 240, 200], :alpha => 40, :interval => [200, 400], :decay => 8 }
-      ]
+      ],
+      :stages => {
+        2 => {
+          :backdrop => "field_colosseum_frenzy",
+          :layers => [
+            { :bitmap => "pf_colosseum_crowd", :hd => true, :x => 0.0, :y => 94.22, :ox => 0, :oy => 0, :z => 1, :frames => 2, :frame_time => 5 },
+            { :bitmap => "pf_colosseum_fence", :hd => true, :x => 0.0, :y => 81.78, :ox => 0, :oy => 0, :z => 2 },
+            { :bitmap => "pf_colosseum_lamp0", :hd => true, :x => 133.33, :y => 0.0, :ox => 11, :oy => 0, :z => 3, :anim => :sway, :amp => 7, :period => 70 },
+            {
+              :bitmap => "pf_colosseum_cone0",
+              :hd => true,
+              :x => 99.11,
+              :y => 37.78,
+              :ox => 0,
+              :oy => 0,
+              :z => 3,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 60,
+              :max => 110,
+              :period => 70,
+              :amp => 0
+            },
+            { :bitmap => "pf_colosseum_lamp1", :hd => true, :x => 248.89, :y => 0.0, :ox => 11, :oy => 0, :z => 3, :anim => :sway, :amp => 7, :period => 70 },
+            {
+              :bitmap => "pf_colosseum_cone1",
+              :hd => true,
+              :x => 214.67,
+              :y => 37.78,
+              :ox => 0,
+              :oy => 0,
+              :z => 3,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 60,
+              :max => 110,
+              :period => 70,
+              :amp => 0
+            },
+            { :bitmap => "pf_colosseum_lamp2", :hd => true, :x => 337.78, :y => 0.0, :ox => 11, :oy => 0, :z => 30, :anim => :sway, :amp => 7, :period => 70 },
+            {
+              :bitmap => "pf_colosseum_cone2",
+              :hd => true,
+              :x => 303.56,
+              :y => 24.44,
+              :ox => 0,
+              :oy => 0,
+              :z => 30,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 60,
+              :max => 110,
+              :period => 70,
+              :amp => 0
+            },
+            { :bitmap => "pf_colosseum_lamp3", :hd => true, :x => 53.33, :y => 0.0, :ox => 11, :oy => 0, :z => 30, :anim => :sway, :amp => 7, :period => 70 },
+            {
+              :bitmap => "pf_colosseum_cone3",
+              :hd => true,
+              :x => 19.11,
+              :y => 24.44,
+              :ox => 0,
+              :oy => 0,
+              :z => 30,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 60,
+              :max => 110,
+              :period => 70,
+              :amp => 0
+            },
+            {
+              :bitmap => "pf_colosseum_frenzy_roar",
+              :hd => true,
+              :x => 71.11,
+              :y => 45.78,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 30,
+              :max => 120,
+              :period => 36
+            }
+          ],
+          :fx => [
+            {
+              :type => :fall,
+              :count => 30,
+              :shape => :rect,
+              :w => 3,
+              :h => 2,
+              :colors => [
+                [230, 60, 50],
+                [250, 210, 80],
+                [240, 240, 240]
+              ],
+              :speed => [0.8, 1.6],
+              :sway => 12,
+              :zoom => [0.6, 1.0],
+              :opacity => [200, 255],
+              :spin => 10,
+              :layers => [:back, :mid, :front]
+            },
+            {
+              :type => :drift,
+              :count => 14,
+              :shape => :dot,
+              :size => 2,
+              :colors => [
+                [230, 220, 190],
+                [255, 245, 220]
+              ],
+              :speed => [0.4, 0.9],
+              :sway => 6,
+              :zoom => [0.5, 0.9],
+              :opacity => [100, 170],
+              :layers => [:back, :mid, :front]
+            },
+            { :type => :flash, :color => [255, 230, 180], :alpha => 70, :interval => [60, 140], :decay => 12, :double => true }
+          ]
+        }
+      }
     },
     # <<< COLOSSEUM
     # >>> CORROSIVE_MIRE
@@ -918,6 +1163,21 @@ module PrismfallEBDX
           :min => 90,
           :max => 170,
           :period => 200
+        },
+        { :bitmap => "pf_desert_awning", :hd => true, :x => 142.22, :y => 92.44, :ox => 4, :oy => 4, :z => 1, :anim => :sway, :amp => 5, :period => 70 },
+        {
+          :bitmap => "pf_desert_devil",
+          :hd => true,
+          :x => 304.44,
+          :y => 82.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :anim => [:drift, :pulse],
+          :amp => 50,
+          :min => 30,
+          :max => 120,
+          :period => 260
         }
       ],
       :stages => {
@@ -1017,8 +1277,8 @@ module PrismfallEBDX
         {
           :bitmap => "pf_dragons_den_magma",
           :hd => true,
-          :x => 36.89,
-          :y => 13.33,
+          :x => 168.0,
+          :y => 17.78,
           :ox => 0,
           :oy => 0,
           :z => 1,
@@ -1067,7 +1327,7 @@ module PrismfallEBDX
               :bitmap => "pf_dragons_den_wyrmfire_magma",
               :hd => true,
               :x => 2.67,
-              :y => 8.44,
+              :y => 10.67,
               :ox => 0,
               :oy => 0,
               :z => 1,
@@ -1683,6 +1943,40 @@ module PrismfallEBDX
           :opacity => [160, 255],
           :layers => [:back, :mid],
           :blend => 1
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 14,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [128.3, 47.3, 138.3, 117.3],
+          :speed => [0.25, 0.5],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back],
+          :blend => 0
+        }
+      ],
+      :layers => [
+        {
+          :bitmap => "pf_frozen_lake_window",
+          :hd => true,
+          :x => 112.0,
+          :y => 121.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 120,
+          :max => 220,
+          :period => 70
         }
       ]
     },
@@ -2307,10 +2601,11 @@ module PrismfallEBDX
           :ox => 0,
           :oy => 0,
           :x => 0,
-          :y => 66.67,
+          :y => 61.33,
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
-          :z => 1
+          :z => 1,
+          :opacity => 230
         },
         "img002" => {
           :bitmap => "pf_meadow_breeze",
@@ -2328,13 +2623,59 @@ module PrismfallEBDX
         }
       },
       :layers => [
+        { :bitmap => "pf_meadow_sails", :hd => true, :x => 272.0, :y => 93.33, :ox => 27, :oy => 27, :z => 1, :anim => :rotate, :speed => 0.8 },
+        {
+          :bitmap => "pf_meadow_shaft0",
+          :hd => true,
+          :x => 43.56,
+          :y => 25.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 20,
+          :max => 80,
+          :period => 190,
+          :phase => 0.0
+        },
+        {
+          :bitmap => "pf_meadow_shaft1",
+          :hd => true,
+          :x => 101.33,
+          :y => 25.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 20,
+          :max => 80,
+          :period => 250,
+          :phase => 1.9
+        },
+        {
+          :bitmap => "pf_meadow_shaft2",
+          :hd => true,
+          :x => 159.11,
+          :y => 25.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 20,
+          :max => 80,
+          :period => 310,
+          :phase => 3.8
+        },
         {
           :bitmap => "pf_meadow_grass0",
           :hd => true,
-          :x => 84.44,
-          :y => 146.67,
+          :x => 88.89,
+          :y => 149.33,
           :ox => 25,
-          :oy => 60,
+          :oy => 50,
           :z => 2,
           :anim => :sway,
           :amp => 3,
@@ -2344,10 +2685,10 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass1",
           :hd => true,
-          :x => 146.67,
-          :y => 149.33,
-          :ox => 18,
-          :oy => 46,
+          :x => 311.11,
+          :y => 151.11,
+          :ox => 22,
+          :oy => 54,
           :z => 2,
           :anim => :sway,
           :amp => 3,
@@ -2357,36 +2698,36 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass2",
           :hd => true,
-          :x => 320.0,
-          :y => 149.33,
-          :ox => 34,
-          :oy => 60,
-          :z => 2,
+          :x => 40.0,
+          :y => 251.56,
+          :ox => 77,
+          :oy => 151,
+          :z => 24,
           :anim => :sway,
-          :amp => 3,
+          :amp => 5,
           :period => 128,
           :phase => 0.8
         },
         {
           :bitmap => "pf_meadow_grass3",
           :hd => true,
-          :x => 355.56,
-          :y => 146.67,
-          :ox => 27,
-          :oy => 48,
-          :z => 2,
+          :x => 84.44,
+          :y => 271.11,
+          :ox => 57,
+          :oy => 120,
+          :z => 24,
           :anim => :sway,
-          :amp => 3,
+          :amp => 5,
           :period => 137,
           :phase => 1.2
         },
         {
           :bitmap => "pf_meadow_grass4",
           :hd => true,
-          :x => 40.0,
-          :y => 248.89,
-          :ox => 72,
-          :oy => 151,
+          :x => 364.44,
+          :y => 269.33,
+          :ox => 77,
+          :oy => 161,
           :z => 24,
           :anim => :sway,
           :amp => 5,
@@ -2396,10 +2737,10 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass5",
           :hd => true,
-          :x => 71.11,
-          :y => 266.67,
-          :ox => 41,
-          :oy => 122,
+          :x => 306.67,
+          :y => 291.56,
+          :ox => 45,
+          :oy => 112,
           :z => 24,
           :anim => :sway,
           :amp => 5,
@@ -2409,46 +2750,34 @@ module PrismfallEBDX
         {
           :bitmap => "pf_meadow_grass6",
           :hd => true,
-          :x => 364.44,
-          :y => 266.67,
-          :ox => 74,
-          :oy => 161,
+          :x => 191.11,
+          :y => 302.22,
+          :ox => 60,
+          :oy => 92,
           :z => 24,
           :anim => :sway,
           :amp => 5,
           :period => 164,
           :phase => 2.4
-        },
-        {
-          :bitmap => "pf_meadow_grass7",
-          :hd => true,
-          :x => 311.11,
-          :y => 288.89,
-          :ox => 53,
-          :oy => 119,
-          :z => 24,
-          :anim => :sway,
-          :amp => 5,
-          :period => 173,
-          :phase => 2.8
         }
       ],
       :fx => [
         {
           :type => :drift,
-          :count => 14,
+          :count => 18,
           :shape => :dot,
           :size => 2,
           :colors => [
-            [255, 255, 240],
-            [250, 240, 200]
+            [255, 255, 220],
+            [255, 240, 160]
           ],
           :dir => 1,
-          :speed => [0.8, 1.6],
-          :sway => 12,
+          :speed => [0.6, 1.4],
+          :sway => 14,
           :zoom => [0.5, 0.9],
-          :opacity => [160, 230],
-          :layers => [:back, :mid, :front]
+          :opacity => [170, 240],
+          :layers => [:back, :mid, :front],
+          :blend => 1
         },
         {
           :type => :drift,
@@ -2800,6 +3129,19 @@ module PrismfallEBDX
           :amp => 1.5,
           :period => 170,
           :angle => -4
+        },
+        { :bitmap => "pf_mountain_pennant", :hd => true, :x => 133.78, :y => 91.11, :ox => 2, :oy => 11, :z => 1, :anim => :sway, :amp => 9, :period => 44 },
+        {
+          :bitmap => "pf_mountain_hawk",
+          :hd => true,
+          :x => 253.78,
+          :y => 86.67,
+          :ox => 13,
+          :oy => 7,
+          :z => 1,
+          :anim => [:drift, :bob],
+          :amp => 60,
+          :period => 420
         }
       ],
       :fx => [
@@ -3661,6 +4003,22 @@ module PrismfallEBDX
           :anim => :sway,
           :amp => 1.6,
           :period => 110
+        },
+        {
+          :bitmap => "pf_snowy_mountain_lamp",
+          :hd => true,
+          :x => 114.22,
+          :y => 122.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => [:pulse, :flicker],
+          :min => 110,
+          :max => 220,
+          :period => 40,
+          :chance => 0.02,
+          :dropout => 3
         }
       ],
       :fx => [
@@ -3960,6 +4318,46 @@ module PrismfallEBDX
           :min => 40,
           :max => 120,
           :period => 100
+        },
+        {
+          :bitmap => "pf_wasteland_flame",
+          :hd => true,
+          :x => 306.67,
+          :y => 132.44,
+          :ox => 13,
+          :oy => 44,
+          :z => 2,
+          :frames => 4,
+          :frame_time => 5,
+          :zoom => 1.2
+        },
+        {
+          :bitmap => "pf_wasteland_fireglow",
+          :hd => true,
+          :x => 268.0,
+          :y => 94.67,
+          :ox => 0,
+          :oy => 0,
+          :z => 2,
+          :blend => 1,
+          :anim => [:pulse, :flicker],
+          :min => 90,
+          :max => 170,
+          :period => 30,
+          :chance => 0.02,
+          :dropout => 2
+        },
+        {
+          :bitmap => "pf_wasteland_hookswing",
+          :hd => true,
+          :x => 134.67,
+          :y => 66.67,
+          :ox => 5,
+          :oy => 2,
+          :z => 1,
+          :anim => :sway,
+          :amp => 5,
+          :period => 180
         }
       ],
       :fx => [
@@ -4108,6 +4506,32 @@ module PrismfallEBDX
           :anim => [:bob, :sway],
           :amp => 3,
           :period => 110
+        },
+        {
+          :bitmap => "pf_water_surface_boat",
+          :hd => true,
+          :x => 135.56,
+          :y => 140.44,
+          :ox => 51,
+          :oy => 86,
+          :z => 2,
+          :anim => [:bob, :sway],
+          :amp => 2.5,
+          :period => 120
+        },
+        {
+          :bitmap => "pf_water_surface_beam",
+          :hd => true,
+          :x => 305.78,
+          :y => 72.44,
+          :ox => 403,
+          :oy => 30,
+          :z => 1,
+          :blend => 1,
+          :anim => :sway,
+          :amp => 26,
+          :period => 320,
+          :opacity => 170
         }
       ],
       :fx => [
@@ -4399,7 +4823,7 @@ module PrismfallEBDX
               :ox => 0,
               :oy => 0,
               :x => 0,
-              :y => 97.78,
+              :y => 84.44,
               :zoom_x => 0.444444444,
               :zoom_y => 0.444444444,
               :z => 3
@@ -4407,24 +4831,86 @@ module PrismfallEBDX
           },
           :layers => [
             {
-              :bitmap => "pf_wildfire_embers_coals",
+              :bitmap => "pf_wildfire_embers_beds",
+              :hd => true,
+              :x => 42.22,
+              :y => 152.44,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 90,
+              :max => 230,
+              :period => 90
+            },
+            {
+              :bitmap => "pf_wildfire_embers_rims",
               :hd => true,
               :x => 0.0,
-              :y => 130.67,
+              :y => 0.0,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 50,
+              :max => 190,
+              :period => 140,
+              :phase => 2.0
+            },
+            {
+              :bitmap => "pf_wildfire_embers_warmth",
+              :hd => true,
+              :x => 60.44,
+              :y => 199.56,
               :ox => 0,
               :oy => 0,
               :z => 1,
               :blend => 1,
               :anim => :pulse,
               :min => 40,
-              :max => 170,
-              :period => 130
+              :max => 110,
+              :period => 160
             }
           ],
           :fx => [
             {
-              :type => :fall,
+              :type => :rise,
               :count => 30,
+              :shape => :glow,
+              :size => 4,
+              :colors => [
+                [255, 150, 50],
+                [255, 100, 30],
+                [255, 210, 90]
+              ],
+              :speed => [0.5, 1.4],
+              :sway => 12,
+              :zoom => [0.3, 0.7],
+              :opacity => [170, 255],
+              :layers => [:back, :mid, :front],
+              :blend => 1
+            },
+            {
+              :type => :twinkle,
+              :count => 12,
+              :shape => :spark,
+              :size => 5,
+              :colors => [
+                [255, 200, 100],
+                [255, 240, 180]
+              ],
+              :area => [40, 140, 350, 308],
+              :speed => [4, 8],
+              :zoom => [0.4, 0.8],
+              :opacity => [170, 255],
+              :layers => [:back, :mid],
+              :blend => 1
+            },
+            {
+              :type => :fall,
+              :count => 8,
               :shape => :dot,
               :size => 3,
               :colors => [
@@ -4434,60 +4920,25 @@ module PrismfallEBDX
               ],
               :speed => [0.3, 0.7],
               :sway => 16,
-              :zoom => [0.4, 0.8],
-              :opacity => [130, 210],
-              :layers => [:back, :mid, :front]
+              :zoom => [0.4, 0.7],
+              :opacity => [110, 170],
+              :layers => [:back, :mid]
             },
             {
               :type => :rise,
-              :count => 10,
-              :shape => :glow,
-              :size => 4,
-              :colors => [
-                [255, 150, 50],
-                [255, 100, 30],
-                [255, 210, 90]
-              ],
-              :speed => [0.4, 1.0],
-              :sway => 8,
-              :zoom => [0.3, 0.6],
-              :opacity => [150, 230],
-              :layers => [:back, :mid],
-              :blend => 1
-            },
-            {
-              :type => :rise,
-              :count => 5,
+              :count => 4,
               :shape => :puff,
-              :size => 24,
+              :size => 22,
               :colors => [
-                [150, 160, 190],
-                [120, 130, 160]
+                [170, 150, 160],
+                [140, 124, 136]
               ],
-              :area => [128.3, 13.3, 138.3, 133.3],
+              :area => [128.3, 40.0, 138.3, 160.0],
               :speed => [0.25, 0.5],
               :sway => 6,
               :zoom => [0.5, 0.8],
               :grow => 1.6,
-              :opacity => [40, 90],
-              :layers => [:back],
-              :blend => 0
-            },
-            {
-              :type => :rise,
-              :count => 5,
-              :shape => :puff,
-              :size => 24,
-              :colors => [
-                [150, 160, 190],
-                [120, 130, 160]
-              ],
-              :area => [306.1, 22.2, 316.1, 142.2],
-              :speed => [0.25, 0.5],
-              :sway => 6,
-              :zoom => [0.5, 0.8],
-              :grow => 1.6,
-              :opacity => [40, 90],
+              :opacity => [40, 80],
               :layers => [:back],
               :blend => 0
             }

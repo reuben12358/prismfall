@@ -128,11 +128,46 @@ name_rules:   # regex on the map name (case-insensitive) -> field; by_kingdom ov
 # Battles that ignore the map default.
 exceptions:
   trainers:   # FieldEffects::TRAINER_FIELDS - matched on the first opponent
-    - {trainer: RIVAL_KESTREL, versions: [10, 11, 12], field: NONE, why: "K1 at Ferrow's Landing is the tutorial battle: learn the basics before fields"}
+    - {trainer: RIVAL_KESTREL, versions: [10, 11, 12, 110, 111, 112, 210, 211, 212], field: NONE, why: "K1 at Ferrow's Landing is the tutorial battle: learn the basics before fields (all difficulty variants)"}
+    # --- trainer workstream (design/TRAINER_FIELD_PLAYBOOK.md): important battles whose team is built for one field.
+    # versions list every difficulty variant (v, v+100, v+200). setBattleRule("field", X) in an event still wins.
+    - {trainer: RIVAL_JUNO, versions: [10, 11, 12, 110, 111, 112, 210, 211, 212], field: MEADOW, why: "J1: spar on Saltmere's promenade green; Juno's Grassy Terrain tends the Meadow into a Flower Garden"}
+    - {trainer: HOLLOW_TEO, versions: [0, 100, 200], field: WATER_SURFACE, why: "Teo at the stalled mill-race: his Swift Swim cell fights on the water wherever the event stands"}
+    - {trainer: RIVAL_KESTREL, versions: [20, 21, 22, 120, 121, 122, 220, 221, 222], field: MOUNTAIN, why: "K2 on the Gullcry Cliffs (Route 6)"}
+    - {trainer: RIVAL_KESTREL, versions: [30, 31, 32, 130, 131, 132, 230, 231, 232], field: DESERT, why: "K3 at the Ossuary exit in the Bone Sands"}
+    - {trainer: RIVAL_JUNO, versions: [20, 21, 22, 120, 121, 122, 220, 221, 222], field: CORROSIVE_MIRE, why: "J2 on Mirefen's stilt-walk; Juno's Misty Terrain can cleanse it"}
+    - {trainer: RIVAL_KESTREL, versions: [40, 41, 42, 140, 141, 142, 240, 241, 242], field: COLOSSEUM, why: "K4: Ironreach Open final in the Iron Pit"}
+    - {trainer: RIVAL_KESTREL, versions: [50, 51, 52, 150, 151, 152, 250, 251, 252], field: STORMFRONT, why: "K5 on Skyreach's decks"}
+    - {trainer: RIVAL_KESTREL, versions: [60, 61, 62, 160, 161, 162, 260, 261, 262], field: HOLLOW_CATHEDRAL, why: "K6 in the Hollow Cathedral (the event may flicker it to BLEED)"}
+    - {trainer: RIVAL_KESTREL, versions: [70, 71, 72, 170, 171, 172, 270, 271, 272], field: FAIRY_TALE, why: "K7 in Gloaming: the knight and the dragon"}
+    - {trainer: RIVAL_JUNO, versions: [40, 41, 42, 140, 141, 142, 240, 241, 242], field: PRISM_ARENA, why: "J4, Festival R16: story/08_ACT_V has the bracket on the cycling Prism Arena"}
+    - {trainer: RIVAL_KESTREL, versions: [80, 81, 82, 180, 181, 182, 280, 281, 282], field: PRISM_ARENA, why: "K8, Festival semifinal"}
+    - {trainer: RIVAL_KESTREL, versions: [90, 91, 92, 190, 191, 192, 290, 291, 292], field: PRISM_ARENA, why: "K9 (Fallen), Festival semifinal"}
+    - {trainer: LEADER_MARISOL, versions: [90, 190, 290], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_ANJA, versions: [90, 190, 290], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_ROWAN, versions: [90, 190, 290], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_CELESTINE, versions: [92, 192, 292], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_SIGRUN, versions: [92, 192, 292], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_KAITO, versions: [92, 192, 292], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_YSOLDE, versions: [92, 192, 292], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_ODESSA, versions: [92, 192, 292], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: LEADER_BRANN, versions: [96, 196, 296], field: PRISM_ARENA, why: "Festival bracket draw (version = ace level)"}
+    - {trainer: CHAMPION_VALEN, versions: [0, 100, 200, 1, 101, 201], field: PRISM_ARENA, why: "Festival final: his team is ordered to the arena's Plate cycle"}
+    - {trainer: MERIDIAN_KROLL, versions: [21, 121, 221], field: PRISM_ARENA, why: "Ch21 tag battle on the cracking arena floor"}
+    - {trainer: MERIDIAN_MARCHETTI, versions: [21, 121, 221], field: PRISM_ARENA, why: "Ch21 tag battle on the cracking arena floor"}
+    - {trainer: MERIDIAN_QUENT, versions: [21, 121, 221], field: PRISM_ARENA, why: "Ch21 tag battle on the cracking arena floor"}
+    - {trainer: MERIDIAN_DIRECTORATE, versions: [21, 121, 221], field: PRISM_ARENA, why: "Ch21 tag battle on the cracking arena floor"}
+    - {trainer: ARCHSEER_DASK, versions: [92, 192, 292], field: INVERSE, why: "Ruin QF: the Synod's champion fights on the Inverse Field (story/12_RUIN_ROUTE)"}
+    - {trainer: ECHO_MORWEN, versions: [90, 190, 290], field: HOLLOW_CATHEDRAL, why: "Night of Masques exhibition at the Crownhaven Cathedral lantern"}
+    - {trainer: LEADER_DORIAN, versions: [90, 190, 290], field: GRAND_STAGE, why: "Pageant Bout exhibition (Dorian + Rook)"}
+    - {trainer: LEADER_MAGNUS, versions: [1, 101, 201], field: FACTORY, why: "Ruin Gym 15 (his lead's Explosion makes it a Scrapyard)"}
+    - {trainer: LEADER_NYX, versions: [1, 101, 201], field: NEW_MOON, why: "Ruin Gym 16"}
+    - {trainer: LEADER_CELESTINE, versions: [1, 101, 201], field: FAIRY_TALE, why: "Ruin Gym 17 (the event turns it INVERSE for her last Pokemon)"}
+    - {trainer: LEADER_SIGRUN, versions: [1, 101, 201], field: DRAGONS_DEN, why: "Ruin Gym 18"}
   scripted:   # set by the event or a helper, not by this file
     gyms: "Prismfall.gym_battle(n) sets each Warden's field from GYMS (Core 003_Badges_Gyms.rb); gym-map defaults below match, so gym trainers fight on the same field"
     bosses: "Prismfall::Bosses set their own field (Zekrom FACTORY, Kyogre FROZEN_LAKE, Arceus PRISM_ARENA, ...); Bleed-zone boss events set BLEED"
-    festival: "Festival bracket rounds use :field => nil (Core 008_Festival_Data.rb), so they get the Temple-Arena default (490: GRAND_STAGE); the Hijack is PRISM_ARENA"
+    festival: "Festival bracket rounds use :field => nil (Core 008_Festival_Data.rb). Every bracket opponent that has a team is listed under exceptions.trainers as PRISM_ARENA (story/08_ACT_V: the bracket is fought on the cycling Prism Arena); anything not listed falls back to the Temple-Arena default (490: GRAND_STAGE). The Hijack is PRISM_ARENA"
     cameos: "Prismfall.cameo_battle(..., field: X) may set a field; without one the map default applies"
     safari: "Safari-style battles (Royal Chase 682) are not move battles, so no field applies there"
     test_arena: "map 990 (mapgen/gen_test_arena.py) sets a field per NPC; not listed here"

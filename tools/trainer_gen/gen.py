@@ -122,7 +122,7 @@ warden(1, "LEADER_TAMSIN", "Tamsin", 15, "SILKWOOD", "Oh! You've unpicked every 
     P("JOLTIK", 13, "COMPOUNDEYES", "ORANBERRY", "MODEST", "ELECTROWEB,FURYCUTTER,STRINGSHOT,ABSORB", "S", casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB"},
       hard={"item": "FOCUSSASH", "moves": "ELECTROWEB,STRUGGLEBUG,STRINGSHOT,THUNDERWAVE"}),
     # Answer to the Fire flip: rain halves Fire, doubles Swift Swim, wets the silk (Electric x1.2) and douses a Wildfire to Embers.
-    P("SURSKIT", 13, "SWIFTSWIM", "ORANBERRY", "TIMID", "WATERGUN,QUICKATTACK,RAINDANCE,SWEETSCENT", "S",
+    P("SURSKIT", 13, "SWIFTSWIM", "ORANBERRY", "TIMID", "WATERGUN,QUICKATTACK,RAINDANCE,STRINGSHOT", "S",
       only="nocasual", hard={"moves": "WATERPULSE,STRUGGLEBUG,RAINDANCE,QUICKATTACK", "item": "DAMPROCK"}),
     P("VIVILLON", 14, "COMPOUNDEYES", "SILVERPOWDER", "TIMID", "STRUGGLEBUG,GUST,STUNSPORE,POISONPOWDER", "S",
       only="hard"),
@@ -147,9 +147,10 @@ warden(2, "LEADER_DORIAN", "Dorian", 19, "GRAND_STAGE", "Bravo! Bravissimo! The 
       hard={"ab": "PROTEAN", "moves": "FAKEOUT,SHADOWSNEAK,KNOCKOFF,DRAINPUNCH"}),
 ])
 warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. Take the badge before I change my mind.", [
-    # Water Surface already switches Swift Swim on, so Standard drops the Damp Rock (rain 5+3 turns instead of 8+3).
-    P("PELIPPER", 21, "DRIZZLE", "ORANBERRY", "MODEST", "WATERPULSE,WINGATTACK,SUPERSONIC,PROTECT", "BS",
-      casual={"ab": "KEENEYE"}, hard={"item": "DAMPROCK", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
+    # Water Surface already switches Swift Swim on and gives Water x1.5, so Standard and Casual drop Drizzle (rain on top
+    # of the field made Water Pulse a one-hit KO at Gym 3). Hard keeps Drizzle + Damp Rock: rain lasts 8+3 turns here.
+    P("PELIPPER", 21, "KEENEYE", "ORANBERRY", "MODEST", "WATERPULSE,WINGATTACK,SUPERSONIC,PROTECT", "BS",
+      hard={"ab": "DRIZZLE", "item": "DAMPROCK", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
     # Volt Absorb punishes the Electric answer; its own Spark is x1.5 against grounded targets. Elemental Seed: +1 Speed, Aqua Ring.
     P("LANTURN", 22, "VOLTABSORB", "ELEMENTALSEED", "MODEST", "BUBBLEBEAM,SPARK,CONFUSERAY,THUNDERWAVE", "BS",
       only="nocasual", hard={"moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),

@@ -66,6 +66,50 @@ module BackdropStills
     end
   end
 
+  # BD_TRANSITIONS="VOLCANIC>ASHEN_WASTE;MEADOW>WILDFIRE>WILDFIRE:2": live field changes through the
+  # field plugin's own Battle#change_field / #set_field_stage, every 2nd frame dumped to Captures/tr_<chain>/.
+  def transition_chains
+    (ENV["BD_TRANSITIONS"] || "").split(";").map { |c| c.split(">").map { |t| a, b = t.split(":"); [a.to_sym, (b || 1).to_i] } }
+  end
+
+  def run_transitions
+    transition_chains.each do |chain|
+      @chain = chain
+      @done = false
+      @current = nil
+      name = "tr_" + chain.map { |id, st| id.to_s.downcase + (st > 1 ? "_s#{st}" : "") }.join("_to_")
+      party = [DemoRun.mon(:LUCARIO, 50, [:AURASPHERE])]
+      DemoRun.battle(name, party, :turns => 1) do
+        $game_temp.clear_battle_rules
+        setBattleRule("field", chain[0][0])
+        setBattleRule("fieldStage", chain[0][1]) if chain[0][1] > 1
+        WildBattle.start(FOES[chain[0][0]] || :DITTO, 50)
+      end
+      DemoRun.every = 100000
+      DemoRun.log("transition #{name}: #{@done ? 'ok' : 'NOT RUN'}")
+    end
+    @chain = nil
+  end
+
+  def play_chain(battle, scene)
+    @done = true
+    DemoRun.every = 2
+    90.times { scene.pbUpdate }
+    @chain[1..].each do |id, st|
+      if battle.field_effect == id
+        battle.set_field_stage(st)
+      else
+        battle.change_field(id)
+        battle.set_field_stage(st) if st > 1
+      end
+      DemoRun.log("  now #{battle.field_effect} stage #{FieldEffects.stage(battle)}")
+      150.times { scene.pbUpdate }
+    end
+    DemoRun.every = 100000
+  end
+
+  def chain?; !@chain.nil?; end
+
   def hold_and_shoot(scene)
     return if @done || !@current
     @done = true
@@ -112,7 +156,8 @@ if ENV["DEMO_PLAN"].to_s.start_with?("backdrops")
       $player.badges = Array.new(18) { true }
       Prismfall::LevelCap.unlock_finale! rescue nil
       self.every = 100000   # no frame dumps, stills only
-      BackdropStills.run_all
+      BackdropStills.run_all if ENV["BD_TRANSITIONS"].to_s.empty?
+      BackdropStills.run_transitions
       log("done")
     end
   end
@@ -134,7 +179,7 @@ if ENV["DEMO_PLAN"].to_s.start_with?("backdrops")
     alias bd_pbCommandPhase pbCommandPhase unless method_defined?(:bd_pbCommandPhase)
     def pbCommandPhase
       if DemoRun.auto
-        BackdropStills.hold_and_shoot(@scene)
+        BackdropStills.chain? ? BackdropStills.play_chain(self, @scene) : BackdropStills.hold_and_shoot(@scene)
         @decision = 3
         return
       end

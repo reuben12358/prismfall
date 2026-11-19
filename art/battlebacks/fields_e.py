@@ -74,15 +74,15 @@ def meadow():
                "softlight")
     # distant landmark on the far ridge + wildflowers through the grass
     wm = windmill(64)
-    paste(hd, wm, 742, 262, "bottom")
+    paste(hd, wm, 612, 268, "bottom")
     flowers_scatter(hd, (110, 300, 864, 693), 700, [(255, 255, 255), (255, 224, 80), (214, 150, 250), (255, 150, 180)],
                     seed=404, size=(1.5, 3.5))
     save_room("field_meadow", hd)
     night = sheet.crop((272, 160, 528, 304)).resize((512, 288), Image.NEAREST)
     hn = extend_vanilla(night, origin=(110, 150))
-    paste(hn, grade(wm, mul=(0.5, 0.5, 0.8)), 742, 262, "bottom")
+    paste(hn, grade(wm, mul=(0.5, 0.5, 0.8)), 612, 268, "bottom")
     save_room("field_meadow_night", hn)
-    layers = [layer(F, "sails", onto(sails(26), 742 - 28, 262 - 58 - 28), anchor=(742, 262 - 58), z=1,
+    layers = [layer(F, "sails", onto(sails(26), 612 - 28, 268 - 58 - 28), anchor=(612, 268 - 58), z=1,
                     anim=S("rotate"), speed=0.8)]
     for i, (x, ang) in enumerate(((300, 62), (430, 68), (560, 74))):
         layers.append(layer(F, "shaft%d" % i, cone(HD, (x - 200, 60), 10, 640, (255, 248, 200), alpha=60, angle=ang),

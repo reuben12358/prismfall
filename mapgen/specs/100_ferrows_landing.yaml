@@ -1077,7 +1077,7 @@ events:
   name: Town sign
   post: false
   text: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
-  at: [37, 8]
+  at: [38, 7]
 - type: sign
   name: Lane sign
   post: false

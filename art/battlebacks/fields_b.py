@@ -135,8 +135,8 @@ def flower_garden():
             hd = grade(hd, mul=(1.3, 1.32, 1.12) if st == 1 else (1.12, 1.3, 1.1), gamma=0.72 if st == 1 else 0.8)
             hd = blend(hd, vgradient(HD, [(0, (255, 240, 170, 110)), (0.5, (255, 240, 170, 30)), (1, (0, 0, 0, 0))]),
                        "softlight")
-            flowers_scatter(hd, (0, 300, 864, 693), 500 if st == 1 else 800,
-                            [(150, 210, 110), (190, 230, 130), (255, 190, 210), (255, 240, 170)], seed=st, size=(1, 3))
+            flowers_scatter(hd, (0, 300, 864, 693), 140 if st == 1 else 260,
+                            [(150, 210, 110), (190, 230, 130), (255, 190, 210), (255, 240, 170)], seed=st, size=(2, 4))
             ring_stones(hd, FOE, 120, 26, [(140, 200, 100), (255, 180, 200), (190, 230, 130)], n=14, size=(4, 6),
                         seed=st, outline=(50, 80, 40))
         if st >= 3:
