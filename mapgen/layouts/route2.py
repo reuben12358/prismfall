@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Route 2 (521): Hale's Bramble farmstead in the south, the survey line across the terrace, the Accord checkpoint on the
+"""Windfall Row (521): Hale's Bramble farmstead in the south, the survey line across the terrace, the Accord checkpoint on the
 west road into the Gossamer Wood, and the Glassed Orchard's gate in the east where the glass has started to creep.  62 x 48.
-South gate x 40-42 (Route 1).  West road exit (0, 9-11) -> 524 (warp R2_WOOD).  East orchard gate (61, 23) -> 522 (R2_ORCHARD).
+South gate x 40-42 (The Ferrymen's Mile).  West road exit (0, 9-11) -> 524 (warp R2_WOOD).  East orchard gate (61, 23) -> 522 (R2_ORCHARD).
 Run:  python3 -I layouts/route2.py && python3 -I build.py 521"""
 import os, sys, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -114,7 +114,7 @@ def build():
     E.append({'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 24, 'y': 56, 'dir': 'up'}})
     E.append({'type': 'warp', 'name': 'To the Glassed Orchard', 'at': [61, 23], 'link': 'R2_ORCHARD', 'arrive': [60, 23, 'left']})
     E.append({'type': 'warp', 'name': 'To the Glassed Orchard 2', 'at': [61, 22], 'to': {'map': 522, 'x': 2, 'y': 37, 'dir': 'right'}})
-    E.append({'type': 'sign', 'at': P['sign'], 'text': "ROUTE 2\nBriarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown's forest and the Warden's care. Litterers will be woven into something."})
+    E.append({'type': 'sign', 'at': P['sign'], 'text': "WINDFALL ROW\nBriarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown's forest and the Warden's care. Litterers will be woven into something."})
     hold = "Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers."
     lifted = ["Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.",
               "Accord Guard: ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.",
@@ -176,10 +176,10 @@ def build():
               'text': "ACCORD QUARANTINE NOTICE\nNo travel beyond the Landing without papers.\nUnderneath, in pencil: challengers excepted, obviously, it's the LAW."})
     c.events = E
     c.ledge(28, 37, 30)
-    head = {'id': 521, 'biome': 'route', 'name': 'Route 2', 'bgm': 'Route 2', 'parent': 0, 'tone': [8, 4, -10, 0],
+    head = {'id': 521, 'biome': 'route', 'name': 'Windfall Row', 'bgm': 'Route 2', 'parent': 0, 'tone': [8, 4, -10, 0],
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 23], 'BattleBack': 'field'},
             'connections': [{'dir': 'S', 'offset': 40, 'to': 520, 'to_offset': 25}]}
-    return c.write('521_route2.yaml', head, "# Route 2 (521). WRITTEN BY layouts/route2.py - edit that, not this file.\n")
+    return c.write('521_route2.yaml', head, "# Windfall Row (521). WRITTEN BY layouts/route2.py - edit that, not this file.\n")
 
 
 if __name__ == '__main__':

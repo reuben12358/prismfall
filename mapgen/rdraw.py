@@ -935,7 +935,8 @@ def pieces_late():
 
 
 CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (1, 0, 0), 'O': (2, 0, 2), 'I': (1, 0, 0, 12),
-        'N': (1, 8, 0), 'S': (1, 1, 0)}   # layer, passage, priority
+        'N': (1, 8, 0), 'S': (1, 1, 0),
+        'Q': (1, 0, 0), 'G': (0, 0, 0)}   # layer, passage, priority (Q: walkable quay coping; G: ground tile)
 
 
 def pieces_late2():
@@ -943,6 +944,13 @@ def pieces_late2():
     out = {}
     im, c = playhouse(); out['pf_playhouse'] = (im, c, (7, 11))
     return out
+
+
+def pieces_late3():
+    """fifth block (map builder 8): Saltmere's city kit from tdraw.py (townhouses, quay kit, stone and timber stairs,
+    cranes, salt, playbills, fountain, stalls, grass variation).  rcustom dedups identical tiles in this block."""
+    import tdraw
+    return tdraw.city_pieces()
 
 
 if __name__ == '__main__':

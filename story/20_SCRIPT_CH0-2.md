@@ -1,13 +1,16 @@
-# Script: Prologue, Chapter 1, Chapter 2 (through Gym 1 and its aftermath)
+# Script: Prologue, Chapter 1, Chapter 2 (Saltmere, through Gym 1 and the Pageant)
 
-> **Final playable script** for the game's first hour (SPINE Revision 8). It covers maps 109–110, 100–108, 520, 523, 522, 521, 524, 120–125, 130–131, 525, 548, 526. Structure follows the built events in `mapgen/specs`; where this file adds an event, it is marked **[NEW]**.
-> Sources: 04_ACT_I (outline), 15_COMEDY (scenes Ch0–Ch2, inlined), NARRATIVE_KEYS (choice keys), FLAGS (switches), SYSTEMS (script calls), CAMEOS §1 (Shelly).
+> **Final playable script** for the game's first hour (SPINE Revisions 8 and 14). It covers maps 109–110, 100–108, 520, 523, 522, 521 (Chapter 1), then the Strand Road 520 → 527 → 528 and Saltmere 140–147, the Pell Playhouse 150/154 (Gym 1) and the Lantern Theatre 145 (Chapter 2). Structure follows the built events in `mapgen/specs`; where this file adds an event, it is marked **[NEW]**. Maps 527 and 528 are new (cartographer, `tools/worldmap/world_data.py`), so all of their events are new.
+> **Chapter 3** (the Weavers' Road, Briarwick, Gym 2) moved to **`story/21_SCRIPT_CH3.md`** when Revision 14 swapped the first two gyms.
+> Sources: 04_ACT_I (outline), 15_COMEDY (scenes Ch0–Ch2, inlined), NARRATIVE_KEYS (choice keys), FLAGS (switches), SYSTEMS (script calls), GYM_PUZZLES (Gym 1), BALANCE 4b (versions).
+> **Keys and switches keep their old names.** `:ch3_juno_talk`, `CH3_PAGEANT_DONE`, `CH3_J1_DONE` and `CH3_UNDERSTUDY_GOT` are all Chapter 2 now; IDs never renumber (FLAGS.md).
 
 ## Conventions
 - `[portrait: NAME, expression]` precedes each portrait line. No tag = plain message box (narration, signs, generic NPCs use `[name: X]` with no portrait).
 - *(italics)* = emote bubble or staging. `MOVE:` = movement route. `SE:` / `BGM:` = audio. `WAIT n` = frames.
 - `> option` = a choice. `→` = what follows. `PC` = the player; `\PN` = player name.
 - **Script calls:** `pf_choose(:key, :value)`, `pf_bond_add(:ID, n)`, `pf_standing_add(:FACTION, n)`, `pf_resonance_add(n)`, `Prismfall.rival_battle(...)`, `Prismfall.gym_battle(n)`, `Prismfall.game_over(:GO_X)`, `Prismfall.record_starter(...)`. Choice effects in NARRATIVE_KEYS §4.2 apply automatically on `pf_choose`; extra deltas are written out.
+- **Gym numbers:** events look a Warden's number up instead of hard-coding it (`Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN))`, `pfm_gym_won?(:LEADER_TAMSIN)`, from `mapgen/ruby/008_GymOrder.rb`). The script writes the number for readability: Dorian is 1, Tamsin is 2.
 - **Switches/variables:** names from `design/FLAGS.md` (S101 = `PRO_FERRY_DONE`, etc.).
 - **Reactive lines:** `[after X]` variants replace the default once switch X is on.
 
@@ -263,6 +266,7 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 [portrait: WENNA, happy] Eat this. No, don't pay me. Eat it where I can see you.
 (Received: BRAMBLE TART. "Restores 30 HP. Still warm. Tastes like somebody's kitchen.")
 [portrait: WENNA, neutral] My Juno works up at the station. Talks like a kettle. You'll like her. Everyone does, it's exhausting.
+[portrait: WENNA, happy] You'll know her by the flowers. She's worn her aunt's blossoms since she was three. They've never wilted. We stopped asking.
 ```
 *[after S103]* `[portrait: WENNA, happy] She named your little group? Of course she did. She named the kettle.`
 *[after S105]* `[portrait: WENNA, sad] She told me about the orchard. That was the Pruetts' place. They had apples when I was a girl.`
@@ -291,8 +295,8 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 
 ### Flavor townsfolk (each a separate event)
 ```
-[name: Rope-skipping Girl 1] One for the weaver, two for the stage,
-[name: Rope-skipping Girl 2] three for the river that won't turn its page!
+[name: Rope-skipping Girl 1] One for the stage and two for the weave,
+[name: Rope-skipping Girl 2] three for the river that won't take its leave!
 [name: Rope-skipping Girl 1] Four for the lantern, five for the dune,
 [name: Rope-skipping Girl 2] six for the fen and its poison-blue moon!
 (Talk again:)
@@ -334,6 +338,7 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 TOWN SIGN: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
 FESTIVAL POSTER: "THE FESTIVAL OF CHAMPIONS, AF 300. All Kingdoms. One Blessing." A painted crown floats over eighteen colored banners. The stone in the crown has a tiny dark fleck. Probably a printing fault.
 LANE SIGN: ↑ Tidewatch Station (Prof. I. Larch) · → Hale's Bramble · ← Lighthouse (KEEP OUT. THIS MEANS YOU, KESTREL.)
+ROAD SIGN [NEW] (north gate): ↑ THE FERRYMEN'S MILE — Hale's Bramble, Windfall Row, and at the Hale Bell the Strand Road west to Saltmere. Briarwick by the forest road: CLOSED BY ORDER OF THE ACCORD.
 NOTICE BOARD: "LOST: one Skwovet, answers to Biscuit. Last seen heading for the old Pruett orchard. Do NOT follow it in. — W. Hale"
 FISH BARRELS: Magikarp. They look resigned.
 HIDDEN ITEM (behind the tart stall): ORAN BERRY. "It rolled off the stall. Finders keepers is an old harbor law."
@@ -392,7 +397,7 @@ DOCKMASTER'S LEDGER (bookshelf): "AF 290, night crossing, unscheduled. Capt. Mor
 
 ### EV "Professor Larch" (first entry, autorun)
 ```
-(A cluttered station: tide charts, brass instruments, a stove with a blackened kettle. Juno is at a bench, labeling seed packets, back turned.)
+(A cluttered station: tide charts, brass instruments, a stove with a blackened kettle. Juno is at a bench, labeling seed packets, back turned. A wreath of white-and-pink blossoms sits crooked on her auburn hair, and a veil of them trails off the stool and across the floor, where it has collected some straw and one bewildered Wooper.)
 [portrait: LARCH, neutral] If that's the kelp man, the answer is still yes, and I don't care what he's offering.
 MOVE: Larch turns. Sees the PC. WAIT 40.
 [portrait: LARCH, shocked] ...Oh.
@@ -419,7 +424,12 @@ MOVE: Larch pours two cups from the kettle. The liquid is dark green.
 [portrait: LARCH, neutral] Null. Right. Well. That's that, then.
 MOVE: Juno has turned around and is staring. A seed packet slides off the bench.
 [portrait: JUNO, shocked] Professor, is this— are they— is this the ferry person?!
+MOVE: Juno stands up. The veil does not; the Wooper is still on it.
 [portrait: LARCH, deadpan] This is \PN. \PN, this is Juno Hale, my assistant. She'll tell you about larches now. I can't stop her. Nobody can.
+> (Look at the flowers.)
+  [portrait: JUNO, happy] Oh! They're my aunt's. Aunt Elin's tree, in Verdance. They never wilt. Not once in twelve years. You can touch one. Gently. They're older than the Wooper.
+> ...
+  [portrait: JUNO, happy] You're looking at the flowers. Everyone does. They're my aunt's. I'll tell you about it some time when I'm not about to tell you about larches.
 [portrait: JUNO, happy] Did you know larches are the only conifers that drop their needles? Every winter they look dead. They're not!
 [portrait: JUNO, happy] They're just letting go so they don't snap. Professor says it's the most sensible thing a tree's ever done.
 [portrait: LARCH, deadpan] I said it once. In 296.
@@ -496,10 +506,13 @@ Switch S104 CH1_K1_DONE = ON.
 [portrait: ROWAN, happy] Are you, now. Rowan Ashby. I keep the garden at Verdance, and this one's aunt kept me.
 [portrait: ROWAN, neutral] I came down for seed stock. And to check on the Professor's tea plants. They're thriving. I can't account for it.
 [portrait: LARCH, deadpan] Spite.
+[portrait: ROWAN, neutral] Came the long way, too. The forest road's glass past Briarwick, so it's round by the coast and Saltmere now.
+[portrait: ROWAN, happy] They're putting the Pageant on early this year. Whole town's in rehearsal. Lot of fuss over a play.
 [portrait: ROWAN, neutral] This is a Phantump. I found it up past Briarwick, in a wood that's gone to glass. It was sitting in a glass tree, crying.
 [portrait: ROWAN, sad] Its tree couldn't die properly, you see. So it couldn't either.
 [portrait: JUNO, sad] That's so sad...
 [portrait: ROWAN, neutral] It's not sad that things die, Juno. Everything that grows must be allowed to. That's what makes room.
+MOVE: Rowan reaches out and touches one of the blossoms in Juno's wreath, very lightly, the way you'd touch someone's hand.
 [portrait: ROWAN, neutral] What's sad is when they're not let.
 (The Phantump drifts off his shoulder and hovers in front of the PC. It stops shivering.)
 [portrait: ROWAN, shocked] ...Well. It hasn't gone near anyone but me in a month.
@@ -516,13 +529,13 @@ Switch S104 CH1_K1_DONE = ON.
 ```
 [portrait: JUNO, panic] \PN! Mum's Skwovet's got out again. Biscuit. He's gone to the Pruett orchard and I'm not— nobody's supposed to go in there.
 [portrait: JUNO, neutral] Will you come and look? Just LOOK. From the outside. I'll show you the way.
-QUEST LOG: "Biscuit" — Go with Juno to the old orchard on Route 1.
+QUEST LOG: "Biscuit" — Go with Juno to the old orchard on Windfall Row.
 (Juno becomes a follower.)
 ```
 
-## Map 520 — Route 1 (farm lane; BGM: route theme, light)
+## Map 520 — The Ferrymen's Mile (coastal farm lane; BGM: route theme, light)
 ```
-ROUTE SIGN: ROUTE 1 — Ferrow's Landing ↔ Hale's Bramble ↔ Route 2. Mind the hedges. The hedges mind you.
+ROUTE SIGN: THE FERRYMEN'S MILE — Ferrow's Landing ↔ Hale's Bramble ↔ Windfall Row. Mind the hedges. The hedges mind you.
 [name: Youngster Pim] A trainer! With a real partner! Fight me, I've got a Bidoof and a dream!
   (Trainer battle. After:) [name: Pim] The dream's fine. The Bidoof needs a minute.
 [name: Lass Dory] My Fletchling only knows Tackle and judgment. (Trainer battle. After:) It's judging me now.
@@ -657,26 +670,28 @@ V102 STORY_CHAPTER = 2.
 ---
 *(Chapter 2 continues below.)*
 
-# CHAPTER 2 — "The Weaver's Debt"
+# CHAPTER 2 — "Curtain Call"
 
-**Chapter start:** the morning after. Larch sees the PC off at the Route 1 stile.
+**Chapter start:** the morning after (V102 = 2). Larch sees the PC off at the stile on the Ferrymen's Mile.
 ```
-[portrait: LARCH, neutral] Eighteen gyms. Briarwick's first, up through the Gossamer Wood. The Warden's a girl called Tamsin Loom. Go easy on her, she inherited the seat in spring and hasn't slept since.
+[portrait: LARCH, neutral] Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off — the Glasswood's walked across it — so you go round by the coast.
+[portrait: LARCH, neutral] Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden's Dorian Pell. He'll call you "darling" and mean it about a third of the time.
 [portrait: LARCH, neutral] Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.
-[portrait: JUNO, happy] I'm coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!
-(Received: TOWN MAP. "Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.")
-QUEST LOG: "Eighteen Roads" — Earn the first badge in Briarwick.
+[portrait: JUNO, happy] I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!
+[portrait: JUNO, happy] And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter.
+[portrait: LARCH, deadpan] They use salt.
+[portrait: JUNO, shocked] ...Why would you tell me that. *(shock lines)*
+(Received: TOWN MAP. "Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.")
+QUEST LOG: "Eighteen Roads" — Earn the first badge in Saltmere, west along the coast.
+(Juno becomes a follower.)
 ```
 
-## Map 521 — Route 2 (farmland into forest; BGM: route theme, fuller)
-```
-ROUTE SIGN: ROUTE 2 — Briarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown's forest and the Warden's care. Litterers will be woven into something.
-```
-**EV "Accord guard"** (roadblock, lifts once S105 is on)
+## Map 520 — The Ferrymen's Mile: the Hale Bell and the quarantine line
+**EV "Accord guard"** (roadblock at the Hale Bell, where the Strand Road turns west; lifts once S105 is on)
 ```
 [name: Accord Guard] Hold. Quarantine order: nobody leaves the Landing without papers.
 [name: Accord Guard] ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.
-[name: Accord Guard] "Eighteen in Concord, One in Keeping." On you go.
+[name: Accord Guard] "Eighteen in Concord, One in Keeping." On you go. Saltmere's two days west. Mind the cliff path in wind.
 ```
 **EV "Accord guard (aside)"**
 ```
@@ -686,382 +701,523 @@ ROUTE SIGN: ROUTE 2 — Briarwick ahead. Travelers are reminded that the Gossame
 (They notice the PC listening. *(sweat drop)* ×2.)
 [name: Accord Guard] Lovely weather.
 ```
+```
+THE HALE BELL (action): A ship's bell on a post above the sea cliff. The ferrymen rang it once the last boat was in. A cloth has been tied round the clapper.
+[portrait: JUNO, sad] Dad tied that. The night they closed the strait. He said there wasn't anything left to ring for.
+[name: Hay-cart Driver] Used to take me four hours to Briarwick and back by the forest road. Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse.
+```
+
+## Map 521 — Windfall Row: the forest-road cordon (Chapter 2 lines)
+```
+ROAD SIGN [NEW]: WINDFALL ROW — ← Gossamer Wood & Briarwick (ROAD CLOSED BY ORDER OF THE ACCORD). Orchard law: keep what has fallen, and nothing else.
+```
+**EV "Forest-road cordon"** (Accord tape across the lane into the Gossamer; opens from the wood's side once the Glass Matriarch is beaten, V105 ≥ 1)
+```
+(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)
+[name: Cordon Warden] Forest road's shut. The Glasswood's across it. Nobody walks it till the Warden in Briarwick says so.
+[name: Cordon Warden] Go round by the coast like everyone else. Saltmere, then the Weavers' Road up the river. It's two days. It's a nice two days.
+[portrait: JUNO, sad] It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.
+[portrait: JUNO, neutral] Parsnip hated the forest. Parsnip was right, as it turns out.
+```
+*[after V105 ≥ 1, from the Gossamer side]* `[name: Cordon Warden] The glass went back a mile overnight. Road's open. Don't ask me how. I just roll up tape.`
+
+## Map 527 — Lacecliff Walk [NEW map] (`:BEACH`; BGM: route theme with sea)
+```
+ROAD SIGN: LACECLIFF WALK — The Strand Road. → The Ferrymen's Mile · ← Marram Down & Saltmere. The arches are older than the Accord. Please do not improve them.
+(Chalk cliffs worn by the sea into arches as fine as lace. The path goes through three of them.)
+[portrait: JUNO, happy] The Briarwick weavers copy these cliffs for their lace. Not the other way round. The sea did it first.
+[portrait: JUNO, happy] The sea does most things first. It's very annoying of it.
+```
+Route trainers and flavor (levels per BALANCE 4b, Gym 1 stretch):
+```
+[name: Fisher Bryn] The strait's closed and the fish haven't been told. (Battle. After:) The fish win again.
+[name: Beachcomber Moll] I found a bottle with a letter in it! It's from my sister. She lives forty yards that way. (Battle.) [after] She writes every week. She's never once walked over.
+[name: Painter at an easel] Hold still. No — you're in the light. No — you ARE the light. Hm. You don't really show up on the canvas, do you? Odd.
+[name: Hiker Dunstan] Cliff path in a gale's a fine way to die. Cliff path in sun's a fine way to live. (Battle.) [after] Today's a sun day. Lucky you.
+[name: Hermit at the Wrecker's Lamp] It's for the gulls. The lamp. Not for ships. I don't know anything about ships. Who said ships?
+[name: Birder] Wingull nest on that stack. Two hundred of them. I've named eleven. The rest won't hold still.
+```
+**Comedy beat: "The Lacemakers' Bench"** (a carved stone seat at the second arch; touch)
+```
+[portrait: JUNO, happy] Sit! You have to sit! It's the Lacemakers' Bench. Everyone who walks the Strand sits here or the cliffs fall in.
+> Is that true?
+  [portrait: JUNO, deadpan] No. But they haven't fallen in, have they.
+> (Sit.)
+(The PC sits. Juno sits. A Wingull lands on the end of the bench. Nobody says anything for a while. The sea does most of the talking.)
+[portrait: JUNO, neutral] ...This is nice. I don't get to sit. I'm always going somewhere with a basket.
+[portrait: JUNO, happy] Right! That's enough nice! Saltmere!
+(The party is healed.)
+```
+```
+SMUGGLERS' SIGNAL POLE (action): A tall pole with a lantern hook. From here you can see the Ferrow lighthouse. Its beam sweeps past, then stops on you for a second longer than it should, then moves on.
+HIDDEN ITEM (under the third arch): PEARL. "The tide left it. The tide will want it back."
+```
+
+## Map 528 — Marram Down [NEW map] (`:BEACH`; BGM: route theme with sea)
+```
+ROAD SIGN: MARRAM DOWN — Free Port of Saltmere, 1 mile. Pulling up the marram grass is fined. Yes, even that one.
+FREE PORT CHARTER STONE (by the stile): "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN." Someone has carved underneath, smaller: "AND BOOS THE REST."
+```
+**EV "The Saltmere Beacon"** (the highest dune; the keeper heals once)
+```
+(From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)
+[portrait: JUNO, happy] Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?
+[portrait: JUNO, happy] The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing.
+[portrait: JUNO, happy] So they make it all up instead. Every night. On purpose.
+[name: Beacon Keeper] Tea? It's not kelp. I've heard about the kelp.
+```
+**EV "The players' camp"** (the Pageant's travelling company, rehearsing the companion piece among their wagons)
+```
+(Three actors in hound masks are chasing a fourth, in a sad bark mask, around a wagon. A fifth is holding a script and despairing.)
+[name: Hound Number One] And SO the Loyal Three drove the Gossamer Ogre from the wood—
+[name: Ogre] *(muffled)* Can I take the mask off? It's very hot in the Ogre.
+[name: Director with script] The Ogre does NOT take the mask off. The Ogre has never taken the mask off. It's in the text.
+[name: Ogre] *(muffled)* Why does he look so sad, though? He's the villain.
+[name: Director with script] Because the carver was having a bad week in AF 140! Places!
+[portrait: JUNO, happy] *(whispering)* I'm going to cry at this. I know I am. I cry at the Ogre every time and I've never even SEEN it.
+[name: Actor (costume double, Battle)] A rehearsal audience! Quick, a scene! (Double battle vs two actors in hound masks.) [after] Notes: we were bitten. Again.
+```
+**Optional: "The Prompter's Box"** (the half-buried theater barge; dig with the camp's sand-shovel)
+```
+(A theater barge lies half-buried in the dune, its name board reading THE WANDERING CHORUS. Costume hampers. A prop throne with three legs.)
+[name: Prop-mistress at the camp] If you're digging in the old barge, there's a shovel by the wagon. The prompter's box went down with it in '71. Nobody's had the heart.
+(Dig at the stern: a sealed prompter's box.)
+(Received: PROMPTER'S SCRIPT. Key Item. "The company's prompt-book for the Pageant, every cue in red. In the margin by the Grand Stage scenes: 'House loves a song. House loves a dance. House HATES a long face — keep them moving.'")
+(Received: NORMAL GEM.)
+PROMPTER'S SCRIPT (read): A page near the back is a different paper, older, folded in. It's the last scene of "The Loyal Three", and it doesn't match the one the actors are rehearsing.
+  "OGRE: I only kept the wood. They wanted the stones.
+   HOUND: Lies! Bite him, brothers!
+   OGRE: Then bite. The wood will remember which of us bled."
+  Across the top, in a clerk's hand: "Struck by order of the Reform, AF 140. Do not perform."
+```
 Route trainers and flavor:
 ```
-[name: Bug Catcher Wim] I'm going to be Warden of Briarwick! (Battle. After:) ...Assistant Warden.
-[name: Picnicker Ada] My Budew sneezes pollen when it's nervous. It's nervous now. (Battle. After:) Bless you. Bless both of us.
-[name: Meridian Surveyor] Mind the orange flags. Survey line for the new Lattice. Straight through to the wood. Trees aren't in the plan, but trees rarely are.
-[name: Hay-cart Driver] Used to take me a day to Briarwick and back. Now the east road's all glass and I go round. Day and a half. Glass doesn't pay my horse.
-[portrait: JUNO, neutral] (follower chatter, at the first orange flag) These weren't here in winter. They go right toward the Glasswood. That's... probably fine?
-HIDDEN ITEM (base of the third flag): ANTIDOTE. "A surveyor dropped it. He'll want it in about ten minutes."
-BERRY TREE: Juno: "Pecha! Pick it gently. It bruises if you look at it wrong. Like Kestrel."
+[name: Kite Flier] Wind off the lake's the best in Elowen. (Battle.) [after] My kite won. You beat the kite-flier, which is different.
+[name: Sand-sculptor] It's the Sovereign's Crown! In sand! ...Don't look at the stone. I ran out of the good sand.
+[name: Dune Guard] Free port starts at the stile. Past that, the Queen's writ doesn't run, and neither do I. (Battle.) [after] I'm going to sit down now. That's allowed in a free port.
+HIDDEN ITEM (in the sand-sledge run's end): SOFT SAND. "Yes. Very."
 ```
 
-## Map 524 — Gossamer Wood (`:SILKWOOD`; BGM: harp and wood-flute)
-```
-(Huge old trees hung with silver silk. Looms' clacking can be heard far off.)
-FIELD NOTES pop-up: "SILKWOOD — Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective."
-[portrait: JUNO, happy] Silk-moths! The Insect Plate's somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for a week!
-[name: Silk-picker] Don't cut the low strands, they're this year's. Cut the high ones. No, higher. No— you know what, I'll do it.
-[name: Bug Catcher Twins Mo & Jo] We battle together! (Double battle.) [after] We lose together.
-[name: Old Weaver resting] Sixty years I've walked this wood. This spring it rings. Hear it? East. Like someone tapping a glass.
-SHRINE STONE (small, mossy): A carving of three beasts chasing a masked figure. Someone has left a honey bun in front of the masked one, not the three.
-HIDDEN ITEM (in a web): NET BALL ×2. "The web gave them up without a fight."
-BLEED VEIL (east edge, a shimmer between two trees; beyond it the trunks are clear crystal): 
-  [portrait: JUNO, sad] That's the Glasswood. It was three fields away at midwinter.
-  (Entering leads to Cocoonfall Hollow via the Deepwood; blocked by a Cut tree until Badge 1.)
-```
+## Map 140 — Saltmere, the Promenade & Market (BGM: harbour waltz, accordion and glockenspiel)
 
-## Map 120 — Briarwick (BGM: looms as percussion, fiddle)
-
-### Arrival (autorun, first entry)
+### Arrival (autorun, first entry by the East Gate)
 ```
-(A village lashed between tree trunks: rope bridges, treetop houses, bolts of silk drying like flags. At the east edge, orange survey flags march to a half-built brass pylon.)
-[portrait: JUNO, happy] Briarwick! Smell that? That's mulberry and lanolin and— oh, the egg-seller's open. I'll find you at the gym! Don't start without me! Or do! I'll catch up!
-MOVE: Juno runs off north. (She stops following.)
+(Lamplit promenades along a white salt lagoon, striped awnings, salt-caramel smoke. On the lagoon, a long green barge flying Elowen's briar crown is rowing toward the harbour mouth.)
+SE: a horn from the breakwater. Along the whole breakwater, a hundred people stand up at once.
+[name: The Breakwater] BOOOOOOOOOOOO.
+MOVE: the green barge turns, slowly, and rows away.
+[portrait: JUNO, deadpan] That's the Queen's tax-barge. They do that every week. It's tradition. The barge comes, everyone boos, the barge goes.
+[portrait: JUNO, neutral] Mum says it's the only time in history a tax has been defeated by noise.
+[portrait: JUNO, happy] I'm taking the tarts to the Lantern Theatre! Find me on the green after. Don't go into the gym without me! I need to be AUDIENCE!
+MOVE: Juno runs off east toward the Lantern Theatre. (She stops following.)
 ```
+### EV "Dorian at the breakwater" (first meeting; the end of the breakwater, map 146)
+```
+(At the end of the breakwater, a man in a velvet coat lowers a silver-topped cane he very clearly does not need. He was conducting the booing.)
+[portrait: DORIAN, happy] *Enter, stage left, a stranger!* No — a challenger. That's a Badge Case. On booing day! The gods of theater are kind.
+[portrait: DORIAN, smug] Dorian Pell. Warden of Saltmere, Pageant-Master to the Accord, and for thirty-one consecutive years, Saltmere's Most Eligible Something.
+[portrait: DORIAN, neutral] You saw the barge? The Queen sends it every week. Our charter says we answer to no crown. Every week we remind her, in the only language a crown understands.
+> Booing?
+  [portrait: DORIAN, happy] Volume, darling. Volume.
+> Isn't that rude?
+  [portrait: DORIAN, smug] Profoundly. That's what makes it diplomacy.
+> ...
+  [portrait: DORIAN, neutral] Ah. A critic. We get a few. We feed them to the Ogre.
+[portrait: DORIAN, neutral] Saltmere is the only city in Velmora where nothing is a miracle, darling. So we built our own. Every night, at eight.
+[portrait: DORIAN, neutral] The Playhouse is in the Old Town. Come when you're ready, not before. A first gym should be an occasion.
+[portrait: DORIAN, happy] And the Pageant opens tonight at the Lantern Theatre. I wrote none of it and I'm in all of it.
+```
+*Reactive (after S108):* `[portrait: DORIAN, sad] I've stood on this breakwater for thirty years telling a queen she can't have us. Last night someone walked onto my stage and took us anyway.`
 
 ### Named residents
-**Tamsin Loom** (first meeting, in the square, carrying too many bolts of silk)
+**The Woman from the ferry** (Prologue's "Woman with crate"; promenade)
 ```
-MOVE: Tamsin walks into the PC. Silk everywhere. *(shock lines)*
-[portrait: TAMSIN, panic] Sorry! Sorry — I wasn't — are you hurt? You're not hurt. Sorry.
-[portrait: TAMSIN, neutral] You've a Badge Case. Oh. Oh no. You're a challenger. TODAY?
-[portrait: TAMSIN, panic] It's fine! It's fine. The gym's open. It's just a bit— the moths are— there was a meeting.
-[portrait: TAMSIN, neutral] I'm Tamsin. Loom. The Warden. Since spring. Come to the Loomhouse when you're ready. Take your time. Please take your time.
-MOVE: Tamsin gathers the silk and hurries east, toward the pylon, not the gym.
+[name: Woman from the ferry] You! From the Dovetail! I'm home! I'm not grey anymore. Look at me. I'm BEIGE.
+[name: Woman from the ferry] Blank tint. Saltmere. The gate said so. My sister cried.
 ```
-**Guildmistress Hett** (Weavers' Guildhall, map 123)
+**Sella the Saltwife** (Saltwife's House, map 144)
 ```
-[name: Hett] Old Mother Loom ran this guild forty years and never once missed a moth-count. The girl's missed three.
-[name: Hett] I'm not saying she's hiding something. I'm saying the ledger's locked and it never used to be.
+[name: Sella] Saltmere salt tastes of nothing. That's how you know it's ours. Everyone else's salt tastes of where it's from.
+[name: Sella] Take a pinch for your road. Put it on anything. It'll taste of whatever it was already. That's the Blank Plate for you: it never changes your mind.
+(Received: a pinch of SALTMERE SALT. Flavor item. "It tastes of nothing at all.")
 ```
-*[after gym]* `[name: Hett] She signed WHAT? Alone? ...Poor fool child. Her gran would've made the whole village sign it with her, and then it'd be all our fault. That's what a guild's FOR.`
-
-**The Moth-keeper, Alder Finch** (grove fence)
+**Harbourmaster Quill** (Harbour Office, map 143)
 ```
-[name: Finch] Fourteen dead this week. They fly east at dusk and come back with glass on their wings. Then they don't come back.
-[name: Finch] Meridian says the Lattice will "stabilize" it. The line they've drawn for it goes straight through my grove.
+[name: Quill] Free port means free. Meridian's ships pay the same dues as a fishing smack. Mr. Voss is very gracious about it.
+[name: Quill] He has a lawyer who is less gracious. She's been in my office four times this spring. She brings biscuits. I don't trust the biscuits.
 ```
+*[after S108]* `[name: Quill] The Queen's herald came by boat this morning. First time a Crown boat's tied up here in eighty years. Nobody booed. That's how frightened everyone is.`
 
-### Flavor townsfolk
+### Flavor townsfolk (Saltmere promenade, harbour and Old Town)
 ```
-[name: Weaver at loom] Clack-clack. Sixty picks a minute. Don't talk to me on the downstroke.
-[name: Weaver at loom] (again) That was the downstroke.
+[name: Caramel Seller] Salt-caramel! Fresh salt-caramel! Pageant tonight — the Loyal Three companion piece!
+[name: Caramel Seller] (again) It's mostly salt. That's the secret. Don't tell anyone. Everyone knows.
 
-[name: Dyer] Elowen green, that's my vat. The Queen's own shade. She's never paid for a yard of it. "The Crown's by right of soil," says the taxman. So's the mud, I said.
+[name: Busker] Saltmere's Plate makes everything ordinary — no Bleed, no miracles. So we make our own, on stage!
+[name: Busker] (again) I've played this corner twenty years. Not one strange thing has happened to me. I find it very hard to write songs.
 
-[name: Apprentice] I wove my first scarf! It's got eleven mistakes. Tamsin found a twelfth and then apologized for an hour.
+[name: Lamplighter] No Meridian lamps on the promenade. The Warden says these lamps are part of the set. Meridian can light the rest of Velmora; the set stays oil.
 
-[name: Rope-bridge Boy] If you jump on the bridge it goes BWOING. I'm not allowed. You're a grown-up. YOU do it.
-  > Jump.  → SE: bwoing. [name: Boy] HA!  [name: Voice below] WHO'S JUMPING?!
-  > Don't.  → [name: Boy] Coward.
+[name: Stagehand on a smoke break] Opening night's tonight. The Accord sends an inspector to make sure we say every line of the official text.
+[name: Stagehand on a smoke break] (again) He sleeps through the second act. We've timed it. Eleven minutes in, every year.
 
-[name: Grandmother knitting] It's a jumper for my Caterpie. Sixteen sleeves. I'm on the fourth. Don't rush me.
+[name: Fisherman] Ordinary fish. Ordinary sea. Fifty years and never seen a thing out of the way. I find that very restful.
 
-[name: Silk Merchant] Briarwick silk never tangles and never rots. That's why nobody ever buys a second one. Terrible business. Wonderful product.
+[name: Child with an Ogre puppet] The Ogre steals the Plates and the Three bite him! Then everyone claps! Then there's caramel!
+[name: Child with an Ogre puppet] (again) I like the Ogre. Don't tell anyone. He's got a nice face.
 
-[name: Meridian Linesman] Pylon'll be humming by month's end. Free light for the looms! Folk here look at me like I'm selling plague.
-[name: Meridian Linesman] (again) Truth is, I don't know what it does to the wood. I just bolt the brass.
+[name: Retired Actor on a bench] I played a king once. In a play they closed before the dress. I'm not allowed to say which.
+[name: Retired Actor on a bench] (again) Better part than Ogre, I'll tell you that. The Ogre never gets a speech.
 
-[name: Tired Mother] Three nights running somebody's cut the survey flags. I'm not saying who. I'm saying I slept very well through it.
+[name: Hound Number Two] I'm Hound Number Two! I bite on the beat! The beat is "GRR". I have to wait for Hound Number One's "GRR" and then I go "GRR".
 
-[name: Old Man on bridge] The Loyal Three drove the Ogre out of this wood. My grandfather told me. His grandfather told him. Nobody's grandfather SAW it, mind.
+[name: Grey Pilgrim] Lovely night for a play. Sit near the back, child. You'll see more from the back.
 
-[name: Girl in ogre mask] RAAH! I'm the Gossamer Ogre! I steal children and eat looms!
-[name: Boy in dog mask] And I'm a Loyal Hound and I bite you! ...Why does the Ogre mask look sad?
+[name: Rival Theatre Barker] TONIGHT at the Little Lantern: "THE PAGEANT OF THE PAGEANT", a play about a man who stages a pageant! Starring nobody you'd know!
+[name: Rival Theatre Barker] (again) Dorian's seen it nine times. He says it's "to gather evidence". He laughs at all the right parts.
 
-[name: Egg-seller] Silk-moth eggs, a copper each. That loud girl bought forty. FORTY. For her uncle, she says.
+[name: Fishwife] You've no tint at all? In Saltmere that's barely worth gossip. We're all Blank here. You're just Blanker.
 
-[name: Tax-barge Deserter] I rowed the Queen's tax-barge. Jumped off at Saltmere when they booed us. Weaving's quieter. Nobody boos a scarf.
+[name: Accord Inspector] I have a copy of the official text. Every word approved. I will be following along. Closely. Until the second act.
 
-[name: Accord Chaplain] The chapel's open. The mural's older than the looms. Mind the Crown in it — people say it's painted wrong. It isn't. It's painted *before*.
+[name: Meridian Clerk] We're not trying to light Saltmere. We're just asking. Every week. Politely.
 
-[name: Youngster] The Warden cries in the gym at night. I heard her through the wall. Then she apologized to the wall.
-
-[name: Woman with basket] East wood rings like a bell now. My mother says a ringing wood means a wedding. I don't think this is a wedding.
-
-[name: Cutter's Wife] You'll want my husband if there's a tree in your way. He'll say no first. He always says no first. Wait for the second answer.
+[name: Old Sailor] Saltmere won't wilt you, they say. Born here, live anywhere. It's the one Plate that doesn't hold on. Kindest Plate there is.
 ```
-*[after gym, village-wide variants]*
+*[after S108, town-wide variants]*
 ```
-[name: Weaver at loom] She told us. All of it, or you did. Either way the looms stopped for a whole minute. First time since the funeral.
-[name: Dyer] Contract's a contract, says the linesman. So's a pitchfork, says I.
-[name: Tired Mother] Still sleeping well.
+[name: Caramel Seller] Nobody's buying. Nobody wants anything sweet this morning.
+[name: Busker] Strange thing happened to me last night. First time in twenty years. I'd like it back the way it was, please.
+[name: Child with an Ogre puppet] The real Ogre came. He didn't steal anything. He just talked. Mum says don't talk about it.
+[name: Grey Pilgrim] (gone. A grey cloak lies folded on the bench, with a lily on it.)
 ```
-*[after S107 Matriarch]* `[name: Finch] The ringing's stopped. The moths flew east at dusk and came back clean. Whatever you did in there: thank you. And don't tell me. I don't want to know.`
 
 ### Signs and objects
 ```
-TOWN SIGN: BRIARWICK — Where the Thread Never Tangles. (Carved under it, smaller: "Unlike the Guild Accounts.")
-LOOMHOUSE SIGN: LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM. "A thread holds because it's twisted with others."
-FESTIVAL POSTER (square): The same poster as the Landing. Here the dark fleck in the Crown's stone has been circled in charcoal. Someone has written: "SEE CHAPEL."
-PYLON (east edge): Half a brass pylon. A plate reads: MERIDIAN CONCORD — LATTICE 15 (BRIARWICK) — "Light for Everyone." It is faintly warm, and the grass around it is stiff, like spun sugar.
-SURVEY FLAGS: Orange cloth on stakes. Four of the stakes have been neatly cut. The cuts are very clean. A weaver's shears.
-SILK RACKS: The silk moves in no wind at all.
-HIDDEN ITEM (under the rope bridge): X ATTACK. "It fell out of someone's pocket mid-bwoing."
-HIDDEN ITEM (behind the dye vats): TINY MUSHROOM. "Dyed Elowen green. Still a mushroom."
+TOWN SIGN: SALTMERE — The Free Port. Answers to the Accord and to No Crown. (Booing Tuesdays.)
+PAGEANT POSTER: "THE PAGEANT OF THE PRISMFALL — a Gift of Love from the Original One. Festival Year: Opening Night! With the companion piece THE LOYAL THREE. By leave of the Accord."
+FESTIVAL POSTER: The same poster as the Landing. The painted Crown's stone has the same tiny dark fleck. Nobody here has bothered to circle it.
+KESTREL AT THE POSTER (event, once, from the promenade): A boy in a too-big black coat is reading the Pageant poster very closely. When you look again, he's gone.
+PROMENADE LAMPS: Oil lamps on iron posts. Each has a number, and a playbill pasted to it.
+HIDDEN ITEM (under the caramel stall): LEMONADE. "Someone was saving it for the interval."
+HIDDEN ITEM (end of the breakwater): STARDUST. "It blew in on the salt."
 ```
 
-### EV "Old woman at the shrine" (S170; north edge, the Loyal Three shrine) — disguised Celestine
+### Sidequest A — "Hound Number Three"
 ```
-(A stone shrine: three carved beasts, a dog, a monkey and a pheasant, standing over a broken ogre mask. An old woman in a grey shawl is sweeping it. She is barefoot.)
-[name: Old Woman] Three loyal hounds and an ogre so bold... 
-[name: Old Woman] ...but who was the thief, when the story was told?
-> Who was?
-  [name: Old Woman] Oh, I couldn't say. I could *sing* it, but I couldn't say.
-> That's not how the story goes.
-  [name: Old Woman] Isn't it? I've only ever told it true. That's the trouble with me.
-> ...
-  [name: Old Woman] Quiet. Good. You'll hear more that way. Most of it's under the floor.
-[name: Old Woman] You've no color on you, child. Did you know? Like water in a glass.
-[name: Old Woman] Walk carefully. Eighteen roads is a long way, and people will want to carry you.
-(She goes back to sweeping. After the gym she is gone; a single dusk-colored flower lies on the shrine. S170 OFF.)
-ITEM: DUSK PETAL. "It's only open at twilight. It's open now. It's noon."
+(Hound Number Two, second talk:)
+[name: Hound Number Two] Hound Number THREE has run off! Not the actor, the actor's Lillipup! It does the real barking! We can't do the Loyal Three with two hounds! It'd be the Loyal Two! That's a different play!
+QUEST LOG: "Hound Number Three" — Find the Lillipup that does the barking.
+(The Lillipup is in the Old Town (147), sitting outside the Little Lantern, watching "The Pageant of the Pageant" through the door.)
+[name: Lillipup] Rrrf.
+> Bring it back.
+  It comes. It looks back at the Little Lantern once, longingly.
+[name: Hound Number Two] You found it! You're a hero! Here, this is from the costume trunk. Nobody's missed it in forty years.
+(Received: SOOTHE BELL. "Off a costume called 'Shepherdess (Comic)'. It rings very sincerely.")
 ```
 
-### Sidequest A — "Sixteen Sleeves"
+### Sidequest B — "The Inspector's Text"
 ```
-(Grandmother knitting, second talk:)
-[name: Grandmother] I've run out of green. The dyer won't sell me less than a bolt. Fetch me three Tiny Mushrooms from the wood and I'll boil my own.
-QUEST LOG: "Sixteen Sleeves" — Bring three Tiny Mushrooms (0/3).
-(On delivery:)
-[name: Grandmother] Lovely. Smells dreadful. Here, I made this one first. It was meant for a Weedle. He evolved. Ungrateful.
-(Received: SILK SCARF. "Two sleeves. A Kakuna has no use for it.")
-(Post-game epilogue hook: a Caterpie in a sixteen-sleeved jumper walks through the square.)
-```
-
-### Sidequest B — "The Locked Ledger" (leads into the main reveal; optional early clue)
-```
-(Guildmistress Hett, second talk:)
-[name: Hett] You're a stranger, so you can do what I can't. The guild ledger's in the Warden's loft and it's locked. Old Mother Loom kept the key in the gym. "Where the first thread starts," she used to say.
-QUEST LOG: "The Locked Ledger" — Find the ledger key in the Loomhouse.
-(Gym foyer, the first loom on the left, action:) A small brass key is tied into the very first warp thread. (Received: LEDGER KEY.)
-(Weavers' Guildhall loft:) LEDGER, last page: "Received of the Meridian Concord, for stewardship rights, Lattice 15: ₽400,000. Signed, T. Loom, Warden." One signature. The line for "Guild witnesses" is blank.
-(Return to Hett before the gym:) [name: Hett] ...Alone. She signed it alone. Don't say anything yet. Let me think how to say it kindly. I'm out of practice.
-(Reward after the chapter: ₽2000 and TM STRING SHOT, "from the guild's teaching chest".)
-(If the player found the ledger first, Tamsin's confession scene opens with: [portrait: TAMSIN, sad] "You've read it. Hett has too. I can tell by how gently she's speaking to me.")
+(Accord Inspector, after S108, on the promenade with his copy of the official text open, staring at nothing:)
+[name: Accord Inspector] Every word approved. I've followed every word for nineteen years. Last night a man said four sentences and none of them are in here.
+[name: Accord Inspector] I've been asked to report what was said. Word for word. I didn't write it down. I was... I was listening.
+> Tell him what the Mourner said.
+  [name: Accord Inspector] *(writing)* "...ever rots." "...underwater." "...collars." Collars. Yes. Thank you.
+  [name: Accord Inspector] I'm going to send this to Crownhaven, and then I am going to take a very long walk.
+> Tell him you don't remember.
+  [name: Accord Inspector] No. Nor do I. Nor does anyone. That's what I'll write. "Nobody remembers." It's the safest sentence in the language.
+(Either way, received: ₽1500, "from the Accord's discretionary fund for cooperative citizens".)
 ```
 
-## Maps 121–125 — Briarwick interiors
+## Map 141 — Pokémon Center / Map 142 — Mart / Map 147 — the Old Town
 ```
 POKÉMON CENTER:
-[name: Nurse] We heal for free. The scanner at the door is new. It told me I'm "Insect, Briarwick". I've lived here forty years, I'd worked it out.
-[name: Trainer] The gym's all planks and looms. Pull the wrong lever and the floor leaves. I've met the basement twice.
-GALE POST DESK [NEW]: A letter is waiting. "Lecture Two is drafted. Do not make me send it. Eat something. — I.L." (Received: POTION ×2, and a tea bag. ITEM: KELP TEA BAG. "You could throw it away. You don't.")
+[name: Nurse] We heal for free. The scanner at the door says "Blank, Saltmere" for everyone. It's had a very dull spring.
+[name: Trainer] The Playhouse is all aisle and no tricks. Dorian doesn't do puzzles. He says the play's the thing.
+GALE POST DESK [NEW]: A letter is waiting. "Saltmere: eat a caramel, it's mostly salt, it's good for you. Lecture Two is drafted. — I.L." (Received: POTION ×2, and a tea bag. ITEM: KELP TEA BAG. "You could throw it away. You don't.")
 
 MART:
-[name: Clerk] Antidotes go fast here. The moths don't mean it.
-[name: Customer] I asked for a Synthetic Seed and the old ladies in the queue went silent. I put it back.
+[name: Clerk] Antidotes? Nobody here gets poisoned. Nobody here gets anything. Have a Potion, it's very ordinary.
+[name: Customer] I asked for a Synthetic Seed and the clerk said "in Saltmere?" in a voice. I bought a Potion.
 
-TREETOP HOUSE (map 124):
-[name: Retired Weaver] I wove Old Mother Loom's shroud. She'd picked the pattern at thirty. "Plan ahead," she said. Tamsin plans ahead too. She plans for everything to go wrong.
-BOOKSHELF: "A Child's Pageant of the Loyal Three." The last page, where the Ogre is driven out, has been torn away. Someone has drawn the Ogre a little house instead.
-
-CHAPEL [exterior door on map 120; interior tile set in 124's second room]:
-MURAL: Eighteen colored stones falling from a white sky into green land. Above them, a silver crown with one clear stone. The stone is whole.
-[name: Child in pew] Mum says the Crown got hurt once. She says don't ask the chaplain. So I'm asking you.
-WINDOW: Eighteen panes of colored glass around one clear pane. The clear one has no lead around it, as if it were added first.
-
-CUTTER'S HOUSE (map 125):
-[name: Cutter] No.
-[name: Cutter] (again) ...What's the tree?
-[name: Cutter] (before Badge 1) Come back with the Warden's badge. I don't hand Cut to people the wood hasn't met.
-[name: Cutter] (after Badge 1) Right. Here. Cut the dead ones. If you cut a live one I'll know. I won't know how. I'll just know.
-(Received: HM01 CUT.)
+OLD TOWN (147):
+SIGN: THE PELL PLAYHOUSE — SALTMERE GYM. WARDEN: DORIAN PELL. "Every pageant is a lie. The trick is choosing which lie to tell."
+SIGN: THE LITTLE LANTERN — "THE PAGEANT OF THE PAGEANT." Held over. Held over again. Held over by D. Pell, who has bought every Thursday.
+[name: Street Juggler] I juggle for coins. In Saltmere the coins are the only thing that falls the way you expect.
+[name: Costumed Usher] Programmes! A copper! Dorian's face on every page, free of charge!
 ```
 
-## Map 120 — **EV "Pallbearer Thistle"** (night event at the pylon; triggers when the PC approaches the pylon after meeting Tamsin)
+## Map 140 — **EV "Juno J1"** (the promenade green; S109)
 ```
-(Night. Two grey-cowled figures in carved bark masks are cutting survey stakes with shears. A third stands at the pylon with a hand flat on the brass.)
-[name: Bereaved] That's the last of the south line.
-[portrait: THISTLE, neutral] Leave soil where they stood. Bare. Let something rot there for once.
-MOVE: The PC steps on a twig. SE: snap. *(shock lines)* ×3.
-[portrait: THISTLE, angry] A watcher. Meridian's, or the Warden's?
-> Neither.
-  [portrait: THISTLE, neutral] Everyone's somebody's. You just haven't been told whose yet.
-> Who are you?
-  [portrait: THISTLE, neutral] The Hollow. We mourn what this land was. Somebody has to.
-> ...
-  [portrait: THISTLE, neutral] No answer. Then I'll assume the worst. It saves time.
-[portrait: THISTLE, sad] I was a weaver once. Lowmarsh. You won't find it on a map now. It had looms too.
-[portrait: THISTLE, angry] Ask your Warden what she signed!
-BATTLE: HOLLOW_THISTLE "Thistle", version 0 (her first battle; named admins count rematches from 0, BALANCE.md 4b). Field: Silkwood (map default). (Hollow admin 1; can't be fled.)
+(Juno is on the promenade green beside the planters, practising a victory pose with an empty tart basket.)
+[portrait: JUNO, happy] There you are! Tarts delivered! Forty! I ate one. Thirty-nine!
+[portrait: JUNO, neutral] Before you go in there... fight me?
+[portrait: JUNO, happy] Not a FIGHT fight. A spar. I want to know if I'm any good before you go off and get good without me.
+[portrait: JUNO, neutral] And I want to know if YOU are. I'm going to be in the audience. I'd like to know what I'm cheering for.
+> Let's go.
+> Are you sure?
+  [portrait: JUNO, deadpan] My partner's weak to yours and I chose it on purpose. I've never been less sure of anything. Let's go!
+Script: Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)     # J1; field :MEADOW (FIELD_DEFAULTS exceptions: the promenade green)
 (WIN:)
-  [portrait: THISTLE, shocked] ...Your partner doesn't fight like the Wood's got hold of it. It fights like it's standing nowhere at all.
-  [portrait: THISTLE, neutral] Let the land grieve, child. And look at the grass by that pylon in daylight.
-  MOVE: The three vanish into the trees. A bark mask is left on the ground.
-  ITEM: BARK MASK. "Carved to look like the Gossamer Ogre. It does look sad."
-Switch S106 CH2_THISTLE_DONE = ON.
+  [portrait: JUNO, happy] You're good. You're REALLY good. *(music note)* That's so annoying. I'm so happy.
+(LOSE:)
+  [portrait: JUNO, shocked] I WON? *(shock lines)* ...Did you let me win? Don't tell me. I'm keeping it.
+(Both:)
+[portrait: JUNO, happy] Here, for your partner. They're from the farm.
+(Received: ORAN BERRY ×2.)
+[portrait: JUNO, happy] Go on, then. The Playhouse is in the Old Town. I'll be in the cheap seats. I'll be LOUD.
+Switch S109 CH3_J1_DONE = ON.
 ```
 
-## Map 130 — Loomhouse Gym, Foyer
+## Map 150 — Pell Playhouse, Lobby
 ```
-[name: Gym Guide] Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does not. I say this to everyone and half of them bring a Bulbasaur.
-[name: Gym Guide] The puzzle: three looms, three colors of plank. Pull a shuttle and one color extends while another retracts. Old Mother Loom built it to teach patience. Tamsin added the safety nets. And the apology cards.
-APOLOGY CARD (pinned by the trapdoor): "If you have fallen, I'm so sorry. Stairs are to your left. — T.L."
-PORTRAIT (wall): A fierce old woman at a loom. Brass plate: "Mother Loom, Warden AF 247–299. 'Twist it or lose it.'"
-```
-**Comedy scene Ch2, "The Apology Spiral"** (Tamsin is in the foyer the first time, re-threading a loom)
-```
-[portrait: TAMSIN, panic] Sorry — the gym's a bit tangled today — sorry —
-> It's fine.
-  [portrait: TAMSIN, panic] Sorry for saying sorry so much. That's annoying. Sorry. *(sweat drop)*
-> Stop apologizing.
-  [portrait: TAMSIN, shocked] Right! Yes! Sorr— *(shock lines)*
-  [portrait: TAMSIN, panic] I nearly did it again. I'm so sorry.
-[portrait: TAMSIN, sad] ...
-[portrait: TAMSIN, deadpan] I'm going to go and stand in the web now.
-MOVE: Tamsin exits to the Weaving Hall.
+(Red plush, gilt urns, velvet ropes. Posters of past seasons. Dorian is on every one.)
+[name: Usher] Ah, our challenger! Tonight's bill: Dorian Pell, in person. Through the doors, up the aisle, onto the stage.
+[name: Usher] The cast may want a word on your way. Actors. They always want a word.
+[name: Gym Guide] Your first Warden! Dorian uses Normal-types, on the Grand Stage field.
+[name: Gym Guide] Here's the trick of a field: the house loves a show. Sound moves and dances get a cheer, and the cheer makes the next move hit harder. It works for you too.
+[name: Gym Guide] Normal-types don't fear much. Fighting-types, they fear. Rock shrugs them off. And Ghosts just don't care, which Dorian finds very rude.
+[name: Lady in the lobby] I come every night. Every. Night. He has never once taken a bow the same way twice.
+POSTER: "THE LADY IN RED. Dorian Pell, Rosalind Vane. Held over by popular demand." (Popular demand: D. Pell.)
+POSTER: "THE LOYAL THREE — the Festival-year companion piece to the Pageant of the Prismfall. Three faithful hounds! One wicked Ogre! Bring the children!"
+POSTER (old, under the others): A title has been pasted over, years ago. Where the paste has lifted, two letters show through: "...ED K..."
 ```
 
-## Map 131 — Loomhouse Gym, Weaving Hall (puzzle per GYM_PUZZLES.md; switches 301+ are World's)
+## Map 154 — Pell Playhouse, Auditorium (Gym 1; layout per GYM_PUZZLES Gym 1)
 ```
-[name: Bug Catcher Nell] A thread alone is just string! (Battle.) [after] Two of us would've had you.
-[name: Lass Orla] I pulled the red shuttle. Don't pull the red shuttle first. (Battle.) [after] ...Did you pull the red shuttle?
-[name: Weaver Trainer Bram] Granny Loom taught me this hall. Tamsin taught me to say sorry when I win. (Battle.) [after] I don't need to say it, then.
-FALL (wrong plank): You drop into a net. A card is pinned to it: "Sorry! — T.L."
-(Juno arrives at the hall's entrance once two trainers are beaten, eating a honey-silk bun.)
-[portrait: JUNO, happy] I made it! Go on! I'll be loud!
+(A small, handsome theater: velvet seats in rows, a red runner up the centre aisle, gilt boxes, and the house curtain down across the stage. The house is half full. The audience is real.)
+FIELD NOTES pop-up (first battle here): "GRAND STAGE — the audience reacts. Sound moves and dances earn applause, and applause lifts the next move. Nothing on this stage is real, which is the point. (Larch, in the margin: 'Saltmere. The one place I never worry about you. Don't make me start.')"
+[name: Juggler Florian] A challenger in the aisle! The show starts NOW! (Battle.) [after] I'll be in the bar. There is no bar. I'll be in the lobby.
+[name: Beauty Rosalind] Every great entrance needs a rival. Tonight, that's me. (Battle.) [after] ...Upstaged. In my own aisle.
+[name: Juggler Ambrose] Side aisle, cheap seats, best view! Let's have a scene! (Battle.) [after] Encore? No? No.
+(Juno arrives in the stalls once one actor is beaten, with a paper cone of salt-caramel.)
+[portrait: JUNO, happy] I made it! I'm AUDIENCE! *(music note)* Go on! I'll be loud!
+[name: Audience Member] Shh!
+[portrait: JUNO, happy] *(whispering)* I'll be loud quietly.
+[name: Stagehand] Places! He won't come out till the curtain's up. That rope, there, on the apron. Give it a good haul.
+CURTAIN ROPE (action): You haul on the rope. The house curtain flies out, the footlights come up — and there he is.
 ```
+*(Once you hold Tamsin's badge, a chalked door in the stage-left wing opens on the optional Playhouse Backstage, DUNGEON_PUZZLES D9. Dorian's line for it is the puzzle engineer's; it should not hand over "The Gilded King", which Dorian keeps.)*
+
 **Warden battle**
 ```
-(Tamsin stands at the great loom at the hall's end. She has stopped fidgeting.)
-[portrait: TAMSIN, neutral] My grandmother wove this room. Every plank, every web. She held this village together for fifty years with thread and shouting.
-[portrait: TAMSIN, sad] I've had it since spring. I can't shout.
-[portrait: TAMSIN, angry] But I can weave. Granny Loom wove this room. Don't you dare tear it.
-Script: Prismfall.gym_battle(1)     # LEADER_TAMSIN, :SILKWOOD, cap 15
-(Mid-battle, when her ace enters:) [portrait: TAMSIN, neutral] Twist with me. Hold.
-(LOSE: standard whiteout to the Pokémon Center. Tamsin on retry: "Again? Good. I mean— sorry. I mean good.")
+(Dorian stands center stage in a single spotlight, cane raised, as if he has been standing there for an hour. He may have.)
+[portrait: DORIAN, happy] *Enter, stage left, our brave challenger!* To thunderous applause! *(the audience applauds, thunderously)*
+[portrait: DORIAN, neutral] Your first Warden. Your first field. Your first audience. I envy you, darling. You only get one of each.
+[portrait: DORIAN, smug] On my stage the house loves a show. Sing, dance, dazzle them, and they'll carry you. Bore them, and they'll let you fall.
+[portrait: DORIAN, happy] Shall we give them something to remember?
+Script: Prismfall.gym_battle(1)     # LEADER_DORIAN, :GRAND_STAGE, cap 15, single battle (GYMS double: false)
+(Mid-battle, when his ace enters:) [portrait: DORIAN, smug] Costume change!
+(LOSE: standard whiteout to the Pokémon Center. Dorian on retry: "Act Two! I adore an Act Two. Everyone's warmed up.")
 (WIN:)
-[portrait: TAMSIN, shocked] ...It held, and you still came through it.
-[portrait: TAMSIN, happy] That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one.
-(Received: the WEFT BADGE.)
-(The PC opens the Badge Case and sets the badge in. SE: a faint hum, one clear note. *(question mark)* over Juno.)
+[portrait: DORIAN, shocked] ...They're standing. Look at them. They're on their FEET.
+[portrait: DORIAN, crying] Bravo! BRAVO! Oh, I'm crying, don't look, it's the footlights.
+(Received: the FOOTLIGHT BADGE.)
+(The PC opens the Badge Case and sets the badge in. SE: a faint hum, one clear note. The whole house goes quiet. *(question mark)* over Juno.)
 [portrait: JUNO, happy] Ooh. Is it supposed to do that?
-[portrait: TAMSIN, neutral] I don't think they do that. ...Do they do that?
-(Received: the gym TM. Species per BALANCE.md; it must not be Struggle Bug, which is Shelly's sidequest reward.)
-[portrait: TAMSIN, neutral] That's the Accord's word that you may use Cut, and that Pokémon up to level nineteen will heed you.
-[portrait: TAMSIN, sad] \PN... could you come up to the loft? There's something I should say to someone, and you've an honest sort of silence.
+[portrait: DORIAN, shocked] Darling, in Saltmere nothing is supposed to do ANYTHING. That's the whole charter. *(shock lines)*
+[portrait: DORIAN, neutral] ...
+[portrait: DORIAN, happy] Do it again.
+(Nothing. The case is quiet.)
+[portrait: DORIAN, deadpan] One night only. The best kind.
+(Received: TM42 FACADE.)
+[portrait: DORIAN, neutral] Facade. The art of turning a bad night into a standing ovation. You'll need it more often than you'd think.
+[portrait: DORIAN, neutral] That badge is the Accord's word that Pokémon up to level nineteen will heed you. Briarwick's will let you cut the dead wood, when you've earned it. They have a man for that.
+MOVE: the troupe files on from the wings. The smallest actor is carrying an Eevee in a ruff.
+[portrait: DORIAN, happy] And one more gift, from the whole company. Forty auditions. Never cast. A tragedy in a ruff.
+[portrait: DORIAN, neutral] You came off that ferry with no color at all, I hear, and this one's never picked one either. You two are a matched set.
+(Received: EEVEE "UNDERSTUDY". Gift Pokémon, Lv 10, nickname "Understudy". Switch S110 CH3_UNDERSTUDY_GOT = ON.)
+[portrait: DORIAN, happy] Rehearsal at the Lantern Theatre this afternoon, opening night at eight. Come to both. Bring Juno. Bring everyone.
 ```
 
-## Map 123 loft — **EV "Tamsin's confession"** → **CHOICE `:ch2_tamsin`**
+## Map 145 — Lantern Theatre: rehearsal (after Gym 1) — **comedy scene Ch2, "Tree #3"**
 ```
-(The loft: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)
-[portrait: TAMSIN, sad] That masked woman at the pylon. She was right. I signed it.
-[portrait: TAMSIN, sad] Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her.
-[portrait: TAMSIN, sad] Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was.
-[portrait: TAMSIN, crying] And now the Glasswood's walking up the survey line like it was invited. Fourteen moths this week. I count them. I count them every morning.
-[portrait: TAMSIN, sad] The guild meets tonight. Tell me what to do. Please. I've run out of thread.
-> Tell them the truth. I'll stand next to you. (help_confess)
-  Script: pf_choose(:ch2_tamsin, :help_confess)
-  [portrait: TAMSIN, shocked] Next to me. Not in front?
-  [portrait: TAMSIN, neutral] ...A thread holds because it's twisted with others. I've had that on the SIGN.
-  → Scene: the guild meeting. Tamsin speaks; her voice cracks twice; Hett stands up first: "Then we sign it WITH you, girl, and then we tear it up together." The contract is renegotiated: a smaller pylon, off the grove.
-> They deserve to know. If you won't say it, I will. (expose)
-  Script: pf_choose(:ch2_tamsin, :expose)
-  [portrait: TAMSIN, panic] No— wait— not like—
-  → Scene: the guild meeting. The PC lays the contract on the table. Uproar. The looms stop. Tamsin stands very still, then tears the contract in half herself, in front of them: "I'm sorry. I'm so sorry. That's the last time I'll say it tonight."
-  Flag: TAMSIN_PUBLIC_CONFESSION.
-> It's your secret. I won't tell. (keep_secret)
-  Script: pf_choose(:ch2_tamsin, :keep_secret)
-  [portrait: TAMSIN, sad] ...Thank you. I think. I'll fix it quietly. I'll find the money somewhere.
-  → No meeting. The pylon is finished within the week (map state). Hett's lines stay suspicious. (In Act V, Tamsin can't afford to let go of her Plate.)
-(All branches:)
-[portrait: TAMSIN, neutral] Whatever's making the wood ring, it's in Cocoonfall Hollow, at the Glasswood's heart. I can't cross the Veil. Nobody can.
-[portrait: JUNO, neutral] *(from the stairs)* ...They can.
-[portrait: TAMSIN, shocked] *(shock lines)* What?
-[portrait: TAMSIN, neutral] Then take this. It was Gran's shuttle. It's only wood. But she never dropped a thread while she held it.
-(Received: MOTHER LOOM'S SHUTTLE. Key Item. "Worn smooth by fifty years of one hand.")
-QUEST LOG: "The Ringing Wood" — Cut through the Deepwood to Cocoonfall Hollow.
+(The Lantern Theatre: a painted forest of flats on stage, actors in hound masks, the sad-masked Ogre eating an apple on a ladder. Juno is at the edge of the stage with the empty tart basket.)
+[portrait: DORIAN, happy] *Enter, stage left, our brave challenger!* And — ah! The understudy! Places, little one!
+[portrait: DORIAN, happy] Forty auditions! Never cast! Tonight your luck changes. You shall play... TREE NUMBER THREE.
+*(Understudy: music note)*
+MOVE: a stagehand straps a cardboard tree to Understudy. It stands very proudly.
+[name: Director (from the stalls)] Dorian. The tree.
+[portrait: DORIAN, sad] ...Ah. The director informs me Tree Number Three has been cut for pacing.
+*(Understudy: "..." bubble)*
+[portrait: DORIAN, crying] Don't look at me like that! It's a cruel business! I was cut from my own biography!
+[portrait: JUNO, angry] You cut a TREE? From a play about a FOREST? *(anger vein)*
+[portrait: DORIAN, smug] There are still two trees, darling. It's a very efficient forest.
 ```
-
-## Map 525 — Gossamer Deepwood (`:SILKWOOD`; Cut required)
+**EV "The costumier"** (same scene, after Tree #3)
 ```
-[name: Woodward (at map 526, his hut)] Past my hut it's all glass. I've stopped chopping. You can't burn it and it cuts the axe.
-WOODWARD'S HUT bookshelf: "Tally of the east trees. Midwinter: 0 glass. Thaw: 40. Spring: 300. I have stopped counting. — W."
-(Received from the Woodward: 3 POTIONS. "For whatever you think you're doing.")
-[name: Bug Maniac Ferris] The bugs in here have gone STRANGE and I love them! (Battle.) [after] That one hummed. Did you hear it hum?
-HIDDEN ITEM (hollow stump): SUPER POTION. "The stump kept it dry."
+[name: Costumier] Oh — and you! The blossoms! Is that from wardrobe? I didn't make that. Which play are you in, dear?
+[portrait: JUNO, happy] It's not a costume! It's my aunt's.
+[name: Costumier] Your aunt's a florist?
+[portrait: JUNO, happy] My aunt's a tree. In Verdance. She blooms all year round. These are hers. They've never wilted. Not once in twelve years.
+[name: Costumier] ...
+[name: Costumier] Well. They're very good. I couldn't do better in silk.
+[portrait: JUNO, happy] Nobody can! I've checked! *(music note)*
 ```
-**Optional thread: cameo sidequest "Lost in the Gossamer" (Shelly)** — CAMEOS.md §1; S181 on completion
+**EV "Prop room"** (backstage, action on the Crown prop)
 ```
-(A dew-pond clearing. A pink-haired girl is crouched in front of a Caterpie, bowing to it.)
-[portrait: SHELLY, panic] I'm so sorry, was this your leaf? I didn't know it was your leaf.
-[portrait: SHELLY, shocked] Oh! A person! Um. Hello. Is this— this isn't the Rhodochrine Jungle, is it. *(sweat drop)*
-[portrait: SHELLY, sad] I looked into a pond at home and then I was looking OUT of this one. That was three days ago. The paths keep re-weaving.
-> I'll help you get back.
-  [portrait: SHELLY, happy] Really? You don't have to. I mean please do. I mean thank you.
-(She follows. The dew-pond she arrived through is behind a small Bleed Veil; a glassed Masquerain guards it. The PC enters alone, battles it (Lv 14, `:BLEED`), and it calms.)
-[portrait: SHELLY, neutral] You just... walked in. Where I'm from, nobody walks into the sick places and comes out the same.
-[portrait: SHELLY, happy] Before I go, could we have one practice battle? Doubles? I'm supposed to be good at this and I don't want to be rusty when I get home.
-BATTLE: FESTIVAL_SHELLY "Shelly", version 1 (double, Lv ~17, `:SILKWOOD`).
-(After, win or lose:)
-[portrait: SHELLY, happy] Your forest sounds like home used to, before the city got sick. Look after it?
-(Received: SILVER POWDER and TM STRUGGLE BUG.)
-MOVE: She steps into the pond's reflection and is gone. One pink ribbon floats on the water.
+(A prop Crown on a velvet stand: painted tin, eighteen glass stones round the rim, one clear stone at the top. The clear stone is new, and small. The old one lies beside it in a box, much larger.)
+[name: Prop-master] The Accord's Pageant Office sends the drawings every Festival year. This year: smaller stone. Different shape. Chipped at the edge, if you can believe it. "As it is," the drawing says.
+[name: Prop-master] As what is? I've made that Crown nine times. It's never been chipped.
 ```
 
-## Map 548 — Cocoonfall Hollow (`:BLEED`)
+## Map 146 — Harbour & Breakwater: **EV "Salt-caramel"** (sunset, before the Pageant) → **CHOICE `:ch3_juno_talk`**
 ```
-(The Veil at the Hollow's mouth. Inside: a crater of crystal trees, and silk that has turned to glass thread, strung between them like a harp. It rings.)
-(Juno and Tamsin stop at the Veil. Juno: "Shout if— no. You can't hear through it, can you. Just come back.")
-INSPECT, glass cocoons: Dozens, hanging. Inside each, a moth, wings spread, perfectly still. One of them twitches.
+(Sunset. The PC and Juno sit on the end of the breakwater with their feet over the lagoon, sharing a paper cone of salt-caramel. Understudy is asleep in Juno's veil.)
+[portrait: JUNO, happy] It's mostly salt. Is that the point? I think that's the point.
+[portrait: JUNO, neutral] Your first badge. And it HUMMED. I'm writing that down. I'm writing everything down.
+[portrait: JUNO, neutral] ...Can I tell you something boring?
+> Go on.
+> Is it about larches?
+  [portrait: JUNO, deadpan] It's not about larches. ...It's a bit about larches.
+> ...
+[portrait: JUNO, neutral] Everyone asks about the flowers. "Which play, dear?" "Are you a bride, dear?" I'm fifteen.
+[portrait: JUNO, neutral] They're from Aunt Elin. She's the Bride Tree, in Uncle Rowan's garden. When I was three she went to glass, except she didn't, she went to blossom, and she never stopped.
+[portrait: JUNO, happy] I'd worn some to her wedding party. She'd only been married a year. So I just... kept wearing them. They don't wilt. They don't even brown at the edges.
+[portrait: JUNO, neutral] Uncle Rowan says that's the problem. I don't know what he means. I think it's the best thing in the world.
+[portrait: JUNO, sad] ...Mostly I think that.
+(She looks at you. *("..." bubble)*)
+[portrait: JUNO, neutral] Your turn. That gate at the dock. It didn't give you a color. Mum heard from the fishwife. Everyone's heard.
 ```
-**Boss: "The Glass Matriarch"** (multi-bar; `design/BOSSES.md`)
+**CHOICE `:ch3_juno_talk`** (the key keeps its old name; this is a Chapter 2 choice)
 ```
-(At the center, a Galvantula the size of a cart, half crystal, sits on a nest of glass silk wound around something that glows faintly green beneath the roots.)
-It turns eight eyes on you. Four of them are glass.
-BOSS BATTLE: Glass Matriarch (GALVANTULA, Lv 16, 2 bars; field `:BLEED`; at the bar break it "re-strings the nest": the field borrows `:SILKWOOD` for 3 turns).
+> Tell her what it said: NULL. (told)
+  Script: pf_choose(:ch3_juno_talk, :told)
+  [portrait: JUNO, shocked] Null. Like... nothing? *(shock lines)*
+  [portrait: JUNO, neutral] ...
+  [portrait: JUNO, happy] Well. I'm a walking bouquet and you're a blank page. We should start a club.
+  [portrait: JUNO, neutral] I won't tell anyone. Not Mum. Not Kestrel. Not even Uncle Rowan. I'm good at secrets. I just don't look it.
+  (Juno keeps it. She never tells.)
+> It's nothing. A broken gate. (deflect)
+  Script: pf_choose(:ch3_juno_talk, :deflect)
+  [portrait: JUNO, sad] ...Okay. *(She doesn't believe you, and she lets you have it anyway.)*
+  [portrait: JUNO, neutral] If it's ever not nothing, I'm here. I'm very easy to find. I'm the one wearing a tree.
+> ... (silent)
+  Script: pf_choose(:ch3_juno_talk, :silent)
+  [portrait: JUNO, neutral] That's fine. Sitting's fine. Sitting is underrated.
+  (She hands you the last caramel.)
+(All:)
+SE: a bell from the Lantern Theatre. Eight o'clock.
+[portrait: JUNO, happy] Opening night! Come ON! If we're late Dorian will make us sit in the Ogre's row!
+```
+
+## Map 145 — Lantern Theatre: **EV "The Pageant"** (opening night; S108)
+```
+(The Lantern Theatre at eight. Every seat is full. Juno and the PC are in the stalls; Dorian, in a gold coat, has the box above them and leans out to wave. In the front row the Accord Inspector has the official text open on his knee.)
+[name: Narrator (on stage)] Three hundred years ago, the Original One looked upon Velmora and loved it. And for love, It gave the land a gift...
+(Eighteen colored lanterns descend on wires: the Plates falling. Salt glitters in the spotlight.)
+[portrait: JUNO, happy] *(whispering)* It IS salt. It's still beautiful. I hate that it's still beautiful.
+(Then the companion piece. Three actors in hound masks chase a figure in a sad bark Ogre mask across a painted wood.)
+[name: Children in the gallery] BOOOO! BOOOO THE OGRE!
+[portrait: JUNO, sad] *(whispering)* I always want him to get away.
+[name: Hound Number One] And SO the Loyal Three drove the Gossamer Ogre from the wood, and the Plates were safe for ever!
+(Applause. The Ogre exits. Then every stage light turns grey at once. SE: a low hum. The applause stops.)
+(In the painted backdrop of the falling Plates, a canvas seam opens, and a figure in a grey cowl steps out of the picture. Ash-bark mask. One white lily.)
+[name: Child in the gallery] Is that the Ogre? He's early!
+[portrait: MOURNER, neutral] *(the voice is doubled: two voices a breath apart)* Three hundred years of pageantry.
+[portrait: MOURNER, neutral] Ask your Warden why nothing in Verdance ever rots.
+(Beside you, Juno's hand goes up to her wreath.)
+[portrait: MOURNER, angry] Ask your Sovereign why the old capital is underwater.
+[portrait: MOURNER, sad] Ask why the Loyal Three wore poison on their collars.
+[portrait: MOURNER, neutral] Let the land grieve.
+(Grey banners unroll from the flies: a grey ring, broken at the top. The Hollow Ring. In the wings a cowled woman with a weaver's shears cuts the curtain ropes, one, two, three, very neatly. The house curtain drops in front of the cast without touching a soul. Then the screaming starts.)
+[name: Accord Inspector] This is not in the TEXT!
+[portrait: DORIAN, angry] *(from the box)* House lights! HOUSE LIGHTS! Everybody walk, nobody run, the exits are where they've always been!
+MOVE: two Bereaved drop from the flies into the aisle in front of the PC.
+[name: Bereaved] Stay in your seat, little one. It's nearly over.
+BATTLE: double battle vs [HOLLOW_GRUNT_M "Grunt"] + [HOLLOW_GRUNT_F "Grunt"], version 0 (BALANCE 4b: 0 = the Saltmere Pageant battle, the first Hollow battle in the game). Field: Grand Stage (map default).
 (WIN:)
-The Matriarch collapses onto the nest. The ringing drops by half. It thrashes, shedding slivers of crystal.
-```
-**CHOICE `:ch2_matriarch`**
-```
-> Stay with it. (soothe)
-  Script: pf_choose(:ch2_matriarch, :soothe)
-  You sit down in the glass. You hold Mother Loom's shuttle because you don't know what else to hold.
-  (Fade. Night passes. Fade in: dawn through crystal.)
-  The Matriarch is asleep against your knee. Around you, half the grove has gone to glass in the night. The other half hasn't.
-  The ringing has stopped.
-> Put your hand on it. Make it stop. (silence)
-  Script: pf_choose(:ch2_matriarch, :silence)
-  You press your palm to its crystal side.
-  Something goes out of it, like water down a drain. Through you. To nowhere.
-  The crystal falls away as dust. The grove stops ringing at once. Not one more tree turns.
-  The Matriarch stands. It is whole. Its eyes are dull as buttons. It doesn't look at you. It doesn't look at anything.
-Switch S107 CH2_MATRIARCH_DONE = ON. V105 BRIARWICK_GLASSWOOD = 1.
-ITEM (under the nest): a sliver of green light sinks back into the roots as you watch. FIELD NOTES: "Something under the Hollow is holding the wood together. I think I was standing on it. — note to self: ask Tamsin where the Plate is."
-```
-**EV "Outside the Veil"**
-```
-(soothe:) [portrait: TAMSIN, crying] Half the grove. ...Half. And the moths that are left are *singing*. I'll take half. I'll take it.
-          [portrait: JUNO, happy] You stayed all night! We could see you through the shimmer, just sitting there! Kestrel would've hated it!
-(silence:) [portrait: TAMSIN, shocked] It just... stopped. All of it.
-          MOVE: the Matriarch walks out through the Veil, past them, into the wood. It doesn't react to anything.
-          [portrait: TAMSIN, neutral] Oh. Oh, that's — thank you. I think.
-          [portrait: JUNO, sad] ...It didn't look at me. They always look at me.
-(Both:)
-[portrait: TAMSIN, neutral] The next Warden's Dorian Pell, in Saltmere. He'll call you "darling" and mean it about a third of the time.
-[portrait: TAMSIN, happy] Come back, will you? I'd like to show you the room when it isn't tangled.
-[portrait: JUNO, happy] I've got to take the eggs to Uncle Rowan. Then Saltmere! There's a PAGEANT! Don't see it without me!
-MOVE: Juno leaves south. 
+[name: Bereaved] ...You don't fight like the ones with color.
+(Through the smoke, on the stage, the Mourner turns and looks straight at you across the whole theater. He goes completely still. WAIT 60.)
+[portrait: MOURNER, shocked] ...You.
+SE: a burst of Cotton Spore. White fluff everywhere. When it settles the stage is empty, the backdrop is torn, and a lily is lying on the boards.
+Switch S108 CH3_PAGEANT_DONE = ON.
+[portrait: JUNO, sad] He sounded sad. Isn't that weird? I thought he'd sound evil.
+[portrait: JUNO, neutral] *(holding her veil in both hands)* Why would anyone say that about Verdance? Nothing rotting's GOOD. Isn't it?
 ```
 
-## Chapter 2 close — Map 120
+## Map 145 — backstage: **EV "Vesper"** (Eevee Octave, encounter 1 of 3; S190)
 ```
-(On the way out of Briarwick, a child is standing at the Festival poster with a stick of charcoal.)
-[name: Child] I circled it. The Crown in the chapel's got a whole stone. This one's got a bit gone. See?
-[name: Child] Mum says the Crown got hurt once.
-[name: Child] How do you hurt a crown?
-(No answer option. The PC's hand moves, unprompted, to their chest. WAIT 40.)
-GALE POST (Pokémon Center desk): "Heard about the Hollow. Lecture Two enclosed. It is nine pages. Page nine says I'm proud of you. Do not skip to page nine. — I.L."
-V102 STORY_CHAPTER = 3.
+(Backstage, after the panic. Chorus singers in Prism Choir white sit on prop crates with blankets round them. A young woman in the same white kneels on the boards — not to the PC. To Understudy.)
+[portrait: VESPER, neutral] Oh. Hello, little one. You're new.
+[portrait: VESPER, happy] I'm Vesper. Vesper Lindqvist. We're the Octave: eight of us, eight Eevee. The Choir lent us to the Pageant for the hymns.
+[portrait: VESPER, neutral] *(to Understudy)* It hasn't decided which Imprint it belongs to yet.
+[portrait: VESPER, neutral] *(to the PC, after a long look)* Neither have you, I think.
+> What does that mean?
+  [portrait: VESPER, neutral] Only what it says. I sing; I don't explain. The Hierophant says I'd make a terrible priest.
+> ...
+  [portrait: VESPER, happy] You don't have to answer. Nobody answers me. It's restful.
+[portrait: VESPER, neutral] The eight of us lost our homes in the Glassfall. The Choir raised us beside the Plates, one each. They say an Eevee becomes what it lives beside.
+[portrait: VESPER, happy] Would you sing a duet with us before we go? It helps, after a fright. Carol, come here.
+> Sing (battle).
+  BATTLE: double battle vs [OCTAVE_VESPER "Vesper", 0] + [OCTAVE_SINGER "Carol", 0]. Field: Grand Stage (FIELD_DEFAULTS exceptions).
+  (After, win or lose:) [portrait: VESPER, happy] There. Your hands have stopped shaking. So have mine.
+> Not tonight.
+  [portrait: VESPER, happy] Then at the Festival. We'll all be there. We always are.
+[portrait: VESPER, neutral] Look after it. Whatever it becomes, it'll become it because of you.
+Switch S190 VESPER_MET_SALTMERE = ON.
+```
+
+## Map 145 — Dorian's dressing room: **EV "The Gilded King"** (after S108)
+```
+(A dressing room crowded with wigs, mirrors and telegrams. Dorian sits in front of the mirror with his gold coat off. Without it he looks every one of his fifty-six years.)
+[portrait: DORIAN, sad] Shut the door, darling. Thank you.
+[portrait: DORIAN, neutral] Thirty years I've staged that pageant for the Accord. Every word approved. Every comma blessed. And a man walks out of my backdrop and says the one thing I've never let anyone say on that stage.
+[portrait: DORIAN, neutral] "Ask why the old capital is underwater."
+MOVE: Dorian unlocks a drawer, takes out a yellowed page and holds it a moment too long.
+[portrait: DORIAN, neutral] Ansel Crewe wrote this in AF 52. A play called "The Gilded King". They hanged him for it, and burned every copy but one.
+[portrait: DORIAN, sad] I've never staged it. I'm a coward with excellent diction.
+[portrait: DORIAN, neutral] This is the prologue. Take it. If anyone asks, you found it in a costume. Everything in this building is in a costume.
+(Received: GILDED KING PROLOGUE. Key Item. "A yellowed page in an old hand. One line is underlined twice: 'If heaven will not kneel, we'll build a chain.'")
+> Why give it to me?
+  [portrait: DORIAN, neutral] Because he looked at you. Out of a whole theater, he looked at you. I've been looked at by audiences for forty years, darling. I know when someone's found the person they came for.
+> Who was the Gilded King?
+  [portrait: DORIAN, deadpan] A king who wanted something very badly. That's all of them. Read it somewhere I'm not.
+> ...
+  [portrait: DORIAN, neutral] Yes. That's the right response to it. I've been giving it that response for thirty years.
+[portrait: DORIAN, neutral] Your next Warden is Tamsin Loom, up the Weavers' Road in Briarwick. She inherited the seat in spring and she hasn't slept since.
+[portrait: DORIAN, happy] Be kind. She'll apologize to you for losing. Let her.
+```
+
+## Map 140 — outside the Lantern Theatre: **EV "Kestrel"** (after S108)
+```
+(The crowd is thinning. Against the wall by the stage door, a boy in a too-big black coat is breathing very fast.)
+[portrait: KESTREL, shocked] You were in there. You heard him.
+[portrait: KESTREL, angry] Did you hear his VOICE? *(anger vein)*
+> I heard him.
+> Kestrel? What are you doing here?
+  [portrait: KESTREL, angry] Following a rumor. Shut up. That's not the point.
+> ...
+[portrait: KESTREL, neutral] Under the doubling. Under the second voice. The way he said "grieve". Like it had two syllables.
+[portrait: KESTREL, shocked] That's — the way she talks — no.
+[portrait: KESTREL, angry] *No.*
+MOVE: Kestrel runs, shoving through the crowd, north toward the North Gate.
+[portrait: JUNO, sad] ...Who talks like that?
+V114 KESTREL_STAGE = 1.
+```
+
+## Chapter 2 close — Map 140
+```
+(Next morning. A herald in Elowen green is pasting a notice to the charter stone by the harbour. A small crowd watches without booing, which in Saltmere is a kind of booing.)
+NOTICE: "HER MAJESTY QUEEN MAELIS notes with grief the Hollow outrage in HER free port of Saltmere, where the Crown's protection was refused. The Crown's protection remains available. — By Order, Briar Keep."
+MOVE: Dorian walks up, reads it, and tears it down in one long rip.
+[portrait: DORIAN, angry] "HER" free port. *(anger vein)*
+[portrait: DORIAN, neutral] Somebody fetch the paste. We'll put the charter back up where it belongs.
+[portrait: DORIAN, smug] And tell the breakwater to warm up. It's booing day on a Thursday this week.
+[portrait: JUNO, neutral] Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.
+[portrait: JUNO, neutral] I'm not sending for them. I'm not letting you walk into the Gossamer by yourself after last night.
+[portrait: JUNO, happy] Also I've never seen a gym puzzle from the INSIDE.
+(Juno becomes a follower.)
+[name: Gate Warden (North Gate)] North Gate's open. Nobody leaves Saltmere on opening night, it's bad luck and worse for business. This morning everybody wants to.
+GALE POST (Pokémon Center desk): "Heard about the Pageant. Are you hurt? Don't answer that, you'll lie. Lecture Two has grown a section. — I.L."
+QUEST LOG: "Eighteen Roads" — Earn the second badge in Briarwick, up the Weavers' Road.
+V102 STORY_CHAPTER = 3. (The North Gate opens onto the Grey Saltings.)
 ```
 
 ---
 
 ## Appendix: events added or changed versus the built specs
-- **[NEW]** Dovetail: rail sign, cabin trunk, cook. Ferrow's Landing: Edda's last call (`GO_HOMEWARD`), two sidequests, lighthouse mirror. Briarwick: Gale Post desk, chapel interior, two sidequests, the charcoal child. Deepwood: Shelly's clearing.
-- **Changed:** the Bleed Veil event now carries the `GO_ORCHARD` prompt; the Glass Matriarch is followed by `:ch2_matriarch`; Tamsin's confession uses `:ch2_tamsin` with three guild-meeting variants.
-- **Open items for other teams:** the gym TM (BALANCE.md decides); portraits needed here: Edda, Voss, Calla, Larch, Juno, Kestrel, Rowan, Wenna, Coll, Hesper, Tamsin, Thistle, Shelly.
+- **[NEW]** Dovetail: rail sign, cabin trunk, cook. Ferrow's Landing: Edda's last call (`GO_HOMEWARD`), two sidequests, lighthouse mirror, the north-gate road sign. Ferrymen's Mile: the Hale Bell, the quarantine roadblock moved here from Windfall Row (the Strand Road leaves westward at the bell). Windfall Row: the forest-road cordon. Lacecliff Walk (527) and Marram Down (528): every event (new maps). Saltmere: Dorian at the breakwater, the Woman from the ferry, Sella, Quill, two sidequests, the Kestrel-at-the-poster glimpse, the prop room, the costumier, the Inspector, the Gale Post desk, the North Gate warden.
+- **Changed for Revision 14:** Chapter 2 is Saltmere now (it was Briarwick). The Chapter 1 opener's counting rhyme starts "One for the stage and two for the weave". Juno's look follows Ever-Bloom. Rowan mentions the Saltmere road and the Pageant. The gym-1 dialogue (Tamsin's) moved to `story/21_SCRIPT_CH3.md` and was rewritten for Gym 2. The Windfall Row survey flags, surveyor and Juno's flag line moved to Chapter 3's road (the Dyers' Ford).
+- **Moved out:** everything from "Chapter 2 — The Weaver's Debt" is in `story/21_SCRIPT_CH3.md`.
+- **Open items for other teams:** see `design/SWAP_GYM1_GYM2.md`. Portraits used here (parked by Revision 15; keep the tags): Edda, Voss, Calla, Larch, Juno, Kestrel, Rowan, Wenna, Coll, Hesper, Dorian, Mourner, Vesper.

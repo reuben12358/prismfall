@@ -13,6 +13,7 @@ CHAPTERS = [
     ("story/03_CAST.md", "cast", "Cast"),
     ("story/04_ACT_I.md", "act-1", "Act I"),
     ("story/20_SCRIPT_CH0-2.md", "script-1", "Script: first hour"),
+    ("story/21_SCRIPT_CH3.md", "script-2", "Script: Chapter 3"),
     ("story/05_ACT_II.md", "act-2", "Act II"),
     ("story/06_ACT_III.md", "act-3", "Act III"),
     ("story/07_ACT_IV.md", "act-4", "Act IV"),
@@ -27,8 +28,8 @@ CHAPTERS = [
     ("design/CAMEOS.md", "cameos", "Sidequest cameos"),
 ]
 
-# Gym order (SPINE): type, city
-GYMS = [("Bug","Briarwick"),("Normal","Saltmere"),("Water","Ebbmouth"),("Electric","Lumen City"),
+# Gym order (SPINE; Revision 14 put Saltmere first): type, city
+GYMS = [("Normal","Saltmere"),("Bug","Briarwick"),("Water","Ebbmouth"),("Electric","Lumen City"),
         ("Ground","Duneholt"),("Poison","Mirefen"),("Fire","Cindervault"),("Fighting","Ironreach"),
         ("Grass","Verdance"),("Ice","Rimeholt"),("Flying","Skyreach"),("Psychic","Lucent"),
         ("Rock","Cragholm"),("Ghost","Gravenmoor"),("Steel","Cogsworth"),("Dark","Underveil"),

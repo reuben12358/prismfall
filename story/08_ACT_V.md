@@ -10,13 +10,13 @@
 
 ---
 
-## CHAPTER 18 — "Once Upon a Time" (R33 → Lightless Deep → R34 Gloamwood Verge → Gloaming, Gym 17; Pecharunt; K7; the Hymn)
+## CHAPTER 18 — "Once Upon a Time" (The Blindwater → Lightless Deep → The Gloamwood Verge → Gloaming, Gym 17; Pecharunt; K7; the Hymn)
 
 **Location:**
-- R33 (`:CAVE`).
+- The Blindwater (`:CAVE`).
 - **Lightless Deep** (844 `:DARK_CRYSTAL` / 845 `:NEW_MOON`).
 - **Inverted Ward** (848, `:INVERSE`: an abandoned Choir hospital turned upside-down by the thinning Glass).
-- R34 **Gloamwood Verge**, **Gloaming** (Elowen's heart, `:FAIRY_TALE`), the **Great Tree**.
+- **Gloamwood Verge**, **Gloaming** (Elowen's heart, `:FAIRY_TALE`), the **Great Tree**.
 
 ### The Lightless Deep: Pecharunt (Nadir's legendary arc)
 The road out of Underveil runs down, not up: below the drained Sump into the **Lightless Deep**, the oldest dark under the City Below.
@@ -31,7 +31,7 @@ The road out of Underveil runs down, not up: below the drained Sump into the **L
 - **Thornguard checkpoints.** Prince Caedmon (now effectively ruling Elowen, since his mother is "resting") has signed the **Forest Compact**. Meridian survey-flags line the Gloamwood. The Thornguard turns the PC back at the Verge "by royal order".
 - The **dusk is spreading**: Gloaming's twilight has crept south across half the forest, and Briarwick's looms now work by lamplight at noon.
 - **Optional scene, Queen Maelis:** in a dusk-garden she's "resting" in under polite guard. Shrewd and finally honest: "My son thinks the forest is a resource. I've been queen for sixty years. The forest is the *sovereign*. I'm just the gardener it tolerates." She gives the PC a **Royal Writ** (key item). It opens the Wardguard escort to Crownhaven even at low Accord Standing, and it seeds Elowen's epilogue: Maelis disowns the Compact.
-- **Celestine** (in her true form; the PC met her disguised in Ch2) dissolves the checkpoint with one sentence the Thornguard captain can't argue with, because she can't lie and everyone knows it: "If you stop this child, the forest will remember your name, and it will say it wrong forever."
+- **Celestine** (in her true form; the PC met her disguised in Ch3, at Briarwick's shrine) dissolves the checkpoint with one sentence the Thornguard captain can't argue with, because she can't lie and everyone knows it: "If you stop this child, the forest will remember your name, and it will say it wrong forever."
 
 ### Gym 17 (`:FAIRY_TALE`), a double battle: "the knight and the dragon"
 Thematic note: *the arena is a storybook. Choose your role (knight, dragon or thief), and the story's rules change who's strong.* Celestine: "Once upon a time — which is the only time there ever is, here —" Her ace is **Sylveon**.
@@ -66,9 +66,9 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 
 ---
 
-## CHAPTER 19 — "The Last Gate" (R35 Gloamwood → R36 → Wyrmscar Rift → Wyrmrest, Gym 18; Reshiram; Sigrun's trial)
+## CHAPTER 19 — "The Last Gate" (The Gloamwood → The Thornwar Marches → Wyrmscar Rift → Wyrmrest, Gym 18; Reshiram; Sigrun's trial)
 
-**Location:** R35 **Gloamwood** (`:FAIRY_TALE`), R36 (`:MOUNTAIN`), **Wyrmscar Rift** (864 `:CAVE` / 865 `:DRAGONS_DEN`), **Wyrmrest** (Ashkaar), **Rainbow Scar** (868, `:RAINBOW`).
+**Location:** **Gloamwood** (`:FAIRY_TALE`), the Thornwar Marches (`:MOUNTAIN`), **Wyrmscar Rift** (864 `:CAVE` / 865 `:DRAGONS_DEN`), **Wyrmrest** (Ashkaar), **Rainbow Scar** (868, `:RAINBOW`).
 
 ### Arrival: Ashkaar, second visit (escalation)
 - **Dominar Hrothgar** is at the front with his legions (the Ashkaar Siege Camp, 14_WAR_AND_BLESSING). Wyrmrest is held by Sigrun's own riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
@@ -105,7 +105,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 - If it was sabotaged, Larch's voice on the radio: "He bought it. God help us, he bought it."
 
 ### Rainbow Scar and the road to Crownhaven
-**Rainbow Scar** (868) is a Bleed zone where all eighteen Imprints bleed together into light. It foreshadows the Prism Arena. Then **R37** and the **Sovereign's Ascent**:
+**Rainbow Scar** (868) is a Bleed zone where all eighteen Imprints bleed together into light. It foreshadows the Prism Arena. Then **The Pilgrim Pass** and the **Sovereign's Ascent**:
 - At high Accord Standing or with the Royal Writ, the Wardguard escort takes the PC up the processional stair.
 - Otherwise, Edda's smugglers take them through the **Glassfall Scar** (888), the forty Fixed of AF 290, still in Lower Crownhaven where they fell. The PC walks among them. One of them is a Choir cantor with her mouth open mid-note who is not Ines; Ines got out. The PC finds the place where they stood at five.
 
@@ -132,8 +132,8 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 
 ### Day 1: The Opening Ceremony (the 18 Plates)
 1. **The procession.** At dusk, eighteen Wardens descend the Sovereign's Stair into the Prism Arena, each carrying their Plate in a reliquary, in gym order to the counting rhyme sung by the Choir:
-   - Tamsin (Insect)
    - Dorian (Blank)
+   - Tamsin (Insect)
    - Marisol (Splash)
    - Rook (Zap, still cracked, in a cradle; if Rook was fired in Ch16, a Meridian officer carries it, and Rook watches from the crowd)
    - Sahar (Earth)
@@ -360,7 +360,7 @@ See Chapter 21.
 
 ### The True Finale: Arceus (cap 100)
 **Boss battle: Arceus**, multi-bar, type- and field-shifting. Variant by state (NS §6.6): **Bound** (default), **Miscalibrated** (telemetry sabotaged), **War** (Resonance ≤ −6), **Gilded** (Engine calibrated: the Bad ending), **Judgment** (Ruin Route only).
-- **Six bars, three locks each, in gym order.** Bar 1 is Tamsin, Dorian and Marisol, and so on through bar 6: Nyx, Celestine and Sigrun. The Prism Arena shifts to the matching gym field for each lock.
+- **Six bars, three locks each, in gym order.** Bar 1 is Dorian, Tamsin and Marisol, and so on through bar 6: Nyx, Celestine and Sigrun. The Prism Arena shifts to the matching gym field for each lock.
 - **Between bars**, those three Wardens kneel at their pylons and **release** their Plate, letting go of the bond they've carried their whole life, or **refuse**. Every refusal makes the next lock **forced**: Arceus gains +1 to every stat stage for that bar.
 - **All 36 lines** (18 releases, 18 refusals, each refusal tied to the player's choice that caused it) are in **`story/11_FINALE_LINES.md`**.
 - **Celestine** sings the Hymn's last verse as her lock breaks. The Gloaming choir in the stands picks it up, then the Prism Choir, then the crowd.

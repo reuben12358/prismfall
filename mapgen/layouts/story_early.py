@@ -303,7 +303,7 @@ K1 = [
 ERRAND = [
     P('JUNO', 'panic', "\\PN! Mum's Skwovet's got out again. Biscuit. He's gone to the Pruett orchard and I'm not— nobody's supposed to go in there.", '', 'Juno (lab yard)'),
     P('JUNO', 'neutral', "Will you come and look? Just LOOK. From the outside. I'll show you the way.", '', 'Juno (lab yard)'),
-    QUEST('biscuit', 'Biscuit', 'Go with Juno to the old orchard on Route 1.'),
+    QUEST('biscuit', 'Biscuit', "Go with Juno to the old orchard on Windfall Row."),
     P('JUNO', 'happy', "Up the lane, past the stile! I'll be right behind you. Probably in front of you.", '', 'Juno (lab yard)'),
     S('pfm_set(:juno_errand)')]
 

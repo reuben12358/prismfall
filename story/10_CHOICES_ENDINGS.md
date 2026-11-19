@@ -48,7 +48,7 @@ hijack) far more than endings; the endings read Standing only through the Hollow
 ### 1.3 Resonance (Harmony ↔ Ruin)
 
 One integer from −10 (Ruin, *none*) to +10 (Harmony, *every*). It moves only when the PC *uses* the shard or chooses how to carry grief:
-soothing or silencing the Glass Matriarch (Ch2), venting or forcing the caldera (Ch8), the Ogre (Ch10), "nobody" (Ch10), burning Morwen's
+soothing or silencing the Glass Matriarch (Ch3), venting or forcing the caldera (Ch8), the Ogre (Ch10), "nobody" (Ch10), burning Morwen's
 letter (Ch12), the Mindscape line (Ch13), the K6 line (Ch15), the oath (Ch19), Calla (Ch20), burning Kestrel's gauntlet off (Ch21).
 Bands: ruin ≤ −6 · ruin-leaning −5..−2 · balanced · harmony-leaning 2..5 · harmony ≥ 6.
 
@@ -76,12 +76,14 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
 ### Prologue and Act I — "The Last Ferry" (warm; nothing here can ruin you, but everything is remembered)
 - **`:pro_fellowship`** — Voss offers a Fellowship card on the *Dovetail*. *accept* (money, Meridian trust) / *decline* (Voss likes you more:
   "Independent. Good.") / *silent* (he leaves it on the rail). *Sets how warmly Meridian treats you in Acts I–II.*
-- **`:ch2_matriarch`** *(new)* — The beaten Glass Matriarch thrashes in the silk-moth grove. *soothe* (stay with it all night; half the grove
+- *Key names keep their pre-Revision-14 chapter prefixes (IDs never renumber): `:ch3_juno_talk` is in Chapter 2 (Saltmere), and
+  `:ch2_tamsin` and `:ch2_matriarch` are in Chapter 3 (Briarwick).*
+- **`:ch3_juno_talk`** (Ch2) — on Saltmere's breakwater: tell Juno about the NULL scan? *told* (she keeps it) / *deflect* / *silent*.
+- **`:ch2_tamsin`** (Ch3) — Tamsin's secret Lattice contract. *expose* / *help_confess* / *keep_secret*. *Keeping it means the pylon keeps
+  draining Briarwick, and in Act V she can't afford to let go of her Plate (Consent).*
+- **`:ch2_matriarch`** (Ch3) *(new)* — The beaten Glass Matriarch thrashes in the silk-moth grove. *soothe* (stay with it all night; half the grove
   crystallizes; Harmony) / *silence* (press your hand to it and the Imprint leaves it like water down a drain; the grove is saved, the
   Matriarch is left hollow; Ruin −2). *The player's first lesson: the efficient choice is the Ruin one.*
-- **`:ch2_tamsin`** — Tamsin's secret Lattice contract. *expose* / *help_confess* / *keep_secret*. *Keeping it means the pylon keeps
-  draining Briarwick, and in Act V she can't afford to let go of her Plate (Consent).*
-- **`:ch3_juno_talk`** — tell Juno about the NULL scan? *told* (she keeps it) / *deflect* / *silent*.
 - **`:ch4_kestrel_mourner`** — is the Mourner his mother? *kind* / *blunt* (−2) / *silent*.
 - **`:ch4_teo`** — Marisol is tipping off her brother's cell. *report* (Meridian trust; Marisol −4; Teo is hunted) / *keep_secret* / *confront*
   (she breaks down; the strongest Marisol bond). *Seeds who Marisol is if Teo dies.*
@@ -279,7 +281,7 @@ rule plus 2–4 key moments each). Order: a drawn path opponent wins until they 
 - **Displaced:** Marisol/Anja swap seats with Juno, and the QF Wardens swap with Celestine; the displaced one plays on as an NPC. Rowan takes Juno's
   seat (she gave it), and on the Ruin Route Dask takes Celestine's ("I cannot lie, so I won't pretend this is a game.").
 - **Exhibitions** (story-met only): the **Pageant Bout** (Dorian and Rook, a double), **Juno's Garden Match** if she wasn't your R16, the **Ebb Guild
-  match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (Vesper is met in Ch3 and Ch13). On the
+  match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (Vesper is met in Ch2 and Ch13). On the
   Ruin Route only the Octave plays.
 - **Teams:** NARRATIVE_KEYS §7. **19 new Festival teams** (Marisol 90, Anja 90, Rowan 90, Celestine 92, Sigrun 92, Kaito 92, Ysolde 92, Odessa 92,
   Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Theodric 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
@@ -533,7 +535,7 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
 1. **All files:** write choice keys as lowercase symbols (`:ch9_teo_sable`); outcome names like `TEO_SAVED` stay as they are (they're derived flags).
 2. **Bond mentions for non-Bond characters** (Tamsin, Sahar, Brann, Anja, Rook, Corvin): replace "X's Bond goes up/down" with the choice key; their
    payoff is their Consent condition (NARRATIVE_KEYS §5). Ysolde and Marisol **are** Bonds now.
-3. **04 Ch2:** add the Glass Matriarch prompt (`:ch2_matriarch`: soothe / silence) after the boss.
+3. **04 Ch3:** add the Glass Matriarch prompt (`:ch2_matriarch`: soothe / silence) after the boss. *(Done; Revision 14 moved Briarwick to Ch3.)*
 4. **04 Ch5:** add Dorian's refusal line for the Arceus fight if the PC told the Directorate "The Mourner broke the Plate".
 5. **06 Ch11:** add the *Fight it now / Get to the towers* prompt at "the lake breathes" (`GO_WEATHER`); make the strike's optional tag battle the
    `:ch11_strike` choice (stand / mediate).
@@ -566,7 +568,7 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
     the pools and reassigned lines in §3.2, companion-match highlights (§3.4) and the exhibitions in §3.6. Venam's "I could hear everything" goes to
     Teo if he lived, otherwise Corvin's ward records. CAMEOS.md's default draw is obsolete.
 22. **Rev 5 screen-time fixes:** give Anja one Act IV scene and Ysolde one pre-Ch15 scene; introduce Archseer Dask again in Ruin R1 and R4 (done in
-    §5.3's intent; script it); the Eevee Octave is cleared (Vesper is met in Ch3 and Ch13).
+    §5.3's intent; script it); the Eevee Octave is cleared (Vesper is met in Ch2 and Ch13).
 23. **The war (Rev 6):** build the chapters around the six `:war_*` choices above, with Anja's capture, the siege of Skaldfast, and a climax cutscene
     whose ending frame follows `WAR_STOPPED / WAR_BOTH_BROKEN / WAR_ASHKAAR_WON / WAR_ISENMAR_WON` (NARRATIVE_KEYS §4.3). Ch19's Dominar petition
     must read the war's outcome.

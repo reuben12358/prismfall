@@ -81,28 +81,34 @@ module Harness
     $player.badges = Array.new([$player.badges.length, 18].max) { |i| i < count }
   end
 
-  # Who made each field / stage change, and every move the foe used.
+  # Who made each field / stage change, and every move the foe used. The change is credited to the nearest preceding
+  # action line (a move, a held seed, an ability splash, a send-out, or the end of the round).
   def self.analyse(log)
     foe_moves = Hash.new(0)
     changes = []
-    last_actor = nil
+    actions = []
     turn = 0
     log.lines.each do |l|
       turn = $1.to_i if l =~ /--- Turn (\d+) ---/
       if l =~ /^\s*The opposing (.+?) used (.+?)!/
         foe_moves[$2] += 1
-        last_actor = :foe
+        actions << :foe
       elsif l =~ /^\s*(.+?) used (.+?)!/
-        last_actor = :player
+        actions << ((l =~ /Warden|Leader|opposing/) ? :foe : :player)
+      elsif l =~ /Seed|\[ability:/
+        actions << ((l =~ /opposing/) ? :foe_entry : :player_entry)
       elsif l =~ /sent out \((foe|player)\)/
-        last_actor = ($1 == "foe") ? :foe_entry : :player_entry
+        actions << (($1 == "foe") ? :foe_entry : :player_entry)
       elsif l =~ /\(end of round\)/
-        last_actor = :end_of_round
+        actions << :end_of_round
+      elsif l =~ /answer .*: the .* it was raised beside/
+        actions << :foe_entry
       end
+      by = actions.last
       if l =~ /## FIELD CHANGE: (\w+) -> (\w+)/
-        changes << { :from => $1, :to => $2, :by => last_actor, :turn => turn } if $1 != "NONE"
+        changes << { :from => $1, :to => $2, :by => by, :turn => turn } if $1 != "NONE"
       elsif l =~ /## FIELD STAGE: (\w+) is now stage (\d+)/
-        changes << { :from => $1, :to => "#{$1}:#{$2}", :by => last_actor, :turn => turn }
+        changes << { :from => $1, :to => "#{$1}:#{$2}", :by => by, :turn => turn }
       end
     end
     { :foe_moves => foe_moves, :changes => changes }
@@ -169,7 +175,7 @@ end
 #-------------------------------------------------------------------------------
 WARDEN_PLAYS = {
   # SPINE Rev 14: Gym 1 = Dorian (single), Gym 2 = Tamsin (double).
-  1  => { "Chatot's songs (Chatter / Round)" => proc { |r| used?(r, "Chatter", "Round") },
+  1  => { "Minccino / Chatot songs (Echoed Voice, Round, Chatter, Hyper Voice)" => proc { |r| used?(r, "Echoed Voice", "Round", "Chatter", "Hyper Voice") },
           "applause raised by Dorian" => proc { |r| changed?(r, "GRAND_STAGE:2") || changed?(r, "GRAND_STAGE:3") } },
   2  => { "Surskit Rain Dance" => proc { |r| used?(r, "Rain Dance") },
           "Electroweb / String Shot (spread speed control)" => proc { |r| used?(r, "Electroweb", "String Shot") },
@@ -190,7 +196,7 @@ WARDEN_PLAYS = {
   10 => { "Body Press / High Horsepower used" => proc { |r| used?(r, "Body Press", "High Horsepower") },
           "Anja cracks lake -> Water Surface" => proc { |r| changed?(r, "WATER_SURFACE") },
           "Anja refreezes -> Frozen Lake" => proc { |r| changed?(r, "FROZEN_LAKE") } },
-  11 => { "Tailwind used" => proc { |r| used?(r, "Tailwind") }, "Wide Guard used" => proc { |r| used?(r, "Wide Guard") },
+  11 => { "Tailwind used" => proc { |r| used?(r, "Tailwind") }, "Wide Guard / Helping Hand" => proc { |r| used?(r, "Wide Guard", "Helping Hand") },
           "Sunny Day used" => proc { |r| used?(r, "Sunny Day") },
           "Odessa -> Rainbow" => proc { |r| changed?(r, "RAINBOW") } },
   12 => { "Trick Room used" => proc { |r| used?(r, "Trick Room") }, "Psychic Noise used" => proc { |r| used?(r, "Psychic Noise") },

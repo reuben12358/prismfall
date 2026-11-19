@@ -1,4 +1,4 @@
-# Brinecut Mine (544 1F, 545 B1F, :CAVE): chalk-and-salt mine linking Route 3 and Route 4.
+# Brinecut Mine (544 1F, 545 B1F, :CAVE): chalk-and-salt mine linking Thistledown Lea and the Grey Saltings.
 # Built on the base project's Rock Cave templates (data/templates/cave1/cave2); the salt lake is [TODO art].
 id: 544
 name: Brinecut Mine 1F
@@ -10,8 +10,8 @@ bgm: Cave
 field: CAVE
 metadata: {Name: Brinecut Mine, MapPosition: [0, 11, 23], BattleBack: cave1}
 events:
-  - {type: warp, name: To Route 4, at: [18, 22], link: R4_MINE, arrive: [18, 21, up], se: Door exit}
-  - {type: warp, name: To Route 3, at: [24, 9], link: R3_MINE, arrive: [24, 10, down], se: Door exit}
+  - {type: warp, name: To the Grey Saltings, at: [18, 22], link: R4_MINE, arrive: [18, 21, up], se: Door exit}
+  - {type: warp, name: To Thistledown Lea, at: [24, 9], link: R3_MINE, arrive: [24, 10, down], se: Door exit}
   - {type: warp, name: Ladder down, at: [10, 12], to: {map: 545, x: 11, y: 12, dir: right}, se: Door exit}
   - {type: trainer, at: [14, 12], sight: 4, dir: right, sprite: trainer_HIKER, trainer: [HIKER, Bram],
      intro: "Salt in the walls, salt in my boots! Let's go!", after: "The B1F salt lake glows at night. Pretty, but don't drink it."}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ferrow's Landing (100): a weathered timber ferry village at the edge of the realm, 68x60, palette `village`.
 Three levels: Tidewatch hill (NE, Larch's observatory-cottage with its lantern turret), the village bluff (narrow
-lanes that wind down from the Route 1 lane to the square and the quay stairs), and the quay and beach with the ferry
+lanes that wind down from the Ferrymen's Mile lane to the square and the quay stairs), and the quay and beach with the ferry
 pier. The lighthouse stands on the west headland ("<- Lighthouse" on the lane sign); the Dovetail is moored east of
 the pier, drawn as a plank hull with rails and a wheelhouse (no sheet has a timber ship).
 Every story event comes from layouts/story_early.py; this script only seats them.

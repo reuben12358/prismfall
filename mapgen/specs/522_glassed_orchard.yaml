@@ -861,16 +861,16 @@ tiles:
 - {tile: 22728, at: [3, 39], layer: 2}
 events:
 - type: warp
-  name: To Route 2
+  name: To Windfall Row
   at: [0, 37]
   link: R2_ORCHARD
   arrive: [1, 37, right]
 - type: warp
-  name: To Route 2 b
+  name: To Windfall Row b
   at: [0, 36]
   to: {map: 521, x: 60, y: 22, dir: left}
 - type: warp
-  name: To Route 2 c
+  name: To Windfall Row c
   at: [0, 38]
   to: {map: 521, x: 60, y: 23, dir: left}
 - type: event

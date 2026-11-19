@@ -11,13 +11,13 @@ CAP = {
     'g1_00': 'Gym 1: outside the Pell Playhouse (map 147)', 'g1_01': 'Gym 1 lobby (map 150)',
     'g1_02': 'Gym 1 auditorium (map 154): the aisle runs between the seat rows to the stage',
     'g1_03': 'Up the aisle (the actors on the aisle edge battle you)', 'g1_04': 'On the apron: the house curtain is in',
-    'g1_05': 'The one interaction: haul the curtain rope; the curtain flies out', 'g1_06': 'Before Warden Dorian',
+    'g1_05': 'The one interaction: haul the curtain rope; the curtain flies out', 'g1_06': 'Before Warden Dorian', 'g1_07': 'After the battle: the badge',
     'g2_00': 'Gym 2: outside the Loomhouse (map 120)', 'g2_01': 'Gym 2 foyer (map 130): one loom bed across the aisle',
     'g2_02': 'The plank sits off to the left; a silk thread runs to the heddle', 'g2_03': 'One pull: the plank slides into the aisle',
     'g2_04': 'Across the loom bed', 'g2_05': 'Weaving Hall (map 131): the middle bed has no left plank at all',
     'g2_06': 'Red heddle lifts beds A and B', 'g2_07': 'Gold lifts B and C',
     'g2_08': 'Green lifts C and A: every bed lifted twice, all planks on the right', 'g2_09': 'Climbing the right-hand column',
-    'g2_10': 'Top ledge', 'g2_11': 'Before Warden Tamsin (double battle)',
+    'g2_10': 'Top ledge', 'g2_11': 'Before Warden Tamsin (double battle)', 'g2_12': 'After the battle: the badge',
     'bs_00': 'Playhouse Backstage (D9, map 151): work lights', 'bs_01': 'Cue the Shipwreck from the mark: a gangplank crosses the pit',
     'bs_02': 'Over the gangplank to stage left', 'bs_03': 'Cue the Forest: the ship drops go, the ladder is free',
     'bs_04': 'Fly Loft (map 152)', 'bs_05': 'RIGHT rail: rope 2 flies flats B and C', 'bs_06': 'Rope 3 flies A and drops the rostrum back in',
@@ -31,14 +31,7 @@ CAP = {
     'lf_10': 'Canopy Lofts: on the bridge only the brass wire opens', 'lf_11': "Granny's Knot: five threads, five treadles",
     'lf_12': "Granny's Knot: treadles 1, 4, 5: up, down, up, down, up", 'lf_13': "Granny's chest opens",
     'd1_00': 'D1 Glassed Orchard: the chime spur plays low, middle, high', 'd1_01': 'A wrong note first: the failure line says which note was wanted',
-    'd1_02': 'Low', 'd1_03': 'Middle', 'd1_04': 'High: the glass hedge shatters', 'd1_05': 'Past where the hedge stood', 'd1_06': "The lost child's satchel",
-    'g2_00': 'Gym 2: outside Pell Playhouse (Saltmere Old Town)', 'g2_01': 'Foyer: the curtain is in',
-    'g2_02': 'Foyer: Cue: Overture, called from the mark', 'g2_03': 'Revolving Stage: work lights',
-    'g2_04': 'Stage: Cue: the Shipwreck (a gangplank crosses the pit)', 'g2_05': 'Stage: over the gangplank to stage left',
-    'g2_06': 'Stage: Cue: the Forest (the ship drops go, the ladder is free)', 'g2_07': 'Fly Loft: up the left ladder',
-    'g2_08': 'Fly Loft, RIGHT rail: rope 2 flies flats B and C', 'g2_09': 'Fly Loft: rope 3 flies A and drops the rostrum back in',
-    'g2_10': 'Stage: down the right ladder', 'g2_11': 'Stage: Cue: the Throne', 'g2_12': 'Stage: through the gap where flat B stood',
-    'g2_13': 'Stage: on the rostrum, flat A gone, the dais ahead', 'g2_14': 'The Grand Stage: Warden Dorian'}
+    'd1_02': 'Low', 'd1_03': 'Middle', 'd1_04': 'High: the glass hedge shatters', 'd1_05': 'Past where the hedge stood', 'd1_06': "The lost child's satchel"}
 ROOM = {130: 'Loomhouse foyer', 131: 'Weaving Hall', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
         }
 

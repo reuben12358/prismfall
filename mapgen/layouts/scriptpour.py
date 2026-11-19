@@ -4,7 +4,14 @@ turn them into event dicts for the layout scripts. Only the mechanical parts are
 battle calls, reactive [after ...] variants) are NOT parsed; those stay hand-written in the layout scripts."""
 import os, re, zlib
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-LINES = open(os.path.join(ROOT, 'story', '20_SCRIPT_CH0-2.md'), encoding='utf-8').read().split('\n')
+# SPINE Revision 14 split the early script: 20_SCRIPT_CH0-2.md (Prologue, Ch1, Ch2 Saltmere) and 21_SCRIPT_CH3.md
+# (Ch3 Briarwick). Both are read, in order, so section() finds Briarwick's "### Flavor townsfolk" in the second file.
+SCRIPTS = ['20_SCRIPT_CH0-2.md', '21_SCRIPT_CH3.md']
+LINES = []
+for _name in SCRIPTS:
+    _path = os.path.join(ROOT, 'story', _name)
+    if os.path.exists(_path):
+        LINES += open(_path, encoding='utf-8').read().split('\n')
 SPR = ['NPC %02d' % i for i in (2, 4, 6, 9, 10, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 29)]
 KEY = (('Meridian', 'trainer_SCIENTIST'), ('Sailor', 'trainer_SAILOR'), ('Deserter', 'trainer_SAILOR'), ('Fish', 'trainer_FISHERMAN'),
        ('Net-mender', 'trainer_FISHERMAN'), ('Youngster', 'trainer_YOUNGSTER'), ('Chaplain', 'trainer_GENTLEMAN'),

@@ -135,11 +135,22 @@ module Prismfall
       res = OUTCOMES[$game_variables[1]] || :lost
       $player.heal_party if res == :lost && $player
       set_status(id, res)
-      if (res == :won || res == :caught) && d[:joins]
-        joined = (res == :caught) ? true : pbAddPokemon(build(id, nil, d[:joins]))
-        set_status(id, :joined) if joined
+      if res == :caught
+        set_status(id, :joined)
+      elsif res == :won && d[:joins] && !d[:join_choice]
+        join(id)
       end
       return res
+    end
+
+    # A beaten boss joins the party (event script decides when for :join_choice).
+    def self.join(id)
+      d = get(id)
+      raise ArgumentError, "Unknown event mon #{id.inspect}" if !d
+      return false if status(id) == :joined
+      ok = pbAddPokemon(build(id, nil, d[:joins] || {}))
+      set_status(id, :joined) if ok
+      return ok
     end
 
     # Moves/ability/nature of the event definition on top of a boss Pokemon.

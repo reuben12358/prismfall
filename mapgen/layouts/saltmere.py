@@ -101,7 +101,7 @@ for y in range(H):
 
 # ------------------------------------------------------------------ paving and paths (before cliffs are stamped in)
 blob(32, 21, 10.5, 3.6, 'c', 3, level=2); rect(28, 17, 9, 3, 'c')         # Playhouse forecourt (cream flagstones)
-path([(45, 0), (46, 6), (44, 13), (41, 19)], 3, 'c', 4)                   # north road from Route 4, round the Playhouse
+path([(45, 0), (46, 6), (44, 13), (41, 19)], 3, 'c', 4)                   # north road from the Grey Saltings, round the Playhouse
 path([(22, 21), (17, 19), (13, 18)], 2, 'o', 5)                           # stepping stones to Saltwife's garden
 path([(13, 18), (9, 20), (6, 19)], 2, 'o', 15)
 path([(42, 20), (48, 18), (52, 18)], 3, 'c', 6)                           # lane to the Pageant Hall

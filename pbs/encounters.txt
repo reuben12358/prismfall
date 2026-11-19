@@ -28,7 +28,7 @@ SuperRod
     5,GYARADOS,46,50
     5,MANTINE,46,50
 #-------------------------------
-[520] # Route 1
+[520] # The Ferrymen's Mile
 Land
     20,SKWOVET,3,5
     15,LECHONK,3,5
@@ -48,7 +48,7 @@ LandNight
     10,ROLYCOLY,4,6
     5,RATTATA,3,5
 #-------------------------------
-[520,1] # Route 1
+[520,1] # The Ferrymen's Mile
 Land
     15,GREEDENT,55,60
     15,OINKOLOGNE,55,60
@@ -60,7 +60,7 @@ Land
     10,MINIOR,55,60
     5,COALOSSAL,55,60
 #-------------------------------
-[521] # Route 2
+[521] # Windfall Row
 Land
     15,PIDOVE,5,7
     10,BOUNSWEET,5,7
@@ -95,7 +95,7 @@ HeadbuttHigh
     9,AIPOM,5,8
     1,HERACROSS,8
 #-------------------------------
-[521,1] # Route 2
+[521,1] # Windfall Row
 Land
     15,CARBINK,55,60
     10,MINIOR,55,60
@@ -194,7 +194,7 @@ SuperRod
     25,BASCULIN,45,50
     15,LOMBRE,45,50
 #-------------------------------
-[540] # Route 3
+[540] # Thistledown Lea
 Land
     12,FLABEBE,10,13
     10,DODUO,10,13
@@ -240,7 +240,7 @@ SuperRod
     10,GYARADOS,46,50
     10,BASCULIN,45,50
 #-------------------------------
-[541] # Route 4
+[541] # The Grey Saltings
 Land
     10,CRABRAWLER,12,15
     8,SANDYGAST,12,15
@@ -369,7 +369,7 @@ SuperRod
     25,SHARPEDO,45,50
     25,LANTURN,45,50
 #-------------------------------
-[560] # Route 5 - Frostflat Causeway
+[560] # Frostflat Causeway
 Land
     10,GLAMEOW,15,18
     8,SKITTY,15,18
@@ -455,7 +455,7 @@ SuperRod
     25,WHISCASH,45,50
     20,SEALEO,45,50
 #-------------------------------
-[561] # Route 6 - Gullcry Cliffs
+[561] # Gullcry Cliffs
 Land
     15,WINGULL,16,19
     10,DUCKLETT,16,19
@@ -582,7 +582,7 @@ SuperRod
     10,GYARADOS,46,50
     10,SEAKING,45,50
 #-------------------------------
-[580] # Route 7
+[580] # The Reedholms
 Land
     12,TYMPOLE,19,23
     10,WOOPER,19,23
@@ -618,7 +618,7 @@ SuperRod
     10,GYARADOS,46,50
     20,BASCULIN,45,50
 #-------------------------------
-[581] # Route 8 - Icefall Locks
+[581] # The Icefall Locks
 Land
     10,MAGNEMITE,21,25
     8,VOLTORB,21,25
@@ -693,7 +693,7 @@ Land,25
     5,CASTFORM,23,26
     5,FINIZEN,23,26
 #-------------------------------
-[600] # Route 9 - The Brass Dunes
+[600] # The Brass Dunes
 Land
     10,SANDSHREW,23,27
     8,CACNEA,23,27
@@ -708,7 +708,7 @@ Land
     8,WATTREL,23,27
     6,ORTHWORM,24,27
 #-------------------------------
-[601] # Route 10
+[601] # The Rib Road
 Land
     15,SANDILE,25,29
     12,TRAPINCH,25,29
@@ -767,7 +767,7 @@ Land,25
     8,TADBULB,26,30
     10,KILOWATTREL,26,30
 #-------------------------------
-[620] # Route 11
+[620] # The Marrow Road
 Land
     12,KROKOROK,27,31
     10,HIPPOPOTAS,27,31
@@ -783,7 +783,7 @@ Land
     8,NACLSTACK,27,31
     6,KLAWF,27,31
 #-------------------------------
-[621] # Route 12 - The Leach Canyons
+[621] # The Leach Canyons
 Land
     8,EKANS,29,33
     8,GULPIN,29,33
@@ -883,7 +883,7 @@ SuperRod
     15,TOXAPEX,46,52
     30,WHISCASH,46,52
 #-------------------------------
-[640] # Route 13
+[640] # Leechman's Walk
 Land
     8,EKANS,31,35
     6,SEVIPER,31,35
@@ -918,7 +918,7 @@ SuperRod
     25,QWILFISH,46,52
     15,TOXAPEX,46,52
 #-------------------------------
-[641] # Route 14 - Sulfur Reach (Lake Sallow)
+[641] # Lake Sallow
 Land
     10,SALANDIT,32,36
     8,CHARCADET,32,36
@@ -1040,7 +1040,7 @@ SuperRod
     20,SHARPEDO,45,52
     20,MANTINE,45,52
 #-------------------------------
-[660] # Route 15
+[660] # The Ashmarch
 Land
     12,SLUGMA,35,39
     10,NUMEL,35,39
@@ -1056,7 +1056,7 @@ Land
     6,CHARCADET,35,39
     8,CAPSAKID,35,39
 #-------------------------------
-[661] # Route 16 - The Ironway
+[661] # The Ironway
 Land
     8,TEDDIURSA,37,41
     8,MIENFOO,37,41
@@ -1073,7 +1073,7 @@ Land
     8,TORKOAL,37,41
     8,FLAMIGO,37,41
 #-------------------------------
-[662] # Route 15b - The Cinderglass Barrens
+[662] # The Cinderglass Barrens
 Land
     8,KROKOROK,36,40
     10,NUMEL,36,40
@@ -1110,7 +1110,7 @@ Land
     4,DRUDDIGON,38,41
     10,GROWLITHE,37,41
 #-------------------------------
-[664] # Mt. Cinder 1F
+[664] # The Cinderhorn 1F
 Cave
     15,SLUGMA,36,40
     10,NUMEL,36,40
@@ -1125,7 +1125,7 @@ Cave
     4,LARVESTA,36,40
     8,CHARCADET,36,40
 #-------------------------------
-[665] # Mt. Cinder 2F
+[665] # The Cinderhorn 2F
 Cave
     10,MAGCARGO,38,41
     8,CAMERUPT,38,41
@@ -1141,7 +1141,7 @@ Cave
     6,DRUDDIGON,38,41
     10,CHARCADET,38,41
 #-------------------------------
-[666] # Mt. Cinder Caldera
+[666] # The Cinderhorn Caldera
 Land
     6,DRUDDIGON,39,42
     8,TURTONATOR,39,42
@@ -1172,7 +1172,7 @@ Land,25
     8,HEATMOR,39,42
     8,MAGMAR,39,42
 #-------------------------------
-[680] # Route 17 - The Rootdeep
+[680] # The Rootdeep
 Cave
     8,MACHOKE,39,43
     8,GURDURR,39,43
@@ -1190,7 +1190,7 @@ Cave
     6,BRAMBLIN,39,43
     4,MABOSSTIFF,39,43
 #-------------------------------
-[681] # Route 18 - Prism Falls
+[681] # Prism Falls
 Land
     8,SWIRLIX,41,45
     8,SPRITZEE,41,45
@@ -1301,7 +1301,7 @@ Land,25
     6,GRAPPLOCT,43,46
     6,ANNIHILAPE,43,46
 #-------------------------------
-[700] # Route 19
+[700] # The Hart's Run
 Land
     8,KRICKETUNE,43,47
     6,LEAVANNY,43,47
@@ -1320,7 +1320,7 @@ Land
     6,LOKIX,43,47
     8,ARIADOS,43,47
 #-------------------------------
-[701] # Route 20 - Northern Rimewood
+[701] # The Hoarwood
 Land
     12,SNOVER,45,49
     10,SWINUB,45,49
@@ -1432,7 +1432,7 @@ SuperRod
     20,DEWGONG,47,53
     10,WALREIN,47,53
 #-------------------------------
-[720] # Route 21
+[720] # The Thane's Sled-Road
 Land
     10,ABOMASNOW,47,51
     10,PILOSWINE,47,51
@@ -1456,7 +1456,7 @@ Water
     15,SEALEO,47,51
     10,LAPRAS,47,51
 #-------------------------------
-[721] # Route 22 - Mast Glacier
+[721] # The Mast Glacier
 Land
     10,CRYOGONAL,49,53
     8,AVALUGG,49,53
@@ -1564,7 +1564,7 @@ Land,25
     8,BEARTIC,51,54
     6,BANETTE,51,54
 #-------------------------------
-[740] # Route 23
+[740] # Conductors' Causeway
 Land
     8,EMOLGA,51,55
     6,ZEBSTRIKA,51,55
@@ -1581,7 +1581,7 @@ Land
     6,CRAMORANT,51,55
     8,CORVISQUIRE,51,55
 #-------------------------------
-[741] # Route 24 - The Wired Wood
+[741] # The Wired Wood
 Land
     6,CLEFAIRY,53,57
     6,JIGGLYPUFF,53,57
@@ -1711,7 +1711,7 @@ Land,25
     6,CLEFAIRY,55,58
     4,REUNICLUS,55,58
 #-------------------------------
-[760] # Route 25 - The Obsidian Barrows
+[760] # The Obsidian Barrows
 Land
     8,XATU,55,59
     6,PALOSSAND,55,59
@@ -1730,7 +1730,7 @@ Land
     4,RUNERIGUS,55,59
     4,GARDEVOIR,55,59
 #-------------------------------
-[761] # Route 26
+[761] # Spinefall Gorge
 Land
     10,DONPHAN,57,61
     10,RHYDON,57,61
@@ -1824,7 +1824,7 @@ Land,25
     8,DUSCLOPS,59,62
     4,INDEEDEE,59,62
 #-------------------------------
-[780] # Route 27
+[780] # The Jawbone Ridge
 Land
     8,RHYDON,59,63
     8,GRAVELER,59,63
@@ -1844,7 +1844,7 @@ Land
     6,SANDACONDA,59,63
     6,GARGANACL,59,63
 #-------------------------------
-[781] # Route 28
+[781] # Hindmoor
 Land
     8,MIGHTYENA,61,65
     8,LIEPARD,61,65
@@ -1963,7 +1963,7 @@ Land,25
     6,PROBOPASS,63,66
     6,GARGANACL,63,66
 #-------------------------------
-[800] # Route 29
+[800] # The Noonless Road
 Land
     6,MISDREAVUS,63,67
     8,GOURGEIST,63,67
@@ -1982,7 +1982,7 @@ Land
     6,LAMPENT,63,67
     8,PHANTUMP,63,67
 #-------------------------------
-[801] # Route 30 - Slag Mesa
+[801] # The Slag Mesa
 Land
     8,MUK,65,69
     8,WEEZING,65,69
@@ -2090,7 +2090,7 @@ SuperRod
     20,DRAGALGE,63,70
     15,TOXAPEX,63,70
 #-------------------------------
-[820] # Route 31 - The Hanging Stair
+[820] # The Hanging Stair
 Land
     8,MAGNETON,67,71
     6,KLINKLANG,67,71
@@ -2110,7 +2110,7 @@ Land
     6,GARBODOR,67,71
     6,SKARMORY,67,71
 #-------------------------------
-[821] # Route 32
+[821] # The Drownings
 Land
     10,SKUNTANK,68,72
     10,KILOWATTREL,68,72
@@ -2153,7 +2153,7 @@ SuperRod
     5,MILOTIC,68,74
     15,WAILORD,68,74
 #-------------------------------
-[822] # Route 32 Seabed
+[822] # Under the Drownings
 Land
     12,LANTURN,68,73
     10,LUMINEON,68,73
@@ -2243,7 +2243,7 @@ Land,25
     6,MAWILE,71,74
     6,COPPERAJAH,71,74
 #-------------------------------
-[840] # Route 33 - Rootdeep River
+[840] # The Blindwater
 Cave
     10,GOLBAT,71,76
     6,AMOONGUSS,71,76
@@ -2283,7 +2283,7 @@ SuperRod
     15,SEISMITOAD,72,78
     10,MILOTIC,72,78
 #-------------------------------
-[841] # Route 34 - Gloamwood Verge
+[841] # The Gloamwood Verge
 Land
     8,WHIMSICOTT,73,78
     6,LILLIGANT,73,78
@@ -2385,7 +2385,7 @@ Land,25
     6,ABSOL,75,79
     8,SABLEYE,75,79
 #-------------------------------
-[860] # Route 35 - Gloamwood
+[860] # The Gloamwood
 Land
     6,FLORGES,76,80
     6,WHIMSICOTT,76,80
@@ -2406,7 +2406,7 @@ Land
     6,KLEFKI,76,80
     6,COMFEY,76,80
 #-------------------------------
-[861] # Route 36 - Thornwar Marches
+[861] # The Thornwar Marches
 Land
     6,TALONFLAME,77,82
     8,FLYGON,77,82
@@ -2488,7 +2488,7 @@ Land,25
     6,HATTERENE,79,83
     4,DEDENNE,79,83
 #-------------------------------
-[880] # Route 37 - Pilgrim Pass
+[880] # The Pilgrim Pass
 Land
     6,URSARING,80,85
     6,BRAVIARY,80,85

@@ -1,7 +1,7 @@
-# Route 5 (560, salt flats), Route 6 (561, sea cliffs, K2) and Gullcry Caves (564). Story: 04_ACT_I.md Chapter 4.
+# Frostflat Causeway (560, salt flats), Gullcry Cliffs (561, sea cliffs, K2) and Gullcry Caves (564). Story: 04_ACT_I.md Chapter 4.
 # The Rehearsal (568) and Gullcry B1F (565) are not built yet (signs).
 id: 560
-name: Route 5
+name: Frostflat Causeway
 palette: outside
 bgm: Route 2
 parent: 0
@@ -40,7 +40,7 @@ map: |
   TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 events:
   - {type: sign, at: [30, 24], text: "The road south dips into a wrecked pier village half-sunk in brine. Something replays there, over and over. [TODO map 568: The Rehearsal]"}
-  - {type: sign, at: [60, 11], text: "ROUTE 5 - THE SALT FLATS\nElowen / Isenmar border. A Meridian sunburst is bolted over both kingdoms' arms."}
+  - {type: sign, at: [60, 11], text: "FROSTFLAT CAUSEWAY - THE SALT FLATS\nElowen / Isenmar border. A Meridian sunburst is bolted over both kingdoms' arms."}
   - {type: trainer, at: [16, 13], sight: 4, dir: right, sprite: trainer_RUINMANIAC, trainer: [RUINMANIAC, Alder],
      intro: "There's a whole village under that brine!", after: "Old pier town. Gone in a night, they say."}
   - {type: trainer, at: [36, 6], sight: 4, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Sela],
@@ -53,7 +53,7 @@ events:
   - {type: item, at: [2, 3], item: SUPERPOTION}
 ---
 id: 561
-name: Route 6
+name: Gullcry Cliffs
 palette: outside
 bgm: Route 3
 parent: 0

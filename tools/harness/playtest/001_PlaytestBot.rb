@@ -656,6 +656,26 @@ module PlayBot
       walk_to(g[0], g[1])
     end
 
+    # Does an edge arrival tile on another map connect to open ground (at least 40 tiles)?
+    def open_arrival?(map, sx, sy)
+      @arrival_ok ||= {}
+      key = [map.map_id, sx, sy]
+      return @arrival_ok[key] if @arrival_ok.has_key?(key)
+      seen = { [sx, sy] => true }
+      queue = [[sx, sy]]
+      until queue.empty? || seen.length >= 40
+        cx, cy = queue.shift
+        DIRS.each do |d, (dx, dy)|
+          nx, ny = cx + dx, cy + dy
+          next if seen[[nx, ny]] || !map.valid?(nx, ny)
+          next if !map.passable?(cx, cy, d, $game_player) || !map.passable?(nx, ny, 10 - d, $game_player)
+          seen[[nx, ny]] = true
+          queue.push([nx, ny])
+        end
+      end
+      return @arrival_ok[key] = (seen.length >= 40)
+    end
+
     # The transfer event (nearest) or the map edge that leads to map dest
     def to_map(dest)
       if !@to || @to[0] != [@step, $game_map.map_id]
@@ -677,6 +697,7 @@ module PlayBot
             dx, dy = DIRS[d]
             nm = $map_factory.getNewMap(ex + dx, ey + dy)
             next if !nm || nm[0].map_id != dest || !$game_player.passable?(ex, ey, d)
+            next if !open_arrival?(nm[0], nm[1], nm[2])   # don't walk off into the neighbour's tree line
             dist = (ex - px).abs + (ey - py).abs
             next if best && best[0] <= dist
             best = [dist, ex, ey, d] if [ex, ey] == [px, py] || path_dirs(ex, ey)

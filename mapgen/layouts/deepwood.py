@@ -3,7 +3,7 @@
 525 (44 x 40): past the Cut tree.  Older, darker wood; the glass seeps in from the east.  Shelly's dew-pond clearing in the
 south (small Veil, glassed Masquerain).  East: the crystal-silk mouth to the Hollow (opens once :ch2_tamsin is chosen).
 548 (38 x 34): a crater of crystal trees strung with glass thread like a harp; the Glass Matriarch on her nest at the centre.
-Entries: west from the Deepwood (DEEP_COCOON, through the Veil where Juno and Tamsin wait) and south from Route 3 (R3_COCOON).
+Entries: west from the Deepwood (DEEP_COCOON, through the Veil where Juno and Tamsin wait) and south from Thistledown Lea (R3_COCOON).
 Run:  python3 -I layouts/deepwood.py && python3 -I build.py 525 548"""
 import os, sys, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -199,7 +199,7 @@ def hollow():
         for y in range(13, 20):
             if x == 4: c.o[2][y][x] = c.o[2][y][x] or CU['veil']
     E = []
-    E.append({'type': 'warp', 'name': 'To Route 3', 'at': [18, 33], 'link': 'R3_COCOON', 'arrive': [18, 32, 'up']})
+    E.append({'type': 'warp', 'name': 'To Thistledown Lea', 'at': [18, 33], 'link': 'R3_COCOON', 'arrive': [18, 32, 'up']})
     E.append({'type': 'warp', 'name': 'To the Deepwood', 'at': [0, 16], 'link': 'DEEP_COCOON', 'arrive': [1, 16, 'right']})
     E.append(c.fog_event('prismfall_glass', 90, 1, 200, 1, 1))
     E.append({'type': 'event', 'name': 'Escort setup', 'at': [0, 1], 'pages': [

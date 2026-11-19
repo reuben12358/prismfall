@@ -1,11 +1,11 @@
-# Route 5 (560). WRITTEN BY layouts/rimewood.py - edit that script.
+# Frostflat Causeway (560). WRITTEN BY layouts/rimewood.py - edit that script.
 id: 560
-name: Route 5
+name: Frostflat Causeway
 parent: 0
 rubric: true
 yards_ok: true
 biome: route
-display_name: Route 5 - Frostflat Causeway
+display_name: Frostflat Causeway
 bgm: Route 2
 metadata:
   Outdoor: true
@@ -30,7 +30,7 @@ events:
 - type: sign
   name: Route sign
   at: [60, 11]
-  text: 'ROUTE 5 - THE FROSTFLAT CAUSEWAY
+  text: 'FROSTFLAT CAUSEWAY
 
     W: Frostwick   E: Saltmere'
   post: false

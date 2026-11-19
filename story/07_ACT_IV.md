@@ -15,9 +15,9 @@
 
 ---
 
-## CHAPTER 14 — "The Deep Seams" (R25 → R26 → Geode Hollow → Cragholm, Gym 13)
+## CHAPTER 14 — "The Deep Seams" (The Obsidian Barrows → Spinefall Gorge → Geode Hollow → Cragholm, Gym 13)
 
-**Location:** R25 (`:INVERSE`, Antumbra exit), R26 (Waterfall, a mirror exit into Ossaria), **Geode Hollow** (`:CRYSTAL_CAVERN`), **Dreaming Quarter** (768, `:BLEED`: a mining street where the sleeping Fixed's dreams play as mirages), **Cragholm** (Ossaria), the **deep seams**.
+**Location:** The Obsidian Barrows (`:INVERSE`, Antumbra exit), Spinefall Gorge (Waterfall, a mirror exit into Ossaria), **Geode Hollow** (`:CRYSTAL_CAVERN`), **Dreaming Quarter** (768, `:BLEED`: a mining street where the sleeping Fixed's dreams play as mirages), **Cragholm** (Ossaria), the **deep seams**.
 
 **Arrival: Ossaria, second visit (escalation).**
 - Cragholm is a canyon wall of lamplit galleries and lift-cages. **Prince-Elector Kassan** has sold its seams to Meridian. Linesmen and Directorate guards stand at the main lifts, and Meridian's new **Lattice-drill** chews into the Stone Plate's crystal halls.
@@ -62,13 +62,13 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 - After the battle, Groudon sinks back into the earth. The aquifer starts, very slowly, to refill. This is the first good news in an act.
 - **Stonesleep** (788): the fossil beds exposed by the collapse. Rare fossils go to the Dig Lab.
 
-**Cliffhanger:** At the Antumbra border on R28, Kestrel's Meridian airship passes overhead toward Gravenmoor. Pip: "That's a sponsor ship. Who'd sponsor a *graveyard*?"
+**Cliffhanger:** At the Antumbra border on Hindmoor, Kestrel's Meridian airship passes overhead toward Gravenmoor. Pip: "That's a sponsor ship. Who'd sponsor a *graveyard*?"
 
 ---
 
-## CHAPTER 15 — "The Hollow Cathedral" (R27 → R28 → Gravenmoor, Gym 14; K6; Vane Hall; Giratina)
+## CHAPTER 15 — "The Hollow Cathedral" (The Jawbone Ridge → Hindmoor → Gravenmoor, Gym 14; K6; Vane Hall; Giratina)
 
-**Location:** R27 (`:MOUNTAIN`), R28 (Antumbra moors, fog), **Gravenmoor** (Antumbra, `:HOLLOW_CATHEDRAL`), **Vane Hall** (haunted house), the **Lantern Hospice**, the barrows, then on the way out **Barrow of the Wardens** and **Giratina's Reverse Depths** (806, `:INVERSE`), **The Hush** (808).
+**Location:** The Jawbone Ridge (`:MOUNTAIN`), Hindmoor (Antumbra moors, fog), **Gravenmoor** (Antumbra, `:HOLLOW_CATHEDRAL`), **Vane Hall** (haunted house), the **Lantern Hospice**, the barrows, then on the way out **Barrow of the Wardens** and **Giratina's Reverse Depths** (806, `:INVERSE`), **The Hush** (808).
 
 **Arrival: Antumbra, second visit.** Gravenmoor is fog, barrows and lanterns. The Spooky Plate makes the dead *linger as echoes*: a woman sweeping a step that isn't there, two children playing a game that ended in AF 211.
 - **Archseer Dask** has come to Gravenmoor himself (his second encounter, needed for the Ruin Route): "The echoes are louder. Louder, the echoes. Something behind the Glass is listening back."
@@ -125,15 +125,15 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 - After the fight it doesn't flee. It *looks* at the PC the way Kyogre did. Story text: *it knows what you carry. It has been guarding the hole your god left for three hundred years.* It lets the PC pass and closes the tear behind them.
 - The Glass has been leaking since the Fault, and Giratina's wound is why visitors from other worlds keep slipping into Velmora (the cameo sidequests, `design/CAMEOS.md`). Post-game: the Distortion Core.
 - **Ruin Route trigger** (only with a full Ledger, `ruin_unlocked`). A pane of black glass in the Depths shows Juno on the other side, calling the PC's name: the exact image of `GO_LOOKING_BACK`. The prompt appears again: **Look back?** (`:ch15_look_back`).
-  - *Yes:* it no longer kills you. The reflection steps aside, and the PC walks *through* into `story/12_RUIN_ROUTE.md` (R1).
+  - *Yes:* it no longer kills you. The reflection steps aside, and the PC walks *through* into `story/12_RUIN_ROUTE.md` (The Ferrymen's Mile).
   - *No:* the main story continues, and the door never reopens on that save.
 - **The Hush** (808): a Bleed zone where sound doesn't exist. The PC can see their own footsteps as ripples. Atmospheric breather.
 
 ---
 
-## CHAPTER 16 — "Clear Air" (R29 → R30 → Cogsworth, Gym 15; the Arbiter blueprints; Zekrom; the Sump Purge begins)
+## CHAPTER 16 — "Clear Air" (The Noonless Road → The Slag Mesa → Cogsworth, Gym 15; the Arbiter blueprints; Zekrom; the Sump Purge begins)
 
-**Location:** R29, R30 (`:WASTELAND`, Zenith's eastern waste), **Cogsworth** (Zenith's foundry district, `:FACTORY`), **Strade Works**, the **Engine core chamber**.
+**Location:** The Noonless Road, the Slag Mesa (`:WASTELAND`, Zenith's eastern waste), **Cogsworth** (Zenith's foundry district, `:FACTORY`), **Strade Works**, the **Engine core chamber**.
 
 **Arrival: Zenith, third visit (escalation).**
 - Cogsworth runs **three shifts**. Smokestacks never stop, and clock-towers chime every quarter-hour.
@@ -180,10 +180,10 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 
 ---
 
-## CHAPTER 17 — "The Drowned Crown" (R31 → R32 → Seabed → Underveil, Gym 16; Aurelia; Voss)
+## CHAPTER 17 — "The Drowned Crown" (The Hanging Stair → The Drownings → Seabed → Underveil, Gym 16; Aurelia; Voss)
 
 **Location:**
-- R31 (`:SCRAPYARD`), R32 (`:WATER_SURFACE`, the drained north coast), **R32 Seabed** (`:UNDERWATER`, Dive).
+- The Hanging Stair (`:SCRAPYARD`), the Drownings (`:WATER_SURFACE`, the drained north coast), **Under the Drownings** (`:UNDERWATER`, Dive).
 - **Underveil** (Nadir's heart, `:NEW_MOON`), the **Moon Market**.
 - **Aurelia** (824 `:UNDERWATER` / 825–826 `:CAVE`), the **Sun Court**.
 - **Ironbloom** (828, `:BLEED`: rust that flowers).
@@ -207,10 +207,10 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
   - **Refuse:** Nyx shrugs and helps anyway in Ch21, sloppily, at a cost to herself (she's injured).
 - Nyx confesses, unprompted, after the gym: "Two years ago I sold Voss the way into the Sun Court. I told myself it was just a door. My family's kept that door shut for three hundred years. I'm the one who opened it."
 
-**Accord Archive branch** (838, high Accord Standing only). **Brann** meets the PC in a sealed Coastwatch vault on R32. It holds the **Concordance's Secret Articles in Maren's handwriting**: the Tuning, and the Hymn of Return. Brann confesses everything here, gently and early (see below), and gives the PC Maren's original Hymn page.
+**Accord Archive branch** (838, high Accord Standing only). **Brann** meets the PC in a sealed Coastwatch vault on the Drownings. It holds the **Concordance's Secret Articles in Maren's handwriting**: the Tuning, and the Hymn of Return. Brann confesses everything here, gently and early (see below), and gives the PC Maren's original Hymn page.
 
 **Aurelia (dive set piece).**
-1. With Dive suits from Cogsworth, the PC descends from R32's drained shallows to the **Seabed** and into **drowned Aurelia**.
+1. With Dive suits from Cogsworth, the PC descends from the Drownings's drained shallows to the **Seabed** and into **drowned Aurelia**.
    - **Sahar Ostrand** leads the expedition. She's the expert, terrified and thrilled: "Three hundred years. I've waited my whole *life*."
    - **Edda Morrow** pilots the support boat.
 2. Golden terraces lie under green water. Gilder machines are rusted into coral. The Gilded King's statues have had their faces chiseled off by his daughter's people.

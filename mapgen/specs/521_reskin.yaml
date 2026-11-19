@@ -1,7 +1,7 @@
-# Route 2 (521). RE-SKINNED BY layouts/reskin.py from layouts/old_521_wilds.yaml - edit that plan.
+# Windfall Row (521). RE-SKINNED BY layouts/reskin.py from layouts/old_521_wilds.yaml - edit that plan.
 id: 521
 biome: route
-name: Route 2
+name: Windfall Row
 bgm: Route 2
 parent: 0
 tone: [8, 4, -10, 0]
@@ -45,7 +45,7 @@ events:
   to: {map: 522, x: 2, y: 37, dir: right}
 - type: sign
   at: [43, 44]
-  text: 'ROUTE 2
+  text: 'WINDFALL ROW
 
     Briarwick ahead. Travelers are reminded that the Gossamer Wood is the Crown''s forest and the Warden''s care. Litterers will be woven into something.'
   post: false

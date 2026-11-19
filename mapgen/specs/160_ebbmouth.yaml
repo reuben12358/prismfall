@@ -1,5 +1,5 @@
 # Ebbmouth (160): Isenmar's southern port where the River Ebb meets the sea. Story: 04_ACT_I.md Chapter 4.
-# The river's day/night current flip is [TODO] (the Outside tileset has no current autotiles); the E edge to Route 7
+# The river's day/night current flip is [TODO] (the Outside tileset has no current autotiles); the E edge to the Reedholms
 # (580) is closed until 580 is built.
 id: 160
 name: Ebbmouth

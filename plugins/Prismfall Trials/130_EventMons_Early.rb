@@ -8,7 +8,7 @@
 #===============================================================================
 em = Prismfall::EventMons
 
-#--- Chapter 1: Ferrow's Landing, Route 1 (520), Route 2 (521) ------------------
+#--- Chapter 1: Ferrow's Landing (100), the Ferrymen's Mile (520), Windfall Row (521)
 em.register(:EL_NICKIT, {
   :species => :NICKIT, :level => 7, :ability => :STAKEOUT, :nature => :JOLLY, :ivs => 20,
   :moves => [:QUICKATTACK, :BEATUP, :THIEF, :TAILWHIP], :item => :ORANBERRY,
@@ -31,7 +31,7 @@ em.register(:EL_SUDOWOODO, {
   :species => :SUDOWOODO, :level => 10, :ability => :ROCKHEAD, :nature => :IMPISH, :ivs => 20,
   :moves => [:ROCKTHROW, :FLAIL, :FAKETEARS, :COPYCAT],
   :kind => :battle, :on_ko => :retry,
-  :map => 521, :where => "Hale orchard, Route 2 (the 'scarecrow')", :chapter => 1,
+  :map => 521, :where => "Hale orchard, Windfall Row (the 'scarecrow')", :chapter => 1,
   :quest => :EL_SCARECROW, :trigger => "Water the scarecrow with Wenna's Squirt Bottle",
   :why => "A Rock type that resists Normal before Dorian's gym; no wild Bonsly line until Badge 7"
 })
@@ -45,12 +45,12 @@ em.register(:EL_WATTREL, {
   :why => "Electric/Flying in Chapter 1; Electric is otherwise two families until Ebbmouth"
 })
 
-#--- Chapter 2: the coast road (541) and Saltmere (140/145/146/147) -------------
+#--- Chapter 2: Lacecliff Walk (527), Marram Down (528), Saltmere (140/145/146/147)
 em.register(:EL_TIDE_CRABRAWLER, {
   :species => :CRABRAWLER, :level => 12, :ability => :IRONFIST, :nature => :ADAMANT, :ivs => 20,
   :moves => [:ROCKSMASH, :BUBBLE, :LEER, :POWERUPPUNCH],
   :kind => :battle, :on_ko => :retry, :field => :BEACH,
-  :map => 541, :where => "Tide-pool on the coast road (current 'Route 4')", :chapter => 2,
+  :map => 527, :where => "The big tide-pool below Lacecliff Walk", :chapter => 2,
   :quest => :EL_TIDE_POOL_FEUD, :trigger => "Side with Clobbopus in the tide-pool feud",
   :why => "Fighting type before the Normal-type Gym 1; Iron Fist Power-Up Punch"
 })
@@ -59,9 +59,9 @@ em.register(:EL_TIDE_CLOBBOPUS, {
   :species => :CLOBBOPUS, :level => 12, :ability => :TECHNICIAN, :nature => :ADAMANT, :ivs => 20,
   :moves => [:ROCKSMASH, :FEINT, :BIND, :POWERUPPUNCH],
   :kind => :battle, :on_ko => :retry, :field => :BEACH,
-  :map => 541, :where => "Tide-pool on the coast road (current 'Route 4')", :chapter => 2,
+  :map => 527, :where => "The big tide-pool below Lacecliff Walk", :chapter => 2,
   :quest => :EL_TIDE_POOL_FEUD, :trigger => "Side with Crabrawler in the tide-pool feud",
-  :why => "Fighting type with Technician (Rock Smash and Power-Up Punch at 60 power); no wild Clobbopus until Gullcry"
+  :why => "Fighting type with Technician (Rock Smash and Power-Up Punch at 60 power); no wild Clobbopus until the Gullcry cliffs"
 })
 
 em.register(:EL_KECLEON, {
@@ -120,7 +120,7 @@ em.register(:EL_GLASS_PONYTA, {
   :why => "Galarian Ponyta (Psychic, Fairy at Rapidash): an Imprinted variant found only in the Orchard"
 })
 
-#--- Chapter 3: inland road (540), Gossamer Wood (524/525), Briarwick (120) -----
+#--- Chapter 3: the Weavers' Road (541/552/540), Gossamer Wood (524/525), Briarwick (120)
 em.register(:EL_HERACROSS, {
   :species => :HERACROSS, :level => 15, :ability => :MOXIE, :nature => :ADAMANT, :ivs => 25,
   :moves => [:FURYATTACK, :AERIALACE, :HORNATTACK, :ENDURE],
@@ -147,13 +147,13 @@ em.register(:EL_SPIDOPS, {
              :stat_mults => { :HP => 1.15, :DEFENSE => 1.1 },
              :intro => "The Silkthief drops from the canopy on a rope of stolen silk!",
              :breaks => { 1 => { :message => "{1} spins a fresh trap from the stolen thread!", :stats => { :DEFENSE => 1 } } } },
-  :joins => { :level => 18 },
-  :map => 525, :where => "Gossamer Deepwood, the moth nests", :chapter => 3,
+  :joins => { :level => 18 }, :join_choice => true,
+  :map => 525, :where => "Gossamer Deepwood, the moth nests (Cut, after Tamsin's badge)", :chapter => 3,
   :quest => :EL_SILKTHIEF, :trigger => "Beat the boss, then choose to take it or leave it guarding the nests",
   :why => "Rejuvenation-style boss reward: Spidops with Stakeout and its signature Silk Trap"
 })
 
-#--- Chapter 4: Frostwick (570/573), Route 6 (561), Ebbmouth (160) ------------
+#--- Chapter 4: Frostwick (570/573), the Rimewood, Gullcry Cliffs (561), Ebbmouth (160)
 em.register(:IS_SNOM, {
   :species => :SNOM, :level => 15, :ability => :ICESCALES, :nature => :MODEST, :ivs => 25, :happiness => 170,
   :moves => [:POWDERSNOW, :STRUGGLEBUG, :MIRRORCOAT, :FAIRYWIND], :obtain_text => "an oath-parcel from Frostwick",

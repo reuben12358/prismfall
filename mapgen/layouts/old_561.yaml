@@ -1,6 +1,6 @@
-# Route 6 (561) as built before MAPGEN 2h; layouts/rimewood.py takes its events from here.
+# Gullcry Cliffs (561) as built before MAPGEN 2h; layouts/rimewood.py takes its events from here.
 id: 561
-name: Route 6
+name: Gullcry Cliffs
 palette: outside
 bgm: Route 3
 parent: 0

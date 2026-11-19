@@ -29,7 +29,7 @@ def casual_drop(top):
 
 def bag(top, diff, boss=False):
     if top <= 15:   t = (["POTION"], ["SUPERPOTION"], [])          # Gym 1 stretch: approachable (SPINE Rev 14)
-    elif top <= 19: t = (["SUPERPOTION"], ["SUPERPOTION"] * 2, [])
+    elif top <= 23: t = (["SUPERPOTION"], ["SUPERPOTION"] * 2, [])   # BALANCE 1: one Super Potion up to cap 23
     elif top <= 31: t = (["SUPERPOTION"] * 2, ["HYPERPOTION"] * 2, ["SUPERPOTION"])
     elif top <= 47: t = (["HYPERPOTION"] * 2, ["FULLRESTORE"] * 2, ["HYPERPOTION"])
     elif top <= 67: t = (["FULLRESTORE"] * 2, ["FULLRESTORE"] * 3, ["HYPERPOTION"])
@@ -150,9 +150,10 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     # Lead pair - the twist: Surskit's Rain Dance wets the silk (every Electric move x1.2) for Joltik's Electroweb,
     # doubles Surskit's own Speed, halves Fire, and douses a Wildfire to Embers.
     # Standard is tuned down for an approachable Gym 2 (harness: realistic teams lost 25/30 to the sharper set):
-    # neutral natures, the support Pokemon at cap-4 / cap-3, Absorb instead of Bug Bite, Water Gun instead of Bubble Beam,
+    # neutral natures, Joltik at cap-5 without Protect (it outlasted every spread answer), the others at cap-4 / cap-3,
+    # Absorb instead of Bug Bite, Water Gun instead of Bubble Beam,
     # Feint instead of Assurance (Assurance doubles after a partner's hit: Hard only).
-    P("JOLTIK", 15, "COMPOUNDEYES", "ORANBERRY", "HARDY", "ELECTROWEB,ABSORB,STRINGSHOT,PROTECT", "S",
+    P("JOLTIK", 14, "COMPOUNDEYES", "ORANBERRY", "HARDY", "ELECTROWEB,ABSORB,STRINGSHOT,FURYCUTTER", "S",
       casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB,PROTECT"},
       hard={"item": "FOCUSSASH", "nat": "MODEST", "moves": "ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT"}),
     P("SURSKIT", 15, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
@@ -189,9 +190,11 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     P("FLOATZEL", 21, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
       hard={"moves": "AQUAJET,WATERPULSE,CRUNCH,ICEFANG", "nat": "NAIVE"}),
     # Transition play: Dive drags the fight Underwater (x1.3 strike), "a current that changes direction mid-fight".
-    P("GYARADOS", 23, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "WATERFALL,BITE,ICEFANG,DIVE", "A",
+    # Standard Lucky (harness: the ace swept 25 of 30 realistic teams after they beat the other three): Hardy, Brine
+    # (special, Gyarados's weak side) instead of Waterfall, and the Dive play kept. Hard: Adamant Waterfall + Dragon Dance.
+    P("GYARADOS", 23, "INTIMIDATE", "SITRUSBERRY", "HARDY", "BRINE,BITE,ICEFANG,DIVE", "A",
       nick="Lucky", casual={"moves": "BITE,TWISTER,BRINE,LEER"},
-      hard={"moves": "WATERFALL,DIVE,ICEFANG,DRAGONDANCE"}),
+      hard={"nat": "ADAMANT", "moves": "WATERFALL,DIVE,ICEFANG,DRAGONDANCE"}),
 ])
 warden(4, "LEADER_ROOK", "Rook", 27, "NEON_GRID", "Cut! ...Okay, okay, that's going in the highlight reel. You earned it.", [
     # Charge reboots a blacked-out grid (2 charging moves); Bite is his hedge for the Blackout (Dark x1.3).
@@ -445,6 +448,10 @@ warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were rea
       hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,SUPERPOWER"}),
 ])
 warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale turns its final page. Happily, I hope.", [
+    # Lead pair: Tinkaton (Fake Out) + Alcremie (Decorate on Tinkaton).
+    # The knight: Steel x1.3, hammers swing true. Fake Out buys Alcremie's Decorate a turn.
+    P("TINKATON", 79, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF", "A",
+      casual={"moves": "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK"}),
     # DOUBLE battle (story: "the knight and the dragon").
     # Magical Seed on Fairy Tale: +1 Sp. Atk, +1 Sp. Def, no cost. Decorate gives the partner +2 Atk and +2 Sp. Atk.
     P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "DECORATE,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
@@ -454,9 +461,6 @@ warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale t
     # Fire is no Steel answer here (dragonfire: Fire also hits as Dragon, which Steel resists). Superpower is.
     P("AZUMARILL", 79, "HUGEPOWER", "SITRUSBERRY", "ADAMANT", "AQUAJET,PLAYROUGH,LIQUIDATION,SUPERPOWER", "HA",
       casual={"ab": "THICKFAT"}, hard={"moves": "AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM"}),
-    # The knight: Steel x1.3, hammers swing true. Fake Out buys Alcremie's Decorate a turn.
-    P("TINKATON", 79, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF", "A",
-      casual={"moves": "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK"}),
     # "Vigilant" guards: Follow Me draws the Steel and Poison hits meant for the ace; Dazzling Gleam hits both foes.
     P("TOGEKISS", 79, "SERENEGRACE", "LEFTOVERS", "BOLD", "FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE", "BS",
       nick="Vigilant", casual={"moves": "AIRSLASH,DAZZLINGGLEAM,AURASPHERE,ROOST"}),

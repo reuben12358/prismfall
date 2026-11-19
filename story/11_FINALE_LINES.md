@@ -8,8 +8,8 @@
 
 | # | Warden (Plate) | Release line |
 |---|---|---|
-| 1 | Tamsin (Insect) | "Granny wove a whole village around this. I think she'd want me to finish the pattern. *Cut the thread.*" |
-| 2 | Dorian (Blank) | "Three hundred years of pageants, and this is the only true scene I ever staged. Exit, pursued by nothing. Lights down." |
+| 1 | Dorian (Blank) | "Three hundred years of pageants, and this is the only true scene I ever staged. Exit, pursued by nothing. Lights down." |
+| 2 | Tamsin (Insect) | "Granny wove a whole village around this. I think she'd want me to finish the pattern. *Cut the thread.*" |
 | 3 | Marisol (Splash) | "The Ebb ran both ways because of this. It'll run one way now, like any honest river. Go on, tides take you." |
 | 4 | Rook (Zap) | "First time I've ever held it. Kinda thought it'd be heavier. ...Stay charged, wherever you're going." |
 | 5 | Sahar (Earth) | "The desert keeps everything. I'm asking it, just this once, to give something back." |
@@ -31,8 +31,8 @@
 
 | # | Warden | Condition that fails | Refusal line |
 |---|---|---|---|
-| 1 | Tamsin | `:ch2_tamsin` = keep_secret (the pylon still drains Briarwick) | "I can't. I *can't*. The contract's still running and there's nothing left in the village but this. I'm sorry — sorry —" |
-| 2 | Dorian | `:ch5_lowlight_testimony` = mourner (you told the official story on record) | "You told them the pageant version, darling. So did I, for thirty years. I find I can't stop on cue." |
+| 1 | Dorian | `:ch5_lowlight_testimony` = mourner (you told the official story on record) | "You told them the pageant version, darling. So did I, for thirty years. I find I can't stop on cue." |
+| 2 | Tamsin | `:ch2_tamsin` = keep_secret (the pylon still drains Briarwick) | "I can't. I *can't*. The contract's still running and there's nothing left in the village but this. I'm sorry — sorry —" |
 | 3 | Marisol | Teo not saved and Bond < 3 | "My brother's in the river mud because of what this thing started. It owes Ebbmouth. It *stays*." |
 | 4 | Rook | neither `ROOK_CUTS_GRID` nor `MARCHETTI_TURNED` (he can't reach his Plate) | "It's not mine to give! It never was! It's in *their* cradle, I can't even — chat, I can't reach it." |
 | 5 | Sahar | `:ch6_drillsite` = directorate | "I buried the truth once because someone with a badge asked me to. You stood with the badge. I'll keep what the sand gave me." |
@@ -56,8 +56,8 @@
 
 | # | City | Last Shatter slide |
 |---|---|---|
-| 1 | Briarwick | "The looms went still in one night. Tamsin weaves by hand now." |
-| 2 | Saltmere | "The one city the Bleed never touched has a glass promenade. The Lantern Theatre plays to it." |
+| 1 | Saltmere | "The one city the Bleed never touched has a glass promenade. The Lantern Theatre plays to it." |
+| 2 | Briarwick | "The looms went still in one night. Tamsin weaves by hand now." |
 | 3 | Ebbmouth | "The Ebb stopped, then ran out to sea and didn't come back. The mills are museums." |
 | 4 | Lumen City | "The Lowlight's glass took three more streets before the dark came. Rook reads the names on air every year." |
 | 5 | Duneholt | "The well never refilled. The caravans left by the east gate, in order of age." |

@@ -89,10 +89,12 @@ is a game-over trigger is not a stored value (the GO fires instead). Values mark
 ```ruby
 CHOICES = {
   # ---- Prologue / Act I
+  # Revision 14 swapped Saltmere (now Ch2, Gym 1) and Briarwick (now Ch3, Gym 2). Key names keep their old chapter prefixes:
+  # IDs never renumber. Only the descriptions and the listing order changed.
   :pro_fellowship         => { :values => [:accept, :decline, :silent], :once => true, :description => "P: Voss's Meridian Fellowship card" },
-  :ch2_matriarch          => { :values => [:soothe, :silence], :once => true, :description => "Ch2: the beaten Glass Matriarch - wait it out, or force the Imprint out" },
-  :ch2_tamsin             => { :values => [:expose, :help_confess, :keep_secret], :once => true, :description => "Ch2: Tamsin's secret Lattice contract" },
-  :ch3_juno_talk          => { :values => [:told, :deflect, :silent], :once => true, :description => "Ch3: tell Juno about the NULL scan" },
+  :ch3_juno_talk          => { :values => [:told, :deflect, :silent], :once => true, :description => "Ch2: tell Juno about the NULL scan (Saltmere breakwater)" },
+  :ch2_tamsin             => { :values => [:expose, :help_confess, :keep_secret], :once => true, :description => "Ch3: Tamsin's secret Lattice contract" },
+  :ch2_matriarch          => { :values => [:soothe, :silence], :once => true, :description => "Ch3: the beaten Glass Matriarch - wait it out, or force the Imprint out" },
   :ch4_kestrel_mourner    => { :values => [:kind, :blunt, :silent], :once => true, :description => "Ch4: is the Mourner his mother?" },
   :ch4_teo                => { :values => [:report, :keep_secret, :confront], :once => true, :description => "Ch4: Marisol tipping off Teo's cell" },
   :ch5_lowlight_testimony => { :values => [:mourner, :someone_else, :unknown], :once => true, :description => "Ch5: what the PC tells the Directorate" },
@@ -168,9 +170,9 @@ Deferred deltas (applied by a later event that reads the choice) are listed afte
 ```ruby
 CHOICE_EFFECTS = {
   :pro_fellowship         => { :accept => "MERIDIAN+2 VOSS+1", :decline => "VOSS+2", :silent => "MERIDIAN+1" },
-  :ch2_matriarch          => { :soothe => "RES+1", :silence => "RES-2 ACCORD+1" },
-  :ch2_tamsin             => { :expose => "HOLLOW+1 ACCORD+1 MERIDIAN-1", :help_confess => "ACCORD+1", :keep_secret => "MERIDIAN+1" },
-  :ch3_juno_talk          => { :told => "JUNO+2", :deflect => "JUNO-1", :silent => "" },
+  :ch3_juno_talk          => { :told => "JUNO+2", :deflect => "JUNO-1", :silent => "" },                  # Ch2
+  :ch2_tamsin             => { :expose => "HOLLOW+1 ACCORD+1 MERIDIAN-1", :help_confess => "ACCORD+1", :keep_secret => "MERIDIAN+1" },   # Ch3
+  :ch2_matriarch          => { :soothe => "RES+1", :silence => "RES-2 ACCORD+1" },                          # Ch3
   :ch4_kestrel_mourner    => { :kind => "KESTREL+1", :blunt => "KESTREL-2", :silent => "" },
   :ch4_teo                => { :report => "MERIDIAN+2 HOLLOW-2 MARISOL-4", :keep_secret => "MARISOL+2 HOLLOW+1", :confront => "MARISOL+3" },
   :ch5_lowlight_testimony => { :mourner => "MERIDIAN+1 HOLLOW-1 VOSS+1", :someone_else => "HOLLOW+1 MERIDIAN-1", :unknown => "" },
@@ -331,9 +333,10 @@ DERIVED_FLAGS = {
 }
 
 # Wardens' Consent, gym order (index = gym - 1). A Warden who doesn't consent refuses to release their Plate in the Arceus fight.
+# Revision 14: Dorian is Gym 1 and Tamsin Gym 2, so their two rows swapped places (must match Core's Prismfall::GYMS order).
 WARDEN_CONSENT = [
-  "choice(:ch2_tamsin) != :keep_secret",                          #  1 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
-  "choice(:ch5_lowlight_testimony) != :mourner",                  #  2 Dorian  - you told the official story on record; he keeps the lie he knows
+  "choice(:ch5_lowlight_testimony) != :mourner",                  #  1 Dorian  - you told the official story on record; he keeps the lie he knows
+  "choice(:ch2_tamsin) != :keep_secret",                          #  2 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
   "(flag(:TEO_SAVED) || bond(:MARISOL) >= 3) && !flag(:ISENMAR_EMBITTERED)",                    #  3 Marisol
   "flag(:ROOK_CUTS_GRID) || flag(:MARCHETTI_TURNED)",             #  4 Rook    - the Zap Plate is in Meridian's vault; he can only release what he can reach
   "choice(:ch6_drillsite) != :directorate",                       #  5 Sahar
@@ -447,9 +450,9 @@ ENTRANTS.merge!({
 ```
 
 ### 6.2 Where the player met every possible opponent (Rev 5 audit)
-Juno, Kestrel, Valen, Rowan, Voss: throughout. Marisol: Ch4, Ch9, Ch11, the war. Anja: Ch11, the war (prisoner). Celestine: Ch2 (disguised), Ch18.
+Juno, Kestrel, Valen, Rowan, Voss: throughout. Marisol: Ch4, Ch9, Ch11, the war. Anja: Ch11, the war (prisoner). Celestine: Ch3 (disguised), Ch9, Ch18.
 Sigrun: Ch8, the war, Ch19. Kaito: Ch9, Ch13. Ysolde: Ch15 (gym, echo, K6 aftermath). Odessa: Ch12, Ch14–16. Brann: Ch8, Ch17. Quent: Ch8, Ch10, Ch14, Ch16.
-Dorian/Rook (exhibition): Ch3, Ch17 / Ch5, Ch16. Morwen's Echo: Ch13 memory, Ch15 echo. Ruin only: Dask (Ch13, R1, R4), Theodric (R3, R6).
+Dorian/Rook (exhibition): Ch2, Ch17 / Ch5, Ch16. Morwen's Echo: Ch13 memory, Ch15 echo. Ruin only: Dask (Ch13, R1, R4), Theodric (R3, R6).
 
 ### 6.3 Draw lists (first match wins; the stage default is the appended fallback)
 ```ruby
@@ -551,7 +554,7 @@ MATCH_RULES = [
 "Notable" = involves Juno or Kestrel, the war's two sides, or Valen. Other NPC matches show a one-line result only.
 
 ### 6.6 Exhibitions (story-met only) [CORE+ `EXHIBITION_EXTRAS`]
-The **Eevee Octave** always plays (Vesper is now met in Ch3 and Ch13), including on the Ruin Route, where it is the only exhibition.
+The **Eevee Octave** always plays (Vesper is now met in Ch2 and Ch13), including on the Ruin Route, where it is the only exhibition.
 ```ruby
 EXHIBITION_EXTRAS = [
   { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                    # Dorian & Rook double
@@ -718,13 +721,13 @@ on the trigger. Every trigger is a deliberate player choice with at least one co
 |---|---|---|---|---|---|
 | GO_HOMEWARD | P | defy / joke | tell Edda you want to go back; confirm at her 2nd "Last chance, sprog" | Edda asks twice | after the badge-case scene |
 | GO_ORCHARD | 1 | defy | "Pull me through?" → Yes | Larch: "Never take a tinted person past a Veil"; Juno's burning line | Glassed Orchard entrance |
-| GO_CURTAIN_CALL | 3 | joke | accept "join the company forever" | butler-ghost mouths *don't* | Thistledown attic stairs |
+| GO_CURTAIN_CALL | 3 | joke | accept "join the company forever" (Thistledown Manor, on the Weavers' Road) | butler-ghost mouths *don't* | Thistledown attic stairs |
 | GO_LIVE_WIRE | 5 | defy | "Grab the cracked Plate and run" (Electivire interlude prompt) | the Mourner's smoking glove; Rook: "Don't touch it with your hands!" | Plate Vault door |
 | GO_SINKFIELD | 6 | defy | step off the fossil path for the glint (after Sahar's 3 warnings) | sinking sandal; Field Notes | Sinkfield entrance |
 | GO_SWEET_TOOTH | 7 | defy / joke | accept Sweetrot the 3rd time | Wenlow's warning after the 1st | Mirefen Pokémon Center (before the 3rd vendor) |
 | GO_LET_THEM_LISTEN | 8 | betrayal | take the Hammer's detonator | Field Notes on Shatters; the Lowlight's glass | caldera floor (before CH8_CALDERA) |
 | GO_PULL_THE_NAIL | 9 | betrayal (offered only if `standing(:HOLLOW) >= 4`) | agree to plant Sable's charge | Wick's Ch7 line; Sable's broadcast | Ironreach shafts |
-| GO_LOYAL | 10 | choice | `:ch10_ogre` → "Stand with the Three" | Celestine's rhyme; the Mourner's Ch3 line; poison collars | Bride Grove gate |
+| GO_LOYAL | 10 | choice | `:ch10_ogre` → "Stand with the Three" | the Mourner's Ch2 line; Celestine's Ch3 rhyme; poison collars | Bride Grove gate |
 | GO_WEATHER | 11 | fight-when-told-to-flee (NEW) | when the lake breathes: "Fight it now" vs "Get to the towers"; scripted unwinnable Kyogre lv 80 | Anja: "That's not a Pokémon, that's weather. *Towers!*" | start of the Thaw |
 | GO_THIN_ICE | 11 | defy / failed escape | go back for the Lattice data core | Anja's line; the cracking-tile gym tutorial | start of the Thaw (same save) |
 | GO_FINE_PRINT | 12 | defy (Interlude III, as Kestrel) | open Voss's desk drawer | Calla's glance | interlude start |
@@ -824,6 +827,7 @@ every other ending after `:ch21_final` (main) or `:ruin_walk` (Ruin). Each is `P
 | (Rev 4–5) cameo entrants, `HEADLINE_CAMEO = :LIN`, the cameo draws, the Rev-4 outsiders (`:ISAURA :DREY :MIREILLE :THORNE`), Sigrun as Final stand-in, `GO_R_SWEET_DREAMS` | `HEADLINE_OPPONENT = :CELESTINE`, the Warden QF pool (§6.3), Brann sole stand-in, `GO_R_WELCOME_BEHIND` | Rev 4: cameos are sidequests; Rev 5: only established characters |
 | (new) | `:ch2_matriarch`, `:ch11_strike`, `:ch13_fault`, `:ch20_calla`, `:ch21_hand`, `:ch21_reach_kestrel`, `:ch15_look_back`, `:ruin_voss`, `:ruin_walk`, `GO_WEATHER`, `GO_STAY_OUT`, `END_EMPTY_LIGHTHOUSE`, `END_REFLECTION` | see 10_CHOICES_ENDINGS |
 | Core samples `:MOURNER` bond, `:SUCCESSOR`, `:MOURNER` entrant, `LEADER_ROWAN v50`, `KESTREL_FALLEN` conditions, all sample CHOICES/GAME_OVERS/ENDINGS | retired / replaced | — |
+| (Rev 14) Saltmere/Briarwick chapter swap | **no renames.** `:ch3_juno_talk` (now Ch2), `:ch2_tamsin` and `:ch2_matriarch` (now Ch3) keep their names; only descriptions changed. `WARDEN_CONSENT` rows 1 and 2 swapped (Dorian, then Tamsin), with Core's `GYMS` | keys and IDs are stable across revisions; the consent list follows gym order |
 
 ## 14. Password additions (append to `Passwords::TABLE`)
 

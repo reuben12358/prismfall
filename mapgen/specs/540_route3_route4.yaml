@@ -1,9 +1,9 @@
-# Route 3 (540) and Route 4 (541). Source: design/maps.json + story/04_ACT_I.md Chapter 3.
-# Deviation: maps.json pairs 540's WEST edge with 541's NORTH edge (not a legal Essentials pair); here Route 4's
-# north edge joins Route 3's SOUTH edge at x=2-9 (west of the river). Thistledown Manor (546) and Brinecut Mine (544)
+# Thistledown Lea (540) and the Grey Saltings (541). Source: design/maps.json + story/04_ACT_I.md Chapter 3.
+# Deviation: maps.json pairs 540's WEST edge with 541's NORTH edge (not a legal Essentials pair); here the Grey Saltings's
+# north edge joins Thistledown Lea's SOUTH edge at x=2-9 (west of the river). Thistledown Manor (546) and Brinecut Mine (544)
 # are not built yet: their entrances are signs.
 id: 540
-name: Route 3
+name: Thistledown Lea
 palette: outside
 bgm: Route 3
 parent: 0
@@ -59,7 +59,7 @@ events:
         through: true
   - {type: sign, at: [42, 7], text: "THISTLEDOWN MANOR\nHome of the Thistledown Players. Closed since AF 211."}
   - {type: warp, name: Mine mouth, at: [51, 15], link: R3_MINE, arrive: [51, 16, down], se: Door exit}
-  - {type: sign, at: [58, 13], text: "ROUTE 3\nE: Briarwick - S: Route 4 to Saltmere"}
+  - {type: sign, at: [58, 13], text: "THISTLEDOWN LEA\nE: Briarwick - S: The Grey Saltings to Saltmere"}
   - {type: trainer, at: [18, 10], sight: 4, dir: down, sprite: trainer_PICNICKER, trainer: [PICNICKER, Bryony],
      intro: "Meadow picnic! Battle before the sandwiches, not after!", after: "The river's lovely from the bridge."}
   - {type: trainer, at: [34, 18], sight: 4, dir: left, sprite: trainer_FISHERMAN, trainer: [FISHERMAN, Hale],
@@ -74,7 +74,7 @@ events:
   - {type: berry, at: [26, 4], berry: CHERIBERRY}
 ---
 id: 541
-name: Route 4
+name: The Grey Saltings
 palette: outside
 bgm: Route 2
 parent: 0
@@ -151,7 +151,7 @@ events:
   - {type: item, at: [2, 46], item: SEAINCENSE}
 ---
 id: 542
-name: Marsh Rest House
+name: The Brinewife's Rest
 parent: 541
 template: house2
 exit_link: R4_REST

@@ -33,7 +33,7 @@ PARTS = [('gl', 'rejuvenation', 62, 'Goldenleaf Forrest'),
          ('rb4', 'reborn', 43, 'Route4'),
          ('ap', 'rejuvenation', 2, 'Aevium Past'),
          ('pf', None, None, None)]          # Prismfall custom pieces (rj_custom.png, built by rcustom.py)
-CUSTOM_ROWS = 400          # the pf part is the last part, so growing it moves no id (map builder 7: 300 -> 400)
+CUSTOM_ROWS = 800          # the pf part is the last part, so growing it moves no id (builder 7: 300 -> 400; builder 8: -> 800)
 
 # every autotile any PF Rejuv tileset may use: (game, source tileset whose passages it takes, source name)
 AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'), ('rejuvenation', 127, 'Dirt'),
@@ -47,7 +47,8 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
          ('reborn', 43, 'Still water grey'), ('reborn', 43, 'Still water snow'), ('rejuvenation', 62, 'Still water'),
          ('rejuvenation', 2, 'White path2'), ('rejuvenation', 7, 'Sand shore'),
          ('rejuvenation', 2, 'Hoenn Sea'), ('rejuvenation', 7, 'Dirt Route 5'), ('rejuvenation', 2, 'Still water - Copy'),
-         ('pf', 62, 'Gravel Spring'), ('pf', 95, 'Packed Snow'), ('pf', 43, 'Frozen Pond')]
+         ('pf', 62, 'Gravel Spring'), ('pf', 95, 'Packed Snow'), ('pf', 43, 'Frozen Pond'),
+         ('pf', 75, 'Saltmere Cobbles'), ('pf', None, 'Saltmere Flags')]          # map builder 8 (tileset 55)
 
 
 def _ice(x, y):
@@ -74,6 +75,16 @@ DERIVED = {'Gravel Spring': ('rejuvenation', 'Gravel(G)', {(213, 184, 68): (168,
                             (120, 121, 130): (184, 196, 226), (155, 156, 166): (210, 218, 238), (183, 185, 195): (226, 230, 244),
                             (230, 233, 234): (240, 242, 250)},
                            {'fn': {(96, 160, 216): _ice}, 'tag': 12, 'pas': 0})}
+# map builder 8: Saltmere's street paving.  Cobbles = Rejuvenation's CobblestoneGrass (Time Dimension) warmed from
+# blue-grey to the harbour stone and its teal verge turned to Sheridan's grass; Flags = the unused `Brick path`
+# herringbone turned to a warm sandstone (squares, quays, the Playhouse forecourt).
+DERIVED['Saltmere Cobbles'] = ('rejuvenation', 'CobblestoneGrass',
+                               {(92, 95, 102): (82, 74, 72), (114, 117, 126): (112, 102, 96), (129, 133, 141): (132, 122, 112),
+                                (143, 146, 153): (152, 142, 128), (169, 172, 177): (182, 172, 156),
+                                (86, 149, 148): (63, 176, 136), (112, 192, 191): (112, 200, 160), (140, 202, 217): (136, 216, 184)}, {})
+DERIVED['Saltmere Flags'] = ('rejuvenation', 'Brick path',
+                             {(216, 224, 224): (212, 196, 166), (224, 232, 232): (226, 214, 186), (192, 200, 208): (188, 170, 140),
+                              (168, 184, 200): (150, 132, 108)}, {})
 VBASE = 100000
 # v21.1 terrain tags for water autotiles these games leave at 0 (they script surfing differently): 5 DeepWater,
 # 6 StillWater, 7 Water, 8 Waterfall, 9 WaterfallCrest.  Fishing and surfing need them.
@@ -96,6 +107,10 @@ TILESETS = {
     53: ('PF Rejuv Wild', [('rejuvenation', 'Sea(Grass)'), ('rejuvenation', 'DirtDark'), ('rejuvenation', 'Dirt'),
                            ('rejuvenation', 'Gravel(G)'), ('rejuvenation', 'Still water'), ('rejuvenation', 'Waterfall'),
                            ('rejuvenation', 'Waterfall bottom')]),
+    # map builder 8: cities (Saltmere 140/146/147).  54 is the puzzle engineer's "PF Rejuv Halls" (compose_halls.py).
+    55: ('PF Rejuv City', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore_2'),
+                           ('pf', 'Saltmere Cobbles'), ('pf', 'Saltmere Flags'), ('rejuvenation', 'DirtDark'),
+                           ('pf', 'Gravel Spring')]),
 }
 _CFG = None
 
@@ -245,7 +260,10 @@ def main():
                     if (r, g_, b) in fn: px[xx, yy] = fn[(r, g_, b)](xx, yy) + (al,)
                     elif (r, g_, b) in cmap: px[xx, yy] = cmap[(r, g_, b)] + (al,)
             im.save(os.path.join(OUT, 'Graphics', 'Autotiles', dst_name + '.png'))
-            t = RR.tileset(sg, tid); s = t['autotile_names'].index(sn) + 1
+            if tid is None:                     # an autotile no source tileset uses: passable, no tag, priority 0
+                t = {'autotile_names': [sn], 'passages': [0] * 96, 'priorities': [0] * 96, 'terrain_tags': [0] * 96}; s = 1
+            else:
+                t = RR.tileset(sg, tid); s = t['autotile_names'].index(sn) + 1
         else:
             src = os.path.join(RR.GAMES[game], 'Graphics', 'Autotiles', name + '.png')
             Image.open(src).save(os.path.join(OUT, 'Graphics', 'Autotiles', dst_name + '.png'))

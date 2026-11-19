@@ -14,8 +14,9 @@
 #  * A "Land" overlay also feeds LandDay/LandNight/LandMorning... when the base
 #    table splits Land by time and the overlay doesn't define that variant itself.
 #    Same for Cave and Water.
-#  * An overlay may add a type the base table lacks; its step chance comes from
-#    the overlay header ("Land,21") or the encounter type's default.
+#  * An overlay may add a type the base table lacks (e.g. HeadbuttHigh); its step
+#    chance comes from the overlay header ("Land,21") or the type's default.
+#  * A map with no base table at all (a route still being built) gets nothing.
 # Hints: a rumour per (map, tier) for Trial halls (pf_trial_rumours / board
 # "Rumours"), the quest log's Rumours tab, and a one-time "rustling" notice the
 # first time the player walks onto a map after its tier unlocked.
@@ -61,6 +62,8 @@ module Prismfall
       def self.merge_into(map_id, tables, steps)
         held = badges
         return [] if held <= 0
+        # No base table yet (a route still being built): add nothing.
+        return [] if !GameData::Encounter.get(map_id, ($PokemonGlobal) ? $PokemonGlobal.encounter_version.to_i : 0)
         applied = []
         (1..held).each do |b|
           data = overlay(map_id, b)
@@ -95,9 +98,11 @@ module Prismfall
         return _INTL("map {1}", map_id)
       end
 
+      # Rumour lines may say {map}; it becomes the map's current name, so
+      # renamed routes don't break the hint.
       def self.rumour_text(map_id, b)
         text = RUMOURS[[map_id, b]]
-        return _INTL(text) if text
+        return _INTL(text).gsub("{map}", map_name(map_id)) if text
         badge = (Prismfall.gym(b)) ? _INTL("{1}", Prismfall.gym(b)[:city]) : b.to_s
         return _INTL(GENERIC_RUMOUR, map_name(map_id), badge)
       end

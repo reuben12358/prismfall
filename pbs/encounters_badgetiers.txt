@@ -1,0 +1,298 @@
+# Prismfall badge-tier encounter OVERLAYS (Essentials v21.1 encounters format; merged as PBS/encounters_badgetiers.txt).
+# Owner: Prismfall Trials (plugins/Prismfall Trials/007_Trials_BadgeTiers.rb). Design: design/BADGE_TIERS.md.
+# Each section ADDS slots to a map's normal table once the player holds enough badges; it never replaces it.
+#   [map, 100 + b]  -> active with b+ badges while encounter_version is 0 (the normal world)
+#   [map, 200 + b]  -> same while encounter_version is 1 (Bleed-spread, Act IV+), and so on.
+# A "Land" overlay also feeds LandNight/LandDay/... when the base table splits Land by time.
+# A map with no base table yet gets nothing (new routes light up once pbs/encounters.txt has them).
+# Levels: tier b = [cap(b) - 6, cap(b) - 3], cap(b) = level cap while holding b badges (1: 13-16, 2: 17-20, 3: 21-24, 4: 25-28).
+# Weights are out of the base table's ~100, so 2-5 = rare. Only maps reached BEFORE badge b get tier b.
+# Route order and names: SPINE Revision 14 + WORLD.md "Revision 14 chain" (maps.json `segment` is authoritative).
+# Validate: python3 -I tools/validate_badge_tiers.py
+
+#===============================================================================
+# FERROW'S LANDING and the Gym 1 leg (segment 0: Ferrow's -> the Ferrymen's Mile -> Windfall Row -> Lacecliff Walk -> Marram Down -> Saltmere)
+#===============================================================================
+[100,101] # Ferrow's Landing - after Badge 1
+OldRod
+    5,CHINCHOU,13,16
+[100,102] # Ferrow's Landing - after Badge 2
+OldRod
+    4,HORSEA,17,20
+    3,LUVDISC,17,20
+[100,103] # Ferrow's Landing - after Badge 3
+GoodRod
+    4,CLAUNCHER,21,24
+    3,SKRELP,21,24
+[100,104] # Ferrow's Landing - after Badge 4
+GoodRod
+    3,STARYU,25,28
+    2,DRATINI,25,28
+[520,101] # The Ferrymen's Mile - after Badge 1
+Land
+    4,TEDDIURSA,13,16
+    3,MUNCHLAX,13,16
+LandNight
+    4,ZORUA,13,16
+[520,102] # The Ferrymen's Mile - after Badge 2
+Land
+    4,FARFETCHD,17,20
+    3,AUDINO,17,20
+LandNight
+    3,MURKROW,17,20
+[520,103] # The Ferrymen's Mile - after Badge 3
+Land
+    4,SWABLU,21,24
+    2,HAWLUCHA,21,24
+[520,104] # The Ferrymen's Mile - after Badge 4
+Land
+    3,STUFFUL,25,28
+    2,TOGEPI,25,28
+[521,101] # Windfall Row - after Badge 1
+Land
+    4,APPLIN,13,16
+    3,SKIDDO,13,16
+[521,102] # Windfall Row - after Badge 2
+Land
+    4,EEVEE,17,20
+    3,HOPPIP,17,20
+HeadbuttHigh
+    3,SHUCKLE,17,20
+[521,103] # Windfall Row - after Badge 3
+Land
+    4,TOEDSCOOL,21,24
+    3,PAWMI,21,24
+[521,104] # Windfall Row - after Badge 4
+Land
+    3,FOMANTIS,25,28
+    2,SCYTHER,25,28
+[527,101] # Lacecliff Walk - after Badge 1
+Land
+    3,BINACLE,13,16
+    3,KRABBY,13,16
+[527,102] # Lacecliff Walk - after Badge 2
+Land
+    3,PYUKUMUKU,17,20
+[527,103] # Lacecliff Walk - after Badge 3
+Land
+    3,WIMPOD,21,24
+[527,104] # Lacecliff Walk - after Badge 4
+Land
+    3,CRAMORANT,25,28
+    2,SKARMORY,25,28
+[528,101] # Marram Down - after Badge 1
+Land
+    3,HELIOPTILE,13,16
+    3,BUNEARY,13,16
+[528,102] # Marram Down - after Badge 2
+Land
+    3,SANDYGAST,17,20
+    3,GOSSIFLEUR,17,20
+[528,103] # Marram Down - after Badge 3
+Land
+    3,MARACTUS,21,24
+[528,104] # Marram Down - after Badge 4
+Land
+    2,TROPIUS,25,28
+[140,101] # Saltmere - after Badge 1
+OldRod
+    3,CLAMPERL,13,16
+[140,102] # Saltmere - after Badge 2
+OldRod
+    3,FINIZEN,17,20
+[140,103] # Saltmere - after Badge 3
+GoodRod
+    3,BRUXISH,21,24
+    3,MANTYKE,21,24
+[140,104] # Saltmere - after Badge 4
+GoodRod
+    3,FRILLISH,25,28
+    2,DHELMISE,25,28
+#===============================================================================
+# THE WEAVERS' ROAD, the Gym 2 leg (segment 1: Saltmere North Gate -> the Grey Saltings -> the Dyers' Ford -> Thistledown Lea -> Gossamer Wood -> Briarwick)
+#===============================================================================
+[541,102] # The Grey Saltings - after Badge 2
+Land
+    4,KRABBY,17,20
+    3,DUCKLETT,17,20
+[541,103] # The Grey Saltings - after Badge 3
+Land
+    3,CRAMORANT,21,24
+    3,PYUKUMUKU,21,24
+[541,104] # The Grey Saltings - after Badge 4
+Land
+    3,MAREANIE,25,28
+    2,WIMPOD,25,28
+[544,102] # Brinecut Mine 1F - after Badge 2
+Cave
+    4,DRILBUR,17,20
+    2,CARBINK,17,20
+[544,103] # Brinecut Mine 1F - after Badge 3
+Cave
+    3,BRONZOR,21,24
+    3,GLIMMET,21,24
+[544,104] # Brinecut Mine 1F - after Badge 4
+Cave
+    2,LARVITAR,25,28
+[545,102] # Brinecut Mine B1F - after Badge 2
+Cave
+    3,ONIX,17,20
+    3,TINKATINK,17,20
+[545,103] # Brinecut Mine B1F - after Badge 3
+Cave
+    2,BELDUM,21,24
+[545,104] # Brinecut Mine B1F - after Badge 4
+Cave
+    2,GIBLE,25,28
+[552,102] # The Dyers' Ford - after Badge 2
+Land
+    3,WOOPER,17,20
+    3,SMEARGLE,17,20
+[552,103] # The Dyers' Ford - after Badge 3
+Land
+    3,LOTAD,21,24
+    3,SPRITZEE,21,24
+[552,104] # The Dyers' Ford - after Badge 4
+Land
+    3,MAREEP,25,28
+    2,GOOMY,25,28
+[540,102] # Thistledown Lea - after Badge 2
+Land
+    4,DEERLING,17,20
+    3,HOPPIP,17,20
+LandNight
+    3,MISDREAVUS,17,20
+[540,103] # Thistledown Lea - after Badge 3
+Land
+    3,TAUROS,21,24
+    3,GIRAFARIG,21,24
+[540,104] # Thistledown Lea - after Badge 4
+Land
+    3,BOUFFALANT,25,28
+    2,RIOLU,25,28
+[546,102] # Thistledown Manor - after Badge 2
+Cave
+    3,LITWICK,17,20
+[546,103] # Thistledown Manor - after Badge 3
+Cave
+    3,HONEDGE,21,24
+[546,104] # Thistledown Manor - after Badge 4
+Cave
+    2,DREEPY,25,28
+[524,102] # Gossamer Wood - after Badge 2
+Land
+    4,JOLTIK,17,20
+    3,VENIPEDE,17,20
+[524,103] # Gossamer Wood - after Badge 3
+Land
+    3,SCYTHER,21,24
+    3,SURSKIT,21,24
+[524,104] # Gossamer Wood - after Badge 4
+Land
+    3,BRAMBLIN,25,28
+    2,LARVESTA,25,28
+#===============================================================================
+# CUT-GATED (Cut needs 2 badges since Rev 14): the Deepwood and Cocoonfall Hollow, reached after Tamsin's badge
+#===============================================================================
+[525,103] # Gossamer Deepwood - after Badge 3
+Land
+    3,TANGELA,21,24
+    3,FOMANTIS,21,24
+[525,104] # Gossamer Deepwood - after Badge 4
+Land
+    3,PHANTUMP,25,28
+    2,SHIINOTIC,25,28
+[548,103] # Cocoonfall Hollow (Bleed) - after Badge 3
+Land
+    3,BERGMITE,21,24
+    2,CARBINK,21,24
+[548,104] # Cocoonfall Hollow (Bleed) - after Badge 4
+Land
+    3,CRYOGONAL,25,28
+    2,CHARJABUG,25,28
+#===============================================================================
+# NORTH TO EBBMOUTH, the Gym 3 leg (segment 2: Spinners' Rise -> Frostwick Pass -> Frostwick -> Rimewood Path -> the Rimewood -> Gullcry Cliffs -> Ebbmouth; side road: Frostflat Causeway, The Rehearsal)
+#===============================================================================
+[566,103] # Spinners' Rise - after Badge 3
+Land
+    3,MAREEP,21,24
+    3,SKIDDO,21,24
+[566,104] # Spinners' Rise - after Badge 4
+Land
+    3,DUBWOOL,25,28
+    2,TAUROS,25,28
+[577,103] # Frostwick Pass - after Badge 3
+Land
+    3,SNEASEL,21,24
+    2,ABSOL,21,24
+[577,104] # Frostwick Pass - after Badge 4
+Land
+    3,BOUFFALANT,25,28
+    2,FRIGIBAX,25,28
+[570,103] # Frostwick - after Badge 3
+GoodRod
+    3,FEEBAS,21,24
+[570,104] # Frostwick - after Badge 4
+GoodRod
+    2,VELUZA,25,28
+[578,103] # Rimewood Path - after Badge 3
+Land
+    3,SNORUNT,21,24
+    2,ABSOL,21,24
+[578,104] # Rimewood Path - after Badge 4
+Land
+    2,CRYOGONAL,25,28
+    2,FRIGIBAX,25,28
+[562,103] # The Rimewood - after Badge 3
+Land
+    3,SNEASEL,21,24
+    2,ABSOL,21,24
+[562,104] # The Rimewood - after Badge 4
+Land
+    2,FRIGIBAX,25,28
+    2,CRYOGONAL,25,28
+[563,103] # Rimewood Glade - after Badge 3
+Land
+    3,MILCERY,21,24
+[563,104] # Rimewood Glade - after Badge 4
+Land
+    2,HATENNA,25,28
+[560,103] # Frostflat Causeway - after Badge 3
+Land
+    3,EISCUE,21,24
+    3,SNEASEL,21,24
+[560,104] # Frostflat Causeway - after Badge 4
+Land
+    2,FRIGIBAX,25,28
+    3,BOUFFALANT,25,28
+[568,103] # The Rehearsal (Bleed) - after Badge 3
+Land
+    3,IMPIDIMP,21,24
+[568,104] # The Rehearsal (Bleed) - after Badge 4
+Land
+    2,MIMIKYU,25,28
+[561,103] # Gullcry Cliffs - after Badge 3
+Land
+    3,FLAMIGO,21,24
+    3,WATTREL,21,24
+[561,104] # Gullcry Cliffs - after Badge 4
+Land
+    3,PELIPPER,25,28
+    2,DRAMPA,25,28
+[564,103] # Gullcry Caves 1F - after Badge 3
+Cave
+    3,CLAUNCHER,21,24
+    3,EISCUE,21,24
+[564,104] # Gullcry Caves 1F - after Badge 4
+Cave
+    2,RELICANTH,25,28
+[565,103] # Gullcry Caves B1F - after Badge 3
+Cave
+    3,FRILLISH,21,24
+[565,104] # Gullcry Caves B1F - after Badge 4
+Cave
+    2,BAGON,25,28
+[160,104] # Ebbmouth - after Badge 4
+GoodRod
+    3,CORSOLA,25,28
+    2,FEEBAS,25,28

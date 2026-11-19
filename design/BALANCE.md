@@ -18,7 +18,7 @@ are defined; Gyms 8–18 fields are designed to their theme, assumptions marked 
 | Levels | Standard −2 (cap <40), −3 (<70), −4 (70+) | Ace **at the cap**, others 1–4 below | Ace at the cap, others +1 (never above cap) |
 | IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV 31 (Trick Room mons Spe IV 0), 252/252/4-style EVs by role |
 | Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present | Upgraded coverage, Hidden Abilities, Megas (trainer gets `MEGARING`), Choice/Life Orb/Weakness Policy, one extra synergy piece |
-| Bag items | Standard −1 | 1 Super Potion → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
+| Bag items | Standard −1 | 1 Potion (cap 15) → 1 Super (to 23) → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
 | AI skill | trainer type's own (Core sets no ceiling) | trainer type's own | Core floor 48 (`ai_skill_min`) |
 
 Rules of thumb used when writing teams:
@@ -31,6 +31,9 @@ Rules of thumb used when writing teams:
 
 ## 2. Level curve
 
+Double battles (story, SPINE Rev 14): **Gyms 2, 6, 11, 16, 17** (`GYMS[:double]`; `Prismfall.gym_battle` sets the rule).
+Gym 1 (Dorian) is always a single battle. Doubles carry the same team sizes as the table below.
+
 Wardens: ace = cap (validator-enforced on Standard/Hard). The curve between caps assumes ~4 levels per gym:
 route trainers sit at **previous cap → cap−3**, gym trainers at **cap−4 → cap−2**, wild routes at **previous cap −3 → cap−5**.
 The level cap (Core) means grinding past the cap is impossible, so Standard difficulty comes from sets, not levels.
@@ -42,7 +45,7 @@ The level cap (Core) means grinding past the cap is impossible, so Standard diff
 | Hard size | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
 | Casual size | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 
-Rival max levels (Standard; Hard same top, others +1): K1 6 · J1 17 · K2 21 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
+Rival max levels (Standard; Hard same top, others +1): K1 6 · J1 14 (Saltmere, before Gym 1 since SPINE Rev 14) · K2 21 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
 K7 79. Festival aces (coordinator, SPINE Rev 3): R16 **90** · QF **92** · SF **94** · Final **96** · Hijack **100** · Arceus **100**;
 rest of each team 1–4 below. (Casual Festival teams keep 6 mons at −4 levels.) Sister-game cameos are optional sidequest fights
 (SPINE Rev 4) — see §6.
@@ -54,7 +57,7 @@ ReserveLastPokemon. Skill is per **trainer type**, so difficulty scaling is done
 
 | Class | SkillLevel | BaseMoney |
 |---|---|---|
-| Wardens 1–2 (Tamsin, Dorian) | 48 | 100 |
+| Wardens 1–2 (Dorian, Tamsin) | 48 | 100 |
 | Wardens 3–18, `LEADER_JUNO` | 100 | 100 |
 | `RIVAL_KESTREL` | 100 | 60 |
 | `RIVAL_JUNO` | 64 | 60 |
@@ -79,23 +82,23 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 
 | # | Warden, field, cap | Team (ace last) | Seed / field pick | Transition or stage play |
 |---|---|---|---|---|
-| 1 | Tamsin, Silkwood, 15 | Joltik, Surskit *(−C)*, **+Hard** Vivillon, Swadloon "Bobbin" | Bobbin: Telluric Seed (Hard: Eviolite) | none of her own; Surskit's Rain Dance answers Fire |
-| 2 | Dorian, Grand Stage, 19, **double** | Chatot, Ambipom, Loudred *(−C)*, **+Hard** Furfrou, Kecleon | Kecleon: Synthetic Seed | Fake Out + Encore raise the applause |
+| 1 | **Dorian**, Grand Stage, 15, single (SPINE Rev 14) | Aipom *(−C)* 11, **+Hard** Chatot, Minccino 12 (Cute Charm; Hard Technician), Kecleon 15 | none on Standard (Hard: Kecleon Synthetic Seed) | Minccino's two songs raise the applause; stalling lowers it |
+| 2 | **Tamsin**, Silkwood, 19, **double** (Rev 14) | Joltik 14, Surskit 15, **+Hard** Vivillon (Rage Powder), Spidops 16 *(−C)*, Swadloon "Bobbin" 19 | Bobbin: Telluric Seed (Hard: Eviolite) | lead pair: Rain Dance wets the silk for Electroweb (spread); Rain douses a Wildfire |
 | 3 | Marisol, Water Surface, 23 | Pelipper (Keen Eye; **Hard Drizzle**), Lanturn *(−C)*, **+Hard** Araquanid, Floatzel, Gyarados "Lucky" | Lanturn: Elemental Seed | Lucky's Dive → Underwater |
 | 4 | Rook, Neon Grid, 27 | Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk, Toxtricity, Rotom-Wash "Camera" | Electabuzz: Synthetic Seed | Charge reboots a Blackout |
 | 5 | Sahar, Desert, 31 | Hippopotas, **+Hard** Dugtrio, Sandaconda *(−C)*, Krokorok, Claydol "Effigy" | Sandaconda: Telluric Seed | sandstorm or Fire Fang bakes a Superbloom back |
-| 6 | Corvin, Corrosive Mire, 35 | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |
+| 6 | Corvin, Corrosive Mire, 35, **double** | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |
 | 7 | Brann, Volcanic, 39 | Torkoal, Camerupt *(−C)* (Magma Armor), **+Hard** Centiskorch, Magmortar, Arcanine, Coalossal "Anvil" | Camerupt: Elemental Seed | Lava Plume ×3 re-melts Cinderglass; Anvil is built for Cinderglass |
 | 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; **Hard Mega**) | Hawlucha: Synthetic Seed + Unburden | Frenzy by knockouts |
 | 9 | Juno (J3), Flower Garden, 47 | see §5 | Whimsicott: Telluric Seed | growth moves; regrow from Embers |
 | 10 | Anja, Frozen Lake, 51 | Alolan Ninetales, Cloyster, Beartic *(−C)*, Walrein, Avalugg, Mamoswine "Matriarch" | Matriarch: Elemental Seed (Hard: Life Orb) | Body Press / High Horsepower crack the lake → Water Surface; Ice moves refreeze |
-| 11 | Odessa, Stormfront, 55 | Pelipper (Keen Eye, Tailwind), Swanna *(−C)*, Pom-Pom Oricorio, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
+| 11 | Odessa, Stormfront, 55, **double** | Pelipper (Keen Eye, Tailwind), Swanna *(−C)*, Pom-Pom Oricorio, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
 | 12 | Ilsa, Mindscape, 59 | Bronzong, Musharna *(−C)*, Espeon, Gothitelle (Hard: Shadow Tag), Reuniclus, Hatterene "Hush" | — | Hush's Psychic Noise ×3 → Inverse; Calm Mind ×2 calms a Nightmare |
 | 13 | Bastian, Crystal Cavern, 63 | Carbink, Alolan Golem *(−C)*, Aurorus, Dusk Lycanroc, Rhyperior, Gigalith "Geode" (Sturdy, no Sand Stream) | Geode: Magical Seed (Hard: Weakness Policy + Meteor Beam) | Golem's Explosion or 3 quakes → Cave; light moves relight a Dark Crystal |
 | 14 | Ysolde, Hollow Cathedral, 67 | Sableye, Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
 | 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Hard Mega**) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
-| 16 | Nyx, New Moon, 75 | Grimmsnarl, Weavile, Malamar *(−C)*, Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
-| 17 | Celestine, Fairy Tale, 80 | Alcremie, Mimikyu *(−C)*, Azumarill, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
+| 16 | Nyx, New Moon, 75, **double** | Grimmsnarl, Weavile, Malamar *(−C)*, Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
+| 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, Mimikyu *(−C)*, Azumarill, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
 | 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Hard Mega**) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
 
 ## 4b. Route and gym trainers (stock trainer types)
@@ -104,13 +107,15 @@ Built from the Map Builder's events (`maps_out/Data/*.rxdata` / `trainers_needed
 movesets (always level-legal), IV 8 Standard / 20 Hard / 0 + EV 0 Casual, Casual −1 level, Hard +1 level.
 **Field touches (Rev 10):** one or two per team for the map's default field (ability the field switches on, a boosted
 level-up move, rarely a seed); see the table in TRAINER_FIELD_PLAYBOOK.md §2 and the per-map notes in `tools/trainer_gen/routes.py`.
-Levels: Route 1 4–5 · Route 2 6–7 · Gossamer Wood 8–10 · Loomhouse Gym 11–13 · Deepwood 11–12 · Route 3 12–14 ·
-Route 4 14–16 · Pell Playhouse actors 15–18 · Pageant Hall grunts 16–17; species from `encounters.txt` for that map,
+Levels (SPINE Rev 14 order: Ferrow's Landing → coast → Saltmere (Gym 1) → inland → Briarwick (Gym 2) → north → Ebbmouth;
+set per **map id** in `routes.py` `PLAN`, provisional until `design/SWAP_GYM1_GYM2.md`): 520 4–6 · 541 coast 8–10 ·
+544/545 Brinecut Mine 9–12 · Pell Playhouse (Gym 1) 10–13 · Pageant Hall grunts 15–16 · 540 15–17 · 546 Thistledown 16–17 ·
+521 15–16 · Gossamer Wood 16–18 · Loomhouse (Gym 2) 15–17 · Deepwood 19–20 · 560–564 and Tidelock unchanged; species from `encounters.txt` for that map,
 leaning Bug/Grass/Normal/Fairy (Elowen). `[YOUNGSTER,Ben]` (map 990 test dummy, Snorlax Lv 50) collides with the base
 project's sample Ben — ours normally compiles later and wins, but packaging should drop the base sample trainers.
 **Generic villains** (`HOLLOW_GRUNT_M/F`, `MERIDIAN_AGENT_M/F`, name "Grunt"/"Agent"): version = encounter number
 (0 = Saltmere Pageant Hall tag battle, then 1, 2, ... in story order; < 100), +100/+200 as usual. Map events must pass
-the version. Named admins (Thistle v0 = Briarwick, Lv 13–15) use 0, 1, 2 ... per rematch.
+the version. Named admins (Thistle v0 = Briarwick before Gym 2, Lv 16–18) use 0, 1, 2 ... per rematch.
 Re-check map references any time with `python3 -I tools/validate_map_trainers.py` (every battle form: TrainerBattle.start,
 rival/gym/cameo battles, trainer intros; also stock trainers and difficulty variants) or `tools/validate_trainers.py --maps maps_out/Data`.
 
@@ -128,10 +133,10 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 | K4 (42) | Staraptor, Krookodile *(−C)*, Scizor, Doublade, starter — Hard +Zweilous |
 | K5 (54) / K6 (66) | Staraptor, Krookodile *(−C)*, Scizor, Zweilous→Hydreigon (K6), starter, **Aegislash "Morwen"** |
 | K7 (79) / K8 (94) | Staraptor, Krookodile *(−C)*, **Mismagius** (from Ysolde), Hydreigon, starter, **Aegislash** ace |
-| J1 (17) | Cottonee *(−C)*, Bounsweet "Sweetpea", starter — Hard +Petilil |
-| J2 (33) | Whimsicott, Lilligant *(−C)*, Steenee, starter — Hard +Shiinotic |
-| J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Shiinotic *(−C)*, Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed and Aromatherapy grow the garden; burn it down with Fire at stage 5. |
-| J4 (90) | Shiinotic, Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
+| J1 (14) | Cottonee *(−C)*, Bounsweet "Sweetpea", starter (unevolved) — Hard +Petilil. Saltmere, before Gym 1 (Rev 14) |
+| J2 (33) | Whimsicott, Lilligant *(−C)*, Steenee, starter — Hard +Floette "Everbloom" (white, SPINE Rev 12) |
+| J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Florges "Everbloom" *(−C)* (white, Flower Veil), Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed, Aromatherapy and Grassy Terrain grow the garden; burn it down with Fire at stage 5. |
+| J4 (90) | Florges "Everbloom", Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
 
 ## 6. Festival of Champions
 
@@ -167,7 +172,7 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   2-vs-1 double, **3 Pokémon each**). Retired and removed per Rev 5/6: Isaura, Drey, Mireille, Thorne (never built),
   Bastian v90, Sigrun v96. List matches NARRATIVE_KEYS §7 (Revision 5/6).
 - **Sister-game cameos = optional sidequests** (`Prismfall.cameo_battle`, design/CAMEOS.md): **v1** at the placement level,
-  **v2** post-game at 100, each +100/+200. Shelly v1 17 (double; Lv-17 roster: Masquerain, Joltik, Larvesta, Scyther, Hard
+  **v2** post-game at 100, each +100/+200. Shelly v1 21 (after Gym 2 since Rev 14; double; roster: Masquerain, Joltik, Larvesta, Scyther, Hard
   +Araquanid) · Venam 38 · Garret 46 (Mega Lucario on Standard too) · Melia 50 · Alexandra 56 · Amaria + Titania 78 (tag
   double, 4 each; full 6 at v2) · Shiv 84 (Core ×2 HP on Ambipom) · Lin v1 only, superboss with all six at 100 · Nova v1
   only, 90. Cameo visitors may run ahead of the level-up curve (the validator doesn't warn for `FESTIVAL_*`).
@@ -189,7 +194,7 @@ Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, fa
 | Telegraph next Plate | 2 turns ahead | 1 turn ahead | 1 turn ahead |
 
 **Alignment with NARRATIVE_KEYS §6.6 (authoritative for bar counts):** a "phase" below = one **bar**. Default
-`ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Bug/Normal/Water … bar 6 Dark/Fairy/Dragon), so
+`ARCEUS_BOUND` has 6 bars; bar *k* holds the Plates of gyms 3k−2..3k (bar 1 Normal/Bug/Water since SPINE Rev 14 … bar 6 Dark/Fairy/Dragon), so
 within a bar Arceus cycles only among those three Plates/fields. Forced locks (+1 all stats per refusing Warden) stack on top.
 Variants: `_MISCALIBRATED` 5 bars (bar 5 cycles all six Plates of gyms 13–18 — use bar HP ×0.85 to keep it fair);
 `_GILDED` 6 bars, bar 6 refills 3× (use the Casual bar HP for refills on every difficulty); `_WAR` 7 bars, every lock

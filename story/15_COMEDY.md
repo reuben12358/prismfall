@@ -76,7 +76,19 @@ From Act III the Wardens share Gale Post relay messages the PC can read at any P
 [portrait: JUNO, happy] He's in it.
 ```
 
-### Ch2 — "The Apology Spiral" (Tamsin, pre-gym)
+### Ch2 — "Tree #3" (the Lantern Theatre rehearsal, after Gym 1)
+```
+[portrait: DORIAN, happy] *Enter, stage left, our brave challenger!* And — what is THAT glorious creature?
+[portrait: DORIAN, happy] Forty auditions! Never cast! Tonight, little one, your luck changes. You shall play... TREE NUMBER THREE.
+*(Understudy: music note)*
+[portrait: DORIAN, sad] ...Ah. The director informs me Tree Number Three has been cut for pacing.
+*(Understudy: "..." bubble)*
+[portrait: DORIAN, crying] Don't look at me like that! It's a cruel business! I was cut from my own biography!
+[portrait: JUNO, angry] You cut a TREE? From a play about a FOREST? *(anger vein)*
+[portrait: DORIAN, smug] There are still two trees, darling. It's a very efficient forest.
+```
+
+### Ch3 — "The Apology Spiral" (Tamsin, in the Loomhouse foyer, before Gym 2)
 ```
 [portrait: TAMSIN, panic] Sorry — the gym's a bit tangled today — sorry —
 > It's fine.
@@ -86,17 +98,6 @@ From Act III the Wardens share Gale Post relay messages the PC can read at any P
 [portrait: TAMSIN, panic] I nearly did it again. I'm so sorry.
 [portrait: TAMSIN, sad] ...
 [portrait: TAMSIN, deadpan] I'm going to go and stand in the web now.
-```
-
-### Ch3 — "Tree #3"
-```
-[portrait: DORIAN, happy] *Enter, stage left, our brave challenger!* And — what is THAT glorious creature?
-[portrait: DORIAN, happy] Forty auditions! Never cast! Tonight, little one, your luck changes. You shall play... TREE NUMBER THREE.
-*(Understudy: music note)*
-[portrait: DORIAN, sad] ...Ah. The director informs me Tree Number Three has been cut for pacing.
-*(Understudy: "..." bubble)*
-[portrait: DORIAN, crying] Don't look at me like that! It's a cruel business! I was cut from my own biography!
-[portrait: JUNO, angry] You cut a TREE? From a play about a FOREST? *(anger vein)*
 ```
 
 ### Ch4 — "He Followed You Here" (K2 aftermath)

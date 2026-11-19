@@ -606,7 +606,7 @@ events:
       - '\pf[JUNO,panic,,Juno (lab yard)]Juno: \PN! Mum''s Skwovet''s got out again. Biscuit. He''s gone to the Pruett orchard and I''m not— nobody''s supposed
         to go in there.'
       - '\pf[JUNO,neutral,,Juno (lab yard)]Juno: Will you come and look? Just LOOK. From the outside. I''ll show you the way.'
-      - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on Route 1.")'}
+      - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on the Ferrymen's Mile.")'}
       - '\pf[JUNO,happy,,Juno (lab yard)]Juno: Up the lane, past the stile! I''ll be right behind you. Probably in front of you.'
       - {script: 'pfm_set(:juno_errand)'}
       else: ['\pf[JUNO,happy]Juno: Up the lane, past the stile! Biscuit won''t wait. Biscuit never waits.']

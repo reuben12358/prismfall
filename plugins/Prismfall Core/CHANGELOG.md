@@ -2,6 +2,12 @@
 
 Notes between workstreams. Newest first. Not loaded by the PluginManager (only .rb files are).
 
+## 2026-11-19 (later still) - story editor: narrative data for the Gym 1 / Gym 2 swap (SPINE Revision 14)
+- `012_Narrative_Data.rb` `WARDEN_CONSENT`: rows 1-2 swapped (Dorian `choice(:ch5_lowlight_testimony) != :mourner`, then
+  Tamsin `choice(:ch2_tamsin) != :keep_secret`) so the list follows `GYMS` order again. Choice descriptions now say Ch2 for
+  `:ch3_juno_talk` and Ch3 for `:ch2_tamsin` / `:ch2_matriarch`. **No key renamed.** `ruby -c` OK.
+- Still to do in Core (design/SWAP_GYM1_GYM2.md §7): `FIELD_MOVE_BADGES[:CUT]` 1 -> 2 (Cut is given after Tamsin's badge).
+
 ## 2026-11-19 (later) - trainer workstream: Gym 1 / Gym 2 swap (SPINE Revision 14)
 - `001_Config.rb` `GYMS`: index 1 is now **Dorian, Saltmere, Normal, :GRAND_STAGE, cap 15, `double: false`**; index 2 is
   **Tamsin, Briarwick, Bug, :SILKWOOD, cap 19, `double: true`**. Trainer IDs are unchanged (`[LEADER_DORIAN,Dorian,0]`,

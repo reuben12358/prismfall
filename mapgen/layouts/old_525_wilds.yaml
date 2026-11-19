@@ -1326,7 +1326,7 @@ tiles:
 - {tile: 8106, at: [15, 29], layer: 2}
 events:
 - type: warp
-  name: To Route 3
+  name: To Thistledown Lea
   at: [18, 33]
   link: R3_COCOON
   arrive: [18, 32, up]

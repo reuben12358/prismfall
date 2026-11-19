@@ -8,16 +8,16 @@ the base project's stock tilesets. Code and specs live in `mapgen/`, output in `
 |---|---|---|
 | 109–110 | The Dovetail: deck and cabin (prologue) | FINAL script (§2f): title card, appearance, manifest name, difficulty; Edda's rail scene, Voss and `:pro_fellowship`, checkpoint, gangway opens on S101; six passengers, cook, trunk, letter |
 | 100–108 | Ferrow's Landing and interiors | FINAL script (§2f): docking, Edda's last call (GO_HOMEWARD), the NULL scan and title card, Larch/Sanctuary/starter/Kestrel, K1, Rowan, Juno's errand, Ch1 end at the inn, Larch's send-off, Wingull and Lamplighter sidequests, Hesper |
-| 520, 521 (+523) | Route 1, Route 2 (+ Hale Farmhouse) | The Route 2 cordon guard lets you through once K1 is done |
+| 520, 521 (+523) | The Ferrymen's Mile, Windfall Row (+ Hale Farmhouse) | The Windfall Row cordon guard lets you through once K1 is done |
 | 522 | The Glassed Orchard (:BLEED) | Bleed Veil scene with Juno: GO-02 choice, the Wurmple calm, Larch's Field Notes line (S105) |
 | 524–526 | Gossamer Wood, Deepwood, Woodward's Hut (:SILKWOOD) | Silk-wall loop, Cut tree to Deepwood |
 | 120–125 | Briarwick and interiors | Thistle at the pylon (HOLLOW_THISTLE, S106), Loyal Three shrine, poster, Celestine (S170) |
 | 130–133 | Loomhouse Gym (Gym 1) | Heddle planks, spool ziplines, then `Prismfall.gym_battle(1)` → `award_badge(1)`. Tamsin's confession and the `CH2_TAMSIN` choice |
-| 540–542, 548 | Route 3, Route 4 (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
-| 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Route 3's mine mouth with Route 4's back door. Salt miner gives TM98 after Badge 2 |
+| 540–542, 548 | Thistledown Lea, the Grey Saltings (:BEACH), rest house, Cocoonfall Hollow (:BLEED) | Crystal silk opens once `pf_choice(:CH2_TAMSIN)` is set. Glass Matriarch: `Prismfall::Bosses.wild_battle(:GLASS_MATRIARCH)` (S107, V105=1, V102=3) |
+| 544–545 | Brinecut Mine 1F/B1F (:CAVE) | Built on the Rock Cave templates. Links Thistledown Lea's mine mouth with the Grey Saltings's back door. Salt miner gives TM98 after Badge 2 |
 | 546–547 | Thistledown Manor + Attic (haunted house) | Mansion tileset (`palettes/mansion.yaml`): checker foyer with a grand staircase, arched-window portrait hall, dust-sheeted dining room, ruined cobwebbed attic. DarkMap. Three ghost scenes (wrong line → ghost battle). Lady Thistledown's offer: GO-03 or Spell Tag + Litwick (S176). Greavard in the attic |
-| 560–563, 570–576 | Borderland A (the Rimewood, §2h): Route 5 Frostflat Causeway, Frostwick and interiors (PC, the Exchange, the Two Hearths, Rime-silk Loft, Border House, Halvard's Smokehouse), The Rimewood, Rimewood Glade (Cut) | Chain 140 → 560 → 570 → 562 → 561 → 160; 562 ↔ 563 by warp `RIME_GLADE` behind a Cut sapling. 11 new route trainers, Border Stones, lagoon ice, the Silk-fall, the Snowveil Shrine |
-| 561, 564 | Route 6 (sea cliffs, landslide detour), Gullcry Caves | K2 (Trainer(4) sight event, `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)`), `CH4_KESTREL_MOURNER` choice, S111, V114=1. Gullcry reuses the Rock Cave template |
+| 560–563, 570–576 | Borderland A (the Rimewood, §2h): Frostflat Causeway, Frostwick and interiors (PC, the Exchange, the Two Hearths, Rime-silk Loft, Border House, Halvard's Smokehouse), The Rimewood, Rimewood Glade (Cut) | Chain 140 → 560 → 570 → 562 → 561 → 160; 562 ↔ 563 by warp `RIME_GLADE` behind a Cut sapling. 11 new route trainers, Border Stones, lagoon ice, the Silk-fall, the Snowveil Shrine |
+| 561, 564 | Gullcry Cliffs (sea cliffs, landslide detour), Gullcry Caves | K2 (Trainer(4) sight event, `Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2)`), `CH4_KESTREL_MOURNER` choice, S111, V114=1. Gullcry reuses the Rock Cave template |
 | 160–165 | Ebbmouth and interiors | Rain. River Ebb with footbridges, Meridian tidal Lattice. Teo night scene (after K2): HOLLOW_TEO battle, `CH4_TEO` choice, S112. Good Rod (Anglers' Guild). Ice-fishers' whale song. Larch's tide-data revelation after Badge 3 |
 | 170–174 | Tidelock Gym (Gym 3, :WATER_SURFACE) | Harbour tileset (`palettes/harbour.yaml`). Low/Mid/High basin variant maps. Sluice wheels W/C/E transfer to the same x,y on another level. Mid: raft events (passable plank tile) to the bell-rope. High: current lanes (forced moves). The north lane reaches the exit only with the tide bell ON (S315). Marisol `gym_battle(3)` → Badge 3, TM03 |
 | 140–145 | Saltmere and interiors | J1 and the `CH3_JUNO_TALK` choice (S109). After Badge 2, the Pageant: Mourner speech, grunt double battle, Gilded King page (S108, V102=4). Kestrel's exit, the royal notice |
@@ -138,7 +138,7 @@ The stock intro's controls tutorial is not reproduced.
   `trees`, `inlay` (drain tiles 3859 / 3916), `sea_rocks`, `warp_line`, `write`.
 - **Saltmere** (`layouts/saltmere_city.py`, 3 maps of 88x72): 140 Promenade & Market, 146 Harbour & Breakwater,
   147 Old Town. Story events of the pilot are in `layouts/saltmere_events.yaml` and are re-seated by name. 140 keeps
-  its Route 4 (N, offset 44) and Route 5 (W, offset 32) connections. Districts are joined by touch warps: harbour
+  its the Grey Saltings (N, offset 44) and Frostflat Causeway (W, offset 32) connections. Districts are joined by touch warps: harbour
   stairs 140 (48-53, 71) <-> 146 (42-47, 3), Players' Gate 140 (87, 42-45) <-> 147 (0, 36-39). Doors: PC, Mart,
   Pageant Hall, Saltwife on 140; Harbour Office on 146; Playhouse on 147. HealingSpot is 140 (19, 30).
 - **Verdance** (`layouts/verdance_city.py`): 280 Market Terraces 104x88, 285 Briar Hall Upper Court 84x64, 286 Great
@@ -343,7 +343,7 @@ Rejuvenation's asset rules forbid copying its maps.
   - HealingSpot is [100, 24, 15].
 - **120 Briarwick** (`layouts/briarwick_rj.py`, tileset 50, 72×64):
   - Doors: elder-tree gym (36,12), Guildhall (17,26), Help Center (45,23), Treetop House (55,24), Mart (27,40), chapel (63,42), Cutter's House (42,50).
-  - Route 3 road on rows 30–31 over the stream walkway. HealingSpot is [120, 45, 24].
+  - Thistledown Lea road on rows 30–31 over the stream walkway. HealingSpot is [120, 45, 24].
 - **Borderland A** (`layouts/rimewood.py` + `rimewood_interiors.py`, tileset 52 / interiors on 34): 560 (64×30), 570 Frostwick (60×48), 562 (48×56), 563 (34×30), 561 (30×60), 571–576.
   - Fixed: 560's west edge now joins **570** (offset 10/18), no longer 561.
   - Edges: 570 N(20) ↔ 562 S(22); 562 N(12) ↔ 561 S(10); 561 N(12) ↔ 160; 560 E(12) ↔ 140 W(32); 560 W(10) ↔ 570 E(21) (see 2i).
@@ -379,7 +379,7 @@ Rejuvenation's asset rules forbid copying its maps.
   solid event or decor covers, and when it lands on a door the tile below must be free (ARRIVAL warnings).
   `rkit.incoming(mid)` gives a layout the cells other specs warp onto; `reskin.py` keeps them bare. `scatter` never puts
   decor on an event's four neighbours.
-- 100's north lane is Route 1's dirt (x 32-34) for 7 rows before the gravel street; 103 barrel, 123 loft arrival, 521
+- 100's north lane is the Ferrymen's Mile's dirt (x 32-34) for 7 rows before the gravel street; 103 barrel, 123 loft arrival, 521
   arrival, 145/154 arena front wall (`tile_edits`).
 
 **Crowns (the "box" bug).** `RMap.stamp` keeps the overhead-only cells of tree-like stamps (`TREELIKE`) free: masks
@@ -447,7 +447,7 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   survives), crops pieces to the 16-px grid, rcustom doubles them exactly 2x. Imported: carchagui's snowed chalets
   (`ch_chalet_a/b/c/pc/shop`; one is the trapper's lodge in 562). Magiscarf's snow-capped trees were style-tested on
   Frostwick and rejected (flat scale-leaf shading, saturated greens: they read as another game beside the lattice).
-- **100 Ferrow (`ferrow_rj.py`):** the Center terrace (h=2) with its own stair, curved valley road from Route 1 into
+- **100 Ferrow (`ferrow_rj.py`):** the Center terrace (h=2) with its own stair, curved valley road from the Ferrymen's Mile into
   a plaza above the harbour with the anchor at the overlook rail, the bay cut into the bluff, two quay stairs, a
   timber wharf along the waterline with bollards, boats moored, freight and stalls on the beach. Doors moved: inn
   (11,27) -> (11,30), Mart (39,22) -> (46,28); PC, lab, customs, Dockmaster, lighthouse, pier arrival and the north
@@ -594,7 +594,7 @@ above the mat facing up, and leave onto the door tile, where the door animates y
 - The River Ebb's day/night current flip in town is not done; the Outside tileset has no current autotiles. Gym 3 uses
   event-driven currents instead.
 - The mine and Gullcry Caves share the base project's Rock Cave template, so they look alike: [TODO art].
-- Deviation from maps.json: Route 4's north edge joins Route 3's **south** edge at x=2–9. maps.json paired 540-west with
+- Deviation from maps.json: The Grey Saltings's north edge joins Thistledown Lea's **south** edge at x=2–9. maps.json paired 540-west with
   541-north, which isn't a legal Essentials edge pair.
 - Story items without item data (Meridian badge case, Fellowship card, Gilded King page, Granny Loom's shuttle) are text
   only. Add key items, then swap the text for `pbReceiveItem`.

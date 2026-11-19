@@ -135,3 +135,41 @@ No map file was edited. Fields for rival, admin and Festival battles now come fr
 - **Side-content room (not reserved yet):** no plot is held for a Trial hall/outpost. Every town keeps lane-side
   forest blocks the layout scripts can clear (Ferrow's east edge, Briarwick's NE and SE, Saltmere 140's east block and
   147's lower town, Frostwick's east bench). Post a footprint and preferred district here and the layout owner seats it.
+11. **Seam trap (2026-11-19): Ferrow's Landing (100) north edge -> Route 1 (520).** On the rebuilt 100 the whole top row is
+    walkable from x 36 to 55, but with `100,N,28,520,S,10` only x 32-35 meet Route 1's dirt lane. Walking off 100's north
+    edge at x 36+ lands in Route 1's tree line: e.g. 100 (38, 0) -> 520 (20, 67) has no way out (the playtest bot got stuck
+    there). Close 100's top row outside the lane (or widen Route 1's south opening). Edge seams aren't warps, so the
+    warp-arrival check doesn't catch this; a seam check (each open edge tile must arrive on a tile connected to the
+    neighbour's main area) would. 520 -> 521 is fine except 520 (24, 0), which arrives on a blocked 521 tile.
+
+## From the trainer workstream, round 2 (Gym 1 / Gym 2 swap, SPINE Revision 14), 2026-11-19
+No map file was edited. Core's `GYMS` now has Dorian at index 1 and Tamsin at index 2 (Core `CHANGELOG.md`).
+1. **Gym numbers in the gym events must swap.** `mapgen/specs/130_loomhouse_gym.yaml` (and `gen_gym1.py`) call
+   `Prismfall.gym_battle(1)` for Tamsin: make it `gym_battle(2)`. `mapgen/specs/150_pell_playhouse.yaml` (and
+   `gen_gym2.py`) call `gym_battle(2)` for Dorian: make it `gym_battle(1)`. Until then each gym starts the other Warden.
+2. **Pell Playhouse:** drop the `script: setBattleRule("double")` before Dorian's battle (Gym 1 is a single battle; Core now
+   forces "single" for Gym 1 anyway). The Loomhouse needs no rule: Core sets "double" for Gym 2 (and 6, 11, 16, 17).
+3. **Route trainer levels are keyed by map id** (`tools/trainer_gen/routes.py` `PLAN`). The stretch each map sits on is my
+   provisional reading of SPINE Rev 14's geography: Gym 1 = 520, 541, 544/545, 151–153 (145 after Gym 1); Gym 2 = 540,
+   546, 521, 524, 131/132; Gym 3 = 525, 560–564, 170–173. If `design/SWAP_GYM1_GYM2.md` (or your re-linking) puts a
+   map elsewhere, tell me or edit its `PLAN` row; the generator re-levels and re-evolves that map's trainers.
+4. **Thistle:** the Ch0–2 script now says version 0 (matches the PBS and your events, which pass no version). Briarwick is
+   the Gym 2 town now, so her team is Lv 16–18.
+5. **New fights with no event yet** (trainer data exists): Brother Wick (`HOLLOW_WICK`, 0), Quent at the caldera
+   (`MERIDIAN_QUENT`, 0), Sable + Hammer Captain Brisk tag double (`HOLLOW_SABLE,Sable,0` + `HOLLOW_ADMIN,Brisk,0`),
+   the Mourner (`HOLLOW_MOURNER,Mourner,0`), Marchetti 0/1/2, Kroll 0/1, Quent 1/2, the Eevee Octave
+   (`OCTAVE_VESPER,Vesper` 0/1/2, `OCTAVE_SINGER` Carol 0 and Aria..Carol 1–8), war soldiers (`ASHKAAR_SOLDIER_M/F`,
+   `ISENMAR_SOLDIER_M/F` "Soldier" 0/1, `*_OFFICER` "Captain" 0). Fields come from `TRAINER_FIELDS`; the Ch3 and Ch13
+   Octave fights and the Sable/Brisk and Ch16 fights are doubles (`setBattleRule("double")` or a tag-battle start).
+
+## From the story editor (Gym 1/Gym 2 swap, SPINE Revision 14), 2026-11-19
+Full checklist by owner: **`design/SWAP_GYM1_GYM2.md`** (§1 is yours: connections, `badge_count` tests, chapter numbers, re-pours).
+1. **Script split.** `story/20_SCRIPT_CH0-2.md` is now the Prologue, Ch1 and the new **Ch2 (Saltmere, Gym 1)**. The Briarwick
+   material moved, revised for Gym 2, to **`story/21_SCRIPT_CH3.md`**. I edited `layouts/scriptpour.py` (shared) so `LINES`
+   reads both files in order; nothing else in it changed. `story_early.py` imports cleanly, and its Briarwick
+   `^### Flavor townsfolk$` section is found in the Ch3 file. Saltmere's townsfolk header is `### Flavor townsfolk (Saltmere …)`
+   on purpose, so neither existing pattern matches it.
+2. **Ch2 road events moved:** Route 2's survey flags, surveyor, Juno flag lines and third-flag Antidote belong to the Dyers'
+   Ford (552) now. The quarantine roadblock moves to the Hale Bell on 520, and 521's forest path becomes the corded forest road.
+3. **Thistle** uses version 0 in the new script (your item 4).
+

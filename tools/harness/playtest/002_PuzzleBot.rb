@@ -12,12 +12,12 @@
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [147, 53, 24], "gym2" => [120, 36, 13], "lofts" => [131, 11, 4], "backstage" => [154, 3, 9],
+  PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 11, 4], "backstage" => [154, 3, 9],
                    "d1" => [522, 6, 36] }
   # Gym 1 (SPINE Rev 14): the Pell Playhouse. A walk-through: lobby, up the aisle past the actors, one curtain rope.
   GYM1_PLAN = [
     [:shot, 147, "g1_00_outside_the_playhouse"],
-    [:bump, 147, 53, 23],                 # map 147's Playhouse door
+    [:door, 147, 150],                    # map 147's Playhouse door (found by its transfer, wherever the town puts it)
     [:shot, 150, "g1_01_lobby"],
     [:bump, 150, 11, 4],                  # the auditorium doors
     [:shot, 154, "g1_02_auditorium"],
@@ -25,12 +25,14 @@ module PlayBot
     [:goto, 154, 12, 9],  [:shot, 154, "g1_04_on_the_apron_curtain_in"],
     [:use_from, 154, 20, 9, 6], [:shot, 154, "g1_05_curtain_out"],
     [:goto, 154, 12, 7],  [:shot, 154, "g1_06_before_dorian"],
+    [:talk, 154, 12, 5],                  # Warden Dorian (the AI plays the battle)
+    [:shot, 154, "g1_07_badge"],
     [:done]
   ]
   # Gym 2 (SPINE Rev 14): the Loomhouse. One heddle in the foyer, three linked heddles in the Weaving Hall.
   GYM2_PLAN = [
     [:shot, 120, "g2_00_outside_the_loomhouse"],
-    [:bump, 120, 36, 12],                 # map 120's elder-tree door
+    [:door, 120, 130],                    # map 120's Loomhouse door
     [:shot, 130, "g2_01_foyer"],
     [:goto, 130, 9, 12], [:shot, 130, "g2_02_at_the_loom_bed"],
     [:talk, 130, 11, 10], [:shot, 130, "g2_03_heddle_pulled"],
@@ -43,6 +45,8 @@ module PlayBot
     [:goto, 131, 21, 18], [:shot, 131, "g2_09_hall_on_the_planks"],
     [:goto, 131, 21, 10], [:goto, 131, 21, 4], [:shot, 131, "g2_10_hall_top"],
     [:goto, 131, 12, 3],  [:shot, 131, "g2_11_before_tamsin"],
+    [:talk, 131, 11, 3],                  # Warden Tamsin, double battle (the AI plays it)
+    [:shot, 131, "g2_12_badge"],
     [:done]
   ]
   # The optional Upper Lofts (after Tamsin's badge): spools + the brass Meridian wire, then Granny's Knot.
@@ -97,6 +101,15 @@ module PlayBot
     [:talk, 522, 38, 1],  [:shot, 522, "d1_06_satchel"],
     [:done]
   ]
+
+  def self.find_door(rpg_events, target_map)
+    rpg_events.each do |e|
+      e.pages.each do |pg|
+        pg.list.each { |c| return [e.x, e.y] if c.code == 201 && c.parameters[0] == 0 && c.parameters[1] == target_map }
+      end
+    end
+    return nil
+  end
 
   class << self
     alias puz_plan plan unless method_defined?(:puz_plan)
@@ -165,6 +178,11 @@ module Game
     alias puzbot_start_new start_new unless method_defined?(:puzbot_start_new)
     def start_new
       st = PlayBot::PUZZLE_START[PlayBot::SESSION]
+      if st && st[1] == :door           # start one step below the town's door into the gym (towns get rebuilt)
+        door = PlayBot.find_door(load_data(sprintf("Data/Map%03d.rxdata", st[0])).events.values, st[2])
+        st = door ? [st[0], door[0], door[1] + 1] : nil
+        PlayBot.log("no door to map #{PlayBot::PUZZLE_START[PlayBot::SESSION][2]} on map #{PlayBot::PUZZLE_START[PlayBot::SESSION][0]}") if !st
+      end
       if st
         PrismfallMaps.define_singleton_method(:apply_start_position) do
           $data_system.start_map_id, $data_system.start_x, $data_system.start_y = *st
@@ -173,6 +191,11 @@ module Game
       end
       puzbot_start_new
       return if !st
+      PlayBot.plan.map! do |step|                # [:door, map, target] -> [:bump, map, door x, door y]
+        next step if step[0] != :door || step[1] != $game_map.map_id
+        d = PlayBot.find_door($game_map.events.values.map { |e| e.instance_variable_get(:@event) }, step[2])
+        d ? [:bump, step[1], d[0], d[1]] : step
+      end
       $player.name = PlayBot::NAME
       $player.has_running_shoes = true
       $player.party = [Pokemon.new(:TALONFLAME, 45), Pokemon.new(:ARCANINE, 45), Pokemon.new(:STARAPTOR, 45)]

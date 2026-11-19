@@ -45,16 +45,16 @@
 - **Epilogue:** He becomes Ghost Warden of Gravenmoor if `KESTREL_ACCEPTED_SEAT` is set (Ysolde offers it after the Festival); otherwise he becomes a wandering trainer.
 
 ### Juno Hale — `RIVAL_JUNO`
-- **Age 15.** Freckled, frizzy auburn hair in a kerchief, gardening gloves clipped to her belt, and a satchel of seed packets she labels in tiny handwriting. Professor Larch's assistant at Tidewatch Station.
+- **Age 15.** Freckled, with frizzy auburn hair under a tilted wreath of white-and-pink blossoms from her aunt's Bride Tree, and a long veil of them trailing behind her to the ground. They're Imprinted, so they never wilt, and she has worn them every day since she was three: the flower girl of a wedding that never ended (SPINE Revision 12, Ever-Bloom). Underneath: an outgrown flower-girl dress with the hem let down, gardening gloves clipped to the sash, and a satchel of seed packets she labels in tiny handwriting. Professor Larch's assistant at Tidewatch Station. The costume carries the sadness. Juno doesn't: she's the warmest, chattiest person in any room.
 - **Background:** Her parents, **Wenna and Coll Hale**, run Hale's Bramble, a berry farm outside Ferrow's Landing. They are warm, ordinary and alive, the homey anchor the PC never had. Wenna's sister **Elin** married **Rowan Ashby**, the Grass Warden, and Juno spent every childhood summer in Verdance. Elin was Fixed in AF 288, when Juno was three. Juno was told Aunt Elin "went away" until AF 293, when Rowan walked her to the Bride Tree and told her the truth. She splits her time between Larch's station and Verdance. "Uncle Rowan" is her hero.
-- **Personality:** Earnest, curious, kind and talkative. She picks the starter weak to the PC's "because somebody should give the underdog a chance. Also it was looking at me." Her anxiety hides under a constant stream of plant facts. She is braver than she knows.
+- **Personality:** Earnest, curious, kind and talkative. She picks the starter weak to the PC's "because somebody should give the underdog a chance. Also it was looking at me." Her anxiety hides under a constant stream of plant facts. She is braver than she knows. Strangers ask which play her flowers are from; she tells them cheerfully that they're her aunt.
 - **Voice:**
   - *(Ch1)* "Did you know larches are the only conifers that drop their needles? Every winter they look dead. They're not! They're just... letting go so they don't snap. Professor says that's the most sensible thing a tree's ever done."
   - *(J3, as Warden)* "I didn't want this seat. I wanted *him* in it. But the city's drowning in flowers and nobody else is coming, so. Hi. I'm the Warden of Verdance. Please don't go easy on me — I'll cry either way."
   - *(J4)* "We started on the same dock. Let's see who's grown more."
 - **Motivation:** Make the people she loves proud, and later, become someone worth the seat she inherited.
 - **Arc by slot:**
-  - **J1** (Saltmere): a cheerful spar outside the theater.
+  - **J1** (Ch2, Saltmere, before Gym 1): a cheerful spar on the promenade green, then the loudest seat in the Playhouse, then salt-caramel on the breakwater, where she tells the PC about the blossoms. She walks on with the PC to Briarwick in Ch3 (silk-moth eggs for Rowan) and is there for both of the badge case's first notes.
   - **J2** (Mirefen): she finds Rowan's name in Corvin's ledger and refuses to believe it.
   - **Ironreach:** watches the Mourner's mask break.
   - **J3** (Gym 9): her Warden trial and gym battle, the most emotionally loaded gym in the game.
@@ -62,7 +62,7 @@
   - **J4** (Festival R16): a joyful, bittersweet battle between equals.
   - **Finale:** the first Warden to release her Plate. "Verdance has never had an autumn. I'd like to see one."
 - **Team concept:** the starter weak to the PC's; **Bounsweet → Steenee → Tsareena** (grown from a seed-pod in Act I, so it rises from a sweet fruit to a queen); **Whimsicott**; **Lilligant**; **Comfey** (a Ch18 gift from Celestine if met earlier); **Shiinotic**. **Ace: Tsareena.**
-- **Epilogue:** In Homecoming, Elin wakes under Juno's first autumn.
+- **Epilogue:** In Homecoming, Elin wakes under Juno's first autumn, and the wreath finally wilts.
 
 ---
 
@@ -107,7 +107,7 @@
 - **Personality:** Gentle, patient, funny with children, devastating when grieving. As the Mourner he is theatrical and liturgical, because grief needs ritual.
 - **Voice:**
   - *(Rowan, Ch1)* "Everything that grows must be allowed to die, Juno. That's not sad. That's what *makes* room."
-  - *(The Mourner, Ch3, Saltmere stage)* "Three hundred years of pageantry. Ask your Warden why nothing in Verdance ever rots. Ask your Sovereign why the old capital is underwater. Let the land grieve."
+  - *(The Mourner, Ch2, Saltmere stage)* "Three hundred years of pageantry. Ask your Warden why nothing in Verdance ever rots. Ask your Sovereign why the old capital is underwater. Let the land grieve."
   - *(The Mourner, Ch5, holding the cracked Zap Plate, hand burning)* "No — no — what did you *do*?" *(He is speaking to Sable. The player will assume he means the PC or himself.)*
   - *(Unmasked, Ch9)* "Juno. Don't look at me like that. Look at the flowers. Look at what they're standing on."
 - **Arc:** Gentle uncle (Act I) → masked zealot (Acts I–II, with fair clues) → unmasked and imprisoned (end of Act II) → tribunal (Ch13), where the PC's testimony matters → escapes in the Fault and leads the reformed "Lantern Hollow" as uneasy allies (Act IV) → in disguise at the Festival → in Homecoming, he is under the Bride Tree when Elin wakes.
@@ -145,25 +145,25 @@
 
 Format: look/age · personality · voice · motivation · secret · plot role · arc & reappearances · ace concept.
 
-### 1. Tamsin Loom — Bug — Briarwick — `LEADER_TAMSIN` — `:SILKWOOD`
+### 1. Dorian Pell — Normal — Saltmere — `LEADER_DORIAN` — `:GRAND_STAGE`
+- **56.** Former matinee idol in a velvet coat with a silver-topped cane he doesn't need. His laugh fills rooms on purpose.
+- **Personality:** Flamboyant, vain, and generous. He speaks in stage directions ("*Enter, stage left, our brave challenger!*") and is a devoted father-figure to his troupe. As the first Warden most challengers meet, he makes them look good on purpose: a first gym "should be an occasion".
+- **Voice:** "Saltmere is the only city in Velmora where nothing is a miracle, darling. So we *built* our own." / "Every pageant is a lie. The trick is choosing which lie to tell." / *(Act V)* "Tonight, for one night only, the truth. Lights, please."
+- **Motivation:** Keep the stage alive in a city with nothing else.
+- **Secret:** As the Accord's Pageant-Master he stages the official *Pageant of the Prismfall* and knows it's propaganda. He owns the last copy of **"The Gilded King"**, a banned play by Ansel Crewe, a playwright executed in AF 52, that tells the true story.
+- **Plot role:** The first Warden (Ch2). His gym is a simple, handsome theater (a walk up the aisle, three actors, one curtain rope) and a **single battle** on the PC's first gym field: the house loves a show. The badge case first hums in his hands, in the one city where nothing strange ever happens. The Mourner hijacks his pageant the same night (Ch2), and he slips the PC the play's prologue page, the first written clue. Saltmere is Elowen's free port, chartered to answer to no king, and Dorian guards that charter jealously against Queen Maelis's tax-collectors (he conducts the weekly booing of her barge himself).
+- **Arc:** His troupe gives the PC the gift Eevee "Understudy" right after Gym 1 (Ch2). In Act III Elowen's crown shuts his Lantern Theatre at Meridian's request for a satire about Meridian. On the Festival's Night of Masques (Act V) he stages "The Gilded King" in Crownhaven in front of Voss, which turns public opinion. He casts **Celestine**, who cannot lie, as the voice of Princess Maren's lament.
+- **Ace:** **Kecleon** (the quick-change artist; Color Change is a costume change); also **Ambipom**, **Chatot** (the voice), **Furfrou**, and later **Exploud**.
+
+### 2. Tamsin Loom — Bug — Briarwick — `LEADER_TAMSIN` — `:SILKWOOD`
 - **19.** Ink-stained fingers, a measuring tape around her neck, and a moth-wing shawl woven by her late grandmother. She became Warden last spring when Old Mother Loom died.
 - **Personality:** An anxious perfectionist who apologizes constantly. She thinks in thread and turns ferocious the moment her people are threatened.
 - **Voice:** "Sorry — sorry — the Silkwood's a bit tangled today. Like me." / "A thread holds because it's twisted with others. Alone it's just... string." / *(battle start)* "Granny Loom wove this room. Don't you dare tear it."
 - **Motivation:** Keep Briarwick's looms running and live up to a legend.
 - **Secret:** Briarwick is bankrupt. She secretly signed a Meridian Lattice contract alone, and the Lattice is pushing the Glasswood (a crystallizing Bleed) toward the silk-moth groves.
-- **Plot role:** The PC's first look at Meridian's double edge, and the first Hollow sabotage.
+- **Plot role:** The second Warden (Ch3). After the Mourner's public question in Saltmere ("Ask your Warden"), she is the first Warden the PC sees who has an answer to hide. She gives the PC their first look at Meridian's double edge (the free light works, and so does the glass) and the first Hollow sabotage (Thistle's cut survey flags). Her gym is the first real puzzle and a **double battle**: "a thread holds because it's twisted with others."
 - **Arc:** Confesses after the gym and either tears up the contract publicly (`TAMSIN_PUBLIC_CONFESSION`) or renegotiates it quietly. Reappears in Ch10 at the Verdance succession as the first small-town Warden to join Juno's Greenward bloc, and again in Act V weaving the Festival's eighteen banners. During the hijack, her Galvantula nets catch falling arena debris.
-- **Ace:** **Leavanny** line (the tailor, Swadloon at Gym 1); later **Galvantula**, **Masquerain**.
-
-### 2. Dorian Pell — Normal — Saltmere — `LEADER_DORIAN` — `:GRAND_STAGE`
-- **56.** Former matinee idol in a velvet coat with a silver-topped cane he doesn't need. His laugh fills rooms on purpose.
-- **Personality:** Flamboyant, vain, and generous. He speaks in stage directions ("*Enter, stage left, our brave challenger!*") and is a devoted father-figure to his troupe.
-- **Voice:** "Saltmere is the only city in Velmora where nothing is a miracle, darling. So we *built* our own." / "Every pageant is a lie. The trick is choosing which lie to tell." / *(Act V)* "Tonight, for one night only, the truth. Lights, please."
-- **Motivation:** Keep the stage alive in a city with nothing else.
-- **Secret:** As the Accord's Pageant-Master he stages the official *Pageant of the Prismfall* and knows it's propaganda. He owns the last copy of **"The Gilded King"**, a banned play by Ansel Crewe, a playwright executed in AF 52, that tells the true story.
-- **Plot role:** The Mourner hijacks his pageant (Ch3). He slips the PC the play's prologue page, which is the first written clue. Saltmere is Elowen's free port, chartered to answer to no king, and Dorian guards that charter jealously against Queen Maelis's tax-collectors.
-- **Arc:** In Act III Elowen's crown shuts his Lantern Theatre at Meridian's request for a satire about Meridian. His troupe also gives the PC the gift Eevee "Understudy" in Ch3. On the Festival's Night of Masques (Act V) he stages "The Gilded King" in Crownhaven in front of Voss, which turns public opinion. He casts **Celestine**, who cannot lie, as the voice of Princess Maren's lament.
-- **Ace:** **Kecleon** (the quick-change artist; Color Change is a costume change); also **Ambipom**, **Chatot** (the voice), **Furfrou**, and later **Exploud**.
+- **Ace:** **Leavanny** line (the tailor; Swadloon at Gym 2, cap 19), fighting beside a partner in doubles; later **Galvantula**, **Masquerain**.
 
 ### 3. Marisol Reyes — Water — Ebbmouth — `LEADER_MARISOL` — `:WATER_SURFACE`
 - **34.** Broad-shouldered dockworker in rolled sleeves and a union pin, with a laugh like a foghorn. Ebbmouth is Isenmar's southern port and the only city whose Warden is **elected** (by the Ebb Guild). The Guild has fought Thane Eirik's harbor taxes for a generation.
@@ -325,7 +325,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 
 - **Hesper Vane** (78): Kestrel's grandmother and keeper of the Ferrow's Landing lighthouse. Bitter, sharp-tongued, and secretly sends the PC care packages after she learns who they are (Act IV). Gives Kestrel the Honedge.
 - **Teo Reyes** (19): Marisol's brother and Ebbmouth Hollow cell leader (`HOLLOW_TEO`). Idealistic, angry and funny. His survival at Ironreach is a player choice. If he lives, he becomes the Lantern Hollow's youngest organizer.
-- **Mara Thistlewood "Thistle"** (40): Hollow Pallbearer (`HOLLOW_THISTLE`), a former Briarwick weaver whose village of Lowmarsh was Fixed. The PC's first admin battle. Fierce and grieving. She is captured at Lumen and returns in Act IV on the PC's side.
+- **Mara Thistlewood "Thistle"** (40): Hollow Pallbearer (`HOLLOW_THISTLE`), a former Briarwick weaver whose village of Lowmarsh was Fixed. She cuts the Lantern Theatre's curtain ropes during the Mourner's hijack (Ch2) and is the PC's first admin battle at Briarwick's pylon (Ch3). Fierce and grieving, and careful: "I know where a thread will fall." She is captured at Lumen and returns in Act IV on the PC's side.
 - **Sable / Sabine Kroll** (35): the Hollow's "Hammer" (`HOLLOW_SABLE`, later `MERIDIAN_KROLL`), secretly a Meridian Special Accounts operative. Cold, cheerful and professional. She caused the Lumen Shatter and the Ironreach attack. Exposed in Ch13 and fought again in Act V.
 - **Dr. Percival Quent** (44): Meridian Head of R&D and lead on the Arbiter Project (`MERIDIAN_QUENT`). Larch's former protégé. Giggly, brilliant and morally weightless. Fought in Ch8, Ch16 and the Festival tag battle. Post-game villain hook.
 - **Director Helene Marchetti** (50): Meridian Security Directorate, the Mandate's enforcer (`MERIDIAN_MARCHETTI`). Ex-Wardguard. Cold, loyal and competent, with no illusions. Fought in Ch12, Ch14 and the Festival tag battle. If `MARCHETTI_TURNED` (the PC shows her Kroll's file), she stands down in the hijack.

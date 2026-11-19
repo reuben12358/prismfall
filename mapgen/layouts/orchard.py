@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """The Glassed Orchard (522, :BLEED): the Pruetts' orchard, turned to glass in one winter night.  44 x 40.
-Entry from Route 2 on the west edge (0, 36-38).  The Bleed Veil is the shimmer line across the gate (x 4).  Orchard
+Entry from Windfall Row on the west edge (0, 36-38).  The Bleed Veil is the shimmer line across the gate (x 4).  Orchard
 terraces rise to the east; the Pruett house stands glassed at the top.  Everything here is the Bleed copy of the
 Tectonic art (tileset 40, id + B): glass-blue foliage, ash-lilac ground, mauve-grey wood, a still gall-pink pond.
 Run:  python3 -I layouts/orchard.py && python3 -I build.py 522"""
@@ -105,9 +105,9 @@ def build():
             if (x + y) % 3 == 0 and not c.o[2][y][x]: c.o[2][y][x] = CU['veil']
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 522")
     E = []
-    E.append({'type': 'warp', 'name': 'To Route 2', 'at': [0, 37], 'link': 'R2_ORCHARD', 'arrive': [1, 37, 'right']})
-    E.append({'type': 'warp', 'name': 'To Route 2 b', 'at': [0, 36], 'to': {'map': 521, 'x': 60, 'y': 22, 'dir': 'left'}})
-    E.append({'type': 'warp', 'name': 'To Route 2 c', 'at': [0, 38], 'to': {'map': 521, 'x': 60, 'y': 23, 'dir': 'left'}})
+    E.append({'type': 'warp', 'name': 'To Windfall Row', 'at': [0, 37], 'link': 'R2_ORCHARD', 'arrive': [1, 37, 'right']})
+    E.append({'type': 'warp', 'name': 'To Windfall Row b', 'at': [0, 36], 'to': {'map': 521, 'x': 60, 'y': 22, 'dir': 'left'}})
+    E.append({'type': 'warp', 'name': 'To Windfall Row c', 'at': [0, 38], 'to': {'map': 521, 'x': 60, 'y': 23, 'dir': 'left'}})
     E.append(c.fog_event('prismfall_glass', 70, 1, 200, 2, 1))
     intro = [
         "(Rows of apple trees turned to clear glass. Glass apples chime in the wind. The air at the gate shimmers like heat.)",

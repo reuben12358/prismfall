@@ -27,7 +27,7 @@ beat the game unless WORLD marks it mandatory (the Glassed Orchard, the Ossuary 
 | 541–545 | **Elowen** — Gossamer Heartwood (703) | III | Elowen |
 | 546–550 | **Zenith** — Voltaic Sluiceworks (584, 585) | I (optional) | Borderland B / Zenith |
 | 551–555 | **Ossaria** — Ossuary of Dunes (624, 625) | II | Ossaria |
-| 556–560 | **Ashkaar** — Mt. Cinder (664, 665, 666) | II | Ashkaar |
+| 556–560 | **Ashkaar** — The Cinderhorn (664, 665, 666) | II | Ashkaar |
 | 561–565 | **Isenmar** — the Ice Vault under Whalebone Keep (308, + 318 new) | III | Isenmar |
 | 566–570 | **Antumbra** — Mirror Mere + Giratina's Reverse Depths (742, 806) | III–IV | Antumbra |
 | 571–575 | **Nadir** — Drowned Aurelia (824, 825, 826) | IV | Nadir |
@@ -50,7 +50,7 @@ puzzle part only.
 | D9 Pell Playhouse Backstage — the old revolve | 151–153 | after Gym 2 | **4** | 20 min | built, proven, engine-run (below) |
 | Zenith — Voltaic Sluiceworks | 584, 585 | optional from Act I | **5** | 20 min | spec |
 | Ossaria — Ossuary of Dunes | 624, 625 | Act II | **6** | 25 min | spec |
-| Ashkaar — Mt. Cinder | 664–666 | Act II | **6** | 30 min | spec |
+| Ashkaar — The Cinderhorn | 664–666 | Act II | **6** | 30 min | spec |
 | Elowen — Gossamer Heartwood | 703 | Act III | **7** | 30 min | spec |
 | Isenmar — the Ice Vault | 308, 318 | Act III | **8** | 35 min | spec |
 | Antumbra — Mirror Mere / Reverse Depths | 742, 806 | Act III–IV | **9** | 40 min | spec |
@@ -128,7 +128,7 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
     combinations, 4 distinct ends):
     - **A** dead end with Hard Stone;
     - **B** the ladder to B1F;
-    - **C** the Route 3 mouth (39,4);
+    - **C** the Thistledown Lea mouth (39,4);
     - **D** buffer stop: "BUMP." The cart rolls you back to the depot.
   - **Teach:** the first fork is visible from the depot; P1 alone decides A vs the rest.
   - **Twist:** P2 and P3 are behind the cart's path. You must ride to A, walk back past P2 (on foot through a crawlway),
@@ -356,7 +356,7 @@ y10  #####@######    @ (5,10) ladder up to 152 p
   - 4×4 crossings; the path to the Ogerpon shrine needs a specific pattern.
   - Warp levers are at the north edge and weft levers at the west edge, so you can only reach a lever whose row and
     column you can already walk.
-  - Bootstrap in order: **W1 → R1 → W3 → R4 → W2** (verify with the builder's grid BFS).
+  - Bootstrap in order: **W1 → The Ferrymen's Mile → W3 → The Grey Saltings → W2** (verify with the builder's grid BFS).
 - **Combine (cross-map):**
   - At **VERDANCE_BLOOM V106 = 1** (Act III runaway bloom), warp 2 is overgrown and can't be pulled. The Weave then
     needs a different pattern that uses **Cut** on two vine knots (permanent, S543/S544).
@@ -410,7 +410,7 @@ when its slots spell its word.
 - **State:** V551 capstone, S552 sand, S553–S555 doors opened.
 - **Ties:** S116 CH6_OSSUARY_DONE; the Duneholt Rubbing; the sealed murals.
 
-## ASHKAAR — Mt. Cinder (664 1F 44×40, 665 2F 40×36, 666 Caldera 40×40, `:VOLCANIC`, Act II) — "drain the mountain, mind the pressure"
+## ASHKAAR — The Cinderhorn (664 1F 44×40, 665 2F 40×36, 666 Caldera 40×40, `:VOLCANIC`, Act II) — "drain the mountain, mind the pressure"
 **Core rule (Pyrous homage):** opening a **vent** on one floor drains the lava pools of the floor *above* through the
 rock. But every drain raises the **caldera pressure** gauge (V556, 0–5) on the Caldera floor.
 - At 5, the Caldera vents. That is a screen-shake set piece: all lava returns and pressure resets to 0 (a fair reset
@@ -430,7 +430,7 @@ rock. But every drain raises the **caldera pressure** gauge (V556, 0–5) on the
   - Order: B1, B2, bleed, C2, C3 → pressure 3 at the summit.
 - **Mastery:** the Caldera floor's **Earthquake TM26** ledge (WORLD §6) needs C1 drained as well. Exact budget: B1, B2,
   bleed, C1, C2, C3 = pressure 4. One more mistake and it vents.
-- **Ties:** the Caldera Crisis (Ch8, V110 CINDERVAULT_STATE). If Brann vented the caldera (V110 = 1), Mt. Cinder
+- **Ties:** the Caldera Crisis (Ch8, V110 CINDERVAULT_STATE). If Brann vented the caldera (V110 = 1), the Cinderhorn
   starts at pressure 2 and the ash is thicker: the same puzzle with less slack, so the story choice changes the
   difficulty.
 - **State:** V556 pressure, S556–S560 (pools B1, B2, C1, C2, C3 drained); the bleeder is self switch A.

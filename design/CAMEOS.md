@@ -15,7 +15,7 @@ The Festival once invited champions through Antumbra's **Veil Gate**, but the Sy
 
 | # | Cameo (source) | Act / Ch | Kingdom, area | Unlock | Fight (lv) | ID / version |
 |---|---|---|---|---|---|---|
-| 1 | Shelly (Reborn) | I / Ch2 | Elowen, Gossamer Deepwood | after Gym 1 | double, ~17 | `FESTIVAL_SHELLY` 1 (2 = PG) |
+| 1 | Shelly (Reborn) | I / Ch3 | Elowen, Gossamer Deepwood | after Gym 2 | double, ~21 | `FESTIVAL_SHELLY` 1 (2 = PG) |
 | 2 | Venam (Rejuvenation) | II / Ch7 | Nadir, Miasma Caverns under Mirefen | after Gym 6 and J2 | ~38 | `FESTIVAL_VENAM` 1 (2) |
 | 3 | Garret (Desolation) | II / Ch9 | Nadir, Ironreach's lower shafts | after the Conclave (Gym 8) | ~46 | `FESTIVAL_GARRET` 1 (2) |
 | 4 | Melia (Rejuvenation) | III / Ch10 | Elowen, the Royal Chase | after J3 (Gym 9) | ~50 | `FESTIVAL_MELIA` 1 (2) |
@@ -29,14 +29,14 @@ The Festival once invited champions through Antumbra's **Veil Gate**, but the Sy
 
 ## 1. "Lost in the Gossamer" — Shelly (Reborn)
 - **Source ✔:** Reborn's pink-haired **Bug** Gym Leader, who loves throwing bugs at you in **double battles**. ✔ In Reborn's post-game she becomes **Champion**, and insists she isn't the region's Professor "until her credentials arrive next year".
-- **Where/when:** Act I, Ch2, Gossamer Deepwood (`:SILKWOOD`), after Gym 1. It's the first cameo and teaches players that the Glass leaks.
+- **Where/when:** Act I, Ch3, Gossamer Deepwood (`:SILKWOOD`), after Gym 2 (Tamsin's badge and Cut). It's the first cameo and teaches players that the Glass leaks.
 - **Premise:**
   - Silk-moth weavers report "a girl who keeps apologizing to the Bugs" deep in the wood.
   - Shelly fell through a dew-pond's reflection and has spent three days lost, because the Silkwood keeps re-weaving the paths.
   - She's terrified of crowds, so Briarwick's busy looms scare her more than the wood does.
   - The PC finds her, walks her through a small Bleed Veil to the dew-pond she came through, and helps her calm a Bleed-glassed Masquerain guarding it.
   - Before she steps back through, she asks for "one practice battle, so I'm not rusty when I get home".
-- **Fight:** **double battle**, lv ~17, on `:SILKWOOD`. Bug core with a partner, so it's tough for its placement.
+- **Fight:** **double battle**, lv ~21 (after Gym 2 since SPINE Rev 14 swapped Saltmere and Briarwick; trainer data `[FESTIVAL_SHELLY,Shelly,1]`), on `:SILKWOOD`. Bug core with a partner, so it's tough for its placement.
 - **Reward:** **Silver Powder** and a TM (Struggle Bug). Lore: "Your forest sounds like home used to, before the city got sick."
 - **Post-game (v2):** she comes back through the same pond, at lv 100 in doubles.
 

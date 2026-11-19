@@ -1,11 +1,11 @@
-# Route 6 (561). WRITTEN BY layouts/rimewood.py - edit that script.
+# Gullcry Cliffs (561). WRITTEN BY layouts/rimewood.py - edit that script.
 id: 561
-name: Route 6
+name: Gullcry Cliffs
 parent: 0
 rubric: true
 yards_ok: true
 biome: route
-display_name: Route 6 - Gullcry Cliffs
+display_name: Gullcry Cliffs
 bgm: Route 3
 metadata:
   Outdoor: true

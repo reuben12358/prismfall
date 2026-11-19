@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Saltmere, the free port, as three linked 88x72 district maps on the composite city tileset (palette `city`):
-  140 Promenade & Market  (north gate -> Route 4, west gate -> Route 5, east gate -> 147, harbour stairs -> 146)
+  140 Promenade & Market  (north gate -> The Grey Saltings, west gate -> Frostflat Causeway, east gate -> 147, harbour stairs -> 146)
   146 Harbour & Breakwater (warehouse rows, four piers, lighthouse headland, breakwater arm, salt pans)
   147 Old Town             (the Playhouse quarter: timber lanes on a bluff, Pell Playhouse on the top terrace)
 Run:  python3 -I layouts/saltmere_city.py && python3 -I build.py 140 146 147
@@ -48,7 +48,7 @@ def build_140():
     def ys(x): return 65 if 53 <= x <= 64 else 65 + int(round(1.4 * math.sin(x / 6.0) + 1.6 * (vnoise(x, 0, 9, 5.0) - 0.5)))
     for y in range(H):
         for x in range(W):
-            if 41 <= x <= 50 and y < 30: c.ht[y][x] = 1          # the Route 4 road runs up a valley between the two hills
+            if 41 <= x <= 50 and y < 30: c.ht[y][x] = 1          # the Grey Saltings road runs up a valley between the two hills
             if y >= ys(x): c.ht[y][x] = 0
     c.notch(22, 24, 22, 2); c.notch(68, 70, 19, 2)
     # streets: gate roads in setts, the bending high street in brick, hill lanes and alleys in cobblestones

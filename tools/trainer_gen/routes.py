@@ -45,16 +45,16 @@ def ROUTES(P):
                 mon = dict(mon, sp=sp, ab=ab or mon["ab"])
             out.append(mon)
         R.append((note, tt, nm, lose, out, cap if cap is not None else pcap))
-    # Map 520 Route 1 (lv 4-6) - MEADOW: Run Away Pokemon dart into the grass (+1 Speed on entry)
-    t("Map 520 Route 1", "YOUNGSTER", "Pip", "Aw, my squad lost!", [m("LILLIPUP", 4, "RUNAWAY", "JOLLY"), m("SKWOVET", 5, "CHEEKPOUCH", "IMPISH")])
-    t("Map 520 Route 1", "LASS", "Wren", "My birdies! Oh, well done.", [m("PIKIPEK", 4, "KEENEYE", "ADAMANT"), m("FLETCHLING", 5, "BIGPECKS", "JOLLY")])
-    # Route 1 trainers as the script (story/20_SCRIPT_CH0-2.md) and the generated map 520 name them
-    t("Map 520 Route 1", "YOUNGSTER", "Pim", "The dream's fine. The Bidoof needs a minute.", [m("BIDOOF", 5, "SIMPLE", "JOLLY")])
-    t("Map 520 Route 1", "LASS", "Dory", "It's judging me now.", [m("FLETCHLING", 5, "BIGPECKS", "ADAMANT")])
-    # Map 521 Route 2 (lv 6-8) - MEADOW: Run Away, Leaf Guard (always on), Growth x2 tends it into a Flower Garden (Mae's Smoliv)
-    t("Map 521 Route 2", "BUGCATCHER", "Dell", "My Metapod was supposed to evolve this time...", [m("CATERPIE", 6, "RUNAWAY", "HARDY"), m("METAPOD", 7, "SHEDSKIN", "IMPISH")])
-    t("Map 521 Route 2", "CAMPER", "Joss", "Guess I'll go camp somewhere quieter.", [m("ZIGZAGOON", 6, "PICKUP", "JOLLY"), m("SHINX", 7, "INTIMIDATE", "ADAMANT")])
-    t("Map 521 Route 2", "PICNICKER", "Mae", "You can have a sandwich anyway!", [m("FIDOUGH", 7, "OWNTEMPO", "IMPISH"), m("SMOLIV", 7, "EARLYBIRD", "MODEST")])
+    # Map 520 The Ferrymen's Mile (lv 4-6) - MEADOW: Run Away Pokemon dart into the grass (+1 Speed on entry)
+    t("Map 520 The Ferrymen's Mile", "YOUNGSTER", "Pip", "Aw, my squad lost!", [m("LILLIPUP", 4, "RUNAWAY", "JOLLY"), m("SKWOVET", 5, "CHEEKPOUCH", "IMPISH")])
+    t("Map 520 The Ferrymen's Mile", "LASS", "Wren", "My birdies! Oh, well done.", [m("PIKIPEK", 4, "KEENEYE", "ADAMANT"), m("FLETCHLING", 5, "BIGPECKS", "JOLLY")])
+    # The Ferrymen's Mile trainers as the script (story/20_SCRIPT_CH0-2.md) and the generated map 520 name them
+    t("Map 520 The Ferrymen's Mile", "YOUNGSTER", "Pim", "The dream's fine. The Bidoof needs a minute.", [m("BIDOOF", 5, "SIMPLE", "JOLLY")])
+    t("Map 520 The Ferrymen's Mile", "LASS", "Dory", "It's judging me now.", [m("FLETCHLING", 5, "BIGPECKS", "ADAMANT")])
+    # Map 521 Windfall Row (lv 6-8) - MEADOW: Run Away, Leaf Guard (always on), Growth x2 tends it into a Flower Garden (Mae's Smoliv)
+    t("Map 521 Windfall Row", "BUGCATCHER", "Dell", "My Metapod was supposed to evolve this time...", [m("CATERPIE", 6, "RUNAWAY", "HARDY"), m("METAPOD", 7, "SHEDSKIN", "IMPISH")])
+    t("Map 521 Windfall Row", "CAMPER", "Joss", "Guess I'll go camp somewhere quieter.", [m("ZIGZAGOON", 6, "PICKUP", "JOLLY"), m("SHINX", 7, "INTIMIDATE", "ADAMANT")])
+    t("Map 521 Windfall Row", "PICNICKER", "Mae", "You can have a sandwich anyway!", [m("FIDOUGH", 7, "OWNTEMPO", "IMPISH"), m("SMOLIV", 7, "EARLYBIRD", "MODEST")])
     # Map 524 Gossamer Wood (lv 8-10) - SILKWOOD: Swarm is always on, String Shot never misses (-3 Speed), Struggle Bug x1.5.
     # Camper Bram's Sizzlipede is deliberate: its Embers show the player "Embers are catching in the silk..." before the gym.
     t("Map 524 Gossamer Wood", "AROMALADY", "Petra", "What a lovely, fierce scent you have.", [m("CUTIEFLY", 8, "SHIELDDUST", "TIMID"), m("PETILIL", 9, "OWNTEMPO", "MODEST"), m("BUDEW", 9, "NATURALCURE", "MODEST")])
@@ -70,16 +70,16 @@ def ROUTES(P):
     # Map 525 Gossamer Deepwood (lv 11-12) - SILKWOOD: Compound Eyes (x1.1 accuracy here), Swarm; Yanma glides (Bug-type Flying x1.2)
     t("Map 525 Gossamer Deepwood", "BUGCATCHER", "Linden", "The deepwood bugs are tougher than mine...", [m("NINCADA", 11, "COMPOUNDEYES", "ADAMANT"), m("LEDYBA", 11, "SWARM", "JOLLY"), m("RELLOR", 12, "COMPOUNDEYES", "IMPISH")])
     t("Map 525 Gossamer Deepwood", "POKEMONRANGER_F", "Sorrel", "Mind the glass trees. They're spreading.", [m("DEERLING", 11, "SAPSIPPER", "JOLLY"), m("SKIDDO", 12, "SAPSIPPER", "ADAMANT")])
-    # Map 540 Route 3 (lv 12-14) - MEADOW: Run Away (Sentret, Doduo), Fairy Wind x1.5, Sunkern's Growth / Ingrain tend the meadow
-    t("Map 540 Route 3", "FISHERMAN", "Hale", "Reeled in a loss. Happens.", [m("MAGIKARP", 12, "SWIFTSWIM", "HARDY"), m("GOLDEEN", 13, "SWIFTSWIM", "ADAMANT"), m("TYMPOLE", 13, "SWIFTSWIM", "MODEST")])
-    t("Map 540 Route 3", "PICNICKER", "Bryony", "My flowers wilted! Oh well, picnic time.", [m("FLABEBE", 12, "FLOWERVEIL", "MODEST"), m("COTTONEE", 13, "PRANKSTER", "BOLD"), m("SUNKERN", 13, "CHLOROPHYLL", "MODEST")])
-    t("Map 540 Route 3 (double battle)", "TWINS", "Bel & Bea", "Bel: We lost! Bea: Together, though!", [m("MANKEY", 13, "VITALSPIRIT", "JOLLY"), m("PANCHAM", 13, "IRONFIST", "ADAMANT")])
-    t("Map 540 Route 3", "YOUNGSTER", "Corin", "My team's the coolest! ...Was.", [m("SENTRET", 12, "RUNAWAY", "JOLLY"), m("BIDOOF", 13, "SIMPLE", "ADAMANT"), m("DODUO", 14, "EARLYBIRD", "JOLLY")])
-    # Map 541 Route 4 (beach, lv 14-16) - BEACH: Mud-Slap / Mud Shot x2 (Bunnelby, Nacli), Water x1.2, Sand Rush works in the sand
-    t("Map 541 Route 4", "CAMPER", "Ned", "Sand in my tent AND I lost. Great day.", [m("BUNNELBY", 14, "CHEEKPOUCH", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH")])
-    t("Map 541 Route 4", "HIKER", "Dunstan", "Ho! Solid as Brinecut stone, you are.", [m("DWEBBLE", 15, "STURDY", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH", "ROCKTHROW,MUDSHOT,SMACKDOWN,HARDEN"), m("CRABRAWLER", 16, "HYPERCUTTER", "ADAMANT")])
-    t("Map 541 Route 4", "SAILOR", "Morrow", "Blow me down! The Dovetail crew'll hear of this.", [m("FINNEON", 15, "SWIFTSWIM", "JOLLY"), m("REMORAID", 15, "HUSTLE", "MODEST"), m("CRABRAWLER", 15, "IRONFIST", "ADAMANT")])
-    t("Map 541 Route 4", "TUBER_F", "Pip", "Waaah! My floaty popped!", [m("SURSKIT", 14, "SWIFTSWIM", "TIMID"), m("MINCCINO", 15, "CUTECHARM", "JOLLY")])
+    # Map 540 Thistledown Lea (lv 12-14) - MEADOW: Run Away (Sentret, Doduo), Fairy Wind x1.5, Sunkern's Growth / Ingrain tend the meadow
+    t("Map 540 Thistledown Lea", "FISHERMAN", "Hale", "Reeled in a loss. Happens.", [m("MAGIKARP", 12, "SWIFTSWIM", "HARDY"), m("GOLDEEN", 13, "SWIFTSWIM", "ADAMANT"), m("TYMPOLE", 13, "SWIFTSWIM", "MODEST")])
+    t("Map 540 Thistledown Lea", "PICNICKER", "Bryony", "My flowers wilted! Oh well, picnic time.", [m("FLABEBE", 12, "FLOWERVEIL", "MODEST"), m("COTTONEE", 13, "PRANKSTER", "BOLD"), m("SUNKERN", 13, "CHLOROPHYLL", "MODEST")])
+    t("Map 540 Thistledown Lea (double battle)", "TWINS", "Bel & Bea", "Bel: We lost! Bea: Together, though!", [m("MANKEY", 13, "VITALSPIRIT", "JOLLY"), m("PANCHAM", 13, "IRONFIST", "ADAMANT")])
+    t("Map 540 Thistledown Lea", "YOUNGSTER", "Corin", "My team's the coolest! ...Was.", [m("SENTRET", 12, "RUNAWAY", "JOLLY"), m("BIDOOF", 13, "SIMPLE", "ADAMANT"), m("DODUO", 14, "EARLYBIRD", "JOLLY")])
+    # Map 541 The Grey Saltings (beach, lv 14-16) - BEACH: Mud-Slap / Mud Shot x2 (Bunnelby, Nacli), Water x1.2, Sand Rush works in the sand
+    t("Map 541 The Grey Saltings", "CAMPER", "Ned", "Sand in my tent AND I lost. Great day.", [m("BUNNELBY", 14, "CHEEKPOUCH", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH")])
+    t("Map 541 The Grey Saltings", "HIKER", "Dunstan", "Ho! Solid as Brinecut stone, you are.", [m("DWEBBLE", 15, "STURDY", "ADAMANT"), m("NACLI", 15, "PURIFYINGSALT", "IMPISH", "ROCKTHROW,MUDSHOT,SMACKDOWN,HARDEN"), m("CRABRAWLER", 16, "HYPERCUTTER", "ADAMANT")])
+    t("Map 541 The Grey Saltings", "SAILOR", "Morrow", "Blow me down! The Dovetail crew'll hear of this.", [m("FINNEON", 15, "SWIFTSWIM", "JOLLY"), m("REMORAID", 15, "HUSTLE", "MODEST"), m("CRABRAWLER", 15, "IRONFIST", "ADAMANT")])
+    t("Map 541 The Grey Saltings", "TUBER_F", "Pip", "Waaah! My floaty popped!", [m("SURSKIT", 14, "SWIFTSWIM", "TIMID"), m("MINCCINO", 15, "CUTECHARM", "JOLLY")])
     # Map 151-153 Pell Playhouse (Gym 2 actors, lv 15-18) - GRAND_STAGE: sound (Echoed Voice, Disarming Voice), showpieces
     # (Fake Out) and dances (Teeter Dance) raise the applause, so the player sees the stages climb before Dorian
     t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
@@ -98,16 +98,16 @@ def ROUTES(P):
     # Map 546 Thistledown Manor (haunted house, lv 14-15) - HOLLOW_CATHEDRAL: Lick always paralyzes, Night Shade x1.5,
     # Astonish x2, Cursed Body +1 Sp. Def on entry
     t("Map 546 Thistledown Manor", "CHANNELER", "Mireille", "The Players say... you were adequate. High praise.", [m("GASTLY", 14, "LEVITATE", "TIMID", "LICK,CONFUSERAY,HYPNOSIS,PAYBACK"), m("SHUPPET", 14, "CURSEDBODY", "ADAMANT"), m("SINISTEA", 15, "CURSEDBODY", "MODEST")])
-    # Map 560 Route 5 (lv 16-19) - SNOWY_MOUNTAIN: Powder Snow x2, Ice Body heals without hail (no Snow Cloak on Standard)
-    t("Map 560 Route 5", "BIKER", "Rook", "Not THAT Rook. Everybody asks.", [m("GLAMEOW", 17, "OWNTEMPO", "JOLLY"), m("TAUROS", 18, "INTIMIDATE", "JOLLY")])
-    t("Map 560 Route 5", "PICNICKER", "Sela", "Okay, you win the last sandwich.", [m("SKITTY", 16, "CUTECHARM", "TIMID"), m("PHANPY", 17, "PICKUP", "ADAMANT")])
-    t("Map 560 Route 5", "POKEMANIAC", "Ivo", "My precious monsters!", [m("CUBONE", 17, "ROCKHEAD", "ADAMANT"), m("KANGASKHAN", 19, "EARLYBIRD", "ADAMANT")])
-    t("Map 560 Route 5", "RUINMANIAC", "Alder", "The old stones told me I'd lose. I never listen.", [m("HELIOPTILE", 17, "DRYSKIN", "TIMID"), m("DUNSPARCE", 18, "SERENEGRACE", "ADAMANT")])
-    # Map 561 Route 6 (lv 17-20) - MOUNTAIN: Flying x1.2 and wind moves x1.3 for the cliff birds
-    t("Map 561 Route 6", "BIRDKEEPER", "Wren", "My flock scattered! Well flown.", [m("TAILLOW", 17, "GUTS", "JOLLY"), m("DUCKLETT", 18, "KEENEYE", "MODEST"), m("CHATOT", 18, "KEENEYE", "MODEST")])
-    t("Map 561 Route 6", "COOLTRAINER_F", "Astrid", "Cool. You'll do fine in the Tidelock.", [m("ORICORIO", 19, "DANCER", "TIMID"), m("CRAMORANT", 19, "GULPMISSILE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
-    t("Map 561 Route 6", "FISHERMAN", "Kjell", "The sea gives, the sea takes.", [m("MAGIKARP", 17, "SWIFTSWIM", "HARDY"), m("FINNEON", 18, "SWIFTSWIM", "TIMID"), m("WOOPER", 18, "DAMP", "IMPISH")])
-    t("Map 561 Route 6", "SAILOR", "Haldor", "Arr! Isenmar's coast breeds tough kids.", [m("WINGULL", 18, "KEENEYE", "MODEST"), m("SPHEAL", 19, "THICKFAT", "MODEST")])
+    # Map 560 Frostflat Causeway (lv 16-19) - SNOWY_MOUNTAIN: Powder Snow x2, Ice Body heals without hail (no Snow Cloak on Standard)
+    t("Map 560 Frostflat Causeway", "BIKER", "Rook", "Not THAT Rook. Everybody asks.", [m("GLAMEOW", 17, "OWNTEMPO", "JOLLY"), m("TAUROS", 18, "INTIMIDATE", "JOLLY")])
+    t("Map 560 Frostflat Causeway", "PICNICKER", "Sela", "Okay, you win the last sandwich.", [m("SKITTY", 16, "CUTECHARM", "TIMID"), m("PHANPY", 17, "PICKUP", "ADAMANT")])
+    t("Map 560 Frostflat Causeway", "POKEMANIAC", "Ivo", "My precious monsters!", [m("CUBONE", 17, "ROCKHEAD", "ADAMANT"), m("KANGASKHAN", 19, "EARLYBIRD", "ADAMANT")])
+    t("Map 560 Frostflat Causeway", "RUINMANIAC", "Alder", "The old stones told me I'd lose. I never listen.", [m("HELIOPTILE", 17, "DRYSKIN", "TIMID"), m("DUNSPARCE", 18, "SERENEGRACE", "ADAMANT")])
+    # Map 561 Gullcry Cliffs (lv 17-20) - MOUNTAIN: Flying x1.2 and wind moves x1.3 for the cliff birds
+    t("Map 561 Gullcry Cliffs", "BIRDKEEPER", "Wren", "My flock scattered! Well flown.", [m("TAILLOW", 17, "GUTS", "JOLLY"), m("DUCKLETT", 18, "KEENEYE", "MODEST"), m("CHATOT", 18, "KEENEYE", "MODEST")])
+    t("Map 561 Gullcry Cliffs", "COOLTRAINER_F", "Astrid", "Cool. You'll do fine in the Tidelock.", [m("ORICORIO", 19, "DANCER", "TIMID"), m("CRAMORANT", 19, "GULPMISSILE", "MODEST"), m("SNORUNT", 19, "INNERFOCUS", "JOLLY")])
+    t("Map 561 Gullcry Cliffs", "FISHERMAN", "Kjell", "The sea gives, the sea takes.", [m("MAGIKARP", 17, "SWIFTSWIM", "HARDY"), m("FINNEON", 18, "SWIFTSWIM", "TIMID"), m("WOOPER", 18, "DAMP", "IMPISH")])
+    t("Map 561 Gullcry Cliffs", "SAILOR", "Haldor", "Arr! Isenmar's coast breeds tough kids.", [m("WINGULL", 18, "KEENEYE", "MODEST"), m("SPHEAL", 19, "THICKFAT", "MODEST")])
     # Map 564 Gullcry Caves (lv 19-20)
     t("Map 564 Gullcry Caves", "HIKER", "Torvald", "The gulls laugh at me every time.", [m("BINACLE", 19, "TOUGHCLAWS", "ADAMANT"), m("CLOBBOPUS", 20, "LIMBER", "ADAMANT")])
     # Maps 170-173 Tidelock Gym (Gym 3, lv 18-21) - WATER_SURFACE: Swift Swim and Hydration work without rain, Electric is
@@ -121,16 +121,16 @@ def ROUTES(P):
     t("Map 990 Prismfall Test Arena (dummy)", "YOUNGSTER", "Prismtest", "Testing, testing... you win!",
       [m("SNORLAX", 50, "THICKFAT", "HARDY", "TACKLE,DEFENSECURL,REST,SNORE")], cap=50)
     # Trainers the generated maps use that were missing (playtest, 2026-11-17)
-    t("Map 521 Route 2", "BUGCATCHER", "Wim", '...Assistant Warden.', [m("SPINARAK", 6, "SWARM", "ADAMANT"), m("COMBEE", 7, "HONEYGATHER", "HASTY")])
-    t("Map 521 Route 2", "PICNICKER", "Ada", 'Bless you. Bless both of us.', [m("ODDISH", 6, "RUNAWAY", "MODEST"), m("BUDEW", 7, "LEAFGUARD", "MODEST")])
+    t("Map 521 Windfall Row", "BUGCATCHER", "Wim", '...Assistant Warden.', [m("SPINARAK", 6, "SWARM", "ADAMANT"), m("COMBEE", 7, "HONEYGATHER", "HASTY")])
+    t("Map 521 Windfall Row", "PICNICKER", "Ada", 'Bless you. Bless both of us.', [m("ODDISH", 6, "RUNAWAY", "MODEST"), m("BUDEW", 7, "LEAFGUARD", "MODEST")])
     t("Map 524 Gossamer Wood", "TWINS", "Mo & Jo", 'We lost together!', [m("KARRABLAST", 9, "SWARM", "ADAMANT"), m("SHELMET", 9, "HYDRATION", "BOLD")])
     t("Map 131 Loomhouse Gym - Weaving Hall", "BUGCATCHER", "Nell", "Knotted up. Tamsin'll untangle you.", [m("SEWADDLE", 11, "SWARM", "ADAMANT"), m("SPINARAK", 12, "SWARM", "ADAMANT")])
     t("Map 131 Loomhouse Gym - Weaving Hall", "LASS", "Orla", 'See? Never the red shuttle first.', [m("LEDYBA", 11, "SWARM", "JOLLY"), m("SPEWPA", 12, "SHEDSKIN", "BOLD")])
     t("Map 131 Loomhouse Gym - Weaving Hall", "GENTLEMAN", "Bram", 'Sorry. No, wait, you won. Well done.', [m("VENONAT", 12, "COMPOUNDEYES", "MODEST"), m("SEWADDLE", 13, "SWARM", "ADAMANT")])
     t("Map 525 Gossamer Deepwood", "POKEMANIAC", "Ferris", 'That one hummed. Did you hear it hum?', [m("PARAS", 11, "EFFECTSPORE", "ADAMANT"), m("NINCADA", 11, "COMPOUNDEYES", "JOLLY"), m("YANMA", 12, "SPEEDBOOST", "MODEST")])
-    t("Map 560 Route 5", "LASS", "Tilde", 'My Swinub slid farther than me.', [m("SWINUB", 16, "OBLIVIOUS", "ADAMANT"), m("SNOM", 17, "SHIELDDUST", "MODEST")])
-    t("Map 560 Route 5", "SAILOR", "Haakon", "Ice'll break by summer. Probably.", [m("SPHEAL", 17, "ICEBODY", "MODEST"), m("CETODDLE", 18, "THICKFAT", "ADAMANT")])
-    t("Map 560 Route 5", "BIRDKEEPER", "Ailsa", "Frostwick's gulls wear little ice hats. Not really.", [m("WINGULL", 17, "KEENEYE", "MODEST"), m("DELIBIRD", 18, "HUSTLE", "JOLLY")])
+    t("Map 560 Frostflat Causeway", "LASS", "Tilde", 'My Swinub slid farther than me.', [m("SWINUB", 16, "OBLIVIOUS", "ADAMANT"), m("SNOM", 17, "SHIELDDUST", "MODEST")])
+    t("Map 560 Frostflat Causeway", "SAILOR", "Haakon", "Ice'll break by summer. Probably.", [m("SPHEAL", 17, "ICEBODY", "MODEST"), m("CETODDLE", 18, "THICKFAT", "ADAMANT")])
+    t("Map 560 Frostflat Causeway", "BIRDKEEPER", "Ailsa", "Frostwick's gulls wear little ice hats. Not really.", [m("WINGULL", 17, "KEENEYE", "MODEST"), m("DELIBIRD", 18, "HUSTLE", "JOLLY")])
     # Map 562 The Rimewood - SILKWOOD under snow: Bug x1.5 (Snom, Tarountula), String Shot never misses
     t("Map 562 The Rimewood", "BUGCATCHER", "Pell", 'They were NOT happy to be woken.', [m("SNOM", 18, "SHIELDDUST", "MODEST"), m("TAROUNTULA", 19, "INSOMNIA", "ADAMANT")])
     t("Map 562 The Rimewood", "POKEMONRANGER_F", "Orla", "You'll do. Mind the silk curtains, they cut.", [m("DEERLING", 18, "SAPSIPPER", "JOLLY"), m("SNOVER", 19, "SNOWWARNING", "MODEST"), m("STANTLER", 20, "INTIMIDATE", "ADAMANT")])

@@ -15,16 +15,16 @@ raw: data/raw/524.npy
 tileset: 53
 events:
 - type: warp
-  name: To Route 2
+  name: To Windfall Row
   at: [23, 57]
   link: R2_WOOD
   arrive: [23, 56, up]
 - type: warp
-  name: To Route 2 b
+  name: To Windfall Row b
   at: [22, 57]
   to: {map: 521, x: 1, y: 9, dir: left}
 - type: warp
-  name: To Route 2 c
+  name: To Windfall Row c
   at: [24, 57]
   to: {map: 521, x: 1, y: 11, dir: left}
 - type: warp

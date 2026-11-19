@@ -32,7 +32,8 @@ module Prismfall
       :stub,       # true = designed only, not wired on a map yet (hidden from boards)
       :tags,       # [Symbols] e.g. [:chase, :boss, :kindness, :cameo]
       :touches,    # String, which choices / bonds / standing it can move (info)
-      :hidden      # true = never listed (unasked kindnesses, secret quests)
+      :hidden,     # true = never listed (unasked kindnesses, secret quests)
+      :design      # String: twist / humour / staging notes for stubs (doc only)
     ].freeze
 
     @quests = {}
@@ -87,11 +88,13 @@ module Prismfall
       :catchable,  # default true for :battle
       :boss,       # Prismfall Bosses definition Hash (bars, stat_mults, breaks ...)
       :joins,      # after a :boss win: Hash of overrides for the Pokemon that joins (e.g. { :level => 13 })
+      :join_choice, # true = the quest script asks first ({ :join => :ID }) instead of joining automatically
       :on_ko,      # :retry (default: can be fought again) or :lost (gone for good)
       :intro,      # message before the battle
       :variants,   # { variant => overrides } (e.g. Smeargle palettes)
       # design info (shown by the doc tool, not used by the engine)
-      :where, :map, :chapter, :quest, :why, :trigger
+      :where, :map, :chapter, :quest, :why, :trigger,
+      :stub        # true = designed only (not placed yet)
     ].freeze
 
     @mons  = {}

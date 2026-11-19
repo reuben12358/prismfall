@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Briarwick (120) on the PF Rejuv sheet (tileset 50 "PF Rejuv Village"), 72x64.  MAPGEN 2h.
-A Sheridan-style forest village: old-growth lattice forest on every side, a stream down the west with the Route 3 road
+A Sheridan-style forest village: old-growth lattice forest on every side, a stream down the west with the Thistledown Lea road
 crossing it on a raised plank walkway (rows 30-31), the north ridge (h=1) under Sheridan cliffs with the elder tree
 Loomhouse on its knoll and the Loyal Three shrine at its west end, giant hollow trees (Prismfall's own art, re-graded
 to Sheridan greens) as the Guildhall, Treetop House and Cutter's House, Sheridan timber houses for the Help Center,
@@ -47,7 +47,7 @@ def deck(m, x0, y0, w, h, stairs=None):
         m.tile(DECK['legL' if x == x0 else 'legR' if x == x0 + w - 1 else 'leg'], x, y0 + h, 1); m.cls[y0 + h, x] = 'B'
     if stairs is not None:
         for i, x in enumerate((stairs, stairs + 1)):
-            m.tile(K.RMap.STAIRS[0 if i == 0 else 2], x, y0 + h, 2); m.cls[y0 + h, x] = 'd'
+            m.tile(m.STAIRS[0 if i == 0 else 2], x, y0 + h, 2); m.cls[y0 + h, x] = 'd'
 
 
 def walkway(m, x0, x1, y):
@@ -88,7 +88,7 @@ def build(preview=None):
     m.plan_cliffs()
     LN = dict(c='d', only='.tT')
     m.blob(40.5, 33.0, 8.4, 5.0, 'd', seed=51, rough=0.3, only='.tT')            # the green: an oval of trodden earth
-    m.rect(0, 30, 16, 2, 'd', only='.T')                                         # Route 3 road (rows 30-31) from the west edge
+    m.rect(0, 30, 16, 2, 'd', only='.T')                                         # Thistledown Lea road (rows 30-31) from the west edge
     m.lane([(15, 31), (21, 31.4), (27, 32.4), (32.5, 33)], w=2.6, seed=52, wobble=0.2, **LN)
     m.rect(35, 18, 3, 1, 'd', only='.tT')
     m.lane([(36.5, 18.5), (37.2, 21.5), (39.2, 24.6), (40, 28.4)], w=2.8, seed=53, wobble=0.2, **LN)   # down from the Loomhouse
@@ -137,7 +137,7 @@ def build(preview=None):
     deck(m, 51, 52, 5, 3, stairs=52)                         # lantern decks, south-east
     deck(m, 59, 52, 5, 3, stairs=61)
     walkway(m, 56, 58, 52)
-    walkway(m, sx(30) - 2, sx(31) + 4, 30)                   # the Route 3 road over the stream
+    walkway(m, sx(30) - 2, sx(31) + 4, 30)                   # the Thistledown Lea road over the stream
     # ---------------------------------------------------------------- events
     P('To Gossamer Wood', (35, 63)); P('To Gossamer Wood b', (36, 63))
     P('Arrival', (34, 62)); P('Juno (arrival)', (36, 61)); P('Stage manager', (37, 62))

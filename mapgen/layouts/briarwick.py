@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Briarwick (120): the weavers' village among giant trees and silk, 72x64, palette `village`, at lantern-lit dusk.
-No crossroads: the Gossamer lane winds up from the south around the boles to an off-centre green; the Route 3 road
+No crossroads: the Gossamer lane winds up from the south around the boles to an off-centre green; the Thistledown Lea road
 crosses the stream on a raised plank walkway and joins the lane below the green; the pylon lane leaves the green's east
 side; stairs climb the knoll to the Loomhouse, the one enormous elder tree. Height: the knoll, two raised timber decks
 (the weavers' deck beside the Guildhall tree, the lantern decks in the south-east joined by a walkway) reached by
@@ -107,7 +107,7 @@ def build():
     for y in range(H):
         for x in range(W):
             if c.g[y][x] == 'C' and c.ht[y][x] < 0: c.g[y][x] = '~'; c.taken[y][x] = False
-    # ---- raised decks and the walkway over the stream (the Route 3 road crosses on it)
+    # ---- raised decks and the walkway over the stream (the Thistledown Lea road crosses on it)
     walkway(c, sx(30) - 3, sx(31) + 5, 30)
     deck(c, 24, 26, 7, 5, stairs=(26, 27))                         # the weavers' deck, beside the Guildhall tree
     deck(c, 50, 51, 7, 4, stairs=(52, 53), open_sides='E')       # the lantern decks, south-east

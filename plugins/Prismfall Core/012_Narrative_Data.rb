@@ -60,9 +60,10 @@ module Prismfall
     CHOICES = {
       # ---- Prologue / Act I
       :pro_fellowship         => { :values => [:accept, :decline, :silent], :once => true, :description => "P: Voss's Meridian Fellowship card" },
-      :ch2_matriarch          => { :values => [:soothe, :silence], :once => true, :description => "Ch2: the beaten Glass Matriarch - wait it out, or force the Imprint out" },
-      :ch2_tamsin             => { :values => [:expose, :help_confess, :keep_secret], :once => true, :description => "Ch2: Tamsin's secret Lattice contract" },
-      :ch3_juno_talk          => { :values => [:told, :deflect, :silent], :once => true, :description => "Ch3: tell Juno about the NULL scan" },
+      # SPINE Revision 14: Saltmere is Ch2 (Gym 1), Briarwick Ch3 (Gym 2). Keys keep their old chapter prefixes.
+      :ch3_juno_talk          => { :values => [:told, :deflect, :silent], :once => true, :description => "Ch2: tell Juno about the NULL scan (Saltmere breakwater)" },
+      :ch2_tamsin             => { :values => [:expose, :help_confess, :keep_secret], :once => true, :description => "Ch3: Tamsin's secret Lattice contract" },
+      :ch2_matriarch          => { :values => [:soothe, :silence], :once => true, :description => "Ch3: the beaten Glass Matriarch - wait it out, or force the Imprint out" },
       :ch4_kestrel_mourner    => { :values => [:kind, :blunt, :silent], :once => true, :description => "Ch4: is the Mourner his mother?" },
       :ch4_teo                => { :values => [:report, :keep_secret, :confront], :once => true, :description => "Ch4: Marisol tipping off Teo's cell" },
       :ch5_lowlight_testimony => { :values => [:mourner, :someone_else, :unknown], :once => true, :description => "Ch5: what the PC tells the Directorate" },
@@ -234,9 +235,10 @@ module Prismfall
     }
 
     # Wardens' Consent, gym order (index = gym - 1). A Warden who doesn't consent refuses to release their Plate in the Arceus fight.
+    # SPINE Revision 14: rows 1-2 follow GYMS (001_Config.rb): Dorian is Gym 1, Tamsin Gym 2.
     WARDEN_CONSENT = [
-      "choice(:ch2_tamsin) != :keep_secret",                          #  1 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
-      "choice(:ch5_lowlight_testimony) != :mourner",                  #  2 Dorian  - you told the official story on record; he keeps the lie he knows
+      "choice(:ch5_lowlight_testimony) != :mourner",                  #  1 Dorian  - you told the official story on record; he keeps the lie he knows
+      "choice(:ch2_tamsin) != :keep_secret",                          #  2 Tamsin  - the pylon still drains Briarwick; she can't afford to let go
       "(flag(:TEO_SAVED) || bond(:MARISOL) >= 3) && !flag(:ISENMAR_EMBITTERED)",                    #  3 Marisol
       "flag(:ROOK_CUTS_GRID) || flag(:MARCHETTI_TURNED)",             #  4 Rook    - the Zap Plate is in Meridian's vault; he can only release what he can reach
       "choice(:ch6_drillsite) != :directorate",                       #  5 Sahar

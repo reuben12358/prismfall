@@ -84,8 +84,8 @@ Pokemon = KECLEON,13
 [LEADER_TAMSIN,Tamsin]
 Items = SUPERPOTION
 LoseText = Oh! You've unpicked every stitch. Well sewn, challenger.
-Pokemon = JOLTIK,15
-    Moves = ELECTROWEB,ABSORB,STRINGSHOT,PROTECT
+Pokemon = JOLTIK,14
+    Moves = ELECTROWEB,ABSORB,STRINGSHOT,FURYCUTTER
     Ability = COMPOUNDEYES
     Item = ORANBERRY
     Nature = HARDY
@@ -113,7 +113,7 @@ Pokemon = SWADLOON,19
 [LEADER_TAMSIN,Tamsin,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Oh! You've unpicked every stitch. Well sewn, challenger.
-Pokemon = JOLTIK,16
+Pokemon = JOLTIK,15
     Moves = ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT
     Ability = COMPOUNDEYES
     Item = FOCUSSASH
@@ -152,7 +152,7 @@ Pokemon = SWADLOON,19
 #-------------------------------
 [LEADER_TAMSIN,Tamsin,200]
 LoseText = Oh! You've unpicked every stitch. Well sewn, challenger.
-Pokemon = JOLTIK,13
+Pokemon = JOLTIK,12
     Moves = ELECTROWEB,FURYCUTTER,ABSORB,PROTECT
     Ability = COMPOUNDEYES
     Item = ORANBERRY
@@ -177,7 +177,7 @@ Pokemon = SWADLOON,17
 # Gym 3 - Marisol - field :WATER_SURFACE - cap 23
 #-------------------------------
 [LEADER_MARISOL,Marisol]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = Ha! Tide's turned. Take the badge before I change my mind.
 Pokemon = PELIPPER,20
     Moves = WATERGUN,WINGATTACK,SUPERSONIC,PROTECT
@@ -199,14 +199,14 @@ Pokemon = FLOATZEL,21
     IV = 12
 Pokemon = GYARADOS,23
     Name = Lucky
-    Moves = WATERFALL,BITE,ICEFANG,DIVE
+    Moves = BRINE,BITE,ICEFANG,DIVE
     Ability = INTIMIDATE
     Item = SITRUSBERRY
-    Nature = ADAMANT
+    Nature = HARDY
     IV = 12
 #-------------------------------
 [LEADER_MARISOL,Marisol,100]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = Ha! Tide's turned. Take the badge before I change my mind.
 Pokemon = PELIPPER,21
     Moves = WATERPULSE,AIRSLASH,ROOST,TAILWIND
@@ -246,7 +246,6 @@ Pokemon = GYARADOS,23
     EV = 4,252,0,252,0,0
 #-------------------------------
 [LEADER_MARISOL,Marisol,200]
-Items = SUPERPOTION
 LoseText = Ha! Tide's turned. Take the badge before I change my mind.
 Pokemon = PELIPPER,18
     Moves = WATERGUN,WINGATTACK,SUPERSONIC,PROTECT
@@ -267,7 +266,7 @@ Pokemon = GYARADOS,21
     Moves = BITE,TWISTER,BRINE,LEER
     Ability = INTIMIDATE
     Item = SITRUSBERRY
-    Nature = ADAMANT
+    Nature = HARDY
     IV = 4
     EV = 0
 # Gym 4 - Rook - field :NEON_GRID - cap 27
@@ -1739,6 +1738,12 @@ Pokemon = HONCHKROW,70
 [LEADER_CELESTINE,Celestine]
 Items = FULLRESTORE,FULLRESTORE
 LoseText = And so the tale turns its final page. Happily, I hope.
+Pokemon = TINKATON,79
+    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
 Pokemon = ALCREMIE,78
     Moves = DECORATE,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
@@ -1756,12 +1761,6 @@ Pokemon = AZUMARILL,79
     Ability = HUGEPOWER
     Item = SITRUSBERRY
     Nature = ADAMANT
-    IV = 31
-Pokemon = TINKATON,79
-    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
     IV = 31
 Pokemon = TOGEKISS,79
     Name = Vigilant
@@ -1781,6 +1780,13 @@ Pokemon = SYLVEON,80
 [LEADER_CELESTINE,Celestine,100]
 Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
 LoseText = And so the tale turns its final page. Happily, I hope.
+Pokemon = TINKATON,80
+    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
 Pokemon = ALCREMIE,79
     Moves = CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
@@ -1802,13 +1808,6 @@ Pokemon = AZUMARILL,80
     Nature = ADAMANT
     IV = 31
     EV = 252,252,0,0,0,4
-Pokemon = TINKATON,80
-    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
-    IV = 31
-    EV = 4,252,0,252,0,0
 Pokemon = TOGEKISS,80
     Name = Vigilant
     Moves = FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE
@@ -1829,6 +1828,13 @@ Pokemon = SYLVEON,80
 [LEADER_CELESTINE,Celestine,200]
 Items = FULLRESTORE
 LoseText = And so the tale turns its final page. Happily, I hope.
+Pokemon = TINKATON,75
+    Moves = GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
 Pokemon = ALCREMIE,74
     Moves = DECORATE,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
@@ -1841,13 +1847,6 @@ Pokemon = AZUMARILL,75
     Ability = THICKFAT
     Item = SITRUSBERRY
     Nature = ADAMANT
-    IV = 20
-    EV = 0
-Pokemon = TINKATON,75
-    Moves = GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
     IV = 20
     EV = 0
 Pokemon = TOGEKISS,75
@@ -2107,7 +2106,7 @@ Pokemon = BULBASAUR,4
 # K2
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,20]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,19
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR
@@ -2130,7 +2129,7 @@ Pokemon = CHARMELEON,21
     IV = 12
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,120]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,20
     Moves = WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN
@@ -2163,7 +2162,6 @@ Pokemon = CHARMELEON,22
     EV = 0,128,0,252,128,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,220]
-Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,17
     Name = Morwen
@@ -2182,7 +2180,7 @@ Pokemon = CHARMELEON,19
     EV = 0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,21]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,19
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR
@@ -2205,7 +2203,7 @@ Pokemon = WARTORTLE,21
     IV = 12
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,121]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,20
     Moves = WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN
@@ -2238,7 +2236,6 @@ Pokemon = WARTORTLE,22
     EV = 4,252,0,252,0,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,221]
-Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,17
     Name = Morwen
@@ -2257,7 +2254,7 @@ Pokemon = WARTORTLE,19
     EV = 0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,22]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,19
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR
@@ -2280,7 +2277,7 @@ Pokemon = IVYSAUR,21
     IV = 12
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,122]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = STARAVIA,20
     Moves = WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN
@@ -2313,7 +2310,6 @@ Pokemon = IVYSAUR,22
     EV = 4,252,0,252,0,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,222]
-Items = SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,17
     Name = Morwen
@@ -6446,7 +6442,7 @@ Pokemon = TSAREENA,93
 #===============================================================================
 # ROUTE & GYM TRAINERS (stock trainer types; map ids from maps_out/trainers_needed.txt)
 #===============================================================================
-# Map 520 Route 1
+# Map 520 The Ferrymen's Mile
 #-------------------------------
 [YOUNGSTER,Pip]
 LoseText = Aw, my squad lost!
@@ -6482,7 +6478,7 @@ Pokemon = SKWOVET,4
     Nature = IMPISH
     IV = 0
     EV = 0
-# Map 520 Route 1
+# Map 520 The Ferrymen's Mile
 #-------------------------------
 [LASS,Wren]
 LoseText = My birdies! Oh, well done.
@@ -6518,7 +6514,7 @@ Pokemon = FLETCHLING,4
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 520 Route 1
+# Map 520 The Ferrymen's Mile
 #-------------------------------
 [YOUNGSTER,Pim]
 LoseText = The dream's fine. The Bidoof needs a minute.
@@ -6541,7 +6537,7 @@ Pokemon = BIDOOF,4
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 520 Route 1
+# Map 520 The Ferrymen's Mile
 #-------------------------------
 [LASS,Dory]
 LoseText = It's judging me now.
@@ -6564,7 +6560,7 @@ Pokemon = FLETCHLING,4
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 521 Route 2
+# Map 521 Windfall Row
 #-------------------------------
 [BUGCATCHER,Dell]
 LoseText = My Metapod was supposed to evolve this time...
@@ -6600,7 +6596,7 @@ Pokemon = METAPOD,15
     Nature = IMPISH
     IV = 0
     EV = 0
-# Map 521 Route 2
+# Map 521 Windfall Row
 #-------------------------------
 [CAMPER,Joss]
 LoseText = Guess I'll go camp somewhere quieter.
@@ -6636,7 +6632,7 @@ Pokemon = LUXIO,15
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 521 Route 2
+# Map 521 Windfall Row
 #-------------------------------
 [PICNICKER,Mae]
 LoseText = You can have a sandwich anyway!
@@ -7076,7 +7072,7 @@ Pokemon = SKIDDO,19
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 540 Route 3
+# Map 540 Thistledown Lea
 #-------------------------------
 [FISHERMAN,Hale]
 LoseText = Reeled in a loss. Happens.
@@ -7125,7 +7121,7 @@ Pokemon = TYMPOLE,15
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 540 Route 3
+# Map 540 Thistledown Lea
 #-------------------------------
 [PICNICKER,Bryony]
 LoseText = My flowers wilted! Oh well, picnic time.
@@ -7174,7 +7170,7 @@ Pokemon = SUNKERN,15
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 540 Route 3 (double battle)
+# Map 540 Thistledown Lea (double battle)
 #-------------------------------
 [TWINS,Bel & Bea]
 LoseText = Bel: We lost! Bea: Together, though!
@@ -7210,7 +7206,7 @@ Pokemon = PANCHAM,15
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 540 Route 3
+# Map 540 Thistledown Lea
 #-------------------------------
 [YOUNGSTER,Corin]
 LoseText = My team's the coolest! ...Was.
@@ -7259,7 +7255,7 @@ Pokemon = DODUO,16
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 541 Route 4
+# Map 541 The Grey Saltings
 #-------------------------------
 [CAMPER,Ned]
 LoseText = Sand in my tent AND I lost. Great day.
@@ -7295,7 +7291,7 @@ Pokemon = NACLI,8
     Nature = IMPISH
     IV = 0
     EV = 0
-# Map 541 Route 4
+# Map 541 The Grey Saltings
 #-------------------------------
 [HIKER,Dunstan]
 LoseText = Ho! Solid as Brinecut stone, you are.
@@ -7347,7 +7343,7 @@ Pokemon = CRABRAWLER,9
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 541 Route 4
+# Map 541 The Grey Saltings
 #-------------------------------
 [SAILOR,Morrow]
 LoseText = Blow me down! The Dovetail crew'll hear of this.
@@ -7396,7 +7392,7 @@ Pokemon = CRABRAWLER,8
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 541 Route 4
+# Map 541 The Grey Saltings
 #-------------------------------
 [TUBER_F,Pip]
 LoseText = Waaah! My floaty popped!
@@ -7899,7 +7895,7 @@ Pokemon = SINISTEA,16
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [BIKER,Rook]
 LoseText = Not THAT Rook. Everybody asks.
@@ -7935,7 +7931,7 @@ Pokemon = TAUROS,17
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [PICNICKER,Sela]
 LoseText = Okay, you win the last sandwich.
@@ -7971,7 +7967,7 @@ Pokemon = PHANPY,16
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [POKEMANIAC,Ivo]
 LoseText = My precious monsters!
@@ -8007,7 +8003,7 @@ Pokemon = KANGASKHAN,18
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [RUINMANIAC,Alder]
 LoseText = The old stones told me I'd lose. I never listen.
@@ -8043,7 +8039,7 @@ Pokemon = DUNSPARCE,17
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 561 Route 6
+# Map 561 Gullcry Cliffs
 #-------------------------------
 [BIRDKEEPER,Wren]
 LoseText = My flock scattered! Well flown.
@@ -8092,7 +8088,7 @@ Pokemon = CHATOT,17
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 561 Route 6
+# Map 561 Gullcry Cliffs
 #-------------------------------
 [COOLTRAINER_F,Astrid]
 LoseText = Cool. You'll do fine in the Tidelock.
@@ -8141,7 +8137,7 @@ Pokemon = SNORUNT,18
     Nature = JOLLY
     IV = 0
     EV = 0
-# Map 561 Route 6
+# Map 561 Gullcry Cliffs
 #-------------------------------
 [FISHERMAN,Kjell]
 LoseText = The sea gives, the sea takes.
@@ -8190,7 +8186,7 @@ Pokemon = WOOPER,17
     Nature = IMPISH
     IV = 0
     EV = 0
-# Map 561 Route 6
+# Map 561 Gullcry Cliffs
 #-------------------------------
 [SAILOR,Haldor]
 LoseText = Arr! Isenmar's coast breeds tough kids.
@@ -8473,7 +8469,7 @@ Pokemon = SNORLAX,49
     Nature = HARDY
     IV = 0
     EV = 0
-# Map 521 Route 2
+# Map 521 Windfall Row
 #-------------------------------
 [BUGCATCHER,Wim]
 LoseText = ...Assistant Warden.
@@ -8509,7 +8505,7 @@ Pokemon = COMBEE,15
     Nature = HASTY
     IV = 0
     EV = 0
-# Map 521 Route 2
+# Map 521 Windfall Row
 #-------------------------------
 [PICNICKER,Ada]
 LoseText = Bless you. Bless both of us.
@@ -8738,7 +8734,7 @@ Pokemon = YANMA,19
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [LASS,Tilde]
 LoseText = My Swinub slid farther than me.
@@ -8774,7 +8770,7 @@ Pokemon = SNOM,16
     Nature = MODEST
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [SAILOR,Haakon]
 LoseText = Ice'll break by summer. Probably.
@@ -8810,7 +8806,7 @@ Pokemon = CETODDLE,17
     Nature = ADAMANT
     IV = 0
     EV = 0
-# Map 560 Route 5
+# Map 560 Frostflat Causeway
 #-------------------------------
 [BIRDKEEPER,Ailsa]
 LoseText = Frostwick's gulls wear little ice hats. Not really.
@@ -9159,7 +9155,7 @@ Pokemon = PHANTUMP,16
 # Map 160 Ebbmouth - Teo Reyes, Ebbmouth Hollow cell (recurring: later battles use versions 1, 2, ...)
 #-------------------------------
 [HOLLOW_TEO,Teo]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = Tell my sister— no. Don't tell her anything.
 Pokemon = CARVANHA,19
     Moves = AQUAJET,BITE,POISONFANG,SCARYFACE
@@ -9182,7 +9178,7 @@ Pokemon = CHEWTLE,21
     IV = 12
 #-------------------------------
 [HOLLOW_TEO,Teo,100]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = Tell my sister— no. Don't tell her anything.
 Pokemon = CARVANHA,20
     Moves = AQUAJET,CRUNCH,POISONFANG,ICEFANG
@@ -9215,7 +9211,6 @@ Pokemon = CHEWTLE,22
     EV = 252,252,4,0,0,0
 #-------------------------------
 [HOLLOW_TEO,Teo,200]
-Items = SUPERPOTION
 LoseText = Tell my sister— no. Don't tell her anything.
 Pokemon = ARROKUDA,18
     Moves = AQUAJET,BITE,FURYATTACK,AGILITY
@@ -12592,13 +12587,19 @@ Pokemon = ZYGARDE,92
 [LEADER_CELESTINE,Celestine,92]
 Items = FULLRESTORE,FULLRESTORE
 LoseText = Wrong key, right door. ...Go on.
-Pokemon = ALCREMIE,88
+Pokemon = TINKATON,88
+    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+Pokemon = ALCREMIE,89
     Moves = CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
     Item = MAGICALSEED
     Nature = BOLD
     IV = 31
-Pokemon = MIMIKYU,89
+Pokemon = MIMIKYU,90
     Moves = PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE
     Ability = DISGUISE
     Item = LIFEORB
@@ -12609,12 +12610,6 @@ Pokemon = AZUMARILL,90
     Ability = HUGEPOWER
     Item = SITRUSBERRY
     Nature = ADAMANT
-    IV = 31
-Pokemon = TINKATON,90
-    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
     IV = 31
 Pokemon = TOGEKISS,91
     Name = Vigilant
@@ -12634,14 +12629,21 @@ Pokemon = SYLVEON,92
 [LEADER_CELESTINE,Celestine,192]
 Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
 LoseText = Wrong key, right door. ...Go on.
-Pokemon = ALCREMIE,89
+Pokemon = TINKATON,89
+    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = ALCREMIE,90
     Moves = CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
     Item = MAGICALSEED
     Nature = BOLD
     IV = 31
     EV = 252,0,4,0,252,0
-Pokemon = MIMIKYU,90
+Pokemon = MIMIKYU,91
     Moves = PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE
     Ability = DISGUISE
     Item = LIFEORB
@@ -12655,13 +12657,6 @@ Pokemon = AZUMARILL,91
     Nature = ADAMANT
     IV = 31
     EV = 252,252,0,0,0,4
-Pokemon = TINKATON,91
-    Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
-    IV = 31
-    EV = 4,252,0,252,0,0
 Pokemon = TOGEKISS,92
     Name = Vigilant
     Moves = FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE
@@ -12682,14 +12677,21 @@ Pokemon = SYLVEON,92
 [LEADER_CELESTINE,Celestine,292]
 Items = FULLRESTORE
 LoseText = Wrong key, right door. ...Go on.
-Pokemon = ALCREMIE,84
+Pokemon = TINKATON,84
+    Moves = GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK
+    Ability = MOLDBREAKER
+    Item = SITRUSBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+Pokemon = ALCREMIE,85
     Moves = CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER
     Ability = AROMAVEIL
     Item = LEFTOVERS
     Nature = BOLD
     IV = 20
     EV = 0
-Pokemon = MIMIKYU,85
+Pokemon = MIMIKYU,86
     Moves = PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE
     Ability = DISGUISE
     Item = LIFEORB
@@ -12701,13 +12703,6 @@ Pokemon = AZUMARILL,86
     Ability = THICKFAT
     Item = SITRUSBERRY
     Nature = ADAMANT
-    IV = 20
-    EV = 0
-Pokemon = TINKATON,86
-    Moves = GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK
-    Ability = MOLDBREAKER
-    Item = SITRUSBERRY
-    Nature = JOLLY
     IV = 20
     EV = 0
 Pokemon = TOGEKISS,87
@@ -14272,6 +14267,12 @@ Pokemon = HONCHKROW,70
 [LEADER_CELESTINE,Celestine,1]
 Items = FULLRESTORE,FULLRESTORE
 LoseText = Every tale has a verse of none. You found it.
+Pokemon = AZUMARILL,79
+    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
+    Ability = HUGEPOWER
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
 Pokemon = TINKATON,79
     Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
     Ability = MOLDBREAKER
@@ -14289,12 +14290,6 @@ Pokemon = MIMIKYU,78
     Ability = DISGUISE
     Item = LIFEORB
     Nature = JOLLY
-    IV = 31
-Pokemon = AZUMARILL,79
-    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
-    Ability = HUGEPOWER
-    Item = SITRUSBERRY
-    Nature = ADAMANT
     IV = 31
 Pokemon = TOGEKISS,79
     Name = Vigilant
@@ -14314,6 +14309,13 @@ Pokemon = SYLVEON,80
 [LEADER_CELESTINE,Celestine,101]
 Items = FULLRESTORE,FULLRESTORE,FULLRESTORE
 LoseText = Every tale has a verse of none. You found it.
+Pokemon = AZUMARILL,80
+    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
+    Ability = HUGEPOWER
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
 Pokemon = TINKATON,80
     Moves = FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF
     Ability = MOLDBREAKER
@@ -14335,13 +14337,6 @@ Pokemon = MIMIKYU,79
     Nature = JOLLY
     IV = 31
     EV = 4,252,0,252,0,0
-Pokemon = AZUMARILL,80
-    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
-    Ability = HUGEPOWER
-    Item = SITRUSBERRY
-    Nature = ADAMANT
-    IV = 31
-    EV = 252,252,0,0,0,4
 Pokemon = TOGEKISS,80
     Name = Vigilant
     Moves = FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE
@@ -14362,6 +14357,13 @@ Pokemon = SYLVEON,80
 [LEADER_CELESTINE,Celestine,201]
 Items = FULLRESTORE
 LoseText = Every tale has a verse of none. You found it.
+Pokemon = AZUMARILL,75
+    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
 Pokemon = TINKATON,75
     Moves = GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK
     Ability = MOLDBREAKER
@@ -14381,13 +14383,6 @@ Pokemon = MIMIKYU,74
     Ability = DISGUISE
     Item = LIFEORB
     Nature = JOLLY
-    IV = 20
-    EV = 0
-Pokemon = AZUMARILL,75
-    Moves = AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM
-    Ability = THICKFAT
-    Item = SITRUSBERRY
-    Nature = ADAMANT
     IV = 20
     EV = 0
 Pokemon = TOGEKISS,75
@@ -15003,7 +14998,7 @@ Pokemon = LAPRAS,96
 # Shelly (FESTIVAL_SHELLY) v1 - ace 21
 #-------------------------------
 [FESTIVAL_SHELLY,Shelly,1]
-Items = SUPERPOTION,SUPERPOTION
+Items = SUPERPOTION
 LoseText = S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
 Pokemon = MASQUERAIN,20
     Moves = STRUGGLEBUG,BUBBLEBEAM,QUICKATTACK,STICKYWEB
@@ -15031,7 +15026,7 @@ Pokemon = SCYTHER,21
     IV = 12
 #-------------------------------
 [FESTIVAL_SHELLY,Shelly,101]
-Items = HYPERPOTION,HYPERPOTION
+Items = SUPERPOTION,SUPERPOTION
 LoseText = S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
 Pokemon = MASQUERAIN,21
     Moves = STRUGGLEBUG,BUBBLEBEAM,QUICKATTACK,STICKYWEB
@@ -15070,7 +15065,6 @@ Pokemon = SCYTHER,21
     EV = 4,252,0,252,0,0
 #-------------------------------
 [FESTIVAL_SHELLY,Shelly,201]
-Items = SUPERPOTION
 LoseText = S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
 Pokemon = MASQUERAIN,18
     Moves = STRUGGLEBUG,BUBBLEBEAM,QUICKATTACK,STICKYWEB

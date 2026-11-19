@@ -1577,7 +1577,7 @@ events:
           - right
 - type: trainer
   at:
-  - 10
+  - 11
   - 18
   sight: 2
   dir: right
@@ -1591,7 +1591,7 @@ events:
   - setBattleRule("field", :GRAND_STAGE)
 - type: trainer
   at:
-  - 14
+  - 13
   - 14
   sight: 2
   dir: left
@@ -1606,7 +1606,7 @@ events:
 - type: trainer
   at:
   - 1
-  - 13
+  - 12
   sight: 3
   dir: down
   sprite: trainer_JUGGLER

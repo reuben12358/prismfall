@@ -11,7 +11,7 @@
 
 ---
 
-## CHAPTER 6 — "What the Sand Keeps" (R9 → Static Tunnels → R10 → Duneholt, Gym 5; Ossuary of Dunes; K3)
+## CHAPTER 6 — "What the Sand Keeps" (The Brass Dunes → Static Tunnels → The Rib Road → Duneholt, Gym 5; Ossuary of Dunes; K3)
 
 **Location:** R9, **Static Tunnels** (Flash), R10 (`:DESERT`), **Duneholt** (Ossaria), R11, **Ossuary of Dunes** (Unown ruins, Strength), **Sinkfield** (628).
 
@@ -31,7 +31,7 @@
 **Gym 5 (`:DESERT`).** Thematic note: *dig down, because what you need is buried.* Sahar is patient, dry and coughing: "The desert keeps everything. It just doesn't keep it where you left it." Her ace is **Claydol**. She gives Strength via her excavators.
 
 **Aftermath and revelation: the Ossuary of Dunes (Unown ruins set piece).**
-- The latest dune-shift has uncovered a doorway in a giant fossil skull on R11.
+- The latest dune-shift has uncovered a doorway in a giant fossil skull on the Marrow Road.
 - Sahar goes pale. She has seen this before. She confesses: in **AF 281** she excavated these ruins, reported them to Valen, and resealed them on his order.
 - Inside, **Unown** drift in the walls. The PC solves Unown-script puzzles (World/puzzle team) and reveals murals:
   1. A golden king, the Gilded King.
@@ -54,9 +54,9 @@
 
 ---
 
-## CHAPTER 7 — "The Quiet Ward" (R12 → Mirefen, Gym 6; J2)
+## CHAPTER 7 — "The Quiet Ward" (The Leach Canyons → Mirefen, Gym 6; J2)
 
-**Location:** R12, **Mirefen** (Nadir, `:CORROSIVE_MIRE`), the **Quiet Ward**, the Sump Barons' **Sweet Market**, R13, **Miasma Caverns**, **Weeping Fen** (648), R14 **Lake Sallow** (Surf after the badge).
+**Location:** The Leach Canyons, **Mirefen** (Nadir, `:CORROSIVE_MIRE`), the **Quiet Ward**, the Sump Barons' **Sweet Market**, Leechman's Walk, **Miasma Caverns**, **Weeping Fen** (648), **Lake Sallow** (Surf after the badge).
 
 **Arrival: first descent into Nadir.**
 - The PC descends a rattling lift-cage from the plateau's edge. The sky disappears, and Zenith's underside is a ceiling of pipes dripping slag. The air tastes of pennies. Rebreathers are for sale on every corner.
@@ -94,9 +94,9 @@
 
 ---
 
-## CHAPTER 8 — "The Light Stone" (R13 → R14 → Cindervault, Gym 7; the Caldera Crisis)
+## CHAPTER 8 — "The Light Stone" (Leechman's Walk → Lake Sallow → Cindervault, Gym 7; the Caldera Crisis)
 
-**Location:** R14 Lake Sallow (Surf), **Lantern Isle** (optional, `:BEACH`), the road up into **Ashkaar**, **Cindervault** (`:VOLCANIC`), **Mount Cinder**, **Ashkaarfall** (668), R15 (`:ASHEN_WASTE` after the crisis).
+**Location:** Lake Sallow (Surf), **Lantern Isle** (optional, `:BEACH`), the road up into **Ashkaar**, **Cindervault** (`:VOLCANIC`), **Mount Cinder**, **Ashkaarfall** (668), the Ashmarch (`:ASHEN_WASTE` after the crisis).
 
 **Borderland:** the land climbs out of Nadir's runoff into **Ashkaar, the Dragonfire Dominion**: black basalt, red lacquer banners and dragon-riders overhead. Oaths are sworn over braziers at every gate. Lying to a Dominion guard is a crime, and an early NPC teaches this ("Say true or say nothing, stranger").
 
@@ -114,7 +114,7 @@
 - **Dr. Percival Quent's** Meridian team, who want to install "dampers" and keep the tap running. **Meridian admin battle: Quent** (`MERIDIAN_QUENT`), giggling: "Oh, it's *you*. The null reading! Hold still, I've only got one probe."
 - **The Hammer:** a Bereaved squad planting a Splitter on the tap to cause an eruption "Meridian can't cover up".
 - **CHOICE `:ch8_caldera`:**
-  - **Help Wick vent.** The battle field transitions `:VOLCANIC` → `:ASHEN_WASTE`. The eruption is averted and the forges go cold for months, and Brann grumbles about it for a season. Hollow Standing goes up, Meridian Standing down. R15 becomes ash.
+  - **Help Wick vent.** The battle field transitions `:VOLCANIC` → `:ASHEN_WASTE`. The eruption is averted and the forges go cold for months, and Brann grumbles about it for a season. Hollow Standing goes up, Meridian Standing down. The Ashmarch becomes ash.
   - **Help Quent's dampers.** The eruption is averted, Meridian Standing goes up and the tap keeps running. The Bleed at Ashkaarfall grows (map state), and Brann's Bond goes up ("You kept my forges lit").
   - **Shut the tap down by force** (a harder fight vs Quent plus Directorate). The eruption is averted, Accord Standing goes up and the Dominar is impressed (`DOMINAR` respect +1). Meridian Standing drops hard.
 - **Game over `GO_LET_THEM_LISTEN` "Let Them Listen".** Trigger: a Hammer bomber hands the PC the detonator and says "Do it. They'll finally listen." The PC accepts. Foreshadowing: the Field Notes entry on Shatters, and the Lowlight's glass. *Epitaph: "They listened. There was no one left to tell."*
@@ -132,13 +132,13 @@
 
 ---
 
-## CHAPTER 9 — "The Iron Conclave" (R15 → R16 Ironway → Ironreach, Gym 8; K4; the Conclave; the Mourner unmasked)
+## CHAPTER 9 — "The Iron Conclave" (The Ashmarch → The Ironway → Ironreach, Gym 8; K4; the Conclave; the Mourner unmasked)
 
-**Location:** R15, **R16 Ironway** (`:MOUNTAIN`), **Ironreach** (Nadir, `:COLOSSEUM`), the **Iron Pit**, the Conclave galleries, the old Aurel mine shafts.
+**Location:** The Ashmarch, **The Ironway** (`:MOUNTAIN`), **Ironreach** (Nadir, `:COLOSSEUM`), the **Iron Pit**, the Conclave galleries, the old Aurel mine shafts.
 
 **Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier Nadir trusts.
 - **The Conclave.** Sovereign Valen has called a rare **Accord Conclave** here, the first held in Nadir in a century, to vote on extending the Mandate realm-wide. Every available Warden is present.
-  - **Introductions/reunions:** Tamsin, Dorian, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and **Odessa Gale** herself, who delivers **Fly** in person from a skiff she lands on the Pit's rim ("Courier's privilege").
+  - **Introductions/reunions:** Dorian, Tamsin, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and **Odessa Gale** herself, who delivers **Fly** in person from a skiff she lands on the Pit's rim ("Courier's privilege").
   - **First sightings** (Revision 5: these Wardens must be met before the Festival):
     - **Ysolde Ashgrave**, veiled, watches Kestrel across the Pit and leaves before he sees her.
     - **Nyx Calloway** is "slumming it" in the observers' gallery and buys the PC a drink they're too young for.

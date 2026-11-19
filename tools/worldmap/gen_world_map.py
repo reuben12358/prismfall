@@ -32,7 +32,7 @@ GW, GH = W.GRID_W, W.GRID_H
 
 KINGDOM_COL = {   # lowland, upland (RGB)
     'Elowen': ((104, 142, 78), (132, 150, 92)),
-    'Isenmar': ((214, 224, 228), (186, 200, 210)),
+    'Isenmar': ((232, 238, 242), (204, 214, 226)),
     'Zenith': ((186, 170, 128), (204, 186, 142)),
     'Nadir': ((112, 116, 84), (128, 122, 96)),
     'Ossaria': ((222, 190, 128), (196, 140, 92)),
@@ -190,7 +190,10 @@ class Fields:
         amp = 0.16 * s
         n1 = fnoise(w, h, 7, 11, 5) - 0.5
         n2 = fnoise(w, h, 7, 12, 5) - 0.5
-        self.dx, self.dy = n1 * 2 * amp, n2 * 2 * amp
+        n3 = fnoise(w, h, 40, 13, 3) - 0.5
+        n4 = fnoise(w, h, 40, 14, 3) - 0.5
+        self.dx = n1 * 2 * amp + n3 * 0.09 * s
+        self.dy = n2 * 2 * amp + n4 * 0.09 * s
         land = poly_mask([G.MAINLAND] + G.ISLANDS, w, h, s)
         self.land = warp_sample(land, self.dx, self.dy)
         lakes = {}
@@ -210,8 +213,8 @@ class Fields:
         plat = poly_mask([G.PLATEAU], w, h, s)
         plat = warp_sample(plat, self.dx * 0.7, self.dy * 0.7)
         self.plateau = plat & self.land
-        pb = ndimage.gaussian_filter(plat.astype(np.float32), 0.12 * s)
-        elev += pb * 0.55
+        pb = ndimage.gaussian_filter(plat.astype(np.float32), 0.05 * s)
+        elev += pb * 0.6
         rnoise = fnoise(w, h, 9, 22, 4)
         self.ridge = np.zeros((h, w), np.float32)
         for pts, hgt, wid in G.RIDGES:
@@ -337,7 +340,7 @@ def paint_big(out_path):
             lo2 = np.array(KINGDOM_COL[ks[1]][0], np.float32)
             hi2 = np.array(KINGDOM_COL[ks[1]][1], np.float32)
             c2 = lo2 * (1 - up) + hi2 * up
-            t = np.clip((F.mixn - 0.5) * 2.4 + 0.5, 0.15, 0.85)[..., None]
+            t = np.clip((F.mixn - 0.5) * 9.0 + 0.5, 0.0, 1.0)[..., None]
             c = c * (1 - t) + c2 * t
         col[m] = c[m]
     # biome overlays
@@ -366,8 +369,22 @@ def paint_big(out_path):
     col *= (0.72 + 0.56 * shade)[..., None]
     # escarpment: darker rim around the plateau
     pe = F.plateau.astype(np.float32)
-    rim = ndimage.gaussian_filter(pe, 3) * (1 - ndimage.gaussian_filter(pe, 3))
-    col *= (1 - np.clip(rim * 2.2, 0, 0.45))[..., None]
+    col *= (1 + 0.07 * ndimage.gaussian_filter(pe, 2))[..., None]
+    # the Escarpment: a rock band round the plateau, lit from the north-west, with an ink lip and foot
+    din = ndimage.distance_transform_edt(F.plateau) / S
+    bw = 0.08 + 0.09 * fnoise(w, h, 20, 82, 2)
+    band = F.plateau & (din < bw)
+    gyp, gxp = np.gradient(ndimage.gaussian_filter(pe, 0.12 * S))
+    nrm = np.hypot(gxp, gyp) + 1e-6
+    light = np.clip(0.5 + ((-gxp) * -0.7 + (-gyp) * -0.7) / nrm * 0.6, 0, 1)
+    stri = fnoise(w, h, 140, 81, 2)
+    rock = np.array((200, 180, 144), np.float32)[None, None, :] * \
+        ((0.62 + 0.5 * light) * (0.8 + 0.3 * stri) * (0.8 + 0.25 * np.clip(din / 0.15, 0, 1)))[..., None]
+    col[band] = rock[band]
+    lip = F.plateau & (din >= bw) & (din < bw + 2.0 / S)
+    col[lip] *= 0.62
+    foot = F.plateau & (din < 1.5 / S)
+    col[foot] *= 0.6
     # --- water
     dl = F.dist_land
     deep = np.array((54, 92, 112), np.float32)
@@ -376,16 +393,25 @@ def paint_big(out_path):
     seacol = shallow * (1 - t) + deep * t
     ripple = (np.abs(((dl * 6.0 + F.grain * 0.4) % 1.0) - 0.5) < 0.05) & (dl < 1.4)
     seacol[ripple] = seacol[ripple] * 0.86 + 255 * 0.14
-    ice = np.array((216, 230, 236), np.float32)
+    ice = np.array((228, 238, 242), np.float32)
     seacol[F.frozen] = ice * (0.92 + 0.08 * F.grain[F.frozen][..., None])
-    crack = (np.abs(fnoise(w, h, 18, 52, 3) - 0.5) < 0.012) & F.frozen
-    seacol[crack] = (150, 176, 192)
+    fy, fx = np.nonzero(F.frozen)
+    fpts = RNG.random((900, 2)) * np.array([GW, 3.6])
+    ftree = cKDTree(fpts)
+    dd, ii = ftree.query(np.stack([F.gx[fy, fx] + F.dx[fy, fx] / S * 0.3, F.gy[fy, fx]], 1), k=2)
+    tone = RNG.random(len(fpts))[ii[:, 0]]
+    seacol[fy, fx] = np.array((222, 236, 244), np.float32) * (0.95 + 0.06 * tone)[:, None]
+    ck = (dd[:, 1] - dd[:, 0]) < 0.022
+    seacol[fy[ck], fx[ck]] = (150, 182, 206)
+    crack = np.zeros_like(F.frozen)
+    iedge = F.frozen & ~ndimage.binary_erosion(F.frozen, iterations=3) & (F.dist_land > 0.1)
+    seacol[iedge] = (250, 252, 252)
     floes = F.shattered & (fnoise(w, h, 30, 53, 2) > 0.56)
     seacol[floes] = (224, 236, 240)
     col[F.sea] = seacol[F.sea]
     for nm, m in F.lakes.items():
         kind = G.LAKES[nm]['kind']
-        c = {'sulfur': (196, 182, 90), 'mirror': (196, 204, 214), 'salt': (196, 210, 206), 'frozen': (220, 232, 238)}[kind]
+        c = {'sulfur': (196, 182, 90), 'mirror': (196, 204, 214), 'salt': (170, 204, 210), 'frozen': (220, 232, 238)}[kind]
         col[m] = np.array(c, np.float32) * (0.9 + 0.1 * F.grain[m][..., None])
     # --- parchment blend and grain
     parch = np.array(PARCH, np.float32)
@@ -459,7 +485,7 @@ def paint_big(out_path):
                 d.line([P(*line[i]), P(*line[i + 1])], fill=(140, 255, 240, 140), width=2)
     bl = catmull(G.BLINDWATER, 18)
     for i in range(0, len(bl) - 1, 3):
-        d.line([P(*bl[i]), P(*bl[i + 1])], fill=(60, 80, 120, 170), width=4)
+        pass
 
     # --- glyphs
     glyph = Image.new('RGBA', (w, h), (0, 0, 0, 0))
@@ -507,19 +533,48 @@ def paint_big(out_path):
             y = y0 + RNG.integers(-8, 9)
             if not (0 <= x < w and 0 <= y < h) or not F.land[y, x] or keep[y, x]:
                 continue
-            if F.dunes[y, x] > 0.5 and RNG.random() < 0.6:
+            ks = kingdoms_of(F.zone_name(y, x))
+            k0 = ks[0] if len(ks) == 1 or F.mixn[y, x] < 0.5 else ks[1]
+            free = F.forest[y, x] < 0.35 and F.ridge[y, x] < 0.3 and F.ring[y, x] < 0.25
+            rr = RNG.random()
+            if F.dunes[y, x] > 0.5 and rr < 0.6:
                 items.append((y, x, 'dune', 0))
-            elif F.marsh[y, x] > 0.45 and RNG.random() < 0.7:
-                items.append((y, x, 'tuft', 0))
-            elif F.obsid[y, x] > 0.45 and RNG.random() < 0.5:
+            elif F.marsh[y, x] > 0.45 and rr < 0.7:
+                items.append((y, x, 'tuft' if rr < 0.5 else 'pool', 0))
+            elif F.obsid[y, x] > 0.45 and rr < 0.5:
                 items.append((y, x, 'shard', 0))
-            elif F.ring[y, x] < 0.2 and F.ridge[y, x] < 0.3 and F.elev[y, x] > 0.32 and F.forest[y, x] < 0.3 \
-                    and not F.plateau[y, x] and RNG.random() < 0.18:
+            elif free and F.elev[y, x] > 0.32 and not F.plateau[y, x] and rr < 0.16:
                 items.append((y, x, 'hill', 0))
+            elif not free:
+                continue
+            elif k0 == 'Elowen' and rr < 0.07:
+                items.append((y, x, 'clump', 'broad'))
+            elif k0 == 'Elowen' and rr < 0.11 and F.dist_sea[y, x] > 0.4:
+                items.append((y, x, 'field', 0))
+            elif k0 == 'Isenmar' and rr < 0.08:
+                items.append((y, x, 'tree', 'pine'))
+            elif k0 == 'Isenmar' and rr < 0.2:
+                items.append((y, x, 'drift', 0))
+            elif k0 == 'Ossaria' and rr < 0.3:
+                items.append((y, x, 'dune', 0))
+            elif k0 == 'Ossaria' and rr < 0.34:
+                items.append((y, x, 'mesa', 0))
+            elif k0 == 'Nadir' and rr < 0.12:
+                items.append((y, x, 'tuft', 0))
+            elif k0 == 'Nadir' and rr < 0.16:
+                items.append((y, x, 'heap', 0))
+            elif k0 == 'Ashkaar' and rr < 0.06:
+                items.append((y, x, 'cone', 0))
+            elif k0 == 'Ashkaar' and rr < 0.2:
+                items.append((y, x, 'ash', 0))
+            elif k0 == 'Zenith' and F.plateau[y, x] and rr < 0.05:
+                items.append((y, x, 'pylon', 0))
+            elif k0 == 'Zenith' and not F.plateau[y, x] and rr < 0.1:
+                items.append((y, x, 'field', 0))
     # escarpment hachures around the plateau
     pe_edge = F.plateau ^ ndimage.binary_erosion(F.plateau, iterations=2)
     ys, xs = np.nonzero(pe_edge)
-    sel = RNG.random(len(xs)) < 0.07
+    sel = RNG.random(len(xs)) < 0.0
     ny, nx = np.gradient(ndimage.gaussian_filter(F.plateau.astype(np.float32), 4))
     for y, x in zip(ys[sel], xs[sel]):
         if keep[y, x]:
@@ -544,10 +599,49 @@ def paint_big(out_path):
         elif kind == 'shard':
             gd.polygon([(x - 4, y + 4), (x, y - 7), (x + 3, y + 4)], fill=(30, 26, 36, 230), outline=(120, 110, 150, 255))
         elif kind == 'hill':
-            gd.arc([x - 10, y - 5, x + 10, y + 9], 190, 350, fill=INK + (150,), width=2)
+            gd.chord([x - 11, y - 6, x + 11, y + 10], 180, 360, fill=(0, 0, 0, 28))
+            gd.arc([x - 11, y - 6, x + 11, y + 10], 190, 350, fill=INK + (150,), width=2)
+        elif kind == 'clump':
+            for ox, oy in ((-5, 1), (4, 2), (0, -3))[:RNG.integers(1, 4)]:
+                draw_tree(gd, x + ox, y + oy, 'broad', '')
+        elif kind == 'field':
+            ang = RNG.random() * 0.8 - 0.4
+            cw, ch = 16, 10
+            c = [(60, 120, 50), (150, 150, 70), (180, 160, 90), (110, 140, 60)][RNG.integers(0, 4)]
+            pts = [(x - cw / 2, y - ch / 2), (x + cw / 2, y - ch / 2 + ang * 8), (x + cw / 2, y + ch / 2 + ang * 8),
+                   (x - cw / 2, y + ch / 2)]
+            gd.polygon(pts, fill=c + (120,), outline=(90, 80, 50, 110))
+            for k in range(-3, 4, 3):
+                gd.line([(x - cw / 2 + 2, y + k), (x + cw / 2 - 2, y + k + ang * 8)], fill=(80, 70, 40, 70), width=1)
+        elif kind == 'drift':
+            gd.arc([x - 9, y - 3, x + 9, y + 7], 200, 330, fill=(150, 170, 190, 170), width=2)
+            gd.arc([x - 9, y - 1, x + 9, y + 9], 200, 330, fill=(255, 255, 255, 200), width=1)
+        elif kind == 'mesa':
+            gd.polygon([(x - 10, y + 5), (x - 6, y - 4), (x + 6, y - 4), (x + 10, y + 5)], fill=(190, 124, 80, 230),
+                       outline=INK + (200,))
+            gd.line([(x - 6, y - 4), (x + 6, y - 4)], fill=(236, 190, 130, 255), width=2)
+        elif kind == 'heap':
+            gd.pieslice([x - 8, y - 6, x + 8, y + 8], 180, 360, fill=(110, 104, 96, 230), outline=INK + (180,))
+        elif kind == 'pool':
+            gd.ellipse([x - 6, y - 3, x + 6, y + 3], fill=(120, 190, 120, 200), outline=(50, 70, 40, 200))
+        elif kind == 'cone':
+            gd.polygon([(x - 9, y + 5), (x - 3, y - 6), (x + 3, y - 6), (x + 9, y + 5)], fill=(76, 62, 58, 240),
+                       outline=INK + (220,))
+            gd.line([(x - 3, y - 6), (x + 3, y - 6)], fill=(230, 100, 40, 255), width=2)
+        elif kind == 'ash':
+            gd.line([(x - 7, y), (x + 7, y - 2)], fill=(70, 60, 56, 120), width=2)
+        elif kind == 'pylon':
+            gd.line([(x, y + 6), (x, y - 10)], fill=(90, 74, 50, 220), width=2)
+            gd.line([(x - 5, y - 7), (x + 5, y - 7)], fill=(90, 74, 50, 220), width=2)
+            gd.line([(x - 4, y + 6), (x, y - 4), (x + 4, y + 6)], fill=(90, 74, 50, 200), width=1)
+        elif kind == 'plot':
+            gd.rectangle([x - 7, y - 5, x + 7, y + 5], outline=(130, 110, 70, 90), width=1)
+            gd.line([(x, y - 5), (x, y + 5)], fill=(130, 110, 70, 70), width=1)
         elif kind == 'hach':
             vx_, vy_ = arg
-            gd.line([(x, y), (x + vx_ * 11, y + vy_ * 11)], fill=(84, 64, 44, 190), width=2)
+            lit = (vx_ * -0.7 + vy_ * -0.7) > 0
+            gd.line([(x, y), (x + vx_ * 15, y + vy_ * 15)], fill=(120, 96, 64, 150) if lit else (66, 48, 34, 210),
+                    width=2 if lit else 3)
     img = Image.alpha_composite(img.convert('RGBA'), glyph)
     d = ImageDraw.Draw(img, 'RGBA')
 
@@ -566,8 +660,8 @@ def paint_big(out_path):
     for n, style, line in road_lines:
         pl = [P(*p) for p in line]
         if style == 'under':
-            for i in range(0, len(pl) - 1, 2):
-                d.line([pl[i], pl[i + 1]], fill=(60, 44, 30, 210), width=4)
+            for i in range(0, len(pl) - 1, 3):
+                d.line([pl[i], pl[i + 1]], fill=(50, 40, 60, 70), width=3)
             continue
         if style == 'sea':
             for i in range(0, len(pl) - 1, 2):
@@ -582,7 +676,7 @@ def paint_big(out_path):
         x, y = P(*cell_center(real))
         draw_gate(d, x, y, g)
 
-    # --- towns
+    # --- towns, gym badges and road shields (placed first: they never move)
     LB = Labels(w, h)
     fT = font(F_SERIF_B, 25)
     fTs = font(F_SERIF_B, 21)
@@ -591,9 +685,7 @@ def paint_big(out_path):
         if k == 'Antumbra':
             continue
         cxp, cyp = P(x + 0.5, y + 0.5)
-        box = draw_town(d, cxp, cyp, r, k)
-        LB.add(box)
-    # gyms
+        LB.add(draw_town(d, cxp, cyp, r, k))
     fG = font(F_SERIF_B, 17)
     for gi, tid in enumerate(W.GYMS, 1):
         n, x, y, r, k = W.SETTLEMENTS[tid]
@@ -602,55 +694,7 @@ def paint_big(out_path):
         cxp, cyp = P(x + 0.5, y + 0.5)
         draw_gym_badge(d, cxp + 22, cyp - 22, gi, fG)
         LB.add((cxp + 9, cyp - 35, cxp + 35, cyp - 9))
-    # --- labels: kingdoms first (big, low alpha), then seas, landmarks, towns, roads
-    kl = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    kd2 = ImageDraw.Draw(kl)
-    fK = font(F_CAPS, 58)
-    fKs = font(F_SERIF_I, 26)
-    for nm, sub, x, y in G.KINGDOM_LABELS:
-        kd2.text(P(x, y), spaced(nm, 1), font=fK, fill=(60, 36, 24, 170), anchor='mm', stroke_width=2,
-                 stroke_fill=(240, 228, 196, 120))
-        kd2.text((P(x, y)[0], P(x, y)[1] + 40), sub, font=fKs, fill=(60, 36, 24, 190), anchor='mm', stroke_width=2,
-                 stroke_fill=(240, 228, 196, 140))
-        tb = kd2.textbbox(P(x, y), spaced(nm, 1), font=fK, anchor='mm')
-        LB.add((tb[0], tb[1], tb[2], tb[3] + 54))
-    img = Image.alpha_composite(img, kl)
-    d = ImageDraw.Draw(img, 'RGBA')
-    for nm, x, y, a, sz in G.SEAS:
-        f = font(F_SERIF_I, 34 * sz + 6)
-        draw_rot_text(img, P(x, y), spaced(nm, 1) if nm.isupper() else nm, f, (30, 56, 80, 230), a,
-                      halo=(214, 228, 232, 150))
-        d = ImageDraw.Draw(img, 'RGBA')
-    for nm, x, y, sz, a in G.LANDMARKS:
-        f = font(F_SERIF_I, 44 * sz)
-        draw_rot_text(img, P(x, y), nm, f, (70, 46, 30, 235), a, halo=(240, 230, 200, 170))
-        d = ImageDraw.Draw(img, 'RGBA')
-        if a == 0:
-            tb = d.textbbox(P(x, y), nm, font=f, anchor='mm')
-            LB.add(tb)
-    # town names
-    order = sorted(W.SETTLEMENTS.items(), key=lambda kv: {'seat': 0, 'city': 1, 'fort': 2, 'town': 3, 'village': 4}[kv[1][3]])
-    for i, (n, x, y, r, k) in order:
-        if k == 'Antumbra':
-            continue
-        cxp, cyp = P(x + 0.5, y + 0.5)
-        f = fT if r == 'seat' else (fTs if r in ('city', 'fort') else fV)
-        txt = n.upper() if r == 'seat' else n
-        place_label(d, LB, txt, f, cxp, cyp, 26, (34, 22, 14), [(0, -1), (0, 1), (1, 0), (-1, 0), (1, -1), (-1, -1), (1, 1), (-1, 1)])
-    # road names (leg names)
-    fR = font(F_SERIF_I, 17)
     fRn = font(F_SERIF_BI, 19)
-    legs = W.leg_by_id()
-    for r, l in W.all_legs():
-        cells = [c for c in l['cells'] if not (c[0] >= 25 and c[1] >= 15)]
-        if not cells:
-            continue
-        mx = sum(c[0] for c in cells) / len(cells) + 0.5
-        my = sum(c[1] for c in cells) / len(cells) + 0.5
-        place_label(d, LB, l['name'], fR, *P(mx, my), 16, (92, 52, 28),
-                    [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (-1, 1), (1, -1), (-1, -1), (0, 2), (0, -2)],
-                    halo=(244, 234, 206), hw=3)
-    # road numbers (the Eighteen Roads): a small shield on each road's first leg
     for rd in W.ROADS:
         main = [l for l in rd['legs'] if l['role'] == 'main' and not (l['cells'][0][0] >= 25 and l['cells'][0][1] >= 15)]
         if not main:
@@ -658,6 +702,99 @@ def paint_big(out_path):
         c = main[len(main) // 2]['cells'][0]
         x, y = P(*cell_center(c))
         draw_road_shield(d, x, y, rd['n'], fRn)
+        LB.add((x - 14, y - 14, x + 14, y + 16))
+    for g, (real, inset, nm) in W.GATES.items():
+        x, y = P(*cell_center(real))
+        LB.add((x - 14, y - 18, x + 14, y + 18))
+    # --- town names
+    order = sorted(W.SETTLEMENTS.items(), key=lambda kv: {'seat': 0, 'city': 1, 'fort': 2, 'town': 3, 'village': 4}[kv[1][3]])
+    for i, (n, x, y, r, k) in order:
+        if k == 'Antumbra':
+            continue
+        cxp, cyp = P(x + 0.5, y + 0.5)
+        f = fT if r == 'seat' else (fTs if r in ('city', 'fort') else fV)
+        txt = n.upper() if r == 'seat' else n
+        if i == 480:
+            d.text((cxp, cyp + 34), 'CROWNHAVEN', font=font(F_CAPS, 30), fill=(70, 34, 22), anchor='mm', stroke_width=3,
+                   stroke_fill=(244, 236, 210))
+            d.text((cxp, cyp + 60), "the Accord's seat and the Festival", font=font(F_SERIF_I, 18), fill=INK, anchor='mm',
+                   stroke_width=3, stroke_fill=(244, 236, 210))
+            LB.add((cxp - 110, cyp + 18, cxp + 110, cyp + 72))
+            continue
+        place_label(d, LB, txt, f, cxp, cyp, 26, (34, 22, 14),
+                    [(0, -1), (0, 1), (1, 0), (-1, 0), (1, -1), (-1, -1), (1, 1), (-1, 1)])
+    # --- kingdom names: big, translucent, auto-placed where the kingdom has the most empty land
+    kl = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    kd2 = ImageDraw.Draw(kl)
+    KSIZE = {'ISENMAR': 44, 'NADIR': 46, 'ZENITH': 54}
+    fKs = font(F_SERIF_I, 26)
+    busy = keep.astype(np.float32)
+    for b in LB.boxes:
+        busy[int(max(0, b[1])):int(max(0, b[3])), int(max(0, b[0])):int(max(0, b[2]))] = 1.0
+    ib = busy.cumsum(0).cumsum(1)
+
+    def busy_sum(x0, y0, x1, y1):
+        if x0 < 8 or y0 < 8 or x1 > w - 8 or y1 > h - 8:
+            return 1e9
+        x0, y0, x1, y1 = int(x0), int(y0), int(x1), int(y1)
+        return ib[y1, x1] - ib[y0, x1] - ib[y1, x0] + ib[y0, x0]
+    for nm, sub, x, y in G.KINGDOM_LABELS:
+        if nm == 'CROWNHAVEN':
+            continue
+        fK = font(F_CAPS, KSIZE.get(nm, 58))
+        tb = kd2.textbbox((0, 0), spaced(nm, 1), font=fK, anchor='mm')
+        tw, th = tb[2] - tb[0], tb[3] - tb[1] + 54
+        best = None
+        ki = [i for i, lab in enumerate(F.labels) if lab == nm.title()]
+        for oy in np.arange(-1.6, 1.61, 0.2):
+            for ox in np.arange(-2.4, 2.41, 0.2):
+                cx_, cy_ = (x + ox) * S, (y + oy) * S
+                if not (0 <= int(cx_) < w and 0 <= int(cy_) < h) or not F.land[int(cy_), int(cx_)]:
+                    continue
+                if ki and F.zone[int(cy_), int(cx_)] != ki[0]:
+                    continue
+                sc = busy_sum(cx_ - tw / 2, cy_ - th / 2 + 10, cx_ + tw / 2, cy_ + th / 2) + (ox * ox + oy * oy) * 900
+                if best is None or sc < best[0]:
+                    best = (sc, cx_, cy_)
+        if best is None:
+            continue
+        cx_, cy_ = best[1], best[2]
+        kd2.text((cx_, cy_), spaced(nm, 1), font=fK, fill=(60, 36, 24, 165), anchor='mm', stroke_width=2,
+                 stroke_fill=(240, 228, 196, 120))
+        kd2.text((cx_, cy_ + 40), sub, font=fKs, fill=(60, 36, 24, 200), anchor='mm', stroke_width=2,
+                 stroke_fill=(240, 228, 196, 150))
+        LB.add((cx_ - tw / 2, cy_ - th / 2 + 10, cx_ + tw / 2, cy_ + th / 2 + 6))
+    img = Image.alpha_composite(img, kl)
+    d = ImageDraw.Draw(img, 'RGBA')
+    # --- landmarks (nudged off anything already placed) and seas
+    for nm, x, y, sz, a in G.LANDMARKS:
+        f = font(F_SERIF_I, 44 * sz)
+        for ox, oy in ((0, 0), (0, 0.3), (0, -0.3), (0.4, 0), (-0.4, 0), (0.4, 0.4), (-0.4, -0.4), (0, 0.6), (0, -0.6)):
+            box = rot_box(P(x + ox, y + oy), nm, f, a)
+            if LB.free(box, pad=0):
+                draw_rot_text(img, P(x + ox, y + oy), nm, f, (70, 46, 30, 235), a, halo=(240, 230, 200, 170))
+                LB.add(box)
+                break
+        else:
+            print('  landmark dropped:', nm)
+    d = ImageDraw.Draw(img, 'RGBA')
+    for nm, x, y, a, sz in G.SEAS:
+        f = font(F_SERIF_I, 34 * sz + 6)
+        draw_rot_text(img, P(x, y), spaced(nm, 1) if nm.isupper() else nm, f, (30, 56, 80, 230), a,
+                      halo=(214, 228, 232, 150))
+    d = ImageDraw.Draw(img, 'RGBA')
+    # --- road names (one per leg)
+    fR = font(F_SERIF_I, 17)
+    lm_names = {nm.lower().replace('the ', '') for nm, *_ in G.LANDMARKS}
+    for r, l in W.all_legs():
+        cells = [c for c in l['cells'] if not (c[0] >= 25 and c[1] >= 15)]
+        if not cells or l['name'].lower().replace('the ', '') in lm_names:
+            continue
+        mx = sum(c[0] for c in cells) / len(cells) + 0.5
+        my = sum(c[1] for c in cells) / len(cells) + 0.5
+        place_label(d, LB, l['name'], fR, *P(mx, my), 16, (92, 52, 28),
+                    [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (-1, 1), (1, -1), (-1, -1), (0, 2), (0, -2)],
+                    halo=(244, 234, 206), hw=3)
 
     # --- the Antumbra inset
     draw_antumbra_inset(img, F, S)
@@ -702,6 +839,16 @@ def place_label(d, LB, txt, f, cx, cy, off, fill, dirs, halo=(244, 234, 206), hw
                 return True
     print('  label dropped:', txt)
     return False
+
+
+def rot_box(xy, txt, f, angle):
+    tmp = Image.new('RGBA', (1, 1))
+    tb = ImageDraw.Draw(tmp).textbbox((0, 0), txt, font=f, stroke_width=3)
+    tw, th = tb[2] - tb[0], tb[3] - tb[1]
+    a = math.radians(angle)
+    bw = abs(tw * math.cos(a)) + abs(th * math.sin(a))
+    bh = abs(tw * math.sin(a)) + abs(th * math.cos(a))
+    return (xy[0] - bw / 2, xy[1] - bh / 2, xy[0] + bw / 2, xy[1] + bh / 2)
 
 
 def draw_rot_text(img, xy, txt, f, fill, angle, halo=None):
@@ -936,7 +1083,7 @@ def draw_antumbra_inset(img, F, S):
 def frame_and_panel(img):
     w, h = img.size
     B = 40
-    PH = 230
+    PH = 270
     out = Image.new('RGB', (w + 2 * B, h + 2 * B + PH), PARCH)
     pn = fnoise(out.width, out.height, 6, 71, 6)
     pa = np.asarray(out).astype(np.float32) * (0.9 + 0.12 * pn[..., None])
@@ -950,12 +1097,12 @@ def frame_and_panel(img):
         d.rectangle([B - 12 + k, B - 12, B - 12 + k + 11, B - 4], fill=INK)
     py = B + h + 26
     # title cartouche
-    d.text((B + 30, py + 8), 'VELMORA', font=font(F_TITLE, 96), fill=(70, 34, 22), anchor='la')
+    d.text((B + 30, py + 4), spaced('VELMORA', 1), font=font(F_CAPS, 84), fill=(70, 34, 22), anchor='la')
     d.text((B + 36, py + 118), 'The Seven Kingdoms and the Crown', font=font(F_SERIF_I, 32), fill=INK, anchor='la')
     d.text((B + 36, py + 160), 'The region of Pokemon Prismfall, three hundred years after the Glassfall', font=font(F_SERIF_I, 21),
            fill=(96, 70, 50), anchor='la')
     # legend
-    lx = B + 640
+    lx = B + 790
     f = font(F_SERIF, 21)
     fb = font(F_SERIF_B, 22)
     d.text((lx, py + 6), 'Legend', font=fb, fill=INK, anchor='la')
@@ -963,7 +1110,7 @@ def frame_and_panel(img):
             ('gym', 'Gym, in badge order'), ('shield', 'One of the Eighteen Roads (+ the Pilgrim Road)')]
     dd = ImageDraw.Draw(out, 'RGBA')
     for i, (k, t) in enumerate(rows):
-        yy = py + 50 + i * 30
+        yy = py + 62 + i * 34
         if k == 'gym':
             draw_gym_badge(dd, lx + 16, yy, 3, font(F_SERIF_B, 15))
         elif k == 'shield':
@@ -972,13 +1119,13 @@ def frame_and_panel(img):
             sc = {'seat': 0.6}.get(k, 0.8)
             draw_town(dd, lx + 16, yy + (6 if k == 'seat' else 0), k, 'Elowen')
         d.text((lx + 44, yy), t, font=f, fill=INK, anchor='lm')
-    lx2 = lx + 560
+    lx2 = lx + 500
     rows2 = [('road', 'Road (each named stretch is one or more maps)'), ('under', 'Underground road (the Blindwater)'),
              ('sea', 'Sea lane / ferry / sled-road over the ice'), ('war', 'War crossing (Ashkaar-Isenmar)'),
              ('air', 'Airship lane (from Act III)'), ('border', 'Kingdom border (mottled land = borderland)'),
              ('gate', 'Gate into Antumbra')]
     for i, (k, t) in enumerate(rows2):
-        yy = py + 20 + i * 28
+        yy = py + 22 + i * 33
         if k == 'road':
             dd.line([(lx2, yy), (lx2 + 34, yy)], fill=(60, 40, 22), width=11)
             dd.line([(lx2, yy), (lx2 + 34, yy)], fill=(236, 214, 160), width=7)
@@ -991,15 +1138,15 @@ def frame_and_panel(img):
             draw_gate(dd, lx2 + 16, yy, 'A')
         d.text((lx2 + 46, yy), t, font=f, fill=INK, anchor='lm')
     # gym order
-    gx0 = lx2 + 560
+    gx0 = lx2 + 540
     d.text((gx0, py + 6), 'The road of eighteen badges', font=fb, fill=INK, anchor='la')
     fs = font(F_SERIF, 17)
     for i, tid in enumerate(W.GYMS):
         col_ = i // 6
         row = i % 6
         nm = W.SETTLEMENTS[tid][0]
-        d.text((gx0 + col_ * 175, py + 44 + row * 27), '%d  %s' % (i + 1, nm), font=fs, fill=INK, anchor='la')
-    d.text((gx0, py + 44 + 6 * 27 + 2), 'then the Pilgrim Road to the Festival in Crownhaven', font=font(F_SERIF_I, 17),
+        d.text((gx0 + col_ * 175, py + 48 + row * 30), '%d  %s' % (i + 1, nm), font=fs, fill=INK, anchor='la')
+    d.text((gx0, py + 48 + 6 * 30 + 4), 'then the Pilgrim Road to the Festival in Crownhaven', font=font(F_SERIF_I, 17),
            fill=(96, 70, 50), anchor='la')
     return out
 
@@ -1053,13 +1200,11 @@ def paint_town_map(out_path):
             hl = mm & (F.grain > 0.62) & (by > 0.5)
             img[hl] = pal[1]
     # biomes
-    tree_m = F.land & (F.forest > 0.45)
-    img[tree_m & (by > 0.3)] = (48, 100, 52)
-    img[F.land & (F.dunes > 0.55) & (by > 0.6)] = (248, 224, 168)
     img[F.land & (F.marsh > 0.5) & (by > 0.5)] = (80, 100, 64)
     img[F.land & (F.obsid > 0.5)] = (48, 40, 56)
-    img[F.land & (F.elev > 0.7)] = (150, 140, 132)
-    img[F.land & (F.elev > 0.95)] = (236, 236, 240)
+    img[F.land & (F.sulfur > 0.6) & (by > 0.7)] = (200, 184, 92)
+    # plateau: lighter top, rim drawn later
+    img[F.plateau & (by > 0.75)] = (226, 208, 160)
     for nm, m in F.lakes.items():
         img[m] = {'sulfur': (212, 196, 96), 'mirror': (200, 208, 224), 'salt': (200, 220, 220),
                   'frozen': (224, 236, 244)}[G.LAKES[nm]['kind']]
@@ -1071,9 +1216,84 @@ def paint_town_map(out_path):
     img[shore] = (176, 216, 232)
     # plateau rim
     pe = F.plateau & ~ndimage.binary_erosion(F.plateau)
-    img[pe] = (120, 100, 70)
+    img[pe] = (112, 92, 64)
+    pe2 = F.plateau & ~ndimage.binary_erosion(F.plateau, iterations=3) & ~pe
+    img[pe2 & (by > 0.4)] = (176, 152, 112)
     im = Image.fromarray(img)
     d = ImageDraw.Draw(im)
+    # pixel glyphs: trees, peaks, dunes (drawn before rivers and routes, which sit on top)
+    keepm = np.zeros((h, w), bool)
+    for n, style, pts in road_polylines():
+        if style == 'inset':
+            continue
+        for (x1, y1), (x2, y2) in zip(pts[:-1], pts[1:]):
+            for t in np.linspace(0, 1, 40):
+                px_, py_ = int((x1 + (x2 - x1) * t) * S), int((y1 + (y2 - y1) * t) * S)
+                keepm[max(0, py_ - 4):py_ + 5, max(0, px_ - 4):px_ + 5] = True
+    for i, (n, x, y, r, k) in W.SETTLEMENTS.items():
+        keepm[y * S - 2:(y + 1) * S + 2, x * S - 2:(x + 1) * S + 2] = True
+    x0i, y0i, x1i, y1i = W.ANTUMBRA_INSET
+    keepm[y0i * S - 4:, x0i * S - 4:] = True
+    TREE = {'broad': ((40, 96, 44), (72, 136, 64), (28, 64, 32)), 'silk': ((128, 176, 128), (208, 232, 208), (60, 100, 64)),
+            'gloam': ((76, 72, 112), (128, 116, 168), (44, 40, 72)), 'rime': ((72, 112, 120), (232, 240, 244), (40, 64, 72)),
+            'pine': ((40, 88, 80), (216, 232, 236), (24, 52, 48)), 'ash': ((112, 100, 96), (232, 112, 48), (64, 56, 52)),
+            'wired': ((56, 104, 56), (200, 176, 96), (32, 64, 36)), 'glass': ((184, 200, 232), (248, 252, 255), (96, 104, 144)),
+            'fungus': ((152, 104, 176), (232, 248, 192), (80, 52, 96)), 'petrified': ((120, 112, 108), (160, 152, 148), (72, 68, 64))}
+    for ty in range(2, h - 6, 5):
+        for tx in range(2 + (ty // 5 % 2) * 2, w - 5, 5):
+            if not F.land[ty + 3, tx + 2] or keepm[ty + 3, tx + 2] or F.forest[ty + 3, tx + 2] < 0.5:
+                continue
+            ki = F.forest_kind[ty + 3, tx + 2]
+            kind = F.fkinds[ki] if ki >= 0 else 'broad'
+            body, hi, ol = TREE.get(kind, TREE['broad'])
+            if kind in ('rime', 'pine', 'glass'):
+                d.polygon([(tx + 2, ty), (tx, ty + 4), (tx + 4, ty + 4)], fill=body, outline=ol)
+                d.point([(tx + 2, ty)], fill=hi)
+                d.point([(tx + 2, ty + 5)], fill=(88, 64, 40))
+            else:
+                d.rectangle([tx, ty + 1, tx + 4, ty + 3], fill=body)
+                d.rectangle([tx + 1, ty, tx + 3, ty + 4], fill=body)
+                d.point([(tx + 1, ty + 1)], fill=hi)
+                d.line([(tx + 1, ty + 4), (tx + 3, ty + 4)], fill=ol)
+                d.point([(tx + 2, ty + 5)], fill=(88, 64, 40))
+
+    def peak(px_, py_, big, snow, pal):
+        hh = 6 if big else 4
+        lit, sh = pal
+        d.polygon([(px_, py_ - hh), (px_ - hh, py_), (px_, py_)], fill=lit)
+        d.polygon([(px_, py_ - hh), (px_ + hh, py_), (px_, py_)], fill=sh)
+        d.line([(px_ - hh, py_), (px_, py_ - hh), (px_ + hh, py_)], fill=(56, 48, 44))
+        if snow:
+            d.polygon([(px_, py_ - hh), (px_ - 2, py_ - hh + 2), (px_ + 2, py_ - hh + 2)], fill=(248, 248, 252))
+    for pts, hgt, wid in G.RIDGES:
+        line = catmull(pts, 30)
+        acc = 0
+        for i in range(len(line) - 1):
+            acc += math.hypot(line[i + 1][0] - line[i][0], line[i + 1][1] - line[i][1])
+            if acc > 0.42:
+                acc = 0
+                px_, py_ = int(line[i][0] * S + RNG.integers(-2, 3)), int(line[i][1] * S + RNG.integers(-2, 3))
+                if 0 <= px_ < w and 0 <= py_ < h and F.land[py_, px_] and not keepm[py_, px_]:
+                    zk = kingdoms_of(F.zone_name(py_, px_))
+                    pal = ((160, 140, 124), (104, 92, 84)) if 'Ashkaar' in zk else \
+                        (((220, 172, 112), (168, 116, 72)) if 'Ossaria' in zk else ((176, 168, 160), (120, 112, 108)))
+                    peak(px_, py_, hgt > 0.7, hgt > 0.75 and 'Ashkaar' not in zk and 'Ossaria' not in zk, pal)
+    cx_, cy_ = G.CROWNWALL['c']
+    for a in range(0, 360, 26):
+        if abs(((a - G.CROWNWALL['gap_angle']) + 180) % 360 - 180) < 20:
+            continue
+        px_ = int((cx_ + G.CROWNWALL['r'] * math.cos(math.radians(a))) * S)
+        py_ = int((cy_ + G.CROWNWALL['r'] * math.sin(math.radians(a))) * S) + 3
+        if not keepm[py_, px_]:
+            peak(px_, py_, True, True, ((216, 208, 192), (152, 144, 132)))
+    vx_, vy_ = int(G.VOLCANO[0] * S), int(G.VOLCANO[1] * S) + 4
+    d.polygon([(vx_ - 9, vy_), (vx_ - 3, vy_ - 9), (vx_ + 3, vy_ - 9), (vx_ + 9, vy_)], fill=(96, 72, 64), outline=(48, 36, 32))
+    d.line([(vx_ - 3, vy_ - 9), (vx_ + 3, vy_ - 9)], fill=(248, 120, 40), width=2)
+    d.line([(vx_ - 1, vy_ - 8), (vx_ - 3, vy_ - 2)], fill=(232, 96, 32))
+    for ty in range(0, h - 4, 7):
+        for tx in range((ty // 7 % 2) * 4, w - 6, 8):
+            if F.land[ty, tx] and not keepm[ty, tx] and F.dunes[ty, tx] > 0.5:
+                d.line([(tx, ty + 2), (tx + 2, ty), (tx + 4, ty + 2)], fill=(200, 152, 96))
     # rivers
     for nm, rv in G.RIVERS.items():
         line = [(x * S, y * S) for x, y in catmull(rv['pts'], 8)]
@@ -1097,8 +1317,9 @@ def paint_town_map(out_path):
     for mid, c in W.OWN_SQUARE.items():
         if c[0] >= 25 and c[1] >= 15:
             continue
-        x, y = (c[0] + 0.5) * S, (c[1] + 0.5) * S
-        d.rectangle([x - 2, y - 2, x + 2, y + 2], fill=(64, 48, 40), outline=(240, 232, 208))
+        x, y = int((c[0] + 0.5) * S), int((c[1] + 0.5) * S)
+        d.rectangle([x - 1, y - 1, x + 1, y + 1], fill=(56, 40, 36))
+        d.point([(x - 1, y - 1)], fill=(200, 184, 160))
     # towns
     for i, (n, x, y, r, k) in W.SETTLEMENTS.items():
         if k == 'Antumbra':

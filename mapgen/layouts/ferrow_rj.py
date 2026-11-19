@@ -2,7 +2,7 @@
 """Ferrow's Landing (100) on the PF Rejuv sheet (tileset 51 "PF Rejuv Coast"), 68x60.  MAPGEN 2h.
 Spring on the south coast: Goldenleaf's timber-and-stone houses on Sheridan's green bluff, Akuwa's grass-capped sea
 cliffs and white beach, blossom trees.  Three levels: Tidewatch hill (NE, Larch's station), the village bluff (gravel
-street from the Route 1 lane down to the square, side streets to the lighthouse headland and the east houses), and the
+street from the Ferrymen's Mile lane down to the square, side streets to the lighthouse headland and the east houses), and the
 harbour beach with the ferry pier (x 33-35, water from row 48: the docking choreography of story_early depends on it).
 The Dovetail is moored east of the pier.  Story events come from layouts/story_early.py; this script seats them.
 Run: python3 -I layouts/ferrow_rj.py && python3 -I build.py 100"""
@@ -72,12 +72,12 @@ def build(preview=None):
     # ---------------------------------------------------------------- stairs first (they cut the cliff lines)
     m.stairs(45, 16, w=3, kit_rows=4)                                  # Tidewatch hill
     m.stairs(23, 20, w=3, kit_rows=4)                                  # the Center terrace
-    m.stairs(25, 35, w=3, kit_rows=3)                                  # west quay stairs
-    m.stairs(47, 36, w=3, kit_rows=3)                                  # east quay stairs
+    m.stairs(25, 35, w=3, kit_rows=3, kind="stone")                    # west quay stairs (dressed stone)
+    m.stairs(47, 36, w=3, kit_rows=3, kind="stone")                    # east quay stairs (dressed stone)
     m.plan_cliffs()
     # ---------------------------------------------------------------- streets: curved lanes into one plaza
     G = dict(c='g', only='.tT')
-    m.rect(32, 0, 3, 7, 'd')                                           # Route 1's dirt lane (520 x 14-16 = our x 32-34)
+    m.rect(32, 0, 3, 7, 'd')                                           # The Ferrymen's Mile's dirt lane (520 x 14-16 = our x 32-34)
     m.lane([(33.5, 6.5), (37.4, 8.8), (38.6, 13.5), (37, 19.5), (33.8, 24.5)], w=3.3, seed=31, wobble=0.2, **G)   # the valley road
     m.blob(32.5, 29.2, 8.6, 4.3, 'g', seed=32, rough=0.3, only='.tT')  # the plaza above the harbour
     m.rect(29, 31, 9, 3, 'g', only='.tT')                              # ... squared off along the overlook rail
@@ -178,6 +178,7 @@ def build(preview=None):
     m.paint_ground(); m.autotiles(); m.cliffs(); m.paint_stairs(); m.forest()
     wharf_paint(m)
     m.put_stamps()
+    m.grass_variation()
     ship(m, 0, 0)
     sea_rocks(m)
     boats(m)

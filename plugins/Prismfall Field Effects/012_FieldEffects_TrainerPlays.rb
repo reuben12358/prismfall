@@ -31,7 +31,7 @@ module FieldEffects
       :LEADER_MARISOL   => { :UNDERWATER => 22, :WATER_SURFACE => -30 },
       :LEADER_ROOK      => { [:NEON_GRID, 1] => 22, [:NEON_GRID, 2] => -12 },
       :LEADER_SAHAR     => { [:DESERT, 1] => 22, [:DESERT, 2] => -20 },
-      :LEADER_CORVIN    => { :WASTELAND => 12, :WATER_SURFACE => -25 },
+      :LEADER_CORVIN    => { :WASTELAND => 20, :WATER_SURFACE => -25 },
       :LEADER_BRANN     => { :VOLCANIC => 22, :ASHEN_WASTE => -15 },
       :LEADER_JUNO      => { [:FLOWER_GARDEN, 2] => 14, [:FLOWER_GARDEN, 3] => 14, [:FLOWER_GARDEN, 4] => 14,
                              [:FLOWER_GARDEN, 5] => 8, :MEADOW => 18, :WILDFIRE => -25 },
@@ -45,20 +45,35 @@ module FieldEffects
       :LEADER_CELESTINE => { :FAIRY_TALE => 22, :DRAGONS_DEN => -20 },
       :LEADER_SIGRUN    => { :DRAGONS_DEN => 22, [:DRAGONS_DEN, 2] => 12, :CAVE => -15, :FAIRY_TALE => -20 },
       # Rivals
-      :RIVAL_JUNO       => { :FLOWER_GARDEN => 18, :MEADOW => 18, :WATER_SURFACE => 14, :WILDFIRE => -25 },
+      :RIVAL_JUNO       => { :FLOWER_GARDEN => 18, :MEADOW => 18, :WATER_SURFACE => 30, :WILDFIRE => -25 },
       :RIVAL_KESTREL    => { :DRAGONS_DEN => 16 },
       # Villains and story fights
-      :HOLLOW_WICK        => { [:HOLLOW_CATHEDRAL, 2] => 22 },
+      :HOLLOW_WICK        => { [:HOLLOW_CATHEDRAL, 2] => 30 },
       :HOLLOW_SABLE       => { :CAVE => 16 },
       :HOLLOW_ADMIN       => { :CAVE => 12 },
       :MERIDIAN_KROLL     => { [:MINDSCAPE, 2] => 16, [:CAVE, 2] => 12, [:CAVE, 1] => 12 },
-      :MERIDIAN_QUENT     => { :ASHEN_WASTE => 22, :SCRAPYARD => 14, :FACTORY => 14 },
+      :MERIDIAN_QUENT     => { :ASHEN_WASTE => 22, :FACTORY => 14 },   # no Scrapyard bonus: Explosion hits his own partner in the Ch16 double
       :MERIDIAN_MARCHETTI => { :DARK_CRYSTAL => 22 },
-      :ARCHSEER_DASK      => { :MINDSCAPE => 10, :INVERSE => 10 },
+      :ARCHSEER_DASK      => { :MINDSCAPE => 22, :INVERSE => 22 },
       # The Eevee Octave
-      :OCTAVE_SINGER      => { :UNDERWATER => 18, :WATER_SURFACE => -25, :INVERSE => 14, [:NEW_MOON, 2] => 14,
+      :OCTAVE_SINGER      => { :UNDERWATER => 18, :WATER_SURFACE => -25, :INVERSE => 22, [:NEW_MOON, 2] => 14,
                                [:NEON_GRID, 1] => 18, :VOLCANIC => 18 },
       :OCTAVE_VESPER      => { :INVERSE => 12 }
+    }
+
+    # SUPPORT - doubles support moves the v21 AI underrates against raw damage. Bonus to the move's score in a
+    # double battle, under a condition: :first_turns (only on the battle's first two turns), :no_tailwind,
+    # :no_rain, :partner (a partner is on the field).
+    SUPPORT = {
+      :LEADER_TAMSIN    => { :RAINDANCE => [25, :no_rain], :SILKTRAP => [8, :partner] },
+      :LEADER_CORVIN    => { :TAILWIND => [20, :no_tailwind], :RAGEPOWDER => [15, :partner] },
+      :LEADER_ODESSA    => { :TAILWIND => [35, :no_tailwind], :WIDEGUARD => [12, :partner], :HELPINGHAND => [10, :partner] },
+      :LEADER_NYX       => { :FAKEOUT => [30, :first_turns], :HELPINGHAND => [10, :partner] },
+      :LEADER_CELESTINE => { :FAKEOUT => [30, :first_turns], :DECORATE => [40, :first_turns], :FOLLOWME => [25, :partner] },
+      :OCTAVE_VESPER    => { :HELPINGHAND => [15, :partner] },
+      :OCTAVE_SINGER    => { :HELPINGHAND => [15, :partner] },
+      :MERIDIAN_MARCHETTI => { :TAILWIND => [20, :no_tailwind] },
+      :MERIDIAN_QUENT   => { :TRICKROOM => [20, :first_turns] }
     }
 
     ENTRY_FIELDS = {
@@ -127,10 +142,14 @@ module FieldEffects
       return table[dest[0]] || 0
     end
 
-    def trainer_type_of(ai)
-      tr = ai.trainer
-      tr = tr.trainer if tr.respond_to?(:trainer)
+    # Trainer type of the trainer who owns the battler the AI is choosing for. (Battle::AI::AITrainer has no
+    # public reader for its trainer, so go through the battle.)
+    def trainer_type_of(battle, battler_index)
+      return nil if !battle.opponent || (battler_index & 1) == 0
+      tr = battle.pbGetOwnerFromBattlerIndex(battler_index)
       return (tr && tr.respond_to?(:trainer_type)) ? tr.trainer_type : nil
+    rescue StandardError
+      return nil
     end
 
     # ENTRY_FIELDS: called as a battler enters (before the field's own on-entry rules).
@@ -172,7 +191,7 @@ class Battle::AI
   def pbPredictMoveFailure
     failed = prismfall_plays_pbPredictMoveFailure
     return failed if !failed || !FieldEffects.active?(@battle)
-    tt = FieldEffects::TrainerPlays.trainer_type_of(self)
+    tt = FieldEffects::TrainerPlays.trainer_type_of(@battle, @user.index)
     return failed if !tt || !FieldEffects::TrainerPlays::WANTS[tt]
     play = FieldEffects::TrainerPlays.play_for(@battle, @user.battler, @move.move, @move.rough_type)
     return failed if !play || !play[3]
@@ -184,7 +203,7 @@ end
 Battle::AI::Handlers::GeneralMoveScore.add(:prismfall_trainer_plays,
   proc { |score, move, user, ai, battle|
     next score if !FieldEffects.active?(battle) || !ai.trainer.medium_skill?
-    tt = FieldEffects::TrainerPlays.trainer_type_of(ai)
+    tt = FieldEffects::TrainerPlays.trainer_type_of(battle, user.index)
     next score if !tt || !FieldEffects::TrainerPlays::WANTS[tt]
     play = FieldEffects::TrainerPlays.play_for(battle, user.battler, move.move, move.rough_type)
     next score if !play
@@ -203,5 +222,27 @@ Battle::AI::Handlers::GeneralMoveScore.add(:prismfall_trainer_plays,
     end
     PBDebug.log_score_change(score - old, "trainer field play (#{dest[0]})")
     next score
+  }
+)
+
+Battle::AI::Handlers::GeneralMoveScore.add(:prismfall_trainer_support,
+  proc { |score, move, user, ai, battle|
+    next score if !ai.trainer.medium_skill? || battle.pbSideSize(user.index) < 2
+    tt = FieldEffects::TrainerPlays.trainer_type_of(battle, user.index)
+    table = tt && FieldEffects::TrainerPlays::SUPPORT[tt]
+    rule = table && table[move.id]
+    next score if !rule
+    bonus, cond = rule
+    side = user.battler.pbOwnSide
+    ok = case cond
+         when :first_turns then battle.turnCount <= 1
+         when :no_tailwind then side.effects[PBEffects::Tailwind] <= 0
+         when :no_rain     then ![:Rain, :HeavyRain].include?(battle.pbWeather)
+         when :partner     then battle.allSameSideBattlers(user.index).any? { |b| b.index != user.index && !b.fainted? }
+         else true
+         end
+    next score if !ok
+    PBDebug.log_score_change(bonus, "trainer doubles support (#{move.id})")
+    next score + bonus
   }
 )

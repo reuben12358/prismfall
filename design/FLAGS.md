@@ -4,16 +4,17 @@
 > **What goes here:** *event/world state*, meaning things map events need on page conditions (a map's look, an NPC's presence, a scene already played).
 > **What does NOT go here:** player **choices, Bonds, Standing, Resonance, game overs and endings**. Those live in Core save data (`Prismfall.state.narrative`, SYSTEMS.md §8) under keys owned by `design/NARRATIVE_KEYS.md`. Events read them with `pf_choice(:key)`, `pf_bond(:ID)`, `pf_cond("…")`. Never mirror a choice into a switch by hand. If a mirror is ever needed for an event page, add it in the "Core-written mirrors" block below, written by Core only.
 > Naming: `S###` switch, `V###` variable. "Set by" is where the story sets it. Reserved gaps are deliberate, so append inside each block.
+> **Revision 14 (Saltmere is now Chapter 2 / Gym 1, Briarwick Chapter 3 / Gym 2):** IDs and names never change, so some names carry their old chapter prefix. `CH2_*` switches (S106, S107) are **Chapter 3, Briarwick**, and `CH3_*` switches (S108–S110) are **Chapter 2, Saltmere**. Only the descriptions below changed. Gym puzzle blocks follow the building, not the gym number: 305–309 = the Loomhouse (Gym 2), 310–314 = the Pell Playhouse (Gym 1) (GYM_PUZZLES §1).
 
 ## Variables (V101–V140 used, V141–V300 reserved)
 
 | ID | Name | Values / meaning | Set by |
 |---|---|---|---|
 | V101 | STORY_ACT | 0 = Prologue, 1–5 = Act, 6 = post-game | Act title cards |
-| V102 | STORY_CHAPTER | 0 = Prologue, 1–21 = chapter, 22 = epilogue, 23 = post-game | Chapter openers |
+| V102 | STORY_CHAPTER | 0 = Prologue, 1–21 = chapter (2 = Saltmere "Curtain Call", 3 = Briarwick "The Weaver's Debt"), 22 = epilogue, 23 = post-game | Chapter openers / closers (2 at the Ch1 cutscene, 3 at Saltmere's North Gate, 4 at Briarwick's charcoal child) |
 | V103 | FESTIVAL_DAY | 0–7 (Ch20–21 scene day; Core's `festival_stage` tracks the bracket separately) | Crownhaven day transitions |
 | V104 | LOWLIGHT_STATE | 0 = intact, 1 = Shattered (608 replaces 181), 2 = spreading (Act IV), 3 = healed (Homecoming) | Ch5, Act IV opener, ending |
-| V105 | BRIARWICK_GLASSWOOD | 0 = edge, 1 = receded (Matriarch beaten), 2 = at the looms (Act IV), 3 = gone | Ch2, Act IV, ending |
+| V105 | BRIARWICK_GLASSWOOD | 0 = edge, 1 = receded (Matriarch beaten; the Windfall Row forest-road cordon lifts), 2 = at the looms (Act IV), 3 = gone | Ch3, Act IV, ending |
 | V106 | VERDANCE_BLOOM | 0 = normal, 1 = runaway (Ch10 arrival), 2 = tamed (Juno confirmed), 3 = autumn (Homecoming) | Ch10, ending |
 | V107 | RIMEHOLT_STATE | 0 = frozen, 1 = Thaw (lower town sunk), 2 = rebuilding (epilogue) | Ch11, epilogue |
 | V108 | EBB_STATE | 0 = two-way, 1 = stuttering, 2 = stopped (Ch4 night), 3 = restored (Ebbmouth Strike) | Ch4, Ch11 transit |
@@ -41,11 +42,11 @@
 | S103 | CH1_STARTER_GOT | Starter received |
 | S104 | CH1_K1_DONE | K1 fought |
 | S105 | CH1_ORCHARD_DONE | Glassed Orchard tutorial cleared |
-| S106 | CH2_THISTLE_DONE | Thistle admin battle |
-| S107 | CH2_MATRIARCH_DONE | Glass Matriarch boss cleared |
-| S108 | CH3_PAGEANT_DONE | Mourner's Saltmere pageant scene |
-| S109 | CH3_J1_DONE | J1 |
-| S110 | CH3_UNDERSTUDY_GOT | Gift Eevee received |
+| S106 | CH2_THISTLE_DONE | Thistle admin battle at Briarwick's pylon (Ch3) |
+| S107 | CH2_MATRIARCH_DONE | Glass Matriarch boss cleared (Ch3, after Gym 2) |
+| S108 | CH3_PAGEANT_DONE | Mourner's Saltmere pageant scene (Ch2, after Gym 1; opens the North Gate) |
+| S109 | CH3_J1_DONE | J1 on Saltmere's promenade green (Ch2, before Gym 1) |
+| S110 | CH3_UNDERSTUDY_GOT | Gift Eevee "Understudy" received (Ch2, right after Gym 1) |
 | S111 | CH4_K2_DONE | K2 |
 | S112 | CH4_TEO_MET | Teo admin battle |
 | S113 | CH5_GALA_DONE | Gala and raid finished |
@@ -110,13 +111,13 @@
 | S167 | DOMINAR_LEGIONS | Ashkaar legions camp at Wyrmrest |
 | S168 | ISENMAR_MARTIAL_LAW | Isenmar refugee NPCs in Elowen and Cragholm |
 | S169 | LANTERN_THEATRE_SHUT | Saltmere theatre closed (Act III–IV) |
-| S170 | GLOAMING_DISGUISED_CELESTINE | Ch2 old-woman NPC at the Loyal Three shrine (off after Ch2) |
+| S170 | GLOAMING_DISGUISED_CELESTINE | Ch3 old-woman NPC at Briarwick's Loyal Three shrine (off once Tamsin's badge is won) |
 | S171 | HOLLOW_SANCTUARY_OPEN | Branch map 698 entrance visible (set when Core's Standing check passes at Ch10 start) |
 | S172 | BLACK_SITE_OPEN | Branch map 699 entrance visible |
 | S173 | ACCORD_ARCHIVE_OPEN | Branch map 838 entrance visible |
 | S174 | DOCTORS_CELL_QUEST | "The Doctor's Cell" side quest active (Ch11–13) |
 | S175 | LITTLE_OWL_QUEST | Ilsa's "Little Owl" quest active (Ch13–20) |
-| S176 | THISTLEDOWN_CLEARED | Haunted manor completed |
+| S176 | THISTLEDOWN_CLEARED | Haunted manor completed (Ch3, on the Weavers' Road) |
 | S177 | EEVEE_OCTAVE_DONE | Eeveelution gauntlet cleared |
 | S178 | VANE_HALL_DONE | Vane Hall sequence completed |
 | S179 | WENLOW_ALIVE | On until Interlude IV ends (Mirefen NPC page) |
@@ -172,7 +173,7 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 |---|---|---|
 | V122 | WAR_STATE | 0 = tension, 1 = passes closed (Ch8), 2 = war declared (Ch11), 3 = Siege of Skaldfast (Ch15), 4 = Battle of the Shattered Ice fought (Ch19), 5 = Peace of Plates (Festival), 6 = settled (ending) |
 | V123 | CAMEO_QUESTS_DONE | Count of sister-game sidequests completed (0–8) for NPC chatter |
-| S181 | CAMEO_SHELLY_DONE | "Lost in the Gossamer" complete |
+| S181 | CAMEO_SHELLY_DONE | "Lost in the Gossamer" complete (Ch3, after Gym 2) |
 | S182 | CAMEO_VENAM_DONE | "Sewer Royalty" complete (Venam's Testimony obtained) |
 | S183 | CAMEO_GARRET_DONE | "Two Lucarios" complete |
 | S184 | CAMEO_MELIA_DONE | "What Are You For?" complete |
@@ -181,7 +182,7 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 | S187 | CAMEO_SHIV_DONE | "Dreamwalker" complete |
 | S188 | CAMEO_LIN_DONE | Lin superboss beaten (post-game) |
 | S189 | CAMEO_NOVA_DONE | Nova fought (Ruin Route) |
-| S190 | VESPER_MET_SALTMERE | Eevee Octave first meeting (Ch3) |
+| S190 | VESPER_MET_SALTMERE | Eevee Octave first meeting (Ch2) |
 | S191 | VESPER_MET_LUCENT | Eevee Octave second meeting (Ch13); the Festival exhibition needs both |
 | S192 | WAR_CUTSCENE_SEEN | WAR-1 has played (enables skip and theater replay) |
 | S193 | RUIN_ROUTE_ACTIVE | Event-page mirror of Core's `ruin_route` (Core-written, read-only) |

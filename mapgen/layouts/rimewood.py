@@ -4,8 +4,8 @@ Snow" (Kristiline Town (Frozen) snow, ice and A-frame longhouses; Reborn Route 4
 forest and Prismfall's giant trees, rcustom.SNOW).  MAPGEN 2h.
 
 Chain (each link is an edge connection; spans match maps.json):
-  140 Saltmere --W(32)/E(12)--> 560 Route 5 --W(10)/E(18)--> 570 Frostwick --N(20)/S(22)--> 562 The Rimewood
-  --N(12)/S(10)--> 561 Route 6 --N(12)/S(22)--> 160 Ebbmouth;   562 (47,24) <-RIME_GLADE-> 563 (0,15)
+  140 Saltmere --W(32)/E(12)--> 560 Frostflat Causeway --W(10)/E(18)--> 570 Frostwick --N(20)/S(22)--> 562 The Rimewood
+  --N(12)/S(10)--> 561 Gullcry Cliffs --N(12)/S(22)--> 160 Ebbmouth;   562 (47,24) <-RIME_GLADE-> 563 (0,15)
 Interiors 571-576 are Sheridan timber rooms (interiorkit, tileset 34).
 Run: python3 -I layouts/rimewood.py && python3 -I build.py 560 561 562 563 570 571 572 573 574 575 576"""
 import os, sys, math, random
@@ -150,9 +150,9 @@ def head(mid, name, **kw):
     h.update(kw); return h
 
 
-# =================================================================================================== 560 Route 5
+# =================================================================================================== 560 Frostflat Causeway
 def route5(prev=None):
-    """Route 5, the Frostflat Causeway (560): a raised salt road (h=1, rows 12-14) on one long south-facing embankment,
+    """Frostflat Causeway (560): a raised salt road (h=1, rows 12-14) on one long south-facing embankment,
     the salt half (east: brine pans with crusted rims, salt-cedars, the overturned salt wagon) turning to the frost half
     (west: frost-pans you slide on, frosted reeds); the Border Stones flank the road at mid-way under a bolted Meridian
     sunburst; Meridian survey pegs march across the flats.  The frozen lagoon (south) and the sea-ice (north) stay open."""
@@ -195,7 +195,7 @@ def route5(prev=None):
     m.stamp('fw_stone', 30, 9); m.stamp('fw_stone', 36, 9)                         # the Border Stones
     E.append(sign((30, 10), 'Border Stones', "Two old stones. One bears Elowen's briar crown, the other Isenmar's whale and axe.\n"
                   "A brass Meridian sunburst has been bolted across both of them. The bolts are new."))
-    E.append(sign((60, 11), 'Route sign', "ROUTE 5 - THE FROSTFLAT CAUSEWAY\nW: Frostwick   E: Saltmere"))
+    E.append(sign((60, 11), 'Route sign', "FROSTFLAT CAUSEWAY\nW: Frostwick   E: Saltmere"))
     E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
                   "[The Rehearsal, map 568: not built yet]"))
     E += [npc((33, 10), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
@@ -255,11 +255,11 @@ def route5(prev=None):
     road_tracks(m, 0.10, seed=560)
     drifts(m, 0.16, seed=560)
     if prev: m.preview(prev, 0.5)
-    m.write(560, head(560, 'Route 5', biome='route', display_name='Route 5 - Frostflat Causeway', bgm='Route 2',
+    m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},
                       tone=[-6, -2, 10, 10],
                       connections=[{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 32}, {'dir': 'W', 'offset': 10, 'to': 570, 'to_offset': 21}],
-                      _file='560_route5.yaml'), '# Route 5 (560). WRITTEN BY layouts/rimewood.py - edit that script.\n')
+                      _file='560_route5.yaml'), '# Frostflat Causeway (560). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     return m
 
 
@@ -784,7 +784,7 @@ def glade(prev=None):
     return m
 
 
-# =================================================================================================== 561 Route 6
+# =================================================================================================== 561 Gullcry Cliffs
 def route6(prev=None):
     W, H = 30, 60
     m = snowmap(W, H, 561, kit='aks', sea=True)
@@ -841,11 +841,11 @@ def route6(prev=None):
         if vnoise(x, y, 7, 3.0) > 0.55 and m.L[1, y, x] == 0: m.L[1, y, x] = ice_at(x, y)
     m.scatter(10, seed=7)
     if prev: m.preview(prev, 0.5)
-    h = head(561, 'Route 6', biome='route', display_name='Route 6 - Gullcry Cliffs', bgm='Route 3',
+    h = head(561, 'Gullcry Cliffs', biome='route', display_name='Gullcry Cliffs', bgm='Route 3',
              metadata=old['metadata'], tone=[-10, -6, 6, 20], walk_from=[[5, 38]],
              connections=[{'dir': 'N', 'offset': 12, 'to': 160, 'to_offset': 22}, {'dir': 'S', 'offset': 10, 'to': 562, 'to_offset': 12}],
              _file='561_route6.yaml')
-    m.write(561, h, '# Route 6 (561). WRITTEN BY layouts/rimewood.py - edit that script.\n')
+    m.write(561, h, '# Gullcry Cliffs (561). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     return m
 
 

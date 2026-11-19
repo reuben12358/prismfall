@@ -1,7 +1,7 @@
-# Route 1 (520). WRITTEN BY layouts/route1.py - edit that, not this file.
+# The Ferrymen's Mile (520). WRITTEN BY layouts/route1.py - edit that, not this file.
 id: 520
 biome: route
-name: Route 1
+name: The Ferrymen's Mile
 bgm: Route 1
 parent: 0
 tone: [4, 6, -8, 0]
@@ -1443,9 +1443,9 @@ tiles:
 events:
 - type: sign
   at: [18, 62]
-  text: 'ROUTE 1
+  text: 'THE FERRYMEN'S MILE
 
-    Ferrow''s Landing - Hale''s Bramble - Route 2.
+    Ferrow''s Landing - Hale''s Bramble - Windfall Row.
 
     Mind the hedges. The hedges mind you.'
 - type: trainer

@@ -140,7 +140,8 @@ def main():
     # hand-drawn pieces (rdraw.py): Frostwick's whalebone longhouses, rib gate, walkways, smoke, stalls, props, the
     # frozen fall.  Appended after everything above, so earlier ids never move.
     drawn = {}
-    def draw_in(table, k):
+    seen = {}
+    def draw_in(table, k, dedup=False):
         for n, (im, code, door) in table.items():
             big = im.resize((im.width * 2, im.height * 2), Image.NEAREST)
             h, w = len(code), len(code[0])
@@ -152,8 +153,13 @@ def main():
                     tile = big.crop((tx * 32, ty * 32, tx * 32 + 32, ty * 32 + 32))
                     if tile.getbbox() is None: continue
                     z, p_, q_ = rdraw.CODE[c][:3]
+                    pr = (p_, q_, rdraw.CODE[c][3] if len(rdraw.CODE[c]) > 3 else 0)
+                    if dedup:
+                        h_ = (tile.tobytes(), pr)
+                        if h_ in seen: lay[z][ty][tx] = seen[h_]; continue
+                        seen[h_] = k
                     sheet.paste(tile, ((k % 8) * 32, (k // 8) * 32))
-                    props[k] = (p_, q_, rdraw.CODE[c][3] if len(rdraw.CODE[c]) > 3 else 0); lay[z][ty][tx] = k; k += 1
+                    props[k] = pr; lay[z][ty][tx] = k; k += 1
             drawn[n] = (w, h, lay, door)
         return k
     k = draw_in(rdraw.pieces(), k)
@@ -185,6 +191,9 @@ def main():
         t, k = add33(off_d + i, k); dove.append([x, y, z, t])
     idmap = {t: i for t, i in idmap.items() if not isinstance(t, tuple)}
     k = draw_in(rdraw.pieces_late2(), k)
+    k0 = k
+    k = draw_in(rdraw.pieces_late3(), k, dedup=True)       # map builder 8: the city kit (tdraw.py), deduplicated
+    print('city kit tiles', k - k0)
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},

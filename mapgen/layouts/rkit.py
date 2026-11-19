@@ -67,6 +67,28 @@ DECOR_SNOW = {'flowers': [9725, 9725, 10620], 'green': [10551, 10555, 10556, 103
               'rare': [10628, 10620]}
 
 
+def P1(name):
+    """the tile id of a 1x1 drawn piece (rdraw / tdraw), whatever layer its code put it on"""
+    L = STAMPS[name]['layers']
+    return next(L[z][0][0] for z in range(3) if L[z][0][0])
+
+
+# map builder 8: the masonry quay kit (tdraw.quay): coping lip (walkable), ashlar face, wet base over the water
+if 'qy_lipm0' in STAMPS:
+    KITS['qy'] = dict(N=(P1('qy_N0'),) * 3, W=P1('qy_W0'), E=P1('qy_E0'),
+                      rows=[(P1('qy_lipw0'), P1('qy_lipm0'), P1('qy_lipe0')), (P1('qy_f1w0'), P1('qy_f1m0'), P1('qy_f1e0')),
+                            (P1('qy_f2w0'), P1('qy_f2m0'), P1('qy_f2e0'))], inW=None, inE=None, l0=False,
+                      alt={P1('qy_f1m0'): (P1('qy_f1m1'), 0.12), P1('qy_lipm0'): (P1('qy_lipm1'), 0.3), P1('qy_f2m0'): (P1('qy_f2m1'), 0.4)})
+    STAIRS_STONE = tuple(P1('st_stair_' + k) for k in 'lmr')
+    STAIRS_TIMBER = tuple(P1('tb_stair_' + k) for k in 'lmr')
+    GRASS_DARK = [[P1('gr_dark00'), P1('gr_dark01')], [P1('gr_dark10'), P1('gr_dark11')]]
+    GRASS_WORN = [[P1('gr_worn00'), P1('gr_worn01')], [P1('gr_worn10'), P1('gr_worn11')]]
+    CLOVER = [P1('gr_clover0'), P1('gr_clover1')]
+    TUFTS = [P1('gr_tuft%d' % i) for i in range(3)]
+# the old flat dark-brown plank slab (Sheridan_2 544-546) once used as stairs: build.py --strict now rejects it
+OLD_SLAB = (C('sh', 544), C('sh', 545), C('sh', 546))
+
+
 def incoming(mid):
     """cells of map `mid` where other specs' transfers land (`to: {map: mid, x, y}`): keep them walkable and bare"""
     import glob
@@ -95,6 +117,12 @@ class RMap:
         self.tall = SH_TALL
         self.auto = {'d': ('DirtDark', 'rejuvenation'), 'g': ('Gravel Spring', 'pf'), 'w': (water, 'rejuvenation'),
                      's': ('Sand shore_2', 'rejuvenation'), 'W': ('Sea deep', 'rejuvenation'), 'u': ('Dirt', 'rejuvenation')}
+        if tileset == 55:                            # map builder 8: city paving (cobbled streets, flagged squares)
+            self.auto = {'c': ('Saltmere Cobbles', 'pf'), 'f': ('Saltmere Flags', 'pf'), 'w': (water, 'rejuvenation'),
+                         's': ('Sand shore_2', 'rejuvenation'), 'W': ('Sea deep', 'rejuvenation'), 'd': ('DirtDark', 'rejuvenation'),
+                         'g': ('Gravel Spring', 'pf')}
+        self.STAIRS = STAIRS_STONE if tileset == 55 else STAIRS_TIMBER     # stone in cities, timber steps elsewhere
+        self.grass_var = True
         self.cliff = np.zeros((H, W), bool)
         self.overm = np.zeros((H, W), bool)          # overhead-only crown cells of tree-like stamps (free below)
         self.bodym = np.zeros((H, W), bool)          # every other stamp cell (walls, boles, trunks, props)
@@ -391,9 +419,36 @@ class RMap:
         for y, x in np.argwhere(self.cls == 't'):
             L[0, y, x] = self.tall[(x * 7 + y * 3) % len(self.tall)] if isinstance(self.tall, list) else self.tall
 
+    def grass_variation(self, dark=0.6, worn=True):
+        """Rejuvenation's grass is never one flat colour (map builder 8): darker shade patches drift through the lawn
+        (noise blobs, densest under tree canopies and at the foot of walls and cliffs), and the turf is worn to earth
+        beside doors, lanes and stair feet.  Only plain Sheridan grass cells are touched."""
+        if self.grass is not SH_GRASS or not getattr(self, 'grass_var', False): return
+        L = self.L; g = set(t for row in SH_GRASS for t in row)
+        shade = np.zeros((self.H, self.W))
+        near = (self.L[2] > 0) | np.isin(self.cls, ['T', 'B']) | self.cliff
+        pad = np.pad(near, 2)
+        for dy in range(-2, 3):
+            for dx in range(-2, 3):
+                shade += np.roll(np.roll(pad, dy, 0), dx, 1)[2:-2, 2:-2] * (1.0 / (1 + abs(dx) + abs(dy)))
+        walk = np.isin(self.cls, list('dgcfsD'))
+        for e in self.events:
+            if e.get('type') == 'door':
+                x, y = e['at']; walk[min(self.H - 1, y + 1), x] = True
+        for sx, sy, sw, sn in self.stairs_at: walk[min(self.H - 1, sy + sn), sx:sx + sw] = True
+        wpad = np.pad(walk, 1); wn = sum(np.roll(np.roll(wpad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1))
+        for y in range(self.H):
+            for x in range(self.W):
+                if self.cls[y, x] not in '.T' or int(L[0, y, x]) not in g: continue
+                n = vnoise(x, y, self.seed + 501, 5.0) + 0.05 * min(6, shade[y, x])
+                if worn and self.cls[y, x] == '.' and wn[y, x] >= 2 and vnoise(x, y, self.seed + 502, 2.0) > 0.45:
+                    L[0, y, x] = GRASS_WORN[y % 2][x % 2]
+                elif n > dark:
+                    L[0, y, x] = GRASS_DARK[y % 2][x % 2]
+
     # class -> layer of its autotile: water on the ground layer; lanes, streets, beach sand and deep water on layer 2
-    AUTO_Z = {'w': 0, 'd': 1, 'g': 1, 's': 1, 'W': 1, 'u': 1}
-    JOIN = {'w': 'wW', 's': None, 'W': 'W'}          # None: everything except water joins (no shore edge toward land)
+    AUTO_Z = {'w': 0, 'd': 1, 'g': 1, 's': 1, 'W': 1, 'u': 1, 'c': 1, 'f': 1}
+    JOIN = {'w': 'wW', 's': None, 'W': 'W', 'c': 'cf', 'f': 'fc'}          # None: everything except water joins (no shore edge toward land)
 
     def autotiles(self):
         """Each autotile class on its layer; neighbours of the same class (and the map edge) join."""
@@ -477,28 +532,32 @@ class RMap:
                 t = K['N'][0 if wn else 2 if en else 1]
             if kind == 'row' and 0 < k < len(K['rows']) - 1 and K.get('vines') and self.rng.random() < K['vines'][1]:
                 t = K['vines'][0] if t == K['rows'][k][1] else t
-            z = 2 if self.L[1, y, x] and self.cls[y, x] in 'sdgW' else 1     # over a beach or lane: above it
+            if K.get('alt') and t in K['alt'] and self.rng.random() < K['alt'][t][1]: t = K['alt'][t][0]
+            z = 2 if self.L[1, y, x] and self.cls[y, x] in 'sdgWcf' else 1     # over a beach, lane or paving: above it
             self.L[z, y, x] = t
             if K.get('l0') and self.cls[y, x] == '.' and kind == 'row' and t == K['rows'][k][1]: self.L[0, y, x] = t
             if kind != 'N': self.cliff[y, x] = True
             self.taken[y, x] = True
         self.pieces = piece
 
-    STAIRS = (C('sh', 544), C('sh', 545), C('sh', 546))
-
-    def stairs(self, x, ylip, w=3, n=None, kit_rows=4):
-        """A wooden stairway w wide down a south face whose lip row is ylip (plan-time: cells become dirt lane)."""
+    def stairs(self, x, ylip, w=3, n=None, kit_rows=4, kind=None, c='d'):
+        """A stairway w wide down a south face whose lip row is ylip (plan-time: cells become lane class `c`).
+        kind: 'stone' (dressed steps with cheek walls), 'timber' (plank steps between log posts) or None = the map's
+        default (self.STAIRS: stone on city tileset 55, timber elsewhere; snow maps set fw_stair)."""
         n = n or kit_rows
         self.stairs_at.append((x, ylip, w, n))
+        if kind: self.stair_kind = dict(getattr(self, 'stair_kind', {}), **{'%d,%d' % (x, ylip): kind})
         for yy in range(ylip, ylip + n):
             for xx in range(x, x + w):
-                self.cls[yy, xx] = 'd'
+                self.cls[yy, xx] = c
 
     def paint_stairs(self):
+        kinds = getattr(self, 'stair_kind', {})
         for sx, sy, sw, sn in self.stairs_at:
+            tab = {'stone': STAIRS_STONE, 'timber': STAIRS_TIMBER}.get(kinds.get('%d,%d' % (sx, sy)), self.STAIRS)
             for yy in range(sy, sy + sn):
                 for i, xx in enumerate(range(sx, sx + sw)):
-                    self.L[2, yy, xx] = self.STAIRS[0 if i == 0 else 2 if i == sw - 1 else 1]
+                    self.L[2, yy, xx] = tab[0 if i == 0 else 2 if i == sw - 1 else 1]
                     self.taken[yy, xx] = True; self.cliff[yy, xx] = False
 
     TREES_SH = [  # 3x4 forest trees: (top two rows on layer 3, bottom two rows on layer 2), weights
@@ -579,11 +638,12 @@ class RMap:
                 nz = vnoise(x, y, seed, 5.0)
                 r = self.rng.random() * 100
                 if nz > 0.58 and r < k * 2.4: self.L[1, y, x] = self.rng.choice(groups['flowers'])
-                elif r < k: self.L[1, y, x] = self.rng.choice(groups['green'])
+                elif r < k: self.L[1, y, x] = self.rng.choice(groups['green'] + (TUFTS + CLOVER if groups is DECOR_SH and getattr(self, 'grass_var', False) else []))
                 elif r < k + 0.6: self.L[1, y, x] = self.rng.choice(groups['rare'])
 
     def paint(self):
         self.paint_ground(); self.autotiles(); self.cliffs(); self.paint_stairs(); self.forest(); self.put_stamps()
+        self.grass_variation()
         return self.L
 
     # ------------------------------------------------------------ output

@@ -32,7 +32,7 @@ The game's spine is the PC learning they're wanted. Its climax is the PC decidin
 |---|---|---|---|
 | The Mourner | **Rowan Ashby** | `HOLLOW_MOURNER` | Grass Warden of Verdance. See 03_CAST. |
 | Pallbearer (theology) | **Brother Wick** | `HOLLOW_WICK` | Co-founder and author of the Return doctrine. Psychic/Ghost team (Bronzong, Chimecho, Musharna, Dusknoir). |
-| Pallbearer (field) | **Mara "Thistle" Thistlewood** | `HOLLOW_THISTLE` | Ex-Briarwick weaver whose village Lowmarsh is a Quiet Town. Bug/Poison team (Ariados, Scolipede, Vespiquen, Dustox). The PC's first admin fight. |
+| Pallbearer (field) | **Mara "Thistle" Thistlewood** | `HOLLOW_THISTLE` | Ex-Briarwick weaver whose village Lowmarsh is a Quiet Town. Bug/Poison team (Ariados, Scolipede, Vespiquen, Dustox). Cuts the Lantern Theatre's curtain ropes at the Saltmere hijack (Ch2); the PC's first admin fight, at Briarwick's pylon (Ch3). |
 | Pallbearer (cells) | **Teo Reyes** | `HOLLOW_TEO` | Ebbmouth cell leader, Marisol's brother, 19. Water/Grass team (Ludicolo, Quagsire, Lombre, Toxicroak). |
 | Pallbearer ("the Hammer") | **Sable** | `HOLLOW_SABLE` → `MERIDIAN_KROLL` | Actually **Sabine Kroll** of Meridian Special Accounts. Dark/Poison team (Drapion, Honchkrow, Skuntank, Toxicroak). Carries Meridian **Splitters**, the Plate-breaking charges. |
 | Cells | ~12, each 5–30 Bereaved | `HOLLOW_GRUNT` | Strongest in Nadir, Ebbmouth, Briarwick and Mirefen. |
@@ -46,7 +46,7 @@ The game's spine is the PC learning they're wanted. Its climax is the PC decidin
 6. **Sympathy.** He never wanted deaths. The Lowlight Shatter (Sable's doing) horrifies him and drives him from "pull the nails" toward Wick's "carry them home". That pivot is the Hollow's arc in miniature.
 
 ### How the Hollow changes across the acts
-- **Act I: theater and sabotage.** They cut Meridian survey lines in Briarwick, hijack Saltmere's pageant and spike Ebbmouth's tidal Lattice. The tone is romantic outlaws. At the **Lumen Gala**, the Mourner tries to *steal* the Zap Plate from Meridian's vault to stop the Lattice drain. Sable detonates a Splitter on it, the Lowlight Shatters, and the realm blames the Hollow. The Mourner's hand is burned catching the cracked Plate.
+- **Act I: theater and sabotage.** They hijack Saltmere's pageant (the Mourner's first appearance, and the question "Ask your Warden"), cut Meridian survey lines in Briarwick (the first sabotage, and Thistle's answer to that question) and spike Ebbmouth's tidal Lattice. The tone is romantic outlaws. At the **Lumen Gala**, the Mourner tries to *steal* the Zap Plate from Meridian's vault to stop the Lattice drain. Sable detonates a Splitter on it, the Lowlight Shatters, and the realm blames the Hollow. The Mourner's hand is burned catching the cracked Plate.
 - **Act II: the split.** Rowan pulls back and starts hunting for "the other way" (the Legend Plate, the Hymn). Sable gathers the angriest Bereaved into **the Hammer**, a faction that wants more Shatters "until they listen". At Cindervault they compete openly: Wick's people try to vent the caldera safely while the Hammer tries to blow it. At **the Ironreach Conclave** the Hammer tries to Shatter the Fist Plate under the Wardens' feet. The Mourner shields the crowd and is unmasked and arrested.
 - **Act III: leaderless and framed.**
   - The Hammer carries out a string of "Hollow atrocities". Some are real. Most are Meridian false flags, including the Skyreach relay bombing blamed on Larch.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Gossamer Wood (524, :SILKWOOD): the Crown's old-growth wood between Route 2 and Briarwick, hung with silver silk.  50 x 58.
-South gate x 22-24 (from Route 2, warp R2_WOOD).  North gate x 24-26 on the root terrace (Briarwick, WOOD_BRIAR).
+"""Gossamer Wood (524, :SILKWOOD): the Crown's old-growth wood between Windfall Row and Briarwick, hung with silver silk.  50 x 58.
+South gate x 22-24 (from Windfall Row, warp R2_WOOD).  North gate x 24-26 on the root terrace (Briarwick, WOOD_BRIAR).
 The direct climb north is walled by silk at the top of the east stairs, so the trail loops west past the dew pond.
 East: the Woodward's hut (526), then a Cut tree and the Bleed Veil before the Deepwood (525, WOOD_DEEP).
 Run:  python3 -I layouts/gossamer.py && python3 -I build.py 524"""
@@ -129,9 +129,9 @@ def build():
     c.grassfill([(16, 44, 3, 2), (31, 31, 2.5, 2), (9, 15, 3, 2.5), (39, 13, 3, 2), (41, 43, 2.5, 2)], only='.')
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 524")
     E = []
-    E.append({'type': 'warp', 'name': 'To Route 2', 'at': [23, 57], 'link': 'R2_WOOD', 'arrive': [23, 56, 'up']})
-    E.append({'type': 'warp', 'name': 'To Route 2 b', 'at': [22, 57], 'to': {'map': 521, 'x': 1, 'y': 9, 'dir': 'left'}})
-    E.append({'type': 'warp', 'name': 'To Route 2 c', 'at': [24, 57], 'to': {'map': 521, 'x': 1, 'y': 11, 'dir': 'left'}})
+    E.append({'type': 'warp', 'name': 'To Windfall Row', 'at': [23, 57], 'link': 'R2_WOOD', 'arrive': [23, 56, 'up']})
+    E.append({'type': 'warp', 'name': 'To Windfall Row b', 'at': [22, 57], 'to': {'map': 521, 'x': 1, 'y': 9, 'dir': 'left'}})
+    E.append({'type': 'warp', 'name': 'To Windfall Row c', 'at': [24, 57], 'to': {'map': 521, 'x': 1, 'y': 11, 'dir': 'left'}})
     E.append({'type': 'warp', 'name': 'To Briarwick', 'at': [25, 0], 'link': 'WOOD_BRIAR', 'arrive': [25, 1, 'down']})
     E.append({'type': 'cut_tree', 'at': [45, 27]})
     E.append({'type': 'warp', 'name': 'To Deepwood', 'at': [49, 27], 'link': 'WOOD_DEEP', 'arrive': [48, 27, 'left']})

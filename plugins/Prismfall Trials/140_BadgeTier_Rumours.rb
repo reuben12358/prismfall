@@ -1,0 +1,87 @@
+#===============================================================================
+# Prismfall Trials - 140 Badge-tier rumours (the hint the player gets)
+#-------------------------------------------------------------------------------
+# [map_id, badges] => rumour. Trial keepers and boards read these
+# (pf_trial_rumours, board > Rumours, quest log > Rumours). {map} becomes the
+# map's current in-game name, so renamed routes keep working. Anything missing
+# falls back to BadgeTiers::GENERIC_RUMOUR. Keep each one a hint, not a list:
+# say what folk saw, not the species, unless the speaker would know it.
+#===============================================================================
+Prismfall::Trials::BadgeTiers::RUMOURS.merge!({
+  # Gym 1 leg (Ferrow's Landing -> Saltmere)
+  [100, 1] => "The {map} anglers say the harbour lights have company. Something down there glows back.",
+  [100, 2] => "Odo swears something with a curly tail stole his float off the {map} pier. Took it out to sea.",
+  [100, 3] => "With a Good Rod, they say, the {map} pier bites back. Something with one enormous claw.",
+  [100, 4] => "An old sailor in {map} says he saw a blue ribbon in the water off the pier. He's been sober a week, he says.",
+  [520, 1] => "Big pawprints in the heather on {map}. Something's been at the honey pots. At night the Lillipup there act oddly.",
+  [520, 2] => "A bird carrying a leek was seen on {map}. Nobody believes it. And at night something black and clever watches the farms.",
+  [520, 3] => "Cotton clouds that sing on {map}, and a little masked wrestler on the ledges who bows before it fights.",
+  [520, 4] => "A child on {map} says a spiky egg rolled past her, laughing. Also: something fluffy that hugs too hard.",
+  [521, 1] => "The {map} orchard folk say an apple has started walking. And a grass goat keeps eating the hedges.",
+  [521, 2] => "An Eevee in the {map} hedgerows again, first in years. Seeds blowing upward, too. And the shy shell-bug is back in the old trees.",
+  [521, 3] => "Mushrooms walking out of the {map} ditches, and a little electric mouse stealing from the Hales' hens.",
+  [521, 4] => "Something with blades for arms in the {map} orchard at dusk. The pickers have stopped working late.",
+  [527, 1] => "Crabs on the {map} rocks, and barnacles that wave back.",
+  [527, 2] => "The tide-pools on {map} have a new resident. If you step on it, it punches you. With its insides.",
+  [527, 3] => "Something small and silver scurries away screaming whenever anyone walks the {map} shore.",
+  [527, 4] => "A steel bird nests on the {map} cliffs, shedding razors. And a seabird swallowed a fisherman's hat.",
+  [528, 1] => "A frilled lizard sunbathing on the {map} dunes, and rabbits in the marram grass.",
+  [528, 2] => "Somebody built a sand castle on {map}. Then it moved. And dandelion seeds blowing the wrong way.",
+  [528, 3] => "A cactus dancing on {map} at noon. Several people have seen it. Nobody will say so twice.",
+  [528, 4] => "A great green beast with fruit under its chin, gliding over the {map} dunes.",
+  [140, 1] => "The harbour anglers of {map} keep reeling up shells with pearls inside. Then the shells bite.",
+  [140, 2] => "Something small and silver follows the ferries that don't run any more out of {map}, jumping the wake.",
+  [140, 3] => "Toothy fish under the {map} breakwater, and a little ray that rides the swell.",
+  [140, 4] => "An old anchor in the {map} harbour has started dragging itself along the bottom. On purpose.",
+  # Gym 2 leg (the Weavers' Road)
+  [541, 2] => "Crabs on the {map} salt pans, bigger than they ought to be, and ducks that don't belong to anyone.",
+  [541, 3] => "A seabird on {map} swallowed a salt-raker's whole catch. Then his hat. Something in the pools punches back, too.",
+  [541, 4] => "The {map} salt-gatherers say something bites their toes in the pools now. Something else runs away from them, screaming.",
+  [544, 2] => "The Brinecut miners hear digging that isn't theirs. And the salt crystals in the deep seam have started to sparkle back.",
+  [544, 3] => "A bell rings in {map} where no bell is. Living gems in the walls; the miners say don't touch, they bite.",
+  [544, 4] => "Something small and green chewing through the walls of {map}. It leaves a tunnel behind it.",
+  [545, 2] => "A great stone snake in {map}. And tiny, angry hammering at night.",
+  [545, 3] => "A floating steel eye in {map}. It stared. It didn't blink. It can't.",
+  [545, 4] => "Land sharks in {map}, the miners say. Small ones. For now.",
+  [552, 2] => "A painter at {map} lost her brush to a dog that paints. The dyers say it does better work.",
+  [552, 3] => "Lily-pad hats bobbing down the river at {map}, and a perfume nobody wears.",
+  [552, 4] => "A little slime dragon in the {map} reeds, and sheep that crackle.",
+  [540, 2] => "Fawns in the {map} meadows, and seed-pods that drift up instead of down. At night, a moaning in the reeds.",
+  [540, 3] => "A bull on {map} charged a hay-cart, and a creature with a face on its tail told it to stop.",
+  [540, 4] => "A boy on {map} says a blue pup taught him how to punch properly. And a great shaggy bull blocks the bridge.",
+  [546, 2] => "Candles in the upstairs windows of {map}. Nobody lights them.",
+  [546, 3] => "A sword in the hall of {map} turned round to watch a visitor leave.",
+  [546, 4] => "Something small and see-through rattles round the {map} nursery, carrying something smaller.",
+  [524, 2] => "The silk in {map} is crackling with static. Something tiny and yellow feeds on it. And the centipedes are back.",
+  [524, 3] => "A green blur cut a sapling in two in {map} and was gone. Water-striders on the puddles, too.",
+  [524, 4] => "Tumbleweeds rolling through {map} with no wind. And a little sun-coloured grub in the old pines.",
+  # Cut-gated (after Tamsin's badge)
+  [525, 3] => "Vines that move on their own in {map}, and a pink mantis in the clearings.",
+  [525, 4] => "Lantern-lights between the trees of {map} at night. Sleeping spores. Don't follow them.",
+  [548, 3] => "The crystals in {map} have started growing ice. Something glittering lives in them now.",
+  [548, 4] => "A snowflake that doesn't melt drifts through {map}. And the grubs there have started to grow batteries.",
+  # Gym 3 leg (north to Ebbmouth)
+  [566, 3] => "Sheep on {map} that crackle when the spinners card them, and a grass goat that headbutts the carts.",
+  [566, 4] => "A great woolly ram on {map} that the spinners can't shear. And a bull that won't let them try.",
+  [577, 3] => "Claw marks in the ice on {map}, and a white beast on the ridge. The old folk say it comes before a disaster.",
+  [577, 4] => "A little ice dragon on {map}, chewing a frozen eel. A great shaggy bull, too, that nobody owns.",
+  [570, 3] => "A plain brown fish in the {map} channel. The anglers throw it back. Bersi says they're fools.",
+  [570, 4] => "A pike with a see-through head hooked in the {map} channel. It looked at the angler like he was the fish.",
+  [578, 3] => "A little snow-headed thing on {map} that follows travellers, and the white beast again.",
+  [578, 4] => "Floating snowflakes and a small ice dragon on {map}, where the trees glaze over.",
+  [562, 3] => "A white beast in {map}. Some say it's warning us. Some say it's waiting.",
+  [562, 4] => "A small ice dragon, and snowflakes that never land, deep in {map}.",
+  [563, 3] => "Something in {map} looks like whipped cream and smells like it too.",
+  [563, 4] => "A pink, quiet thing in {map} that flees from noise. Be quiet, they say.",
+  [560, 3] => "A penguin with an ice-cube for a head waddling along {map}, and claw marks in the frost.",
+  [560, 4] => "A little ice dragon on {map}, and a great shaggy bull that walks the salt road like it owns it.",
+  [568, 3] => "A new player in the loop at {map}: a little imp that laughs on the wrong cue.",
+  [568, 4] => "Something in {map} is wearing a costume. Badly. On purpose.",
+  [561, 3] => "Pink birds on one leg in the surf below {map}, and gulls that crackle.",
+  [561, 4] => "A pelican full of fish on {map}, and something old and dragon-shaped napping on the clifftop.",
+  [564, 3] => "A shrimp with one huge pistol claw firing at the walls of {map}. A penguin with an ice-cube head watches.",
+  [564, 4] => "A fish older than {map} itself has been seen in the deep pools.",
+  [565, 3] => "Ghostly jellyfish drifting through {map}, out of the water. They shouldn't be able to do that.",
+  [565, 4] => "Something in {map} keeps headbutting the rock. Hard. It wants to fly, the cavers say.",
+  [160, 4] => "The {map} anglers' Good Rods are bringing up pink coral, and a plain brown fish Marisol says to leave alone."
+})

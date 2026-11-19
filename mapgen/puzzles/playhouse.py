@@ -61,7 +61,7 @@ THEATRE = ["#########################",
            "#########################"]
 CURTAIN = [(x, y) for y in range(4, 9) for x in range(1, 24)]       # the house curtain, closed: stage rows 4-8
 THEATRE_AT = dict(dorian=(12, 5), front=(12, 6), rope=(21, 9), stagehand=(22, 9), start=(12, 21), doors=(12, 23),
-                  wing=(1, 9), ferdie=(10, 18), rosalind=(14, 14), crewe=(1, 13), mark=(12, 9))
+                  wing=(1, 9), ferdie=(11, 18), rosalind=(13, 14), crewe=(1, 12), mark=(12, 9))
 
 
 def theatre_model():

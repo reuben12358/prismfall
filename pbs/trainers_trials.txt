@@ -1,0 +1,37 @@
+# Pokémon Prismfall - Trial quest trainers (Essentials v21.1 trainers format, merged as PBS/trainers_trials.txt).
+# Owner: Prismfall Trials (design/TRIALS.md). Versions 50-99 are reserved for Trial quests so they never collide
+# with route/story trainers (Hard = v+100, Casual = v+200 follow the BALANCE.md scheme; Core falls back to v).
+# Moves are left out on purpose: Essentials gives each Pokémon its last four level-up moves (always legal).
+#-------------------------------
+# AS_LITTLE_CRUCIBLE - the Legion recruiting barge, Saltmere harbour (after Gym 1, cap 19). Gauntlet, no healing.
+[ASHKAAR_SOLDIER_M,Rekk,50]
+LoseText = Ha! Good hit. Do it again sometime. Not to me.
+Pokemon = SIZZLIPEDE,15
+    IV = 15
+Pokemon = ROLYCOLY,15
+    IV = 15
+#-------------------------------
+[ASHKAAR_SOLDIER_F,Vasha,50]
+LoseText = The Sergeant's going to make me run laps. Worth it.
+Pokemon = CAPSAKID,15
+    IV = 15
+Pokemon = HOUNDOUR,16
+    IV = 15
+#-------------------------------
+[ASHKAAR_OFFICER,Brakka,50]
+LoseText = Three for three. Honest work.
+Items = POTION
+Pokemon = SALANDIT,16
+    IV = 18
+Pokemon = NUMEL,16
+    IV = 18
+Pokemon = FLETCHINDER,17
+    IV = 18
+#-------------------------------
+# IS_SKALDS_SAGA - Gorm the dock bully, Ebbmouth (before Gym 3, cap 23)
+[SAILOR,Gorm,50]
+LoseText = Fine! Walk on my crates. See if I care.
+Pokemon = KRABBY,20
+    IV = 15
+Pokemon = MAKUHITA,21
+    IV = 15

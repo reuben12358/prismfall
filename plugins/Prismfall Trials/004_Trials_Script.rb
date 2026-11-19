@@ -20,7 +20,8 @@
 #   { :event_battle => :MON, :caught => [], :won => [], :lost => [], :fled => [] }
 #   { :trainer => [:TYPE, "Name", version], :won => [], :lost => [], :field => :ID, :double => true }
 #   { :gauntlet => [[:TYPE, "Name", v], ...], :heal_between => false, :won => [], :lost => [] }
-#   { :gift => :MON, :variant => :key }  { :item => [:ITEM, qty] }  { :take => [:ITEM, qty] }
+#   { :gift => :MON, :variant => :key }  { :join => :MON } (a beaten :boss joins, :joins overrides)
+#    { :item => [:ITEM, qty] }  { :take => [:ITEM, qty] }
 #   { :money => n }  { :pay => n }  { :effects => "JUNO+1 RES+1" }  { :points => [:TRIAL, n] }
 #   { :choice_key => [:registered_choice, :value] }  { :deed => :id }
 #   { :chase => :advance | :reset }      { :heal => true }  { :se => "name" }  { :me => "name" }
@@ -162,6 +163,8 @@ module Prismfall
           exec(won ? (e[:won] || []) : (e[:lost] || []), ctx)
         elsif e.has_key?(:gift)
           Prismfall::EventMons.gift(e[:gift], e[:variant])
+        elsif e.has_key?(:join)
+          Prismfall::EventMons.join(e[:join])
         elsif e.has_key?(:item)
           pbReceiveItem(e[:item][0], e[:item][1] || 1)
         elsif e.has_key?(:take)

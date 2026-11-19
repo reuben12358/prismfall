@@ -23,7 +23,7 @@ module Prismfall
         :ranks    => ["Seedling", "Sapling", "Bough", "Heartwood", "Evergreen"],
         :halls    => { 100 => "the Ferrow's Landing wayshrine", 140 => "the Saltmere Lantern House",
                        120 => "the Briarwick Lantern House", 280 => "the Hall of the Listening Root (Verdance)",
-                       460 => "the Twilight Cloister (Gloaming)" },
+                       440 => "the Twilight Cloister (Gloaming)" },
         :accept   => "You untie the lantern from the rope.",
         :done     => "The lantern is lit and let go. It rises over the roofs.",
         :greeting => "The Root listens. What would you take down from the rope?"
@@ -49,6 +49,7 @@ module Prismfall
         :board    => "Split-Flap Board",
         :ranks    => ["Applicant", "Licensee", "Fellow", "Patent-Holder", "Laureate"],
         :halls    => { 108 => "Grant Kiosk P-3NNY (Ferrow's Landing customs hall)",
+                       143 => "Grant Kiosk P-3NNY/1 (Saltmere Harbour Office)",
                        160 => "Grant Kiosk P-3NNY/2 (Ebbmouth Lattice station)",
                        194 => "the Prize Exchange floor (Lumen City, Council Ward)" },
         :accept   => "The board clacks. Your name flips into the ACCEPTED column.",
@@ -102,7 +103,7 @@ module Prismfall
         :board    => "Speculum Glass",
         :ranks    => ["Glimpse", "Gleam", "Mirror", "Speculum", "Behind-the-Glass"],
         :halls    => { 753 => "the Glassmere reading-pool", 346 => "the Speculum (Lucent)",
-                       400 => "the lantern-priests' glass (Gravenmoor)" },
+                       380 => "the lantern-priests' glass (Gravenmoor)" },
         :accept   => "You read it backwards, which is forwards here. It reads you back.",
         :done     => "Your reflection signs the Speculum. It signs a little late.",
         :greeting => "Look into it. No, the other way. There. Which do you take?"

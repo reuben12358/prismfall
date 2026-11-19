@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Route 1 (520): the farm lane over the sea-cliff heath north of Ferrow's Landing.  44 x 68.
-South gate (x 15-17) joins Ferrow's Landing; north gate (x 25-27) joins Route 2.  Three levels: the low meadow by the
+"""The Ferrymen's Mile (520): the farm lane over the sea-cliff heath north of Ferrow's Landing.  44 x 68.
+South gate (x 15-17) joins Ferrow's Landing; north gate (x 25-27) joins Windfall Row.  Three levels: the low meadow by the
 town, the heath terrace, and the Beacon Knoll in the north-west with its pond.  A brook crosses the terrace to the sea.
 Run:  python3 -I layouts/route1.py && python3 -I build.py 520"""
 import os, sys, math
@@ -105,7 +105,7 @@ def build():
     c.path_decor([1164], 0.015)
     # ---- events (story/20_SCRIPT_CH0-2.md, "Map 520")
     E = []
-    E.append({'type': 'sign', 'at': P['sign'], 'text': "ROUTE 1\nFerrow's Landing - Hale's Bramble - Route 2.\nMind the hedges. The hedges mind you."})
+    E.append({'type': 'sign', 'at': P['sign'], 'text': "THE FERRYMEN'S MILE\nFerrow's Landing - Hale's Bramble - Windfall Row.\nMind the hedges. The hedges mind you."})
     pim, dory = P['pim'], P['dory']
     E.append(trainer(pim, 'YOUNGSTER', 'Pim', 'trainer_YOUNGSTER', 'down', 4,
                      "A trainer! With a real partner! Fight me, I've got a Bidoof and a dream!", "The dream's fine. The Bidoof needs a minute."))
@@ -151,10 +151,10 @@ def build():
             {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'trigger': 'touch', 'commands': once(520, 'CH2', ch2)}]})
     c.events = E
     
-    head = {'id': 520, 'biome': 'route', 'name': 'Route 1', 'bgm': 'Route 1', 'parent': 0, 'tone': [4, 6, -8, 0],
+    head = {'id': 520, 'biome': 'route', 'name': 'The Ferrymen\'s Mile', 'bgm': 'Route 1', 'parent': 0, 'tone': [4, 6, -8, 0],
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 24], 'BattleBack': 'field'},
             'connections': [{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 25, 'to': 521, 'to_offset': 40}]}
-    return c.write('520_route1.yaml', head, "# Route 1 (520). WRITTEN BY layouts/route1.py - edit that, not this file.\n")
+    return c.write('520_route1.yaml', head, "# The Ferrymen's Mile (520). WRITTEN BY layouts/route1.py - edit that, not this file.\n")
 
 
 if __name__ == '__main__':

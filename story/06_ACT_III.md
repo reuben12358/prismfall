@@ -11,10 +11,10 @@
 
 ---
 
-## CHAPTER 10 — "The Seat That Blooms" (R17 Lift Road → R18 Prism Falls → Verdance, Gym 9; J3)
+## CHAPTER 10 — "The Seat That Blooms" (The Rootdeep Lift Road → Prism Falls → Verdance, Gym 9; J3)
 
 **Location:**
-- **R17 Lift Road** (the great freight-lift from Nadir up to the plateau) and **R18 Prism Falls** (`:RAINBOW`).
+- **The Rootdeep Lift Road** (the great freight-lift from Nadir up to the plateau) and **Prism Falls** (`:RAINBOW`).
 - **Grudgestone Quarry**, **Echo Coliseum** (688, `:BLEED`: Ironreach's attack replaying as ghost-sound).
 - **Verdance** (Elowen's royal seat, `:FLOWER_GARDEN`), **Briar Keep** (the Queen's castle on the highest terrace), the **Heartgarden**, the **Bride Grove** (708), the **Royal Chase** (Safari-style reserve).
 - **Branch maps by Standing:** 698 **Hollow Sanctuary** (high Hollow) or 699 **Meridian Black Site** (high Meridian).
@@ -47,7 +47,7 @@
   - **Stand with the Ogre** (`OGERPON_TRUSTED`): Ogerpon fights alongside the PC in the boss sequence as a partner-battle ally. It later joins Juno, and it appears at the Festival.
   - **Stand with the Three:** the "official story" choice. See `GO_LOYAL`.
   - **Hesitate:** the Ogre fights alone, the battle is harder, and Ogerpon leaves the Grove afterward, distrustful.
-- **Game over `GO_LOYAL` "Loyal".** Trigger: side with the Loyal Three. Foreshadowing: Celestine's Ch2 rhyme ("who was the thief"), the Mourner's Ch3 line ("ask why the Loyal Three wore poison on their collars"), and the poison collars themselves. The Three seize the Meadow Plate and their poison runs into the Bride Tree's roots. *Epitaph: "You believed the story everyone told. So did the people who wrote it."*
+- **Game over `GO_LOYAL` "Loyal".** Trigger: side with the Loyal Three. Foreshadowing: the Mourner's Ch2 line at the Saltmere pageant ("ask why the Loyal Three wore poison on their collars"), Celestine's Ch3 rhyme at Briarwick's shrine ("who was the thief"), and the poison collars themselves. The Three seize the Meadow Plate and their poison runs into the Bride Tree's roots. *Epitaph: "You believed the story everyone told. So did the people who wrote it."*
 
 **Gym 9: J3** (`:FLOWER_GARDEN`, 5 growth stages). Thematic note: *a garden you grow during the fight; the stages rise with Juno's confidence.* Juno, newly confirmed, with pollen in her hair:
 > *"I didn't want this seat. I wanted him in it. But the city's drowning in flowers and nobody else is coming, so. Hi. I'm the Warden of Verdance. Please don't go easy on me — I'll cry either way."*
@@ -65,9 +65,9 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 
 ---
 
-## CHAPTER 11 — "The Thaw" (R19 → R20 → Frostfang Pass → Rimeholt, Gym 10; Kyogre)
+## CHAPTER 11 — "The Thaw" (The Hart's Run → The Hoarwood → Frostfang Pass → Rimeholt, Gym 10; Kyogre)
 
-**Location:** R19, R20 (`:SNOWY_MOUNTAIN`), **Gossamer Heartwood** (Silkwood revisit), **Frostfang Pass**, **Rimeholt** (Isenmar, `:FROZEN_LAKE`), **Lake Rime**.
+**Location:** The Hart's Run, the Hoarwood (`:SNOWY_MOUNTAIN`), **Gossamer Heartwood** (Silkwood revisit), **Frostfang Pass**, **Rimeholt** (Isenmar, `:FROZEN_LAKE`), **Lake Rime**.
 
 **Travel:** **Juno travels with the PC.** She is lobbying the northern Wardens for the Greenward and is nervous about it. She practices speeches on the PC's Pokémon.
 
@@ -99,7 +99,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 - **Thane Eirik** declares **martial law** and evacuates the lower town south into Elowen, which causes a border crisis with Queen Maelis's Thornguard.
 - Juno, wet through and shaking: "That's what Uncle Rowan meant. Isn't it. The flowers. The heaters. It's all the same thing."
 
-**Transit (segment 10): Ebbmouth, Isenmar second visit.** R21/R22 and the **Ebbmouth Sea Grotto** (revisit) pass back through Ebbmouth:
+**Transit (segment 10): Ebbmouth, Isenmar second visit.** The Thane's Sled-Road/The Mast Glacier and the **Ebbmouth Sea Grotto** (revisit) pass back through Ebbmouth:
 - **The Ebbmouth Strike.** Marisol leads the Ebb Guild in cutting Meridian's tidal Lattice with dockworkers' saws. The Ebb runs both ways again for the first time in a year, and the whole city cheers on the quay.
 - **If `TEO_SAVED`:** Teo is there with glassed fingers, organizing.
 - **If not:** Teo's photograph is nailed to the strike's banner pole, and Marisol delivers the "He was nineteen" line here instead.
@@ -154,14 +154,14 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 - Voss's line: "Your mother was destroyed by a man who thinks he's holding up the sky. I'd like to help you take the sky off him." Kestrel signs the **Festival sponsorship contract**.
 - **Game over `GO_FINE_PRINT` "Read the Fine Print".** Interlude-only, Kestrel's game over. Trigger: Kestrel opens Voss's private desk drawer when Voss steps out (he's warned once by Calla's glance). Inside is a file on the PC titled **UNIMPRINTED-01: KEYSTONE**. Voss returns: "Ah." *Epitaph: "Kestrel Vane was reported missing the next morning. Meridian offered a reward."*
 
-**Cliffhanger:** On R23, leaving Skyreach, the PC sees their reflection in a puddle move a half-second *late*.
+**Cliffhanger:** On Conductors' Causeway, leaving Skyreach, the PC sees their reflection in a puddle move a half-second *late*.
 
 ---
 
-## CHAPTER 13 — "Behind the Glass" (R23 → R24 → Mirror Mere → Antumbra Threshold → Lucent, Gym 12; the tribunal; the Fault)
+## CHAPTER 13 — "Behind the Glass" (Conductors' Causeway → The Wired Wood → Mirror Mere → Antumbra Threshold → Lucent, Gym 12; the tribunal; the Fault)
 
 **Location:**
-- R23 (`:STORMFRONT`), R24, **Mirror Mere** (742).
+- Conductors' Causeway (`:STORMFRONT`), the Wired Wood, **Mirror Mere** (742).
 - **Antumbra Threshold** (743, `:INVERSE`), **Lucent** (Antumbra, `:MINDSCAPE`), the **Lucent Athenaeum**.
 - **Stormwatch Spire** (optional revisit), **Shattered Sky** (748).
 

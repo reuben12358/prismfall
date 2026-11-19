@@ -23,11 +23,13 @@ event still wins.
 | Battle | Trainer (Standard version) | Field | Set by |
 |---|---|---|---|
 | K1 tutorial | `RIVAL_KESTREL` 10–12 | none | TRAINER_FIELDS (now also covers the Hard/Casual variants) |
-| Thistle, Briarwick pylon | `HOLLOW_THISTLE` 0 | Silkwood | map default (120) |
-| Gyms 1–18 | `LEADER_*` 0, Juno 30–32 | signature field | `gym_battle` |
-| J1, Saltmere promenade | `RIVAL_JUNO` 10–12 | Meadow | TRAINER_FIELDS (the map default is Beach) |
+| Thistle, Briarwick pylon (before Gym 2) | `HOLLOW_THISTLE` 0 | Silkwood | TRAINER_FIELDS (round 2) |
+| Gyms 1–18 | `LEADER_*` 0, Juno 30–32 | signature field | `gym_battle` (also sets double for Gyms 2, 6, 11, 16, 17 and single for Gym 1) |
+| J1, Saltmere promenade (before Gym 1) | `RIVAL_JUNO` 10–12 | Meadow | TRAINER_FIELDS (the map default is Beach) |
+| Round 2 story fights: Wick, Quent 0–2, Sable, the Mourner, Marchetti 0–2, Kroll 0–1, the Eevee Octave | see §6 | see §6 | TRAINER_FIELDS |
+| War soldiers and captains | `ASHKAAR_*`, `ISENMAR_*` | map default (922–927) | map |
 | Teo, Ebbmouth mill-race | `HOLLOW_TEO` 0 | Water Surface | TRAINER_FIELDS (the Reyes cellar map is Cave) |
-| K2, Route 6 cliffs | `RIVAL_KESTREL` 20–22 | Mountain | TRAINER_FIELDS |
+| K2, Gullcry Cliffs | `RIVAL_KESTREL` 20–22 | Mountain | TRAINER_FIELDS |
 | K3, Ossuary exit | 30–32 | Desert | TRAINER_FIELDS |
 | J2, Mirefen stilt-walk | `RIVAL_JUNO` 20–22 | Corrosive Mire | TRAINER_FIELDS |
 | K4, Ironreach Open final | 40–42 | Colosseum | TRAINER_FIELDS |
@@ -49,100 +51,102 @@ delete the `PRISM_ARENA` bracket lines from `exceptions.trainers` and run `ruby 
 
 ## 2. Early game (Chapters 0–2, Gyms 1–3)
 
-Design rule for this stretch: one new field idea per fight, the Gym Guide's advice must work, and the Warden's
-counter to that advice is a single Pokémon the player can remove.
+**SPINE Revision 14 swapped Saltmere and Briarwick.** Gym 1 is Dorian (Saltmere, Normal, Grand Stage, cap 15, single);
+Gym 2 is Tamsin (Briarwick, Bug, Silkwood, cap 19, double). Route order: Ferrow's Landing → coast → Saltmere → inland
+→ Gossamer Wood / Briarwick → north → Rimewood / Frostwick → Ebbmouth. Trainer IDs did not change
+(`[LEADER_DORIAN,Dorian,0]`, `[LEADER_TAMSIN,Tamsin,0]`); `Prismfall::GYMS` (Core) now has Dorian at index 1. Which
+route map sits on which stretch is provisional until `design/SWAP_GYM1_GYM2.md` lands (one table, `routes.py` `PLAN`).
 
-### Pallbearer Thistle — Silkwood (Briarwick, before Gym 1)
-Morelull 13, Foongus 14, Phantump "Lowmarsh" 15.
-- **Plan.** Grass ×1.2, powders ×1.2 accuracy (Stun Spore), Leech Seed and drain moves outlast a team that has
-  just walked through sticky silk (−1 Speed on first entry).
-- **Transition.** She cannot start one (no Fire moves at this level) and does not need to: if the player burns the
-  wood, the Wildfire burns down to Embers after 4 rounds, and Embers give Grass and Ghost ×1.2 and heal Grass types.
-  Ingrain, Growth and Leech Seed (any two) then regrow the ash into a Meadow. "Let the land grieve."
-- **Counterplay.** Fire and Flying; she has no answer to a fast Fire type. This is the first Silkwood fight, so it is
-  deliberately mild.
+Design rule for this stretch: one new field idea per fight, the Gym Guide's advice must work, the Warden's counter to it
+is one Pokémon the player can remove, and Standard is tuned against a realistic early team in the harness (§6).
 
-### Gym 1: Tamsin — Silkwood (cap 15)
-Joltik 13, Surskit 13 (not on Casual), Swadloon "Bobbin" 15. Hard adds Vivillon.
-- **Plan.** Speed control, then Bobbin outlasts. Electroweb is ×1.5, never misses and paralyzes 30% of the time;
-  String Shot never misses and drops Speed three stages; Bug moves are ×1.5 and Bug types heal 1/16 a turn.
-- **Seed.** Bobbin holds the **Telluric Seed** (+1 Def, +1 Sp. Def, −1 Speed: "a silk cocoon"). It is the first seed
-  the player sees used against them; Ranger Ash in the gym shows one a room earlier.
-- **Transition.** None of her own: Silkwood's only change is being burned, and she will not burn her grandmother's
-  room.
-- **Answer to the flip.** Three Fire attacks set the wood ablaze. Surskit's Rain Dance halves Fire, doubles its own
-  Speed (Swift Swim), makes Electric ×1.2 on the wet silk, and douses a Wildfire to Embers.
-- **Counterplay.** Fire still wins (it one-shots Surskit and is 4× on Bobbin); knock Surskit out before it rains, or
-  wait five turns. Non-Bug fliers are ×0.8 here, so the Gym Guide's "Fire and Flying" is half right on purpose.
-- Standard changes from the old team: seed instead of Eviolite (Eviolite stays on Hard), Rain Dance on Surskit.
-
-### Gym 2: Dorian — Grand Stage, double battle (cap 19)
-Chatot 17, Ambipom 18, Loudred 18 (not on Casual), Kecleon 19. Hard adds Furfrou.
-- **Plan.** Play to the crowd. Applause rises a stage for every two sound moves, two showpieces (Fake Out, Encore)
-  or any critical hit, and each stage raises Normal and sound damage. Chatot's Chatter and Round, Ambipom's
-  Technician Fake Out (×1.5 here) and Swift, Loudred's Echoed Voice.
-- **Seed.** Kecleon holds the **Synthetic Seed**: +1 Speed and Laser Focus (its first hit is a sure crit, which is
-  another applause stage) at the cost of being Taunted, and its set is four attacks.
-- **Stage play.** Fake Out + Encore on turn one is two showpieces: straight to Encore.
-- **Answer to the flip.** The player lowers the applause with Protect, Recover or Roost. Chatot's Encore (it lasts
-  two turns longer here) locks them into the stalling move, which then fails.
-- **Counterplay.** Fighting types, Soundproof, and stalling moves to keep the stage low. Loudred is Scrappy, so a
-  Ghost is not a free switch.
-- Standard is softer than before: Loudred lost Uproar, and the Chatot + Loudred Round duet (a one-hit KO at this
-  level) is Hard-only.
-
-### Gym 3: Marisol — Water Surface (cap 23)
-Pelipper 21, Lanturn 22 (not on Casual), Floatzel 22, Gyarados "Lucky" 23. Hard adds Araquanid.
-- **Plan.** Water ×1.5, Swift Swim works without rain, and the player's grounded non-Water Pokémon wade at ×0.75
-  Speed. Floatzel is the sweeper.
-- **Seed.** Lanturn holds the **Elemental Seed** (+1 Speed, Aqua Ring).
-- **Transition play.** Lucky's **Dive** drags the fight Underwater with a transform strike: "a current that changes
-  direction mid-fight". Underwater suits the whole team (non-Water Pokémon move at half Speed and their physical
-  hits are halved). It is on the ace only, so it happens at the end, and Dive gives the player a free turn.
-- **Answer to the flip.** The obvious answers are Electric and Grass. Lanturn absorbs Electric and its own Spark is
-  ×1.5 against grounded targets; Pelipper's Flying moves and Lucky's Ice Fang cover Grass.
-- **Counterplay.** Electric from a Pokémon that is not grounded-and-slow, or Grass; underwater, Electric is ×1.5 and
-  never misses, which is 4× on Lucky. Hazards and Ground moves fail on the water.
-- Standard no longer has Drizzle: rain stacked on the field made Water Pulse a one-hit KO in the harness. Hard keeps
-  Drizzle + Damp Rock (rain lasts 8 + 3 turns here).
-
-### J1: Juno — Meadow (Saltmere promenade green, cap 19)
-Cottonee 15 (not on Casual), Bounsweet "Sweetpea" 15, starter 17. Hard adds Petilil.
+### J1: Juno — Meadow (Saltmere promenade green, before Gym 1, cap 15)
+Cottonee 12 (not on Casual), Bounsweet "Sweetpea" 12, starter 14 (unevolved). Hard adds Petilil.
 - **Plan.** Fairy Wind and Razor Leaf are ×1.5 in the Meadow breeze; Leaf Guard is always on.
 - **Transition play.** A Prankster **Grassy Terrain** turns the Meadow into a Flower Garden at once, the field she
-  will defend at Gym 9, and the terrain lasts 8 turns there.
-- **Counterplay.** Two Fire attacks burn a Meadow (one in sun); this is the friendliest place to learn that.
+  will defend at Gym 9; the terrain lasts 8 turns there. Seen in the harness in 1 of 2 early runs (§6).
+- **Counterplay.** Two Fire attacks burn a Meadow (one in sun); the friendliest place to learn that.
+- Levels came down from 15–17 because Saltmere is now the Gym 1 town.
+
+### Gym 1: Dorian — Grand Stage, single battle (cap 15)
+Aipom 11 (not on Casual), Minccino 12, Kecleon 15. Hard adds Chatot and sharper sets (Technician Minccino, Fake Out,
+Kecleon's Synthetic Seed, Sing).
+- **Character.** Warm, gentle, theatrical; the first Warden teaches rather than punishes. Standard has neutral natures,
+  no sleep, no seed, no accuracy drops, a Potion rather than a Super Potion, and the openers well under the cap,
+  because the Grand Stage already makes every Normal move ×1.3.
+- **The lesson: applause.** Minccino's Echoed Voice and Round are both damaging sound moves; the second song raises
+  the applause a stage with a big message, and each stage makes Normal and sound moves hit harder. Echoed Voice also
+  grows each turn, so the stage and the echo climb together where the player can see it. Cute Charm Minccino has a tiny
+  Sp. Atk: it teaches without sweeping (an early Chatot did sweep, so Chatot is Hard-only now).
+- **Ace.** Kecleon's Color Change is a costume change; Fury Swipes hits 2–5 times and any critical hit is applause too.
+- **Counterplay.** Fighting types; stalling moves (Protect, Recover...) calm the crowd a stage; the player's own sound
+  moves and Normal moves get the same boost.
+- AI: `012_FieldEffects_TrainerPlays.rb` gives Dorian a small nudge toward moves that raise the stage.
+
+### Pallbearer Thistle — Silkwood (Briarwick, before Gym 2, cap 19)
+Dustox 16, Foongus 17 (not on Casual), Phantump "Lowmarsh" 18. Hard adds Whirlipede.
+- **Theme.** A weaver's Bug/Poison team (02_FACTIONS) plus the glassed Phantump named for her Quiet Town.
+- **Plan.** Dustox glides on the silk (Bug-type fliers: Flying ×1.2) and Shield Dust ignores the player's add-ons;
+  powders are ×1.2 accurate; Leech Seed and Mega Drain outlast a team slowed by fresh silk.
+- **Transition.** She doesn't burn her own trade's wood, but if the player does, Embers favour Grass and Ghost and
+  heal her Grass types; two growing moves turn the ash into a Meadow.
+- **Version.** The Ch0–2 script now says version 0, matching the PBS (named admins count rematches from 0).
+
+### Gym 2: Tamsin — Silkwood, double battle (cap 19)
+Joltik 14 + Surskit 15 lead, Spidops 16 (not on Casual), Swadloon "Bobbin" 19. Hard adds Vivillon (Rage Powder).
+- **Theme: "a thread holds because it's twisted with others."** Every Pokémon makes its partner better.
+- **Lead pair.** Surskit's **Rain Dance** wets the silk (every Electric move ×1.2) for Joltik's **Electroweb**, which
+  in a double hits both foes (×1.5, never misses, Speed −1, 30% paralysis); rain also doubles Surskit's Speed.
+  String Shot hits both foes too (−3 Speed here).
+- **Back line.** Spidops's **Silk Trap** guards it while its partner attacks (and binds tighter here); Struggle Bug
+  (spread, ×1.5) cuts both foes' Sp. Atk. Bobbin holds the **Telluric Seed** (a silk cocoon: +1 Def, +1 Sp. Def,
+  −1 Speed) and its Razor Leaf hits both foes. Hard: Vivillon's Rage Powder pulls single-target hits off Bobbin.
+- **Answer to the flip.** Three Fire attacks set the wood ablaze; the rain halves Fire and douses a Wildfire to
+  Embers, where Bobbin's Grass moves are ×1.2.
+- **Counterplay.** Fire and Rock (Smack Down, Rock Throw); spread Fire hits both; knock Surskit out before it rains.
+- Standard tuning: Joltik at cap−5 with no Protect (it outlasted every spread answer in the harness), Absorb, Water
+  Gun and Feint instead of Bug Bite, Bubble Beam and Assurance (Hard keeps those).
 
 ### Teo — Water Surface (Ebbmouth, before Gym 3)
 Carvanha 19 (not on Casual), Arrokuda 20, Chewtle "Snapper" 21. Hard adds Basculin.
-- **Plan.** A Swift Swim rush (Arrokuda, and Snapper now has Swift Swim too) with Water ×1.5.
-- **Transition.** None, on purpose: this fight introduces the field one battle before the gym teaches its changes.
-- **Counterplay.** Electric and Grass, as for Marisol, without Lanturn in the way.
+- **Plan.** A Swift Swim rush (Arrokuda; Snapper has Swift Swim too) with Water ×1.5. No transition play on purpose:
+  this fight introduces the field one battle before the gym teaches its changes.
 
-### K2: Kestrel — Mountain (Route 6 cliffs, cap 23)
+### K2: Kestrel — Mountain (Gullcry Cliffs, cap 23)
 Staravia 19 (not on Casual), Honedge "Morwen" 19, starter 21. Hard adds Sandile.
-- **Plan.** Flying ×1.2 (Wing Attack, Aerial Ace on both). Staravia's **Telluric Seed** gives +1 Speed and a Tailwind
-  for his side: "I don't do fair fights."
-- **Counterplay.** Rock is ×1.5 here and Thunder never misses on the peaks; stall the Tailwind out with Protect.
+- Flying ×1.2; Staravia's **Telluric Seed** gives +1 Speed and a Tailwind for his side. Rock is ×1.5 here and Thunder
+  never misses on the peaks; stall the Tailwind out with Protect.
 
-### Route trainers, Chapters 0–2
-One or two field-aware choices each, level-up moves only, no bag items (`routes.py` has a note per map):
+### Gym 3: Marisol — Water Surface (cap 23)
+Pelipper 20, Chinchou 21 (not on Casual), Floatzel 21, Gyarados "Lucky" 23. Hard adds Araquanid; Hard has Lanturn
+with the Elemental Seed instead of Chinchou, Drizzle Pelipper and Dragon Dance Lucky.
+- **Plan.** Water ×1.5, Swift Swim without rain, and the player's grounded non-Water Pokémon wade at ×0.75 Speed.
+- **Transition play.** Lucky's **Dive** drags the fight Underwater (transform strike), where non-Water Pokémon move
+  at half Speed. It is on the ace only, so it comes at the end, and Dive gives the player a free turn.
+- **Answer to the flip.** Chinchou's Volt Absorb takes the Electric answer and its Spark is ×1.5 against grounded
+  targets; Pelipper's Flying moves and Lucky's Ice Fang cover Grass.
+- **Counterplay.** Electric from a Pokémon that isn't grounded, or Grass; Electric is ×1.5 and never misses
+  underwater, 4× on Lucky. Hazards and Ground moves fail on the water.
+- Standard tuning: neutral natures, Water Gun on Pelipper, Brine instead of Waterfall on Lucky, Chinchou instead of
+  Lanturn (it walled realistic teams: 64 knockouts in 30 runs).
 
-| Map | Field | Touches |
-|---|---|---|
-| Route 1, 2, 3 | Meadow | Run Away (+1 Speed on entry) on Lillipup, Caterpie, Oddish, Sentret, Doduo; Leaf Guard Budew; Smoliv and Sunkern know Growth, which tends a Meadow toward a Flower Garden |
-| Gossamer Wood, Deepwood, Loomhouse | Silkwood | Swarm (always on) with String Shot, Bug Bite, Struggle Bug; Camper Bram's Sizzlipede shows "Embers are catching in the silk..."; Ranger Ash's Beautifly holds a Telluric Seed |
-| Route 4 | Beach | Mud-Slap and Mud Shot are ×2 (Bunnelby, Nacli) |
-| Pell Playhouse | Grand Stage | Echoed Voice and Disarming Voice (sound), Fake Out (showpiece), Teeter Dance: the applause climbs before Dorian |
-| Brinecut Mine | Cave | Rock Head Geodude and Aron (safe from a cave-in), Rock Tomb ×1.5 |
-| Thistledown Manor | Hollow Cathedral | Gastly's Lick (always paralyzes), Cursed Body Shuppet and Sinistea (+1 Sp. Def on entry), Night Shade ×1.5 |
-| Route 5 | Snowy Mountain | Powder Snow ×2, Ice Body Spheal (no Snow Cloak on Standard) |
-| Route 6 | Mountain | cliff birds: Flying ×1.2, wind ×1.3 |
-| Tidelock Gym | Water Surface | Swift Swim and Hydration without rain; Sailor Bjorn's Chinchou holds an Elemental Seed |
-| Rimewood, Rimewood Glade | Silkwood, Frozen Lake | Snom and Tarountula; Cryogonal's Rapid Spin skates (×1.5), Icy Wind −2 Speed |
+### Route trainers, Chapters 0–3
+One or two field-aware choices each, level-up moves, no bag items (`routes.py`; levels by map id, `PLAN`):
 
-Route trainers on maps 540–564 and 151–173 now gain the +1 level on Hard that BALANCE.md specifies (their cap was
-left at 15 before, so Hard never raised them).
+| Map | Field | Stretch, levels | Touches |
+|---|---|---|---|
+| 520 | Meadow | Gym 1, 4–6 | Run Away (+1 Speed on entry) on Lillipup |
+| 541 coast | Beach | Gym 1, 8–10 | Mud-Slap and Mud Shot are ×2 (Bunnelby, Nacli) |
+| 544/545 Brinecut Mine | Cave | Gym 1, 9–12 | Rock Head Geodude and Aron (safe from a cave-in), Rock Tomb ×1.5 |
+| 151–153 Pell Playhouse | Grand Stage | Gym 1, 10–13 | Echoed Voice and Round (sound), Fake Out (showpiece), Teeter Dance: the applause climbs before Dorian; Herdier became Lillipup at the new level |
+| 145 Pageant Hall | Grand Stage | after Gym 1, 15–16 | the Hollow tag battle |
+| 540 | Meadow | Gym 2, 15–17 | Run Away (Sentret, Doduo), Fairy Wind ×1.5, Sunkern's Growth |
+| 546 Thistledown Manor | Hollow Cathedral | Gym 2, 16–17 | Gastly's Lick (always paralyzes), Cursed Body, Night Shade ×1.5 |
+| 521 | Meadow | Gym 2, 15–16 | Run Away, Leaf Guard; Shinx became Luxio; Dell's Caterpie and Metapod still refuse to evolve (the joke) |
+| 524 Gossamer Wood | Silkwood | Gym 2, 16–18 | Swarm, String Shot, Struggle Bug; Blipbug and Seedot became Dottler and Nuzleaf; Bram's Sizzlipede shows "Embers are catching in the silk..." |
+| 131/132 Loomhouse | Silkwood | Gym 2, 15–17 | Swarm bugs; Spewpa and Tarountula became Vivillon and Spidops; Ranger Ash's Beautifly holds a Telluric Seed |
+| 525 Deepwood | Silkwood | after Gym 2, 19–20 | Compound Eyes, Swarm; Ledyba became Ledian |
+| 560–564, Rimewood, Tidelock | as before | Gym 3, unchanged | as before (Chinchou with an Elemental Seed in the Tidelock) |
 
 ## 3. Gyms 4–18
 
@@ -166,7 +170,10 @@ Hippopotas, Sandaconda, Krokorok, Claydol "Effigy".
 - **Counterplay.** Grass, with rain timed after Hippopotas and Sandaconda are down. Water is ×0.8 here.
 - She has no cross-field transition (Cinderglass needs searing Fire moves her team does not learn).
 
-### Gym 6: Corvin — Corrosive Mire (35, double in the story)
+### Gym 6: Corvin — Corrosive Mire, double battle (35)
+- **Doubles (Round 2).** Lead Weezing + Amoonguss. Weezing's Heat Wave hits both foes (and each use scorches grounded
+  non-Fire foes 1/8 on the mire); Protect on the frail pair; Crobat's Tailwind; Ward's Baneful Bunker. Hard: Rage Powder
+  Amoonguss redirects, Fake Out Salazzle, Wide Guard Ward (Amoonguss only learns Rage Powder at 40).
 Galarian Weezing, Crobat, Amoonguss, Drapion, Toxapex "Ward".
 - **Plan.** Poison ×1.5 and it hits Steel; Venoshock is always doubled against grounded targets; Poison types
   fling poison each turn and heal 1/16. Ward's Merciless gets +1 Attack on entry and crits whatever is poisoned.
@@ -225,7 +232,10 @@ Alolan Ninetales, Cloyster, Beartic, Walrein, Avalugg, Mamoswine "Matriarch".
 - **Counterplay.** Fighting and Steel rather than Fire; Electric and Grass once it is water.
 - Matriarch uses High Horsepower instead of Earthquake: quakes lay Spikes on both sides here and fail on open water.
 
-### Gym 11: Odessa — Stormfront (55, double in the story)
+### Gym 11: Odessa — Stormfront, double battle (55)
+- **Doubles (Round 2).** Lead Pelipper + Noivern: Pelipper's Tailwind (6 turns here) and **Wide Guard** against the
+  Rock Slides and Discharges a flock fears; Noivern's Hyper Voice and Swanna's Icy Wind (wind, ×1.2) hit both foes;
+  Oricorio's Helping Hand; Kilowattrel and Pelipper carry Protect.
 Pelipper, Swanna, Pom-Pom Oricorio, Noivern, Kilowattrel, Corviknight "Taxi".
 - **Plan.** Hurricane and Thunder never miss; Tailwind lasts two turns longer. Kilowattrel's Wind Power arrives
   charged; Swanna's Big Pecks is +1 Defense on entry.
@@ -283,7 +293,9 @@ Ferrothorn, Excadrill, Kingambit, Klinklang "Mark One", Scizor, Metagross "Engin
 - Nobody on his team quakes or explodes any more (Excadrill and Engine did), and Excadrill is Mold Breaker: Sand
   Rush could never work indoors.
 
-### Gym 16: Nyx — New Moon (75, double in the story)
+### Gym 16: Nyx — New Moon, double battle (75)
+- **Doubles (Round 2).** The illusion double: Grimmsnarl's Prankster screens beside Weavile's Fake Out; Umbreon's
+  Snarl (Dark spread, ×1.5) and Helping Hand; Malamar keeps Protect.
 Grimmsnarl, Weavile, Malamar, Umbreon, Zoroark "Nobody" (disguised as the last slot), Honchkrow.
 - **Plan.** Dark ×1.5; everything that is not Dark or Ghost aims at ×0.9.
 - **Stage play.** Weavile's **Magical Seed** gives +1 accuracy and Focus Energy and pulls the field into the Abyss
@@ -294,7 +306,10 @@ Grimmsnarl, Weavile, Malamar, Umbreon, Zoroark "Nobody" (disguised as the last s
 - **Counterplay.** Fairy, Fighting, Bug; Keen Eye, Compound Eyes and No Guard see in the dark.
 - Umbreon uses Wish: Moonlight fails under a new moon.
 
-### Gym 17: Celestine — Fairy Tale (80, double in the story)
+### Gym 17: Celestine — Fairy Tale, double battle (80)
+- **Doubles (Round 2).** "The knight and the dragon": Tinkaton's Fake Out buys Alcremie a Decorate (+2 Atk, +2 Sp. Atk
+  on the partner); Togekiss "Vigilant" uses **Follow Me** to draw the Steel and Poison hits meant for Vow; Vow's
+  Pixilate Hyper Voice and Togekiss's Dazzling Gleam hit both foes.
 Alcremie, Mimikyu, Azumarill, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per the story bible).
 - **Plan.** Fairy ×1.5; Vow's Draining Kiss is ×2 here; Tinkaton is the knight (Steel ×1.3).
 - **Seed.** Alcremie: **Magical Seed** (+1 Sp. Atk, +1 Sp. Def), plus Decorate for the double.
@@ -371,37 +386,92 @@ the ascendant Plate (the Memory swap is Core's job, BALANCE.md §6).
 - **Ruin Nyx, Celestine, Sigrun (version 1).** Promoted gym teams; leads Weavile, Tinkaton, Haxorus.
 - **Quent 99, Theodric, Ch21 tag foes, the Reflection.** Not re-tuned beyond what they inherit (see §7).
 
-## 6. Verification
+## 6. Story teams added in Round 2
 
-- `python3 -I tools/validate_trainers.py`: 0 errors. The 30 warnings are the Hard-only early moves and the three
-  Imposter Dittos that were there before; Standard and Casual have none.
-- `python3 -I tools/validate_map_trainers.py`: every battle on the built maps resolves.
-- `python3 -I tools/trainer_gen/field_fit.py`: 78 important Standard teams, 0 conflicts. On the previous data it
-  flags Excadrill's Sand Rush in the Factory and Umbreon's Moonlight under the New Moon.
-- Headless harness (`tools/harness/run_all.rb`, run in a private folder so the shared captures were not touched): the
-  PBS compiles with the real Compiler; all 18 Warden fights and the 15 other field battles finish with 0 exceptions.
-- **Seen in those logs:** twelve of the sixteen Warden seeds activating (Lanturn, Electabuzz, Kecleon, Sandaconda,
-  Camerupt, Hawlucha, Whimsicott, Matriarch, Oricorio, Cofagrigus, Mark One, Alcremie) and Bobbin's in a separate
-  run (in the full run the wood was already burning when it entered); Crobat, Geode and Weavile never came out,
-  Surskit's Rain Dance, Whimsicott's Growth and Leech Seed growing the garden to stage 5, Kilowattrel arriving charged,
-  Avalugg's Body Press cracking the lake and her Ice moves resealing it, Golem's Earthquakes opening the Cave, Sigrun
-  taking a Fairy Tale back with Dragon attacks, one Psychic Noise from Hush.
-- **Not seen in a harness battle** (one seeded AI-vs-AI fight per Warden, so absence only means it did not come up):
-  Lucky's Dive, a third Psychic Noise, Noivern's Sunny Days, Weezing's Heat Wave play, Golem's Explosion, Klinklang's
-  restart, Weavile's seed opening the Abyss, Ysolde's rites. The field probes confirm each of those
-  transitions fires; the Wardens' use of them is untested in play.
-- No rival, admin or Festival battle was run in the harness: it only fights the 18 Wardens plus one trainer per
-  remaining field. Those teams are checked by the validators and `field_fit.py` only.
-- Balance is checked only against the harness's generic cap-level challenger (no items, perfect IVs). It beat
-  Tamsin, Dorian, Rook, Juno and Odessa and lost to the other thirteen. Nothing here has been played by a person.
+All Standard / Hard / Casual; fields from `FIELD_DEFAULTS.yaml` `exceptions.trainers` unless the map default fits.
 
-## 7. Open items
+| Battle (version) | Field | Team (ace last) | Field plan and transition play | Counterplay |
+|---|---|---|---|---|
+| Ch7 Brother Wick (`HOLLOW_WICK` 0), drowned chapel | Hollow Cathedral | Chimecho, Bronzong *(−C)*, Musharna, **+Hard** Gardevoir, Dusclops "Sexton" | He **consecrates** the nave: Heal Bell and Dazzling Gleam are holy acts (3 → Consecrated: hymns ×1.3, holy ×1.5, Ghosts weakened). Sexton's Night Shade is ×1.5 while it is still haunted | Ghost rites (Curse, Spite...) undo it; Dark types |
+| Ch8 Dr. Quent (`MERIDIAN_QUENT` 0), caldera taps | Volcanic | Bronzong (Heatproof, Damp Rock), Magneton, Castform *(−C)*, **+Hard** Rotom-Wash, Porygon2 "Probe" | His "dampers": **Rain Dance** quenches the Volcanic field to Cinderglass at once; rain-form Castform rides the geysers and Thunder never misses in rain | Sun or three eruption moves re-melt it; Ground for the Steel/Electric core |
+| Ch9 Sable + Hammer Captain Brisk (`HOLLOW_SABLE` 0 + `HOLLOW_ADMIN,Brisk` 0), **tag double** | Colosseum | Sable: Skuntank, Toxicroak (Fake Out), Drapion (Battle Armor +1 Def). Brisk: Mightyena, Banette *(−C)*, Scolipede | "Until they listen": Bulldoze and Earthquake — three quakes drop the pit into a **Cave** (strike), where Ground reaches Kestrel's Staraptor. Fell Stinger ×2 in the pit | Psychic and Ground; Kestrel's partner is airborne until the Cave |
+| Ch9 the Mourner (`HOLLOW_MOURNER` 0), reliquary | Colosseum | Shiftry, Cacturne *(−C)*, **+Hard** Gourgeist, Trevenant "Glasswood" (boss ace; Bosses config still to write) | Fights **defensively** ("get BACK"): Protect and Spiky Shield also calm a Frenzy; Payback ×1.3 in the pit | Fire and Flying; burn the Grass core |
+| Ch12 Marchetti (`MERIDIAN_MARCHETTI` 0), sorting halls | Stormfront | Mabosstiff, Manectric *(−C)* (Lightning Rod), Arcanine, **+Hard** Magnezone, Corviknight | Electric ×1.3 and Thunder never misses; Lightning Rod takes the Electric answer; Tailwind 6 turns. No transition: she holds a position | Ground (Manectric, Arcanine), Fire for Corviknight |
+| Ch13 Kroll unmasked (`MERIDIAN_KROLL` 0), Lucent tribunal | Mindscape | Skuntank *(−C)*, Toxicroak, **+Hard** Crawdaunt, Honchkrow, Drapion | Stage play: three Dark attacks curdle the dream into a **Nightmare** (Dark ×1.5, her Dark types heal) | Two soothing moves (Calm Mind...) calm it; Fighting, Ground |
+| Ch14 Marchetti (1), Darkglass gallery | Dark Crystal | Houndoom *(−C)* (Magical Seed), Arcanine, **+Hard** Kingambit, Corviknight, Mabosstiff | Dark ×1.5, Dark contact +1 crit, the player aims ×0.9; one Dark Pulse re-darkens a relit cavern (strike) | Two light moves relight it; Fighting, Water |
+| Ch16 Marchetti (2) + Quent (1), **tag double** | Factory | Marchetti: Arcanine, Corviknight, Mabosstiff. Quent: Bronzong, Magnezone, Porygon-Z | Quent plays both ways "for the data": Bronzong's **Explosion** wrecks the floor (→ Scrapyard, strike); three Discharges restart it | Fire on the Steel core; Water once it is a Scrapyard (rust) |
+| Ch17 Kroll (1) / Quent (2), Sun Court | Cave | Kroll: Skuntank, Toxicroak *(−C)*, Honchkrow, Obstagoon, **+Hard** Kingambit, Drapion. Quent: Bronzong, Magnezone *(−C)*, Metagross, **+Hard** Rotom, Porygon-Z | Rock Slide ×1.5; Kroll's Earthquakes crack the ceiling, the next brings it down on everyone | Rock Head / Bulletproof / Overcoat are safe from the cave-in |
+| Ch19 war: Ashkaar soldiers (0, 1) + Captain | Cinderglass (924), Volcanic (927) | Magcargo, Druddigon, Ninetales, Flygon, Camerupt, Tyrantrum, Talonflame, Turtonator; Captain: Torkoal, Coalossal, Arcanine *(−C)*, Garchomp | Magma Armor, Steam Engine; Lava Plume ×3 re-melts Cinderglass; Drought 8 turns on Volcanic | Water and Ground; rain quenches |
+| Ch19 war: Isenmar soldiers (0, 1) + Captain | Frozen Lake (922, 926) | Walrein, Crabominable, Froslass, Dewgong, Beartic, Avalugg, Glalie, Lapras; Captain: Abomasnow, Lapras, Weavile *(−C)*, Cetitan | Ice ×1.5, Slush Rush and Ice Body without hail, Aurora Veil without hail; Heavy Slam cracks the lake | Fire and Fighting; cracking the lake helps their Water types |
 
-- **Double battles.** The story has Gyms 6, 11, 16 and 17 as doubles; BALANCE.md and `gym_battle` only treat Gym 2
-  as one. These teams work in either format but are not tuned for doubles beyond Alcremie's Decorate. The gym events
-  need `setBattleRule("double")` if the story stands (logged in `mapgen/REQUESTS.md`).
-- **No teams exist yet** for the Mourner, Brother Wick, Sable, Ashe, the story fights against Marchetti, Quent and
-  Kroll before Ch21, the Eevee Octave, or the war-arc soldiers. They were pending before this pass and still are.
-- **Cameo sidequests** (`cameos.py`) were not re-tuned. Their fields come from `Prismfall.cameo_battle(..., field:)`.
-- **Juno's Fire answer** is regrowth, not coverage; her starter is the one weak to the player's by SPINE rule.
-- **Flower Garden starting stage** for Gym 9 comes from the puzzle; the team is written for stage 1.
+War soldiers have no bag items and use `version` = encounter number, like the grunts.
+
+### The Eevee Octave (showpiece)
+
+Eight Glassfall orphans of the Prism Choir; in-world an Eevee evolves by the Imprint it is raised beside, so every
+singer's partner is at home on exactly one field. Types `OCTAVE_VESPER` / `OCTAVE_SINGER` (new in `trainer_types.txt`).
+
+| Fight | Field | Eeveelution and how it shines |
+|---|---|---|
+| Ch3 Saltmere backstage, **double**: Vesper (0) + Chorister Carol (0) | Grand Stage | Vesper's undecided Eevee "Amen" (Helping Hand) and Carol's Sylveon: Disarming Voice is spread sound, so the applause rises |
+| Ch13 Lucent cloister, **double**: Vesper (1) | Mindscape | Espeon at home; Amen's and Sylveon's Hyper Voices (spread sound) crack the dream into the Inverse Field on the third |
+| Ch20 gauntlet 1 Aria | Water Surface | Vaporeon: Water Absorb heals here, Elemental Seed (Aqua Ring), **Dive → Underwater** (strike), where non-Water Pokémon move at half Speed |
+| 2 Cadence | Neon Grid | Jolteon: Volt Absorb starts charged and heals every turn; Synthetic Seed (Magnet Rise: no Ground answer); Discharge reboots a Blackout |
+| 3 Forte | Volcanic | Flareon: Flash Fire lit; Lava Plume primes eruptions (+1 for Flareon, lava for the foe); Elemental Seed burns a Fire type for free |
+| 4 Lento | Frozen Lake | Glaceon: Ice Body heals; Elemental Seed +2 Speed; Ice Shard slides and reseals a crack |
+| 5 Lyra | Flower Garden (stage 3) | Leafeon: the Telluric Seed grows it to stage 4 on entry, which switches Chlorophyll on |
+| 6 Sona | Mindscape | Espeon: Hyper Voice ×3 cracks the dream to Inverse, where Magic Bounce gets +1 Sp. Def |
+| 7 Noct | New Moon | Umbreon: Magical Seed opens the Abyss on entry (Dark ×1.5 ×1.4 shadow moves); Wish, not Moonlight |
+| 8 Carol | Fairy Tale | Sylveon: Draining Kiss ×2, Mystical Fire ×1.5, Magical Seed |
+| Finale: Vesper (2) | starts on Grand Stage, then **follows the active Eeveelution** | `012_FieldEffects_TrainerPlays.rb` `ENTRY_FIELDS`: as each of Vaporeon, Jolteon, Flareon, Umbreon, Espeon and Sylveon "Vespers" enters, the Choir gardens become the field it was raised beside (Water Surface, Neon Grid, Volcanic, New Moon, Mindscape, Fairy Tale). No held seeds (six fields in one fight): the abilities carry it |
+
+Counterplay for the finale: the field changes on her switch, so a player who reads the next Eeveelution can bring the
+answer to *both* the Pokémon and its home field (Grass for Vaporeon on water, Ground for Jolteon, Water for Flareon...).
+
+## 7. Re-tunes in Round 2
+
+- **Cameos** (`cameos.py`): Venam (Corrosive Mire) Venoshock + Flamethrower Salazzle (Flamethrower ×2 burns the gas
+  to Wasteland), Synthetic Seed Toxicroak; Garret (Colosseum) Steadfast Sirfetch'd (+1 crit here, +2 Leek: every hit
+  crits); Amaria (Water Surface) Competitive Milotic (the water soothes burns, so Flame Orb + Marvel Scale didn't
+  hold); Alexandra (Rimeholt's sunken town, open water) no Earthquake or Stealth Rock (both fail on Water Surface);
+  Shelly's sidequest is after Gym 2 now (ace 21). Lin, Melia, Shiv, Titania, Nova reviewed, unchanged.
+- **Quent 99 (hijack)**: Heatproof Bronzong for the Flame Plate's turn; Magical Seed Magnezone.
+- **Theodric**: reviewed for the inverted chart (Fighting and Ghost hit what they couldn't before); Gholdengo moved
+  from Choice Specs to Magical Seed + Nasty Plot (the chart flips under him, so he must change moves). Hard keeps Specs.
+- **Ch21 tag foes**: Protect on the frail hitters, Tailwind Corviknight, Heatproof Bronzong with Trick Room.
+- **Juno, Ever-Bloom** (SPINE Rev 12): the white Flabébé line is the bridal blossom — Floette "Everbloom" (J2 Hard),
+  Florges "Everbloom" (J3, J4; Flower Veil grows the garden on entry, Grassy Terrain) in place of Shiinotic.
+
+## 8. AI support for the plays
+
+`plugins/Prismfall Field Effects/012_FieldEffects_TrainerPlays.rb` (new; alias-chained, no core file edited):
+- `WANTS`: per trainer type, which field changes its team is built for (and which to avoid). It adds a score to a move
+  that advances or completes that change, counts weather / terrain moves whose weather triggers a transition (Rain
+  Dance on a Volcanic field, Misty Terrain on a mire), and stops the AI from treating an `:even_if_failed` transition
+  move as a failed move (Noivern's Sunny Day on the Stormfront).
+- `ENTRY_FIELDS`: the field follows a trainer's Pokémon as it enters (the Eevee Octave finale).
+- `SUPPORT`: in doubles, a bonus for support moves the v21 AI underrates against raw damage (Tailwind, Wide Guard,
+  Helping Hand, Follow Me, Fake Out and Decorate on the first turns, Rain Dance when it isn't raining).
+- Found and fixed in round 2: `Battle::AI::AITrainer` has no public reader for its trainer, so the first version of
+  these hooks never fired (round-1 "plays used" numbers are base-AI behaviour). They look the trainer up through
+  `battle.pbGetOwnerFromBattlerIndex` now; a debug-log run confirms the bonus is applied.
+- `plugins/Prismfall Bosses/105_Boss_Mourner.rb` (new): Trevenant "Glasswood" is a 2-bar boss (3 on Hard) through a
+  trainer-boss rule; each break cures it, resets drops, +1 Def and roots it (Ingrain).
+
+## 9. Verification
+
+HARNESS_RESULTS_PLACEHOLDER
+
+## 10. Open items
+
+- **`design/SWAP_GYM1_GYM2.md`, `design/PLACE_NAMES.md`, `design/TRIALS.md`, `design/EVENT_POKEMON.md` had not landed**
+  when this pass ended. Route levels use my provisional stretch-per-map reading (`routes.py` `PLAN`, keyed by map id);
+  Trial opponents and event/boss Pokémon will be built to the same standards once those files exist.
+- **Map events must swap gym numbers** (Loomhouse → `gym_battle(2)`, Pell Playhouse → `gym_battle(1)`); logged in
+  `mapgen/REQUESTS.md`. Until then each gym starts the other Warden.
+- **Bosses owned by others:** the Glass Matriarch (Galvantula) was written as Lv 16 after Gym 1; it is after Gym 2 now
+  (about Lv 20). The Hard Warden boss rule names Ilsa and Celestine (Celestine's ace is Sylveon now).
+- `MERIDIAN_ASHE` has a trainer type but no story battle anywhere in `story/`; no team was built.
+- Cut is badge 1 in Core's `FIELD_MOVE_BADGES` ("Briarwick Cutter's House"); Briarwick is badge 2 now. Systems/story call.
+- Flower Garden starting stage for Gym 9 comes from the puzzle; Juno's team is written for stage 1.
+- Nothing here has been played by a person.

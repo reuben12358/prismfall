@@ -5,11 +5,11 @@ Regenerate the coverage lists below with `--summary`. This file adds what encoun
 
 ## 1. Rules used
 - **Kingdom flavour:** Land/Cave tables on kingdom maps are ≥65% (target 70%) that kingdom's types. The validator enforces this. Borderland routes mix both kingdoms. Set pieces are exempt (Thistledown Manor, Unown Script Vault, Lantern Isle, Aurelia, Inverted Ward).
-- **Borderlands (Rev 9):** borderland maps mix both kingdoms' types ≈50/50 and are the places where blend species live. Rimewood (Elowen/Isenmar): Snover, Snom, Cubchoo, Stantler, Deerling, Smoochum. Cinderglass Barrens/Petrified Ashwood (Ashkaar/Ossaria): Carkol, Magcargo, Vibrava, Sudowoodo. Rootdeep (Nadir/Elowen): Foongus, Parasect, Toedscruel. Thornwar Marches (Elowen/Ashkaar): Scovillain, Volcarona. Obsidian Barrows (Antumbra/Ossaria): Palossand, Golurk, Claydol, Runerigus. Full list: WORLD.md §10. Phanpy moved from R5 to R9, and Farfetch'd (both forms) and Lickitung from R17 to the Royal Chase.
+- **Borderlands (Rev 9):** borderland maps mix both kingdoms' types ≈50/50 and are the places where blend species live. Rimewood (Elowen/Isenmar): Snover, Snom, Cubchoo, Stantler, Deerling, Smoochum. Cinderglass Barrens/Petrified Ashwood (Ashkaar/Ossaria): Carkol, Magcargo, Vibrava, Sudowoodo. Rootdeep (Nadir/Elowen): Foongus, Parasect, Toedscruel. Thornwar Marches (Elowen/Ashkaar): Scovillain, Volcarona. Obsidian Barrows (Antumbra/Ossaria): Palossand, Golurk, Claydol, Runerigus. Full list: WORLD.md §10. Phanpy moved from Frostflat Causeway to the Brass Dunes, and Farfetch'd (both forms) and Lickitung from the Rootdeep to the Royal Chase.
 - **Power curve:** wild max ≤ the next level cap, accounting for when the map is reachable and when the encounter method unlocks (Good Rod 3, Rock Smash 2, Surf 6, Super Rod 10 badges). So early-map Water/Super Rod tables are level-30s/40s on revisit. An evolved form never appears more than 5 levels before its evolution level. Stone, trade and friendship evolutions don't appear wild before Lv 20.
 - **Variety (Reborn-like):** 61 families at 0 badges (Elowen's Bug/Normal/Grass/Flying, with Litleo/Sizzlipede/Rolycoly/Fletchling for Gym 1) and about 330 by the end. By 4 badges every type has ≥6 families. See §6.
-- **Pseudo-legends** are rare (2–5%) one act before they're usable: Goomy s3 (R7), Gible s4 (R10), Larvitar s4 (Static Depths), Beldum s4–5, Dratini s8 (Prism Falls rods), Jangmo-o s8 (Grudgestone), Frigibax s9 (Frostfang), Bagon s9–10, Deino s13 (Darkglass), Dreepy s14 (R29 as Drakloak).
-- **Imprinted variants** = regional forms, found only in Bleed zones or near their Imprint: Galarian Stunfisk and Alolan Diglett (Sinkfield), Alolan Grimer, Galarian Corsola and Galarian Weezing (Mirefen area), Alolan Marowak, Galarian Darumaka and Alolan Vulpix (Emberfall: "the fire burns cold"), Galarian Farfetch'd (R17, for Sirfetch'd), Alolan Sandshrew/Vulpix (R20), Galarian Mr. Mime (Frostfang/Stillwater), Galarian Slowpoke (Dreaming Quarter), Galarian Linoone (R28, for Obstagoon), Galarian Meowth (R30, for Perrserker), Pom-Pom Oricorio (R23/Spire roof), Alolan Exeggutor (Lantern Isle, Bride Grove). Velmora must be town-map **region 0** (WORLD §1), or Essentials re-forms some species on evolution.
+- **Pseudo-legends** are rare (2–5%) one act before they're usable: Goomy s3 (The Reedholms), Gible s4 (The Rib Road), Larvitar s4 (Static Depths), Beldum s4–5, Dratini s8 (Prism Falls rods), Jangmo-o s8 (Grudgestone), Frigibax s9 (Frostfang), Bagon s9–10, Deino s13 (Darkglass), Dreepy s14 (The Noonless Road as Drakloak).
+- **Imprinted variants** = regional forms, found only in Bleed zones or near their Imprint: Galarian Stunfisk and Alolan Diglett (Sinkfield), Alolan Grimer, Galarian Corsola and Galarian Weezing (Mirefen area), Alolan Marowak, Galarian Darumaka and Alolan Vulpix (Emberfall: "the fire burns cold"), Galarian Farfetch'd (The Rootdeep, for Sirfetch'd), Alolan Sandshrew/Vulpix (The Hoarwood), Galarian Mr. Mime (Frostfang/Stillwater), Galarian Slowpoke (Dreaming Quarter), Galarian Linoone (Hindmoor, for Obstagoon), Galarian Meowth (The Slag Mesa, for Perrserker), Pom-Pom Oricorio (Conductors' Causeway/Spire roof), Alolan Exeggutor (Lantern Isle, Bride Grove). Velmora must be town-map **region 0** (WORLD §1), or Essentials re-forms some species on evolution.
 - **Paradox Pokémon** appear wild only postgame (Shardfall Isles, "Prism echoes").
 
 ## 2. Starters & gifts
@@ -18,7 +18,7 @@ Regenerate the coverage lists below with `--summary`. This file adds what encoun
 | Prologue | Larch's lab | any Gen 1–9 starter (Core starter picker) |
 | after B2 | Saltmere (Eevee breeder) | Eevee Lv 10, with Eeveelution stones sold from Lumen on |
 | after B2 | Saltmere playhouse (stage magician) | Abra Lv 12 (no wild Abra line) |
-| Act I | Briarwick dyer | one of Pansage / Pansear / Panpour (Pansear also wild on R14) |
+| Act I | Briarwick dyer | one of Pansage / Pansear / Panpour (Pansear also wild on Lake Sallow) |
 | after B4 | Lumen Fossil Lab | revives Old Amber (Brinecut B1F) → Aerodactyl Lv 25. Dome/Helix found in Ossuary |
 | after B6 | Mirefen ward | starter egg: player picks any **Grass** starter not chosen |
 | after B9 | Verdance (Juno) | starter egg: any **Fire** starter |
@@ -31,7 +31,7 @@ Regenerate the coverage lists below with `--summary`. This file adds what encoun
 Evolution notes: **trade evolutions** use the Linking Cord (Lumen Dept. 2F). Pawmot, Brambleghast and Rabsca are `Level,100` placeholders in the Gen 9 Pack PBS (their real walk/step methods are scripted), so they are also placed wild at s9–s11. Kingambit, Annihilape, Dudunsparce, Farigiraf, Archaludon, Dipplin/Hydrapple, Kleavor, Ursaluna and Wyrdeer come from evolving their wild pre-evolutions; Core must confirm those methods work (Gen 9 Pack).
 
 ## 3. Statics (non-legendary)
-Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, after the ghost-girl quest) · Spiritomb Lv 33 (Ossuary, Odd Keystone + 32 Bleed-zone NPC talks) · Larvesta egg (Mt. Cinder caldera hermit) · Carbink glimpse in the Glassed Orchard (scripted, not catchable) · Gimmighoul coins hunt (Antumbra) → Gholdengo.
+Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, after the ghost-girl quest) · Spiritomb Lv 33 (Ossuary, Odd Keystone + 32 Bleed-zone NPC talks) · Larvesta egg (The Cinderhorn Caldera hermit) · Carbink glimpse in the Glassed Orchard (scripted, not catchable) · Gimmighoul coins hunt (Antumbra) → Gholdengo.
 
 ## 4. Legendary arcs, one per kingdom (multi-bar boss battles; levels at or below the cap)
 | Kingdom | Legendary | Where / when | Lv |
@@ -44,7 +44,7 @@ Rotom Lv 25 (Sluiceworks Turbine Hall) · Greavard Lv 16 (Thistledown attic, aft
 | Ossaria | **Groudon** (Duneholt Undersands) + **Regirock** (Stonesleep braille) | Act IV | 64 |
 | Antumbra | **Giratina** (Reverse Depths 806, Act IV boss; Origin form postgame at the Distortion Core 910) | Act IV | 70 |
 | Crownhaven | **Arceus** (true finale boss; catchable on the Good ending's postgame) | Festival | 100 |
-Postgame (Hallow Strait, Shardfall Isles, Bleed rifts, Battle Tower rewards): the Kanto/Galar birds, the Beasts, Lugia/Ho-Oh, Latios/Latias (roaming), Regice/Registeel/Regieleki/Regidrago/Regigigas, the Lake trio (Lucent lakes), Dialga/Palkia, Heatran (Mt. Cinder), Cresselia/Darkrai, the Swords and Forces of Nature, Xerneas/Yveltal/Zygarde cells, Tapus, Cosmog → Solgaleo/Lunala, Necrozma, the Ultra Beasts ("Bleed rifts" lore), Zacian/Zamazenta/Eternatus, Calyrex + steeds, the Treasures of Ruin, Koraidon/Miraidon, Terapagos. Mythicals are event/password unlocks.
+Postgame (Hallow Strait, Shardfall Isles, Bleed rifts, Battle Tower rewards): the Kanto/Galar birds, the Beasts, Lugia/Ho-Oh, Latios/Latias (roaming), Regice/Registeel/Regieleki/Regidrago/Regigigas, the Lake trio (Lucent lakes), Dialga/Palkia, Heatran (The Cinderhorn), Cresselia/Darkrai, the Swords and Forces of Nature, Xerneas/Yveltal/Zygarde cells, Tapus, Cosmog → Solgaleo/Lunala, Necrozma, the Ultra Beasts ("Bleed rifts" lore), Zacian/Zamazenta/Eternatus, Calyrex + steeds, the Treasures of Ruin, Koraidon/Miraidon, Terapagos. Mythicals are event/password unlocks.
 
 ## 5. Wild families first available, by badges held (validator output)
 
