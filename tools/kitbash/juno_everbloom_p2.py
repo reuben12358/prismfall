@@ -28,12 +28,15 @@ def arm():
     return mat.clean_orphans(a)
 
 
-def build(with_arm, ax=-4, ay=4):
+def build(with_arm, ax=-4, ay=4, ribbon=False):
     b = eb.lady_body(keep_head=False)
     fig = Image.new('RGBA', b.size, CLEAR); fig.paste(b, (eb.SHIFT, 0))
     h = Image.new('RGBA', b.size, CLEAR); h.paste(eb.lass_head(), (-2, -4)); fig.alpha_composite(h)
     V = Image.new('RGBA', fig.size, CLEAR)
     c = eb.cape()
+    if ribbon:
+        V.alpha_composite(eb.tail(), (43, 40)); V.alpha_composite(c, (43, 9)); V = mat.erase(V, mat.region(V.size, rect=(0, 66, 58, 80)))
+        c = Image.new('RGBA', (1, 1), CLEAR)
     V.alpha_composite(c, (48, 43))          # floor length: same cloth
     V.alpha_composite(c, (45, 26))          # middle length overlaps both, so the folds run on
     V.alpha_composite(c, (43, 9))           # upper length: from the wreath
@@ -65,13 +68,14 @@ def build(with_arm, ax=-4, ay=4):
         for (x, y) in [(8, 17), (4, 11)]:
             out = v2.stamp(out, x, y, v2.F5)
         out = v2.stamp(out, 12, 12, v2.BUD)
-    for (x, y) in [(62, 28), (68, 62)]:
+    for (x, y) in ([(62, 28), (64, 58)] if ribbon else [(62, 28), (68, 62)]):
         out = v2.stamp(out, x, y, v2.F5)
     return out
 
 
 if __name__ == '__main__':
     items = []
+    build(False, ribbon=True).save(OUT + '/eb_P3.png')
     for k, w in [('P2', False), ('P2arm', True)]:
         o = build(w); o.save(OUT + '/eb_%s.png' % k); items.append((k, o))
     items.append(('pass1 A', Image.open(OUT + '/eb_A.png')))

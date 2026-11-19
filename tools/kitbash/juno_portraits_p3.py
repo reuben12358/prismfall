@@ -110,13 +110,64 @@ def cand_A(expr='happy'):
     return dress(im, [(30, 6), (22, 9), (15, 11), (9, 14), (26, 5)], veil_x=41)
 
 
+XP = {'m': H('983840'), 'd': H('702838'), 'p': H('e06880'), 'w': H('f8f8f8'), 'k': BLACK, 't': H('9ad8f0'), 'T': H('e8f8ff')}
+SMILE = ['mmmmmmmmm', 'mwwwwwwwm', '.mdddddm.', '..mpppm..', '...mmm...']
+
+
+def final_A(expr):
+    global mouth
+    keep = mouth; mouth = lambda k: Image.new('RGBA', (1, 1), CLEAR)
+    im = cand_A(expr); mouth = keep
+    if expr == 'happy':
+        im = mat.patch(im, 22, 35, SMILE, XP)
+    if expr in ('happy', 'neutral'):
+        im = mat.patch(im, 17, 20, ['.kkk.', 'k....'], XP); im = mat.patch(im, 32, 20, ['.kkk.', '....k'], XP)
+    p = im.load()
+    for y in range(22, 29):                       # lift the old visor shadow off her forehead
+        for x in range(14, 40):
+            if p[x, y] == SKS:
+                p[x, y] = SKIN
+    return im
+
+
+def cand_B(expr='happy'):
+    r = bust('POKEMONTRAINER_Hilda').crop((32, 0, 80, 48))
+    r = mat.recolour(r, {c4(232, 232, 248): HL, c4(184, 184, 216): HM}, mat.region(r.size, rect=(0, 0, 47, 24)))
+    r = mat.recolour(r, {c4(200, 88, 152): HM, c4(160, 48, 112): HD, c4(232, 136, 216): HL}, mat.region(r.size, rect=(0, 0, 47, 29)))
+    r = mat.recolour(r, {c4(48, 16, 8): HD, c4(72, 40, 32): HM, c4(96, 64, 56): HL, c4(80, 120, 168): GR['g'], c4(64, 64, 80): GR['d']})
+    back = Image.new('RGBA', (48, 48), CLEAR); back.alpha_composite(caitlin_hair(), (-14, -4))
+    im = mat.under(r, back, 0, 0)
+    for y in range(38, 44):
+        for x in range(18, 32):
+            if im.getpixel((x, y))[:3] in ((160, 112, 64), (0, 0, 0)):
+                im.putpixel((x, y), (248, 216, 192, 255))
+    if expr == 'happy':
+        im = mat.patch(im, 20, 38, SMILE, XP)
+    return dress(im, [(30, 8), (22, 12), (15, 13), (9, 16), (26, 8)], veil_x=42)
+
+
+def cand_C(expr='happy'):
+    r = bust('LEADER_Skyla').crop((38, 4, 86, 52))
+    blues = [c4(40, 56, 64), c4(56, 88, 152), c4(56, 128, 152), c4(104, 144, 160), c4(88, 176, 200), c4(168, 216, 240), c4(168, 232, 208)]
+    eyes = mat.region(r.size, [[(14, 15), (22, 15), (22, 25), (14, 25)], [(26, 13), (33, 13), (33, 23), (26, 23)]])
+    r = mat.recolour(r, {c4(56, 88, 152): GR['g'], c4(104, 144, 160): GR['l'], c4(40, 56, 64): GR['d'], c4(56, 128, 152): GR['g']}, eyes)
+    r = mat.erase(r, mat.mask_and(mat.mask_not(eyes), mat.colour_mask(r, blues)))
+    r = mat.erase(r, mat.region(r.size, rect=(0, 36, 47, 47)))
+    notmouth = mat.mask_not(mat.region(r.size, rect=(20, 25, 31, 31)))
+    r = mat.recolour(r, {c4(112, 40, 56): HD, c4(152, 56, 64): HM, c4(192, 72, 80): HL}, notmouth)
+    r = mat.clean_orphans(r)
+    back = Image.new('RGBA', (48, 48), CLEAR); back.alpha_composite(caitlin_hair(), (-18, -2)); back.alpha_composite(hilda_mass(), (-10, 2))
+    im = mat.under(r, back, 0, 0)
+    return dress(im, [(30, 0), (22, 3), (15, 5), (10, 9), (26, 1)], veil_x=42)
+
+
 if __name__ == '__main__':
+    items = [(n, kb.on_bg(f('happy'), (150, 160, 170, 255))) for n, f in [('A', final_A), ('B', cand_B), ('C', cand_C)]]
+    for n, f in [('A', final_A), ('B', cand_B), ('C', cand_C)]:
+        f('happy').save(P + '/p3_cand_%s_48.png' % n)
+    kb.contact(items, 3, (49 * 6, 49 * 6), k=6, fs=11).save(kb.WORK + '/sheets/p3_cands.png')
     items = []
-    for mk, mp in [('iris', (21, 34)), ('skyla', (20, 35))]:
-        MOUTH, MPOS = mk, mp
-        items.append(('A happy ' + mk, kb.on_bg(cand_A('happy'), (150, 160, 170, 255))))
-    X = {'m': H('983840'), 'd': H('702838'), 'p': H('e06880'), 'w': H('f8f8f8')}
-    MOUTH = 'none'; mouth_orig = mouth; mouth = lambda k: Image.new('RGBA', (1, 1), CLEAR)
-    h = mat.patch(cand_A('happy'), 22, 35, ['mmmmmmmmm', 'mwwwwwwwm', '.mdddddm.', '..mpppm..', '...mmm...'], X)
-    items.append(('A happy patch', kb.on_bg(h, (150, 160, 170, 255))))
+    for e in ['happy', 'surprised', 'sad', 'neutral']:
+        im = final_A(e); im.save(P + '/p3_A_%s_48.png' % e); kb.up(im, 2).save(J + '/JUNO_%s_p3.png' % e)
+        items.append((e, kb.on_bg(im, (150, 160, 170, 255))))
     kb.contact(items, 4, (49 * 6, 49 * 6), k=6, fs=11).save(kb.WORK + '/sheets/p3_A.png')

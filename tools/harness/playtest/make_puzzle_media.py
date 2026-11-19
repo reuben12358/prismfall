@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Puzzle engine proof media: python3 -I make_puzzle_media.py gym1|gym2 [--step 7] [--ms 220]
+"""Puzzle engine proof media: python3 -I make_puzzle_media.py gym1|gym2|lofts|d1 [--step 7] [--ms 220]
 Reads $RUN/puzzle_out/<session>/ (bot.log, shots/, frames/) and writes docs/playtest/puzzles/<session>_NN_*.png
 (real engine frames, caption strip added below) and <session>_solve.gif (slow, battles cut, a card between rooms)."""
 import os, re, subprocess, sys
@@ -8,14 +8,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RUN = os.environ.get('RUN', '/home/claude/run')
 DOCS = os.path.join(HERE, '..', '..', '..', 'docs', 'playtest', 'puzzles')
 CAP = {
-    'g1_00': "Gym 1: outside the Loomhouse (Briarwick's elder tree)", 'g1_01': 'Foyer: the plank starts on the left balcony',
-    'g1_02': 'Foyer: one pull of the training heddle, the plank slides to the middle', 'g1_03': 'Foyer: two pulls, the plank is under the stairs',
-    'g1_04': 'Foyer: across the loom bed', 'g1_05': 'Weaving Hall: start (the middle bed has no plank at all)',
-    'g1_06': 'Weaving Hall: Red heddle lifts beds A and B', 'g1_07': 'Weaving Hall: Gold lifts B and C',
-    'g1_08': 'Weaving Hall: Green lifts C and A: every bed lifted twice, all planks on the right', 'g1_09': 'Weaving Hall: climbing the right-hand column',
-    'g1_10': 'Weaving Hall: top ledge', 'g1_11': 'Canopy Lofts: first deck', 'g1_12': 'Canopy Lofts: alpha cord, then the spool throws you west',
-    'g1_13': 'Canopy Lofts: the brass Meridian wire swings a bridge out', 'g1_14': 'Canopy Lofts: three more rides to the north deck',
-    'g1_15': 'Canopy Lofts: on the bridge only the brass wire opens', 'g1_16': 'The Spindle: Warden Tamsin',
+    'g1_00': 'Gym 1: outside the Loomhouse (map 120)', 'g1_01': 'The Loomhouse: one hall, the Warden at the far end',
+    'g1_02': 'The loom bed: the plank sits off to the left, a silk thread runs to the heddle', 'g1_03': 'One pull: the plank slides into the aisle',
+    'g1_04': 'Across the loom bed', 'g1_05': 'Before Warden Tamsin',
+    'lf_00': 'Upper Lofts (optional, after Badge 1): the stairs behind the Warden', 'lf_01': 'Weaving Hall: start (the middle bed has no plank at all)',
+    'lf_02': 'Weaving Hall: Red heddle lifts beds A and B', 'lf_03': 'Weaving Hall: Gold lifts B and C',
+    'lf_04': 'Weaving Hall: Green lifts C and A: every bed lifted twice, all planks on the right', 'lf_05': 'Weaving Hall: climbing the right-hand column',
+    'lf_06': 'Canopy Lofts: first deck', 'lf_07': 'Canopy Lofts: alpha cord, then the spool throws you west',
+    'lf_08': 'Canopy Lofts: the brass Meridian wire swings a bridge out', 'lf_09': 'Canopy Lofts: three more rides to the north deck',
+    'lf_10': 'Canopy Lofts: on the bridge only the brass wire opens', 'lf_11': "Granny's Knot: five threads, five treadles",
+    'lf_12': "Granny's Knot: treadles 1, 4, 5: up, down, up, down, up", 'lf_13': "Granny's chest opens",
+    'd1_00': 'D1 Glassed Orchard: the chime spur plays low, middle, high', 'd1_01': 'A wrong note first: the failure line says which note was wanted',
+    'd1_02': 'Low', 'd1_03': 'Middle', 'd1_04': 'High: the glass hedge shatters', 'd1_05': 'Past where the hedge stood', 'd1_06': "The lost child's satchel",
     'g2_00': 'Gym 2: outside Pell Playhouse (Saltmere Old Town)', 'g2_01': 'Foyer: the curtain is in',
     'g2_02': 'Foyer: Cue: Overture, called from the mark', 'g2_03': 'Revolving Stage: work lights',
     'g2_04': 'Stage: Cue: the Shipwreck (a gangplank crosses the pit)', 'g2_05': 'Stage: over the gangplank to stage left',
@@ -23,7 +27,7 @@ CAP = {
     'g2_08': 'Fly Loft, RIGHT rail: rope 2 flies flats B and C', 'g2_09': 'Fly Loft: rope 3 flies A and drops the rostrum back in',
     'g2_10': 'Stage: down the right ladder', 'g2_11': 'Stage: Cue: the Throne', 'g2_12': 'Stage: through the gap where flat B stood',
     'g2_13': 'Stage: on the rostrum, flat A gone, the dais ahead', 'g2_14': 'The Grand Stage: Warden Dorian'}
-ROOM = {130: 'Foyer', 131: 'Weaving Hall', 132: 'Canopy Lofts', 133: 'The Spindle', 120: 'Briarwick', 147: 'Saltmere Old Town',
+ROOM = {130: 'The Loomhouse', 131: 'Weaving Hall', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
         150: 'Foyer', 151: 'Revolving Stage', 152: 'Fly Loft', 154: 'The Grand Stage'}
 
 
@@ -55,14 +59,14 @@ def main():
     segs = [s for s in segs if s[2] - s[1] > 10]
     shots = []
     for fn in sorted(os.listdir(os.path.join(run, 'shots'))):
-        m = re.match(r'\d+_(g\d_\d\d)_', fn)
+        m = re.match(r'\d+_([a-z][a-z0-9]_\d\d)_', fn)
         if m: shots.append('%s:%s' % (fn, CAP[m.group(1)]))
     os.makedirs(DOCS, exist_ok=True)
     for old in os.listdir(DOCS):
         if old.startswith(ses + '_'): os.remove(os.path.join(DOCS, old))
     tmp = os.path.join(run, 'media'); os.makedirs(tmp, exist_ok=True)
     for old in os.listdir(tmp): os.remove(os.path.join(tmp, old))
-    labels = '|'.join('%s: %s' % ('Gym 1' if ses == 'gym1' else 'Gym 2', ROOM.get(m, str(m))) for m, _, _ in segs)
+    labels = '|'.join('%s: %s' % ({'gym1': 'Gym 1', 'gym2': 'Gym 2', 'lofts': 'Upper Lofts', 'd1': 'Dungeon 1'}.get(ses, ses), ROOM.get(m, str(m))) for m, _, _ in segs)
     cmd = ['python3', '-I', os.path.join(HERE, 'make_playtest_media.py'), run, tmp, '--step', str(step), '--ms', str(ms), '--name', 'solve',
            '--gif', ','.join('%d-%d' % (a, b) for _, a, b in segs), '--labels', labels]
     for s in shots: cmd += ['--shot', s]

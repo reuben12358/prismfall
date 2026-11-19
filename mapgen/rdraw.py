@@ -830,6 +830,12 @@ def pieces_late():
     """pieces added after rcustom's EXTRA33 block.  APPEND NEW PIECES HERE (at the end): ids before them never move."""
     out = {}
     im, c = pc_sign(); out['pf_pcsign'] = (im, c, None)
+    import os, json                                   # imported sheets (rimport.py): keyed 16-px pieces at 1x
+    d_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'imports')
+    mp = os.path.join(d_, 'manifest.json')
+    if os.path.exists(mp):
+        for n, v in json.load(open(mp)).items():
+            out[n] = (Image.open(os.path.join(d_, n + '.png')).convert('RGBA'), v['code'], tuple(v['door']) if v.get('door') else None)
     return out
 
 

@@ -3,43 +3,55 @@
 # The bot walks into a gym through its town door and solves the puzzle rooms with
 # ordinary input only: arrow keys along BFS paths, Use on levers/ropes, walking
 # into spools.  Nothing sets a switch or variable for it.
-#   PLAYBOT_SESSION=gym1   Briarwick door -> Foyer -> Weaving Hall -> Canopy Lofts -> the Spindle
+#   PLAYBOT_SESSION=gym1   map 120's gym door -> the Loomhouse hall (one heddle) -> the Warden
+#   PLAYBOT_SESSION=lofts  the optional Upper Lofts: Weaving Hall -> Canopy Lofts -> Granny's Knot
 #   PLAYBOT_SESSION=gym2   Saltmere Old Town door -> Foyer -> Revolving Stage <-> Fly Loft -> the Grand Stage
 # New step kinds: [:use_from, map, x, y, dir]  stand on (x, y), face dir, press Use
 #                 [:ride, map, x, y, dir]      stand on (x, y), walk into the thing in dir until thrown elsewhere
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [120, 36, 13], "gym2" => [147, 53, 24], "d1" => [522, 6, 36] }
+  PUZZLE_START = { "gym1" => [120, 36, 13], "lofts" => [130, 9, 21], "gym2" => [147, 53, 24], "d1" => [522, 6, 36] }
+  # Gym 1 (SPINE Rev 13): one easy hall. One heddle, one pull, two trainers, the Warden.
   GYM1_PLAN = [
     [:shot, 120, "g1_00_outside_the_loomhouse"],
     [:bump, 120, 36, 12],                 # the elder tree's door
-    [:shot, 130, "g1_01_foyer_start"],
-    [:talk, 130, 3, 10], [:shot, 130, "g1_02_foyer_one_pull"],
-    [:talk, 130, 3, 10], [:shot, 130, "g1_03_foyer_two_pulls"],
-    [:goto, 130, 13, 3], [:shot, 130, "g1_04_foyer_across"],
-    [:goto, 130, 13, 2],
-    [:shot, 131, "g1_05_hall_start"],
-    [:talk, 131, 1, 21],  [:shot, 131, "g1_06_hall_red"],
-    [:talk, 131, 9, 21],  [:shot, 131, "g1_07_hall_gold"],
-    [:talk, 131, 23, 21], [:shot, 131, "g1_08_hall_green_all_right"],
-    [:goto, 131, 21, 18], [:shot, 131, "g1_09_hall_on_the_planks"],
-    [:goto, 131, 21, 4],  [:shot, 131, "g1_10_hall_top"],
+    [:shot, 130, "g1_01_hall_start"],
+    [:goto, 130, 9, 12], [:shot, 130, "g1_02_at_the_loom_bed"],
+    [:talk, 130, 11, 10], [:shot, 130, "g1_03_heddle_pulled"],
+    [:goto, 130, 9, 9],  [:shot, 130, "g1_04_on_the_plank"],
+    [:goto, 130, 9, 6],  [:shot, 130, "g1_05_before_the_warden"],
+    [:done]
+  ]
+  # The optional Upper Lofts (open after Badge 1): linked heddles, spools and the brass wire, Granny's Knot.
+  LOFTS_PLAN = [
+    [:talk, 130, 11, 10],
+    [:goto, 130, 15, 3], [:shot, 130, "lf_00_stairs_to_the_upper_lofts"],
+    [:goto, 130, 15, 2],
+    [:shot, 131, "lf_01_hall_start"],
+    [:talk, 131, 1, 21],  [:shot, 131, "lf_02_hall_red"],
+    [:talk, 131, 9, 21],  [:shot, 131, "lf_03_hall_gold"],
+    [:talk, 131, 23, 21], [:shot, 131, "lf_04_hall_green_all_right"],
+    [:goto, 131, 21, 18], [:shot, 131, "lf_05_hall_on_the_planks"],
+    [:goto, 131, 21, 4],
     [:goto, 131, 12, 1],
-    [:shot, 132, "g1_11_lofts_start"],
+    [:shot, 132, "lf_06_lofts_start"],
     [:talk, 132, 1, 21],                  # alpha cord
     [:ride, 132, 3, 22, 6],               # spool s1 -> west deck
-    [:shot, 132, "g1_12_lofts_west_deck"],
+    [:shot, 132, "lf_07_lofts_west_deck"],
     [:talk, 132, 3, 11],                  # the brass Meridian wire: the bridge swings out
-    [:shot, 132, "g1_13_lofts_brass_wire"],
+    [:shot, 132, "lf_08_lofts_brass_wire"],
     [:ride, 132, 5, 12, 6],               # spool s3 -> east deck
     [:talk, 132, 18, 13],                 # gamma cord
     [:ride, 132, 20, 14, 6],              # spool s4 -> south deck
     [:ride, 132, 13, 20, 6],              # spool s2 -> north deck
-    [:shot, 132, "g1_14_lofts_north_deck_bridge"],
-    [:goto, 132, 17, 5], [:shot, 132, "g1_15_lofts_on_the_bridge"],
+    [:shot, 132, "lf_09_lofts_north_deck_bridge"],
+    [:goto, 132, 17, 5], [:shot, 132, "lf_10_lofts_on_the_bridge"],
     [:goto, 132, 22, 2],
-    [:arrive, 133], [:shot, 133, "g1_16_the_spindle"],
+    [:shot, 134, "lf_11_grannys_knot"],
+    [:talk, 134, 7, 9], [:talk, 134, 10, 9], [:talk, 134, 11, 9],
+    [:shot, 134, "lf_12_knot_solved"],
+    [:talk, 134, 5, 10], [:shot, 134, "lf_13_chest"],
     [:done]
   ]
   GYM2_PLAN = [
@@ -71,7 +83,7 @@ module PlayBot
     [:talk, 522, 19, 33], [:shot, 522, "d1_00_chime_post"],
     [:goto, 522, 23, 16], [:shot, 522, "d1_01_wrong_note_first"],
     [:goto, 522, 4, 16],  [:shot, 522, "d1_02_low"],
-    [:goto, 522, 22, 17], [:goto, 522, 23, 16], [:shot, 522, "d1_03_middle"],
+    [:goto, 522, 23, 16], [:shot, 522, "d1_03_middle"],
     [:goto, 522, 35, 25], [:shot, 522, "d1_04_high_hedge_shatters"],
     [:goto, 522, 38, 2],  [:shot, 522, "d1_05_past_the_hedge"],
     [:talk, 522, 38, 1],  [:shot, 522, "d1_06_satchel"],
@@ -83,6 +95,7 @@ module PlayBot
     def plan
       return GYM1_PLAN if SESSION == "gym1"
       return GYM2_PLAN if SESSION == "gym2"
+      return LOFTS_PLAN if SESSION == "lofts"
       return D1_PLAN if SESSION == "d1"
       return puz_plan
     end
@@ -155,6 +168,7 @@ module Game
       $player.has_running_shoes = true
       $player.party = [Pokemon.new(:TALONFLAME, 45), Pokemon.new(:ARCANINE, 45), Pokemon.new(:STARAPTOR, 45)]
       Prismfall::LevelCap.disable! if defined?(Prismfall::LevelCap) && Prismfall::LevelCap.respond_to?(:disable!)
+      $player.badges[0] = true if PlayBot::SESSION == "lofts"
       (101..110).each { |i| $game_switches[i] = true }      # the story so far (Chapters 0-2 flags), as on a real save
       $game_map.need_refresh = true
       PlayBot.recording = true

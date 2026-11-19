@@ -16,11 +16,10 @@
 123	120	Weavers' Guildhall
 124	120	Treetop House
 125	120	Cutter's House
-130	120	Loomhouse Gym - Foyer
-131	130	Loomhouse Gym - Weaving Hall
-132	130	Loomhouse Gym - Canopy Lofts
-133	130	Loomhouse Gym - The Spindle
-134	130	Loomhouse Gym - Granny's Knot
+130	120	Loomhouse Gym
+131	130	Loomhouse Upper Lofts - Weaving Hall
+132	130	Loomhouse Upper Lofts - Canopy Lofts
+134	130	Loomhouse Upper Lofts - Granny's Knot
 140	0	Saltmere
 141	140	Saltmere Pokémon Center
 142	140	Saltmere Mart

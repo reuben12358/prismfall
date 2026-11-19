@@ -1,0 +1,100 @@
+{
+ "ch_chalet_a": {
+  "w": 7,
+  "h": 8,
+  "code": [
+   "RRRRRRR",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "WWWWWWW",
+   "WWWDWWW"
+  ],
+  "door": [
+   3,
+   7
+  ],
+  "source": "da_carchagui/Snow village tiles.png",
+  "credit": "carchagui"
+ },
+ "ch_chalet_b": {
+  "w": 7,
+  "h": 7,
+  "code": [
+   "RRRRRRR",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "WWWWWWW",
+   "WWWDWWW"
+  ],
+  "door": [
+   3,
+   6
+  ],
+  "source": "da_carchagui/Snow village tiles.png",
+  "credit": "carchagui"
+ },
+ "ch_chalet_c": {
+  "w": 7,
+  "h": 7,
+  "code": [
+   "RRRRRRR",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "rrrrrrr",
+   "WWWWWWW",
+   "WWWDWWW"
+  ],
+  "door": [
+   3,
+   6
+  ],
+  "source": "da_carchagui/Snow village tiles.png",
+  "credit": "carchagui"
+ },
+ "ch_chalet_pc": {
+  "w": 10,
+  "h": 8,
+  "code": [
+   "RRRRRRRRRR",
+   "rrrrrrrrrr",
+   "rrrrrrrrrr",
+   "rrrrrrrrrr",
+   "rrrrrrrrrr",
+   "rrrrrrrrrr",
+   "WWWWWWWWWW",
+   "WWWDWWWWWW"
+  ],
+  "door": [
+   3,
+   7
+  ],
+  "source": "da_carchagui/Snow village tiles.png",
+  "credit": "carchagui"
+ },
+ "ch_chalet_shop": {
+  "w": 9,
+  "h": 8,
+  "code": [
+   "RRRRRRRRR",
+   "rrrrrrrrr",
+   "rrrrrrrrr",
+   "rrrrrrrrr",
+   "rrrrrrrrr",
+   "rrrrrrrrr",
+   "WWWWWWWWW",
+   "WWDWWWWWW"
+  ],
+  "door": [
+   2,
+   7
+  ],
+  "source": "da_carchagui/Snow village tiles.png",
+  "credit": "carchagui"
+ }
+}

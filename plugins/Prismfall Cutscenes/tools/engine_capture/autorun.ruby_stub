@@ -40,6 +40,10 @@ module CutRun
       $scene.createSpritesets
       30.times { Graphics.update; $scene.miniupdate }
       $player.name = "Tester"
+      pbChangePlayer(1) if $player.character_ID < 1     # a new game has no player graphic before the intro
+      $game_player.refresh_charset if $game_player.respond_to?(:refresh_charset)
+      8.times { Graphics.update; $scene.miniupdate }
+      log("player charset #{$game_player.character_name.inspect}")
       id = (ENV["CUT_ID"] || "WAR_CLIMAX").to_sym
       vars = {}
       (ENV["CUT_VARS"] || "").split(",").each do |kv|

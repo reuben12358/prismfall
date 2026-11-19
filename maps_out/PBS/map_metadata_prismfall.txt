@@ -84,24 +84,20 @@ MapPosition = 0,14,23
 Name = Woodward's Hut
 MapPosition = 0,13,23
 #-------------------------------
-[130]   # Loomhouse Gym - Foyer
-Name = Loomhouse Gym - Foyer
+[130]   # Loomhouse Gym
+Name = Loomhouse Gym
 MapPosition = 0,12,22
 #-------------------------------
-[131]   # Loomhouse Gym - Weaving Hall
-Name = Loomhouse Gym - Weaving Hall
+[131]   # Loomhouse Upper Lofts - Weaving Hall
+Name = Loomhouse Upper Lofts - Weaving Hall
 MapPosition = 0,12,22
 #-------------------------------
-[132]   # Loomhouse Gym - Canopy Lofts
-Name = Loomhouse Gym - Canopy Lofts
+[132]   # Loomhouse Upper Lofts - Canopy Lofts
+Name = Loomhouse Upper Lofts - Canopy Lofts
 MapPosition = 0,12,22
 #-------------------------------
-[133]   # Loomhouse Gym - The Spindle
-Name = Loomhouse Gym - The Spindle
-MapPosition = 0,12,22
-#-------------------------------
-[134]   # Loomhouse Gym - Granny's Knot
-Name = Loomhouse Gym - Granny's Knot
+[134]   # Loomhouse Upper Lofts - Granny's Knot
+Name = Loomhouse Upper Lofts - Granny's Knot
 MapPosition = 0,12,22
 #-------------------------------
 [140]   # Saltmere

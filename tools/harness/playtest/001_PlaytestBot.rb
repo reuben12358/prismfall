@@ -21,63 +21,37 @@ module PlayBot
   # [kind, map, x, y, extra]; :goto walks onto a tile, :bump walks into a blocking
   # event (doors), :talk faces a tile and presses Use, :edge holds a direction off
   # the map edge into a connected map, :debug_install runs the Debug menu entry.
+  # Steps name maps by ID and targets by event name, never by coordinates (maps are still being rebuilt):
+  #   [:to, map, dest]      take the transfer event or map edge that leads to map dest (doors are bumped)
+  #   [:goto, map, name]    walk onto the event    [:near, map, name]  stand next to it
+  #   [:talk, map, name]    face it and press Use  [:spot_all, map]    walk into every unbeaten trainer's sight
+  #   [:catch, map]         walk the tall grass until a second Pokemon is caught (bot throws Poke Balls)
   PLAN = [
     [:debug_install, 109],
-    [:goto, 109, 15, 10],          # cabin hatch -> 110
-    [:talk, 110, 4, 7],            # Mum's letter
-    [:goto, 110, 7, 11],           # back up to the deck
-    [:goto, 109, 12, 6],           # rail: Edda
-    [:goto, 109, 12, 7],
-    [:goto, 109, 11, 6],           # rail again: Voss, docking
-    [:goto, 109, 9, 15],           # gangway -> Ferrow's Landing
-    [:goto, 100, 34, 47],          # Edda's last call (34,51), customs gate NULL scan
-    [:bump, 100, 53, 11],          # Larch Research Station door -> 103 (Rejuvenation-tileset rebuild of 100)
-    [:talk, 103, 20, 10],          # starter table
-    [:goto, 103, 14, 15],          # exit -> K1 autorun at the lab gate
-    [:bump, 100, 24, 14],          # Poke Center: in, heal, out (door step-out check 1)
-    [:talk, 101, "Nurse"],
-    [:goto, 101, "Exit"],
-    [:bump, 100, 39, 22],          # Mart: in and out (door step-out check 2)
-    [:goto, 102, "Exit"],
-    [:edge, 100, 34, 0, 8],        # north lane -> Route 1
-    [:goto, 520, 12, 54],          # Juno's catching tutorial (5 Poke Balls: the bot then catches one wild Pokemon)
-    [:spot, 520, 2],               # Youngster Pim
-    [:spot, 520, 3],               # Lass Dory
-    [:edge, 520, 26, 0, 8],        # north edge -> Route 2
-    [:spot, 521, 13],              # Bug Catcher Wim
-    [:spot, 521, 14],              # Picnicker Ada
-    [:goto, 521, 61, 23],          # east edge -> the Glassed Orchard (arrival scene, the Veil)
-    [:talk, 522, 24, 18],          # the Glassed Wurmple (Bleed field)
-    [:talk, 522, "Lost Skwovet"],  # Biscuit (he wanders)
-    [:goto, 522, 4, 36],           # back through the Veil: Larch, Lecture One (S105)
-    [:goto, 522, 0, 37],           # -> Route 2
-    [:goto, 521, 57, 21],          # Juno's flags
-    [:bump, 521, 30, 35],          # Hale Farmhouse door
-    [:talk, 523, 7, 8],            # Wenna: Biscuit home
-    [:goto, 523, 10, 13],          # out
-    [:edge, 521, 41, 47, 2],       # back down to Route 1
-    [:goto, 520, 15, 60],          # the stile send-off (Chapter 1 close, V102 = 2)
-    [:edge, 520, 26, 0, 8],        # north again
-    [:spot, 521, 15],              # the trainer by the Accord barrier
-    [:goto, 521, 0, 10],           # the Accord barrier opens after the orchard -> Gossamer Wood
-    [:spot, 524, 21], [:spot, 524, 20], [:spot, 524, 22], [:spot, 524, 23], [:spot, 524, 24],   # 20 = the Twins (double)
-    [:goto, 524, 25, 0],           # -> Briarwick
-    [:arrive, 120],
-    [:bump, 120, 45, 23],          # Briarwick Poke Center
-    [:talk, 121, "Nurse"],
-    [:goto, 121, "Exit"],
-    [:bump, 120, 36, 12],          # Loomhouse Gym (Gym 1): attempt it as it is installed
-    [:goto, 130, "To Weaving Hall"],
-    [:spot, 131, 36], [:spot, 131, 37], [:spot, 131, 38],
-    [:goto, 131, "Up to Canopy Lofts"],
-    [:goto, 132, "To the Spindle"],
+    [:to, 109, 110], [:talk, 110, "Mum's letter"], [:to, 110, 109],
+    [:goto, 109, "Rail watch 3"], [:near, 109, "Rail watch 3"], [:goto, 109, "Rail watch 2"],   # Edda, then Voss
+    [:to, 109, 100],                               # gangway -> Ferrow's Landing
+    [:goto, 100, "Customs gate 2"],                # Edda's last call, the NULL scan
+    [:to, 100, 103], [:talk, 103, "Starter table"], [:to, 103, 100],   # Larch, starter, K1 at the lab gate
+    [:to, 100, 101], [:talk, 101, "Nurse"], [:to, 101, 100],           # Poke Center in/out (door step-out 1)
+    [:to, 100, 102], [:to, 102, 100],                                  # Mart in/out (door step-out 2)
+    [:to, 100, 520],
+    [:goto, 520, "Juno tutorial 4"], [:catch, 520], [:spot_all, 520],
+    [:to, 520, 521], [:spot_all, 521],
+    [:to, 521, 522], [:talk, 522, "Glassed Wurmple"], [:talk, 522, "Lost Skwovet"], [:goto, 522, "Bleed Veil 2"],
+    [:to, 522, 521], [:goto, 521, "Juno flags 1"],
+    [:to, 521, 523], [:talk, 523, "Wenna"], [:to, 523, 521],
+    [:to, 521, 520], [:goto, 520, "Stile send-off 2"], [:to, 520, 521],
+    [:to, 521, 524], [:spot_all, 524], [:to, 524, 120], [:arrive, 120],
+    [:to, 120, 121], [:talk, 121, "Nurse"], [:to, 121, 120],
+    [:to, 120, 130], [:to, 130, 131], [:spot_all, 131], [:to, 131, 132], [:spot_all, 132], [:to, 132, 133],
     [:talk, 133, "Tamsin"],
     [:done]
   ]
-  REWIND = PLAN.index { |st| st[0] == :edge && st[1] == 100 }   # after a blackout: walk out of Ferrow's Landing again
+  REWIND = PLAN.index([:to, 100, 520])   # after a blackout: walk out of Ferrow's Landing again
   MAX_BLACKOUTS = 5
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
-  ROUTE1_PLAN = [[:goto, 520, 12, 54], [:goto, 520, 10, 44], [:goto, 520, 16, 38], [:goto, 520, 16, 34], [:done]]
+  ROUTE1_PLAN = [[:goto, 520, "Juno tutorial 4"], [:spot_all, 520], [:done]]
   # PLAYBOT_SESSION=checks: real map lines with glyphs the fonts lack, a quest-log line, then every trainer added on
   # 2026-11-17 (AI vs AI, two turns each) - checks 002_Font_Glyphs.rb and the new PBS entries in the engine
   CHECK_LINES = [
@@ -456,13 +430,17 @@ module PlayBot
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]
-        return spot(step[2]) if kind == :spot
+        return ctrl_step($game_player.x, $game_player.y) if !$game_player.moving? && boxed_in?($game_player.x, $game_player.y)
+        return (spot(step[2]) && next_step) if kind == :spot
+        return spot_all if kind == :spot_all
+        return catch_step if kind == :catch
+        return to_map(step[2]) if kind == :to
         if x.is_a?(String)             # an event by name (it may wander)
           ev = $game_map.events.values.find { |e| e.name == x }
           return stuck("no event named #{x}") if !ev
           x, y = ev.x, ev.y
         end
-        return ctrl_step($game_player.x, $game_player.y) if !$game_player.moving? && boxed_in?($game_player.x, $game_player.y)
+        kind = :talk_near if kind == :near
         case kind
         when :goto
           return next_step if $game_player.x == x && $game_player.y == y && !$game_player.moving?
@@ -470,13 +448,14 @@ module PlayBot
         when :edge
           return walk_to(x, y) if $game_player.x != x || $game_player.y != y
           @dir = step[4] if !$game_player.moving?
-        when :bump, :talk
+        when :bump, :talk, :talk_near
           ax, ay, d = approach(x, y)
           if ax.nil? && kind == :talk && (path_dirs(x, y + 2) || [x, y + 2] == [$game_player.x, $game_player.y])
             ax, ay, d = x, y + 2, 8          # across a counter (Poke Center nurse)
           end
           return stuck("no tile next to (#{x},#{y})") if ax.nil?
           return walk_to(ax, ay) if $game_player.x != ax || $game_player.y != ay
+          return next_step if kind == :talk_near
           return if @idle < 12
           if kind == :bump
             @dir = d
@@ -618,21 +597,107 @@ module PlayBot
     # Walk into a trainer's line of sight: stand 2 (then 1, 3) tiles in front of it and wait to be noticed
     def spot(id)
       ev = $game_map.events[id]
-      return next_step if !ev || $game_self_switches[[$game_map.map_id, id, "A"]]
-      return next_step if @spot_i > 2
+      return true if !ev || $game_self_switches[[$game_map.map_id, id, "A"]] || @spot_i > 2
       dx, dy = DIRS[ev.direction] || [0, 1]
       d = [2, 1, 3][@spot_i]
       tx, ty = ev.x + (dx * d), ev.y + (dy * d)
-      if !$game_map.valid?(tx, ty) || ([tx, ty] != [$game_player.x, $game_player.y] && !path_dirs(tx, ty))
+      here = [tx, ty] == [$game_player.x, $game_player.y]
+      if !$game_map.valid?(tx, ty) || (!here && !path_dirs(tx, ty))
         @spot_i += 1
-        return
+        return false
       end
-      return walk_to(tx, ty) if [tx, ty] != [$game_player.x, $game_player.y]
+      return (walk_to(tx, ty); false) if !here
       @spot_wait += 1
       if @spot_wait > 90
         log("spot: trainer #{id} on map #{$game_map.map_id} did not notice at distance #{d} (party #{party_text})")
         @spot_i += 1
         @spot_wait = 0
+      end
+      return false
+    end
+
+    def spot_all
+      @spot_skip ||= {}
+      mid = $game_map.map_id
+      list = $game_map.events.values.select { |e| e.name =~ /^Trainer\(/ && !$game_self_switches[[mid, e.id, "A"]] && !@spot_skip[[mid, e.id]] }
+      return next_step if list.empty?
+      @spot_cur = nil if @spot_cur && !list.any? { |e| e.id == @spot_cur }
+      @spot_cur ||= list.min_by { |e| (e.x - $game_player.x).abs + (e.y - $game_player.y).abs }.id
+      if spot(@spot_cur)
+        if !$game_self_switches[[mid, @spot_cur, "A"]]
+          log("spot_all: could not engage trainer event #{@spot_cur} on map #{mid}")
+          @spot_skip[[mid, @spot_cur]] = true
+        end
+        @spot_cur = nil; @spot_i = 0; @spot_wait = 0
+      end
+    end
+
+    # Tall grass until a second Pokemon joins (or the balls run out, or it takes too long)
+    def catch_step
+      return next_step if !want_catch?
+      @catch_frames = @catch_frames.to_i + 1
+      if @catch_frames > 5400
+        log("catch: no catch after 90 s of grass (party #{party_text}, balls #{$bag.quantity(:POKEBALL)})")
+        return next_step
+      end
+      if !@grass || @grass_map != $game_map.map_id
+        @grass_map = $game_map.map_id
+        @grass = []
+        $game_map.width.times do |gx|
+          $game_map.height.times { |gy| @grass.push([gx, gy]) if $game_map.terrain_tag(gx, gy).land_wild_encounters }
+        end
+        px, py = $game_player.x, $game_player.y
+        @grass = @grass.sort_by { |g| (g[0] - px).abs + (g[1] - py).abs }.first(40).select { |g| path_dirs(g[0], g[1]) }
+        log("catch: #{@grass.length} grass tiles near (#{px},#{py})")
+        return next_step if @grass.length < 2
+      end
+      @grass_i = (@grass_i.to_i + 1) % @grass.length if [$game_player.x, $game_player.y] == @grass[@grass_i.to_i]
+      g = @grass[@grass_i.to_i]
+      walk_to(g[0], g[1])
+    end
+
+    # The transfer event (nearest) or the map edge that leads to map dest
+    def to_map(dest)
+      if !@to || @to[0] != [@step, $game_map.map_id]
+        @to = [[@step, $game_map.map_id], nil]
+        px, py = $game_player.x, $game_player.y
+        evs = $game_map.events.values.select { |e| e.list && e.list.any? { |c| c.code == 201 && c.parameters[0] == 0 && c.parameters[1] == dest } }
+        evs = evs.sort_by { |e| (e.x - px).abs + (e.y - py).abs }
+        evs.each do |e|
+          if path_dirs(e.x, e.y) then @to[1] = [:walk, e.x, e.y]
+          elsif (ap = approach(e.x, e.y)) then @to[1] = [:bump, *ap]
+          end
+          break if @to[1]
+        end
+        if !@to[1]
+          best = nil
+          w, h = $game_map.width, $game_map.height
+          edge = (0...w).flat_map { |ex| [[ex, 0, 8], [ex, h - 1, 2]] } + (0...h).flat_map { |ey| [[0, ey, 4], [w - 1, ey, 6]] }
+          edge.each do |ex, ey, d|
+            dx, dy = DIRS[d]
+            nm = $map_factory.getNewMap(ex + dx, ey + dy)
+            next if !nm || nm[0].map_id != dest || !$game_player.passable?(ex, ey, d)
+            dist = (ex - px).abs + (ey - py).abs
+            next if best && best[0] <= dist
+            best = [dist, ex, ey, d] if [ex, ey] == [px, py] || path_dirs(ex, ey)
+          end
+          @to[1] = [:edge, best[1], best[2], best[3]] if best
+        end
+        log("to map #{dest}: #{@to[1].inspect}")
+      end
+      t = @to[1]
+      if !t
+        @to = nil
+        return stuck("no way from map #{$game_map.map_id} to map #{dest}")
+      end
+      at = [$game_player.x, $game_player.y] == [t[1], t[2]]
+      return walk_to(t[1], t[2]) if !at
+      return if t[0] == :walk || $game_player.moving?
+      @dir = t[3]
+      @bumps = (@bumps || 0) + 1
+      if @bumps > 400
+        @to = nil
+        stuck("holding #{t[3]} toward map #{dest} did nothing")
       end
     end
 

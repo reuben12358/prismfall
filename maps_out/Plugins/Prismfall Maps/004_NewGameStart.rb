@@ -38,7 +38,11 @@ module PrismfallMaps
   FIRST_RESPAWN_MAP = 100   # Ferrow's Landing
 
   def self.set_first_respawn
-    spot = GameData::MapMetadata.try_get(FIRST_RESPAWN_MAP)&.teleport_destination
+    spot = nil   # the HealingSpot is on the Poke Center's own metadata and points at the town map
+    GameData::MapMetadata.each do |md|
+      d = md.teleport_destination
+      spot ||= d if d && d[0] == FIRST_RESPAWN_MAP
+    end
     return if !spot || !$PokemonGlobal
     $PokemonGlobal.pokecenterMapId     = spot[0]
     $PokemonGlobal.pokecenterX         = spot[1]

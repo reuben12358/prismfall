@@ -109,3 +109,15 @@ Sheet: `art/previews/12_juno_everbloom_p2.png`, engine frames `art/previews/12_e
 - Not verified: charset on a map (setting the player's `character_name` in the autorun was overridden and the rig's start map
   renders black), and an EBDX VS-bar transition (a `BattleVS = trainerSM` line in the copy's `PBS/EBDX/trainers.txt` had no visible
   effect; only the default ball wipe played).
+
+## 9. Portrait pass 3 and front pass 3 (2026-11-19)
+
+Sheet: `art/previews/13_juno_portraits.png`. Scripts: `juno_portraits_p3.py` (candidates A/B/C, expressions on A), `sheet13.py`;
+front `eb_P3` comes from `juno_everbloom_p2.py` (`build(False, ribbon=True)`). Front installed; **portraits not installed** (the
+rejected Burgh-based set is still in `art/out/Graphics/Portraits/`).
+
+- **A whole recognisable bust repainted is a wig job.** Compose instead: one face, back hair from another bust, headwear replaced.
+- **Hats can be repainted as a hair crown** and hidden under the wreath, but the dome shape survives and reads as a bonnet.
+- **Mouths do not transplant between busts** unless the head angles match; Skyla's and Iris's failed on a frontal face.
+- **Charset in engine:** overriding `$game_player.character_name` with a singleton method makes the walker use the sheet, and
+  128x192 frames display correctly. The rig's autorun does not draw map tiles, so "on a lit map" is still unverified.

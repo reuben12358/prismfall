@@ -35,7 +35,7 @@ def bag(top, diff, boss=False):
     else:           t = (["FULLRESTORE"] * 2, ["FULLRESTORE"] * 3, ["FULLRESTORE"])
     return list(t[diff])
 
-def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=False, route=False):
+def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=False, route=False, nobag=False):
     """diff 0 std, 1 hard, 2 casual. mons = list of P dicts (already filtered)."""
     top = max(m["lv"] for m in mons)
     out = ["#-------------------------------"]
@@ -52,7 +52,7 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
             o.update(m["casual"])
             o["lv"] = max(2, m["lv"] - (1 if route else casual_drop(top)))
         built.append(o)
-    items = [] if route else bag(top, diff)
+    items = [] if (route or nobag) else bag(top, diff)
     if diff in ((0, 1) if mega_std else (1,)) and any(o["item"] in MEGA_STONES for o in built):
         items = ["MEGARING"] + items
     if diff == 2:
@@ -93,15 +93,15 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
             out.append("    EV = 0")
     return "\n".join(out)
 
-def variants(ttype, name, base, mons, lose, cap, mega_std=False, route=False):
+def variants(ttype, name, base, mons, lose, cap, mega_std=False, route=False, nobag=False):
     """Yields (version, text) for Standard / Hard / Casual."""
     std = [m for m in mons if m.get("only") not in ("hard",)]
     hard = [m for m in mons if m.get("only") in (None, "hard", "nocasual")]
     cas = [m for m in mons if m.get("only") is None]
     res = []
-    res.append(render(ttype, name, base, std, lose, 0, cap, mega_std=mega_std, route=route))
-    res.append(render(ttype, name, base + 100, hard, lose, 1, cap, mega_std=mega_std, route=route))
-    res.append(render(ttype, name, base + 200, cas, lose, 2, cap, mega_std=mega_std, route=route))
+    res.append(render(ttype, name, base, std, lose, 0, cap, mega_std=mega_std, route=route, nobag=nobag))
+    res.append(render(ttype, name, base + 100, hard, lose, 1, cap, mega_std=mega_std, route=route, nobag=nobag))
+    res.append(render(ttype, name, base + 200, cas, lose, 2, cap, mega_std=mega_std, route=route, nobag=nobag))
     return res
 
 OUT = []
@@ -197,24 +197,29 @@ warden(5, "LEADER_SAHAR", "Sahar", 31, "DESERT", "The sand remembers everything.
       nick="Effigy", hard={"moves": "SCORCHINGSANDS,PSYCHIC,ICEBEAM,STEALTHROCK", "item": "SITRUSBERRY"}),
 ])
 warden(6, "LEADER_CORVIN", "Corvin", 35, "CORROSIVE_MIRE", "Hmph. Clean work. The mire doesn't give that compliment often.", [
-    # Never Misty Surge (it would purify the field). Transition play: Heat Wave ignites the marsh gas (1/8 to grounded
-    # non-Fire foes each use) and the second one burns it off to Wasteland, where quakes are halved.
-    P("WEEZING", 33, "LEVITATE", "BLACKSLUDGE", "BOLD", "STRANGESTEAM,SLUDGE,HEATWAVE,TOXICSPIKES", "PD", form=1,
-      casual={"moves": "STRANGESTEAM,SLUDGE,WILLOWISP,TOXICSPIKES"},
-      hard={"ab": "NEUTRALIZINGGAS", "moves": "STRANGESTEAM,SLUDGEBOMB,HEATWAVE,TOXICSPIKES"}),
-    # Synthetic Seed on the Mire: +1 Atk, +1 Sp. Atk, holder poisoned - and a Poison type can't be poisoned.
-    P("CROBAT", 33, "INNERFOCUS", "SYNTHETICSEED", "JOLLY", "CROSSPOISON,WINGATTACK,BITE,SUPERSONIC", "A",
-      only="nocasual", hard={"moves": "CROSSPOISON,ACROBATICS,UTURN,TAUNT"}),
-    P("SALAZZLE", 34, "CORROSION", "BLACKSLUDGE", "TIMID", "TOXIC,VENOSHOCK,FLAMETHROWER,NASTYPLOT", "S",
+    # DOUBLE battle (story; Prismfall.gym_battle sets it). Lead pair: Weezing spreads, Amoonguss draws the fire.
+    # Never Misty Surge (it would purify the field). Transition play: Heat Wave hits both foes, ignites the marsh gas
+    # (1/8 to each grounded non-Fire foe per use) and the second one burns it off to Wasteland, where quakes are halved.
+    P("WEEZING", 33, "LEVITATE", "BLACKSLUDGE", "BOLD", "STRANGESTEAM,SLUDGE,HEATWAVE,PROTECT", "PD", form=1,
+      casual={"moves": "STRANGESTEAM,SLUDGE,WILLOWISP,PROTECT"},
+      hard={"ab": "NEUTRALIZINGGAS", "moves": "STRANGESTEAM,SLUDGEBOMB,HEATWAVE,PROTECT"}),
+    # Powders are x1.25 accurate here. On Hard the doctor redirects: Rage Powder pulls single-target moves off Weezing and Ward
+    # (Amoonguss only learns it at 40, so Standard gets Protect instead).
+    P("AMOONGUSS", 34, "EFFECTSPORE", "BLACKSLUDGE", "RELAXED", "GIGADRAIN,VENOSHOCK,STUNSPORE,PROTECT", "PD",
+      casual={"moves": "GIGADRAIN,VENOSHOCK,STUNSPORE,CLEARSMOG"},
+      hard={"ab": "REGENERATOR", "moves": "GIGADRAIN,SLUDGEBOMB,RAGEPOWDER,SPORE"}),
+    # Synthetic Seed on the Mire: +1 Atk, +1 Sp. Atk, holder poisoned - and a Poison type can't be poisoned. Tailwind for the pair.
+    P("CROBAT", 33, "INNERFOCUS", "SYNTHETICSEED", "JOLLY", "CROSSPOISON,WINGATTACK,BITE,TAILWIND", "A",
+      only="nocasual", hard={"moves": "CROSSPOISON,ACROBATICS,TAILWIND,TAUNT"}),
+    P("SALAZZLE", 34, "CORROSION", "BLACKSLUDGE", "TIMID", "FAKEOUT,VENOSHOCK,HEATWAVE,PROTECT", "S",
       only="hard", gender="female"),
-    P("AMOONGUSS", 34, "EFFECTSPORE", "BLACKSLUDGE", "RELAXED", "GIGADRAIN,VENOSHOCK,STUNSPORE,CLEARSMOG", "PD",
-      hard={"ab": "REGENERATOR", "moves": "GIGADRAIN,SLUDGEBOMB,SPORE,CLEARSMOG"}),
-    P("DRAPION", 34, "SNIPER", "SCOPELENS", "ADAMANT", "POISONFANG,CRUNCH,KNOCKOFF,FELLSTINGER", "A",
-      hard={"moves": "POISONJAB,CRUNCH,EARTHQUAKE,SWORDSDANCE", "item": "LIFEORB"}),
-    # Merciless: +1 Attack on entry here, and the mire keeps poisoning grounded foes. Scald answers the Fire flip.
-    P("TOXAPEX", 35, "MERCILESS", "BLACKSLUDGE", "BOLD", "VENOSHOCK,TOXIC,SCALD,RECOVER", "BPD",
-      nick="Ward", casual={"ab": "LIMBER"},
-      hard={"item": "ROCKYHELMET"}),
+    P("DRAPION", 34, "SNIPER", "SCOPELENS", "ADAMANT", "POISONFANG,KNOCKOFF,FELLSTINGER,PROTECT", "A",
+      hard={"moves": "POISONJAB,KNOCKOFF,EARTHQUAKE,PROTECT", "item": "LIFEORB"}),
+    # Merciless: +1 Attack on entry here, and the mire keeps poisoning grounded foes. Baneful Bunker is his Protect;
+    # Scald answers the Fire flip.
+    P("TOXAPEX", 35, "MERCILESS", "BLACKSLUDGE", "BOLD", "VENOSHOCK,SCALD,BANEFULBUNKER,RECOVER", "BPD",
+      nick="Ward", casual={"ab": "LIMBER", "moves": "VENOSHOCK,TOXIC,SCALD,RECOVER"},
+      hard={"item": "ROCKYHELMET", "moves": "VENOSHOCK,SCALD,BANEFULBUNKER,WIDEGUARD"}),
 ])
 warden(7, "LEADER_BRANN", "Brann", 39, "VOLCANIC", "Ha! Tempered steel! That's what you are, aye!", [
     # No Stealth Rock on this team any more: his own eruptions blow hazards away. Lava Plume and Earth Power prime eruptions
@@ -281,24 +286,27 @@ warden(10, "LEADER_ANJA", "Anja", 51, "FROZEN_LAKE", "The ice held for you. It d
       hard={"item": "LIFEORB", "moves": "HIGHHORSEPOWER,ICICLECRASH,ICESHARD,STEALTHROCK"}),
 ])
 warden(11, "LEADER_ODESSA", "Odessa", 55, "STORMFRONT", "Clear skies to you, flyer. You've earned the jetstream.", [
-    # No Drizzle any more: in rain the Stormfront's lightning strikes every airborne non-Electric Pokemon, which is her team.
-    # Hurricane and Thunder never miss here anyway. Tailwind lasts 2 turns longer.
-    P("PELIPPER", 53, "KEENEYE", "SITRUSBERRY", "MODEST", "HURRICANE,SCALD,TAILWIND,UTURN", "BS",
-      hard={"moves": "HURRICANE,SCALD,TAILWIND,ROOST"}),
-    # Big Pecks: +1 Defense on entry here.
-    P("SWANNA", 53, "BIGPECKS", "LEFTOVERS", "TIMID", "HURRICANE,SCALD,AIRSLASH,ROOST", "S", only="nocasual",
-      hard={"moves": "HURRICANE,SCALD,ICEBEAM,ROOST"}),
-    # Elemental Seed on the Stormfront: +1 Speed and Charge - the first Electric Revelation Dance is doubled.
-    P("ORICORIO", 54, "DANCER", "ELEMENTALSEED", "TIMID", "REVELATIONDANCE,HURRICANE,CALMMIND,ROOST", "S", form=1,
-      casual={"item": "SITRUSBERRY"}),
+    # DOUBLE battle (story). No Drizzle: in rain the Stormfront's lightning strikes every airborne non-Electric Pokemon,
+    # which is her team. Hurricane and Thunder never miss here anyway.
+    # Lead pair: Pelipper's Tailwind lasts 6 turns here and its Wide Guard stops the Rock Slides and Discharges that a
+    # team of fliers fears; Noivern's Hyper Voice hits both foes.
+    P("PELIPPER", 53, "KEENEYE", "SITRUSBERRY", "MODEST", "TAILWIND,WIDEGUARD,HURRICANE,SCALD", "BS",
+      casual={"moves": "TAILWIND,HURRICANE,SCALD,UTURN"}),
     # Transition play: two Sunny Days tear the storm open -> Rainbow (added effects doubled: Air Slash flinches 60%,
     # Hurricane confuses 60%; Normal x1.5 for Hyper Voice / Boomburst).
     P("NOIVERN", 54, "INFILTRATOR", "LIFEORB", "TIMID", "HURRICANE,HYPERVOICE,AIRSLASH,SUNNYDAY", "S",
       casual={"item": "SITRUSBERRY", "moves": "HURRICANE,HYPERVOICE,DRAGONPULSE,FLAMETHROWER"},
       hard={"moves": "HURRICANE,BOOMBURST,DRACOMETEOR,SUNNYDAY"}),
+    # Big Pecks: +1 Defense on entry here. Icy Wind is a wind move (x1.2) that slows both foes.
+    P("SWANNA", 53, "BIGPECKS", "LEFTOVERS", "TIMID", "HURRICANE,SCALD,ICYWIND,ROOST", "S", only="nocasual",
+      hard={"moves": "HURRICANE,SCALD,ICYWIND,PROTECT"}),
+    # Elemental Seed on the Stormfront: +1 Speed and Charge - the first Electric Revelation Dance is doubled.
+    P("ORICORIO", 54, "DANCER", "ELEMENTALSEED", "TIMID", "REVELATIONDANCE,HURRICANE,HELPINGHAND,ROOST", "S", form=1,
+      casual={"item": "SITRUSBERRY"}),
     # The answer to Electric: Wind Power arrives charged on this field, and Electric is x1.3. Replaces Talonflame.
-    P("KILOWATTREL", 54, "WINDPOWER", "SHARPBEAK", "TIMID", "THUNDERBOLT,HURRICANE,VOLTSWITCH,ROOST", "S",
-      casual={"ab": "VOLTABSORB"}, hard={"moves": "THUNDER,HURRICANE,VOLTSWITCH,ROOST", "item": "MAGNET"}),
+    P("KILOWATTREL", 54, "WINDPOWER", "SHARPBEAK", "TIMID", "THUNDERBOLT,HURRICANE,VOLTSWITCH,PROTECT", "S",
+      casual={"ab": "VOLTABSORB", "moves": "THUNDERBOLT,HURRICANE,VOLTSWITCH,ROOST"},
+      hard={"moves": "THUNDER,HURRICANE,VOLTSWITCH,PROTECT", "item": "MAGNET"}),
     P("CORVIKNIGHT", 55, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,IRONHEAD,BULKUP,ROOST", "BPD",
       nick="Taxi", hard={"moves": "BRAVEBIRD,BODYPRESS,BULKUP,ROOST"}),
 ])
@@ -384,18 +392,20 @@ warden(15, "LEADER_MAGNUS", "Magnus", 71, "FACTORY", "Efficient. Unexpected. I'l
                            "moves": "METEORMASH,ZENHEADBUTT,HAMMERARM,ICEPUNCH"}),
 ])
 warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were real the whole time.", [
-    P("GRIMMSNARL", 73, "PRANKSTER", "LIGHTCLAY", "CAREFUL", "REFLECT,LIGHTSCREEN,SPIRITBREAK,THUNDERWAVE", "SD",
+    # DOUBLE battle (story: the illusion double). Lead pair: Prankster screens beside Weavile's Fake Out.
+    P("GRIMMSNARL", 73, "PRANKSTER", "LIGHTCLAY", "CAREFUL", "REFLECT,LIGHTSCREEN,SPIRITBREAK,FAKEOUT", "SD",
       hard={"moves": "REFLECT,LIGHTSCREEN,SPIRITBREAK,TAUNT"}),
     # Stage play: Magical Seed on the New Moon gives +1 accuracy and Focus Energy and pulls the field down into the Abyss
     # (shadow moves x1.4, the challenger's accuracy x0.8). Night Slash then always crits.
-    P("WEAVILE", 73, "PRESSURE", "MAGICALSEED", "JOLLY", "NIGHTSLASH,ICICLECRASH,ICESHARD,SWORDSDANCE", "A",
+    P("WEAVILE", 73, "PRESSURE", "MAGICALSEED", "JOLLY", "FAKEOUT,NIGHTSLASH,ICICLECRASH,ICESHARD", "A",
       casual={"item": "SITRUSBERRY", "moves": "KNOCKOFF,ICICLECRASH,ICESHARD,SWORDSDANCE"},
-      hard={"ab": "PICKPOCKET", "moves": "NIGHTSLASH,TRIPLEAXEL,ICESHARD,SWORDSDANCE"}),
-    P("MALAMAR", 74, "CONTRARY", "LEFTOVERS", "ADAMANT", "SUPERPOWER,KNOCKOFF,PSYCHOCUT,SLEEPTALK", "BA",
-      only="nocasual", hard={"moves": "SUPERPOWER,KNOCKOFF,PSYCHOCUT,REST"}),
+      hard={"ab": "PICKPOCKET", "moves": "FAKEOUT,NIGHTSLASH,TRIPLEAXEL,ICESHARD"}),
+    P("MALAMAR", 74, "CONTRARY", "LEFTOVERS", "ADAMANT", "SUPERPOWER,KNOCKOFF,PSYCHOCUT,PROTECT", "BA",
+      only="nocasual"),
     # Moonlight fails under the New Moon: Wish instead.
-    P("UMBREON", 74, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,WISH,YAWN,PROTECT", "SD",
-      hard={"ab": "SYNCHRONIZE"}),
+    # Snarl is a Dark spread move (x1.5 here) that cuts both foes' Sp. Atk; Helping Hand for the sweeper beside it.
+    P("UMBREON", 74, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,SNARL,HELPINGHAND,WISH", "SD",
+      hard={"ab": "SYNCHRONIZE", "moves": "FOULPLAY,SNARL,HELPINGHAND,PROTECT"}),
     # Night Daze never misses and three of them deepen the New Moon to an Abyss. Flamethrower is for the Lamplight
     # (Fire x1.2) and Sludge Bomb for the Fairy types who lit it.
     P("ZOROARK", 75, "ILLUSION", "LIFEORB", "TIMID", "NIGHTDAZE,FLAMETHROWER,SLUDGEBOMB,NASTYPLOT", "S",
@@ -405,7 +415,8 @@ warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were rea
       hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,SUPERPOWER"}),
 ])
 warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale turns its final page. Happily, I hope.", [
-    # Magical Seed on Fairy Tale: +1 Sp. Atk, +1 Sp. Def, no cost. Decorate for the double battle.
+    # DOUBLE battle (story: "the knight and the dragon").
+    # Magical Seed on Fairy Tale: +1 Sp. Atk, +1 Sp. Def, no cost. Decorate gives the partner +2 Atk and +2 Sp. Atk.
     P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "DECORATE,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
       casual={"item": "LEFTOVERS"}, hard={"moves": "CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER"}),
     P("MIMIKYU", 78, "DISGUISE", "LIFEORB", "JOLLY", "PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE", "A",
@@ -413,13 +424,14 @@ warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale t
     # Fire is no Steel answer here (dragonfire: Fire also hits as Dragon, which Steel resists). Superpower is.
     P("AZUMARILL", 79, "HUGEPOWER", "SITRUSBERRY", "ADAMANT", "AQUAJET,PLAYROUGH,LIQUIDATION,SUPERPOWER", "HA",
       casual={"ab": "THICKFAT"}, hard={"moves": "AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM"}),
-    # The knight: Steel x1.3, hammers swing true.
-    P("TINKATON", 79, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK", "A",
-      hard={"moves": "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,SWORDSDANCE"}),
-    P("TOGEKISS", 79, "SERENEGRACE", "LEFTOVERS", "TIMID", "AIRSLASH,DAZZLINGGLEAM,AURASPHERE,ROOST", "S",
-      nick="Vigilant", hard={"moves": "AIRSLASH,DAZZLINGGLEAM,AURASPHERE,NASTYPLOT"}),
-    # Ace per the story bible. Draining Kiss x2 here (and it wakes sleepers); three Fairy attacks tame a roused
-    # Dragon's Den back into Fairy Tale with a x1.3 strike.
+    # The knight: Steel x1.3, hammers swing true. Fake Out buys Alcremie's Decorate a turn.
+    P("TINKATON", 79, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "FAKEOUT,GIGATONHAMMER,PLAYROUGH,KNOCKOFF", "A",
+      casual={"moves": "GIGATONHAMMER,PLAYROUGH,KNOCKOFF,STEALTHROCK"}),
+    # "Vigilant" guards: Follow Me draws the Steel and Poison hits meant for the ace; Dazzling Gleam hits both foes.
+    P("TOGEKISS", 79, "SERENEGRACE", "LEFTOVERS", "BOLD", "FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE", "BS",
+      nick="Vigilant", casual={"moves": "AIRSLASH,DAZZLINGGLEAM,AURASPHERE,ROOST"}),
+    # Ace per the story bible. Pixilate Hyper Voice hits both foes; Draining Kiss x2 here (and it wakes sleepers); three
+    # Fairy attacks tame a roused Dragon's Den back into Fairy Tale with a x1.3 strike.
     P("SYLVEON", 80, "PIXILATE", "PIXIEPLATE", "MODEST", "HYPERVOICE,DRAININGKISS,PSYSHOCK,CALMMIND", "BS",
       nick="Vow", casual={"ab": "CUTECHARM", "moves": "MOONBLAST,DRAININGKISS,PSYSHOCK,CALMMIND"},
       hard={"item": "LEFTOVERS"}),
@@ -624,8 +636,11 @@ rival("LEADER_JUNO", "Juno", 3, 47, "I'm crying. I said I would. ...Take it. The
     # (and regrow what Fire prunes; from Embers two of them bring the Meadow back).
     P("WHIMSICOTT", 45, "PRANKSTER", "TELLURICSEED", "TIMID", "LEECHSEED,GROWTH,ENERGYBALL,MOONBLAST", "S",
       casual={"item": "LEFTOVERS"}, hard={"moves": "LEECHSEED,GROWTH,MOONBLAST,TAILWIND"}),
-    P("SHIINOTIC", 45, "EFFECTSPORE", "SITRUSBERRY", "CALM", "GIGADRAIN,MOONBLAST,STRENGTHSAP,SLEEPPOWDER", "SD",
-      only="nocasual", hard={"moves": "GIGADRAIN,MOONBLAST,STRENGTHSAP,SPORE"}),
+    # Ever-Bloom (SPINE Rev 12): the white Florges is the bridal blossom, and replaces Shiinotic. Flower Veil: the
+    # garden grows a stage when it enters and her Grass types can't be statused or have stats lowered beside it.
+    # Grassy Terrain grows it again and lasts 8 turns here.
+    P("FLORGES", 45, "FLOWERVEIL", "SITRUSBERRY", "CALM", "MOONBLAST,PETALBLIZZARD,GRASSYTERRAIN,WISH", "SD", form=4,
+      nick="Everbloom", only="nocasual", hard={"moves": "MOONBLAST,PETALDANCE,GRASSYTERRAIN,WISH"}),
     P("ROSERADE", 46, "NATURALCURE", "MIRACLESEED", "TIMID", "GIGADRAIN,SLUDGEBOMB,SHADOWBALL,TOXICSPIKES", "S",
       only="hard", nick="Rowan"),
     # Petal Dance is a petal move (up to x1.5 on top of Grass) and Own Tempo never tires of it. Aromatherapy grows the garden.
@@ -639,8 +654,8 @@ rival("LEADER_JUNO", "Juno", 3, 47, "I'm crying. I said I would. ...Take it. The
       hard={"item": "LIFEORB", "moves": "POWERWHIP,HIGHJUMPKICK,KNOCKOFF,UTURN"}),
 ])
 rival("RIVAL_JUNO", "Juno", 4, 90, "We started on the same dock. ...You grew more. I'm so glad it was you.", lambda s: [
-    P("SHIINOTIC", 86, "EFFECTSPORE", "LEFTOVERS", "CALM", "GIGADRAIN,MOONBLAST,STRENGTHSAP,SPORE", "SD",
-      casual={"moves": "GIGADRAIN,MOONBLAST,STRENGTHSAP,CONFUSERAY"}),
+    P("FLORGES", 86, "FLOWERVEIL", "LEFTOVERS", "CALM", "MOONBLAST,GIGADRAIN,CALMMIND,SYNTHESIS", "SD", form=4,
+      nick="Everbloom"),
     P("WHIMSICOTT", 87, "PRANKSTER", "LEFTOVERS", "TIMID", "LEECHSEED,ENERGYBALL,MOONBLAST,TAILWIND", "S",
       hard={"moves": "LEECHSEED,MOONBLAST,ENCORE,TAILWIND"}),
     # J4 is on the PRISM_ARENA. Magical Seed there: +1 Sp. Atk, +1 Sp. Def - set up with Quiver Dance in the three quiet

@@ -20,11 +20,10 @@ module PrismfallMaps
     125 => [10, 4, -12, 0],   # Cutter's House
     523 => [10, 4, -12, 0],   # Hale Farmhouse
     526 => [10, 4, -12, 0],   # Woodward's Hut
-    130 => [-10, -6, -18, 10],   # Loomhouse Gym - Foyer
-    131 => [-10, -6, -18, 10],   # Loomhouse Gym - Weaving Hall
-    132 => [-14, -8, -20, 15],   # Loomhouse Gym - Canopy Lofts
-    133 => [-16, -10, -20, 15],   # Loomhouse Gym - The Spindle
-    134 => [-16, -10, -20, 15],   # Loomhouse Gym - Granny's Knot
+    130 => [-10, -6, -18, 10],   # Loomhouse Gym
+    131 => [-10, -6, -18, 10],   # Loomhouse Upper Lofts - Weaving Hall
+    132 => [-14, -8, -20, 15],   # Loomhouse Upper Lofts - Canopy Lofts
+    134 => [-16, -10, -20, 15],   # Loomhouse Upper Lofts - Granny's Knot
     140 => [10, 4, -14, 0],   # Saltmere
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
