@@ -1,5 +1,8 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 15 (user, 2026-11-19) <<<
+**Character portraits are parked:** "skip the whole portrait thing for now, work on more important things." Juno keeps the pass-3 stopgap portraits. When portraits resume, use the 360 VS busts in Graphics/Transitions of the three games (see art/PORTRAIT_SOURCES.md). Spend effort on gameplay, maps, story and systems instead.
+
 ## >>> REVISION 14 (user decision, 2026-11-19) <<<
 **Gym 1 is Normal-type**, to ease the player in (user: "gym 1 should be normal type to ease the player into the game"). Gym 2 was already Normal (Dorian), so the user left the fix to us ("whatever u think is correct"). Decision: **swap the town order of Saltmere and Briarwick.**
 - **Gym 1 = Dorian Pell, Saltmere, Normal, `:GRAND_STAGE`.** Cap 15, a single battle. The gym is a simple, handsome theatre: a Jasmine-style walk-through (aisle, seats, a few trainers, the stage) with at most one gentle interaction. Grand Stage is the player's first field and must teach fields gently (the audience cheers flashy moves). Eevee "Understudy" is gifted after Gym 1.
