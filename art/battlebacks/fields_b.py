@@ -130,8 +130,15 @@ def flower_garden():
     stages = {}
     for st in range(1, 6):
         hd = vanilla("reborn", "FlowerGarden%d" % (st - 1))
-        if st == 1:
-            hd = grade(hd, mul=(1.12, 1.12, 1.05), gamma=0.9)
+        if st <= 2:
+            # a promising garden, not a gloomy one: sunlit soil and fresh green, beds full of buds
+            hd = grade(hd, mul=(1.3, 1.32, 1.12) if st == 1 else (1.12, 1.3, 1.1), gamma=0.72 if st == 1 else 0.8)
+            hd = blend(hd, vgradient(HD, [(0, (255, 240, 170, 110)), (0.5, (255, 240, 170, 30)), (1, (0, 0, 0, 0))]),
+                       "softlight")
+            flowers_scatter(hd, (0, 300, 864, 693), 500 if st == 1 else 800,
+                            [(150, 210, 110), (190, 230, 130), (255, 190, 210), (255, 240, 170)], seed=st, size=(1, 3))
+            ring_stones(hd, FOE, 120, 26, [(140, 200, 100), (255, 180, 200), (190, 230, 130)], n=14, size=(4, 6),
+                        seed=st, outline=(50, 80, 40))
         if st >= 3:
             cols = [(255, 150, 200), (255, 240, 120), (190, 150, 255), (255, 255, 255), (255, 120, 120)]
             n = {3: 18, 4: 26, 5: 34}[st]
@@ -154,7 +161,7 @@ def flower_garden():
     prof = {S("layers"): stages[1], S("stages"): {st: {S("layers"): stages[st]} for st in range(2, 6)}}
     return {"profile": prof,
             "origins": [[REB, "battlebgFlowerGarden0-4, enemybaseFlowerGarden0-4 (one per stage)"],
-                        [OWN, "flower rings round the platforms (stages 3-5), giant bloom (stage 5), sunbeams"]]}
+                        [OWN, "sunlit bud-filled beds (stages 1-2), flower rings round the platforms, giant bloom (stage 5), sunbeams"]]}
 
 
 #---------------------------------------------------------------------------------------------

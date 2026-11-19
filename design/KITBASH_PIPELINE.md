@@ -79,3 +79,18 @@ Sheet: `art/previews/10_juno_kitbash_pass2.png`. Scripts: `juno_v1_p2.py`, `juno
 - **Slot size:** EBDX draws trainers at `TRAINER_SPRITE_SCALE = 1`, anchored bottom-centre, with an optional per-trainer `SpriteScale`
   in `PBS/EBDX/trainers.txt`. A 160x160 front therefore shows 25% larger than the 128x128 stock fronts and keeps its feet on the
   base. Read from code only: no engine screenshot was taken, because the capture rig was running another job.
+
+## 7. Ever-Bloom, the chosen Juno (2026-11-18)
+
+Sheet: `art/previews/11_juno_everbloom.png`; engine frame: `art/previews/11_juno_everbloom_engine.png`.
+Scripts: `juno_everbloom.py` (variants A/B/C; A is the pick), `juno_everbloom_portraits.py`, `juno_everbloom_ow.py`, `sheet11.py`.
+Installed to `art/out/Graphics/` (Trainers `RIVAL_JUNO`/`LEADER_JUNO`, Characters `JUNO` + `trainer_*`, Portraits `JUNO_*`);
+the v3 files they replaced are in `art/work/kitbash/passes/replaced_v3/`.
+
+- **Cloth comes from cloth.** Diantha's cape gave the veil real folds; the Miku tail alone read as ribbon. Capes (`diantha`,
+  `lance`, `olympia`, `wallace-masters`) are the veil/cloak library.
+- **Head swaps carry the expression.** Line up the eyes, erase the old head down to the jaw, keep the base's back hair behind.
+- **Slot size, confirmed in engine:** a 160x160 front at `TRAINER_SPRITE_SCALE = 1` sits on the base correctly in an EBDX intro. No
+  `SpriteScale` entry is needed. Captured with a private rig copy: `RUN=/home/claude/run_juno` (build symlinked), `PACKAGE=0 …
+  assemble`, graphic copied into the copy's `Graphics/Trainers`, a `juno` plan added to the copy's autorun, `ISOLATE=1 DISPLAY_NUM=93 … run juno`.
+- **Overworld:** 30x32-px frames (file 240x256). At that size the wreath is 7 pixels and the veil a sheer strip; keep expectations low.

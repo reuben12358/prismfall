@@ -76,6 +76,12 @@ module PrismfallEBDX
     end
     name = defn[:backdrop] if defn.is_a?(Hash)
     name = "field_#{field_id.to_s.downcase}" if name.nil? || name.to_s.empty?
+    # A stage whose definition has no key of its own (it would reuse stage 1) may get art from the
+    # bridge profile: :stages => { n => { :backdrop => "field_x_variant" } }.
+    if stage && stage > 1 && name.to_s == backdrop_name(field_id, 1)
+      alt = profile_for(field_id, stage)[:backdrop]
+      name = alt if alt && pbResolveBitmap(EBDX_BATTLEBG + alt.to_s)
+    end
     return name.to_s
   end
 

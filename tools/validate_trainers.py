@@ -693,6 +693,12 @@ def validate(args):
         rep.err("trainers.txt", "file not found: %s" % tpath)
         return rep, [], ref, types
     trainers = parse_trainers(tpath, rep)
+    # The kit's own items (pbs/items_*.txt, e.g. the field seeds) are legal held items too.
+    import glob as _glob
+    for _f in sorted(_glob.glob(os.path.join(args.pbs, "items*.txt"))):
+        for iid, sec in parse_sections(_f).items():
+            flags = [f for v in sec.get("Flags", []) for f in v.split(",")]
+            ref.items.setdefault(iid, {"flags": set(flags), "name": sec.get("Name", [iid])[0]})
     allow = load_allowlist(args.balance)
     seen = {}
     megaring = {i for i, d in ref.items.items() if "MegaRing" in d["flags"]}

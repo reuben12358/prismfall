@@ -57,11 +57,15 @@ midday_tz() {
 
 session() {
   [[ "$1" == install ]] && rm -rf "$SAVE_DIR"          # a fresh machine: no saves, no logs
-  rm -f "$SAVE_DIR"/Game*.rxdata                         # New Game must be the first load-screen entry
-  rm -rf "$GAME/Playtest"; mkdir -p "$RUN/playtest_out"
+  export PLAYBOT_STATE="$RUN/playtest_resume_state.txt"
+  if [[ "$1" != resume ]]; then                          # resume: Continue from the bot's autosave, keep the output
+    rm -f "$SAVE_DIR"/Game*.rxdata "$PLAYBOT_STATE"      # New Game must be the first load-screen entry
+    rm -rf "$GAME/Playtest"
+  fi
+  mkdir -p "$RUN/playtest_out"
   (cd "$GAME" && PLAYBOT_SESSION="$1" TZ="${PLAY_TZ:-$(midday_tz)}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
      xvfb-run -n "${PLAY_DISPLAY:-147}" -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/playtest_$1_stdout.txt" 2>&1) || true
-  rm -rf "$RUN/playtest_out/$1"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$1" 2>/dev/null || true
+  o="$1"; [[ "$1" == resume ]] && o=play; rm -rf "$RUN/playtest_out/$o"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$o" 2>/dev/null || true
   [[ -f "$SAVE_DIR/errorlog.txt" ]] && cp "$SAVE_DIR/errorlog.txt" "$RUN/playtest_out/$1/" || true
   grep -E "FATAL|STUCK|bot error|installer|plan done|finished" "$RUN/playtest_out/$1/bot.log" || true
 }
@@ -76,6 +80,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|play|route1|checks|ch1) session "$1" ;;
+  install|play|route1|checks|ch1|resume) session "$1" ;;
   *) echo "usage: $0 assemble | install | play | route1 | checks | ch1 | stop"; exit 1 ;;
 esac

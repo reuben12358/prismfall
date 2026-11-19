@@ -34,12 +34,18 @@ module PlayBot
     [:bump, 100, 53, 11],          # Larch Research Station door -> 103 (Rejuvenation-tileset rebuild of 100)
     [:talk, 103, 20, 10],          # starter table
     [:goto, 103, 14, 15],          # exit -> K1 autorun at the lab gate
+    [:bump, 100, 24, 14],          # Poke Center: in, heal, out (door step-out check 1)
+    [:talk, 101, "Nurse"],
+    [:goto, 101, "Exit"],
+    [:bump, 100, 39, 22],          # Mart: in and out (door step-out check 2)
+    [:goto, 102, "Exit"],
     [:edge, 100, 34, 0, 8],        # north lane -> Route 1
-    [:goto, 520, 12, 54],          # Juno's catching tutorial
-    [:goto, 520, 10, 44],          # up the route past the Youngster (Route 1 trainers may spot us)
-    [:goto, 520, 16, 38],
-    # Chapter 1: Route 2, the Glassed Orchard, Hale's Bramble, the send-off, Gossamer Wood
+    [:goto, 520, 12, 54],          # Juno's catching tutorial (5 Poke Balls: the bot then catches one wild Pokemon)
+    [:spot, 520, 2],               # Youngster Pim
+    [:spot, 520, 3],               # Lass Dory
     [:edge, 520, 26, 0, 8],        # north edge -> Route 2
+    [:spot, 521, 13],              # Bug Catcher Wim
+    [:spot, 521, 14],              # Picnicker Ada
     [:goto, 521, 61, 23],          # east edge -> the Glassed Orchard (arrival scene, the Veil)
     [:talk, 522, 24, 18],          # the Glassed Wurmple (Bleed field)
     [:talk, 522, "Lost Skwovet"],  # Biscuit (he wanders)
@@ -52,12 +58,24 @@ module PlayBot
     [:edge, 521, 41, 47, 2],       # back down to Route 1
     [:goto, 520, 15, 60],          # the stile send-off (Chapter 1 close, V102 = 2)
     [:edge, 520, 26, 0, 8],        # north again
+    [:spot, 521, 15],              # the trainer by the Accord barrier
     [:goto, 521, 0, 10],           # the Accord barrier opens after the orchard -> Gossamer Wood
-    [:goto, 524, 20, 33],          # past the Twins (double battle)
+    [:spot, 524, 21], [:spot, 524, 20], [:spot, 524, 22], [:spot, 524, 23], [:spot, 524, 24],   # 20 = the Twins (double)
     [:goto, 524, 25, 0],           # -> Briarwick
     [:arrive, 120],
+    [:bump, 120, 45, 23],          # Briarwick Poke Center
+    [:talk, 121, "Nurse"],
+    [:goto, 121, "Exit"],
+    [:bump, 120, 36, 12],          # Loomhouse Gym (Gym 1): attempt it as it is installed
+    [:goto, 130, "To Weaving Hall"],
+    [:spot, 131, 36], [:spot, 131, 37], [:spot, 131, 38],
+    [:goto, 131, "Up to Canopy Lofts"],
+    [:goto, 132, "To the Spindle"],
+    [:talk, 133, "Tamsin"],
     [:done]
   ]
+  REWIND = PLAN.index { |st| st[0] == :edge && st[1] == 100 }   # after a blackout: walk out of Ferrow's Landing again
+  MAX_BLACKOUTS = 5
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
   ROUTE1_PLAN = [[:goto, 520, 12, 54], [:goto, 520, 10, 44], [:goto, 520, 16, 38], [:goto, 520, 16, 34], [:done]]
   # PLAYBOT_SESSION=checks: real map lines with glyphs the fonts lack, a quest-log line, then every trainer added on
@@ -83,7 +101,7 @@ module PlayBot
   @last_map = nil; @ready = 0; @went_busy = 0; @typed = 0; @entry_done = false
 
   class << self
-    attr_accessor :recording, :debug_phase
+    attr_accessor :recording, :debug_phase, :battle_tag
     attr_reader :frame
 
     def log(msg)
@@ -292,7 +310,7 @@ module PlayBot
                /^No\. Stay there\.$/, /^It was stuck\.$/]   # never "Take her hand" (Game Over GO_ORCHARD)
       rules.each { |re| i = find.call(re); return i if i }
       if c.length == 2 && c[0] =~ /^Yes$/i && c[1] =~ /^No$/i
-        return 0 if t =~ /Play on|install them now|give up|stop trying|stop learning/i
+        return 0 if t =~ /Play on|install them now|give up|stop trying|stop learning|heal your|rest your|take a rest/i
         return 1
       end
       return nil   # keep the default cursor
@@ -369,7 +387,7 @@ module PlayBot
 
     def drive_battle
       @battle_frames += 1
-      shot("battle_start") if @battle_frames == 150
+      shot("battle_#{@battle_tag || 'start'}") if @battle_frames == 240
       shot("battle_t#{@battle_frames}") if @battle_frames > 150 && @battle_frames % 900 == 0
       press(B::USE) if @battle_frames % 20 == 0
     end
@@ -378,6 +396,7 @@ module PlayBot
     # Plan steps (run while the map is free; walking keeps going while moving)
     #---------------------------------------------------------------------------
     def plan
+      return PLAN if SESSION == "resume"
       return ROUTE1_PLAN if SESSION == "route1"
       return CHECKS_PLAN if SESSION == "checks"
       return PLAN[PLAN.index { |st| st[1] == 520 }..] if SESSION == "ch1"   # resume at Route 1, state as after K1
@@ -400,6 +419,7 @@ module PlayBot
     end
 
     def drive_plan
+      return after_blackout if @rewind && @idle >= 30
       step = plan[@step]
       return if !step
       kind, map = step
@@ -436,6 +456,7 @@ module PlayBot
       else
         return wait_for_map if $game_map.map_id != map
         x, y = step[2], step[3]
+        return spot(step[2]) if kind == :spot
         if x.is_a?(String)             # an event by name (it may wander)
           ev = $game_map.events.values.find { |e| e.name == x }
           return stuck("no event named #{x}") if !ev
@@ -462,8 +483,12 @@ module PlayBot
             @dir = d
           elsif @talk_at && @went_busy && @went_busy > @talk_at
             next_step    # the event ran and is over
+          elsif (@talk_n || 0) >= 4
+            log("talk: nothing happened at #{step.inspect} (already done?)")
+            next_step
           elsif !@talk_at || @frame - @talk_at > 120
             @talk_at = @frame
+            @talk_n = (@talk_n || 0) + 1
             press(B::USE)
           end
         end
@@ -473,7 +498,15 @@ module PlayBot
     # A step for another map: skip ahead to the first later step for the map we are on
     def wait_for_map
       later = plan[@step..].index { |s| s[1] == $game_map.map_id }
-      return if !later
+      if !later
+        @map_wait = (@map_wait || 0) + 1
+        if @map_wait > 1500
+          log("GAVE UP on #{plan[@step].inspect}: still on map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
+          shot("gave_up_step#{@step}")
+          next_step
+        end
+        return
+      end
       @step += later
       @step_start = 0
       log("now on map #{$game_map.map_id}: skipping to step #{@step}")
@@ -484,7 +517,10 @@ module PlayBot
       @step_start = 0
       @bumps = 0
       @talk_at = nil
+      @talk_n = 0
+      @spot_i = 0; @spot_wait = 0; @map_wait = 0
       @path = nil
+      autosave
       @nopath = 0
     end
 
@@ -574,6 +610,70 @@ module PlayBot
         @nopath = 0
       end
       @dir = @path[0] || 0
+    end
+
+    # Walk into a trainer's line of sight: stand 2 (then 1, 3) tiles in front of it and wait to be noticed
+    def spot(id)
+      ev = $game_map.events[id]
+      return next_step if !ev || $game_self_switches[[$game_map.map_id, id, "A"]]
+      return next_step if @spot_i > 2
+      dx, dy = DIRS[ev.direction] || [0, 1]
+      d = [2, 1, 3][@spot_i]
+      tx, ty = ev.x + (dx * d), ev.y + (dy * d)
+      if !$game_map.valid?(tx, ty) || ([tx, ty] != [$game_player.x, $game_player.y] && !path_dirs(tx, ty))
+        @spot_i += 1
+        return
+      end
+      return walk_to(tx, ty) if [tx, ty] != [$game_player.x, $game_player.y]
+      @spot_wait += 1
+      if @spot_wait > 90
+        log("spot: trainer #{id} on map #{$game_map.map_id} did not notice at distance #{d} (party #{party_text})")
+        @spot_i += 1
+        @spot_wait = 0
+      end
+    end
+
+    def party_text
+      return $player.party.map { |p| "#{p.species} L#{p.level} #{p.hp}/#{p.totalhp}" }.join(", ")
+    end
+
+    # Resilience: save and note the step after each step, so PLAYBOT_SESSION=resume can carry on after a host restart
+    def autosave
+      return if !["play", "resume"].include?(SESSION) || !ENV["PLAYBOT_STATE"] || !on_map? || @step < 2
+      return if pbMapInterpreterRunning? || $game_temp.in_battle
+      File.write(ENV["PLAYBOT_STATE"], "#{@step} #{@nframe} #{@blackouts.to_i}") if Game.save
+    rescue StandardError => e
+      log("autosave failed: #{e.message}")
+    end
+
+    def resume_state
+      st = (File.read(ENV["PLAYBOT_STATE"]).split.map(&:to_i) rescue nil)
+      return if !st
+      @step, @nframe, @blackouts = st
+      @step_start = 0
+      log("RESUMED from the autosave at step #{@step} #{plan[@step].inspect} (host restart; not one unbroken run)")
+    end
+
+    def blackout
+      @blackouts = @blackouts.to_i + 1
+      log("BLACKOUT ##{@blackouts} at step #{@step} #{plan[@step].inspect} on map #{$game_map.map_id}; party #{party_text}")
+      shot("blackout_#{@blackouts}")
+      @rewind = true
+    end
+
+    def after_blackout
+      @rewind = false
+      if @blackouts > MAX_BLACKOUTS
+        log("STOPPING: #{@blackouts} blackouts (difficulty wall for this one-or-two-Pokemon AI team)")
+        return finish
+      end
+      @step = REWIND if SESSION != "ch1" && @step > REWIND
+      @step_start = 0
+      log("after blackout: on map #{$game_map.map_id}, replaying the plan from step #{@step}")
+    end
+
+    def want_catch?
+      return $player.party.length < 2 && $bag && $bag.has?(:POKEBALL)
     end
 
     def boxed_in?(px, py)
@@ -779,6 +879,40 @@ class Game_Character
   end
 end
 
+alias playbot_pbStartOver pbStartOver unless defined?(playbot_pbStartOver)
+def pbStartOver(*args)
+  PlayBot.blackout
+  return playbot_pbStartOver(*args)
+end
+
+# With Poke Balls and a one-Pokemon party, the bot throws a ball each turn of a wild battle (a new player's first catch)
+class Battle::AI
+  alias playbot_pbDefaultChooseEnemyCommand pbDefaultChooseEnemyCommand unless method_defined?(:playbot_pbDefaultChooseEnemyCommand)
+  def pbDefaultChooseEnemyCommand(idxBattler)
+    if @battle.wildBattle? && !@battle.opposes?(idxBattler) && !@battle.disablePokeBalls && PlayBot.want_catch? &&
+       @battle.pbRegisterItem(idxBattler, :POKEBALL, 1)
+      PlayBot.log("  bot throws a Poke Ball")
+      return
+    end
+    playbot_pbDefaultChooseEnemyCommand(idxBattler)
+  end
+end
+
+module Game
+  class << self
+    alias playbot_load load unless method_defined?(:playbot_load)
+    def load(save_data)
+      playbot_load(save_data)
+      if PlayBot::SESSION == "resume"
+        PlayBot.recording = true
+        PlayBot.resume_state
+        $PokemonSystem.textspeed = 2
+        $PokemonSystem.runstyle = 1
+      end
+    end
+  end
+end
+
 # AI plays the player's side (the Dovetail prologue never needs a human in battle)
 module BattleCreationHelperMethods
   class << self
@@ -786,6 +920,10 @@ module BattleCreationHelperMethods
     def prepare_battle(battle)
       playbot_prepare_battle(battle)
       battle.controlPlayer = true
+      who = battle.opponent ? battle.opponent.map { |t| t.full_name }.join(" + ") : "wild #{battle.pbParty(1).map { |p| "#{p.species} L#{p.level}" }.join(', ')}"
+      fld = (battle.respond_to?(:field_effect) ? (battle.field_effect rescue "?") : "-")
+      PlayBot.battle_tag = "#{fld}_#{who}"
+      PlayBot.log("BATTLE map #{$game_map.map_id} vs #{who} | field #{fld} | backdrop #{battle.backdrop} | party #{PlayBot.party_text} | foe #{battle.pbParty(1).map { |p| "#{p.species} L#{p.level}" }.join(', ')}")
       PlayBot.log("battle prepared: #{battle.opponent ? battle.opponent.map { |t| t.full_name }.inspect : 'wild'} field #{battle.respond_to?(:field_effect) ? (battle.field_effect rescue '?') : '-'}")
     end
   end

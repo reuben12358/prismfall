@@ -293,6 +293,7 @@ in the validator, so they need no row.
 | Trainer | Species | Move | Reason |
 |---|---|---|---|
 | FESTIVAL_LIN,Lin,* | TOGEKISS | OBLIVIONWING | Lin's Reborn signature: a Togekiss with an illegal move (CAMEOS.md). Casual swaps it for Air Slash. |
+| LEADER_ILSA,Ilsa,* | HATTERENE | PSYCHICNOISE | Legal in Scarlet/Violet (TM 213); the base pokemon.txt has no DLC TM learnsets. Her transition play: 3 damaging sound moves crack the Mindscape into the Inverse Field (TRAINER_FIELD_PLAYBOOK.md). Casual uses Psychic. |
 
 ## Status
 

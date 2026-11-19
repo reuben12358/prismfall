@@ -24,12 +24,12 @@ events:
   name: Poke Center door
   link: FL_PC
 - type: door
-  at: [11, 27]
+  at: [11, 30]
   gfx: ['', 0, 2]
   name: Inn door
   link: FL_INN
 - type: door
-  at: [39, 22]
+  at: [46, 28]
   gfx: ['', 0, 2]
   name: Mart door
   link: FL_MART
@@ -723,7 +723,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [38, 3]
+  at: [35, 5]
 - type: event
   name: Juno (sendoff)
   pages:
@@ -740,7 +740,7 @@ events:
     trigger: action
     move: fixed
     cond: {self: A}
-  at: [30, 3]
+  at: [31, 3]
 - type: event
   name: Wenna Hale
   pages:
@@ -799,7 +799,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 03, dir: down}
     cond: {switch: CH1_ORCHARD_DONE}
-  at: [41, 46]
+  at: [41, 45]
 - type: event
   name: HiddenItem tart stall
   pages:
@@ -875,7 +875,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 17912, dir: down}
-  at: [21, 47]
+  at: [22, 46]
 - type: event
   name: Quay lamp 2
   pages:
@@ -917,7 +917,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 17912, dir: down}
-  at: [37, 41]
+  at: [37, 40]
 - type: event
   name: Quay lamp 4
   pages:
@@ -938,7 +938,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 17912, dir: down}
-  at: [46, 47]
+  at: [46, 46]
 - type: event
   name: Quay lamp 5
   pages:
@@ -959,7 +959,7 @@ events:
     move: fixed
     cond: {self: A}
     graphic: {tile: 17912, dir: down}
-  at: [52, 41]
+  at: [51, 41]
 - type: event
   name: Quay lamp 6
   pages:
@@ -1013,7 +1013,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
-  at: [27, 47]
+  at: [27, 45]
 - type: event
   name: Wingull (with girl)
   pages:
@@ -1026,7 +1026,7 @@ events:
     graphic: {sprite: Followers/WINGULL, dir: left}
     cond: {self: A}
     step_anime: true
-  at: [28, 47]
+  at: [28, 45]
 - type: event
   name: Lamplighter
   pages:
@@ -1072,28 +1072,28 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 01, dir: down}
-  at: [30, 26]
+  at: [30, 28]
 - type: sign
   name: Town sign
   post: false
   text: FERROW'S LANDING — Elowen's Door on the Sea. Pop. 212 and one lighthouse.
-  at: [37, 2]
+  at: [37, 8]
 - type: sign
   name: Lane sign
   post: false
   text: ↑ Tidewatch Station (Prof. I. Larch) · → Hale's Bramble · ← Lighthouse (KEEP OUT. THIS MEANS YOU, KESTREL.)
-  at: [31, 34]
+  at: [28, 34]
 - type: sign
   name: Notice board
   post: false
   text: '"LOST: one Skwovet, answers to Biscuit. Last seen heading for the old Pruett orchard. Do NOT follow it in. — W. Hale"'
-  at: [27, 24]
+  at: [27, 27]
 - type: sign
   name: Festival poster
   post: false
   text: '"THE FESTIVAL OF CHAMPIONS, AF 300. All Kingdoms. One Blessing." A painted crown floats over eighteen colored banners. The stone in the crown has
     a tiny dark fleck. Probably a printing fault.'
-  at: [36, 24]
+  at: [38, 27]
 - type: sign
   name: Fish barrels
   post: false
@@ -1117,7 +1117,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 29, dir: down}
     cond: {self: A}
-  at: [29, 27]
+  at: [34, 27]
 - type: event
   name: Rope-skipping Girl 2
   pages:
@@ -1136,7 +1136,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 29, dir: down}
     cond: {self: A}
-  at: [30, 27]
+  at: [35, 27]
 - type: event
   name: Kelp-drier
   pages:
@@ -1152,7 +1152,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
-  at: [36, 44]
+  at: [36, 45]
 - type: event
   name: Meridian Linesman
   pages:
@@ -1183,7 +1183,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 14, dir: down}
-  at: [14, 37]
+  at: [14, 43]
 - type: event
   name: Boy with toy boat
   pages:
@@ -1191,7 +1191,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: NPC 22, dir: down}
-  at: [31, 46]
+  at: [31, 45]
 - type: event
   name: Accord Clerk
   pages:
@@ -1199,7 +1199,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
-  at: [25, 47]
+  at: [25, 45]
 - type: event
   name: Drunk on the steps
   pages:
@@ -1207,7 +1207,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
-  at: [35, 36]
+  at: [27, 35]
 - type: event
   name: Old Woman on bench
   pages:
@@ -1215,7 +1215,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
-  at: [39, 30]
+  at: [38, 32]
 - type: event
   name: Net-mender
   pages:
@@ -1231,7 +1231,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 18, dir: down}
-  at: [47, 30]
+  at: [55, 30]
 - type: event
   name: Twin 2
   pages:
@@ -1239,7 +1239,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 18, dir: down}
-  at: [48, 30]
+  at: [56, 30]
 - type: event
   name: Meridian Recruiter
   pages:
@@ -1248,7 +1248,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
-  at: [31, 21]
+  at: [35, 22]
 - type: event
   name: Boy (town)
   pages:
@@ -1260,7 +1260,7 @@ events:
     move: random
     graphic: {sprite: NPC 02, dir: down}
     cond: {switch: PRO_SCANNED_NULL}
-  at: [36, 12]
+  at: [37, 12]
 - type: event
   name: Boy's Mother (town)
   pages:
@@ -1272,7 +1272,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 04, dir: down}
     cond: {switch: PRO_SCANNED_NULL}
-  at: [32, 11]
+  at: [35, 9]
 - type: event
   name: Woman with crate (town)
   pages:
@@ -1284,4 +1284,4 @@ events:
     move: fixed
     graphic: {sprite: NPC 22, dir: left}
     cond: {switch: PRO_SCANNED_NULL}
-  at: [43, 30]
+  at: [42, 31]

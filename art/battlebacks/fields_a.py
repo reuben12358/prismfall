@@ -12,8 +12,11 @@ OWN = "Prismfall (procedural, art/battlebacks/*.py)"
 O = (142, 150)   # vanilla bg origin: its top row = top of the default view, foe point aligned
 
 
-def vanilla(game, name, base=None, player_base="scaled", origin=O, **kw):
-    hd = extend_vanilla(game_img(game, "battlebg" + name), origin=origin, **kw)
+def vanilla(game, name, base=None, player_base="scaled", origin=O, mirror=False, **kw):
+    bg = game_img(game, "battlebg" + name)
+    if mirror:
+        bg = bg.transpose(Image.FLIP_LEFT_RIGHT)
+    hd = extend_vanilla(bg, origin=origin, **kw)
     bname = base or name
     if base is not False and has_game_img(game, "enemybase" + bname):
         eb = game_img(game, "enemybase" + bname)
@@ -189,7 +192,9 @@ def hoard(w, h, seed=0, gold=(226, 176, 56), dark=(130, 80, 24), light=(255, 238
 def dragons_den():
     F = "dragons_den"
     # deep inside the caldera tunnel: the painted cave zoomed 2x on its tunnel mouth, recoloured violet
-    src = game_img("rejuvenation", "battlebgVolcano").transpose(Image.FLIP_LEFT_RIGHT)
+    # a hoard chamber: 2x view of the caldera's great wall and lava fall (no tunnel mouth in frame)
+    src = game_img("rejuvenation", "battlebgVolcano")
+    src = src.crop((0, 40, 256, 184)).resize((512, 288), Image.NEAREST)
     hd = extend_vanilla(src, origin=O)
     lava = mask_from(hd, lambda r, g, b: (r > 200) & (g > 70) & (b < 120))
     hd = gradient_map(hd, [(0.0, (14, 6, 22)), (0.08, (34, 16, 50)), (0.18, (66, 32, 88)), (0.3, (104, 54, 126)),
@@ -234,7 +239,7 @@ def dragons_den():
                                    opacity=90),
               "img003": strip(F, "haze", haze, 230, speed=0.5, direction=-1, z=4)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
-            "origins": [[REJ, "battlebgVolcano (mirrored, gradient-mapped violet, lava kept as magma)"],
+            "origins": [[REJ, "battlebgVolcano (2x crop of the great wall and lava fall, gradient-mapped violet, lava kept as magma)"],
                         [EBDX, "decor009"],
                         [OWN, "wyrm statues, dragon skull and ribs, gold hoard, coin-ringed platforms, glows"]]}
 
@@ -356,7 +361,7 @@ def _clusters(hd, palette, outline, glowcol, F, dim=False):
 
 def crystal_cavern():
     F = "crystal_cavern"
-    hd = vanilla("rejuvenation", "CrystalCavern")
+    hd = vanilla("rejuvenation", "CrystalCavern", mirror=True)
     hd = grade(hd, mul=(0.95, 0.98, 1.06), sat=1.05)
     pal = [(140, 230, 255), (190, 150, 255), (255, 170, 230), (150, 255, 220)]
     glows = _clusters(hd, pal, (30, 26, 60), (150, 220, 255), F)
@@ -377,13 +382,13 @@ def crystal_cavern():
           P(type=":drift", count=10, shape=":dot", size=2, colors=[[200, 255, 255], [240, 200, 255]],
             speed=[0.2, 0.4], sway=6, zoom=[0.5, 0.8], opacity=[90, 160], layers=[":mid", ":front"], blend=1)]
     return {"profile": {S("layers"): layers, S("fx"): fx},
-            "origins": [[REJ, "battlebgCrystalCavern, enemybaseCrystalCavern"],
+            "origins": [[REJ, "battlebgCrystalCavern (mirrored), enemybaseCrystalCavern"],
                         [OWN, "giant prismatic crystal clusters, crystal glow, prismatic light shafts"]]}
 
 
 def dark_crystal():
     F = "dark_crystal"
-    hd = vanilla("rejuvenation", "DarkCrystalCavern")
+    hd = vanilla("rejuvenation", "DarkCrystalCavern", mirror=True)
     pal = [(54, 34, 84), (80, 50, 120), (36, 24, 60), (110, 70, 160)]
     glows = _clusters(hd, pal, (10, 6, 18), (140, 60, 255), F)
     hd = grade(hd, mul=(0.9, 0.86, 1.0))
@@ -393,7 +398,7 @@ def dark_crystal():
               "img003": strip(F, "murk", fog_strip(864, 200, (60, 30, 90), seed=23, scale=30, density=0.6,
                                                    alpha=110), 230, speed=0.5, direction=-1, z=4)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
-            "origins": [[REJ, "battlebgDarkCrystalCavern, enemybaseDarkCrystalCavern"],
+            "origins": [[REJ, "battlebgDarkCrystalCavern (mirrored), enemybaseDarkCrystalCavern"],
                         [EBDX, "dark006 (vacuum rings)"],
                         [OWN, "obsidian crystal clusters (same placement as Crystal Cavern), dying glow, murk"]]}
 

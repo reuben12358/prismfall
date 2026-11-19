@@ -456,9 +456,9 @@ def ashen_rework():
     # glassy sheen: hard specular streaks across the floor
     ys = np.arange(693)[:, None]
     n = noise(HD, 60, 501, 1)
-    streak = ((np.sin((np.arange(864)[None, :] * 0.5 + ys * 1.4) / 26.0 + n * 6) > 0.93) & (ys > 300))
+    streak = ((np.sin((np.arange(864)[None, :] * 0.5 + ys * 1.4) / 26.0 + n * 6) > 0.985) & (ys > 300))
     a = arr(hd)
-    a[streak] = a[streak] * 0.5 + np.array([200, 190, 255, 255], np.float32) * 0.5
+    a[streak] = a[streak] * 0.72 + np.array([170, 150, 240, 255], np.float32) * 0.28
     lm = Image.fromarray((lava * 255).astype(np.uint8))
     inner = np.asarray(lm.filter(ImageFilter.MinFilter(5)), np.float32) / 255
     a[lava > 0] = [14, 8, 26, 255]                    # flows frozen to black glass
@@ -501,7 +501,7 @@ def ashen_rework():
             "origins": [[REJ, "battlebgVolcano, enemybaseVolcano (Volcanic's layout quenched to black glass: "
                               "gradient-mapped violet-black, flows glassed over with hot seams)"],
                         [EBDX, "decor006"],
-                        [OWN, "Cinderglass: glass sheen streaks, obsidian shards, seam glow, steam geysers with "
+                        [OWN, "Cinderglass: faint glass sheen, obsidian shards, seam glow, steam geysers with "
                               "bursts, glass glints, violet banners"]]}
 
 

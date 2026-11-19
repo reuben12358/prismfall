@@ -25,6 +25,15 @@ SINGLES = {'lamp_off': C2 + 166, 'lamp_on': C2 + 167, 'garl_plain': C3 + 184, 'g
            'garl_lantern': C3 + 186, 'garl_tufts': C3 + 187}
 
 
+EXTRA33 = {'hs_jonquil_26': 'hb_boat1', 'hs_jonquil_29': 'hb_boat2', 'hs_jonquil_31': 'hb_boat3', 'hs_jonquil_33': 'hb_boat4',
+           'hs_jonquil_15': 'hb_post1', 'hs_jonquil_16': 'hb_post2', 'hs_jonquil_19': 'hb_posts2', 'hs_jonquil_20': 'hb_posts3',
+           'hs_jonquil_05': 'hb_buoy', 'hs_jonquil_07': 'hb_buoy2', 'hs_jonquil_32': 'hb_tubs', 'hs_jonquil_35': 'hb_fish',
+           'hs_jonquil_36': 'hb_barrel', 'hs_jonquil_37': 'hb_barrel2', 'hs_jonquil_38': 'hb_barrels', 'hs_jonquil_13': 'hb_plank',
+           'tp_stall_02': 'hb_tables', 'tp_stall_05': 'hb_rugline', 'tp_stall_06': 'hb_rugline2', 'tp_stall_08': 'hb_washline',
+           'tp_stall_13': 'hb_boxes', 'tp_stall_16': 'hb_boxes2', 'tp_barrel_07': 'hb_shed', 'tp_barrel_03': 'hb_cask',
+           'tp_barrel_06': 'hb_keg', 'tp_stall_21': 'hb_dyeline', 'tp_stall_01': 'hb_crates4'}
+
+
 def sheridan_ramp():
     """Sheridan_2's tree greens, dark -> light (from the 3x4 forest tree, rows 26-29)."""
     im = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGB')
@@ -143,6 +152,22 @@ def main():
                 sheet.paste(tile, ((k % 8) * 32, (k // 8) * 32))
                 props[k] = (p_, q_, rdraw.CODE[c][3] if len(rdraw.CODE[c]) > 3 else 0); lay[z][ty][tx] = k; k += 1
         drawn[n] = (w, h, lay, door)
+    # harbour and market props from tileset 33 (Ekat's Jonquil pieces, Magiscarf stalls): appended AFTER the drawn
+    # pieces so no earlier id moves (map builder 7).  Add new names at the END of EXTRA33 only.
+    extra = {}
+    for n in EXTRA33:
+        st = SV[n]; L = np.array(st['layers']); out_l = np.zeros_like(L)
+        for (z, yy, xx), t in np.ndenumerate(L):
+            if t < 384: continue
+            t = int(t)
+            if ('x', t) not in idmap:
+                im = tc.tile(t)
+                if im is None: continue
+                sheet.paste(im, ((k % 8) * 32, (k // 8) * 32))
+                props[k] = (ts33['passages'][t], ts33['priorities'][t], 0); idmap[('x', t)] = k; k += 1
+            out_l[z, yy, xx] = idmap[('x', t)]
+        extra[EXTRA33[n]] = (st['w'], st['h'], out_l.tolist())
+    idmap = {t: i for t, i in idmap.items() if not isinstance(t, tuple)}
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
@@ -167,6 +192,8 @@ def main():
         d = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['rdraw', n])
         if door: d['door'] = list(door)
         out[n] = d
+    for n, (w, h, lay) in extra.items():
+        out[n] = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['pf33x', n])
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}
     out['_singles'] = {k: base + idmap[v] for k, v in SINGLES.items()}

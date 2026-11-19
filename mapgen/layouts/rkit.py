@@ -258,6 +258,41 @@ class RMap:
                     self.cls[y, x] = 'T'; n += 1
         return n
 
+    def smooth(self, c, into='.', passes=1, only=None):
+        """majority-smooth a class region (no 1-cell spurs or notches): lane and plaza edges read as curves"""
+        for _ in range(passes):
+            cur = (self.cls == c); pad = np.pad(cur, 1)
+            n = sum(np.roll(np.roll(pad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) - cur
+            grow = ~cur & (n >= 5) & ~self.taken; shrink = cur & (n <= 3)
+            if only is not None: grow &= np.isin(self.cls, list(only))
+            self.cls[grow] = c; self.cls[shrink] = into
+
+    def plan_cliffs(self, rows=4):
+        """mark, at plan time, the cells the cliff kit will cover (lips, faces, sides, rims) so that events, lamps and
+        props are never seated on them; `cliffs()` recomputes the exact pieces at paint time"""
+        ht = self.ht; H, W = self.H, self.W
+        kitof = (lambda h: KITS[self.kit.get(h, self.kit.get('default', 'sh'))]) if isinstance(self.kit, dict) else (lambda h: KITS[self.kit])
+        for y in range(H):
+            for x in range(W):
+                h = ht[y, x]
+                c = (y + 1 < H and ht[y + 1, x] < h) or (x > 0 and ht[y, x - 1] < h) or (x + 1 < W and ht[y, x + 1] < h) \
+                    or (y > 0 and ht[y - 1, x] < h)
+                if not c:
+                    for k in range(1, rows):
+                        if y - k >= 0 and ht[y - k, x] > h and all(ht[y - j, x] <= h for j in range(1, k)):
+                            c = k < len(kitof(ht[y - k, x])['rows']); break
+                if c: self.cliff[y, x] = True
+        for sx, sy, sw, sn in self.stairs_at: self.cliff[sy:sy + sn, sx:sx + sw] = False
+
+    def doorpath(self, door, c='d', depth=7, stop='dgsD'):
+        """a trodden line from a doorstep straight down to the nearest lane (2 wide at the step, then 1-2 wide, jogging)"""
+        x, y = door
+        for k in range(1, depth + 1):
+            yy = y + k
+            if not self.inb(x, yy) or self.cls[yy, x] in stop or self.taken[yy, x] or self.cliff[yy, x] or self.ht[yy, x] != self.ht[y, x]: break
+            for xx in (x, x + (1 if (x + y + k // 3) % 2 else -1)):
+                if self.inb(xx, yy) and self.cls[yy, xx] in '.tT' and not self.taken[yy, xx] and not self.cliff[yy, xx]: self.cls[yy, xx] = c
+
     def street(self, pts, w=3, c='g', only=None):
         """orthogonal street through pts (each leg axis-aligned), w wide, centred on the points"""
         a = w // 2

@@ -714,6 +714,51 @@ def anchor_monument():
     return im, ['OOO', 'OOO', 'WWW', 'WWW']
 
 
+def snow_bridge(part):
+    """Frostwick's brook bridges (1x1 tiles, the bridge runs east-west): split planks laid across the stringers with
+    snow trodden into the gaps and lying along the edges, a post-and-beam rail with a snow cap on the north (n) and
+    south (s) tiles, the dark underside showing over the ice below the south rail.  part: n / m / s (+ digit variant)"""
+    im, d = canvas(1, 1)
+    v = int(part[1]) if len(part) > 1 else 0; part = part[0]
+    rng = random.Random(700 + v * 13 + ord(part))
+    d.rectangle([0, 0, 15, 15], fill=WOOD[2])
+    for x in range(0, 16, 4):                                  # planks, 4 px wide, each a touch different
+        c = WOOD[3] if (x // 4 + v) % 3 == 0 else WOOD[2]
+        d.rectangle([x, 0, x + 2, 15], fill=c); d.line([x + 3, 0, x + 3, 15], fill=WOOD[0])
+        d.line([x, 0, x, 15], fill=WOOD[3] if c == WOOD[2] else (164, 126, 90, 255))
+    for _ in range(5 + 2 * v):                                 # snow trodden into the boards
+        x, y = rng.randrange(16), rng.randrange(2, 14)
+        P(im, x, y, SNOW[3]); P(im, x + 1, y, SNOW[2])
+        if rng.random() < 0.4: P(im, x, y + 1, SNOW[2])
+    for _ in range(3): P(im, rng.randrange(16), rng.randrange(16), WOOD[1])
+    if part == 'n':
+        d.rectangle([0, 0, 15, 2], fill=CLEAR)
+        d.rectangle([0, 6, 15, 7], fill=WOOD[0])               # rail shadow on the deck
+        for x in range(16): P(im, x, 8, SNOW[2] if (x + v) % 5 else SNOW[3])   # snow blown against the rail foot
+        for x in range(0, 16, 3): P(im, x + v % 2, 9, SNOW[3])
+        d.rectangle([0, 3, 15, 5], fill=WOOD[1]); d.line([0, 3, 15, 3], fill=OUT); d.line([0, 4, 15, 4], fill=WOOD[3])
+        for px in (3, 11):                                     # posts
+            d.rectangle([px, 1, px + 2, 7], fill=WOOD[1], outline=OUT); d.line([px + 1, 2, px + 1, 6], fill=WOOD[3])
+            P(im, px, 0, SNOW[2]); P(im, px + 1, 0, SNOW[3]); P(im, px + 2, 0, SNOW[3]); P(im, px + 1, 1, SNOW[3])
+        for x in range(16):                                    # snow cap on the beam
+            if x not in (3, 4, 5, 11, 12, 13):
+                P(im, x, 2, SNOW[3]); P(im, x, 3, SNOW[3] if (x * 7 + v) % 4 else SNOW[2])
+    if part == 's':
+        for x in range(16): P(im, x, 5, SNOW[2] if (x + v) % 4 else SNOW[3])
+        for x in range(1, 16, 3): P(im, x, 4, SNOW[3])
+        d.rectangle([0, 9, 15, 11], fill=WOOD[1]); d.line([0, 9, 15, 9], fill=OUT); d.line([0, 10, 15, 10], fill=WOOD[3])
+        d.rectangle([0, 12, 15, 13], fill=WOOD[0]); d.rectangle([0, 14, 15, 15], fill=CLEAR)
+        for x in range(0, 16, 2): P(im, x, 14, (96, 120, 160, 150))    # shadow on the ice
+        for px in (3, 11):
+            d.rectangle([px, 6, px + 2, 13], fill=WOOD[1], outline=OUT); d.line([px + 1, 7, px + 1, 12], fill=WOOD[3])
+            P(im, px, 5, SNOW[3]); P(im, px + 1, 5, SNOW[3]); P(im, px + 2, 5, SNOW[2]); P(im, px + 1, 6, SNOW[3])
+        for x in range(16):
+            if x not in (3, 4, 5, 11, 12, 13):
+                P(im, x, 8, SNOW[3]); P(im, x, 9, SNOW[3] if (x * 5 + v) % 4 else SNOW[2])
+    return im
+
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -759,10 +804,14 @@ def pieces():
     out['fw_pal_v'] = (palisade('v'), ['W'], None)
     im, c = frozen_fall(4, 5); out['fw_fall'] = (im, c, None)
     for k in 'nms': out['fw_log_' + k] = (fallen_log(k), ['FF'], None)
+    # ---- appended by map builder 7 (append below this line only: earlier ids must not move)
+    for k, code in (('n', 'N'), ('m', 'F'), ('s', 'S')):
+        for v in range(2): out['fw_bridge_%s%d' % (k, v)] = (snow_bridge('%s%d' % (k, v)), [code], None)
     return out
 
 
-CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (1, 0, 0), 'O': (2, 0, 2), 'I': (1, 0, 0, 12)}   # layer, passage, priority
+CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (1, 0, 0), 'O': (2, 0, 2), 'I': (1, 0, 0, 12),
+        'N': (1, 8, 0), 'S': (1, 1, 0)}   # layer, passage, priority
 
 
 if __name__ == '__main__':
