@@ -27,7 +27,7 @@ GoodRod
 [100,104] # Ferrow's Landing - after Badge 4
 GoodRod
     3,STARYU,25,28
-    2,DRATINI,25,28
+    1,DRATINI,25,28
 [520,101] # The Ferrymen's Mile - after Badge 1
 Land
     4,TEDDIURSA,13,16
@@ -133,17 +133,18 @@ Cave
     3,GLIMMET,21,24
 [544,104] # Brinecut Mine 1F - after Badge 4
 Cave
-    2,LARVITAR,25,28
+    2,STONJOURNER,25,28
 [545,102] # Brinecut Mine B1F - after Badge 2
 Cave
     3,ONIX,17,20
     3,TINKATINK,17,20
 [545,103] # Brinecut Mine B1F - after Badge 3
 Cave
-    2,BELDUM,21,24
+    3,CARKOL,21,24
 [545,104] # Brinecut Mine B1F - after Badge 4
 Cave
-    2,GIBLE,25,28
+    2,NACLSTACK,25,28
+    1,BELDUM,25,28
 [552,102] # The Dyers' Ford - after Badge 2
 Land
     3,WOOPER,17,20
@@ -155,7 +156,7 @@ Land
 [552,104] # The Dyers' Ford - after Badge 4
 Land
     3,MAREEP,25,28
-    2,GOOMY,25,28
+    2,DEWPIDER,25,28
 [540,102] # Thistledown Lea - after Badge 2
 Land
     4,DEERLING,17,20
@@ -169,7 +170,7 @@ Land
 [540,104] # Thistledown Lea - after Badge 4
 Land
     3,BOUFFALANT,25,28
-    2,RIOLU,25,28
+    1,RIOLU,25,28
 [546,102] # Thistledown Manor - after Badge 2
 Cave
     3,LITWICK,17,20
@@ -178,7 +179,7 @@ Cave
     3,HONEDGE,21,24
 [546,104] # Thistledown Manor - after Badge 4
 Cave
-    2,DREEPY,25,28
+    2,DRIFLOON,25,28
 [524,102] # Gossamer Wood - after Badge 2
 Land
     4,JOLTIK,17,20
@@ -202,6 +203,7 @@ Land
 Land
     3,PHANTUMP,25,28
     2,SHIINOTIC,25,28
+    1,GOOMY,25,28
 [548,103] # Cocoonfall Hollow (Bleed) - after Badge 3
 Land
     3,BERGMITE,21,24
@@ -228,7 +230,7 @@ Land
 [577,104] # Frostwick Pass - after Badge 4
 Land
     3,BOUFFALANT,25,28
-    2,FRIGIBAX,25,28
+    2,STANTLER,25,28
 [570,103] # Frostwick - after Badge 3
 GoodRod
     3,FEEBAS,21,24
@@ -291,8 +293,20 @@ Cave
     3,FRILLISH,21,24
 [565,104] # Gullcry Caves B1F - after Badge 4
 Cave
-    2,BAGON,25,28
+    2,SLOWPOKE,25,28
 [160,104] # Ebbmouth - after Badge 4
 GoodRod
     3,CORSOLA,25,28
     2,FEEBAS,25,28
+#===============================================================================
+# RELOCATED EARLY PSEUDO-LEGENDS (coordinator, 2026-11-19): at most four on Chapter 0-4 maps, each where it fits and at
+# weight 1 (Dratini: Ferrow's Landing Good Rod; Goomy: the wet Deepwood; Riolu: Thistledown Lea; Beldum: the iron seam of
+# Brinecut B1F). The rest move to their own kingdoms. Gible and Frigibax are already wild there (the Rib Road, Frostfang
+# Pass), as is the Dreepy line in Antumbra (Drakloak from Badge 14), so only these two overlays are new:
+#===============================================================================
+[601,105] # The Rib Road (Ossaria) - after Badge 5
+Land
+    1,LARVITAR,27,29
+[666,108] # The Cinderhorn Caldera (Ashkaar) - after Badge 8: the Bagon line
+Land
+    1,SHELGON,41,44

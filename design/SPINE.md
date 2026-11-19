@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 16 (user, 2026-11-19 15:48) <<<
+**The game is meant to be challenging. No handing out counters to the next gym.** The user: "we cant go around giving out strong fighting types before the gyms! the game is meant to be challenging!!! look at how reborn and rejuv distribute pokemon, do it like that."
+- **Pokémon distribution follows Reborn and Rejuvenation**, studied from their actual encounter, gift and event data, not from memory.
+- **No type answers to the next Warden handed over before that gym:** no gifts, no guaranteed duels, no common wild spawns of them. Revision 14's "a Fighting type before Saltmere" is withdrawn: the Timburr gift and the Crabrawler/Clobbopus duel move to after Gym 1 (or later), unless the study shows the reference games do the same.
+- **Strong Pokémon are earned:** behind badges, quests, puzzles, bosses and exploration, with rarity tiers like the reference games.
+- **Gym 1** is Normal so the type matchup is simple, not so the fight is easy. Dorian is fair but a real fight, at Reborn/Rejuvenation early-gym difficulty. The difficulty modes (Casual/Standard/Hard) still exist; Standard should feel like those games.
+
 ## >>> REVISION 15 (user, 2026-11-19) <<<
 **Character portraits are parked:** "skip the whole portrait thing for now, work on more important things." Juno keeps the pass-3 stopgap portraits. When portraits resume, use the 360 VS busts in Graphics/Transitions of the three games (see art/PORTRAIT_SOURCES.md). Spend effort on gameplay, maps, story and systems instead.
 

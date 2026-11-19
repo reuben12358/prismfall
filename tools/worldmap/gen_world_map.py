@@ -227,9 +227,9 @@ class Fields:
         cx, cy = G.CROWNWALL['c']
         dr = np.hypot(gx - cx, gy - cy)
         ang = np.degrees(np.arctan2(gy - cy, gx - cx))
-        gap = np.abs(((ang - G.CROWNWALL['gap_angle']) + 180) % 360 - 180) < 16
-        ring = 1.0 * np.exp(-((dr - G.CROWNWALL['r']) / G.CROWNWALL['w']) ** 2) * (0.7 + 0.5 * rnoise)
-        ring[gap] *= 0.25
+        gd_ = np.abs(((ang - G.CROWNWALL['gap_angle']) + 180) % 360 - 180)
+        gapf = 0.25 + 0.75 * np.clip((gd_ - 8) / 22.0, 0, 1)        # soft-edged pass through the ring
+        ring = 1.0 * np.exp(-((dr - G.CROWNWALL['r']) / G.CROWNWALL['w']) ** 2) * (0.7 + 0.5 * rnoise) * gapf
         self.ring = ring
         elev = elev + self.ridge + self.volc + ring
         elev *= np.clip(self.dist_sea / 0.6, 0.25, 1.0)
@@ -678,6 +678,8 @@ def paint_big(out_path):
 
     # --- towns, gym badges and road shields (placed first: they never move)
     LB = Labels(w, h)
+    ix0, iy0, ix1, iy1 = W.ANTUMBRA_INSET
+    LB.add((ix0 * S - 10, iy0 * S - 10, w, h))          # the Antumbra inset covers this corner
     fT = font(F_SERIF_B, 25)
     fTs = font(F_SERIF_B, 21)
     fV = font(F_SERIF, 19)
@@ -740,6 +742,15 @@ def paint_big(out_path):
         return ib[y1, x1] - ib[y0, x1] - ib[y1, x0] + ib[y0, x0]
     for nm, sub, x, y in G.KINGDOM_LABELS:
         if nm == 'CROWNHAVEN':
+            continue
+        if nm == 'ISENMAR':         # the kingdom IS the frozen sea: its name sits on the ice
+            fK = font(F_CAPS, 50)
+            kd2.text(P(x, y), spaced(nm, 1), font=fK, fill=(40, 60, 84, 190), anchor='mm', stroke_width=2,
+                     stroke_fill=(236, 244, 248, 160))
+            kd2.text((P(x, y)[0], P(x, y)[1] + 34), sub, font=fKs, fill=(40, 60, 84, 210), anchor='mm', stroke_width=2,
+                     stroke_fill=(236, 244, 248, 170))
+            tb = kd2.textbbox(P(x, y), spaced(nm, 1), font=fK, anchor='mm')
+            LB.add((tb[0], tb[1], tb[2], tb[3] + 46))
             continue
         fK = font(F_CAPS, KSIZE.get(nm, 58))
         tb = kd2.textbbox((0, 0), spaced(nm, 1), font=fK, anchor='mm')
@@ -808,7 +819,7 @@ def paint_big(out_path):
         d.rectangle([x0 + k * 40, y0, x0 + (k + 1) * 40, y0 + 8], fill=INK if k % 2 == 0 else (240, 230, 200),
                     outline=INK)
     d.text((x0, y0 - 6), "0", font=fS, fill=INK, anchor='mb')
-    d.text((x0 + 160, y0 - 6), "40 leagues", font=fS, fill=INK, anchor='mb')
+    d.text((x0 + 160, y0 - 6), "12 leagues", font=fS, fill=INK, anchor='mb')
 
     # --- frame + bottom panel
     img = frame_and_panel(img.convert('RGB'))
@@ -837,6 +848,8 @@ def place_label(d, LB, txt, f, cx, cy, off, fill, dirs, halo=(244, 234, 206), hw
                 d.text((x, y), txt, font=f, fill=fill, anchor='mm', stroke_width=hw, stroke_fill=halo)
                 LB.add(box)
                 return True
+    if f.size > 14:
+        return place_label(d, LB, txt, font(f.path, f.size - 3), cx, cy, off, fill, dirs, halo, hw)
     print('  label dropped:', txt)
     return False
 

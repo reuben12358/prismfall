@@ -107,7 +107,6 @@ ANCHORS = [
 
 SEAS = [  # label, x, y, angle, size
     ("THE FROZEN NORTH SEA", 19.6, 0.62, 0, 1.0),
-    ("Isenmar's Waters", 3.6, 0.85, 0, 0.7),
     ("THE SHATTERED ICE", 27.8, 2.45, -18, 0.62),
     ("THE HALLOW STRAIT", 8.6, 19.62, 0, 0.9),
     ("THE WESTERN DEEP", 0.75, 12.0, 90, 0.85),
@@ -138,7 +137,7 @@ LANDMARKS = [  # label, x, y, size, angle
 ]
 KINGDOM_LABELS = [  # name, subtitle, x, y
     ("ELOWEN", "the Evergreen Crown", 8.6, 16.25),
-    ("ISENMAR", "the Frozen Sea", 3.2, 5.6),
+    ("ISENMAR", "the Frozen Sea", 3.7, 0.62),
     ("ZENITH", "the City Above", 13.6, 3.6),
     ("NADIR", "the City Below", 15.7, 12.5),
     ("OSSARIA", "the Bone Sands", 20.0, 3.2),

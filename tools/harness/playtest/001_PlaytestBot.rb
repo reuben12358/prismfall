@@ -485,6 +485,11 @@ module PlayBot
     # A step for another map: skip ahead to the first later step for the map we are on
     def wait_for_map
       later = plan[@step..].index { |s| s[1] == $game_map.map_id }
+      if !later && plan[@step] && plan[@step][1].is_a?(Integer) && plan[@step][1] != $game_map.map_id
+        # e.g. woke up in a Poke Center after a blackout: walk back to the step's map if a door or edge leads there
+        @map_wait = (@map_wait || 0) + 1
+        return to_map(plan[@step][1]) if @map_wait < 1500 && @idle >= 12
+      end
       if !later
         @map_wait = (@map_wait || 0) + 1
         if @map_wait > 1500
