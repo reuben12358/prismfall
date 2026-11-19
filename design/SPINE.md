@@ -1,5 +1,8 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 12 (user decision, 2026-11-18) <<<
+Juno's design direction is EVER-BLOOM (user: "everbloom kinda looked cooler ngl"): she wears the never-wilting blossoms of her aunt's Bride Tree, the flower girl of a wedding that never ended. Wreath, long veil-train, bouquet, white dress. Her personality stays warm, chatty and funny; the costume carries the sadness. Under Glass and Rot & Bloom are shelved. Story and script references to Juno's look should follow this.
+
 ## >>> REVISION 11 (user feedback, 2026-11-17 10:38) <<<
 Character art v5 (the four Juno concept thumbnails) was rejected: "it looks god awful... theres so much good pixel art out there, surely we can do better."
 - Drawing trainer sprites from scratch, pixel by pixel in code, has failed five times. Stop doing it.

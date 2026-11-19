@@ -5,4 +5,5 @@ Optional   = Prismfall Field Effects,1.0.0
 Optional   = Prismfall Core,1.0.0
 Optional   = Prismfall Bosses,1.0.0
 Optional   = Prismfall Cutscenes,1.0.0
+Optional   = Prismfall Puzzles,1.0.0
 Credits    = Prismfall dev team

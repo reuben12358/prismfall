@@ -34,7 +34,7 @@ STYLES = {
                         'NW': MG(4511), 'S+E': MG(4517), 'S+W': MG(4515), 'N+E': MG(4501), 'N+W': MG(4499)},
                   wall_hi=[MG(4524)], wall_lo=[MG(4532)], post_hi=MG(4520), post_lo=MG(4528), post_every=6,
                   end_l=None, end_r=None,
-                  floor=[MG(4678)], floor_sh=[MG(4678)], floor2=[MG(4702)], floor2_sh=[MG(4694)],
+                  floor=[MI(1241), MI(1242), MI(1243)], floor_sh=[MI(1233), MI(1234), MI(1235)], floor2=[MG(4702)], floor2_sh=[MG(4694)],
                   stair=MG(3151), pit=MG(4508), pit_top=MG(4508), pit_bot=MG(4508)),
 }
 # multi-tile objects: name -> (rows of ids, layer of each row)

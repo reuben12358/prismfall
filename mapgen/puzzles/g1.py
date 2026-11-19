@@ -243,3 +243,14 @@ ROOMS = {
                            "Every treadle lifts the first thread. An odd number of presses leaves it up.",
                            "Press the first, fourth and fifth treadles, once each, in any order."]),
 }
+
+RUBY = """
+PrismfallPuzzles.checker(:g1_knot, :g1_knot, {
+  :first_down => "The chest is tied shut with one unfinished row. The first warp thread is down: the sampler starts UP.",
+  :wrong_row  => "The chest is tied shut with one unfinished row. The threads don't match the sampler yet: up, down, up, down, up."
+}) do
+  ups = (1..5).map { |i| PrismfallPuzzles.state_of("T#{i}") == 1 }
+  next [:ok] if ups == [true, false, true, false, true]
+  next [:fail, ups[0] ? :wrong_row : :first_down]
+end
+"""

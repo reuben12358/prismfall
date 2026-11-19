@@ -8,7 +8,7 @@ Add art in any order.
 
 ## 0. Status (Revision 10): every field and stage has shipped art
 
-All 33 fields and their stages (50 rooms) have finished backdrops. They live in the kit folder
+All 33 fields and their stages (49 field/stage rooms, plus one night variant) have finished backdrops. They live in the kit folder
 **`graphics/EBDX/Battlebacks/`** (`battlebg/` rooms, `elements/` animated layers), which `tools/package.sh` copies to
 `Graphics/EBDX/Battlebacks/` in the dev kit. Real-engine stills: `docs/battle_captures/backdrops/contact_sheet.png`.
 
