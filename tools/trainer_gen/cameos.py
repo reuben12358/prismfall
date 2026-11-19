@@ -40,7 +40,9 @@ def CAMEOS(P):
         P("GOLISOPOD", -3, "EMERGENCYEXIT", "ASSAULTVEST", "ADAMANT", "FIRSTIMPRESSION,LIQUIDATION,LEECHLIFE,KNOCKOFF", "BA"),
         P("LUDICOLO", -2, "SWIFTSWIM", "LIFEORB", "MODEST", "HYDROPUMP,GIGADRAIN,ICEBEAM,RAINDANCE", "S", nick="Indiana",
           casual={"item": "SITRUSBERRY"}),
-        P("MILOTIC", -2, "MARVELSCALE", "FLAMEORB", "BOLD", "SCALD,ICEBEAM,RECOVER,HAZE", "BPD", casual={"item": "LEFTOVERS"}),
+        # Water Surface (v1): the water soothes burns, so the Flame Orb + Marvel Scale trick doesn't hold. Competitive
+        # punishes Intimidate in the tag double instead.
+        P("MILOTIC", -2, "COMPETITIVE", "LEFTOVERS", "BOLD", "SCALD,ICEBEAM,RECOVER,HAZE", "BPD"),
         P("KINGDRA", -1, "SWIFTSWIM", "DAMPROCK", "MODEST", "HYDROPUMP,DRACOMETEOR,ICEBEAM,RAINDANCE", "S", nick="Atlantica"),
         P("LAPRAS", 0, "SHELLARMOR", "LEFTOVERS", "MODEST", "SPARKLINGARIA,FREEZEDRY,THUNDERBOLT,HYDROPUMP", "BS",
           nick="Deliverer", hard={"ab": "WATERABSORB", "item": "ASSAULTVEST"}),
@@ -59,9 +61,11 @@ def CAMEOS(P):
     c("FESTIVAL_ALEXANDRA", "Alexandra", 95, "Thank you. ...If yours wake up, will you write to me?", [
         P("SIGILYPH", -4, "MAGICGUARD", "LIFEORB", "TIMID", "PSYCHIC,AIRSLASH,HEATWAVE,COSMICPOWER", "S"),
         P("STARMIE", -3, "ANALYTIC", "LIFEORB", "TIMID", "HYDROPUMP,PSYCHIC,ICEBEAM,RECOVER", "S", casual={"item": "SITRUSBERRY"}),
-        P("ALTARIA", -2, "NATURALCURE", "LEFTOVERS", "JOLLY", "DRAGONDANCE,DRAGONCLAW,EARTHQUAKE,ROOST", "A"),
-        P("GARCHOMP", -2, "ROUGHSKIN", "ROCKYHELMET", "JOLLY", "EARTHQUAKE,DRAGONCLAW,STONEEDGE,STEALTHROCK", "A"),
-        P("DRAGONITE", -1, "MULTISCALE", "LUMBERRY", "ADAMANT", "DRAGONDANCE,EXTREMESPEED,EARTHQUAKE,FIREPUNCH", "A"),
+        # Her sidequest fight is in Rimeholt's sunken lower town (open water after the Thaw): Earthquake and Stealth Rock
+        # fail on Water Surface, so the dragons carry moves that work there.
+        P("ALTARIA", -2, "NATURALCURE", "LEFTOVERS", "JOLLY", "DRAGONDANCE,DRAGONCLAW,IRONTAIL,ROOST", "A"),
+        P("GARCHOMP", -2, "ROUGHSKIN", "ROCKYHELMET", "JOLLY", "DRAGONCLAW,STONEEDGE,IRONHEAD,SWORDSDANCE", "A"),
+        P("DRAGONITE", -1, "MULTISCALE", "LUMBERRY", "ADAMANT", "DRAGONDANCE,EXTREMESPEED,DRAGONCLAW,FIREPUNCH", "A"),
         P("LATIAS", 0, "LEVITATE", "SOULDEW", "TIMID", "DRACOMETEOR,PSYCHIC,CALMMIND,RECOVER", "S",
           hard={"item": "LATIASITE", "moves": "DRACOMETEOR,PSYSHOCK,MISTBALL,RECOVER"},
           casual={"item": "SITRUSBERRY"}),
@@ -70,8 +74,11 @@ def CAMEOS(P):
         P("TOXTRICITY", -3, "PUNKROCK", "THROATSPRAY", "MODEST", "OVERDRIVE,SLUDGEBOMB,BOOMBURST,VOLTSWITCH", "S"),
         P("GARBODOR", -3, "AFTERMATH", "ROCKYHELMET", "ADAMANT", "GUNKSHOT,DRAINPUNCH,TOXICSPIKES,STOMPINGTANTRUM", "BA"),
         P("MUK", -2, "POISONTOUCH", "ASSAULTVEST", "ADAMANT", "POISONJAB,KNOCKOFF,FIREPUNCH,SHADOWSNEAK", "BA", form=1),
-        P("SALAZZLE", -2, "CORROSION", "BLACKSLUDGE", "TIMID", "TOXIC,SLUDGEBOMB,FLAMETHROWER,NASTYPLOT", "S", gender="female"),
-        P("TOXICROAK", -1, "DRYSKIN", "LIFEORB", "JOLLY", "GUNKSHOT,DRAINPUNCH,SUCKERPUNCH,SWORDSDANCE", "A",
+        # Corrosive Mire (v1): Venoshock is always doubled against grounded targets; Corrosion is +1 Attack on entry;
+        # two Flamethrowers burn the marsh gas off (-> Wasteland) and scorch grounded foes on the way.
+        P("SALAZZLE", -2, "CORROSION", "BLACKSLUDGE", "TIMID", "VENOSHOCK,SLUDGEBOMB,FLAMETHROWER,NASTYPLOT", "S", gender="female"),
+        # Synthetic Seed on the Mire: +1 Atk, +1 Sp. Atk and a poisoning a Poison type shrugs off.
+        P("TOXICROAK", -1, "DRYSKIN", "SYNTHETICSEED", "JOLLY", "GUNKSHOT,DRAINPUNCH,SUCKERPUNCH,SWORDSDANCE", "A",
           casual={"item": "BLACKSLUDGE"}),
         P("SEVIPER", 0, "INFILTRATOR", "LIFEORB", "NAIVE", "POISONJAB,FLAMETHROWER,EARTHQUAKE,SUCKERPUNCH", "MX",
           casual={"item": "BLACKSLUDGE", "ab": "SHEDSKIN"}),
@@ -92,7 +99,8 @@ def CAMEOS(P):
         P("BRELOOM", -2, "TECHNICIAN", "LIFEORB", "JOLLY", "MACHPUNCH,BULLETSEED,ROCKTOMB,SPORE", "A",
           casual={"moves": "MACHPUNCH,BULLETSEED,ROCKTOMB,STUNSPORE", "item": "SITRUSBERRY"}),
         P("PANGORO", -2, "IRONFIST", "ASSAULTVEST", "ADAMANT", "DRAINPUNCH,KNOCKOFF,ICEPUNCH,BULLETPUNCH", "HA"),
-        P("SIRFETCHD", -1, "SCRAPPY", "LEEK", "JOLLY", "METEORASSAULT,CLOSECOMBAT,BRAVEBIRD,KNOCKOFF", "A"),
+        # Colosseum (v1): Steadfast is +1 crit stage here and the Leek +2, so every hit is a critical hit.
+        P("SIRFETCHD", -1, "STEADFAST", "LEEK", "JOLLY", "METEORASSAULT,CLOSECOMBAT,BRAVEBIRD,KNOCKOFF", "A"),
         P("LUCARIO", 0, "JUSTIFIED", "LUCARIONITE", "JOLLY", "SWORDSDANCE,CLOSECOMBAT,METEORMASH,EXTREMESPEED", "A",
           casual_item_fallback="LIFEORB"),
     ], mega_std=True)

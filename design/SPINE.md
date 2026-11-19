@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 14 (user decision, 2026-11-19) <<<
+**Gym 1 is Normal-type**, to ease the player in (user: "gym 1 should be normal type to ease the player into the game"). Gym 2 was already Normal (Dorian), so the user left the fix to us ("whatever u think is correct"). Decision: **swap the town order of Saltmere and Briarwick.**
+- **Gym 1 = Dorian Pell, Saltmere, Normal, `:GRAND_STAGE`.** Cap 15, a single battle. The gym is a simple, handsome theatre: a Jasmine-style walk-through (aisle, seats, a few trainers, the stage) with at most one gentle interaction. Grand Stage is the player's first field and must teach fields gently (the audience cheers flashy moves). Eevee "Understudy" is gifted after Gym 1.
+- **Gym 2 = Tamsin Loom, Briarwick, Bug, `:SILKWOOD`.** Cap 19, a **double battle** ("a thread holds because it's twisted with others"). The linked-heddle Weaving Hall becomes Gym 2's puzzle: the first real puzzle, still friendly.
+- **Story:** Chapter 2 becomes "Curtain Call" (Saltmere, Gym 1, J1, the Mourner's pageant hijack, the Gilded King page) and Chapter 3 becomes "The Weaver's Debt" (Briarwick, Gym 2, Tamsin's contract, Thistle). Re-check every cross-reference: the badge-case hum, Juno lines, Tamsin's Act V, the Plate bar order (bar 1 = Normal/Bug/Water, Normal still has no Plate), BALANCE caps, the Festival.
+- **Geography:** Ferrow's Landing → coast → Saltmere (Elowen's free port) → inland → Gossamer Wood/Briarwick → north → Rimewood/Frostwick → Ebbmouth. Characters and their types are unchanged.
+
 ## >>> REVISION 13 (user feedback, 2026-11-19) <<<
 1. **Trial Centers replace help centers.** Rejuvenation has Help Centers with many side quests; ours are per-kingdom "Trials" that express each kingdom's culture. Ashkaar: the Trial by Flames, combat-centred (think Noxus in League of Legends). Elowen: spiritual quests (think Ionia). Every other kingdom gets its own flavour. Lots of quests, some random and funny.
 2. **No "Route 1 / Route 2" names.** Name every route the way Game of Thrones names places (the user's examples: "Frostwick Pass", "Rimewood Path").

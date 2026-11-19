@@ -29,9 +29,14 @@ All 33 fields and their stages (49 field/stage rooms, plus one night variant) ha
   CAVE 2 and COLOSSEUM 2 have bridge-side art (`field_cave_cracked`, `field_colosseum_frenzy`): their field
   definitions carry no stage key, so the bridge profile names it (`:stages => { 2 => { :backdrop => ... } }`).
   Night variants: `field_frozen_lake_night` (aurora), `field_meadow_night`.
-- **Sources beyond the three games:** MEADOW is Magiscarf's painted "Fields Backgrounds" at 2x. Packs worth a manual
-  download to replace composed rooms: everblack's "Battlebacks Essentials" (itch.io) and Eevee Expo resources 40,
-  654, 1517, 1668. Already judged off-style in `art/tilesets/NEW_SOURCES.md`: ORAS/XY EBDX packs, Orre battlebacks.
+- **Sources beyond the three games** (all already on disk in `/home/claude/ref/art/morgebby/`, credited per file in
+  `docs/CREDITS.md`): Magiscarf "Fields Backgrounds" (MEADOW); aveontrainer's painted battle backgrounds (DESERT dunes,
+  MOUNTAIN highland falls, WASTELAND dead-tree mire); carchagui's cave background (CAVE earth panel, SNOWY_MOUNTAIN
+  snow panel); princess-phoenix's arena panel (PRISM_ARENA). Rejuvenation's painted night plaza (NEW_MOON) and
+  Darchlight path (INVERSE) replaced their procedural bases.
+- **Checked online and not usable:** Eevee Expo 654, 1517, 1668 are Fakemon battler packs (no backgrounds); 40 is a
+  tutorial; everblack's itch.io pack is generic-RPG battlebacks (off-style). Judged off-style earlier in
+  `art/tilesets/NEW_SOURCES.md`: ORAS/XY EBDX packs, Orre battlebacks.
 - **Not made:** vanilla (non-EBDX) `_bg/_base0/_base1/_message` sets.
 
 The sections below are the original brief, kept for anyone repainting a room by hand.

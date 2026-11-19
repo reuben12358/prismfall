@@ -513,3 +513,20 @@ BaseMoney = 80
 SkillLevel = 100
 BattleBGM = Battle Elite
 VictoryBGM = Battle victory leader
+#-------------------------------
+# The Eevee Octave (Prism Choir): Vesper Lindqvist and her seven fellow orphans. See design/TRAINER_FIELD_PLAYBOOK.md.
+[OCTAVE_VESPER]
+Name = Octave Cantor
+Gender = Female
+BaseMoney = 100
+SkillLevel = 100
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[OCTAVE_SINGER]
+Name = Chorister
+Gender = Mixed
+BaseMoney = 60
+SkillLevel = 100
+BattleBGM = Battle Elite
+VictoryBGM = Battle victory leader

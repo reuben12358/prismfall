@@ -195,6 +195,7 @@ def dragons_den():
     # a hoard chamber: 2x view of the caldera's great wall and lava fall (no tunnel mouth in frame)
     src = game_img("rejuvenation", "battlebgVolcano")
     src = src.crop((0, 40, 256, 184)).resize((512, 288), Image.NEAREST)
+    src = src.convert("RGB").filter(ImageFilter.ModeFilter(5)).convert("RGBA")   # round off the 2x stair-steps
     hd = extend_vanilla(src, origin=O)
     lava = mask_from(hd, lambda r, g, b: (r > 200) & (g > 70) & (b < 120))
     hd = gradient_map(hd, [(0.0, (14, 6, 22)), (0.08, (34, 16, 50)), (0.18, (66, 32, 88)), (0.3, (104, 54, 126)),

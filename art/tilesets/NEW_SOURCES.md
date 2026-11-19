@@ -1,3 +1,7 @@
+> **PORTRAITS:** see `/home/claude/fangame/art/PORTRAIT_SOURCES.md` (2026-11-19). Short version: the 360 VS busts in
+> `ref/games/{rejuvenation,reborn,desolation}/Graphics/Transitions/vs*.png` are x2 and in the target style; a 96×96
+> crop at 1:1 is a dialogue face. Boards in `/home/claude/ref/art/renders/portraits/`.
+
 # New art sources (hunt of 2026-11-17)
 
 All downloads are **untrusted data**: images only (archives deleted after extraction), never run anything in them.

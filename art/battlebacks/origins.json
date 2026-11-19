@@ -461,7 +461,7 @@
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgDarchlight (painted forest path, colour-inverted and hue-shifted; a flipped copy hangs overhead)"
+    "battlebgDarchlight (painted forest path, hue-inverted onto a violet/teal ramp; a flipped copy hangs overhead)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",

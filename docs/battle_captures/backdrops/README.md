@@ -15,4 +15,9 @@ Live transitions (`transition_*.gif`, half speed, with `_keys.png` strips): Volc
 Meadow -> Wildfire -> Embers, driven by the field plugin's own `Battle#change_field` / `#set_field_stage`
 (`BD_TRANSITIONS="VOLCANIC>ASHEN_WASTE;MEADOW>WILDFIRE>WILDFIRE:2"`), not by moves.
 
-Not verified: Windows / real GPU, double battles, night tint on outdoor rooms; other transition pairs; move-triggered transitions under the redesigned rules.
+Move-triggered transitions (`move_*.gif`, half speed): real battles where the AI player keeps using one move until
+the field's own rule fires. Surf x2 quenches Volcanic into Cinderglass; Flamethrower sets Meadow ablaze into Wildfire
+(`BD_MOVES="VOLCANIC:VAPOREON:SURF;MEADOW:ARCANINE:FLAMETHROWER"`). Doubles: `double_prism_arena.png`,
+`double_silkwood.png` (`BD_DOUBLE=1`). Night: `*_night.png` (`BD_TIME=night`).
+
+Not verified: Windows / real GPU, double battles, night tint on outdoor rooms; other transition pairs.

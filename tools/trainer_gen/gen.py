@@ -864,23 +864,32 @@ X("Exhibition - Pageant Bout (2-vs-1 double with Dorian v90): Rook's half", "LEA
 ])
 X("Hijack - Dr. Percival Quent (Voss removed)", "MERIDIAN_QUENT", "Percival", 99, 100,
   "Hee... the numbers were so pretty. So pretty.", [
-    P("BRONZONG", 96, "LEVITATE", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,EARTHQUAKE,EXPLOSION", "PD", tr=True),
+    # PRISM_ARENA: Heatproof Bronzong sets Trick Room in the quiet rounds and is the one Steel type safe on the Flame
+    # Plate's turn (rounds 4-6). Tri Attack is x1.3 on the arena; Magnezone holds the Magical Seed (+1 Sp. Atk, +1 Sp. Def).
+    P("BRONZONG", 96, "HEATPROOF", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,EARTHQUAKE,EXPLOSION", "PD", tr=True),
     P("METAGROSS", 97, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,EARTHQUAKE,BULLETPUNCH", "HA"),
     P("JIRACHI", 97, "SERENEGRACE", "LEFTOVERS", "JOLLY", "IRONHEAD,ZENHEADBUTT,UTURN,FIREPUNCH", "A"),
     P("PORYGONZ", 98, "ADAPTABILITY", "CHOICESPECS", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,THUNDERBOLT", "S", casual={"item": "SITRUSBERRY"}),
-    P("MAGNEZONE", 99, "MAGNETPULL", "ASSAULTVEST", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,BODYPRESS", "BS"),
+    P("MAGNEZONE", 99, "MAGNETPULL", "MAGICALSEED", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,BODYPRESS", "BS",
+      casual={"item": "SITRUSBERRY"}),
     P("SILVALLY", 100, "RKSSYSTEM", "STEELMEMORY", "JOLLY", "MULTIATTACK,PARTINGSHOT,FLAMECHARGE,SWORDSDANCE", "A",
       form=8, nick="NULL", casual={"moves": "MULTIATTACK,CRUSHCLAW,FLAMECHARGE,SCARYFACE"}),
 ])
 X("Hijack (Ruin) - Theodric, the Gilded Reflection", "GILDED_THEODRIC", "Theodric", 0, 100,
   "Three hundred years and still the god will not kneel...", [
+    # PRISM_ARENA "running Inverse" (story/12_RUIN_ROUTE; the event layers the inverted chart). Reviewed for it: under the
+    # inverted chart Fighting and Ghost hit what they could not touch before (No Guard Dynamic Punch into Ghosts,
+    # Close Combat into Psychic / Fairy / Flying, Poltergeist into Normal and Dark), and Kyogre + Groudon share one team
+    # on purpose: the "Year of Two Weathers". Regigigas keeps Slow Start and Protect.
     P("GOLURK", 97, "NOGUARD", "LIFEORB", "ADAMANT", "DYNAMICPUNCH,EARTHQUAKE,POLTERGEIST,STONEEDGE", "HA", casual={"item": "SITRUSBERRY"}),
     P("AEGISLASH", 97, "STANCECHANGE", "WEAKNESSPOLICY", "QUIET", "KINGSSHIELD,SHADOWBALL,CLOSECOMBAT,SHADOWSNEAK", "BS"),
     P("KYOGRE", 98, "DRIZZLE", "CHOICESPECS", "MODEST", "WATERSPOUT,ORIGINPULSE,ICEBEAM,THUNDER", "S", casual={"item": "LEFTOVERS"}),
     P("GROUDON", 98, "DROUGHT", "LIFEORB", "ADAMANT", "PRECIPICEBLADES,STONEEDGE,FIREPUNCH,SWORDSDANCE", "A", casual={"item": "LEFTOVERS"}),
     P("REGIGIGAS", 99, "SLOWSTART", "LEFTOVERS", "ADAMANT", "CRUSHGRIP,KNOCKOFF,DRAINPUNCH,PROTECT", "HA"),
-    P("GHOLDENGO", 100, "GOODASGOLD", "CHOICESPECS", "TIMID", "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,TRICK", "S", nick="Gilt",
-      casual={"item": "LEFTOVERS", "moves": "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,NASTYPLOT"}),
+    # Magical Seed on the arena (+1 Sp. Atk, +1 Sp. Def) with Nasty Plot instead of being locked by Specs: the chart
+    # flips under him, so he needs to change moves.
+    P("GHOLDENGO", 100, "GOODASGOLD", "MAGICALSEED", "TIMID", "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,NASTYPLOT", "S", nick="Gilt",
+      casual={"item": "LEFTOVERS"}, hard={"item": "CHOICESPECS", "moves": "MAKEITRAIN,SHADOWBALL,FOCUSBLAST,TRICK"}),
 ])
 X("Exhibition - Morwen's Echo (Night of Masques, Crownhaven Cathedral lantern)", "ECHO_MORWEN", "Morwen", 90, 90,
   "...Tell him I'm proud. Tell him I'm sorry. In that order.", [
@@ -897,21 +906,24 @@ X("Exhibition - Morwen's Echo (Night of Masques, Crownhaven Cathedral lantern)",
 # Ch21 tag foes (versions 21), aces 97
 X("Ch21 tag foe - Sabine Kroll", "MERIDIAN_KROLL", "Sabine", 21, 97, "Nothing personal. It never is.", [
     P("OBSTAGOON", 95, "GUTS", "FLAMEORB", "ADAMANT", "OBSTRUCT,KNOCKOFF,FACADE,CLOSECOMBAT", "A", casual={"item": "SITRUSBERRY"}),
-    P("CRAWDAUNT", 96, "ADAPTABILITY", "LIFEORB", "ADAMANT", "CRABHAMMER,KNOCKOFF,AQUAJET,SWORDSDANCE", "A", casual={"item": "SITRUSBERRY"}),
+    # Tag double on the PRISM_ARENA: Protect on the frail hitters, Obstruct on the lead.
+    P("CRAWDAUNT", 96, "ADAPTABILITY", "LIFEORB", "ADAMANT", "CRABHAMMER,KNOCKOFF,AQUAJET,PROTECT", "A", casual={"item": "SITRUSBERRY"}),
     P("KINGAMBIT", 97, "SUPREMEOVERLORD", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE", "HA"),
 ])
 X("Ch21 tag foe - Director Helene Marchetti", "MERIDIAN_MARCHETTI", "Helene", 21, 97, "Directorate, stand down. ...That's an order.", [
     P("MABOSSTIFF", 95, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,PSYCHICFANGS,WILDCHARGE", "BA"),
-    P("ARCANINE", 96, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,WILDCHARGE,MORNINGSUN", "A"),
-    P("CORVIKNIGHT", 97, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,BODYPRESS,BULKUP,ROOST", "BPD"),
+    # Double Intimidate lead; Corviknight's Tailwind for the pair.
+    P("ARCANINE", 96, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT", "A"),
+    P("CORVIKNIGHT", 97, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,BODYPRESS,TAILWIND,ROOST", "BPD"),
 ])
 X("Ch21 tag foe - Dr. Percival Quent", "MERIDIAN_QUENT", "Percival", 21, 97, "Data! Glorious data! Do it again!", [
-    P("BRONZONG", 95, "LEVITATE", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,PSYCHIC,STEALTHROCK", "PD", tr=True),
-    P("METAGROSS", 96, "CLEARBODY", "LIFEORB", "ADAMANT", "METEORMASH,ZENHEADBUTT,EARTHQUAKE,BULLETPUNCH", "HA", casual={"item": "SITRUSBERRY"}),
-    P("PORYGONZ", 97, "ADAPTABILITY", "LIFEORB", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,THUNDERBOLT", "S", casual={"item": "SITRUSBERRY"}),
+    # Heatproof for the Flame Plate's turn; Trick Room for the pair; Tri Attack x1.3 on the arena.
+    P("BRONZONG", 95, "HEATPROOF", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,PSYCHIC,PROTECT", "PD", tr=True),
+    P("METAGROSS", 96, "CLEARBODY", "LIFEORB", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA", casual={"item": "SITRUSBERRY"}),
+    P("PORYGONZ", 97, "ADAPTABILITY", "LIFEORB", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,PROTECT", "S", casual={"item": "SITRUSBERRY"}),
 ])
 X("Ch21 tag foe - Directorate Captain (when Marchetti is turned)", "MERIDIAN_DIRECTORATE", "Captain", 21, 97, "For the Concord.", [
-    P("ALAKAZAM", 95, "MAGICGUARD", "LIFEORB", "TIMID", "PSYCHIC,FOCUSBLAST,SHADOWBALL,DAZZLINGGLEAM", "S", casual={"item": "SITRUSBERRY"}),
+    P("ALAKAZAM", 95, "MAGICGUARD", "LIFEORB", "TIMID", "PSYCHIC,FOCUSBLAST,DAZZLINGGLEAM,PROTECT", "S", casual={"item": "SITRUSBERRY"}),
     P("SCIZOR", 96, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA", casual={"item": "METALCOAT"}),
     P("MAGNEZONE", 97, "MAGNETPULL", "CHOICESPECS", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,BODYPRESS", "BS", casual={"item": "SITRUSBERRY"}),
 ])
@@ -935,6 +947,291 @@ X("Ruin R1 - the Reflection (fallback only; Core mirrors $player.party at battle
     P("DITTO", 85, "IMPOSTER", "FOCUSSASH", "JOLLY", "TRANSFORM", "HS"),
     P("DITTO", 85, "IMPOSTER", "LEFTOVERS", "JOLLY", "TRANSFORM", "HS"),
 ])
+
+# ------------------------------------------------------------------------------
+# STORY ADMINS, THE MOURNER, THE EEVEE OCTAVE, WAR SOLDIERS (round 2; design/TRAINER_FIELD_PLAYBOOK.md 6-8)
+# Named admins count rematches from 0. Fields: design/FIELD_DEFAULTS.yaml exceptions.trainers unless the map default fits.
+# ------------------------------------------------------------------------------
+STORY = []  # (note, ttype, name, base_version, cap, lose, mons, nobag)
+def S(note, tt, nm, v, cap, lose, mons, nobag=False):
+    STORY.append((note, tt, nm, v, cap, lose, mons, nobag))
+
+# --- Ch7: Brother Wick, drowned chapel at the Weeping Fen (HOLLOW_CATHEDRAL) --------------------------------------
+S("Ch7 - Brother Wick, drowned chapel (field :HOLLOW_CATHEDRAL). He consecrates it: three holy acts (Heal Bell, Dazzling Gleam) "
+  "make hymns x1.3 and holy moves x1.5, and weaken the Ghosts the player brought for a Ghost fight.",
+  "HOLLOW_WICK", "Wick", 0, 35, "Nobody bleeds three hundred years from a gift, child. ...Sit. I'll tell you the rest.", [
+    # The chapel bell: Heal Bell is a holy act (it counts even with nothing to cure); Echoed Voice is a hymn.
+    P("CHIMECHO", 33, "LEVITATE", "SITRUSBERRY", "CALM", "HEALBELL,ECHOEDVOICE,EXTRASENSORY,YAWN", "SD",
+      casual={"moves": "HEALBELL,ECHOEDVOICE,CONFUSION,YAWN"}, hard={"moves": "HEALBELL,HYPERVOICE,EXTRASENSORY,YAWN"}),
+    P("BRONZONG", 33, "LEVITATE", "SITRUSBERRY", "RELAXED", "GYROBALL,EXTRASENSORY,CONFUSERAY,SAFEGUARD", "PD",
+      only="nocasual", hard={"moves": "GYROBALL,EXTRASENSORY,CONFUSERAY,TRICKROOM"}, tr=True),
+    # Dazzling Gleam is the third holy act and is x1.5 x1.2 once the nave is consecrated.
+    P("MUSHARNA", 34, "FOREWARN", "SITRUSBERRY", "BOLD", "DAZZLINGGLEAM,PSYBEAM,MOONLIGHT,YAWN", "BPD"),
+    P("GARDEVOIR", 34, "SYNCHRONIZE", "SITRUSBERRY", "MODEST", "DAZZLINGGLEAM,PSYCHIC,HEALPULSE,CALMMIND", "S", only="hard"),
+    # "Sexton": Night Shade is x1.5 in the haunted nave, Will-O-Wisp never misses. He fights to hold, not to win.
+    P("DUSCLOPS", 35, "PRESSURE", "EVIOLITE", "IMPISH", "NIGHTSHADE,SHADOWSNEAK,WILLOWISP,PAINSPLIT", "BPD",
+      nick="Sexton", casual={"item": "SITRUSBERRY"}),
+])
+# --- Ch8: Dr. Quent, Cindervault caldera (VOLCANIC -> he damps it) ------------------------------------------------
+S("Ch8 - Dr. Percival Quent at the caldera taps (field :VOLCANIC). Transition play: his Rain Dances are the 'dampers' - rain "
+  "quenches the field to Cinderglass at once, where rain-form Castform rides the geysers and Thunder never misses.",
+  "MERIDIAN_QUENT", "Percival", 0, 39, "Fascinating! You broke it. Do you know what that costs per hour?", [
+    # Heatproof is safe from the lava rain and the geysers.
+    P("BRONZONG", 37, "HEATPROOF", "DAMPROCK", "RELAXED", "RAINDANCE,GYROBALL,EXTRASENSORY,CONFUSERAY", "PD", tr=True,
+      casual={"item": "SITRUSBERRY"}),
+    P("MAGNETON", 37, "STURDY", "EVIOLITE", "MODEST", "THUNDER,FLASHCANNON,THUNDERWAVE,RAINDANCE", "BS",
+      casual={"moves": "SPARK,FLASHCANNON,THUNDERWAVE,SCREECH", "item": "SITRUSBERRY"}),
+    # The weather probe: Forecast makes it a Water type in rain (it rides the Cinderglass geysers: +1 Speed).
+    P("CASTFORM", 38, "FORECAST", "SITRUSBERRY", "MODEST", "RAINDANCE,WEATHERBALL,THUNDER,ICEBEAM", "S", only="nocasual"),
+    P("ROTOM", 38, "LEVITATE", "SITRUSBERRY", "MODEST", "HYDROPUMP,THUNDER,RAINDANCE,HEX", "S", form=2, only="hard"),
+    P("PORYGON2", 39, "DOWNLOAD", "EVIOLITE", "MODEST", "TRIATTACK,ICEBEAM,THUNDERBOLT,RECOVER", "BS",
+      nick="Probe", casual={"item": "SITRUSBERRY", "moves": "TRIATTACK,ICEBEAM,THUNDERBOLT,CONVERSION"}),
+])
+# --- Ch9: Ironreach. Tag battle Sable + Hammer Captain Brisk, then the Mourner -----------------------------------
+S("Ch9 - Sable, tag DOUBLE with Hammer Captain Brisk vs player + Kestrel (field :COLOSSEUM). Transition play: the Hammer "
+  "brings the roof down - three quakes drop the pit into a Cave (x1.3 strike), where Ground moves reach Kestrel's Staraptor.",
+  "HOLLOW_SABLE", "Sable", 0, 43, "Light for everyone, right? ...Oops. Wrong mask.", [
+    P("SKUNTANK", 41, "AFTERMATH", "SITRUSBERRY", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,PROTECT", "BA"),
+    # Dry Skin; Drain Punch is a punch (x1.2) and Fake Out opens the double.
+    P("TOXICROAK", 42, "DRYSKIN", "BLACKSLUDGE", "JOLLY", "FAKEOUT,DRAINPUNCH,SUCKERPUNCH,BULLDOZE", "A",
+      hard={"moves": "FAKEOUT,DRAINPUNCH,SUCKERPUNCH,EARTHQUAKE", "item": "LIFEORB"}),
+    # Battle Armor: +1 Defense on entry here. Fell Stinger is x2 in the pit and a knockout feeds the crowd too.
+    P("DRAPION", 43, "BATTLEARMOR", "SCOPELENS", "ADAMANT", "KNOCKOFF,CROSSPOISON,EARTHQUAKE,FELLSTINGER", "A",
+      casual={"moves": "KNOCKOFF,CROSSPOISON,BULLDOZE,PROTECT"}),
+])
+S("Ch9 - Hammer Captain Brisk, Sable's tag partner (field :COLOSSEUM). Bulldoze counts toward the cave-in and slows both foes.",
+  "HOLLOW_ADMIN", "Brisk", 0, 43, "Until they listen! ...They're not listening.", [
+    P("MIGHTYENA", 40, "MOXIE", "SITRUSBERRY", "JOLLY", "CRUNCH,FIREFANG,SUCKERPUNCH,SNARL", "A"),
+    P("BANETTE", 41, "CURSEDBODY", "SPELLTAG", "ADAMANT", "SHADOWCLAW,KNOCKOFF,WILLOWISP,SHADOWSNEAK", "A", only="nocasual"),
+    P("SCOLIPEDE", 42, "POISONPOINT", "SITRUSBERRY", "JOLLY", "POISONTAIL,BULLDOZE,ROCKSLIDE,PROTECT", "A",
+      hard={"ab": "SPEEDBOOST", "moves": "POISONJAB,BULLDOZE,MEGAHORN,PROTECT"}),
+])
+S("Ch9 - the Mourner in the reliquary (field :COLOSSEUM). He fights defensively ('get BACK'): Protect and Spiky Shield also "
+  "calm a Frenzy. Trevenant is the multi-bar boss (Prismfall Bosses config still to be written: :MOURNER_TREVENANT).",
+  "HOLLOW_MOURNER", "Mourner", 0, 43, "Not now - you don't understand - ...Juno. Don't look at me like that.", [
+    P("SHIFTRY", 41, "CHLOROPHYLL", "SITRUSBERRY", "JOLLY", "FAKEOUT,LEAFBLADE,SUCKERPUNCH,PROTECT", "A",
+      hard={"item": "FOCUSSASH", "moves": "FAKEOUT,LEAFBLADE,SUCKERPUNCH,TAILWIND"}),
+    # Payback x1.3 in the pit (he hits back, never first); Spiky Shield is his wall.
+    P("CACTURNE", 41, "WATERABSORB", "SITRUSBERRY", "ADAMANT", "SPIKYSHIELD,PAYBACK,SEEDBOMB,LEECHSEED", "BA", only="nocasual"),
+    P("GOURGEIST", 42, "FRISK", "LEFTOVERS", "IMPISH", "SEEDBOMB,SHADOWSNEAK,WILLOWISP,LEECHSEED", "BPD", only="hard"),
+    # The Phantump he showed Juno in Ch1. Harvest regrows the Sitrus; the same Pokemon is Rowan's Festival ace.
+    P("TREVENANT", 43, "HARVEST", "SITRUSBERRY", "IMPISH", "HORNLEECH,SHADOWCLAW,WILLOWISP,PROTECT", "BPD",
+      nick="Glasswood", casual={"ab": "NATURALCURE"}, hard={"moves": "HORNLEECH,PHANTOMFORCE,WILLOWISP,PROTECT"}),
+])
+# --- Ch12-17: the Directorate, Kroll unmasked, Quent again -------------------------------------------------------
+S("Ch12 - Director Marchetti on Skyreach's sorting-hall catwalks (field :STORMFRONT). Electric x1.3 for the guard dogs; "
+  "Thunder never misses; Tailwind lasts 6 turns. No transition play: she holds a position, she doesn't remake it.",
+  "MERIDIAN_MARCHETTI", "Helene", 0, 55, "You're not under arrest. You're under protection. Learn the difference.", [
+    P("MABOSSTIFF", 53, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,WILDCHARGE,PLAYROUGH,ROAR", "BA"),
+    # Lightning Rod takes the Electric answer aimed at Corviknight.
+    P("MANECTRIC", 54, "LIGHTNINGROD", "MAGNET", "TIMID", "THUNDER,FLAMETHROWER,SNARL,VOLTSWITCH", "S", only="nocasual"),
+    P("ARCANINE", 54, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,WILDCHARGE,EXTREMESPEED,CRUNCH", "A",
+      casual={"moves": "FIREFANG,WILDCHARGE,EXTREMESPEED,CRUNCH"}),
+    P("MAGNEZONE", 54, "STURDY", "AIRBALLOON", "MODEST", "THUNDER,FLASHCANNON,VOLTSWITCH,THUNDERWAVE", "BS", only="hard"),
+    P("CORVIKNIGHT", 55, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,IRONHEAD,TAILWIND,ROOST", "BPD"),
+])
+S("Ch13 - Sabine Kroll, unmasked at the Lucent tribunal (field :MINDSCAPE). Stage play: three Dark attacks curdle Ilsa's "
+  "dream into a Nightmare (Dark x1.5, her Dark types heal 1/16 a turn, Fairy x0.8).",
+  "MERIDIAN_KROLL", "Sabine", 0, 59, "Special Accounts thanks you for your testimony.", [
+    P("SKUNTANK", 57, "AFTERMATH", "BLACKSLUDGE", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT", "BA", only="nocasual"),
+    P("TOXICROAK", 57, "DRYSKIN", "LIFEORB", "JOLLY", "DRAINPUNCH,GUNKSHOT,SUCKERPUNCH,SWORDSDANCE", "A",
+      casual={"item": "BLACKSLUDGE"}),
+    P("CRAWDAUNT", 58, "ADAPTABILITY", "SITRUSBERRY", "ADAMANT", "CRABHAMMER,KNOCKOFF,AQUAJET,SWORDSDANCE", "A", only="hard"),
+    P("HONCHKROW", 58, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,ROOST", "A"),
+    P("DRAPION", 59, "SNIPER", "BLACKGLASSES", "JOLLY", "KNOCKOFF,CROSSPOISON,EARTHQUAKE,SWORDSDANCE", "A",
+      casual={"moves": "KNOCKOFF,CROSSPOISON,EARTHQUAKE,TOXICSPIKES"}),
+])
+S("Ch14 - Marchetti in the Darkglass gallery (field :DARK_CRYSTAL; she shot the lamps out). Dark x1.5, Dark contact moves +1 "
+  "crit, the player aims at x0.9. Transition play: if the cavern is relit, one Dark Pulse darkens it again (x1.3 strike).",
+  "MERIDIAN_MARCHETTI", "Helene", 1, 63, "Lights. ...Someone get the lights.", [
+    # Magical Seed in the dark: +1 Atk, +1 Sp. Atk.
+    P("HOUNDOOM", 61, "FLASHFIRE", "MAGICALSEED", "TIMID", "DARKPULSE,FLAMETHROWER,SLUDGEBOMB,NASTYPLOT", "S",
+      only="nocasual"),
+    P("ARCANINE", 62, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,CRUNCH,EXTREMESPEED,WILDCHARGE", "A"),
+    P("KINGAMBIT", 62, "DEFIANT", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE", "HA", only="hard"),
+    P("CORVIKNIGHT", 62, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,BODYPRESS,BULKUP,ROOST", "BPD"),
+    P("MABOSSTIFF", 63, "INTIMIDATE", "BLACKGLASSES", "ADAMANT", "CRUNCH,JAWLOCK,PLAYROUGH,PSYCHICFANGS", "BA",
+      casual={"item": "SITRUSBERRY"}),
+])
+S("Ch16 - Marchetti, tag DOUBLE with Quent v1 vs player + Rook on the casting floor (field :FACTORY). Fire x1.2 softens "
+  "Steel plating; Iron Head x1.5.",
+  "MERIDIAN_MARCHETTI", "Helene", 2, 71, "Doctor, if you break one more thing in here -", [
+    P("ARCANINE", 69, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,WILDCHARGE,EXTREMESPEED,PROTECT", "A"),
+    P("CORVIKNIGHT", 70, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,IRONHEAD,TAILWIND,ROOST", "BPD"),
+    P("MABOSSTIFF", 71, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,WILDCHARGE,PROTECT", "BA"),
+])
+S("Ch16 - Dr. Quent, Marchetti's tag partner (field :FACTORY). Transition play both ways, for the data: Bronzong's Explosion "
+  "wrecks the floor (-> Scrapyard, x1.3 on the Factory and x1.3 strike); three of Porygon-Z's Discharges restart the line.",
+  "MERIDIAN_QUENT", "Percival", 1, 71, "Data! Glorious data! ...Why is Helene looking at me like that?", [
+    P("BRONZONG", 69, "HEATPROOF", "SITRUSBERRY", "RELAXED", "GYROBALL,TRICKROOM,PROTECT,EXPLOSION", "PD", tr=True,
+      casual={"moves": "GYROBALL,TRICKROOM,PROTECT,EXTRASENSORY"}),
+    # Magnet Pull: +1 Defense on entry in the Scrapyard. Discharge spares a Levitating / Ground-immune partner only.
+    P("MAGNEZONE", 70, "MAGNETPULL", "SITRUSBERRY", "MODEST", "THUNDERBOLT,FLASHCANNON,PROTECT,VOLTSWITCH", "BS"),
+    # Download: +1 Speed on entry in the Factory. Discharge is a charging move.
+    P("PORYGONZ", 71, "DOWNLOAD", "LIFEORB", "TIMID", "TRIATTACK,DISCHARGE,ICEBEAM,PROTECT", "S",
+      casual={"item": "SITRUSBERRY"}),
+])
+S("Ch17 - Kroll holds the Sun Court in drowned Aurelia (field :CAVE). The Hammer's play again: one quake cracks the "
+  "ceiling, the next brings it down on everyone (1/8, Rock-scaled); Rock Slide is x1.5 here.",
+  "MERIDIAN_KROLL", "Sabine", 1, 75, "Nothing personal. The cradle's already on the lift.", [
+    P("SKUNTANK", 73, "AFTERMATH", "BLACKSLUDGE", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,EXPLOSION", "BA",
+      casual={"moves": "NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT"}),
+    P("TOXICROAK", 73, "DRYSKIN", "LIFEORB", "JOLLY", "DRAINPUNCH,GUNKSHOT,SUCKERPUNCH,EARTHQUAKE", "A", only="nocasual"),
+    P("HONCHKROW", 74, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,ROOST", "A"),
+    P("OBSTAGOON", 74, "GUTS", "FLAMEORB", "ADAMANT", "OBSTRUCT,KNOCKOFF,FACADE,CLOSECOMBAT", "A", casual={"item": "SITRUSBERRY"}),
+    P("KINGAMBIT", 74, "SUPREMEOVERLORD", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE", "HA", only="hard"),
+    P("DRAPION", 75, "BATTLEARMOR", "SCOPELENS", "JOLLY", "KNOCKOFF,CROSSPOISON,EARTHQUAKE,ROCKSLIDE", "A"),
+])
+S("Ch17 (if Kroll was beaten publicly in Ch13) - Quent holds the Sun Court instead (field :CAVE). Rock x1.5 for Rock Slide; "
+  "Metal Sound is x1.3 accurate in the echo. No transition play.",
+  "MERIDIAN_QUENT", "Percival", 2, 75, "Oh, bother. Well. It was a very good reading.", [
+    P("BRONZONG", 73, "LEVITATE", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,ROCKSLIDE,METALSOUND", "PD", tr=True),
+    P("MAGNEZONE", 73, "STURDY", "AIRBALLOON", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,METALSOUND", "BS", only="nocasual"),
+    P("METAGROSS", 74, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA"),
+    P("ROTOM", 74, "LEVITATE", "LEFTOVERS", "MODEST", "HYDROPUMP,THUNDERBOLT,WILLOWISP,VOLTSWITCH", "S", form=2, only="hard"),
+    P("PORYGONZ", 75, "ADAPTABILITY", "LIFEORB", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,THUNDERBOLT", "S",
+      casual={"item": "SITRUSBERRY"}),
+])
+
+# --- THE EEVEE OCTAVE --------------------------------------------------------------------------------------------
+# Eight Glassfall orphans of the Prism Choir, each raised beside a different Imprint; in-world an Eevee evolves by the
+# Imprint it grows up in, so every singer's partner is at home on exactly one field. Leader: Vesper Lindqvist.
+#   Ch3  (Saltmere, backstage): optional DOUBLE, Vesper's Eevee + Carol's Sylveon on the Grand Stage.
+#   Ch13 (Lucent cloister): optional DOUBLE vs Vesper alone, on the Mindscape.
+#   Ch20 (Crownhaven Choir gardens): the gauntlet. Singers 1-8, one Eeveelution each, each on its own field
+#        (TRAINER_FIELDS by version), then Vesper (version 2): the field follows whichever Eeveelution is out
+#        (plugins/Prismfall Field Effects/013_FieldEffects_TrainerPlays.rb, ENTRY_FIELDS).
+S("Ch3 - Vesper, backstage at the Lantern Theatre, DOUBLE with Chorister Carol (field :GRAND_STAGE). Two singers: "
+  "sound moves raise the applause. Her Eevee 'hasn't decided which Imprint it belongs to yet'.",
+  "OCTAVE_VESPER", "Vesper", 0, 19, "It hasn't decided yet. ...Neither have you, I think.", [
+    P("EEVEE", 18, "ADAPTABILITY", "ORANBERRY", "JOLLY", "SWIFT,QUICKATTACK,BABYDOLLEYES,HELPINGHAND", "A", nick="Amen",
+      hard={"item": "EVIOLITE"}),
+])
+S("Ch3 - Chorister Carol, Vesper's partner in the Saltmere double (field :GRAND_STAGE). Disarming Voice is a spread sound move.",
+  "OCTAVE_SINGER", "Carol", 0, 19, "Oh! You sing back. Most people don't.", [
+    P("SYLVEON", 18, "CUTECHARM", "ORANBERRY", "MODEST", "DISARMINGVOICE,SWIFT,BABYDOLLEYES,QUICKATTACK", "BS"),
+])
+S("Ch13 - Vesper in the Lucent Athenaeum cloister, optional DOUBLE (field :MINDSCAPE). Espeon is at home; Amen's Hyper Voice "
+  "and Sylveon's Pixilate Hyper Voice are spread sound moves (x1.2 here), and the third one cracks the dream to Inverse.",
+  "OCTAVE_VESPER", "Vesper", 1, 59, "The Choir says we were born lucky. I don't feel lucky.", [
+    P("ESPEON", 56, "MAGICBOUNCE", "TWISTEDSPOON", "TIMID", "PSYCHIC,DAZZLINGGLEAM,SHADOWBALL,PROTECT", "S",
+      casual={"ab": "SYNCHRONIZE"}),
+    P("UMBREON", 56, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,SNARL,HELPINGHAND,WISH", "SD", only="nocasual"),
+    P("SYLVEON", 57, "PIXILATE", "SITRUSBERRY", "MODEST", "HYPERVOICE,MYSTICALFIRE,CALMMIND,PROTECT", "BS",
+      casual={"ab": "CUTECHARM", "moves": "MOONBLAST,MYSTICALFIRE,CALMMIND,PROTECT"}),
+    P("EEVEE", 58, "ADAPTABILITY", "EVIOLITE", "JOLLY", "HYPERVOICE,DOUBLEEDGE,QUICKATTACK,HELPINGHAND", "A", nick="Amen"),
+])
+def octave_singer(v, name, field, lose, mon):
+    S("Ch20 gauntlet %d/8 - Chorister %s (field :%s)" % (v, name, field), "OCTAVE_SINGER", name, v, 90, lose, [mon])
+# 1 Water: Water Absorb sips 1/16 a turn here; Elemental Seed = +1 Speed and Aqua Ring; Dive -> Underwater (x1.3 strike),
+#   where everything that isn't a Water type moves at half Speed.
+octave_singer(1, "Aria", "WATER_SURFACE", "The tide took the note. That's all right.",
+    P("VAPOREON", 90, "WATERABSORB", "ELEMENTALSEED", "BOLD", "SCALD,ICEBEAM,DIVE,WISH", "BPD", casual={"item": "LEFTOVERS"}))
+# 2 Electric: Volt Absorb starts charged and heals every turn on the grid; Synthetic Seed = +1 Sp. Atk and Magnet Rise
+#   (no Ground answer); Shadow Ball is the hedge for a Blackout (Ghost x1.2) and Discharge reboots it.
+octave_singer(2, "Cadence", "NEON_GRID", "Off the beat. Mine, not yours.",
+    P("JOLTEON", 90, "VOLTABSORB", "SYNTHETICSEED", "TIMID", "THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE", "S",
+      casual={"item": "MAGNET"}))
+# 3 Fire: Flash Fire starts lit; Lava Plume primes an eruption (+1 for Flareon, lava for the foe); Elemental Seed =
+#   +1 Atk / Sp. Atk / Speed and a burn that can't touch a Fire type.
+octave_singer(3, "Forte", "VOLCANIC", "Too loud? ...No. Just right, and you were louder.",
+    P("FLAREON", 90, "FLASHFIRE", "ELEMENTALSEED", "ADAMANT", "FLAREBLITZ,LAVAPLUME,SUPERPOWER,QUICKATTACK", "A",
+      casual={"item": "CHARCOAL"}))
+# 4 Ice: Ice Body heals without hail; Elemental Seed = +2 Speed (for 1/8 HP); Ice Shard slides (+1 Speed) and reseals a crack.
+octave_singer(4, "Lento", "FROZEN_LAKE", "Slowly, slowly. You got there first anyway.",
+    P("GLACEON", 90, "ICEBODY", "ELEMENTALSEED", "MODEST", "ICEBEAM,FREEZEDRY,ICESHARD,SHADOWBALL", "S",
+      casual={"item": "NEVERMELTICE"}))
+# 5 Grass: the garden starts at stage 3 and the Telluric Seed makes it 4 on entry, which switches Chlorophyll on.
+#   No non-Grass blades (they would cut her own garden back).
+octave_singer(5, "Lyra", "FLOWER_GARDEN", "It bloomed for you. It doesn't do that for everyone.",
+    P("LEAFEON", 90, "CHLOROPHYLL", "TELLURICSEED", "JOLLY", "LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS", "A",
+      casual={"ab": "LEAFGUARD", "item": "MIRACLESEED"}))
+# 6 Psychic: Magic Bounce gets +1 Sp. Def on the Inverse side of the dream; Hyper Voice x3 cracks the Mindscape into it.
+octave_singer(6, "Sona", "MINDSCAPE", "I heard that coming. I still couldn't stop it.",
+    P("ESPEON", 90, "MAGICBOUNCE", "TWISTEDSPOON", "TIMID", "PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND", "S",
+      casual={"ab": "SYNCHRONIZE"}))
+# 7 Dark: Magical Seed under the New Moon = +1 accuracy, Focus Energy and an instant Abyss; Dark Pulse x1.5 x1.4 there.
+#   Wish, not Moonlight (Moonlight fails).
+octave_singer(7, "Noct", "NEW_MOON", "...Good night.",
+    P("UMBREON", 90, "INNERFOCUS", "MAGICALSEED", "CALM", "DARKPULSE,FOULPLAY,SNARL,WISH", "SD",
+      casual={"item": "LEFTOVERS"}))
+# 8 Fairy: Draining Kiss x2, Mystical Fire x1.5, Magical Seed = +1 Sp. Atk, +1 Sp. Def.
+octave_singer(8, "Carol", "FAIRY_TALE", "And they all lived. That's the whole ending. They all lived.",
+    P("SYLVEON", 90, "PIXILATE", "MAGICALSEED", "MODEST", "HYPERVOICE,DRAININGKISS,MYSTICALFIRE,CALMMIND", "BS",
+      casual={"ab": "CUTECHARM", "item": "PIXIEPLATE", "moves": "MOONBLAST,DRAININGKISS,MYSTICALFIRE,CALMMIND"}))
+S("Ch20 gauntlet finale - Vesper (starts on :GRAND_STAGE; the field becomes each Eeveelution's home as it enters: Water Surface, "
+  "Neon Grid, Volcanic, Mindscape, New Moon, Fairy Tale). Six fields in one fight, so no held seeds: abilities carry it.",
+  "OCTAVE_VESPER", "Vesper", 2, 92, "We were all born the year the Crown broke. I think we're just... what was left.", [
+    P("VAPOREON", 90, "WATERABSORB", "LEFTOVERS", "BOLD", "SCALD,ICEBEAM,WISH,PROTECT", "BPD"),
+    P("JOLTEON", 90, "VOLTABSORB", "LIFEORB", "TIMID", "THUNDERBOLT,SHADOWBALL,VOLTSWITCH,HYPERVOICE", "S",
+      casual={"item": "MAGNET"}),
+    P("FLAREON", 91, "FLASHFIRE", "CHOICEBAND", "ADAMANT", "FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME", "A",
+      casual={"item": "CHARCOAL"}),
+    P("UMBREON", 91, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,DARKPULSE,WISH,YAWN", "SD"),
+    P("ESPEON", 91, "MAGICBOUNCE", "LIFEORB", "TIMID", "PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND", "S",
+      casual={"ab": "SYNCHRONIZE", "item": "TWISTEDSPOON"}),
+    P("SYLVEON", 92, "PIXILATE", "LEFTOVERS", "MODEST", "HYPERVOICE,DRAININGKISS,MYSTICALFIRE,CALMMIND", "BS",
+      nick="Vespers", casual={"ab": "CUTECHARM", "moves": "MOONBLAST,DRAININGKISS,MYSTICALFIRE,CALMMIND"}),
+])
+
+# --- THE ASHKAAR-ISENMAR WAR (Ch19 gauntlets; map defaults: 924/925 Cinderglass, 927 Volcanic, 922/926 Frozen Lake) ---
+# Generic "Soldier" / "Captain", version = encounter number like the grunts. No bag items.
+def soldier(tt, nm, v, lose, mons, note):
+    S("Ch19 war - " + note, tt, nm, v, 85, lose, mons, nobag=True)
+# Ashkaar (Fire / Dragon / Rock). On Cinderglass: Rock x1.3 and obsidian edges, Magma Armor +1 Def, Steam Engine and
+# Sand Rush work, Fire and Water types ride the geysers. Three Lava Plumes re-melt it to Volcanic.
+soldier("ASHKAAR_SOLDIER_M", "Soldier", 0, "The Dominar will hear of this!", [
+    P("MAGCARGO", 79, "MAGMAARMOR", "SITRUSBERRY", "BOLD", "LAVAPLUME,ANCIENTPOWER,EARTHPOWER,RECOVER", "BPD"),
+    P("DRUDDIGON", 80, "ROUGHSKIN", "ROCKYHELMET", "ADAMANT", "DRAGONCLAW,ROCKSLIDE,SUPERPOWER,GLARE", "HA", only="nocasual"),
+], "Ashkaar siege line (map 924, Cinderglass)")
+soldier("ASHKAAR_SOLDIER_F", "Soldier", 0, "Hold the line - hold - oh, forget it.", [
+    P("NINETALES", 79, "DROUGHT", "HEATROCK", "TIMID", "FLAMETHROWER,SOLARBEAM,WILLOWISP,NASTYPLOT", "S"),
+    P("FLYGON", 80, "LEVITATE", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,EARTHQUAKE,UTURN", "A", only="nocasual"),
+], "Ashkaar siege line (map 924, Cinderglass)")
+soldier("ASHKAAR_SOLDIER_M", "Soldier", 1, "Tell them we burned bright.", [
+    P("CAMERUPT", 80, "MAGMAARMOR", "SITRUSBERRY", "QUIET", "LAVAPLUME,EARTHPOWER,ROCKSLIDE,YAWN", "BS"),
+    P("TYRANTRUM", 81, "ROCKHEAD", "SITRUSBERRY", "ADAMANT", "HEADSMASH,DRAGONCLAW,EARTHQUAKE,DRAGONDANCE", "A", only="nocasual"),
+], "Cinder Cape Warfort (map 927, Volcanic)")
+soldier("ASHKAAR_SOLDIER_F", "Soldier", 1, "My wing's still in the air. You're not done.", [
+    P("TALONFLAME", 80, "FLAMEBODY", "SHARPBEAK", "JOLLY", "BRAVEBIRD,FLAREBLITZ,UTURN,ROOST", "A"),
+    P("TURTONATOR", 81, "SHELLARMOR", "SITRUSBERRY", "QUIET", "SHELLTRAP,DRAGONPULSE,FLAMETHROWER,SHELLSMASH", "BS", only="nocasual"),
+], "Cinder Cape Warfort (map 927, Volcanic)")
+soldier("ASHKAAR_OFFICER", "Captain", 0, "Dragons bow to no Accord. ...I'm not a dragon. Go.", [
+    # Drought lasts 8 turns on Volcanic; Lava Plume primes eruptions there and re-melts Cinderglass.
+    P("TORKOAL", 82, "DROUGHT", "SITRUSBERRY", "BOLD", "LAVAPLUME,EARTHPOWER,SOLARBEAM,WILLOWISP", "PD"),
+    P("COALOSSAL", 82, "STEAMENGINE", "SITRUSBERRY", "BRAVE", "HEATCRASH,STONEEDGE,TARSHOT,ROCKPOLISH", "HA"),
+    P("ARCANINE", 83, "FLASHFIRE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,WILDCHARGE,EXTREMESPEED,CLOSECOMBAT", "A", only="nocasual"),
+    # Stone Edge is x1.3 x1.3 on obsidian; Ground x1.2.
+    P("GARCHOMP", 84, "ROUGHSKIN", "LUMBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,EARTHQUAKE,SWORDSDANCE", "A",
+      casual={"moves": "DRAGONCLAW,STONEEDGE,EARTHQUAKE,SANDSTORM"}),
+], "Ashkaar siege camp officer (map 924, Cinderglass)")
+# Isenmar (Water / Ice). On the Frozen Lake: Ice x1.5, Slush Rush and Ice Body without hail, Thick Fat +1 Def on entry;
+# heavy blows crack the ice to open water, which suits their Water types.
+soldier("ISENMAR_SOLDIER_M", "Soldier", 0, "Skaldfast stands. I don't, apparently.", [
+    P("WALREIN", 79, "ICEBODY", "LEFTOVERS", "MODEST", "BLIZZARD,SURF,ENCORE,PROTECT", "BS"),
+    P("CRABOMINABLE", 80, "IRONFIST", "SITRUSBERRY", "ADAMANT", "ICEHAMMER,CLOSECOMBAT,ICEPUNCH,THUNDERPUNCH", "HA", only="nocasual"),
+], "Skaldfast harbour (map 922, Frozen Lake)")
+soldier("ISENMAR_SOLDIER_F", "Soldier", 0, "The whale's awake and I lose to you. Some war.", [
+    P("FROSLASS", 79, "CURSEDBODY", "SITRUSBERRY", "TIMID", "ICEBEAM,SHADOWBALL,ICYWIND,DESTINYBOND", "S"),
+    P("DEWGONG", 80, "THICKFAT", "SITRUSBERRY", "CALM", "SURF,ICEBEAM,ICESHARD,ENCORE", "SD", only="nocasual"),
+], "Skaldfast harbour (map 922, Frozen Lake)")
+soldier("ISENMAR_SOLDIER_M", "Soldier", 1, "Ice remembers. So will I.", [
+    P("BEARTIC", 80, "SLUSHRUSH", "SITRUSBERRY", "ADAMANT", "ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE", "A"),
+    P("AVALUGG", 81, "STURDY", "ROCKYHELMET", "IMPISH", "AVALANCHE,BODYPRESS,RAPIDSPIN,RECOVER", "BPD", only="nocasual"),
+], "The Shattered Ice (map 926, Frozen Lake)")
+soldier("ISENMAR_SOLDIER_F", "Soldier", 1, "Fine. Walk. Everyone walks through us lately.", [
+    P("GLALIE", 80, "ICEBODY", "SITRUSBERRY", "JOLLY", "ICICLECRASH,CRUNCH,ICESHARD,SPIKES", "A"),
+    P("LAPRAS", 81, "WATERABSORB", "SITRUSBERRY", "MODEST", "SURF,FREEZEDRY,THUNDERBOLT,ICESHARD", "BS", only="nocasual"),
+], "The Shattered Ice (map 926, Frozen Lake)")
+soldier("ISENMAR_OFFICER", "Captain", 0, "Tell the Thane the line held as long as it could.", [
+    # Snow Warning: hail lasts 8 turns here; Aurora Veil needs no hail on this field.
+    P("ABOMASNOW", 82, "SNOWWARNING", "SITRUSBERRY", "QUIET", "BLIZZARD,GIGADRAIN,ICESHARD,AURORAVEIL", "BS"),
+    P("LAPRAS", 83, "WATERABSORB", "LEFTOVERS", "MODEST", "SURF,FREEZEDRY,THUNDERBOLT,ICESHARD", "BS"),
+    P("WEAVILE", 83, "PRESSURE", "LIFEORB", "JOLLY", "TRIPLEAXEL,KNOCKOFF,ICESHARD,SWORDSDANCE", "A", only="nocasual"),
+    # Slush Rush without hail; Ice Spinner skates (x1.3); Heavy Slam is the heavy blow that cracks the lake.
+    P("CETITAN", 84, "SLUSHRUSH", "SITRUSBERRY", "ADAMANT", "ICESPINNER,EARTHQUAKE,HEAVYSLAM,ICESHARD", "A",
+      casual={"ab": "THICKFAT"}),
+], "Isenmar ice-fleet officer (map 926, Frozen Lake)")
 
 # ------------------------------------------------------------------------------
 CAMEO_VERSIONS = (0, 9)   # Rev 4: Festival versions 1-3 retired; sidequest versions come from the new CAMEOS.md
@@ -968,6 +1265,10 @@ def main():
     for note, tt, nm, cap, lose, mons in ADMINS:
         OUT.append("# " + note)
         OUT.extend(variants(tt, nm, 0, mons, lose, cap))
+    section("STORY ADMINS, THE MOURNER, THE EEVEE OCTAVE, WAR SOLDIERS")
+    for note, tt, nm, v, cap, lose, mons, nobag in STORY:
+        OUT.append("# " + note)
+        OUT.extend(variants(tt, nm, v, mons, lose, cap, nobag=nobag))
     section("FESTIVAL OF CHAMPIONS - final and hijack")
     for tt, nm, cap, lose, mons in BOSSES:
         OUT.extend(variants(tt, nm, 0, mons, lose, cap))

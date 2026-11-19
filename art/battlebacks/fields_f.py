@@ -147,10 +147,10 @@ def wasteland():
     F = "wasteland"
     bg = art("battlebgswamp2_by_aveontrainer_dd2qjzq.png")
     a = arr(bg)
-    water = (a[..., 2] > a[..., 0] + 14) & (a[..., 2] > a[..., 1] * 0.82) & (a[..., :3].sum(-1) < 360) & (np.arange(288)[:, None] > 110)
+    water = (a[..., 2] > a[..., 0] + 6) & (a[..., 1] > a[..., 2]) & (a[..., :3].sum(-1) < 330) & (np.arange(288)[:, None] > 110)
     bg = gradient_map(bg, [(0, (22, 16, 22)), (0.3, (66, 54, 52)), (0.55, (118, 104, 80)), (0.8, (176, 166, 104)),
                            (1, (240, 232, 160))])
-    b = arr(bg); b[water] = b[water] * 0.35 + np.array([120, 210, 70, 255], np.float32) * 0.65
+    b = arr(bg); b[water] = b[water] * 0.55 + np.array([90, 150, 50, 255], np.float32) * 0.45
     hd = room_from(img(b))
     wm = np.zeros((693, 864), np.float32); wm[150:438, 142:654] = water
     fields_a.plat_pair(hd, (74, 66, 66), (40, 34, 38), outline=(16, 12, 14),
@@ -221,8 +221,9 @@ def new_moon():
 def inverse():
     F = "inverse"
     bg = game_img("rejuvenation", "battlebgDarchlight")
-    a = arr(bg); a[..., :3] = 255 - a[..., :3]
-    neg = hue_shift(img(a), 40)
+    # colours inverted (hue turned 180 degrees) but the light kept: a dark violet world lit by a teal path
+    neg = gradient_map(hue_shift(bg, 180), [(0, (30, 16, 62)), (0.15, (70, 40, 124)), (0.32, (124, 82, 196)),
+                                             (0.5, (80, 196, 214)), (0.7, (206, 250, 240)), (1, (255, 255, 255))])
     hd = room_from(neg)
     over = neg.transpose(Image.FLIP_TOP_BOTTOM).crop((0, 150, 512, 288))      # the same world, hanging overhead
     ext = Image.new("RGBA", (864, 138))
@@ -251,7 +252,7 @@ def inverse():
     extras = {"img001": strip(F, "static", fog_strip(864, 120, (255, 255, 255), seed=161, scale=10, density=0.4,
                                                      alpha=50), 270, speed=2, direction=-1, z=3)}
     return {"profile": {S("art_extras"): extras, S("layers"): layers},
-            "origins": [[REJ, "battlebgDarchlight (painted forest path, colour-inverted and hue-shifted; a flipped "
+            "origins": [[REJ, "battlebgDarchlight (painted forest path, hue-inverted onto a violet/teal ramp; a flipped "
                               "copy hangs overhead)"],
                         [OWN, "negative platforms, floating rocks, static mist"]]}
 

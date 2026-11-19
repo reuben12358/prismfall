@@ -33,6 +33,8 @@ EXTRA33 = {'hs_jonquil_26': 'hb_boat1', 'hs_jonquil_29': 'hb_boat2', 'hs_jonquil
            'tp_stall_13': 'hb_boxes', 'tp_stall_16': 'hb_boxes2', 'tp_barrel_07': 'hb_shed', 'tp_barrel_03': 'hb_cask',
            'tp_barrel_06': 'hb_keg', 'tp_stall_21': 'hb_dyeline', 'tp_stall_01': 'hb_crates4'}
 
+EXTRA33_B = {'hs_jonquil_12': 'hb_wheelhouse', 'p_banner3': 'hb_banner', 'hs_jonquil_34': 'hb_fishstall', 'hs_jonquil_09': 'hb_lamp2'}
+
 
 def sheridan_ramp():
     """Sheridan_2's tree greens, dark -> light (from the 3x4 forest tree, rows 26-29)."""
@@ -158,20 +160,30 @@ def main():
     # harbour and market props from tileset 33 (Ekat's Jonquil pieces, Magiscarf stalls): appended AFTER the drawn
     # pieces so no earlier id moves (map builder 7).  Add new names at the END of EXTRA33 only.
     extra = {}
-    for n in EXTRA33:
-        st = SV[n]; L = np.array(st['layers']); out_l = np.zeros_like(L)
-        for (z, yy, xx), t in np.ndenumerate(L):
-            if t < 384: continue
-            t = int(t)
-            if ('x', t) not in idmap:
-                im = tc.tile(t)
-                if im is None: continue
-                sheet.paste(im, ((k % 8) * 32, (k // 8) * 32))
-                props[k] = (ts33['passages'][t], ts33['priorities'][t], 0); idmap[('x', t)] = k; k += 1
-            out_l[z, yy, xx] = idmap[('x', t)]
-        extra[EXTRA33[n]] = (st['w'], st['h'], out_l.tolist())
-    idmap = {t: i for t, i in idmap.items() if not isinstance(t, tuple)}
+    def add33(t, k):
+        """one tileset-33 tile appended at k (once); returns (index, k)"""
+        if ('x', t) not in idmap:
+            im = tc.tile(t)
+            if im is None: return 0, k
+            sheet.paste(im, ((k % 8) * 32, (k // 8) * 32))
+            props[k] = (ts33['passages'][t], ts33['priorities'][t], 0); idmap[('x', t)] = k; k += 1
+        return idmap[('x', t)], k
+    def add_stamps(table, k):
+        for n in table:
+            st = SV[n]; L = np.array(st['layers']); out_l = np.zeros_like(L)
+            for (z, yy, xx), t in np.ndenumerate(L):
+                if t < 384: continue
+                out_l[z, yy, xx], k = add33(int(t), k)
+            extra[table[n]] = (st['w'], st['h'], out_l.tolist())
+        return k
+    k = add_stamps(EXTRA33, k)
     k = draw_in(rdraw.pieces_late(), k)
+    # third block (after the late pieces): the Dovetail's own deck art (ship_art config `dovetail`, map 109) and deck props
+    k = add_stamps(EXTRA33_B, k)
+    ship_d = json.load(open(os.path.join(HERE, 'data', 'ship_dovetail.json'))); off_d = OFF33['dovetail']['offset']; dove = []
+    for x, y, z, i in ship_d:
+        t, k = add33(off_d + i, k); dove.append([x, y, z, t])
+    idmap = {t: i for t, i in idmap.items() if not isinstance(t, tuple)}
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
@@ -199,6 +211,7 @@ def main():
     for n, (w, h, lay) in extra.items():
         out[n] = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['pf33x', n])
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
+    out['_ship_dovetail'] = {'tiles': [[x, y, z, base + t] for x, y, z, t in dove if t]}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}
     out['_singles'] = {k: base + idmap[v] for k, v in SINGLES.items()}
     json.dump(out, open(os.path.join(HERE, 'data', 'stamps_rjc.json'), 'w'))

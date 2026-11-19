@@ -164,6 +164,30 @@ exceptions:
     - {trainer: LEADER_NYX, versions: [1, 101, 201], field: NEW_MOON, why: "Ruin Gym 16"}
     - {trainer: LEADER_CELESTINE, versions: [1, 101, 201], field: FAIRY_TALE, why: "Ruin Gym 17 (the event turns it INVERSE for her last Pokemon)"}
     - {trainer: LEADER_SIGRUN, versions: [1, 101, 201], field: DRAGONS_DEN, why: "Ruin Gym 18"}
+    # --- round 2: story admins, the Mourner, the Eevee Octave (playbook 6-7). War soldiers use the map defaults (922-927).
+    - {trainer: HOLLOW_WICK, versions: [0, 100, 200], field: HOLLOW_CATHEDRAL, why: "Ch7: the drowned chapel at the edge of the Weeping Fen (map 648 itself is the Bleed); Wick consecrates it"}
+    - {trainer: MERIDIAN_QUENT, versions: [0, 100, 200], field: VOLCANIC, why: "Ch8: Quent at the caldera taps; his Rain Dance damps it to Cinderglass"}
+    - {trainer: HOLLOW_SABLE, versions: [0, 100, 200], field: COLOSSEUM, why: "Ch9: tag battle with Hammer Captain Brisk in the Conclave galleries"}
+    - {trainer: HOLLOW_MOURNER, versions: [0, 100, 200], field: COLOSSEUM, why: "Ch9: the Mourner in the reliquary under the Iron Pit (the event flips it to BLEED afterwards)"}
+    - {trainer: MERIDIAN_MARCHETTI, versions: [0, 100, 200], field: STORMFRONT, why: "Ch12: Skyreach sorting-hall catwalks"}
+    - {trainer: MERIDIAN_KROLL, versions: [0, 100, 200], field: MINDSCAPE, why: "Ch13: Kroll unmasked at the Lucent tribunal"}
+    - {trainer: MERIDIAN_MARCHETTI, versions: [1, 101, 201], field: DARK_CRYSTAL, why: "Ch14: Darkglass gallery after the lamps are shot out"}
+    - {trainer: MERIDIAN_MARCHETTI, versions: [2, 102, 202], field: FACTORY, why: "Ch16: casting-floor tag battle (Marchetti + Quent)"}
+    - {trainer: MERIDIAN_QUENT, versions: [1, 101, 201], field: FACTORY, why: "Ch16: casting-floor tag battle; his Bronzong's Explosion makes it a Scrapyard"}
+    - {trainer: MERIDIAN_KROLL, versions: [1, 101, 201], field: CAVE, why: "Ch17: the Sun Court in drowned Aurelia"}
+    - {trainer: MERIDIAN_QUENT, versions: [2, 102, 202], field: CAVE, why: "Ch17 alternative: Quent holds the Sun Court"}
+    - {trainer: OCTAVE_VESPER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch3: backstage double with Chorister Carol"}
+    - {trainer: OCTAVE_SINGER, versions: [0, 100, 200], field: GRAND_STAGE, why: "Ch3: Carol, Vesper's partner in the Saltmere double"}
+    - {trainer: OCTAVE_VESPER, versions: [1, 101, 201], field: MINDSCAPE, why: "Ch13: Lucent Athenaeum cloister double"}
+    - {trainer: OCTAVE_SINGER, versions: [1, 101, 201], field: WATER_SURFACE, why: "Ch20 Eevee Octave gauntlet 1/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [2, 102, 202], field: NEON_GRID, why: "Ch20 Eevee Octave gauntlet 2/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [3, 103, 203], field: VOLCANIC, why: "Ch20 Eevee Octave gauntlet 3/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [4, 104, 204], field: FROZEN_LAKE, why: "Ch20 Eevee Octave gauntlet 4/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [5, 105, 205], field: FLOWER_GARDEN, stage: 3, why: "Ch20 Eevee Octave gauntlet 5/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [6, 106, 206], field: MINDSCAPE, why: "Ch20 Eevee Octave gauntlet 6/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [7, 107, 207], field: NEW_MOON, why: "Ch20 Eevee Octave gauntlet 7/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_SINGER, versions: [8, 108, 208], field: FAIRY_TALE, why: "Ch20 Eevee Octave gauntlet 8/8: the Imprint this singer's Eeveelution was raised beside"}
+    - {trainer: OCTAVE_VESPER, versions: [2, 102, 202], field: GRAND_STAGE, why: "Ch20 gauntlet finale: starts on the Grand Stage, then follows each Eeveelution (012_FieldEffects_TrainerPlays.rb ENTRY_FIELDS)"}
   scripted:   # set by the event or a helper, not by this file
     gyms: "Prismfall.gym_battle(n) sets each Warden's field from GYMS (Core 003_Badges_Gyms.rb); gym-map defaults below match, so gym trainers fight on the same field"
     bosses: "Prismfall::Bosses set their own field (Zekrom FACTORY, Kyogre FROZEN_LAKE, Arceus PRISM_ARENA, ...); Bleed-zone boss events set BLEED"
