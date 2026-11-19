@@ -54,12 +54,22 @@ module Harness
     end
   end
 
-  # Realistic early-game party: [species, level] list, level-up moves as the game gives them, IV 15, no EVs.
+  # Realistic early-game party: [species, level] list, IV 15, no EVs, HARDY. Moves: what the game teaches by level-up
+  # at that level, minus the pure stat-drop filler a player replaces or never clicks (Growl, Leer, Tail Whip...),
+  # newest first, up to four. No TMs, no held items but one Oran Berry.
+  FILLER = [:GROWL, :LEER, :TAILWHIP, :BABYDOLLEYES, :SANDATTACK, :SMOKESCREEN, :SWEETSCENT, :STRINGSHOT, :SPLASH,
+            :HARDEN, :WITHDRAW, :DEFENSECURL, :CHARM, :PLAYNICE, :HELPINGHAND, :FOCUSENERGY, :CHARGE, :ODORSLEUTH,
+            :CAMOUFLAGE, :SCARYFACE, :SCREECH, :CONFIDE, :COPYCAT, :WORKUP].freeze
   def self.casual_party(list, item_on_first = :ORANBERRY)
     party = list.map do |species, level|
       p = Pokemon.new(species, level)
       GameData::Stat.each_main { |s| p.iv[s.id] = 15 }
       p.nature = :HARDY
+      learned = p.species_data.moves.select { |lv, _m| lv <= level }.map { |_lv, m| m }.uniq.reverse
+      keep = learned.reject { |m| FILLER.include?(m) }.first(4)
+      keep += (learned - keep).first(4 - keep.size) if keep.size < 4
+      p.forget_all_moves
+      keep.reverse.each { |m| p.learn_move(m) }
       p.calc_stats
       p
     end
@@ -101,6 +111,20 @@ end
 
 Harness.new_game_state
 Prismfall.record_starter(:CHARMANDER)
+# Calibration switches for part C: PRISM_NOBAG=1 strips the Warden's bag items, PRISM_NOFIELD=1 fights without a field,
+# PRISM_EARLY_GYMS=1,2 limits the gyms.
+if ENV["PRISM_NOBAG"] == "1"
+  EventHandlers.add(:on_trainer_load, :harness_nobag, proc { |tr| tr.items.clear if tr && tr.respond_to?(:items) })
+end
+EARLY_FIELD = (ENV["PRISM_NOFIELD"] == "1") ? false : true
+# PRISM_PLAYER_SKILL=n: the AI skill that pilots the challenger (default: the player trainer type's, 60 in the base PBS).
+if ENV["PRISM_PLAYER_SKILL"]
+  PLAYER_SKILL = ENV["PRISM_PLAYER_SKILL"].to_i
+  class Player < Trainer
+    def skill_level; PLAYER_SKILL; end
+  end
+end
+EARLY_GYMS  = ENV["PRISM_EARLY_GYMS"]&.split(",")&.map(&:to_i)
 RESULTS = { :wardens => [], :others => [], :early => [], :errors => [] }
 
 def run_one(title, file, seed, level, party, badges: nil, cap: nil, size_check: nil)
@@ -144,9 +168,13 @@ end
 # A. Wardens
 #-------------------------------------------------------------------------------
 WARDEN_PLAYS = {
-  1  => { "Surskit Rain Dance" => proc { |r| used?(r, "Rain Dance") } },
-  2  => { "Fake Out / Encore showpieces" => proc { |r| used?(r, "Fake Out", "Encore") },
+  # SPINE Rev 14: Gym 1 = Dorian (single), Gym 2 = Tamsin (double).
+  1  => { "Chatot's songs (Chatter / Round)" => proc { |r| used?(r, "Chatter", "Round") },
           "applause raised by Dorian" => proc { |r| changed?(r, "GRAND_STAGE:2") || changed?(r, "GRAND_STAGE:3") } },
+  2  => { "Surskit Rain Dance" => proc { |r| used?(r, "Rain Dance") },
+          "Electroweb / String Shot (spread speed control)" => proc { |r| used?(r, "Electroweb", "String Shot") },
+          "Silk Trap used" => proc { |r| used?(r, "Silk Trap") },
+          "Tamsin douses a Wildfire -> Embers" => proc { |r| changed?(r, "WILDFIRE:2") } },
   3  => { "Lucky's Dive -> Underwater" => proc { |r| changed?(r, "UNDERWATER") } },
   4  => { "Charge used" => proc { |r| used?(r, "Charge") },
           "grid rebooted by Rook" => proc { |r| changed?(r, "NEON_GRID:1") } },
@@ -286,23 +314,27 @@ end
 # the cap, the moves the game gives them at that level, IV 15, no EVs, one Oran Berry. The AI plays both sides, with
 # no bag items for the player and no switching for a type edge, so a careful human should do better than this.
 EARLY = {
+  # SPINE Rev 14 route order. Gym 1 (Dorian, single): Ferrow's Landing -> coast -> Saltmere. Gym 2 (Tamsin, DOUBLE):
+  # inland -> Briarwick, with Eevee "Understudy" (gifted after Gym 1). Gym 3 (Marisol): north to Ebbmouth.
   1 => { :cap => 15, :starters => { "Grass starter" => [[:BULBASAUR, 15]], "Fire starter" => [[:CHARMANDER, 15]], "Water starter" => [[:SQUIRTLE, 15]] },
-         :catches => [[:FLETCHLING, 14], [:SHINX, 13], [:LILLIPUP, 13]] },
+         :catches => [[:FLETCHLING, 13], [:SHINX, 12], [:LILLIPUP, 12], [:MACHOP, 12]] },
   2 => { :cap => 19, :starters => { "Grass starter" => [[:IVYSAUR, 19]], "Fire starter" => [[:CHARMELEON, 19]], "Water starter" => [[:WARTORTLE, 19]] },
-         :catches => [[:FLETCHINDER, 18], [:LUXIO, 17], [:HERDIER, 17], [:MANKEY, 17]] },
+         :catches => [[:FLETCHINDER, 18], [:EEVEE, 17], [:LUXIO, 17], [:MANKEY, 17], [:MACHOP, 17]] },
   3 => { :cap => 23, :starters => { "Grass starter" => [[:IVYSAUR, 23]], "Fire starter" => [[:CHARMELEON, 23]], "Water starter" => [[:WARTORTLE, 23]] },
-         :catches => [[:FLETCHINDER, 21], [:LUXIO, 22], [:HERDIER, 21], [:MANKEY, 21], [:LOMBRE, 21]] }
+         :catches => [[:FLETCHINDER, 21], [:LUXIO, 22], [:EEVEE, 21], [:MANKEY, 21], [:LOMBRE, 21], [:SEWADDLE, 20]] }
 }
 EARLY_STARTER_SPECIES = { "Grass starter" => :BULBASAUR, "Fire starter" => :CHARMANDER, "Water starter" => :SQUIRTLE }
 if PARTS.include?("C")
   n = (ENV["PRISM_EARLY_SEEDS"] || "20").to_i
   EARLY.each do |gym, spec|
+    next if EARLY_GYMS && !EARLY_GYMS.include?(gym)
     spec[:starters].each do |sname, starter|
       runs = (1..n).map do |s|
-        list = starter + spec[:catches].rotate(s % spec[:catches].size)
+        keep = { 1 => 3, 2 => 4, 3 => 5 }[gym]   # 4 / 5 / 6 Pokemon: what a player has caught by then
+        list = starter + spec[:catches].rotate(s % spec[:catches].size).first(keep)
         list = list.rotate(s % 2)   # the starter leads half the time
         run_one("Gym #{gym} realistic (#{sname}) seed #{s}", format("early_gym%d_%s", gym, sname[0, 1].downcase), 9000 + gym * 100 + s,
-                spec[:cap], Harness.casual_party(list), :badges => gym - 1) { Prismfall.gym_battle(gym, :can_lose => true) }
+                spec[:cap], Harness.casual_party(list), :badges => gym - 1) { Prismfall.gym_battle(gym, :can_lose => true, :field => EARLY_FIELD) }
       end
       summarise("Gym #{gym} realistic, #{sname}", runs, {}, RESULTS[:early])
     end

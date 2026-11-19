@@ -29,13 +29,23 @@ STYLES = {
                  end_l=(MI(1281), MI(1289)), end_r=(MI(1282), MI(1290)),
                  floor=[MI(1241), MI(1242), MI(1243)], floor_sh=[MI(1233), MI(1234), MI(1235)], floor2=[MI(1049)], floor2_sh=[MI(1049)],
                  stair=MI(962), pit=CU('warp'), pit_top=CU('warp_top'), pit_bot=CU('warp_bot')),
+    'lobby': dict(void=MG(4508),
+                  edge={'S': MG(4516), 'N': MG(4500), 'E': MG(4509), 'W': MG(4507), 'SE': MG(4502), 'SW': MG(4503), 'NE': MG(4510),
+                        'NW': MG(4511), 'S+E': MG(4517), 'S+W': MG(4515), 'N+E': MG(4501), 'N+W': MG(4499)},
+                  wall_hi=[MG(4630)], wall_lo=[MG(4638)], post_hi=MG(1704), post_lo=MG(1704), post_every=0,
+                  end_l=None, end_r=None, door=((MG(4577), MG(4578), MG(4579)), (MG(4585), MG(4586), MG(4587))),
+                  floor=[MG(4603)], floor_sh=[MG(4595)], floor2=[MG(4603)], floor2_sh=[MG(4595)],
+                  frame=dict(l=MG(4602), r=MG(4604), b=MG(4611), bl=MG(4610), br=MG(4612), tl=MG(4594), tr=MG(4596)),
+                  stair=MG(3151), pit=MG(4508), pit_top=MG(4508), pit_bot=MG(4508)),
     'stage': dict(void=MG(4508),
                   edge={'S': MG(4516), 'N': MG(4500), 'E': MG(4509), 'W': MG(4507), 'SE': MG(4502), 'SW': MG(4503), 'NE': MG(4510),
                         'NW': MG(4511), 'S+E': MG(4517), 'S+W': MG(4515), 'N+E': MG(4501), 'N+W': MG(4499)},
                   wall_hi=[MG(4524)], wall_lo=[MG(4532)], post_hi=MG(4520), post_lo=MG(4528), post_every=6,
                   end_l=None, end_r=None,
                   floor=[MI(1241), MI(1242), MI(1243)], floor_sh=[MI(1233), MI(1234), MI(1235)], floor2=[MG(4702)], floor2_sh=[MG(4694)],
-                  stair=MG(3151), pit=MG(4508), pit_top=MG(4508), pit_bot=MG(4508)),
+                  stair=MG(3151), pit=MG(4508), pit_top=MG(4508), pit_bot=MG(4508),
+                  door=((MG(4521), MG(4522), MG(4523)), (MG(4529), MG(4530), MG(4531))),
+                  lip=MG(4489), seat=(MG(4691), MG(4692)), seat_back=MG(4683)),
 }
 # multi-tile objects: name -> (rows of ids, layer of each row)
 OBJ = {
@@ -52,6 +62,16 @@ OBJ = {
     'door_mi': ([[MI(1016), MI(1277), MI(1018)], [MI(1024), MI(1285), MI(1026)]], [1, 1]),
     'mat_mi': ([[MI(2696), MI(2697), MI(2698)]], [1]),
     'mat_mg': ([[MG(1731), MG(1732), MG(1733)]], [1]),
+    'urn': ([[MG(1710)], [MG(1718)]], [2, 1]),
+    'rope_h': ([[MG(1802), MG(1803), MG(1804)]], [2]),
+    'poster_rain': ([[MG(4704), MG(4705), MG(4706)], [MG(4712), MG(4713), MG(4714)], [MG(4720), MG(4721), MG(4722)]], [1, 1, 1]),
+    'poster_lady': ([[MG(4634), MG(4635), MG(4636)], [MG(4642), MG(4643), MG(4644)], [MG(4650), MG(4651), MG(4652)]], [1, 1, 1]),
+    'poster_green': ([[MG(5184), MG(5185), MG(5186)], [MG(5192), MG(5193), MG(5194)], [MG(5200), MG(5201), MG(5202)]], [1, 1, 1]),
+    'rug_mg': ([[MG(4645)] + [MG(4646)] * 4 + [MG(4647)], [MG(4653)] + [MG(4654)] * 4 + [MG(4655)], [MG(4661)] + [MG(4662)] * 4 + [MG(4663)]], [1, 1, 1]),
+    'couch_l': ([[MG(4656)], [MG(4664)], [MG(4672)]], [2, 2, 2]),
+    'couch_r': ([[MG(4657)], [MG(4665)], [MG(4673)]], [2, 2, 2]),
+    'pillar': ([[MG(1704)]], [0]),
+    'drape_top': ([[MG(4681)]], [1]), 'drape': ([[MG(4689)]], [1]), 'drape_bot': ([[MG(4697)]], [1]),
     'door_mg': ([[MG(4521), MG(4522), MG(4523)], [MG(4529), MG(4530), MG(4531)]], [1, 1]),
 }
 
@@ -98,9 +118,28 @@ class Hall:
                     if st['end_l'] and self.c(x - 1, y) == 'void': t = st['end_l'][1 if lo else 0]
                     if st['end_r'] and self.c(x + 1, y) == 'void': t = st['end_r'][1 if lo else 0]
                     L[0, y, x] = t
+                elif k == 'door':                       # a 3-wide double door set into the bottom two rows of a wall
+                    lo = dn != 'wall' and dn != 'door'
+                    col = sum(1 for dx in (1, 2) if self.c(x - dx, y) == 'door')
+                    L[0, y, x] = st['door'][1 if lo else 0][col]
+                elif k == 'lip':                        # the stage front: a lit edge over the dark under-stage
+                    L[0, y, x] = st['void']; L[1, y, x] = st['lip']
+                elif k == 'seat':
+                    L[0, y, x] = st['floor2'][0]; L[1, y, x] = st['seat'][y % 2]; L[2, y, x] = st['seat_back']
+                    if up != 'seat': L[2, y - 1, x] = st['seat_back']
                 elif k in ('floor', 'floor2'):
-                    sh = up == 'wall'
+                    sh = up in ('wall', 'door', 'lip')
                     L[0, y, x] = self.r.choice(st[k + '_sh'] if sh else st[k])
+                    fr = st.get('frame')
+                    if fr:
+                        lv, rv, bv = self.c(x - 1, y) == 'void', self.c(x + 1, y) == 'void', self.c(x, y + 1) == 'void'
+                        if sh and lv: L[0, y, x] = fr['tl']
+                        elif sh and rv: L[0, y, x] = fr['tr']
+                        elif bv and lv: L[0, y, x] = fr['bl']
+                        elif bv and rv: L[0, y, x] = fr['br']
+                        elif lv: L[0, y, x] = fr['l']
+                        elif rv: L[0, y, x] = fr['r']
+                        elif bv and not sh: L[0, y, x] = fr['b']
                 elif k == 'stair':
                     L[0, y, x] = st['floor'][0]; L[1, y, x] = st['stair']
                 elif k == 'pit':

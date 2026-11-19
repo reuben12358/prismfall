@@ -25,6 +25,9 @@ TID, NAME = 54, 'PF Rejuv Halls'
 MI = ('rejuvenation', 17, 'Multi-Interiors', (7, 17, 220))
 MG = ('rejuvenation', 120, 'Multi-Gym Interior', (400, 401))
 SOLID_PF = (17876, 17877)      # the loom's upper row: looms are walls between the Weaving Hall's walkways
+SOLID_MG = (4691, 4692, 4697,  # theatre seats and the house curtain's fringe: solid (the aisles are the way through)
+            4704, 4705, 4706, 4712, 4713, 4714, 4720, 4721, 4722, 4634, 4635, 4636, 4642, 4643, 4644, 4650, 4651, 4652,
+            5184, 5185, 5186, 5192, 5193, 5194, 5200, 5201, 5202)   # wall posters: never a way onto the wall
 PF_STAMPS = ['pf_p_lantern', 'pf_p_silk', 'pf_p_silk1', 'pf_p_strand_w', 'pf_p_strand_p', 'pf_p_web', 'pf_p_web1', 'pf_p_loom',
              'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y', 'pf_p_laundry', 'pf_p_awning', 'pf_lantern']
 
@@ -171,7 +174,9 @@ def main():
     tiles_by_part = {}
     for key, (game, tid, fname, maps) in (('mi', MI), ('mg', MG)):
         im, mp, p, q = rows_part(game, tid, fname, maps)
-        for src, (i, c) in mp.items(): data[key][str(src)] = 384 + (row + i) * 8 + c
+        for src, (i, c) in mp.items():
+            data[key][str(src)] = 384 + (row + i) * 8 + c
+            if key == 'mg' and src in SOLID_MG: p[i * 8 + c] = 15
         parts.append(im); pas += p; pri += q; row += im.height // 32; tiles_by_part[key] = im
     # pf props, tile by tile from the PF Rejuv sheet
     reg = json.load(open(REG)); t50 = next(t for t in reg if t['id'] == 50)

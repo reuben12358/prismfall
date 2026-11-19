@@ -7,9 +7,10 @@
 #
 #   bash run_puzzles.sh assemble   # fresh base copy + Plugins/PBS/Data/Graphics + bot
 #   bash run_puzzles.sh install    # first Debug boot (compiles), New Game -> install offer -> quit
-#   bash run_puzzles.sh gym1       # walk in through map 120's gym door, pull the one heddle, walk up to the Warden
-#   bash run_puzzles.sh lofts      # the optional Upper Lofts (Badge 1): linked heddles, spools + brass wire, Granny's Knot
-#   bash run_puzzles.sh gym2       # walk in through the Playhouse door, solve Foyer / Revolving Stage + Fly Loft
+#   bash run_puzzles.sh gym1       # Gym 1 (Rev 14): map 147's Playhouse door, up the aisle, the curtain rope, Dorian
+#   bash run_puzzles.sh gym2       # Gym 2 (Rev 14): map 120's Loomhouse door, one heddle, three linked heddles, Tamsin
+#   bash run_puzzles.sh lofts      # optional Upper Lofts (Tamsin's badge): spools + brass wire, Granny's Knot
+#   bash run_puzzles.sh backstage  # optional Playhouse Backstage (D9): the old revolving stage + Fly Loft
 #   bash run_puzzles.sh d1         # the Glassed Orchard chime rows (one wrong note first, then the phrase)
 #   python3 -I make_puzzle_media.py gym1|gym2   # shots + slow GIF -> docs/playtest/puzzles/
 #   bash run_puzzles.sh stop       # stops only this copy's engine
@@ -72,6 +73,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|gym1|gym2|lofts|d1) session "$1" ;;
-  *) echo "usage: $0 assemble | install | gym1 | gym2 | lofts | d1 | stop"; exit 1 ;;
+  install|gym1|gym2|lofts|backstage|d1) session "$1" ;;
+  *) echo "usage: $0 assemble | install | gym1 | gym2 | lofts | backstage | d1 | stop"; exit 1 ;;
 esac

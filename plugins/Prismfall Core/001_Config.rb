@@ -23,12 +23,14 @@ module Prismfall
   #                  (battle_number * 10 + starter_slot) instead of :version.
   #                  Gym 9 is Juno's J3 battle.
   # :double       => true = the Warden battle is a double battle (story: Gyms 2,
-  #                  6, 11, 16 and 17). Prismfall.gym_battle sets the rule.
+  #                  6, 11, 16 and 17); false = always a single battle (Gym 1).
+  #                  No key = whatever the event set. Prismfall.gym_battle applies it.
   BADGE_COUNT = 18
 
   GYMS = [
-    { index: 1,  type: :BUG,      city: "Briarwick",   warden: "Tamsin Loom",      trainer_name: "Tamsin",    trainer_type: :LEADER_TAMSIN,    field: :SILKWOOD,         cap: 15, version: 0 },
-    { index: 2,  type: :NORMAL,   city: "Saltmere",    warden: "Dorian Pell",      trainer_name: "Dorian",    trainer_type: :LEADER_DORIAN,    field: :GRAND_STAGE,      cap: 19, version: 0, double: true },
+    # SPINE Revision 14: Saltmere and Briarwick swapped places. Gym 1 is Dorian (Normal, a single battle), Gym 2 Tamsin (double).
+    { index: 1,  type: :NORMAL,   city: "Saltmere",    warden: "Dorian Pell",      trainer_name: "Dorian",    trainer_type: :LEADER_DORIAN,    field: :GRAND_STAGE,      cap: 15, version: 0, double: false },
+    { index: 2,  type: :BUG,      city: "Briarwick",   warden: "Tamsin Loom",      trainer_name: "Tamsin",    trainer_type: :LEADER_TAMSIN,    field: :SILKWOOD,         cap: 19, version: 0, double: true },
     { index: 3,  type: :WATER,    city: "Ebbmouth",    warden: "Marisol Reyes",    trainer_name: "Marisol",   trainer_type: :LEADER_MARISOL,   field: :WATER_SURFACE,    cap: 23, version: 0 },
     { index: 4,  type: :ELECTRIC, city: "Lumen City",  warden: "Rook Calder",      trainer_name: "Rook",      trainer_type: :LEADER_ROOK,      field: :NEON_GRID,        cap: 27, version: 0 },
     { index: 5,  type: :GROUND,   city: "Duneholt",    warden: "Sahar Ostrand",    trainer_name: "Sahar",     trainer_type: :LEADER_SAHAR,     field: :DESERT,           cap: 31, version: 0 },

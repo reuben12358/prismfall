@@ -14,13 +14,13 @@ ANCHORS = {1: (0, 1), 2: (1, 2), 3: (0, 2)}                    # D3 anchor -> br
 def d1():
     def actions(v):
         return [('ring ' + n, v + 1 if CHIME_ORDER[v] == n else 0) for n in CHIME_ORDER] if v < 3 else []
-    return machine('d1_chime (522)', 0, actions, lambda v: v == 3, moves=3)
+    return machine('d1_chime (522)', 0, actions, lambda v: v == 3, moves=3, rating=2)
 
 
 def d2():
     def actions(v):
         return [(n + ' post', tuple(b ^ (i in c) for i, b in enumerate(v))) for n, c in POSTS.items()]
-    return machine('d2_cocoons (525)', (0, 0, 0), actions, lambda v: v == (1, 0, 1), moves=2)
+    return machine('d2_cocoons (525)', (0, 0, 0), actions, lambda v: v == (1, 0, 1), moves=2, rating=2)
 
 
 def d3():
@@ -29,7 +29,7 @@ def d3():
     true: every reachable state has two taut bridges or none, never all three, so opening the nest (c) always costs a or b."""
     def actions(v):
         return [('anchor %d' % n, tuple(b ^ (i in c) for i, b in enumerate(v))) for n, c in ANCHORS.items()]
-    return machine('d3_anchors (548)', (1, 1, 0), actions, lambda v: v[2] == 1, moves=1, invariant=lambda v: sum(v) in (0, 2))
+    return machine('d3_anchors (548)', (1, 1, 0), actions, lambda v: v[2] == 1, moves=1, invariant=lambda v: sum(v) in (0, 2), rating=2)
 
 
 CHECKS = []

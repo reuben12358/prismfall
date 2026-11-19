@@ -1,0 +1,739 @@
+# Saltmere - Harbour & Breakwater (146). WRITTEN BY layouts/saltmere_city.py.
+id: 146
+name: Saltmere - Harbour & Breakwater
+palette: city
+bgm: Lerucean Town
+parent: 140
+rubric: true
+tone: [6, 4, -8, 0]
+yards_ok: true
+metadata:
+  Name: Saltmere Harbour
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 10, 25]
+  BattleBack: field
+  Weather: [Rain, 10]
+map: |
+  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC######CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
+  WWCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCckkkkcCCCCCCCCCCCCCCCCCCCCCCCCCC~~~~~~~~~~~~~~
+  WWTTTTTTTTTT.TTTTTTTTTTTTTTT.TTTTTTThTTTTcckkkkcc..h.TTTTTTTTTTTTTTTTTTTTT~~~~~~~~~~~~~~
+  WWTTTTTTTT...TTTTTTTTTTTTTTT.TTTTTTT.TTTTcckkkkcc....TTTTTTTTTTTTT...TTTTT~~~~~~~~~~~~~~
+  WWTTTTTTTTTTTTTTTTT########T.TTTTTTT.TTTTcckkkkcch...TT#####TTTTTTTTTTTTTT~~~~~~~~~~~~~~
+  WWTTTTTTTTTTppppppT####################TTTTkkkk#####hTT#####TTT####TT####T~~~~~~~~~~~~~~
+  WWTpppppppTTppppppT####################TTTkkkkk#####.TT#####TTT####TT####T~~~~~~~~~~~~~~
+  WWTpppppppTTppppppT####################TTTkkkkk#####TTT#####TT#####TT####T~~~~~~~~~~~~~~
+  WWTpppppppTTppppppT####################TTTkkkkk#####TTT#####TT#####TT####T~~~~~~~~~~~~~~
+  WWTpppppppTTppppppT,ooo################TTTkkkkk#####TTTkkookkkk####TT####T~~~~~~~~~~~~~~
+  WWTTTTTTTTTTTTTTTTTToookkkkkk,kkkkk#####TTTkkkTkkkkkkkkkkookkkkkkkkkk####T~~~~~~~~~~~~~~
+  WWTTTTTTTT...TTTTTTToookkkkkkkkkkkkkkkkk.Tkkkkkkkkkkkkkkkookkkkkkkkkkkkk,T~~~~~~~~~~~~~~
+  WWTpppppTTppppppppTToooTTTTkkkkkkkkkkkkkkkkkkkkkkkkkTTTTToo#####TTTkkkkkTT~~~~~~~~~~~~~~
+  WWTpppppTTppppppppTToooTTTTThTTTkkkkkkkkkkkkkkkkkk#####Tooo#####TTTThTTTTT~~~~~~~~~~~~~~
+  WWTpppppTTppppppppTTooTTTTTT.TTTTTTTTTTTkkkkkTT########TooT#####TTTT..TTTT~~~~~~~~~~~~~~
+  WWTpppppTTppppppppTTooTTTTTT.TTTT####TTkkkkkk.Tccccccc#.ooT#####TTTT...TTT~~~~~~~~~~~~~~
+  WWTpppppTTTTTTTTTTTToo#####TT########TTkkkkkTTTccccccc#TooT#####TTTT####TT~~~~~~~~~~~~~~
+  WWTTTTTTTTTTTTTTTTTToo#####TT########TkkkkkkTTTccccccc#TooT,,,#####T####TT~~~~~~~~~~~~~~
+  WWTTppppppppppppTTTToo#####TT########TkkkkkTTTTccccccc#Too#########h####TT~~~~~~~~~~~~~~
+  WWTTppppppppppppTTTooo#####TT########kkkkkkTTTTccccccc#Too#########.####TT~~~~~~~~~~~~~~
+  WWTTTTTTTTTTTTTTTTTooT#####TT####,,,kkkkkTTTTTT,,,,,,,,Too#########T####TT~~~~~~~~~~~~~~
+  WWTTTTTTTTTTT#TTkkkookkkkkkkk####TTTkkkkkTTT#TTT.hT#TTTooo#########Tkkk,TT~~~~~~~~~~~~~~
+  WWTTTTTTkkkkkkkkkkkookkkkkkkkkkkkkkkkkkkkkkkkkkTh..#.TTooo####kkkkkkkkkTTT~~~~~~~~~~~~~~
+  WWTTTToookkkkkkkkkkoookkkkT.kkkkkkkkkkkkkkkkkkkkkkkkkkToookkkkkkkkkkkkkTTT~~~~~~~~~~~~~~
+  WWTkkkooookkkkkkTTTTooTTTTT..TTTTTTTkkkkkkkkkkkkkkkkkkkoookkkkkkkkkkkkkTTT~~~~~~~~~~~~~~
+  WWTkkkooookTTTTTTTTTooTTTTT..TTTTTTTkkkTTTTTTTTTTTkkkkkookkkkkkkTTTTkkkTTT~~~~~~~~~~~~~~
+  WWTTTTToooTTTTTT####ooTTT########TTTkkkTT####TTTTTTTTTTooTTT########kkkTTT~~~~~~~~~~~~~~
+  WWTTTTToooTTTTTT####oooT.########TTTkkkTT####T#####TTTToooTT########hkkTTT~~~~~~~~~~~~~~
+  WWTTTTToooTTTTTT####Too..#ccccccccTTkkkTT####T#####TTTTTooTT#ccccccc.kkTTT~~~TTTTTT~~~~~
+  WWT####oooT####T####Too..#ccccccccTTkkkkT####T#####TTTTTooTT#ccccccc.kkTTT~TTTTTTTTT~~~~
+  WWT####TooT####T####.ooo.#ccccccccTTkkkkT####T#########TooTT#cccccccTkkTTTTTTTTTTTTTT~~~
+  WWT####TooT####T####.ooo.#ccccccccTTkkkk.####T#########TooTT#cccccccTkkTTTTTTTTTTTTTTT~~
+  WWT####TooT####T,,,,Toooo#ccccccccTTkkkk.,#############TooTT#cccccccTkkTTTTTTTTTTTTTTT~~
+  WWT####Tooo##########oooo,,,,,,,,TTTkkkkkT#############ToooT,,,,,,,,TkkTTTTTTTTTTTTTTT~~
+  WWT####Tooo##########ooooTTTTTTTTTTTkkkkkT#############T.ooTTTTTTTTT.kkTTTTTTTTTTTTTTT~~
+  WWT####TToo,,,,######ToooTTTTTTTTTTTkkkkkT#########,####.oo...####bbbkkbbbTTT#######..~~
+  WWT####TToo##########ToooTTbbbbbbbbbbkkkkT#########T####.oo..h####bbbkkbbbTTT#######..T~
+  KKK####Thoo##########Tooobbbbbbbbbbbbkkkkb#########T####.h########bbbkkbbbTTT#######..T~
+  KKK####T.TT##########bbbbbbbbbbbbbbbbkkkkbbbbbbbb,,T####hT########bbbbbbbboTT#######..T~
+  KKK####..TT####,,,bbbbbbbbbbbbbbbbbbbbkkkbbbbbbbbbbb####hT########bbbbbbbboTT#######....
+  GGG####TTTT####bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb#T####,,,,~~~~~TToooT#######...T
+  GGGbbbbbbbbbbbbbbbbbbbbbbbb=~~~~~~~~~bbbbbbbbbbbbbbbbbbbbb####Tbbb~~~~~TToooo#######...T
+  GGGbbbbbbbbbbbbbbbbbbbb~~===~~~~~~~~~~~~~~bbbbbbbbbbbbbbbbbbbbbbbb~~~~~TTToooo######...T
+  bbbbbbbbbbbbbbbbbbbbb~~~~===~~~~~~~~~~~~~~~====~~bbbbbbbbbbbbbbbbb~~~~~TTToooo######..TT
+  bbbbbbbbbbbbbbbbbb~~~~~~~===~~~~~~~~~~~~~~~====~~~~~bbbbbbbbbbbbbb~~~~~TTTTooo######..TT
+  bbbbbbbbbbbbbbb~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~bbbbbbbbbb~~~~~TTTTooo######h.TT
+  bbb~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~bbbbb~~~~~~~~TTTTooo######.TTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~TTTTToo######TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~TTTTToo######TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~TTTTToo######TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~TTTTTooo#####TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~====~~~~~~~~~~~~~===~~~~~~~~~TTTTooo#####TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~TTTTooo#####TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~TTTTooo,,,,,TTTT
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~TTTToooTTTTTTTT~
+  ~~~~~~~~~===~~~~~~~~~~~~~===~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~TTToooTTTTTTTT~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~TTToooTTTTTTTT~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===~~~~~~~~~~TTooooTTTTTTT~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Too.h.TTTTT~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ooo.....TT~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~o.hh...TT~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTTTTTT~~~~~~~~~~~~~~~~~~~oTT....TT~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~oooooooooTTTTTTTTTTTTTTTTTTTTooooooooooooooooTTTT..hT~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ooooooooooooooooooooooooooooooooooooooooooooooooTTTTT.TTTT~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTooooooooooooooooooooooooooooooooooooooTTTTTTTTTTTTTTTTT~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTTTTTTT.oooooooTTTTTooooooo...h.TTTTTTTTTTTT~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+heights: |
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+stamps:
+- stamp: t_stairs
+  at: [42, 0]
+- stamp: t_stairs
+  at: [45, 0]
+- stamp: t_lodge
+  at: [42, 33]
+  link: SM_HARBOUR
+  name: Harbour Office door
+  door: [1, 5]
+- stamp: t_lighthouse
+  at: [77, 36]
+- stamp: t_ship
+  at: [48, 47]
+- stamp: t_ship
+  at: [13, 54]
+- stamp: t_warehouse
+  at: [47, 14]
+- stamp: t_warehouse
+  at: [25, 27]
+- stamp: t_warehouse
+  at: [60, 27]
+- stamp: h_chim_o
+  at: [58, 38]
+- stamp: h_chim_o
+  at: [52, 36]
+- stamp: h_black
+  at: [47, 33]
+- stamp: h_green2
+  at: [58, 19]
+- stamp: h_black
+  at: [29, 17]
+- stamp: h_long_g
+  at: [62, 18]
+- stamp: h_green
+  at: [22, 17]
+- stamp: h_gable_o
+  at: [68, 17]
+- stamp: t_house_blue
+  at: [35, 6]
+- stamp: t_house_blue
+  at: [69, 6]
+- stamp: h_black
+  at: [23, 5]
+- stamp: h_green2
+  at: [27, 6]
+- stamp: h_red
+  at: [31, 6]
+- stamp: h_green
+  at: [47, 6]
+- stamp: h_olive2
+  at: [63, 6]
+- stamp: h_green
+  at: [55, 5]
+- stamp: h_black
+  at: [3, 36]
+- stamp: h_green2
+  at: [11, 37]
+- stamp: h_red
+  at: [62, 36]
+- stamp: h_red
+  at: [51, 31]
+- stamp: t_house_blue
+  at: [41, 27]
+- stamp: h_long_g
+  at: [46, 28]
+- stamp: h_chim_o
+  at: [33, 16]
+- stamp: h_green
+  at: [59, 13]
+- stamp: h_gable_o
+  at: [19, 5]
+- stamp: w_house_s
+  at: [15, 34]
+- stamp: w_cot
+  at: [3, 30]
+- stamp: w_cot_m
+  at: [11, 30]
+- stamp: w_cot_m
+  at: [16, 27]
+- stamp: t_barrel2
+  at: [9, 42]
+- stamp: t_barrel
+  at: [7, 43]
+- stamp: t_crate_pair
+  at: [32, 38]
+- stamp: t_barrel2
+  at: [19, 41]
+- stamp: t_barrel
+  at: [47, 40]
+- stamp: t_barrel
+  at: [16, 41]
+- stamp: t_barrel
+  at: [4, 42]
+- stamp: t_barrel
+  at: [27, 39]
+- stamp: t_barrel2
+  at: [51, 42]
+- stamp: t_barrel
+  at: [11, 43]
+- stamp: t_barrel2
+  at: [45, 40]
+- stamp: t_lamp
+  at: [51, 22]
+- stamp: t_board
+  at: [13, 22]
+- stamp: t_barrel
+  at: [24, 38]
+- stamp: t_lamp
+  at: [62, 8]
+- stamp: t_board
+  at: [44, 22]
+- stamp: t_barrel
+  at: [56, 41]
+- stamp: t_barrel2
+  at: [39, 11]
+tiles:
+- tile: 3859
+  at: [67, 37]
+  layer: 0
+- tile: 3859
+  at: [25, 39]
+  layer: 0
+- tile: 3859
+  at: [44, 40]
+  layer: 0
+- tile: 3859
+  at: [20, 41]
+  layer: 0
+- tile: 3859
+  at: [41, 41]
+  layer: 0
+- tile: 3859
+  at: [21, 42]
+  layer: 0
+- tile: 3859
+  at: [49, 42]
+  layer: 0
+- tile: 3859
+  at: [13, 44]
+  layer: 0
+- tile: 3859
+  at: [62, 44]
+  layer: 0
+- tile: 3859
+  at: [3, 45]
+  layer: 0
+- tile: 3859
+  at: [62, 45]
+  layer: 0
+- tile: 3859
+  at: [59, 46]
+  layer: 0
+- tile: 3859
+  at: [60, 46]
+  layer: 0
+- tile: 1555
+  at: [54, 69]
+  layer: 2
+- tile: 1563
+  at: [54, 70]
+  layer: 2
+- tile: 1552
+  at: [9, 68]
+  layer: 2
+- tile: 1553
+  at: [10, 68]
+  layer: 2
+- tile: 1560
+  at: [9, 69]
+  layer: 2
+- tile: 1561
+  at: [10, 69]
+  layer: 2
+- tile: 1555
+  at: [75, 15]
+  layer: 2
+- tile: 1563
+  at: [75, 16]
+  layer: 2
+- tile: 1554
+  at: [1, 63]
+  layer: 2
+- tile: 1562
+  at: [1, 64]
+  layer: 2
+- tile: 1555
+  at: [19, 68]
+  layer: 2
+- tile: 1563
+  at: [19, 69]
+  layer: 2
+- tile: 1552
+  at: [29, 43]
+  layer: 2
+- tile: 1553
+  at: [30, 43]
+  layer: 2
+- tile: 1560
+  at: [29, 44]
+  layer: 2
+- tile: 1561
+  at: [30, 44]
+  layer: 2
+- tile: 1555
+  at: [55, 59]
+  layer: 2
+- tile: 1563
+  at: [55, 60]
+  layer: 2
+- tile: 1554
+  at: [40, 58]
+  layer: 2
+- tile: 1562
+  at: [40, 59]
+  layer: 2
+- tile: 1555
+  at: [85, 10]
+  layer: 2
+- tile: 1563
+  at: [85, 11]
+  layer: 2
+- tile: 1555
+  at: [79, 6]
+  layer: 2
+- tile: 1563
+  at: [79, 7]
+  layer: 2
+- tile: 1552
+  at: [2, 58]
+  layer: 2
+- tile: 1553
+  at: [3, 58]
+  layer: 2
+- tile: 1560
+  at: [2, 59]
+  layer: 2
+- tile: 1561
+  at: [3, 59]
+  layer: 2
+- tile: 1554
+  at: [4, 53]
+  layer: 2
+- tile: 1562
+  at: [4, 54]
+  layer: 2
+- tile: 1555
+  at: [76, 21]
+  layer: 2
+- tile: 1563
+  at: [76, 22]
+  layer: 2
+- tile: 1552
+  at: [78, 14]
+  layer: 2
+- tile: 1553
+  at: [79, 14]
+  layer: 2
+- tile: 1560
+  at: [78, 15]
+  layer: 2
+- tile: 1561
+  at: [79, 15]
+  layer: 2
+- tile: 1554
+  at: [37, 45]
+  layer: 2
+- tile: 1562
+  at: [37, 46]
+  layer: 2
+- tile: 1555
+  at: [59, 68]
+  layer: 2
+- tile: 1563
+  at: [59, 69]
+  layer: 2
+- tile: 1554
+  at: [29, 56]
+  layer: 2
+- tile: 1562
+  at: [29, 57]
+  layer: 2
+- tile: 1552
+  at: [80, 3]
+  layer: 2
+- tile: 1553
+  at: [81, 3]
+  layer: 2
+- tile: 1560
+  at: [80, 4]
+  layer: 2
+- tile: 1561
+  at: [81, 4]
+  layer: 2
+- tile: 1554
+  at: [79, 17]
+  layer: 2
+- tile: 1562
+  at: [79, 18]
+  layer: 2
+- tile: 1555
+  at: [19, 48]
+  layer: 2
+- tile: 1563
+  at: [19, 49]
+  layer: 2
+- tile: 1552
+  at: [32, 69]
+  layer: 2
+- tile: 1553
+  at: [33, 69]
+  layer: 2
+- tile: 1560
+  at: [32, 70]
+  layer: 2
+- tile: 1561
+  at: [33, 70]
+  layer: 2
+- tile: 1555
+  at: [82, 16]
+  layer: 2
+- tile: 1563
+  at: [82, 17]
+  layer: 2
+- tile: 1555
+  at: [69, 56]
+  layer: 2
+- tile: 1563
+  at: [69, 57]
+  layer: 2
+- tile: 1552
+  at: [59, 60]
+  layer: 2
+- tile: 1553
+  at: [60, 60]
+  layer: 2
+- tile: 1560
+  at: [59, 61]
+  layer: 2
+- tile: 1561
+  at: [60, 61]
+  layer: 2
+- tile: 1552
+  at: [65, 69]
+  layer: 2
+- tile: 1553
+  at: [66, 69]
+  layer: 2
+- tile: 1560
+  at: [65, 70]
+  layer: 2
+- tile: 1561
+  at: [66, 70]
+  layer: 2
+- tile: 1554
+  at: [85, 3]
+  layer: 2
+- tile: 1562
+  at: [85, 4]
+  layer: 2
+- tile: 1552
+  at: [68, 50]
+  layer: 2
+- tile: 1553
+  at: [69, 50]
+  layer: 2
+- tile: 1560
+  at: [68, 51]
+  layer: 2
+- tile: 1561
+  at: [69, 51]
+  layer: 2
+- tile: 1552
+  at: [21, 64]
+  layer: 2
+- tile: 1553
+  at: [22, 64]
+  layer: 2
+- tile: 1560
+  at: [21, 65]
+  layer: 2
+- tile: 1561
+  at: [22, 65]
+  layer: 2
+- tile: 1555
+  at: [76, 26]
+  layer: 2
+- tile: 1563
+  at: [76, 27]
+  layer: 2
+- tile: 1552
+  at: [6, 56]
+  layer: 2
+- tile: 1553
+  at: [7, 56]
+  layer: 2
+- tile: 1560
+  at: [6, 57]
+  layer: 2
+- tile: 1561
+  at: [7, 57]
+  layer: 2
+- tile: 1552
+  at: [68, 60]
+  layer: 2
+- tile: 1553
+  at: [69, 60]
+  layer: 2
+- tile: 1560
+  at: [68, 61]
+  layer: 2
+- tile: 1561
+  at: [69, 61]
+  layer: 2
+- tile: 1552
+  at: [67, 47]
+  layer: 2
+- tile: 1553
+  at: [68, 47]
+  layer: 2
+- tile: 1560
+  at: [67, 48]
+  layer: 2
+- tile: 1561
+  at: [68, 48]
+  layer: 2
+- tile: 1554
+  at: [84, 68]
+  layer: 2
+- tile: 1562
+  at: [84, 69]
+  layer: 2
+- tile: 1555
+  at: [80, 67]
+  layer: 2
+- tile: 1563
+  at: [80, 68]
+  layer: 2
+- tile: 1552
+  at: [80, 23]
+  layer: 2
+- tile: 1553
+  at: [81, 23]
+  layer: 2
+- tile: 1560
+  at: [80, 24]
+  layer: 2
+- tile: 1561
+  at: [81, 24]
+  layer: 2
+- tile: 1554
+  at: [5, 62]
+  layer: 2
+- tile: 1562
+  at: [5, 63]
+  layer: 2
+- tile: 1555
+  at: [32, 58]
+  layer: 2
+- tile: 1563
+  at: [32, 59]
+  layer: 2
+- tile: 1554
+  at: [39, 55]
+  layer: 2
+- tile: 1562
+  at: [39, 56]
+  layer: 2
+- tile: 1552
+  at: [28, 60]
+  layer: 2
+- tile: 1553
+  at: [29, 60]
+  layer: 2
+- tile: 1560
+  at: [28, 61]
+  layer: 2
+- tile: 1561
+  at: [29, 61]
+  layer: 2
+- tile: 1555
+  at: [82, 10]
+  layer: 2
+- tile: 1563
+  at: [82, 11]
+  layer: 2
+- tile: 1555
+  at: [4, 68]
+  layer: 2
+- tile: 1563
+  at: [4, 69]
+  layer: 2
+- tile: 1552
+  at: [42, 54]
+  layer: 2
+- tile: 1553
+  at: [43, 54]
+  layer: 2
+- tile: 1560
+  at: [42, 55]
+  layer: 2
+- tile: 1561
+  at: [43, 55]
+  layer: 2
+- tile: 1555
+  at: [38, 52]
+  layer: 2
+- tile: 1563
+  at: [38, 53]
+  layer: 2
+- tile: 1555
+  at: [49, 69]
+  layer: 2
+- tile: 1563
+  at: [49, 70]
+  layer: 2
+- tile: 1554
+  at: [33, 43]
+  layer: 2
+- tile: 1562
+  at: [33, 44]
+  layer: 2
+- tile: 1554
+  at: [71, 69]
+  layer: 2
+- tile: 1562
+  at: [71, 70]
+  layer: 2
+tileblocks: []
+events:
+- type: sign
+  at: [72, 63]
+  text: The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed.
+- type: sign
+  at: [45, 39]
+  text: 'SALTMERE HARBOUR OFFICE
+
+    All ferries suspended by order of the quarantine.'
+- type: npc
+  name: Stevedore
+  at: [30, 41]
+  sprite: NPC 07
+  dir: down
+  move: random
+  text: 'Stevedore: Tax-barges tie up outside the breakwater and no further.
+
+    Free port means free. [TODO story]'
+- type: npc
+  name: Salt raker
+  at: [10, 12]
+  sprite: NPC 11
+  dir: right
+  text: 'Salt raker: The pans glitter best at low sun. Mind the brine. [TODO story]'
+- type: npc
+  name: Old angler
+  at: [26, 54]
+  sprite: NPC 05
+  dir: down
+  text: 'Old angler: Something big has been circling the breakwater since the Shatter talk began. [TODO story]'
+- type: warp
+  at: [42, 3]
+  to: {map: 140, x: 56, y: 70, dir: retain}
+- type: warp
+  at: [43, 3]
+  to: {map: 140, x: 57, y: 70, dir: retain}
+- type: warp
+  at: [44, 3]
+  to: {map: 140, x: 58, y: 70, dir: retain}
+- type: warp
+  at: [45, 3]
+  to: {map: 140, x: 59, y: 70, dir: retain}
+- type: warp
+  at: [46, 3]
+  to: {map: 140, x: 60, y: 70, dir: retain}
+- type: warp
+  at: [47, 3]
+  to: {map: 140, x: 61, y: 70, dir: retain}

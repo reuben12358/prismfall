@@ -28,7 +28,8 @@ def casual_drop(top):
     return 2 if top < 40 else 3 if top < 70 else 4
 
 def bag(top, diff, boss=False):
-    if top <= 19:   t = (["SUPERPOTION"], ["SUPERPOTION"] * 2, [])
+    if top <= 15:   t = (["POTION"], ["SUPERPOTION"], [])          # Gym 1 stretch: approachable (SPINE Rev 14)
+    elif top <= 19: t = (["SUPERPOTION"], ["SUPERPOTION"] * 2, [])
     elif top <= 31: t = (["SUPERPOTION"] * 2, ["HYPERPOTION"] * 2, ["SUPERPOTION"])
     elif top <= 47: t = (["HYPERPOTION"] * 2, ["FULLRESTORE"] * 2, ["HYPERPOTION"])
     elif top <= 67: t = (["FULLRESTORE"] * 2, ["FULLRESTORE"] * 3, ["HYPERPOTION"])
@@ -117,46 +118,75 @@ def warden(gym, ttype, name, cap, field, lose, mons):
     WARDENS.append((gym, ttype, name, cap, field, lose, mons))
 
 # Field logic per team: design/TRAINER_FIELD_PLAYBOOK.md. Field data: plugins/Prismfall Field Effects/1xx_Field_*.rb.
-warden(1, "LEADER_TAMSIN", "Tamsin", 15, "SILKWOOD", "Oh! You've unpicked every stitch. Well sewn, challenger.", [
-    # Silkwood: Electroweb x1.5 + never misses + 30% paralysis, Bug x1.5, String Shot -3 Speed, Bug types heal 1/16.
-    P("JOLTIK", 13, "COMPOUNDEYES", "ORANBERRY", "MODEST", "ELECTROWEB,FURYCUTTER,STRINGSHOT,ABSORB", "S", casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB"},
-      hard={"item": "FOCUSSASH", "moves": "ELECTROWEB,STRUGGLEBUG,STRINGSHOT,THUNDERWAVE"}),
-    # Answer to the Fire flip: rain halves Fire, doubles Swift Swim, wets the silk (Electric x1.2) and douses a Wildfire to Embers.
-    P("SURSKIT", 13, "SWIFTSWIM", "ORANBERRY", "TIMID", "WATERGUN,QUICKATTACK,RAINDANCE,STRINGSHOT", "S",
-      only="nocasual", hard={"moves": "WATERPULSE,STRUGGLEBUG,RAINDANCE,QUICKATTACK", "item": "DAMPROCK"}),
-    P("VIVILLON", 14, "COMPOUNDEYES", "SILVERPOWDER", "TIMID", "STRUGGLEBUG,GUST,STUNSPORE,POISONPOWDER", "S",
-      only="hard"),
-    # Telluric Seed on Silkwood: +1 Def, +1 Sp. Def, -1 Speed (a silk cocoon). First seed the player sees.
-    P("SWADLOON", 15, "OVERCOAT", "TELLURICSEED", "ADAMANT", "RAZORLEAF,BUGBITE,STRINGSHOT,PROTECT", "BA",
-      nick="Bobbin", casual={"ab": "LEAFGUARD", "item": "ORANBERRY"}, hard={"item": "EVIOLITE"}),
+# SPINE Revision 14: Gym 1 is Dorian (Saltmere, Normal, single), Gym 2 is Tamsin (Briarwick, Bug, double).
+warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The audience is yours tonight!", [
+    # Gym 1, a SINGLE battle and the player's first field. Warm and gentle: neutral natures, no sleep, no seed, no
+    # accuracy drops on Standard, and the openers sit well below the cap, because the Grand Stage already makes every
+    # Normal move x1.3 (and sound moves x1.3 more). The lesson is the applause: two damaging sound moves raise it a
+    # stage, with a big message, and each stage makes Normal and sound moves hit harder. Stalling (Protect, Recover...)
+    # calms the crowd - the player's first counterplay. Std 3 / Hard 4 / Casual 2.
+    P("AIPOM", 11, "RUNAWAY", "ORANBERRY", "HARDY", "SCRATCH,ASTONISH,TAILWHIP", "A",
+      only="nocasual", hard={"ab": "SKILLLINK", "nat": "JOLLY", "moves": "FAKEOUT,SWIFT,ASTONISH,SANDATTACK"}),
+    # The teacher: Echoed Voice and Round are both damaging sound moves, so the crowd rises on Minccino's second song
+    # (a big "the audience is warming up" message) and Echoed Voice grows each turn it is used - the player sees the
+    # stage and the echo build together. Cute Charm Minccino has a tiny Sp. Atk, so the songs teach without sweeping.
+    P("MINCCINO", 12, "CUTECHARM", "ORANBERRY", "HARDY", "ECHOEDVOICE,ROUND,POUND,BABYDOLLEYES", "A",
+      casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
+      hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "ECHOEDVOICE,TAILSLAP,SING,ROUND"}),
+    # Hard only: Dorian's voice. Big Pecks +1 Def, Hyper Voice / Chatter at Modest, Sing and Encore.
+    P("CHATOT", 14, "BIGPECKS", "SITRUSBERRY", "MODEST", "CHATTER,HYPERVOICE,ENCORE,SING", "S", only="hard"),
+    # The quick-change artist: Color Change is a costume change (it turns into the type of the move that hit it - hit
+    # it once with Fighting, then switch). Fury Swipes hits 2-5 times and any critical hit raises the applause.
+    # Hard: Protean, Fake Out (a showpiece) and the Synthetic Seed (Laser Focus).
+    P("KECLEON", 15, "COLORCHANGE", "ORANBERRY", "HARDY", "FURYSWIPES,SHADOWSNEAK,LICK,TAILWHIP", "BA",
+      casual={"moves": "SCRATCH,LICK,TAILWHIP,BIND"},
+      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "nat": "ADAMANT", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,FEINT"}),
 ])
-warden(2, "LEADER_DORIAN", "Dorian", 19, "GRAND_STAGE", "Bravo! Bravissimo! The audience is yours tonight!", [
-    # Gym 2 is a DOUBLE battle: Std 4 / Hard 5 / Casual 3. Applause stages: sound x2, showpieces x2 (Fake Out, Encore) or any crit.
-    P("CHATOT", 17, "BIGPECKS", "ORANBERRY", "MODEST", "CHATTER,ROUND,ENCORE,SING", "S",
-      hard={"moves": "CHATTER,HYPERVOICE,ENCORE,TAUNT", "item": "THROATSPRAY"},
-      casual={"moves": "CHATTER,ROUND,PECK,GROWL"}),
-    P("AMBIPOM", 18, "TECHNICIAN", "SILKSCARF", "JOLLY", "FAKEOUT,SWIFT,DUALCHOP,TICKLE", "A",
-      casual={"moves": "SWIFT,DUALCHOP,ASTONISH,TICKLE"},
-      hard={"moves": "FAKEOUT,ACROBATICS,DUALCHOP,UTURN", "item": None}),
-    P("LOUDRED", 18, "SCRAPPY", "SITRUSBERRY", "MODEST", "ECHOEDVOICE,BITE,HOWL,SCREECH", "S", only="nocasual",
-      hard={"moves": "HYPERVOICE,ROUND,BITE,SCREECH"}),
-    P("FURFROU", 18, "FURCOAT", "SITRUSBERRY", "JOLLY", "HEADBUTT,BABYDOLLEYES,SNARL,UTURN", "BPD", only="hard"),
-    # Synthetic Seed on Grand Stage: +1 Speed and Laser Focus (a sure crit = applause), but Taunted - and Kecleon only attacks.
-    P("KECLEON", 19, "COLORCHANGE", "SYNTHETICSEED", "ADAMANT", "FURYSWIPES,SHADOWSNEAK,PSYBEAM,THIEF", "BA",
-      casual={"moves": "SHADOWSNEAK,THIEF,FEINT,LICK", "item": "ORANBERRY"},
-      hard={"ab": "PROTEAN", "moves": "FAKEOUT,SHADOWSNEAK,KNOCKOFF,DRAINPUNCH"}),
+warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every stitch. Well sewn, challenger.", [
+    # Gym 2, a DOUBLE battle: "a thread holds because it's twisted with others". Std 4 / Hard 5 / Casual 3.
+    # Silkwood: Electroweb x1.5, never misses, 30% paralysis; String Shot never misses (-3 Speed); Bug x1.5; Bug types
+    # heal 1/16 a turn. In a double, Electroweb and String Shot hit BOTH foes, so the lead pair locks the player's
+    # whole side down, and Struggle Bug (spread, x1.5) cuts both foes' Sp. Atk.
+    # Lead pair - the twist: Surskit's Rain Dance wets the silk (every Electric move x1.2) for Joltik's Electroweb,
+    # doubles Surskit's own Speed, halves Fire, and douses a Wildfire to Embers.
+    # Standard is tuned down for an approachable Gym 2 (harness: realistic teams lost 25/30 to the sharper set):
+    # neutral natures, the support Pokemon at cap-4 / cap-3, Absorb instead of Bug Bite, Water Gun instead of Bubble Beam,
+    # Feint instead of Assurance (Assurance doubles after a partner's hit: Hard only).
+    P("JOLTIK", 15, "COMPOUNDEYES", "ORANBERRY", "HARDY", "ELECTROWEB,ABSORB,STRINGSHOT,PROTECT", "S",
+      casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB,PROTECT"},
+      hard={"item": "FOCUSSASH", "nat": "MODEST", "moves": "ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT"}),
+    P("SURSKIT", 15, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
+      hard={"item": "DAMPROCK", "nat": "TIMID", "moves": "RAINDANCE,BUBBLEBEAM,STRUGGLEBUG,QUICKATTACK"},
+      casual={"moves": "WATERGUN,STRUGGLEBUG,QUICKATTACK,SWEETSCENT"}),
+    # Hard: Rage Powder (powders x1.2 accurate here) pulls single-target hits off Bobbin.
+    P("VIVILLON", 18, "COMPOUNDEYES", "SILVERPOWDER", "TIMID", "RAGEPOWDER,STRUGGLEBUG,GUST,STUNSPORE", "S",
+      only="hard"),
+    # The trap spider: Silk Trap guards it while its partner attacks, and binds tighter here (an extra Speed drop on
+    # a contact move). Hard: Lunge, x1.3 here, which lowers Attack.
+    P("SPIDOPS", 16, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,STRUGGLEBUG,FEINT,STRINGSHOT", "BA",
+      only="nocasual", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,LUNGE,STRUGGLEBUG,ASSURANCE"}),
+    # Telluric Seed: +1 Def, +1 Sp. Def, -1 Speed - a silk cocoon. Razor Leaf hits both foes (Grass x1.2, Overgrow on).
+    P("SWADLOON", 19, "OVERCOAT", "TELLURICSEED", "HARDY", "RAZORLEAF,BUGBITE,STRUGGLEBUG,PROTECT", "BA",
+      nick="Bobbin", casual={"ab": "LEAFGUARD", "item": "ORANBERRY", "moves": "RAZORLEAF,BUGBITE,STRINGSHOT,PROTECT"},
+      hard={"item": "EVIOLITE"}),
 ])
 warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. Take the badge before I change my mind.", [
     # Water Surface already switches Swift Swim on and gives Water x1.5, so Standard and Casual drop Drizzle (rain on top
     # of the field made Water Pulse a one-hit KO at Gym 3). Hard keeps Drizzle + Damp Rock: rain lasts 8+3 turns here.
-    P("PELIPPER", 21, "KEENEYE", "ORANBERRY", "MODEST", "WATERPULSE,WINGATTACK,SUPERSONIC,PROTECT", "BS",
-      hard={"ab": "DRIZZLE", "item": "DAMPROCK", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
+    # Standard is tuned down for an approachable Gym 3 (harness: realistic teams lost 29/30): neutral natures, the
+    # openers two levels under the cap, Water Gun on Pelipper. Water x1.5 on the field still makes every hit count.
+    P("PELIPPER", 20, "KEENEYE", "ORANBERRY", "HARDY", "WATERGUN,WINGATTACK,SUPERSONIC,PROTECT", "BS",
+      hard={"ab": "DRIZZLE", "item": "DAMPROCK", "nat": "MODEST", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
     # Volt Absorb punishes the Electric answer; its own Spark is x1.5 against grounded targets. Elemental Seed: +1 Speed, Aqua Ring.
-    P("LANTURN", 22, "VOLTABSORB", "ELEMENTALSEED", "MODEST", "BUBBLEBEAM,SPARK,CONFUSERAY,THUNDERWAVE", "BS",
-      only="nocasual", hard={"moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),
+    # Standard: the lantern-fish is still a Chinchou (Lanturn walled realistic teams: 64 knockouts in 30 runs).
+    # Volt Absorb still punishes the Electric answer, and its Spark is x1.5 against grounded targets. Hard: Lanturn
+    # with the Elemental Seed (+1 Speed, Aqua Ring).
+    P("CHINCHOU", 21, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
+      only="nocasual", hard={"sp": "LANTURN", "item": "ELEMENTALSEED", "nat": "MODEST",
+                             "moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),
     P("ARAQUANID", 22, "WATERBUBBLE", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
       only="hard", hard={"moves": "LIQUIDATION,LEECHLIFE,CRUNCH,AQUARING"}),
-    P("FLOATZEL", 22, "SWIFTSWIM", "MYSTICWATER", "JOLLY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
+    P("FLOATZEL", 21, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
       hard={"moves": "AQUAJET,WATERPULSE,CRUNCH,ICEFANG", "nat": "NAIVE"}),
     # Transition play: Dive drags the fight Underwater (x1.3 strike), "a current that changes direction mid-fight".
     P("GYARADOS", 23, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "WATERFALL,BITE,ICEFANG,DIVE", "A",
@@ -607,16 +637,17 @@ def kestrel_fallen(s_):
 rival("RIVAL_KESTREL", "Kestrel", 9, 94, "...It won't let go. Why won't it let go?", kestrel_fallen)
 
 # --- Juno --------------------------------------------------------------------
-rival("RIVAL_JUNO", "Juno", 1, 19, "Aww, you're so good at this! Okay, again soon, okay?", lambda s: [
+rival("RIVAL_JUNO", "Juno", 1, 15, "Aww, you're so good at this! Okay, again soon, okay?", lambda s: [
     # J1 is on Saltmere's promenade green (MEADOW, set by TRAINER_FIELDS): Fairy Wind and Razor Leaf x1.5, Leaf Guard always on.
     # Transition play: a Prankster Grassy Terrain turns the Meadow into a Flower Garden at once (the field she will defend
     # at Gym 9); the terrain lasts 8 turns there. Hard Petilil's Growth / Aromatherapy keep the garden growing.
-    P("COTTONEE", 15, "PRANKSTER", "ORANBERRY", "BOLD", "FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE", "SD",
+    # SPINE Rev 14: J1 is in Saltmere before Gym 1 now (cap 15), so the levels came down and her starter is unevolved.
+    P("COTTONEE", 12, "PRANKSTER", "ORANBERRY", "BOLD", "FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE", "SD",
       only="nocasual"),
-    P("PETILIL", 16, "OWNTEMPO", "ORANBERRY", "MODEST", "MEGADRAIN,MAGICALLEAF,GROWTH,AROMATHERAPY", "S", only="hard"),
-    P("BOUNSWEET", 15, "LEAFGUARD", "ORANBERRY", "ADAMANT", "RAZORLEAF,RAPIDSPIN,PLAYNICE", "BA",
-      nick="Sweetpea", hard={"moves": "RAZORLEAF,RAPIDSPIN,MAGICALLEAF,PLAYNICE", "item": "EVIOLITE"}),
-    starter_mon("RIVAL_JUNO", s, 1, 17),
+    P("PETILIL", 13, "OWNTEMPO", "ORANBERRY", "MODEST", "MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE", "S", only="hard"),
+    P("BOUNSWEET", 12, "LEAFGUARD", "ORANBERRY", "ADAMANT", "RAZORLEAF,RAPIDSPIN,PLAYNICE", "BA",
+      nick="Sweetpea", hard={"item": "EVIOLITE"}, casual={"moves": "RAPIDSPIN,PLAYNICE,SPLASH"}),
+    starter_mon("RIVAL_JUNO", s, 0, 14),
 ])
 rival("RIVAL_JUNO", "Juno", 2, 35, "That's not his name in the ledger. It can't be. ...Good battle, though.", lambda s: [
     # J2 is on Mirefen's stilt-walk (CORROSIVE_MIRE), where her Grass moves also hit as Poison. Transition play: a Prankster
@@ -624,7 +655,9 @@ rival("RIVAL_JUNO", "Juno", 2, 35, "That's not his name in the ledger. It can't 
     P("WHIMSICOTT", 31, "PRANKSTER", "SITRUSBERRY", "TIMID", "LEECHSEED,ENERGYBALL,MISTYTERRAIN,FAIRYWIND", "S",
       casual={"moves": "LEECHSEED,ENERGYBALL,COTTONSPORE,FAIRYWIND"},
       hard={"moves": "LEECHSEED,ENERGYBALL,MOONBLAST,MISTYTERRAIN"}),
-    P("SHIINOTIC", 32, "EFFECTSPORE", "SITRUSBERRY", "CALM", "GIGADRAIN,MOONBLAST,SPORE,STRENGTHSAP", "SD", only="hard"),
+    # Ever-Bloom (SPINE Rev 12): the white Floette that becomes J3's Florges "Everbloom". Hard only here.
+    P("FLOETTE", 32, "FLOWERVEIL", "SITRUSBERRY", "CALM", "MAGICALLEAF,RAZORLEAF,WISH,FAIRYWIND", "SD", form=4,
+      nick="Everbloom", only="hard"),
     P("LILLIGANT", 31, "OWNTEMPO", "MIRACLESEED", "MODEST", "MAGICALLEAF,TEETERDANCE,SLEEPPOWDER,QUIVERDANCE", "S",
       only="nocasual", hard={"moves": "GIGADRAIN,PETALDANCE,SLEEPPOWDER,QUIVERDANCE"}),
     P("STEENEE", 32, "LEAFGUARD", "EVIOLITE", "ADAMANT", "RAZORLEAF,STOMP,RAPIDSPIN,PLAYNICE", "BA",
@@ -678,17 +711,21 @@ rival("RIVAL_JUNO", "Juno", 7, 97, "We did it. We actually did it.", lambda s: [
 # BOSSES
 # ------------------------------------------------------------------------------
 ADMINS = []  # villain admins: full sets, Std/Hard/Casual (versions 0/100/200; later rematches 1, 2, ...)
-ADMINS.append(("Map 120 Briarwick - first admin battle (Act I)", "HOLLOW_THISTLE", "Thistle", 15,
+ADMINS.append(("Map 120 Briarwick - first admin battle (Act I; before Gym 2 since SPINE Rev 14)", "HOLLOW_THISTLE", "Thistle", 19,
     "Lowmarsh is glass now. Remember that when you sleep.", [
-    # Thistle fights at the pylon in Briarwick (SILKWOOD): Grass x1.2, powders x1.2 accuracy. A weaver who lets the wood
-    # burn: if the challenger sets it ablaze, Embers favour Grass and Ghost, and Ingrain / Growth / Leech Seed (any two)
-    # regrow the ash into a Meadow.
-    P("MORELULL", 13, "EFFECTSPORE", "ORANBERRY", "MODEST", "MEGADRAIN,CONFUSERAY,INGRAIN,ASTONISH", "BS", casual={"moves": "ABSORB,CONFUSERAY,ASTONISH"},
-      hard={"moves": "MEGADRAIN,CONFUSERAY,LEECHSEED,DAZZLINGGLEAM"}),
-    P("FOONGUS", 14, "EFFECTSPORE", "ORANBERRY", "RELAXED", "MEGADRAIN,STUNSPORE,GROWTH,ASTONISH", "PD",
-      only="nocasual", hard={"ab": "REGENERATOR", "moves": "MEGADRAIN,STUNSPORE,VENOSHOCK,GROWTH"}),
-    P("PHANTUMP", 15, "NATURALCURE", "SITRUSBERRY", "ADAMANT", "BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY", "HA",
-      nick="Lowmarsh", hard={"ab": "HARVEST", "moves": "BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP"}),
+    # Thistle fights at the pylon in Briarwick (SILKWOOD). A weaver's team (02_FACTIONS: Bug/Poison) plus the glassed
+    # Phantump she named for her village. Bug x1.5, Grass x1.2, powders x1.2 accurate (Poison Powder, Stun Spore).
+    # She lets the wood burn: if the player sets it ablaze, Embers favour Grass and Ghost and heal her Grass types,
+    # and Leech Seed + Ingrain-style regrowth (two growing moves) turn the ash into a Meadow.
+    # Dustox is a Bug-type flier: it glides on the silk (Flying x1.2) and Shield Dust ignores the player's add-ons.
+    P("DUSTOX", 16, "SHIELDDUST", "ORANBERRY", "BOLD", "GUST,STRUGGLEBUG,POISONPOWDER,CONFUSION", "BS",
+      casual={"moves": "GUST,BUGBITE,CONFUSION,HARDEN"}),
+    P("WHIRLIPEDE", 17, "POISONPOINT", "ORANBERRY", "IMPISH", "POISONTAIL,BUGBITE,PROTECT,IRONDEFENSE", "BPD", only="hard"),
+    P("FOONGUS", 17, "EFFECTSPORE", "ORANBERRY", "RELAXED", "MEGADRAIN,STUNSPORE,GROWTH,ASTONISH", "PD",
+      only="nocasual", hard={"ab": "REGENERATOR"}),
+    P("PHANTUMP", 18, "NATURALCURE", "SITRUSBERRY", "ADAMANT", "BRANCHPOKE,ASTONISH,LEECHSEED,WILLOWISP", "HA",
+      nick="Lowmarsh", casual={"moves": "BRANCHPOKE,ASTONISH,LEECHSEED,CONFUSERAY"},
+      hard={"ab": "HARVEST", "moves": "BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP"}),
 ]))
 ADMINS.append(("Map 160 Ebbmouth - Teo Reyes, Ebbmouth Hollow cell (recurring: later battles use versions 1, 2, ...)", "HOLLOW_TEO", "Teo", 23,
     "Tell my sister— no. Don't tell her anything.", [

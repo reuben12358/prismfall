@@ -61,8 +61,8 @@ MANUAL_PREVO = {"KINGAMBIT": "BISHARP", "ANNIHILAPE": "PRIMEAPE", "FARIGIRAF": "
 # --- SPINE data (LOCKED) ------------------------------------------------------
 # gym number -> (trainer type, trainer name, level cap)
 WARDENS = OrderedDict([
-    (1, ("LEADER_TAMSIN", "Tamsin", 15)),
-    (2, ("LEADER_DORIAN", "Dorian", 19)),
+    (1, ("LEADER_DORIAN", "Dorian", 15)),     # SPINE Rev 14: Saltmere / Briarwick swapped
+    (2, ("LEADER_TAMSIN", "Tamsin", 19)),
     (3, ("LEADER_MARISOL", "Marisol", 23)),
     (4, ("LEADER_ROOK", "Rook", 27)),
     (5, ("LEADER_SAHAR", "Sahar", 31)),
@@ -91,7 +91,7 @@ RIVAL_BATTLES = OrderedDict([
     (("RIVAL_KESTREL", 7), ("Kestrel", 80)),
     (("RIVAL_KESTREL", 8), ("Kestrel", 94)),
     (("RIVAL_KESTREL", 9), ("Kestrel", 94)),    # Festival SF variant "Kestrel (Fallen)"
-    (("RIVAL_JUNO", 1), ("Juno", 19)),
+    (("RIVAL_JUNO", 1), ("Juno", 15)),          # Saltmere, before Gym 1 since SPINE Rev 14
     (("RIVAL_JUNO", 2), ("Juno", 35)),
     (("LEADER_JUNO", 3), ("Juno", 47)),     # J3 is the Gym 9 Warden battle
     (("RIVAL_JUNO", 4), ("Juno", 90)),
@@ -117,7 +117,7 @@ SINGLE_BOSSES = [  # (type, name, min ace level, max ace level) - Standard/Hard
 # ace in this range (Standard/Hard).
 # design/CAMEOS.md placements: {type: {version: ace level}}
 CAMEO_PLACEMENT = {
-    "FESTIVAL_SHELLY": {1: 17, 2: 100}, "FESTIVAL_VENAM": {1: 38, 2: 100}, "FESTIVAL_GARRET": {1: 46, 2: 100},
+    "FESTIVAL_SHELLY": {1: 21, 2: 100}, "FESTIVAL_VENAM": {1: 38, 2: 100}, "FESTIVAL_GARRET": {1: 46, 2: 100},
     "FESTIVAL_MELIA": {1: 50, 2: 100}, "FESTIVAL_ALEXANDRA": {1: 56, 2: 100}, "FESTIVAL_AMARIA": {1: 78, 2: 100},
     "FESTIVAL_TITANIA": {1: 78, 2: 100}, "FESTIVAL_SHIV": {1: 84, 2: 100}, "FESTIVAL_LIN": {1: 100},
     "FESTIVAL_NOVA": {1: 90},

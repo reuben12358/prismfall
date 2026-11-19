@@ -5,7 +5,7 @@ unsolvable, can soft-lock, or its shortest solution is not the designed one.
     python3 -I mapgen/puzzle_check.py     # print every proof"""
 import importlib
 
-MODULES = ['g1', 'g2', 'dungeons']
+MODULES = ['loomhouse', 'playhouse', 'dungeons']
 
 
 def modules():

@@ -124,3 +124,14 @@ No map file was edited. Fields for rival, admin and Festival battles now come fr
 5. **Gym 9 starting stage.** `setBattleRule("fieldStage", n)` from the puzzle result; Juno's team is written for stage 1.
 6. New route-trainer held items (no event change needed): Ranger Ash (map 132) Beautifly holds a Telluric Seed, Sailor
    Bjorn (map 173) Chinchou an Elemental Seed.
+
+## From map builder 7, 2026-11-19
+- **Door cells moved** (links unchanged; build.py checks arrivals): 100 inn (11,30), Mart (46,28); 120 PC (47,25),
+  Treetop House (60,23), Mart (29,43); 140 PC (24,32), Mart (58,30), Pageant Hall (46,26), House (26,6); 146 Harbour
+  Office (52,26); 147 Playhouse (44,18). HealingSpots follow (121: [120,47,26]; 141: [140,24,33]). The playtest bot's
+  Ferrow waypoints (34,47) and the lab door (53,11) are unchanged.
+- Map 109 moved from tileset 33 to 51 (same events and cells). Install tilesets 50-53 (the PF Rejuv sheet grew to 2570 rows).
+- **Saltmere rewiring waits** for design/SWAP_GYM1_GYM2.md and ROUTES.yaml: 140's N/W edges and all warps are as before.
+- **Side-content room (not reserved yet):** no plot is held for a Trial hall/outpost. Every town keeps lane-side
+  forest blocks the layout scripts can clear (Ferrow's east edge, Briarwick's NE and SE, Saltmere 140's east block and
+  147's lower town, Frostwick's east bench). Post a footprint and preferred district here and the layout owner seats it.

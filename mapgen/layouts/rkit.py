@@ -206,7 +206,9 @@ class RMap:
             nm = rng.choice(names); st = STAMPS[nm]; ox, oy = st['door']
             x0, y0 = x - ox, y - 1 - gap - oy
             if x0 - margin < 0 or y0 < 0 or x0 + st['w'] + margin > self.W: continue
-            if not self.free(x0 - margin, y0, st['w'] + 2 * margin, st['h'] + gap, on=on): continue
+            hh = min(st['h'], y - y0)                     # the footprint stops above the street (some stamps carry rows below the door)
+            if not self.free(x0 - margin, y0, st['w'] + 2 * margin, hh, on=on): continue
+            if hasattr(self, 'bfoot') and self.bfoot[max(0, y0 - 1):y, max(0, x0 - margin):x0 + st['w'] + margin].any(): continue
             sub = self.ht[y0:y + 1, x0:x0 + st['w']]
             if sub.min() != sub.max() or self.cliff[y0:y + 1, x0 - margin:x0 + st['w'] + margin].any(): continue
             if y0 + st['h'] + 4 <= self.H and (self.ht[y0 - 4 if y0 >= 4 else 0:y0, x0:x0 + st['w']] > sub.max()).any(): continue

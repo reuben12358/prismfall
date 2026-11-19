@@ -3,17 +3,19 @@
 120	:HOLLOW_THISTLE, "Thistle"
 130	:BUGCATCHER, "Nell"
 130	:LASS, "Orla"
-130	Prismfall.gym_battle(1)
 131	:GENTLEMAN, "Bram"
+131	Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)
 132	:BUGCATCHER, "Hollis"
 132	:POKEMONRANGER_M, "Ash"
 140	Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)
 145	:HOLLOW_GRUNT_M, "Grunt", :HOLLOW_GRUNT_F, "Grunt"
-151	:BEAUTY, "Rosalind"
-151	:JUGGLER, "Ambrose"
-151	:JUGGLER, "Florian"
-152	:GENTLEMAN, "Reginald"
-154	Prismfall.gym_battle(2)
+151	:GENTLEMAN, "Reginald"
+151	:JUGGLER, "Pierrot"
+151	:LADY, "Odette"
+154	:BEAUTY, "Rosalind"
+154	:JUGGLER, "Ambrose"
+154	:JUGGLER, "Florian"
+154	Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)
 160	:HOLLOW_TEO, "Teo"
 170	:FISHERMAN, "Gunnar"
 171	:SWIMMER_F, "Ingrid"

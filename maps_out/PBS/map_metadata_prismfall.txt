@@ -84,12 +84,12 @@ MapPosition = 0,14,23
 Name = Woodward's Hut
 MapPosition = 0,13,23
 #-------------------------------
-[130]   # Loomhouse Gym
-Name = Loomhouse Gym
+[130]   # Loomhouse Gym - Foyer
+Name = Loomhouse Gym - Foyer
 MapPosition = 0,12,22
 #-------------------------------
-[131]   # Loomhouse Upper Lofts - Weaving Hall
-Name = Loomhouse Upper Lofts - Weaving Hall
+[131]   # Loomhouse Gym - Weaving Hall
+Name = Loomhouse Gym - Weaving Hall
 MapPosition = 0,12,22
 #-------------------------------
 [132]   # Loomhouse Upper Lofts - Canopy Lofts
@@ -110,7 +110,7 @@ Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center
-HealingSpot = 140,28,30
+HealingSpot = 140,24,33
 MapPosition = 0,10,25
 #-------------------------------
 [142]   # Saltmere Mart
@@ -145,24 +145,24 @@ MapPosition = 0,10,25
 BattleBack = field
 Weather = Rain,10
 #-------------------------------
-[150]   # Pell Playhouse - Foyer
-Name = Pell Playhouse - Foyer
+[150]   # Pell Playhouse - Lobby
+Name = Pell Playhouse - Lobby
 MapPosition = 0,10,25
 #-------------------------------
-[151]   # Pell Playhouse - Revolving Stage
-Name = Pell Playhouse - Revolving Stage
+[154]   # Pell Playhouse - Auditorium
+Name = Pell Playhouse - Auditorium
 MapPosition = 0,10,25
 #-------------------------------
-[152]   # Pell Playhouse - Fly Loft
-Name = Pell Playhouse - Fly Loft
+[151]   # Pell Playhouse Backstage - The Old Revolve
+Name = Pell Playhouse Backstage - The Old Revolve
 MapPosition = 0,10,25
 #-------------------------------
-[153]   # Pell Playhouse - The Trap Room
-Name = Pell Playhouse - The Trap Room
+[152]   # Pell Playhouse Backstage - Fly Loft
+Name = Pell Playhouse Backstage - Fly Loft
 MapPosition = 0,10,25
 #-------------------------------
-[154]   # Pell Playhouse - The Grand Stage
-Name = Pell Playhouse - The Grand Stage
+[153]   # Pell Playhouse Backstage - The Trap Room
+Name = Pell Playhouse Backstage - The Trap Room
 MapPosition = 0,10,25
 #-------------------------------
 [160]   # Ebbmouth

@@ -184,6 +184,7 @@ def main():
     for x, y, z, i in ship_d:
         t, k = add33(off_d + i, k); dove.append([x, y, z, t])
     idmap = {t: i for t, i in idmap.items() if not isinstance(t, tuple)}
+    k = draw_in(rdraw.pieces_late2(), k)
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},

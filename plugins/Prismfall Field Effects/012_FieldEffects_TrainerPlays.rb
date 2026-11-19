@@ -26,6 +26,8 @@ module FieldEffects
   module TrainerPlays
     WANTS = {
       # Wardens
+      :LEADER_DORIAN    => { [:GRAND_STAGE, 2] => 10, [:GRAND_STAGE, 3] => 10, [:GRAND_STAGE, 1] => -10 },
+      :LEADER_TAMSIN    => { [:WILDFIRE, 2] => 20, :WILDFIRE => -25 },
       :LEADER_MARISOL   => { :UNDERWATER => 22, :WATER_SURFACE => -30 },
       :LEADER_ROOK      => { [:NEON_GRID, 1] => 22, [:NEON_GRID, 2] => -12 },
       :LEADER_SAHAR     => { [:DESERT, 1] => 22, [:DESERT, 2] => -20 },

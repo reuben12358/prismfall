@@ -44,8 +44,8 @@ module PlayBot
     [:to, 521, 520], [:goto, 520, "Stile send-off 2"], [:to, 520, 521],
     [:to, 521, 524], [:spot_all, 524], [:to, 524, 120], [:arrive, 120],
     [:to, 120, 121], [:talk, 121, "Nurse"], [:to, 121, 120],
-    [:to, 120, 130], [:to, 130, 131], [:spot_all, 131], [:to, 131, 132], [:spot_all, 132], [:to, 132, 133],
-    [:talk, 133, "Tamsin"],
+    # Stop at Briarwick: SPINE Rev 14 moves Gym 1 to Saltmere and makes Briarwick Gym 2 (design/SWAP_GYM1_GYM2.md
+    # pending), so no gym is attempted until the routes are rewired.
     [:done]
   ]
   REWIND = PLAN.index([:to, 100, 520])   # after a blackout: walk out of Ferrow's Landing again

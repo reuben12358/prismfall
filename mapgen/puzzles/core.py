@@ -83,8 +83,21 @@ class Model:
         return path[::-1], dist, regs, edges, emb
 
 
-def verify(model, moves=None, without=None, softlock=True):
-    """Returns (ok, lines). `moves`: the intended minimum number of device uses."""
+# SPINE Revision 13/14 difficulty curve (GYM_PUZZLES section 0b): a room's rating caps its shortest solution
+# (device uses) and its reachable state space.  verify(..., rating=r) fails a room that is harder than its rating.
+RATING_BUDGET = {1: (1, 4), 2: (3, 16), 3: (4, 64), 4: (8, 256), 5: (12, 1024), 6: (16, 4096), 7: (20, 16384),
+                 8: (28, 65536), 9: (36, 262144), 10: (60, 10 ** 7)}
+
+
+def rating_check(name, rating, moves, states):
+    mx, ms = RATING_BUDGET[rating]
+    if moves > mx or states > ms:
+        return False, 'FAIL %s: harder than its rating %d/10 (shortest %d moves, max %d; %d states, max %d)' % (name, rating, moves, mx, states, ms)
+    return True, '  rated %d/10: within budget (%d of %d moves, %d of %d states)' % (rating, moves, mx, states, ms)
+
+
+def verify(model, moves=None, without=None, softlock=True, rating=None):
+    """Returns (ok, lines). `moves`: the intended minimum number of device uses. `rating`: 1-10 difficulty cap."""
     out = []; ok = True
     path, dist, regs, edges, emb = model.solve()
     if emb:
@@ -114,6 +127,8 @@ def verify(model, moves=None, without=None, softlock=True):
             ok = False; out.append('FAIL %s: still solvable without %s: %s' % (model.name, label, ' > '.join(p2)))
         else:
             out.append('  proved: unsolvable without %s' % label)
+    if rating is not None:
+        k, line = rating_check(model.name, rating, len(path), len(dist)); ok &= k; out.append(line)
     out.insert(0, '%s %s: %d reachable states, shortest solution %d moves: %s' % (
         'ok  ' if ok else 'FAIL', model.name, len(dist), len(path), ' > '.join(path)))
     return ok, out
@@ -133,7 +148,7 @@ def around(mid, x, y):
     return [(mid, x + dx, y + dy) for dx, dy in DIRS]
 
 
-def machine(name, start, actions, goal, moves=None, invariant=None):
+def machine(name, start, actions, goal, moves=None, invariant=None, rating=None):
     """Proof for a puzzle with no walking in it (chimes, anchors): a plain state machine.
     actions(state) -> [(label, state)]; goal(state) -> bool; invariant(state) -> bool must hold everywhere."""
     dist = {start: 0}; prev = {start: None}; q = deque([start]); edges = {}
@@ -161,5 +176,7 @@ def machine(name, start, actions, goal, moves=None, invariant=None):
         ok = False; out.append('FAIL %s: %d soft-locked states' % (name, len(dist) - len(good)))
     if invariant and not all(invariant(s) for s in dist):
         ok = False; out.append('FAIL %s: invariant broken' % name)
+    if rating is not None:
+        k, line = rating_check(name, rating, len(path), len(dist)); ok &= k; out.append(line)
     out.insert(0, '%s %s: %d reachable states, shortest solution %d moves: %s' % ('ok  ' if ok else 'FAIL', name, len(dist), len(path), ' > '.join(path)))
     return ok, out

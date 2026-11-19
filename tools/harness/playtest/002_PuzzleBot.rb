@@ -3,38 +3,51 @@
 # The bot walks into a gym through its town door and solves the puzzle rooms with
 # ordinary input only: arrow keys along BFS paths, Use on levers/ropes, walking
 # into spools.  Nothing sets a switch or variable for it.
-#   PLAYBOT_SESSION=gym1   map 120's gym door -> the Loomhouse hall (one heddle) -> the Warden
-#   PLAYBOT_SESSION=lofts  the optional Upper Lofts: Weaving Hall -> Canopy Lofts -> Granny's Knot
-#   PLAYBOT_SESSION=gym2   Saltmere Old Town door -> Foyer -> Revolving Stage <-> Fly Loft -> the Grand Stage
+#   PLAYBOT_SESSION=gym1       map 147's Playhouse door -> Lobby -> Auditorium (aisle, curtain rope) -> Dorian
+#   PLAYBOT_SESSION=gym2       map 120's Loomhouse door -> Foyer (one heddle) -> Weaving Hall (linked heddles) -> Tamsin
+#   PLAYBOT_SESSION=lofts      the optional Upper Lofts (with Tamsin's badge): Canopy Lofts -> Granny's Knot
+#   PLAYBOT_SESSION=backstage  the optional Playhouse Backstage (D9): old revolve + Fly Loft
 # New step kinds: [:use_from, map, x, y, dir]  stand on (x, y), face dir, press Use
 #                 [:ride, map, x, y, dir]      stand on (x, y), walk into the thing in dir until thrown elsewhere
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [120, 36, 13], "lofts" => [130, 9, 21], "gym2" => [147, 53, 24], "d1" => [522, 6, 36] }
-  # Gym 1 (SPINE Rev 13): one easy hall. One heddle, one pull, two trainers, the Warden.
+  PUZZLE_START = { "gym1" => [147, 53, 24], "gym2" => [120, 36, 13], "lofts" => [131, 11, 4], "backstage" => [154, 3, 9],
+                   "d1" => [522, 6, 36] }
+  # Gym 1 (SPINE Rev 14): the Pell Playhouse. A walk-through: lobby, up the aisle past the actors, one curtain rope.
   GYM1_PLAN = [
-    [:shot, 120, "g1_00_outside_the_loomhouse"],
-    [:bump, 120, 36, 12],                 # the elder tree's door
-    [:shot, 130, "g1_01_hall_start"],
-    [:goto, 130, 9, 12], [:shot, 130, "g1_02_at_the_loom_bed"],
-    [:talk, 130, 11, 10], [:shot, 130, "g1_03_heddle_pulled"],
-    [:goto, 130, 9, 9],  [:shot, 130, "g1_04_on_the_plank"],
-    [:goto, 130, 9, 6],  [:shot, 130, "g1_05_before_the_warden"],
+    [:shot, 147, "g1_00_outside_the_playhouse"],
+    [:bump, 147, 53, 23],                 # map 147's Playhouse door
+    [:shot, 150, "g1_01_lobby"],
+    [:bump, 150, 11, 4],                  # the auditorium doors
+    [:shot, 154, "g1_02_auditorium"],
+    [:goto, 154, 12, 15], [:shot, 154, "g1_03_up_the_aisle"],
+    [:goto, 154, 12, 9],  [:shot, 154, "g1_04_on_the_apron_curtain_in"],
+    [:use_from, 154, 20, 9, 6], [:shot, 154, "g1_05_curtain_out"],
+    [:goto, 154, 12, 7],  [:shot, 154, "g1_06_before_dorian"],
     [:done]
   ]
-  # The optional Upper Lofts (open after Badge 1): linked heddles, spools and the brass wire, Granny's Knot.
-  LOFTS_PLAN = [
-    [:talk, 130, 11, 10],
-    [:goto, 130, 15, 3], [:shot, 130, "lf_00_stairs_to_the_upper_lofts"],
+  # Gym 2 (SPINE Rev 14): the Loomhouse. One heddle in the foyer, three linked heddles in the Weaving Hall.
+  GYM2_PLAN = [
+    [:shot, 120, "g2_00_outside_the_loomhouse"],
+    [:bump, 120, 36, 12],                 # map 120's elder-tree door
+    [:shot, 130, "g2_01_foyer"],
+    [:goto, 130, 9, 12], [:shot, 130, "g2_02_at_the_loom_bed"],
+    [:talk, 130, 11, 10], [:shot, 130, "g2_03_heddle_pulled"],
+    [:goto, 130, 9, 9],  [:shot, 130, "g2_04_on_the_plank"],
     [:goto, 130, 15, 2],
-    [:shot, 131, "lf_01_hall_start"],
-    [:talk, 131, 1, 21],  [:shot, 131, "lf_02_hall_red"],
-    [:talk, 131, 9, 21],  [:shot, 131, "lf_03_hall_gold"],
-    [:talk, 131, 23, 21], [:shot, 131, "lf_04_hall_green_all_right"],
-    [:goto, 131, 21, 18], [:shot, 131, "lf_05_hall_on_the_planks"],
-    [:goto, 131, 21, 4],
-    [:goto, 131, 12, 1],
+    [:shot, 131, "g2_05_hall_start"],
+    [:talk, 131, 1, 21],  [:shot, 131, "g2_06_hall_red"],
+    [:talk, 131, 9, 21],  [:shot, 131, "g2_07_hall_gold"],
+    [:talk, 131, 23, 21], [:shot, 131, "g2_08_hall_green_all_right"],
+    [:goto, 131, 21, 18], [:shot, 131, "g2_09_hall_on_the_planks"],
+    [:goto, 131, 21, 10], [:goto, 131, 21, 4], [:shot, 131, "g2_10_hall_top"],
+    [:goto, 131, 12, 3],  [:shot, 131, "g2_11_before_tamsin"],
+    [:done]
+  ]
+  # The optional Upper Lofts (after Tamsin's badge): spools + the brass Meridian wire, then Granny's Knot.
+  LOFTS_PLAN = [
+    [:goto, 131, 12, 2],
     [:shot, 132, "lf_06_lofts_start"],
     [:talk, 132, 1, 21],                  # alpha cord
     [:ride, 132, 3, 22, 6],               # spool s1 -> west deck
@@ -54,30 +67,25 @@ module PlayBot
     [:talk, 134, 5, 10], [:shot, 134, "lf_13_chest"],
     [:done]
   ]
-  GYM2_PLAN = [
-    [:shot, 147, "g2_00_outside_the_playhouse"],
-    [:bump, 147, 53, 23],
-    [:shot, 150, "g2_01_foyer_start"],
-    [:use_from, 150, 3, 6, 6], [:shot, 150, "g2_02_foyer_overture"],
-    [:goto, 150, 9, 2],
-    [:shot, 151, "g2_03_stage_work_lights"],
-    [:use_from, 151, 2, 17, 2], [:shot, 151, "g2_04_stage_shipwreck"],
-    [:goto, 151, 4, 13], [:shot, 151, "g2_05_stage_across_the_gangplank"],
-    [:use_from, 151, 6, 10, 6], [:shot, 151, "g2_06_stage_forest"],
+  # Playhouse Backstage (D9, optional after Gym 2): the old revolving stage + Fly Loft.
+  BACKSTAGE_PLAN = [
+    [:goto, 154, 2, 9], [:bump, 154, 1, 9],
+    [:shot, 151, "bs_00_old_revolve"],
+    [:use_from, 151, 2, 17, 2], [:shot, 151, "bs_01_shipwreck"],
+    [:goto, 151, 4, 13],  [:shot, 151, "bs_02_across_the_gangplank"],
+    [:use_from, 151, 6, 10, 6], [:shot, 151, "bs_03_forest"],
     [:goto, 151, 2, 4],
-    [:shot, 152, "g2_07_loft_start"],
-    [:talk, 152, 21, 6], [:shot, 152, "g2_08_loft_rope2"],
-    [:talk, 152, 22, 6], [:shot, 152, "g2_09_loft_rope3"],
+    [:shot, 152, "bs_04_loft"],
+    [:talk, 152, 21, 6], [:shot, 152, "bs_05_rope2_right_rail"],
+    [:talk, 152, 22, 6], [:shot, 152, "bs_06_rope3"],
     [:goto, 152, 22, 4],
-    [:shot, 151, "g2_10_stage_right_side"],
-    [:use_from, 151, 18, 5, 8], [:shot, 151, "g2_11_stage_throne"],
-    [:goto, 151, 14, 10], [:shot, 151, "g2_12_stage_through_flat_b"],
-    [:goto, 151, 12, 7],  [:shot, 151, "g2_13_stage_on_the_rostrum"],
-    [:goto, 151, 12, 2],
-    [:arrive, 154], [:shot, 154, "g2_14_the_grand_stage"],
+    [:use_from, 151, 18, 5, 8], [:shot, 151, "bs_07_throne"],
+    [:goto, 151, 14, 10], [:shot, 151, "bs_08_through_flat_b"],
+    [:goto, 151, 12, 7],  [:shot, 151, "bs_09_rostrum"],
+    [:goto, 151, 12, 3],  [:goto, 151, 12, 2],
+    [:arrive, 154], [:shot, 154, "bs_10_back_in_the_auditorium"],
     [:done]
   ]
-
   # PLAYBOT_SESSION=d1: the Glassed Orchard chime rows, with one deliberate wrong note first (the failure line)
   D1_PLAN = [
     [:talk, 522, 19, 33], [:shot, 522, "d1_00_chime_post"],
@@ -96,6 +104,7 @@ module PlayBot
       return GYM1_PLAN if SESSION == "gym1"
       return GYM2_PLAN if SESSION == "gym2"
       return LOFTS_PLAN if SESSION == "lofts"
+      return BACKSTAGE_PLAN if SESSION == "backstage"
       return D1_PLAN if SESSION == "d1"
       return puz_plan
     end
@@ -168,7 +177,11 @@ module Game
       $player.has_running_shoes = true
       $player.party = [Pokemon.new(:TALONFLAME, 45), Pokemon.new(:ARCANINE, 45), Pokemon.new(:STARAPTOR, 45)]
       Prismfall::LevelCap.disable! if defined?(Prismfall::LevelCap) && Prismfall::LevelCap.respond_to?(:disable!)
-      $player.badges[0] = true if PlayBot::SESSION == "lofts"
+      if ["lofts", "backstage"].include?(PlayBot::SESSION)   # these need Tamsin's badge, as on a real save
+        n = pfm_gym(:LEADER_TAMSIN) || 2
+        $player.badges[n - 1] = true
+        $player.badges[(pfm_gym(:LEADER_DORIAN) || 1) - 1] = true
+      end
       (101..110).each { |i| $game_switches[i] = true }      # the story so far (Chapters 0-2 flags), as on a real save
       $game_map.need_refresh = true
       PlayBot.recording = true

@@ -8,9 +8,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RUN = os.environ.get('RUN', '/home/claude/run')
 DOCS = os.path.join(HERE, '..', '..', '..', 'docs', 'playtest', 'puzzles')
 CAP = {
-    'g1_00': 'Gym 1: outside the Loomhouse (map 120)', 'g1_01': 'The Loomhouse: one hall, the Warden at the far end',
-    'g1_02': 'The loom bed: the plank sits off to the left, a silk thread runs to the heddle', 'g1_03': 'One pull: the plank slides into the aisle',
-    'g1_04': 'Across the loom bed', 'g1_05': 'Before Warden Tamsin',
+    'g1_00': 'Gym 1: outside the Pell Playhouse (map 147)', 'g1_01': 'Gym 1 lobby (map 150)',
+    'g1_02': 'Gym 1 auditorium (map 154): the aisle runs between the seat rows to the stage',
+    'g1_03': 'Up the aisle (the actors on the aisle edge battle you)', 'g1_04': 'On the apron: the house curtain is in',
+    'g1_05': 'The one interaction: haul the curtain rope; the curtain flies out', 'g1_06': 'Before Warden Dorian',
+    'g2_00': 'Gym 2: outside the Loomhouse (map 120)', 'g2_01': 'Gym 2 foyer (map 130): one loom bed across the aisle',
+    'g2_02': 'The plank sits off to the left; a silk thread runs to the heddle', 'g2_03': 'One pull: the plank slides into the aisle',
+    'g2_04': 'Across the loom bed', 'g2_05': 'Weaving Hall (map 131): the middle bed has no left plank at all',
+    'g2_06': 'Red heddle lifts beds A and B', 'g2_07': 'Gold lifts B and C',
+    'g2_08': 'Green lifts C and A: every bed lifted twice, all planks on the right', 'g2_09': 'Climbing the right-hand column',
+    'g2_10': 'Top ledge', 'g2_11': 'Before Warden Tamsin (double battle)',
+    'bs_00': 'Playhouse Backstage (D9, map 151): work lights', 'bs_01': 'Cue the Shipwreck from the mark: a gangplank crosses the pit',
+    'bs_02': 'Over the gangplank to stage left', 'bs_03': 'Cue the Forest: the ship drops go, the ladder is free',
+    'bs_04': 'Fly Loft (map 152)', 'bs_05': 'RIGHT rail: rope 2 flies flats B and C', 'bs_06': 'Rope 3 flies A and drops the rostrum back in',
+    'bs_07': 'Down the right ladder: cue the Throne', 'bs_08': 'Through the gap where flat B stood', 'bs_09': 'On the rostrum, flat A gone, the dais ahead',
+    'bs_10': 'The upstage door: the old script, and back to the auditorium',
     'lf_00': 'Upper Lofts (optional, after Badge 1): the stairs behind the Warden', 'lf_01': 'Weaving Hall: start (the middle bed has no plank at all)',
     'lf_02': 'Weaving Hall: Red heddle lifts beds A and B', 'lf_03': 'Weaving Hall: Gold lifts B and C',
     'lf_04': 'Weaving Hall: Green lifts C and A: every bed lifted twice, all planks on the right', 'lf_05': 'Weaving Hall: climbing the right-hand column',
@@ -27,8 +39,8 @@ CAP = {
     'g2_08': 'Fly Loft, RIGHT rail: rope 2 flies flats B and C', 'g2_09': 'Fly Loft: rope 3 flies A and drops the rostrum back in',
     'g2_10': 'Stage: down the right ladder', 'g2_11': 'Stage: Cue: the Throne', 'g2_12': 'Stage: through the gap where flat B stood',
     'g2_13': 'Stage: on the rostrum, flat A gone, the dais ahead', 'g2_14': 'The Grand Stage: Warden Dorian'}
-ROOM = {130: 'The Loomhouse', 131: 'Weaving Hall', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
-        150: 'Foyer', 151: 'Revolving Stage', 152: 'Fly Loft', 154: 'The Grand Stage'}
+ROOM = {130: 'Loomhouse foyer', 131: 'Weaving Hall', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
+        }
 
 
 def main():
@@ -66,7 +78,7 @@ def main():
         if old.startswith(ses + '_'): os.remove(os.path.join(DOCS, old))
     tmp = os.path.join(run, 'media'); os.makedirs(tmp, exist_ok=True)
     for old in os.listdir(tmp): os.remove(os.path.join(tmp, old))
-    labels = '|'.join('%s: %s' % ({'gym1': 'Gym 1', 'gym2': 'Gym 2', 'lofts': 'Upper Lofts', 'd1': 'Dungeon 1'}.get(ses, ses), ROOM.get(m, str(m))) for m, _, _ in segs)
+    labels = '|'.join('%s: %s' % ({'gym1': 'Gym 1', 'gym2': 'Gym 2', 'lofts': 'Upper Lofts', 'backstage': 'Backstage', 'd1': 'Dungeon 1'}.get(ses, ses), ROOM.get(m, str(m))) for m, _, _ in segs)
     cmd = ['python3', '-I', os.path.join(HERE, 'make_playtest_media.py'), run, tmp, '--step', str(step), '--ms', str(ms), '--name', 'solve',
            '--gif', ','.join('%d-%d' % (a, b) for _, a, b in segs), '--labels', labels]
     for s in shots: cmd += ['--shot', s]

@@ -1,4 +1,4 @@
-# GYM PUZZLES — all 18 Wardens (Revision 10 rewrite)
+# GYM PUZZLES — all 18 Wardens (Revision 10 rewrite; Revision 14 order and difficulty curve in §0b)
 
 Supersedes the previous GYM_PUZZLES.md. Research basis: `design/PUZZLE_STUDY.md` (decoded Reborn and Rejuvenation puzzles
 and the 15 design principles). Dungeons: `design/DUNGEON_PUZZLES.md`.
@@ -10,6 +10,68 @@ field (map default in `FieldEffects::MAP_FIELDS`, plus `setBattleRule("field", �
   already a solution: you could walk straight up the left side.
 - *Gym 1, 131.* The levers stood on the plank landing tiles of ledge S (3/12/21, 18), so a plank landing on a lever was
   unreachable.
+
+---
+## 0b. The difficulty curve (SPINE Revisions 13 and 14) — supersedes every ★ rating below
+
+The user: *"gym puzzles should range from simple to complicated (gym 1 should have a layout similar to Jasmine's gym from
+HeartGold/SoulSilver, nothing too complicated, gym 2 onwards it gets more fun)"* and *"gym 1 should be normal type to ease the
+player into the game"*. So Gyms 1 and 2 swapped towns (SPINE Rev 14), Gym 1 lost its puzzle, and every gym now has a
+**rating (1–10)** and an **expected first-time solve time** (puzzle only, battles excluded). Reborn-level difficulty arrives in
+the mid-to-late gyms, never before Gym 9.
+
+**What a rating means, and the machine check.** `mapgen/puzzles/core.py` (`RATING_BUDGET`) caps each *required* room's
+shortest solution (device uses: levers, ropes, rides) and its reachable state space. `build.py --strict` fails a room that is
+harder than its rating, so an early gym cannot creep up.
+
+| Rating | Feels like | Max moves | Max states | Rule budget |
+|---|---|---|---|---|
+| 1 | a walk-through (Jasmine) | 1 | 4 | at most one interaction, no way to fail |
+| 2 | one obvious step | 3 | 16 | one rule, said aloud |
+| 3 | first real puzzle | 4 | 64 | one coupled rule you can SEE; a 3-tier hint always works |
+| 4 | a proper room | 8 | 256 | one rule + one twist |
+| 5 | two systems | 12 | 1 024 | rule × second system |
+| 6 | two systems, two rooms | 16 | 4 096 | cross-room cause and effect |
+| 7 | Reborn mid-game | 20 | 16 384 | three systems, or one deep one |
+| 8 | Reborn Lapis / Calcenon | 28 | 65 536 | composition, careful planning |
+| 9 | Reborn late game | 36 | 262 144 | composition + one timing or information layer |
+| 10 | the hardest in the game | 60 | 10 000 000 | everything; still provably fair |
+
+Optional Mastery rooms may sit up to **two points above** their gym; they never block a badge.
+
+| Gym | Warden · town | Type · field | Rating | Expected solve | Required puzzle (what you must do) | Moved out to stay in budget |
+|---|---|---|---|---|---|---|
+| 1 | Dorian · Saltmere (150, 154) | Normal · Grand Stage | **1** | 2 min | Walk up the aisle past three actors, pull one curtain rope, battle | The whole revolving stage → **D9 Playhouse Backstage** (optional, 4/10) |
+| 2 | Tamsin · Briarwick (130, 131) | Bug · Silkwood (doubles) | **3** | 6–10 min | One heddle (teach), then three linked heddles: each lifts two loom beds | Spools + brass Meridian wire + Granny's Knot → **Upper Lofts** (optional, 4/10 and 3/10) |
+| 3 | Marisol · Ebbmouth | Water · Water Surface | **4** | 10–15 min | Practice lock, then ONE basin: level wheel + drifting raft (≤ 8 actions) | Tide bell × lock gate combination → Overflow Culvert Mastery (6/10) |
+| 4 | Rook · Lumen City | Electric · Neon Grid | **5** | 15 min | Rotate conduits, tees and the alarm lamp | Drone-as-wire + latches → Live Wire Hall stays, but the latch board is the Edit Bay Mastery |
+| 5 | Sahar · Duneholt | Ground · Desert | **5** | 15–20 min | Sun-mirrors decide crust or sink; one drop is the way across | Two-floor loop of drops → Mural Gallery Mastery |
+| 6 | Corvin · Mirefen | Poison · Corrosive Mire | **6** | 20 min | Measures with unmarked flasks (3 + 5 make 4), carried across the filter steps | — |
+| 7 | Brann · Cindervault | Fire · Volcanic | **6** | 20 min | Pour, aim, quench; what you don't quench drains below | — |
+| 8 | Kaito · Ironreach | Fighting · Colosseum | **6** | 20 min | Pursuers vs Strength boulders, checkpoints | — |
+| 9 | Juno · Verdance | Grass · Flower Garden | **7** | 25 min | Watering rings; leftover overgrowth becomes the arena's field stage | — |
+| 10 | Anja · Rimeholt | Ice · Frozen Lake | **7** | 25 min | Slides, cracks, the under-ice, plugs | — |
+| 11 | Odessa · Skyreach | Flying · Stormfront | **8** | 30 min | Coupled vanes steer fans that push you and the mail | — |
+| 12 | Ilsa · Lucent | Psychic · Mindscape | **8** | 30 min | Mirrored walker, swap pads | — |
+| 13 | Bastian · Cragholm | Rock · Crystal Cavern | **8** | 30 min | Beams, prisms, colour gates, boulders as blocks | — |
+| 14 | Ysolde · Gravenmoor | Ghost · Hollow Cathedral | **9** | 35 min | Twin naves, persistent pews, the echo | — |
+| 15 | Magnus · Cogsworth | Steel · Factory | **9** | 35 min | Belts, presses, crates on one clock | — |
+| 16 | Nyx · Underveil | Dark · New Moon | **9** | 40 min | Guards, lanterns, secrets that re-route the vault | — |
+| 17 | Celestine · Gloaming | Fairy · Fairy Tale | **10** | 40 min | Truth-bound storybook logic | — |
+| 18 | Sigrun · Wyrmrest | Dragon · Dragon's Den | **10** | 45 min | Scales, statues and the magma tide | — |
+
+**Built and proven today** (`python3 -I mapgen/puzzle_check.py`, and again on the built maps by `build.py`):
+Gym 1 auditorium 1 move / 2 states (1/10) · Gym 2 foyer 1 / 2 (1/10) · Gym 2 Weaving Hall 3 / 27 (3/10) · Upper Lofts
+7 / 93 (4/10, unsolvable without the brass wire) · Granny's Knot 3 / 32 (3/10, unique) · Playhouse Backstage stage + loft
+5 / 39 (4/10, unsolvable without each scene and without the loft) · Trap Room 3 / 6 (3/10).
+**Gym 3 needs a trim before it is rebuilt** (owner of `gen_gym3.py`): its spec'd basins take 16 actions, which is a 6/10 room.
+The required route must fit 4/10 (≤ 8 actions); the bell × gate combination becomes the Culvert Mastery.
+
+**ID blocks after the swap.** Switch/variable blocks belong to the *building*, not the gym number, so nothing was renumbered:
+305–309 = the Loomhouse (now Gym 2), 310–314 = the Pell Playhouse (now Gym 1). Names in `mapgen/flags.yaml` are
+`LOOM_*` and `STAGE_*`. Gym events never hard-code a gym number either: they call
+`Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)` and `award_badge(pfm_gym(...))`
+(`mapgen/ruby/008_GymOrder.rb`), which read Core's `Prismfall::GYMS` table, so the maps are right in either order.
 
 ---
 ## 0. Conventions (read once)
@@ -95,10 +157,10 @@ them, or where a state crosses maps.
 ---
 ## 2. The 18 at a glance
 
-| # | Warden · field | Core rule | Teach → Twist → Combine → Mastery | ★ |
+| # | Warden · field | Core rule | Teach → Twist → Combine → Mastery | ★ (see §0b for the 1–10 ratings) |
 |---|---|---|---|---|
-| 1 | Tamsin · Silkwood | **Follow the thread**: each heddle moves what its silk ties to, and every pattern repeats in 3 pulls | one heddle → coupled heddles → spools + a brass Meridian wire that also moves a bridge → Granny's Knot | 1 |
-| 2 | Dorian · Grand Stage | **The stage moves, the marks don't**: cues swap scenery, ropes only work from marks | one cue → three scenes in Script order → loft flats that leave the stage hang in the loft → ride the revolve | 2 |
+| 1 | Dorian · Grand Stage | **A walk-through** (Rev 14): the house loves a show | aisle, three actors, raise the curtain (D9 Backstage keeps the old revolving-stage puzzle) | 1/10 |
+| 2 | Tamsin · Silkwood | **Follow the thread**: each heddle moves what its silk ties to | one heddle → three linked heddles (Upper Lofts: spools + brass wire → Granny's Knot, optional) | 3/10 |
 | 3 | Marisol · Water Surface | **Water lifts what floats, the current carries what's loose** | practice lock → three water levels × a drifting raft × the tide bell × a lock gate → snag culvert | 3 |
 | 4 | Rook · Neon Grid | **Route the power, never the alarm** | rotate conduits → tees and an alarm lamp → Rotom drone as a portable wire + latching relays → the empty Plate socket | 4 |
 | 5 | Sahar · Desert | **Sun hardens, shade sinks**: falling is a way across | one drop → sun-mirrors decide which lanes are crust and which sink → a two-floor loop where drops are transport → mural rubbing | 5 |
@@ -117,7 +179,7 @@ them, or where a state crosses maps.
 | 18 | Sigrun · Dragon's Den | **Nothing passes unweighed**: scales, statues and the magma tide | one scale → the coupled statue ring → hoard weights on magma-floated pans → say it aloud | 10 |
 
 ---
-## 3. Runtime helpers the specs call (`mapgen/ruby/007_Puzzles.rb`, contract)
+## 3. Runtime helpers the specs call (contract; BUILT as the plugin `plugins/Prismfall Puzzles/`, rooms in the generated `Plugins/Prismfall Maps/007_PuzzleRooms.rb`)
 
 The builder writes this file next to `006_MapStory.rb` (§5 lists everything the toolchain needs). All helpers act on the
 current map and find events by name. Each must be Ruby 3.1-safe and use only v21.1 APIs: `pbSet`, `pbGet`,
@@ -144,7 +206,53 @@ current map and find events by name. Each must be Ruby 3.1-safe and use only v21
 | `pfp_hint(id)` / `pfp_skip?` | apprentice support: hint tier, and the skip test (`$game_switches[301]`) |
 
 ---
-## Gym 1 — Briarwick, the Loomhouse · Tamsin Loom (Bug, `:SILKWOOD`, cap 15) · ★
+## Gym 1 — Saltmere, the Pell Playhouse · Dorian Pell (Normal, `:GRAND_STAGE`, cap 15, single battle) · 1/10, 2 min
+
+**SPINE Rev 14.** The first gym is a handsome walk-through in the spirit of Jasmine's HGSS gym. The only thing to learn is
+the first field: the house loves a show.
+**Layout and logic:** `mapgen/puzzles/playhouse.py` (`LOBBY`, `THEATRE`; authoritative coordinates), painted by
+`mapgen/gen_playhouse.py` on tileset 54 "PF Rejuv Halls" (Rejuvenation's Goldenleaf Theatre tiles).
+
+### 150 Lobby (22×14)
+Mauve panelled walls with purple pillars, framed playbills (*The Gilded King*, pasted over "closed"; *The Lady in Red*),
+gilded urns and velvet ropes, couches, a rug. The usher, the **gym guide** (teaches the field: sound and dance moves get a
+cheer; Fighting is good, Ghosts don't care) and a regular. The auditorium doors are in the back wall. Exit mat → Saltmere
+(`SM_GYM`, map 147).
+
+### 154 Auditorium — the gym (25×25)
+```
+y2-3   red drape backdrop
+y4-8   the stage, house curtain IN (tile events, var STAGE_CURTAIN = V311)    Dorian (12,5) behind it
+y9     the apron: wing steps (1,9) · curtain rope (21,9) · stagehand (22,9)
+y10    the stage lip, steps at (12,10)
+y11    cross aisle
+y12-14 seat blocks x2-10 | central aisle x11-13 (velvet runner) | x14-22;  Rosalind (14,14) faces the aisle
+y15    cross aisle                                                          Ambrose (1,13) watches the side aisle
+y16-19 seat blocks;  Florian (10,18) faces the aisle
+y20-21 back of the house;  doors (12,23) → lobby
+```
+- **Trainers:** Juggler Florian and Beauty Rosalind stand at the aisle's edge, so walking up it means two battles; Juggler
+  Ambrose in the side aisle is optional. All use the Grand Stage field.
+- **The one interaction:** the curtain is in. The stagehand: "He won't come out till the curtain's up. That rope, there."
+  Pull it: V311 = 1, a small screen shake, the curtain events vanish and Dorian's page appears.
+- **Dorian:** `Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)`. Win → badge, TM42 Facade, Eevee
+  "Understudy" (S110), the Pageant invitation.
+- **Apprentice:** none needed (nothing can go wrong). The room is still registered (`:ph_theatre`) so Debug reset/solve work.
+- **Proof:** 1 move, 2 states (rating 1).
+- **After Tamsin's badge,** Dorian points at the stage-left wing: the **Playhouse Backstage** (DUNGEON_PUZZLES D9),
+  which is the Revision 10 Gym 2 puzzle, kept whole.
+
+---
+## Gym 2 — Briarwick, the Loomhouse · Tamsin Loom (Bug, `:SILKWOOD`, cap 19, double battle) · 3/10, 6–10 min
+
+**SPINE Rev 14:** this was Gym 1; it is now the first real puzzle. The gym itself is two rooms (130 Foyer, 131 Weaving Hall);
+Tamsin waits on the Weaving Hall's top ledge. The spools, the brass Meridian wire and Granny's Knot became the optional
+**Upper Lofts** (132, 134), up the stairs behind her after the badge. Coordinates: `mapgen/puzzles/loomhouse.py`
+(authoritative; the tables below give the design, the module gives the built positions). Painted by `mapgen/gen_loomhouse.py`
+on tileset 54 (Rejuvenation timber-hall tiles + Prismfall looms, dye vats, silk bales, webs).
+Rejected Rev 13 interim (one-room hall with the Warden at the top): superseded by Rev 14 the same day.
+
+**Original design (Revision 10), adjusted:**
 
 **Core rule: follow the thread.** Every lever (a *heddle*) is tied by visible silk to what it moves. One pull can lift two
 things. Every pattern repeats after three pulls.
@@ -168,7 +276,13 @@ It is not on the pattern card, and it moves something nobody expects: Tamsin's s
 
 Tiles: `PLANK` = 3807 (passable cross-board, used today). Hanging threads use the `custom` strand tiles (`CU['strand_*']`).
 
-### 130 Foyer — TEACH "the first thread" (15×13, palette `loom`)
+### 130 Foyer — TEACH "the first thread" (20×24 as built)
+**As built (Rev 14):** a straight hall: looms in pairs either side of an aisle, one loom bed across it. The plank starts at
+x5–6 (left); the heddle beside the aisle (11,10) is tied by a visible silk thread to it; **one pull** slides it into the
+aisle (V308 0/1). Bug Catcher Nell and Lass Orla flank the aisle; Tamsin's apology spiral; Pim (apprentice, `:lh_foyer`);
+the first loom (Ledger key). Stairs (15,2) → 131. Proof: 1 move, 2 states.
+
+*Revision 10 version (three balconies, period-3 heddle), kept for reference:*
 ```
      012345678901234
 y0   vvvvvvvvvvvvvvv
@@ -200,7 +314,11 @@ pull is rewarded either way (balcony B holds the hint card, A the Potion).
 **Teaches:** that a lever moves something far away, that a visible thread shows the link, and that the cycle has period 3.
 There is no failure state.
 
-### 131 Weaving Hall — TWIST "two threads per heddle" (25×21)
+### 131 Weaving Hall — TWIST "two threads per heddle" (25×24 as built) — the gym's puzzle
+**As built (Rev 14):** the grid below shifted down two rows (three loom beds at rows 5–8, 11–13, 16–19). Tamsin stands on
+the top ledge at (11,3); the stairs behind her (12,1) go to the Upper Lofts once you hold her badge. Gentleman Bram is on the
+top ledge; Nell and Orla moved to the Foyer. Battle: `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`.
+Proof on the built map: 3 moves (Red, Gold, Green once each), 27 states, no soft-lock.
 ```
      0123456789012345678901234
 y0   ############E############    E (12,0) → 132 (2,22)
@@ -241,7 +359,9 @@ y20  ############.############    entrance (12,20) from 130
   each row got lifted the same number of times?" 3 the solution.
 - **Reset:** Pim → V305–307 = 0. Pulls are also self-undoing (three pulls = no change).
 
-### 132 Canopy Lofts — COMBINE "spools, cords and the brass wire" (25×25)
+### 132 Canopy Lofts — UPPER LOFTS, optional after the badge (4/10) "spools, cords and the brass wire" (25×26)
+**As built:** P6's exit leads to Granny's Knot (134); there is no trunk door. Proof: **7** actions (the spec said 8; the
+solver found the true minimum), unsolvable without the brass wire.
 Platforms (4×3 decks, centre `(cx,cy)`): **P1 (2,22)**, **P2 (12,20)**, **P3 (4,12)**, **P4 (19,14)**, **P5 (12,6)**,
 **P6 (20,3)**, with P6's deck extended to rows 2–5. Everything else is void with silk lines drawn between spool pairs
 (the existing zip-tile loop).
@@ -289,12 +409,12 @@ Other solutions exist (for example brass twice for the P4 bridge). All of them n
 isn't Gran's. Pull it and watch the far side of the canopy." 3 the solution.
 **Reset:** Mossy → S305–307 OFF, V309 = 0, back to P1.
 
-### 133 The Spindle — arena (15×15, unchanged)
+### 133 The Spindle — retired (Rev 14): Tamsin battles on 131's top ledge. Map 133 is no longer built.
 Tamsin, single battle, `:SILKWOOD`. Badge 1, TM89 U-turn, then the existing confession scene (`:ch2_tamsin`). New
 line if S308 is on: "You finished Gran's row. ...She'd have shouted. Happily. Sorry — I'm crying, that's the Silkwood,
 it's very dusty."
 
-### 134 Granny's Knot — MASTERY (optional, 13×9, new; door D on P5)
+### 134 Granny's Knot — UPPER LOFTS MASTERY (optional, 3/10; reached from P6)
 ```
      0123456789012
 y0   #############
@@ -316,162 +436,10 @@ y8   ######@######     @ (6,8) ← door D
   "Twist it or lose it."
 - **Reset:** the "Re-thread" lever lowers every thread.
 
-**Gym 1 trainers (5):** Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
+**Trainers (Rev 14):** Foyer: Nell, Orla. Weaving Hall: Bram. Upper Lofts: Hollis, Ash. *Original list:* Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
 (12–13), Pokémon Ranger ♂ Ash (13–14). Nell and Bram are optional.
 
 ---
-## Gym 2 — Saltmere, Pell Playhouse · Dorian Pell (Normal, `:GRAND_STAGE`, cap 19) · ★★
-
-**Core rule: the stage moves, the marks don't.** A cue rope changes the whole set: flats appear, bridges vanish. You can
-only call a cue from a painted **mark**, because every rope post is boxed in so that the only tile beside it is a mark.
-**Twist:** cues set *specific* scenes, and the geometry forces them in Script order. **Combine:** in the Fly Loft, a flat
-flown *out* of the stage hangs *in* the loft. The two rooms share one set of scenery, and the counterweight ropes are
-coupled. **Mastery:** ride the revolve (a turntable under the stage).
-**Warden link:** "The stage tells the truth the throne won't." The only route through the stage performs *The Gilded King*
-in order (Ship → Forest → Throne): Dorian's banned play, staged by the player. **Field link:** Grand Stage. Actors are
-dancers and singers (Sound and Dance moves). **Kingdom:** Saltmere, Elowen's free port, where "nothing is a miracle, so
-we built our own".
-
-### State
-| ID | Name | Values |
-|---|---|---|
-| V310 | `G2_SCENE` | 0 work lights · 1 Shipwreck · 2 Forest · 3 Throne |
-| V311 | spare | |
-| V312 | `G2_TURNTABLE` | 0–3 (153) |
-| V313 | `G2_OVERTURE` | 0/1 (150) |
-| S310 / S311 / S312 | `G2_FLAT_A/B/C_FLOWN` | ON = the flat hangs in the loft (off the stage) |
-| S313 | spare | |
-| S314 | `G2_TRAP_DONE` | 153 chest |
-
-### 150 Foyer — TEACH "hit your mark" (19×13)
-```
-     0123456789012345678
-y0   #########E#########    E (9,0) auditorium doors → 151 (12,16)
-y1   #.......hhh.......#    h = Overture curtain-flat (wall while V313 = 0)
-y2   #...#.............#
-y3   #..x1#......u.....#    rope "Cue: Overture" (4,3), boxed by (4,2) (5,3) (4,4) · x mark (3,3) · u usher (12,3)
-y4   #...#.............#
-y5   #.................#
-y6   #..S..........A...#    S the Script sign (3,6) · A apprentice "Stagehand Wren" (14,6)
-...
-y12  #########@#########    @ (9,12), link from Saltmere 147
-```
-- `Curtain h` (8–10, 1): P0 [—] tile CURTAIN (impassable) · P1 [V313≥1] blank.
-- The rope (action, usable only from (3,3)): V313 = 1 − V313. "*Cue: Overture!* The curtain flies out."
-- Usher: "On this stage, darling, the scenery moves and the marks don't. Call a cue from anywhere but your mark and
-  you'll be wearing a forest." Script sign: *"Act I, the Shipwreck. Act II, the Forest. Act III, the Throne. Places,
-  understudy."*
-
-### 151 Revolving Stage — TWIST "three scenes, in order" (25×18)
-```
-     0123456789012345678901234
-y0   ############E############    E (12,0) upstage door → 154 (10,13)
-y1   #...s....###T###..#.....#    T (12,1) dais steps (passable only in Throne)
-y2   #.L.s....#.....#.#3#..K.#    L (2,2) ladder → 152 left · K (22,2) ladder → 152 right · rope 3 (18,2)
-y3   #...s....#AAAAA#..x.....#    A = flat A (wall while IN)
-y4   #ssss....#.....#.....ttt#
-y5   #....ffff#vvCvv#........#    C (12,5) = rostrum over the stage trap (walkable only while IN)
-y6   #........#.....#fffff...#
-y7   #......#.#.....#....f...#
-y8   #.....x2##.....B....f...#    rope 2 (7,8) with mark (6,8) · B (15,8) = flat B (wall while IN)
-y9   #......#.#.....#ttttf...#
-y10  #fff.ffff#.....#....f...#
-y11  #........#.....#....f...#
-y12  #vvvSvvvvvvvFvvvvvvvTvvv#    orchestra pit: S (4) gangplank · F (12) log · T (20) dais steps
-y13  #vvvSvvvvvvvFvvvvvvvTvvv#
-y14  #.......................#    house
-y15  ##x.....................#    mark (2,15)
-y16  ##1#........@.....A.....#    rope 1 (2,16) · @ (12,16) · A apprentice "Stage manager Pip" (18,16)
-y17  #########################
-```
-Legend: `s` Shipwreck flat (wall only in scene 1) · `f` Forest flat (wall only in 2) · `t` Throne flat (wall only in 3)
-· `S/F/T` passable **only** in scene 1/2/3 (void or wall below) · `A/B` loft flats (wall while IN) · `C` rostrum
-(floor while IN, void below).
-
-| Event family | Pages |
-|---|---|
-| `s x,y` | P0 [—] blank · P1 [V310≥1] tile FLAT_SHIP · P2 [V310≥2] blank |
-| `f x,y` | P0 blank · P1 [V310≥2] tile FLAT_FOREST · P2 [V310≥3] blank |
-| `t x,y` | P0 blank · P1 [V310≥3] tile FLAT_THRONE |
-| `S x,y` | P0 blank (pit void) · P1 [V310≥1] tile GANGPLANK · P2 [V310≥2] blank |
-| `F x,y` | P0 blank · P1 [V310≥2] tile LOG_BRIDGE · P2 [V310≥3] blank |
-| `T x,y` | P0 blank · P1 [V310≥3] tile DAIS_STEPS |
-| `A x,3` | P0 [—] tile FLAT_A · P1 [S310 on] blank |
-| `B 15,8` | P0 [—] tile FLAT_B · P1 [S311 on] blank |
-| `C 12,5` | P0 [—] tile ROSTRUM (passable) · P1 [S312 on] blank |
-| `Rope 1` (2,16), `Rope 2` (7,8), `Rope 3` (18,2) | action → if V310 == n: "The stage is already set." else V310 = n, screen shake (2, 8), SE "Earth1", text "*Cue: <scene>!* The revolve groans round." First time: the scene's actor enters |
-| `L` / `K` | touch warps to 152 (2,2) / (22,2) |
-| Actors | Juggler "Ferdie" [V310≥1] at (2,6), sight 3 · Beauty "Rosalind" [V310≥2] at (2,9) · Gentleman "Crewe" [V310≥3] at (21,6) |
-
-**Solution (verified, BFS):**
-1. From mark (2,15), cue **Shipwreck**. Cross gangplank S into stage-left.
-2. Walk to mark (6,8) and cue **Forest**. The ship flats boxing in the ladder vanish, and the forest flats cut you off
-   from the pit.
-3. Climb L into the loft, walk the catwalk to the right rail, and set the flats (see 152): **pull rope 2, then rope 3**.
-4. Climb down K. From mark (18,3), cue **Throne**. The forest flats vanish.
-5. Walk through B (flown) → centre → onto the rostrum C (still in) → through A (flown) → up the dais T → door E.
-
-Without the loft it is unsolvable (BFS), and it is unsolvable without Ship or without Forest.
-**Why it reads well:** the Script order is never enforced by a rule; the stage *makes* it the only route.
-**Hints (Pip):** 1 "Script order, love. The stage won't let you skip an act." 2 "The Throne cue's on the far side. Seen
-the stage from above yet?" 3 the solution.
-**Reset:** Pip → V310 = 0, S310–312 off, player to (12,15). Leaving the room keeps everything.
-
-### 152 Fly Loft — COMBINE "a flat is in one place at a time" (25×15; rows 6–14 void: the stage seen from above)
-```
-     0123456789012345678901234
-y0   #########################
-y1   #.....a....b....c.......#    a / b / c: where flats A / B / C hang while FLOWN (they block the catwalk)
-y2   #.L...a.i..b..p.c.....K.#    L (2,2) ↔ 151 L · K (22,2) ↔ 151 K · p (14,2) trapdoor → 153 · i (8,2) Super Potion
-y3   #.....a....b....c.......#
-y4   #.123.a....b....c...123.#    left rail: ropes 1-3 at (2..4,4) · right rail: ropes 1-3 at (20..22,4)
-y5   #########################
-```
-- **Counterweight coupling:** rope 1 → A · rope 2 → B + C · rope 3 → A + C. Each rope pulls its flats out if they're in,
-  and back in if they're out. The ropes on the two rails are the same three ropes.
-- `a x,1-4`: P0 [—] blank · P1 [S310 on] tile HANGING_FLAT (impassable). Same for `b` [S311] and `c` [S312].
-- **What the stage needs:** A out, B out, C in. Pulls: **rope 2** (B out, C out) then **rope 3** (A out, C back in). The
-  natural try, rope 1 then rope 2, leaves C out, and the rostrum is gone.
-- **The aha:** once flats are flown, they hang across the catwalk *behind you*. Set them at the **right** rail.
-  Players who set them at the left rail find the loft blocked and must reset. The trapdoor p is reachable only while
-  b or c is in.
-- **Hints (stagehand "Dot", at (5,2)):** 1 "Whatever leaves the stage comes up here. Where do you want to be standing
-  when it does?" 2 "Rope 2 drags two flats. Rope 3 also catches the rostrum." 3 the solution.
-
-### 153 The Trap Room — MASTERY "ride the revolve" (optional; 11×11 puzzle, padded to 20×15; via trapdoor p)
-Turntable 5×5 at (3–7, 3–7), crank post at its centre (5,5). Shown at rotation 0:
-```
-     01234567890
-y0   ###########
-y1   ########*##    * (8,1) prop chest
-y2   #######..##
-y3   ##...#...##
-y4   ##..##...##
-y5   ##.#.o...##    o crank (5,5)
-y6   ##.#.##..##
-y7   ##.#..#..##
-y8   ####...####
-y9   ####...####
-y10  #####@#####    @ (5,10) ladder up to 152 p
-```
-- Turntable cells are 24 events, each with 4 pages (`[—]` rot 0, `[V312≥1]` rot 1, `[V312≥2]`, `[V312≥3]`). A cell is
-  machinery (impassable tile) or blank (floor) according to the 5×5 pattern `..#.. / .##.. / #.o.. / #.##. / #..#.`
-  rotated clockwise by V312 quarter-turns.
-- **Crank** (action, only from the four tiles beside it): `pfp_cycle(312, 4)`, and **the player rides**: their offset from
-  the centre (dx, dy) becomes (−dy, dx) (`pfp_turntable_ride(5,5)`). "You lean on the crank. The whole floor — and you
-  with it — swings a quarter-turn."
-- **Solution (verified, BFS):** walk to (4,5) and crank three times. You ride from west to north to east to south.
-  Then walk east (6,6) → (7,6) → (8,6) and north up the right-hand corridor to the chest.
-- **Reward:** Magical Seed ×2 (on Grand Stage: +1 Speed and Laser Focus), PP Up, and the prop crown of the Gilded King
-  (flavour; Dorian comments in 154).
-- **Reset:** the apprentice "Old Joss" (by the ladder) → V312 = 0.
-
-### 154 The Grand Stage — arena (21×15)
-Dorian, **double battle** (curtain call). Badge 2 + TM42 Facade. If S314 is on: "You found the old crown! Keep it. Every
-understudy should own one thing that doesn't fit."
-
-**Gym 2 trainers (6):** three actors (above, 15–17), Juggler ×1 on 152's catwalk (17–18; at (18,3), never blocking a
-rail), Lady ×1 in 150 (16–17), Beauty ×1 (18).
 
 ---
 ## Gym 3 — Ebbmouth, Tidelock Gym · Marisol Reyes (Water, `:WATER_SURFACE`, cap 23) · ★★★

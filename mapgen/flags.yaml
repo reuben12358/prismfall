@@ -1,26 +1,28 @@
 # Gym puzzle Switch / Variable IDs (block 301-400, gym n = 300+5n ... 300+5n+4; GYM_PUZZLES.md).
 # Story IDs (101-300) are read straight from design/FLAGS.md by build.py - write their NAMES in specs.
 variables:
-  GYM1_A: 305         # Weaving Hall heddles A/B/C (0-2)
-  GYM1_B: 306
-  GYM1_C: 307
-  GYM1_FOYER: 308     # Foyer training heddle (0-2)
-  GYM1_BRIDGE: 309    # Canopy Lofts bridge swung by the brass wire (0 none, 1 P5-P6, 2 P4-P6)
-  GYM2_SCENE: 310     # Revolving Stage set (0 work lights, 1 Shipwreck, 2 Forest, 3 Throne)
-  GYM2_TURNTABLE: 312 # Trap Room revolve, quarter turns (0-3)
-  GYM2_OVERTURE: 313  # Foyer curtain flown (0/1)
+  # SPINE Rev 14 swapped Gyms 1 and 2. The 305-309 / 310-314 blocks stay with their buildings: 305-309 = the Loomhouse
+  # (Tamsin, now Gym 2, maps 130-134), 310-314 = the Pell Playhouse (Dorian, now Gym 1, maps 150-154).
+  LOOM_A: 305         # Weaving Hall heddles: plank column of loom beds A/B/C (0-2)
+  LOOM_B: 306
+  LOOM_C: 307
+  LOOM_FOYER: 308     # Loomhouse foyer heddle (0/1)
+  LOOM_BRIDGE: 309    # Upper Lofts bridge swung by the brass wire (0 none, 1 P5-P6, 2 P4-P6)
+  STAGE_SCENE: 310    # Playhouse Backstage revolving stage set (0 work lights, 1 Shipwreck, 2 Forest, 3 Throne)
+  STAGE_CURTAIN: 311  # Gym 1 auditorium: house curtain raised (0/1)
+  STAGE_TURNTABLE: 312 # Backstage Trap Room revolve, quarter turns (0-3)
   D1_CHIME: 501       # Glassed Orchard chime rows: notes rung in order (0-3)
 switches:
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on
-  GYM1_KNOT: 308      # Granny's Knot solved (134)
-  GYM1_ALPHA: 305     # Canopy Lofts cords
-  GYM1_BETA: 306      # the brass Meridian wire
-  GYM1_GAMMA: 307
-  GYM2_FLAT_A: 310    # loft flats: ON = flown (hangs in the Fly Loft, off the stage)
-  GYM2_FLAT_B: 311
-  GYM2_FLAT_C: 312    # the rostrum
-  GYM2_TRAP_DONE: 314 # Trap Room chest taken
+  LOOM_ALPHA: 305     # Upper Lofts cords
+  LOOM_BRASS: 306     # the brass Meridian wire
+  LOOM_GAMMA: 307
+  LOOM_KNOT: 308      # Granny's Knot solved (134)
+  STAGE_FLAT_A: 310   # Backstage loft flats: ON = flown (hangs in the Fly Loft, off the stage)
+  STAGE_FLAT_B: 311
+  STAGE_FLAT_C: 312   # the rostrum
+  STAGE_TRAP_DONE: 314 # Backstage Trap Room chest taken
   GYM3_BELL: 315      # Tidelock tide bell: ON = currents run inland (north)
 # Dungeons 501-600, 5 per dungeon (DUNGEON_PUZZLES.md section 0)
   D2_COCOON1: 506     # Deepwood lantern cocoons lit

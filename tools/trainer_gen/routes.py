@@ -1,3 +1,4 @@
+import re
 # Route / gym trainers (stock trainer types). moves=None -> level-up moveset (always level-legal).
 # Field touches (Revision 10): each map's default field is in design/FIELD_DEFAULTS.yaml; trainers get one or two
 # field-aware choices (an ability the field switches on, a boosted level-up move, rarely a seed). The per-map notes
@@ -6,14 +7,44 @@ def ROUTES(P):
     def m(sp, lv, ab, nat, moves=None, item=None):
         return P(sp, lv, ab, item, nat, moves, "A", casual=({"item": None} if item else None))
     R = []
-    # cap = the level cap of the stretch the map belongs to (Hard = +1 level, never above it)
-    CAPS = [("Map 520", 15), ("Map 521", 15), ("Map 524", 15), ("Map 525", 15), ("Map 131", 15), ("Map 132", 15),
-            ("Map 540", 19), ("Map 541", 19), ("Map 15", 19), ("Map 145", 19), ("Map 544", 19), ("Map 545", 19), ("Map 546", 19),
-            ("Map 56", 23), ("Map 17", 23)]
+    # ---------------------------------------------------------------------------------------------------------------
+    # Level plan per MAP ID (SPINE Revision 14 swapped Saltmere and Briarwick: Ferrow's Landing -> coast -> Saltmere
+    # (Gym 1, cap 15) -> inland -> Gossamer Wood / Briarwick (Gym 2, cap 19) -> north -> Rimewood / Frostwick ->
+    # Ebbmouth (Gym 3, cap 23)). The teams below are written at their PRE-SWAP levels; PLAN shifts each map by `delta`,
+    # sets the stretch cap (Hard = +1 level, never above it) and swaps species a shifted level would have evolved.
+    # Which map sits on which stretch is PROVISIONAL until design/SWAP_GYM1_GYM2.md lands: edit one row here.
+    # Map names change (design/PLACE_NAMES.md); the ids don't, so everything is keyed by map id.
+    #   map id: (delta, cap, {OLD_SPECIES: (NEW_SPECIES, NEW_ABILITY or None)})
+    PLAN = {
+        # Gym 1 stretch, cap 15: route trainers lv 4-12, gym trainers 11-13 (BALANCE 2)
+        520: (0, 15, {}),                                     # coastal heath out of Ferrow's Landing, 4-6
+        541: (-6, 15, {}),                                    # the coast road to Saltmere (beach), 8-10
+        544: (-5, 15, {}), 545: (-5, 15, {}),                 # Brinecut Mine (optional, Rock Smash later), 9-12
+        151: (-5, 15, {"HERDIER": ("LILLIPUP", "VITALSPIRIT")}), 152: (-5, 15, {"HERDIER": ("LILLIPUP", "VITALSPIRIT")}),
+        153: (-5, 15, {}),                                    # Pell Playhouse = Gym 1 actors, 11-13
+        145: (-1, 19, {}),                                    # Pageant Hall grunts, after Gym 1, 15-16
+        # Gym 2 stretch, cap 19: route trainers 15-17, gym trainers 15-17
+        540: (3, 19, {}),                                     # river meadows inland from Saltmere, 15-17
+        546: (2, 19, {}),                                     # Thistledown Manor (optional), 16-17
+        521: (9, 19, {"SHINX": ("LUXIO", None)}),             # orchard country into the forest, 15-16
+        524: (8, 19, {"BLIPBUG": ("DOTTLER", None), "SEEDOT": ("NUZLEAF", None)}),   # Gossamer Wood, 16-18
+        131: (4, 19, {"SPEWPA": ("VIVILLON", "SHIELDDUST"), "TAROUNTULA": ("SPIDOPS", None)}),
+        132: (4, 19, {"TAROUNTULA": ("SPIDOPS", None)}),       # Loomhouse = Gym 2 trainers, 15-17
+        # Gym 3 stretch, cap 23
+        525: (8, 23, {"LEDYBA": ("LEDIAN", None)}),            # Gossamer Deepwood, after Gym 2, 19-20
+    }
+    DEFAULT_CAP = 23                                          # 560-564, 170-173: unchanged (Gym 3 stretch)
     def t(note, tt, nm, lose, mons, cap=None):
-        if cap is None:
-            cap = next((c for pre, c in CAPS if note.startswith(pre)), 15)
-        R.append((note, tt, nm, lose, mons, cap))
+        mid = int(re.match(r"Map (\d+)", note).group(1))
+        delta, pcap, swaps = PLAN.get(mid, (0, DEFAULT_CAP, {}))
+        out = []
+        for mon in mons:
+            mon = dict(mon, lv=max(2, mon["lv"] + delta))
+            if mon["sp"] in swaps:
+                sp, ab = swaps[mon["sp"]]
+                mon = dict(mon, sp=sp, ab=ab or mon["ab"])
+            out.append(mon)
+        R.append((note, tt, nm, lose, out, cap if cap is not None else pcap))
     # Map 520 Route 1 (lv 4-6) - MEADOW: Run Away Pokemon dart into the grass (+1 Speed on entry)
     t("Map 520 Route 1", "YOUNGSTER", "Pip", "Aw, my squad lost!", [m("LILLIPUP", 4, "RUNAWAY", "JOLLY"), m("SKWOVET", 5, "CHEEKPOUCH", "IMPISH")])
     t("Map 520 Route 1", "LASS", "Wren", "My birdies! Oh, well done.", [m("PIKIPEK", 4, "KEENEYE", "ADAMANT"), m("FLETCHLING", 5, "BIGPECKS", "JOLLY")])
@@ -51,8 +82,8 @@ def ROUTES(P):
     t("Map 541 Route 4", "TUBER_F", "Pip", "Waaah! My floaty popped!", [m("SURSKIT", 14, "SWIFTSWIM", "TIMID"), m("MINCCINO", 15, "CUTECHARM", "JOLLY")])
     # Map 151-153 Pell Playhouse (Gym 2 actors, lv 15-18) - GRAND_STAGE: sound (Echoed Voice, Disarming Voice), showpieces
     # (Fake Out) and dances (Teeter Dance) raise the applause, so the player sees the stages climb before Dorian
-    t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,SING,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
-    t("Map 151 Pell Playhouse - Revolving Stage", "BEAUTY", "Rosalind", "The spotlight suits you better, darling.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,DISARMINGVOICE,SING,ATTRACT"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
+    t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
+    t("Map 151 Pell Playhouse - Revolving Stage", "BEAUTY", "Rosalind", "The spotlight suits you better, darling.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,ROUND,SING,TAILWHIP"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
     t("Map 151 Pell Playhouse - Revolving Stage", "JUGGLER", "Ambrose", "An encore? No? Fair.", [m("AIPOM", 16, "SKILLLINK", "JOLLY"), m("HERDIER", 17, "INTIMIDATE", "ADAMANT")])
     t("Map 152 Pell Playhouse - Fly Loft", "GENTLEMAN", "Reginald", "Splendid form. Dorian will be delighted.", [m("HERDIER", 17, "INTIMIDATE", "ADAMANT"), m("FURFROU", 17, "FURCOAT", "JOLLY")])
     t("Map 153 Pell Playhouse - Dressing Rooms", "JUGGLER", "Pierrot", "...(Pierrot mimes a dramatic faint.)", [m("AIPOM", 17, "PICKUP", "JOLLY"), m("SPINDA", 17, "TANGLEDFEET", "ADAMANT")])

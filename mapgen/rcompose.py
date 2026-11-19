@@ -33,7 +33,7 @@ PARTS = [('gl', 'rejuvenation', 62, 'Goldenleaf Forrest'),
          ('rb4', 'reborn', 43, 'Route4'),
          ('ap', 'rejuvenation', 2, 'Aevium Past'),
          ('pf', None, None, None)]          # Prismfall custom pieces (rj_custom.png, built by rcustom.py)
-CUSTOM_ROWS = 300
+CUSTOM_ROWS = 400          # the pf part is the last part, so growing it moves no id (map builder 7: 300 -> 400)
 
 # every autotile any PF Rejuv tileset may use: (game, source tileset whose passages it takes, source name)
 AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'), ('rejuvenation', 127, 'Dirt'),

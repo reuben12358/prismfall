@@ -431,6 +431,39 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
 - **562:** ravine banks smoothed and opened (`smooth` x3, ragged bank clearing), floes and reeds along them.
 - **Still open:** Ferrow / Briarwick street plans, NEW_SOURCES imports, interior / Dovetail / 522 / 548 re-skins.
 
+## 2k. Map builder 7 (2026-11-18/19): town layouts, Saltmere rebuild, Dovetail on PF Rejuv, imports
+- **Kit (`layouts/rkit.py`):** `smooth()`, `plan_cliffs()` (marks cliff cells at plan time so props and events never
+  land on faces), `doorpath()` (trodden line from a door down to the nearest lane), `autotrees()` (single trees packed
+  into leftover lawn), `keep_under` (sand / gravel / dirt autotiles keep painting under props, so freight on a quay
+  shows sand, not grass; `self.under` / `self.eff`). **Bug fix:** `frontage()` demanded the street row itself be free,
+  so it never placed a house; it now checks the footprint above the street only.
+- **Sheet:** `rcompose.CUSTOM_ROWS` 300 -> 400 (pf is the last part: no id moved). rcustom appends, in order after the
+  rdraw pieces: `EXTRA33` (tileset-33 harbour/market props as `hb_*`: boats, bollards, buoys, tubs, fish stall, barrels,
+  tables, rug/wash/dye lines, sheds), `rdraw.pieces_late()` (`pf_pcsign`, the `ch_*` chalets from `rimport.py`),
+  `EXTRA33_B` + `_ship_dovetail` (the Dovetail's deck art), `rdraw.pieces_late2()` (`pf_playhouse`). Append new things
+  at the END of the last block only. New rdraw pieces: `fw_bridge_n/m/s` (snowy plank bridge with rails),
+  `pf_pcsign`, `pf_playhouse` (14x12, door (7, 11)).
+- **`rimport.py`:** keys a baked checker background by flood fill from the sheet border (white snow inside outlines
+  survives), crops pieces to the 16-px grid, rcustom doubles them exactly 2x. Imported: carchagui's snowed chalets
+  (`ch_chalet_a/b/c/pc/shop`; one is the trapper's lodge in 562). Magiscarf's snow-capped trees were style-tested on
+  Frostwick and rejected (flat scale-leaf shading, saturated greens: they read as another game beside the lattice).
+- **100 Ferrow (`ferrow_rj.py`):** the Center terrace (h=2) with its own stair, curved valley road from Route 1 into
+  a plaza above the harbour with the anchor at the overlook rail, the bay cut into the bluff, two quay stairs, a
+  timber wharf along the waterline with bollards, boats moored, freight and stalls on the beach. Doors moved: inn
+  (11,27) -> (11,30), Mart (39,22) -> (46,28); PC, lab, customs, Dockmaster, lighthouse, pier arrival and the north
+  lane unchanged.
+- **120 Briarwick (`briarwick_rj.py`):** lanes curve into an oval green round the Gathering Tree; the PC is a timber
+  hall (`sh_inn` + `pf_pcsign`), not the blue Help Center; more houses, a weavers' row house in a clearing. Doors moved:
+  PC (45,23) -> (47,25) (HealingSpot [120,47,26]), Treetop House (55,24) -> (60,23), Mart (27,40) -> (29,43).
+- **140/146/147 Saltmere (`saltmere_rj.py`, replaces `saltmere_city.py`; old specs kept as `layouts/old_14x_*_city.yaml`,
+  the events' source):** same sizes, connection openings (140 N x 43-48, W y 32-34), touch warps and door links.
+  Door cells: 140 PC (24,32) (HealingSpot [140,24,33]), Mart (58,30), Pageant Hall (46,26), House (26,6); 146 Harbour
+  Office (52,26); 147 Playhouse / SM_GYM (44,18). `blockfill()` packs houses into wooded blocks with paths to the lanes.
+- **109 the Dovetail (`dovetail.py`):** now tileset 51 (Rejuvenation Ocean with swells), ship_art deck from the pf part,
+  `hb_*` freight. Event cells and PRISMFALL_START (7,6) unchanged. 110's cabin and the other interiors are unchanged.
+- **570:** the brook bridges use `fw_bridge_*` (rails solid north/south, passage 8 / 1).
+- **build.py:** spec generators whose file name is not an identifier (staging copies like `gen_gym1.new.py`) are skipped.
+
 ## 3. Regenerating
 ```
 cd fangame/mapgen

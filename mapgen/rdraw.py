@@ -775,6 +775,101 @@ def pc_sign():
 
 
 
+RED = [(84, 26, 34, 255), (128, 40, 44, 255), (170, 62, 58, 255), (208, 98, 80, 255), (232, 140, 112, 255)]
+PLASTER = [(150, 130, 108, 255), (196, 180, 152, 255), (226, 214, 186, 255), (244, 236, 214, 255)]
+
+
+def playhouse():
+    """The Pell Playhouse, Saltmere (14x12): a timber-framed playhouse on a stone arcade.  Crimson tile roof with a
+    gilded ridge, a front gable holding a round window with the comedy and tragedy masks, a pennant on the apex;
+    plastered upper storey with red-curtained windows and two crimson banners; stone ground floor with an arcade of
+    posters, a gilt marquee board over the double doors.  Light from the top left; outlines never black."""
+    W, H = 14, 12
+    im, d = canvas(W, H); w, h = W * 16, H * 16
+    # ---- main roof (rows 0-5): a broad hipped roof, eaves at y 92
+    ey, ry = 92, 22
+    d.polygon([(4, ey), (22, ry), (w - 23, ry), (w - 5, ey)], fill=RED[1], outline=OUT)
+    for y in range(ry + 4, ey - 1, 5):                               # tile courses, staggered
+        t = (y - ry) / float(ey - ry); x0 = int(22 - 18 * t) + 2; x1 = int(w - 23 + 18 * t) - 2
+        d.line([x0, y, x1, y], fill=RED[0])
+        for x in range(x0 + ((y // 5) % 2) * 3, x1, 6): P(im, x, y - 1, RED[2]); P(im, x + 1, y - 2, RED[3])
+    d.line([23, ry + 1, 40, ry + 1], fill=RED[4]); d.line([6, ey - 2, 21, ry + 2], fill=RED[3])     # lit hip edge
+    d.line([22, ry, w - 23, ry], fill=GOLD[1]); d.line([22, ry - 1, w - 23, ry - 1], fill=GOLD[0])   # gilded ridge
+    for x in range(26, w - 24, 8): d.polygon([(x, ry - 1), (x + 2, ry - 5), (x + 4, ry - 1)], fill=GOLD[1], outline=GOLD[0])
+    d.rectangle([4, ey, w - 5, ey + 3], fill=WOOD[1], outline=OUT); d.line([5, ey + 1, w - 6, ey + 1], fill=WOOD[3])   # eaves board
+    # ---- front gable (centre): a tall triangle over the entrance with the masks window
+    cx = w // 2; gy0, gy1 = 6, ey + 2
+    d.polygon([(cx - 40, gy1), (cx, gy0), (cx + 40, gy1)], fill=RED[2], outline=OUT)
+    for y in range(gy0 + 8, gy1, 5):
+        half = int(40 * (y - gy0) / float(gy1 - gy0)) - 2
+        d.line([cx - half, y, cx + half, y], fill=RED[1])
+        for x in range(cx - half + ((y // 5) % 2) * 3, cx + half, 6): P(im, x, y - 1, RED[3])
+    d.line([cx - 1, gy0 + 1, cx - 39, gy1 - 1], fill=RED[4])
+    d.polygon([(cx - 30, gy1), (cx, gy0 + 20), (cx + 30, gy1)], fill=PLASTER[2], outline=OUT)      # plaster tympanum
+    d.line([cx - 29, gy1 - 1, cx, gy0 + 21], fill=PLASTER[3])
+    d.ellipse([cx - 13, 52, cx + 13, 78], fill=GOLD[0], outline=OUT); d.ellipse([cx - 11, 54, cx + 11, 76], fill=(44, 60, 92, 255))
+    for a in range(0, 360, 45):                                     # rose window tracery
+        import math as _m
+        d.line([cx, 65, cx + int(11 * _m.cos(_m.radians(a))), 65 + int(11 * _m.sin(_m.radians(a)))], fill=GOLD[1])
+    d.ellipse([cx - 9, 59, cx - 1, 69], fill=PLASTER[3], outline=OUT)     # comedy (left)
+    P(im, cx - 7, 62, OUT); P(im, cx - 4, 62, OUT); d.arc([cx - 8, 62, cx - 2, 67], 20, 160, fill=OUT)
+    d.ellipse([cx + 1, 61, cx + 9, 71], fill=GOLD[2], outline=OUT)        # tragedy (right)
+    P(im, cx + 3, 64, OUT); P(im, cx + 6, 64, OUT); d.arc([cx + 2, 67, cx + 8, 72], 200, 340, fill=OUT)
+    d.line([cx, gy0, cx, gy0 - 6], fill=WOOD[0]); d.polygon([(cx + 1, gy0 - 6), (cx + 9, gy0 - 4), (cx + 1, gy0 - 2)], fill=RED[3], outline=RED[0])
+    # ---- upper storey (y 96-139): plaster between timber posts, curtained windows, banners
+    fy0, fy1 = 96, 140
+    d.rectangle([6, fy0, w - 7, fy1], fill=PLASTER[2], outline=OUT)
+    d.line([7, fy0 + 1, w - 8, fy0 + 1], fill=PLASTER[3])
+    posts = [6, 34, 62, 96, 126, 160, 188, w - 9]
+    for px in posts:
+        d.rectangle([px, fy0, px + 3, fy1], fill=WOOD[1], outline=OUT); d.line([px + 1, fy0 + 1, px + 1, fy1 - 1], fill=WOOD[3])
+    d.rectangle([6, fy0 + 20, w - 7, fy0 + 22], fill=WOOD[1]); d.line([6, fy0 + 20, w - 7, fy0 + 20], fill=WOOD[3])
+    for a, b in zip(posts, posts[1:]):
+        if b - a < 20: continue
+        m_ = (a + b) // 2
+        d.rectangle([m_ - 7, fy0 + 4, m_ + 7, fy0 + 18], fill=WOOD[0], outline=OUT)             # window
+        d.rectangle([m_ - 6, fy0 + 5, m_ + 6, fy0 + 17], fill=(255, 214, 140, 255))
+        d.polygon([(m_ - 6, fy0 + 5), (m_ - 1, fy0 + 5), (m_ - 6, fy0 + 17)], fill=RED[2])         # curtains
+        d.polygon([(m_ + 6, fy0 + 5), (m_ + 1, fy0 + 5), (m_ + 6, fy0 + 17)], fill=RED[2])
+        d.line([m_ - 6, fy0 + 5, m_ + 6, fy0 + 5], fill=RED[1])
+        d.line([a + 4, fy0 + 23, b - 1, fy1 - 1], fill=WOOD[1]); d.line([b - 1, fy0 + 23, a + 4, fy1 - 1], fill=WOOD[1])   # braces
+    d.rectangle([7, fy0 + 2, w - 8, fy0 + 3], fill=PLASTER[1])                            # shadow under the eaves
+    for bx in (posts[2] - 3, posts[5] - 3):                          # two crimson banners on the posts, with the gold mask
+        d.rectangle([bx, fy0 + 2, bx + 8, fy0 + 36], fill=RED[1], outline=OUT); d.line([bx + 1, fy0 + 3, bx + 1, fy0 + 35], fill=RED[3])
+        d.polygon([(bx, fy0 + 36), (bx + 4, fy0 + 32), (bx + 8, fy0 + 36), (bx + 8, fy0 + 40), (bx + 4, fy0 + 37), (bx, fy0 + 40)], fill=RED[1], outline=OUT)
+        d.ellipse([bx + 1, fy0 + 12, bx + 7, fy0 + 19], fill=GOLD[1], outline=GOLD[0]); P(im, bx + 3, fy0 + 15, OUT); P(im, bx + 5, fy0 + 15, OUT)
+        d.rectangle([bx - 1, fy0, bx + 9, fy0 + 2], fill=GOLD[0])
+    # ---- ground floor (y 140-191): stone arcade, posters, marquee, double doors, steps
+    gy = 140
+    d.rectangle([4, gy, w - 5, h - 1], fill=STONE[1], outline=OUT)
+    for y in range(gy + 6, h - 1, 7):
+        d.line([5, y, w - 6, y], fill=STONE[0])
+        for x in range(5 + (y // 7 % 2) * 6, w - 6, 12): d.line([x, y - 6, x, y - 1], fill=STONE[0]); P(im, x + 1, y - 6, STONE[2])
+    d.rectangle([4, gy, w - 5, gy + 3], fill=STONE[3], outline=OUT); d.line([5, gy + 4, w - 6, gy + 4], fill=STONE[0])
+    for i, ax in enumerate(range(12, w - 20, 24)):                  # arcade bays
+        if abs(ax + 8 - cx) < 20: continue
+        d.rectangle([ax, gy + 12, ax + 16, h - 6], fill=STONE[0], outline=OUT)
+        d.pieslice([ax, gy + 6, ax + 16, gy + 22], 180, 360, fill=STONE[0], outline=OUT)
+        d.rectangle([ax + 3, gy + 15, ax + 13, gy + 33], fill=PLASTER[3], outline=OUT)            # playbill
+        col = (RED, TEAL, GOLD, ROSE)[i % 4]
+        d.rectangle([ax + 4, gy + 17, ax + 12, gy + 24], fill=col[1]); d.line([ax + 5, gy + 27, ax + 11, gy + 27], fill=OUT); d.line([ax + 5, gy + 30, ax + 10, gy + 30], fill=STONE[1])
+    d.rectangle([cx - 18, gy + 4, cx + 17, gy + 13], fill=GOLD[1], outline=OUT)                # marquee board
+    d.line([cx - 17, gy + 5, cx + 16, gy + 5], fill=GOLD[2])
+    for x in range(cx - 14, cx + 14, 4): d.rectangle([x, gy + 8, x + 2, gy + 10], fill=RED[0])
+    for x in range(cx - 18, cx + 18, 5): P(im, x, gy + 14, (255, 236, 168, 255))                  # bulbs
+    d.rectangle([cx - 14, gy + 18, cx + 13, h - 3], fill=WOOD[0], outline=OUT)                  # double doors
+    d.pieslice([cx - 14, gy + 12, cx + 13, gy + 26], 180, 360, fill=WOOD[0], outline=OUT)
+    for dx in (-12, 1):
+        d.rectangle([cx + dx, gy + 20, cx + dx + 10, h - 4], fill=RED[1], outline=OUT); d.line([cx + dx + 1, gy + 21, cx + dx + 1, h - 5], fill=RED[3])
+        d.rectangle([cx + dx + 2, gy + 24, cx + dx + 8, gy + 34], outline=GOLD[1])
+    P(im, cx - 3, gy + 38, GOLD[2]); P(im, cx + 2, gy + 38, GOLD[2])
+    for x in (cx - 20, cx + 19):                                    # lanterns either side
+        d.rectangle([x - 1, gy + 18, x + 1, gy + 26], fill=IRON[1], outline=IRON[0]); P(im, x, gy + 21, (255, 214, 120, 255))
+    code = ['R' * W] + ['r' * W] * 6 + ['W' * W] * 4 + [''.join('D' if c == 7 else 'W' for c in range(W))]
+    return im, code
+
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -843,6 +938,13 @@ CODE = {'R': (2, 0, 1), 'r': (2, 15, 1), 'W': (1, 15, 0), 'D': (1, 0, 0), 'F': (
         'N': (1, 8, 0), 'S': (1, 1, 0)}   # layer, passage, priority
 
 
+def pieces_late2():
+    """fourth block (after rcustom's Dovetail port).  APPEND NEW PIECES HERE: earlier ids never move."""
+    out = {}
+    im, c = playhouse(); out['pf_playhouse'] = (im, c, (7, 11))
+    return out
+
+
 if __name__ == '__main__':
     ps = pieces()
     ims = [(n, im.resize((im.width * 2, im.height * 2), Image.NEAREST)) for n, (im, c, dr) in ps.items()]
@@ -855,3 +957,4 @@ if __name__ == '__main__':
     for n, im, x, y in pos:
         sheet.alpha_composite(im, (x, y + 12)); dr.text((x, y), n, fill=(200, 0, 120, 255))
     sheet.save(sys.argv[1] if len(sys.argv) > 1 else '/tmp/rdraw.png'); print(sheet.size)
+

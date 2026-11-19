@@ -6,7 +6,7 @@ template: pokecenter
 exit_link: SM_PC
 drop_template_events: [Bill]
 bgm: Poke Center
-metadata: {HealingSpot: [140, 28, 30], MapPosition: [0, 10, 25]}
+metadata: {HealingSpot: [140, 24, 33], MapPosition: [0, 10, 25]}
 events:
   - {type: npc, name: Actor, at: [12, 6], sprite: NPC 08, dir: left,
      text: "Healing between matinées. Dorian's troupe battles harder than it acts. Mostly."}

@@ -23,6 +23,7 @@ beat the game unless WORLD marks it mandatory (the Glassed Orchard, the Ossuary 
 | 526–530 | D6 Gullcry Caves (564, 565) | I | Isenmar |
 | 531–535 | D7 The Rimewood + Glade (562, 563) | I | Borderland A |
 | 536–540 | D8 The Rehearsal (568), bonus | I | Elowen (Bleed) |
+| (310–314) | D9 Pell Playhouse Backstage (151–153): uses the Playhouse block | I | Elowen |
 | 541–545 | **Elowen** — Gossamer Heartwood (703) | III | Elowen |
 | 546–550 | **Zenith** — Voltaic Sluiceworks (584, 585) | I (optional) | Borderland B / Zenith |
 | 551–555 | **Ossaria** — Ossuary of Dunes (624, 625) | II | Ossaria |
@@ -31,6 +32,29 @@ beat the game unless WORLD marks it mandatory (the Glassed Orchard, the Ossuary 
 | 566–570 | **Antumbra** — Mirror Mere + Giratina's Reverse Depths (742, 806) | III–IV | Antumbra |
 | 571–575 | **Nadir** — Drowned Aurelia (824, 825, 826) | IV | Nadir |
 | 576–600 | reserved (Static Tunnels, Miasma Caverns, Stormwatch Spire, Sovereign's Ascent…) | | |
+
+## 0b. Difficulty curve (SPINE Revisions 13–14; same scale and machine check as GYM_PUZZLES §0b)
+Dungeons sit **at or below** the gym that comes before them; optional ones may go up to two points higher. "Solve" = the
+puzzle part only.
+
+| Dungeon | Maps | When | Rating | Expected solve | Status |
+|---|---|---|---|---|---|
+| D1 The Glassed Orchard — chime rows | 522 | before Gym 1 | **2** | 3 min | built (events over the Orchard), proven 3 moves / 4 states, engine-run |
+| D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | before / after Gym 1 | **2** | 5 min | proven (2 posts); map events not yet placed |
+| D3 Cocoonfall Hollow — crystal-silk anchors | 548 | after Gym 2 | **2** | 5 min | proven; **design fix:** start with TWO bridges taut (a, b). The spec's start (one taut) let anchor 2 tighten all three in one pull, so the parity lesson never happened |
+| D4 Brinecut Mine — points and brine | 544, 545 | after Gym 2 | **3** | 10 min | spec |
+| D5 Thistledown Manor — don't turn your back | 546, 547 | Act I | **3** | 10 min | spec (runtime: `pfp_pursue(name, :creep)`) |
+| D6 Gullcry Caves — the tide counts your steps | 564, 565 | Act I | **4** | 15 min | spec (runtime: `pfp_step_clock`) |
+| D7 The Rimewood + Glade — frost loom, ice slide | 562, 563 | before Gym 3 | **3** | 10 min | spec; the Glade slide (9 slides) is optional 4/10 |
+| D8 The Rehearsal — between the frames | 568 | bonus | **4** | 15 min | spec |
+| D9 Pell Playhouse Backstage — the old revolve | 151–153 | after Gym 2 | **4** | 20 min | built, proven, engine-run (below) |
+| Zenith — Voltaic Sluiceworks | 584, 585 | optional from Act I | **5** | 20 min | spec |
+| Ossaria — Ossuary of Dunes | 624, 625 | Act II | **6** | 25 min | spec |
+| Ashkaar — Mt. Cinder | 664–666 | Act II | **6** | 30 min | spec |
+| Elowen — Gossamer Heartwood | 703 | Act III | **7** | 30 min | spec |
+| Isenmar — the Ice Vault | 308, 318 | Act III | **8** | 35 min | spec |
+| Antumbra — Mirror Mere / Reverse Depths | 742, 806 | Act III–IV | **9** | 40 min | spec |
+| Nadir — Drowned Aurelia | 824–826 | Act IV | **9** | 40 min | spec |
 
 ---
 # PART 1 — THE EARLY GAME (Act I)
@@ -198,6 +222,124 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
     right, left").
   - Standing still is impossible (there's no waiting), but stepping back and forth spends frames.
 - **Reward:** TM10 Work Up + Bleed Shard #3.
+
+## D9 Pell Playhouse Backstage (151 old revolve 25×20, 152 Fly Loft 25×15, 153 Trap Room 20×15; `:GRAND_STAGE`, optional, after the Gym 2 badge) — "the stage moves, the marks don't" · 4/10, ~20 min
+
+The Revision 10 Gym 2 puzzle, kept whole when Gym 1 became a walk-through (SPINE Rev 14). Entered by the stage-left wing
+steps on the Gym 1 auditorium's apron (154 (1,9)); the door checks `pfm_gym_won?(:LEADER_TAMSIN)`. Dorian, after Gym 2:
+"The revolve back there hasn't turned since my debut. Get it through all three acts and the old script is yours."
+**Built and proven** (`mapgen/puzzles/playhouse.py`, `mapgen/gen_playhouse.py`): stage + loft 5 moves / 39 states (4/10),
+Script order forced, unsolvable without the loft; Trap Room 3 cranks (3/10) on a new pattern the solver found (the spec's
+pattern opened after one crank). Actors: Juggler Pierrot, Lady Odette, Gentleman Reginald (one per scene). Apprentices Pip,
+Dot and Old Joss (`:pb_stage`, `:pb_loft`, `:pb_trap`). IDs: the Playhouse block, `STAGE_SCENE` V310, `STAGE_FLAT_A/B/C`
+S310–312, `STAGE_TURNTABLE` V312, `STAGE_TRAP_DONE` S314. Reward behind the upstage door: the Gilded King's annotated
+script + Magical Seed ×2 + PP Up; the Trap Room chest keeps its prop crown.
+
+*Design text (from GYM_PUZZLES Revision 10, coordinates superseded by the module):*
+
+#### 151 Revolving Stage — TWIST "three scenes, in order" (25×18)
+```
+     0123456789012345678901234
+y0   ############E#############    E (12,0) upstage door → 154 (10,13)
+y1   #...s....###T###..#.....#    T (12,1) dais steps (passable only in Throne)
+y2   #.L.s....#.....#.#3#..K.#    L (2,2) ladder → 152 left · K (22,2) ladder → 152 right · rope 3 (18,2)
+y3   #...s....#AAAAA#..x.....#    A = flat A (wall while IN)
+y4   #ssss....#.....#.....ttt#
+y5   #....ffff#vvCvv#........#    C (12,5) = rostrum over the stage trap (walkable only while IN)
+y6   #........#.....#fffff...#
+y7   #......#.#.....#....f...#
+y8   #.....x2##.....B....f...#    rope 2 (7,8) with mark (6,8) · B (15,8) = flat B (wall while IN)
+y9   #......#.#.....#ttttf...#
+y10  #fff.ffff#.....#....f...#
+y11  #........#.....#....f...#
+y12  #vvvSvvvvvvvFvvvvvvvTvvv#    orchestra pit: S (4) gangplank · F (12) log · T (20) dais steps
+y13  #vvvSvvvvvvvFvvvvvvvTvvv#
+y14  #.......................#    house
+y15  ##x.....................#    mark (2,15)
+y16  ##1#........@.....A.....#    rope 1 (2,16) · @ (12,16) · A apprentice "Stage manager Pip" (18,16)
+y17  #########################
+```
+Legend: `s` Shipwreck flat (wall only in scene 1) · `f` Forest flat (wall only in 2) · `t` Throne flat (wall only in 3)
+· `S/F/T` passable **only** in scene 1/2/3 (void or wall below) · `A/B` loft flats (wall while IN) · `C` rostrum
+(floor while IN, void below).
+
+| Event family | Pages |
+|---|---|
+| `s x,y` | P0 [—] blank · P1 [V310≥1] tile FLAT_SHIP · P2 [V310≥2] blank |
+| `f x,y` | P0 blank · P1 [V310≥2] tile FLAT_FOREST · P2 [V310≥3] blank |
+| `t x,y` | P0 blank · P1 [V310≥3] tile FLAT_THRONE |
+| `S x,y` | P0 blank (pit void) · P1 [V310≥1] tile GANGPLANK · P2 [V310≥2] blank |
+| `F x,y` | P0 blank · P1 [V310≥2] tile LOG_BRIDGE · P2 [V310≥3] blank |
+| `T x,y` | P0 blank · P1 [V310≥3] tile DAIS_STEPS |
+| `A x,3` | P0 [—] tile FLAT_A · P1 [S310 on] blank |
+| `B 15,8` | P0 [—] tile FLAT_B · P1 [S311 on] blank |
+| `C 12,5` | P0 [—] tile ROSTRUM (passable) · P1 [S312 on] blank |
+| `Rope 1` (2,16), `Rope 2` (7,8), `Rope 3` (18,2) | action → if V310 == n: "The stage is already set." else V310 = n, screen shake (2, 8), SE "Earth1", text "*Cue: <scene>!* The revolve groans round." First time: the scene's actor enters |
+| `L` / `K` | touch warps to 152 (2,2) / (22,2) |
+| Actors | Juggler "Ferdie" [V310≥1] at (2,6), sight 3 · Beauty "Rosalind" [V310≥2] at (2,9) · Gentleman "Crewe" [V310≥3] at (21,6) |
+
+**Solution (verified, BFS):**
+1. From mark (2,15), cue **Shipwreck**. Cross gangplank S into stage-left.
+2. Walk to mark (6,8) and cue **Forest**. The ship flats boxing in the ladder vanish, and the forest flats cut you off
+   from the pit.
+3. Climb L into the loft, walk the catwalk to the right rail, and set the flats (see 152): **pull rope 2, then rope 3**.
+4. Climb down K. From mark (18,3), cue **Throne**. The forest flats vanish.
+5. Walk through B (flown) → centre → onto the rostrum C (still in) → through A (flown) → up the dais T → door E.
+
+Without the loft it is unsolvable (BFS), and it is unsolvable without Ship or without Forest.
+**Why it reads well:** the Script order is never enforced by a rule; the stage *makes* it the only route.
+**Hints (Pip):** 1 "Script order, love. The stage won't let you skip an act." 2 "The Throne cue's on the far side. Seen
+the stage from above yet?" 3 the solution.
+**Reset:** Pip → V310 = 0, S310–312 off, player to (12,15). Leaving the room keeps everything.
+
+#### 152 Fly Loft — COMBINE "a flat is in one place at a time" (25×15; rows 6–14 void: the stage seen from above)
+```
+     0123456789012345678901234
+y0   #########################
+y1   #.....a....b....c.......#    a / b / c: where flats A / B / C hang while FLOWN (they block the catwalk)
+y2   #.L...a.i..b..p.c.....K.#    L (2,2) ↔ 151 L · K (22,2) ↔ 151 K · p (14,2) trapdoor → 153 · i (8,2) Super Potion
+y3   #.....a....b....c.......#
+y4   #.123.a....b....c...123.#    left rail: ropes 1-3 at (2..4,4) · right rail: ropes 1-3 at (20..22,4)
+y5   #########################
+```
+- **Counterweight coupling:** rope 1 → A · rope 2 → B + C · rope 3 → A + C. Each rope pulls its flats out if they're in,
+  and back in if they're out. The ropes on the two rails are the same three ropes.
+- `a x,1-4`: P0 [—] blank · P1 [S310 on] tile HANGING_FLAT (impassable). Same for `b` [S311] and `c` [S312].
+- **What the stage needs:** A out, B out, C in. Pulls: **rope 2** (B out, C out) then **rope 3** (A out, C back in). The
+  natural try, rope 1 then rope 2, leaves C out, and the rostrum is gone.
+- **The aha:** once flats are flown, they hang across the catwalk *behind you*. Set them at the **right** rail.
+  Players who set them at the left rail find the loft blocked and must reset. The trapdoor p is reachable only while
+  b or c is in.
+- **Hints (stagehand "Dot", at (5,2)):** 1 "Whatever leaves the stage comes up here. Where do you want to be standing
+  when it does?" 2 "Rope 2 drags two flats. Rope 3 also catches the rostrum." 3 the solution.
+
+#### 153 The Trap Room — MASTERY "ride the revolve" (optional; 11×11 puzzle, padded to 20×15; via trapdoor p)
+Turntable 5×5 at (3–7, 3–7), crank post at its centre (5,5). Shown at rotation 0:
+```
+     01234567890
+y0   ###########
+y1   ########*##    * (8,1) prop chest
+y2   #######..##
+y3   ##...#...##
+y4   ##..##...##
+y5   ##.#.o...##    o crank (5,5)
+y6   ##.#.##..##
+y7   ##.#..#..##
+y8   ####...####
+y9   ####...####
+y10  #####@######    @ (5,10) ladder up to 152 p
+```
+- Turntable cells are 24 events, each with 4 pages (`[—]` rot 0, `[V312≥1]` rot 1, `[V312≥2]`, `[V312≥3]`). A cell is
+  machinery (impassable tile) or blank (floor) according to the 5×5 pattern `..#.. / .##.. / #.o.. / #.##. / #..#.`
+  rotated clockwise by V312 quarter-turns.
+- **Crank** (action, only from the four tiles beside it): `pfp_cycle(312, 4)`, and **the player rides**: their offset from
+  the centre (dx, dy) becomes (−dy, dx) (`pfp_turntable_ride(5,5)`). "You lean on the crank. The whole floor — and you
+  with it — swings a quarter-turn."
+- **Solution (verified, BFS):** walk to (4,5) and crank three times. You ride from west to north to east to south.
+  Then walk east (6,6) → (7,6) → (8,6) and north up the right-hand corridor to the chest.
+- **Reward:** Magical Seed ×2 (on Grand Stage: +1 Speed and Laser Focus), PP Up, and the prop crown of the Gilded King
+  (flavour; Dorian comments in 154).
+- **Reset:** the apprentice "Old Joss" (by the ladder) → V312 = 0.
 
 ---
 # PART 2 — ONE SIGNATURE PUZZLE DUNGEON PER KINGDOM

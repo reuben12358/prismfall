@@ -20,11 +20,11 @@ module PrismfallMaps
     125 => [10, 4, -12, 0],   # Cutter's House
     523 => [10, 4, -12, 0],   # Hale Farmhouse
     526 => [10, 4, -12, 0],   # Woodward's Hut
-    130 => [-10, -6, -18, 10],   # Loomhouse Gym
-    131 => [-10, -6, -18, 10],   # Loomhouse Upper Lofts - Weaving Hall
+    130 => [-10, -6, -18, 10],   # Loomhouse Gym - Foyer
+    131 => [-10, -6, -18, 10],   # Loomhouse Gym - Weaving Hall
     132 => [-14, -8, -20, 15],   # Loomhouse Upper Lofts - Canopy Lofts
     134 => [-16, -10, -20, 15],   # Loomhouse Upper Lofts - Granny's Knot
-    140 => [10, 4, -14, 0],   # Saltmere
+    140 => [8, 4, -12, 0],   # Saltmere
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
@@ -56,6 +56,7 @@ module PrismfallMaps
     100 => ["prismfall_seamist", 0, 34, 0, 100, 2, 0],   # Ferrow's Landing
     109 => ["prismfall_seamist", 0, 55, 0, 100, 3, 0],   # The Dovetail - Deck
     120 => ["prismfall_spores", 0, 46, 1, 100, 1, -1],   # Briarwick
+    140 => ["prismfall_seamist", 0, 30, 0, 100, 2, 0],   # Saltmere
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }

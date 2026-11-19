@@ -18,8 +18,8 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[123] = :SILKWOOD   # Weavers' Guildhall
   FieldEffects::MAP_FIELDS[124] = :NONE   # Treetop House
   FieldEffects::MAP_FIELDS[125] = :NONE   # Cutter's House
-  FieldEffects::MAP_FIELDS[130] = :SILKWOOD   # Loomhouse Gym
-  FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Upper Lofts - Weaving Hall
+  FieldEffects::MAP_FIELDS[130] = :SILKWOOD   # Loomhouse Gym - Foyer
+  FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Gym - Weaving Hall
   FieldEffects::MAP_FIELDS[132] = :SILKWOOD   # Loomhouse Upper Lofts - Canopy Lofts
   FieldEffects::MAP_FIELDS[133] = :SILKWOOD   # Loomhouse Gym - The Spindle
   FieldEffects::MAP_FIELDS[134] = :SILKWOOD   # Loomhouse Upper Lofts - Granny's Knot
@@ -31,11 +31,11 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[145] = :GRAND_STAGE   # Pageant Hall
   FieldEffects::MAP_FIELDS[146] = :BEACH   # Saltmere - Harbour & Breakwater
   FieldEffects::MAP_FIELDS[147] = :GRAND_STAGE   # Saltmere - Old Town
-  FieldEffects::MAP_FIELDS[150] = :GRAND_STAGE   # Pell Playhouse - Foyer
-  FieldEffects::MAP_FIELDS[151] = :GRAND_STAGE   # Pell Playhouse - Revolving Stage
-  FieldEffects::MAP_FIELDS[152] = :GRAND_STAGE   # Pell Playhouse - Fly Loft
-  FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse - The Trap Room
-  FieldEffects::MAP_FIELDS[154] = :GRAND_STAGE   # Pell Playhouse - The Grand Stage
+  FieldEffects::MAP_FIELDS[150] = :GRAND_STAGE   # Pell Playhouse - Lobby
+  FieldEffects::MAP_FIELDS[151] = :GRAND_STAGE   # Pell Playhouse Backstage - The Old Revolve
+  FieldEffects::MAP_FIELDS[152] = :GRAND_STAGE   # Pell Playhouse Backstage - Fly Loft
+  FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse Backstage - The Trap Room
+  FieldEffects::MAP_FIELDS[154] = :GRAND_STAGE   # Pell Playhouse - Auditorium
   FieldEffects::MAP_FIELDS[160] = :WATER_SURFACE   # Ebbmouth
   FieldEffects::MAP_FIELDS[161] = :NONE   # Ebbmouth Pokémon Center
   FieldEffects::MAP_FIELDS[162] = :NONE   # Ebbmouth Mart

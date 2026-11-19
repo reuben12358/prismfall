@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""Writes specs/130_loomhouse_gym.yaml from design/GYM_PUZZLES.md 'Gym 1' (Revision 13): map 130 is the whole gym, one
-easy hall in the manner of Jasmine's gym; 131 / 132 / 134 are the optional Upper Lofts (the Revision 10 puzzles).
-Layouts and puzzle logic come from mapgen/puzzles/g1.py - the same grids the solver proves - and are painted on
+"""Writes specs/130_loomhouse_gym.yaml: the Loomhouse, Briarwick (map IDs 130-134).
+SPINE Revision 14: this is GYM 2 (Tamsin Loom, Bug, Silkwood, DOUBLE battle, cap 19), the first real puzzle (3/10):
+  130 Foyer        TEACH: one heddle, one pull (a plank slides into the aisle); Nell and Orla
+  131 Weaving Hall TWIST: three linked heddles (each lifts two loom beds; all three once); Bram; Tamsin on the top ledge
+  132 / 134        the optional Upper Lofts after her badge: spools + the brass Meridian wire, Granny's Knot
+Layouts and puzzle logic come from mapgen/puzzles/loomhouse.py - the same grids the solver proves - and are painted on
 tileset 54 "PF Rejuv Halls" (compose_halls.py: Rejuvenation's timber-hall tiles + Prismfall's silk props) with
 layouts/hallkit.py.  Story dialogue is story/20_SCRIPT_CH0-2.md, unchanged.  Edit this script, then run build.py."""
 import os, sys
@@ -51,7 +54,7 @@ def head(mid, name, parent, tone, extra=None):
 
 def main():
     import hallkit as K
-    from puzzles import g1
+    from puzzles import loomhouse as g1
     CU, MI, PF = K.CU, K.MI, K.PF
     PLANK = CU('plank')
     docs = []
@@ -67,7 +70,7 @@ def main():
     win = [
         say('TAMSIN', 'shocked', "...It held, and you still came through it."),
         say('TAMSIN', 'happy', "That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one."),
-        {'script': 'Prismfall.award_badge(1)'},
+        {'script': 'Prismfall.award_badge(pfm_gym(:LEADER_TAMSIN))'},
         "(You open the Badge Case and set the badge in. A faint hum: one clear note.)",
         "\\pf[JUNO,happy,question]Juno: Ooh. Is it supposed to do that?",
         say('TAMSIN', 'neutral', "I don't think they do that. ...Do they do that?"),
@@ -110,7 +113,7 @@ def main():
             say('TAMSIN', 'sad', "I've had it since spring. I can't shout."),
             say('TAMSIN', 'angry', "But I can weave. Granny Loom wove this room. Don't you dare tear it.")]},
         {'script': key(133, 'TRIED') + ' = true'},
-        {'if': 'Prismfall.gym_battle(1)', 'then': win}]
+        {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)', 'then': win}]
     A = g1.GYM_AT
     h = K.Hall(g1.GYM, 'loom', CLS, seed=130)
     for x, y in g1.GYM_LOOMS: h.obj('loom', x, y)
@@ -128,7 +131,7 @@ def main():
     ev = [{'type': 'exit', 'at': list(A['exit']), 'link': 'BW_GYM', 'se': 'Door exit'}]
     for k, cols in g1.GYM_PLANKS.items():
         for x in cols:
-            for y in (8, 9): ev.append(K.tile_event('Plank %d,%d' % (x, y), x, y, K.exact('GYM1_FOYER', k, PLANK, 1)))
+            for y in (8, 9): ev.append(K.tile_event('Plank %d,%d' % (x, y), x, y, K.exact('LOOM_FOYER', k, PLANK, 1)))
     ev += [
         {'type': 'event', 'name': 'Heddle', 'at': [hx, hy], 'pages': [{'graphic': {'tile': CU('post_silk')}, 'commands': [
             {'se': 'Door exit'}, {'script': 'pfp_cycle(%d, 2)' % g1.V_FOYER},
@@ -138,11 +141,12 @@ def main():
         {'type': 'npc', 'name': 'Gym guide', 'at': list(A['guide']), 'sprite': 'NPC 01', 'dir': 'right', 'commands': [
             "Gym Guide: Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does not. "
             "I say this to everyone and half of them bring a Bulbasaur.",
-            "Gym Guide: Straight up the aisle, two weavers, then the Warden. There's one loom bed in the way. Every heddle in this "
-            "house is tied by silk to what it moves, so follow the thread."]},
-        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'g1_gym', "Weaver Pim, loom-minder. Stuck at the loom bed? It happens."),
+            "Gym Guide: Every heddle in this house is tied by silk to what it moves, so follow the thread. Up here it's one heddle, "
+            "one plank. Upstairs in the Weaving Hall, each heddle lifts TWO beds. Count lifts, not pulls.",
+            "Gym Guide: And Tamsin fights two at a time. A thread holds because it's twisted with others."]},
+        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_foyer', "Weaver Pim, loom-minder. Stuck at the loom bed? It happens."),
         sign('Apology card', A['card_a'], "A card pinned to the wall: \"If the plank is in the wrong place, I'm so sorry. The heddle by the aisle moves it. — T.L.\""),
-        sign('Apology card B', A['card_b'], "A card: \"Upper lofts closed to challengers. Gran's old practice rooms. They're a tangle. Sorry! — T.L.\""),
+        sign('Apology card B', A['card_b'], "A card: \"The Weaving Hall is upstairs. If you fall, the nets are soft. Sorry! — T.L.\""),
         sign('Portrait', A['portrait'], "A fierce old woman at a loom. Brass plate: \"Mother Loom, Warden AF 247–299. 'Twist it or lose it.'\""),
         {'type': 'item', 'at': list(A['item']), 'item': 'POTION'},
         trainer(A['nell'], 'BUGCATCHER', 'Nell', 2, 'right', "A thread alone is just string!", "Two of us would've had you."),
@@ -155,17 +159,8 @@ def main():
              'then': ['A small brass key is tied into the very first warp thread.', {'script': 'pfm_item(:LEDGERKEY, 1, "Ledger Key")'}],
              'else': ["Mother Loom's first loom. The warp stops mid-row: up, down, up, down, up - and then nothing, as if she meant "
                       "to come back to it."]}]}]},
-        {'type': 'event', 'name': 'Tamsin', 'at': list(A['tamsin']), 'pages': [
-            {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': tamsin_fight},
-            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
-                {'if_switch': [g1.S_KNOT, True], 'then': [
-                    say('TAMSIN', 'crying', "You finished Gran's row. ...She'd have shouted. Happily. Sorry — I'm crying, that's the Silkwood, it's very dusty.")]},
-                say('TAMSIN', 'neutral', "The Cutter in town owes me a favour. Tell him I sent you. And— thank you. Not sorry. Thank you."),
-                say('TAMSIN', 'neutral', "The stairs behind me go up to Gran's practice lofts. They're open to you now. Mind the brass wire. It isn't hers.")]}]},
-        {'type': 'event', 'name': 'Upper lofts stair', 'at': list(A['stair']), 'pages': [{'trigger': 'touch', 'commands': [
-            {'if': '$player.badge_count >= 1', 'then': [{'se': 'Door exit'}, {'transfer': {'map': 131, 'x': g1.HALL_AT['start'][0], 'y': g1.HALL_AT['start'][1], 'dir': 'up'}}],
-             'else': ["A silk rope across the stairs, and a card: \"Upper lofts: Gran's old practice rooms. After your badge. Sorry! — T.L.\"",
-                      {'move': {'who': -1, 'route': ['down']}}]}]}]},
+        {'type': 'warp', 'name': 'Stairs to the Weaving Hall', 'at': list(A['stair']),
+         'to': {'map': 131, 'x': g1.HALL_AT['start'][0], 'y': g1.HALL_AT['start'][1], 'dir': 'up'}},
         reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[130, e.id, 'A']] } >= 2", ['Juno']),
         {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
             {'commands': []},
@@ -173,7 +168,7 @@ def main():
                 {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on! I'm being loud! In my head!")],
                  'else': ["(Juno is by the door, eating a honey-silk bun.)",
                           say('JUNO', 'happy', "I made it! Go on! I'll be loud!"), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
-    d = head(130, 'Loomhouse Gym', 120, [-10, -6, -18, 10]); d.update(h.write(130)); d['events'] = ev; docs.append(d)
+    d = head(130, 'Loomhouse Gym - Foyer', 120, [-10, -6, -18, 10]); d.update(h.write(130)); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 131 Weaving Hall (TWIST: two threads per heddle)
     A = g1.HALL_AT
@@ -192,7 +187,7 @@ def main():
         h.put(CU('thread_%s_h' % COL[side[g][0]]), 1, mid, 2); h.put(CU('thread_%s_h' % COL[side[g][1]]), 23, mid, 2)
     ev = []
     for g, (rows, var, cols) in g1.HALL_GAPS.items():
-        name = {g1.V_A: 'GYM1_A', g1.V_B: 'GYM1_B', g1.V_C: 'GYM1_C'}[var]
+        name = {g1.V_A: 'LOOM_A', g1.V_B: 'LOOM_B', g1.V_C: 'LOOM_C'}[var]
         for k, x in enumerate(cols):
             if x is None: continue
             for y in rows: ev.append(K.tile_event('Plank %s %d,%d' % (g, x, y), x, y, K.exact(name, k, PLANK, 2)))
@@ -202,14 +197,24 @@ def main():
             'The %s heddle rises. Two threads lift with it: loom beds %s shift.' % (n.lower(), what)]}]})
     ev += [
         {'type': 'warp', 'name': 'Back down to the gym', 'at': list(A['entrance']), 'to': {'map': 130, 'x': 15, 'y': 4, 'dir': 'down'}},
-        {'type': 'warp', 'name': 'Up to Canopy Lofts', 'at': list(A['stair']),
-         'to': {'map': 132, 'x': g1.LOFT_AT['arrive'][0], 'y': g1.LOFT_AT['arrive'][1], 'dir': 'up'}},
+        {'type': 'event', 'name': 'Tamsin', 'at': list(g1.HALL_AT['tamsin']), 'pages': [
+            {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': tamsin_fight},
+            {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
+                {'if_switch': [g1.S_KNOT, True], 'then': [
+                    say('TAMSIN', 'crying', "You finished Gran's row. ...She'd have shouted. Happily. Sorry — I'm crying, that's the Silkwood, it's very dusty.")]},
+                say('TAMSIN', 'neutral', "The Cutter in town owes me a favour. Tell him I sent you. And— thank you. Not sorry. Thank you."),
+                say('TAMSIN', 'neutral', "The stairs behind me go up to Gran's practice lofts. They're open to you now. Mind the brass wire. It isn't hers.")]}]},
+        {'type': 'event', 'name': 'Upper lofts stair', 'at': list(A['stair']), 'pages': [{'trigger': 'touch', 'commands': [
+            {'if': 'pfm_gym_won?(:LEADER_TAMSIN)', 'then': [{'se': 'Door exit'},
+                {'transfer': {'map': 132, 'x': g1.LOFT_AT['arrive'][0], 'y': g1.LOFT_AT['arrive'][1], 'dir': 'up'}}],
+             'else': ["A silk rope across the stairs, and a card: \"Upper lofts: Gran's old practice rooms. After your badge. Sorry! — T.L.\"",
+                      {'move': {'who': -1, 'route': ['down']}}]}]}]},
         trainer(A['bram'], 'GENTLEMAN', 'Bram', 3, 'right', "Granny Loom taught me this hall. Tamsin taught me to say sorry when I win.",
                 "I don't need to say it, then."),
         sign('Torn-net sign', A['sign'], "A card on a post: \"The left warp of the middle bed snapped. Sorry! Use the other two. — T.L.\"",
              CU('post_silk')),
-        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'g1_hall', "Pim again. I run between rooms. Want it put back, or a nudge?")]
-    d = head(131, 'Loomhouse Upper Lofts - Weaving Hall', 130, [-10, -6, -18, 10]); d.update(h.write(131)); d['events'] = ev; docs.append(d)
+        K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_hall', "Pim again. I run between rooms. Want it put back, or a nudge?")]
+    d = head(131, 'Loomhouse Gym - Weaving Hall', 130, [-10, -6, -18, 10]); d.update(h.write(131)); d['events'] = ev; docs.append(d)
 
     # ---------------------------------------------------------------- 132 Canopy Lofts (COMBINE: spools, cords, the brass wire)
     A = g1.LOFT_AT
@@ -251,12 +256,12 @@ def main():
                 {'transfer': {'map': 132, 'x': g1.CENTRE[1][0], 'y': g1.CENTRE[1][1], 'dir': 'up'}},
                 {'tone': [0, 0, 0, 0, 8]}], []]}]}]})
     for k, cells in g1.BRIDGE.items():
-        for x, y in cells: ev.append(K.tile_event('Bridge %d %d,%d' % (k, x, y), x, y, K.exact('GYM1_BRIDGE', k, PLANK, 2)))
+        for x, y in cells: ev.append(K.tile_event('Bridge %d %d,%d' % (k, x, y), x, y, K.exact('LOOM_BRIDGE', k, PLANK, 2)))
     ev += [
         {'type': 'warp', 'name': 'Down to Weaving Hall', 'at': list(A['down']), 'to': {'map': 131, 'x': 12, 'y': 3, 'dir': 'down'}},
         {'type': 'warp', 'name': "Granny's door", 'at': list(A['warp']), 'to': {'map': 134, 'x': g1.KNOT_AT['start'][0], 'y': g1.KNOT_AT['start'][1], 'dir': 'up'}},
         {'type': 'item', 'at': list(A['item']), 'item': 'SILVERPOWDER'},
-        K.apprentice('Mossy', 'NPC 07', A['mossy'][0], A['mossy'][1], 'g1_lofts', "Mossy. I oil the spools. If you're going round in circles, say."),
+        K.apprentice('Mossy', 'NPC 07', A['mossy'][0], A['mossy'][1], 'lh_lofts', "Mossy. I oil the spools. If you're going round in circles, say."),
         trainer(A['hollis'], 'BUGCATCHER', 'Hollis', 2, 'left', "Ride the spools wrong and you go in circles. I've been going in circles since lunch.",
                 "...Lunch was a while ago."),
         trainer(A['ash'], 'POKEMONRANGER_M', 'Ash', 2, 'left', "Rangers learn the high lines first. Let's see if you can keep your feet up here.",
@@ -276,7 +281,7 @@ def main():
         names = ' '.join('T%d' % (t + 1) for t in g1.KNOT_FLIPS[i])
         ev.append({'type': 'event', 'name': 'Treadle %d' % (i + 1), 'at': [x, y], 'pages': [{'graphic': {'tile': CU('treadle_down')}, 'commands': [
             {'se': 'Door exit'}, {'script': 'pfp_flip_self(%%w[%s])' % names},
-            {'if': '!$game_switches[%d] && pfp_check(:g1_knot)[0] == :ok' % g1.S_KNOT, 'then': [
+            {'if': '!$game_switches[%d] && pfp_check(:lh_knot)[0] == :ok' % g1.S_KNOT, 'then': [
                 {'switch': [g1.S_KNOT, True]}, {'se': 'Door exit'},
                 "Up, down, up, down, up. The row Granny Loom never finished is finished. A knot on the chest lets go."]}]}]})
     ev += [
@@ -285,16 +290,16 @@ def main():
                 {'if_switch': [g1.S_KNOT, True], 'then': [
                     {'script': 'pfm_item(:TELLURICSEED, 2, "Telluric Seed")'}, {'script': 'pfm_item(:SILKSCARF, 1, "Silk Scarf")'},
                     "A note in Mother Loom's hand: \"Twist it or lose it.\"", {'selfswitch': ['A', True]}],
-                 'else': [{'script': 'pfp_check!(:g1_knot)'}]}]},
+                 'else': [{'script': 'pfp_check!(:lh_knot)'}]}]},
             {'cond': {'self': 'A'}}]},
         {'type': 'event', 'name': 'Re-thread lever', 'at': list(A['lever']), 'pages': [{'graphic': {'tile': CU('post_silk')}, 'commands': [
             'The re-thread lever. Lower every thread?',
-            {'choices': ['Yes', 'No'], 'cancel': 2, 'branches': [[{'script': 'pfp_reset(:g1_knot, false)'}, 'Every thread drops.'], []]},
-            {'if': 'PrismfallPuzzles.room_log(:g1_knot)[:resets] >= 1', 'then': [{'script': 'pfp_hint(:g1_knot)'}]}]}]}]
+            {'choices': ['Yes', 'No'], 'cancel': 2, 'branches': [[{'script': 'pfp_reset(:lh_knot, false)'}, 'Every thread drops.'], []]},
+            {'if': 'PrismfallPuzzles.room_log(:lh_knot)[:resets] >= 1', 'then': [{'script': 'pfp_hint(:lh_knot)'}]}]}]}]
     d = head(134, "Loomhouse Upper Lofts - Granny's Knot", 130, [-16, -10, -20, 15]); d.update(h.write(134)); d['events'] = ev; docs.append(d)
 
     with open(os.path.join(HERE, 'specs', '130_loomhouse_gym.yaml'), 'w') as f:
-        f.write('# GENERATED by gen_gym1.py from design/GYM_PUZZLES.md + mapgen/puzzles/g1.py + story/20_SCRIPT_CH0-2.md (Gym 1 on tileset 54). Edit the script, then run build.py.\n')
+        f.write('# GENERATED by gen_loomhouse.py from design/GYM_PUZZLES.md + mapgen/puzzles/loomhouse.py + story/20_SCRIPT_CH0-2.md (Gym 2 since SPINE Rev 14, tileset 54). Edit the script, then run build.py.\n')
         yaml.safe_dump_all(docs, f, sort_keys=False, allow_unicode=True, width=120)
     print('wrote specs/130_loomhouse_gym.yaml')
 

@@ -2,6 +2,19 @@
 
 Notes between workstreams. Newest first. Not loaded by the PluginManager (only .rb files are).
 
+## 2026-11-19 (later) - trainer workstream: Gym 1 / Gym 2 swap (SPINE Revision 14)
+- `001_Config.rb` `GYMS`: index 1 is now **Dorian, Saltmere, Normal, :GRAND_STAGE, cap 15, `double: false`**; index 2 is
+  **Tamsin, Briarwick, Bug, :SILKWOOD, cap 19, `double: true`**. Trainer IDs are unchanged (`[LEADER_DORIAN,Dorian,0]`,
+  `[LEADER_TAMSIN,Tamsin,0]`), so PBS references keep working; badge 1 is now Dorian's, badge 2 Tamsin's.
+- `003_Badges_Gyms.rb` `gym_battle`: `GYMS[:double]` is now authoritative: `true` sets "double", `false` sets "single"
+  (so an old event that still calls `setBattleRule("double")` before Gym 1 gets the single battle the story wants); no
+  key leaves the event's rule. The `double:` argument still overrides.
+- **Map events must swap numbers** (logged in `mapgen/REQUESTS.md`): the Loomhouse (130) calls `gym_battle(1)` and must call
+  `gym_battle(2)`; the Pell Playhouse (150) calls `gym_battle(2)` and must call `gym_battle(1)` and can drop its
+  `setBattleRule("double")`. Until then each gym starts the other Warden.
+- Anything else keyed on gym *number* for these two (Field Notes order, badge names, HM badge counts in
+  `FIELD_MOVE_BADGES`: Cut was badge 1 from Briarwick's Cutter's House) needs the story / systems owner's check.
+
 ## 2026-11-19 - trainer workstream: gym double battles
 - `001_Config.rb`: `GYMS` entries for Gyms **2, 6, 11, 16, 17** carry `double: true` (the story has all five as double
   battles; the teams in `pbs/trainers.txt` are tuned for it, see `design/TRAINER_FIELD_PLAYBOOK.md`).

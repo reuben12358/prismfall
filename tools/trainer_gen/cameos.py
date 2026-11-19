@@ -3,7 +3,7 @@
 # version 2 = post-game rematch at 100. Levels in team lists are offsets from the ace (0).
 # versions: {version: (ace_level, mode)}; mode None = full team, "last4" = last four (tag-double halves), "flat" = all at ace.
 PLACEMENT = {
-    "FESTIVAL_SHELLY":    {1: (17, None), 2: (100, None)},   # Act I Gossamer Deepwood, DOUBLE (v1 uses V1_TEAMS)
+    "FESTIVAL_SHELLY":    {1: (21, None), 2: (100, None)},   # Act I Gossamer Deepwood after Gym 2 (SPINE Rev 14), DOUBLE (v1 uses V1_TEAMS)
     "FESTIVAL_VENAM":     {1: (38, None), 2: (100, None)},   # Act II Miasma Caverns, :CORROSIVE_MIRE
     "FESTIVAL_GARRET":    {1: (46, None), 2: (100, None)},   # Act II Ironreach lower shafts, :COLOSSEUM
     "FESTIVAL_MELIA":     {1: (50, None), 2: (100, None)},   # Act III Royal Chase
