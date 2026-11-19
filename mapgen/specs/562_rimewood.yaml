@@ -135,3 +135,10 @@ events:
 - type: item
   at: [26, 33]
   item: ICESTONE
+- type: sign
+  name: Lodge door
+  at: [4, 40]
+  text: 'The trapper''s lodge. Fairy lights along the eaves, a note on the door:
+
+    "Out on the line. Kettle''s by the fire. Sit."'
+  post: false

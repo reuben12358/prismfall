@@ -9,9 +9,14 @@
    "elements/pf_ashen_waste_geyser1.png",
    "elements/pf_ashen_waste_geyser2.png",
    "elements/pf_ashen_waste_geyser3.png",
+   "elements/pf_ashen_waste_plume.png",
    "elements/pf_ashen_waste_seams.png",
    "elements/pf_ashen_waste_sheen.png",
-   "elements/pf_ashen_waste_steam.png"
+   "elements/pf_ashen_waste_steam.png",
+   "elements/pf_ashen_waste_vent0.png",
+   "elements/pf_ashen_waste_vent1.png",
+   "elements/pf_ashen_waste_vent2.png",
+   "elements/pf_ashen_waste_vent3.png"
   ],
   "sources": [
    [
@@ -24,7 +29,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "Cinderglass: faint glass sheen, obsidian shards, seam glow, steam geysers with bursts, glass glints, violet banners"
+    "Cinderglass: faint glass sheen, obsidian shards, seam glow, geyser plumes (8-cell sheets) over glowing vents, glass glints, violet banners"
    ]
   ]
  },
@@ -84,16 +89,20 @@
   ],
   "sources": [
    [
+    "carchagui (DeviantArt backgrounds; credit)",
+    "cave_background, earth panel at 2x (twin tunnel mouths)"
+   ],
+   [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgCave (2x crop of the tunnel mouth), enemybaseCave"
+    "enemybaseCave"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
-    "decor006, decor009, fog (the CAVE environment's layers)"
+    "decor006, fog"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "timber mine supports, stalactites, hanging lanterns, lantern light"
+    "timbered tunnel mouth, hanging lanterns and lantern light"
    ],
    [
     "stage 2",
@@ -208,7 +217,6 @@
    "battlebg/field_desert_bloom.png",
    "battlebg/field_desert_bloom_hd.png",
    "battlebg/field_desert_hd.png",
-   "elements/pf_desert_awning.png",
    "elements/pf_desert_devil.png",
    "elements/pf_desert_haze.png",
    "elements/pf_desert_haze2.png",
@@ -216,16 +224,12 @@
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgDesert (extended)"
+    "aveontrainer (DeviantArt battle backgrounds; credit)",
+    "battlebgdesert (painted dunes, mesas and cacti; extended)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "mesas, half-buried sandstone ruins, sandstone slab platforms, sun glare, heat haze"
-   ],
-   [
-    "Prismfall (procedural, art/battlebacks/*.py)",
-    "sunken temple gate, torn awning (sways), dust devil"
+    "sandstone platforms, sun glare, dust devil, heat haze"
    ],
    [
     "stage 2",
@@ -341,7 +345,7 @@
   "sources": [
    [
     "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgFlowerGarden0-4, enemybaseFlowerGarden0-4 (one per stage)"
+    "battlebgFlowerGarden2-4, enemybaseFlowerGarden1-4; stages 1-2 are the stage-3 garden with its blooms closed back into green buds"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
@@ -450,26 +454,18 @@
   "files": [
    "battlebg/field_inverse.png",
    "battlebg/field_inverse_hd.png",
-   "elements/pf_inverse_island0.png",
-   "elements/pf_inverse_island1.png",
-   "elements/pf_inverse_island2.png",
    "elements/pf_inverse_rock0.png",
    "elements/pf_inverse_rock1.png",
-   "elements/pf_inverse_rock2.png",
    "elements/pf_inverse_static.png"
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgInverse, enemybaseInverse"
-   ],
-   [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgForest (colour-inverted and flipped: the world hanging overhead)"
+    "battlebgDarchlight (painted forest path, colour-inverted and hue-shifted; a flipped copy hangs overhead)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "negative floating rock islands, static mist"
+    "negative platforms, floating rocks, static mist"
    ]
   ]
  },
@@ -551,25 +547,23 @@
   "files": [
    "battlebg/field_mountain.png",
    "battlebg/field_mountain_hd.png",
-   "elements/pf_mountain_clouds.png",
+   "elements/pf_mountain_foam.png",
    "elements/pf_mountain_hawk.png",
    "elements/pf_mountain_mist.png",
-   "elements/pf_mountain_pennant.png",
-   "elements/pf_mountain_pine0.png",
-   "elements/pf_mountain_pine1.png"
+   "elements/pf_mountain_spray.png"
   ],
   "sources": [
    [
+    "aveontrainer (DeviantArt battle backgrounds; credit)",
+    "battlebgwaterfall (painted highland tarn, crags and falls; extended)"
+   ],
+   [
     "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgMountain, enemybaseMountain"
+    "enemybaseMountain"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "sky, layered snow-capped ridges, pines, clouds, valley mist"
-   ],
-   [
-    "Prismfall (procedural, art/battlebacks/*.py)",
-    "ridge watchtower with a streaming pennant, circling hawk"
+    "moving foam on the falls, spray glow, mist, circling hawk, wind"
    ]
   ]
  },
@@ -628,7 +622,7 @@
   "sources": [
    [
     "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
-    "battlebgStarlight1 (starfield, darkened)"
+    "battlebgGDCCentralSquareNight (painted night plaza and skyline, darkened violet)"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
@@ -636,7 +630,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "dark moon with violet corona, Underveil rooftops and windows, violet rim light"
+    "dark moon with violet corona, flickering windows, shadow mist, violet-rim platforms"
    ],
    [
     "stage 2",
@@ -654,14 +648,20 @@
    "battlebg/field_prism_arena_hd.png",
    "elements/pf_prism_arena_beam0.png",
    "elements/pf_prism_arena_beam1.png",
+   "elements/pf_prism_arena_beam2.png",
+   "elements/pf_prism_arena_crowd.png",
    "elements/pf_prism_arena_plates.png",
    "elements/pf_prism_arena_prism.png",
    "elements/pf_prism_arena_sigil.png"
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgChampion (gradient-mapped night, as the arena sky glow)"
+    "princess-phoenix (DeviantArt 'Some battle backgrounds'; credit)",
+    "arena panel (night) at 2x: painted stadium court and stands"
+   ],
+   [
+    "Pok\u00e9mon Rejuvenation (Rejuvenation Team)",
+    "battlebgNewWorld (starfield strip above the stands)"
    ],
    [
     "Elite Battle: DX stock elements (Luka S.J.)",
@@ -669,7 +669,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "Crownhaven stands with crowd lights, the 18 Plates ring, prismatic floor sigil, searchlights, marble platforms"
+    "the 18 Plates ring, prismatic sigil, cheering crowd sheet, sweeping spotlights, confetti, camera flashes, marble platforms"
    ]
   ]
  },
@@ -749,22 +749,17 @@
    "battlebg/field_snowy_mountain_hd.png",
    "elements/pf_snowy_mountain_blizzard.png",
    "elements/pf_snowy_mountain_flags.png",
-   "elements/pf_snowy_mountain_flags2.png",
-   "elements/pf_snowy_mountain_lamp.png",
+   "elements/pf_snowy_mountain_glint.png",
    "elements/pf_snowy_mountain_spindrift.png"
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgSnowyMountain, enemybaseSnowyMountain"
+    "carchagui (DeviantArt backgrounds; credit)",
+    "cave_background, snow panel at 2x (snowbound summit hollow)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "summit ridges and cornices, snowy pines, prayer flags, spindrift, blizzard"
-   ],
-   [
-    "Prismfall (procedural, art/battlebacks/*.py)",
-    "dark crags, summit stupa with a flickering lamp"
+    "snow platforms, prayer flags, spindrift, blizzard, ice glint"
    ]
   ]
  },
@@ -846,22 +841,17 @@
    "battlebg/field_wasteland_hd.png",
    "elements/pf_wasteland_fireglow.png",
    "elements/pf_wasteland_flame.png",
-   "elements/pf_wasteland_hookswing.png",
    "elements/pf_wasteland_pools.png",
    "elements/pf_wasteland_smog.png"
   ],
   "sources": [
    [
-    "Pok\u00e9mon Reborn (Reborn Team)",
-    "battlebgWasteland (sky re-graded), enemybaseWasteland"
+    "aveontrainer (DeviantArt battle backgrounds; credit)",
+    "battlebgswamp2 (painted dead-tree mire, gradient-mapped jaundiced; water turned toxic)"
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "slag heaps, dead trees, rusted barrels, glowing toxic pools, smog"
-   ],
-   [
-    "Prismfall (procedural, art/battlebacks/*.py)",
-    "derelict crane, burning drum (flame sheet), swinging chain"
+    "slag platforms, barrels, burning drum (flame sheet), toxic glow, smog"
    ]
   ]
  },

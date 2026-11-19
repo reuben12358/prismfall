@@ -28,10 +28,11 @@ def arm():
     return mat.clean_orphans(a)
 
 
-def build(with_arm, ax=-4, ay=4, ribbon=False):
-    b = eb.lady_body(keep_head=False)
+def build(with_arm, ax=-4, ay=4, ribbon=False, head='lass'):
+    b = eb.lady_body(keep_head=(head == 'lady'))
     fig = Image.new('RGBA', b.size, CLEAR); fig.paste(b, (eb.SHIFT, 0))
-    h = Image.new('RGBA', b.size, CLEAR); h.paste(eb.lass_head(), (-2, -4)); fig.alpha_composite(h)
+    if head == 'lass':
+        h = Image.new('RGBA', b.size, CLEAR); h.paste(eb.lass_head(), (-2, -4)); fig.alpha_composite(h)
     V = Image.new('RGBA', fig.size, CLEAR)
     c = eb.cape()
     if ribbon:

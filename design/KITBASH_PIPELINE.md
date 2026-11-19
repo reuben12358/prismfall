@@ -121,3 +121,17 @@ rejected Burgh-based set is still in `art/out/Graphics/Portraits/`).
 - **Mouths do not transplant between busts** unless the head angles match; Skyla's and Iris's failed on a frontal face.
 - **Charset in engine:** overriding `$game_player.character_name` with a singleton method makes the walker use the sheet, and
   128x192 frames display correctly. The rig's autorun does not draw map tiles, so "on a lit map" is still unverified.
+
+## 10. How the reference games draw portraits, and sprite busts (2026-11-19)
+
+Sheet: `art/previews/14_juno_portraits.png`. Script: `juno_portraits_p4.py`, `sheet14.py`.
+
+- **Rejuvenation and Desolation both use the stock Essentials face tag**: `\ff[name,index]` in message text (`Scripts/Messages.rb`,
+  class `FaceWindowVX`) loads `Graphics/Faces/<name>.png`, falls back to `Graphics/Pictures/<name>.png`, and shows a 96x96 cell in a
+  square window to the left of the message box. `\f[name]` shows a whole picture from `Graphics/Pictures`. These are dedicated,
+  hand-drawn portrait files, not crops of trainer or overworld sprites. No round-bubble code or art was found in either copy.
+- **Pool size:** our Rejuvenation copy has 13 face files (2 characters), Desolation 90 (about 27 characters, few of them girls).
+  `Graphics/Pictures` holds no further portrait sets in either game. There is no larger donor pool on disk.
+- **Sprite busts** (32x32 crop of the 80-px front, x3): match the battle sprite exactly, but the face is 8 px wide, so expressions
+  barely differ and the pixels are 1.5x coarser than a 48-px portrait. Usable as a consistent fallback, not as Rejuvenation-style art.
+- Installed portraits: the pass-3 composite A set (stopgap, replaces the Burgh-based set).

@@ -808,3 +808,30 @@ def orchard_tree(r=16, leaf=(70, 140, 60), fruit=(230, 80, 60), outline=(24, 50,
         x, y = rng.uniform(6, r * 2 - 2), rng.uniform(6, r * 1.8)
         d.point((x, y), fill=C(fruit)); d.point((x + 1, y), fill=C(fruit))
     return im
+
+
+def plume_sheet(w=64, h=200, frames=8, seed=0, color=(238, 240, 250), shade=(176, 184, 214)):
+    """Geyser eruption cells (horizontal sheet, pivot bottom centre): simmer, jet, billow, disperse."""
+    rng = random.Random(seed)
+    sheet = Image.new("RGBA", (w * frames, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(sheet)
+    heights = [0.06, 0.1, 0.45, 0.85, 1.0, 0.95, 0.8, 0.5][:frames]
+    alphas = [200, 220, 255, 255, 255, 220, 150, 80][:frames]
+    for f in range(frames):
+        ox = f * w; cx = ox + w / 2
+        top = h - h * heights[f]
+        al = alphas[f]
+        if heights[f] > 0.2 and f < 6:      # the jet column
+            jw = 5 if f < 5 else 3
+            d.polygon([(cx - jw, h), (cx - jw * 0.6, top + 16), (cx + jw * 0.6, top + 16), (cx + jw, h)], fill=C(shade, al))
+            d.line([(cx - 1, h), (cx - 1, top + 16)], fill=C(color, al), width=2)
+        n = 3 if heights[f] < 0.2 else int(5 + heights[f] * 9)
+        for k in range(n):
+            t = k / max(n - 1, 1)
+            y = h - 6 - (h - 6 - top) * (t if heights[f] > 0.2 else rng.random())
+            spread = (4 + t * w * 0.34) * (1.25 if f >= 5 else 1)
+            x = cx + rng.uniform(-spread, spread) * (0.4 + t * 0.6)
+            r = (4 + t * 13) * (1.2 if f >= 5 else 1)
+            d.ellipse([x - r, y - r * 0.8, x + r, y + r * 0.8], fill=C(shade, int(al * 0.9)))
+            d.ellipse([x - r * 0.8, y - r * 0.8, x + r * 0.55, y + r * 0.4], fill=C(color, al))
+    return sheet

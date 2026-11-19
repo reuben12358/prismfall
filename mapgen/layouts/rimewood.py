@@ -628,7 +628,14 @@ def rimewood(prev=None):
         if e['type'] == 'sign': signboard(m, e)
     for x, y in pegs:
         if m.free(x, y, 1, 1, on='.dt'): m.tile(4847, x, y, 1)
-    m.near('kf_flat', 6, 37, on='.t', r=3)                                # the trapper's lean-to
+    if m.free(1, 34, 7, 7, on='.tT'):                                      # the trapper's lodge (carchagui chalet, rimport.py)
+        dd = m.stamp('ch_chalet_b', 1, 34, None, None); dx, dy = 1 + STAMPS['ch_chalet_b']['door'][0], 34 + STAMPS['ch_chalet_b']['door'][1]
+        for yy in range(31, 42):
+            for xx in range(0, 10):
+                if m.cls[yy, xx] == 'T': m.cls[yy, xx] = '.'               # a clearing round it
+        doorstep(m, (dx, dy)); m.cls[dy, dx] = 'B'
+        E.append(sign((dx, dy), 'Lodge door', "The trapper's lodge. Fairy lights along the eaves, a note on the door:\n\"Out on the line. Kettle's by the fire. Sit.\""))
+    else: print('  (rimewood: no room for the lodge)')
     m.near('pf_g_tree4_ice', 31, 5, on='.tT', r=3)                         # the Frost Loom (a giant, silk frozen mid-weave)
     m.near('pf_p_loom', 34, 11, on='.t', r=2)
     for x, y in ((10, 32), (12, 33), (14, 31), (16, 33), (11, 35), (15, 36)):    # frozen silk curtains (soft walls)

@@ -60,7 +60,13 @@ module BackdropStills
         $game_temp.clear_battle_rules
         setBattleRule("field", id)
         setBattleRule("fieldStage", stage) if stage > 1
-        WildBattle.start(foe, 50)
+        if ENV["BD_DOUBLE"] == "1"
+          $player.party = [DemoRun.mon(:LUCARIO, 50, [:AURASPHERE]), DemoRun.mon(:GARDEVOIR, 50, [:PSYCHIC])]
+          setBattleRule("double")
+          WildBattle.start(foe, 50, foe, 50)
+        else
+          WildBattle.start(foe, 50)
+        end
       end
       DemoRun.log("backdrop still #{id} stage #{stage}: #{@done ? 'ok' : 'NO SHOT'}")
     end
@@ -110,6 +116,30 @@ module BackdropStills
 
   def chain?; !@chain.nil?; end
 
+  # BD_MOVES="VOLCANIC:VAPOREON:SURF;MEADOW:ARCANINE:FLAMETHROWER": real battles where the AI-controlled
+  # player keeps using one move until the field's own transition rule fires; every 2nd frame dumped.
+  def move_tests
+    (ENV["BD_MOVES"] || "").split(";").map { |t| t.split(":").map(&:to_sym) }
+  end
+
+  def run_moves
+    move_tests.each do |field, mon, move|
+      @moves_mode = true
+      name = "mv_#{field.to_s.downcase}_#{move.to_s.downcase}"
+      party = [DemoRun.mon(mon, 60, [move])]
+      DemoRun.every = 2
+      DemoRun.battle(name, party, :turns => 4) do
+        $game_temp.clear_battle_rules
+        setBattleRule("field", field)
+        WildBattle.start(:SHUCKLE, 70)
+      end
+      DemoRun.every = 100000
+      @moves_mode = false
+    end
+  end
+
+  def moves_mode?; @moves_mode; end
+
   def hold_and_shoot(scene)
     return if @done || !@current
     @done = true
@@ -156,8 +186,9 @@ if ENV["DEMO_PLAN"].to_s.start_with?("backdrops")
       $player.badges = Array.new(18) { true }
       Prismfall::LevelCap.unlock_finale! rescue nil
       self.every = 100000   # no frame dumps, stills only
-      BackdropStills.run_all if ENV["BD_TRANSITIONS"].to_s.empty?
+      BackdropStills.run_all if ENV["BD_TRANSITIONS"].to_s.empty? && ENV["BD_MOVES"].to_s.empty?
       BackdropStills.run_transitions
+      BackdropStills.run_moves
       log("done")
     end
   end
@@ -178,6 +209,14 @@ if ENV["DEMO_PLAN"].to_s.start_with?("backdrops")
   class Battle
     alias bd_pbCommandPhase pbCommandPhase unless method_defined?(:bd_pbCommandPhase)
     def pbCommandPhase
+      if DemoRun.auto && BackdropStills.moves_mode?
+        if @turnCount >= 4
+          @decision = 3
+          return
+        end
+        DemoRun.log("turn #{@turnCount + 1}: field #{field_effect}")
+        return bd_pbCommandPhase
+      end
       if DemoRun.auto
         BackdropStills.chain? ? BackdropStills.play_chain(self, @scene) : BackdropStills.hold_and_shoot(@scene)
         @decision = 3

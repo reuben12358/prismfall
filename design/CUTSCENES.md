@@ -237,6 +237,7 @@ These come from how those games actually build their scenes (design/CUTSCENE_RES
 | `fade_in steps: 5`, `fade_out steps: 5`, `fade :id, to: 0, steps: 5`, `ease: :step3`..`:step8` | Stepped (pixel-art) fades |
 
 | `fx_sheet "Graphics/Animations/X", grid: [5, 4], frames: 0..3, at: point, hold: 0.08, loops: true, id: :fire1` | Looping or held effect cell (`blend:`, `scale:`, `z:`); end it with `stop_fx :fire1` |
+| `fx_sheet` extras | `origin: [ox, oy]`, `squash:` (flatten a ground decal), `grow: [from, to, seconds]`, `stay: seconds / :forever` (hold the last frame), `fade:` / `fade_in:` seconds, `drift: [vx, vy]` + `gravity:` (thrown pieces) |
 | `shadow :id, size: 30, ground: 420` | Dithered ground shadow under a flying actor |
 | `submerge :id, to: 0.6, duration: 1` | Sink an actor into the water line |
 | `idle :id, frames: [0, 1], hold: 0.3` | Background loop that a `flipbook`/`pose` interrupts |
@@ -296,7 +297,17 @@ legendaries acting through sheet frames, armies as charset sprites, effect sheet
   Reshiram: `pfw_reshiram` charset, descends walking left. No battle sprites are used.
 - If the stage picture is missing, `:WAR_CLIMAX` plays `:WAR_CLIMAX_PROCEDURAL` (the older code-drawn version; the
   storyboard differences listed above and the section below describe that one).
-- Previews: docs/cutscene_previews/war_climax_onmap_sheet.png and war_climax_onmap_clash.gif.
+- Polish pass (2026-11-19): the sea ice is the map team's pale soft ice (`rdraw.soft_ice`, cracks, drifts, floes)
+  painted over the Kristiline render; Kyogre turns side-on for the beam (`pfw_kyogre_side`, a kitbash of Reborn's
+  overworld Kyogre in the Primal palette); the clash point is `pfw_fx_clash_core` (blue | white-hot | orange) with
+  ice chunks and steam thrown out (`spray:`); the dome and the ice fracture are sheets (`pfw_fx_dome`,
+  `pfw_fx_fracture`); each army is two drilled blocks under banners (`army ..., blocks: 2, gap: 56`).
+- Real-engine capture: `bash tools/engine_capture/capture.sh assemble`, then
+  `CUT_VARS=variant=A CUT_EVERY=3 bash tools/engine_capture/capture.sh run WAR_CLIMAX`. It reuses the mkxp-z binary
+  built by tools/harness/visual, works in its own copy (`/tmp/pfcut_run`), locks game time to 1/60 s per frame and
+  writes PNG frames plus `frames.tsv`. Works for any scene id.
+- Previews (real engine): docs/cutscene_previews/war_climax_engine_sheet.png, war_climax_engine_full.mp4,
+  war_climax_engine_clash_slow.mp4, war_climax_engine_clash.gif.
 
 ### Legendary acting sheets (procedural version)
 If `Graphics/Characters/pkmn_kyogre_war.png` / `pkmn_reshiram_war.png` exist (named after the species in use), the war
