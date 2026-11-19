@@ -29,17 +29,17 @@ events:
   name: Guildhall door
   link: BW_GUILD
 - type: door
-  at: [45, 23]
+  at: [47, 25]
   gfx: ['', 0, 2]
   name: Poke Center door
   link: BW_PC
 - type: door
-  at: [55, 24]
+  at: [60, 23]
   gfx: ['', 0, 2]
   name: Treetop House door
   link: BW_HOUSE1
 - type: door
-  at: [27, 40]
+  at: [29, 43]
   gfx: ['', 0, 2]
   name: Mart door
   link: BW_MART
@@ -624,7 +624,7 @@ events:
   text: 'BRIARWICK — Where the Thread Never Tangles.
 
     (Carved under it, smaller: "Unlike the Guild Accounts.")'
-  at: [37, 57]
+  at: [38, 58]
 - type: event
   name: Finch
   pages:
@@ -639,7 +639,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 07, dir: right}
     cond: {switch: CH2_MATRIARCH_DONE}
-  at: [60, 33]
+  at: [57, 33]
 - type: event
   name: Rope-bridge Boy
   pages:
@@ -656,7 +656,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
-  at: [30, 31]
+  at: [28, 32]
 - type: event
   name: Grandmother knitting
   pages:
@@ -690,7 +690,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 11, dir: down}
-  at: [46, 36]
+  at: [45, 36]
 - type: event
   name: Dyer
   pages:
@@ -702,7 +702,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 15, dir: down}
-  at: [16, 36]
+  at: [16, 37]
 - type: event
   name: Apprentice
   pages:
@@ -710,7 +710,7 @@ events:
     trigger: action
     move: random
     graphic: {sprite: NPC 17, dir: down}
-  at: [21, 31]
+  at: [21, 32]
 - type: event
   name: Silk Merchant
   pages:
@@ -718,7 +718,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
-  at: [36, 36]
+  at: [35, 35]
 - type: event
   name: Meridian Linesman
   pages:
@@ -733,7 +733,7 @@ events:
     move: fixed
     graphic: {sprite: trainer_SCIENTIST, dir: down}
     cond: {self: A}
-  at: [52, 31]
+  at: [53, 31]
 - type: event
   name: Tired Mother
   pages:
@@ -744,7 +744,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
-  at: [33, 48]
+  at: [32, 46]
 - type: event
   name: Old Man on bridge
   pages:
@@ -762,7 +762,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
-  at: [43, 32]
+  at: [44, 31]
 - type: event
   name: Boy in dog mask
   pages:
@@ -771,7 +771,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 02, dir: down}
-  at: [44, 33]
+  at: [45, 32]
 - type: event
   name: Egg-seller
   pages:
@@ -779,7 +779,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 22, dir: down}
-  at: [47, 33]
+  at: [47, 34]
 - type: event
   name: Tax-barge Deserter
   pages:
@@ -787,7 +787,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
-  at: [33, 55]
+  at: [33, 54]
 - type: event
   name: Accord Chaplain
   pages:
@@ -796,7 +796,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: trainer_GENTLEMAN, dir: down}
-  at: [58, 45]
+  at: [60, 47]
 - type: event
   name: Youngster
   pages:
@@ -812,7 +812,7 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 17, dir: down}
-  at: [46, 40]
+  at: [48, 41]
 - type: event
   name: Cutter's Wife
   pages:

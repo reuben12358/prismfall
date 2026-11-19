@@ -10,15 +10,12 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
   Warden Tamsin sent out Joltik!
     >> sent out (foe): Joltik Lv.13 @ORANBERRY [COMPOUNDEYES]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.15 @TELLURICSEED [INTIMIDATE]
+    >> sent out (player): Growlithe Lv.15 @TELLURICSEED [FLASHFIRE]
 ## FIELD CHANGE: NONE -> SILKWOOD
   Giant webs glisten between the ancient trees...
   Growlithe stepped into a curtain of sticky silk!
     (anim: StatDown)
   Growlithe's Speed fell!
-    [ability: Growlithe (player)'s Intimidate]
-    (anim: StatDown)
-  The opposing Joltik's Attack fell!
     (anim: UseItem)
   Growlithe's Telluric Seed spun a silk cocoon around it!
     (anim: StatUp)
@@ -71,6 +68,7 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
     HP Surskit (foe): 35 -> 14 / 35
 ## FIELD CHANGE: SILKWOOD -> WILDFIRE
   The silk caught! Flames leap from web to web - the Silkwood is ablaze!
+  The power of Growlithe's Fire-type moves rose!
   (end of round)
 
 --- Turn 4 ---
@@ -96,19 +94,7 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
   It's not very effective...
   Growlithe used Ember!
   Growlithe drew the wildfire into its attack!
-    HP Bobbin (foe): 44 -> 1 / 44
-  It's super effective!
-  The flames roared higher!
-  (end of round)
-
---- Turn 6 ---
-  [Growlithe 24/46 | Bobbin 1/44]
-  The opposing Bobbin used Bug Bite!
-    HP Growlithe (player): 24 -> 18 / 46
-  It's not very effective...
-  Growlithe used Ember!
-  Growlithe drew the wildfire into its attack!
-    HP Bobbin (foe): 1 -> 0 / 44
+    HP Bobbin (foe): 44 -> 0 / 44
   It's super effective!
   The opposing Bobbin fainted!
     xx fainted: Bobbin (foe)
@@ -118,4 +104,4 @@ Silkwood [SILKWOOD] - Gym 1 Warden Tamsin vs challenger (Lv.15)
   You got $1,500 for winning!
   battle result code: 1
   
-RESULT: player won after 5 turn(s)
+RESULT: player won after 4 turn(s)

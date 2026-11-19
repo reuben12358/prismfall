@@ -57,17 +57,26 @@ module Prismfall
       tone to: [-34, -40, -6, 60], duration: 0                 # cold pre-dawn
       bgm :bgm_war_field
       bgs :bgs_war, volume: 70
-      army :isenmar, charsets: ["pfw_soldier_isenmar"], count: 30, rows: 4, area: [56, 372, 430, 84], facing: :right
-      army :ice_mons, charsets: ["pfw_walrein", "pfw_sealeo", "pfw_beartic"], count: 6, rows: 1,
-           area: [290, 360, 190, 6], facing: :right
-      army :ashkaar, charsets: ["pfw_soldier_ashkaar"], count: 30, rows: 4, area: [1250, 372, 520, 84], facing: :left
-      army :fire_mons, charsets: ["pfw_houndoom", "pfw_camerupt"], count: 6, rows: 1,
-           area: [1170, 360, 220, 6], facing: :left
-      army :riders, charsets: ["pfw_charizard", "pfw_salamence"], count: 6, rows: 2,
-           area: [1270, 262, 420, 50], facing: :left, walk: true
-      actor :eirik, charset: "pfw_eirik", at: [470, 440], dir: :right
-      actor :hrothgar, charset: "pfw_hrothgar", at: [1220, 440], dir: :left
-      [[1300, 470], [1480, 448], [1650, 482], [1830, 452], [1560, 236], [1880, 240]].each_with_index do |pt, i|
+      # Two drilled blocks a side under their banners, the Wardens' Pokemon as a front line, the rulers out ahead.
+      army :isenmar, charsets: ["pfw_soldier_isenmar"], count: 18, rows: 3, blocks: 2, gap: 64,
+           area: [84, 388, 264, 56], facing: :right
+      army :ice_mons, charsets: ["pfw_walrein", "pfw_beartic", "pfw_sealeo", "pfw_walrein"], count: 4, rows: 2,
+           area: [384, 384, 76, 56], facing: :right
+      army :ashkaar, charsets: ["pfw_soldier_ashkaar"], count: 18, rows: 3, blocks: 2, gap: 64,
+           area: [1400, 388, 264, 56], facing: :left
+      army :fire_mons, charsets: ["pfw_houndoom", "pfw_camerupt", "pfw_camerupt", "pfw_houndoom"], count: 4, rows: 2,
+           area: [1290, 384, 76, 56], facing: :left
+      army :riders, charsets: ["pfw_charizard", "pfw_salamence"], count: 4, rows: 2,
+           area: [1420, 272, 250, 44], facing: :left, walk: true
+      [[76, 372], [240, 372], [404, 366]].each_with_index do |pt, i|
+        actor :"ban_i#{i}", sheet: ch + "pfw_banner_isenmar", grid: [1, 1], at: pt
+      end
+      [[1348, 366], [1512, 372], [1676, 372]].each_with_index do |pt, i|
+        actor :"ban_a#{i}", sheet: ch + "pfw_banner_ashkaar", grid: [1, 1], at: pt
+      end
+      actor :eirik, charset: "pfw_eirik", at: [492, 440], dir: :right
+      actor :hrothgar, charset: "pfw_hrothgar", at: [1250, 440], dir: :left
+      [[1330, 486], [1500, 474], [1690, 490], [1840, 452], [1560, 236], [1880, 240]].each_with_index do |pt, i|
         fx_sheet flames[:sheet], **flames, at: pt, z: 400 + pt[1], id: :"camp#{i}"
       end
       emit :snow, rate: 26, id: :snow
@@ -137,6 +146,13 @@ module Prismfall
       else
         wait 0.4
       end
+      if legends                                 # off screen, the sea-beast turns to face its enemy
+        actor :water, sheet: ch + "pfw_kyogre_side", grid: [4, 2], frame: 0, at: [water_at[0], water_at[1] + 4], mouth: [80, -46]
+        submerge :water, to: 14, duration: 0
+        idle :water, frames: 0..3, hold: 0.16
+        fx_sheet ch + "pfw_kyogre_rise", grid: [4, 4], frames: [12, 13, 14, 15], hold: 0.12, loops: :forever,
+                 at: [water_at[0], water_at[1] - 44], z: 500 + water_at[1] + 6, id: :wake_ripples
+      end
       cut at: [fire_at[0] - 40, 300], zoom: 1.0
       actor :fire, charset: fire_cs, at: [fire_at[0] + 30, fire_at[1] - 330], dir: :left, walk: true,
             mouth: (legends) ? [-46, -64] : nil
@@ -163,7 +179,7 @@ module Prismfall
       stop_emit :rain
       tone to: [-80, -84, -60, 70], duration: 0.6
       cut at: { actor: :water, part: :mouth, offset: [16, 0] }, zoom: 2.0
-      idle :water, frames: 4..7, hold: 0.12 if legends
+      idle :water, frames: 4..7, hold: 0.12 if legends          # markings lit
       fx_sheet an + "pfw_fx_origin_pulse", grid: [5, 3], frames: 0..3, hold: 0.06, loops: 6,
                at: { actor: :water, part: :mouth }, blend: :add, scale: 0.8, z: 1200
       pan by: [8, 0], duration: 1.3, ease: :linear
@@ -188,17 +204,20 @@ module Prismfall
                       flare: { sheet: an + "pfw_fx_origin_pulse", grid: [5, 3], frames: 0..3, scale: 0.55 } },
                  b: { from: :fire, color: :fireclash, width: 20, sheet: ch + "pfw_beam_fire",
                       flare: { sheet: an + "pfw_fx_fusion_flare", grid: [5, 5], frames: [11, 11, 12], scale: 0.45 } },
-                 core: [{ sheet: an + "pfw_fx_steam", grid: [5, 4], frames: [9], scale: 0.85, spin: 40, blend: :normal },
-                        { sheet: an + "pfw_fx_fusion_flare", grid: [5, 5], frames: [12, 0], scale: 0.3, spin: -60, blend: :normal }],
+                 core: [{ sheet: an + "pfw_fx_steam", grid: [5, 4], frames: [9], scale: 0.95, spin: 50, blend: :normal },
+                        { sheet: an + "pfw_fx_clash_core", grid: [4, 1], frames: 0..3, scale: 0.62, blend: :normal }],
+                 spray: { every: 0.28, chunks: { sheet: an + "pfw_fx_ice_chunks", grid: [4, 1], frames: 1..3, scale: 0.2 },
+                          steam: { sheet: an + "pfw_fx_steam", grid: [5, 4], frames: 5..8, hold: 0.09, scale: 0.5 } },
                  burst: { sheet: an + "pfw_fx_explosions", grid: [4, 3], frames: 0..3, hold: 0.06, blend: :normal },
                  steam: { sheet: an + "pfw_fx_steam", grid: [5, 4], frames: 5..8, hold: 0.1, blend: :normal },
-                 curve: [[0, 0.5], [0.07, 0.38], [0.14, 0.62], [0.22, 0.5], [0.5, 0.46], [0.75, 0.54], [1, 0.5]],
+                 curve: [[0, 0.5], [0.06, 0.37], [0.12, 0.63], [0.18, 0.41], [0.25, 0.57], [0.5, 0.45], [0.63, 0.56], [0.76, 0.46], [1, 0.5]],
                  ball: 14, shake: 3, ground: ground, wait: false
       wait s5
       # 6: impact - white frame, a slow-motion beat, push in on the meeting point; flashes ramp
       impact_frames count: 2
       slowmo 0.2, duration: 0.3
-      fracture at: [clash_c[0], ground], radius: 170, duration: 1.6, arms: 7, color: [40, 72, 150], highlight: [236, 248, 255]
+      fx_sheet an + "pfw_fx_fracture", grid: [4, 1], frames: 0..3, hold: 0.28, stay: :forever, at: [clash_c[0], ground + 6],
+               z: 460, id: :fracture
       pan to: clash_c, zoom: 2.0, duration: 0.9, ease: :out
       clash_mod :clash, shake: 6
       [[0.6, 20], [1.2, 50], [1.8, 130], [2.4, 220]].each do |t, p|
@@ -213,7 +232,7 @@ module Prismfall
       wait s6
       # 7: reaction cuts - Isenmar's ranks, then the player
       clash_mod :clash, shake: 3, intensity: 0.8, duration: 0.3
-      cut at: [300, 420], zoom: 2.0
+      cut at: [380, 410], zoom: 2.0
       army_fall :isenmar, fraction: 0.4, duration: 0.8
       tremble :eirik, duration: 1.6
       face :eirik, :left
@@ -231,7 +250,8 @@ module Prismfall
       cut at: two_shot, zoom: 1.0
       army_fall :ashkaar, fraction: 0.4, duration: 0.8
       army_fall :fire_mons, fraction: 0.5, duration: 0.8
-      dome at: [clash_c[0], ground], radius: 200, duration: s8 - 0.4, squash: 0.4
+      fx_sheet an + "pfw_fx_dome", grid: [4, 1], frames: 0..3, hold: 0.14, loops: :forever, origin: [240, 236],
+               at: [clash_c[0], ground + 34], scale: 0.92, grow: [0.12, 1.0, 0.7], opacity: 225, z: 1240, id: :dome
       army_tint :isenmar, color: :bleed, amount: 110, duration: s8
       army_tint :ashkaar, color: :bleed, amount: 110, duration: s8
       stop_emit :embers
@@ -247,7 +267,6 @@ module Prismfall
         move :mount, to: [930, 470], duration: s9 - 0.4, ease: :out
         move :pc, to: [930, 440], duration: 0
         fade :pc, to: 0, duration: 0
-        dome hole_at: :mount, hole: 60, duration: 2.0
         wait 0.8
         say who[:sigrun], "Hold on!", duration: 2.0
         wait s9 - 2.8
@@ -258,7 +277,6 @@ module Prismfall
         pan to: [760, 460], duration: s9 - 0.3
         move :mount, to: [800, 470], duration: s9 - 0.4, ease: :out
         fade :pc, to: 0, duration: 0
-        dome hole_at: :mount, hole: 60, duration: 2.0
         wait 0.8
         say who[:marisol], "Tides take it, kid, now!", duration: 2.4
         wait s9 - 3.2
@@ -267,7 +285,6 @@ module Prismfall
         follow :pc, smooth: 0.08, offset: [0, -80]
         move :pc, to: [870, 430], duration: s9 - 0.4, walk: true, ease: :linear
         move :starter, to: [846, 440], duration: s9 - 0.4, walk: true, ease: :linear
-        dome hole_at: :pc, hole: 54, duration: 2.5
         tint :pc, color: [255, 255, 255], amount: 70, duration: 2.5
         wait s9
       end
@@ -288,15 +305,19 @@ module Prismfall
       if variant == :A2
         wait s11 * 0.5
         impact_frames count: 2
-        dome radius: 420, duration: 0.6
+        stop_fx :dome
+        fx_sheet an + "pfw_fx_dome", grid: [4, 1], frames: 0..3, hold: 0.1, loops: 3, origin: [240, 236],
+                 at: [clash_c[0], ground + 34], scale: 0.92, grow: [1.0, 2.4, 0.6], opacity: 225, z: 1240, id: :dome
         fade :water, to: 0, duration: 1.2
         fade :fire, to: 0, duration: 1.2
         wait (s11 * 0.5) - 0.14
         flash duration: 2.4, hold: 0.6
-        dome off: true
+        stop_fx :dome
         stop_emit :steamline
         [:isenmar, :ashkaar, :ice_mons, :fire_mons, :riders].each { |a| rout a, by: [0, 0], duration: 0.1 }
         6.times { |i| stop_fx :"camp#{i}" }
+        3.times { |i| remove :"ban_i#{i}"; remove :"ban_a#{i}" }
+        stop_fx :wake_ripples if legends
         remove :pc
         remove :starter
         camera at: two_shot, zoom: 1.0
@@ -310,10 +331,14 @@ module Prismfall
 
         #--- 12: the two legends look down, and leave --------------------------
         cut at: two_shot, zoom: 1.0
-        dome radius: 120, duration: 2.0
+        stop_fx :dome
+        fx_sheet an + "pfw_fx_dome", grid: [4, 1], frames: 0..3, hold: 0.14, loops: 4, origin: [240, 236], fade: 1.0,
+                 at: [clash_c[0], ground + 34], scale: 0.92, grow: [1.0, 0.45, 2.0], opacity: 225, z: 1240
         hop :water, height: 3, duration: 0.5
         wait 1.0
         if legends
+          stop_fx :wake_ripples
+          fx_sheet an + "pfw_fx_origin_pulse", grid: [5, 3], frames: 5..8, hold: 0.08, at: [water_at[0], water_at[1] - 30], z: 1100
           actor :water_sink, sheet: ch + "pfw_kyogre_rise", grid: [4, 4], frame: 5, at: water_at
           fade :water, to: 0, duration: 0
           flipbook :water_sink, frames: [5, 6, 7, 8, 9, 10, 11], hold: 0.24
@@ -323,7 +348,6 @@ module Prismfall
         face :fire, :up
         move :fire, to: [fire_at[0] + 60, -200], duration: 2.4, ease: :in
         text "It looked at me as if I were very small and very familiar. Again.", position: :top, duration: 3.6
-        dome off: true
       end
       bgm :bgm_war_after
 

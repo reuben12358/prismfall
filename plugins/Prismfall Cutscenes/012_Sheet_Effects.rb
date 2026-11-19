@@ -53,13 +53,20 @@ module Prismfall
         @spin = (a[:spin] || 0).to_f
         @angle = (a[:angle] || 0).to_f
         @opacity = a[:opacity] || 255
+        @squash = (a[:squash] || 1).to_f           # zoom_y multiplier (ground decals)
+        @grow = a[:grow]                           # [from, to, seconds] scale multiplier, eased out
+        @stay = a[:stay]                           # hold the last frame this long (or :forever) after the loops
+        @fade = (a[:fade] || 0).to_f               # fade out over the last seconds of its life
+        @fade_in = (a[:fade_in] || 0).to_f
+        @drift = a[:drift]                         # [vx, vy] world px per second
+        @gravity = (a[:gravity] || 0).to_f
         return if !@bmp
         @cw = @bmp.width / @cols
         @ch = @bmp.height / @rows
         @sprite = Sprite.new(scene.viewport)
         @sprite.bitmap = @bmp
-        @sprite.ox = @cw / 2
-        @sprite.oy = @ch / 2
+        @sprite.ox = (a[:origin]) ? a[:origin][0] : @cw / 2
+        @sprite.oy = (a[:origin]) ? a[:origin][1] : @ch / 2
         @sprite.z = a[:z] || 1100
         @sprite.blend_type = BLENDS[a[:blend]] || 0
         @sprite.mirror = a[:mirror] || false
@@ -72,18 +79,39 @@ module Prismfall
 
       def update(scene, lt, dt)
         return true if !@bmp || @stopped
-        return true if @loops != :forever && lt >= @total * @loops
-        t = lt % @total
-        i = 0
-        acc = 0.0
-        i += 1 while i < @frames.length - 1 && t >= (acc += @holds[i])
+        life = (@loops == :forever || @stay == :forever) ? nil : (@total * @loops) + (@stay || 0)
+        return true if life && lt >= life
+        if @loops != :forever && lt >= @total * @loops
+          i = @frames.length - 1                  # staying on the last frame
+        else
+          t = lt % @total
+          i = 0
+          acc = 0.0
+          i += 1 while i < @frames.length - 1 && t >= (acc += @holds[i])
+        end
         cell = @frames[i]
         @sprite.src_rect.set((cell % @cols) * @cw, (cell / @cols) * @ch, @cw, @ch)
         pt = @at.call
-        sx, sy = scene.camera.to_screen(pt[0] + @offset[0], pt[1] + @offset[1], 1.0)
+        wx = pt[0] + @offset[0]
+        wy = pt[1] + @offset[1]
+        if @drift
+          wx += @drift[0] * lt
+          wy += (@drift[1] * lt) + (0.5 * @gravity * lt * lt)
+        end
+        sx, sy = scene.camera.to_screen(wx, wy, 1.0)
         @sprite.x = sx.round
         @sprite.y = sy.round
-        @sprite.zoom_x = @sprite.zoom_y = @scale * scene.camera.zoom
+        k = @scale
+        if @grow
+          u = Util.clamp(lt / [@grow[2].to_f, 0.001].max, 0.0, 1.0)
+          k *= @grow[0] + ((@grow[1] - @grow[0]) * Ease.apply(:out, u))
+        end
+        @sprite.zoom_x = k * scene.camera.zoom
+        @sprite.zoom_y = k * @squash * scene.camera.zoom
+        op = @opacity
+        op *= Util.clamp(lt / @fade_in, 0.0, 1.0) if @fade_in > 0
+        op *= Util.clamp((life - lt) / @fade, 0.0, 1.0) if @fade > 0 && life
+        @sprite.opacity = op.round
         @sprite.angle = @angle + (@spin * lt)
         @sprite.visible = scene.silhouette.nil?
         return false
@@ -144,6 +172,38 @@ module Prismfall
           { :sprite => s, :spec => f }
         end
         @burst = a[:burst]
+        @spray = a[:spray]                         # { every: 0.3, chunks: {sheet spec}, steam: {sheet spec} }
+        @spray_next = 0.0
+        @spray_n = 0
+      end
+
+      # While the beams grind: ice chunks and steam thrown out of the meeting point.
+      def spray(scene, lt)
+        return if !@spray || lt < @launch || @ball_scale < 0.5 || @mote || @resolving
+        return if lt < @spray_next
+        @spray_next = lt + (@spray[:every] || 0.3)
+        @spray_n += 1
+        c, = clash_point
+        n = @spray_n
+        2.times do |j|
+          ang = (-150 + (Util.hash01(n, j, 31) * 120)) * Math::PI / 180      # up and out, both sides
+          spd = 150 + (Util.hash01(n, j, 32) * 110)
+          if @spray[:chunks]
+            scene.run_effect(SheetFx.new(scene, @spray[:chunks].merge(
+              :at => [c[0], c[1]], :frames => [(@spray[:chunks][:frames] || [0]).to_a[(n + j) % (@spray[:chunks][:frames] || [0]).to_a.length]],
+              :hold => 0.9, :drift => [Math.cos(ang) * spd, Math.sin(ang) * spd], :gravity => 520,
+              :spin => ((j == 0) ? 300 : -260), :fade => 0.25, :z => 1290,
+              :scale => (@spray[:chunks][:scale] || 0.3) * (0.7 + (Util.hash01(n, j, 33) * 0.6)), :blend => :normal)), scene.time)
+          end
+        end
+        if @spray[:steam] && n.even?
+          side = (n % 4 == 0) ? -1 : 1
+          scene.run_effect(SheetFx.new(scene, @spray[:steam].merge(
+            :at => [c[0] + (side * 14), c[1] - 12], :drift => [side * 26, -46], :fade => 0.2, :z => 1280,
+            :scale => (@spray[:steam][:scale] || 0.5), :blend => @spray[:steam].fetch(:blend, :normal))), scene.time)
+        end
+        pal_a, pal_b = palettes
+        scene.burst_at(:sparks, c, 4, (n.even?) ? pal_a : pal_b, { :angle => (n.even?) ? -60 : -120, :spread => 70, :speed => 1.5 })
       end
 
       def cell_rect(sprite, spec, index)
@@ -194,6 +254,7 @@ module Prismfall
           end
         end
         layout(scene, lt)
+        spray(scene, lt)
         return done
       end
 

@@ -93,4 +93,26 @@ if defined?(PrismfallPuzzles)
     :reset => { :switches => { 511 => true, 512 => true, 513 => false } },
     :hints => ["Every anchor pulls two threads at once. Three threads can't all be tight.", "Cross the two bridges that are already taut before you touch anything.", "Visit both houses first. Then pull the middle or the right anchor: one house bridge goes slack and the nest's pulls tight."],
   })
+  # D1 the Glassed Orchard: ring the cracked trees in the gate phrase's order (low, middle, high).
+  def pfp_chime(note)
+    order = [:L, :M, :H]
+    names = { :L => "low", :M => "middle", :H => "high" }
+    v = $game_variables[501].to_i
+    return if v >= 3
+    if order[v] == note
+      $game_variables[501] = v + 1
+      pbSEPlay("Mining reveal") rescue nil
+      if v + 1 >= 3
+        pbMessage(_INTL("The cracked tree rings the {1} note... and the whole phrase hangs in the air, finished.", names[note]))
+        pbSEPlay("Battle damage super") rescue nil
+        pbMessage(_INTL("Far to the north-east, a hedge of glass shatters."))
+      else
+        pbMessage(_INTL("The cracked tree rings as you pass: the {1} note. ({2} of 3)", names[note], v + 1))
+      end
+    elsif v > 0 || note != order[0]
+      $game_variables[501] = 0
+      PrismfallPuzzles.fail!(:d1_chime, _INTL("A sour chord: this tree rings the {1} note, but the gate phrase wanted the {2} one next. The rows fall silent. Start the phrase again.", names[note], names[order[v]]))
+    end
+    $game_map.need_refresh = true
+  end
 end

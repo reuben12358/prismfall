@@ -10,7 +10,7 @@
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [120, 36, 13], "gym2" => [147, 53, 24] }
+  PUZZLE_START = { "gym1" => [120, 36, 13], "gym2" => [147, 53, 24], "d1" => [522, 6, 36] }
   GYM1_PLAN = [
     [:shot, 120, "g1_00_outside_the_loomhouse"],
     [:bump, 120, 36, 12],                 # the elder tree's door
@@ -66,11 +66,24 @@ module PlayBot
     [:done]
   ]
 
+  # PLAYBOT_SESSION=d1: the Glassed Orchard chime rows, with one deliberate wrong note first (the failure line)
+  D1_PLAN = [
+    [:talk, 522, 19, 33], [:shot, 522, "d1_00_chime_post"],
+    [:goto, 522, 23, 16], [:shot, 522, "d1_01_wrong_note_first"],
+    [:goto, 522, 4, 16],  [:shot, 522, "d1_02_low"],
+    [:goto, 522, 22, 17], [:goto, 522, 23, 16], [:shot, 522, "d1_03_middle"],
+    [:goto, 522, 35, 25], [:shot, 522, "d1_04_high_hedge_shatters"],
+    [:goto, 522, 38, 2],  [:shot, 522, "d1_05_past_the_hedge"],
+    [:talk, 522, 38, 1],  [:shot, 522, "d1_06_satchel"],
+    [:done]
+  ]
+
   class << self
     alias puz_plan plan unless method_defined?(:puz_plan)
     def plan
       return GYM1_PLAN if SESSION == "gym1"
       return GYM2_PLAN if SESSION == "gym2"
+      return D1_PLAN if SESSION == "d1"
       return puz_plan
     end
 

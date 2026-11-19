@@ -69,74 +69,41 @@ Generic route trainers (from the base PBS) keep their stock skill. BGMs are stoc
 
 ## 4. Warden teams and field play (Standard roster; **+Hard** = Hard-only mon, *(−C)* = cut on Casual)
 
+**Revision 10 re-tune.** Every team below was rebuilt against the v1.1 fields (seeds, always-on abilities, transition
+plays, an answer to the obvious flip). The reasoning for each team (game plan, transition play, counterplay) is in
+**`design/TRAINER_FIELD_PLAYBOOK.md`**; this list is the roster. The old **[assume]** notes are gone: every field is
+implemented. Cross-check with `python3 -I tools/trainer_gen/field_fit.py` (see the playbook).
+
 Kingdoms (Rev 3): Elowen = Gyms 1, 2, 9, 17 · Isenmar = 3, 10 · Zenith = 4, 11, 15 · Ossaria = 5, 13 · Nadir = 6, 8, 16 ·
 Ashkaar = 7, 18 · Antumbra = 12, 14.
 
-1. **Tamsin — Silkwood (cap 15).** Joltik, Surskit *(−C)*, **+Hard** Vivillon, ace **Swadloon "Bobbin"** (Eviolite, Overcoat).
-   Silkwood makes Electroweb/String Shot never miss and String Shot −2 Spe, Fury Cutter ×1.2 (cutting) + Bug ×1.5,
-   Swarm always on, Bug types heal 1/16. The plan is speed control → Swadloon outlasts. Answer: Fire ×1.3 and 3 Fire moves
-   burn the field to Ashen Waste; Flying is ×0.8 here, so bring Fire.
-2. **Dorian — Grand Stage (19), DOUBLE battle** (hence one extra mon at every difficulty: 4 / 5 / 3). Chatot, Ambipom
-   (Technician Dual Chop/Swift; Hard Fake Out), Loudred *(−C)* (Hard spread Hyper Voice), **+Hard** Furfrou, ace **Kecleon**
-   (Color Change = costume change; Hard: Protean + Fake Out ×1.5). Sound ×1.5 + Normal ×1.5 make Chatter/Uproar/Echoed Voice
-   the threats; Sing gets ×1.3 accuracy (Hard Chatot drops Sing for Taunt). Answer: Fighting, Soundproof, and no weather.
-3. **Marisol — Water Surface (23).** Pelipper (Drizzle; rain +3 turns on this field), Lanturn *(−C)*, **+Hard** Araquanid,
-   Floatzel (Swift Swim is always ×1.5 here), ace **Gyarados "Lucky"** (Intimidate; Hard Dragon Dance). Electric is ×1.5 vs
-   grounded — Lanturn punishes your Grass/Electric answers via Volt Absorb. Hazards and Ground moves fail on this field.
-   Answer: Electric on Flying/Levitating users, Grass; 3 Ice Beams freeze the lake (Frozen Lake, removes Swift Swim boost).
-4. **Rook — Neon Grid (27).** Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk (Dry Skin), Toxtricity (Punk Rock; Plus/Minus
-   +1 SpA on entry; Hard Overdrive + Throat Spray), ace **Rotom-Wash "Camera"** — Hydro Pump gets the field's 30% paralysis.
-   Answer: Ground types (immune and two Earthquakes short the grid to no field).
-5. **Sahar — Desert (31).** Hippopotas (Sand Stream, Smooth Rock → 8+3 turns), **+Hard** Dugtrio (Arena Trap), Sandaconda
-   *(−C)* (Sand Spit, Glare), Krokorok (Moxie; Sand Tomb ×2 traps), ace **Claydol "Effigy"** (Levitate; Hard Scorching Sands ×1.5).
-   Answer: Water/Grass (Water is ×0.8 here, Grass neutral — bring Grass); Ice users lose 1/16 per turn.
-6. **Corvin — Corrosive Mire (35).** Galarian Weezing (Levitate; **never** Misty Surge — it would purify the field),
-   Crobat *(−C)*, **+Hard** Salazzle (Corrosion; its Fire moves ignite the fumes for 1/8 to every non-Fire mon), Amoonguss,
-   Drapion (Sniper), ace **Toxapex "Ward"** (Merciless + the field's 20%/turn poison = constant crits; Casual: Limber).
-   Poison hits Steel here, so Steel walls fail. Answer: Ground/Psychic, and Misty Terrain or Purify ×2 to convert the field.
-7. **Brann — Volcanic (39).** Torkoal (Drought; sun +3 turns), Camerupt *(−C)* (Solid Rock; Hard Eruption), **+Hard**
-   Centiskorch, Magmortar, Arcanine, ace **Coalossal "Anvil"** — on Volcanic its Rock moves also hit as Fire, Tar Shot doubles
-   Fire, Steam Engine/Heat Crash. Grounded non-Fire take burn chip every turn. Answer: Water — but sun halves it, so remove
-   Torkoal first; 2 Surfs (or rain) quench to Ashen Waste.
-8. **Kaito — Colosseum (43) [assume: Fighting ×1.5, contact ×1.2, a "crowd" Attack boost on KO].** Hawlucha (Unburden +
-   Sitrus), **+Hard** Medicham (Pure Power), Machamp (No Guard Dynamic Punch), Hitmontop *(−C)*, Conkeldurr (Guts + Flame Orb),
-   ace **Lucario "Memory"** (Std special Life Orb; **Hard Mega Lucario**, physical Swords Dance/Meteor Mash/ES).
-   Answer: Psychic/Flying/Fairy, Intimidate, burns (except vs Conkeldurr).
-9. **Juno (J3) — Flower Garden (47)** — see §5.
-10. **Anja — Frozen Lake (51) [assume: Ice ×1.5, Slush Rush active, Fire melts → Water Surface].** Alolan Ninetales (Snow
-    Warning + Aurora Veil), Cloyster (Skill Link Shell Smash; Casual: no Shell Smash), Beartic *(−C)* (Slush Rush), Walrein,
-    Avalugg, ace **Mamoswine "Matriarch"**. If you melt the lake it becomes Water Surface, which still favours Cloyster/Walrein.
-    Answer: Fire + Steel + Fighting, and Brick Break the veil.
-11. **Odessa — Stormfront (55) [assume: Flying ×1.5, wind moves boosted, Hurricane/Thunder never miss, Tailwind +2 turns].**
-    Pelipper (rain makes Hurricane perfect), Swanna *(−C)*, Pom-Pom Oricorio (Dancer copies dances), Noivern, Talonflame
-    (Gale Wings), ace **Corviknight "Taxi"** (Mirror Armor, Bulk Up/Roost). Answer: Electric/Rock, Ground-immune-proof leads.
-12. **Ilsa — Mindscape (59) [assume: Psychic ×1.5, Trick Room +3 turns, grounded priority blocked].** Bronzong, Musharna
-    *(−C)*, Espeon (the fast exception, Magic Bounce), Gothitelle (Hard: Shadow Tag), Reuniclus (Magic Guard LO), ace
-    **Hatterene "Hush"**. Trick Room team (Hard: Spe IV 0). Answer: Dark/Ghost/Bug, Taunt, or stall Trick Room out.
-13. **Bastian — Crystal Cavern (63) [assume: Rock ×1.5, gem/light moves boosted, Dark moves darken → Dark Crystal].**
-    Carbink (screens + Rocks), Alolan Golem *(−C)* (Galvanize), Aurorus (Refrigerate), Dusk Lycanroc (Tough Claws Accelerock),
-    Rhyperior (Solid Rock, AV), ace **Gigalith "Geode"** (Sand Stream SpD boost; Hard Weakness Policy + Meteor Beam).
-    Answer: Water/Grass/Fighting/Steel; using Dark moves to darken the cave weakens his boosts.
-14. **Ysolde — Hollow Cathedral (67) [assume: Ghost ×1.5, sound ×1.5, Will-O-Wisp never misses].** Sableye (Prankster),
-    Spiritomb *(−C)*, Dusknoir, Cofagrigus (Mummy), Gengar (**Hard Mega Gengar + Perish Song**), ace **Chandelure "Vigil"**.
-    No Mismagius (it goes to Kestrel after K6, per cast). Answer: Dark types, Normal-type pivots, Infiltrator-proof bulk.
-15. **Magnus — Factory (71) [assume: Steel ×1.5, Electric ×1.2, gear moves double effect, Explosion → Scrapyard].**
-    Ferrothorn, Excadrill *(−C)*, Kingambit (Gen 9 upgrade of the cast's Bisharp), Klinklang "Mark One" (Shift Gear), Scizor,
-    ace **Metagross "Engine"** (AV; **Hard Mega Metagross**). Answer: Fire/Ground; wrecking the Factory into Scrapyard ends gear boosts.
-16. **Nyx — New Moon (75) [assume: Dark ×1.5, Psychic/Fairy weakened, accuracy of status moves up].** Grimmsnarl (Prankster
-    screens), Weavile, Malamar *(−C)* (Contrary Superpower), Umbreon, ace **Zoroark "Nobody"** in slot 5 with Honchkrow
-    last — **Illusion disguises the ace as Honchkrow**. Answer: Fairy/Fighting/Bug; check for the illusion before committing.
-17. **Celestine — Fairy Tale (80) [assume: Fairy ×1.5, Steel "knight" moves ×1.5, Dragon weakened].** Alcremie, Mimikyu
-    *(−C)*, Azumarill (Huge Power; Hard Belly Drum), Tinkaton (Gigaton Hammer), Sylveon (Pixilate Hyper Voice), ace
-    **Togekiss "Vigilant"** (Serene Grace Air Slash). Answer: Steel/Poison; Tinkaton punishes Steel, so lead Poison.
-18. **Sigrun — Dragon's Den (85) [assume: Dragon ×1.5, Fire ×1.5, Ice ×0.5, magma chip on grounded non-Fire/Dragon].**
-    Flygon (Scarf), Kommo-o (Clangorous Soul + Throat Spray), Goodra *(−C)*, Haxorus, Dragapult, ace **Salamence "Dreamwing"**
-    (**Hard Mega Salamence**, Aerilate Double-Edge). Answer: Fairy + Ice (Ice is halved here: bring Fairy + Steel).
+| # | Warden, field, cap | Team (ace last) | Seed / field pick | Transition or stage play |
+|---|---|---|---|---|
+| 1 | Tamsin, Silkwood, 15 | Joltik, Surskit *(−C)*, **+Hard** Vivillon, Swadloon "Bobbin" | Bobbin: Telluric Seed (Hard: Eviolite) | none of her own; Surskit's Rain Dance answers Fire |
+| 2 | Dorian, Grand Stage, 19, **double** | Chatot, Ambipom, Loudred *(−C)*, **+Hard** Furfrou, Kecleon | Kecleon: Synthetic Seed | Fake Out + Encore raise the applause |
+| 3 | Marisol, Water Surface, 23 | Pelipper (Keen Eye; **Hard Drizzle**), Lanturn *(−C)*, **+Hard** Araquanid, Floatzel, Gyarados "Lucky" | Lanturn: Elemental Seed | Lucky's Dive → Underwater |
+| 4 | Rook, Neon Grid, 27 | Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk, Toxtricity, Rotom-Wash "Camera" | Electabuzz: Synthetic Seed | Charge reboots a Blackout |
+| 5 | Sahar, Desert, 31 | Hippopotas, **+Hard** Dugtrio, Sandaconda *(−C)*, Krokorok, Claydol "Effigy" | Sandaconda: Telluric Seed | sandstorm or Fire Fang bakes a Superbloom back |
+| 6 | Corvin, Corrosive Mire, 35 | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |
+| 7 | Brann, Volcanic, 39 | Torkoal, Camerupt *(−C)* (Magma Armor), **+Hard** Centiskorch, Magmortar, Arcanine, Coalossal "Anvil" | Camerupt: Elemental Seed | Lava Plume ×3 re-melts Cinderglass; Anvil is built for Cinderglass |
+| 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; **Hard Mega**) | Hawlucha: Synthetic Seed + Unburden | Frenzy by knockouts |
+| 9 | Juno (J3), Flower Garden, 47 | see §5 | Whimsicott: Telluric Seed | growth moves; regrow from Embers |
+| 10 | Anja, Frozen Lake, 51 | Alolan Ninetales, Cloyster, Beartic *(−C)*, Walrein, Avalugg, Mamoswine "Matriarch" | Matriarch: Elemental Seed (Hard: Life Orb) | Body Press / High Horsepower crack the lake → Water Surface; Ice moves refreeze |
+| 11 | Odessa, Stormfront, 55 | Pelipper (Keen Eye, Tailwind), Swanna *(−C)*, Pom-Pom Oricorio, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
+| 12 | Ilsa, Mindscape, 59 | Bronzong, Musharna *(−C)*, Espeon, Gothitelle (Hard: Shadow Tag), Reuniclus, Hatterene "Hush" | — | Hush's Psychic Noise ×3 → Inverse; Calm Mind ×2 calms a Nightmare |
+| 13 | Bastian, Crystal Cavern, 63 | Carbink, Alolan Golem *(−C)*, Aurorus, Dusk Lycanroc, Rhyperior, Gigalith "Geode" (Sturdy, no Sand Stream) | Geode: Magical Seed (Hard: Weakness Policy + Meteor Beam) | Golem's Explosion or 3 quakes → Cave; light moves relight a Dark Crystal |
+| 14 | Ysolde, Hollow Cathedral, 67 | Sableye, Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
+| 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Hard Mega**) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
+| 16 | Nyx, New Moon, 75 | Grimmsnarl, Weavile, Malamar *(−C)*, Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
+| 17 | Celestine, Fairy Tale, 80 | Alcremie, Mimikyu *(−C)*, Azumarill, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
+| 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Hard Mega**) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
 
 ## 4b. Route and gym trainers (stock trainer types)
 
 Built from the Map Builder's events (`maps_out/Data/*.rxdata` / `trainers_needed.txt`). Rules: no bag items, level-up
 movesets (always level-legal), IV 8 Standard / 20 Hard / 0 + EV 0 Casual, Casual −1 level, Hard +1 level.
+**Field touches (Rev 10):** one or two per team for the map's default field (ability the field switches on, a boosted
+level-up move, rarely a seed); see the table in TRAINER_FIELD_PLAYBOOK.md §2 and the per-map notes in `tools/trainer_gen/routes.py`.
 Levels: Route 1 4–5 · Route 2 6–7 · Gossamer Wood 8–10 · Loomhouse Gym 11–13 · Deepwood 11–12 · Route 3 12–14 ·
 Route 4 14–16 · Pell Playhouse actors 15–18 · Pageant Hall grunts 16–17; species from `encounters.txt` for that map,
 leaning Bug/Grass/Normal/Fairy (Elowen). `[YOUNGSTER,Ben]` (map 990 test dummy, Snorlax Lv 50) collides with the base
@@ -163,14 +130,14 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
 | K7 (79) / K8 (94) | Staraptor, Krookodile *(−C)*, **Mismagius** (from Ysolde), Hydreigon, starter, **Aegislash** ace |
 | J1 (17) | Cottonee *(−C)*, Bounsweet "Sweetpea", starter — Hard +Petilil |
 | J2 (33) | Whimsicott, Lilligant *(−C)*, Steenee, starter — Hard +Shiinotic |
-| J3 (47, `LEADER_JUNO` 30–32) | Whimsicott, Shiinotic *(−C)*, Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: Growth/Quiver Dance/Leech Seed grow the garden; burn it down with Fire. |
+| J3 (47, `LEADER_JUNO` 30–32) | Whimsicott (Telluric Seed), Shiinotic *(−C)*, Lilligant, starter, ace **Tsareena** — Hard +Roserade "Rowan". Flower Garden: the seed, Growth, Leech Seed and Aromatherapy grow the garden; burn it down with Fire at stage 5. |
 | J4 (90) | Shiinotic, Whimsicott, Lilligant, Comfey, starter, **Tsareena** |
 
 ## 6. Festival of Champions
 
 - **Valen** (`CHAMPION_VALEN,Valen`, ace 96): Bronzong, Lapras "Ferry", Kingdra, Gallade (**Hard Mega Gallade**), Volcarona,
-  **Zygarde** (50%, **Power Construct** → Complete Forme below half HP). Suggested field: none or `:RAINBOW` (balanced team, his
-  field is "order").
+  **Zygarde** (50%, **Power Construct** → Complete Forme below half HP). Field: `:PRISM_ARENA`; party order now follows the
+  arena's Plate cycle (Bronzong, Volcarona, Kingdra, Gallade, Lapras, Zygarde), see the playbook §5.
 - **Voss** (`MERIDIAN_VOSS,Aurelian`, ace **100**, `:PRISM_ARENA`): Klinklang, Magnezone, Golurk "Gilder", Archaludon,
   Porygon-Z, **Silvally "NULL"** (RKS System, starts with Steel Memory, form 8). **Field-team hook ("Project NULL"):** whenever
   `:PRISM_ARENA` cycles to a gym field, if Voss owns Silvally, set its item to that field's type Memory (form follows via the
@@ -276,10 +243,11 @@ telegraph, not one wall. Kestrel (tag partner in the hijack per cast) does **not
 - **Core:** ✔ variant fallback, ✔ J3 on `LEADER_JUNO` 30/31/32, ✔ ability-slot preservation on starter swap (we rely on
   `AbilityIndex = 2` surviving). Trainer names: Wardens by first name (`Tamsin` ...), `Kestrel`, `Juno`, `Valen`,
   `MERIDIAN_VOSS` name **`Aurelian`**. Warden Festival versions 50 are NPC-only (no data written).
-- **Field team:** Gyms 8–18 teams assume the **[assume]** notes above; tell balance if a field lands differently.
+- **Field team:** explicit fields for rival, admin and Festival battles are in `FIELD_DEFAULTS.yaml` → `exceptions.trainers`
+  (TRAINER_FIELD_PLAYBOOK.md §1). The Festival bracket is set to `:PRISM_ARENA` there, following story/08_ACT_V; confirm or revert.
   Galarian Weezing deliberately never has Misty Surge. Voss's Silvally hook and the Arceus Plate hook are specified in §6–7.
 - **Story:** nicknames used — Bobbin, Lucky, Camera, Effigy, Ward, Anvil, Memory, Matriarch, Taxi, Hush, Geode, Vigil,
-  Mark One, Nobody, Vigilant, Dreamwing (aces); Morwen (Kestrel's Honedge line), Sweetpea (Juno's Bounsweet line),
+  Mark One, Nobody, Vow (Celestine's Sylveon, the ace; Togekiss keeps "Vigilant"), Dreamwing (aces); Morwen (Kestrel's Honedge line), Sweetpea (Juno's Bounsweet line),
   Rowan (Juno's Hard Roserade), Ferry (Valen's Lapras), Gilder, NULL (Voss). Rename freely (≤10 chars).
 - Gen 9 note: the live base `pokemon.txt` does not list Bisharp→Kingambit (the Gen 9 Pack adds it only through its optional
   Auto-Updates PBS); the validator treats such Gen 9 evolutions as prevolutions (`MANUAL_PREVO`).
@@ -301,5 +269,8 @@ in the validator, so they need no row.
   every Festival entry in NARRATIVE_KEYS §7 (Rev 5/6), the Ruin teams, the cameo sidequests and
   every route/gym trainer the built maps reference: **done, 0 validator errors** (`--maps maps_out/Data`: all resolve).
 - Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
+- Rev 10 field re-tune: done for Wardens, rivals, Thistle, Teo, Valen, Voss, the Festival draws and the route trainers
+  (TRAINER_FIELD_PLAYBOOK.md). Not re-tuned: cameo sidequests, Quent, Theodric, the Ch21 tag foes.
+- Still no teams: the Mourner, Wick, Sable, Ashe, pre-Ch21 Marchetti/Quent/Kroll fights, the Eevee Octave.
 - Pending: war-arc soldier/officer teams (types `ASHKAAR_*` / `ISENMAR_*` exist; teams once the story lead writes the war);
   new maps' trainers as they are generated.

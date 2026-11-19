@@ -553,6 +553,11 @@ def main():
             if s:
                 s['_file'] = os.path.basename(f)
                 specs.append(s)
+    import puzzles                              # puzzle events laid over maps whose layout another script owns (D1 chime rows)
+    for mod in puzzles.modules():
+        for mid, evs in getattr(mod, 'EVENTS', {}).items():
+            for s in specs:
+                if s['id'] == mid: s.setdefault('events', []); s['events'] = list(s['events']) + copy.deepcopy(evs)
     ids = [s['id'] for s in specs]
     if len(ids) != len(set(ids)):
         sys.exit('duplicate map ids in specs')

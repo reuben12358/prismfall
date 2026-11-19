@@ -108,3 +108,19 @@ New Game start tile is boxed in. You may call it at the end of build.py; it is i
     map 525 event 4 "Crystal silk" tile 22672 (tileset-40 ids), but both maps are now on tileset 53 (20144 ids). Essentials
     raises "Event's graphic is an out-of-range tile" as soon as Route 2 is drawn (also from Route 1, which connects to it).
     `export_tilesets_rxdata.py` now warns about these. The playtest bot blanks them in its test copy only.
+
+## From the trainer / field re-tune (design/TRAINER_FIELD_PLAYBOOK.md), 2026-11-18
+No map file was edited. Fields for rival, admin and Festival battles now come from `FieldEffects::TRAINER_FIELDS`
+(`design/FIELD_DEFAULTS.yaml` -> `exceptions.trainers`), so no event has to set them. Requests, none blocking:
+1. **Map 140 (Saltmere promenade), J1.** The battle is on `:MEADOW` (the map default is `:BEACH`). Please stand Juno's
+   event on or beside the promenade green / planters so the Meadow backdrop makes sense.
+2. **Teo (`HOLLOW_TEO`).** Fought on `:WATER_SURFACE` wherever the event is (the Reyes cellar, map 166, is `:CAVE`).
+   If the fight is staged in the cellar rather than at the mill-race, tell the trainer workstream and the entry goes.
+3. **Double battles.** The story has Gyms 6, 11, 16 and 17 as doubles; `Prismfall.gym_battle` does not set that. When
+   those gym maps are built, the Warden event needs `setBattleRule("double")` before `Prismfall.gym_battle(n)` if the
+   story stands (BALANCE.md only lists Gym 2 as a double: story lead and balance should settle it first).
+4. **Thistle's version.** `story/20_SCRIPT_CH0-2.md` says "HOLLOW_THISTLE, version 1"; the PBS team is version 0
+   (BALANCE 4b: named admins start at 0). The event should use 0.
+5. **Gym 9 starting stage.** `setBattleRule("fieldStage", n)` from the puzzle result; Juno's team is written for stage 1.
+6. New route-trainer held items (no event change needed): Ranger Ash (map 132) Beautifly holds a Telluric Seed, Sailor
+   Bjorn (map 173) Chinchou an Elemental Seed.

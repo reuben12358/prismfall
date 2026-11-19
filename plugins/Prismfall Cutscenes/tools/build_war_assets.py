@@ -19,6 +19,9 @@ sys.path.insert(0, os.path.join(GAME_ROOT, "mapgen"))
 import rmarshal
 import render
 import terrain
+import rdraw                      # the map team's own tile painter (soft ice, cracks, drifts, banners)
+import math, random
+from PIL import ImageDraw
 
 REF = "/home/claude/ref/games"
 OUT = os.path.join(PLUGIN, "Graphics")
@@ -59,6 +62,210 @@ def tint(img, rgb, amount):
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
 
 
+
+def outline_dark(img):
+    """Darken the darkest ~12% of opaque pixels to a near-black outline so small sprites read on pale ice."""
+    a = np.array(img.convert("RGBA"))
+    lum = a[:, :, 0] * 0.3 + a[:, :, 1] * 0.59 + a[:, :, 2] * 0.11
+    m = (a[:, :, 3] > 0) & (lum < 70)
+    a[m, 0], a[m, 1], a[m, 2] = 30, 26, 44
+    return Image.fromarray(a)
+
+
+def up2(img):
+    return img.resize((img.width * 2, img.height * 2), Image.NEAREST)
+
+
+def kyogre_side():
+    """Side-on acting sheet for the beam shots (kitbash): Reborn's overworld Kyogre, right-facing row, doubled to
+    the Primal sheet's size and pushed to its deeper palette. Row 0 = swim loop, row 1 = markings lit (firing)."""
+    im = Image.open(src("reborn", "Characters", "pkmn_kyogre.png")).convert("RGBA")
+    cw, ch = im.width // 4, im.height // 4
+    sheet = Image.new("RGBA", (cw * 2 * 4, ch * 2 * 2), (0, 0, 0, 0))
+    for row in range(2):
+        for c in range(4):
+            cell = np.array(up2(im.crop((c * cw, 2 * ch, c * cw + cw, 3 * ch)))).astype(np.int32)
+            r, g, b, al = cell[:, :, 0], cell[:, :, 1], cell[:, :, 2], cell[:, :, 3]
+            blue = (b > r + 30) & (al > 0)                       # body blues -> Primal's deeper navy
+            red = (r > 150) & (g < 90) & (b < 90) & (al > 0)     # the markings
+            out = cell.copy()
+            out[blue, 0] = (r[blue] * 0.45).astype(np.int32)
+            out[blue, 1] = (g[blue] * 0.62).astype(np.int32)
+            out[blue, 2] = np.clip(b[blue] * 0.95 + 8, 0, 255).astype(np.int32)
+            if row == 1:
+                out[red, 0], out[red, 1], out[red, 2] = 255, 226, 120
+            sheet.alpha_composite(Image.fromarray(out.astype(np.uint8)), (c * cw * 2, row * ch * 2))
+    save(sheet, "Characters", "pfw_kyogre_side", "Reborn: Graphics/Characters/pkmn_kyogre.png",
+         "kitbash: right-facing row doubled to 192x128 cells, Primal palette; row 1 = markings lit (4x2)")
+
+
+def banners():
+    """War banners as 1x1 sheets (the map team's banner painter, doubled twice so they stand over a rank)."""
+    for name, cols in (("pfw_banner_isenmar", rdraw.TEAL), ("pfw_banner_ashkaar", [(110, 24, 30, 255), (206, 52, 44, 255), (250, 190, 80, 255)])):
+        im, _ = rdraw.banner(cols)
+        save(up2(up2(im)), "Characters", name, "Prismfall mapgen/rdraw.py banner()", "own art, 4x scale (64x128)")
+
+
+RAMP_SEA = [(14, 30, 96), (30, 84, 200), (70, 160, 250), (160, 232, 255), (255, 255, 255)]
+RAMP_FIRE = [(96, 16, 30), (212, 56, 32), (250, 140, 40), (255, 226, 120), (255, 255, 255)]
+
+
+def clash_core():
+    """The meeting point: Fusion Flare's rayed sun re-ramped so its left half burns blue, its right half orange and
+    the middle white-hot, with Ice Burn's star laid over the centre. 4 cells of 192 (two sizes of flare, mirrored)."""
+    ff = Image.open(src("rejuvenation", "Animations", "PRAS- Fusion Flare.png")).convert("RGBA")
+    ib = Image.open(src("rejuvenation", "Animations", "PRAS- Ice Burn.png")).convert("RGBA")
+    sun = ff.crop((2 * 192, 2 * 192, 3 * 192, 3 * 192))            # cell 12
+    stars = [ib.crop((2 * 192, 0, 3 * 192, 192)), ib.crop((3 * 192, 0, 4 * 192, 192))]
+    sheet = Image.new("RGBA", (192 * 4, 192), (0, 0, 0, 0))
+    a = np.array(sun).astype(np.float32)
+    lum = (a[:, :, 0] * 0.3 + a[:, :, 1] * 0.59 + a[:, :, 2] * 0.11) / 255.0
+    op = a[:, :, 3] > 0
+    lo, hi = lum[op].min(), lum[op].max()
+    lum = np.clip((lum - lo) / max(hi - lo, 1e-3), 0, 1)
+    yy, xx = np.mgrid[0:192, 0:192]
+    rad = np.sqrt((xx - 96.0) ** 2 + (yy - 96.0) ** 2)
+    for i in range(4):
+        out = np.zeros((192, 192, 4), dtype=np.uint8)
+        wob = np.sin((yy + i * 13) * 0.21) * 7 + np.sin((yy - i * 29) * 0.08) * 6      # ragged seam between the halves
+        left = (xx + wob) < 96
+        lv = np.clip(lum + (0.42 if i % 2 else 0.3) * np.clip(1 - rad / 30.0, 0, 1), 0, 1)
+        idx = np.minimum((lv * 4.999).astype(int), 4)
+        for k in range(5):
+            m = op & (idx == k)
+            for side, ramp in ((left, RAMP_SEA), (~left, RAMP_FIRE)):
+                mm = m & side
+                out[mm, 0], out[mm, 1], out[mm, 2], out[mm, 3] = ramp[k][0], ramp[k][1], ramp[k][2], 255
+        hot = op & (rad < (20 if i % 2 else 16))
+        out[hot] = [255, 255, 255, 255]
+        cell = Image.fromarray(out)
+        star = stars[i % 2]
+        sa = np.array(star)
+        dark = (sa[:, :, 3] > 0) & (sa[:, :, 0].astype(int) + sa[:, :, 1] + sa[:, :, 2] < 200)   # the star's black pip -> white
+        sa[dark] = [255, 255, 255, 255]
+        star = Image.fromarray(sa)
+        if i >= 2: star = star.rotate(45, resample=Image.NEAREST)
+        cell.alpha_composite(star)
+        if i >= 2: cell = cell.transpose(Image.FLIP_TOP_BOTTOM)
+        sheet.alpha_composite(cell, (i * 192, 0))
+    save(sheet, "Animations", "pfw_fx_clash_core",
+         "Rejuvenation: Graphics/Animations/PRAS- Fusion Flare.png + PRAS- Ice Burn.png",
+         "kitbash: sun cell re-ramped blue | white-hot | orange with the ice star over it; 4x1 cells of 192")
+    shards = Image.new("RGBA", (192 * 4, 192), (0, 0, 0, 0))
+    for i, (cx, cy) in enumerate([(0, 0), (1, 0), (3, 1), (4, 1)]):       # ice boulder, chunk, two shards
+        shards.alpha_composite(ib.crop((cx * 192, cy * 192, cx * 192 + 192, cy * 192 + 192)), (i * 192, 0))
+    save(shards, "Animations", "pfw_fx_ice_chunks", "Rejuvenation: Graphics/Animations/PRAS- Ice Burn.png",
+         "4x1 cells of 192: ice boulder, chunk, two shards (thrown from the clash)")
+
+
+WATER = [(34, 52, 104, 255), (52, 84, 140, 255), (84, 128, 190, 255)]
+
+
+def fracture():
+    """The ice breaking under the clash: 4 growing frames, drawn in the map tiles' style (dark lead + lit lower lip,
+    loose plates), logical 224x112 doubled to 448x224. Ellipse-squashed for the overworld's 3/4 view."""
+    W2, H2 = 224, 112
+    rng = random.Random(926)
+    arms = []
+    for k in range(9):
+        ang = k * (2 * math.pi / 9) + rng.uniform(-0.25, 0.25)
+        pts = [(0.0, 0.0)]
+        x = y = 0.0
+        L = rng.uniform(70, 104)
+        d = 0.0
+        while d < L:
+            step = rng.uniform(5, 10)
+            ang2 = ang + rng.uniform(-0.55, 0.55)
+            x += math.cos(ang2) * step; y += math.sin(ang2) * step
+            d += step
+            pts.append((x, y))
+        arms.append(pts)
+        if k % 2 == 0:                                   # a branch
+            j = rng.randrange(2, max(3, len(pts) - 2))
+            bx, by = pts[j]; bang = ang + rng.choice((-1, 1)) * rng.uniform(0.6, 1.0)
+            bp = [(bx, by)]
+            for _ in range(rng.randrange(3, 6)):
+                bx += math.cos(bang + rng.uniform(-0.4, 0.4)) * 7; by += math.sin(bang + rng.uniform(-0.4, 0.4)) * 7
+                bp.append((bx, by))
+            arms.append(bp)
+    sheet = Image.new("RGBA", (W2 * 2 * 4, H2 * 2), (0, 0, 0, 0))
+    for f in range(4):
+        reach = (0.3, 0.55, 0.8, 1.0)[f] * 104
+        im = Image.new("RGBA", (W2, H2), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        tr = lambda p: (W2 / 2 + p[0], H2 / 2 + p[1] * 0.46)
+        for pts in arms:
+            for a, b in zip(pts, pts[1:]):
+                if math.hypot(*b) > reach: break
+                A, B = tr(a), tr(b)
+                wide = math.hypot(*a) < reach * 0.45
+                d.line([A[0], A[1] + 1, B[0], B[1] + 1], fill=rdraw.ICE[3])                    # lit lower lip
+                if wide: d.line([A[0], A[1] + 2, B[0], B[1] + 2], fill=rdraw.ICE[3])
+                d.line([A, B], fill=WATER[0], width=2 if wide else 1)
+                if wide: d.line([A[0], A[1] - 1, B[0], B[1] - 1], fill=WATER[1])
+        r0 = (5, 9, 13, 17)[f]                                                                  # the hole at the centre
+        d.ellipse([W2 / 2 - r0 * 1.6, H2 / 2 - r0 * 0.7, W2 / 2 + r0 * 1.6, H2 / 2 + r0 * 0.7], fill=WATER[0], outline=rdraw.ICE[3])
+        d.ellipse([W2 / 2 - r0, H2 / 2 - r0 * 0.4, W2 / 2 + r0 * 0.6, H2 / 2 + r0 * 0.2], fill=WATER[1])
+        prng = random.Random(40)
+        for k in range(6 + f * 4):                                                              # loose plates
+            ang = prng.uniform(0, 6.28); rr = prng.uniform(0.2, 0.9) * reach
+            px, py = tr((math.cos(ang) * rr, math.sin(ang) * rr))
+            if rr > reach * 0.95: continue
+            d.polygon([(px - 3, py), (px, py - 2), (px + 3, py - 1), (px + 2, py + 1)], fill=rdraw.SNOW[3], outline=rdraw.ICE[0])
+        sheet.alpha_composite(up2(im), (f * W2 * 2, 0))
+    save(sheet, "Animations", "pfw_fx_fracture", "own art (drawn by tools/build_war_assets.py in the rdraw tile style)",
+         "4x1 cells of 448x224: the ice cracking outward under the clash")
+
+
+def dome():
+    """The dome of Bleed light: a hand-shaded glass hemisphere, 4 shimmer frames, logical 240x150 doubled to
+    480x300. Semi-transparent body, hard pixel rim, ground ring, travelling glints."""
+    W2, H2 = 240, 150
+    PINK, MINT, VIO, WHITE = (255, 176, 232), (112, 224, 216), (136, 96, 216), (255, 255, 255)
+    cx, base, rx, ry, top = 120, 118, 112, 26, 108
+    sheet = Image.new("RGBA", (W2 * 2 * 4, H2 * 2), (0, 0, 0, 0))
+    for f in range(4):
+        a = np.zeros((H2, W2, 4), dtype=np.uint8)
+        yy, xx = np.mgrid[0:H2, 0:W2]
+        nx = (xx - cx) / float(rx)
+        up = (base - yy) / float(top)
+        dome_in = ((yy <= base) & (nx ** 2 + up ** 2 <= 1.0)) | ((yy > base) & (nx ** 2 + ((yy - base) / float(ry)) ** 2 <= 1.0))
+        edge = np.sqrt(nx ** 2 + np.where(yy <= base, up, (yy - base) / float(ry)) ** 2)
+        # body: violet glass, thicker (more opaque) toward the rim; 2-step banding, checker dither between bands
+        band = np.where(edge > 0.9, 2, np.where(edge > 0.7, 1, 0))
+        dither = ((xx + yy) % 2 == 0)
+        alpha = np.select([band == 2, band == 1], [120, np.where(dither, 96, 64)], default=np.where(dither, 52, 34))
+        col = np.select([band[..., None] == 2, band[..., None] == 1], [np.array(PINK), np.array(VIO)], default=np.array(MINT))
+        a[dome_in, :3] = col[dome_in]
+        a[dome_in, 3] = alpha[dome_in]
+        rim = dome_in & (edge > 0.965)
+        a[rim] = [WHITE[0], WHITE[1], WHITE[2], 235]
+        rim2 = dome_in & (edge > 0.93) & ~rim
+        a[rim2] = [PINK[0], PINK[1], PINK[2], 200]
+        im = Image.fromarray(a)
+        d = ImageDraw.Draw(im)
+        d.arc([cx - rx, base - ry, cx + rx, base + ry], 0, 180, fill=WHITE + (235,))              # ground ring, front
+        d.arc([cx - rx, base - ry, cx + rx, base + ry], 180, 360, fill=PINK + (110,))            # and far side
+        for k in range(3):                                                                      # meridians drift
+            ph = ((k + f / 4.0) / 3.0) * 2 - 1
+            w = abs(ph) * rx
+            if w < 8: continue
+            box = [cx - w, base - top, cx + w, base + top]
+            d.arc(box, 180, 360, fill=(MINT if k % 2 else PINK) + (120,))
+        d.arc([cx - rx + 14, base - top + 10, cx + rx - 40, base + top - 40], 200, 250, fill=WHITE + (230,), width=2)   # big glint
+        g = random.Random(5)
+        for k in range(14):                                                                     # sparkles twinkle
+            ang = g.uniform(3.3, 6.1); rr = g.uniform(0.3, 0.92)
+            px, py = cx + math.cos(ang) * rr * rx, base + math.sin(ang) * rr * top
+            if (k + f) % 4 == 0:
+                d.line([px - 2, py, px + 2, py], fill=WHITE + (255,)); d.line([px, py - 2, px, py + 2], fill=WHITE + (255,))
+            elif (k + f) % 4 == 1:
+                d.point([px, py], fill=WHITE + (255,))
+        sheet.alpha_composite(up2(im), (f * W2 * 2, 0))
+    save(sheet, "Animations", "pfw_fx_dome", "own art (drawn by tools/build_war_assets.py)",
+         "4x1 cells of 480x300: Bleed-light dome with shimmer; anchor = ground centre at (240, 236) in the cell")
+
+
 # --------------------------------------------------------------------------- characters
 def characters():
     copy("rejuvenation", "Characters", "pkmn_kyogre2.png", "pfw_kyogre_rise", "4x4: emerge from the water (0-5), sink (6-7), splashes (8-15)")
@@ -72,10 +279,12 @@ def characters():
                             ("reborn", "pkmn_salamence.png", "pfw_salamence")]:
         copy(game, "Characters", name, new, "4x4 overworld follower sprite (army unit)")
     grunt = Image.open(src("rejuvenation", "Characters", "Grunt_1.png")).convert("RGBA")
-    save(tint(grunt, (140, 200, 255), 0.45), "Characters", "pfw_soldier_isenmar",
-         "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured icy blue (Isenmar soldier)")
-    save(tint(grunt, (255, 110, 70), 0.5), "Characters", "pfw_soldier_ashkaar",
-         "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured crimson (Ashkaar soldier)")
+    save(outline_dark(tint(grunt, (58, 122, 184), 0.8)), "Characters", "pfw_soldier_isenmar",
+         "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured Isenmar teal-blue (#3A7AB8 cloth), darker outline")
+    save(outline_dark(tint(grunt, (214, 60, 44), 0.8)), "Characters", "pfw_soldier_ashkaar",
+         "Rejuvenation: Graphics/Characters/Grunt_1.png", "recoloured Ashkaar crimson, darker outline")
+    kyogre_side()
+    banners()
     knight = Image.open(src("rejuvenation", "Characters", "knight.png")).convert("RGBA")
     save(tint(knight, (150, 200, 255), 0.5), "Characters", "pfw_eirik",
          "Rejuvenation: Graphics/Characters/knight.png", "recoloured pale blue (Thane Eirik stand-in)")
@@ -122,6 +331,9 @@ def effects():
                             ("PRAS- Fusion Flare.png", "pfw_fx_fusion_flare", "5x5 cells of 192: sun 0, flame swirls, suns 11-12"),
                             ("PRAS- Light that Burns the Sky.png", "pfw_fx_sky_burn", "5x5 cells of 192: flame grow 5-9, die 10-12")]:
         copy("rejuvenation", "Animations", name, new, note)
+    clash_core()
+    fracture()
+    dome()
 
 
 # --------------------------------------------------------------------------- stage map
@@ -129,6 +341,46 @@ W, H = 64, 24
 SNOW, ICE, LEAD = 2475, 2476, 144        # Kristiline Town (Frozen): snow, sea ice, KristilineWatersFrozen autotile
 CLIFF = [761, 689, 690]                  # cliff faces
 LEDGE = 1485                             # ledge base with snow lip
+
+
+def soften_ice(img, d, lead, shore):
+    """Swap Kristiline's saturated striped ice for the pale blue-white ice Frostwick (map 570) uses: rdraw.soft_ice
+    on every ice cell and inside the lead autotile's ice corners, then pressure cracks, snowdrifts and floes."""
+    a = np.array(img)
+    ice_cells = (d[0] == ICE) & (d[1] == 0)
+    ys, xs = np.where(ice_cells)
+    y0, x0 = [(y, x) for y, x in zip(ys, xs) if y > shore + 1][0]
+    old = {tuple(c) for c in a[y0 * 32:(y0 + 1) * 32, x0 * 32:(x0 + 1) * 32, :3].reshape(-1, 3)}     # the striped ice's colours
+    soft = [np.array(up2(rdraw.soft_ice(v))) for v in range(4)]
+    rng = random.Random(570)
+    pick = [[rng.choice((0, 0, 0, 1, 2, 3)) for _ in range(W)] for _ in range(H)]
+    for y in range(H):
+        for x in range(W):
+            cell = a[y * 32:(y + 1) * 32, x * 32:(x + 1) * 32]
+            if ice_cells[y, x]:
+                cell[:, :, :] = soft[pick[y][x]]
+            elif lead[y, x]:
+                flat = cell[:, :, :3].reshape(-1, 3)
+                m = np.array([tuple(c) in old for c in flat]).reshape(32, 32)
+                cell[m] = soft[0][m]
+    out = Image.fromarray(a)
+    free = lambda x, y: 0 <= x < W and shore + 1 < y < H and ice_cells[y, x]
+    used = set()
+    for _ in range(26):                                   # pressure ridges: runs of crack tiles
+        x, y = rng.randrange(0, W), rng.randrange(shore + 2, H)
+        for k in range(rng.randrange(2, 6)):
+            if free(x + k, y) and (x + k, y) not in used:
+                out.alpha_composite(up2(rdraw.crack(rng.randrange(1, 9))), ((x + k) * 32, y * 32)); used.add((x + k, y))
+    for _ in range(70):                                   # snowdrifts
+        x, y = rng.randrange(0, W), rng.randrange(shore + 2, H)
+        if free(x, y) and (x, y) not in used:
+            out.alpha_composite(up2(rdraw.drift(rng.randrange(1, 7) * 2)), (x * 32, y * 32)); used.add((x, y))
+    for y in range(shore + 2, H - 1):                     # floes on open water away from the edges
+        for x in range(1, W - 1):
+            if lead[y, x] and lead[y - 1, x] and lead[y + 1, x] and lead[y, x - 1] and lead[y, x + 1] and rng.random() < 0.22:
+                if not (15 <= x <= 26 and 8 <= y <= 14):  # keep Kyogre's pool clear
+                    out.alpha_composite(up2(rdraw.floe(rng.randrange(1, 9))), (x * 32, y * 32))
+    return out
 
 
 def stage():
@@ -199,10 +451,11 @@ def stage():
     m.events = {}
     render.GFX = os.path.join(root, "Graphics")
     render.OUT_GFX = "/nonexistent"
-    img = render.render(m, events=False, ts=ts)
+    img = render.render(m, events=False, ts=ts).convert("RGBA")
+    img = soften_ice(img, d, lead, shore)
     save(img.convert("RGBA"), "Pictures", "pfw_shattered_ice",
-         "Rejuvenation: tileset 'Kristiline Town (Frozen)' + autotiles, tiles from Map328 (Kristiline Town)",
-         "composed %dx%d-tile frozen strait (temporary stage for :WAR_CLIMAX until map 926 exists)" % (W, H))
+         "Rejuvenation: tileset 'Kristiline Town (Frozen)' + autotiles, tiles from Map328 (Kristiline Town); ice from Prismfall mapgen/rdraw.py",
+         "composed %dx%d-tile frozen strait; sea ice repainted with the map team's pale soft ice, cracks, drifts and floes (temporary stage until map 926 exists)" % (W, H))
     json.dump({"tiles": [W, H], "shore_row": shore, "pool": [20.5, 11.0]},
               open(os.path.join(OUT, "Pictures", "pfw_shattered_ice.json"), "w"))
 

@@ -10,9 +10,12 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
   Warden Dorian sent out Chatot!
     >> sent out (foe): Chatot Lv.17 @ORANBERRY [BIGPECKS]
   Go! Growlithe!
-    >> sent out (player): Growlithe Lv.19 @SYNTHETICSEED [FLASHFIRE]
+    >> sent out (player): Growlithe Lv.19 @SYNTHETICSEED [INTIMIDATE]
 ## FIELD CHANGE: NONE -> GRAND_STAGE
   The curtain rises! The spotlight blazes over the stage!
+    [ability: Growlithe (player)'s Intimidate]
+    (anim: StatDown)
+  The opposing Chatot's Attack fell!
     (anim: UseItem)
   Growlithe's Synthetic Seed put it in the spotlight! It's here to perform!
     (anim: StatUp)
@@ -101,7 +104,7 @@ Grand Stage [GRAND_STAGE] - Gym 2 Warden Dorian vs challenger (Lv.19)
   (end of round)
   The opposing Loudred is making an uproar!
   You're in charge, Roggenrola!
-    >> sent out (player): Roggenrola Lv.19 [WEAKARMOR]
+    >> sent out (player): Roggenrola Lv.19 [STURDY]
 
 --- Turn 7 ---
   [Roggenrola 55/55 | Loudred 61/61]

@@ -25,7 +25,7 @@ Regenerate with `ruby tools/harness/run_all.rb` then `python3 -I tools/harness/r
 
 | # | Field | Full battle vs | Completed? | Result | Turns | Field messages | Boosted move (damage on field / no field) | Transitions fired | Seed | End-of-round |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Silkwood `SILKWOOD` | Gym 1 Warden Tamsin (Lv.15) | yes | player won | 5 | 8 | Bug Buzz 99 / 66 | 2/2 | 1/1 | 1/1 |
+| 1 | Silkwood `SILKWOOD` | Gym 1 Warden Tamsin (Lv.15) | yes | player won | 4 | 8 | Bug Buzz 99 / 66 | 2/2 | 1/1 | 1/1 |
 | 2 | Grand Stage `GRAND_STAGE` | Gym 2 Warden Dorian (Lv.19) | yes | player lost | 13 | 6 | Swift 58 / 45 | 7/7 | 1/1 | none defined |
 | 3 | Water Surface `WATER_SURFACE` | Gym 3 Warden Marisol (Lv.23) | yes | player lost | 21 | 4 | Water Pulse 66 / 45 | 4/4 | 1/1 | 2/2 |
 | 4 | Neon Grid `NEON_GRID` | Gym 4 Warden Rook (Lv.27) | yes | player won | 15 | 6 | Thunderbolt 99 / 66 | 5/5 | 1/1 | 2/2 |

@@ -44,8 +44,17 @@ module Prismfall
         count.times do |i|
           r = i % rows
           c = i / rows
-          x = ax + (aw * (c + 0.5 + ((r.odd?) ? 0.35 : 0)) / cols) + ((Util.hash01(i, seed, 1) - 0.5) * 10)
-          y = ay + ((rows > 1) ? ah * r / (rows - 1.0) : ah / 2.0) + ((Util.hash01(i, seed, 2) - 0.5) * 6)
+          if o[:blocks]                       # drilled ranks: square blocks with gaps, no stagger
+            nb = o[:blocks]
+            gap = o[:gap] || 48
+            bw = (aw - (gap * (nb - 1))) / nb.to_f
+            cpb = (cols / nb.to_f).ceil
+            x = ax + ((c / cpb) * (bw + gap)) + (bw * ((c % cpb) + 0.5) / cpb) + ((Util.hash01(i, seed, 1) - 0.5) * 3)
+            y = ay + ((rows > 1) ? ah * r / (rows - 1.0) : ah / 2.0) + ((Util.hash01(i, seed, 2) - 0.5) * 2)
+          else
+            x = ax + (aw * (c + 0.5 + ((r.odd?) ? 0.35 : 0)) / cols) + ((Util.hash01(i, seed, 1) - 0.5) * 10)
+            y = ay + ((rows > 1) ? ah * r / (rows - 1.0) : ah / 2.0) + ((Util.hash01(i, seed, 2) - 0.5) * 6)
+          end
           g = @gfx[i % @gfx.length]
           s = Sprite.new(scene.viewport)
           s.bitmap = g.bitmap

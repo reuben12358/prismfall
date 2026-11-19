@@ -59,6 +59,7 @@ def walkway(m, x0, x1, y):
 
 def build(preview=None):
     m = K.RMap(W, H, 50, 120, water='Sea(Grass)', kit='sh')
+    m.keep_under = 'd'
     # ---------------------------------------------------------------- terrain
     for x in range(W):
         for y in range(H):
@@ -81,41 +82,52 @@ def build(preview=None):
             shrine = ((x - 22) / 5.5) ** 2 + ((y - 9) / 4.5) ** 2 < 1.0 + 0.5 * (vnoise(x, y, 5, 3.0) - 0.5)
             ridge_forest = m.ht[y, x] == 1 and not knoll and not shrine
             if deep or ridge_forest: m.cls[y, x] = 'T'
-    # ---------------------------------------------------------------- lanes (Sheridan dirt, orthogonal with soft bends)
-    m.street([(35, 63), (35, 52), (40, 52), (40, 38)], 3, 'd', only='.T')       # from Gossamer Wood up to the green
-    m.rect(34, 29, 15, 9, 'd', '.')                                              # the green (Tamsin's square)
-    m.street([(0, 31), (34, 31)], 2, 'd', only='.T')                             # Route 3 road (rows 30-31) from the west edge
-    m.street([(48, 31), (71, 31)], 3, 'd', only='.T')                            # east lane to the pylon
-    m.street([(36, 19), (36, 29)], 3, 'd', only='.')                             # stairs down from the Loomhouse
-    m.street([(22, 14), (22, 19), (36, 19)], 2, 'd', only='.T')                  # shrine stairs path
-    m.street([(17, 27), (17, 30)], 2, 'd', only='.')
-    m.street([(45, 25), (45, 29)], 2, 'd', only='.')
-    m.street([(56, 25), (56, 30)], 2, 'd', only='.')
-    m.street([(27, 41), (27, 37), (34, 37)], 2, 'd', only='.')
-    m.street([(63, 43), (63, 46), (51, 46)], 2, 'd', only='.')
-    m.street([(42, 51), (42, 52)], 2, 'd', only='.')
-    m.street([(48, 37), (55, 46), (55, 49)], 2, 'd', only='.')
+    # ---------------------------------------------------------------- lanes: curved dirt lanes into the round green
     m.stairs(35, 14, w=3, kit_rows=4)
     m.stairs(21, 12, w=2, kit_rows=4)                                           # the ridge lip is row 12 at x 21-22
-    m.street([(22, 10), (22, 12)], 2, 'd', only='.')                             # shrine path above the stairs
+    m.plan_cliffs()
+    LN = dict(c='d', only='.tT')
+    m.blob(40.5, 33.0, 8.4, 5.0, 'd', seed=51, rough=0.3, only='.tT')            # the green: an oval of trodden earth
+    m.rect(0, 30, 16, 2, 'd', only='.T')                                         # Route 3 road (rows 30-31) from the west edge
+    m.lane([(15, 31), (21, 31.4), (27, 32.4), (32.5, 33)], w=2.6, seed=52, wobble=0.2, **LN)
+    m.rect(35, 18, 3, 1, 'd', only='.tT')
+    m.lane([(36.5, 18.5), (37.2, 21.5), (39.2, 24.6), (40, 28.4)], w=2.8, seed=53, wobble=0.2, **LN)   # down from the Loomhouse
+    m.rect(21, 16, 2, 1, 'd', only='.tT')
+    m.lane([(22, 16.5), (23.4, 19.2), (29, 20.4), (35.6, 19.6)], w=2.1, seed=54, wobble=0.2, **LN)     # the shrine path
+    m.lane([(48.4, 32.6), (54, 31.3), (60, 31)], w=2.9, seed=55, wobble=0.2, **LN)                      # east lane to the pylon
+    m.rect(59, 30, 13, 3, 'd', only='.tT')
+    m.rect(34, 57, 4, 7, 'd', only='.tT')                                        # from Gossamer Wood
+    m.lane([(35.6, 57.5), (34.4, 52), (34.8, 46.5), (36.6, 41.5), (38.4, 38)], w=2.9, seed=56, wobble=0.25, **LN)
+    m.lane([(46, 36.6), (48.4, 41), (52, 46), (58, 47.4), (64.4, 47.2)], w=2.4, seed=57, wobble=0.25, **LN)   # round the chapel
+    m.lane([(36.5, 56.6), (44, 57), (53, 56.6), (62.5, 56.8)], w=2.2, seed=58, wobble=0.2, **LN)        # the lantern decks
+    m.lane([(34.6, 46.2), (30, 45.2), (25, 45.4), (19.6, 44.6), (17.8, 40), (17.6, 35), (18.4, 32)], w=2.3, seed=59, wobble=0.25, **LN)  # dyers' loop
+    m.lane([(34.5, 57.4), (30, 57.2), (26.5, 56.6)], w=2.0, seed=60, wobble=0.15, **LN)
+    m.rect(22, 10, 2, 3, 'd', only='.')                                          # shrine path above the stairs
+    m.smooth('d', into='.', passes=2, only='.tT')
+    m.blob(40.8, 32.0, 3.6, 2.0, '.', seed=61, rough=0.2, only='d')              # the island under the Gathering Tree
     # ---------------------------------------------------------------- buildings
     E = []
     P = lambda n, at, **kw: E.append(SE.place(120, n, at, **kw))
     d = {}
     d['gym'] = m.stamp('pf_g_elder', 30, 1, 'BW_GYM', 'Gym door')
     d['guild'] = m.stamp('pf_g_tree6', 13, 19, 'BW_GUILD', 'Guildhall door')
-    d['pc'] = m.stamp('sh_help', 42, 18, 'BW_PC', 'Poke Center door')
-    d['house1'] = m.stamp('pf_g_tree4', 53, 18, 'BW_HOUSE1', 'Treetop House door')
-    d['mart'] = m.stamp('sh_cot', 24, 34, 'BW_MART', 'Mart door')
+    d['pc'] = m.stamp('sh_inn', 45, 16, 'BW_PC', 'Poke Center door')             # a timber hall, not Sheridan's blue Help Center
+    d['house1'] = m.stamp('pf_g_tree4', 58, 17, 'BW_HOUSE1', 'Treetop House door')
+    d['mart'] = m.stamp('sh_cot', 26, 37, 'BW_MART', 'Mart door')
     d['chapel'] = m.stamp('sh_big', 55, 34, 'BW_CHAPEL', 'Chapel door')
     d['house2'] = m.stamp('pf_g_tree4', 40, 44, 'BW_HOUSE2', "Cutter's House door")
-    for nm, x, y in (('pf_g_tree4p', 22, 44), ('pf_g_tree2', 47, 9), ('pf_g_tree2', 61, 20), ('pf_g_tree4p', 61, 39),
-                     ('pf_g_tree2', 29, 48), ('pf_g_tree2', 48, 45), ('sh_small', 64, 24), ('sh_small', 49, 36)):
-        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.dT'): m.stamp(nm, x, y)
+    m.stamp('pf_g_tree2', 39, 27)                                                # the Gathering Tree on the green
+    hd = []
+    for nm, x, y in (('pf_g_tree4p', 20, 36), ('pf_g_tree2', 47, 8), ('pf_g_tree2', 66, 14),
+                     ('pf_g_tree2', 46, 50), ('sh_small', 65, 22), ('sh_small', 50, 35), ('sh_ell', 23, 49), ('pf_g_tree2', 8, 54),
+                     ('pf_g_tree2', 67, 40)):
+        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.dT'):
+            m.stamp(nm, x, y)
+            if 'door' in STAMPS[nm]: dd = STAMPS[nm]['door']; hd.append((x + dd[0], y + dd[1]))
         else: print('  (no room for %s at %d,%d)' % (nm, x, y))
-    for k, (dx, dy) in d.items():
-        for yy in (dy + 1, dy + 2):
-            if m.inb(dx, yy) and m.cls[yy, dx] in '.tT' and m.ht[yy, dx] == m.ht[dy, dx]: m.cls[yy, dx] = 'd'
+    for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=8)
+    put = lambda nm, x, y, on='.d': (m.stamp(nm, x, y) if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on=on) and not m.cliff[y:y + STAMPS[nm]['h'], x:x + STAMPS[nm]['w']].any() else print('  (no room for %s at %d,%d)' % (nm, x, y)))
+    put('pf_pcsign', 49, 27)
     deck(m, 22, 23, 7, 4, stairs=24)                         # the weavers' deck beside the Guildhall tree
     deck(m, 51, 52, 5, 3, stairs=52)                         # lantern decks, south-east
     deck(m, 59, 52, 5, 3, stairs=61)
@@ -136,10 +148,10 @@ def build(preview=None):
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     def S(n, ax, ay, on='.d', r=8):
         e = SE.place(120, n, m.snap(ax, ay, on, r=r)); E.append(e); m.taken[e['at'][1], e['at'][0]] = True
-    S('Town sign', 37, 57); S('Finch', 60, 35); S('Rope-bridge Boy', 30, 31); S('Grandmother knitting', 46, 36)
-    town = [('Dyer', 16, 36), ('Apprentice', 21, 31), ('Silk Merchant', 36, 36), ('Meridian Linesman', 52, 31), ('Tired Mother', 33, 48),
-            ('Old Man on bridge', 9, 31), ('Girl in ogre mask', 43, 32), ('Boy in dog mask', 44, 33), ('Egg-seller', 47, 33),
-            ('Tax-barge Deserter', 33, 55), ('Accord Chaplain', 59, 42), ('Youngster', 50, 29), ('Woman with basket', 46, 40),
+    S('Town sign', 38, 58); S('Finch', 57, 33); S('Rope-bridge Boy', 28, 32); S('Grandmother knitting', 45, 36)
+    town = [('Dyer', 16, 37), ('Apprentice', 21, 32), ('Silk Merchant', 35, 35), ('Meridian Linesman', 53, 31), ('Tired Mother', 32, 46),
+            ('Old Man on bridge', 9, 31), ('Girl in ogre mask', 44, 31), ('Boy in dog mask', 45, 32), ('Egg-seller', 47, 34),
+            ('Tax-barge Deserter', 33, 55), ('Accord Chaplain', 60, 47), ('Youngster', 50, 29), ('Woman with basket', 48, 41),
             ("Cutter's Wife", 44, 52)]
     for n, x, y in town: S(n, x, y)
     for e in E:
@@ -153,7 +165,11 @@ def build(preview=None):
     # ---------------------------------------------------------------- dressing
     for nm, x, y in (('pf_p_loom', 23, 24), ('pf_p_loom', 27, 24), ('pf_p_laundry', 23, 23), ('pf_p_vat_b', 13, 36),
                      ('pf_p_vat_r', 15, 37), ('pf_p_vat_y', 13, 39), ('sh_crates', 51, 52), ('sh_crates', 62, 52),
-                     ('pf_logbench', 59, 53), ('sh_campfire', 42, 36), ('sh_crates', 49, 36), ('pf_p_silk', 54, 52), ('pf_p_silk', 60, 52)):
+                     ('pf_logbench', 59, 53), ('sh_campfire', 38, 36), ('sh_crates', 47, 29), ('pf_p_silk', 54, 52), ('pf_p_silk', 60, 52),
+                     ('pf_logbench', 38, 33), ('pf_logbench', 42, 33), ('hb_tables', 33, 30), ('hb_dyeline', 14, 34), ('hb_rugline', 31, 35),
+                     ('hb_boxes', 34, 37), ('hb_cask', 44, 29), ('hb_washline', 62, 26), ('hb_barrel', 53, 26), ('hb_tables', 44, 37),
+                     ('pf_logbench', 20, 47), ('hb_keg', 31, 43), ('hb_barrel2', 57, 46), ('hb_rugline2', 20, 28), ('pf_logbench', 47, 44),
+                     ('hb_boxes2', 37, 51), ('hb_cask', 30, 52)):
         st = STAMPS[nm]
         if m.free(x, y, st['w'], st['h'], on='.dD') or all(m.cls[y + j, x + i] == 'D' for i in range(st['w']) for j in range(st['h'])):
             m.over += [(z, x + i, y + j, t) for z in (1, 2) for j in range(st['h']) for i in range(st['w']) for t in [st['layers'][z][j][i]] if t]
@@ -168,17 +184,20 @@ def build(preview=None):
             if m.cls[y, x] == '.' and not m.taken[y, x] and m.ht[y, x] == 0:
                 near_edge = any(m.inb(x + dx, y + dy) and m.cls[y + dy, x + dx] in 'Tw' for dx in (-2, -1, 0, 1, 2) for dy in (-2, -1, 0, 1, 2))
                 if near_edge and vnoise(x, y, 17, 4.0) > 0.6: m.cls[y, x] = 't'
-    for cx, cy, n in ((20, 35, 2), (30, 42, 2), (48, 26, 1), (60, 46, 2), (52, 40, 2), (30, 54, 2), (44, 58, 2), (27, 17, 1),
-                      (50, 15, 2), (62, 15, 2), (14, 43, 1), (66, 46, 1), (52, 58, 2), (24, 58, 2), (18, 28, 1)):
+    for cx, cy, n in ((24, 30, 1), (31, 41, 1), (43, 26, 1), (60, 44, 1), (52, 42, 2), (40, 54, 2), (44, 60, 2), (27, 17, 1),
+                      (57, 13, 2), (64, 18, 1), (14, 43, 1), (66, 46, 1), (52, 59, 2), (20, 58, 2), (22, 28, 1), (30, 26, 2),
+                      (33, 23, 1), (43, 21, 1), (56, 27, 1), (24, 42, 1), (52, 37, 1), (30, 49, 1), (42, 41, 1), (66, 36, 1)):
         m.trees(cx, cy, n, TREES, r=3, seed=cx + cy * 5)
-    for x, y in ((33, 21), (39, 27), (33, 39), (48, 34), (38, 48), (59, 32), (27, 32), (18, 30)):
+    for x, y in ((34, 22), (42, 27), (32, 38), (49, 35), (37, 48), (58, 29), (26, 31), (19, 30), (33, 29), (50, 45), (22, 46),
+                 (16, 40), (45, 55), (57, 55), (61, 46), (32, 55), (25, 19)):
         if m.free(x, y - 1, 1, 2, on='.'): m.stamp('pf_lantern', x, y - 1)
     m.beds(prefixes=('sh_',))
-    m.greenfill(3)
+    print('  yard trees', m.autotrees(26, TREES, seed=7, gap=0, box=(12, 14, 68, 60)))
+    m.greenfill(2)
     # ---------------------------------------------------------------- paint
     m.paint()
-    garlands(m, ((33, 47, 29, 0), (35, 41, 47, 1), (41, 48, 25, 2), (18, 28, 29, 3), (50, 62, 36, 1), (33, 40, 57, 2)))
-    m.scatter(7, seed=21)
+    garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3)))
+    m.scatter(9, seed=21, on='.T')
     if preview: m.preview(preview, 0.5)
     head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},

@@ -52,3 +52,61 @@ ROOMS = {
                               "Cross the two bridges that are already taut before you touch anything.",
                               "Visit both houses first. Then pull the middle or the right anchor: one house bridge goes slack and the nest's pulls tight."]),
 }
+
+# ---- in-engine pieces -------------------------------------------------------------------------------------------
+# D1 is built with events only, laid over the existing Orchard (build.py appends EVENTS[map] to that map's spec, so
+# the layout owner's script is untouched).  The three "rows" are the Orchard's own rows of glass apple trees.
+T40 = dict(glow=22968, signpost=8114, crystal=8098)          # tileset 40 "Prismfall Wilds"
+D1_TREES = {'L': (4, 16), 'M': (23, 16), 'H': (35, 25)}       # touch tile beside each cracked tree
+D1_POST, D1_HEDGE, D1_PRIZE = (19, 33), (38, 3), (38, 1)
+
+
+def _d1_events():
+    ev = [{'type': 'event', 'name': 'Chime post', 'at': list(D1_POST), 'pages': [{'graphic': {'tile': T40['signpost']}, 'commands': [
+        "A spur of green glass by the gate. Three glass apples hang from it like wind chimes: small, middling and large.",
+        {'se': 'Mining reveal'}, "It rings a little phrase: LOW ... MIDDLE ... HIGH.",
+        "\\pf[JUNO,happy]Juno: (from beyond the Veil) It's the bit before the chorus in Wingull Shanty! Low, middle, high!",
+        {'if': 'PrismfallPuzzles.room_log(:d1_chime)[:fails] >= 1', 'then': [{'script': 'pfp_hint(:d1_chime)'}]}]}]}]
+    for n, (x, y) in D1_TREES.items():
+        ev.append({'type': 'event', 'name': 'Cracked tree ' + n, 'at': [x, y], 'pages': [
+            {'graphic': {'tile': T40['glow']}, 'trigger': 'touch', 'commands': [{'script': 'pfp_chime(:%s)' % n}]},
+            {'cond': {'var': ['D1_CHIME', 3]}}]})
+    ev.append({'type': 'event', 'name': 'Glass hedge', 'at': list(D1_HEDGE), 'pages': [
+        {'graphic': {'tile': T40['crystal']}, 'commands': [
+            "A hedge of glass apple boughs, fused shut. Something is caught on the far side.",
+            "Hairline cracks run through it, as if one clear note would finish the job."]},
+        {'cond': {'var': ['D1_CHIME', 3]}}]})
+    ev.append({'type': 'event', 'name': 'Lost satchel', 'at': list(D1_PRIZE), 'pages': [
+        {'graphic': {'sprite': 'Object ball'}, 'commands': [
+            "A child's satchel, half glassed over. Inside: a wooden Wingull whistle and a sliver of something that hums.",
+            {'script': 'pfm_item(:BLEEDSHARD, 1, "Bleed Shard")'}, {'script': 'pfm_set(:d1_satchel)'}, {'selfswitch': ['A', True]}]},
+        {'cond': {'self': 'A'}}]})
+    return ev
+
+
+EVENTS = {522: _d1_events()}
+
+RUBY = """
+# D1 the Glassed Orchard: ring the cracked trees in the gate phrase's order (low, middle, high).
+def pfp_chime(note)
+  order = [:L, :M, :H]
+  names = { :L => "low", :M => "middle", :H => "high" }
+  v = $game_variables[501].to_i
+  return if v >= 3
+  if order[v] == note
+    $game_variables[501] = v + 1
+    pbSEPlay("Mining reveal") rescue nil
+    if v + 1 >= 3
+      pbMessage(_INTL("The cracked tree rings the {1} note... and the whole phrase hangs in the air, finished.", names[note]))
+      pbSEPlay("Battle damage super") rescue nil
+      pbMessage(_INTL("Far to the north-east, a hedge of glass shatters."))
+    else
+      pbMessage(_INTL("The cracked tree rings as you pass: the {1} note. ({2} of 3)", names[note], v + 1))
+    end
+  elsif v > 0 || note != order[0]
+    $game_variables[501] = 0
+    PrismfallPuzzles.fail!(:d1_chime, _INTL("A sour chord: this tree rings the {1} note, but the gate phrase wanted the {2} one next. The rows fall silent. Start the phrase again.", names[note], names[order[v]]))
+  end
+  $game_map.need_refresh = true
+end
+"""

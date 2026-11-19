@@ -759,6 +759,22 @@ def snow_bridge(part):
 
 
 
+def pc_sign():
+    """a village Poke Center sign, 1x2: a carved board hung from a timber post, a red-and-white ball painted on it"""
+    im, d = canvas(1, 2)
+    d.rectangle([2, 6, 4, 30], fill=WOOD[1], outline=OUT); d.line([3, 7, 3, 29], fill=WOOD[3])
+    d.rectangle([2, 4, 14, 6], fill=WOOD[1], outline=OUT); d.line([3, 5, 13, 5], fill=WOOD[3])
+    d.line([8, 7, 8, 8], fill=ROPED); d.line([12, 7, 12, 8], fill=ROPED)
+    d.rectangle([5, 9, 15, 20], fill=(226, 212, 180, 255), outline=OUT)
+    d.ellipse([6, 10, 14, 19], fill=(244, 244, 248, 255), outline=OUT)
+    d.pieslice([6, 10, 14, 19], 180, 360, fill=(216, 60, 56, 255), outline=OUT)
+    d.line([7, 14, 13, 14], fill=OUT); d.rectangle([9, 13, 11, 15], fill=(244, 244, 248, 255), outline=OUT)
+    P(im, 8, 12, (244, 130, 120, 255))
+    d.line([1, 31, 5, 31], fill=(60, 90, 60, 160))
+    return im, ['O', 'W']
+
+
+
 def pieces():
     """every piece: name -> (image at logical scale, code rows, door tile or None)"""
     out = {}
@@ -807,6 +823,13 @@ def pieces():
     # ---- appended by map builder 7 (append below this line only: earlier ids must not move)
     for k, code in (('n', 'N'), ('m', 'F'), ('s', 'S')):
         for v in range(2): out['fw_bridge_%s%d' % (k, v)] = (snow_bridge('%s%d' % (k, v)), [code], None)
+    return out
+
+
+def pieces_late():
+    """pieces added after rcustom's EXTRA33 block.  APPEND NEW PIECES HERE (at the end): ids before them never move."""
+    out = {}
+    im, c = pc_sign(); out['pf_pcsign'] = (im, c, None)
     return out
 
 
