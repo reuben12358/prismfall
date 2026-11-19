@@ -29,10 +29,10 @@
 145	140	Pageant Hall
 146	140	Saltmere - Harbour & Breakwater
 147	140	Saltmere - Old Town
-150	140	Pell Playhouse - Foyer
+150	147	Pell Playhouse - Foyer
 151	150	Pell Playhouse - Revolving Stage
 152	150	Pell Playhouse - Fly Loft
-153	150	Pell Playhouse - Dressing Rooms
+153	150	Pell Playhouse - The Trap Room
 154	150	Pell Playhouse - The Grand Stage
 160	0	Ebbmouth
 161	160	Ebbmouth Pokémon Center

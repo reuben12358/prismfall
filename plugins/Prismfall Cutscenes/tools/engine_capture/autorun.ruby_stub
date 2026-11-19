@@ -1,0 +1,107 @@
+#===============================================================================
+# DEV-ONLY: plays one cutscene in the real engine and dumps frames with
+# Graphics.screenshot. Installed only into the capture copy by capture.sh
+# (as "ZZ Cutscene Autorun/001_Autorun.rb"). Never ship.
+#   CUT_ID=WAR_CLIMAX CUT_VARS="variant=A" CUT_EVERY=3 CUT_FROM=0 CUT_TO=999
+# Game time is locked to 1/60 s per frame, so the frames are true scene time
+# however slowly software rendering runs.
+#===============================================================================
+module CutRun
+  ROOT  = "Captures"
+  EVERY = (ENV["CUT_EVERY"] || "3").to_i
+  FROM  = (ENV["CUT_FROM"] || "0").to_f
+  TO    = (ENV["CUT_TO"] || "9999").to_f
+  @frame = 0; @shots = 0; @rec = false; @vbase = nil; @t0 = 0
+  class << self
+    attr_reader :vbase
+    def log(msg); File.open("#{ROOT}/cut.log", "a") { |f| f.puts(msg) }; end
+    def virtual_uptime; return @vbase + @frame / 60.0; end
+    def lock_clock; @vbase = System.cut_real_uptime; @frame = 0; end
+    def start; @rec = true; @t0 = @frame; end
+    def stop; @rec = false; end
+    def tick
+      @frame += 1
+      return if !@rec
+      t = (@frame - @t0) / 60.0
+      return if t < FROM || t > TO || (@frame - @t0) % EVERY != 0
+      Graphics.screenshot(format("%s/frames/f%05d.png", ROOT, @shots))
+      File.open("#{ROOT}/frames.tsv", "a") { |f| f.puts(format("%d\t%.3f", @shots, t)) }
+      @shots += 1
+    end
+
+    def run
+      Dir.mkdir(ROOT) if !Dir.exist?(ROOT)
+      Dir.mkdir("#{ROOT}/frames") if !Dir.exist?("#{ROOT}/frames")
+      File.write("#{ROOT}/cut.log", "")
+      log("boot ok: #{PluginManager.plugins.inspect}")
+      Graphics.transition(0)
+      PrismfallMaps.define_singleton_method(:apply_start_position) { false } if defined?(PrismfallMaps)
+      Game.start_new
+      $scene.createSpritesets
+      30.times { Graphics.update; $scene.miniupdate }
+      $player.name = "Tester"
+      id = (ENV["CUT_ID"] || "WAR_CLIMAX").to_sym
+      vars = {}
+      (ENV["CUT_VARS"] || "").split(",").each do |kv|
+        k, v = kv.split("=", 2)
+        next if !v
+        vars[k.to_sym] = (v == "true") ? true : (v == "false") ? false : (v =~ /\A-?\d+\z/) ? v.to_i : v.to_sym
+      end
+      lock_clock
+      start
+      real = System.cut_real_uptime
+      res = Prismfall::Cutscene.play(id, **vars)
+      stop
+      log("played #{id} #{vars.inspect}: result #{res.inspect}, #{@shots} frames, scene #{((@frame - @t0) / 60.0).round(2)} s, wall #{(System.cut_real_uptime - real).round(1)} s")
+    end
+  end
+end
+
+module Graphics
+  class << self
+    alias cut_autorun_update update unless method_defined?(:cut_autorun_update)
+    def update
+      cut_autorun_update
+      CutRun.tick
+    end
+  end
+end
+
+module System
+  class << self
+    alias cut_real_uptime uptime unless method_defined?(:cut_real_uptime)
+    def uptime
+      return CutRun.virtual_uptime if CutRun.vbase
+      return cut_real_uptime
+    end
+  end
+end
+
+class Scene_CutRun
+  def main
+    begin
+      CutRun.run
+    rescue Exception => e
+      raise if e.is_a?(SystemExit)
+      CutRun.log("FATAL #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(30).join("\n  "))
+    end
+    $scene = nil
+    Kernel.exit!(0)
+  end
+end
+
+alias cut_autorun_pbCallTitle pbCallTitle unless defined?(cut_autorun_pbCallTitle)
+def pbCallTitle
+  return Scene_CutRun.new
+end
+
+# No audio device in the capture environment.
+module Audio
+  class << self
+    %w[bgm_play bgm_stop bgm_fade bgs_play bgs_stop bgs_fade me_play me_stop me_fade se_play se_stop].each do |m|
+      define_method(m) { |*_args| nil }
+    end
+    def bgm_pos; 0; end
+    def bgs_pos; 0; end
+  end
+end

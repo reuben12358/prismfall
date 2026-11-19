@@ -59,6 +59,7 @@ STAGE = ["#########################",
          "#.......................#",
          "##x.....................#",
          "##1#........@.....P.....#",
+         "############.############",
          "#########################"]
 LOFT = ["#########################",
         "#WWWWWWWWWWWWWWWWWWWWWWW#",
@@ -76,8 +77,8 @@ LOFT = ["#########################",
         "#########################",
         "#########################"]
 ROPE_FLATS = {1: (0,), 2: (1, 2), 3: (0, 2)}             # counterweight coupling: rope -> flats A=0 B=1 C=2
-STAGE_AT = dict(start=(12, 18), pip=(18, 18), goal=(12, 2), ferdie=(2, 8), rosalind=(2, 11), crewe=(21, 8))
-LOFT_AT = dict(dot=(5, 4), item=(8, 4), trap=(14, 4), juggler=(18, 3))
+STAGE_AT = dict(start=(12, 18), pip=(18, 18), goal=(12, 2), ferdie=(2, 8), rosalind=(2, 11), crewe=(21, 8), exit=(12, 19))
+LOFT_AT = dict(dot=(5, 4), item=(8, 4), trap=(14, 4), juggler=(18, 3))      # 'juggler' = Gentleman Reginald on the catwalk
 SCENES = ['work lights', 'the Shipwreck', 'the Forest', 'the Throne']
 
 
@@ -131,7 +132,7 @@ def stage_model(with_loft=True, actors=True):
     m = Model('g2_stage (151+152)', cells, passable, (151,) + STAGE_AT['start'], (0, False, False, False), dev,
               [(151,) + STAGE_AT['goal']], links=links, resets=around(151, *STAGE_AT['pip']) + around(152, *LOFT_AT['dot']))
     m.game = lambda v: ({V_SCENE: v[0]}, {S_A: v[1], S_B: v[2], S_C: v[3]})
-    m.exits = [(152,) + LOFT_AT['trap']]
+    m.exits = [(152,) + LOFT_AT['trap'], (151,) + STAGE_AT['exit']]
     return m
 
 

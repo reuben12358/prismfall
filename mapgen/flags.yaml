@@ -6,23 +6,21 @@ variables:
   GYM1_C: 307
   GYM1_FOYER: 308     # Foyer training heddle (0-2)
   GYM1_BRIDGE: 309    # Canopy Lofts bridge swung by the brass wire (0 none, 1 P5-P6, 2 P4-P6)
-  GYM2_SCENE: 310     # Revolving Stage set (0 bare, 1 Shipwreck, 2 Forest, 3 Throne)
-  GYM2_ACTS: 311      # acts performed in Script order (0-3)
-  GYM2_SPOT1: 312     # Fly Loft spotlight aims (0 Hero, 1 King, 2 Beast)
-  GYM2_SPOT2: 313
-  GYM2_SPOT3: 314
+  GYM2_SCENE: 310     # Revolving Stage set (0 work lights, 1 Shipwreck, 2 Forest, 3 Throne)
+  GYM2_TURNTABLE: 312 # Trap Room revolve, quarter turns (0-3)
+  GYM2_OVERTURE: 313  # Foyer curtain flown (0/1)
   D1_CHIME: 501       # Glassed Orchard chime rows: notes rung in order (0-3)
 switches:
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on
   GYM1_KNOT: 308      # Granny's Knot solved (134)
   GYM1_ALPHA: 305     # Canopy Lofts cords
-  GYM1_BETA: 306
+  GYM1_BETA: 306      # the brass Meridian wire
   GYM1_GAMMA: 307
-  GYM2_LADDER: 310    # wing ladder to the Fly Loft unlocked
-  GYM2_MASK: 311      # Comedy door chosen: corridor exit open
-  GYM2_TRAP: 312      # every light upon the Beast: trapdoor open
-  GYM2_SPOTS_SET: 313 # Fly Loft spotlights initialised to (Hero, King, King)
+  GYM2_FLAT_A: 310    # loft flats: ON = flown (hangs in the Fly Loft, off the stage)
+  GYM2_FLAT_B: 311
+  GYM2_FLAT_C: 312    # the rostrum
+  GYM2_TRAP_DONE: 314 # Trap Room chest taken
   GYM3_BELL: 315      # Tidelock tide bell: ON = currents run inland (north)
 # Dungeons 501-600, 5 per dungeon (DUNGEON_PUZZLES.md section 0)
   D2_COCOON1: 506     # Deepwood lantern cocoons lit

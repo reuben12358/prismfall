@@ -161,8 +161,8 @@ MapPosition = 0,10,25
 Name = Pell Playhouse - Fly Loft
 MapPosition = 0,10,25
 #-------------------------------
-[153]   # Pell Playhouse - Dressing Rooms
-Name = Pell Playhouse - Dressing Rooms
+[153]   # Pell Playhouse - The Trap Room
+Name = Pell Playhouse - The Trap Room
 MapPosition = 0,10,25
 #-------------------------------
 [154]   # Pell Playhouse - The Grand Stage

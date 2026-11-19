@@ -34,7 +34,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[150] = :GRAND_STAGE   # Pell Playhouse - Foyer
   FieldEffects::MAP_FIELDS[151] = :GRAND_STAGE   # Pell Playhouse - Revolving Stage
   FieldEffects::MAP_FIELDS[152] = :GRAND_STAGE   # Pell Playhouse - Fly Loft
-  FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse - Dressing Rooms
+  FieldEffects::MAP_FIELDS[153] = :GRAND_STAGE   # Pell Playhouse - The Trap Room
   FieldEffects::MAP_FIELDS[154] = :GRAND_STAGE   # Pell Playhouse - The Grand Stage
   FieldEffects::MAP_FIELDS[160] = :WATER_SURFACE   # Ebbmouth
   FieldEffects::MAP_FIELDS[161] = :NONE   # Ebbmouth Pokémon Center
