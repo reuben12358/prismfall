@@ -139,7 +139,7 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
     P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
       casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
-      hard={"ab": "SKILLLINK", "moves": "FAKEOUT,DOUBLEHIT,ASTONISH,TICKLE"}),
+      hard={"moves": "FAKEOUT,SWIFT,ASTONISH,TICKLE"}),
     # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB here); Echoed Voice doubles each
     #    turn it is repeated, so the echo and the applause climb together where the player can see it - switch, or KO
     #    the singer. Encore lasts two turns longer on this stage (it locks a player who set up); Baby-Doll Eyes also
@@ -151,8 +151,10 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
       only="nocasual", hard={"moves": "TEETERDANCE,HEADBUTT,PSYBEAM,COPYCAT", "item": "SITRUSBERRY"}),
-    # Hard only: Dorian's voice. Big Pecks +1 Def, Hyper Voice / Chatter (sound, x1.3 x1.3) at Modest, Sing and Encore.
-    P("CHATOT", 14, "BIGPECKS", "SITRUSBERRY", "MODEST", "CHATTER,HYPERVOICE,ENCORE,SING", "S", only="hard"),
+    # Hard only: the costume department. Fur Coat halves physical hits (early starters are physical: bring special
+    #    moves or status); Baby-Doll Eyes also lowers Sp. Atk here. (A Chatot with Chatter / Hyper Voice OHKO'd
+    #    prepared teams at Lv 13-14 in the harness, so Dorian's voice stays in the Pageant Bout.)
+    P("FURFROU", 13, "FURCOAT", "ORANBERRY", "IMPISH", "HEADBUTT,BABYDOLLEYES,BITE,TACKLE", "BPD", only="hard"),
     # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
     #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
     P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",

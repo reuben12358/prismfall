@@ -14,7 +14,7 @@ metadata:
 tone: [6, 2, -10, 0]
 fog: {name: prismfall_seamist, opacity: 34, blend: 0, zoom: 100, sx: 2, sy: 0}
 connections:
-- {dir: N, offset: 28, to: 520, to_offset: 10}
+- {dir: N, offset: 28, to: 520, to_offset: 11}
 raw: data/raw/100.npy
 tileset: 51
 events:
@@ -625,14 +625,20 @@ events:
   - commands:
     - if: '!pfm?(:ch2_sendoff)'
       then:
-      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
-        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked
+        across it -- so you go round by the coast.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call
+        you "darling" and mean it about a third of the time.'
       - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
         by post.'
-      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL
+        glitter.'
+      - '\pf[LARCH,deadpan,,Larch (sendoff)]Larch: They use salt.'
+      - '\pf[JUNO,shocked,shock,Juno (sendoff)]Juno: ...Why would you tell me that.'
       - {script: 'pfm_item(:TOWNMAP, 1)'}
-      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
-      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
@@ -647,14 +653,20 @@ events:
   - commands:
     - if: '!pfm?(:ch2_sendoff)'
       then:
-      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
-        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked
+        across it -- so you go round by the coast.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call
+        you "darling" and mean it about a third of the time.'
       - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
         by post.'
-      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL
+        glitter.'
+      - '\pf[LARCH,deadpan,,Larch (sendoff)]Larch: They use salt.'
+      - '\pf[JUNO,shocked,shock,Juno (sendoff)]Juno: ...Why would you tell me that.'
       - {script: 'pfm_item(:TOWNMAP, 1)'}
-      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
-      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
@@ -669,14 +681,20 @@ events:
   - commands:
     - if: '!pfm?(:ch2_sendoff)'
       then:
-      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
-        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked
+        across it -- so you go round by the coast.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call
+        you "darling" and mean it about a third of the time.'
       - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
         by post.'
-      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL
+        glitter.'
+      - '\pf[LARCH,deadpan,,Larch (sendoff)]Larch: They use salt.'
+      - '\pf[JUNO,shocked,shock,Juno (sendoff)]Juno: ...Why would you tell me that.'
       - {script: 'pfm_item(:TOWNMAP, 1)'}
-      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
-      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
@@ -691,14 +709,20 @@ events:
   - commands:
     - if: '!pfm?(:ch2_sendoff)'
       then:
-      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Briarwick''s first, up through the Gossamer Wood. The Warden''s a girl called Tamsin Loom.
-        Go easy on her, she inherited the seat in spring and hasn''t slept since.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked
+        across it -- so you go round by the coast.'
+      - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call
+        you "darling" and mean it about a third of the time.'
       - '\pf[LARCH,neutral,,Larch (sendoff)]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
         by post.'
-      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+      - '\pf[JUNO,happy,,Juno (sendoff)]Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL
+        glitter.'
+      - '\pf[LARCH,deadpan,,Larch (sendoff)]Larch: They use salt.'
+      - '\pf[JUNO,shocked,shock,Juno (sendoff)]Juno: ...Why would you tell me that.'
       - {script: 'pfm_item(:TOWNMAP, 1)'}
-      - Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.
-      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Briarwick.")'}
+      - Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
@@ -730,7 +754,7 @@ events:
   - commands: []
     trigger: action
     move: fixed
-  - commands: ['\pf[JUNO,happy]Juno: Briarwick! Silk-moth eggs! A GYM!']
+  - commands: ['\pf[JUNO,happy]Juno: Saltmere! Forty tarts! A PAGEANT!']
     trigger: action
     move: fixed
     graphic: {sprite: trainer_RIVAL2, dir: down}

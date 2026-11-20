@@ -48,11 +48,14 @@ module PlayBot
     [:need_map, 527],
     [:to, 520, 527], [:spot_all, 527], [:to, 527, 528], [:spot_all, 528], [:to, 528, 140], [:arrive, 140],
     [:to, 140, 141], [:talk, 141, "Nurse"], [:to, 141, 140],
-    [:to, 140, 147], [:to, 147, 150], [:to, 150, 154], [:spot_all, 154],
+    [:talk, 140, "Juno J1"],                       # J1 on the promenade green, before the gym
+    [:to, 140, 147], [:to, 147, 150], [:to, 150, 154], [:spot_all, 154],   # the Pell Playhouse: lobby, auditorium
+    [:talk, 154, "Curtain rope"], [:talk, 154, "Dorian"],                  # one rope, then Warden Dorian
+    [:arrive, 154],
     [:done]
   ]
   REWIND = PLAN.index([:to, 100, 520])   # after a blackout: walk out of Ferrow's Landing again
-  MAX_BLACKOUTS = 5
+  MAX_BLACKOUTS = (ENV["PLAYBOT_MAX_BLACKOUTS"] || 5).to_i
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
   ROUTE1_PLAN = [[:goto, 520, "Juno tutorial 4"], [:spot_all, 520], [:done]]
   # PLAYBOT_SESSION=checks: real map lines with glyphs the fonts lack, a quest-log line, then every trainer added on

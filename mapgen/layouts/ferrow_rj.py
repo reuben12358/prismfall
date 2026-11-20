@@ -183,11 +183,12 @@ def build(preview=None):
     sea_rocks(m)
     boats(m)
     m.scatter(10, seed=12, on=".T")
+    m.seal_edges([('N', 32, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'] + [(x, y) for x in range(m.W) for y in range(m.H - 12, m.H)])   # map builder 9: only the lane meets the Ferrymen's Mile
     if preview: m.preview(preview, 0.5)
     head = {'id': 100, 'biome': 'village', 'name': "Ferrow's Landing", 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 14, 26], 'BattleBack': 'field'},
             'tone': [6, 2, -10, 0], 'fog': {'name': 'prismfall_seamist', 'opacity': 34, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0},
-            'connections': [{'dir': 'N', 'offset': 28, 'to': 520, 'to_offset': 10}], '_file': '100_ferrows_landing.yaml'}
+            'connections': [{'dir': 'N', 'offset': 28, 'to': 520, 'to_offset': 11}], '_file': '100_ferrows_landing.yaml'}
     m.write(100, head, "# Ferrow's Landing (100). WRITTEN BY layouts/ferrow_rj.py (PF Rejuv) - edit that script.\n")
     print('doors', d)
     return m

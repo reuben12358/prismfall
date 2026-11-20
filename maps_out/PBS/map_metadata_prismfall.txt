@@ -274,8 +274,8 @@ MapPosition = 0,9,10
 Name = The Ferrymen's Mile
 Outdoor = true
 ShowArea = true
-MapPosition = 0,12,17
 BattleBack = field
+MapPosition = 0,12,17
 #-------------------------------
 [521]   # Windfall Row
 Name = Windfall Row

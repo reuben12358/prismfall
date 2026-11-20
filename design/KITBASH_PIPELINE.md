@@ -168,3 +168,6 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   of 2+ px back as dark-brown contours (runs of 5+ tapered), one notch/spur pass only, shades = round(0.68 x pass-3 two-tone +
   0.32 x lock gradient); wreath band and crisp crown arc kept. Previous set in `passes/replaced_p3m_before_quarter/`.
   Taste note: the user steers toward pass 3's shape language; change accepted art in small, reversible steps.
+- **Combined (installed, `16d_juno_hair.png`, `juno_hair_fix.py combined`, files `*_p3c`):** pass 3's hair exactly from the eye
+  line (row 24) down, the step above; at the two seam rows pass-3 lines entering from below stay black and the silhouette follows
+  pass 3, so nothing jumps. Changes are confined to rows 0-23. Previous set in `passes/replaced_p3q_before_combined/`.

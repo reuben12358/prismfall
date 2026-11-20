@@ -163,7 +163,7 @@ def main():
     print('ok')
 
 
-if __name__ == '__main__' and sys.argv[1:2] not in (['middle'], ['quarter']):
+if __name__ == '__main__' and sys.argv[1:2] not in (['middle'], ['quarter'], ['combined']):
     main()
 
 
@@ -272,3 +272,40 @@ def main_quarter():
 
 if __name__ == '__main__' and sys.argv[1:2] == ['quarter']:
     main_quarter()
+
+
+# ---------------------------------------------------------------- combined: pass 3's lower hair + the quarter step's upper hair
+SEAM = 24
+
+
+def combined(e):
+    orig = Image.open(P + '/p3_A_%s_48.png' % e).convert('RGBA')
+    upper = Image.open(P + '/p3q_%s_48.png' % e).convert('RGBA')
+    out = upper.copy(); q = out.load(); po = orig.load(); pu = upper.load()
+    for y in range(SEAM, 48):
+        for x in range(48):
+            q[x, y] = po[x, y]                                # pass 3 exactly below the eye line
+    # seam: where a pass-3 line or outline enters from below, carry it up through the last two rows of the upper part so
+    # strokes don't change colour or jump at the join; outline pixels match pass 3's silhouette in those rows
+    for y in (SEAM - 1, SEAM - 2):
+        for x in range(48):
+            below = q[x, y + 1]
+            if po[x, y] == BLACK and below == BLACK and pu[x, y] in {DARK, BLACK} | set(SH):
+                q[x, y] = BLACK
+            if po[x, y][3] == 0 and pu[x, y][3] and below[3] == 0:
+                q[x, y] = po[x, y]                            # silhouette notch back to pass 3's at the join
+            if po[x, y][3] and pu[x, y][3] == 0:
+                q[x, y] = po[x, y]
+    return out
+
+
+def main_combined():
+    for e in EXPR:
+        m = combined(e)
+        m.save(P + '/p3c_%s_48.png' % e)
+        kb.up(m, 2).save(J + '/JUNO_%s_p3c.png' % e)
+    print('combined ok')
+
+
+if __name__ == '__main__' and sys.argv[1:2] == ['combined']:
+    main_combined()

@@ -332,10 +332,10 @@ def build_520():
     # Hale's Bramble: berry terraces climbing east of the lane (h1-h3), each with a stair
     for (x0, x1, y0, y1, h) in ((36, 58, 36, 58, 2), (40, 58, 36, 51, 3), (44, 58, 36, 45, 4)):
         m.ht[y0:y1 + 1, x0:x1 + 1] = np.maximum(m.ht[y0:y1 + 1, x0:x1 + 1], h)
-    road = [(15, 109), (15, 101), (19, 93), (24, 85), (22, 77), (22, 72), (27, 62), (31, 52), (28, 41), (33, 29), (31, 16), (31, 0)]
+    road = [(16, 109), (16, 101), (19, 93), (24, 85), (22, 77), (22, 72), (27, 62), (31, 52), (28, 41), (33, 29), (31, 16), (31, 0)]
     r.road(road, w=3.0, open_=None)
     r.road([(22, 74), (12, 73), (0, 73)], w=3.0, open_=None)                        # the Hale Bell fork: west to Lacecliff Walk
-    r.exit('S', 14, 4); r.exit('N', 30, 4); r.exit('W', 72, 4)
+    r.exit('S', 15, 4); r.exit('N', 30, 4); r.exit('W', 72, 4)
     for (sx, yl) in ((38, 58), (42, 51), (46, 45)):                                  # terrace stairs
         r.crossing(sx, yl, w=2, rows=3)
     r.lane([(32, 56), (38, 61)], w=2.0, open_=None)
@@ -420,7 +420,7 @@ def build_520():
     flowers(r, 30, 84, 4, 2, p=0.4)
     for y in range(82, 106, 5): water_stamp(r, 'hb_post1', 4, y) if False else None
     h = head(520, "The Ferrymen's Mile", field='MEADOW', bgm='Route 1',
-             connections=[{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
+             connections=[{'dir': 'S', 'offset': 11, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
                           {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],
              fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0}, tone=[4, 4, -4, 0])
     r.write(h, '520_ferrymens_mile.yaml', "# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_early.py - edit that script.\n", '/tmp/rt/520.png' if PREV else None)

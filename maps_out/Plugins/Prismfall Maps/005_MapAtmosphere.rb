@@ -35,7 +35,7 @@ module PrismfallMaps
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
     287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
     295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
-    520 => [4, 6, -8, 0],   # The Ferrymen's Mile
+    520 => [4, 4, -4, 0],   # The Ferrymen's Mile
     521 => [8, 4, -10, 0],   # Windfall Row
     522 => [-18, -22, 26, 70],   # The Glassed Orchard
     524 => [-28, -8, -30, 25],   # Gossamer Wood
@@ -64,6 +64,7 @@ module PrismfallMaps
     140 => ["prismfall_seamist", 0, 30, 0, 100, 2, 0],   # Saltmere
     146 => ["prismfall_seamist", 0, 36, 0, 100, 2, 0],   # Saltmere - Harbour & Breakwater
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
+    520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }

@@ -11,6 +11,9 @@
 #   bash run_playtest.sh route1     # dev shortcut: start on Route 1 after K1, walk into its trainers
 #   bash run_playtest.sh ch1        # resume at Route 1 (state as after K1) and play Chapter 1 to Briarwick
 #   bash run_playtest.sh narrative  # Debug > Prismfall Core > Show Core status (Core's narrative self-check)
+#   bash run_playtest.sh update     # mid-run kit update: package, copy the new kit over the game (as a user would)
+#   bash run_playtest.sh reinstall  # Continue the autosave, Debug > Files > Install Prismfall maps, quit (restart)
+#   bash run_playtest.sh resume     # Continue the autosave and carry on with the plan
 #   bash run_playtest.sh checks     # dev shortcut: glyph lines + quest log + every trainer added 2026-11-17
 #   python3 make_playtest_media.py  # shots + GIF -> docs/playtest/
 #
@@ -51,6 +54,17 @@ PY
   echo "assembled $GAME"
 }
 
+# Mid-run kit update: the same README step 2 copy over the existing game (saves and installed Data stay), new bot
+update() {
+  (cd "$KIT" && bash tools/package.sh)
+  rm -rf "$RUN/playtest_kit"; mkdir -p "$RUN/playtest_kit"
+  (cd "$RUN/playtest_kit" && unzip -q "$KIT/dist/Prismfall_DevKit.zip")
+  K="$RUN/playtest_kit/Prismfall_DevKit"
+  for d in Plugins PBS Data Graphics; do cp -r "$K/$d/." "$GAME/$d/"; done
+  cp "$HERE/meta.txt" "$HERE/001_PlaytestBot.rb" "$GAME/Plugins/ZZ Playtest Bot/"
+  echo "updated $GAME"
+}
+
 # POSIX TZ whose local time is about 13:00 now (POSIX signs are inverted: PLAY5 = UTC-5)
 midday_tz() {
   local off=$(( (13 - 10#$(date -u +%H) + 36) % 24 - 12 ))
@@ -60,16 +74,17 @@ midday_tz() {
 session() {
   [[ "$1" == install ]] && rm -rf "$SAVE_DIR"          # a fresh machine: no saves, no logs
   export PLAYBOT_STATE="$RUN/playtest_resume_state.txt"
-  if [[ "$1" != resume ]]; then                          # resume: Continue from the bot's autosave, keep the output
+  if [[ "$1" != resume && "$1" != reinstall ]]; then                          # resume: Continue from the bot's autosave, keep the output
     rm -f "$SAVE_DIR"/Game*.rxdata "$PLAYBOT_STATE"      # New Game must be the first load-screen entry
     rm -rf "$GAME/Playtest"
   fi
   mkdir -p "$RUN/playtest_out"
-  (cd "$GAME" && PLAYBOT_SESSION="$1" TZ="${PLAY_TZ:-$(midday_tz)}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
+  local sess="$1"; [[ "$1" == reinstall ]] && sess=resume
+  (cd "$GAME" && PLAYBOT_SESSION="$sess" PLAYBOT_REINSTALL="$([[ "$1" == reinstall ]] && echo 1 || echo 0)" TZ="${PLAY_TZ:-$(midday_tz)}" ALSOFT_DRIVERS=null timeout "${TIMEOUT:-2400}" \
      xvfb-run -n "${PLAY_DISPLAY:-147}" -s "-screen 0 1024x768x24" ./mkxp-z.x86_64 debug > "$RUN/playtest_$1_stdout.txt" 2>&1) || true
-  o="$1"; [[ "$1" == resume ]] && o=play; rm -rf "$RUN/playtest_out/$o"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$o" 2>/dev/null || true
-  [[ -f "$SAVE_DIR/errorlog.txt" ]] && cp "$SAVE_DIR/errorlog.txt" "$RUN/playtest_out/$1/" || true
-  grep -E "FATAL|STUCK|bot error|installer|plan done|finished" "$RUN/playtest_out/$1/bot.log" || true
+  o="$1"; [[ "$1" == resume || "$1" == reinstall ]] && o=play; rm -rf "$RUN/playtest_out/$o"; cp -r "$GAME/Playtest" "$RUN/playtest_out/$o" 2>/dev/null || true
+  [[ -f "$SAVE_DIR/errorlog.txt" ]] && cp "$SAVE_DIR/errorlog.txt" "$RUN/playtest_out/$o/" || true
+  grep -E "FATAL|STUCK|bot error|installer|plan done|finished|END OF RUN" "$RUN/playtest_out/$o/bot.log" || true
 }
 
 # Stop only this test copy's engine (other engine runs may share the machine)
@@ -81,7 +96,8 @@ stop() {
 
 case "${1:-}" in
   assemble) assemble ;;
+  update) update ;;
   stop) stop ;;
-  install|play|route1|checks|ch1|resume|narrative) session "$1" ;;
-  *) echo "usage: $0 assemble | install | play | route1 | checks | ch1 | narrative | resume | stop"; exit 1 ;;
+  install|play|route1|checks|ch1|resume|reinstall|narrative) session "$1" ;;
+  *) echo "usage: $0 assemble | update | install | play | route1 | checks | ch1 | narrative | resume | reinstall | stop"; exit 1 ;;
 esac

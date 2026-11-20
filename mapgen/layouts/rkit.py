@@ -692,8 +692,8 @@ class RMap:
                 if ts['passages'][t] & 15 == 15: blocked = True; break
                 if ts['priorities'][t] == 0: break
             if blocked: continue
-            z = 2 if self.L[2, y, x] == 0 else 1
-            if self.L[z, y, x] and z == 1: continue
+            z = 2 if self.L[2, y, x] == 0 else 1                    # under an overhead roof or crown: the filler goes below it
+            if z == 1 and self.L[1, y, x] and self.L[1, y, x] < RC.VBASE: self.L[0, y, x] = self.L[1, y, x] if self.L[0, y, x] == 0 else self.L[0, y, x]
             self.L[z, y, x] = filler; n += 1
         return n
 

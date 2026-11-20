@@ -11,7 +11,7 @@ field: MEADOW
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 200, sx: 1, sy: 0}
 tone: [4, 4, -4, 0]
 connections:
-- {dir: S, offset: 10, to: 100, to_offset: 28}
+- {dir: S, offset: 11, to: 100, to_offset: 28}
 - {dir: N, offset: 30, to: 521, to_offset: 58}
 - {dir: W, offset: 72, to: 527, to_offset: 22}
 raw: data/raw/520.npy
@@ -45,7 +45,7 @@ events:
   pages: *id001
 - type: event
   name: Stile send-off 1
-  at: [15, 99]
+  at: [16, 99]
   pages: &id002
   - commands: []
   - cond:
@@ -77,11 +77,11 @@ events:
           $game_map.need_refresh = true'}
 - type: event
   name: Stile send-off 2
-  at: [16, 99]
+  at: [17, 99]
   pages: *id002
 - type: event
   name: Stile send-off 3
-  at: [18, 98]
+  at: [18, 97]
   pages: *id002
 - type: event
   name: Accord barrier 1
@@ -269,7 +269,7 @@ events:
         chalked: "STRAIT CLOSED." Under that, smaller: "for now"']
 - type: event
   name: Road Stone I
-  at: [19, 106]
+  at: [19, 107]
   pages:
   - trigger: action
     commands: [ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.]
