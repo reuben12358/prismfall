@@ -423,7 +423,7 @@ Weather = Snow,20
 [571]   # Frostwick Pokémon Center
 Name = Frostwick Pokémon Center
 ShowArea = false
-HealingSpot = 570,13,26
+HealingSpot = 570,6,35
 MapPosition = 0,6,12
 #-------------------------------
 [572]   # The Exchange

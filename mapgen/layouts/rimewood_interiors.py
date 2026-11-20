@@ -26,7 +26,7 @@ def main():
     for fx in (2, 10): r.window(fx)
     r.tf('heal', 3, -1); r.tf('counter4', 5, 1); r.tf('tv', 10, -1); r.sf('plantrack', 0, -1); r.sf('plantrack', 12, -1)
     r.rug(4, 3, 5, 3); r.tf('table_tea', 5, 4); r.tf('bench_v', 0, 3); r.tf('bench_v', 12, 3); r.tf('fern_big', 11, 6)
-    s = r.spec(H(571, 'Frostwick Pokémon Center', bgm='Poke Center', metadata={'ShowArea': False, 'HealingSpot': [570, 13, 26]}),
+    s = r.spec(H(571, 'Frostwick Pokémon Center', bgm='Poke Center', metadata={'ShowArea': False, 'HealingSpot': [570, 6, 35]}),
                [talk(r.at(2, 5), 'Local', 'NPC 08', ["Two kingdoms, one nurse. She's the only person in town nobody argues with."])], 'FW_PC')
     s['take_events'] = [{'template': 'pokecenter', 'name': 'Nurse', 'at': r.at(6, 0), 'prepend': SE.NO_MON},
                         {'template': 'pokecenter', 'name': 'Healing balls', 'at': r.at(4, 0)},

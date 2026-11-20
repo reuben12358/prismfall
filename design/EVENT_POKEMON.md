@@ -5,7 +5,7 @@
 > Rules: every event Pokémon carries something its area lacks (a type, ability or move); levels sit just under the cap of its chapter; a knocked-out battle event can be retried (`:on_ko => :retry`) unless stated; boss rewards join at a lower level than the boss; moves are legal (level-up, TM/tutor or egg) except a listed `:special_moves` event move. The headless test checks all of this.
 > **SPINE Revision 16** (`design/DISTRIBUTION_STUDY.md`, `design/warden_gates.json`): the **Badges** column is the fewest badges with which the Pokémon can be obtained (the test recomputes it from the quest unlock, the TALK rows and the scene's own gates). Nothing obtainable with *b* badges is a type answer to Warden *b*+1 or *b*+2 (Dorian: Fighting/Ghost; Tamsin: Fire/Flying/Rock; Marisol: Electric/Grass; Rook: Ground). A spar you can't catch (`:catchable => false`) hands nothing over.
 
-**44 event Pokémon** (22 implemented, the rest designed with data); **9 in Chapters 0–2.**
+**44 event Pokémon** (23 implemented, the rest designed with data); **9 in Chapters 0–2.**
 
 | # | Pokémon | Kind | Ch | Badges | Where (map) | How it plays | Why it's worth having | Quest | Status |
 |---|---|---|---|---|---|---|---|---|---|
@@ -52,4 +52,4 @@
 | 41 | **Hatenna Lv 54 (MAGICBOUNCE)** `AN_HATENNA` | gift | 13 |  | the Antumbra Threshold (743) | Open the umbrella indoors (which is outdoors) | Magic Bounce Hatterene line | It Keeps the Rain In `AN_UMBRELLA` | designed |
 | 42 | **Galarian Yamask Lv 60 (WANDERINGSPIRIT)** `OS_YAMASK` | gift | 14 |  | Vigil (770) | Hold the dead Elector's last election | Galarian Yamask (Ground/Ghost) for Runerigus | The Unquiet Elector `OS_UNQUIET_ELECTOR` | designed |
 | 43 | **Poltchageist Lv 72 (HOSPITALITY)** `NA_POLTCHAGEIST` | gift | 18 |  | the Moon Market, Underveil (423) | Brew Larch's kelp tea for the Sweetrot vendors | Grass/Ghost with Hospitality; pays off running gag 1 | Sweetrot `NA_SWEETROT` | designed |
-| 44 | **Eevee "Prism" Lv 50 (ADAPTABILITY)** `CR_PRISM_EEVEE` | gift | 20 |  | Pilgrim's Rest (890) | Visit all eighteen shrines on the Pilgrim Pass | A shiny 'prism-coated' Eevee for any Eeveelution, after the Octave gauntlet | Eighteen Shrines `CR_EIGHTEEN_SHRINES` | designed |
+| 44 | **Eevee Lv 70 (ADAPTABILITY)** — LASTRESORT, STOREDPOWER, SHADOWBALL, QUICKATTACK `CR_OCTAVE_EEVEE` | gift | 20 |  | the Glassfall Memorial Garden, Crownhaven (489) | Win the Octave's gauntlet: all eight singers in the order you helped them, then Vesper's Eevee | Knows Last Resort for the Eevium Z (Extreme Evoboost) and can still become any Eeveelution | The Eevee Octave `CR_OCTAVE` | implemented |

@@ -727,6 +727,7 @@ def main():
                                 ctx.warn(s['id'], 'event "%s" transfers outside map %d' % (ev.name, tm))
     ctx.arrival_bad = check_arrivals(selected, specs, ctx)
     ctx.seam_bad = check_seams(specs, ctx)
+    ctx.spot_bad = check_spots(specs, ctx)
     # trainers referenced by events -> list for the trainer-data owner
     need = set()
     for s in selected:
@@ -756,6 +757,63 @@ def main():
         sys.exit('--strict: %d edge tiles that lead onto blocked ground across a map connection (see SEAM warnings)' % ctx.seam_bad)
     if '--strict' in sys.argv and getattr(ctx, 'slab_bad', 0):
         sys.exit('--strict: %d old slab-stair tiles (see OLD SLAB STAIRS warnings)' % ctx.slab_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'spot_bad', 0):
+        sys.exit('--strict: %d HealingSpot / fly spot problem(s) (see SPOT warnings)' % ctx.spot_bad)
+
+
+def check_spots(specs, ctx):
+    """map builder 10 (REQUESTS cartographer item 7): every HealingSpot (map metadata: where blacking out and Fly put the
+    player) and every fly point of pbs/town_map.txt must land on a passable tile that no solid event covers, and from
+    that tile the player must be able to walk to a way out (a transfer event or an open edge of a connected side).
+    Returns the number of problems; each is a SPOT warning."""
+    import render as R
+    by_id = {s['id']: s for s in specs}
+    spots = []
+    for s in specs:
+        hs = (s.get('metadata') or {}).get('HealingSpot')
+        if hs: spots.append(('HealingSpot of %d %s' % (s['id'], s.get('name', '')), s['id'], tuple(int(v) for v in hs)))
+    tm = os.path.join(os.path.dirname(HERE), 'pbs', 'town_map.txt')
+    if os.path.exists(tm):
+        for line in open(tm, encoding='utf-8'):
+            if not line.startswith('Point'): continue
+            f = [v.strip() for v in line.split('=', 1)[1].split(',')]
+            if len(f) >= 7 and f[4] and f[5] and f[6]:
+                spots.append(('fly spot "%s"' % f[2], None, (int(f[4]), int(f[5]), int(f[6]))))
+    cache = {}
+    bad = 0
+    for what, owner, (mid, x, y) in spots:
+        if mid not in by_id: continue
+        p = os.path.join(OUT, 'Data', 'Map%03d.rxdata' % mid)
+        if not os.path.exists(p): continue
+        if mid not in cache:
+            m = M.load_file(p); ts = R.tilesets()[m.tileset_id]; lay = m.data.data
+            solid = {(e.x, e.y) for e in m.events.values() if (e.pages[0].graphic.character_name or e.pages[0].graphic.tile_id) and not e.pages[0].through}
+            ok = np.array([[cell_passable(lay, ts, xx, yy) and (xx, yy) not in solid for xx in range(m.width)] for yy in range(m.height)])
+            exits = {(e.x, e.y) for e in m.events.values() if any(c.code == 201 for pg in e.pages for c in pg.list)}
+            sides = {c['dir'][0].upper() for c in by_id[mid].get('connections', []) or []}
+            for c in (s for s in specs if any(cc.get('to') == mid for cc in s.get('connections', []) or [])):
+                for cc in c.get('connections', []):
+                    if cc.get('to') == mid: sides.add({'N': 'S', 'S': 'N', 'W': 'E', 'E': 'W'}[cc['dir'][0].upper()])
+            cache[mid] = (m, ok, exits, sides)
+        m, ok, exits, sides = cache[mid]
+        tag = owner if owner is not None else mid
+        if not (0 <= x < m.width and 0 <= y < m.height) or not ok[y, x]:
+            ctx.warn(tag, 'SPOT: %s lands on map %d (%d,%d), a blocked or covered tile' % (what, mid, x, y)); bad += 1; continue
+        seen = np.zeros_like(ok); st = [(x, y)]; out = False
+        while st and not out:
+            cx, cy = st.pop()
+            if seen[cy, cx]: continue
+            seen[cy, cx] = True
+            if ((cx == 0 and 'W' in sides) or (cx == m.width - 1 and 'E' in sides) or (cy == 0 and 'N' in sides)
+                    or (cy == m.height - 1 and 'S' in sides)):
+                out = True; break
+            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                nx, ny = cx + dx, cy + dy
+                if (nx, ny) in exits: out = True; break
+                if 0 <= nx < m.width and 0 <= ny < m.height and ok[ny, nx] and not seen[ny, nx]: st.append((nx, ny))
+        if not out:
+            ctx.warn(tag, 'SPOT: %s on map %d (%d,%d) is boxed in: no door, warp or open edge can be walked to' % (what, mid, x, y)); bad += 1
+    return bad
 
 
 def check_arrivals(selected, specs, ctx):

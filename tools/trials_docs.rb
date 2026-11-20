@@ -90,6 +90,22 @@ def render(list, depth, out)
           out << "#{pad}  - on #{k}:"
           render(e[k], depth + 2, out)
         end
+      elsif e[:octave_help]
+        out << "#{pad}- [the Octave remembers that you helped #{e[:octave_help].to_s.capitalize}: the gauntlet order]"
+      elsif e[:octave_gauntlet]
+        out << "#{pad}- [gauntlet, no healing: the eight singers (`OCTAVE_SINGER` v60) in the order you helped them, " \
+               "each on their Eeveelution's home field, each using its Z-move -> `OCTAVE_VESPER` Vesper (v60), Eevee with the Eevium Z, on `:GRAND_STAGE`]"
+        [:won, :lost].each do |k|
+          next if !e[k] || e[k].empty?
+          out << "#{pad}  - on #{k}:"
+          render(e[k], depth + 2, out)
+        end
+      elsif e[:octave_verses]
+        out << "#{pad}- [for each singer you helped, in that order:]"
+        e[:octave_verses].each do |sid, entry|
+          out << "#{pad}  - #{sid.to_s.capitalize}:"
+          render([entry], depth + 2, out)
+        end
       elsif e[:accept]       then out << "#{pad}- [quest accepted]"
       elsif e.key?(:step)    then out << "#{pad}- [quest step: #{e[:step]}]"
       elsif e.key?(:complete) then out << "#{pad}- [quest complete#{e[:complete] == true ? '' : ": #{e[:complete]}"}]"
@@ -167,7 +183,7 @@ TR::TRIALS.each do |t, td|
            "#{'★' * (q[:rank] || 1)} · #{q[:rec_level]} | #{esc(what)} | #{esc(rewards(q))} | #{esc(q[:touches])} | #{q[:stub] ? 'designed' : 'wired'} |"
   end
 end
-out << "" << "## Part 2. Full scripts of the wired quests (Chapters 1–4)" << ""
+out << "" << "## Part 2. Full scripts of the wired quests (Chapters 1–4, and the Eevee Octave across the game)" << ""
 out << "Conventions: *italics* = narration box; **Name** _(expression)_ = a line under a portrait bubble (`pf_say`);"
 out << "[stage] = what the map event shows (the map builder stages it); [if ...] = a `Prismfall::Conditions` check; `> option` = a choice."
 TR::TRIALS.each_key do |t|

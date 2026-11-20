@@ -25,8 +25,8 @@ DY = 12
 MASK2 = ['..kkkkk..',
          '.kmMmmmk.',
          'kmmmMmmmk',
-         'kNkkmkkNk',
-         'kmkkmkkmk',
+         'kNNNmNNNk',
+         'kmNkmkNmk',
          'kmmNmmmmk',
          '.kmmMmmk.',
          '.kmNkNmk.',
@@ -56,7 +56,7 @@ def parts():
     t = s9.donor_img('B:trevenant')
     crown = t.crop((30, 0, 72, 21))
     crown = mat.erase(crown, mat.colour_mask(crown, GREENS))
-    crown = mat.recolour(mat.drop_specks(mat.clean_orphans(crown), 6), DEAD)
+    crown = mat.recolour(mat.drop_specks(mat.clean_orphans(crown), 14), DEAD)
     crown = mat.outline_outer(crown, BLACK)
     roots = t.crop((16, 48, 80, 77))
     roots = mat.erase(roots, mat.colour_mask(roots, GREENS))
@@ -66,13 +66,15 @@ def parts():
 
 
 def build(var='C'):
+    if var == 'A':
+        return m1.build('A')
     a = m1.build('A')
     # rebuild the head with the smaller curved mask: pass-1's mask area -> cowl shadow first
     p = a.load()
     for y in range(4, 18):
         for x in range(34, 45):
             if p[x, y][3]:
-                p[x, y] = C['r5']
+                p[x, y] = C['r3']
     a = mat.paste(a, mask2(), 35, 6)
     # the figure down DY px, its lowest rows (sandals, white under-robe) cut
     body = Image.new('RGBA', a.size, CLEAR)

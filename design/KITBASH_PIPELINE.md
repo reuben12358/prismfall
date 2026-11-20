@@ -233,3 +233,17 @@ Sheet: `art/previews/22_player.png`. Scripts: `player.py` (fronts A1 A2 B1 B2), 
 - **Charsets:** the base FRLG charsets share one animation template, so heads (rows 0-14) and bodies (15-23) splice cell by cell.
   RIVAL1's spikes read as Blue: avoid. A long-hair head hides a back-worn bag in the up row: draw the bag on top.
 - **Watch:** grey-ash hair can read as elderly at 16 px.
+
+## 15. Thistle, the Mourner, Vesper (2026-11-19)
+
+Recipes `thistle.py`, `mourner.py` + `mourner_p2.py`, `vesper.py` + `vesper_p2.py` (all `sheet_cast.py` modules). Sheets 23, 24, 24b,
+25, 25b. Nothing installed; exports in `art/work/kitbash/<name>/`.
+- **Hood grafts:** the Pearl Clan member's hood (cloth only, face pixels and the visor band cut, embroidery painted out) wraps
+  round another donor's own face; fill the gaps inside with a cowl shadow. Used light for Thistle, darker for the Mourner.
+- **Trevenant as a parts bin:** lower-trunk bark = mask surface; the two antler branches (leaves cut) = a crown that changes the
+  whole silhouette; the root legs = a hem running into roots (they can read as creature legs: judge at 1x). A head at the top of
+  the frame leaves no room for a crown: move the figure down and let the roots replace the lost hem.
+- **Masks:** a square mask with a frown read as No-Face; small and curved with deep eye hollows read as a skull until the cowl
+  interior was lightened and the hollows made dark bark instead of black.
+- **Thin coloured strands** (Vesper's ribbons): 1-px lines side by side read as a rainbow flag; 2-px ribbons with a dark gap,
+  spread at both ends, read as separate ribbons. A kneeling base costs a third of the height: wrong for a host who needs presence.

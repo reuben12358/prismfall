@@ -241,10 +241,9 @@ tr.quest(:ZE_OCTAVE_OFF_BEAT, {
           ["Not tonight.", [[:CADENCE, :deadpan, "Nobody's ever free tonight. That's why it's always tonight."]]]] }
     ],
     :junction => [
-      { :map => "A brass Lattice junction box, humming. A dial on the front ticks in fours." },
-      { :choice => "Set the dial to...", :options => [
-          ["A three-count.", [{ :count => [:shifted, 1] }, "The hum stumbles and finds a new, lopsided rhythm. Snare's fur settles a little."]],
-          ["Leave it on four.", ["You leave it. The hum keeps time with Cadence's drumming, perfectly."]]] },
+      { :map => "A brass Lattice junction box, humming. A dial on the front ticks in fours, exactly in time with Cadence's drumming." },
+      "You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.",
+      { :count => [:shifted, 1] },
       { :if => "quest_count(:SELF, :shifted) >= 3", :then => [
           { :map => "Cadence plays a long roll. Snare crackles. The streetlamps stay on." },
           [:CADENCE, :happy, "Ha. Listen to that. It's terrible. It's the best thing I've ever heard."],

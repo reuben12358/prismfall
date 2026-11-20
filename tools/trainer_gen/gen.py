@@ -209,10 +209,11 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
       hard={"item": "EVIOLITE"}),
 ])
 warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. Take the badge before I change my mind.", [
-    # Water Surface already switches Swift Swim on and gives Water x1.5, so Standard and Casual drop Drizzle (rain on top
-    # of the field made Water Pulse a one-hit KO at Gym 3). Hard keeps Drizzle + Damp Rock: rain lasts 8+3 turns here.
-    # Standard is tuned down for an approachable Gym 3 (harness: realistic teams lost 29/30): neutral natures, the
-    # openers two levels under the cap, Water Gun on Pelipper. Water x1.5 on the field still makes every hit count.
+    # Water Surface already switches Swift Swim on and gives Water x1.5, so no mode brings Drizzle (rain on top of the
+    # field made Water Pulse a one-hit KO at Gym 3, and Hard's Drizzle Pelipper swept prepared teams).
+    # Standard (reference calibration, BALANCE 1b): four Pokemon at cap-4 .. cap, neutral natures, Water Gun on Pelipper,
+    # no Dive loop. Water x1.5 on the field still makes every hit count. Grass is common before her and blunted (R3):
+    # Pelipper's Flying moves, Chinchou's Spark (Water/Electric, neutral to Grass) and Lucky hold it.
     P("PELIPPER", 19, "KEENEYE", "ORANBERRY", "HARDY", "WATERGUN,WINGATTACK,SUPERSONIC,PROTECT", "BS",
       hard={"item": "SITRUSBERRY", "nat": "MODEST", "moves": "WATERPULSE,WINGATTACK,ROOST,TAILWIND"}),
     # Volt Absorb punishes the Electric answer; its own Spark is x1.5 against grounded targets. Elemental Seed: +1 Speed, Aqua Ring.
@@ -220,8 +221,8 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     # Volt Absorb still punishes the Electric answer, and its Spark is x1.5 against grounded targets. Hard: Lanturn
     # with the Elemental Seed (+1 Speed, Aqua Ring).
     P("CHINCHOU", 20, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
-      only="nocasual", hard={"sp": "LANTURN", "item": "ELEMENTALSEED", "nat": "MODEST",
-                             "moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),
+      only="nocasual", hard={"sp": "LANTURN", "item": "SITRUSBERRY", "nat": "MODEST",
+                             "moves": "BUBBLEBEAM,SPARK,CONFUSERAY,THUNDERWAVE"}),
     # Hard only. Water Absorb, not Water Bubble: Water Bubble Liquidation on Water Surface OHKO'd prepared teams
     # (122 knockouts in 60 fights). Water Absorb heals it on the field instead.
     P("ARAQUANID", 22, "WATERABSORB", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
@@ -229,7 +230,7 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     # The swimmer: Swift Swim is on without rain here (x2 Speed). Standard brings the Buizel (a Lv 20 Floatzel took
     # 63 knockouts in 60 realistic fights with Water Pulse alone); Hard brings the Floatzel.
     P("BUIZEL", 20, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
-      hard={"sp": "FLOATZEL", "moves": "AQUAJET,WATERPULSE,CRUNCH,ICEFANG", "nat": "NAIVE"}),
+      hard={"sp": "FLOATZEL", "moves": "AQUAJET,WATERPULSE,BITE,QUICKATTACK", "nat": "NAIVE"}),
     # Transition play (Hard): Dive drags the fight Underwater (x1.3 strike), "a current that changes direction mid-fight".
     # On Standard the Dive is gone: each Dive surfaces again with a second transform strike, so the AI looped it
     # (Water x1.5, Dive x1.5 / x1.3, strike x1.3, STAB) and it OHKO'd full-HP neutral targets every other turn - 103

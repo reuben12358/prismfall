@@ -435,3 +435,7 @@ tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Reh
     north (teach), and a short one-way run between two loops (twist). The runtime is ready: an event with the charset
     `pf_silk_curtain` (rows: down = leans S, left = W, right = E, up = N; `dir_fix`), trigger touch, script
     `pfp_silk("N", 0)`. Send me the coordinates and I'll add them to the proof.
+20. **548 Cocoonfall Hollow (D3 anchors):** the puzzle is proven (`dungeons.py` d3: start a and b taut, parity) but the
+    crater floor has no glass ravine for its three crystal bridges. If you give the hamlet a ravine to the north with three
+    1-wide crossings (to the NE cocoon-house, the NW Shard house and the Matriarch's nest), I'll lay the anchors and bridge
+    events over it the same way as 525 and 562.

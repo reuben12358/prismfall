@@ -444,11 +444,12 @@ stub.call(:AN_SHIV, {
 #===============================================================================
 stub.call(:CR_EIGHTEEN_SHRINES, {
   :trial => :CROWNHAVEN, :title => "Eighteen Shrines", :giver => "the Pilgrim's Rest keeper", :map => 890, :where => "Pilgrim's Rest",
-  :rank => 1, :points => 4, :rec_level => 85, :chapter => 20, :unlock => "badges >= 18", :tags => [:pilgrimage, :event_mon],
+  :rank => 1, :points => 4, :rec_level => 85, :chapter => 20, :unlock => "badges >= 18", :tags => [:pilgrimage],
   :summary => "Eighteen roadside shrines on the Pilgrim Pass, one per Plate. Ashkaar charges a toll at six of them.",
   :steps => { :ask => "Visit all eighteen shrines on the Pilgrim Pass.", :crown => "Report to the shrine-keeper at the Crown gate." },
-  :reward => { :pokemon => :CR_PRISM_EEVEE }, :touches => "Ashkaar tolls (pay, fight or talk); WORLD 'Eighteen Shrines'",
-  :design => "Each shrine asks one line of the counting rhyme; the eighteenth asks for the line nobody sings ('...and one that no one counted'). The keeper's prism-coated Eevee follows you down the Pass."
+  :reward => { :items => [[:FIRESTONE, 1], [:WATERSTONE, 1], [:THUNDERSTONE, 1], [:LEAFSTONE, 1], [:ICESTONE, 1]] },
+  :touches => "Ashkaar tolls (pay, fight or talk); WORLD 'Eighteen Shrines'",
+  :design => "Each shrine asks one line of the counting rhyme; the eighteenth asks for the line nobody sings ('...and one that no one counted'). The keeper gives you the five Imprint stones the shrines kept (the Octave's Eevee, SPINE Rev 19, replaced the old 'Prism' Eevee here)."
 })
 stub.call(:CR_LOST_PROPERTY, {
   :trial => :CROWNHAVEN, :title => "Lost Property", :giver => "the lost-property clerk", :map => 499, :where => "the Court of Eight Pavilions",

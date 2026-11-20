@@ -91,6 +91,11 @@ later.call(:AN_HATENNA, { :species => :HATENNA, :level => 54, :ability => :MAGIC
   :why => "Magic Bounce Hatterene line" })
 
 #--- Crownhaven ------------------------------------------------------------------------
-later.call(:CR_PRISM_EEVEE, { :species => :EEVEE, :level => 50, :shiny => true, :ability => :ADAPTABILITY, :nickname => "Prism", :kind => :gift, :chapter => 20,
-  :map => 890, :where => "Pilgrim's Rest", :quest => :CR_EIGHTEEN_SHRINES, :trigger => "Visit all eighteen shrines on the Pilgrim Pass",
-  :why => "A shiny 'prism-coated' Eevee for any Eeveelution, after the Octave gauntlet" })
+# The Eevee Octave's thanks (SPINE Rev 19; 113_Quests_Octave.rb, implemented): given with the Eevium Z and the Z-Power Ring.
+# It replaces the Eighteen Shrines' "Prism" Eevee (one Eevee gift in Crownhaven, not two).
+em.register(:CR_OCTAVE_EEVEE, { :species => :EEVEE, :level => 70, :ability => :ADAPTABILITY, :kind => :gift, :chapter => 20,
+  :moves => [:LASTRESORT, :STOREDPOWER, :SHADOWBALL, :QUICKATTACK], :happiness => 160,
+  :obtain_text => "Vesper gives you an Eevee born in the Glassfall Memorial Garden.",
+  :map => 489, :where => "the Glassfall Memorial Garden, Crownhaven", :quest => :CR_OCTAVE,
+  :trigger => "Win the Octave's gauntlet: all eight singers in the order you helped them, then Vesper's Eevee",
+  :why => "Knows Last Resort for the Eevium Z (Extreme Evoboost) and can still become any Eeveelution" })

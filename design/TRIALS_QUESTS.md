@@ -5,18 +5,18 @@
 > Map IDs are current `maps.json` IDs (names change; IDs don't). Chapters and order follow SPINE Revision 14.
 > **Status:** *wired* = scenes written and testable (map events in `design/TRIAL_EVENTS.yaml`); *designed* = `:stub`, off the boards until wired.
 
-**80 quests** (22 wired, 58 designed) across 8 Trials.
+**89 quests** (31 wired, 58 designed) across 8 Trials.
 
 | Trial | Quests | Wired |
 |---|---|---|
-| The Quiet Way (Elowen) | 19 | 14 |
-| The Tally (Isenmar) | 10 | 4 |
-| The Prize Exchange (Zenith) | 9 | 3 |
-| The Gutter Book (Nadir) | 9 | 0 |
-| The Trial by Flames (Ashkaar) | 9 | 1 |
-| The Rolls of Unearthing (Ossaria) | 8 | 0 |
-| The Rite of Reflection (Antumbra) | 8 | 0 |
-| The Hall of Petitions (Crownhaven) | 8 | 0 |
+| The Quiet Way (Elowen) | 20 | 15 |
+| The Tally (Isenmar) | 11 | 5 |
+| The Prize Exchange (Zenith) | 10 | 4 |
+| The Gutter Book (Nadir) | 10 | 1 |
+| The Trial by Flames (Ashkaar) | 10 | 2 |
+| The Rolls of Unearthing (Ossaria) | 9 | 1 |
+| The Rite of Reflection (Antumbra) | 9 | 1 |
+| The Hall of Petitions (Crownhaven) | 10 | 2 |
 
 ## Part 1. Catalogue
 
@@ -37,6 +37,7 @@
 | **Three Loyal, Three Knots** `EL_THREE_KNOTS` | 3 | `badges >= 1` | Mother Aldreth · the Briarwick Lantern House (120) | ★ · 16 | A pilgrimage: re-tie the silk knots at the three wayshrines of the Loyal Three, and answer what each shrine asks. | MAGICALSEED x2; +3 pts | Lore seed for the Loyal Three / Ogerpon arc (story/04_ACT_I, Elowen legendary arc) | wired |
 | **The Horn and the Pincer** `EL_HORN_AND_PINCER` | 3 | `badges >= 2` | the lantern rope (no one signed it) · the sap tree on the old trail, Gossamer Wood (524) | ★ · 19 | Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week. | HONEY x2; +2 pts | none; the one you help clears a shortcut (Heracross tears a silk wall, Pinsir crushes a log) | wired |
 | **The Silkthief** `EL_SILKTHIEF` | 3 | `badges >= 2` | Hett · the Weavers' Guildhall (123) | ★★ · 20 | Somebody is stealing finished silk straight off the drying racks at night. Hett has a theory, and it has eight legs. | $800; guardian: SILVERPOWDER, RES+1; +3 pts | Resonance (Harmony +1 if you leave the Spidops guarding the moths); Briarwick's moth tally board | wired |
+| **The Moss Hymn** `EL_OCTAVE_MOSS` | 3 | `badges >= 1` | Lyra of the Octave · under the Lantern House tree, Briarwick; the moss-stone in Gossamer Wood (524) (120) | ★ · 18 | A singer of the Octave has been singing to her Eevee for three days. It will not come down from the moss-stone in Gossamer Wood. | $800, BIGROOT; +3 pts | The Octave: Lyra (1 of 8 in gym order) | wired |
 | **Someone Apologising to Bugs** `EL_SHELLY` | 3 | `badges >= 2` | Mother Aldreth · the Briarwick Lantern House (120) | ★★ · 21 | A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy. **Twist:** Board pointer to CAMEOS.md 'Lost in the Gossamer'. The cameo event calls Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true) and then pf_quest_complete(:EL_SHELLY). Moved from 'after Gym 1' to 'after Gym 2' by SPINE Rev 14. | SILVERPOWDER; +3 pts | Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1 | designed |
 | **The Rehearsal** `EL_REHEARSAL` | 4 | `badges >= 2` | Sister Maelon · the Half-Tally, Frostwick (573) | ★★ · 20 | Off the Frostflat Causeway, a stretch of road replays five seconds of a wagon crash, over and over. Something out there is practising a tragedy. | SPELLTAG; +3 pts | Resonance (Harmony +1) | wired |
 | **Gerald** `EL_GERALD` | 10 | `badges >= 8 && switch(126)` | the Queen's Keeper of Small Creatures · the Royal Chase (682) | ★★★ · 44 | Queen Maelis's named Scatterbugs have escaped into the Royal Chase. Each one has a personality file. Gerald's is four pages long. **Twist:** Six hide-and-seek finds, each solved by reading its file (Doris likes warm stones, Percival hates the colour blue...). Gerald hides inside the Queen's own crown on its stand in the hunting lodge. Reward: Gerald, a Fancy-pattern Scatterbug. | SHINYSTONE, Scatterbug "Gerald" Lv 40 (COMPOUNDEYES); +3 pts | Elowen Crown favour (flavour); Queen Maelis comedy (15_COMEDY 'The Royal We') | designed |
@@ -52,6 +53,7 @@
 | **The Oathbound Parcel** `IS_OATH_PARCEL` | 4 | `badges >= 2` | Ingrith · the Half-Tally, Frostwick (573) | ★ · 17 | Carry a sealed oath-parcel from Frostwick to the Net Loft in Ebbmouth. In Isenmar a carried oath is not opened. Not ever. | $500; +3 pts | Isenmar 'oath' flavour: opening it costs a Trial point and earns you a very rude verse | wired |
 | **A Deed for the Skald** `IS_SKALDS_SAGA` | 4 | `badges >= 2` | Bersi Gullsong · the Ebbmouth Net Loft (160) | ★ · 19 | The Ebb Guild feast is tonight and Bersi has no new saga. He needs a deed. Any deed. He'll handle the exaggerating. | MYSTICWATER; bully: MARISOL+1; tall_tale: POTION; +2 pts | Marisol bond (+1 for flattening Gorm, who she can't touch because he's Guild) | wired |
 | **The Egg Thief of Gullcry** `IS_EGG_THIEF` | 4 | `badges >= 3` | Old Asta · the egg-gatherers' hut on the Gullcry Cliffs (561) | ★★ · 24 | Something is taking eggs off the Gullcry ledges. Old Asta wants it stopped. Then she wants it stopped harder. | $1000; let_go: EXPCANDYM x2, RES+1; +3 pts | Resonance (Harmony +1 if you let the Bombirdier keep its route) | wired |
+| **The Drowned Note** `IS_OCTAVE_DROWNED_NOTE` | 4 | `badges >= 2` | Aria of the Octave · the river steps, Ebbmouth; the Mill Quay wheel (167) (160) | ★ · 22 | A singer's Vaporeon melted into the Ebb when the river stuttered and hasn't come out. She can still hear it, sometimes. | $1200, SHELLBELL; +3 pts | The Octave: Aria (2 of 8 in gym order); a verse on the Tally Mast | wired |
 | **The White Stag** `IS_WHITE_STAG` | 11 | `badges >= 9` | the lodge-keeper · Snowbriar (710) | ★★ · 48 | A white stag has been seen in the royal hunting woods. Elowen law says it's the Crown's. The trappers say it's nobody's. **Twist:** Four-sighting chase in deep snow; it only appears at dawn. At the end: battle and catch (EVENT IS_WHITE_STAG), report it to the Crown's lodge (Elowen points), or let the trappers' children see it once and let it go (Harmony). | $4000; +3 pts | Elowen vs Isenmar clan rights (WORLD.md 'The White Stag'); Thane's standing flavour | designed |
 | **The Harpoon Rite** `IS_HARPOON_RITE` | 11 | `badges >= 9` | Old Halla Brinesdottir · the Great Tally, Rimeholt (306) | ★★★ · 50 | Every Harpooner earns the rank by facing the Old Bull on the ice. The Old Bull is a Cetitan. It has never once been harpooned. **Twist:** Boss Cetitan (3 bars) on :FROZEN_LAKE; the field cracks to :WATER_SURFACE at bar 2. Nobody harpoons it: the rite is to stand your ground. Win and it slaps the ice twice and swims under you (no catch). The calf that follows it out joins you (EVENT IS_CETODDLE). | NEVERMELTICE; +4 pts | Before the Thaw only (expires on S128 CH11_THAW) | designed |
 | **Eleven Years at One Hole** `IS_ELEVEN_YEARS` | 11 | `badges >= 9` | Old Torstein · the ice-fishing flats, Rimeholt (300) | ★ · 47 | Old Torstein has fished one ice-hole for eleven years waiting for a single bite. He has not noticed he is sitting on an Avalugg. **Twist:** You fish his hole; a Tatsugiri has been nibbling the bait for eleven years without ever taking the hook. When Torstein stands up to cheer, his 'seat' stands up too. 'How long has that been there?' 'About eleven years, sir.' Reward: the Tatsugiri. | Tatsugiri Lv 48 (COMMANDER); +2 pts | 15_COMEDY Isenmar bit | designed |
@@ -66,6 +68,7 @@
 | **Form 7-B** `ZE_FORM_7B` | 1 | `switch(103)` | Grant Kiosk P-3NNY · the Quarantine Customs Hall, Ferrow's Landing (108) | ★ · 5 | CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $500. | disposed: $500, MERIDIAN+1; adopted: POTION x2; +2 pts | Meridian standing (+1 if you sign the disposal form); the Charcadet is collected after Badge 2 | wired |
 | **Field Survey: Coastal** `ZE_FIELD_SURVEY` | 2 | `switch(103)` | Grant Kiosk P-3NNY · any P-3NNY kiosk (Ferrow's Landing, Saltmere, Ebbmouth) (108) | ★ · 10 | CALL FOR PROPOSALS #0002: RECORD BATTLES ON THREE (3) DIFFERENT FIELDS. DATA IS THE CURRENCY OF THE FUTURE. SO IS CURRENCY. | EXPCANDYS x3; +2 pts | Field Notes (fields_seen) | wired |
 | **The Lattice Hums Wrong** `ZE_LATTICE_HUM` | 4 | `badges >= 2` | Grant Kiosk P-3NNY/2 · the tidal Lattice station, Ebbmouth (160) | ★ · 20 | CALL FOR PROPOSALS #0003: ACOUSTIC SURVEY OF THE EBBMOUTH TIDAL LATTICE DURING 'STUTTER EVENTS'. RECORDER PROVIDED. | $300; meridian: $1500, MERIDIAN+1; guild: MARISOL+1; larch: EXPCANDYS x2; +3 pts | Meridian standing or Marisol bond, depending on who gets the recordings (foreshadows Larch's tide data in Ch4) | wired |
+| **Off the Beat** `ZE_OCTAVE_OFF_BEAT` | 5 | `badges >= 3` | Grant Kiosk P-3NNY / Cadence of the Octave · the Lowlight steps, Lumen City (181) | ★ · 26 | CALL FOR PROPOSALS #0031: NOISE COMPLIANCE, LOWLIGHT BLOCK 9. A STREET DRUMMER'S JOLTEON BLACKS OUT THE BLOCK. BOUNTY: $800. | $800, CELLBATTERY x2; unknown: RES+1; fault: $800, MERIDIAN+1; +3 pts | The Octave: Cadence (3 of 8 in gym order); Meridian standing if you file it as a Lattice fault | wired |
 | **Customer Support** `ZE_CUSTOMER_SUPPORT` | 5 | `badges >= 3` | Helpdesk Rotom · Meridian Spire lobby, Lumen City (185) | ★ · 24 | Walk a form through nine offices. The form is to cancel the form. **Twist:** Each office wants a different stamp first (circular dependency the player has to break by noticing office 4 has two doors). When the form is finally cancelled, it cancels itself out of existence. What's left on the desk is a Porygon, who was the form all along. | Porygon Lv 24 (DOWNLOAD); +3 pts | 15_COMEDY Zenith bit 'Customer Support' | designed |
 | **The Machine Wants Compliments** `ZE_FIZZBOLT` | 5 | `badges >= 3` | a Fizzbolt vending machine · Lumen City Concourse (180) | ★ · 24 | A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it. **Twist:** Five compliments across five visits; each needs a fresh one (choice lists rotate). Repeat a compliment and it sulks for a day. On the fifth it dispenses everything at once and a Rotom flies out to thank you, then back in. | CELLBATTERY; +2 pts | none | designed |
 | **Product Recall** `ZE_ROTOM_RECALL` | 5 | `badges >= 3` | the Lumen Arcade floor manager · Lumen Arcade Dept. Store (183) | ★★ · 26 | Five display appliances have walked off the shop floor. They were not supposed to be able to walk. **Twist:** A hide-and-seek in the department store; each appliance (fan, mower, fridge, washer, oven) dashes between counters when you look away. Reward: a voucher the Sluiceworks Rotom can use to change form at the Arcade. | EXPCANDYM x2; +3 pts | Teaches Rotom forms before the Sluiceworks Rotom | designed |
@@ -77,6 +80,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
+| **Lamps Out** `NA_OCTAVE_LAMPS_OUT` | 7 | `badges >= 5` | Six-Fingers Ottoline (chalk job) / the marsh ferryman · the ferry steps on the runoff marsh, Mirefen (at night) (220) | ★ · 34 | Chalk job: someone keeps putting out the night-ferry lamps on the marsh. The ferrymen pay a cut to whoever stops it. | $1000, DUSKBALL x5; truth: $1000; covered: HOLLOW+1; +3 pts | The Octave: Noct (5 of 8 in gym order); the Gutter Book takes its cut either way | wired |
 | **Clean Water** `NA_CLEAN_WATER` | 7 | `badges >= 5` | a char-burner · Charwell (630) | ★ · 32 | Ossarian bone-char filters clean Nadir's poison. Someone is skimming the filter carts. Find who, then decide who you tell. **Twist:** The skimmer is a sump-folk grandmother selling filters to families the cart route skips. Tell Meridian (MERIDIAN+1), tell the Hollow (HOLLOW+1), or reroute the carts yourself (a puzzle on the canal locks; Harmony). | $3000; +3 pts | Hollow vs Meridian standing (WORLD 'Clean Water') | designed |
 | **A Five Out of Ten** `NA_NOODLE_SCORE` | 7 | `badges >= 5` | the noodle-cart cook · Mirefen (220) | ★ · 32 | Mirefen's noodle cart rates its customers out of ten. Nobody has scored above a four. Corvin has a two and comes daily. **Twist:** The score isn't about manners: it's about whether you notice the cook's Alolan Grimer cleaning the pots. Thank the Grimer and you get a five (the first ever). The cook, overcome, gives you one of its babies. Corvin demands a recount. | Alolan Grimer Lv 30 (POISONTOUCH); +2 pts | 15_COMEDY Nadir bit; Corvin (Ch7) | designed |
 | **Sewer Royalty** `NA_VENAM` | 7 | `badges >= 6 && switch(118)` | Six-Fingers Ottoline · the Miasma Caverns under Mirefen (644) | ★★ · 38 | Somebody has crowned herself queen of the Miasma Caverns. Ottoline wants to know who's charging tolls on her sumps. **Twist:** Board pointer for the Venam cameo; her event completes the quest. | BLACKSLUDGE; +3 pts | CAMEOS.md #2 'Sewer Royalty' (FESTIVAL_VENAM) | designed |
@@ -92,6 +96,7 @@
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
 | **The Little Crucible** `AS_LITTLE_CRUCIBLE` | 4 | `badges >= 2` | Sergeant Brakka Emberhide · the Legion recruiting barge, Saltmere harbour (146) | ★ · 21 | WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less. | $1200, QUICKCLAW; +3 pts | Ashkaar flavour: honesty is law; signing up (flag :recruited) changes how later Legion NPCs greet you | wired |
+| **Too Loud for the Choir** `AS_OCTAVE_TOO_LOUD` | 8 | `badges >= 6` | Forte of the Octave · the Crucible on the caldera rim, Cindervault (240) | ★ · 38 | Writ of Flame: a Choir singer wants a Writ. The Crucible will hear her if she brings a second. | $2000, HEATROCK; +3 pts | The Octave: Forte (6 of 8 in gym order); Ashkaar honesty (she must say who she is) | wired |
 | **Seven Bouts** `AS_SEVEN_BOUTS` | 8 | `badges >= 6` | Legate Varra Kosk · the Crucible, Cindervault (240) | ★ · 38 | The Crucible's entry rite: seven legion fighters, back to back, on the caldera floor. No items. No healing. No complaining. **Twist:** Volcanic field; each bout raises the field's heat stage. Bout 4 is a double. Bout 7 is the Legate's adjutant on a Dragon's Den preview. The Herald introduces you with whatever the Saltmere barge called you. | CHARCOAL, FIRESTONE; +4 pts | Ashkaar recruitment flag from the Saltmere barge is honoured here (skip bout 1) | designed |
 | **The Lava-Tube Terror** `AS_DRUDDIGON` | 8 | `badges >= 6` | a Hearthguild smith · The Cinderhorn (664) | ★★ · 40 | A Druddigon has made the Cinderhorn lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed. **Twist:** Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying. | Druddigon Lv 37 (ROUGHSKIN); +4 pts | Honesty law: report how the fight really went (lying costs the reward) | designed |
 | **Adequate Swords** `AS_ADEQUATE_SWORDS` | 8 | `badges >= 6` | the owner of ADEQUATE SWORDS · Cindervault market (240) | ★ · 38 | A rival shop has opened across the street: EXCELLENT SWORDS. The owner of ADEQUATE SWORDS suspects a lie. Lying is a crime. **Twist:** You test the swords (a battle against the rival smith's Honedge on a 'sharpness' rule). The swords are excellent. ADEQUATE SWORDS loses the case, renames itself ADEQUATE SWORDS (STILL), and is happier. | METALCOAT; +2 pts | 15_COMEDY Ashkaar honest-signs bit | designed |
@@ -105,6 +110,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
+| **The Noon Bell** `OS_OCTAVE_NOON_BELL` | 6 | `badges >= 4` | Sona of the Octave · the Temple of the Noon Sun, outside Duneholt (new map, off Sunbleach Flats 613) (215) | ★ · 30 | Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this. | $1500, SUNSTONE; +3 pts | The Octave: Sona (4 of 8 in gym order) | wired |
 | **Kevin** `OS_KEVIN` | 6 | `badges >= 4` | the Dig Lab interns · the Dig Lab, Duneholt (209) | ★ · 29 | The interns revived a fossil they can't identify. They call it Kevin. Kevin is a rock. Kevin is in the staff photo. **Twist:** Three tests (light, sound, being talked to kindly) over three visits. On the third Kevin turns out to be a Carbink that was asleep, and it has been listening to the interns' gossip for a month. It knows everything. | Carbink "Kevin" Lv 28 (STURDY); +2 pts | 15_COMEDY Ossaria bit | designed |
 | **The Riddle Trader** `OS_RIDDLE_CARAVAN` | 6 | `badges >= 4` | a caravan trader · Copperdune caravanserai (610) | ★ · 27 | A caravan trader only barters in riddles. She doesn't know the answers either. She wants you to find them. **Twist:** The riddles have real answers hidden in Copperdune (a buried locomotive, a mural, a Sandile who only comes out at noon). When you give her the third answer she says 'Oh! I always thought it was a goat,' and pays you in a Trapinch. | Trapinch Lv 27 (SHEERFORCE); +2 pts | 15_COMEDY Ossaria bit | designed |
 | **Tomb Freight** `OS_TOMB_FREIGHT` | 6 | `badges >= 4` | the freight-depot foreman · Copperdune (610) | ★★ · 30 | A locked railway car bound for Lumen is heavier than its manifest. Meridian says machine parts. The tomb-guild says grave goods. **Twist:** Stealth into the depot at night; the car holds an Elector's sarcophagus with an Unown inscription that names the Prismfall. | $3500; +3 pts | Meridian vs Ossarian Electors (WORLD 'Tomb Freight'); Prince-Elector Kassan | designed |
@@ -118,6 +124,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
+| **The Still Water** `AN_OCTAVE_STILL_WATER` | 13 | `badges >= 11` | Lento of the Octave (the Rite, read at Glassmere) · the frozen Mirror Mere, past Glassmere (753) (742) | ★ · 58 | Mirror-writing in the reading-pool: the Mirror Mere froze in summer. Its singer won't leave the ice. Her reflection is under it. | $4000, MIRRORHERB; +4 pts | The Octave: Lento (7 of 8 in gym order); the Rite of Reflection | wired |
 | **Your Other Half** `AN_OTHER_HALF` | 13 | `badges >= 11` | a Glassmere fisherwoman · Glassmere (753) | ★ · 56 | Her husband came back from the Mere reversed: left-handed, kinder, and worse at fishing. She'd like the old one back. Probably. **Twist:** Swap through the Mere twice; the reflection doesn't want to go back. The fisherwoman chooses (you can influence it). The couple's Indeedee also came back reversed, and stays with you. | Indeedee Lv 55 (PSYCHICSURGE); +3 pts | WORLD 'Your Other Half'; mirror gag (running gag 8) | designed |
 | **It Keeps the Rain In** `AN_UMBRELLA` | 13 | `badges >= 11` | a man with an umbrella · the Antumbra Threshold (743) | ★ · 55 | His umbrella keeps the rain in. He'd like it to keep the rain out. He's tried holding it the other way up. That keeps the rain up. **Twist:** The answer is to open it indoors (which is outdoors here). The tiny storm inside it was a Hatenna that hates noise and was hiding from the Threshold's echoes; it comes with you. | Hatenna Lv 54 (MAGICBOUNCE); +2 pts | 15_COMEDY Antumbra bit | designed |
 | **Better Marks** `AN_STUDENT` | 13 | `badges >= 11` | a Lucent student · the Athenaeum, Lucent (344) | ★★ · 58 | Her reflection has been attending lectures for her. It gets better marks. She is furious and wants to sit the final herself. **Twist:** Battle the REFLECTION trainer type (her team, mirrored). She passes with a lower mark than her reflection got, and is prouder of it. | TWISTEDSPOON; +3 pts | 15_COMEDY Antumbra bit | designed |
@@ -131,7 +138,9 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
-| **Eighteen Shrines** `CR_EIGHTEEN_SHRINES` | 20 | `badges >= 18` | the Pilgrim's Rest keeper · Pilgrim's Rest (890) | ★ · 85 | Eighteen roadside shrines on the Pilgrim Pass, one per Plate. Ashkaar charges a toll at six of them. **Twist:** Each shrine asks one line of the counting rhyme; the eighteenth asks for the line nobody sings ('...and one that no one counted'). The keeper's prism-coated Eevee follows you down the Pass. | Eevee "Prism" Lv 50 (ADAPTABILITY); +4 pts | Ashkaar tolls (pay, fight or talk); WORLD 'Eighteen Shrines' | designed |
+| **The Eevee Octave** `CR_OCTAVE` | 2 | `` | Vesper Lindqvist · backstage at the Lantern Theatre, Saltmere (asked); the Glassfall Memorial Garden, Crownhaven (489) (145) | ★ · 90 | Vesper asked you to look in on the eight singers of the Octave as your road takes you through the kingdoms. | EEVIUMZ, ZPOWERRING, Eevee Lv 70 (ADAPTABILITY); +5 pts | The gauntlet runs in the order you helped the singers (each Eeveelution uses its Z-move); S177 EEVEE_OCTAVE_DONE | wired |
+| **The Ninth Verse** `CR_OCTAVE_NINTH_VERSE` | 20 | `switch(155)` | Carol of the Octave · the Glassfall Memorial Garden, Crownhaven (489) | ★ · 88 | Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all. | $6000, PPUP x3; +4 pts | The Octave: Carol (always 8 of 8); she sends for Vesper | wired |
+| **Eighteen Shrines** `CR_EIGHTEEN_SHRINES` | 20 | `badges >= 18` | the Pilgrim's Rest keeper · Pilgrim's Rest (890) | ★ · 85 | Eighteen roadside shrines on the Pilgrim Pass, one per Plate. Ashkaar charges a toll at six of them. **Twist:** Each shrine asks one line of the counting rhyme; the eighteenth asks for the line nobody sings ('...and one that no one counted'). The keeper gives you the five Imprint stones the shrines kept (the Octave's Eevee, SPINE Rev 19, replaced the old 'Prism' Eevee here). | FIRESTONE, WATERSTONE, THUNDERSTONE, LEAFSTONE, ICESTONE; +4 pts | Ashkaar tolls (pay, fight or talk); WORLD 'Eighteen Shrines' | designed |
 | **Lost Property** `CR_LOST_PROPERTY` | 20 | `switch(155)` | the lost-property clerk · the Court of Eight Pavilions (499) | ★ · 88 | The Festival lost-property tent has one item. Every day. It's an eel receipt. **Twist:** It's Kestrel's, from Ebbmouth, from Chapter 4. He has been carrying it for sixteen chapters. He denies it until you show him the date. Then he takes it back very carefully. | RARECANDY x2; +2 pts | Kestrel bond (+1); 15_COMEDY Crownhaven bit; Ebbmouth's 'THE BOY (4 EELS, DAILY)' | designed |
 | **The Pavilion Line** `CR_DELEGATION_DISPUTE` | 20 | `switch(155)` | Clerk-Superior Amadeus Fenwright · the Court of Eight Pavilions (499) | ★★ · 88 | Ashkaar's pavilion is four inches over the line into Isenmar's. Neither delegation will speak to the other. Both will speak to you. **Twist:** Every message gets ruder in translation. The fix is to move the line, not the pavilion; Fenwright is appalled and then promoted. | PPMAX; +3 pts | War outcome flavour (war_terms); Dominar / Thane | designed |
 | **Invitations to the Masque** `CR_MASQUE_INVITES` | 20 | `switch(156)` | the Basilica steward · the Basilica Close (483) | ★★ · 88 | Deliver eight invitations to the Night of Masques. One recipient doesn't exist. One is dead. One is you. **Twist:** A social route through the capital meeting every delegation; the dead recipient is Morwen Vane, and Kestrel sees you holding it. | RARECANDY x2; +3 pts | Night of Masques (S157) staging | designed |
@@ -140,7 +149,7 @@
 | **Hand of the Accord** `CR_ACCORD_CHAMPIONS` | 21 | `switch(160)` | Clerk-Superior Amadeus Fenwright · the Hall of Petitions (496) | ★★★★★ · 95 | Answer one petition from every kingdom in a single day. Each is a battle. Each Warden who still speaks to you sends one. **Twist:** Requires rank 4+ in at least five Trials. The gauntlet's order is the eight Trials' halls; between bouts, each Trial's keeper says one line about what you did in their kingdom. | MASTERBALL; +5 pts | Postgame Warden's Gauntlet (S160); every Trial's rank 5 counts | designed |
 | **The Meteor Champion** `CR_LIN` | 22 | `switch(160)` | a petition in a hand nobody recognises · Ferrow Lighthouse (105) | ★★★★ · 100 | A petition arrives from nowhere: 'Come back to where you landed.' **Twist:** Board pointer for the Lin postgame cameo; her event completes the quest. | ABILITYPATCH; +5 pts | CAMEOS.md #8 (FESTIVAL_LIN superboss) | designed |
 
-## Part 2. Full scripts of the wired quests (Chapters 1–4)
+## Part 2. Full scripts of the wired quests (Chapters 1–4, and the Eevee Octave across the game)
 
 Conventions: *italics* = narration box; **Name** _(expression)_ = a line under a portrait bubble (`pf_say`);
 [stage] = what the map event shows (the map builder stages it); [if ...] = a `Prismfall::Conditions` check; `> option` = a choice.
@@ -1099,6 +1108,70 @@ Off the Frostflat Causeway, a stretch of road replays five seconds of a wagon cr
   - on lost:
     - *Your double bows. The Rehearsal begins again.*
 
+#### The Moss Hymn (`EL_OCTAVE_MOSS`)
+
+*Chapter 3 · Lyra of the Octave, under the Lantern House tree, Briarwick; the moss-stone in Gossamer Wood (524) (map 120) · rank 1 · 3 points · unlock `badges >= 1`*
+
+A singer of the Octave has been singing to her Eevee for three days. It will not come down from the moss-stone in Gossamer Wood.
+
+**Quest log steps:** `ask`: Go with Lyra to the moss-stone in Gossamer Wood. · `stone`: Lyra's Eevee won't come down from the moss-stone. Mother Aldreth says: stop singing at it. · `duel`: Moss came down a Leafeon. Lyra wants a duel so it knows it can stand on its own.
+
+**Reward:** $800, BIGROOT; +3 pts. **Touches:** The Octave: Lyra (1 of 8 in gym order).
+
+**Scene `offer`** (event: `pf_quest_run(:EL_OCTAVE_MOSS, :offer)`)
+
+- [stage] A girl in Choir grey sits under the Lantern House tree with her knees up, humming the same four notes over and over.
+- **Lyra** _(sad)_: Oh. Sorry. Was I humming? I'm always humming. The plants don't mind.
+- **Lyra** _(neutral)_: I'm Lyra. Of the Octave. Vesper's Octave. I came home to Briarwick after the Pageant, and my Eevee, Moss, went straight up the old moss-stone in Gossamer Wood and won't come down.
+- **Lyra** _(sad)_: Three days. I've sung it everything I know. Mother Aldreth says I should stop singing at it. I don't know what that means. I'm a singer.
+- [if `party_has(:EEVEE)`]
+  - **Lyra** _(happy)_: Is that an Eevee? Hello. Has yours decided yet? Mine is trying to.
+- **CHOICE:** Go with Lyra to the moss-stone?
+  - > I'll come.
+    - [quest accepted]
+    - [quest step: stone]
+    - **Lyra** _(happy)_: Thank you. It's past the silk walls, where the moss grows on the north side of everything.
+  - > Not now.
+    - **Lyra** _(neutral)_: That's all right. I'll be here. Humming.
+
+**Scene `stone`** (event: `pf_quest_run(:EL_OCTAVE_MOSS, :stone)`)
+
+- [stage] The moss-stone: a grey boulder furred green to the top. A small brown Eevee sits on the summit with its eyes shut. Lyra is already there, mid-note.
+- **Lyra** _(neutral)_: Moss. Moss, please. I'll sing the one you like.
+- *The Eevee's ears flatten a little more with every note.*
+- **CHOICE:** What do you do?
+  - > Sing along.
+    - *You join in. The Eevee curls up tighter. Lyra stops, and looks at you, and laughs at herself.*
+    - **Lyra** _(sad)_: It's not working when two of us do it either.
+  - > Sit down by the stone and say nothing.
+    - *You sit. After a while, Lyra stops singing and sits down next to you.*
+    - *The wood is very loud when nobody is singing: leaves, water somewhere, the moss creaking as it drinks.*
+    - *The Eevee opens its eyes. It listens too.*
+    - [stage] Moss climbs down the stone. The green on the stone is the green on its fur, then all of it: a Leafeon steps off the last ledge.
+    - **Lyra** _(happy)_: Oh. Oh, look at you. You weren't stuck. You were listening.
+    - **Lyra** _(neutral)_: And I was too loud to hear it. Mother Aldreth is going to be unbearable.
+    - [quest step: duel]
+    - [continue: duel]
+  - > Tell Lyra to stop singing.
+    - **Lyra** _(sad)_: Everyone keeps telling me that. Fine. Fine. I'll stop.
+    - *She stops for almost three seconds, then starts humming again without noticing.*
+
+**Scene `duel`** (event: `pf_quest_run(:EL_OCTAVE_MOSS, :duel)`)
+
+- **Lyra** _(neutral)_: Will you duel us? Moss has never stood on its own feet in a fight. I want it to know it can.
+- [trainer battle] OCTAVE_SINGER Lyra (v50)
+  - on won:
+    - **Lyra** _(happy)_: It stood. It stood the whole time. Thank you.
+    - **Lyra** _(neutral)_: I'll write to Vesper tonight. She'll say she knew. She always knew.
+    - [the Octave remembers that you helped Lyra: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Lyra** _(neutral)_: Moss liked that. Come back and try again? We'll be at the Lantern House tree.
+
+**Scene `after`** (event: `pf_quest_run(:EL_OCTAVE_MOSS, :after)`)
+
+- **Lyra** _(happy)_: Moss sits in the Lantern House now and listens to Mother Aldreth not talking. They get on very well.
+
 ### The Tally
 
 #### Two Hearths, One Pot (`IS_TWO_HEARTHS`)
@@ -1373,6 +1446,66 @@ Something is taking eggs off the Gullcry ledges. Old Asta wants it stopped. Then
 - [else]
   - [quest complete: took]
 
+#### The Drowned Note (`IS_OCTAVE_DROWNED_NOTE`)
+
+*Chapter 4 · Aria of the Octave, the river steps, Ebbmouth; the Mill Quay wheel (167) (map 160) · rank 1 · 3 points · unlock `badges >= 2`*
+
+A singer's Vaporeon melted into the Ebb when the river stuttered and hasn't come out. She can still hear it, sometimes.
+
+**Quest log steps:** `listen`: Listen for Brine's note at three places on the Ebb: the river steps, the fish-market slip and the Mill Quay steps. · `wheel`: Aria thinks Brine is hiding under the Mill Quay wheel. · `duel`: Brine is back. Bersi wants a fight for the saga.
+
+**Reward:** $1200, SHELLBELL; +3 pts. **Touches:** The Octave: Aria (2 of 8 in gym order); a verse on the Tally Mast.
+
+**Scene `offer`** (event: `pf_quest_run(:IS_OCTAVE_DROWNED_NOTE, :offer)`)
+
+- [stage] On the river steps a young woman in a wet Choir robe is sitting in the shallows up to her waist, singing a sea-shanty with the words wrong on purpose.
+- **Aria** _(happy)_: Morning! It's lovely in. The cold's just the sea saying hello.
+- **Aria** _(neutral)_: I'm Aria. Octave. My Vaporeon, Brine, melted into the river three days ago, when it did that stutter. They do that, Vaporeon. Go to water.
+- **Aria** _(sad)_: It always comes back. It hasn't come back. But I can hear it. A note in the water, here and there, like it's calling from a long way down.
+- **Aria** _(happy)_: You've got young ears. Will you listen with me? Bersi says if I find it he'll carve it on the Tally Mast.
+- **CHOICE:** Help Aria listen for Brine?
+  - > Let's listen.
+    - [quest accepted]
+    - **Aria** _(happy)_: Try here on the steps, at the fish-market slip, and down at the Mill Quay steps. Put your ear right to the water.
+  - > Later.
+    - **Aria** _(neutral)_: I'll stay in. I'm warm now. Don't tell me if I'm not.
+
+**Scene `note`** (event: `pf_quest_run(:IS_OCTAVE_DROWNED_NOTE, :note)`)
+
+- [stage] You kneel and put your ear to the water. Somewhere under the noise of the river, a long, low note.
+- [if `quest_count(:SELF, :notes) >= 3`]
+  - *The third note is lower than the others, and it comes from upstream, where the Mill Quay wheel turns.*
+  - **Aria** _(happy)_: The wheel! It's hiding under the wheel. The Lattice hum is quieter there. It never liked the hum.
+  - [quest step: wheel]
+- [else]
+  - *The note fades. It came from further up the river.*
+
+**Scene `wheel`** (event: `pf_quest_run(:IS_OCTAVE_DROWNED_NOTE, :wheel)`)
+
+- [stage] Under the Mill Quay wheel the water is black and slow. Aria wades in to her chest and sings one note, the same one you heard.
+- **Aria** _(neutral)_: Come on, then. I know it's loud up here. I'm loud too. You like me anyway.
+- [stage] The water stands up, gathers into a shape, and becomes a Vaporeon, coughing.
+- **Aria** _(happy)_: Brine! You great puddle!
+- [quest step: duel]
+- [continue: duel]
+
+**Scene `duel`** (event: `pf_quest_run(:IS_OCTAVE_DROWNED_NOTE, :duel)`)
+
+- **Aria** _(happy)_: Bersi says a saga needs a fight in it or the Tally won't take it. Fight us? He'll make it sound bigger than it was.
+- [trainer battle] OCTAVE_SINGER Aria (v50)
+  - on won:
+    - **Aria** _(happy)_: Ha! Wrong note, right song. Bersi's already carving.
+    - [stage] At the Net Loft, Bersi Gullsong cuts a notch on the Tally Mast beside your name.
+    - **Bersi Gullsong** _(happy)_: 'And the stranger heard the river's sorrow, and the drowned beast rose.' Something like that. I'll fix it later. I never fix it later.
+    - [the Octave remembers that you helped Aria: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Aria** _(happy)_: Ha! The river wins today. Come back, we'll be on the steps.
+
+**Scene `after`** (event: `pf_quest_run(:IS_OCTAVE_DROWNED_NOTE, :after)`)
+
+- **Aria** _(happy)_: Brine goes back in the river every morning now, and comes out every morning. That's all I wanted.
+
 ### The Prize Exchange
 
 #### Form 7-B (`ZE_FORM_7B`)
@@ -1547,6 +1680,136 @@ CALL FOR PROPOSALS #0003: ACOUSTIC SURVEY OF THE EBBMOUTH TIDAL LATTICE DURING '
     - *A reply comes back by the next Gale Post: "I had this already. Thank you. Please stop doing my job. - I.L."*
     - [quest complete: larch]
 
+#### Off the Beat (`ZE_OCTAVE_OFF_BEAT`)
+
+*Chapter 5 · Grant Kiosk P-3NNY / Cadence of the Octave, the Lowlight steps, Lumen City (map 181) · rank 1 · 3 points · unlock `badges >= 3`*
+
+CALL FOR PROPOSALS #0031: NOISE COMPLIANCE, LOWLIGHT BLOCK 9. A STREET DRUMMER'S JOLTEON BLACKS OUT THE BLOCK. BOUNTY: $800.
+
+**Quest log steps:** `ask`: Find the drummer on the Lowlight steps. · `junctions`: Cadence's Jolteon syncs to her drumming, and the Lattice syncs to it. Shift the three Lattice junction boxes on Block 9 off her beat. · `duel`: The block stayed lit. Cadence wants to play it out properly.
+
+**Reward:** $800, CELLBATTERY x2; unknown: RES+1; fault: $800, MERIDIAN+1; +3 pts. **Touches:** The Octave: Cadence (3 of 8 in gym order); Meridian standing if you file it as a Lattice fault.
+
+**Scene `offer`** (event: `pf_quest_run(:ZE_OCTAVE_OFF_BEAT, :offer)`)
+
+- [stage] The Lowlight steps after dark. A woman in a cut-down Choir robe drums on a stack of paint tins, fast, in fours. A Jolteon bristles beside her in time. Every fourth beat, the streetlamps on the block flicker.
+- **Cadence** _(deadpan)_: If you're from Meridian, I've got a permit. If you're not, I haven't got a permit.
+- **Cadence** _(neutral)_: Cadence. Octave. Yes, that Octave. The Choir pays in hymns. Meridian pays in money. I tune their Lattice junctions on nights. Guess which one buys noodles.
+- **Cadence** _(sad)_: Snare picks up my beat and the Lattice picks up Snare. One-two-three-four, blackout. They've posted a bounty on 'the source'. The source is me.
+- **CHOICE:** Help Cadence?
+  - > How do we fix it?
+    - **Cadence** _(neutral)_: Three junction boxes on this block. They're tuned to a four-count, because some engineer liked a four-count. Shift each one off the beat and Snare can't drive them.
+    - **Cadence** _(deadpan)_: I'd do it myself but I'm the source. They'd notice the source fiddling with the junctions.
+    - [quest accepted]
+    - [quest step: junctions]
+  - > Not tonight.
+    - **Cadence** _(deadpan)_: Nobody's ever free tonight. That's why it's always tonight.
+
+**Scene `junction`** (event: `pf_quest_run(:ZE_OCTAVE_OFF_BEAT, :junction)`)
+
+- [stage] A brass Lattice junction box, humming. A dial on the front ticks in fours, exactly in time with Cadence's drumming.
+- *You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.*
+- [if `quest_count(:SELF, :shifted) >= 3`]
+  - [stage] Cadence plays a long roll. Snare crackles. The streetlamps stay on.
+  - **Cadence** _(happy)_: Ha. Listen to that. It's terrible. It's the best thing I've ever heard.
+  - [quest step: duel]
+  - [continue: duel]
+
+**Scene `duel`** (event: `pf_quest_run(:ZE_OCTAVE_OFF_BEAT, :duel)`)
+
+- **Cadence** _(neutral)_: Snare's never been allowed to go flat out on this block. Let's find out what it's got. One, two, three, four.
+- [trainer battle] OCTAVE_SINGER Cadence (v50) on `:NEON_GRID`
+  - on won:
+    - **Cadence** _(happy)_: Off the beat. Mine, not yours. Again tomorrow?
+    - **Cadence** _(neutral)_: P-3NNY still wants a report on 'the source'. Your name, your report.
+    - **CHOICE:** File the report as...
+      - > 'Source unknown.'
+        - **P-3NNY** _(neutral)_: REPORT FILED: SOURCE UNKNOWN. BOUNTY WITHHELD. THE REGISTRY IS DISAPPOINTED. THE REGISTRY WILL LIVE.
+        - [the Octave remembers that you helped Cadence: the gauntlet order]
+        - [quest complete: unknown]
+      - > 'A Lattice tuning fault.'
+        - **P-3NNY** _(happy)_: REPORT FILED: TUNING FAULT, BLOCK 9. MERIDIAN WILL CORRECT IT. BOUNTY RELEASED.
+        - **Cadence** _(deadpan)_: They'll send someone to fix it. It'll be me. On nights. Fine.
+        - [the Octave remembers that you helped Cadence: the gauntlet order]
+        - [quest complete: fault]
+  - on lost:
+    - **Cadence** _(deadpan)_: Off your beat, that. Come back when you've got one.
+
+**Scene `after`** (event: `pf_quest_run(:ZE_OCTAVE_OFF_BEAT, :after)`)
+
+- **Cadence** _(neutral)_: Snare still drums. The lamps don't. Best of both.
+
+### The Gutter Book
+
+#### Lamps Out (`NA_OCTAVE_LAMPS_OUT`)
+
+*Chapter 7 · Six-Fingers Ottoline (chalk job) / the marsh ferryman, the ferry steps on the runoff marsh, Mirefen (at night) (map 220) · rank 1 · 3 points · unlock `badges >= 5`*
+
+Chalk job: someone keeps putting out the night-ferry lamps on the marsh. The ferrymen pay a cut to whoever stops it.
+
+**Quest log steps:** `lamps`: At night, watch the three ferry lamps on the marsh. · `noct`: Something with gold rings in the dark put the lamps out. Find the lamplighter. · `duel`: Noct wants to know if you can be trusted with the dark.
+
+**Reward:** $1000, DUSKBALL x5; truth: $1000; covered: HOLLOW+1; +3 pts. **Touches:** The Octave: Noct (5 of 8 in gym order); the Gutter Book takes its cut either way.
+
+**Scene `offer`** (event: `pf_quest_run(:NA_OCTAVE_LAMPS_OUT, :offer)`)
+
+- [stage] The ferry steps on the runoff marsh. A ferryman with a pole and a grudge.
+- **Marsh ferryman** _(angry)_: Every night. Every lamp on the crossing, out, one after another. I've had two boats on the mud this week.
+- **Six-Fingers Ottoline** _(neutral)_: (Chalked on the board above him, in Ottoline's hand:) LAMPS OUT. FERRYMEN PAY. MY CUT'S A FIFTH. IT'S YOURS. DON'T MAKE IT MINE.
+- **CHOICE:** Take the job?
+  - > I'll watch the lamps.
+    - [quest accepted]
+    - [quest step: lamps]
+    - **Marsh ferryman** _(neutral)_: Nights only. In the day they behave.
+  - > Not my business.
+    - **Marsh ferryman** _(angry)_: Nobody's business. That's the business down here.
+
+**Scene `lamp`** (event: `pf_quest_run(:NA_OCTAVE_LAMPS_OUT, :lamp)`)
+
+- [if `!night`]
+  - *The lamp is unlit and harmless in the daylight. Come back after dark.*
+  - [end scene]
+- [stage] A ferry lamp on a pole over the black water. As you watch, two gold rings blink in the reeds, and the flame folds down and goes out.
+- [if `quest_count(:SELF, :lamps) >= 3`]
+  - *The gold rings slip away across the boardwalk, toward the old lamplighter's hut at the end of the steps.*
+  - [quest step: noct]
+- [else]
+  - *The gold rings are gone. Another lamp, further out, is still lit. For now.*
+
+**Scene `noct`** (event: `pf_quest_run(:NA_OCTAVE_LAMPS_OUT, :noct)`)
+
+- [stage] The lamplighter's hut. A young man in a soot-black Choir robe, a pole with a hook, and an Umbreon with its rings glowing. Behind him, under a sail, four sleeping children.
+- **Noct** _(neutral)_: ...Shh.
+- **Noct** _(neutral)_: Noct. Octave. The lamps are mine. So is putting them out.
+- **Noct** _(sad)_: Sweetrot runners come up the crossing at night looking for lamp-runners. Kids who'll carry for them. They look where it's lit.
+- **Noct** _(neutral)_: Wick puts the lamps out when they come. Dark's the only thing down here that's free.
+- **CHOICE:** What do you tell the Gutter Book?
+  - > The truth. The ferrymen should know why.
+    - **Noct** _(neutral)_: ...Fine. Tell them. Then they can keep a lookout instead of a grudge.
+  - > Marsh gas. It happens.
+    - **Noct** _(neutral)_: ...Marsh gas. Ottoline will know. She'll take her fifth anyway.
+- [quest step: duel]
+- [continue: duel]
+
+**Scene `duel`** (event: `pf_quest_run(:NA_OCTAVE_LAMPS_OUT, :duel)`)
+
+- **Noct** _(neutral)_: Wick wants to know if you're safe in the dark. Show it.
+- [trainer battle] OCTAVE_SINGER Noct (v50)
+  - on won:
+    - **Noct** _(neutral)_: ...Good. Now you know where the dark is.
+    - **Noct** _(neutral)_: Corvin has beds at the infirmary. I'll take them in the morning. Thank you.
+    - [the Octave remembers that you helped Noct: the gauntlet order]
+    - [if `quest_flag(:SELF, :told) == :covered`]
+      - [quest complete: covered]
+    - [else]
+      - [quest complete: truth]
+  - on lost:
+    - **Noct** _(neutral)_: ...Again. When you can see better.
+
+**Scene `after`** (event: `pf_quest_run(:NA_OCTAVE_LAMPS_OUT, :after)`)
+
+- **Noct** _(neutral)_: The lamps stay lit now. The kids sleep at Corvin's. Wick sulks. ...It's fine.
+
 ### The Trial by Flames
 
 #### The Little Crucible (`AS_LITTLE_CRUCIBLE`)
@@ -1613,3 +1876,355 @@ WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. W
     - **Sergeant Brakka** _(neutral)_: Honest. Fine. The offer stands as long as you keep winning.
 - *The Herald strikes the gong. Your brand goes up on the barge's little Wall of the Proven.*
 - [quest complete]
+
+#### Too Loud for the Choir (`AS_OCTAVE_TOO_LOUD`)
+
+*Chapter 8 · Forte of the Octave, the Crucible on the caldera rim, Cindervault (map 240) · rank 1 · 3 points · unlock `badges >= 6`*
+
+Writ of Flame: a Choir singer wants a Writ. The Crucible will hear her if she brings a second.
+
+**Quest log steps:** `ask`: Find the singer outside the Crucible. · `legate`: Stand as Forte's second before Legate Varra Kosk. · `duel`: The Legate's trial: Forte fights her own second, in the Crucible.
+
+**Reward:** $2000, HEATROCK; +3 pts. **Touches:** The Octave: Forte (6 of 8 in gym order); Ashkaar honesty (she must say who she is).
+
+**Scene `offer`** (event: `pf_quest_run(:AS_OCTAVE_TOO_LOUD, :offer)`)
+
+- [stage] Outside the Crucible's gate a young woman in a scorched Choir robe is arguing with a herald twice her size, and winning on volume.
+- **Forte** _(angry)_: I can fight! Look at me! LOOK at me!
+- [stage] The herald walks away. She turns on you, still shouting, then sees your badges and stops.
+- **Forte** _(happy)_: Oh! You're a challenger. Brilliant. Forte. Octave. That's Bellows. Bellows, say hello. Not like that. Not on fire.
+- **Forte** _(neutral)_: I want a Writ of Flame. The Legion. They won't hear a 'Choir child' without a second to stand for her. Will you stand for me?
+- **CHOICE:** Stand as Forte's second?
+  - > I'll stand for you.
+    - [quest accepted]
+    - [quest step: legate]
+    - **Forte** _(happy)_: YES. The Legate's inside. Don't let me talk.
+  - > Why do you want to join the Legion?
+    - **Forte** _(neutral)_: Because everyone looks at us like we're sad. The Glassfall orphans. Poor things. I'm not a poor thing. I'm loud.
+    - **Forte** _(neutral)_: Ask me again when you'll stand for me.
+
+**Scene `legate`** (event: `pf_quest_run(:AS_OCTAVE_TOO_LOUD, :legate)`)
+
+- [stage] The Crucible: a sand ring on the caldera rim. Legate Varra Kosk sits on the steps with a ledger on her knee.
+- **Legate Varra Kosk** _(neutral)_: You told my herald you were twenty, from the Cinder Cape, and a Legion family. Which of those was true?
+- **Forte** _(sad)_: ...None of them.
+- **Legate Varra Kosk** _(neutral)_: Lying is a crime here. Not a large one. It ends the conversation. Unless your second has something to say.
+- **CHOICE:** What do you say?
+  - > Tell her who you are, Forte.
+    - **Forte** _(neutral)_: ...I'm a Choir orphan. From the Glassfall. I sing. I'm also the strongest person in this ring, and I'm not sorry.
+    - **Legate Varra Kosk** _(happy)_: There. That's a Writ's worth of truth. Now show me the strong part.
+  - > She's the strongest singer you'll ever meet.
+    - **Legate Varra Kosk** _(neutral)_: That's your truth, second. I asked for hers.
+    - **Forte** _(neutral)_: ...I'm a Choir orphan. I sing. And I'm strong. That's all of it.
+    - **Legate Varra Kosk** _(happy)_: Better. Now show me.
+- **Legate Varra Kosk** _(neutral)_: The trial is simple. Fight your second. Win, or lose well. Both are honest.
+- [quest step: duel]
+- [continue: duel]
+
+**Scene `duel`** (event: `pf_quest_run(:AS_OCTAVE_TOO_LOUD, :duel)`)
+
+- **Forte** _(happy)_: Don't go easy. If you go easy I'll know and I'll shout.
+- [trainer battle] OCTAVE_SINGER Forte (v50) on `:VOLCANIC`
+  - on won:
+    - **Forte** _(happy)_: Too loud? ...No. Just right. You were louder.
+    - **Legate Varra Kosk** _(neutral)_: Lost well. Honestly. That is a Writ.
+    - [stage] The Legate brands an iron token with Forte's mark. Forte holds it up to Bellows, who sneezes on it.
+    - [the Octave remembers that you helped Forte: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Legate Varra Kosk** _(neutral)_: She won. That's also a Writ, but not for you. Come back when your second can stand.
+
+**Scene `after`** (event: `pf_quest_run(:AS_OCTAVE_TOO_LOUD, :after)`)
+
+- **Forte** _(happy)_: I'm a Legion recruit AND I'm in the Octave. Vesper cried. Happy crying. I think.
+
+### The Rolls of Unearthing
+
+#### The Noon Bell (`OS_OCTAVE_NOON_BELL`)
+
+*Chapter 6 · Sona of the Octave, the Temple of the Noon Sun, outside Duneholt (new map, off Sunbleach Flats 613) (map 215) · rank 1 · 3 points · unlock `badges >= 4`*
+
+Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper needs diggers. Its keeper says she knew you'd read this.
+
+**Quest log steps:** `ask`: Find the keeper of the Temple of the Noon Sun. · `dig`: Dig the three sand drifts out of the temple's light-shaft. · `noon`: The shaft is clear. Be in the temple at noon (any time of day, not at night).
+
+**Reward:** $1500, SUNSTONE; +3 pts. **Touches:** The Octave: Sona (4 of 8 in gym order).
+
+**Scene `offer`** (event: `pf_quest_run(:OS_OCTAVE_NOON_BELL, :offer)`)
+
+- [stage] A round sandstone temple, half swallowed by a dune. Inside, in the gloom, a woman in Choir grey sits beside a sleeping Espeon whose forehead jewel has gone dull. She speaks before you do.
+- **Sona** _(neutral)_: Yes, I'm the keeper. Yes, the sand. No, it isn't dangerous. You were going to ask all three.
+- **Sona** _(neutral)_: Sona. Of the Octave. Noon sleeps here, where the light used to fall at midday. The dune came down the shaft in the spring and the light stopped.
+- **Sona** _(sad)_: Its jewel has been dark for a month. It still knows when noon is. It wakes, and looks up, and goes back to sleep.
+- **Sona** _(deadpan)_: You're going to say yes. I'll get the spade.
+- **CHOICE:** Dig out the light-shaft?
+  - > Yes.
+    - [quest accepted]
+    - [quest step: dig]
+    - **Sona** _(neutral)_: Three drifts. I heard you'd be quick.
+  - > No.
+    - **Sona** _(neutral)_: Hm. I didn't hear that coming. I'm glad. It's boring, being right.
+
+**Scene `drift`** (event: `pf_quest_run(:OS_OCTAVE_NOON_BELL, :drift)`)
+
+- [stage] A drift of sand packed into the light-shaft. You dig until a broken clay tablet slides out of it and the sand runs away under your feet.
+- [if `quest_count(:SELF, :drifts) >= 3`]
+  - *Daylight falls down the shaft for the first time in a month and lies on the temple floor in a hot white circle.*
+  - **Sona** _(happy)_: There. Now we wait for noon. Noon will wait too. It's very good at it.
+  - [quest step: noon]
+- [else]
+  - *A little more light gets in. The shaft is not clear yet.*
+
+**Scene `noon`** (event: `pf_quest_run(:OS_OCTAVE_NOON_BELL, :noon)`)
+
+- [if `night`]
+  - **Sona** _(neutral)_: It's night. Even I can't make it noon. Come back in the day.
+  - [end scene]
+- [stage] Noon. The circle of light slides onto the sleeping Espeon. Its jewel lights red, then white, and it opens its eyes.
+- **Sona** _(happy)_: Hello, Noon.
+- **Curator-Elect Nasrin Vael** _(neutral)_: (From the doorway, out of breath:) The Rolls will want that tablet, you know. And a full record of the dig. ...It's lovely, though.
+- **Sona** _(neutral)_: Noon wants to stretch. It hasn't fought in a month. You knew I'd ask.
+- [trainer battle] OCTAVE_SINGER Sona (v50)
+  - on won:
+    - **Sona** _(happy)_: I heard that coming. I still couldn't stop it. That's the nice kind.
+    - **Sona** _(neutral)_: Ring the bell on your way out. It's been a long time since anyone rang it at noon.
+    - [the Octave remembers that you helped Sona: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Sona** _(neutral)_: I knew you'd want another go. It'll be noon again tomorrow.
+
+**Scene `after`** (event: `pf_quest_run(:OS_OCTAVE_NOON_BELL, :after)`)
+
+- **Sona** _(neutral)_: You're going to ask if Noon is happy. Yes. You're going to ask if I am. ...Come back another day and ask that.
+
+### The Rite of Reflection
+
+#### The Still Water (`AN_OCTAVE_STILL_WATER`)
+
+*Chapter 13 · Lento of the Octave (the Rite, read at Glassmere), the frozen Mirror Mere, past Glassmere (753) (map 742) · rank 1 · 4 points · unlock `badges >= 11`*
+
+Mirror-writing in the reading-pool: the Mirror Mere froze in summer. Its singer won't leave the ice. Her reflection is under it.
+
+**Quest log steps:** `ask`: Find the singer on the frozen Mirror Mere. · `cracks`: Lector Saffi: in Antumbra you free a thing by holding it backwards. Walk the three cracks in the ice from their ends to their starts. · `duel`: The ice is thin and Lento is ready to let go.
+
+**Reward:** $4000, MIRRORHERB; +4 pts. **Touches:** The Octave: Lento (7 of 8 in gym order); the Rite of Reflection.
+
+**Scene `offer`** (event: `pf_quest_run(:AN_OCTAVE_STILL_WATER, :offer)`)
+
+- [stage] The Mirror Mere, frozen white in high summer. In the middle of the ice a woman in Choir grey stands perfectly still beside a Glaceon. Under the ice, her reflection stands upside down, beating softly on it.
+- **Lento** _(neutral)_: Hello. Hello.
+- **Lento** _(neutral)_: I'm Lento. Lento. Of the Octave. I say things twice. Once for me, once for her. Habit. Habit.
+- **Lento** _(sad)_: Reflections wander here. Mine wanted to go. Hush froze the mere so she couldn't. I didn't ask it to. I didn't ask it not to.
+- **Lento** _(sad)_: Now she's under there and I'm up here, and neither of us can leave. Slowly, slowly, I've noticed this is worse.
+- **CHOICE:** Help Lento?
+  - > How?
+    - **Lento** _(neutral)_: Lector Saffi would know. She reads the Rite at Glassmere. She'll tell you backwards. Listen backwards.
+    - **Lector Saffi Ivarne** _(neutral)_: (Her mirror-writing in the reading-pool, read in the glass:) TO FREE A THING IN ANTUMBRA, HOLD IT BACKWARDS. WALK EACH CRACK FROM ITS END TO ITS START.
+    - [quest accepted]
+    - [quest step: cracks]
+  - > I'll come back.
+    - **Lento** _(neutral)_: Slowly. Slowly. We'll be here.
+
+**Scene `crack`** (event: `pf_quest_run(:AN_OCTAVE_STILL_WATER, :crack)`)
+
+- [stage] A long crack across the ice. You find where it ends and walk it back to where it began. Under your feet, the reflection walks it with you, upside down, the other way.
+- [if `quest_count(:SELF, :cracks) >= 3`]
+  - *On the third crack the ice sighs. It does not break. It just stops holding on.*
+  - [stage] Lento's reflection rises to the underside of the ice, presses one hand to it, and lets go. It drifts off across the mere, slowly, toward the Glass.
+  - **Lento's reflection** _(happy)_: (Faint, from under the ice, said once:) Thank you.
+  - **Lento** _(sad)_: She only said it once. She's never done that.
+  - **Lento** _(neutral)_: It's all right. It's all right. She'll come back. Slowly.
+  - [quest step: duel]
+  - [continue: duel]
+- [else]
+  - *The ice creaks. It is still holding on.*
+
+**Scene `duel`** (event: `pf_quest_run(:AN_OCTAVE_STILL_WATER, :duel)`)
+
+- **Lento** _(neutral)_: Hush is upset. Hush is upset. It thinks it did something wrong. Duel us? It needs to do something right.
+- [trainer battle] OCTAVE_SINGER Lento (v50) on `:FROZEN_LAKE`
+  - on won:
+    - **Lento** _(happy)_: Slowly, slowly. You got there first anyway.
+    - **Lento** _(neutral)_: I'm going to write to Vesper. I'm going to write to Vesper. She'll be cross I didn't write sooner. Once.
+    - [the Octave remembers that you helped Lento: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Lento** _(neutral)_: Again. Again. When the ice is kinder.
+
+**Scene `after`** (event: `pf_quest_run(:AN_OCTAVE_STILL_WATER, :after)`)
+
+- **Lento** _(happy)_: She comes back some evenings and stands beside me in the water. Then she goes. That's what reflections are for. For.
+
+### The Hall of Petitions
+
+#### The Eevee Octave (`CR_OCTAVE`)
+
+*Chapter 2 · Vesper Lindqvist, backstage at the Lantern Theatre, Saltmere (asked); the Glassfall Memorial Garden, Crownhaven (489) (map 145) · rank 1 · 5 points · unlock ``*
+
+Vesper asked you to look in on the eight singers of the Octave as your road takes you through the kingdoms.
+
+**Quest log steps:** `road`: Look in on the Octave's singers as you travel: Lyra (Briarwick), Aria (Ebbmouth), Cadence (Lumen City), Sona (Duneholt), Noct (Mirefen), Forte (Cindervault), Lento (the Mirror Mere). Carol never leaves Crownhaven. · `garden`: All eight singers have had your help. Vesper is waiting in the Glassfall Memorial Garden in Crownhaven.
+
+**Reward:** EEVIUMZ, ZPOWERRING, Eevee Lv 70 (ADAPTABILITY); +5 pts. **Touches:** The gauntlet runs in the order you helped the singers (each Eeveelution uses its Z-move); S177 EEVEE_OCTAVE_DONE.
+
+**Scene `saltmere`** (event: `pf_quest_run(:CR_OCTAVE, :saltmere)`)
+
+- [stage] After the duet backstage (S190). Vesper is folding Amen's ribbon back into her sleeve.
+- **Vesper** _(neutral)_: We sing together once a year, for the Pageant. Tomorrow we scatter again. Each of us lives beside a Plate now, one each, in all seven kingdoms.
+- **Vesper** _(happy)_: Except Carol. Carol never leaves Crownhaven. Someone has to sing to the ones who didn't get out.
+- **Vesper** _(neutral)_: They're very good at singing and very bad at being alone. If your road takes you past any of them... would you look in on them?
+- **CHOICE:** Look in on the Octave?
+  - > I will.
+    - **Vesper** _(happy)_: Thank you. Lyra's going home to Briarwick, so she's first, if you go that way.
+    - [quest accepted]
+  - > Why me?
+    - **Vesper** _(neutral)_: Because you looked at Understudy the way they look at their Eevee. Like it was a person.
+    - **Vesper** _(happy)_: And because nobody else asked. That's usually how.
+    - [quest accepted]
+- **Vesper** _(neutral)_: Lyra in Briarwick. Aria in Ebbmouth. Cadence in Lumen City. Sona in Duneholt. Noct in Mirefen. Forte in Cindervault. Lento at the Mirror Mere.
+- **Vesper** _(happy)_: I'll be at the Festival. We always are.
+
+**Scene `lucent`** (event: `pf_quest_run(:CR_OCTAVE, :lucent)`)
+
+- [stage] Chapter 13, the Athenaeum cloister, after Vesper's sparring double (S191).
+- **Vesper** _(neutral)_: Carol writes to me every week. The others write when something has gone wrong.
+- [if `octave_helped >= 5`]
+  - **Vesper** _(happy)_: So I've had a lot of letters about you. Good letters. Forte's had three exclamation marks in it.
+- [else]
+  - **Vesper** _(neutral)_: None of them has mentioned you yet. That's all right. Roads are long.
+- [if `!octave_has(:LENTO)`]
+  - **Vesper** _(sad)_: Lento hasn't written at all. She's at the Mirror Mere, past Glassmere. It's frozen, they say. In summer.
+
+**Scene `garden`** (event: `pf_quest_run(:CR_OCTAVE, :garden)`)
+
+- [stage] The Glassfall Memorial Garden. White stone, a ring of glass figures among the roses, and eight singers standing in a half-circle with their Eeveelutions. Vesper steps out to meet you.
+- **Vesper** _(happy)_: You came. Everyone, it's them.
+- **Vesper** _(neutral)_: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+- **Vesper** _(neutral)_: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
+- **Vesper** _(happy)_: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
+- **Vesper** _(neutral)_: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
+- **CHOICE:** **Vesper**: Will you sing with all of us?
+  - > Begin.
+    - **Vesper** _(happy)_: Then from the first note.
+    - [gauntlet, no healing: the eight singers (`OCTAVE_SINGER` v60) in the order you helped them, each on their Eeveelution's home field, each using its Z-move -> `OCTAVE_VESPER` Vesper (v60), Eevee with the Eevium Z, on `:GRAND_STAGE`]
+      - on won:
+        - [stage] The last note. Amen sits down in the grass, very pleased with itself. The singers clap, out of time, on purpose.
+        - **Vesper** _(happy)_: That was every note we have. You were worth all of them.
+        - **Vesper** _(neutral)_: This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you.
+        - **Vesper** _(neutral)_: And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it.
+        - [if `party_has(:EEVEE)`]
+          - **Vesper** _(happy)_: It works for Understudy too, if it's still undecided. An Eevee who knows Last Resort and holds that crystal can become everything at once, for a moment.
+        - [script]
+        - [quest complete]
+        - **Vesper** _(happy)_: Whatever it becomes, it'll become it because of you. I said that once before, didn't I?
+      - on lost:
+        - **Vesper** _(neutral)_: Rest. Sing it again when you're ready. We aren't going anywhere. We never miss a Festival.
+  - > Not yet.
+    - **Vesper** _(neutral)_: Then we'll wait. We're good at it.
+
+**Scene `after`** (event: `pf_quest_run(:CR_OCTAVE, :after)`)
+
+- **Vesper** _(happy)_: The Octave sings at dusk, here, every day of the Festival. You know all the words now.
+
+#### The Ninth Verse (`CR_OCTAVE_NINTH_VERSE`)
+
+*Chapter 20 · Carol of the Octave, the Glassfall Memorial Garden, Crownhaven (map 489) · rank 1 · 4 points · unlock `switch(155)`*
+
+Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all.
+
+**Quest log steps:** `ask`: Tell Carol about the other seven singers of the Octave. · `duel`: Carol has every verse but the one in the middle, where the fight goes.
+
+**Reward:** $6000, PPUP x3; +4 pts. **Touches:** The Octave: Carol (always 8 of 8); she sends for Vesper.
+
+**Scene `not_yet`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :not_yet)`)
+
+- [stage] Among the glass figures of the Memorial Garden a young woman in Choir white is writing on a slate, with a Sylveon's ribbons wrapped round her wrist.
+- **Carol** _(happy)_: Hello! You're the one Vesper writes about. I'm Carol. I'm the one who never leaves.
+- **Carol** _(neutral)_: I'm writing the Octave's song for the Festival. A verse for everyone. But I can only write what I know, and I don't know what happened to them out there.
+- **Carol** _(sad)_: Some of them haven't written. Have you met them? These ones I haven't heard about:
+- [if `!octave_has(:LYRA)`]
+  - *Lyra, in Briarwick.*
+- [if `!octave_has(:ARIA)`]
+  - *Aria, in Ebbmouth.*
+- [if `!octave_has(:CADENCE)`]
+  - *Cadence, on the Lowlight steps in Lumen City.*
+- [if `!octave_has(:SONA)`]
+  - *Sona, at the Temple of the Noon Sun outside Duneholt.*
+- [if `!octave_has(:NOCT)`]
+  - *Noct, at the ferry steps in Mirefen.*
+- [if `!octave_has(:FORTE)`]
+  - *Forte, at the Crucible in Cindervault.*
+- [if `!octave_has(:LENTO)`]
+  - *Lento, on the Mirror Mere past Glassmere.*
+- **Carol** _(happy)_: Come back when you've met them all. I'll be here. I'm always here.
+
+**Scene `offer`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :offer)`)
+
+- [stage] Carol, among the glass figures, with her slate. She has written eight titles on it and nothing else.
+- **Carol** _(happy)_: You've met them all! Everyone's written about you. Sit down, sit down. Tell me everything, in the order it happened.
+- [quest accepted]
+- [for each singer you helped, in that order:]
+  - Lyra:
+    - [continue: verse_lyra]
+  - Aria:
+    - [continue: verse_aria]
+  - Cadence:
+    - [continue: verse_cadence]
+  - Sona:
+    - [continue: verse_sona]
+  - Noct:
+    - [continue: verse_noct]
+  - Forte:
+    - [continue: verse_forte]
+  - Lento:
+    - [continue: verse_lento]
+- **Carol** _(neutral)_: That's seven. And me, the eighth: the one with no Plate. Ribbon became a Sylveon because it loved me, and I've always thought that meant I was the one without an Imprint.
+- **Carol** _(happy)_: But listening to you, I think the bond is the Imprint. Everyone you met was saved by somebody staying.
+- **Carol** _(neutral)_: Every story needs a fight in the middle, though. That's the verse I can't write. Will you help me with that one too?
+- [quest step: duel]
+- [continue: duel]
+
+**Scene `verse_lyra`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_lyra)`)
+
+- **Carol** _(happy)_: Lyra! 'And the moss came down when no one sang.' Oh, that's good. I'm keeping that.
+
+**Scene `verse_aria`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_aria)`)
+
+- **Carol** _(happy)_: Aria and the river. 'The drowned note rose.' Bersi wrote me eleven pages about that. Eleven.
+
+**Scene `verse_cadence`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_cadence)`)
+
+- **Carol** _(happy)_: Cadence kept her job? Cadence kept a JOB? 'And the lamps stayed lit on Block Nine.'
+
+**Scene `verse_sona`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_sona)`)
+
+- **Carol** _(happy)_: Sona said you'd tell me that. She said you'd tell it well. 'The bell rang at noon.'
+
+**Scene `verse_noct`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_noct)`)
+
+- **Carol** _(neutral)_: Noct doesn't write. Noct sent a lamp wick in an envelope. Now I know what it meant. 'Dark is the only thing that's free.'
+
+**Scene `verse_forte`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_forte)`)
+
+- **Carol** _(happy)_: Forte's letter was all capitals. 'TOO LOUD FOR THE CHOIR.' I'm putting it in exactly like that.
+
+**Scene `verse_lento`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :verse_lento)`)
+
+- **Carol** _(neutral)_: Lento's reflection. 'She said it once.' ...Oh. I'll write that one slowly.
+
+**Scene `duel`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :duel)`)
+
+- **Carol** _(happy)_: Ribbon, the middle of the story. Your favourite part.
+- [trainer battle] OCTAVE_SINGER Carol (v50) on `:FAIRY_TALE`
+  - on won:
+    - **Carol** _(happy)_: And they all lived. That's the whole ending. They all lived.
+    - **Carol** _(neutral)_: The song's finished. I have to show Vesper. VESPER!
+    - [stage] Carol runs off between the roses. Across the garden, the other seven singers are arriving for the Festival, one by one.
+    - [the Octave remembers that you helped Carol: the gauntlet order]
+    - [quest complete]
+  - on lost:
+    - **Carol** _(happy)_: The middle's always the hard part. Try again? I'll keep the ending warm.
+
+**Scene `after`** (event: `pf_quest_run(:CR_OCTAVE_NINTH_VERSE, :after)`)
+
+- **Carol** _(happy)_: We sing it at dusk. You're in every verse, you know. You're the one who stayed.
