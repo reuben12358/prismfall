@@ -178,6 +178,34 @@ BUILDERS["MOUNTAIN"] = mountain
 
 
 #---------------------------------------------------------------------------------------------
+# Rock-walled rooms: above the panel the wall (ceiling) simply goes on, quilted from a band of clean wall near the
+# panel's top (no cave mouths, crystals or outlines copied); the same wall continues beside the panel's upper rows.
+#---------------------------------------------------------------------------------------------
+def wall_labels(r0, r1, vmin=0.0, vmax=1.0, x0=0, x1=None, extra=None):
+    def fn(p):
+        r, g, b, s, v = hsv(p)
+        lab = np.full(p.shape[:2], -1, np.int16)
+        y, x = rows(lab), cols(lab)
+        ok = (y >= r0) & (y < r1) & (v >= vmin) & (v <= vmax) & (x >= x0) & (x < (x1 or p.shape[1]))
+        if extra is not None:
+            ok &= extra(p)
+        lab[ok] = 0
+        return lab
+    return fn
+
+
+def all_wall(x, y, lab):
+    return np.zeros(x.shape, np.int16)
+
+
+# CAVE and its cracked stage: carchagui's cave panel (2x). The very top rows are a darker ceiling band; the wall
+# exemplar is the band of plain wall between it and the two cave mouths.
+PLANS["5a681c5c1e"] = Plan(wall_labels(4, 24, vmin=0.36), all_wall, 1, sides=(100, 100), block=14, seed=5)
+# SNOWY_MOUNTAIN: the same panel in its snow-cave colours
+PLANS["a0dc52e2d4"] = Plan(wall_labels(4, 24, vmin=0.36), all_wall, 1, sides=(100, 100), block=14, seed=6)
+
+
+#---------------------------------------------------------------------------------------------
 def install():
     import sys
     M.PLANS.update(PLANS)
