@@ -464,6 +464,52 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
 - **570:** the brook bridges use `fw_bridge_*` (rails solid north/south, passage 8 / 1).
 - **build.py:** spec generators whose file name is not an identifier (staging copies like `gen_gym1.new.py`) are skipped.
 
+## 2l. Map builder 9 (2026-11-19): Saltmere as a harbour city, real stairs, the Rev 14 chain, the Chapter 0-4 roads
+- **Kit (`tdraw.py`, the city kit, appended to the `pf` part through `rdraw.pieces_late3`, deduplicated):** stone and
+  timber stairs redrawn as real steps (`st_stair_l/m/r`, `tb_stair_l/m/r`: two treads per tile with nosing, shaded riser,
+  cheek wall or log stringer); `rw_*` terrace kit (balustraded lip, coursed face, footing; solid side copings
+  `rw_W0`/`rw_E0`; ivy faces `rw_ivy0/1` as `vines`), `rw_rail_w/m/e` stone balustrade and `qy_rail_*` iron railing for
+  lips, `pf_hounds` (the Loyal Three monument), `pf_planter0-3`, `pf_well`, `hb_glint0-3` (wave crests over water),
+  `pf_chalkarch` (Lacecliff's sea arches, 7x5, walk-through), `dye_red/blue/yellow0-1` (the Dyers' Ford bands),
+  `pf_stepstone0-1`. `rkit.KITS['rw']` is the terrace kit. **`build.py` already rejects the old flat slab (OLD SLAB STAIRS,
+  `--strict`)**; no map uses it now.
+- **rkit:** tall grass now stands on layer 2 over the ground grass (rubric bare / layer2; terrain tag unchanged).
+  `seal_edges()` / `seal_against(conns, spans=...)`: on every side that has a connection, all walkable border cells are
+  closed except the crossing span (both maps of a connection carry matching spans), so no edge tile leads onto blocked
+  ground next door. Snow maps use a snowy stone (`m.SEAL`).
+- **`build.py`:** `check_seams()` (SEAM warnings; `--strict` fails): every edge tile of a connection is walked across with
+  Essentials' passability (the playtest's request 11/14). `trial_overlay.py` is merged like the puzzle EVENTS (below).
+- **Saltmere (`layouts/saltmere_rj.py`, tileset 55):** 140 Upper Town (North Gate gatehouse, barred until S108; High Town
+  terrace with balustrade and three stone stairs; ranks of townhouses and shops wall to wall with alleys, walled back
+  gardens and courts; the market square with the fountain and the Loyal Three; Lantern Theatre, Lantern House, PC, Mart,
+  bell tower; the promenade with iron railing and plane trees; the salt lake with pans; causeways to 146 and 147), 146 Harbour
+  (customs house on Harbour Square, warehouse rows, cranes, bollards, two ships at Quay Street, fish market on the West Mole,
+  the Legion berth on the East Mole, the breakwater with the striped light), 147 Old Town (Players' Gate, three terraces
+  and stairs, the Pell Playhouse above a 12-wide grand stair, the Little Lantern and the costumiers, Theatre Square with
+  playbill columns, lantern strings, stalls and the crowd). Chapter 2 events re-poured from the script: J1 on the green
+  before the gym, Dorian at the breakwater, Salt-caramel (`:ch3_juno_talk`) after the gym, Kestrel after S108, the
+  Chapter 2 close (V102 = 3). The puzzle engineer's audience keys (`pfm_audience`) are on the 18 named townsfolk.
+- **Roads (`layouts/routekit.py` + `layouts/routes_early.py`):** 520 (64x110), 521 (120x70), 527 (140x64), 528 (110x80),
+  541 (70x110), 552 (80x72), 540 (130x64), 524 (90x110), 566 (80x120), 577 (72x96), 578 (80x88), every leg with its
+  ROUTES.yaml landmark, side path, secret and the script's events. `routekit.Route` recipes: `road` (a lane with open
+  land), `forest_band`, `copse`, `clearing`, `sea` (beach and cliff), `terraces` + `crossing`, `pocket` (a secret behind a
+  Cut tree), `exit`, then `seat_events`, `dress`, `paint`, `write` (seals the edges, seeds the reachability check at every
+  exit). The old `reskin.py` refuses 520/521/524 now; their previous specs are kept as `layouts/old_*_reskin.yaml`.
+- **Rewired (SWAP_GYM1_GYM2 1A):** 100 N <-> 520 S; 520 N <-> 521 S; 520 W (Hale Bell, the quarantine roadblock) <-> 527 E;
+  527 W <-> 528 E; 528 W <-> 140 E (East Gate); 140 N (North Gate) <-> 541 S; 541 N <-> 552 S; 552 N <-> 540 S; 540 E <-> 524 W;
+  524 N warps <-> 120 S; 521 W warps <-> 524 S (the corded forest road, open from the wood when V105 >= 1); 120 N (North
+  Gate) <-> 566 S; 566 N <-> 577 S; 577 W <-> 570 E; 570 N <-> 578 S; 578 N <-> 562 S; 570 S <-> 560 N (the Causeway's west
+  end turned north; the Isenmar customs chain at the Border Stones unhooks from the Frostwick side); 560 E <-> 140 W. The
+  `R3_COCOON` warp is gone (548 is entered from the Deepwood only). Gym checks use `pfm_gym_won?(:LEADER_...)`.
+- **Trial events (`mapgen/trial_overlay.py`):** the Chapter 0-4 events of `design/TRIAL_EVENTS.yaml` laid over other
+  scripts' maps at build time (seated on the nearest reachable free cell), and the `pf_trial_ready?` branches on the
+  existing NPCs. Skipped on purpose: the Timburr gift and its planks, the tide-pool duel and its sea cave. New interiors
+  (`layouts/trial_interiors.py`): 148 Saltmere Lantern House, 126 Briarwick Lantern House, 168 the Net Loft; 542 the
+  Brinewife's Rest re-tiled.
+- **Run order:** `rcustom.py && rcompose.py && rstamps.py`, then `ferrow_rj, briarwick_rj, rimewood, dovetail,
+  saltmere_rj, routes_early, trial_interiors`, then `build.py`, then **the layouts and `build.py --strict` once more**
+  (edge sealing of town maps reads the neighbours' built maps where no span is given).
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

@@ -174,10 +174,20 @@ inside single-quoted Python strings.
   every .py in mapgen/ and tools/ (ast) and every .rb in plugins/ and mapgen/ruby (`ruby -c`) is checked and the whole
   run is rolled back if anything newly breaks. `--selftest` covers the Ferrymen's Mile cases. Two YAML sign texts it had
   broken (`520_reskin.yaml`, `layouts/old_520_wilds.yaml`, "THE FERRYMEN'S MILE") parse again.
-- **✓ maps.json segments:** 525, 548, 151, 152, 153, 132 → 2 (134 is not in maps.json; it inherits Briarwick's square).
-  548 is off 540's side list and on 524/525's.
+- **✓ maps.json segments:** 525, 548, 151, 152, 153, 132, 134 → 2 (134 "Loomhouse Upper Lofts - Granny's Knot" is now in
+  maps.json, reached by warp from 132; 133 is retired). 548 is entered only from 525 (DEEP_COCOON); 540's south edge is
+  552. Connections are declarative in `gen_docs.py`, so re-running it changes nothing.
 - **✓ maps.json connections** rewritten per 1A (`rev14_connections` marks the maps; spans of new or moved edges are the
   map builder's). Listed for the builder in `mapgen/REQUESTS.md` (cartographer entry, item 4).
 - **✓ 577** Handfast Arch carries the bolted Meridian sunburst (ROUTES.yaml landmark); the Border Stones stay on 560.
 - **✓ Saltmere's Old Rod** (encounters [140]) was Lv 12-16 against the new cap 15: now 10-14. `validate_encounters.py`: 0 errors.
 - **✓ ROUTES.yaml** regenerated with the Revision 14 chain, segments and connections notes.
+
+### 1D. Map builder 9 status (2026-11-19)
+- **✓ 1A** all connections and warps, with the new maps 527, 528, 552, 566, 577, 578 built (see mapgen/REQUESTS.md "From
+  map builder 9" for every cell). The quarantine roadblock is at the Hale Bell on 520; 521's forest road is the corded road
+  (V105 >= 1 from the wood); the survey flags, surveyor, Juno's flag line and the Antidote are on 552.
+- **✓ 1C** `badge_count` / `has_badge?` tests: 120 (6), 121 (3), 141 (1, Dorian), 544 (1, Dorian), 161 (1, Marisol) now use
+  `pfm_gym_won?(:LEADER_...)`. Chapter numbers: 141 sets 3 at Saltmere's close, Briarwick's Gale Post sets 4. Send-off
+  re-poured (story_early.py and route1.py: "Saltmere's first", the tarts, "They use salt"). J1 before the gym, Dorian at
+  the breakwater, Salt-caramel after Badge 1, Kestrel and the Chapter 2 close re-poured on 140/146.

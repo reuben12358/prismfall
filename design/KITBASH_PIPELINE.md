@@ -213,3 +213,23 @@ Tool: `sheet_cast.py <recipe>` exports `art/work/kitbash/<name>/<NAME>_<v>(_nati
 - **Bug to avoid:** after `im = mat.patch(...)` or `mat.recolour(...)`, any `p = im.load()` taken earlier is stale.
 
 - 2026-11-19 21:46: the user asked to remove the shocked expression entirely. JUNO_shocked/JUNO_panic now point at the surprised face. Do not draw a separate shocked face for Juno.
+
+## 14. Player characters (2026-11-19)
+
+Sheet: `art/previews/22_player.png`. Scripts: `player.py` (fronts A1 A2 B1 B2), `player_back.py` (EBDX backs), `player_ow.py`
+(charsets), `sheet22.py` (exports to `art/work/kitbash/player/`, sheet). Only the two charsets are installed, and only to
+`art/out/preview_only/Graphics/Characters/`. The appearance choice is `pbChangePlayer(1/2)` in `mapgen/layouts/story_early.py`
+(map 109, "That's me. (Style A/B)"), not in Prismfall Core.
+
+- **Concept "off the last ferry":** colourless (chalk white, ash, slate) + one accent, a faded prism-teal canvas sea bag with a red
+  ferry tag. The bag is the silhouette everywhere. `player.sea_bag()` builds it standalone from the Backpacker's pack (column-extended
+  to a round bottom, left seam closed, cinched rope neck, tag) for reuse.
+- **Back-sprite format:** the base project's active players (metadata [1]/[2] = Red/Leaf) use 5 frames of 160x234 (80x117 art,
+  doubled at odd offsets: `backstrips.frames` picks the uniform phase). EBDX: `src_rect.width /= 5`, frame 0 idle, +1 on the wind-up,
+  then +1 every other tick (frames 2-4). Brendan/May and the HGSS partner packs are 160x160; fangame backs are 128x128 (64-art).
+  Heads are about 30 px wide in all of them, so parts mix.
+- **Back head swaps:** `player_back.align` finds each frame's head by matching frame 0's cap; erase only head colours inside the
+  shifted polygon; protect the raised ball hand per frame; `mat.drop_specks` clears the left-over outline bits.
+- **Charsets:** the base FRLG charsets share one animation template, so heads (rows 0-14) and bodies (15-23) splice cell by cell.
+  RIVAL1's spikes read as Blue: avoid. A long-hair head hides a back-worn bag in the up row: draw the bag on top.
+- **Watch:** grey-ash hair can read as elderly at 16 px.

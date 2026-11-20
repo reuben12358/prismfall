@@ -1,0 +1,113 @@
+# Pokémon Prismfall - Z-moves (Essentials v21.1 moves format, merged as PBS/moves_zpower.txt).
+# Owner: Prismfall Z-Power (plugins/Prismfall Z-Power, design/EEVEE_OCTAVE.md section 5). No Pokemon learns these:
+# a held Z-crystal turns a base move into one for a single turn. Power and category come from the base move at that
+# moment (Power 1 / Category here are placeholders); Accuracy 0 = never misses; no CanProtect flag = goes through
+# Protect for 1/4 damage. Flag ZMove lets field rules match every Z-move; CannotMetronome keeps them out of Metronome.
+#-------------------------------
+[HYDROVORTEX]
+Name = Hydro Vortex
+Type = WATER
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user summons a raging whirlpool with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[GIGAVOLTHAVOC]
+Name = Gigavolt Havoc
+Type = ELECTRIC
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user hurls a great ball of lightning with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[INFERNOOVERDRIVE]
+Name = Inferno Overdrive
+Type = FIRE
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user breathes a stream of fire with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[SUBZEROSLAMMER]
+Name = Subzero Slammer
+Type = ICE
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user drops the temperature and freezes the target with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[BLOOMDOOM]
+Name = Bloom Doom
+Type = GRASS
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user gathers the energy of plants with its Z-Power and strikes. Its power comes from the move it was born from.
+#-------------------------------
+[SHATTEREDPSYCHE]
+Name = Shattered Psyche
+Type = PSYCHIC
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user seizes the target's mind with its Z-Power and throws it about. Its power comes from the move it was born from.
+#-------------------------------
+[BLACKHOLEECLIPSE]
+Name = Black Hole Eclipse
+Type = DARK
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user gathers dark energy with its Z-Power and draws the target in. Its power comes from the move it was born from.
+#-------------------------------
+[TWINKLETACKLE]
+Name = Twinkle Tackle
+Type = FAIRY
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user traps the target in a charming space with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[EXTREMEEVOBOOST]
+Name = Extreme Evoboost
+Type = NORMAL
+Category = Status
+Power = 0
+Accuracy = 0
+TotalPP = 1
+Target = User
+FunctionCode = PrismfallExtremeEvoboost
+Flags = ZMove,CannotMetronome
+Description = Eevee calls on every Imprint it could have become, and its Attack, Defense, Sp. Atk, Sp. Def and Speed sharply rise.

@@ -81,6 +81,14 @@ if defined?(PrismfallPuzzles)
     :solved => { :switches => { 506 => true, 507 => false, 508 => true } },
     :hints => ["A spark runs along a whole thread. Count the cocoons on each one.", "The middle cocoon hangs on both threads. Touch both posts and it has been lit twice.", "Touch the alpha post, then the beta post: the first and third curtains lean the other way."],
   })
+  PrismfallPuzzles.room(:d7_frost_loom, {
+    :name => "The Frost Loom",
+    :map => 562,
+    :home => false,
+    :reset => { :switches => { 531 => false, 532 => false, 533 => false } },
+    :solved => { :switches => { 531 => true, 532 => true, 533 => true } },
+    :hints => ["Each thread runs to more than one curtain. Count the cracks, not the pulls.", "The middle thread would refreeze the second curtain if anything else had broken it.", "Pull the left thread and the right thread, once each."],
+  })
   PrismfallPuzzles.room(:d3_anchors, {
     :name => "Cocoonfall anchors",
     :map => 548,

@@ -39,7 +39,7 @@ module PrismfallPuzzles
     dx, dy = { 2 => [0, 1], 4 => [-1, 0], 6 => [1, 0], 8 => [0, -1] }[pl.direction]
     jump = w[:jump] || 3
     20.times do
-      pbSEPlay("Battle jump", 70, 120) rescue nil
+      pbSEPlay("Player jump", 70, 120) rescue nil
       tx, ty = pl.x + dx * jump, pl.y + dy * jump
       ride(tx, ty)
       case web_kind(tx, ty)
@@ -55,7 +55,7 @@ module PrismfallPuzzles
   end
 
   def self.web_fall(w)
-    pbSEPlay("Fall", 80) rescue (pbSEPlay("Battle damage weak") rescue nil)
+    pbSEPlay("Battle damage weak", 80) rescue nil
     pbMessage(_INTL("...and nothing there to land on. You drop into Tamsin's safety net, far below."))
     pbFadeOutIn do
       $game_player.moveto(w[:start][0], w[:start][1])

@@ -28,6 +28,9 @@ switches:
   D2_COCOON1: 506     # Deepwood lantern cocoons lit
   D2_COCOON2: 507
   D2_COCOON3: 508
+  D7_CURTAIN_1: 531   # the Rimewood's Frost Loom: icicle curtains broken
+  D7_CURTAIN_2: 532
+  D7_CURTAIN_3: 533
   D3_BRIDGE_A: 511    # Cocoonfall Hollow crystal-silk bridges taut
   D3_BRIDGE_B: 512
   D3_BRIDGE_C: 513

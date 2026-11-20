@@ -297,7 +297,7 @@ def main():
         K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_canopy', "Pim. I mind the nets. Want the Joltik calmed down, or a nudge?"),
         {'type': 'npc', 'name': 'Leavanny', 'at': list(A['leavanny']), 'sprite': 'Followers/LEAVANNY', 'dir': 'down', 'commands': [
             "Leavanny is tailoring a challenger's cloak out of leaf and silk. It holds the leaf up against you, decides you're the wrong colour, and starts again.",
-            {'se': 'Cry/LEAVANNY'}]},
+            {'se': 'Cries/LEAVANNY'}]},
         reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[131, e.id, 'A']] } >= 1", ['Juno']),
         {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
             {'commands': []},

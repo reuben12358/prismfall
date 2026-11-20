@@ -144,9 +144,9 @@
     - 13
     sprite: NPC 07
     move: random
-    text: 'One for the weaver, two for the stage,
+    text: 'One for the stage and two for the weave,
 
-      three for the river that won''t turn its page,
+      three for the river that won''t take its leave,
 
       four for the lantern, five for the dune...!'
   - type: event

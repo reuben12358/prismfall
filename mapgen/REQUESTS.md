@@ -384,3 +384,32 @@ values in `maps_out/PBS/map_metadata_prismfall.txt` already match `mapgen/data/t
 6. **(done) Fly follows the live HealingSpot:** `mapgen/ruby/009_TownMap.rb` (copy in maps_out/Plugins/Prismfall Maps
    is identical) wraps `PokemonRegionMap_Scene#pbGetHealingSpot`, so when a rebuild moves a PC door, Fly uses the map
    metadata's `HealingSpot` instead of the coordinates in `town_map.txt`. Nothing to do on your side.
+
+## From map builder 9 (2026-11-19)
+**Doors and warps that moved** (links unchanged unless said; build.py checks every arrival and now every edge seam):
+- **Saltmere 140:** PC (24,32) -> **(54,24)** (HealingSpot [140,54,25]), Mart (58,30) -> **(60,24)**, Pageant Hall / Lantern
+  Theatre (46,26) -> **(34,24)**, Saltwife's House (26,6) -> **(23,49)**; **new** Lantern House door (25,24) `SM_LANTERN` -> 148.
+  **146** Harbour Office (52,26) -> **(55,21)**. **147** Playhouse `SM_GYM` (44,18) -> **(44,33)**.
+- **Saltmere districts:** 140 (56-61,71) <-> 146 (42-47,0); **new** 140 (9-14,71) <-> 147 (40-45,0) (the Players' Causeway).
+  The old Players' Gate edge warp 140 E (87,42-45) <-> 147 W (0,36-39) is gone: 140's east edge is the East Gate to 528.
+- **Connections (PBS):** 140 N 43 <-> 541 S 30; 140 W 31 <-> 560 E 12; 140 E 44 <-> 528 W 38; 100 N 28 <-> 520 S 11;
+  520 N 30 <-> 521 S 58; 520 W 72 <-> 527 E 22; 527 W 18 <-> 528 E 30; 541 N 34 <-> 552 S 38; 552 N 39 <-> 540 S 20;
+  540 E 30 <-> 524 W 50; 120 N 52 <-> 566 S 38; 566 N 42 <-> 577 S 30; 577 W 37 <-> 570 E 23; 570 N 27 <-> 578 S 40;
+  578 N 36 <-> 562 S 26; 570 S 4 <-> 560 N 2. Removed: 120 W <-> 540, 540 S <-> 541, 560 W <-> 570 E, 570 N <-> 562 S.
+- **Rebuilt roads:** 520, 521, 524, 540, 541 at ROUTES.yaml sizes. Doors: 521 farmhouse `R2_FARM` (30,35) -> **(50,44)**;
+  521 forest-road warps (0,9-11) now land on 524 (40-42,108); 524 north warps (44-46,0) <-> 120 (35-36,63); 524 Woodward's Hut
+  `WOOD_HUT` (42,25) -> **(58,51)**; 524 Deepwood warp `WOOD_DEEP` (49,27) -> **(89,48)** (Cut tree (82,48)); 540 manor
+  `R3_MANOR` -> **(64,14)**, mine mouth `R3_MINE` (51,15) -> **(8,24)**; 541 mine back door `R4_MINE` (25,24) -> **(57,49)**,
+  Brinewife's Rest `R4_REST` -> **(12,58)**. **Removed:** `R3_COCOON` (548's south warp is a "glass-choked" sign now).
+- **Briarwick 120:** **new** Lantern House door (26,8) `BW_LANTERN` -> 126; "To Gossamer Wood b" lands on 524 (45,1).
+- **Ebbmouth 160:** **new** Net Loft door (36,24) `EB_NETLOFT` -> 168.
+- **Playtest bot:** waypoints on 520/521/524/540/541 changed with the rebuilds; the Saltmere entrance is the East Gate
+  edge from 528, the North Gate is barred until S108 (events "North Gate bar 1-6" at 140 (43-48,6)).
+
+**Done from the requests above:** distribution items 1 (Sinistea from the manor mantel), 2 (Carbink glimpse, battle Lv 20
+after Tamsin), 3 (Ebbmouth mast Wattrel), 4 (the Dovetail's Wattrel nest condition), 5 (the sap-tree duel after Badge 2;
+the silk wall and the fallen log on 524). Playtest 11 / 14: `build.py` has a SEAM check and `--strict` fails on it.
+Puzzle engineer item 14: `pfm_audience(:KEY)` is the first command of all 18 named people (140, 143, 144, 146, 147).
+Trials: 148 / 126 / 168 built; the Legion barge berth on 146 has Brakka and the herald; the Dovetail can be boarded from
+the Ferrow berth after Chapter 1 (gangplank on the pier, 100 (34,52) -> 109 (9,14)). Not done: the Timburr gift and the
+tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Rehearsal (not built).

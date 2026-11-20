@@ -68,10 +68,13 @@ module PrismfallZ
     return CRYSTALS.keys + EXCLUSIVE.keys
   end
 
+  # A Z-crystal: listed above, or any item with the ZCrystal flag in its PBS entry.
   def self.crystal?(item)
     return false if !item
     item = item.id if item.respond_to?(:id)
-    return CRYSTALS.key?(item.to_sym) || EXCLUSIVE.key?(item.to_sym)
+    item = item.to_sym
+    return true if CRYSTALS.key?(item) || EXCLUSIVE.key?(item)
+    return GameData::Item.exists?(item) && GameData::Item.get(item).has_flag?("ZCrystal")
   end
 
   def self.zmove_ids

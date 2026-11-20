@@ -1,0 +1,84 @@
+# Pokémon Prismfall - Z-Power items (Essentials v21.1 items format, merged as PBS/items_zpower.txt).
+# Owner: Prismfall Z-Power (design/EEVEE_OCTAVE.md section 5). The crystals are slivers of the Crown's glass from the
+# Glassfall, each tuned by the Prism Choir to one Imprint; held, they are never used up and can't be taken. The ring is
+# what lets the player's Pokemon use them (NPC trainers only need the crystal). Flag ZCrystal marks them unlosable in battle.
+#-------------------------------
+[WATERIUMZ]
+Name = Waterium Z
+NamePlural = Waterium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Water Imprint. Held, it turns a Water-type attack into a Z-Move once per battle.
+#-------------------------------
+[ELECTRIUMZ]
+Name = Electrium Z
+NamePlural = Electrium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Electric Imprint. Held, it turns an Electric-type attack into a Z-Move once per battle.
+#-------------------------------
+[FIRIUMZ]
+Name = Firium Z
+NamePlural = Firium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Fire Imprint. Held, it turns a Fire-type attack into a Z-Move once per battle.
+#-------------------------------
+[ICIUMZ]
+Name = Icium Z
+NamePlural = Icium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Ice Imprint. Held, it turns an Ice-type attack into a Z-Move once per battle.
+#-------------------------------
+[GRASSIUMZ]
+Name = Grassium Z
+NamePlural = Grassium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Grass Imprint. Held, it turns a Grass-type attack into a Z-Move once per battle.
+#-------------------------------
+[PSYCHIUMZ]
+Name = Psychium Z
+NamePlural = Psychium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Psychic Imprint. Held, it turns a Psychic-type attack into a Z-Move once per battle.
+#-------------------------------
+[DARKINIUMZ]
+Name = Darkinium Z
+NamePlural = Darkinium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Dark Imprint. Held, it turns a Dark-type attack into a Z-Move once per battle.
+#-------------------------------
+[FAIRIUMZ]
+Name = Fairium Z
+NamePlural = Fairium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Fairy Imprint. Held, it turns a Fairy-type attack into a Z-Move once per battle.
+#-------------------------------
+[EEVIUMZ]
+Name = Eevium Z
+NamePlural = Eevium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass the Octave sang over together. Held by an Eevee, it turns Last Resort into Extreme Evoboost.
+#-------------------------------
+[ZPOWERRING]
+Name = Z-Power Ring
+NamePlural = Z-Power Rings
+Pocket = 8
+Price = 0
+Flags = KeyItem,ZRing
+Description = Vesper's cantor's ring. With it, your Pokemon can draw on a held Z-Crystal and unleash a Z-Move once a battle.

@@ -629,7 +629,7 @@ events:
   commands:
   - Leavanny is tailoring a challenger's cloak out of leaf and silk. It holds the leaf up against you, decides you're the
     wrong colour, and starts again.
-  - se: Cry/LEAVANNY
+  - se: Cries/LEAVANNY
 - type: event
   name: Reveal helper
   at:
