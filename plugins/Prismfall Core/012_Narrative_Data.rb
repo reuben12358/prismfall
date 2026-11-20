@@ -282,11 +282,11 @@ module Prismfall
     # WAR_ISENMAR_WON). Merged after the base tables below are defined.
     #---------------------------------------------------------------------------
     CHOICES.merge!({
-      :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
-      :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
-      :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
+      :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: from Frostfang Pass the PC sees the Dominar's legions massing on Ossaria's western dunes before anyone else knows" },
+      :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's siege-runners ask the Unimprinted to walk a sledge convoy from Duneholt through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
+      :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held in the Ashkaar Siege Camp) and the Dominar's nephew (held by the Thane in Skaldfast)" },
       :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
-      :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Shattered Ice" },
+      :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Glass Dunes" },
       :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table in Skaldfast (only if one side won)" },
       # the story lead's two Blessing keys (14_WAR_AND_BLESSING Part A)
       :ch20_colors   => { :values => [:elowen, :zenith, :nadir, :unsworn], :once => true, :description => "Ch20 Day 0: whose colors the Unimprinted challenger wears (flavor + one delta)" },

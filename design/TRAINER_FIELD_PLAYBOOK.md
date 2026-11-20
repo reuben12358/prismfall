@@ -506,11 +506,11 @@ Late fights (the Octave gauntlet, the war doubles and legendaries): §6 above. E
 - **`design/SWAP_GYM1_GYM2.md`, `design/PLACE_NAMES.md`, `design/TRIALS.md`, `design/EVENT_POKEMON.md` had not landed**
   when this pass ended. Route levels use my provisional stretch-per-map reading (`routes.py` `PLAN`, keyed by map id);
   Trial opponents and event/boss Pokémon will be built to the same standards once those files exist.
-- **Map events must swap gym numbers** (Loomhouse → `gym_battle(2)`, Pell Playhouse → `gym_battle(1)`); logged in
-  `mapgen/REQUESTS.md`. Until then each gym starts the other Warden.
+- ~~**Map events must swap gym numbers**~~ **Resolved:** the Loomhouse and Playhouse events call
+  `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN))` / `pfm_gym(:LEADER_DORIAN)` (`mapgen/ruby/008_GymOrder.rb`).
 - **Bosses owned by others:** the Glass Matriarch (Galvantula) was written as Lv 16 after Gym 1; it is after Gym 2 now
   (about Lv 20). The Hard Warden boss rule names Ilsa and Celestine (Celestine's ace is Sylveon now).
 - `MERIDIAN_ASHE` has a trainer type but no story battle anywhere in `story/`; no team was built.
-- Cut is badge 1 in Core's `FIELD_MOVE_BADGES` ("Briarwick Cutter's House"); Briarwick is badge 2 now. Systems/story call.
+- ~~Cut is badge 1 in Core's `FIELD_MOVE_BADGES`~~ **Resolved:** Core has `:CUT => 2` (after Tamsin's badge, SPINE Rev 14).
 - Flower Garden starting stage for Gym 9 comes from the puzzle; Juno's team is written for stage 1.
 - Nothing here has been played by a person.

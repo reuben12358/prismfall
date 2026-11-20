@@ -5,6 +5,25 @@
 
 ---
 
+## Portrait use (every script; coordinator ruling, 2026-11-20)
+
+The user: "i dont think we need a portrait for every conversation." These rules apply to every script in `story/` and every
+map event built from one.
+- **Who gets a portrait:** main and named story characters only. That means the rivals and companions (Juno, Kestrel),
+  the Wardens (Kaito, Dorian, Tamsin...), the villains (the Mourner, Voss, Sable...) and key NPCs (Larch, Wenna, Coll, Edda,
+  Hesper, Rowan, Vesper...).
+- **When:** in story scenes, plus the occasional comedy beat where the face is the joke. A line with an emote such as
+  *(shock lines)* or *(sweat drop)* keeps its portrait.
+- **Never:** generic NPCs, townsfolk, shopkeepers, route and gym trainers, guards, signs and objects. They get a plain text
+  box, with a name box if it helps: `[name: Gym Guide] ...`.
+- **Not on every line.** A speaker's portrait goes on their first line in a scene and on any line where their expression
+  changes. Their other lines use the name box only: `[name: Juno] ...`. A new scene starts fresh: a new event, an
+  `[after X]` variant, or a choice branch.
+- **Notation:** `[portrait: NAME, expression]` = face and name box · `[name: X]` = name box only · no tag = narration.
+  Map events use `\pf[NAME,expr]` only where the script has a portrait tag.
+
+---
+
 ## WAR-1 — "The Beam Clash on the Glass Dunes" (Ch19 climax; ~95 s)
 
 **Staging:** on map 926, the Glass Dunes, with `on_map: true` (the way `013_Scenes_War_OnMap.rb` stages it), or on a stage picture exported from that map until it is built. The legendaries are **overworld-scale acting sheets** in the map's 3/4 view (design/CUTSCENES.md §4), never battle sprites: Primal Kyogre is as long as a rank of soldiers, and Reshiram's wings cover the Siege Camp's earthwork. The armies are charset blocks under banners. Isenmar and Kyogre are on the left (west), Ashkaar and Reshiram on the right (east).
@@ -34,6 +53,24 @@
 | 15 | Slow fade (3 s) | The Glass Dunes at sunrise: steam-glass where the sand was, the flood's last wave standing in it as glass, both armies' glassed dead upright. At the edge the bone-carters raise a new white banner and walk out onto the glass | — | Larch (radio): "That wasn't a battle to them. That was a *reading*." |
 
 **Skippable:** yes, after first viewing. **Replay:** Dream Mist / theater menu.
+
+---
+
+## RD-1 — "The Ring Sings" (Ch8, the Ring-Day; ~8 s)
+
+> **Withdrawn from Ch8 (SPINE Revision 21):** the Mega Ring now comes after Badge 13. The shots still work wherever the Mega workstream moves the scene; change the backdrop to suit.
+
+**Staging:** on map 244, the Hearthguild Hall, `on_map: true`, in the middle of the Ring-Day dialogue (`story/22_SCRIPT_CH8.md`, after "Somewhere under your ribs, something answers it"). It's small on purpose: no beams, no music sting. Its job is to be remembered when the cradle sings in Ch17 (09_MYSTERIES #1).
+**Backdrop:** the guild's great anvil, forge-light (or, after `:ch8_caldera` = *vent*, one candle-forge and a cold hearth). Brann at the anvil, the PC facing him, Larch on a crate by the door.
+
+| # | Camera | Sprites / action | FX | Text |
+|---|---|---|---|---|
+| 1 | Close on the PC's open hand (1.5 s) | The gold ring drops into the palm and settles | Forge-light flicker on the band | — |
+| 2 | Extreme close on the chip (2 s) | The colourless chip catches the light and breaks it into eighteen thin colours, then gathers them back to clear | Prism fan, 18 hues, 20 frames out and 20 back; SE: one sustained glass note | — |
+| 3 | Mid on the PC (2 s) | The PC's hand goes to their sternum | One colourless star-pulse under the coat (the scar, 03_CAST), 1 frame bright, 30 frames fade; the room desaturates 30% and back | — |
+| 4 | Two-shot, Brann and Larch (2.5 s) | Brann's hammer hand stops mid-air. By the door, Larch lowers her book | The glass note fades under the forge's roar (or under silence, after *vent*) | — (dialogue resumes: `[portrait: BRANN, shocked] ...`) |
+
+**Variant:** none by key; only the backdrop follows `:ch8_caldera`. **Skippable:** no (8 s). **Replay:** theater menu.
 
 ---
 

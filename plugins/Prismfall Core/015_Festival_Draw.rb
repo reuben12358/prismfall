@@ -75,7 +75,7 @@ module Prismfall
           [:KESTREL, :AEGISLASH,   :attack,   "King's Shield, then the counter."],
           [:ODESSA,  :CORVIKNIGHT, :forfeit,  "She salutes and loses with style."] ] },
       { :pair => [:ANJA, :BRANN], :winner => :ANJA, :condition => "flag(:WAR_ISENMAR_WON) || (flag(:WAR_STOPPED) && choice(:war_prisoner) == :free)", :moments => [
-          [:BRANN, :COALOSSAL, :send_out,     "Two Wardens who were on opposite shores a season ago."],
+          [:BRANN, :COALOSSAL, :send_out,     "Two Wardens who were on opposite sides of the Steamline a season ago."],
           [:ANJA,  :MAMOSWINE, :beam_clash,   "Blizzard meets Flamethrower: the war's beam clash, in miniature, and this time nobody dies."],
           [:BRANN, :COALOSSAL, :faint,        "Brann laughs until he coughs. \"Aye. Ice remembers.\""] ] },
       { :pair => [:ANJA, :BRANN], :winner => :BRANN, :condition => nil, :moments => [

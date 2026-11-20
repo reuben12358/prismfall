@@ -88,7 +88,7 @@ From Act III the Wardens share Gale Post relay messages the PC can read at any P
 [portrait: DORIAN, smug] There are still two trees, darling. It's a very efficient forest.
 ```
 
-### Ch3 — "The Apology Spiral" (Tamsin, in the Loomhouse foyer, before Gym 2)
+### Ch3 — "The Apology Spiral" (Tamsin, in the Loomhouse lobby, before Gym 2; the gym is the web Canopy upstairs)
 ```
 [portrait: TAMSIN, panic] Sorry — the gym's a bit tangled today — sorry —
 > It's fine.

@@ -192,3 +192,22 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 | S232 | Mirror: `WAR_BOTH_BROKEN` | Empty pavilions for both kingdoms |
 
 S181–S193 use part of the block previously reserved for per-Warden side-arc steps; S194–S220 remain reserved for those. V122–V123 use two of the reserved chapter counters.
+
+## Pointer rows: puzzle IDs the story touches (outside 101–300)
+
+These IDs belong to the puzzle blocks (gyms 301–494, GYM_PUZZLES §1; dungeons 501–600, DUNGEON_PUZZLES §0). Their names
+and owners live in **`mapgen/flags.yaml`**. They are listed here only because story scripts and story staging read them.
+Story events never set them. **A switch and a variable with the same number are different objects** (S305 is not V305).
+
+| ID | Name | Meaning | Owner / where |
+|---|---|---|---|
+| V305 | CANOPY_WEB_A | Gym 2, the Canopy (131): the bottom Joltik web. 0 = as built (slack), 1 = flipped. The gold Joltik (ledge 3) flips A and B | Loomhouse block (Tamsin); `mapgen/puzzles/canopy.py`, runtime `008_Puzzles_Webs.rb`; script `21_SCRIPT_CH3.md` Map 131 |
+| V306 | CANOPY_WEB_B | The middle web, on both strands: the gold Joltik and the blue Joltik (west perch) each flip it | as V305 |
+| V307 | CANOPY_WEB_C | The top web. The blue Joltik flips B and C. Solved = A 1, B 0, C 1 (spark both Joltik once each); Pim's reset sets all three to 0 | as V305 |
+| V313 | STAGE_AUDIENCE | Gym 1, the Saltmere audience: Saltmere townsfolk met (each counts once) plus Saltmere Trial-board quests done. 0–6 → the Grand Stage starts at stage 1 (Opening Night), 7–13 → stage 2 (Encore), 14+ → stage 3 (Standing Ovation). Map 154's seats fill by it. From 7, your fans cheer for **your** side (your Pokémon bask in the applause), and at Standing Ovation the house cheers you, not Dorian (his troupe loses the bask; his Normal moves stay ×1.5). Pays $150 a head after the win | Playhouse block (Dorian); `plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb`, the townsfolk call `pfm_audience(:key)`; script `20_SCRIPT_CH0-2.md` Saltmere |
+| S531 | D7_CURTAIN_1 | Dungeon D7, the Rimewood's Frost Loom (562): icicle curtain 1 broken. The left thread cracks curtains 1+2, the middle one 2+3, the right one 3. A thread refreezes any curtain on its line that's already broken | D7 block 531–535; `design/DUNGEON_PUZZLES.md` D7 |
+| S532 | D7_CURTAIN_2 | Curtain 2 broken | as S531 |
+| S533 | D7_CURTAIN_3 | Curtain 3 broken. All three = the trapper's cache (Snowball ×2) on the east side path. Unique answer: left + right | as S531 |
+
+*Not in this list:* S305–S309 are the Loomhouse's switches (S305–S307 are the Upper Lofts cords α/brass/γ, S308
+Granny's Knot), V309 is the Upper Lofts bridge, and 310–314 are the Playhouse backstage. See `mapgen/flags.yaml`.

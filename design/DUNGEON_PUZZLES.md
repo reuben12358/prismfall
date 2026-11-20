@@ -108,7 +108,7 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
 ## D3 Cocoonfall Hollow (548, 32×28, `:BLEED`, optional) — "the shuttle re-threads"
 **Rule:** Mother Loom's Shuttle (key item, from Tamsin after her badge, Gym 2) can **re-thread crystal silk**.
 - Each of three **cocoon anchors** pulls its crystal threads taut or slack. A taut thread is a bridge; slack is void.
-- The coupling is Gym 2's (the Weaving Hall), binary now: **anchor 1** toggles bridges a and b, **anchor 2** toggles b and c, **anchor 3**
+- The coupling is Gym 2's Joltik strands (one pull flips everything on its thread; the Canopy, GYM_PUZZLES Gym 2): **anchor 1** toggles bridges a and b, **anchor 2** toggles b and c, **anchor 3**
   toggles a and c.
 - **Layout:** the hamlet sits on a crater floor. Three bridges cross the glass ravine:
   - **a** to the TM81 cocoon-house (NE);
@@ -193,7 +193,7 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
 ## D7 The Rimewood (562, 48×56) and Rimewood Glade (563, 34×30, Cut) — borderland A
 **Rule:** frost holds what silk holds. This is the first ice in the game, a preview of Gym 10, gentler.
 - **The Frost Loom (562 centre).**
-  - A frozen heddle frame (a callback to Gym 2, the Weaving Hall). Three frozen threads hold three icicle curtains over the trail's
+  - A frozen heddle frame (a callback to Granny Loom's looms in the Loomhouse lobby, and to Gym 2's Joltik strands: one pull changes everything on its line). Three frozen threads hold three icicle curtains over the trail's
     side path.
   - Pulling a thread (action) runs frost along it: it **cracks** each frozen curtain on its line and **refreezes** any
     broken one. **Left** → curtains 1 and 2 · **middle** → 2 and 3 · **right** → 3.

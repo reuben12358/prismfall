@@ -6,7 +6,7 @@
 > **Keys and switches keep their old names.** `:ch3_juno_talk`, `CH3_PAGEANT_DONE`, `CH3_J1_DONE` and `CH3_UNDERSTUDY_GOT` are all Chapter 2 now; IDs never renumber (FLAGS.md).
 
 ## Conventions
-- `[portrait: NAME, expression]` precedes each portrait line. No tag = plain message box (narration, signs, generic NPCs use `[name: X]` with no portrait).
+- `[portrait: NAME, expression]` shows a face. **Portrait use** (`story/13_CUTSCENES.md`): named story characters only, on their first line in a scene and where their expression changes (or a comedy beat with an emote). Their other lines use `[name: X]`. Generic NPCs, signs and trainers never get one: `[name: X]` or no tag. No tag = plain message box (narration).
 - *(italics)* = emote bubble or staging. `MOVE:` = movement route. `SE:` / `BGM:` = audio. `WAIT n` = frames.
 - `> option` = a choice. `→` = what follows. `PC` = the player; `\PN` = player name.
 - **Script calls:** `pf_choose(:key, :value)`, `pf_bond_add(:ID, n)`, `pf_standing_add(:FACTION, n)`, `pf_resonance_add(n)`, `Prismfall.rival_battle(...)`, `Prismfall.gym_battle(n)`, `Prismfall.game_over(:GO_X)`, `Prismfall.record_starter(...)`. Choice effects in NARRATIVE_KEYS §4.2 apply automatically on `pf_choose`; extra deltas are written out.
@@ -66,7 +66,7 @@ MOVE: Edda stomps in from the wheelhouse. *(anger vein)*
 MOVE: Edda steps closer, then stops dead. *("..." bubble)* WAIT 40.
 [portrait: EDDA, shocked] Don't lean on my rail like that, you'll— huh.
 [portrait: EDDA, neutral] ...Never mind. You stand how you like.
-[portrait: EDDA, neutral] Mind the gap when we dock. And don't look down at the water after dark.
+[name: Edda] Mind the gap when we dock. And don't look down at the water after dark.
 > Why not?
   [portrait: EDDA, deadpan] Because I said, and it's my boat.
 > ...
@@ -109,11 +109,11 @@ One of them, far to the north, flickers.
 MOVE: Voss walks up beside the PC and leans on the rail, right next to the sign. He holds a chipped white mug with a faded sunburst.
 [portrait: VOSS, happy] First crossing? Everyone goes quiet when they see the lights.
 [portrait: EDDA, angry] *(from the wheelhouse)* RAIL! *(anger vein)*
-[portrait: VOSS, happy] I believe the rail has no objection, Captain.
-[portrait: EDDA, angry] Nobody asked the passengers in the nice coats!
+[name: Voss] I believe the rail has no objection, Captain.
+[name: Edda] Nobody asked the passengers in the nice coats!
 [portrait: VOSS, neutral] She's been shouting at me since I was a linesman. It's how I know I'm home.
-[portrait: VOSS, neutral] I've spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.
-[portrait: VOSS, neutral] So. You're coming *in* on the day everyone else wishes they could get out. That takes nerve or bad luck.
+[name: Voss] I've spent a month in a marble room asking the Concert not to do this. They did it anyway. Politely.
+[name: Voss] So. You're coming *in* on the day everyone else wishes they could get out. That takes nerve or bad luck.
 > Nerve.
   [portrait: VOSS, happy] Good. Velmora runs on it.
 > Bad luck.
@@ -125,7 +125,7 @@ MOVE: Voss walks up beside the PC and leans on the rail, right next to the sign.
 (Received: BADGE CASE.)
 ITEM DESCRIPTION: A slim brass case with eighteen empty settings. Stamped on the hinge: MERIDIAN CONCORD.
 [portrait: VOSS, neutral] We make them for the League anyway. Call it a welcome from a fellow traveler.
-[portrait: VOSS, neutral] And this, if you'll take it. A Meridian Fellowship. A little money each month, a discount at any Mart. We give them to young trainers with promise.
+[name: Voss] And this, if you'll take it. A Meridian Fellowship. A little money each month, a discount at any Mart. We give them to young trainers with promise.
 ```
 **CHOICE `:pro_fellowship`**
 ```
@@ -177,7 +177,7 @@ MOVE: Woman with crate steps through. SE: chime. The bar glows white.
 ### EV "Edda's last call" (touch, at the foot of the gangway) — **Game over `GO_HOMEWARD`**
 ```
 [portrait: EDDA, neutral] That's it, then. Once I cast off the Concert's cutters won't let me back across.
-[portrait: EDDA, neutral] Last chance, sprog. Anyone who wants off this rock rides with me now.
+[name: Edda] Last chance, sprog. Anyone who wants off this rock rides with me now.
 > I'm staying.
   [portrait: EDDA, happy] Thought so. Go on. Mind the gap.
 > I want to go back.
@@ -203,7 +203,7 @@ Someone has bolted a Meridian sunburst to the post beside it. The bolts are new.
 [portrait: CALLA, neutral] Next, please. Hold still.
 MOVE: PC steps into the gate.
 SE: chime... then nothing. The bar stays dark. WAIT 60.
-[portrait: CALLA, neutral] One moment.
+[name: Calla] One moment.
 SE: chime. The bar flickers, and a word scrolls across it: NULL.
 [portrait: CALLA, shocked] *(question mark)* ...That's not a tint.
 [portrait: CALLA, neutral] I'm sorry, could you step out and in again?
@@ -214,9 +214,9 @@ MOVE: PC steps out, steps in. SE: chime. NULL.
 MOVE: Voss walks up from behind the queue.
 [portrait: VOSS, happy] Faulty unit. These things hate sea air.
 [portrait: VOSS, neutral] Let them through, Calla.
-[portrait: CALLA, neutral] Sir, the protocol says—
-[portrait: VOSS, neutral] The protocol was written by me, on a train. Let them through.
-[portrait: CALLA, neutral] ...Yes, sir. Welcome to Velmora.
+[name: Calla] Sir, the protocol says—
+[name: Voss] The protocol was written by me, on a train. Let them through.
+[name: Calla] ...Yes, sir. Welcome to Velmora.
 MOVE: PC walks through. Voss follows, pauses beside the PC.
 [portrait: VOSS, happy] There. Ordinary as anyone. Enjoy the Landing. Try the bramble tarts.
 MOVE: Voss exits north toward a waiting Meridian carriage. He glances back at the gate's dark bar. WAIT 30. He leaves.
@@ -231,7 +231,7 @@ TITLE CARD: ACT I — THE LAST FERRY
 *Calla, after the scan (action):*
 ```
 [portrait: CALLA, neutral] The unit's been logged as faulty. Please don't worry about it.
-[portrait: CALLA, neutral] ...Are you feeling well? No fatigue? No pallor?
+[name: Calla] ...Are you feeling well? No fatigue? No pallor?
 > I'm fine.
   [portrait: CALLA, neutral] Good. That's good. Welcome to Velmora.
 > Why?
@@ -274,7 +274,7 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 **Coll Hale** (mending nets beside the stall)
 ```
 [portrait: COLL, neutral] Mm. Ferry child.
-[portrait: COLL, neutral] Farm's up the lane if you need a bed. Wenna'll say the same but with more words.
+[name: Coll] Farm's up the lane if you need a bed. Wenna'll say the same but with more words.
 [portrait: COLL, deadpan] ...Did she give you a tart? Then you're family. That's how it works. I didn't make the rules.
 ```
 *[after S105]* `[portrait: COLL, neutral] Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.`
@@ -386,6 +386,7 @@ QUEST LOG: "The Last Round" — Light the six old lamps along the quay (0/6).
 [name: Mart Clerk] (with an unactivated Fellowship Card) Want me to switch that card on? ...Signed by WHO? *(shock lines)* (Received: ₽3000.)
 
 [name: Innkeeper] Rooms are full of people who came home on the last boat with nowhere to be. First time I've been full since the wedding of '91.
+[name: Innkeeper] *[after S105, before the night]* And Wenna Hale's been in. Said if I find you so much as a cot, she stops selling me tarts. I'm not risking the tarts. Farm's up the lane.
 [name: Inn Guest] I left Velmora nine years ago to be a famous painter. I'm back to be a tired one.
 [name: Inn Guest 2] The Concert says we carry the Bleed. We don't carry it. It's not a cold. It's the ground.
 
@@ -406,7 +407,7 @@ MOVE: Larch turns. Sees the PC. WAIT 40.
 [portrait: LARCH, sad] Last winter. And nobody told me until you were already on a boat.
 [portrait: LARCH, neutral] Your mother was the bravest coward I ever knew. Sit.
 MOVE: Larch pours two cups from the kettle. The liquid is dark green.
-[portrait: LARCH, neutral] Drink. It's disgusting.
+[name: Larch] Drink. It's disgusting.
 > Drink it.
   It tastes like a harbor at low tide. You keep it down. Barely.
   [portrait: LARCH, happy] Ha! Nobody finishes the first one. Ines didn't.
@@ -415,7 +416,7 @@ MOVE: Larch pours two cups from the kettle. The liquid is dark green.
 > ...
   [portrait: LARCH, deadpan] It doesn't get better if you stare at it. I've tried.
 [portrait: LARCH, neutral] She told you nothing, I take it. "Go to Imelda." That's Ines. Hand me a child and a mystery and die before I can shout at her.
-[portrait: LARCH, neutral] Did they scan you at the dock?
+[name: Larch] Did they scan you at the dock?
 > Yes.
   [portrait: LARCH, angry] She wrote ONE instruction about that. *(anger vein)* ...Not your fault. What did it say?
 > It said NULL.
@@ -431,7 +432,7 @@ MOVE: Juno stands up. The veil does not; the Wooper is still on it.
 > ...
   [portrait: JUNO, happy] You're looking at the flowers. Everyone does. They're my aunt's. I'll tell you about it some time when I'm not about to tell you about larches.
 [portrait: JUNO, happy] Did you know larches are the only conifers that drop their needles? Every winter they look dead. They're not!
-[portrait: JUNO, happy] They're just letting go so they don't snap. Professor says it's the most sensible thing a tree's ever done.
+[name: Juno] They're just letting go so they don't snap. Professor says it's the most sensible thing a tree's ever done.
 [portrait: LARCH, deadpan] I said it once. In 296.
 [portrait: LARCH, neutral] Right. You can't walk Velmora with empty pockets. Come through to the Sanctuary. Both of you.
 ```
@@ -440,9 +441,9 @@ MOVE: Juno stands up. The veil does not; the Wooper is still on it.
 ```
 (A glasshouse full of small Pokémon from every corner of the world, in pens and on perches.)
 [portrait: LARCH, neutral] The Wayfarer Sanctuary. Twenty years of colleagues abroad sending me Pokémon that weren't born here, so I could watch how the Imprints take hold of them.
-[portrait: LARCH, neutral] They all pick up a tint in a few weeks. Every one. I've never had one that didn't.
+[name: Larch] They all pick up a tint in a few weeks. Every one. I've never had one that didn't.
 [portrait: LARCH, neutral] *(a look at the PC)* ...Never had one.
-[portrait: LARCH, neutral] Pick a partner. Any of them. Take your time, it's the only decision today I trust you with.
+[name: Larch] Pick a partner. Any of them. Take your time, it's the only decision today I trust you with.
 (STARTER SELECTION UI: any Gen 1–9 starter, grouped Grass / Fire / Water.)
 [portrait: LARCH, happy] (on confirm) Good. It liked you before you chose it. I was watching.
 Script: Prismfall.record_starter($player.party[0])
@@ -450,9 +451,9 @@ Switch S103 CH1_STARTER_GOT = ON.
 (Received: POKÉDEX — "Fitted with a Meridian Imprint Reader. Larch has put tape over half of it.")
 [portrait: JUNO, happy] My turn! Um. Um um um.
 MOVE: Juno walks the pens, stops at the starter weak to the PC's.
-[portrait: JUNO, happy] This one. It was looking at me.
+[name: Juno] This one. It was looking at me.
 [portrait: LARCH, deadpan] That one's at a disadvantage against \PN's, Juno.
-[portrait: JUNO, happy] Somebody should give the underdog a chance! Also it was LOOKING at me.
+[name: Juno] Somebody should give the underdog a chance! Also it was LOOKING at me.
 SE: a crash from the loft. Hay falls. *(shock lines)* on everyone.
 MOVE: Kestrel drops from the loft ladder, brushing straw off a black coat that's too big for him.
 [portrait: LARCH, angry] Kestrel Vane. How long have you been sleeping in my hayloft?
@@ -461,7 +462,7 @@ MOVE: Kestrel drops from the loft ladder, brushing straw off a black coat that's
 [portrait: LARCH, neutral] You asked me twice, and both times you'd just set something on fire.
 [portrait: KESTREL, smug] One of those was an accident.
 MOVE: Kestrel walks straight to the starter strong against the PC's and picks it up.
-[portrait: KESTREL, smug] This one.
+[name: Kestrel] This one.
 [portrait: JUNO, angry] You only picked that because it beats theirs!
 [portrait: KESTREL, deadpan] Yes. Fair fights are for people who can afford to lose.
 (Larch looks at him for a long moment. *("..." bubble)*)
@@ -492,9 +493,9 @@ Script: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, can_lose: true)
 MOVE: Juno runs out of the station.
 [portrait: JUNO, happy] That was amazing! Both of you! We should have a team name!
 [portrait: KESTREL, deadpan] There's no team.
-[portrait: JUNO, happy] Team Compost! Because we break things down and make them better!
-[portrait: KESTREL, deadpan] I'm not in it.
-[portrait: JUNO, happy] He's in it.
+[name: Juno] Team Compost! Because we break things down and make them better!
+[name: Kestrel] I'm not in it.
+[name: Juno] He's in it.
 MOVE: Kestrel leaves west, toward the lighthouse. *(anger vein)*
 Switch S104 CH1_K1_DONE = ON.
 ```
@@ -506,14 +507,14 @@ Switch S104 CH1_K1_DONE = ON.
 [portrait: ROWAN, happy] Are you, now. Rowan Ashby. I keep the garden at Verdance, and this one's aunt kept me.
 [portrait: ROWAN, neutral] I came down for seed stock. And to check on the Professor's tea plants. They're thriving. I can't account for it.
 [portrait: LARCH, deadpan] Spite.
-[portrait: ROWAN, neutral] Came the long way, too. The forest road's glass past Briarwick, so it's round by the coast and Saltmere now.
+[name: Rowan] Came the long way, too. The forest road's glass past Briarwick, so it's round by the coast and Saltmere now.
 [portrait: ROWAN, happy] They're putting the Pageant on early this year. Whole town's in rehearsal. Lot of fuss over a play.
 [portrait: ROWAN, neutral] This is a Phantump. I found it up past Briarwick, in a wood that's gone to glass. It was sitting in a glass tree, crying.
 [portrait: ROWAN, sad] Its tree couldn't die properly, you see. So it couldn't either.
 [portrait: JUNO, sad] That's so sad...
 [portrait: ROWAN, neutral] It's not sad that things die, Juno. Everything that grows must be allowed to. That's what makes room.
 MOVE: Rowan reaches out and touches one of the blossoms in Juno's wreath, very lightly, the way you'd touch someone's hand.
-[portrait: ROWAN, neutral] What's sad is when they're not let.
+[name: Rowan] What's sad is when they're not let.
 (The Phantump drifts off his shoulder and hovers in front of the PC. It stops shivering.)
 [portrait: ROWAN, shocked] ...Well. It hasn't gone near anyone but me in a month.
 [portrait: ROWAN, neutral] *(to the PC)* She'd have liked you.
@@ -552,8 +553,38 @@ KITCHEN TABLE: Six chairs. One has "JUNO" carved in it. One newer carving beside
 [portrait: WENNA, happy] (if home) I had Coll carve it. Don't make it strange. Sit when you like.
 BOOKSHELF: "Berries of the South Coast", annotated in tiny handwriting: "WRONG." "ALSO WRONG." "Ask Uncle Rowan."
 JUNO'S ROOM: Seed packets pinned to the wall like butterflies. One is labeled "MYSTERY (do not eat) (I ate one) (do NOT eat)".
-BED (action): You could rest here. (Heals the party.)
+BED (action, before S105): You could rest here. (Heals the party.)
 HEADBUTT TUTOR (farmhand in the yard): Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.
+```
+
+### EV "Biscuit comes home" [NEW lines] (Wenna, first talk after S105; the same scene plays at her quay stall on 100 if the PC finds her there first; the two share the Biscuit self switch)
+```
+(Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
+[portrait: WENNA, happy] Oh, you wretched animal. Thank you. Both of you. Here. And another tart, for the nerves. Mine.
+(Received: ORAN BERRY ×3.) QUEST COMPLETE: "Biscuit".
+[portrait: WENNA, neutral] Now. It's getting dark, you've glass in your hair, and the inn's full of people with nowhere to be.
+[name: Wenna] You're sleeping here tonight. That wasn't a question. I don't do questions after sundown.
+[portrait: JUNO, happy] You can have my bed! I'll take the hayloft. I always take the hayloft when we have guests.
+[name: Juno] We've never had guests. I'm very excited about the hayloft.
+[portrait: COLL, deadpan] *(from the yard)* Hayloft's got a goat in it.
+[name: Juno] I'm excited about the goat.
+[portrait: WENNA, happy] Supper's whenever you come in. Coll made the bed, so it's made badly. But it's made.
+OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)
+```
+*Wenna, again (after S105, before the night):* `[portrait: WENNA, neutral] Going up to the lighthouse? Give Hesper my love, and don't let her give you any back. Bed's yours whenever.`
+*Coll, in the yard (after S105, before the night):* `[portrait: COLL, neutral] Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.`
+
+### BED (action, after S105 and V102 < 2) [NEW lines]
+```
+Juno's bed. The pillow smells of crushed mint and seed packets. Sleep here tonight?
+> Sleep.
+  (Fade out. Crickets. A goat, briefly.)
+  [portrait: JUNO, happy] *(from the hayloft across the yard)* \PN? You awake? You can see all eighteen from up here tonight.
+  [portrait: JUNO, neutral] Usually it's only the near ones. Fourteen. Fifteen if Dad's not snoring. They're brighter every year. Nobody says why.
+  [portrait: JUNO, happy] ...Night! The goat says night too. That was the goat.
+  (Heals the party. → End of Chapter 1 cutscene, below.)
+> Not yet.
+  (The bed will keep.)
 ```
 
 ## Map 522 — The Glassed Orchard (`:BLEED`; BGM cuts to wind chimes)
@@ -566,7 +597,7 @@ HEADBUTT TUTOR (farmhand in the yard): Want your partner to learn to headbutt tr
 SE: a squeak from inside. A Skwovet is visible on a glass branch.
 [portrait: JUNO, panic] Biscuit! Biscuit, come OUT!
 MOVE: Juno steps toward the shimmer and stops hard. *(shock lines)*
-[portrait: JUNO, panic] Ow— no. No. My skin's burning. I can't.
+[name: Juno] Ow— no. No. My skin's burning. I can't.
 [portrait: JUNO, sad] That's the Veil. Nobody can cross one. You just... can't. Your body won't.
 (The PC is prompted to step forward. MOVE: PC walks through the shimmer. Nothing happens. WAIT 40.)
 [portrait: JUNO, shocked] *(shock lines)* ...How are you DOING that?
@@ -609,22 +640,22 @@ EV "Lost Skwovet":
 (Larch is standing next to Juno with a notebook. She has clearly run the whole way.)
 MOVE: PC walks out through the Veil with Biscuit on their head.
 [portrait: LARCH, neutral] So. You walked through a Bleed Veil.
-[portrait: LARCH, neutral] Into a Bleed zone. On your first day. To fetch a Skwovet.
+[name: Larch] Into a Bleed zone. On your first day. To fetch a Skwovet.
 > It was stuck.
 [portrait: LARCH, angry] IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES. *(anger vein)*
 [portrait: JUNO, happy] Technically Skwovet are scansorial, so—
-[portrait: LARCH, angry] Juno.
+[name: Larch] Juno.
 [portrait: JUNO, panic] Shutting up! *(sweat drop)*
 [portrait: LARCH, crying] Your mother wrote me one instruction. One! "Keep them out of trouble, Imelda." It has been NINE HOURS.
-[portrait: LARCH, crying] I'm not crying. It's the tea. The tea is very strong.
+[name: Larch] I'm not crying. It's the tea. The tea is very strong.
 (WAIT 30. Larch looks at the sleeping swarm in the glass trees, then at the PC.)
 [portrait: LARCH, neutral] ...They calmed down. When you went near them.
-[portrait: LARCH, neutral] Well. That's that, then.
+[name: Larch] Well. That's that, then.
 MOVE: Larch writes in the notebook. 
-[portrait: LARCH, neutral] Listen to me, both of you. Never take a tinted person past a Veil. Never. It isn't pain that stops them. It's the body knowing.
-[portrait: LARCH, neutral] And you. This is Lecture One. I'm numbering them. I have a feeling.
+[name: Larch] Listen to me, both of you. Never take a tinted person past a Veil. Never. It isn't pain that stops them. It's the body knowing.
+[name: Larch] And you. This is Lecture One. I'm numbering them. I have a feeling.
 (Received: FIELD NOTES — "Professor Larch's field encyclopedia. It fills in as you meet new fields.")
-Switch S105 CH1_ORCHARD_DONE = ON. Quest "Biscuit" complete: Wenna gives 3 ORAN BERRIES and "another tart, for the nerves. Mine."
+Switch S105 CH1_ORCHARD_DONE = ON. Biscuit rides home on the PC's head: the quest completes at Wenna (EV "Biscuit comes home", map 523, or her quay stall on 100), where she offers the night.
 Script: pf_bond_add(:JUNO, 1)
 ```
 *Station bookshelf (map 103), readable any time:* `"Field safety, rule one, underlined three times: NEVER TAKE A TINTED PERSON PAST A VEIL."`
@@ -652,11 +683,11 @@ MOVE: Hesper turns and sees the PC. The rag drops. *(shock lines)* WAIT 60.
 > ...
   [portrait: HESPER, sad] Stars. You even stand like— no.
 [portrait: HESPER, neutral] You're the one the boy fought on the quay. He came home swearing. That means he liked it.
-[portrait: HESPER, neutral] Keep away from him. Everyone who gets near that boy's mother's ghost gets hurt.
+[name: Hesper] Keep away from him. Everyone who gets near that boy's mother's ghost gets hurt.
 MOVE: Hesper picks up the rag and turns her back.
 ```
 
-## End of Chapter 1 — cutscene (plays when the PC sleeps at the farmhouse or the inn after S105)
+## End of Chapter 1 — cutscene (plays when the PC sleeps in the Hale Farmhouse bed after S105, right after Juno's goodnight)
 ```
 (Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.)
 TEXT (handwriting): "Subject reads NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred."
@@ -672,22 +703,50 @@ V102 STORY_CHAPTER = 2.
 
 # CHAPTER 2 — "Curtain Call"
 
-**Chapter start:** the morning after (V102 = 2). Larch sees the PC off at the stile on the Ferrymen's Mile.
+**Chapter start:** the morning after (V102 = 2), at the Hale Farmhouse (523). The send-off autoruns when the night cutscene ends; it replaces the old send-off at the stile on 520. The Hale Bell barrier opens after it.
+
+### EV "The send-off" (523, autorun after the night cutscene; V102 = 2)
 ```
-[portrait: LARCH, neutral] Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off — the Glasswood's walked across it — so you go round by the coast.
-[portrait: LARCH, neutral] Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden's Dorian Pell. He'll call you "darling" and mean it about a third of the time.
-[portrait: LARCH, neutral] Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.
-[portrait: JUNO, happy] I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!
-[portrait: JUNO, happy] And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter.
+(Morning. Bramble tea, too many tarts, and a goat in the doorway. Wenna is packing a basket that keeps getting bigger. Coll is reading yesterday's Gale Post upside down. Juno has straw in her blossoms.)
+[portrait: JUNO, happy] Morning! The goat and I have reached an understanding. *(straw falls out of her wreath)*
+[portrait: WENNA, neutral] Eat. You've two days of cliff ahead of you, and Saltmere charges for air.
+[portrait: WENNA, sad] Rowan was off before the cock crowed. Didn't even take a tart. Twenty years I've known that man and he's never not taken a tart.
+[portrait: JUNO, neutral] Warden business. It's always Warden business.
+[portrait: JUNO, happy] He'll turn up in Saltmere, though. He never misses the Pageant.
+MOVE: The door opens. Larch, in yesterday's coat, holding yesterday's cup. She has not slept.
+[portrait: LARCH, deadpan] Don't get up. Nobody ever does.
+[portrait: WENNA, happy] Imelda! Tart?
+[portrait: LARCH, neutral] Two. ...Three. I've been up all night writing about your guest.
+[name: Larch] Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off — the Glasswood's walked across it — so you go round by the coast.
+[name: Larch] Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden's Dorian Pell. He'll call you "darling" and mean it about a third of the time.
+[name: Larch] Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.
+[name: Juno] I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!
+[portrait: WENNA, deadpan] Forty-one. One's for the cart.
+[name: Juno] And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter.
 [portrait: LARCH, deadpan] They use salt.
 [portrait: JUNO, shocked] ...Why would you tell me that. *(shock lines)*
 (Received: TOWN MAP. "Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.")
+[portrait: COLL, neutral] Bell's on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.
+[name: Coll] You come back with all eighteen, I'll untie it.
+[portrait: COLL, deadpan] Don't make it strange.
+[portrait: WENNA, shocked] That's MY line. *(shock lines)*
+[name: Coll] It's a good line.
 QUEST LOG: "Eighteen Roads" — Earn the first badge in Saltmere, west along the coast.
 (Juno becomes a follower.)
 ```
+*(Rowan gone before dawn, and Juno's "He never misses the Pageant", are fair Mourner clues for the Pageant hijack, 09_MYSTERIES #2. Coll's "all eighteen" is the first plain echo of "carry them home", #19.)*
 
 ## Map 520 — The Ferrymen's Mile: the Hale Bell and the quarantine line
-**EV "Accord guard"** (roadblock at the Hale Bell, where the Strand Road turns west; lifts once S105 is on)
+**EV "Accord guard"** (roadblock at the Hale Bell, where the Strand Road turns west; it stays shut until the send-off, V102 ≥ 2)
+*Before the send-off (V102 < 2) [NEW lines]:*
+```
+[name: Accord Guard] Hold. Quarantine order: nobody west of the Bell without papers.
+[name: Accord Guard] ...A Badge Case. A challenger. Challengers pass, that's older law than the quarantine. But they pass at first light, with the cliff patrol. Not a minute before.
+[name: Accord Guard] Go and get some sleep. The cliffs'll still be there in the morning. Mostly. They're chalk.
+```
+*[after S105, before the send-off, adds]* `[name: Accord Guard] You're the one stopping at the Hales'? Then eat whatever Wenna puts in front of you. That's an order. Hers, not mine.`
+
+*After the send-off (V102 ≥ 2), first time; the barrier lifts:*
 ```
 [name: Accord Guard] Hold. Quarantine order: nobody leaves the Landing without papers.
 [name: Accord Guard] ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.
@@ -703,7 +762,8 @@ QUEST LOG: "Eighteen Roads" — Earn the first badge in Saltmere, west along the
 ```
 ```
 THE HALE BELL (action): A ship's bell on a post above the sea cliff. The ferrymen rang it once the last boat was in. A cloth has been tied round the clapper.
-[portrait: JUNO, sad] Dad tied that. The night they closed the strait. He said there wasn't anything left to ring for.
+[portrait: JUNO, sad] Dad tied that. The night they closed the strait.
+[portrait: JUNO, happy] He's never untied a knot in his life. He cuts them. So if he says he'll untie it, he's been practising.
 [name: Hay-cart Driver] Used to take me four hours to Briarwick and back by the forest road. Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse.
 ```
 
@@ -726,7 +786,7 @@ ROAD SIGN [NEW]: WINDFALL ROW — ← Gossamer Wood & Briarwick (ROAD CLOSED BY 
 ROAD SIGN: LACECLIFF WALK — The Strand Road. → The Ferrymen's Mile · ← Marram Down & Saltmere. The arches are older than the Accord. Please do not improve them.
 (Chalk cliffs worn by the sea into arches as fine as lace. The path goes through three of them.)
 [portrait: JUNO, happy] The Briarwick weavers copy these cliffs for their lace. Not the other way round. The sea did it first.
-[portrait: JUNO, happy] The sea does most things first. It's very annoying of it.
+[name: Juno] The sea does most things first. It's very annoying of it.
 ```
 Route trainers and flavor (levels per BALANCE 4b, Gym 1 stretch):
 ```
@@ -762,8 +822,8 @@ FREE PORT CHARTER STONE (by the stile): "By grant of Sovereign Maren, AF 41: SAL
 ```
 (From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)
 [portrait: JUNO, happy] Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?
-[portrait: JUNO, happy] The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing.
-[portrait: JUNO, happy] So they make it all up instead. Every night. On purpose.
+[name: Juno] The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing.
+[name: Juno] So they make it all up instead. Every night. On purpose.
 [name: Beacon Keeper] Tea? It's not kelp. I've heard about the kelp.
 ```
 **EV "The players' camp"** (the Pageant's travelling company, rehearsing the companion piece among their wagons)
@@ -824,7 +884,7 @@ MOVE: Juno runs off east toward the Lantern Theatre. (She stops following.)
 > ...
   [portrait: DORIAN, neutral] Ah. A critic. We get a few. We feed them to the Ogre.
 [portrait: DORIAN, neutral] Saltmere is the only city in Velmora where nothing is a miracle, darling. So we built our own. Every night, at eight.
-[portrait: DORIAN, neutral] The Playhouse is in the Old Town. Come when you're ready, not before. A first gym should be an occasion.
+[name: Dorian] The Playhouse is in the Old Town. Come when you're ready, not before. A first gym should be an occasion.
 [portrait: DORIAN, happy] And the Pageant opens tonight at the Lantern Theatre. I wrote none of it and I'm in all of it.
 ```
 *Reactive (after S108):* `[portrait: DORIAN, sad] I've stood on this breakwater for thirty years telling a queen she can't have us. Last night someone walked onto my stage and took us anyway.`
@@ -965,7 +1025,7 @@ Script: Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)     # J1;
 (Both:)
 [portrait: JUNO, happy] Here, for your partner. They're from the farm.
 (Received: ORAN BERRY ×2.)
-[portrait: JUNO, happy] Go on, then. The Playhouse is in the Old Town. I'll be in the cheap seats. I'll be LOUD.
+[name: Juno] Go on, then. The Playhouse is in the Old Town. I'll be in the cheap seats. I'll be LOUD.
 Switch S109 CH3_J1_DONE = ON.
 ```
 
@@ -1022,7 +1082,7 @@ Script: Prismfall.gym_battle(1)     # LEADER_DORIAN, :GRAND_STAGE, cap 15, singl
 [portrait: DORIAN, deadpan] One night only. The best kind.
 (Received: TM42 FACADE.)
 [portrait: DORIAN, neutral] Facade. The art of turning a bad night into a standing ovation. You'll need it more often than you'd think.
-[portrait: DORIAN, neutral] That badge is the Accord's word that Pokémon up to level nineteen will heed you. Briarwick's will let you cut the dead wood, when you've earned it. They have a man for that.
+[name: Dorian] That badge is the Accord's word that Pokémon up to level nineteen will heed you. Briarwick's will let you cut the dead wood, when you've earned it. They have a man for that.
 MOVE: the troupe files on from the wings. The smallest actor is carrying an Eevee in a ruff.
 [portrait: DORIAN, happy] And one more gift, from the whole company. Forty auditions. Never cast. A tragedy in a ruff.
 [portrait: DORIAN, neutral] You came off that ferry with no color at all, I hear, and this one's never picked one either. You two are a matched set.
@@ -1034,7 +1094,7 @@ MOVE: the troupe files on from the wings. The smallest actor is carrying an Eeve
 ```
 (The Lantern Theatre: a painted forest of flats on stage, actors in hound masks, the sad-masked Ogre eating an apple on a ladder. Juno is at the edge of the stage with the empty tart basket.)
 [portrait: DORIAN, happy] *Enter, stage left, our brave challenger!* And — ah! The understudy! Places, little one!
-[portrait: DORIAN, happy] Forty auditions! Never cast! Tonight your luck changes. You shall play... TREE NUMBER THREE.
+[name: Dorian] Forty auditions! Never cast! Tonight your luck changes. You shall play... TREE NUMBER THREE.
 *(Understudy: music note)*
 MOVE: a stagehand straps a cardboard tree to Understudy. It stands very proudly.
 [name: Director (from the stalls)] Dorian. The tree.
@@ -1049,7 +1109,7 @@ MOVE: a stagehand straps a cardboard tree to Understudy. It stands very proudly.
 [name: Costumier] Oh — and you! The blossoms! Is that from wardrobe? I didn't make that. Which play are you in, dear?
 [portrait: JUNO, happy] It's not a costume! It's my aunt's.
 [name: Costumier] Your aunt's a florist?
-[portrait: JUNO, happy] My aunt's a tree. In Verdance. She blooms all year round. These are hers. They've never wilted. Not once in twelve years.
+[name: Juno] My aunt's a tree. In Verdance. She blooms all year round. These are hers. They've never wilted. Not once in twelve years.
 [name: Costumier] ...
 [name: Costumier] Well. They're very good. I couldn't do better in silk.
 [portrait: JUNO, happy] Nobody can! I've checked! *(music note)*
@@ -1066,13 +1126,13 @@ MOVE: a stagehand straps a cardboard tree to Understudy. It stands very proudly.
 (Sunset. The PC and Juno sit on the end of the breakwater with their feet over the lagoon, sharing a paper cone of salt-caramel. Understudy is asleep in Juno's veil.)
 [portrait: JUNO, happy] It's mostly salt. Is that the point? I think that's the point.
 [portrait: JUNO, neutral] Your first badge. And it HUMMED. I'm writing that down. I'm writing everything down.
-[portrait: JUNO, neutral] ...Can I tell you something boring?
+[name: Juno] ...Can I tell you something boring?
 > Go on.
 > Is it about larches?
   [portrait: JUNO, deadpan] It's not about larches. ...It's a bit about larches.
 > ...
 [portrait: JUNO, neutral] Everyone asks about the flowers. "Which play, dear?" "Are you a bride, dear?" I'm fifteen.
-[portrait: JUNO, neutral] They're from Aunt Elin. She's the Bride Tree, in Uncle Rowan's garden. When I was three she went to glass, except she didn't, she went to blossom, and she never stopped.
+[name: Juno] They're from Aunt Elin. She's the Bride Tree, in Uncle Rowan's garden. When I was three she went to glass, except she didn't, she went to blossom, and she never stopped.
 [portrait: JUNO, happy] I'd worn some to her wedding party. She'd only been married a year. So I just... kept wearing them. They don't wilt. They don't even brown at the edges.
 [portrait: JUNO, neutral] Uncle Rowan says that's the problem. I don't know what he means. I think it's the best thing in the world.
 [portrait: JUNO, sad] ...Mostly I think that.
@@ -1115,7 +1175,7 @@ SE: a bell from the Lantern Theatre. Eight o'clock.
 (In the painted backdrop of the falling Plates, a canvas seam opens, and a figure in a grey cowl steps out of the picture. Ash-bark mask. One white lily.)
 [name: Child in the gallery] Is that the Ogre? He's early!
 [portrait: MOURNER, neutral] *(the voice is doubled: two voices a breath apart)* Three hundred years of pageantry.
-[portrait: MOURNER, neutral] Ask your Warden why nothing in Verdance ever rots.
+[name: The Mourner] Ask your Warden why nothing in Verdance ever rots.
 (Beside you, Juno's hand goes up to her wreath.)
 [portrait: MOURNER, angry] Ask your Sovereign why the old capital is underwater.
 [portrait: MOURNER, sad] Ask why the Loyal Three wore poison on their collars.
@@ -1164,9 +1224,9 @@ Switch S190 VESPER_MET_SALTMERE = ON.
 (A dressing room crowded with wigs, mirrors and telegrams. Dorian sits in front of the mirror with his gold coat off. Without it he looks every one of his fifty-six years.)
 [portrait: DORIAN, sad] Shut the door, darling. Thank you.
 [portrait: DORIAN, neutral] Thirty years I've staged that pageant for the Accord. Every word approved. Every comma blessed. And a man walks out of my backdrop and says the one thing I've never let anyone say on that stage.
-[portrait: DORIAN, neutral] "Ask why the old capital is underwater."
+[name: Dorian] "Ask why the old capital is underwater."
 MOVE: Dorian unlocks a drawer, takes out a yellowed page and holds it a moment too long.
-[portrait: DORIAN, neutral] Ansel Crewe wrote this in AF 52. A play called "The Gilded King". They hanged him for it, and burned every copy but one.
+[name: Dorian] Ansel Crewe wrote this in AF 52. A play called "The Gilded King". They hanged him for it, and burned every copy but one.
 [portrait: DORIAN, sad] I've never staged it. I'm a coward with excellent diction.
 [portrait: DORIAN, neutral] This is the prologue. Take it. If anyone asks, you found it in a costume. Everything in this building is in a costume.
 (Received: GILDED KING PROLOGUE. Key Item. "A yellowed page in an old hand. One line is underlined twice: 'If heaven will not kneel, we'll build a chain.'")
@@ -1206,7 +1266,7 @@ MOVE: Dorian walks up, reads it, and tears it down in one long rip.
 [portrait: DORIAN, neutral] Somebody fetch the paste. We'll put the charter back up where it belongs.
 [portrait: DORIAN, smug] And tell the breakwater to warm up. It's booing day on a Thursday this week.
 [portrait: JUNO, neutral] Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.
-[portrait: JUNO, neutral] I'm not sending for them. I'm not letting you walk into the Gossamer by yourself after last night.
+[name: Juno] I'm not sending for them. I'm not letting you walk into the Gossamer by yourself after last night.
 [portrait: JUNO, happy] Also I've never seen a gym puzzle from the INSIDE.
 (Juno becomes a follower.)
 [name: Gate Warden (North Gate)] North Gate's open. Nobody leaves Saltmere on opening night, it's bad luck and worse for business. This morning everybody wants to.
@@ -1220,5 +1280,6 @@ V102 STORY_CHAPTER = 3. (The North Gate opens onto the Grey Saltings.)
 ## Appendix: events added or changed versus the built specs
 - **[NEW]** Dovetail: rail sign, cabin trunk, cook. Ferrow's Landing: Edda's last call (`GO_HOMEWARD`), two sidequests, lighthouse mirror, the north-gate road sign. Ferrymen's Mile: the Hale Bell, the quarantine roadblock moved here from Windfall Row (the Strand Road leaves westward at the bell). Windfall Row: the forest-road cordon. Lacecliff Walk (527) and Marram Down (528): every event (new maps). Saltmere: Dorian at the breakwater, the Woman from the ferry, Sella, Quill, two sidequests, the Kestrel-at-the-poster glimpse, the prop room, the costumier, the Inspector, the Gale Post desk, the North Gate warden.
 - **Changed for Revision 14:** Chapter 2 is Saltmere now (it was Briarwick). The Chapter 1 opener's counting rhyme starts "One for the stage and two for the weave". Juno's look follows Ever-Bloom. Rowan mentions the Saltmere road and the Pageant. The gym-1 dialogue (Tamsin's) moved to `story/21_SCRIPT_CH3.md` and was rewritten for Gym 2. The Windfall Row survey flags, surveyor and Juno's flag line moved to Chapter 3's road (the Dyers' Ford).
-- **Moved out:** everything from "Chapter 2 — The Weaver's Debt" is in `story/21_SCRIPT_CH3.md`.
+- **Changed 2026-11-20 (the Chapter 1 close):** Chapter 1 ends with a night at the Hale Farmhouse. Wenna offers it when Biscuit comes home ("Biscuit comes home", 523 or the quay stall), with new lines for Juno, Coll, the Innkeeper and the Hale Bell guard. The guard holds the road until the send-off. The 523 bed (after S105) plays Juno's goodnight, then the night cutscene. The send-off moved from the stile on 520 to the farmhouse breakfast table (Chapter 2 start), where the Town Map and "Eighteen Roads" now come from. Map requests: `mapgen/REQUESTS.md`, "From the story editor (Ch1 close...)".
+- **Moved out:** "The Weaver's Debt" (Chapter 2 before the swap, Chapter 3 now) is in `story/21_SCRIPT_CH3.md`.
 - **Open items for other teams:** see `design/SWAP_GYM1_GYM2.md`. Portraits used here (parked by Revision 15; keep the tags): Edda, Voss, Calla, Larch, Juno, Kestrel, Rowan, Wenna, Coll, Hesper, Dorian, Mourner, Vesper.

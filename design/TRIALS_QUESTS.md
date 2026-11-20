@@ -64,7 +64,7 @@
 | **Eleven Years at One Hole** `IS_ELEVEN_YEARS` | 11 | `badges >= 9` | Old Torstein · the ice-fishing flats, Rimeholt (300) | ★ · 47 | Old Torstein has fished one ice-hole for eleven years waiting for a single bite. He has not noticed he is sitting on an Avalugg. **Twist:** You fish his hole; a Tatsugiri has been nibbling the bait for eleven years without ever taking the hook. When Torstein stands up to cheer, his 'seat' stands up too. 'How long has that been there?' 'About eleven years, sir.' Reward: the Tatsugiri. | Tatsugiri Lv 48 (COMMANDER); +2 pts | 15_COMEDY Isenmar bit | designed |
 | **The Sinking Quarter** `IS_SINKING_QUARTER` | 11 | `switch(128)` | a net-mender of Net Row · the Sinking Quarter, Rimeholt (309) | ★★★ · 52 | After the Thaw, the lower town is going under. Three families won't leave without their boat, their grandmother and their Lapras, in that order. **Twist:** Timed escort over breaking ice (floes sink after N steps); at the gate the checkpoint officer is an ISENMAR_OFFICER battle or a bribe or Anja's word if her bond is good. | EXPCANDYL x2; +4 pts | Refugee arc (S168 ISENMAR_MARTIAL_LAW); Thane / Anja politics | designed |
 | **Crystal Sleep** `IS_ALEXANDRA` | 11 | `badges >= 10 && switch(128)` | Old Halla Brinesdottir · the sunken lower town, Rimeholt (309) | ★★★ · 56 | Something sleeps in a block of ice in the sunken quarter: a woman, very much alive, very annoyed about it. **Twist:** Board pointer for the Alexandra cameo; her event completes the quest. | ICYROCK; +3 pts | CAMEOS.md #5 'Crystal Sleep' (FESTIVAL_ALEXANDRA) | designed |
-| **The Saga of the Shattered Ice** `IS_SAGA_OF_THE_ICE` | 15 | `badges >= 13` | Bersi Gullsong · Skaldfast (921) | ★★★★★ · 70 | Bersi wants to sing the war. Truthfully, for once. He needs a witness who stood on the ice. **Twist:** Bersi sings the war straight, no exaggeration, and it's the first time the hall goes silent for him. His verses use the war choice keys, so the saga is different on every war outcome. | Lapras "Saga" Lv 45 (WATERABSORB); +5 pts | War choices (war_climax / war_terms): the saga's words follow what you chose | designed |
+| **The Saga of the Glass Dunes** `IS_SAGA_OF_THE_ICE` | 15 | `badges >= 13` | Bersi Gullsong · Skaldfast (921) | ★★★★★ · 70 | Bersi wants to sing the war. Truthfully, for once. He needs a witness who stood on the glass. **Twist:** Bersi sings the war straight, no exaggeration, and it's the first time the hall goes silent for him: Skaldfast on the sand, the flood, the glass, the bone-carters. His verses use the war choice keys, so the saga is different on every war outcome. | Lapras "Saga" Lv 45 (WATERABSORB); +5 pts | War choices (war_climax / war_terms): the saga's words follow what you chose | designed |
 | **The Causeway Matriarch** `IS_CAUSEWAY_MATRIARCH` | 18 | `badges >= 16` | the Matriarch · the Frostflat Causeway at low tide (560) | ★ · 78 | A Kangaskhan the size of a hut has taken the Frostflat Causeway. | KANGASKHANITE; +3 pts |  | wired |
 
 ### The Prize Exchange — Zenith
@@ -1231,8 +1231,8 @@ Juno is waiting under the Bride Tree.
 - **Juno** _(happy)_: You came! Sit, sit. Mind the roots, they've got opinions.
 - **Juno** _(neutral)_: Uncle Rowan kept a seed-tin in the potting shed. Label says NOT SEEDS. Guess what was in it.
 - *She opens her hand: a stone the green of new leaves, with a pink flower caught inside it.*
-- **Juno** _(neutral)_: It grew in the Bride Tree's roots. A Venusaur's heart, the Order says. The tree's been in bloom for forty years. I suppose it had to put the extra somewhere.
-- **Juno** _(sad)_: He left me his ring, too. The Grass Warden's ring. It won't answer me. I hold it and it's just... his.
+- **Juno** _(neutral)_: It grew in the Bride Tree's roots. A Venusaur's heart, the Listening Root says. Aunt Elin's been in bloom for twelve years. I suppose she had to put the extra somewhere.
+- **Juno** _(sad)_: He left me his ring, too. It was in with his testament. The Grass Warden's ring. It won't answer me. I hold it and it's just... his.
 - **Juno** _(happy)_: Yours sings, though. Don't look at me like that, I can hear it from here. So you take the stone. Somebody should.
 - [script]
 - **Juno** _(happy)_: And next time we fight, I'll have the ring talking to me. You'll see. Probably. Hopefully.
@@ -1285,7 +1285,7 @@ A lantern from the Woodward: 'THE OLD PINCER HAS TAKEN THE HEARTWOOD SAP. BRING 
 **Scene `offer`** (event: `pf_quest_run(:EL_OLD_PINCER, :offer)`)
 
 - **The Woodward** _(neutral)_: There's a Pinsir in the Heartwood older than my hut. Old Pincer, we call it. This spring it took the great sap tree and nothing gets near it.
-- **The Woodward** _(worried)_: The silk-moths need that sap. So does the Loomhouse. I'd ask a Warden, but the Wardens are busy being at war.
+- **The Woodward** _(worried)_: The silk-moths need that sap. So does the Loomhouse. I'd ask Tamsin, but she's got half of Isenmar's refugees sleeping in the Loomhouse.
 - **CHOICE:** Take on the Old Pincer?
   - > I'll go.
     - [quest accepted]
@@ -2050,7 +2050,7 @@ CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W.
   - > Of course.
     - [quest accepted]
     - [quest step: beds]
-    - **Wenlow** _(happy)_: Thank you! Start with Missus Pell by the window, she likes the weather.
+    - **Wenlow** _(happy)_: Thank you! Start with Missus Garrow by the window, she likes the weather.
   - > Not now.
     - **Wenlow** _(neutral)_: That's all right. They're not going anywhere. Sorry. Doctor's joke.
 
@@ -2281,31 +2281,31 @@ Brann has something for you at the Hearthguild Hall.
 
 **Scene `ringday`** (event: `pf_quest_run(:AS_RING_DAY, :ringday)`)
 
-- [stage] Morning. Brann stands at the guild's great anvil with a folded cloth. Larch sits on a crate by the door, pretending to read.
+- [stage] Morning. Brann is at the guild's great anvil with a folded cloth. Larch sits on a crate by the door with a book she isn't reading.
 - [if `choice(:ch8_caldera) == :vent`]
-  - [stage] The great forge is cold. One candle-forge burns on the anvil.
-  - **Brann** _(sad)_: Forge is cold for a season, thanks to you lot. Don't look like that. A ring wants a candle, not a caldera.
+  - [stage] The great forge is cold. One small candle-forge burns on the anvil.
+  - **Brann** _(sad)_: Cold for a season, thanks to you lot. Don't make that face, I've had worse winters. A ring wants a candle, not a caldera.
 - [if `choice(:ch8_caldera) == :dampers`]
-  - **Brann** _(happy)_: Hear that? My forges, still singing. You kept 'em lit. I won't forget it.
+  - **Brann** _(happy)_: Hear that? Every forge in the Vault, roaring. You kept 'em lit, and I won't forget it.
 - [if `choice(:ch8_caldera) == :shutdown`]
-  - **Brann** _(happy)_: You shut a Meridian tap with your own two hands. The Dominar's still talking about it. So am I.
-- **Brann** _(worried)_: About last night. The chestnuts. A fool talks too much over chestnuts. Forget the fool.
+  - **Brann** _(happy)_: You shut a Meridian tap with your bare hands. The Dominar hasn't stopped talking about it. Neither have I.
+- **Brann** _(worried)_: About last night. A fool talks too much over chestnuts. Forget the fool. Forget the chestnuts too. They were burnt.
 - **Brann** _(neutral)_: Here's what a sober man says instead. Hold out your hand.
 - *He opens the cloth: a plain gold band, and set in it a chip of stone with no colour at all.*
-- **Brann** _(neutral)_: A Warden's ring. Mega Ring, the Accord calls it. The guild's cut one for every seat since the Concordance.
-- **Brann** _(neutral)_: The chip is grind. Dust off the Crown's own stone, kept every time it's reset. The Legend Plate's every type and none, so a fleck of it opens any heartstone.
-- **Brann** _(neutral)_: Heartstones. Mega Stones, if you're Accord. Where an Imprint soaks into one kind of Pokemon long enough, it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
-- **Brann** _(deadpan)_: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
-- *He sets the ring in your palm. The colourless chip catches the forge-light... and sings: one clear note, like a struck glass.*
+- **Brann** _(neutral)_: A Warden's ring. 'Mega Ring', the Accord calls it. The guild's cut one for every seat since the Concordance. This one's the odd one out. I cut it ten years back, and it's sulked on every hand I've tried it on.
+- **Brann** _(neutral)_: The chip's grind off the Crown's own stone. No colour of its own, so it'll take any colour you put to it. That's how it opens a heartstone.
+- **Brann** _(neutral)_: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
+- **Brann** _(deadpan)_: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double. ...Right. Let's see if it sulks on you.
+- *He drops the ring into your palm. The colourless chip catches the forge-light... and sings: one clear note, like a wet finger round the rim of a glass.*
 - *Somewhere under your ribs, something answers it.*
 - **Brann** _(shocked)_: ...
 - **Brann** _(sad)_: They don't sing. Thirty years at this anvil, and not one of them has ever sung.
 - [stage] Larch has lowered her book.
-- **Brann** _(worried)_: ...Old fool. It's the forge-hum. Here: an iron heart to start you off. Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do.
+- **Brann** _(worried)_: ...It's the forge-hum. That's a lie, and lying's a crime in Ashkaar, so you never heard it. Here: an iron heart to start you off.
 - [script]
 - [if `mega_stones > 1`]
   - *The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.*
-- **Brann** _(happy)_: Now. Go and show Kaito what a ferry child does with a Warden's ring.
+- **Brann** _(happy)_: Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do. Now go and show Kaito what a ferry child does with a Warden's ring.
 
 #### The Forge Remembers (`AS_FORGE_REMEMBERS`)
 
@@ -2463,8 +2463,8 @@ TABLET: The Old Amber held two things. The Warden kept one. Bring her the other,
 
 **Scene `offer`** (event: `pf_quest_run(:OS_AMBER_AGAIN, :offer)`)
 
-- **Sahar** _(deadpan)_: The Old Amber from the Brinecut mine. Two things were in it. A sleeping Aerodactyl, which Lumen woke for you. And this, which I kept.
-- **Sahar** _(neutral)_: Shameful. I'm a curator. Curators keep things. Show me the first one alive and well, and the second is yours.
+- **Sahar** _(deadpan)_: The Old Amber from the Brinecut mine. Lumen's lab woke the Aerodactyl in it for you, then sent me the rest for the Rolls. The rest had this in it. I kept it.
+- **Sahar** _(neutral)_: Shameful. I'm a curator. Curators keep things. Show me the Aerodactyl alive and well, and this is yours.
 - [quest accepted]
 - [if `party_has(:AERODACTYL)`]
   - [continue: show]

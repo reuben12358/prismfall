@@ -166,7 +166,7 @@ and frame-based events. The war climax "looks weird" mostly for reasons this res
    - Layout: 4×4 cells, each about 140×100. Overworld scale and 3/4 perspective, dark outline, 24–32 colours.
    - Rows: 0 rise/enter, 1 charge (anticipation), 2 firing loop, 3 recoil/exit.
    - The scene already plays rows 0 and 1 when the files exist; rows 2 and 3 need two more `flipbook` lines.
-2. **Stage the war climax on a real "Shattered Ice" map** with `on_map: true`. Soldiers would be map events, the hosts
+2. **Stage the war climax on a real "Shattered Ice" map** (now **the Glass Dunes**, 926: the war is fought on land in Ossaria, SPINE Rev 18) with `on_map: true`. Soldiers would be map events, the hosts
    would come from tilesets, and the camera would follow events. Our procedural backdrops then become a fallback.
 3. **Effect sheets instead of code-drawn bursts** for impacts and the clash point.
    - Hand-drawn 5–8 cell sheets (192 px cells, transparent, 4 colours) played with `play_sheet ... blend: :add` and

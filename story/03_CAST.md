@@ -158,7 +158,7 @@ Format: look/age · personality · voice · motivation · secret · plot role ·
 ### 2. Tamsin Loom — Bug — Briarwick — `LEADER_TAMSIN` — `:SILKWOOD`
 - **19.** Ink-stained fingers, a measuring tape around her neck, and a moth-wing shawl woven by her late grandmother. She became Warden last spring when Old Mother Loom died.
 - **Personality:** An anxious perfectionist who apologizes constantly. She thinks in thread and turns ferocious the moment her people are threatened.
-- **Voice:** "Sorry — sorry — the Silkwood's a bit tangled today. Like me." / "A thread holds because it's twisted with others. Alone it's just... string." / *(battle start)* "Granny Loom wove this room. Don't you dare tear it."
+- **Voice:** "Sorry — sorry — the Silkwood's a bit tangled today. Like me." / "A thread holds because it's twisted with others. Alone it's just... string." / *(battle start)* "We spun this whole hollow together, the Bugs and me. Don't you dare tear it."
 - **Motivation:** Keep Briarwick's looms running and live up to a legend.
 - **Secret:** Briarwick is bankrupt. She secretly signed a Meridian Lattice contract alone, and the Lattice is pushing the Glasswood (a crystallizing Bleed) toward the silk-moth groves.
 - **Plot role:** The second Warden (Ch3). After the Mourner's public question in Saltmere ("Ask your Warden"), she is the first Warden the PC sees who has an answer to hide. She gives the PC their first look at Meridian's double edge (the free light works, and so does the glass) and the first Hollow sabotage (Thistle's cut survey flags). Her gym is the first real puzzle and a **double battle**: "a thread holds because it's twisted with others."

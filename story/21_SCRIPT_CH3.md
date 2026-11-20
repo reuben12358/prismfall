@@ -5,7 +5,7 @@
 > **Before Revision 14 this was Chapter 2.** Keys and switches keep their old names: `:ch2_tamsin`, `:ch2_matriarch`, `CH2_THISTLE_DONE`, `CH2_MATRIARCH_DONE` are all Chapter 3 now. Events must test Tamsin's badge by Warden (`pfm_gym_won?(:LEADER_TAMSIN)`), never `badge_count >= 1`: the player arrives here already holding Dorian's badge.
 
 ## Conventions
-Same as `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` lines (portraits parked by Revision 15; keep the tags), `[name: X]` for generic NPCs, `> option` choices, `MOVE:`/`SE:`/`WAIT n`, `[after X]` reactive variants. Gym numbers are written for readability (Tamsin is 2); events call `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN))`.
+Same as `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` per **Portrait use** in `story/13_CUTSCENES.md` (named characters only; first line in a scene and expression changes), `[name: X]` for generic NPCs and for a portrait character's other lines, `> option` choices, `MOVE:`/`SE:`/`WAIT n`, `[after X]` reactive variants. Gym numbers are written for readability (Tamsin is 2); events call `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN))`.
 
 **Juno travels with the PC for this whole chapter** (placed events per map) until she leaves at the Cocoonfall Veil.
 
@@ -20,7 +20,7 @@ Same as `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` lines (portraits pa
 ROAD SIGN: THE GREY SALTINGS — The Weavers' Road. ↓ Saltmere (North Gate) · ↑ The Dyers' Ford, Thistledown Lea & Briarwick. Mind the pans. The pans do not mind you.
 (Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)
 [portrait: JUNO, neutral] This is where Saltmere's salt comes from. "Grey" is the salt before it's washed.
-[portrait: JUNO, neutral] ...And the weather. It's mostly the weather.
+[name: Juno] ...And the weather. It's mostly the weather.
 ```
 Route trainers and flavor:
 ```
@@ -293,7 +293,7 @@ QUEST LOG: "Sixteen Sleeves" — Bring three Tiny Mushrooms (0/3).
 (Guildmistress Hett, second talk:)
 [name: Hett] You're a stranger, so you can do what I can't. The guild ledger's in the Warden's loft and it's locked. Old Mother Loom kept the key in the gym. "Where the first thread starts," she used to say.
 QUEST LOG: "The Locked Ledger" — Find the ledger key in the Loomhouse.
-(Gym foyer, the first loom on the left, action:) A small brass key is tied into the very first warp thread. (Received: LEDGER KEY.)
+(Gym lobby, Mother Loom's first loom, action:) A small brass key is tied into the very first warp thread. (Received: LEDGER KEY.)
 (Weavers' Guildhall loft:) LEDGER, last page: "Received of the Meridian Concord, for stewardship rights, Lattice 15: ₽400,000. Signed, T. Loom, Warden." One signature. The line for "Guild witnesses" is blank.
 (Return to Hett before the gym:) [name: Hett] ...Alone. She signed it alone. Don't say anything yet. Let me think how to say it kindly. I'm out of practice.
 (Reward after the chapter: ₽2000 and TM STRING SHOT, "from the guild's teaching chest".)
@@ -304,7 +304,7 @@ QUEST LOG: "The Locked Ledger" — Find the ledger key in the Loomhouse.
 ```
 POKÉMON CENTER:
 [name: Nurse] We heal for free. The scanner at the door is new. It told me I'm "Insect, Briarwick". I've lived here forty years, I'd worked it out.
-[name: Trainer] The gym's all planks and looms. Pull the wrong heddle and the floor leaves. I've met the basement twice.
+[name: Trainer] The gym's all webs. Step on the wrong one and it throws you into the net. Tamsin apologises to you all the way down.
 [name: Trainer 2] She fights two at once. Two! Bring a partner that likes company.
 GALE POST DESK [NEW]: A letter is waiting. "Lecture Two is now two lectures. Do not make me send them both. Eat something. — I.L." (Received: POTION ×2, and a second tea bag. "You have two now. That's a collection.")
 
@@ -343,7 +343,7 @@ MOVE: The PC steps on a twig. SE: snap. *(shock lines)* ×3.
 > ...
   [portrait: THISTLE, neutral] No answer. Then I'll assume the worst. It saves time.
 [portrait: THISTLE, neutral] ...I know you. You were in the stalls at the Lantern. The one he looked at.
-[portrait: THISTLE, neutral] I cut the ropes that night. Nobody was hurt. I'm a weaver, child. I know where a thread will fall.
+[name: Thistle] I cut the ropes that night. Nobody was hurt. I'm a weaver, child. I know where a thread will fall.
 [portrait: THISTLE, sad] I was a weaver once. Lowmarsh. You won't find it on a map now. It had looms too.
 [portrait: THISTLE, angry] He told the whole theater to ask their Warden. I'll tell you what to ask yours. Ask her what she signed!
 BATTLE: HOLLOW_THISTLE "Thistle", version 0 (her first battle; named admins count rematches from 0, BALANCE.md 4b). Field: Silkwood (map default). (Hollow admin 1; can't be fled.)
@@ -355,18 +355,21 @@ BATTLE: HOLLOW_THISTLE "Thistle", version 0 (her first battle; named admins coun
 Switch S106 CH2_THISTLE_DONE = ON.
 ```
 
-## Map 130 — Loomhouse Gym, Foyer (Gym 2; puzzle per GYM_PUZZLES Gym 2)
+## Map 130 — Loomhouse Gym, Lobby (Gym 2; the weavers' hall at the foot of the elder; no puzzle; GYM_PUZZLES Gym 2)
+*(SPINE Revision 19: the weaver touches stay down here. The gym itself is up the stair, in the hollow of the elder: the Canopy, 131.)*
 ```
 [name: Gym Guide] Challenger! This is the Loomhouse. Bug-types, and the Silkwood field. Fire and Flying do well. Grass does not. I say this to everyone and half of them bring a Bulbasaur.
-[name: Gym Guide] Every heddle in this house is tied by silk to what it moves, so follow the thread. Down here it's one heddle, one plank. In the Weaving Hall each heddle lifts TWO beds. Count lifts, not pulls.
-[name: Gym Guide] And Tamsin fights two at a time. A thread holds because it's twisted with others. Old Mother Loom built the room to teach patience. Tamsin added the safety nets. And the apology cards.
-APOLOGY CARD (pinned by the loom bed): "If the plank is in the wrong place, I'm so sorry. The heddle by the aisle moves it. — T.L."
-APOLOGY CARD B: "The Weaving Hall is upstairs. If you fall, the nets are soft. Sorry! — T.L."
+[name: Gym Guide] The gym's up the stair, in the hollow of the elder itself. Tamsin's Bug Pokémon have strung it with webs. Step on a tight one and it throws you, three good bounds, the way you stepped on. Step on a sticky one and it keeps you.
+[name: Gym Guide] The Joltik up there feed on the strands. When one sparks, every web on its strand changes its mind.
+[name: Gym Guide] And Tamsin fights two at a time. A thread holds because it's twisted with others.
+[name: Gym Guide] Old Mother Loom never once went up there. Said the Bugs had better hands than hers. Tamsin added the safety nets. And the apology cards.
+[name: Weaver Tibb] The looms down here are Granny Loom's. The webs up there are the Bugs'. Tamsin says that's the difference between a weaver and a Warden: a weaver makes cloth, a Warden makes room for things to make themselves.
+APOLOGY CARD (pinned by the stair): "The gym is UP. If a web throws you somewhere silly, the nets are soft. Sorry! — T.L."
 PORTRAIT (wall): A fierce old woman at a loom. Brass plate: "Mother Loom, Warden AF 247–299. 'Twist it or lose it.'"
-[name: Bug Catcher Nell] A thread alone is just string! (Battle.) [after] Two of us would've had you.
-[name: Lass Orla] Mind the loom bed. I fell in twice. The net's very comfortable. (Battle.) [after] ...I'm going back to the net.
+FIRST LOOM (action): Mother Loom's first loom. The warp stops mid-row: up, down, up, down, up — and then nothing, as if she meant to come back to it.
+  (During "The Locked Ledger":) A small brass key is tied into the very first warp thread. (Received: LEDGER KEY.)
 ```
-**Comedy scene Ch3, "The Apology Spiral"** (Tamsin is in the foyer the first time, re-threading a loom)
+**Comedy scene Ch3, "The Apology Spiral"** (Tamsin is in the lobby the first time, re-threading a loom)
 ```
 [portrait: TAMSIN, panic] Sorry — the gym's a bit tangled today — sorry —
 > It's fine.
@@ -376,30 +379,68 @@ PORTRAIT (wall): A fierce old woman at a loom. Brass plate: "Mother Loom, Warden
   [portrait: TAMSIN, panic] I nearly did it again. I'm so sorry.
 [portrait: TAMSIN, sad] ...
 [portrait: TAMSIN, deadpan] I'm going to go and stand in the web now.
-MOVE: Tamsin exits to the Weaving Hall.
+MOVE: Tamsin goes up the stair into the tree.
 ```
 
-## Map 131 — Loomhouse Gym, Weaving Hall (three linked heddles; switches 305–309 stay the Loomhouse's)
+## Map 131 — Loomhouse Gym, the Canopy (the hollow of the elder; web trampolines; variables V305–307 `CANOPY_WEB_A/B/C`, the Loomhouse's IDs since before the swap)
+*(Layout and rules: GYM_PUZZLES Gym 2 §131. A taut web throws you three tiles the way you stepped on; a sticky web stops you; nothing under you means the net. The climb: the floor → ledge 1 → ledge 2 → the sticky turn → ledge 3 → the Joltik perch and back → Tamsin's ledge.)*
 ```
-[name: Gentleman Bram] Granny Loom taught me this hall. Tamsin taught me to say sorry when I win. (Battle.) [after] I don't need to say it, then.
-FALL (wrong gap): You drop into a net. A card is pinned to it: "Sorry! — T.L."
-(Juno arrives at the hall's entrance once Bram is beaten, holding a hatbox with great care.)
-[portrait: JUNO, happy] Forty eggs! In a hatbox! Don't knock the hatbox!
-[portrait: JUNO, happy] Go on, I'll be loud. Quietly. I learned that in Saltmere.
+(First entry. The stair comes up into the hollow of the elder. Inside it's as tall as a cathedral and full of webs: silver drum-tight ones, sagging yellow ones beaded with dew, and far overhead a ledge with a lantern on it. Moths drift across the drop. Something small and yellow crackles along a strand.)
+CARD: WEBS (on a twig at the foot of the hollow): "Tight webs THROW you, three bounds, the way you step on. Mind which way you're facing. — T.L."
+[name: Pim] Pim. I mind the nets. Want the Joltik calmed down, or a nudge?
+  > A nudge. (one hint per ask)
+    [name: Pim] A Joltik's spark runs the whole strand. Look at which webs hang on each one.
+    [name: Pim] Up there you want to go up, stop, then go across. Taut throws, sticky stops.
+    [name: Pim] Spark both Joltik, once each: the one on the third ledge and the one on the west perch. Then the bottom web throws you up, the middle one holds you, and the top one throws you across to Tamsin.
+  > Calm the Joltik. (reset: V305–307 = 0, back to the foot of the hollow)
+    [name: Pim] *(clicks his tongue; somewhere above, a Joltik yawns)* There. Every strand as Tamsin left it.
+FALL (a web throws you onto nothing): ...and nothing there to land on. You drop into Tamsin's safety net, far below.
+  The net lowers you, very gently, all the way back to the bottom of the hollow. A card is pinned to it: "Sorry! — T.L."
+SPINARAK (floor): The Spinarak is spinning a very small web. It is very proud of it.
+SWADLOON (by the stair): The Swadloon is wrapped in leaves for the night. It's the middle of the afternoon.
+```
+**Juno** (at the foot of the hollow, once the PC has beaten a trainer in here; she's holding a hatbox with great care)
+```
+[portrait: JUNO, happy] Forty eggs! In a hatbox! Don't knock the hatbox! And don't fall on me!
+[name: Juno] Go on, I'll be loud. Quietly. I learned that in Saltmere.
+(again:) [portrait: JUNO, happy] *(a whisper you can hear from the top of the tree)* GO ON, \PN! *(music note)*
+```
+**Ledge 1** (one web, straight up from the floor)
+```
+LEAVANNY: Leavanny is tailoring a challenger's cloak out of leaf and silk. It holds the leaf up against you, decides you're the wrong colour, and starts again.
+[name: Bug Catcher Nell] (optional) A thread alone is just string! (Battle.) [after] Two of us would've had you.
+```
+**Ledge 2** (a web that throws you onto a web; Orla watches the landing, so her battle can't be skipped)
+```
+[name: Lass Orla] Mind the webs. I bounced into the net twice. It's very comfortable. (Battle.) [after] ...I'm going back to the net.
+CARD: STICKY: "Sticky webs keep you. You can step off one any way you like. That's how you turn round up here. — T.L."
+SEWADDLE: The Sewaddle is wearing a leaf hood that Leavanny made. It doesn't fit. It won't take it off.
+```
+**Ledge 3** (up through the sticky turn; the two webs either side of the first sticky web, and the one beside the start, throw you into the drop)
+```
+CARD: JOLTIK: "The Joltik eat the current in the strands. Spark one and every web on its strand changes. Gold strand here, blue strand on the perch. Sorry about the zaps. — T.L."
+JOLTIK (ledge 3, gold strand / the west perch, blue strand): The Joltik sparks! The charge runs the whole gold (blue) strand, and every web hanging on it flips: slack snaps taut, taut sags slack.
+KAKUNA: The Kakuna hangs from the deck by one thread. It does not appear to mind.
+```
+*(The obvious move is the trap: spark only the gold Joltik and the bottom two webs both go taut, so they throw you straight up the trunk and into the net. Spark both, once each: up, stop, across.)*
+**Tamsin's ledge**
+```
+[name: Gentleman Bram] (optional) Granny Loom taught me the looms. Tamsin taught me the webs. I prefer the looms. (Battle.) [after] They don't throw you, you see.
+STAIR (behind Tamsin, before the badge): A silk rope across the stair, and a card: "Upper lofts: Gran's old practice rooms. After your badge. Sorry! — T.L."
 ```
 **Warden battle** (double)
 ```
-(Tamsin stands at the great loom on the top ledge. She has stopped fidgeting.)
-[portrait: TAMSIN, neutral] My grandmother wove this room. Every plank, every web. She held this village together for fifty years with thread and shouting.
-[portrait: TAMSIN, sad] I've had it since spring. I can't shout.
+(Tamsin stands at the top of the hollow, among the webs. She has stopped fidgeting.)
+[portrait: TAMSIN, neutral] Gran wove the looms downstairs. She never came up here. She said the Bugs had better hands than hers, and she was right.
+[portrait: TAMSIN, sad] She held this village together for fifty years with thread and shouting. I've had it since spring. I can't shout.
 [portrait: TAMSIN, neutral] Dorian goes first because he makes people brave. I go second because by then you think you know what a gym is.
-[portrait: TAMSIN, angry] But I can weave. Granny Loom wove this room. Don't you dare tear it.
+[portrait: TAMSIN, angry] But I can hold a thread. So can they. We spun this whole hollow together, the Bugs and me. Don't you dare tear it.
 Script: Prismfall.gym_battle(2)     # LEADER_TAMSIN, :SILKWOOD, cap 19, DOUBLE battle (GYMS double: true)
 (When her ace enters:) [portrait: TAMSIN, neutral] Twist with me. Hold.
 (LOSE: standard whiteout to the Pokémon Center. Tamsin on retry: "Again? Good. I mean— sorry. I mean good.")
 (WIN:)
 [portrait: TAMSIN, shocked] ...It held, and you still came through it.
-[portrait: TAMSIN, happy] That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one.
+[portrait: TAMSIN, happy] That's allowed. Gran said a good web always leaves one way through, for the right one. I didn't think I'd ever meet one.
 (Received: the WEFT BADGE.)
 (The PC opens the Badge Case and sets the badge beside Dorian's. SE: the first note, then a second, higher, in tune with it. The two hang in the air together. *(music note)* over Juno.)
 [portrait: JUNO, shocked] It's doing a CHORD. *(shock lines)*
@@ -410,17 +451,19 @@ Script: Prismfall.gym_battle(2)     # LEADER_TAMSIN, :SILKWOOD, cap 19, DOUBLE b
 [portrait: TAMSIN, neutral] That's the Accord's word that Pokémon up to level twenty-three will heed you. And the Cutter will give you Cut now. He'll say no first. Wait for the second answer.
 [portrait: TAMSIN, sad] \PN... could you come up to the loft? There's something I should say to someone, and you've an honest sort of silence.
 ```
+*Tamsin, after the confession (her ledge):* `[portrait: TAMSIN, neutral] The Cutter in town owes me a favour. Tell him I sent you. And— thank you. Not sorry. Thank you.` / `[portrait: TAMSIN, neutral] The stair behind me goes up to Gran's practice lofts. They're open to you now. Mind the brass wire. It isn't hers.` *(the brass wire is Meridian's, stamped with a sunburst: GYM_PUZZLES §132)*
+*If Granny's Knot is solved (S308):* `[portrait: TAMSIN, crying] You finished Gran's row. ...She'd have shouted. Happily. Sorry — I'm crying, that's the Silkwood, it's very dusty.`
 
-## Map 130/131 loft — **EV "Tamsin's confession"** → **CHOICE `:ch2_tamsin`** (the key keeps its old name; staged in the loom-loft above the hall, or in the Guildhall loft 123: guard whichever copy is built with `pf_choice(:ch2_tamsin).nil? && pfm_gym_won?(:LEADER_TAMSIN)`)
+## Map 130/131 loft — **EV "Tamsin's confession"** → **CHOICE `:ch2_tamsin`** (the key keeps its old name; staged in the Warden's loft, high in the elder above the webs, where Hett says the ledger is kept; or in the Guildhall loft 123: guard whichever copy is built with `pf_choice(:ch2_tamsin).nil? && pfm_gym_won?(:LEADER_TAMSIN)`)
 ```
-(The loft: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)
+(The Warden's loft, high in the elder above the webs: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)
 [portrait: TAMSIN, sad] That woman at the pylon. With the shears. She was right. I signed it.
-[portrait: TAMSIN, sad] Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her.
-[portrait: TAMSIN, sad] Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was.
+[name: Tamsin] Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her.
+[name: Tamsin] Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was.
 [portrait: TAMSIN, neutral] And it WORKS. That's the thing. The looms ran till midnight for a week. Everyone was so happy. Nobody had been happy since the funeral.
 [portrait: TAMSIN, crying] And now the Glasswood's walking up the survey line like it was invited. Fourteen moths this week. I count them. I count them every morning.
 [portrait: TAMSIN, sad] The man in Saltmere told everyone to ask their Warden. Nobody's asked me yet. They're all too kind. The guild meets tonight.
-[portrait: TAMSIN, sad] Tell me what to do. Please. I've run out of thread.
+[name: Tamsin] Tell me what to do. Please. I've run out of thread.
 > Tell them the truth. I'll stand next to you. (help_confess)
   Script: pf_choose(:ch2_tamsin, :help_confess)
   [portrait: TAMSIN, shocked] Next to me. Not in front?
@@ -534,5 +577,6 @@ V102 STORY_CHAPTER = 4.
 ## Appendix: events added or changed versus the built specs
 - **Moved here from `20_SCRIPT_CH0-2.md`** (Revision 14): Gossamer Wood, Briarwick and its interiors, Thistle, the Loomhouse, Tamsin's confession, the Deepwood, Shelly, Cocoonfall Hollow and the chapter close. Before the swap this was Chapter 2.
 - **[NEW]** The Grey Saltings, Brinecut and Thistledown Manor lines (they were outline-only in 04); the Dyers' Ford (552, a new map: every event); the Gossamer Wood's south cordon; Tamsin's "you beat Dorian" opener; the bun-seller's Kestrel line; the ogre-mask stall; Thistle's shears and Lantern lines; the second badge note; the north-gate frost line.
-- **Changed for Revision 14:** Tamsin is a double battle at cap 19 and says "level twenty-three"; Cut comes from the Cutter after *her* badge (not any badge); the survey flags and Juno's flag line moved here from Windfall Row; the Weaving Hall's trainers follow the built Loomhouse (Nell and Orla in the Foyer, Bram in the Hall); the confession may stage on the loom-loft or the Guildhall loft (guard as noted); Shelly and the Matriarch are levelled for the stretch after Gym 2; the Matriarch also lifts the forest-road cordon. The old `$player.badge_count >= 1` tests must become `pfm_gym_won?(:LEADER_TAMSIN)` (see `design/SWAP_GYM1_GYM2.md`).
+- **Changed for Revision 19 (2026-11-20): Gym 2 is the Canopy.** The linked-heddle Weaving Hall is retired. 130 is the weavers' lobby (no puzzle; the Gym Guide explains the webs and the Joltik; the lobby weaver is **Weaver Tibb**, so he isn't confused with Pim, the net-minder upstairs). 131 is the hollow of the elder, with web trampolines, sticky webs, the two Joltik strands (V305–307) and Tamsin's ledge. All three trainers are in 131: Nell on ledge 1 (optional), Orla on ledge 2 (watches the landing), Bram on Tamsin's ledge (optional). Tamsin's lines now credit the Bugs with the webs ("We spun this whole hollow together"). The confession is in the Warden's loft. Pim's third hint names the Joltik by place, not by the letters A/B/C, and the Joltik line no longer says "the taut one... the slack one" (both start slack). Map requests: `mapgen/REQUESTS.md`, story editor 2026-11-20.
+- **Changed for Revision 14:** Tamsin is a double battle at cap 19 and says "level twenty-three"; Cut comes from the Cutter after *her* badge (not any badge); the survey flags and Juno's flag line moved here from Windfall Row; the confession may stage in the Warden's loft or the Guildhall loft (guard as noted); Shelly and the Matriarch are levelled for the stretch after Gym 2; the Matriarch also lifts the forest-road cordon. The old `$player.badge_count >= 1` tests must become `pfm_gym_won?(:LEADER_TAMSIN)` (see `design/SWAP_GYM1_GYM2.md`).
 - **Open items for other teams:** see `design/SWAP_GYM1_GYM2.md`. Portraits used here (parked by Revision 15; keep the tags): Juno, Tamsin, Thistle, Shelly.

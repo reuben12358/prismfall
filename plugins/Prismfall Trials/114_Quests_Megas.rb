@@ -34,30 +34,30 @@ tr.quest(:AS_RING_DAY, {
   :touches => "Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings.",
   :scenes => {
     :ringday => [
-      { :map => "Morning. Brann stands at the guild's great anvil with a folded cloth. Larch sits on a crate by the door, pretending to read." },
+      { :map => "Morning. Brann is at the guild's great anvil with a folded cloth. Larch sits on a crate by the door with a book she isn't reading." },
       { :if => "choice(:ch8_caldera) == :vent", :then => [
-          { :map => "The great forge is cold. One candle-forge burns on the anvil." },
-          [:BRANN, :sad, "Forge is cold for a season, thanks to you lot. Don't look like that. A ring wants a candle, not a caldera."]] },
+          { :map => "The great forge is cold. One small candle-forge burns on the anvil." },
+          [:BRANN, :sad, "Cold for a season, thanks to you lot. Don't make that face, I've had worse winters. A ring wants a candle, not a caldera."]] },
       { :if => "choice(:ch8_caldera) == :dampers", :then => [
-          [:BRANN, :happy, "Hear that? My forges, still singing. You kept 'em lit. I won't forget it."]] },
+          [:BRANN, :happy, "Hear that? Every forge in the Vault, roaring. You kept 'em lit, and I won't forget it."]] },
       { :if => "choice(:ch8_caldera) == :shutdown", :then => [
-          [:BRANN, :happy, "You shut a Meridian tap with your own two hands. The Dominar's still talking about it. So am I."]] },
-      [:BRANN, :worried, "About last night. The chestnuts. A fool talks too much over chestnuts. Forget the fool."],
+          [:BRANN, :happy, "You shut a Meridian tap with your bare hands. The Dominar hasn't stopped talking about it. Neither have I."]] },
+      [:BRANN, :worried, "About last night. A fool talks too much over chestnuts. Forget the fool. Forget the chestnuts too. They were burnt."],
       [:BRANN, :neutral, "Here's what a sober man says instead. Hold out your hand."],
       "He opens the cloth: a plain gold band, and set in it a chip of stone with no colour at all.",
-      [:BRANN, :neutral, "A Warden's ring. Mega Ring, the Accord calls it. The guild's cut one for every seat since the Concordance."],
-      [:BRANN, :neutral, "The chip is grind. Dust off the Crown's own stone, kept every time it's reset. The Legend Plate's every type and none, so a fleck of it opens any heartstone."],
-      [:BRANN, :neutral, "Heartstones. Mega Stones, if you're Accord. Where an Imprint soaks into one kind of Pokemon long enough, it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
-      [:BRANN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double."],
-      "He sets the ring in your palm. The colourless chip catches the forge-light... and sings: one clear note, like a struck glass.",
+      [:BRANN, :neutral, "A Warden's ring. 'Mega Ring', the Accord calls it. The guild's cut one for every seat since the Concordance. This one's the odd one out. I cut it ten years back, and it's sulked on every hand I've tried it on."],
+      [:BRANN, :neutral, "The chip's grind off the Crown's own stone. No colour of its own, so it'll take any colour you put to it. That's how it opens a heartstone."],
+      [:BRANN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
+      [:BRANN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double. ...Right. Let's see if it sulks on you."],
+      "He drops the ring into your palm. The colourless chip catches the forge-light... and sings: one clear note, like a wet finger round the rim of a glass.",
       "Somewhere under your ribs, something answers it.",
       [:BRANN, :shocked, "..."],
       [:BRANN, :sad, "They don't sing. Thirty years at this anvil, and not one of them has ever sung."],
       { :map => "Larch has lowered her book." },
-      [:BRANN, :worried, "...Old fool. It's the forge-hum. Here: an iron heart to start you off. Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do."],
+      [:BRANN, :worried, "...It's the forge-hum. That's a lie, and lying's a crime in Ashkaar, so you never heard it. Here: an iron heart to start you off."],
       { :script => proc { |_ctx| Prismfall::Trials.complete(:AS_RING_DAY, nil, false) } },
       { :if => "mega_stones > 1", :then => ["The other stones in your Bag are warm now, and quiet, as if they had stopped waiting."] },
-      [:BRANN, :happy, "Now. Go and show Kaito what a ferry child does with a Warden's ring."]
+      [:BRANN, :happy, "Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do. Now go and show Kaito what a ferry child does with a Warden's ring."]
     ]
   }
 })
@@ -125,8 +125,8 @@ tr.quest(:EL_BRIDE_TREE_HEART, {
       [:JUNO, :happy, "You came! Sit, sit. Mind the roots, they've got opinions."],
       [:JUNO, :neutral, "Uncle Rowan kept a seed-tin in the potting shed. Label says NOT SEEDS. Guess what was in it."],
       "She opens her hand: a stone the green of new leaves, with a pink flower caught inside it.",
-      [:JUNO, :neutral, "It grew in the Bride Tree's roots. A Venusaur's heart, the Order says. The tree's been in bloom for forty years. I suppose it had to put the extra somewhere."],
-      [:JUNO, :sad, "He left me his ring, too. The Grass Warden's ring. It won't answer me. I hold it and it's just... his."],
+      [:JUNO, :neutral, "It grew in the Bride Tree's roots. A Venusaur's heart, the Listening Root says. Aunt Elin's been in bloom for twelve years. I suppose she had to put the extra somewhere."],
+      [:JUNO, :sad, "He left me his ring, too. It was in with his testament. The Grass Warden's ring. It won't answer me. I hold it and it's just... his."],
       [:JUNO, :happy, "Yours sings, though. Don't look at me like that, I can hear it from here. So you take the stone. Somebody should."],
       { :script => proc { |_ctx| Prismfall::Trials.complete(:EL_BRIDE_TREE_HEART, nil, false) } },
       [:JUNO, :happy, "And next time we fight, I'll have the ring talking to me. You'll see. Probably. Hopefully."]
@@ -178,7 +178,7 @@ tr.quest(:EL_OLD_PINCER, {
   :scenes => {
     :offer => [
       [:WOODWARD, :neutral, "There's a Pinsir in the Heartwood older than my hut. Old Pincer, we call it. This spring it took the great sap tree and nothing gets near it."],
-      [:WOODWARD, :worried, "The silk-moths need that sap. So does the Loomhouse. I'd ask a Warden, but the Wardens are busy being at war."],
+      [:WOODWARD, :worried, "The silk-moths need that sap. So does the Loomhouse. I'd ask Tamsin, but she's got half of Isenmar's refugees sleeping in the Loomhouse."],
       { :choice => "Take on the Old Pincer?", :options => [
           ["I'll go.", [{ :accept => true }, { :step => :fight }, [:WOODWARD, :happy, "Bless you. Bring a Fire type. Bring two."]]],
           ["Not yet.", [[:WOODWARD, :neutral, "It's not going anywhere. That's the problem."]]]] }
@@ -356,7 +356,7 @@ tr.quest(:NA_BEDSIDE_MANNER, {
       [:WENLOW, :happy, "You're back! Hi! Sorry. Hi. I'm doing rounds and I've got forty patients and two hands, and the Doctor says talking helps."],
       [:WENLOW, :neutral, "Their eyes move under the glass, did he tell you? Like they're dreaming. So I talk to them. Will you? Just three. They like new voices."],
       { :choice => "Sit with the patients?", :options => [
-          ["Of course.", [{ :accept => true }, { :step => :beds }, [:WENLOW, :happy, "Thank you! Start with Missus Pell by the window, she likes the weather."]]],
+          ["Of course.", [{ :accept => true }, { :step => :beds }, [:WENLOW, :happy, "Thank you! Start with Missus Garrow by the window, she likes the weather."]]],
           ["Not now.", [[:WENLOW, :neutral, "That's all right. They're not going anywhere. Sorry. Doctor's joke."]]]] }
     ],
     :bed => [
@@ -453,8 +453,8 @@ tr.quest(:OS_AMBER_AGAIN, {
   :reward => { :items => [[:AERODACTYLITE, 1]] },
   :scenes => {
     :offer => [
-      [:SAHAR, :deadpan, "The Old Amber from the Brinecut mine. Two things were in it. A sleeping Aerodactyl, which Lumen woke for you. And this, which I kept."],
-      [:SAHAR, :neutral, "Shameful. I'm a curator. Curators keep things. Show me the first one alive and well, and the second is yours."],
+      [:SAHAR, :deadpan, "The Old Amber from the Brinecut mine. Lumen's lab woke the Aerodactyl in it for you, then sent me the rest for the Rolls. The rest had this in it. I kept it."],
+      [:SAHAR, :neutral, "Shameful. I'm a curator. Curators keep things. Show me the Aerodactyl alive and well, and this is yours."],
       { :accept => true },
       { :if => "party_has(:AERODACTYL)", :then => [{ :run => :show }],
         :else => [[:SAHAR, :neutral, "No Aerodactyl with you. The amber waited a hundred thousand years; I can wait an afternoon."]] }

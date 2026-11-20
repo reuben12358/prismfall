@@ -128,6 +128,8 @@
 
 **Revelation.** Brann, drunk and maudlin over chestnuts, lets slip one sentence: "I reset the Crown's stone myself, y'know. After the accident. Ten years back. It was smaller than it should've been." Then he catches himself: "Ach, I'm an old fool. Forget it." The PC's shard throbs once. (Larch notices the PC wince.)
 
+**The Ring-Day** *(withdrawn from Ch8 by SPINE Revision 21: the Mega Ring comes after Badge 13; the Mega workstream will move this beat. Kept below for them.)* **(next morning, Hearthguild Hall; SPINE Revision 20).** Sober, Brann gives the PC a **Warden's ring** (the Mega Ring) and an **Aggronite**: Mega Evolution opens. The ring's colourless chip is grind off the Crown's own stone, and this ring is the odd one out: he cut it "ten years back" and it has "sulked on every hand" he's tried it on. In the PC's palm it **sings**, and something under their ribs answers. "They don't sing. Thirty years at this anvil." Larch lowers her book. He lies about it out loud and admits it's a lie. The opening line follows `:ch8_caldera`. Script: `22_SCRIPT_CH8.md`; lore: `design/MEGA_EVOLUTION.md` §1. (Brann names neither the Legend Plate nor the reset: 09_MYSTERIES #5/#6 stay for Ch15–17.)
+
 **Cliffhanger:** The Dominar's herald reads a proclamation in the caldera square: Ashkaar holds Zenith responsible for the "assault on the Flame" and **closes the eastern passes to Meridian**. War-drums. Sigrun, watching her father's banner, says nothing at all.
 
 ---
@@ -200,6 +202,7 @@ He leaves. Brann, at his elbow, looks back at the PC with an expression of pure 
 - The dawn before the Conclave. Verdance's Heartgarden. The player controls Rowan as he waters the **Bride Tree**.
 - Gentle walk-and-talk with the tree, which is Elin: "The roses are coming in again. They don't stop, love. They never stop."
 - Mini-scene: he shows the healed Phantump from Ch1, now a Trevenant, the bark mask, and the lily he picks from her branches every time.
+- Before the mask, he twists off his Warden's ring and seals it into an envelope with his Warden's testament, addressed to the Sovereign, and leaves it for the Gale Post. ("A mask can't hide a Warden's ring.") This is how the ring and the seat reach Juno in Ch10, and why the Mourner never Mega Evolves.
 - It ends with him putting on the mask: "One more. Then I'll find the other way. I promise."
 
 **END OF ACT II.** Title card: *III — Fault Lines.*

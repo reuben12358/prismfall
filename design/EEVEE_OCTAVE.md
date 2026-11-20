@@ -44,8 +44,8 @@ be helped on a later visit, so the order of the first seven is the player's own.
 
 ## 2. Vesper Lindqvist, the thread
 
-- **Ch2, Saltmere backstage (map 145):** the existing optional duet (Vesper + now **Lyra**, not Carol, who never leaves
-  Crownhaven). Afterwards Vesper asks the PC to look in on the singers ("they're very good at singing and very bad at
+- **Ch2, Saltmere backstage (map 145):** the existing optional duet (Vesper v0 + now **Lyra v0**, not Carol, who never
+  leaves Crownhaven). Afterwards Vesper asks the PC to look in on the singers ("they're very good at singing and very bad at
   being alone") and names where each one lives. This starts **"The Eevee Octave"** (`CR_OCTAVE`, step `:road`). Skipping
   her is fine: helping any singer starts it.
 - **Ch13, Lucent cloister:** after her sparring double, a few lines on how the letters about you are going, and a nudge
@@ -61,9 +61,9 @@ be helped on a later visit, so the order of the first seven is the player's own.
   `octave_ready`.
 - **The gauntlet** (`{ :octave_gauntlet => true }`): nine trainer battles back to back, **no healing between them** (the
   party's HP and PP carry over, as in Reborn's and Rejuvenation's chained battles; bag items in battle are allowed):
-  the eight singers in the order helped (`OCTAVE_SINGER <name> v60`), each with **one Eeveelution holding its type's
+  the eight singers in the order helped (`OCTAVE_SINGER <name> v60`, Lv 87), each with **one Eeveelution holding its type's
   Z-crystal and an attacking move of that type**, each on the field its Eeveelution was raised beside; then **Vesper's
-  Eevee "Amen"** (`OCTAVE_VESPER Vesper v60`) with the **Eevium Z** (Last Resort → Extreme Evoboost) on the **Grand
+  Eevee "Amen"** (`OCTAVE_VESPER Vesper v60`, Lv 89) with the **Eevium Z** (Last Resort → Extreme Evoboost) on the **Grand
   Stage**, where the Octave was first met. A Z-move lifts the Grand Stage's applause a stage (section 5.4).
 - A loss ends the run; the party is healed (quest losses never black out) and Vesper waits to be asked again.
 - **Available:** from the moment Carol is helped (Festival week, after S155) and after, including the post-game.
@@ -73,23 +73,28 @@ be helped on a later visit, so the order of the first seven is the player's own.
   The Eighteen Shrines' "Prism" Eevee (`CR_PRISM_EEVEE`) is gone: one Eevee gift in Crownhaven, not two; that quest
   now gives the five Imprint stones.
 
-## 4. Levels (provisional; the trainer designer owns them, mapgen/REQUESTS.md)
+## 4. Levels (the trainer designer owns them; as in `pbs/trainers.txt` after round 3, 2026-11-20)
 
-| Fight | Version | Level | Notes |
+| Fight | Version (Std; Hard = +100, Casual = +200) | Level (Std / Hard / Casual) | Notes |
 |---|---|---|---|
+| Ch2 duet, Saltmere backstage (145) | `OCTAVE_VESPER Vesper 0` + **`OCTAVE_SINGER Lyra 0`** | Amen 18; Lyra's Moss 17 (still an Eevee: it becomes a Leafeon in Ch3) | double on the Grand Stage. **Lyra v0 is Vesper's partner** (it replaces the retired Carol v0: Carol never leaves Crownhaven) |
+| Ch13 cloister sparring, Lucent | `OCTAVE_VESPER Vesper 1` | 56–58 | optional double on the Mindscape |
 | Kingdom duels | `OCTAVE_SINGER <name> 50` | Lyra 17/18, Aria 21/22, Cadence 25/26, Sona 29/30, Noct 33/34, Forte 37/38, Lento 57/58, Carol 87/88 | a local partner + the Eeveelution at the next Warden's cap − 1 |
-| Gauntlet bouts 1–8 | `OCTAVE_SINGER <name> 60` | 90 | the designer's Ch20 Octave sets (v1–8), with the Z-crystal in place of the seed |
-| Gauntlet finale | `OCTAVE_VESPER Vesper 60` | 92 | Eevee "Amen", Eevium Z, Last Resort / Stored Power / Shadow Ball / Quick Attack |
+| Gauntlet bouts 1–8 | `OCTAVE_SINGER <name> 60` | **87** / 88 / 83 | one Eeveelution with its type's Z-crystal and an attacking move of that type, on its home field |
+| Gauntlet finale | `OCTAVE_VESPER Vesper 60` | **Eevee "Amen" 89** / 90 / 85 | Eevium Z; Last Resort / Stored Power / Shadow Ball / Quick Attack, on the Grand Stage |
 
-The Festival-week cap is 90 (Core `FESTIVAL_CAP`). **Harness finding:** an AI-played Lv 100 team of six (Snorlax,
-Garchomp, Metagross, Tyranitar, Volcarona, Togekiss, EV-trained) won the nine bouts with **146 of 2,334 HP left**;
-six Lv 100 Snorlax lost at bout 4. A Z-move on its home field is a near one-shot: Moss's Bloom Doom (Flower Garden
-stage 3) took 73% of a Lv 100 Snorlax; Forte's Inferno Overdrive on Volcanic, with Flash Fire lit by the field,
-one-shot a Lv 95 Vaporeon **through the resist** in the real engine. In the real engine (AI on both sides) the same Lv 100
-team lost at bout 6, and six EV-trained Lv 100 legendaries (Arceus, Mewtwo, Kyogre, Groudon, Rayquaza, Lugia) won with
-four of them fainted. The designer should tune with `run_winrates.rb`
-(suggestions in REQUESTS: drop Forte's Flash Fire stack or the field's Flash Fire activation for this fight, 88 for
-bouts 1–8, Sitrus/Leftovers instead of nothing on the frailer ones).
+**Retired** (no longer in `pbs/trainers.txt`; don't reintroduce them): **Carol v0** (the old Ch2 duet partner), the
+**singers' v1–8** (the old Festival-week exhibition sets, which the v60 gauntlet sets replace) and **Vesper v2** (the old
+exhibition's full Eeveelution team). Vesper v0 and v1 stay.
+
+The Festival-week cap is 90 (Core `FESTIVAL_CAP`), so the gauntlet sits just under it. **Harness finding (at the old
+90/92 levels, before the round-3 retune to 87/89):** an AI-played Lv 100 team of six (Snorlax, Garchomp, Metagross,
+Tyranitar, Volcarona, Togekiss, EV-trained) won the nine bouts with **146 of 2,334 HP left**; six Lv 100 Snorlax lost at
+bout 4. A Z-move on its home field is a near one-shot: Moss's Bloom Doom (Flower Garden stage 3) took 73% of a Lv 100
+Snorlax; Forte's Inferno Overdrive on Volcanic, with Flash Fire lit by the field, one-shot a Lv 95 Vaporeon **through the
+resist** in the real engine (round 3 gave Flareon Guts instead of Flash Fire; TRAINER_FIELD_PLAYBOOK). In the real engine
+(AI on both sides) the same Lv 100 team lost at bout 6, and six EV-trained Lv 100 legendaries (Arceus, Mewtwo, Kyogre,
+Groudon, Rayquaza, Lugia) won with four of them fainted. Re-check with `run_winrates.rb` at 87/89.
 
 ## 5. Z-Power (`plugins/Prismfall Z-Power`)
 

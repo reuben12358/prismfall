@@ -866,3 +866,85 @@ Tests: `tools/harness/run_mega.rb` 59/59, `run_trials.rb` still 142/142, and an 
 shield breaks (Rejuvenation's Latios in its second bar). Wild bosses can't Mega Evolve in Essentials.
 
 **Packaging:** add the new folder `plugins/Prismfall Mega`. `tools/package.sh` already copies `plugins/` wholesale.
+
+## From the story editor (Ch1 close, the Ring-Day, Gym 2 lines), 2026-11-20
+**Map builder (Ferrow's Landing 100/104, the Ferrymen's Mile 520, Hale Farmhouse 523).** Chapter 1 now closes with a
+night at the Hale Farmhouse. The real lines replace your placeholders; they are all in `story/20_SCRIPT_CH0-2.md`
+(search for the headings in quotes). This also fixes REQUESTS items 15–16 above (the Hale Bell leak, no send-off).
+1. **"Biscuit comes home"** (Map 523 section; Wenna, first talk after S105). It is the same scene at her quay stall on 100,
+   and both share the existing `[[523, 0, 'BISCUIT']]` self switch. It pays the 3 Oran Berries, completes "Biscuit", and
+   has Wenna's offer of the night, Juno's hayloft lines and Coll's goat line. It ends with OBJECTIVE: "Sleep at the
+   Hale Farmhouse." Wenna's and Coll's repeat lines are right under it (after S105, V102 < 2).
+2. **BED (action, after S105 and V102 < 2)** on 523: a Sleep / Not yet choice. Sleep plays Juno's goodnight from the
+   hayloft, heals the party, then plays the existing "End of Chapter 1" night cutscene (which sets V102 = 2). Before S105,
+   the bed stays a plain heal.
+3. **"The send-off"** (Chapter 2 start; 523, autorun when the night cutscene ends, V102 = 2, once). It gives the TOWN MAP,
+   the "Eighteen Roads" quest and Juno as follower. It **replaces `SENDOFF_520`** (Larch at the stile, `routes_early.py`).
+   Larch now walks in to the breakfast table, so retire the stile event, or keep it only as a fallback that runs if
+   `:ch2_sendoff` is unset. Keep `pfm_set(:ch2_sendoff)` at the end of the new autorun.
+4. **The Hale Bell barrier (520)** stays shut until V102 >= 2 (not S105). Its guard has two pages in the script's
+   "Accord guard" block: before the send-off, a first-light curfew line plus one extra line after S105 that sends the
+   PC back to the Hales; after the send-off, the existing pass lines. Please also close the gaps from item 15 (edge
+   tiles (0,72)–(0,75)).
+5. **Tidewater Inn (104):** one Innkeeper line after S105 and before the night, which sends the PC up the lane. The inn
+   no longer ends the chapter: there is no inn bed.
+6. **The Hale Bell (520), action:** Juno's second line changed ("He's never untied a knot in his life...").
+
+**The Ring-Day (Ch8; review of the Mega Evolution workstream's item 9 above).** *Withdrawn by SPINE Revision 21 (the ring comes after Badge 13): **don't build items 8 and 9**. Item 7 (Kestrel) and item 10 (ring lore) still stand, wherever the scene moves.* Script: `story/22_SCRIPT_CH8.md`. The
+plugin strings in `114_Quests_Megas.rb` now match it (string edits only; `run_trials.rb` 142/142).
+7. **Trainer designer: no Kestrel Mega at K4–K7** (this replaces "Kestrel K4–K9: Mega Scizor" in item 4 above). His
+   mother's ring is the Key Item **Morwen's Ring**. Edda holds it until Ch15 (07_ACT_IV), and it reaches Kestrel only
+   through the PC (`:ch18_kestrel_ring`). Give him `MEGARING` at K8/K9 only when `choice(:ch18_kestrel_ring) ==
+   :give_now` (BALANCE §6b row updated). Nothing to undo: there's no Kestrel Mega in `pbs/trainers.txt` yet.
+8. **Trials owner:** add one `:if` entry to `AS_RING_DAY`, after the three caldera branches:
+   `choice(:ch8_lightstone) == :dominar` → `[:BRANN, :sad, "And the Light Stone... no. Not today. Today I'm in a good
+   mood, and I'm keeping it."]`. Also add Larch's idle line by the door (in the script).
+9. **Map builder (Cindervault):** the morning after the Caldera Crisis, Larch at the inn sends the PC to the Hall ("Brann
+   wants you at the Hall. He's sober. It's unsettling."). The Dominar's herald (the Ch8 cliffhanger) should wait for
+   `quest_done(:AS_RING_DAY)`, so the ring always comes first.
+10. **Mega Evolution workstream (lore, for your §1):** Brann names neither the Legend Plate nor the reset in Ch8 (those
+    are 09_MYSTERIES #5/#6, Ch15–17). The PC's ring is the odd one out: he cut it ten years back, from the AF 290 grind.
+    Rowan's ring went into his sealed testament before he first wore the mask; Juno gets it with the seat in Ch10.
+    MEGA_EVOLUTION.md §1, §4 and §6 are updated.
+
+**Gym 2, the Canopy (130/131; `gen_loomhouse.py`, `puzzles/canopy.py`, `layouts/story_early.py`).** The script is now
+`story/21_SCRIPT_CH3.md` Maps 130 and 131, and it matches what you built except for these lines:
+11. **130 lobby:** rename "Weaver Pim" to **Weaver Tibb** (Pim is the net-minder upstairs; there can't be one Pim in two
+    places). Add a fifth Gym Guide line: "Old Mother Loom never once went up there. Said the Bugs had better hands than
+    hers. Tamsin added the safety nets. And the apology cards."
+12. **131 Tamsin, before the battle:** her first and last lines change, because "Granny Loom wove this room" contradicts
+    "the webs up here, the Bugs wove". The new lines: "Gran wove the looms downstairs. She never came up here. She said
+    the Bugs had better hands than hers, and she was right." ... "But I can hold a thread. So can they. We spun this
+    whole hollow together, the Bugs and me. Don't you dare tear it." Her win line: "That's allowed. Gran said a good web
+    always leaves one way through, for the right one. I didn't think I'd ever meet one."
+13. **131 confession stage line:** "(The Warden's loft, high in the elder above the webs: ...)" instead of "The loft
+    above the hall" (there's no hall now).
+14. **131 Joltik:** "The Joltik sparks! The charge runs the whole gold/blue strand, and every web hanging on it flips:
+    slack snaps taut, taut sags slack." The built line says "webs A and B", letters the player never sees, and "the taut
+    one... the slack one", which isn't true at the start (all three are slack).
+15. **Pim (`canopy.py` ROOMS hints[2]):** "Spark both Joltik, once each: the one on the third ledge and the one on the
+    west perch. Then the bottom web throws you up, the middle one holds you, and the top one throws you across to
+    Tamsin." The current hint says "the Joltik on this ledge", but Pim stands on the floor. There's also an optional
+    reset line in the script.
+16. **131 Juno, repeat line:** "(a whisper you can hear from the top of the tree) GO ON, \PN!"
+17. **121 (Briarwick interiors) "Trainer":** still describes the retired heddle hall ("planks and looms... the floor
+    leaves"). New line: "The gym's all webs. Step on the wrong one and it throws you into the net. Tamsin apologises to
+    you all the way down."
+
+**Sweep (Gym 1/2 swap, Geography v2, the land war).**
+18. **Applied for you (strings only, keys and logic unchanged; `ruby -c` and `run_trials.rb` pass):** items 6–8 of "From
+    story editor (geo v2)" above. Core `012_Narrative_Data.rb` (`:war_warning`/`:war_convoy`/`:war_prisoner`/
+    `:war_climax` descriptions now match NARRATIVE_KEYS; no more "Marisol's fleet" or "Shattered Ice"), Core
+    `015_Festival_Draw.rb` ("opposite sides of the Steamline"), and Trials `120_Quests_Catalogue.rb` ("The Saga of the
+    Glass Dunes"; the key `IS_SAGA_OF_THE_ICE` stays). TRIALS_QUESTS.md has been regenerated.
+19. **Cartographer (`tools/worldmap/world_data.py` → maps.json, PLACE_NAMES.md):** 130 is still "Loomhouse Gym - Foyer",
+    131 "Loomhouse Gym - Weaving Hall" and 133 "Loomhouse Gym - The Spindle". The built names are "Loomhouse Gym - Lobby"
+    and "Loomhouse Gym - The Canopy" (`gen_loomhouse.py`), and 133 is retired (GYM_PUZZLES §133). Please rename them and
+    mark 133 as unbuilt.
+
+**Portrait use (coordinator ruling, 2026-11-20; `story/13_CUTSCENES.md` "Portrait use").**
+20. **Map builder:** portraits are for named story characters only, on their first line in a scene and where the
+    expression changes (plus comedy beats with an emote). Other lines get a name box. In `20_SCRIPT_CH0-2.md` and
+    `21_SCRIPT_CH3.md`, a portrait character's repeated same-expression lines are now `[name: X]` (58 and 6 lines). When
+    you rebuild those events, put `\pf[...]` only where the script has a portrait tag. Generic NPCs, trainers and signs
+    never get one, and none of the scripts give them one.

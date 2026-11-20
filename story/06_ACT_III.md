@@ -30,7 +30,7 @@
 - **Three claimants for the Meadow Plate:**
   1. **Queen Maelis** has sent her **Thornguard** to occupy the Heartgarden: "the Plate lies on Crown soil."
   2. **Meridian** offers "temporary custody for public safety". Prince Caedmon smiles beside the Meridian delegate.
-  3. **Rowan's sealed Warden's testament**, opened by Valen, names **Juno Hale** heir.
+  3. **Rowan's sealed Warden's testament**, opened by Valen, names **Juno Hale** heir. His Warden's ring is sealed in with it (Interlude II); Valen puts it in her hand.
 - **Valen** presides from the Heartgarden steps. Juno is terrified. "I didn't want this seat. I wanted *him* in it."
 - **Tamsin** has come up from Briarwick to stand with Juno, the first small-town Warden to join what the press is calling the **Greenward**.
   - If `:ch2_tamsin` was "keep secret", Thistle's cell appears to heckle Tamsin ("You *knew*"), and the PC must defuse it.

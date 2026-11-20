@@ -6,9 +6,9 @@ Room IDs follow WORLD.md §2 and maps.json (gym in city c = rooms 100+20c+10 …
 field (map default in `FieldEffects::MAP_FIELDS`, plus `setBattleRule("field", …)` on each trainer).
 
 **Bugs fixed from the previous version (found while re-checking it):**
-- *Gym 1, 131 Weaving Hall.* Ledge N is full width and all three planks start in column x3, so the start state was
+- *Loomhouse 131, the Weaving Hall (Gym 1 before the swap; retired by Revision 19).* Ledge N is full width and all three planks start in column x3, so the start state was
   already a solution: you could walk straight up the left side.
-- *Gym 1, 131.* The levers stood on the plank landing tiles of ledge S (3/12/21, 18), so a plank landing on a lever was
+- *Loomhouse 131 (same retired room).* The levers stood on the plank landing tiles of ledge S (3/12/21, 18), so a plank landing on a lever was
   unreachable.
 
 ---
@@ -412,7 +412,7 @@ y8   ######@######     @ (6,8) ← door D
   "Twist it or lose it."
 - **Reset:** the "Re-thread" lever lowers every thread.
 
-**Trainers (Rev 14):** Foyer: Nell, Orla. Weaving Hall: Bram. Upper Lofts: Hollis, Ash. *Original list:* Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
+**Trainers (Rev 19, as built):** the Canopy (131): Bug Catcher Nell (ledge 1, optional), Lass Orla (ledge 2, watches the landing), Gentleman Bram (Tamsin's ledge, optional). Upper Lofts: Hollis, Ash. The lobby (130) has none. *Original list:* Bug Catcher Nell (11–12), Lass Orla (12–13), Gentleman "Weaver Bram" (13), Bug Catcher Hollis
 (12–13), Pokémon Ranger ♂ Ash (13–14). Nell and Bram are optional.
 
 ---

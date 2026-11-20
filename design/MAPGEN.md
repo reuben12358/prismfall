@@ -65,9 +65,11 @@ The stock intro's controls tutorial is not reproduced.
   - Variables: V101 STORY_ACT, V102 STORY_CHAPTER, V105 BRIARWICK_GLASSWOOD.
   - Plus stock switch 22 `s:tsOff?("A")`, used by the door pattern.
 - **Gym puzzle IDs (301–400)**, in `mapgen/flags.yaml`:
-  - Gym 1: V305–307 heddles, S305–307 cords.
-  - Gym 2: V310 scene, V311 acts, V312–314 spotlights; S310 ladder, S311 mask, S312 trapdoor, S313 spotlights initialised.
-  - Gym 2 actor-beaten flags are self switches B/C/D on the wheel event.
+  - The blocks follow the building, not the gym number (SPINE Rev 14). **305–309 = the Loomhouse (Gym 2):** V305–307
+    `CANOPY_WEB_A/B/C` (the Canopy's Joltik webs, Rev 19), S305–307 the Upper Lofts cords, S308 Granny's Knot, V309 the
+    loft bridge. **310–314 = the Pell Playhouse (Gym 1):** V310 `STAGE_SCENE`, V311 `STAGE_CURTAIN`, V312
+    `STAGE_TURNTABLE`, V313 `STAGE_AUDIENCE`; S310–312 the backstage flats, S314 the Trap Room chest. Names:
+    `mapgen/flags.yaml`; story pointers: FLAGS.md "Pointer rows".
   - Gym 3: S315 tide bell (ON = currents run inland/north). Water level = which variant map you're on (no variable).
   - Story IDs also used now: S111 CH4_K2_DONE, S112 CH4_TEO_MET, V114 KESTREL_STAGE (set to 1 after K2).
 - The base project's System.rxdata defines 100 switches and 100 variables. That is **not cosmetic**: Essentials v21.1's

@@ -99,12 +99,12 @@ stub.call(:IS_ALEXANDRA, {
   :design => "Board pointer for the Alexandra cameo; her event completes the quest."
 })
 stub.call(:IS_SAGA_OF_THE_ICE, {
-  :trial => :ISENMAR, :title => "The Saga of the Shattered Ice", :giver => "Bersi Gullsong", :map => 921, :where => "Skaldfast",
+  :trial => :ISENMAR, :title => "The Saga of the Glass Dunes", :giver => "Bersi Gullsong", :map => 921, :where => "Skaldfast",
   :rank => 5, :points => 5, :rec_level => 70, :chapter => 15, :unlock => "badges >= 13", :tags => [:war, :final_trial],
-  :summary => "Bersi wants to sing the war. Truthfully, for once. He needs a witness who stood on the ice.",
-  :steps => { :ask => "Tell Bersi what really happened on the Shattered Ice.", :sing => "Hear the saga in the great hall of Skaldfast." },
+  :summary => "Bersi wants to sing the war. Truthfully, for once. He needs a witness who stood on the glass.",
+  :steps => { :ask => "Tell Bersi what really happened on the Glass Dunes.", :sing => "Hear the saga in the great hall of Skaldfast." },
   :reward => { :pokemon => :IS_RANK_LAPRAS }, :touches => "War choices (war_climax / war_terms): the saga's words follow what you chose",
-  :design => "Bersi sings the war straight, no exaggeration, and it's the first time the hall goes silent for him. His verses use the war choice keys, so the saga is different on every war outcome."
+  :design => "Bersi sings the war straight, no exaggeration, and it's the first time the hall goes silent for him: Skaldfast on the sand, the flood, the glass, the bone-carters. His verses use the war choice keys, so the saga is different on every war outcome."
 })
 
 #===============================================================================

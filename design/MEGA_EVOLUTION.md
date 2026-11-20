@@ -21,17 +21,31 @@ Prismfall's Megas come out of the Plates and Imprints (story/01_WORLD_LORE.md §
   Holding one, a Pokémon can carry its whole Imprint for one battle. That's why the stones turn up in Imprint-heavy
   places: the Cinderhorn slag, the Bride Tree's roots, a sap tree, a lighthouse lens.
 - **A Mega Ring is a Warden's ring.** It is a gold band holding a chip of stone with no colour at all. The chip is
-  **grind**: dust from the Crown's own stone (the Legend Plate shard), kept by Cindervault's **Hearthguild** each time
-  the stone is reset. The Legend Plate is every type and none, so a fleck of it opens any heartstone. The guild has cut
-  one ring for every Warden's seat since the Concordance. That's why Wardens Mega Evolve and ordinary trainers don't.
+  **grind**: dust from the Crown's own stone (in truth the Legend Plate shard, which only the Secret Articles say),
+  kept by Cindervault's **Hearthguild**. It has no colour of its own, so it takes any colour and opens any heartstone.
+  The guild has cut one ring for every Warden's seat since the Concordance. That's why Wardens Mega Evolve and
+  ordinary trainers don't.
+  - **What Brann may say in Ch8:** "grind off the Crown's own stone", nothing more. He never names the Legend Plate and
+    never says "reset". 09_MYSTERIES #5 (the One in Keeping is the Legend Plate) and #6 (the Crown is cracked) are
+    revealed in Ch15–17; his chestnut slip the night before is the only Ch8 clue to #4/#6.
 - **One heart at a time.** Two rings on the same side "ring against each other". That is the in-world reason for the
   rule of one Mega per side, partner battles included.
-- **Rings people carry:** every Warden has one. Kestrel wears **his mother Morwen Vane's** ring, never returned after her
-  disgrace; it answers him for the first time at Ironreach (K4). Juno inherits **Rowan's**, and at first it won't answer
-  her. Valen wears the Sovereign's. Meridian has no ring and wants none: Voss wants the whole Crown, not a fleck of it.
-- **Foreshadowing (09_MYSTERIES #1):** the PC's ring is cut from the same stone as the PC's splinter, so it **sings**
-  ("They don't sing. Thirty years at this anvil..."). Pre-Ring stones hum when the PC picks them up. Brann's Ch8 drunken
-  line ("It was smaller than it should've been") lands the next morning when the ring sings in his hand.
+- **Rings people carry:** every seated Warden has one. Valen wears the Sovereign's. Meridian has no ring and wants
+  none: Voss wants the whole Crown, not a fleck of it.
+  - **Morwen's ring** is the Key Item **Morwen's Ring** (07_ACT_IV Ch15). She paid Edda with it for the AF 290 night
+    ferry, and Edda gives it to the PC at Morwen's grave. Kestrel wears it only once the PC gives it to him:
+    `:ch18_kestrel_ring` *give now* (after K7), or at the SF if he's Redeemed. **It answers him the first time he
+    wears it into battle**, so Kestrel has **no Mega before then** (no ring of his own; through Acts III–IV Meridian's
+    Resonance Gauntlet is his power-up instead). Giving the ring early makes him safe from falling and also makes K8
+    harder: he Megas at the SF.
+  - **Rowan's ring.** Rowan takes it off before he first puts on the mask and leaves it with his sealed Warden's
+    testament (Interlude II, 05_ACT_II), so the Mourner never Megas. The testament names Juno heir (06_ACT_III Ch10),
+    and the ring comes to her with it. At first it won't answer her (the Heartgarden scene); at J4 it does.
+- **Foreshadowing (09_MYSTERIES #1):** the PC's ring is **the odd one out**. Brann cut it "ten years back" from the
+  grind of the AF 290 reset (he doesn't say that part), the same break the splinter flew from. It has "sulked on every
+  hand" he's tried it on, and it **sings** for the PC ("They don't sing. Thirty years at this anvil..."). Pre-Ring stones
+  hum when the PC picks them up. Brann's drunken line the night before ("After the accident. Ten years back. It was
+  smaller than it should've been") lands the next morning, when a ring he cut ten years back sings in the PC's hand.
 
 Z-crystals stay what EEVEE_OCTAVE.md made them: slivers of Glassfall glass, each tuned by the Choir to one Imprint. The
 Z-Power Ring stays Vesper's Octave reward. Rings and crystals are separate things in the story too.
@@ -156,24 +170,31 @@ Sigrun, Scolipede for Tamsin's Festival team. Their stones would go after badge 
 
 - **When:** the morning after the Caldera Crisis (05_ACT_II Ch8), with **7 badges**, after Brann's gym (where Mega
   Camerupt is the first Warden Mega the player meets) and the Light Stone choice. It comes before the Dominar's
-  herald (the chapter's cliffhanger). That's mid-Act II, and right before Ch9's K4, where Kestrel's ring first answers.
+  herald (the chapter's cliffhanger). That's mid-Act II, right before Ch9's Ironreach, where Kaito's Mega Lucario
+  is the first Warden fight in which both sides can Mega.
 - **Where:** the Hearthguild Hall (map 244). Brann is at the guild anvil and Larch sits by the door.
+- **Script:** `story/22_SCRIPT_CH8.md` (authoritative lines; the plugin matches it). Storyboard of the ring's note:
+  `story/13_CUTSCENES.md` RD-1.
 - **Scene** (`AS_RING_DAY`, hidden; `pf_trial_talk(:BRANN_HEARTHGUILD)`). The opening depends on the caldera choice:
-  vent ("Forge is cold... A ring wants a candle, not a caldera"), dampers ("You kept 'em lit"), shutdown ("The
-  Dominar's still talking about it"). Then:
-  1. Brann waves off last night's chestnuts ("A fool talks too much over chestnuts. Forget the fool").
-  2. He gives the ring: what a Warden's ring is, what the colourless chip is (grind from the Crown's stone), what a
-     heartstone is, and the rule: one Mega to a side ("Remember it in a double").
+  vent ("Cold for a season... A ring wants a candle, not a caldera"), dampers ("You kept 'em lit"), shutdown ("The
+  Dominar hasn't stopped talking about it"). Then:
+  1. Brann waves off last night's chestnuts ("Forget the fool. Forget the chestnuts too. They were burnt").
+  2. He gives the ring: what a Warden's ring is, and that this one is the odd one out ("I cut it ten years back, and
+     it's sulked on every hand I've tried it on"); what the colourless chip is (grind off the Crown's stone, which takes
+     any colour); what a heartstone is; and the rule, one Mega to a side ("Remember it in a double").
   3. **The ring sings.** "Somewhere under your ribs, something answers it." Brann goes quiet ("They don't sing. Thirty
      years at this anvil, and not one of them has ever sung"). Larch lowers her book.
-  4. He covers it up ("Old fool. It's the forge-hum") and adds the **Aggronite** ("Aron burrow under the Brinecut
-     cliffs").
-  5. Any stones already in the Bag "are warm now, and quiet, as if they had stopped waiting." He signs off with "Go and
-     show Kaito what a ferry child does with a Warden's ring."
+  4. He covers it up, badly ("It's the forge-hum. That's a lie, and lying's a crime in Ashkaar, so you never heard
+     it"), and adds the **Aggronite**.
+  5. Any stones already in the Bag "are warm now, and quiet, as if they had stopped waiting." He signs off: Aron burrow
+     under the Brinecut cliffs, and "Go and show Kaito what a ferry child does with a Warden's ring."
 - **Gives:** `MEGARING` and `AGGRONITE`. No Trial gong: the scene closes quietly.
-- **Follow-up beats:** K4 (Kestrel's first Mega, with his mother's ring). J3/the Heartgarden: Juno's ring won't answer
-  her yet (`EL_BRIDE_TREE_HEART`, Venusaurite). J4: it does. Act III: Brann's spare heartstone (`AS_FORGE_REMEMBERS`,
-  "Your ring still singing? ...No. Don't tell me").
+- **Follow-up beats:** Ch9 Kaito's Mega Lucario. J3/the Heartgarden: Juno's ring won't answer her yet
+  (`EL_BRIDE_TREE_HEART`, Venusaurite). Act III: Brann's spare heartstone (`AS_FORGE_REMEMBERS`, "Your ring still
+  singing? ...No. Don't tell me"). Ch18/SF: Morwen's Ring answers Kestrel the first time he wears it. J4: Juno's ring
+  answers her.
+- **Open for the Trials owner:** one reactive line if `choice(:ch8_lightstone) == :dominar` (Brann is hurt; see the
+  script). It needs a new `:if` entry, so it isn't in the plugin yet (`mapgen/REQUESTS.md`, story editor 2026-11-20).
 - For the story editor: the scene is written in the Trials data so it plays and tests now. If you'd rather stage it as a
   story event, keep the lines and call `pbReceiveItem(:MEGARING)` and `pbReceiveItem(:AGGRONITE)`.
 
@@ -258,7 +279,7 @@ post-game teams keep them on all difficulties.
 | Trainer (field, cap) | Mega | Difficulty | Why this one |
 |---|---|---|---|
 | **Brann**, Gym 7 (Volcanic, 39) | **Camerupt "Kiln"** (move it to slot 5, before Anvil; the Elemental Seed goes to Torkoal) | Std, Hard | the living volcano for the forge-Warden. On Volcanic its Mega primes an eruption (+1 Sp. Atk for Fire, lava for grounded foes). The answer is honest: 4× Water, and Surf ×2 quenches the field. Brann's team has no Charizard; Charizard X is Ashkaar's dragon-rider stone, which the player earns from Old Cinder at 11. |
-| **Kestrel** K4 (Ironreach Open, 42) → K8, K9 | **Scizor** | Std, Hard (Casual from K5) | his mother's ring answers him for the first time at K4, one chapter after the PC's Ring-Day. Scizor is his duelist and doesn't depend on the player's starter. Mega Scizor's blade-claws echo Aegislash "Morwen". |
+| **Kestrel** K8 (Festival SF, 94) and K9, **only if he wears Morwen's Ring** (`:ch18_kestrel_ring` = *give_now*) | **Scizor** | all | Morwen's Ring is with Edda until Ch15 and reaches Kestrel only through the PC (07 Ch15, 08 Ch18), so he has **no Mega at K4–K7**: Meridian's Gauntlet is his power-up then. The ring answers him the first time he wears it. If it's given at the SF instead (Redeemed, after K8), his first Mega is in the hijack tag battle, where the player's Mega has priority (one per side). Scizor is his duelist and doesn't depend on the player's starter. |
 | **Kaito**, Gym 8 (Colosseum, 43) | **Lucario "Memory"** (Lucarionite instead of the Std Scope Lens) | Std, Hard | "It remembers for me." The crowd roars for its Mega (a knockout toward the Frenzy). The first Warden fight where both sides can Mega. |
 | **Juno** J3, Gym 9 (Flower Garden, 47) | none | — | Rowan's ring won't answer her yet (the Heartgarden scene). |
 | **Juno** J4 (Festival R16, 90), J7 (Ch21 partner) | her **starter**: write the Gen 1 line with its stone (Blastoisinite / Venusaurite / Charizardite X by slot). Core remaps it to the swapped starter's stone, or Life Orb | all | the ring answers at last. As Ch21 partner she Megas only if the player doesn't (one per side). |
@@ -276,11 +297,12 @@ post-game teams keep them on all difficulties.
 | Festival v92 draws (Kaito, Ysolde, Sigrun, Odessa, Celestine), Brann v96 | their gym Mega | all | — |
 | Cameo sidequests | unchanged (Garret's Mega Lucario at 46, Titania's Mawile, Lin's Gardevoir, Alexandra's Latias, Nova's Banette) | — | all after the Ring-Day |
 | **Voss**, Quent, the Octave gauntlet | none | — | Meridian has no ring (Silvally NULL is its answer). The Octave is Z-moves' showcase. |
-| **The Mourner** (Ch9 boss) | none | — | a mask can't hide a Warden's ring. At the unmasking, Rowan's ring is on his hand. |
+| **The Mourner** (Ch9 boss) | none | — | a mask can't hide a Warden's ring, so Rowan left his with his sealed testament before he ever put the mask on (Interlude II). His bare ring-finger, pale where the band sat for 24 years, is a detail at the unmasking. |
 | **Wild bosses** (Old Cinder 58, Old Pincer 62, the Causeway Matriarch 78) | none (wild) | — | they guard stones; none joins. |
 
 **EBDX battle speech** (optional, trainer designer): give each Mega Warden a `megaOpp` line, for example Brann: "Some
-things you forge to last!", Kaito: "Memory. Remember." and Kestrel at K4: "...She'd have hated this. Answer me!"
+things you forge to last!", Kaito: "Memory. Remember." and Kestrel at K8 wearing Morwen's Ring: "Mum. Just this
+once. Answer me."
 
 ---------------------------------------------------------------------------------------------------
 ## 7. Implementation
