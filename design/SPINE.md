@@ -12,6 +12,8 @@ New layout:
 - Fire and ice meet only across the northern sea (the war front).
 - The start (Ferrow's Landing, Saltmere, Briarwick, Rimewood, then Ebbmouth) is unchanged, on Elowen's south-west coast.
 
+- **The war is fought on land, in Ossaria** (user, 17:26: "seems weird designating the north sea as a fighting spot considering its water and we have a fire region... u could also make it so that the fight is fought in ossaria or even in elowen"). Ossaria's bone sands lie between the two kingdoms, so both armies march into neutral ground. In the climax, Primal Kyogre drags a flood-sea into the desert and Reshiram's fire turns the dunes to glass. The beam clash happens over the glassing dunes. This replaces the "Shattered Ice" / north-sea front; fire and ice still never share a border.
+
 ## >>> REVISION 17 (user, 2026-11-19 17:17) <<<
 **Juno's portrait is the pass-3 "composite A"** (the middle row of art/previews/15_juno_portraits.png). User: "juno pass 5 looks bad, i much rather prefer at the middle one, she looks damn near cool in that" and "something about she looking like burgh in pass 1 is still unsettling to me". Pass 3 is reinstalled. Any polish must keep that face and look: no rebuild onto a different base face. Lesson for the whole cast: the user prefers the cleaner, brighter, bigger-eyed B2W2-VS style of pass 3 over the more realistic, painterly Rejuvenation/Desolation faces, and anything that reads even slightly like a known character (Burgh) is a fail.
 

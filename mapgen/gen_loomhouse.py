@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, 'layouts'))
 FIELD_RULE = 'setBattleRule("field", :SILKWOOD)'
 CLS = {'#': 'void', 'W': 'wall', '.': 'floor', 'v': 'pit', 'S': 'stair', 'o': 'floor'}
-M = {'MapPosition': [0, 12, 22]}
+M = {'MapPosition': [0, 12, 22], 'SnapEdges': True}
 
 
 def say(who, expr, text):
@@ -50,6 +50,50 @@ def head(mid, name, parent, tone, extra=None):
     d = {'id': mid, 'name': name, 'parent': parent, 'biome': 'canopy_gym', 'bgm': 'Gym', 'field': 'SILKWOOD', 'tone': tone, 'metadata': M}
     d.update(extra or {})
     return d
+
+
+def loom_bed(K, h, rows, x0, x1, rnd, ends=None, posts=True):
+    """A loom bed seen from above (art pass 2026-11-19): the walkway's timber front with the breast beam along the first row,
+    then the storey below in shadow, bolts and baskets on its boards, the warp stretched over it all and tied to the back beam
+    on the last row.  `ends`: the two heddle colours tied round the beam at the left and right ends."""
+    CU = K.CU
+    rows = list(rows)
+    PROPS = ['bolt_r', 'bolt_b', 'bolt_y', 'bolt_p', 'basket', 'basket']
+    for i, y in enumerate(rows):
+        for x in range(x0, x1 + 1):
+            if i == 0:
+                t = 'loom_face_l' if x == x0 else 'loom_face_r' if x == x1 else 'loom_face_mid'
+                if ends and x in (x0, x0 + 1): t = 'loom_face_' + ends[0]
+                if ends and x in (x1, x1 - 1): t = 'loom_face_' + ends[1]
+                h.put(CU(t), x, y, 0); h.put(0, x, y, 1); h.put(0, x, y, 2)
+                continue
+            h.put(CU('lower_%d_%d' % (min(i, 3), rnd.randrange(3))), x, y, 0)
+            h.put(CU('warp_back') if i == len(rows) - 1 else CU('warp_mid'), x, y, 2)
+            h.put(0, x, y, 1)
+            if posts and x in (x0, x1):
+                h.put(CU('tpost_base' if i == len(rows) - 1 else 'tpost_band' if i == 1 else 'tpost_mid'), x, y, 1)
+            elif rnd.random() < 0.16:
+                h.put(CU(rnd.choice(PROPS)), x, y, 1)
+
+
+def light_band(K, h, x0, y0, y1, bed_rows):
+    """Window light falling down-right across the floor (and on into a loom bed), two tiles wide."""
+    for y in range(y0, y1 + 1):
+        c = x0 + (y - y0)
+        for dx, k in ((0, 'l'), (1, 'full'), (2, 'r')):
+            x = c + dx
+            if not (0 < x < h.W - 1): continue
+            if y in bed_rows:
+                if h.L[1, y, x] == 0 and h.c(x, y) == 'pit': h.put(K.CU('light_%s_x' % k), x, y, 1)
+            elif h.c(x, y) in ('floor', 'stair') and h.L[2, y, x] == 0:
+                h.put(K.CU('light_' + k), x, y, 2)
+
+
+def windows(K, h, xs, y0):
+    """Tall arched windows in the timber wall: arch, glazing, sill (two tiles wide each)."""
+    for x in xs:
+        for dy, part in enumerate(('top', 'mid', 'sill')):
+            for c in range(2): h.put(K.CU('window_%s_%d' % (part, c)), x + c, y0 + dy, 1)
 
 
 def main():
@@ -122,24 +166,30 @@ def main():
         {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)', 'then': win}]
     A = g1.GYM_AT
     h = K.Hall(g1.GYM, 'loom', CLS, seed=130)
+    rnd = h.r
     for x, y in g1.GYM_LOOMS: h.obj('loom', x, y)
-    for y in range(4, 8):                               # the Warden's rug, and a runner all the way up the aisle
-        for x in range(7, 13): h.put(MI(1049), x, y, 0)
-    for y in range(10, 22):
+    windows(K, h, (4, 11), 2)
+    for y in range(6, 10):                              # the Warden's rug at the top, and a runner all the way up the aisle
+        for x in range(8, 12): h.put(MI(1049), x, y, 0)
+    for y in range(12, 24):
         for x in (9, 10): h.put(MI(1049), x, y, 0)
-    for x in (3, 6, 10): h.obj('laundry', x, 3)
-    h.obj('web', 3, 1); h.obj('web', 14, 1); h.obj('plant', 3, 3); h.obj('plant', 16, 3)
-    h.obj('vat_b', 12, 6); h.obj('vat_r', 13, 6); h.obj('vat_y', 14, 6); h.obj('silk', 16, 6); h.obj('silk1', 16, 5)
-    h.obj('lantern', 3, 20); h.obj('lantern', 16, 20); h.obj('silk', 15, 20); h.obj('silk1', 3, 13); h.obj('silk1', 16, 14)
-    h.obj('plant', 3, 9); h.obj('plant', 16, 9); h.obj('mat_mi', 8, 21)
+    loom_bed(K, h, g1.GYM_BED, 3, 16, rnd, posts=False)
+    for x in (6, 13): h.obj('laundry', x, 5)
+    h.obj('web', 3, 2); h.obj('web', 14, 2); h.obj('plant', 3, 5); h.obj('plant', 16, 5)
+    h.obj('vat_b', 12, 8); h.obj('vat_r', 13, 8); h.obj('vat_y', 14, 8); h.obj('silk', 16, 8); h.obj('silk1', 16, 7)
+    h.obj('lantern', 3, 22); h.obj('lantern', 16, 22); h.obj('silk', 15, 22); h.obj('silk1', 3, 15); h.obj('silk1', 16, 16)
+    h.obj('plant', 3, 12); h.obj('plant', 16, 12); h.obj('mat_mi', 8, 23)
+    h.stamp('hb_dyeline', 13, 11 + 1)                   # silk drying on its frame by the aisle
+    light_band(K, h, 4, 6, 11, set(g1.GYM_BED)); light_band(K, h, 11, 6, 9, set(g1.GYM_BED))
     hx, hy = A['heddle']
-    for x in range(7, hx): h.put(CU('thread_silk_h'), x, 9, 2)      # the silk from the heddle to the plank, across the bed
+    for x in range(7, hx): h.put(CU('thread_silk_h'), x, hy, 2)     # the silk from the heddle to the plank, along the bed
+    h.put(CU('heddle_silk_top'), hx, hy - 1, 2)
     ev = [{'type': 'exit', 'at': list(A['exit']), 'link': 'BW_GYM', 'se': 'Door exit'}]
     for k, cols in g1.GYM_PLANKS.items():
         for x in cols:
-            for y in (8, 9): ev.append(K.tile_event('Plank %d,%d' % (x, y), x, y, K.exact('LOOM_FOYER', k, PLANK, 1)))
+            for y in g1.GYM_BED: ev.append(K.tile_event('Plank %d,%d' % (x, y), x, y, K.exact('LOOM_FOYER', k, PLANK, 1)))
     ev += [
-        {'type': 'event', 'name': 'Heddle', 'at': [hx, hy], 'pages': [{'graphic': {'tile': CU('post_silk')}, 'commands': [
+        {'type': 'event', 'name': 'Heddle', 'at': [hx, hy], 'pages': [{'graphic': {'tile': CU('heddle_silk_bot')}, 'commands': [
             {'se': 'Door exit'}, {'script': 'pfp_cycle(%d, 2)' % g1.V_FOYER},
             {'if': 'pbGet(%d) == 1' % g1.V_FOYER, 'then': [
                 'You pull the heddle. The silk thread running out over the loom bed twitches, and the plank slides along it, right into the aisle.'],
@@ -173,18 +223,22 @@ def main():
     # ---------------------------------------------------------------- 131 Weaving Hall (TWIST: two threads per heddle)
     A = g1.HALL_AT
     h = K.Hall(g1.HALL, 'loom', CLS, seed=131)
-    for y in (9, 14):                                   # looms shoulder to shoulder between the three walkways
-        for x in (5, 7, 9, 14, 16, 18): h.obj('loom', x, y)
-    for x in (2, 6, 16, 20): h.obj('laundry', x, 2)
-    h.obj('web', 0, 0); h.obj('web', 22, 0); h.obj('plant', 1, 2); h.obj('plant', 23, 2)
-    h.obj('vat_b', 6, 3); h.obj('vat_r', 7, 3); h.obj('vat_y', 17, 3); h.obj('silk', 19, 3 - 1); h.obj('silk1', 18, 3)
-    h.obj('lantern', 4, 19); h.obj('lantern', 20, 19); h.obj('mat_mi', 11, 21)
+    rnd = h.r
     COL = {'Red': 'red', 'Gold': 'gold', 'Green': 'green'}
     side = {'A': ('Red', 'Green'), 'B': ('Red', 'Gold'), 'C': ('Gold', 'Green')}        # which two heddles lift each loom bed
-    for g, (rows, var, cols) in g1.HALL_GAPS.items():   # a tag of each heddle's colour at both ends of the beds it lifts
-        mid = list(rows)[len(rows) // 2]
-        h.put(CU('thread_%s_h' % COL[side[g][0]]), 0, mid, 2); h.put(CU('thread_%s_h' % COL[side[g][1]]), 24, mid, 2)
-        h.put(CU('thread_%s_h' % COL[side[g][0]]), 1, mid, 2); h.put(CU('thread_%s_h' % COL[side[g][1]]), 23, mid, 2)
+    windows(K, h, (2, 7, 16, 21), 1)
+    for y in (11, 16):                                  # looms shoulder to shoulder between the three walkways
+        for x in (5, 7, 9, 14, 16, 18): h.obj('loom', x, y)
+    for g, (rows, var, cols) in g1.HALL_GAPS.items():   # the loom beds: the floor below, the warp over it, the heddles' colours at the ends
+        loom_bed(K, h, rows, 1, 23, rnd, ends=(COL[side[g][0]], COL[side[g][1]]))
+    for x in (5, 18): h.obj('laundry', x, 4)
+    h.obj('web', 0, 0); h.obj('web', 22, 0)
+    h.obj('vat_b', 6, 5); h.obj('vat_r', 7, 5); h.obj('vat_y', 17, 5)
+    h.stamp('hb_rugline', 20, 5); h.stamp('hb_dyeline', 14, 22)                     # a tapestry and dyed silk drying on frames
+    h.obj('silk', 1, 22); h.obj('silk1', 2, 22); h.obj('lantern', 4, 21); h.obj('lantern', 20, 21); h.obj('mat_mi', 11, 23)
+    for x0 in (2, 7, 16, 21): light_band(K, h, x0, 5, 10, set(g1.HALL_GAPS['A'][0]))
+    for n, (pos, _, _) in g1.HALL_HEDDLES.items():      # each heddle frame's header stands over the walkway behind it
+        h.put(CU('heddle_%s_top' % COL[n]), pos[0], pos[1] - 1, 2)
     ev = []
     for g, (rows, var, cols) in g1.HALL_GAPS.items():
         name = {g1.V_A: 'LOOM_A', g1.V_B: 'LOOM_B', g1.V_C: 'LOOM_C'}[var]
@@ -192,11 +246,11 @@ def main():
             if x is None: continue
             for y in rows: ev.append(K.tile_event('Plank %s %d,%d' % (g, x, y), x, y, K.exact(name, k, PLANK, 2)))
     for n, (pos, (a, b), what) in g1.HALL_HEDDLES.items():
-        ev.append({'type': 'event', 'name': '%s heddle' % n, 'at': list(pos), 'pages': [{'graphic': {'tile': CU('post_' + COL[n])}, 'commands': [
+        ev.append({'type': 'event', 'name': '%s heddle' % n, 'at': list(pos), 'pages': [{'graphic': {'tile': CU('heddle_%s_bot' % COL[n])}, 'commands': [
             {'se': 'Door exit'}, {'script': 'pfp_cycle(%d, 3)\npfp_cycle(%d, 3)' % (a, b)},
             'The %s heddle rises. Two threads lift with it: loom beds %s shift.' % (n.lower(), what)]}]})
     ev += [
-        {'type': 'warp', 'name': 'Back down to the gym', 'at': list(A['entrance']), 'to': {'map': 130, 'x': 15, 'y': 4, 'dir': 'down'}},
+        {'type': 'warp', 'name': 'Back down to the gym', 'at': list(A['entrance']), 'to': {'map': 130, 'x': g1.GYM_AT['arrive'][0], 'y': g1.GYM_AT['arrive'][1], 'dir': 'down'}},
         {'type': 'event', 'name': 'Tamsin', 'at': list(g1.HALL_AT['tamsin']), 'pages': [
             {'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': tamsin_fight},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_LASS', 'dir': 'down'}, 'commands': [
@@ -215,7 +269,7 @@ def main():
              CU('post_silk')),
         K.apprentice('Pim', 'NPC 05', A['pim'][0], A['pim'][1], 'lh_hall', "Pim again. I run between rooms. Want it put back, or a nudge?"),
         reveal_if("$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[131, e.id, 'A']] } >= 1", ['Juno']),
-        {'type': 'event', 'name': 'Juno', 'at': [13, 21], 'pages': [
+        {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
             {'commands': []},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
                 {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on, I'll be loud. Quietly. I learned that in Saltmere.")],
@@ -266,7 +320,7 @@ def main():
     for k, cells in g1.BRIDGE.items():
         for x, y in cells: ev.append(K.tile_event('Bridge %d %d,%d' % (k, x, y), x, y, K.exact('LOOM_BRIDGE', k, PLANK, 2)))
     ev += [
-        {'type': 'warp', 'name': 'Down to Weaving Hall', 'at': list(A['down']), 'to': {'map': 131, 'x': 12, 'y': 3, 'dir': 'down'}},
+        {'type': 'warp', 'name': 'Down to Weaving Hall', 'at': list(A['down']), 'to': {'map': 131, 'x': g1.HALL_AT['arrive_from_lofts'][0], 'y': g1.HALL_AT['arrive_from_lofts'][1], 'dir': 'down'}},
         {'type': 'warp', 'name': "Granny's door", 'at': list(A['warp']), 'to': {'map': 134, 'x': g1.KNOT_AT['start'][0], 'y': g1.KNOT_AT['start'][1], 'dir': 'up'}},
         {'type': 'item', 'at': list(A['item']), 'item': 'SILVERPOWDER'},
         K.apprentice('Mossy', 'NPC 07', A['mossy'][0], A['mossy'][1], 'lh_lofts', "Mossy. I oil the spools. If you're going round in circles, say."),

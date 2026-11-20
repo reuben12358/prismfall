@@ -243,7 +243,7 @@ def main():
     for p in ('mid', 'band', 'base'): add('tpost_' + p, HA.post(p), 15)
     for p in ('top', 'mid', 'sill'):
         for (cx, cy), t in HA.tiles(HA.window(p)).items(): add('window_%s_%d' % (p, cx), t, 15)
-    for n in ('red', 'gold', 'green'):
+    for n in ('red', 'gold', 'green', 'silk'):
         add('heddle_%s_top' % n, HA.heddle_frame(COLS[n], 'top'), 0, 1)   # the frame's header, drawn over the walker
         add('heddle_%s_bot' % n, HA.heddle_frame(COLS[n], 'bot'), 15)
     for n, c in (('bolt_r', (170, 50, 60)), ('bolt_b', (60, 90, 170)), ('bolt_y', (200, 160, 60)), ('bolt_p', (150, 70, 150))):

@@ -15,6 +15,7 @@ metadata:
   - 0
   - 12
   - 22
+  SnapEdges: true
 raw: data/raw/130.npy
 tileset: 54
 events:
@@ -25,10 +26,10 @@ events:
   link: BW_GYM
   se: Door exit
 - type: event
-  name: Plank 5,8
+  name: Plank 5,10
   at:
   - 5
-  - 8
+  - 10
   pages:
   - graphic:
       tile: 3015
@@ -37,10 +38,10 @@ events:
       - LOOM_FOYER
       - 1
 - type: event
-  name: Plank 5,9
+  name: Plank 5,11
   at:
   - 5
-  - 9
+  - 11
   pages:
   - graphic:
       tile: 3015
@@ -49,10 +50,10 @@ events:
       - LOOM_FOYER
       - 1
 - type: event
-  name: Plank 6,8
+  name: Plank 6,10
   at:
   - 6
-  - 8
+  - 10
   pages:
   - graphic:
       tile: 3015
@@ -61,10 +62,10 @@ events:
       - LOOM_FOYER
       - 1
 - type: event
-  name: Plank 6,9
+  name: Plank 6,11
   at:
   - 6
-  - 9
+  - 11
   pages:
   - graphic:
       tile: 3015
@@ -73,10 +74,10 @@ events:
       - LOOM_FOYER
       - 1
 - type: event
-  name: Plank 9,8
+  name: Plank 9,10
   at:
   - 9
-  - 8
+  - 10
   pages:
   - {}
   - cond:
@@ -86,10 +87,10 @@ events:
     graphic:
       tile: 3015
 - type: event
-  name: Plank 9,9
+  name: Plank 9,11
   at:
   - 9
-  - 9
+  - 11
   pages:
   - {}
   - cond:
@@ -99,10 +100,10 @@ events:
     graphic:
       tile: 3015
 - type: event
-  name: Plank 10,8
+  name: Plank 10,10
   at:
   - 10
-  - 8
+  - 10
   pages:
   - {}
   - cond:
@@ -112,10 +113,10 @@ events:
     graphic:
       tile: 3015
 - type: event
-  name: Plank 10,9
+  name: Plank 10,11
   at:
   - 10
-  - 9
+  - 11
   pages:
   - {}
   - cond:
@@ -131,7 +132,7 @@ events:
   - 12
   pages:
   - graphic:
-      tile: 3047
+      tile: 3194
     commands:
     - se: Door exit
     - script: pfp_cycle(308, 2)
@@ -297,6 +298,7 @@ metadata:
   - 0
   - 12
   - 22
+  SnapEdges: true
 raw: data/raw/131.npy
 tileset: 54
 events:
@@ -733,7 +735,7 @@ events:
   - 23
   pages:
   - graphic:
-      tile: 3019
+      tile: 3188
     commands:
     - se: Door exit
     - script: 'pfp_cycle(305, 3)
@@ -747,7 +749,7 @@ events:
   - 23
   pages:
   - graphic:
-      tile: 3026
+      tile: 3190
     commands:
     - se: Door exit
     - script: 'pfp_cycle(306, 3)
@@ -761,7 +763,7 @@ events:
   - 23
   pages:
   - graphic:
-      tile: 3033
+      tile: 3192
     commands:
     - se: Door exit
     - script: 'pfp_cycle(307, 3)
@@ -776,7 +778,7 @@ events:
   to:
     map: 130
     x: 15
-    y: 4
+    y: 6
     dir: down
 - type: event
   name: Tamsin
@@ -982,7 +984,7 @@ events:
   name: Juno
   at:
   - 13
-  - 21
+  - 23
   pages:
   - commands: []
   - cond:
@@ -1016,6 +1018,7 @@ metadata:
   - 0
   - 12
   - 22
+  SnapEdges: true
 raw: data/raw/132.npy
 tileset: 54
 events:
@@ -1436,7 +1439,7 @@ events:
   to:
     map: 131
     x: 12
-    y: 3
+    y: 5
     dir: down
 - type: warp
   name: Granny's door
@@ -1507,6 +1510,7 @@ metadata:
   - 0
   - 12
   - 22
+  SnapEdges: true
 raw: data/raw/134.npy
 tileset: 54
 events:

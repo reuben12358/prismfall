@@ -87,18 +87,22 @@ MapPosition = 0,11,14
 [130]   # Loomhouse Gym - Foyer
 Name = Loomhouse Gym - Foyer
 MapPosition = 0,11,13
+SnapEdges = true
 #-------------------------------
 [131]   # Loomhouse Gym - Weaving Hall
 Name = Loomhouse Gym - Weaving Hall
 MapPosition = 0,11,13
+SnapEdges = true
 #-------------------------------
 [132]   # Loomhouse Upper Lofts - Canopy Lofts
 Name = Loomhouse Upper Lofts - Canopy Lofts
 MapPosition = 0,11,13
+SnapEdges = true
 #-------------------------------
 [134]   # Loomhouse Upper Lofts - Granny's Knot
 Name = Loomhouse Upper Lofts - Granny's Knot
 MapPosition = 0,11,13
+SnapEdges = true
 #-------------------------------
 [140]   # Saltmere
 Name = Saltmere

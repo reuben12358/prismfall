@@ -4,7 +4,7 @@ if defined?(PrismfallPuzzles)
   PrismfallPuzzles.room(:lh_foyer, {
     :name => "Loomhouse Foyer",
     :map => 130,
-    :start => [9, 21, 8],
+    :start => [9, 23, 8],
     :reset => { :vars => { 308 => 0 } },
     :solved => { :vars => { 308 => 1 } },
     :hints => ["See the silk running from the heddle by the aisle? Follow it with your eyes.", "Pull the heddle beside the aisle once. The plank slides over from the left, right into your path."],
@@ -12,7 +12,7 @@ if defined?(PrismfallPuzzles)
   PrismfallPuzzles.room(:lh_hall, {
     :name => "Weaving Hall",
     :map => 131,
-    :start => [12, 21, 8],
+    :start => [12, 23, 8],
     :reset => { :vars => { 305 => 0, 306 => 0, 307 => 0 } },
     :solved => { :vars => { 305 => 2, 306 => 2, 307 => 2 } },
     :hints => ["Every heddle lifts two rows. Count lifts, not pulls.", "Three heddles, three rows: what if each row got lifted the same number of times?", "Pull Red, Gold and Green once each. Every row has been lifted twice, so all three planks sit on the right. Climb the right-hand column to Tamsin."],
