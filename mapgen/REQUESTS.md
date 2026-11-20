@@ -234,3 +234,63 @@ Nothing below needs a shared file edited by me except the two small hooks marked
    tiles, no empty corridor longer than 12 tiles, every dead end pays).
 7. **Not mine, noticed:** `build.py --strict` currently stops on the new OLD SLAB STAIRS check (140, 146, 147: 111
    tiles). The commit before the rename (a36c784) builds strict-green; the slab check was added after it.
+
+## From the Pokémon distribution pass (SPINE Revision 16), 2026-11-19
+Study and rules: `design/DISTRIBUTION_STUDY.md` (Reborn/Rejuvenation data, rules R1–R9); numbers in `design/warden_gates.json`.
+In one line: nothing that answers the next Warden is handed out before that gym, and gated answers are ≤5% in the wild.
+No map file was edited. Encounter tables (`pbs/encounters.txt`, `encounters_badgetiers.txt`) and the Trials plugin data
+were changed; everything below is map-side or for the trainer designer.
+
+**Map builder**
+1. **Thistledown Manor (546, spec in `544_brinecut_mine.yaml`), Lady Thistledown's "bow out" branch:** replace
+   `pbAddPokemon(:LITWICK, 14)` with `pbAddPokemon(:SINISTEA, 14)` and the line "A small candle-flame drifts out of the
+   footlights and follows you." with "A chipped teacup rattles off the mantel and follows you." Litwick is Fire, an answer
+   to Tamsin, and this is before her gym. Litwick still turns up in the manor from Badge 2 (overlay `[546,102]`).
+2. **The Glassed Orchard (522), event "Wild Carbink":** Carbink is Rock (Tamsin's answer) and the event has no condition.
+   Page 1 (fewer than 2 badges): a glimpse only, no battle ("It licks a glass tree, sees you, and phases into the glass.").
+   Page 2, condition `Condition: badges >= 2` or `$player.badge_count >= 2` (Prismfall `pfm_gym_won?(:LEADER_TAMSIN)` is
+   better): `setBattleRule("field", :BLEED)` + `WildBattle.start(:CARBINK, 20)`.
+3. **Ebbmouth (160): new event "Harbour mast Wattrel"** (`design/TRIAL_EVENTS.yaml`, key `EBB_MAST`): a Wattrel on the mast
+   by the Gale Post jetty, `pf_trial_talk(:EBB_MAST)`, visible on
+   `Condition: quest_done(:EL_MASTER_OF_NOTHING) && badges >= 3 && event_mon(:EL_WATTREL) != :gifted`.
+4. **The Dovetail (109), Wattrel nest:** its condition is now
+   `quest_step(:EL_MASTER_OF_NOTHING) == :ask || (quest_done(:EL_MASTER_OF_NOTHING) && badges < 3)` (the bird stays aboard
+   until Badge 3).
+5. **Gossamer Wood (524), sap-tree duel:** condition `badges >= 2 && !quest_done(:EL_HORN_AND_PINCER)` (after Tamsin). The
+   silk wall and the log stay until it is done, so the two shortcuts open on a revisit.
+6. **Quests whose map events now matter later** (no map change unless the event has its own condition): the Timburr at the
+   Ferrow's berth and the tide-pool feud on Lacecliff Walk open after Badge 1; Hesper keeps the Charcadet crate by the lamp
+   until Badge 2; the Legion barge in Saltmere (146) and the Sudowoodo rematch on Windfall Row open after Badge 2. Players
+   reach them from Frostwick by the Frostflat Causeway, so please keep that road open from the start of Chapter 4.
+7. **If you implement the dyer's monkeys** (POKEMON_AVAILABILITY §2, not built yet): the Dyers' Ford dye-master gives
+   Pansear or Panpour after Badge 2, and Pansage only after Badge 5.
+
+**Trainer designer** (what the player can have, by Warden; full lists: `python3 -I tools/validate_encounters.py --gates`)
+- **Dorian (Gym 1, cap 15):** the player has **no Fighting type** except a Fighting starter (Monferno at 14, Combusken at
+  16 is too late, Pignite at 17 too late). Ghost: a 2–3% Sandygast. He should be a fair but real fight at Reborn/
+  Rejuvenation early-gym strength (SPINE Rev 16): raw stats, the Grand Stage applause and coverage, not type walls.
+- **Tamsin (Gym 2, cap 19, double):** Fire and Rock only as rare wild finds (Litleo, Sizzlipede, Rolycoly 3%, Ponyta,
+  Fletchling, Nacli, Dwebble, Roggenrola, Aron 4%) or a Fire starter. **Flying is common** (Pidove, Hoothoot, Pikipek,
+  Wingull, Combee): keep her answer to it (Joltik's Electroweb in rain, Surskit's Rain Dance). Fighting is now common
+  (Timburr gift, the duel, Brinecut's Machop/Timburr/Meditite, Crabrawler, Mankey, Pancham): Bug resists it already.
+- **Marisol (Gym 3, cap 23):** Electric only 4–5% (Joltik, Mareep, Shinx, Blitzle, Grubbin, Tynamo); **Grass is common**
+  (Elowen): keep Pelipper, Araquanid and Gyarados as its answer. After Badge 2 the player can also have Charcadet,
+  Litleo, Sudowoodo, Heracross or Pinsir (Moxie), Spidops, Snom, Ditto.
+- **Rook (Gym 4, cap 27):** Ground only 2–5% (Diglett, Bunnelby, Sandygast, Silicobra, Nincada, Swinub, Wooper, Tympole,
+  Barboach and Stunfisk by rod, Geodude by Rock Smash). After Badge 3: Bombirdier, Wattrel.
+- **The Little Crucible** (`pbs/trainers_trials.txt`: ASHKAAR_SOLDIER_M Rekk, ASHKAAR_SOLDIER_F Vasha, ASHKAAR_OFFICER Brakka)
+  now opens at Badge 2: please move those three teams to the 2-badge band (cap 23); the mascot boss Litleo is Lv 21.
+- **Wardens 5–18:** when you build a team, add its `answers`, `gated` and `blunted` lists to `design/warden_gates.json`
+  (rule R9); the encounter validators and the Trials test then enforce the gates for it. Known item: the Bombirdier
+  reward (Badge 3) is Flying, immune to Sahar's Ground.
+
+**Story editor:** `design/SWAP_GYM1_GYM2.md` §8 still asks for "one Fighting family before Saltmere"; Revision 16 withdraws
+it (`DISTRIBUTION_STUDY.md` R1). The Gym Guide's "Fighting-types, they fear" line still works as a hint about Dorian's
+weakness, but the player can't act on it before the badge.
+`story/21_SCRIPT_CH3.md` line 124 gives a LITWICK from the manor's chandelier: please make it a SINISTEA from the mantel (map
+request 1), or keep the Litwick line and have it "follow you out" only after Badge 2.
+
+**Cartographer:** WORLD.md §11 (from `tools/worldmap/world_data.py`) still lists Heracross in Windfall Row's Headbutt trees;
+it is now in the Gossamer Wood only (3%), and Windfall Row's Litleo (3%) and Shinx (4%) are rare finds. The new base tables
+for 527, 528, 552, 566, 577 and 578 follow the ROUTES.yaml fill lists, except Smeargle at the Dyers' Ford, which arrives with
+Badge 2 (overlay) so that the Saltmere paint-loft gift comes first.

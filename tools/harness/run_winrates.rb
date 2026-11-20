@@ -113,7 +113,21 @@ module WR
     GameData::Stat.each_main { |s| p.iv[s.id] = 5 + rng.rand(21) }
     p.nature = GameData::Nature.keys.sample(random: rng)
     learned = p.species_data.moves.select { |lv, _m| lv <= level }.map { |_lv, m| m }.uniq.reverse
-    keep = learned.reject { |m| FILLER.include?(m) }.first(4)
+    if PREP
+      # A thoughtful player declines the weak moves: the three strongest attacks (power x STAB x accuracy), then the
+      # best of what is left (a fourth attack, or the newest non-filler status move).
+      score = lambda do |m|
+        mv = GameData::Move.get(m)
+        next 0 if mv.power.to_i <= 1
+        mv.power * (p.types.include?(mv.type) ? 1.5 : 1.0) * ((mv.accuracy.to_i == 0) ? 100 : mv.accuracy) / 100.0
+      end
+      attacks = learned.select { |m| score.call(m) > 0 }.sort_by { |m| -score.call(m) }
+      keep = attacks.first(3)
+      rest = learned.reject { |m| keep.include?(m) || FILLER.include?(m) }
+      keep += rest.first(4 - keep.size)
+    else
+      keep = learned.reject { |m| FILLER.include?(m) }.first(4)
+    end
     keep += (learned - keep).first(4 - keep.size) if keep.size < 4
     p.forget_all_moves
     keep.reverse.each { |m| p.learn_move(m) }
@@ -161,7 +175,7 @@ MODES.each do |mode|
         Harness.set_badges(f[:badges])
         Prismfall::LevelCap.set_override(f[:lvcap] || f[:cap])
         $player.party = WR.party(fight, lines, seed)
-        bag = (mode == :HARD) ? [] : WR::BAG[f[:bag]].dup
+        bag = (mode == :HARD && ENV["PRISM_HARD_BAG"] != "1") ? [] : WR::BAG[f[:bag]].dup
         $bag.clear if $bag.respond_to?(:clear)
         bag.each { |it| $bag.add(it) }
         foe_left = nil

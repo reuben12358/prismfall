@@ -1,0 +1,211 @@
+# The Dyers' Ford (552). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 552
+name: The Dyers' Ford
+parent: 0
+bgm: Route 3
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: MEADOW
+tone: [6, 4, -2, 0]
+connections:
+- {dir: S, offset: 38, to: 541, to_offset: 34}
+- {dir: N, offset: 39, to: 540, to_offset: 20}
+raw: data/raw/552.npy
+tileset: 53
+events:
+- type: cut_tree
+  at: [70, 9]
+  name: CutTree
+- type: sign
+  name: Road sign
+  at: [36, 66]
+  text: THE DYERS' FORD -- The Weavers' Road. Briarwick Dye-Works. Do not drink the river. Do not bathe in the river. Do not stand in the red.
+  post: false
+- type: event
+  name: The Dyers' Ford
+  at: [38, 62]
+  pages:
+  - trigger: touch
+    commands:
+    - '(Below three vat-sheds, the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road.)'
+    - '\pf[JUNO,happy]Juno: The Briarwick dyers wash their cloth here, so the river runs in three colors! There''s a fourth band nobody''s allowed to dye.
+      It''s just water. People leave ribbons for it.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    commands: []
+- type: event
+  name: Meridian Surveyor
+  at: [46, 26]
+  pages:
+  - graphic: {sprite: trainer_SCIENTIST, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Meridian Surveyor: Mind the orange flags. Survey line for the new Lattice. Straight up the river and through to the wood.', 'Meridian Surveyor:
+        Trees aren''t in the plan, but trees rarely are.']
+- type: event
+  name: Survey flag 1
+  at: [44, 24]
+  pages:
+  - graphic: {}
+    trigger: action
+    commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7., '\pf[JUNO,neutral]Juno: These go right toward the Glasswood. That''s...', (She
+        stops. Two nights ago a man in a mask asked a theater why nothing in Verdance ever rots.), '\pf[JUNO,sad]Juno: ...That''s probably fine. Isn''t
+        it?']
+- type: event
+  name: Survey flag 2
+  at: [45, 14]
+  pages:
+  - graphic: {}
+    trigger: action
+    commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.]
+- type: event
+  name: Survey flag 3
+  at: [43, 6]
+  pages:
+  - graphic: {}
+    trigger: action
+    commands: [An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.]
+- type: item
+  at: [44, 5]
+  item: ANTIDOTE
+  hidden: true
+  name: HiddenItem (base of the third flag)
+- type: trainer
+  at: [52, 24]
+  sight: 4
+  dir: left
+  sprite: trainer_PAINTER
+  trainer: [PAINTER, Morwenna]
+  intro: Red's my color! Red's everyone's color, eventually, if you work the madder vat.
+  after: Look at my hands. They'll be red till Fallmorn.
+- type: trainer
+  at: [60, 18]
+  sight: 4
+  dir: down
+  sprite: trainer_PAINTER
+  trainer: [PAINTER, Ash]
+  intro: Woad blue. The Queen's Elowen green is woad and weld together. She's never paid for a yard of it.
+  after: Bill her. Somebody bill her.
+- type: event
+  name: Dye Foreman
+  at: [36, 44]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Dye Foreman: Step the stones in the order I hum. Red, blue, yellow. No -- that''s blue, red, yellow.', 'Dye Foreman: I''ve been humming
+        it wrong for thirty years and nobody''s told me.']
+- type: event
+  name: Smeargle owner
+  at: [24, 60]
+  pages:
+  - graphic: {sprite: NPC 18, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Smeargle owner: My Smeargle paints a mark on the boundary stone for every trainer who passes.', 'Smeargle owner: Yours is... it''s left
+        yours blank. It''s never done that.']
+- type: event
+  name: Smeargle
+  at: [25, 62]
+  pages:
+  - graphic: {sprite: Followers/SMEARGLE, dir: down}
+    trigger: action
+    move: random
+    commands: ['(It looks at you, then at its brush, then at you. It puts the brush away.)']
+- type: event
+  name: Boundary stone
+  at: [22, 61]
+  pages:
+  - trigger: action
+    commands: ['A boundary stone painted with a hundred small marks in every colour. One square, near the bottom, is left blank.']
+- type: event
+  name: Shearer
+  at: [64, 52]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Shearer: Briarwick''s dyers, Saltmere''s salt, Ferrow''s fish. Every town in Elowen''s got a thing the Plate gives it.', 'Shearer: We''ve
+        got colors. Lovely colors. You can''t eat them.']
+- type: event
+  name: Mareep
+  at: [66, 53]
+  pages:
+  - graphic: {sprite: Followers/MAREEP, dir: down}
+    trigger: action
+    move: random
+    commands: [Baa-zzt.]
+- type: event
+  name: 'Mareep '
+  at: [60, 56]
+  pages:
+  - graphic: {sprite: Followers/MAREEP, dir: down}
+    trigger: action
+    move: random
+    commands: [Baa.]
+- type: event
+  name: Shrine of the Fourth Colour
+  at: [30, 30]
+  pages:
+  - trigger: action
+    commands: [A plain white ribbon tied to a stake at the edge of the undyed band. Dozens more are tied beside it., 'A card in a child''s hand: "for the
+        color nobody gets".']
+- type: event
+  name: Hound shrine
+  at: [33, 29]
+  pages:
+  - trigger: action
+    commands:
+    - {script: 'pf_trial_talk(:SHRINE_FORD)'}
+- type: berry
+  at: [26, 50]
+  berry: PECHABERRY
+- type: event
+  name: Fulling mill
+  at: [16, 44]
+  pages:
+  - trigger: action
+    commands: ['THE FULLING MILL. Hammers the size of Snorlax beat the cloth soft. Not today: the wheel is waiting on the river.']
+- type: event
+  name: Bargee
+  at: [66, 28]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Bargee: Cloth barge to Saltmere. When the foreman''s errand''s done, I''ll row you down. Till then I''m ''on my break''.']
+- type: event
+  name: The Bleachfield
+  at: [70, 3]
+  pages:
+  - trigger: action
+    commands: ['(Through the culvert: a small meadow where the undyed water spreads out. Every flower is white. The air rings, very faintly.)']
+- type: item
+  at: [72, 4]
+  item: TM44
+- type: item
+  at: [10, 50]
+  item: POTION
+- type: item
+  at: [72, 46]
+  item: SUPERPOTION
+- type: event
+  name: Madder field
+  at: [14, 57]
+  pages:
+  - trigger: action
+    commands: [MADDER (red). The dyers grow their own colours. Please stay on the path. The path is also madder.]
+- type: event
+  name: Woad field
+  at: [52, 60]
+  pages:
+  - trigger: action
+    commands: [WOAD (blue). Do not eat. Do not roll in. Do not let the Mareep roll in.]
+- type: event
+  name: Weld field
+  at: [34, 54]
+  pages:
+  - trigger: action
+    commands: [WELD (yellow). It looks like a weed because it is a weed. A very valuable weed.]

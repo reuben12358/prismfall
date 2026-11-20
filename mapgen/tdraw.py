@@ -1160,7 +1160,7 @@ def chalk_arch():
 
 def dye(col, v):
     """dyed water (1x1 overlay for the Dyers' Ford): a translucent wash of madder, woad or weld with paler crests"""
-    im = Image.new('RGBA', (16, 16), col + (96,)); rng = random.Random(800 + v + sum(col))
+    im = Image.new('RGBA', (16, 16), col + (168,)); rng = random.Random(800 + v + sum(col))
     hi = tuple(min(255, c + 70) for c in col)
     for _ in range(3):
         x, y = rng.randrange(0, 12), rng.randrange(1, 15)

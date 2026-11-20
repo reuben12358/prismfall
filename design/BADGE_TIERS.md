@@ -45,7 +45,7 @@ combined base + overlay table at every badge count). **Test:** `tools/harness/ru
 | 1 | Badge 1 (Dorian) | 13–16 | 3–5 | a rarer local and a "visitor" from the next kingdom over |
 | 2 | Badge 2 (Tamsin) | 17–20 | 3–4 | the same, one step stronger; Eevee returns to the hedgerows |
 | 3 | Badge 3 (Marisol) | 21–24 | 2–4 | something fierce (Hawlucha, Scyther, Absol) |
-| 4 | Badge 4 (Rook, end of Act I) | 25–28 | 2–3 | one **early sighting** of a pseudo-legend or a rare line, plus one rare local |
+| 4 | Badge 4 (Rook, end of Act I) | 25–28 | 2–3 | one rare line (a strong evolver such as Scyther, Skarmory, Riolu), plus one rare local; pseudo-legends wait for Badge 8 (R7) |
 
 **Level rule:** tier *b* = [cap(*b*) − 6, cap(*b*) − 3], where cap(*b*) is the level cap while holding *b* badges
 (19, 23, 27, 31...). So a tier is always worth meeting at the level you are now, on a road you walked at level 5.
@@ -99,7 +99,7 @@ Metang (Static Tunnels Depths), `[648,108]` Sliggoo (the Weeping Fen).
    write `2xx` overlays only for maps the story sends the player back to.
 2. **Two slots per tier**, weights 2–5: one **rarer local** (the kingdom's types, a family not yet on that map) and one
    **visitor** (a neighbouring kingdom's or borderland's type, or the route's "secret"). Every fourth tier may carry one
-   early pseudo-legend or rare line at weight 2.
+   rare line at weight 2; a pseudo-legend only from Badge 8 (rule R7), at weight 1–3, on revisits.
 3. **Levels** by the formula above. Evolved forms only at or above their evolution level; stone/trade/friendship
    evolutions not below 20 (the encounters validator's rules).
 4. **Never**: legendaries, mythicals, Paradox Pokémon (postgame only), the 27 starter lines, gift-only lines (Abra,

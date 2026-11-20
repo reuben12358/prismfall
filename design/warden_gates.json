@@ -13,7 +13,7 @@
     "own_type_fliers": "optional per Warden ('own_type_fliers': true): a flier that shares the Warden's type is gated instead of blunted. Not used for Tamsin: Elowen's early bug lines (Butterfree, Beautifly, Vivillon) are Bug-type fliers by Lv 10-12, and Tamsin's Joltik answers every flier with Electroweb on wet silk",
     "pseudo_legend_min_badges": 8,
     "pseudo_legend_roots": ["DRATINI", "LARVITAR", "BAGON", "BELDUM", "GIBLE", "DEINO", "GOOMY", "JANGMOO", "DREEPY", "FRIGIBAX"],
-    "pseudo_legends": "rule R7: no pseudo-legend line in a wild table or overlay the player can use with fewer than pseudo_legend_min_badges badges (Reborn and Rejuvenation: none wild before about Badge 13 of 18); earlier ones only as earned rewards (quest, boss, puzzle, egg), at most one per Act and never before Badge 4",
+    "pseudo_legends": "rule R7: no pseudo-legend line in a wild table or overlay the player can use with fewer than pseudo_legend_min_badges badges (Reborn and Rejuvenation: none wild before Badge 12-16 of 18); earlier ones only as earned rewards (quest, boss, puzzle, egg), at most one per Act and never before Badge 4",
     "exempt": "the Prologue starter pick (any Gen 1-9 starter) and story Pokemon given back to the player"
   },
   "wardens": [

@@ -1,0 +1,207 @@
+# The Grey Saltings (541). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 541
+name: The Grey Saltings
+parent: 0
+bgm: Route 2
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: BEACH
+tone: [0, 0, 4, 18]
+fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 200, sx: 1, sy: 0}
+connections:
+- {dir: S, offset: 30, to: 140, to_offset: 43}
+- {dir: N, offset: 34, to: 552, to_offset: 38}
+raw: data/raw/541.npy
+tileset: 51
+events:
+- type: warp
+  name: Mine back door
+  at: [57, 51]
+  link: R4_MINE
+  arrive: [57, 50, down]
+  se: Door exit
+- type: sign
+  name: Road sign
+  at: [36, 104]
+  text: 'THE GREY SALTINGS -- The Weavers'' Road. v Saltmere (North Gate) - ^ The Dyers'' Ford, Thistledown Lea & Briarwick.
+
+    Mind the pans. The pans do not mind you.'
+  post: false
+- type: event
+  name: The Saltings
+  at: [33, 98]
+  pages:
+  - trigger: touch
+    commands:
+    - (Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)
+    - '\pf[JUNO,neutral]Juno: This is where Saltmere''s salt comes from. "Grey" is the salt before it''s washed.'
+    - '\pf[JUNO,neutral]Juno: ...And the weather. It''s mostly the weather.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    commands: []
+- type: trainer
+  at: [24, 46]
+  sight: 4
+  dir: right
+  sprite: trainer_SAILOR
+  trainer: [SAILOR, Morrow]
+  intro: Salt barge went down in the mud in '88. Still there. Still salty.
+  after: You're heavier than you look. In battle, I mean.
+- type: trainer
+  at: [40, 59]
+  sight: 4
+  dir: left
+  sprite: trainer_TUBER_F
+  trainer: [TUBER_F, Pip]
+  intro: My floaty is a Wailmer! No it's not. It's a floaty.
+  after: Waaah! My floaty popped!
+- type: trainer
+  at: [36, 30]
+  sight: 4
+  dir: down
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Ned]
+  intro: Sand in my tent! Sand in my boots! Sand in my battle!
+  after: Sand in my tent AND I lost. Great day.
+- type: event
+  name: Salt Raker
+  at: [16, 92]
+  pages:
+  - graphic: {sprite: NPC 19, dir: down}
+    trigger: action
+    move: random
+    commands: ['Salt Raker: You''re the ones from the Pageant? Everyone''s heard.', 'Salt Raker: The rakers say the Mourner''s a Saltmere man. The boilers
+        say he''s from Verdance. Nobody says it loud.']
+- type: event
+  name: Samphire Picker
+  at: [44, 72]
+  pages:
+  - graphic: {sprite: NPC 27, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Samphire Picker: Pick from the edges. The middle''s the Plate''s. Don''t ask me what that means. My mother said it.']
+- type: event
+  name: Children building Sandygast castles
+  at: [20, 66]
+  pages:
+  - graphic: {sprite: NPC 16, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Children: Don''t step on that one! That one''s ALIVE. ...That one too.']
+- type: event
+  name: Sandygast
+  at: [22, 67]
+  pages:
+  - graphic: {sprite: Followers/SANDYGAST, dir: down}
+    trigger: action
+    move: fixed
+    commands: [(A sand castle. It is watching you.)]
+- type: event
+  name: Squawkabilly watcher
+  at: [51, 24]
+  pages:
+  - graphic: {sprite: NPC 09, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Watcher: Squawkabilly. Four colours, one flock, and every one of them thinks it''s the real one.', '\pf[JUNO,happy]Juno: Squawkabilly! Four
+        colors! In the wild they argue about which one''s the real one!']
+- type: event
+  name: Salt-barge wreck
+  at: [34, 39]
+  pages:
+  - trigger: action
+    commands: ['The wreck of a salt barge, sunk to the gunwales in the mud. The name board says HONEST WEIGHT.']
+- type: item
+  at: [36, 40]
+  item: BIGPEARL
+  hidden: true
+  name: HiddenItem (salt-barge wreck)
+- type: event
+  name: Ring Boss
+  at: [44, 76]
+  pages:
+  - graphic: {sprite: NPC 21, dir: down}
+    trigger: action
+    commands:
+    - if: pfm?(:crab_ring)
+      then: ['Ring Boss: Champion of the mudflat! The bucket''s yours. The glory''s mine.']
+      else:
+      - 'Ring Boss: Crabrawler ring! Three bouts, no biting, best of three, winner gets the bucket!'
+      - choices: [Step into the ring., Not now.]
+        cancel: 1
+        branches:
+        - - {script: 'WildBattle.start(:CRABRAWLER, 15)'}
+          - {script: 'WildBattle.start(:CRABRAWLER, 15)'}
+          - {script: 'WildBattle.start(:CRABRAWLER, 16)'}
+          - 'Ring Boss: Champion! Here''s the bucket.'
+          - (It contains a KING'S ROCK.)
+          - {script: 'pbReceiveItem(:KINGSROCK)'}
+          - {script: 'pfm_set(:crab_ring)'}
+        - ['Ring Boss: The ring is always open. The ring never closes. The tide closes it, twice a day.']
+- type: event
+  name: Road Stone II
+  at: [29, 6]
+  pages:
+  - trigger: action
+    commands: ['ROAD STONE II. THE WEAVERS'' ROAD. "Saltmere 1, Briarwick 4." A ribbon of undyed silk is tied round it.']
+- type: event
+  name: The boiling-house
+  at: [21, 82]
+  pages:
+  - trigger: action
+    commands: ['THE BOILING-HOUSE. Brine in, salt out, smoke up. A notice: "NO SWIMMING IN THE PANS. THIS MEANS YOU, TERRENCE."']
+- type: event
+  name: The Drowned Lane
+  at: [50, 95]
+  pages:
+  - trigger: action
+    commands:
+    - if: PBDayNight.isNight?
+      then:
+      - The tide is out. An old cart road shows under an inch of water, all the way to the islet.
+      - {script: 'pbFadeOutIn { $game_player.moveto(59, 100) }'}
+      else: ['Water as far as the islet. The rakers say an old cart road runs under it, at night.']
+- type: event
+  name: Wreckers' cache
+  at: [61, 99]
+  pages:
+  - trigger: action
+    commands: ['A wreckers'' cache: a tarred chest, padlocked. The lock is stamped SALTMERE HARBOUR OFFICE.']
+- type: item
+  at: [59, 101]
+  item: BIGPEARL
+- type: item
+  at: [62, 101]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (the Drowned Lane)
+- type: event
+  name: Back to the causeway
+  at: [58, 100]
+  pages:
+  - trigger: action
+    commands:
+    - Wade back along the drowned cart road?
+    - choices: ['Yes', 'No']
+      cancel: 1
+      branches:
+      - - {script: 'pbFadeOutIn { $game_player.moveto(48, 96) }'}
+      - []
+- type: item
+  at: [10, 30]
+  item: POTION
+- type: item
+  at: [60, 34]
+  item: GREATBALL
+- type: item
+  at: [14, 100]
+  item: PEARL
+  hidden: true
+  name: HiddenItem (salt pans)
+- type: door
+  at: [12, 58]
+  gfx: ['', 0, 2]
+  name: The Brinewife's Rest door
+  link: R4_REST

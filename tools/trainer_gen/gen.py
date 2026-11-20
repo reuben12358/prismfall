@@ -146,7 +146,7 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     #    lowers Sp. Atk here.
     P("MINCCINO", 10, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
       casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
-      hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),
+      hard={"nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),
     # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
