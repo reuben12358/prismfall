@@ -3,29 +3,30 @@
 # with route/story trainers (Hard = v+100, Casual = v+200 follow the BALANCE.md scheme; Core falls back to v).
 # Moves are left out on purpose: Essentials gives each Pokémon its last four level-up moves (always legal).
 #-------------------------------
-# AS_LITTLE_CRUCIBLE - the Legion recruiting barge, Saltmere harbour (after Gym 1, cap 19). Gauntlet, no healing.
+# AS_LITTLE_CRUCIBLE - the Legion recruiting barge, Saltmere harbour (after Gym 2, cap 23; Revision 16 moved it past
+# Tamsin because Fire is her answer). Gauntlet, no healing, then Cinderpaw (Litleo 21, 2 bars). Levels: trainer designer.
 [ASHKAAR_SOLDIER_M,Rekk,50]
 LoseText = Ha! Good hit. Do it again sometime. Not to me.
-Pokemon = SIZZLIPEDE,15
+Pokemon = SIZZLIPEDE,19
     IV = 15
-Pokemon = ROLYCOLY,15
+Pokemon = CARKOL,19
     IV = 15
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Vasha,50]
 LoseText = The Sergeant's going to make me run laps. Worth it.
-Pokemon = CAPSAKID,15
+Pokemon = CAPSAKID,19
     IV = 15
-Pokemon = HOUNDOUR,16
+Pokemon = HOUNDOUR,20
     IV = 15
 #-------------------------------
 [ASHKAAR_OFFICER,Brakka,50]
 LoseText = Three for three. Honest work.
-Items = POTION
-Pokemon = SALANDIT,16
+Items = SUPERPOTION
+Pokemon = SALANDIT,20
     IV = 18
-Pokemon = NUMEL,16
+Pokemon = NUMEL,20
     IV = 18
-Pokemon = FLETCHINDER,17
+Pokemon = FLETCHINDER,21
     IV = 18
 #-------------------------------
 # IS_SKALDS_SAGA - Gorm the dock bully, Ebbmouth (before Gym 3, cap 23)
@@ -36,182 +37,6 @@ Pokemon = KRABBY,20
 Pokemon = MAKUHITA,21
     IV = 15
 #===============================================================================
-# THE EEVEE OCTAVE (SPINE Revision 19; design/EEVEE_OCTAVE.md). PROVISIONAL teams for the trainer designer to tune
-# (mapgen/REQUESTS.md, "From the Eevee Octave workstream"). Levels follow the chapter caps of each singer's kingdom.
-#   v50 = the singer's own quest duel in their kingdom (one partner + their Eeveelution at the next Warden's cap - 1)
-#   v60 = their bout in the Crownhaven gauntlet (one Eeveelution, Lv 90, its type's Z-crystal and an attack of that type);
-#         Vesper v60 is the host's finale: Eevee "Amen" with the Eevium Z (Last Resort -> Extreme Evoboost).
-# The gauntlet runs v60 in the order the player helped them, no healing; each bout's field is set by the quest
-# (Prismfall::Trials::Octave::SINGERS), so these versions need no TRAINER_FIELDS entry.
-#-------------------------------
-# EL_OCTAVE_MOSS - Lyra, Briarwick (Ch3, after Gym 1, cap 19). Her Eevee becomes a Leafeon in the quest.
-[OCTAVE_SINGER,Lyra,50]
-LoseText = You stood still for it. Most people fidget.
-Pokemon = SKIDDO,17
-    IV = 18
-Pokemon = LEAFEON,18
-    Name = Moss
-    Ability = LEAFGUARD
-    IV = 18
-#-------------------------------
-# IS_OCTAVE_DROWNED_NOTE - Aria, Ebbmouth (Ch4, after Gym 2, cap 23)
-[OCTAVE_SINGER,Aria,50]
-LoseText = Ha! Wrong note, right song. Bersi'll love it.
-Pokemon = SPHEAL,21
-    IV = 18
-Pokemon = VAPOREON,22
-    Name = Brine
-    Ability = WATERABSORB
-    IV = 18
-#-------------------------------
-# ZE_OCTAVE_OFF_BEAT - Cadence, Lumen City Lowlight (Ch5, after Gym 3, cap 27)
-[OCTAVE_SINGER,Cadence,50]
-LoseText = Off the beat. Mine, not yours. Again tomorrow?
-Pokemon = KLINK,25
-    IV = 20
-Pokemon = JOLTEON,26
-    Name = Snare
-    Ability = VOLTABSORB
-    IV = 20
-#-------------------------------
-# OS_OCTAVE_NOON_BELL - Sona, the Temple of the Noon Sun, Duneholt (Ch6, after Gym 4, cap 31)
-[OCTAVE_SINGER,Sona,50]
-LoseText = I heard that coming. I still couldn't stop it.
-Pokemon = BALTOY,29
-    IV = 20
-Pokemon = ESPEON,30
-    Name = Noon
-    Ability = SYNCHRONIZE
-    IV = 20
-#-------------------------------
-# NA_OCTAVE_LAMPS_OUT - Noct, Mirefen (Ch7, after Gym 5, cap 35)
-[OCTAVE_SINGER,Noct,50]
-LoseText = ...Good. Now you know where the dark is.
-Pokemon = MURKROW,33
-    IV = 22
-Pokemon = UMBREON,34
-    Name = Wick
-    Ability = SYNCHRONIZE
-    IV = 22
-#-------------------------------
-# AS_OCTAVE_TOO_LOUD - Forte, the Crucible, Cindervault (Ch8, after Gym 6, cap 39)
-[OCTAVE_SINGER,Forte,50]
-LoseText = Too loud? ...No. Just right. You were louder.
-Pokemon = CARKOL,37
-    IV = 22
-Pokemon = FLAREON,38
-    Name = Bellows
-    Ability = FLASHFIRE
-    IV = 22
-#-------------------------------
-# AN_OCTAVE_STILL_WATER - Lento, the Mirror Mere (Ch13, after Gym 11, cap 59)
-[OCTAVE_SINGER,Lento,50]
-LoseText = Slowly, slowly. Slowly, slowly. You got there first anyway.
-Pokemon = FROSLASS,57
-    IV = 26
-Pokemon = GLACEON,58
-    Name = Hush
-    Ability = SNOWCLOAK
-    IV = 26
-#-------------------------------
-# CR_OCTAVE_NINTH_VERSE - Carol, the Glassfall Memorial Garden, Crownhaven (Ch20, Festival week, cap 90)
-[OCTAVE_SINGER,Carol,50]
-LoseText = And they all lived. That's the whole ending. They all lived.
-Pokemon = FLORGES,87
-    IV = 31
-Pokemon = SYLVEON,88
-    Name = Ribbon
-    Ability = PIXILATE
-    IV = 31
-#-------------------------------
-# CR_OCTAVE - the gauntlet, the Glassfall Memorial Garden (Ch20, Festival week, after all eight are helped).
-[OCTAVE_SINGER,Lyra,60]
-LoseText = It bloomed for you. It doesn't do that for everyone.
-Pokemon = LEAFEON,90
-    Name = Moss
-    Moves = LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS
-    Ability = CHLOROPHYLL
-    Item = GRASSIUMZ
-    Nature = JOLLY
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Aria,60]
-LoseText = The tide took the note. That's all right. It brings them back.
-Pokemon = VAPOREON,90
-    Name = Brine
-    Moves = SCALD,ICEBEAM,WISH,PROTECT
-    Ability = WATERABSORB
-    Item = WATERIUMZ
-    Nature = BOLD
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Cadence,60]
-LoseText = Off the beat. Mine, not yours.
-Pokemon = JOLTEON,90
-    Name = Snare
-    Moves = THUNDERBOLT,SHADOWBALL,VOLTSWITCH,HYPERVOICE
-    Ability = VOLTABSORB
-    Item = ELECTRIUMZ
-    Nature = TIMID
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Sona,60]
-LoseText = I heard that coming. I still couldn't stop it.
-Pokemon = ESPEON,90
-    Name = Noon
-    Moves = PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND
-    Ability = MAGICBOUNCE
-    Item = PSYCHIUMZ
-    Nature = TIMID
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Noct,60]
-LoseText = ...Good night.
-Pokemon = UMBREON,90
-    Name = Wick
-    Moves = FOULPLAY,DARKPULSE,SNARL,WISH
-    Ability = INNERFOCUS
-    Item = DARKINIUMZ
-    Nature = CALM
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Forte,60]
-LoseText = Too loud? ...No. Just right, and you were louder.
-Pokemon = FLAREON,90
-    Name = Bellows
-    Moves = FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME
-    Ability = FLASHFIRE
-    Item = FIRIUMZ
-    Nature = ADAMANT
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Lento,60]
-LoseText = Slowly, slowly. You got there first anyway.
-Pokemon = GLACEON,90
-    Name = Hush
-    Moves = ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD
-    Ability = ICEBODY
-    Item = ICIUMZ
-    Nature = MODEST
-    IV = 31
-#-------------------------------
-[OCTAVE_SINGER,Carol,60]
-LoseText = And they all lived. That's the whole ending.
-Pokemon = SYLVEON,90
-    Name = Ribbon
-    Moves = MOONBLAST,HYPERVOICE,MYSTICALFIRE,CALMMIND
-    Ability = PIXILATE
-    Item = FAIRIUMZ
-    Nature = MODEST
-    IV = 31
-#-------------------------------
-[OCTAVE_VESPER,Vesper,60]
-LoseText = There. That's every note we have. ...You were worth all of them.
-Pokemon = EEVEE,92
-    Name = Amen
-    Moves = LASTRESORT,STOREDPOWER,SHADOWBALL,QUICKATTACK
-    Ability = ADAPTABILITY
-    Item = EEVIUMZ
-    Nature = HASTY
-    IV = 31
-    EV = 4,128,0,124,0,252
+# THE EEVEE OCTAVE (SPINE Revision 19): the teams moved to pbs/trainers.txt, generated by tools/trainer_gen/gen.py
+# (OCTAVE_SINGER <name> v0/v50/v60, OCTAVE_VESPER Vesper v0/v1/v60; Hard v+100, Casual v+200). Levels: design/BALANCE.md
+# and design/EEVEE_OCTAVE.md section 4.

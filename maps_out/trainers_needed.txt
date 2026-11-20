@@ -1,7 +1,4 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-527	:FISHERMAN, "Bryn"
-527	:HIKER, "Dunstan"
-527	:PICNICKER, "Moll"
 528	:BIRDKEEPER, "Lark"
 528	:JUGGLER, "Hounds"
 528	:POKEMONRANGER_F, "Sedge"

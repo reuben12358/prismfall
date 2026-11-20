@@ -658,6 +658,9 @@ maps:
   925: {name: "The Steamline", kind: route, field: ASHEN_WASTE, source: spec, why: "world spec"}
   926: {name: "The Glass Dunes", kind: dungeon, field: DESERT, source: spec, why: "world spec"}
   927: {name: "Cinder Cape Warfort", kind: town, field: VOLCANIC, source: spec, why: "world spec"}
+  928: {name: "Ashkaar Siege Camp - Command Pavilion", kind: interior, field: NONE, source: spec, why: "world spec"}
+  929: {name: "The Observers' Mesa", kind: dungeon, field: DESERT, battles: [trainer], source: spec, why: "world spec"}
+  930: {name: "The Bone-Carters' Camp", kind: town, field: DESERT, battles: [trainer], source: spec, why: "world spec"}
   959: {name: "Skyport Customs", kind: interior, field: NONE, source: hand, why: "customs hall"}
   960: {name: "The Ledger Hall", kind: interior, field: BLEED, source: spec, why: "world spec"}
   961: {name: "Glassed Orchard - Ruin", kind: bleed_zone, field: BLEED, source: spec, why: "world spec"}

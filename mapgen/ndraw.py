@@ -568,6 +568,32 @@ def sluice():
     return im, ['O', 'W']
 
 
+def shoal(v):
+    """the drowned cart road at low water: wet sand and ruts with a sheen of water (1x1, opaque; shown by an event at
+    night over the channel, where its passage makes the cell walkable)"""
+    im = Image.new('RGBA', (16, 16), SAND[1] + (255,)); r = random.Random(740 + v)
+    for _ in range(26): P(im, r.randrange(16), r.randrange(16), SAND[0] + (255,))
+    for _ in range(14): P(im, r.randrange(16), r.randrange(16), SAND[2] + (255,))
+    for x in range(16):                                            # cart ruts
+        P(im, x, 4 + (x // 6) % 2, (120, 108, 80, 255)); P(im, x, 11 + (x // 7) % 2, (120, 108, 80, 255))
+    for _ in range(3):
+        x, y = r.randrange(0, 11), r.randrange(1, 15)
+        for k in range(r.randrange(3, 6)): P(im, x + k, y, (150, 190, 214, 200))
+    return im
+
+
+def mine_mouth():
+    """a timbered mine mouth in a chalk face (3x3): the opening (middle column) is walkable, the warp stands in it"""
+    im, d = canvas(3, 3)
+    d.rectangle([6, 14, 41, 47], fill=(26, 22, 30, 255))
+    for x0 in (4, 38): d.rectangle([x0, 12, x0 + 5, 47], fill=WOOD[2], outline=OUT); d.line([x0 + 1, 13, x0 + 1, 46], fill=WOOD[3])
+    d.rectangle([2, 8, 45, 14], fill=WOOD[1], outline=OUT); d.line([3, 9, 44, 9], fill=WOOD[3])
+    for x in range(10, 38, 6): d.line([x, 14, x + 3, 22], fill=(60, 50, 44, 255))
+    for k in range(8): P(im, 18 + k * 2, 44 + (k % 2), (110, 104, 96, 255))      # rails
+    for x in range(2, 46): P(im, x, 6 + (x % 3 == 0), CHALK[1])
+    return im, ['OOO', 'WDW', 'WDW']
+
+
 def pieces():
     """name -> (image, code rows, door): appended by rcustom (rdraw.pieces_late4)"""
     D.CODE.update(CODES)
@@ -611,6 +637,8 @@ def pieces():
     out['gw_bridge_m'] = (weft_bridge('m'), ['K'], None)
     out['gw_bridge_s'] = (weft_bridge('s'), ['C'], None)
     for v in range(3): out['fw_gust%d' % v] = (gust(v), ['O'], None)
+    for v in range(2): out['cs_shoal%d' % v] = (shoal(v), ['F'], None)
+    im, c = mine_mouth(); out['pf_minemouth'] = (im, c, None)
     for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
         out['df_slab_' + nm] = (slab(col), ['F'], None)
     im, c = sluice(); out['df_sluice'] = (im, c, None)

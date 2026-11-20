@@ -3208,7 +3208,7 @@
     {
      "id": "war",
      "when": "Ashkaar-Isenmar war active (story key)",
-     "change": "Isenmar blockade fleet in the roads; Ashkaar envoys expelled"
+     "change": "the Thane requisitions the Ebb Guild's sleds for the front and the Guild refuses; Thaw refugees; Ashkaar envoys expelled"
     }
    ]
   },
@@ -5718,7 +5718,17 @@
      "the well collapsing",
      "Necropolis of the Electors"
     ]
-   }
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "Kassan's neutrality notices (the Elector's Lease) on the Sandgate; caravans leaving by the east gate; foreign quartermasters, Isenmar's and Ashkaar's, in the Hall of Audience (206); bone-carters loading at the west gate"
+    }
+   ]
   },
   {
    "id": 201,
@@ -8070,7 +8080,7 @@
     {
      "id": "war",
      "when": "Ashkaar-Isenmar war active (story key)",
-     "change": "war footing: levies drilling, refugees from Skaldfast, harbour chained"
+     "change": "war footing: levies drilling, refugees from Skaldfast, sleds requisitioned for the front"
     }
    ]
   },
@@ -9598,7 +9608,17 @@
     ]
    },
    "tileset_kit": "G5_DESERT_CANYON",
-   "border": "canyon walls, dune ridges, sandstone mesas"
+   "border": "canyon walls, dune ridges, sandstone mesas",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "refugees from both kingdoms in Bastian's seams, Ossarian well-folk among them"
+    }
+   ]
   },
   {
    "id": 361,
@@ -11423,7 +11443,7 @@
     {
      "id": "war",
      "when": "Ashkaar-Isenmar war active (story key)",
-     "change": "Dominar's legions camped on the slopes (Act V)"
+     "change": "the legions gone to the war in Ossaria; Sigrun's riders hold the gate"
     }
    ]
   },
@@ -19540,7 +19560,7 @@
     {
      "id": "war",
      "when": "Ashkaar-Isenmar war active (story key)",
-     "change": "supply columns north; scorched ice-raider wrecks"
+     "change": "supply and conscript columns north to the Cinderglass Barrens"
     }
    ],
    "size_was": [
@@ -19694,7 +19714,17 @@
      24,
      6
     ]
-   }
+   },
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "legion columns marching west across the barrens to the Siege Camp"
+    }
+   ]
   },
   {
    "id": 663,
@@ -19896,7 +19926,17 @@
     ]
    },
    "tileset_kit": "BL_CINDERGLASS_BARRENS",
-   "border": "borderland edges: obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms"
+   "border": "borderland edges: obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "furnace apprentices taken by the levy; the glass market shut"
+    }
+   ]
   },
   {
    "id": 671,
@@ -21263,7 +21303,17 @@
     ]
    },
    "tileset_kit": "BL_MAST_GLACIER",
-   "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors"
+   "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "sled-convoys over the Mast Glacier by night; dragon patrols overhead"
+    }
+   ]
   },
   {
    "id": 731,
@@ -22949,7 +22999,7 @@
    "tileset": "Outside",
    "bgm": "Route 3",
    "field": "DESERT",
-   "segment": 14,
+   "segment": 13,
    "detail": "outline",
    "connections_outline": [
     "see design/ROUTES.yaml"
@@ -22960,13 +23010,13 @@
    "tileset_kit": "G5_DESERT_CANYON",
    "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
    "route_plan": {
-    "road": 15,
-    "road_name": "The Slag Road",
+    "road": 14,
+    "road_name": "The Moor Road",
     "role": "side",
-    "landmark": "Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought.",
+    "landmark": "Shell pavements, a stranded ship's ribs, the bone-carters' white banner over their camp at the west end, and the Glass Dunes beyond, where the war is fought.",
     "origin": "An old seabed, rippled like a beach the sea left one evening and never came back to.",
     "wild": "Fossil ground types, Sandaconda, Palossand.",
-    "exits": "E: Duneholt's west gate. W: the Glass Dunes (the war's battlefield; story-gated).",
+    "exits": "E: Duneholt's west gate. W end: the bone-carters' camp (930); past it the war maps (the Siege Camp 924 and the Glass Dunes 926; story-gated). The observers' mesa (929, Ch19) stands south of the battlefield.",
     "fill": [],
     "secret": "At night you can hear the tide. Follow it.",
     "town_map": [
@@ -22987,7 +23037,17 @@
      3
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "states": [
+    {
+     "id": "default"
+    },
+    {
+     "id": "war",
+     "when": "Ashkaar-Isenmar war active (story key)",
+     "change": "the bone-carters' carts and white banner on the road west; their camp (930) at the west end"
+    }
+   ]
   },
   {
    "id": 811,
@@ -24715,22 +24775,22 @@
    "key_features": [
     "Isenmar's border fortress on Ossaria's western edge, besieged from the east: ice-and-granite curtain wall over the dunes, breached gatehouse, dragonfire scorch"
    ],
-   "tileset_kit": "G4_SNOW_COAST",
+   "tileset_kit": "G4_SNOW_FORTRESS",
    "border": "frozen dunes, the Mast Glacier snout and granite outcrops",
    "visual_brief": {
     "landmarks": [
      "breached gatehouse",
-     "ice-and-granite curtain wall",
-     "chained longships",
-     "keep on the harbour mole"
+     "rime-glazed granite walls on the sand's edge",
+     "sled-yards",
+     "Rime Keep over a frozen spring"
     ],
-    "silhouette": "squat fortress-port frozen into the sea, smoke and dragon shapes over the walls",
-    "materials": "granite, packed ice, whalebone, scorched timber",
-    "palette": "Rejuvenation winter: steel blue, ash grey, fire orange",
+    "silhouette": "squat rime-white fortress at the Mast Glacier's foot, the dunes running east from its walls, smoke and dragon shapes over them",
+    "materials": "granite, packed ice, whalebone, scorched timber, drifted sand",
+    "palette": "Rejuvenation winter against the desert: steel blue, rime white, sand ochre, fire orange",
     "set_pieces": [
      "dragonfire run along the wall",
-     "sortie across the ice",
-     "hospital in the mead hall"
+     "sortie onto the Rimed Sands",
+     "hospital in the great hall"
     ]
    },
    "metadata": {
@@ -24764,7 +24824,7 @@
    "key_features": [
     "Skaldfast's inner keep, built over a frozen spring; the war council's hall"
    ],
-   "tileset_kit": "G4_SNOW_COAST",
+   "tileset_kit": "G4_SNOW_FORTRESS",
    "border": "fortress walls",
    "metadata": {
     "town_map_pos": [
@@ -24900,18 +24960,18 @@
    "border": "dune ridges; glass after the climax",
    "visual_brief": {
     "landmarks": [
-     "cracked ice plain",
-     "lava-breached floes",
-     "wrecked sled-forts",
+     "bone-white dunes across the caravan road",
+     "the bone-carters' white banner on a crest",
+     "wrecked sled-forts and siege engines",
      "two war banners"
     ],
-    "silhouette": "flat white sea split by glowing fissures under a steam sky",
-    "materials": "sea ice, basalt, steam",
-    "palette": "white/cyan against magma orange, heavy steam overlay",
+    "silhouette": "rolling white dunes between two hosts under a steam sky; after the climax a glass plain with glassed soldiers standing in it",
+    "materials": "sand, flood-water, steam-glass",
+    "palette": "bone white and sand ochre; flood grey-blue; glass cyan and magma orange at the clash",
     "set_pieces": [
-     "beam clash: fire/dragon vs water/ice",
-     "the ice breaking under both armies",
-     "player caught between the lines"
+     "Kyogre's flood-sea pouring in over the sand",
+     "glass where the fire passes",
+     "afterwards: a glass plain of standing glassed soldiers and the bone-carters' banner"
     ]
    },
    "metadata": {
@@ -24955,6 +25015,103 @@
     ]
    },
    "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
+  },
+  {
+   "id": 928,
+   "name": "Ashkaar Siege Camp - Command Pavilion",
+   "act": 4,
+   "kingdom": "Ossaria (Ashkaar camp)",
+   "kind": "interior",
+   "size": [
+    24,
+    18
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "NONE",
+   "segment": 13,
+   "detail": "outline",
+   "war_theatre": true,
+   "parent": 924,
+   "connections_outline": [
+    "door: the Dominar's war-tent on the Siege Camp (924). Story: Anja's cage (`:war_prisoner`, Ch15-16) and the Dominar's petition (`:ch19_dominar`, after the Battle of the Glass Dunes)"
+   ],
+   "key_features": [
+    "the Dominar's command pavilion: red lacquer screens, a map table of the western dunes, the oath-brazier (lies are a capital crime here), the Light Stone's empty stand, a prisoner's cage at the back"
+   ],
+   "tileset_kit": "G45_GRAND_INTERIOR",
+   "border": "tent walls (interior)",
+   "metadata": {
+    "town_map_pos": [
+     0,
+     15,
+     2
+    ]
+   }
+  },
+  {
+   "id": 929,
+   "name": "The Observers' Mesa",
+   "act": 5,
+   "kingdom": "Ossaria",
+   "kind": "dungeon",
+   "size": [
+    36,
+    28
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "DESERT",
+   "segment": 17,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "story-gated: reached in the Ch19 battle (WAR-1 shot 14), from the south edge of the Glass Dunes (926) or the Dry Tide's west end (810)"
+   ],
+   "key_features": [
+    "a flat-topped sandstone mesa behind the lines: Meridian's white tents, brass tripods and dial-boxes, a field telegraph; the whole battlefield below. Dr. Quent packs up here"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "mesa cliffs on every side; one goat-path up",
+   "metadata": {
+    "town_map_pos": [
+     0,
+     13,
+     3
+    ]
+   }
+  },
+  {
+   "id": 930,
+   "name": "The Bone-Carters' Camp",
+   "act": 4,
+   "kingdom": "Ossaria",
+   "kind": "town",
+   "size": [
+    44,
+    32
+   ],
+   "tileset": "Outside",
+   "bgm": null,
+   "field": "DESERT",
+   "segment": 13,
+   "detail": "outline",
+   "war_theatre": true,
+   "connections_outline": [
+    "E: the Dry Tide's west end (810). W: the war maps (the Siege Camp 924, the Glass Dunes 926; story-gated). Sigrun sets the PC down here in Ch19"
+   ],
+   "key_features": [
+    "Ossaria's burial guild at the war's edge: the white bone-banner on a pole, burial carts, a tally-wall of names, an embalmers' tent; the elder's quest (bring out the dead the carts can't reach)"
+   ],
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "dunes and the Dry Tide's shell pavements",
+   "metadata": {
+    "town_map_pos": [
+     0,
+     14,
+     3
+    ]
+   }
   },
   {
    "id": 959,

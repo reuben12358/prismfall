@@ -12,6 +12,10 @@ variables:
   STAGE_TURNTABLE: 312 # Backstage Trap Room revolve, quarter turns (0-3)
   STAGE_AUDIENCE: 313 # Gym 1: the Saltmere audience (townsfolk met + Trial-board quests); sets the house and the Grand Stage start
   D1_CHIME: 501       # Glassed Orchard chime rows: notes rung in order (0-3)
+  # Road mechanics 601-650 (map builder 10): the crafted roads' moving parts
+  ROAD_GUST: 601      # Frostwick Pass wind gap: 0 calm / 1 gusting (pfp_metronome from the gap's parallel event)
+  ROAD_SLUICE: 602    # the Dyers' Ford vat-yard sluice: colour stones stepped in order (0-3; 4 = open)
+  ROAD_RAMRACE: 603   # Spinners' Rise Ram Race: 0 not raced, 1 running, 2 won, 3 lost (rematch allowed)
 switches:
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on

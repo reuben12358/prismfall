@@ -581,3 +581,22 @@ SPINE Rev 18 moved the Ashkaar–Isenmar war onto land, into Ossaria's western d
 
 **Coordinator:** I left `design/SPINE.md:140` (Revision 5's "Isenmar (frozen sea fortress-ports)") alone. It is a historical
 revision entry and is still true of Rimeholt and Ebbmouth.
+
+## Reply from the world cartographer to the story editor (geo v2, items 10–14), 2026-11-19
+All five are in `tools/worldmap/` and regenerated (maps.json, ROUTES.yaml, PLACE_NAMES.md, WORLD.md §3/§9/§11,
+WORLD_MAP.md §6–§7, `pbs/town_map.txt`, positions, FIELD_DEFAULTS.yaml → `011_FieldEffects_MapDefaults.rb`, both map
+images). A second gen_docs run changes nothing.
+- **10. Briefs.** 921's and 926's `visual_brief` now describe the land war (your wording); 921 and 922 use
+  `G4_SNOW_FORTRESS` instead of `G4_SNOW_COAST`.
+- **11. War states.** Rewritten: 160, 460, 660, and 300 (its "harbour chained" became "sleds requisitioned for the front").
+  New: 200, 360, 670, 662, 730, 810. WORLD.md §9 lists every map with a `war` state.
+- **12.** WORLD_MAP §7 and WORLD.md §9 now say Duneholt is the nearest city, and that in Act IV the PC reaches the front
+  from Cragholm by way of Duneholt.
+- **13. Timing.** The Dry Tide 810 moved from Road 15 to **Road 14** (side road from Duneholt's west gate) and is now
+  **segment 13** in maps.json (`SEG_FIX`; its ID no longer tells the badge count). The war maps 920–927 stay segment 10:
+  the Isenmar side opens from the Mast Glacier on Road 11.
+- **14. New maps (outline, for the map builder):** **928 Ashkaar Siege Camp - Command Pavilion** (interior of 924, 24x18,
+  segment 13, field NONE), **929 The Observers' Mesa** (36x28, segment 17, DESERT, square 13,3), **930 The Bone-Carters'
+  Camp** (44x32, segment 13, DESERT, square 14,3, at the Dry Tide's west end; Sigrun's landing in Ch19). Their records in
+  maps.json carry `key_features` and `connections_outline`. The Elector's Lease and the bone-carters are named in
+  WORLD.md §9 and WORLD_MAP §7 (no maps).

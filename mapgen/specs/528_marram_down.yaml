@@ -154,7 +154,7 @@ events:
       - {script: 'pfm_item(:SANDSHOVEL, 1, "Sand Shovel")'}
 - type: event
   name: The Prompter's Box
-  at: [24, 61]
+  at: [22, 59]
   pages:
   - trigger: action
     commands:
@@ -171,7 +171,7 @@ events:
         else: [(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.), Something square is buried at the stern.
             You'd need a shovel.]
 - type: trainer
-  at: [91, 25]
+  at: [91, 24]
   sight: 4
   dir: left
   sprite: trainer_BIRDKEEPER

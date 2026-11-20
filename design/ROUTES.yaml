@@ -2126,7 +2126,9 @@ roads:
   to_name: Gravenmoor
   chapter: Act IV
   detail: outline
-  note: Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors.
+  note: 'Along the ridge back to Vigil, through the Grave Glass, and across Antumbra''s moors. Side road: the Dry Tide,
+    Ossaria''s dry seabed from Duneholt''s west gate out to the war in the sands (the bone-carters'' camp at its end; Ch14-16
+    convoy and prisoner trips, and Sigrun''s landing in Ch19).'
   paths:
   - style: road
     stops:
@@ -2140,6 +2142,11 @@ roads:
     - 781
     - 790
     - 380
+  - style: side
+    stops:
+    - 200
+    - 810
+    - P:926
   via: []
   legs:
   - id: 780
@@ -2220,6 +2227,33 @@ roads:
     fill: []
     secret: Blow one candle out and a door-shaped piece of dark stays lit.
     side_maps: []
+  - id: 810
+    name: The Dry Tide
+    old_name: null
+    origin: An old seabed, rippled like a beach the sea left one evening and never came back to.
+    kingdom: Ossaria
+    role: side
+    mode: road
+    segment: 13
+    field: DESERT
+    size:
+    - 140
+    - 72
+    size_was: null
+    built: false
+    town_map:
+    - - 15
+      - 3
+    - - 14
+      - 3
+    landmark: Shell pavements, a stranded ship's ribs, the bone-carters' white banner over their camp at the west end, and
+      the Glass Dunes beyond, where the war is fought.
+    wild: Fossil ground types, Sandaconda, Palossand.
+    exits: 'E: Duneholt''s west gate. W end: the bone-carters'' camp (930); past it the war maps (the Siege Camp 924 and
+      the Glass Dunes 926; story-gated). The observers'' mesa (929, Ch19) stands south of the battlefield.'
+    fill: []
+    secret: At night you can hear the tide. Follow it.
+    side_maps: []
 - n: 15
   name: The Slag Road
   from: 380
@@ -2228,9 +2262,8 @@ roads:
   to_name: Cogsworth
   chapter: Act IV
   detail: outline
-  note: 'Out of Antumbra by the Slagglass, the black mirror Cogsworth''s slag cooled into on the Slag Mesa (borderland G,
-    Zenith''s eastern waste), then down the Smokestack Parade into the foundries. Side road: the Dry Tide, Ossaria''s dry
-    seabed west of Duneholt, out to the war''s battlefield.'
+  note: Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa (borderland G,
+    Zenith's eastern waste), then down the Smokestack Parade into the foundries.
   paths:
   - style: inset
     stops:
@@ -2243,11 +2276,6 @@ roads:
     - 801
     - 811
     - 400
-  - style: side
-    stops:
-    - 200
-    - 810
-    - P:926
   via: []
   legs:
   - id: 800
@@ -2328,31 +2356,6 @@ roads:
     exits: ''
     fill: []
     secret: Stack 9 has no furnace under it.
-    side_maps: []
-  - id: 810
-    name: The Dry Tide
-    old_name: null
-    origin: An old seabed, rippled like a beach the sea left one evening and never came back to.
-    kingdom: Ossaria
-    role: side
-    mode: road
-    segment: 14
-    field: DESERT
-    size:
-    - 140
-    - 72
-    size_was: null
-    built: false
-    town_map:
-    - - 15
-      - 3
-    - - 14
-      - 3
-    landmark: Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought.
-    wild: Fossil ground types, Sandaconda, Palossand.
-    exits: 'E: Duneholt''s west gate. W: the Glass Dunes (the war''s battlefield; story-gated).'
-    fill: []
-    secret: At night you can hear the tide. Follow it.
     side_maps: []
 - n: 16
   name: The Drowned Road

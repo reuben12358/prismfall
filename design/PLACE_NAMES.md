@@ -40,8 +40,8 @@ has one road name (the Strand Road, the Hoar Road) and every map along it has it
 | 11 | The Mast Road | Rimeholt -> Skyreach | The Thane's Sled-Road (720), The Mast Glacier (721), The Tetherline (732) |
 | 12 | The Glass Road | Skyreach -> Lucent | Conductors' Causeway (740), The Wired Wood (741), Kingsmead (756), The Looking-Glass Wood (752), Widdershins Walk (755); via Candle Down (602), The Highwold (603) |
 | 13 | The Grave Road | Lucent -> Cragholm | Yesterday's Road (772), The Obsidian Barrows (760), Spinefall Gorge (761), The Vertebrae (773) |
-| 14 | The Moor Road | Cragholm -> Gravenmoor | The Jawbone Ridge (780), Hindmoor (781), Downflame Road (790) |
-| 15 | The Slag Road | Gravenmoor -> Cogsworth | The Noonless Road (800), The Slag Mesa (801), The Smokestack Parade (811), The Dry Tide (810) [side] |
+| 14 | The Moor Road | Cragholm -> Gravenmoor | The Jawbone Ridge (780), Hindmoor (781), Downflame Road (790), The Dry Tide (810) [side] |
+| 15 | The Slag Road | Gravenmoor -> Cogsworth | The Noonless Road (800), The Slag Mesa (801), The Smokestack Parade (811) |
 | 16 | The Drowned Road | Cogsworth -> Underveil | The Brink (832), The Hanging Stair (820), The Drownings (821) |
 | 17 | The Blind Road | Underveil -> Gloaming | The Throat (852), The Blindwater (840), The Gloamwood Verge (841) |
 | 18 | The Truce Road | Gloaming -> Wyrmrest | The Gloamwood (860), The Thornwar Marches (861), The Wyrmspine (872) |
@@ -512,6 +512,9 @@ moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_S
 | 925 | The Steamline | The Steamline | kept | Ossaria (contested) | 12, 1 | No-man's-land in the dunes where the two Imprints meet: ice on one side, fire on the other, steam and glass between. |
 | 926 | The Shattered Ice | The Glass Dunes | replaced | Ossaria (contested) | 13, 2 | The war's battlefield: Kyogre drags a flood-sea into the desert and Reshiram's fire turns the dunes to glass. |
 | 927 | Cinder Cape Warfort | Cinder Cape Warfort | kept | Ashkaar | 26, 3 | The Dominion's warfort on the Cape of Cinders: the staging fortress for the war in the sands. |
+| 928 | Ashkaar Siege Camp - Command Pavilion | Ashkaar Siege Camp - Command Pavilion | kept | Ossaria (Ashkaar camp) | 15, 2 | The Dominar's war-tent: red lacquer, an oath-brazier and a map table, pitched at the heart of the Siege Camp. |
+| 929 | The Observers' Mesa | The Observers' Mesa | kept | Ossaria | 13, 3 | A flat-topped sandstone mesa behind the lines, where Meridian's observers set up their instruments. |
+| 930 | The Bone-Carters' Camp | The Bone-Carters' Camp | kept | Ossaria | 14, 3 | Where Ossaria's burial guild camps at the edge of the war, under the white bone-banner both armies let pass. |
 | 959 | Skyport Customs | Skyport Customs | kept | Zenith | 19, 14 |  |
 | 960 | The Ledger Hall | The Ledger Hall | kept | Ruin Route | 13, 15 |  |
 | 961 | Glassed Orchard - Ruin | Glassed Orchard - Ruin | kept | Ruin Route | 14, 16 |  |

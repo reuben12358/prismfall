@@ -458,6 +458,9 @@ module FieldEffects
     925 => :ASHEN_WASTE,   # The Steamline
     926 => :DESERT,   # The Glass Dunes
     927 => :VOLCANIC,   # Cinder Cape Warfort
+    928 => :NONE,   # Ashkaar Siege Camp - Command Pavilion
+    929 => :DESERT,   # The Observers' Mesa
+    930 => :DESERT,   # The Bone-Carters' Camp
     959 => :NONE,   # Skyport Customs
     960 => :BLEED,   # The Ledger Hall
     961 => :BLEED,   # Glassed Orchard - Ruin

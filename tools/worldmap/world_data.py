@@ -736,6 +736,10 @@ ROADS = [
       'Antumbra', [(25, 17), (25, 18)], [80, 130], [32, 56], 'INVERSE',
       landmark="Standing pools that show what is behind you.", wild="Ghost and Dark: Greavard, Dreepy, Absol, Mimikyu.",
       secret="Walk it backwards and you find the cottage."),
+    L(790, None, "Downflame Road", "Lit by candles whose flames hang below the wick. Gravenmoor makes them.",
+      'Antumbra', [(26, 18)], [110, 70], None, 'INVERSE',
+      landmark="The candle-posts and the lantern hospice on the hill.",
+      wild="Litwick line, Drifloon, Shuppet.", secret="Blow one candle out and a door-shaped piece of dark stays lit."),
     L(810, None, "The Dry Tide", "An old seabed, rippled like a beach the sea left one evening and never came back to.",
       'Ossaria', [(15, 3), (14, 3)], [140, 72], None, 'DESERT', role='side',
       landmark="Shell pavements, a stranded ship's ribs, the bone-carters' white banner over their camp at the west end, "
@@ -744,10 +748,6 @@ ROADS = [
       exits="E: Duneholt's west gate. W end: the bone-carters' camp (930); past it the war maps (the Siege Camp 924 and "
             "the Glass Dunes 926; story-gated). The observers' mesa (929, Ch19) stands south of the battlefield.",
       secret="At night you can hear the tide. Follow it."),
-    L(790, None, "Downflame Road", "Lit by candles whose flames hang below the wick. Gravenmoor makes them.",
-      'Antumbra', [(26, 18)], [110, 70], None, 'INVERSE',
-      landmark="The candle-posts and the lantern hospice on the hill.",
-      wild="Litwick line, Drifloon, Shuppet.", secret="Blow one candle out and a door-shaped piece of dark stays lit."),
   ]),
   dict(n=15, name="The Slag Road", frm=380, to=400, chapter="Act IV", detail='outline',
        note="Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa "

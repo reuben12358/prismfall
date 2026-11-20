@@ -458,6 +458,9 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[925] = :ASHEN_WASTE   # The Steamline
   FieldEffects::MAP_FIELDS[926] = :DESERT   # The Glass Dunes
   FieldEffects::MAP_FIELDS[927] = :VOLCANIC   # Cinder Cape Warfort
+  FieldEffects::MAP_FIELDS[928] = :NONE   # Ashkaar Siege Camp - Command Pavilion
+  FieldEffects::MAP_FIELDS[929] = :DESERT   # The Observers' Mesa
+  FieldEffects::MAP_FIELDS[930] = :DESERT   # The Bone-Carters' Camp
   FieldEffects::MAP_FIELDS[959] = :NONE   # Skyport Customs
   FieldEffects::MAP_FIELDS[960] = :BLEED   # The Ledger Hall
   FieldEffects::MAP_FIELDS[961] = :BLEED   # Glassed Orchard - Ruin

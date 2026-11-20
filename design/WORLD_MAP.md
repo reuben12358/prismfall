@@ -117,7 +117,8 @@ Crownhaven with anything but Elowen. Antumbra touches the mainland only at its t
   Velmora ends on it; Roads 4, 5, 8 and 12 run along part of it, and only Road 19 goes in. It is how the gym order
   crosses Elowen between kingdoms that do not touch (WORLD.md §10, "Elowen in between").
 - **Side roads:** Windfall Row (orchards, Chapter 1), the Frostflat Causeway, the war road north from Cindervault
-  (the Cinderglass Barrens, Glasswake, the Wyrmtongue to Cinder Cape).
+  (the Cinderglass Barrens, Glasswake, the Wyrmtongue to Cinder Cape), and **the Dry Tide** (Road 14's side road,
+  open after Badge 13) from Duneholt's west gate to the bone-carters' camp and the front.
 - **Sea lanes:** the Last Ferry (the *Dovetail*, into Ferrow's Landing), the coast packet (Saltmere ↔ Ebbmouth), the
   Strait ferry to the Shardfall Isles (postgame). **On the ice:** the Thane's sled-road from Rimeholt east along the
   frozen coast to the Mast Glacier.
@@ -135,11 +136,17 @@ The Ashkaar–Isenmar war is fought **on land, in Ossaria's western dunes**, neu
   on Ashkaar's own north-east coast, behind the lines.
 - **The Steamline** (12, 1) is the steam-glass strip where the two Imprints meet: ice on one side, fire on the other.
 - **The Glass Dunes** (13, 2) are the battlefield. In the climax Primal Kyogre drags a flood-sea into the desert and
-  Reshiram's fire turns the dunes to glass.
+  Reshiram's fire turns the dunes to glass. Meridian's observers watch from **the Observers' Mesa** (13, 3) behind the
+  lines; the Dominar holds court in his **Command Pavilion** in the Siege Camp.
+- **Ossaria's side:** the western dunes are rented to the war under Prince-Elector Kassan's **Elector's Lease**. The
+  **bone-carters**, Ossaria's burial guild, camp at the west end of the Dry Tide (14, 3) and walk between the lines under
+  a white bone-banner both armies let pass.
 - On the world map: blue march arrows (Isenmar) and red march arrows (Ashkaar) converge on a glowing jagged front line
   at x ≈ 13, crossed swords mark the Glass Dunes, and the camps are flagged. The Town Map shows the same front in pixels,
   and each war site has its own named point.
-- Maps 920–927 (WORLD.md §9). Cragholm (Gym 13) is the nearest gym city to the front.
+- Maps 920–930 (WORLD.md §9). **Duneholt** (17, 3) is the nearest city, a day's ride from the front: the Dry Tide
+  runs from its west gate to the bone-carters' camp. In Act IV the PC reaches the front from Cragholm by way of
+  Duneholt; in Ch19 Sigrun flies the PC from Wyrmrest to the bone-carters' camp.
 
 ## 8. Crownhaven and the Festival grounds
 

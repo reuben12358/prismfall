@@ -41,6 +41,7 @@ for i in list(range(120, 140)) + [524, 526]:
     SEG_FIX[i] = 1
 for i in (525, 548, 151, 152, 153, 132, 134):      # after Tamsin's badge (SWAP_GYM1_GYM2.md section 0)
     SEG_FIX[i] = 2
+SEG_FIX[810] = 13       # the Dry Tide: Road 14's side road from Duneholt to the front, walked after Badge 13 (story, geo v2)
 
 E = lambda d, to, note='': dict(type='edge', dir=d, to=to, **({'note': note} if note else {}))
 WP = lambda at, to, link, note='': dict(type='warp', at=list(at), to=to, link=link, **({'note': note} if note else {}))
@@ -97,6 +98,32 @@ EXTRA_MAPS = {
               note='Upper Lofts mastery room (optional, after Tamsin\'s badge); added by the cartographer so its segment '
                    'is explicit (validate_encounters falls back to the pre-swap ID scheme otherwise)',
               tileset_kit='G5_GYM_INTERIOR', border='building walls (interior)'),
+    # small maps the war story asks for (story editor, geo v2; story/13_CUTSCENES.md "Requested small maps")
+    928: dict(id=928, name="Ashkaar Siege Camp - Command Pavilion", act=4, kingdom='Ossaria (Ashkaar camp)',
+              kind='interior', size=[24, 18], tileset='Outside', bgm=None, field='NONE', segment=13, detail='outline',
+              war_theatre=True, parent=924,
+              connections_outline=["door: the Dominar's war-tent on the Siege Camp (924). Story: Anja's cage "
+                                   "(`:war_prisoner`, Ch15-16) and the Dominar's petition (`:ch19_dominar`, after the "
+                                   "Battle of the Glass Dunes)"],
+              key_features=["the Dominar's command pavilion: red lacquer screens, a map table of the western dunes, the "
+                            "oath-brazier (lies are a capital crime here), the Light Stone's empty stand, a prisoner's "
+                            "cage at the back"],
+              tileset_kit='G45_GRAND_INTERIOR', border='tent walls (interior)'),
+    929: dict(id=929, name="The Observers' Mesa", act=5, kingdom='Ossaria', kind='dungeon', size=[36, 28],
+              tileset='Outside', bgm=None, field='DESERT', segment=17, detail='outline', war_theatre=True,
+              connections_outline=["story-gated: reached in the Ch19 battle (WAR-1 shot 14), from the south edge of the "
+                                   "Glass Dunes (926) or the Dry Tide's west end (810)"],
+              key_features=["a flat-topped sandstone mesa behind the lines: Meridian's white tents, brass tripods and "
+                            "dial-boxes, a field telegraph; the whole battlefield below. Dr. Quent packs up here"],
+              tileset_kit='G5_DESERT_CANYON', border='mesa cliffs on every side; one goat-path up'),
+    930: dict(id=930, name="The Bone-Carters' Camp", act=4, kingdom='Ossaria', kind='town', size=[44, 32],
+              tileset='Outside', bgm=None, field='DESERT', segment=13, detail='outline', war_theatre=True,
+              connections_outline=["E: the Dry Tide's west end (810). W: the war maps (the Siege Camp 924, the Glass "
+                                   "Dunes 926; story-gated). Sigrun sets the PC down here in Ch19"],
+              key_features=["Ossaria's burial guild at the war's edge: the white bone-banner on a pole, burial carts, "
+                            "a tally-wall of names, an embalmers' tent; the elder's quest (bring out the dead the carts "
+                            "can't reach)"],
+              tileset_kit='G5_DESERT_CANYON', border='dunes and the Dry Tide\'s shell pavements'),
 }
 RETIRED = {133: 'GYM_PUZZLES.md: retired in Revision 14 (Tamsin battles on 131\'s top ledge); not built'}
 
@@ -162,9 +189,18 @@ WAR_TEXT = {
               border='frozen dunes and ice-glazed sandstone; the Steamline to the east'),
     921: dict(key_features=["Isenmar's border fortress on Ossaria's western edge, besieged from the east: ice-and-granite "
                             "curtain wall over the dunes, breached gatehouse, dragonfire scorch"],
-              border='frozen dunes, the Mast Glacier snout and granite outcrops'),
+              border='frozen dunes, the Mast Glacier snout and granite outcrops', tileset_kit='G4_SNOW_FORTRESS',
+              visual_brief={'landmarks': ['breached gatehouse', "rime-glazed granite walls on the sand's edge",
+                                          'sled-yards', 'Rime Keep over a frozen spring'],
+                            'silhouette': "squat rime-white fortress at the Mast Glacier's foot, the dunes running east "
+                                          "from its walls, smoke and dragon shapes over them",
+                            'materials': 'granite, packed ice, whalebone, scorched timber, drifted sand',
+                            'palette': 'Rejuvenation winter against the desert: steel blue, rime white, sand ochre, '
+                                       'fire orange',
+                            'set_pieces': ['dragonfire run along the wall', 'sortie onto the Rimed Sands',
+                                           'hospital in the great hall']}),
     922: dict(key_features=["Skaldfast's inner keep, built over a frozen spring; the war council's hall"],
-              border='fortress walls'),
+              border='fortress walls', tileset_kit='G4_SNOW_FORTRESS'),
     924: dict(kingdom='Ossaria (Ashkaar camp)', tileset_kit='G5_DESERT_CANYON',
               key_features=["legion tents, dragon pickets and trebuchets on the eastern dunes; the Dominar's war-tent"],
               border='dunes, sandstone mesas and the Ashkaar war road'),
@@ -175,7 +211,32 @@ WAR_TEXT = {
     926: dict(kingdom='Ossaria (contested)', field='DESERT', tileset_kit='G5_DESERT_CANYON',
               key_features=["the war's battlefield in the dunes: in the climax Primal Kyogre drags a flood-sea into the "
                             "desert and Reshiram's fire turns the dunes to glass (field transition: the fields team)"],
-              border='dune ridges; glass after the climax'),
+              border='dune ridges; glass after the climax',
+              visual_brief={'landmarks': ['bone-white dunes across the caravan road', "the bone-carters' white banner "
+                                          "on a crest", 'wrecked sled-forts and siege engines', 'two war banners'],
+                            'silhouette': 'rolling white dunes between two hosts under a steam sky; after the climax a '
+                                          'glass plain with glassed soldiers standing in it',
+                            'materials': 'sand, flood-water, steam-glass',
+                            'palette': 'bone white and sand ochre; flood grey-blue; glass cyan and magma orange at the '
+                                       'clash',
+                            'set_pieces': ["Kyogre's flood-sea pouring in over the sand", 'glass where the fire passes',
+                                           "afterwards: a glass plain of standing glassed soldiers and the "
+                                           "bone-carters' banner"]}),
+}
+WAR_WHEN = 'Ashkaar-Isenmar war active (story key)'
+WAR_STATES = {
+    160: "the Thane requisitions the Ebb Guild's sleds for the front and the Guild refuses; Thaw refugees; Ashkaar "
+         "envoys expelled",
+    300: "war footing: levies drilling, refugees from Skaldfast, sleds requisitioned for the front",
+    460: "the legions gone to the war in Ossaria; Sigrun's riders hold the gate",
+    660: "supply and conscript columns north to the Cinderglass Barrens",
+    200: "Kassan's neutrality notices (the Elector's Lease) on the Sandgate; caravans leaving by the east gate; foreign "
+         "quartermasters, Isenmar's and Ashkaar's, in the Hall of Audience (206); bone-carters loading at the west gate",
+    360: "refugees from both kingdoms in Bastian's seams, Ossarian well-folk among them",
+    670: "furnace apprentices taken by the levy; the glass market shut",
+    662: "legion columns marching west across the barrens to the Siege Camp",
+    730: "sled-convoys over the Mast Glacier by night; dragon patrols overhead",
+    810: "the bone-carters' carts and white banner on the road west; their camp (930) at the west end",
 }
 WAR_OUTLINE = ("Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). "
                "Isenmar side: " + W.WAR['isenmar'] + ". Ashkaar side: " + W.WAR['ashkaar'] + ". Front: " +
@@ -236,6 +297,20 @@ def apply_geography_v2(d, by):
         for k, v in WAR_TEXT.get(i, {}).items():
             m[k] = v
         m['geography_v2'] = 'Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)'
+    for i, change in WAR_STATES.items():
+        m = by.get(i)
+        if not m:
+            continue
+        st = m.get('states') or [{'id': 'default'}]
+        if not any(x.get('id') == 'default' for x in st):
+            st.insert(0, {'id': 'default'})
+        war = [x for x in st if x.get('id') == 'war']
+        if war:
+            war[0]['change'] = change
+            war[0].setdefault('when', WAR_WHEN)
+        else:
+            st.append({'id': 'war', 'when': WAR_WHEN, 'change': change})
+        m['states'] = st
     # Static Tunnels: the Mainline's buried tunnels under the Brass Dunes (side of 600)
     for i in (604, 605):
         if i in by:
@@ -575,6 +650,12 @@ def update_field_defaults():
         new[l['id']] = '  %d: {name: "%s", kind: route, field: %s, battles: [trainer], encounters: [Land], source: hand, ' \
                        'why: "ROUTES.yaml: %s"}' % (l['id'], l['name'].replace('"', "'"), l['field'],
                                                    l['landmark'].replace('"', "'")[:110])
+    for i, e in EXTRA_MAPS.items():
+        if i in existing or i not in maps or not e.get('war_theatre'):
+            continue
+        battles = '' if e['kind'] == 'interior' else ', battles: [trainer]'
+        new[i] = '  %d: {name: "%s", kind: %s, field: %s%s, source: spec, why: "world spec"}' % (
+            i, e['name'].replace('"', "'"), e['kind'], e.get('field') or 'NONE', battles)
     if not new:
         if synced:
             open(p, 'w', encoding='utf-8').write('\n'.join(lines))

@@ -16,6 +16,8 @@ import craftkit as CK
 import routes_early as RE
 from routes_early import once, obj, trial, P, old_events, at, line_events, barrier_tile, cave_mouth
 from terrain import vnoise
+import rcompose as RC
+RC_VBASE = RC.VBASE
 
 PREV = RE.PREV
 J = lambda e, t: P('JUNO', e, t)
@@ -247,22 +249,22 @@ def build_528():
     # ---- the sea, the beach and the foredune ridge (h1)
     for x in range(W):
         sea = 67 + 2.0 * (vnoise(x, 0, 5281, 10.0) - 0.5) * 2 + bump(x, 20, 10, 2) - bump(x, 70, 12, 2)
-        fd = 54 + 2.5 * (vnoise(x, 1, 5282, 9.0) - 0.5) * 2 + bump(x, 28, 7, 3) + bump(x, 92, 8, 2)
+        fd = 54 + 1.6 * (vnoise(x, 1, 5282, 14.0) - 0.5) * 2 + bump(x, 28, 7, 3) + bump(x, 92, 8, 2)
         for y in range(H):
             if y >= sea: m.cls[y, x] = 'W' if y >= sea + 6 + 2 * vnoise(x, 2, 5283, 6.0) else 'w'
             elif y >= fd + 3: m.cls[y, x] = 's'
-        for y in range(int(fd) - 5 + int(2 * vnoise(x, 3, 5284, 5.0)), int(fd) + 1):
+        for y in range(int(fd) - 5, int(fd) + 1):
             if 0 <= y < H: m.ht[y, x] = 1
     CK.smooth_sea(m, 3)
     # ---- the dune belt (north): three levels up to the Beacon
     for x in range(W):
-        d1 = 26 + 3.0 * (vnoise(x, 4, 5285, 9.0) - 0.5) * 2 - bump(x, 14, 9, 6) - bump(x, 100, 8, 5)
-        d2 = 18 + 2.5 * (vnoise(x, 5, 5286, 8.0) - 0.5) * 2 - bump(x, 20, 12, 8) - bump(x, 96, 12, 6)
+        d1 = 26 + 2.0 * (vnoise(x, 4, 5285, 14.0) - 0.5) * 2 - bump(x, 14, 9, 6) - bump(x, 100, 8, 5)
+        d2 = 18 + 1.6 * (vnoise(x, 5, 5286, 14.0) - 0.5) * 2 - bump(x, 20, 12, 8) - bump(x, 96, 12, 6)
         for y in range(H):
             if y <= d1: m.ht[y, x] = max(m.ht[y, x], 1)
             if y <= d2: m.ht[y, x] = max(m.ht[y, x], 2)
     CK.plateau(r, 55, 10, 9, 5, 3, rough=0.35, seed=1)
-    for h in (1, 2): CK.smooth_ht(m, h, 2)
+    for h in (1, 2): CK.smooth_ht(m, h, 4)
     CK.smooth_ht(m, 3, 2, box=(40, 0, 72, 20))
     # ---- sand: dune tops and slopes are bare sand (the Dirt autotile), slacks are grass
     for i, (cx, cy, rx, ry) in enumerate(((55, 10, 10, 6), (36, 18, 9, 4), (76, 17, 8, 4), (20, 26, 7, 3), (92, 24, 8, 3),
@@ -290,7 +292,8 @@ def build_528():
     m.blob(72, 44, 7, 3.2, 'd', seed=44, rough=0.45, only='.tu')
     r.finish_plan(border=0)
     r.forest_band('N', 3, wobble=1.5)
-    for cx, cy, rx, ry in ((8, 6, 7, 4), (104, 6, 6, 4), (30, 8, 5, 3), (84, 8, 5, 3), (4, 30, 3, 6), (106, 46, 3, 5)):
+    for cx, cy, rx, ry in ((8, 6, 7, 4), (104, 6, 6, 4), (30, 8, 5, 3), (84, 8, 5, 3), (4, 30, 3, 6), (106, 46, 3, 5),
+                           (40, 44, 4, 2.5), (20, 30, 3, 2), (86, 28, 3, 2.5), (104, 20, 3, 3), (12, 48, 3, 2), (72, 12, 4, 3), (40, 12, 4, 3), (26, 46, 3, 2)):
         r.copse(cx, cy, rx, ry)
     # marram ledges: from the slack south of the road, one way down to the camp's hollow
     CK.ledge(r, 44, 60, 41, face='dune'); CK.ledge(r, 88, 96, 42, face='dune')
@@ -357,6 +360,7 @@ def build_528():
           talk('Birdwatcher', (93, 18), 'NPC 09', ['Birdwatcher: Brackish pool. Half sea, half rain. The Wingull come to wash the salt off. Shh.']),
           hidden((bx - 1, land_y), 'SOFTSAND', 'HiddenItem (sledge run)'),
           item((8, 64), 'POTION'), item((101, 18), 'GREATBALL'), item((24, 24), 'REPEL'), item((36, 15), 'ESCAPEROPE'), hidden((70, 4), 'STARDUST', 'HiddenItem (dune crest)'))
+    ship_part_sand(r, -24, 10, 53)                                                   # the Wandering Chorus, half-buried
     # keep the chute clear: nothing may stand on the slide column
     for y in range(top_y, land_y + 1):
         m.taken[y, bx] = True
@@ -376,16 +380,18 @@ def build_528():
         r.near('dk_rock_big', x, y, on='.ut', r=3)
     for (x, y) in ((90, 14), (101, 14), (91, 17), (102, 16), (95, 18)):
         r.near('nt_reed1', x, y, on='.u', r=2)
-    CK.fringe(r, CK.FRINGE['coast'], 120, seed=1, near_forest=4)
-    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh'], 14, box=(0, 18, W, 56), seed=2, near_forest=0)
+    CK.fringe(r, CK.FRINGE['coast'], 200, seed=1, near_forest=6)
+    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh', 'nt_teal_a'], 40, box=(0, 12, W, 56), seed=2, near_forest=0)
+    CK.props(r, ['nt_log', 'dk_boulder', 'dk_pebbles', 'nt_log'], 16, box=(0, 56, W, 68), on='s', clump=3, seed=11)
+    CK.props(r, ['nt_reed1', 'nt_reed1', 'nt_fern1'], 26, box=(0, 55, W, 62), on='s', clump=2, seed=12)
     CK.undergrowth(r, 160, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'ak_fern', 'nt_reed1'), seed=3)
     r.dress(trees=('nt_pine_a',), n_trees=0, copses=0, scatter=0)
-    ship_part_sand(r, 6, 54, 53)                                                     # the Wandering Chorus, half-buried
     r.paint(glint=0.35)
+    ship_part_sand(r, -24, 10, 53, draw=True)
     CK.paint_extras(r)
     for y in range(top_y + 1, land_y + 1):                                           # the polished chute (walkable decal)
         if m.cls[y, bx] in '.ust' and not m.cliff[y, bx] and m.L[2, y, bx] == 0: m.L[2, y, bx] = K.P1('mr_chute%d' % (y % 2))
-    for n, x, y in (('pf_seastack2', 60, 74), ('hb_boat2', 94, 70), ('pf_seastack', 12, 73)):
+    for n, x, y in (('dk_rock_big', 60, 73), ('hb_boat2', 94, 70), ('dk_rock_big', 12, 72), ('dk_boulder', 34, 71), ('dk_boulder', 80, 72)):
         CK.water_stamp(r, n, x, y)
     CK.shore(r, wet=1, wet_noise=0.45, wrack=0.7, chalk_rocks=False)
     sea_pinks = [K.DECOR_SH['flowers'][i] for i in (2, 3)]
@@ -399,15 +405,25 @@ def build_528():
     r.write(h, '528_marram_down.yaml', '# Marram Down (528). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/528.png' if PREV else None)
 
 
-def ship_part_sand(r, dx, dy, max_row):
-    """the moored two-master's hull (rows up to max_row) laid on the sand: a wreck half-buried in the foredune"""
+def ship_part_sand(r, dx, dy, max_row, draw=False):
+    """the moored two-master's hull (rows up to max_row) laid on the sand: a wreck half-buried on the beach.  Call once
+    at plan time (marks the hull solid so nothing is seated under it) and once after painting with draw=True (the
+    ground autotile moves down a layer so the sand shows through the hull's gaps)"""
     m = r.m
     for x, y, z, t in K.SHIP:
         if y > max_row: continue
         X, Y = x + dx, y + dy
-        if m.inb(X, Y) and m.cls[Y, X] in 'su.d' and not m.taken[Y, X]:
-            m.L[1 if z == 0 else 2, Y, X] = t
-            if z == 0: m.taken[Y, X] = True; m.under[Y, X] = m.cls[Y, X]; m.cls[Y, X] = 'B'
+        if not m.inb(X, Y): continue
+        if not draw:
+            if z == 0 and m.cls[Y, X] in 'su.d' and not m.taken[Y, X]:
+                m.taken[Y, X] = True; m.under[Y, X] = m.cls[Y, X]; m.cls[Y, X] = 'B'
+            continue
+        if z == 0:
+            if m.cls[Y, X] != 'B': continue
+            if m.L[1, Y, X] >= RC_VBASE: m.L[0, Y, X] = m.L[1, Y, X]
+            m.L[1, Y, X] = t
+        elif m.cls[Y, X] in 'Bsu.d':
+            m.L[2, Y, X] = t
 
 
 BUILD[528] = build_528

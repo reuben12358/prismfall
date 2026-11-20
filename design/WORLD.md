@@ -88,11 +88,11 @@ Wild level band ≈ previous cap −3 … next cap −2. Field = default battle 
 | 10 | III | Rimeholt → Skyreach (G11 55) | The Thane's Sled-Road 720, the Mast Glacier 721 SNOWY_MOUNTAIN, Anchorhold 730, the air leg to the Tetherline 732, Ebbmouth Sea Grotto 723 (revisit, a detour south from Rimeholt), Cloudstair 724–726 MOUNTAIN (Rock Climb), **Stillwater 728** | 46–53 |
 | 11 | III | Skyreach → Lucent (G12 59) | Conductors' Causeway 740 STORMFRONT, the Wired Wood 741, Kingsmead 756 (Crown Road), the Looking-Glass Wood 752, Widdershins Walk 755, Mirror Mere 742, **Antumbra Threshold 743 INVERSE**, Stormwatch Spire 744–746 STORMFRONT, **Shattered Sky 748** | 50–57 |
 | 12 | IV | Lucent → Cragholm (G13 63) | Yesterday's Road 772, the Obsidian Barrows 760 INVERSE (Antumbra), the Vertebrae 773, Spinefall Gorge 761 (Waterfall), Geode Hollow 764/765 CRYSTAL_CAVERN, **Dreaming Quarter 768** | 54–61 |
-| 13 | IV | Cragholm → Gravenmoor (G14 67) | The Jawbone Ridge 780 MOUNTAIN, Hindmoor 781 (Antumbra moors), Downflame Road 790, Duneholt Undersands 783 DESERT (revisit, Groudon arc), Darkglass Mine 784/785 DARK_CRYSTAL, **Stonesleep 788** (fossils) | 58–65 |
-| 14 | IV | Gravenmoor → Cogsworth (G15 71) | The Noonless Road 800, the Slag Mesa 801 WASTELAND (gate C), the Smokestack Parade 811, the Dry Tide 810 (side), Barrow of the Wardens 804/805 (CAVE/HOLLOW_CATHEDRAL), Giratina's Reverse Depths 806 INVERSE, **The Hush 808** | 62–69 |
+| 13 | IV | Cragholm → Gravenmoor (G14 67) | The Jawbone Ridge 780 MOUNTAIN, Hindmoor 781 (Antumbra moors), Downflame Road 790, the Dry Tide 810 DESERT (side, from Duneholt's west gate to the front) and the Bone-Carters' Camp 930, the Siege Camp's Command Pavilion 928, Duneholt Undersands 783 DESERT (revisit, Groudon arc), Darkglass Mine 784/785 DARK_CRYSTAL, **Stonesleep 788** (fossils) | 58–65 |
+| 14 | IV | Gravenmoor → Cogsworth (G15 71) | The Noonless Road 800, the Slag Mesa 801 WASTELAND (gate C), the Smokestack Parade 811, Barrow of the Wardens 804/805 (CAVE/HOLLOW_CATHEDRAL), Giratina's Reverse Depths 806 INVERSE, **The Hush 808** | 62–69 |
 | 15 | IV | Cogsworth → Underveil (G16 75) | The Brink 832, the Hanging Stair 820 SCRAPYARD, the Drownings 821 WATER_SURFACE, Under the Drownings 822 UNDERWATER (Dive), **Aurelia** 824 UNDERWATER / 825–826 CAVE, **Ironbloom 828** | 66–73 |
 | 16 | V | Underveil → Gloaming (G17 80) | The Throat 852, the Blindwater 840 CAVE, the Gloamwood Verge 841, Lightless Deep 844 DARK_CRYSTAL / 845 NEW_MOON (Pecharunt arc), **Inverted Ward 848 INVERSE** | 70–78 |
-| 17 | V | Gloaming → Wyrmrest (G18 85) | The Gloamwood 860 FAIRY_TALE, the Thornwar Marches 861 MOUNTAIN, the Wyrmspine 872, Wyrmscar Rift 864 CAVE / 865 DRAGONS_DEN (Reshiram arc), **Rainbow Scar 868 RAINBOW** | 75–83 |
+| 17 | V | Gloaming → Wyrmrest (G18 85) | The Gloamwood 860 FAIRY_TALE, the Thornwar Marches 861 MOUNTAIN, the Wyrmspine 872, Wyrmscar Rift 864 CAVE / 865 DRAGONS_DEN (Reshiram arc), the war climax (the Glass Dunes 926, the Observers' Mesa 929; Sigrun flies the PC to the front and back), **Rainbow Scar 868 RAINBOW** | 75–83 |
 | 18 | V | Wyrmrest → Crownhaven (Festival 90) | Dominar's Toll 892, the Pilgrim Pass 880 MOUNTAIN, the Coronation Road 893, Sovereign's Ascent 884–886, **Glassfall Scar 888** | 80–88 |
 | PG | — | postgame | Hallow Strait 900, Seabed 901, Shardfall Isles 905, Antumbra Distortion Core 910 | 80–95 |
 
@@ -171,12 +171,20 @@ War-theatre maps are **920–939** (*prov.* names; the story team sets the act):
 | 925 | The Steamline | Ossaria (contested) | no-man's-land where the two Imprints meet: ice on one side, fire on the other, steam-glass between (a Bleed line) |
 | 926 | **The Glass Dunes** (was the Shattered Ice) | Ossaria (contested) | the battlefield of the climax cutscene (beam clash); default field DESERT, the flood-then-glass transition is the fields team's |
 | 927 | Cinder Cape Warfort | Ashkaar | Ashkaar's staging fortress on its own north-east coast, behind the lines |
+| 928 | Ashkaar Siege Camp - Command Pavilion | Ossaria (Ashkaar camp) | the Dominar's war-tent (interior of 924): Anja's cage (`:war_prisoner`), the petition (`:ch19_dominar`); segment 13 |
+| 929 | The Observers' Mesa | Ossaria | the sandstone mesa behind the lines where Meridian's observers watch the battle (WAR-1 shot 14); Ch19, segment 17 |
+| 930 | The Bone-Carters' Camp | Ossaria | Ossaria's burial guild at the Dry Tide's west end, under the white bone-banner; the elder's quest; Sigrun sets the PC down here in Ch19; segment 13 |
+The western dunes are Ossarian ground rented to the war under **the Elector's Lease** (Prince-Elector Kassan); the
+**bone-carters** (Ossaria's burial guild) walk between the lines. Neither has a map of its own.
 Access: the Isenmar side is Rimeholt → the Thane's Sled-Road 720 → the Mast Glacier 721 (border B2) → Skaldfast 921 →
 the Rimed Sands 920. The Ashkaar side is Cindervault's north gate → the Cinderglass Barrens 662 (border M) → Glasswake
-670 → west across the sands → the Siege Camp 924; the Wyrmtongue 673 runs out to Cinder Cape 927. From Cragholm (Gym 13)
-the front is a westward walk across the sands (War 2 `:war_convoy`, War 3 `:war_prisoner`); from Wyrmrest (Ch19)
-Sigrun flies the PC there. A `war` state is defined on Rimeholt 300/304, Cindervault 240, Ebbmouth 160, the Sled-Road
-720, the Mast Glacier 721, the Ashmarch 660, the Ironway 661 and Wyrmrest 460.
+670 → west across the sands → the Siege Camp 924; the Wyrmtongue 673 runs out to Cinder Cape 927. **Duneholt** (Gym 5) is
+the nearest city: **the Dry Tide** 810 (Road 14's side road, segment 13) runs from its west gate to the bone-carters'
+camp 930 and the front. In Act IV the PC reaches the front from Cragholm by way of Duneholt (War 2 `:war_convoy`, War 3
+`:war_prisoner`); from Wyrmrest (Ch19) Sigrun flies the PC to the bone-carters' camp. A `war` state is defined on
+Ebbmouth 160, Duneholt 200, Cindervault 240, Rimeholt 300/304, Cragholm 360, Wyrmrest 460, Frostwick 570, the Ashmarch
+660, the Ironway 661, the Cinderglass Barrens 662, Glasswake 670, the Sled-Road 720, the Mast Glacier 721, Anchorhold 730
+and the Dry Tide 810 (texts in maps.json `states`; the sea-war texts are gone).
 
 ---
 ## 10. Borderlands (Revision 9; re-laid for Geography v2, Revision 18)
@@ -304,8 +312,8 @@ No place is called "Route N" any more. Each **road** joins two gym towns and has
 | 11 | **The Mast Road** | Rimeholt -> Skyreach | The Thane's Sled-Road 720 140x72 -> The Mast Glacier 721 72x130 -> The Tetherline 732 130x64 | Act III |
 | 12 | **The Glass Road** | Skyreach -> Lucent | Conductors' Causeway 740 72x130 -> The Wired Wood 741 80x130 -> Kingsmead 756 110x90 -> The Looking-Glass Wood 752 100x90 -> Widdershins Walk 755 100x80 | Act III |
 | 13 | **The Grave Road** | Lucent -> Cragholm | Yesterday's Road 772 110x64 -> The Obsidian Barrows 760 130x80 -> Spinefall Gorge 761 72x130 -> The Vertebrae 773 64x120 | Act IV |
-| 14 | **The Moor Road** | Cragholm -> Gravenmoor | The Jawbone Ridge 780 150x72 -> Hindmoor 781 80x130 -> Downflame Road 790 110x70 | Act IV |
-| 15 | **The Slag Road** | Gravenmoor -> Cogsworth | The Noonless Road 800 140x70 -> The Slag Mesa 801 80x130 -> The Smokestack Parade 811 120x64 -> The Dry Tide 810 140x72 (side) | Act IV |
+| 14 | **The Moor Road** | Cragholm -> Gravenmoor | The Jawbone Ridge 780 150x72 -> Hindmoor 781 80x130 -> Downflame Road 790 110x70 -> The Dry Tide 810 140x72 (side) | Act IV |
+| 15 | **The Slag Road** | Gravenmoor -> Cogsworth | The Noonless Road 800 140x70 -> The Slag Mesa 801 80x130 -> The Smokestack Parade 811 120x64 | Act IV |
 | 16 | **The Drowned Road** | Cogsworth -> Underveil | The Brink 832 130x60 -> The Hanging Stair 820 72x150 -> The Drownings 821 120x120 | Act IV |
 | 17 | **The Blind Road** | Underveil -> Gloaming | The Throat 852 64x110 -> The Blindwater 840 150x80 -> The Gloamwood Verge 841 72x130 | Act V |
 | 18 | **The Truce Road** | Gloaming -> Wyrmrest | The Gloamwood 860 140x80 -> The Thornwar Marches 861 80x130 -> The Wyrmspine 872 150x72 | Act V |
@@ -547,16 +555,16 @@ Each leg: name, target size, landmark, secret. Fill lists follow when the act is
 - **Spinefall Gorge** (761, Ossaria, `:DESERT`, 72x130): The river comes down over the backbone of something that was a mile long. *Landmark:* The waterfall over fossil vertebrae. *Secret:* A dry cave behind the fall with a nest of something revived.
 - **The Vertebrae** (773, Ossaria, `:MOUNTAIN`, 64x120): A stair of round stone drums up to Cragholm, each one a step and a bone. *Landmark:* The drum-stair and Cragholm's lift towers above. *Secret:* One drum is hollow.
 
-**Road 14, The Moor Road** (Cragholm -> Gravenmoor, Act IV). Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors.
+**Road 14, The Moor Road** (Cragholm -> Gravenmoor, Act IV). Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors. Side road: the Dry Tide, Ossaria's dry seabed from Duneholt's west gate out to the war in the sands (the bone-carters' camp at its end; Ch14-16 convoy and prisoner trips, and Sigrun's landing in Ch19).
 - **The Jawbone Ridge** (780, Ossaria, `:MOUNTAIN`, 150x72): A ridge with a toothed skyline. Cragholm says the teeth were cut; Vigil says they grew. *Landmark:* The teeth, the Darkglass Mine headframe, and the war's smoke to the west. *Secret:* A cave in the largest tooth.
 - **Hindmoor** (781, Antumbra, `:INVERSE`, 80x130): The moor that is only seen properly over your shoulder. Look straight at it and it is somewhere else. *Landmark:* Standing pools that show what is behind you. *Secret:* Walk it backwards and you find the cottage.
 - **Downflame Road** (790, Antumbra, `:INVERSE`, 110x70): Lit by candles whose flames hang below the wick. Gravenmoor makes them. *Landmark:* The candle-posts and the lantern hospice on the hill. *Secret:* Blow one candle out and a door-shaped piece of dark stays lit.
+- **The Dry Tide** (810, Ossaria, `:DESERT`, 140x72, side road): An old seabed, rippled like a beach the sea left one evening and never came back to. *Landmark:* Shell pavements, a stranded ship's ribs, the bone-carters' white banner over their camp at the west end, and the Glass Dunes beyond, where the war is fought. *Secret:* At night you can hear the tide. Follow it.
 
-**Road 15, The Slag Road** (Gravenmoor -> Cogsworth, Act IV). Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa (borderland G, Zenith's eastern waste), then down the Smokestack Parade into the foundries. Side road: the Dry Tide, Ossaria's dry seabed west of Duneholt, out to the war's battlefield.
+**Road 15, The Slag Road** (Gravenmoor -> Cogsworth, Act IV). Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa (borderland G, Zenith's eastern waste), then down the Smokestack Parade into the foundries.
 - **The Noonless Road** (800, Antumbra, `:INVERSE`, 140x70): Antumbra has no noon. On this road your shadow never shortens. *Landmark:* Sundials with no shortest mark; the Barrow of the Wardens. *Secret:* A sundial that does work, for one minute.
 - **The Slag Mesa** (801, Borderland (Elowen/Zenith), `:WASTELAND`, 80x130): Kept name: a mesa that is half rock and half what Cogsworth poured on it. *Landmark:* Slag falls, still warm, and the Slagglass: a cooled black pour that reflects Antumbra (gate C). *Secret:* A cooled slag flow shaped round something large.
 - **The Smokestack Parade** (811, Zenith, `:FACTORY`, 120x64): Cogsworth's ceremonial avenue: one chimney per founding patent. *Landmark:* The numbered stacks and three shift-clocks. *Secret:* Stack 9 has no furnace under it.
-- **The Dry Tide** (810, Ossaria, `:DESERT`, 140x72, side road): An old seabed, rippled like a beach the sea left one evening and never came back to. *Landmark:* Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought. *Secret:* At night you can hear the tide. Follow it.
 
 **Road 16, The Drowned Road** (Cogsworth -> Underveil, Act IV). Borderland L, the Hanging Stair: off the plateau's south-east rim and down the cliff to the drowned south coast, then by water over the towers of Aurelia to Underveil.
 - **The Brink** (832, Zenith, `:STORMFRONT`, 130x60): Where Zenith stops. A promenade with a brass rail and a very long view. *Landmark:* The rail, the lift-heads, the telescopes over the Hallow Strait. *Secret:* One telescope is fixed on a window in Underveil.
