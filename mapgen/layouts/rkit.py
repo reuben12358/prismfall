@@ -684,7 +684,7 @@ class RMap:
         Lr = RC.resolve(self.L, self.tid)
         for x, y, side, i in cells:
             if opening(side, i) or (x, y) in keep: continue
-            if self.cls[y, x] in 'wWo': continue
+            if self.cls[y, x] in 'wW': continue
             st = [int(v) for v in Lr[:, y, x]]
             blocked = False
             for t in reversed(st):
@@ -696,6 +696,31 @@ class RMap:
             if z == 1 and self.L[1, y, x] and self.L[1, y, x] < RC.VBASE: self.L[0, y, x] = self.L[1, y, x] if self.L[0, y, x] == 0 else self.L[0, y, x]
             self.L[z, y, x] = filler; n += 1
         return n
+
+    def seal_against(self, conns, keep=(), extra=()):
+        """map builder 9: seal every border cell except those that meet walkable ground across a connection (read from
+        the neighbour's last built map in maps_out/Data) and the `extra` spans; run on both sides, the openings converge
+        to exactly the shared crossing"""
+        import build as B, rmarshal as M
+        spans = list(extra)
+        for c in conns:
+            p = os.path.join(HERE, '..', 'maps_out', 'Data', 'Map%03d.rxdata' % c['to'])
+            d = c['dir'][0].upper(); oa, ob = c.get('offset', 0), c.get('to_offset', 0)
+            if not os.path.exists(p):
+                spans.append((d, 0, max(self.W, self.H))); continue
+            nb = M.load_file(p); nts = R.tilesets()[nb.tileset_id]; lay = nb.data.data
+            n = self.W if d in 'NS' else self.H
+            for i in range(n):
+                j = i - oa + ob
+                if d in 'NS':
+                    if not 0 <= j < nb.width: continue
+                    yy = nb.height - 1 if d == 'N' else 0
+                    if B.cell_passable(lay, nts, j, yy): spans.append((d, i, 1))
+                else:
+                    if not 0 <= j < nb.height: continue
+                    xx = nb.width - 1 if d == 'W' else 0
+                    if B.cell_passable(lay, nts, xx, j): spans.append((d, i, 1))
+        return self.seal_edges(spans, keep=keep)
 
     # ------------------------------------------------------------ output
     def rubric(self):

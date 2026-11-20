@@ -35,7 +35,7 @@ has one road name (the Strand Road, the Hoar Road) and every map along it has it
 | 6 | The Leach Road | Duneholt -> Mirefen | The Marrow Road (620), The Kneeling Stones (632), The Leach Canyons (621), Wormwood Lea (634), The Gutterfall (633) |
 | 7 | The Sulfur Road | Mirefen -> Cindervault | Leechman's Walk (640), Lake Sallow (641), The Pyre Road (652) |
 | 8 | The Iron Road | Cindervault -> Ironreach | The Ashmarch (660), The Ironway (661), The Long Drop (672), The Cinderglass Barrens (662) [side], The Wyrmtongue (673) [side]; via Candle Down (602) |
-| 9 | The Root Road | Ironreach -> Verdance | The Tailings (692), The Rootdeep (680), Prism Falls (681), The Briarway (693); via Wallshadow Row (594) |
+| 9 | The Root Road | Ironreach -> Verdance | The Tailings (692), The Rootdeep (680), Prism Falls (681), The Briarway (693) |
 | 10 | The Hart Road | Verdance -> Rimeholt | The Hart's Run (700), The Hoarwood (701), The Whalebone Road (712) |
 | 11 | The Mast Road | Rimeholt -> Skyreach | The Thane's Sled-Road (720), The Mast Glacier (721), The Tetherline (732) |
 | 12 | The Glass Road | Skyreach -> Lucent | Conductors' Causeway (740), The Wired Wood (741), Kingsmead (756), The Looking-Glass Wood (752), Widdershins Walk (755); via Candle Down (602), The Highwold (603) |

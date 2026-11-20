@@ -613,7 +613,7 @@ def build_541():
         for x in range(W):
             if r.road_mask[y, x] and m.cls[y, x] == 'w': r.deck.append((x, y))
     r.lane([(30, 50), (46, 50), (57, 50)], w=2.0, c='g', open_=None)                 # to the mine mouth
-    r.lane([(32, 30), (44, 22), (52, 21)], w=2.0, c='g', open_=None)                 # to the bird hide
+    r.lane([(32, 30), (40, 22), (44, 21)], w=2.0, c='g', open_=None)                 # to the bird hide
     r.lane([(30, 70), (14, 72), (10, 60)], w=2.0, c='g', open_=None)                  # to the Brinewife's Rest
     # the Drowned Lane: a tidal islet off the south-east, reached over a night-only shoal
     r.water(58, 100, 9, 7)
@@ -637,7 +637,7 @@ def build_541():
           talk('Samphire Picker', (44, 72), 'NPC 27', ["Samphire Picker: Pick from the edges. The middle's the Plate's. Don't ask me what that means. My mother said it."]),
           talk('Children building Sandygast castles', (20, 66), 'NPC 16', ["Children: Don't step on that one! That one's ALIVE. ...That one too."]),
           talk('Sandygast', (22, 67), 'Followers/SANDYGAST', ['(A sand castle. It is watching you.)']),
-          talk('Squawkabilly watcher', (50, 24), 'NPC 09', ['Watcher: Squawkabilly. Four colours, one flock, and every one of them thinks it\'s the real one.',
+          talk('Squawkabilly watcher', (42, 22), 'NPC 09', ['Watcher: Squawkabilly. Four colours, one flock, and every one of them thinks it\'s the real one.',
                J('happy', 'Squawkabilly! Four colors! In the wild they argue about which one\'s the real one!')]),
           obj('Salt-barge wreck', (34, 39), ["The wreck of a salt barge, sunk to the gunwales in the mud. The name board says HONEST WEIGHT."]),
           hidden((36, 40), 'BIGPEARL', 'HiddenItem (salt-barge wreck)'),
@@ -659,14 +659,14 @@ def build_541():
           item((59, 101), 'BIGPEARL'), hidden((62, 101), 'STARDUST', 'HiddenItem (the Drowned Lane)'),
           {'type': 'event', 'name': 'Back to the causeway', 'at': [58, 100], 'pages': [{'trigger': 'action', 'commands': [
               'Wade back along the drowned cart road?', {'choices': ['Yes', 'No'], 'cancel': 1, 'branches': [[{'script': 'pbFadeOutIn { $game_player.moveto(48, 96) }'}], []]}]}]},
-          item((10, 30), 'POTION'), item((60, 34), 'GREATBALL'), hidden((14, 100), 'PEARL', 'HiddenItem (salt pans)'))
+          item((10, 30), 'POTION'), item((40, 18), 'GREATBALL'), hidden((14, 100), 'PEARL', 'HiddenItem (salt pans)'))
     r.seat_events(on='.dtgS')
     fd = m.front('sh_cot', 12, 58, 'R4_REST', "The Brinewife's Rest door")
     r.events += [e for e in m.events if e.get('link') == 'R4_REST']; m.events = []
     m.cls[59:61, 11:14] = np.where(m.cls[59:61, 11:14] == 'B', 'B', 'g')
     r.stamp('gl_flat2', 18, 76, mark='B') if m.free(18, 76, 7, 6, on='.dgS') else None   # the boiling-house
     r.near('fw_smoke_a', 22, 74, on='.dg', r=2)
-    r.stamp('gl_shed', 52, 15, mark='B') if m.free(52, 15, 4, 6, on='.') else r.near('gl_shed', 52, 15, on='.', r=4)   # the bird hide
+    r.near('gl_shed', 42, 14, on='.', r=4)                                         # the bird hide
     for n, x, y in (('hb_salt0', 8, 92), ('hb_salt1', 24, 100), ('hb_salt2', 12, 102), ('hb_salt0', 26, 92), ('hb_tubs', 6, 98), ('hb_barrel', 20, 88)):
         r.near(n, x, y, on='S', r=3)
     pans(r, 4, 88, 29, 106)
@@ -678,6 +678,7 @@ def build_541():
     h = head(541, 'The Grey Saltings', field='BEACH', bgm='Route 2', biome='route',
              connections=[{'dir': 'S', 'offset': 30, 'to': 140, 'to_offset': 43}, {'dir': 'N', 'offset': 34, 'to': 552, 'to_offset': 38}],
              tone=[0, 0, 4, 18], fog={'name': 'prismfall_seamist', 'opacity': 40, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0})
+    h['walk_from'] = [[59, 100]]                                                  # the islet (reached over the night shoal)
     r.write(h, '541_grey_saltings.yaml', '# The Grey Saltings (541). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/541.png' if PREV else None)
 
 
@@ -1132,7 +1133,7 @@ def build_578():
     RW.rime_silk(m, ((30, 12), (48, 22), (34, 40), (52, 50), (26, 78))) if hasattr(RW, 'rime_silk') else None
     RW.drifts(m, 0.12, seed=578)
     h = head(578, 'Rimewood Path', field='SILKWOOD', bgm='Natural Park', weather=['Snow', 10], biome='forest',
-             connections=[{'dir': 'S', 'offset': 40, 'to': 570, 'to_offset': 20}, {'dir': 'N', 'offset': 36, 'to': 562, 'to_offset': 22}],
+             connections=[{'dir': 'S', 'offset': 40, 'to': 570, 'to_offset': 27}, {'dir': 'N', 'offset': 36, 'to': 562, 'to_offset': 26}],
              tone=[-12, -8, 8, 16])
     h['metadata']['BattleBack'] = 'snow'
     r.write(h, '578_rimewood_path.yaml', '# Rimewood Path (578). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/578.png' if PREV else None)

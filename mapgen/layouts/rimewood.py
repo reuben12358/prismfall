@@ -265,7 +265,7 @@ def route5(prev=None):
     reed_beds(m, 130, seed=561)
     road_tracks(m, 0.10, seed=560)
     drifts(m, 0.16, seed=560)
-    m.seal_edges([('E', 12, 3), ('N', 2, 3)])                                   # map builder 9: only the causeway meets Saltmere and Frostwick
+    m.seal_against([{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 31}, {'dir': 'N', 'offset': 2, 'to': 570, 'to_offset': 4}])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},
@@ -300,6 +300,10 @@ def over_tiles(m, name, x, y, z=2):
         for dx in range(L.shape[2]):
             t = int(L[:, dy, dx].max())
             if t and m.inb(x + dx, y + dy) and m.L[z, y + dy, x + dx] == 0: m.L[z, y + dy, x + dx] = t
+
+
+FW_CONN = [{'dir': 'N', 'offset': 27, 'to': 578, 'to_offset': 40}, {'dir': 'E', 'offset': 23, 'to': 577, 'to_offset': 37},
+           {'dir': 'S', 'offset': 4, 'to': 560, 'to_offset': 2}]          # map builder 9 (SWAP 1A): Pass east, Path north, Causeway south
 
 
 def frostwick(prev=None):
@@ -465,12 +469,12 @@ def frostwick(prev=None):
             m.L[1, y, x] = STAMPS['fw_crack%d' % ((x + y) % 3)]['layers'][1][0][0] if (x * 3 + y) % 2 else STAMPS['fw_drift%d' % ((x + y) % 3)]['layers'][1][0][0]
     road_tracks(m, 0.07, seed=570)
     drifts(m, 0.07, seed=570)
+    m.seal_against(FW_CONN, keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(570, head(570, 'Frostwick', biome='village', bgm='Lerucean Town',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 21], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},
                       tone=[-8, -4, 12, 12], fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 100, 'sx': 1, 'sy': 0},
-                      connections=[{'dir': 'N', 'offset': 20, 'to': 578, 'to_offset': 40}, {'dir': 'E', 'offset': 21, 'to': 577, 'to_offset': 60},
-                                   {'dir': 'S', 'offset': 4, 'to': 560, 'to_offset': 2}],
+                      connections=FW_CONN,
                       _file='570_frostwick.yaml'), '# Frostwick (570). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     print('frostwick doors', d)
     return m
@@ -676,6 +680,8 @@ def rimewood(prev=None):
     rime_silk(m, ((6, 8), (12, 20), (30, 30), (40, 20), (20, 44), (34, 50)))
     m.scatter(8, seed=6)
     dress_ice(m, 0.25, seed=562); reed_beds(m, 45, seed=562); drifts(m, 0.08, seed=562)
+    m.seal_against([{'dir': 'N', 'offset': 12, 'to': 561, 'to_offset': 10}, {'dir': 'S', 'offset': 26, 'to': 578, 'to_offset': 36}],
+                   keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(562, head(562, 'The Rimewood', biome='forest', bgm='Natural Park',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 20], 'BattleBack': 'snow', 'Weather': ['Snow', 30]},
@@ -862,6 +868,7 @@ def route6(prev=None):
              metadata=old['metadata'], tone=[-10, -6, 6, 20], walk_from=[[5, 38]],
              connections=[{'dir': 'N', 'offset': 12, 'to': 160, 'to_offset': 22}, {'dir': 'S', 'offset': 10, 'to': 562, 'to_offset': 12}],
              _file='561_route6.yaml')
+    m.seal_against(h['connections'], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     m.write(561, h, '# Gullcry Cliffs (561). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     return m
 

@@ -12,12 +12,15 @@ tone: [6, 4, -2, 0]
 connections:
 - {dir: S, offset: 20, to: 552, to_offset: 39}
 - {dir: E, offset: 30, to: 524, to_offset: 50}
+walk_from:
+- [22, 62]
+- [128, 32]
 raw: data/raw/540.npy
 tileset: 53
 events:
 - type: warp
   name: Mine mouth
-  at: [8, 21]
+  at: [8, 24]
   link: R3_MINE
   arrive: [8, 25, down]
   se: Door exit

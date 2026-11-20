@@ -528,9 +528,9 @@ def build_140(prev=None):
     paint_salt(m, 140); dry_footings(m); glints(m, 140)
     boats(m, (('hb_boat1', 2, 61), ('hb_boat3', 2, 66), ('hb_boat2', 62, 61), ('hb_boat4', 79, 60), ('hb_boat1', 5, 69)))
     m.scatter(5, seed=140, on='.')
-    m.seal_edges([('N', 43, 6), ('W', 31, 4), ('E', 44, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'] + [(x, H - 1) for x in range(W)])
-    conn = [{'dir': 'N', 'offset': 43, 'to': 541, 'to_offset': 12}, {'dir': 'W', 'offset': 31, 'to': 560, 'to_offset': 12},
+    conn = [{'dir': 'N', 'offset': 43, 'to': 541, 'to_offset': 30}, {'dir': 'W', 'offset': 31, 'to': 560, 'to_offset': 12},
             {'dir': 'E', 'offset': 44, 'to': 528, 'to_offset': 38}]
+    m.seal_against(conn, keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
     h = head(140, '140_saltmere.yaml', biome='harbour', tone=[8, 4, -12, 0], connections=conn,
              fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0})
     m.write(140, h, "# Saltmere - The Upper Town (140). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.\n")

@@ -180,15 +180,22 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     P("JOLTIK", 14, "COMPOUNDEYES", "ORANBERRY", "HARDY", "ELECTROWEB,ABSORB,STRINGSHOT,FURYCUTTER", "S",
       casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB,PROTECT"},
       hard={"item": "FOCUSSASH", "nat": "MODEST", "moves": "ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT"}),
-    P("SURSKIT", 15, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
+    P("SURSKIT", 14, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
       hard={"item": "DAMPROCK", "nat": "TIMID", "moves": "RAINDANCE,BUBBLEBEAM,STRUGGLEBUG,QUICKATTACK"},
       casual={"moves": "WATERGUN,STRUGGLEBUG,QUICKATTACK,SWEETSCENT"}),
     # Hard: Rage Powder (powders x1.2 accurate here) pulls single-target hits off Bobbin.
     P("VIVILLON", 18, "COMPOUNDEYES", "SILVERPOWDER", "TIMID", "RAGEPOWDER,STRUGGLEBUG,GUST,STUNSPORE", "S",
       only="hard"),
-    # The trap spider: Silk Trap guards it while its partner attacks, and binds tighter here (an extra Speed drop on
-    # a contact move). Hard: Lunge, x1.3 here, which lowers Attack.
-    P("SPIDOPS", 16, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,STRUGGLEBUG,FEINT,STRINGSHOT", "BA",
+    # The answer to the birds (DISTRIBUTION_STUDY point 2: Flying is common before Gym 2 and blunted, so the gym is
+    # built to beat it, as Shelly's Rain beats Fire in Reborn). Smack Down is Rock (super effective on fliers) and
+    # grounds them for the partner's Struggle Bug and String Shot; Rock Tomb slows both foes' Speed race. Bug/Rock also
+    # RESISTS Fire and stands in front of the rare Fire answer; Sturdy survives one big hit. Counterplay: Water, Grass,
+    # Fighting and Steel (Crabrawler's Rock Smash, Timburr's Low Kick: 4x... 2x on Bug/Rock).
+    P("DWEBBLE", 15, "STURDY", "ORANBERRY", "IMPISH", "SMACKDOWN,ROCKTOMB,BUGBITE,FURYCUTTER", "BA",
+      only="nocasual", hard={"ab": "SHELLARMOR", "item": "SITRUSBERRY", "moves": "SMACKDOWN,ROCKTOMB,BUGBITE,STEALTHROCK"}),
+    # The trap spider (Hard only on the Standard roster since the bird answer took its slot; the harness saw it hold
+    # 51 of 52 realistic losses behind Silk Trap): Silk Trap guards it while its partner attacks, and binds tighter here.
+    P("SPIDOPS", 15, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,BUGBITE,FEINT,STRINGSHOT", "BA",
       only="nocasual", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,LUNGE,STRUGGLEBUG,ASSURANCE"}),
     # Telluric Seed: +1 Def, +1 Sp. Def, -1 Speed - a silk cocoon. Razor Leaf hits both foes (Grass x1.2, Overgrow on).
     P("SWADLOON", 19, "OVERCOAT", "TELLURICSEED", "HARDY", "RAZORLEAF,BUGBITE,STRUGGLEBUG,PROTECT", "BA",

@@ -108,6 +108,12 @@ inside single-quoted Python strings.
 - **To do (DUNGEON_PUZZLES stale lines):** D2 "before / after Gym 1" → Gym 2. Line 88 "after Badge 1 and Cut" → after Tamsin's badge. Line 101 "Shuttle, from Tamsin after Badge 1" → after Badge 2. Line 103 "the coupling is Gym 1's" → Gym 2's. Line 136 "the salt miner gives TM98 after Badge 2" → handed over at Badge 1, usable at Badge 2. Lines 188/193, the Rimewood frozen heddle "callback to Gym 1" → Gym 2. D5 Thistledown is on the Ch3 road (cap 19).
 - **Story conflict, D9 reward** (lines 235, 340): "the Gilded King's annotated script" and "the prop crown of the Gilded King". Dorian owns the *last* copy of "The Gilded King", has never staged it, and hands over only the prologue page (Ch2); the full play is staged at the Festival. Suggested reward: the Pageant's prompt-book with every line about the old capital struck out in red, or the old Crown prop with its original *whole* stone (a nice match for Saltmere's prop-room scene, Crown seed 2).
 - Gym 1 has to teach fields gently: the Field Notes pop-up text in 154 is in the script, and Juno's cheering from the stalls is part of the joke.
+- **✓ done (puzzle engineer, 2026-11-19 evening):** the DUNGEON_PUZZLES stale lines (D2, the Deepwood, the Shuttle, the
+  coupling, TM98, the Rimewood heddle, D5's cap) all read Gym 2 / Badge 2 now. D9's reward is the old Pageant prompt-book and
+  the old Crown prop with its original stone whole (both lines, 237 and 341); no Gilded King's script or crown remains. D3's
+  text now matches its proof (start with a and b taut). The Grand Stage FIELD NOTES pop-up from the script plays once on
+  the first step up the 154 aisle (`pfm(:fn_grand_stage)`); Juno appears in the front row after the first actor. GYM_PUZZLES
+  §133 (Badge 2, double battle) and the Gym 2 state table (`LOOM_*` names) are corrected.
 
 ## 3. Trainer designer
 - **✓ done:** Core `GYMS` (Dorian 1, cap 15, `double: false`; Tamsin 2, cap 19, `double: true`) and `gym_battle` honouring it. BALANCE §4 rows, class row and bar 1 (Normal/Bug/Water). `validate_trainers.py` WARDENS swapped. J1 at 14. Thistle at 16–18. Shelly v1 at 21. The playbook's Gym 1/2 sections.

@@ -12,9 +12,44 @@ tone: [-28, -8, -30, 25]
 fog: {name: prismfall_spores, opacity: 40, blend: 1, zoom: 100, sx: 1, sy: -1}
 connections:
 - {dir: W, offset: 50, to: 540, to_offset: 30}
+walk_from:
+- [1, 52]
 raw: data/raw/524.npy
 tileset: 53
 events:
+- type: warp
+  name: To Windfall Row
+  at: [41, 109]
+  to: {map: 521, x: 1, y: 10, dir: left}
+- type: warp
+  name: To Windfall Row b
+  at: [40, 109]
+  to: {map: 521, x: 1, y: 9, dir: left}
+- type: warp
+  name: To Windfall Row c
+  at: [42, 109]
+  to: {map: 521, x: 1, y: 11, dir: left}
+- type: warp
+  name: To Briarwick
+  at: [44, 0]
+  link: WOOD_BRIAR
+  arrive: [44, 1, down]
+- type: warp
+  name: To Briarwick b
+  at: [45, 0]
+  to: {map: 120, x: 36, y: 62, dir: up}
+- type: warp
+  name: To Briarwick c
+  at: [46, 0]
+  to: {map: 120, x: 36, y: 62, dir: up}
+- type: cut_tree
+  at: [82, 48]
+  name: CutTree
+- type: warp
+  name: To Deepwood
+  at: [89, 48]
+  link: WOOD_DEEP
+  arrive: [88, 48, left]
 - type: event
   name: Wood entry 1
   at: [4, 49]
@@ -77,39 +112,6 @@ events:
       var: [BRIARWICK_GLASSWOOD, 1]
     through: true
     commands: []
-- type: warp
-  name: To Windfall Row
-  at: [41, 109]
-  to: {map: 521, x: 1, y: 10, dir: left}
-- type: warp
-  name: To Windfall Row b
-  at: [40, 109]
-  to: {map: 521, x: 1, y: 9, dir: left}
-- type: warp
-  name: To Windfall Row c
-  at: [42, 109]
-  to: {map: 521, x: 1, y: 11, dir: left}
-- type: warp
-  name: To Briarwick
-  at: [44, 0]
-  link: WOOD_BRIAR
-  arrive: [44, 1, down]
-- type: warp
-  name: To Briarwick b
-  at: [45, 0]
-  to: {map: 120, x: 36, y: 62, dir: up}
-- type: warp
-  name: To Briarwick c
-  at: [46, 0]
-  to: {map: 120, x: 36, y: 62, dir: up}
-- type: cut_tree
-  at: [82, 48]
-  name: CutTree
-- type: warp
-  name: To Deepwood
-  at: [89, 48]
-  link: WOOD_DEEP
-  arrive: [88, 48, left]
 - type: sign
   name: Cordon notice
   at: [43, 103]

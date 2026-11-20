@@ -14,8 +14,11 @@ biome: forest
 field: SILKWOOD
 tone: [-12, -8, 8, 16]
 connections:
-- {dir: S, offset: 40, to: 570, to_offset: 20}
-- {dir: N, offset: 36, to: 562, to_offset: 22}
+- {dir: S, offset: 40, to: 570, to_offset: 27}
+- {dir: N, offset: 36, to: 562, to_offset: 26}
+walk_from:
+- [42, 86]
+- [38, 1]
 raw: data/raw/578.npy
 tileset: 52
 events:

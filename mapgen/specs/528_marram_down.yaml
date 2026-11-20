@@ -12,6 +12,9 @@ tone: [8, 4, -8, 0]
 connections:
 - {dir: E, offset: 30, to: 527, to_offset: 18}
 - {dir: W, offset: 38, to: 140, to_offset: 44}
+walk_from:
+- [108, 32]
+- [1, 40]
 raw: data/raw/528.npy
 tileset: 51
 events:

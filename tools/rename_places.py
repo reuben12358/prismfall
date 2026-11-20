@@ -47,6 +47,8 @@ INCLUDE = ['design/*.md', 'design/*.yaml', 'design/maps.json', 'story/*.md', 'pb
            'mapgen/layouts/*.py', 'mapgen/layouts/*.yaml', 'tools/trainer_gen/*.py', 'plugins/**/*.rb',
            'mapgen/ruby/*.rb', 'README.md']
 EXCLUDE = {'design/PLACE_NAMES.md', 'design/SPINE.md', 'design/SPINE_FEEDBACK.md', 'design/ROUTES.yaml'}
+# studies of the reference games (Reborn, Rejuvenation, Desolation): their "Route 1" is THEIR Route 1
+EXCLUDE_RX = re.compile(r'^design/[^/]*(STUDY|RESEARCH)[^/]*\.md$')
 SKIP_DIRS = {'.git', 'dist', 'dist_web', '__pycache__', 'node_modules'}
 SKIP_I = re.compile(r'GlitchxCity|Rejuvenation Route|Reborn Route|rejuv_wll|\.ogg|\.mid\b|BGM/|`bgm:`', re.I)
 BGM_VAL = re.compile(r'''(bgm['"]?\s*[:=]\s*['"]?)(Route \d+)''', re.I)
@@ -213,6 +215,10 @@ def rewrite_line(line, rules, abbr, rel):
     return rewrite_text(line, rules, abbr, rel)
 
 
+LIT_ROUTE = re.compile(r"""(['"])(Route [123])\1""")      # the base project's stock BGM: Audio/BGM/Route 1-3.mid
+NAME_KEY = re.compile(r"""(name|display_name|title|label|sign)['"]?\s*[:=]\s*$""", re.I)
+
+
 def rewrite_text(line, rules, abbr, rel):
     saved = []
 
@@ -220,6 +226,13 @@ def rewrite_text(line, rules, abbr, rel):
         saved.append(m.group(2))
         return m.group(1) + '\x00%d\x00' % (len(saved) - 1)
     line = BGM_VAL.sub(mask, line)
+    if lang_of(rel):                      # code: a string that is exactly "Route 1/2/3" is a stock BGM file name
+        def mask_lit(m):                  # (e.g. head(542, "The Brinewife's Rest", 541, 'Route 2', ...)) unless named
+            if NAME_KEY.search(m.string[:m.start()]):
+                return m.group(0)
+            saved.append(m.group(2))
+            return m.group(1) + '\x00%d\x00' % (len(saved) - 1) + m.group(1)
+        line = LIT_ROUTE.sub(mask_lit, line)
     line = _rewrite(line, rules, abbr, rel)
     return re.sub('\x00(\\d+)\x00', lambda m: saved[int(m.group(1))], line)
 
@@ -659,7 +672,7 @@ def files():
     for p in INCLUDE:
         for f in sorted(glob.glob(os.path.join(ROOT, p), recursive=True)):
             rel = os.path.relpath(f, ROOT)
-            if rel not in EXCLUDE and not (set(rel.split(os.sep)) & SKIP_DIRS):
+            if rel not in EXCLUDE and not EXCLUDE_RX.match(rel) and not (set(rel.split(os.sep)) & SKIP_DIRS):
                 out.append((f, rel))
     return out
 
@@ -672,11 +685,11 @@ SELFTEST = [
     ('t.py', ["h = {'name': 'Route 1', 'bgm': 'Route 1', 'x': 'Route 1 and Route 1'}  # Route 1"],
      ["h = {'name': 'The Ferrymen\\'s Mile', 'bgm': 'Route 1', 'x': 'The Ferrymen\\'s Mile and the Ferrymen\\'s Mile'}"
       "  # The Ferrymen's Mile"]),
-    ('t.py', ['"""doc', "Route 1 in 'Route 1'", '"""', "y = 'Route 1'", "z = '''Route 1'''"],
-     ['"""doc', "The Ferrymen's Mile in 'The Ferrymen's Mile'", '"""', "y = 'The Ferrymen\\'s Mile'",
-      "z = '''The Ferrymen's Mile'''"]),
-    ('t.py', ["x = 'Route 1'", "p = r'on Route 1'", "q = r\"on Route 1\"", "f = f'{n} on Route 1'"],   # raw '': skipped
-     ["x = 'The Ferrymen\\'s Mile'", "p = r'on Route 1'", "q = r\"on the Ferrymen's Mile\"",
+    ('t.py', ['"""doc', "Route 1 in 'Route 1 sign'", '"""', "y = 'Route 1 sign'", "z = '''Route 1 sign'''"],
+     ['"""doc', "The Ferrymen's Mile in 'The Ferrymen's Mile sign'", '"""', "y = 'The Ferrymen\\'s Mile sign'",
+      "z = '''The Ferrymen's Mile sign'''"]),
+    ('t.py', ["x = 'to Route 1'", "p = r'on Route 1'", "q = r\"on Route 1\"", "f = f'{n} on Route 1'"],   # raw '': skipped
+     ["x = 'to the Ferrymen\\'s Mile'", "p = r'on Route 1'", "q = r\"on the Ferrymen's Mile\"",
       "f = f'{n} on the Ferrymen\\'s Mile'"]),
     ('t.py', ["E.append({'script': \"pbMessage('Go to Route 1.')\", 'text': \"Route 1's sign\"})",
               "S = 'pbMessage(\"on Route 1\")'", "T = 'pbMessage(\\'on Route 1\\')'"],
@@ -690,12 +703,19 @@ SELFTEST = [
      ["- {script: 'pfm_quest(:biscuit, \"Biscuit\", \"on the Ferrymen''s Mile.\")'}",
       "- {script: \"pbMessage('on the Ferrymen\\\\'s Mile')\"}", "- {script: 'pbMessage(''on the Ferrymen\\''s Mile'')'}",
       "- text: Go to the Ferrymen's Mile now  # The Ferrymen's Mile"]),
-    ('t.rb', ["t = \"on Route 15\"; u = 'Route 1' # Route 1", "x = <<~'EOS'", "  Route 1 sign", "EOS",
-              "y = 'two", "Route 1 lines'", "z = %q(Route 1) + :'Route 1'.to_s"],
-     ["t = \"on the Ashmarch\"; u = 'The Ferrymen\\'s Mile' # The Ferrymen's Mile", "x = <<~'EOS'",
+    ('t.rb', ["t = \"on Route 15\"; u = 'Route 1 sign' # Route 1", "x = <<~'EOS'", "  Route 1 sign", "EOS",
+              "y = 'two", "Route 1 lines'", "z = %q(Route 1) + :'Route 1 sign'.to_s", "w = {name: 'Route 1'}"],
+     ["t = \"on the Ashmarch\"; u = 'The Ferrymen\\'s Mile sign' # The Ferrymen's Mile", "x = <<~'EOS'",
       "  The Ferrymen's Mile sign", "EOS", "y = 'two", "The Ferrymen\\'s Mile lines'",
-      "z = %q(The Ferrymen's Mile) + :'The Ferrymen\\'s Mile'.to_s"]),
+      "z = %q(The Ferrymen's Mile) + :'The Ferrymen\\'s Mile sign'.to_s", "w = {name: 'The Ferrymen\\'s Mile'}"]),
     ('t.md', ["| `Route 2_new` (39), `Route 3` (8) |", "GlitchxCity - Route 10 remix", "bgm: Route 2"], None),
+    # a positional BGM argument is an audio file name; a name value is a place
+    ('t.py', ["specs.append(head(542, \"The Brinewife's Rest\", 541, 'Route 2', 'R4_REST'))",
+              "m.write(560, head(560, 'Route 5', biome='route', display_name='Route 5', bgm='Route 2'))"],
+     ["specs.append(head(542, \"The Brinewife's Rest\", 541, 'Route 2', 'R4_REST'))",
+      "m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2'))"]),
+    # rule labels R1-R9 (Revision 16) are not route shorthand
+    ('design/POKEMON_AVAILABILITY.md', ["rules R1–R9 and (R8): shape"], None),
 ]
 
 
@@ -735,7 +755,9 @@ def main():
     global NAMES
     NAMES = [(n[4:] if n.startswith('The ') else n, n.split()[-1]) for _, o, n in rows]
     rules = build_rules(rows, prose)
-    abbr = abbrev_rules(rows)
+    # The "R5" shorthand rule is opt-in (--abbrev): every old shorthand was converted by the 2026-11-19 runs, and
+    # Revision 16's distribution rules are numbered R1-R9 (design/DISTRIBUTION_STUDY.md), which the rule would mangle.
+    abbr = abbrev_rules(rows) if '--abbrev' in sys.argv else {}
     apply = '--apply' in sys.argv
     if '--selftest' in sys.argv:
         sys.exit(0 if selftest(rules, abbr) else 1)

@@ -14,7 +14,7 @@ metadata:
   BattleBack: field
   Weather: [Rain, 10]
 connections:
-- {dir: N, offset: 43, to: 541, to_offset: 12}
+- {dir: N, offset: 43, to: 541, to_offset: 30}
 - {dir: W, offset: 31, to: 560, to_offset: 12}
 - {dir: E, offset: 44, to: 528, to_offset: 38}
 biome: harbour

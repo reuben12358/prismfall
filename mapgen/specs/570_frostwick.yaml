@@ -15,8 +15,8 @@ metadata:
 tone: [-8, -4, 12, 12]
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 100, sx: 1, sy: 0}
 connections:
-- {dir: N, offset: 20, to: 578, to_offset: 40}
-- {dir: E, offset: 21, to: 577, to_offset: 60}
+- {dir: N, offset: 27, to: 578, to_offset: 40}
+- {dir: E, offset: 23, to: 577, to_offset: 37}
 - {dir: S, offset: 4, to: 560, to_offset: 2}
 raw: data/raw/570.npy
 tileset: 52

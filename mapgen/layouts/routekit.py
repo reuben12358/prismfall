@@ -207,7 +207,11 @@ class Route:
         m = self.m
         for x, y in K.incoming(self.mid):
             if m.inb(x, y): m.taken[y, x] = True
-        self.events = RW.seat(m, self.events, on=on + 'D')
+        fixed = [e for e in self.events if e.get('type') in ('warp', 'cut_tree') or e.get('fixed')]
+        for e in fixed: m.taken[e['at'][1], e['at'][0]] = True
+        rest = [e for e in self.events if e not in fixed]
+        self.events = fixed + RW.seat(m, rest, on=on + 'D')
+        for e in self.events: e.pop('fixed', None)
         for e in self.events:
             if e.get('type') == 'sign': e['post'] = False; m.tile(C('sh', 4847 - 4448), e['at'][0], e['at'][1], 1)
 
@@ -244,8 +248,7 @@ class Route:
         for x, y in self.deck:
             if m.inb(x, y): m.L[1, y, x] = C('sh', 497)
         m.scatter(self._scatter if hasattr(self, '_scatter') else 9, seed=self.mid)
-        keep = [tuple(e['at']) for e in self.events if e.get('type') in ('warp',)]
-        self.sealed = m.seal_edges(self.exits, keep=keep)
+        self._keep = [tuple(e['at']) for e in self.events if e.get('type') in ('warp',)]
         if glint:
             G = [K.P1('hb_glint%d' % i) for i in range(4)]
             for y, x in np.argwhere(np.isin(m.cls, ['w', 'W'])):
@@ -257,6 +260,12 @@ class Route:
         connections = head.pop('connections', [])
         head['connections'] = connections
         head['_file'] = fname
+        self.sealed = m.seal_against(connections, keep=getattr(self, '_keep', []))
+        seeds = []
+        for side, off, w in self.exits:                                # reachability seeds at every exit (the first warp may sit apart)
+            i = off + w // 2
+            seeds.append([i, 1] if side == 'N' else [i, self.H - 2] if side == 'S' else [1, i] if side == 'W' else [self.W - 2, i])
+        if seeds: head['walk_from'] = head.get('walk_from', []) + seeds
         m.write(self.mid, head, comment)
         if preview: m.preview(preview, 0.5)
 

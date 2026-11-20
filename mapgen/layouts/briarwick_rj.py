@@ -210,7 +210,7 @@ def build(preview=None):
     m.paint()
     garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3)))
     m.scatter(9, seed=21, on='.T')
-    m.seal_edges([('N', 52, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'] + [(x, H - 1) for x in range(33, 39)])
+    m.seal_against([{'dir': 'N', 'offset': 52, 'to': 566, 'to_offset': 38}], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
     if preview: m.preview(preview, 0.5)
     head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},

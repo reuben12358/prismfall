@@ -10,6 +10,10 @@ biome: route
 field: BEACH
 tone: [0, 0, 4, 18]
 fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 200, sx: 1, sy: 0}
+walk_from:
+- [59, 100]
+- [33, 108]
+- [36, 1]
 connections:
 - {dir: S, offset: 30, to: 140, to_offset: 43}
 - {dir: N, offset: 34, to: 552, to_offset: 38}
@@ -18,7 +22,7 @@ tileset: 51
 events:
 - type: warp
   name: Mine back door
-  at: [57, 51]
+  at: [57, 49]
   link: R4_MINE
   arrive: [57, 50, down]
   se: Door exit
@@ -100,7 +104,7 @@ events:
     commands: [(A sand castle. It is watching you.)]
 - type: event
   name: Squawkabilly watcher
-  at: [51, 24]
+  at: [42, 22]
   pages:
   - graphic: {sprite: NPC 09, dir: down}
     trigger: action
@@ -193,7 +197,7 @@ events:
   at: [10, 30]
   item: POTION
 - type: item
-  at: [60, 34]
+  at: [40, 18]
   item: GREATBALL
 - type: item
   at: [14, 100]

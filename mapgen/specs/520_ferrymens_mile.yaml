@@ -14,9 +14,16 @@ connections:
 - {dir: S, offset: 11, to: 100, to_offset: 28}
 - {dir: N, offset: 30, to: 521, to_offset: 58}
 - {dir: W, offset: 72, to: 527, to_offset: 22}
+walk_from:
+- [17, 108]
+- [32, 1]
+- [1, 74]
 raw: data/raw/520.npy
 tileset: 51
 events:
+- type: cut_tree
+  at: [13, 89]
+  name: CutTree
 - type: event
   name: Juno tutorial 1
   at: [20, 89]
@@ -364,6 +371,3 @@ events:
   pages:
   - trigger: action
     commands: ['A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out.']
-- type: cut_tree
-  at: [13, 89]
-  name: CutTree

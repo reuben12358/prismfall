@@ -186,6 +186,13 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   lower lid, and a rounded 3x4 green iris with a 1x2 pupil (dark iris corners read as an "x"; dropped). Mouth A, a small rounded
   "O" in the surprised mouth's 1-px line, is installed as `_shocked` and `_panic`; B (soft trapezoid) read sulky. Only eye and
   mouth boxes change (checked). Previous files in `passes/replaced_before_shocked_fix/`.
+  **Rejected strongly** ("they all look god awful"): redrawn eyes and mouths are not wanted; reverted.
+- **Shocked placement fix (installed, `16h_juno_shocked_pos.png`, `juno_shocked_pos.py`, file `JUNO_shocked_p3z.png`):** 16f's
+  own eyes and mouth, only moved. Left eye on screen = the exact mirror of the right one about x=25 (rows y25-33; face outline
+  and hair at x13/x14 kept); the mouth unchanged, moved 1 left and 1 down (x23-30, y35-41: top at y35 like happy/surprised,
+  centred like surprised), the pixels it left restored from the base face (incl. the nose pixel). 72 pixels change, all in
+  the two boxes. Taste lesson: when he says "fix the placement", move his accepted pixels; don't redraw. Previous (the
+  surprised stand-in) in `passes/replaced_before_shocked_pos/`.
 
 ## 13. Early-cast battle fronts (2026-11-19)
 

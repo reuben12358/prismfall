@@ -938,7 +938,7 @@ ROAD_PATHS = {
 # the Crown"). Four maps: Wallshadow Row (594, SW), Candle Down (602, SE), the Highwold (603, NE), Kingsmead (756, NW).
 CROWN_ROAD = ['sq:11,9', 'sq:12,7', 'sq:14,6', 'sq:16,7', 'sq:17,9', 'sq:16,11', 'sq:14,12', 'sq:12,11', 'sq:11,9']
 # legs a road walks that another road introduced (shown as "via" in the docs)
-VIA = {4: [], 5: [], 6: [], 7: [], 8: [602], 9: [594], 11: [], 12: [602, 603], 19: []}
+VIA = {8: [602], 12: [602, 603]}
 
 # ----------------------------------------------------------------------------- kingdoms and borderlands (Geography v2)
 KINGDOM_WHERE = {
