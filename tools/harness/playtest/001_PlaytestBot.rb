@@ -408,6 +408,10 @@ module PlayBot
         after_blackout if @idle >= 30
         return
       end
+      if @reinstall
+        debug_install if @idle >= 12 || @debug_phase
+        return
+      end
       step = plan[@step]
       return if !step
       kind, map = step
@@ -808,7 +812,9 @@ module PlayBot
       return if !st
       @step, @nframe, @blackouts = st
       @step_start = 0
-      log("RESUMED from the autosave at step #{@step} #{plan[@step].inspect} (host restart; not one unbroken run)")
+      @reinstall = (ENV["PLAYBOT_REINSTALL"] == "1")
+      log("RESUMED from the autosave at step #{@step} #{plan[@step].inspect}" +
+          (@reinstall ? " after a kit update: Debug > Files > Install Prismfall maps first" : " (host restart; not one unbroken run)"))
     end
 
     def blackout
@@ -874,7 +880,19 @@ module PlayBot
       return seen.length
     end
 
+    # Debug > Files options > Install Prismfall maps. As a plan step it advances the plan; on a resume after a kit
+    # update (PLAYBOT_REINSTALL=1) it runs once, then quits (restart); the next plain resume carries on.
     def debug_install
+      done = proc do
+        @debug_phase = :closed
+        if @reinstall   # the installer says "Restart the game now": quit, and a plain resume carries on
+          @reinstall = false
+          log("reinstall done; quitting so the next resume restarts at step #{@step} #{plan[@step].inspect}")
+          finish
+        else
+          next_step
+        end
+      end
       case @debug_phase
       when nil
         @debug_phase = :opening
@@ -884,17 +902,15 @@ module PlayBot
       when :opening
         if @frame - @debug_t > 600
           log("debug: the menu never opened")
-          @debug_phase = :closed
-          next_step
+          done.call
         end
       when :leaving
         if @frame - @cmd_seen > 40
           log("debug: menu closed")
-          @debug_phase = :closed
-          next_step
+          done.call
         end
       else
-        next_step
+        done.call
       end
     end
 

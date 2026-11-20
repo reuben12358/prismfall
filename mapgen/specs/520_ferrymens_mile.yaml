@@ -45,7 +45,7 @@ events:
   pages: *id001
 - type: event
   name: Stile send-off 1
-  at: [16, 97]
+  at: [15, 99]
   pages: &id002
   - commands: []
   - cond:
@@ -81,11 +81,11 @@ events:
   pages: *id002
 - type: event
   name: Stile send-off 3
-  at: [17, 97]
+  at: [18, 98]
   pages: *id002
 - type: event
   name: Accord barrier 1
-  at: [7, 72]
+  at: [3, 71]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -95,7 +95,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 2
-  at: [7, 71]
+  at: [2, 73]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -105,7 +105,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 3
-  at: [7, 70]
+  at: [2, 74]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -115,7 +115,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 4
-  at: [8, 75]
+  at: [2, 75]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -139,7 +139,7 @@ events:
     commands: []
 - type: event
   name: Accord guard
-  at: [7, 69]
+  at: [5, 71]
   pages:
   - graphic: {sprite: NPC 07, dir: down}
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
@@ -150,7 +150,7 @@ events:
         days west. Mind the cliff path in wind.']
 - type: event
   name: Accord guard (aside)
-  at: [9, 77]
+  at: [6, 77]
   pages:
   - graphic: {sprite: NPC 07, dir: up}
     commands: ['Second Guard: Nobody past. Orders came down this morning.']
@@ -213,12 +213,12 @@ events:
   move: random
   text: 'Farmhand: Tall grass is where the wild ones are. Juno''ll tell you their Latin names. Nobody asked her to learn those.'
 - type: item
-  at: [12, 99]
+  at: [10, 99]
   item: POTION
   hidden: true
   name: Under the stile
 - type: sign
-  at: [12, 98]
+  at: [13, 99]
   post: false
   name: Stile
   text: A stile over the hedge bank. Somebody has carved a tally of Wingull into the top rail.
@@ -228,7 +228,7 @@ events:
   name: Scarecrow
   text: It's wearing a Meridian linesman's cap. Somebody has a sense of humor.
 - type: sign
-  at: [11, 62]
+  at: [12, 62]
   post: false
   name: Lookout board
   text: 'GULLWATCH LOOKOUT
@@ -269,7 +269,7 @@ events:
         chalked: "STRAIT CLOSED." Under that, smaller: "for now"']
 - type: event
   name: Road Stone I
-  at: [19, 107]
+  at: [19, 106]
   pages:
   - trigger: action
     commands: [ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.]
@@ -315,7 +315,7 @@ events:
   - trigger: action
     commands: ['THE MINDING HEDGES. "Mind the hedges. The hedges mind you." A maze of three turns, planted by a ferryman who missed the sea.']
 - type: item
-  at: [11, 60]
+  at: [12, 60]
   item: POTION
   hidden: true
   name: HiddenItem (hedge maze)
@@ -351,19 +351,19 @@ events:
   at: [8, 50]
   item: POTION
 - type: item
-  at: [4, 97]
+  at: [8, 98]
   item: BIGPEARL
   hidden: true
   name: HiddenItem (Ferryman's Rest)
 - type: item
-  at: [5, 95]
+  at: [10, 97]
   item: REVIVE
 - type: event
   name: The Ferryman's Rest
-  at: [3, 95]
+  at: [9, 95]
   pages:
   - trigger: action
     commands: ['A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out.']
 - type: cut_tree
-  at: [9, 88]
+  at: [13, 89]
   name: CutTree

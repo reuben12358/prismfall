@@ -15,6 +15,7 @@ import numpy as np
 import rkit as K
 from rkit import C, STAMPS
 from terrain import vnoise
+vnoise = vnoise
 import rimewood as RW
 
 trainer, npc, sign, item = RW.trainer, RW.npc, RW.sign, RW.item
@@ -186,8 +187,16 @@ class Route:
     def add(self, *evs):
         self.events += [e for e in evs if e]
 
-    def finish_plan(self):
+    def finish_plan(self, border=3):
         m = self.m
+        if border:                                                    # a forest rim on every land edge (exits stay open)
+            def opening(side, i):
+                return any(s == side and o - 1 <= i < o + w + 1 for s, o, w in self.exits)
+            for y in range(self.H):
+                for x in range(self.W):
+                    for side, t, i in (('N', y, x), ('S', self.H - 1 - y, x), ('W', x, y), ('E', self.W - 1 - x, y)):
+                        if t < border and not opening(side, i) and m.cls[y, x] in '.t' and m.ht[y, x] == m.ht[min(self.H - 1, max(0, y)), x]:
+                            m.cls[y, x] = 'T'
         m.plan_cliffs()
         for sx, sy, sw, sn in m.stairs_at:
             m.cls[sy:sy + sn, sx:sx + sw] = 'd'

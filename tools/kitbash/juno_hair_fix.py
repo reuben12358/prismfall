@@ -51,14 +51,14 @@ def classify(im):
     return hair, outer
 
 
-def smooth_silhouette(im, hair, outer):
+def smooth_silhouette(im, hair, outer, iters=2):
     """fill the stair-step notches and shave the spurs of the hair edge against empty space (never touches
     flowers, veil or face). Two passes: a notch pixel with 3+ filled 4-neighbours is filled, a hair pixel with
     only one filled 4-neighbour is cut."""
     p = im.load()
     filled = set((x, y) for y in range(48) for x in range(48) if p[x, y][3])
     region = set(hair | outer)
-    for _ in range(2):
+    for _ in range(iters):
         add, rem = set(), set()
         for y in range(48):
             for x in range(48):
@@ -143,9 +143,9 @@ def cleanup(im, region):
     return out
 
 
-def fix(im):
+def fix(im, iters=2):
     hair, outer = classify(im)
-    region = smooth_silhouette(im, hair, outer)
+    region = smooth_silhouette(im, hair, outer, iters)
     out = im.copy(); op = out.load()
     for (x, y) in outer | hair:
         if (x, y) not in region:
@@ -163,7 +163,7 @@ def main():
     print('ok')
 
 
-if __name__ == '__main__' and sys.argv[1:2] != ['middle']:
+if __name__ == '__main__' and sys.argv[1:2] not in (['middle'], ['quarter']):
     main()
 
 
@@ -171,7 +171,7 @@ if __name__ == '__main__' and sys.argv[1:2] != ['middle']:
 DARK = H('4e1a14')          # inner lock contour: two shades under the hair's darkest, never black
 
 
-def contours(orig, region):
+def contours(orig, region, min_run=4, trim_from=4):
     """pass 3's internal black strand lines, kept only where they are real lock divisions (runs of 4+ px), tapered by
     trimming each run's free ends."""
     hair, outer = classify(orig)
@@ -191,9 +191,12 @@ def contours(orig, region):
         comps.append(comp)
     keep = set()
     for comp in comps:
-        if len(comp) < 4:
+        if len(comp) < min_run:
             continue
         cs = set(comp)
+        if len(comp) < trim_from:
+            keep |= cs
+            continue
         ends = [c for c in comp if sum(1 for dx in (-1, 0, 1) for dy in (-1, 0, 1)
                                        if (dx or dy) and (c[0] + dx, c[1] + dy) in cs) <= 1]
         keep |= cs - set(ends)
@@ -228,3 +231,44 @@ def main_middle():
 
 if __name__ == '__main__' and sys.argv[1:2] == ['middle']:
     main_middle()
+
+
+# ---------------------------------------------------------------- quarter step (halfway from the middle ground to pass 3)
+V3 = {H('5a2018'): 0, H('963a24'): 1, H('c8582e'): 2, BLACK: 1}
+
+
+def quarter(e):
+    global BAND_W, LOCK_AMP, BAND_R, BAND_SOLID
+    BAND_W, LOCK_AMP, BAND_R, BAND_SOLID = 0.75, 0.22, 21.5, True
+    orig = Image.open(P + '/p3_A_%s_48.png' % e).convert('RGBA')
+    hair, outer = classify(orig)
+    region = smooth_silhouette(orig, hair, outer, 1)          # only the worst stair-steps
+    out = fix(orig, 1)
+    q = out.load(); po = orig.load()
+    idx = {c: i for i, c in enumerate(SH)}
+    for (x, y) in region:
+        c = q[x, y]
+        if c not in idx:
+            continue                                          # highlight arc and outer outline stay
+        v3 = V3.get(po[x, y], 1 if po[x, y][3] else 2)
+        k = int(round(0.68 * v3 + 0.32 * idx[c] + 0.15))       # pass 3's two-tone blocks, a hint of the lock gradient
+        q[x, y] = SH[max(0, min(3, k))]
+    for (x, y) in region:
+        if po[x, y] == H('5a2018') and q[x, y] in set(SH):
+            q[x, y] = SH[0]                                   # the wreath band
+    for (x, y) in contours(orig, region, min_run=2, trim_from=5):
+        if q[x, y] in set(SH) | {HI}:
+            q[x, y] = DARK
+    return out
+
+
+def main_quarter():
+    for e in EXPR:
+        m = quarter(e)
+        m.save(P + '/p3q_%s_48.png' % e)
+        kb.up(m, 2).save(J + '/JUNO_%s_p3q.png' % e)
+    print('quarter ok')
+
+
+if __name__ == '__main__' and sys.argv[1:2] == ['quarter']:
+    main_quarter()

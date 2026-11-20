@@ -321,15 +321,16 @@ def build_520():
     r = Route(520, W, H, 'coast', kit={1: 'ak', 2: 'sh3', 3: 'sh3', 'default': 'sh3'}, base='.')
     m = r.m
     # the sea on the south-west, under the cliff-walk; woods on the east and north
-    r.sea('W', 9, wobble=3.0, beach=3, deep=4, cliff=1, scale=10.0)
-    for y in range(0, 62): m.cls[y, :] = np.where(np.isin(m.cls[y, :], ['w', 'W', 's']), '.', m.cls[y, :]); m.ht[y, :] = np.where(m.ht[y, :] == 1, 0, m.ht[y, :])
-    m.ht[62:, :] = np.where(np.isin(m.cls[62:, :], ['w', 'W', 's']), 0, 1)
-    m.ht[62:66, :] = np.where(np.isin(m.cls[62:66, :], ['w', 'W', 's']), 0, m.ht[62:66, :])
+    m.ht[:, :] = 1                                                                   # the whole down is cliff-top (h1)
+    for y in range(80, H):                                                           # the sea under the cliff-walk, south-west
+        d = 7 + int(3 * (RK.vnoise(0, y, 520, 9.0) - 0.5) * 2) + max(0, (y - 96) // 3)
+        for x in range(0, d + 3):
+            m.cls[y, x] = ('W' if x < d - 4 else 'w') if x < d else 's'; m.ht[y, x] = 0
     r.forest_band('E', 9, wobble=4.0); r.forest_band('N', 4, wobble=2.0)
     for cx, cy, rx, ry in ((52, 30, 6, 5), (8, 14, 6, 5), (46, 92, 7, 6), (54, 70, 5, 6), (10, 46, 5, 4)):
         r.copse(cx, cy, rx, ry)
     # Hale's Bramble: berry terraces climbing east of the lane (h1-h3), each with a stair
-    for (x0, x1, y0, y1, h) in ((36, 58, 36, 58, 1), (40, 58, 36, 51, 2), (44, 58, 36, 45, 3)):
+    for (x0, x1, y0, y1, h) in ((36, 58, 36, 58, 2), (40, 58, 36, 51, 3), (44, 58, 36, 45, 4)):
         m.ht[y0:y1 + 1, x0:x1 + 1] = np.maximum(m.ht[y0:y1 + 1, x0:x1 + 1], h)
     road = [(15, 109), (15, 101), (19, 93), (24, 85), (22, 77), (22, 72), (27, 62), (31, 52), (28, 41), (33, 29), (31, 16), (31, 0)]
     r.road(road, w=3.0, open_=None)
@@ -343,12 +344,11 @@ def build_520():
     r.lane([(26, 60), (16, 62)], w=2.0, open_=None)
     r.lane([(32, 24), (44, 22), (48, 18)], w=2.0, open_=None)
     # the Smuggler's Stair: a pocket on the beach below the toll booth's cliff, behind a bramble (Cut)
-    r.pocket(5, 96, 3, 3, gate=None)
-    m.ht[93:100, 1:9] = 0; m.cls[93:100, 2:8] = 's'
-    r.flatten(8, 10, 92, 1); r.crossing(8, 92, w=3, rows=3)
+    m.ht[93:101, 0:12] = 0; m.cls[93:101, 0:12] = np.where(np.isin(m.cls[93:101, 0:12], ['w', 'W']), m.cls[93:101, 0:12], 's')
+    r.flatten(12, 14, 92, 1); r.crossing(12, 92, w=3, rows=3)
     r.grass(thr=0.6, scale=6.0)
     r.finish_plan()
-    m.cls[86:89, 9:11] = '.'
+    m.cls[86:92, 12:15] = np.where(m.cls[86:92, 12:15] == 'T', '.', m.cls[86:92, 12:15])
     ev = old_events('520_reskin.yaml', 520)
     J = lambda e, t: P('JUNO', e, t)
     tut = [{'cond': {'switch': 'CH1_K1_DONE'}, 'trigger': 'touch', 'commands': [{'if': "$game_self_switches[[520, 0, 'TUT']]", 'then': [], 'else': [
@@ -403,9 +403,9 @@ def build_520():
                "Shepherd: If you see a Wooloo, walk it uphill. It'll be so surprised it'll follow you."]),
           talk('Wooloo', (40, 14), 'Followers/WOOLOO', ['Baaa. (It is rolling, very slowly, in no direction.)'], move='random'),
           talk('Wooloo ', (50, 26), 'Followers/WOOLOO', ['Baaa.'], move='random'),
-          item((50, 12), 'POKEBALL'), item((8, 50), 'POTION'), hidden((4, 97), 'BIGPEARL', 'HiddenItem (Ferryman\'s Rest)'),
-          item((6, 95), 'REVIVE'), obj("The Ferryman's Rest", (3, 95), ["A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out."]),
-          {'type': 'cut_tree', 'at': [9, 88], 'name': 'CutTree'})
+          item((50, 12), 'POKEBALL'), item((8, 50), 'POTION'), hidden((8, 98), 'BIGPEARL', 'HiddenItem (Ferryman\'s Rest)'),
+          item((10, 97), 'REVIVE'), obj("The Ferryman's Rest", (9, 95), ["A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out."]),
+          {'type': 'cut_tree', 'at': [13, 89], 'name': 'CutTree'})
     r.seat_events(on='.dts')
     for x in range(36, 59, 3):
         for y in (40, 47, 54):
@@ -418,6 +418,7 @@ def build_520():
     r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pink'), n_trees=W * H // 140, copses=8, scatter=12)
     r.paint(glint=0.25)
     flowers(r, 30, 84, 4, 2, p=0.4)
+    for y in range(82, 106, 5): water_stamp(r, 'hb_post1', 4, y) if False else None
     h = head(520, "The Ferrymen's Mile", field='MEADOW', bgm='Route 1',
              connections=[{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
                           {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],

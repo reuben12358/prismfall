@@ -164,3 +164,7 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   but missed pass 3's shape. Pass 3's internal strand lines come back only as lock divisions (runs of 4+ px, free ends trimmed
   = tapered) in a dark brown two shades under the hair (never black), pass 3's darkest tone returns as the band the wreath sits
   on, and the highlight is one crisp arc over the crown above the wreath. Previous set in `passes/replaced_p3h_before_middle/`.
+- **Step toward pass 3 (installed, `16c_juno_hair.png`, `juno_hair_fix.py quarter`, files `*_p3q`):** all of pass 3's inner lines
+  of 2+ px back as dark-brown contours (runs of 5+ tapered), one notch/spur pass only, shades = round(0.68 x pass-3 two-tone +
+  0.32 x lock gradient); wreath band and crisp crown arc kept. Previous set in `passes/replaced_p3m_before_quarter/`.
+  Taste note: the user steers toward pass 3's shape language; change accepted art in small, reversible steps.
