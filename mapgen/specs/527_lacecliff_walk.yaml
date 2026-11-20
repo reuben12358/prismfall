@@ -1,0 +1,167 @@
+# Lacecliff Walk (527). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 527
+name: Lacecliff Walk
+parent: 0
+bgm: Route 3
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: BEACH
+tone: [6, 4, -6, 0]
+connections:
+- {dir: W, offset: 18, to: 528, to_offset: 30}
+- {dir: E, offset: 22, to: 520, to_offset: 72}
+raw: data/raw/527.npy
+tileset: 51
+events:
+- type: sign
+  name: Road sign
+  at: [136, 21]
+  text: 'LACECLIFF WALK - The Strand Road. -> The Ferrymen''s Mile - <- Marram Down & Saltmere.
+
+    The arches are older than the Accord. Please do not improve them.'
+  post: false
+- type: event
+  name: The Lace Arches
+  at: [103, 27]
+  pages:
+  - trigger: touch
+    commands:
+    - (Chalk cliffs worn by the sea into arches as fine as lace. The path goes through three of them.)
+    - '\pf[JUNO,happy]Juno: The Briarwick weavers copy these cliffs for their lace. Not the other way round. The sea did it first.'
+    - '\pf[JUNO,happy]Juno: The sea does most things first. It''s very annoying of it.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    commands: []
+- type: trainer
+  at: [104, 48]
+  sight: 4
+  dir: left
+  sprite: trainer_FISHERMAN
+  trainer: [FISHERMAN, Bryn]
+  intro: The strait's closed and the fish haven't been told.
+  after: The fish win again.
+- type: trainer
+  at: [40, 47]
+  sight: 4
+  dir: right
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Moll]
+  intro: I found a bottle with a letter in it! It's from my sister. She lives forty yards that way.
+  after: She writes every week. She's never once walked over.
+- type: trainer
+  at: [86, 16]
+  sight: 4
+  dir: down
+  sprite: trainer_HIKER
+  trainer: [HIKER, Dunstan]
+  intro: Cliff path in a gale's a fine way to die. Cliff path in sun's a fine way to live.
+  after: Today's a sun day. Lucky you.
+- type: event
+  name: Painter at an easel
+  at: [58, 22]
+  pages:
+  - graphic: {sprite: NPC 18, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Painter: Hold still. No -- you''re in the light. No -- you ARE the light.', 'Painter: Hm. You don''t really show up on the canvas, do you?
+        Odd.']
+- type: event
+  name: Hermit at the Wrecker's Lamp
+  at: [118, 8]
+  pages:
+  - graphic: {sprite: NPC 26, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Hermit: It''s for the gulls. The lamp. Not for ships.', 'Hermit: I don''t know anything about ships. Who said ships?']
+- type: event
+  name: Wrecker's Lamp
+  at: [120, 6]
+  pages:
+  - trigger: action
+    commands: ['A lamp on a tall pole, trimmed and full. It faces the sea, where the rocks are.']
+- type: event
+  name: Birder
+  at: [24, 10]
+  pages:
+  - graphic: {sprite: NPC 09, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Birder: Wingull nest on that stack. Two hundred of them. I''ve named eleven. The rest won''t hold still.']
+- type: event
+  name: Smugglers' signal pole
+  at: [70, 8]
+  pages:
+  - trigger: action
+    commands: [A tall pole with a lantern hook. From here you can see the Ferrow lighthouse., 'Its beam sweeps past, then stops on you for a second longer
+        than it should, then moves on.']
+- type: event
+  name: Road Stone I-b
+  at: [128, 21]
+  pages:
+  - trigger: action
+    commands: ['ROAD STONE I-b. THE STRAND ROAD. "Ferrow 2, Saltmere 6." Someone has chalked a seventh mile on, for the arches.']
+- type: event
+  name: Lacemakers' Bench
+  at: [62, 23]
+  pages:
+  - trigger: action
+    commands:
+    - '\pf[JUNO,happy]Juno: Sit! You have to sit! It''s the Lacemakers'' Bench. Everyone who walks the Strand sits here or the cliffs fall in.'
+    - choices: ['Is that true?', (Sit.)]
+      cancel: 1
+      branches:
+      - ['\pf[JUNO,deadpan]Juno: No. But they haven''t fallen in, have they.']
+      - - (You sit. Juno sits. A Wingull lands on the end of the bench. Nobody says anything for a while. The sea does most of the talking.)
+        - '\pf[JUNO,neutral]Juno: ...This is nice. I don''t get to sit. I''m always going somewhere with a basket.'
+        - '\pf[JUNO,happy]Juno: Right! That''s enough nice! Saltmere!'
+        - {heal: true}
+- type: item
+  at: [50, 23]
+  item: PEARL
+  hidden: true
+  name: HiddenItem (third arch)
+- type: item
+  at: [119, 11]
+  item: POTION
+- type: item
+  at: [20, 9]
+  item: POKEBALL
+- type: item
+  at: [95, 48]
+  item: SUPERPOTION
+- type: event
+  name: Dobbs the shell-gatherer
+  at: [43, 42]
+  pages:
+  - trigger: action
+    commands:
+    - {script: 'pf_trial_talk(:DOBBS)'}
+    graphic: {sprite: NPC 27, dir: down}
+- type: event
+  name: Tide-rock
+  at: [64, 44]
+  pages:
+  - graphic: {sprite: Object rock, dir: down}
+    trigger: action
+    commands:
+    - if: PBDayNight.isNight?
+      then:
+      - The tide is out. The rock stands in a dry hollow now, and you can squeeze past it.
+      - selfswitch: [A, true]
+      else: ['The sea fills the gap behind this rock. At low tide, maybe.']
+  - cond: {self: A}
+    commands: []
+- type: event
+  name: Drowned sample-book
+  at: [74, 47]
+  pages:
+  - trigger: action
+    commands: ['A weaver''s sample-book, swollen with seawater. Every page is a lace pattern copied from these cliffs.', 'On the last page, in a different
+        hand: "Found the Thread. Going home by the forest road." It is dated the winter the road closed.']
+- type: item
+  at: [76, 47]
+  item: SHELLBELL
+  hidden: true
+  name: HiddenItem (the Lost Thread)

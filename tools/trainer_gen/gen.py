@@ -133,10 +133,10 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
       casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
       hard={"ab": "SKILLLINK", "item": "SILKSCARF", "moves": "FAKEOUT,DOUBLEHIT,ASTONISH,TICKLE"}),
-    # 2. The chorus: Round is a damaging sound move (x1.3 x1.3 STAB here), and Encore lasts two turns longer on this
-    #    stage (it locks a player who set up). Baby-Doll Eyes also lowers Sp. Atk here. Echoed Voice, which doubles
-    #    every turn it is repeated and climbs with the applause, is Hard's (on Standard it swept realistic teams in
-    #    the harness: 71 knockouts in 60 fights).
+    # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB here); Echoed Voice doubles each
+    #    turn it is repeated, so the echo and the applause climb together where the player can see it - switch, or KO
+    #    the singer. Encore lasts two turns longer on this stage (it locks a player who set up); Baby-Doll Eyes also
+    #    lowers Sp. Atk here.
     P("MINCCINO", 10, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
       casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
       hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),

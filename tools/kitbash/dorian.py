@@ -15,7 +15,7 @@ from PIL import Image
 OUT = kb.WORK + '/passes'
 NAME, SHEET = 'DORIAN', '18_dorian.png'
 TITLE = ('DORIAN PELL - Gym 1 Warden (Normal), 56, former matinee idol. Battle front kitbash (80-px art, file 160x160). '
-         'Concept: the curtain call that never ended. Plum velvet + silver, gold-lined cape, a silver-topped cane he doesn\'t need.')
+         'Concept: the curtain call that never ended. Plum velvet + silver, white silk scarf, a silver-topped cane he doesn\'t need.')
 
 
 def sd(n):
@@ -48,6 +48,51 @@ def cape():
                          H('313142'): H('2a0626'), H('737373'): H('cfcadf'), H('4d4d4d'): H('9690ae')})
     l = mat.erase(l, mat.region(l.size, rect=(58, 0, 79, 52)))     # Lance's hand and loose outline on the right
     return mat.clean_orphans(l)
+
+
+def opera_cape():
+    # the Juggler's cape, swept out under the flung arm: plum outside, silver satin inside
+    j = sd('juggler')
+    c = mat.keep(j, mat.region(j.size, [[(46, 38), (60, 38), (68, 46), (68, 72), (52, 72), (48, 56)]]))
+    src = sorted(set(mat.palette_of(c)), key=kb.lum)
+    cols = [x for x in src if x != BLACK]
+    m = mat.lumrank_map(cols, [H('2a0626'), H('4a1040'), H('6e2464'), H('9690ae'), H('cfcadf')])
+    return mat.clean_orphans(mat.recolour(c, m))
+
+
+SCARF_COLS = [H('f8f8f8'), H('c8c8c8'), H('808088'), H('9860c8'), BLACK]
+
+
+def scarf():
+    g = sd('gentleman')
+    c = mat.keep(g, mat.region(g.size, [[(26, 21), (38, 21), (37, 48), (28, 48)]]))
+    p = c.load()
+    for y in range(80):
+        for x in range(80):
+            if p[x, y][3] and p[x, y] not in SCARF_COLS:
+                p[x, y] = CLEAR
+    c = mat.recolour(c, {H('9860c8'): H('8c3a7e'), H('f8f8f8'): H('f8f6fc'), H('c8c8c8'): H('cfcadf'), H('808088'): H('9690ae')})
+    return mat.clean_orphans(c)
+
+
+def owner_head():
+    o = sd('owner')
+    hd = mat.keep(o, mat.region(o.size, [[(20, 0), (40, 0), (40, 21), (20, 21)]]))
+    return mat.recolour(hd, SILVER)
+
+
+def gentleman_b():
+    g = sd('gentleman')
+    g = mat.erase(g, mat.region(g.size, [[(18, 4), (46, 4), (46, 21), (18, 21)]]))
+    khaki = [H('605848'), H('887858'), H('a89870')]
+    g = mat.recolour(g, dict(zip(khaki, [VEL[1], VEL[2], VEL[3]])))
+    g = mat.recolour(g, {H('484870'): VEL[0], H('408050'): H('4a4a60'), H('204828'): H('1a1a24'), H('9860c8'): H('8c3a7e'),
+                         H('f8f8f8'): H('f8f6fc'), H('c8c8c8'): H('cfcadf'), H('808088'): H('9690ae')})
+    g = mat.patch(g, 50, 43, ['kwgk', 'kgGk'], X)                               # silver collar of the cane under his palm
+    t = Image.new('RGBA', (80, 80), CLEAR); t.paste(owner_head(), (4, 3)); g = mat.under(g, Image.new('RGBA', (1, 1), CLEAR), 0, 0)
+    g.alpha_composite(t)
+    g = head_edits(g, 4, 3)
+    return g
 
 
 def head_edits(im, ox, oy):
@@ -106,17 +151,29 @@ def clean_lines(im):
     return out
 
 
+CAPE = None
+
+
 def build(var='A'):
     if var == 'A':
         fig = Image.new('RGBA', (80, 80), CLEAR)
         fig.paste(owner_body(), (6, 0))
         fig = head_edits(fig, 6, 0)
-        out = mat.under(fig, cape(), -6, -2)
-        out = cane(out, 10, 16, 26, 68)
-        out = mat.patch(out, 15, 39, ['.kkkk', 'kssSk', 'ksSSk', 'kSSmk', '.kkk.'], X)     # fist round the shaft
+        out = fig if CAPE is None else (mat.under(fig, opera_cape(), 6, -4) if CAPE == 'opera' else mat.under(fig, cape(), -6, -2))
+        sc = Image.new('RGBA', (80, 80), CLEAR); sc.paste(scarf(), (5, -1)); out.alpha_composite(sc)
+        op = out.load()
+        for y in range(34, 48):
+            for x in range(12, 22):
+                if op[x, y] in VEL:
+                    op[x, y] = CLEAR                                                     # crumbs of the old hand
+        out = cane(out, 14, 24, 27, 60)
+        out = mat.patch(out, 18, 39, ['.kkkk', 'kssSk', 'ksSSk', 'kSSmk', '.kkk.'], X)     # fist round the shaft, at the cuff
+        out = mat.patch(out, 43, 26, ['.q.', 'qQq', '.g.'], {'q': H('d0304a'), 'Q': H('ff6a7a'), 'g': H('2e5a3a')})  # red rose
         out = clean_lines(out)
         return out
     if var == 'B':
+        return gentleman_b()
+    if var == 'C':
         return juggler()
     return build('A')
 
@@ -135,15 +192,18 @@ def juggler():
     return j
 
 
-VARIANTS = [('A', "A: curtain call. One arm flung to the house, the cane hoisted like a baton, laughing; a gold-lined "
-                  "plum cape fans out behind. Owner class body in velvet, Lance's cape, glasses off, moustache + pompadour."),
-            ('B', 'B: the house loves a show. Juggling three Poke Balls in a velvet tailcoat (Juggler class body, same head).')]
+VARIANTS = [('A', "A: curtain call. One arm flung out to the house, the silver-topped cane hoisted like a baton, head back "
+                  "laughing. Plum velvet suit, white silk opera scarf, red rose. Owner class body; glasses off, pencil moustache, pompadour."),
+            ('B', "B: the cane he doesn't need. Leaning on it like a man twice his age, grinning at the joke. Gentleman class body "
+                  "(scarf and cane kept), Owner's head with the same edits, plum velvet, silver cane collar.")]
 PICK = 'A'
 REFS = [('sd:gentleman', 'Gentleman (official BW)'), ('sd:grimsley', 'Grimsley (official BW)'), ('sd:alder', 'Alder (official BW)'),
         ('rejuv:139', 'Rejuvenation front (Angie)')]
-DONORS = [('sd:owner', 'owner: body, arm flung out, head (laugh kept)'), ('sd:lance-lgpe', 'lance-lgpe: cape only, repainted plum/gold'),
-          ('sd:juggler', 'juggler: body for B, balls')]
-NOTE = 'Hand pixels: eyes and brows where the glasses were, pencil moustache, pompadour wave, the cane (straight shaft + silver knob) and the fist round it.'
+DONORS = [('sd:owner', 'owner: body, flung arm, head (laugh kept) for A and B'),
+          ('sd:gentleman', 'gentleman: silk scarf (A), whole body + cane for B')]
+NOTE = ('Hand pixels: eyes and brows where the glasses were, pencil moustache, pompadour wave, the cane in A (straight shaft + silver knob) '
+        'and the fist round it, B\'s silver cane collar, the rose. Tried and dropped: Lance\'s cape (read as a flat slab), the Juggler\'s cape '
+        '(a bag under the arm) and a Juggler body (read as a vampire). Who does it look like? No named character: Owner and Gentleman are classes.')
 
 if __name__ == '__main__':
     vs = sys.argv[1:] or ['A']

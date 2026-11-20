@@ -68,16 +68,19 @@ def build_527():
     two stairs down to coves (shingle, rock pools, a beached rowboat); the Wrecker's Lamp; a Wingull stack; the gorse
     heath with its hidden field of sea-pinks; the Lacemakers' Bench; the smugglers' pole; the Lost Thread cove (secret)"""
     W, H = 140, 64
-    r = Route(527, W, H, 'coast', kit={1: 'ak', 'default': 'ak'})
+    r = Route(527, W, H, 'coast', kit={1: 'ak', 'default': 'ak'}, base='.')
     m = r.m
     r.sea('S', 13, wobble=3.0, beach=7, deep=5, cliff=1, scale=16.0)
+    r.forest_band('N', 6, wobble=4.0)
+    for cx, cy, rx, ry in ((8, 30, 6, 3), (30, 32, 5, 2.5), (58, 34, 4, 2), (84, 32, 6, 3), (128, 33, 7, 3), (112, 12, 5, 3), (44, 10, 7, 3), (92, 8, 6, 3)):
+        r.copse(cx, cy, rx, ry)
     # the coves: the beach bites into the cliff where the stairs come down
     for cx, cy, rx, ry in ((40, 44, 9, 5), (98, 45, 10, 4)):
         for y in range(H):
             for x in range(W):
                 if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1.0 and m.ht[y, x] == 1: m.ht[y, x] = 0; m.cls[y, x] = 's'
     road = [(139, 24), (126, 22), (112, 26), (100, 24), (88, 19), (74, 21), (62, 27), (50, 25), (38, 21), (24, 18), (12, 21), (0, 20)]
-    r.road(road, w=3.0, open_=(4, 11))
+    r.road(road, w=3.0, open_=None)
     r.exit('E', 22, 4); r.exit('W', 18, 4)
     # cliff-top heath north of the path, gorse banks and copses; the side path up to the Wrecker's Lamp
     r.clearing(118, 8, 10, 5); r.lane([(110, 24), (114, 15), (118, 9)], w=2.0)
@@ -142,8 +145,20 @@ def build_527():
               'On the last page, in a different hand: "Found the Thread. Going home by the forest road." It is dated the winter the road closed.']),
           hidden((76, 46), 'SHELLBELL', 'HiddenItem (the Lost Thread)'))
     r.seat_events(on='.dts')
-    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 260, copses=10, scatter=10, greenfill=None)
-    r.paint(glint=0.12)
+    lipkeep = np.zeros((H, W), bool)
+    for y in range(H - 1):
+        for x in range(W):
+            if m.ht[y, x] == 1 and m.ht[min(H - 1, y + 1), x] == 0: lipkeep[max(0, y - 2):y + 1, x] = True
+    was = m.taken.copy(); m.taken |= lipkeep
+    for _ in range(70):                                                    # gorse bushes on the heath
+        x, y = r.rng.randrange(W - 2), r.rng.randrange(8, 40)
+        if m.free(x, y, 2, 2, on='.'): m.stamp('ak_fern', x, y)
+    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 200, copses=6, scatter=12, greenfill=None)
+    m.taken = was | (m.taken & ~lipkeep)
+    for n, x, y in (('ak_rock2', 12, 45), ('hb_plank', 56, 47), ('hb_rope', 31, 44), ('hb_buoy', 88, 48), ('ak_rock2', 118, 46),
+                    ('hb_boxes', 70, 44), ('hb_plank', 126, 47), ('hb_barrel', 108, 44), ('ak_rock2', 136, 45), ('hb_post1', 50, 43)):
+        r.near(n, x, y, on='s', r=4)
+    r.paint(glint=0.25)
     flowers(r, 70, 9, 10, 4); flowers(r, 22, 9, 7, 3); flowers(r, 118, 9, 8, 4, p=0.3)
     for x, y in ((20, 55), (60, 56), (120, 54), (84, 58), (8, 52), (132, 57)): water_stamp(r, 'ak_rock2', x, y)
     water_stamp(r, 'ak_boulder', 26, 51)

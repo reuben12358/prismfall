@@ -30,7 +30,7 @@ def talk(name, at, sprite, lines, d='down', move='fixed', again=None):
 
 
 class Route:
-    def __init__(self, mid, W, H, theme='meadow', seed=None, kit=None):
+    def __init__(self, mid, W, H, theme='meadow', seed=None, kit=None, base='T'):
         self.mid, self.W, self.H, self.theme = mid, W, H, theme
         seed = mid if seed is None else seed
         self.rng = random.Random(seed); self.seed = seed
@@ -46,7 +46,7 @@ class Route:
                       'g': ('Gravel(G)', 'rejuvenation')}
         if 'sh3' not in K.KITS:
             K.KITS['sh3'] = dict(K.KITS['sh'], rows=[K.KITS['sh']['rows'][0], K.KITS['sh']['rows'][1], K.KITS['sh']['rows'][3]])
-        m.cls[:, :] = 'T'
+        m.cls[:, :] = base
         self.m = m
         self.road_mask = np.zeros((H, W), bool)
         self.events = []; self.exits = []; self.keep = []
@@ -80,6 +80,18 @@ class Route:
                 if 0 < D[y, x] <= hi and m.cls[y, x] == 'T':
                     lim = lo + (hi - lo) * vnoise(x, y, s, 7.0)
                     if D[y, x] <= lim: m.cls[y, x] = '.'
+
+    def forest_band(self, side, depth, wobble=3.0, scale=9.0, only='.t'):
+        """woods along one edge (the inland side of a coast road, the far side of a meadow)"""
+        m = self.m; s = self.seed + 505 + ord(side)
+        for y in range(self.H):
+            for x in range(self.W):
+                t = {'S': self.H - 1 - y, 'N': y, 'W': x, 'E': self.W - 1 - x}[side]
+                along = x if side in 'NS' else y
+                if t < depth + wobble * (vnoise(along, 0, s, scale) - 0.5) * 2 and m.cls[y, x] in only: m.cls[y, x] = 'T'
+
+    def copse(self, cx, cy, rx, ry, rough=0.6):
+        self.m.blob(cx, cy, rx, ry, 'T', seed=self.seed + int(cx * 3 + cy * 11), rough=rough, only='.t')
 
     def clearing(self, cx, cy, rx, ry, c='.', rough=0.5, only='T'):
         self.m.blob(cx, cy, rx, ry, c, seed=self.seed + int(cx * 13 + cy), rough=rough, only=only)
