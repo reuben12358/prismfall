@@ -408,6 +408,12 @@ War soldiers have no bag items and use `version` = encounter number, like the gr
 
 ### The Eevee Octave (showpiece)
 
+> **SPINE Rev 19 (`design/EEVEE_OCTAVE.md`):** the Ch20 gauntlet below is replaced. The eight singers now each have a quest
+> in their own kingdom, and the gauntlet runs them **in the order the player helped them**, as `OCTAVE_SINGER <name> v60`
+> (provisional in `pbs/trainers_trials.txt`: these v1–8 sets with the type's **Z-crystal** in place of the seed), each on
+> the field below (set by the quest, not `TRAINER_FIELDS`), then **Vesper v60: Eevee "Amen" with the Eevium Z** on the
+> Grand Stage (no longer the six-Eeveelution `ENTRY_FIELDS` team, v2). The Ch2 double's partner is **Lyra**, not Carol.
+
 Eight Glassfall orphans of the Prism Choir; in-world an Eevee evolves by the Imprint it is raised beside, so every
 singer's partner is at home on exactly one field. Types `OCTAVE_VESPER` / `OCTAVE_SINGER` (new in `trainer_types.txt`).
 

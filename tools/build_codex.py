@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the story bible (story/*.md + design/CAMEOS.md) into one readable HTML page: dist_web/codex.html."""
+"""Render the story bible (story/*.md + design/WORLD_MAP.md + design/CAMEOS.md) into one readable HTML page: dist_web/codex.html."""
 import html, pathlib, re, markdown
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -9,6 +9,7 @@ OUT = ROOT / "dist_web" / "codex.html"
 CHAPTERS = [
     ("story/00_OVERVIEW.md", "overview", "Overview"),
     ("story/01_WORLD_LORE.md", "world", "World & lore"),
+    ("design/WORLD_MAP.md", "geography", "Geography"),   # Geography v2 (SPINE Rev 18): the layout and the war in the sands
     ("story/02_FACTIONS.md", "factions", "Factions"),
     ("story/03_CAST.md", "cast", "Cast"),
     ("story/04_ACT_I.md", "act-1", "Act I"),

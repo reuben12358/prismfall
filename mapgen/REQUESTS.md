@@ -310,6 +310,12 @@ fixed**: `export_tilesets_rxdata.py` warns about nothing and 521 draws without t
     Row was unreachable. Fixed by the 21:56 rebuild of 521. A seam check would catch it at build time: for every open
     edge tile, the arrival tile on the neighbour must be passable and connected (the playtest's offline checker,
     `/home/claude/run_pt/scripts/seam.py`, reads Map*.rxdata + Tilesets_prismfall.rxdata; happy to move it into mapgen).
+15. **The Hale Bell roadblock leaks (map 520, 22:11 build): Chapter 1 can be skipped.** The four "Accord barrier" events
+    (3,71), (2,73), (2,74), (2,75) don't close the road to the west edge (the 520 W <-> 527 seam is rows 72-75 at x 0).
+    Row 72 is open from x 0 to 11 with no barrier on (2,72), and (1,70)-(1,71), (2,68)-(2,70) and (1,76)-(2,76) are open
+    too. In the engine the bot walked from the stile (18,109) to (0,75) and onto Lacecliff Walk (527) with S105 off, i.e.
+    before the Glassed Orchard. Suggested: put the barrier events on the four edge tiles (0,72)-(0,75), or wall x 1-2 so
+    that the barrier column is the only way through.
 
 ## From the puzzle engineer: the Saltmere audience (SPINE Revision 19, item 3), 2026-11-19
 **For map builder 9 (Saltmere 140/143/144/146/147 are yours; I have not edited them).** "The more people you meet around town,
@@ -425,7 +431,7 @@ tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Reh
 **For map builder 9 (puzzle engineer, 2026-11-19 late):** puzzle events are now laid over three maps you own, through
 `mapgen/puzzles/dungeons.py` `EVENTS` (your specs are untouched; `build.py --strict` proves them on your built maps):
 17. **525 Deepwood (D2):** a silk-walled lantern hollow round the north-east pocket, x25-40, y4-10 (walls, three curtains,
-    three cocoons, two Joltik posts, TM19 at (39,1), a sign at (25,9)). Please keep that pocket's terrain as it is, or tell
+    three cocoons, two Joltik posts, TM19 at (31,2), a sign at (25,9)). Please keep that pocket's terrain as it is, or tell
     me before you change it (the proof will fail the strict build if a wall lands on open ground or the pocket opens up).
     Also noticed: the "Crystal silk" gate (41,20) uses tile 17753, which is passable on tileset 53, so the gate can be
     walked through; a solid graphic (or a character sprite) would hold it.
@@ -439,3 +445,139 @@ tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Reh
     crater floor has no glass ravine for its three crystal bridges. If you give the hamlet a ravine to the north with three
     1-wide crossings (to the NE cocoon-house, the NW Shard house and the Matriarch's nest), I'll lay the anchors and bridge
     events over it the same way as 525 and 562.
+
+**For the story lead (FLAGS.md pointer rows, puzzle engineer 2026-11-19 late):** new IDs in `mapgen/flags.yaml` (the installer
+names them from there): V305–V307 are now `CANOPY_WEB_A/B/C` (Gym 2's Joltik webs; the old `LOOM_A/B/C` heddles are retired,
+V308 `LOOM_FOYER` is free); **V313 `STAGE_AUDIENCE`** (the Saltmere audience, SPINE Rev 19); **S531–S533 `D7_CURTAIN_1..3`**
+(the Rimewood's Frost Loom). D2's cocoons keep S506–S508.
+
+## From the Eevee Octave workstream (SPINE Revision 19, item 1), 2026-11-19
+No map file and nothing in `pbs/trainers.txt` was edited. Design: **`design/EEVEE_OCTAVE.md`**. Every placeable event is in
+**`design/TRIAL_EVENTS.yaml`** (maps 145, 120, 524, 160, 167, 181, 215, 220, 240, 340, 742, 489), one call each,
+`{script: 'pf_trial_talk(:KEY)'}`; dialogue lives in the Trials plugin.
+**For the map builder**
+1. **New interior, suggested 215: the Temple of the Noon Sun** (Sona, Espeon). A small round sandstone temple half under a
+   dune, door off Sunbleach Flats (613) or Duneholt's Sandgate (203): one room, a light-shaft in the roof that drops a circle
+   of light on the floor, a bronze bell, three sand drifts in the shaft (events `SUN_DRIFT`).
+2. **Map 145 backstage:** Vesper's duet partner becomes **Lyra** (`OCTAVE_SINGER,Lyra,0`, once the trainer designer adds
+   it; Carol is now met only in Ch20). After her lines, add `{script: 'pf_trial_talk(:VESPER_SALTMERE)'}` (her request; it
+   starts the quest line). **Lucent cloister** (Ch13, S191): add `{script: 'pf_trial_talk(:VESPER_LUCENT)'}` after her double.
+3. **489 Glassfall Memorial Garden:** Carol (from S155) and Vesper (`Condition: octave_ready`; the user's "a trainer spawns
+   in Crownhaven"). Optional decor: the seven other singers with their Eeveelutions in a half-circle behind Vesper, same
+   condition.
+4. **742 Mirror Mere** is frozen (ice tiles, Lento's reflection under it) until `quest_done(:AN_OCTAVE_STILL_WATER)`, then
+   open water. **220 Mirefen:** the three ferry lamps exist only at night (their condition includes `night`).
+5. Repeated objects (river notes, junction boxes, sand drifts, lamps, cracks) erase themselves with self switch A after their
+   call, like the Ferrow's Landing planks. The singers stand where `near:` says; the moss-stone (524) shows Lyra beside it
+   while `quest_step(:EL_OCTAVE_MOSS) == :stone`.
+6. Sprites (stock charsets are fine): eight singers in Choir grey (Lyra, Aria, Sona, Lento), cut-down/scorched/soot robes
+   (Cadence, Forte, Noct) and white (Carol, Vesper), each with an Eevee-line follower; Legate Varra Kosk; a marsh ferryman.
+**For the trainer designer** (provisional teams in `pbs/trainers_trials.txt`; tune them, or move them into your files)
+7. New: `OCTAVE_SINGER` Lyra/Aria/Cadence/Sona/Noct/Forte/Lento/Carol **v50** (kingdom duels: a local partner + the
+   Eeveelution at the next Warden's cap − 1: 18, 22, 26, 30, 34, 38, 58, 88) and **v60** (gauntlet bouts: your Ch20 v1–8
+   sets at Lv 90 with the type's Z-crystal instead of the seed; Carol has Moonblast for Fairium Z), `OCTAVE_VESPER Vesper`
+   **v60** (Eevee "Amen" Lv 92, Adaptability, Eevium Z; Last Resort / Stored Power / Shadow Ball / Quick Attack).
+8. **Ch2 double:** please add `OCTAVE_SINGER,Lyra,0` (an Eevee around Lv 17, Carol v0's role). **Retire** Carol v0, Aria..Carol
+   v1–8 and Vesper v2 (and their `TRAINER_FIELDS` / `ENTRY_FIELDS` rows), or move the v60 sets into those slots and tell me:
+   the versions are two constants in `plugins/Prismfall Trials/012_Trials_Octave.rb` (`GAUNTLET_VERSION`, `HOST`).
+9. **Balance (headless harness, AI on both sides):** six Lv 100 Snorlax lost at bout 4; an EV-trained Lv 100 team (Snorlax,
+   Garchomp, Metagross, Tyranitar, Volcarona, Togekiss) won the nine with 146 of 2,334 HP left. A home-field Z-move is a
+   near one-shot: Moss's Bloom Doom (Flower Garden stage 3) took 73% of a Lv 100 Snorlax; in the real engine Forte's Inferno
+   Overdrive (Volcanic + Flash Fire lit by the field + STAB) one-shot a Lv 95 Vaporeon through the resist. Suggestions: 88
+   for bouts 1–8, no Flash Fire on Forte's Flareon (Guts?), a Leftovers/Sitrus on the frail ones instead of nothing. The
+   player can use bag items between turns; there is no healing between bouts.
+10. Z-crystals work for any trainer: the AI unleashes an eligible move as a Z-move once per battle (and holds it back against
+    an immune target). Status moves don't become Z-moves.
+**For the field workstream:** a Z-move counts as its type for every field rule; rules naming a base move don't carry over
+(Dive, Lava Plume, Draining Kiss...). To give a Z-move a field effect, name it in `:moves` or match `:flags => ["ZMove"]`.
+The Z plugin adds one showpiece itself: on the Grand Stage a Z-move raises the applause a stage (`004_ZPower_Fields.rb`).
+**For the EBDX Bridge owner (optional):** the player's Z choice is a Yes/No box after picking the move (works on EBDX's box,
+screenshot in `run_zpower.sh zpower`); a Z button on the Fight menu like the Mega button would be nicer. Z-moves show their
+base move's animation; `:prismfall_zmove_unleashed (battle, user, z)` is there if you want a Z aura.
+**Packaging:** new plugin folder `plugins/Prismfall Z-Power`; new `pbs/moves_zpower.txt` and `pbs/items_zpower.txt` (copied
+as-is by `tools/package.sh`; v21.1 merges `PBS/moves_*.txt` / `items_*.txt`). Story docs edited for the reshape (story editor,
+please review): `story/03_CAST.md` (Vesper + the singers), `04_ACT_I.md` and `20_SCRIPT_CH0-2.md` (Ch2: Lyra, Vesper's
+request), `06_ACT_III.md` (Ch13), `08_ACT_V.md` (Ch20), `00_OVERVIEW.md`, `10_CHOICES_ENDINGS.md`, `12_RUIN_ROUTE.md`.
+
+## From story editor (geo v2), 2026-11-19
+SPINE Rev 18 moved the Ashkaar–Isenmar war onto land, into Ossaria's western dunes. The story is rewritten for it
+(`story/14_WAR_AND_BLESSING.md` Part B, `story/13_CUTSCENES.md` WAR-1, the act files, 00–03, 09–12), and
+`design/FLAGS.md`, `NARRATIVE_KEYS.md`, `TRIALS.md`, `CUTSCENES.md` (a §4 note and the §8 wishlist only) and
+`ART_DIRECTION.md` are synced. **No ID, key or value was renamed or renumbered.** What is left is in files I don't own.
+
+**Cutscenes owner (`plugins/Prismfall Cutscenes`): restage the war climax in the desert.**
+1. **On-map `:WAR_CLIMAX`** (`013_Scenes_War_OnMap.rb`), per the rewritten WAR-1: a Glass Dunes stage instead of
+   `pfw_shattered_ice.png` (export map 926 once it is built; until then a desert stage from the Rejuvenation/Reborn desert
+   tiles: Skaldfast's rime-white walls far left (west), the Siege Camp's palisade right (east), the Steamline's steam along
+   the top, the grey sea on the horizon, the bone-carters' white banner on a dune between the hosts). Kyogre rises out of a
+   flood-sea that pours in over the sand (a flood-front sheet), Blue Flare leaves a glass trail on wet sand, shot 6's ring is
+   sand glassing rather than ice cracking, shot 7 has a wave setting into glass, shot 12 the flood draining back out, and
+   shot 15 the glass plain with the bone-carters raising a new banner. Legendaries stay overworld-scale acting sheets.
+2. **Procedural version** (`013_Scenes_War.rb`): dunes instead of pack ice (`background :floes`, the `ice` palette, `ground`
+   "the ice between the two hosts"); shot 1 has Eirik on the lead ice-sledge on frozen sand and the Dominar on the Siege
+   Camp's earthwork (not the Warfort wall); shot 9C's `:prow` ship becomes Marisol's sled-boat riding the flood (the `:ship`
+   prop, `004_Actors.rb:207`, and the sled-ship row, `005_Backdrops.rb:301`, can stay as land sledges); 13B/C put the
+   winner's banners over Skaldfast (B) or over the Siege Camp (C), not Cinder Cape.
+3. **Text:** "The Beam Clash on the Glass Dunes" in `013_Scenes_War.rb:4`, `013_Scenes_War_OnMap.rb:4`, `015_Debug.rb:15`
+   and the example title card in `010_Text.rb:6`; `WAR_STAGE` and the stage comments; Eirik's line becomes
+   "Isenmar! The sea has come to the sand!".
+4. **No-legend variant:** your reading is confirmed (`legends: false` exactly when `choice(:war_legend) == :neither`). It has
+   no flood: Mamoswine bursts up out of the Rimed Sands' frozen trench-line (or Gyarados out of its meltwater), and the
+   glass in shot 7 comes from frost meeting fire.
+5. Then bring `design/CUTSCENES.md` §4 up to date with the new build (I only added a "pending restage" note there).
+
+**Core owner (`plugins/Prismfall Core`), strings only:**
+6. `012_Narrative_Data.rb`: copy the new descriptions of `:war_warning` (:285), `:war_convoy` (:286), `:war_prisoner` (:287)
+   and `:war_climax` (:289) from NARRATIVE_KEYS §4.3 (Frostfang Pass looking at Ossaria's dunes; siege-runners and sledges
+   from Duneholt; Anja in the Siege Camp; "the beam clash on the Glass Dunes").
+7. `015_Festival_Draw.rb:78`, the Anja vs Brann caption: "Two Wardens who were on opposite sides of the Steamline a season
+   ago." (was "opposite shores").
+
+**Trials owner (`plugins/Prismfall Trials`):**
+8. `120_Quests_Catalogue.rb:102–105`: title "The Saga of the Glass Dunes" (the key `IS_SAGA_OF_THE_ICE` stays), summary
+   "...a witness who stood on the glass", step `:ask` "Tell Bersi what really happened on the Glass Dunes." Then re-run
+   `ruby tools/trials_docs.rb`: `design/TRIALS_QUESTS.md` is generated, and the regeneration overwrote my edit there.
+   Bersi's verses should sing the land war (Skaldfast on the sand, the flood, the glass, the bone-carters).
+
+**Trainers owner:**
+9. `tools/trainer_gen/gen.py:1315–1336` → `pbs/trainers.txt` comments: "Skaldfast harbour (map 922, Frozen Lake)" →
+   "Skaldfast - Rime Keep (map 922, Frozen Lake)"; "The Shattered Ice (map 926, Frozen Lake)" → "The Glass Dunes (map 926,
+   Desert)"; "Isenmar ice-fleet officer" → "Isenmar sled-host officer". 926's default field is DESERT now, so the soldiers
+   fought there should be built for sand (and for the flood), not for Frozen Lake.
+
+**Cartographer (`tools/worldmap/world_data.py` → maps.json, WORLD.md, WORLD_MAP.md):**
+10. maps.json still carries sea-war briefs. **921** Skaldfast - Outer Walls ("fortress-port frozen into the sea", "chained
+    longships", "keep on the harbour mole", "sortie across the ice"); suggested: "rime-glazed granite walls on the sand's
+    edge at the Mast Glacier's foot; sled-yards; keep over a frozen spring; set pieces: dragonfire run along the wall, sortie
+    onto the Rimed Sands, hospital in the great hall". **926** the Glass Dunes ("cracked ice plain", "lava-breached floes",
+    "flat white sea"); suggested: "bone-white dunes across the caravan road; Kyogre's flood-sea pouring in; glass where the
+    fire passes; afterwards a glass plain of standing glassed soldiers and the bone-carters' banner".
+11. War states. Change **160** Ebbmouth ("Isenmar blockade fleet in the roads") → "the Thane requisitions the Ebb Guild's
+    sleds for the front and the Guild refuses; Thaw refugees; Ashkaar envoys expelled"; **460** Wyrmrest ("Dominar's legions
+    camped on the slopes (Act V)") → "the legions gone to the war in Ossaria; Sigrun's riders hold the gate"; **660** the
+    Ashmarch ("scorched ice-raider wrecks") → "supply and conscript columns north to the Cinderglass Barrens". Add war states
+    the story now uses: **200** Duneholt (Kassan's neutrality notices on the Sandgate, caravans leaving by the east gate,
+    foreign quartermasters in the Hall of Audience 206, bone-carters at the west gate), **360** Cragholm (Ossarian well-folk
+    among the refugees), **670** Glasswake (apprentices taken by the levy), **662** the Cinderglass Barrens (legion columns
+    west), **730** Anchorhold (sled-convoys by night, dragon patrols), **810** the Dry Tide (the bone-carters' camp). WORLD.md
+    §9's list of maps with a `war` state grows to match.
+12. WORLD_MAP.md §7 says "Cragholm (Gym 13) is the nearest gym city to the front". Duneholt (17, 3) is nearer the Siege Camp
+    (15, 2) than Cragholm (21, 2), and the story now uses that: Duneholt is "a day's ride" from the front, and the Lease keeps
+    armies out of it. Suggest: "Duneholt is the nearest city; in Act IV the PC reaches the front from Cragholm by way of
+    Duneholt."
+13. **Timing:** the story walks to the front from Duneholt in Ch14–16 (`:war_convoy` after Badge 13, then `:war_prisoner`), but
+    the Dry Tide 810, the only drawn road from Duneholt to the Glass Dunes, is segment 14 (Road 15's side road). Either open
+    it from segment 13, or give the convoy its own way in (a warp or event from Duneholt's west gate into the war maps). The
+    story only names the Dry Tide where it is late enough (the bone-carters' camp, and Sigrun's landing in Ch19).
+14. Small maps the story asks for (also in 13_CUTSCENES, "Renames"): the Dominar's command pavilion (924 interior), the
+    observers' sandstone mesa (WAR-1 shot 14), and the bone-carters' camp on the Dry Tide (part of 810). New story names with
+    no map: **the Elector's Lease** (Kassan's lease of the western dunes) and **the bone-carters** (Ossaria's burial guild).
+
+**Fields team:**
+15. 926 in the climax battle: the story beat is DESERT → Kyogre's flood-sea comes in (water over sand) → Reshiram's fire turns
+    it to glass (steam-glass, Bleed-like). The transitions are yours; FIELDS.md's Desert note ("rain wakes a superbloom;
+    searing heat makes glass") already fits. Please also check 925 the Steamline: the story treats it as a Bleed line that
+    only the PC can cross, and FIELD_DEFAULTS has it as ASHEN_WASTE.
+
+**Coordinator:** I left `design/SPINE.md:140` (Revision 5's "Isenmar (frozen sea fortress-ports)") alone. It is a historical
+revision entry and is still true of Rimeholt and Ebbmouth.

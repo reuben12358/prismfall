@@ -63,7 +63,7 @@ tr.quest(:CR_OCTAVE, {
     :garden => [
       { :map => "The Glassfall Memorial Garden. White stone, a ring of glass figures among the roses, and eight singers standing in a half-circle with their Eeveelutions. Vesper steps out to meet you." },
       [:VESPER, :happy, "You came. Everyone, it's them."],
-      [:VESPER, :neutral, "All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow."],
+      [:VESPER, :neutral, "All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow."],
       [:VESPER, :neutral, "Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song."],
       [:VESPER, :happy, "They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it."],
       [:VESPER, :neutral, "So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between."],
@@ -509,7 +509,7 @@ tr.quest(:AN_OCTAVE_STILL_WATER, {
 tr.quest(:CR_OCTAVE_NINTH_VERSE, {
   :trial => :CROWNHAVEN, :title => "The Ninth Verse", :giver => "Carol of the Octave", :map => 489,
   :where => "the Glassfall Memorial Garden, Crownhaven", :rank => 1, :points => 4, :rec_level => 88, :chapter => 20,
-  :unlock => "switch(155)", :board => true, :tags => [:octave, :story, :duel],
+  :unlock => "switch(155) && octave_helped >= 7", :board => true, :tags => [:octave, :story, :duel],
   :summary => "Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all.",
   :steps => { :ask => "Tell Carol about the other seven singers of the Octave.",
               :duel => "Carol has every verse but the one in the middle, where the fight goes." },

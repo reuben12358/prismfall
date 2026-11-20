@@ -131,13 +131,13 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
 - **`:sq_doctors_cell`** — "The Doctor's Cell" (Ch11–13): free Corvin from the holding barge, or fail. *Corvin's Consent; the Cragholm hospital.*
 
 ### The Ashkaar–Isenmar War (Revision 6; chapters placed by the story lead, Act III–IV) — six proposed choices
-- **`:war_warning`** — you see the Dominar's legions at Frostfang Pass before anyone. Warn Isenmar / warn Ashkaar they've been seen / warn both
+- **`:war_warning`** — from Frostfang Pass you see the Dominar's legions massing on Ossaria's sands before anyone. Warn Isenmar / warn Ashkaar they've been seen / warn both
   (the Accord's way; both sides note it) / say nothing.
 - **`:war_convoy`** — Marisol asks the one person who can walk the Bleed-front to take a convoy through the Steamline into besieged Skaldfast: *relief* (food) /
   *arms* (harpoon-guns; Marisol +3, Sigrun −2) / *refuse*.
 - **`:war_prisoner`** — Ashkaar holds Anja; the Thane holds the Dominar's nephew. *free* one in secret / broker an *exchange* / *leave* them.
 - **`:war_legend`** — both sides beg you to bring their legend: *calm Kyogre* / *wake Reshiram* / *neither*. It decides whose beams meet in the climax.
-- ★ **`:war_climax`** — the Shattered Ice, both lines charging. **Stand between** them / **back Ashkaar** / **back Isenmar**. Standing between only
+- ★ **`:war_climax`** — the Glass Dunes, both lines charging and Kyogre's flood coming in. **Stand between** them / **back Ashkaar** / **back Isenmar**. Standing between only
   stops the war if both armies have seen you act in good faith four times (war trust: warned both, relief, a prisoner helped, no legend used as a
   weapon, Sigrun ≥ 4, Marisol ≥ 3). Otherwise the beam clash goes off over your head and breaks both armies.
 - **`:war_terms`** — if one side won: argue for *mercy*, *reparations* or *occupation* at the armistice table in Skaldfast.
@@ -148,7 +148,7 @@ Format: **key** — situation. Options → immediate effect. *Long-term.* Exact 
 
 *Long-term:* a beaten kingdom forfeits a Festival seat (§3.1); beaten and unforgiven, its Wardens won't release their Plates (Marisol and Anja,
 or Brann and Sigrun; both pairs if the clash broke both armies), which can sink Consent below 12 on its own; *occupation* makes Homecoming
-impossible (Unfinished at best); the winner's fleets or legions (both, if you stopped it) defend Crownhaven in the hijack; Anja vs Brann in the
+impossible (Unfinished at best); the winner's host or legions (both, if you stopped it) defend Crownhaven in the hijack; Anja vs Brann in the
 bracket is decided by it.
 
 ### Act IV — "The Drowned Crown" (who are you willing to become?)
@@ -178,7 +178,7 @@ bracket is decided by it.
   Then the prompt that is `GO_STAY_OUT`.
 - ★ **`:ch19_oath`** — at the Draco brazier, aloud. **Return** / **Keep** (Valen +3; Kaito draws into your QF: "You'd keep them? Marrowgate's still knocking."; Sigrun won't let go of the Draco Plate) / **Open** ("I don't know yet") / **Ruin** (only at Ruin-leaning or lower; Sigrun draws her
   blade and lets you pass). The hidden "Whatever you want to hear." is `GO_LIARS_PYRE`.
-- **`:ch19_dominar`** — the petition. *swayed* (needs the Light Stone at Wyrmrest plus proof, or Sigrun ≥ 4) / *failed* (the legions march on Zenith).
+- **`:ch19_dominar`** — the petition. *swayed* (needs the Light Stone at Wyrmrest plus proof, or Sigrun ≥ 4) / *failed* (the legions march on Zenith across Elowen).
 - **`:ch20_envoy`** — Envoy Okoro. *proof* (needs two of: Larch Papers, Arbiter Blueprints, testimony that the Fixed still dream, from Teo if he lived ("I could hear everything while my hand was glass") or Corvin's ward records if he's free; no Severance) / *plea*.
 - **`:ch20_calla`** *(new, who lives)* — at the Night of Masques Calla Wren finds you, shaking: she can get the arena's power schematics to Larch.
   Only offered if someone inside is already moving (Rook held, or Magnus kept faith). *shelter* her with Edda (partial schematics, one crack) /
@@ -281,7 +281,7 @@ rule plus 2–4 key moments each). Order: a drawn path opponent wins until they 
 - **Displaced:** Marisol/Anja swap seats with Juno, and the QF Wardens swap with Celestine; the displaced one plays on as an NPC. Rowan takes Juno's
   seat (she gave it), and on the Ruin Route Dask takes Celestine's ("I cannot lie, so I won't pretend this is a game.").
 - **Exhibitions** (story-met only): the **Pageant Bout** (Dorian and Rook, a double), **Juno's Garden Match** if she wasn't your R16, the **Ebb Guild
-  match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (Vesper is met in Ch2 and Ch13). On the
+  match** with Marisol (Teo saved, close), **Morwen's Echo** on the Night of Masques, and the **Eevee Octave** (all eight singers helped; `design/EEVEE_OCTAVE.md`). On the
   Ruin Route only the Octave plays.
 - **Teams:** NARRATIVE_KEYS §7. **19 new Festival teams** (Marisol 90, Anja 90, Rowan 90, Celestine 92, Sigrun 92, Kaito 92, Ysolde 92, Odessa 92,
   Dask 92, Kestrel Fallen 90–92, Brann 96, Valen 1, Quent 99, Theodric 0, Dorian 90, Rook 90, Morwen 90) plus 4 Arceus configs. Revision 6 adds none:
@@ -388,7 +388,7 @@ Hesper Vane's lighthouse mirror has one crack per game over found; at 23 the cra
   written, but Kestrel knows: "You're going to *erase* her? Everything she paid for?" `:ch18_kestrel_ring` is still offered.
 - **R5 "The Last Gate"** (Wyrmrest, Gym 18). The oath can only be true one way: "I'm going to end it. All of it." Reshiram accepts the truth and
   flies away without a fight. **Gym 18 (Ruin):** Sigrun on `:DRAGONS_DEN`, no Reshiram, every Pokémon a step faster ("Dragons don't let anything
-  through they haven't weighed. I've weighed you."). The Dominar can't be swayed; his legions march on Zenith during the Festival.
+  through they haven't weighed. I've weighed you."). The Dominar can't be swayed; his legions march from the sands across Elowen on Zenith during the Festival.
 - **R6 "The Unfestival"** (Festival week). The Accord bars "the Renegade". Archseer Dask claims the PC for the Veiled Synod and walks them in through the Glass; Dorian, who has never
   once let the bowl ruin a story, seeds them anyway. **R16 Juno** ("You'll make sure Verdance never gets an autumn."), **QF Archseer Dask** (his offer to stay behind the Glass is
   `GO_R_WELCOME_BEHIND`), **SF Kestrel** (he tears the Gauntlet off to fight you as himself), **Final Valen, the Last Tuning** ("I'll hold them quiet
@@ -568,7 +568,7 @@ Edits the act files need so they match this spec. Keys and conditions are in NAR
     the pools and reassigned lines in §3.2, companion-match highlights (§3.4) and the exhibitions in §3.6. Venam's "I could hear everything" goes to
     Teo if he lived, otherwise Corvin's ward records. CAMEOS.md's default draw is obsolete.
 22. **Rev 5 screen-time fixes:** give Anja one Act IV scene and Ysolde one pre-Ch15 scene; introduce Archseer Dask again in Ruin R1 and R4 (done in
-    §5.3's intent; script it); the Eevee Octave is cleared (Vesper is met in Ch2 and Ch13).
+    §5.3's intent; script it); the Eevee Octave is cleared (SPINE Rev 19: it needs all eight singers helped, `design/EEVEE_OCTAVE.md`).
 23. **The war (Rev 6):** build the chapters around the six `:war_*` choices above, with Anja's capture, the siege of Skaldfast, and a climax cutscene
     whose ending frame follows `WAR_STOPPED / WAR_BOTH_BROKEN / WAR_ASHKAAR_WON / WAR_ISENMAR_WON` (NARRATIVE_KEYS §4.3). Ch19's Dominar petition
     must read the war's outcome.

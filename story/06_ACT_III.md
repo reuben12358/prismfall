@@ -11,10 +11,10 @@
 
 ---
 
-## CHAPTER 10 — "The Seat That Blooms" (The Rootdeep Lift Road → Prism Falls → Verdance, Gym 9; J3)
+## CHAPTER 10 — "The Seat That Blooms" (the Root Road: The Rootdeep Lift Road → Prism Falls → The Briarway → Verdance, Gym 9; J3)
 
 **Location:**
-- **The Rootdeep Lift Road** (the great freight-lift from Nadir up to the plateau) and **Prism Falls** (`:RAINBOW`).
+- **The Root Road**: **the Tailings** (692) outside Ironreach, then **the Rootdeep** (680, borderland F), whose great freight-lift, the **Rootdeep Lift Road**, hauls ore from Nadir's mines up to Elowen's downs west of the plateau, past **Lanternroot** (690). Then across the Crown Road to **Prism Falls** (681, `:RAINBOW`) and **the Briarway** (693), the royal road to Verdance.
 - **Grudgestone Quarry**, **Echo Coliseum** (688, `:BLEED`: Ironreach's attack replaying as ghost-sound).
 - **Verdance** (Elowen's royal seat, `:FLOWER_GARDEN`), **Briar Keep** (the Queen's castle on the highest terrace), the **Heartgarden**, the **Bride Grove** (708), the **Royal Chase** (Safari-style reserve).
 - **Branch maps by Standing:** 698 **Hollow Sanctuary** (high Hollow) or 699 **Meridian Black Site** (high Meridian).
@@ -65,11 +65,13 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 
 ---
 
-## CHAPTER 11 — "The Thaw" (The Hart's Run → The Hoarwood → Frostfang Pass → Rimeholt, Gym 10; Kyogre)
+## CHAPTER 11 — "The Thaw" (the Hart Road: The Hart's Run → The Hoarwood → Frostfang Pass → Rimeholt, Gym 10; Kyogre; war)
 
-**Location:** The Hart's Run, the Hoarwood (`:SNOWY_MOUNTAIN`), **Gossamer Heartwood** (Silkwood revisit), **Frostfang Pass**, **Rimeholt** (Isenmar, `:FROZEN_LAKE`), **Lake Rime**.
+**Location:** **the Hart Road**: the Hart's Run (700), the Hoarwood (701, `:SNOWY_MOUNTAIN`, borderland A2) with the lodge-town **Snowbriar** (710), **Gossamer Heartwood** (Silkwood revisit), **Frostfang Pass** (704/705), the Whalebone Road (712) down to **Rimeholt** (Isenmar, `:FROZEN_LAKE`) and **Lake Rime**. After the Thaw: Ebbmouth (detour), then **the Mast Road** out (below).
 
 **Travel:** **Juno travels with the PC.** She is lobbying the northern Wardens for the Greenward and is nervous about it. She practices speeches on the PC's Pokémon.
+
+**War 1 on Frostfang Pass (`:war_warning`, before the Thaw).** From the top of the pass on a hard, clear morning, the PC can see north-east across the Mast Glacier to the bone sands: cookfire smoke along the horizon and a dragon-column circling over it. The Dominar's legions are already camped on Ossaria's western dunes, on sand Kassan has leased them, and nobody in Isenmar knows. Juno: "Those aren't caravans, are they." (Staging and options: 14_WAR_AND_BLESSING Part B.)
 
 **Arrival: Isenmar, second visit (escalation).** Rimeholt is timber and whalebone on the ice of Lake Rime, part of the frozen sea. Sled-roads, fishing huts and breath-smoke. **Meridian heat-towers** keep the city alive, and the ice under them is grey and thin. Fishers' holes near the towers don't refreeze. Old men sing the **Sleeping Whale** song more often than usual.
 - Warden **Anja Sorrel** is blunt, pragmatic and loyal to her brother, the **Thane**, who signed the kingdom's heat contract. She tells Juno to her face that southern idealists can keep their principles: "You want me to choose between my principles and my grandchildren's toes? Easy choice. Toes."
@@ -98,26 +100,30 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
   - Either way, **Anja breaks with Meridian publicly.**
 - **Thane Eirik** declares **martial law** and evacuates the lower town south into Elowen, which causes a border crisis with Queen Maelis's Thornguard.
 - Juno, wet through and shaking: "That's what Uncle Rowan meant. Isn't it. The flowers. The heaters. It's all the same thing."
+- **War.** Kyogre's Primal rain rolls east for three days, over the Mast Glacier and across the bone sands, and flash-floods the Dominar's forward camps in the dunes. The Thane blames the embargo, and the Dominar blames "Isenmar's sea-beast". On the third day **war is declared** on every screen, and the Thane's host starts east along the Sled-Road for Skaldfast (14_WAR_AND_BLESSING).
 
-**Transit (segment 10): Ebbmouth, Isenmar second visit.** The Thane's Sled-Road/The Mast Glacier and the **Ebbmouth Sea Grotto** (revisit) pass back through Ebbmouth:
-- **The Ebbmouth Strike.** Marisol leads the Ebb Guild in cutting Meridian's tidal Lattice with dockworkers' saws. The Ebb runs both ways again for the first time in a year, and the whole city cheers on the quay.
+**Detour (segment 10): Ebbmouth, Isenmar second visit.** The Thane's evacuation takes Rimeholt's lower town south, back over Frostfang Pass and down the Icecutters' Haul toward Elowen, and Juno goes with it to face the Thornguard at the border. The PC walks the column as far as **Ebbmouth** (or Flies; the **Ebbmouth Sea Grotto**, 723, is open to revisit with Surf), where Isenmar's refugees reach a city on strike:
+- **The Ebbmouth Strike.** Marisol leads the Ebb Guild in cutting Meridian's tidal Lattice with dockworkers' saws, and in refusing the Thane's war levy: the Guild's sleds were requisitioned for the front that morning. "The Guild'll run food to Skaldfast. On our sleds, on our say. Not on Eirik's." The Ebb runs both ways again for the first time in a year, and the whole city cheers on the quay.
 - **If `TEO_SAVED`:** Teo is there with glassed fingers, organizing.
 - **If not:** Teo's photograph is nailed to the strike's banner pole, and Marisol delivers the "He was nineteen" line here instead.
 - **CHOICE `:ch11_strike`:** when the strikebreakers arrive at the picket:
   - **Stand:** a tag battle with Marisol. Her Bond rises a lot, and more if Teo died. This is the only Act III way back to her after Teo's death.
   - **Mediate:** talk the Directorate foreman down. It's peaceful and polite, and Marisol notes that you didn't pick a side.
 
+**Then the Mast Road (Road 11).** Isenmar and Zenith share no border, so the road to Skyreach has an air leg. Back north through Rimeholt and east along **the Thane's Sled-Road** (720), past ice-fishing camps and war-sleds going east, up **the Mast Glacier** (721, borderland B2: tundra and permafrost dunes) to **Anchorhold** (730), where Skyreach's airships are anchored in the ice. **Stillwater** (728), just outside Rimeholt, is an optional Bleed zone where a waterfall hangs frozen in mid-fall without being ice.
+
 **Optional thread: cameo sidequest "Crystal Sleep" (Alexandra).** See `design/CAMEOS.md`. In the Thaw's aftermath, a tall woman with a Latias is sitting among Rimeholt's half-Fixed fishers, asking whether they can hear her. Her mother sleeps in crystal in another world.
 
-**Cliffhanger:** **Cloudstair** (Rock Climb) and **Stillwater** (728, a Bleed zone where a waterfall hangs frozen in mid-fall without being ice). On the climb, a Gale Post airship passes overhead, trailing a banner from Skyreach: **"LARCH SPEAKS TONIGHT."**
+**Cliffhanger:** At Anchorhold's moorings a Gale Post mail-ship is loading in a hurry, trailing a banner from Skyreach: **"LARCH SPEAKS TONIGHT."** The PC goes aboard. As it climbs off the glacier they can see Isenmar's host strung east across the sands toward Skaldfast, and the smoke of the Dominar's camps beyond it. Then the ship turns south over Ossaria's dunes and Elowen's forest, and the Crownwall passes under the keel: a white ring with a city inside.
 
 ---
 
-## CHAPTER 12 — "Dead Letters" (Cloudstair → Skyreach, Gym 11; K5; the Larch Papers)
+## CHAPTER 12 — "Dead Letters" (the Mast Road's air leg: Anchorhold → The Tetherline → Cloudstair → Skyreach, Gym 11; K5; the Larch Papers)
 
-**Location:** **Skyreach** (Zenith's airship spire, `:STORMFRONT`), the **Gale Post** sorting halls, the **dead-letter archive**, **Stormwatch Spire** (the relay crown).
+**Location:** **the Tetherline** (732), the walkway under Skyreach's mooring cables, and **the Cloudstair** (724–726, Rock Climb) up into **Skyreach** (Zenith's airship spire, `:STORMFRONT`), the **Gale Post** sorting halls, the **dead-letter archive**, **Stormwatch Spire** (the relay crown).
 
 **Arrival: Zenith, second visit (escalation).**
+- The mail-ship moors low, on the Tetherline, because the Directorate searches everything at the upper docks. The PC climbs the Cloudstair (Rock Climb) the back way into the city.
 - Skyreach is a vertical city of docking masts and skybridges climbing into the **Stormfront**, the Sky Plate's permanent storm wall. It now has a **Mandate curfew**: searchlights from 9pm, and Directorate airships patrolling the masts.
 - Larch is here, hiding in plain sight in the **Gale Post** sorting halls as a guest of Warden **Odessa Gale** (goggles, scarf, irreverence). Odessa: "Skyreach's got one law: the wind doesn't care. Everything else is negotiable."
 - A **black dragon** is glimpsed in the Stormfront's lightning by airship crews: "**the Stormfront Wyrm**." (Zekrom seed. Larch, softly: "That's impossible. That's the shape of the Spire's core.")
@@ -158,12 +164,14 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 
 ---
 
-## CHAPTER 13 — "Behind the Glass" (Conductors' Causeway → The Wired Wood → Mirror Mere → Antumbra Threshold → Lucent, Gym 12; the tribunal; the Fault)
+## CHAPTER 13 — "Behind the Glass" (the Glass Road: Conductors' Causeway → The Wired Wood → The Crown Road → Mirror Mere → Antumbra Threshold → Lucent, Gym 12; the tribunal; the Fault)
 
 **Location:**
-- Conductors' Causeway (`:STORMFRONT`), the Wired Wood, **Mirror Mere** (742).
-- **Antumbra Threshold** (743, `:INVERSE`), **Lucent** (Antumbra, `:MINDSCAPE`), the **Lucent Athenaeum**.
+- **The Glass Road** north off the plateau: Conductors' Causeway (740, `:STORMFRONT`), the Wired Wood (741, borderland G) with **Verdigris** (750), then the Crown Road round the Crownwall's east and north: **Candle Down** (602), **the Highwold** (603) and **Kingsmead** (756). Then **the Looking-Glass Wood** (752, borderland H) with **Glassmere** (753), and **Mirror Mere** (742).
+- **Antumbra Threshold** (743, `:INVERSE`), **Widdershins Walk** (755), **Lucent** (Antumbra, `:MINDSCAPE`), the **Lucent Athenaeum**.
 - **Stormwatch Spire** (optional revisit), **Shattered Sky** (748).
+
+**The road.** From Kingsmead's old paddocks under the Crownwall's north-west face, the PC can see the **Glassfall Scar** glittering high on the wall, where forty people were Fixed in AF 290. The scar on their chest aches the whole way past it. (It sets up the Mindscape.)
 
 **Crossing the Glass: Antumbra, first visit.**
 - At **Mirror Mere**, Archseer **Imre Dask** of the Veiled Synod meets the PC. He has two different-colored eyes and speaks in mirrored sentences: "Welcome, behind. Behind, welcome." He grants passage because Ilsa sent for the PC.
@@ -196,7 +204,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 
 **The tribunal (set piece).** In the Athenaeum's Glass Court, Valen presides. Wardens attend, and the kings' observers sit in their gallery. **Rowan** is gaunt from Meridian custody, with his right hand still Bleed-burned in a lightning pattern.
 
-0. **In attendance:** Hierophant Ellery, with the **Eevee Octave** as her honor guard. Vesper's second encounter is an optional sparring double battle in the Athenaeum cloister. She is shaken by the Fault later in the chapter: "The Choir says we were born lucky. I don't feel lucky." **Celestine** refuses to swear the witness oath ("I can't lie anyway; it'd be rude to pretend").
+0. **In attendance:** Hierophant Ellery, with the **Eevee Octave** as her honor guard. Vesper's second encounter is an optional sparring double battle in the Athenaeum cloister; afterwards she says how the singers' letters about the PC are going, and that Lento, at the frozen Mirror Mere past Glassmere, hasn't written (her quest, *The Still Water*, is this chapter's Antumbra Trial). She is shaken by the Fault later in the chapter: "The Choir says we were born lucky. I don't feel lucky." **Celestine** refuses to swear the witness oath ("I can't lie anyway; it'd be rude to pretend").
 1. **Rowan's statement:** "I wanted to pull the nails. I was wrong about how. I was not wrong about why."
 2. **Kaito's testimony.**
    - **CHOICE `:ch13_kaito`:** before the session, Kaito asks the PC whether he should speak about **Marrowgate**. Encourage him (`KAITO_TESTIFIED`) or tell him it isn't his burden.
@@ -214,7 +222,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 1. That night, across the realm, the ground moves.
 2. Under Cogsworth, Meridian test-fires the **Arbiter Engine's** first core. It is built around the **Dark Stone** and draws on all eighteen Plates at once.
 3. A tremor runs through every Imprint. The Bleed leaps forward everywhere, and from Act IV on all early maps use encounter version 1 (Bleed-spread).
-4. On the **north coast**, the sea pulls back from Zenith's cliffs overnight. The **Sump drains**, and the spires of **drowned Aurelia** stand naked under Underveil for the first time in three hundred years.
+4. On the **south coast**, the sea pulls back from Zenith's cliffs overnight. The **Sump drains**, and the spires of **drowned Aurelia** stand naked under Underveil for the first time in three hundred years.
 5. In the Athenaeum, the Glass Court's windows shatter.
 6. **The undercroft floods.** The Glass Court's floor gives way into the flooded undercroft. **Rowan** is chained in the dock and the water is rising around him. The orrery's great brass ring has come down on **Director Marchetti**, pinning her. Wick's people are on the far side of the water. The PC can reach one.
    - **CHOICE `:ch13_fault`** (MAJOR, who lives):

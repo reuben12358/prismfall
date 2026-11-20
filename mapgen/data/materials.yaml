@@ -70,3 +70,9 @@ tilesets:
     - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
     - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
     - [14560, 17743, modern]     # Aevium Past: city blocks
+  56:                            # map builder 10: PF Rejuv Shore (same sheet)
+    - [1416, 1433, modern]       # Goldenleaf: Poke Center / Mart fronts
+    - [1760, 1807, modern]       # Goldenleaf: train
+    - [2304, 2359, modern]       # Goldenleaf: Poke Center / Mart
+    - [11496, 14431, modern]     # Aevium Past: city blocks, cars, signage
+    - [14560, 17743, modern]     # Aevium Past: city blocks

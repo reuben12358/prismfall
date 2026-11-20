@@ -39,6 +39,19 @@ def ranges(rr):
     return out
 
 
+_SHEET = []
+
+
+def empty_tile(cid):
+    """map builder 10: a fully transparent cell of the composite sheet (sheet stamps with trim: true leave it empty)"""
+    if not _SHEET:
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        _SHEET.append(Image.open(os.path.join(os.path.dirname(HERE), 'maps_out', 'Graphics', 'Tilesets', 'PF Rejuv.png')).convert('RGBA'))
+    i = int(cid) - 384
+    return _SHEET[0].crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32)).getbbox() is None
+
+
 def mine(name, s):
     if 'sheet' in s:
         off = RC.offset(s['sheet']); c0, r0 = s['at']; w, h = s['size']
@@ -47,6 +60,7 @@ def mine(name, s):
             for dx in range(w):
                 z = 2 if dy < s.get('top', 0) else s.get('layer', 1)
                 lay[z, dy, dx] = off + (r0 + dy) * 8 + c0 + dx
+                if s.get('trim') and empty_tile(lay[z, dy, dx]): lay[z, dy, dx] = 0
         st = dict(w=w, h=h, layers=lay.tolist(), src=['sheet', s['sheet'], c0, r0])
         if 'door' in s: st['door'] = list(s['door'])
         return st

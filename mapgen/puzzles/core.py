@@ -31,13 +31,18 @@ class Model:
         self.goal, self.links, self.resets = set(goal), dict(links or {}), set(resets)
         self.reset_to = reset_to or (start, vars0)
 
+    def step_ok(self, c, n, v):
+        """Directional passage (built maps set move_ok); design grids are undirected."""
+        mo = getattr(self, 'move_ok', None)
+        return mo is None or mo(c, n, v)
+
     def region(self, cell, v):
         seen = {cell}; q = [cell]
         while q:
             m, x, y = q.pop()
             for dx, dy in DIRS:
                 n = (m, x + dx, y + dy)
-                if n in self.cells and self.passable(n, v):
+                if n in self.cells and self.passable(n, v) and self.step_ok((m, x, y), n, v):
                     n = self.links.get(n, n)             # stepping onto a ladder / warp tile lands on its far end
                     if n not in seen:
                         seen.add(n); q.append(n)

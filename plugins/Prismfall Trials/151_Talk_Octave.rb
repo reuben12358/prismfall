@@ -69,8 +69,8 @@ Prismfall::Trials::TALK.merge!({
   :MERE_CRACK => { :rows => [[:AN_OCTAVE_STILL_WATER, "quest_step(:SELF) == :cracks", :crack]] },
   #--- Carol: the Glassfall Memorial Garden, Crownhaven (489) -------------------------------
   :OCTAVE_CAROL => { :rows => [
-    [:CR_OCTAVE_NINTH_VERSE, "quest_state(:SELF) == :available && octave_helped >= 7", :offer],
-    [:CR_OCTAVE_NINTH_VERSE, "quest_state(:SELF) == :available", :not_yet],
+    [:CR_OCTAVE_NINTH_VERSE, "quest_state(:SELF) == :available", :offer],          # unlock: S155 and the other seven helped
+    [:CR_OCTAVE_NINTH_VERSE, "quest_state(:SELF) == :locked && switch(155)", :not_yet],
     [:CR_OCTAVE_NINTH_VERSE, "quest_step(:SELF) == :duel", :duel],
     [:CR_OCTAVE_NINTH_VERSE, "quest_done(:SELF)", :after]] }
 })

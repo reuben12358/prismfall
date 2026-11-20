@@ -511,26 +511,29 @@ module PlayBot
     end
 
     # A step for another map: skip ahead to the first later step for the map we are on
+    # The step is for another map. Skip ahead only over transit steps (arriving where a [:to] step leads, or an event
+    # that carried the player on); otherwise walk back to the step's map over the plan's links (e.g. from a Poke Center
+    # after a blackout) and never skip unfinished steps.
     def wait_for_map
-      later = plan[@step..].index { |s| s[1] == $game_map.map_id }
-      if !later && plan[@step] && plan[@step][1].is_a?(Integer) && plan[@step][1] != $game_map.map_id
-        # e.g. woke up in a Poke Center after a blackout: walk back to the step's map, one plan link at a time
-        @map_wait = (@map_wait || 0) + 1
-        hop = next_hop($game_map.map_id, plan[@step][1])
-        return to_map(hop) if hop && @map_wait < 1500 && @idle >= 12
-      end
-      if !later
-        @map_wait = (@map_wait || 0) + 1
-        if @map_wait > 1500
-          log("GAVE UP on #{plan[@step].inspect}: still on map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
-          shot("gave_up_step#{@step}")
-          next_step
-        end
+      here = $game_map.map_id
+      @map_wait = (@map_wait || 0) + 1
+      later = plan[@step..].index { |s| s[1] == here }
+      later = nil if later && plan[(@step + 1)...(@step + later)].any? { |s| s[0] != :to }
+      if later
+        @step += later
+        @step_start = 0
+        log("now on map #{here}: skipping to step #{@step}")
         return
       end
-      @step += later
-      @step_start = 0
-      log("now on map #{$game_map.map_id}: skipping to step #{@step}")
+      target = plan[@step] && plan[@step][1]
+      hop = target.is_a?(Integer) ? next_hop(here, target) : nil
+      limit = hop ? 4000 : 1500          # per map: @map_wait restarts on every map change
+      if @map_wait > limit
+        log("GAVE UP on #{plan[@step].inspect}: still on map #{here} (#{$game_player.x},#{$game_player.y})")
+        shot("gave_up_step#{@step}")
+        return next_step
+      end
+      to_map(hop) if hop && @idle >= 12
     end
 
     # Next map on the shortest way from map `from` to map `dest`, over the links the plan's [:to, a, b] steps walk

@@ -1,5 +1,7 @@
 # Geography v2 + SPINE Rev 18: story lines to fix
 
+> **Status (story editor, 2026-11-19): applied.** Every W/C/N line in §1–§10 is fixed in story/; the war arc is rewritten as a land war in Ossaria (14_WAR_AND_BLESSING Part B, 13_CUTSCENES WAR-1). §11's design-doc lines are synced (FLAGS, NARRATIVE_KEYS, TRIALS, CUTSCENES §8, ART_DIRECTION); the code and data lines are requested in mapgen/REQUESTS.md, "From story editor (geo v2)". Line numbers below are from before the fixes.
+
 Written by the cartographer for the story agent. Every line below describes a border crossing, a direction or a
 war site that is wrong under **Geography v2** (SPINE Rev 18: Elowen in the middle, Ossaria north, Isenmar west,
 Ashkaar east, Zenith/Nadir south) or under the **land war in Ossaria** (Rev 18 war bullet). Line numbers are

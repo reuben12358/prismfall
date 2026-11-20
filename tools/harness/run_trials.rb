@@ -14,6 +14,11 @@
 #      Badge 1 and 2, 4000-roll sampling, LandNight feed, rumours, entry notice,
 #      no overlay on a map with no base table, encounter_version 1 untouched
 #   6. "Condition:" page comments, save round trip
+#   7. Z-Power (SPINE Rev 19): data, the AI and the player's Fight menu, the ring,
+#      once per battle, Protect, wild Pokemon, crystals unlosable, field rules
+#   8. the Eevee Octave: all eight singer quests out of gym order, the help order,
+#      Carol last, a lost and a won 9-bout gauntlet (fields, Z-moves, no healing),
+#      the reward Eevee's Extreme Evoboost on the Grand Stage
 # Writes docs/trials_test/REPORT.md and transcript.txt. Exit 1 on any failure.
 #===============================================================================
 require "fileutils"
@@ -152,6 +157,17 @@ walk = lambda do |qid, list, path|
       elsif e[:event_battle]
         cmd_errors << "#{path}: unknown event mon #{e[:event_battle]}" if !em.exists?(e[:event_battle])
         [:caught, :won, :lost, :fled].each { |k| walk.call(qid, e[k], "#{path}>#{k}") }
+      elsif e[:octave_help]
+        cmd_errors << "#{path}: unknown Octave singer #{e[:octave_help]}" if !tr::Octave::SINGERS[e[:octave_help]]
+      elsif e[:octave_gauntlet]
+        specs = tr::Octave::SINGERS.values.map { |sg| [tr::Octave::GAUNTLET_TYPE, sg[:name], tr::Octave::GAUNTLET_VERSION] } + [tr::Octave::HOST]
+        specs.each { |t| cmd_errors << "#{path}: no gauntlet trainer #{t.inspect}" if !GameData::Trainer.exists?(t[0], t[1], t[2]) }
+        walk.call(qid, e[:won], path + ">won"); walk.call(qid, e[:lost], path + ">lost")
+      elsif e[:octave_verses]
+        e[:octave_verses].each do |sid, entry|
+          cmd_errors << "#{path}: unknown Octave singer #{sid}" if !tr::Octave::SINGERS[sid]
+          walk.call(qid, [entry], "#{path}>#{sid}")
+        end
       elsif e[:trainer] || e[:gauntlet]
         (e[:gauntlet] || [e[:trainer]]).each do |t|
           cmd_errors << "#{path}: no trainer #{t.inspect}" if !GameData::Trainer.exists?(t[0], t[1], t[2] || 0)
@@ -559,6 +575,323 @@ dump = Marshal.dump(Prismfall.state)
 back = Marshal.load(dump)
 check("save round trip keeps Trials state", back.trials[:quests].keys.sort == Prismfall.state.trials[:quests].keys.sort &&
       back.trials[:points] == Prismfall.state.trials[:points] && back.trials[:rumours] == Prismfall.state.trials[:rumours])
+
+#-------------------------------------------------------------------------------
+section("7. Z-Power (plugins/Prismfall Z-Power): data, AI and player use, once per battle, Protect, fields")
+#-------------------------------------------------------------------------------
+# Logic test: lift the level cap so the over-cap test teams obey (Standard mode makes Pokemon above the cap disobey,
+# and a disobedient Pokemon never uses Z-Power). Balance at the real caps is the trainer designer's (BALANCE.md).
+cap_override0 = Prismfall.state.level_cap_override
+Prismfall.state.level_cap_override = 100
+ZLOG = []
+EventHandlers.add(:prismfall_zmove_unleashed, :harness_zlog,
+  proc { |battle, user, z|
+    foe = battle.battlers.find { |b| b && b.opposes?(user.index) && !b.fainted? }
+    entry = { :foe => (battle.opponent ? battle.opponent.map(&:name).join("+") : "wild"), :side => user.index & 1,
+              :z => z.id, :base => z.prism_base ? z.prism_base.id : nil, :species => user.species, :power => z.power,
+              :category => z.category, :field => (battle.respond_to?(:field_effect) ? battle.field_effect : nil),
+              :base_pp => z.prism_base ? z.prism_base.pp : nil, :base_total => z.prism_base ? z.prism_base.total_pp : nil }
+    if foe && defined?(FieldEffects) && z.damagingMove?
+      entry[:z_mult] = FieldEffects.damage_multiplier(battle, user, foe, z, z.pbCalcType(user))
+      entry[:base_mult] = FieldEffects.damage_multiplier(battle, user, foe, z.prism_base, z.prism_base.pbCalcType(user)) if z.prism_base
+    end
+    ZLOG << entry
+  })
+ZDONE = []
+EventHandlers.add(:prismfall_zmove_done, :harness_zdone,
+  proc { |_battle, user, z| ZDONE << { :z => z.id, :side => user.index & 1, :stages => user.stages.dup } })
+ZCHOSEN = []
+EventHandlers.add(:prismfall_zmove_chosen, :harness_zchosen,
+  proc { |battle, idx, z|
+    ZCHOSEN << { :foe => (battle.opponent ? battle.opponent.map(&:name).join("+") : "wild"), :side => idx & 1, :z => z.id,
+                 :turn => battle.turnCount + 1 }
+  })
+zp = PrismfallZ
+zdata_err = []
+zp::TYPE_ZMOVES.each_value { |m| zdata_err << "#{m} missing" if !GameData::Move.exists?(m) }
+zp::EXCLUSIVE.each_value { |e| zdata_err << "#{e[:zmove]} missing" if !GameData::Move.exists?(e[:zmove]) }
+zp.zmove_ids.each do |m|
+  next if !GameData::Move.exists?(m)
+  d = GameData::Move.get(m)
+  zdata_err << "#{m}: no ZMove flag" if !d.has_flag?("ZMove")
+  zdata_err << "#{m}: can be protected against" if d.has_flag?("CanProtect")
+  zdata_err << "#{m}: class #{d.function_code} missing" if !Object.const_defined?("Battle::Move::#{d.function_code}")
+end
+zp.all_crystals.each { |i| zdata_err << "#{i} missing/unflagged" if !GameData::Item.exists?(i) || !GameData::Item.get(i).has_flag?("ZCrystal") }
+zdata_err << "ZPOWERRING not a key item" if !GameData::Item.exists?(:ZPOWERRING) || !GameData::Item.get(:ZPOWERRING).is_key_item?
+check("Z data: #{zp.zmove_ids.length} Z-moves (ZMove flag, no CanProtect, classes), #{zp.all_crystals.length} crystals, the Z-Power Ring",
+      zdata_err.empty?, zdata_err.first(5).join("; "))
+pw = [[50, 100], [60, 120], [80, 160], [90, 175], [100, 180], [120, 190], [140, 200]].reject { |b, z| zp.power_for(b) == z }
+check("Gen 7 power table (50->100, 80->160, 90->175, 120->190, 140->200)", pw.empty?, pw.inspect)
+
+wild_z = lambda do |title, party, foe, field: nil, seed: 3, setup: nil|
+  $player.party = party
+  Harness.run_battle(title, :seed => seed, :setup => setup) do
+    setBattleRule("field", field) if field
+    setBattleRule("canLose"); setBattleRule("cannotRun")
+    WildBattle.start(foe)
+  end
+end
+vap = lambda { |moves = [:SCALD, :DIVE]| v = mk(:VAPOREON, 70, moves); v.item = :WATERIUMZ; v }
+protector = mk(:SNORLAX, 60, [:PROTECT]); protector.ability = :IMMUNITY
+
+$bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+n0 = ZLOG.length
+log = wild_z.call("Z: player's Vaporeon (AI-controlled) with the ring vs a wild Snorlax that only Protects", [vap.call], protector,
+                  field: :WATER_SURFACE)
+mine = ZLOG[n0..].select { |z| z[:side] == 0 }
+TRANSCRIPT << "" << "=== Z-Power battle 1 ===" << log.text
+z1 = mine.first || {}
+check("AI (controlPlayer) unleashed Hydro Vortex from a Water move with the ring", z1[:z] == :HYDROVORTEX && [:SCALD, :DIVE].include?(z1[:base]),
+      mine.map { |z| "#{z[:z]}<-#{z[:base]}" }.inspect)
+check("once per battle: one Z-move in a #{log.turns}-turn battle", mine.length == 1 && log.turns >= 2, "#{mine.length} in #{log.turns} turns")
+check("Z power from the base move (Scald/Dive 80 -> 160), category from the base", z1[:power] == 160 &&
+      z1[:category] == GameData::Move.get(z1[:base] || :SCALD).category, "#{z1[:power]} cat #{z1[:category]}")
+check("the base move lost 1 PP for the Z-move", z1[:base_pp] == (z1[:base_total] || 0) - 1, "#{z1[:base_pp]}/#{z1[:base_total]}")
+check("Z-move hits through Protect for 1/4 ('couldn't fully protect itself')", log.include?(/couldn't fully protect itself/))
+check("Z-Power messages and the Z-move's name in the battle log",
+      log.include?(/surrounded itself with its Z-Power/) && log.include?(/full-force Z-Move/) && log.include?(/Hydro Vortex/))
+check("field rule 1: Water Surface's Water x1.5 powers Hydro Vortex", (z1[:z_mult] || 0).round(2) == 1.5, z1[:z_mult].inspect)
+dive_z = ZLOG[n0..].find { |z| z[:base] == :DIVE }
+check("field rule 2: a base-move rule (Water Surface: Dive x1.3) does not follow it into its Z-move",
+      dive_z.nil? || (dive_z[:base_mult] > dive_z[:z_mult]), dive_z ? "Dive #{dive_z[:base_mult].round(2)} vs Z #{dive_z[:z_mult].round(2)}" : "(Scald was the base)")
+b0 = log.battle && log.battle.battlers[0]
+check("crystals can't be knocked off or stolen (unlosableItem?) and stay held",
+      b0 && b0.unlosableItem?(:WATERIUMZ) && b0.unlosableItem?(:EEVIUMZ) && !b0.unlosableItem?(:ORANBERRY) && $player.party[0].item_id == :WATERIUMZ)
+
+$bag.remove(:ZPOWERRING)
+n0 = ZLOG.length
+log = wild_z.call("Z: same battle without the Z-Power Ring", [vap.call], mk(:SNORLAX, 60, [:PROTECT]))
+check("without the Z-Power Ring the player's side never uses Z-Power", ZLOG[n0..].none? { |z| z[:side] == 0 } && log.outcome, "#{ZLOG[n0..].length} Z")
+$bag.add(:ZPOWERRING)
+
+menus = lambda do |answer|
+  proc do |battle|
+    battle.controlPlayer = false
+    sc = battle.scene
+    sc.define_singleton_method(:pbCommandMenu) { |_i, _f| 0 }
+    sc.define_singleton_method(:pbFightMenu) { |_i, _m = false, &blk| 5.times { break if blk.call(0) } }
+    sc.define_singleton_method(:pbDisplayConfirmMessage) do |msg|
+      ans = msg.to_s.include?("Z-Power") ? answer : true
+      Harness.log&.add("#{Harness.clean(msg)}  [player answers: #{ans ? 'Yes' : 'No'}]")
+      ans
+    end
+  end
+end
+n0 = ZLOG.length
+log = wild_z.call("Z: the player's own Fight menu, answering Yes", [vap.call([:SCALD])], mk(:MAGIKARP, 5), setup: menus.call(true))
+check("player's Fight menu: choosing Scald asks 'Unleash ... Z-Power?'; Yes -> Hydro Vortex",
+      log.include?(/Unleash Vaporeon's Z-Power\? \(Scald becomes Hydro Vortex\)/) && ZLOG[n0..].count { |z| z[:side] == 0 } == 1)
+n0 = ZLOG.length
+log = wild_z.call("Z: the player's own Fight menu, answering No", [vap.call([:SCALD])], mk(:MAGIKARP, 5), setup: menus.call(false))
+check("answering No uses plain Scald", log.include?(/used Scald!/) && ZLOG[n0..].none? { |z| z[:side] == 0 })
+# Each gauntlet singer (v60) against a neutral, slower wall: all eight crystals in battle.
+oct = Prismfall::Trials::Octave
+per_singer = oct::SINGERS.map do |id, sg|
+  wall = mk(:SNORLAX, 100, [:BODYSLAM, :REST]); wall.ability = :IMMUNITY
+  $player.party = [wall]
+  n0 = ZLOG.length
+  c0 = ZCHOSEN.length
+  lg = Harness.run_battle("Z: #{sg[:name]} (OCTAVE_SINGER v60) vs a neutral Snorlax", :seed => 40 + id.to_s.length) do
+    Prismfall::Trials.trainer_battle([oct::GAUNTLET_TYPE, sg[:name], oct::GAUNTLET_VERSION], field: sg[:field])
+  end
+  TRANSCRIPT << "" << lg.text
+  want = PrismfallZ::TYPE_ZMOVES[GameData::Species.get(sg[:species]).types[0]]
+  ch = ZCHOSEN[c0..].find { |z| z[:side] == 1 }
+  un = ZLOG[n0..].find { |z| z[:side] == 1 }
+  [sg[:name], want, ch && ch[:z] == want && ch[:turn] == 1 && un && un[:z] == want, "#{ch && ch[:z]}@t#{ch && ch[:turn]}"]
+end
+check("each gauntlet singer's Eeveelution uses its crystal's Z-move on turn 1 against a neutral target (all 8 crystals)",
+      per_singer.all? { |r| r[2] }, per_singer.map { |n, w, ok, d| "#{n}:#{ok ? w : "MISSING #{w} (#{d})"}" }.join(", "))
+wild_foe = mk(:VAPOREON, 40, [:SCALD]); wild_foe.item = :WATERIUMZ
+n0 = ZLOG.length
+log = wild_z.call("Z: a wild Pokemon holding a crystal", [mk(:SNORLAX, 60, [:BODYSLAM])], wild_foe)
+check("wild Pokemon never use Z-Power", ZLOG[n0..].none? { |z| z[:side] == 1 })
+
+#-------------------------------------------------------------------------------
+section("8. The Eevee Octave: eight quests, the help order, the 9-bout gauntlet, the reward")
+#-------------------------------------------------------------------------------
+oc = tr::Octave
+def otalk(key, answers = [])
+  Prismfall::Trials.answers = answers.dup
+  TRANSCRIPT << "-- talk #{key}"
+  log = Harness::BattleLog.new("talk #{key}")
+  Harness.current_log = log
+  ret = nil
+  begin
+    ret = pf_trial_talk(key)
+  ensure
+    Harness.current_log = nil
+  end
+  if log.battle || !log.errors.empty?
+    TRANSCRIPT << log.text.lines.map { |l| "    | #{l.rstrip}" }.join("\n")
+    log.errors.each { |e| check("no engine error in talk #{key}", false, e.inspect[0, 300]) }
+  end
+  left = Prismfall::Trials.answers.length
+  check("talk #{key} used every scripted answer", left == 0, "#{left} unused") if !answers.empty?
+  [ret, log]
+end
+NIGHT = [false]
+PBDayNight.singleton_class.send(:alias_method, :__harness_isNight?, :isNight?) if !PBDayNight.respond_to?(:__harness_isNight?)
+PBDayNight.define_singleton_method(:isNight?) { |*_a| NIGHT[0] }
+# A strong Lv 100 test team (a logic test of the chain, not a balance test: see BALANCE.md / REQUESTS.md).
+gauntlet_team = lambda do
+  [[:SNORLAX, [:BODYSLAM, :HEAVYSLAM, :CRUNCH, :EARTHQUAKE], :LEFTOVERS, [:HP, :ATTACK]],
+   [:GARCHOMP, [:EARTHQUAKE, :DRAGONCLAW, :STONEEDGE, :FIREFANG], :LIFEORB, [:ATTACK, :SPEED]],
+   [:METAGROSS, [:METEORMASH, :ZENHEADBUTT, :EARTHQUAKE, :BULLETPUNCH], :LEFTOVERS, [:HP, :ATTACK]],
+   [:TYRANITAR, [:STONEEDGE, :CRUNCH, :EARTHQUAKE, :ICEPUNCH], :LEFTOVERS, [:HP, :ATTACK]],
+   [:VOLCARONA, [:FIERYDANCE, :BUGBUZZ, :QUIVERDANCE, :GIGADRAIN], :LEFTOVERS, [:SPECIAL_ATTACK, :SPEED]],
+   [:TOGEKISS, [:AIRSLASH, :DAZZLINGGLEAM, :AURASPHERE, :ROOST], :LEFTOVERS, [:HP, :SPECIAL_ATTACK]]].map do |sp, mv, it, evs|
+    pk = mk(sp, 100, mv)
+    evs.each { |st| pk.ev[st] = 252 }
+    pk.item = it; pk.calc_stats; pk
+  end
+end
+$player.party = gauntlet_team.call
+$bag.remove(:ZPOWERRING) while $bag.has?(:ZPOWERRING)
+[:CR_OCTAVE, *oc::SINGERS.values.map { |sg| sg[:quest] }].each { |q| tr.reset(q) }
+oc.reset
+$player.badges = Array.new(18) { |i| i < 1 }
+otalk(:VESPER_SALTMERE, ["Why me?"])
+check("Ch2 Saltmere: Vesper's request starts 'The Eevee Octave' (step :road)", tr.at?(:CR_OCTAVE, :road), tr.state(:CR_OCTAVE))
+check("Carol isn't met before Crownhaven: her quest is locked until S155", tr.state(:CR_OCTAVE_NINTH_VERSE) == :locked && !tr.talk_ready?(:OCTAVE_CAROL))
+$game_switches[155] = true
+otalk(:OCTAVE_CAROL)
+check("Carol with 0 of 7 helped: :not_yet lists the missing singers; her petition stays off the board", tr.state(:CR_OCTAVE_NINTH_VERSE) == :locked &&
+      TRANSCRIPT.last(14).join("\n").include?("Lento, on the Mirror Mere"))
+$game_switches[155] = false
+# Lyra (Elowen), gym order says first; done first here.
+otalk(:OCTAVE_LYRA, ["I'll come."])
+otalk(:MOSS_STONE, ["Sing along."])
+check("Lyra: singing along doesn't work (still at the stone)", tr.at?(:EL_OCTAVE_MOSS, :stone))
+srand(11)
+otalk(:MOSS_STONE, ["Sit down by the stone and say nothing."])
+check("Lyra: the quiet answer -> Leafeon -> duel won -> quest done, helped 1st", tr.done?(:EL_OCTAVE_MOSS) && oc.position(:LYRA) == 1,
+      "#{tr.state(:EL_OCTAVE_MOSS)} pos #{oc.position(:LYRA)}")
+# Out of gym order on purpose: Cadence (Zenith) before Aria (Isenmar), Forte before Sona and Noct.
+$player.badges = Array.new(18) { |i| i < 6 }
+otalk(:OCTAVE_CADENCE, ["How do we fix it?"])
+srand(12)
+2.times { otalk(:LATTICE_JUNCTION) }
+otalk(:LATTICE_JUNCTION, ["'A Lattice tuning fault.'"])   # the third box -> the duel -> P-3NNY's report
+check("Cadence: three junctions -> duel on the Neon Grid -> filed as a fault (Meridian +1)", tr.done?(:ZE_OCTAVE_OFF_BEAT) &&
+      tr.outcome(:ZE_OCTAVE_OFF_BEAT) == :fault && oc.position(:CADENCE) == 2, "#{tr.state(:ZE_OCTAVE_OFF_BEAT)} #{tr.outcome(:ZE_OCTAVE_OFF_BEAT)}")
+otalk(:OCTAVE_ARIA, ["Let's listen."])
+otalk(:EBB_NOTE); otalk(:EBB_NOTE)
+check("Aria: two notes heard, still listening", tr.at?(:IS_OCTAVE_DROWNED_NOTE, :listen) && tr.count(:IS_OCTAVE_DROWNED_NOTE, :notes) == 2)
+otalk(:EBB_NOTE)
+srand(13)
+otalk(:MILL_WHEEL)
+check("Aria: third note -> the Mill Quay wheel -> Brine reforms -> duel won, helped 3rd", tr.done?(:IS_OCTAVE_DROWNED_NOTE) && oc.position(:ARIA) == 3)
+otalk(:OCTAVE_FORTE, ["Why do you want to join the Legion?"])
+otalk(:OCTAVE_FORTE, ["I'll stand for you."])
+srand(14)
+otalk(:CRUCIBLE_LEGATE, ["Tell her who you are, Forte."])
+check("Forte: the truth before the Legate -> duel on Volcanic -> Writ, helped 4th", tr.done?(:AS_OCTAVE_TOO_LOUD) && oc.position(:FORTE) == 4)
+otalk(:OCTAVE_SONA, ["Yes."])
+3.times { otalk(:SUN_DRIFT) }
+NIGHT[0] = true
+otalk(:OCTAVE_SONA)
+check("Sona: at night the noon light can't come (still :noon)", tr.at?(:OS_OCTAVE_NOON_BELL, :noon))
+NIGHT[0] = false
+srand(15)
+otalk(:OCTAVE_SONA)
+check("Sona: three drifts, noon -> Noon's jewel lights -> duel won, helped 5th", tr.done?(:OS_OCTAVE_NOON_BELL) && oc.position(:SONA) == 5)
+$player.badges = Array.new(18) { |i| i < 11 }
+otalk(:OCTAVE_LENTO, ["How?"])
+3.times { otalk(:MERE_CRACK) }
+check("Lento: three cracks walked backwards -> the reflection lets go -> duel won, helped 6th", tr.done?(:AN_OCTAVE_STILL_WATER) && oc.position(:LENTO) == 6,
+      "#{tr.state(:AN_OCTAVE_STILL_WATER)} step #{tr.step(:AN_OCTAVE_STILL_WATER)}")
+otalk(:FERRYMAN_MIREFEN, ["I'll watch the lamps."])
+NIGHT[0] = true
+3.times { otalk(:FERRY_LAMP) }
+srand(16)
+otalk(:OCTAVE_NOCT, ["Marsh gas. It happens."])
+NIGHT[0] = false
+check("Noct: three lamps at night -> the lamplighter -> covered for him -> duel won, helped 7th", tr.done?(:NA_OCTAVE_LAMPS_OUT) &&
+      tr.outcome(:NA_OCTAVE_LAMPS_OUT) == :covered && oc.position(:NOCT) == 7)
+check("Vesper not in the garden yet (7 of 8)", !oc.ready? && !tr.talk_ready?(:VESPER_GARDEN))
+$player.badges = Array.new(18) { true }
+$game_switches[155] = true
+TRANSCRIPT << "-- (Carol's verses follow, in the order helped)"
+mark = TRANSCRIPT.length
+srand(17)
+otalk(:OCTAVE_CAROL)
+verses = TRANSCRIPT[mark..].join("\n")
+seen = { :LYRA => "Lyra!", :CADENCE => "Cadence kept", :ARIA => "Aria and the river", :FORTE => "Forte's letter",
+         :SONA => "Sona said", :LENTO => "Lento's reflection", :NOCT => "Noct doesn't write" }.map { |id, t| [id, verses.index(t)] }
+order_ok = seen.all? { |_id, i| i } && seen.map { |_id, i| i } == seen.map { |_id, i| i }.sort
+check("Carol tells the seven verses in the order you helped them", order_ok, seen.map { |id, i| "#{id}@#{i}" }.join(" "))
+check("Carol last: duel on Fairy Tale won, helped 8th; Vesper's quest moves to :garden", tr.done?(:CR_OCTAVE_NINTH_VERSE) &&
+      oc.position(:CAROL) == 8 && tr.at?(:CR_OCTAVE, :garden), "#{tr.state(:CR_OCTAVE_NINTH_VERSE)} #{tr.step(:CR_OCTAVE)}")
+expected = [:LYRA, :CADENCE, :ARIA, :FORTE, :SONA, :LENTO, :NOCT, :CAROL]
+check("help order recorded: #{oc.order.map { |i| oc::SINGERS[i][:name] }.join(' > ')}", oc.order == expected)
+check("Vesper appears in the Glassfall Memorial Garden (condition octave_ready)", oc.ready? && tr.talk_ready?(:VESPER_GARDEN) &&
+      Prismfall::Conditions.evaluate("octave_ready"))
+# A lost gauntlet: heal, nothing recorded, try again later.
+keep = $player.party
+$player.party = [mk(:MAGIKARP, 5, [:SPLASH])]
+srand(18)
+otalk(:VESPER_GARDEN, ["Begin."])
+check("losing the gauntlet: quest stays at :garden, party healed, order kept", tr.at?(:CR_OCTAVE, :garden) && $player.party[0].hp == $player.party[0].totalhp &&
+      oc.order == expected)
+$player.party = keep
+$player.heal_party
+n0 = ZLOG.length
+c0 = ZCHOSEN.length
+mark = TRANSCRIPT.length
+HP_START = []; HP_END = []
+EventHandlers.add(:on_start_battle, :harness_hp, proc { HP_START << $player.party.sum(&:hp) })
+EventHandlers.add(:on_end_battle, :harness_hp, proc { |_d, _c| HP_END << $player.party.sum(&:hp) })
+srand(19)
+_r, glog = otalk(:VESPER_GARDEN, ["Begin."])
+EventHandlers.remove(:on_start_battle, :harness_hp)
+EventHandlers.remove(:on_end_battle, :harness_hp)
+bouts = TRANSCRIPT[mark..].join("\n").scan(/^  Bout (\d) of 9: (\w+) and (\w+)!/)   # overworld lines, not the battle-log copy
+check("the gauntlet runs 9 bouts in the order helped, Vesper last",
+      bouts.map { |b| b[1] } == expected.map { |i| oc::SINGERS[i][:name] } + ["Vesper"], bouts.map { |b| b[1] }.join(" > "))
+fields = glog.text.scan(/^\s*field: (\w+)/).flatten.map(&:to_sym)
+want_f = expected.map { |i| f = oc::SINGERS[i][:field]; f.is_a?(Array) ? f[0] : f } + [oc::HOST_FIELD]
+check("each bout on its Eeveelution's home field (host: Grand Stage)", fields == want_f, fields.join(", "))
+check("Flower Garden bout starts at stage 3", glog.text.include?("field: FLOWER_GARDEN (stage 3)"))
+want_z = expected.map { |i| PrismfallZ::TYPE_ZMOVES[GameData::Species.get(oc::SINGERS[i][:species]).types[0]] } + [:EXTREMEEVOBOOST]
+chosen = ZCHOSEN[c0..].select { |z| z[:side] == 1 }
+first_pick = chosen.group_by { |z| z[:foe] }.map { |foe, zs| [foe, zs.first] }.to_h
+names = expected.map { |i| oc::SINGERS[i][:name] } + ["Vesper"]
+wrong = names.each_with_index.select { |n, i| first_pick[n] && first_pick[n][:z] != want_z[i] }
+check("in the gauntlet each singer who chose Z-Power chose its own crystal's Z-move (#{first_pick.length}/9 did; " \
+      "the AI holds it back against an immune target)", wrong.empty? && first_pick.length >= 6,
+      names.map { |n| first_pick[n] ? "#{n}:#{first_pick[n][:z]}@t#{first_pick[n][:turn]}" : "#{n}:-" }.join(", "))
+foe_z = ZLOG[n0..].select { |z| z[:side] == 1 }
+check("Z-moves unleashed by the singers who got to act (#{foe_z.length}/9), each once",
+      foe_z.length >= 1 && foe_z.map { |z| z[:foe] }.uniq.length == foe_z.length && (foe_z.map { |z| z[:z] } - want_z).empty?,
+      foe_z.map { |z| "#{z[:foe]}:#{z[:z]}" }.join(", "))
+carried = (1...HP_START.length).all? { |i| HP_START[i] == HP_END[i - 1] }
+check("no healing between bouts: each bout starts with the HP the last one ended with",
+      HP_START.length == 9 && carried && HP_START.last < $player.party.sum(&:totalhp), "start HP #{HP_START.inspect} / end #{HP_END.inspect}")
+check("gauntlet won: 'The Eevee Octave' done, S177 EEVEE_OCTAVE_DONE on", tr.done?(:CR_OCTAVE) && $game_switches[177], tr.state(:CR_OCTAVE))
+eevee = $player.party.find { |p| p.isSpecies?(:EEVEE) } || ($PokemonStorage && $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }.find { |p| p.isSpecies?(:EEVEE) })
+check("reward: an Eevee (Lv 70, Last Resort) + the Eevium Z + the Z-Power Ring", eevee && eevee.level == 70 && eevee.hasMove?(:LASTRESORT) &&
+      $bag.has?(:EEVIUMZ) && $bag.has?(:ZPOWERRING), eevee ? "#{eevee.name} Lv#{eevee.level}" : "no Eevee")
+check("Crownhaven points from Carol (4) + the Octave (5)", tr.points(:CROWNHAVEN) >= 9, tr.points(:CROWNHAVEN))
+# The reward in use: the player's new Eevee with the Eevium Z on the Grand Stage.
+if eevee
+  eevee.item = :EEVIUMZ
+  n0 = ZLOG.length
+  log = wild_z.call("Z: the reward Eevee holding the Eevium Z on the Grand Stage", [eevee], mk(:SNORLAX, 60, [:BODYSLAM]), field: :GRAND_STAGE)
+  TRANSCRIPT << "" << "=== Extreme Evoboost ===" << log.text
+  ev = ZLOG[n0..].find { |z| z[:side] == 0 }
+  dn = ZDONE.reverse.find { |z| z[:side] == 0 && z[:z] == :EXTREMEEVOBOOST }
+  st = dn ? dn[:stages] : {}
+  check("Eevee + Eevium Z: Last Resort becomes Extreme Evoboost on turn 1 (even with its other moves unused)",
+        ev && ev[:z] == :EXTREMEEVOBOOST && ev[:base] == :LASTRESORT && log.include?(/Extreme Evoboost/), ev.inspect)
+  check("Extreme Evoboost: +2 Attack, Defense, Sp. Atk, Sp. Def and Speed",
+        [:ATTACK, :DEFENSE, :SPECIAL_ATTACK, :SPECIAL_DEFENSE, :SPEED].all? { |s| (st[s] || 0) >= 2 }, st.inspect)
+  check("field showpiece: the Z-move lifts the Grand Stage to Encore (stage 2)", log.field_changes.any? { |o, n, sg| n == :GRAND_STAGE && sg == 2 },
+        log.field_changes.inspect)
+end
+PBDayNight.define_singleton_method(:isNight?) { |*a| __harness_isNight?(*a) }
+Prismfall.state.level_cap_override = cap_override0
 
 #-------------------------------------------------------------------------------
 fails = RESULTS.reject { |r| r[1] }

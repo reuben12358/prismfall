@@ -11,11 +11,11 @@
 
 ---
 
-## CHAPTER 6 — "What the Sand Keeps" (The Brass Dunes → Static Tunnels → The Rib Road → Duneholt, Gym 5; Ossuary of Dunes; K3)
+## CHAPTER 6 — "What the Sand Keeps" (the Brass Road: Candle Down → The Highwold → The Brass Dunes → Static Tunnels → Duneholt, Gym 5; Ossuary of Dunes; K3)
 
-**Location:** R9, **Static Tunnels** (Flash), R10 (`:DESERT`), **Duneholt** (Ossaria), R11, **Ossuary of Dunes** (Unown ruins, Strength), **Sinkfield** (628).
+**Location:** **the Brass Road** north out of Lumen: **the Meridian Mainline** (612, borderland G) off the plateau, then Elowen's Crown Road round the Crownwall's east and north, **Candle Down** (602) and **the Highwold** (603), then **the Brass Dunes** (600, borderland C) with **Copperdune** (610) and **Static Tunnels** (604/605, Flash), **the Rib Road** (601, `:DESERT`) and **Sunbleach Flats** (613) to **Duneholt** (Ossaria). Past the city: **the Marrow Road** (620) with the **Ossuary of Dunes** (Unown ruins, Strength), and **Sinkfield** (628).
 
-**Borderland:** Zenith's plateau gives way to **Ossaria, the Bone Sands**. Fossil ribs as big as houses poke from the dunes. Caravan-houses pitch tents in the lee of them. NPCs quote prices in "bones".
+**Borderland:** Zenith and Ossaria don't touch, so the road crosses Elowen. The Mainline's cutting drops off the plateau into the Crownlands, and the Crown Road takes the PC round the Crownwall: Candle Down's pilgrim cairns, with a view into the wall's one gap, then the Highwold's chalk and skylarks north of the wall. The downs give way to the Brass Dunes, where the railway ran into the sand, and then to **Ossaria, the Bone Sands**. Fossil ribs as big as houses poke from the dunes. Caravan-houses pitch tents in the lee of them. NPCs quote prices in "bones".
 
 **Arrival.** Duneholt is sandstone terraces around a great **sinking well**. The aquifer the Earth Plate holds in the stone is collapsing under **Meridian's deep drills**, and every week the waterline drops another rung. The Prince-Elector's men post notices: *"By license of His Excellency Idris Kassan, the Concord deep-works are a protected enterprise."* Caravan-mothers curse at them.
 - **Sahar's Dig Lab:** fossil revival opens here. Ossaria is fossil country, so a wide selection is available, and Sahar is delighted by anyone who brings her bones.
@@ -54,12 +54,12 @@
 
 ---
 
-## CHAPTER 7 — "The Quiet Ward" (The Leach Canyons → Mirefen, Gym 6; J2)
+## CHAPTER 7 — "The Quiet Ward" (the Leach Road: The Leach Canyons → Wormwood Lea → The Gutterfall → Mirefen, Gym 6; J2)
 
-**Location:** The Leach Canyons, **Mirefen** (Nadir, `:CORROSIVE_MIRE`), the **Quiet Ward**, the Sump Barons' **Sweet Market**, Leechman's Walk, **Miasma Caverns**, **Weeping Fen** (648), **Lake Sallow** (Surf after the badge).
+**Location:** **the Leach Road** down the River Leach: the Marrow Road (620), **the Kneeling Stones** (632, Ossaria's crossroads), **the Leach Canyons** (621, borderland D) with **Charwell** (630), then Elowen's **Wormwood Lea** (634) east of the Crown, and **the Gutterfall** (633, borderland F) down into Nadir. **Mirefen** (Nadir, `:CORROSIVE_MIRE`), the **Quiet Ward**, the Sump Barons' **Sweet Market**, Leechman's Walk, **Miasma Caverns**, **Weeping Fen** (648), **Lake Sallow** (Surf after the badge).
 
 **Arrival: first descent into Nadir.**
-- The PC descends a rattling lift-cage from the plateau's edge. The sky disappears, and Zenith's underside is a ceiling of pipes dripping slag. The air tastes of pennies. Rebreathers are for sale on every corner.
+- The PC rides a rattling lift-cage down the Gutterfall, beside the blue waterfall where the Leach drops off the Crownland edge and Zenith's outfall pours in from the plateau's north cliff. Under the overhang the sky disappears, and Zenith's underside is a ceiling of pipes dripping slag. The air tastes of pennies. Rebreathers are for sale on every corner.
 - Hollow Ring graffiti is everywhere, often beside a painted **Ogre in the Mask** (Nadir's folk-saint).
 - Mirefen is stilt-houses over a marsh that **glows blue at night**: Zenith's Lattice runoff mixing with the Toxic Plate's mire, the "poison-blue moon" of the rhyme.
 - This is the best street food in Velmora (bog coffee, slag-fried noodles), and people are kinder here than topside.
@@ -96,11 +96,11 @@
 
 ## CHAPTER 8 — "The Light Stone" (Leechman's Walk → Lake Sallow → Cindervault, Gym 7; the Caldera Crisis)
 
-**Location:** Lake Sallow (Surf), **Lantern Isle** (optional, `:BEACH`), the road up into **Ashkaar**, **Cindervault** (`:VOLCANIC`), **Mount Cinder**, **Ashkaarfall** (668), the Ashmarch (`:ASHEN_WASTE` after the crisis).
+**Location:** **the Sulfur Road**: Leechman's Walk (640), **Lake Sallow** (641, Surf, borderland E) with **Scaldwater** (650) and **Lantern Isle** (optional, `:BEACH`), then **the Pyre Road** (652) up into **Ashkaar**. **Cindervault** (`:VOLCANIC`), **the Cinderhorn** (664–666), **Emberfall** (668), the Ashmarch (`:ASHEN_WASTE` after the crisis).
 
-**Borderland:** the land climbs out of Nadir's runoff into **Ashkaar, the Dragonfire Dominion**: black basalt, red lacquer banners and dragon-riders overhead. Oaths are sworn over braziers at every gate. Lying to a Dominion guard is a crime, and an early NPC teaches this ("Say true or say nothing, stranger").
+**Borderland:** past Lake Sallow's sulfur shallows, still Elowen ground, the land climbs into **Ashkaar, the Dragonfire Dominion**: black basalt, red lacquer banners and dragon-riders overhead. Oaths are sworn over braziers at every gate. Lying to a Dominion guard is a crime, and an early NPC teaches this ("Say true or say nothing, stranger").
 
-**Arrival.** Cindervault is a forge-city inside Mount Cinder's caldera. Lava-channels for quenching, smithies stacked up the crater walls, the Hearthguild's bells.
+**Arrival.** Cindervault is a forge-city inside the Cinderhorn's caldera. Lava-channels for quenching, smithies stacked up the crater walls, the Hearthguild's bells.
 - Warden **Brann Holloway** is a giant, booming and sentimental. He drops his hammer to bear-hug Larch, an old friend, and then the PC for good measure.
 - **Two crises:**
   1. **Meridian's geothermal tap** at the caldera floor is overdrawing the Flame Plate's Imprint. The magma is rising, and the forges run too hot to work.
@@ -115,7 +115,7 @@
 - **The Hammer:** a Bereaved squad planting a Splitter on the tap to cause an eruption "Meridian can't cover up".
 - **CHOICE `:ch8_caldera`:**
   - **Help Wick vent.** The battle field transitions `:VOLCANIC` → `:ASHEN_WASTE`. The eruption is averted and the forges go cold for months, and Brann grumbles about it for a season. Hollow Standing goes up, Meridian Standing down. The Ashmarch becomes ash.
-  - **Help Quent's dampers.** The eruption is averted, Meridian Standing goes up and the tap keeps running. The Bleed at Ashkaarfall grows (map state), and Brann's Bond goes up ("You kept my forges lit").
+  - **Help Quent's dampers.** The eruption is averted, Meridian Standing goes up and the tap keeps running. The Bleed at Emberfall grows (map state), and Brann's Bond goes up ("You kept my forges lit").
   - **Shut the tap down by force** (a harder fight vs Quent plus Directorate). The eruption is averted, Accord Standing goes up and the Dominar is impressed (`DOMINAR` respect +1). Meridian Standing drops hard.
 - **Game over `GO_LET_THEM_LISTEN` "Let Them Listen".** Trigger: a Hammer bomber hands the PC the detonator and says "Do it. They'll finally listen." The PC accepts. Foreshadowing: the Field Notes entry on Shatters, and the Lowlight's glass. *Epitaph: "They listened. There was no one left to tell."*
 
@@ -132,9 +132,9 @@
 
 ---
 
-## CHAPTER 9 — "The Iron Conclave" (The Ashmarch → The Ironway → Ironreach, Gym 8; K4; the Conclave; the Mourner unmasked)
+## CHAPTER 9 — "The Iron Conclave" (the Iron Road: The Ashmarch → The Ironway → Candle Down → The Long Drop → Ironreach, Gym 8; K4; the Conclave; the Mourner unmasked)
 
-**Location:** The Ashmarch, **The Ironway** (`:MOUNTAIN`), **Ironreach** (Nadir, `:COLOSSEUM`), the **Iron Pit**, the Conclave galleries, the old Aurel mine shafts.
+**Location:** **the Iron Road** west out of the Dominion: the Ashmarch (660), **the Ironway** (661, `:MOUNTAIN`, borderland E), **Candle Down** (602) on the Crown Road, then **the Long Drop** (672, borderland F), the shaft road down under Zenith's west rim. Optional: the war road north from Cindervault's north gate (the Cinderglass Barrens 662, Glasswake 670, the Wyrmtongue 673 to Cinder Cape Warfort; 14_WAR_AND_BLESSING). **Ironreach** (Nadir, `:COLOSSEUM`), the **Iron Pit**, the Conclave galleries, the old Aurel mine shafts.
 
 **Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier Nadir trusts.
 - **The Conclave.** Sovereign Valen has called a rare **Accord Conclave** here, the first held in Nadir in a century, to vote on extending the Mandate realm-wide. Every available Warden is present.

@@ -46,27 +46,27 @@ Pokemon = KECLEON,15
 [LEADER_DORIAN,Dorian,100]
 Items = SUPERPOTION
 LoseText = Bravo! Bravissimo! The audience is yours tonight!
-Pokemon = AIPOM,11
+Pokemon = AIPOM,10
     Moves = FAKEOUT,ASTONISH,SCRATCH,TICKLE
     Ability = PICKUP
     Item = ORANBERRY
     Nature = JOLLY
     IV = 20
-    EV = 4,66,0,66,0,0
-Pokemon = MINCCINO,11
+    EV = 4,60,0,60,0,0
+Pokemon = MINCCINO,10
     Moves = ECHOEDVOICE,ROUND,ENCORE,SING
     Ability = CUTECHARM
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,66,66,0
-Pokemon = SPINDA,12
+    EV = 4,0,0,60,60,0
+Pokemon = SPINDA,11
     Moves = TEETERDANCE,PSYBEAM,COPYCAT,TACKLE
     Ability = OWNTEMPO
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 20
-    EV = 4,72,0,72,0,0
+    EV = 4,66,0,66,0,0
 Pokemon = WHISMUR,12
     Moves = ROUND,ASTONISH,POUND,HOWL
     Ability = SOUNDPROOF
@@ -74,13 +74,13 @@ Pokemon = WHISMUR,12
     Nature = HARDY
     IV = 20
     EV = 4,0,0,72,72,0
-Pokemon = JIGGLYPUFF,12
+Pokemon = JIGGLYPUFF,11
     Moves = SING,DISARMINGVOICE,ROUND,DEFENSECURL
     Ability = COMPETITIVE
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 20
-    EV = 72,0,4,0,72,0
+    EV = 66,0,4,0,66,0
 Pokemon = KECLEON,15
     Moves = FAKEOUT,FURYSWIPES,SHADOWSNEAK,KNOCKOFF
     Ability = PROTEAN
@@ -146,20 +146,20 @@ Pokemon = SWADLOON,19
 [LEADER_TAMSIN,Tamsin,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Oh! You've unpicked every stitch. Well sewn, challenger.
-Pokemon = JOLTIK,15
+Pokemon = JOLTIK,14
     Moves = ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT
     Ability = COMPOUNDEYES
     Item = FOCUSSASH
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,90,90,0
-Pokemon = SURSKIT,16
+    EV = 4,0,0,84,84,0
+Pokemon = SURSKIT,15
     Moves = RAINDANCE,BUBBLEBEAM,STRUGGLEBUG,QUICKATTACK
     Ability = SWIFTSWIM
     Item = DAMPROCK
     Nature = TIMID
     IV = 20
-    EV = 4,0,0,96,96,0
+    EV = 4,0,0,90,90,0
 Pokemon = VIVILLON,18
     Moves = RAGEPOWDER,STRUGGLEBUG,GUST,STUNSPORE
     Ability = COMPOUNDEYES
@@ -167,18 +167,11 @@ Pokemon = VIVILLON,18
     Nature = TIMID
     IV = 20
     EV = 4,0,0,108,108,0
-Pokemon = DWEBBLE,17
+Pokemon = DWEBBLE,16
     Moves = SMACKDOWN,ROCKTOMB,BUGBITE,STEALTHROCK
     Ability = SHELLARMOR
     Item = SITRUSBERRY
     Nature = IMPISH
-    IV = 20
-    EV = 102,102,4,0,0,0
-Pokemon = SPIDOPS,16
-    Moves = SILKTRAP,BUGBITE,STRUGGLEBUG,ASSURANCE
-    Ability = STAKEOUT
-    Item = SITRUSBERRY
-    Nature = ADAMANT
     IV = 20
     EV = 96,96,4,0,0,0
 Pokemon = SWADLOON,19
@@ -248,40 +241,40 @@ Pokemon = GYARADOS,23
 [LEADER_MARISOL,Marisol,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Ha! Tide's turned. Take the badge before I change my mind.
-Pokemon = PELIPPER,20
+Pokemon = PELIPPER,19
     Moves = WATERPULSE,WINGATTACK,ROOST,TAILWIND
     Ability = KEENEYE
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 20
-    EV = 120,0,4,0,120,0
-Pokemon = LANTURN,21
+    EV = 114,0,4,0,114,0
+Pokemon = LANTURN,20
     Moves = BUBBLEBEAM,SPARK,CONFUSERAY,THUNDERWAVE
     Ability = VOLTABSORB
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 20
-    EV = 126,0,4,0,126,0
-Pokemon = ARAQUANID,22
+    EV = 120,0,4,0,120,0
+Pokemon = DEWPIDER,21
     Moves = BUBBLEBEAM,BUGBITE,BITE,AQUARING
     Ability = WATERABSORB
-    Item = SITRUSBERRY
+    Item = ORANBERRY
     Nature = ADAMANT
     IV = 20
-    EV = 132,132,4,0,0,0
-Pokemon = FLOATZEL,21
+    EV = 126,126,4,0,0,0
+Pokemon = FLOATZEL,20
     Moves = AQUAJET,WATERPULSE,BITE,QUICKATTACK
     Ability = SWIFTSWIM
     Item = ORANBERRY
     Nature = NAIVE
     IV = 20
-    EV = 4,126,0,126,0,0
+    EV = 4,120,0,120,0,0
 Pokemon = GYARADOS,23
     Name = Lucky
-    Moves = WATERFALL,DIVE,ICEFANG,DRAGONDANCE
+    Moves = WHIRLPOOL,BRINE,ICEFANG,BITE
     Ability = INTIMIDATE
     Item = SITRUSBERRY
-    Nature = ADAMANT
+    Nature = MODEST
     IV = 20
     EV = 138,0,4,0,138,0
 #-------------------------------
@@ -2057,13 +2050,13 @@ Pokemon = STARLY,5
     Nature = JOLLY
     IV = 20
     EV = 4,30,0,30,0,0
-Pokemon = CHARMANDER,6
+Pokemon = CHARMANDER,5
     Moves = SCRATCH,GROWL,EMBER
     AbilityIndex = 0
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,36,36,0
+    EV = 4,0,0,30,30,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,210]
 LoseText = Whatever. Beginner's luck. Don't get used to it.
@@ -2092,13 +2085,13 @@ Pokemon = STARLY,5
     Nature = JOLLY
     IV = 20
     EV = 4,30,0,30,0,0
-Pokemon = SQUIRTLE,6
+Pokemon = SQUIRTLE,5
     Moves = TACKLE,TAILWHIP,WATERGUN,WITHDRAW
     AbilityIndex = 0
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,36,36,0
+    EV = 4,0,0,30,30,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,211]
 LoseText = Whatever. Beginner's luck. Don't get used to it.
@@ -2127,13 +2120,13 @@ Pokemon = STARLY,5
     Nature = JOLLY
     IV = 20
     EV = 4,30,0,30,0,0
-Pokemon = BULBASAUR,6
+Pokemon = BULBASAUR,5
     Moves = TACKLE,GROWL,VINEWHIP,GROWTH
     AbilityIndex = 0
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,36,36,0
+    EV = 4,0,0,30,30,0
 #-------------------------------
 [RIVAL_KESTREL,Kestrel,212]
 LoseText = Whatever. Beginner's luck. Don't get used to it.
@@ -2177,20 +2170,20 @@ Pokemon = CHARMELEON,23
 [RIVAL_KESTREL,Kestrel,120]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
-Pokemon = STARAVIA,22
+Pokemon = STARAVIA,21
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,UTURN
     Ability = INTIMIDATE
     Item = TELLURICSEED
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
-Pokemon = SANDILE,22
+    EV = 4,126,0,126,0,0
+Pokemon = SANDILE,21
     Moves = BITE,ROCKTOMB,DIG,HONECLAWS
     Ability = MOXIE
     Item = ORANBERRY
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
+    EV = 4,126,0,126,0,0
 Pokemon = DEINO,21
     Moves = DRAGONBREATH,BITE,HEADBUTT,ROAR
     Ability = HUSTLE
@@ -2198,14 +2191,14 @@ Pokemon = DEINO,21
     Nature = ADAMANT
     IV = 20
     EV = 4,126,0,126,0,0
-Pokemon = HONEDGE,22
+Pokemon = HONEDGE,21
     Name = Morwen
-    Moves = SHADOWSNEAK,SLASH,AERIALACE,SWORDSDANCE
+    Moves = SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER
     Ability = NOGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 132,132,4,0,0,0
+    EV = 126,126,4,0,0,0
 Pokemon = CHARMELEON,23
     Moves = FIREFANG,DRAGONBREATH,SCRATCH,SMOKESCREEN
     AbilityIndex = 0
@@ -2264,20 +2257,20 @@ Pokemon = WARTORTLE,23
 [RIVAL_KESTREL,Kestrel,121]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
-Pokemon = STARAVIA,22
+Pokemon = STARAVIA,21
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,UTURN
     Ability = INTIMIDATE
     Item = TELLURICSEED
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
-Pokemon = SANDILE,22
+    EV = 4,126,0,126,0,0
+Pokemon = SANDILE,21
     Moves = BITE,ROCKTOMB,DIG,HONECLAWS
     Ability = MOXIE
     Item = ORANBERRY
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
+    EV = 4,126,0,126,0,0
 Pokemon = DEINO,21
     Moves = DRAGONBREATH,BITE,HEADBUTT,ROAR
     Ability = HUSTLE
@@ -2285,14 +2278,14 @@ Pokemon = DEINO,21
     Nature = ADAMANT
     IV = 20
     EV = 4,126,0,126,0,0
-Pokemon = HONEDGE,22
+Pokemon = HONEDGE,21
     Name = Morwen
-    Moves = SHADOWSNEAK,SLASH,AERIALACE,SWORDSDANCE
+    Moves = SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER
     Ability = NOGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 132,132,4,0,0,0
+    EV = 126,126,4,0,0,0
 Pokemon = WARTORTLE,23
     Moves = WATERPULSE,BITE,RAPIDSPIN,AQUATAIL
     AbilityIndex = 0
@@ -2351,20 +2344,20 @@ Pokemon = IVYSAUR,23
 [RIVAL_KESTREL,Kestrel,122]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
-Pokemon = STARAVIA,22
+Pokemon = STARAVIA,21
     Moves = WINGATTACK,QUICKATTACK,AERIALACE,UTURN
     Ability = INTIMIDATE
     Item = TELLURICSEED
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
-Pokemon = SANDILE,22
+    EV = 4,126,0,126,0,0
+Pokemon = SANDILE,21
     Moves = BITE,ROCKTOMB,DIG,HONECLAWS
     Ability = MOXIE
     Item = ORANBERRY
     Nature = JOLLY
     IV = 20
-    EV = 4,132,0,132,0,0
+    EV = 4,126,0,126,0,0
 Pokemon = DEINO,21
     Moves = DRAGONBREATH,BITE,HEADBUTT,ROAR
     Ability = HUSTLE
@@ -2372,14 +2365,14 @@ Pokemon = DEINO,21
     Nature = ADAMANT
     IV = 20
     EV = 4,126,0,126,0,0
-Pokemon = HONEDGE,22
+Pokemon = HONEDGE,21
     Name = Morwen
-    Moves = SHADOWSNEAK,SLASH,AERIALACE,SWORDSDANCE
+    Moves = SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER
     Ability = NOGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 132,132,4,0,0,0
+    EV = 126,126,4,0,0,0
 Pokemon = IVYSAUR,23
     Moves = RAZORLEAF,LEECHSEED,SLEEPPOWDER,SEEDBOMB
     AbilityIndex = 0
@@ -5032,28 +5025,28 @@ Pokemon = SQUIRTLE,15
 [RIVAL_JUNO,Juno,110]
 Items = SUPERPOTION
 LoseText = Aww, you're so good at this! Okay, again soon, okay?
-Pokemon = COTTONEE,14
+Pokemon = COTTONEE,13
     Moves = FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE
     Ability = PRANKSTER
     Item = ORANBERRY
     Nature = BOLD
     IV = 20
-    EV = 84,0,4,0,0,84
-Pokemon = PETILIL,14
+    EV = 78,0,4,0,0,78
+Pokemon = PETILIL,13
     Moves = MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE
     Ability = OWNTEMPO
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,84,84,0
-Pokemon = BOUNSWEET,14
+    EV = 4,0,0,78,78,0
+Pokemon = BOUNSWEET,13
     Name = Sweetpea
     Moves = RAZORLEAF,RAPIDSPIN,PLAYNICE,MAGICALLEAF
     Ability = LEAFGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 84,84,4,0,0,0
+    EV = 78,78,4,0,0,0
 Pokemon = FIDOUGH,13
     Moves = COVET,BITE,LICK,TAILWHIP
     Ability = OWNTEMPO
@@ -5119,28 +5112,28 @@ Pokemon = BULBASAUR,15
 [RIVAL_JUNO,Juno,111]
 Items = SUPERPOTION
 LoseText = Aww, you're so good at this! Okay, again soon, okay?
-Pokemon = COTTONEE,14
+Pokemon = COTTONEE,13
     Moves = FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE
     Ability = PRANKSTER
     Item = ORANBERRY
     Nature = BOLD
     IV = 20
-    EV = 84,0,4,0,0,84
-Pokemon = PETILIL,14
+    EV = 78,0,4,0,0,78
+Pokemon = PETILIL,13
     Moves = MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE
     Ability = OWNTEMPO
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,84,84,0
-Pokemon = BOUNSWEET,14
+    EV = 4,0,0,78,78,0
+Pokemon = BOUNSWEET,13
     Name = Sweetpea
     Moves = RAZORLEAF,RAPIDSPIN,PLAYNICE,MAGICALLEAF
     Ability = LEAFGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 84,84,4,0,0,0
+    EV = 78,78,4,0,0,0
 Pokemon = FIDOUGH,13
     Moves = COVET,BITE,LICK,TAILWHIP
     Ability = OWNTEMPO
@@ -5206,28 +5199,28 @@ Pokemon = CHARMANDER,15
 [RIVAL_JUNO,Juno,112]
 Items = SUPERPOTION
 LoseText = Aww, you're so good at this! Okay, again soon, okay?
-Pokemon = COTTONEE,14
+Pokemon = COTTONEE,13
     Moves = FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE
     Ability = PRANKSTER
     Item = ORANBERRY
     Nature = BOLD
     IV = 20
-    EV = 84,0,4,0,0,84
-Pokemon = PETILIL,14
+    EV = 78,0,4,0,0,78
+Pokemon = PETILIL,13
     Moves = MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE
     Ability = OWNTEMPO
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 4,0,0,84,84,0
-Pokemon = BOUNSWEET,14
+    EV = 4,0,0,78,78,0
+Pokemon = BOUNSWEET,13
     Name = Sweetpea
     Moves = RAZORLEAF,RAPIDSPIN,PLAYNICE,MAGICALLEAF
     Ability = LEAFGUARD
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 84,84,4,0,0,0
+    EV = 78,78,4,0,0,0
 Pokemon = FIDOUGH,13
     Moves = COVET,BITE,LICK,TAILWHIP
     Ability = OWNTEMPO
@@ -6581,11 +6574,11 @@ Pokemon = SKWOVET,5
 #-------------------------------
 [YOUNGSTER,Pip,100]
 LoseText = Aw, my squad lost!
-Pokemon = LILLIPUP,5
+Pokemon = LILLIPUP,4
     Ability = RUNAWAY
     Nature = JOLLY
     IV = 20
-Pokemon = SKWOVET,6
+Pokemon = SKWOVET,5
     Ability = CHEEKPOUCH
     Nature = IMPISH
     IV = 20
@@ -6617,11 +6610,11 @@ Pokemon = FLETCHLING,5
 #-------------------------------
 [LASS,Wren,100]
 LoseText = My birdies! Oh, well done.
-Pokemon = PIKIPEK,5
+Pokemon = PIKIPEK,4
     Ability = KEENEYE
     Nature = ADAMANT
     IV = 20
-Pokemon = FLETCHLING,6
+Pokemon = FLETCHLING,5
     Ability = BIGPECKS
     Nature = JOLLY
     IV = 20
@@ -6649,7 +6642,7 @@ Pokemon = BIDOOF,5
 #-------------------------------
 [YOUNGSTER,Pim,100]
 LoseText = The dream's fine. The Bidoof needs a minute.
-Pokemon = BIDOOF,6
+Pokemon = BIDOOF,5
     Ability = SIMPLE
     Nature = JOLLY
     IV = 20
@@ -6672,7 +6665,7 @@ Pokemon = FLETCHLING,5
 #-------------------------------
 [LASS,Dory,100]
 LoseText = It's judging me now.
-Pokemon = FLETCHLING,6
+Pokemon = FLETCHLING,5
     Ability = BIGPECKS
     Nature = ADAMANT
     IV = 20
@@ -6699,11 +6692,11 @@ Pokemon = METAPOD,7
 #-------------------------------
 [BUGCATCHER,Dell,100]
 LoseText = My Metapod was supposed to evolve this time...
-Pokemon = CATERPIE,7
+Pokemon = CATERPIE,6
     Ability = RUNAWAY
     Nature = HARDY
     IV = 20
-Pokemon = METAPOD,8
+Pokemon = METAPOD,7
     Ability = SHEDSKIN
     Nature = IMPISH
     IV = 20
@@ -6735,11 +6728,11 @@ Pokemon = SHINX,7
 #-------------------------------
 [CAMPER,Joss,100]
 LoseText = Guess I'll go camp somewhere quieter.
-Pokemon = ZIGZAGOON,7
+Pokemon = ZIGZAGOON,6
     Ability = PICKUP
     Nature = JOLLY
     IV = 20
-Pokemon = SHINX,8
+Pokemon = SHINX,7
     Ability = INTIMIDATE
     Nature = ADAMANT
     IV = 20
@@ -6771,11 +6764,11 @@ Pokemon = SMOLIV,7
 #-------------------------------
 [PICNICKER,Mae,100]
 LoseText = You can have a sandwich anyway!
-Pokemon = FIDOUGH,8
+Pokemon = FIDOUGH,7
     Ability = OWNTEMPO
     Nature = IMPISH
     IV = 20
-Pokemon = SMOLIV,8
+Pokemon = SMOLIV,7
     Ability = EARLYBIRD
     Nature = MODEST
     IV = 20
@@ -6811,15 +6804,15 @@ Pokemon = BUDEW,17
 #-------------------------------
 [AROMALADY,Petra,100]
 LoseText = What a lovely, fierce scent you have.
-Pokemon = CUTIEFLY,17
+Pokemon = CUTIEFLY,16
     Ability = SHIELDDUST
     Nature = TIMID
     IV = 20
-Pokemon = PETILIL,18
+Pokemon = PETILIL,17
     Ability = OWNTEMPO
     Nature = MODEST
     IV = 20
-Pokemon = BUDEW,18
+Pokemon = BUDEW,17
     Ability = NATURALCURE
     Nature = MODEST
     IV = 20
@@ -6856,11 +6849,11 @@ Pokemon = GRUBBIN,17
 #-------------------------------
 [BUGCATCHER,Reed,100]
 LoseText = The wood's full of better bugs than mine, huh.
-Pokemon = DOTTLER,17
+Pokemon = DOTTLER,16
     Ability = SWARM
     Nature = MODEST
     IV = 20
-Pokemon = GRUBBIN,18
+Pokemon = GRUBBIN,17
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -6892,11 +6885,11 @@ Pokemon = VENONAT,18
 #-------------------------------
 [BUGCATCHER,Tobin,100]
 LoseText = Careful in the webs past here!
-Pokemon = SPINARAK,18
+Pokemon = SPINARAK,17
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
-Pokemon = VENONAT,19
+Pokemon = VENONAT,18
     Ability = COMPOUNDEYES
     Nature = MODEST
     IV = 20
@@ -6932,15 +6925,15 @@ Pokemon = SIZZLIPEDE,18
 #-------------------------------
 [CAMPER,Bram,100]
 LoseText = Lost to a tourist. Don't tell anyone.
-Pokemon = NUZLEAF,17
+Pokemon = NUZLEAF,16
     Ability = EARLYBIRD
     Nature = ADAMANT
     IV = 20
-Pokemon = SHROOMISH,18
+Pokemon = SHROOMISH,17
     Ability = EFFECTSPORE
     Nature = ADAMANT
     IV = 20
-Pokemon = SIZZLIPEDE,19
+Pokemon = SIZZLIPEDE,18
     Ability = FLASHFIRE
     Nature = ADAMANT
     IV = 20
@@ -6977,11 +6970,11 @@ Pokemon = KRICKETUNE,16
 #-------------------------------
 [BUGCATCHER,Milo,100]
 LoseText = Warden Tamsin's going to tie you in knots!
-Pokemon = VIVILLON,16
+Pokemon = VIVILLON,15
     Ability = SHIELDDUST
     Nature = BOLD
     IV = 20
-Pokemon = KRICKETUNE,17
+Pokemon = KRICKETUNE,16
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -7013,11 +7006,11 @@ Pokemon = SEWADDLE,16
 #-------------------------------
 [LASS,Fern,100]
 LoseText = Ah, you slipped right through my threads.
-Pokemon = CUTIEFLY,16
+Pokemon = CUTIEFLY,15
     Ability = SHIELDDUST
     Nature = TIMID
     IV = 20
-Pokemon = SEWADDLE,17
+Pokemon = SEWADDLE,16
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -7049,11 +7042,11 @@ Pokemon = SPINARAK,20
 #-------------------------------
 [BUGCATCHER,Hollis,100]
 LoseText = My spiders never lose in the lofts... usually.
-Pokemon = SPIDOPS,21
+Pokemon = SPIDOPS,20
     Ability = INSOMNIA
     Nature = ADAMANT
     IV = 20
-Pokemon = SPINARAK,21
+Pokemon = SPINARAK,20
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -7087,11 +7080,11 @@ Pokemon = BEAUTIFLY,21
 #-------------------------------
 [POKEMONRANGER_M,Ash,100]
 LoseText = You read the forest well. The Warden's above.
-Pokemon = DOTTLER,21
+Pokemon = DOTTLER,20
     Ability = SWARM
     Nature = MODEST
     IV = 20
-Pokemon = BEAUTIFLY,22
+Pokemon = BEAUTIFLY,21
     Moves = GUST,BUGBITE,ABSORB,STRINGSHOT
     Ability = SWARM
     Item = TELLURICSEED
@@ -7130,15 +7123,15 @@ Pokemon = RELLOR,20
 #-------------------------------
 [BUGCATCHER,Linden,100]
 LoseText = The deepwood bugs are tougher than mine...
-Pokemon = NINCADA,20
+Pokemon = NINCADA,19
     Ability = COMPOUNDEYES
     Nature = ADAMANT
     IV = 20
-Pokemon = LEDIAN,20
+Pokemon = LEDIAN,19
     Ability = SWARM
     Nature = JOLLY
     IV = 20
-Pokemon = RELLOR,21
+Pokemon = RELLOR,20
     Ability = COMPOUNDEYES
     Nature = IMPISH
     IV = 20
@@ -7175,11 +7168,11 @@ Pokemon = SKIDDO,20
 #-------------------------------
 [POKEMONRANGER_F,Sorrel,100]
 LoseText = Mind the glass trees. They're spreading.
-Pokemon = DEERLING,20
+Pokemon = DEERLING,19
     Ability = SAPSIPPER
     Nature = JOLLY
     IV = 20
-Pokemon = SKIDDO,21
+Pokemon = SKIDDO,20
     Ability = SAPSIPPER
     Nature = ADAMANT
     IV = 20
@@ -7215,15 +7208,15 @@ Pokemon = TYMPOLE,16
 #-------------------------------
 [FISHERMAN,Hale,100]
 LoseText = Reeled in a loss. Happens.
-Pokemon = MAGIKARP,16
+Pokemon = MAGIKARP,15
     Ability = SWIFTSWIM
     Nature = HARDY
     IV = 20
-Pokemon = GOLDEEN,17
+Pokemon = GOLDEEN,16
     Ability = SWIFTSWIM
     Nature = ADAMANT
     IV = 20
-Pokemon = TYMPOLE,17
+Pokemon = TYMPOLE,16
     Ability = SWIFTSWIM
     Nature = MODEST
     IV = 20
@@ -7264,15 +7257,15 @@ Pokemon = SUNKERN,16
 #-------------------------------
 [PICNICKER,Bryony,100]
 LoseText = My flowers wilted! Oh well, picnic time.
-Pokemon = FLABEBE,16
+Pokemon = FLABEBE,15
     Ability = FLOWERVEIL
     Nature = MODEST
     IV = 20
-Pokemon = COTTONEE,17
+Pokemon = COTTONEE,16
     Ability = PRANKSTER
     Nature = BOLD
     IV = 20
-Pokemon = SUNKERN,17
+Pokemon = SUNKERN,16
     Ability = CHLOROPHYLL
     Nature = MODEST
     IV = 20
@@ -7309,11 +7302,11 @@ Pokemon = PANCHAM,16
 #-------------------------------
 [TWINS,Bel & Bea,100]
 LoseText = Bel: We lost! Bea: Together, though!
-Pokemon = MANKEY,17
+Pokemon = MANKEY,16
     Ability = VITALSPIRIT
     Nature = JOLLY
     IV = 20
-Pokemon = PANCHAM,17
+Pokemon = PANCHAM,16
     Ability = IRONFIST
     Nature = ADAMANT
     IV = 20
@@ -7349,15 +7342,15 @@ Pokemon = DODUO,17
 #-------------------------------
 [YOUNGSTER,Corin,100]
 LoseText = My team's the coolest! ...Was.
-Pokemon = SENTRET,16
+Pokemon = SENTRET,15
     Ability = RUNAWAY
     Nature = JOLLY
     IV = 20
-Pokemon = BIDOOF,17
+Pokemon = BIDOOF,16
     Ability = SIMPLE
     Nature = ADAMANT
     IV = 20
-Pokemon = DODUO,18
+Pokemon = DODUO,17
     Ability = EARLYBIRD
     Nature = JOLLY
     IV = 20
@@ -7394,11 +7387,11 @@ Pokemon = NACLI,15
 #-------------------------------
 [CAMPER,Ned,100]
 LoseText = Sand in my tent AND I lost. Great day.
-Pokemon = BUNNELBY,15
+Pokemon = BUNNELBY,14
     Ability = CHEEKPOUCH
     Nature = ADAMANT
     IV = 20
-Pokemon = NACLI,16
+Pokemon = NACLI,15
     Ability = PURIFYINGSALT
     Nature = IMPISH
     IV = 20
@@ -7430,11 +7423,11 @@ Pokemon = NACLI,10
 #-------------------------------
 [HIKER,Dunstan,100]
 LoseText = Today's a sun day. Lucky you.
-Pokemon = ROLYCOLY,10
+Pokemon = ROLYCOLY,9
     Ability = STEAMENGINE
     Nature = ADAMANT
     IV = 20
-Pokemon = NACLI,11
+Pokemon = NACLI,10
     Ability = PURIFYINGSALT
     Nature = IMPISH
     IV = 20
@@ -7470,15 +7463,15 @@ Pokemon = CRABRAWLER,15
 #-------------------------------
 [SAILOR,Morrow,100]
 LoseText = Blow me down! The Dovetail crew'll hear of this.
-Pokemon = FINNEON,16
+Pokemon = FINNEON,15
     Ability = SWIFTSWIM
     Nature = JOLLY
     IV = 20
-Pokemon = REMORAID,16
+Pokemon = REMORAID,15
     Ability = HUSTLE
     Nature = MODEST
     IV = 20
-Pokemon = CRABRAWLER,16
+Pokemon = CRABRAWLER,15
     Ability = IRONFIST
     Nature = ADAMANT
     IV = 20
@@ -7515,11 +7508,11 @@ Pokemon = MINCCINO,15
 #-------------------------------
 [TUBER_F,Pip,100]
 LoseText = Waaah! My floaty popped!
-Pokemon = SURSKIT,15
+Pokemon = SURSKIT,14
     Ability = SWIFTSWIM
     Nature = TIMID
     IV = 20
-Pokemon = MINCCINO,16
+Pokemon = MINCCINO,15
     Ability = CUTECHARM
     Nature = JOLLY
     IV = 20
@@ -7552,12 +7545,12 @@ Pokemon = SPINDA,11
 #-------------------------------
 [JUGGLER,Florian,100]
 LoseText = Dropped every pin! Bravo, though.
-Pokemon = MINCCINO,11
+Pokemon = MINCCINO,10
     Moves = ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES
     Ability = TECHNICIAN
     Nature = JOLLY
     IV = 20
-Pokemon = SPINDA,12
+Pokemon = SPINDA,11
     Ability = OWNTEMPO
     Nature = ADAMANT
     IV = 20
@@ -7591,12 +7584,12 @@ Pokemon = FLABEBE,11
 #-------------------------------
 [BEAUTY,Rosalind,100]
 LoseText = The spotlight suits you better, darling.
-Pokemon = SKITTY,12
+Pokemon = SKITTY,11
     Moves = FAKEOUT,ROUND,SING,TAILWHIP
     Ability = CUTECHARM
     Nature = TIMID
     IV = 20
-Pokemon = FLABEBE,12
+Pokemon = FLABEBE,11
     Ability = FLOWERVEIL
     Nature = MODEST
     IV = 20
@@ -7629,11 +7622,11 @@ Pokemon = HERDIER,12
 #-------------------------------
 [JUGGLER,Ambrose,100]
 LoseText = An encore? No? Fair.
-Pokemon = AIPOM,12
+Pokemon = AIPOM,11
     Ability = SKILLLINK
     Nature = JOLLY
     IV = 20
-Pokemon = HERDIER,13
+Pokemon = HERDIER,12
     Ability = INTIMIDATE
     Nature = ADAMANT
     IV = 20
@@ -7665,11 +7658,11 @@ Pokemon = FURFROU,20
 #-------------------------------
 [GENTLEMAN,Reginald,100]
 LoseText = Splendid form. Dorian will be delighted.
-Pokemon = HERDIER,21
+Pokemon = HERDIER,20
     Ability = INTIMIDATE
     Nature = ADAMANT
     IV = 20
-Pokemon = FURFROU,21
+Pokemon = FURFROU,20
     Ability = FURCOAT
     Nature = JOLLY
     IV = 20
@@ -7701,11 +7694,11 @@ Pokemon = SPINDA,20
 #-------------------------------
 [JUGGLER,Pierrot,100]
 LoseText = ...(Pierrot mimes a dramatic faint.)
-Pokemon = AIPOM,21
+Pokemon = AIPOM,20
     Ability = PICKUP
     Nature = JOLLY
     IV = 20
-Pokemon = SPINDA,21
+Pokemon = SPINDA,20
     Ability = TANGLEDFEET
     Nature = ADAMANT
     IV = 20
@@ -7737,11 +7730,11 @@ Pokemon = FURFROU,21
 #-------------------------------
 [LADY,Odette,100]
 LoseText = My costume is ruined. Worth it.
-Pokemon = BUNEARY,21
+Pokemon = BUNEARY,20
     Ability = LIMBER
     Nature = JOLLY
     IV = 20
-Pokemon = FURFROU,22
+Pokemon = FURFROU,21
     Ability = FURCOAT
     Nature = JOLLY
     IV = 20
@@ -7773,11 +7766,11 @@ Pokemon = FOONGUS,16
 #-------------------------------
 [HOLLOW_GRUNT_M,Grunt,100]
 LoseText = Let the land grieve... ugh, not today.
-Pokemon = NICKIT,16
+Pokemon = NICKIT,15
     Ability = UNBURDEN
     Nature = JOLLY
     IV = 20
-Pokemon = FOONGUS,17
+Pokemon = FOONGUS,16
     Ability = EFFECTSPORE
     Nature = RELAXED
     IV = 20
@@ -7809,11 +7802,11 @@ Pokemon = MORELULL,16
 #-------------------------------
 [HOLLOW_GRUNT_F,Grunt,100]
 LoseText = The Plates are poison. You'll see.
-Pokemon = PHANTUMP,16
+Pokemon = PHANTUMP,15
     Ability = NATURALCURE
     Nature = ADAMANT
     IV = 20
-Pokemon = MORELULL,17
+Pokemon = MORELULL,16
     Ability = EFFECTSPORE
     Nature = MODEST
     IV = 20
@@ -7845,11 +7838,11 @@ Pokemon = TIMBURR,16
 #-------------------------------
 [BLACKBELT,Taro,100]
 LoseText = Hah! My fists need more salt-mine training.
-Pokemon = MACHOP,16
+Pokemon = MACHOP,15
     Ability = GUTS
     Nature = ADAMANT
     IV = 20
-Pokemon = TIMBURR,17
+Pokemon = TIMBURR,16
     Ability = GUTS
     Nature = ADAMANT
     IV = 20
@@ -7885,15 +7878,15 @@ Pokemon = NACLI,15
 #-------------------------------
 [HIKER,Bram,100]
 LoseText = Tunnels go on forever. So does losing, apparently.
-Pokemon = GEODUDE,15
+Pokemon = GEODUDE,14
     Ability = ROCKHEAD
     Nature = ADAMANT
     IV = 20
-Pokemon = ROGGENROLA,16
+Pokemon = ROGGENROLA,15
     Ability = STURDY
     Nature = ADAMANT
     IV = 20
-Pokemon = NACLI,16
+Pokemon = NACLI,15
     Ability = PURIFYINGSALT
     Nature = IMPISH
     IV = 20
@@ -7930,11 +7923,11 @@ Pokemon = NOSEPASS,17
 #-------------------------------
 [HIKER,Gorse,100]
 LoseText = Deep enough down here to hear the sea. Well fought.
-Pokemon = ARON,17
+Pokemon = ARON,16
     Ability = ROCKHEAD
     Nature = ADAMANT
     IV = 20
-Pokemon = NOSEPASS,18
+Pokemon = NOSEPASS,17
     Ability = STURDY
     Nature = IMPISH
     IV = 20
@@ -7971,16 +7964,16 @@ Pokemon = SINISTEA,17
 #-------------------------------
 [CHANNELER,Mireille,100]
 LoseText = The Players say... you were adequate. High praise.
-Pokemon = GASTLY,17
+Pokemon = GASTLY,16
     Moves = LICK,CONFUSERAY,HYPNOSIS,PAYBACK
     Ability = LEVITATE
     Nature = TIMID
     IV = 20
-Pokemon = SHUPPET,17
+Pokemon = SHUPPET,16
     Ability = CURSEDBODY
     Nature = ADAMANT
     IV = 20
-Pokemon = SINISTEA,18
+Pokemon = SINISTEA,17
     Ability = CURSEDBODY
     Nature = MODEST
     IV = 20
@@ -8018,11 +8011,11 @@ Pokemon = TAUROS,18
 #-------------------------------
 [BIKER,Rook,100]
 LoseText = Not THAT Rook. Everybody asks.
-Pokemon = GLAMEOW,18
+Pokemon = GLAMEOW,17
     Ability = OWNTEMPO
     Nature = JOLLY
     IV = 20
-Pokemon = TAUROS,19
+Pokemon = TAUROS,18
     Ability = INTIMIDATE
     Nature = JOLLY
     IV = 20
@@ -8054,11 +8047,11 @@ Pokemon = PHANPY,17
 #-------------------------------
 [PICNICKER,Sela,100]
 LoseText = Okay, you win the last sandwich.
-Pokemon = SKITTY,17
+Pokemon = SKITTY,16
     Ability = CUTECHARM
     Nature = TIMID
     IV = 20
-Pokemon = PHANPY,18
+Pokemon = PHANPY,17
     Ability = PICKUP
     Nature = ADAMANT
     IV = 20
@@ -8090,11 +8083,11 @@ Pokemon = KANGASKHAN,19
 #-------------------------------
 [POKEMANIAC,Ivo,100]
 LoseText = My precious monsters!
-Pokemon = CUBONE,18
+Pokemon = CUBONE,17
     Ability = ROCKHEAD
     Nature = ADAMANT
     IV = 20
-Pokemon = KANGASKHAN,20
+Pokemon = KANGASKHAN,19
     Ability = EARLYBIRD
     Nature = ADAMANT
     IV = 20
@@ -8126,11 +8119,11 @@ Pokemon = DUNSPARCE,18
 #-------------------------------
 [RUINMANIAC,Alder,100]
 LoseText = The old stones told me I'd lose. I never listen.
-Pokemon = HELIOPTILE,18
+Pokemon = HELIOPTILE,17
     Ability = DRYSKIN
     Nature = TIMID
     IV = 20
-Pokemon = DUNSPARCE,19
+Pokemon = DUNSPARCE,18
     Ability = SERENEGRACE
     Nature = ADAMANT
     IV = 20
@@ -8166,15 +8159,15 @@ Pokemon = CHATOT,18
 #-------------------------------
 [BIRDKEEPER,Wren,100]
 LoseText = My flock scattered! Well flown.
-Pokemon = TAILLOW,18
+Pokemon = TAILLOW,17
     Ability = GUTS
     Nature = JOLLY
     IV = 20
-Pokemon = DUCKLETT,19
+Pokemon = DUCKLETT,18
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
-Pokemon = CHATOT,19
+Pokemon = CHATOT,18
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
@@ -8215,15 +8208,15 @@ Pokemon = SNORUNT,19
 #-------------------------------
 [COOLTRAINER_F,Astrid,100]
 LoseText = Cool. You'll do fine in the Tidelock.
-Pokemon = ORICORIO,20
+Pokemon = ORICORIO,19
     Ability = DANCER
     Nature = TIMID
     IV = 20
-Pokemon = CRAMORANT,20
+Pokemon = CRAMORANT,19
     Ability = GULPMISSILE
     Nature = MODEST
     IV = 20
-Pokemon = SNORUNT,20
+Pokemon = SNORUNT,19
     Ability = INNERFOCUS
     Nature = JOLLY
     IV = 20
@@ -8264,15 +8257,15 @@ Pokemon = WOOPER,18
 #-------------------------------
 [FISHERMAN,Kjell,100]
 LoseText = The sea gives, the sea takes.
-Pokemon = MAGIKARP,18
+Pokemon = MAGIKARP,17
     Ability = SWIFTSWIM
     Nature = HARDY
     IV = 20
-Pokemon = FINNEON,19
+Pokemon = FINNEON,18
     Ability = SWIFTSWIM
     Nature = TIMID
     IV = 20
-Pokemon = WOOPER,19
+Pokemon = WOOPER,18
     Ability = DAMP
     Nature = IMPISH
     IV = 20
@@ -8309,11 +8302,11 @@ Pokemon = SPHEAL,19
 #-------------------------------
 [SAILOR,Haldor,100]
 LoseText = Arr! Isenmar's coast breeds tough kids.
-Pokemon = WINGULL,19
+Pokemon = WINGULL,18
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
-Pokemon = SPHEAL,20
+Pokemon = SPHEAL,19
     Ability = THICKFAT
     Nature = MODEST
     IV = 20
@@ -8345,11 +8338,11 @@ Pokemon = CLOBBOPUS,20
 #-------------------------------
 [HIKER,Torvald,100]
 LoseText = The gulls laugh at me every time.
-Pokemon = BINACLE,20
+Pokemon = BINACLE,19
     Ability = TOUGHCLAWS
     Nature = ADAMANT
     IV = 20
-Pokemon = CLOBBOPUS,21
+Pokemon = CLOBBOPUS,20
     Ability = LIMBER
     Nature = ADAMANT
     IV = 20
@@ -8381,11 +8374,11 @@ Pokemon = BARBOACH,19
 #-------------------------------
 [FISHERMAN,Gunnar,100]
 LoseText = Lock's open. Mind the current.
-Pokemon = GOLDEEN,19
+Pokemon = GOLDEEN,18
     Ability = SWIFTSWIM
     Nature = ADAMANT
     IV = 20
-Pokemon = BARBOACH,20
+Pokemon = BARBOACH,19
     Ability = HYDRATION
     Nature = ADAMANT
     IV = 20
@@ -8417,11 +8410,11 @@ Pokemon = CHEWTLE,19
 #-------------------------------
 [SWIMMER_F,Ingrid,100]
 LoseText = You swim like you were born here.
-Pokemon = BUIZEL,20
+Pokemon = BUIZEL,19
     Ability = SWIFTSWIM
     Nature = JOLLY
     IV = 20
-Pokemon = CHEWTLE,20
+Pokemon = CHEWTLE,19
     Ability = STRONGJAW
     Nature = ADAMANT
     IV = 20
@@ -8453,11 +8446,11 @@ Pokemon = CORPHISH,20
 #-------------------------------
 [FISHERMAN,Oskar,100]
 LoseText = Hooked a loss. Marisol'll laugh.
-Pokemon = BARBOACH,21
+Pokemon = BARBOACH,20
     Ability = OBLIVIOUS
     Nature = ADAMANT
     IV = 20
-Pokemon = CORPHISH,21
+Pokemon = CORPHISH,20
     Ability = HYPERCUTTER
     Nature = ADAMANT
     IV = 20
@@ -8489,11 +8482,11 @@ Pokemon = PSYDUCK,20
 #-------------------------------
 [SWIMMER_M,Leif,100]
 LoseText = Ugh, the water's rising. So's my shame.
-Pokemon = ARROKUDA,21
+Pokemon = ARROKUDA,20
     Ability = SWIFTSWIM
     Nature = ADAMANT
     IV = 20
-Pokemon = PSYDUCK,21
+Pokemon = PSYDUCK,20
     Ability = SWIFTSWIM
     Nature = MODEST
     IV = 20
@@ -8527,11 +8520,11 @@ Pokemon = CHINCHOU,21
 #-------------------------------
 [SAILOR,Bjorn,100]
 LoseText = The Warden's pool is next. Good luck, sprat.
-Pokemon = WINGULL,21
+Pokemon = WINGULL,20
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
-Pokemon = CHINCHOU,22
+Pokemon = CHINCHOU,21
     Moves = SPARK,BUBBLEBEAM,CONFUSERAY,THUNDERWAVE
     Ability = VOLTABSORB
     Item = ELEMENTALSEED
@@ -8592,11 +8585,11 @@ Pokemon = COMBEE,7
 #-------------------------------
 [BUGCATCHER,Wim,100]
 LoseText = ...Assistant Warden.
-Pokemon = SPINARAK,7
+Pokemon = SPINARAK,6
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
-Pokemon = COMBEE,8
+Pokemon = COMBEE,7
     Ability = HONEYGATHER
     Nature = HASTY
     IV = 20
@@ -8628,11 +8621,11 @@ Pokemon = BUDEW,7
 #-------------------------------
 [PICNICKER,Ada,100]
 LoseText = Bless you. Bless both of us.
-Pokemon = ODDISH,7
+Pokemon = ODDISH,6
     Ability = RUNAWAY
     Nature = MODEST
     IV = 20
-Pokemon = BUDEW,8
+Pokemon = BUDEW,7
     Ability = LEAFGUARD
     Nature = MODEST
     IV = 20
@@ -8664,11 +8657,11 @@ Pokemon = SHELMET,17
 #-------------------------------
 [TWINS,Mo & Jo,100]
 LoseText = We lost together!
-Pokemon = KARRABLAST,18
+Pokemon = KARRABLAST,17
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
-Pokemon = SHELMET,18
+Pokemon = SHELMET,17
     Ability = HYDRATION
     Nature = BOLD
     IV = 20
@@ -8700,11 +8693,11 @@ Pokemon = SPINARAK,16
 #-------------------------------
 [BUGCATCHER,Nell,100]
 LoseText = Knotted up. Tamsin'll untangle you.
-Pokemon = SEWADDLE,16
+Pokemon = SEWADDLE,15
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
-Pokemon = SPINARAK,17
+Pokemon = SPINARAK,16
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -8736,11 +8729,11 @@ Pokemon = VIVILLON,16
 #-------------------------------
 [LASS,Orla,100]
 LoseText = See? Never the red shuttle first.
-Pokemon = LEDYBA,16
+Pokemon = LEDYBA,15
     Ability = SWARM
     Nature = JOLLY
     IV = 20
-Pokemon = VIVILLON,17
+Pokemon = VIVILLON,16
     Ability = SHIELDDUST
     Nature = BOLD
     IV = 20
@@ -8772,11 +8765,11 @@ Pokemon = SEWADDLE,17
 #-------------------------------
 [GENTLEMAN,Bram,100]
 LoseText = Sorry. No, wait, you won. Well done.
-Pokemon = VENONAT,17
+Pokemon = VENONAT,16
     Ability = COMPOUNDEYES
     Nature = MODEST
     IV = 20
-Pokemon = SEWADDLE,18
+Pokemon = SEWADDLE,17
     Ability = SWARM
     Nature = ADAMANT
     IV = 20
@@ -8812,15 +8805,15 @@ Pokemon = YANMA,20
 #-------------------------------
 [POKEMANIAC,Ferris,100]
 LoseText = That one hummed. Did you hear it hum?
-Pokemon = PARAS,20
+Pokemon = PARAS,19
     Ability = EFFECTSPORE
     Nature = ADAMANT
     IV = 20
-Pokemon = NINCADA,20
+Pokemon = NINCADA,19
     Ability = COMPOUNDEYES
     Nature = JOLLY
     IV = 20
-Pokemon = YANMA,21
+Pokemon = YANMA,20
     Ability = SPEEDBOOST
     Nature = MODEST
     IV = 20
@@ -8857,11 +8850,11 @@ Pokemon = SNOM,17
 #-------------------------------
 [LASS,Tilde,100]
 LoseText = My Swinub slid farther than me.
-Pokemon = SWINUB,17
+Pokemon = SWINUB,16
     Ability = OBLIVIOUS
     Nature = ADAMANT
     IV = 20
-Pokemon = SNOM,18
+Pokemon = SNOM,17
     Ability = SHIELDDUST
     Nature = MODEST
     IV = 20
@@ -8893,11 +8886,11 @@ Pokemon = CETODDLE,18
 #-------------------------------
 [SAILOR,Haakon,100]
 LoseText = Ice'll break by summer. Probably.
-Pokemon = SPHEAL,18
+Pokemon = SPHEAL,17
     Ability = ICEBODY
     Nature = MODEST
     IV = 20
-Pokemon = CETODDLE,19
+Pokemon = CETODDLE,18
     Ability = THICKFAT
     Nature = ADAMANT
     IV = 20
@@ -8929,11 +8922,11 @@ Pokemon = DELIBIRD,18
 #-------------------------------
 [BIRDKEEPER,Ailsa,100]
 LoseText = Frostwick's gulls wear little ice hats. Not really.
-Pokemon = WINGULL,18
+Pokemon = WINGULL,17
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
-Pokemon = DELIBIRD,19
+Pokemon = DELIBIRD,18
     Ability = HUSTLE
     Nature = JOLLY
     IV = 20
@@ -8965,11 +8958,11 @@ Pokemon = TAROUNTULA,19
 #-------------------------------
 [BUGCATCHER,Pell,100]
 LoseText = They were NOT happy to be woken.
-Pokemon = SNOM,19
+Pokemon = SNOM,18
     Ability = SHIELDDUST
     Nature = MODEST
     IV = 20
-Pokemon = TAROUNTULA,20
+Pokemon = TAROUNTULA,19
     Ability = INSOMNIA
     Nature = ADAMANT
     IV = 20
@@ -9005,15 +8998,15 @@ Pokemon = STANTLER,20
 #-------------------------------
 [POKEMONRANGER_F,Orla,100]
 LoseText = You'll do. Mind the silk curtains, they cut.
-Pokemon = DEERLING,19
+Pokemon = DEERLING,18
     Ability = SAPSIPPER
     Nature = JOLLY
     IV = 20
-Pokemon = SNOVER,20
+Pokemon = SNOVER,19
     Ability = SNOWWARNING
     Nature = MODEST
     IV = 20
-Pokemon = STANTLER,21
+Pokemon = STANTLER,20
     Ability = INTIMIDATE
     Nature = ADAMANT
     IV = 20
@@ -9050,11 +9043,11 @@ Pokemon = BERGMITE,19
 #-------------------------------
 [HIKER,Ulf,100]
 LoseText = Ha! No, no traps for you.
-Pokemon = TEDDIURSA,19
+Pokemon = TEDDIURSA,18
     Ability = PICKUP
     Nature = ADAMANT
     IV = 20
-Pokemon = BERGMITE,20
+Pokemon = BERGMITE,19
     Ability = OWNTEMPO
     Nature = IMPISH
     IV = 20
@@ -9086,11 +9079,11 @@ Pokemon = SNEASEL,19
 #-------------------------------
 [CAMPER,Rook,100]
 LoseText = ...Is that what the aurora's for?
-Pokemon = CUBCHOO,19
+Pokemon = CUBCHOO,18
     Ability = SNOWCLOAK
     Nature = ADAMANT
     IV = 20
-Pokemon = SNEASEL,20
+Pokemon = SNEASEL,19
     Ability = INNERFOCUS
     Nature = JOLLY
     IV = 20
@@ -9122,11 +9115,11 @@ Pokemon = SNORUNT,19
 #-------------------------------
 [TWINS,Ana & Ida,100]
 LoseText = Two of us lost! Two kingdoms of losing!
-Pokemon = MORELULL,20
+Pokemon = MORELULL,19
     Ability = EFFECTSPORE
     Nature = MODEST
     IV = 20
-Pokemon = SNORUNT,20
+Pokemon = SNORUNT,19
     Ability = INNERFOCUS
     Nature = JOLLY
     IV = 20
@@ -9159,11 +9152,11 @@ Pokemon = CRYOGONAL,20
 #-------------------------------
 [POKEMONRANGER_M,Sigurd,100]
 LoseText = ...So you cut your way in. Fair.
-Pokemon = STANTLER,20
+Pokemon = STANTLER,19
     Ability = INTIMIDATE
     Nature = ADAMANT
     IV = 20
-Pokemon = CRYOGONAL,21
+Pokemon = CRYOGONAL,20
     Moves = ICESHARD,RAPIDSPIN,ICYWIND,CONFUSERAY
     Ability = LEVITATE
     Nature = CALM
@@ -9201,15 +9194,15 @@ Pokemon = WINGULL,9
 #-------------------------------
 [FISHERMAN,Bryn,100]
 LoseText = The fish win again.
-Pokemon = MAGIKARP,9
+Pokemon = MAGIKARP,8
     Ability = SWIFTSWIM
     Nature = HARDY
     IV = 20
-Pokemon = FINNEON,10
+Pokemon = FINNEON,9
     Ability = SWIFTSWIM
     Nature = TIMID
     IV = 20
-Pokemon = WINGULL,10
+Pokemon = WINGULL,9
     Ability = KEENEYE
     Nature = MODEST
     IV = 20
@@ -9246,11 +9239,11 @@ Pokemon = SANDYGAST,10
 #-------------------------------
 [PICNICKER,Moll,100]
 LoseText = She writes every week. She's never once walked over.
-Pokemon = BUNNELBY,10
+Pokemon = BUNNELBY,9
     Ability = PICKUP
     Nature = ADAMANT
     IV = 20
-Pokemon = SANDYGAST,11
+Pokemon = SANDYGAST,10
     Ability = WATERCOMPACTION
     Nature = MODEST
     IV = 20
@@ -9282,11 +9275,11 @@ Pokemon = ROOKIDEE,11
 #-------------------------------
 [BIRDKEEPER,Lark,100]
 LoseText = My kite won. You beat the kite-flier, which is different.
-Pokemon = PIKIPEK,11
+Pokemon = PIKIPEK,10
     Ability = KEENEYE
     Nature = JOLLY
     IV = 20
-Pokemon = ROOKIDEE,12
+Pokemon = ROOKIDEE,11
     Ability = KEENEYE
     Nature = JOLLY
     IV = 20
@@ -9322,15 +9315,15 @@ Pokemon = WOOLOO,12
 #-------------------------------
 [POKEMONRANGER_F,Sedge,100]
 LoseText = I'm going to sit down now. That's allowed in a free port.
-Pokemon = DWEBBLE,12
+Pokemon = DWEBBLE,11
     Ability = STURDY
     Nature = ADAMANT
     IV = 20
-Pokemon = NACLI,12
+Pokemon = NACLI,11
     Ability = PURIFYINGSALT
     Nature = IMPISH
     IV = 20
-Pokemon = WOOLOO,13
+Pokemon = WOOLOO,12
     Ability = FLUFFY
     Nature = IMPISH
     IV = 20
@@ -9367,11 +9360,11 @@ Pokemon = YAMPER,11
 #-------------------------------
 [JUGGLER,Hounds,100]
 LoseText = Notes: we were bitten. Again.
-Pokemon = LILLIPUP,12
+Pokemon = LILLIPUP,11
     Ability = VITALSPIRIT
     Nature = JOLLY
     IV = 20
-Pokemon = YAMPER,12
+Pokemon = YAMPER,11
     Ability = BALLFETCH
     Nature = JOLLY
     IV = 20
@@ -9407,15 +9400,15 @@ Pokemon = WOOBAT,17
 #-------------------------------
 [HIKER,Holt,100]
 LoseText = It IS a shortcut? To WHERE?
-Pokemon = ROGGENROLA,17
+Pokemon = ROGGENROLA,16
     Ability = STURDY
     Nature = ADAMANT
     IV = 20
-Pokemon = NACLI,17
+Pokemon = NACLI,16
     Ability = PURIFYINGSALT
     Nature = IMPISH
     IV = 20
-Pokemon = WOOBAT,18
+Pokemon = WOOBAT,17
     Ability = UNAWARE
     Nature = TIMID
     IV = 20
@@ -9452,11 +9445,11 @@ Pokemon = CRABRAWLER,17
 #-------------------------------
 [BLACKBELT,Saul,100]
 LoseText = I need a drink. Not salt.
-Pokemon = MACHOP,17
+Pokemon = MACHOP,16
     Ability = GUTS
     Nature = ADAMANT
     IV = 20
-Pokemon = CRABRAWLER,18
+Pokemon = CRABRAWLER,17
     Ability = IRONFIST
     Nature = ADAMANT
     IV = 20
@@ -9488,11 +9481,11 @@ Pokemon = LITLEO,16
 #-------------------------------
 [PAINTER,Morwenna,100]
 LoseText = Look at my hands. They'll be red till Fallmorn.
-Pokemon = LEDYBA,16
+Pokemon = LEDYBA,15
     Ability = SWARM
     Nature = JOLLY
     IV = 20
-Pokemon = LITLEO,17
+Pokemon = LITLEO,16
     Ability = RIVALRY
     Nature = MODEST
     IV = 20
@@ -9524,11 +9517,11 @@ Pokemon = MARILL,16
 #-------------------------------
 [PAINTER,Ash,100]
 LoseText = Bill her. Somebody bill her.
-Pokemon = ODDISH,16
+Pokemon = ODDISH,15
     Ability = CHLOROPHYLL
     Nature = MODEST
     IV = 20
-Pokemon = MARILL,17
+Pokemon = MARILL,16
     Ability = HUGEPOWER
     Nature = ADAMANT
     IV = 20
@@ -9564,15 +9557,15 @@ Pokemon = SMOLIV,17
 #-------------------------------
 [PICNICKER,Edie,100]
 LoseText = ...I'll write to Ada. I'll lie.
-Pokemon = ODDISH,17
+Pokemon = ODDISH,16
     Ability = RUNAWAY
     Nature = MODEST
     IV = 20
-Pokemon = BUDEW,17
+Pokemon = BUDEW,16
     Ability = LEAFGUARD
     Nature = MODEST
     IV = 20
-Pokemon = SMOLIV,18
+Pokemon = SMOLIV,17
     Ability = EARLYBIRD
     Nature = MODEST
     IV = 20
@@ -9625,13 +9618,13 @@ Pokemon = PHANTUMP,18
 [HOLLOW_THISTLE,Thistle,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Lowmarsh is glass now. Remember that when you sleep.
-Pokemon = DUSTOX,17
+Pokemon = DUSTOX,16
     Moves = GUST,STRUGGLEBUG,POISONPOWDER,CONFUSION
     Ability = SHIELDDUST
     Item = ORANBERRY
     Nature = BOLD
     IV = 20
-    EV = 102,0,4,0,102,0
+    EV = 96,0,4,0,96,0
 Pokemon = WHIRLIPEDE,17
     Moves = POISONTAIL,BUGBITE,PROTECT,IRONDEFENSE
     Ability = POISONPOINT
@@ -9639,21 +9632,21 @@ Pokemon = WHIRLIPEDE,17
     Nature = IMPISH
     IV = 20
     EV = 102,4,102,0,0,0
-Pokemon = FOONGUS,18
+Pokemon = FOONGUS,17
     Moves = MEGADRAIN,STUNSPORE,GROWTH,ASTONISH
     Ability = REGENERATOR
     Item = ORANBERRY
     Nature = RELAXED
     IV = 20
-    EV = 108,0,108,0,0,4
-Pokemon = PHANTUMP,19
+    EV = 102,0,102,0,0,4
+Pokemon = PHANTUMP,18
     Name = Lowmarsh
     Moves = BRANCHPOKE,SHADOWCLAW,LEECHSEED,WILLOWISP
     Ability = HARVEST
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 20
-    EV = 114,114,0,0,0,4
+    EV = 108,108,0,0,0,4
 #-------------------------------
 [HOLLOW_THISTLE,Thistle,200]
 LoseText = Lowmarsh is glass now. Remember that when you sleep.
@@ -9700,13 +9693,13 @@ Pokemon = CHEWTLE,21
 [HOLLOW_TEO,Teo,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Tell my sister— no. Don't tell her anything.
-Pokemon = CARVANHA,20
+Pokemon = CARVANHA,19
     Moves = AQUAJET,CRUNCH,POISONFANG,ICEFANG
     Ability = SPEEDBOOST
     Item = FOCUSSASH
     Nature = JOLLY
     IV = 20
-    EV = 4,120,0,120,0,0
+    EV = 4,114,0,114,0,0
 Pokemon = BASCULIN,20
     Moves = WATERFALL,CRUNCH,AQUAJET,PSYCHICFANGS
     Ability = RECKLESS
@@ -9714,21 +9707,21 @@ Pokemon = BASCULIN,20
     Nature = ADAMANT
     IV = 20
     EV = 4,120,0,120,0,0
-Pokemon = ARROKUDA,21
+Pokemon = ARROKUDA,20
     Moves = LIQUIDATION,BITE,AQUAJET,CLOSECOMBAT
     Ability = SWIFTSWIM
     Item = MYSTICWATER
     Nature = ADAMANT
     IV = 20
-    EV = 4,126,0,126,0,0
-Pokemon = CHEWTLE,22
+    EV = 4,120,0,120,0,0
+Pokemon = CHEWTLE,21
     Name = Snapper
     Moves = BITE,LIQUIDATION,ICEFANG,PROTECT
     Ability = SWIFTSWIM
     Item = EVIOLITE
     Nature = ADAMANT
     IV = 20
-    EV = 132,132,4,0,0,0
+    EV = 126,126,4,0,0,0
 #-------------------------------
 [HOLLOW_TEO,Teo,200]
 LoseText = Tell my sister— no. Don't tell her anything.
@@ -10806,14 +10799,14 @@ Pokemon = EEVEE,18
 [OCTAVE_VESPER,Vesper,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = It hasn't decided yet. ...Neither have you, I think.
-Pokemon = EEVEE,19
+Pokemon = EEVEE,18
     Name = Amen
     Moves = SWIFT,QUICKATTACK,BABYDOLLEYES,HELPINGHAND
     Ability = ADAPTABILITY
     Item = EVIOLITE
     Nature = JOLLY
     IV = 20
-    EV = 4,114,0,114,0,0
+    EV = 4,108,0,108,0,0
 #-------------------------------
 [OCTAVE_VESPER,Vesper,200]
 LoseText = It hasn't decided yet. ...Neither have you, I think.
@@ -10840,13 +10833,13 @@ Pokemon = SYLVEON,18
 [OCTAVE_SINGER,Carol,100]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = Oh! You sing back. Most people don't.
-Pokemon = SYLVEON,19
+Pokemon = SYLVEON,18
     Moves = DISARMINGVOICE,SWIFT,BABYDOLLEYES,QUICKATTACK
     Ability = CUTECHARM
     Item = ORANBERRY
     Nature = MODEST
     IV = 20
-    EV = 114,0,4,0,114,0
+    EV = 108,0,4,0,108,0
 #-------------------------------
 [OCTAVE_SINGER,Carol,200]
 LoseText = Oh! You sing back. Most people don't.
@@ -15548,20 +15541,20 @@ Pokemon = SCYTHER,21
 [FESTIVAL_SHELLY,Shelly,101]
 Items = SUPERPOTION,SUPERPOTION
 LoseText = S-sorry! Um. That was really good. Your bugs— er, Pokémon— are lovely.
-Pokemon = MASQUERAIN,21
+Pokemon = MASQUERAIN,20
     Moves = STRUGGLEBUG,BUBBLEBEAM,QUICKATTACK,STICKYWEB
     Ability = INTIMIDATE
     Item = SITRUSBERRY
     Nature = TIMID
     IV = 20
-    EV = 4,0,0,126,126,0
-Pokemon = JOLTIK,21
+    EV = 4,0,0,120,120,0
+Pokemon = JOLTIK,20
     Moves = ELECTROWEB,STRUGGLEBUG,BUGBITE,THUNDERWAVE
     Ability = COMPOUNDEYES
     Item = ORANBERRY
     Nature = TIMID
     IV = 20
-    EV = 4,0,0,126,126,0
+    EV = 4,0,0,120,120,0
 Pokemon = ARAQUANID,21
     Moves = BUBBLEBEAM,BUGBITE,WIDEGUARD,PROTECT
     Ability = WATERBUBBLE

@@ -74,6 +74,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|gym1|gym2|lofts|backstage|d1|house0|house7|house21) session "$1" ;;
+  install|gym1|gym2|lofts|backstage|d1|d2|d7|house0|house7|house21) session "$1" ;;
   *) echo "usage: $0 assemble | install | gym1 | gym2 | lofts | backstage | d1 | stop"; exit 1 ;;
 esac

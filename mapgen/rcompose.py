@@ -108,6 +108,11 @@ TILESETS = {
                            ('rejuvenation', 'Gravel(G)'), ('rejuvenation', 'Still water'), ('rejuvenation', 'Waterfall'),
                            ('rejuvenation', 'Waterfall bottom')]),
     # map builder 8: cities (Saltmere 140/146/147).  54 is the puzzle engineer's "PF Rejuv Halls" (compose_halls.py).
+    # map builder 10: the crafted coast roads (527 Lacecliff Walk, 528 Marram Down, 541 the Grey Saltings): warm Aevium
+    # sand instead of Akuwa's white, the sea in two tones, inland water, lanes and dune sand
+    56: ('PF Rejuv Shore', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore'),
+                            ('rejuvenation', 'Sea(Grass)'), ('rejuvenation', 'DirtDark'), ('pf', 'Gravel Spring'),
+                            ('rejuvenation', 'Dirt')]),
     55: ('PF Rejuv City', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore_2'),
                            ('pf', 'Saltmere Cobbles'), ('pf', 'Saltmere Flags'), ('rejuvenation', 'DirtDark'),
                            ('pf', 'Gravel Spring')]),

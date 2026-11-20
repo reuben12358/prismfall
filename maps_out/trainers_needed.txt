@@ -1,1 +1,4 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
+525	:BUGCATCHER, "Linden"
+525	:POKEMANIAC, "Ferris"
+525	:POKEMONRANGER_F, "Sorrel"

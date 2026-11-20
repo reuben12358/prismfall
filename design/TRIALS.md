@@ -57,7 +57,7 @@ they live in the quest log. Cameo quests still write the Ledger through Core's `
 Each entry: name and halls · philosophy · who runs it · how quests are posted and ranked · the flavour of its quests ·
 its final (rank-5) trial. Counts are total / wired now.
 
-### Elowen — **The Quiet Way** (19 / 14) · *Ionia*
+### Elowen — **The Quiet Way** (20 / 15) · *Ionia*
 - **Halls.** Lantern Houses, run by the **Order of the Listening Root**. Early: the *wayshrine* in **Ferrow's Landing (100)**
   (a lantern rope over a roadside shrine, Brother Teasel), the **Saltmere Lantern House** (suggested 148, sharing a wall
   with the Lantern Theatre: the only silent building in the noisiest town in Elowen, which is the joke), the **Briarwick
@@ -80,7 +80,7 @@ its final (rank-5) trial. Counts are total / wired now.
 - **Final trial.** *The Twilight Cloister*: cross seven dusk-chapels where every choice list hides one silent option.
   Speaking sends you back to the start. Celestine is waiting in the eighth.
 
-### Isenmar — **The Tally** (10 / 4) · *the saga-hall*
+### Isenmar — **The Tally** (11 / 5) · *the saga-hall*
 - **Halls.** The **Net Loft** in Ebbmouth (suggested 168), the **Half-Tally** at the Two Hearths in **Frostwick (573)**
   (borderland: one board, runes on the Isenmar side and lanterns on the Elowen side), the **Great Tally** in the Mead Hall
   of Rimeholt (306).
@@ -94,10 +94,10 @@ its final (rank-5) trial. Counts are total / wired now.
 - **Quest flavour.** Oaths you must not break (*The Oathbound Parcel*: it's a Snom, and it's eating the oath), feasts and
   contests (*A Deed for the Skald*: flatten the dock bully, out-fish Old Gudrun, or simply lie, and Bersi sings it anyway),
   endurance rites on the ice (*The Harpoon Rite*: stand your ground against the Old Bull Cetitan), sea-rescues and the
-  refugees of the Thaw, and finally the war (*The Saga of the Shattered Ice*, sung straight for once from your war choices).
+  refugees of the Thaw, and finally the war (*The Saga of the Glass Dunes*, sung straight for once from your war choices).
 - **Final trial.** Be the witness Bersi needs to sing the war truthfully.
 
-### Zenith — **The Prize Exchange** (9 / 3) · *Piltover: invention grants*
+### Zenith — **The Prize Exchange** (10 / 4) · *Piltover: invention grants*
 - **Halls.** A **Rotom kiosk, P-3NNY**, everywhere Meridian has a desk: the Ferrow's customs hall (108), the Saltmere
   Harbour Office (143), the Ebbmouth Lattice station (160). The seat is the **Prize Exchange floor** in Lumen's Council
   Ward (194): a brass trading floor with a split-flap board.
@@ -114,7 +114,7 @@ its final (rank-5) trial. Counts are total / wired now.
   under embargo, and Cogsworth's rigged invention bout.
 - **Final trial.** *The Laureate's Prize*: win a rigged contest and hear the Registrar admit it.
 
-### Nadir — **The Gutter Book** (9 / 0) · *Zaun: undercity odd jobs*
+### Nadir — **The Gutter Book** (10 / 1) · *Zaun: undercity odd jobs*
 - **Halls.** Chalk boards wherever the City Below drinks: the Mirefen noodle cart (220), the Charwell char-burners' wall
   (630, borderland D), **the Last Rung** at the bottom of an Ironreach lift-shaft (260), a Moon Market stall in Underveil (423).
 - **Philosophy.** Nobody down here gets anything free. You earn, you owe, you pay. Jobs come with a cut, and some of them
@@ -128,7 +128,7 @@ its final (rank-5) trial. Counts are total / wired now.
   running gag 1). Venam's and Garret's cameo quests are posted here.
 - **Final trial.** Mother Gutter's ledger: whatever you did, do it on purpose.
 
-### Ashkaar — **The Trial by Flames** (9 / 1) · *Noxus: strength*
+### Ashkaar — **The Trial by Flames** (10 / 2) · *Noxus: strength*
 - **Halls.** **The Crucible**, an arena on the Cindervault caldera rim (240), the Scaldwater truce-baths (650, borderland E),
   the Wyrmrest proving ground (460). Early outpost: the **Legion recruiting barge** moored in Saltmere's free harbour (146),
   where bouts are legal because the Elowen crown can't stop them.
@@ -143,7 +143,7 @@ its final (rank-5) trial. Counts are total / wired now.
   and one terrified dragon-rider recruit.
 - **Final trial.** *Dragonsworn*: the Legate's dragons on the Dragon's Den, and the oath, which you may refuse.
 
-### Ossaria — **The Rolls of Unearthing** (8 / 0) · *bone sands*
+### Ossaria — **The Rolls of Unearthing** (9 / 1) · *bone sands*
 - **Halls.** Tablet racks at the Copperdune caravanserai (610, borderland C), the **Hall of Unearthing** at Duneholt's
   Dig Lab (200/209), the Vigil embalmers (770), the Cragholm lift-house (360).
 - **Philosophy.** Everything is buried somewhere. Digging is how Ossaria remembers, and whoever owns the dig owns the past.
@@ -155,7 +155,7 @@ its final (rank-5) trial. Counts are total / wired now.
   story, sinkhole rescues in a Bleed zone, a dead Elector who wants to cast one last vote.
 - **Final trial.** *The Bonewright's Rite*: reassemble a whole skeleton from the pieces you dug across the kingdom.
 
-### Antumbra — **The Rite of Reflection** (8 / 0) · *the mirror world*
+### Antumbra — **The Rite of Reflection** (9 / 1) · *the mirror world*
 - **Halls.** The Glassmere reading-pool (753, borderland H), **the Speculum** in Lucent (346), the lantern-priests' glass in
   Gravenmoor (380).
 - **Philosophy.** Your reflection knows you better than you do. The Veiled Synod mediates with Giratina; the Rite teaches
@@ -168,7 +168,7 @@ its final (rank-5) trial. Counts are total / wired now.
   upward, and Shiv's dream-walking cameo.
 - **Final trial.** *Behind the Glass*: one playable night as your own reflection (and the payoff of the mirror gag).
 
-### Crownhaven — **The Hall of Petitions** (8 / 0) · *the capital*
+### Crownhaven — **The Hall of Petitions** (10 / 2) · *the capital*
 - **Halls.** The Pilgrim's Rest shrine-post (890, borderland K), the **Hall of Petitions** in the Market Ring (496), the
   Pilgrims' Quarter board (497).
 - **Philosophy.** All eighteen gates send their troubles here. The Accord is a bureaucracy that has forgotten it was meant
@@ -180,6 +180,14 @@ its final (rank-5) trial. Counts are total / wired now.
   (Kestrel's, from Chapter 4), Masque invitations, the Chancellor's second ledger, Valen's last errand, the Eighteen Shrines,
   and the postgame Warden gauntlet. Lin's postgame cameo is posted here.
 - **Final trial.** *Hand of the Accord*: one petition from every kingdom in a day (needs rank 4+ in five Trials).
+
+### The Eevee Octave — one quest on every board (SPINE Revision 19)
+Eight singers of the Prism Choir, one per kingdom, each with an Eeveelution raised beside that kingdom's Imprint, post a
+quest on their own kingdom's board, in its own flavour: Lyra's *Moss Hymn* is a Quiet Way koan (stop singing at it),
+Aria's *Drowned Note* is a saga for the Tally, Cadence's *Off the Beat* is a Call for Proposals, Sona's *Noon Bell* is a
+dig, Noct's *Lamps Out* is a Gutter Book chalk job, Forte's *Too Loud for the Choir* is a Writ of Flame, Lento's *Still
+Water* is a Rite, and Carol's *Ninth Verse* is a petition in Crownhaven (always last). The order you help them in is the
+order of the gauntlet Vesper hosts in Crownhaven's Glassfall Memorial Garden. Everything: **`design/EEVEE_OCTAVE.md`**.
 
 ### Borderland outposts
 Borderland towns carry a small board that is both kingdoms' at once: the **Half-Tally** in Frostwick (wired), the

@@ -1,4 +1,5 @@
-# TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4)
+# TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4), and the Eevee Octave
+# (SPINE Rev 19, Chapters 2-20: maps 145, 120, 524, 160, 167, 181, 215, 220, 240, 340, 742, 489; design/EEVEE_OCTAVE.md)
 # Owner: Prismfall Trials (design/TRIALS.md). Consumer: the map builder (design/MAPGEN.md section 4 event DSL).
 # No map file was edited; place these where `near:` says and fill `at:`.
 #
@@ -13,7 +14,8 @@
 #       {if: 'pf_trial_ready?(:KEY)', then: [{script: 'pf_trial_talk(:KEY)'}], else: [<their existing lines>]}
 #   * Trial halls/boards: a keeper NPC whose TALK entry has a board falls through to pf_trial_board(:TRIAL) when no quest
 #     scene is due. A separate board object can just call pf_trial_board(:TRIAL).
-#   * Story switches used in page conds: CH1_STARTER_GOT (S103), PRO_FERRY_DONE (S101), CH3_PAGEANT_DONE (S108).
+#   * Story switches used in page conds: CH1_STARTER_GOT (S103), PRO_FERRY_DONE (S101), CH3_PAGEANT_DONE (S108),
+#     CH20_VEIL_GATE_OPEN (S155).
 #   * Sprites are descriptions; use whatever the cast/NPC sheets provide.
 maps:
   100:
@@ -129,6 +131,7 @@ maps:
        condition: "quest_step(:EL_SOUND_OF_SALTMERE) == :ask && !quest_flag(:EL_SOUND_OF_SALTMERE, :stage)"}
     - {name: Marguerite Fane, key: FANE, near: "the paint loft, under the torn backdrop", sprite: "scene-painter in a smock, Smeargle beside her",
        trigger: action, cond: {switch: CH3_PAGEANT_DONE}, condition: "quest_state(:EL_PAINT_LOFT) != :done"}
+    - {name: Vesper, key: VESPER_SALTMERE, patch: "existing backstage event 'Vesper' (S190): after her duet lines, add {script: 'pf_trial_talk(:VESPER_SALTMERE)'}; she asks you to look in on the Octave (CR_OCTAVE). Her duet partner is now Lyra (OCTAVE_SINGER Lyra 0), not Carol: see mapgen/REQUESTS.md"}
   146:
     name: Saltmere - Harbour & Breakwater
     events:
@@ -163,11 +166,15 @@ maps:
        note: "impassable silk wall; gone once Heracross tears it down"}
     - {name: Fallen log, near: "a second shortcut", condition: "quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir",
        note: "impassable log; gone once Pinsir crushes it"}
+    - {name: Moss-stone, key: MOSS_STONE, near: "a big moss-furred boulder past the silk walls, on the north side of the wood", sprite: "Eevee curled on top of a mossy boulder", trigger: action,
+       note: "Show Lyra (Choir grey) standing beside it on a page with condition quest_step(:EL_OCTAVE_MOSS) == :stone; the Eevee is gone once the quest is done."}
   120:
     name: Briarwick
     events:
     - {name: Lantern House, request: "the Briarwick Lantern House, a hollow-tree interior (suggest map 126)"}
     - {name: Loyal Three shrine, key: SHRINE_SQUARE, patch: "existing event 'Loyal Three shrine'"}
+    - {name: Lyra, key: OCTAVE_LYRA, near: "under the Lantern House tree", sprite: "girl in Choir grey, humming; an Eevee at her feet (a Leafeon once EL_OCTAVE_MOSS is done)", trigger: action,
+       condition: "quest_step(:EL_OCTAVE_MOSS) != :stone", note: "Eevee Octave 1/8 (Elowen). While the step is :stone she is at the moss-stone in 524 instead."}
   126:
     name: Briarwick Lantern House (new interior; suggested ID)
     events:
@@ -215,10 +222,18 @@ maps:
     - {name: Grant Kiosk P-3NNY/2, key: KIOSK_PENNY_EBB, near: "the tidal Lattice station gate", sprite: "tile: brass kiosk", trigger: action}
     - {name: Upper mill-wheel, key: WHEEL_UPPER, near: "the upper wheel on the Ebb", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :upper)"}
     - {name: Guild mill-wheel, key: WHEEL_GUILD, near: "the wheel by the Guild hall", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :guild)"}
+    - {name: Aria, key: OCTAVE_ARIA, near: "the river steps", sprite: "young woman in a wet Choir robe sitting in the shallows (a Vaporeon beside her once IS_OCTAVE_DROWNED_NOTE is past :wheel)", trigger: action,
+       note: "Eevee Octave 2/8 (Isenmar)."}
+    - {name: River note (steps), key: EBB_NOTE, near: "the bottom step of the river steps, at the waterline", sprite: "tile: rings on the water", trigger: action,
+       condition: "quest_step(:IS_OCTAVE_DROWNED_NOTE) == :listen", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: River note (fish market), key: EBB_NOTE, near: "the fish-market slip", same_as: "River note (steps)"}
   167:
     name: Ebbmouth - Mill Quay
     events:
     - {name: Mill Quay wheel, key: WHEEL_QUAY, near: "the Mill Quay wheel", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :quay)"}
+    - {name: River note (Mill Quay steps), key: EBB_NOTE, near: "the Mill Quay steps", same_as: "River note (steps) on 160"}
+    - {name: Under the wheel, key: MILL_WHEEL, near: "the black water under the Mill Quay wheel, beside 'Mill Quay wheel'", trigger: action,
+       condition: "quest_step(:IS_OCTAVE_DROWNED_NOTE) == :wheel"}
   168:
     name: The Net Loft (new interior; suggested ID)
     events:
@@ -230,3 +245,61 @@ maps:
     - {name: The loop, key: REHEARSAL_LOOP, near: "the wheel-rut where the wagon tips", sprite: "wagon, horse and girl (one pink edge)", trigger: action,
        condition: "!quest_done(:EL_REHEARSAL)"}
     - {name: The girl in the road, key: REHEARSAL_GIRL, near: "in the road", trigger: action, condition: "quest_step(:EL_REHEARSAL) == :finish"}
+  181:
+    name: Lumen City - Lowlight
+    events:
+    - {name: Cadence, key: OCTAVE_CADENCE, near: "the Lowlight steps, under a streetlamp", sprite: "woman in a cut-down Choir robe drumming on paint tins; a Jolteon", trigger: action,
+       note: "Eevee Octave 3/8 (Zenith). The Call for Proposals is on the Prize Exchange board (ZE_OCTAVE_OFF_BEAT)."}
+    - {name: Lattice junction 1, key: LATTICE_JUNCTION, near: "a brass Lattice junction box at the top of the steps", sprite: "tile: brass box with a dial", trigger: action,
+       condition: "quest_step(:ZE_OCTAVE_OFF_BEAT) == :junctions", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Lattice junction 2, key: LATTICE_JUNCTION, near: "a junction box by the noodle bar", same_as: "Lattice junction 1"}
+    - {name: Lattice junction 3, key: LATTICE_JUNCTION, near: "a junction box at the bottom of the steps", same_as: "Lattice junction 1"}
+  215:
+    name: Temple of the Noon Sun (new interior; suggested ID)
+    events:
+    - {name: Temple door, request: "a small round sandstone temple half under a dune, off Sunbleach Flats (613) or Duneholt's Sandgate (203): one room, a light-shaft in the roof that drops a circle of light on the floor at noon, a bronze bell"}
+    - {name: Sona, key: OCTAVE_SONA, near: "beside the sleeping Espeon in the middle of the floor", sprite: "woman in Choir grey, eyes half shut; an Espeon asleep", trigger: action,
+       note: "Eevee Octave 4/8 (Ossaria). The clay tablet is on the Rolls of Unearthing rack (OS_OCTAVE_NOON_BELL)."}
+    - {name: Sand drift 1, key: SUN_DRIFT, near: "sand packed into the light-shaft, left side", sprite: "tile: sand drift", trigger: action,
+       condition: "quest_step(:OS_OCTAVE_NOON_BELL) == :dig", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Sand drift 2, key: SUN_DRIFT, near: "the light-shaft, back wall", same_as: "Sand drift 1"}
+    - {name: Sand drift 3, key: SUN_DRIFT, near: "the light-shaft, right side", same_as: "Sand drift 1"}
+  220:
+    name: Mirefen
+    events:
+    - {name: Marsh ferryman, key: FERRYMAN_MIREFEN, near: "the ferry steps onto the runoff marsh, under the Gutter Book chalk board", sprite: "ferryman with a pole", trigger: action,
+       note: "Gives NA_OCTAVE_LAMPS_OUT (Ottoline's chalk job); falls through to the Nadir board."}
+    - {name: Ferry lamp 1, key: FERRY_LAMP, near: "a lamp post on the boardwalk over the marsh", sprite: "lamp post, lit", trigger: action,
+       condition: "quest_step(:NA_OCTAVE_LAMPS_OUT) == :lamps && night", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Ferry lamp 2, key: FERRY_LAMP, near: "a lamp post halfway along the crossing", same_as: "Ferry lamp 1"}
+    - {name: Ferry lamp 3, key: FERRY_LAMP, near: "the last lamp post, by the reeds", same_as: "Ferry lamp 1"}
+    - {name: Noct, key: OCTAVE_NOCT, near: "the old lamplighter's hut at the end of the ferry steps (four children asleep under a sail inside)", sprite: "young man in a soot-black Choir robe with a lamp-hook; an Umbreon", trigger: action,
+       condition: "quest_step(:NA_OCTAVE_LAMPS_OUT) == :noct || quest_step(:NA_OCTAVE_LAMPS_OUT) == :duel || quest_done(:NA_OCTAVE_LAMPS_OUT)",
+       note: "Eevee Octave 5/8 (Nadir)."}
+  240:
+    name: Cindervault - Forge Terraces
+    events:
+    - {name: Forte, key: OCTAVE_FORTE, near: "outside the Crucible's gate on the caldera rim", sprite: "young woman in a scorched Choir robe; a Flareon", trigger: action,
+       note: "Eevee Octave 6/8 (Ashkaar)."}
+    - {name: Legate Varra Kosk, key: CRUCIBLE_LEGATE, near: "on the Crucible's steps, ledger on her knee", sprite: "legion officer, grey-haired", trigger: action,
+       note: "Keeper of the Crucible (Trial by Flames); falls through to the Ashkaar board."}
+  340:
+    name: Lucent - Athenaeum Quarter
+    events:
+    - {name: Vesper (Ch13), key: VESPER_LUCENT, patch: "existing Ch13 event 'Vesper' in the Athenaeum cloister (S191; on whichever Lucent map holds the cloister): after her sparring double, add {script: 'pf_trial_talk(:VESPER_LUCENT)'} (news of the Octave, a nudge toward Lento)"}
+  742:
+    name: Mirror Mere
+    events:
+    - {name: Lento, key: OCTAVE_LENTO, near: "the middle of the frozen mere", sprite: "woman in Choir grey standing very still; a Glaceon. Her reflection under the ice (upside down) until the cracks are walked", trigger: action,
+       note: "Eevee Octave 7/8 (Antumbra). The Rite's mirror-writing is read at the Glassmere reading-pool (753). The mere is frozen (ice tiles) until AN_OCTAVE_STILL_WATER is done, then open water."}
+    - {name: Crack 1, key: MERE_CRACK, near: "the end of a long crack in the ice, west side", sprite: "tile: crack in ice", trigger: action,
+       condition: "quest_step(:AN_OCTAVE_STILL_WATER) == :cracks", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Crack 2, key: MERE_CRACK, near: "the end of a crack, north side", same_as: "Crack 1"}
+    - {name: Crack 3, key: MERE_CRACK, near: "the end of a crack, east side", same_as: "Crack 1"}
+  489:
+    name: Glassfall Memorial Garden
+    events:
+    - {name: Carol, key: OCTAVE_CAROL, near: "among the glass figures, on a bench with a slate", sprite: "young woman in Choir white; a Sylveon with its ribbons round her wrist", trigger: action,
+       cond: {switch: CH20_VEIL_GATE_OPEN}, note: "Eevee Octave 8/8 (Crownhaven), always last: her quest opens once the other seven are helped."}
+    - {name: Vesper (the gauntlet), key: VESPER_GARDEN, near: "the head of the garden; the other seven singers in a half-circle behind her once she appears", sprite: "Vesper Lindqvist in Choir white; an Eevee (Amen)", trigger: action,
+       condition: "octave_ready", note: "Appears when all eight singers have been helped (the user's 'a trainer spawns in Crownhaven'). Starts the 9-bout gauntlet."}

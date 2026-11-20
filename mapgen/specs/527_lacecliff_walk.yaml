@@ -1,4 +1,4 @@
-# Lacecliff Walk (527). WRITTEN BY layouts/routes_early.py - edit that script.
+# Lacecliff Walk (527). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 527
 name: Lacecliff Walk
 parent: 0
@@ -9,15 +9,47 @@ yards_ok: true
 biome: route
 field: BEACH
 tone: [6, 4, -6, 0]
+walk_from:
+- [72, 44]
+- [138, 24]
+- [1, 20]
 connections:
 - {dir: W, offset: 18, to: 528, to_offset: 30}
 - {dir: E, offset: 22, to: 520, to_offset: 72}
-walk_from:
-- [138, 24]
-- [1, 20]
 raw: data/raw/527.npy
-tileset: 51
+tileset: 56
 events:
+- type: event
+  name: Chalk rubble
+  at: [43, 14]
+  pages:
+  - graphic: {sprite: Object rock, dir: down}
+    trigger: action
+    commands: ['Chalk rubble from the fallen arch, too heavy to shift by hand.']
+- type: rock_smash
+  at: [44, 14]
+  name: Rock
+- type: event
+  name: Chalk rubble
+  at: [45, 14]
+  pages:
+  - graphic: {sprite: Object rock, dir: down}
+    trigger: action
+    commands: ['Chalk rubble from the fallen arch, too heavy to shift by hand.']
+- type: event
+  name: Tide-rock
+  at: [78, 46]
+  pages:
+  - graphic: {sprite: Object rock, dir: down}
+    trigger: action
+    commands:
+    - if: PBDayNight.isNight?
+      then:
+      - The tide is out. The rock stands in a dry hollow now, and you can squeeze past it.
+      - selfswitch: [A, true]
+      else: ['The sea fills the gap behind this rock. At low tide, maybe.']
+  - cond: {self: A}
+    commands: []
 - type: sign
   name: Road sign
   at: [136, 21]
@@ -27,18 +59,18 @@ events:
   post: false
 - type: event
   name: The Lace Arches
-  at: [103, 27]
+  at: [104, 29]
   pages:
   - trigger: touch
     commands:
-    - (Chalk cliffs worn by the sea into arches as fine as lace. The path goes through three of them.)
+    - (Chalk cliffs worn by the sea into arches as fine as lace. The path goes through three of them. Well -- two and a half.)
     - '\pf[JUNO,happy]Juno: The Briarwick weavers copy these cliffs for their lace. Not the other way round. The sea did it first.'
     - '\pf[JUNO,happy]Juno: The sea does most things first. It''s very annoying of it.'
     - selfswitch: [A, true]
   - cond: {self: A}
     commands: []
 - type: trainer
-  at: [104, 48]
+  at: [93, 46]
   sight: 4
   dir: left
   sprite: trainer_FISHERMAN
@@ -46,7 +78,7 @@ events:
   intro: The strait's closed and the fish haven't been told.
   after: The fish win again.
 - type: trainer
-  at: [40, 47]
+  at: [38, 45]
   sight: 4
   dir: right
   sprite: trainer_PICNICKER
@@ -54,7 +86,7 @@ events:
   intro: I found a bottle with a letter in it! It's from my sister. She lives forty yards that way.
   after: She writes every week. She's never once walked over.
 - type: trainer
-  at: [86, 16]
+  at: [30, 9]
   sight: 4
   dir: down
   sprite: trainer_HIKER
@@ -62,8 +94,16 @@ events:
   intro: Cliff path in a gale's a fine way to die. Cliff path in sun's a fine way to live.
   after: Today's a sun day. Lucky you.
 - type: event
+  name: Lass on the heath
+  at: [112, 28]
+  pages:
+  - graphic: {sprite: NPC 16, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Lass: The Wrecker''s Lamp? It''s only for the gulls. Everyone says so. Everyone says it a bit fast.']
+- type: event
   name: Painter at an easel
-  at: [58, 22]
+  at: [59, 40]
   pages:
   - graphic: {sprite: NPC 18, dir: down}
     trigger: action
@@ -72,7 +112,7 @@ events:
         Odd.']
 - type: event
   name: Hermit at the Wrecker's Lamp
-  at: [118, 8]
+  at: [120, 45]
   pages:
   - graphic: {sprite: NPC 26, dir: down}
     trigger: action
@@ -80,13 +120,13 @@ events:
     commands: ['Hermit: It''s for the gulls. The lamp. Not for ships.', 'Hermit: I don''t know anything about ships. Who said ships?']
 - type: event
   name: Wrecker's Lamp
-  at: [120, 6]
+  at: [118, 48]
   pages:
   - trigger: action
-    commands: ['A lamp on a tall pole, trimmed and full. It faces the sea, where the rocks are.']
+    commands: ['A lamp on a tall pole at the very tip of the headland, trimmed and full. It faces the sea, where the rocks are.']
 - type: event
   name: Birder
-  at: [24, 10]
+  at: [108, 9]
   pages:
   - graphic: {sprite: NPC 09, dir: down}
     trigger: action
@@ -94,20 +134,26 @@ events:
     commands: ['Birder: Wingull nest on that stack. Two hundred of them. I''ve named eleven. The rest won''t hold still.']
 - type: event
   name: Smugglers' signal pole
-  at: [70, 8]
+  at: [104, 8]
   pages:
   - trigger: action
     commands: [A tall pole with a lantern hook. From here you can see the Ferrow lighthouse., 'Its beam sweeps past, then stops on you for a second longer
         than it should, then moves on.']
 - type: event
+  name: Dew pond
+  at: [110, 9]
+  pages:
+  - trigger: action
+    commands: ['A dew pond, lined with chalk and clay by shepherds long gone. It never quite dries. The Wingull drink here and argue.']
+- type: event
   name: Road Stone I-b
-  at: [128, 21]
+  at: [129, 27]
   pages:
   - trigger: action
     commands: ['ROAD STONE I-b. THE STRAND ROAD. "Ferrow 2, Saltmere 6." Someone has chalked a seventh mile on, for the arches.']
 - type: event
   name: Lacemakers' Bench
-  at: [62, 23]
+  at: [57, 41]
   pages:
   - trigger: action
     commands:
@@ -120,51 +166,65 @@ events:
         - '\pf[JUNO,neutral]Juno: ...This is nice. I don''t get to sit. I''m always going somewhere with a basket.'
         - '\pf[JUNO,happy]Juno: Right! That''s enough nice! Saltmere!'
         - {heal: true}
+- type: event
+  name: The fallen arch
+  at: [44, 15]
+  pages:
+  - trigger: action
+    commands: ['(The third arch. Its span fell in a winter storm before anyone alive was born, and took the old way up onto the down with it.)']
 - type: item
-  at: [50, 23]
+  at: [44, 10]
   item: PEARL
   hidden: true
   name: HiddenItem (third arch)
+- type: event
+  name: Sea-pinks
+  at: [22, 8]
+  pages:
+  - trigger: action
+    commands: ['(A hollow on the down, hidden by gorse: a whole field of sea-pinks. On clear mornings, they say, the Flabebe come to dance here.)']
 - type: item
-  at: [119, 11]
+  at: [121, 41]
   item: POTION
 - type: item
-  at: [20, 9]
+  at: [12, 6]
   item: POKEBALL
 - type: item
-  at: [95, 48]
+  at: [97, 48]
   item: SUPERPOTION
+- type: item
+  at: [125, 8]
+  item: NUGGET
+  hidden: true
+  name: HiddenItem (high down)
+- type: item
+  at: [68, 33]
+  item: ETHER
 - type: event
   name: Dobbs the shell-gatherer
-  at: [43, 42]
+  at: [28, 45]
   pages:
   - trigger: action
     commands:
     - {script: 'pf_trial_talk(:DOBBS)'}
     graphic: {sprite: NPC 27, dir: down}
 - type: event
-  name: Tide-rock
-  at: [64, 44]
+  name: Fisher at the camp
+  at: [36, 46]
   pages:
-  - graphic: {sprite: Object rock, dir: down}
+  - graphic: {sprite: NPC 25, dir: down}
     trigger: action
-    commands:
-    - if: PBDayNight.isNight?
-      then:
-      - The tide is out. The rock stands in a dry hollow now, and you can squeeze past it.
-      - selfswitch: [A, true]
-      else: ['The sea fills the gap behind this rock. At low tide, maybe.']
-  - cond: {self: A}
-    commands: []
+    move: fixed
+    commands: ['Fisher: The cove''s ours till the tide says otherwise. Sit by the fire. Mind the crab, he''s ours as well.']
 - type: event
   name: Drowned sample-book
-  at: [74, 47]
+  at: [71, 46]
   pages:
   - trigger: action
     commands: ['A weaver''s sample-book, swollen with seawater. Every page is a lace pattern copied from these cliffs.', 'On the last page, in a different
         hand: "Found the Thread. Going home by the forest road." It is dated the winter the road closed.']
 - type: item
-  at: [76, 47]
+  at: [73, 46]
   item: SHELLBELL
   hidden: true
   name: HiddenItem (the Lost Thread)

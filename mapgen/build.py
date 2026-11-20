@@ -273,6 +273,10 @@ def pages_from(e, ctx, mid):
         l = [G.ev_cmd(111, 0, [12, 'pbCut']), G.ev_cmd(355, 1, ['pbSmashEvent(get_self)']), G.ev_cmd(0, 1),
              G.ev_cmd(412, 0)]
         return [G.page(gfx=G.graphic('Object tree 1'), cmds=l)]
+    if t == 'rock_smash':                                  # map builder 10: Essentials' "Rock" event (pbRockSmash)
+        l = [G.ev_cmd(111, 0, [12, 'pbRockSmash']), G.ev_cmd(355, 1, ['pbSmashEvent(get_self)']), G.ev_cmd(0, 1),
+             G.ev_cmd(412, 0)]
+        return [G.page(gfx=G.graphic('Object rock'), cmds=l)]
     if t == 'pc':
         return [G.page(cmds=G.compile_cmds([{'script': 'pbPokeCenterPC'}]))]
     if t == 'event':
@@ -456,7 +460,7 @@ def material_check(spec, ctx, layers, tileset_id):
 # cliff and quay "stairs".  Stairs are now real steps (tdraw st_stair_* / tb_stair_*, rdraw fw_stair_*); the slab must
 # never come back on a PF Rejuv map.
 OLD_SLAB = {4992, 4993, 4994}
-PF_REJUV_TILESETS = (50, 51, 52, 53, 55)
+PF_REJUV_TILESETS = (50, 51, 52, 53, 55, 56)
 
 
 def slab_check(spec, ctx, layers, tileset_id):
@@ -519,6 +523,8 @@ def default_name(e):
         return 'BerryPlant'
     if t == 'cut_tree':
         return 'CutTree'
+    if t == 'rock_smash':
+        return 'Rock'
     return {'exit': 'Exit', 'door': 'Door', 'warp': 'Warp', 'sign': 'Sign', 'pc': 'PC', 'mart': 'Mart'}.get(t, t.capitalize())
 
 

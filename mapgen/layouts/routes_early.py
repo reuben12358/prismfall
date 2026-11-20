@@ -1159,6 +1159,8 @@ BUILD = {566: build_566, 577: build_577, 578: build_578, 520: build_520, 521: bu
 
 
 def main():
+    import routes_craft                       # map builder 10: the crafted roads replace these ids
+    BUILD.update(routes_craft.BUILD)
     ids = [int(a) for a in sys.argv[1:] if a.isdigit()] or sorted(BUILD)
     for i in ids:
         BUILD[i](); print('built', i)

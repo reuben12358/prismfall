@@ -139,7 +139,7 @@
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
 | **The Eevee Octave** `CR_OCTAVE` | 2 | `` | Vesper Lindqvist · backstage at the Lantern Theatre, Saltmere (asked); the Glassfall Memorial Garden, Crownhaven (489) (145) | ★ · 90 | Vesper asked you to look in on the eight singers of the Octave as your road takes you through the kingdoms. | EEVIUMZ, ZPOWERRING, Eevee Lv 70 (ADAPTABILITY); +5 pts | The gauntlet runs in the order you helped the singers (each Eeveelution uses its Z-move); S177 EEVEE_OCTAVE_DONE | wired |
-| **The Ninth Verse** `CR_OCTAVE_NINTH_VERSE` | 20 | `switch(155)` | Carol of the Octave · the Glassfall Memorial Garden, Crownhaven (489) | ★ · 88 | Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all. | $6000, PPUP x3; +4 pts | The Octave: Carol (always 8 of 8); she sends for Vesper | wired |
+| **The Ninth Verse** `CR_OCTAVE_NINTH_VERSE` | 20 | `switch(155) && octave_helped >= 7` | Carol of the Octave · the Glassfall Memorial Garden, Crownhaven (489) | ★ · 88 | Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all. | $6000, PPUP x3; +4 pts | The Octave: Carol (always 8 of 8); she sends for Vesper | wired |
 | **Eighteen Shrines** `CR_EIGHTEEN_SHRINES` | 20 | `badges >= 18` | the Pilgrim's Rest keeper · Pilgrim's Rest (890) | ★ · 85 | Eighteen roadside shrines on the Pilgrim Pass, one per Plate. Ashkaar charges a toll at six of them. **Twist:** Each shrine asks one line of the counting rhyme; the eighteenth asks for the line nobody sings ('...and one that no one counted'). The keeper gives you the five Imprint stones the shrines kept (the Octave's Eevee, SPINE Rev 19, replaced the old 'Prism' Eevee here). | FIRESTONE, WATERSTONE, THUNDERSTONE, LEAFSTONE, ICESTONE; +4 pts | Ashkaar tolls (pay, fight or talk); WORLD 'Eighteen Shrines' | designed |
 | **Lost Property** `CR_LOST_PROPERTY` | 20 | `switch(155)` | the lost-property clerk · the Court of Eight Pavilions (499) | ★ · 88 | The Festival lost-property tent has one item. Every day. It's an eel receipt. **Twist:** It's Kestrel's, from Ebbmouth, from Chapter 4. He has been carrying it for sixteen chapters. He denies it until you show him the date. Then he takes it back very carefully. | RARECANDY x2; +2 pts | Kestrel bond (+1); 15_COMEDY Crownhaven bit; Ebbmouth's 'THE BOY (4 EELS, DAILY)' | designed |
 | **The Pavilion Line** `CR_DELEGATION_DISPUTE` | 20 | `switch(155)` | Clerk-Superior Amadeus Fenwright · the Court of Eight Pavilions (499) | ★★ · 88 | Ashkaar's pavilion is four inches over the line into Isenmar's. Neither delegation will speak to the other. Both will speak to you. **Twist:** Every message gets ruder in translation. The fix is to move the line, not the pavilion; Fenwright is appalled and then promoted. | PPMAX; +3 pts | War outcome flavour (war_terms); Dominar / Thane | designed |
@@ -2099,7 +2099,7 @@ Vesper asked you to look in on the eight singers of the Octave as your road take
 
 - [stage] The Glassfall Memorial Garden. White stone, a ring of glass figures among the roses, and eight singers standing in a half-circle with their Eeveelutions. Vesper steps out to meet you.
 - **Vesper** _(happy)_: You came. Everyone, it's them.
-- **Vesper** _(neutral)_: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+- **Vesper** _(neutral)_: All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
 - **Vesper** _(neutral)_: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
 - **Vesper** _(happy)_: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
 - **Vesper** _(neutral)_: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
@@ -2128,7 +2128,7 @@ Vesper asked you to look in on the eight singers of the Octave as your road take
 
 #### The Ninth Verse (`CR_OCTAVE_NINTH_VERSE`)
 
-*Chapter 20 · Carol of the Octave, the Glassfall Memorial Garden, Crownhaven (map 489) · rank 1 · 4 points · unlock `switch(155)`*
+*Chapter 20 · Carol of the Octave, the Glassfall Memorial Garden, Crownhaven (map 489) · rank 1 · 4 points · unlock `switch(155) && octave_helped >= 7`*
 
 Petition, sealed in eight waxes: a singer is writing the Octave's Festival song and needs someone who has met them all.
 

@@ -276,6 +276,10 @@ in the validator, so they need no row.
 - Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
 - Rev 10 field re-tune: done for Wardens, rivals, Thistle, Teo, Valen, Voss, the Festival draws and the route trainers
   (TRAINER_FIELD_PLAYBOOK.md). Not re-tuned: cameo sidequests, Quent, Theodric, the Ch21 tag foes.
-- Still no teams: the Mourner, Wick, Sable, Ashe, pre-Ch21 Marchetti/Quent/Kroll fights, the Eevee Octave.
+- Still no teams: the Mourner, Wick, Sable, Ashe, pre-Ch21 Marchetti/Quent/Kroll fights.
+- **Eevee Octave (SPINE Rev 19):** provisional teams from the Trials workstream in `pbs/trainers_trials.txt`
+  (`OCTAVE_SINGER <name>` v50 kingdom duels at the next cap − 1, v60 gauntlet bouts at 90 with Z-crystals,
+  `OCTAVE_VESPER Vesper` v60 Eevee 92 with the Eevium Z); levels, balance findings and the retired v0 Carol / v1–8 / Vesper v2
+  sets: `design/EEVEE_OCTAVE.md` §4 and mapgen/REQUESTS.md ("From the Eevee Octave workstream"). For the trainer designer to tune.
 - Pending: war-arc soldier/officer teams (types `ASHKAAR_*` / `ISENMAR_*` exist; teams once the story lead writes the war);
   new maps' trainers as they are generated.

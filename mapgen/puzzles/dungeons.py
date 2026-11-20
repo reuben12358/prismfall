@@ -46,7 +46,7 @@ D2_WALLS = [c for c in [(30, 5), (29, 7), (29, 9), (30, 10), (32, 10), (37, 7), 
 D2_CURTAINS = {1: ((29, 8), 'W'), 2: ((31, 10), 'S'), 3: ((34, 6), 'S')}      # cocoon n -> (cell, natural lean)
 D2_EXIT = ((30, 4), 'W')                                                        # the island's one-way way home
 D2_POSTS = {'alpha': ((25, 7), (0, 1)), 'beta': ((33, 9), (1, 2))}
-D2_START, D2_GOAL = (24, 8), (39, 1)
+D2_START, D2_GOAL = (24, 8), (31, 2)
 D2_LEAN = {'N': (0, -1), 'S': (0, 1), 'E': (1, 0), 'W': (-1, 0)}
 D2_FLIP = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
 MAP525 = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'maps_out', 'Data', 'Map525.rxdata')
@@ -73,7 +73,7 @@ class SilkModel(Model):
                     if D2_LEAN[lean[c]] != (dx, dy): continue
                     n = (m, c[0] + dx, c[1] + dy)
                     if n not in self.cells or not self.passable(n, v): continue
-                elif (m,) + c in self.cells and self.passable((m,) + c, v):
+                elif (m,) + c in self.cells and self.passable((m,) + c, v) and self.step_ok((m, x, y), (m,) + c, v):
                     n = (m,) + c
                 else:
                     continue
@@ -232,12 +232,10 @@ def _d7_events():
     for n, ((x, y), lines) in D7_THREADS.items():
         sc = '\n'.join('pfp_flip(%d)' % S_CURTAIN[l] for l in lines)
         ev.append({'type': 'event', 'name': 'Frozen thread (%s)' % n, 'at': [x, y], 'pages': [{'graphic': {'tile': T52['peg']}, 'commands': [
-            "A frozen thread runs from this peg up the east path, to %s." % LINE[n],
-            {'choices': ['Pull it', 'Leave it'], 'cancel': 2, 'branches': [[
-                {'se': 'Anim/Ice1'}, {'script': sc}, {'raw': [225, [2, 3, 6]]},
-                "Frost runs up the thread. Somewhere up the path, ice cracks... and ice sets again.",
-                {'script': 'pbMessage(_INTL("(Curtains: {1})", [%s].map { |s| $game_switches[s] ? "broken" : "frozen" }.join(", ")))' % ', '.join(str(c) for c in S_CURTAIN)}],
-                []]}]}]})
+            "A frozen thread runs from this peg up the east path, to %s. You pull it." % LINE[n],
+            {'se': 'Anim/Ice1'}, {'script': sc}, {'raw': [225, [2, 3, 6]]},
+            "Frost runs up the thread. Somewhere up the path, ice cracks... and ice sets again.",
+            {'script': 'pbMessage(_INTL("(Curtains: {1})", [%s].map { |s| $game_switches[s] ? "broken" : "frozen" }.join(", ")))' % ', '.join(str(c) for c in S_CURTAIN)}]}]})
     ev.append({'type': 'event', 'name': "Trapper's cache", 'at': list(D7_CACHE), 'pages': [
         {'graphic': {'sprite': 'Object ball'}, 'commands': [
             "A trapper's cache, tucked under the roots: two Snowballs, wrapped in waxed cloth.",
@@ -276,10 +274,9 @@ def _d2_events():
         sc = '\n'.join('pfp_flip(%d)' % S_COCOON[i] for i in lines)
         ev.append({'type': 'event', 'name': 'Anchor post %s' % name, 'at': [x, y], 'pages': [
             {'graphic': {'sprite': 'Followers/JOLTIK', 'dir': 'down'}, 'step_anime': True, 'dir_fix': True, 'commands': [
-                "A Joltik clings to the anchor post where two silk strands are tied.",
-                {'choices': ['Touch the strands', 'Leave it'], 'cancel': 2, 'branches': [[
-                    {'se': 'Anim/Thunder1'}, {'script': sc},
-                    "The Joltik sparks! The charge runs both strands, and every cocoon on them changes: dark ones glow, glowing ones go dark."], []]}]}]})
+                "A Joltik clings to the anchor post where two silk strands are tied. You touch the strands.",
+                {'se': 'Anim/Thunder1'}, {'script': sc},
+                "The Joltik sparks! The charge runs both strands, and every cocoon on them changes: dark ones glow, glowing ones go dark."]}]})
     ev.append({'type': 'item', 'at': list(D2_GOAL), 'item': 'TM19'})
     ev.append({'type': 'sign', 'at': [25, 9], 'text': '"SILK ONLY LETS YOU GO THE WAY IT\'S BEEN PULLED. A LIT COCOON PULLS IT THE OTHER WAY. -- Woodward"'})
     return ev

@@ -4,7 +4,8 @@
 # ordinary input only: arrow keys along BFS paths, Use on levers/ropes, walking
 # into spools.  Nothing sets a switch or variable for it.
 #   PLAYBOT_SESSION=gym1       map 147's Playhouse door -> Lobby -> Auditorium (aisle, curtain rope) -> Dorian
-#   PLAYBOT_SESSION=gym2       map 120's Loomhouse door -> Foyer (one heddle) -> Weaving Hall (linked heddles) -> Tamsin
+#   PLAYBOT_SESSION=gym2       map 120's Loomhouse door -> Lobby -> the Canopy (web trampolines, sticky webs, two Joltik) -> Tamsin
+#   PLAYBOT_SESSION=house0 / house7 / house21   Gym 1 with 0 / 7 / 21 Saltmere townsfolk met: the house and Dorian's opening stage
 #   PLAYBOT_SESSION=lofts      the optional Upper Lofts (with Tamsin's badge): Canopy Lofts -> Granny's Knot
 #   PLAYBOT_SESSION=backstage  the optional Playhouse Backstage (D9): old revolve + Fly Loft
 # New step kinds: [:use_from, map, x, y, dir]  stand on (x, y), face dir, press Use
@@ -13,7 +14,7 @@
 #===============================================================================
 module PlayBot
   PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 19, 5], "backstage" => [154, 2, 11],
-                   "house0" => [154, 12, 28], "house7" => [154, 12, 28], "house21" => [154, 12, 28],
+                   "house0" => [154, 12, 28], "d2" => [525, 24, 8], "d7" => [562, 36, 21], "house7" => [154, 12, 28], "house21" => [154, 12, 28],
                    "d1" => [522, 6, 36] }
   # Gym 1 (SPINE Rev 14): the Pell Playhouse. A walk-through: lobby, up the aisle past the actors, one curtain rope.
   GYM1_PLAN = [
@@ -39,6 +40,24 @@ module PlayBot
     [:goto, 154, 12, 11], [:use_from, 154, 20, 11, 6],
     [:goto, 154, 12, 8], [:talk, 154, 12, 7],
     [:shot, 154, "hs_02_after_the_show"],
+    [:done]
+  ]
+  # Dungeons laid over the map builder's maps (puzzles/dungeons.py EVENTS): D2 the Deepwood's lantern hollow, D7 the Frost Loom
+  D2_PLAN = [
+    [:shot, 525, "d2_00_the_lantern_hollow"],
+    [:talk, 525, 25, 7], [:shot, 525, "d2_01_post_alpha"],
+    [:ride, 525, 28, 8, 6], [:shot, 525, "d2_02_through_the_first_curtain"],
+    [:talk, 525, 33, 9], [:shot, 525, "d2_03_post_beta"],
+    [:ride, 525, 34, 7, 8], [:shot, 525, "d2_04_onto_the_island"],
+    [:talk, 525, 31, 2], [:shot, 525, "d2_05_tm19"],
+    [:done]
+  ]
+  D7_PLAN = [
+    [:shot, 562, "d7_00_the_frost_loom"],
+    [:talk, 562, 40, 19], [:shot, 562, "d7_01_left_thread"],
+    [:talk, 562, 42, 19], [:shot, 562, "d7_02_right_thread"],
+    [:goto, 562, 47, 15], [:shot, 562, "d7_03_through_the_curtains"],
+    [:talk, 562, 44, 12], [:shot, 562, "d7_04_the_cache"],
     [:done]
   ]
   # Gym 2 (SPINE Rev 19): the Loomhouse lobby, then the Canopy: web trampolines, sticky webs, two Joltik.
@@ -136,6 +155,8 @@ module PlayBot
       return BACKSTAGE_PLAN if SESSION == "backstage"
       return D1_PLAN if SESSION == "d1"
       return HOUSE_PLAN if SESSION.start_with?("house")
+      return D2_PLAN if SESSION == "d2"
+      return D7_PLAN if SESSION == "d7"
       return puz_plan
     end
 

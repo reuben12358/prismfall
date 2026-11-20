@@ -282,9 +282,10 @@ Differences from the storyboard, all because of engine limits:
 - "Heat-haze shader" and per-half screen tints are a whole-screen tone.
 - Shots 9B/9C use a Salamence battler / a code-drawn ship as the mount.
 - Shot 14's ridge is the same backdrop far to the side. A dedicated backdrop image would be better.
-- **To confirm with the story team:** I read "`:war_legend` kept the legendaries away" as the `:neither` choice.
+- **Confirmed by the story team (2026-11-19):** "`:war_legend` kept the legendaries away" means `:neither`, and only `:neither` (14_WAR_AND_BLESSING Part B).
 
 ### On-map staging (current `:WAR_CLIMAX`)
+**Pending restage (SPINE Rev 18):** the war is now fought on land, on the Glass Dunes in Ossaria; story/13_CUTSCENES.md WAR-1 is rewritten for the desert and the changes are listed in mapgen/REQUESTS.md ("From story editor (geo v2)"). The text below describes the current sea-ice build.
 `013_Scenes_War_OnMap.rb` stages the scene the way Rejuvenation/Reborn do: an overworld map, overworld-scale
 legendaries acting through sheet frames, armies as charset sprites, effect sheets along the beam path.
 - Art lives in the plugin overlay `Plugins/Prismfall Cutscenes/Graphics/{Characters,Animations,Pictures}/pfw_*`.
@@ -438,9 +439,9 @@ the code-drawn figure.
 | Soldier charsets | `Graphics/Characters/trainer_ASHKAAR_SOLDIER.png`, `trainer_ISENMAR_SOLDIER.png`, `..._OFFICER` | Replaces the block-figure armies and rulers |
 | Character charsets | `trainer_LEADER_SIGRUN`, `trainer_LEADER_ANJA`, `trainer_MERIDIAN_QUENT`, `trainer_MERIDIAN_AGENT` | Shots 13–14 |
 | Trainer front sprites | `Graphics/Trainers/LEADER_*.png` etc. | VS cards and highlight trainers |
-| War backdrops | 512x384 (or wider) pictures: Shattered Ice at dawn, Skaldfast walls, Cinder Cape Warfort, the ridge | `background image:` instead of procedural layers |
+| War backdrops | 512x384 (or wider) pictures: the Glass Dunes at dawn (dry, flooded, glassed), Skaldfast's walls on the sand, the Siege Camp's earthwork, the observers' mesa | `background image:` instead of procedural layers |
 | Temple-Arena backdrop | 512x384 picture | Highlights (`background image:` in `Highlight.build`) |
-| Sled-ship, banner, Light Stone, tripod sprites | any PNG, used with `actor :x, image:` | Replaces the code-drawn props |
+| Ice-sledge, sled-boat, bone-carters' banner, war banner, Light Stone, tripod sprites | any PNG, used with `actor :x, image:` | Replaces the code-drawn props |
 | Audio | names in design/AUDIO.md (`Beam charge`, `Beam clash`, `Beam break`, `Crowd cheer`, `Crowd gasp`, `War - *`, `Festival highlight *`) | Until then stock/EBDX stand-ins play, or silence |
 
 ## 9. Self-test

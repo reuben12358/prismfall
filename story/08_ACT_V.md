@@ -16,7 +16,7 @@
 - The Blindwater (`:CAVE`).
 - **Lightless Deep** (844 `:DARK_CRYSTAL` / 845 `:NEW_MOON`).
 - **Inverted Ward** (848, `:INVERSE`: an abandoned Choir hospital turned upside-down by the thinning Glass).
-- **Gloamwood Verge**, **Gloaming** (Elowen's heart, `:FAIRY_TALE`), the **Great Tree**.
+- **Gloamwood Verge**, **Gloaming** (Elowen's oldest corner, in the deep south-east, `:FAIRY_TALE`), the **Great Tree**.
 
 ### The Lightless Deep: Pecharunt (Nadir's legendary arc)
 The road out of Underveil runs down, not up: below the drained Sump into the **Lightless Deep**, the oldest dark under the City Below.
@@ -29,7 +29,7 @@ The road out of Underveil runs down, not up: below the drained Sump into the **L
 
 ### Gloaming: Elowen, third visit (escalation)
 - **Thornguard checkpoints.** Prince Caedmon (now effectively ruling Elowen, since his mother is "resting") has signed the **Forest Compact**. Meridian survey-flags line the Gloamwood. The Thornguard turns the PC back at the Verge "by royal order".
-- The **dusk is spreading**: Gloaming's twilight has crept south across half the forest, and Briarwick's looms now work by lamplight at noon.
+- The **dusk is spreading**: Gloaming's twilight has crept west across half the forest, and Briarwick's looms now work by lamplight at noon.
 - **Optional scene, Queen Maelis:** in a dusk-garden she's "resting" in under polite guard. Shrewd and finally honest: "My son thinks the forest is a resource. I've been queen for sixty years. The forest is the *sovereign*. I'm just the gardener it tolerates." She gives the PC a **Royal Writ** (key item). It opens the Wardguard escort to Crownhaven even at low Accord Standing, and it seeds Elowen's epilogue: Maelis disowns the Compact.
 - **Celestine** (in her true form; the PC met her disguised in Ch3, at Briarwick's shrine) dissolves the checkpoint with one sentence the Thornguard captain can't argue with, because she can't lie and everyone knows it: "If you stop this child, the forest will remember your name, and it will say it wrong forever."
 
@@ -71,11 +71,11 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
 **Location:** **Gloamwood** (`:FAIRY_TALE`), the Thornwar Marches (`:MOUNTAIN`), **Wyrmscar Rift** (864 `:CAVE` / 865 `:DRAGONS_DEN`), **Wyrmrest** (Ashkaar), **Rainbow Scar** (868, `:RAINBOW`).
 
 ### Arrival: Ashkaar, second visit (escalation)
-- **Dominar Hrothgar** is at the front with his legions (the Ashkaar Siege Camp, 14_WAR_AND_BLESSING). Wyrmrest is held by Sigrun's own riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
+- **Dominar Hrothgar** is at the front with his legions, in the Ashkaar Siege Camp on Ossaria's western dunes, the length of Ashkaar and half of Ossaria away (14_WAR_AND_BLESSING). Wyrmrest is held by Sigrun's own riders. The Dominar means to march on Zenith "the hour the Festival ends", and he has ordered his daughter to close the pass to everyone Zenith-tainted. That includes the PC: Meridian's Fellowship, Meridian's badge case.
 - **Sigrun Ashfall** keeps the pass open anyway, in open defiance, standing on the gate in dragonhide with her Salamence. "Wyrmrest is the last gate. Dragons don't let anything through they haven't weighed. *I* do the weighing, Father. Not you."
 
 ### The Dominar (optional political scene, `DOMINAR_SWAYED`)
-- The PC petitions the Dominar in his command pavilion at the Siege Camp, after the battle. Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
+- The PC petitions the Dominar in his command pavilion at the Siege Camp, after the Battle of the Glass Dunes (Sigrun has flown them there; below). Lies are a capital crime in an Ashkaar court, and the oath-brazier is lit.
 - Persuading him to fly *for* Crownhaven instead of *against* Zenith requires:
   - the Light Stone sent to Wyrmrest (`:ch8_lightstone` = wyrmrest) **plus** proof (the **Arbiter Blueprints** or the **Larch Papers**), **or**
   - Sigrun's Bond ≥ 4, so that she speaks for the PC (`:ch19_dominar`).
@@ -93,7 +93,11 @@ Gloaming's lantern-moth market offers bargains. One stall promises "the answer t
    - *(Only if Resonance ≤ −2:)* **"I'm going to end it. All of it."** Sigrun draws her blade but lets them pass, horrified.
 4. **Game over `GO_LIARS_PYRE` "Liar's Pyre".** A fifth option is always offered: "Whatever you want to hear." Foreshadowing: the Ashkaar gate-guard's "say true or say nothing", and the brazier oath. The fire answers. *Epitaph: "Ashkaar burns liars. It is the oldest law, and the dragons remember it even when men forget."*
 
+### The Battle of the Glass Dunes (between the oath and Gym 18)
+After the oath, word comes that Kyogre has risen and is dragging a flood-sea across the desert, and that the Dominar has carried the Light Stone to the front. Sigrun flies the PC to Ossaria's western dunes overnight. The battle, its choices (`:war_climax`, `:war_terms`), WAR-1 and the legendary fight are in **14_WAR_AND_BLESSING Part B**; the Dominar's petition follows it. Then Sigrun flies the PC back to Wyrmrest for Gym 18.
+
 ### Reshiram (Ashkaar's legendary arc)
+*(Unless `:war_legend` is `:neither`, the Light Stone wakes in the Dominar's hand on the Glass Dunes and the fight below happens there, on the dunes' field; see 14. With `:neither` the stone stays dark at the front, and the fight happens here, as written, after the truce, when the stone comes home.)*
 1. Any true answer wakes the **Light Stone**, which has hung in Wyrmrest's Rift-shrine since Ch8 if it was sent there, or which arrives carried by a Hearthguild runner if it wasn't.
 2. **Boss battle: Reshiram** (multi-bar) on `:DRAGONS_DEN`. Its fire is the truth of the PC's oath: Return and Open lean Harmony, Keep is neutral, and Ruin makes the fight savage.
 3. After the battle, Reshiram bows to Sigrun, not to the PC: "the truth is hers to carry now." It flies to Crownhaven ahead of them.
@@ -114,7 +118,7 @@ Thematic note: *the den's heat rises each turn, and the dragons grow stronger th
 ## CHAPTER 20 — "The Festival of Champions" (Crownhaven, Festival week)
 
 > **Revision 4:** no sister-game cameos appear anywhere in Festival week. They are optional sidequests elsewhere (`design/CAMEOS.md`). The bracket, draw pools and exhibitions use **original characters only**, following `story/10_CHOICES_ENDINGS.md` §3 and NARRATIVE_KEYS §6. **Revision 5:** every possible opponent is someone the PC has met at least twice by Act IV.
-> **Revision 6:** the Festival is the ceremony of **Arceus's Blessing**. Entrants are **kingdom delegations** (two per kingdom, Valen, and the PC), chosen by player choices: see `14_WAR_AND_BLESSING.md` Part A, which replaces the seed list here. The PC picks their colors on Day 0 (`:ch20_colors`). Companion-vs-companion matches can be watched as highlight cutscenes (`13_CUTSCENES.md`). The Coronation in Ch21 is "the Blessing", and Ch19's Dominar scenes play inside the Battle of the Shattered Ice.
+> **Revision 6:** the Festival is the ceremony of **Arceus's Blessing**. Entrants are **kingdom delegations** (two per kingdom, Valen, and the PC), chosen by player choices: see `14_WAR_AND_BLESSING.md` Part A, which replaces the seed list here. The PC picks their colors on Day 0 (`:ch20_colors`). Companion-vs-companion matches can be watched as highlight cutscenes (`13_CUTSCENES.md`). The Coronation in Ch21 is "the Blessing", and Ch19's Dominar scenes play inside the Battle of the Glass Dunes.
 
 ### Day 0: Arrival
 1. **Crownhaven** is white stone and bells in the caldera. Upper Crownhaven is festooned with **Tamsin's eighteen banners**, woven since Ch10. The **Meridian Prism Arena** gleams where the old grounds were, too new.
@@ -176,9 +180,9 @@ Story staging for each R16 candidate (draw rules: NS §3.2):
 - **Valen** and **Sigrun** advance.
 
 ### Day 3: Exhibitions and the Festival Grounds
-- **The Eevee Octave** (Eeveelution gauntlet). Eight Glassfall orphans raised by the Choir, each beside a different Imprint, fight a back-to-back gauntlet in the Choir gardens, each fielding a different Eeveelution. It ends with leader **Vesper Lindqvist**'s full Eeveelution team on a field that shifts to match whichever Eeveelution is active.
+- **The Eevee Octave** (SPINE Rev 19; `design/EEVEE_OCTAVE.md`). On arrival (Day 0) the PC meets **Carol**, the Octave's Crownhaven singer, in the **Glassfall Memorial Garden** (489); her quest *The Ninth Verse* opens once the PC has helped the other seven singers on the road (Lyra, Aria, Cadence, Sona, Noct, Forte, Lento). Once all eight are helped, **Vesper** waits in the garden with the others: they want to thank the PC and test whether they can carry the power of Eevee. The **gauntlet**: the eight singers in the order the PC helped them, back to back with no healing, each with one Eeveelution on its home field using its type's **Z-move**; then Vesper's Eevee **Amen** with **Extreme Evoboost** on the Grand Stage. Open from then on, through Festival week and after.
   - Vesper, gentle: "We were all born the year the Crown broke. The Choir says we're lucky. I think we're just... what was left."
-  - Reward: a Prism Ribbon for Understudy. If Understudy has evolved, Vesper notes which Imprint "claimed" it.
+  - Reward: an **Eevee**, the **Eevium Z** and Vesper's **Z-Power Ring**. If Understudy is still an Eevee, Vesper says the crystal works for it too; if it has evolved, she notes which Imprint "claimed" it.
 - **Other exhibitions** (NS §3.6, original characters only):
   - **The Pageant Bout:** Dorian and Rook in a double battle staged as "a duet for the cameras", with Rook's Rotom filming it.
   - **Juno's Garden Match**, if she wasn't the PC's R16.
@@ -408,6 +412,7 @@ See Chapter 21.
 - **Calla's name** on the new Spire memorial, if she went back.
 - **Rimeholt** rebuilding on the southern shore, with Anja and Eirik and a thaw-fishery.
 - **Cindervault's** forges on coal again. Brann has forged Valen's memorial from the empty Crown's setting.
+- **Ossaria:** the caravans walk the western road again, round the Glass Dunes, where the bone-carters keep the newest necropolis in the Bone Sands. Kassan is arrested on the Sandgate steps, and the Elector's Lease is read out among the charges.
 - **Lumen** with fewer lights and more stars, and the Zenith Council reformed with **Nadir's first elected seat**. Nyx is in it and hates it.
 - **The quarantine:** it lifts now (`ENVOY_PERSUADED`) or a year late, grudgingly. **Edda's** ferry runs again.
 - **Bastian** dies peacefully at home: "the first Warden in three hundred years with nothing in his keeping".

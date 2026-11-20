@@ -50,15 +50,17 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Rekk sent out Sizzlipede!
     |     >> sent out (foe): Sizzlipede Lv.15 [FLASHFIRE]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Sizzlipede 43/43]
-    |   Machoke used Rock Tomb!
+    |   Machoke used Knock Off!
     |     HP Sizzlipede (foe): 43 -> 0 / 43
-    |   It's super effective!
     |   The opposing Sizzlipede fainted!
     |     xx fainted: Sizzlipede (foe)
     |   The crowd went wild for Machoke!
@@ -72,7 +74,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Rolycoly 37/37]
-    |   Machoke used Knock Off!
+    |   Machoke used Rock Tomb!
     |     HP Rolycoly (foe): 37 -> 0 / 37
     |   The opposing Rolycoly fainted!
     |     xx fainted: Rolycoly (foe)
@@ -91,14 +93,16 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Vasha sent out Capsakid!
     |     >> sent out (foe): Capsakid Lv.15 [CHLOROPHYLL]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Capsakid 43/43]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   Machoke used Rock Tomb!
     |     HP Capsakid (foe): 43 -> 0 / 43
     |   The opposing Capsakid fainted!
     |     xx fainted: Capsakid (foe)
@@ -113,10 +117,9 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Houndour 43/43]
-    |   Machoke used Karate Chop!
-    |   The pit erupted as Machoke pressed the attack!
+    |   Machoke used Knock Off!
     |     HP Houndour (foe): 43 -> 0 / 43
-    |   It's super effective!
+    |   It's not very effective...
     |   The opposing Houndour fainted!
     |     xx fainted: Houndour (foe)
     |   The crowd went wild for Machoke!
@@ -134,18 +137,19 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Salandit!
     |     >> sent out (foe): Salandit Lv.16 [CORROSION]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Salandit 45/45]
-    |   The opposing Salandit used Poison Gas!
-    |     (anim: Poison)
-    |   Machoke was poisoned!
-    |   Machoke used Rock Tomb!
+    |   The opposing Salandit used Smog!
+    |     HP Machoke (player): 76 -> 69 / 76
+    |   Machoke used Knock Off!
     |     HP Salandit (foe): 45 -> 0 / 45
-    |   It's super effective!
     |   The opposing Salandit fainted!
     |     xx fainted: Salandit (foe)
     |   The crowd went wild for Machoke!
@@ -153,17 +157,13 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 76 -> 67 / 76
-    |   Machoke was hurt by poison!
     |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Numel!
     |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
     | 
     | --- Turn 2 ---
-    |   [Machoke 67/76 POISON | Numel 49/49]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   [Machoke 69/76 | Numel 49/49]
+    |   Machoke used Knock Off!
     |     HP Numel (foe): 49 -> 0 / 49
     |   The opposing Numel fainted!
     |     xx fainted: Numel (foe)
@@ -171,9 +171,6 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     (anim: StatUp)
     |   Machoke's Attack rose!
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 67 -> 58 / 76
-    |   Machoke was hurt by poison!
     | ## FIELD STAGE: COLOSSEUM is now stage 2
     |   Two down! The crowd is in a frenzy!
     |   Ashkaar Officer Brakka is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
@@ -181,14 +178,15 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
     | 
     | --- Turn 3 ---
-    |   [Machoke 58/76 POISON | Fletchinder 52/52]
-    |   The opposing Fletchinder used Growl!
-    |     (anim: StatDown)
-    |   Machoke's Attack fell!
+    |   [Machoke 69/76 | Fletchinder 52/52]
+    |   The opposing Fletchinder used Ember!
+    |     HP Machoke (player): 69 -> 57 / 76
+    |   A critical hit!
+    |     (anim: Burn)
+    |   Machoke was burned!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Fletchinder (foe): 52 -> 0 / 52
-    |   A critical hit!
     |   It's not very effective...
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
@@ -207,18 +205,22 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   Oh! A wild Litleo appeared!
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 58/76 POISON | Litleo 69/69]
+    |   [Machoke 57/76 BURN | Litleo 69/69]
     |   The wild Litleo used Work Up!
     |     (anim: StatUp)
     |   The wild Litleo's Attack rose!
     |   The wild Litleo's Special Attack rose!
-    |   Machoke used Rock Tomb!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Litleo (foe): 69 -> 1 / 69
     |   It's super effective!
     |     (anim: StatDown)
@@ -229,13 +231,14 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     (anim: StatUp)
     |   The wild Litleo's Special Attack rose!
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 58 -> 49 / 76
-    |   Machoke was hurt by poison!
+    |     (anim: Burn)
+    |     HP Machoke (player): 57 -> 53 / 76
+    |   Machoke was hurt by its burn!
     | 
     | --- Turn 2 ---
-    |   [Machoke 49/76 POISON | Litleo 69/69]
-    |   Machoke used Rock Tomb!
+    |   [Machoke 53/76 BURN | Litleo 69/69]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Litleo (foe): 69 -> 0 / 69
     |   It's super effective!
     |   The wild Litleo fainted!
@@ -498,3 +501,1828 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
   520 Land after Badge 2: SKWOVET(20) 3-5, LECHONK(15) 3-5, LILLIPUP(15) 3-5, PIKIPEK(13) 4-6, WOOLOO(13) 4-6, YUNGOOS(9) 3-5, ROOKIDEE(8) 3-5, FLETCHLING(4) 4-6, ROLYCOLY(3) 4-6, TEDDIURSA(4) 13-16, MUNCHLAX(3) 13-16, FARFETCHD(4) 17-20, AUDINO(3) 17-20, SWABLU(4) 21-24, HAWLUCHA(2) 21-24
 
 === 6. Page conditions and save round trip ===
+
+=== 7. Z-Power (plugins/Prismfall Z-Power): data, AI and player use, once per battle, Protect, fields ===
+
+=== Z-Power battle 1 ===
+Z: player's Vaporeon (AI-controlled) with the ring vs a wild Snorlax that only Protects
+=======================================================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Vaporeon!
+    >> sent out (player): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+
+--- Turn 1 ---
+  [Vaporeon 283/283 | Snorlax 280/280]
+  The wild Snorlax used Protect!
+  The wild Snorlax protected itself!
+  Vaporeon surrounded itself with its Z-Power!
+  Vaporeon unleashed its full-force Z-Move!
+  Vaporeon used Hydro Vortex!
+  The wild Snorlax couldn't fully protect itself and got hurt!
+  Vaporeon rode the waves into the attack!
+    HP Snorlax (foe): 280 -> 221 / 280
+  (end of round)
+
+--- Turn 2 ---
+  [Vaporeon 283/283 | Snorlax 221/280]
+  The wild Snorlax used Protect!
+  But it failed!
+  Vaporeon used Scald!
+  Vaporeon rode the waves into the attack!
+    HP Snorlax (foe): 221 -> 35 / 280
+  A critical hit!
+  (end of round)
+
+--- Turn 3 ---
+  [Vaporeon 283/283 | Snorlax 35/280]
+  The wild Snorlax used Protect!
+  The wild Snorlax protected itself!
+  Vaporeon used Scald!
+    (anim: Protect)
+  The wild Snorlax protected itself!
+  (end of round)
+
+--- Turn 4 ---
+  [Vaporeon 283/283 | Snorlax 35/280]
+  The wild Snorlax used Protect!
+  But it failed!
+  Vaporeon used Scald!
+  Vaporeon rode the waves into the attack!
+    HP Snorlax (foe): 35 -> 0 / 280
+  The wild Snorlax fainted!
+    xx fainted: Snorlax (foe)
+  Vaporeon got 1885 Exp. Points!
+  battle result code: 1
+  
+RESULT: player won after 3 turn(s)
+
+
+Z: Lyra (OCTAVE_SINGER v60) vs a neutral Snorlax
+================================================
+
+--- Battle start ---
+  field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+  You are challenged by Chorister Lyra!
+  Chorister Lyra sent out Moss!
+    >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> FLOWER_GARDEN
+  Flowers bloom across the garden!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Moss 263/263]
+  The opposing Moss surrounded itself with its Z-Power!
+  The opposing Moss unleashed its full-force Z-Move!
+  The opposing Moss used Bloom Doom!
+  The blooming garden poured its strength into Bloom Doom!
+    HP Snorlax (player): 461 -> 105 / 461
+  Snorlax used Body Slam!
+    HP Moss (foe): 263 -> 165 / 263
+  (end of round)
+  The opposing Moss drank from the blooming garden.
+    HP Moss (foe): 165 -> 181 / 263
+
+--- Turn 2 ---
+  [Snorlax 105/461 | Moss 181/263]
+  The opposing Moss used Leaf Blade!
+  The blooming garden poured its strength into Leaf Blade!
+    HP Snorlax (player): 105 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+## FIELD STAGE: FLOWER_GARDEN is now stage 4
+  The garden is in full flower!
+  You have no more Pokémon that can fight!
+  You lost against Chorister Lyra!
+  You gave $3,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 1 turn(s)
+
+
+Z: Aria (OCTAVE_SINGER v60) vs a neutral Snorlax
+================================================
+
+--- Battle start ---
+  field: WATER_SURFACE | weather: None | terrain: None
+  You are challenged by Chorister Aria!
+  Chorister Aria sent out Brine!
+    >> sent out (foe): Brine Lv.90 @WATERIUMZ [WATERABSORB]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> WATER_SURFACE
+  The battle is taking place on the open water!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Brine 380/380]
+  The opposing Brine surrounded itself with its Z-Power!
+  The opposing Brine unleashed its full-force Z-Move!
+  The opposing Brine used Hydro Vortex!
+  The opposing Brine rode the waves into the attack!
+    HP Snorlax (player): 461 -> 217 / 461
+  Snorlax used Body Slam!
+    HP Brine (foe): 380 -> 231 / 380
+  (end of round)
+  The opposing Brine soaked up the spray.
+    HP Brine (foe): 231 -> 255 / 380
+
+--- Turn 2 ---
+  [Snorlax 217/461 | Brine 255/380]
+  The opposing Brine used Scald!
+  The opposing Brine rode the waves into the attack!
+    HP Snorlax (player): 217 -> 91 / 461
+  Snorlax used Body Slam!
+    HP Brine (foe): 255 -> 109 / 380
+    (anim: Paralysis)
+  The opposing Brine is paralyzed! It may be unable to move!
+  (end of round)
+  The opposing Brine soaked up the spray.
+    HP Brine (foe): 109 -> 133 / 380
+
+--- Turn 3 ---
+  [Snorlax 91/461 | Brine 133/380 PARALYSIS]
+  The opposing Brine used Scald!
+  The opposing Brine rode the waves into the attack!
+    HP Snorlax (player): 91 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Aria!
+  You gave $3,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 2 turn(s)
+
+
+Z: Cadence (OCTAVE_SINGER v60) vs a neutral Snorlax
+===================================================
+
+--- Battle start ---
+  field: NEON_GRID | weather: None | terrain: None
+  You are challenged by Chorister Cadence!
+  Chorister Cadence sent out Snare!
+    >> sent out (foe): Snare Lv.90 @ELECTRIUMZ [VOLTABSORB]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> NEON_GRID
+  Neon circuitry hums beneath your feet!
+  The opposing Snare soaked up current from the grid!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Snare 263/263]
+  The opposing Snare surrounded itself with its Z-Power!
+  The opposing Snare unleashed its full-force Z-Move!
+  The opposing Snare used Gigavolt Havoc!
+  The opposing Snare drew power straight from the grid!
+    HP Snorlax (player): 461 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Cadence!
+  You gave $348 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 0 turn(s)
+
+
+Z: Sona (OCTAVE_SINGER v60) vs a neutral Snorlax
+================================================
+
+--- Battle start ---
+  field: MINDSCAPE | weather: None | terrain: None
+  You are challenged by Chorister Sona!
+  Chorister Sona sent out Noon!
+    >> sent out (foe): Noon Lv.90 @PSYCHIUMZ [MAGICBOUNCE]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> MINDSCAPE
+  The world dissolves into a sea of drifting thoughts...
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Noon 263/263]
+  The opposing Noon surrounded itself with its Z-Power!
+  The opposing Noon unleashed its full-force Z-Move!
+  The opposing Noon used Shattered Psyche!
+  The Mindscape gave the opposing Noon's thoughts real shape!
+    HP Snorlax (player): 461 -> 121 / 461
+  Snorlax used Body Slam!
+    HP Noon (foe): 263 -> 91 / 263
+  (end of round)
+
+--- Turn 2 ---
+  [Snorlax 121/461 | Noon 91/263]
+  The opposing Noon used Psychic!
+  The Mindscape gave the opposing Noon's thoughts real shape!
+    HP Snorlax (player): 121 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Sona!
+  battle result code: 2
+  
+RESULT: player lost after 1 turn(s)
+
+
+Z: Noct (OCTAVE_SINGER v60) vs a neutral Snorlax
+================================================
+
+--- Battle start ---
+  field: NEW_MOON | weather: None | terrain: None
+  You are challenged by Chorister Noct!
+  Chorister Noct sent out Wick!
+    >> sent out (foe): Wick Lv.90 @DARKINIUMZ [INNERFOCUS]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> NEW_MOON
+  The moon has gone dark over Underveil... Something moves in the shadows.
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Wick 317/317]
+  The opposing Wick surrounded itself with its Z-Power!
+  The opposing Wick unleashed its full-force Z-Move!
+  The opposing Wick used Black Hole Eclipse!
+  The opposing Wick struck from the depths of the new moon!
+    HP Snorlax (player): 461 -> 304 / 461
+  Snorlax used Body Slam!
+    HP Wick (foe): 317 -> 206 / 317
+  (end of round)
+
+--- Turn 2 ---
+  [Snorlax 304/461 | Wick 206/317]
+  The opposing Wick used Dark Pulse!
+  The opposing Wick struck from the depths of the new moon!
+  The shadows gathered around Dark Pulse!
+    HP Snorlax (player): 304 -> 200 / 461
+  The shadows grow... (2 more)
+  Snorlax flinched and couldn't move!
+  (end of round)
+
+--- Turn 3 ---
+  [Snorlax 200/461 | Wick 206/317]
+  The opposing Wick used Dark Pulse!
+  The opposing Wick struck from the depths of the new moon!
+  The shadows gathered around Dark Pulse!
+    HP Snorlax (player): 200 -> 106 / 461
+  The shadows grow... (1 more)
+  Snorlax flinched and couldn't move!
+  (end of round)
+
+--- Turn 4 ---
+  [Snorlax 106/461 | Wick 206/317]
+  The opposing Wick used Dark Pulse!
+  The opposing Wick struck from the depths of the new moon!
+  The shadows gathered around Dark Pulse!
+    HP Snorlax (player): 106 -> 16 / 461
+## FIELD STAGE: NEW_MOON is now stage 2
+  The shadows swallowed the stars! The new moon deepened into an abyss!
+  Snorlax used Body Slam!
+    HP Wick (foe): 206 -> 93 / 317
+    (anim: Paralysis)
+  The opposing Wick is paralyzed! It may be unable to move!
+  (end of round)
+
+--- Turn 5 ---
+  [Snorlax 16/461 | Wick 93/317 PARALYSIS]
+  Snorlax used Body Slam!
+    HP Wick (foe): 93 -> 0 / 317
+  The opposing Wick fainted!
+    xx fainted: Wick (foe)
+  Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Chorister Noct!
+  ...Good night.
+  You got $5,400 for winning!
+  battle result code: 1
+  
+RESULT: player won after 4 turn(s)
+
+
+Z: Forte (OCTAVE_SINGER v60) vs a neutral Snorlax
+=================================================
+
+--- Battle start ---
+  field: VOLCANIC | weather: None | terrain: None
+  You are challenged by Chorister Forte!
+  Chorister Forte sent out Bellows!
+    >> sent out (foe): Bellows Lv.90 @FIRIUMZ [FLASHFIRE]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> VOLCANIC
+  Magma churns across the battlefield!
+  The power of the opposing Bellows's Fire-type moves rose!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Bellows 263/263]
+  The opposing Bellows surrounded itself with its Z-Power!
+  The opposing Bellows unleashed its full-force Z-Move!
+  The opposing Bellows used Inferno Overdrive!
+  The opposing Bellows drew fire up from the magma!
+    HP Snorlax (player): 461 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Forte!
+  You gave $3,600 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 0 turn(s)
+
+
+Z: Lento (OCTAVE_SINGER v60) vs a neutral Snorlax
+=================================================
+
+--- Battle start ---
+  field: FROZEN_LAKE | weather: None | terrain: None
+  You are challenged by Chorister Lento!
+  Chorister Lento sent out Hush!
+    >> sent out (foe): Hush Lv.90 @ICIUMZ [ICEBODY]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Hush 263/263]
+  The opposing Hush surrounded itself with its Z-Power!
+  The opposing Hush unleashed its full-force Z-Move!
+  The opposing Hush used Subzero Slammer!
+  The frozen lake lent its cold to Subzero Slammer!
+    HP Snorlax (player): 461 -> 186 / 461
+  Snorlax used Body Slam!
+    HP Hush (foe): 263 -> 158 / 263
+  (end of round)
+    [ability: Hush (foe)'s Ice Body]
+    HP Hush (foe): 158 -> 174 / 263
+  The opposing Hush's HP was restored.
+
+--- Turn 2 ---
+  [Snorlax 186/461 | Hush 174/263]
+  The opposing Hush used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Snorlax (player): 186 -> 22 / 461
+  Snorlax used Body Slam!
+    HP Hush (foe): 174 -> 67 / 263
+  (end of round)
+    [ability: Hush (foe)'s Ice Body]
+    HP Hush (foe): 67 -> 83 / 263
+  The opposing Hush's HP was restored.
+
+--- Turn 3 ---
+  [Snorlax 22/461 | Hush 83/263]
+  The opposing Hush used Ice Beam!
+  The frozen lake lent its cold to Ice Beam!
+    HP Snorlax (player): 22 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Lento!
+  You gave $1,800 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 2 turn(s)
+
+
+Z: Carol (OCTAVE_SINGER v60) vs a neutral Snorlax
+=================================================
+
+--- Battle start ---
+  field: FAIRY_TALE | weather: None | terrain: None
+  You are challenged by Chorister Carol!
+  Chorister Carol sent out Ribbon!
+    >> sent out (foe): Ribbon Lv.90 @FAIRIUMZ [PIXILATE]
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.100 [IMMUNITY]
+## FIELD CHANGE: NONE -> FAIRY_TALE
+  Once upon a time, in a castle deep in the forest... the story begins!
+
+--- Turn 1 ---
+  [Snorlax 461/461 | Ribbon 317/317]
+  The opposing Ribbon surrounded itself with its Z-Power!
+  The opposing Ribbon unleashed its full-force Z-Move!
+  The opposing Ribbon used Twinkle Tackle!
+  The storybook's magic sparkled through Twinkle Tackle!
+    HP Snorlax (player): 461 -> 161 / 461
+  Snorlax used Body Slam!
+    HP Ribbon (foe): 317 -> 164 / 317
+  (end of round)
+
+--- Turn 2 ---
+  [Snorlax 161/461 | Ribbon 164/317]
+  The opposing Ribbon used Hyper Voice!
+  The storybook's magic sparkled through Hyper Voice!
+    HP Snorlax (player): 161 -> 0 / 461
+  Snorlax fainted!
+    xx fainted: Snorlax (player)
+  You have no more Pokémon that can fight!
+  You lost against Chorister Carol!
+  battle result code: 2
+  
+RESULT: player lost after 1 turn(s)
+
+
+=== 8. The Eevee Octave: eight quests, the help order, the 9-bout gauntlet, the reward ===
+-- talk VESPER_SALTMERE
+  Vesper: We sing together once a year, for the Pageant. Tomorrow we scatter again. Each of us lives beside a Plate now, one each, in all seven kingdoms.
+  Vesper: Except Carol. Carol never leaves Crownhaven. Someone has to sing to the ones who didn't get out.
+  Vesper: They're very good at singing and very bad at being alone. If your road takes you past any of them... would you look in on them?
+  Look in on the Octave?
+  Vesper: Because you looked at Understudy the way they look at their Eevee. Like it was a person.
+  Vesper: And because nobody else asked. That's usually how.
+  NEW QUEST: "The Eevee Octave" Look in on the Octave's singers as you travel: Lyra (Briarwick), Aria (Ebbmouth), Cadence (Lumen City), Sona (Duneholt), Noct (Mirefen), Forte (Cindervault), Lento (the Mirror Mere). Carol never leaves Crownhaven.
+  Vesper: Lyra in Briarwick. Aria in Ebbmouth. Cadence in Lumen City. Sona in Duneholt. Noct in Mirefen. Forte in Cindervault. Lento at the Mirror Mere.
+  Vesper: I'll be at the Festival. We always are.
+-- talk OCTAVE_CAROL
+  Carol: Hello! You're the one Vesper writes about. I'm Carol. I'm the one who never leaves.
+  Carol: I'm writing the Octave's song for the Festival. A verse for everyone. But I can only write what I know, and I don't know what happened to them out there.
+  Carol: Some of them haven't written. Have you met them? These ones I haven't heard about:
+  Lyra, in Briarwick.
+  Aria, in Ebbmouth.
+  Cadence, on the Lowlight steps in Lumen City.
+  Sona, at the Temple of the Noon Sun outside Duneholt.
+  Noct, at the ferry steps in Mirefen.
+  Forte, at the Crucible in Cindervault.
+  Lento, on the Mirror Mere past Glassmere.
+  Carol: Come back when you've met them all. I'll be here. I'm always here.
+-- talk OCTAVE_LYRA
+  Lyra: Oh. Sorry. Was I humming? I'm always humming. The plants don't mind.
+  Lyra: I'm Lyra. Of the Octave. Vesper's Octave. I came home to Briarwick after the Pageant, and my Eevee, Moss, went straight up the old moss-stone in Gossamer Wood and won't come down.
+  Lyra: Three days. I've sung it everything I know. Mother Aldreth says I should stop singing at it. I don't know what that means. I'm a singer.
+  Go with Lyra to the moss-stone?
+  NEW QUEST: "The Moss Hymn" Go with Lyra to the moss-stone in Gossamer Wood.
+  QUEST LOG: "The Moss Hymn" Lyra's Eevee won't come down from the moss-stone. Mother Aldreth says: stop singing at it.
+  Lyra: Thank you. It's past the silk walls, where the moss grows on the north side of everything.
+-- talk MOSS_STONE
+  Lyra: Moss. Moss, please. I'll sing the one you like.
+  The Eevee's ears flatten a little more with every note.
+  What do you do?
+  You join in. The Eevee curls up tighter. Lyra stops, and looks at you, and laughs at herself.
+  Lyra: It's not working when two of us do it either.
+-- talk MOSS_STONE
+  Lyra: Moss. Moss, please. I'll sing the one you like.
+  The Eevee's ears flatten a little more with every note.
+  What do you do?
+  You sit. After a while, Lyra stops singing and sits down next to you.
+  The wood is very loud when nobody is singing: leaves, water somewhere, the moss creaking as it drinks.
+  The Eevee opens its eyes. It listens too.
+  Lyra: Oh. Oh, look at you. You weren't stuck. You were listening.
+  Lyra: And I was too loud to hear it. Mother Aldreth is going to be unbearable.
+  QUEST LOG: "The Moss Hymn" Moss came down a Leafeon. Lyra wants a duel so it knows it can stand on its own.
+  Lyra: Will you duel us? Moss has never stood on its own feet in a fight. I want it to know it can.
+  Lyra: It stood. It stood the whole time. Thank you.
+  Lyra: I'll write to Vesper tonight. She'll say she knew. She always knew.
+  (The Octave will remember that you helped Lyra: 1 of 8.)
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Moss Hymn"
+  \PN received $800!
+  You obtained a Big Root!
+  You put the Big Root in your Bag's Items pocket.
+  Your standing in The Quiet Way rose to Heartwood!
+    | talk MOSS_STONE
+    | ===============
+    |   (overworld message) Lyra: Moss. Moss, please. I'll sing the one you like.
+    |   (overworld message) The Eevee's ears flatten a little more with every note.
+    |   (overworld message) What do you do?
+    |   (overworld message) You sit. After a while, Lyra stops singing and sits down next to you.
+    |   (overworld message) The wood is very loud when nobody is singing: leaves, water somewhere, the moss creaking as it drinks.
+    |   (overworld message) The Eevee opens its eyes. It listens too.
+    |   (overworld message) Lyra: Oh. Oh, look at you. You weren't stuck. You were listening.
+    |   (overworld message) Lyra: And I was too loud to hear it. Mother Aldreth is going to be unbearable.
+    |   (overworld message) QUEST LOG: "The Moss Hymn" Moss came down a Leafeon. Lyra wants a duel so it knows it can stand on its own.
+    |   (overworld message) Lyra: Will you duel us? Moss has never stood on its own feet in a fight. I want it to know it can.
+    | 
+    | --- Battle start ---
+    |   field: MEADOW | weather: None | terrain: None
+    |   You are challenged by Chorister Lyra!
+    |   Chorister Lyra sent out Skiddo!
+    |     >> sent out (foe): Skiddo Lv.17 [SAPSIPPER]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> MEADOW
+    |   Tall grass ripples in the breeze across the meadow.
+    |   The opposing Skiddo munched on the meadow grass!
+    |     (anim: StatUp)
+    |   The opposing Skiddo's Attack rose!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Skiddo 53/53]
+    |   Snorlax used Crunch!
+    |     HP Skiddo (foe): 53 -> 0 / 53
+    |   The opposing Skiddo fainted!
+    |     xx fainted: Skiddo (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Lyra is about to send out Moss. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Lyra sent out Moss!
+    |     >> sent out (foe): Moss Lv.18 [LEAFGUARD]
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Moss 55/55]
+    |   Snorlax used Crunch!
+    |     HP Moss (foe): 55 -> 0 / 55
+    |   The opposing Moss fainted!
+    |     xx fainted: Moss (foe)
+    |   You defeated Chorister Lyra!
+    |   You stood still for it. Most people fidget.
+    |   You got $1,080 for winning!
+    |   battle result code: 1
+    |   (overworld message) Lyra: It stood. It stood the whole time. Thank you.
+    |   (overworld message) Lyra: I'll write to Vesper tonight. She'll say she knew. She always knew.
+    |   (overworld message) (The Octave will remember that you helped Lyra: 1 of 8.)
+    |   (overworld message) The lantern is lit and let go. It rises over the roofs.
+    |   (overworld message) QUEST COMPLETE: "The Moss Hymn"
+    |   (overworld message) \PN received $800!
+    |   (overworld message) You obtained a Big Root!
+    |   (overworld message) You put the Big Root in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Quiet Way rose to Heartwood!
+-- talk OCTAVE_CADENCE
+  Cadence: If you're from Meridian, I've got a permit. If you're not, I haven't got a permit.
+  Cadence: Cadence. Octave. Yes, that Octave. The Choir pays in hymns. Meridian pays in money. I tune their Lattice junctions on nights. Guess which one buys noodles.
+  Cadence: Snare picks up my beat and the Lattice picks up Snare. One-two-three-four, blackout. They've posted a bounty on 'the source'. The source is me.
+  Help Cadence?
+  Cadence: Three junction boxes on this block. They're tuned to a four-count, because some engineer liked a four-count. Shift each one off the beat and Snare can't drive them.
+  Cadence: I'd do it myself but I'm the source. They'd notice the source fiddling with the junctions.
+  NEW QUEST: "Off the Beat" Find the drummer on the Lowlight steps.
+  QUEST LOG: "Off the Beat" Cadence's Jolteon syncs to her drumming, and the Lattice syncs to it. Shift the three Lattice junction boxes on Block 9 off her beat.
+-- talk LATTICE_JUNCTION
+  You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.
+-- talk LATTICE_JUNCTION
+  You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.
+-- talk LATTICE_JUNCTION
+  You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.
+  Cadence: Ha. Listen to that. It's terrible. It's the best thing I've ever heard.
+  QUEST LOG: "Off the Beat" The block stayed lit. Cadence wants to play it out properly.
+  Cadence: Snare's never been allowed to go flat out on this block. Let's find out what it's got. One, two, three, four.
+  Cadence: Off the beat. Mine, not yours. Again tomorrow?
+  Cadence: P-3NNY still wants a report on 'the source'. Your name, your report.
+  File the report as...
+  P-3NNY: REPORT FILED: TUNING FAULT, BLOCK 9. MERIDIAN WILL CORRECT IT. BOUNTY RELEASED.
+  Cadence: They'll send someone to fix it. It'll be me. On nights. Fine.
+  (The Octave will remember that you helped Cadence: 2 of 8.)
+  The board clacks: PRIZE AWARDED. Somewhere a small bell rings.
+  QUEST COMPLETE: "Off the Beat"
+  \PN received $800!
+  You obtained 2 Cell Batteries!
+  You put the Cell Batteries in your Bag's Items pocket.
+  Your standing in The Prize Exchange rose to Licensee!
+    | talk LATTICE_JUNCTION
+    | =====================
+    |   (overworld message) You turn the dial to a three-count. The hum stumbles and finds a new, lopsided rhythm. Down the steps, Snare's fur settles a little.
+    |   (overworld message) Cadence: Ha. Listen to that. It's terrible. It's the best thing I've ever heard.
+    |   (overworld message) QUEST LOG: "Off the Beat" The block stayed lit. Cadence wants to play it out properly.
+    |   (overworld message) Cadence: Snare's never been allowed to go flat out on this block. Let's find out what it's got. One, two, three, four.
+    | 
+    | --- Battle start ---
+    |   field: NEON_GRID | weather: None | terrain: None
+    |   You are challenged by Chorister Cadence!
+    |   Chorister Cadence sent out Klink!
+    |     >> sent out (foe): Klink Lv.25 [PLUS]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> NEON_GRID
+    |   Neon circuitry hums beneath your feet!
+    |   The opposing Klink synced with the grid!
+    |     (anim: StatUp)
+    |   The opposing Klink's Special Attack rose!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Klink 62/62]
+    |   Snorlax used Earthquake!
+    |     HP Klink (foe): 62 -> 0 / 62
+    |   It's super effective!
+    |   The opposing Klink fainted!
+    |     xx fainted: Klink (foe)
+    |   The grid flickers and sparks... (1 more)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Cadence is about to send out Snare. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Cadence sent out Snare!
+    |     >> sent out (foe): Snare Lv.26 [VOLTABSORB]
+    |   The opposing Snare soaked up current from the grid!
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Snare 77/77]
+    |   The opposing Snare used Baby-Doll Eyes!
+    |     (anim: StatDown)
+    |   Snorlax's Attack fell!
+    |   Snorlax used Earthquake!
+    |     HP Snare (foe): 77 -> 0 / 77
+    |   A critical hit!
+    |   It's super effective!
+    |   The opposing Snare fainted!
+    |     xx fainted: Snare (foe)
+    | ## FIELD STAGE: NEON_GRID is now stage 2
+    |   The grid shorted out! The neon lights died - only sparks light the dark!
+    |   You defeated Chorister Cadence!
+    |   Off the beat. Mine, not yours. Again tomorrow?
+    |   You got $1,560 for winning!
+    |   battle result code: 1
+    |   (overworld message) Cadence: Off the beat. Mine, not yours. Again tomorrow?
+    |   (overworld message) Cadence: P-3NNY still wants a report on 'the source'. Your name, your report.
+    |   (overworld message) File the report as...
+    |   (overworld message) P-3NNY: REPORT FILED: TUNING FAULT, BLOCK 9. MERIDIAN WILL CORRECT IT. BOUNTY RELEASED.
+    |   (overworld message) Cadence: They'll send someone to fix it. It'll be me. On nights. Fine.
+    |   (overworld message) (The Octave will remember that you helped Cadence: 2 of 8.)
+    |   (overworld message) The board clacks: PRIZE AWARDED. Somewhere a small bell rings.
+    |   (overworld message) QUEST COMPLETE: "Off the Beat"
+    |   (overworld message) \PN received $800!
+    |   (overworld message) You obtained 2 Cell Batteries!
+    |   (overworld message) You put the Cell Batteries in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Prize Exchange rose to Licensee!
+-- talk OCTAVE_ARIA
+  Aria: Morning! It's lovely in. The cold's just the sea saying hello.
+  Aria: I'm Aria. Octave. My Vaporeon, Brine, melted into the river three days ago, when it did that stutter. They do that, Vaporeon. Go to water.
+  Aria: It always comes back. It hasn't come back. But I can hear it. A note in the water, here and there, like it's calling from a long way down.
+  Aria: You've got young ears. Will you listen with me? Bersi says if I find it he'll carve it on the Tally Mast.
+  Help Aria listen for Brine?
+  NEW QUEST: "The Drowned Note" Listen for Brine's note at three places on the Ebb: the river steps, the fish-market slip and the Mill Quay steps.
+  Aria: Try here on the steps, at the fish-market slip, and down at the Mill Quay steps. Put your ear right to the water.
+-- talk EBB_NOTE
+  The note fades. It came from further up the river.
+-- talk EBB_NOTE
+  The note fades. It came from further up the river.
+-- talk EBB_NOTE
+  The third note is lower than the others, and it comes from upstream, where the Mill Quay wheel turns.
+  Aria: The wheel! It's hiding under the wheel. The Lattice hum is quieter there. It never liked the hum.
+  QUEST LOG: "The Drowned Note" Aria thinks Brine is hiding under the Mill Quay wheel.
+-- talk MILL_WHEEL
+  Aria: Come on, then. I know it's loud up here. I'm loud too. You like me anyway.
+  Aria: Brine! You great puddle!
+  QUEST LOG: "The Drowned Note" Brine is back. Bersi wants a fight for the saga.
+  Aria: Bersi says a saga needs a fight in it or the Tally won't take it. Fight us? He'll make it sound bigger than it was.
+  Aria: Ha! Wrong note, right song. Bersi's already carving.
+  Bersi Gullsong: 'And the stranger heard the river's sorrow, and the drowned beast rose.' Something like that. I'll fix it later. I never fix it later.
+  (The Octave will remember that you helped Aria: 3 of 8.)
+  A new notch is cut in the Tally Mast, beside your name.
+  QUEST COMPLETE: "The Drowned Note"
+  \PN received $1,200!
+  You obtained a Shell Bell!
+  You put the Shell Bell in your Bag's Items pocket.
+  Your standing in The Tally rose to Oarhand!
+    | talk MILL_WHEEL
+    | ===============
+    |   (overworld message) Aria: Come on, then. I know it's loud up here. I'm loud too. You like me anyway.
+    |   (overworld message) Aria: Brine! You great puddle!
+    |   (overworld message) QUEST LOG: "The Drowned Note" Brine is back. Bersi wants a fight for the saga.
+    |   (overworld message) Aria: Bersi says a saga needs a fight in it or the Tally won't take it. Fight us? He'll make it sound bigger than it was.
+    | 
+    | --- Battle start ---
+    |   field: MEADOW | weather: None | terrain: None
+    |   You are challenged by Chorister Aria!
+    |   Chorister Aria sent out Spheal!
+    |     >> sent out (foe): Spheal Lv.21 [THICKFAT]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> MEADOW
+    |   Tall grass ripples in the breeze across the meadow.
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Spheal 65/65]
+    |   Snorlax used Body Slam!
+    |   Snorlax stampeded through the tall grass!
+    |     HP Spheal (foe): 65 -> 0 / 65
+    |   The opposing Spheal fainted!
+    |     xx fainted: Spheal (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Aria is about to send out Brine. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Aria sent out Brine!
+    |     >> sent out (foe): Brine Lv.22 [WATERABSORB]
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Brine 94/94]
+    |   The opposing Brine used Baby-Doll Eyes!
+    |     (anim: StatDown)
+    |   Snorlax's Attack fell!
+    |   Snorlax used Body Slam!
+    |   Snorlax stampeded through the tall grass!
+    |     HP Brine (foe): 94 -> 0 / 94
+    |   The opposing Brine fainted!
+    |     xx fainted: Brine (foe)
+    |   You defeated Chorister Aria!
+    |   Ha! Wrong note, right song. Bersi'll love it.
+    |   You got $1,320 for winning!
+    |   battle result code: 1
+    |   (overworld message) Aria: Ha! Wrong note, right song. Bersi's already carving.
+    |   (overworld message) Bersi Gullsong: 'And the stranger heard the river's sorrow, and the drowned beast rose.' Something like that. I'll fix it later. I never fix it later.
+    |   (overworld message) (The Octave will remember that you helped Aria: 3 of 8.)
+    |   (overworld message) A new notch is cut in the Tally Mast, beside your name.
+    |   (overworld message) QUEST COMPLETE: "The Drowned Note"
+    |   (overworld message) \PN received $1,200!
+    |   (overworld message) You obtained a Shell Bell!
+    |   (overworld message) You put the Shell Bell in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Tally rose to Oarhand!
+-- talk OCTAVE_FORTE
+  Forte: I can fight! Look at me! LOOK at me!
+  Forte: Oh! You're a challenger. Brilliant. Forte. Octave. That's Bellows. Bellows, say hello. Not like that. Not on fire.
+  Forte: I want a Writ of Flame. The Legion. They won't hear a 'Choir child' without a second to stand for her. Will you stand for me?
+  Stand as Forte's second?
+  Forte: Because everyone looks at us like we're sad. The Glassfall orphans. Poor things. I'm not a poor thing. I'm loud.
+  Forte: Ask me again when you'll stand for me.
+-- talk OCTAVE_FORTE
+  Forte: I can fight! Look at me! LOOK at me!
+  Forte: Oh! You're a challenger. Brilliant. Forte. Octave. That's Bellows. Bellows, say hello. Not like that. Not on fire.
+  Forte: I want a Writ of Flame. The Legion. They won't hear a 'Choir child' without a second to stand for her. Will you stand for me?
+  Stand as Forte's second?
+  NEW QUEST: "Too Loud for the Choir" Find the singer outside the Crucible.
+  QUEST LOG: "Too Loud for the Choir" Stand as Forte's second before Legate Varra Kosk.
+  Forte: YES. The Legate's inside. Don't let me talk.
+-- talk CRUCIBLE_LEGATE
+  Legate Varra Kosk: You told my herald you were twenty, from the Cinder Cape, and a Legion family. Which of those was true?
+  Forte: ...None of them.
+  Legate Varra Kosk: Lying is a crime here. Not a large one. It ends the conversation. Unless your second has something to say.
+  What do you say?
+  Forte: ...I'm a Choir orphan. From the Glassfall. I sing. I'm also the strongest person in this ring, and I'm not sorry.
+  Legate Varra Kosk: There. That's a Writ's worth of truth. Now show me the strong part.
+  Legate Varra Kosk: The trial is simple. Fight your second. Win, or lose well. Both are honest.
+  QUEST LOG: "Too Loud for the Choir" The Legate's trial: Forte fights her own second, in the Crucible.
+  Forte: Don't go easy. If you go easy I'll know and I'll shout.
+  Forte: Too loud? ...No. Just right. You were louder.
+  Legate Varra Kosk: Lost well. Honestly. That is a Writ.
+  (The Octave will remember that you helped Forte: 4 of 8.)
+  The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+  QUEST COMPLETE: "Too Loud for the Choir"
+  \PN received $2,000!
+  You obtained a Heat Rock!
+  You put the Heat Rock in your Bag's Items pocket.
+    | talk CRUCIBLE_LEGATE
+    | ====================
+    |   (overworld message) Legate Varra Kosk: You told my herald you were twenty, from the Cinder Cape, and a Legion family. Which of those was true?
+    |   (overworld message) Forte: ...None of them.
+    |   (overworld message) Legate Varra Kosk: Lying is a crime here. Not a large one. It ends the conversation. Unless your second has something to say.
+    |   (overworld message) What do you say?
+    |   (overworld message) Forte: ...I'm a Choir orphan. From the Glassfall. I sing. I'm also the strongest person in this ring, and I'm not sorry.
+    |   (overworld message) Legate Varra Kosk: There. That's a Writ's worth of truth. Now show me the strong part.
+    |   (overworld message) Legate Varra Kosk: The trial is simple. Fight your second. Win, or lose well. Both are honest.
+    |   (overworld message) QUEST LOG: "Too Loud for the Choir" The Legate's trial: Forte fights her own second, in the Crucible.
+    |   (overworld message) Forte: Don't go easy. If you go easy I'll know and I'll shout.
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Chorister Forte!
+    |   Chorister Forte sent out Carkol!
+    |     >> sent out (foe): Carkol Lv.37 [STEAMENGINE]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Carkol 119/119]
+    |   Snorlax used Body Slam!
+    |     HP Carkol (foe): 119 -> 0 / 119
+    |   It's not very effective...
+    |   The opposing Carkol fainted!
+    |     xx fainted: Carkol (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Forte is about to send out Bellows. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Forte sent out Bellows!
+    |     >> sent out (foe): Bellows Lv.38 [FLASHFIRE]
+    |   The power of the opposing Bellows's Fire-type moves rose!
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Bellows 111/111]
+    |   Snorlax used Crunch!
+    |     HP Bellows (foe): 111 -> 0 / 111
+    |   The opposing Bellows fainted!
+    |     xx fainted: Bellows (foe)
+    |   You defeated Chorister Forte!
+    |   Too loud? ...No. Just right. You were louder.
+    |   You got $2,280 for winning!
+    |   battle result code: 1
+    |   (overworld message) Forte: Too loud? ...No. Just right. You were louder.
+    |   (overworld message) Legate Varra Kosk: Lost well. Honestly. That is a Writ.
+    |   (overworld message) (The Octave will remember that you helped Forte: 4 of 8.)
+    |   (overworld message) The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
+    |   (overworld message) QUEST COMPLETE: "Too Loud for the Choir"
+    |   (overworld message) \PN received $2,000!
+    |   (overworld message) You obtained a Heat Rock!
+    |   (overworld message) You put the Heat Rock in your Bag's Items pocket.
+-- talk OCTAVE_SONA
+  Sona: Yes, I'm the keeper. Yes, the sand. No, it isn't dangerous. You were going to ask all three.
+  Sona: Sona. Of the Octave. Noon sleeps here, where the light used to fall at midday. The dune came down the shaft in the spring and the light stopped.
+  Sona: Its jewel has been dark for a month. It still knows when noon is. It wakes, and looks up, and goes back to sleep.
+  Sona: You're going to say yes. I'll get the spade.
+  Dig out the light-shaft?
+  NEW QUEST: "The Noon Bell" Find the keeper of the Temple of the Noon Sun.
+  QUEST LOG: "The Noon Bell" Dig the three sand drifts out of the temple's light-shaft.
+  Sona: Three drifts. I heard you'd be quick.
+-- talk SUN_DRIFT
+  A little more light gets in. The shaft is not clear yet.
+-- talk SUN_DRIFT
+  A little more light gets in. The shaft is not clear yet.
+-- talk SUN_DRIFT
+  Daylight falls down the shaft for the first time in a month and lies on the temple floor in a hot white circle.
+  Sona: There. Now we wait for noon. Noon will wait too. It's very good at it.
+  QUEST LOG: "The Noon Bell" The shaft is clear. Be in the temple at noon (any time of day, not at night).
+-- talk OCTAVE_SONA
+  Sona: It's night. Even I can't make it noon. Come back in the day.
+-- talk OCTAVE_SONA
+  Sona: Hello, Noon.
+  Curator-Elect Nasrin Vael: (From the doorway, out of breath:) The Rolls will want that tablet, you know. And a full record of the dig. ...It's lovely, though.
+  Sona: Noon wants to stretch. It hasn't fought in a month. You knew I'd ask.
+  Sona: I heard that coming. I still couldn't stop it. That's the nice kind.
+  Sona: Ring the bell on your way out. It's been a long time since anyone rang it at noon.
+  (The Octave will remember that you helped Sona: 5 of 8.)
+  You crack the tablet in two. The Curator files both halves.
+  QUEST COMPLETE: "The Noon Bell"
+  \PN received $1,500!
+  You obtained a Sun Stone!
+  You put the Sun Stone in your Bag's Items pocket.
+  Your standing in The Rolls of Unearthing rose to Digger!
+    | talk OCTAVE_SONA
+    | ================
+    |   (overworld message) Sona: Hello, Noon.
+    |   (overworld message) Curator-Elect Nasrin Vael: (From the doorway, out of breath:) The Rolls will want that tablet, you know. And a full record of the dig. ...It's lovely, though.
+    |   (overworld message) Sona: Noon wants to stretch. It hasn't fought in a month. You knew I'd ask.
+    | 
+    | --- Battle start ---
+    |   field: MEADOW | weather: None | terrain: None
+    |   You are challenged by Chorister Sona!
+    |   Chorister Sona sent out Baltoy!
+    |     >> sent out (foe): Baltoy Lv.29 [LEVITATE]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> MEADOW
+    |   Tall grass ripples in the breeze across the meadow.
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Baltoy 70/70]
+    |   Snorlax used Heavy Slam!
+    |     HP Baltoy (foe): 70 -> 0 / 70
+    |   The opposing Baltoy fainted!
+    |     xx fainted: Baltoy (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Sona is about to send out Noon. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Sona sent out Noon!
+    |     >> sent out (foe): Noon Lv.30 [SYNCHRONIZE]
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Noon 88/88]
+    |   Snorlax used Crunch!
+    |     HP Noon (foe): 88 -> 0 / 88
+    |   It's super effective!
+    |   The opposing Noon fainted!
+    |     xx fainted: Noon (foe)
+    |   You defeated Chorister Sona!
+    |   I heard that coming. I still couldn't stop it.
+    |   You got $1,800 for winning!
+    |   battle result code: 1
+    |   (overworld message) Sona: I heard that coming. I still couldn't stop it. That's the nice kind.
+    |   (overworld message) Sona: Ring the bell on your way out. It's been a long time since anyone rang it at noon.
+    |   (overworld message) (The Octave will remember that you helped Sona: 5 of 8.)
+    |   (overworld message) You crack the tablet in two. The Curator files both halves.
+    |   (overworld message) QUEST COMPLETE: "The Noon Bell"
+    |   (overworld message) \PN received $1,500!
+    |   (overworld message) You obtained a Sun Stone!
+    |   (overworld message) You put the Sun Stone in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Rolls of Unearthing rose to Digger!
+-- talk OCTAVE_LENTO
+  Lento: Hello. Hello.
+  Lento: I'm Lento. Lento. Of the Octave. I say things twice. Once for me, once for her. Habit. Habit.
+  Lento: Reflections wander here. Mine wanted to go. Hush froze the mere so she couldn't. I didn't ask it to. I didn't ask it not to.
+  Lento: Now she's under there and I'm up here, and neither of us can leave. Slowly, slowly, I've noticed this is worse.
+  Help Lento?
+  Lento: Lector Saffi would know. She reads the Rite at Glassmere. She'll tell you backwards. Listen backwards.
+  Lector Saffi Ivarne: (Her mirror-writing in the reading-pool, read in the glass:) TO FREE A THING IN ANTUMBRA, HOLD IT BACKWARDS. WALK EACH CRACK FROM ITS END TO ITS START.
+  NEW QUEST: "The Still Water" Find the singer on the frozen Mirror Mere.
+  QUEST LOG: "The Still Water" Lector Saffi: in Antumbra you free a thing by holding it backwards. Walk the three cracks in the ice from their ends to their starts.
+-- talk MERE_CRACK
+  The ice creaks. It is still holding on.
+-- talk MERE_CRACK
+  The ice creaks. It is still holding on.
+-- talk MERE_CRACK
+  On the third crack the ice sighs. It does not break. It just stops holding on.
+  Lento's reflection: (Faint, from under the ice, said once:) Thank you.
+  Lento: She only said it once. She's never done that.
+  Lento: It's all right. It's all right. She'll come back. Slowly.
+  QUEST LOG: "The Still Water" The ice is thin and Lento is ready to let go.
+  Lento: Hush is upset. Hush is upset. It thinks it did something wrong. Duel us? It needs to do something right.
+  Lento: Slowly, slowly. You got there first anyway.
+  Lento: I'm going to write to Vesper. I'm going to write to Vesper. She'll be cross I didn't write sooner. Once.
+  (The Octave will remember that you helped Lento: 6 of 8.)
+  Your reflection signs the Speculum. It signs a little late.
+  QUEST COMPLETE: "The Still Water"
+  \PN received $4,000!
+  You obtained a Mirror Herb!
+  You put the Mirror Herb in your Bag's Items pocket.
+  Your standing in The Rite of Reflection rose to Gleam!
+    | talk MERE_CRACK
+    | ===============
+    |   (overworld message) On the third crack the ice sighs. It does not break. It just stops holding on.
+    |   (overworld message) Lento's reflection: (Faint, from under the ice, said once:) Thank you.
+    |   (overworld message) Lento: She only said it once. She's never done that.
+    |   (overworld message) Lento: It's all right. It's all right. She'll come back. Slowly.
+    |   (overworld message) QUEST LOG: "The Still Water" The ice is thin and Lento is ready to let go.
+    |   (overworld message) Lento: Hush is upset. Hush is upset. It thinks it did something wrong. Duel us? It needs to do something right.
+    | 
+    | --- Battle start ---
+    |   field: FROZEN_LAKE | weather: None | terrain: None
+    |   You are challenged by Chorister Lento!
+    |   Chorister Lento sent out Froslass!
+    |     >> sent out (foe): Froslass Lv.57 [SNOWCLOAK]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> FROZEN_LAKE
+    |   The battle is taking place on a frozen lake!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Froslass 173/173]
+    |   The opposing Froslass used Will-O-Wisp!
+    |   The opposing Froslass's attack missed!
+    |   Snorlax used Crunch!
+    |     HP Froslass (foe): 173 -> 0 / 173
+    |   It's super effective!
+    |   The opposing Froslass fainted!
+    |     xx fainted: Froslass (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |   Chorister Lento is about to send out Hush. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Lento sent out Hush!
+    |     >> sent out (foe): Hush Lv.58 [SNOWCLOAK]
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 524/524 | Hush 170/170]
+    |   The opposing Hush used Freeze-Dry!
+    |   The frozen lake lent its cold to Freeze-Dry!
+    |     HP Snorlax (player): 524 -> 467 / 524
+    |   Snorlax used Body Slam!
+    |   Snorlax's attack missed!
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 467 -> 499 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    | 
+    | --- Turn 3 ---
+    |   [Snorlax 499/524 | Hush 170/170]
+    |   The opposing Hush used Freeze-Dry!
+    |   The frozen lake lent its cold to Freeze-Dry!
+    |     HP Snorlax (player): 499 -> 445 / 524
+    |   Snorlax used Body Slam!
+    |     HP Hush (foe): 170 -> 0 / 170
+    |   The opposing Hush fainted!
+    |     xx fainted: Hush (foe)
+    |   You defeated Chorister Lento!
+    |   Slowly, slowly. Slowly, slowly. You got there first anyway.
+    |   You got $3,480 for winning!
+    |   battle result code: 1
+    |   (overworld message) Lento: Slowly, slowly. You got there first anyway.
+    |   (overworld message) Lento: I'm going to write to Vesper. I'm going to write to Vesper. She'll be cross I didn't write sooner. Once.
+    |   (overworld message) (The Octave will remember that you helped Lento: 6 of 8.)
+    |   (overworld message) Your reflection signs the Speculum. It signs a little late.
+    |   (overworld message) QUEST COMPLETE: "The Still Water"
+    |   (overworld message) \PN received $4,000!
+    |   (overworld message) You obtained a Mirror Herb!
+    |   (overworld message) You put the Mirror Herb in your Bag's Items pocket.
+    |   (overworld message) Your standing in The Rite of Reflection rose to Gleam!
+-- talk FERRYMAN_MIREFEN
+  Marsh ferryman: Every night. Every lamp on the crossing, out, one after another. I've had two boats on the mud this week.
+  Six-Fingers Ottoline: (Chalked on the board above him, in Ottoline's hand:) LAMPS OUT. FERRYMEN PAY. MY CUT'S A FIFTH. IT'S YOURS. DON'T MAKE IT MINE.
+  Take the job?
+  NEW QUEST: "Lamps Out" At night, watch the three ferry lamps on the marsh.
+  Marsh ferryman: Nights only. In the day they behave.
+-- talk FERRY_LAMP
+  The gold rings are gone. Another lamp, further out, is still lit. For now.
+-- talk FERRY_LAMP
+  The gold rings are gone. Another lamp, further out, is still lit. For now.
+-- talk FERRY_LAMP
+  The gold rings slip away across the boardwalk, toward the old lamplighter's hut at the end of the steps.
+  QUEST LOG: "Lamps Out" Something with gold rings in the dark put the lamps out. Find the lamplighter.
+-- talk OCTAVE_NOCT
+  Noct: ...Shh.
+  Noct: Noct. Octave. The lamps are mine. So is putting them out.
+  Noct: Sweetrot runners come up the crossing at night looking for lamp-runners. Kids who'll carry for them. They look where it's lit.
+  Noct: Wick puts the lamps out when they come. Dark's the only thing down here that's free.
+  What do you tell the Gutter Book?
+  Noct: ...Marsh gas. Ottoline will know. She'll take her fifth anyway.
+  QUEST LOG: "Lamps Out" Noct wants to know if you can be trusted with the dark.
+  Noct: Wick wants to know if you're safe in the dark. Show it.
+  Noct: ...Good. Now you know where the dark is.
+  Noct: Corvin has beds at the infirmary. I'll take them in the morning. Thank you.
+  (The Octave will remember that you helped Noct: 7 of 8.)
+  The job's chalked through. Ottoline takes her cut. You get the rest.
+  QUEST COMPLETE: "Lamps Out"
+  \PN received $1,000!
+  You obtained 5 Dusk Balls!
+  You put the Dusk Balls in your Bag's Poké Balls pocket.
+  Your standing in The Gutter Book rose to Runner!
+    | talk OCTAVE_NOCT
+    | ================
+    |   (overworld message) Noct: ...Shh.
+    |   (overworld message) Noct: Noct. Octave. The lamps are mine. So is putting them out.
+    |   (overworld message) Noct: Sweetrot runners come up the crossing at night looking for lamp-runners. Kids who'll carry for them. They look where it's lit.
+    |   (overworld message) Noct: Wick puts the lamps out when they come. Dark's the only thing down here that's free.
+    |   (overworld message) What do you tell the Gutter Book?
+    |   (overworld message) Noct: ...Marsh gas. Ottoline will know. She'll take her fifth anyway.
+    |   (overworld message) QUEST LOG: "Lamps Out" Noct wants to know if you can be trusted with the dark.
+    |   (overworld message) Noct: Wick wants to know if you're safe in the dark. Show it.
+    | 
+    | --- Battle start ---
+    |   field: MEADOW | weather: None | terrain: None
+    |   You are challenged by Chorister Noct!
+    |   Chorister Noct sent out Murkrow!
+    |     >> sent out (foe): Murkrow Lv.33 [INSOMNIA]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> MEADOW
+    |   Tall grass ripples in the breeze across the meadow.
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 445/524 | Murkrow 93/93]
+    |   Snorlax used Crunch!
+    |     HP Murkrow (foe): 93 -> 0 / 93
+    |   It's not very effective...
+    |   The opposing Murkrow fainted!
+    |     xx fainted: Murkrow (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 445 -> 477 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    |   Chorister Noct is about to send out Wick. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Noct sent out Wick!
+    |     >> sent out (foe): Wick Lv.34 [SYNCHRONIZE]
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 477/524 | Wick 120/120]
+    |   Snorlax used Heavy Slam!
+    |     HP Wick (foe): 120 -> 0 / 120
+    |   The opposing Wick fainted!
+    |     xx fainted: Wick (foe)
+    |   You defeated Chorister Noct!
+    |   ...Good. Now you know where the dark is.
+    |   You got $2,040 for winning!
+    |   battle result code: 1
+    |   (overworld message) Noct: ...Good. Now you know where the dark is.
+    |   (overworld message) Noct: Corvin has beds at the infirmary. I'll take them in the morning. Thank you.
+    |   (overworld message) (The Octave will remember that you helped Noct: 7 of 8.)
+    |   (overworld message) The job's chalked through. Ottoline takes her cut. You get the rest.
+    |   (overworld message) QUEST COMPLETE: "Lamps Out"
+    |   (overworld message) \PN received $1,000!
+    |   (overworld message) You obtained 5 Dusk Balls!
+    |   (overworld message) You put the Dusk Balls in your Bag's Poké Balls pocket.
+    |   (overworld message) Your standing in The Gutter Book rose to Runner!
+-- (Carol's verses follow, in the order helped)
+-- talk OCTAVE_CAROL
+  Carol: You've met them all! Everyone's written about you. Sit down, sit down. Tell me everything, in the order it happened.
+  NEW QUEST: "The Ninth Verse" Tell Carol about the other seven singers of the Octave.
+  Carol: Lyra! 'And the moss came down when no one sang.' Oh, that's good. I'm keeping that.
+  Carol: Cadence kept her job? Cadence kept a JOB? 'And the lamps stayed lit on Block Nine.'
+  Carol: Aria and the river. 'The drowned note rose.' Bersi wrote me eleven pages about that. Eleven.
+  Carol: Forte's letter was all capitals. 'TOO LOUD FOR THE CHOIR.' I'm putting it in exactly like that.
+  Carol: Sona said you'd tell me that. She said you'd tell it well. 'The bell rang at noon.'
+  Carol: Lento's reflection. 'She said it once.' ...Oh. I'll write that one slowly.
+  Carol: Noct doesn't write. Noct sent a lamp wick in an envelope. Now I know what it meant. 'Dark is the only thing that's free.'
+  Carol: That's seven. And me, the eighth: the one with no Plate. Ribbon became a Sylveon because it loved me, and I've always thought that meant I was the one without an Imprint.
+  Carol: But listening to you, I think the bond is the Imprint. Everyone you met was saved by somebody staying.
+  Carol: Every story needs a fight in the middle, though. That's the verse I can't write. Will you help me with that one too?
+  QUEST LOG: "The Ninth Verse" Carol has every verse but the one in the middle, where the fight goes.
+  Carol: Ribbon, the middle of the story. Your favourite part.
+  Carol: And they all lived. That's the whole ending. They all lived.
+  Carol: The song's finished. I have to show Vesper. VESPER!
+  QUEST LOG: "The Eevee Octave" All eight singers have had your help. Vesper is waiting in the Glassfall Memorial Garden in Crownhaven.
+  (The Octave will remember that you helped Carol: 8 of 8.)
+  The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
+  QUEST COMPLETE: "The Ninth Verse"
+  \PN received $6,000!
+  You obtained 3 bottles of PP Up!
+  You put the bottles of PP Up in your Bag's Medicine pocket.
+  Your standing in The Hall of Petitions rose to Courier!
+    | talk OCTAVE_CAROL
+    | =================
+    |   (overworld message) Carol: You've met them all! Everyone's written about you. Sit down, sit down. Tell me everything, in the order it happened.
+    |   (overworld message) NEW QUEST: "The Ninth Verse" Tell Carol about the other seven singers of the Octave.
+    |   (overworld message) Carol: Lyra! 'And the moss came down when no one sang.' Oh, that's good. I'm keeping that.
+    |   (overworld message) Carol: Cadence kept her job? Cadence kept a JOB? 'And the lamps stayed lit on Block Nine.'
+    |   (overworld message) Carol: Aria and the river. 'The drowned note rose.' Bersi wrote me eleven pages about that. Eleven.
+    |   (overworld message) Carol: Forte's letter was all capitals. 'TOO LOUD FOR THE CHOIR.' I'm putting it in exactly like that.
+    |   (overworld message) Carol: Sona said you'd tell me that. She said you'd tell it well. 'The bell rang at noon.'
+    |   (overworld message) Carol: Lento's reflection. 'She said it once.' ...Oh. I'll write that one slowly.
+    |   (overworld message) Carol: Noct doesn't write. Noct sent a lamp wick in an envelope. Now I know what it meant. 'Dark is the only thing that's free.'
+    |   (overworld message) Carol: That's seven. And me, the eighth: the one with no Plate. Ribbon became a Sylveon because it loved me, and I've always thought that meant I was the one without an Imprint.
+    |   (overworld message) Carol: But listening to you, I think the bond is the Imprint. Everyone you met was saved by somebody staying.
+    |   (overworld message) Carol: Every story needs a fight in the middle, though. That's the verse I can't write. Will you help me with that one too?
+    |   (overworld message) QUEST LOG: "The Ninth Verse" Carol has every verse but the one in the middle, where the fight goes.
+    |   (overworld message) Carol: Ribbon, the middle of the story. Your favourite part.
+    | 
+    | --- Battle start ---
+    |   field: FAIRY_TALE | weather: None | terrain: None
+    |   You are challenged by Chorister Carol!
+    |   Chorister Carol sent out Florges!
+    |     >> sent out (foe): Florges Lv.87 [FLOWERVEIL]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> FAIRY_TALE
+    |   Once upon a time, in a castle deep in the forest... the story begins!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 477/524 | Florges 277/277]
+    |   The opposing Florges used Moonblast!
+    |   The storybook's magic sparkled through Moonblast!
+    |     HP Snorlax (player): 477 -> 333 / 524
+    |   Snorlax used Body Slam!
+    |     HP Florges (foe): 277 -> 74 / 277
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 333 -> 365 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 365/524 | Florges 74/277]
+    |   The opposing Florges used Moonblast!
+    |   The storybook's magic sparkled through Moonblast!
+    |     HP Snorlax (player): 365 -> 219 / 524
+    |   Snorlax used Earthquake!
+    |     HP Florges (foe): 74 -> 0 / 277
+    |   The opposing Florges fainted!
+    |     xx fainted: Florges (foe)
+    |   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 219 -> 251 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    |   Chorister Carol is about to send out Ribbon. Will you switch your Pokémon?  [auto: No]
+    |   Chorister Carol sent out Ribbon!
+    |     >> sent out (foe): Ribbon Lv.88 [PIXILATE]
+    | 
+    | --- Turn 3 ---
+    |   [Snorlax 251/524 | Ribbon 310/310]
+    |   The opposing Ribbon used Moonblast!
+    |   The storybook's magic sparkled through Moonblast!
+    |     HP Snorlax (player): 251 -> 106 / 524
+    |   Snorlax used Body Slam!
+    |     HP Ribbon (foe): 310 -> 102 / 310
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 106 -> 138 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    | 
+    | --- Turn 4 ---
+    |   [Snorlax 138/524 | Ribbon 102/310]
+    |   The opposing Ribbon used Moonblast!
+    |   The storybook's magic sparkled through Moonblast!
+    |     HP Snorlax (player): 138 -> 8 / 524
+    |   Snorlax used Body Slam!
+    |     HP Ribbon (foe): 102 -> 0 / 310
+    |   The opposing Ribbon fainted!
+    |     xx fainted: Ribbon (foe)
+    |   You defeated Chorister Carol!
+    |   And they all lived. That's the whole ending. They all lived.
+    |   You got $5,280 for winning!
+    |   battle result code: 1
+    |   (overworld message) Carol: And they all lived. That's the whole ending. They all lived.
+    |   (overworld message) Carol: The song's finished. I have to show Vesper. VESPER!
+    |   (overworld message) QUEST LOG: "The Eevee Octave" All eight singers have had your help. Vesper is waiting in the Glassfall Memorial Garden in Crownhaven.
+    |   (overworld message) (The Octave will remember that you helped Carol: 8 of 8.)
+    |   (overworld message) The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
+    |   (overworld message) QUEST COMPLETE: "The Ninth Verse"
+    |   (overworld message) \PN received $6,000!
+    |   (overworld message) You obtained 3 bottles of PP Up!
+    |   (overworld message) You put the bottles of PP Up in your Bag's Medicine pocket.
+    |   (overworld message) Your standing in The Hall of Petitions rose to Courier!
+-- talk VESPER_GARDEN
+  Vesper: You came. Everyone, it's them.
+  Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+  Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
+  Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
+  Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
+  Vesper: Will you sing with all of us?
+  Vesper: Then from the first note.
+  Bout 1 of 9: Lyra and Leafeon!
+  Vesper: Rest. Sing it again when you're ready. We aren't going anywhere. We never miss a Festival.
+    | talk VESPER_GARDEN
+    | ==================
+    |   (overworld message) Vesper: You came. Everyone, it's them.
+    |   (overworld message) Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+    |   (overworld message) Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
+    |   (overworld message) Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
+    |   (overworld message) Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
+    |   (overworld message) Vesper: Will you sing with all of us?
+    |   (overworld message) Vesper: Then from the first note.
+    |   (overworld message) Bout 1 of 9: Lyra and Leafeon!
+    | 
+    | --- Battle start ---
+    |   field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+    |   You are challenged by Chorister Lyra!
+    |   Chorister Lyra sent out Moss!
+    |     >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+    |   Go! Magikarp!
+    |     >> sent out (player): Magikarp Lv.5 [SWIFTSWIM]
+    | ## FIELD CHANGE: NONE -> FLOWER_GARDEN
+    |   Flowers bloom across the garden!
+    | 
+    | --- Turn 1 ---
+    |   [Magikarp 18/18 | Moss 263/263]
+    |   The opposing Moss surrounded itself with its Z-Power!
+    |   The opposing Moss unleashed its full-force Z-Move!
+    |   The opposing Moss used Bloom Doom!
+    |   The blooming garden poured its strength into Bloom Doom!
+    |     HP Magikarp (player): 18 -> 0 / 18
+    |   It's super effective!
+    |   Magikarp fainted!
+    |     xx fainted: Magikarp (player)
+    |   You have no more Pokémon that can fight!
+    |   You lost against Chorister Lyra!
+    |   You gave $600 to the winner...
+    |   battle result code: 2
+    |   (overworld message) Vesper: Rest. Sing it again when you're ready. We aren't going anywhere. We never miss a Festival.
+-- talk VESPER_GARDEN
+  Vesper: You came. Everyone, it's them.
+  Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+  Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
+  Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
+  Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
+  Vesper: Will you sing with all of us?
+  Vesper: Then from the first note.
+  Bout 1 of 9: Lyra and Leafeon!
+  Bout 2 of 9: Cadence and Jolteon!
+  Bout 3 of 9: Aria and Vaporeon!
+  Bout 4 of 9: Forte and Flareon!
+  Bout 5 of 9: Sona and Espeon!
+  Bout 6 of 9: Lento and Glaceon!
+  Bout 7 of 9: Noct and Umbreon!
+  Bout 8 of 9: Carol and Sylveon!
+  Bout 9 of 9: Vesper and Amen!
+  Vesper: That was every note we have. You were worth all of them.
+  Vesper: This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you.
+  Vesper: And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it.
+  The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
+  QUEST COMPLETE: "The Eevee Octave"
+  You obtained an Eevium Z!
+  You put the Eevium Z in your Bag's Items pocket.
+  You obtained a Z-Power Ring!
+  You put the Z-Power Ring in your Bag's Key Items pocket.
+  Tester obtained Eevee!
+  Eevee has been sent to Box "Box 1"!
+  Your standing in The Hall of Petitions rose to Envoy!
+  Vesper: Whatever it becomes, it'll become it because of you. I said that once before, didn't I?
+    | talk VESPER_GARDEN
+    | ==================
+    |   (overworld message) Vesper: You came. Everyone, it's them.
+    |   (overworld message) Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+    |   (overworld message) Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
+    |   (overworld message) Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
+    |   (overworld message) Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
+    |   (overworld message) Vesper: Will you sing with all of us?
+    |   (overworld message) Vesper: Then from the first note.
+    |   (overworld message) Bout 1 of 9: Lyra and Leafeon!
+    | 
+    | --- Battle start ---
+    |   field: FLOWER_GARDEN (stage 3) | weather: None | terrain: None
+    |   You are challenged by Chorister Lyra!
+    |   Chorister Lyra sent out Moss!
+    |     >> sent out (foe): Moss Lv.90 @GRASSIUMZ [CHLOROPHYLL]
+    |   Go! Snorlax!
+    |     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
+    | ## FIELD CHANGE: NONE -> FLOWER_GARDEN
+    |   Flowers bloom across the garden!
+    | 
+    | --- Turn 1 ---
+    |   [Snorlax 524/524 | Moss 263/263]
+    |   The opposing Moss surrounded itself with its Z-Power!
+    |   The opposing Moss unleashed its full-force Z-Move!
+    |   The opposing Moss used Bloom Doom!
+    |   The blooming garden poured its strength into Bloom Doom!
+    |     HP Snorlax (player): 524 -> 185 / 524
+    |   Snorlax used Body Slam!
+    |     HP Moss (foe): 263 -> 151 / 263
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Snorlax (player): 185 -> 217 / 524
+    |   Snorlax restored a little HP using its Leftovers!
+    |   The opposing Moss drank from the blooming garden.
+    |     HP Moss (foe): 151 -> 167 / 263
+    | 
+    | --- Turn 2 ---
+    |   [Snorlax 217/524 | Moss 167/263]
+    |   The opposing Moss used Knock Off!
+    |     HP Snorlax (player): 217 -> 116 / 524
+    |   Snorlax dropped its Leftovers!
+    |   Snorlax used Body Slam!
+    |     HP Moss (foe): 167 -> 55 / 263
+    |   (end of round)
+    |   The opposing Moss drank from the blooming garden.
+    |     HP Moss (foe): 55 -> 71 / 263
+    | 
+    | --- Turn 3 ---
+    |   [Snorlax 116/524 | Moss 71/263]
+    |   The opposing Moss used Leaf Blade!
+    |   The blooming garden poured its strength into Leaf Blade!
+    |     HP Snorlax (player): 116 -> 0 / 524
+    |   Snorlax fainted!
+    |     xx fainted: Snorlax (player)
+    | ## FIELD STAGE: FLOWER_GARDEN is now stage 4
+    |   The garden is in full flower!
+    |   (end of round)
+    |   The opposing Moss drank from the blooming garden.
+    |     HP Moss (foe): 71 -> 87 / 263
+    |   Just a little more! Hang in there, Volcarona!
+    |     >> sent out (player): Volcarona Lv.100 @LEFTOVERS [FLAMEBODY]
+    | 
+    | --- Turn 4 ---
+    |   [Volcarona 311/311 | Moss 87/263]
+    |   The opposing Moss used Knock Off!
+    |     HP Volcarona (player): 311 -> 165 / 311
+    |   A critical hit!
+    |   Volcarona dropped its Leftovers!
+    |   Volcarona used Giga Drain!
+    |   The flowering garden poured its strength into Giga Drain!
+    |     HP Moss (foe): 87 -> 0 / 263
+    |   It's not very effective...
+    |   The opposing Moss fainted!
+    |     xx fainted: Moss (foe)
+    |   The opposing Moss had its energy drained!
+    |     HP Volcarona (player): 165 -> 209 / 311
+    |   Volcarona is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Lyra!
+    |   It bloomed for you. It doesn't do that for everyone.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 2 of 9: Cadence and Jolteon!
+    | 
+    | --- Battle start ---
+    |   field: NEON_GRID | weather: None | terrain: None
+    |   You are challenged by Chorister Cadence!
+    |   Chorister Cadence sent out Snare!
+    |     >> sent out (foe): Snare Lv.90 @ELECTRIUMZ [VOLTABSORB]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.100 @LIFEORB [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> NEON_GRID
+    |   Neon circuitry hums beneath your feet!
+    |   The opposing Snare soaked up current from the grid!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 357/357 | Snare 263/263]
+    |   The opposing Snare used Shadow Ball!
+    |     HP Garchomp (player): 357 -> 286 / 357
+    |   Garchomp used Dragon Claw!
+    |     HP Snare (foe): 263 -> 0 / 263
+    |   A critical hit!
+    |   The opposing Snare fainted!
+    |     xx fainted: Snare (foe)
+    |     HP Garchomp (player): 286 -> 251 / 357
+    |   Garchomp lost some of its HP!
+    |   Garchomp is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Cadence!
+    |   Off the beat. Mine, not yours.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 3 of 9: Aria and Vaporeon!
+    | 
+    | --- Battle start ---
+    |   field: WATER_SURFACE | weather: None | terrain: None
+    |   You are challenged by Chorister Aria!
+    |   Chorister Aria sent out Brine!
+    |     >> sent out (foe): Brine Lv.90 @WATERIUMZ [WATERABSORB]
+    |   Go! Garchomp!
+    |     >> sent out (player): Garchomp Lv.100 @LIFEORB [SANDVEIL]
+    | ## FIELD CHANGE: NONE -> WATER_SURFACE
+    |   The battle is taking place on the open water!
+    | 
+    | --- Turn 1 ---
+    |   [Garchomp 251/357 | Brine 380/380]
+    |   Garchomp used Fire Fang!
+    |   The flames hissed into steam on the waves...
+    |     HP Brine (foe): 380 -> 340 / 380
+    |   It's not very effective...
+    |     HP Garchomp (player): 251 -> 216 / 357
+    |   Garchomp lost some of its HP!
+    |   The opposing Brine surrounded itself with its Z-Power!
+    |   The opposing Brine unleashed its full-force Z-Move!
+    |   The opposing Brine used Hydro Vortex!
+    |   The opposing Brine rode the waves into the attack!
+    |     HP Garchomp (player): 216 -> 0 / 357
+    |   Garchomp fainted!
+    |     xx fainted: Garchomp (player)
+    |   (end of round)
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 340 -> 364 / 380
+    |   Go for it, Metagross!
+    |     >> sent out (player): Metagross Lv.100 @LEFTOVERS [CLEARBODY]
+    | 
+    | --- Turn 2 ---
+    |   [Metagross 364/364 | Brine 364/380]
+    |   The opposing Brine used Scald!
+    |   The opposing Brine rode the waves into the attack!
+    |     HP Metagross (player): 364 -> 208 / 364
+    |   Metagross used Meteor Mash!
+    |     HP Brine (foe): 364 -> 261 / 380
+    |   It's not very effective...
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Metagross (player): 208 -> 230 / 364
+    |   Metagross restored a little HP using its Leftovers!
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 261 -> 285 / 380
+    | 
+    | --- Turn 3 ---
+    |   [Metagross 230/364 | Brine 285/380]
+    |   The opposing Brine used Scald!
+    |   The opposing Brine rode the waves into the attack!
+    |     HP Metagross (player): 230 -> 86 / 364
+    |   Metagross used Zen Headbutt!
+    |     HP Brine (foe): 285 -> 102 / 380
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Metagross (player): 86 -> 108 / 364
+    |   Metagross restored a little HP using its Leftovers!
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 102 -> 126 / 380
+    | 
+    | --- Turn 4 ---
+    |   [Metagross 108/364 | Brine 126/380]
+    |   The opposing Brine used Scald!
+    |   The opposing Brine rode the waves into the attack!
+    |     HP Metagross (player): 108 -> 0 / 364
+    |   Metagross fainted!
+    |     xx fainted: Metagross (player)
+    |   (end of round)
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 126 -> 150 / 380
+    |   Just a little more! Hang in there, Togekiss!
+    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
+    | 
+    | --- Turn 5 ---
+    |   [Togekiss 374/374 | Brine 150/380]
+    |   Togekiss used Air Slash!
+    |     HP Brine (foe): 150 -> 12 / 380
+    |   The opposing Brine used Scald!
+    |   The opposing Brine rode the waves into the attack!
+    |     HP Togekiss (player): 374 -> 262 / 374
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Togekiss (player): 262 -> 285 / 374
+    |   Togekiss restored a little HP using its Leftovers!
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 12 -> 36 / 380
+    | 
+    | --- Turn 6 ---
+    |   [Togekiss 285/374 | Brine 36/380]
+    |   Togekiss used Air Slash!
+    |   Togekiss's attack missed!
+    |   The opposing Brine used Ice Beam!
+    |     HP Togekiss (player): 285 -> 158 / 374
+    |   It's super effective!
+    |   Ice is spreading across the water... (2 more)
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Togekiss (player): 158 -> 181 / 374
+    |   Togekiss restored a little HP using its Leftovers!
+    |   The opposing Brine soaked up the spray.
+    |     HP Brine (foe): 36 -> 60 / 380
+    | 
+    | --- Turn 7 ---
+    |   [Togekiss 181/374 | Brine 60/380]
+    |   Togekiss used Air Slash!
+    |     HP Brine (foe): 60 -> 0 / 380
+    |   The opposing Brine fainted!
+    |     xx fainted: Brine (foe)
+    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Aria!
+    |   The tide took the note. That's all right. It brings them back.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 4 of 9: Forte and Flareon!
+    | 
+    | --- Battle start ---
+    |   field: VOLCANIC | weather: None | terrain: None
+    |   You are challenged by Chorister Forte!
+    |   Chorister Forte sent out Bellows!
+    |     >> sent out (foe): Bellows Lv.90 @FIRIUMZ [FLASHFIRE]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    | ## FIELD CHANGE: NONE -> VOLCANIC
+    |   Magma churns across the battlefield!
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |     (anim: Sandstorm)
+    |   A sandstorm brewed!
+    | ## FIELD CHANGE: VOLCANIC -> ASHEN_WASTE
+    |   The sandstorm buried the magma! It cooled into black, glassy dunes!
+    | 
+    | --- Turn 1 ---
+    |   [Tyranitar 404/404 | Bellows 263/263]
+    |   Tyranitar used Crunch!
+    |     HP Bellows (foe): 263 -> 42 / 263
+    |   The opposing Bellows surrounded itself with its Z-Power!
+    |   The opposing Bellows unleashed its full-force Z-Move!
+    |   The opposing Bellows used Inferno Overdrive!
+    |   The heat beneath the glass flared up with Inferno Overdrive!
+    |     HP Tyranitar (player): 404 -> 315 / 404
+    |   A critical hit!
+    |   It's not very effective...
+    |   (end of round)
+    |     (anim: Sandstorm)
+    |   The sandstorm is raging.
+    |   The opposing Bellows is buffeted by the sandstorm!
+    |     HP Bellows (foe): 42 -> 26 / 263
+    |     (anim: UseItem)
+    |     HP Tyranitar (player): 315 -> 340 / 404
+    |   Tyranitar restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Tyranitar 340/404 | Bellows 26/263]
+    |   Tyranitar used Crunch!
+    |     HP Bellows (foe): 26 -> 0 / 263
+    |   The opposing Bellows fainted!
+    |     xx fainted: Bellows (foe)
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Forte!
+    |   Too loud? ...No. Just right, and you were louder.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 5 of 9: Sona and Espeon!
+    | 
+    | --- Battle start ---
+    |   field: MINDSCAPE | weather: None | terrain: None
+    |   You are challenged by Chorister Sona!
+    |   Chorister Sona sent out Noon!
+    |     >> sent out (foe): Noon Lv.90 @PSYCHIUMZ [MAGICBOUNCE]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    | ## FIELD CHANGE: NONE -> MINDSCAPE
+    |   The world dissolves into a sea of drifting thoughts...
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |     (anim: Sandstorm)
+    |   A sandstorm brewed!
+    | 
+    | --- Turn 1 ---
+    |   [Tyranitar 340/404 | Noon 263/263]
+    |   The opposing Noon used Calm Mind!
+    |     (anim: StatUp)
+    |   The opposing Noon's Special Attack rose!
+    |   The opposing Noon's Special Defense rose!
+    |   Tyranitar used Crunch!
+    |   A nightmare took shape around Crunch!
+    |     HP Noon (foe): 263 -> 0 / 263
+    |   It's super effective!
+    |   The opposing Noon fainted!
+    |     xx fainted: Noon (foe)
+    |   Shadows are creeping into the dream... (2 more)
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Sona!
+    |   I heard that coming. I still couldn't stop it.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 6 of 9: Lento and Glaceon!
+    | 
+    | --- Battle start ---
+    |   field: FROZEN_LAKE | weather: None | terrain: None
+    |   You are challenged by Chorister Lento!
+    |   Chorister Lento sent out Hush!
+    |     >> sent out (foe): Hush Lv.90 @ICIUMZ [ICEBODY]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    | ## FIELD CHANGE: NONE -> FROZEN_LAKE
+    |   The battle is taking place on a frozen lake!
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |     (anim: Sandstorm)
+    |   A sandstorm brewed!
+    | 
+    | --- Turn 1 ---
+    |   [Tyranitar 340/404 | Hush 263/263]
+    |   Tyranitar used Crunch!
+    |     HP Hush (foe): 263 -> 130 / 263
+    |   The opposing Hush surrounded itself with its Z-Power!
+    |   The opposing Hush unleashed its full-force Z-Move!
+    |   The opposing Hush used Subzero Slammer!
+    |   The frozen lake lent its cold to Subzero Slammer!
+    |     HP Tyranitar (player): 340 -> 128 / 404
+    |   (end of round)
+    |     (anim: Sandstorm)
+    |   The sandstorm is raging.
+    |   The opposing Hush is buffeted by the sandstorm!
+    |     HP Hush (foe): 130 -> 114 / 263
+    |     (anim: UseItem)
+    |     HP Tyranitar (player): 128 -> 153 / 404
+    |   Tyranitar restored a little HP using its Leftovers!
+    |     [ability: Hush (foe)'s Ice Body]
+    |     HP Hush (foe): 114 -> 130 / 263
+    |   The opposing Hush's HP was restored.
+    | 
+    | --- Turn 2 ---
+    |   [Tyranitar 153/404 | Hush 130/263]
+    |   Tyranitar used Crunch!
+    |     HP Hush (foe): 130 -> 0 / 263
+    |   The opposing Hush fainted!
+    |     xx fainted: Hush (foe)
+    |   Tyranitar is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Lento!
+    |   Slowly, slowly. You got there first anyway.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 7 of 9: Noct and Umbreon!
+    | 
+    | --- Battle start ---
+    |   field: NEW_MOON | weather: None | terrain: None
+    |   You are challenged by Chorister Noct!
+    |   Chorister Noct sent out Wick!
+    |     >> sent out (foe): Wick Lv.90 @DARKINIUMZ [INNERFOCUS]
+    |   Go! Tyranitar!
+    |     >> sent out (player): Tyranitar Lv.100 @LEFTOVERS [SANDSTREAM]
+    | ## FIELD CHANGE: NONE -> NEW_MOON
+    |   The moon has gone dark over Underveil... Something moves in the shadows.
+    |     [ability: Tyranitar (player)'s Sand Stream]
+    |     (anim: Sandstorm)
+    |   A sandstorm brewed!
+    | 
+    | --- Turn 1 ---
+    |   [Tyranitar 153/404 | Wick 317/317]
+    |   Tyranitar used Ice Punch!
+    |     HP Wick (foe): 317 -> 237 / 317
+    |   The opposing Wick surrounded itself with its Z-Power!
+    |   The opposing Wick unleashed its full-force Z-Move!
+    |   The opposing Wick used Black Hole Eclipse!
+    |   The opposing Wick struck from the depths of the new moon!
+    |     HP Tyranitar (player): 153 -> 55 / 404
+    |   It's not very effective...
+    |   (end of round)
+    |     (anim: Sandstorm)
+    |   The sandstorm is raging.
+    |   The opposing Wick is buffeted by the sandstorm!
+    |     HP Wick (foe): 237 -> 218 / 317
+    |     (anim: UseItem)
+    |     HP Tyranitar (player): 55 -> 80 / 404
+    |   Tyranitar restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Tyranitar 80/404 | Wick 218/317]
+    |   Tyranitar used Crunch!
+    |   Tyranitar struck from the depths of the new moon!
+    |     HP Wick (foe): 218 -> 117 / 317
+    |   It's not very effective...
+    |     (anim: StatDown)
+    |   The opposing Wick's Defense fell!
+    |   The opposing Wick used Foul Play!
+    |   The opposing Wick struck from the depths of the new moon!
+    |     HP Tyranitar (player): 80 -> 0 / 404
+    |   It's not very effective...
+    |   Tyranitar fainted!
+    |     xx fainted: Tyranitar (player)
+    |   (end of round)
+    |     (anim: Sandstorm)
+    |   The sandstorm is raging.
+    |   The opposing Wick is buffeted by the sandstorm!
+    |     HP Wick (foe): 117 -> 98 / 317
+    |   Just a little more! Hang in there, Togekiss!
+    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
+    | 
+    | --- Turn 3 ---
+    |   [Togekiss 181/374 | Wick 98/317]
+    |   Togekiss used Aura Sphere!
+    |     HP Wick (foe): 98 -> 0 / 317
+    |   It's super effective!
+    |   The opposing Wick fainted!
+    |     xx fainted: Wick (foe)
+    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Noct!
+    |   ...Good night.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 8 of 9: Carol and Sylveon!
+    | 
+    | --- Battle start ---
+    |   field: FAIRY_TALE | weather: None | terrain: None
+    |   You are challenged by Chorister Carol!
+    |   Chorister Carol sent out Ribbon!
+    |     >> sent out (foe): Ribbon Lv.90 @FAIRIUMZ [PIXILATE]
+    |   Go! Volcarona!
+    |     >> sent out (player): Volcarona Lv.100 @LEFTOVERS [FLAMEBODY]
+    | ## FIELD CHANGE: NONE -> FAIRY_TALE
+    |   Once upon a time, in a castle deep in the forest... the story begins!
+    | 
+    | --- Turn 1 ---
+    |   [Volcarona 209/311 | Ribbon 317/317]
+    |   Volcarona used Fiery Dance!
+    |   Volcarona breathed searing dragonfire!
+    |     HP Ribbon (foe): 317 -> 194 / 317
+    |   The opposing Ribbon surrounded itself with its Z-Power!
+    |   The opposing Ribbon unleashed its full-force Z-Move!
+    |   The opposing Ribbon used Twinkle Tackle!
+    |   The storybook's magic sparkled through Twinkle Tackle!
+    |     HP Volcarona (player): 209 -> 60 / 311
+    |   It's not very effective...
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Volcarona (player): 60 -> 79 / 311
+    |   Volcarona restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Volcarona 79/311 | Ribbon 194/317]
+    |   Volcarona used Fiery Dance!
+    |   Volcarona breathed searing dragonfire!
+    |     HP Ribbon (foe): 194 -> 71 / 317
+    |   The opposing Ribbon used Mystical Fire!
+    |   The opposing Ribbon breathed searing dragonfire!
+    |     HP Volcarona (player): 79 -> 0 / 311
+    |   Volcarona fainted!
+    |     xx fainted: Volcarona (player)
+    |   (end of round)
+    |   Your opponent's weak! Get 'em, Togekiss!
+    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
+    | 
+    | --- Turn 3 ---
+    |   [Togekiss 181/374 | Ribbon 71/317]
+    |   Togekiss used Air Slash!
+    |   Togekiss wielded Air Slash like a true knight!
+    |     HP Ribbon (foe): 71 -> 0 / 317
+    |   The opposing Ribbon fainted!
+    |     xx fainted: Ribbon (foe)
+    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Chorister Carol!
+    |   And they all lived. That's the whole ending.
+    |   You got $5,400 for winning!
+    |   battle result code: 1
+    |   (overworld message) Bout 9 of 9: Vesper and Amen!
+    | 
+    | --- Battle start ---
+    |   field: GRAND_STAGE | weather: None | terrain: None
+    |   You are challenged by Octave Cantor Vesper!
+    |   Octave Cantor Vesper sent out Amen!
+    |     >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+    |   Go! Togekiss!
+    |     >> sent out (player): Togekiss Lv.100 @LEFTOVERS [SERENEGRACE]
+    | ## FIELD CHANGE: NONE -> GRAND_STAGE
+    |   The curtain rises! The spotlight blazes over the stage!
+    | 
+    | --- Turn 1 ---
+    |   [Togekiss 181/374 | Amen 232/232]
+    |   Togekiss used Air Slash!
+    |     HP Amen (foe): 232 -> 87 / 232
+    |   The opposing Amen flinched and couldn't move!
+    |   (end of round)
+    |     (anim: UseItem)
+    |     HP Togekiss (player): 181 -> 204 / 374
+    |   Togekiss restored a little HP using its Leftovers!
+    | 
+    | --- Turn 2 ---
+    |   [Togekiss 204/374 | Amen 87/232]
+    |   The opposing Amen used Quick Attack!
+    |   The crowd roared for the opposing Amen!
+    |     HP Togekiss (player): 204 -> 146 / 374
+    |   Togekiss used Air Slash!
+    |     HP Amen (foe): 87 -> 0 / 232
+    |   The opposing Amen fainted!
+    |     xx fainted: Amen (foe)
+    |   Togekiss is at the level cap (Lv. 100) and can't gain Exp. Points.
+    |   You defeated Octave Cantor Vesper!
+    |   There. That's every note we have. ...You were worth all of them.
+    |   You got $9,200 for winning!
+    |   battle result code: 1
+    |   (overworld message) Vesper: That was every note we have. You were worth all of them.
+    |   (overworld message) Vesper: This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you.
+    |   (overworld message) Vesper: And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it.
+    |   (overworld message) The petition is marked ANSWERED in red ink and filed in the eighteenth drawer.
+    |   (overworld message) QUEST COMPLETE: "The Eevee Octave"
+    |   (overworld message) You obtained an Eevium Z!
+    |   (overworld message) You put the Eevium Z in your Bag's Items pocket.
+    |   (overworld message) You obtained a Z-Power Ring!
+    |   (overworld message) You put the Z-Power Ring in your Bag's Key Items pocket.
+    |   (overworld message) Tester obtained Eevee!
+    |   (overworld message) Eevee has been sent to Box "Box 1"!
+    |   (overworld message) Your standing in The Hall of Petitions rose to Envoy!
+    |   (overworld message) Vesper: Whatever it becomes, it'll become it because of you. I said that once before, didn't I?
+
+=== Extreme Evoboost ===
+Z: the reward Eevee holding the Eevium Z on the Grand Stage
+===========================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Eevee!
+    >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Eevee 167/167 | Snorlax 280/280]
+  Eevee surrounded itself with its Z-Power!
+  Eevee unleashed its full-force Z-Move!
+  Eevee used Extreme Evoboost!
+    (anim: StatUp)
+  Eevee's Attack rose sharply!
+  Eevee's Defense rose sharply!
+  Eevee's Special Attack rose sharply!
+  Eevee's Special Defense rose sharply!
+  Eevee's Speed rose sharply!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  A Z-Move! The audience leaps to its feet!
+  The wild Snorlax used Body Slam!
+  The crowd roared for the wild Snorlax!
+    HP Eevee (player): 167 -> 0 / 167
+  A critical hit!
+  Eevee fainted!
+    xx fainted: Eevee (player)
+## FIELD STAGE: GRAND_STAGE is now stage 3
+  A breathtaking hit! Standing ovation!
+  You have no more Pokémon that can fight!
+  You panicked and dropped $8,400...
+  battle result code: 2
+  
+RESULT: player lost after 0 turn(s)
+

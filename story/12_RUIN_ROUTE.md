@@ -49,11 +49,11 @@
   5. **K7** plays as written, but Kestrel knows: "You're going to *erase* her? Everything she paid for?" `:ch18_kestrel_ring` is still offered. Giving it is the last warm thing on the route.
 - **Cliffhanger:** `GO_STAY_OUT`'s prompt appears and can't be answered *yes*. The cursor won't move there.
 
-## R5 — "The Last Gate" (Wyrmrest, Gym 18; the Shattered Ice; Nova)
+## R5 — "The Last Gate" (Wyrmrest, Gym 18; the Glass Dunes; Nova)
 - **Beats:**
   1. **The oath** can only be true one way: "I'm going to end it. All of it." Reshiram accepts the truth and flies to the front without a fight.
   2. **Gym 18 (Ruin):** Sigrun on `:DRAGONS_DEN`, no Reshiram, every Pokémon a step faster. "Dragons don't let anything through they haven't weighed. I've weighed you."
-  3. **The Battle of the Shattered Ice** (14_WAR_AND_BLESSING). The PC can't *stand between*: the option reads "End it." The shard doesn't calm the beam clash. It **eats** it, and both legendaries' beams go out like candles. WAR-1 plays with shots 10–12 replaced: the clash-ball turns black and vanishes, Kyogre and Reshiram both flee the PC, and both armies stop fighting out of fear. The truce is called anyway. Nobody thanks the PC.
+  3. **The Battle of the Glass Dunes** (14_WAR_AND_BLESSING). The PC can't *stand between*: the option reads "End it." The shard doesn't calm the beam clash. It **eats** it, and both legendaries' beams go out like candles. WAR-1 plays with shots 10–12 replaced: the clash-ball turns black and vanishes, the flood stops dead and sinks into the sand, Kyogre and Reshiram both flee the PC, and both armies stop fighting out of fear. The truce is called anyway. Nobody thanks the PC.
   4. The Dominar can't be swayed, and neither ruler will ride with the Renegade.
 - **Sidequest: Nova** (CAMEOS.md §9), on the Mirrorwalk dream-road out of Gloaming. She offers a gentler unmaking: everyone asleep and happy forever. Accepting is **`GO_R_SWEET_DREAMS`**. Refusing is a fight, and the **Crescent Charm**.
 - **Cliffhanger:** on the Sovereign's Ascent the Wardguard bars the road. Dask's Synod opens a mirror in the cliff instead.
@@ -68,7 +68,7 @@
   6. **Night of Masques:** the actor playing the Gilded King freezes mid-line, because the mirror behind the stage is showing the real one.
   7. **Valen's audience** is three lines long. Valen: "I know what you are now. I'll hold them quiet one more time. I'll die doing it. That's still better than you."
   8. **Final: Valen, the Last Tuning.** He fights with the Crown on and the Plates lit behind him.
-- **No exhibitions** except the Eevee Octave. Vesper won't look at the PC, but Understudy's siblings do.
+- **No exhibitions** except the Eevee Octave (its gauntlet still needs all eight singers helped). Vesper hosts it without once looking at the PC, but Understudy's siblings do.
 - **Cliffhanger:** the Blessing. Nobody will raise the Crown. The PC picks it up off the arena floor.
 
 ## R7 — "Every Type and None" (the finale)

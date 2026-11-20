@@ -61,6 +61,14 @@ KITS['shs'] = dict(N=(SN('cliff_sh', 1624), SN('cliff_sh', 1625), SN('cliff_sh',
                    inW=(SN('cliff_sh', 1636), SN('cliff_sh', 1644)), inE=(SN('cliff_sh', 1635), SN('cliff_sh', 1643)), l0=True) if SNOWT else None
 KITS['aks'] = dict(N=tuple(SN('cliff_ak', 440 + i) for i in range(3)), W=SN('cliff_ak', 448), E=SN('cliff_ak', 450),
                    rows=[tuple(SN('cliff_ak', b + i) for i in range(3)) for b in (456, 464, 472)], inW=None, inE=None, l0=False) if SNOWT else None
+CHALKT = _ST.get('_chalk', {})
+if CHALKT:                                  # map builder 10: chalk copies of the Akuwa sea cliffs and the Sheridan cliffs
+    def CK(key, sid): return CHALKT['%s:%d' % (key, sid)]
+    KITS['akc'] = dict(N=tuple(CK('cliff_ak', 440 + i) for i in range(3)), W=CK('cliff_ak', 448), E=CK('cliff_ak', 450),
+                       rows=[tuple(CK('cliff_ak', b + i) for i in range(3)) for b in (456, 464, 472)], inW=None, inE=None, l0=False)
+    KITS['shc'] = dict(N=(CK('cliff_sh', 1624), CK('cliff_sh', 1625), CK('cliff_sh', 1627)), W=CK('cliff_sh', 1632), E=CK('cliff_sh', 1634),
+                       rows=[tuple(CK('cliff_sh', b + i) for i in range(3)) for b in (1640, 1648, 1656)],
+                       inW=(CK('cliff_sh', 1636), CK('cliff_sh', 1644)), inE=(CK('cliff_sh', 1635), CK('cliff_sh', 1643)), l0=True)
 SNOW_GROUND = [[C('kf', 2475), C('kf', 2475)], [C('kf', 2475), C('kf', 2475)]]
 SNOW_TALL = [C('kf', i) for i in (411, 412, 419, 420, 427, 428)]        # frosted ferns (terrain tag 2)
 DECOR_SNOW = {'flowers': [9725, 9725, 10620], 'green': [10551, 10555, 10556, 10371, 9725],

@@ -115,6 +115,11 @@ module WR
               :bag => :g1, :stage => 0, :start => proc { Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, :can_lose => true) } },
     "G1" => { :label => "Gym 1 Dorian (Grand Stage, single)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
               :bag => :g1, :stage => 0, :start => proc { Prismfall.gym_battle(1, :can_lose => true) } },
+    # Revision 19: the Saltmere crowd you met sets the Grand Stage's starting stage (1-3) for Dorian's fight.
+    "G1S2" => { :label => "Gym 1 Dorian, crowd start: Encore (stage 2)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :start => proc { setBattleRule("fieldStage", 2); Prismfall.gym_battle(1, :can_lose => true) } },
+    "G1S3" => { :label => "Gym 1 Dorian, crowd start: Standing Ovation (stage 3)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :start => proc { setBattleRule("fieldStage", 3); Prismfall.gym_battle(1, :can_lose => true) } },
     "G2" => { :label => "Gym 2 Tamsin (Silkwood, double)", :cap => 19, :badges => 1, :size => 6, :pool => :ch3,
               :bag => :g2, :tms => :g2, :stage => 1, :start => proc { Prismfall.gym_battle(2, :can_lose => true) } },
     "K2" => { :label => "K2 Kestrel (Gullcry Cliffs, before Gym 3)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,

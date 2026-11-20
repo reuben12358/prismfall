@@ -46,3 +46,57 @@ kf_hall:    {game: rejuvenation, map: 328, rect: [37, 31, 6, 9], rows: [[55, 80]
 kf_tree:    {game: rejuvenation, map: 328, rect: [14, 34, 4, 6], rows: [[82, 110]]}
 pine:       {sheet: rb4, at: [4, 31], size: [2, 3], top: 2}
 pine2:      {sheet: rb4, at: [2, 19], size: [2, 3], top: 2}
+# map builder 10: the nature kit for the crafted roads (trim: fully transparent sheet cells are left empty)
+nt_pine_a:    {sheet: ak, at: [0, 0], size: [2, 3], top: 2, trim: true}
+nt_pine_b:    {sheet: ak, at: [2, 0], size: [2, 3], top: 2, trim: true}
+nt_teal_a:    {sheet: ak, at: [0, 13], size: [3, 4], top: 2, trim: true}
+nt_teal_b:    {sheet: ak, at: [3, 14], size: [3, 4], top: 2, trim: true}
+nt_rock_big:  {sheet: ak, at: [0, 17], size: [3, 3], top: 1, trim: true}
+nt_stump_big: {sheet: ak, at: [3, 18], size: [3, 4], top: 2, trim: true}
+nt_pine_red:  {sheet: ak, at: [6, 17], size: [2, 3], top: 2, trim: true}
+nt_pine_blue: {sheet: ak, at: [0, 20], size: [2, 3], top: 2, trim: true}
+nt_pebbles:   {sheet: ak, at: [2, 20], size: [1, 2], trim: true}
+nt_pine_purp: {sheet: ak, at: [6, 20], size: [2, 3], top: 2, trim: true}
+nt_tree_blue: {sheet: ak, at: [0, 30], size: [3, 4], top: 2, trim: true}
+nt_tree_red:  {sheet: ak, at: [3, 30], size: [3, 4], top: 2, trim: true}
+nt_stump:     {sheet: ak, at: [6, 33], size: [2, 2], trim: true}
+nt_tree_purp: {sheet: ak, at: [0, 34], size: [3, 4], top: 2, trim: true}
+nt_tree_pink: {sheet: ak, at: [3, 35], size: [3, 4], top: 2, trim: true}
+nt_pine_pink: {sheet: ak, at: [6, 36], size: [2, 3], top: 2, trim: true}
+nt_boulder:   {sheet: ak, at: [5, 39], size: [2, 2], trim: true}
+nt_log:       {sheet: ak, at: [0, 43], size: [2, 1], trim: true}
+nt_fern0:     {sheet: ak, at: [0, 3], size: [1, 1], trim: true}
+nt_fern1:     {sheet: ak, at: [1, 3], size: [1, 1], trim: true}
+nt_bush0:     {sheet: ak, at: [0, 6], size: [1, 1], trim: true}
+nt_bush1:     {sheet: ak, at: [1, 6], size: [1, 1], trim: true}
+nt_lily:      {sheet: ak, at: [4, 1], size: [1, 2], top: 1, trim: true}
+nt_reed0:     {sheet: ak, at: [6, 11], size: [1, 2], top: 1, trim: true}
+nt_reed1:     {sheet: ak, at: [7, 11], size: [1, 2], top: 1, trim: true}
+nt_round_sh:  {sheet: sh, at: [0, 23], size: [3, 3], top: 2, trim: true}
+nt_pine_sh:   {sheet: sh, at: [3, 23], size: [2, 3], top: 2, trim: true}
+nt_dark_sh:   {sheet: sh, at: [0, 137], size: [3, 3], top: 2, trim: true}
+nt_dpine_sh:  {sheet: sh, at: [3, 137], size: [2, 3], top: 2, trim: true}
+nt_hollow:    {sheet: sh, at: [5, 24], size: [3, 3], top: 1, trim: true}
+nt_rock_sh:   {sheet: sh, at: [5, 34], size: [3, 3], top: 1, trim: true}
+nt_cave_sh:   {sheet: sh, at: [0, 31], size: [3, 3], top: 1, trim: true}
+nt_shrub0:    {sheet: sh, at: [3, 29], size: [2, 2], top: 1, trim: true}
+nt_shrub1:    {sheet: sh, at: [3, 31], size: [2, 2], top: 1, trim: true}
+nt_sapling:   {sheet: sh, at: [4, 34], size: [1, 2], top: 1, trim: true}
+nt_azalea0:   {sheet: sh, at: [0, 97], size: [2, 2], top: 1, trim: true}
+nt_azalea1:   {sheet: sh, at: [2, 97], size: [2, 2], top: 1, trim: true}
+nt_azalea2:   {sheet: sh, at: [0, 99], size: [2, 2], top: 1, trim: true}
+nt_conifer:   {sheet: sh, at: [4, 97], size: [2, 4], top: 3, trim: true}
+nt_blossom:   {sheet: sh, at: [0, 107], size: [3, 4], top: 2, trim: true}
+nt_birch_h:   {sheet: sh, at: [2, 72], size: [3, 1], trim: true}
+nt_birch_h2:  {sheet: sh, at: [0, 77], size: [3, 1], trim: true}
+nt_birch_v:   {sheet: sh, at: [0, 71], size: [1, 3], top: 1, trim: true}
+nt_stonering: {sheet: sh, at: [0, 165], size: [2, 2], trim: true}
+nt_deadtree:  {sheet: sh, at: [5, 212], size: [3, 3], top: 2, trim: true}
+nt_rocks_s0:  {sheet: sh, at: [7, 206], size: [1, 1], trim: true}
+nt_rocks_s1:  {sheet: sh, at: [7, 207], size: [1, 1], trim: true}
+nt_rocks_s2:  {sheet: sh, at: [7, 208], size: [1, 1], trim: true}
+nt_lime:      {sheet: gl, at: [0, 52], size: [3, 4], top: 2, trim: true}
+nt_olive:     {sheet: gl, at: [3, 52], size: [3, 4], top: 2, trim: true}
+nt_lime2:     {sheet: gl, at: [0, 451], size: [3, 3], top: 2, trim: true}
+nt_stone_gl:  {sheet: gl, at: [6, 448], size: [1, 1], trim: true}
+nt_stone_gl2: {sheet: gl, at: [7, 448], size: [1, 1], trim: true}

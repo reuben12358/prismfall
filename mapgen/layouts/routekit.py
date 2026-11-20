@@ -38,6 +38,12 @@ class Route:
         self.rng = random.Random(seed); self.seed = seed
         if theme == 'snow':
             m = RW.snowmap(W, H, mid, kit=kit or 'shs')
+        elif theme == 'shore':                                         # map builder 10: tileset 56, warm sand, chalk kits
+            m = K.RMap(W, H, 56, mid, water='Ocean', kit=kit or {1: 'akc', 'default': 'shc'})
+            m.auto = {'d': ('DirtDark', 'rejuvenation'), 'w': ('Ocean', 'rejuvenation'), 's': ('Sand shore', 'rejuvenation'),
+                      'W': ('Sea deep', 'rejuvenation'), 'g': ('Gravel Spring', 'pf'), 'u': ('Dirt', 'rejuvenation'),
+                      'p': ('Sea(Grass)', 'rejuvenation')}
+            m.keep_under = 'sug'                                       # sand and lanes keep painting under props
         elif theme in ('coast', 'dunes', 'marsh'):
             m = K.RMap(W, H, 51, mid, water='Ocean', kit=kit or {1: 'sh3', 2: 'sh3', 3: 'sh3', 'default': 'sh3'})
             m.auto = {'d': ('DirtDark', 'rejuvenation'), 'w': ('Ocean', 'rejuvenation'), 's': ('Sand shore_2', 'rejuvenation'),

@@ -34,8 +34,13 @@ CAP = {
     'd1_00': 'D1 Glassed Orchard: the chime spur plays low, middle, high', 'd1_01': 'A wrong note first: the failure line says which note was wanted',
     'hs_00': 'Gym 1 auditorium: the house tonight', 'hs_01': 'The stalls: everyone you met in Saltmere has a seat by the aisle',
     'hs_02': "After Dorian's show",
+    'd2_00': 'D2 the Deepwood (map 525): the lantern hollow, walled with silk', 'd2_01': 'Post alpha: the Joltik lights cocoons 1 and 2',
+    'd2_02': 'Curtain 1 now leans in: through it', 'd2_03': 'Post beta, inside: cocoons 2 and 3 (2 goes dark again)',
+    'd2_04': 'Curtain 3 leans north now: onto the island', 'd2_05': 'TM19 Giga Drain',
+    'd7_00': 'D7 the Rimewood (map 562): the Frost Loom', 'd7_01': 'The left thread cracks curtains 1 and 2',
+    'd7_02': 'The right thread cracks curtain 3', 'd7_03': 'Up the east path, all three broken', 'd7_04': "The trapper's cache",
     'd1_02': 'Low', 'd1_03': 'Middle', 'd1_04': 'High: the glass hedge shatters', 'd1_05': 'Past where the hedge stood', 'd1_06': "The lost child's satchel"}
-ROOM = {130: 'Loomhouse lobby', 131: 'The Canopy', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
+ROOM = {525: 'The Deepwood', 562: 'The Rimewood', 130: 'Loomhouse lobby', 131: 'The Canopy', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
         }
 
 

@@ -59,7 +59,9 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         o = dict(m)
         if diff == 1:
             o.update(m["hard"])
-            if m["lv"] < cap and m.get("only") != "hard":
+            # Hard is +1 level (never above the cap) from Gym 4 on; through cap 23 its levels match Standard and Hard
+            # comes from the extra Pokemon, IVs, EVs, sets and the Bag ban (harness: +1 there cost prepared teams 10-15%).
+            if m["lv"] < cap and m.get("only") != "hard" and cap > 23:
                 o["lv"] = min(cap, m["lv"] + 1)
         elif diff == 2:
             o.update(m["casual"])
@@ -199,10 +201,8 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     # Fighting and Steel (Crabrawler's Rock Smash, Timburr's Low Kick: 4x... 2x on Bug/Rock).
     P("DWEBBLE", 16, "STURDY", "ORANBERRY", "IMPISH", "SMACKDOWN,ROCKTOMB,BUGBITE,FURYCUTTER", "BA",
       only="nocasual", hard={"ab": "SHELLARMOR", "item": "SITRUSBERRY", "moves": "SMACKDOWN,ROCKTOMB,BUGBITE,STEALTHROCK"}),
-    # The trap spider (Hard only on the Standard roster since the bird answer took its slot; the harness saw it hold
-    # 51 of 52 realistic losses behind Silk Trap): Silk Trap guards it while its partner attacks, and binds tighter here.
-    P("SPIDOPS", 16, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,STRUGGLEBUG,FEINT,STRINGSHOT", "BA",
-      only="hard", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,BUGBITE,STRUGGLEBUG,ASSURANCE"}),
+    # (Spidops, the trap spider, waits for the Festival: behind Silk Trap it held 51 of 52 realistic losses on
+    # Standard and, as Hard's sixth beside Vivillon, beat prepared teams 59/60.)
     # Telluric Seed: +1 Def, +1 Sp. Def, -1 Speed - a silk cocoon. Razor Leaf hits both foes (Grass x1.2, Overgrow on).
     P("SWADLOON", 19, "OVERCOAT", "TELLURICSEED", "HARDY", "RAZORLEAF,BUGBITE,STRUGGLEBUG,PROTECT", "BA",
       nick="Bobbin", casual={"ab": "LEAFGUARD", "item": "ORANBERRY", "moves": "RAZORLEAF,BUGBITE,STRINGSHOT,PROTECT"},
@@ -223,9 +223,10 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     P("CHINCHOU", 20, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
       only="nocasual", hard={"sp": "LANTURN", "item": "SITRUSBERRY", "nat": "MODEST",
                              "moves": "BUBBLEBEAM,SPARK,CONFUSERAY,THUNDERWAVE"}),
-    # Hard only. Water Absorb, not Water Bubble: Water Bubble Liquidation on Water Surface OHKO'd prepared teams
-    # (122 knockouts in 60 fights). Water Absorb heals it on the field instead.
-    P("ARAQUANID", 22, "WATERABSORB", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
+    # Hard only: the diving-bell spider, still a Dewpider at Gym 3. Water Absorb heals it on the field. (A Water Bubble
+    # Araquanid at 22 OHKO'd prepared teams with Liquidation - 122 knockouts in 60 fights - and walled Grass and
+    # Electric alike; it waits for the Festival rematch.)
+    P("DEWPIDER", 21, "WATERABSORB", "ORANBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
       only="hard"),
     # The swimmer: Swift Swim is on without rain here (x2 Speed). Standard brings the Buizel (a Lv 20 Floatzel took
     # 63 knockouts in 60 realistic fights with Water Pulse alone); Hard brings the Floatzel.
@@ -240,7 +241,7 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     # answer to Grass (R3). Hard keeps Adamant, Dive, Ice Fang and Dragon Dance.
     P("GYARADOS", 23, "INTIMIDATE", "ORANBERRY", "MODEST", "WHIRLPOOL,BRINE,TWISTER,BITE", "BS",
       nick="Lucky", casual={"moves": "BITE,TWISTER,BRINE,LEER"},
-      hard={"nat": "ADAMANT", "item": "SITRUSBERRY", "moves": "WATERFALL,DIVE,ICEFANG,DRAGONDANCE"}),
+      hard={"item": "SITRUSBERRY", "moves": "WHIRLPOOL,BRINE,ICEFANG,BITE"}),
 ])
 warden(4, "LEADER_ROOK", "Rook", 27, "NEON_GRID", "Cut! ...Okay, okay, that's going in the highlight reel. You earned it.", [
     # Charge reboots a blacked-out grid (2 charging moves); Bite is his hedge for the Blackout (Dark x1.3).
@@ -607,7 +608,7 @@ rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way,
     # Hard only: the Deino that becomes Hydreigon (K5+), already mean.
     P("DEINO", 21, "HUSTLE", "ORANBERRY", "ADAMANT", "DRAGONBREATH,BITE,HEADBUTT,ROAR", "A", only="hard"),
     P("HONEDGE", 21, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
-      nick="Morwen", hard={"moves": "SHADOWSNEAK,SLASH,AERIALACE,SWORDSDANCE", "item": "EVIOLITE"}),
+      nick="Morwen", hard={"moves": "SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER", "item": "EVIOLITE"}),
     starter_mon("RIVAL_KESTREL", s, 1, 23),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don't get it. Nobody does.", lambda s: [
@@ -1206,23 +1207,29 @@ S("Ch17 (if Kroll was beaten publicly in Ch13) - Quent holds the Sun Court inste
       casual={"item": "SITRUSBERRY"}),
 ])
 
-# --- THE EEVEE OCTAVE --------------------------------------------------------------------------------------------
-# Eight Glassfall orphans of the Prism Choir, each raised beside a different Imprint; in-world an Eevee evolves by the
-# Imprint it grows up in, so every singer's partner is at home on exactly one field. Leader: Vesper Lindqvist.
-#   Ch2  (Saltmere, backstage, after Gym 1): optional DOUBLE, Vesper's Eevee + Carol's Sylveon on the Grand Stage.
-#   Ch13 (Lucent cloister): optional DOUBLE vs Vesper alone, on the Mindscape.
-#   Ch20 (Crownhaven Choir gardens): the gauntlet. Singers 1-8, one Eeveelution each, each on its own field
-#        (TRAINER_FIELDS by version), then Vesper (version 2): the field follows whichever Eeveelution is out
-#        (plugins/Prismfall Field Effects/013_FieldEffects_TrainerPlays.rb, ENTRY_FIELDS).
-S("Ch2 - Vesper, backstage at the Lantern Theatre after Gym 1, DOUBLE with Chorister Carol (field :GRAND_STAGE). Two singers: "
-  "sound moves raise the applause. Her Eevee 'hasn't decided which Imprint it belongs to yet'.",
+# --- THE EEVEE OCTAVE (SPINE Revision 19; design/EEVEE_OCTAVE.md) -----------------------------------------------
+# Eight Glassfall orphans of the Prism Choir, each living beside one kingdom's Plate; in-world an Eevee becomes what
+# it lives beside, so every singer's partner is at home on one field. Host: Vesper Lindqvist. Moved here from
+# pbs/trainers_trials.txt at the Octave workstream's request (mapgen/REQUESTS.md); versions are theirs:
+#   0   Ch2 Saltmere backstage double: Vesper + Lyra (both still Eevees), Grand Stage (TRAINER_FIELDS).
+#   1   Ch13 Lucent cloister double: Vesper alone, Mindscape (TRAINER_FIELDS).
+#   50  each singer's kingdom duel: a local partner + the Eeveelution at the next Warden's cap - 1 (map field).
+#   60  the Crownhaven gauntlet: one Eeveelution with its type's Z-crystal, on the field it was raised beside (the
+#       quest sets it), back to back with no healing, in the order the player helped them; then Vesper's Eevee with
+#       the Eevium Z (Extreme Evoboost) on the Grand Stage. Lv 88 / host 90 against the Festival cap of 90 (bag
+#       items allowed in battle, none between bouts); the bouts carry no bag of their own.
+# Retired with the reshape: Carol v0, Aria..Carol v1-8, Vesper v2 (their TRAINER_FIELDS / ENTRY_FIELDS rows are dead).
+S("Ch2 - Vesper, backstage at the Lantern Theatre after Gym 1, DOUBLE with Lyra (field :GRAND_STAGE). Two singers: "
+  "sound and showpieces raise the applause; Swift hits both foes. Her Eevee 'hasn't decided which Imprint it belongs to yet'.",
   "OCTAVE_VESPER", "Vesper", 0, 19, "It hasn't decided yet. ...Neither have you, I think.", [
     P("EEVEE", 18, "ADAPTABILITY", "ORANBERRY", "JOLLY", "SWIFT,QUICKATTACK,BABYDOLLEYES,HELPINGHAND", "A", nick="Amen",
-      hard={"item": "EVIOLITE"}),
+      hard={"item": "EVIOLITE", "moves": "SWIFT,COVET,BABYDOLLEYES,HELPINGHAND"}),
 ])
-S("Ch2 - Chorister Carol, Vesper's partner in the Saltmere double (field :GRAND_STAGE). Disarming Voice is a spread sound move.",
-  "OCTAVE_SINGER", "Carol", 0, 19, "Oh! You sing back. Most people don't.", [
-    P("SYLVEON", 18, "CUTECHARM", "ORANBERRY", "MODEST", "DISARMINGVOICE,SWIFT,BABYDOLLEYES,QUICKATTACK", "BS"),
+S("Ch2 - Lyra, Vesper's partner in the Saltmere double (field :GRAND_STAGE). Her Eevee becomes the Leafeon 'Moss' in her "
+  "Ch3 quest; here it is still an Eevee that hums with her.",
+  "OCTAVE_SINGER", "Lyra", 0, 19, "You sang back. ...Most people fidget.", [
+    P("EEVEE", 17, "ANTICIPATION", "ORANBERRY", "MODEST", "SWIFT,COVET,CHARM,HELPINGHAND", "S", nick="Moss",
+      casual={"moves": "SWIFT,TACKLE,CHARM,HELPINGHAND"}, hard={"item": "EVIOLITE"}),
 ])
 S("Ch13 - Vesper in the Lucent Athenaeum cloister, optional DOUBLE (field :MINDSCAPE). Espeon is at home; Amen's Hyper Voice "
   "and Sylveon's Pixilate Hyper Voice are spread sound moves (x1.2 here), and the third one cracks the dream to Inverse.",
@@ -1234,58 +1241,103 @@ S("Ch13 - Vesper in the Lucent Athenaeum cloister, optional DOUBLE (field :MINDS
       casual={"ab": "CUTECHARM", "moves": "MOONBLAST,MYSTICALFIRE,CALMMIND,PROTECT"}),
     P("EEVEE", 58, "ADAPTABILITY", "EVIOLITE", "JOLLY", "HYPERVOICE,DOUBLEEDGE,QUICKATTACK,HELPINGHAND", "A", nick="Amen"),
 ])
-def octave_singer(v, name, field, lose, mon):
-    S("Ch20 gauntlet %d/8 - Chorister %s (field :%s)" % (v, name, field), "OCTAVE_SINGER", name, v, 90, lose, [mon])
-# 1 Water: Water Absorb sips 1/16 a turn here; Elemental Seed = +1 Speed and Aqua Ring; Dive -> Underwater (x1.3 strike),
-#   where everything that isn't a Water type moves at half Speed.
-octave_singer(1, "Aria", "WATER_SURFACE", "The tide took the note. That's all right.",
-    P("VAPOREON", 90, "WATERABSORB", "ELEMENTALSEED", "BOLD", "SCALD,ICEBEAM,DIVE,WISH", "BPD", casual={"item": "LEFTOVERS"}))
-# 2 Electric: Volt Absorb starts charged and heals every turn on the grid; Synthetic Seed = +1 Sp. Atk and Magnet Rise
-#   (no Ground answer); Shadow Ball is the hedge for a Blackout (Ghost x1.2) and Discharge reboots it.
-octave_singer(2, "Cadence", "NEON_GRID", "Off the beat. Mine, not yours.",
-    P("JOLTEON", 90, "VOLTABSORB", "SYNTHETICSEED", "TIMID", "THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE", "S",
-      casual={"item": "MAGNET"}))
-# 3 Fire: Flash Fire starts lit; Lava Plume primes an eruption (+1 for Flareon, lava for the foe); Elemental Seed =
-#   +1 Atk / Sp. Atk / Speed and a burn that can't touch a Fire type.
-octave_singer(3, "Forte", "VOLCANIC", "Too loud? ...No. Just right, and you were louder.",
-    P("FLAREON", 90, "FLASHFIRE", "ELEMENTALSEED", "ADAMANT", "FLAREBLITZ,LAVAPLUME,SUPERPOWER,QUICKATTACK", "A",
-      casual={"item": "CHARCOAL"}))
-# 4 Ice: Ice Body heals without hail; Elemental Seed = +2 Speed (for 1/8 HP); Ice Shard slides (+1 Speed) and reseals a crack.
-octave_singer(4, "Lento", "FROZEN_LAKE", "Slowly, slowly. You got there first anyway.",
-    P("GLACEON", 90, "ICEBODY", "ELEMENTALSEED", "MODEST", "ICEBEAM,FREEZEDRY,ICESHARD,SHADOWBALL", "S",
-      casual={"item": "NEVERMELTICE"}))
-# 5 Grass: the garden starts at stage 3 and the Telluric Seed makes it 4 on entry, which switches Chlorophyll on.
-#   No non-Grass blades (they would cut her own garden back).
-octave_singer(5, "Lyra", "FLOWER_GARDEN", "It bloomed for you. It doesn't do that for everyone.",
-    P("LEAFEON", 90, "CHLOROPHYLL", "TELLURICSEED", "JOLLY", "LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS", "A",
-      casual={"ab": "LEAFGUARD", "item": "MIRACLESEED"}))
-# 6 Psychic: Magic Bounce gets +1 Sp. Def on the Inverse side of the dream; Hyper Voice x3 cracks the Mindscape into it.
-octave_singer(6, "Sona", "MINDSCAPE", "I heard that coming. I still couldn't stop it.",
-    P("ESPEON", 90, "MAGICBOUNCE", "TWISTEDSPOON", "TIMID", "PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND", "S",
-      casual={"ab": "SYNCHRONIZE"}))
-# 7 Dark: Magical Seed under the New Moon = +1 accuracy, Focus Energy and an instant Abyss; Dark Pulse x1.5 x1.4 there.
-#   Wish, not Moonlight (Moonlight fails).
-octave_singer(7, "Noct", "NEW_MOON", "...Good night.",
-    P("UMBREON", 90, "INNERFOCUS", "MAGICALSEED", "CALM", "DARKPULSE,FOULPLAY,SNARL,WISH", "SD",
-      casual={"item": "LEFTOVERS"}))
-# 8 Fairy: Draining Kiss x2, Mystical Fire x1.5, Magical Seed = +1 Sp. Atk, +1 Sp. Def.
-octave_singer(8, "Carol", "FAIRY_TALE", "And they all lived. That's the whole ending. They all lived.",
-    P("SYLVEON", 90, "PIXILATE", "MAGICALSEED", "MODEST", "HYPERVOICE,DRAININGKISS,MYSTICALFIRE,CALMMIND", "BS",
-      casual={"ab": "CUTECHARM", "item": "PIXIEPLATE", "moves": "MOONBLAST,DRAININGKISS,MYSTICALFIRE,CALMMIND"}))
-S("Ch20 gauntlet finale - Vesper (starts on :GRAND_STAGE; the field becomes each Eeveelution's home as it enters: Water Surface, "
-  "Neon Grid, Volcanic, Mindscape, New Moon, Fairy Tale). Six fields in one fight, so no held seeds: abilities carry it.",
-  "OCTAVE_VESPER", "Vesper", 2, 92, "We were all born the year the Crown broke. I think we're just... what was left.", [
-    P("VAPOREON", 90, "WATERABSORB", "LEFTOVERS", "BOLD", "SCALD,ICEBEAM,WISH,PROTECT", "BPD"),
-    P("JOLTEON", 90, "VOLTABSORB", "LIFEORB", "TIMID", "THUNDERBOLT,SHADOWBALL,VOLTSWITCH,HYPERVOICE", "S",
-      casual={"item": "MAGNET"}),
-    P("FLAREON", 91, "FLASHFIRE", "CHOICEBAND", "ADAMANT", "FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME", "A",
-      casual={"item": "CHARCOAL"}),
-    P("UMBREON", 91, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,DARKPULSE,WISH,YAWN", "SD"),
-    P("ESPEON", 91, "MAGICBOUNCE", "LIFEORB", "TIMID", "PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND", "S",
-      casual={"ab": "SYNCHRONIZE", "item": "TWISTEDSPOON"}),
-    P("SYLVEON", 92, "PIXILATE", "LEFTOVERS", "MODEST", "HYPERVOICE,DRAININGKISS,MYSTICALFIRE,CALMMIND", "BS",
-      nick="Vespers", casual={"ab": "CUTECHARM", "moves": "MOONBLAST,DRAININGKISS,MYSTICALFIRE,CALMMIND"}),
+# -- v50: the kingdom duels (quest climaxes on the singer's own ground; the map's field). Partner first, then the
+#    Eeveelution at the next Warden's cap - 1 (Lento and Carol at their chapters' caps - 1). Real sets, no seeds.
+def octave_duel(name, cap, quest, lose, mons):
+    S("Kingdom duel - %s (%s)" % (name, quest), "OCTAVE_SINGER", name, 50, cap, lose, mons)
+octave_duel("Lyra", 19, "EL_OCTAVE_MOSS, Gossamer Wood, Ch3, cap 19: Silkwood, Grass x1.2 for Moss", "You stood still for it. Most people fidget.", [
+    P("SKIDDO", 17, "SAPSIPPER", "ORANBERRY", "IMPISH", "RAZORLEAF,LEECHSEED,GROWTH,TACKLE", "BPD", only="nocasual"),
+    P("LEAFEON", 18, "LEAFGUARD", "ORANBERRY", "JOLLY", "RAZORLEAF,QUICKATTACK,BITE,SWIFT", "A", nick="Moss",
+      hard={"moves": "RAZORLEAF,QUICKATTACK,BITE,TAKEDOWN"}),
 ])
+octave_duel("Aria", 23, "IS_OCTAVE_DROWNED_NOTE, Ebbmouth, Ch4, cap 23", "Ha! Wrong note, right song. Bersi'll love it.", [
+    P("SPHEAL", 21, "THICKFAT", "ORANBERRY", "MODEST", "POWDERSNOW,WATERGUN,ROLLOUT,DEFENSECURL", "BS", only="nocasual"),
+    P("VAPOREON", 22, "WATERABSORB", "ORANBERRY", "BOLD", "WATERGUN,BITE,HAZE,QUICKATTACK", "BPD", nick="Brine",
+      hard={"moves": "WATERGUN,BITE,HAZE,SWIFT"}),
+])
+octave_duel("Cadence", 27, "ZE_OCTAVE_OFF_BEAT, the Lowlight, Ch5, cap 27", "Off the beat. Mine, not yours. Again tomorrow?", [
+    P("KLINK", 25, "PLUS", "ORANBERRY", "MODEST", "CHARGEBEAM,VISEGRIP,CHARGE,METALSOUND", "BS", only="nocasual"),
+    P("JOLTEON", 26, "VOLTABSORB", "SITRUSBERRY", "TIMID", "THUNDERSHOCK,DOUBLEKICK,QUICKATTACK,THUNDERWAVE", "S",
+      nick="Snare", hard={"moves": "THUNDERSHOCK,DOUBLEKICK,BITE,THUNDERWAVE"}),
+])
+octave_duel("Sona", 31, "OS_OCTAVE_NOON_BELL, the Temple of the Noon Sun, Ch6, cap 31", "I heard that coming. I still couldn't stop it.", [
+    P("BALTOY", 29, "LEVITATE", "ORANBERRY", "CALM", "EXTRASENSORY,ROCKTOMB,COSMICPOWER,RAPIDSPIN", "SD", only="nocasual"),
+    P("ESPEON", 30, "MAGICBOUNCE", "SITRUSBERRY", "TIMID", "PSYBEAM,SWIFT,MORNINGSUN,BITE", "S", nick="Noon",
+      casual={"ab": "SYNCHRONIZE"}),
+])
+octave_duel("Noct", 35, "NA_OCTAVE_LAMPS_OUT, Mirefen ferry steps at night, Ch7, cap 35", "...Good. Now you know where the dark is.", [
+    P("MURKROW", 33, "PRANKSTER", "ORANBERRY", "JOLLY", "WINGATTACK,ASSURANCE,TAUNT,HAZE", "A", only="nocasual",
+      casual={"ab": "INSOMNIA"}),
+    P("UMBREON", 34, "INNERFOCUS", "SITRUSBERRY", "CALM", "FOULPLAY,SNARL,CONFUSERAY,MOONLIGHT", "SD", nick="Wick"),
+])
+octave_duel("Forte", 39, "AS_OCTAVE_TOO_LOUD, the Crucible, Ch8, cap 39", "Too loud? ...No. Just right. You were louder.", [
+    P("CARKOL", 37, "STEAMENGINE", "ORANBERRY", "ADAMANT", "FLAMECHARGE,ANCIENTPOWER,SMACKDOWN,STEALTHROCK", "BA", only="nocasual"),
+    P("FLAREON", 38, "FLASHFIRE", "SITRUSBERRY", "ADAMANT", "FIREFANG,BITE,QUICKATTACK,TAKEDOWN", "A", nick="Bellows",
+      casual={"ab": "GUTS"}),
+])
+octave_duel("Lento", 59, "AN_OCTAVE_STILL_WATER, the Mirror Mere, Ch13, cap 59", "Slowly, slowly. Slowly, slowly. You got there first anyway.", [
+    P("FROSLASS", 57, "CURSEDBODY", "SITRUSBERRY", "TIMID", "ICEFANG,HEX,WILLOWISP,DESTINYBOND", "A", only="nocasual"),
+    P("GLACEON", 58, "ICEBODY", "LEFTOVERS", "MODEST", "BLIZZARD,FREEZEDRY,ICESHARD,MIRRORCOAT", "S", nick="Hush"),
+])
+octave_duel("Carol", 90, "CR_OCTAVE_NINTH_VERSE, the Glassfall Memorial Garden, Ch20, cap 90", "And they all lived. That's the whole ending. They all lived.", [
+    P("FLORGES", 87, "FLOWERVEIL", "LEFTOVERS", "CALM", "MOONBLAST,PETALBLIZZARD,WISH,AROMATHERAPY", "SD", only="nocasual"),
+    P("SYLVEON", 88, "PIXILATE", "SITRUSBERRY", "MODEST", "HYPERVOICE,MOONBLAST,DRAININGKISS,CALMMIND", "BS", nick="Ribbon",
+      casual={"ab": "CUTECHARM"}),
+])
+# -- v60: the Crownhaven gauntlet. Each Eeveelution shines on its home field with its Z-move (a Z-move is its type
+#    for every field rule; base-move rules don't carry over; on the Grand Stage a Z-move raises the applause).
+def octave_bout(name, lose, mon):
+    S("Gauntlet bout - %s (v60; the quest sets the field: plugins/Prismfall Trials/012_Trials_Octave.rb SINGERS)" % name,
+      "OCTAVE_SINGER", name, 60, 90, lose, [mon], nobag=True)
+# Flower Garden stage 3: Grass x1.5 for Bloom Doom (Leaf Blade 90 -> 175), and the Z-move grows the garden; Swords Dance
+# first if it can. Leaf Guard keeps it status-free in the meadow. Knock Off for the Ghosts and Psychics.
+octave_bout("Lyra", "It bloomed for you. It doesn't do that for everyone.",
+    P("LEAFEON", 88, "LEAFGUARD", "GRASSIUMZ", "JOLLY", "LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS", "A", nick="Moss",
+      casual={"moves": "LEAFBLADE,KNOCKOFF,QUICKATTACK,SYNTHESIS"}))
+# Water Surface: Water Absorb sips 1/16 a turn, Water x1.5 for Hydro Vortex (Scald 80 -> 160); Wish keeps it afloat
+# through a chain; Ice Beam for the Grass and Dragon answers.
+octave_bout("Aria", "The tide took the note. That's all right. It brings them back.",
+    P("VAPOREON", 88, "WATERABSORB", "WATERIUMZ", "BOLD", "SCALD,ICEBEAM,WISH,PROTECT", "BPD", nick="Brine",
+      casual={"moves": "SCALD,ICEBEAM,WISH,HAZE"}))
+# Neon Grid: Volt Absorb starts charged and heals every turn, Electric x1.5 for Gigavolt Havoc (Thunderbolt 90 -> 175);
+# Shadow Ball for the Ghosts and Psychics; Discharge reboots a Blackout (the player's quakes and floods short the grid).
+octave_bout("Cadence", "Off the beat. Mine, not yours.",
+    P("JOLTEON", 88, "VOLTABSORB", "ELECTRIUMZ", "TIMID", "THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE", "S", nick="Snare",
+      casual={"moves": "THUNDERBOLT,SHADOWBALL,DISCHARGE,QUICKATTACK"}))
+# Mindscape: Psychic x1.5 for Shattered Psyche (Psychic 90 -> 175), Magic Bounce sends hazards and status home, and
+# three damaging sound moves (Hyper Voice) crack the dream into the Inverse Field, where Dark and Bug answers resist.
+octave_bout("Sona", "I heard that coming. I still couldn't stop it.",
+    P("ESPEON", 88, "MAGICBOUNCE", "PSYCHIUMZ", "TIMID", "PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND", "S", nick="Noon",
+      casual={"ab": "SYNCHRONIZE", "moves": "PSYCHIC,SHADOWBALL,HYPERVOICE,MORNINGSUN"}))
+# New Moon: Dark x1.5 for Black Hole Eclipse (Dark Pulse 80 -> 160); the wall of the Octave: Wish (Moonlight fails
+# under a new moon), Snarl to blunt special answers, Foul Play turns a physical sweeper's Attack against it.
+octave_bout("Noct", "...Good night.",
+    P("UMBREON", 88, "INNERFOCUS", "DARKINIUMZ", "CALM", "DARKPULSE,FOULPLAY,SNARL,WISH", "SD", nick="Wick",
+      casual={"moves": "DARKPULSE,FOULPLAY,SNARL,YAWN"}))
+# Volcanic: Lava Plume primes eruptions (+1 to Fire types, lava on grounded foes); Inferno Overdrive from Flare Blitz
+# (120 -> 190). Guts, not Flash Fire: the field lights Flash Fire, and a lit Inferno Overdrive one-shot a Lv 95
+# Vaporeon through the resist in the Octave workstream's real-engine run. Guts pays off if the lava burns it.
+octave_bout("Forte", "Too loud? ...No. Just right, and you were louder.",
+    P("FLAREON", 88, "GUTS", "FIRIUMZ", "ADAMANT", "FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME", "A", nick="Bellows",
+      casual={"moves": "FLAREBLITZ,SUPERPOWER,QUICKATTACK,BITE"}))
+# Frozen Lake: Ice Body heals without hail, Ice x1.5 for Subzero Slammer (Ice Beam 90 -> 175); Ice Shard slides (+1
+# Speed) and reseals a crack; Freeze-Dry for the Water types the cracked lake would favour.
+octave_bout("Lento", "Slowly, slowly. You got there first anyway.",
+    P("GLACEON", 88, "ICEBODY", "ICIUMZ", "MODEST", "ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD", "S", nick="Hush",
+      casual={"moves": "ICEBEAM,FREEZEDRY,SHADOWBALL,MIRRORCOAT"}))
+# Fairy Tale: Fairy x1.5 for Twinkle Tackle (Moonblast 95 -> 175); Draining Kiss x2 here; Pixilate Hyper Voice is a
+# second Fairy attack; Mystical Fire for the Steel answer.
+octave_bout("Carol", "And they all lived. That's the whole ending.",
+    P("SYLVEON", 88, "PIXILATE", "FAIRIUMZ", "MODEST", "MOONBLAST,HYPERVOICE,MYSTICALFIRE,DRAININGKISS", "BS", nick="Ribbon",
+      casual={"ab": "CUTECHARM", "moves": "MOONBLAST,SWIFT,MYSTICALFIRE,DRAININGKISS"}))
+# The host: Eevee "Amen" on the Grand Stage. Extreme Evoboost (Last Resort + Eevium Z: +2 to every stat) is a showpiece
+# that lifts the applause; then Stored Power (20 + 20 per boost) or Last Resort (Normal x1.3/x1.5 on the stage, x1.3
+# as the grand finale, Adaptability). Shadow Ball for the Ghosts that ignore Last Resort; Quick Attack to finish.
+S("Gauntlet finale - Vesper's Eevee 'Amen' with the Eevium Z (v60; field :GRAND_STAGE from the quest)",
+  "OCTAVE_VESPER", "Vesper", 60, 90, "There. That's every note we have. ...You were worth all of them.", [
+    P("EEVEE", 90, "ADAPTABILITY", "EEVIUMZ", "HASTY", "LASTRESORT,STOREDPOWER,SHADOWBALL,QUICKATTACK", "MX", nick="Amen",
+      casual={"moves": "LASTRESORT,SWIFT,SHADOWBALL,QUICKATTACK"}),
+], nobag=True)
 
 # --- THE ASHKAAR-ISENMAR WAR (Ch19 gauntlets; map defaults: 924/925 Cinderglass, 927 Volcanic, 922/926 Frozen Lake) ---
 # Generic "Soldier" / "Captain", version = encounter number like the grunts. No bag items.

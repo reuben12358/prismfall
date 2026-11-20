@@ -11,6 +11,8 @@
 # The choice then carries the Z-move object, so priority, targeting and the
 # move's use all see the Z-move. The Z-Power is spent when the Z-move is
 # actually unleashed (a flinch or sleep keeps it), once per trainer per battle.
+# Events: :prismfall_zmove_chosen (battle, idxBattler, z), :prismfall_zmove_unleashed
+# (battle, user, z), :prismfall_zmove_done (battle, user, z; after the move resolves).
 #===============================================================================
 module PrismfallZ
   # [battler index, Z-move id, base move id] for each Z-move unleashed (tests read it).
@@ -85,6 +87,7 @@ module PrismfallZ
       return if !ai_wants?(battle, b, move, zid)
     end
     battle.choices[idx][2] = build(battle, move, zid)
+    EventHandlers.trigger(:prismfall_zmove_chosen, battle, idx, battle.choices[idx][2])
   end
 
   def self.ai_wants?(battle, b, move, zid)

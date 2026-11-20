@@ -1140,22 +1140,23 @@ Switch S108 CH3_PAGEANT_DONE = ON.
 ```
 (Backstage, after the panic. Chorus singers in Prism Choir white sit on prop crates with blankets round them. A young woman in the same white kneels on the boards — not to the PC. To Understudy.)
 [portrait: VESPER, neutral] Oh. Hello, little one. You're new.
-[portrait: VESPER, happy] I'm Vesper. Vesper Lindqvist. We're the Octave: eight of us, eight Eevee. The Choir lent us to the Pageant for the hymns.
+[portrait: VESPER, happy] I'm Vesper. Vesper Lindqvist. We're the Octave: eight singers, eight Eevee. I just conduct. The Choir lends us to the Pageant for the hymns.
 [portrait: VESPER, neutral] *(to Understudy)* It hasn't decided which Imprint it belongs to yet.
 [portrait: VESPER, neutral] *(to the PC, after a long look)* Neither have you, I think.
 > What does that mean?
   [portrait: VESPER, neutral] Only what it says. I sing; I don't explain. The Hierophant says I'd make a terrible priest.
 > ...
   [portrait: VESPER, happy] You don't have to answer. Nobody answers me. It's restful.
-[portrait: VESPER, neutral] The eight of us lost our homes in the Glassfall. The Choir raised us beside the Plates, one each. They say an Eevee becomes what it lives beside.
-[portrait: VESPER, happy] Would you sing a duet with us before we go? It helps, after a fright. Carol, come here.
+[portrait: VESPER, neutral] We all lost our homes in the Glassfall. The Choir raised us, and when the others were grown it sent each of them to live beside a Plate, one each. They say an Eevee becomes what it lives beside.
+[portrait: VESPER, happy] Would you sing a duet with us before we go? It helps, after a fright. Lyra, come here. *(A girl in Choir grey, humming, with an Eevee at her heels: the Octave's Elowen singer, going home to Briarwick.)*
 > Sing (battle).
-  BATTLE: double battle vs [OCTAVE_VESPER "Vesper", 0] + [OCTAVE_SINGER "Carol", 0]. Field: Grand Stage (FIELD_DEFAULTS exceptions).
+  BATTLE: double battle vs [OCTAVE_VESPER "Vesper", 0] + [OCTAVE_SINGER "Lyra", 0] (SPINE Rev 19: Lyra replaces Carol, who never leaves Crownhaven and is met last, in Ch20). Field: Grand Stage (FIELD_DEFAULTS exceptions).
   (After, win or lose:) [portrait: VESPER, happy] There. Your hands have stopped shaking. So have mine.
 > Not tonight.
   [portrait: VESPER, happy] Then at the Festival. We'll all be there. We always are.
 [portrait: VESPER, neutral] Look after it. Whatever it becomes, it'll become it because of you.
 Switch S190 VESPER_MET_SALTMERE = ON.
+(Then `pf_trial_talk(:VESPER_SALTMERE)`: Vesper asks the PC to look in on the eight singers as their road goes through the kingdoms, and names where each lives. This starts "The Eevee Octave" (`CR_OCTAVE`); lines in design/TRIALS_QUESTS.md, design in design/EEVEE_OCTAVE.md.)
 ```
 
 ## Map 145 — Dorian's dressing room: **EV "The Gilded King"** (after S108)

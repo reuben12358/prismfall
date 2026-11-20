@@ -59,6 +59,40 @@ class Built:
                 return False
         return self.B.cell_passable(m.data.data, ts, x, y)
 
+    BIT = {(0, 1): 1, (-1, 0): 2, (1, 0): 4, (0, -1): 8}            # Essentials' passage bits: down, left, right, up
+
+    def dir_ok(self, cell, bit, vars_, sw):
+        """Game_Map#passable?(x, y, d) for one tile and one direction bit: events first, then layers top down."""
+        mid, x, y = cell
+        m = self.maps[mid]; ts = self.ts[mid]
+        if not (0 <= x < m.width and 0 <= y < m.height): return False
+        for e in self.ev.get(cell, []):
+            pg = active_page(e, vars_, sw)
+            if pg is None or pg.through: continue
+            g = pg.graphic
+            if g.tile_id > 0:
+                p = ts['passages'][g.tile_id]
+                if p & bit or p & 0x0f == 0x0f: return False
+                if ts['priorities'][g.tile_id] == 0: return True
+            elif g.character_name:
+                return False
+        L = m.data.data
+        for z in (2, 1, 0):
+            t = int(L[z, y, x])
+            if t == 0: continue
+            tag = ts['terrain_tags'][t] if t < len(ts['terrain_tags']) else 0
+            if tag in (13, 15): continue
+            p = ts['passages'][t]
+            if p & bit or p & 0x0f == 0x0f: return False
+            if ts['priorities'][t] == 0: return True
+        return True
+
+    def can_move(self, c, n, vars_, sw):
+        """Game_Character#passable?: the tile you leave must let you out that way, the tile you enter must let you in."""
+        d = (n[1] - c[1], n[2] - c[2])
+        if d not in self.BIT: return True
+        return self.dir_ok(c, self.BIT[d], vars_, sw) and self.dir_ok(n, self.BIT[(-d[0], -d[1])], vars_, sw)
+
 
 def rebuild(model):
     """The same puzzle with the built maps' geometry."""
@@ -84,9 +118,14 @@ def rebuild(model):
         stand = [sh(c) for c in d.stand]
         devs.append(Device(d.name, stand, act, d.label))
     cls = model.__class__ if getattr(model, 'rebuild_same_class', False) else Model   # e.g. the Canopy's web throws
+    def move_ok(c, n, v):                                               # directional passage bits (cliff edges, ledges, rails)
+        if c in extra or n in extra or c[0] != n[0]: return True
+        vars_, sw = model.game(v)
+        return b.can_move(c, n, vars_, sw)
     m = cls(model.name + ' [built map]', cells | extra, passable, sh(model.start), model.vars0, devs,
               [sh(c) if c[1] >= 0 else c for c in model.goal], links={sh(k): sh(v) for k, v in model.links.items()},
               resets=[sh(c) for c in model.resets])
+    m.move_ok = move_ok
     return m, b
 
 

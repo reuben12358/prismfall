@@ -35,6 +35,7 @@
 | 26 | **Pecharunt is the source of Sweetrot** | Ch7: Sweetrot thralls' blank bliss | Ch10: the Loyal Three's eyes "the same blissful blank" | Ch18 Lightless Deep |
 | 27 | **Marrowgate and the Quiet Towns** | Act I: maps with blank spaces (Town Map has an unlabeled region in Ossaria's borderlands) | Ch9: Kaito's "A fist is a promise…". 01 lore | Ch13 Kaito's testimony (if encouraged). Payoff: Homecoming, Kaito opens the gate |
 | 28 | **Velmorans wilt abroad; the PC's mother wilted** | ★ P: Ines's letter ("I wanted one of us to have an ordinary life") | Ch1: Larch, "the bravest coward". Ch12: Morwen's letter, "keep wilting, love" | Ch15 echo, then Ch20 with Valen |
+| 29 | **The war will end on Ossaria's sand, in a second Year of Two Weathers** | Ch4: dock gossip of a sled-caravan burned on the dune road. Ch6: the caravan-mother's "new owners with an accent"; the Ossuary mural of two titans, and Sahar's "That's our western dunes" | Ch9: Kassan's envoy leaves the Conclave with both seals (the Elector's Lease). Ch11: the legions on the sands from Frostfang Pass; Kyogre's rain floods their camps. Ch14: Groudon's glyphs and Sahar's "The sand remembers the sea". The Dry Tide's dry seabed | Ch19: the Battle of the Glass Dunes (14_WAR_AND_BLESSING) |
 | 30 | **Shiv dreamed the PC** (cameo) | Ch18 sidequest "Dreamwalker" | — | Ruin Route hooks |
 
 ## Act I → Act V seed checklist (★ items)

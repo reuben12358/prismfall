@@ -73,7 +73,7 @@
 | S134 | CH13_ANTUMBRA_ENTERED | Crossed the Glass |
 | S135 | CH13_MINDSCAPE_DONE | Mindscape scene played |
 | S136 | CH13_TRIBUNAL_DONE | Tribunal finished |
-| S137 | CH13_FAULT | **The Fault.** North coast drained, encounter version 1 from Act IV |
+| S137 | CH13_FAULT | **The Fault.** South coast drained, encounter version 1 from Act IV |
 | S138 | CH14_TELEMETRY_SCENE | Larch dismantled the badge case |
 | S139 | CH14_RAID_DONE | Cragholm raid finished |
 | S140 | CH14_GROUDON_DONE | Groudon boss cleared |
@@ -118,7 +118,7 @@
 | S174 | DOCTORS_CELL_QUEST | "The Doctor's Cell" side quest active (Ch11–13) |
 | S175 | LITTLE_OWL_QUEST | Ilsa's "Little Owl" quest active (Ch13–20) |
 | S176 | THISTLEDOWN_CLEARED | Haunted manor completed (Ch3, on the Weavers' Road) |
-| S177 | EEVEE_OCTAVE_DONE | Eeveelution gauntlet cleared |
+| S177 | EEVEE_OCTAVE_DONE | Eeveelution gauntlet cleared (set by the Trials quest `CR_OCTAVE` on the win; SPINE Rev 19) |
 | S178 | VANE_HALL_DONE | Vane Hall sequence completed |
 | S179 | WENLOW_ALIVE | On until Interlude IV ends (Mirefen NPC page) |
 | S180 | TYPE_NULL_GIFT | Black Site Type: Null received |
@@ -171,7 +171,7 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 
 | ID | Name | Meaning |
 |---|---|---|
-| V122 | WAR_STATE | 0 = tension, 1 = passes closed (Ch8), 2 = war declared (Ch11), 3 = Siege of Skaldfast (Ch15), 4 = Battle of the Shattered Ice fought (Ch19), 5 = Peace of Plates (Festival), 6 = settled (ending) |
+| V122 | WAR_STATE | 0 = tension, 1 = passes closed (Ch8), 2 = war declared (Ch11), 3 = Siege of Skaldfast (Ch15), 4 = Battle of the Glass Dunes fought (Ch19), 5 = Peace of Plates (Festival), 6 = settled (ending) |
 | V123 | CAMEO_QUESTS_DONE | Count of sister-game sidequests completed (0–8) for NPC chatter |
 | S181 | CAMEO_SHELLY_DONE | "Lost in the Gossamer" complete (Ch3, after Gym 2) |
 | S182 | CAMEO_VENAM_DONE | "Sewer Royalty" complete (Venam's Testimony obtained) |
@@ -183,12 +183,12 @@ Story-side proposals still waiting on Narrative Systems: `:ch20_colors` (the PC'
 | S188 | CAMEO_LIN_DONE | Lin superboss beaten (post-game) |
 | S189 | CAMEO_NOVA_DONE | Nova fought (Ruin Route) |
 | S190 | VESPER_MET_SALTMERE | Eevee Octave first meeting (Ch2) |
-| S191 | VESPER_MET_LUCENT | Eevee Octave second meeting (Ch13); the Festival exhibition needs both |
+| S191 | VESPER_MET_LUCENT | Eevee Octave second meeting (Ch13). SPINE Rev 19: the gauntlet no longer needs S190/S191; it opens when all eight singers are helped (Trials state `octave_ready`) |
 | S192 | WAR_CUTSCENE_SEEN | WAR-1 has played (enables skip and theater replay) |
 | S193 | RUIN_ROUTE_ACTIVE | Event-page mirror of Core's `ruin_route` (Core-written, read-only) |
 | S229 | Mirror: Rowan alive (`ROWAN_ALIVE`) | Rowan vs Teo/Thistle NPC pages in Acts IV–V (Core-written) |
 | S230 | Mirror: war outcome is a victory for Ashkaar | Banner events at Skaldfast and the Festival pavilions (Core-written) |
-| S231 | Mirror: war outcome is a victory for Isenmar | Same |
+| S231 | Mirror: war outcome is a victory for Isenmar | Banner events over the Ashkaar Siege Camp (924) and the Festival pavilions (Core-written) |
 | S232 | Mirror: `WAR_BOTH_BROKEN` | Empty pavilions for both kingdoms |
 
 S181–S193 use part of the block previously reserved for per-Warden side-arc steps; S194–S220 remain reserved for those. V122–V123 use two of the reserved chapter counters.

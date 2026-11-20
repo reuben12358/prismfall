@@ -261,7 +261,8 @@ def main():
     add('web_taut', HA.web('taut'), 0); add('web_sticky', HA.web('sticky'), 0)        # webs are events; the tiles are walkable
     add('web_anchor_l', HA.web_anchor('l'), 15); add('web_anchor_r', HA.web_anchor('r'), 15)
     for p in ('tl', 'tr', 'bl', 'br'): add('knot_hole_' + p, HA.knot_hole(p), 15)
-    for nm_, t in (('cocoon_top', 17752), ('cocoon_bot', 17753)):     # silk cocoons hung over the drop: solid copies
+    for nm_, t in (('cocoon_top', 17752), ('cocoon_bot', 17753), ('strand_w_top', 17755), ('strand_w_bot', 17757),
+                   ('strand_p_top', 17754), ('strand_p_bot', 17756)):     # silk cocoons and dyed lengths hung over the drop: solid copies
         k = t - 384; add(nm_, pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32)), 15)
     for t in BARK:                                                  # the elder's bark, for the hollow's walls (PF Rejuv pf part)
         k = t - 384; tile = pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32))

@@ -62,7 +62,7 @@
 | 4 | Lumen City | "The Lowlight's glass took three more streets before the dark came. Rook reads the names on air every year." |
 | 5 | Duneholt | "The well never refilled. The caravans left by the east gate, in order of age." |
 | 6 | Mirefen | "The mire went clear and killed everything that had learned to live in it. Corvin's Ward was empty by then." |
-| 7 | Cindervault | "Mount Cinder went cold with its forges full. Brann's last blade is still in the stone." |
+| 7 | Cindervault | "The Cinderhorn went cold with its forges full. Brann's last blade is still in the stone." |
 | 8 | Ironreach | "The shafts fell in on the Pit. Kaito dug for nine days." |
 | 9 | Verdance | "Autumn came all at once, and winter the same week. Juno planted anyway." |
 | 10 | Rimeholt | "The lake let go. The Holdfast is an island now, and Anja lights its beacon for nobody." |

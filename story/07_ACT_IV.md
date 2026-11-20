@@ -8,7 +8,7 @@
 
 **Act-opening state (after the Fault):**
 - The Bleed has leapt forward everywhere. Briarwick's Glasswood has reached the looms. The Lowlight's glass has spread a block. Saltmere, never once touched by Bleed, has a glass puddle on the promenade, and Dorian has roped it off as "our first miracle, darlings".
-- News screens show the **north coast**: the sea pulled back from Zenith's cliffs, and drowned Aurelia's golden spires standing in the mud below Underveil.
+- News screens show the **south coast**: the sea pulled back from Zenith's cliffs, and drowned Aurelia's golden spires standing in the mud below Underveil.
 - The Concert of Regions announces it will decide on **Severance** at the Festival.
 
 > **Revision 7 (comedy):** each chapter here has a scripted funny scene in `15_COMEDY.md` §4 (Ch14–17), plus running gags (§3) and optional kingdom bits (§5). Place each scene where its heading says, and never inside the beats §1 lists as joke-free.
@@ -21,7 +21,7 @@
 
 **Arrival: Ossaria, second visit (escalation).**
 - Cragholm is a canyon wall of lamplit galleries and lift-cages. **Prince-Elector Kassan** has sold its seams to Meridian. Linesmen and Directorate guards stand at the main lifts, and Meridian's new **Lattice-drill** chews into the Stone Plate's crystal halls.
-- The miners are sullen and terrified. Many of them are refugees: Isenmar families from the Thaw, and Nadir families fleeing Mandate raids.
+- The miners are sullen and terrified. Many of them are refugees: Isenmar families from the Thaw, Ossarian well-folk driven off the western dunes by two foreign armies, and Nadir families fleeing Mandate raids.
 - Warden **Bastian Ore** (74, a miner's lamp on his hat, pretending to be deaf to Directorate questions) greets the PC like a grandson: "Ilsa sent you? Sit down, I'm telling you about the crown."
 - **Pip Ore** (14), his granddaughter, runs lamp-errands and is the fastest talker in Ossaria. She's the PC's guide through the deep seams.
 
@@ -31,7 +31,7 @@
 - Lantern Hollow faithful: **Rowan**, gaunt (or their new leader, if he drowned), with **Wick** and **Thistle**.
 - **Corvin's field hospital**, if `CORVIN_FREED`. That flag comes from the Act III side quest "The Doctor's Cell", available Ch11–13: Corvin was arrested under the Mandate for treating Hollow wounded, and the PC can free him from a Directorate holding barge on Lake Sallow. If he wasn't freed, the hospital is run by a frightened **Wenlow** alone, and Corvin's absence is felt.
 
-**Anja** arrives on the second day with a column of Rimeholt refugees, frostbitten and furious at herself. If she was exposed in Ch11 she won't meet the PC's eyes, and if she confessed she shakes their hand. This is her second encounter before the Festival.
+**Anja** arrives on the second day with a column of Rimeholt refugees, frostbitten and furious at herself. Ossarian bone-carters walked them east across the lines under their white banner, the one flag both armies let pass. If she was exposed in Ch11 she won't meet the PC's eyes, and if she confessed she shakes their hand. This is her second encounter before the Festival. When she leaves, she goes west to the front, to Skaldfast (`:war_prisoner`, Ch15–16).
 
 Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he and Juno (if she's visited) don't speak, but they sit at the same table. If he drowned, Juno sits with Thistle, who was with him at the end.
 
@@ -54,12 +54,17 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 3. **Thistle defects openly to the PC's side**, earlier and warmer at high Hollow Standing. Her Pokémon hold the lift-shaft while refugees escape.
 4. **CHOICE `:ch14_marchetti`:** after her defeat, the PC can show Marchetti the **Splitter Casing** or the Ironreach comm-device: "Your own Special Accounts bombed Skyreach." With either item, `MARCHETTI_TURNED` becomes possible. She doesn't turn now. She just goes very still, and in the Festival hijack she stands down. Without the evidence, she remains loyal.
 
-**Transit (segment 13), Ossaria: Duneholt Undersands and Groudon.**
+**Transit (segment 13), Ossaria: Duneholt at the war's edge, the Undersands and Groudon.**
 - On the road to Gravenmoor, the PC passes back through Duneholt. The aquifer has *gone*, the great well is a dry shaft, and Meridian's deep drill has punched through into something hot.
+- **The war is a day's ride west.** Ashkaar's supply columns go round the city on the Lease's roads, and Kassan's notices of neutrality hang on the Sandgate over older ones about the drilling. The caravans are leaving by the east gate, one house at a time. (14_WAR_AND_BLESSING Part B, "Ossaria".)
+- **Prince-Elector Kassan** receives the PC in the Hall of Audience (206), between a Meridian paymaster and two foreign quartermasters, Isenmar's and Ashkaar's, who are not speaking to each other. He is delightful. He shows the PC **the Elector's Lease** as if it were a wedding present: *"The Bone Sands have buried every army that ever marched into them. I only charge for the plot."*
+- **The bone-carters** load their carts at the west gate under the white bone-banner. Their elder asks the one who can walk in the glass to bring out the dead their carts can't reach (optional, from their camp on the Dry Tide).
+- **War 2, `:war_convoy`:** Marisol's sledges are waiting in the bazaar. The caravan-mothers will lead them west to the Steamline's edge, and the PC walks them through.
 - **Duneholt Undersands** (783, `:DESERT`) opens.
 - **Boss battle: Groudon** (multi-bar), woken by the drills, in a chamber of Unown glyphs that record Theodric's "Year of Two Weathers".
 - Sahar is with the PC, and she reads the glyphs mid-fight (story text between bars): *"The King woke the red one and the blue one to remake the land. When they would not obey, he turned his eyes to heaven."*
 - After the battle, Groudon sinks back into the earth. The aquifer starts, very slowly, to refill. This is the first good news in an act.
+- Sahar sits down in the dust and looks west: "The King woke the red one and the blue one. Someone's going to bring the blue one here again, you know. The sand remembers the sea. It doesn't want it back."
 - **Stonesleep** (788): the fossil beds exposed by the collapse. Rare fossils go to the Dig Lab.
 
 **Cliffhanger:** At the Antumbra border on Hindmoor, Kestrel's Meridian airship passes overhead toward Gravenmoor. Pip: "That's a sponsor ship. Who'd sponsor a *graveyard*?"
@@ -69,6 +74,8 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 ## CHAPTER 15 — "The Hollow Cathedral" (The Jawbone Ridge → Hindmoor → Gravenmoor, Gym 14; K6; Vane Hall; Giratina)
 
 **Location:** The Jawbone Ridge (`:MOUNTAIN`), Hindmoor (Antumbra moors, fog), **Gravenmoor** (Antumbra, `:HOLLOW_CATHEDRAL`), **Vane Hall** (haunted house), the **Lantern Hospice**, the barrows, then on the way out **Barrow of the Wardens** and **Giratina's Reverse Depths** (806, `:INVERSE`), **The Hush** (808).
+
+**The road.** On the Jawbone Ridge the war's smoke stands on the western sky. A Gale Post courier catches the PC at Vigil with the news, **the Siege of Skaldfast**, and with Anja's name on the list of the taken (`:war_prisoner`, 14_WAR_AND_BLESSING).
 
 **Arrival: Antumbra, second visit.** Gravenmoor is fog, barrows and lanterns. The Spooky Plate makes the dead *linger as echoes*: a woman sweeping a step that isn't there, two children playing a game that ended in AF 211.
 - **Archseer Dask** has come to Gravenmoor himself (his second encounter, needed for the Ruin Route): "The echoes are louder. Louder, the echoes. Something behind the Glass is listening back."
@@ -183,7 +190,7 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 ## CHAPTER 17 — "The Drowned Crown" (The Hanging Stair → The Drownings → Seabed → Underveil, Gym 16; Aurelia; Voss)
 
 **Location:**
-- The Hanging Stair (`:SCRAPYARD`), the Drownings (`:WATER_SURFACE`, the drained north coast), **Under the Drownings** (`:UNDERWATER`, Dive).
+- The Hanging Stair (`:SCRAPYARD`), the Drownings (`:WATER_SURFACE`, the drained south coast), **Under the Drownings** (`:UNDERWATER`, Dive).
 - **Underveil** (Nadir's heart, `:NEW_MOON`), the **Moon Market**.
 - **Aurelia** (824 `:UNDERWATER` / 825–826 `:CAVE`), the **Sun Court**.
 - **Ironbloom** (828, `:BLEED`: rust that flowers).

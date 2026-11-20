@@ -953,6 +953,13 @@ def pieces_late3():
     return tdraw.city_pieces()
 
 
+def pieces_late4():
+    """sixth block (map builder 10): the nature kit for the crafted roads (ndraw.py): ledges, coast detail, chalk sea
+    arches and stacks, landmarks, silk, mechanics.  rcustom dedups identical tiles in this block."""
+    import ndraw
+    return ndraw.pieces()
+
+
 if __name__ == '__main__':
     ps = pieces()
     ims = [(n, im.resize((im.width * 2, im.height * 2), Image.NEAREST)) for n, (im, c, dr) in ps.items()]

@@ -103,6 +103,7 @@ class CanopyModel(Model):
                 n = (m, x + dx, y + dy)
                 if n not in self.cells: continue
                 ch = HALL[n[2]][n[1]]
+                if not self.step_ok((m, x, y), n, v): continue
                 if ch in 'wsABC' and web_kind(ch, v) == 'w':
                     kind, (lx, ly) = throw(n[1], n[2], (dx, dy), v)
                     land = (m, lx, ly)

@@ -224,11 +224,11 @@ Quiet Hours relationship scenes (10_CHOICES_ENDINGS §7.1) add `+1` to their Bon
 ### 4.3 The Ashkaar–Isenmar War (SPINE Revision 6) — proposed keys; the story lead places the chapters (Act III–IV)
 ```ruby
 CHOICES.merge!({
-  :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: the PC sees the Dominar's legions massing at Frostfang Pass before anyone else knows" },
-  :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's fleet asks the Unimprinted to walk a convoy through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
-  :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held by Ashkaar) and the Dominar's nephew (held by the Thane)" },
+  :war_warning   => { :values => [:warn_isenmar, :warn_ashkaar, :warn_both, :silent], :once => true, :description => "War 1: from Frostfang Pass the PC sees the Dominar's legions massing on Ossaria's western dunes before anyone else knows" },
+  :war_convoy    => { :values => [:relief, :arms, :refuse], :once => true, :description => "War 2: Marisol's siege-runners ask the Unimprinted to walk a sledge convoy from Duneholt through the Steamline into besieged Skaldfast: food, or harpoon-guns" },
+  :war_prisoner  => { :values => [:free, :exchange, :leave], :once => true, :description => "War 3: a captured Warden (Anja, held in the Ashkaar Siege Camp) and the Dominar's nephew (held by the Thane in Skaldfast)" },
   :war_legend    => { :values => [:calm_kyogre, :wake_reshiram, :neither], :once => true, :description => "War 4: each side begs the PC to bring its legend to the front" },
-  :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Shattered Ice" },
+  :war_climax    => { :values => [:stand_between, :back_ashkaar, :back_isenmar], :once => true, :description => "War 5 (MAJOR): the beam clash on the Glass Dunes" },
   :war_terms     => { :values => [:mercy, :reparations, :occupation], :once => true, :description => "War 6: what the PC argues for at the armistice table in Skaldfast (only if one side won)" },
   # the story lead's two Blessing keys (14_WAR_AND_BLESSING Part A)
   :ch20_colors   => { :values => [:elowen, :zenith, :nadir, :unsworn], :once => true, :description => "Ch20 Day 0: whose colors the Unimprinted challenger wears (flavor + one delta)" },
@@ -263,15 +263,16 @@ DERIVED_FLAGS.merge!({
   :ASHKAAR_EMBITTERED => "flag(:WAR_BOTH_BROKEN) || (flag(:WAR_ISENMAR_WON) && choice(:war_terms) != :mercy)"
 })
 ```
-- **Cutscene variants** (Prismfall Cutscenes): the climax always contains the beam clash (Reshiram's Blue Flare vs Kyogre's Origin Pulse if
-  `:war_legend` woke/failed to calm them; otherwise Sigrun's Salamence Draco Meteor vs Anja's Mamoswine/Marisol's Gyarados Hydro Pump–Blizzard).
+- **Cutscene variants** (Prismfall Cutscenes): the climax always contains the beam clash, on the Glass Dunes in Ossaria (Rev 18). It is Reshiram's
+  Blue Flare vs Kyogre's Origin Pulse out of the flood-sea Kyogre drags into the desert, unless `:war_legend` is `:neither`, the one value that keeps both
+  legends away; then there is no flood, and it is Sigrun's Salamence Draco Meteor vs Anja's Mamoswine/Marisol's Gyarados Hydro Pump–Blizzard.
   Ending frame by flag: `WAR_STOPPED` (beams part around the PC), `WAR_BOTH_BROKEN` (white-out, both lines gone), a victor's banner otherwise.
 - **Consent:** `WARDEN_CONSENT` entries 3 (Marisol) and 10 (Anja) gain `&& !flag(:ISENMAR_EMBITTERED)`; entries 7 (Brann) and 18 (Sigrun) gain
   `&& !flag(:ASHKAAR_EMBITTERED)`. A beaten, unforgiven kingdom won't give up the last thing it holds. (Applied in §5's array below this note:
   Core should transcribe the four amended strings.)
 - **Endings:** `END_UNFINISHED` also fires on `flag(:WAR_OCCUPATION)` (Arceus won't bless a land with a boot on its neck) unless the Boon ends it;
   `:ch21_boon` otherwise only picks epilogue slides (reparations ended / Nadir seated on every council / the Seat dissolved); `DOMINAR_SWAYED` is false
-  if `WAR_ISENMAR_WON` without `:mercy` (enforced in the §5 flag); `LANTERN_HOLDS`-style hijack help: the winning side's (or, if stopped, both sides') fleets and legions defend Crownhaven.
+  if `WAR_ISENMAR_WON` without `:mercy` (enforced in the §5 flag); `LANTERN_HOLDS`-style hijack help: the winning side's (or, if stopped, both sides') hosts and legions defend Crownhaven.
 
 ---
 
@@ -514,7 +515,7 @@ MATCH_RULES = [
       [:KESTREL, :AEGISLASH,   :attack,   "King's Shield, then the counter."],
       [:ODESSA,  :CORVIKNIGHT, :forfeit,  "She salutes and loses with style."] ] },
   { :pair => [:ANJA, :BRANN], :winner => :ANJA, :condition => "flag(:WAR_ISENMAR_WON) || (flag(:WAR_STOPPED) && choice(:war_prisoner) == :free)", :moments => [
-      [:BRANN, :COALOSSAL, :send_out,     "Two Wardens who were on opposite shores a season ago."],
+      [:BRANN, :COALOSSAL, :send_out,     "Two Wardens who were on opposite sides of the Steamline a season ago."],
       [:ANJA,  :MAMOSWINE, :beam_clash,   "Blizzard meets Flamethrower: the war's beam clash, in miniature, and this time nobody dies."],
       [:BRANN, :COALOSSAL, :faint,        "Brann laughs until he coughs. \"Aye. Ice remembers.\""] ] },
   { :pair => [:ANJA, :BRANN], :winner => :BRANN, :condition => nil, :moments => [
@@ -554,7 +555,7 @@ MATCH_RULES = [
 "Notable" = involves Juno or Kestrel, the war's two sides, or Valen. Other NPC matches show a one-line result only.
 
 ### 6.6 Exhibitions (story-met only) [CORE+ `EXHIBITION_EXTRAS`]
-The **Eevee Octave** always plays (Vesper is now met in Ch2 and Ch13), including on the Ruin Route, where it is the only exhibition.
+The **Eevee Octave** is not in this list: it is a Trials quest line (SPINE Rev 19, `design/EEVEE_OCTAVE.md`) whose gauntlet opens in the Glassfall Memorial Garden once all eight singers are helped, on every route, including the Ruin Route, where it is the only exhibition.
 ```ruby
 EXHIBITION_EXTRAS = [
   { :entrant => :PAGEANT_BOUT, :condition => "!ruin_route", :from_day => 3 },                                    # Dorian & Rook double

@@ -98,7 +98,7 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   ("Lost in the Gossamer") is stuck behind curtain 3. Freeing her is the reason most players come.
 - **As built (2026-11-19, `mapgen/puzzles/dungeons.py`, events laid over 525 by `EVENTS`, the map builder's spec untouched):**
   the lantern hollow is walled with silk round the Deepwood's north-east pocket. Outside → curtain 1 (29,8) → the thicket
-  (x30-36, y7-9; the Bug Catcher's there) → curtain 3 (34,6) → the island (Silver Powder (35,5), TM19 (39,1)); curtain 2
+  (x30-36, y7-9; the Bug Catcher's there) → curtain 3 (34,6) → the island (Silver Powder (35,5), TM19 (31,2)); curtain 2
   (31,10) is the thicket's back door; the island's own curtain (30,4) leans home. A chevron in each curtain's sag shows the
   way it lets you through (`pfp_silk`, charset `graphics/Characters/pf_silk_curtain.png`); the lantern cocoons hang in the
   silk wall beside their curtains and glow when lit. Post α (a Joltik on the anchor, (25,7)) stands outside, post β (33,9)

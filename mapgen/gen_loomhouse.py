@@ -248,6 +248,11 @@ def main():
     # cocoons hung in the drop, silk bales and drying silk on the decks, lanterns
     for x, y in ((3, 14), (19, 13), (21, 21), (3, 21), (8, 27), (17, 27), (22, 8), (8, 8)):
         if rows[y][x] == 'v' and rows[y + 1][x] == 'v': h.put(CU('cocoon_top'), x, y, 1); h.put(CU('cocoon_bot'), x, y + 1, 1)
+    for x, y, c in ((4, 12, 'p'), (15, 12, 'w'), (20, 19, 'p'), (9, 19, 'w'), (3, 26, 'p'), (21, 26, 'w'), (19, 8, 'p'), (8, 4, 'w')):
+        if rows[y][x] == 'v' and rows[y + 1][x] == 'v' and (x, y) not in C.WEBS and (x, y + 1) not in C.WEBS:   # dyed silk drying in the drop
+            h.put(CU('strand_%s_top' % c), x, y, 1); h.put(CU('strand_%s_bot' % c), x, y + 1, 1)
+    h.obj('web', 15, 1); h.put(CU('cocoon_top'), 23, 4, 1); h.put(CU('cocoon_bot'), 23, 5, 1)            # Tamsin's ledge
+    h.obj('silk1', 15, 7); h.obj('lantern', 15, 4)
     h.stamp('hb_dyeline', 1, 29); h.stamp('hb_rugline', 20, 29)
     h.obj('lantern', 4, 30); h.obj('lantern', 19, 30); h.obj('lantern', 1, 22); h.obj('lantern', 23, 15)
     h.obj('silk1', 23, 17); h.obj('silk', 1, 24); h.obj('silk1', 23, 10); h.obj('vat_y', 22, 24); h.obj('vat_r', 23, 24)

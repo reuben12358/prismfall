@@ -77,6 +77,30 @@ SNOW = [('cliff_sh', 'rejuvenation', 'Sheridan_2', list(range(1624, 1664)), 'cli
         ('cave_sh', 'rejuvenation', 'Sheridan_2', list(range(616, 648)), 'cliff')]
 
 
+# map builder 10: chalk copies of the cliff kits (Lacecliff Walk's white cliffs): earth and rock -> chalk by brightness
+CHALK = [('cliff_ak', 'rejuvenation', 'Route 4', list(range(440, 480)), 'chalk'),
+         ('cliff_sh', 'rejuvenation', 'Sheridan_2', list(range(1624, 1664)), 'chalk'),
+         ('rock_ak', 'rejuvenation', 'Route 4', [384 + r_ * 8 + c_ for r_ in (17, 18, 19) for c_ in (0, 1, 2)] +
+          [384 + r_ * 8 + c_ for r_ in (39, 40) for c_ in (5, 6)] + [384 + r_ * 8 + 2 for r_ in (20, 21)], 'chalk')]
+# chalk rock stamps (sheet rectangles of Route 4, as in rstamps.yaml's nt_rock_big / nt_boulder / nt_pebbles)
+CHALK_STAMPS = {'ck_rock_big': (0, 17, 3, 3, 1), 'ck_boulder': (5, 39, 2, 2, 0), 'ck_pebbles': (2, 20, 1, 2, 0)}
+CHALK_RAMP = [(92, 90, 104), (128, 126, 136), (162, 160, 164), (190, 188, 184), (214, 212, 204), (234, 232, 224)]
+
+
+def chalkify(im):
+    """recolour a cliff tile: browns / mauves -> the chalk ramp (dark crevices stay a cool grey); grass caps untouched"""
+    px = im.load()
+    for yy in range(im.height):
+        for xx in range(im.width):
+            r, g, b, a = px[xx, yy]
+            if not a: continue
+            h, s_, v = colorsys.rgb_to_hsv(r / 255., g / 255., b / 255.)
+            if (h < 0.14 or h > 0.85) and s_ > 0.08:
+                t = max(0.0, min(0.999, (v - 0.20) / 0.50))
+                px[xx, yy] = CHALK_RAMP[int(t * len(CHALK_RAMP))] + (a,)
+    return im
+
+
 def main():
     ts33 = R.tilesets()[33]; tc = R.TileCache(ts33)
     want = {}
@@ -194,6 +218,18 @@ def main():
     k0 = k
     k = draw_in(rdraw.pieces_late3(), k, dedup=True)       # map builder 8: the city kit (tdraw.py), deduplicated
     print('city kit tiles', k - k0)
+    k0 = k
+    k = draw_in(rdraw.pieces_late4(), k, dedup=True)       # map builder 10: the nature kit (ndraw.py), deduplicated
+    print('nature kit tiles', k - k0)
+    chalk = {}                                             # map builder 10: chalk copies of the cliff kits (Lacecliff)
+    for key, game, sheetname, srcs, mode in CHALK:
+        src = Image.open(os.path.join(RC.RR.GAMES[game], 'Graphics', 'Tilesets', sheetname + '.png')).convert('RGBA')
+        t = RC.RR.tileset(game, {'Sheridan_2': 126, 'Route 4': 211}[sheetname])
+        for sid in srcs:
+            i = sid - 384; tile = src.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32))
+            sheet.paste(chalkify(tile.copy()), ((k % 8) * 32, (k // 8) * 32))
+            props[k] = (t['passages'][sid], t['priorities'][sid], t['terrain_tags'][sid] if t['terrain_tags'][sid] <= 16 else 0)
+            chalk['%s:%d' % (key, sid)] = k; k += 1
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
@@ -221,6 +257,16 @@ def main():
     for n, (w, h, lay) in extra.items():
         out[n] = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['pf33x', n])
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
+    out['_chalk'] = {k2: base + v for k2, v in chalk.items()}
+    r4 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Route 4.png')).convert('RGBA')
+    for n, (c0, r0, w, h, top) in CHALK_STAMPS.items():
+        lay = [[[0] * w for _ in range(h)] for _ in range(3)]
+        for dy in range(h):
+            for dx in range(w):
+                sid = 384 + (r0 + dy) * 8 + c0 + dx; i = sid - 384
+                if r4.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32)).getbbox() is None: continue
+                lay[2 if dy < top else 1][dy][dx] = base + chalk['rock_ak:%d' % sid]
+        out[n] = dict(w=w, h=h, layers=lay, src=['chalk', n])
     out['_ship_dovetail'] = {'tiles': [[x, y, z, base + t] for x, y, z, t in dove if t]}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}
     out['_singles'] = {k: base + idmap[v] for k, v in SINGLES.items()}
