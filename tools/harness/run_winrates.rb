@@ -51,28 +51,53 @@ end
 
 module WR
   STARTERS = { "Grass" => [:BULBASAUR, :IVYSAUR], "Fire" => [:CHARMANDER, :CHARMELEON], "Water" => [:SQUIRTLE, :WARTORTLE] }
-  # What a player can have caught before each fight (SPINE Rev 16: no counter to the next Warden is handed out, so
-  # the pools hold only what the availability doc gives at that point). Edit with design/POKEMON_AVAILABILITY.md.
+  # What a player can have caught before each fight, weighted by how often the player meets it: the best wild rate of
+  # each land / cave / Headbutt species on the maps walked before that fight (pbs/encounters.txt after the SPINE Rev 16
+  # distribution pass; fishing-only species left out) plus the hand-outs of design/POKEMON_AVAILABILITY.md 2a and
+  # EVENT_POKEMON.md. Gated answers keep their 2-4% weight, so a realistic team holds one only now and then.
+  # Regenerate the wild part with /home/claude/work/trainers2/pools.py-style counting if the tables change.
   POOLS = {
-    # Ch1 (520 Ferrymen's Mile, 521 Windfall Row) + the Strand Road (527/528) + Ch1 gifts. No Fighting type before Gym 1.
-    :ch1_2 => [:FLETCHLING, :SHINX, :LITLEO, :NIDORANmA, :NIDORANfE, :PIKIPEK, :NICKIT, :SMOLIV, :WATTREL, :CHARCADET,
-               :LILLIPUP, :BOUNSWEET, :ROLYCOLY, :ZIGZAGOON, :PIDOVE, :SKWOVET],
-    # + after Gym 1: Eevee "Understudy", the Weavers' Road (541/552/540/544-545/524) and the Saltmere gifts.
-    :ch3   => [:EEVEE, :SHINX, :NIDORANmA, :PIKIPEK, :NICKIT, :SMOLIV, :WATTREL, :LILLIPUP, :BOUNSWEET, :RALTS,
-               :KECLEON, :BUNNELBY, :MACHOP, :FLABEBE, :SURSKIT, :MAREEP, :TIMBURR, :FLETCHLING],
-    # + after Gym 2: the Hoar Road (566/577/578), Frostwick, the Rimewood, the Gullcry Cliffs.
-    :ch4   => [:EEVEE, :LUXIO, :NIDORINO, :TRUMBEAK, :MACHOP, :KECLEON, :RALTS, :HERACROSS, :SNOVER, :STANTLER, :TEDDIURSA,
-               :DEERLING, :CUBCHOO, :SNOM, :FLETCHINDER, :MAREEP, :SKIDDO, :WINGULL]
+    # Before Gym 1 / J1 (0 badges): 520, 521, 522, 527, 528, Saltmere. No Fighting type at all; Ghost = Sandygast 3%.
+    :ch1_2 => { :PIDOVE => 17, :HOOTHOOT => 20, :PIKIPEK => 15, :WINGULL => 15, :SKWOVET => 20, :LILLIPUP => 15,
+                :NICKIT => 25, :MEOWTH => 15, :SPINARAK => 18, :TAROUNTULA => 15, :GOSSIFLEUR => 15, :ODDISH => 15,
+                :BOUNSWEET => 12, :SMOLIV => 12, :ZIGZAGOON => 12, :BUNEARY => 12, :NIDORANmA => 10, :NIDORANfE => 10,
+                :POOCHYENA => 10, :LECHONK => 15, :WOOLOO => 13, :NYMBLE => 13, :CUTIEFLY => 10, :NOIBAT => 10,
+                :FIDOUGH => 9, :TANDEMAUS => 16, :SQUAWKABILLY => 20, :COMBEE => 30, :KECLEON => 15,   # lantern quest
+                :FLETCHLING => 4, :SHINX => 4, :NACLI => 4, :DWEBBLE => 4, :ROLYCOLY => 3, :LITLEO => 3,
+                :BUNNELBY => 3, :SANDYGAST => 3 },
+    # Before Gym 2 (1 badge): + the Weavers' Road (541, 544/545, 552, 540, 546, 524) and the Badge-1 hand-outs.
+    :ch3   => { :EEVEE => 60, :ABRA => 20, :TIMBURR => 25, :CRABRAWLER => 20, :RALTS => 15, :SMEARGLE => 10, :PONYTA_G => 10,
+                :PIDOVE => 17, :HOOTHOOT => 20, :PIKIPEK => 15, :WINGULL => 15, :SPEAROW => 10, :DODUO => 12, :DUCKLETT => 8,
+                :NICKIT => 15, :MEOWTH => 15, :LILLIPUP => 15, :SKWOVET => 15, :SHUPPET => 20, :FLABEBE => 18, :ZUBAT => 18,
+                :GREAVARD => 18, :VENONAT => 15, :PHANTUMP => 15, :KARRABLAST => 15, :SHELMET => 15, :WHISMUR => 15,
+                :DUSKULL => 15, :COTTONEE => 14, :WOOBAT => 13, :MACHOP => 13, :MINCCINO => 13, :SMOLIV => 12,
+                :BOUNSWEET => 12, :SENTRET => 12, :SUNKERN => 12, :SABLEYE => 12, :MAWILE => 12, :SINISTEA => 12,
+                :GASTLY => 12, :NIDORANmA => 10, :MANKEY => 10, :STUNKY => 10, :PURRLOIN => 10, :SNUBBULL => 10,
+                :FOONGUS => 10, :MORELULL => 10, :SURSKIT => 9, :SEWADDLE => 8, :PETILIL => 8, :SKIDDO => 8, :MEDITITE => 8,
+                :KECLEON => 10, :COMBEE => 30, :SQUAWKABILLY => 20,
+                :FLETCHLING => 4, :SHINX => 4, :NACLI => 4, :DWEBBLE => 4, :ROLYCOLY => 3, :LITLEO => 3, :SIZZLIPEDE => 3,
+                :ROGGENROLA => 4, :ARON => 4, :MAREEP => 5 },
+    # Before K2 / Gym 3 (2 badges): + Deepwood, Cocoonfall, the Hoar Road, Frostwick, the Rimewood, Gullcry, Rock Smash
+    # and the Badge-2 hand-outs (Charcadet, Litleo, Sudowoodo, Heracross or Pinsir, Spidops, Snom, Ditto).
+    :ch4   => { :EEVEE => 60, :ABRA => 15, :TIMBURR => 20, :CRABRAWLER => 15, :RALTS => 15, :PONYTA_G => 10,
+                :CHARCADET => 15, :LITLEO => 15, :SUDOWOODO => 10, :HERACROSS => 10, :PINSIR => 8, :SPIDOPS => 10, :SNOM => 15,
+                :DWEBBLE => 50, :NACLI => 45, :ROGGENROLA => 30, :BINACLE => 20, :SNORUNT => 18, :SNOVER => 16, :SKIDDO => 15,
+                :SHUCKLE => 15, :DEERLING => 14, :CUBCHOO => 14, :SMOOCHUM => 14, :TEDDIURSA => 12, :GLAMEOW => 12,
+                :SPHEAL => 12, :YANMA => 12, :LEDYBA => 12, :DUCKLETT => 12, :DODUO => 12, :PIDOVE => 17, :WINGULL => 17,
+                :HOOTHOOT => 20, :SHUPPET => 20, :ZUBAT => 18, :GREAVARD => 18, :MACHOP => 13, :MANKEY => 10, :NICKIT => 15,
+                :LILLIPUP => 15, :FLABEBE => 18, :VENONAT => 15, :PHANTUMP => 15, :MAWILE => 12, :SABLEYE => 12,
+                :SWABLU => 10, :SNEASEL => 5, :STANTLER => 6, :SPINDA => 10, :DUNSPARCE => 10, :KECLEON => 10,
+                :SHINX => 4, :MAREEP => 5, :JOLTIK => 5, :BLITZLE => 4, :GRUBBIN => 4 }
   }
   # TMs the story has handed over by then (TM42 Facade from Dorian, TM98 Rock Smash at Brinecut, TM89 U-turn from Tamsin):
   # each goes to the first party member that can learn it, replacing its weakest move.
   TMS = { :none => [], :g2 => [:FACADE, :ROCKSMASH], :g3 => [:FACADE, :ROCKSMASH, :UTURN] }
-  # A PREPARED player (PRISM_PREPARED=1): the same rules, but the catches are the best type answers the availability
-  # doc allows by then (resists / super-effective STAB vs the Warden's type), not a random handful.
+  # A PREPARED player (PRISM_PREPARED=1): grinds every catch to the cap, keeps its strongest moves and hunts the best
+  # type answers the availability doc allows by then (rare finds included), first listed first.
   PREPARED = {
-    :ch1_2 => [:ROLYCOLY, :SUDOWOODO, :NICKIT, :WATTREL, :CHARCADET, :LITLEO, :FLETCHLING, :SHINX],
-    :ch3   => [:ROLYCOLY, :FLETCHLING, :LITLEO, :CHARCADET, :WATTREL, :EEVEE, :KECLEON, :RALTS],
-    :ch4   => [:LUXIO, :WATTREL, :MAREEP, :SMOLIV, :BOUNSWEET, :ODDISH, :RALTS, :EEVEE]
+    :ch1_2 => [:NACLI, :DWEBBLE, :SANDYGAST, :ROLYCOLY, :NICKIT, :KECLEON, :SHINX, :FLETCHLING],
+    :ch3   => [:PONYTA, :NACLI, :DWEBBLE, :FLETCHLING, :SPEAROW, :DODUO, :HOOTHOOT, :LITLEO],
+    :ch4   => [:MAREEP, :SHINX, :JOLTIK, :SKIDDO, :SNOVER, :DEERLING, :HERACROSS, :ODDISH]
   }
   PREP = ENV["PRISM_PREPARED"] == "1"
   BAG = { :none => [], :g1 => [:POTION] * 3, :g2 => [:POTION, :POTION, :SUPERPOTION, :SUPERPOTION],
@@ -108,8 +133,33 @@ module WR
     species
   end
 
-  def self.mon(species, level, rng)
+  # Hand-outs keep their event ability, form and moves (plugins/Prismfall Trials/130_EventMons_Early.rb); level-up moves
+  # learned since then replace filler first.
+  EVENT = {
+    :KECLEON => [:PROTEAN, 13, [:FURYSWIPES, :FEINT, :BIND, :THIEF]],
+    :NICKIT => [:STAKEOUT, 7, [:QUICKATTACK, :BEATUP, :THIEF, :TAILWHIP]],
+    :TIMBURR => [:GUTS, 13, [:LOWKICK, :ROCKTHROW, :LEER, :MACHPUNCH]],
+    :CRABRAWLER => [:IRONFIST, 14, [:ROCKSMASH, :BUBBLE, :LEER, :POWERUPPUNCH]],
+    :SMEARGLE => [:TECHNICIAN, 14, [:SKETCH, :AQUAJET, :ICYWIND]],
+    :RALTS => [:TRACE, 13, [:CONFUSION, :DISARMINGVOICE, :DOUBLETEAM, :HYPNOSIS]],
+    :PONYTA_G => [:PASTELVEIL, 15, [:CONFUSION, :FAIRYWIND, :TAILWHIP, :HYPNOSIS], 1],
+    :HERACROSS => [:MOXIE, 19, [:FURYATTACK, :HORNATTACK, :REVENGE, :ENDURE]],
+    :PINSIR => [:MOXIE, 19, [:VISEGRIP, :BIND, :SEISMICTOSS, :BUGBITE]],
+    :SPIDOPS => [:STAKEOUT, 18, [:SILKTRAP, :BUGBITE, :FEINT, :ASSURANCE]],
+    :LITLEO => [:MOXIE, 19, [:EMBER, :HEADBUTT, :WORKUP, :NOBLEROAR]],
+    :CHARCADET => [:FLAMEBODY, 18, [:EMBER, :CLEARSMOG, :FIRESPIN, :WILLOWISP]],
+    :SUDOWOODO => [:ROCKHEAD, 20, [:ROCKTHROW, :FLAIL, :FAKETEARS, :COPYCAT]],
+    :SNOM => [:ICESCALES, 15, [:POWDERSNOW, :STRUGGLEBUG, :MIRRORCOAT, :FAIRYWIND]]
+  }
+  EVENT_IN = { :ch1_2 => [:KECLEON, :NICKIT], :ch3 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :SMEARGLE, :RALTS, :PONYTA_G],
+               :ch4 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :RALTS, :PONYTA_G, :HERACROSS, :PINSIR, :SPIDOPS,
+                        :LITLEO, :CHARCADET, :SUDOWOODO, :SNOM] }
+
+  def self.mon(species, level, rng, pool = nil)
+    ev = (pool && EVENT_IN[pool]&.include?(species)) ? EVENT[species] : nil
+    species = :PONYTA if species == :PONYTA_G
     p = Pokemon.new(evolve(species, level), level)
+    p.form = ev[3] if ev && ev[3]
     GameData::Stat.each_main { |s| p.iv[s.id] = 5 + rng.rand(21) }
     p.nature = GameData::Nature.keys.sample(random: rng)
     learned = p.species_data.moves.select { |lv, _m| lv <= level }.map { |_lv, m| m }.uniq.reverse
@@ -129,6 +179,11 @@ module WR
       keep = learned.reject { |m| FILLER.include?(m) }.first(4)
     end
     keep += (learned - keep).first(4 - keep.size) if keep.size < 4
+    if ev
+      p.ability = ev[0] if p.species_data.abilities.include?(ev[0]) || p.species_data.hidden_abilities.include?(ev[0])
+      newer = p.species_data.moves.select { |lv, _m| lv > ev[1] && lv <= level }.map { |_lv, m| m }.uniq.reverse
+      keep = (newer.reject { |m| FILLER.include?(m) } + ev[2].reject { |m| FILLER.include?(m) } + ev[2]).uniq.first(4)
+    end
     p.forget_all_moves
     keep.reverse.each { |m| p.learn_move(m) }
     p.calc_stats
@@ -140,11 +195,21 @@ module WR
     f = FIGHTS[fight]
     st = starter_lines[f[:stage]] || starter_lines[0]
     list = [[st, f[:cap]]]
-    pool = (PREP ? PREPARED : POOLS)[f[:pool]]
-    catches = PREP ? pool.first(f[:size] + 1).shuffle(random: rng).first(f[:size] - 1) : pool.shuffle(random: rng).first(f[:size] - 1)
+    if PREP
+      catches = PREPARED[f[:pool]].first(f[:size] + 1).shuffle(random: rng).first(f[:size] - 1)
+    else   # weighted draw without replacement
+      bag_w = POOLS[f[:pool]].to_a
+      catches = []
+      (f[:size] - 1).times do
+        tot = bag_w.sum { |_sp, w| w }
+        r = rng.rand * tot
+        i = bag_w.index { |_sp, w| (r -= w) < 0 } || (bag_w.size - 1)
+        catches << bag_w.delete_at(i)[0]
+      end
+    end
     offsets = [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
     catches.each_with_index { |sp, i| list << [sp, f[:cap] - (PREP ? 0 : offsets[i % offsets.size])] }   # prepared = grinded to the cap
-    party = list.map { |sp, lv| mon(sp, lv, rng) }
+    party = list.map { |sp, lv| mon(sp, lv, rng, f[:pool]) }
     TMS[f[:tms] || :none].each do |tm|
       pk = party.find { |pp| pp.compatible_with_move?(tm) && !pp.hasMove?(tm) }
       next if !pk

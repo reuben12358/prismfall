@@ -1470,11 +1470,11 @@ def paint_town_map(out_path):
         cx, cy = (real[0] + 0.5) * S, (real[1] + 0.5) * S
         d.ellipse([cx - 3, cy - 4, cx + 3, cy + 4], fill=(150, 130, 210), outline=(40, 30, 60))
     if getattr(G, 'WAR', None):         # crossed swords over the Glass Dunes (drawn last so nothing covers them)
-        bx, by = int(G.WAR['battlefield'][0] * S), int(G.WAR['battlefield'][1] * S)
+        wbx, wby = int(G.WAR['battlefield'][0] * S), int(G.WAR['battlefield'][1] * S)
         for sx in (-1, 1):
-            d.line([(bx - 4 * sx, by - 4), (bx + 4 * sx, by + 4)], fill=(40, 24, 20), width=3)
-            d.line([(bx - 4 * sx, by - 4), (bx + 4 * sx, by + 4)], fill=(236, 232, 224), width=1)
-        d.point([(bx - 2, by + 2), (bx + 2, by + 2)], fill=(192, 40, 30))
+            d.line([(wbx - 4 * sx, wby - 4), (wbx + 4 * sx, wby + 4)], fill=(40, 24, 20), width=3)
+            d.line([(wbx - 4 * sx, wby - 4), (wbx + 4 * sx, wby + 4)], fill=(236, 232, 224), width=1)
+        d.point([(wbx - 2, wby + 2), (wbx + 2, wby + 2)], fill=(192, 40, 30))
     # Antumbra inset
     x0, y0, x1, y1 = W.ANTUMBRA_INSET
     bx0, by0, bx1, by1 = x0 * S + 2, y0 * S + 2, (x1 + 1) * S - 3, (y1 + 1) * S - 3

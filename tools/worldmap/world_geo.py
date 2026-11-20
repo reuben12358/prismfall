@@ -92,7 +92,7 @@ FORESTS = [
 MARSHES = [(20.8, 13.35, 0.8), (21.4, 12.6, 0.4), (6.6, 17.1, 0.6), (20.3, 9.0, 0.35)]
 DESERT_DUNES = [(11.0, 2.6, 1.2), (13.6, 2.4, 1.1), (16.0, 3.2, 1.0), (14.4, 4.2, 0.8), (18.8, 4.4, 0.6),
                 (21.6, 3.4, 0.6), (9.8, 3.8, 0.6)]
-OBSIDIAN = [(23.8, 5.6, 0.85), (13.4, 2.0, 0.45)]   # the Cinderglass Barrens; the Glass Dunes (the war's battlefield)
+OBSIDIAN = [(23.8, 5.6, 0.85)]   # the Cinderglass Barrens
 SULFUR = [(21.7, 10.7, 1.0)]
 
 # zone anchors (extra Voronoi seeds that shape the kingdoms; road cells and towns are seeds too). Nadir has no surface

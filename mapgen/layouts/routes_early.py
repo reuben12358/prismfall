@@ -947,8 +947,8 @@ def build_524():
     for x, y in ((56, 66), (58, 66), (60, 66)):
         pass
     gts = 0
-    for n, x, y in (('pf_g_tree6', 24, 36), ('pf_g_tree4', 52, 24), ('pf_g_tree6', 62, 88), ('pf_g_tree4', 20, 92), ('pf_g_tree2', 66, 40), ('pf_g_tree4', 8, 26),
-                    ('pf_g_tree2', 30, 46), ('pf_g_tree6', 72, 60)):
+    for n, x, y in (('pf_g_tree4p', 24, 36), ('pf_g_tree4p', 52, 24), ('pf_g_tree4p', 62, 88), ('pf_g_tree2', 20, 92), ('pf_g_tree2', 66, 40), ('pf_g_tree4p', 8, 26),
+                    ('pf_g_tree2', 30, 46), ('pf_g_tree4p', 72, 60)):
         if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.tT'):
             m.stamp(n, x, y, mark='B', blend=True); gts += 1
     r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine'), n_trees=W * H // 220, copses=0, scatter=10)

@@ -167,6 +167,8 @@ def route5(prev=None):
             if y <= top: m.cls[y, x] = 'o'
             if y >= bot: m.cls[y, x] = 'o'
     lagoon(m, 0.5)
+    for y in range(0, 12):                                                        # map builder 9: the west end turns north to Frostwick
+        for x in range(2, 5): m.cls[y, x] = 'd'; m.ht[y, x] = 1
     m.rect(0, 12, W, 3, 'd', only='.')                                             # the causeway (rows 12-14 at both edges)
     m.rect(8, 11, 29, 1, 'd', only='.')                                            # ... riding a row higher mid-way
     m.rect(27, 11, 13, 1, 'd', only='.')                                           # it widens at the Border Stones
@@ -195,7 +197,14 @@ def route5(prev=None):
     m.stamp('fw_stone', 30, 9); m.stamp('fw_stone', 36, 9)                         # the Border Stones
     E.append(sign((30, 10), 'Border Stones', "Two old stones. One bears Elowen's briar crown, the other Isenmar's whale and axe.\n"
                   "A brass Meridian sunburst has been bolted across both of them. The bolts are new."))
-    E.append(sign((60, 11), 'Route sign', "FROSTFLAT CAUSEWAY\nW: Frostwick   E: Saltmere"))
+    E.append(sign((60, 11), 'Route sign', "FROSTFLAT CAUSEWAY\nN (at the west end): Frostwick   E: Saltmere"))
+    chain = lambda i, y: {'type': 'event', 'name': 'Customs chain %d' % i, 'at': [34, y], 'pages': [
+        {'graphic': {'tile': int(np.array(STAMPS['pf_barricade']['layers']).max())}, 'trigger': 'action', 'commands': [
+            {'if': '$game_player.x < 34', 'then': ['An Isenmar customs chain across the causeway, hooked on this side.', 'You unhook it. The chain clanks into the snow.',
+                                                     {'script': "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']] = true if ev\nend\n$game_map.need_refresh = true"}],
+             'else': ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']}]},
+        {'cond': {'self': 'A'}, 'through': True, 'commands': []}]}
+    E += [chain(i + 1, y) for i, y in enumerate((11, 12, 13, 14))]
     E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
                   "[The Rehearsal, map 568: not built yet]"))
     E += [npc((33, 10), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
@@ -258,7 +267,7 @@ def route5(prev=None):
     m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},
                       tone=[-6, -2, 10, 10],
-                      connections=[{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 32}, {'dir': 'W', 'offset': 10, 'to': 570, 'to_offset': 21}],
+                      connections=[{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 31}, {'dir': 'N', 'offset': 2, 'to': 570, 'to_offset': 4}],
                       _file='560_route5.yaml'), '# Frostflat Causeway (560). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     return m
 
@@ -422,6 +431,10 @@ def frostwick(prev=None):
     for cx, cy, n in ((6, 31, 1), (29, 15, 1), (50, 9, 2), (56, 13, 2), (24, 34, 1), (11, 33, 1), (42, 12, 1), (3, 25, 2), (58, 34, 1),
                       (4, 18, 3), (7, 15, 1), (2, 22, 1)):
         m.trees(cx, cy, n, ['pine2', 'kf_tree', 'pine2'], r=2, on='.', seed=cx * 7 + cy)
+    for y in range(LANE[1] - 1, 48):                                        # map builder 9: the South Gate lane over the ice to the Causeway
+        for x in range(4, 8):
+            if m.cls[y, x] not in 'B': m.cls[y, x] = 'd'; m.taken[y, x] = False
+    E.append(sign((8, 44), 'South Gate sign', 'SOUTH GATE - The Frostflat Causeway to Saltmere. Unhook the customs chain at the Border Stones on your way.'))
     m.greenfill(3)
     m.events = [e for e in m.events if e['type'] == 'door'] + E
     m.paint()
@@ -453,7 +466,8 @@ def frostwick(prev=None):
     m.write(570, head(570, 'Frostwick', biome='village', bgm='Lerucean Town',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 21], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},
                       tone=[-8, -4, 12, 12], fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 100, 'sx': 1, 'sy': 0},
-                      connections=[{'dir': 'N', 'offset': 20, 'to': 562, 'to_offset': 22}, {'dir': 'E', 'offset': 21, 'to': 560, 'to_offset': 10}],
+                      connections=[{'dir': 'N', 'offset': 20, 'to': 578, 'to_offset': 40}, {'dir': 'E', 'offset': 21, 'to': 577, 'to_offset': 60},
+                                   {'dir': 'S', 'offset': 4, 'to': 560, 'to_offset': 2}],
                       _file='570_frostwick.yaml'), '# Frostwick (570). WRITTEN BY layouts/rimewood.py - edit that script.\n')
     print('frostwick doors', d)
     return m
