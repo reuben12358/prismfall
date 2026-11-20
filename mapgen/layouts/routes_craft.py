@@ -471,23 +471,25 @@ def build_541():
     m.blob(4, 84, 3.5, 3.0, '.', seed=5, rough=0.3, only='wWd')
     m.blob(4, 84, 4.8, 4.2, 's', seed=6, rough=0.3, only='wW')
     m.blob(4, 84, 3.2, 2.6, '.', seed=5, rough=0.2, only='s')
-    # ---- Brinecut: the chalk cliff (east), two levels
-    for y in range(H):
-        for x in range(W):
-            e1 = 47 + 3 * (vnoise(0, y, 5413, 9.0) - 0.5) * 2
-            if x >= e1 and y <= 60 + 3 * (vnoise(x, 0, 5414, 8.0) - 0.5) * 2: m.ht[y, x] = 1
-            e2 = 57 + 2 * (vnoise(0, y, 5415, 7.0) - 0.5) * 2
-            if x >= e2 and y <= 38 + 2 * (vnoise(x, 1, 5416, 8.0) - 0.5) * 2: m.ht[y, x] = 2
+    # ---- Brinecut: the chalk shelf across the north-east, two levels, faces to the south
+    for x in range(W):
+        f1 = 34 + 3 * (vnoise(x, 0, 5414, 10.0) - 0.5) * 2 - bump(x, 40, 5, 10)
+        f2 = 19 + 2 * (vnoise(x, 1, 5416, 9.0) - 0.5) * 2 - bump(x, 48, 6, 8)
+        for y in range(H):
+            if x >= 39 and y <= f1: m.ht[y, x] = 1
+            if x >= 47 and y <= f2: m.ht[y, x] = 2
     for h in (1, 2): CK.smooth_ht(m, h, 3)
-    # ---- the marsh: pools (grass-edged water), mudflats; the salt flats (class S) in the south-west
-    for i, (cx, cy, rx, ry) in enumerate(((22, 36, 5, 3), (30, 46, 4, 2.6), (20, 52, 4.5, 3), (40, 40, 3.5, 2.5),
-                                          (40, 70, 4, 2.5), (26, 64, 3, 2), (44, 86, 3.5, 2.2))):
-        CK.pond(r, cx, cy, rx, ry, c='p', rough=0.35, seed=i)
-    for i, (cx, cy, rx, ry) in enumerate(((18, 72, 6, 4), (16, 92, 4, 3), (24, 28, 4, 2.5), (46, 96, 5, 3))):
+    # ---- the marsh: pools (grass-edged water) in clusters, mudflats; the salt flats (class S) in the south-west
+    for i, (cx, cy, rx, ry) in enumerate(((21, 38, 6.5, 3.6), (28, 46, 4.5, 3), (18, 54, 5.5, 3.2), (24, 64, 4, 2.6),
+                                          (44, 52, 5, 3.4), (50, 60, 3.5, 2.4), (44, 74, 5, 3), (52, 84, 4, 2.6), (40, 90, 3.5, 2.2))):
+        CK.pond(r, cx, cy, rx, ry, c='p', rough=0.7, seed=i)
+        CK.pond(r, cx + rx * 0.6, cy + ry * 0.5, rx * 0.5, ry * 0.6, c='p', rough=0.7, seed=i + 20)
+    for i, (cx, cy, rx, ry) in enumerate(((18, 72, 6, 4), (16, 92, 4, 3), (24, 28, 4, 2.5), (54, 96, 5, 3), (48, 42, 4, 2),
+                                          (30, 56, 3, 2), (56, 70, 4, 2.5))):
         m.blob(cx, cy, rx, ry, 'd', seed=5420 + i, rough=0.75, only='.')
-    for y in range(86, 107):
-        for x in range(10, 34):
-            if m.cls[y, x] in '.d' and ((x - 22) / 12.0) ** 2 + ((y - 97) / 10.0) ** 2 <= 1.0: m.cls[y, x] = 'S'
+    for y in range(90, 107):
+        for x in range(10, 30):
+            if m.cls[y, x] in '.d' and ((x - 20) / 10.0) ** 2 + ((y - 98) / 8.0) ** 2 <= 1.0 + 0.3 * (vnoise(x, y, 5430, 3.0) - 0.5): m.cls[y, x] = 'S'
     # ---- the causeway (gravel), the mine path, the Rest, the hide
     road = [(32.5, 109), (33, 100), (36, 90), (34, 80), (32, 70), (35, 60), (32, 50), (30, 40), (33, 28), (37, 16), (35.5, 0)]
     r.road(road, w=3.0, c='g', open_=None, only='.tTdp')
@@ -495,18 +497,20 @@ def build_541():
     for y in range(H):
         for x in range(W):
             if m.cls[y, x] == 'd' and ((y > H - 5 and 30 <= x < 36) or (y < 4 and 34 <= x < 38)): m.cls[y, x] = 'g'
-    r.lane([(34, 58), (46, 60), (53, 62)], w=2.0, c='g', open_=None, only='.tTd')         # to the mine's back door
+    r.lane([(35, 40), (44, 42), (52, 40)], w=2.0, c='g', open_=None, only='.tTd')         # to the mine's back door
+    yy = max(y for y in range(H) if m.ht[y, 61] == 1); CK.stair(r, 60, yy, w=3, h=1)    # up onto Brinecut
+    r.lane([(61, yy + 3), (58, 44), (52, 42)], w=2.0, c='g', open_=None, only='.tTd')
     r.lane([(33, 74), (22, 76), (14, 66), (13, 60)], w=2.0, c='g', open_=None, only='.tTd')  # to the Brinewife's Rest
-    r.lane([(31, 32), (40, 26), (44, 24)], w=2.0, c='g', open_=None, only='.tTd')         # to the bird hide
+    r.lane([(33, 60), (40, 62), (44, 64)], w=2.0, c='g', open_=None, only='.tTd')         # to the bird hide
     # the boardwalk maze over the pools (planks; three only laid at low water)
-    walks = [((23, 40), (23, 33)), ((23, 33), (32, 33)), ((20, 48), (20, 56)), ((20, 48), (31, 48)), ((27, 41), (27, 48)),
-             ((36, 40), (44, 40)), ((40, 66), (40, 74)), ((24, 62), (30, 62))]
+    walks = [((22, 44), (22, 33)), ((15, 38), (30, 38)), ((18, 49), (18, 60)), ((18, 49), (30, 49)), ((27, 42), (27, 49)),
+             ((39, 52), (50, 52)), ((44, 47), (44, 58)), ((40, 74), (50, 74)), ((44, 70), (44, 80)), ((20, 64), (30, 64)), ((48, 84), (56, 84))]
     for (x0, y0), (x1, y1) in walks:
         for y in range(min(y0, y1), max(y0, y1) + 1):
             for x in range(min(x0, x1), max(x0, x1) + 1):
                 if m.cls[y, x] == 'p': r.deck.append((x, y))
                 elif m.cls[y, x] in '.t': m.cls[y, x] = 'd'
-    night_planks = [(26, 33), (27, 44), (40, 70)]
+    night_planks = [(25, 38), (27, 45), (44, 77)]
     r.deck = [c for c in r.deck if c not in night_planks]
     # the Drowned Lane: from the mudflat to the islet, a cart road under the channel
     lane_y = 84
@@ -514,17 +518,20 @@ def build_541():
     for x, y in drowned: m.cls[y, x] = 'w'
     r.finish_plan(border=0)
     r.forest_band('E', 3, wobble=1.5)
-    for cx, cy, rx, ry in ((44, 8, 6, 4), (16, 10, 6, 4), (52, 76, 5, 4), (58, 96, 6, 6), (40, 104, 4, 3), (12, 40, 3, 4)):
+    for cx, cy, rx, ry in ((44, 8, 5, 3), (16, 10, 6, 4), (60, 76, 5, 4), (58, 96, 6, 6), (40, 104, 4, 3), (12, 44, 3, 4),
+                           (62, 8, 5, 4), (54, 28, 3, 2), (64, 50, 3, 4), (36, 82, 3, 2)):
         r.copse(cx, cy, rx, ry)
     # tall grass: sea-lavender and cord-grass patches on the marsh
-    CK.grass_fields(r, [(42, 50, 3.5), (38, 30, 3), (26, 22, 3), (44, 64, 3), (26, 84, 3.5), (44, 78, 3), (18, 44, 2.5),
-                        (40, 12, 3), (28, 8, 2.5), (46, 104, 2.5), (14, 30, 2.5), (38, 94, 2.5)])
+    CK.grass_fields(r, [(40, 46, 3), (26, 20, 3.5), (52, 66, 3.5), (28, 84, 4), (48, 78, 3), (14, 46, 2.5), (40, 64, 3),
+                        (28, 8, 3), (46, 104, 3), (14, 30, 2.5), (38, 96, 3), (54, 46, 3), (48, 26, 3), (60, 14, 3), (30, 72, 3),
+                        (22, 80, 2.5), (58, 90, 3), (36, 54, 2.5), (54, 10, 2.5)])
     CK.earth(r, [(36, 84, 2.5, 1.5), (30, 56, 2, 1.2), (36, 22, 2, 1.2)], c='u')
     CK.woods(r, CK.COAST, scale=10.0)
     LOW = [K.P1('cs_shoal0'), K.P1('cs_shoal1')]
     plank = C_SH497
     # ---- events
-    r.add({'type': 'warp', 'name': 'Mine back door', 'at': [55, 62], 'link': 'R4_MINE', 'arrive': [55, 63, 'down'], 'se': 'Door exit', 'fixed': True},
+    mx = 52; my = max(y for y in range(H) if m.ht[y, mx] == 1) + 2
+    r.add({'type': 'warp', 'name': 'Mine back door', 'at': [mx, my], 'link': 'R4_MINE', 'arrive': [mx, my + 1, 'down'], 'se': 'Door exit', 'fixed': True},
           sign((36, 104), 'Road sign', "THE GREY SALTINGS -- The Weavers' Road. v Saltmere (North Gate) - ^ The Dyers' Ford, Thistledown Lea & Briarwick.\nMind the pans. The pans do not mind you."),
           once('The Saltings', (33, 99), ['(Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)',
                J('neutral', 'This is where Saltmere\'s salt comes from. "Grey" is the salt before it\'s washed.'), J('neutral', "...And the weather. It's mostly the weather.")]),
@@ -536,11 +543,11 @@ def build_541():
           talk('Samphire Picker', (16, 70), 'NPC 27', ["Samphire Picker: Pick from the edges. The middle's the Plate's. Don't ask me what that means. My mother said it."]),
           talk('Children building Sandygast castles', (20, 74), 'NPC 16', ["Children: Don't step on that one! That one's ALIVE. ...That one too."]),
           talk('Sandygast', (21, 76), 'Followers/SANDYGAST', ['(A sand castle. It is watching you.)']),
-          talk('Squawkabilly watcher', (43, 27), 'NPC 09', ['Watcher: Squawkabilly. Four colours, one flock, and every one of them thinks it\'s the real one.',
+          talk('Squawkabilly watcher', (45, 65), 'NPC 09', ['Watcher: Squawkabilly. Four colours, one flock, and every one of them thinks it\'s the real one.',
                J('happy', 'Squawkabilly! Four colors! In the wild they argue about which one\'s the real one!')]),
           obj('Salt-barge wreck', (14, 20), ["The wreck of a salt barge, sunk to the gunwales in the mud. The name board says HONEST WEIGHT."]),
           hidden((16, 22), 'BIGPEARL', 'HiddenItem (salt-barge wreck)'),
-          {'type': 'event', 'name': 'Ring Boss', 'at': [44, 46], 'pages': [{'graphic': {'sprite': 'NPC 21', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+          {'type': 'event', 'name': 'Ring Boss', 'at': [56, 103], 'pages': [{'graphic': {'sprite': 'NPC 21', 'dir': 'down'}, 'trigger': 'action', 'commands': [
               {'if': 'pfm?(:crab_ring)', 'then': ["Ring Boss: Champion of the mudflat! The bucket's yours. The glory's mine."],
                'else': ['Ring Boss: Crabrawler ring! Three bouts, no biting, best of three, winner gets the bucket!',
                         {'choices': ['Step into the ring.', 'Not now.'], 'cancel': 1, 'branches': [
@@ -555,29 +562,32 @@ def build_541():
                 'else': ['The rakers say the old cart road comes up at night, when the tide goes out.']}]),
           obj("Wreckers' cache", (4, 83), ["A wreckers' cache: a tarred chest, padlocked. The lock is stamped SALTMERE HARBOUR OFFICE."]),
           item((3, 85), 'BIGPEARL'), hidden((5, 82), 'STARDUST', 'HiddenItem (the Drowned Lane)'),
-          item((10, 34), 'POTION'), item((60, 30), 'GREATBALL'), hidden((14, 100), 'PEARL', 'HiddenItem (salt pans)'),
+          item((10, 34), 'POTION'), item((60, 12), 'GREATBALL'), hidden((52, 6), 'NUGGET', 'HiddenItem (Brinecut top)'), hidden((14, 100), 'PEARL', 'HiddenItem (salt pans)'),
           obj('Low-water planks', (25, 34), ['Plank rests on the boardwalk posts, empty. The salt-rakers lay the missing boards at low water, when the pools drain.']),
           tide_controller(541, (1, 1)))
     for i, (x, y) in enumerate(drowned): r.events.append(low_water('Low water lane %d' % (i + 1), (x, y), LOW[i % 2]))
     for i, (x, y) in enumerate(night_planks): r.events.append(low_water('Low water plank %d' % (i + 1), (x, y), plank))
     for x, y in drowned + night_planks: m.taken[y, x] = True
     r.seat_events(on='.dtgSu')
-    fd = m.front('sh_cot', 13, 60, 'R4_REST', "The Brinewife's Rest door")
+    fd = m.front('sh_cot', 12, 58, 'R4_REST', "The Brinewife's Rest door")
     r.events += [e for e in m.events if e.get('link') == 'R4_REST']; m.events = []
-    m.stamp('pf_minemouth', 54, 60, mark='B')
-    m.cls[62, 55] = 'g'
+    m.stamp('pf_minemouth', mx - 1, my - 2, mark='B')
+    m.cls[my, mx] = 'g'
     r.near('gl_flat2', 26, 82, on='.dgS', r=3)                                           # the boiling-house
     r.near('fw_smoke_a', 28, 80, on='.dg', r=3)
-    r.near('gl_shed', 44, 20, on='.', r=4)                                               # the bird hide
+    r.near('gl_shed', 46, 60, on='.', r=4)                                               # the bird hide over the pools
+    hiker = None
     for n, x, y in (('hb_salt0', 14, 90), ('hb_salt1', 26, 102), ('hb_salt2', 12, 102), ('hb_salt0', 30, 94), ('hb_tubs', 10, 98),
                     ('hb_barrel', 22, 88), ('hb_salt1', 18, 104)):
         r.near(n, x, y, on='S', r=3)
     RE.pans(r, 12, 89, 32, 106, pw=(2, 6), ph=(2, 3))
-    for (x, y) in ((42, 44), (46, 44), (42, 49), (46, 49), (40, 46), (48, 46)):                 # the Crabrawler ring
+    for (x, y) in ((53, 101), (59, 101), (53, 105), (59, 105), (51, 103), (61, 103)):         # the Crabrawler ring
         r.near('dk_pebbles', x, y, on='.dt', r=1)
     ship_part_sand(r, -26, -32, 53)                                                     # HONEST WEIGHT, sunk in the mud
-    CK.props(r, ['ck_boulder', 'ck_pebbles', 'nt_rocks_s0'], 16, box=(46, 0, W, 64), clump=3, seed=7)
-    CK.props(r, ['nt_reed1', 'nt_reed0', 'nt_reed1'], 40, box=(10, 20, 48, 80), on='.d', clump=3, seed=8)
+    CK.props(r, ['ck_boulder', 'ck_pebbles', 'nt_rocks_s0'], 18, box=(38, 0, W, 40), clump=3, seed=7)
+    for (x, y) in ((44, 14), (58, 6), (64, 26)):
+        r.near('ck_rock_big', x, y, on='.t', r=3)
+    CK.props(r, ['nt_reed1', 'nt_reed0', 'nt_reed1'], 70, box=(10, 30, 60, 94), on='.d', clump=3, seed=8)
     CK.props(r, ['nt_log', 'dk_pebbles'], 10, box=(8, 20, 30, 110), on='d', clump=2, seed=9)
     CK.fringe(r, CK.FRINGE['coast'], 110, seed=1, near_forest=4)
     CK.undergrowth(r, 120, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'nt_reed1', 'ak_fern'), seed=3)

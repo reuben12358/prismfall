@@ -1,5 +1,13 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 20 (user, 2026-11-19 23:06) <<<
+**Mega Evolution is in the game,** alongside Z-moves (user: "speaking of adding z moves, u also gotta add mega evolutions").
+- Megas are earned the Reborn/Rejuvenation way:
+  - the Mega Ring comes from a story beat;
+  - Mega Stones come from quests, puzzles and exploration, after badges.
+- Wardens and bosses use Megas where it fits their theme and field.
+- Megas, Z-moves and fields must work together in battle: one Mega and one Z-move per side per battle, under EBDX.
+
 ## >>> REVISION 19 (user, 2026-11-19 18:06–21:44) <<<
 1. **The Eevee quest.** One Eevee trainer per kingdom, with the last trainer met in Crownhaven. User's assignments: fire → Flareon, water → Vaporeon, Zenith ("the piltover place") → Jolteon, the dark place (Nadir) → Umbreon. Ours: Elowen → Leafeon, Ossaria → Espeon (desert sun temple), Antumbra → Glaceon (the frozen Mirror Mere), Crownhaven (the last) → Sylveon.
    - Each trainer gets their own quest.

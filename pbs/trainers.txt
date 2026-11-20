@@ -11130,7 +11130,7 @@ Items = SUPERPOTION
 LoseText = I heard that coming. I still couldn't stop it.
 Pokemon = ESPEON,28
     Name = Noon
-    Moves = PSYBEAM,SWIFT,MORNINGSUN,BITE
+    Moves = PSYBEAM,SWIFT,QUICKATTACK,BITE
     Ability = SYNCHRONIZE
     Item = SITRUSBERRY
     Nature = TIMID
@@ -11629,7 +11629,7 @@ Pokemon = EEVEE,86
     Nature = HASTY
     IV = 20
     EV = 0
-# Ch19 war - Ashkaar siege line (map 924, Cinderglass)
+# Ch19 war - Ashkaar siege line, the earthworks (map 924, Cinderglass)
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier]
 LoseText = The Dominar will hear of this!
@@ -11672,7 +11672,7 @@ Pokemon = MAGCARGO,75
     Nature = BOLD
     IV = 20
     EV = 0
-# Ch19 war - Ashkaar siege line (map 924, Cinderglass)
+# Ch19 war - Ashkaar siege line, the earthworks (map 924, Cinderglass)
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier]
 LoseText = Hold the line - hold - oh, forget it.
@@ -11715,7 +11715,7 @@ Pokemon = NINETALES,75
     Nature = TIMID
     IV = 20
     EV = 0
-# Ch19 war - Cinder Cape Warfort (map 927, Volcanic)
+# Ch19 war - the Steamline, Ashkaar side (map 925, Cinderglass; stand between)
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier,1]
 LoseText = Tell them we burned bright.
@@ -11758,7 +11758,7 @@ Pokemon = CAMERUPT,76
     Nature = QUIET
     IV = 20
     EV = 0
-# Ch19 war - Cinder Cape Warfort (map 927, Volcanic)
+# Ch19 war - the Glass Dunes, Ashkaar crest (map 926, Desert)
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier,1]
 LoseText = My wing's still in the air. You're not done.
@@ -11768,11 +11768,11 @@ Pokemon = TALONFLAME,80
     Item = SHARPBEAK
     Nature = JOLLY
     IV = 31
-Pokemon = TURTONATOR,81
-    Moves = SHELLTRAP,DRAGONPULSE,FLAMETHROWER,SHELLSMASH
-    Ability = SHELLARMOR
+Pokemon = RHYPERIOR,81
+    Moves = HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH
+    Ability = SOLIDROCK
     Item = SITRUSBERRY
-    Nature = QUIET
+    Nature = ADAMANT
     IV = 31
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier,101]
@@ -11784,13 +11784,13 @@ Pokemon = TALONFLAME,81
     Nature = JOLLY
     IV = 31
     EV = 4,252,0,252,0,0
-Pokemon = TURTONATOR,82
-    Moves = SHELLTRAP,DRAGONPULSE,FLAMETHROWER,SHELLSMASH
-    Ability = SHELLARMOR
-    Item = SITRUSBERRY
-    Nature = QUIET
+Pokemon = RHYPERIOR,82
+    Moves = HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH
+    Ability = SOLIDROCK
+    Item = WEAKNESSPOLICY
+    Nature = ADAMANT
     IV = 31
-    EV = 252,0,4,0,252,0
+    EV = 252,252,0,0,0,4
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier,201]
 LoseText = My wing's still in the air. You're not done.
@@ -11801,7 +11801,7 @@ Pokemon = TALONFLAME,76
     Nature = JOLLY
     IV = 20
     EV = 0
-# Ch19 war - Ashkaar siege camp officer (map 924, Cinderglass)
+# Ch19 war - Ashkaar siege camp officer, the earthworks gate (map 924, Cinderglass)
 #-------------------------------
 [ASHKAAR_OFFICER,Captain]
 LoseText = Dragons bow to no Accord. ...I'm not a dragon. Go.
@@ -11884,261 +11884,519 @@ Pokemon = GARCHOMP,80
     Nature = JOLLY
     IV = 20
     EV = 0
-# Ch19 war - Skaldfast harbour (map 922, Frozen Lake)
+# Ch19 war - the Glass Dunes, Ashkaar line officer (map 926, Desert; partner double)
 #-------------------------------
-[ISENMAR_SOLDIER_M,Soldier]
-LoseText = Skaldfast stands. I don't, apparently.
-Pokemon = WALREIN,79
-    Moves = BLIZZARD,SURF,ENCORE,PROTECT
-    Ability = ICEBODY
-    Item = LEFTOVERS
-    Nature = MODEST
+[ASHKAAR_OFFICER,Captain,1]
+LoseText = Glass or sand, I held my ground. ...Your ground, now.
+Pokemon = TORKOAL,82
+    Moves = ERUPTION,EARTHPOWER,SOLARBEAM,PROTECT
+    Ability = DROUGHT
+    Item = HEATROCK
+    Nature = QUIET
     IV = 31
-Pokemon = CRABOMINABLE,80
-    Moves = ICEHAMMER,CLOSECOMBAT,ICEPUNCH,THUNDERPUNCH
-    Ability = IRONFIST
+Pokemon = COALOSSAL,83
+    Moves = ROCKSLIDE,FLAREBLITZ,HIGHHORSEPOWER,PROTECT
+    Ability = STEAMENGINE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = GARCHOMP,84
+    Moves = DRAGONCLAW,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Ability = ROUGHSKIN
+    Item = LUMBERRY
+    Nature = JOLLY
+    IV = 31
+#-------------------------------
+[ASHKAAR_OFFICER,Captain,101]
+LoseText = Glass or sand, I held my ground. ...Your ground, now.
+Pokemon = TORKOAL,83
+    Moves = ERUPTION,EARTHPOWER,SOLARBEAM,PROTECT
+    Ability = DROUGHT
+    Item = HEATROCK
+    Nature = QUIET
+    IV = 31,31,31,0,31,31
+    EV = 252,0,4,0,252,0
+Pokemon = COALOSSAL,84
+    Moves = ROCKSLIDE,FLAREBLITZ,HIGHHORSEPOWER,PROTECT
+    Ability = STEAMENGINE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+Pokemon = GARCHOMP,85
+    Moves = SCALESHOT,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Ability = ROUGHSKIN
+    Item = LIFEORB
+    Nature = JOLLY
+    IV = 31
+    EV = 4,252,0,252,0,0
+#-------------------------------
+[ASHKAAR_OFFICER,Captain,201]
+LoseText = Glass or sand, I held my ground. ...Your ground, now.
+Pokemon = TORKOAL,78
+    Moves = HEATWAVE,EARTHPOWER,SOLARBEAM,PROTECT
+    Ability = DROUGHT
+    Item = SITRUSBERRY
+    Nature = QUIET
+    IV = 20
+    EV = 0
+Pokemon = GARCHOMP,80
+    Moves = DRAGONCLAW,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Ability = ROUGHSKIN
+    Item = LUMBERRY
+    Nature = JOLLY
+    IV = 20
+    EV = 0
+# Ch19 war - the Glass Dunes, Ashkaar line (map 926, Desert; partner double with Captain 1)
+#-------------------------------
+[ASHKAAR_SOLDIER_M,Soldier,2]
+LoseText = Sand in my teeth. Glass in my boots. Worth it.
+Pokemon = CHARIZARD,81
+    Moves = HEATWAVE,OVERHEAT,AIRSLASH,SOLARBEAM
+    Ability = SOLARPOWER
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 31
+Pokemon = TYRANITAR,82
+    Moves = ROCKSLIDE,CRUNCH,HIGHHORSEPOWER,PROTECT
+    Ability = SANDSTREAM
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
 #-------------------------------
-[ISENMAR_SOLDIER_M,Soldier,100]
-LoseText = Skaldfast stands. I don't, apparently.
-Pokemon = WALREIN,80
-    Moves = BLIZZARD,SURF,ENCORE,PROTECT
-    Ability = ICEBODY
-    Item = LEFTOVERS
-    Nature = MODEST
+[ASHKAAR_SOLDIER_M,Soldier,102]
+LoseText = Sand in my teeth. Glass in my boots. Worth it.
+Pokemon = CHARIZARD,82
+    Moves = HEATWAVE,OVERHEAT,AIRSLASH,SOLARBEAM
+    Ability = SOLARPOWER
+    Item = CHARCOAL
+    Nature = TIMID
     IV = 31
-    EV = 252,0,4,0,252,0
-Pokemon = CRABOMINABLE,81
-    Moves = ICEHAMMER,CLOSECOMBAT,ICEPUNCH,THUNDERPUNCH
-    Ability = IRONFIST
+    EV = 4,0,0,252,252,0
+Pokemon = TYRANITAR,83
+    Moves = ROCKSLIDE,CRUNCH,HIGHHORSEPOWER,PROTECT
+    Ability = UNNERVE
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
     EV = 252,252,0,0,0,4
 #-------------------------------
+[ASHKAAR_SOLDIER_M,Soldier,202]
+LoseText = Sand in my teeth. Glass in my boots. Worth it.
+Pokemon = CHARIZARD,77
+    Moves = HEATWAVE,AIRSLASH,DRAGONPULSE,PROTECT
+    Ability = BLAZE
+    Item = SITRUSBERRY
+    Nature = TIMID
+    IV = 20
+    EV = 0
+# Ch19 war - the Rimed Sands, Isenmar trench-line (map 920, Desert)
+#-------------------------------
+[ISENMAR_SOLDIER_M,Soldier]
+LoseText = Skaldfast stands. I don't, apparently.
+Pokemon = MAMOSWINE,79
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,STEALTHROCK
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = SEISMITOAD,80
+    Moves = RAINDANCE,MUDDYWATER,EARTHPOWER,SLUDGEWAVE
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[ISENMAR_SOLDIER_M,Soldier,100]
+LoseText = Skaldfast stands. I don't, apparently.
+Pokemon = MAMOSWINE,80
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,STEALTHROCK
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = SEISMITOAD,81
+    Moves = RAINDANCE,MUDDYWATER,EARTHPOWER,SLUDGEWAVE
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+#-------------------------------
 [ISENMAR_SOLDIER_M,Soldier,200]
 LoseText = Skaldfast stands. I don't, apparently.
-Pokemon = WALREIN,75
-    Moves = BLIZZARD,SURF,ENCORE,PROTECT
-    Ability = ICEBODY
-    Item = LEFTOVERS
+Pokemon = MAMOSWINE,75
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,STEALTHROCK
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch19 war - the Rimed Sands, Isenmar trench-line (map 920, Desert)
+#-------------------------------
+[ISENMAR_SOLDIER_F,Soldier]
+LoseText = We froze the sand for nothing. It just keeps being sand.
+Pokemon = PELIPPER,79
+    Moves = HURRICANE,SCALD,UTURN,ROOST
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 31
+Pokemon = LUDICOLO,80
+    Moves = GIGADRAIN,HYDROPUMP,ICEBEAM,LEECHSEED
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[ISENMAR_SOLDIER_F,Soldier,100]
+LoseText = We froze the sand for nothing. It just keeps being sand.
+Pokemon = PELIPPER,80
+    Moves = HURRICANE,SCALD,UTURN,ROOST
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = LUDICOLO,81
+    Moves = GIGADRAIN,HYDROPUMP,ICEBEAM,LEECHSEED
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+#-------------------------------
+[ISENMAR_SOLDIER_F,Soldier,200]
+LoseText = We froze the sand for nothing. It just keeps being sand.
+Pokemon = PELIPPER,75
+    Moves = HURRICANE,SCALD,UTURN,ROOST
+    Ability = KEENEYE
+    Item = SITRUSBERRY
     Nature = MODEST
     IV = 20
     EV = 0
-# Ch19 war - Skaldfast harbour (map 922, Frozen Lake)
+# Ch19 war - the Steamline, Isenmar side (map 925, Cinderglass; stand between)
 #-------------------------------
-[ISENMAR_SOLDIER_F,Soldier]
-LoseText = The whale's awake and I lose to you. Some war.
-Pokemon = FROSLASS,79
-    Moves = ICEBEAM,SHADOWBALL,ICYWIND,DESTINYBOND
-    Ability = CURSEDBODY
-    Item = SITRUSBERRY
-    Nature = TIMID
-    IV = 31
-Pokemon = DEWGONG,80
-    Moves = SURF,ICEBEAM,ICESHARD,ENCORE
+[ISENMAR_SOLDIER_M,Soldier,1]
+LoseText = Ice remembers. So will I.
+Pokemon = WALREIN,80
+    Moves = SURF,ICEBEAM,ENCORE,PROTECT
     Ability = THICKFAT
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+Pokemon = GASTRODON,81
+    Moves = SCALD,EARTHPOWER,RECOVER,CLEARSMOG
+    Ability = STORMDRAIN
     Item = SITRUSBERRY
     Nature = CALM
     IV = 31
 #-------------------------------
-[ISENMAR_SOLDIER_F,Soldier,100]
-LoseText = The whale's awake and I lose to you. Some war.
-Pokemon = FROSLASS,80
-    Moves = ICEBEAM,SHADOWBALL,ICYWIND,DESTINYBOND
-    Ability = CURSEDBODY
-    Item = SITRUSBERRY
-    Nature = TIMID
-    IV = 31
-    EV = 4,0,0,252,252,0
-Pokemon = DEWGONG,81
-    Moves = SURF,ICEBEAM,ICESHARD,ENCORE
+[ISENMAR_SOLDIER_M,Soldier,101]
+LoseText = Ice remembers. So will I.
+Pokemon = WALREIN,81
+    Moves = SURF,ICEBEAM,ENCORE,PROTECT
     Ability = THICKFAT
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = GASTRODON,82
+    Moves = SCALD,EARTHPOWER,RECOVER,CLEARSMOG
+    Ability = STORMDRAIN
     Item = SITRUSBERRY
     Nature = CALM
     IV = 31
     EV = 252,0,4,0,0,252
 #-------------------------------
-[ISENMAR_SOLDIER_F,Soldier,200]
-LoseText = The whale's awake and I lose to you. Some war.
-Pokemon = FROSLASS,75
-    Moves = ICEBEAM,SHADOWBALL,ICYWIND,DESTINYBOND
-    Ability = CURSEDBODY
-    Item = SITRUSBERRY
-    Nature = TIMID
-    IV = 20
-    EV = 0
-# Ch19 war - The Shattered Ice (map 926, Frozen Lake)
-#-------------------------------
-[ISENMAR_SOLDIER_M,Soldier,1]
-LoseText = Ice remembers. So will I.
-Pokemon = BEARTIC,80
-    Moves = ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE
-    Ability = SLUSHRUSH
-    Item = SITRUSBERRY
-    Nature = ADAMANT
-    IV = 31
-Pokemon = AVALUGG,81
-    Moves = AVALANCHE,BODYPRESS,RAPIDSPIN,RECOVER
-    Ability = STURDY
-    Item = ROCKYHELMET
-    Nature = IMPISH
-    IV = 31
-#-------------------------------
-[ISENMAR_SOLDIER_M,Soldier,101]
-LoseText = Ice remembers. So will I.
-Pokemon = BEARTIC,81
-    Moves = ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE
-    Ability = SLUSHRUSH
-    Item = SITRUSBERRY
-    Nature = ADAMANT
-    IV = 31
-    EV = 4,252,0,252,0,0
-Pokemon = AVALUGG,82
-    Moves = AVALANCHE,BODYPRESS,RAPIDSPIN,RECOVER
-    Ability = STURDY
-    Item = ROCKYHELMET
-    Nature = IMPISH
-    IV = 31
-    EV = 252,4,252,0,0,0
-#-------------------------------
 [ISENMAR_SOLDIER_M,Soldier,201]
 LoseText = Ice remembers. So will I.
-Pokemon = BEARTIC,76
-    Moves = ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE
-    Ability = SLUSHRUSH
-    Item = SITRUSBERRY
-    Nature = ADAMANT
+Pokemon = WALREIN,76
+    Moves = SURF,ICEBEAM,ENCORE,PROTECT
+    Ability = THICKFAT
+    Item = LEFTOVERS
+    Nature = MODEST
     IV = 20
     EV = 0
-# Ch19 war - The Shattered Ice (map 926, Frozen Lake)
+# Ch19 war - the Glass Dunes, Isenmar crest (map 926, Desert)
 #-------------------------------
 [ISENMAR_SOLDIER_F,Soldier,1]
-LoseText = Fine. Walk. Everyone walks through us lately.
-Pokemon = GLALIE,80
-    Moves = ICICLECRASH,CRUNCH,ICESHARD,SPIKES
-    Ability = ICEBODY
-    Item = SITRUSBERRY
-    Nature = JOLLY
+LoseText = The whale's awake and I lose to you. Some war.
+Pokemon = POLITOED,80
+    Moves = SCALD,ICEBEAM,ENCORE,PERISHSONG
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = CALM
     IV = 31
-Pokemon = LAPRAS,81
-    Moves = SURF,FREEZEDRY,THUNDERBOLT,ICESHARD
-    Ability = WATERABSORB
+Pokemon = KINGDRA,81
+    Moves = HYDROPUMP,DRACOMETEOR,ICEBEAM,RAINDANCE
+    Ability = SWIFTSWIM
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 31
 #-------------------------------
 [ISENMAR_SOLDIER_F,Soldier,101]
-LoseText = Fine. Walk. Everyone walks through us lately.
-Pokemon = GLALIE,81
-    Moves = ICICLECRASH,CRUNCH,ICESHARD,SPIKES
-    Ability = ICEBODY
-    Item = SITRUSBERRY
-    Nature = JOLLY
+LoseText = The whale's awake and I lose to you. Some war.
+Pokemon = POLITOED,81
+    Moves = SCALD,ICEBEAM,ENCORE,PERISHSONG
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = CALM
     IV = 31
-    EV = 4,252,0,252,0,0
-Pokemon = LAPRAS,82
-    Moves = SURF,FREEZEDRY,THUNDERBOLT,ICESHARD
-    Ability = WATERABSORB
+    EV = 252,0,4,0,0,252
+Pokemon = KINGDRA,82
+    Moves = HYDROPUMP,DRACOMETEOR,ICEBEAM,RAINDANCE
+    Ability = SWIFTSWIM
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 31
-    EV = 252,0,4,0,252,0
+    EV = 4,0,0,252,252,0
 #-------------------------------
 [ISENMAR_SOLDIER_F,Soldier,201]
-LoseText = Fine. Walk. Everyone walks through us lately.
-Pokemon = GLALIE,76
-    Moves = ICICLECRASH,CRUNCH,ICESHARD,SPIKES
-    Ability = ICEBODY
+LoseText = The whale's awake and I lose to you. Some war.
+Pokemon = POLITOED,76
+    Moves = SCALD,ICEBEAM,ENCORE,HYPNOSIS
+    Ability = WATERABSORB
     Item = SITRUSBERRY
-    Nature = JOLLY
+    Nature = CALM
     IV = 20
     EV = 0
-# Ch19 war - Isenmar ice-fleet officer (map 926, Frozen Lake)
+# Ch19 war - the Rimed Sands, Isenmar sled-host officer (map 920, Desert)
 #-------------------------------
 [ISENMAR_OFFICER,Captain]
 LoseText = Tell the Thane the line held as long as it could.
-Pokemon = ABOMASNOW,82
-    Moves = BLIZZARD,GIGADRAIN,ICESHARD,AURORAVEIL
-    Ability = SNOWWARNING
-    Item = SITRUSBERRY
-    Nature = QUIET
+Pokemon = POLITOED,82
+    Moves = SCALD,ICEBEAM,ENCORE,HYPNOSIS
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = CALM
     IV = 31
-Pokemon = LAPRAS,83
-    Moves = SURF,FREEZEDRY,THUNDERBOLT,ICESHARD
+Pokemon = LUDICOLO,83
+    Moves = GIGADRAIN,HYDROPUMP,ICEBEAM,RAINDANCE
+    Ability = SWIFTSWIM
+    Item = LIFEORB
+    Nature = MODEST
+    IV = 31
+Pokemon = MAMOSWINE,83
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,STEALTHROCK
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = LAPRAS,84
+    Moves = HYDROPUMP,FREEZEDRY,THUNDERBOLT,ICESHARD
     Ability = WATERABSORB
     Item = LEFTOVERS
     Nature = MODEST
-    IV = 31
-Pokemon = WEAVILE,83
-    Moves = TRIPLEAXEL,KNOCKOFF,ICESHARD,SWORDSDANCE
-    Ability = PRESSURE
-    Item = LIFEORB
-    Nature = JOLLY
-    IV = 31
-Pokemon = CETITAN,84
-    Moves = ICESPINNER,EARTHQUAKE,HEAVYSLAM,ICESHARD
-    Ability = SLUSHRUSH
-    Item = SITRUSBERRY
-    Nature = ADAMANT
     IV = 31
 #-------------------------------
 [ISENMAR_OFFICER,Captain,100]
 LoseText = Tell the Thane the line held as long as it could.
-Pokemon = ABOMASNOW,83
-    Moves = BLIZZARD,GIGADRAIN,ICESHARD,AURORAVEIL
-    Ability = SNOWWARNING
-    Item = SITRUSBERRY
-    Nature = QUIET
+Pokemon = POLITOED,83
+    Moves = SCALD,ICEBEAM,ENCORE,HYPNOSIS
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = CALM
     IV = 31
-    EV = 252,0,4,0,252,0
-Pokemon = LAPRAS,84
-    Moves = SURF,FREEZEDRY,THUNDERBOLT,ICESHARD
-    Ability = WATERABSORB
-    Item = LEFTOVERS
+    EV = 252,0,4,0,0,252
+Pokemon = LUDICOLO,84
+    Moves = GIGADRAIN,HYDROPUMP,ICEBEAM,RAINDANCE
+    Ability = SWIFTSWIM
+    Item = LIFEORB
     Nature = MODEST
     IV = 31
-    EV = 252,0,4,0,252,0
-Pokemon = WEAVILE,84
-    Moves = TRIPLEAXEL,KNOCKOFF,ICESHARD,SWORDSDANCE
-    Ability = PRESSURE
-    Item = LIFEORB
-    Nature = JOLLY
-    IV = 31
-    EV = 4,252,0,252,0,0
-Pokemon = CETITAN,85
-    Moves = ICESPINNER,EARTHQUAKE,HEAVYSLAM,ICESHARD
-    Ability = SLUSHRUSH
+    EV = 4,0,0,252,252,0
+Pokemon = MAMOSWINE,84
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,STEALTHROCK
+    Ability = THICKFAT
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
     EV = 4,252,0,252,0,0
+Pokemon = LAPRAS,85
+    Moves = HYDROPUMP,FREEZEDRY,THUNDERBOLT,ICESHARD
+    Ability = WATERABSORB
+    Item = LEFTOVERS
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
 #-------------------------------
 [ISENMAR_OFFICER,Captain,200]
 LoseText = Tell the Thane the line held as long as it could.
-Pokemon = ABOMASNOW,78
-    Moves = BLIZZARD,GIGADRAIN,ICESHARD,AURORAVEIL
-    Ability = SNOWWARNING
+Pokemon = POLITOED,78
+    Moves = SCALD,ICEBEAM,ENCORE,HYPNOSIS
+    Ability = WATERABSORB
     Item = SITRUSBERRY
-    Nature = QUIET
+    Nature = CALM
     IV = 20
     EV = 0
-Pokemon = LAPRAS,79
-    Moves = SURF,FREEZEDRY,THUNDERBOLT,ICESHARD
+Pokemon = LUDICOLO,79
+    Moves = GIGADRAIN,HYDROPUMP,ICEBEAM,RAINDANCE
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = LAPRAS,80
+    Moves = HYDROPUMP,FREEZEDRY,THUNDERBOLT,ICESHARD
     Ability = WATERABSORB
     Item = LEFTOVERS
     Nature = MODEST
     IV = 20
     EV = 0
-Pokemon = CETITAN,80
-    Moves = ICESPINNER,EARTHQUAKE,HEAVYSLAM,ICESHARD
+# Ch19 war - the Glass Dunes, Isenmar line officer (map 926, Desert; partner double)
+#-------------------------------
+[ISENMAR_OFFICER,Captain,1]
+LoseText = The sea came all this way for us. ...And still.
+Pokemon = PELIPPER,82
+    Moves = HURRICANE,SCALD,TAILWIND,PROTECT
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 31
+Pokemon = KINGDRA,83
+    Moves = MUDDYWATER,DRACOMETEOR,ICEBEAM,PROTECT
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = ARCTOVISH,84
+    Moves = FISHIOUSREND,ICICLECRASH,PSYCHICFANGS,PROTECT
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+#-------------------------------
+[ISENMAR_OFFICER,Captain,101]
+LoseText = The sea came all this way for us. ...And still.
+Pokemon = PELIPPER,83
+    Moves = HURRICANE,SCALD,TAILWIND,PROTECT
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
+Pokemon = KINGDRA,84
+    Moves = MUDDYWATER,DRACOMETEOR,ICEBEAM,PROTECT
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+Pokemon = ARCTOVISH,85
+    Moves = FISHIOUSREND,ICICLECRASH,PSYCHICFANGS,PROTECT
+    Ability = WATERABSORB
+    Item = MYSTICWATER
+    Nature = ADAMANT
+    IV = 31
+    EV = 252,252,0,0,0,4
+#-------------------------------
+[ISENMAR_OFFICER,Captain,201]
+LoseText = The sea came all this way for us. ...And still.
+Pokemon = PELIPPER,78
+    Moves = HURRICANE,SCALD,ROOST,PROTECT
+    Ability = KEENEYE
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = ARCTOVISH,80
+    Moves = LIQUIDATION,ICICLECRASH,PSYCHICFANGS,PROTECT
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 20
+    EV = 0
+# Ch19 war - the Glass Dunes, Isenmar line (map 926, Desert; partner double with Captain 1)
+#-------------------------------
+[ISENMAR_SOLDIER_M,Soldier,2]
+LoseText = The tide's on our side. It's just slow about it.
+Pokemon = MAMOSWINE,81
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,ROCKSLIDE
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = SEISMITOAD,82
+    Moves = MUDDYWATER,EARTHPOWER,SLUDGEWAVE,PROTECT
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+#-------------------------------
+[ISENMAR_SOLDIER_M,Soldier,102]
+LoseText = The tide's on our side. It's just slow about it.
+Pokemon = MAMOSWINE,82
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,ROCKSLIDE
+    Ability = THICKFAT
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
+Pokemon = SEISMITOAD,83
+    Moves = MUDDYWATER,EARTHPOWER,SLUDGEWAVE,PROTECT
+    Ability = SWIFTSWIM
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 4,0,0,252,252,0
+#-------------------------------
+[ISENMAR_SOLDIER_M,Soldier,202]
+LoseText = The tide's on our side. It's just slow about it.
+Pokemon = MAMOSWINE,77
+    Moves = EARTHQUAKE,ICICLECRASH,ICESHARD,ROCKSLIDE
     Ability = THICKFAT
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 20
     EV = 0
+# Ch19 war partner - Sigrun beside the PC on the Glass Dunes (backing Ashkaar, or standing between). Against the sea: dragons resist the Water, Flygon's Levitate spares it Mamoswine's Earthquake, Scorching Sands is x1.5 on the dunes, and Heat Wave x1.3 dries the bloom (two Fire attacks bake it back to sand).
+#-------------------------------
+[LEADER_SIGRUN,Sigrun,19]
+LoseText = Hold here. Let them come to us.
+Pokemon = FLYGON,83
+    Moves = SCORCHINGSANDS,DRAGONCLAW,ROCKSLIDE,UTURN
+    Ability = LEVITATE
+    Item = SOFTSAND
+    Nature = JOLLY
+    IV = 31
+Pokemon = DRAGONITE,84
+    Moves = EXTREMESPEED,DRAGONCLAW,FIREPUNCH,PROTECT
+    Ability = MULTISCALE
+    Item = LUMBERRY
+    Nature = ADAMANT
+    IV = 31
+Pokemon = SALAMENCE,85
+    Name = Dreamwing
+    Moves = HEATWAVE,DRAGONCLAW,ROCKSLIDE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = NAIVE
+    IV = 31
+# Ch19 war partner - Marisol beside the PC on the Glass Dunes (backing Isenmar). Against the glass: Drizzle takes the sky from Torkoal's sun and soaks the dunes (Ashkaar's Eruption and Heat Wave are halved in rain), Gyarados' Intimidate blunts Coalossal and Garchomp, and Lanturn's Volt Absorb and Scald cover the rest.
+#-------------------------------
+[LEADER_MARISOL,Marisol,19]
+LoseText = Ha! Keep your head down and your Pokemon up.
+Pokemon = PELIPPER,83
+    Moves = HURRICANE,SCALD,TAILWIND,PROTECT
+    Ability = DRIZZLE
+    Item = DAMPROCK
+    Nature = MODEST
+    IV = 31
+Pokemon = LANTURN,84
+    Moves = SCALD,THUNDERBOLT,ICEBEAM,PROTECT
+    Ability = VOLTABSORB
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+Pokemon = GYARADOS,85
+    Name = Lucky
+    Moves = WATERFALL,DRAGONDANCE,CRUNCH,ICEFANG
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
 #===============================================================================
 # FESTIVAL OF CHAMPIONS - final and hijack
 #===============================================================================

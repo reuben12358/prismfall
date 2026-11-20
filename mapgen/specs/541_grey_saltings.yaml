@@ -1,4 +1,4 @@
-# The Grey Saltings (541). WRITTEN BY layouts/routes_early.py - edit that script.
+# The Grey Saltings (541). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 541
 name: The Grey Saltings
 parent: 0
@@ -11,21 +11,103 @@ field: BEACH
 tone: [0, 0, 4, 18]
 fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 200, sx: 1, sy: 0}
 walk_from:
-- [59, 100]
+- [4, 84]
 - [33, 108]
 - [36, 1]
 connections:
 - {dir: S, offset: 30, to: 140, to_offset: 43}
 - {dir: N, offset: 34, to: 552, to_offset: 38}
 raw: data/raw/541.npy
-tileset: 51
+tileset: 56
 events:
 - type: warp
   name: Mine back door
-  at: [57, 49]
+  at: [52, 35]
   link: R4_MINE
-  arrive: [57, 50, down]
+  arrive: [52, 36, down]
   se: Door exit
+- type: event
+  name: Tide
+  at: [1, 1]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: "night = PBDayNight.isNight?\nchanged = false\n$game_map.events.each_value do |e|\n  next if !e.name.start_with?('Low water')\n  key = [541,\
+        \ e.id, 'A']\n  next if $game_self_switches[key] == night\n  $game_self_switches[key] = night\n  changed = true\nend\n$game_map.need_refresh = true\
+        \ if changed"}
+    - {wait: 40}
+- type: event
+  name: Low water lane 1
+  at: [10, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22769}
+    commands: []
+- type: event
+  name: Low water lane 2
+  at: [11, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22770}
+    commands: []
+- type: event
+  name: Low water lane 3
+  at: [12, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22769}
+    commands: []
+- type: event
+  name: Low water lane 4
+  at: [13, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22770}
+    commands: []
+- type: event
+  name: Low water lane 5
+  at: [14, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22769}
+    commands: []
+- type: event
+  name: Low water lane 6
+  at: [15, 84]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 22770}
+    commands: []
+- type: event
+  name: Low water plank 1
+  at: [25, 38]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 4945}
+    commands: []
+- type: event
+  name: Low water plank 2
+  at: [27, 45]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 4945}
+    commands: []
+- type: event
+  name: Low water plank 3
+  at: [44, 77]
+  pages:
+  - commands: []
+  - cond: {self: A}
+    graphic: {tile: 4945}
+    commands: []
 - type: sign
   name: Road sign
   at: [36, 104]
@@ -35,7 +117,7 @@ events:
   post: false
 - type: event
   name: The Saltings
-  at: [33, 98]
+  at: [33, 99]
   pages:
   - trigger: touch
     commands:
@@ -46,7 +128,7 @@ events:
   - cond: {self: A}
     commands: []
 - type: trainer
-  at: [24, 46]
+  at: [28, 58]
   sight: 4
   dir: right
   sprite: trainer_SAILOR
@@ -54,7 +136,7 @@ events:
   intro: Salt barge went down in the mud in '88. Still there. Still salty.
   after: You're heavier than you look. In battle, I mean.
 - type: trainer
-  at: [40, 59]
+  at: [38, 72]
   sight: 4
   dir: left
   sprite: trainer_TUBER_F
@@ -62,7 +144,7 @@ events:
   intro: My floaty is a Wailmer! No it's not. It's a floaty.
   after: Waaah! My floaty popped!
 - type: trainer
-  at: [36, 30]
+  at: [36, 34]
   sight: 4
   dir: down
   sprite: trainer_CAMPER
@@ -71,7 +153,7 @@ events:
   after: Sand in my tent AND I lost. Great day.
 - type: event
   name: Salt Raker
-  at: [16, 92]
+  at: [18, 94]
   pages:
   - graphic: {sprite: NPC 19, dir: down}
     trigger: action
@@ -80,7 +162,7 @@ events:
         say he''s from Verdance. Nobody says it loud.']
 - type: event
   name: Samphire Picker
-  at: [44, 72]
+  at: [16, 70]
   pages:
   - graphic: {sprite: NPC 27, dir: down}
     trigger: action
@@ -88,7 +170,7 @@ events:
     commands: ['Samphire Picker: Pick from the edges. The middle''s the Plate''s. Don''t ask me what that means. My mother said it.']
 - type: event
   name: Children building Sandygast castles
-  at: [20, 66]
+  at: [20, 74]
   pages:
   - graphic: {sprite: NPC 16, dir: down}
     trigger: action
@@ -96,7 +178,7 @@ events:
     commands: ['Children: Don''t step on that one! That one''s ALIVE. ...That one too.']
 - type: event
   name: Sandygast
-  at: [22, 67]
+  at: [21, 76]
   pages:
   - graphic: {sprite: Followers/SANDYGAST, dir: down}
     trigger: action
@@ -104,7 +186,7 @@ events:
     commands: [(A sand castle. It is watching you.)]
 - type: event
   name: Squawkabilly watcher
-  at: [42, 22]
+  at: [45, 65]
   pages:
   - graphic: {sprite: NPC 09, dir: down}
     trigger: action
@@ -113,18 +195,18 @@ events:
         colors! In the wild they argue about which one''s the real one!']
 - type: event
   name: Salt-barge wreck
-  at: [34, 39]
+  at: [14, 20]
   pages:
   - trigger: action
     commands: ['The wreck of a salt barge, sunk to the gunwales in the mud. The name board says HONEST WEIGHT.']
 - type: item
-  at: [36, 40]
+  at: [16, 22]
   item: BIGPEARL
   hidden: true
   name: HiddenItem (salt-barge wreck)
 - type: event
   name: Ring Boss
-  at: [44, 76]
+  at: [56, 103]
   pages:
   - graphic: {sprite: NPC 21, dir: down}
     trigger: action
@@ -146,64 +228,62 @@ events:
         - ['Ring Boss: The ring is always open. The ring never closes. The tide closes it, twice a day.']
 - type: event
   name: Road Stone II
-  at: [29, 6]
+  at: [37, 6]
   pages:
   - trigger: action
     commands: ['ROAD STONE II. THE WEAVERS'' ROAD. "Saltmere 1, Briarwick 4." A ribbon of undyed silk is tied round it.']
 - type: event
   name: The boiling-house
-  at: [21, 82]
+  at: [28, 88]
   pages:
   - trigger: action
     commands: ['THE BOILING-HOUSE. Brine in, salt out, smoke up. A notice: "NO SWIMMING IN THE PANS. THIS MEANS YOU, TERRENCE."']
 - type: event
   name: The Drowned Lane
-  at: [50, 95]
+  at: [20, 83]
   pages:
   - trigger: action
     commands:
+    - Ruts in the mud run straight into the channel and on under the water, toward the islet.
     - if: PBDayNight.isNight?
-      then:
-      - The tide is out. An old cart road shows under an inch of water, all the way to the islet.
-      - {script: 'pbFadeOutIn { $game_player.moveto(59, 100) }'}
-      else: ['Water as far as the islet. The rakers say an old cart road runs under it, at night.']
+      then: ['The tide is out. The old cart road shows above the water, all the way across.']
+      else: ['The rakers say the old cart road comes up at night, when the tide goes out.']
 - type: event
   name: Wreckers' cache
-  at: [61, 99]
+  at: [4, 83]
   pages:
   - trigger: action
     commands: ['A wreckers'' cache: a tarred chest, padlocked. The lock is stamped SALTMERE HARBOUR OFFICE.']
 - type: item
-  at: [59, 101]
+  at: [3, 85]
   item: BIGPEARL
 - type: item
-  at: [62, 101]
+  at: [5, 82]
   item: STARDUST
   hidden: true
   name: HiddenItem (the Drowned Lane)
-- type: event
-  name: Back to the causeway
-  at: [58, 100]
-  pages:
-  - trigger: action
-    commands:
-    - Wade back along the drowned cart road?
-    - choices: ['Yes', 'No']
-      cancel: 1
-      branches:
-      - - {script: 'pbFadeOutIn { $game_player.moveto(48, 96) }'}
-      - []
 - type: item
-  at: [11, 30]
+  at: [10, 34]
   item: POTION
 - type: item
-  at: [40, 18]
+  at: [60, 12]
   item: GREATBALL
+- type: item
+  at: [52, 6]
+  item: NUGGET
+  hidden: true
+  name: HiddenItem (Brinecut top)
 - type: item
   at: [14, 100]
   item: PEARL
   hidden: true
   name: HiddenItem (salt pans)
+- type: event
+  name: Low-water planks
+  at: [25, 34]
+  pages:
+  - trigger: action
+    commands: ['Plank rests on the boardwalk posts, empty. The salt-rakers lay the missing boards at low water, when the pools drain.']
 - type: door
   at: [12, 58]
   gfx: ['', 0, 2]
