@@ -52,6 +52,13 @@ if _SILK:                                    # Gossamer Wood's silk-wrapped Sher
         sw = lambda t: _SILK.get('silk_sh:%d' % (t - K.RC.offset('sh') + 384), t) if t else 0
         return ([[sw(t) for t in row] for row in top], [[sw(t) for t in row] for row in bot], 1)
     SPECIES['silk0'] = _silk_lat(K.RMap.TREES_SH[0]); SPECIES['silk1'] = _silk_lat(K.RMap.TREES_SH[1])
+_SN2 = K._ST.get('_snow2', {})
+if _SN2:                                     # snowified Akuwa oaks (rcustom SNOW_MORE): teal and blue under snow
+    def _snow_lat(name):
+        top, bot, w = lat(name)
+        sw = lambda t: _SN2.get('snow_ak:%d' % (t - K.RC.offset('ak') + 384), t) if t else 0
+        return ([[sw(t) for t in row] for row in top], [[sw(t) for t in row] for row in bot], 1)
+    SPECIES['snowteal'] = _snow_lat('nt_teal_a'); SPECIES['snowteal2'] = _snow_lat('nt_teal_b'); SPECIES['snowblue'] = _snow_lat('nt_tree_blue')
 if getattr(K.RMap, 'TREES_SNOW', None):
     SPECIES['snow0'], SPECIES['snow1'] = K.RMap.TREES_SNOW[0], K.RMap.TREES_SNOW[1]
 
@@ -129,6 +136,7 @@ def fringe(r, kinds, n, box=None, on='.', seed=0, near_forest=2, zone_scale=9.0)
         if ty < 0 or not m.can_tree(k, tx, ty, on): continue
         if ev[ty:y + 1, tx:tx + w].any() or r.road_mask[max(0, ty):y + 2, max(0, tx - 1):tx + w + 1].any(): continue
         if m.bodym[max(0, y - 1):y + 2, max(0, tx - 1):tx + w + 1].any(): continue
+        if hasattr(m, 'bfoot') and m.bfoot[ty:ty + h, tx:tx + w].any(): continue        # the building guard would refuse it
         m.stamp(k, tx, ty, mark='B'); placed += 1
     return placed
 
@@ -370,7 +378,8 @@ def props(r, kinds, n, box=None, on='.', seed=0, clump=0):
 def scatter_quiet(r, n=4, seed=None):
     """the kit's decor pass without the evenly sprinkled flowers (meadows do flowers): greens and rare props only"""
     m = r.m
-    groups = {'flowers': m.decor['green'], 'green': m.decor['green'], 'rare': m.decor['rare']}
+    from rkit import TUFTS, CLOVER                   # the noise patches get walkable tufts and clover, never solid bushes
+    groups = {'flowers': TUFTS + CLOVER, 'green': m.decor['green'], 'rare': m.decor['rare']}
     m.scatter(n, seed=r.mid if seed is None else seed, groups=groups)
 
 
@@ -511,3 +520,43 @@ def drapes_along(r, every=5, seed=0, kinds=('gw_drape0', 'gw_drape1', 'gw_cocoon
                     if t: m.over.append((2, x + dx, y + dy, t))
             n += 1
     return n
+
+
+def seat(r, name, x, y, radius=8, on='.tT', avoid='d', **kw):
+    """seat a building at the nearest legal spot to (x, y): free of stamps/crowns, every cell in `on`, no road cell
+    under it, and its door front walkable; forest under the footprint and in a ring round it is cleared to grass.
+    Returns (x, y) or None"""
+    m = r.m; st = STAMPS[name]; w, h = st['w'], st['h']; door = st.get('door')
+    best = None
+    for dy in range(-radius, radius + 1):
+        for dx in range(-radius, radius + 1):
+            X, Y = x + dx, y + dy
+            if not m.free(X, Y, w, h, on=on): continue
+            sub = m.cls[Y:Y + h, X:X + w]
+            if any(ch in avoid for ch in sub.reshape(-1)): continue
+            if door:
+                fx, fy = X + door[0], Y + door[1] + 1
+                if not m.inb(fx, fy) or m.cls[fy, fx] not in '.tTdgu' or m.taken[fy, fx]: continue
+            d = dx * dx + dy * dy
+            if best is None or d < best[0]: best = (d, X, Y)
+    if best is None: return None
+    _, X, Y = best
+    for yy in range(max(0, Y - 1), min(m.H, Y + h + 2)):
+        for xx in range(max(0, X - 1), min(m.W, X + w + 1)):
+            if m.cls[yy, xx] == 'T' and not m.taken[yy, xx]: m.cls[yy, xx] = '.'
+    m.stamp(name, X, Y, **kw)
+    return X, Y
+
+
+SNOWWOOD = [{'snow0': 5, 'snow1': 4}, {'snow1': 3, 'snowteal': 3, 'snowteal2': 2}, {'snow0': 3, 'snowblue': 2, 'snowteal': 2},
+            {'snowteal2': 3, 'snow1': 3, 'snowblue': 1}]
+
+
+def snow_ground_var(r, thr=0.5, seed=0):
+    """snow ground that is never one flat sheet: wind ripples, sparkle and shadow dips drift in noise patches"""
+    m = r.m; G = [P1('sn_g%d' % i) for i in range(4)]
+    base = set(t for row in K.SNOW_GROUND for t in row)
+    for y in range(m.H):
+        for x in range(m.W):
+            if m.L[0, y, x] in base and vnoise(x, y, r.seed + 4440 + seed, 5.0) > thr:
+                m.L[0, y, x] = G[int(vnoise(x, y, r.seed + 4441 + seed, 2.5) * 3.999)]

@@ -60,28 +60,36 @@ route map sits on which stretch is provisional until `design/SWAP_GYM1_GYM2.md` 
 Design rule for this stretch: one new field idea per fight, the Gym Guide's advice must work, the Warden's counter to it
 is one Pokémon the player can remove, and Standard is tuned against a realistic early team in the harness (§6).
 
+### K1: Kestrel — no field (Tidewatch Station, Lv 5, can be lost)
+The starter with the type edge, Lv 5, **no type move** on Standard (Scratch / Growl, Tackle / Tail Whip, Tackle /
+Growl), as Reborn's Victoria and Rejuvenation's Ren open. With the type move it won 60 of 60 against realistic Lv 5
+starters; without it the player wins about one in six, the upset the script has a line for. Hard keeps the type move
+and adds Starly; Casual is Lv 3. (A non-Gen 1 pick gets its level-up moves from Core, so the type move may be back.)
+
 ### J1: Juno — Meadow (Saltmere promenade green, before Gym 1, cap 15)
-Cottonee 12 (not on Casual), Bounsweet "Sweetpea" 12, starter 14 (unevolved). Hard adds Petilil.
-- **Plan.** Fairy Wind and Razor Leaf are ×1.5 in the Meadow breeze; Leaf Guard is always on.
+Cottonee 13 *(−C)*, Petilil 13 *(−C)*, Bounsweet "Sweetpea" 13, starter 15 (unevolved). Hard adds Fidough.
+- **Plan.** Fairy Wind and Razor Leaf are ×1.5 in the Meadow breeze; Leaf Guard is always on; Petilil's Growth and
+  Aromatherapy keep the Grass side going.
 - **Transition play.** A Prankster **Grassy Terrain** turns the Meadow into a Flower Garden at once, the field she
-  will defend at Gym 9; the terrain lasts 8 turns there. Seen in the harness in 1 of 2 early runs (§6).
+  will defend at Gym 9; the terrain lasts 8 turns there.
 - **Counterplay.** Two Fire attacks burn a Meadow (one in sun); the friendliest place to learn that.
-- Levels came down from 15–17 because Saltmere is now the Gym 1 town.
 
 ### Gym 1: Dorian — Grand Stage, single battle (cap 15)
-Aipom 11 (not on Casual), Minccino 12, Kecleon 15. Hard adds Chatot and sharper sets (Technician Minccino, Fake Out,
-Kecleon's Synthetic Seed, Sing).
-- **Character.** Warm, gentle, theatrical; the first Warden teaches rather than punishes. Standard has neutral natures,
-  no sleep, no seed, no accuracy drops, a Potion rather than a Super Potion, and the openers well under the cap,
-  because the Grand Stage already makes every Normal move ×1.3.
-- **The lesson: applause.** Minccino's Echoed Voice and Round are both damaging sound moves; the second song raises
-  the applause a stage with a big message, and each stage makes Normal and sound moves hit harder. Echoed Voice also
-  grows each turn, so the stage and the echo climb together where the player can see it. Cute Charm Minccino has a tiny
-  Sp. Atk: it teaches without sweeping (an early Chatot did sweep, so Chatot is Hard-only now).
-- **Ace.** Kecleon's Color Change is a costume change; Fury Swipes hits 2–5 times and any critical hit is applause too.
-- **Counterplay.** Fighting types; stalling moves (Protect, Recover...) calm the crowd a stage; the player's own sound
-  moves and Normal moves get the same boost.
-- AI: `012_FieldEffects_TrainerPlays.rb` gives Dorian a small nudge toward moves that raise the stage.
+Aipom 10, Minccino 10, Spinda 11 *(−C)*, Jigglypuff 11 *(−C)*, Kecleon 15; skill 100 (the ace waits for last). Hard
+adds Whismur and sharper sets (Fake Out Kecleon with Protean and the Synthetic Seed, Competitive Jigglypuff).
+Reference: Reborn's Julia and Rejuvenation's Venam bring six at cap −3 .. cap with berries, a Gem and field plays.
+- **The show builds.** Aipom's Fake Out is a showpiece (×1.5); Minccino's Echoed Voice and Round are damaging sound
+  moves; Spinda's Teeter Dance is a dance (+1 Speed, confusion). Two of a kind raise the applause; any crit does too.
+  At Standing Ovation Jigglypuff's **Sing never misses**, every attack gets +1 crit stage and Normal types bask (1/16).
+- **Ace.** Kecleon (Color Change, Hardy, no Fake Out on Standard: an Adamant Fake Out one-shot leads at stage 2).
+- **Counterplay.** Rock and Ghost (Nacli, Dwebble, Sandygast), stalling moves to calm the crowd, KO the singers first.
+  No Fighting type exists before Gym 1 (Rev 16 distribution).
+- **The Saltmere audience (SPINE Rev 19).** The townsfolk met set the opening stage (0–6: 1, 7–13: 2, 14+: 3), and
+  from a good house up your fans heal your side 1/16 a round. Standard win rates (realistic six, 60 runs each):
+  sparse 43%, good 52%, full 45% with a Lv 15 team (50 / 52 / 37% in an earlier run); 37 / 25 / 35% with a Lv 14
+  team. The crowd you gathered doesn't pay off yet, because of the Standing Ovation bask (his troupe is all Normal): harness-only, with your fans in **Dorian's troupe not basking** gave
+  sparse 50 / good 63 / full 73% (Lv 14: 37 / 37 / 43%). Halving the bask gave 45% at a full house. Proposal for the
+  puzzle engineer / field owner in mapgen/REQUESTS.md (trainer designer, round 3).
 
 ### Pallbearer Thistle — Silkwood (Briarwick, before Gym 2, cap 19)
 Dustox 16, Foongus 17 (not on Casual), Phantump "Lowmarsh" 18. Hard adds Whirlipede.
@@ -93,19 +101,18 @@ Dustox 16, Foongus 17 (not on Casual), Phantump "Lowmarsh" 18. Hard adds Whirlip
 - **Version.** The Ch0–2 script now says version 0, matching the PBS (named admins count rematches from 0).
 
 ### Gym 2: Tamsin — Silkwood, double battle (cap 19)
-Joltik 14 + Surskit 15 lead, Spidops 16 (not on Casual), Swadloon "Bobbin" 19. Hard adds Vivillon (Rage Powder).
+Joltik 14 + Surskit 15 lead, Dwebble 16 *(−C)*, Swadloon "Bobbin" 19; skill 100. Hard adds Vivillon (Rage Powder) and
+sharper items (Focus Sash, Eviolite, Silver Powder, Damp Rock).
 - **Theme: "a thread holds because it's twisted with others."** Every Pokémon makes its partner better.
 - **Lead pair.** Surskit's **Rain Dance** wets the silk (every Electric move ×1.2) for Joltik's **Electroweb**, which
   in a double hits both foes (×1.5, never misses, Speed −1, 30% paralysis); rain also doubles Surskit's Speed.
-  String Shot hits both foes too (−3 Speed here).
-- **Back line.** Spidops's **Silk Trap** guards it while its partner attacks (and binds tighter here); Struggle Bug
-  (spread, ×1.5) cuts both foes' Sp. Atk. Bobbin holds the **Telluric Seed** (a silk cocoon: +1 Def, +1 Sp. Def,
-  −1 Speed) and its Razor Leaf hits both foes. Hard: Vivillon's Rage Powder pulls single-target hits off Bobbin.
-- **Answer to the flip.** Three Fire attacks set the wood ablaze; the rain halves Fire and douses a Wildfire to
-  Embers, where Bobbin's Grass moves are ×1.2.
-- **Counterplay.** Fire and Rock (Smack Down, Rock Throw); spread Fire hits both; knock Surskit out before it rains.
-- Standard tuning: Joltik at cap−5 with no Protect (it outlasted every spread answer in the harness), Absorb, Water
-  Gun and Feint instead of Bug Bite, Bubble Beam and Assurance (Hard keeps those).
+- **The bird answer (Rev 16 study, point 2).** Birds are common before Gym 2 and Flying is the obvious answer to Bug,
+  so **Dwebble** replaced Spidops: Smack Down grounds a bird into the silk (non-Bug fliers are ×0.8 there anyway) and
+  Rock Tomb slows both answers; Electroweb hits them for 2×. Spidops held 51 of 52 harness losses.
+- **Back line.** Bobbin holds the **Telluric Seed** (+1 Def, +1 Sp. Def, −1 Speed) and Protect; its Razor Leaf hits both.
+- **Answer to the flip.** Three Fire attacks set the wood ablaze; the rain halves Fire and douses a Wildfire to Embers.
+- **Counterplay.** Fire and Rock (before her: no Fire / Rock / Flying gift; wild Fire and Rock ≤ 4%), spread moves,
+  knock Surskit out before it rains.
 
 ### Teo — Water Surface (Ebbmouth, before Gym 3)
 Carvanha 19 (not on Casual), Arrokuda 20, Chewtle "Snapper" 21. Hard adds Basculin.
@@ -113,22 +120,22 @@ Carvanha 19 (not on Casual), Arrokuda 20, Chewtle "Snapper" 21. Hard adds Bascul
   this fight introduces the field one battle before the gym teaches its changes.
 
 ### K2: Kestrel — Mountain (Gullcry Cliffs, cap 23)
-Staravia 19 (not on Casual), Honedge "Morwen" 19, starter 21. Hard adds Sandile.
-- Flying ×1.2; Staravia's **Telluric Seed** gives +1 Speed and a Tailwind for his side. Rock is ×1.5 here and Thunder
-  never misses on the peaks; stall the Tailwind out with Protect.
+Staravia 21 *(−C)*, Sandile 21 *(−C)*, Honedge "Morwen" 21, starter 23. Hard adds Deino; Hard Morwen dropped Swords Dance
+for Fury Cutter (Swords Dance + Shadow Sneak swept prepared teams).
+- Flying ×1.2; Staravia's **Telluric Seed** gives +1 Speed and a Tailwind for his side (6 turns here). Rock is ×1.5
+  on the cliffs (Sandile's Rock Tomb) and Moxie snowballs. Stall the Tailwind out with Protect.
 
 ### Gym 3: Marisol — Water Surface (cap 23)
-Pelipper 20, Chinchou 21 (not on Casual), Floatzel 21, Gyarados "Lucky" 23. Hard adds Araquanid; Hard has Lanturn
-with the Elemental Seed instead of Chinchou, Drizzle Pelipper and Dragon Dance Lucky.
+Pelipper 19, Chinchou 20 *(−C)*, Buizel 20, Gyarados "Lucky" 23. Hard: Lanturn for Chinchou, + Dewpider, Floatzel for
+Buizel, Tailwind Pelipper, Ice Fang Lucky.
 - **Plan.** Water ×1.5, Swift Swim without rain, and the player's grounded non-Water Pokémon wade at ×0.75 Speed.
-- **Transition play.** Lucky's **Dive** drags the fight Underwater (transform strike), where non-Water Pokémon move
-  at half Speed. It is on the ace only, so it comes at the end, and Dive gives the player a free turn.
+  Lucky's **Whirlpool** is ×2 here and traps.
+- **No Dive (round 3).** The Water Surface ↔ Underwater loop strikes ×1.3 both ways (Dive in, Dive out): it was 103
+  knockouts in 60 harness runs, so neither Standard nor Hard Lucky has Dive. Field owner asked about the loop.
 - **Answer to the flip.** Chinchou's Volt Absorb takes the Electric answer and its Spark is ×1.5 against grounded
-  targets; Pelipper's Flying moves and Lucky's Ice Fang cover Grass.
-- **Counterplay.** Electric from a Pokémon that isn't grounded, or Grass; Electric is ×1.5 and never misses
-  underwater, 4× on Lucky. Hazards and Ground moves fail on the water.
-- Standard tuning: neutral natures, Water Gun on Pelipper, Brine instead of Waterfall on Lucky, Chinchou instead of
-  Lanturn (it walled realistic teams: 64 knockouts in 30 runs).
+  targets; Pelipper's Flying moves cover Grass.
+- **Counterplay.** Electric from a Pokémon that isn't grounded, or Grass; hazards and Ground moves fail on the water.
+- Standard tuning: Buizel for Floatzel (Ice Fang Floatzel was a top killer), Modest Lucky, Oran Berries.
 
 ### Route trainers, Chapters 0–3
 One or two field-aware choices each, level-up moves, no bag items (`routes.py`; levels by map id, `PLAN`):
@@ -168,7 +175,9 @@ Hippopotas, Sandaconda, Krokorok, Claydol "Effigy".
 - **Stage play / answer to the flip.** Rain or three floods wake a Superbloom (Grass ×1.5). Sand Stream, Sand Spit
   (it triggers when the Water move lands) and two of Krokorok's Fire Fangs each bake it back to dunes.
 - **Counterplay.** Grass, with rain timed after Hippopotas and Sandaconda are down. Water is ×0.8 here.
-- She has no cross-field transition (Cinderglass needs searing Fire moves her team does not learn).
+- She makes no cross-field change herself. A player's two searing moves (Overheat, Eruption...) fuse her dunes into the
+  **Glass Dunes** (Fire ×1.2, no sand, no Dig), and her quakes shatter the glass back into her Desert in three (her
+  `[:DESERT, 1] => 22` want rewards that); the sea-storm (heavy rain) is the only way to the flood.
 
 ### Gym 6: Corvin — Corrosive Mire, double battle (35)
 - **Doubles (Round 2).** Lead Weezing + Amoonguss. Weezing's Heat Wave hits both foes (and each use scorches grounded
@@ -405,14 +414,32 @@ All Standard / Hard / Casual; fields from `FIELD_DEFAULTS.yaml` `exceptions.trai
 | Ch19 war, Siege Camp earthworks (`ASHKAAR_SOLDIER_M/F` 0, `ASHKAAR_OFFICER` 0), 924 | Cinderglass | Magcargo, Druddigon *(−C)*; Ninetales, Flygon *(−C)*; Captain: Torkoal, Coalossal, Arcanine *(−C)*, Garchomp | Magma Armor, Steam Engine every turn; Stone Edge ×1.3 ×1.3 on obsidian; Lava Plume ×3 re-melts it to Volcanic | Water and Ground; three floods fill the glass into a lake |
 | Ch19 war, the Steamline 925 (stand between: `ASHKAAR_SOLDIER_M` 1, `ISENMAR_SOLDIER_M` 1) | Bleed (borrows only the war's fields) | Camerupt, Tyrantrum *(−C)*; Walrein, Gastrodon *(−C)* | Every 3 rounds the Steamline borrows Volcanic, Cinderglass, Frozen Lake, Desert, the flood or the glass; off-type attacks are ×1.2 (Rock Slide, Earthquake, Earth Power, Clear Smog), so both soldiers carry coverage | Read the borrowed field each third round and switch to it |
 | Ch19 war, the Glass Dunes 926 crest (`ASHKAAR_SOLDIER_F` 1, `ISENMAR_SOLDIER_F` 1) | Desert → glass / bloom | Talonflame, Turtonator *(−C)*; Politoed, Kingdra *(−C)* | Ashkaar makes **glass**: Turtonator's two Overheats are the two searing moves, then it draws 1/16 a turn from the glass and Flash Cannon refracts ×1.3. Isenmar makes **rain**: Drizzle soaks the dunes into the Superbloom for Swift Swim Kingdra; on glass its Ice Beam cracks the crust and Hydro Pump is a flood | The weather decides the dunes: bring your own; Protect through the Overheats |
-| Ch19 war, Glass Dunes **partner double** (backing Isenmar): Marisol (`LEADER_MARISOL` 19) beside you vs `ASHKAAR_OFFICER` 1 + `ASHKAAR_SOLDIER_M` 2 | Desert → Glass Dunes | Captain: Torkoal, Coalossal *(−C)*, Garchomp; Soldier: Charizard, Haxorus *(−C)* | **The glass plan.** Drought (7 turns on the dunes) + Eruption (spread, searing, Fire ×1.2 ×1.5 sun); Charizard's Overheat is the second searing move and the dunes fuse to glass: Fire types heal 1/16 a turn there, Coalossal enters at +1 Speed and Tar Shot sets up the next Eruption; Solar Power is free on the sand and Solar Beam is ×1.5 there, ×1.3 off the glass. No quakes in the line (they would crack its own glass) | Marisol's Drizzle takes the sky (rain halves the Fire); Wide Guard, Protect; KO Torkoal before the second searing move; on glass, quakes and big Ice moves crack it (three in the rain → the flood) |
-| Ch19 war, Glass Dunes **partner double** (backing Ashkaar): Sigrun (`LEADER_SIGRUN` 19) beside you vs `ISENMAR_OFFICER` 1 + `ISENMAR_SOLDIER_M` 2 | Desert → Superbloom (→ the flood once Kyogre is in) | Captain: Pelipper, Kingdra *(−C)*, Arctovish; Soldier: Mamoswine, Seismitoad *(−C)* | **The sea plan.** Pelipper's Drizzle and Tailwind: rain soaks the dunes (Superbloom: the Water and Ice nerfs lift, Ground still ×1.2) and holds Kyogre's flood in. Kingdra's Swift Swim on top of Tailwind; Arctovish's Fishious Rend doubles when it moves first, which in rain + Tailwind is always. Mamoswine leads beside the bird so its Earthquake spares it | Sigrun's dragons resist Water; Heat Wave and two Fire attacks bake the bloom back to sand; KO Pelipper first |
+| Ch19 war, Glass Dunes **partner double** (backing Isenmar): Marisol (`LEADER_MARISOL` 19) beside you vs `ASHKAAR_OFFICER` 1 + `ASHKAAR_SOLDIER_M` 2 | Desert → Glass Dunes | Captain: Torkoal, Coalossal *(−C)*, Arcanine (Intimidate), Garchomp; Soldier: Charizard, Haxorus *(−C)*, **+Hard** Ninetales (a second Drought) | **The glass plan.** Drought (7 turns on the dunes) + Eruption (spread, searing, Fire ×1.2 ×1.5 sun); Charizard's Overheat is the second searing move and the dunes fuse to glass: Fire types heal 1/16 a turn there, Coalossal enters at +1 Speed and Tar Shot sets up the next Eruption; Solar Power is free on the sand and Solar Beam is ×1.5 there, ×1.3 off the glass. No quakes in the line (they would crack its own glass) | Marisol's Drizzle takes the sky (rain halves the Fire); Wide Guard, Protect; KO Torkoal before the second searing move; on glass, quakes and big Ice moves crack it (three in the rain → the flood) |
+| Ch19 war, Glass Dunes **partner double** (backing Ashkaar): Sigrun (`LEADER_SIGRUN` 19) beside you vs `ISENMAR_OFFICER` 1 + `ISENMAR_SOLDIER_M` 2 | Desert → Superbloom (→ the flood once Kyogre is in) | Captain: Pelipper, Kingdra *(−C)*, Lapras, Arctovish; Soldier: Mamoswine, Seismitoad *(−C)*, **+Hard** Cloyster | **The sea plan.** Pelipper's Drizzle and Tailwind: rain soaks the dunes (Superbloom: the Water and Ice nerfs lift, Ground still ×1.2) and holds Kyogre's flood in. Kingdra's Swift Swim on top of Tailwind; Arctovish's Fishious Rend doubles when it moves first, which in rain + Tailwind is always. Mamoswine leads beside the bird so its Earthquake spares it; Lapras's Freeze-Dry ×3 freezes the flood into a Frozen Lake, Isenmar's second ground | Sigrun's dragons resist Water; Heat Wave and two Fire attacks bake the bloom back to sand; KO Pelipper first |
 | Stand between: Sigrun beside you vs `ISENMAR_OFFICER` 1 + `ASHKAAR_OFFICER` 1 | Desert, both ways at once | the two Captains above | A weather war on the other side of the field: Drizzle against Drought, bloom against glass. Whoever sets weather last owns the dunes | Pick the side of the weather war that suits your team and help it win |
 
 War teams have no bag items and use `version` = encounter number, like the grunts (cap 85, Ch19, between Gyms 17
 and 18). The two partners are one version only, the same ally in every difficulty. Fields: Desert
 (`106_Field_Desert.rb`), the flood (`139_Field_FloodedDunes.rb`: only Kyogre's heavy rain or Origin Pulse brings it)
 and the glass (`140_Field_GlassDunes.rb`), from the fields team; `tools/harness/run_glass_dunes.rb` G runs the captains on 926.
+Field "wants" (`012_FieldEffects_TrainerPlays.rb`, the fields team's numbers): Isenmar types want the flood (+20) and a
+Frozen Lake (+16), a Superbloom a little (+8), never the glass (−20); Ashkaar types want the glass (+20) and Volcanic
+(+16), never the flood (−20) or the bloom (−10); partners Sigrun (glass +14, flood −14) and Marisol (flood +18, glass −14).
+
+| The legendary (Prismfall Bosses `106_Boss_WarLegends.rb`) | Field | Bars | Plan | Counterplay |
+|---|---|---|---|---|
+| **Reshiram** `:RESHIRAM_GLASS_DUNES` (default; Lv 85, Calm, HP/Sp. Def EVs, HP ×1.35 on Standard) | Desert → (break 1) the flood-sea in a storm → Blue Flare glasses it | 2 / 3 / 3 | Bar 1 has no searing move (the sand stays sand until the sea comes); break 1 brings the flood and the rain and teaches **Blue Flare** (white fire glasses the flood in one, even rain-halved); break 2 teaches Fusion Flare | Water / Rock / Dragon; hit hard during the storm's rain (Fire halved); on the glass, quakes crack it back to sand |
+| **Kyogre** `:KYOGRE_GLASS_DUNES` (backing Ashkaar; Lv 85, Calm, HP/Sp. Def EVs) | Desert → Drizzle's Superbloom → (break 1) the flood-sea, the rain passes | 2 / 3 / 3 | Surf in rain on the bloom; break 1: the sea comes in, **the rain blows over** (no rain × flood stacking), Origin Pulse and Calm Mind arrive; break 2: the sea armours it (+1 Def / Sp. Def; Hard also +1 Sp. Atk). **No Primal form in the fight**: Primordial Sea over the flood is ×1.95 before STAB and one-shot everything neutral | Grass (×1.5 in the bloom), Electric (×1.3 against it in the flood), Storm Drain / Water Absorb; the tide drains the flood if nobody feeds it Water attacks |
+
+Harness (`/home/claude/work/trainers2/run_late.rb`, a well-built Lv 85 six with Full Restores, AI-piloted, 8 runs each):
+Reshiram Standard 7/8 (9 turns; before the HP ×1.35 a Life Orb Garchomp broke a bar per Dragon Claw), Hard 5/8;
+Kyogre Standard 5/8 (12 turns), Hard 0/8 for this general team (a counter-team is the Hard plan), Casual 8/8. Neutral
+hits run 60–90% of a bulky Lv 85's HP; the one-shots left are 4× weaknesses (Ice Beam into Garchomp, Thunder into
+Gyarados). Field sequences seen: Reshiram DESERT > FLOODED_DUNES > GLASS_DUNES every run; Kyogre DESERT > bloom > flood,
+then the tide drains and Origin Pulse re-floods, or Ice Beam ×3 freezes the flood into a Frozen Lake.
+Partner doubles, same team + partner (8 runs): vs Isenmar Standard 6/8, Hard 3/8 (bloom → flood → Frozen Lake);
+vs Ashkaar 8/8 both (bloom from Marisol's rain → sun bakes it back → glass); stand between 8/8. Singles: the gauntlet
+soldiers and captains fall to this team (they are a gauntlet's links, two to four Pokémon each).
 
 ### The Eevee Octave (showpiece; SPINE Revision 19, `design/EEVEE_OCTAVE.md`)
 
@@ -426,8 +453,13 @@ rows are dead, see mapgen/REQUESTS.md).
 | Ch2 Saltmere backstage, **double**: Vesper (0) + Lyra (0), after Gym 1 | Grand Stage | Two undecided Eevees: Vesper's "Amen" 18 (Adaptability, Helping Hand) and Lyra's "Moss" 17. Swift hits both foes; Covet and Baby-Doll Eyes; two damaging sound/showpiece moves raise the applause |
 | Ch13 Lucent cloister, **double**: Vesper (1) | Mindscape | Espeon, Umbreon *(−C)*, Sylveon (Pixilate Hyper Voice, spread sound), Amen 58: the third spread sound move cracks the dream to Inverse |
 | Kingdom duels (50), each the climax of the singer's own quest, at the next Warden's cap − 1, one local partner first *(−C)* | the map's | Lyra: Skiddo, Leafeon "Moss" 18 (Gossamer Wood, Silkwood) · Aria: Spheal, Vaporeon "Brine" 22 (Ebbmouth) · Cadence: Klink, Jolteon "Snare" 26 (the Lowlight) · Sona: Baltoy, Espeon "Noon" 30 (Temple of the Noon Sun) · Noct: Murkrow, Umbreon "Wick" 34 (Mirefen at night) · Forte: Carkol, Flareon "Bellows" 38 (the Crucible) · Lento: Froslass, Glaceon "Hush" 58 (the Mirror Mere) · Carol: Florges, Sylveon "Ribbon" 88 (the Memorial Garden) |
-| **Crownhaven gauntlet** (60), back to back, no healing, in the order the player helped them; the quest sets each field | each Eeveelution's home field | One Eeveelution each, Lv 88 (Hard 89, Casual 84), its type's **Z-crystal** and a strong attack of that type: Leafeon Grassium Z (Flower Garden 3: Bloom Doom from Leaf Blade, Swords Dance), Vaporeon Waterium Z (Water Surface: Hydro Vortex from Scald, Wish), Jolteon Electrium Z (Neon Grid: Gigavolt Havoc, Volt Absorb charged), Espeon Psychium Z (Mindscape: Shattered Psyche; Hyper Voice ×3 cracks it to Inverse), Umbreon Darkinium Z (New Moon: Black Hole Eclipse, Wish wall), Flareon Firium Z (Volcanic: Inferno Overdrive from Flare Blitz; **Guts, not Flash Fire**: the field lights Flash Fire and that one-shot a Lv 95 Vaporeon through the resist), Glaceon Icium Z (Frozen Lake: Subzero Slammer, Ice Body), Sylveon Fairium Z (Fairy Tale: Twinkle Tackle from Moonblast, Draining Kiss ×2) |
-| Gauntlet finale: Vesper (60) | Grand Stage | Eevee "Amen" Lv 90 (Hard 90, Casual 86), Adaptability, **Eevium Z**: Last Resort → **Extreme Evoboost** (+2 every stat; a Z-move raises the applause), then Stored Power or Last Resort (Normal ×1.3/×1.5 here, ×1.3 grand finale); Shadow Ball for Ghosts, Quick Attack to finish |
+| **Crownhaven gauntlet** (60), back to back, no healing, in the order the player helped them; the quest sets each field | each Eeveelution's home field | One Eeveelution each, Lv 87 (Hard 88, Casual 83), its type's **Z-crystal** and a strong attack of that type: Leafeon Grassium Z (Flower Garden 3: Bloom Doom from Leaf Blade, Swords Dance), Vaporeon Waterium Z (Water Surface: Hydro Vortex from Scald, Wish), Jolteon Electrium Z (Neon Grid: Gigavolt Havoc, Volt Absorb charged), Espeon Psychium Z (Mindscape: Shattered Psyche; Hyper Voice ×3 cracks it to Inverse), Umbreon Darkinium Z (New Moon: Black Hole Eclipse, Wish wall), Flareon Firium Z (Volcanic: Inferno Overdrive from Flare Blitz; **Guts, not Flash Fire**: the field lights Flash Fire and that one-shot a Lv 95 Vaporeon through the resist), Glaceon Icium Z (Frozen Lake: Subzero Slammer, Ice Body), Sylveon Fairium Z (Fairy Tale: Twinkle Tackle from Moonblast, Draining Kiss ×2) |
+| Gauntlet finale: Vesper (60) | Grand Stage | Eevee "Amen" Lv 89 (Hard 90, Casual 85), Adaptability, **Eevium Z**: Last Resort → **Extreme Evoboost** (+2 every stat; a Z-move raises the applause), then Stored Power or Last Resort (Normal ×1.3/×1.5 here, ×1.3 grand finale); Shadow Ball for Ghosts, Quick Attack to finish |
+
+Harness (a well-built Lv 90 six, Full Restores carried, no healing between bouts, 10 help orders): a player who leads
+each bout with the Pokémon that takes its type best clears it 9 times in 10 on Standard and 8 in 10 on Hard; an
+unplanned AI team clears it once in 10 on Standard (6.6 of 9 bouts) and never on Hard (4.4). The Z-moves are 36 of
+55 knockouts: one per bout, into whatever leads. Casual 9 in 10 unplanned.
 
 Counterplay for the gauntlet: the order is the player's, so they can line up their answers; each Z-move fires once, so a
 Protect or a sacrificial switch on the bout's first big turn takes most of the danger out. Against Amen: Haze,
@@ -465,7 +497,9 @@ Clear Smog, Roar, Whirlwind or a Ghost type (Last Resort can't touch it) before 
 
 ## 9. Verification
 
-HARNESS_RESULTS_PLACEHOLDER
+Realistic and prepared win rates for K1–Gym 3 per difficulty: `design/BALANCE.md` §9 (round 3, 60 fights a cell).
+Late fights (the Octave gauntlet, the war doubles and legendaries): §6 above. Every team: `validate_trainers.py`
+0 errors, `validate_map_trainers.py` 0 errors, `field_fit.py --all` 0 problems, `run_all.rb` 0 errors.
 
 ## 10. Open items
 

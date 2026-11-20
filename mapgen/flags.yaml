@@ -16,6 +16,7 @@ variables:
   ROAD_GUST: 601      # Frostwick Pass wind gap: 0 calm / 1 gusting (pfp_metronome from the gap's parallel event)
   ROAD_SLUICE: 602    # the Dyers' Ford vat-yard sluice: colour stones stepped in order (0-3; 4 = open)
   ROAD_RAMRACE: 603   # Spinners' Rise Ram Race: 0 not raced, 1 running, 2 won, 3 lost (rematch allowed)
+  ROAD_RAMSTEPS: 604  # the Ram Race's start: $stats.distance_walked when the boy said go
 switches:
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on

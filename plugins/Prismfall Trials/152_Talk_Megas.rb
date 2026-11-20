@@ -59,9 +59,9 @@ Prismfall::Trials::TALK.merge!({
     [:OS_AMBER_AGAIN, "quest_state(:SELF) == :available || quest_active(:SELF)", :offer]] },
   #--- Cragholm rack (360) and the third vertebra on the Vertebrae (773) -----------------------
   :NASRIN_CRAGHOLM => { :board => :OSSARIA, :rows => [
-    [:OS_BONEWRIGHT, "quest_state(:SELF) == :available", :offer],
-    [:OS_BONEWRIGHT, "quest_step(:SELF) == :return", :return]] },
-  :THIRD_VERTEBRA => { :rows => [[:OS_BONEWRIGHT, "quest_step(:SELF) == :ask", :dig]],
+    [:OS_TYRANT_HEART, "quest_state(:SELF) == :available", :offer],
+    [:OS_TYRANT_HEART, "quest_step(:SELF) == :return", :return]] },
+  :THIRD_VERTEBRA => { :rows => [[:OS_TYRANT_HEART, "quest_step(:SELF) == :ask", :dig]],
                        :idle => "A vertebra the size of a house. The rock under it is warm." },
   #--- Lucent, the Speculum (346): Lector Saffi and the third pane --------------------------------
   :SAFFI_SPECULUM => { :board => :ANTUMBRA, :rows => [
@@ -73,5 +73,5 @@ Prismfall::Trials::TALK.merge!({
 # Existing keepers get the new rows too (their map events are already placed).
 Prismfall::Trials::TALK[:HESPER][:rows].push([:EL_LAMP_LENS, "quest_state(:SELF) == :available", :offer]) if Prismfall::Trials::TALK[:HESPER]
 if Prismfall::Trials::TALK[:CRUCIBLE_LEGATE]
-  Prismfall::Trials::TALK[:CRUCIBLE_LEGATE][:rows].push([:AS_DRAGONSWORN, "quest_state(:SELF) == :available || quest_active(:SELF)", :offer])
+  Prismfall::Trials::TALK[:CRUCIBLE_LEGATE][:rows].push([:AS_BRAZIER_WRIT, "quest_state(:SELF) == :available || quest_active(:SELF)", :offer])
 end

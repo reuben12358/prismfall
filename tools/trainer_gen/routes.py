@@ -20,7 +20,7 @@ def ROUTES(P):
         # Segment 0, cap 15. Ch1: 520 Ferrymen's Mile, 521 Windfall Row (keeps its Ch1 trainers at 6-8).
         # Ch2: 527 Lacecliff Walk / 528 Marram Down (the Strand Road, 8-12), 154 Pell Playhouse auditorium actors (10-13).
         520: (0, 15, {}), 521: (0, 15, {}), 527: (0, 15, {}), 528: (0, 15, {}),
-        154: (-5, 15, {}),                                    # Florian, Rosalind, Ambrose (written as map 151 before)
+        154: (-5, 15, {}),                                    # Florian, Rosalind, Ambrose (written as map 151 before); lose texts = the Ch1 script's [after] lines
         # Segment 1, cap 19 (Ch2 after Gym 1, and the Ch3 Weavers' Road to Briarwick)
         145: (-1, 19, {}),                                    # Pageant Hall grunts, after Gym 1, 15-16
         541: (0, 19, {}), 544: (0, 19, {}), 545: (0, 19, {}), # the Grey Saltings, Brinecut Mine (14-17)
@@ -85,9 +85,9 @@ def ROUTES(P):
     t("Map 541 The Grey Saltings", "TUBER_F", "Pip", "Waaah! My floaty popped!", [m("SURSKIT", 14, "SWIFTSWIM", "TIMID"), m("MINCCINO", 15, "CUTECHARM", "JOLLY")])
     # Map 151-153 Pell Playhouse (Gym 2 actors, lv 15-18) - GRAND_STAGE: sound (Echoed Voice, Disarming Voice), showpieces
     # (Fake Out) and dances (Teeter Dance) raise the applause, so the player sees the stages climb before Dorian
-    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Florian", "Dropped every pin! Bravo, though.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
-    t("Map 154 Pell Playhouse - Auditorium", "BEAUTY", "Rosalind", "The spotlight suits you better, darling.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,ROUND,SING,TAILWHIP"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
-    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Ambrose", "An encore? No? Fair.", [m("AIPOM", 16, "SKILLLINK", "JOLLY"), m("HERDIER", 17, "INTIMIDATE", "ADAMANT")])
+    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Florian", "I'll be in the bar. There is no bar. I'll be in the lobby.", [m("MINCCINO", 15, "TECHNICIAN", "JOLLY", "ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES"), m("SPINDA", 16, "OWNTEMPO", "ADAMANT")])
+    t("Map 154 Pell Playhouse - Auditorium", "BEAUTY", "Rosalind", "...Upstaged. In my own aisle.", [m("SKITTY", 16, "CUTECHARM", "TIMID", "FAKEOUT,ROUND,SING,TAILWHIP"), m("FLABEBE", 16, "FLOWERVEIL", "MODEST")])
+    t("Map 154 Pell Playhouse - Auditorium", "JUGGLER", "Ambrose", "Encore? No? No.", [m("AIPOM", 16, "SKILLLINK", "JOLLY"), m("LILLIPUP", 17, "VITALSPIRIT", "ADAMANT")])
     t("Map 152 Pell Playhouse - Backstage (D9, after Badge 2)", "GENTLEMAN", "Reginald", "Splendid form. Dorian will be delighted.", [m("HERDIER", 17, "INTIMIDATE", "ADAMANT"), m("FURFROU", 17, "FURCOAT", "JOLLY")])
     t("Map 153 Pell Playhouse - Backstage (D9, after Badge 2)", "JUGGLER", "Pierrot", "...(Pierrot mimes a dramatic faint.)", [m("AIPOM", 17, "PICKUP", "JOLLY"), m("SPINDA", 17, "TANGLEDFEET", "ADAMANT")])
     t("Map 153 Pell Playhouse - Backstage (D9, after Badge 2)", "LADY", "Odette", "My costume is ruined. Worth it.", [m("BUNEARY", 17, "LIMBER", "JOLLY"), m("FURFROU", 18, "FURCOAT", "JOLLY")])
@@ -127,9 +127,9 @@ def ROUTES(P):
     t("Map 521 Windfall Row", "BUGCATCHER", "Wim", '...Assistant Warden.', [m("SPINARAK", 6, "SWARM", "ADAMANT"), m("COMBEE", 7, "HONEYGATHER", "HASTY")])
     t("Map 521 Windfall Row", "PICNICKER", "Ada", 'Bless you. Bless both of us.', [m("ODDISH", 6, "RUNAWAY", "MODEST"), m("BUDEW", 7, "LEAFGUARD", "MODEST")])
     t("Map 524 Gossamer Wood", "TWINS", "Mo & Jo", 'We lost together!', [m("KARRABLAST", 9, "SWARM", "ADAMANT"), m("SHELMET", 9, "HYDRATION", "BOLD")])
-    t("Map 131 Loomhouse Gym - Weaving Hall", "BUGCATCHER", "Nell", "Knotted up. Tamsin'll untangle you.", [m("SEWADDLE", 11, "SWARM", "ADAMANT"), m("SPINARAK", 12, "SWARM", "ADAMANT")])
-    t("Map 131 Loomhouse Gym - Weaving Hall", "LASS", "Orla", 'See? Never the red shuttle first.', [m("LEDYBA", 11, "SWARM", "JOLLY"), m("SPEWPA", 12, "SHEDSKIN", "BOLD")])
-    t("Map 131 Loomhouse Gym - Weaving Hall", "GENTLEMAN", "Bram", 'Sorry. No, wait, you won. Well done.', [m("VENONAT", 12, "COMPOUNDEYES", "MODEST"), m("SEWADDLE", 13, "SWARM", "ADAMANT")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "BUGCATCHER", "Nell", "Two of us would've had you.", [m("SEWADDLE", 11, "SWARM", "ADAMANT"), m("SPINARAK", 12, "SWARM", "ADAMANT")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "LASS", "Orla", "...I'm going back to the net.", [m("LEDYBA", 11, "SWARM", "JOLLY"), m("SPEWPA", 12, "SHEDSKIN", "BOLD")])
+    t("Map 131 Loomhouse Gym - Weaving Hall", "GENTLEMAN", "Bram", "I don't need to say it, then.", [m("VENONAT", 12, "COMPOUNDEYES", "MODEST"), m("SEWADDLE", 13, "SWARM", "ADAMANT")])
     t("Map 525 Gossamer Deepwood", "POKEMANIAC", "Ferris", 'That one hummed. Did you hear it hum?', [m("PARAS", 11, "EFFECTSPORE", "ADAMANT"), m("NINCADA", 11, "COMPOUNDEYES", "JOLLY"), m("YANMA", 12, "SPEEDBOOST", "MODEST")])
     t("Map 560 Frostflat Causeway", "LASS", "Tilde", 'My Swinub slid farther than me.', [m("SWINUB", 16, "OBLIVIOUS", "ADAMANT"), m("SNOM", 17, "SHIELDDUST", "MODEST")])
     t("Map 560 Frostflat Causeway", "SAILOR", "Haakon", "Ice'll break by summer. Probably.", [m("SPHEAL", 17, "ICEBODY", "MODEST"), m("CETODDLE", 18, "THICKFAT", "ADAMANT")])

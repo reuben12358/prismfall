@@ -145,8 +145,9 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # careless player who lets the crowd climb. Counterplay: KO the singers first, stall (Protect, Endure, Splash...)
     # to calm the crowd, Rock and Ghost types (Rolycoly, Sudowoodo, Sandygast) shrug off the Normal moves.
     # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
-    P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
-      casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
+    # (Baton Pass is a Lv 11 move: Standard and Casual stay level-legal.)
+    P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,TAILWHIP", "A",
+      casual={"moves": "SCRATCH,ASTONISH,TAILWHIP"},
       hard={"moves": "FAKEOUT,ASTONISH,SCRATCH,TICKLE"}),
     # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB here); Echoed Voice doubles each
     #    turn it is repeated, so the echo and the applause climb together where the player can see it - switch, or KO
@@ -611,7 +612,8 @@ rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way,
     # Hard only: the Deino that becomes Hydreigon (K5+), already mean.
     P("DEINO", 21, "HUSTLE", "ORANBERRY", "ADAMANT", "DRAGONBREATH,BITE,HEADBUTT,ROAR", "A", only="hard"),
     P("HONEDGE", 21, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
-      nick="Morwen", hard={"moves": "SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER", "item": "EVIOLITE"}),
+      nick="Morwen", hard={"moves": "SHADOWSNEAK,SLASH,AERIALACE,FURYCUTTER", "item": "EVIOLITE"},
+      casual={"moves": "SHADOWSNEAK,AERIALACE,FURYCUTTER,TACKLE"}),   # Casual Lv 19: Slash is a Lv 20 move
     starter_mon("RIVAL_KESTREL", s, 1, 23),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don't get it. Nobody does.", lambda s: [
@@ -1289,8 +1291,13 @@ octave_duel("Carol", 90, "CR_OCTAVE_NINTH_VERSE, the Glassfall Memorial Garden, 
 ])
 # -- v60: the Crownhaven gauntlet. Each Eeveelution shines on its home field with its Z-move (a Z-move is its type
 #    for every field rule; base-move rules don't carry over; on the Grand Stage a Z-move raises the applause).
-OCT_BOUT_LV, OCT_HOST_LV = 87, 89   # Festival cap 90; Hard +1, Casual -4 (variants()). Harness: 88 / 90 gave a
-                                   # well-built Lv 90 team 1 full clear in 10 (6.5 of 9 bouts on average).
+OCT_BOUT_LV, OCT_HOST_LV = 87, 89   # Festival cap 90; Hard +1, Casual -4 (variants()). Target (coordinator): hard but fair
+# for a well-built team at the cap, beatable with planning. Harness (/home/claude/work/trainers2/run_late.rb, a well-built
+# Lv 90 six, AI-piloted, a few Full Restores / Hyper Potions carried through, no healing between bouts, 10 orders):
+#   87 / 89: no plan 1 of 10 full clears on Standard (6.6 of 9 bouts), 0 of 10 on Hard (4.4); leading each bout with
+#            the Pokemon that takes its type best ("planned") 9 of 10 Standard, 8 of 10 Hard; Casual 9 of 10 unplanned.
+#   88 / 90: planned 10 / 8 of 10, no plan 1 / 0.  85 / 87: planned 9 / 10, no plan 2 / 0. The killers are the Z-moves
+#   (36 of 55 knockouts): one per bout, on the home field, into whatever leads - so the lead is the plan.
 def octave_bout(name, lose, mon):
     S("Gauntlet bout - %s (v60; the quest sets the field: plugins/Prismfall Trials/012_Trials_Octave.rb SINGERS)" % name,
       "OCTAVE_SINGER", name, 60, 90, lose, [mon], nobag=True)
@@ -1419,6 +1426,8 @@ soldier("ASHKAAR_OFFICER", "Captain", 1, "Glass or sand, I held my ground. ...Yo
       casual={"item": "SITRUSBERRY", "moves": "HEATWAVE,EARTHPOWER,SOLARBEAM,PROTECT"}),
     P("COALOSSAL", 83, "STEAMENGINE", "SITRUSBERRY", "ADAMANT", "ROCKSLIDE,FLAREBLITZ,TARSHOT,PROTECT", "HA",
       only="nocasual"),
+    # Intimidate for the pair; Extreme Speed picks off what the Eruptions left.
+    P("ARCANINE", 83, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT", "A"),
     P("GARCHOMP", 84, "ROUGHSKIN", "LUMBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,FIREFANG,PROTECT", "A",
       hard={"item": "LIFEORB", "moves": "SCALESHOT,STONEEDGE,FIREFANG,PROTECT"}),
 ], "the Glass Dunes, Ashkaar line officer (map 926, Desert; partner double)")
@@ -1428,6 +1437,8 @@ soldier("ASHKAAR_SOLDIER_M", "Soldier", 2, "Sand in my teeth. Glass in my boots.
     # Mold Breaker: Rock Slide (spread) through Sturdy / Multiscale; Dragon Claw for Sigrun's dragons when she stands in.
     P("HAXORUS", 82, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,ROCKSLIDE,POISONJAB,PROTECT", "A",
       only="nocasual", hard={"moves": "DRAGONCLAW,ROCKSLIDE,POISONJAB,DRAGONDANCE"}),
+    # Hard: a second Drought to take the sky back from Marisol's rain.
+    P("NINETALES", 82, "DROUGHT", "HEATROCK", "TIMID", "HEATWAVE,SOLARBEAM,ENCORE,PROTECT", "S", only="hard"),
 ], "the Glass Dunes, Ashkaar line (map 926, Desert; partner double with Captain 1)")
 # -- Isenmar (Water / Ice) --------------------------------------------------------------------------------------------
 # On the dunes Ice is x0.75 and Water x0.8 until the sea comes: Drizzle (or three floods) soaks the sand, the nerfs
@@ -1478,12 +1489,16 @@ soldier("ISENMAR_OFFICER", "Captain", 1, "The sea came all this way for us. ...A
     P("PELIPPER", 82, "DRIZZLE", "DAMPROCK", "MODEST", "HURRICANE,SCALD,TAILWIND,PROTECT", "BS",
       casual={"ab": "KEENEYE", "item": "SITRUSBERRY", "moves": "HURRICANE,SCALD,ROOST,PROTECT"}),
     P("KINGDRA", 83, "SWIFTSWIM", "SITRUSBERRY", "MODEST", "MUDDYWATER,DRACOMETEOR,ICEBEAM,PROTECT", "S", only="nocasual"),
+    # Freeze-Dry hits Water types for 2x and is a big Ice move: three freeze the flood into a Frozen Lake, Isenmar's
+    # second ground (and it cracks a glass crust).
+    P("LAPRAS", 83, "WATERABSORB", "SITRUSBERRY", "MODEST", "HYDROPUMP,FREEZEDRY,ICESHARD,PROTECT", "BS"),
     P("ARCTOVISH", 84, "WATERABSORB", "SITRUSBERRY", "ADAMANT", "FISHIOUSREND,ICICLECRASH,PSYCHICFANGS,PROTECT", "HA",
       hard={"item": "MYSTICWATER"}, casual={"moves": "LIQUIDATION,ICICLECRASH,PSYCHICFANGS,PROTECT"}),
 ], "the Glass Dunes, Isenmar line officer (map 926, Desert; partner double)")
 soldier("ISENMAR_SOLDIER_M", "Soldier", 2, "The tide's on our side. It's just slow about it.", [
     P("MAMOSWINE", 81, "THICKFAT", "SITRUSBERRY", "ADAMANT", "EARTHQUAKE,ICICLECRASH,ICESHARD,ROCKSLIDE", "A"),
     P("SEISMITOAD", 82, "SWIFTSWIM", "SITRUSBERRY", "MODEST", "MUDDYWATER,EARTHPOWER,SLUDGEWAVE,PROTECT", "S", only="nocasual"),
+    P("CLOYSTER", 82, "SKILLLINK", "WHITEHERB", "ADAMANT", "ICICLESPEAR,ROCKBLAST,SHELLSMASH,PROTECT", "A", only="hard"),
 ], "the Glass Dunes, Isenmar line (map 926, Desert; partner double with Captain 1)")
 # -- The partners (one version: the same ally in every mode). Each brings the answer to the other host's plan.
 S("Ch19 war partner - Sigrun beside the PC on the Glass Dunes (backing Ashkaar, or standing between). Against the sea: "

@@ -92,6 +92,7 @@ CHALK_RAMP = [(92, 90, 104), (128, 126, 136), (162, 160, 164), (190, 188, 184), 
 DUNE_RAMP = [(112, 84, 58), (146, 116, 80), (176, 148, 102), (200, 176, 126), (220, 200, 148), (234, 218, 170)]
 
 
+SNOW_MORE = [(0, 13, 3, 4), (3, 14, 3, 4), (0, 30, 3, 4), (0, 0, 2, 3), (2, 0, 2, 3), (6, 17, 2, 3)]   # Route 4: teal oaks, the blue oak, pines
 SILK_TREES = [[[592, 593, 0], [600, 601, 602], [608, 609, 610], [616, 617, 618]],
               [[1504, 1505, 1506], [1512, 1513, 1514], [1520, 1521, 1522], [1528, 1529, 1530]]]
 
@@ -307,6 +308,18 @@ def main():
                 sheet.paste(big.crop((tx * 32, ty * 32, tx * 32 + 32, ty * 32 + 32)), ((k % 8) * 32, (k // 8) * 32))
                 props[k] = (t126s['passages'][sid], t126s['priorities'][sid], 0)
                 silked['silk_sh:%d' % sid] = k; k += 1
+    snow2 = {}                                             # map builder 10: more snowy lattice species for the Hoar Road
+    r4s = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Route 4.png')).convert('RGBA')
+    t211 = RC.RR.tileset('rejuvenation', 211)
+    for (c0, r0, w_, h_) in SNOW_MORE:
+        for dy in range(h_):
+            for dx in range(w_):
+                sid = 384 + (r0 + dy) * 8 + c0 + dx; i = sid - 384
+                tile = r4s.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32))
+                if tile.getbbox() is None or ('snow_ak:%d' % sid) in snow2: continue
+                sheet.paste(snowify(tile.copy(), 'tree'), ((k % 8) * 32, (k // 8) * 32))
+                props[k] = (t211['passages'][sid], t211['priorities'][sid], 0)
+                snow2['snow_ak:%d' % sid] = k; k += 1
     dyed = {}                                              # map builder 10: the Dyers' Ford's madder / woad / weld fields
     sh2 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGBA')
     t126 = RC.RR.tileset('rejuvenation', 126)
@@ -345,6 +358,7 @@ def main():
     out['_chalk'] = {k2: base + v for k2, v in chalk.items()}
     out['_dyegrass'] = {k2: base + v for k2, v in dyed.items()}
     out['_silk'] = {k2: base + v for k2, v in silked.items()}
+    out['_snow2'] = {k2: base + v for k2, v in snow2.items()}
     r4 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Route 4.png')).convert('RGBA')
     for n, (c0, r0, w, h, top) in CHALK_STAMPS.items():
         lay = [[[0] * w for _ in range(h)] for _ in range(3)]

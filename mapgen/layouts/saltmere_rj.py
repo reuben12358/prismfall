@@ -58,6 +58,7 @@ def can_place(m, n, x, y):
     if m.taken[y:y + h, x:x + w].any() or m.cliff[y:y + h, x:x + w].any(): return False
     if hasattr(m, 'bfoot') and m.bfoot[y:y + h, x:x + w].any(): return False
     if np.isin(m.cls[y:y + h, x:x + w], list('wWsS')).any(): return False
+    if getattr(m, 'smask', None) is not None and m.smask[y:y + h, x:x + w].any(): return False
     sub = m.ht[y:y + h, x:x + w]
     return sub.min() == sub.max()
 
@@ -100,6 +101,7 @@ def block(m, x0, x1, ytop, yb, pool, seed, alley_every=14, setback=0.15):
     every cell not built on becomes a cobbled back court (props, laundry, a well)"""
     m.rect(x0, ytop, x1 - x0 + 1, yb - ytop + 1, 'c', only='T.')
     m.court[ytop:yb + 1, x0:x1 + 1] |= (m.cls[ytop:yb + 1, x0:x1 + 1] == 'c')
+    if getattr(m, 'smask', None) is not None: m.court &= ~m.smask
     depth = yb - ytop + 1; k = 0
     while depth >= 6:
         if depth <= 11: hmax = depth
@@ -110,6 +112,44 @@ def block(m, x0, x1, ytop, yb, pool, seed, alley_every=14, setback=0.15):
         if depth - hmax >= 8:
             m.alleys.append((x0, yb - 1, x1 - x0 + 1, 2)); yb -= 2
         depth = yb - ytop + 1; k += 1
+
+
+def street(m, pts, w=3.2, c='c', wobble=0.0):
+    """map builder 10: a curved or diagonal street (Catmull-Rom through pts) cut through the blocks before they are
+    built: its cells join m.smask, so ranks build round it (stepped fronts) and back courts never claim it"""
+    if getattr(m, 'smask', None) is None: m.smask = np.zeros((m.H, m.W), bool)
+    before = m.cls.copy()
+    m.lane(pts, c=c, w=w, only='T.', wobble=wobble)
+    m.smask |= (m.cls != before)
+
+
+def stepped_rank(m, x0, x1, ylo, pool, seed, maxh=9, minh=6, below=True):
+    """houses shoulder to shoulder from x0 to x1 whose fronts follow a slanting street: each house stands with its
+    bottom row one above the first street cell under it (the lowest it can go over its whole width), and the strip
+    between a front and a street that drops away under it is flagged pavement (a stoop).  ylo: the search starts there"""
+    rng = random.Random(seed); x = x0; last = None; placed = []
+    def edge(xx):
+        for yy in range(ylo, m.H):
+            if m.smask[yy, xx] or m.cls[yy, xx] in 'fwWS' or m.cliff[yy, xx]: return yy
+        return m.H
+    while x <= x1:
+        room = x1 - x + 1
+        if room < 3: break
+        c = []
+        for n in pool:
+            w, h = SZ(n)
+            if w > room or n == last or not (minh <= h <= maxh): continue
+            yb = min(edge(xx) for xx in range(x, x + w)) - 1
+            if yb - h + 1 < ylo or not can_place(m, n, x, yb - h + 1): continue
+            c.append((abs(maxh - h) + rng.random() * 2.5 + (0 if room - w == 0 or room - w >= 3 else 3), n, yb))
+        if not c: x += 1; continue
+        c.sort(); _, n, yb = c[0]; w, h = SZ(n)
+        put(m, n, x, yb - h + 1); placed.append((n, x, yb - h + 1)); last = n
+        for xx in range(x, x + w):
+            for yy in range(yb + 1, edge(xx)):
+                if m.cls[yy, xx] in 'cT.' and not m.taken[yy, xx]: m.cls[yy, xx] = 'f'; m.smask[yy, xx] = True
+        x += w
+    return placed
 
 
 def gardens(m, seed, trees=('tr_oak', 'tr_oak2', 'tr_teal', 'tr_pink', 'tr_oak')):
@@ -292,6 +332,8 @@ def paint_salt(m, seed):
     salt = [K.P1('salt%d' % i) for i in range(4)]
     for y, x in np.argwhere(m.cls == 'S'):
         m.L[0, y, x] = salt[0] if rng.random() < 0.55 else rng.choice(salt); m.L[1, y, x] = 0
+    for y, x in np.argwhere((m.cls == 'B') & (m.under == 'S')):                 # under heaps, tubs and pans: salt, not grass
+        m.L[0, y, x] = salt[0]
 
 
 def brine_pans(m, x0, y0, x1, y1, seed, pw=(3, 6), ph=(2, 3)):
@@ -310,6 +352,54 @@ def brine_pans(m, x0, y0, x1, y1, seed, pw=(3, 6), ph=(2, 3)):
                         m.tile(K.P1('brine_' + v), xx, yy, 1); m.cls[yy, xx] = 'B'
             x += w + rng.choice((1, 1, 2))
         y += h + 1
+
+
+def salt_works(m, seed, flats, kinds=('brine', 'brine', 'brp', 'brg', 'brx', 'brx')):
+    """map builder 10: for each (box, walks): reserve the boardwalk lines (x0, y0, x1, y1) over the salt, then pack every
+    salt field the walks leave with pans: bands of 2-4 rows, pans 2-7 wide, each its own brine (blue new water, grey-green
+    off the marsh, halophile pink in the oldest pans, white crystallising), now and then a gap left for the heaps and a
+    tall pan over two bands.  Returns the deck cells for lay_deck (after paint)"""
+    from scipy import ndimage
+    rng = random.Random(seed * 7 + 1); deck = []
+    for box, walks in flats:
+        for x0, y0, x1, y1 in walks:
+            for y in range(y0, y1 + 1):
+                for x in range(x0, x1 + 1):
+                    if m.inb(x, y) and m.cls[y, x] in 'Sw': deck.append((x, y)); m.taken[y, x] = True   # a jetty where it crosses water
+        bx0, by0, bx1, by1 = box
+        field = np.zeros((m.H, m.W), bool)
+        field[by0:by1 + 1, bx0:bx1 + 1] = (m.cls[by0:by1 + 1, bx0:bx1 + 1] == 'S') & ~m.taken[by0:by1 + 1, bx0:bx1 + 1]
+        lab, n = ndimage.label(field)
+        for k in range(1, n + 1):
+            ys, xs = np.nonzero(lab == k)
+            if len(ys) < 12: continue
+            e = lambda v, edge: 0 if v == edge else 1                                          # a 1-cell raking margin (none at the map edge)
+            fy0, fy1, fx0, fx1 = ys.min() + e(ys.min(), 0), ys.max() - e(ys.max(), m.H - 1), xs.min() + e(xs.min(), 0), xs.max() - e(xs.max(), m.W - 1)
+            y = fy0
+            while y + 1 <= fy1:
+                room = fy1 - y + 1
+                h = room if room <= 4 else min(rng.choice((2, 3, 3, 4)), room - 3) if room - 3 >= 2 else room
+                h = max(2, min(h, 4)); x = fx0 + rng.choice((0, 0, 1))
+                while x + 1 <= fx1:
+                    w = min(rng.randint(2, 7), fx1 - x + 1)
+                    if fx1 - (x + w) in (1, 2): w = fx1 - x + 1                                # no sliver at the end
+                    hh = h + 1 + rng.randint(2, 3) if rng.random() < 0.12 and y + h + 3 <= fy1 else h
+                    ok = w >= 2 and all(lab[yy, xx] == k and not m.taken[yy, xx] for yy in range(y, y + hh) for xx in range(x, x + w))
+                    if ok and rng.random() < 0.88:
+                        kind = rng.choice(kinds)
+                        for yy in range(y, y + hh):
+                            for xx in range(x, x + w):
+                                v = ('n' if yy == y else 's' if yy == y + hh - 1 else '') + ('w' if xx == x else 'e' if xx == x + w - 1 else '')
+                                m.tile(K.P1('%s_%s' % (kind, v or 'c')), xx, yy, 1); m.cls[yy, xx] = 'B'; m.under[yy, xx] = 'S'
+                    x += w + rng.choice((1, 1, 2))
+                y += h + 1
+    return deck
+
+
+def lay_deck(m, deck):
+    """the rakers' plank walks on the salt (after paint: they sit on layer 2 over the salt ground)"""
+    import craftkit as CK, types
+    CK.boardwalks(types.SimpleNamespace(m=m, seed=0), deck)
 
 
 def dry_footings(m):
@@ -552,13 +642,19 @@ def build_140(prev=None):
     m.stairs(31, LAKE - 1, w=3, kit_rows=3, c='c')
     m.stairs(74, LAKE - 1, w=3, kit_rows=3, c='c')
     m.plan_cliffs()
-    S = lambda x, y, w, h, c='c': m.rect(x, y, w, h, c, only='T.')
+    m.smask = np.zeros((H, W), bool)
+    def S(x, y, w, h, c='c'):
+        m.rect(x, y, w, h, c, only='T.'); m.smask[max(0, y):y + h, max(0, x):x + w] |= (m.cls[max(0, y):y + h, max(0, x):x + w] == c)
     S(43, 0, 6, 26)                                                                  # Gate Street from the North Gate
     S(0, 8, 88, 4)                                                                   # Lantern Row (High Town)
     S(0, 31, 22, 4)                                                                  # West Street to the West Gate
     S(64, 44, 24, 4)                                                                 # East Street from the East Gate
-    S(19, 12, 3, 38)                                                                 # Chandlers' Way
-    S(68, 12, 3, 32)                                                                 # Players' Lane
+    S(19, 12, 3, 23)                                                                 # Chandlers' Way (to West Street)
+    # map builder 10: the grid broken.  Players' Lane bends east down the hill to the East Gate (the old ropewalk's line),
+    # the Saltwife's Slant cuts from the square's corner down to the promenade; Lantern Passage joins the lane to the square
+    street(m, [(69, 12), (69, 17), (71, 24), (75, 31), (79, 38), (81, 44)], w=3.4)
+    street(m, [(23, 40), (18, 43), (12, 46.5), (6, 50)], w=3.2)
+    S(64, 26, 8, 3)                                                                  # Lantern Passage
     m.rect(22, 25, 42, 17, 'f', only='T.c')                                          # the market square
     m.rect(40, 42, 10, 8, 'f', only='T.c')                                           # the Fountain Walk to the promenade
     m.rect(0, 50, 88, LAKE - 50, 'f', only='T.c')                                    # the promenade on the sea wall
@@ -585,11 +681,13 @@ def build_140(prev=None):
     block(m, 0, 18, 14, 30, pool, 13)                                                # above West Street
     block(m, 22, 42, 14, 24, HOUSES, 14)
     block(m, 49, 67, 14, 24, SHOPS, 15)
-    block(m, 71, 87, 14, 43, pool, 17, alley_every=10)
-    block(m, 0, 18, 35, 49, pool, 19)                                                # above the promenade, west
+    stepped_rank(m, 72, 87, 14, pool, 17, maxh=9)                                    # fronts stepping down the bent lane
+    block(m, 72, 87, 14, 43, pool, 117, alley_every=10)
+    block(m, 64, 80, 29, 43, pool, 22, alley_every=0)                                # under the lane, west of it
+    stepped_rank(m, 0, 18, 35, pool, 19, maxh=9)                                     # fronts stepping down the Slant
+    block(m, 0, 18, 35, 49, pool, 119)
     block(m, 22, 39, 42, 49, SHOPS + HOUSES, 20)
     block(m, 50, 63, 42, 49, SHOPS, 21)
-    block(m, 64, 67, 25, 43, HOUSES, 22)
     m.cls[m.cls == 'T'] = 'c'
     pavements(m)
     m.blob(43.5, 32, 6.5, 4.6, 'c', seed=21, rough=0.0, only='f'); m.blob(43.5, 32, 4.4, 3.2, 'f', seed=22, rough=0.0, only='c')
@@ -627,6 +725,10 @@ def build_140(prev=None):
                       "Woman from the ferry: You! From the Dovetail! I'm home! I'm not grey anymore. Look at me. I'm BEIGE.\nWoman from the ferry: Blank tint. Saltmere. The gate said so. My sister cried."}, 76, 46))
     E.append(seat(m, {'type': 'npc', 'name': 'Salt raker', 'sprite': 'NPC 19', 'dir': 'up', 'move': 'random', 'text':
                       'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'}, 40, 66, 'S'))
+    E.append(seat(m, {'type': 'npc', 'name': 'Pan warden', 'sprite': 'NPC 25', 'dir': 'left', 'move': 'fixed', 'text':
+                      "Pan warden: Pink pans are the old ones. The colour's a little life that loves salt more than we do. White means ready. Blue means wait."}, 80, 66, 'S'))
+    E.append(seat(m, {'type': 'npc', 'name': 'Raker boy', 'sprite': 'NPC 05', 'dir': 'down', 'move': 'random', 'text':
+                      "Raker boy: Walk the planks! If you walk the crust it cracks and Gran knows. Gran always knows."}, 24, 68, 'S'))
     m.events += audience(E)
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(140): m.taken[y, x] = True
@@ -648,24 +750,28 @@ def build_140(prev=None):
     props(m, (('pf_morris', 66, 45), ('hb_cask', 75, 45), ('hb_barrels', 64, 48), ('pf_morris', 10, 33), ('hb_boxes', 16, 31)), on='c')
     for x, y in ((12, 53), (64, 53)): m.trees(x, y, 1, ['tr_oak2', 'tr_teal'], r=1, on='.')
     lamps(m, [(x, 51) for x in range(5, 86, 8)] + [(x, 57) for x in range(9, 86, 12)] + [(42, 26), (49, 26), (23, 26), (62, 26), (23, 41), (62, 41),
-              (40, 43), (49, 43), (46, 12), (42, 22), (49, 22), (18, 30), (72, 43), (10, 30), (80, 43), (67, 30), (8, 12), (30, 12), (58, 12), (80, 12)])
+              (40, 43), (49, 43), (46, 12), (42, 22), (49, 22), (18, 30), (72, 43), (10, 30), (80, 43), (67, 30), (8, 12), (30, 12), (58, 12), (80, 12),
+              (71, 19), (74, 29), (78, 37), (68, 25), (16, 45), (9, 49), (21, 39)])
     string_lights(m, 23, 42, 25); string_lights(m, 49, 62, 25)                       # lantern strings along the civic fronts
     string_lights(m, 20, 23, 30); string_lights(m, 71, 84, 43); string_lights(m, 0, 18, 49)
     for x in (29, 35, 54, 60): overs(m, 'hb_banner', x, 22) if False else None
     parapets(m, 'rw', rows=(11,)); parapets(m, 'qy', rows=(LAKE - 1,))
     street_trees(m, [(8, 57), (20, 57), (32, 57), (50, 57), (70, 57), (84, 57), (25, 29), (61, 30), (24, 40), (61, 40), (2, 33), (82, 46)])
     gardens(m, 140); courts(m, 140)
-    # ---- the salt lake: uneven pans with raking paths, heaps, tubs; boats on the open water
-    brine_pans(m, 18, LAKE + 3, 52, H - 1, 140)
-    brine_pans(m, 66, LAKE + 5, 87, H - 1, 141, pw=(3, 5))
-    props(m, (('hb_salt0', 21, 69), ('hb_salt1', 34, 69), ('hb_salt2', 46, 68), ('hb_salt0', 75, 69), ('hb_salt1', 82, 66),
-              ('hb_barrel', 40, 69), ('hb_tubs', 26, 69), ('hb_salt2', 28, 62), ('hb_salt0', 69, 65)), on='S', r=3)
+    # ---- the salt lake (map builder 10): pans of every size in four brines (blue new water, grey-green off the marsh,
+    # halophile pink in the oldest pans, white crystallising pans ready to rake), plank boardwalks the rakers use from the
+    # stair feet, heaps and tubs along the walks
+    deck = salt_works(m, 140, [((18, LAKE + 2, 52, H - 1), [(32, LAKE + 1, 32, H - 1), (18, 66, 51, 66)]),
+                               ((65, LAKE + 4, 87, H - 1), [(75, LAKE + 2, 75, H - 1), (66, 67, 86, 67)])])
+    props(m, (('hb_salt0', 21, 69), ('hb_salt1', 36, 68), ('hb_salt2', 46, 68), ('hb_salt0', 79, 69), ('hb_salt1', 84, 65),
+              ('hb_barrel', 40, 64), ('hb_tubs', 26, 63), ('hb_salt2', 28, 69), ('hb_salt0', 69, 65), ('hb_salt2', 50, 63),
+              ('hb_salt1', 19, 63), ('hb_tubs', 72, 69)), on='S', r=3)
     # ---- crowd: the square and the promenade are full on Pageant week
     sq = [(x, y) for y in range(26, 41) for x in range(23, 63)]
     pr = [(x, y) for y in range(51, 57) for x in range(2, 86)]
     crowd(m, sq, 12, 1401); crowd(m, pr, 10, 1402); crowd(m, [(x, y) for y in range(8, 11) for x in range(0, 88)], 4, 1403, on='c')
     m.paint()
-    paint_salt(m, 140); dry_footings(m); glints(m, 140)
+    paint_salt(m, 140); lay_deck(m, deck); dry_footings(m); glints(m, 140)
     boats(m, (('hb_boat1', 2, 61), ('hb_boat3', 2, 66), ('hb_boat2', 62, 61), ('hb_boat4', 79, 60), ('hb_boat1', 5, 69)))
     m.scatter(5, seed=140, on='.')
     conn = [{'dir': 'N', 'offset': 43, 'to': 541, 'to_offset': 30}, {'dir': 'W', 'offset': 31, 'to': 560, 'to_offset': 12},
@@ -738,7 +844,7 @@ def build_146(prev=None):
     m.events += audience(E)
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(146): m.taken[y, x] = True
-    brine_pans(m, 1, 0, 36, 4, 146, pw=(3, 5), ph=(2, 2))
+    salt_works(m, 146, [((0, 0, 37, 5), [])])
     props(m, (('hb_salt1', 30, 1), ('hb_salt0', 14, 2)), on='S', r=2)
     # ---- the square and the quay: cranes, freight, the fish market, nets, bollards; the berth and the breakwater
     props(m, (('hb_crane', 22, 31), ('hb_crane', 34, 31), ('hb_crane', 58, 31), ('hb_crane', 66, 31)), on='f', r=2)
@@ -798,44 +904,55 @@ def build_147(prev=None):
     m.ht[:7, 39:47] = 3; m.cls[:7, 39:47] = 'f'                                    # the Players' Causeway (copings at 39 / 46)
     m.ht[61:, :] = 0; m.cls[61:, :] = 'w'; m.cls[66:, :] = 'W'
     m.blob(20, 69, 10, 3, 'w', seed=5, only='W'); m.blob(70, 70, 9, 3, 'w', seed=6, only='W')
-    # ---- stairs: Gate Steps, Mask Steps, the grand stair, Curtain Steps, the boat steps
-    m.stairs(41, 18, w=4, kit_rows=3, c='c'); m.stairs(9, 18, w=3, kit_rows=3, c='c'); m.stairs(77, 18, w=3, kit_rows=3, c='c')
-    m.stairs(38, 38, w=12, kit_rows=3, c='f')
-    m.stairs(10, 38, w=3, kit_rows=3, c='c'); m.stairs(76, 38, w=3, kit_rows=3, c='c')
+    # ---- stairs (map builder 10: nothing mirrors any more).  Gate Steps under the Players' Gate; Mask Steps (W) and
+    # Rope Steps (E, further in); the grand stair under the Playhouse, which stands west of the gate; Curtain Steps;
+    # Prompt Steps; the boat steps
+    m.stairs(41, 18, w=4, kit_rows=3, c='c'); m.stairs(9, 18, w=3, kit_rows=3, c='c'); m.stairs(68, 18, w=3, kit_rows=3, c='c')
+    m.stairs(22, 38, w=10, kit_rows=3, c='f')
+    m.stairs(10, 38, w=3, kit_rows=3, c='c'); m.stairs(58, 38, w=3, kit_rows=3, c='c')
     m.stairs(56, 60, w=3, kit_rows=3, c='c')
     m.plan_cliffs()
-    S = lambda x, y, w, h, c='c': m.rect(x, y, w, h, c, only='T.')
+    m.smask = np.zeros((H, W), bool)
+    def S(x, y, w, h, c='c'):
+        m.rect(x, y, w, h, c, only='T.'); m.smask[max(0, y):y + h, max(0, x):x + w] |= (m.cls[max(0, y):y + h, max(0, x):x + w] == c)
     S(40, 7, 6, 12)                                                                  # under the Players' Gate
     S(0, 15, 88, 4)                                                                  # Mask Row (h3)
     S(0, 36, 88, 3)                                                                  # Curtain Lane (h2)
-    S(9, 21, 3, 15); S(77, 21, 3, 15)                                                # the Mask Steps lanes
-    m.rect(34, 34, 20, 4, 'f', only='T.c')                                          # the Playhouse forecourt
-    m.rect(18, 41, 52, 10, 'f', only='T.c')                                         # the Theatre Square (h1)
-    S(10, 41, 3, 17); S(76, 41, 3, 17)
-    m.rect(0, 57, 88, 4, 'f', only='T.c')                                           # the seafront on the sea wall
-    # ---- the gate, the Playhouse, the Little Lantern
+    S(9, 21, 3, 15)                                                                  # the Mask Steps lane (W)
+    street(m, [(43, 20), (44, 25), (48, 29), (51, 33), (50, 36)], w=3.0)              # the Crooked Lane, Gate Steps to Curtain Lane
+    street(m, [(69, 20), (71, 25), (76, 29), (82, 33), (85, 36)], w=3.0)              # Rope Walk, bending to the east end
+    m.rect(18, 34, 18, 4, 'f', only='T.c')                                          # the Playhouse forecourt
+    for y in range(41, 52):                                                          # the Theatre Square: wide under the grand stair,
+        for x in range(14, 62):                                                      # drawing in eastward, its south side ragged
+            if (x - 30) ** 2 / (19.0 + 2 * vnoise(x, y, 147, 4.0)) ** 2 + (y - 45.5) ** 2 / 6.0 ** 2 <= 1.0 and not (x > 44 and y > 48 - (x - 44) // 4):
+                if m.cls[y, x] in 'T.c': m.cls[y, x] = 'f'; m.smask[y, x] = True
+    street(m, [(44, 46), (52, 48), (60, 52), (67, 56), (70, 58)], w=3.2)              # Prompt Street, the square to the seafront
+    S(58, 41, 3, 6)                                                                  # Prompt Steps' foot
+    S(10, 41, 3, 17)                                                                 # the Mask Steps lane (h1)
+    m.rect(0, 57, 88, 4, 'f', only='T.c'); m.smask[57:61, :] |= (m.cls[57:61, :] == 'f')   # the seafront on the sea wall
+    # ---- the gate, the Playhouse (west of the gate: you see it across the roofs from Mask Row), the Little Lantern
     put(m, 'gt_gate6', 37, 7)
     d = {}
-    d['gym'] = put(m, 'pf_playhouse2', 36, 21, 'SM_GYM', 'Playhouse door')
+    d['gym'] = put(m, 'pf_playhouse2', 19, 21, 'SM_GYM', 'Playhouse door')
     keep_door_clear(m, d['gym'])
-    d['little'] = put(m, 'cv_little', 57, 29)
+    d['little'] = put(m, 'cv_little', 56, 28)
     keep_door_clear(m, d['little'])
-    put(m, 'sp_cost', 25, 28); put(m, 'sp_masks', 29, 29)                             # the costumiers beside the Playhouse
+    put(m, 'sp_cost', 36, 27); put(m, 'sp_masks', 62, 28)                              # the costumiers, one each side of the Crooked Lane
     # ---- blocks
-    block(m, 0, 36, 7, 14, HOUSES, 41, alley_every=12)
-    block(m, 49, 87, 7, 14, HOUSES + ['sp_books'], 42, alley_every=12)
+    block(m, 0, 36, 7, 14, HOUSES, 41, alley_every=9)
+    block(m, 49, 87, 7, 14, HOUSES + ['sp_books'], 42, alley_every=13)
     block(m, 0, 8, 19, 35, HOUSES + SHOPS, 43, alley_every=0)
-    block(m, 12, 33, 19, 35, HOUSES + ['sp_cost', 'sp_masks', 'sp_cafe', 'sp_tav'], 44, alley_every=10)
-    block(m, 54, 76, 19, 35, HOUSES + ['sp_cafe', 'sp_books'], 45, alley_every=10)
-    block(m, 80, 87, 19, 35, HOUSES, 46, alley_every=0)
+    block(m, 12, 18, 19, 35, HOUSES, 44, alley_every=0)
+    stepped_rank(m, 52, 87, 19, HOUSES + ['sp_cafe', 'sp_books'], 45, maxh=8)
+    block(m, 36, 87, 19, 35, HOUSES + ['sp_cafe', 'sp_books', 'sp_tav'], 145, alley_every=11)
     block(m, 0, 9, 41, 56, HOUSES + SHOPS, 47, alley_every=0)
-    block(m, 13, 17, 41, 56, HOUSES, 48, alley_every=0)
-    block(m, 18, 69, 51, 56, SHOPS + ['th_s', 'th_t', 'th_u', 'th_v', 'th_w', 'th_y', 'th_m', 'th_q', 'th_d'], 49, alley_every=14)
-    block(m, 70, 75, 41, 56, HOUSES, 50, alley_every=0)
-    block(m, 79, 87, 41, 56, HOUSES + SHOPS, 51, alley_every=0)
+    block(m, 13, 40, 49, 56, SHOPS + ['th_s', 'th_t', 'th_u', 'th_v', 'th_w', 'th_y', 'th_m', 'th_q', 'th_d'], 49, alley_every=13)
+    stepped_rank(m, 46, 87, 41, HOUSES + SHOPS, 51, maxh=9)
+    block(m, 46, 87, 41, 56, HOUSES + SHOPS, 151, alley_every=0)
+    block(m, 40, 66, 50, 56, HOUSES + ['sp_cafe'], 50, alley_every=0)
     m.cls[m.cls == 'T'] = 'c'
     pavements(m)
-    m.blob(43.5, 45.5, 8.5, 3.6, 'c', seed=23, rough=0.0, only='f'); m.blob(43.5, 45.5, 6.0, 2.2, 'f', seed=24, rough=0.0, only='c')
+    m.blob(30, 45.5, 6.5, 3.0, 'c', seed=23, rough=0.0, only='f'); m.blob(30, 45.5, 4.4, 1.8, 'f', seed=24, rough=0.0, only='c')
     # ---- events
     E = [{'type': 'warp', 'at': [40 + i, 0], 'to': {'map': 140, 'x': 9 + i, 'y': 70, 'dir': 'retain'}} for i in range(6)]
     ev = old_events(147); tf = townsfolk()
@@ -845,13 +962,13 @@ def build_147(prev=None):
     E.append(seat(m, {'type': 'sign', 'name': "Players' Gate sign", 'text': "THE PLAYERS' GATE - North: the Players' Causeway to the Upper Town and the market."}, 39, 16, 'c'))
     E.append(seat(m, {'type': 'sign', 'name': 'Playbill wall', 'text': 'Playbills, ten deep: "THE LOYAL THREE", "THE DROWNED DUKE", "...ED K..." (pasted over, twice), "THE PAGEANT OF THE PAGEANT".'}, 22, 42, 'f'))
     E.append(seat(m, ev['Costumier'], 27, 37, 'c'))
-    E.append(seat(m, ev['Street player'], 44, 46, 'f'))
+    E.append(seat(m, ev['Street player'], 30, 45, 'f'))
     for n, x, y in (('Rival Theatre Barker', 60, 37),):
         if n in tf: E.append(seat(m, tf[n], x, y))
     E.append(seat(m, {'type': 'npc', 'name': 'Street Juggler', 'sprite': 'NPC 06', 'dir': 'down', 'move': 'fixed', 'text':
-                      'Street Juggler: I juggle for coins. In Saltmere the coins are the only thing that falls the way you expect.'}, 30, 45, 'f'))
+                      'Street Juggler: I juggle for coins. In Saltmere the coins are the only thing that falls the way you expect.'}, 47, 47, 'f'))
     E.append(seat(m, {'type': 'npc', 'name': 'Costumed Usher', 'sprite': 'NPC 18', 'dir': 'down', 'move': 'fixed', 'text':
-                      "Costumed Usher: Programmes! A copper! Dorian's face on every page, free of charge!"}, 49, 35, 'f'))
+                      "Costumed Usher: Programmes! A copper! Dorian's face on every page, free of charge!"}, 33, 35, 'f'))
     E.append(seat(m, {'type': 'event', 'name': 'Lillipup (Hound Number Three)', 'pages': [
         {'cond': {}, 'commands': []},
         {'cond': {'self': None}, 'commands': []}]}, 62, 37, 'c') if False else None)
@@ -860,23 +977,23 @@ def build_147(prev=None):
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(147): m.taken[y, x] = True
     # ---- playbills on the walls, columns, lantern strings, stalls, benches, the crowd
-    props(m, (('pf_morris', 22, 44), ('pf_morris', 65, 44), ('pf_morris', 33, 48), ('pf_morris', 55, 48), ('pf_morris', 35, 35), ('pf_morris', 52, 35),
-              ('pf_stall4', 24, 47), ('pf_stall1', 60, 47), ('pf_stall3', 40, 49), ('pf_stall0', 46, 49),
-              ('pf_logbench', 28, 42), ('pf_logbench', 58, 42), ('pf_hounds', 42, 42) if False else ('pf_planter0', 36, 41),
-              ('pf_planter3', 51, 41), ('hb_tables', 20, 49), ('gl_tables', 66, 48), ('hb_barrels', 68, 42), ('pf_well', 19, 42)), on='f')
-    props(m, (('hb_barrel', 24, 37), ('hb_cask', 64, 36), ('hb_crates4', 70, 37), ('pf_morris', 15, 37), ('pf_morris', 74, 16), ('pf_morris', 14, 16),
-              ('hb_rugline', 3, 37), ('hb_washline', 82, 36)), on='c')
+    props(m, (('pf_morris', 16, 44), ('pf_morris', 41, 43), ('pf_morris', 24, 49), ('pf_morris', 37, 49), ('pf_morris', 19, 35), ('pf_morris', 34, 36),
+              ('pf_stall4', 18, 47), ('pf_stall1', 43, 46), ('pf_stall3', 27, 49), ('pf_stall0', 33, 49), ('pf_stall2', 52, 49),
+              ('pf_logbench', 22, 42), ('pf_logbench', 38, 42), ('pf_planter0', 21, 41), ('pf_planter3', 33, 41),
+              ('hb_tables', 15, 47), ('gl_tables', 45, 44), ('hb_barrels', 55, 47), ('pf_well', 17, 42), ('hb_crates4', 62, 54)), on='f')
+    props(m, (('hb_barrel', 40, 37), ('hb_cask', 64, 36), ('hb_crates4', 72, 37), ('pf_morris', 15, 37), ('pf_morris', 74, 16), ('pf_morris', 27, 16),
+              ('hb_rugline', 3, 37), ('hb_washline', 80, 36), ('hb_barrels', 47, 27), ('pf_morris', 53, 33), ('hb_cask', 73, 26)), on='c')
     props(m, (('pf_logbench', 6, 59), ('pf_logbench', 30, 59), ('pf_logbench', 64, 59), ('hb_rope', 52, 59), ('hb_crates4', 70, 58),
               ('pf_stall2', 18, 57), ('hb_fishstall', 78, 57), ('pf_morris', 44, 58)), on='f')
-    for x in (20, 26, 31, 57, 62, 67): overs(m, 'pf_bill%d' % (x % 4), x, 50, z=2)
-    lamps(m, [(x, 57) for x in range(4, 86, 9)] + [(x, 36) for x in range(4, 86, 12)] + [(x, 15) for x in range(6, 86, 13)] +
-          [(34, 34), (53, 34), (18, 41), (69, 41), (18, 50), (69, 50)])
-    string_lights(m, 34, 53, 34); string_lights(m, 18, 69, 41); string_lights(m, 0, 87, 36) if False else None
-    string_lights(m, 18, 69, 50); string_lights(m, 12, 33, 36); string_lights(m, 54, 76, 36)
+    for x in (17, 23, 29, 38, 50, 61): overs(m, 'pf_bill%d' % (x % 4), x, 50 if x < 45 else 52 + (x - 50) // 6, z=2)
+    lamps(m, [(x, 57) for x in range(4, 86, 9)] + [(x, 36) for x in range(7, 86, 11)] + [(x, 15) for x in range(3, 86, 11)] +
+          [(18, 34), (36, 34), (15, 41), (45, 42), (16, 50), (42, 50), (45, 23), (49, 31), (72, 24), (80, 32), (54, 50), (64, 55)])
+    string_lights(m, 18, 35, 34); string_lights(m, 14, 44, 41); string_lights(m, 40, 52, 36)
+    string_lights(m, 16, 40, 50); string_lights(m, 0, 8, 36); string_lights(m, 60, 72, 36)
     parapets(m, 'rw', rows=(18, 38)); parapets(m, 'qy', rows=(60,))
-    street_trees(m, [(16, 60), (36, 60), (50, 60), (70, 60), (20, 49), (67, 49)])
+    street_trees(m, [(14, 60), (31, 60), (47, 60), (78, 60), (15, 49), (44, 49), (65, 57)])
     gardens(m, 147); courts(m, 147)
-    crowd(m, [(x, y) for y in range(42, 50) for x in range(18, 70)], 16, 1471, moving=0.5)
+    crowd(m, [(x, y) for y in range(42, 52) for x in range(14, 62)], 16, 1471, moving=0.5)
     crowd(m, [(x, y) for y in range(34, 39) for x in range(0, 88)], 6, 1472)
     crowd(m, [(x, y) for y in range(57, 60) for x in range(0, 88)], 5, 1473); crowd(m, [(x, y) for y in range(15, 18) for x in range(0, 88)], 4, 1474, on='c')
     m.paint()

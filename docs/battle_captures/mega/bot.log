@@ -1,0 +1,79 @@
+[     0] bot loaded (session mega)
+[    56] New Game (session mega); plugins: ["Prismfall Base Fixes", "v21.1 Hotfixes", "Generation 9 Pack", "Prismfall Field Effects", "Luka's Scripting Utilities", "Elite Battle: DX", "Prismfall Core", "Prismfall Bosses", "Prismfall Z-Power", "Prismfall Cutscenes", "Prismfall Puzzles", "Prismfall Maps", "Prismfall Trials", "Prismfall EBDX Bridge", "PWT System (E21)", "Prismfall Mega", "Prismfall Debug Tools", "ZZ Playtest Bot", "Easy Mouse System", "EBDX Stat Boost Overlay"]
+[    56] started on map 147 (44,34); respawn 100,24,15; map 100 HealingSpot nil
+[    56] MG session mega: start [147, 44, 34]; plugins ["Prismfall Base Fixes", "v21.1 Hotfixes", "Generation 9 Pack", "Prismfall Field Effects", "Luka's Scripting Utilities", "Elite Battle: DX", "Prismfall Core", "Prismfall Bosses", "Prismfall Z-Power", "Prismfall Cutscenes", "Prismfall Puzzles", "Prismfall Maps", "Prismfall Trials", "Prismfall EBDX Bridge", "PWT System (E21)", "Prismfall Mega", "Prismfall Debug Tools", "ZZ Playtest Bot", "Easy Mouse System", "EBDX Stat Boost Overlay"]
+[    57] on map 147 Saltmere Old Town at (44,34); party CHARIZARD L60 182/182, SNORLAX L60 266/266
+[    86] shot Playtest/shots/001_mg_00_start.png
+[    86] MG: queued mega
+[    86] MG: player's Fight menu vs Brann (test team) on Volcanic; party CHARIZARD L60 182/182, SNORLAX L60 263/263; ring true; Mega plugin loaded; LIMIT side
+[    86] BATTLE map 147 vs Warden Brann | field VOLCANIC | backdrop field | party CHARIZARD L60 182/182, SNORLAX L60 263/263 | foe TORKOAL L55, CAMERUPT L56
+[    86] battle prepared: ["Warden Brann"] field VOLCANIC
+[    86] MG: controlPlayer false
+[   102] shot Playtest/shots/002_map147_arrival.png
+[   118]   room: field VOLCANIC (map 147 default :GRAND_STAGE) | EBDX backdrop "field_volcanic" + HD layer | essentials backdrop field
+[   326] shot Playtest/shots/003_battle_VOLCANIC_Warden_Brann.png
+[   480]   battle: Magma churns across the battlefield!
+[   514] MG: Fight menu open for Charizard; Mega possible true
+[   534] shot Playtest/shots/004_mg_01_fight_menu.png
+[   564] shot Playtest/shots/005_mg_02_mega_button_on.png
+[   578] MG: toggled the Mega button and chose the first move
+[   586]   battle: Charizard's Charizardite X is reacting to Wren's Mega Ring!
+[   606] MG: frames MegaEvolution start for Charizard at rec frame 275
+[   606] shot Playtest/shots/006_mg_anim_MegaEvolution_Charizard.png
+[   606] MG: frames MegaEvolution end at rec frame 275
+[   606] shot Playtest/shots/007_mg_after_MegaEvolution_Charizard.png
+[   606] MG: frames MegaEvolution2 start for Charizard at rec frame 275
+[   606] shot Playtest/shots/008_mg_anim_MegaEvolution2_Charizard.png
+[   850] MG: frames MegaEvolution2 end at rec frame 397
+[   850] shot Playtest/shots/009_mg_after_MegaEvolution2_Charizard.png
+[   850]   battle: Charizard has Mega Evolved into Mega Charizard X!
+[   870]   battle: Charizard's Mega Evolution stirred the magma... the volcano is about to erupt!
+[   890] MG: MEGA Charizard (side 0) BLAZE -> TOUGHCLAWS, field VOLCANIC, rec frame 417
+[   890] MG: the player's Mega is done; the AI plays the rest
+[   958]   battle: The opposing Torkoal protected itself!
+[   975]   battle: The opposing Torkoal protected itself!
+[  1006]   battle: The volcano erupted!
+[  1021]   battle: Charizard rode the eruption!
+[  1050] shot Playtest/shots/010_battle_t900.png
+[  1094]   battle: Charizard's Special Attack rose!
+[  1110]   battle: The opposing Torkoal rode the eruption!
+[  1194]   battle: The opposing Torkoal's Attack rose!
+[  1304]   battle: The opposing Torkoal flinched and couldn't move!
+[  1860]   battle: The opposing Camerupt's armor hardened in the magma!
+[  1934]   battle: The opposing Camerupt's Defense rose!
+[  1950] shot Playtest/shots/011_battle_t1800.png
+[  1950]   battle: The opposing Camerupt's Cameruptite is reacting to Warden Brann's Mega Ring!
+[  1990] MG: frames MegaEvolution start for Camerupt at rec frame 967
+[  1990] shot Playtest/shots/012_mg_anim_MegaEvolution_Camerupt.png
+[  1990] MG: frames MegaEvolution end at rec frame 967
+[  1990] shot Playtest/shots/013_mg_after_MegaEvolution_Camerupt.png
+[  1990] MG: frames MegaEvolution2 start for Camerupt at rec frame 967
+[  1990] shot Playtest/shots/014_mg_anim_MegaEvolution2_Camerupt.png
+[  2234] MG: frames MegaEvolution2 end at rec frame 1089
+[  2234] shot Playtest/shots/015_mg_after_MegaEvolution2_Camerupt.png
+[  2234]   battle: The opposing Camerupt has Mega Evolved into Mega Camerupt!
+[  2250]   battle: The opposing Camerupt's Mega Evolution stirred the magma... the volcano is about to erupt!
+[  2310] MG: MEGA Camerupt (side 1) MAGMAARMOR -> SHEERFORCE, field VOLCANIC, rec frame 1127
+[  2496]   battle: The opposing Camerupt drew fire up from the magma!
+[  2718]   battle: The volcano erupted!
+[  2740]   battle: Lava rained down around Snorlax!
+[  2750]   battle: The opposing Camerupt rode the eruption!
+[  2834]   battle: The opposing Camerupt's Special Attack rose!
+[  2850] shot Playtest/shots/016_battle_t2700.png
+[  3060]   battle: The opposing Camerupt is paralyzed! It may be unable to move!
+[  3082]   battle: Magma erupted from below!
+[  3277]   battle: The ground heaves... the volcano is about to erupt!
+[  3306]   battle: The volcano erupted!
+[  3330]   battle: The opposing Camerupt rode the eruption!
+[  3414]   battle: The opposing Camerupt's Special Attack rose!
+[  3680]   battle: Magma erupted from below!
+[  3750] shot Playtest/shots/017_battle_t3600.png
+[  3846]   battle: It's super effective!
+[  3872]   battle: The ground heaves... the volcano is about to erupt!
+[  3980] BATTLE END: lost | party CHARIZARD L60 0/182, SNORLAX L60 0/263
+[  4008] MG: battle lost; Megas [[0, :CHARIZARD, "Mega Charizard X", :VOLCANIC], [1, :CAMERUPT, "Mega Camerupt", :VOLCANIC]]; marks [["MegaEvolution", "Charizard", 275], ["MegaEvolution2", "Charizard", 275], ["MegaEvolution", "Camerupt", 967], ["MegaEvolution2", "Camerupt", 967]]; one per side: true
+[  4039] shot Playtest/shots/018_map147_Saltmere_Old_Town.png
+[  4049] step 1: [:done]
+[  4049] shot Playtest/shots/019_end.png
+[  4049] plan done
+[  4049] bot finished (19 shots, 1996 frames)

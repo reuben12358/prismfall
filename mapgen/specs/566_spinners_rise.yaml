@@ -40,7 +40,7 @@ events:
     commands: ['Ribbon-tier: Tie one for the road. The cross remembers who passed. The tax-man does too, but the cross is kinder.']
 - type: event
   name: Shepherd
-  at: [60, 88]
+  at: [60, 92]
   pages:
   - graphic: {sprite: NPC 20, dir: down}
     trigger: action
@@ -48,14 +48,36 @@ events:
     commands: ['Shepherd: The hamlet sleeps anyone the fell catches out. Third cottage, door''s never locked. Mind the dog. The dog is a Lillipup and it
         is in charge.']
 - type: event
+  name: Third cottage
+  at: [71, 90]
+  pages:
+  - trigger: action
+    commands:
+    - The third cottage. The door is never locked. A fire is laid, a kettle on the hob, and a Lillipup asleep across the threshold, in charge.
+    - (You rest a while. The Lillipup permits it.)
+    - {heal: true}
+- type: event
   name: Shepherd boy
   at: [56, 77]
   pages:
   - graphic: {sprite: NPC 05, dir: down}
     trigger: action
-    move: fixed
-    commands: ['Shepherd boy: Race you to the cross! My Skiddo knows every rock!', (He is gone in a scatter of gravel. You will see him at the top. He will
-        pretend he was always there.)]
+    commands:
+    - if: $game_variables[603] == 2
+      then: ['Shepherd boy: You beat a Skiddo up the Rise. Nobody beats a Skiddo up the Rise. ...Again sometime?']
+      else:
+      - 'Shepherd boy: Race you to the Fleece Cross! My Skiddo knows every rock!'
+      - choices: [Race him!, Not now.]
+        cancel: 1
+        branches:
+        - - {script: '$game_variables[603] = 1
+
+              $game_variables[604] = $stats.distance_walked'}
+          - (He is gone in a scatter of gravel. Up the drove road to the cross -- go!)
+          - selfswitch: [A, true]
+        - ['Shepherd boy: Scared of a goat? Fair.']
+  - cond: {self: A}
+    commands: []
 - type: event
   name: Skiddo
   at: [57, 77]
@@ -64,6 +86,21 @@ events:
     trigger: action
     move: random
     commands: ['(It bleats, very pleased with itself.)']
+- type: event
+  name: Shepherd boy at the cross
+  at: [53, 35]
+  pages:
+  - commands: []
+  - cond:
+      var: [ROAD_RAMRACE, 2]
+    graphic: {sprite: NPC 05, dir: down}
+    trigger: action
+    commands:
+    - if: $game_variables[603] >= 3
+      then:
+      - 'Shepherd boy: Been here ages. Ages! ...Again? Meet me at the hamlet.'
+      - {script: '$game_variables[603] = 0'}
+      else: ['Shepherd boy: You got here first. On FOOT. Skiddo is very upset with me.']
 - type: event
   name: Sheep-wash
   at: [20, 57]
@@ -100,7 +137,7 @@ events:
     move: fixed
     commands: ['(A Wooloo lamb, hidden in the cave with the best fleece. It looks at you as if you might be its shepherd.)']
 - type: item
-  at: [60, 92]
+  at: [60, 91]
   item: POTION
 - type: item
   at: [24, 40]
@@ -116,3 +153,94 @@ events:
 - type: berry
   at: [64, 94]
   berry: ASPEARBERRY
+- type: event
+  name: Ram Race finish 1
+  at: [47, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 2
+  at: [48, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 3
+  at: [49, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 4
+  at: [50, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 5
+  at: [51, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 6
+  at: [52, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}
+- type: event
+  name: Ram Race finish 7
+  at: [53, 33]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
+        \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
+        \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
+        \ his head, pretending he has been there for hours.'))\n  end\n  $game_map.need_refresh = true\nend"}

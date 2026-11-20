@@ -1,5 +1,6 @@
 # TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4), and the Eevee Octave
 # (SPINE Rev 19, Chapters 2-20: maps 145, 120, 524, 160, 167, 181, 215, 220, 240, 340, 742, 489; design/EEVEE_OCTAVE.md)
+# and Mega Evolution (SPINE Rev 20, design/MEGA_EVOLUTION.md section 6: the Ring-Day, the stone quests, 44 stones)
 # Owner: Prismfall Trials (design/TRIALS.md). Consumer: the map builder (design/MAPGEN.md section 4 event DSL).
 # No map file was edited; place these where `near:` says and fill `at:`.
 #
@@ -168,6 +169,8 @@ maps:
        note: "impassable log; gone once Pinsir crushes it"}
     - {name: Moss-stone, key: MOSS_STONE, near: "a big moss-furred boulder past the silk walls, on the north side of the wood", sprite: "Eevee curled on top of a mossy boulder", trigger: action,
        note: "Show Lyra (Choir grey) standing beside it on a page with condition quest_step(:EL_OCTAVE_MOSS) == :stone; the Eevee is gone once the quest is done."}
+    - {name: "Mega Stone: HERACRONITE", near: "in the bark of the old weeping sap tree, after the Horn-and-Pincer duel", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 16 && !has_item(:HERACRONITE)",
+       commands: ["{script: 'pf_mega_stone(:HERACRONITE, \"A blue stone is grown into the bark, where two horns once locked.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   120:
     name: Briarwick
     events:
@@ -303,3 +306,236 @@ maps:
        cond: {switch: CH20_VEIL_GATE_OPEN}, note: "Eevee Octave 8/8 (Crownhaven), always last: her quest opens once the other seven are helped."}
     - {name: Vesper (the gauntlet), key: VESPER_GARDEN, near: "the head of the garden; the other seven singers in a half-circle behind her once she appears", sprite: "Vesper Lindqvist in Choir white; an Eevee (Amen)", trigger: action,
        condition: "octave_ready", note: "Appears when all eight singers have been helped (the user's 'a trainer spawns in Crownhaven'). Starts the 9-bout gauntlet."}
+  # ---- Mega Evolution (SPINE Rev 20; design/MEGA_EVOLUTION.md). Quests: plugins/Prismfall Trials/114_Quests_Megas.rb,
+  # ---- talk rows 152_Talk_Megas.rb. Stones lying in the world call pf_mega_stone(:ITEM[, "line"]) (plugins/Prismfall Mega).
+  154:
+    name: Pell Playhouse - The Grand Stage
+    events:
+    - {name: Dorian, key: DORIAN_ENCORE, patch: "existing event 'Dorian' on the Grand Stage: add the branch (EL_ENCORE, 16 badges: Lopunnite)"}
+  209:
+    name: Sahar's Dig Lab
+    events:
+    - {name: Sahar, key: SAHAR_DIGLAB, patch: "existing event 'Sahar' in the Dig Lab: add the branch (OS_AMBER_AGAIN, 12 badges: Aerodactylite)"}
+  223:
+    name: Corvin Mott's Infirmary
+    events:
+    - {name: Wenlow, key: WENLOW_INFIRMARY, near: "between the Quiet Ward's beds", sprite: "Wenlow (apprentice, apron)", trigger: action, cond: {switch: WENLOW_ALIVE},
+       note: "Bedside Manner (8 badges): Audinite. If the story map has a Wenlow event, patch it instead."}
+    - {name: Corvin (Wenlow's gift), key: CORVIN_INFIRMARY, near: "at Wenlow's old desk", sprite: "Corvin Mott (plague-doctor half-mask)", trigger: action, condition: "badges >= 8 && !switch(179) && !quest_done(:NA_BEDSIDE_MANNER)",
+       note: "Only after the Sump Purge (S179 WENLOW_ALIVE off): Corvin hands over Wenlow's gift."}
+    - {name: Ward bed 1, key: WARD_BED, near: "the bed by the window (Missus Pell)", sprite: "none (bed tile)", trigger: action,
+       condition: "quest_step(:NA_BEDSIDE_MANNER) == :beds", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Ward bed 2, key: WARD_BED, near: "a bed in the middle row", same_as: "Ward bed 1"}
+    - {name: Ward bed 3, key: WARD_BED, near: "the bed nearest the stove (Mister Coyle)", same_as: "Ward bed 1"}
+  244:
+    name: Hearthguild Hall
+    events:
+    - {name: Brann, key: BRANN_HEARTHGUILD, near: "at the great anvil of the Hearthguild Hall", sprite: "Brann Holloway (forge apron)", trigger: action,
+       note: "The Ring-Day (Mega Ring + Aggronite) after Gym 7 and the Caldera Crisis; his Act III spare (Cameruptite) at 10 badges. If the story map already has a Brann event here, patch it with the pf_trial_ready? branch instead."}
+  248:
+    name: Pyre Keep - Dragon Roosts
+    events:
+    - {name: Roost-keeper Tarn, key: ROOST_KEEPER, near: "at the foot of the high roost ladder", sprite: "dragon-roost keeper, burn-scarred gloves", trigger: action,
+       note: "Old Cinder (11 badges); falls through to the Ashkaar board."}
+    - {name: Old Cinder, key: OLD_CINDER, near: "on the high roost, curled round an empty saddle", sprite: "Followers/CHARIZARD", trigger: action, condition: "!quest_done(:AS_OLD_CINDER)",
+       note: "Boss (AS_OLD_CINDER, Lv 58): Charizardite X. The Legate's brazier writ (15 badges) is on CRUCIBLE_LEGATE (240), already placed."}
+  260:
+    name: Ironreach
+    events:
+    - {name: Ottoline (Last Rung), key: OTTOLINE_LAST_RUNG, near: "behind the Last Rung's bar, under the pawn shelf", sprite: "Six-Fingers Ottoline", trigger: action,
+       note: "Gutter Book keeper at Ironreach; The Memory Kata (17 badges): Lucarionite. Kaito sits at the bar during the scene (a page with the same condition is enough)."}
+  263:
+    name: The Iron Pit
+    events:
+    - {name: "Mega Stone: MEDICHAMITE", near: "the meditation shelf above the Pit's top tier (Rock Climb)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 16 && !has_item(:MEDICHAMITE)",
+       commands: ["{script: 'pf_mega_stone(:MEDICHAMITE, \"Someone has left a stone on a folded mat, as if mid-breath.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  294:
+    name: The Heartgarden
+    events:
+    - {name: Juno (Bride Tree), key: JUNO_BRIDE_TREE, near: "under the Bride Tree", sprite: "Juno Hale (Ever-Bloom)", trigger: action, condition: "badges >= 9 && !quest_done(:EL_BRIDE_TREE_HEART)",
+       note: "After J3: the Venusaurite. If the Ch10/Ch11 story already places Juno here, patch that event instead."}
+  320:
+    name: Skyreach - Mast Ward
+    events:
+    - {name: Dead letter door, key: DEAD_LETTER_DOOR, near: "a blue door on the Mast Ward", sprite: "none (door tile)", trigger: action,
+       condition: "quest_step(:ZE_RETURN_TO_SENDER) == :letters", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  323:
+    name: Skyreach - Lower Gantries
+    events:
+    - {name: Dead letter door, key: DEAD_LETTER_DOOR, near: "a hatch on the Lower Gantries", sprite: "none (door tile)", trigger: action,
+       condition: "quest_step(:ZE_RETURN_TO_SENDER) == :letters", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  324:
+    name: Skyreach - Skybridge Ward
+    events:
+    - {name: Dead letter door, key: DEAD_LETTER_DOOR, near: "a door halfway along the Skybridge Ward", sprite: "none (door tile)", trigger: action,
+       condition: "quest_step(:ZE_RETURN_TO_SENDER) == :letters", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  325:
+    name: Gale Post Hall
+    events:
+    - {name: Postmaster Halloran, key: GALE_POSTMASTER, near: "behind the sorting counter", sprite: "postmaster in a Gale Post coat", trigger: action,
+       note: "Return to Sender (10 badges): Pidgeotite. Falls through to the Zenith board."}
+  345:
+    name: Lucent Athenaeum - Sealed Stacks
+    events:
+    - {name: "Mega Stone: ALAKAZITE", near: "the Unread Shelf in the Sealed Stacks", sprite: "Object ball", trigger: action, condition: "badges >= 12 && !has_item(:ALAKAZITE)",
+       commands: ["{script: 'pf_mega_stone(:ALAKAZITE, \"Behind the last book nobody ever read, a stone that seems to read you.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A",
+       note: "Puzzle reward (puzzle team): the Unread Shelf - shelve the stacks' books so every title is read once; this event is behind the shelf that opens."}
+  346:
+    name: The Speculum - Mirror City
+    events:
+    - {name: Lector Saffi, key: SAFFI_SPECULUM, near: "before the great Speculum", sprite: "Lector Saffi Ivarne", trigger: action,
+       note: "Rite of Reflection keeper at Lucent; the smile behind the glass (13 badges, rank 2): Mawilite."}
+    - {name: Third pane, key: THIRD_PANE, near: "the third pane of the Speculum", sprite: "none (mirror tile)", trigger: action,
+       condition: "quest_step(:AN_SMILE_BEHIND_GLASS) == :ask"}
+  360:
+    name: Cragholm
+    events:
+    - {name: Curator-Elect Nasrin, key: NASRIN_CRAGHOLM, near: "at the lift-house tablet rack", sprite: "curator in dust-pale robes", trigger: action,
+       note: "Rolls of Unearthing keeper at Cragholm; the tyrant's heart (15 badges, rank 2): Tyranitarite."}
+  383:
+    name: Vane Hall
+    events:
+    - {name: "Mega Stone: SCIZORITE", near: "Morwen Vane's trophy case in the long gallery", sprite: "Object ball", trigger: action, condition: "badges >= 13 && !has_item(:SCIZORITE)",
+       commands: ["{script: 'pf_mega_stone(:SCIZORITE, \"A red stone on a velvet stand. The card under it, in a child's hand: MUM'S. DON'T TOUCH. - K.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  403:
+    name: Strade Works - Foundry Floor
+    events:
+    - {name: "Mega Stone: METAGROSSITE", near: "at the end of the sorting line", sprite: "Object ball", trigger: action, condition: "badges >= 14 && !has_item(:METAGROSSITE)",
+       commands: ["{script: 'pf_mega_stone(:METAGROSSITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A",
+       note: "Puzzle reward (puzzle team): route the foundry's sorting line so the crate reaches the end; the stone rides out on it."}
+  423:
+    name: Underveil - Moon Market
+    events:
+    - {name: Ottoline (Moon Market), key: OTTOLINE_MOON_MARKET, near: "at her stall under the moon lantern", sprite: "Six-Fingers Ottoline", trigger: action,
+       note: "Gutter Book keeper at Underveil; Dogs of the Moon Market (15 badges): Houndoominite."}
+    - {name: Kennel cage 1, key: KENNEL_CAGE, near: "behind the market, the Barons' kennel row", sprite: "tile: iron cage with a thin Houndoom", trigger: action,
+       condition: "quest_step(:NA_MOON_MARKET_DOGS) == :cages", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Kennel cage 2, key: KENNEL_CAGE, near: "the kennel row, middle cage", same_as: "Kennel cage 1"}
+    - {name: Kennel cage 3, key: KENNEL_CAGE, near: "the kennel row, end cage by the kennel-master's stool", same_as: "Kennel cage 1"}
+  526:
+    name: Woodward's Hut
+    events:
+    - {name: The Woodward, key: WOODWARD_PINCER, near: "inside the hut, by the stove", sprite: "old woodsman", trigger: action,
+       note: "Keeper for the Old Pincer quest (12 badges); falls through to the Elowen board."}
+  546:
+    name: Thistledown Manor
+    events:
+    - {name: Doll button 1, key: DOLL_BUTTON, near: "under the dining-room table", sprite: "tile: small black button", trigger: action,
+       condition: "quest_step(:EL_DOLL_WHO_WAITED) == :buttons", after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: Doll button 2, key: DOLL_BUTTON, near: "in the cold fireplace of the parlour", same_as: "Doll button 1"}
+    - {name: Doll button 3, key: DOLL_BUTTON, near: "on the landing, beside the grandfather clock", same_as: "Doll button 1"}
+  547:
+    name: Thistledown Manor - Attic
+    events:
+    - {name: Rag doll, key: ATTIC_DOLL, near: "in the sunlit corner of the attic", sprite: "rag doll with a zipped mouth (Shuppet-like)", trigger: action,
+       note: "The Doll Who Waited (9 badges): Banettite."}
+  560:
+    name: Frostflat Causeway
+    events:
+    - {name: The Matriarch, key: CAUSEWAY_MATRIARCH, near: "on the causeway's crown by the old cairn (blocks the road at low tide)", sprite: "Followers/KANGASKHAN (large)", trigger: action, condition: "badges >= 16 && !quest_done(:IS_CAUSEWAY_MATRIARCH)",
+       note: "Boss (Lv 78, 3 bars): Kangaskhanite. Put two or three small Kangaskhan 'young ones' around her as decor with the same condition."}
+  577:
+    name: Frostwick Pass
+    events:
+    - {name: "Mega Stone: ABSOLITE", near: "the avalanche gully below the pass, behind a Rock Smash boulder", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 2 && !has_item(:ABSOLITE)",
+       commands: ["{script: 'pf_mega_stone(:ABSOLITE, \"Under the snow, a black stone with a white streak, like a horn.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  605:
+    name: Static Tunnels Depths
+    events:
+    - {name: "Mega Stone: STEELIXITE", near: "the magnetite seam in the deepest gallery (Flash)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 4 && !has_item(:STEELIXITE)",
+       commands: ["{script: 'pf_mega_stone(:STEELIXITE, \"Iron filings have grown round a grey stone like fur.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  680:
+    name: The Rootdeep
+    events:
+    - {name: "Mega Stone: SWAMPERTITE", near: "a ledge on the underground river (Surf)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 8 && !has_item(:SWAMPERTITE)",
+       commands: ["{script: 'pf_mega_stone(:SWAMPERTITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  681:
+    name: Prism Falls
+    events:
+    - {name: "Mega Stone: BLASTOISINITE", near: "behind the falls (Surf)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 8 && !has_item(:BLASTOISINITE)",
+       commands: ["{script: 'pf_mega_stone(:BLASTOISINITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  682:
+    name: The Royal Chase
+    events:
+    - {name: "Mega Stone: SCEPTILITE", near: "the mantel of the ruined hunting lodge", sprite: "Object ball", trigger: action, condition: "badges >= 8 && !has_item(:SCEPTILITE)",
+       commands: ["{script: 'pf_mega_stone(:SCEPTILITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  685:
+    name: Grudgestone Quarry B1F
+    events:
+    - {name: "Mega Stone: SABLENITE", near: "the gem seam the wild Sableye feed on", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 8 && !has_item(:SABLENITE)",
+       commands: ["{script: 'pf_mega_stone(:SABLENITE, \"Among the gnawed gems, one stone nobody has dared to bite.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  701:
+    name: The Hoarwood
+    events:
+    - {name: "Mega Stone: ABOMASITE", near: "under the frost-giant pine", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 13 && !has_item(:ABOMASITE)",
+       commands: ["{script: 'pf_mega_stone(:ABOMASITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  703:
+    name: Gossamer Heartwood
+    events:
+    - {name: Old Pincer, key: OLD_PINCER, near: "wrapped round the great sap tree", sprite: "Followers/PINSIR", trigger: action, condition: "!quest_done(:EL_OLD_PINCER)",
+       note: "Boss (EL_OLD_PINCER, Lv 62): Pinsirite."}
+    - {name: "Mega Stone: BEEDRILLITE", near: "inside the hollow of the old hive tree", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 9 && !has_item(:BEEDRILLITE)",
+       commands: ["{script: 'pf_mega_stone(:BEEDRILLITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  705:
+    name: Frostfang Pass 2F
+    events:
+    - {name: "Mega Stone: GLALITITE", near: "behind the ice wall at the end of the upper gallery (the wall is gone from 11 badges: a page with condition badges >= 11)", sprite: "Object ball", trigger: action, condition: "badges >= 11 && !has_item(:GLALITITE)",
+       commands: ["{script: 'pf_mega_stone(:GLALITITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  723:
+    name: Ebbmouth Sea Grotto
+    events:
+    - {name: "Mega Stone: SLOWBRONITE", near: "a tide-pool shelf at the back of the grotto", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 10 && !has_item(:SLOWBRONITE)",
+       commands: ["{script: 'pf_mega_stone(:SLOWBRONITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  726:
+    name: Cloudstair - Summit
+    events:
+    - {name: "Mega Stone: CHARIZARDITEY", near: "the wind-scoured ledge at the summit", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 10 && !has_item(:CHARIZARDITEY)",
+       commands: ["{script: 'pf_mega_stone(:CHARIZARDITEY)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  732:
+    name: The Tetherline
+    events:
+    - {name: "Mega Stone: ALTARIANITE", near: "a cloud-nest of down on a tether pylon", sprite: "Object ball", trigger: action, condition: "badges >= 10 && !has_item(:ALTARIANITE)",
+       commands: ["{script: 'pf_mega_stone(:ALTARIANITE, \"A nest like a small cloud. Something blue is tucked inside.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  752:
+    name: The Looking-Glass Wood
+    events:
+    - {name: "Mega Stone: GARDEVOIRITE", near: "the heart of the mirror maze", sprite: "Object ball", trigger: action, condition: "badges >= 13 && !has_item(:GARDEVOIRITE)",
+       commands: ["{script: 'pf_mega_stone(:GARDEVOIRITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A",
+       note: "Puzzle reward (puzzle team): the Looking-Glass Wood's mirror maze, solved."}
+  773:
+    name: The Vertebrae
+    events:
+    - {name: Third vertebra, key: THIRD_VERTEBRA, near: "under the third vertebra-arch of the ridge", sprite: "none (rock tile)", trigger: action,
+       condition: "quest_step(:OS_TYRANT_HEART) == :ask"}
+  805:
+    name: Barrow Sanctum
+    events:
+    - {name: "Mega Stone: GENGARITE", near: "the altar of the nameless Warden", sprite: "Object ball", trigger: action, condition: "badges >= 14 && !has_item(:GENGARITE)",
+       commands: ["{script: 'pf_mega_stone(:GENGARITE, \"On the altar, a stone with a grin in it.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  810:
+    name: The Dry Tide
+    events:
+    - {name: "Mega Stone: GARCHOMPITE", near: "a sand-sunk caravan", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 15 && !has_item(:GARCHOMPITE)",
+       commands: ["{script: 'pf_mega_stone(:GARCHOMPITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  824:
+    name: Aurelia - Drowned Spires
+    events:
+    - {name: "Mega Stone: GYARADOSITE", near: "the flooded bell tower (Dive)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 15 && !has_item(:GYARADOSITE)",
+       commands: ["{script: 'pf_mega_stone(:GYARADOSITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  841:
+    name: The Gloamwood Verge
+    events:
+    - {name: "Mega Stone: GALLADITE", near: "the knight's barrow", sprite: "Object ball", trigger: action, condition: "badges >= 16 && !has_item(:GALLADITE)",
+       commands: ["{script: 'pf_mega_stone(:GALLADITE, \"In the knight's stone hands, where a sword should be, a stone.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  870:
+    name: Thornwatch
+    events:
+    - {name: "Mega Stone: BLAZIKENITE", near: "the war-brazier on the gate tower", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 17 && !has_item(:BLAZIKENITE)",
+       commands: ["{script: 'pf_mega_stone(:BLAZIKENITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  905:
+    name: Shardfall Isles
+    events:
+    - {name: "Mega Stone: LATIASITE", near: "the eon nest on the highest isle (post-game)", sprite: "Object ball", trigger: action, condition: "badges >= 18 && !has_item(:LATIASITE)",
+       commands: ["{script: 'pf_mega_stone(:LATIASITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+    - {name: "Mega Stone: LATIOSITE", near: "the eon nest on the highest isle (post-game)", sprite: "Object ball", trigger: action, condition: "badges >= 18 && !has_item(:LATIOSITE)",
+       commands: ["{script: 'pf_mega_stone(:LATIOSITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}

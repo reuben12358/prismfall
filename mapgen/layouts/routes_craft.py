@@ -1332,3 +1332,106 @@ def build_520():
 
 
 BUILD[520] = build_520
+
+
+# ====================================================================================================== 577 Frostwick Pass
+def gust_event(i, at_):
+    """a wind-gap cell: while the gap gusts (ROAD_GUST 1) the drift shows and stepping in throws you back down the gap"""
+    push = ("pbSEPlay('Wind1') rescue nil\n"
+            "PrismfallPuzzles.push_line(2, 'Gust')\n"
+            "pbMessage(_INTL('A gust tears down the gap and throws you back!')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)\n"
+            "$PokemonGlobal.instance_variable_set(:@pf_gust_told, true)")
+    return {'type': 'event', 'name': 'Gust %d' % i, 'at': list(at_), 'fixed': True, 'pages': [
+        {'trigger': 'touch', 'through': True, 'commands': []},
+        {'cond': {'var': ['ROAD_GUST', 1]}, 'graphic': {'tile': K.P1('fw_gust%d' % (i % 3))}, 'trigger': 'touch', 'through': True,
+         'commands': [{'script': push}]}]}
+
+
+def build_577():
+    """Frostwick Pass (72x96, SNOWY_MOUNTAIN): the low pass over the hoar downs into Frostwick, claimed by both
+    kingdoms.  The drove road climbs north from Spinners' Rise in three levels: past the bothy (rest, a hot drink) and the
+    empty toll hut with its two disagreeing ledgers; up through the wind gap, a cut between two crags where the gusts
+    throw you back unless you move between them (ROAD_GUST, a real timing crossing); onto the upper down by the frozen
+    tarn (ice-fishing hole) and the frozen fall, behind which lies the Hollow of the Handfast (secret); then west under
+    the Handfast Arch to Frostwick's East Gate.  Avalanche fences, trappers' racks, the snowmen (one is a Snorunt), the
+    snow-buried signpost in two scripts, Road Stone III-b."""
+    W, H = 72, 96
+    r = Route(577, W, H, 'snow', base='.', kit='shs')
+    m = r.m
+    lips = [(74, 1), (50, 2)]
+    r.terraces(lips, wobble=2.5, scale=14.0)
+    for h in (1, 2): CK.smooth_ht(m, h, 3)
+    r.forest_band('E', 9, wobble=4.0); r.forest_band('S', 5, wobble=3.0); r.forest_band('N', 7, wobble=3.0); r.forest_band('W', 4, wobble=2.0)
+    # the wind gap: two crags (forest and rock) close the slope above the toll hut to a three-wide cut
+    GX, GY0, GY1 = 40, 54, 66
+    road = [(31.5, 95), (33, 86), (40, 79), (41, 72), (41, GY1 + 2), (41, GY0 - 2), (36, 46), (26, 41), (14, 38.5), (0, 38.5)]
+    r.road(road, w=3.0, c='d', open_=(2, 5))
+    r.exit('S', 30, 4); r.exit('W', 37, 4)
+    for y in range(GY0, GY1 + 1):
+        for x in range(GX - 12, GX + 13):
+            if abs(x - (GX + 1)) >= 2 and m.cls[y, x] in '.td': m.cls[y, x] = 'T'
+        for x in (GX, GX + 1, GX + 2): m.cls[y, x] = 'd'
+    for yl, h in lips:
+        xs = [x for x in range(W) if r.road_mask[yl, x]]
+        if xs: CK.stair(r, min(xs) + max(0, (len(xs) - 3) // 2), yl, w=3, h=h)
+    # the frozen tarn, the frozen fall on its north shore, the Hollow behind; side paths
+    m.blob(54, 32, 7.5, 4.2, 'p', seed=7, rough=0.35, only='.tT')
+    r.lane([(38, 46), (46, 36), (52, 28)], w=2.0, c='d', open_=(1, 3))
+    r.pocket(58, 20, 4, 2.6, gate=None)
+    r.lane([(30, 82), (20, 84), (14, 80)], w=2.0, c='d', open_=(1, 3))           # to the bothy
+    r.lane([(42, 70), (54, 70), (60, 66)], w=2.0, c='d', open_=(1, 2))           # to the trappers' racks
+    for cx, cy_, rx, ry in ((14, 86, 6, 4), (12, 20, 8, 6), (60, 46, 4, 4), (22, 60, 5, 3), (50, 86, 4, 3), (28, 24, 4, 3)):
+        r.copse(cx, cy_, rx, ry)
+    r.finish_plan(border=0)
+    CK.grass_fields(r, [(18, 46, 3.5), (30, 54, 3), (54, 58, 3), (24, 70, 3.5), (50, 80, 3), (14, 28, 3), (40, 28, 3), (34, 88, 2.5)])
+    CK.woods(r, CK.SNOWWOOD, scale=10.0)
+    m.cls[20:23, 57:59] = '.'
+    r.add(sign((34, 90), 'Road sign', "FROSTWICK PASS -- The Hoar Road. v Spinners' Rise - <- Frostwick (East Gate). Two scripts on one post; the Isenmar half is longer."),
+          obj('The Handfast Arch', (8, 36), ['THE HANDFAST ARCH: half whale-jaw, half living briar, raised when the border was last agreed.',
+              'A brass Meridian sunburst has been bolted across the keystone. The bolts are new and very shiny.']),
+          obj('Toll hut ledgers', (36, 76), ['Two ledgers on the empty toll hut\'s counter, one per kingdom. They disagree about everything, including the date.']),
+          talk('Bothy keeper', (16, 82), 'NPC 26', ['Bothy keeper: Sit. Drink. It\'s hot and it\'s brown. That\'s all I promise.', {'heal': True}]),
+          obj('Ice-fishing hole', (52, 35), ['A round hole cut in the tarn ice, a line still in it. Face the water and use a rod.']),
+          obj('Snowmen', (24, 49), ['A row of snowmen built by Frostwick children. One of them is blinking.']),
+          talk('Snorunt', (27, 49), 'Followers/SNORUNT', ['(It is pretending very hard to be a snowman.)']),
+          obj('Avalanche fence', (56, 62), ['Avalanche fences of split larch. Somebody has painted EAT MORE CHEESE on one in Isenmar.']),
+          obj('Snow-buried signpost', (46, 44), ['A signpost buried to its arms in snow. One arm says FROSTWICK. The other says it in runes, and adds "AND NOT ELOWEN".']),
+          obj('Road Stone III-b', (30, 92), ['ROAD STONE III-b. THE HOAR ROAD. "Frostwick 1." The \'1\' is in Isenmar runes; the Elowen side says "nearly".']),
+          obj('Wind gap', (GX - 1, GY1 + 2), ['THE WIND GAP. The pass funnels the north wind through this cut in gusts. Walk between them, or it walks you back down.']),
+          obj('Frozen fall', (58, 18), ['(Behind the frozen fall, a hollow: carvings of a forester and a huscarl, their hands joined, and a bell on a ribbon.)']),
+          item((59, 20), 'SOOTHEBELL'), item((8, 56), 'ICEHEAL'), item((62, 48), 'SUPERPOTION'), hidden((47, 28), 'NEVERMELTICE', 'HiddenItem (tarn)'),
+          talk('Huscarl', (20, 41), 'NPC 21', ['Huscarl: Elowen side, Isenmar side. The arch doesn\'t care. Nor do I, mostly. Pass.'], d='right'),
+          talk('Forester', (44, 73), 'NPC 14', ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']),
+          {'type': 'event', 'name': 'Wind', 'at': [1, 1], 'fixed': True, 'pages': [{'trigger': 'parallel', 'commands': [
+              {'script': 'pfp_metronome(601, 48, 2)'}]}]})
+    k = 0
+    for y in range(GY0, GY1 + 1):
+        for x in (GX, GX + 1, GX + 2):
+            r.events.append(gust_event(k, (x, y))); m.taken[y, x] = True; k += 1
+    r.seat_events(on='.dtp')
+    CK.clear_around(r)
+    m.stamp('wb_gate', 7, 33)                                                      # the Handfast Arch, feet on the road's verge
+    for n, x, y in (('wb_hut', 32, 72), ('wb_short', 12, 78), ('fw_rack', 58, 66), ('fw_rack', 54, 64), ('fw_sled', 36, 80),
+                    ('fw_fall', 56, 14), ('fw_brazier', 20, 80)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.dt'): m.stamp(n, x, y)
+        else: r.near(n, x, y, on='.td', r=7)
+    for x in range(50, 64):
+        if m.free(x, 60, 1, 1, on='.t'): m.stamp('fw_pal_h', x, 60, mark='B')
+    for (x, y) in ((GX - 2, GY0 - 1), (GX + 3, GY0 - 1), (GX - 2, GY1 + 1), (GX + 4, GY1 + 1)):
+        r.near('fw_stone', x, y, on='.t', r=1)
+    CK.fringe(r, ['pine2', 'kf_tree', 'pf_g_tree2_ice'], 70, seed=1, near_forest=4)
+    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2'], 24, box=(0, 0, W, H), clump=3, seed=7)
+    r.dress(trees=('pine2',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    CK.snow_ground_var(r, thr=0.45)
+    RW.drifts(m, 0.3, seed=577); RW.road_tracks(m, 0.12, seed=577); RW.dress_ice(m, 0.5, seed=577); RW.reed_beds(m, 50, seed=577)
+    h = head(577, 'Frostwick Pass', field='SNOWY_MOUNTAIN', bgm='Route 2', weather=['Snow', 20],
+             connections=[{'dir': 'S', 'offset': 30, 'to': 566, 'to_offset': 42}, {'dir': 'W', 'offset': 37, 'to': 570, 'to_offset': 23}],
+             tone=[-6, -2, 10, 10])
+    h['metadata']['BattleBack'] = 'snow'
+    r.write(h, '577_frostwick_pass.yaml', '# Frostwick Pass (577). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/577.png' if PREV else None)
+
+
+RW = RE.RW
+BUILD[577] = build_577

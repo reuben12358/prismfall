@@ -73,7 +73,7 @@ tr.quest(:AS_FORGE_REMEMBERS, {
   :scenes => {
     :spare => [
       [:BRANN, :happy, "There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot."],
-      [:BRANN, :neutral, "You remember Cinder, my Camerupt? The one that tried to erupt on you."],
+      [:BRANN, :neutral, "You remember Kiln, my Camerupt? The one that tried to erupt on you."],
       [:BRANN, :neutral, "Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel."],
       [:BRANN, :smug, "I'd give it to a Warden. You'll do better than most Wardens."],
       { :script => proc { |_ctx| Prismfall::Trials.complete(:AS_FORGE_REMEMBERS, nil, false) } },
@@ -311,17 +311,17 @@ tr.quest(:AS_OLD_CINDER, {
   }
 })
 
-# 15 badges, Trial by Flames rank 2: the Dragonsworn writ (Salamencite).
-tr.quest(:AS_DRAGONSWORN, {
-  :trial => :ASHKAAR, :title => "Dragonsworn", :giver => "Legate Varra Kosk", :map => 240,
+# 15 badges, Trial by Flames rank 2: the brazier writ (Salamencite). (Not the stub AS_DRAGONSWORN, the final Ashkaar trial.)
+tr.quest(:AS_BRAZIER_WRIT, {
+  :trial => :ASHKAAR, :title => "The Brazier Writ", :giver => "Legate Varra Kosk", :map => 240,
   :where => "the Crucible, Cindervault", :rank => 2, :points => 4, :rec_level => 75, :chapter => 17,
   :unlock => "badges >= 15", :board => true, :tags => [:mega, :oath],
-  :summary => "WRIT OF THE DRAGONSWORN: the Crucible keeps one heartstone for one who earns it without being born to a dragon.",
-  :steps => { :ask => "Swear the Dragonsworn oath before Legate Kosk." },
+  :summary => "WRIT OF THE BRAZIER: the Crucible keeps one heartstone for one who earns it without being born to a dragon.",
+  :steps => { :ask => "Answer the brazier's question before Legate Kosk." },
   :reward => { :items => [[:SALAMENCITE, 1]] },
   :scenes => {
     :offer => [
-      [:KOSK, :neutral, "The Crucible keeps a heartstone for the Dragonsworn who wasn't born to a dragon. In forty years nobody has taken it."],
+      [:KOSK, :neutral, "The Crucible keeps a heartstone for a dragon-rider who wasn't born to a dragon. In forty years nobody has taken it."],
       [:KOSK, :neutral, "The oath is one question, at the brazier. Lie and the writ burns. Ashkaar law."],
       { :accept => true },
       { :choice => [:KOSK, :neutral, "Why do you fight?"], :options => [
@@ -331,7 +331,7 @@ tr.quest(:AS_DRAGONSWORN, {
           ["For the glory of Ashkaar.", [[:KOSK, :deadpan, "...No. The brazier says otherwise. The writ burns. Come back when you'll say true."]]]] }
     ],
     :sworn => [
-      [:KOSK, :neutral, "Say true, and the fire keeps you. Dragonsworn."],
+      [:KOSK, :neutral, "Say true, and the fire keeps you. The writ is yours."],
       "She takes a blue stone with a red heart from a niche above the brazier. It is hot enough that she hands it over in tongs.",
       { :complete => true }
     ]
@@ -468,9 +468,9 @@ tr.quest(:OS_AMBER_AGAIN, {
   }
 })
 
-# 15 badges, Rolls of Unearthing rank 2: the Bonewright's commission (Tyranitarite).
-tr.quest(:OS_BONEWRIGHT, {
-  :trial => :OSSARIA, :title => "The Bonewright's Commission", :giver => "Curator-Elect Nasrin Vael", :map => 360,
+# 15 badges, Rolls of Unearthing rank 2: the tyrant's heart (Tyranitarite). (Not the stub OS_BONEWRIGHT.)
+tr.quest(:OS_TYRANT_HEART, {
+  :trial => :OSSARIA, :title => "The Tyrant's Heart", :giver => "Curator-Elect Nasrin Vael", :map => 360,
   :where => "the Cragholm lift-house rack; the dig is on the Vertebrae", :rank => 2, :points => 4, :rec_level => 75, :chapter => 17,
   :unlock => "badges >= 15", :board => true, :tags => [:mega, :dig],
   :summary => "TABLET: A tyrant's heart lies in the third vertebra. Dig it out whole.",

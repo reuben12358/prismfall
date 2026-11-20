@@ -1,4 +1,4 @@
-# Frostwick Pass (577). WRITTEN BY layouts/routes_early.py - edit that script.
+# Frostwick Pass (577). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 577
 name: Frostwick Pass
 parent: 0
@@ -22,6 +22,793 @@ walk_from:
 raw: data/raw/577.npy
 tileset: 52
 events:
+- type: event
+  name: Wind
+  at: [1, 1]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'pfp_metronome(601, 48, 2)'}
+- type: event
+  name: Gust 0
+  at: [40, 54]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 1
+  at: [41, 54]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 2
+  at: [42, 54]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 3
+  at: [40, 55]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 4
+  at: [41, 55]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 5
+  at: [42, 55]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 6
+  at: [40, 56]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 7
+  at: [41, 56]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 8
+  at: [42, 56]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 9
+  at: [40, 57]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 10
+  at: [41, 57]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 11
+  at: [42, 57]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 12
+  at: [40, 58]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 13
+  at: [41, 58]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 14
+  at: [42, 58]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 15
+  at: [40, 59]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 16
+  at: [41, 59]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 17
+  at: [42, 59]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 18
+  at: [40, 60]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 19
+  at: [41, 60]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 20
+  at: [42, 60]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 21
+  at: [40, 61]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 22
+  at: [41, 61]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 23
+  at: [42, 61]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 24
+  at: [40, 62]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 25
+  at: [41, 62]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 26
+  at: [42, 62]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 27
+  at: [40, 63]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 28
+  at: [41, 63]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 29
+  at: [42, 63]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 30
+  at: [40, 64]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 31
+  at: [41, 64]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 32
+  at: [42, 64]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 33
+  at: [40, 65]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 34
+  at: [41, 65]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 35
+  at: [42, 65]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 36
+  at: [40, 66]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22766}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 37
+  at: [41, 66]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22767}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
+- type: event
+  name: Gust 38
+  at: [42, 66]
+  pages:
+  - trigger: touch
+    through: true
+    commands: []
+  - cond:
+      var: [ROAD_GUST, 1]
+    graphic: {tile: 22768}
+    trigger: touch
+    through: true
+    commands:
+    - {script: 'pbSEPlay(''Wind1'') rescue nil
+
+        PrismfallPuzzles.push_line(2, ''Gust'')
+
+        pbMessage(_INTL(''A gust tears down the gap and throws you back!'')) if !$PokemonGlobal.instance_variable_get(:@pf_gust_told)
+
+        $PokemonGlobal.instance_variable_set(:@pf_gust_told, true)'}
 - type: sign
   name: Road sign
   at: [34, 90]
@@ -29,20 +816,20 @@ events:
   post: false
 - type: event
   name: The Handfast Arch
-  at: [12, 37]
+  at: [8, 36]
   pages:
   - trigger: action
     commands: ['THE HANDFAST ARCH: half whale-jaw, half living briar, raised when the border was last agreed.', A brass Meridian sunburst has been bolted
         across the keystone. The bolts are new and very shiny.]
 - type: event
   name: Toll hut ledgers
-  at: [40, 70]
+  at: [36, 78]
   pages:
   - trigger: action
     commands: ['Two ledgers on the empty toll hut''s counter, one per kingdom. They disagree about everything, including the date.']
 - type: event
   name: Bothy keeper
-  at: [52, 84]
+  at: [16, 82]
   pages:
   - graphic: {sprite: NPC 26, dir: down}
     trigger: action
@@ -52,19 +839,19 @@ events:
     - {heal: true}
 - type: event
   name: Ice-fishing hole
-  at: [44, 33]
+  at: [52, 35]
   pages:
   - trigger: action
     commands: ['A round hole cut in the tarn ice, a line still in it. Face the water and use a rod.']
 - type: event
   name: Snowmen
-  at: [24, 58]
+  at: [24, 49]
   pages:
   - trigger: action
     commands: [A row of snowmen built by Frostwick children. One of them is blinking.]
 - type: event
   name: Snorunt
-  at: [26, 58]
+  at: [27, 49]
   pages:
   - graphic: {sprite: Followers/SNORUNT, dir: down}
     trigger: action
@@ -72,10 +859,16 @@ events:
     commands: [(It is pretending very hard to be a snowman.)]
 - type: event
   name: Avalanche fence
-  at: [60, 60]
+  at: [56, 62]
   pages:
   - trigger: action
     commands: [Avalanche fences of split larch. Somebody has painted EAT MORE CHEESE on one in Isenmar.]
+- type: event
+  name: Snow-buried signpost
+  at: [46, 44]
+  pages:
+  - trigger: action
+    commands: ['A signpost buried to its arms in snow. One arm says FROSTWICK. The other says it in runes, and adds "AND NOT ELOWEN".']
 - type: event
   name: Road Stone III-b
   at: [30, 92]
@@ -83,19 +876,25 @@ events:
   - trigger: action
     commands: [ROAD STONE III-b. THE HOAR ROAD. "Frostwick 1." The '1' is in Isenmar runes; the Elowen side says "nearly".]
 - type: event
+  name: Wind gap
+  at: [39, 68]
+  pages:
+  - trigger: action
+    commands: ['THE WIND GAP. The pass funnels the north wind through this cut in gusts. Walk between them, or it walks you back down.']
+- type: event
   name: Frozen fall
-  at: [54, 20]
+  at: [58, 18]
   pages:
   - trigger: action
     commands: ['(Behind the frozen fall, a hollow: carvings of a forester and a huscarl, their hands joined, and a bell on a ribbon.)']
 - type: item
-  at: [55, 23]
+  at: [59, 20]
   item: SOOTHEBELL
 - type: item
   at: [8, 56]
   item: ICEHEAL
 - type: item
-  at: [62, 46]
+  at: [64, 45]
   item: SUPERPOTION
 - type: item
   at: [47, 28]
@@ -104,7 +903,7 @@ events:
   name: HiddenItem (tarn)
 - type: event
   name: Huscarl
-  at: [20, 44]
+  at: [20, 41]
   pages:
   - graphic: {sprite: NPC 21, dir: right}
     trigger: action
@@ -112,7 +911,7 @@ events:
     commands: ['Huscarl: Elowen side, Isenmar side. The arch doesn''t care. Nor do I, mostly. Pass.']
 - type: event
   name: Forester
-  at: [42, 80]
+  at: [44, 72]
   pages:
   - graphic: {sprite: NPC 14, dir: down}
     trigger: action

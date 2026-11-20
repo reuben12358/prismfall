@@ -707,6 +707,47 @@ def bellpost():
     return im, ['O', 'O', 'W']
 
 
+def snow_ground(v):
+    """snow ground variants (1x1, ground layer) matching Kristiline's snow (232,232,240): wind ripples, sparkle, a
+    shadow dip, footprint-free"""
+    base = (232, 232, 240)
+    im = Image.new('RGBA', (16, 16), base + (255,)); r = random.Random(860 + v)
+    if v == 0:
+        for k in range(3):
+            y = 3 + k * 5 + r.randrange(2)
+            for x in range(16): P(im, x, y + int(math.sin(x * 0.6 + k) * 0.8), (220, 224, 236, 255))
+    elif v == 1:
+        for _ in range(9): P(im, r.randrange(16), r.randrange(16), (250, 252, 255, 255))
+        for _ in range(4): P(im, r.randrange(16), r.randrange(16), (200, 224, 232, 255))
+    elif v == 2:
+        for y in range(16):
+            for x in range(16):
+                if ((x - 8) / 7.0) ** 2 + ((y - 9) / 5.0) ** 2 < 1: P(im, x, y, (224, 226, 238, 255))
+        for x in range(4, 12): P(im, x, 4, (244, 246, 252, 255))
+    else:
+        for _ in range(6):
+            x, y = r.randrange(14), r.randrange(15)
+            P(im, x, y, (214, 220, 234, 255)); P(im, x + 1, y, (244, 246, 252, 255))
+    return im
+
+
+def fleece_cross():
+    """the Fleece Cross (2x3): an old stone market cross on a stepped plinth, hung with yarn ribbons in every colour"""
+    im, d = canvas(2, 3); r = random.Random(29)
+    d.rectangle([4, 38, 27, 46], fill=STONE[1], outline=OUT); d.rectangle([7, 33, 24, 38], fill=STONE[2], outline=OUT)
+    d.line([5, 39, 26, 39], fill=STONE[3]); d.line([8, 34, 23, 34], fill=STONE[3])
+    d.rectangle([13, 6, 18, 33], fill=STONE[2], outline=OUT); d.line([14, 7, 14, 32], fill=STONE[3])
+    d.rectangle([7, 10, 24, 15], fill=STONE[2], outline=OUT); d.line([8, 11, 23, 11], fill=STONE[3])
+    cols = [(196, 52, 64), (52, 84, 186), (228, 196, 60), (240, 240, 236), (120, 180, 90), (200, 120, 200)]
+    for k in range(9):
+        x = 6 + k * 2 + r.randrange(2); y0 = 14 + r.randrange(3); L = 6 + r.randrange(12)
+        c = r.choice(cols)
+        for y in range(y0, y0 + L): P(im, x + (1 if (y - y0) % 5 == 4 else 0), y, c + (255,))
+    for k in range(4): P(im, 15 + k - 2, 20 + k * 3, (240, 240, 236, 255))
+    d.ellipse([3, 45, 28, 47], fill=(0, 0, 0, 60))
+    return im, ['OO', 'OO', 'WW']
+
+
 def pieces():
     """name -> (image, code rows, door): appended by rcustom (rdraw.pieces_late4)"""
     D.CODE.update(CODES)
@@ -763,6 +804,8 @@ def pieces():
     out['sb_m'] = (stone_bridge('m'), ['D'], None); out['sb_w'] = (stone_bridge('w'), ['W'], None); out['sb_e'] = (stone_bridge('e'), ['W'], None)
     im, c = bamboo(); out['pf_bamboo'] = (im, c, None)
     im, c = bellpost(); out['pf_bellpost'] = (im, c, None)
+    for v in range(4): out['sn_g%d' % v] = (snow_ground(v), ['G'], None)
+    im, c = fleece_cross(); out['pf_fleececross'] = (im, c, None)
     for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
         out['df_slab_' + nm] = (slab(col), ['F'], None)
     im, c = sluice(); out['df_sluice'] = (im, c, None)

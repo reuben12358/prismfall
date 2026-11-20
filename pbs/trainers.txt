@@ -13,7 +13,7 @@
 Items = POTION
 LoseText = Bravo! Bravissimo! The audience is yours tonight!
 Pokemon = AIPOM,10
-    Moves = FAKEOUT,ASTONISH,SCRATCH,BATONPASS
+    Moves = FAKEOUT,ASTONISH,SCRATCH,TAILWHIP
     Ability = PICKUP
     Item = ORANBERRY
     Nature = JOLLY
@@ -92,7 +92,7 @@ Pokemon = KECLEON,15
 [LEADER_DORIAN,Dorian,200]
 LoseText = Bravo! Bravissimo! The audience is yours tonight!
 Pokemon = AIPOM,8
-    Moves = SCRATCH,ASTONISH,TAILWHIP,BATONPASS
+    Moves = SCRATCH,ASTONISH,TAILWHIP
     Ability = PICKUP
     Item = ORANBERRY
     Nature = JOLLY
@@ -2211,7 +2211,7 @@ Pokemon = CHARMELEON,23
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,19
     Name = Morwen
-    Moves = SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER
+    Moves = SHADOWSNEAK,AERIALACE,FURYCUTTER,TACKLE
     Ability = NOGUARD
     Item = ORANBERRY
     Nature = ADAMANT
@@ -2298,7 +2298,7 @@ Pokemon = WARTORTLE,23
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,19
     Name = Morwen
-    Moves = SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER
+    Moves = SHADOWSNEAK,AERIALACE,FURYCUTTER,TACKLE
     Ability = NOGUARD
     Item = ORANBERRY
     Nature = ADAMANT
@@ -2385,7 +2385,7 @@ Pokemon = IVYSAUR,23
 LoseText = ...Fine. Stay out of the Hollow's way, then. I mean it.
 Pokemon = HONEDGE,19
     Name = Morwen
-    Moves = SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER
+    Moves = SHADOWSNEAK,AERIALACE,FURYCUTTER,TACKLE
     Ability = NOGUARD
     Item = ORANBERRY
     Nature = ADAMANT
@@ -7532,7 +7532,7 @@ Pokemon = MINCCINO,14
 # Map 154 Pell Playhouse - Auditorium
 #-------------------------------
 [JUGGLER,Florian]
-LoseText = Dropped every pin! Bravo, though.
+LoseText = I'll be in the bar. There is no bar. I'll be in the lobby.
 Pokemon = MINCCINO,10
     Moves = ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES
     Ability = TECHNICIAN
@@ -7544,7 +7544,7 @@ Pokemon = SPINDA,11
     IV = 8
 #-------------------------------
 [JUGGLER,Florian,100]
-LoseText = Dropped every pin! Bravo, though.
+LoseText = I'll be in the bar. There is no bar. I'll be in the lobby.
 Pokemon = MINCCINO,10
     Moves = ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES
     Ability = TECHNICIAN
@@ -7556,7 +7556,7 @@ Pokemon = SPINDA,11
     IV = 20
 #-------------------------------
 [JUGGLER,Florian,200]
-LoseText = Dropped every pin! Bravo, though.
+LoseText = I'll be in the bar. There is no bar. I'll be in the lobby.
 Pokemon = MINCCINO,9
     Moves = ECHOEDVOICE,POUND,HELPINGHAND,BABYDOLLEYES
     Ability = TECHNICIAN
@@ -7571,7 +7571,7 @@ Pokemon = SPINDA,10
 # Map 154 Pell Playhouse - Auditorium
 #-------------------------------
 [BEAUTY,Rosalind]
-LoseText = The spotlight suits you better, darling.
+LoseText = ...Upstaged. In my own aisle.
 Pokemon = SKITTY,11
     Moves = FAKEOUT,ROUND,SING,TAILWHIP
     Ability = CUTECHARM
@@ -7583,7 +7583,7 @@ Pokemon = FLABEBE,11
     IV = 8
 #-------------------------------
 [BEAUTY,Rosalind,100]
-LoseText = The spotlight suits you better, darling.
+LoseText = ...Upstaged. In my own aisle.
 Pokemon = SKITTY,11
     Moves = FAKEOUT,ROUND,SING,TAILWHIP
     Ability = CUTECHARM
@@ -7595,7 +7595,7 @@ Pokemon = FLABEBE,11
     IV = 20
 #-------------------------------
 [BEAUTY,Rosalind,200]
-LoseText = The spotlight suits you better, darling.
+LoseText = ...Upstaged. In my own aisle.
 Pokemon = SKITTY,10
     Moves = FAKEOUT,ROUND,SING,TAILWHIP
     Ability = CUTECHARM
@@ -7610,36 +7610,36 @@ Pokemon = FLABEBE,10
 # Map 154 Pell Playhouse - Auditorium
 #-------------------------------
 [JUGGLER,Ambrose]
-LoseText = An encore? No? Fair.
+LoseText = Encore? No? No.
 Pokemon = AIPOM,11
     Ability = SKILLLINK
     Nature = JOLLY
     IV = 8
-Pokemon = HERDIER,12
-    Ability = INTIMIDATE
+Pokemon = LILLIPUP,12
+    Ability = VITALSPIRIT
     Nature = ADAMANT
     IV = 8
 #-------------------------------
 [JUGGLER,Ambrose,100]
-LoseText = An encore? No? Fair.
+LoseText = Encore? No? No.
 Pokemon = AIPOM,11
     Ability = SKILLLINK
     Nature = JOLLY
     IV = 20
-Pokemon = HERDIER,12
-    Ability = INTIMIDATE
+Pokemon = LILLIPUP,12
+    Ability = VITALSPIRIT
     Nature = ADAMANT
     IV = 20
 #-------------------------------
 [JUGGLER,Ambrose,200]
-LoseText = An encore? No? Fair.
+LoseText = Encore? No? No.
 Pokemon = AIPOM,10
     Ability = SKILLLINK
     Nature = JOLLY
     IV = 0
     EV = 0
-Pokemon = HERDIER,11
-    Ability = INTIMIDATE
+Pokemon = LILLIPUP,11
+    Ability = VITALSPIRIT
     Nature = ADAMANT
     IV = 0
     EV = 0
@@ -8681,7 +8681,7 @@ Pokemon = SHELMET,16
 # Map 131 Loomhouse Gym - Weaving Hall
 #-------------------------------
 [BUGCATCHER,Nell]
-LoseText = Knotted up. Tamsin'll untangle you.
+LoseText = Two of us would've had you.
 Pokemon = SEWADDLE,15
     Ability = SWARM
     Nature = ADAMANT
@@ -8692,7 +8692,7 @@ Pokemon = SPINARAK,16
     IV = 8
 #-------------------------------
 [BUGCATCHER,Nell,100]
-LoseText = Knotted up. Tamsin'll untangle you.
+LoseText = Two of us would've had you.
 Pokemon = SEWADDLE,15
     Ability = SWARM
     Nature = ADAMANT
@@ -8703,7 +8703,7 @@ Pokemon = SPINARAK,16
     IV = 20
 #-------------------------------
 [BUGCATCHER,Nell,200]
-LoseText = Knotted up. Tamsin'll untangle you.
+LoseText = Two of us would've had you.
 Pokemon = SEWADDLE,14
     Ability = SWARM
     Nature = ADAMANT
@@ -8717,7 +8717,7 @@ Pokemon = SPINARAK,15
 # Map 131 Loomhouse Gym - Weaving Hall
 #-------------------------------
 [LASS,Orla]
-LoseText = See? Never the red shuttle first.
+LoseText = ...I'm going back to the net.
 Pokemon = LEDYBA,15
     Ability = SWARM
     Nature = JOLLY
@@ -8728,7 +8728,7 @@ Pokemon = VIVILLON,16
     IV = 8
 #-------------------------------
 [LASS,Orla,100]
-LoseText = See? Never the red shuttle first.
+LoseText = ...I'm going back to the net.
 Pokemon = LEDYBA,15
     Ability = SWARM
     Nature = JOLLY
@@ -8739,7 +8739,7 @@ Pokemon = VIVILLON,16
     IV = 20
 #-------------------------------
 [LASS,Orla,200]
-LoseText = See? Never the red shuttle first.
+LoseText = ...I'm going back to the net.
 Pokemon = LEDYBA,14
     Ability = SWARM
     Nature = JOLLY
@@ -8753,7 +8753,7 @@ Pokemon = VIVILLON,15
 # Map 131 Loomhouse Gym - Weaving Hall
 #-------------------------------
 [GENTLEMAN,Bram]
-LoseText = Sorry. No, wait, you won. Well done.
+LoseText = I don't need to say it, then.
 Pokemon = VENONAT,16
     Ability = COMPOUNDEYES
     Nature = MODEST
@@ -8764,7 +8764,7 @@ Pokemon = SEWADDLE,17
     IV = 8
 #-------------------------------
 [GENTLEMAN,Bram,100]
-LoseText = Sorry. No, wait, you won. Well done.
+LoseText = I don't need to say it, then.
 Pokemon = VENONAT,16
     Ability = COMPOUNDEYES
     Nature = MODEST
@@ -8775,7 +8775,7 @@ Pokemon = SEWADDLE,17
     IV = 20
 #-------------------------------
 [GENTLEMAN,Bram,200]
-LoseText = Sorry. No, wait, you won. Well done.
+LoseText = I don't need to say it, then.
 Pokemon = VENONAT,15
     Ability = COMPOUNDEYES
     Nature = MODEST
@@ -11900,6 +11900,12 @@ Pokemon = COALOSSAL,83
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
+Pokemon = ARCANINE,83
+    Moves = FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
 Pokemon = GARCHOMP,84
     Moves = DRAGONCLAW,STONEEDGE,FIREFANG,PROTECT
     Ability = ROUGHSKIN
@@ -11923,6 +11929,13 @@ Pokemon = COALOSSAL,84
     Nature = ADAMANT
     IV = 31
     EV = 252,252,0,0,0,4
+Pokemon = ARCANINE,84
+    Moves = FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
 Pokemon = GARCHOMP,85
     Moves = SCALESHOT,STONEEDGE,FIREFANG,PROTECT
     Ability = ROUGHSKIN
@@ -11938,6 +11951,13 @@ Pokemon = TORKOAL,78
     Ability = DROUGHT
     Item = SITRUSBERRY
     Nature = QUIET
+    IV = 20
+    EV = 0
+Pokemon = ARCANINE,79
+    Moves = FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT
+    Ability = INTIMIDATE
+    Item = SITRUSBERRY
+    Nature = ADAMANT
     IV = 20
     EV = 0
 Pokemon = GARCHOMP,80
@@ -11980,6 +12000,13 @@ Pokemon = HAXORUS,83
     Nature = JOLLY
     IV = 31
     EV = 4,252,0,252,0,0
+Pokemon = NINETALES,82
+    Moves = HEATWAVE,SOLARBEAM,ENCORE,PROTECT
+    Ability = DROUGHT
+    Item = HEATROCK
+    Nature = TIMID
+    IV = 31
+    EV = 4,0,0,252,252,0
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier,202]
 LoseText = Sand in my teeth. Glass in my boots. Worth it.
@@ -12261,6 +12288,12 @@ Pokemon = KINGDRA,83
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 31
+Pokemon = LAPRAS,83
+    Moves = HYDROPUMP,FREEZEDRY,ICESHARD,PROTECT
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
 Pokemon = ARCTOVISH,84
     Moves = FISHIOUSREND,ICICLECRASH,PSYCHICFANGS,PROTECT
     Ability = WATERABSORB
@@ -12284,6 +12317,13 @@ Pokemon = KINGDRA,84
     Nature = MODEST
     IV = 31
     EV = 4,0,0,252,252,0
+Pokemon = LAPRAS,84
+    Moves = HYDROPUMP,FREEZEDRY,ICESHARD,PROTECT
+    Ability = WATERABSORB
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 31
+    EV = 252,0,4,0,252,0
 Pokemon = ARCTOVISH,85
     Moves = FISHIOUSREND,ICICLECRASH,PSYCHICFANGS,PROTECT
     Ability = WATERABSORB
@@ -12297,6 +12337,13 @@ LoseText = The sea came all this way for us. ...And still.
 Pokemon = PELIPPER,78
     Moves = HURRICANE,SCALD,ROOST,PROTECT
     Ability = KEENEYE
+    Item = SITRUSBERRY
+    Nature = MODEST
+    IV = 20
+    EV = 0
+Pokemon = LAPRAS,79
+    Moves = HYDROPUMP,FREEZEDRY,ICESHARD,PROTECT
+    Ability = WATERABSORB
     Item = SITRUSBERRY
     Nature = MODEST
     IV = 20
@@ -12341,6 +12388,13 @@ Pokemon = SEISMITOAD,83
     Nature = MODEST
     IV = 31
     EV = 4,0,0,252,252,0
+Pokemon = CLOYSTER,82
+    Moves = ICICLESPEAR,ROCKBLAST,SHELLSMASH,PROTECT
+    Ability = SKILLLINK
+    Item = WHITEHERB
+    Nature = ADAMANT
+    IV = 31
+    EV = 4,252,0,252,0,0
 #-------------------------------
 [ISENMAR_SOLDIER_M,Soldier,202]
 LoseText = The tide's on our side. It's just slow about it.

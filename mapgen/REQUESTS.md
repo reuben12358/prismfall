@@ -316,6 +316,13 @@ fixed**: `export_tilesets_rxdata.py` warns about nothing and 521 draws without t
     too. In the engine the bot walked from the stile (18,109) to (0,75) and onto Lacecliff Walk (527) with S105 off, i.e.
     before the Glassed Orchard. Suggested: put the barrier events on the four edge tiles (0,72)-(0,75), or wall x 1-2 so
     that the barrier column is the only way through.
+16. **Chapter 1 can close without the Chapter 1 close (maps 523/520, 22:11 build).** V102 = 2 is set only by the Bed in
+    Hale Farmhouse (523, "You could rest here", S105 and V102 < 2 -> the night cutscene). Nothing tells the player to
+    rest: Wenna's Biscuit lines don't, and the script's "plays when the PC sleeps at the farmhouse or the inn" has no
+    inn event yet (104). But the Hale Bell barrier on 520 opens on S105 alone. In the engine the bot returned Biscuit,
+    walked to the stile (the send-off needs V102 >= 2, so nothing played) and went on to Lacecliff Walk: no send-off,
+    no Town Map, no "Eighteen Roads", still in Chapter 1. Suggested: gate the Hale Bell barrier on V102 >= 2 (with a
+    guard line pointing back to the farm), or have Wenna/Juno ask "stay the night?" when Biscuit comes home.
 
 ## From the puzzle engineer: the Saltmere audience (SPINE Revision 19, item 3), 2026-11-19
 **For map builder 9 (Saltmere 140/143/144/146/147 are yours; I have not edited them).** "The more people you meet around town,
@@ -682,3 +689,80 @@ Cinderglass): the story calls it a Bleed line only the PC can cross.
 **For the EBDX Bridge owner:** two new backdrop keys with no art (`field_flooded_dunes`, `field_glass_dunes`), the new
 transition colours, and profile suggestions are in `design/FIELD_BACKDROPS_NEEDED.md` §1, §2, §4. `[:DESERT, :ASHEN_WASTE]`
 is no longer used.
+
+## From the trainer designer, round 3 (SPINE Revisions 16, 18, 19), 2026-11-20
+Data: `tools/trainer_gen/gen.py` → `pbs/trainers.txt` (generator-exact, 0 validator errors). Win rates and the
+Reborn / Rejuvenation calibration: `design/BALANCE.md` §1b and §9; per-fight notes: `design/TRAINER_FIELD_PLAYBOOK.md`.
+No map file was edited.
+
+**For the puzzle engineer (the Saltmere audience) and the field owner (`102_Field_GrandStage.rb`):**
+1. **Yes, a bigger crowd should favour the player, and today it doesn't.** Dorian's team is the same at every stage;
+   with the fans rule in, a realistic Standard six wins **43% (sparse) / 52% (good) / 45% (full)** with a Lv 15 team
+   (50 / 52 / 37% in a second run) and 37 / 25 / 35% with a Lv 14 team (60 runs each, `tools/harness/run_winrates.rb` fights G1, G1S2, G1S3, G1L14,
+   G1S2L14, G1S3L14). Casual wins 100% at every stage, Hard (realistic) 0–7%. What keeps the full house from paying off is the
+   Standing Ovation **bask**: his whole troupe is Normal, so from turn 1 every one of them heals 1/16 a round.
+2. **Proposal:** with your fans in (7+ met), the bask is for **your side only** ("the house cheers you, not him"): add a
+   battler condition to the two bask rules at stage 3, e.g. `:condition => proc { |_bt, b| !($game_temp&.pf_home_crowd && b.opposes?) }`.
+   Harness result (Standard, harness-only patch `PRISM_EXP_HOUSE=nobask`): **sparse 50 / good 63 / full 73%**
+   (Lv 14 team: 37 / 37 / 43%), so the crowd you gathered pays off and the sparse house is untouched. If that is too
+   generous, halving Dorian's bask with fans in (`halfbask`) gives 45% at a full house, about even with sparse. Giving the
+   +1 crit stage to your side only (`crit`) adds little on top. I'd ship `nobask`.
+
+**For the field owner:**
+3. **Water Surface ↔ Underwater loop:** Dive into Underwater and Dive back to the surface are both transform strikes
+   (×1.3, and Dive is ×1.5 underwater): 103 knockouts in 60 Gym 3 runs came from it, so Marisol no longer has Dive.
+   Suggest: the return trip is not a strike (or one strike per battle).
+4. `FIELD_DEFAULTS.yaml` `exceptions.trainers`: the `OCTAVE_SINGER` v1–8 and `OCTAVE_VESPER` v2 rows are dead (retired
+   versions); `OCTAVE_SINGER` v0 is Lyra now (the row's text says Carol; the field, Grand Stage, is right). The v60 bouts
+   need no rows (the quest sets the field). In `012_FieldEffects_TrainerPlays.rb` (mine) I emptied `ENTRY_FIELDS`
+   (only Vesper v2 used it) and added the war WANTS exactly as you suggested, plus the partners'.
+5. The war teams are rebuilt for your sequence: Desert on 920 / 926 (rain → Superbloom → flood; two searing moves →
+   glass; no quakes in the Ashkaar glass line), the Bleed on 925, Cinderglass on 924. Harness: with the WANTS the
+   Ashkaar line glasses the dunes in 6–8 of 8 partner doubles and the Isenmar line floods them (and freezes the flood)
+   in 6 of 8. Partner versions `LEADER_SIGRUN` / `LEADER_MARISOL` 19 need no `TRAINER_FIELDS` row (926 is Desert).
+
+**For the map builder / story (the Battle of the Glass Dunes, Ch19, cap 85):** versions are encounter numbers.
+6. Gauntlets: back Ashkaar → 920 the Rimed Sands: `ISENMAR_SOLDIER_M,Soldier,0`, `ISENMAR_SOLDIER_F,Soldier,0`,
+   `ISENMAR_OFFICER,Captain,0`. Back Isenmar → 924 the Siege Camp: `ASHKAAR_SOLDIER_M,Soldier,0`, `ASHKAAR_SOLDIER_F,Soldier,0`,
+   `ASHKAAR_OFFICER,Captain,0`. Stand between → 925 the Steamline: `ASHKAAR_SOLDIER_M,Soldier,1`, `ISENMAR_SOLDIER_M,Soldier,1`.
+   926 crest singles: `ASHKAAR_SOLDIER_F,Soldier,1`, `ISENMAR_SOLDIER_F,Soldier,1`.
+7. Partner double on 926 (map default Desert):
+   ```
+   pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)     # back Ashkaar or stand between
+   setBattleRule("double")
+   TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ISENMAR_SOLDIER_M, "Soldier", 2)
+   #   stand between: TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ASHKAAR_OFFICER, "Captain", 1)
+   pbRegisterPartner(:LEADER_MARISOL, "Marisol", 19)   # back Isenmar
+   TrainerBattle.start(:ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2)
+   ```
+   (Clear `$PokemonGlobal.partner` afterwards as usual.) The partners have one version only, the same ally in every mode.
+8. The legendary (Prismfall Bosses, taken over at the coordinator's request; `106_Boss_WarLegends.rb`, `design/BOSSES.md` §4):
+   `Prismfall::Bosses.wild_battle(:RESHIRAM_GLASS_DUNES)` by default, `:KYOGRE_GLASS_DUNES` if backing Ashkaar; then
+   `Prismfall::Bosses.last_result[:result] == :turned_back`. No catch. Both start on 926's Desert; Reshiram's first break
+   brings the flood-sea (and teaches Blue Flare, which glasses it), Kyogre's first break floods the dunes and the rain
+   passes. **Origin Pulse balance:** no Primal form in the fight (Primordial Sea over the flood one-shot everything: Hard
+   0 of 8 with it), Calm natures and HP / Sp. Def EVs; neutral hits now run 60–90% (results in the playbook §6).
+
+**For the Eevee Octave workstream / Trials owner:**
+9. Done: all Octave teams live in `gen.py` now (removed from `pbs/trainers_trials.txt`, a pointer comment left).
+   `OCTAVE_SINGER,Lyra,0` (Eevee "Moss" 17) partners `OCTAVE_VESPER,Vesper,0` (Eevee "Amen" 18) in the Ch2 double; Vesper 1
+   (Ch13) kept; **retired** Carol 0, the singers' 1–8 and Vesper 2. Duels (50) at your levels (next cap − 1: 18, 22, 26, 30,
+   34, 38, 58, 88; partner one below, not on Casual), real level-legal sets. `GAUNTLET_VERSION` 60 and `HOST` unchanged.
+10. **Gauntlet levels (please copy into EEVEE_OCTAVE.md §4): bouts Lv 87 (Hard 88, Casual 83), Vesper's Eevee Lv 89
+    (Hard 90, Casual 85)**, down from 90 / 92; no bag of their own; Forte's Flareon is Guts (no Flash Fire stacking on
+    Volcanic). Harness (a well-built Lv 90 six, Full Restores carried, no healing between bouts, 10 help orders): a player
+    who leads each bout with the Pokémon that takes its type best clears it 9 / 10 (Standard) and 8 / 10 (Hard); an
+    unplanned team 1 / 10 and 0 / 10; Casual 9 / 10 unplanned. Z-moves are two thirds of the knockouts, so the lead is
+    the plan: hard, but fair to a player who reads the order they chose.
+11. **The Little Crucible** (`AS_LITTLE_CRUCIBLE`, after Badge 2): Rekk / Vasha / Brakka re-levelled to the cap-23 band
+    in `pbs/trainers_trials.txt` (Sizzlipede 19 / Carkol 19; Capsakid 19 / Houndour 20; Salandit 20 / Numel 20 /
+    Fletchinder 21, Super Potion). The quest already unlocks at `badges >= 2`.
+
+**For the Base Fixes owner:**
+12. Gen 9 Pack `[003] Moves/[000] Move Functions.rb`, the Psycho Shift override (`GiveUserStatusToTarget`, ~line 27)
+    calls `paldea_pbEffectAgainstTarget` with no arguments: an ArgumentError whenever Psycho Shift is used without
+    Drowsy / Frostbite. It should be `paldea_pbEffectAgainstTarget(user, target)`.
+
+**For the distribution owner:** Tamsin's answer to the common birds is Dwebble (Smack Down grounds them into the silk,
+Rock Tomb), not a new Flying weakness; the Little Crucible is in the 2-badge band; K1's Standard starter has no type
+move (Reborn / Rejuvenation do the same), so the realistic upset rate is about one in six.

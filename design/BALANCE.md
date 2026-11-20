@@ -27,7 +27,7 @@ Rules of thumb used when writing teams:
 - Standard never uses: OHKO moves, evasion abilities (Sand Veil/Snow Cloak), Moody, Baton Pass chains, sleep + Dream
   Eater loops, Shadow Tag. Hard may use Shadow Tag (Gothitelle) and Perish trapping (Mega Gengar) once each.
 - Moves learned "early" (by level-up above the mon's level) are allowed only on Hard. The validator warns about them
-  (34 Hard-only warnings at the moment, all intentional); Standard and Casual have zero.
+  (28 Hard-only warnings at the moment, all intentional); Standard and Casual have zero.
 
 ## 1b. Calibration against Reborn and Rejuvenation (round 3)
 
@@ -280,6 +280,40 @@ telegraph, not one wall. Kestrel (tag partner in the hijack per cast) does **not
 - Gen 9 note: the live base `pokemon.txt` does not list Bisharp→Kingambit (the Gen 9 Pack adds it only through its optional
   Auto-Updates PBS); the validator treats such Gen 9 evolutions as prevolutions (`MANUAL_PREVO`).
 
+## 9. Win rates (harness, round 3)
+
+`tools/harness/run_winrates.rb` (real Essentials v21.1 battle code + Prismfall plugins, AI on both sides): a **realistic**
+challenger is a starter plus catches drawn from what `POKEMON_AVAILABILITY.md` (Rev 16 distribution) and
+`EVENT_POKEMON.md` allow before that fight, weighted by encounter rate (no Fighting type and only a 3% Sandygast before
+Gym 1; no Fire / Rock / Flying gift and ≤ 4% wild Fire / Rock before Gym 2), six Pokémon from Gym 1 on, the starter at
+the cap and the rest 1–3 under, level-up moves plus the story's TMs, random natures, IV 5–25, an Oran Berry and a few
+Potions (none on Hard), piloted by the AI at skill 100. **Prepared** = grinded to the cap with the best type answers the
+distribution allows by then (rare finds included). 60 fights per cell (20 per starter); ±6 points of noise.
+
+| Fight | Casual | Standard | Hard (realistic) | Hard (prepared) |
+|---|---|---|---|---|
+| K1 Kestrel (Lv 5, can be lost) | 100% | 15% | 0% | — |
+| J1 Juno (Meadow) | 100% | 63% | 50% | 55% |
+| Gym 1 Dorian, sparse house (stage 1) | 100% | 43% | 2% | 33% |
+| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 52% | 7% | 37% |
+| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 45% | 0% | 43% |
+| Gym 2 Tamsin (Silkwood, double) | 100% | 45% | 3% | 35% |
+| K2 Kestrel (Mountain) | 98% | 58% | 5% | 30% |
+| Gym 3 Marisol (Water Surface) | 83% | 25% | 0% | 30% |
+
+Reading: the AI challenger plays worse than a person (no planned leads, little stalling), so Standard's 25–60% means
+"a realistic team loses a few times and wins with the field notes"; a **prepared** team wins Standard J1 83%, Gym 1
+95%, Gym 2 98% (one run crashed on the Gen 9 Pack's Psycho Shift bug, counted as a loss), K2 73%, Gym 3 97%. Hard is for prepared teams (30–55%); a realistic team loses there, as on Reborn's harder modes. Casual
+is 83–100%. Weak spots: Gym 3 with the Fire starter (0 of 20 realistic: Electric and Grass catches are rare before
+Ebbmouth) and the Saltmere crowd, which doesn't reward the player yet: about even across the houses with a Lv 15 team
+(43 / 52 / 45%; an earlier run with Baton Pass Aipom, 50 / 52 / 37%), worse with a Lv 14 team (37 / 25 / 35%).
+Proposal: Dorian's troupe stops basking when your fans are in (harness 50 / 63 / 73%, mapgen/REQUESTS.md).
+
+Late fights (`/home/claude/work/trainers2/run_late.rb`, a well-built six at the cap, Full Restores, 8–10 runs): the
+Eevee Octave gauntlet (Lv 87 / 89) 9 of 10 Standard and 8 of 10 Hard with planned leads, 1 and 0 of 10 without; the war
+legendaries Reshiram 7/8 Standard, 5/8 Hard; Kyogre 5/8 Standard, 0/8 Hard (a counter-team fight); war partner doubles
+6/8 (Isenmar) and 8/8 (Ashkaar) on Standard. Details: TRAINER_FIELD_PLAYBOOK.md §6.
+
 ## Intentional non-learnable moves (validator allowlist)
 
 Rows here are read by `tools/validate_trainers.py`: `| TYPE,Name,Version | SPECIES | MOVE or ABILITY | reason |`.
@@ -299,10 +333,18 @@ in the validator, so they need no row.
 - Not trainer data (specified in §7 for Prismfall Bosses): the Arceus configs, `GIRATINA_ORIGIN_TRIAL`, `KYOGRE_WEATHER`.
 - Rev 10 field re-tune: done for Wardens, rivals, Thistle, Teo, Valen, Voss, the Festival draws and the route trainers
   (TRAINER_FIELD_PLAYBOOK.md). Not re-tuned: cameo sidequests, Quent, Theodric, the Ch21 tag foes.
-- Still no teams: the Mourner, Wick, Sable, Ashe, pre-Ch21 Marchetti/Quent/Kroll fights.
-- **Eevee Octave (SPINE Rev 19):** provisional teams from the Trials workstream in `pbs/trainers_trials.txt`
-  (`OCTAVE_SINGER <name>` v50 kingdom duels at the next cap − 1, v60 gauntlet bouts at 90 with Z-crystals,
-  `OCTAVE_VESPER Vesper` v60 Eevee 92 with the Eevium Z); levels, balance findings and the retired v0 Carol / v1–8 / Vesper v2
-  sets: `design/EEVEE_OCTAVE.md` §4 and mapgen/REQUESTS.md ("From the Eevee Octave workstream"). For the trainer designer to tune.
-- Pending: war-arc soldier/officer teams (types `ASHKAAR_*` / `ISENMAR_*` exist; teams once the story lead writes the war);
-  new maps' trainers as they are generated.
+- Story teams: the Mourner, Wick, Sable, Marchetti 0–2, Quent 0–2, Kroll 0–1 all exist (round 2). Ashe has no story
+  battle in the script (no team needed until one is written).
+- **Eevee Octave (SPINE Rev 19), round 3: done in `gen.py`** (moved out of `pbs/trainers_trials.txt`). Lyra 0 (Eevee 17)
+  + Vesper 0 (Eevee 18) for the Ch2 double; Vesper 1 (Ch13); duels v50 at the next cap − 1 (18 / 22 / 26 / 30 / 34 /
+  38 / 58 / 88); **gauntlet v60: one Eeveelution each with its Z-crystal, Lv 87 (Hard 88, Casual 83); Vesper's Eevee
+  with the Eevium Z, Lv 89 (Hard 90, Casual 85)** against the Festival cap of 90. Retired: Carol 0, singers 1–8,
+  Vesper 2. Harness results: TRAINER_FIELD_PLAYBOOK.md §6 and mapgen/REQUESTS.md (trainer designer, round 3).
+- **The war (SPINE Rev 18), round 3:** the Battle of the Glass Dunes is on land. Gauntlets on 920 (Desert), 924
+  (Cinderglass), 925 (the Bleed); crest singles and the partner doubles on 926 (Desert → flood / glass); partners
+  `LEADER_SIGRUN` / `LEADER_MARISOL` 19 (one version: the same ally in every mode); war legendaries
+  `:RESHIRAM_GLASS_DUNES` / `:KYOGRE_GLASS_DUNES` in Prismfall Bosses (`106_Boss_WarLegends.rb`; the trainer designer
+  took the Bosses plugin over). Cap 85.
+- Little Crucible (Trials) re-levelled to the 2-badge band (19–21). K1 Standard: no type move (Reborn / Rejuvenation).
+- Pending: new maps' trainers as they are generated; the Saltmere audience rule (proposal in REQUESTS: Dorian's troupe
+  doesn't bask when your fans are in).

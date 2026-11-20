@@ -40,7 +40,9 @@ module PlayBot
     [:to, 520, 521], [:spot_all, 521],
     [:to, 521, 522], [:talk, 522, "Glassed Wurmple"], [:talk, 522, "Lost Skwovet"], [:goto, 522, "Bleed Veil 2"],
     [:to, 522, 521],                               # "Juno flags 1" moved to the Dyers' Ford (552) in Rev 14
-    [:to, 521, 523], [:talk, 523, "Wenna"], [:to, 523, 521],
+    [:to, 521, 523], [:talk, 523, "Wenna"],
+    [:talk, 523, "Bed"],                           # rest: the end-of-Chapter-1 night cutscene (S105 -> V102 = 2)
+    [:to, 523, 521],
     [:to, 521, 520], [:goto, 520, "Stile send-off 2"],   # the stile send-off closes Chapter 1
     # Chapter 2 (SPINE Rev 14, design/SWAP_GYM1_GYM2.md 1A): the Strand Road 520 W -> 527 -> 528 -> Saltmere 140 East
     # Gate, then Gym 1 (147 -> 150 -> 154). The forest road 521 -> 524 is corded until after Gym 2. Until map builder 9's
@@ -427,6 +429,7 @@ module PlayBot
       @step_frames += 1                # only frames with the map free count (cutscenes can be long)
       return wait_for_map if ![:done, :debug_install, :run_checks, :arrive, :need_map, :eval_conditions].include?(kind) &&
                              $game_map.map_id != map
+      @routing = false
       if @step_frames > 5400 && !(kind == :spot_all && @grind_target.to_i > 0)   # grinding has its own cap
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
@@ -519,7 +522,7 @@ module PlayBot
       here = $game_map.map_id
       @map_wait = (@map_wait || 0) + 1
       later = plan[@step..].index { |s| s[1] == here }
-      later = nil if later && plan[(@step + 1)...(@step + later)].any? { |s| s[0] != :to }
+      later = nil if later && (@routing || plan[(@step + 1)...(@step + later)].any? { |s| s[0] != :to })
       if later
         @step += later
         @step_start = 0
@@ -535,7 +538,9 @@ module PlayBot
         shot("gave_up_step#{@step}")
         return next_step
       end
-      to_map(hop) if hop && @idle >= 12
+      return if !hop || @idle < 12
+      @routing = true                    # walking back on our own: never skip the step we are walking back to
+      to_map(hop)
     end
 
     # Next map on the shortest way from map `from` to map `dest`, over the links the plan's [:to, a, b] steps walk
@@ -562,6 +567,7 @@ module PlayBot
     end
 
     def next_step
+      @routing = false
       @step += 1
       @step_start = 0
       @bumps = 0
@@ -891,8 +897,12 @@ module PlayBot
       log("BLACKOUT ##{@blackouts} at step #{@step} #{plan[@step].inspect} on map #{$game_map.map_id}; party #{party_text}")
       shot("blackout_#{@blackouts}")
       if GRIND_LEVELS > 0 && @battle_tag.to_s !~ /_wild /   # lost to a trainer
-        @grind_target = [@grind_target.to_i, $player.party.map { |pk| pk.level }.max + GRIND_LEVELS].max
+        top = $player.party.map { |pk| pk.level }.max
+        cap = (defined?(Prismfall::LevelCap) ? (Prismfall::LevelCap.current rescue 100) : 100)
+        target = [[@grind_target.to_i, top + GRIND_LEVELS].max, cap].min
+        @grind_target = (target > top) ? target : nil   # at the level cap: training can't help, fight on
         @grind_frames = 0
+        log("grind: lead L#{top} is at the level cap (L#{cap}); no training") if !@grind_target
       end
       @rewind = true
     end

@@ -88,7 +88,7 @@ events:
   text: 'SALTMERE - The Free Port.
 
     Answers to the Accord and to No Crown. (Booing Tuesdays.)'
-  at: [80, 44]
+  at: [80, 43]
   post: false
 - type: sign
   name: North Gate sign
@@ -487,6 +487,20 @@ events:
   - {script: 'pfm_audience(:salt_raker)'}
   - 'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'
 - type: npc
+  name: Pan warden
+  sprite: NPC 25
+  dir: left
+  move: fixed
+  text: 'Pan warden: Pink pans are the old ones. The colour''s a little life that loves salt more than we do. White means ready. Blue means wait.'
+  at: [80, 66]
+- type: npc
+  name: Raker boy
+  sprite: NPC 05
+  dir: down
+  move: random
+  text: 'Raker boy: Walk the planks! If you walk the crust it cracks and Gran knows. Gran always knows.'
+  at: [24, 68]
+- type: npc
   name: Townsfolk 1
   sprite: NPC 17
   dir: up
@@ -548,7 +562,7 @@ events:
   dir: down
   move: fixed
   text: Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.
-  at: [28, 40]
+  at: [29, 40]
 - type: npc
   name: Townsfolk 10
   sprite: NPC 03
