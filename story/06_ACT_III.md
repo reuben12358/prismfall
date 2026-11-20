@@ -126,6 +126,7 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
 - The mail-ship moors low, on the Tetherline, because the Directorate searches everything at the upper docks. The PC climbs the Cloudstair (Rock Climb) the back way into the city.
 - Skyreach is a vertical city of docking masts and skybridges climbing into the **Stormfront**, the Sky Plate's permanent storm wall. It now has a **Mandate curfew**: searchlights from 9pm, and Directorate airships patrolling the masts.
 - Larch is here, hiding in plain sight in the **Gale Post** sorting halls as a guest of Warden **Odessa Gale** (goggles, scarf, irreverence). Odessa: "Skyreach's got one law: the wind doesn't care. Everything else is negotiable."
+- **Meridian's keystones** (SPINE Rev 21; before the raid, where Marchetti's Mega Manectric is the first Meridian Mega). Larch, watching Directorate officers walk the mooring cables past a sorting-hall window: *"See the steel bands on their wrists? Lattice-glass. Meridian can't buy a Warden's ring off the Hearthguild, so it grows its own keystones. A Warden's ring asks a heartstone to open. Theirs pry it open. If they come for me tonight and Marchetti's dog changes shape on you, don't stand there gawping."* (Meridian's bands never sing, and Meridian doesn't lend them out: `design/MEGA_EVOLUTION.md` §1.2.)
 - A **black dragon** is glimpsed in the Stormfront's lightning by airship crews: "**the Stormfront Wyrm**." (Zekrom seed. Larch, softly: "That's impossible. That's the shape of the Spire's core.")
 
 **Gym 11 (`:STORMFRONT`), a double battle.** Thematic note: *wind lanes that redirect moves and Pokémon between rounds.* Odessa: "Hold onto something. No, really." Her ace is **Corviknight**. The sky-river guides give **Waterfall**.
@@ -201,6 +202,23 @@ Her ace is **Tsareena**. If `:ch7_ledger` was "said his name", her mid-battle li
   - Then darkness, and the shape of a Mismagius closing the memory like a curtain.
 - **"Not yet":** Ilsa respects it. The memory plays in Ch15 instead, in the Cathedral echo, harder.
 - Ilsa, afterward, white-faced: "The man in white was my father." She has known for eleven years. "The truth is a weapon. I've kept it sheathed. Don't mistake that for mercy." (This seeds her "Little Owl" sidequest.)
+
+**Juno and the Ralts** (the Athenaeum's cloister garden, the night before the tribunal; a warm scene; SPINE Rev 21 sets up her Festival Mega). Juno has come to Lucent as Grass Warden to sit in the Wardens' row at her uncle's trial. A wild Ralts (Lucent is Psychic country, and Ralts are wild from 11 badges) has been riding in her blossom veil since the Antumbra Threshold, drawn by how frightened she is. She keeps it, and it becomes her Gardevoir **"Veil"** (it replaces Comfey on her team). By the Festival, Rowan's ring answers her through it (J4, 08_ACT_V).
+```
+(The cloister garden at night. Juno sits on the rim of a reflecting pool with a speech in her lap she isn't reading. Her blossom veil trails in the water. Something in the veil is trembling.)
+[portrait: JUNO, sad] Don't. I know. I look like a wedding that got lost.
+[name: Juno] He's in a cell under this building. Tomorrow I sit in the Wardens' row and listen to them decide what he is. I've written this speech eleven times. It says "uncle" in all of them.
+(The veil moves. A small white Pokémon with a green bowl of hair peers out of the blossoms: a Ralts, its red horn glowing faintly.)
+[portrait: JUNO, shocked] ...Oh. Hello. How long have you been in there?
+[portrait: JUNO, happy] Since the Threshold, I think. Ilsa says Ralts can feel what you feel. So it's had a horrible week.
+[name: Juno] Everyone stares at the veil. Nobody looks inside it. That's actually very clever of you.
+[portrait: JUNO, neutral] They feel it when you're frightened, and they come closer instead of running away. That's backwards. I like it.
+> It's picked you.
+  [portrait: JUNO, happy] Has it? ...Then you're Veil. I name things after where they hide. It's a system.
+> (Say nothing.)
+  [portrait: JUNO, happy] You're right, it's not my decision. ...Veil? Do you want to be Veil? It's nodding. Or shivering. I'm counting it.
+[portrait: JUNO, sad] Uncle Rowan's ring still won't talk to me. Maybe it's waiting for me to stop being scared. Maybe Veil can teach me how.
+```
 
 **The tribunal (set piece).** In the Athenaeum's Glass Court, Valen presides. Wardens attend, and the kings' observers sit in their gallery. **Rowan** is gaunt from Meridian custody, with his right hand still Bleed-burned in a lightning pattern.
 

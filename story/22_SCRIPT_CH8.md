@@ -1,6 +1,6 @@
 # Script: Chapter 8 — "The Light Stone" (scripted scenes)
 
-> **WITHDRAWN (SPINE Revision 21, 2026-11-20):** the Mega Ring now comes after Badge 13, so the Ring-Day below no longer plays in Ch8. The Mega workstream is choosing its new place and giver and will move this scene (`mapgen/REQUESTS.md`). Until then it's kept as written, for them to reuse. Don't build it.
+> **WITHDRAWN (SPINE Revision 21, 2026-11-20):** the Mega Ring now comes after Badge 13. **The Ring-Day is in `story/07_ACT_IV.md` Ch14:** Bastian's lamp-room in Cragholm, with Bastian giving the odd ring Brann cut "ten years back" (quest `OS_RING_DAY`). The Ch8 version below is kept only as a record. Don't build it. Brann's own beat is now his forge follow-up at 15 badges (07 Ch16).
 
 > **Playable script** for Chapter 8's scripted scenes. The chapter itself (the Sulfur Road, Cindervault, Gym 7, the Caldera Crisis, the Light Stone, Brann's chestnut slip, the herald) is still outline in `story/05_ACT_II.md` Ch8, and its comedy scene "The Hug" is in `15_COMEDY.md`. Each scene here is final; if a plugin plays it, the plugin's strings match this file.
 > Conventions as in `story/20_SCRIPT_CH0-2.md` (`[portrait: NAME, expression]`, `> option`, `MOVE:`, `WAIT n`, *(emotes)*).

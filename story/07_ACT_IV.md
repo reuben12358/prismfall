@@ -38,7 +38,34 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 **Bastian's account.**
 > *"I've seen three Festivals, two Sovereigns and one crown break. AF 290. I was carrying the Stone Plate in the procession. I was nearest the Choir loft. There was brass behind the loft that had no business in a church, and men in white coats with little gold suns on their pockets, watching dials. When the Crown cracked, the dials jumped. They weren't surprised. They were *pleased*. Then Valen said 'find the child', and Morwen Vane threw herself over a little thing in a Choir ribbon, and the next week Morwen was ruined and nobody ever asked me what I saw. I never told. I was afraid. I'm still afraid. I'm telling you anyway."*
 
-**Gym 13 (`:CRYSTAL_CAVERN`).** Thematic note: *light through crystal; darken it and the whole field turns.* (`:CRYSTAL_CAVERN` → `:DARK_CRYSTAL`.) Bastian: "Rock's patient. Rock'll wait a thousand years. I'm only seventy-four, so I'll wait about ten minutes." His ace is **Gigalith**.
+**Gym 13 (`:CRYSTAL_CAVERN`).** Thematic note: *light through crystal; darken it and the whole field turns.* (`:CRYSTAL_CAVERN` → `:DARK_CRYSTAL`.) Bastian: "Rock's patient. Rock'll wait a thousand years. I'm only seventy-four, so I'll wait about ten minutes." His ace is **Gigalith**. His old Aerodactyl **"Amber"** Mega Evolves ("Rock's patient. So's this."): it's the last Mega the PC faces without a ring of their own.
+
+**The Ring-Day (after Gym 13; SPINE Revision 21).** The Mega Ring comes here, at 13 badges, as in Reborn and Rejuvenation. By now the PC has faced a Mega in every gym since Rimeholt, and Marchetti's at Skyreach. Bastian sends Pip up the lifts for the PC and gives them a **Warden's ring** (the Mega Ring) and an **Aggronite** in his lamp-room. It comes before Larch opens the badge case and before the raid, so the PC goes into the raid wearing it. The ring is **the odd one out**. Brann cut it in Cindervault "ten years back", and it "sulked" on every hand, so he posted it to Bastian "in a sock". It sings in the PC's palm. Bastian is half-deaf and can't hear it, but he feels it in the table. A player who remembers Brann's chestnut slip ("After the accident. Ten years back.") and Bastian's crown story an hour earlier can put the three together. Nobody says it until Ch17. **Must not say:** "reset" or "Legend Plate" (09_MYSTERIES #5/#6). Plays as the hidden Trials quest `OS_RING_DAY` on map 363 (`pf_trial_talk(:BASTIAN_LAMPROOM)`), which gives `MEGARING` and `AGGRONITE`, with no Trial gong. The plugin's strings match the lines below. Lore: `design/MEGA_EVOLUTION.md` §1 and §4.
+```
+(Map 363, the lowest of the Lift Galleries. Bastian's lamp-room: a cot, a kettle and forty years of lamps. Pip is perched on a crate; Larch sits by the door with a book she isn't reading.)
+[portrait: BASTIAN, happy] Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks.
+[portrait: BASTIAN, neutral] You'll have seen a few of those by now. Anja's Glalie. Odessa's bird. That Directorate woman's dog. My old Amber, just now. Nobody's told you properly what it is, I'd wager. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild's cut one for every seat since the Concordance.
+[name: Bastian] A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
+[name: Bastian] Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokémon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
+[portrait: BASTIAN, deadpan] One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
+He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.
+[portrait: BASTIAN, neutral] Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain.
+[portrait: BASTIAN, deadpan] Two old men who don't ask each other things. That's how you get to seventy-four.
+[portrait: BASTIAN, neutral] Rock's patient. I reckon this has waited long enough. Hold out your hand.
+He drops the ring into your palm. The colourless chip catches the lamplight... and sings: one clear note, like a wet finger round the rim of a glass.
+Somewhere under your ribs, something answers it.
+(Cutscene RD-1, 13_CUTSCENES.md.)
+[portrait: PIP, shocked] Grandad. Grandad, it's SINGING.
+[name: Bastian] Is it? Can't hear a thing. Half-deaf, me.
+[portrait: BASTIAN, sad] ...I can feel it in the table, though. Holloway swore they don't sing. Thirty years at his anvil, and not one of them ever sang.
+(Larch has lowered her book.)
+[portrait: BASTIAN, worried] Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts.
+(Received: MEGA RING. Received: AGGRONITE.)
+[if the Bag already held a Mega Stone] The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.
+[portrait: BASTIAN, happy] Wear it. If the Directorate comes down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
+```
+*Idle, after:* `Bastian is cleaning a lamp he can't possibly need. He hums, flat, a note behind the tune.`
+*(Brann sees the ring on the PC's hand at 15 badges: "Brann's forge", Ch16 below. Morwen's Ring comes in Ch15, at the grave.)*
 
 **Larch and the badge case (revelation).** Larch takes the PC's **Meridian badge case** apart on a miner's bench. Inside the lining is a sliver of Lattice-glass and a transmitter.
 - "Every badge you've won, it's recorded your — whatever it is in you — resonating with that Plate. And it's been sending it to Meridian. Voss isn't watching you. He's **tuning** you."
@@ -50,7 +77,7 @@ Warm scene: a communal meal of date-bread and miners' stew. If Rowan lives, he a
 
 **The raid.**
 1. **Marchetti's** Directorate raids the seams, hunting Larch and Rowan.
-2. **Admin battle: Marchetti** in the Darkglass gallery (`:DARK_CRYSTAL` after the lamps are shot out).
+2. **Admin battle: Marchetti** in the Darkglass gallery (`:DARK_CRYSTAL` after the lamps are shot out). Her Mega Houndoom makes it the first fight in which both sides can Mega Evolve, hours after the Ring-Day.
 3. **Thistle defects openly to the PC's side**, earlier and warmer at high Hollow Standing. Her Pokémon hold the lift-shaft while refugees escape.
 4. **CHOICE `:ch14_marchetti`:** after her defeat, the PC can show Marchetti the **Splitter Casing** or the Ironreach comm-device: "Your own Special Accounts bombed Skyreach." With either item, `MARCHETTI_TURNED` becomes possible. She doesn't turn now. She just goes very still, and in the Festival hijack she stands down. Without the evidence, she remains loyal.
 
@@ -184,6 +211,20 @@ She gives the PC the ring (Key Item **Morwen's Ring**; plot-relevant in Act V fo
 - **This death cannot be prevented.** It is the act's moral floor.
 
 **Cliffhanger:** Dawn. The PC, Rook and the blueprints on a supply-lift heading down into Nadir. Through the grille below, smoke rises from Underveil.
+
+**Optional thread: Brann's forge (any time from 15 badges until the Festival).** Brann is at the Hearthguild anvil (map 244) whenever he isn't at Valen's side (he comes to Underveil from Crownhaven in Ch17). Most players find him on the road through Ashkaar to Wyrmrest in Ch19. He knows his ring on the PC's hand. If the PC told him the Light Stone was the Dominar's (`:ch8_lightstone` = *dominar*), it still hurts, and he says so and then won't talk about it. He gives the **Cameruptite**, the twin of Kiln's. Plays as the hidden Trials quest `AS_FORGE_REMEMBERS` on `pf_trial_talk(:BRANN_HEARTHGUILD)`; the strings match.
+```
+[portrait: BRANN, happy] There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot.
+[portrait: BRANN, shocked] ...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room.
+[if :ch8_lightstone = :dominar]
+  [portrait: BRANN, sad] I haven't forgotten the Light Stone, mind. 'It's his people's,' you said. ...No. I'm not going to talk about it. The ring doesn't hold it against you, so I won't. Not today.
+[portrait: BRANN, neutral] Kiln, my Camerupt. If you've met her, you remember her. She likes to erupt on people.
+[name: Brann] Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel.
+[portrait: BRANN, smug] I'd give it to a Warden. You'll do better than most Wardens.
+(Received: CAMERUPTITE.)
+[portrait: BRANN, deadpan] Your ring still singing? ...No. Don't tell me. I sleep badly enough.
+```
+*(Kiln is on Brann's Standard and Hard teams only, so the line doesn't assume the PC fought her. If the confession has already happened (Ch17), "Don't tell me" lands harder: he still won't ask where the rest of the stone went.)*
 
 ---
 

@@ -6,8 +6,8 @@
 > **Keys and switches keep their old names.** `:ch3_juno_talk`, `CH3_PAGEANT_DONE`, `CH3_J1_DONE` and `CH3_UNDERSTUDY_GOT` are all Chapter 2 now; IDs never renumber (FLAGS.md).
 
 ## Conventions
-- `[portrait: NAME, expression]` shows a face. **Portrait use** (`story/13_CUTSCENES.md`): named story characters only, on their first line in a scene and where their expression changes (or a comedy beat with an emote). Their other lines use `[name: X]`. Generic NPCs, signs and trainers never get one: `[name: X]` or no tag. No tag = plain message box (narration).
-- *(italics)* = emote bubble or staging. `MOVE:` = movement route. `SE:` / `BGM:` = audio. `WAIT n` = frames.
+- **Portrait use** (SPINE Rev 22; `story/13_CUTSCENES.md`): `[portrait: NAME, expression]` = the cast's Desolation-style face window, tagged on a speaker's first line in a conversation and on expression changes. Their later lines are `[name: Name]`, and the face stays. `[bubble: NAME, expression, emote]` = the rare speech bubble, for a marked comic or dramatic beat. Only `Prismfall::Portrait::CAST` gets either. Everyone else is `[name: X]` (generic NPCs, trainers, Coll). No tag = plain message box (narration, signs).
+- *(italics)* = staging. An emote only shows on a `[bubble: ...]` line (SPINE Rev 22). `MOVE:` = movement route. `SE:` / `BGM:` = audio. `WAIT n` = frames.
 - `> option` = a choice. `→` = what follows. `PC` = the player; `\PN` = player name.
 - **Script calls:** `pf_choose(:key, :value)`, `pf_bond_add(:ID, n)`, `pf_standing_add(:FACTION, n)`, `pf_resonance_add(n)`, `Prismfall.rival_battle(...)`, `Prismfall.gym_battle(n)`, `Prismfall.game_over(:GO_X)`, `Prismfall.record_starter(...)`. Choice effects in NARRATIVE_KEYS §4.2 apply automatically on `pf_choose`; extra deltas are written out.
 - **Gym numbers:** events look a Warden's number up instead of hard-coding it (`Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN))`, `pfm_gym_won?(:LEADER_TAMSIN)`, from `mapgen/ruby/008_GymOrder.rb`). The script writes the number for readability: Dorian is 1, Tamsin is 2.
@@ -273,11 +273,11 @@ QUEST LOG: "Mum's Letter" — Find Imelda Larch at the research station on the h
 
 **Coll Hale** (mending nets beside the stall)
 ```
-[portrait: COLL, neutral] Mm. Ferry child.
+[name: Coll] Mm. Ferry child.
 [name: Coll] Farm's up the lane if you need a bed. Wenna'll say the same but with more words.
-[portrait: COLL, deadpan] ...Did she give you a tart? Then you're family. That's how it works. I didn't make the rules.
+[name: Coll] ...Did she give you a tart? Then you're family. That's how it works. I didn't make the rules.
 ```
-*[after S105]* `[portrait: COLL, neutral] Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.`
+*[after S105]* `[name: Coll] Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.`
 
 **Fisherman Odo** (pier end; gives the Old Rod)
 ```
@@ -566,13 +566,13 @@ HEADBUTT TUTOR (farmhand in the yard): Want your partner to learn to headbutt tr
 [name: Wenna] You're sleeping here tonight. That wasn't a question. I don't do questions after sundown.
 [portrait: JUNO, happy] You can have my bed! I'll take the hayloft. I always take the hayloft when we have guests.
 [name: Juno] We've never had guests. I'm very excited about the hayloft.
-[portrait: COLL, deadpan] *(from the yard)* Hayloft's got a Skiddo in it.
+[name: Coll] *(from the yard)* Hayloft's got a Skiddo in it.
 [name: Juno] I'm excited about the Skiddo.
 [portrait: WENNA, happy] Supper's whenever you come in. Coll made the bed, so it's made badly. But it's made.
 OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)
 ```
 *Wenna, again (after S105, before the night):* `[portrait: WENNA, neutral] Going up to the lighthouse? Give Hesper my love, and don't let her give you any back. Bed's yours whenever.`
-*Coll, in the yard (after S105, before the night):* `[portrait: COLL, neutral] Skiddo's called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn't hold with new names.`
+*Coll, in the yard (after S105, before the night):* `[name: Coll] Skiddo's called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn't hold with new names.`
 
 ### BED (action, after S105 and V102 < 2) [NEW lines]
 ```
@@ -642,9 +642,9 @@ MOVE: PC walks out through the Veil with Biscuit on their head.
 [portrait: LARCH, neutral] So. You walked through a Bleed Veil.
 [name: Larch] Into a Bleed zone. On your first day. To fetch a Skwovet.
 > It was stuck.
-[portrait: LARCH, angry] IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES. *(anger vein)*
+[bubble: LARCH, angry, anger] IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.
 [portrait: JUNO, happy] Technically Skwovet are scansorial, so—
-[name: Larch] Juno.
+[portrait: LARCH, angry] Juno.
 [portrait: JUNO, panic] Shutting up! *(sweat drop)*
 [portrait: LARCH, crying] Your mother wrote me one instruction. One! "Keep them out of trouble, Imelda." It has been NINE HOURS.
 [name: Larch] I'm not crying. It's the tea. The tea is very strong.
@@ -726,10 +726,10 @@ MOVE: The door opens. Larch, in yesterday's coat, holding yesterday's cup. She h
 [portrait: LARCH, deadpan] They use salt.
 [portrait: JUNO, shocked] ...Why would you tell me that. *(shock lines)*
 (Received: TOWN MAP. "Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.")
-[portrait: COLL, neutral] Bell's on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.
+[name: Coll] Bell's on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.
 [name: Coll] You come back with all eighteen, I'll untie it.
-[portrait: COLL, deadpan] Don't make it strange.
-[portrait: WENNA, shocked] That's MY line. *(shock lines)*
+[name: Coll] Don't make it strange.
+[bubble: WENNA, shocked, shock] That's MY line.
 [name: Coll] It's a good line.
 QUEST LOG: "Eighteen Roads" — Earn the first badge in Saltmere, west along the coast.
 (Juno becomes a follower.)

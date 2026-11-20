@@ -41,7 +41,7 @@
   - **K7** (Gloaming): has registered for the Festival as Meridian's sponsored challenger. He tries to stop the PC from going: "They all want to *use* you. Stay out of Crownhaven and let me end it."
   - **K8** (Festival semifinal): fights with Meridian's Resonance Gauntlet, then tears it off mid-battle. Afterward he finally reads his mother's letter.
   - **Finale:** turns on Voss when Voss admits Meridian cracked the Crown. He fights beside the PC in the hijack tag battle.
-- **Team concept:** the counter-starter; **Aegislash** line (a Honedge his grandmother gives him in Ch4: "It was your mother's blade's child"); **Staraptor** (namesake raptor); later **Mismagius** (Morwen's partner, inherited from Ysolde after K6); **Hydreigon** or **Weavile** as a late power pick. **Ace: Aegislash.** The sword-and-shield is the son defending his mother.
+- **Team concept:** the counter-starter; **Aegislash** line (a Honedge his grandmother gives him in Ch4: "It was your mother's blade's child"); **Staraptor** (namesake raptor); **Scizor** (his duelist from K4 at Ironreach; it Mega Evolves only through Morwen's Ring, at K8, if the PC gave it to him in Ch18); later **Mismagius** (Morwen's partner, inherited from Ysolde after K6); **Hydreigon** or **Weavile** as a late power pick. **Ace: Aegislash.** The sword-and-shield is the son defending his mother.
 - **Epilogue:** He becomes Ghost Warden of Gravenmoor if `KESTREL_ACCEPTED_SEAT` is set (Ysolde offers it after the Festival); otherwise he becomes a wandering trainer.
 
 ### Juno Hale — `RIVAL_JUNO`
@@ -61,7 +61,7 @@
   - **Acts III–IV:** an increasingly confident Warden who leads the anti-Meridian "Greenward" bloc. She carries her guilt over visiting Rowan in prison.
   - **J4** (Festival R16): a joyful, bittersweet battle between equals.
   - **Finale:** the first Warden to release her Plate. "Verdance has never had an autumn. I'd like to see one."
-- **Team concept:** the starter weak to the PC's; **Bounsweet → Steenee → Tsareena** (grown from a seed-pod in Act I, so it rises from a sweet fruit to a queen); **Whimsicott**; **Lilligant**; **Comfey** (a Ch18 gift from Celestine if met earlier); **Shiinotic**. **Ace: Tsareena.**
+- **Team concept:** the starter weak to the PC's; **Bounsweet → Steenee → Tsareena** (grown from a seed-pod in Act I, so it rises from a sweet fruit to a queen); **Whimsicott**; **Lilligant**; **Gardevoir "Veil"** (a Ralts that hid in her blossom veil at Lucent, Ch13; it's her Festival Mega once Rowan's ring answers her); **Shiinotic**. **Ace: Tsareena.**
 - **Epilogue:** In Homecoming, Elin wakes under Juno's first autumn, and the wreath finally wilts.
 
 ---
@@ -266,7 +266,7 @@ See Rivals. She succeeds **Rowan Ashby** in Ch10. Her trial ends with bonding to
 - **Secret:** He shelters fugitives in Cragholm's deep seams (Larch, Hollow, Rimeholt refugees). At the AF 290 Fracture he **saw Meridian technicians at the Crown's mount** and kept silent for ten years after the purge.
 - **Plot role:** The first eyewitness account of the Fracture (Ch14).
 - **Arc:** Defends Cragholm during the Meridian raid. In Act V he is too old to compete but stands at the ceremony carrying the Stone Plate. In Homecoming he dies peacefully in the epilogue, "the first Warden in three hundred years to die with nothing in his keeping".
-- **Ace:** **Gigalith** (crystal); also **Carbink**, **Rhyperior**, **Golem**.
+- **Ace:** **Gigalith** (crystal); also **Carbink**, **Rhyperior**, **Golem**, and his old **Aerodactyl "Amber"**, his Mega (SPINE Rev 21). He keeps Brann's odd ring under his mountain for ten years and gives it to the PC (the Ring-Day, Ch14).
 
 ### 14. Ysolde Ashgrave — Ghost — Gravenmoor — `LEADER_YSOLDE` — `:HOLLOW_CATHEDRAL`
 - **37.** Pale, in layered black lace and a veil, with a lantern always lit. She speaks very softly. She was **Morwen Vane's apprentice and partner**, and Kestrel's step-parent in all but law.

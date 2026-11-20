@@ -173,7 +173,7 @@ bracket is decided by it.
   **Accept** (`VOSS_ACCEPTED`: at the hijack his hand ends the game in Concord Dawn if you take it).
 
 ### Act V — "Sovereign" (who carries it?)
-- ★ **`:ch18_kestrel_ring`** — after K7, Morwen's Ring. **Give now** (+3: he can never fall) / **Keep** (a bigger moment at the SF if he's
+- ★ **`:ch18_kestrel_ring`** — after K7, Morwen's Ring. **Give now** (+3: he can never fall, and the ring answers him at K8: his Scizor Megas, the SF's only Kestrel Mega) / **Keep** (a bigger moment at the SF if he's
   Redeemed, and the one thing that can reach him in the Engine if he isn't). *The safest choice and the most dramatic choice are different.*
   Then the prompt that is `GO_STAY_OUT`.
 - ★ **`:ch19_oath`** — at the Draco brazier, aloud. **Return** / **Keep** (Valen +3; Kaito draws into your QF: "You'd keep them? Marrowgate's still knocking."; Sigrun won't let go of the Draco Plate) / **Open** ("I don't know yet") / **Ruin** (only at Ruin-leaning or lower; Sigrun draws her

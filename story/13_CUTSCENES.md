@@ -5,22 +5,24 @@
 
 ---
 
-## Portrait use (every script; coordinator ruling, 2026-11-20)
+## Portrait use (every script; SPINE Revision 22)
 
-The user: "i dont think we need a portrait for every conversation." These rules apply to every script in `story/` and every
-map event built from one.
-- **Who gets a portrait:** main and named story characters only. That means the rivals and companions (Juno, Kestrel),
-  the Wardens (Kaito, Dorian, Tamsin...), the villains (the Mourner, Voss, Sable...) and key NPCs (Larch, Wenna, Coll, Edda,
-  Hesper, Rowan, Vesper...).
-- **When:** in story scenes, plus the occasional comedy beat where the face is the joke. A line with an emote such as
-  *(shock lines)* or *(sweat drop)* keeps its portrait.
-- **Never:** generic NPCs, townsfolk, shopkeepers, route and gym trainers, guards, signs and objects. They get a plain text
-  box, with a name box if it helps: `[name: Gym Guide] ...`.
-- **Not on every line.** A speaker's portrait goes on their first line in a scene and on any line where their expression
-  changes. Their other lines use the name box only: `[name: Juno] ...`. A new scene starts fresh: a new event, an
-  `[after X]` variant, or a choice branch.
-- **Notation:** `[portrait: NAME, expression]` = face and name box · `[name: X]` = name box only · no tag = narration.
-  Map events use `\pf[NAME,expr]` only where the script has a portrait tag.
+The user: "i dont think we need a portrait for every conversation", "the speech bubble thing only needs to exist for like
+special scenes for like dramatic effect (usually comic relief)" and "portrait for main cast (like desolation) doesnt sound
+like a bad idea". Engine: `plugins/Prismfall Cutscenes/014_Portraits.rb`. A line can look three ways:
+- **Face** (the default for the story cast): a framed 96×96 face beside the message box, Desolation-style. Script tag
+  `[portrait: NAME, expression]`, map events `\pf[NAME,expr]`. Tag a speaker's **first line in a conversation** and **any
+  line where their expression changes**. Their later lines in the same conversation are `[name: Name]`, and the engine keeps
+  their face with the last expression. Until a character has portrait art, the face falls back to a name box on its own.
+- **Bubble** (rare, opt-in): the round portrait with a tail pointing at the speaker on the map, plus emotes. Use it only for
+  a special dramatic or (usually) comic beat, marked per line: `[bubble: NAME, expression, emote]` / `\pfb[...]`. Allow
+  about a handful per chapter. Emote names: sweat, shock, anger, sparkle, gloom, question, exclaim, tears, blush, dots.
+  Older scripts' *(shock lines)*-style notes are staging only, and they show nothing in face mode.
+- **Plain** (everyone else): the message box with a name label, `[name: X]`. That means generic NPCs, townsfolk,
+  shopkeepers, quest-givers, route and gym trainers, guards, signs and objects. **Only characters in
+  `Prismfall::Portrait::CAST` get a face or a bubble.** Anyone else stays plain even if tagged, so don't tag them (Coll and
+  the sister-game cameos, for example, are plain).
+- A new conversation starts fresh: a new event, an `[after X]` variant, or a choice branch.
 
 ---
 
@@ -56,21 +58,23 @@ map event built from one.
 
 ---
 
-## RD-1 — "The Ring Sings" (Ch8, the Ring-Day; ~8 s)
+## RD-1 — "The Ring Sings" (Ch14, the Ring-Day in Bastian's lamp-room; ~8 s)
 
-> **Withdrawn from Ch8 (SPINE Revision 21):** the Mega Ring now comes after Badge 13. The shots still work wherever the Mega workstream moves the scene; change the backdrop to suit.
-
-**Staging:** on map 244, the Hearthguild Hall, `on_map: true`, in the middle of the Ring-Day dialogue (`story/22_SCRIPT_CH8.md`, after "Somewhere under your ribs, something answers it"). It's small on purpose: no beams, no music sting. Its job is to be remembered when the cradle sings in Ch17 (09_MYSTERIES #1).
-**Backdrop:** the guild's great anvil, forge-light (or, after `:ch8_caldera` = *vent*, one candle-forge and a cold hearth). Brann at the anvil, the PC facing him, Larch on a crate by the door.
+**Staging:** on map 363 (Cragholm Lift Galleries, Bastian's lamp-room at the bottom of the lowest gallery), `on_map: true`,
+in the middle of the Ring-Day dialogue (`story/07_ACT_IV.md` Ch14, after "Somewhere under your ribs, something answers it").
+It's small on purpose: no beams, no music sting. Its job is to be remembered when the cradle sings in Ch17 (09_MYSTERIES #1).
+(SPINE Revision 21 moved the Ring-Day here from Ch8; the old Cindervault version is withdrawn.)
+**Backdrop:** forty years of miners' lamps on hooks and shelves, a cot, a kettle on a spirit stove, the oilcloth on Bastian's
+work table. Bastian at the table, the PC facing him, Pip on a crate, Larch by the door.
 
 | # | Camera | Sprites / action | FX | Text |
 |---|---|---|---|---|
-| 1 | Close on the PC's open hand (1.5 s) | The gold ring drops into the palm and settles | Forge-light flicker on the band | — |
-| 2 | Extreme close on the chip (2 s) | The colourless chip catches the light and breaks it into eighteen thin colours, then gathers them back to clear | Prism fan, 18 hues, 20 frames out and 20 back; SE: one sustained glass note | — |
-| 3 | Mid on the PC (2 s) | The PC's hand goes to their sternum | One colourless star-pulse under the coat (the scar, 03_CAST), 1 frame bright, 30 frames fade; the room desaturates 30% and back | — |
-| 4 | Two-shot, Brann and Larch (2.5 s) | Brann's hammer hand stops mid-air. By the door, Larch lowers her book | The glass note fades under the forge's roar (or under silence, after *vent*) | — (dialogue resumes: `[portrait: BRANN, shocked] ...`) |
+| 1 | Close on the PC's open hand (1.5 s) | The gold ring drops into the palm and settles | Lamplight flicker on the band | — |
+| 2 | Extreme close on the chip (2 s) | The colourless chip catches the lamplight and breaks it into eighteen thin colours, then gathers them back to clear | Prism fan, 18 hues, 20 frames out and 20 back; SE: one sustained glass note | — |
+| 3 | Mid on the PC (2 s) | The PC's hand goes to their sternum | One colourless star-pulse under the coat (the scar, 03_CAST), 1 frame bright, 30 frames fade; the room desaturates 30% and back; every lamp in the room flares at once | — |
+| 4 | Three-shot: Pip, Bastian, Larch (2.5 s) | Pip jumps off her crate. Bastian, who can't hear it, lays his palm flat on the table. By the door, Larch lowers her book | The glass note fades under the kettle's hiss | — (dialogue resumes: `[portrait: PIP, shocked] Grandad. Grandad, it's SINGING.`) |
 
-**Variant:** none by key; only the backdrop follows `:ch8_caldera`. **Skippable:** no (8 s). **Replay:** theater menu.
+**Variant:** none. **Skippable:** no (8 s). **Replay:** theater menu.
 
 ---
 

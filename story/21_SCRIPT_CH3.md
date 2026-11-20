@@ -5,7 +5,7 @@
 > **Before Revision 14 this was Chapter 2.** Keys and switches keep their old names: `:ch2_tamsin`, `:ch2_matriarch`, `CH2_THISTLE_DONE`, `CH2_MATRIARCH_DONE` are all Chapter 3 now. Events must test Tamsin's badge by Warden (`pfm_gym_won?(:LEADER_TAMSIN)`), never `badge_count >= 1`: the player arrives here already holding Dorian's badge.
 
 ## Conventions
-Same as `20_SCRIPT_CH0-2.md`: `[portrait: NAME, expression]` per **Portrait use** in `story/13_CUTSCENES.md` (named characters only; first line in a scene and expression changes), `[name: X]` for generic NPCs and for a portrait character's other lines, `> option` choices, `MOVE:`/`SE:`/`WAIT n`, `[after X]` reactive variants. Gym numbers are written for readability (Tamsin is 2); events call `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN))`.
+Same as `20_SCRIPT_CH0-2.md`: **Portrait use** per SPINE Rev 22 (`story/13_CUTSCENES.md`): `[portrait: NAME, expression]` faces for the cast (first line and expression changes; later lines `[name: X]` keep the face), the rare `[bubble: NAME, expression, emote]`, and `[name: X]` for everyone else (generic NPCs, trainers, the cameo Shelly), `> option` choices, `MOVE:`/`SE:`/`WAIT n`, `[after X]` reactive variants. Gym numbers are written for readability (Tamsin is 2); events call `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN))`.
 
 **Juno travels with the PC for this whole chapter** (placed events per map) until she leaves at the Cocoonfall Veil.
 
@@ -403,7 +403,7 @@ SWADLOON (by the stair): The Swadloon is wrapped in leaves for the night. It's t
 ```
 [portrait: JUNO, happy] Forty eggs! In a hatbox! Don't knock the hatbox! And don't fall on me!
 [name: Juno] Go on, I'll be loud. Quietly. I learned that in Saltmere.
-(again:) [portrait: JUNO, happy] *(a whisper you can hear from the top of the tree)* GO ON, \PN! *(music note)*
+(again:) [bubble: JUNO, happy, exclaim] *(a whisper you can hear from the top of the tree)* GO ON, \PN!
 ```
 **Ledge 1** (one web, straight up from the floor)
 ```
@@ -496,17 +496,17 @@ CRYSTAL SILK (the mouth to the Hollow, east): A curtain of silk gone to glass. M
 **Optional thread: cameo sidequest "Lost in the Gossamer" (Shelly)** — CAMEOS.md §1; S181 on completion
 ```
 (A dew-pond clearing. A pink-haired girl is crouched in front of a Caterpie, bowing to it.)
-[portrait: SHELLY, panic] I'm so sorry, was this your leaf? I didn't know it was your leaf.
-[portrait: SHELLY, shocked] Oh! A person! Um. Hello. Is this— this isn't the Rhodochrine Jungle, is it. *(sweat drop)*
-[portrait: SHELLY, sad] I looked into a pond at home and then I was looking OUT of this one. That was three days ago. The paths keep re-weaving.
+[name: Shelly] I'm so sorry, was this your leaf? I didn't know it was your leaf.
+[name: Shelly] Oh! A person! Um. Hello. Is this— this isn't the Rhodochrine Jungle, is it. *(sweat drop)*
+[name: Shelly] I looked into a pond at home and then I was looking OUT of this one. That was three days ago. The paths keep re-weaving.
 > I'll help you get back.
-  [portrait: SHELLY, happy] Really? You don't have to. I mean please do. I mean thank you.
+  [name: Shelly] Really? You don't have to. I mean please do. I mean thank you.
 (She follows. The dew-pond she arrived through is behind a small Bleed Veil; a glassed Masquerain guards it. The PC enters alone, battles it (`:BLEED`, level per BALANCE §6), and it calms.)
-[portrait: SHELLY, neutral] You just... walked in. Where I'm from, nobody walks into the sick places and comes out the same.
-[portrait: SHELLY, happy] Before I go, could we have one practice battle? Doubles? I'm supposed to be good at this and I don't want to be rusty when I get home.
+[name: Shelly] You just... walked in. Where I'm from, nobody walks into the sick places and comes out the same.
+[name: Shelly] Before I go, could we have one practice battle? Doubles? I'm supposed to be good at this and I don't want to be rusty when I get home.
 BATTLE: FESTIVAL_SHELLY "Shelly", version 1 (double, `:SILKWOOD`; level per BALANCE §6, after Gym 2).
 (After, win or lose:)
-[portrait: SHELLY, happy] Your forest sounds like home used to, before the city got sick. Look after it?
+[name: Shelly] Your forest sounds like home used to, before the city got sick. Look after it?
 (Received: SILVER POWDER and TM STRUGGLE BUG.)
 MOVE: She steps into the pond's reflection and is gone. One pink ribbon floats on the water.
 ```

@@ -1130,3 +1130,46 @@ in MEGA_EVOLUTION.md §8.
 
 **EBDX Bridge / battle speech (optional):** a `megaOpp` line per Mega fight (examples in MEGA_EVOLUTION.md §6.2).
 **Field Effects owner:** nothing new; no field file changed.
+
+## From the story editor: reply to the Mega Rev 21 entry, and SPINE Rev 22 portraits, 2026-11-20
+**Mega workstream (items 4–9 done).**
+1. **The Ring-Day** is written in `story/07_ACT_IV.md` Ch14, after Gym 13 and before Larch and the raid. Its lines match
+   `OS_RING_DAY`. RD-1 in `13_CUTSCENES.md` is the lamp-room now, and 09_MYSTERIES #1's ring clue is Ch14. The withdrawn
+   Ch8 versions (05_ACT_II, `22_SCRIPT_CH8.md`) point there.
+   - **Strings polished in `114_Quests_Megas.rb`** (strings only; `run_trials.rb` passes).
+   - Bastian's "You'll have been wondering what my old Amber did" read as the PC's first Mega, but by Gym 13 the PC
+     has faced one in every gym since Rimeholt. It's now "You'll have seen a few of those by now. Anja's Glalie.
+     Odessa's bird. That Directorate woman's dog. My old Amber, just now. Nobody's told you properly...". Brann is left
+     out because Casual has no Camerupt.
+   - "If Meridian's linesmen come down my lifts" is now "If the Directorate comes down my lifts": it's Marchetti's raid.
+2. **Brann's forge** (15 badges) is written as an optional thread at the end of 07 Ch16; most players meet it on the
+   Ch19 road. Two string changes:
+   - The Light Stone line is now tighter and quotes the PC: "'It's his people's,' you said. ...No. I'm not going to
+     talk about it."
+   - "The one that tried to erupt on you" assumed the PC fought Kiln, who isn't on Casual. It's now "If you've met her,
+     you remember her. She likes to erupt on people."
+3. **Kestrel K8** (08_ACT_V): his Scizor Megas only with Morwen's Ring (*give_now*). His line is "Mum. Just this once.
+   Answer me." Otherwise there's no Mega, and Fallen never has the ring. 10_CHOICES and the Ch18 give-now bullet say so.
+4. **Juno's Gardevoir "Veil"** is introduced in 06_ACT_III Ch13. A Ralts has hidden in her blossom veil since the
+   Antumbra Threshold, and she keeps it the night before Rowan's tribunal, in the Athenaeum's cloister garden. At J4,
+   "...Oh. There you are." when Rowan's ring answers her. 03_CAST swaps Comfey for Veil.
+5. **Meridian's keystones** line (Larch at the Gale Post, Ch12, before Marchetti's raid): "See the steel bands on their
+   wrists? Lattice-glass. Meridian can't buy a Warden's ring off the Hearthguild, so it grows its own keystones...".
+6. **Two small errors in your docs:** this entry's item 11 says the Mourner has a weak Mega, but §6.3 and
+   `pbs/trainers.txt` say he has none (correct: no ring). MEGA_EVOLUTION.md §1.2 says Kestrel's Scizor dates from K3;
+   the trainers file has it from K4 (v40).
+
+**Map builder.**
+7. **Ch13, Lucent:** one Juno event in the Athenaeum's cloister garden for the Ralts scene (night, before the tribunal;
+   06_ACT_III).
+8. **Ch12, Skyreach:** Larch's keystone line in the Gale Post sorting halls, before the raid.
+9. **Ch14, Cragholm:** optionally, Pip fetches the PC to the lamp-room after Gym 13 (07_ACT_IV).
+10. **Speech bubbles (SPINE Rev 22) are now marked per line** with `[bubble: NAME, expression, emote]`. Build them as
+    `\pfb[NAME,expression,emote]`. So far: Larch's "IT LIVES IN A TREE" (Ch1), Wenna's "That's MY line." (the
+    send-off), Juno's "GO ON" (131 repeat line), Bastian's "Pip! Those are the ginger ones!" (15_COMEDY Ch14).
+    Everything else from the cast is a face (`\pf[...]`, first line and expression changes).
+11. **Not in CAST, so plain:** Coll (the scripts are now `[name: Coll]`), the cameo Shelly, and generic officers.
+
+**Cutscenes owner (`014_Portraits.rb`).**
+12. Please add **WENLOW** to `Prismfall::Portrait::CAST`: a named story character, the player character of Interlude IV,
+    with face tags in 15_COMEDY.

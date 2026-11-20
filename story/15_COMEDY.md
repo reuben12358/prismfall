@@ -228,13 +228,13 @@ From Act III the Wardens share Gale Post relay messages the PC can read at any P
 
 ### Ch14 — "Selectively" (Bastian vs a Directorate officer, before the raid)
 ```
-[portrait: OFFICER, angry] Warden Ore! Are you sheltering fugitives?
+[name: Directorate Officer] Warden Ore! Are you sheltering fugitives?
 [portrait: BASTIAN, happy] Eh? Ferrets? No ferrets here, son.
-[portrait: OFFICER, angry] FUGITIVES. *(anger vein)*
+[name: Directorate Officer] FUGITIVES.
 [portrait: BASTIAN, happy] Oh, I've had it for years. Doctor says it's the dust.
 *(Forty meters away, behind rock, Pip opens a biscuit tin.)*
-[portrait: BASTIAN, shocked] Pip! Those are the ginger ones! Put two back! *(shock lines)*
-[portrait: OFFICER, deadpan] ...
+[bubble: BASTIAN, shocked, shock] Pip! Those are the ginger ones! Put two back!
+[name: Directorate Officer] ...
 [portrait: BASTIAN, happy] Eh?
 ```
 

@@ -2286,8 +2286,8 @@ Brann found something in the slag.
 - **Brann** _(happy)_: There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot.
 - **Brann** _(shocked)_: ...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room.
 - [if `choice(:ch8_lightstone) == :dominar`]
-  - **Brann** _(sad)_: I haven't forgotten the Light Stone, mind. Whose it should've gone to. I'm not going to talk about it. A ring doesn't care what its wearer said in a forge one bad night, so I won't either. Not today.
-- **Brann** _(neutral)_: You remember Kiln, my Camerupt? The one that tried to erupt on you.
+  - **Brann** _(sad)_: I haven't forgotten the Light Stone, mind. 'It's his people's,' you said. ...No. I'm not going to talk about it. The ring doesn't hold it against you, so I won't. Not today.
+- **Brann** _(neutral)_: Kiln, my Camerupt. If you've met her, you remember her. She likes to erupt on people.
 - **Brann** _(neutral)_: Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel.
 - **Brann** _(smug)_: I'd give it to a Warden. You'll do better than most Wardens.
 - [script]
@@ -2432,7 +2432,7 @@ Bastian wants you in his lamp-room.
 
 - [stage] The lowest gallery of the deep seams. Bastian's lamp-room: a cot, a kettle and forty years of lamps. Pip is perched on a crate; Larch sits by the door with a book she isn't reading.
 - **Bastian** _(happy)_: Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks.
-- **Bastian** _(neutral)_: You'll have been wondering what my old Amber did in there, changing like that. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild cuts one for every seat since the Concordance.
+- **Bastian** _(neutral)_: You'll have seen a few of those by now. Anja's Glalie. Odessa's bird. That Directorate woman's dog. My old Amber, just now. Nobody's told you properly what it is, I'd wager. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild's cut one for every seat since the Concordance.
 - **Bastian** _(neutral)_: A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
 - **Bastian** _(neutral)_: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
 - **Bastian** _(deadpan)_: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
@@ -2450,7 +2450,7 @@ Bastian wants you in his lamp-room.
 - [script]
 - [if `mega_stones > 1`]
   - *The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.*
-- **Bastian** _(happy)_: Wear it. If Meridian's linesmen come down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
+- **Bastian** _(happy)_: Wear it. If the Directorate comes down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
 
 #### Amber, Again (`OS_AMBER_AGAIN`)
 
