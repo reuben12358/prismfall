@@ -50,13 +50,18 @@ def esc(s)
   s.to_s.gsub("|", "/").gsub("\n", " ")
 end
 
+# ", bubble" for a line that asks for the speech bubble (4th element :bubble or { :bubble => true })
+def bubble_mark(style)
+  return (style == :bubble || (style.is_a?(Hash) && style[:bubble])) ? ", bubble" : ""
+end
+
 # Renders a scene script as an indented markdown list.
 def render(list, depth, out)
   pad = "  " * depth
   Array(list).each do |e|
     case e
     when String then out << "#{pad}- *#{e}*"
-    when Array  then out << "#{pad}- **#{name_of(e[0])}** _(#{e[1]})_: #{e[2]}"
+    when Array  then out << "#{pad}- **#{name_of(e[0])}** _(#{e[1]}#{bubble_mark(e[3])})_: #{e[2]}"
     when Hash
       if e[:map]     then out << "#{pad}- [stage] #{e[:map]}"
       elsif e[:note] then out << "#{pad}- [note] #{e[:note]}"
@@ -184,7 +189,8 @@ TR::TRIALS.each do |t, td|
   end
 end
 out << "" << "## Part 2. Full scripts of the wired quests (Chapters 1–4, and the Eevee Octave across the game)" << ""
-out << "Conventions: *italics* = narration box; **Name** _(expression)_ = a line under a portrait bubble (`pf_say`);"
+out << "Conventions: *italics* = narration box; **Name** _(expression)_ = a character line (`pf_say`: the face beside the box " \
+       "for the story cast with portrait art, else a name label); _(expression, bubble)_ = the rare speech-bubble beat;"
 out << "[stage] = what the map event shows (the map builder stages it); [if ...] = a `Prismfall::Conditions` check; `> option` = a choice."
 TR::TRIALS.each_key do |t|
   ids = TR.quests_for(t).reject { |id| TR.get(id)[:stub] }

@@ -67,6 +67,7 @@ module Graphics
     def update
       cut_autorun_update
       CutRun.tick
+      PortraitRun.tick
     end
   end
 end
@@ -81,10 +82,180 @@ module System
   end
 end
 
+#-------------------------------------------------------------------------------
+# CUT_ID=PF_INSTALL: install the Prismfall maps (tilesets, MapInfos, switch names)
+# and quit; the next boot can then walk onto them.
+# CUT_ID=PORTRAITS: face windows, the plain box and one speech bubble on Ferrow's
+# Landing (map 100), screenshots to Captures/shots/portraits_*.png. Each message is
+# advanced with a scripted USE press PortraitRun::SETTLE frames after its text (and
+# any choice box) has finished, the screenshot is taken just before that.
+#-------------------------------------------------------------------------------
+module PortraitRun
+  SHOTS  = "Captures/shots"
+  SETTLE = 30                 # frames after the text is done: the pop-in (0.16 s) is long over
+  @frame = 0
+  @msg = nil
+  @queue = []
+  @advance = false
+  @depth = 0
+  class << self
+    attr_accessor :advance
+    attr_reader :frame
+
+    def log(m); CutRun.log(m); end
+
+    def install
+      log("boot ok (install): #{PluginManager.plugins.inspect}")
+      ts = PrismfallMapInstaller.install_tilesets
+      sy = PrismfallMapInstaller.install_system
+      mi = PrismfallMapInstaller.install_mapinfos
+      log("installed: tilesets #{ts && [ts[0].length, ts[1].length].inspect}, names #{sy && sy[0]}, maps #{mi[0, 2].inspect}")
+    end
+
+    # name: the screenshot for the next message (nil = none); burst: also its first frames
+    def shot(name, burst: false); @queue.push([name, burst]); end
+
+    def tick
+      @frame += 1
+      return if !@msg
+      win = @msg[:win]
+      # ready: the text is done, or it is paused mid-way (a long line waits for USE between pages)
+      ready = (!win || win.disposed? || !win.busy? || win.pausing?) rescue true
+      @msg[:done] = nil if !ready
+      @msg[:done] ||= @frame if ready
+      age = @frame - @msg[:start]
+      if @msg[:burst] && age <= 14
+        Graphics.screenshot(format("%s/pop/%s_%02d.png", SHOTS, @msg[:name], age))
+      end
+      return if !@msg[:done]
+      wait = @frame - @msg[:done]
+      if wait == SETTLE && @msg[:name] && !@msg[:shot]
+        @msg[:shot] = true
+        Graphics.screenshot("#{SHOTS}/#{@msg[:name]}.png")
+        view = Prismfall::Portrait.current
+        log("shot #{@msg[:name]}: #{view.class.name.split('::').last} #{(view.respond_to?(:rect)) ? view.rect.inspect : ''} " \
+            "#{(view.respond_to?(:file)) ? File.basename(view.file.to_s) : ''} msg y=#{win && win.y}")
+      end
+      if wait == SETTLE + 2
+        @advance = true
+        @msg[:done] = nil                 # a paused line goes on to its next page
+        @msg[:start] = @frame
+      end
+    end
+
+    def begin_message(win, text)
+      @depth += 1
+      return if @depth > 1
+      name, burst = @queue.shift
+      @msg = { :start => @frame, :win => win, :name => name, :burst => burst, :done => nil }
+      log("message: #{text.to_s[0, 70].inspect}")
+    end
+
+    def end_message
+      @depth -= 1
+      return if @depth > 0
+      @msg = nil
+      @advance = false
+    end
+
+    # A stand-in character on the map (story events need story switches to show).
+    def actor(id, name, charset, x, y, dir)
+      rpg = RPG::Event.new(x, y)
+      rpg.id = id
+      rpg.name = name
+      rpg.pages[0].graphic.character_name = charset
+      rpg.pages[0].graphic.direction = dir
+      ev = Game_Event.new($game_map.map_id, rpg, $game_map)
+      $game_map.events[id] = ev
+      return ev
+    end
+
+    def run
+      Dir.mkdir(SHOTS) if !Dir.exist?(SHOTS)
+      Dir.mkdir("#{SHOTS}/pop") if !Dir.exist?("#{SHOTS}/pop")
+      log("boot ok (portraits)")
+      Graphics.transition(0)
+      PrismfallMaps.define_singleton_method(:apply_start_position) { false } if defined?(PrismfallMaps)
+      Game.start_new
+      $scene.createSpritesets
+      $player.name = "Tester"
+      pbChangePlayer(1) if $player.character_ID < 1
+      $game_temp.player_new_map_id = 100              # Ferrow's Landing, the anchor plaza
+      $game_temp.player_new_x = 36
+      $game_temp.player_new_y = 30
+      $game_temp.player_new_direction = 6
+      $scene.transfer_player
+      $game_map.events.each_value do |e|              # a backdrop: nothing on the map runs by itself
+        e.instance_variable_set(:@interpreter, nil)
+        e.instance_variable_set(:@trigger, 0)
+      end
+      actor(901, "Juno", "JUNO", 38, 30, 4)
+      actor(902, "Professor Larch", "LARCH", 38, 29, 4)
+      actor(903, "Dockhand", "NPC 03", 35, 29, 6)
+      $scene.disposeSpritesets
+      $scene.createSpritesets
+      CutRun.lock_clock
+      40.times { Graphics.update; $scene.miniupdate }
+      log("on map #{$game_map.map_id} at #{$game_player.x},#{$game_player.y}; skin #{MessageConfig.pbGetSpeechFrame.inspect}")
+      shot("portraits_juno_happy", burst: true)
+      pbMessage("\\pf[JUNO,happy]Juno: You walked through the Bleed like it was fog. Nobody does that. NOBODY.")
+      shot("portraits_juno_sad")
+      pbMessage("\\pf[JUNO,sad]Juno: Biscuit's in there somewhere. Past the farmhand. Please be careful.")
+      shot("portraits_juno_followup")
+      pbMessage("Juno: (A name-only line in the same conversation keeps her face.)")
+      shot("portraits_larch")
+      pbMessage("\\pf[LARCH,deadpan]Larch: I've watched forty people pretend. You're the worst at it.")
+      shot("portraits_npc_plain")
+      pbMessage("\\pf[DOCKHAND,neutral]Dockhand: Mind the nets. The Wattrel sleeps in them and it bites.")
+      shot("portraits_bubble")
+      pbMessage("\\pfb[LARCH,angry,anger,902]Larch: IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.")
+      shot("portraits_juno_choice")
+      pbMessage("\\pf[JUNO,neutral]Juno: Can you pull me through? Just for a second?", [_INTL("No. Stay there."), _INTL("Take her hand.")], 1)
+      $game_system.message_position = 0
+      shot("portraits_juno_top")
+      pbMessage("\\pf[JUNO,surprised]Juno: Same face window with the box at the top: it sits below the box.")
+      $game_system.message_position = 2
+      shot("portraits_player")
+      pf_say(:PLAYER, :happy, "(The player's own face: PLAYER_A, the look picked at the start.)", name: "Tester")
+      log("done")
+    end
+  end
+end
+
+alias pfrun_pbMessageDisplay pbMessageDisplay unless defined?(pfrun_pbMessageDisplay)
+def pbMessageDisplay(msgwindow, message, *args, &block)
+  PortraitRun.begin_message(msgwindow, message)
+  begin
+    return pfrun_pbMessageDisplay(msgwindow, message, *args, &block)
+  ensure
+    PortraitRun.end_message
+  end
+end
+
+module Input
+  class << self
+    alias pfrun_trigger? trigger? unless method_defined?(:pfrun_trigger?)
+    def trigger?(button)
+      if PortraitRun.advance && button == Input::USE
+        PortraitRun.advance = false
+        return true
+      end
+      return pfrun_trigger?(button)
+    end
+  end
+end
+
+# This Linux engine build leaves stock script methods private (docs/playtest/README.md): choices need it public.
+Object.send(:public, :pbShowCommands) rescue nil
+
 class Scene_CutRun
   def main
     begin
-      CutRun.run
+      case ENV["CUT_ID"]
+      when "PF_INSTALL" then PortraitRun.install
+      when "PORTRAITS" then PortraitRun.run
+      else CutRun.run
+      end
     rescue Exception => e
       raise if e.is_a?(SystemExit)
       CutRun.log("FATAL #{e.class}: #{e.message}\n  " + (e.backtrace || []).first(30).join("\n  "))

@@ -5,7 +5,7 @@ if defined?(MenuHandlers)
   MenuHandlers.add(:debug_menu, :prismfall_cutscenes_menu, {
     "name"        => _INTL("Prismfall Cutscenes..."),
     "parent"      => :main,
-    "description" => _INTL("Play pixel cutscenes, Festival highlights and portrait bubbles."),
+    "description" => _INTL("Play pixel cutscenes, Festival highlights, portrait faces and bubbles."),
     "always_show" => true
   })
 
@@ -72,12 +72,15 @@ if defined?(MenuHandlers)
   })
 
   MenuHandlers.add(:debug_menu, :prismfall_cutscenes_portraits, {
-    "name"        => _INTL("Portrait bubbles"),
+    "name"        => _INTL("Portrait faces and bubbles"),
     "parent"      => :prismfall_cutscenes_menu,
-    "description" => _INTL("Shows every expression as a portrait speech bubble on the player."),
+    "description" => _INTL("Shows the player's face for every expression (face mode), then each as a speech bubble."),
     "effect"      => proc {
       Prismfall::Portrait::EXPRESSIONS.each_key do |expr|
         pf_say(:PLAYER, expr, _INTL("This is the {1} expression.", expr.to_s), name: _INTL("Tester"))
+      end
+      Prismfall::Portrait::EXPRESSIONS.each_key do |expr|
+        pf_say(:PLAYER, expr, _INTL("A {1} speech bubble.", expr.to_s), name: _INTL("Tester"), bubble: true)
       end
     }
   })

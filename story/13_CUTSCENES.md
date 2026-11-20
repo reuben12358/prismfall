@@ -24,6 +24,25 @@ like a bad idea". Engine: `plugins/Prismfall Cutscenes/014_Portraits.rb`. A line
   the sister-game cameos, for example, are plain).
 - A new conversation starts fresh: a new event, an `[after X]` variant, or a choice branch.
 
+**How the engine reads these (`014_Portraits.rb`; shots: `docs/playtest/portraits_*.png`):**
+- Face: the frame is cut from the message box's own windowskin and sits on the box's left edge, above it, or below it
+  when the box is at the top (Desolation's face window). It rises and fades in (0.16 s) for a new speaker and gives a
+  2 px nudge for a new expression. A same-speaker, same-face line does not move at all.
+- The expression only picks the file: `Graphics/Portraits/NAME_expression.png`, else `NAME.png` (any expression name
+  works, e.g. Juno's `surprised`). With neither file, the line is plain. `PLAYER` uses `PLAYER_A` or `PLAYER_B`, by the
+  look picked on the Dovetail.
+- Carry-over: a cast member's untagged `Name: ...` line keeps the face from their last tagged line, until a new event
+  starts. A choice branch inside the same event inherits it, so tag a branch's first line when the face should change.
+  A bubble line counts too: the next `[name: X]` line goes back to that character's face.
+- In face mode, the emote and event fields of a tag are ignored. In bubble mode, the tail points at the event named in the
+  4th field (`\pfb[LARCH,angry,anger,Professor Larch]`), else at an event named like the character, else at the event
+  running the text.
+- Script calls: `pf_say(:JUNO, :happy, "text")` (face), `pf_say(:LARCH, :angry, "text", bubble: true, emote: :anger)`.
+  Trials talk rows: `[:JUNO, :happy, "text"]` (face), `[:LARCH, :angry, "text", :bubble]`, or
+  `[:LARCH, :angry, "text", { :bubble => true, :emote => [:anger], :event => "Professor Larch" }]`. A choice prompt
+  `[:SPK, :expr, "prompt", :bubble]` works the same way.
+- The map builders' `mapgen/layouts/scriptpour.py` turns `[bubble: NAME, expr, emote]` into `\pfb[NAME,expr,emote]Name: ...`.
+
 ---
 
 ## WAR-1 — "The Beam Clash on the Glass Dunes" (Ch19 climax; ~95 s)

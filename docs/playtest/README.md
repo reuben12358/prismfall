@@ -68,6 +68,22 @@ The bot uses only ordinary input:
 The AI plays the player's side of battles. The engine clock was set to about 13:00 (TZ) so Essentials' day/night
 tint shows the maps by day.
 
+### Portraits (2026-11-20, SPINE Rev 22): face windows, the plain box, one bubble
+`portraits_*.png` are unmodified `Graphics.screenshot` frames (no caption strip) from
+`plugins/Prismfall Cutscenes/tools/engine_capture/capture.sh portraits`: the 11:10 kit with the current Cutscenes
+plugin and `art/out/Graphics` copied in, a first boot that installs the maps, then Ferrow's Landing's anchor plaza
+(map 100) with stand-in Juno, Larch and dockhand events (story events need story switches) and scripted USE presses.
+| File | Shows |
+|---|---|
+| `portraits_juno_happy.png`, `portraits_juno_sad.png` | Juno in face mode, two expressions (`\pf[JUNO,happy]`, `\pf[JUNO,sad]`) |
+| `portraits_juno_followup.png` | An untagged `Juno: ...` line in the same conversation keeps her face |
+| `portraits_larch.png` | Larch in face mode (`\pf[LARCH,deadpan]`) |
+| `portraits_npc_plain.png` | A dockhand (not cast): the plain box with the name label, even though the line is tagged |
+| `portraits_bubble.png` | The opt-in bubble: `\pfb[LARCH,angry,anger,902]`, tail on his event, anger emote |
+| `portraits_juno_choice.png` | A choice beside a face: the choice box on the right, the face on the left |
+| `portraits_juno_top.png` | Message box at the top: the face sits below it |
+| `portraits_player.png` | `:PLAYER` with Style A picked: `PLAYER_A_happy.png` |
+
 ## Bugs found
 | Bug | Status |
 |---|---|

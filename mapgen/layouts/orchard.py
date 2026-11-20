@@ -134,7 +134,7 @@ def build():
         say('LARCH', 'neutral', "So. You walked through a Bleed Veil."),
         say('LARCH', 'neutral', "Into a Bleed zone. On your first day. To fetch a Skwovet."),
         {'choices': ["It was stuck."], 'cancel': 1, 'branches': [[]]},
-        "\\pf[LARCH,angry,anger]Larch: IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.",
+        "\\pfb[LARCH,angry,anger,Professor Larch]Larch: IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.",
         say('JUNO', 'happy', "Technically Skwovet are scansorial, so—"),
         say('LARCH', 'angry', "Juno."),
         "\\pf[JUNO,panic,sweat]Juno: Shutting up!",

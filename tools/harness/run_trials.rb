@@ -143,6 +143,7 @@ walk = lambda do |qid, list, path|
     when String then next
     when Array
       cmd_errors << "#{path}: speaker line needs [Symbol, Symbol, String]" if !(e[0].is_a?(Symbol) && e[2].is_a?(String))
+      cmd_errors << "#{path}: 4th element must be :bubble or an options Hash" if e.length > 3 && !(e[3] == :bubble || e[3].is_a?(Hash))
     when Hash
       if e[:choice]
         e[:options].each { |o| walk.call(qid, o[1], "#{path}>#{o[0]}"); (Prismfall::Conditions.check(o[2].gsub(':SELF', ":#{qid}")) rescue cmd_errors << "#{path}: bad option cond #{o[2]}") if o[2] }

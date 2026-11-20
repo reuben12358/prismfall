@@ -1,21 +1,33 @@
 #===============================================================================
-# Prismfall Cutscenes - 014 Portrait speech bubbles (SPINE Revision 7)
+# Prismfall Cutscenes - 014 Portraits: face windows and speech bubbles
+# (SPINE Revision 22; the bubble is Revision 7's)
 #-------------------------------------------------------------------------------
-# A round portrait with a white ring and a speech tail pointing at the speaker
-# on the map, popping in above the normal message box, with code-drawn emotes.
+# Three ways a line can look:
+#   FACE   (the default for the story cast, once they have portrait art): a
+#          framed 96x96 face beside the message box, on its left, Desolation
+#          style. The frame is cut from the message box's own windowskin.
+#   BUBBLE (opt-in, rare: comic relief, dramatic beats): a round portrait with a
+#          speech tail pointing at the speaker on the map, plus emotes.
+#   PLAIN  (everyone else, and cast without art yet): the normal message box;
+#          the "Name: " label stays in the text.
 #
-#   Script:    pf_say(:MARTIN, :crying, "I LEFT THE OVEN ON!")
-#              pf_say(:MARTIN, :smug, "Obviously.", emote: :sparkle, event: 12)
-#   Show Text: \pf[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!
-#              \pf[MARTIN,shocked,sweat+exclaim]      (third field: emotes)
-#              \pf[MARTIN,angry,,12]                  (fourth field: event id)
-#              [portrait: MARTIN, crying] MARTIN: ...  (story-bible tag, same thing)
+#   Script:    pf_say(:JUNO, :happy, "Hi!")                         face
+#              pf_say(:LARCH, :angry, "IT LIVES IN A TREE.", bubble: true, emote: :anger)
+#   Show Text: \pf[JUNO,happy]Juno: Hi!                              face
+#              \pfb[LARCH,angry,anger]Larch: IT LIVES IN A TREE.     bubble
+#              \pfb[MARTIN,shocked,sweat+exclaim,12]Martin: WHAT.    (emotes, event id)
+#              [portrait: JUNO, happy] / [bubble: LARCH, angry, anger]  (story-bible tags)
+# In face mode the emotes and event fields are ignored. Within one conversation
+# a cast member's later name-only lines ("Juno: ...") keep their face with the
+# last expression, so scripts only tag first lines and expression changes.
 #
-# Expressions: neutral happy smug angry crying shocked deadpan panic sad blush
+# Expressions: any name works for faces (it picks the file); bubbles know
+#              neutral happy smug angry crying shocked deadpan panic sad blush
 # Emotes:      sweat shock anger sparkle gloom question exclaim tears blush dots
-# Portrait art (optional): Graphics/Portraits/NAME_expression.png, then
-# Graphics/Portraits/NAME.png, then a round crop of the trainer front sprite's
-# head, then a silhouette with the name's initial. See design/CUTSCENES.md.
+# Portrait art: Graphics/Portraits/ID_expression.png, then ID.png (96x96).
+# :PLAYER uses PLAYER_A or PLAYER_B, by the look chosen (pbChangePlayer 1/2).
+# Bubbles without art fall back to a round crop of the trainer front sprite's
+# head, then a silhouette. See design/CUTSCENES.md section 6.
 #===============================================================================
 module Prismfall
   module Portrait
@@ -30,6 +42,15 @@ module Prismfall
     VIEWPORT_Z = 99_999
     POP_TIME = 0.28
     EMOTE_FPS = 8
+    # Face mode (Desolation's FaceWindowVX: a 128x128 window holding a 96x96 face,
+    # set on the message box's left edge, above it, or below it when the box is at the top)
+    FACE_SIZE   = 96
+    FACE_EDGE   = 16         # frame thickness around the face
+    FACE_FRAME  = FACE_SIZE + (FACE_EDGE * 2)
+    FACE_POP    = 0.16       # new speaker: rises 8 px out of the box and fades in
+    FACE_SWAP   = 0.10       # same speaker, new expression: a 2 px nudge
+    FACE_LINGER = 0.35       # a face closed this recently is still "on screen" for the next line
+    FACE_SKIN   = "Graphics/Windowskins/speech hgss 1"   # when the message box has no skin to copy
     EMOTES = [:sweat, :shock, :anger, :sparkle, :gloom, :question, :exclaim, :tears, :blush, :dots]
 
     # bg: backdrop colour behind the face; emotes: drawn around the ring;
@@ -53,9 +74,11 @@ module Prismfall
     #   crop: [x, y, size])   # head square on the trainer sprite, when the default misses
     @people = {}
     @current = nil
+    @scene_faces = {}     # "juno" => [:JUNO, :happy]: who has shown a face in this conversation
+    @last_face = nil      # [id, file, closed_at] of the last face window
 
-    # Portrait use (user, 2026-11-20: "i dont think we need a portrait for every
-    # conversation"). Only the story cast gets a bubble. Anyone else tagged with
+    # Portrait use (SPINE Rev 22). Only the story cast gets a face (once their
+    # art exists) or, when a line asks for one, a bubble. Anyone else tagged with
     # \pf[...] or pf_say gets the plain message box with their "Name: " label.
     # Add a character with `Portrait.register(:ID, cast: true)` or by listing them here.
     # See story/13_CUTSCENES.md, "Portrait use".
@@ -69,7 +92,7 @@ module Prismfall
       ODESSA ILSA BASTIAN YSOLDE MAGNUS NYX CELESTINE SIGRUN
       HESPER TEO THISTLE SABLE KROLL QUENT MARCHETTI HOLLIS PIP MAUD DEX MORWEN
       MAELIS DASK EIRIK HROTHGAR KASSAN RENATA GUTTER DELPHINE
-      VESPER WENNA MARTIN
+      VESPER WENNA MARTIN WENLOW
     ]
 
     class << self
@@ -78,7 +101,7 @@ module Prismfall
       def register(id, **data); @people[id.to_s.upcase.to_sym] = data; end
       def person(id); return @people[id.to_s.upcase.to_sym] || {}; end
 
-      # true when this speaker should get a portrait bubble
+      # true when this speaker may get a face or a bubble
       def cast?(id)
         return true if !ONLY_CAST
         key = id.to_s.upcase.to_sym
@@ -92,30 +115,99 @@ module Prismfall
       end
 
       # Pulls a portrait tag out of message text. Returns [clean_text, spec or nil].
+      # \pf[...] and [portrait: ...] ask for the face; \pfb[...] and [bubble: ...] for the bubble.
       def extract(message)
         text = message.to_s
         spec = nil
-        text = text.sub(/\\pf\[([^\]]*)\]/i) do
-          spec = parse($1)
+        text = text.sub(/\\pf(b?)\[([^\]]*)\]/i) do
+          spec = parse($2, !$1.empty?)
           ""
         end
         if !spec
-          text = text.sub(/\[portrait:\s*([^\]]*)\]\s*/i) do
-            spec = parse($1)
+          text = text.sub(/\[(portrait|bubble):\s*([^\]]*)\]\s*/i) do
+            spec = parse($2, $1.downcase == "bubble")
             ""
           end
         end
-        text = text.gsub(/\\pf\[[^\]]*\]/i, "").gsub(/\[portrait:[^\]]*\]\s*/i, "") if spec
+        text = text.gsub(/\\pfb?\[[^\]]*\]/i, "").gsub(/\[(?:portrait|bubble):[^\]]*\]\s*/i, "") if spec
         return text, spec
       end
 
-      def parse(fields)
+      def parse(fields, bubble = false)
         parts = fields.split(",").map(&:strip)
         return nil if parts.empty? || parts[0].to_s.empty?
         expr = (parts[1] && !parts[1].empty?) ? parts[1].downcase.to_sym : :neutral
         emotes = (parts[2].to_s.empty?) ? nil : parts[2].downcase.split(/[+\s|]+/).map(&:to_sym)
         event = (parts[3].to_s.empty?) ? nil : (parts[3] =~ /\A-?\d+\z/ ? parts[3].to_i : parts[3])
-        return { :id => parts[0].upcase.to_sym, :expression => expr, :emotes => emotes, :event => event }
+        return { :id => parts[0].upcase.to_sym, :expression => expr, :emotes => emotes, :event => event, :bubble => bubble }
+      end
+
+      # The art file id: :PLAYER is PLAYER_A or PLAYER_B, by the look picked at the
+      # start (pbChangePlayer(1) / (2)); register(:ID, art: :OTHER) borrows another's.
+      def art_id(id)
+        key = id.to_s.upcase.to_sym
+        return person(key)[:art].to_s.upcase.to_sym if person(key)[:art]
+        return key if key != :PLAYER
+        look = ($player.character_ID rescue 1) if defined?($player) && $player
+        return (look == 2) ? :PLAYER_B : :PLAYER_A
+      end
+
+      # Graphics/Portraits/ID_expression.png, else ID.png, else nil (no art yet).
+      def face_file(id, expression)
+        aid = art_id(id)
+        ["#{FOLDER}#{aid}_#{expression.to_s.downcase}", "#{FOLDER}#{aid}"].each do |path|
+          file = C::Gfx.resolve(path)
+          return file if file
+        end
+        return nil
+      end
+
+      # -> :face, :bubble or :plain
+      def mode_for(spec)
+        return :plain if !spec || !cast?(spec[:id])
+        return :bubble if spec[:bubble]
+        return :face if face_file(spec[:id], spec[:expression])
+        return :plain
+      end
+
+      # "Juno" in "Juno: Hi" (after any leading control codes), or nil.
+      def label_of(text)
+        t = text.to_s.sub(/\A(?:\\[A-Za-z]+(?:\[[^\]]*\])?|\s)+/, "")
+        m = t.match(/\A([^:\n\\\[\]]{1,32}):\s/)
+        return (m) ? m[1].strip.downcase : nil
+      end
+
+      # A cast member's name-only line ("Juno: ...") after one of their tagged lines in
+      # the same conversation keeps their face, with the last expression.
+      def carry(text)
+        return nil if @scene_faces.empty?
+        return nil if defined?($game_temp) && $game_temp && $game_temp.respond_to?(:in_battle) && $game_temp.in_battle
+        label = label_of(text)
+        hit = label && @scene_faces[label]
+        return nil if !hit
+        return { :id => hit[0], :expression => hit[1], :emotes => nil, :event => nil, :bubble => false, :carried => true }
+      end
+
+      def remember(spec, text)
+        [label_of(text), display_name(spec[:id]).downcase].compact.uniq.each do |label|
+          @scene_faces[label] = [spec[:id], spec[:expression]]
+        end
+      end
+
+      # A new conversation: the main map interpreter set up an event (see the hook below).
+      def new_conversation
+        @scene_faces.clear
+      end
+
+      # How a face window enters: :pop (new speaker), :swap (new expression) or :none.
+      def face_entry(id, file)
+        last = @last_face
+        return :pop if !last || last[0] != id || C::Util.now - last[2] > FACE_LINGER
+        return (last[1] == file) ? :none : :swap
+      end
+
+      def face_closed(id, file)
+        @last_face = [id, file, C::Util.now]
       end
 
       # The map character a bubble points at: an explicit event id / name, the
@@ -137,12 +229,14 @@ module Prismfall
         return nil
       end
 
-      def open(spec, msgwindow = nil)
+      # mode :face or :bubble (default: what the spec asks for)
+      def open(spec, msgwindow = nil, mode = nil)
         close
-        @current = Bubble.new(spec, msgwindow)
+        mode ||= (spec[:bubble]) ? :bubble : :face
+        @current = (mode == :bubble) ? Bubble.new(spec, msgwindow) : FaceBox.new(spec, msgwindow)
         return @current
       rescue StandardError => e
-        C::Util.log("portrait bubble failed: #{e.class}: #{e.message}")
+        C::Util.log("portrait #{mode} failed: #{e.class}: #{e.message}")
         raise if C.raise_errors
         @current = nil
         return nil
@@ -163,10 +257,11 @@ module Prismfall
       # -> [bitmap (DIAMETER x DIAMETER, round), kind] where kind is
       # :expression, :base, :sprite or :silhouette.
       def load(id, expression)
-        src = C::Gfx.load_bitmap("#{FOLDER}#{id}_#{expression}")
+        aid = Portrait.art_id(id)
+        src = C::Gfx.load_bitmap("#{FOLDER}#{aid}_#{expression}")
         kind = :expression
         if !src
-          src = C::Gfx.load_bitmap("#{FOLDER}#{id}")
+          src = C::Gfx.load_bitmap("#{FOLDER}#{aid}")
           kind = :base
         end
         if src
@@ -344,6 +439,203 @@ module Prismfall
     end
 
     #---------------------------------------------------------------------------
+    # Face mode: the frame is cut from the message box's own windowskin, so it
+    # matches whichever speech frame the player picked in Options.
+    #---------------------------------------------------------------------------
+    module Frame
+      module_function
+
+      # -> FACE_FRAME square bitmap: the skin's left corners and edge (mirrored for the
+      # right side, so the frame is symmetric) around a panel of the skin's body colour.
+      def build(msgwindow = nil)
+        out = Bitmap.new(FACE_FRAME, FACE_FRAME)
+        skin, own = skin_for(msgwindow)
+        src = (skin) ? region(skin, msgwindow) : nil
+        if src
+          cut(out, skin, *src)
+        else
+          drawn(out)
+        end
+        skin.dispose if own && skin && !skin.disposed?
+        return out
+      end
+
+      # The message box's skin (it may have been changed with \w[...]), else the
+      # speech frame from Options, else the stock HGSS frame. -> [bitmap, loaded_here]
+      def skin_for(msgwindow)
+        if msgwindow && msgwindow.respond_to?(:windowskin)
+          s = msgwindow.windowskin
+          return s, false if s.is_a?(Bitmap) && !s.disposed?
+        end
+        path = (defined?(MessageConfig) && MessageConfig.respond_to?(:pbGetSpeechFrame)) ? MessageConfig.pbGetSpeechFrame : nil
+        bmp = (path && !path.to_s.empty?) ? C::Gfx.load_bitmap(path) : nil
+        bmp ||= C::Gfx.load_bitmap(FACE_SKIN)
+        return bmp, true
+      rescue StandardError
+        return nil, false
+      end
+
+      # -> [x, y, w, h of the frame part, body colour x, y, corner size, back rect or nil]
+      def region(skin, msgwindow)
+        w = skin.width
+        h = skin.height
+        return [128, 0, 64, 64, 64, 64, 16, [0, 0, 128, 128]] if w == 192 && h == 128   # RPG Maker XP skin
+        return [64, 0, 64, 64, 32, 32, 16, [0, 0, 64, 64]] if w == 128 && h == 128      # RPG Maker VX skin
+        c = [FACE_EDGE, w / 3, h / 3].min
+        return nil if c < 4
+        r = (msgwindow.respond_to?(:skinrect)) ? msgwindow.skinrect : nil
+        if r.is_a?(Rect) && r.width > 0 && r.height > 0 && r.x + r.width <= w && r.y + r.height <= h
+          bx = r.x + (r.width / 2)
+          by = r.y + (r.height / 2)
+        elsif h == 48 && (w == 96 || w == 80)          # Essentials' speech frames (body 32,16,16,16)
+          bx, by = 40, 24
+        else
+          bx, by = w / 2, h / 2
+        end
+        return [0, 0, w, h, bx, by, c, nil]
+      end
+
+      def cut(out, skin, ox, oy, w, h, bx, by, c, back)
+        f = FACE_FRAME
+        mid = f - (c * 2)
+        if back
+          out.stretch_blt(Rect.new(2, 2, f - 4, f - 4), skin, Rect.new(*back))
+        else
+          out.stretch_blt(Rect.new(c, c, mid, mid), skin, Rect.new(bx, by, 1, 1))
+        end
+        c.times do |i|
+          [i, f - 1 - i].each do |dx|                    # a left column, and its mirror on the right
+            out.blt(dx, 0, skin, Rect.new(ox + i, oy, 1, c))
+            out.blt(dx, f - c, skin, Rect.new(ox + i, oy + h - c, 1, c))
+            out.stretch_blt(Rect.new(dx, c, 1, mid), skin, Rect.new(ox + i, oy + c, 1, h - (c * 2)))
+          end
+        end
+        out.stretch_blt(Rect.new(c, 0, mid, c), skin, Rect.new(ox + c - 1, oy, 1, c))
+        out.stretch_blt(Rect.new(c, f - c, mid, c), skin, Rect.new(ox + c - 1, oy + h - c, 1, c))
+      end
+
+      # No skin at all: a plain dark-rimmed box.
+      def drawn(out)
+        f = FACE_FRAME
+        e = FACE_EDGE
+        out.fill_rect(4, 2, f - 8, f - 4, Color.new(72, 64, 72))
+        out.fill_rect(2, 4, f - 4, f - 8, Color.new(72, 64, 72))
+        out.fill_rect(6, 4, f - 12, f - 8, Color.new(100, 100, 112))
+        out.fill_rect(4, 6, f - 8, f - 12, Color.new(100, 100, 112))
+        out.fill_rect(e, e, f - (e * 2), f - (e * 2), Color.new(248, 248, 248))
+      end
+    end
+
+    #---------------------------------------------------------------------------
+    # Face mode: a framed face beside the message box (Desolation's face window).
+    #---------------------------------------------------------------------------
+    class FaceBox
+      attr_reader :spec, :file, :entry, :rect
+
+      def initialize(spec, msgwindow = nil)
+        @spec = spec
+        @msg = msgwindow
+        @id = spec[:id]
+        @file = Portrait.face_file(@id, spec[:expression])
+        @entry = Portrait.face_entry(@id, @file)
+        @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
+        @viewport.z = VIEWPORT_Z
+        @frame_bmp = Frame.build(msgwindow)
+        @face_bmp = load_face
+        @frame = Sprite.new(@viewport)
+        @frame.bitmap = @frame_bmp
+        @face = Sprite.new(@viewport)
+        @face.bitmap = @face_bmp
+        @face.z = 1
+        @start = C::Util.now
+        @first = true
+        @rect = [0, 0, FACE_FRAME, FACE_FRAME]
+        update
+      end
+
+      # The art as a FACE_SIZE square (other square sizes are scaled to it).
+      def load_face
+        out = Bitmap.new(FACE_SIZE, FACE_SIZE)
+        src = (@file) ? C::Gfx.load_bitmap(@file) : nil
+        return out if !src
+        size = [src.width, src.height].min
+        sx = (src.width - size) / 2
+        if size == FACE_SIZE
+          out.blt(0, 0, src, Rect.new(sx, 0, size, size))
+        else
+          out.stretch_blt(Rect.new(0, 0, FACE_SIZE, FACE_SIZE), src, Rect.new(sx, 0, size, size))
+        end
+        src.dispose
+        return out
+      end
+
+      # pbPositionNearMsgWindow(face, msg, :left): on the box's left edge, above it,
+      # or below it when there is no room above (the box at the top).
+      def place
+        mx = 0
+        mh = 96
+        my = Graphics.height - mh
+        if @msg && @msg.respond_to?(:y) && @msg.respond_to?(:height)
+          mx = @msg.x.to_i if @msg.respond_to?(:x)
+          mh = @msg.height.to_i
+          my = (@first) ? predicted_y(mh) : @msg.y.to_i
+        end
+        y = my - FACE_FRAME
+        below = y < 0
+        y = my + mh if below
+        return mx, y, below
+      end
+
+      # The face opens before the core places the box for this message: guess the
+      # place the same way pbRepositionMessageWindow will (later frames use the real one).
+      def predicted_y(mh)
+        pos = ($game_system.message_position rescue 2) if defined?($game_system) && $game_system
+        return 0 if pos == 0
+        return (Graphics.height - mh) / 2 if pos == 1
+        return Graphics.height - mh
+      end
+
+      def update
+        return if @disposed
+        x, y, below = place
+        @first = false
+        t = C::Util.now - @start
+        dy = 0                   # frame and face
+        op = 255
+        fdy = 0                  # face only
+        fop = 255
+        if @entry == :pop && t < FACE_POP
+          k = C::Ease.apply(:out, t / FACE_POP)
+          dy = ((1 - k) * 4).round * 2                   # 8 px, in 2 px steps, out of the box
+          dy = -dy if below
+          op = (255 * k).round
+          fop = op
+        elsif @entry == :swap && t < FACE_SWAP
+          fdy = (t < FACE_SWAP / 2) ? ((below) ? -2 : 2) : 0
+          fop = (160 + (95 * t / FACE_SWAP)).round
+        end
+        @frame.x = x
+        @frame.y = y + dy
+        @frame.opacity = op
+        @face.x = x + FACE_EDGE
+        @face.y = y + FACE_EDGE + dy + fdy
+        @face.opacity = fop
+        @rect = [x, y, FACE_FRAME, FACE_FRAME]
+      end
+
+      def dispose
+        return if @disposed
+        @disposed = true
+        Portrait.face_closed(@id, @file)
+        [@frame, @face].each { |s| s.dispose if s && !s.disposed? }
+        [@frame_bmp, @face_bmp].each { |b| b.dispose if b && !b.disposed? }
+        @viewport.dispose
+      end
+    end
+
+    #---------------------------------------------------------------------------
+    # Bubble mode (opt-in): round portrait, speech tail, emotes.
+    #---------------------------------------------------------------------------
     class Bubble
       attr_reader :spec, :art_kind, :emotes, :center
 
@@ -356,7 +648,7 @@ module Prismfall
         @speaker = Portrait.speaker(spec)
         @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
         @viewport.z = VIEWPORT_Z
-        @art, @art_kind = Art.load(@id, @expr)
+        @art, @art_kind = Art.load(@id, spec[:expression] || @expr)   # the file goes by the name asked for
         @emotes = (spec[:emotes] || @cfg[:emotes]).select { |e| EMOTES.include?(e) }
         @emotes += (@cfg[:face] || []) if @art_kind != :expression && !spec[:emotes]
         @base_bmp = Bitmap.new(CANVAS, CANVAS)
@@ -512,36 +804,57 @@ module Prismfall
 end
 
 #-------------------------------------------------------------------------------
-# Message hook: a \pf[...] or [portrait: ...] tag in any Show Text / pbMessage
-# opens the bubble for that message. Alias-chained; the core method is called
-# with the tag removed.
+# Message hook: a \pf[...] / \pfb[...] (or [portrait: ...] / [bubble: ...]) tag in
+# any Show Text / pbMessage shows that message with a face or a bubble. A cast
+# member's untagged "Name: ..." line keeps the face they showed earlier in the
+# same conversation. Alias-chained; the core method gets the text without the tag.
 #-------------------------------------------------------------------------------
 if defined?(pbMessageDisplay) && !defined?(prismfall_portrait_pbMessageDisplay)
   alias prismfall_portrait_pbMessageDisplay pbMessageDisplay
 
   def pbMessageDisplay(msgwindow, message, letterbyletter = true, commandProc = nil, &block)
-    text, spec = Prismfall::Portrait.extract(message)
-    return prismfall_portrait_pbMessageDisplay(msgwindow, message, letterbyletter, commandProc, &block) if !spec
-    # Not story cast: plain message box, tag stripped (the "Name: " label stays).
-    return prismfall_portrait_pbMessageDisplay(msgwindow, text, letterbyletter, commandProc, &block) if !Prismfall::Portrait.cast?(spec[:id])
-    bubble = Prismfall::Portrait.open(spec, msgwindow)
+    pf = Prismfall::Portrait
+    text, spec = pf.extract(message)
+    spec ||= pf.carry(text)
+    mode = pf.mode_for(spec)
+    pf.remember(spec, text) if mode != :plain && !spec[:carried]
+    # No tag, not story cast, or no art yet (and no bubble asked for): the plain box,
+    # tag stripped (the "Name: " label stays).
+    return prismfall_portrait_pbMessageDisplay(msgwindow, text, letterbyletter, commandProc, &block) if mode == :plain
+    view = pf.open(spec, msgwindow, mode)
     begin
       return prismfall_portrait_pbMessageDisplay(msgwindow, text, letterbyletter, commandProc) do
-        bubble&.update
+        view&.update
         block&.call
       end
     ensure
-      Prismfall::Portrait.close
+      pf.close
     end
   end
 end
 
-# pf_say(:MARTIN, :crying, "text")  - shows "Martin: text" under a portrait bubble.
-# Options: emote: :sweat or [:sweat, :shock], event: id or name, name: false (no
-# "Name: " prefix) or a String, plus anything pbMessage takes as commands.
-def pf_say(id, expression = :neutral, text = "", emote: nil, event: nil, name: nil, commands: nil, cancel: 0)
+# A new event on the main map interpreter starts a new conversation (faces are
+# not carried over from the last one). Parallel and child interpreters don't count.
+if defined?(Interpreter) && !Interpreter.method_defined?(:prismfall_portrait_setup)
+  class Interpreter
+    alias prismfall_portrait_setup setup
+
+    def setup(*args)
+      Prismfall::Portrait.new_conversation if @main
+      return prismfall_portrait_setup(*args)
+    end
+  end
+end
+
+# pf_say(:JUNO, :happy, "text")  - "Juno: text" with Juno's face beside the box
+# (or the plain box until she has art). bubble: true - the speech bubble instead
+# (the rare comic/dramatic beat); then emote: :sweat or [:sweat, :shock] and
+# event: id or name (who the tail points at) apply. name: false (no "Name: "
+# prefix) or a String; commands:/cancel: as pbMessage takes them.
+def pf_say(id, expression = :neutral, text = "", emote: nil, event: nil, name: nil, commands: nil, cancel: 0, bubble: false)
   emotes = Array(emote).compact.join("+")
   label = (name == false) ? "" : "#{name || Prismfall::Portrait.display_name(id)}: "
-  message = "\\pf[#{id},#{expression},#{emotes},#{event}]#{label}#{text}"
+  tag = (bubble) ? "pfb" : "pf"
+  message = "\\#{tag}[#{id},#{expression},#{emotes},#{event}]#{label}#{text}"
   return pbMessage(message, commands, cancel)
 end

@@ -384,69 +384,208 @@ check "team read from pbs/trainers.txt", t[:team].first == :JOLTIK, t[:team].ins
 $messages = []
 check "offer hook asks first", C.offer_festival_highlight(info.call(:ANJA), info.call(:BRANN), :ANJA) == true && $messages.include?("Watch the highlights?")
 
-section "portrait speech bubbles"
+section "portraits: tags and modes"
 P = Prismfall::Portrait
 $game_map.events = { 1 => EventStub.new("Martin", 200, 220), 2 => EventStub.new("Sign", 400, 120), 3 => EventStub.new("Edge", 500, 20), 4 => EventStub.new("Far", 2000, 900) }
 text, spec = P.extract("\\pf[MARTIN,crying]MARTIN: Waaah!")
-check "tag parsed", text == "MARTIN: Waaah!" && spec == { :id => :MARTIN, :expression => :crying, :emotes => nil, :event => nil }, [text, spec].inspect
+check "tag parsed", text == "MARTIN: Waaah!" && spec == { :id => :MARTIN, :expression => :crying, :emotes => nil, :event => nil, :bubble => false }, [text, spec].inspect
 text, spec = P.extract("[portrait: Martin, Smug] Obviously.")
-check "story tag parsed", text == "Obviously." && spec[:id] == :MARTIN && spec[:expression] == :smug, [text, spec].inspect
+check "story tag parsed", text == "Obviously." && spec[:id] == :MARTIN && spec[:expression] == :smug && !spec[:bubble], [text, spec].inspect
 text, spec = P.extract("\\PF[martin, shocked, sweat+exclaim, 3]Hi")
 check "emotes + event", spec[:emotes] == [:sweat, :exclaim] && spec[:event] == 3, spec.inspect
+text, spec = P.extract("\\pfb[LARCH,angry,anger,Professor Larch]Larch: IT LIVES IN A TREE.")
+check "\\pfb asks for the bubble", text == "Larch: IT LIVES IN A TREE." && spec[:bubble] == true && spec[:event] == "Professor Larch" && spec[:emotes] == [:anger], [text, spec].inspect
+text, spec = P.extract("[bubble: Juno, panic, sweat] Juno: Shutting up!")
+check "[bubble: ...] story tag", text == "Juno: Shutting up!" && spec[:bubble] == true && spec[:id] == :JUNO, [text, spec].inspect
 check "no tag untouched", P.extract("Plain \\c[2]text") == ["Plain \\c[2]text", nil]
+check "label of a line", P.label_of("\\c[1]Juno: hi") == "juno" && P.label_of("(She waits.)").nil? && P.label_of("Accord guard (aside): x") == "accord guard (aside)"
+check "no art -> plain, even for the cast", P.mode_for(P.parse("JUNO,happy")) == :plain && P.mode_for(P.parse("LARCH,angry", true)) == :bubble &&
+      P.mode_for(P.parse("SHOPKEEPER,happy", true)) == :plain && P.mode_for(nil) == :plain
 seen = []
 P.singleton_class.send(:alias_method, :open_real, :open)
-P.define_singleton_method(:open) { |sp, win = nil| b = open_real(sp, win); seen.push(b); b }
+P.define_singleton_method(:open) { |sp, win = nil, mode = nil| b = open_real(sp, win, mode); seen.push(b); b }
 before = $live.dup
-$shown = []
-pbMessage("\\pf[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!")
-b = seen.last
-check "bubble opened, text cleaned, closed", b && $shown.last == "MARTIN: I LEFT THE OVEN ON!" && P.current.nil? && $live == before, [$shown.last, $live, before].inspect
-check "anchored above the named event", b && (b.center[0] - 200).abs <= 2 && b.center[1] < 180, b && b.center.inspect
-check "silhouette fallback + face emotes", b && b.art_kind == :silhouette && b.emotes == [:sweat, :tears], b && [b.art_kind, b.emotes].inspect
+
+section "portraits: plain box (not cast, or no art yet)"
 $shown = []
 pbMessage("Just text.")
-check "plain message passes through", $shown.last == "Just text." && seen.length == 1
-n_before = seen.length
+check "plain message passes through", $shown.last == "Just text." && seen.empty?
+pbMessage("\\pf[MARTIN,crying]Martin: I LEFT THE OVEN ON!")
+pf_say(:JUNO, :happy, "No art in this run.")
+check "cast without art: plain box, tag stripped, no silhouette", seen.empty? && $shown[-2] == "Martin: I LEFT THE OVEN ON!" &&
+      $shown.last == "Juno: No art in this run." && P.current.nil?, [seen.length, $shown.last(2)].inspect
 pbMessage("\\pf[SHOPKEEPER,happy]Shopkeeper: Welcome!")
 pf_say(:ACCORD_GUARD, :angry, "Halt.")
-check "non-cast speakers get the plain box, no bubble", seen.length == n_before && $shown.last == "Accord Guard: Halt." && P.current.nil?, [seen.length, $shown.last].inspect
+pf_say(:ACCORD_GUARD, :angry, "Halt!", bubble: true, emote: :anger)
+pbMessage("\\pfb[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)")
+check "non-cast speakers get the plain box in both modes", seen.empty? && $shown[-3] == "Accord Guard: Halt." && $shown[-2] == "Accord Guard: Halt!" &&
+      $shown.last == "(They notice you listening.)" && P.current.nil?, [seen.length, $shown.last(3)].inspect
+
+section "portraits: speech bubbles (opt-in)"
+pbMessage("\\pfb[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!")
+b = seen.last
+check "bubble opened, text cleaned, closed", b.is_a?(P::Bubble) && $shown.last == "MARTIN: I LEFT THE OVEN ON!" && P.current.nil? && $live == before, [b.class, $shown.last, $live, before].inspect
+check "anchored above the named event", b && (b.center[0] - 200).abs <= 2 && b.center[1] < 180, b && b.center.inspect
+check "silhouette fallback + face emotes", b && b.art_kind == :silhouette && b.emotes == [:sweat, :tears], b && [b.art_kind, b.emotes].inspect
 P.register(:NOBODY, cast: true)
-pf_say(:NOBODY, :deadpan, "Hm.")
+pf_say(:NOBODY, :deadpan, "Hm.", bubble: true)
 # event 2 stands near the top edge, so the bubble sits beside it instead of over it
-check "pf_say falls back to the running event", $shown.last == "Nobody: Hm." && (seen.last.center[0] - 400).abs.between?(60, 110), [$shown.last, seen.last.center].inspect
-pf_say(:MARTIN, :panic, "Edge!", event: 3, emote: [:question, :anger], name: false)
+check "pf_say(bubble: true) falls back to the running event", $shown.last == "Nobody: Hm." && seen.last.is_a?(P::Bubble) && (seen.last.center[0] - 400).abs.between?(60, 110), [$shown.last, seen.last.center].inspect
+pf_say(:MARTIN, :panic, "Edge!", event: 3, emote: [:question, :anger], name: false, bubble: true)
 c = seen.last.center
 check "clamped on screen, emote override", $shown.last == "Edge!" && c[0] <= 512 - 54 && c[1] >= 54 && seen.last.emotes == [:question, :anger], [c, seen.last.emotes].inspect
-pf_say(:MARTIN, :happy, "Off-screen speaker", event: 4)
+pf_say(:MARTIN, :happy, "Off-screen speaker", event: 4, bubble: true)
 check "off-screen speaker -> above the box", seen.last.center[1] < $msg_y && seen.last.center[0] < 120, seen.last.center.inspect
 $msg_y = 0
-pf_say(:PLAYER, :sad, "Top box")
+pf_say(:PLAYER, :sad, "Top box", bubble: true)
 check "message box at top", seen.last.center[1] > 96, seen.last.center.inspect
 $msg_y = 288
 $game_player = Struct.new(:character_name, :screen_x, :screen_y).new("x", 256, 192)
-P::EXPRESSIONS.each_key { |e| pf_say(:PLAYER, e, "x", emote: P::EMOTES) }
-P::EXPRESSIONS.each_key { |e| pf_say(:MARTIN, e, "x") }
-pf_say(:MARTIN, :not_an_expression, "x", emote: :not_an_emote)
-check "all expressions x all emotes, no leaks", $live == before && seen.length == 26, [seen.length, $live].inspect
+n0 = seen.length
+P::EXPRESSIONS.each_key { |e| pf_say(:PLAYER, e, "x", emote: P::EMOTES, bubble: true) }
+P::EXPRESSIONS.each_key { |e| pbMessage("\\pfb[MARTIN,#{e}]x") }
+pf_say(:MARTIN, :not_an_expression, "x", emote: :not_an_emote, bubble: true)
+check "all expressions x all emotes, no leaks", $live == before && seen.length - n0 == 21 && seen.last(21).all? { |v| v.is_a?(P::Bubble) }, [seen.length - n0, $live].inspect
 $opt[:assets] = true
 P.register(:MARTIN, name: "Martin", trainer: :LEADER_MARTIN, color: [200, 60, 60])
-pf_say(:MARTIN, :angry, "With a trainer sprite.")
+pf_say(:MARTIN, :angry, "With a trainer sprite.", bubble: true)
 check "trainer-sprite head crop", seen.last.art_kind == :sprite && $shown.last.start_with?("Martin: "), seen.last.art_kind
+n0 = seen.length
+pf_say(:MARTIN, :angry, "Still no portrait art.")
+check "...but a sprite is not portrait art: no face (plain box)", seen.length == n0 && $shown.last == "Martin: Still no portrait art." && P.current.nil?, seen.length - n0
 tmp = Dir.mktmpdir("pf_portraits")
 FileUtils.mkdir_p(File.join(tmp, "Graphics/Portraits"))
 system("convert", "-size", "96x96", "xc:orange", File.join(tmp, "Graphics/Portraits/MARTIN_crying.png"))
 system("convert", "-size", "48x48", "xc:teal", File.join(tmp, "Graphics/Portraits/MARTIN.png"))
+real_assets = ASSET_DIR
 Object.send(:remove_const, :ASSET_DIR)
 ASSET_DIR = tmp
-pf_say(:MARTIN, :crying, "x")
+pf_say(:MARTIN, :crying, "x", bubble: true)
 k1 = [seen.last.art_kind, seen.last.emotes]
-pf_say(:MARTIN, :smug, "x")
+pf_say(:MARTIN, :smug, "x", bubble: true)
 k2 = seen.last.art_kind
-check "NAME_expression.png then NAME.png", k1 == [:expression, [:sweat]] && k2 == :base, [k1, k2].inspect
+check "bubble art: NAME_expression.png then NAME.png", k1 == [:expression, [:sweat]] && k2 == :base, [k1, k2].inspect
+
+section "portraits: face mode (the default once art exists)"
+pf_say(:MARTIN, :smug, "Face from the 48 px base file.")
+f = seen.last
+check "face: NAME.png fallback, scaled to 96", f.is_a?(P::FaceBox) && f.file.to_s.end_with?("MARTIN.png") && $shown.last == "Martin: Face from the 48 px base file.", [f.class, f.file].inspect
+check "face: no skin file -> drawn frame, no leaks", P.current.nil? && $live == before, $live.inspect
 FileUtils.rm_rf(tmp)
+Object.send(:remove_const, :ASSET_DIR)
+ASSET_DIR = real_assets
+skin, own = P::Frame.skin_for(nil)
+check "frame skin: the stock speech frame (96x48)", skin && own && skin.width == 96 && skin.height == 48, skin && [skin.width, skin.height].inspect
+xp = Bitmap.new(192, 128)
+vx = Bitmap.new(128, 128)
+check "frame region: speech / XP / VX skins", P::Frame.region(skin, nil) == [0, 0, 96, 48, 40, 24, 16, nil] &&
+      P::Frame.region(xp, nil)[0, 4] == [128, 0, 64, 64] && P::Frame.region(vx, nil)[0, 4] == [64, 0, 64, 64]
+[skin, xp, vx].each(&:dispose)
+P.new_conversation
+P.instance_variable_set(:@last_face, nil)
+pf_say(:JUNO, :happy, "You walked through the Bleed like it was fog.")
+f = seen.last
+check "Juno: face mode, her happy file, name label kept", f.is_a?(P::FaceBox) && File.basename(f.file.to_s) == "JUNO_happy.png" && $shown.last == "Juno: You walked through the Bleed like it was fog.", [f.class, f.file, $shown.last].inspect
+check "new speaker pops in", f.entry == :pop, f.entry
+check "beside the box on the left, above it", f.rect == [0, 288 - 128, 128, 128], f.rect.inspect
+pf_say(:JUNO, :happy, "Nobody does that.")
+check "same speaker, same face: no pop", seen.last.entry == :none, seen.last.entry
+pbMessage("\\pf[JUNO,sad]Juno: Biscuit's in there somewhere.")
+check "same speaker, new expression: a small swap", seen.last.entry == :swap && File.basename(seen.last.file) == "JUNO_sad.png", [seen.last.entry, seen.last.file].inspect
+pbMessage("\\pf[JUNO,wink]Juno: Any expression name works if the file exists.")
+pbMessage("\\pf[JUNO,grumpy]Juno: ...else her base file.")
+check "expression picks the file (ID_expr.png, else ID.png)", File.basename(seen[-2].file) == "JUNO_wink.png" && File.basename(seen[-1].file) == "JUNO.png", [seen[-2].file, seen[-1].file].inspect
+pbMessage("\\pf[JUNO,sad]Juno: Please be careful.")
+n1 = seen.length
+pbMessage("Juno: (a name-only line in the same conversation)")
+check "name-only follow-up keeps her face and expression", seen.length == n1 + 1 && seen.last.is_a?(P::FaceBox) && File.basename(seen.last.file) == "JUNO_sad.png" &&
+      seen.last.entry == :none && $shown.last == "Juno: (a name-only line in the same conversation)", [seen.length - n1, seen.last.file].inspect
+pbMessage("Kestrel: Not tagged here, no art.")
+pbMessage("(Narration.)")
+pbMessage("Junonia: Not her.")
+check "others' and narration lines stay plain", seen.length == n1 + 1, seen.length - n1
+pbMessage("Juno: Back again.")
+check "...and her face comes back (pops: the box was hers no longer)", seen.length == n1 + 2 && seen.last.entry == :pop, [seen.length - n1, seen.last.entry].inspect
+pbMessage("\\pf[LARCH,deadpan]Larch: I've watched forty people pretend.")
+check "Larch: his own face, popping in", seen.last.is_a?(P::FaceBox) && File.basename(seen.last.file) == "LARCH_deadpan.png" && seen.last.entry == :pop, seen.last.file
+pbMessage("\\pfb[LARCH,angry,anger,1]Larch: IT LIVES IN A TREE.")
+check "bubble with real art: round crop of his file", seen.last.is_a?(P::Bubble) && seen.last.art_kind == :expression && seen.last.emotes == [:anger], [seen.last.class, seen.last.art_kind].inspect
+pbMessage("\\pfb[JUNO,surprised]Juno: Eh?")
+check "bubble: an expression outside the list still finds its file", seen.last.is_a?(P::Bubble) && seen.last.art_kind == :expression, seen.last.art_kind
+pbMessage("Larch: A name-only line after the bubble goes back to his face.")
+check "after a bubble line: the face again", seen.last.is_a?(P::FaceBox) && File.basename(seen.last.file) == "LARCH_angry.png", seen.last.file
+P.new_conversation
+n2 = seen.length
+pbMessage("Juno: A new conversation starts fresh.")
+check "new conversation: no carry-over", seen.length == n2, seen.length - n2
+$msg_y = 0
+pf_say(:JUNO, :happy, "Box at the top.")
+check "box at the top: face below it", seen.last.rect == [0, 96, 128, 128], seen.last.rect.inspect
+$msg_y = 144
+pf_say(:JUNO, :happy, "Box in the middle.")
+check "box in the middle: face above it", seen.last.rect == [0, 16, 128, 128], seen.last.rect.inspect
+$msg_y = 288
+$player = Struct.new(:character_ID).new(2)
+pf_say(:PLAYER, :happy, "Style B.", name: "Tester")
+fb = File.basename(seen.last.file.to_s)
+$player.character_ID = 1
+pf_say(:PLAYER, :smug, "Style A.", name: "Tester")
+check ":PLAYER uses PLAYER_A / PLAYER_B art by the chosen look", fb == "PLAYER_B_happy.png" && File.basename(seen.last.file.to_s) == "PLAYER_A_smug.png", [fb, seen.last.file].inspect
+P.instance_variable_set(:@last_face, nil)
+win = MsgWindowStub.new(288, 96, nil, 0)
+box = P::FaceBox.new(P.parse("JUNO,happy"), win)
+fr = box.instance_variable_get(:@frame)
+fa = box.instance_variable_get(:@face)
+a0 = [fr.opacity, fr.y, fa.y]
+$clock += P::FACE_POP / 2
+box.update
+a1 = [fr.opacity, fr.y]
+$clock += P::FACE_POP
+box.update
+a2 = [fr.opacity, fr.y, fr.x, fa.x, fa.y]
+box.dispose
+check "pop-in: rises 8 px out of the box and fades in, then rests", a0[0] == 0 && a0[1] == 168 && a0[2] == 184 && a1[0].between?(1, 254) && a1[1].between?(160, 166) &&
+      a2 == [255, 160, 0, 16, 176], [a0, a1, a2].inspect
+box = P::FaceBox.new(P.parse("JUNO,sad"), win)
+s0 = [box.entry, box.instance_variable_get(:@face).y, box.instance_variable_get(:@frame).opacity]
+box.dispose
+check "expression swap: frame stays put, face nudges 2 px", s0 == [:swap, 178, 255], s0.inspect
 $opt[:assets] = false
+$player = nil
 check "portraits leave nothing behind", $live == before, [$live, before].inspect
+
+section "Trials talk rows (004_Trials_Script.rb)"
+begin
+  load File.join(GAME_DIR, "plugins/Prismfall Trials/004_Trials_Script.rb")
+  tr = Prismfall::Trials
+  $opt[:assets] = true
+  n3 = seen.length
+  tr.say(:JUNO, :happy, "Face by default.")
+  r1 = [seen.last.class, $shown.last]
+  tr.say(:LARCH, :angry, "Bubble on request.", nil, 0, :bubble)
+  r2 = seen.last.class
+  tr::Script.exec_one([:LARCH, :crying, "It's the tea.", { :bubble => true, :emote => [:sweat], :event => 1 }], { :quest => :TEST, :scene => :t })
+  r3 = [seen.last.class, seen.last.emotes, seen.last.spec[:event]]
+  tr::Script.exec_one([:JUNO, :panic, "Shutting up!", :bubble], { :quest => :TEST, :scene => :t })
+  r4 = seen.last.class
+  tr::Script.exec_one([:WENNA, :happy, "No art yet."], { :quest => :TEST, :scene => :t })
+  r5 = [seen.length - n3, $shown.last]
+  $menu_choice = 1
+  idx = tr::Script.exec_one({ :choice => [:JUNO, :neutral, "Pull me through?", :bubble], :options => [["No.", []], ["Yes.", []]] }, { :quest => :TEST, :scene => :t })
+  r6 = seen.last.class
+  $menu_choice = 0
+  check "say: face by default, name label kept", r1 == [P::FaceBox, "Juno: Face by default."], r1.inspect
+  check "say(..., :bubble) and [.., :bubble] rows", r2 == P::Bubble && r4 == P::Bubble && r6 == P::Bubble, [r2, r4, r6].inspect
+  check "row option hash: bubble + emote + event", r3 == [P::Bubble, [:sweat], 1], r3.inspect
+  check "cast without art: plain box", r5 == [4, "Wenna: No art yet."], r5.inspect
+  err = (tr.line_style(:bubbel) rescue $!)
+  check "a mistyped row option is an error", err.is_a?(ArgumentError), err.inspect
+rescue StandardError, ScriptError => e
+  check "Trials script loads standalone", false, "#{e.class}: #{e.message} #{e.backtrace.first}"
+ensure
+  $opt[:assets] = false
+end
+check "trials lines leave nothing behind", $live == before, [$live, before].inspect
 
 section "debug menu"
 h = MenuHandlers::HANDLERS[:debug_menu] || {}

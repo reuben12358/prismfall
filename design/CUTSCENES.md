@@ -5,7 +5,8 @@ It provides three things:
 
 1. **Pixel cutscenes** written as data in a small Ruby DSL and played full-screen (`Prismfall::Cutscene.play(:ID)`).
 2. **Festival match highlights**, built automatically from two trainers and a list of key moments.
-3. **Portrait speech bubbles** for overworld dialogue (`pf_say`, or a `\pf[...]` tag in Show Text).
+3. **Portraits** for overworld dialogue: the cast's face beside the message box (default), or the rare speech
+   bubble (`pf_say`, or a `\pf[...]` / `\pfb[...]` tag in Show Text).
 
 Everything works with zero custom art: backgrounds, beams, particles and emotes are drawn by code, and any missing
 sprite or portrait is replaced by a code-drawn placeholder. All sound cues are silent when their file is missing.
@@ -26,7 +27,7 @@ sprite or portrait is replaced by a code-drawn placeholder. All sound cues are s
 | `012_Cinematic.rb` | Dithering, scenery layers (floes, aurora, smoke, hosts), impact frames, slow motion, fracture, rim light, edge glow |
 | `012_Cinematic_Techniques.rb` | Techniques from Rejuvenation/Reborn: sheets and flipbooks, `play_sheet`, blend modes, stills, pulses, database animations, on-map mode, camera follow, photosensitive mode (see design/CUTSCENE_RESEARCH.md) |
 | `013_Scenes_War.rb` | `:WAR_CLIMAX` (story/13_CUTSCENES.md WAR-1) and `:WAR_CLIMAX_DEMO` |
-| `014_Portraits.rb` | Portrait speech bubbles and the message hook |
+| `014_Portraits.rb` | Portrait face windows, speech bubbles and the message hook |
 | `015_Debug.rb` | Debug menu: "Prismfall Cutscenes..." |
 | `selftest/` | Offline test harness (not loaded by the game; see section 9) |
 
@@ -377,19 +378,48 @@ match_highlight([:LEADER_TAMSIN, "Tamsin", 0], { name: "Rook", team: [:ROTOM, :T
 - The four fully storyboarded highlights (FH-1 to FH-4) currently play through this generic renderer using their
   `MATCH_RULES` rows. Their bespoke shots (Gauntlet glow, crowd reactions, illusion break) are not hand-authored yet.
 
-## 6. Portrait speech bubbles (Rev 7)
+## 6. Portraits: face windows and speech bubbles (Rev 22; the bubble is Rev 7's)
+
+A line of dialogue can look three ways (SPINE Rev 22; the writing rules are in story/13_CUTSCENES.md, "Portrait use"):
+
+| Mode | When | Looks |
+|---|---|---|
+| **Face** (default) | A `\pf[...]` / `[portrait: ...]` line or `pf_say` by someone in `Portrait::CAST` who has portrait art | A framed 96x96 face on the message box's left edge, above the box (below it when the box is at the top), as in Desolation |
+| **Bubble** (opt-in) | A `\pfb[...]` / `[bubble: ...]` line or `pf_say(..., bubble: true)` by someone in `CAST` | The round portrait with a speech tail pointing at the speaker on the map, plus emotes |
+| **Plain** | Not in `CAST`, or no art yet (and no bubble asked for) | The normal message box; the tag is removed and the "Name: " label stays |
 
 ```
-Script:     pf_say(:MARTIN, :crying, "I LEFT THE OVEN ON!")
-Show Text:  \pf[MARTIN,crying]MARTIN: I LEFT THE OVEN ON!
-Show Text:  \pf[MARTIN,shocked,sweat+exclaim]MARTIN: WHAT.      (third field: emotes)
-Show Text:  \pf[MARTIN,angry,,12]MARTIN: You.                   (fourth field: event id or name)
-Show Text:  [portrait: MARTIN, crying] MARTIN: ...              (the story bible's tag; same effect)
+Script:     pf_say(:JUNO, :happy, "You walked through the Bleed like it was fog.")            face
+            pf_say(:LARCH, :angry, "IT LIVES IN A TREE.", bubble: true, emote: :anger)       bubble
+Show Text:  \pf[JUNO,happy]Juno: You walked through the Bleed like it was fog.                face
+            \pfb[LARCH,angry,anger]Larch: IT LIVES IN A TREE.                                bubble
+            \pfb[MARTIN,shocked,sweat+exclaim,12]Martin: WHAT.   (3rd field: emotes, 4th: event id or name)
+Story tags: [portrait: JUNO, happy] ...   [bubble: LARCH, angry, anger] ...   (same effect)
+Trials:     [:JUNO, :happy, "text"]   [:LARCH, :angry, "text", :bubble]
+            [:LARCH, :angry, "text", { :bubble => true, :emote => [:anger], :event => "Professor Larch" }]
 ```
 - The tag is removed and the rest goes to the normal message box, so every other control code still works. It is
   handled by an alias around `pbMessageDisplay`, so it works in Show Text, `pbMessage` and choices.
-- `pf_say` adds "Name: " for you (`name: false` to drop it, `name: "???"` to override) and takes `emote:`
-  (one or a list) and `event:`.
+- `pf_say` adds "Name: " for you (`name: false` to drop it, `name: "???"` to override). `emote:` (one or a list) and
+  `event:` only matter with `bubble: true`; in face mode the tag's emote and event fields are ignored.
+- **Carry-over:** within one conversation (until the main map interpreter starts a new event), a cast member's untagged
+  `Name: ...` line keeps the face of their last tagged line, expression included. So scripts tag only a speaker's first
+  line and expression changes, and map events keep their `Name: ...` lines.
+
+### Face mode
+- The art file is picked by the expression: `Graphics/Portraits/ID_expression.png`, else `ID.png`; any expression name
+  works. `:PLAYER` uses `PLAYER_A` / `PLAYER_B` by `$player.character_ID` (the look picked with `pbChangePlayer(1/2)`);
+  `register(:ID, art: :OTHER)` borrows another id's files. No file = the plain box (no sprite crop, no silhouette).
+- The frame (128x128 around the 96x96 face) is cut from the message box's own windowskin, so it follows the speech frame
+  picked in Options: the skin's left corners and edge, mirrored for the right side, around a panel of the skin's body
+  colour. RPG Maker XP/VX skins work too; with no skin at all, a code-drawn frame stands in. Faces with transparent
+  backgrounds show that panel.
+- Placement follows Essentials' `pbPositionNearMsgWindow(face, msgwindow, :left)`: the box's x, above the box, or below
+  it when there is no room above. It follows `\wu` / `\wm` / `\wd` and the box's slide-in.
+- Entry: a new speaker rises 8 px out of the box and fades in (0.16 s); the same speaker with a new face file gets a 2 px
+  nudge (0.1 s); the same face on the next line does not move. No bounce.
+
+### Bubble mode
 - **Who the tail points at:** the event given in the tag; else an event on the map whose name is the id
   (or the one registered); `PLAYER` is the player; else the event running the text. If the speaker is off-screen,
   the bubble sits at the left above the box with the tail pointing at the box.
@@ -401,25 +431,32 @@ Show Text:  [portrait: MARTIN, crying] MARTIN: ...              (the story bible
 
 Each expression has a backdrop colour, default emotes and (for angry/crying/panic) a shake. Face overlays (tears,
 gloom lines, blush marks) are only drawn when there is no art for that expression, so they do not double up on a
-drawn crying face.
+drawn crying face. Other expression names fall back to `neutral`'s look (the file is still looked up by name).
 
 Optional per-character setup, anywhere after the plugin loads:
 ```ruby
 Prismfall::Portrait.register(:MARTIN, name: "Martin", trainer: :LEADER_MARTIN, event: "Martin",
-                             color: [200, 60, 60], crop: [40, 6, 48])
+                             color: [200, 60, 60], crop: [40, 6, 48], cast: true)
 ```
 
 ### Portrait art spec
-- Folder `Graphics/Portraits/`. Files `NAME_expression.png` (e.g. `MARTIN_crying.png`), plus `NAME.png` as the
-  fallback for expressions without their own file. `NAME` is the id in capitals.
-- **96x96 px**, drawn as pixel art at 2x (so effectively 48x48 art pixels doubled) to match the bubble. A 48x48 file
-  also works and is doubled. Other square sizes are scaled to 96.
-- The engine masks the image to a circle of diameter 96: keep the face inside the centre ~80 px and fill the corners
-  with anything. Transparent backgrounds show the expression's backdrop colour; opaque ones cover it.
-- Draw the face big: forehead to chin should fill most of the circle. Exaggerate (that is the joke).
-- Do not draw sweat drops, shock lines and so on into the file; the engine animates them outside the ring.
-- Load order: `NAME_expression.png` → `NAME.png` → round crop of the trainer front sprite's head (trainer type
+- Folder `Graphics/Portraits/`. Files `NAME_expression.png` (e.g. `JUNO_happy.png`), plus `NAME.png` as the
+  fallback for expressions without their own file. `NAME` is the id in capitals (`PLAYER_A`, `PLAYER_B` for the player).
+  The project's art lives in `art/out/Graphics/Portraits/` (Juno, Larch, both player looks); copy it into the game's
+  `Graphics/` (design/CHARACTER_ART.md). `tools/package.sh` does not ship it yet.
+- **96x96 px**, drawn as pixel art at 2x (48x48 art pixels doubled), Desolation's face-file format. The face window shows
+  the whole square at 1:1. A 48x48 file also works and is doubled; other square sizes are scaled to 96.
+- The bubble masks the same file to a circle of diameter 96: keep the face inside the centre ~80 px. Transparent
+  backgrounds show the frame's panel (face) or the expression's backdrop colour (bubble).
+- Do not draw sweat drops, shock lines and so on into the file; the bubble animates them outside the ring.
+- Bubble load order: `NAME_expression.png` → `NAME.png` → round crop of the trainer front sprite's head (trainer type
   from `register`, else `NAME`, `LEADER_NAME`, `RIVAL_NAME`, `CHAMPION_NAME`) → silhouette with the initial.
+
+### Real-engine shots
+`plugins/Prismfall Cutscenes/tools/engine_capture/capture.sh portraits` (mkxp-z under Xvfb, a lean hard-linked copy of
+the base project: `assemble`, then `portraits`, then `clean`) installs the maps on a first boot and on the second stages
+Ferrow's Landing with stand-in Juno/Larch/dockhand events: `docs/playtest/portraits_*.png` (Juno happy, sad and a
+carried name-only line; Larch; a dockhand's plain box; Larch's bubble; a choice; the box at the top; the player's face).
 
 ### Stand-in sprites
 Prismfall trainer types have no art yet, so `STAND_INS` in `001_Config.rb` maps them to stock sprites
@@ -443,7 +480,7 @@ the code-drawn figure.
 - Battler mouths are guessed (58% of the sprite height). Set `mouth: [dx, dy]` per actor for beams that must leave
   from the right spot (dx is for the unflipped sprite).
 - Highlights pick beam colours from the Pokémon's first type, not from the move named in the caption.
-- Portrait bubbles: one at a time; they need the speaker's event for the tail; they are not shown in battle.
+- Portraits: one face or bubble at a time; a bubble needs the speaker's event for its tail.
 - The scene does not update the map underneath (it is covered).
 
 ## 8. Optional art that would improve it
@@ -452,7 +489,7 @@ the code-drawn figure.
 |---|---|---|
 | Legendary acting sheets | `Graphics/Characters/pkmn_<species>_war.png` (see section 4) | The war climax's biggest missing piece: staged battle sprites read wrong at this scale |
 | Effect sheets | `Graphics/Animations/*.png` (192 px cells) or any grid | Sparse, 4-colour impacts and beam segments for `play_sheet ... blend: :add`, the way Reborn builds its set pieces |
-| Portraits | `Graphics/Portraits/NAME_expression.png` | The biggest win for Rev 7 comedy; see the spec above |
+| Portraits | `Graphics/Portraits/NAME_expression.png` | Every cast member without art talks in the plain box until theirs lands; see the spec above |
 | Soldier charsets | `Graphics/Characters/trainer_ASHKAAR_SOLDIER.png`, `trainer_ISENMAR_SOLDIER.png`, `..._OFFICER` | Replaces the block-figure armies and rulers |
 | Character charsets | `trainer_LEADER_SIGRUN`, `trainer_LEADER_ANJA`, `trainer_MERIDIAN_QUENT`, `trainer_MERIDIAN_AGENT` | Shots 13–14 |
 | Trainer front sprites | `Graphics/Trainers/LEADER_*.png` etc. | VS cards and highlight trainers |
@@ -473,7 +510,9 @@ no leaked sprites or viewports), reads teams from `pbs/trainers.txt` and Core's 
 `--render` composites frames to PNG (needs ImageMagick; `--assets` uses the EBDX base project's sprites, path in
 `PF_ASSETS`). The suite covers both example scenes at 20/40/60/144 FPS and with jitter and lag spikes, all war
 variants, every DSL command, skipping, mash clashes, Core's `match_highlight` call for all 12 rules, the portrait
-tag forms, every expression and emote, the art fallback chain, the Debug menu entries, and the
+tag forms and the three modes (face with the project's real art from `art/out`, opt-in bubble, plain fallback), face
+placement, entry and carry-over, the frame's windowskin cut, Trials talk rows (`:bubble` and option hashes), every
+bubble expression and emote, the art fallback chain, the Debug menu entries, and the
 Rejuvenation/Reborn techniques: flipbooks, `play_sheet` chains, blend modes, stills, pulses, database animations
 (through a stand-in `RPG::Sprite`), on-map mode with event-following actors, camera follow, legend sheets in the war
 climax, and photosensitive mode.

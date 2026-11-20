@@ -5,8 +5,14 @@
 # headless test and the generated dialogue doc (tools/trials_script.rb).
 # Entries:
 #   "text"                              narration box
-#   [:SPEAKER, :expression, "text"]     a character line (portrait bubble when
-#                                       the Cutscenes plugin is installed)
+#   [:SPEAKER, :expression, "text"]     a character line: the speaker's face beside
+#                                       the box (story cast with portrait art, when the
+#                                       Cutscenes plugin is installed), else "Name: text"
+#   [:SPEAKER, :expression, "text", :bubble]   the rare speech-bubble beat (comic
+#                                       relief, drama: SPINE Rev 22). Bubble options:
+#   [:SPK, :expr, "text", { :bubble => true, :emote => [:sweat], :event => "Juno" }]
+#                                       (:event = who the tail points at; a choice
+#                                       prompt [:SPK, :expr, "prompt", :bubble] works too)
 #   { :map => "stage direction" }       doc only (the map event moves people)
 #   { :note => "design note" }          doc only
 #   { :choice => "prompt" | [:SPK, :expr, "prompt"],
@@ -51,24 +57,37 @@ module Prismfall
       return id.to_s.split("_").map(&:capitalize).join(" ")
     end
 
+    # pf_say options for a line's optional 4th element (:bubble, or a Hash).
+    def self.line_style(style)
+      return {} if style.nil?
+      return { :bubble => true } if style == :bubble
+      raise ArgumentError, "Bad line option #{style.inspect} (use :bubble or a Hash)" if !style.is_a?(Hash)
+      ret = {}
+      ret[:bubble] = true if style[:bubble]
+      ret[:emote] = style[:emote] if style[:emote]
+      ret[:event] = style[:event] if style[:event]
+      return ret
+    end
+
     # One line of dialogue, optionally with choices. Returns the choice index.
-    def self.say(speaker, expression, text, commands = nil, cancel = 0)
+    # style: nil (face or plain box), :bubble, or { :bubble => true, :emote => ..., :event => ... }
+    def self.say(speaker, expression, text, commands = nil, cancel = 0, style = nil)
       text = _INTL(text)
       if speaker.nil?
         return pick(text, commands, cancel) if commands
         pbMessage(text)
         return 0
       end
-      return pick("#{speaker_name(speaker)}: #{text}", commands, cancel, speaker, expression, text) if commands
+      return pick("#{speaker_name(speaker)}: #{text}", commands, cancel, speaker, expression, text, style) if commands
       if defined?(pf_say) && defined?(Prismfall::Portrait)
-        pf_say(speaker, expression || :neutral, text, name: speaker_name(speaker))
+        pf_say(speaker, expression || :neutral, text, name: speaker_name(speaker), **line_style(style))
       else
         pbMessage("#{speaker_name(speaker)}: #{text}")
       end
       return 0
     end
 
-    def self.pick(message, commands, cancel = 0, speaker = nil, expression = nil, raw = nil)
+    def self.pick(message, commands, cancel = 0, speaker = nil, expression = nil, raw = nil, style = nil)
       labels = commands.map { |c| _INTL(c) }
       if @answers && !@answers.empty?
         ans = @answers.shift
@@ -78,7 +97,8 @@ module Prismfall
         return idx
       end
       if speaker && defined?(pf_say) && defined?(Prismfall::Portrait)
-        return pf_say(speaker, expression || :neutral, raw, name: speaker_name(speaker), commands: labels, cancel: cancel + 1) || 0
+        return pf_say(speaker, expression || :neutral, raw, name: speaker_name(speaker), commands: labels, cancel: cancel + 1,
+                      **line_style(style)) || 0
       end
       return pbMessage(message, labels, cancel + 1)
     end
@@ -123,7 +143,7 @@ module Prismfall
           tr.say(nil, nil, e)
           return
         when Array
-          tr.say(e[0], e[1], e[2].to_s)
+          tr.say(e[0], e[1], e[2].to_s, nil, 0, e[3])
           return
         when Hash
           # handled below
@@ -138,7 +158,7 @@ module Prismfall
           prompt = e[:choice]
           cancel = e[:cancel] || (labels.length - 1)
           idx = if prompt.is_a?(Array)
-                  tr.say(prompt[0], prompt[1], prompt[2].to_s, labels, cancel)
+                  tr.say(prompt[0], prompt[1], prompt[2].to_s, labels, cancel, prompt[3])
                 else
                   tr.say(nil, nil, prompt.to_s, labels, cancel)
                 end

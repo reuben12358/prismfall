@@ -41,17 +41,21 @@ def parse(lines, per_speaker=False):
         m = re.match(r'HIDDEN ITEM \(([^)]*)\): ([A-Z ]+?)[.:] *"?(.*?)"?$', l)
         if m:
             items.append({'item': m.group(2).replace(' ', ''), 'where': m.group(1), 'text': m.group(3)}); continue
-        parts = re.split(r'(?=\[(?:name|portrait): )', l)
+        parts = re.split(r'(?=\[(?:name|portrait|bubble): )', l)
         got = False
         for p in parts:
-            m = re.match(r'\[(name|portrait): ([^\],]+)(?:, *([^\]]+))?\] *(.*)', p)
+            m = re.match(r'\[(name|portrait|bubble): ([^\],]+)(?:, *([^\]]+))?\] *(.*)', p)
             if not m: continue
             got = True; kind, who, expr, text = m.groups(); text = text.strip(); ag = again
             m2 = re.match(r'\((again)\) *(.*)', text)
             if m2: ag = True; text = m2.group(2)
             if re.match(r'\((before|after|with|no ) ?[^)]*\)', text): text = re.sub(r'^\([^)]*\) *', '', text)
             text = re.sub(r'\*\(([^)]*)\)\*', '', text).strip()
-            line = ('\\pf[%s,%s]%s: %s' % (who.upper(), expr.strip(), who.title(), text)) if kind == 'portrait' else '%s: %s' % (who, text)
+            if kind == 'bubble':   # [bubble: WHO, expr, emote] -> the opt-in speech bubble (SPINE Rev 22)
+                f = [x.strip() for x in (expr or 'neutral').split(',')]
+                line = '\\pfb[%s,%s,%s]%s: %s' % (who.upper(), f[0], '+'.join(f[1:]), who.title(), text)
+            else:
+                line = ('\\pf[%s,%s]%s: %s' % (who.upper(), expr.strip(), who.title(), text)) if kind == 'portrait' else '%s: %s' % (who, text)
             if per_speaker and cur is not None and cur['name'].split(' (later)')[0] != who: cur = None
             if cur is None:
                 if any(n['name'] == who for n in npcs): cur = {'name': who + ' (later)', 'first': [], 'again': [], 'dup': True}
