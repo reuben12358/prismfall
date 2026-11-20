@@ -40,12 +40,12 @@ puzzle part only.
 | Dungeon | Maps | When | Rating | Expected solve | Status |
 |---|---|---|---|---|---|
 | D1 The Glassed Orchard — chime rows | 522 | Ch1, before Gym 1 | **2** | 3 min | built (events over the Orchard), proven 3 moves / 4 states, engine-run |
-| D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | Ch3: before / after Gym 2 | **2** | 5 min | proven (2 posts); map events not yet placed |
+| D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | Ch3: before / after Gym 2 | **2** | 5 min | **525 built and proven** on the built map (2 posts, 5 states; unsolvable without either post); the 524 teach/twist curtains are a request to the map builder (524 is being rebuilt) |
 | D3 Cocoonfall Hollow — crystal-silk anchors | 548 | after Gym 2 | **2** | 5 min | proven; **design fix:** start with TWO bridges taut (a, b). The spec's start (one taut) let anchor 2 tighten all three in one pull, so the parity lesson never happened |
 | D4 Brinecut Mine — points and brine | 544, 545 | Ch3 road (after Gym 1) | **3** | 10 min | spec |
 | D5 Thistledown Manor — don't turn your back | 546, 547 | Ch3 road, cap 19 | **3** | 10 min | spec (runtime: `pfp_pursue(name, :creep)`) |
 | D6 Gullcry Caves — the tide counts your steps | 564, 565 | Act I | **4** | 15 min | spec (runtime: `pfp_step_clock`) |
-| D7 The Rimewood + Glade — frost loom, ice slide | 562, 563 | before Gym 3 | **3** | 10 min | spec; the Glade slide (9 slides) is optional 4/10 |
+| D7 The Rimewood + Glade — frost loom, ice slide | 562, 563 | before Gym 3 | **3** | 10 min | **Frost Loom built and proven** on the built map (2 pulls, 8 states, unique over Z2, unsolvable without the right thread); the Glade slide is the map builder's (562's Hoar Pond slide is built) |
 | D8 The Rehearsal — between the frames | 568 | bonus | **4** | 15 min | spec |
 | D9 Pell Playhouse Backstage — the old revolve | 151–153 | after Gym 2 | **4** | 20 min | built, proven, engine-run (below) |
 | Zenith — Voltaic Sluiceworks | 584, 585 | optional from Act I | **5** | 20 min | spec |
@@ -96,6 +96,14 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   - **State:** S506 / S507 / S508 = cocoons 1–3 lit.
 - **Reward:** TM19 Giga Drain (WORLD §6; in the Deepwood's island hollow) + Silver Powder. Shelly's cameo sidequest
   ("Lost in the Gossamer") is stuck behind curtain 3. Freeing her is the reason most players come.
+- **As built (2026-11-19, `mapgen/puzzles/dungeons.py`, events laid over 525 by `EVENTS`, the map builder's spec untouched):**
+  the lantern hollow is walled with silk round the Deepwood's north-east pocket. Outside → curtain 1 (29,8) → the thicket
+  (x30-36, y7-9; the Bug Catcher's there) → curtain 3 (34,6) → the island (Silver Powder (35,5), TM19 (39,1)); curtain 2
+  (31,10) is the thicket's back door; the island's own curtain (30,4) leans home. A chevron in each curtain's sag shows the
+  way it lets you through (`pfp_silk`, charset `graphics/Characters/pf_silk_curtain.png`); the lantern cocoons hang in the
+  silk wall beside their curtains and glow when lit. Post α (a Joltik on the anchor, (25,7)) stands outside, post β (33,9)
+  inside the thicket, so α → β is forced. Proof on the built map: 2 posts, 5 states, rating 2; unsolvable without either.
+  Shelly stays where the map builder placed her (15,26); moving her behind curtain 3 is a story/map-builder call.
 
 ## D3 Cocoonfall Hollow (548, 32×28, `:BLEED`, optional) — "the shuttle re-threads"
 **Rule:** Mother Loom's Shuttle (key item, from Tamsin after her badge, Gym 2) can **re-thread crystal silk**.
@@ -192,6 +200,11 @@ Gull cries count down the last 3 steps, and a tide-mark rock changes colour.
   - **Unique answer: left + right** (verified by hand over Z₂: middle would refreeze curtain 2).
   - A breather that rewards remembering Gym 2. **State:** S531–S533 = curtains broken.
   - Reward behind it: the trapper's cache (Snowball ×2).
+  - **As built (2026-11-19, events laid over 562 by `EVENTS`):** the east edge's dead-end side path. Curtains (icicles
+    from the frozen fall) at (47,16), (47,17), (47,18) in the 1-wide corridor; the frozen threads are trappers' pegs at
+    (40,19) left, (41,19) middle, (42,19) right; the cache (44,12) in the pocket; a trapper (39,21) explains it ("a frost
+    loom... like a heddle, she said"). S531–S533. Proof on the built map: left + right, 8 states, rating 3; unsolvable
+    without the right thread; unique over Z2.
 - **The frozen Hoar Brook:** an ice slide shortcut (one-way, top to bottom) from the aurora clearing back to Frostwick's
   edge. Shortcut principle.
 - **Rimewood Glade, the Silk-fall pond (563):** a 13×9 slide puzzle at (10,8).

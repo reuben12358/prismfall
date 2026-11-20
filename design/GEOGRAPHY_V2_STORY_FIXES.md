@@ -50,7 +50,7 @@ behind it has moved); **N** = naming only.
 | 241 | Zenith: "on the **north-central** plateau" | W | "on the southern plateau". |
 | 250 | Underveil: "the Sump **beneath the north cliffs**" | W | "beneath the south cliffs". |
 | 253 | Ashkaar: "The **east and south-east** volcanic highlands" | W | The south-east is Elowen's Gloamwood (and the Antumbra inset). "The eastern volcanic highlands, from Cinder Cape on the north-east coast down the Wyrmspine". |
-| 254 | "the caldera of **Mount Cinder**" | N | The volcano's place name is **the Cinderhorn** (maps 664–666, PLACE_NAMES "Mt. Cinder → the Cinderhorn"). Same at 05_ACT_II.md:99, :103 and 11_FINALE_LINES.md:65. |
+| 254 | "the caldera of **Mount Cinder**" | N | The volcano's place name is **the Cinderhorn** (maps 664–666 in PLACE_NAMES). Same at 05_ACT_II.md:99, :103 and 11_FINALE_LINES.md:65. |
 | 258 | Ossaria: "The **north-east** desert and canyon country" | W | "The northern desert and canyon country along the north coast". Worth adding that the war is fought in its western dunes, on neutral ground. |
 
 ## 2. story/00_OVERVIEW.md

@@ -421,3 +421,17 @@ tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Reh
    Frostwick has its Poke Center door (FW_PC) at (6, 34), so the spot should be **[570, 6, 35]** (the tile below the
    door, as in Saltmere and Briarwick). The same stale spot also sends a blacked-out player there. After you fix it,
    `python3 -I tools/worldmap/gen_docs.py` copies it into `pbs/town_map.txt` (and 009_TownMap.rb already reads it live).
+
+**For map builder 9 (puzzle engineer, 2026-11-19 late):** puzzle events are now laid over three maps you own, through
+`mapgen/puzzles/dungeons.py` `EVENTS` (your specs are untouched; `build.py --strict` proves them on your built maps):
+17. **525 Deepwood (D2):** a silk-walled lantern hollow round the north-east pocket, x25-40, y4-10 (walls, three curtains,
+    three cocoons, two Joltik posts, TM19 at (39,1), a sign at (25,9)). Please keep that pocket's terrain as it is, or tell
+    me before you change it (the proof will fail the strict build if a wall lands on open ground or the pocket opens up).
+    Also noticed: the "Crystal silk" gate (41,20) uses tile 17753, which is passable on tileset 53, so the gate can be
+    walked through; a solid graphic (or a character sprite) would hold it.
+18. **562 Rimewood (D7 Frost Loom):** the east edge's dead-end side path (x43-47, y12-19): icicle curtains (47,16-18),
+    three pegs (40-42,19), the cache (44,12), a trapper (39,21). Same request: keep that corridor 1 wide.
+19. **524 Gossamer Wood (D2 teach and twist), when your rebuild settles:** one silk curtain across the trail that leans
+    north (teach), and a short one-way run between two loops (twist). The runtime is ready: an event with the charset
+    `pf_silk_curtain` (rows: down = leans S, left = W, right = E, up = N; `dir_fix`), trigger touch, script
+    `pfp_silk("N", 0)`. Send me the coordinates and I'll add them to the proof.
