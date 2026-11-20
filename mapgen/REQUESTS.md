@@ -1116,8 +1116,8 @@ tests and win rates); trainer table also in `design/BALANCE.md` §6b. No map fil
 10. **Quests moved by badge** (rule R4 with the ring at 13): The Doll Who Waited and Return to Sender at 14, Old Cinder
     at 15 (its rider now died "on the Rimed Sands"), Bedside Manner post-game (18).
 11. **SPINE Rev 21 text** still says "Nobody uses a Mega below that, which retires Brann's Gym 7 Mega Camerupt"; the
-    user's amendment ("he could have one as long as its considered 'Weak'") is what's built: Brann (Gym 7) and the
-    Mourner (Ch9) have weak Megas on Standard and Hard (MEGA_EVOLUTION.md §6.1). **Brann's fight is kept exactly as
+    user's amendment ("he could have one as long as its considered 'Weak'") is what's built: Brann (Gym 7) has a weak
+    Mega on Standard and Hard (MEGA_EVOLUTION.md §6.1). The Mourner has none (no ring in the story, §6.3). [main, fixed] **Brann's fight is kept exactly as
     designed, per the user** (his set, Mega Camerupt, the Volcanic prime and its Sp. Atk boost): the Rev 20 entry's
     item 5 ("Brann's Mega Camerupt needs tuning") is withdrawn.
 

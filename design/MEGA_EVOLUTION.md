@@ -52,7 +52,7 @@ a Mega" rule gives way wherever the story gives the fighter no ring by then, and
   her (the Heartgarden scene after J3); **by the Festival (J4) it does**, and she Megas her **Gardevoir "Veil"**.
 - **Kestrel** has no ring of his own: **no Mega at K1–K7**. **Morwen's Ring** (Key Item, 07_ACT_IV Ch15) is with Edda
   until she gives it to the PC at Morwen's grave, and reaches Kestrel only through the PC (`:ch18_kestrel_ring`). Given
-  in Ch18, it answers him the first time he wears it: **K8 Megas his Scizor**, his duelist since K3
+  in Ch18, it answers him the first time he wears it: **K8 Megas his Scizor**, his duelist since K4
   (`PrismfallMega::MORWEN_RING`, at battle start). Given at the SF instead (after K8), it first shows in the hijack tag
   battle, on the player's side. K9 happens only if he never got it: no Mega.
 - **The PC's ring** is the odd one out (§4).
