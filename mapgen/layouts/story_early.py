@@ -305,7 +305,7 @@ ERRAND = [
     P('JUNO', 'neutral', "Will you come and look? Just LOOK. From the outside. I'll show you the way.", '', 'Juno (lab yard)'),
     QUEST('biscuit', 'Biscuit', "Go with Juno to the old orchard on Windfall Row."),
     P('JUNO', 'happy', "Up the lane, past the stile! I'll be right behind you. Probably in front of you.", '', 'Juno (lab yard)'),
-    S('pfm_set(:juno_errand)')]
+    S('pfm_set(:juno_errand)'), S('pfm_juno_join(:errand, "Juno (lab yard)")')]   # (Juno becomes a follower.)
 
 SENDOFF = [   # story/20_SCRIPT_CH0-2.md, Chapter 2 "Chapter start" (Revision 14: Saltmere is first; map builder 9 re-pour)
     P('LARCH', 'neutral', "Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off -- the Glasswood's walked across it -- so you go round by the coast.", '', 'Larch (sendoff)'),
@@ -317,7 +317,7 @@ SENDOFF = [   # story/20_SCRIPT_CH0-2.md, Chapter 2 "Chapter start" (Revision 14
     P('JUNO', 'shocked', '...Why would you tell me that.', 'shock', 'Juno (sendoff)'),
     ITEM('TOWNMAP'), 'Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.',
     QUEST('eighteen_roads', 'Eighteen Roads', 'Earn the first badge in Saltmere, west along the coast.'),
-    S('pfm_set(:ch2_sendoff)'), SELF('Larch (sendoff)'), SELF('Juno (sendoff)')]
+    S('pfm_set(:ch2_sendoff)'), SELF('Larch (sendoff)'), SELF('Juno (sendoff)'), S('pfm_juno_join(:saltmere)')]
 
 WINGULL_GIRL = [IF('pfm?(:wingull_back)', [N('Girl', "Captain Edda's grounded. She doesn't know what that means. Neither do I.")], [
     IF('pfm?(:wingull_found)', [
@@ -347,6 +347,22 @@ LAMPLIGHTER = [IF('pfm?(:lamps_done)', [N('Lamplighter', "Forty years. And the g
                 N('Lamplighter', "Forty years I've lit this quay. Now a pole does it. The pole doesn't know the fishwives' names."),
                 S('pfm_set(:lamp_talked)')])])])])]
 
+
+# "Biscuit comes home" (story/20_SCRIPT_CH0-2.md, Map 523): Wenna, first talk after S105. The same scene plays here at
+# her quay stall when the PC finds her before the farm; both copies share the 523 BISCUIT self switch
+# (layouts/b3_interiors_523_526.yaml has the farm copy). Juno is following, so her lines point at the follower.
+BISCUIT_HOME = [
+    "(Biscuit hops off your head and into Wenna's apron pocket. He rattles.)",
+    P('WENNA', 'happy', 'Oh, you wretched animal. Thank you. Both of you. Here. And another tart, for the nerves. Mine.'),
+    ITEM('ORANBERRY', 3), S('pfm_quest_done(:biscuit)'), S("$game_self_switches[[523, 0, 'BISCUIT']] = true"),
+    P('WENNA', 'neutral', "Now. It's getting dark, you've glass in your hair, and the inn's full of people with nowhere to be."),
+    N('Wenna', "You're sleeping here tonight. That wasn't a question. I don't do questions after sundown."),
+    P('JUNO', 'happy', "You can have my bed! I'll take the hayloft. I always take the hayloft when we have guests."),
+    N('Juno', "We've never had guests. I'm very excited about the hayloft."),
+    P('COLL', 'deadpan', "Hayloft's got a goat in it.", '', 'Coll Hale'),
+    N('Juno', "I'm excited about the goat."),
+    P('WENNA', 'happy', "Supper's whenever you come in. Coll made the bed, so it's made badly. But it's made."),
+    'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)']
 
 WENNA_FIRST = [
     P('WENNA', 'happy', 'Tarts! Bramble tarts! Last of the— oh. You came off the ferry.'),
@@ -403,17 +419,18 @@ add(100,
            SPR['WENNA'], 'down'),
        page([IF('!pfm?(:wenna_tart)', WENNA_FIRST, [
            P('WENNA', 'happy', 'She named your little group? Of course she did. She named the kettle.')])], SPR['WENNA'], 'down', cond={'switch': 'CH1_STARTER_GOT'}),
-       page([IF('!pfm?(:wenna_tart)', WENNA_FIRST), IF("!pfm?(:biscuit_reward) && !$game_self_switches[[523, 0, 'BISCUIT']]", [
-           P('WENNA', 'happy', "Biscuit's home, rattling like a money box. Here. And another tart, for the nerves. Mine."),
-           ITEM('ORANBERRY', 3), ITEM('BRAMBLETART', 1, 'Bramble Tart'), S('pfm_quest_done(:biscuit)'), S('pfm_set(:biscuit_reward)'),
-           S("$game_self_switches[[523, 0, 'BISCUIT']] = true")], [
-           P('WENNA', 'sad', "She told me about the orchard. That was the Pruetts' place. They had apples when I was a girl.")])],
+       page([IF('!pfm?(:wenna_tart)', WENNA_FIRST), IF("!$game_self_switches[[523, 0, 'BISCUIT']]", BISCUIT_HOME + [S('pfm_set(:biscuit_reward)')], [
+           IF('$game_variables[102] < 2', [
+               P('WENNA', 'neutral', "Going up to the lighthouse? Give Hesper my love, and don't let her give you any back. Bed's yours whenever.")], [
+               P('WENNA', 'sad', "She told me about the orchard. That was the Pruetts' place. They had apples when I was a girl.")])])],
            SPR['WENNA'], 'down', cond={'switch': 'CH1_ORCHARD_DONE'})),
     talk('Coll Hale', SPR['COLL'], 'down',
          [P('COLL', 'neutral', 'Mm. Ferry child.'),
           P('COLL', 'neutral', "Farm's up the lane if you need a bed. Wenna'll say the same but with more words."),
           P('COLL', 'deadpan', "...Did she give you a tart? Then you're family. That's how it works. I didn't make the rules.")],
-         after=[({'switch': 'CH1_ORCHARD_DONE'}, [P('COLL', 'neutral', "Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.")])]),
+         after=[({'switch': 'CH1_ORCHARD_DONE'}, [IF("$game_self_switches[[523, 0, 'BISCUIT']] && $game_variables[102] < 2", [
+             P('COLL', 'neutral', "Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.")], [
+             P('COLL', 'neutral', "Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.")])])]),
     ev('Odo',
        page([IF('!pfm?(:odo_rod)', [N('Odo', "You fish? No? Everybody fishes. You just haven't yet."), ITEM('OLDROD'),
                                     N('Odo', "Catch a Magikarp, throw it back, feel superior. That's the whole sport."), S('pfm_set(:odo_rod)')],
@@ -429,7 +446,7 @@ add(100,
     ev('Juno (lab yard)', page([], cond={'switch': 'CH1_STARTER_GOT'}, through=True),
        page([IF('!pfm?(:juno_errand)', ERRAND, [P('JUNO', 'happy', "Up the lane, past the stile! Biscuit won't wait. Biscuit never waits.")])],
             SPR['JUNO'], 'down', cond={'switch': 'CH1_K1_DONE'}),
-       page([], cond={'switch': 'CH1_ORCHARD_DONE'})),
+       page([], cond={'switch': 'CH1_ORCHARD_DONE'}), page([], cond={'self': 'B'})),
     *strip(ev('Sendoff', page([IF('!pfm?(:ch2_sendoff)', SENDOFF)], trigger='touch', cond={'var': ['STORY_CHAPTER', 2]})), 4),
     ev('Larch (sendoff)', page([]), page([P('LARCH', 'neutral', 'Off you go. Lecture Two is already drafted.')], SPR['LARCH'], 'down', cond={'var': ['STORY_CHAPTER', 2]}),
        page([], cond={'self': 'A'})),
@@ -697,6 +714,7 @@ GRANDMOTHER = [IF('pfm?(:sleeves_done)', [N('Grandmother', 'Sixteen sleeves. I\'
 add(120,
     ev('Arrival', page([
         'A village lashed between tree trunks: rope bridges, treetop houses, bolts of silk drying like flags. At the east edge, orange survey flags march to a half-built brass pylon.',
+        S('pfm_juno_part("Juno (arrival)")'),   # (She stops following.)
         MV('Juno (arrival)', [{'graphic': [SPR['JUNO'], 0, 8, 0]}, {'opacity': 255}]),
         P('JUNO', 'happy', "Briarwick! Smell that? That's mulberry and lanolin and— oh, the egg-seller's open. I'll find you at the gym! Don't start without me! Or do! I'll catch up!", 'sparkle', 'Juno (arrival)'),
         MV('Juno (arrival)', ['through_on', 'up', 'up', 'up', 'up', 'up', 'up', {'opacity': 0}]),

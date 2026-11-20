@@ -455,6 +455,9 @@ def arrival_event():
             P('JUNO', 'deadpan', "That's the Queen's tax-barge. They do that every week. It's tradition. The barge comes, everyone boos, the barge goes."),
             P('JUNO', 'neutral', 'Mum says it\'s the only time in history a tax has been defeated by noise.'),
             P('JUNO', 'happy', "I'm taking the tarts to the Lantern Theatre! Find me on the green after. Don't go into the gym without me! I need to be AUDIENCE!"),
+            {'script': 'pfm_juno_part("Juno (arrival)")'},   # (She stops following.) She runs off toward the theatre.
+            {'move': {'who': 'Juno (arrival)', 'route': [{'graphic': [SE.SPR['JUNO'], 0, 4, 0]}, {'opacity': 255}, 'through_on',
+                                                         'left', 'left', 'left', 'left', 'left', 'left', 'left', {'opacity': 0}], 'wait': True}},
             {'script': 'pfm_set(:sm_arrived)'}, {'selfswitch': ['A', True]}]
     return {'type': 'event', 'name': 'Arrival (East Gate)', 'pages': [
         {'trigger': 'autorun', 'cond': {}, 'commands': [{'if': '!pfm?(:sm_arrived) && $game_player.x >= 80', 'then': cmds, 'else': [{'selfswitch': ['A', True]}]}]},
@@ -570,6 +573,7 @@ def chapter2_close():
             J('neutral', 'Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.'),
             J('neutral', "I'm not sending for them. I'm not letting you walk into the Gossamer by yourself after last night."),
             J('happy', "Also I've never seen a gym puzzle from the INSIDE."),
+            {'script': 'pfm_juno_join(:weavers)'},   # (Juno becomes a follower.)
             {'script': 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the second badge in Briarwick, up the Weavers\' Road.")'},
             {'var': ['STORY_CHAPTER', 3]}, {'script': 'pfm_set(:ch2_closed)'}, {'selfswitch': ['A', True]}]
     return {'type': 'event', 'name': 'Royal notice', 'pages': [
@@ -724,6 +728,7 @@ def build_140(prev=None):
             {'graphic': {'tile': bar}, 'trigger': 'action', 'commands': ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']},
             {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'through': True, 'commands': []}]})
     E.append(seat(m, arrival_event(), 85, 46, 'c'))
+    E.append(seat(m, {'type': 'event', 'name': 'Juno (arrival)', 'pages': [{'through': True, 'commands': []}]}, 84, 46, 'c'))
     for n, x, y in (('Caramel Seller', 30, 38), ('Busker', 54, 33), ('Lamplighter', 72, 53), ('Child with an Ogre puppet', 36, 34),
                     ('Retired Actor on a bench', 28, 55), ('Hound Number Two', 49, 52), ('Grey Pilgrim', 60, 55), ('Accord Inspector', 37, 29),
                     ('Meridian Clerk', 55, 27), ('Fishwife', 66, 46)):

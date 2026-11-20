@@ -6240,7 +6240,7 @@ events:
       - (Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
       - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here. And another tart, for the nerves. Mine.'
       - {script: 'pbReceiveItem(:ORANBERRY, 3)'}
-      - 'QUEST COMPLETE: "Biscuit".'
+      - {script: 'pfm_quest_done(:biscuit)'}
       - {script: '$game_self_switches[[523, 0, ''BISCUIT'']] = true'}
       - '\pf[WENNA,neutral]Wenna: Now. It''s getting dark, you''ve glass in your hair, and the inn''s full of people with nowhere to be.'
       - 'Wenna: You''re sleeping here tonight. That wasn''t a question. I don''t do questions after sundown.'
@@ -6289,7 +6289,8 @@ events:
       - choices: [Sleep., Not yet.]
         cancel: 2
         branches:
-        - - tone: [-255, -255, -255, 0, 20]
+        - - {script: pfm_juno_part}
+          - tone: [-255, -255, -255, 0, 20]
           - {wait: 24}
           - (Crickets. A goat, briefly.)
           - '\pf[JUNO,happy]Juno: (from the hayloft across the yard) \PN? You awake? You can see all eighteen from up here tonight.'
@@ -6340,6 +6341,7 @@ events:
             - 'Coll: It''s a good line.'
             - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
             - {script: 'pfm_set(:ch2_sendoff)'}
+            - {script: 'pfm_juno_join(:saltmere)'}
             else: []
         - [(The bed will keep.)]
       else:

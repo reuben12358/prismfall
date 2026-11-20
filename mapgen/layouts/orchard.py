@@ -110,6 +110,7 @@ def build():
     E.append({'type': 'warp', 'name': 'To Windfall Row c', 'at': [0, 38], 'to': {'map': 521, 'x': 60, 'y': 23, 'dir': 'left'}})
     E.append(c.fog_event('prismfall_glass', 70, 1, 200, 2, 1))
     intro = [
+        {'script': 'pfm_juno_part'},   # she stops at the gate: the map's own Juno event takes over
         "(Rows of apple trees turned to clear glass. Glass apples chime in the wind. The air at the gate shimmers like heat.)",
         say('JUNO', 'sad', "There. That was the Pruetts'. It went last winter, in one night."),
         say('JUNO', 'neutral', "It's pretty, isn't it? I hate that it's pretty."),
@@ -148,6 +149,7 @@ def build():
         {'if': 'GameData::Item.exists?(:FIELDNOTES)', 'then': [{'script': 'pbReceiveItem(:FIELDNOTES)'}],
          'else': ["\\me[Key item get]You received the FIELD NOTES!\\nProfessor Larch's field encyclopedia. It fills in as you meet new fields."]},
         {'switch': ['CH1_ORCHARD_DONE', True]}, {'script': 'pf_bond_add(:JUNO, 1)'},
+        {'script': 'pfm_juno_join(:errand)'},   # she falls in again outside (hidden on 522 while she waits at the gate)
         "QUEST: \"Biscuit\" - bring Biscuit home to Wenna at Hale's Bramble."]
     for i, y in enumerate(range(35, 39)):
         if c.g[y][VX] not in 'aAD' or c.o[1][y][VX]: continue
@@ -167,7 +169,8 @@ def build():
                      say('JUNO', 'shocked', "\\PN, I can't feel my—"), {'script': 'Prismfall.game_over(:GO_ORCHARD)'}]]}],
              'else': [say('JUNO', 'sad', "Biscuit's in there somewhere. Past the farmhand. Please be careful.")]}]},
         {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'right'},
-         'commands': [say('JUNO', 'happy', "You walked through the Bleed like it was fog. Nobody does that. NOBODY.")]}]})
+         'commands': [say('JUNO', 'happy', "You walked through the Bleed like it was fog. Nobody does that. NOBODY.")]},
+        {'cond': {'var': ['STORY_CHAPTER', 2]}}]})
     E.append({'type': 'event', 'name': 'Professor Larch', 'at': P['larch'], 'pages': [
         {'cond': {'switch': 'CH1_K1_DONE'}, 'commands': []},
         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_PROFESSOR', 'dir': 'right'}, 'commands': [say('LARCH', 'neutral', "Lecture One stands. Out. Now. Home.")]},

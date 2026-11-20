@@ -892,6 +892,7 @@ events:
   - cond: {switch: CH1_K1_DONE}
     trigger: autorun
     commands:
+    - {script: pfm_juno_part}
     - (Rows of apple trees turned to clear glass. Glass apples chime in the wind. The air at the gate shimmers like heat.)
     - '\pf[JUNO,sad]Juno: There. That was the Pruetts''. It went last winter, in one night.'
     - '\pf[JUNO,neutral]Juno: It''s pretty, isn''t it? I hate that it''s pretty.'
@@ -965,6 +966,7 @@ events:
         else: ['\me[Key item get]You received the FIELD NOTES!\nProfessor Larch''s field encyclopedia. It fills in as you meet new fields.']
       - switch: [CH1_ORCHARD_DONE, true]
       - {script: 'pf_bond_add(:JUNO, 1)'}
+      - {script: 'pfm_juno_join(:errand)'}
       - 'QUEST: "Biscuit" - bring Biscuit home to Wenna at Hale''s Bramble.'
       else:
       - if: $game_self_switches[[522, 0, 'VEIL']] && !$game_self_switches[[522, 0, 'VEILMSG']]
@@ -1035,6 +1037,8 @@ events:
   - cond: {switch: CH1_ORCHARD_DONE}
     graphic: {sprite: trainer_RIVAL2, dir: right}
     commands: ['\pf[JUNO,happy]Juno: You walked through the Bleed like it was fog. Nobody does that. NOBODY.']
+  - cond:
+      var: [STORY_CHAPTER, 2]
 - type: event
   name: Professor Larch
   at: [2, 38]
@@ -1105,8 +1109,6 @@ events:
   pages:
   - graphic: {sprite: Followers/CARBINK, dir: left}
     commands:
-    - It licks a glass tree, sees you, and phases into the glass.
-    - {comment: 'map builder 9 (REQUESTS, distribution pass item 2): a glimpse only before Tamsin''s badge'}
     - if: pfm_gym_won?(:LEADER_TAMSIN)
       then:
       - It is licking a glass tree. It seems very happy about the whole situation.
@@ -1114,6 +1116,7 @@ events:
 
           WildBattle.start(:CARBINK, 20)'}
       - selfswitch: [A, true]
+      else: ['It licks a glass tree, sees you, and phases into the glass.']
   - cond: {self: A}
 - type: event
   name: Lost Skwovet

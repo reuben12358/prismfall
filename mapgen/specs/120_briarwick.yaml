@@ -83,6 +83,7 @@ events:
   - commands:
     - 'A village lashed between tree trunks: rope bridges, treetop houses, bolts of silk drying like flags. At the east edge, orange survey flags march
       to a half-built brass pylon.'
+    - {script: pfm_juno_part("Juno (arrival)")}
     - move:
         who: Juno (arrival)
         route:

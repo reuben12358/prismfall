@@ -309,6 +309,7 @@ SENDOFF_520 = [P('LARCH', 'neutral', "Eighteen gyms. Saltmere's first. The fores
                {'script': 'pfm_item(:TOWNMAP, 1, "Town Map")'}, '(Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.)',
                {'script': 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'},
                {'script': '$game_variables[102] = 2 if $game_variables[102] < 2'}, {'script': 'pfm_set(:ch2_sendoff)'},
+               {'script': 'pfm_juno_join(:saltmere)'},
                {'script': "ev = $game_map.events.values.find { |e| e.name == 'Professor Larch' }\n$game_self_switches[[520, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}]
 
 
@@ -448,6 +449,18 @@ def orchard_rows(r, x0, y0, x1, y1, kind, gap=5, name=None, sign_at=None, skip_r
     return rows
 
 
+def coll_yard(e):
+    """Coll in the farm yard (story/20_SCRIPT_CH0-2.md, Map 523): after S105 and before the night he has the goat line,
+    then the Headbutt offer as always."""
+    offer = list(e['commands'])
+    line = SE.P('COLL', 'neutral', "Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.")
+    g = {'sprite': e['sprite'], 'dir': e.get('dir', 'down')}
+    return {'type': 'event', 'name': e['name'], 'at': e['at'], 'pages': [
+        {'graphic': g, 'trigger': 'action', 'commands': offer},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': g, 'trigger': 'action',
+         'commands': [{'if': '$game_variables[102] < 2', 'then': [line], 'else': []}] + offer}]}
+
+
 def build_521():
     """Windfall Row (120x70, MEADOW): the farm lanes north of the Mile.  The Hale orchards (apple, pear, plum, cherry,
     quince, medlar; Headbutt trees), the Cider Press yard, the farmhouse (R2_FARM), the duck pond, the old mill tower on
@@ -516,7 +529,7 @@ def build_521():
           trainer((104, 40), 'PICNICKER', 'Mae', 'Battle first, sandwich after! House rules.', 'You can have a sandwich anyway!', d='left'),
           talk('Hay-cart Driver', (62, 44), 'NPC 25', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
                "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
-          at(ev['Coll (Headbutt tutor)'], 52, 50), at(ev['Wayside shrine'], 26, 22),
+          coll_yard(at(ev['Coll (Headbutt tutor)'], 52, 50)), at(ev['Wayside shrine'], 26, 22),
           {'type': 'berry', 'at': [36, 46], 'berry': 'PECHABERRY'}, {'type': 'berry', 'at': [70, 30], 'berry': 'ORANBERRY'},
           item((14, 36), 'POKEBALL'), item((114, 46), 'POTION'), hidden((80, 20), 'ORANBERRY', 'HiddenItem (windfall)'),
           obj('Cider press', (101, 54), ['THE CIDER PRESS. A screw press as big as a cart, smelling of last autumn. A sign: "WINDFALLS ONLY. WE CAN TELL."']),

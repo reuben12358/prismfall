@@ -189,6 +189,7 @@ events:
       - '\pf[JUNO,neutral]Juno: Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.'
       - '\pf[JUNO,neutral]Juno: I''m not sending for them. I''m not letting you walk into the Gossamer by yourself after last night.'
       - '\pf[JUNO,happy]Juno: Also I''ve never seen a gym puzzle from the INSIDE.'
+      - {script: 'pfm_juno_join(:weavers)'}
       - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the second badge in Briarwick, up the Weavers'' Road.")'}
       - var: [STORY_CHAPTER, 3]
       - {script: 'pfm_set(:ch2_closed)'}
@@ -321,6 +322,22 @@ events:
       - '\pf[JUNO,neutral]Juno: Mum says it''s the only time in history a tax has been defeated by noise.'
       - '\pf[JUNO,happy]Juno: I''m taking the tarts to the Lantern Theatre! Find me on the green after. Don''t go into the gym without me! I need to be
         AUDIENCE!'
+      - {script: pfm_juno_part("Juno (arrival)")}
+      - move:
+          who: Juno (arrival)
+          route:
+          - graphic: [trainer_RIVAL2, 0, 4, 0]
+          - {opacity: 255}
+          - through_on
+          - left
+          - left
+          - left
+          - left
+          - left
+          - left
+          - left
+          - {opacity: 0}
+          wait: true
       - {script: 'pfm_set(:sm_arrived)'}
       - selfswitch: [A, true]
       else:
@@ -328,6 +345,12 @@ events:
   - cond: {self: A}
     commands: []
   at: [85, 46]
+- type: event
+  name: Juno (arrival)
+  pages:
+  - through: true
+    commands: []
+  at: [84, 46]
 - type: event
   name: Caramel Seller
   pages:

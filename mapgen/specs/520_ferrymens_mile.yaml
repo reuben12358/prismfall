@@ -81,6 +81,7 @@ events:
       - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
       - {script: '$game_variables[102] = 2 if $game_variables[102] < 2'}
       - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'pfm_juno_join(:saltmere)'}
       - {script: 'ev = $game_map.events.values.find { |e| e.name == ''Professor Larch'' }
 
           $game_self_switches[[520, ev.id, ''A'']] = true if ev

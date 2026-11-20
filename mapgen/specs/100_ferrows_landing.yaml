@@ -609,6 +609,7 @@ events:
       - {script: 'pfm_quest(:biscuit, "Biscuit", "Go with Juno to the old orchard on Windfall Row.")'}
       - '\pf[JUNO,happy,,Juno (lab yard)]Juno: Up the lane, past the stile! I''ll be right behind you. Probably in front of you.'
       - {script: 'pfm_set(:juno_errand)'}
+      - {script: 'pfm_juno_join(:errand, "Juno (lab yard)")'}
       else: ['\pf[JUNO,happy]Juno: Up the lane, past the stile! Biscuit won''t wait. Biscuit never waits.']
     trigger: action
     move: fixed
@@ -618,6 +619,10 @@ events:
     trigger: action
     move: fixed
     cond: {switch: CH1_ORCHARD_DONE}
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: B}
   at: [53, 12]
 - type: event
   name: Sendoff 1
@@ -642,6 +647,7 @@ events:
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+      - {script: 'pfm_juno_join(:saltmere)'}
     trigger: touch
     move: fixed
     cond:
@@ -670,6 +676,7 @@ events:
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+      - {script: 'pfm_juno_join(:saltmere)'}
     trigger: touch
     move: fixed
     cond:
@@ -698,6 +705,7 @@ events:
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+      - {script: 'pfm_juno_join(:saltmere)'}
     trigger: touch
     move: fixed
     cond:
@@ -726,6 +734,7 @@ events:
       - {script: 'pfm_set(:ch2_sendoff)'}
       - {script: 'pbSetSelfSwitch(%EV[Larch (sendoff)]%, "A", true)'}
       - {script: 'pbSetSelfSwitch(%EV[Juno (sendoff)]%, "A", true)'}
+      - {script: 'pfm_juno_join(:saltmere)'}
     trigger: touch
     move: fixed
     cond:
@@ -796,15 +805,26 @@ events:
   - commands:
     - if: '!pfm?(:wenna_tart)'
       then: *id001
-    - if: '!pfm?(:biscuit_reward) && !$game_self_switches[[523, 0, ''BISCUIT'']]'
+    - if: '!$game_self_switches[[523, 0, ''BISCUIT'']]'
       then:
-      - '\pf[WENNA,happy]Wenna: Biscuit''s home, rattling like a money box. Here. And another tart, for the nerves. Mine.'
+      - (Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
+      - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here. And another tart, for the nerves. Mine.'
       - {script: 'pfm_item(:ORANBERRY, 3)'}
-      - {script: 'pfm_item(:BRAMBLETART, 1, "Bramble Tart")'}
       - {script: 'pfm_quest_done(:biscuit)'}
-      - {script: 'pfm_set(:biscuit_reward)'}
       - {script: '$game_self_switches[[523, 0, ''BISCUIT'']] = true'}
-      else: ['\pf[WENNA,sad]Wenna: She told me about the orchard. That was the Pruetts'' place. They had apples when I was a girl.']
+      - '\pf[WENNA,neutral]Wenna: Now. It''s getting dark, you''ve glass in your hair, and the inn''s full of people with nowhere to be.'
+      - 'Wenna: You''re sleeping here tonight. That wasn''t a question. I don''t do questions after sundown.'
+      - '\pf[JUNO,happy]Juno: You can have my bed! I''ll take the hayloft. I always take the hayloft when we have guests.'
+      - 'Juno: We''ve never had guests. I''m very excited about the hayloft.'
+      - '\pf[COLL,deadpan,,Coll Hale]Coll: Hayloft''s got a goat in it.'
+      - 'Juno: I''m excited about the goat.'
+      - '\pf[WENNA,happy]Wenna: Supper''s whenever you come in. Coll made the bed, so it''s made badly. But it''s made.'
+      - 'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)'
+      - {script: 'pfm_set(:biscuit_reward)'}
+      else:
+      - if: $game_variables[102] < 2
+        then: ['\pf[WENNA,neutral]Wenna: Going up to the lighthouse? Give Hesper my love, and don''t let her give you any back. Bed''s yours whenever.']
+        else: ['\pf[WENNA,sad]Wenna: She told me about the orchard. That was the Pruetts'' place. They had apples when I was a girl.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 19, dir: down}
@@ -818,7 +838,10 @@ events:
     trigger: action
     move: fixed
     graphic: {sprite: NPC 03, dir: down}
-  - commands: ['\pf[COLL,neutral]Coll: Orchard went glass the same week my hens stopped laying. Don''t know that it''s connected. Don''t know that it isn''t.']
+  - commands:
+    - if: $game_self_switches[[523, 0, 'BISCUIT']] && $game_variables[102] < 2
+      then: ['\pf[COLL,neutral]Coll: Goat''s called Parsnip. Second Parsnip. First one was a donkey. Juno doesn''t hold with new names.']
+      else: ['\pf[COLL,neutral]Coll: Orchard went glass the same week my hens stopped laying. Don''t know that it''s connected. Don''t know that it isn''t.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 03, dir: down}

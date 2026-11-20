@@ -157,14 +157,24 @@ events:
     move: fixed
     commands: ['Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.', 'Hay-cart Driver: Now it''s all glass and I go round
         by Saltmere. Two days. Glass doesn''t pay my horse.']
-- type: npc
+- type: event
   name: Coll (Headbutt tutor)
   at: [52, 50]
-  sprite: NPC 03
-  dir: down
-  commands:
-  - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
-  - {script: 'pbMoveTutorChoice(:HEADBUTT)'}
+  pages:
+  - graphic: &id002 {sprite: NPC 03, dir: down}
+    trigger: action
+    commands:
+    - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
+    - &id003 {script: 'pbMoveTutorChoice(:HEADBUTT)'}
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: *id002
+    trigger: action
+    commands:
+    - if: $game_variables[102] < 2
+      then: ['\pf[COLL,neutral]Coll: Goat''s called Parsnip. Second Parsnip. First one was a donkey. Juno doesn''t hold with new names.']
+      else: []
+    - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
+    - *id003
 - type: sign
   at: [26, 22]
   post: false
