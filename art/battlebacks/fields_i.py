@@ -27,9 +27,11 @@ class Plan:
     """labels(panel) -> material labels (art px; -1 = never sample); layout(x, y, lab) -> wanted labels in the
     margins (panel art coords); sides = (left rows, right rows) repainted below the panel's top edge."""
 
-    def __init__(self, labels, layout, nlab, sides=(0, 0), block=16, seed=1, top=True, feather=6):
+    def __init__(self, labels, layout, nlab, sides=(0, 0), block=16, seed=1, top=True, feather=6, post=None,
+                 relight=0):
         self.labels, self.layout, self.nlab = labels, layout, nlab
         self.sides, self.block, self.seed, self.top, self.feather = sides, block, seed, top, feather
+        self.post, self.relight = post, relight
 
     def room(self, bg, origin):
         """The filled art-pixel room (margins painted where the plan says, the old extension elsewhere)."""
@@ -56,6 +58,15 @@ class Plan:
         if self.top:
             order.append("top")
         R.fill(ex, order=order, seed=self.seed)
+        if self.relight:
+            # smooth (non pixel-art) panels: keep the patches' detail but take the large-scale shading from the old
+            # extension (blurred far past any recognisable shape), so patch seams don't show as light/dark blocks
+            from scipy.ndimage import gaussian_filter
+            fixed = ~R.P
+            lo = lambda A: np.stack([gaussian_filter(A[..., c], self.relight) for c in range(3)], -1)
+            R.A[fixed] = np.clip(R.A + lo(a) - lo(R.A), 0, 255)[fixed]
+        if self.post:
+            self.post(R, lab)
         return R, old
 
     def region(self, R):
@@ -203,6 +214,110 @@ def all_wall(x, y, lab):
 PLANS["5a681c5c1e"] = Plan(wall_labels(4, 24, vmin=0.36), all_wall, 1, sides=(100, 100), block=14, seed=5)
 # SNOWY_MOUNTAIN: the same panel in its snow-cave colours
 PLANS["a0dc52e2d4"] = Plan(wall_labels(4, 24, vmin=0.36), all_wall, 1, sides=(100, 100), block=14, seed=6)
+
+
+def gem_tips(is_gem, max_h=6):
+    """Post step: crystals cut by the panel's top edge get their tips drawn above it (the panel's own crystal colours,
+    tapering one art pixel per side per row, darkest colour on the edges) instead of a flat cut."""
+    def post(R, lab):
+        top = R.panel[0]
+        g = is_gem(R.panel[:3])
+        runs, x = [], 0
+        while x < R.bw:
+            if g[0, x]:
+                a = x
+                while x < R.bw and g[0, x]:
+                    x += 1
+                runs.append((a, x - 1))
+            x += 1
+        for a, b in runs:
+            seg = R.panel[0:3, a:b + 1][g[0:3, a:b + 1]]
+            if not len(seg):
+                continue
+            lum = seg.sum(-1)
+            dark, light = seg[lum.argmin()], seg[lum.argmax()]
+            h = min(max_h, (b - a) // 2 + 1)
+            for i in range(1, h + 1):
+                l, r = a + i // 2 + (i > 1), b - i // 2 - (i > 1)
+                if l > r:
+                    break
+                y = R.T - i
+                for xx in range(l, r + 1):
+                    c = top[xx]
+                    if xx in (l, r):
+                        c = dark
+                    elif xx == l + 1 and i < h:
+                        c = light
+                    R.A[y, R.L + xx] = c
+    return post
+
+
+def gem_mask(p):
+    r, g, b, s, v = hsv(p)
+    return (s > 0.45) & (v > 0.45)
+
+
+def cave_labels(r1, vmin, smax=0.45, extra_bad=None):
+    def fn(p):
+        r, g, b, s, v = hsv(p)
+        lab = np.full(p.shape[:2], -1, np.int16)
+        y = rows(lab)
+        ok = (y < r1) & (v >= vmin) & (s <= smax)
+        if extra_bad is not None:
+            ok &= ~extra_bad(p)
+        # keep a margin around excluded things so no patch carries half a crystal
+        from scipy.ndimage import binary_dilation
+        ok &= ~binary_dilation(~ok & (y < r1), iterations=2)
+        lab[ok] = 0
+        return lab
+    return fn
+
+
+# CRYSTAL_CAVERN / DARK_CRYSTAL: Rejuvenation's crystal tunnel. Above it the streaked wall goes on (crystals and the
+# tunnel's dark mouth are never copied); crystals cut by the top edge get their tips.
+def tunnel_labels(vwall, vdark, bad=None):
+    """0 wall, 1 the tunnel's dark mouth (upper left), -1 crystals / floor."""
+    base = cave_labels(70, vwall, extra_bad=bad)
+
+    def fn(p):
+        lab = base(p)
+        r, g, b, s, v = hsv(p)
+        y, x = rows(lab), cols(lab)
+        lab[(v < vdark) & (y < 90) & (x < 130)] = 1
+        return lab
+    return fn
+
+
+def tunnel_layout(x, y, lab):
+    """Wall everywhere, except that the tunnel mouth cut by the panel's left edge closes in a rounded end 9 art px
+    into the margin."""
+    L = np.zeros(x.shape, np.int16)
+    run = np.where(lab[:, 0] == 1)[0]
+    if len(run):
+        a, b = run.min(), run.max()
+        yc, ry = (a + b) / 2.0, (b - a) / 2.0 + 1
+        inside = (x < 0) & (((x - 0) / 9.0) ** 2 + ((y - yc) / ry) ** 2 < 1)
+        L[inside] = 1
+    # the dark arch cut by the panel's top edge closes in a low curve just above it
+    cs = np.where(lab[0] == 1)[0]
+    if len(cs):
+        a, b = cs.min() - 6, cs.max()
+        xc, hw = (a + b) / 2.0, (b - a) / 2.0 + 1
+        h = 7 * np.sqrt(np.clip(1 - ((x - xc) / hw) ** 2, 0, 1))
+        L[(y < 0) & (-y < h)] = 1
+    return L
+
+
+PLANS["a84f34677a"] = Plan(tunnel_labels(0.25, 0.25), tunnel_layout, 2, sides=(110, 110), block=12, seed=7,
+                           post=gem_tips(gem_mask))
+PLANS["4bb0600cef"] = Plan(tunnel_labels(0.12, 0.12, bad=lambda p: hsv(p)[4] > 0.62), tunnel_layout, 2,
+                           sides=(110, 110), block=12, seed=8, post=gem_tips(lambda p: hsv(p)[4] > 0.62))
+# DRAGONS_DEN (both stages): the smoothed den wall (1:1 pixels); its lava vein is never copied
+PLANS["ea51db409b"] = Plan(cave_labels(200, 0.0, smax=0.75), all_wall, 1, sides=(250, 250), block=40, seed=9,
+                           relight=14)
+# VOLCANIC / ASHEN_WASTE: the caldera tunnel; lava is never copied, so the stream down the panel's right edge gets a
+# rock bank instead of a mirrored twin
+PLANS["f6bc3067b7"] = Plan(cave_labels(70, 0.0, smax=0.78), all_wall, 1, sides=(110, 110), block=16, seed=10)
 
 
 #---------------------------------------------------------------------------------------------
