@@ -57,66 +57,89 @@ def can_place(m, n, x, y):
     if x < 0 or y < 0 or x + w > m.W or y + h > m.H: return False
     if m.taken[y:y + h, x:x + w].any() or m.cliff[y:y + h, x:x + w].any(): return False
     if hasattr(m, 'bfoot') and m.bfoot[y:y + h, x:x + w].any(): return False
+    if np.isin(m.cls[y:y + h, x:x + w], list('wWsS')).any(): return False
     sub = m.ht[y:y + h, x:x + w]
     return sub.min() == sub.max()
 
 
 def put(m, n, x, y, link=None, dname=None):
-    m.stamp(n, x, y, link, dname)
+    """a building: its cells keep cobble underneath (no grass verge round the block)"""
     w, h = SZ(n)
-    sub = m.cls[y:y + h, x:x + w]; sub[sub == 'T'] = 'B'
+    sub = m.cls[y:y + h, x:x + w]; sub[np.isin(sub, ['T', '.'])] = 'c'
+    d = m.stamp(n, x, y, link, dname)
+    if d: m.under[d[1], d[0]] = 'c'
     return (x + STAMPS[n]['door'][0], y + STAMPS[n]['door'][1]) if 'door' in STAMPS[n] else None
 
 
-def rank(m, x0, x1, yb, pool, seed, maxh, minh=6, alley_every=0, last=None, back='c'):
-    """buildings shoulder to shoulder from x0 to x1 (inclusive), every bottom row on yb (the street is yb+1).  Picks
-    heights near maxh so the backs stay tight; leftover space above a lower roof becomes a back court (class `back`).
-    alley_every: leave a 2-wide alley north through the rank about that often.  Returns placed (name, x, y)."""
+def rank(m, x0, x1, yb, pool, seed, maxh, minh=6, alley_every=0, last=None, setback=0.0):
+    """buildings shoulder to shoulder from x0 to x1 (inclusive), bottom rows on yb (the street is yb+1).  Heights near
+    maxh keep the backs tight; leftover space above a lower roof is back court.  alley_every: a 2-wide alley north
+    through the rank about that often.  setback: chance a house stands one row back behind a stoop."""
     rng = random.Random(seed); x = x0; placed = []; since = 0; used = set()
     while x <= x1:
         room = x1 - x + 1
-        if room < 3:
-            m.rect(x, yb - 2, room, 3, back, only='.tT'); break
+        if room < 3: break
         if alley_every and since >= alley_every and room > 8:
-            m.rect(x, yb - maxh + 1, 2, maxh, 'c', only='.tTB'); x += 2; since = 0; continue
-        c = [n for n in pool if minh <= SZ(n)[1] <= maxh and SZ(n)[0] <= room and n != last and can_place(m, n, x, yb - SZ(n)[1] + 1)]
+            m.court[yb - maxh + 1:yb + 1, x:x + 2] = True; m.alleys.append((x, yb - maxh + 1, 2, maxh)); x += 2; since = 0; continue
+        sb = 1 if setback and rng.random() < setback else 0
+        c = [n for n in pool if minh <= SZ(n)[1] <= maxh - sb and SZ(n)[0] <= room and n != last and can_place(m, n, x, yb - sb - SZ(n)[1] + 1)]
+        if not c and sb:
+            sb = 0; c = [n for n in pool if minh <= SZ(n)[1] <= maxh and SZ(n)[0] <= room and n != last and can_place(m, n, x, yb - SZ(n)[1] + 1)]
         if not c: x += 1; continue
         fits = [n for n in c if room - SZ(n)[0] == 0 or room - SZ(n)[0] >= 3]
         c = fits or c
-        c.sort(key=lambda n: (abs(maxh - SZ(n)[1]) + (2 if n in used else 0) + rng.random() * 2.2))
+        c.sort(key=lambda n: (abs(maxh - sb - SZ(n)[1]) + (2 if n in used else 0) + rng.random() * 2.2))
         n = c[0]; w, h = SZ(n)
-        put(m, n, x, yb - h + 1); placed.append((n, x, yb - h + 1)); used.add(n); last = n
-        if h < maxh: m.rect(x, yb - maxh + 1, w, maxh - h, back, only='.tT')
+        put(m, n, x, yb - sb - h + 1); placed.append((n, x, yb - sb - h + 1)); used.add(n); last = n
         x += w; since += w
     return placed
 
 
-def block(m, x0, x1, ytop, yb, pool, seed, alley_every=14):
-    """fill a block whose south edge is street row yb+1: ranks from the bottom up with 2-row alleys between them"""
+def block(m, x0, x1, ytop, yb, pool, seed, alley_every=14, setback=0.15):
+    """fill a block whose south edge is street row yb+1: ranks from the bottom up with 2-row back alleys between them;
+    every cell not built on becomes a cobbled back court (props, laundry, a well)"""
+    m.rect(x0, ytop, x1 - x0 + 1, yb - ytop + 1, 'c', only='T.')
+    m.court[ytop:yb + 1, x0:x1 + 1] |= (m.cls[ytop:yb + 1, x0:x1 + 1] == 'c')
     depth = yb - ytop + 1; k = 0
     while depth >= 6:
         if depth <= 11: hmax = depth
-        elif depth < 14: hmax = depth - 8 if depth - 8 >= 6 else depth          # leave room for an alley and a 6-row rank
+        elif depth < 14: hmax = depth - 8 if depth - 8 >= 6 else depth
         else: hmax = min(10, depth - 8)
-        rank(m, x0, x1, yb, pool, seed + k, hmax, minh=max(6, min(hmax, 6)), alley_every=alley_every)
+        rank(m, x0, x1, yb, pool, seed + k, hmax, minh=max(6, min(hmax, 6)), alley_every=alley_every, setback=setback if k == 0 else 0)
         yb -= hmax
         if depth - hmax >= 8:
-            m.rect(x0, yb - 1, x1 - x0 + 1, 2, 'c', only='.tTB')               # the back alley
-            yb -= 2
+            m.alleys.append((x0, yb - 1, x1 - x0 + 1, 2)); yb -= 2
         depth = yb - ytop + 1; k += 1
-    if depth > 0: m.rect(x0, ytop, x1 - x0 + 1, depth, 'c', only='.tT')
 
 
-def courts(m, seed):
-    """back courts (cobbled class c with no building): laundry lines, barrels, crates, a tree or a well"""
+def gardens(m, seed, trees=('tr_oak', 'tr_oak2', 'tr_teal', 'tr_pink', 'tr_oak')):
+    """leftover block interiors (behind lower roofs, under terrace walls, block corners) become walled gardens:
+    grass with fruit trees and shrubs, the alleys and doorsteps stay cobbled"""
+    keep = np.zeros_like(m.court)
+    for x, y, w, h in m.alleys: keep[y:y + h, x:x + w] = True
+    for e in m.events:
+        if e.get('type') == 'door': x, y = e['at']; keep[y:y + 3, max(0, x - 1):x + 2] = True
+    street = np.isin(m.cls, ['c', 'f']) & ~m.court
+    pad = np.pad(street, 1); near = sum(np.roll(np.roll(pad, dy, 0), dx, 1)[1:-1, 1:-1] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) > 0
+    g = m.court & (m.cls == 'c') & ~m.taken & ~m.cliff & ~keep & ~near
+    m.cls[g] = '.'
+    m.smooth('.', into='c', passes=1, only='c')
+    m.autotrees(400, list(trees), on='.', seed=seed, gap=1)
+    return int(g.sum())
+
+
+def courts(m, seed, p=0.07):
+    """back courts and alleys (m.court): laundry lines, barrels, crates, casks, a well-tub"""
     rng = random.Random(seed)
-    props = ['hb_washline', 'hb_barrels', 'hb_crates4', 'hb_boxes', 'hb_cask', 'hb_keg', 'hb_barrel', 'hb_rugline', 'sh_crates', 'hb_tubs']
-    for y in range(m.H):
-        for x in range(m.W):
-            if m.cls[y, x] == 'c' and not m.taken[y, x] and rng.random() < 0.05:
-                n = rng.choice(props); w, h = SZ(n)
-                if m.free(x, y, w, h, on='c') and not m.cliff[y:y + h, x:x + w].any():
-                    m.stamp(n, x, y)
+    props = ['hb_washline', 'hb_barrels', 'hb_crates4', 'hb_boxes', 'hb_cask', 'hb_keg', 'hb_barrel', 'hb_rugline', 'hb_tubs', 'hb_barrel2', 'hb_boxes2', 'hb_rugline2']
+    cells = [tuple(c) for c in np.argwhere(m.court & np.isin(m.cls, ['c', '.']) & ~m.taken)]
+    rng.shuffle(cells)
+    for y, x in cells:
+        if rng.random() > p * 3: continue
+        n = rng.choice(props); w, h = SZ(n)
+        if m.free(x, y, w, h, on='c.') and not m.cliff[y:y + h, x:x + w].any() and m.court[y:y + h, x:x + w].all() \
+                and not m.taken[max(0, y - 1):y + h + 1, max(0, x - 1):x + w + 1].any():
+            m.stamp(n, x, y)
 
 
 def lamps(m, pts, on='cf'):
@@ -135,14 +158,18 @@ def props(m, items, on='cf', r=2):
         if not ok: print('  (no room for %s near %d,%d)' % (n, x, y))
 
 
-def overs(m, n, x, y):
+def overs(m, n, x, y, z=None):
     """lay a stamp's tiles as over-tiles (decals and overhead strings that need no footprint)"""
     L = np.array(STAMPS[n]['layers'])
-    for z in range(3):
+    for zz in range(3):
         for dy in range(L.shape[1]):
             for dx in range(L.shape[2]):
-                t = int(L[z, dy, dx])
-                if t: m.over.append((z, x + dx, y + dy, t))
+                t = int(L[zz, dy, dx])
+                if t: m.over.append((zz if z is None else z, x + dx, y + dy, t))
+
+
+def string_lights(m, x0, x1, y):
+    for x in range(x0, x1 + 1): overs(m, 'pf_lstring%d' % (x % 3), x, y, z=2)
 
 
 def seat(m, e, x, y, on='cf.', r=6):
@@ -152,11 +179,51 @@ def seat(m, e, x, y, on='cf.', r=6):
     return e
 
 
+def door_props(m, rng, items=('hb_barrel', 'hb_cask', 'hb_keg', 'hb_boxes', 'hb_barrel2'), p=0.5):
+    """a barrel or crate beside shop doors (never in front of a door)"""
+    for e in m.events:
+        if e.get('type') != 'door' and not e.get('name', '').endswith(' door'): continue
+    for nm, x, y in list(m.stamps):
+        if not nm.startswith(('sp_', 'wh_')) or 'door' not in STAMPS[nm]: continue
+        dx, dy = STAMPS[nm]['door']; X, Y = x + dx, y + dy
+        for side in (-2, 2, -1, 1):
+            n = rng.choice(items); w, h = SZ(n)
+            yy = Y + 1 - h + 1 if h > 1 else Y + 1
+            xx = X + side
+            if rng.random() < p and m.free(xx, Y + 1, w, 1, on='cf') and abs(xx - X) >= 1:
+                if h == 1: m.stamp(n, xx, Y + 1); break
+
+
+NPC_LINES = ["Mind your purse. Not because of thieves. Because of the caramel.", "Three plays tonight and I've tickets to two. Choices!",
+             "My grandmother booed a Queen's barge in AF 92. She still has the voice for it.", "Salt's up a copper a sack. Blame the weather. Everyone does.",
+             "The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.", "Don't stand under the gulls by the fish stalls.",
+             "Dorian waved at me once. From a balcony. I think it was at me.", "The free port's free. The rent isn't.",
+             "My cousin's in the Hound chorus. He says 'GRR' professionally.", "You can tell an outlander by the way they look up at the roofs.",
+             "If you get lost, walk downhill. Everything in Saltmere ends at the water.", "They paint the playbills fresh every morning. The rain washes them by noon.",
+             "Lamplighter's late. He's always late. The lamps forgive him.", "That's real salt on the steps, not frost. Mind your footing.",
+             "Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.", "Fresh mackerel! Ordinary mackerel! Very ordinary!",
+             "I came for a week. That was eleven years ago.", "The gate shuts at the Pageant. Tradition. Nobody remembers why. Probably a play."]
+
+
+def crowd(m, cells, n, seed, on='cf', sprites=None, moving=0.6):
+    """townsfolk filling a street or square: random walkers and loiterers with a line each"""
+    rng = random.Random(seed); out = []
+    sprites = sprites or ['NPC %02d' % i for i in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)]
+    cells = list(cells); rng.shuffle(cells)
+    for x, y in cells:
+        if len(out) >= n: break
+        if not (m.inb(x, y) and m.cls[y, x] in on and not m.taken[max(0, y - 1):y + 2, max(0, x - 1):x + 2].any() and not m.cliff[y, x]): continue
+        e = {'type': 'npc', 'name': 'Townsfolk %d' % (len(out) + 1), 'sprite': rng.choice(sprites), 'dir': rng.choice(['down', 'left', 'right', 'up']),
+             'move': 'random' if rng.random() < moving else 'fixed', 'text': rng.choice(NPC_LINES), 'at': [x, y]}
+        m.taken[y, x] = True; out.append(e)
+    m.events += out
+    return out
+
+
 def salt_lake(m, box, seed):
-    """white salt flats (class S) with brine pans and heaps inside box"""
-    x0, y0, x1, y1 = box; rng = random.Random(seed)
+    """white salt flats (class S) inside box (only over water)"""
+    x0, y0, x1, y1 = box
     m.rect(x0, y0, x1 - x0 + 1, y1 - y0 + 1, 'S', only='w')
-    return rng
 
 
 def paint_salt(m, seed):
@@ -164,22 +231,24 @@ def paint_salt(m, seed):
     salt = [K.P1('salt%d' % i) for i in range(4)]
     for y, x in np.argwhere(m.cls == 'S'):
         m.L[0, y, x] = salt[0] if rng.random() < 0.55 else rng.choice(salt); m.L[1, y, x] = 0
-    for kind in ('f2',):                                         # quay faces standing on salt get the dry footing
-        pass
 
 
-def brine_pans(m, x0, y0, nx, ny, pw=4, ph=2, gap=1):
-    """rectangular salt pans on the flats: brine with clay bunds"""
-    for j in range(ny):
-        for i in range(nx):
-            px, py = x0 + i * (pw + gap), y0 + j * (ph + gap)
-            if not (m.cls[py:py + ph, px:px + pw] == 'S').all() or m.taken[py:py + ph, px:px + pw].any(): continue
-            for yy in range(py, py + ph):
-                for xx in range(px, px + pw):
-                    v = ('n' if yy == py else 's' if yy == py + ph - 1 else '') + ('w' if xx == px else 'e' if xx == px + pw - 1 else '')
-                    v = {'': 'c', 'nw': 'nw', 'ne': 'ne', 'sw': 'sw', 'se': 'se', 'n': 'n', 's': 's', 'w': 'w', 'e': 'e'}.get(v, v)
-                    if ph == 1: v = 'ns' if pw == 1 else ('w' if xx == px else 'e' if xx == px + pw - 1 else 'ns')
-                    m.tile(K.P1('brine_' + v), xx, yy, 1); m.cls[yy, xx] = 'B'
+def brine_pans(m, x0, y0, x1, y1, seed, pw=(3, 6), ph=(2, 3)):
+    """salt pans of uneven size on the flats (rows of brine with clay bunds, staggered like real salterns), leaving
+    raking paths between them"""
+    rng = random.Random(seed); y = y0
+    while y < y1:
+        h = rng.randint(*ph); x = x0 + rng.randint(0, 2)
+        while x < x1:
+            w = rng.randint(*pw)
+            if x + w <= x1 and y + h <= y1 and (m.cls[y:y + h, x:x + w] == 'S').all() and not m.taken[y:y + h, x:x + w].any():
+                for yy in range(y, y + h):
+                    for xx in range(x, x + w):
+                        v = ('n' if yy == y else 's' if yy == y + h - 1 else '') + ('w' if xx == x else 'e' if xx == x + w - 1 else '')
+                        v = v or 'c'
+                        m.tile(K.P1('brine_' + v), xx, yy, 1); m.cls[yy, xx] = 'B'
+            x += w + rng.choice((1, 1, 2))
+        y += h + 1
 
 
 def dry_footings(m):
@@ -195,11 +264,26 @@ def dry_footings(m):
 def boats(m, items):
     for n, x, y in items:
         L = np.array(STAMPS[n]['layers']); hh, ww = L.shape[1:]
-        if all(m.cls[y + j, x + i] == 'w' and m.L[2, y + j, x + i] == 0 for i in range(ww) for j in range(hh)):
+        if all(m.inb(x + i, y + j) and m.cls[y + j, x + i] in 'wW' and m.L[2, y + j, x + i] == 0 for i in range(ww) for j in range(hh)):
             for j in range(hh):
                 for i in range(ww):
                     t = int(L[:, j, i].max())
                     if t: m.L[2, y + j, x + i] = t
+        else: print('  (no water for %s at %d,%d)' % (n, x, y))
+
+
+def ship(m, dx, dy):
+    """the moored two-master (ship_art 'moored', the Dovetail's sister hull) at offset dx, dy: hull solid on layer 2,
+    rigging overhead on layer 3; the hull cells become class B"""
+    for x, y, z, t in K.SHIP:
+        x += dx; y += dy
+        if m.inb(x, y):
+            m.L[1 if z == 0 else 2, y, x] = t
+            if z == 0: m.taken[y, x] = True
+
+
+def ship_cells(dx, dy):
+    return [(x + dx, y + dy) for x, y, z, t in K.SHIP if z == 0]
 
 
 def townsfolk():
@@ -235,115 +319,150 @@ def gate_warden(x):
 
 
 # ====================================================================================================== 140
+def new_map(mid, kit):
+    W, H = 88, 72
+    m = K.RMap(W, H, 55, mid, water='Ocean', kit=kit); m.keep_under = 'cfS'
+    m.court = np.zeros((H, W), bool); m.alleys = []
+    return m
+
+
+def keep_door_clear(m, d, rows=2):
+    if d:
+        x, y = d
+        for k in range(1, rows + 1):
+            if m.inb(x, y + k): m.taken[y + k, x] = True
+
+
+def finish(m, seed, lamp_pts=(), on_crowd=None):
+    courts(m, seed)
+
+
 def build_140(prev=None):
     W, H = 88, 72
-    m = K.RMap(W, H, 55, 140, water='Ocean', kit={1: 'qy', 2: 'qy'}); m.keep_under = 'cfS'
+    m = new_map(140, {1: 'qy', 2: 'rw'})
     m.cls[:, :] = 'T'
-    LAKE = 58
-    m.ht[:LAKE, :] = 1
-    m.cls[LAKE:, :] = 'w'
-    # causeways over the salt lake (stay at the city's height): west to the Old Town, east to the Harbour
-    for cx in (9, 56):
+    LAKE = 59
+    m.ht[:, :] = 1
+    m.ht[:12, :] = 2                                                                 # the High Town terrace (lip on row 11)
+    m.ht[LAKE:, :] = 0; m.cls[LAKE:, :] = 'w'
+    for cx in (9, 56):                                                               # causeways over the salt lake
         m.ht[LAKE:, cx:cx + 6] = 1; m.cls[LAKE:, cx:cx + 6] = 'f'
     salt_lake(m, (17, LAKE + 2, 52, H - 1), 140)
-    salt_lake(m, (66, LAKE + 6, 87, H - 1), 141)
-    m.stairs(30, LAKE - 1, w=3, kit_rows=3, c='c')                                     # down the sea wall onto the pans
+    salt_lake(m, (65, LAKE + 4, 87, H - 1), 141)
+    # ---- stairs first (they cut the wall lines): Gate Street, Chandlers' Way, Players' Lane, the pan stair
+    m.stairs(43, 11, w=6, kit_rows=3, c='c')
+    m.stairs(19, 11, w=3, kit_rows=3, c='c')
+    m.stairs(68, 11, w=3, kit_rows=3, c='c')
+    m.stairs(31, LAKE - 1, w=3, kit_rows=3, c='c')
+    m.stairs(74, LAKE - 1, w=3, kit_rows=3, c='c')
     m.plan_cliffs()
-    # ---- streets and squares (all at h=1)
     S = lambda x, y, w, h, c='c': m.rect(x, y, w, h, c, only='T.')
     S(43, 0, 6, 26)                                                                  # Gate Street from the North Gate
-    S(0, 10, 88, 3)                                                                  # Lantern Row
-    S(0, 31, 27, 4)                                                                  # West Street to the West Gate
-    S(62, 44, 26, 4)                                                                 # East Street from the East Gate
-    S(19, 13, 3, 37)                                                                 # Chandlers' Way
-    S(68, 13, 3, 31)                                                                 # Players' Lane
-    m.rect(26, 25, 36, 17, 'f', only='T.c')                                          # the market square
-    m.rect(40, 42, 10, 8, 'f', only='T.c')                                           # the Fountain Steps down to the promenade
+    S(0, 8, 88, 4)                                                                   # Lantern Row (High Town)
+    S(0, 31, 22, 4)                                                                  # West Street to the West Gate
+    S(64, 44, 24, 4)                                                                 # East Street from the East Gate
+    S(19, 12, 3, 38)                                                                 # Chandlers' Way
+    S(68, 12, 3, 32)                                                                 # Players' Lane
+    m.rect(22, 25, 42, 17, 'f', only='T.c')                                          # the market square
+    m.rect(40, 42, 10, 8, 'f', only='T.c')                                           # the Fountain Walk to the promenade
     m.rect(0, 50, 88, LAKE - 50, 'f', only='T.c')                                    # the promenade on the sea wall
-    m.rect(62, 44, 26, 6, 'c', only='T.')                                            # the East Gate esplanade
-    m.blob(39, 53.5, 4.2, 2.2, '.', seed=7, rough=0.2, only='f')                     # the promenade green (J1)
+    m.rect(64, 48, 24, 2, 'c', only='T.')
+    m.blob(37, 53.6, 4.6, 2.0, '.', seed=7, rough=0.25, only='f')                   # the promenade green (J1)
+    m.blob(13, 53.5, 2.6, 1.6, '.', seed=8, rough=0.3, only='f')                    # little greens with planes
+    m.blob(63, 53.5, 2.8, 1.6, '.', seed=9, rough=0.3, only='f')
     # ---- gates and civic fronts
     put(m, 'gt_gate6', 40, 0)
-    for x, y in ((84, 38), (84, 48)): put(m, 'gt_tower', x, y)                      # the East Gate towers
+    for x, y in ((85, 38), (85, 48)): put(m, 'gt_tower', x, y)                      # the East Gate towers
     for x, y in ((0, 25), (0, 35)): put(m, 'gt_tower', x, y)                        # the West Gate towers
     d = {}
-    d['pageant'] = put(m, 'cv_lantern', 29, 24 - 9 + 1, 'SM_PAGEANT', 'Pageant Hall door')
-    d['pc'] = put(m, 'cv_pc', 52, 24 - 7 + 1, 'SM_PC', 'Poke Center door')
-    d['mart'] = put(m, 'cv_mart', 60, 24 - 6 + 1, 'SM_MART', 'Mart door')
-    d['house1'] = put(m, 'sp_salt', 22, 49 - 6 + 1, 'SM_HOUSE1', 'House door')      # Sella the Saltwife, on the promenade
-    lh = put(m, 'th_af', 25, 24 - 8 + 1)                                              # the Lantern House (map 148, Trials): door kept clear
-    # ---- blocks of townhouses (bottom rows on the street below), alleys behind
+    d['pageant'] = put(m, 'cv_lantern', 28, 16, 'SM_PAGEANT', 'Pageant Hall door')
+    d['lantern'] = put(m, 'th_af', 24, 17, 'SM_LANTERN', 'Lantern House door')     # map 148 (Trials, Sister Hollin)
+    d['pc'] = put(m, 'cv_pc', 51, 18, 'SM_PC', 'Poke Center door')
+    d['mart'] = put(m, 'cv_mart', 59, 19, 'SM_MART', 'Mart door')
+    d['house1'] = put(m, 'sp_salt', 23, 44, 'SM_HOUSE1', 'House door')              # Sella the Saltwife, on the promenade
+    put(m, 'gt_tower', 40, 18)                                                       # the old bell tower beside the Lantern
+    for k in d.values(): keep_door_clear(m, k)
+    # ---- blocks of townhouses wall to wall, alleys and back courts behind
     pool = HOUSES + SHOPS
-    block(m, 0, 39, 0, 9, HOUSES, 11)                                                # north of Lantern Row, west of the gate
-    block(m, 52, 87, 0, 9, HOUSES, 12)
-    block(m, 0, 18, 13, 30, pool, 13)                                                # above West Street
-    block(m, 22, 24, 13, 24, HOUSES, 14)
-    block(m, 49, 51, 13, 24, HOUSES, 15)
-    block(m, 66, 67, 13, 43, HOUSES, 16)
-    block(m, 71, 83, 13, 43, pool, 17)
-    block(m, 84, 87, 13, 37, HOUSES, 18)
-    block(m, 0, 18, 37, 49, pool, 19)                                                # above the promenade, west
+    block(m, 0, 39, 0, 7, HOUSES, 11, alley_every=16)                                # High Town, west of the gate
+    block(m, 52, 87, 0, 7, HOUSES + ['sp_books', 'sp_cost'], 12, alley_every=16)
+    block(m, 0, 18, 14, 30, pool, 13)                                                # above West Street
+    block(m, 22, 42, 14, 24, HOUSES, 14)
+    block(m, 49, 67, 14, 24, SHOPS, 15)
+    block(m, 71, 87, 14, 43, pool, 17, alley_every=10)
+    block(m, 0, 18, 35, 49, pool, 19)                                                # above the promenade, west
     block(m, 22, 39, 42, 49, SHOPS + HOUSES, 20)
-    block(m, 50, 61, 42, 49, SHOPS + HOUSES, 21)
-    block(m, 62, 67, 26, 43, pool, 22)
-    m.rect(25, 13, 4, 12, 'c', only='T.')                                            # what is left becomes cobbled courts
-    m.cls[m.cls == 'T'] = 'c'
+    block(m, 50, 63, 42, 49, SHOPS, 21)
+    block(m, 64, 67, 25, 43, HOUSES, 22)
+    m.cls[m.cls == 'T'] = 'c'; m.court |= False
     # ---- events
     E = []
     E += [{'type': 'warp', 'at': [cx + i, H - 1], 'to': {'map': 146 if cx == 56 else 147, 'x': (42 if cx == 56 else 40) + i, 'y': 1, 'dir': 'retain'}}
           for cx in (9, 56) for i in range(6)]
     ev = old_events(140); tf = townsfolk()
-    E.append(seat(m, {'type': 'sign', 'name': 'Town sign', 'text': TOWN_SIGN}, 82, 43))
+    E.append(seat(m, {'type': 'sign', 'name': 'Town sign', 'text': TOWN_SIGN}, 80, 43))
     E.append(seat(m, {'type': 'sign', 'name': 'North Gate sign', 'text': 'NORTH GATE - The Grey Saltings, the Dyers\' Ford and the weaving country.'}, 42, 9))
     E.append(seat(m, {'type': 'sign', 'name': 'West Gate sign', 'text': 'WEST GATE - The Frostflat Causeway. (Chained at the Border Stones by order of Isenmar customs.)'}, 4, 30))
     E.append(seat(m, {'type': 'sign', 'name': 'Harbour causeway sign', 'text': 'THE HARBOUR CAUSEWAY - Quays, the Harbour Office and the breakwater.'}, 55, 56))
     E.append(seat(m, {'type': 'sign', 'name': 'Old Town causeway sign', 'text': "THE PLAYERS' CAUSEWAY - The Old Town, the Pell Playhouse and the Little Lantern."}, 15, 56))
-    E.append(seat(m, {'type': 'sign', 'name': 'Pageant poster', 'text': '"THE PAGEANT OF THE PRISMFALL - a Gift of Love from the Original One. Festival Year: Opening Night! With the companion piece THE LOYAL THREE. By leave of the Accord."'}, 41, 26))
+    E.append(seat(m, {'type': 'sign', 'name': 'Pageant poster', 'text': '"THE PAGEANT OF THE PRISMFALL - a Gift of Love from the Original One. Festival Year: Opening Night! With the companion piece THE LOYAL THREE. By leave of the Accord."'}, 38, 26))
     E.append(seat(m, {'type': 'sign', 'name': 'Festival poster', 'text': "The same poster as the Landing's. The painted Crown's stone has the same tiny dark fleck. Nobody here has bothered to circle it."}, 50, 26))
-    E.append(seat(m, {'type': 'sign', 'name': 'Promenade lamps', 'text': 'Oil lamps on iron posts. Each has a number, and a playbill pasted to it.'}, 64, 52))
-    E.append(seat(m, ev['Juno J1'], 39, 53, '.f'))
+    E.append(seat(m, {'type': 'sign', 'name': 'Promenade lamps', 'text': 'Oil lamps on iron posts. Each has a number, and a playbill pasted to it.'}, 66, 52))
+    E.append(seat(m, {'type': 'sign', 'name': 'Bell tower', 'text': 'THE SALT BELL. Rung for the tax-barge, for fire, and for curtain-up. Mostly for curtain-up.'}, 42, 25))
+    E.append(seat(m, ev['Juno J1'], 37, 53, '.f'))
     E.append(seat(m, ev['Royal notice'], 47, 41, 'f'))
-    E.append(seat(m, ev['Kestrel'], 44, 27, 'f'))
+    E.append(seat(m, ev['Kestrel'], 36, 27, 'f'))
     E.append(seat(m, ev['Eevee breeder'], 58, 38, 'f'))
-    E.append(seat(m, gate_warden(45), 45, 9, 'c'))
+    E.append(seat(m, gate_warden(45), 46, 9, 'c'))
     E.append(seat(m, arrival_event(), 85, 46, 'c'))
-    for n, x, y in (('Caramel Seller', 33, 38), ('Busker', 54, 33), ('Lamplighter', 72, 53), ('Child with an Ogre puppet', 36, 34),
-                    ('Retired Actor on a bench', 28, 52), ('Hound Number Two', 49, 52), ('Grey Pilgrim', 60, 54), ('Accord Inspector', 37, 27),
+    for n, x, y in (('Caramel Seller', 30, 38), ('Busker', 54, 33), ('Lamplighter', 72, 53), ('Child with an Ogre puppet', 36, 34),
+                    ('Retired Actor on a bench', 28, 55), ('Hound Number Two', 49, 52), ('Grey Pilgrim', 60, 55), ('Accord Inspector', 37, 29),
                     ('Meridian Clerk', 55, 27), ('Fishwife', 66, 46)):
         E.append(seat(m, tf[n], x, y))
-    E.append(seat(m, SE.hidden('HiddenItem lemonade', 'LEMONADE', 'Someone was saving it for the interval.'), 34, 39, 'f'))
+    E.append(seat(m, SE.hidden('HiddenItem lemonade', 'LEMONADE', 'Someone was saving it for the interval.'), 31, 39, 'f'))
     E.append(seat(m, {'type': 'npc', 'name': 'Woman from the ferry', 'sprite': 'NPC 13', 'dir': 'down', 'text':
                       "Woman from the ferry: You! From the Dovetail! I'm home! I'm not grey anymore. Look at me. I'm BEIGE.\nWoman from the ferry: Blank tint. Saltmere. The gate said so. My sister cried."}, 76, 46))
+    E.append(seat(m, {'type': 'npc', 'name': 'Salt raker', 'sprite': 'NPC 19', 'dir': 'up', 'move': 'random', 'text':
+                      'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'}, 40, 66, 'S'))
     m.events += E
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(140): m.taken[y, x] = True
-    if lh: m.taken[lh[1], lh[0]] = True; m.taken[min(H - 1, lh[1] + 1), lh[0]] = True
-    # ---- the square and the promenade: fountain, stalls, benches, lamps, playbill columns, planters
-    props(m, (('pf_fountain', 42, 30),), on='f', r=0)
-    props(m, (('pf_stall0', 29, 36), ('pf_stall1', 35, 36), ('pf_stall2', 52, 36), ('pf_stall3', 57, 34), ('pf_stall4', 29, 30),
-              ('pf_stall2', 56, 29), ('pf_morris', 39, 28), ('pf_morris', 50, 28), ('pf_logbench', 41, 36), ('pf_logbench', 46, 36),
-              ('hb_crates4', 31, 33), ('hb_barrels', 59, 38), ('hb_tables', 33, 27), ('gl_tables', 47, 39)), on='f')
-    props(m, (('pf_stall1', 6, 51), ('pf_stall3', 66, 51), ('pf_logbench', 26, 55), ('pf_logbench', 46, 55), ('pf_logbench', 62, 55),
-              ('pf_logbench', 74, 55), ('pf_morris', 18, 51), ('pf_morris', 52, 51), ('hb_fishstall', 78, 51), ('hb_tubs', 70, 50),
-              ('pf_stall0', 82, 51), ('hb_rope', 3, 55)), on='f')
-    props(m, (('pf_morris', 66, 45), ('hb_cask', 75, 44), ('hb_barrels', 64, 48)), on='c')
-    lamps(m, [(x, 51) for x in range(5, 86, 8)] + [(42, 26), (49, 26), (27, 26), (60, 26), (27, 40), (60, 40), (40, 44), (49, 44),
-                                                    (46, 13), (42, 22), (49, 22), (20, 30), (72, 43), (10, 30), (80, 43), (66, 30)])
-    for x in range(44, 48): overs(m, 'pf_lstring%d' % (x % 3), x, 12)                 # lantern strings over Lantern Row
-    for x in range(20, 27): overs(m, 'pf_lstring%d' % (x % 3), x, 30)
-    for x in range(71, 84): overs(m, 'pf_lstring%d' % (x % 3), x, 43)
-    courts(m, 140)
-    # ---- the salt lake: pans, heaps, rakes; boats on the open water
-    brine_pans(m, 18, LAKE + 3, 7, 3, pw=4, ph=2)
-    brine_pans(m, 67, LAKE + 8, 4, 2, pw=4, ph=2)
-    props(m, (('hb_salt0', 21, 69), ('hb_salt1', 34, 69), ('hb_salt2', 46, 69), ('hb_salt0', 75, 68), ('hb_salt1', 82, 66),
-              ('hb_barrel', 40, 69), ('hb_tubs', 26, 69)), on='S', r=2)
-    print('  140 courts / props done')
-    m.beds(prefixes=('th_', 'sp_')) if False else None
+    # ---- the square: the fountain on its flagged dais, stalls in two arcs, benches, columns, lamps
+    props(m, (('pf_fountain', 41, 30), ('pf_hounds', 43, 37)), on='f', r=0)
+    props(m, (('pf_planter0', 40, 42), ('pf_planter1', 48, 42), ('pf_planter2', 40, 46), ('pf_planter3', 48, 46), ('pf_well', 30, 26),
+              ('pf_planter1', 23, 25), ('pf_planter2', 61, 25), ('pf_planter0', 27, 49), ('pf_planter3', 59, 49)), on='fc', r=1)
+    props(m, (('pf_stall0', 25, 36), ('pf_stall1', 29, 37), ('pf_stall4', 25, 29), ('pf_stall2', 33, 38), ('pf_stall3', 25, 32),
+              ('pf_stall2', 55, 36), ('pf_stall0', 59, 33), ('pf_stall1', 59, 29), ('pf_stall4', 51, 38), ('pf_stall3', 59, 37),
+              ('pf_morris', 39, 28), ('pf_morris', 47, 28), ('pf_morris', 39, 37), ('pf_morris', 47, 37),
+              ('pf_logbench', 40, 36), ('pf_logbench', 44, 36), ('pf_logbench', 36, 32), ('pf_logbench', 48, 32),
+              ('hb_crates4', 29, 34), ('hb_barrels', 32, 34), ('hb_tables', 52, 29), ('gl_tables', 33, 28), ('hb_boxes', 55, 31),
+              ('hb_cask', 62, 40), ('hb_barrel', 23, 40), ('hb_washline', 23, 26)), on='f')
+    # ---- the promenade: stalls, benches, columns, the fish market by the harbour causeway
+    props(m, (('pf_stall1', 4, 51), ('pf_stall3', 68, 51), ('pf_logbench', 26, 56), ('pf_logbench', 46, 56), ('pf_logbench', 66, 56),
+              ('pf_logbench', 80, 56), ('pf_logbench', 6, 56), ('pf_morris', 18, 51), ('pf_morris', 52, 51), ('pf_morris', 82, 51),
+              ('hb_fishstall', 76, 50), ('hb_tubs', 71, 50), ('pf_stall0', 30, 51), ('hb_rope', 3, 56), ('hb_barrels', 54, 51),
+              ('pf_stall2', 44, 51), ('hb_crates4', 58, 51)), on='f')
+    props(m, (('pf_morris', 66, 45), ('hb_cask', 75, 45), ('hb_barrels', 64, 48), ('pf_morris', 10, 33), ('hb_boxes', 16, 31)), on='c')
+    for x, y in ((12, 53), (64, 53)): m.trees(x, y, 1, ['tr_oak2', 'tr_teal'], r=1, on='.')
+    lamps(m, [(x, 51) for x in range(5, 86, 8)] + [(x, 57) for x in range(9, 86, 12)] + [(42, 26), (49, 26), (23, 26), (62, 26), (23, 41), (62, 41),
+              (40, 43), (49, 43), (46, 12), (42, 22), (49, 22), (18, 30), (72, 43), (10, 30), (80, 43), (67, 30), (8, 12), (30, 12), (58, 12), (80, 12)])
+    string_lights(m, 23, 42, 25); string_lights(m, 49, 62, 25)                       # lantern strings along the civic fronts
+    string_lights(m, 20, 23, 30); string_lights(m, 71, 84, 43); string_lights(m, 0, 18, 49)
+    for x in (29, 35, 54, 60): overs(m, 'hb_banner', x, 22) if False else None
+    gardens(m, 140); courts(m, 140)
+    # ---- the salt lake: uneven pans with raking paths, heaps, tubs; boats on the open water
+    brine_pans(m, 18, LAKE + 3, 52, H - 1, 140)
+    brine_pans(m, 66, LAKE + 5, 87, H - 1, 141, pw=(3, 5))
+    props(m, (('hb_salt0', 21, 69), ('hb_salt1', 34, 69), ('hb_salt2', 46, 68), ('hb_salt0', 75, 69), ('hb_salt1', 82, 66),
+              ('hb_barrel', 40, 69), ('hb_tubs', 26, 69), ('hb_salt2', 28, 62), ('hb_salt0', 69, 65)), on='S', r=3)
+    # ---- crowd: the square and the promenade are full on Pageant week
+    sq = [(x, y) for y in range(26, 41) for x in range(23, 63)]
+    pr = [(x, y) for y in range(51, 57) for x in range(2, 86)]
+    crowd(m, sq, 12, 1401); crowd(m, pr, 10, 1402); crowd(m, [(x, y) for y in range(8, 11) for x in range(0, 88)], 4, 1403, on='c')
     m.paint()
     paint_salt(m, 140); dry_footings(m)
-    boats(m, (('hb_boat1', 3, 61), ('hb_boat3', 64, 60), ('hb_boat2', 70, 61), ('hb_boat4', 3, 66), ('hb_boat1', 78, 61)))
-    m.scatter(6, seed=140, on='.')
+    boats(m, (('hb_boat1', 2, 61), ('hb_boat3', 2, 66), ('hb_boat2', 63, 60), ('hb_boat4', 79, 60), ('hb_boat1', 16, 60)))
+    m.scatter(5, seed=140, on='.')
     conn = [{'dir': 'N', 'offset': 43, 'to': 541, 'to_offset': 12}, {'dir': 'W', 'offset': 31, 'to': 560, 'to_offset': 12},
             {'dir': 'E', 'offset': 44, 'to': 528, 'to_offset': 38}]
     h = head(140, '140_saltmere.yaml', biome='harbour', tone=[8, 4, -12, 0], connections=conn,

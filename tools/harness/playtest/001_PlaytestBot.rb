@@ -39,13 +39,16 @@ module PlayBot
     [:goto, 520, "Juno tutorial 4"], [:catch, 520], [:spot_all, 520],
     [:to, 520, 521], [:spot_all, 521],
     [:to, 521, 522], [:talk, 522, "Glassed Wurmple"], [:talk, 522, "Lost Skwovet"], [:goto, 522, "Bleed Veil 2"],
-    [:to, 522, 521], [:goto, 521, "Juno flags 1"],
+    [:to, 522, 521],                               # "Juno flags 1" moved to the Dyers' Ford (552) in Rev 14
     [:to, 521, 523], [:talk, 523, "Wenna"], [:to, 523, 521],
-    [:to, 521, 520], [:goto, 520, "Stile send-off 2"], [:to, 520, 521],
-    [:to, 521, 524], [:spot_all, 524], [:to, 524, 120], [:arrive, 120],
-    [:to, 120, 121], [:talk, 121, "Nurse"], [:to, 121, 120],
-    # Stop at Briarwick: SPINE Rev 14 moves Gym 1 to Saltmere and makes Briarwick Gym 2 (design/SWAP_GYM1_GYM2.md
-    # pending), so no gym is attempted until the routes are rewired.
+    [:to, 521, 520], [:goto, 520, "Stile send-off 2"],   # the stile send-off closes Chapter 1
+    # Chapter 2 (SPINE Rev 14, design/SWAP_GYM1_GYM2.md 1A): the Strand Road 520 W -> 527 -> 528 -> Saltmere 140 East
+    # Gate, then Gym 1 (147 -> 150 -> 154). The forest road 521 -> 524 is corded until after Gym 2. Until map builder 9's
+    # rewiring is installed, :need_map ends the run here, at the end of Chapter 1.
+    [:need_map, 527],
+    [:to, 520, 527], [:spot_all, 527], [:to, 527, 528], [:spot_all, 528], [:to, 528, 140], [:arrive, 140],
+    [:to, 140, 141], [:talk, 141, "Nurse"], [:to, 141, 140],
+    [:to, 140, 147], [:to, 147, 150], [:to, 150, 154], [:spot_all, 154],
     [:done]
   ]
   REWIND = PLAN.index([:to, 100, 520])   # after a blackout: walk out of Ferrow's Landing again
@@ -66,8 +69,9 @@ module PlayBot
                     [:SAILOR, "Haakon"], [:BIRDKEEPER, "Ailsa"], [:BUGCATCHER, "Pell"], [:POKEMONRANGER_F, "Orla"],
                     [:HIKER, "Ulf"], [:CAMPER, "Rook"], [:TWINS, "Ana & Ida", true], [:POKEMONRANGER_M, "Sigurd"]]
   CHECKS_PLAN = [[:run_checks, 520], [:done]]
-  # PLAYBOT_SESSION=narrative: Debug > Prismfall Core... > Show Core status (runs Prismfall::NarrativeCheck in the engine)
-  NARRATIVE_PLAN = [[:debug_install, 520], [:done]]
+  # PLAYBOT_SESSION=narrative: Debug > Prismfall Core... > Show Core status (runs Prismfall::NarrativeCheck in the engine),
+  # then evaluates every condition it walks (WARDEN_CONSENT included) against the live save
+  NARRATIVE_PLAN = [[:debug_install, 520], [:eval_conditions, 520], [:done]]
   DEBUG_PATH = (SESSION == "narrative") ? [/^Prismfall Core/, /^Show Core status/] : [/^Files options/, /^Install Prismfall maps/]
 
   @frame = 0; @armed = {}; @live = {}; @dir = 0; @step = 0; @step_start = 0; @idle = 0
@@ -214,7 +218,7 @@ module PlayBot
       return if !on_map?
       id = $game_map.map_id
       if id != @last_map
-        log("on map #{id} #{$game_map.name rescue '?'} at (#{$game_player.x},#{$game_player.y})")
+        log("on map #{id} #{$game_map.name rescue '?'} at (#{$game_player.x},#{$game_player.y}); party #{party_text rescue '?'}")
         @last_map = id
         @map_arrival = @frame
         @path = nil
@@ -408,7 +412,8 @@ module PlayBot
         log("step #{@step}: #{step.inspect}")
       end
       @step_frames += 1                # only frames with the map free count (cutscenes can be long)
-      return wait_for_map if ![:done, :debug_install, :run_checks, :arrive].include?(kind) && $game_map.map_id != map
+      return wait_for_map if ![:done, :debug_install, :run_checks, :arrive, :need_map, :eval_conditions].include?(kind) &&
+                             $game_map.map_id != map
       if @step_frames > 5400
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
@@ -426,6 +431,16 @@ module PlayBot
         debug_install if @idle >= 12
       when :run_checks
         run_checks if @idle >= 30
+      when :need_map
+        return next_step if map_installed?(map)
+        return if @idle < 40
+        @recording = false
+        log("END OF RUN at step #{@step}: map #{map} is not installed (the rewiring has not landed); party #{party_text}")
+        shot("end_map#{map}_missing")
+        finish
+      when :eval_conditions
+        eval_conditions
+        next_step
       when :arrive
         return wait_for_map if $game_map.map_id != map
         if @idle >= 60
@@ -736,6 +751,44 @@ module PlayBot
       return $player.party.map { |p| "#{p.species} L#{p.level} #{p.hp}/#{p.totalhp}" }.join(", ")
     end
 
+    def map_installed?(id)
+      infos = (pbLoadMapInfos rescue nil) || {}
+      return infos.has_key?(id) && pbRgssExists?(sprintf("Data/Map%03d.rxdata", id))
+    end
+
+    # Every condition NarrativeCheck walks, evaluated against the live save (the static check only parses them)
+    def eval_conditions
+      list = Prismfall::NarrativeCheck.all_conditions
+      bad = []
+      list.each do |label, cond|
+        Prismfall::Conditions.value(cond)
+      rescue Exception => e
+        bad.push("#{label}: #{e.class}: #{e.message}")
+      end
+      log("conditions: #{list.length} evaluated against the live save, #{bad.length} raised")
+      bad.first(25).each { |b| log("  CONDITION ERROR #{b}") }
+      Prismfall::Narrative::WARDEN_CONSENT.first(2).each_with_index do |c, i|
+        g = (Prismfall::GYMS[i] rescue {}) || {}
+        log("  consent row #{i + 1} (GYMS #{g[:index]} #{g[:warden]}): #{c} -> #{(Prismfall::Conditions.evaluate(c) rescue $!.class).inspect}")
+      end
+      log("  tally CONSENT = #{(Prismfall::Narrative.tally(:CONSENT) rescue $!.class).inspect} of #{Prismfall::Narrative::WARDEN_CONSENT.size}")
+    rescue Exception => e
+      log("conditions: evaluation failed #{e.class}: #{e.message}")
+    end
+
+    # The field and EBDX room a battle actually got, next to the map's default field
+    def log_room(scene, battle)
+      room = (PrismfallEBDX.ebdx_room(scene) rescue nil)
+      data = room ? (room.instance_variable_get(:@data) || {}) : {}
+      mid = $game_map ? $game_map.map_id : nil
+      mapf = (FieldEffects::MAP_FIELDS[mid] rescue nil)
+      fld = (battle.respond_to?(:field_effect) ? (battle.field_effect rescue "?") : "-")
+      log("  room: field #{fld} (map #{mid} default #{mapf.inspect}) | EBDX backdrop #{data['backdrop'].inspect}" \
+          "#{data['img000'] ? ' + HD layer' : ''} | essentials backdrop #{battle.backdrop rescue '?'}")
+    rescue StandardError => e
+      log("  room: #{e.class}: #{e.message}")
+    end
+
     # Resilience: save and note the step after each step, so PLAYBOT_SESSION=resume can carry on after a host restart
     def autosave
       return if !["play", "resume"].include?(SESSION) || !ENV["PLAYBOT_STATE"] || !on_map? || @step < 2
@@ -1028,6 +1081,14 @@ module BattleCreationHelperMethods
   end
 end
 
+class Battle::Scene
+  alias playbot_loadBackdrop loadBackdrop unless method_defined?(:playbot_loadBackdrop)
+  def loadBackdrop
+    playbot_loadBackdrop
+    PlayBot.log_room(self, @battle)
+  end
+end
+
 class Battle
   alias playbot_pbCommandPhase pbCommandPhase unless method_defined?(:playbot_pbCommandPhase)
   def pbCommandPhase
@@ -1037,6 +1098,14 @@ class Battle
       return
     end
     playbot_pbCommandPhase
+  end
+
+  alias playbot_pbEndOfBattle pbEndOfBattle unless method_defined?(:playbot_pbEndOfBattle)
+  def pbEndOfBattle
+    ret = playbot_pbEndOfBattle
+    outcome = { 1 => "won", 2 => "lost", 3 => "ran/ended", 4 => "caught", 5 => "draw" }[@decision] || @decision.to_s
+    PlayBot.log("BATTLE END: #{outcome} | party #{PlayBot.party_text rescue '?'}")
+    return ret
   end
 
   alias playbot_pbDisplay pbDisplay unless method_defined?(:playbot_pbDisplay)

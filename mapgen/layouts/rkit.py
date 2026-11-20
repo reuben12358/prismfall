@@ -86,6 +86,14 @@ if 'qy_lipm0' in STAMPS:
     CLOVER = [P1('gr_clover0'), P1('gr_clover1')]
     GRASS_PATCH = [[[P1('gp%d%d_%02d' % (i, j, k)) for k in range(48)] for j in range(2)] for i in range(2)] if 'gp00_00' in STAMPS else None
     TUFTS = [P1('gr_tuft%d' % i) for i in range(3)]
+    # map builder 9: the terrace retaining-wall kit (tdraw.retaining): parapet coping lip, coursed face, footing course;
+    # solid side copings so a terrace edge cannot be stepped off sideways
+    if 'rw_W0' in STAMPS:
+        KITS['rw'] = dict(N=(P1('qy_N0'),) * 3, W=P1('rw_W0'), E=P1('rw_E0'),
+                          rows=[(P1('rw_lipw0'), P1('rw_lipm0'), P1('rw_lipe0')), (P1('rw_f1w0'), P1('rw_f1m0'), P1('rw_f1e0')),
+                                (P1('rw_f2w0'), P1('rw_f2m0'), P1('rw_f2e0'))], inW=None, inE=None, l0=False,
+                          alt={P1('rw_lipm0'): (P1('rw_lipm1'), 0.3), P1('rw_f1m0'): (P1('rw_f1m1'), 0.15)},
+                          vines=(P1('rw_ivy0'), 0.22) if 'rw_ivy0' in STAMPS else None)
 # the old flat dark-brown plank slab (Sheridan_2 544-546) once used as stairs: build.py --strict now rejects it
 OLD_SLAB = (C('sh', 544), C('sh', 545), C('sh', 546))
 

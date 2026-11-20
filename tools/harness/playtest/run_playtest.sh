@@ -16,7 +16,7 @@
 #
 # Needs the mkxp-z build from tools/harness/visual/run_engine_capture.sh (build step).
 # Test-copy-only changes: the bot plugin, mkxp.json (Ruby stdlib path, no vsync, own
-# save folder "Prismfall Playtest") and the Linux engine binary. Nothing else is patched.
+# save folder "Prismfall Playtest", override: PLAY_APP) and the Linux engine binary. Nothing else is patched.
 # The engine runs with a TZ whose local time is about 13:00 (override: PLAY_TZ) so Essentials' day/night tint
 # shows the maps by day,
 # on its own Xvfb display :147 (override: PLAY_DISPLAY) so it never collides with other engine runs.
@@ -28,7 +28,8 @@ RUN="${RUN:-/home/claude/run}"
 BASE="${BASE:-/home/claude/ref/ebdx_renovation}"
 RUBY_HOME="${RUBY_HOME:-/opt/rbenv/versions/3.3.6}"
 GAME="$RUN/playtest_game"
-SAVE_DIR="$HOME/.local/share/Prismfall Playtest"
+APP="${PLAY_APP:-Prismfall Playtest}"                # save/error-log folder name (dataPathApp)
+SAVE_DIR="$HOME/.local/share/$APP"
 
 assemble() {
   (cd "$KIT" && bash tools/package.sh)
@@ -39,11 +40,11 @@ assemble() {
   for d in Plugins PBS Data Graphics; do cp -r "$K/$d/." "$GAME/$d/"; done   # README step 2 (merge folders)
   mkdir -p "$GAME/Plugins/ZZ Playtest Bot"
   cp "$HERE/meta.txt" "$HERE/001_PlaytestBot.rb" "$GAME/Plugins/ZZ Playtest Bot/"
-  python3 - "$GAME/mkxp.json" "$RUBY_HOME" <<'PY'
+  python3 - "$GAME/mkxp.json" "$RUBY_HOME" "$APP" <<'PY'
 import sys
-p, r = sys.argv[1], sys.argv[2]; s = open(p, encoding='utf-8').read(); i = s.index('"windowTitle"')
+p, r, app = sys.argv[1], sys.argv[2], sys.argv[3]; s = open(p, encoding='utf-8').read(); i = s.index('"windowTitle"')
 s = s[:i] + ('"rubyLoadpath": ["%s/lib/ruby/3.3.0/x86_64-linux", "%s/lib/ruby/3.3.0"],\n    "vsync": false, '
-             '"frameSkip": false, "dataPathApp": "Prismfall Playtest",\n    ' % (r, r)) + s[i:]
+             '"frameSkip": false, "dataPathApp": "%s",\n    ' % (r, r, app)) + s[i:]
 open(p, 'w', encoding='utf-8').write(s)
 PY
   cp "$RUN/build/mkxp-z/b/mkxp-z.x86_64" "$GAME/"

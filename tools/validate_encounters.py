@@ -47,10 +47,19 @@ def cap_for(badges):
     return GYM_CAPS[badges]
 
 
+# SPINE Rev 14 (design/SWAP_GYM1_GYM2.md §0): Act I maps whose segment no longer follows from their ID block.
+# Optional gym wings and the Gossamer side maps open after Badge 2; Gossamer Wood itself is on the Ch3 road.
+ACT1_SEGMENTS = {132: 2, 133: 1, 134: 2,            # Loomhouse Upper Lofts (optional, after Badge 2); 133 the Spindle
+                 151: 2, 152: 2, 153: 2,            # Pell Playhouse Backstage, D9 (after Badge 2)
+                 524: 1, 526: 1,                    # Gossamer Wood, Woodward's Hut (Weavers' Road, Ch3)
+                 525: 2, 548: 2}                    # Gossamer Deepwood (Cut), Cocoonfall Hollow
+
+
 def segment_from_id(mid):
     """Fallback for maps missing from maps.json (it reads `segment` first)."""
-    # SPINE Rev 14 (design/SWAP_GYM1_GYM2.md): Saltmere (140-159) holds Gym 1 and Briarwick (120-139) Gym 2, so the two
-    # Act I blocks swap relative to the ID scheme below.
+    if mid in ACT1_SEGMENTS: return ACT1_SEGMENTS[mid]
+    # Saltmere (140-159) holds Gym 1 and Briarwick (120-139) Gym 2, so the two Act I blocks swap relative to the
+    # ID scheme below.
     if 120 <= mid < 140: return 1
     if 140 <= mid < 160: return 0
     if 100 <= mid < 480: return max(0, (mid - 100) // 20 - 1)

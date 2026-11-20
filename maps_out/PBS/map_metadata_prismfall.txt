@@ -98,7 +98,7 @@ MapPosition = 0,11,13
 #-------------------------------
 [134]   # Loomhouse Upper Lofts - Granny's Knot
 Name = Loomhouse Upper Lofts - Granny's Knot
-MapPosition = 0,12,22
+MapPosition = 0,11,13
 #-------------------------------
 [140]   # Saltmere
 Name = Saltmere
@@ -110,7 +110,7 @@ Weather = Rain,10
 #-------------------------------
 [141]   # Saltmere Pokémon Center
 Name = Saltmere Pokémon Center
-HealingSpot = 140,24,33
+HealingSpot = 140,54,25
 MapPosition = 0,6,18
 #-------------------------------
 [142]   # Saltmere Mart

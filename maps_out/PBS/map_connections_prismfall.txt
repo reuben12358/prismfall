@@ -5,9 +5,9 @@
 # Briarwick (120) - Thistledown Lea (540)
 120,W,29,540,E,10
 # Saltmere (140) - The Grey Saltings (541)
-140,N,44,541,S,13
+140,N,43,541,S,12
 # Saltmere (140) - Frostflat Causeway (560)
-140,W,32,560,E,12
+140,W,31,560,E,12
 # Ebbmouth (160) - Gullcry Cliffs (561)
 160,S,22,561,N,12
 # The Ferrymen's Mile (520) - Windfall Row (521)

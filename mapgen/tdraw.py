@@ -572,38 +572,76 @@ def dormer(im, x, y, rt, wr):
 
 # ------------------------------------------------------------------ stairs, quay kit, harbour and street props
 def stone_stairs(part, ramp=None):
-    """dressed stone steps (1x1, repeats down a flight): pale treads with a lit nosing and a dark riser shadow,
-    staggered joints; l / r pieces carry a cheek wall with a coping stone"""
-    ramp = ramp or [(84, 76, 78), (128, 120, 114), (170, 162, 150), (204, 196, 182), (228, 222, 208)]
+    """dressed stone steps (map builder 9): two real steps per tile.  Each step reads top to bottom as a contact
+    shadow where it meets the riser above, a lit tread with slab joints and wear, a bright nosing, then a shaded
+    riser (it faces south, away from the top-left light) with staggered block joints and a dark foot.
+    l / r pieces carry a cheek wall: coping on top, coursed face and a shadow cast onto the treads."""
+    ramp = ramp or [(70, 64, 68), (112, 104, 102), (150, 142, 134), (186, 178, 164), (214, 206, 190), (236, 230, 216)]
+    A = lambda i: ramp[i] + (255,)
     im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
-    for k in range(4):
-        y = k * 4
-        d.line([0, y, 15, y], fill=ramp[4] + (255,)); d.line([0, y + 1, 15, y + 1], fill=ramp[3] + (255,))
-        d.line([0, y + 2, 15, y + 2], fill=ramp[2] + (255,)); d.line([0, y + 3, 15, y + 3], fill=ramp[0] + (255,))
-        for x in range((k * 5) % 7 + 2, 16, 7): P(im, x, y + 1, ramp[1] + (255,)); P(im, x, y + 2, ramp[1] + (255,))
+    for k in range(2):
+        y = k * 8
+        d.line([0, y, 15, y], fill=A(1))                                  # contact shadow at the riser above
+        d.rectangle([0, y + 1, 15, y + 3], fill=A(3))                     # tread
+        d.line([0, y + 1, 15, y + 1], fill=A(2))
+        for x in range(16):                                               # foot-worn middle, speckle
+            if 4 <= x <= 11 and (x + k) % 3: P(im, x, y + 2, A(4))
+        for x in ((5 + k * 6) % 16, (12 + k * 6) % 16):                   # slab joints on the tread
+            P(im, x, y + 1, A(1)); P(im, x, y + 2, A(2)); P(im, x, y + 3, A(2))
+        d.line([0, y + 4, 15, y + 4], fill=A(5))                          # nosing catches the light
+        d.rectangle([0, y + 5, 15, y + 6], fill=A(2))                     # riser in shade
+        d.line([0, y + 5, 15, y + 5], fill=A(3))
+        for x in ((2 + k * 5) % 16, (9 + k * 5) % 16):
+            P(im, x, y + 5, A(1)); P(im, x, y + 6, A(1))
+        d.line([0, y + 7, 15, y + 7], fill=A(0))                          # riser foot
+        if k == 1:
+            P(im, 3, y + 6, (96, 116, 82, 255)); P(im, 12, y + 6, (96, 116, 82, 255))   # a little moss in the joints
     if part in 'lr':
-        x = 0 if part == 'l' else 12
-        d.rectangle([x, 0, x + 3, 15], fill=ramp[2] + (255,)); d.line([x + (0 if part == 'l' else 3), 0, x + (0 if part == 'l' else 3), 15], fill=OUT)
-        d.line([x + 1 if part == 'l' else x, 0, x + 1 if part == 'l' else x, 15], fill=ramp[4] + (255,))
-        d.line([x + 2 if part == 'l' else x + 2, 0, x + 2 if part == 'l' else x + 2, 15], fill=ramp[3] + (255,))
-        inner = x + 4 if part == 'l' else x - 1
-        d.line([inner, 0, inner, 15], fill=ramp[0] + (255,))
-        for y in range(0, 16, 6): d.line([x, y, x + 3, y], fill=ramp[1] + (255,))
+        L = part == 'l'; x0 = 0 if L else 12
+        d.rectangle([x0, 0, x0 + 3, 15], fill=A(2))
+        for y in range(0, 16, 4):                                         # coursed cheek face
+            d.line([x0, y + 3, x0 + 3, y + 3], fill=A(1))
+            P(im, x0 + (1 if (y // 4) % 2 else 2), y + 1, A(1)); P(im, x0 + (1 if (y // 4) % 2 else 2), y + 2, A(1))
+        d.line([x0 + (1 if L else 0), 0, x0 + (1 if L else 0), 15], fill=A(4))   # coping edge lit on the west
+        d.line([x0 if L else x0 + 3, 0, x0 if L else x0 + 3, 15], fill=OUT)
+        sx = x0 + 4 if L else x0 - 1                                      # cheek shadow on the treads (east side lit less)
+        for y in range(16):
+            c = im.getpixel((sx, y)); P(im, sx, y, shade(c, 0.72 if L else 0.82))
     return im
 
 
 def timber_stairs(part):
-    """plank steps between log posts (village / route): split-log treads, a lit edge, a dark riser"""
+    """timber steps (map builder 9): two plank steps per tile on log stringers.  Each step: a dark gap under the
+    step above, a lit split-plank tread with grain and peg heads, a pale bevelled nosing, a shaded riser board and a
+    dark foot.  l / r pieces are the log stringers with post heads at every step."""
+    T = [(48, 32, 28, 255), (82, 56, 42, 255), (116, 82, 56, 255), (150, 110, 74, 255), (182, 140, 96, 255), (212, 176, 128, 255)]
     im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
-    for k in range(4):
-        y = k * 4
-        d.line([0, y, 15, y], fill=WOOD[4]); d.line([0, y + 1, 15, y + 1], fill=WOOD[3])
-        d.line([0, y + 2, 15, y + 2], fill=WOOD[2]); d.line([0, y + 3, 15, y + 3], fill=WOOD[0])
-        for x in range(2 + (k % 2) * 4, 16, 8): P(im, x, y + 1, WOOD[2]); P(im, x + 1, y + 2, WOOD[1])
+    for k in range(2):
+        y = k * 8
+        d.line([0, y, 15, y], fill=T[0])
+        d.rectangle([0, y + 1, 15, y + 3], fill=T[3])
+        d.line([0, y + 1, 15, y + 1], fill=T[2])
+        for x in range((3 + 5 * k) % 7, 16, 7):                            # grain streaks
+            d.line([x, y + 2, min(15, x + 3), y + 2], fill=T[4])
+        for x in ((4 + k * 4) % 16, (11 + k * 4) % 16):                   # peg heads
+            P(im, x, y + 3, T[1])
+        P(im, (8 + k * 3) % 16, y + 2, T[2])                              # a split in the plank
+        d.line([0, y + 4, 15, y + 4], fill=T[5])                          # bevelled nosing
+        d.rectangle([0, y + 5, 15, y + 6], fill=T[2])                     # riser board in shade
+        d.line([0, y + 5, 15, y + 5], fill=T[3])
+        for x in ((1 + k * 6) % 16, (9 + k * 6) % 16): P(im, x, y + 6, T[1])
+        d.line([0, y + 7, 15, y + 7], fill=T[0])
     if part in 'lr':
-        x = 0 if part == 'l' else 13
-        d.rectangle([x, 0, x + 2, 15], fill=WOOD[1], outline=OUT); d.line([x + 1, 0, x + 1, 15], fill=WOOD[3])
-        for y in (1, 9): d.line([x, y, x + 2, y], fill=WOOD[0])
+        L = part == 'l'; x0 = 0 if L else 13
+        d.rectangle([x0, 0, x0 + 2, 15], fill=T[2])                       # log stringer
+        d.line([x0 + 1, 0, x0 + 1, 15], fill=T[3] if L else T[2])
+        d.line([x0 if L else x0 + 2, 0, x0 if L else x0 + 2, 15], fill=OUT)
+        for y in (3, 11):                                                 # post heads (end grain)
+            d.rectangle([x0, y - 1, x0 + 2, y + 1], fill=T[4]); P(im, x0 + 1, y, T[2])
+            d.line([x0, y + 2, x0 + 2, y + 2], fill=T[0])
+        sx = x0 + 3 if L else x0 - 1
+        for y in range(16):
+            c = im.getpixel((sx, y)); P(im, sx, y, shade(c, 0.7 if L else 0.85))
     return im
 
 
@@ -977,6 +1015,83 @@ def fountain():
     return im, code
 
 
+def monument():
+    """THE LOYAL THREE (4x5): three bronze hounds on a stepped ashlar plinth with a gilt inscription band; the
+    square's landmark.  Code: plinth solid, hounds' heads overhead"""
+    im = Image.new('RGBA', (64, 80), CLEAR); d = ImageDraw.Draw(im)
+    BR = [(52, 44, 34, 255), (92, 70, 46, 255), (134, 100, 60, 255), (178, 140, 86, 255), (214, 184, 120, 255)]
+    # steps
+    for k, (x0, x1, y0, y1) in enumerate(((2, 61, 66, 77), (6, 57, 58, 66), (12, 51, 30, 58))):
+        d.rectangle([x0, y0, x1, y1], fill=QY[2 + (k == 2)] + (255,), outline=OUT)
+        d.line([x0 + 1, y0 + 1, x1 - 1, y0 + 1], fill=QY[5] + (255,))
+        d.line([x0 + 1, y1 - 1, x1 - 1, y1 - 1], fill=QY[1] + (255,))
+    for x in range(14, 50, 9): d.line([x, 31, x, 57], fill=QY[2] + (255,))
+    for y in range(36, 57, 7): d.line([13, y, 50, y], fill=QY[2] + (255,))
+    d.rectangle([16, 44, 47, 50], fill=D.GOLD[1], outline=OUT)                    # inscription band
+    for x in range(19, 45, 3): P(im, x, 47, D.GOLD[0])
+    d.line([0, 78, 63, 78], fill=(0, 0, 0, 60))
+    # three hounds: sitting, on guard, howling (bronze, lit from the top left)
+    def hound(cx, base, face, howl=False):
+        f = face                                                                    # -1 faces west, +1 east
+        d.ellipse([cx - f * 9 - 6, base - 11, cx - f * 9 + 6, base], fill=BR[1], outline=BR[0])      # haunch
+        d.polygon([(cx - f * 9, base - 10), (cx + f * 1, base - 22), (cx + f * 5, base - 20), (cx + f * 4, base - 6), (cx - f * 6, base - 2)],
+                  fill=BR[2], outline=BR[0])                                       # chest and back
+        for lx in (cx + f * 1, cx + f * 4):                                         # forelegs
+            d.rectangle([min(lx, lx + f), base - 8, max(lx, lx + f), base - 1], fill=BR[2], outline=BR[0])
+        hx, hy = (cx + f * 2, base - 30) if howl else (cx + f * 3, base - 27)
+        d.ellipse([hx - 4, hy, hx + 4, hy + 8], fill=BR[2], outline=BR[0])         # head
+        if howl: d.polygon([(hx - 1, hy + 1), (hx + f * 3, hy - 6), (hx + f * 5, hy - 4), (hx + f * 3, hy + 3)], fill=BR[2], outline=BR[0])
+        else: d.rectangle([min(hx + f * 3, hx + f * 8), hy + 3, max(hx + f * 3, hx + f * 8), hy + 7], fill=BR[2], outline=BR[0])   # snout
+        d.polygon([(hx - f * 2, hy + 1), (hx - f * 4, hy - 5), (hx, hy)], fill=BR[1], outline=BR[0])    # ear
+        d.line([cx - f * 15, base - 4, cx - f * 17, base - 9], fill=BR[1])          # tail
+        P(im, hx - f * 1, hy + 2, BR[4]); d.line([cx - f * 1, base - 19, cx - f * 7, base - 9], fill=BR[4])
+        P(im, hx + f * 1, hy + 3, BR[0])                                            # eye
+    hound(22, 32, -1); hound(42, 32, 1); hound(32, 31, 1, howl=True)
+    code = ['.OO.', 'OOOO', 'WWWW', 'WWWW', 'WWWW']
+    return im, code
+
+
+def planter(v):
+    """a stone trough planter (2x1) with box shrubs and flowers"""
+    im = Image.new('RGBA', (32, 16), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(500 + v)
+    d.rectangle([1, 6, 30, 15], fill=QY[2] + (255,), outline=OUT); d.line([2, 7, 29, 7], fill=QY[4] + (255,))
+    d.line([2, 14, 29, 14], fill=QY[1] + (255,))
+    G = [(40, 86, 54, 255), (58, 120, 70, 255), (90, 156, 90, 255), (140, 196, 120, 255)]
+    for cx in (8, 16, 24):
+        d.ellipse([cx - 6, 0, cx + 6, 10], fill=G[1], outline=G[0])
+        d.ellipse([cx - 4, 1, cx + 2, 6], fill=G[2]); P(im, cx - 2, 2, G[3])
+    fl = [(236, 92, 110, 255), (250, 214, 96, 255), (240, 240, 246, 255), (170, 120, 220, 255)][v % 4]
+    for _ in range(7): P(im, rng.randrange(3, 29), rng.randrange(1, 8), fl)
+    return im
+
+
+def well():
+    """a town well (2x3): round stone curb, a timber frame with a little shingle roof, rope and bucket"""
+    im = Image.new('RGBA', (32, 48), CLEAR); d = ImageDraw.Draw(im)
+    d.ellipse([3, 26, 28, 46], fill=QY[2] + (255,), outline=OUT); d.ellipse([7, 28, 24, 38], fill=(28, 34, 44, 255))
+    d.arc([3, 26, 28, 46], 200, 340, fill=QY[5] + (255,))
+    for x in (5, 25): d.rectangle([x, 8, x + 2, 36], fill=WOOD[2], outline=OUT)
+    d.polygon([(0, 12), (16, 2), (31, 12), (27, 15), (16, 8), (4, 15)], fill=(120, 64, 50, 255), outline=OUT)
+    d.line([4, 12, 16, 4], fill=(170, 96, 70, 255))
+    d.line([7, 16, 24, 16], fill=WOOD[1]); d.line([16, 16, 16, 28], fill=(200, 186, 150, 255))
+    d.rectangle([13, 28, 19, 33], fill=WOOD[2], outline=OUT)
+    d.line([3, 47, 28, 47], fill=(0, 0, 0, 60))
+    return im, ['OO', 'WW', 'WW']
+
+
+def ivy_face(v):
+    """a retaining-wall face with ivy hanging down it (variant of rw_f1m)"""
+    im = retaining('f1m', v); d = ImageDraw.Draw(im); rng = random.Random(600 + v)
+    G = [(36, 74, 48, 255), (52, 104, 62, 255), (80, 140, 80, 255), (120, 176, 104, 255)]
+    for x in range(1, 15, 3):
+        L = rng.randrange(4, 16)
+        for y in range(L):
+            xx = x + (1 if (y // 3 + x) % 2 else 0)
+            P(im, xx, y, G[1] if y % 3 else G[2]); P(im, xx + 1, y, G[0])
+            if rng.random() < 0.3: P(im, xx - 1, y, G[3])
+    return im
+
+
 def stall(cols, goods, seed):
     """a market stall (3x2): a striped canvas roof on poles over a plank counter with goods"""
     im = Image.new('RGBA', (48, 32), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(seed)
@@ -1205,6 +1320,12 @@ def city_pieces():
         for end in 'wme':
             out['rw_%s%s0' % (kind, end)] = (retaining(kind + end, 0), ['Q' if kind == 'lip' else 'W'], None)
     out['rw_lipm1'] = (retaining('lipm', 1), ['Q'], None); out['rw_f1m1'] = (retaining('f1m', 2), ['W'], None)
+    im, c = monument(); out['pf_hounds'] = (im, c, None)
+    for v in range(4): out['pf_planter%d' % v] = (planter(v), ['W', 'W'][:1] * 1 if False else ['WW'], None)
+    im, c = well(); out['pf_well'] = (im, c, None)
+    for v in range(2): out['rw_ivy%d' % v] = (ivy_face(v), ['W'], None)
+    for kind in ('W', 'E'):                     # map builder 9: solid side copings for terraces on land (no stepping off the side)
+        out['rw_%s0' % kind] = (quay(kind + 'm', 0), ['W'], None)
     for v in range(4): out['salt%d' % v] = (salt_flat(v), ['G'], None)
     for v in ('', 'n', 's', 'w', 'e', 'nw', 'ne', 'sw', 'se', 'ns', 'we'):
         out['brine_' + (v or 'c')] = (brine(v), ['W'], None)

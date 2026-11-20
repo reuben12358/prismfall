@@ -1,4 +1,4 @@
-# Saltmere - The Promenade (140). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv) - edit that script.
+# Saltmere - The Upper Town (140). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.
 id: 140
 name: Saltmere
 bgm: Lerucean Town
@@ -14,78 +14,126 @@ metadata:
   BattleBack: field
   Weather: [Rain, 10]
 connections:
-- {dir: N, offset: 44, to: 541, to_offset: 13}
-- {dir: W, offset: 32, to: 560, to_offset: 12}
-biome: village
+- {dir: N, offset: 43, to: 541, to_offset: 12}
+- {dir: W, offset: 31, to: 560, to_offset: 12}
+- {dir: E, offset: 44, to: 528, to_offset: 38}
+biome: harbour
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 100, sx: 2, sy: 0}
 raw: data/raw/140.npy
-tileset: 51
+tileset: 55
 events:
-- type: sign
-  name: Locked door
-  at: [41, 26]
-  post: false
-  text: The door is barred from the inside.
 - type: door
-  at: [46, 26]
+  at: [34, 24]
   gfx: ['', 0, 2]
   name: Pageant Hall door
   link: SM_PAGEANT
 - type: door
-  at: [24, 32]
+  at: [25, 24]
+  gfx: ['', 0, 2]
+  name: Lantern House door
+  link: SM_LANTERN
+- type: door
+  at: [54, 24]
   gfx: ['', 0, 2]
   name: Poke Center door
   link: SM_PC
 - type: door
-  at: [58, 30]
+  at: [60, 24]
   gfx: ['', 0, 2]
   name: Mart door
   link: SM_MART
 - type: door
-  at: [26, 6]
+  at: [23, 49]
   gfx: ['', 0, 2]
   name: House door
   link: SM_HOUSE1
 - type: warp
+  at: [9, 71]
+  to: {map: 147, x: 40, y: 1, dir: retain}
+- type: warp
+  at: [10, 71]
+  to: {map: 147, x: 41, y: 1, dir: retain}
+- type: warp
+  at: [11, 71]
+  to: {map: 147, x: 42, y: 1, dir: retain}
+- type: warp
+  at: [12, 71]
+  to: {map: 147, x: 43, y: 1, dir: retain}
+- type: warp
+  at: [13, 71]
+  to: {map: 147, x: 44, y: 1, dir: retain}
+- type: warp
+  at: [14, 71]
+  to: {map: 147, x: 45, y: 1, dir: retain}
+- type: warp
   at: [56, 71]
-  to: {map: 146, x: 42, y: 4, dir: retain}
+  to: {map: 146, x: 42, y: 1, dir: retain}
 - type: warp
   at: [57, 71]
-  to: {map: 146, x: 43, y: 4, dir: retain}
+  to: {map: 146, x: 43, y: 1, dir: retain}
 - type: warp
   at: [58, 71]
-  to: {map: 146, x: 44, y: 4, dir: retain}
+  to: {map: 146, x: 44, y: 1, dir: retain}
 - type: warp
   at: [59, 71]
-  to: {map: 146, x: 45, y: 4, dir: retain}
+  to: {map: 146, x: 45, y: 1, dir: retain}
 - type: warp
   at: [60, 71]
-  to: {map: 146, x: 46, y: 4, dir: retain}
+  to: {map: 146, x: 46, y: 1, dir: retain}
 - type: warp
   at: [61, 71]
-  to: {map: 146, x: 47, y: 4, dir: retain}
-- type: warp
-  at: [87, 42]
-  to: {map: 147, x: 1, y: 36, dir: retain}
-- type: warp
-  at: [87, 43]
-  to: {map: 147, x: 1, y: 37, dir: retain}
-- type: warp
-  at: [87, 44]
-  to: {map: 147, x: 1, y: 38, dir: retain}
-- type: warp
-  at: [87, 45]
-  to: {map: 147, x: 1, y: 39, dir: retain}
+  to: {map: 146, x: 47, y: 1, dir: retain}
 - type: sign
-  at: [49, 6]
-  text: 'SALTMERE
+  name: Town sign
+  text: 'SALTMERE - The Free Port.
 
-    The free port of the Evergreen Crown.'
-  name: SALTMERE
+    Answers to the Accord and to No Crown. (Booing Tuesdays.)'
+  at: [80, 44]
+  post: false
+- type: sign
+  name: North Gate sign
+  text: NORTH GATE - The Grey Saltings, the Dyers' Ford and the weaving country.
+  at: [42, 9]
+  post: false
+- type: sign
+  name: West Gate sign
+  text: WEST GATE - The Frostflat Causeway. (Chained at the Border Stones by order of Isenmar customs.)
+  at: [4, 31]
+  post: false
+- type: sign
+  name: Harbour causeway sign
+  text: THE HARBOUR CAUSEWAY - Quays, the Harbour Office and the breakwater.
+  at: [55, 56]
+  post: false
+- type: sign
+  name: Old Town causeway sign
+  text: THE PLAYERS' CAUSEWAY - The Old Town, the Pell Playhouse and the Little Lantern.
+  at: [15, 56]
+  post: false
+- type: sign
+  name: Pageant poster
+  text: '"THE PAGEANT OF THE PRISMFALL - a Gift of Love from the Original One. Festival Year: Opening Night! With the companion piece THE LOYAL THREE. By
+    leave of the Accord."'
+  at: [38, 26]
+  post: false
+- type: sign
+  name: Festival poster
+  text: The same poster as the Landing's. The painted Crown's stone has the same tiny dark fleck. Nobody here has bothered to circle it.
+  at: [50, 26]
+  post: false
+- type: sign
+  name: Promenade lamps
+  text: Oil lamps on iron posts. Each has a number, and a playbill pasted to it.
+  at: [66, 52]
+  post: false
+- type: sign
+  name: Bell tower
+  text: THE SALT BELL. Rung for the tax-barge, for fire, and for curtain-up. Mostly for curtain-up.
+  at: [42, 25]
   post: false
 - type: event
   name: Juno J1
-  at: [37, 36]
+  at: [37, 53]
   pages:
   - cond: {switch: CH2_MATRIARCH_DONE}
     graphic: {sprite: trainer_RIVAL2, dir: down}
@@ -110,29 +158,16 @@ events:
   - cond: {switch: CH3_J1_DONE}
     graphic: {sprite: trainer_RIVAL2, dir: down}
     commands: ['Juno: Same breakwater, same caramel, next time. Deal?']
-- type: npc
-  name: Busker
-  at: [33, 40]
-  sprite: NPC 08
-  dir: down
-  move: random
-  text: 'Busker: Saltmere''s Plate makes everything ordinary - no Bleed, no miracles. So we make our own, on stage!'
-- type: npc
-  name: Caramel seller
-  at: [47, 41]
-  sprite: NPC 11
-  dir: down
-  text: Salt-caramel! Fresh salt-caramel! Pageant tonight - the Loyal Three companion piece!
 - type: event
   name: Royal notice
-  at: [50, 31]
+  at: [47, 41]
   pages:
   - cond: {switch: CH3_PAGEANT_DONE}
     commands: ['A royal notice: Queen Maelis "notes with grief" the Hollow outrage in her free port, "where the Crown''s protection was refused."', 'Someone
         - Dorian, by the velvet thread - has torn it half down.']
 - type: event
   name: Kestrel
-  at: [52, 32]
+  at: [36, 27]
   pages:
   - cond: {switch: CH3_PAGEANT_DONE}
     graphic: {sprite: trainer_RIVAL1, dir: left}
@@ -144,21 +179,364 @@ events:
   - cond: {self: A}
 - type: npc
   name: Eevee breeder
-  at: [46, 58]
+  at: [58, 38]
   sprite: NPC 25
   dir: down
   text: 'Breeder: Dorian''s troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage.'
-- type: sign
-  at: [55, 59]
-  text: 'HARBOUR STAIRS
+- type: event
+  name: Gate Warden
+  pages:
+  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    commands: ['Gate Warden: The North Gate is shut while the Pageant runs. Accord orders: nobody leaves with a full purse or an empty seat.', 'Gate Warden:
+        Come back when the curtain''s down. The Saltings road isn''t going anywhere. It never does.']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    graphic: {sprite: trainer_GENTLEMAN, dir: left}
+    commands: ['Gate Warden: The gate''s open. After last night... mind the Grey Saltings. And mind who you talk to.']
+  at: [46, 9]
+- type: event
+  name: Arrival (East Gate)
+  pages:
+  - trigger: autorun
+    cond: {}
+    commands:
+    - if: '!pfm?(:sm_arrived) && $game_player.x >= 80'
+      then:
+      - {se: Horse}
+      - (Lamplit promenades along a white salt lake, striped awnings, salt-caramel smoke. A long green barge flying Elowen's briar crown rows across the
+        lake toward the harbour mouth.)
+      - {se: Applause}
+      - 'The Breakwater: BOOOOOOOOOOOO.'
+      - (The green barge turns, slowly, and rows away.)
+      - '\pf[JUNO,deadpan]Juno: That''s the Queen''s tax-barge. They do that every week. It''s tradition. The barge comes, everyone boos, the barge goes.'
+      - '\pf[JUNO,neutral]Juno: Mum says it''s the only time in history a tax has been defeated by noise.'
+      - '\pf[JUNO,happy]Juno: I''m taking the tarts to the Lantern Theatre! Find me on the green after. Don''t go into the gym without me! I need to be
+        AUDIENCE!'
+      - {script: 'pfm_set(:sm_arrived)'}
+      - selfswitch: [A, true]
+      else:
+      - selfswitch: [A, true]
+  - cond: {self: A}
+    commands: []
+  at: [85, 46]
+- type: event
+  name: Caramel Seller
+  pages:
+  - commands:
+    - 'Caramel Seller: Salt-caramel! Fresh salt-caramel! Pageant tonight — the Loyal Three companion piece!'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 29, dir: down}
+  - commands: ['Caramel Seller: It''s mostly salt. That''s the secret. Don''t tell anyone. Everyone knows.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 29, dir: down}
+    cond: {self: A}
+  at: [30, 38]
+- type: event
+  name: Busker
+  pages:
+  - commands:
+    - 'Busker: Saltmere''s Plate makes everything ordinary — no Bleed, no miracles. So we make our own, on stage!'
+    - selfswitch: [A, true]
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 27, dir: down}
+  - commands: ['Busker: I''ve played this corner twenty years. Not one strange thing has happened to me. I find it very hard to write songs.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 27, dir: down}
+    cond: {self: A}
+  at: [54, 33]
+- type: event
+  name: Lamplighter
+  pages:
+  - commands: ['Lamplighter: No Meridian lamps on the promenade. The Warden says these lamps are part of the set. Meridian can light the rest of Velmora;
+        the set stays oil.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 26, dir: down}
+  at: [72, 53]
+- type: event
+  name: Child with an Ogre puppet
+  pages:
+  - commands:
+    - 'Child with an Ogre puppet: The Ogre steals the Plates and the Three bite him! Then everyone claps! Then there''s caramel!'
+    - selfswitch: [A, true]
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 17, dir: down}
+  - commands: ['Child with an Ogre puppet: I like the Ogre. Don''t tell anyone. He''s got a nice face.']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 17, dir: down}
+    cond: {self: A}
+  at: [36, 34]
+- type: event
+  name: Retired Actor on a bench
+  pages:
+  - commands:
+    - 'Retired Actor on a bench: I played a king once. In a play they closed before the dress. I''m not allowed to say which.'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 24, dir: down}
+  - commands: ['Retired Actor on a bench: Better part than Ogre, I''ll tell you that. The Ogre never gets a speech.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 24, dir: down}
+    cond: {self: A}
+  at: [28, 55]
+- type: event
+  name: Hound Number Two
+  pages:
+  - commands: ['Hound Number Two: I''m Hound Number Two! I bite on the beat! The beat is "GRR". I have to wait for Hound Number One''s "GRR" and then I
+        go "GRR".']
+    trigger: action
+    move: random
+    graphic: {sprite: NPC 23, dir: down}
+  at: [49, 52]
+- type: event
+  name: Grey Pilgrim
+  pages:
+  - commands: ['Grey Pilgrim: Lovely night for a play. Sit near the back, child. You''ll see more from the back.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 24, dir: down}
+  at: [60, 55]
+- type: event
+  name: Accord Inspector
+  pages:
+  - commands: ['Accord Inspector: I have a copy of the official text. Every word approved. I will be following along. Closely. Until the second act.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 06, dir: down}
+  at: [37, 29]
+- type: event
+  name: Meridian Clerk
+  pages:
+  - commands: ['Meridian Clerk: We''re not trying to light Saltmere. We''re just asking. Every week. Politely.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SCIENTIST, dir: down}
+  at: [55, 27]
+- type: event
+  name: Fishwife
+  pages:
+  - commands: ['Fishwife: You''ve no tint at all? In Saltmere that''s barely worth gossip. We''re all Blank here. You''re just Blanker.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_FISHERMAN, dir: down}
+  at: [66, 46]
+- type: event
+  name: HiddenItem lemonade
+  pages:
+  - commands:
+    - if: pbItemBall(:LEMONADE)
+      then:
+      - Someone was saving it for the interval.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [31, 39]
+- type: npc
+  name: Woman from the ferry
+  sprite: NPC 13
+  dir: down
+  text: 'Woman from the ferry: You! From the Dovetail! I''m home! I''m not grey anymore. Look at me. I''m BEIGE.
 
-    Down to the quays and the breakwater.'
-  name: HARBOUR STAIRS
-  post: false
-- type: sign
-  at: [82, 46]
-  text: 'PLAYERS'' GATE
-
-    Old Town and the Pell Playhouse.'
-  name: PLAYERS GATE
-  post: false
+    Woman from the ferry: Blank tint. Saltmere. The gate said so. My sister cried.'
+  at: [76, 46]
+- type: npc
+  name: Salt raker
+  sprite: NPC 19
+  dir: up
+  move: random
+  text: 'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'
+  at: [40, 66]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 17
+  dir: up
+  move: fixed
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [45, 26]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 04
+  dir: up
+  move: fixed
+  text: Salt's up a copper a sack. Blame the weather. Everyone does.
+  at: [49, 39]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 23
+  dir: up
+  move: fixed
+  text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
+  at: [47, 26]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 04
+  dir: up
+  move: random
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [33, 36]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 23
+  dir: right
+  move: fixed
+  text: I came for a week. That was eleven years ago.
+  at: [52, 32]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 15
+  dir: down
+  move: random
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [29, 32]
+- type: npc
+  name: Townsfolk 7
+  sprite: NPC 03
+  dir: up
+  move: random
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [44, 28]
+- type: npc
+  name: Townsfolk 8
+  sprite: NPC 23
+  dir: left
+  move: random
+  text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
+  at: [57, 34]
+- type: npc
+  name: Townsfolk 9
+  sprite: NPC 22
+  dir: down
+  move: fixed
+  text: Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.
+  at: [49, 34]
+- type: npc
+  name: Townsfolk 10
+  sprite: NPC 03
+  dir: down
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [28, 40]
+- type: npc
+  name: Townsfolk 11
+  sprite: NPC 11
+  dir: right
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [59, 40]
+- type: npc
+  name: Townsfolk 12
+  sprite: NPC 01
+  dir: up
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [39, 33]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 18
+  dir: up
+  move: fixed
+  text: The free port's free. The rent isn't.
+  at: [26, 54]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 04
+  dir: left
+  move: random
+  text: Don't stand under the gulls by the fish stalls.
+  at: [50, 56]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 04
+  dir: down
+  move: fixed
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [83, 55]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 20
+  dir: down
+  move: random
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [58, 53]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 03
+  dir: down
+  move: fixed
+  text: Fresh mackerel! Ordinary mackerel! Very ordinary!
+  at: [35, 56]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 11
+  dir: right
+  move: fixed
+  text: The gate shuts at the Pageant. Tradition. Nobody remembers why. Probably a play.
+  at: [12, 56]
+- type: npc
+  name: Townsfolk 7
+  sprite: NPC 14
+  dir: up
+  move: random
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [64, 56]
+- type: npc
+  name: Townsfolk 8
+  sprite: NPC 06
+  dir: down
+  move: random
+  text: My cousin's in the Hound chorus. He says 'GRR' professionally.
+  at: [3, 54]
+- type: npc
+  name: Townsfolk 9
+  sprite: NPC 09
+  dir: down
+  move: fixed
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [8, 52]
+- type: npc
+  name: Townsfolk 10
+  sprite: NPC 05
+  dir: down
+  move: fixed
+  text: Dorian waved at me once. From a balcony. I think it was at me.
+  at: [16, 53]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 04
+  dir: up
+  move: random
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [68, 9]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 03
+  dir: down
+  move: fixed
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [64, 10]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 03
+  dir: down
+  move: random
+  text: Don't stand under the gulls by the fish stalls.
+  at: [66, 9]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 14
+  dir: up
+  move: fixed
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [36, 9]

@@ -3,14 +3,31 @@ if defined?(Prismfall::Bosses)
   # map 548
   Prismfall::Bosses.register(:GLASS_MATRIARCH, {
     :species    => :GALVANTULA,
-    :level      => { :CASUAL => 15, :STANDARD => 16, :HARD => 18, :default => 16 },
+    :level      => { :CASUAL => 18, :STANDARD => 20, :HARD => 22, :default => 20 },
     :nickname   => "Glass Matriarch",
-    :bars       => { :CASUAL => 2, :STANDARD => 3, :HARD => 3, :default => 3 },
+    :moves      => { :CASUAL => [:ELECTROWEB, :BUGBITE, :STRINGSHOT, :ABSORB],
+                     :STANDARD => [:ELECTROWEB, :BUGBITE, :STRINGSHOT, :SCREECH],
+                     :HARD => [:ELECTROWEB, :BUGBUZZ, :STICKYWEB, :THUNDERWAVE],
+                     :default => [:ELECTROWEB, :BUGBITE, :STRINGSHOT, :SCREECH] },
+    :bars       => { :CASUAL => 2, :STANDARD => 2, :HARD => 3, :default => 2 },
     :stat_mults => { :HP => 1.1, :DEFENSE => 1.15, :SPECIAL_DEFENSE => 1.15 },
     :field      => :BLEED,
     :intro      => "The Glass Matriarch rises from its nest, every crystal hair ringing!",
     :breaks     => {
-      1 => { :message => "{1}'s crystal silk shatters... and regrows thicker!", :stats => { :DEFENSE => 1 } },
+      1 => { :message => "{1} re-strings the nest! Crystal silk floods the Bleed!", :stats => { :DEFENSE => 1 },
+             :proc => proc { |battle, battler, state|
+               next false if !defined?(FieldEffects) || FieldEffects.current(battle) != :BLEED
+               st = FieldEffects.raw_state(battle)
+               next false if !st
+               old = st[:borrowed].dup
+               st[:borrowed] = [:SILKWOOD]
+               st[:borrow_timer] = 3
+               FieldEffects.invalidate_cache(battle)
+               battle.pbDisplay(FieldEffects.format("The Bleed convulses... echoes of the {1} tear through the battlefield!",
+                                                    FieldEffects.name_of(:SILKWOOD)))
+               FieldEffects.notify_overlay_change(battle, :BLEED, old, [:SILKWOOD])
+               true
+             } },
       2 => { :message => "{1} pulls the Bleed into its nest!", :cure_status => true, :stats => { :SPEED => 1 } }
     },
     :on_defeat  => { :message => "{1} folds its legs. The ringing of the nest softens.", :result => :calmed }

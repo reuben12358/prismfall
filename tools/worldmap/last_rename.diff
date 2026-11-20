@@ -1,1 +1,16 @@
-
+--- design/EVENT_POKEMON.md
++++ design/EVENT_POKEMON.md
+@@ -36 +36 @@
+-| 26 | **Druddigon Lv 37 (ROUGHSKIN)** `AS_DRUDDIGON` | boss battle, then it joins | 8 | Mt. Cinder lava tubes (664) | Beat the lava-tube boss | Rough Skin Dragon with Dragon Tail; Dragon has 13 families by Badge 8 and this is the bulkiest | The Lava-Tube Terror `AS_DRUDDIGON` | designed |
++| 26 | **Druddigon Lv 37 (ROUGHSKIN)** `AS_DRUDDIGON` | boss battle, then it joins | 8 | The Cinderhorn lava tubes (664) | Beat the lava-tube boss | Rough Skin Dragon with Dragon Tail; Dragon has 13 families by Badge 8 and this is the bulkiest | The Lava-Tube Terror `AS_DRUDDIGON` | designed |
+@@ -40 +40 @@
+-| 30 | **Axew Lv 1** `AS_AXEW_EGG` | egg | 9 | the far roost, Mt. Cinder (248) | Keep the egg warm across Mt. Cinder | The earliest Axew (wild only from Badge 17): Haxorus | The Egg Run `AS_EGG_RUN` | designed |
++| 30 | **Axew Lv 1** `AS_AXEW_EGG` | egg | 9 | the far roost, the Cinderhorn (248) | Keep the egg warm across the Cinderhorn | The earliest Axew (wild only from Badge 17): Haxorus | The Egg Run `AS_EGG_RUN` | designed |
+--- design/TRIALS_QUESTS.md
++++ design/TRIALS_QUESTS.md
+@@ -96 +96 @@
+-| **The Lava-Tube Terror** `AS_DRUDDIGON` | 8 | `badges >= 6` | a Hearthguild smith · Mt. Cinder (664) | ★★ · 40 | A Druddigon has made the Mt. Cinder lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed. **Twist:** Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying. | Druddigon Lv 37 (ROUGHSKIN); +4 pts | Honesty law: report how the fight really went (lying costs the reward) | designed |
++| **The Lava-Tube Terror** `AS_DRUDDIGON` | 8 | `badges >= 6` | a Hearthguild smith · The Cinderhorn (664) | ★★ · 40 | A Druddigon has made the Cinderhorn lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed. **Twist:** Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying. | Druddigon Lv 37 (ROUGHSKIN); +4 pts | Honesty law: report how the fight really went (lying costs the reward) | designed |
+@@ -101 +101 @@
+-| **The Egg Run** `AS_EGG_RUN` | 9 | `badges >= 7` | the Roost-mistress · the Dragon Roosts, Cindervault (248) | ★★★ · 42 | Carry a warm dragon egg across Mt. Cinder to the far roost. Egg-hunters know the route. The egg must not get cold. **Twist:** A warmth meter (steps since the last vent) instead of a timer; egg-hunter ambushes (trainer battles) at the vents. At the far roost the egg hatches early in your hands. It decides you're its roost. | Axew Lv 1; +4 pts | none; earliest Axew (wild only from Badge 17) | designed |
++| **The Egg Run** `AS_EGG_RUN` | 9 | `badges >= 7` | the Roost-mistress · the Dragon Roosts, Cindervault (248) | ★★★ · 42 | Carry a warm dragon egg across the Cinderhorn to the far roost. Egg-hunters know the route. The egg must not get cold. **Twist:** A warmth meter (steps since the last vent) instead of a timer; egg-hunter ambushes (trainer battles) at the vents. At the far roost the egg hatches early in your hands. It decides you're its roost. | Axew Lv 1; +4 pts | none; earliest Axew (wild only from Badge 17) | designed |
