@@ -150,3 +150,13 @@ expressions). It was installed and then reverted: the pass-3 set is back in `art
 - **Anything that reads even slightly like a known character fails.** Before showing any face or sprite, ask "who does this look
   like?" and check against the obvious official characters (Burgh, Rosa, Hilda, Bianca...) as well as the donors.
 - Polish of an accepted look stays inside that look: keep face, eyes and style exactly; only fix the listed faults.
+
+## 12. Pass-3 hair fix (2026-11-19)
+
+Sheet: `art/previews/16_juno_hair_fix.png`. Script: `juno_hair_fix.py` (`sheet16h.py`). Outputs `JUNO_<expr>_p3h.png`, installed;
+the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels change (checked: 0 non-hair pixels differ).
+- The choppy look came from Rosa's hat lines and Hilda's strand lines: black 1-px stripes inside the mass, two flat colours.
+- Fix: classify hair (3 hair colours + black pixels that touch only hair), fill stair-step notches / cut spurs against empty space,
+  then re-shade procedurally: locks radiate from a crown point above the frame with a slight wave, each lock lit on one side and
+  falling into a crease (sawtooth profile), 4 shades (pass 3's own two plus one darker, one lighter), one highlight arc that
+  follows the dome and breaks at the creases. Black stays only on the outer silhouette.

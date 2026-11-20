@@ -62,6 +62,31 @@ def main():
             except ValueError: return None
         return VE.NONLEVEL_EVO_MIN
 
+    gates, grules = VE.load_gates()
+    def root(sp):
+        b, seen = species[sp]["base"], set()
+        while b in prevo and b not in seen:
+            seen.add(b); b = prevo[b][0]
+        return b
+    # Revision 16 gates on the COMBINED table (base + every overlay open at that badge count), per encounter type
+    if gates:
+        for mid in sorted({k[0] for k in tiers}):
+            base_sec = base.get((mid, 0))
+            for b in range(1, 18):
+                combined = {}
+                if base_sec:
+                    for et, lst in base_sec["types"].items():
+                        combined.setdefault(et, []).extend(lst)
+                opened = False
+                for (m2, ver), sec in tiers.items():
+                    if m2 != mid or ver // 100 != 1 or ver % 100 > b: continue
+                    opened = opened or ver % 100 == b
+                    for et, lst in sec["types"].items():
+                        combined.setdefault(et, []).extend(lst)
+                if not opened or not base_sec: continue
+                for et, lst in combined.items():
+                    VE.gate_check(lst, max(b, VE.base_unlock(et)), species, gates, grules,
+                                  f"[{mid}] base + tiers to {b} {et}", errors)
     slots = 0
     for (mid, ver), sec in tiers.items():
         where = f"[{mid},{ver}]"
@@ -100,6 +125,9 @@ def main():
                     warnings.append(f"L{no} {where}: weight {w} is not rare (overlays should be 2-6)")
                 if any(f in species[sp]["flags"] for f in VE.SPECIAL_FLAGS):
                     errors.append(f"L{no} {where}: {sp} is legendary/mythical")
+                if grules and root(sp) in grules.get("pseudo_legend_roots", []) and badges < grules["pseudo_legend_min_badges"]:
+                    errors.append(f"L{no} {where}: {sp} is a pseudo-legend line; overlays from Badge "
+                                  f"{grules['pseudo_legend_min_badges']} only (rule R7)")
                 el = evo_level(sp)
                 if el and lo < el - VE.EVO_TOLERANCE:
                     warnings.append(f"L{no} {where}: {sp} at Lv{lo} but evolves in at Lv{el}")

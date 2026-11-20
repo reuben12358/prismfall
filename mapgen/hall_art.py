@@ -221,8 +221,10 @@ def loom_face(part='mid', color=None):
         for x in range(16):
             r, g, b, a = im.getpixel((x, y)); k = 1 - (y - 6) * 0.045
             im.putpixel((x, y), (int(r * k), int(g * k), int(b * k), a))
-    for x in range(1, 16, 2):                                        # warp threads tied over the beam
-        d.line([(x, 3), (x, 15)], fill=SILK[0] if x % 4 == 1 else SILK[1])
+    for x in (1, 5, 9, 13):                                          # warp threads tied over the beam
+        d.line([(x, 3), (x, 15)], fill=SILK[0])
+    for x in (3, 11):
+        d.line([(x, 4), (x, 15)], fill=SILK[2])
     if part == 'l': d.rectangle([0, 0, 1, 15], fill=WOOD[0])
     if part == 'r': d.rectangle([14, 0, 15, 15], fill=WOOD[0])
     if color:
@@ -246,14 +248,15 @@ def warp_overlay(kind='mid'):
     """The warp: taut silk threads stretched across a loom bed (overlay; the floor below shows between them).
     kind 'bot' adds the back beam the threads are tied to at the far side."""
     im = blank(); d = ImageDraw.Draw(im)
-    for x in range(1, 16, 2):
-        c = SILK[0] if x % 4 == 1 else SILK[1]
-        d.line([(x, 0), (x, 15)], fill=c + (235,))
-        im.putpixel((x, 7), SILK[2] + (255,))
+    for x in (1, 5, 9, 13):                                          # the warp: one thread in four, so the floor below shows
+        d.line([(x, 0), (x, 15)], fill=SILK[0] + (215,))
+        d.line([(x + 1, 0), (x + 1, 15)], fill=(40, 30, 40, 70))     # each thread's shadow on the boards below
+    for x in (3, 11):
+        d.line([(x, 0), (x, 15)], fill=SILK[1] + (120,))
     if kind == 'bot':
         d.rectangle([0, 11, 15, 14], fill=WOOD[3]); d.line([(0, 11), (15, 11)], fill=WOOD[5]); d.line([(0, 14), (15, 14)], fill=WOOD[1])
         d.line([(0, 15), (15, 15)], fill=(0, 0, 0, 90))
-        for x in range(1, 16, 2): im.putpixel((x, 12), SILK[0] + (255,))
+        for x in (1, 5, 9, 13): im.putpixel((x, 12), SILK[0] + (255,))
     return up(im)
 
 

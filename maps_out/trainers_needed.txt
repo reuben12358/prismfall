@@ -3,5 +3,3 @@
 130	:LASS, "Orla"
 131	:GENTLEMAN, "Bram"
 131	Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)
-132	:BUGCATCHER, "Hollis"
-132	:POKEMONRANGER_M, "Ash"

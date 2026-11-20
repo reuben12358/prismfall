@@ -73,11 +73,11 @@ module WR
   FIGHTS = {
     "K1" => { :label => "K1 Kestrel (intro, Lv 5 starter alone)", :cap => 5, :lvcap => 15, :badges => 0, :size => 1, :pool => :ch1_2,
               :bag => :none, :stage => 0, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, :can_lose => true) } },
-    "J1" => { :label => "J1 Juno (Saltmere green, before Gym 1)", :cap => 15, :badges => 0, :size => 4, :pool => :ch1_2,
+    "J1" => { :label => "J1 Juno (Saltmere green, before Gym 1)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
               :bag => :g1, :stage => 0, :start => proc { Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, :can_lose => true) } },
-    "G1" => { :label => "Gym 1 Dorian (Grand Stage, single)", :cap => 15, :badges => 0, :size => 4, :pool => :ch1_2,
+    "G1" => { :label => "Gym 1 Dorian (Grand Stage, single)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
               :bag => :g1, :stage => 0, :start => proc { Prismfall.gym_battle(1, :can_lose => true) } },
-    "G2" => { :label => "Gym 2 Tamsin (Silkwood, double)", :cap => 19, :badges => 1, :size => 5, :pool => :ch3,
+    "G2" => { :label => "Gym 2 Tamsin (Silkwood, double)", :cap => 19, :badges => 1, :size => 6, :pool => :ch3,
               :bag => :g2, :tms => :g2, :stage => 1, :start => proc { Prismfall.gym_battle(2, :can_lose => true) } },
     "K2" => { :label => "K2 Kestrel (Gullcry Cliffs, before Gym 3)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
               :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2, :can_lose => true) } },
@@ -119,7 +119,7 @@ module WR
     st = starter_lines[f[:stage]] || starter_lines[0]
     list = [[st, f[:cap]]]
     catches = POOLS[f[:pool]].shuffle(random: rng).first(f[:size] - 1)
-    offsets = [1, 1, 2, 2, 1]
+    offsets = [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
     catches.each_with_index { |sp, i| list << [sp, f[:cap] - offsets[i % offsets.size]] }
     party = list.map { |sp, lv| mon(sp, lv, rng) }
     TMS[f[:tms] || :none].each do |tm|

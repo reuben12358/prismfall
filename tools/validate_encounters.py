@@ -313,6 +313,10 @@ def main():
                     kdenom += w
                     if set(sp[s]["types"]) & ktypes: kshare += w
                 fam = family_root(s)
+                if grules and fam in grules.get("pseudo_legend_roots", []) and eff is not None \
+                        and eff < grules["pseudo_legend_min_badges"]:
+                    errors.append(f"L{no} {tag} {t}: {s} is a pseudo-legend line, wild from Badge "
+                                  f"{grules['pseudo_legend_min_badges']} only (rule R7), usable here from {eff}")
                 key = eff if eff is not None else 99
                 if fam not in first_seen or key < first_seen[fam][0]: first_seen[fam] = (key, mid, s)
             gate_check(slots, eff, sp, gates, grules, f"{tag} {t}", errors)

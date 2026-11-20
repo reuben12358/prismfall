@@ -174,7 +174,7 @@ def main():
     for y in range(12, 24):
         for x in (9, 10): h.put(MI(1049), x, y, 0)
     loom_bed(K, h, g1.GYM_BED, 3, 16, rnd, posts=False)
-    for x in (6, 13): h.obj('laundry', x, 5)
+    for x in (6, 12): h.obj('laundry', x, 5)
     h.obj('web', 3, 2); h.obj('web', 14, 2); h.obj('plant', 3, 5); h.obj('plant', 16, 5)
     h.obj('vat_b', 12, 8); h.obj('vat_r', 13, 8); h.obj('vat_y', 14, 8); h.obj('silk', 16, 8); h.obj('silk1', 16, 7)
     h.obj('lantern', 3, 22); h.obj('lantern', 16, 22); h.obj('silk', 15, 22); h.obj('silk1', 3, 15); h.obj('silk1', 16, 16)
@@ -234,7 +234,7 @@ def main():
     for x in (5, 18): h.obj('laundry', x, 4)
     h.obj('web', 0, 0); h.obj('web', 22, 0)
     h.obj('vat_b', 6, 5); h.obj('vat_r', 7, 5); h.obj('vat_y', 17, 5)
-    h.stamp('hb_rugline', 20, 5); h.stamp('hb_dyeline', 14, 22)                     # a tapestry and dyed silk drying on frames
+    h.stamp('hb_rugline', 5, 22); h.stamp('hb_dyeline', 14, 22)                     # a tapestry and dyed silk drying on frames
     h.obj('silk', 1, 22); h.obj('silk1', 2, 22); h.obj('lantern', 4, 21); h.obj('lantern', 20, 21); h.obj('mat_mi', 11, 23)
     for x0 in (2, 7, 16, 21): light_band(K, h, x0, 5, 10, set(g1.HALL_GAPS['A'][0]))
     for n, (pos, _, _) in g1.HALL_HEDDLES.items():      # each heddle frame's header stands over the walkway behind it

@@ -1127,6 +1127,37 @@ def glint(v):
     return im
 
 
+def chalk_arch():
+    """a sea-cut chalk arch (7x5) the cliff path runs under (Lacecliff Walk): two chalk legs, a span worn into
+    lace-like holes, turf and sea-pinks on top.  Code: span overhead, legs solid, the opening walkable"""
+    im = Image.new('RGBA', (112, 80), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(77)
+    CH = [(118, 116, 120, 255), (168, 166, 166, 255), (206, 204, 198, 255), (232, 230, 222, 255), (248, 246, 240, 255)]
+    G = [(52, 104, 62, 255), (86, 150, 86, 255), (134, 196, 120, 255)]
+    d.rectangle([2, 10, 109, 44], fill=CH[2], outline=OUT)                     # the span
+    for (x0, x1) in ((2, 31), (80, 109)):                                      # the legs
+        d.rectangle([x0, 30, x1, 78], fill=CH[2], outline=OUT)
+        d.line([x0 + 1, 31, x0 + 1, 77], fill=CH[4]); d.line([x1 - 1, 31, x1 - 1, 77], fill=CH[1])
+        for y in range(36, 76, 7): d.line([x0 + 3, y, x1 - 3, y + rng.randrange(-1, 2)], fill=CH[1])
+        d.line([x0, 78, x1, 78], fill=(0, 0, 0, 70))
+    d.pieslice([30, 26, 82, 86], 180, 360, fill=CLEAR)                          # the arch opening
+    d.rectangle([32, 56, 80, 79], fill=CLEAR)
+    d.arc([30, 26, 82, 86], 180, 360, fill=OUT); d.arc([31, 27, 81, 85], 180, 360, fill=CH[1])
+    d.line([31, 56, 31, 79], fill=OUT); d.line([81, 56, 81, 79], fill=OUT)
+    for _ in range(9):                                                         # lace holes worn through the span
+        x, y = rng.randrange(8, 104), rng.randrange(18, 40)
+        if 28 < x < 84 and y > 30: continue
+        r = rng.choice((2, 3))
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(70, 120, 150, 255), outline=CH[0])
+        P(im, x - r + 1, y - r + 1, CH[1])
+    for x in range(4, 108, 3): d.line([x, 12, x + rng.randrange(-2, 3), 16 + rng.randrange(4)], fill=CH[3])
+    d.line([3, 11, 108, 11], fill=CH[4])
+    d.rectangle([2, 0, 109, 10], fill=G[1], outline=OUT)                       # turf cap
+    for x in range(3, 108, 2): P(im, x, 1 + rng.randrange(3), G[2]); P(im, x, 9, G[0])
+    for _ in range(14): P(im, rng.randrange(4, 106), rng.randrange(1, 9), (240, 150, 180, 255))   # sea-pinks
+    code = ['OOOOOOO', 'OOOOOOO', 'WWOOOWW', 'WW...WW', 'WW...WW']
+    return im, code
+
+
 def stall(cols, goods, seed):
     """a market stall (3x2): a striped canvas roof on poles over a plank counter with goods"""
     im = Image.new('RGBA', (48, 32), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(seed)
@@ -1361,6 +1392,7 @@ def city_pieces():
     for e in 'wme':
         out['rw_rail_' + e] = (balustrade(e), ['W'], None); out['qy_rail_' + e] = (balustrade(e, iron=True), ['W'], None)
     for v in range(4): out['hb_glint%d' % v] = (glint(v), ['O'], None)
+    im, c = chalk_arch(); out['pf_chalkarch'] = (im, c, None)
     for v in range(2): out['rw_ivy%d' % v] = (ivy_face(v), ['W'], None)
     for kind in ('W', 'E'):                     # map builder 9: solid side copings for terraces on land (no stepping off the side)
         out['rw_%s0' % kind] = (quay(kind + 'm', 0), ['W'], None)

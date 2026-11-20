@@ -27,7 +27,7 @@ GoodRod
 [100,104] # Ferrow's Landing - after Badge 4
 GoodRod
     3,STARYU,25,28
-    1,DRATINI,25,28
+    2,SHELLDER,25,28
 [520,101] # The Ferrymen's Mile - after Badge 1
 Land
     4,TEDDIURSA,13,16
@@ -86,8 +86,8 @@ Land
     3,BUNEARY,13,16
 [528,102] # Marram Down - after Badge 2
 Land
-    3,SANDYGAST,17,20
-    3,GOSSIFLEUR,17,20
+    3,ROLYCOLY,17,20
+    3,CACNEA,17,20
 [528,103] # Marram Down - after Badge 3
 Land
     3,MARACTUS,21,24
@@ -144,7 +144,6 @@ Cave
 [545,104] # Brinecut Mine B1F - after Badge 4
 Cave
     2,NACLSTACK,25,28
-    1,BELDUM,25,28
 [552,102] # The Dyers' Ford - after Badge 2
 Land
     3,WOOPER,17,20
@@ -203,7 +202,6 @@ Land
 Land
     3,PHANTUMP,25,28
     2,SHIINOTIC,25,28
-    1,GOOMY,25,28
 [548,103] # Cocoonfall Hollow (Bleed) - after Badge 3
 Land
     3,BERGMITE,21,24
@@ -217,12 +215,12 @@ Land
 #===============================================================================
 [566,103] # Spinners' Rise - after Badge 3
 Land
-    3,MAREEP,21,24
-    3,SKIDDO,21,24
+    3,PONYTA,21,24
+    3,HOPPIP,21,24
 [566,104] # Spinners' Rise - after Badge 4
 Land
     3,DUBWOOL,25,28
-    2,TAUROS,25,28
+    2,MILTANK,25,28
 [577,103] # Frostwick Pass - after Badge 3
 Land
     3,SNEASEL,21,24
@@ -230,7 +228,7 @@ Land
 [577,104] # Frostwick Pass - after Badge 4
 Land
     3,BOUFFALANT,25,28
-    2,STANTLER,25,28
+    2,CETODDLE,25,28
 [570,103] # Frostwick - after Badge 3
 GoodRod
     3,FEEBAS,21,24
@@ -239,16 +237,16 @@ GoodRod
     2,VELUZA,25,28
 [578,103] # Rimewood Path - after Badge 3
 Land
-    3,SNORUNT,21,24
-    2,SMOOCHUM,21,24
+    3,SMOOCHUM,21,24
+    3,DELIBIRD,21,24
 [578,104] # Rimewood Path - after Badge 4
 Land
     2,CRYOGONAL,25,28
     2,STANTLER,25,28
 [562,103] # The Rimewood - after Badge 3
 Land
-    3,SNEASEL,21,24
     2,ABSOL,21,24
+    3,EISCUE,21,24
 [562,104] # The Rimewood - after Badge 4
 Land
     3,CRYOGONAL,25,28
@@ -304,9 +302,16 @@ GoodRod
 # Brinecut B1F). The rest move to their own kingdoms. Gible and Frigibax are already wild there (the Rib Road, Frostfang
 # Pass), as is the Dreepy line in Antumbra (Drakloak from Badge 14), so only these two overlays are new:
 #===============================================================================
-[601,105] # The Rib Road (Ossaria) - after Badge 5
+[601,108] # The Rib Road (Ossaria) - after Badge 8: pseudo-legends wait for Act III (DISTRIBUTION_STUDY R7)
 Land
-    1,LARVITAR,27,29
+    2,GABITE,41,44
+[605,108] # Static Tunnels Depths - after Badge 8 (R7)
+Cave
+    2,PUPITAR,41,44
+    1,METANG,41,44
+[648,108] # The Weeping Fen - after Badge 8 (R7)
+Land
+    3,SLIGGOO,41,44
 [666,108] # The Cinderhorn Caldera (Ashkaar) - after Badge 8: the Bagon line
 Land
     1,SHELGON,41,44

@@ -130,30 +130,32 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # careless player who lets the crowd climb. Counterplay: KO the singers first, stall (Protect, Endure, Splash...)
     # to calm the crowd, Rock and Ghost types (Rolycoly, Sudowoodo, Sandygast) shrug off the Normal moves.
     # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
-    P("AIPOM", 11, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
+    P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
       casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
       hard={"ab": "SKILLLINK", "item": "SILKSCARF", "moves": "FAKEOUT,DOUBLEHIT,ASTONISH,TICKLE"}),
-    # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB), Echoed Voice grows each turn,
-    #    and Encore lasts two turns longer on this stage (it locks a player who set up). Baby-Doll Eyes also lowers Sp. Atk here.
-    P("MINCCINO", 11, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,POUND,ENCORE,BABYDOLLEYES", "S",
+    # 2. The chorus: Round is a damaging sound move (x1.3 x1.3 STAB here), and Encore lasts two turns longer on this
+    #    stage (it locks a player who set up). Baby-Doll Eyes also lowers Sp. Atk here. Echoed Voice, which doubles
+    #    every turn it is repeated and climbs with the applause, is Hard's (on Standard it swept realistic teams in
+    #    the harness: 71 knockouts in 60 fights).
+    P("MINCCINO", 10, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
       casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
       hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),
     # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
-    P("SPINDA", 12, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
+    P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
       only="nocasual", hard={"moves": "TEETERDANCE,HEADBUTT,PSYBEAM,FAKEOUT", "item": "SITRUSBERRY"}),
     # Hard only: Dorian's voice. Big Pecks +1 Def, Hyper Voice / Chatter (sound, x1.3 x1.3) at Modest, Sing and Encore.
     P("CHATOT", 14, "BIGPECKS", "SITRUSBERRY", "MODEST", "CHATTER,HYPERVOICE,ENCORE,SING", "S", only="hard"),
     # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
     #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
-    P("JIGGLYPUFF", 12, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
+    P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
       only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,ROUND,DISARMINGVOICE,ECHOEDVOICE"}),
     # 5. The quick-change artist: Color Change is a costume change (it becomes the type of the move that hit it - hit
     #    it once with Fighting, then switch). It opens with its own Fake Out ("Costume change!"); Fury Swipes hits 2-5
     #    times and every critical hit is applause. Hard: Protean and the Synthetic Seed (Laser Focus: a sure crit).
-    P("KECLEON", 15, "COLORCHANGE", "SITRUSBERRY", "ADAMANT", "FAKEOUT,FURYSWIPES,SHADOWSNEAK,LICK", "BA",
+    P("KECLEON", 15, "COLORCHANGE", "SITRUSBERRY", "HARDY", "FURYSWIPES,SHADOWSNEAK,FEINT,LICK", "BA",
       casual={"item": "ORANBERRY", "moves": "SCRATCH,LICK,TAILWHIP,BIND"},
-      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,KNOCKOFF"}),
+      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "nat": "ADAMANT", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,KNOCKOFF"}),
 ])
 warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every stitch. Well sewn, challenger.", [
     # Gym 2, a DOUBLE battle: "a thread holds because it's twisted with others". Std 4 / Hard 5 / Casual 3.

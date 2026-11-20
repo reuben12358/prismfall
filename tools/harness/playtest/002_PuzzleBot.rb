@@ -12,20 +12,20 @@
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 11, 4], "backstage" => [154, 3, 9],
+  PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 11, 6], "backstage" => [154, 2, 11],
                    "d1" => [522, 6, 36] }
   # Gym 1 (SPINE Rev 14): the Pell Playhouse. A walk-through: lobby, up the aisle past the actors, one curtain rope.
   GYM1_PLAN = [
     [:shot, 147, "g1_00_outside_the_playhouse"],
     [:door, 147, 150],                    # map 147's Playhouse door (found by its transfer, wherever the town puts it)
     [:shot, 150, "g1_01_lobby"],
-    [:bump, 150, 11, 4],                  # the auditorium doors
+    [:bump, 150, 12, 5],                  # the auditorium doors
     [:shot, 154, "g1_02_auditorium"],
-    [:goto, 154, 12, 15], [:shot, 154, "g1_03_up_the_aisle"],
-    [:goto, 154, 12, 9],  [:shot, 154, "g1_04_on_the_apron_curtain_in"],
-    [:use_from, 154, 20, 9, 6], [:shot, 154, "g1_05_curtain_out"],
-    [:goto, 154, 12, 7],  [:shot, 154, "g1_06_before_dorian"],
-    [:talk, 154, 12, 5],                  # Warden Dorian (the AI plays the battle)
+    [:goto, 154, 12, 17], [:shot, 154, "g1_03_up_the_aisle"],
+    [:goto, 154, 12, 11], [:shot, 154, "g1_04_on_the_apron_curtain_in"],
+    [:use_from, 154, 20, 11, 6], [:shot, 154, "g1_05_curtain_out"],
+    [:goto, 154, 12, 8],  [:shot, 154, "g1_06_before_dorian"],
+    [:talk, 154, 12, 7],                  # Warden Dorian (the AI plays the battle)
     [:shot, 154, "g1_07_badge"],
     [:done]
   ]
@@ -34,24 +34,24 @@ module PlayBot
     [:shot, 120, "g2_00_outside_the_loomhouse"],
     [:door, 120, 130],                    # map 120's Loomhouse door
     [:shot, 130, "g2_01_foyer"],
-    [:goto, 130, 9, 12], [:shot, 130, "g2_02_at_the_loom_bed"],
-    [:talk, 130, 11, 10], [:shot, 130, "g2_03_heddle_pulled"],
-    [:goto, 130, 9, 9],  [:shot, 130, "g2_04_on_the_plank"],
-    [:goto, 130, 15, 2],
+    [:goto, 130, 9, 14], [:shot, 130, "g2_02_at_the_loom_bed"],
+    [:talk, 130, 11, 12], [:shot, 130, "g2_03_heddle_pulled"],
+    [:goto, 130, 9, 11], [:shot, 130, "g2_04_on_the_plank"],
+    [:goto, 130, 15, 4],
     [:shot, 131, "g2_05_hall_start"],
-    [:talk, 131, 1, 21],  [:shot, 131, "g2_06_hall_red"],
-    [:talk, 131, 9, 21],  [:shot, 131, "g2_07_hall_gold"],
-    [:talk, 131, 23, 21], [:shot, 131, "g2_08_hall_green_all_right"],
-    [:goto, 131, 21, 18], [:shot, 131, "g2_09_hall_on_the_planks"],
-    [:goto, 131, 21, 10], [:goto, 131, 21, 4], [:shot, 131, "g2_10_hall_top"],
-    [:goto, 131, 12, 3],  [:shot, 131, "g2_11_before_tamsin"],
-    [:talk, 131, 11, 3],                  # Warden Tamsin, double battle (the AI plays it)
+    [:talk, 131, 1, 23],  [:shot, 131, "g2_06_hall_red"],
+    [:talk, 131, 9, 23],  [:shot, 131, "g2_07_hall_gold"],
+    [:talk, 131, 23, 23], [:shot, 131, "g2_08_hall_green_all_right"],
+    [:goto, 131, 21, 20], [:shot, 131, "g2_09_hall_on_the_planks"],
+    [:goto, 131, 21, 12], [:goto, 131, 21, 6], [:shot, 131, "g2_10_hall_top"],
+    [:goto, 131, 12, 5],  [:shot, 131, "g2_11_before_tamsin"],
+    [:talk, 131, 11, 5],                  # Warden Tamsin, double battle (the AI plays it)
     [:shot, 131, "g2_12_badge"],
     [:done]
   ]
   # The optional Upper Lofts (after Tamsin's badge): spools + the brass Meridian wire, then Granny's Knot.
   LOFTS_PLAN = [
-    [:goto, 131, 12, 2], [:goto, 131, 12, 1],   # the stairs behind Tamsin (a touch event on the top step)
+    [:goto, 131, 12, 4], [:goto, 131, 12, 3],   # the stairs behind Tamsin (a touch event on the top step)
     [:shot, 132, "lf_06_lofts_start"],
     [:talk, 132, 1, 21],                  # alpha cord
     [:ride, 132, 3, 22, 6],               # spool s1 -> west deck
@@ -73,7 +73,7 @@ module PlayBot
   ]
   # Playhouse Backstage (D9, optional after Gym 2): the old revolving stage + Fly Loft.
   BACKSTAGE_PLAN = [
-    [:goto, 154, 2, 9], [:bump, 154, 1, 9],
+    [:goto, 154, 2, 11], [:bump, 154, 2, 10],
     [:shot, 151, "bs_00_old_revolve"],
     [:use_from, 151, 2, 17, 2], [:shot, 151, "bs_01_shipwreck"],
     [:goto, 151, 4, 13],  [:shot, 151, "bs_02_across_the_gangplank"],
