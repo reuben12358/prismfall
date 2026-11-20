@@ -670,7 +670,7 @@ menus = lambda do |answer|
     battle.controlPlayer = false
     sc = battle.scene
     sc.define_singleton_method(:pbCommandMenu) { |_i, _f| 0 }
-    sc.define_singleton_method(:pbFightMenu) { |_i, _m = false, &blk| 5.times { break if blk.call(0) } }
+    sc.define_singleton_method(:pbFightMenu) { |_i, _m = false, &blk| [0, 1, 2, 3].each { |mi| break if blk.call(mi) } }   # first move; next if refused
     sc.define_singleton_method(:pbDisplayConfirmMessage) do |msg|
       ans = msg.to_s.include?("Z-Power") ? answer : true
       Harness.log&.add("#{Harness.clean(msg)}  [player answers: #{ans ? 'Yes' : 'No'}]")
@@ -889,6 +889,48 @@ if eevee
         [:ATTACK, :DEFENSE, :SPECIAL_ATTACK, :SPECIAL_DEFENSE, :SPEED].all? { |s| (st[s] || 0) >= 2 }, st.inspect)
   check("field showpiece: the Z-move lifts the Grand Stage to Encore (stage 2)", log.field_changes.any? { |o, n, sg| n == :GRAND_STAGE && sg == 2 },
         log.field_changes.inspect)
+end
+# The shipped base project's Generation 9 Pack runs with Settings::CHAMPIONS_MECHANICS = true: Last Resort can't be chosen
+# until the user's other moves have been used (found in the real-engine run: Amen never chose Extreme Evoboost). This
+# harness's Gen 9 Pack is older (same alias, paldea_pbCanChooseMove?, without the rule), so emulate the rule where the
+# pack puts it: above paldea_pbCanChooseMove? and below Z-Power in the alias chain.
+class Battle::Battler
+  alias __harness_below_z prismfall_z_pbCanChooseMove?
+  def prismfall_z_pbCanChooseMove?(move, commandPhase, showMessages = true, specialUsage = false)
+    if move.function_code == "FailsIfUserHasUnusedMove" && @moves.any? { |m| m.id != move.id && !@movesUsed.include?(m.id) }
+      @battle.pbDisplayPaused(_INTL("This move can't be used!")) if showMessages
+      return false
+    end
+    return __harness_below_z(move, commandPhase, showMessages, specialUsage)
+  end
+end
+champ = lambda do |title, party, setup = nil|
+  $player.party = party
+  n0 = ZLOG.length
+  lg = Harness.run_battle(title, :seed => 61, :setup => setup) { Prismfall::Trials.trainer_battle([:OCTAVE_VESPER, "Vesper", 60], field: :GRAND_STAGE) }
+  TRANSCRIPT << "" << lg.text
+  [lg, ZLOG[n0..]]
+end
+lugia = lambda { pk = mk(:LUGIA, 100, [:AEROBLAST, :ROOST]); pk.item = :LEFTOVERS; pk.calc_stats; pk }
+lg, zs = champ.call("Champions rule: Vesper's Amen vs a Lv 100 Lugia", [lugia.call])
+check("Champions rule (shipped Gen 9 Pack): Amen still opens with Extreme Evoboost although Last Resort is locked",
+      zs.any? { |z| z[:side] == 1 && z[:z] == :EXTREMEEVOBOOST && z[:base] == :LASTRESORT }, zs.map { |z| z[:z] }.inspect)
+if eevee
+  $bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+  eevee.item = :EEVIUMZ; eevee.heal
+  lr = eevee.moves.index { |m| m.id == :LASTRESORT }
+  eevee.moves[0], eevee.moves[lr] = eevee.moves[lr], eevee.moves[0] if lr && lr > 0   # Last Resort first in the menu
+  lg, zs = champ.call("Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes", [eevee, lugia.call], menus.call(true))
+  check("Champions rule: the player may pick a locked Last Resort for its Z-move; Yes -> Extreme Evoboost",
+        zs.any? { |z| z[:side] == 0 && z[:z] == :EXTREMEEVOBOOST } && lg.include?(/Last Resort becomes Extreme Evoboost/), zs.map { |z| z[:z] }.inspect)
+  eevee.heal
+  lg, zs = champ.call("Champions rule: the player's Eevee, Fight menu, Last Resort -> No", [eevee, lugia.call], menus.call(false))
+  check("Champions rule: answering No undoes the locked Last Resort ('This move can't be used!')",
+        zs.none? { |z| z[:side] == 0 } && lg.include?(/This move can't be used!/) && !lg.include?(/Amen.*used Last Resort|Eevee used Last Resort/), lg.outcome.inspect)
+  eevee.heal
+end
+class Battle::Battler
+  alias prismfall_z_pbCanChooseMove? __harness_below_z
 end
 PBDayNight.define_singleton_method(:isNight?) { |*a| __harness_isNight?(*a) }
 Prismfall.state.level_cap_override = cap_override0

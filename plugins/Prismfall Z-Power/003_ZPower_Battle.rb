@@ -68,6 +68,27 @@ module PrismfallZ
     return true
   end
 
+  #-----------------------------------------------------------------------------
+  # Base moves that can't normally be chosen yet. The shipped base project's Generation 9 Pack runs with
+  # Settings::CHAMPIONS_MECHANICS = true, which makes Last Resort unselectable until the user's other moves have
+  # been used. Its Z-move doesn't have that condition (Extreme Evoboost works from turn 1, as in Gen 7), so a move
+  # that is about to become a status Z-move may be chosen anyway; if it then doesn't become the Z-move (the player
+  # answers No), the choice is undone with the usual message.
+  #-----------------------------------------------------------------------------
+  def self.status_z_exempt?(battler, move)
+    battle = battler.battle
+    zid = zmove_for(battler, move)
+    return false if !zid || !GameData::Move.exists?(zid) || GameData::Move.get(zid).category != 2
+    return false if !can_use?(battle, battler.index)
+    return true if battle.pbOwnedByPlayer?(battler.index) && !battle.controlPlayer
+    return ai_wants?(battle, battler, move, zid)
+  end
+
+  def self.exempt_marks(battle)
+    battle.instance_variable_set(:@prism_z_exempt, {}) if !battle.instance_variable_get(:@prism_z_exempt)
+    return battle.instance_variable_get(:@prism_z_exempt)
+  end
+
   def self.build(battle, base_move, zid)
     z = Battle::Move.from_pokemon_move(battle, Pokemon::Move.new(zid))
     return z.prism_attach(base_move)
@@ -153,9 +174,33 @@ end
 class Battle
   alias prismfall_z_pbRegisterMove pbRegisterMove unless method_defined?(:prismfall_z_pbRegisterMove)
   def pbRegisterMove(idxBattler, idxMove, showMessages = true)
+    marks = PrismfallZ.exempt_marks(self)
+    marks.delete(idxBattler)
     ret = prismfall_z_pbRegisterMove(idxBattler, idxMove, showMessages)
     PBDebug.logonerr { PrismfallZ.after_register(self, idxBattler, idxMove, showMessages) } if ret
+    if ret && marks.delete(idxBattler) && !(@choices[idxBattler][2] && @choices[idxBattler][2].prism_zmove?)
+      # Chosen only because it could become a Z-move, and it didn't: undo it.
+      pbClearChoice(idxBattler)
+      pbDisplayPaused(_INTL("This move can't be used!")) if showMessages
+      return false
+    end
     return ret
+  end
+end
+
+class Battle::Battler
+  alias prismfall_z_pbCanChooseMove? pbCanChooseMove? unless method_defined?(:prismfall_z_pbCanChooseMove?)
+  def pbCanChooseMove?(move, commandPhase, showMessages = true, specialUsage = false)
+    return prismfall_z_pbCanChooseMove?(move, commandPhase, showMessages, specialUsage) if !commandPhase || specialUsage
+    exempt = false
+    PBDebug.logonerr { exempt = PrismfallZ.status_z_exempt?(self, move) }
+    return prismfall_z_pbCanChooseMove?(move, commandPhase, showMessages, specialUsage) if !exempt
+    return true if prismfall_z_pbCanChooseMove?(move, commandPhase, false, specialUsage)
+    # Only the Generation 9 Pack's Champions restriction may be skipped: run the chain below it.
+    return false if !respond_to?(:paldea_pbCanChooseMove?)
+    return false if !paldea_pbCanChooseMove?(move, commandPhase, showMessages, specialUsage)
+    PrismfallZ.exempt_marks(@battle)[@index] = true
+    return true
   end
 end
 

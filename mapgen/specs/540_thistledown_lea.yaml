@@ -1,4 +1,4 @@
-# Thistledown Lea (540). WRITTEN BY layouts/routes_early.py - edit that script.
+# Thistledown Lea (540). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 540
 name: Thistledown Lea
 parent: 0
@@ -9,29 +9,30 @@ yards_ok: true
 biome: route
 field: MEADOW
 tone: [6, 4, -2, 0]
+walk_from:
+- [70, 53]
+- [22, 62]
+- [128, 32]
 connections:
 - {dir: S, offset: 20, to: 552, to_offset: 39}
 - {dir: E, offset: 30, to: 524, to_offset: 50}
-walk_from:
-- [22, 62]
-- [128, 32]
 raw: data/raw/540.npy
 tileset: 53
 events:
 - type: warp
   name: Mine mouth
-  at: [8, 24]
+  at: [9, 25]
   link: R3_MINE
-  arrive: [8, 25, down]
+  arrive: [9, 26, down]
   se: Door exit
 - type: sign
   name: Road sign
   at: [25, 44]
-  text: THISTLEDOWN LEA -- The lands of House Thistledown (extinct). <- The Dyers' Ford - -> Gossamer Wood & Briarwick - ^ Thistledown Manor (PRIVATE. DECEASED.)
+  text: THISTLEDOWN LEA -- The lands of House Thistledown (extinct). v The Dyers' Ford - -> Gossamer Wood & Briarwick - ^ Thistledown Manor (PRIVATE. DECEASED.)
   post: false
 - type: event
   name: The Lea
-  at: [20, 46]
+  at: [22, 46]
   pages:
   - trigger: touch
     commands:
@@ -43,7 +44,7 @@ events:
     commands: []
 - type: sign
   name: Manor sign
-  at: [60, 23]
+  at: [61, 24]
   text: 'THISTLEDOWN MANOR
 
     Home of the Thistledown Players. Closed since AF 211.'
@@ -58,7 +59,7 @@ events:
     commands: ['Drover: Race you to the fence!', (He wins. He always wins. He has a Ponyta.)]
 - type: event
   name: Ponyta
-  at: [44, 22]
+  at: [36, 22]
   pages:
   - graphic: {sprite: Followers/PONYTA, dir: down}
     trigger: action
@@ -66,14 +67,14 @@ events:
     commands: [(It tosses its mane. Show-off.)]
 - type: event
   name: Fisherman on the bridge
-  at: [24, 47]
+  at: [25, 47]
   pages:
   - graphic: {sprite: trainer_FISHERMAN, dir: left}
     trigger: action
     move: fixed
     commands: ['Fisherman: Bridge toll''s a copper. Nobody''s collected it since the house died. I just tell people. Habit.']
 - type: item
-  at: [24, 57]
+  at: [26, 59]
   item: GREATBALL
   hidden: true
   name: HiddenItem (under the bridge)
@@ -95,7 +96,7 @@ events:
     trigger: action
     commands: ['Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.']
 - type: trainer
-  at: [52, 40]
+  at: [52, 38]
   sight: 4
   dir: down
   sprite: trainer_PICNICKER
@@ -103,7 +104,7 @@ events:
   intro: Ada beat me on Windfall Row last year. I've been training on the Lea all spring.
   after: '...I''ll write to Ada. I''ll lie.'
 - type: trainer
-  at: [36, 30]
+  at: [36, 32]
   sight: 4
   dir: down
   sprite: trainer_PICNICKER
@@ -128,7 +129,7 @@ events:
   after: 'Twins: Saltmere''s south. They do plays there!'
   rules: [setBattleRule("double")]
 - type: trainer
-  at: [112, 36]
+  at: [112, 34]
   sight: 4
   dir: left
   sprite: trainer_YOUNGSTER
@@ -137,19 +138,19 @@ events:
   after: My team's the coolest! ...Was.
 - type: event
   name: Broken mill
-  at: [96, 42]
+  at: [96, 46]
   pages:
   - trigger: action
     commands: [The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.]
 - type: event
   name: Bamboo stand
-  at: [110, 18]
+  at: [112, 18]
   pages:
   - trigger: action
     commands: ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']
 - type: event
   name: Pancham
-  at: [108, 20]
+  at: [108, 19]
   pages:
   - graphic: {sprite: Followers/PANCHAM, dir: down}
     trigger: action
@@ -157,36 +158,42 @@ events:
     commands: [(It glares at you over a bamboo shoot. Respect.)]
 - type: event
   name: Road Stone II-b
-  at: [120, 30]
+  at: [122, 29]
   pages:
   - trigger: action
     commands: [ROAD STONE II-b. THE WEAVERS' ROAD. "Briarwick 1." The '1' has been scratched to a '2' and back again.]
 - type: event
   name: Gateposts
-  at: [62, 23]
+  at: [64, 18]
   pages:
   - trigger: action
     commands: [Two stone gateposts with the Thistledown thistle carved on them. No gate. Gates are for people who expect visitors.]
 - type: event
   name: The Ha-ha
-  at: [87, 8]
+  at: [85, 3]
   pages:
   - trigger: action
     commands: ['(The sunken wall''s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging
         behind it.)']
 - type: event
   name: Greavard
-  at: [85, 6]
+  at: [80, 6]
   pages:
   - graphic: {sprite: Followers/GREAVARD, dir: down}
     trigger: action
     move: random
     commands: [(It is digging very seriously. It does not want to be interrupted. It wags anyway.)]
 - type: item
-  at: [88, 5]
+  at: [86, 3]
   item: RAREBONE
   hidden: true
   name: HiddenItem (the Ha-ha)
+- type: event
+  name: Topiary
+  at: [58, 14]
+  pages:
+  - trigger: action
+    commands: [A topiary garden gone wild. One bush was a Ponyta once. Now it is a Ponyta that has seen things.]
 - type: berry
   at: [30, 34]
   berry: CHERIBERRY
@@ -197,15 +204,15 @@ events:
   at: [4, 34]
   item: POKEBALL
 - type: item
-  at: [70, 46]
+  at: [70, 52]
   item: GREATBALL
 - type: sign
   name: Locked door
-  at: [59, 14]
+  at: [61, 9]
   post: false
   text: The door is barred from the inside.
 - type: door
-  at: [64, 14]
+  at: [66, 9]
   gfx: ['', 0, 2]
   name: Manor door
   link: R3_MANOR

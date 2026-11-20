@@ -309,6 +309,21 @@ check "on-map war climax uses the games' overworld sheets",
       dw.events.none? { |e| e.op == :actor && [:water, :fire].include?(e.args[:id]) && e.args[:species] } &&
       dw.events.any? { |e| e.op == :beam_clash && e.args[:style] == :sheet } &&
       [:fx_sheet, :flipbook, :idle, :shadow].all? { |o| ops.include?(o) }, ops.uniq.inspect
+sheets = dw.events.select { |e| e.op == :fx_sheet }.map { |e| e.args[:sheet].to_s }
+says = dw.events.select { |e| e.op == :text }.map { |e| e.args[:text].to_s }.join(" | ")
+check "war climax on the Glass Dunes (Rev 18): flood in and out, glass trail, glass ring, new lines",
+      dw.events.any? { |e| e.op == :background && e.args[:image].to_s.include?("pfw_glass_dunes") } &&
+      dw.events.count { |e| e.op == :flipbook && e.args[:id] == :flood } == 2 &&
+      sheets.count { |n| n.include?("pfw_fx_glass_patch") } >= 7 && sheets.any? { |n| n.include?("pfw_fx_glass_ring") } &&
+      dw.events.any? { |e| e.op == :actor && e.args[:sheet].to_s.include?("pfw_fx_glass_wave") } &&
+      says.include?("The sea has come to the sand!") && !says.include?("remembers it's a sea"), says
+nl = C.build(:WAR_CLIMAX, variant: :A, legends: false)
+check "no-legend war climax has no flood",
+      nl.events.none? { |e| e.op == :actor && e.args[:id] == :flood } &&
+      nl.events.any? { |e| e.op == :actor && e.args[:id] == :water && e.args[:charset].to_s.include?("pfw_gyarados") }
+pd = C.build(:WAR_CLIMAX_PROCEDURAL, variant: :A)
+check "procedural war climax on dunes", pd.events.any? { |e| e.op == :background && e.args[:kind] == :dunes } &&
+                                        pd.events.none? { |e| e.op == :background && e.args[:kind] == :floes }
 dw = C.build(:WAR_CLIMAX_PROCEDURAL, variant: :A)
 check "legend sheet picked up", dw.events.any? { |e| e.op == :actor && e.args[:id] == :water && e.args[:sheet] } &&
                                 dw.events.any? { |e| e.op == :actor && e.args[:id] == :fire && e.args[:species] }

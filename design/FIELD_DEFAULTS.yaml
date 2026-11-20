@@ -8,6 +8,8 @@
 # Field IDs are FieldEffects IDs (design/FIELDS.md). NONE = deliberately no field.
 # stage: starting stage (1 if omitted). wild: field for wild battles on this map if it
 # differs from field (surfing / fishing / diving still apply on top, see below).
+# borrow: optional list of field IDs. An open borrowing field (the Bleed) on this map
+# borrows only from these (FieldEffects::MAP_BORROW_POOLS; read by the field plugin only).
 
 schema: 1
 field_plugin_version: "1.1.0"
@@ -655,8 +657,8 @@ maps:
   922: {name: "Skaldfast - Rime Keep", kind: town, field: FROZEN_LAKE, source: spec, why: "world spec"}
   923: {name: "Skaldfast - Great Hall", kind: interior, field: FROZEN_LAKE, source: name, why: "name: \"Great Hall\" (Isenmar)"}
   924: {name: "Ashkaar Siege Camp", kind: town, field: ASHEN_WASTE, source: spec, why: "world spec"}
-  925: {name: "The Steamline", kind: route, field: ASHEN_WASTE, source: spec, why: "world spec"}
-  926: {name: "The Glass Dunes", kind: dungeon, field: DESERT, source: spec, why: "world spec"}
+  925: {name: "The Steamline", kind: route, field: BLEED, borrow: [VOLCANIC, ASHEN_WASTE, FROZEN_LAKE, SNOWY_MOUNTAIN, DESERT, FLOODED_DUNES, GLASS_DUNES], source: hand, why: "story/14 Part B: the steam-glass where the Fire and Ice Imprints meet is a Bleed line only the PC can cross; its Bleed echoes only the war's fire, ice, sand and steam-glass fields"}
+  926: {name: "The Glass Dunes", kind: dungeon, field: DESERT, borrow: [VOLCANIC, ASHEN_WASTE, FROZEN_LAKE, SNOWY_MOUNTAIN, DESERT, FLOODED_DUNES, GLASS_DUNES], source: hand, why: "story/14 Part B: dunes until Kyogre's flood-sea comes in (FLOODED_DUNES) and Reshiram's fire glasses it (GLASS_DUNES); a beam clash on the glass tears it into the Bleed, which echoes the war's fields"}
   927: {name: "Cinder Cape Warfort", kind: town, field: VOLCANIC, source: spec, why: "world spec"}
   928: {name: "Ashkaar Siege Camp - Command Pavilion", kind: interior, field: NONE, source: spec, why: "world spec"}
   929: {name: "The Observers' Mesa", kind: dungeon, field: DESERT, battles: [trainer], source: spec, why: "world spec"}

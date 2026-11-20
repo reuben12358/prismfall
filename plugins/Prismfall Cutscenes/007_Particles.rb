@@ -26,6 +26,7 @@ module Prismfall
         :steam      => { :speed => [12, 30],  :angle => -90, :spread => 40,  :life => [1.2, 2.4], :grav => -8,  :size => 3, :sway => 8, :pal => :steam, :shape => :puff },
         :petals     => { :speed => [20, 50],  :angle => 70,  :spread => 50,  :life => [2.0, 3.5], :grav => 8,   :size => 2, :sway => 18, :pal => :fairy },
         :lift       => { :speed => [14, 46],  :angle => -90, :spread => 22,  :life => [0.9, 2.0], :grav => -30, :size => 3, :sway => 5, :pal => :ice, :shape => :shard },
+        :sand       => { :speed => [40, 90],  :angle => 4,   :spread => 10,  :life => [1.4, 2.6], :grav => 0,   :size => 1, :sway => 4, :pal => :ground, :weather => :left },
         :motes      => { :speed => [4, 14],   :angle => -90, :spread => 180, :life => [1.5, 3.0], :grav => 0,   :size => 1, :sway => 4, :pal => :light }
       }
 

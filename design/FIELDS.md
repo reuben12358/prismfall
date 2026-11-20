@@ -1,6 +1,6 @@
 # Prismfall Fields (v1.1, Revision 10 redesign)
 
-Player-facing reference for all 33 battle fields. The per-field sections are generated from the field files
+Player-facing reference for all 35 battle fields. The per-field sections are generated from the field files
 (`plugins/Prismfall Field Effects/1xx_Field_*.rb`: `:description`, `:notes`, transitions, seed), so they match what
 the in-game **Field Notes** show. DSL: `FIELD_API.md`. Research behind the redesign: `FIELD_RESEARCH.md`.
 Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
@@ -17,6 +17,9 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
   `:ASHEN_WASTE`): quenched lava turned to volcanic glass, with geysers every 3 rounds, steam, and obsidian shards.
 - **Two new fields:** **Wildfire** (what Silkwood, Meadow and an overgrown Flower Garden burn into; it burns down
   to Embers and regrows into Meadow) and **Meadow** (the open-country default).
+- **The war fields (SPINE Revision 18):** **Flooded Dunes** (Kyogre's flood-sea over the Bone Sands) and **Glass
+  Dunes** (steam-glass: what white fire makes of the flood, or of any desert). Map 926 walks DESERT -> Flooded Dunes ->
+  Glass Dunes; the Steamline (925) is the Bleed, echoing only the war's fields.
 - **Stages** on Grand Stage (applause), Neon Grid (Blackout), Desert (Superbloom), Colosseum (Frenzy), Mindscape
   (Nightmare), Hollow Cathedral (Consecrated), New Moon (Abyss, Lamplight), Dragon's Den (Awakened), Cave (cracked
   ceiling), Wildfire (Embers) and Flower Garden (5 growth stages).
@@ -34,7 +37,9 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
 | Wildfire | Embers stage (burns out after 4 rounds unless fed; water, wind, rain); Embers → Meadow (rain, Grassy Terrain, growth moves ×2) or back to Wildfire (big Fire moves ×2, sun) |
 | Volcanic | Cinderglass (big Water or Ice moves ×2, rain, sandstorm) |
 | Cinderglass | Volcanic (eruption moves ×3); Water Surface (big Water moves ×3, heavy rain) |
-| Desert | Superbloom stage (rain, Water moves ×3); Cinderglass (hottest Fire moves ×2) |
+| Desert | Superbloom stage (rain, Water moves ×3); Flooded Dunes (heavy rain, Origin Pulse; from the Superbloom also Water moves ×3); Glass Dunes (hottest Fire moves ×2) |
+| Flooded Dunes | Glass Dunes (Blue Flare / Fusion Flare, or searing moves ×2, even snuffed by heavy rain); Frozen Lake (big Ice moves ×3); Desert Superbloom (the tide drains: 5 rounds without rain or Water attacks, faster in sun) |
+| Glass Dunes | Flooded Dunes (heavy rain, Origin Pulse ×2, floods ×3); Desert (3 shatters: quakes, heavy stomps, big Ice moves; Fire anneals a crack) or Flooded Dunes if it's raining; the Bleed (2 beam clashes) |
 | Cave | Crystal Cavern (Power Gem, Diamond Storm ×2); Volcanic (eruption moves ×2); Dragon's Den (Draco Meteor, dragon moves ×2) |
 | Mountain | Snowy Mountain (hail, blizzard moves ×2); Volcanic (eruption moves ×2) |
 | Snowy Mountain | Mountain (sun, big Fire moves ×2); Volcanic (Eruption, Magma Storm ×2) |
@@ -56,7 +61,7 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
 | Mindscape | Nightmare stage; Inverse (Topsy-Turvy, damaging sound moves ×3 crack the dream) |
 | Hollow Cathedral | Consecrated stage (holy moves ×3); Inverse (Topsy-Turvy, Boomburst/Shadow Force ×2) |
 | Inverse | the field it came from, else Mindscape (Topsy-Turvy) |
-| The Bleed, Prism Arena | none (they borrow other fields' effects in rotation) |
+| The Bleed, Prism Arena | none (they borrow other fields' effects in rotation; on the Steamline and the Glass Dunes the Bleed only echoes the war's fields) |
 | Grand Stage, Neon Grid, New Moon, Stormfront* | stage changes only (*Stormfront also → Rainbow) |
 
 ## Silkwood (`:SILKWOOD`)
@@ -203,7 +208,7 @@ Electric Pokemon draw power from live circuitry; water and steel conduct; nobody
 
 > Heat shimmers over the endless dunes...
 
-Sand-dwellers own the dunes: sand abilities always work, Ground types hide in the sand, and the bones of Ossaria make weapons. Rain wakes a superbloom; searing heat makes glass.
+Sand-dwellers own the dunes: sand abilities always work, Ground types hide in the sand, and the bones of Ossaria make weapons. Rain wakes a superbloom, a sea-storm floods the dunes, and searing heat makes glass.
 
 - Ground x1.2, Fire x1.2. Ice x0.75 and Water x0.8 (the dunes drink them).
 - Sand Rush, Sand Force, Sand Veil and Solar Power work without weather (Solar Power costs no HP here).
@@ -212,15 +217,20 @@ Sand-dwellers own the dunes: sand abilities always work, Ground types hide in th
 - Physical Ground moves may kick sand in the eyes (20%, accuracy -1). Sand Attack never misses and drops accuracy one stage more; Shore Up also gives +1 Def.
 - Earth Eater draws on the dunes (1/16 HP a turn). Dry Skin dries out in the heat (1/8).
 - Hail can't form; Sandstorm +3 turns, Sun +2. Grassy Terrain can't take root.
-- Rain, or 3 floods (Surf, Muddy Water, Hydro Pump...) -> Superbloom (stage 2). 2 searing moves (Eruption, Blast Burn, Fusion Flare, Blue Flare...) -> Cinderglass.
-- Superbloom: Grass x1.5, Bug x1.2, petal and seed moves x1.5, Chlorophyll and Leaf Guard active, Grass types drink 1/16 HP a turn. Sun, sandstorm or 2 fire attacks bake it back to dunes.
+- Rain, or 3 floods (Surf, Muddy Water, Hydro Pump...) -> Superbloom (stage 2). Heavy rain or Origin Pulse drags the sea in -> Flooded Dunes. 2 searing moves (Eruption, Blast Burn, Fusion Flare, Blue Flare...) -> Glass Dunes.
+- Superbloom: Grass x1.5, Bug x1.2, petal and seed moves x1.5, Chlorophyll and Leaf Guard active, Grass types drink 1/16 HP a turn. Sun, sandstorm or 2 fire attacks bake it back to dunes; heavy rain, Origin Pulse or 3 more floods drown it -> Flooded Dunes.
 - Telluric Seed: +1 Defense, +1 Sp. Def, but it's half-buried (-1 Speed).
 
 **Changes:**
-- weather Rain/HeavyRain → stage 2
-- SURF, MUDDYWATER, WATERSPOUT, HYDROPUMP, WATERPLEDGE +2 more x3 → stage 2
-- ERUPTION, BLASTBURN, FUSIONFLARE, BLUEFLARE, MAGMASTORM +3 more x2 → **Cinderglass**
-- *Stage 2* (`field_desert_bloom`): Superbloom: the rain woke the seeds in the sand. Grass, Bug and petal moves surge while it lasts.
+- weather HeavyRain → **Flooded Dunes**
+- ORIGINPULSE → **Flooded Dunes**
+- weather Rain → stage 2
+- SURF, MUDDYWATER, WATERSPOUT, HYDROPUMP, WATERPLEDGE +1 more x3 → stage 2
+- ERUPTION, BLASTBURN, FUSIONFLARE, BLUEFLARE, MAGMASTORM +3 more x2 → **Glass Dunes**
+- *Stage 2* (`field_desert_bloom`): Superbloom: water woke the seeds in the sand. Grass, Bug and petal moves surge while it lasts.
+  - weather HeavyRain → **Flooded Dunes**
+  - ORIGINPULSE → **Flooded Dunes**
+  - SURF, MUDDYWATER, WATERSPOUT, HYDROPUMP, WATERPLEDGE +1 more x3 → **Flooded Dunes**
   - weather Sun/HarshSun/Sandstorm → stage 1
   - FIRE-type moves x2 → stage 1
 
@@ -336,6 +346,7 @@ The Reverse World: the type chart is inverted, reflections strike back harder, a
 Every 3 rounds it borrows another field's effects. Raw Imprint energy rewards coverage, shapeshifters and type-shifting moves.
 
 - Every 3 rounds (and at once) it borrows the full effects of another field at random. Borrowed fields never transform the Bleed and their seeds don't react.
+- Where the Fire and Ice Imprints meet (the Steamline, the Glass Dunes) it only echoes the war's own fields: Volcanic, Cinderglass, Frozen Lake, Snowy Mountain, Desert, Flooded Dunes, Glass Dunes.
 - Attacks that don't match the user's type x1.2 (raw Imprint energy rewards coverage).
 - Type-shifting moves drink the raw Imprints: Judgment, Multi-Attack, Techno Blast, Revelation Dance, Weather Ball, Terrain Pulse, Hidden Power x1.3.
 - Protean, Libero and Color Change Pokemon adapt fast (+1 Speed on entry). Mimicry takes the Bleed's natural type (Psychic).
@@ -943,6 +954,63 @@ Elowen's open countryside: grazers stampede, bugs and birds work the wildflowers
 - GROWTH, ROTOTILLER, FLOWERSHIELD, FLORALHEALING, AROMATHERAPY +2 more x2 → **Flower Garden**
 
 **Seed (TELLURICSEED):** EVASION +1; effects: ingrain.
+## Flooded Dunes (`:FLOODED_DUNES`)
+
+*Elemental field. Backdrop `field_flooded_dunes`. Nature Power: MUDDYWATER. Natural type: WATER.*
+
+> The sea has come to the sand! Floodwater pours in between the dunes!
+
+Kyogre's flood-sea over the Bone Sands: swimmers ride it between the dune crests, the wet sand turns quakes to mud, and only the white fire can fuse it to glass. It drains away unless rain or Water attacks hold it.
+
+- Water x1.3, Ice x1.2 (the cold of the Northern Sea). Electric x1.3 against grounded targets standing in the flood.
+- Fire is hissed down to steam: damaging Fire moves x0.5 against grounded targets - except searing moves (Blue Flare, Fusion Flare, Eruption, Blast Burn, Overheat, V-create...) and Turboblaze users.
+- A searing move flashes the flood into scalding steam: every foe of the user that isn't Fire type loses 1 accuracy.
+- Mud: damaging Ground moves also hit as Water. Mud Shot, Mud Bomb, Mud-Slap, Muddy Water, Whirlpool and Sand Tomb x1.5 (Whirlpool and Sand Tomb more accurate). Physical Ground moves may churn quicksand round a grounded target (30%: Speed -1).
+- Wave Crash, Dive, Aqua Step, Flip Turn x1.3; Surf, Surging Strikes x1.2. Spikes, Toxic Spikes and Stealth Rock sink without a trace.
+- Wading: grounded Pokemon that aren't Water or Ground type move at x0.75 Speed (Swift Swim, Surge Surfer and Turboblaze aren't slowed). Swift Swim, Torrent, Rain Dish, Hydration and Dry Skin act as if it were raining.
+- Grounded Pokemon can't be burned, and the cold water soothes old burns. Water Absorb and Storm Drain drink in the flood (1/16 HP). Water Compaction +1 Def and +1 Sp. Def, Steam Engine +1 Speed on entry.
+- Rain lasts 3 turns longer; sandstorms can't blow over the water.
+- The tide: the flood drains into the sand after 5 rounds unless it rains; each damaging Water attack feeds it a round (max 6); sun drains it twice as fast. Drained, it leaves the Desert's Superbloom.
+- Blue Flare or Fusion Flare (or 2 other searing moves) fuse the wet sand into the Glass Dunes - even when heavy rain snuffs the flame. 3 big Ice moves freeze the flood into a Frozen Lake.
+- Elemental Seed: +1 Speed, and the holder is soaked through: it becomes part Water type (no wading, but Electric and Grass hit it harder).
+
+**Changes:**
+- BLUEFLARE, FUSIONFLARE (even if they fail) → **Glass Dunes**
+- ERUPTION, BLASTBURN, MAGMASTORM, BURNUP, OVERHEAT +2 more x2 (even if they fail) → **Glass Dunes**
+- BLIZZARD, SHEERCOLD, GLACIATE, ICEBEAM, FREEZEDRY +2 more x3 → **Frozen Lake**
+- the tide runs out (hook: 5 rounds, rain holds it, Water attacks feed it, sun x2) → **Desert** stage 2 (Superbloom)
+
+**Seed (ELEMENTALSEED):** SPEED +1; becomes part WATER type.
+
+## Glass Dunes (`:GLASS_DUNES`)
+
+*Telluric field. Backdrop `field_glass_dunes`. Nature Power: POWERGEM. Natural type: ROCK.*
+
+> The dunes have fused into glass! Steam rises from every hollow!
+
+Steam-glass over the Bone Sands: the heat in the glass feeds fire and boils any water into scalding steam, light refracts, and the brittle crust shatters under quakes and sudden cold. Both Imprints that made it are still inside.
+
+- Fire x1.2 (the white fire's heat is still in the glass). Ice x0.8 - but big Ice moves crack it (below). Nothing can be frozen.
+- Water boils on the hot glass: damaging Water moves may burn a grounded target (20%). Scald and Steam Eruption x1.3 and burn more often.
+- Refraction: Aurora Beam, Charge Beam, Dazzling Gleam, Flash Cannon, Luster Purge, Mirror Shot, Photon Geyser, Power Gem, Prismatic Laser, Signal Beam, Solar Beam x1.3. Mirror Shot x1.5 and always lowers accuracy.
+- Mirror-dark glass: Mirror Coat strikes back x1.25; Reflect and Light Screen last 3 turns longer. Mirror Armor +1 Def, Prism Armor +1 Sp. Def on entry.
+- Shattering: quakes, heavy stomps, Rock Smash (x2) and big Ice moves (thermal shock) crack the crust - shards hit each grounded foe of the user (1/16, Rock-scaled; Heavy-Duty Boots protect). 3 shatters break the glass apart: back to the Desert, or into the Flooded Dunes if it's raining. Each damaging Fire move anneals one crack.
+- No sand left: Dig fails, Sand Tomb whips up glass grit (Rock type, x1.2), sandstorms and hail can't form, Grassy Terrain can't take root. Sun lasts 2 turns longer.
+- Fire types draw warmth from the glass (1/16 HP a turn). Turboblaze users' Fire moves x1.2 more (the glass rings with the white fire that made it). Steam Engine +1 Speed on entry.
+- The sea returns: heavy rain, 2 Origin Pulses or 3 floods (Surf, Hydro Pump, Water Spout, Muddy Water...) -> Flooded Dunes.
+- Beam clash: in 2 rounds where opposing sides both land a great Water beam (Origin Pulse, Water Spout, Hydro Cannon, Hydro Pump, Steam Eruption) and a great Fire beam (Blue Flare, Fusion Flare, Blast Burn, Eruption, V-create, Overheat), the Imprints tear open -> the Bleed.
+- Telluric Seed: +2 Defense (a glass carapace), but -1 Sp. Def (light passes straight through).
+
+**Changes:**
+- weather HeavyRain → **Flooded Dunes**
+- ORIGINPULSE x2 → **Flooded Dunes**
+- SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, WAVECRASH +2 more x3 (even if they fail) → **Flooded Dunes**
+- EARTHQUAKE, MAGNITUDE, BULLDOZE, FISSURE, PRECIPICEBLADES +16 more x3 → **Desert** (in rain: **Flooded Dunes**)
+- FIRE-type damaging moves rewind the shatter count by 1
+- beam clash x2 (check) → **The Bleed**
+
+**Seed (TELLURICSEED):** DEFENSE +2, SPECIAL_DEFENSE -1.
+
 ## Every battle has a field
 
 Data: `FIELD_DEFAULTS.yaml`. The engine picks, in order: the event's `setBattleRule("field", …)` → diving
@@ -953,6 +1021,9 @@ Snowy Mountain, …).
 
 - All 424 maps in `maps.json` have an entry (the 79 built story maps are hand-reviewed; map 990 is the test arena).
   333 have a field; 91 are `NONE`: Poké Centers, Marts, houses, offices and other rooms with no battles.
+- **The war theatre:** the Glass Dunes (926) default to DESERT for the climax sequence above; the Steamline (925) is
+  the Bleed, and on both maps the Bleed borrows only from the war's fields (`borrow:` in FIELD_DEFAULTS.yaml ->
+  `MAP_BORROW_POOLS`).
 - Kingdom flavour for maps the world spec left open: Elowen Meadow/Silkwood, Isenmar Beach/Snowy Mountain/Cave,
   Zenith Neon Grid/Mountain/Factory, Nadir New Moon (Lamplight)/Corrosive Mire/Scrapyard, Ashkaar
   Cinderglass/Mountain/Volcanic, Ossaria Desert/Cave, Antumbra Mindscape/Inverse, Crownhaven Grand Stage.

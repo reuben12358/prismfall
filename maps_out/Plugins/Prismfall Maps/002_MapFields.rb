@@ -455,7 +455,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[922] = :FROZEN_LAKE   # Skaldfast - Rime Keep
   FieldEffects::MAP_FIELDS[923] = :FROZEN_LAKE   # Skaldfast - Great Hall
   FieldEffects::MAP_FIELDS[924] = :ASHEN_WASTE   # Ashkaar Siege Camp
-  FieldEffects::MAP_FIELDS[925] = :ASHEN_WASTE   # The Steamline
+  FieldEffects::MAP_FIELDS[925] = :BLEED   # The Steamline
   FieldEffects::MAP_FIELDS[926] = :DESERT   # The Glass Dunes
   FieldEffects::MAP_FIELDS[927] = :VOLCANIC   # Cinder Cape Warfort
   FieldEffects::MAP_FIELDS[928] = :NONE   # Ashkaar Siege Camp - Command Pavilion

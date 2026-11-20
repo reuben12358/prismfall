@@ -113,7 +113,10 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Houndour 43/43]
-    |   Machoke used Karate Chop!
+    |   The opposing Houndour used Bite!
+    |     HP Machoke (player): 76 -> 71 / 76
+    |   It's not very effective...
+    |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Houndour (foe): 43 -> 0 / 43
     |   It's super effective!
@@ -139,13 +142,14 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   The crowd roars as the fighters enter the pit!
     | 
     | --- Turn 1 ---
-    |   [Machoke 76/76 | Salandit 45/45]
+    |   [Machoke 71/76 | Salandit 45/45]
     |   The opposing Salandit used Poison Gas!
     |     (anim: Poison)
     |   Machoke was poisoned!
-    |   Machoke used Rock Tomb!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Salandit (foe): 45 -> 0 / 45
-    |   It's super effective!
+    |   It's not very effective...
     |   The opposing Salandit fainted!
     |     xx fainted: Salandit (foe)
     |   The crowd went wild for Machoke!
@@ -154,16 +158,15 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
     |     (anim: Poison)
-    |     HP Machoke (player): 76 -> 67 / 76
+    |     HP Machoke (player): 71 -> 62 / 76
     |   Machoke was hurt by poison!
     |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Numel!
     |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
     | 
     | --- Turn 2 ---
-    |   [Machoke 67/76 POISON | Numel 49/49]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   [Machoke 62/76 POISON | Numel 49/49]
+    |   Machoke used Rock Tomb!
     |     HP Numel (foe): 49 -> 0 / 49
     |   The opposing Numel fainted!
     |     xx fainted: Numel (foe)
@@ -172,7 +175,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   (end of round)
     |     (anim: Poison)
-    |     HP Machoke (player): 67 -> 58 / 76
+    |     HP Machoke (player): 62 -> 53 / 76
     |   Machoke was hurt by poison!
     | ## FIELD STAGE: COLOSSEUM is now stage 2
     |   Two down! The crowd is in a frenzy!
@@ -181,14 +184,13 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
     | 
     | --- Turn 3 ---
-    |   [Machoke 58/76 POISON | Fletchinder 52/52]
+    |   [Machoke 53/76 POISON | Fletchinder 52/52]
     |   The opposing Fletchinder used Growl!
     |     (anim: StatDown)
     |   Machoke's Attack fell!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Fletchinder (foe): 52 -> 0 / 52
-    |   A critical hit!
     |   It's not very effective...
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
@@ -213,7 +215,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
     | 
     | --- Turn 1 ---
-    |   [Machoke 58/76 POISON | Litleo 69/69]
+    |   [Machoke 53/76 POISON | Litleo 69/69]
     |   The wild Litleo used Work Up!
     |     (anim: StatUp)
     |   The wild Litleo's Attack rose!
@@ -230,20 +232,68 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   The wild Litleo's Special Attack rose!
     |   (end of round)
     |     (anim: Poison)
-    |     HP Machoke (player): 58 -> 49 / 76
+    |     HP Machoke (player): 53 -> 44 / 76
     |   Machoke was hurt by poison!
     | 
     | --- Turn 2 ---
-    |   [Machoke 49/76 POISON | Litleo 69/69]
-    |   Machoke used Rock Tomb!
-    |     HP Litleo (foe): 69 -> 0 / 69
+    |   [Machoke 44/76 POISON | Litleo 69/69]
+    |   The wild Litleo used Headbutt!
+    |     HP Machoke (player): 44 -> 23 / 76
+    |   Machoke flinched and couldn't move!
+    |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 23 -> 14 / 76
+    |   Machoke was hurt by poison!
+    | 
+    | --- Turn 3 ---
+    |   [Machoke 14/76 POISON | Litleo 69/69]
+    |   Good job, Machoke! Come back!
+    |     << recalled: Machoke (player)
+    |   You're in charge, Wartortle!
+    |     >> sent out (player): Wartortle Lv.23 [TORRENT]
+    |   The wild Litleo used Headbutt!
+    |     HP Wartortle (player): 67 -> 48 / 67
+    |   (end of round)
+    | 
+    | --- Turn 4 ---
+    |   [Wartortle 48/67 | Litleo 69/69]
+    |   Wartortle used Water Pulse!
+    |     HP Litleo (foe): 69 -> 18 / 69
     |   It's super effective!
+    |     (anim: Confusion)
+    |   The wild Litleo became confused!
+    |     (anim: Confusion)
+    |   The wild Litleo is confused!
+    |   The wild Litleo used Ember!
+    |   The crowd rallied behind the wild Litleo!
+    |     HP Wartortle (player): 48 -> 35 / 67
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 5 ---
+    |   [Wartortle 35/67 | Litleo 18/69]
+    |   Wartortle used Bite!
+    |     HP Litleo (foe): 18 -> 3 / 69
+    |     (anim: Confusion)
+    |   The wild Litleo is confused!
+    |   The wild Litleo used Ember!
+    |   The crowd rallied behind the wild Litleo!
+    |     HP Wartortle (player): 35 -> 22 / 67
+    |   It's not very effective...
+    |   (end of round)
+    | 
+    | --- Turn 6 ---
+    |   [Wartortle 22/67 | Litleo 3/69]
+    |   Wartortle used Bite!
+    |   The crowd rallied behind Wartortle!
+    |     HP Litleo (foe): 3 -> 0 / 69
     |   The wild Litleo fainted!
     |     xx fainted: Litleo (foe)
-    |   The crowd went wild for Machoke!
+    |   The crowd went wild for Wartortle!
     |     (anim: StatUp)
-    |   Machoke's Attack rose!
+    |   Wartortle's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
+    |   Wartortle is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   battle result code: 1
     |   (overworld message) Tester obtained Litleo!
     |   (overworld message) Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.
@@ -2322,4 +2372,270 @@ Z: the reward Eevee holding the Eevium Z on the Grand Stage
   battle result code: 2
   
 RESULT: player lost after 0 turn(s)
+
+
+Champions rule: Vesper's Amen vs a Lv 100 Lugia
+===============================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  You are challenged by Octave Cantor Vesper!
+  Octave Cantor Vesper sent out Amen!
+    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+  Go! Lugia!
+    >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+    [ability: Lugia (player)'s Pressure]
+  Lugia is exerting its pressure!
+
+--- Turn 1 ---
+  [Lugia 353/353 | Amen 232/232]
+  Lugia used Aeroblast!
+    HP Amen (foe): 232 -> 48 / 232
+  A critical hit!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  What a hit! The audience leaps to its feet!
+  The opposing Amen surrounded itself with its Z-Power!
+  The opposing Amen unleashed its full-force Z-Move!
+  The opposing Amen used Extreme Evoboost!
+    (anim: StatUp)
+  The opposing Amen's Attack rose sharply!
+  The opposing Amen's Defense rose sharply!
+  The opposing Amen's Special Attack rose sharply!
+  The opposing Amen's Special Defense rose sharply!
+  The opposing Amen's Speed rose sharply!
+## FIELD STAGE: GRAND_STAGE is now stage 3
+  The Z-Move brings the house down! Standing ovation!
+  (end of round)
+  The opposing Amen basked in the applause.
+    HP Amen (foe): 48 -> 63 / 232
+
+--- Turn 2 ---
+  [Lugia 353/353 | Amen 63/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 353 -> 278 / 353
+  It's super effective!
+    (anim: StatDown)
+  Lugia's Special Defense fell!
+  Lugia used Aeroblast!
+    HP Amen (foe): 63 -> 0 / 232
+  The opposing Amen fainted!
+    xx fainted: Amen (foe)
+  Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Octave Cantor Vesper!
+  There. That's every note we have. ...You were worth all of them.
+  You got $9,200 for winning!
+  battle result code: 1
+  
+RESULT: player won after 1 turn(s)
+
+
+Champions rule: the player's Eevee, Fight menu, Last Resort -> Yes
+==================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  You are challenged by Octave Cantor Vesper!
+  Octave Cantor Vesper sent out Amen!
+    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+  Go! Eevee!
+    >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Eevee 167/167 | Amen 232/232]
+  Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: Yes]
+  The opposing Amen surrounded itself with its Z-Power!
+  The opposing Amen unleashed its full-force Z-Move!
+  The opposing Amen used Extreme Evoboost!
+    (anim: StatUp)
+  The opposing Amen's Attack rose sharply!
+  The opposing Amen's Defense rose sharply!
+  The opposing Amen's Special Attack rose sharply!
+  The opposing Amen's Special Defense rose sharply!
+  The opposing Amen's Speed rose sharply!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  A Z-Move! The audience leaps to its feet!
+  Eevee surrounded itself with its Z-Power!
+  Eevee unleashed its full-force Z-Move!
+  Eevee used Extreme Evoboost!
+    (anim: StatUp)
+  Eevee's Attack rose sharply!
+  Eevee's Defense rose sharply!
+  Eevee's Special Attack rose sharply!
+  Eevee's Special Defense rose sharply!
+  Eevee's Speed rose sharply!
+## FIELD STAGE: GRAND_STAGE is now stage 3
+  The Z-Move brings the house down! Standing ovation!
+  (end of round)
+
+--- Turn 2 ---
+  [Eevee 167/167 | Amen 232/232]
+  This move can't be used!
+  The opposing Amen used Quick Attack!
+  The crowd roared for the opposing Amen!
+    HP Eevee (player): 167 -> 19 / 167
+  Eevee used Stored Power!
+    HP Amen (foe): 232 -> 186 / 232
+  (end of round)
+  The opposing Amen basked in the applause.
+    HP Amen (foe): 186 -> 201 / 232
+  Eevee basked in the applause.
+    HP Eevee (player): 19 -> 29 / 167
+
+--- Turn 3 ---
+  [Eevee 29/167 | Amen 201/232]
+  This move can't be used!
+  The opposing Amen used Quick Attack!
+  The crowd roared for the opposing Amen!
+    HP Eevee (player): 29 -> 0 / 167
+  Eevee fainted!
+    xx fainted: Eevee (player)
+  (end of round)
+  The opposing Amen basked in the applause.
+    HP Amen (foe): 201 -> 216 / 232
+  Eevee has no energy left to battle!
+  Eevee has no energy left to battle!
+  Eevee has no energy left to battle!
+  Go for it, Lugia!
+    >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
+    [ability: Lugia (player)'s Pressure]
+  Lugia is exerting its pressure!
+
+--- Turn 4 ---
+  [Lugia 353/353 | Amen 216/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 353 -> 269 / 353
+  It's super effective!
+  Lugia used Aeroblast!
+    HP Amen (foe): 216 -> 40 / 232
+  A critical hit!
+  (end of round)
+    (anim: UseItem)
+    HP Lugia (player): 269 -> 291 / 353
+  Lugia restored a little HP using its Leftovers!
+  The opposing Amen basked in the applause.
+    HP Amen (foe): 40 -> 55 / 232
+
+--- Turn 5 ---
+  [Lugia 291/353 | Amen 55/232]
+  The opposing Amen used Quick Attack!
+  The crowd roared for the opposing Amen!
+    HP Lugia (player): 291 -> 201 / 353
+  Lugia used Aeroblast!
+    HP Amen (foe): 55 -> 0 / 232
+  The opposing Amen fainted!
+    xx fainted: Amen (foe)
+  Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Octave Cantor Vesper!
+  There. That's every note we have. ...You were worth all of them.
+  You got $9,200 for winning!
+  battle result code: 1
+  
+RESULT: player won after 4 turn(s)
+
+
+Champions rule: the player's Eevee, Fight menu, Last Resort -> No
+=================================================================
+
+--- Battle start ---
+  field: GRAND_STAGE | weather: None | terrain: None
+  You are challenged by Octave Cantor Vesper!
+  Octave Cantor Vesper sent out Amen!
+    >> sent out (foe): Amen Lv.92 @EEVIUMZ [ADAPTABILITY]
+  Go! Eevee!
+    >> sent out (player): Eevee Lv.70 @EEVIUMZ [ADAPTABILITY]
+## FIELD CHANGE: NONE -> GRAND_STAGE
+  The curtain rises! The spotlight blazes over the stage!
+
+--- Turn 1 ---
+  [Eevee 167/167 | Amen 232/232]
+  Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: No]
+  This move can't be used!
+  The opposing Amen surrounded itself with its Z-Power!
+  The opposing Amen unleashed its full-force Z-Move!
+  The opposing Amen used Extreme Evoboost!
+    (anim: StatUp)
+  The opposing Amen's Attack rose sharply!
+  The opposing Amen's Defense rose sharply!
+  The opposing Amen's Special Attack rose sharply!
+  The opposing Amen's Special Defense rose sharply!
+  The opposing Amen's Speed rose sharply!
+## FIELD STAGE: GRAND_STAGE is now stage 2
+  A Z-Move! The audience leaps to its feet!
+  Eevee used Stored Power!
+    HP Amen (foe): 232 -> 228 / 232
+  (end of round)
+
+--- Turn 2 ---
+  [Eevee 167/167 | Amen 228/232]
+  Unleash Eevee's Z-Power? (Last Resort becomes Extreme Evoboost)  [player answers: No]
+  This move can't be used!
+  The opposing Amen used Quick Attack!
+  The crowd roared for the opposing Amen!
+    HP Eevee (player): 167 -> 0 / 167
+  Eevee fainted!
+    xx fainted: Eevee (player)
+  (end of round)
+  Go for it, Lugia!
+    >> sent out (player): Lugia Lv.100 @LEFTOVERS [PRESSURE]
+    [ability: Lugia (player)'s Pressure]
+  Lugia is exerting its pressure!
+
+--- Turn 3 ---
+  [Lugia 353/353 | Amen 228/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 353 -> 268 / 353
+  It's super effective!
+  Lugia used Aeroblast!
+    HP Amen (foe): 228 -> 168 / 232
+  (end of round)
+    (anim: UseItem)
+    HP Lugia (player): 268 -> 290 / 353
+  Lugia restored a little HP using its Leftovers!
+
+--- Turn 4 ---
+  [Lugia 290/353 | Amen 168/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 290 -> 205 / 353
+  It's super effective!
+  Lugia used Aeroblast!
+    HP Amen (foe): 168 -> 109 / 232
+  (end of round)
+    (anim: UseItem)
+    HP Lugia (player): 205 -> 227 / 353
+  Lugia restored a little HP using its Leftovers!
+
+--- Turn 5 ---
+  [Lugia 227/353 | Amen 109/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 227 -> 146 / 353
+  It's super effective!
+    (anim: StatDown)
+  Lugia's Special Defense fell!
+  Lugia used Aeroblast!
+    HP Amen (foe): 109 -> 51 / 232
+  (end of round)
+    (anim: UseItem)
+    HP Lugia (player): 146 -> 168 / 353
+  Lugia restored a little HP using its Leftovers!
+
+--- Turn 6 ---
+  [Lugia 168/353 | Amen 51/232]
+  The opposing Amen used Shadow Ball!
+    HP Lugia (player): 168 -> 56 / 353
+  It's super effective!
+  Lugia used Aeroblast!
+    HP Amen (foe): 51 -> 0 / 232
+  The opposing Amen fainted!
+    xx fainted: Amen (foe)
+  Lugia is at the level cap (Lv. 100) and can't gain Exp. Points.
+  You defeated Octave Cantor Vesper!
+  There. That's every note we have. ...You were worth all of them.
+  You got $9,200 for winning!
+  battle result code: 1
+  
+RESULT: player won after 5 turn(s)
 

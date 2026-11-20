@@ -32,6 +32,10 @@ module FieldEffects
   # special indoor battles). Keys: trainer type, or [trainer type, version].
   # Value: field (:NONE = no field) or [field, stage]. First opponent decides.
   TRAINER_FIELDS = {} unless const_defined?(:TRAINER_FIELDS, false)
+  # Per-map pools for open borrowing fields (:BLEED, :borrow pool :all): on that
+  # map they borrow only from these field IDs (FIELD_DEFAULTS.yaml `borrow:`,
+  # generated into 011). E.g. the Steamline's Bleed only echoes the war's fields.
+  MAP_BORROW_POOLS = {} unless const_defined?(:MAP_BORROW_POOLS, false)
   # Wild battles only: by encounter type. Keys are GameData::EncounterType IDs
   # (:Land, :Cave, :Water, :OldRod...) or their :type (:land, :cave, :water,
   # :fishing, :contest). ID entries win over :type entries. Applied unless the
@@ -77,7 +81,7 @@ module FieldEffects
 
   # Fields added after the SPINE roster (Revision 10). Valid transition targets
   # and listed after the roster in Field Notes.
-  EXTRA_FIELDS = [:WILDFIRE, :MEADOW].freeze
+  EXTRA_FIELDS = [:WILDFIRE, :MEADOW, :FLOODED_DUNES, :GLASS_DUNES].freeze
   KNOWN_FIELDS = (ROSTER + EXTRA_FIELDS).freeze
 
   SEED_ITEMS = [:ELEMENTALSEED, :MAGICALSEED, :TELLURICSEED, :SYNTHETICSEED].freeze

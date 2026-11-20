@@ -594,6 +594,106 @@ def mine_mouth():
     return im, ['OOO', 'WDW', 'WDW']
 
 
+BRINES = {'brp': ((214, 150, 164), (236, 186, 196)),       # halophile pink: the oldest pans
+          'brg': ((140, 172, 158), (172, 200, 186)),       # grey-green: fresh brine off the marsh
+          'brx': ((198, 208, 218), (236, 240, 246))}       # crystallising: the salt is nearly ready to rake
+
+
+def brine_col(v, key):
+    """a salt pan of standing brine in one of the BRINES colours (1x1, its clay bund on the sides named in v)"""
+    base, hi = BRINES[key]
+    im = Image.new('RGBA', (16, 16), base + (255,)); d = ImageDraw.Draw(im); r = random.Random(400 + len(v) + ord(key[2]))
+    for _ in range(8): P(im, r.randrange(16), r.randrange(16), hi + (255,))
+    for _ in range(5 if key != 'brx' else 14): P(im, r.randrange(16), r.randrange(16), (246, 248, 250, 255))
+    C1, C2 = (176, 150, 116, 255), (138, 112, 86, 255)
+    if 'n' in v: d.rectangle([0, 0, 15, 2], fill=C1); d.line([0, 2, 15, 2], fill=C2)
+    if 's' in v: d.rectangle([0, 13, 15, 15], fill=C1); d.line([0, 13, 15, 13], fill=(232, 236, 240, 255))
+    if 'w' in v: d.rectangle([0, 0, 2, 15], fill=C1); d.line([2, 0, 2, 15], fill=C2)
+    if 'e' in v: d.rectangle([13, 0, 15, 15], fill=C1); d.line([13, 0, 13, 15], fill=(232, 236, 240, 255))
+    return im
+
+
+def crust(v):
+    """the grey salt crust of the Saltings (1x1 ground): grey-cream, crazed, glinting crystals, a little mud"""
+    im = Image.new('RGBA', (16, 16), (204, 202, 194, 255)); r = random.Random(760 + v)
+    for _ in range(4):
+        x, y = r.randrange(16), r.randrange(16); L = r.randrange(3, 7); dx = r.choice((1, -1))
+        for k in range(L): P(im, (x + k * dx) % 16, (y + k // 2) % 16, (168, 166, 160, 255))
+    for _ in range(12): P(im, r.randrange(16), r.randrange(16), (232, 234, 236, 255))
+    for _ in range(6): P(im, r.randrange(16), r.randrange(16), (186, 182, 172, 255))
+    if v == 3:
+        for _ in range(6): P(im, r.randrange(16), r.randrange(16), (150, 136, 112, 255))
+    return im
+
+
+def boardwalk(vertical):
+    """a light timber boardwalk on posts (1x1, walkable): planks across the way of travel, a shadow on the water"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
+    W2 = [(126, 96, 66, 255), (166, 128, 88, 255), (196, 160, 112, 255)]
+    if vertical:
+        d.rectangle([2, 0, 13, 15], fill=W2[1])
+        for y in range(0, 16, 4): d.line([2, y, 13, y], fill=W2[0]); d.line([2, y + 1, 13, y + 1], fill=W2[2])
+        d.line([2, 0, 2, 15], fill=W2[0]); d.line([13, 0, 13, 15], fill=W2[0]); d.line([14, 0, 14, 15], fill=(0, 0, 0, 70))
+    else:
+        d.rectangle([0, 2, 15, 12], fill=W2[1])
+        for x in range(0, 16, 4): d.line([x, 2, x, 12], fill=W2[0]); d.line([x + 1, 2, x + 1, 12], fill=W2[2])
+        d.line([0, 2, 15, 2], fill=W2[2]); d.line([0, 12, 15, 12], fill=W2[0]); d.line([0, 13, 15, 13], fill=(0, 0, 0, 80))
+    return im
+
+
+def dye_cloth(col, v):
+    """a drying line across the road (1x1, overhead: you walk under it): a sagging rope and a length of dyed cloth"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im); r = random.Random(800 + v + sum(col))
+    for x in range(16): P(im, x, 2 + (1 if 4 < x < 11 else 0), (90, 76, 60, 255))
+    x0 = 2 + r.randrange(2); x1 = x0 + 10 + r.randrange(2); hem = 11 + r.randrange(4)
+    lo = tuple(int(c * 0.72) for c in col); hi = tuple(min(255, int(c * 1.18) + 16) for c in col)
+    for x in range(x0, x1):
+        for y in range(3 + (1 if 4 < x < 11 else 0), hem + (x % 3 == 0)):
+            P(im, x, y, (hi if x == x0 + 1 else lo if (x - x0) % 4 == 3 else col) + (235,))
+    for x in (x0, x1 - 1): P(im, x, 3, (240, 236, 226, 255))                 # pegs
+    return im
+
+
+def dye_post():
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
+    d.rectangle([6, 0, 9, 14], fill=WOOD[1], outline=OUT); d.line([7, 1, 7, 13], fill=WOOD[3])
+    d.line([0, 3, 15, 3], fill=(90, 76, 60, 255)); d.ellipse([4, 13, 11, 15], fill=(0, 0, 0, 70))
+    return im
+
+
+def stone_bridge(part):
+    """an old stone bridge running north-south (1x1): 'm' the cobbled deck, 'w' / 'e' the parapets (solid)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im); r = random.Random({'m': 1, 'w': 2, 'e': 3}[part])
+    if part == 'm':
+        for y in range(0, 16, 4):
+            off = 0 if (y // 4) % 2 else 2
+            for x in range(-off, 16, 5):
+                d.rectangle([x, y, x + 4, y + 3], fill=STONE[2] if r.random() < 0.7 else STONE[3], outline=STONE[1])
+        return im
+    x0 = 3 if part == 'w' else 2
+    d.rectangle([x0, 0, x0 + 10, 15], fill=STONE[2], outline=OUT)
+    for y in range(0, 16, 4): d.line([x0 + 1, y, x0 + 9, y], fill=STONE[1])
+    d.line([x0 + 1, 0, x0 + 1, 15], fill=STONE[3])
+    for _ in range(4): P(im, x0 + 2 + r.randrange(8), r.randrange(16), MOSS[1])
+    if part == 'w': d.line([x0 + 11, 0, x0 + 11, 15], fill=(0, 0, 0, 70))
+    return im
+
+
+def bamboo():
+    """a bamboo clump (2x3): pale green culms with nodes, leaf sprays at the top (overhead)"""
+    im, d = canvas(2, 3); r = random.Random(17)
+    for k in range(7):
+        x = 3 + k * 4 + r.randrange(-1, 2); top = 2 + r.randrange(10)
+        for y in range(top, 46):
+            P(im, x, y, (110, 170, 80, 255)); P(im, x + 1, y, (150, 206, 110, 255)); P(im, x + 2, y, (70, 120, 60, 255))
+            if (y - top) % 9 == 0: P(im, x, y, (60, 100, 50, 255)); P(im, x + 1, y, (60, 100, 50, 255)); P(im, x + 2, y, (60, 100, 50, 255))
+        for _ in range(5):
+            lx, ly = x + r.randrange(-4, 6), top + r.randrange(0, 14)
+            for t in range(4): P(im, lx + t, ly + t // 2, (90, 160, 70, 255))
+    d.ellipse([2, 43, 29, 47], fill=(0, 0, 0, 70))
+    return im, ['OO', 'OO', 'WW']
+
+
 def pieces():
     """name -> (image, code rows, door): appended by rcustom (rdraw.pieces_late4)"""
     D.CODE.update(CODES)
@@ -639,6 +739,16 @@ def pieces():
     for v in range(3): out['fw_gust%d' % v] = (gust(v), ['O'], None)
     for v in range(2): out['cs_shoal%d' % v] = (shoal(v), ['F'], None)
     im, c = mine_mouth(); out['pf_minemouth'] = (im, c, None)
+    for key in BRINES:
+        for v in ('', 'n', 's', 'w', 'e', 'nw', 'ne', 'sw', 'se', 'ns', 'we'):
+            out['%s_%s' % (key, v or 'c')] = (brine_col(v, key), ['W'], None)
+    for v in range(4): out['gs_crust%d' % v] = (crust(v), ['G'], None)
+    out['bw_h'] = (boardwalk(False), ['D'], None); out['bw_v'] = (boardwalk(True), ['D'], None)
+    for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
+        for v in range(2): out['dl_cloth_%s%d' % (nm, v)] = (dye_cloth(col, v), ['O'], None)
+    out['dl_post'] = (dye_post(), ['W'], None)
+    out['sb_m'] = (stone_bridge('m'), ['D'], None); out['sb_w'] = (stone_bridge('w'), ['W'], None); out['sb_e'] = (stone_bridge('e'), ['W'], None)
+    im, c = bamboo(); out['pf_bamboo'] = (im, c, None)
     for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
         out['df_slab_' + nm] = (slab(col), ['F'], None)
     im, c = sluice(); out['df_sluice'] = (im, c, None)

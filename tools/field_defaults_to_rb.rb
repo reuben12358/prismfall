@@ -1,8 +1,10 @@
 # encoding: utf-8
 # Writes plugins/Prismfall Field Effects/011_FieldEffects_MapDefaults.rb from
 # design/FIELD_DEFAULTS.yaml: the interim per-map default fields
-# (FieldEffects::MAP_DEFAULT_FIELDS / MAP_DEFAULT_WILD_FIELDS) and the trainer
-# exceptions (TRAINER_FIELDS). mapgen's MAP_FIELDS still win where present.
+# (FieldEffects::MAP_DEFAULT_FIELDS / MAP_DEFAULT_WILD_FIELDS), the per-map
+# pools of open borrowing fields such as the Bleed (MAP_BORROW_POOLS, from a
+# map's `borrow:` list) and the trainer exceptions (TRAINER_FIELDS). mapgen's
+# MAP_FIELDS still win where present.
 #
 #   ruby tools/field_defaults_to_rb.rb [--check]
 #
@@ -35,6 +37,7 @@ out << "# Interim map defaults: used only where mapgen's MAP_FIELDS / MAP_WILD_F
 out << "module FieldEffects"
 out << "  MAP_DEFAULT_FIELDS.merge!({"
 wild = []
+pools = []
 data["maps"].sort_by { |k, _| k.to_i }.each do |id, m|
   check.call(m["field"], "map #{id}")
   out << format("    %d => %s,   # %s", id.to_i, entry(m["field"], m["stage"]), m["name"].to_s.gsub(/[^\x20-\x7E]/, "?"))
@@ -42,10 +45,20 @@ data["maps"].sort_by { |k, _| k.to_i }.each do |id, m|
     check.call(m["wild"], "map #{id} wild")
     wild << format("    %d => %s,   # %s", id.to_i, entry(m["wild"], m["wild_stage"]), m["name"].to_s.gsub(/[^\x20-\x7E]/, "?"))
   end
+  if m["borrow"]
+    list = Array(m["borrow"])
+    list.each { |f| check.call(f, "map #{id} borrow") }
+    errors << "map #{id} borrow: NONE is not a field" if list.any? { |f| f.to_s.upcase == "NONE" }
+    pools << format("    %d => [%s],   # %s", id.to_i, list.map { |f| ":#{f.to_s.upcase}" }.join(", "),
+                    m["name"].to_s.gsub(/[^\x20-\x7E]/, "?"))
+  end
 end
 out << "  })"
 out << "  MAP_DEFAULT_WILD_FIELDS.merge!({"
 out.concat(wild)
+out << "  })"
+out << "  MAP_BORROW_POOLS.merge!({"
+out.concat(pools)
 out << "  })"
 out << "  TRAINER_FIELDS.merge!({"
 Array(data.dig("exceptions", "trainers")).each do |t|
@@ -71,4 +84,4 @@ if ARGV.include?("--check")
   exit(same ? 0 : 1)
 end
 File.write(DEST, text, encoding: "UTF-8")
-puts "wrote #{DEST} (#{data["maps"].size} maps, #{wild.size} wild overrides)"
+puts "wrote #{DEST} (#{data["maps"].size} maps, #{wild.size} wild overrides, #{pools.size} borrow pools)"

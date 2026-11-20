@@ -1,15 +1,17 @@
 #===============================================================================
 # Prismfall Cutscenes - 013 The war climax (story/13_CUTSCENES.md, WAR-1)
 #-------------------------------------------------------------------------------
-# :WAR_CLIMAX  "The Beam Clash on the Shattered Ice" - 15 shots, about 64 s (including a slow-motion beat).
-# Isenmar and Kyogre hold the left of the strait, Ashkaar and Reshiram the right.
+# :WAR_CLIMAX  "The Beam Clash on the Glass Dunes" - 15 shots, about 64 s (including a slow-motion beat).
+# The procedural fallback for 013_Scenes_War_OnMap.rb (it plays when the art overlay is missing).
+# The war is fought on land in Ossaria's western dunes (SPINE Rev 18): Isenmar and Kyogre on the left (west,
+# Skaldfast), Ashkaar and Reshiram on the right (east, the Siege Camp), the Northern Sea along the horizon.
 #
 # Variables (Prismfall::Cutscene.play(:WAR_CLIMAX, variant: :B) overrides them;
 # otherwise they are read from Prismfall Core's war outcome flags):
 #   variant: :A  = WAR_STOPPED       the PC walks in, the clash falls silent
 #            :A2 = WAR_BOTH_BROKEN   as A to shot 10, then a white-out; both lines gone
 #            :B  = WAR_ASHKAAR_WON   the PC rides in on Sigrun's Salamence
-#            :C  = WAR_ISENMAR_WON   the PC rides in on Marisol's prow
+#            :C  = WAR_ISENMAR_WON   the PC rides the flood in on Marisol's sled-boat
 #   legends: false = :war_legend kept the legendaries away; the Wardens' aces
 #            fight instead (fire_mon: / water_mon:, default Salamence / Mamoswine)
 #   fire_legend: / water_legend: placeholder species the story team can swap.
@@ -58,7 +60,7 @@ module Prismfall
       fire_pal  = :fireclash
       who = WAR_SPEAKERS
       wide = [232, 192]                 # the wide two-shot
-      ground = 318                      # the ice between the two hosts
+      ground = 318                      # the sand between the two hosts
       water_at = [40, 300]
       fire_at  = [404, 300]
       overpower = var(:overpower, false) && [:B, :C].include?(variant)
@@ -66,20 +68,23 @@ module Prismfall
       clash_end = :both if variant == :A2
       clash_end = ((variant == :B) ? :b : :a) if overpower
 
-      # The Shattered Ice before dawn: aurora over Isenmar (left), smoke over
-      # Ashkaar (right), two mountain ranges, both fortresses, pack ice, and
-      # the two hosts as ranks of tiny figures in front of everything behind y 312.
-      stage = lambda do |ice, hosts|
+      # The Glass Dunes at dawn: aurora over Isenmar (left), smoke over Ashkaar
+      # (right), the Mast Glacier behind Skaldfast and the mesas behind the Siege
+      # Camp, the grey Northern Sea on the horizon, bone-white dunes (flooded in
+      # front of Kyogre once it has come), and the two hosts as ranks of tiny
+      # figures in front of everything behind y 312. dunes = :dawn or :glass.
+      stage = lambda do |dunes, hosts|
         background :sky, palette: :dawn, stars: true, clouds: 5, height: 392,
                    colors: [[12, 10, 40], [24, 18, 66], [52, 30, 98], [98, 46, 110], [164, 72, 106], [226, 122, 96], [250, 190, 126]]
         background :aurora, x: -300, y: 2, width: 600, height: 160
         background :smoke_bank, x: 330, y: 216, width: 640, height: 200
         background :mountains, color: [52, 44, 104], y: 200, height: 56, snow: true, parallax: 0.15, seed: 3
-        background :mountains, color: [30, 26, 70], y: 206, height: 34, parallax: 0.3, seed: 8
+        background :mountains, color: [96, 60, 64], y: 206, height: 30, parallax: 0.3, seed: 8
         background :fortress, x: -190, y: 210, width: 300, height: 96, color: [22, 26, 60], glow: [150, 224, 255]
         background :fortress, x: 400, y: 210, width: 320, height: 110, color: [36, 16, 30], glow: [255, 168, 64], seed: 4
         background :fleet, x: -400, y: 226, width: 300, count: 5, color: [26, 34, 72]
-        background :floes, x: -512, width: 1536, palette: ice, pools: (hosts) ? [[water_at[0], 302, 124, 20]] : nil
+        background :dunes, x: -512, width: 1536, palette: dunes, horizon: 196,
+                   flood: (hosts && legends) ? [[water_at[0] + 20, 300, 170, 22]] : nil
         next if !hosts
         background :host, x: -400, width: 510, y: 330, rows: 6, color: [80, 128, 208], banner: [208, 240, 255],
                    facing: :right, frost: 7, haze: [60, 70, 130], front: true
@@ -120,7 +125,7 @@ module Prismfall
       move :water, to: water_at, duration: 1.5, ease: :out
       flipbook :water, frames: 0..3, hold: 0.1 if water_src[:sheet]
       wait 0.9
-      burst :ice_shards, at: [water_at[0], 300], count: 30, speed: 1.3
+      burst :lift, at: [water_at[0], 300], count: 30, color: :water
       burst :lift, at: [water_at[0], 300], count: 12
       ring at: [water_at[0], 302], color: :seaclash, radius: 220, duration: 0.9, squash: 0.2
       emit :rain, rate: 80, id: :rain
@@ -138,7 +143,7 @@ module Prismfall
       shake power: 5, duration: 0.6
       pan by: [10, -8], duration: 2.8, ease: :out
       wait 0.5
-      say who[:eirik], "Isenmar! The sea remembers it's a sea!", duration: 2.6
+      say who[:eirik], "Isenmar! The sea has come to the sand!", duration: 2.6
 
       #--- 3: Ashkaar answers ----------------------------------------------------
       cut at: [520, 300], zoom: 2.0
@@ -215,12 +220,12 @@ module Prismfall
       # 6: impact - a white frame, a slow-motion beat, then the push in
       impact_frames count: 2
       slowmo 0.2, duration: 0.3
-      fracture at: [236, ground], radius: 250, duration: 1.6, arms: 11
+      fracture at: [236, ground], radius: 250, duration: 1.6, arms: 11, color: [96, 150, 176], highlight: [240, 252, 255]   # the sand glassing
       pan to: [236, 196], zoom: 1.5, duration: 0.9, ease: :out
       clash_mod :clash, shake: 6
       2.times do |i|
         at(now + 1.1 + (i * 0.9)) do
-          burst :ice_shards, at: [176 + (i * 120), ground], count: 14, speed: 1.3
+          burst :ice_shards, at: [176 + (i * 120), ground], count: 14, speed: 1.3, color: :white
           burst :lift, at: [236, ground], count: 8
         end
       end
@@ -269,6 +274,7 @@ module Prismfall
         wait s9 - 2.8
       when :C
         remove :starter
+        # Marisol's sled-boat riding the flood in (the :ship prop stands in for it)
         actor :prow, prop: :ship, color: [72, 96, 144], at: [-40, 344], scale: 2, flip: true, z: 870
         actor :pc, player: true, at: [-20, 316], dir: :right, z: 880
         cut at: [40, 250], zoom: 1.5
@@ -388,7 +394,7 @@ module Prismfall
         say (variant == :B) ? who[:anja] : who[:sigrun], "I'll remember which side you stood on.", duration: 3.2
       end
 
-      #--- 14: the observers on the ridge ---------------------------------------
+      #--- 14: the observers on a sandstone mesa behind the lines ----------------
       fade_out duration: 0.5
       stop_emit
       clear_actors
@@ -396,15 +402,15 @@ module Prismfall
       glow side: :left, level: 0, duration: 0
       glow side: :right, level: 0, duration: 0
       background :sky, palette: :dawn, clouds: 4, sun: [150, 150]
-      background :mountains, color: [72, 72, 120], y: 210, height: 70, snow: true
-      background :battlefield, palette: :snow, horizon: 250
+      background :mountains, color: [150, 104, 84], y: 210, height: 70
+      background :battlefield, palette: :sand, horizon: 250
       camera at: [256, 230], zoom: 2.0
       tone to: [0, 0, 0, 0], duration: 0
       actor :tripod, prop: :tripod, color: [208, 168, 72], at: [226, 300], scale: 2
       actor :quent, charset: :MERIDIAN_QUENT, color: [240, 240, 244], at: [270, 304], dir: :left
       actor :obs1, charset: :MERIDIAN_AGENT, color: [224, 224, 232], at: [190, 306], dir: :right
       actor :obs2, charset: :MERIDIAN_AGENT, color: [224, 224, 232], at: [316, 308], dir: :left
-      emit :snow, rate: 14
+      emit :motes, rate: 6
       fade_in duration: 0.5
       fade :tripod, to: 0, duration: 1.6
       hop :quent, height: 3, times: 3, duration: 1.5
@@ -412,7 +418,7 @@ module Prismfall
       pan by: [8, 0], duration: 3.4, ease: :linear
       say who[:quent], "Lovely reading. Simply lovely.", duration: 3.2
 
-      #--- 15: the steam-glass plain at sunrise ---------------------------------
+      #--- 15: the Glass Dunes at sunrise: steam-glass where the sand was --------
       fade_out duration: 0.6
       stop_emit
       clear_actors

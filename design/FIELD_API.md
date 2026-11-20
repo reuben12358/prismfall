@@ -5,8 +5,9 @@ encyclopedia: records each field the player battles on in save data `:prismfall_
 **Each field lives in its own file `1xx_Field_<Name>.rb` that only calls `FieldEffects.register`.**
 Never edit the core files to add a field. Validate with `ruby tools/validate_fields.rb` (must print 0 errors).
 
-Implemented fields: 33 (`101_Field_Silkwood.rb` … `138_Field_Meadow.rb`; the 31 SPINE roster fields plus `:WILDFIRE` and
-`:MEADOW`, listed in `FieldEffects::EXTRA_FIELDS`). File numbers used: 101–118, 120–125, 130–138. Next free: 139.
+Implemented fields: 35 (`101_Field_Silkwood.rb` … `140_Field_GlassDunes.rb`; the 31 SPINE roster fields plus `:WILDFIRE`,
+`:MEADOW`, `:FLOODED_DUNES` and `:GLASS_DUNES`, listed in `FieldEffects::EXTRA_FIELDS`). File numbers used: 101–118,
+120–125, 130–140. Next free: 141.
 `010_` = v1.1 extensions, `011_` = generated map defaults (do not edit; see §12.6). **v1.1 additions are in §12.**
 Design background: `design/FIELD_RESEARCH.md`.
 
@@ -337,6 +338,13 @@ FieldEffects.register(:FLOWER_GARDEN, {
              :start_immediately => true,
              :message => "The Bleed shudders... echoes of {1} seep in!" }   # {1} = borrowed names
 ```
+**Per-map pools (v1.1, Revision 18).** A map may narrow what an *open* borrower (`:pool => :all`, i.e. the Bleed)
+draws from: `FieldEffects::MAP_BORROW_POOLS[map_id] = [ids]`, generated into `011_` from a map's `borrow:` list in
+`design/FIELD_DEFAULTS.yaml`. The Steamline (925) and the Glass Dunes (926) use the war pool (Volcanic, Cinderglass,
+Frozen Lake, Snowy Mountain, Desert, Flooded Dunes, Glass Dunes). Fixed pools (PRISM_ARENA's) are never narrowed.
+Borrowed hooks run too, so a field's hook that changes the field or keeps per-field counters must first check
+`FieldEffects.current(battle) == :ITS_ID` (see `139_Field_FloodedDunes.rb`'s tide).
+
 Borrowed fields contribute their **effect** keys only: type/move/damage/effectiveness/inverse/type changes/extra types/
 accuracy/priority/crit/added effects/effect chances/fixed damage/weather_as/stat boosts/move fails/end_of_round/on_entry/speed/negated
 abilities/weather/terrain and hooks except `on_start`/`on_end`. **Not** borrowed: identity, transitions, seed, stages,
@@ -436,5 +444,6 @@ So Wardens push toward fields that suit them and avoid breaking a field they bui
 
 The data lives in `design/FIELD_DEFAULTS.yaml` (all 424 maps, encounter rules, kingdom and borderland fallbacks,
 exceptions). `ruby tools/field_defaults_to_rb.rb` turns it into `011_FieldEffects_MapDefaults.rb`
-(`MAP_DEFAULT_FIELDS`, `MAP_DEFAULT_WILD_FIELDS`, `TRAINER_FIELDS`); `--check` reports if that file is stale.
+(`MAP_DEFAULT_FIELDS`, `MAP_DEFAULT_WILD_FIELDS`, `MAP_BORROW_POOLS`, `TRAINER_FIELDS`); `--check` reports if that file
+is stale.
 mapgen's `MAP_FIELDS` / `MAP_WILD_FIELDS` always win over the generated defaults.

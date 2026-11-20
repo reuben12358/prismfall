@@ -6,7 +6,8 @@ these keys. If a stage key has no art, the bridge falls back to the stage-1 art.
 edits the bridge config. Everything below is a request or a suggestion.
 
 Status checked 2026-11-17 11:10: **every key below already has art in `graphics/EBDX/Battlebacks/battlebg/`**
-(the backdrop pass ran in parallel and picked up the keys from the field files). So the open items are design
+(the backdrop pass ran in parallel and picked up the keys from the field files). **Exception, 2026-11-19:** the two war fields
+`field_flooded_dunes` and `field_glass_dunes` are new and have no art yet (briefs in the table; bridge suggestions in §4). So the open items are design
 changes the current art does not show yet, plus transition colours for the new transitions.
 
 ## 1. Keys: fields and stages
@@ -17,6 +18,8 @@ changes the current art does not show yet, plus transition colours for the new t
 | WILDFIRE | Wildfire | 2 "Embers" | `field_wildfire_embers` | **NEW stage.** Art exists. A burned-down glow: smouldering ground, drifting sparks, the first green shoots. It leads on to MEADOW, so the shoots matter. |
 | MEADOW | Meadow | 1 | `field_meadow` | **NEW field.** Art exists. Open grass and wildflowers. It is the default for most routes, so it must look good and not bland: wind in the grass, wildflowers, pollen. |
 | ASHEN_WASTE | **Cinderglass** (renamed) | 1 | `field_ashen_waste` (key kept) | **REWORK needed.** The current art is a cooled caldera under falling grey ash. The redesign is *Cinderglass*: lava quenched into a plain of black volcanic glass, with steam geysers that erupt every 3 rounds, glittering glass grit, and obsidian shards that Rock/Ground users throw. Please keep the Volcanic layout so the quench still reads as the same place. Swap the grey ash fall for steam plumes rising from vents (periodic bursts would match the geyser rounds), glints on glass facets, and a violet-black glass sheen with hot orange seams in the cracks. Avoid grey, dusty "dead" art. The user's complaint was that this transition felt like going to "kinda nothing". |
+| FLOODED_DUNES | Flooded Dunes | 1 | `field_flooded_dunes` | **NEW field (2026-11-19, the Ch19 war; no art yet).** *Desert dunes under a flood-sea.* Ossaria's bone-white dunes with the Northern Sea poured in over them: grey-green seawater fills the hollows, the dune crests stand out of it as pale sandbars, foam lines and a slow swell run between them, wet dark sand at every waterline, the grey sea on the horizon and a low rain-sky. Keep the Desert layout (the same dunes, now drowned) so DESERT -> FLOODED_DUNES reads as the sea arriving. It is Kyogre's sea and Isenmar's ground: powerful, cold, moving water, not a disaster scene. Spray, rain sheen and drifting foam would fit; a tide line that rises and falls would match the drain mechanic. |
+| GLASS_DUNES | Glass Dunes | 1 | `field_glass_dunes` | **NEW field (2026-11-19, the Ch19 war; no art yet).** *Black-green glass dunes with steam.* The same dunes fused by white fire into smooth black-green glass (desert glass / trinitite: deep bottle-green to near-black, with hot amber seams where it is still cooling), a breaking wave of the flood set into glass mid-curl, hollows of boiling water steaming between the glass crests, glints and refraction on the facets, a faint prismatic Bleed shimmer where the two Imprints are locked in. Steam rising in plumes, not grey ash. It must read as beautiful and strange, the place Reshiram made, and later the bone-carters' necropolis: no gore, no glassed bodies in the battle art. Keep the Desert/Flooded Dunes layout so the three backdrops are one place in three states. |
 | GRAND_STAGE | Grand Stage | 2 "Encore" | `field_grand_stage_2` | Stage. Art exists. Warmer lights, an audience reacting. |
 | GRAND_STAGE | Grand Stage | 3 "Standing Ovation" | `field_grand_stage_3` | Stage. Art exists. Full spotlight, confetti. |
 | NEON_GRID | Neon Grid | 2 "Blackout" | `field_neon_grid_blackout` | Stage. Art exists. The grid has shorted: dark city, live sparks, Electric power surging in a cycle. A pulsing spark layer would show the surge cycle. |
@@ -43,7 +46,14 @@ and then regrows into MEADOW. Suggested colours for the other transitions:
 
 | From -> To | Trigger (short) | Suggested flash |
 |---|---|---|
-| DESERT -> ASHEN_WASTE | the hottest Fire moves glass the sand | `[255, 200, 120]` white-hot |
+| DESERT -> FLOODED_DUNES | Primordial Sea / Origin Pulse: the flood-sea pours in (also from the Superbloom) | `[150, 210, 255]` sea |
+| DESERT / FLOODED_DUNES -> GLASS_DUNES | the hottest Fire moves (Blue Flare) glass the sand | `[235, 255, 240]` white-hot, green-tinged |
+| GLASS_DUNES -> FLOODED_DUNES | heavy rain, Origin Pulse ×2, floods ×3: the sea breaks back over the glass | `[150, 210, 255]` sea |
+| GLASS_DUNES -> DESERT | 3 shatters: the glass breaks into glittering sand | `[230, 220, 190]` sand-dust |
+| FLOODED_DUNES -> DESERT (stage 2) | the tide drains away and the wet sand blooms | `[200, 255, 170]` green |
+| FLOODED_DUNES -> FROZEN_LAKE | big Ice moves freeze the flood | `:white` |
+| GLASS_DUNES -> BLEED | two beam clashes tear the Imprints open (the WAR-1 dome) | `:distortion` (the existing ANY->BLEED rule covers it) |
+| DESERT -> ASHEN_WASTE | **no longer used** (2026-11-19): a glassed desert is now GLASS_DUNES; Cinderglass is only the quenched volcano | — |
 | ASHEN_WASTE -> VOLCANIC | eruption moves reopen the vents | `[255, 90, 20]` lava |
 | ASHEN_WASTE -> WATER_SURFACE | big Water moves / heavy rain flood the glass basin | `[200, 220, 235]` steam |
 | WILDFIRE -> MEADOW (from Embers) | rain, Grassy Terrain, growth moves | `[200, 255, 170]` green |
@@ -85,3 +95,19 @@ The number of maps (of 424) that default to each field. Fields that come up ofte
 - Early game first impressions: BEACH (Ferrow's Landing, Saltmere), MEADOW (Routes 1-3: the first wild battles),
   SILKWOOD (Briarwick, Gossamer Wood, Loomhouse Gym), GRAND_STAGE (Pell Playhouse), WATER_SURFACE (Ebbmouth, Tidelock Gym)
 - Mostly reached by transition: WILDFIRE (0 maps), MEADOW (5), RAINBOW (2), PRISM_ARENA (1), UNDERWATER (3, plus diving)
+
+## 4. Bridge profile suggestions for the two war fields (2026-11-19, field workstream)
+
+The bridge config is the bridge owner's; these are suggestions only. Until `field_flooded_dunes` / `field_glass_dunes`
+art exists, the bridge's fallback room shows (DEFAULT_PROFILE), so a profile with a good fallback matters.
+- **`:FLOODED_DUNES`**: `:fallback => { "backdrop" => "Sand", "sky" => true }`, `:outdoor => true`,
+  `:art_extras => { "water" => true }`, `:tone => [-20, 0, 25, 20]` (cold sea light over the sand),
+  `:transition => [150, 210, 255]`; fx: a `:drift` of spray (`:dot`, white/pale blue, `:dir => 1`) and a `:twinkle` of
+  wave glints low in the room (`:area` on the lower half), like WATER_SURFACE's.
+- **`:GLASS_DUNES`**: `:fallback => { "backdrop" => "Sand", "sky" => true }`, `:outdoor => true`,
+  `:tone => [-35, 0, -20, 40]` (dark bottle-green glass), `:transition => [235, 255, 240]`; fx: a `:rise` of steam
+  (`:puff`, the existing `STEAM` colours, slow, `:layers => [:back, :mid]`) and a `:twinkle` of glass glints
+  (`:spark`, white and pale green, `:blend => 1`).
+- Layout: the war boss fights (Reshiram / Kyogre) start on DESERT and change twice, so the stage-1 art of all
+  three should share one horizon line.
+

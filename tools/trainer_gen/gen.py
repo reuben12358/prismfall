@@ -588,12 +588,15 @@ def rival(ttype, name, num, cap, lose, build):
 # --- Kestrel -----------------------------------------------------------------
 rival("RIVAL_KESTREL", "Kestrel", 1, 7, "Whatever. Beginner's luck. Don't get used to it.", lambda s: [
     # K1, the tutorial on Ferrow's Landing (can be lost). Reborn's Cain / Victoria and Rejuvenation's Ren open with a
-    # Lv 5 starter and basic moves; Kestrel picks the starter with the type edge, so Standard matches the player's level
-    # (Lv 5) instead of out-levelling it. Hard: Lv 6 with Starly; Casual: Lv 3 (no type move yet on a Gen 1 pick).
+    # Lv 5 starter and BASIC moves (Reborn's Litten: Scratch / Growl; Ren's Froakie: Pound / Growl). Kestrel picks the
+    # starter with the type edge, so on Standard it has no type move yet: with Ember / Water Gun / Vine Whip at Lv 5 it
+    # won 60 of 60 against realistic Lv 5 starters (the story has a win line, "...With the type disadvantage").
+    # Hard keeps the type move and adds Starly; Casual is Lv 3. (Core resets the moves of a non-Gen 1 pick to its
+    # level-up set, which may include the type move: an upset is still on.)
     P("STARLY", 5, "KEENEYE", None, "JOLLY", "TACKLE,GROWL,QUICKATTACK", "A", only="hard"),
-    dict(starter_mon("RIVAL_KESTREL", s, 0, 5), hard={"moves": SETS[0][SLOT_LINE["RIVAL_KESTREL"][s]][1],
-                                                     "item": "ORANBERRY"},
-         casual={"moves": {"FIRE": "SCRATCH,GROWL", "WATER": "TACKLE,TAILWHIP", "GRASS": "TACKLE,GROWL"}[SLOT_LINE["RIVAL_KESTREL"][s]]}),
+    dict(starter_mon("RIVAL_KESTREL", s, 0, 5,
+                     moves={"FIRE": "SCRATCH,GROWL", "WATER": "TACKLE,TAILWHIP", "GRASS": "TACKLE,GROWL"}),
+         hard={"moves": SETS[0][SLOT_LINE["RIVAL_KESTREL"][s]][1], "item": "ORANBERRY"}),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way, then. I mean it.", lambda s: [
     # K2 is on the Gullcry Cliffs (MOUNTAIN): Rock x1.5, Flying x1.2, wind moves x1.3, Tailwind 2 turns longer. Reference
@@ -1344,24 +1347,26 @@ S("Gauntlet finale - Vesper's Eevee 'Amen' with the Eevium Z (v60; field :GRAND_
 # NOT choose, then a partner battle on the Glass Dunes, then the legendary. Map defaults (FIELD_DEFAULTS.yaml):
 #   920 the Rimed Sands (Isenmar's trench-lines on frozen sand)  DESERT       Isenmar soldiers 0 + Captain 0
 #   924 the Ashkaar Siege Camp (earthworks)                       Cinderglass  Ashkaar soldiers 0 + Captain 0
-#   925 the Steamline (stand between: both lines)                  Cinderglass  Ashkaar soldier M 1, Isenmar soldier M 1
-#   926 the Glass Dunes (between the hosts)                        DESERT, then the flood and the glass (fields team)
+#   925 the Steamline (stand between: both lines)                  BLEED        Ashkaar soldier M 1, Isenmar soldier M 1
+#                                                                  (borrows only the war's fields, MAP_BORROW_POOLS)
+#   926 the Glass Dunes (between the hosts)                        DESERT -> FLOODED_DUNES / GLASS_DUNES (139/140)
 #       singles on the crest: Ashkaar soldier F 1, Isenmar soldier F 1
 #       partner doubles: back Ashkaar = Sigrun (LEADER_SIGRUN 19) vs Isenmar Captain 1 + Isenmar soldier M 2;
 #                        back Isenmar = Marisol (LEADER_MARISOL 19) vs Ashkaar Captain 1 + Ashkaar soldier M 2;
 #                        stand between = Sigrun vs Isenmar Captain 1 + Ashkaar Captain 1 (both lines turn on the PC).
 # Generic "Soldier" / "Captain", version = encounter number like the grunts. No bag items. Partners have one version only.
-# THE DUNES DECIDE THE WAR. Desert: Ground x1.2, Fire x1.2, Ice x0.75, Water x0.8; Ground types take x0.67 from special
+# THE GROUND DECIDES THE WAR. Desert: Ground x1.2, Fire x1.2, Ice x0.75, Water x0.8; Ground types take x0.67 from special
 # attacks; Sand Rush / Sand Force / Sand Veil / Solar Power work without weather (Solar Power costs no HP); hail can't
-# form; sun lasts 2 turns longer, sandstorm 3. So each host fights to change the ground under it:
-#   Isenmar brings the SEA. Rain (Drizzle) or three floods (Surf, Muddy Water, Hydro Pump, Origin Pulse...) soak the
-#   dunes: on a plain Desert that is the Superbloom (the Water and Ice nerfs go, Grass x1.5 for Ludicolo), on 926 it is
-#   Kyogre's flood-sea coming in. Swift Swim in the rain. Mamoswine, Gastrodon and Seismitoad are Ground types that hide
-#   in the sand from special answers.
+# form; sun lasts 2 turns longer, sandstorm 3. Each host fights to change the ground under it:
+#   Isenmar brings the SEA. Rain (Drizzle, Rain Dance) or three floods soak the dunes into the Superbloom: the Water and
+#   Ice nerfs go, Ludicolo's Grass is x1.5, Swift Swim runs in the rain. Only Kyogre's heavy rain or Origin Pulse drags
+#   the real flood-sea in (FLOODED_DUNES: Water x1.3, Ice x1.2, Swift Swim on, the rest wade at x0.75). If Ashkaar has
+#   glassed the dunes, big Ice moves (thermal shock) and quakes crack the glass - three cracks in the rain break it into
+#   the flood - and three floods (Surf, Muddy Water, Hydro Pump) drown it again.
 #   Ashkaar brings the GLASS. Sun (Drought) lasts 7 turns here and Solar Power is free; two searing moves (Eruption,
-#   Overheat, Blast Burn, Blue Flare...) fuse the dunes into black glass (Cinderglass: Rock x1.3, obsidian edges x1.3,
-#   Steam Engine every turn, Ice x0.7), and Rock Slide off the glass finishes the line. A sandstorm or sun also bakes a
-#   bloom back to dunes, so the weather war is the battle.
+#   Overheat, Blast Burn, Blue Flare...) fuse the dunes into GLASS_DUNES: Fire x1.2, Fire types draw 1/16 HP a turn from
+#   the glass, Ice x0.8, nothing freezes, Solar Beam / Flash Cannon / Power Gem refract x1.3, sun 2 turns longer, no
+#   sandstorm. Every Fire attack anneals a crack, so a Fire team keeps its glass.
 # Counterplay: take the weather (your own rain or sun), Wide Guard and Protect against the spread moves, Water Absorb /
 # Storm Drain / Flash Fire switch-ins, and KO the setter first. Each partner brings the answer to the other host's plan.
 def soldier(tt, nm, v, lose, mons, note):
@@ -1378,16 +1383,18 @@ soldier("ASHKAAR_SOLDIER_F", "Soldier", 0, "Hold the line - hold - oh, forget it
     P("FLYGON", 80, "LEVITATE", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,EARTHQUAKE,UTURN", "A", only="nocasual"),
 ], "Ashkaar siege line, the earthworks (map 924, Cinderglass)")
 soldier("ASHKAAR_SOLDIER_M", "Soldier", 1, "Tell them we burned bright.", [
-    # The Steamline is already glass: Rock x1.3 (Head Smash), geysers lift Camerupt's Speed; Magma Armor keeps it safe.
+    # The Steamline is a Bleed that borrows the war's fields every 3 rounds (Volcanic, Cinderglass, Frozen Lake, Desert,
+    # the flood, the glass...); off-type attacks are x1.2 there (Rock Slide, Earthquake). Lava Plume primes a borrowed Volcanic.
     P("CAMERUPT", 80, "MAGMAARMOR", "SITRUSBERRY", "QUIET", "LAVAPLUME,EARTHPOWER,ROCKSLIDE,YAWN", "BS"),
     P("TYRANTRUM", 81, "ROCKHEAD", "SITRUSBERRY", "ADAMANT", "HEADSMASH,DRAGONCLAW,EARTHQUAKE,DRAGONDANCE", "A", only="nocasual"),
-], "the Steamline, Ashkaar side (map 925, Cinderglass; stand between)")
+], "the Steamline, Ashkaar side (map 925, Bleed; stand between)")
 soldier("ASHKAAR_SOLDIER_F", "Soldier", 1, "My wing's still in the air. You're not done.", [
-    # On the dunes: Flare Blitz x1.2. Overheat is a searing move: two (with the Captain's Eruption) turn the dunes to glass.
+    # On the dunes Flare Blitz is x1.2; Talonflame scouts, Turtonator makes the glass.
     P("TALONFLAME", 80, "FLAMEBODY", "SHARPBEAK", "JOLLY", "BRAVEBIRD,FLAREBLITZ,UTURN,ROOST", "A"),
-    # Rock/Ground hides in the sand (special x0.67), Earthquake x1.2, and Stone Edge x1.3 x1.3 once the glass forms.
-    P("RHYPERIOR", 81, "SOLIDROCK", "SITRUSBERRY", "ADAMANT", "HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH", "HA",
-      only="nocasual", hard={"moves": "HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH", "item": "WEAKNESSPOLICY"}),
+    # Two Overheats are the two searing moves that fuse the dunes; then it draws 1/16 a turn from the glass (Fire type)
+    # and Flash Cannon refracts x1.3 for the Fairy and Ice answers. Shell Armor: no crits.
+    P("TURTONATOR", 81, "SHELLARMOR", "WHITEHERB", "MODEST", "OVERHEAT,DRAGONPULSE,FLASHCANNON,PROTECT", "BS",
+      only="nocasual", hard={"moves": "OVERHEAT,DRACOMETEOR,FLASHCANNON,SHELLSMASH"}),
 ], "the Glass Dunes, Ashkaar crest (map 926, Desert)")
 soldier("ASHKAAR_OFFICER", "Captain", 0, "Dragons bow to no Accord. ...I'm not a dragon. Go.", [
     # Cinderglass: Drought sun, Lava Plume x3 re-melts it to Volcanic (Fire Pokemon draw on the magma).
@@ -1400,23 +1407,25 @@ soldier("ASHKAAR_OFFICER", "Captain", 0, "Dragons bow to no Accord. ...I'm not a
 ], "Ashkaar siege camp officer, the earthworks gate (map 924, Cinderglass)")
 # Partner double on the Glass Dunes (vs the PC + Marisol, or vs the PC + Sigrun with the Isenmar Captain if standing
 # between). THE GLASS PLAN: Torkoal's Drought (7 turns here) + Eruption, a spread searing move (Fire x1.2 x1.5 in sun);
-# a second searing move (Charizard's Overheat, or Eruption again) fuses the dunes to glass, and then Coalossal's Steam
-# Engine climbs every turn and its Rock Slide cuts x1.3 x1.3. Charizard's Solar Power is free on the dunes, and Solar
-# Beam is x1.5 and needs no charge in the sun. Answer: Marisol's Drizzle takes the sky (rain soaks the dunes), Wide
-# Guard, and KO Torkoal before the second searing move lands.
+# a second searing move (Charizard's Overheat, or Eruption again) fuses the dunes to glass, where every Fire type draws
+# 1/16 a turn, Fire stays x1.2, Steam Engine Coalossal enters at +1 Speed and Tar Shot makes the target weak to the next
+# Eruption; Charizard's Solar Power is free on the dunes, and its Solar Beam (no charge in the sun) is x1.5 on the
+# sand and refracts x1.3 off the glass. No quakes in this line: they would crack its own glass. Answer: Marisol's
+# Drizzle takes the sky (rain halves the Fire), Wide Guard, and KO Torkoal before the second searing move lands.
 soldier("ASHKAAR_OFFICER", "Captain", 1, "Glass or sand, I held my ground. ...Your ground, now.", [
     P("TORKOAL", 82, "DROUGHT", "HEATROCK", "QUIET", "ERUPTION,EARTHPOWER,SOLARBEAM,PROTECT", "BS", tr=True,
       casual={"item": "SITRUSBERRY", "moves": "HEATWAVE,EARTHPOWER,SOLARBEAM,PROTECT"}),
-    P("COALOSSAL", 83, "STEAMENGINE", "SITRUSBERRY", "ADAMANT", "ROCKSLIDE,FLAREBLITZ,HIGHHORSEPOWER,PROTECT", "HA",
+    P("COALOSSAL", 83, "STEAMENGINE", "SITRUSBERRY", "ADAMANT", "ROCKSLIDE,FLAREBLITZ,TARSHOT,PROTECT", "HA",
       only="nocasual"),
-    P("GARCHOMP", 84, "ROUGHSKIN", "LUMBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,STOMPINGTANTRUM,PROTECT", "A",
-      hard={"item": "LIFEORB", "moves": "SCALESHOT,STONEEDGE,STOMPINGTANTRUM,PROTECT"}),
+    P("GARCHOMP", 84, "ROUGHSKIN", "LUMBERRY", "JOLLY", "DRAGONCLAW,STONEEDGE,FIREFANG,PROTECT", "A",
+      hard={"item": "LIFEORB", "moves": "SCALESHOT,STONEEDGE,FIREFANG,PROTECT"}),
 ], "the Glass Dunes, Ashkaar line officer (map 926, Desert; partner double)")
 soldier("ASHKAAR_SOLDIER_M", "Soldier", 2, "Sand in my teeth. Glass in my boots. Worth it.", [
     P("CHARIZARD", 81, "SOLARPOWER", "SITRUSBERRY", "TIMID", "HEATWAVE,OVERHEAT,AIRSLASH,SOLARBEAM", "S",
       casual={"ab": "BLAZE", "moves": "HEATWAVE,AIRSLASH,DRAGONPULSE,PROTECT"}, hard={"item": "CHARCOAL"}),
-    P("TYRANITAR", 82, "SANDSTREAM", "SITRUSBERRY", "ADAMANT", "ROCKSLIDE,CRUNCH,HIGHHORSEPOWER,PROTECT", "HA",
-      only="nocasual", hard={"ab": "UNNERVE"}),
+    # Mold Breaker: Rock Slide (spread) through Sturdy / Multiscale; Dragon Claw for Sigrun's dragons when she stands in.
+    P("HAXORUS", 82, "MOLDBREAKER", "SITRUSBERRY", "JOLLY", "DRAGONCLAW,ROCKSLIDE,POISONJAB,PROTECT", "A",
+      only="nocasual", hard={"moves": "DRAGONCLAW,ROCKSLIDE,POISONJAB,DRAGONDANCE"}),
 ], "the Glass Dunes, Ashkaar line (map 926, Desert; partner double with Captain 1)")
 # -- Isenmar (Water / Ice) --------------------------------------------------------------------------------------------
 # On the dunes Ice is x0.75 and Water x0.8 until the sea comes: Drizzle (or three floods) soaks the sand, the nerfs
@@ -1434,13 +1443,14 @@ soldier("ISENMAR_SOLDIER_F", "Soldier", 0, "We froze the sand for nothing. It ju
     P("LUDICOLO", 80, "SWIFTSWIM", "SITRUSBERRY", "MODEST", "GIGADRAIN,HYDROPUMP,ICEBEAM,LEECHSEED", "S", only="nocasual"),
 ], "the Rimed Sands, Isenmar trench-line (map 920, Desert)")
 soldier("ISENMAR_SOLDIER_M", "Soldier", 1, "Ice remembers. So will I.", [
-    # The Steamline: Water types ride the geysers (+1 Speed), Scald x1.5 and burns more, and three floods (Surf) fill
-    # the glass into a hot-spring lake (Water Surface), Isenmar's ground. Thick Fat for the Fire heat under the glass.
+    # The Steamline's Bleed borrows the war's fields: on a borrowed Frozen Lake their Ice is x1.5, on the borrowed
+    # flood their Water x1.3; off-type attacks (Earth Power, Clear Smog) are x1.2 there. Thick Fat for the borrowed Volcanic.
     P("WALREIN", 80, "THICKFAT", "LEFTOVERS", "MODEST", "SURF,ICEBEAM,ENCORE,PROTECT", "BS"),
     P("GASTRODON", 81, "STORMDRAIN", "SITRUSBERRY", "CALM", "SCALD,EARTHPOWER,RECOVER,CLEARSMOG", "SD", only="nocasual"),
-], "the Steamline, Isenmar side (map 925, Cinderglass; stand between)")
+], "the Steamline, Isenmar side (map 925, Bleed; stand between)")
 soldier("ISENMAR_SOLDIER_F", "Soldier", 1, "The whale's awake and I lose to you. Some war.", [
-    # Drizzle brings the sea to the sand (the flood on 926); Kingdra's Swift Swim and Hydro Pump in the rain.
+    # Drizzle soaks the dunes (Superbloom: the Water and Ice nerfs lift) for Kingdra's Swift Swim; if the dunes are
+    # glassed, Ice Beam cracks them (three cracks in the rain break the glass into the flood) and Hydro Pump is a flood.
     P("POLITOED", 80, "DRIZZLE", "DAMPROCK", "CALM", "SCALD,ICEBEAM,ENCORE,PERISHSONG", "SD",
       casual={"ab": "WATERABSORB", "item": "SITRUSBERRY", "moves": "SCALD,ICEBEAM,ENCORE,HYPNOSIS"}),
     P("KINGDRA", 81, "SWIFTSWIM", "SITRUSBERRY", "MODEST", "HYDROPUMP,DRACOMETEOR,ICEBEAM,RAINDANCE", "S", only="nocasual"),
@@ -1456,10 +1466,12 @@ soldier("ISENMAR_OFFICER", "Captain", 0, "Tell the Thane the line held as long a
     P("LAPRAS", 84, "WATERABSORB", "LEFTOVERS", "MODEST", "HYDROPUMP,FREEZEDRY,THUNDERBOLT,ICESHARD", "BS"),
 ], "the Rimed Sands, Isenmar sled-host officer (map 920, Desert)")
 # Partner double on the Glass Dunes (vs the PC + Sigrun). THE SEA PLAN: Pelipper's Drizzle and Tailwind; rain soaks the
-# dunes and calls the flood, and every Muddy Water / Surf / Hydro Pump is a flood toward it. Kingdra's Swift Swim with
-# Tailwind on top; Arctovish's Fishious Rend doubles when it moves first, which in rain + Tailwind is always. Mamoswine
-# leads beside Pelipper so its Earthquake spares the bird. Answer: Sigrun's Drought-free dragons hit hard; take the
-# weather back (sun or sand), Protect / Wide Guard against Muddy Water, and KO Pelipper first.
+# dunes into the Superbloom (the Water and Ice nerfs lift; Mamoswine's and Seismitoad's Ground stays x1.2) and, once
+# Kyogre's flood is in, holds it there. Kingdra's Swift Swim on top of Tailwind; Arctovish's Fishious Rend doubles when it
+# moves first, which in rain + Tailwind is always. On glass, Earthquake, Icicle Crash and Ice Beam crack it (shards hit
+# the PC's side) and in the rain the third crack drops everyone into the flood. Mamoswine leads beside the bird so its
+# Earthquake spares it. Answer: Sigrun's dragons resist Water; Heat Wave and two Fire attacks bake the bloom back to
+# sand; Protect / Wide Guard against Muddy Water; KO Pelipper first.
 soldier("ISENMAR_OFFICER", "Captain", 1, "The sea came all this way for us. ...And still.", [
     P("PELIPPER", 82, "DRIZZLE", "DAMPROCK", "MODEST", "HURRICANE,SCALD,TAILWIND,PROTECT", "BS",
       casual={"ab": "KEENEYE", "item": "SITRUSBERRY", "moves": "HURRICANE,SCALD,ROOST,PROTECT"}),

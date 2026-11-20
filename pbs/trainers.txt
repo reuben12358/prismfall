@@ -2036,7 +2036,7 @@ Pokemon = SALAMENCE,81
 Items = POTION
 LoseText = Whatever. Beginner's luck. Don't get used to it.
 Pokemon = CHARMANDER,5
-    Moves = SCRATCH,GROWL,EMBER
+    Moves = SCRATCH,GROWL
     AbilityIndex = 0
     Nature = MODEST
     IV = 12
@@ -2071,7 +2071,7 @@ Pokemon = CHARMANDER,3
 Items = POTION
 LoseText = Whatever. Beginner's luck. Don't get used to it.
 Pokemon = SQUIRTLE,5
-    Moves = TACKLE,TAILWHIP,WATERGUN
+    Moves = TACKLE,TAILWHIP
     AbilityIndex = 0
     Nature = MODEST
     IV = 12
@@ -2106,7 +2106,7 @@ Pokemon = SQUIRTLE,3
 Items = POTION
 LoseText = Whatever. Beginner's luck. Don't get used to it.
 Pokemon = BULBASAUR,5
-    Moves = TACKLE,GROWL,VINEWHIP
+    Moves = TACKLE,GROWL
     AbilityIndex = 0
     Nature = MODEST
     IV = 12
@@ -11715,7 +11715,7 @@ Pokemon = NINETALES,75
     Nature = TIMID
     IV = 20
     EV = 0
-# Ch19 war - the Steamline, Ashkaar side (map 925, Cinderglass; stand between)
+# Ch19 war - the Steamline, Ashkaar side (map 925, Bleed; stand between)
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier,1]
 LoseText = Tell them we burned bright.
@@ -11768,11 +11768,11 @@ Pokemon = TALONFLAME,80
     Item = SHARPBEAK
     Nature = JOLLY
     IV = 31
-Pokemon = RHYPERIOR,81
-    Moves = HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH
-    Ability = SOLIDROCK
-    Item = SITRUSBERRY
-    Nature = ADAMANT
+Pokemon = TURTONATOR,81
+    Moves = OVERHEAT,DRAGONPULSE,FLASHCANNON,PROTECT
+    Ability = SHELLARMOR
+    Item = WHITEHERB
+    Nature = MODEST
     IV = 31
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier,101]
@@ -11784,13 +11784,13 @@ Pokemon = TALONFLAME,81
     Nature = JOLLY
     IV = 31
     EV = 4,252,0,252,0,0
-Pokemon = RHYPERIOR,82
-    Moves = HIGHHORSEPOWER,STONEEDGE,MEGAHORN,ROCKPOLISH
-    Ability = SOLIDROCK
-    Item = WEAKNESSPOLICY
-    Nature = ADAMANT
+Pokemon = TURTONATOR,82
+    Moves = OVERHEAT,DRACOMETEOR,FLASHCANNON,SHELLSMASH
+    Ability = SHELLARMOR
+    Item = WHITEHERB
+    Nature = MODEST
     IV = 31
-    EV = 252,252,0,0,0,4
+    EV = 252,0,4,0,252,0
 #-------------------------------
 [ASHKAAR_SOLDIER_F,Soldier,201]
 LoseText = My wing's still in the air. You're not done.
@@ -11895,13 +11895,13 @@ Pokemon = TORKOAL,82
     Nature = QUIET
     IV = 31
 Pokemon = COALOSSAL,83
-    Moves = ROCKSLIDE,FLAREBLITZ,HIGHHORSEPOWER,PROTECT
+    Moves = ROCKSLIDE,FLAREBLITZ,TARSHOT,PROTECT
     Ability = STEAMENGINE
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
 Pokemon = GARCHOMP,84
-    Moves = DRAGONCLAW,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Moves = DRAGONCLAW,STONEEDGE,FIREFANG,PROTECT
     Ability = ROUGHSKIN
     Item = LUMBERRY
     Nature = JOLLY
@@ -11917,14 +11917,14 @@ Pokemon = TORKOAL,83
     IV = 31,31,31,0,31,31
     EV = 252,0,4,0,252,0
 Pokemon = COALOSSAL,84
-    Moves = ROCKSLIDE,FLAREBLITZ,HIGHHORSEPOWER,PROTECT
+    Moves = ROCKSLIDE,FLAREBLITZ,TARSHOT,PROTECT
     Ability = STEAMENGINE
     Item = SITRUSBERRY
     Nature = ADAMANT
     IV = 31
     EV = 252,252,0,0,0,4
 Pokemon = GARCHOMP,85
-    Moves = SCALESHOT,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Moves = SCALESHOT,STONEEDGE,FIREFANG,PROTECT
     Ability = ROUGHSKIN
     Item = LIFEORB
     Nature = JOLLY
@@ -11941,7 +11941,7 @@ Pokemon = TORKOAL,78
     IV = 20
     EV = 0
 Pokemon = GARCHOMP,80
-    Moves = DRAGONCLAW,STONEEDGE,STOMPINGTANTRUM,PROTECT
+    Moves = DRAGONCLAW,STONEEDGE,FIREFANG,PROTECT
     Ability = ROUGHSKIN
     Item = LUMBERRY
     Nature = JOLLY
@@ -11957,11 +11957,11 @@ Pokemon = CHARIZARD,81
     Item = SITRUSBERRY
     Nature = TIMID
     IV = 31
-Pokemon = TYRANITAR,82
-    Moves = ROCKSLIDE,CRUNCH,HIGHHORSEPOWER,PROTECT
-    Ability = SANDSTREAM
+Pokemon = HAXORUS,82
+    Moves = DRAGONCLAW,ROCKSLIDE,POISONJAB,PROTECT
+    Ability = MOLDBREAKER
     Item = SITRUSBERRY
-    Nature = ADAMANT
+    Nature = JOLLY
     IV = 31
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier,102]
@@ -11973,13 +11973,13 @@ Pokemon = CHARIZARD,82
     Nature = TIMID
     IV = 31
     EV = 4,0,0,252,252,0
-Pokemon = TYRANITAR,83
-    Moves = ROCKSLIDE,CRUNCH,HIGHHORSEPOWER,PROTECT
-    Ability = UNNERVE
+Pokemon = HAXORUS,83
+    Moves = DRAGONCLAW,ROCKSLIDE,POISONJAB,DRAGONDANCE
+    Ability = MOLDBREAKER
     Item = SITRUSBERRY
-    Nature = ADAMANT
+    Nature = JOLLY
     IV = 31
-    EV = 252,252,0,0,0,4
+    EV = 4,252,0,252,0,0
 #-------------------------------
 [ASHKAAR_SOLDIER_M,Soldier,202]
 LoseText = Sand in my teeth. Glass in my boots. Worth it.
@@ -12076,7 +12076,7 @@ Pokemon = PELIPPER,75
     Nature = MODEST
     IV = 20
     EV = 0
-# Ch19 war - the Steamline, Isenmar side (map 925, Cinderglass; stand between)
+# Ch19 war - the Steamline, Isenmar side (map 925, Bleed; stand between)
 #-------------------------------
 [ISENMAR_SOLDIER_M,Soldier,1]
 LoseText = Ice remembers. So will I.

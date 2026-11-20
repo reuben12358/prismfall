@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 #   text "Caption."                     (position: :bottom / :top / :center)
 #   say "Sigrun", "Father. Enough."     (name tag + line, typed out)
-#   title "THE SHATTERED ICE", sub: "Chapter 19"
+#   title "THE GLASS DUNES", sub: "Chapter 19"
 #   hp_bar :mon, value: 0.1, duration: 0.6      hp_bar :mon, show: false
 # Text is timed (it never waits for a button), so scenes keep their length.
 #===============================================================================

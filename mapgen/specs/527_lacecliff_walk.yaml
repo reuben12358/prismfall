@@ -193,7 +193,7 @@ events:
   at: [97, 48]
   item: SUPERPOTION
 - type: item
-  at: [125, 8]
+  at: [126, 8]
   item: NUGGET
   hidden: true
   name: HiddenItem (high down)

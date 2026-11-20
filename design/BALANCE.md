@@ -15,8 +15,8 @@ are defined; Gyms 8–18 fields are designed to their theme, assumptions marked 
 |---|---|---|---|
 | Feel | Approachable: learn the field, win on the second try at worst | Fair but demanding: you must use the field and type matchups; overlevelling to the cap is expected | Reborn-hard: the field is a weapon pointed at you; expect to build counter-teams and lose a few times |
 | Team size | Standard −1 (min 2); Festival always 6 | see §3 | Standard +1 (max 6) |
-| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+) | Ace **at the cap**, others 1–4 below | Ace at the cap, others +1 (never above cap) |
-| IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV 31 (Trick Room mons Spe IV 0), 252/252/4-style EVs by role |
+| Levels | Standard −2 (cap <40), −3 (<70), −4 (70+) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
+| IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV Standard + 8 (20 to cap 23, 26 to cap 35), 31 from cap 39 (Trick Room mons Spe IV 0); 252/252/4-style EVs by role, **at most 6 × level per stat** (60 at Lv 10, the full 252 from Lv 42) |
 | Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present | Upgraded coverage, Hidden Abilities, Megas (trainer gets `MEGARING`), Choice/Life Orb/Weakness Policy, one extra synergy piece |
 | Bag items | Standard −1 | 1 Potion (cap 15) → 1 Super (to 23) → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
 | AI skill | trainer type's own (Core sets no ceiling) | trainer type's own | Core floor 48 (`ai_skill_min`) |
@@ -28,6 +28,30 @@ Rules of thumb used when writing teams:
   Eater loops, Shadow Tag. Hard may use Shadow Tag (Gothitelle) and Perish trapping (Mega Gengar) once each.
 - Moves learned "early" (by level-up above the mon's level) are allowed only on Hard. The validator warns about them
   (34 Hard-only warnings at the moment, all intentional); Standard and Casual have zero.
+
+## 1b. Calibration against Reborn and Rejuvenation (round 3)
+
+Read from the games' own compiled data (`Data/trainers.dat`; Rejuvenation also `trainers_story.dat` / `bossdata*.dat`),
+cross-checked with the BigJra walkthroughs. Version 0 = the normal-mode team.
+
+| Fight | Reborn | Rejuvenation | Prismfall Standard (Hard / Casual) |
+|---|---|---|---|
+| First rival | Victoria: Litten Lv 5, Scratch / Growl | Ren: Froakie Lv 5, Pound / Growl, IV 4 | K1 Kestrel: the advantage starter Lv 5, **no type move** (Hard: type move + Starly; Casual Lv 3) |
+| Gym 1 | Julia: **6**, Lv 12–15, 2 Potions, IV 10 (20–24 on three), real natures; Charge / Charge Beam on Electric Terrain, Explosion, Rollout | Venam: **6**, Lv 13–16, Potion, IV 20, three Oran Berries + a Normal Gem; Fake Out, Encore, Spikes | Dorian: **5**, Lv 10–15, Potion, IV 12, Oran ×4 + Sitrus; Fake Out, Echoed Voice / Round, Teeter Dance, Sing (Hard 6, IV 20, Synthetic Seed; Casual 3) |
+| Gym 2 | Florinia: 6, Lv 22–24, 2 Super, Telluric Seed, Spore, Leech Seed, Spikes, Sandstorm | Keta: 6, Lv 22–25, 2 Super, IV 20 (ace 31), Charcoal, Black Belt, Coba | Tamsin (**double**): 4, Lv 14–19, Super, IV 12, Telluric Seed; Rain Dance + Electroweb (Hard 5: + Vivillon, Focus Sash, Eviolite) |
+| Gym 3 | Corey: 6, Lv 26–30, 2 Super, Focus Sash, Telluric Seed, Black Glasses | Marianette: 6, Lv 27–29, 2 Super, Plates, Focus Sash, Leftovers | Marisol: 4, Lv 19–23, Super, Oran Berries (Hard 5) |
+| Gym 4 | Shelly: 6, Lv 31–35, 2 Hyper, Damp Rock, Silver Powder, Leftovers, Telluric Seed | Narcissa: 6, Lv 33–35, Super, Magical Seeds, Eviolite, a Plate | Rook: 4, Lv 25–27, 2 Super, Magnet, Synthetic Seed (Hard 5) |
+| Second rival | Victoria 1: 4, Lv 18–19, 2 Potions, IV 30–31, Wise Glasses, Eviolite | Ren: 4, Lv 13–16, Potion (team id 7: 2 at Lv 19–20, IV 31, Sitrus, Wacan) | K2 Kestrel: 4, Lv 21–23, Super, Telluric Seed (Hard 5, Eviolite) |
+
+**Reading.** The references bring six Pokémon from Gym 1 on, two to five levels under the ace, with real natures, a
+berry or gem on most, and one or two field plays per team. Prismfall matches them on sets, items, natures and plays
+(Standard IV 12 sits between Reborn's default 10 and Rejuvenation's 20), and runs **smaller teams at the same pace**,
+because (1) our level cap is hard, so the player cannot out-level a six-Pokémon wall the way a Reborn player grinds
+past Florinia; (2) our early fields are stronger per move (Grand Stage ×1.3–1.5 on every Normal move from turn 1,
+Silkwood ×1.5 on spread Electroweb); and (3) in the harness a realistic team already wins only ~50 / 40 / 25% of
+Gyms 1–3 on Standard, and a fifth Pokémon for Tamsin dropped hers to 13%. Hard goes past the references where they
+are soft: perfect-ish IVs, EV spreads, the extra Pokémon, Focus Sash / Eviolite / seeds, and no Bag in trainer
+battles; its team size matches Reborn at Gym 1 (6). Casual stays well under them on purpose.
 
 ## 2. Level curve
 
@@ -41,11 +65,11 @@ The level cap (Core) means grinding past the cap is impossible, so Standard diff
 | Gym | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Cap / ace | 15 | 19 | 23 | 27 | 31 | 35 | 39 | 43 | 47 | 51 | 55 | 59 | 63 | 67 | 71 | 75 | 80 | 85 |
-| Std size | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
-| Hard size | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
-| Casual size | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
+| Std size | 5 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+| Hard size | 6 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+| Casual size | 3 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 
-Rival max levels (Standard; Hard same top, others +1): K1 6 · J1 14 (Saltmere, before Gym 1 since SPINE Rev 14) · K2 21 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
+Rival max levels (Standard; Hard same top, others +1 from cap 27): K1 5 · J1 15 (Saltmere, before Gym 1 since SPINE Rev 14) · K2 23 · K3 33 · J2 33 · K4 42 · J3 47 · K5 54 · K6 66 ·
 K7 79. Festival aces (coordinator, SPINE Rev 3): R16 **90** · QF **92** · SF **94** · Final **96** · Hijack **100** · Arceus **100**;
 rest of each team 1–4 below. (Casual Festival teams keep 6 mons at −4 levels.) Sister-game cameos are optional sidequest fights
 (SPINE Rev 4) — see §6.
@@ -57,8 +81,7 @@ ReserveLastPokemon. Skill is per **trainer type**, so difficulty scaling is done
 
 | Class | SkillLevel | BaseMoney |
 |---|---|---|
-| Wardens 1–2 (Dorian, Tamsin) | 48 | 100 |
-| Wardens 3–18, `LEADER_JUNO` | 100 | 100 |
+| Wardens 1–18 (Dorian and Tamsin raised from 48 in round 3: ReserveLastPokemon keeps the ace for last), `LEADER_JUNO` | 100 | 100 |
 | `RIVAL_KESTREL` | 100 | 60 |
 | `RIVAL_JUNO` | 64 | 60 |
 | `CHAMPION_VALEN`, `MERIDIAN_VOSS`, `FESTIVAL_*` | 100 | 150 |
@@ -82,9 +105,9 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 
 | # | Warden, field, cap | Team (ace last) | Seed / field pick | Transition or stage play |
 |---|---|---|---|---|
-| 1 | **Dorian**, Grand Stage, 15, single (SPINE Rev 14) | Aipom *(−C)* 11, **+Hard** Chatot, Minccino 12 (Cute Charm; Hard Technician), Kecleon 15 | none on Standard (Hard: Kecleon Synthetic Seed) | Minccino's two songs raise the applause; stalling lowers it |
-| 2 | **Tamsin**, Silkwood, 19, **double** (Rev 14) | Joltik 14, Surskit 15, **+Hard** Vivillon (Rage Powder), Spidops 16 *(−C)*, Swadloon "Bobbin" 19 | Bobbin: Telluric Seed (Hard: Eviolite) | lead pair: Rain Dance wets the silk for Electroweb (spread); Rain douses a Wildfire |
-| 3 | Marisol, Water Surface, 23 | Pelipper (Keen Eye; **Hard Drizzle**), Lanturn *(−C)*, **+Hard** Araquanid, Floatzel, Gyarados "Lucky" | Lanturn: Elemental Seed | Lucky's Dive → Underwater |
+| 1 | **Dorian**, Grand Stage, 15, single (SPINE Rev 14); opening stage 1–3 from the Saltmere audience (Rev 19) | Aipom 10, Minccino 10, Spinda 11 *(−C)*, Jigglypuff 11 *(−C)*, **+Hard** Whismur 12, Kecleon 15 | none on Standard (Hard: Kecleon Synthetic Seed, Protean) | Fake Out, Echoed Voice / Round and Teeter Dance raise the applause; Sing never misses at Standing Ovation; stalling lowers it |
+| 2 | **Tamsin**, Silkwood, 19, **double** (Rev 14) | Joltik 14, Surskit 15, **+Hard** Vivillon (Rage Powder), Dwebble 16 *(−C)* (the bird answer: Smack Down, Rock Tomb), Swadloon "Bobbin" 19 | Bobbin: Telluric Seed (Hard: Eviolite) | lead pair: Rain Dance wets the silk for Electroweb (spread); Rain douses a Wildfire |
+| 3 | Marisol, Water Surface, 23 | Pelipper 19 (Keen Eye; Hard Tailwind), Chinchou 20 *(−C)* (Hard Lanturn), **+Hard** Dewpider, Buizel 20 (Hard Floatzel), Gyarados "Lucky" 23 | none (Oran / Sitrus) | no Dive (the Water Surface ↔ Underwater loop strikes ×1.3 both ways: 103 knockouts in 60 runs); Lucky's Whirlpool ×2 traps |
 | 4 | Rook, Neon Grid, 27 | Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk, Toxtricity, Rotom-Wash "Camera" | Electabuzz: Synthetic Seed | Charge reboots a Blackout |
 | 5 | Sahar, Desert, 31 | Hippopotas, **+Hard** Dugtrio, Sandaconda *(−C)*, Krokorok, Claydol "Effigy" | Sandaconda: Telluric Seed | sandstorm or Fire Fang bakes a Superbloom back |
 | 6 | Corvin, Corrosive Mire, 35, **double** | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |

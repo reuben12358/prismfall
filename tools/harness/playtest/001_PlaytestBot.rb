@@ -465,6 +465,7 @@ module PlayBot
         x, y = step[2], step[3]
         return ctrl_step($game_player.x, $game_player.y) if !$game_player.moving? && boxed_in?($game_player.x, $game_player.y)
         return (spot(step[2]) && next_step) if kind == :spot
+        return grind_step if kind == :spot_all && grinding?
         return spot_all if kind == :spot_all
         return catch_step if kind == :catch
         return to_map(step[2]) if kind == :to
@@ -687,7 +688,10 @@ module PlayBot
       mid = $game_map.map_id
       list = $game_map.events.values.select { |e| e.name =~ /^Trainer\(/ && !$game_self_switches[[mid, e.id, "A"]] && !@spot_skip[[mid, e.id]] }
       return next_step if list.empty?
-      @spot_cur = nil if @spot_cur && !list.any? { |e| e.id == @spot_cur }
+      if @spot_cur && !list.any? { |e| e.id == @spot_cur }
+        autosave if $game_self_switches[[mid, @spot_cur, "A"]]   # beaten: checkpoint
+        @spot_cur = nil
+      end
       @spot_cur ||= list.min_by { |e| (e.x - $game_player.x).abs + (e.y - $game_player.y).abs }.id
       if spot(@spot_cur)
         if !$game_self_switches[[mid, @spot_cur, "A"]]
@@ -708,6 +712,11 @@ module PlayBot
         log("catch: no catch after 90 s of grass (party #{party_text}, balls #{$bag.quantity(:POKEBALL)})")
         return next_step
       end
+      return next_step if !walk_grass("catch")
+    end
+
+    # Walk between the nearest tall-grass tiles (wild battles come to the player). false = no grass here.
+    def walk_grass(why)
       if !@grass || @grass_map != $game_map.map_id
         @grass_map = $game_map.map_id
         @grass = []
@@ -716,12 +725,37 @@ module PlayBot
         end
         px, py = $game_player.x, $game_player.y
         @grass = @grass.sort_by { |g| (g[0] - px).abs + (g[1] - py).abs }.first(40).select { |g| path_dirs(g[0], g[1]) }
-        log("catch: #{@grass.length} grass tiles near (#{px},#{py})")
-        return next_step if @grass.length < 2
+        log("#{why}: #{@grass.length} grass tiles near (#{px},#{py})")
       end
+      return false if @grass.length < 2
       @grass_i = (@grass_i.to_i + 1) % @grass.length if [$game_player.x, $game_player.y] == @grass[@grass_i.to_i]
       g = @grass[@grass_i.to_i]
       walk_to(g[0], g[1])
+      return true
+    end
+
+    # After losing to a trainer a player trains before trying again: walk the step map's grass until the strongest
+    # party member is GRIND_LEVELS above its level at the loss (capped in frames), then fight on.
+    GRIND_LEVELS = (ENV["PLAYBOT_GRIND_LEVELS"] || 2).to_i
+    def grinding?
+      return false if !@grind_target || @grind_target <= 0
+      lv = $player.party.map { |pk| pk.level }.max
+      if lv >= @grind_target || @grind_frames.to_i > 15_000
+        log("grind: done at L#{lv} (target L#{@grind_target}, #{@grind_frames.to_i} frames); party #{party_text}")
+        @grind_target = nil
+        @grind_frames = 0
+        @grass = nil
+        return false
+      end
+      return true
+    end
+
+    def grind_step
+      @grind_frames = @grind_frames.to_i + 1
+      log("grind: training in #{$game_map.map_id}'s grass to L#{@grind_target} before the next trainer; party #{party_text}") if @grind_frames == 1
+      return if walk_grass("grind")
+      log("grind: no grass on map #{$game_map.map_id}")
+      @grind_target = nil
     end
 
     # Does an edge arrival tile on another map connect to open ground (at least 40 tiles)?
@@ -836,7 +870,7 @@ module PlayBot
     def autosave
       return if !["play", "resume"].include?(SESSION) || !ENV["PLAYBOT_STATE"] || !on_map? || @step < 2
       return if pbMapInterpreterRunning? || $game_temp.in_battle
-      File.write(ENV["PLAYBOT_STATE"], "#{@step} #{@nframe} #{@blackouts.to_i}") if Game.save
+      File.write(ENV["PLAYBOT_STATE"], "#{@step} #{@nframe} #{@blackouts.to_i} #{@grind_target.to_i}") if Game.save
     rescue StandardError => e
       log("autosave failed: #{e.message}")
     end
@@ -844,7 +878,7 @@ module PlayBot
     def resume_state
       st = (File.read(ENV["PLAYBOT_STATE"]).split.map(&:to_i) rescue nil)
       return if !st
-      @step, @nframe, @blackouts = st
+      @step, @nframe, @blackouts, @grind_target = st
       @step_start = 0
       @spot_i = 0; @spot_wait = 0; @map_wait = 0; @talk_n = 0; @bumps = 0; @nopath = 0   # what next_step resets
       @reinstall = (ENV["PLAYBOT_REINSTALL"] == "1")
@@ -856,6 +890,10 @@ module PlayBot
       @blackouts = @blackouts.to_i + 1
       log("BLACKOUT ##{@blackouts} at step #{@step} #{plan[@step].inspect} on map #{$game_map.map_id}; party #{party_text}")
       shot("blackout_#{@blackouts}")
+      if GRIND_LEVELS > 0 && @battle_tag.to_s !~ /_wild /   # lost to a trainer
+        @grind_target = [@grind_target.to_i, $player.party.map { |pk| pk.level }.max + GRIND_LEVELS].max
+        @grind_frames = 0
+      end
       @rewind = true
     end
 

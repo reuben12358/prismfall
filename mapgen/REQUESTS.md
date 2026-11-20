@@ -494,6 +494,12 @@ The Z plugin adds one showpiece itself: on the Grand Stage a Z-move raises the a
 **For the EBDX Bridge owner (optional):** the player's Z choice is a Yes/No box after picking the move (works on EBDX's box,
 screenshot in `run_zpower.sh zpower`); a Z button on the Fight menu like the Mega button would be nicer. Z-moves show their
 base move's animation; `:prismfall_zmove_unleashed (battle, user, z)` is there if you want a Z aura.
+**For the art workstream:** EBDX logs "Could not find the Trainer sprite" for `OCTAVE_SINGER` and `OCTAVE_VESPER` in every
+Octave fight (real-engine run); battle sprites for the singers and Vesper are wanted.
+**Note for everyone touching moves:** the shipped base's Generation 9 Pack runs with `Settings::CHAMPIONS_MECHANICS = true`
+(Last Resort, Fake Out after turn 1, Stockpile moves etc. become unselectable; every move's PP becomes 8/12/16/20). Our
+harness run folder has an older Gen 9 Pack without it, so headless results can differ there. Z-Power handles Last Resort ->
+Extreme Evoboost under it.
 **Packaging:** new plugin folder `plugins/Prismfall Z-Power`; new `pbs/moves_zpower.txt` and `pbs/items_zpower.txt` (copied
 as-is by `tools/package.sh`; v21.1 merges `PBS/moves_*.txt` / `items_*.txt`). Story docs edited for the reshape (story editor,
 please review): `story/03_CAST.md` (Vesper + the singers), `04_ACT_I.md` and `20_SCRIPT_CH0-2.md` (Ch2: Lyra, Vesper's
@@ -600,3 +606,79 @@ images). A second gen_docs run changes nothing.
   Camp** (44x32, segment 13, DESERT, square 14,3, at the Dry Tide's west end; Sigrun's landing in Ch19). Their records in
   maps.json carry `key_features` and `connections_outline`. The Elector's Lease and the bone-carters are named in
   WORLD.md §9 and WORLD_MAP §7 (no maps).
+
+## From the field workstream: the Glass Dunes and the Steamline (SPINE Revisions 10 and 18), 2026-11-19
+Answers story editor item 15. Two new fields, `:FLOODED_DUNES` (139) and `:GLASS_DUNES` (140); player-facing rules in
+`design/FIELDS.md`, backdrop briefs in `design/FIELD_BACKDROPS_NEEDED.md`, harness proof in
+`docs/battle_captures/glass_dunes/SUMMARY.md` (`tools/harness/run_glass_dunes.rb`).
+**The 926 sequence:** DESERT (the map default) -> **Flooded Dunes** (Kyogre: Primordial Sea's heavy rain, or one Origin
+Pulse) -> **Glass Dunes** (Reshiram: one Blue Flare or Fusion Flare, or two other searing moves, *even when the heavy rain
+snuffs the flame*). Then it is a tug of war: heavy rain / 2 Origin Pulses / 3 floods re-flood the glass, Blue Flare glasses
+it again, and in two rounds where opposing sides both land a great Water beam and a great Fire beam the Imprints tear
+open into the **Bleed** (WAR-1's dome). On 925 and 926 the Bleed only echoes the war's fields (Volcanic, Cinderglass,
+Frozen Lake, Snowy Mountain, Desert, Flooded Dunes, Glass Dunes). **The Steamline (925) now defaults to BLEED** (was
+Cinderglass): the story calls it a Bleed line only the PC can cross.
+
+**For the trainer designer (the 926 / 925 soldier teams):**
+1. What changed under the plans in `tools/trainer_gen/gen.py`'s war block:
+   - **Desert (920, 926):** rain is still the Superbloom. The *flood* is heavy rain, Origin Pulse, or 3 more floods
+     (Surf, Muddy Water, Hydro Pump, Water Spout, Wave Crash, Water Pledge; Scald doesn't count) once it is in bloom.
+     So "Isenmar brings the sea" is two steps: Drizzle, then three floods. Two searing moves now make the **Glass
+     Dunes**, not Cinderglass, so "Ashkaar brings the glass" no longer gives obsidian Rock x1.3 / Stone Edge x1.3 / Steam
+     Engine every turn.
+   - **Flooded Dunes (Isenmar's ground):** Water x1.3, Ice x1.2, Electric x1.3 against grounded targets; Swift Swim,
+     Torrent, Rain Dish, Hydration and Dry Skin work without rain; grounded non-Water/non-Ground Pokemon wade (x0.75
+     Speed); grounded Pokemon can't be burned; damaging Ground moves also hit as Water; Whirlpool / Sand Tomb / mud moves
+     x1.5; Spikes, Toxic Spikes, Stealth Rock fail; 3 big Ice moves freeze it into a **Frozen Lake** (Isenmar's second
+     ground). Fire is halved against grounded targets except searing moves and Turboblaze. The tide drains it into a
+     Superbloom after 5 rounds without rain unless Water attacks feed it, so Drizzle/Rain Dance holds it.
+   - **Glass Dunes (Ashkaar's ground):** Fire x1.2, Fire types heal 1/16 a turn, Steam Engine +1 Speed on entry, Water
+     attacks may burn grounded targets (Kyogre's side harnesses it too), nothing freezes, Dig fails, no sand or hail,
+     light beams x1.3. Quakes, heavy stomps and big Ice moves **shatter** it (shards hit the user's grounded foes): 3
+     shatters break it to the Desert, or back into the flood if it is raining; each damaging Fire move anneals a crack.
+     Careful: Garchomp's Earthquake breaks Ashkaar's own glass; Mamoswine's Icicle Crash in Pelipper's rain is Isenmar's
+     way back to the sea.
+   - **The Steamline (925) is the Bleed:** every 3 rounds it echoes one of the seven war fields; off-type attacks x1.2;
+     Protean / Libero / Color Change +1 Speed; Weather Ball, Terrain Pulse, Judgment, Techno Blast x1.3. The two
+     925 soldiers (Ashkaar M 1, Isenmar M 1) were written for Cinderglass, which is now only one of the seven echoes.
+2. **Suggested WANTS** for `plugins/Prismfall Field Effects/012_FieldEffects_TrainerPlays.rb` (your file, not edited):
+   `:ISENMAR_SOLDIER_M`, `:ISENMAR_SOLDIER_F`, `:ISENMAR_OFFICER` => `{ :FLOODED_DUNES => 20, :FROZEN_LAKE => 16,
+   [:DESERT, 2] => 8, :GLASS_DUNES => -20 }`; `:ASHKAAR_SOLDIER_M`, `:ASHKAAR_SOLDIER_F`, `:ASHKAAR_OFFICER` =>
+   `{ :GLASS_DUNES => 20, :VOLCANIC => 16, :FLOODED_DUNES => -20, [:DESERT, 2] => -10 }`; and for the partners,
+   `LEADER_SIGRUN` `:GLASS_DUNES => 14, :FLOODED_DUNES => -14`, `LEADER_MARISOL` `:FLOODED_DUNES => 18,
+   :GLASS_DUNES => -14`. A positive want also lets the AI pick a searing move that heavy rain will snuff, since the snuffed
+   move still glasses the flood (the transition is `:even_if_failed`). Harness (singles, AI vs AI, 926): without WANTS no
+   captain changed the field (Isenmar Captain 1 bloomed the dunes with Drizzle and lost the bloom to Fire Fang; Ashkaar
+   Captain 1's Torkoal chose Earth Power and Protect, never Eruption); with the suggested WANTS Torkoal opened with Eruption.
+3. Playbook: `design/TRAINER_FIELD_PLAYBOOK.md` §5 says Sahar has no cross-field transition because "Cinderglass needs
+   searing Fire moves". A player's searing moves now make the Glass Dunes instead, where her quakes shatter the glass
+   back into her Desert (her existing `[:DESERT, 1] => 22` want already rewards that).
+4. Field per battle (my suggestion, set in the events): the gauntlets on 920 / 924 / 925 use the map defaults; the 926
+   singles and partner doubles start on the map default DESERT; the legendary fight starts on DESERT and changes through
+   the boss script and the moves (below).
+
+**For the Bosses owner (`plugins/Prismfall Bosses`) and the story team: the war legendaries on 926.**
+5. Neither war boss is registered yet. Two harness-only definitions in `tools/harness/run_glass_dunes.rb` show a shape that
+   works: leave `:field` unset so the fight starts on 926's DESERT. **Reshiram** (the default fight): break 1 brings the
+   flood in (`:field => :FLOODED_DUNES`, a flood message, optionally `:weather => :Rain`); with Blue Flare in its set the
+   AI glasses the flood on its own (AIField scores it +16; AI vs AI it reached DESERT > Superbloom > Flooded Dunes > Glass
+   Dunes). **Kyogre** (backing Ashkaar): Primordial Sea floods the dunes at send-out; the player's searing moves still
+   glass it while snuffed. Balance note: on the flood in heavy rain Origin Pulse runs x1.95 before STAB (the AI-piloted
+   Lv.85 Reshiram in the harness was one-shot), so tune Kyogre's level/EVs, or open its first bar with Drizzle (rain
+   blooms the dunes; Origin Pulse then floods them) and save the Primal reversion for a later break, as `KYOGRE_ISENMAR`
+   does.
+
+**For the mapgen owner / map builder:**
+6. `design/FIELD_DEFAULTS.yaml` now has **925: BLEED** (source: hand) and a new optional map key `borrow:` (read only by the
+   field plugin's generator; `build.py` can ignore it). Please re-run `mapgen/build.py` so
+   `maps_out/Plugins/Prismfall Maps/002_MapFields.rb` writes `MAP_FIELDS[925] = :BLEED`: `MAP_FIELDS` wins over the field
+   plugin's defaults, so until then a game build still loads Cinderglass on the Steamline. 926 stays DESERT.
+
+**For the world cartographer:**
+7. `tools/worldmap/gen_docs.py` still gives 925 `field='ASHEN_WASTE'` (so maps.json and the WORLD.md table say
+   Cinderglass). FIELD_DEFAULTS has `source: hand` on 925 and 926, so gen_docs won't overwrite them, but please change it to
+   `'BLEED'` so the docs agree. WORLD.md's 926 note ("the flood-then-glass transition is the fields team's") is done.
+
+**For the EBDX Bridge owner:** two new backdrop keys with no art (`field_flooded_dunes`, `field_glass_dunes`), the new
+transition colours, and profile suggestions are in `design/FIELD_BACKDROPS_NEEDED.md` §1, §2, §4. `[:DESERT, :ASHEN_WASTE]`
+is no longer used.

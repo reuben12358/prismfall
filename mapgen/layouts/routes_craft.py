@@ -182,6 +182,7 @@ def build_527():
               'On the last page, in a different hand: "Found the Thread. Going home by the forest road." It is dated the winter the road closed.']),
           hidden((73, yl[73] + 3), 'SHELLBELL', 'HiddenItem (the Lost Thread)'))
     r.seat_events(on='.dtsu')
+    CK.clear_around(r)
     # ---- the coves' purpose: the fishers' camp (cove A), rock pools, a beached rowboat; nets and posts in cove B
     for n, x, y in (('sh_campfire', 34, 43), ('hb_rope', 40, 42), ('hb_plank', 26, 43), ('hb_post1', 30, 42), ('hb_boxes', 88, 43), ('hb_barrel', 99, 44), ('hb_rope', 95, 45)):
         r.near(n, x, y, on='s', r=3)
@@ -291,7 +292,7 @@ def build_528():
     # the players' camp: a trodden hollow in the slack south of the road
     m.blob(72, 44, 7, 3.2, 'd', seed=44, rough=0.45, only='.tu')
     r.finish_plan(border=0)
-    r.forest_band('N', 3, wobble=1.5)
+    r.forest_band('N', 5, wobble=2.0)
     for cx, cy, rx, ry in ((8, 6, 7, 4), (104, 6, 6, 4), (30, 8, 5, 3), (84, 8, 5, 3), (4, 30, 3, 6), (106, 46, 3, 5),
                            (40, 44, 4, 2.5), (20, 30, 3, 2), (86, 28, 3, 2.5), (104, 20, 3, 3), (12, 48, 3, 2), (72, 12, 4, 3), (40, 12, 4, 3), (26, 46, 3, 2)):
         r.copse(cx, cy, rx, ry)
@@ -365,6 +366,7 @@ def build_528():
     for y in range(top_y, land_y + 1):
         m.taken[y, bx] = True
     r.seat_events(on='.dtus')
+    CK.clear_around(r)
     # ---- the camp's purpose: wagons (stalls), the fire, the washing line, the props barrels, the morris column
     for n, x, y in (('pf_stall4', 64, 41), ('pf_stall2', 77, 41), ('pf_stall0', 79, 45), ('sh_campfire', 70, 45),
                     ('hb_washline', 66, 48), ('hb_tables', 75, 47), ('hb_barrels', 81, 43), ('pf_morris', 63, 44)):
@@ -380,8 +382,8 @@ def build_528():
         r.near('dk_rock_big', x, y, on='.ut', r=3)
     for (x, y) in ((90, 14), (101, 14), (91, 17), (102, 16), (95, 18)):
         r.near('nt_reed1', x, y, on='.u', r=2)
-    CK.fringe(r, CK.FRINGE['coast'], 200, seed=1, near_forest=6)
-    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh', 'nt_teal_a'], 40, box=(0, 12, W, 56), seed=2, near_forest=0)
+    CK.fringe(r, CK.FRINGE['coast'], 230, seed=1, near_forest=6)
+    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh', 'nt_teal_a'], 55, box=(0, 12, W, 56), seed=2, near_forest=0)
     CK.props(r, ['nt_log', 'dk_boulder', 'dk_pebbles', 'nt_log'], 16, box=(0, 56, W, 68), on='s', clump=3, seed=11)
     CK.props(r, ['nt_reed1', 'nt_reed1', 'nt_fern1'], 26, box=(0, 55, W, 62), on='s', clump=2, seed=12)
     CK.undergrowth(r, 160, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'ak_fern', 'nt_reed1'), seed=3)
@@ -460,6 +462,7 @@ def build_541():
     W, H = 70, 110
     r = Route(541, W, H, 'shore', kit={1: 'akc', 2: 'akc', 'default': 'akc'}, base='.')
     m = r.m
+    m.gv_dark = 0.44                                                   # mottled wet ground
     # ---- the estuary (west): channel, deep water, mud
     for y in range(H):
         cw = 9 + 3.0 * (vnoise(0, y, 5411, 12.0) - 0.5) * 2 + bump(y, 84, 12, 5) - bump(y, 20, 10, 3)
@@ -490,9 +493,16 @@ def build_541():
     for y in range(90, 107):
         for x in range(10, 30):
             if m.cls[y, x] in '.d' and ((x - 20) / 10.0) ** 2 + ((y - 98) / 8.0) ** 2 <= 1.0 + 0.3 * (vnoise(x, y, 5430, 3.0) - 0.5): m.cls[y, x] = 'S'
+    # ---- tidal creeks meander in from the estuary (the causeway bridges them)
+    creeks = [[(11, 44), (16, 46), (13, 50), (20, 52)], [(12, 66), (18, 68), (26, 70), (30, 68), (38, 66), (46, 68), (54, 66)],
+              [(12, 24), (18, 26), (24, 24), (30, 26)], [(14, 80), (22, 82), (30, 80), (40, 82), (48, 80)]]
+    pre = m.cls == 'p'
+    for i, pts in enumerate(creeks): CK.stream(r, pts, w=1.7, c='p', seed=i, only='.tdT')
+    creek = (m.cls == 'p') & ~pre
     # ---- the causeway (gravel), the mine path, the Rest, the hide
     road = [(32.5, 109), (33, 100), (36, 90), (34, 80), (32, 70), (35, 60), (32, 50), (30, 40), (33, 28), (37, 16), (35.5, 0)]
     r.road(road, w=3.0, c='g', open_=None, only='.tTdp')
+    for y, x in np.argwhere(creek & (m.cls == 'g')): m.cls[y, x] = 'p'; r.deck.append((x, y))    # little bridges over the creeks
     r.exit('S', 30, 6); r.exit('N', 34, 4)
     for y in range(H):
         for x in range(W):
@@ -500,6 +510,8 @@ def build_541():
     r.lane([(35, 40), (44, 42), (52, 40)], w=2.0, c='g', open_=None, only='.tTd')         # to the mine's back door
     yy = max(y for y in range(H) if m.ht[y, 61] == 1); CK.stair(r, 60, yy, w=3, h=1)    # up onto Brinecut
     r.lane([(61, yy + 3), (58, 44), (52, 42)], w=2.0, c='g', open_=None, only='.tTd')
+    y2 = max(y for y in range(H) if m.ht[y, 56] == 2); CK.stair(r, 55, y2, w=2, h=2)       # up onto the top
+    r.lane([(56, y2 + 3), (58, yy - 2), (61, yy - 1)], w=2.0, c='g', open_=None, only='.tTd')
     r.lane([(33, 74), (22, 76), (14, 66), (13, 60)], w=2.0, c='g', open_=None, only='.tTd')  # to the Brinewife's Rest
     r.lane([(33, 60), (40, 62), (44, 64)], w=2.0, c='g', open_=None, only='.tTd')         # to the bird hide
     # the boardwalk maze over the pools (planks; three only laid at low water)
@@ -517,8 +529,11 @@ def build_541():
     drowned = [(x, lane_y) for x in range(5, 20) if m.cls[lane_y, x] in 'wW']
     for x, y in drowned: m.cls[y, x] = 'w'
     r.finish_plan(border=0)
-    r.forest_band('E', 3, wobble=1.5)
-    for cx, cy, rx, ry in ((44, 8, 5, 3), (16, 10, 6, 4), (60, 76, 5, 4), (58, 96, 6, 6), (40, 104, 4, 3), (12, 44, 3, 4),
+    r.forest_band('E', 6, wobble=2.0)
+    for y in range(0, 4):
+        for x in range(40, W):
+            if m.cls[y, x] in '.t' and y < 2 + 2 * vnoise(x, 0, 5440, 5.0): m.cls[y, x] = 'T'
+    for cx, cy, rx, ry in ((44, 8, 5, 3), (16, 10, 6, 4), (60, 62, 4, 3), (14, 34, 2.5, 3), (26, 14, 4, 3), (60, 106, 5, 3), (50, 92, 3, 2.5), (40, 58, 2.5, 2), (24, 76, 2.5, 2), (40, 16, 3, 2.5), (62, 40, 3, 3), (60, 76, 5, 4), (58, 96, 6, 6), (40, 104, 4, 3), (12, 44, 3, 4),
                            (62, 8, 5, 4), (54, 28, 3, 2), (64, 50, 3, 4), (36, 82, 3, 2)):
         r.copse(cx, cy, rx, ry)
     # tall grass: sea-lavender and cord-grass patches on the marsh
@@ -528,7 +543,7 @@ def build_541():
     CK.earth(r, [(36, 84, 2.5, 1.5), (30, 56, 2, 1.2), (36, 22, 2, 1.2)], c='u')
     CK.woods(r, CK.COAST, scale=10.0)
     LOW = [K.P1('cs_shoal0'), K.P1('cs_shoal1')]
-    plank = C_SH497
+    plank = K.P1('bw_h')
     # ---- events
     mx = 52; my = max(y for y in range(H) if m.ht[y, mx] == 1) + 2
     r.add({'type': 'warp', 'name': 'Mine back door', 'at': [mx, my], 'link': 'R4_MINE', 'arrive': [mx, my + 1, 'down'], 'se': 'Door exit', 'fixed': True},
@@ -547,7 +562,7 @@ def build_541():
                J('happy', 'Squawkabilly! Four colors! In the wild they argue about which one\'s the real one!')]),
           obj('Salt-barge wreck', (14, 20), ["The wreck of a salt barge, sunk to the gunwales in the mud. The name board says HONEST WEIGHT."]),
           hidden((16, 22), 'BIGPEARL', 'HiddenItem (salt-barge wreck)'),
-          {'type': 'event', 'name': 'Ring Boss', 'at': [56, 103], 'pages': [{'graphic': {'sprite': 'NPC 21', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+          {'type': 'event', 'name': 'Ring Boss', 'at': [45, 101], 'pages': [{'graphic': {'sprite': 'NPC 21', 'dir': 'down'}, 'trigger': 'action', 'commands': [
               {'if': 'pfm?(:crab_ring)', 'then': ["Ring Boss: Champion of the mudflat! The bucket's yours. The glory's mine."],
                'else': ['Ring Boss: Crabrawler ring! Three bouts, no biting, best of three, winner gets the bucket!',
                         {'choices': ['Step into the ring.', 'Not now.'], 'cancel': 1, 'branches': [
@@ -569,6 +584,7 @@ def build_541():
     for i, (x, y) in enumerate(night_planks): r.events.append(low_water('Low water plank %d' % (i + 1), (x, y), plank))
     for x, y in drowned + night_planks: m.taken[y, x] = True
     r.seat_events(on='.dtgSu')
+    CK.clear_around(r)
     fd = m.front('sh_cot', 12, 58, 'R4_REST', "The Brinewife's Rest door")
     r.events += [e for e in m.events if e.get('link') == 'R4_REST']; m.events = []
     m.stamp('pf_minemouth', mx - 1, my - 2, mark='B')
@@ -577,25 +593,27 @@ def build_541():
     r.near('fw_smoke_a', 28, 80, on='.dg', r=3)
     r.near('gl_shed', 46, 60, on='.', r=4)                                               # the bird hide over the pools
     hiker = None
+    CK.pans_varied(r, 11, 91, 30, 106, pw=(2, 5), ph=(2, 3), seed=541, gap=(1, 1))
     for n, x, y in (('hb_salt0', 14, 90), ('hb_salt1', 26, 102), ('hb_salt2', 12, 102), ('hb_salt0', 30, 94), ('hb_tubs', 10, 98),
                     ('hb_barrel', 22, 88), ('hb_salt1', 18, 104)):
         r.near(n, x, y, on='S', r=3)
-    RE.pans(r, 12, 89, 32, 106, pw=(2, 6), ph=(2, 3))
-    for (x, y) in ((53, 101), (59, 101), (53, 105), (59, 105), (51, 103), (61, 103)):         # the Crabrawler ring
+    for (x, y) in ((42, 99), (48, 99), (42, 104), (48, 104), (40, 101), (50, 101)):          # the Crabrawler ring
         r.near('dk_pebbles', x, y, on='.dt', r=1)
     ship_part_sand(r, -26, -32, 53)                                                     # HONEST WEIGHT, sunk in the mud
     CK.props(r, ['ck_boulder', 'ck_pebbles', 'nt_rocks_s0'], 18, box=(38, 0, W, 40), clump=3, seed=7)
     for (x, y) in ((44, 14), (58, 6), (64, 26)):
         r.near('ck_rock_big', x, y, on='.t', r=3)
-    CK.props(r, ['nt_reed1', 'nt_reed0', 'nt_reed1'], 70, box=(10, 30, 60, 94), on='.d', clump=3, seed=8)
+    CK.props(r, ['nt_reed1', 'nt_reed0', 'nt_reed1'], 130, box=(10, 20, 62, 96), on='.d', clump=2, seed=8)
     CK.props(r, ['nt_log', 'dk_pebbles'], 10, box=(8, 20, 30, 110), on='d', clump=2, seed=9)
-    CK.fringe(r, CK.FRINGE['coast'], 110, seed=1, near_forest=4)
-    CK.undergrowth(r, 120, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'nt_reed1', 'ak_fern'), seed=3)
+    CK.fringe(r, CK.FRINGE['coast'], 230, seed=1, near_forest=5)
+    CK.fringe(r, ['nt_pine_a', 'nt_teal_a', 'nt_dpine_sh'], 16, box=(14, 4, 60, 100), seed=2, near_forest=0)
+    CK.undergrowth(r, 160, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'nt_reed1', 'ak_fern'), seed=3)
     r.dress(trees=('nt_pine_a',), n_trees=0, copses=0, scatter=0)
     r.paint(glint=0.35)
     ship_part_sand(r, -26, -32, 53, draw=True)
     CK.paint_extras(r)
-    RE.salt_ground(r, [(x, y) for y, x in np.argwhere(m.cls == 'S')])
+    CK.crust_ground(r, [(x, y) for y, x in np.argwhere((m.cls == 'S') | ((m.cls == 'B') & (m.under == 'S')))])
+    CK.boardwalks(r, r.deck)
     CK.shore(r, wet=1, wet_noise=0.5, wrack=0.4, shallows=0.02, chalk_rocks=False)
     for i, (cx, cy, rx, ry) in enumerate(((42, 32, 4, 2), (46, 56, 3, 2), (28, 78, 4, 2), (40, 100, 3, 2))):
         CK.meadow(r, cx, cy, rx, ry, tiles=[K.DECOR_SH['flowers'][k] for k in (5, 9)], p=0.6, seed=i)      # sea lavender
@@ -609,3 +627,346 @@ def build_541():
 
 C_SH497 = K.C('sh', 497)
 BUILD[541] = build_541
+
+
+# ====================================================================================================== 552 The Dyers' Ford
+def sluice_stone(name, at_, idx, colour):
+    """one of the vat-yard sluice stones (touch): stepped in the river's own order (red, blue, yellow) it opens the gate"""
+    scr = ("v = $game_variables[602]\n"
+           "if v < 4\n"
+           "  if v == %d\n"
+           "    $game_variables[602] = v + 1\n"
+           "    pbSEPlay('Door exit') rescue nil\n"
+           "    if v + 1 >= 3\n"
+           "      $game_variables[602] = 4\n"
+           "      pbMessage(_INTL('Clunk. Somewhere under the vats the sluice gate grinds open, and the white water runs free.'))\n"
+           "      $game_map.need_refresh = true\n"
+           "    end\n"
+           "  elsif v > 0\n"
+           "    $game_variables[602] = 0\n"
+           "    pbMessage(_INTL('The stones sink back. The sluice shudders and stays shut.'))\n"
+           "  end\n"
+           "end" % idx)
+    return {'type': 'event', 'name': name, 'at': list(at_), 'fixed': True, 'pages': [
+        {'graphic': {'tile': K.P1('df_slab_' + colour)}, 'trigger': 'touch', 'through': True, 'commands': [{'script': scr}]}]}
+
+
+def build_552():
+    """The Dyers' Ford (80x72, MEADOW): the River Selvedge in three dyed bands below Briarwick's dye-works.  North: the
+    works on their terrace (three vat sheds, the vats, drying lines over the road you walk under like corridors, the
+    vat-yard sluice: step the colour stones in the river's own order); the white water falls off the terrace in the
+    one undyed stream.  The stepping-stone ford.  South: the madder, woad and weld fields, three colours of tall grass;
+    the fulling mill on the bank; the sheep-wash and shearers; the Smeargle's boundary stone; the shrine of the Fourth
+    Colour.  East: the cloth barge's jetty (it rows you back to Saltmere once the sluice runs).  Secret: through the
+    culvert grate (opened by the sluice), up the white water to the Bleachfield."""
+    W, H = 80, 72
+    r = Route(552, W, H, 'meadow', base='.')
+    m = r.m
+    # ---- the north terrace (h1) with the works; the river Selvedge
+    lipy = colmap(r, lambda x: 20 + 2 * (vnoise(x, 0, 5521, 9.0) - 0.5) * 2 + bump(x, 8, 7, 3))
+    for x in range(W):
+        m.ht[:lipy[x] + 1, x] = 1
+    CK.smooth_ht(m, 1, 2)
+    cy = colmap(r, lambda x: 35 + 2 * (vnoise(x, 1, 552, 14.0) - 0.5) * 2)
+    for x in range(W):
+        for y in range(cy[x] - 5, cy[x] + 6): m.cls[y, x] = 'w'
+    # the white water: down from the Bleachfield (NE) to the river, over the terrace lip
+    CK.stream(r, [(69, 0), (68, 8), (69, 16), (68, 26), (68, cy[68] - 4)], w=2.2, c='w', only='.tT')
+    sx = 67
+    # ---- the road: from the North exit down the stairs, through the meadow, over the ford, south between the fields
+    road = [(40.5, 0), (40, 10), (40, lipy[40] - 1)]
+    r.road(road, w=3.0, open_=None, only='.tT')
+    CK.stair(r, 39, max(y for y in range(H) if m.ht[y, 40] == 1), w=3, h=1)
+    r.road([(40, lipy[40] + 3), (38, 26), (39, cy[39] - 6)], w=3.0, open_=None, only='.tT')
+    r.road([(39, cy[39] + 6), (37, 50), (40, 60), (39.5, 71)], w=3.0, open_=None, only='.tT')
+    r.exit('N', 39, 4); r.exit('S', 38, 4)
+    stones_ = [(x, y) for y in range(cy[39] - 5, cy[39] + 6) for x in (38, 39, 40) if m.cls[y, x] == 'w' and (x + y) % 3 != 0 or (m.cls[y, x] == 'w' and x == 39)]
+    # side paths: the vat yard, the jetty, the mill, the sheep-wash, the white-water bank
+    r.lane([(42, 12), (50, 13), (60, 14)], w=2.0, open_=None)
+    r.lane([(42, 27), (56, 28), (72, cy[72] - 6)], w=2.0, open_=None)
+    r.lane([(37, 50), (22, 48), (12, 46)], w=2.0, open_=None)
+    r.lane([(41, 58), (56, 58), (66, 56)], w=2.0, open_=None)
+    r.lane([(60, 14), (64, 11), (64, 5)], w=1.6, open_=None)
+    # the Bleachfield (on the terrace, up the white water's west bank)
+    r.clearing(60, 3, 5, 2.6, c='.')
+    # the sheep-wash pool; the mill race
+    CK.pond(r, 70, 57, 4, 2.5, c='w', rough=0.3)
+    r.forest_band('W', 4, wobble=2.0); r.forest_band('E', 3, wobble=2.0); r.forest_band('N', 2, wobble=1.0)
+    for cx, cy_, rx, ry in ((10, 8, 7, 5), (24, 6, 6, 4), (6, 62, 5, 6), (74, 66, 5, 4), (60, 4, 3, 2.5), (26, 30, 4, 2.5),
+                            (54, 44, 3, 2.5), (14, 32, 4, 2.5), (66, 44, 3, 2), (32, 8, 4, 3), (4, 50, 3, 4), (48, 70, 4, 2),
+                            (76, 56, 2.5, 4)):
+        r.copse(cx, cy_, rx, ry)
+    r.finish_plan(border=0)
+    CK.waterfall(r, sx, sx + 2, lipy[sx + 1])
+    # the madder, woad and weld fields (organic, dyed later), and plain tall grass on the banks
+    fields = {'r': [(14, 54, 5), (20, 60, 4)], 'b': [(52, 52, 4.5), (58, 62, 4)], 'y': [(28, 64, 4), (16, 66, 3.5)]}
+    for k, spots in fields.items(): CK.grass_fields(r, spots)
+    dyemask = {k: np.zeros((H, W), bool) for k in fields}
+    for k, spots in fields.items():
+        for (fx, fy, s_) in spots:
+            for y in range(max(0, int(fy - 2.5 * s_)), min(H, int(fy + 2.5 * s_))):
+                for x in range(max(0, int(fx - 2.5 * s_)), min(W, int(fx + 2.5 * s_))):
+                    if m.cls[y, x] == 't' and ((x - fx) / (2.2 * s_)) ** 2 + ((y - fy) / (1.8 * s_)) ** 2 <= 1.0: dyemask[k][y, x] = True
+    CK.grass_fields(r, [(20, 26, 3), (56, 24, 3), (8, 28, 2.5), (30, 14, 3), (16, 16, 3), (74, 26, 2.5), (48, 66, 3)])
+    CK.ledge(r, 26, 35, 47)
+    for y in (46, 47, 48):
+        for x in (25, 36):
+            if m.cls[y, x] in '.t': m.cls[y, x] = 'T'
+    CK.woods(r, CK.ELOWEN, scale=12.0)
+    # ---- events
+    flag = lambda i, x, y, extra=(): {'type': 'event', 'name': 'Survey flag %d' % i, 'at': [x, y], 'pages': [{'trigger': 'action',
+                                     'commands': ['An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.'] + list(extra)}]}
+    grate_t = K.P1('nr_wall_v')
+    r.add(sign((36, 66), 'Road sign', "THE DYERS' FORD -- The Weavers' Road. Briarwick Dye-Works. Do not drink the river. Do not bathe in the river. Do not stand in the red."),
+          once("The Dyers' Ford", (39, cy[39] + 7), ['(Below three vat-sheds, the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road.)',
+               J('happy', "The Briarwick dyers wash their cloth here, so the river runs in three colors! There's a fourth band nobody's allowed to dye. It's just water. People leave ribbons for it.")]),
+          talk('Meridian Surveyor', (44, 24), 'trainer_SCIENTIST', ['Meridian Surveyor: Mind the orange flags. Survey line for the new Lattice. Straight up the river and through to the wood.',
+               'Meridian Surveyor: Trees aren\'t in the plan, but trees rarely are.'], d='left'),
+          flag(1, 43, 26, [J('neutral', "These go right toward the Glasswood. That's..."), '(She stops. Two nights ago a man in a mask asked a theater why nothing in Verdance ever rots.)',
+                           J('sad', "...That's probably fine. Isn't it?")]),
+          flag(2, 43, 10), flag(3, 43, 4), hidden((44, 3), 'ANTIDOTE', 'HiddenItem (base of the third flag)'),
+          trainer((52, 16), 'PAINTER', 'Morwenna', "Red's my color! Red's everyone's color, eventually, if you work the madder vat.", "Look at my hands. They'll be red till Fallmorn.", d='left'),
+          trainer((60, 10), 'PAINTER', 'Ash', "Woad blue. The Queen's Elowen green is woad and weld together. She's never paid for a yard of it.", 'Bill her. Somebody bill her.', d='down'),
+          {'type': 'event', 'name': 'Dye Foreman', 'at': [54, 19], 'pages': [{'graphic': {'sprite': 'NPC 20', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+              {'if': '$game_variables[602] >= 4', 'then': ["Dye Foreman: You opened the sluice? In the right order? Which order was it?",
+                                                          '(You tell him. He hums it. He hums it wrong.)',
+                                                          "Dye Foreman: Tell the bargee the cloth's ready. She'll row you down to Saltmere, she owes me."],
+               'else': ["Dye Foreman: The sluice stones. Step them in the order I hum. Red, blue, yellow. No -- that's blue, red, yellow.",
+                        "Dye Foreman: I've been humming it wrong for thirty years and nobody's told me. The river knows. Ask the river."]}]}]},
+          sluice_stone('Sluice stone red', (49, 18), 0, 'r'), sluice_stone('Sluice stone blue', (51, 18), 1, 'b'), sluice_stone('Sluice stone yellow', (53, 18), 2, 'y'),
+          {'type': 'event', 'name': 'Culvert grate', 'at': [64, 8], 'fixed': True, 'pages': [
+              {'graphic': {'tile': grate_t}, 'trigger': 'action', 'commands': ['A grate over the culvert where the white water comes down. It is chained to the sluice gate below.']},
+              {'cond': {'var': ['ROAD_SLUICE', 4]}, 'through': True, 'commands': []}]},
+          talk('Smeargle owner', (24, 62), 'NPC 18', ["Smeargle owner: My Smeargle paints a mark on the boundary stone for every trainer who passes.",
+               "Smeargle owner: Yours is... it's left yours blank. It's never done that."]),
+          talk('Smeargle', (25, 63), 'Followers/SMEARGLE', ['(It looks at you, then at its brush, then at you. It puts the brush away.)'], move='random'),
+          obj('Boundary stone', (22, 61), ['A boundary stone painted with a hundred small marks in every colour. One square, near the bottom, is left blank.']),
+          talk('Shearer', (64, 54), 'NPC 03', ["Shearer: Briarwick's dyers, Saltmere's salt, Ferrow's fish. Every town in Elowen's got a thing the Plate gives it.",
+               "Shearer: We've got colors. Lovely colors. You can't eat them."]),
+          talk('Mareep', (62, 56), 'Followers/MAREEP', ['Baa-zzt.'], move='random'), talk('Mareep ', (62, 61), 'Followers/MAREEP', ['Baa.'], move='random'),
+          obj('Shrine of the Fourth Colour', (64, cy[64] - 6), ['A plain white ribbon tied to a stake where the undyed white water meets the river. Dozens more are tied beside it.',
+              'A card in a child\'s hand: "for the color nobody gets".']),
+          trial('Hound shrine', (61, cy[61] - 6), 'SHRINE_FORD'),
+          {'type': 'berry', 'at': [26, 50], 'berry': 'PECHABERRY'},
+          obj('Fulling mill', (12, 44), ['THE FULLING MILL. Hammers the size of Snorlax beat the cloth soft. Not today: the wheel is waiting on the river.']),
+          {'type': 'event', 'name': 'Bargee', 'at': [72, cy[72] - 7], 'pages': [{'graphic': {'sprite': 'NPC 25', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+              {'if': '$game_variables[602] >= 4', 'then': [
+                  "Bargee: The foreman says the cloth's ready and you're the reason. Want a lift down to Saltmere? It's all downstream.",
+                  {'choices': ['Ride the barge.', 'Not yet.'], 'cancel': 1, 'branches': [
+                      ['(You sit on the bolts of red and blue cloth. The Selvedge carries you down past the Saltings to the salt lake.)',
+                       {'tone': [-255, -255, -255, 0, 12]}, {'wait': 14}, {'transfer': {'map': 140, 'x': 40, 'y': 61, 'dir': 'down'}},
+                       {'tone': [0, 0, 0, 0, 12]}],
+                      ["Bargee: I'll be here. The river's not going anywhere. Well. It is. But slowly."]]}],
+               'else': ["Bargee: Cloth barge to Saltmere. When the foreman's errand's done, I'll row you down. Till then I'm 'on my break'."]}]}]},
+          obj('The Bleachfield', (60, 2), ['(Through the culvert: a small meadow where the undyed water spreads out. Every flower is white. The air rings, very faintly.)']),
+          item((57, 3), 'TM44'), item((10, 50), 'POTION'), item((68, 45), 'SUPERPOTION'),
+          obj('Madder field', (12, 58), ['MADDER (red). The dyers grow their own colours. Please stay on the path. The path is also madder.']),
+          obj('Woad field', (50, 60), ['WOAD (blue). Do not eat. Do not roll in. Do not let the Mareep roll in.']),
+          obj('Weld field', (30, 68), ['WELD (yellow). It looks like a weed because it is a weed. A very valuable weed.']))
+    stones_ = [c for c in stones_ if m.cls[c[1], c[0]] == 'w']
+    CK.stones(r, stones_)
+    for x, y in ((49, 18), (51, 18), (53, 18), (64, 8)): m.taken[y, x] = True
+    for y in range(6, 11):                                                               # the grate closes the bank path
+        for x in (62, 63, 65, 66):
+            if m.cls[y, x] in '.t' and m.cls[y, x] != 'w': m.cls[y, x] = 'T'
+    r.seat_events(on='.dt')
+    CK.clear_around(r)
+    # ---- the works: vat sheds, vats, drying lines across the road, barrels; the mill; the jetty; the sheep-wash pen
+    for nm, x, y in (('gl_shed', 46, 4), ('gl_shed', 53, 3), ('gl_shed', 59, 5)):
+        r.near(nm, x, y, on='.d', r=3)
+    for n, x, y in (('pf_p_vat_r', 47, 14), ('pf_p_vat_b', 53, 14), ('pf_p_vat_y', 58, 16), ('pf_p_vat_r', 49, 11), ('pf_p_vat_b', 56, 11),
+                    ('hb_dyeline', 44, 7), ('hb_rugline', 49, 8), ('hb_rugline2', 55, 8), ('hb_barrels', 62, 16), ('hb_crates4', 60, 18),
+                    ('hb_shed', 12, 41), ('pf_logbench', 30, 46), ('hb_tubs', 63, 58), ('df_sluice', 64, 17)):
+        r.near(n, x, y, on='.d', r=3)
+    r.near('gl_flat2', 6, 40, on='.', r=4)                                               # the fulling mill
+    m.fence(58, 68, 51, gaps=((62, 64),)); m.fence(58, 68, 64, gaps=((60, 62),))
+    for i, yy in enumerate((6, 10, 14)):                                                # drying lines over the road
+        xs = [x for x in range(34, 48) if m.cls[yy, x] in 'd.t' and not m.taken[yy, x] or r.road_mask[yy, x]]
+        if not xs: continue
+        x0, x1 = min(xs), max(xs)
+        for x in range(x0, x1 + 1):
+            if x in (x0, x1):
+                if m.free(x, yy, 1, 1, on='.t'): m.stamp('dl_post', x, yy, mark='B')
+            else:
+                m.over.append((2, x, yy, K.P1('dl_cloth_%s%d' % ('rby'[(x + i) % 3], (x * 3 + yy) % 2))))
+    jetty = [(x, y) for x in (70, 71, 72) for y in range(cy[71] - 5, cy[71] - 1) if m.cls[y, x] == 'w']
+    r.deck += jetty
+    # walls between the fields
+    for (x0, x1, y) in ((4, 22, 51), (44, 62, 46), (12, 32, 70)):
+        for x in range(x0, x1 + 1):
+            if abs(x - (x0 + x1) // 2) <= 1: continue                                    # a gate in every wall
+            if m.free(x, y, 1, 1, on='.t') and vnoise(x, y, 5522, 3.0) > 0.25:
+                m.stamp('nr_wall_' + ('w' if x == x0 else 'e' if x == x1 else 'm'), x, y, mark='B')
+    CK.props(r, ['nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_log', 'nt_stump'], 22, box=(0, 0, W, H), clump=3, seed=7)
+    for (x, y) in ((36, 30), (44, 30), (30, 42), (48, 42), (60, 29), (20, 29), (8, 44), (76, 30)):
+        r.near(random.Random(x * 7 + y).choice(['nt_reed1', 'nt_reed0']), x, y, on='.', r=2)
+    CK.fringe(r, CK.FRINGE['meadow'], 150, seed=1, near_forest=5)
+    CK.fringe(r, CK.FRINGE['orchard'], 12, box=(2, 24, 78, 70), seed=2, near_forest=0)
+    CK.undergrowth(r, 220, seed=3)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    CK.boardwalks(r, r.deck)
+    T = {k: K._ST['_dyegrass']['tall_' + k] for k in 'rby'}
+    for k, msk in dyemask.items():
+        for y, x in np.argwhere(msk & (m.cls == 't')): m.L[1, y, x] = T[k]
+    for y, x in np.argwhere(m.cls == 'w'):                                              # the three colours, and the clear band
+        c = cy[x]
+        band = (y - (c - 5)) / 11.0
+        if x >= 66 and y < c - 5: continue                                              # the white water stays white
+        nm = 'red' if band < 0.3 else 'blue' if band < 0.58 else 'yellow' if band < 0.86 else None
+        if nm and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and 0 <= band <= 1: m.L[1, y, x] = K.P1('dye_%s%d' % (nm, (x * 7 + y) % 2))
+    CK.water_stamp(r, 'hb_boat2', 73, cy[73] - 3)
+    CK.meadow(r, 60, 3, 4, 2.0, tiles=[K.DECOR_SH['flowers'][2], K.DECOR_SH['flowers'][11]], p=0.9, seed=1)    # the Bleachfield's white flowers
+    for i, (cx_, cy_, rx, ry) in enumerate(((22, 24, 5, 2), (56, 26, 5, 2), (8, 22, 3, 2), (28, 46, 4, 1.5), (68, 46, 3, 2), (46, 68, 4, 2))):
+        CK.meadow(r, cx_, cy_, rx, ry, p=0.65, seed=i + 3)
+    CK.scatter_quiet(r, 12)
+    h = head(552, "The Dyers' Ford", field='MEADOW', bgm='Route 3',
+             connections=[{'dir': 'S', 'offset': 38, 'to': 541, 'to_offset': 34}, {'dir': 'N', 'offset': 39, 'to': 540, 'to_offset': 20}], tone=[6, 4, -2, 0])
+    h['walk_from'] = [[60, 4]]
+    r.write(h, '552_dyers_ford.yaml', "# The Dyers' Ford (552). WRITTEN BY layouts/routes_craft.py - edit that script.\n", '/tmp/rt/552.png' if PREV else None)
+
+
+BUILD[552] = build_552
+
+
+# ====================================================================================================== 540 Thistledown Lea
+def build_540():
+    """Thistledown Lea (130x64, MEADOW): the extinct House Thistledown's river meadows, unmown for sixty years.  The road
+    comes up from the Dyers' Ford over the old stone bridge (a fisherman keeps the toll nobody collects) and runs east to
+    the Gossamer Wood.  North: Thistledown Manor on its terraced hill (ruined wall, gateposts, the overgrown topiary
+    garden), and behind it the Ha-ha, a sunken ditch round the hill to the back garden and the cellar door (secret).  West:
+    the outcrop with the Brinecut mine mouth.  The Ponyta paddock (its ledges drop to the road, one way); the mowers' camp
+    with hay-ricks (heal once); the bamboo stand and its Pancham; the broken mill on the mill-race; four fields of tall
+    grass and the wildflower meadows in bands; the Selvedge along the south with two islets."""
+    W, H = 130, 64
+    r = Route(540, W, H, 'meadow', base='.')
+    m = r.m
+    # ---- the river Selvedge along the south, two islets
+    cy = colmap(r, lambda x: 53 + 2.0 * (vnoise(x, 0, 540, 16.0) - 0.5) * 2)
+    for x in range(W):
+        for y in range(cy[x] - 4, cy[x] + 5):
+            if 0 <= y < H: m.cls[y, x] = 'w'
+    m.blob(70, 53, 4, 1.6, '.', seed=3, rough=0.3, only='w'); m.blob(104, 54, 3, 1.4, '.', seed=4, rough=0.3, only='w')
+    # ---- the manor hill (h1, h2) and the west outcrop
+    CK.plateau(r, 66, 10, 20, 11, 1, rough=0.3, seed=1)
+    CK.plateau(r, 66, 6, 11, 6, 2, rough=0.25, seed=2)
+    for y in range(0, 28):
+        for x in range(0, 20):
+            if x < 15 + 3 * vnoise(0, y, 541, 7.0) and y < 22 + 2 * vnoise(x, 0, 543, 7.0): m.ht[y, x] = max(m.ht[y, x], 1)
+    CK.smooth_ht(m, 1, 2); CK.smooth_ht(m, 2, 2, box=(40, 0, 95, 20))
+    # the Ha-ha: the hill's back is cut off from the meadows except by the ditch path (forest closes the rest)
+    # ---- the road: bridge, then east along the middle
+    road = [(21.5, 63), (21, cy[21] + 5), (21, cy[21] - 5), (24, 42), (36, 36), (56, 34), (76, 33), (96, 34), (112, 31.5), (129, 31.5)]
+    r.road(road, w=3.0, open_=None, only='T.tw')
+    bridge = [(x, y) for y in range(H) for x in range(19, 25) if r.road_mask[y, x] and m.cls[y, x] == 'd' and cy[x] - 5 <= y <= cy[x] + 5]
+    r.exit('S', 20, 4); r.exit('E', 30, 4)
+    # the manor drive and stairs (h1, then h2), the mine path, the mill path, the Ha-ha
+    y1 = max(y for y in range(H) if m.ht[y, 65] == 1)
+    CK.stair(r, 64, y1, w=3, h=1)
+    r.lane([(65, 33), (65, y1 + 3)], w=2.0, open_=None)
+    y2 = max(y for y in range(H) if m.ht[y, 67] == 2)
+    CK.stair(r, 66, y2, w=2, h=2)
+    r.lane([(65, y1 - 1), (67, y2 + 3)], w=2.0, open_=None)
+    ym = max(y for y in range(H) if m.ht[y, 9] == 1)
+    r.lane([(24, 40), (14, 32), (9, ym + 3)], w=2.0, open_=None)
+    r.lane([(96, 34), (98, 42), (96, cy[96] - 5)], w=2.0, open_=None)
+    r.lane([(92, 33), (90, 24), (88, 14), (86, 3)], w=1.7, open_=None)            # the Ha-ha's ditch, round the hill's back
+    r.clearing(82, 3, 4, 2.2)
+    # fields and meadows
+    r.clearing(38, 22, 9, 6)                                                      # the Ponyta paddock
+    r.forest_band('N', 4, wobble=2.0); r.forest_band('S', 3, wobble=1.5); r.forest_band('E', 2, wobble=1.0)
+    for cx, cy_, rx, ry in ((118, 12, 10, 7), (100, 46, 6, 3), (6, 40, 5, 5), (36, 6, 8, 3), (124, 46, 5, 4), (100, 14, 4, 3),
+                            (14, 8, 5, 4), (50, 46, 4, 2.5), (82, 44, 3, 2), (110, 22, 3, 3), (30, 46, 3, 2)):
+        r.copse(cx, cy_, rx, ry)
+    for x in range(44, 92):                                                       # woods close the hill's sides (the ditch is the way)
+        for y in range(0, 22):
+            if m.ht[y, x] == 0 and m.cls[y, x] in '.t' and not r.road_mask[y, x] and (x < 50 or x > 80): m.cls[y, x] = 'T'
+    r.finish_plan(border=0)
+    # ledges: the paddock's bank drops to the road (one way)
+    CK.ledge(r, 30, 46, 30)
+    for y in (29, 30, 31):
+        for x in (29, 47):
+            if m.cls[y, x] in '.t': m.cls[y, x] = 'T'
+    CK.grass_fields(r, [(30, 40, 4), (46, 40, 4.5), (78, 38, 4), (106, 38, 4.5), (110, 26, 3.5), (16, 34, 3), (52, 28, 3),
+                        (88, 46, 3), (118, 38, 3), (8, 48, 3), (62, 46, 3), (74, 26, 3)])
+    CK.woods(r, CK.ELOWEN, scale=12.0, accents={'blossom': 0.02, 'red': 0.01})
+    ev = old_events('540_route3_route4.yaml', 540)
+    # ---- events
+    r.add({'type': 'warp', 'name': 'Mine mouth', 'at': [9, ym + 2], 'link': 'R3_MINE', 'arrive': [9, ym + 3, 'down'], 'se': 'Door exit', 'fixed': True},
+          sign((25, 44), 'Road sign', "THISTLEDOWN LEA -- The lands of House Thistledown (extinct). v The Dyers' Ford - -> Gossamer Wood & Briarwick - ^ Thistledown Manor (PRIVATE. DECEASED.)"),
+          once('The Lea', (22, 46), [J('happy', 'Mum says the Thistledowns were actors. All of them. Even the dog. They played Saltmere for a hundred years and then they all died in the same winter.'),
+               J('neutral', "People say they're still up there. Rehearsing. I'd like to see that. From a distance. A long distance.")]),
+          sign((63, y1 + 2), 'Manor sign', 'THISTLEDOWN MANOR\nHome of the Thistledown Players. Closed since AF 211.'),
+          talk('Drover', (40, 26), 'NPC 25', ['Drover: Race you to the fence!', '(He wins. He always wins. He has a Ponyta.)']),
+          talk('Ponyta', (36, 22), 'Followers/PONYTA', ['(It tosses its mane. Show-off.)'], move='random'),
+          talk('Fisherman on the bridge', (25, cy[25] - 6), 'trainer_FISHERMAN', ["Fisherman: Bridge toll's a copper. Nobody's collected it since the house died. I just tell people. Habit."], d='left'),
+          hidden((26, cy[26] + 6), 'GREATBALL', 'HiddenItem (under the bridge)'),
+          {'type': 'event', 'name': 'Mower', 'at': [80, 40], 'pages': [
+              {'graphic': {'sprite': 'NPC 03', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  "Mower: Nobody's mown the Lea in sixty years. You can't buy land off a dead family. They won't come to the door.",
+                  {'if': '!pfm?(:mowers_heal)', 'then': ['Mower: Sit by the fire a bit. Kettle\'s on.', {'heal': True}, {'script': 'pfm_set(:mowers_heal)'}]}]},
+              {'cond': {'switch': 'CH2_THISTLE_DONE'}, 'graphic': {'sprite': 'NPC 03', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  'Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.']}]},
+          trainer((52, 38), 'PICNICKER', 'Edie', "Ada beat me on Windfall Row last year. I've been training on the Lea all spring.", "...I'll write to Ada. I'll lie.", d='down'),
+          at(ev['Bryony'], 36, 32), trainer((74, 46), 'FISHERMAN', 'Hale', 'You scared the fish! Now you owe me a battle.', 'Reeled in a loss. Happens.', d='down'),
+          trainer((92, 28), 'TWINS', 'Bel & Bea', 'Twins: We battle together! Always together!', "Twins: Saltmere's south. They do plays there!", d='down', double=True),
+          trainer((112, 34), 'YOUNGSTER', 'Corin', "Saltmere badge? Prove it!", "My team's the coolest! ...Was.", d='left'),
+          obj('Broken mill', (96, cy[96] - 6), ['The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.']),
+          obj('Bamboo stand', (112, 18), ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']),
+          talk('Pancham', (108, 20), 'Followers/PANCHAM', ['(It glares at you over a bamboo shoot. Respect.)'], move='random'),
+          obj('Road Stone II-b', (122, 29), ["ROAD STONE II-b. THE WEAVERS' ROAD. \"Briarwick 1.\" The '1' has been scratched to a '2' and back again."]),
+          obj('Gateposts', (64, y1 - 2), ['Two stone gateposts with the Thistledown thistle carved on them. No gate. Gates are for people who expect visitors.']),
+          obj('The Ha-ha', (82, 2), ['(The sunken wall\'s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging behind it.)']),
+          talk('Greavard', (80, 4), 'Followers/GREAVARD', ['(It is digging very seriously. It does not want to be interrupted. It wags anyway.)'], move='random'),
+          hidden((84, 3), 'RAREBONE', 'HiddenItem (the Ha-ha)'),
+          obj('Topiary', (58, 14), ['A topiary garden gone wild. One bush was a Ponyta once. Now it is a Ponyta that has seen things.']),
+          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((126, 20), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 52), 'GREATBALL'))
+    r.seat_events(on='.dt')
+    CK.clear_around(r)
+    fd = m.front('sh_big', 66, y2 - 3, 'R3_MANOR', 'Manor door')
+    r.events += [e for e in m.events if e.get('link') == 'R3_MANOR' or e.get('name') == 'Locked door']; m.events = []
+    m.stamp('pf_minemouth', 8, ym, mark='B'); m.cls[ym + 2, 9] = 'd'
+    # the manor's ruined wall round its terrace, gateposts at the stair, the topiary garden
+    for x in range(52, 82):
+        y = y1 - 3
+        if abs(x - 65) <= 2: continue
+        if m.free(x, y, 1, 1, on='.t') and vnoise(x, 0, 5401, 3.0) > 0.3: m.stamp('nr_wall_' + ('w' if x == 52 else 'e' if x == 81 else 'm'), x, y, mark='B')
+    for gx in (63, 67): r.near('nr_col', gx, y1 - 3, on='.t', r=1)
+    for (x, y) in ((56, 14), (59, 15), (56, 17), (59, 18), (73, 14), (76, 15), (73, 17), (76, 18)):
+        r.near(random.Random(x + y).choice(['nt_bush0', 'nt_bush1', 'nt_azalea0', 'nt_shrub0']), x, y, on='.t', r=1)
+    r.near('nr_ruin', 94, 44, on='.t', r=3)                                       # the broken mill
+    for n, x, y in (('sh_campfire', 78, 41), ('hb_tables', 83, 41), ('pf_hayrick', 76, 37), ('pf_hayrick', 86, 37), ('pf_logbench', 80, 44)):
+        r.near(n, x, y, on='.d', r=3)
+    for (x, y) in ((110, 16), (113, 15), (116, 17), (107, 18), (114, 20)):
+        r.near('pf_bamboo', x, y, on='.t', r=2)
+    m.fence(29, 47, 17, gaps=((37, 38),)); m.fence(29, 47, 27, gaps=((42, 43),))
+    m.cls[bridge and 0 or 0, 0] = m.cls[0, 0]
+    CK.props(r, ['nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_log', 'nt_stump'], 24, box=(0, 20, W, 50), clump=3, seed=7)
+    for (x, y) in ((40, cy[40] - 5), (60, cy[60] - 5), (84, cy[84] - 5), (114, cy[114] - 5), (50, cy[50] + 5), (10, cy[10] - 5)):
+        r.near(random.Random(x).choice(['nt_reed1', 'nt_reed0']), x, y, on='.', r=2)
+    CK.fringe(r, CK.FRINGE['meadow'], 200, seed=1, near_forest=5)
+    CK.fringe(r, CK.FRINGE['orchard'], 14, box=(2, 20, W - 2, 50), seed=2, near_forest=0)
+    CK.undergrowth(r, 320, seed=3)
+    CK.props(r, ['nt_reed1', 'nt_reed1', 'nt_fern1'], 40, box=(0, 40, W, 62), clump=2, seed=13)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    for x, y in bridge: m.cls[y, x] = 'w'
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    bx = sorted({x for x, y in bridge})
+    for x, y in bridge:
+        if m.inb(x, y): m.L[1, y, x] = K.P1('sb_w' if x == bx[0] else 'sb_e' if x == bx[-1] else 'sb_m')
+    # wildflower meadows in bands of colour
+    FL = K.DECOR_SH['flowers']
+    for i, (cx_, cy_, rx, ry, ks) in enumerate(((28, 14, 6, 3, (0, 4)), (44, 46, 7, 2, (2, 3)), (90, 40, 6, 2, (1, 5)), (108, 44, 6, 2, (6, 7)),
+                                                (120, 26, 5, 3, (8, 9)), (16, 42, 4, 2, (10, 11)), (62, 40, 5, 2, (0, 1)), (74, 18, 4, 2, (2, 6)))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in ks], p=0.75, seed=i)
+    CK.shore(r, wet=0, wrack=0, shallows=0.05, kelp=0.05, chalk_rocks=False)
+    CK.scatter_quiet(r, 16)
+    h = head(540, 'Thistledown Lea', field='MEADOW', bgm='Route 3',
+             connections=[{'dir': 'S', 'offset': 20, 'to': 552, 'to_offset': 39}, {'dir': 'E', 'offset': 30, 'to': 524, 'to_offset': 50}], tone=[6, 4, -2, 0])
+    h['walk_from'] = [[70, 53]]                                                        # the islet (Surf, later)
+    r.write(h, '540_thistledown_lea.yaml', '# Thistledown Lea (540). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/540.png' if PREV else None)
+
+
+BUILD[540] = build_540

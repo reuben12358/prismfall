@@ -9,9 +9,13 @@
 #                              Flash Fire + Volcanic + STAB on Inferno Overdrive; see mapgen/REQUESTS.md.)
 #   PLAYBOT_SESSION=zgauntlet  the whole gauntlet through Vesper's map event script (pf_trial_talk(:VESPER_GARDEN)):
 #                              eight singers in a set help order, then Vesper; the AI plays the player's side.
+#                              PLAYBOT_ZP_TEAM=legends gives an overwhelming team, to see the reward path end to end.
+#   PLAYBOT_SESSION=zevo       the Eevium Z under the shipped Gen 9 Pack's CHAMPIONS_MECHANICS (Last Resort locked until
+#                              the other moves are used): the player's Eevee picks Last Resort in the Fight menu -> Yes ->
+#                              Extreme Evoboost, against Vesper's Amen (AI), who opens with it too.
 #===============================================================================
 module PlayBot
-  ZP_SESSIONS = ["zpower", "zgauntlet"].freeze
+  ZP_SESSIONS = ["zpower", "zgauntlet", "zevo"].freeze
   ZP_HELP_ORDER = [:NOCT, :LYRA, :SONA, :ARIA, :LENTO, :CADENCE, :FORTE, :CAROL].freeze   # deliberately not gym order
   ZP_QUEUE = []
   @zp_control = true
@@ -109,6 +113,21 @@ module PlayBot
       won = Prismfall::Trials.trainer_battle([:OCTAVE_SINGER, "Lento", 60], field: :FROZEN_LAKE)
       log("ZP: battle vs Lento #{won ? 'won' : 'lost'}; Z used #{PrismfallZ.log($zp_last_battle).inspect rescue '?'}")
       @zp_control = true
+    when :zevo
+      ev = Pokemon.new(:EEVEE, 100)
+      GameData::Stat.each_main { |st| ev.iv[st.id] = 31 }
+      ev.forget_all_moves
+      [:LASTRESORT, :STOREDPOWER, :SHADOWBALL, :QUICKATTACK].each { |m| ev.learn_move(m) }
+      ev.item = :EEVIUMZ
+      ev.calc_stats
+      zp_setup_party(true)
+      $player.party = [ev] + $player.party.first(2)
+      $bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+      @zp_control = false
+      log("ZP: Eevium Z vs Vesper (v60); CHAMPIONS_MECHANICS #{defined?(Settings::CHAMPIONS_MECHANICS) ? Settings::CHAMPIONS_MECHANICS : 'n/a'}; party #{party_text}")
+      won = Prismfall::Trials.trainer_battle([:OCTAVE_VESPER, "Vesper", 60], field: :GRAND_STAGE)
+      log("ZP: battle vs Vesper #{won ? 'won' : 'lost'}; Z used #{PrismfallZ.log($zp_last_battle).inspect rescue '?'}")
+      @zp_control = true
     when :zgauntlet
       zp_setup_party(true)
       oc = Prismfall::Trials::Octave
@@ -173,6 +192,12 @@ EventHandlers.add(:prismfall_zmove_unleashed, :zp_bot, proc { |battle, user, z|
   PlayBot.log("ZP: UNLEASHED #{z.id} (#{z.name}) by #{user.name} (side #{user.index & 1}), power #{z.power}, field #{battle.field_effect rescue '?'}")
   PlayBot.zp_shot_in(8, "zp_z_power_#{user.name}_#{z.id}")
   PlayBot.zp_shot_in(70, "zp_z_move_#{user.name}_#{z.id}")
+  # The bot only ever presses Use (first move): once the player's Z-move is spent, let the AI finish the battle
+  # (under CHAMPIONS_MECHANICS the first move, Last Resort, is locked again and the menu would refuse it forever).
+  if (user.index & 1) == 0 && !battle.controlPlayer
+    battle.controlPlayer = true
+    PlayBot.log("ZP: the player's Z-move is spent; the AI plays the rest")
+  end
 })
 
 module Game

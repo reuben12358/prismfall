@@ -455,7 +455,7 @@ module FieldEffects
     922 => :FROZEN_LAKE,   # Skaldfast - Rime Keep
     923 => :FROZEN_LAKE,   # Skaldfast - Great Hall
     924 => :ASHEN_WASTE,   # Ashkaar Siege Camp
-    925 => :ASHEN_WASTE,   # The Steamline
+    925 => :BLEED,   # The Steamline
     926 => :DESERT,   # The Glass Dunes
     927 => :VOLCANIC,   # Cinder Cape Warfort
     928 => :NONE,   # Ashkaar Siege Camp - Command Pavilion
@@ -469,6 +469,10 @@ module FieldEffects
   })
   MAP_DEFAULT_WILD_FIELDS.merge!({
     821 => :BEACH,   # The Drownings
+  })
+  MAP_BORROW_POOLS.merge!({
+    925 => [:VOLCANIC, :ASHEN_WASTE, :FROZEN_LAKE, :SNOWY_MOUNTAIN, :DESERT, :FLOODED_DUNES, :GLASS_DUNES],   # The Steamline
+    926 => [:VOLCANIC, :ASHEN_WASTE, :FROZEN_LAKE, :SNOWY_MOUNTAIN, :DESERT, :FLOODED_DUNES, :GLASS_DUNES],   # The Glass Dunes
   })
   TRAINER_FIELDS.merge!({
     [:RIVAL_KESTREL, 10] => :NONE,   # K1 at Ferrow's Landing is the tutorial battle: learn the bas

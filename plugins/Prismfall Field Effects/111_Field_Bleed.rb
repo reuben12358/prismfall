@@ -3,6 +3,9 @@
 # borrows the effects of another registered field (fields added later join the
 # pool automatically). Raw Imprint energy rewards adaptable Pokemon.
 # Story battles only change INTO the Bleed; it never transforms itself.
+# A map can narrow what it borrows (FIELD_DEFAULTS.yaml `borrow:` ->
+# MAP_BORROW_POOLS): the Steamline (925) and the Glass Dunes (926) only echo the
+# war's fire, ice, sand and steam-glass fields.
 # Family: Magical.
 #===============================================================================
 FieldEffects.register(:BLEED, {
@@ -12,6 +15,7 @@ FieldEffects.register(:BLEED, {
   :intro_message => "Reality frays at the edges... The Bleed is spreading!",
   :description   => "Every 3 rounds it borrows another field's effects. Raw Imprint energy rewards coverage, shapeshifters and type-shifting moves.",
   :notes         => ["Every 3 rounds (and at once) it borrows the full effects of another field at random. Borrowed fields never transform the Bleed and their seeds don't react.",
+                     "Where the Fire and Ice Imprints meet (the Steamline, the Glass Dunes) it only echoes the war's own fields: Volcanic, Cinderglass, Frozen Lake, Snowy Mountain, Desert, Flooded Dunes, Glass Dunes.",
                      "Attacks that don't match the user's type x1.2 (raw Imprint energy rewards coverage).",
                      "Type-shifting moves drink the raw Imprints: Judgment, Multi-Attack, Techno Blast, Revelation Dance, Weather Ball, Terrain Pulse, Hidden Power x1.3.",
                      "Protean, Libero and Color Change Pokemon adapt fast (+1 Speed on entry). Mimicry takes the Bleed's natural type (Psychic).",

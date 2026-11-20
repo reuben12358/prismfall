@@ -27,7 +27,7 @@ event still wins.
 | Gyms 1–18 | `LEADER_*` 0, Juno 30–32 | signature field | `gym_battle` (also sets double for Gyms 2, 6, 11, 16, 17 and single for Gym 1) |
 | J1, Saltmere promenade (before Gym 1) | `RIVAL_JUNO` 10–12 | Meadow | TRAINER_FIELDS (the map default is Beach) |
 | Round 2 story fights: Wick, Quent 0–2, Sable, the Mourner, Marchetti 0–2, Kroll 0–1, the Eevee Octave | see §6 | see §6 | TRAINER_FIELDS |
-| War soldiers and captains | `ASHKAAR_*`, `ISENMAR_*` | map default (922–927) | map |
+| War soldiers, captains and partners (Ch19, the Battle of the Glass Dunes) | `ASHKAAR_*`, `ISENMAR_*` 0–2, `LEADER_SIGRUN`/`LEADER_MARISOL` 19 | map default (920 Desert, 924 Cinderglass, 925 Bleed, 926 Desert → flood / glass) | map |
 | Teo, Ebbmouth mill-race | `HOLLOW_TEO` 0 | Water Surface | TRAINER_FIELDS (the Reyes cellar map is Cave) |
 | K2, Gullcry Cliffs | `RIVAL_KESTREL` 20–22 | Mountain | TRAINER_FIELDS |
 | K3, Ossuary exit | 30–32 | Desert | TRAINER_FIELDS |
@@ -401,38 +401,37 @@ All Standard / Hard / Casual; fields from `FIELD_DEFAULTS.yaml` `exceptions.trai
 | Ch14 Marchetti (1), Darkglass gallery | Dark Crystal | Houndoom *(−C)* (Magical Seed), Arcanine, **+Hard** Kingambit, Corviknight, Mabosstiff | Dark ×1.5, Dark contact +1 crit, the player aims ×0.9; one Dark Pulse re-darkens a relit cavern (strike) | Two light moves relight it; Fighting, Water |
 | Ch16 Marchetti (2) + Quent (1), **tag double** | Factory | Marchetti: Arcanine, Corviknight, Mabosstiff. Quent: Bronzong, Magnezone, Porygon-Z | Quent plays both ways "for the data": Bronzong's **Explosion** wrecks the floor (→ Scrapyard, strike); three Discharges restart it | Fire on the Steel core; Water once it is a Scrapyard (rust) |
 | Ch17 Kroll (1) / Quent (2), Sun Court | Cave | Kroll: Skuntank, Toxicroak *(−C)*, Honchkrow, Obstagoon, **+Hard** Kingambit, Drapion. Quent: Bronzong, Magnezone *(−C)*, Metagross, **+Hard** Rotom, Porygon-Z | Rock Slide ×1.5; Kroll's Earthquakes crack the ceiling, the next brings it down on everyone | Rock Head / Bulletproof / Overcoat are safe from the cave-in |
-| Ch19 war: Ashkaar soldiers (0, 1) + Captain | Cinderglass (924), Volcanic (927) | Magcargo, Druddigon, Ninetales, Flygon, Camerupt, Tyrantrum, Talonflame, Turtonator; Captain: Torkoal, Coalossal, Arcanine *(−C)*, Garchomp | Magma Armor, Steam Engine; Lava Plume ×3 re-melts Cinderglass; Drought 8 turns on Volcanic | Water and Ground; rain quenches |
-| Ch19 war: Isenmar soldiers (0, 1) + Captain | Frozen Lake (922, 926) | Walrein, Crabominable, Froslass, Dewgong, Beartic, Avalugg, Glalie, Lapras; Captain: Abomasnow, Lapras, Weavile *(−C)*, Cetitan | Ice ×1.5, Slush Rush and Ice Body without hail, Aurora Veil without hail; Heavy Slam cracks the lake | Fire and Fighting; cracking the lake helps their Water types |
+| Ch19 war, Isenmar trench-line (`ISENMAR_SOLDIER_M/F` 0, `ISENMAR_OFFICER` 0), the Rimed Sands 920 | Desert | Mamoswine, Seismitoad *(−C)*; Pelipper, Ludicolo *(−C)*; Captain: Politoed, Ludicolo, Mamoswine *(−C)*, Lapras | **The sea comes to the sand.** On the dunes Ice is ×0.75 and Water ×0.8, so they open with Drizzle or Rain Dance: rain soaks the dunes into the Superbloom (the nerfs lift, Ludicolo's Grass ×1.5) and Swift Swim runs. Mamoswine and Seismitoad are Ground types that hide in the sand (special ×0.67) | Take the sky back (sun, sand, or two Fire attacks bake the bloom away); KO the setter; Water Absorb / Storm Drain |
+| Ch19 war, Siege Camp earthworks (`ASHKAAR_SOLDIER_M/F` 0, `ASHKAAR_OFFICER` 0), 924 | Cinderglass | Magcargo, Druddigon *(−C)*; Ninetales, Flygon *(−C)*; Captain: Torkoal, Coalossal, Arcanine *(−C)*, Garchomp | Magma Armor, Steam Engine every turn; Stone Edge ×1.3 ×1.3 on obsidian; Lava Plume ×3 re-melts it to Volcanic | Water and Ground; three floods fill the glass into a lake |
+| Ch19 war, the Steamline 925 (stand between: `ASHKAAR_SOLDIER_M` 1, `ISENMAR_SOLDIER_M` 1) | Bleed (borrows only the war's fields) | Camerupt, Tyrantrum *(−C)*; Walrein, Gastrodon *(−C)* | Every 3 rounds the Steamline borrows Volcanic, Cinderglass, Frozen Lake, Desert, the flood or the glass; off-type attacks are ×1.2 (Rock Slide, Earthquake, Earth Power, Clear Smog), so both soldiers carry coverage | Read the borrowed field each third round and switch to it |
+| Ch19 war, the Glass Dunes 926 crest (`ASHKAAR_SOLDIER_F` 1, `ISENMAR_SOLDIER_F` 1) | Desert → glass / bloom | Talonflame, Turtonator *(−C)*; Politoed, Kingdra *(−C)* | Ashkaar makes **glass**: Turtonator's two Overheats are the two searing moves, then it draws 1/16 a turn from the glass and Flash Cannon refracts ×1.3. Isenmar makes **rain**: Drizzle soaks the dunes into the Superbloom for Swift Swim Kingdra; on glass its Ice Beam cracks the crust and Hydro Pump is a flood | The weather decides the dunes: bring your own; Protect through the Overheats |
+| Ch19 war, Glass Dunes **partner double** (backing Isenmar): Marisol (`LEADER_MARISOL` 19) beside you vs `ASHKAAR_OFFICER` 1 + `ASHKAAR_SOLDIER_M` 2 | Desert → Glass Dunes | Captain: Torkoal, Coalossal *(−C)*, Garchomp; Soldier: Charizard, Haxorus *(−C)* | **The glass plan.** Drought (7 turns on the dunes) + Eruption (spread, searing, Fire ×1.2 ×1.5 sun); Charizard's Overheat is the second searing move and the dunes fuse to glass: Fire types heal 1/16 a turn there, Coalossal enters at +1 Speed and Tar Shot sets up the next Eruption; Solar Power is free on the sand and Solar Beam is ×1.5 there, ×1.3 off the glass. No quakes in the line (they would crack its own glass) | Marisol's Drizzle takes the sky (rain halves the Fire); Wide Guard, Protect; KO Torkoal before the second searing move; on glass, quakes and big Ice moves crack it (three in the rain → the flood) |
+| Ch19 war, Glass Dunes **partner double** (backing Ashkaar): Sigrun (`LEADER_SIGRUN` 19) beside you vs `ISENMAR_OFFICER` 1 + `ISENMAR_SOLDIER_M` 2 | Desert → Superbloom (→ the flood once Kyogre is in) | Captain: Pelipper, Kingdra *(−C)*, Arctovish; Soldier: Mamoswine, Seismitoad *(−C)* | **The sea plan.** Pelipper's Drizzle and Tailwind: rain soaks the dunes (Superbloom: the Water and Ice nerfs lift, Ground still ×1.2) and holds Kyogre's flood in. Kingdra's Swift Swim on top of Tailwind; Arctovish's Fishious Rend doubles when it moves first, which in rain + Tailwind is always. Mamoswine leads beside the bird so its Earthquake spares it | Sigrun's dragons resist Water; Heat Wave and two Fire attacks bake the bloom back to sand; KO Pelipper first |
+| Stand between: Sigrun beside you vs `ISENMAR_OFFICER` 1 + `ASHKAAR_OFFICER` 1 | Desert, both ways at once | the two Captains above | A weather war on the other side of the field: Drizzle against Drought, bloom against glass. Whoever sets weather last owns the dunes | Pick the side of the weather war that suits your team and help it win |
 
-War soldiers have no bag items and use `version` = encounter number, like the grunts.
+War teams have no bag items and use `version` = encounter number, like the grunts (cap 85, Ch19, between Gyms 17
+and 18). The two partners are one version only, the same ally in every difficulty. Fields: Desert
+(`106_Field_Desert.rb`), the flood (`139_Field_FloodedDunes.rb`: only Kyogre's heavy rain or Origin Pulse brings it)
+and the glass (`140_Field_GlassDunes.rb`), from the fields team; `tools/harness/run_glass_dunes.rb` G runs the captains on 926.
 
-### The Eevee Octave (showpiece)
+### The Eevee Octave (showpiece; SPINE Revision 19, `design/EEVEE_OCTAVE.md`)
 
-> **SPINE Rev 19 (`design/EEVEE_OCTAVE.md`):** the Ch20 gauntlet below is replaced. The eight singers now each have a quest
-> in their own kingdom, and the gauntlet runs them **in the order the player helped them**, as `OCTAVE_SINGER <name> v60`
-> (provisional in `pbs/trainers_trials.txt`: these v1–8 sets with the type's **Z-crystal** in place of the seed), each on
-> the field below (set by the quest, not `TRAINER_FIELDS`), then **Vesper v60: Eevee "Amen" with the Eevium Z** on the
-> Grand Stage (no longer the six-Eeveelution `ENTRY_FIELDS` team, v2). The Ch2 double's partner is **Lyra**, not Carol.
+Eight Glassfall orphans of the Prism Choir; in-world an Eevee becomes what it lives beside, so every singer's partner is
+at home on exactly one field. Types `OCTAVE_VESPER` / `OCTAVE_SINGER`. All in `gen.py` now (moved out of
+`pbs/trainers_trials.txt`); retired: Carol 0, the singers' 1–8 and Vesper 2 (their `TRAINER_FIELDS` / `ENTRY_FIELDS`
+rows are dead, see mapgen/REQUESTS.md).
 
-Eight Glassfall orphans of the Prism Choir; in-world an Eevee evolves by the Imprint it is raised beside, so every
-singer's partner is at home on exactly one field. Types `OCTAVE_VESPER` / `OCTAVE_SINGER` (new in `trainer_types.txt`).
-
-| Fight | Field | Eeveelution and how it shines |
+| Fight (version) | Field | Team and how it shines |
 |---|---|---|
-| Ch3 Saltmere backstage, **double**: Vesper (0) + Chorister Carol (0) | Grand Stage | Vesper's undecided Eevee "Amen" (Helping Hand) and Carol's Sylveon: Disarming Voice is spread sound, so the applause rises |
-| Ch13 Lucent cloister, **double**: Vesper (1) | Mindscape | Espeon at home; Amen's and Sylveon's Hyper Voices (spread sound) crack the dream into the Inverse Field on the third |
-| Ch20 gauntlet 1 Aria | Water Surface | Vaporeon: Water Absorb heals here, Elemental Seed (Aqua Ring), **Dive → Underwater** (strike), where non-Water Pokémon move at half Speed |
-| 2 Cadence | Neon Grid | Jolteon: Volt Absorb starts charged and heals every turn; Synthetic Seed (Magnet Rise: no Ground answer); Discharge reboots a Blackout |
-| 3 Forte | Volcanic | Flareon: Flash Fire lit; Lava Plume primes eruptions (+1 for Flareon, lava for the foe); Elemental Seed burns a Fire type for free |
-| 4 Lento | Frozen Lake | Glaceon: Ice Body heals; Elemental Seed +2 Speed; Ice Shard slides and reseals a crack |
-| 5 Lyra | Flower Garden (stage 3) | Leafeon: the Telluric Seed grows it to stage 4 on entry, which switches Chlorophyll on |
-| 6 Sona | Mindscape | Espeon: Hyper Voice ×3 cracks the dream to Inverse, where Magic Bounce gets +1 Sp. Def |
-| 7 Noct | New Moon | Umbreon: Magical Seed opens the Abyss on entry (Dark ×1.5 ×1.4 shadow moves); Wish, not Moonlight |
-| 8 Carol | Fairy Tale | Sylveon: Draining Kiss ×2, Mystical Fire ×1.5, Magical Seed |
-| Finale: Vesper (2) | starts on Grand Stage, then **follows the active Eeveelution** | `012_FieldEffects_TrainerPlays.rb` `ENTRY_FIELDS`: as each of Vaporeon, Jolteon, Flareon, Umbreon, Espeon and Sylveon "Vespers" enters, the Choir gardens become the field it was raised beside (Water Surface, Neon Grid, Volcanic, New Moon, Mindscape, Fairy Tale). No held seeds (six fields in one fight): the abilities carry it |
+| Ch2 Saltmere backstage, **double**: Vesper (0) + Lyra (0), after Gym 1 | Grand Stage | Two undecided Eevees: Vesper's "Amen" 18 (Adaptability, Helping Hand) and Lyra's "Moss" 17. Swift hits both foes; Covet and Baby-Doll Eyes; two damaging sound/showpiece moves raise the applause |
+| Ch13 Lucent cloister, **double**: Vesper (1) | Mindscape | Espeon, Umbreon *(−C)*, Sylveon (Pixilate Hyper Voice, spread sound), Amen 58: the third spread sound move cracks the dream to Inverse |
+| Kingdom duels (50), each the climax of the singer's own quest, at the next Warden's cap − 1, one local partner first *(−C)* | the map's | Lyra: Skiddo, Leafeon "Moss" 18 (Gossamer Wood, Silkwood) · Aria: Spheal, Vaporeon "Brine" 22 (Ebbmouth) · Cadence: Klink, Jolteon "Snare" 26 (the Lowlight) · Sona: Baltoy, Espeon "Noon" 30 (Temple of the Noon Sun) · Noct: Murkrow, Umbreon "Wick" 34 (Mirefen at night) · Forte: Carkol, Flareon "Bellows" 38 (the Crucible) · Lento: Froslass, Glaceon "Hush" 58 (the Mirror Mere) · Carol: Florges, Sylveon "Ribbon" 88 (the Memorial Garden) |
+| **Crownhaven gauntlet** (60), back to back, no healing, in the order the player helped them; the quest sets each field | each Eeveelution's home field | One Eeveelution each, Lv 88 (Hard 89, Casual 84), its type's **Z-crystal** and a strong attack of that type: Leafeon Grassium Z (Flower Garden 3: Bloom Doom from Leaf Blade, Swords Dance), Vaporeon Waterium Z (Water Surface: Hydro Vortex from Scald, Wish), Jolteon Electrium Z (Neon Grid: Gigavolt Havoc, Volt Absorb charged), Espeon Psychium Z (Mindscape: Shattered Psyche; Hyper Voice ×3 cracks it to Inverse), Umbreon Darkinium Z (New Moon: Black Hole Eclipse, Wish wall), Flareon Firium Z (Volcanic: Inferno Overdrive from Flare Blitz; **Guts, not Flash Fire**: the field lights Flash Fire and that one-shot a Lv 95 Vaporeon through the resist), Glaceon Icium Z (Frozen Lake: Subzero Slammer, Ice Body), Sylveon Fairium Z (Fairy Tale: Twinkle Tackle from Moonblast, Draining Kiss ×2) |
+| Gauntlet finale: Vesper (60) | Grand Stage | Eevee "Amen" Lv 90 (Hard 90, Casual 86), Adaptability, **Eevium Z**: Last Resort → **Extreme Evoboost** (+2 every stat; a Z-move raises the applause), then Stored Power or Last Resort (Normal ×1.3/×1.5 here, ×1.3 grand finale); Shadow Ball for Ghosts, Quick Attack to finish |
 
-Counterplay for the finale: the field changes on her switch, so a player who reads the next Eeveelution can bring the
-answer to *both* the Pokémon and its home field (Grass for Vaporeon on water, Ground for Jolteon, Water for Flareon...).
+Counterplay for the gauntlet: the order is the player's, so they can line up their answers; each Z-move fires once, so a
+Protect or a sacrificial switch on the bout's first big turn takes most of the danger out. Against Amen: Haze,
+Clear Smog, Roar, Whirlwind or a Ghost type (Last Resort can't touch it) before Stored Power comes online.
 
 ## 7. Re-tunes in Round 2
 

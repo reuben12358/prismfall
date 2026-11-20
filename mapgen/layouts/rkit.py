@@ -678,7 +678,7 @@ class RMap:
 
     def paint(self):
         self.paint_ground(); self.autotiles(); self.cliffs(); self.paint_stairs(); self.forest(); self.put_stamps()
-        self.grass_variation()
+        self.grass_variation(dark=getattr(self, 'gv_dark', 0.6))          # map builder 10: marshes set a lower threshold
         return self.L
 
     def seal_edges(self, spans, filler=None, keep=(), sides='NSWE'):

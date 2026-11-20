@@ -44,6 +44,52 @@ class Battle
   end
 end
 
+# The Saltmere audience (Prismfall Puzzles 007_Puzzles_SaltmereCrowd.rb): pf_house_rules sets the Grand Stage's opening
+# stage and $game_temp.pf_home_crowd, which the field's "fans" rule reads through FieldEffects.home_crowd?. The run
+# folder has no Puzzles plugin, so load that one file (its map-side helpers are only called from events).
+CROWD_RB = File.expand_path("../../plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb", HARNESS_DIR)
+load CROWD_RB if File.exist?(CROWD_RB)
+def wr_house(audience)
+  stage = (audience >= 14) ? 3 : (audience >= 7) ? 2 : 1
+  setBattleRule("fieldStage", stage) if stage > 1
+  $game_temp.pf_home_crowd = (audience >= 7) ? audience : nil if $game_temp.respond_to?(:pf_home_crowd=)
+end
+
+# Experiments on the full house (PRISM_EXP_HOUSE, harness only; proposals for the puzzle engineer / field owner):
+#   crit   with your fans in, Standing Ovation's +1 crit stage is for your side only ("the house is yours")
+#   nobask with your fans in, Dorian's Normal types don't bask at Standing Ovation (the house cheers you, not him)
+#   halfbask with your fans in, Dorian's Normal types bask for 1/32 instead of 1/16
+#   heal8  your fans heal 1/8 at Standing Ovation instead of 1/16
+if (EXP_HOUSE = ENV["PRISM_EXP_HOUSE"]) && FieldEffects.exists?(:GRAND_STAGE)
+  d = FieldEffects.get(:GRAND_STAGE)
+  nd = d.dup; nd.delete(:id)
+  nd[:stages] = d[:stages].transform_values { |v| v.dup }
+  s3 = nd[:stages][3]
+  not_house_foe = proc { |_battle, b| !($game_temp.pf_home_crowd && b.opposes?) }
+  EXP_HOUSE.split("+").each do |e|
+    case e
+    when "crit"
+      s3[:crit_mods] = [{ :category => :damaging, :user => { :condition => not_house_foe }, :add => 1 }]
+    when "nobask"
+      s3[:end_of_round] = s3[:end_of_round].map do |r|
+        next r if !r[:message].to_s.include?("basked")
+        r2 = r.dup; r2[:battlers] = (r[:battlers] || {}).merge(:condition => not_house_foe); r2
+      end
+    when "halfbask"
+      s3[:end_of_round] = s3[:end_of_round].flat_map do |r|
+        next [r] if !r[:message].to_s.include?("basked")
+        mine = r.dup; mine[:battlers] = (r[:battlers] || {}).merge(:condition => not_house_foe)
+        theirs = r.dup; theirs[:battlers] = (r[:battlers] || {}).merge(:condition => proc { |bt, b| !not_house_foe.call(bt, b) })
+        theirs[:heal] = 1/32r
+        [mine, theirs]
+      end
+    when "heal8"
+      s3[:end_of_round] = s3[:end_of_round].map { |r| r[:message].to_s.include?("stalls") ? r.merge(:heal => 1/8r) : r }
+    end
+  end
+  FieldEffects.register(:GRAND_STAGE, nd)
+end
+
 module Harness
   def self.set_badges(count)
     $player.badges = Array.new([$player.badges.length, 18].max) { |i| i < count }
@@ -116,10 +162,19 @@ module WR
     "G1" => { :label => "Gym 1 Dorian (Grand Stage, single)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
               :bag => :g1, :stage => 0, :start => proc { Prismfall.gym_battle(1, :can_lose => true) } },
     # Revision 19: the Saltmere crowd you met sets the Grand Stage's starting stage (1-3) for Dorian's fight.
-    "G1S2" => { :label => "Gym 1 Dorian, crowd start: Encore (stage 2)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
-                :bag => :g1, :stage => 0, :start => proc { setBattleRule("fieldStage", 2); Prismfall.gym_battle(1, :can_lose => true) } },
-    "G1S3" => { :label => "Gym 1 Dorian, crowd start: Standing Ovation (stage 3)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
-                :bag => :g1, :stage => 0, :start => proc { setBattleRule("fieldStage", 3); Prismfall.gym_battle(1, :can_lose => true) } },
+    # Revision 19: the Saltmere audience (V313) sets the opening stage: 0-6 stage 1, 7-13 stage 2 + your fans heal your
+    # side 1/16 a round, 14+ stage 3 (the fans keep cheering). G1S2 = 10 met, G1S3 = 18 met (pf_house_rules).
+    "G1S2" => { :label => "Gym 1 Dorian, good house (10 met: Encore + fans)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :start => proc { wr_house(10); Prismfall.gym_battle(1, :can_lose => true) } },
+    "G1S3" => { :label => "Gym 1 Dorian, full house (18 met: Standing Ovation + fans)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :start => proc { wr_house(18); Prismfall.gym_battle(1, :can_lose => true) } },
+    # The same three houses with a team a level lower (starter 14, catches 14/13/13/12/12): a player who did not grind.
+    "G1L14" => { :label => "Gym 1 Dorian, sparse house, Lv 14 team", :cap => 14, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :lvcap => 15, :offsets => [0, 1, 1, 2, 2], :start => proc { Prismfall.gym_battle(1, :can_lose => true) } },
+    "G1S2L14" => { :label => "Gym 1 Dorian, good house, Lv 14 team", :cap => 14, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :lvcap => 15, :offsets => [0, 1, 1, 2, 2], :start => proc { wr_house(10); Prismfall.gym_battle(1, :can_lose => true) } },
+    "G1S3L14" => { :label => "Gym 1 Dorian, full house, Lv 14 team", :cap => 14, :badges => 0, :size => 6, :pool => :ch1_2,
+                :bag => :g1, :stage => 0, :lvcap => 15, :offsets => [0, 1, 1, 2, 2], :start => proc { wr_house(18); Prismfall.gym_battle(1, :can_lose => true) } },
     "G2" => { :label => "Gym 2 Tamsin (Silkwood, double)", :cap => 19, :badges => 1, :size => 6, :pool => :ch3,
               :bag => :g2, :tms => :g2, :stage => 1, :start => proc { Prismfall.gym_battle(2, :can_lose => true) } },
     "K2" => { :label => "K2 Kestrel (Gullcry Cliffs, before Gym 3)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
@@ -217,7 +272,7 @@ module WR
         catches << bag_w.delete_at(i)[0]
       end
     end
-    offsets = [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
+    offsets = f[:offsets] || [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
     catches.each_with_index { |sp, i| list << [sp, f[:cap] - (PREP ? 0 : offsets[i % offsets.size])] }   # prepared = grinded to the cap
     party = list.map { |sp, lv| mon(sp, lv, rng, f[:pool]) }
     TMS[f[:tms] || :none].each do |tm|

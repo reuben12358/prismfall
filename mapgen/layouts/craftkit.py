@@ -192,7 +192,13 @@ def shelf(r, poly, h):
 def stair(r, x, y_lip, w=3, h=None):
     """a stairway down a south face at lip row y_lip: straighten the lip there (routekit.flatten) and cut the steps"""
     m = r.m; h = h if h is not None else int(m.ht[y_lip, x + w // 2])
-    r.flatten(x, x + w - 1, y_lip, h); r.crossing(x, y_lip, w=w, rows=len(K.KITS[m.kit.get(h, m.kit.get('default')) if isinstance(m.kit, dict) else m.kit]['rows']))
+    n = len(K.KITS[m.kit.get(h, m.kit.get('default')) if isinstance(m.kit, dict) else m.kit]['rows'])
+    r.flatten(x, x + w - 1, y_lip, h); r.crossing(x, y_lip, w=w, rows=n)
+    for yy in (y_lip - 2, y_lip - 1, y_lip + n, y_lip + n + 1):          # the landings stay clear (no tree or rock)
+        for xx in range(x, x + w):
+            if m.inb(xx, yy):
+                r.road_mask[yy, xx] = True
+                if m.cls[yy, xx] in 'tT': m.cls[yy, xx] = '.'
 
 
 def ledge(r, x0, x1, y, chalk=False, face=None):
@@ -426,3 +432,52 @@ def paint_extras(r):
     for x, y in getattr(r, 'stepping', []):
         m.L[1, y, x] = ST[(x + y) % 2]
     paint_falls(r)
+
+
+# ---------------------------------------------------------------------------------------------- salt works
+def pans_varied(r, x0, y0, x1, y1, kinds=('brine', 'brp', 'brg', 'brx'), pw=(2, 6), ph=(2, 3), on='S', seed=0, gap=(1, 2)):
+    """salt pans of many sizes and brine colours on class `on` cells (a clay bund drawn round each); returns the pans
+    as (x, y, w, h) so a layout can lay boardwalks, rakes and heaps between them"""
+    m = r.m; rng = random.Random(r.seed * 19 + seed); out = []
+    y = y0
+    while y < y1:
+        h = rng.randint(*ph); x = x0 + rng.randint(0, 2)
+        while x < x1:
+            w = rng.randint(*pw)
+            if x + w <= x1 and y + h <= y1 and (m.cls[y:y + h, x:x + w] == on).all() and not m.taken[y:y + h, x:x + w].any():
+                k = rng.choice(kinds)
+                for yy in range(y, y + h):
+                    for xx in range(x, x + w):
+                        v = ('n' if yy == y else 's' if yy == y + h - 1 else '') + ('w' if xx == x else 'e' if xx == x + w - 1 else '')
+                        m.tile(P1('%s_%s' % (k, v or 'c')), xx, yy, 1); m.cls[yy, xx] = 'B'
+                out.append((x, y, w, h))
+            x += w + rng.randint(*gap)
+        y += h + rng.randint(*gap)
+    return out
+
+
+def crust_ground(r, cells, seed=0):
+    """grey salt crust on the given cells' ground layer"""
+    m = r.m; rng = random.Random(r.seed + 23 + seed); G = [P1('gs_crust%d' % i) for i in range(4)]
+    for x, y in cells:
+        m.L[0, y, x] = G[0] if rng.random() < 0.5 else rng.choice(G)
+
+
+def boardwalks(r, cells):
+    """light timber boardwalks over water / mud: each cell picks the plank direction from its neighbours"""
+    m = r.m; S = set(cells)
+    for x, y in cells:
+        horiz = ((x - 1, y) in S or (x + 1, y) in S) and not ((x, y - 1) in S and (x, y + 1) in S)
+        m.L[1, y, x] = P1('bw_h' if horiz else 'bw_v')
+
+
+def clear_around(r, radius=1):
+    """after seating: keep the ring round every event free of trees, rocks and bushes placed later (nothing boxes a
+    talker or a trainer in); the cells keep their class"""
+    m = r.m
+    for e in r.events:
+        x, y = e['at']
+        for dy in range(-radius, radius + 1):
+            for dx in range(-radius, radius + 1):
+                X, Y = x + dx, y + dy
+                if m.inb(X, Y) and m.cls[Y, X] in '.tdgsuS' and not m.cliff[Y, X]: m.taken[Y, X] = True

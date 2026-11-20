@@ -3,11 +3,13 @@
 # buried bones and a white sun. Sand-dwellers own the place: sand abilities
 # work without a sandstorm and Ground types hide in the dunes.
 # Rain (or 3 floods) wakes the seeds sleeping in the sand: stage 2 "Superbloom".
-# Searing heat fuses the dunes into black glass (ASHEN_WASTE, Cinderglass).
-# Family: Telluric.
+# A sea-storm (heavy rain) or Origin Pulse drags the sea in over the dunes
+# (FLOODED_DUNES); the bloom drowns the same way, or under 3 more floods.
+# Searing heat fuses the dunes into glass (GLASS_DUNES, the steam-glass of
+# the Ch19 war). Family: Telluric.
 #===============================================================================
 FieldEffects.register(:DESERT, (lambda do
-  floods   = [:SURF, :MUDDYWATER, :WATERSPOUT, :HYDROPUMP, :WATERPLEDGE, :ORIGINPULSE, :WAVECRASH]
+  floods   = [:SURF, :MUDDYWATER, :WATERSPOUT, :HYDROPUMP, :WATERPLEDGE, :WAVECRASH]
   searing  = [:ERUPTION, :BLASTBURN, :FUSIONFLARE, :BLUEFLARE, :MAGMASTORM, :BURNUP, :OVERHEAT, :ARMORCANNON]
   bones    = { :BONECLUB => 1.3, :BONEMERANG => 1.3, :BONERUSH => 1.3, :SHADOWBONE => 1.3 }
   petals   = [:PETALDANCE, :PETALBLIZZARD, :POLLENPUFF, :FLOWERTRICK, :FLEURCANNON, :SEEDBOMB]
@@ -17,7 +19,7 @@ FieldEffects.register(:DESERT, (lambda do
     :backdrop      => "field_desert",
     :family        => :telluric,
     :intro_message => "Heat shimmers over the endless dunes...",
-    :description   => "Sand-dwellers own the dunes: sand abilities always work, Ground types hide in the sand, and the bones of Ossaria make weapons. Rain wakes a superbloom; searing heat makes glass.",
+    :description   => "Sand-dwellers own the dunes: sand abilities always work, Ground types hide in the sand, and the bones of Ossaria make weapons. Rain wakes a superbloom, a sea-storm floods the dunes, and searing heat makes glass.",
     :notes         => ["Ground x1.2, Fire x1.2. Ice x0.75 and Water x0.8 (the dunes drink them).",
                        "Sand Rush, Sand Force, Sand Veil and Solar Power work without weather (Solar Power costs no HP here).",
                        "Ground-type Pokemon burrow into the sand: special attacks against them deal x0.67.",
@@ -25,8 +27,8 @@ FieldEffects.register(:DESERT, (lambda do
                        "Physical Ground moves may kick sand in the eyes (20%, accuracy -1). Sand Attack never misses and drops accuracy one stage more; Shore Up also gives +1 Def.",
                        "Earth Eater draws on the dunes (1/16 HP a turn). Dry Skin dries out in the heat (1/8).",
                        "Hail can't form; Sandstorm +3 turns, Sun +2. Grassy Terrain can't take root.",
-                       "Rain, or 3 floods (Surf, Muddy Water, Hydro Pump...) -> Superbloom (stage 2). 2 searing moves (Eruption, Blast Burn, Fusion Flare, Blue Flare...) -> Cinderglass.",
-                       "Superbloom: Grass x1.5, Bug x1.2, petal and seed moves x1.5, Chlorophyll and Leaf Guard active, Grass types drink 1/16 HP a turn. Sun, sandstorm or 2 fire attacks bake it back to dunes.",
+                       "Rain, or 3 floods (Surf, Muddy Water, Hydro Pump...) -> Superbloom (stage 2). Heavy rain or Origin Pulse drags the sea in -> Flooded Dunes. 2 searing moves (Eruption, Blast Burn, Fusion Flare, Blue Flare...) -> Glass Dunes.",
+                       "Superbloom: Grass x1.5, Bug x1.2, petal and seed moves x1.5, Chlorophyll and Leaf Guard active, Grass types drink 1/16 HP a turn. Sun, sandstorm or 2 fire attacks bake it back to dunes; heavy rain, Origin Pulse or 3 more floods drown it -> Flooded Dunes.",
                        "Telluric Seed: +1 Defense, +1 Sp. Def, but it's half-buried (-1 Speed)."],
     :nature_power  => :SANDTOMB,
     :camouflage    => :GROUND,
@@ -70,14 +72,18 @@ FieldEffects.register(:DESERT, (lambda do
                         :extend => { :Sandstorm => 3, :Sun => 2 } },
     :terrain       => { :block => [:Grassy], :block_message => "Nothing can take root in the dry dunes!" },
     :transitions   => [
-      { :weather => [:Rain, :HeavyRain], :stage => 2,
+      { :weather => [:HeavyRain], :to => :FLOODED_DUNES,
+        :message => "A sea-storm broke over the desert! The flood-sea is pouring in over the dunes!" },
+      { :moves => [:ORIGINPULSE], :to => :FLOODED_DUNES,
+        :message => "The sea answered the pulse and poured in over the dunes!" },
+      { :weather => [:Rain], :stage => 2,
         :message => "Rain on the dunes! Seeds sleeping in the sand burst into a superbloom!" },
       { :moves => floods, :stage => 2, :uses => 3,
         :progress_message => "The sand darkens with water... ({1} more)",
         :message => "The soaked dunes burst into a superbloom!" },
-      { :moves => searing, :to => :ASHEN_WASTE, :uses => 2,
+      { :moves => searing, :to => :GLASS_DUNES, :uses => 2,
         :progress_message => "The sand is starting to glaze over in the heat... ({1} more)",
-        :message => "The heat fused the dunes into black glass!" }
+        :message => "The heat fused the dunes into glass!" }
     ],
     :seed => { :item => :TELLURICSEED, :stats => { :DEFENSE => 1, :SPECIAL_DEFENSE => 1, :SPEED => -1 },
                :message => "{1}'s {2} half-buried it in hardened sand!" },
@@ -86,7 +92,7 @@ FieldEffects.register(:DESERT, (lambda do
       2 => {
         :backdrop      => "field_desert_bloom",
         :intro_message => "The desert is in bloom!",
-        :description   => "Superbloom: the rain woke the seeds in the sand. Grass, Bug and petal moves surge while it lasts.",
+        :description   => "Superbloom: water woke the seeds in the sand. Grass, Bug and petal moves surge while it lasts.",
         :activate_abilities => [:CHLOROPHYLL, :LEAFGUARD, :SANDFORCE],
         :type_mods     => { :GRASS => 1.5, :BUG => 1.2, :GROUND => 1.2 },
         :type_messages => { :GRASS => "The blooming desert poured life into {2}!" },
@@ -104,6 +110,13 @@ FieldEffects.register(:DESERT, (lambda do
                             :extend => { :Rain => 2 } },
         :terrain       => { :extend => { :Grassy => 3 } },
         :transitions   => [
+          { :weather => [:HeavyRain], :to => :FLOODED_DUNES,
+            :message => "A sea-storm broke over the bloom! The flood-sea is pouring in over the dunes!" },
+          { :moves => [:ORIGINPULSE], :to => :FLOODED_DUNES,
+            :message => "The sea answered the pulse and poured in over the blooming dunes!" },
+          { :moves => floods, :to => :FLOODED_DUNES, :uses => 3,
+            :progress_message => "The water is rising through the bloom... ({1} more)",
+            :message => "The water kept rising until the sea came in over the dunes!" },
           { :weather => [:Sun, :HarshSun, :Sandstorm], :stage => 1,
             :message => "The bloom withered back into the sand. The dunes return." },
           { :types => [:FIRE], :category => :damaging, :stage => 1, :uses => 2,

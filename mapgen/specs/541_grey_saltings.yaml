@@ -90,7 +90,7 @@ events:
   pages:
   - commands: []
   - cond: {self: A}
-    graphic: {tile: 4945}
+    graphic: {tile: 22817}
     commands: []
 - type: event
   name: Low water plank 2
@@ -98,7 +98,7 @@ events:
   pages:
   - commands: []
   - cond: {self: A}
-    graphic: {tile: 4945}
+    graphic: {tile: 22817}
     commands: []
 - type: event
   name: Low water plank 3
@@ -106,7 +106,7 @@ events:
   pages:
   - commands: []
   - cond: {self: A}
-    graphic: {tile: 4945}
+    graphic: {tile: 22817}
     commands: []
 - type: sign
   name: Road sign
@@ -206,7 +206,7 @@ events:
   name: HiddenItem (salt-barge wreck)
 - type: event
   name: Ring Boss
-  at: [56, 103]
+  at: [45, 101]
   pages:
   - graphic: {sprite: NPC 21, dir: down}
     trigger: action

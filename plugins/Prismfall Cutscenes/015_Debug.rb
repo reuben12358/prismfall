@@ -12,7 +12,7 @@ if defined?(MenuHandlers)
   MenuHandlers.add(:debug_menu, :prismfall_cutscenes_war, {
     "name"        => _INTL("War climax (pick outcome)"),
     "parent"      => :prismfall_cutscenes_menu,
-    "description" => _INTL("The Beam Clash on the Shattered Ice, any of the four outcomes."),
+    "description" => _INTL("The Beam Clash on the Glass Dunes, any of the four outcomes."),
     "effect"      => proc {
       variants = [:A, :A2, :B, :C]
       cmd = pbMessage(_INTL("Which outcome?"),

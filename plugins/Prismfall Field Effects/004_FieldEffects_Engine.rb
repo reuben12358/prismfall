@@ -832,12 +832,21 @@ module FieldEffects
   #=============================================================================
   def self.borrow_pool(battle, spec)
     cur = self.current(battle)
-    pool = (spec[:pool] == :all) ? self.ids : Array(spec[:pool])
+    pool = (spec[:pool] == :all) ? (self.map_borrow_pool || self.ids) : Array(spec[:pool])
     return pool.select do |id|
       next false if id == cur || spec[:exclude].include?(id)
       defn = self.get(id)
       next defn && !defn[:borrow]
     end
+  end
+
+  # The current map's MAP_BORROW_POOLS entry (registered fields only), or nil.
+  # Narrows only open pools (:all); fixed pools such as PRISM_ARENA's are kept.
+  def self.map_borrow_pool
+    return nil if MAP_BORROW_POOLS.empty? || !defined?($game_map) || !$game_map
+    list = Array(MAP_BORROW_POOLS[$game_map.map_id]).map { |id| self.normalize_id(id) }
+    list = list.select { |id| id != NONE && self.exists?(id) }
+    return (list.empty?) ? nil : list
   end
 
   def self.start_borrowing(battle)

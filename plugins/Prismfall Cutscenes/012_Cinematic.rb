@@ -187,6 +187,70 @@ module Prismfall
         return [spec(b, o, { :parallax => 1.0, :y => top * PX, :x => x0, :tile => o[:width].nil? && o[:pools].nil? })]
       end
 
+      # Desert dunes in perspective (the Glass Dunes, SPINE Rev 18): the grey
+      # Northern Sea along the horizon, then rows of dune ridges with a lit
+      # windward face and a shaded lee, bigger towards the viewer.
+      #   flood: [[x, y, rx, ry], ...] Kyogre's flood-sea (screen px), grey water with foam
+      #   palette: DUNES key (:dawn, :day, :glass)
+      DUNES = {
+        :dawn  => [[246, 236, 220], [226, 212, 190], [196, 178, 158], [158, 138, 124]],
+        :day   => [[252, 246, 232], [236, 226, 206], [212, 198, 174], [176, 158, 136]],
+        :glass => [[255, 255, 255], [226, 244, 250], [196, 228, 240], [150, 196, 220]]
+      }
+
+      def dunes(o, vw, vh, seed)
+        cols = o[:colors] || DUNES[o[:palette] || :dawn] || DUNES[:dawn]
+        top = v(o[:horizon] || 200)
+        x0 = o[:x] || 0
+        vw = v(o[:width]) if o[:width]
+        b = Bitmap.new(vw, vh - top + 16)
+        sea = o[:sea] || [92, 106, 124]
+        sea_h = v(o[:sea_height] || 12)
+        Pix.rect(b, 0, 0, vw, sea_h, Util.color(sea))
+        Pix.rect(b, 0, 2, vw, 1, Util.color(Util.mix(sea, [255, 255, 255], 0.25)))
+        Pix.rect(b, 0, sea_h, vw, 1, Util.color(Util.mix(sea, [255, 255, 255], 0.7)))       # surf
+        Pix.rect(b, 0, sea_h + 1, vw, b.height - sea_h - 1, Util.color(cols[1]))            # sand
+        Pix.rect(b, 0, sea_h + 1, vw, 1, Util.color(cols[3]))                               # wet sand
+        lit = Util.color(cols[0])
+        lee = Util.color(cols[2])
+        foot = Util.color(cols[3])
+        crest = Util.color(Util.mix(cols[0], [255, 255, 255], 0.5))
+        y = sea_h + 3
+        row = 0
+        while y < b.height - 2
+          h = 2 + row + (row * row * 0.25).round
+          x = -((Util.hash01(row, seed, 1) * 40).round)
+          i = 0
+          while x < vw
+            w = (h * (4.5 + (Util.hash01(row, i, seed) * 6))).round + 6
+            if Util.hash01(row, i, seed + 7) > 0.25
+              peak = x + (w * (0.3 + (Util.hash01(row, i, seed + 3) * 0.3))).round
+              yy = y + ((Util.hash01(row, i, seed + 4) * (1 + (h / 3))).round)
+              h.times do |j|
+                l = peak - ((peak - x) * (j + 1) / h)
+                r = peak + ((x + w - peak) * (j + 1) / h)
+                Pix.rect(b, l, yy + j, peak - l, 1, lit)
+                Pix.rect(b, peak, yy + j, r - peak, 1, lee)
+              end
+              Pix.rect(b, x, yy + h, w, 1, foot)
+              Pix.rect(b, peak - 1, yy, 2, 1, crest)
+            end
+            x += w - (h / 2)
+            i += 1
+          end
+          y += h + 1 + (row / 2)
+          row += 1
+        end
+        (o[:flood] || []).each do |p|
+          cx, cy, rx, ry = v(p[0] - x0), v(p[1]) - top, v(p[2]), v(p[3])
+          Pix.disc(b, cx, cy, rx, Util.color(sea), ry)
+          Pix.disc(b, cx, cy - (ry / 3), (rx * 0.7).round, Util.color(Util.mix(sea, [255, 255, 255], 0.12)), (ry * 0.5).round)
+          Pix.ring(b, cx, cy, rx, Util.color(Util.mix(sea, [255, 255, 255], 0.75)), 1, ry)
+          Pix.rect(b, cx - (rx / 4), 0, rx / 2, cy - ry + 2, Util.color(sea)) if o[:flood_channel]     # the channel from the sea
+        end
+        return [spec(b, o, { :parallax => 1.0, :y => top * PX, :x => x0, :tile => o[:width].nil? && o[:flood].nil? })]
+      end
+
       # Northern lights: hanging curtains fading upwards in dither steps.
       def aurora(o, vw, vh, seed)
         w = v(o[:width] || 320)

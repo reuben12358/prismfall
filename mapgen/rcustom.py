@@ -92,6 +92,26 @@ CHALK_RAMP = [(92, 90, 104), (128, 126, 136), (162, 160, 164), (190, 188, 184), 
 DUNE_RAMP = [(112, 84, 58), (146, 116, 80), (176, 148, 102), (200, 176, 126), (220, 200, 148), (234, 218, 170)]
 
 
+TALL_DYE = [('tall_r', (214, 64, 80)), ('tall_b', (72, 104, 214)), ('tall_y', (236, 198, 56))]
+
+
+def dyegrass(im, col):
+    """tall grass in flower: the tips of the blades (its two lightest greens) take the field's dye colour"""
+    px = im.load(); cols = {}
+    for yy in range(im.height):
+        for xx in range(im.width):
+            r, g, b, a = px[xx, yy]
+            if a: cols[(r, g, b)] = cols.get((r, g, b), 0) + 1
+    greens = sorted([c for c in cols if c[1] > c[0] and c[1] > c[2]], key=lambda c: sum(c))
+    tips = set(greens[-2:])
+    hi = tuple(min(255, int(v * 1.15) + 20) for v in col)
+    for yy in range(im.height):
+        for xx in range(im.width):
+            r, g, b, a = px[xx, yy]
+            if a and (r, g, b) in tips: px[xx, yy] = (hi if (xx + yy) % 3 == 0 else col) + (a,)
+    return im
+
+
 def chalkify(im, ramp=None):
     """recolour a cliff tile: browns / mauves -> the chalk ramp (dark crevices stay a cool grey); grass caps untouched"""
     px = im.load()
@@ -236,6 +256,14 @@ def main():
             sheet.paste(chalkify(tile.copy(), DUNE_RAMP if mode == 'dune' else None), ((k % 8) * 32, (k // 8) * 32))
             props[k] = (t['passages'][sid], t['priorities'][sid], t['terrain_tags'][sid] if t['terrain_tags'][sid] <= 16 else 0)
             chalk['%s:%d' % (key, sid)] = k; k += 1
+    dyed = {}                                              # map builder 10: the Dyers' Ford's madder / woad / weld fields
+    sh2 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGBA')
+    t126 = RC.RR.tileset('rejuvenation', 126)
+    for name, col in TALL_DYE:
+        i = 390 - 384; tile = sh2.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32)).copy()
+        sheet.paste(dyegrass(tile, col), ((k % 8) * 32, (k // 8) * 32))
+        props[k] = (t126['passages'][390], t126['priorities'][390], t126['terrain_tags'][390] if t126['terrain_tags'][390] <= 16 else 0)
+        dyed[name] = k; k += 1
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},
@@ -264,6 +292,7 @@ def main():
         out[n] = dict(w=w, h=h, layers=[[[base + t if t else 0 for t in row] for row in L] for L in lay], src=['pf33x', n])
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
     out['_chalk'] = {k2: base + v for k2, v in chalk.items()}
+    out['_dyegrass'] = {k2: base + v for k2, v in dyed.items()}
     r4 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Route 4.png')).convert('RGBA')
     for n, (c0, r0, w, h, top) in CHALK_STAMPS.items():
         lay = [[[0] * w for _ in range(h)] for _ in range(3)]

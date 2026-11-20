@@ -2,8 +2,9 @@
 # ASHEN_WASTE - "Cinderglass". The ID is kept (SPINE roster); the place is new.
 # A quenched volcano: magma set into black obsidian, steam vents and geysers
 # breaking through the glass, dunes of glass-grit, heat glowing underneath.
-# What VOLCANIC becomes when quenched, what DESERT becomes under searing heat,
-# and the field of the Cinderglass Barrens (Ashkaar-Ossaria borderland).
+# What VOLCANIC becomes when quenched, and the field of the Cinderglass Barrens
+# (Ashkaar-Ossaria borderland) and the Ashkaar Siege Camp. (A desert glassed by
+# searing heat is the GLASS_DUNES instead: sand glass, not volcanic glass.)
 #   * Geysers blow on a 3-round cycle (a quake sets them off at once): swimmers
 #     and fire Pokemon ride the steam, others get blasted.
 #   * Water on hot glass flashes into blinding steam; Scald-type moves boil.

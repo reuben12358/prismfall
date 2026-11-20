@@ -85,7 +85,9 @@ The Festival-week cap is 90 (Core `FESTIVAL_CAP`). **Harness finding:** an AI-pl
 Garchomp, Metagross, Tyranitar, Volcarona, Togekiss, EV-trained) won the nine bouts with **146 of 2,334 HP left**;
 six Lv 100 Snorlax lost at bout 4. A Z-move on its home field is a near one-shot: Moss's Bloom Doom (Flower Garden
 stage 3) took 73% of a Lv 100 Snorlax; Forte's Inferno Overdrive on Volcanic, with Flash Fire lit by the field,
-one-shot a Lv 95 Vaporeon **through the resist** in the real engine. The designer should tune with `run_winrates.rb`
+one-shot a Lv 95 Vaporeon **through the resist** in the real engine. In the real engine (AI on both sides) the same Lv 100
+team lost at bout 6, and six EV-trained Lv 100 legendaries (Arceus, Mewtwo, Kyogre, Groudon, Rayquaza, Lugia) won with
+four of them fainted. The designer should tune with `run_winrates.rb`
 (suggestions in REQUESTS: drop Forte's Flash Fire stack or the field's Flash Fire activation for this fight, 88 for
 bouts 1–8, Sitrus/Leftovers instead of nothing on the frailer ones).
 
@@ -108,6 +110,11 @@ quest needs, and downloaded plugin code is not run in this workspace. So Z-Power
   1/4 damage. Status moves don't become Z-moves (no Z-status effects; out of scope).
 - **Eevium Z**: Eevee's Last Resort becomes **Extreme Evoboost** (+2 Attack, Defense, Sp. Atk, Sp. Def, Speed), usable
   from turn 1 (Last Resort's own condition doesn't apply).
+- **The shipped base's Generation 9 Pack runs with `Settings::CHAMPIONS_MECHANICS = true`**, which locks Last Resort until
+  the user's other moves have been used. A base move that is about to become a *status* Z-move may still be chosen (only
+  that rule is skipped: the plugin calls the chain below it, `paldea_pbCanChooseMove?`); if the player then answers No,
+  the choice is undone with the pack's own "This move can't be used!". Found in the real engine, where Amen first never
+  chose Extreme Evoboost; the headless harness's older Gen 9 Pack lacks the rule, so the test emulates it.
 - Once per trainer per battle; the Z-Power is spent when the Z-move is actually unleashed (a flinch, sleep or
   disobedience keeps it). The base move pays 1 PP. Encore, Disable, Choice lock, Copycat and Last Resort see the base move.
 - Crystals are held, never used up, and can't be knocked off, stolen, swapped or flung.
@@ -139,5 +146,13 @@ quest needs, and downloaded plugin code is not run in this workspace. So Z-Power
   (all ten quests driven through their map-event rows, out of gym order; Carol locked, then "not yet", then last; the
   verses told in help order; a lost and a won 9-bout gauntlet with order, fields, Z-moves and carried-over HP checked;
   the reward; the reward Eevee's Extreme Evoboost on the Grand Stage).
-- Real engine (`tools/harness/playtest/run_zpower.sh`, own game copy and display): `zpower` (the player's Fight menu box
-  in EBDX, Hydro Vortex) and `zgauntlet` (Vesper's event script, the nine bouts, the reward).
+  Plus the Champions rule (Amen still opens with Extreme Evoboost; the player's locked Last Resort -> Yes -> Extreme
+  Evoboost; No -> undone). **142/142.**
+- Real engine (`tools/harness/playtest/run_zpower.sh`, mkxp-z + EBDX, own game copy and display, the bot only presses
+  buttons): `zpower`: the player's Fight menu -> Scald -> the "Unleash ... Z-Power?" box on EBDX -> Yes -> Hydro Vortex
+  (won vs Lento). `zgauntlet`: Vesper's event script with the help order Noct > Lyra > Sona > Aria > Lento > Cadence >
+  Forte > Carol: every bout on its field, HP carried over, Black Hole Eclipse, Bloom Doom, Shattered Psyche, Hydro Vortex,
+  Gigavolt Havoc, Twinkle Tackle unleashed (Glaceon and Flareon chose theirs and fainted first); with
+  `PLAYBOT_ZP_TEAM=legends` all nine won and the reward arrived (Eevee Lv 70 with Last Resort, nickname prompt, the Eevium
+  Z, the ring, S177). `zevo` (Champions rule live): the player's Eevee and Amen both open with Extreme Evoboost.
+  Screenshots: `$RUN/zpower_out/<session>/shots/`.

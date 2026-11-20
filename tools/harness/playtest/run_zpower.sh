@@ -10,6 +10,7 @@
 #   bash run_zpower.sh install     # first Debug boot (compiles), New Game -> install offer -> quit
 #   bash run_zpower.sh zpower      # the player's own Fight menu: Scald -> "Unleash ... Z-Power?" -> Yes -> Hydro Vortex
 #   bash run_zpower.sh zgauntlet   # Vesper's event script: the 9-bout gauntlet in a set help order (AI plays the player)
+#   bash run_zpower.sh zevo        # the player's Eevee: locked Last Resort -> "Unleash ... Z-Power?" -> Extreme Evoboost
 #   bash run_zpower.sh stop        # stops only this copy's engine
 #===============================================================================
 set -euo pipefail
@@ -70,6 +71,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|zpower|zgauntlet) session "$1" ;;
-  *) echo "usage: $0 assemble | install | zpower | zgauntlet | stop"; exit 1 ;;
+  install|zpower|zgauntlet|zevo) session "$1" ;;
+  *) echo "usage: $0 assemble | install | zpower | zgauntlet | zevo | stop"; exit 1 ;;
 esac
