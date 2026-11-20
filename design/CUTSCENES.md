@@ -261,15 +261,17 @@ keeps updating underneath and no background is needed. Actors can follow map eve
 
 ## 4. The war climax
 
-`:WAR_CLIMAX` follows story/13_CUTSCENES.md WAR-1 shot by shot (about 64 s, including a slow-motion beat; the storyboard's 95 s was a suggestion).
-Isenmar and Kyogre are on the left, Ashkaar and Reshiram on the right.
+`:WAR_CLIMAX` "The Beam Clash on the Glass Dunes" follows story/13_CUTSCENES.md WAR-1 shot by shot (about 72 s,
+including a slow-motion beat; the storyboard's 95 s was a suggestion). Since SPINE Rev 18 the war is fought on land,
+on the Glass Dunes (map 926) in Ossaria's western desert: Isenmar's host from Skaldfast on the left (west), Ashkaar's
+legions from the Siege Camp on the right (east), the grey Northern Sea along the top.
 
 | Variable | Values | Default source |
 |---|---|---|
 | `variant:` | `:A` WAR_STOPPED, `:A2` WAR_BOTH_BROKEN, `:B` WAR_ASHKAAR_WON, `:C` WAR_ISENMAR_WON | `Prismfall::Narrative.flag(...)`; `:A` without Core |
-| `legends:` | `false` = the Wardens' aces fight instead | false when `choice(:war_legend) == :neither` |
+| `legends:` | `false` = the Wardens' aces fight instead, and there is no flood | false when `choice(:war_legend) == :neither` |
 | `water_legend:` / `fire_legend:` | placeholder species (`:KYOGRE` / `:RESHIRAM`) | story team can swap |
-| `water_mon:` / `fire_mon:` | aces when `legends: false` (`:MAMOSWINE` / `:SALAMENCE`) | |
+| `water_mon:` / `fire_mon:` | aces when `legends: false`: on-map `:GYARADOS` (Marisol's, out of the trench-lines' meltwater) / `:SALAMENCE`; procedural `:MAMOSWINE` / `:SALAMENCE` | |
 | `starter_charset:` | charset for the starter in shot 9A | `"Followers/EEVEE"` |
 | `overpower:` | `true` with `:B`/`:C`: the winning kingdom's beam swallows the other and whites out the screen instead of the clash falling silent. Not in the storyboard, so off by default | `false` |
 
@@ -278,37 +280,52 @@ Audio follows design/AUDIO.md: `War - Battlefield` → 0.5 s fade → `War - Bea
 at the break → `War - Aftermath`.
 
 Differences from the storyboard, all because of engine limits:
-- Shot 4's split screen is one wide shot with both charge-ups (there is no split-screen primitive).
+- Shot 4's split screen is two cuts (there is no split-screen primitive).
 - "Heat-haze shader" and per-half screen tints are a whole-screen tone.
-- Shots 9B/9C use a Salamence battler / a code-drawn ship as the mount.
-- Shot 14's ridge is the same backdrop far to the side. A dedicated backdrop image would be better.
+- No-legend variant: there is no overworld Mamoswine sheet in the reference games, so the on-map version uses
+  Marisol's Gyarados (the storyboard's alternative); it rises at Kyogre's spot rather than in a trench-line.
 - **Confirmed by the story team (2026-11-19):** "`:war_legend` kept the legendaries away" means `:neither`, and only `:neither` (14_WAR_AND_BLESSING Part B).
 
 ### On-map staging (current `:WAR_CLIMAX`)
-**Pending restage (SPINE Rev 18):** the war is now fought on land, on the Glass Dunes in Ossaria; story/13_CUTSCENES.md WAR-1 is rewritten for the desert and the changes are listed in mapgen/REQUESTS.md ("From story editor (geo v2)"). The text below describes the current sea-ice build.
 `013_Scenes_War_OnMap.rb` stages the scene the way Rejuvenation/Reborn do: an overworld map, overworld-scale
-legendaries acting through sheet frames, armies as charset sprites, effect sheets along the beam path.
+legendaries acting through sheet frames, armies as charset blocks under banners, effect sheets along the beam path.
 - Art lives in the plugin overlay `Plugins/Prismfall Cutscenes/Graphics/{Characters,Animations,Pictures}/pfw_*`.
   The loader looks there after the game's own `Graphics/`, so nothing needs copying. Rebuild it with
-  `python3 -I tools/build_war_assets.py` (reads /home/claude/ref/games, origins in docs/CREDITS.md).
-- The stage is a picture, `Graphics/Pictures/pfw_shattered_ice.png` (64×24 tiles, Rejuvenation's frozen Kristiline
-  tileset). When map 926 exists, export it to that file name or change `WAR_STAGE` and the coordinates at the top
-  of the scene (`water_at`, `fire_at`, `clash_c`, `ground`).
-- Kyogre: `pfw_kyogre_rise` (emerge/sink flipbooks) then `pfw_kyogre_primal` (front-facing, markings glow).
-  Reshiram: `pfw_reshiram` charset, descends walking left. No battle sprites are used.
-- If the stage picture is missing, `:WAR_CLIMAX` plays `:WAR_CLIMAX_PROCEDURAL` (the older code-drawn version; the
-  storyboard differences listed above and the section below describe that one).
-- Polish pass (2026-11-19): the sea ice is the map team's pale soft ice (`rdraw.soft_ice`, cracks, drifts, floes)
-  painted over the Kristiline render; Kyogre turns side-on for the beam (`pfw_kyogre_side`, a kitbash of Reborn's
-  overworld Kyogre in the Primal palette); the clash point is `pfw_fx_clash_core` (blue | white-hot | orange) with
-  ice chunks and steam thrown out (`spray:`); the dome and the ice fracture are sheets (`pfw_fx_dome`,
-  `pfw_fx_fracture`); each army is two drilled blocks under banners (`army ..., blocks: 2, gap: 56`).
-- Real-engine capture: `bash tools/engine_capture/capture.sh assemble`, then
+  `python3 -I tools/build_war_assets.py` (characters, beams, clash cells; it also runs `tools/build_desert.py` for
+  the stage, flood, glass and bone-carters). It reads /home/claude/ref/games; origins are in docs/CREDITS.md.
+- **The stage** is a picture, `Graphics/Pictures/pfw_glass_dunes.png` (64×24 tiles): Reborn's Twilight Desert dune
+  layer recoloured bone-white, the Northern Sea from Rejuvenation's Zor Coast autotile (greyed), Skaldfast from
+  Rejuvenation's Castle Weiss wall (rime-tinted) under a Kristiline ice cliff, the Rimed Sands' white trench-lines,
+  the Siege Camp (Badlands tents and stake palisade on an earthwork) and a sandstone mesa (Zorrialyn Desert) for
+  Meridian. `pfw_glass_dunes.json` records the boxes. When map 926 exists, export it to that file name, or change
+  `WAR_STAGE` and the coordinates at the top of the scene (`water_at`, `fire_at`, `clash_c`, `ground`, `gate`,
+  `crest`, `mesa`, `flood_at`).
+- **The flood-sea** is `pfw_fx_flood` (6 cells of 768×576, 3×2): the sea pouring south over the dunes into the
+  hollow round Kyogre. It is an actor (`:flood`, z 455, under every figure) flipbooked 0→5 in shot 2 and 5→0 in shot
+  12 as Kyogre sinks.
+- **The glass:** `pfw_fx_glass_patch` (Blue Flare's trail, seven patches laid as the beam runs out), `pfw_fx_glass_ring`
+  (the wet sand glassing round the clash, hot to cool, replaces the ice fracture), `pfw_fx_glass_wave` (a flood wave
+  curling, then setting into glass; it stays to the end), and the bone-carters' banner tinted to glass in shot 8.
+  All of them `stay: :forever`, so shots 13 and 15 stand on the glass plain.
+- Kyogre: `pfw_kyogre_rise` (emerge/sink flipbooks) and `pfw_kyogre_primal` (front-facing, markings glow), then
+  `pfw_kyogre_side` for the beam (a kitbash of Reborn's overworld Kyogre in the Primal palette). Reshiram:
+  `pfw_reshiram` charset, descends walking left. No battle sprites are used.
+- The clash point is `pfw_fx_clash_core` (blue | white-hot | orange) with chunks and steam thrown out (`spray:`);
+  the dome is `pfw_fx_dome`; each army is two drilled blocks under banners (`army ..., blocks: 2, gap: 56`).
+- People and props: `pfw_bone_carter` (the bone-carters, who flee when the flood comes and walk back out in shot 15
+  to raise a new white banner), `pfw_banner_carters`, `pfw_sled` (Isenmar's ice-sledges; Eirik stands on the lead
+  one; in 9C it is Marisol's sled-boat riding the flood), `pfw_gyarados`.
+- 13B/C: the losing host breaks and the winner's banners go up over Skaldfast (B) or over the Siege Camp (C).
+- If the stage picture is missing, `:WAR_CLIMAX` plays `:WAR_CLIMAX_PROCEDURAL` (`013_Scenes_War.rb`, code-drawn:
+  `background :dunes` with a flood pool, the same shots and lines).
+- **Real-engine capture:** `bash tools/engine_capture/capture.sh assemble`, then
   `CUT_VARS=variant=A CUT_EVERY=3 bash tools/engine_capture/capture.sh run WAR_CLIMAX`. It reuses the mkxp-z binary
   built by tools/harness/visual, works in its own copy (`/tmp/pfcut_run`), locks game time to 1/60 s per frame and
   writes PNG frames plus `frames.tsv`. Works for any scene id.
-- Previews (real engine): docs/cutscene_previews/war_climax_engine_sheet.png, war_climax_engine_full.mp4,
-  war_climax_engine_clash_slow.mp4, war_climax_engine_clash.gif.
+- Previews (real engine): docs/cutscene_previews/war_climax_dunes_engine_sheet.png, war_climax_dunes_engine_full.mp4,
+  war_climax_dunes_engine_slow.mp4 (flood and clash at half speed), war_climax_dunes_engine_flood.gif,
+  war_climax_dunes_engine_clash.gif. The `war_climax_engine_*` / `war_climax_onmap_*` files are the superseded
+  sea-ice build.
 
 ### Legendary acting sheets (procedural version)
 If `Graphics/Characters/pkmn_kyogre_war.png` / `pkmn_reshiram_war.png` exist (named after the species in use), the war

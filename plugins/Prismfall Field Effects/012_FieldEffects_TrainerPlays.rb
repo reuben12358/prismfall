@@ -28,7 +28,8 @@ module FieldEffects
       # Wardens
       :LEADER_DORIAN    => { [:GRAND_STAGE, 2] => 10, [:GRAND_STAGE, 3] => 10, [:GRAND_STAGE, 1] => -10 },
       :LEADER_TAMSIN    => { [:WILDFIRE, 2] => 20, :WILDFIRE => -25 },
-      :LEADER_MARISOL   => { :UNDERWATER => 22, :WATER_SURFACE => -30 },
+      :LEADER_MARISOL   => { :UNDERWATER => 22, :WATER_SURFACE => -30,
+                             :FLOODED_DUNES => 18, :GLASS_DUNES => -14 },   # Ch19 war partner (v19) on the Glass Dunes
       :LEADER_ROOK      => { [:NEON_GRID, 1] => 22, [:NEON_GRID, 2] => -12 },
       :LEADER_SAHAR     => { [:DESERT, 1] => 22, [:DESERT, 2] => -20 },
       :LEADER_CORVIN    => { :WASTELAND => 20, :WATER_SURFACE => -25 },
@@ -43,7 +44,8 @@ module FieldEffects
       :LEADER_MAGNUS    => { :FACTORY => 25, :SCRAPYARD => -25 },
       :LEADER_NYX       => { [:NEW_MOON, 2] => 16, [:NEW_MOON, 1] => 12, [:NEW_MOON, 3] => -20 },
       :LEADER_CELESTINE => { :FAIRY_TALE => 22, :DRAGONS_DEN => -20 },
-      :LEADER_SIGRUN    => { :DRAGONS_DEN => 22, [:DRAGONS_DEN, 2] => 12, :CAVE => -15, :FAIRY_TALE => -20 },
+      :LEADER_SIGRUN    => { :DRAGONS_DEN => 22, [:DRAGONS_DEN, 2] => 12, :CAVE => -15, :FAIRY_TALE => -20,
+                             :GLASS_DUNES => 14, :FLOODED_DUNES => -14 },   # Ch19 war partner (v19)
       # Rivals
       :RIVAL_JUNO       => { :FLOWER_GARDEN => 18, :MEADOW => 18, :WATER_SURFACE => 30, :WILDFIRE => -25 },
       :RIVAL_KESTREL    => { :DRAGONS_DEN => 16 },
@@ -55,6 +57,16 @@ module FieldEffects
       :MERIDIAN_QUENT     => { :ASHEN_WASTE => 22, :FACTORY => 14 },   # no Scrapyard bonus: Explosion hits his own partner in the Ch16 double
       :MERIDIAN_MARCHETTI => { :DARK_CRYSTAL => 22 },
       :ARCHSEER_DASK      => { :MINDSCAPE => 22, :INVERSE => 22 },
+      # The Ashkaar-Isenmar war (Ch19; fields team's suggestion, mapgen/REQUESTS.md "the Glass Dunes and the Steamline").
+      # Isenmar brings the sea (rain -> Superbloom -> the flood; a frozen flood is home too), Ashkaar the glass (two
+      # searing moves; Lava Plume x3 re-melts Cinderglass on 924). Without these no captain changed the field in the
+      # harness; with them Torkoal opens with Eruption. A snuffed searing move still glasses (:even_if_failed).
+      :ISENMAR_SOLDIER_M  => { :FLOODED_DUNES => 20, :FROZEN_LAKE => 16, [:DESERT, 2] => 8, :GLASS_DUNES => -20 },
+      :ISENMAR_SOLDIER_F  => { :FLOODED_DUNES => 20, :FROZEN_LAKE => 16, [:DESERT, 2] => 8, :GLASS_DUNES => -20 },
+      :ISENMAR_OFFICER    => { :FLOODED_DUNES => 20, :FROZEN_LAKE => 16, [:DESERT, 2] => 8, :GLASS_DUNES => -20 },
+      :ASHKAAR_SOLDIER_M  => { :GLASS_DUNES => 20, :VOLCANIC => 16, :FLOODED_DUNES => -20, [:DESERT, 2] => -10 },
+      :ASHKAAR_SOLDIER_F  => { :GLASS_DUNES => 20, :VOLCANIC => 16, :FLOODED_DUNES => -20, [:DESERT, 2] => -10 },
+      :ASHKAAR_OFFICER    => { :GLASS_DUNES => 20, :VOLCANIC => 16, :FLOODED_DUNES => -20, [:DESERT, 2] => -10 },
       # The Eevee Octave
       :OCTAVE_SINGER      => { :UNDERWATER => 18, :WATER_SURFACE => -25, :INVERSE => 22, [:NEW_MOON, 2] => 14,
                                [:NEON_GRID, 1] => 18, :VOLCANIC => 18 },
@@ -76,15 +88,9 @@ module FieldEffects
       :MERIDIAN_QUENT   => { :TRICKROOM => [20, :first_turns] }
     }
 
-    ENTRY_FIELDS = {
-      :OCTAVE_VESPER => {
-        :versions => [2],
-        :fields   => { :VAPOREON => :WATER_SURFACE, :JOLTEON => :NEON_GRID, :FLAREON => :VOLCANIC,
-                       :ESPEON => :MINDSCAPE, :UMBREON => :NEW_MOON, :SYLVEON => :FAIRY_TALE,
-                       :LEAFEON => [:FLOWER_GARDEN, 3], :GLACEON => :FROZEN_LAKE, :EEVEE => :GRAND_STAGE },
-        :message  => "The Choir gardens answer {1}: the {2} it was raised beside rises around it!"
-      }
-    }
+    # The Eevee Octave's old six-Eeveelution finale (Vesper v2) used this; SPINE Rev 19 retired it (Vesper v60 is one
+    # Eevee on the Grand Stage, and each gauntlet bout's field is set by the quest). Kept for future teams.
+    ENTRY_FIELDS = {}
 
     WEATHER_CODES = { "StartSunWeather" => [:Sun, :HarshSun], "StartRainWeather" => [:Rain, :HeavyRain],
                       "StartSandstormWeather" => [:Sandstorm], "StartHailWeather" => [:Hail] }.freeze

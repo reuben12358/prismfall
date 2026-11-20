@@ -215,10 +215,12 @@ Team Aqua's Hideout for the open asset repo; the Pokémon Tectonic team for open
 
 ## War climax cutscene art (temporary, personal build only)
 
-Files under `plugins/Prismfall Cutscenes/Graphics/` (prefix `pfw_`), copied or recoloured from the reference games by
-`plugins/Prismfall Cutscenes/tools/build_war_assets.py`. Pokémon Rejuvenation (Jan and team) and Pokémon Reborn (Amethyst and
-team); the `PRAS-` animation sheets are from the Pokémon Reborn Animation Squad. These are stand-ins for a private hobby
-build and should be replaced or cleared with their authors before any release.
+Files under `plugins/Prismfall Cutscenes/Graphics/` (prefix `pfw_`), copied, recoloured or composed from the reference
+games by `plugins/Prismfall Cutscenes/tools/build_war_assets.py` and `tools/build_desert.py`. Pokémon Rejuvenation (Jan
+and team) and Pokémon Reborn (Amethyst and team); the `PRAS-` animation sheets are from the Pokémon Reborn Animation
+Squad. The Glass Dunes stage uses tiles from Reborn's Twilight Desert and Rejuvenation's Zor Coast, Castle Weiss,
+Kristiline (Frozen) and Badlands - Desert tilesets. These are stand-ins for a private hobby build and should be
+replaced or cleared with their authors before any release.
 
 | File | Source | Changes |
 |---|---|---|
@@ -250,6 +252,13 @@ build and should be replaced or cleared with their authors before any release.
 | `Animations/pfw_fx_sky_burn.png` | Rejuvenation: Graphics/Animations/PRAS- Light that Burns the Sky.png | 5x5 cells of 192: flame grow 5-9, die 10-12 |
 | `Animations/pfw_fx_clash_core.png` | Rejuvenation: Graphics/Animations/PRAS- Fusion Flare.png + PRAS- Ice Burn.png | kitbash: sun cell re-ramped blue | white-hot | orange with the ice star over it; 4x1 cells of 192 |
 | `Animations/pfw_fx_ice_chunks.png` | Rejuvenation: Graphics/Animations/PRAS- Ice Burn.png | 4x1 cells of 192: ice boulder, chunk, two shards (thrown from the clash) |
-| `Animations/pfw_fx_fracture.png` | own art (drawn by tools/build_war_assets.py in the rdraw tile style) | 4x1 cells of 448x224: the ice cracking outward under the clash |
 | `Animations/pfw_fx_dome.png` | own art (drawn by tools/build_war_assets.py) | 4x1 cells of 480x300: Bleed-light dome with shimmer; anchor = ground centre at (240, 236) in the cell |
-| `Pictures/pfw_shattered_ice.png` | Rejuvenation: tileset 'Kristiline Town (Frozen)' + autotiles, tiles from Map328 (Kristiline Town); ice from Prismfall mapgen/rdraw.py | composed 64x24-tile frozen strait; sea ice repainted with the map team's pale soft ice, cracks, drifts and floes (temporary stage until map 926 exists) |
+| `Pictures/pfw_glass_dunes.png` | Reborn: Map841 (Twilight Desert) dune layer + Tileset 'Desert'; Rejuvenation: Map631 (Castle Weiss) wall, Tileset 'Kristiline Town (Frozen)', Map373 (Zorrialyn Desert) mesa, Tileset 'Badlands - Desert' tents, palisade, skulls, rocks, Zor Coast sea autotile | composed 64x24-tile Glass Dunes: bone-white dunes, grey Northern Sea, Skaldfast (rime-tinted), the Rimed Sands' trench-lines, the Siege Camp; temporary stage for :WAR_CLIMAX until map 926 exists |
+| `Animations/pfw_fx_flood.png` | Rejuvenation: Tileset 154 (Zor Coast) 'Sea' autotile | 6 frames (3x2 cells of 768x576): the flood-sea rolling south over the dunes, greyed, own foam |
+| `Animations/pfw_fx_glass_ring.png` | own art (tools/build_desert.py) | 4x1 cells of 448x224: sand glassing outward round the clash, hot to cool |
+| `Animations/pfw_fx_glass_patch.png` | own art (tools/build_desert.py) | 4x1 cells of 64x32: one patch of the glass trail under Blue Flare (hot -> glass) |
+| `Animations/pfw_fx_glass_wave.png` | own art (tools/build_desert.py) | 6x1 cells of 128x96: a flood wave curling (0-2), then setting into glass (3-5) |
+| `Characters/pfw_bone_carter.png` | Rejuvenation: Graphics/Characters/Grunt_1.png | recoloured bone-white (Ossaria's bone-carters) |
+| `Characters/pfw_banner_carters.png` | Prismfall mapgen/rdraw.py banner() | own art, 4x scale (64x128): the bone-carters' white banner |
+| `Characters/pfw_sled.png` | Prismfall mapgen/rdraw.py sled() | own art, 2x scale (64x32): an Isenmar ice-sledge |
+| `Characters/pfw_gyarados.png` | Rejuvenation: Graphics/Characters/pkmn_gyarados.png | 4x4 overworld follower sprite (Marisol's Gyarados, no-legend variant) |

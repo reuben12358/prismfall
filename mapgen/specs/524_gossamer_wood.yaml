@@ -1,4 +1,4 @@
-# Gossamer Wood (524). WRITTEN BY layouts/routes_early.py - edit that script.
+# Gossamer Wood (524). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 524
 name: Gossamer Wood
 parent: 0
@@ -10,13 +10,76 @@ biome: forest
 field: SILKWOOD
 tone: [-28, -8, -30, 25]
 fog: {name: prismfall_spores, opacity: 40, blend: 1, zoom: 100, sx: 1, sy: -1}
+walk_from:
+- [78, 86]
+- [1, 52]
 connections:
 - {dir: W, offset: 50, to: 540, to_offset: 30}
-walk_from:
-- [1, 52]
 raw: data/raw/524.npy
 tileset: 53
 events:
+- type: event
+  name: Wood entry 1
+  at: [4, 50]
+  pages: &id001
+  - cond: {switch: CH1_ORCHARD_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[524, 0, 'ENTRY']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
+        a week!'
+      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
+      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
+- type: event
+  name: Wood entry 2
+  at: [4, 51]
+  pages: *id001
+- type: event
+  name: Wood entry 3
+  at: [4, 52]
+  pages: *id001
+- type: event
+  name: Wood entry 4
+  at: [4, 53]
+  pages: *id001
+- type: event
+  name: Accord cordon 1
+  at: [40, 104]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
+      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
+  - cond:
+      var: [BRIARWICK_GLASSWOOD, 1]
+    through: true
+    commands: []
+- type: event
+  name: Accord cordon 2
+  at: [41, 104]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
+      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
+  - cond:
+      var: [BRIARWICK_GLASSWOOD, 1]
+    through: true
+    commands: []
+- type: event
+  name: Accord cordon 3
+  at: [42, 104]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
+      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
+  - cond:
+      var: [BRIARWICK_GLASSWOOD, 1]
+    through: true
+    commands: []
 - type: warp
   name: To Windfall Row
   at: [41, 109]
@@ -51,8 +114,23 @@ events:
   link: WOOD_DEEP
   arrive: [88, 48, left]
 - type: event
+  name: Silk seam
+  at: [74, 80]
+  pages:
+  - graphic: {tile: 17758}
+    trigger: action
+    commands:
+    - if: PBDayNight.isNight?
+      then:
+      - The silk wall has loosened in the dark. It parts like a curtain.
+      - selfswitch: [A, true]
+      else: ['A wall of silk, tight as a drum. At night, the weavers say, the seams unpick themselves.']
+  - cond: {self: A}
+    through: true
+    commands: []
+- type: event
   name: Silk wall
-  at: [50, 43]
+  at: [31, 25]
   pages:
   - commands: []
   - graphic: {tile: 17758}
@@ -62,7 +140,7 @@ events:
     - A wall of silk, tight as a drum. Something with a horn could tear it.
 - type: event
   name: Fallen log
-  at: [24, 92]
+  at: [20, 87]
   pages:
   - commands: []
   - graphic: {tile: 19313}
@@ -71,67 +149,26 @@ events:
     - {comment: 'Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir'}
     - A fallen log across the path. Something with pincers could crush it.
 - type: event
-  name: Wood entry 1
-  at: [4, 49]
-  pages: &id001
+  name: Juno at the Veil 1
+  at: [79, 47]
+  pages: &id002
   - cond: {switch: CH1_ORCHARD_DONE}
     trigger: touch
     commands:
-    - if: $game_self_switches[[524, 0, 'ENTRY']]
+    - if: $game_self_switches[[524, 0, 'GLASS']]
       then: []
       else:
-      - '\pf[JUNO,happy]Juno: Silk-moths! The Insect Plate''s somewhere under Briarwick, and it makes the silk never tangle. Ever! You could knot it for
-        a week!'
-      - 'FIELD NOTES: SILKWOOD - Bug moves bite deeper. Webs slow the careless. Fire here is rude and effective.'
-      - {script: '$game_self_switches[[524, 0, ''ENTRY'']] = true'}
+      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
+      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
+      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
 - type: event
-  name: Wood entry 2
-  at: [3, 51]
-  pages: *id001
+  name: Juno at the Veil 2
+  at: [79, 48]
+  pages: *id002
 - type: event
-  name: Wood entry 3
-  at: [3, 52]
-  pages: *id001
-- type: event
-  name: Wood entry 4
-  at: [3, 53]
-  pages: *id001
-- type: event
-  name: Accord cordon 1
-  at: [40, 103]
-  pages:
-  - graphic: {tile: 18119}
-    trigger: action
-    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
-      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
-  - cond:
-      var: [BRIARWICK_GLASSWOOD, 1]
-    through: true
-    commands: []
-- type: event
-  name: Accord cordon 2
-  at: [41, 103]
-  pages:
-  - graphic: {tile: 18119}
-    trigger: action
-    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
-      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
-  - cond:
-      var: [BRIARWICK_GLASSWOOD, 1]
-    through: true
-    commands: []
-- type: event
-  name: Accord cordon 3
-  at: [42, 103]
-  pages:
-  - graphic: {tile: 18119}
-    trigger: action
-    commands: ['ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
-      '\pf[JUNO,sad]Juno: That''s the way I used to come. Four hours with Parsnip. Now it''s two days and a pageant.']
-  - cond:
-      var: [BRIARWICK_GLASSWOOD, 1]
-    through: true
-    commands: []
+  name: Juno at the Veil 3
+  at: [79, 49]
+  pages: *id002
 - type: sign
   name: Cordon notice
   at: [43, 103]
@@ -139,20 +176,20 @@ events:
   post: false
 - type: npc
   name: Silk-picker
-  at: [54, 46]
+  at: [66, 48]
   sprite: NPC 11
   dir: up
   move: random
   text: 'Silk-picker: Don''t cut the low strands, they''re this year''s. Cut the high ones. No, higher. No— you know what, I''ll do it.'
 - type: npc
   name: Old Weaver
-  at: [30, 62]
+  at: [18, 64]
   sprite: NPC 13
   dir: down
   text: 'Old Weaver: Sixty years I''ve walked this wood. This spring it rings. Hear it? East. Like someone tapping a glass.'
 - type: event
   name: Shrine stone
-  at: [16, 12]
+  at: [12, 8]
   pages:
   - trigger: action
     commands: ['A small mossy shrine stone. A carving of three beasts chasing a masked figure. Someone has left a honey bun in front of the masked one,
@@ -166,7 +203,7 @@ events:
     move: fixed
     commands: ['Kestrel: Briarwick''s just ahead. Try not to get lost in the webs. ...Not that I''d come looking.']
 - type: trainer
-  at: [38, 32]
+  at: [35, 32]
   sight: 4
   dir: right
   sprite: trainer_TWINS
@@ -175,7 +212,7 @@ events:
   after: We lose together.
   rules: [setBattleRule("double")]
 - type: trainer
-  at: [30, 70]
+  at: [26, 68]
   sight: 4
   dir: down
   sprite: trainer_BUGCATCHER
@@ -183,7 +220,7 @@ events:
   intro: My bugs love the silk here!
   after: Careful in the webs past here!
 - type: trainer
-  at: [46, 46]
+  at: [46, 45]
   sight: 4
   dir: left
   sprite: trainer_BUGCATCHER
@@ -191,7 +228,7 @@ events:
   intro: You walked right into my web!
   after: The wood's full of better bugs than mine, huh.
 - type: trainer
-  at: [40, 18]
+  at: [40, 16]
   sight: 4
   dir: down
   sprite: trainer_AROMALADY
@@ -207,20 +244,20 @@ events:
   intro: Camping in Gossamer? Battle first, questions later!
   after: Lost to a tourist. Don't tell anyone.
 - type: item
-  at: [70, 18]
+  at: [78, 14]
   item: TM19
 - type: item
   at: [8, 82]
   item: REPEL
 - type: item
-  at: [62, 50]
+  at: [74, 50]
   item: POTION
 - type: item
-  at: [34, 34]
+  at: [33, 36]
   item: ETHER
 - type: event
   name: HiddenItem
-  at: [22, 16]
+  at: [18, 12]
   pages:
   - commands:
     - if: pbItemBall(:NETBALL, 2)
@@ -231,13 +268,13 @@ events:
   - cond: {self: A}
 - type: event
   name: Cocoon grove
-  at: [12, 78]
+  at: [12, 77]
   pages:
   - trigger: action
     commands: ['A grove of silk cocoons the size of lanterns, hung in rows. Each has a weaver''s knot-mark tied to it.']
 - type: event
   name: Weaver (harvest)
-  at: [16, 82]
+  at: [16, 81]
   pages:
   - graphic: {sprite: NPC 13, dir: down}
     trigger: action
@@ -245,49 +282,49 @@ events:
     commands: ['Weaver: One cocoon in three. Always leave two. The wood counts.']
 - type: event
   name: Weaver (racks)
-  at: [8, 84]
+  at: [8, 83]
   pages:
   - graphic: {sprite: NPC 27, dir: down}
     trigger: action
     move: fixed
     commands: ['Weaver: The racks dry the silk in the dark. Sun makes it brittle. Like Kestrel.']
 - type: event
+  name: Weaver (spool)
+  at: [66, 56]
+  pages:
+  - graphic: {sprite: NPC 18, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Weaver: The Weft Bridge? Spun in my great-grandmother''s day. Every guild in Briarwick gave a thread. It''s stronger than stone. It''s ruder
+        than stone, too. Mind the bounce.']
+- type: event
   name: Mushroom ring
-  at: [18, 15]
+  at: [14, 11]
   pages:
   - trigger: action
     commands: ['A ring of pale mushrooms. At night, they say, it glows, and the Morelull dance.']
 - type: event
   name: Monkey shrine
-  at: [20, 12]
+  at: [19, 9]
   pages:
   - trigger: action
     commands:
     - {script: 'pf_trial_talk(:SHRINE_WOOD)'}
 - type: event
-  name: Fallen giant
-  at: [60, 64]
+  name: The Weft Bridge
+  at: [54, 47]
   pages:
   - trigger: action
-    commands: ['A fallen giant tree, hollow end to end. The weavers use it as a shortcut. The Venonat use it as a hotel.']
+    commands: ['THE WEFT BRIDGE. A rope of spun silk as thick as a road, woven by every guild in Briarwick. It hums when you walk on it.']
 - type: event
-  name: Silk seam
-  at: [74, 79]
+  name: Fallen giant
+  at: [41, 76]
   pages:
-  - graphic: {tile: 17758}
-    trigger: action
-    commands:
-    - if: PBDayNight.isNight?
-      then:
-      - The silk wall has loosened in the dark. It parts like a curtain.
-      - selfswitch: [A, true]
-      else: ['A wall of silk, tight as a drum. At night, the weavers say, the seams unpick themselves.']
-  - cond: {self: A}
-    through: true
-    commands: []
+  - trigger: action
+    commands: ['A fallen giant tree, hollow end to end, lying across the stream. The weavers use it as a bridge. The Venonat use it as a hotel.']
 - type: event
   name: Sap tree duel
-  at: [78, 84]
+  at: [78, 86]
   pages:
   - commands: []
   - graphic: {sprite: Followers/HERACROSS, dir: left}
@@ -297,33 +334,12 @@ events:
     - {script: 'pf_trial_talk(:SAP_TREE)'}
 - type: event
   name: Sap tree
-  at: [80, 83]
+  at: [80, 85]
   pages:
   - trigger: action
     commands: [A weeping sap tree. Two very large beetles are disputing ownership of it.]
-- type: event
-  name: Juno at the Veil 1
-  at: [79, 46]
-  pages: &id002
-  - cond: {switch: CH1_ORCHARD_DONE}
-    trigger: touch
-    commands:
-    - if: $game_self_switches[[524, 0, 'GLASS']]
-      then: []
-      else:
-      - (A shimmer hangs between two trees. Beyond it, the trunks are clear crystal.)
-      - '\pf[JUNO,sad]Juno: That''s the Glasswood. It was three fields away at midwinter.'
-      - {script: '$game_self_switches[[524, 0, ''GLASS'']] = true'}
-- type: event
-  name: Juno at the Veil 2
-  at: [78, 48]
-  pages: *id002
-- type: event
-  name: Juno at the Veil 3
-  at: [78, 49]
-  pages: *id002
 - type: door
-  at: [58, 51]
+  at: [70, 51]
   gfx: ['', 0, 2]
   name: Woodward's Hut door
   link: WOOD_HUT

@@ -922,7 +922,7 @@ def build_540():
           talk('Greavard', (80, 4), 'Followers/GREAVARD', ['(It is digging very seriously. It does not want to be interrupted. It wags anyway.)'], move='random'),
           hidden((84, 3), 'RAREBONE', 'HiddenItem (the Ha-ha)'),
           obj('Topiary', (58, 14), ['A topiary garden gone wild. One bush was a Ponyta once. Now it is a Ponyta that has seen things.']),
-          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((126, 20), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 52), 'GREATBALL'))
+          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((118, 27), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 52), 'GREATBALL'))
     r.seat_events(on='.dt')
     CK.clear_around(r)
     fd = m.front('sh_big', 66, y2 - 3, 'R3_MANOR', 'Manor door')
@@ -971,3 +971,194 @@ def build_540():
 
 
 BUILD[540] = build_540
+
+
+# ====================================================================================================== 524 Gossamer Wood
+def build_524():
+    """Gossamer Wood (90x110, SILKWOOD): the silk forest that gives Briarwick its trade; ancient trees hung with silk.
+    From Thistledown Lea (W) the trail climbs to the upper wood (stairs) and on to Briarwick's gate (N).  A white stream
+    falls off the upper wood and runs south-west through the trees: the Weft Bridge, a span of spun silk as thick as a
+    road, carries the east path over it to Woodward's Hut in the central clearing (canopy walkways between the giant
+    trunks); on the corded forest road south the fallen giant is the bridge.  Side loops: the mushroom ring (NW, upper
+    wood), the cocoon grove with its racks and weavers (SW), the Giga Drain grove (NE, over the stepping stones).  East:
+    the Cut tree and the Veil to the Deepwood.  Secret: the Unpicked Seam (SE), a silk wall that parts only at night.
+    Two one-tile pinch points wait for the puzzle engineer's silk curtains (REQUESTS 19)."""
+    W, H = 90, 110
+    r = Route(524, W, H, 'forest', base='T')
+    m = r.m
+    # ---- the upper wood (h1) across the north
+    lipy = colmap(r, lambda x: 26 + 2.5 * (vnoise(x, 0, 5241, 10.0) - 0.5) * 2 + bump(x, 80, 8, 3))
+    for x in range(W):
+        m.ht[:lipy[x] + 1, x] = 1
+    CK.smooth_ht(m, 1, 2)
+    # ---- the white stream: from the north edge, over the terrace lip (waterfall), south-west through the wood
+    stream = [(68, 0), (66, 12), (64, lipy[64] - 3), (64, lipy[64] + 4), (60, 36), (58, 46), (54, 58), (48, 70), (40, 80), (28, 92), (16, 102), (8, 109)]
+    CK.stream(r, stream, w=3.2, c='w', only='T.t')
+    # ---- trails
+    main = [(0, 51.5), (12, 51), (22, 48), (28, 40), (31, lipy[31] + 4)]
+    r.road(main, w=3.0, open_=(2, 4))
+    CK.stair(r, 30, lipy[31], w=3, h=1)
+    r.road([(31, lipy[31] - 2), (34, 20), (40, 13), (45, 6), (45, 0)], w=3.0, open_=(2, 4))
+    r.exit('W', 50, 4)
+    m.cls[0:3, 44:47] = 'd'
+    # the fork round the great tree (the east branch narrows to one tile: the teach curtain)
+    r.lane([(31, 20), (26, 15), (30, 9), (40, 13)], w=2.2, open_=(1, 2))
+    # east: over the Weft Bridge to Woodward's clearing, the Cut tree and the Veil
+    r.lane([(28, 40), (40, 44), (52, 46)], w=2.6, open_=(1, 3))
+    r.lane([(64, 46), (72, 47), (84, 48), (89, 48)], w=2.4, open_=(1, 3))
+    r.clearing(70, 52, 8, 6)
+    # the corded forest road south, over the fallen giant
+    r.lane([(22, 48), (22, 60), (30, 72), (39, 77)], w=2.6, open_=(1, 3))
+    r.lane([(39, 84), (41, 96), (41, 106), (41, 109)], w=2.6, open_=(1, 3))
+    # the cocoon grove (SW) and its loop; the one-tile twist run back to the road
+    r.lane([(22, 60), (12, 68), (10, 80), (16, 88), (26, 84)], w=2.0, open_=(1, 3))
+    r.clearing(12, 80, 6, 5)
+    # the mushroom ring (NW, upper wood); the Giga Drain grove (NE, over the stepping stones)
+    r.lane([(34, 20), (20, 16), (12, 10)], w=2.0, open_=(1, 3)); r.clearing(14, 10, 6, 4)
+    r.lane([(45, 8), (56, 9), (70, 12), (76, 14)], w=2.0, open_=(1, 2)); r.clearing(77, 14, 6, 4)
+    # the Unpicked Seam (SE): a pocket behind a night silk wall
+    r.lane([(74, 56), (74, 66), (74, 76), (74, 79)], w=2.0, open_=(1, 2))
+    r.pocket(77, 85, 6, 5, gate=None)
+    CK.grass_fields(r, [(14, 48, 3), (24, 66, 3), (36, 42, 3), (70, 58, 3), (16, 76, 2.5), (38, 92, 2.5), (14, 12, 2.5), (38, 20, 2.5), (78, 16, 2.5)])
+    r.finish_plan(border=0)
+    m.cls[106:110, 40:43] = 'd'
+    sx = 63
+    CK.waterfall(r, sx, sx + 2, lipy[sx + 1])
+    # the Weft Bridge (E-W, spun silk) and the fallen giant (N-S)
+    weft_y = None
+    for y in range(40, 52):
+        xs = [x for x in range(50, 68) if m.cls[y, x] == 'w']
+        if xs and 46 <= y <= 48: weft_y = 46; break
+    weft_y = 46
+    wxs = [x for x in range(48, 70) if m.cls[weft_y, x] == 'w' or m.cls[weft_y - 1, x] == 'w' or m.cls[weft_y + 1, x] == 'w']
+    wx0, wx1 = min(wxs) - 1, max(wxs) + 1
+    weft = []
+    for x in range(wx0, wx1 + 1):
+        for k, y in enumerate((weft_y - 1, weft_y, weft_y + 1)):
+            weft.append((x, y, 'nms'[k]))
+            if m.cls[y, x] != 'w': m.cls[y, x] = 'w'
+    r.lane([(52, 46), (wx0 - 1, weft_y)], w=2.6, open_=(1, 2)); r.lane([(wx1 + 1, weft_y), (64, 46)], w=2.6, open_=(1, 2))
+    lys = [y for y in range(70, 90) if m.cls[y, 39] == 'w' or m.cls[y, 40] == 'w']
+    ly0, ly1 = min(lys) - 1, max(lys) + 1
+    giant = [(x, y) for y in range(ly0, ly1 + 1) for x in (39, 40)]
+    for x, y in giant: m.cls[y, x] = 'w'
+    for x in (38, 41):                                                   # the log's flanks: rough water, no wading
+        for y in range(ly0, ly1 + 1):
+            if m.cls[y, x] in '.dt': m.cls[y, x] = 'T'
+    # stepping stones to the Giga Drain grove
+    st = [(x, 11) for x in range(56, 78) if m.cls[11, x] == 'w']
+    CK.stones(r, st)
+    # one-tile pinch points for the puzzle engineer's silk curtains
+    PINCH = {'teach': (28, 12), 'twist': (21, 86)}
+    for (px, py) in PINCH.values():
+        for dx in (-1, 1):
+            if m.cls[py, px + dx] in '.t' and not r.road_mask[py, px + dx]: m.cls[py, px + dx] = 'T'
+        m.cls[py, px] = 'd'
+    CK.woods(r, CK.GOSSAMER, scale=10.0, accents={'blossom': 0.01})
+    J_ = J
+    ev = old_events('524_reskin.yaml', 524)
+    entry = ev['Wood entry 1']['pages']
+    for i, y in enumerate((50, 51, 52, 53)):
+        r.events.append({'type': 'event', 'name': 'Wood entry %d' % (i + 1), 'at': [4, y], 'pages': entry, 'fixed': True}); m.taken[y, 4] = True
+    veil = ev['Juno at the Veil 1']['pages']
+    tape = lambda i, x: {'type': 'event', 'name': 'Accord cordon %d' % i, 'at': [x, 104], 'fixed': True, 'pages': [
+        {'graphic': {'tile': barrier_tile()}, 'trigger': 'action', 'commands': [
+            'ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
+            J_('sad', "That's the way I used to come. Four hours with Parsnip. Now it's two days and a pageant.")]},
+        {'cond': {'var': ['BRIARWICK_GLASSWOOD', 1]}, 'through': True, 'commands': []}]}
+    for i, x in enumerate((40, 41, 42)): r.events.append(tape(i + 1, x)); m.taken[104, x] = True
+    silk = int(np.array(STAMPS['pf_p_silk1']['layers']).max()); logt = int(np.array(STAMPS['fw_log_m']['layers']).max())
+    r.add({'type': 'warp', 'name': 'To Windfall Row', 'at': [41, 109], 'to': {'map': 521, 'x': 1, 'y': 10, 'dir': 'left'}, 'fixed': True},
+          {'type': 'warp', 'name': 'To Windfall Row b', 'at': [40, 109], 'to': {'map': 521, 'x': 1, 'y': 9, 'dir': 'left'}, 'fixed': True},
+          {'type': 'warp', 'name': 'To Windfall Row c', 'at': [42, 109], 'to': {'map': 521, 'x': 1, 'y': 11, 'dir': 'left'}, 'fixed': True},
+          {'type': 'warp', 'name': 'To Briarwick', 'at': [44, 0], 'link': 'WOOD_BRIAR', 'arrive': [44, 1, 'down'], 'fixed': True},
+          {'type': 'warp', 'name': 'To Briarwick b', 'at': [45, 0], 'to': {'map': 120, 'x': 36, 'y': 62, 'dir': 'up'}, 'fixed': True},
+          {'type': 'warp', 'name': 'To Briarwick c', 'at': [46, 0], 'to': {'map': 120, 'x': 36, 'y': 62, 'dir': 'up'}, 'fixed': True},
+          {'type': 'cut_tree', 'at': [82, 48], 'name': 'CutTree'},
+          {'type': 'warp', 'name': 'To Deepwood', 'at': [89, 48], 'link': 'WOOD_DEEP', 'arrive': [88, 48, 'left'], 'fixed': True},
+          sign((44, 103), 'Cordon notice', 'CLOSED BY ORDER OF THE ACCORD. From this side you can see the glass across the lane, a mile on.'),
+          at(ev['Silk-picker'], 66, 48), at(ev['Old Weaver'], 18, 64),
+          obj('Shrine stone', (12, 8), ['A small mossy shrine stone. A carving of three beasts chasing a masked figure. Someone has left a honey bun in front of the masked one, not the three.',
+              J('neutral', "That's the Pageant. That's the play we saw. ...Somebody likes the Ogre better.")]),
+          talk('Kestrel', (44, 6), 'trainer_RIVAL1', ["Kestrel: Briarwick's just ahead. Try not to get lost in the webs. ...Not that I'd come looking."]),
+          trainer((36, 30), 'TWINS', 'Mo & Jo', 'We battle together!', 'We lose together.', d='right', double=True),
+          trainer((26, 68), 'BUGCATCHER', 'Tobin', 'My bugs love the silk here!', 'Careful in the webs past here!', d='down'),
+          trainer((46, 45), 'BUGCATCHER', 'Reed', 'You walked right into my web!', "The wood's full of better bugs than mine, huh.", d='left'),
+          trainer((40, 16), 'AROMALADY', 'Petra', 'Smell that? Night-blooming gossamer.', 'What a lovely, fierce scent you have.', d='down'),
+          trainer((14, 52), 'CAMPER', 'Bram', 'Camping in Gossamer? Battle first, questions later!', "Lost to a tourist. Don't tell anyone.", d='down'),
+          item((78, 14), 'TM19'), item((8, 82), 'REPEL'), item((74, 50), 'POTION'), item((34, 36), 'ETHER'),
+          {'type': 'event', 'name': 'HiddenItem', 'at': [18, 12], 'pages': ev['HiddenItem']['pages']},
+          obj('Cocoon grove', (12, 77), ['A grove of silk cocoons the size of lanterns, hung in rows. Each has a weaver\'s knot-mark tied to it.']),
+          talk('Weaver (harvest)', (16, 81), 'NPC 13', ['Weaver: One cocoon in three. Always leave two. The wood counts.']),
+          talk('Weaver (racks)', (8, 83), 'NPC 27', ['Weaver: The racks dry the silk in the dark. Sun makes it brittle. Like Kestrel.']),
+          talk('Weaver (spool)', (66, 56), 'NPC 18', ["Weaver: The Weft Bridge? Spun in my great-grandmother's day. Every guild in Briarwick gave a thread. It's stronger than stone. It's ruder than stone, too. Mind the bounce."]),
+          obj('Mushroom ring', (14, 11), ['A ring of pale mushrooms. At night, they say, it glows, and the Morelull dance.']),
+          trial('Monkey shrine', (19, 9), 'SHRINE_WOOD'),
+          obj('The Weft Bridge', (wx0 - 1, weft_y + 1), ['THE WEFT BRIDGE. A rope of spun silk as thick as a road, woven by every guild in Briarwick. It hums when you walk on it.']),
+          obj('Fallen giant', (42, ly0 - 1), ['A fallen giant tree, hollow end to end, lying across the stream. The weavers use it as a bridge. The Venonat use it as a hotel.']),
+          {'type': 'event', 'name': 'Silk seam', 'at': [74, 80], 'fixed': True, 'pages': [{'graphic': {'tile': K.P1('pf_p_silk1') if False else silk}, 'trigger': 'action', 'commands': [
+              {'if': 'PBDayNight.isNight?', 'then': ['The silk wall has loosened in the dark. It parts like a curtain.', {'selfswitch': ['A', True]}],
+               'else': ['A wall of silk, tight as a drum. At night, the weavers say, the seams unpick themselves.']}]},
+              {'cond': {'self': 'A'}, 'through': True, 'commands': []}]},
+          {'type': 'event', 'name': 'Sap tree duel', 'at': [78, 86], 'pages': [{'commands': []},
+              {'graphic': {'sprite': 'Followers/HERACROSS', 'dir': 'left'}, 'trigger': 'action',
+               'commands': [{'comment': 'Condition: badges >= 2 && !quest_done(:EL_HORN_AND_PINCER)'}, {'script': 'pf_trial_talk(:SAP_TREE)'}]}]},
+          obj('Sap tree', (80, 85), ['A weeping sap tree. Two very large beetles are disputing ownership of it.']))
+    # the two Horn-and-Pincer shortcuts (TRIAL_EVENTS 524): a silk wall and a fallen log, each gone when its beetle clears it
+    r.lane([(64, 42), (60, 36), (54, 30)], w=1.6, open_=None) if False else None
+    r.events.append({'type': 'event', 'name': 'Silk wall', 'at': [31, 25], 'fixed': True, 'pages': [{'commands': []},
+        {'graphic': {'tile': silk}, 'trigger': 'action', 'commands': [{'comment': "Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :heracross"},
+                                                                       'A wall of silk, tight as a drum. Something with a horn could tear it.']}]})
+    r.events.append({'type': 'event', 'name': 'Fallen log', 'at': [20, 87], 'fixed': True, 'pages': [{'commands': []},
+        {'graphic': {'tile': logt}, 'trigger': 'action', 'commands': [{'comment': "Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir"},
+                                                                       'A fallen log across the path. Something with pincers could crush it.']}]})
+    for i, y in enumerate((47, 48, 49)): r.events.append({'type': 'event', 'name': 'Juno at the Veil %d' % (i + 1), 'at': [79, y], 'pages': veil, 'fixed': True}); m.taken[y, 79] = True
+    for x, y in ((31, 25), (20, 87), (74, 80)): m.taken[y, x] = True
+    r.seat_events(on='.dt')
+    CK.clear_around(r)
+    fd = m.front('gl_shed', 70, 51, 'WOOD_HUT', "Woodward's Hut door")
+    r.events += [e for e in m.events if e.get('link') == 'WOOD_HUT']; m.events = []
+    # ---- the weavers' wood: giant silk-hung trees, racks, spools, looms, webs, drapes, cocoons
+    for n, x, y in (('pf_g_tree4p', 58, 50), ('pf_g_tree2', 79, 52), ('pf_g_tree4p', 22, 28), ('pf_g_tree2', 46, 22), ('pf_g_tree6', 4, 58),
+                    ('pf_g_tree4p', 50, 86), ('pf_g_tree2', 6, 30), ('pf_g_tree4p', 72, 26), ('pf_g_tree2', 30, 98), ('pf_g_tree4p', 78, 94)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.tT'): m.stamp(n, x, y, mark='B', blend=True)
+    for n, x, y in (('gw_rack', 6, 76), ('gw_rack', 16, 74), ('gw_spool', 18, 84), ('pf_p_loom', 66, 54), ('gw_spool', 76, 55),
+                    ('pf_p_net', 62, 56), ('pf_logbench', 68, 58), ('pf_p_lantern', 64, 50), ('gw_rack', 76, 58), ('sh_campfire', 72, 60)):
+        r.near(n, x, y, on='.d', r=3)
+    rng = random.Random(524)
+    for _ in range(W * H // 28):                                                    # silk: webs across gaps, drapes, cocoons
+        nm = rng.choice(['pf_p_web', 'pf_p_web1', 'gw_drape0', 'gw_drape1', 'gw_cocoons', 'gw_cocoons', 'pf_p_strand_w', 'pf_p_strand_p'])
+        x, y = rng.randrange(W), rng.randrange(H); st_ = STAMPS[nm]
+        if nm.startswith('gw_drape') or nm == 'gw_cocoons':               # drapes hang from the canopy at the wood's edge
+            if y + st_['h'] < H and (m.cls[y, x:x + st_['w']] == 'T').all() and m.free(x, y + 1, st_['w'], st_['h'] - 1, on='.dt'):
+                m.stamp(nm, x, y, mark=None)
+        elif m.free(x, y, st_['w'], st_['h'], on='.'): m.stamp(nm, x, y, mark=None)
+    CK.props(r, ['nt_log', 'nt_stump', 'nt_birch_h', 'nt_rocks_s0', 'nt_stump_big'], 26, box=(0, 0, W, H), clump=3, seed=7)
+    CK.fringe(r, CK.FRINGE['wood'], 120, seed=1, near_forest=3)
+    CK.undergrowth(r, 300, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'nt_shrub0', 'ak_fern', 'nt_shrub1'), seed=3)
+    for (x, y) in ((44, 50), (36, 56), (52, 62), (30, 80), (50, 74), (62, 24), (66, 32)):
+        r.near(rng.choice(['nt_reed1', 'nt_reed0']), x, y, on='.', r=2)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    for x, y, k in weft: m.L[1, y, x] = K.P1('gw_bridge_' + k); m.L[2, y, x] = 0
+    for x, y in giant:
+        k = 'n' if y == ly0 else 's' if y == ly1 else 'm'
+        L = STAMPS['fw_log_' + k]['layers']
+        m.L[1, y, x] = int(L[1][0][x - 39]) or int(L[2][0][x - 39]) or int(L[0][0][x - 39])
+    # canopy walkways between the clearing's giant trunks (overhead rope bridges)
+    for x in range(62, 79): m.L[2, 49, x] = K.P1('fw_walk_h') if m.L[2, 49, x] == 0 else m.L[2, 49, x]
+    for i, (cx_, cy_, rx, ry) in enumerate(((70, 60, 4, 2), (14, 12, 3, 2), (78, 16, 3, 2), (26, 70, 3, 2), (36, 44, 3, 1.5))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[K.DECOR_SH['flowers'][k] for k in (2, 11, 4)], p=0.6, seed=i)
+    CK.scatter_quiet(r, 12)
+    h = head(524, 'Gossamer Wood', field='SILKWOOD', bgm='Route 3', biome='forest',
+             connections=[{'dir': 'W', 'offset': 50, 'to': 540, 'to_offset': 30}], tone=[-28, -8, -30, 25],
+             fog={'name': 'prismfall_spores', 'opacity': 40, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1})
+    h['metadata']['BattleBack'] = 'forest'
+    h['walk_from'] = [[78, 86]]                                                    # the Unpicked Seam (behind the night silk wall)
+    r.pinch = PINCH
+    r.write(h, '524_gossamer_wood.yaml', '# Gossamer Wood (524). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/524.png' if PREV else None)
+    print('524 silk-curtain pinch points:', PINCH)
+
+
+BUILD[524] = build_524

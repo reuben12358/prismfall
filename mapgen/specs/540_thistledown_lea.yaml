@@ -144,13 +144,13 @@ events:
     commands: [The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.]
 - type: event
   name: Bamboo stand
-  at: [112, 18]
+  at: [112, 23]
   pages:
   - trigger: action
     commands: ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']
 - type: event
   name: Pancham
-  at: [108, 19]
+  at: [108, 23]
   pages:
   - graphic: {sprite: Followers/PANCHAM, dir: down}
     trigger: action
@@ -198,7 +198,7 @@ events:
   at: [30, 34]
   berry: CHERIBERRY
 - type: item
-  at: [126, 20]
+  at: [118, 27]
   item: SUPERPOTION
 - type: item
   at: [4, 34]
