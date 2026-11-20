@@ -15,7 +15,7 @@ User: "i dont think we need a portrait for every conversation".
    - Stones found earlier stay as "they hum and wait" collectibles, as in Reborn.
 2. **Enemies use Megas before the player can** (user: "Every important story fight after level 50-55 ish should have mega evolutions").
    - From an ace level of about 50 on (Gym 10, cap 51, onward), **every** important story fight has a Mega: every Warden, every rival fight, villain bosses, war bosses and the Festival of Champions.
-   - Below about Lv 50, an important fight may use only a **weak** Mega, and only where the character's design calls for it (user, 01:00: "he could have one as long as its considered 'Weak'"). Brann keeps Mega Camerupt, tuned as weak.
+   - Below about Lv 50, an important fight may use only a **weak** Mega, and only where the character's design calls for it (user, 01:00: "he could have one as long as its considered 'Weak'"). Brann keeps Mega Camerupt **exactly as designed, not retuned** (user, 11:10: "brann's mega can stay as is, please do NOT change that fight").
    - Kestrel Megas from K5 with a non-family ring. When Morwen's Ring reaches him (Ch18/SF), his Mega switches to one that echoes her Ghost Warden past.
    - Exceptions are not allowed for theme reasons. If one Mega clashes with a leader's field, choose a different Mega.
    - The Eevee Octave keeps its Z-move design.
