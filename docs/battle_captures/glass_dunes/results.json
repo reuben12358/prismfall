@@ -1,0 +1,250 @@
+{
+  "war_pool": [
+    "VOLCANIC",
+    "ASHEN_WASTE",
+    "FROZEN_LAKE",
+    "SNOWY_MOUNTAIN",
+    "DESERT",
+    "FLOODED_DUNES",
+    "GLASS_DUNES"
+  ],
+  "scenarios": [
+    {
+      "key": "A_walk_desert_flood_glass_bleed",
+      "title": "A. Glass Dunes walk (map 926 default, no field rule): Kyogre vs Reshiram, both scripted",
+      "outcome": "fled/forfeit",
+      "turns": 10,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "FLOODED_DUNES",
+        "GLASS_DUNES",
+        "BLEED"
+      ],
+      "checks": {
+        "starts_on_desert": true,
+        "desert_flood_glass": true,
+        "beam_clash_to_bleed": true,
+        "transform_strike": true,
+        "steam_on_flood": true,
+        "clash_progress": true,
+        "bleed_echoes_war_only": true
+      },
+      "ok": true
+    },
+    {
+      "key": "B_primal_sea_tug_of_war",
+      "title": "B. Primal Kyogre (Primordial Sea) vs Reshiram on 926: flood at send-out, glass under the heavy rain",
+      "outcome": "fled/forfeit",
+      "turns": 5,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "FLOODED_DUNES",
+        "GLASS_DUNES",
+        "FLOODED_DUNES",
+        "GLASS_DUNES"
+      ],
+      "checks": {
+        "flood_before_turn_1": true,
+        "snuffed_flare_glasses": true,
+        "origin_pulse_refloods": true,
+        "fusion_flare_reglass": true
+      },
+      "ok": true
+    },
+    {
+      "key": "C_ai_reshiram_boss",
+      "title": "C. AI vs AI: Reshiram boss (3 bars, break 1 = the flood-sea) vs Kyogre, Garchomp, Lapras on 926",
+      "outcome": "player lost",
+      "turns": 6,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "DESERT st2",
+        "FLOODED_DUNES",
+        "GLASS_DUNES"
+      ],
+      "checks": {
+        "starts_on_desert": true,
+        "reaches_flood": true,
+        "reaches_glass": true,
+        "no_exceptions": true
+      },
+      "ok": true
+    },
+    {
+      "key": "D_ai_primal_kyogre_boss",
+      "title": "D. AI vs AI: Primal Kyogre boss (2 bars) vs Reshiram, Charizard, Garchomp on 926",
+      "outcome": "player lost",
+      "turns": 2,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "FLOODED_DUNES"
+      ],
+      "checks": {
+        "flooded_at_start": true,
+        "no_exceptions": true
+      },
+      "ok": true
+    },
+    {
+      "key": "E_tide_drains_to_superbloom",
+      "title": "E. Tide: Flooded Dunes, the player's Sunny Day drains the flood (sun: 2 a round)",
+      "outcome": "fled/forfeit",
+      "turns": 4,
+      "errors": 0,
+      "fields": [
+        "FLOODED_DUNES",
+        "DESERT",
+        "DESERT st2"
+      ],
+      "checks": {
+        "drains_to_desert_bloom": true,
+        "warned": true
+      },
+      "ok": true
+    },
+    {
+      "key": "E2_ai_low_tide",
+      "title": "E2. AI vs AI on the Flooded Dunes: Kyogre vs a Drought Ninetales (sun drains the tide)",
+      "outcome": "player lost",
+      "turns": 4,
+      "errors": 0,
+      "fields": [
+        "FLOODED_DUNES",
+        "DESERT",
+        "DESERT st2"
+      ],
+      "checks": {
+        "no_exceptions": true,
+        "warned": true
+      },
+      "ok": true
+    },
+    {
+      "key": "F_steamline_bleed_war_pool",
+      "title": "F. The Steamline (map 925 default, no field rule): 15 quiet rounds of Bleed rotation",
+      "outcome": "fled/forfeit",
+      "turns": 15,
+      "errors": 0,
+      "fields": [
+        "BLEED"
+      ],
+      "checks": {
+        "default_is_bleed": true,
+        "rotated": true,
+        "war_pool_only": true
+      },
+      "ok": true
+    },
+    {
+      "key": "F2_control_open_bleed",
+      "title": "F2. Control: the Bleed on a map without a pool (990) borrows from every field",
+      "outcome": "fled/forfeit",
+      "turns": 15,
+      "errors": 0,
+      "fields": [
+        "BLEED"
+      ],
+      "checks": {
+        "borrows_outside_war_pool": true
+      },
+      "ok": true
+    },
+    {
+      "key": "G1_soldier_isenmar_officer_1",
+      "title": "G1. AI vs AI on 926: ISENMAR_OFFICER Captain v1 vs Lv.85 challenger",
+      "outcome": "player won",
+      "turns": 12,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "DESERT st2",
+        "DESERT st1"
+      ],
+      "checks": {
+        "no_exceptions": true,
+        "starts_on_desert": true
+      },
+      "ok": true
+    },
+    {
+      "key": "G2_soldier_ashkaar_officer_1",
+      "title": "G2. AI vs AI on 926: ASHKAAR_OFFICER Captain v1 vs Lv.85 challenger",
+      "outcome": "player lost",
+      "turns": 9,
+      "errors": 0,
+      "fields": [
+        "DESERT"
+      ],
+      "checks": {
+        "no_exceptions": true,
+        "starts_on_desert": true
+      },
+      "ok": true
+    },
+    {
+      "key": "G3_soldier_isenmar_soldier_f_1",
+      "title": "G3. AI vs AI on 926: ISENMAR_SOLDIER_F Soldier v1 vs Lv.85 challenger",
+      "outcome": "player won",
+      "turns": 7,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "DESERT st2"
+      ],
+      "checks": {
+        "no_exceptions": true,
+        "starts_on_desert": true
+      },
+      "ok": true
+    },
+    {
+      "key": "G4_soldier_ashkaar_soldier_f_1",
+      "title": "G4. AI vs AI on 926: ASHKAAR_SOLDIER_F Soldier v1 vs Lv.85 challenger",
+      "outcome": "player lost",
+      "turns": 7,
+      "errors": 0,
+      "fields": [
+        "DESERT"
+      ],
+      "checks": {
+        "no_exceptions": true,
+        "starts_on_desert": true
+      },
+      "ok": true
+    },
+    {
+      "key": "Gw1_wants_isenmar_officer_1",
+      "title": "G'1. AI vs AI on 926 with the suggested WANTS: ISENMAR_OFFICER Captain v1 vs Lv.85 challenger",
+      "outcome": "player won",
+      "turns": 12,
+      "errors": 0,
+      "fields": [
+        "DESERT",
+        "DESERT st2",
+        "DESERT st1"
+      ],
+      "checks": {
+        "no_exceptions": true
+      },
+      "ok": true
+    },
+    {
+      "key": "Gw2_wants_ashkaar_officer_1",
+      "title": "G'2. AI vs AI on 926 with the suggested WANTS: ASHKAAR_OFFICER Captain v1 vs Lv.85 challenger",
+      "outcome": "player won",
+      "turns": 7,
+      "errors": 0,
+      "fields": [
+        "DESERT"
+      ],
+      "checks": {
+        "no_exceptions": true
+      },
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+G'1. AI vs AI on 926 with the suggested WANTS: ISENMAR_OFFICER Captain v1 vs Lv.85 challenger
+=============================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  You are challenged by Isenmar Officer Captain!
+  Isenmar Officer Captain sent out Pelipper!
+    >> sent out (foe): Pelipper Lv.82 @DAMPROCK [DRIZZLE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    [ability: Pelipper (foe)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+## FIELD STAGE: DESERT is now stage 2
+  Rain on the dunes! Seeds sleeping in the sand burst into a superbloom!
+
+--- Turn 1 ---
+  [Garchomp 304/304 | Pelipper 233/233]
+  [AIField @ DESERT st2] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +2 -> DESERT (1/2)
+  [AIField @ DESERT st2] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 233 -> 220 / 233
+  It's not very effective...
+  The blossoms are curling in the heat... (1 more)
+  The opposing Pelipper used Scald!
+    HP Garchomp (player): 304 -> 149 / 304
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Garchomp 149/304 | Pelipper 220/233]
+  [AIField @ DESERT st2] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +9 -> DESERT (2/2)
+  [AIField @ DESERT st2] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 220 -> 207 / 233
+  It's not very effective...
+## FIELD STAGE: DESERT is now stage 1
+  The heat baked the bloom away. The dunes return.
+  The opposing Pelipper used Scald!
+  The opposing Pelipper's attack missed!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 3 ---
+  [Garchomp 149/304 | Pelipper 207/233]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 207 -> 191 / 233
+  It's not very effective...
+  The opposing Pelipper used Scald!
+  The opposing Pelipper's attack missed!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 4 ---
+  [Garchomp 149/304 | Pelipper 191/233]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 191 -> 175 / 233
+  It's not very effective...
+  The opposing Pelipper used Scald!
+  The thirsty dunes drank up some of the water...
+    HP Garchomp (player): 149 -> 72 / 304
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 5 ---
+  [Garchomp 72/304 | Pelipper 175/233]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Pelipper (foe): 175 -> 158 / 233
+  It's not very effective...
+  The opposing Pelipper used Scald!
+  The thirsty dunes drank up some of the water...
+    HP Garchomp (player): 72 -> 0 / 304
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.85 [ILLUMINATE]
+
+--- Turn 6 ---
+  [Starmie 223/223 | Pelipper 158/233]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Pelipper: Hurricane +0, Scald +0, Tailwind +0, Protect +0
+  Starmie used Thunderbolt!
+    HP Pelipper (foe): 158 -> 0 / 233
+  It's super effective!
+  The opposing Pelipper fainted!
+    xx fainted: Pelipper (foe)
+  Starmie got 2420 Exp. Points!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Isenmar Officer Captain is about to send out Kingdra. Will you switch your Pokémon?  [auto: No]
+  Isenmar Officer Captain sent out Kingdra!
+    >> sent out (foe): Kingdra Lv.83 @SITRUSBERRY [SWIFTSWIM]
+
+--- Turn 7 ---
+  [Starmie 223/223 | Kingdra 260/260]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Kingdra: Muddy Water +0 -> DESERT st2 (1/3), Draco Meteor +0, Ice Beam +0, Protect +0
+  The opposing Kingdra used Ice Beam!
+  The desert heat blunted the cold...
+    HP Starmie (player): 223 -> 194 / 223
+  It's not very effective...
+  Starmie used Thunderbolt!
+    HP Kingdra (foe): 260 -> 201 / 260
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 8 ---
+  [Starmie 194/223 | Kingdra 201/260]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Kingdra: Muddy Water +0 -> DESERT st2 (1/3), Draco Meteor +0, Ice Beam +0, Protect +0
+  The opposing Kingdra used Ice Beam!
+  The desert heat blunted the cold...
+    HP Starmie (player): 194 -> 167 / 223
+  It's not very effective...
+  Starmie used Thunderbolt!
+    HP Kingdra (foe): 201 -> 146 / 260
+  (end of round)
+  The rain stopped.
+
+--- Turn 9 ---
+  [Starmie 167/223 | Kingdra 146/260]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Kingdra: Muddy Water +0 -> DESERT st2 (1/3), Draco Meteor +0, Ice Beam +0, Protect +0
+  Starmie used Psychic!
+    HP Kingdra (foe): 146 -> 20 / 260
+  A critical hit!
+    (anim: EatBerry)
+    HP Kingdra (foe): 20 -> 85 / 260
+  The opposing Kingdra restored its health using its Sitrus Berry!
+  The opposing Kingdra used Ice Beam!
+  The desert heat blunted the cold...
+    HP Starmie (player): 167 -> 140 / 223
+  It's not very effective...
+  (end of round)
+
+--- Turn 10 ---
+  [Starmie 140/223 | Kingdra 85/260]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Kingdra: Muddy Water +0 -> DESERT st2 (1/3), Draco Meteor +0, Ice Beam +0, Protect +0
+  Starmie used Psychic!
+    HP Kingdra (foe): 85 -> 2 / 260
+  The opposing Kingdra used Draco Meteor!
+    HP Starmie (player): 140 -> 0 / 223
+    (anim: StatDown)
+  The opposing Kingdra's Special Attack harshly fell!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.85 [STEADFAST]
+
+--- Turn 11 ---
+  [Lucario 240/240 | Kingdra 2/260]
+  [AIField @ DESERT] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT] Kingdra: Muddy Water +0 -> DESERT st2 (1/3), Draco Meteor +0, Ice Beam +0, Protect +0
+  Lucario used Extreme Speed!
+    HP Kingdra (foe): 2 -> 0 / 260
+  The opposing Kingdra fainted!
+    xx fainted: Kingdra (foe)
+  Lucario got 4358 Exp. Points!
+  (end of round)
+  Isenmar Officer Captain is about to send out Arctovish. Will you switch your Pokémon?  [auto: No]
+  Isenmar Officer Captain sent out Arctovish!
+    >> sent out (foe): Arctovish Lv.84 @SITRUSBERRY [WATERABSORB]
+
+--- Turn 12 ---
+  [Lucario 240/240 | Arctovish 288/288]
+  [AIField @ DESERT] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT] Arctovish: Fishious Rend +0, Icicle Crash +0, Psychic Fangs +0, Protect +0
+  Lucario used Flash Cannon!
+    HP Arctovish (foe): 288 -> 187 / 288
+  The opposing Arctovish used Psychic Fangs!
+    HP Lucario (player): 240 -> 161 / 240
+  (end of round)
+
+--- Turn 13 ---
+  [Lucario 161/240 | Arctovish 187/288]
+  [AIField @ DESERT] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT] Arctovish: Fishious Rend +0, Icicle Crash +0, Psychic Fangs +0, Protect +0
+  Lucario used Close Combat!
+    HP Arctovish (foe): 187 -> 0 / 288
+  It's super effective!
+  The opposing Arctovish fainted!
+    xx fainted: Arctovish (foe)
+  Lucario got 2932 Exp. Points!
+  You defeated Isenmar Officer Captain!
+  The sea came all this way for us. ...And still.
+  You got $6,720 for winning!
+  battle result code: 1
+  
+RESULT: player won after 12 turn(s)

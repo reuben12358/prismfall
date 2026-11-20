@@ -875,9 +875,10 @@ def build_540():
     r.clearing(82, 3, 4, 2.2)
     # fields and meadows
     r.clearing(38, 22, 9, 6)                                                      # the Ponyta paddock
+    r.lane([(24, 38), (26, 31), (27, 25), (31, 21)], w=2.0, open_=None)           # the drove-way into it (the ledges are the way out)
     r.forest_band('N', 4, wobble=2.0); r.forest_band('S', 3, wobble=1.5); r.forest_band('E', 2, wobble=1.0)
     for cx, cy_, rx, ry in ((118, 12, 10, 7), (100, 46, 6, 3), (6, 40, 5, 5), (36, 6, 8, 3), (124, 46, 5, 4), (100, 14, 4, 3),
-                            (14, 8, 5, 4), (50, 46, 4, 2.5), (82, 44, 3, 2), (110, 22, 3, 3), (30, 46, 3, 2)):
+                            (14, 8, 5, 4), (50, 46, 4, 2.5), (82, 44, 3, 2), (30, 46, 3, 2)):
         r.copse(cx, cy_, rx, ry)
     for x in range(44, 92):                                                       # woods close the hill's sides (the ditch is the way)
         for y in range(0, 22):
@@ -913,8 +914,8 @@ def build_540():
           trainer((92, 28), 'TWINS', 'Bel & Bea', 'Twins: We battle together! Always together!', "Twins: Saltmere's south. They do plays there!", d='down', double=True),
           trainer((112, 34), 'YOUNGSTER', 'Corin', "Saltmere badge? Prove it!", "My team's the coolest! ...Was.", d='left'),
           obj('Broken mill', (96, cy[96] - 6), ['The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.']),
-          obj('Bamboo stand', (112, 18), ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']),
-          talk('Pancham', (108, 20), 'Followers/PANCHAM', ['(It glares at you over a bamboo shoot. Respect.)'], move='random'),
+          obj('Bamboo stand', (112, 23), ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']),
+          talk('Pancham', (108, 23), 'Followers/PANCHAM', ['(It glares at you over a bamboo shoot. Respect.)'], move='random'),
           obj('Road Stone II-b', (122, 29), ["ROAD STONE II-b. THE WEAVERS' ROAD. \"Briarwick 1.\" The '1' has been scratched to a '2' and back again."]),
           obj('Gateposts', (64, y1 - 2), ['Two stone gateposts with the Thistledown thistle carved on them. No gate. Gates are for people who expect visitors.']),
           obj('The Ha-ha', (82, 2), ['(The sunken wall\'s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging behind it.)']),

@@ -1,0 +1,219 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+F. The Steamline (map 925 default, no field rule): 15 quiet rounds of Bleed rotation
+====================================================================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.85 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Glass Dunes tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:GLASS_DUNES] (was [])
+
+--- Turn 1 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Special Attack rose!
+  The wild Snorlax's Attack fell!
+
+--- Turn 2 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Special Attack fell!
+
+--- Turn 3 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the Cinderglass tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:ASHEN_WASTE] (was [:GLASS_DUNES])
+
+--- Turn 4 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Special Defense rose!
+  The wild Snorlax's Special Attack fell!
+
+--- Turn 5 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The ground hisses... the geysers will blow next turn!
+
+--- Turn 6 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Defense rose!
+  The wild Snorlax's Special Attack fell!
+  Geysers of steam blast up through the glass!
+    HP Mew (player): 291 -> 255 / 291
+  A geyser erupted right beneath Mew!
+    HP Snorlax (foe): 393 -> 344 / 393
+  A geyser erupted right beneath the wild Snorlax!
+  The Bleed convulses... echoes of the Desert tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:DESERT] (was [:ASHEN_WASTE])
+
+--- Turn 7 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Attack rose!
+  The wild Snorlax's Speed fell!
+
+--- Turn 8 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 9 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the Glass Dunes tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:GLASS_DUNES] (was [:DESERT])
+
+--- Turn 10 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 11 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Speed fell!
+
+--- Turn 12 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Defense rose!
+  Mew's Special Attack fell!
+  The Bleed convulses... echoes of the Frozen Lake tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:FROZEN_LAKE] (was [:GLASS_DUNES])
+
+--- Turn 13 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 14 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Special Defense rose!
+  Mew's Speed fell!
+
+--- Turn 15 ---
+  [Mew 255/291 | Snorlax 344/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the Glass Dunes tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:GLASS_DUNES] (was [:FROZEN_LAKE])
+
+--- Turn 16 ---
+  [Mew 255/291 | Snorlax 344/393]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 15 turn(s)

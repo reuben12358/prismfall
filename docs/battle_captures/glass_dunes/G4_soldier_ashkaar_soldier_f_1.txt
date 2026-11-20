@@ -1,0 +1,127 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+G4. AI vs AI on 926: ASHKAAR_SOLDIER_F Soldier v1 vs Lv.85 challenger
+=====================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  You are challenged by Ashkaar Soldier Soldier!
+  Ashkaar Soldier Soldier sent out Talonflame!
+    >> sent out (foe): Talonflame Lv.80 @SHARPBEAK [FLAMEBODY]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+
+--- Turn 1 ---
+  [Garchomp 304/304 | Talonflame 256/256]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Talonflame: Brave Bird +0, Flare Blitz +0, U-turn +0, Roost +0
+  The opposing Talonflame used Flare Blitz!
+  The opposing Talonflame's attack missed!
+  Garchomp used Stone Edge!
+    HP Talonflame (foe): 256 -> 0 / 256
+  It's super effective!
+  The opposing Talonflame fainted!
+    xx fainted: Talonflame (foe)
+  Garchomp got 2605 Exp. Points!
+  (end of round)
+  Ashkaar Soldier Soldier is about to send out Rhyperior. Will you switch your Pokémon?  [auto: No]
+  Ashkaar Soldier Soldier sent out Rhyperior!
+    >> sent out (foe): Rhyperior Lv.81 @SITRUSBERRY [SOLIDROCK]
+
+--- Turn 2 ---
+  [Garchomp 304/304 | Rhyperior 319/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  Garchomp used Fire Fang!
+    HP Rhyperior (foe): 319 -> 294 / 319
+  It's not very effective...
+  The opposing Rhyperior flinched and couldn't move!
+  (end of round)
+
+--- Turn 3 ---
+  [Garchomp 304/304 | Rhyperior 294/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  Garchomp used Fire Fang!
+    HP Rhyperior (foe): 294 -> 269 / 319
+  It's not very effective...
+  The opposing Rhyperior used Rock Polish!
+    (anim: StatUp)
+  The opposing Rhyperior's Speed rose sharply!
+  (end of round)
+
+--- Turn 4 ---
+  [Garchomp 304/304 | Rhyperior 269/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  The opposing Rhyperior used Megahorn!
+    HP Garchomp (player): 304 -> 140 / 304
+  A critical hit!
+  Garchomp used Fire Fang!
+    HP Rhyperior (foe): 269 -> 244 / 319
+  It's not very effective...
+  (end of round)
+
+--- Turn 5 ---
+  [Garchomp 140/304 | Rhyperior 244/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  The opposing Rhyperior used High Horsepower!
+  The dunes shifted under the opposing Rhyperior's command!
+    HP Garchomp (player): 140 -> 0 / 304
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.85 [ILLUMINATE]
+
+--- Turn 6 ---
+  [Starmie 223/223 | Rhyperior 244/319]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  Starmie used Ice Beam!
+  The desert heat blunted the cold...
+    HP Rhyperior (foe): 244 -> 173 / 319
+  It's super effective!
+  The opposing Rhyperior used Megahorn!
+    HP Starmie (player): 223 -> 0 / 223
+  A critical hit!
+  It's super effective!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+  Go for it, Lucario!
+    >> sent out (player): Lucario Lv.85 [STEADFAST]
+
+--- Turn 7 ---
+  [Lucario 240/240 | Rhyperior 173/319]
+  [AIField @ DESERT] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  The opposing Rhyperior used High Horsepower!
+  The dunes shifted under the opposing Rhyperior's command!
+    HP Lucario (player): 240 -> 0 / 240
+  It's super effective!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  (end of round)
+  Go for it, Charizard!
+    >> sent out (player): Charizard Lv.85 [BLAZE]
+
+--- Turn 8 ---
+  [Charizard 253/253 | Rhyperior 173/319]
+  [AIField @ DESERT] Charizard: Flamethrower +0, Air Slash +0, Dragon Pulse +0, Earthquake +0
+  [AIField @ DESERT] Rhyperior: High Horsepower +0, Stone Edge +0, Megahorn +0, Rock Polish +0
+  The opposing Rhyperior used Stone Edge!
+    HP Charizard (player): 253 -> 0 / 253
+  It's super effective!
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  You have no more Pokémon that can fight!
+  You lost against Ashkaar Soldier Soldier!
+  You gave $3,888 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 7 turn(s)

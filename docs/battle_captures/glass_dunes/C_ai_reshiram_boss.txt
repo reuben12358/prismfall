@@ -1,0 +1,156 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+C. AI vs AI: Reshiram boss (3 bars, break 1 = the flood-sea) vs Kyogre, Garchomp, Lapras on 926
+===============================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Reshiram appeared!
+  Go! Kyogre!
+    >> sent out (player): Kyogre Lv.85 [DRIZZLE]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+  The Light Stone cracks white... Reshiram unfolds over the Siege Camp!
+    [ability: Reshiram (foe)'s Turboblaze]
+  The wild Reshiram is radiating a blazing aura!
+    [ability: Kyogre (player)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+## FIELD STAGE: DESERT is now stage 2
+  Rain on the dunes! Seeds sleeping in the sand burst into a superbloom!
+
+--- Turn 1 ---
+  [Kyogre 291/291 | Reshiram 344/344]
+  [AIField @ DESERT st2] Kyogre: Origin Pulse +8 -> FLOODED_DUNES (1/1), Ice Beam +0, Thunder +0, Calm Mind +0
+  [AIField @ DESERT st2] Reshiram: Blue Flare +2 -> DESERT (1/2), Dragon Pulse +0, Earth Power +0, Flamethrower +2 -> DESERT (1/2)
+  The wild Reshiram used Earth Power!
+    HP Kyogre (player): 291 -> 134 / 291
+  A critical hit!
+  Kyogre used Calm Mind!
+    (anim: StatUp)
+  Kyogre's Special Attack rose!
+  Kyogre's Special Defense rose!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 2 ---
+  [Kyogre 134/291 | Reshiram 344/344]
+  [AIField @ DESERT st2] Kyogre: Origin Pulse +8 -> FLOODED_DUNES (1/1), Ice Beam +0, Thunder +0, Calm Mind +0
+  [AIField @ DESERT st2] Reshiram: Blue Flare +2 -> DESERT (1/2), Dragon Pulse +0, Earth Power +0, Flamethrower +2 -> DESERT (1/2)
+  The wild Reshiram used Flamethrower!
+    HP Kyogre (player): 134 -> 113 / 291
+  It's not very effective...
+  The blossoms are curling in the heat... (1 more)
+  Kyogre used Origin Pulse!
+    HP Reshiram (foe): 344 -> 1 / 344
+## FIELD CHANGE: DESERT -> FLOODED_DUNES
+  The sea answered the pulse and poured in over the blooming dunes!
+  The wild Reshiram's shield shattered!
+    HP Reshiram (foe): 1 -> 344 / 344
+  The Northern Sea stands up on the horizon - Kyogre's flood-sea is pouring over the dunes!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 3 ---
+  [Kyogre 113/291 | Reshiram 344/344]
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0, Calm Mind +0
+  [AIField @ FLOODED_DUNES] Reshiram: Blue Flare +16 -> GLASS_DUNES (1/1), Dragon Pulse +0, Earth Power +0, Flamethrower +0
+  The wild Reshiram used Blue Flare!
+    HP Kyogre (player): 113 -> 73 / 291
+  It's not very effective...
+  The white fire flashed the floodwater into scalding steam!
+    (anim: StatDown)
+  Kyogre's accuracy fell!
+## FIELD CHANGE: FLOODED_DUNES -> GLASS_DUNES
+  The white fire flashed the flood to steam and fused the drowned sand into glass!
+  Kyogre used Origin Pulse!
+    HP Reshiram (foe): 344 -> 52 / 344
+  The sea is rising against the glass... (1 more)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 52 -> 74 / 344
+
+--- Turn 4 ---
+  [Kyogre 73/291 | Reshiram 74/344]
+  [AIField @ GLASS_DUNES] Kyogre: Origin Pulse +16 -> FLOODED_DUNES (2/2), Ice Beam +3 -> FLOODED_DUNES (1/3), Thunder +0, Calm Mind +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Dragon Pulse +0, Earth Power +0, Flamethrower +0
+  The wild Reshiram used Dragon Pulse!
+    HP Kyogre (player): 73 -> 0 / 291
+  Kyogre fainted!
+    xx fainted: Kyogre (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 74 -> 96 / 344
+  Use next Pokémon?  [auto: Yes]
+  Just a little more! Hang in there, Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+
+--- Turn 5 ---
+  [Garchomp 304/304 | Reshiram 96/344]
+  [AIField @ GLASS_DUNES] Garchomp: Earthquake +1 -> FLOODED_DUNES (1/3), Dragon Claw +0, Stone Edge +0, Swords Dance +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Dragon Pulse +0, Earth Power +0, Flamethrower +0
+  Garchomp used Earthquake!
+    HP Reshiram (foe): 96 -> 1 / 344
+  It's super effective!
+  Garchomp shattered the glass crust! Shards flew up around its foes!
+  Flying glass caught the wild Reshiram!
+  The wild Reshiram's shield shattered!
+    HP Reshiram (foe): 1 -> 344 / 344
+  Cracks are spreading through the glass... (2 more)
+  The wild Reshiram used Blue Flare!
+  The heat locked in the glass flared up with Blue Flare!
+  The glass rang with the white fire that made it!
+    HP Garchomp (player): 304 -> 207 / 304
+  It's not very effective...
+  The heat annealed the cracks in the glass!
+  (end of round)
+  The rain stopped.
+
+--- Turn 6 ---
+  [Garchomp 207/304 | Reshiram 344/344]
+  [AIField @ GLASS_DUNES] Garchomp: Earthquake +3 -> DESERT (1/3), Dragon Claw +0, Stone Edge +0, Swords Dance +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Dragon Pulse +0, Earth Power +0, Flamethrower +0
+  Garchomp used Earthquake!
+    HP Reshiram (foe): 344 -> 101 / 344
+  It's super effective!
+  Garchomp shattered the glass crust! Shards flew up around its foes!
+    HP Reshiram (foe): 101 -> 58 / 344
+  Flying glass caught the wild Reshiram!
+  Cracks are spreading through the glass... (2 more)
+  The wild Reshiram used Blue Flare!
+  The heat locked in the glass flared up with Blue Flare!
+  The glass rang with the white fire that made it!
+    HP Garchomp (player): 207 -> 0 / 304
+  It's not very effective...
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  The heat annealed the cracks in the glass!
+  (end of round)
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 58 -> 80 / 344
+  Use next Pokémon?  [auto: Yes]
+  Your opponent's weak! Get 'em, Lapras!
+    >> sent out (player): Lapras Lv.85 [WATERABSORB]
+
+--- Turn 7 ---
+  [Lapras 342/342 | Reshiram 80/344]
+  [AIField @ GLASS_DUNES] Lapras: Hydro Pump +4 -> FLOODED_DUNES (1/3), Freeze-Dry +1 -> DESERT (1/3), Thunderbolt +0, Ice Shard +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Dragon Pulse +0, Earth Power +0, Flamethrower +0
+  The wild Reshiram used Blue Flare!
+  The heat locked in the glass flared up with Blue Flare!
+  The glass rang with the white fire that made it!
+    HP Lapras (player): 342 -> 0 / 342
+  Lapras fainted!
+    xx fainted: Lapras (player)
+  You have no more Pokémon that can fight!
+  You panicked and dropped $3,000...
+  battle result code: 2
+  
+RESULT: player lost after 6 turn(s)

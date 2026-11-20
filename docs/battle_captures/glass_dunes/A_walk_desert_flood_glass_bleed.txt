@@ -1,0 +1,217 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+A. Glass Dunes walk (map 926 default, no field rule): Kyogre vs Reshiram, both scripted
+=======================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Reshiram appeared!
+  Go! Kyogre!
+    >> sent out (player): Kyogre Lv.100 @LEFTOVERS [PRESSURE]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    [ability: Kyogre (player)'s Pressure]
+  Kyogre is exerting its pressure!
+    [ability: Reshiram (foe)'s Turboblaze]
+  The wild Reshiram is radiating a blazing aura!
+
+--- Turn 1 ---
+  [Kyogre 404/404 | Reshiram 404/404]
+  [AIField @ DESERT] Kyogre: Origin Pulse +15 -> FLOODED_DUNES (1/1), Hydro Pump +1 -> DESERT st2 (1/3), Ice Beam +0, Thunder +0
+  [AIField @ DESERT] Reshiram: Blue Flare +0 -> GLASS_DUNES (1/2), Fusion Flare +0 -> GLASS_DUNES (1/2), Dragon Pulse +0, Earth Power +0
+  Kyogre used Origin Pulse!
+  The thirsty dunes drank up some of the water...
+    HP Reshiram (foe): 404 -> 270 / 404
+## FIELD CHANGE: DESERT -> FLOODED_DUNES
+  The sea answered the pulse and poured in over the dunes!
+  The wild Reshiram used Dragon Pulse!
+    HP Kyogre (player): 404 -> 313 / 404
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 313 -> 338 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 270 -> 295 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+
+--- Turn 2 ---
+  [Kyogre 338/404 | Reshiram 295/404]
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Hydro Pump +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0
+  [AIField @ FLOODED_DUNES] Reshiram: Blue Flare +16 -> GLASS_DUNES (1/1), Fusion Flare +16 -> GLASS_DUNES (1/1), Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Blue Flare!
+    HP Kyogre (player): 338 -> 249 / 404
+  It's not very effective...
+  The white fire flashed the floodwater into scalding steam!
+    (anim: StatDown)
+  Kyogre's accuracy fell!
+## FIELD CHANGE: FLOODED_DUNES -> GLASS_DUNES
+  The white fire flashed the flood to steam and fused the drowned sand into glass!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 249 -> 274 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 295 -> 320 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 320 -> 345 / 404
+
+--- Turn 3 ---
+  [Kyogre 274/404 | Reshiram 345/404]
+  [AIField @ GLASS_DUNES] Kyogre: Splash +0, Hydro Pump +3 -> FLOODED_DUNES (1/3), Ice Beam +0 -> DESERT (1/3), Thunder +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Origin Pulse!
+    HP Reshiram (foe): 345 -> 215 / 404
+  The sea is rising against the glass... (1 more)
+  The wild Reshiram used Blue Flare!
+  The heat locked in the glass flared up with Blue Flare!
+  The glass rang with the white fire that made it!
+    HP Kyogre (player): 274 -> 176 / 404
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 176 -> 201 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 215 -> 240 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 240 -> 265 / 404
+  The beams locked over the glass! Both Imprints are ringing in it!
+  The glass is singing with both Imprints... (1 more clash)
+
+--- Turn 4 ---
+  [Kyogre 201/404 | Reshiram 265/404]
+  [AIField @ GLASS_DUNES] Kyogre: Origin Pulse +16 -> FLOODED_DUNES (2/2), Hydro Pump +3 -> FLOODED_DUNES (1/3), Ice Beam +0 -> DESERT (1/3), Thunder +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Hydro Pump!
+    HP Reshiram (foe): 265 -> 135 / 404
+  Water is pooling between the glass dunes... (2 more)
+  The wild Reshiram used Fusion Flare!
+  The heat locked in the glass flared up with Fusion Flare!
+  The glass rang with the white fire that made it!
+    HP Kyogre (player): 201 -> 125 / 404
+  It's not very effective...
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 125 -> 150 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 135 -> 160 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 160 -> 185 / 404
+  The beams locked over the glass! Both Imprints are ringing in it!
+## FIELD CHANGE: GLASS_DUNES -> BLEED
+  The beams met over the glass and the Imprints tore open! The Bleed swells over the dunes!
+  The Bleed convulses... echoes of the Snowy Mountain tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:SNOWY_MOUNTAIN] (was [])
+
+--- Turn 5 ---
+  [Kyogre 150/404 | Reshiram 185/404]
+  [AIField @ BLEED] Kyogre: Origin Pulse +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 150 -> 175 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 185 -> 210 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+
+--- Turn 6 ---
+  [Kyogre 175/404 | Reshiram 210/404]
+  [AIField @ BLEED] Kyogre: Splash +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Splash +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 175 -> 200 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 210 -> 235 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+
+--- Turn 7 ---
+  [Kyogre 200/404 | Reshiram 235/404]
+  [AIField @ BLEED] Kyogre: Splash +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Splash +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 200 -> 225 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 235 -> 260 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The Bleed convulses... echoes of the Desert tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:DESERT] (was [:SNOWY_MOUNTAIN])
+
+--- Turn 8 ---
+  [Kyogre 225/404 | Reshiram 260/404]
+  [AIField @ BLEED] Kyogre: Splash +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Splash +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 225 -> 250 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 260 -> 285 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+
+--- Turn 9 ---
+  [Kyogre 250/404 | Reshiram 285/404]
+  [AIField @ BLEED] Kyogre: Splash +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Splash +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 250 -> 275 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 285 -> 310 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+
+--- Turn 10 ---
+  [Kyogre 275/404 | Reshiram 310/404]
+  [AIField @ BLEED] Kyogre: Splash +0, Hydro Pump +0, Ice Beam +0, Thunder +0
+  [AIField @ BLEED] Reshiram: Splash +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  Kyogre used Splash!
+  But nothing happened!
+  The wild Reshiram used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: UseItem)
+    HP Kyogre (player): 275 -> 300 / 404
+  Kyogre restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Reshiram (foe): 310 -> 335 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The Bleed convulses... echoes of the Snowy Mountain tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:SNOWY_MOUNTAIN] (was [:DESERT])
+
+--- Turn 11 ---
+  [Kyogre 300/404 | Reshiram 335/404]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 10 turn(s)

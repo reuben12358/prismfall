@@ -1,0 +1,74 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+E. Tide: Flooded Dunes, the player's Sunny Day drains the flood (sun: 2 a round)
+================================================================================
+
+--- Battle start ---
+  field: FLOODED_DUNES | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Ninetales!
+    >> sent out (player): Ninetales Lv.85 [FLASHFIRE]
+## FIELD CHANGE: NONE -> FLOODED_DUNES
+  The sea has come to the sand! Floodwater pours in between the dunes!
+
+--- Turn 1 ---
+  [Ninetales 245/245 | Snorlax 393/393]
+  [AIField @ FLOODED_DUNES] Ninetales: Sunny Day +0, Flamethrower +0
+  [AIField @ FLOODED_DUNES] Snorlax: Splash +0
+  Ninetales used Sunny Day!
+  The sunlight turned harsh!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Ninetales 245/245 | Snorlax 393/393]
+  [AIField @ FLOODED_DUNES] Ninetales: Sunny Day +0, Flamethrower +0
+  [AIField @ FLOODED_DUNES] Snorlax: Splash +0
+  Ninetales used Flamethrower!
+  The flood hissed the flames down to steam...
+    HP Snorlax (foe): 393 -> 337 / 393
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  The floodwater is sinking into the sand...
+
+--- Turn 3 ---
+  [Ninetales 245/245 | Snorlax 337/393]
+  [AIField @ FLOODED_DUNES] Ninetales: Sunny Day +0, Flamethrower +0
+  [AIField @ FLOODED_DUNES] Snorlax: Splash +0
+  Ninetales used Flamethrower!
+  The flood hissed the flames down to steam...
+    HP Snorlax (foe): 337 -> 281 / 393
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+## FIELD CHANGE: FLOODED_DUNES -> DESERT
+  The flood-sea drained away into the sand... and the soaked dunes burst into a superbloom!
+## FIELD STAGE: DESERT is now stage 2
+
+--- Turn 4 ---
+  [Ninetales 245/245 | Snorlax 281/393]
+  [AIField @ DESERT st2] Ninetales: Sunny Day +0, Flamethrower +1 -> DESERT (1/2)
+  [AIField @ DESERT st2] Snorlax: Splash +0
+  Ninetales used Flamethrower!
+    HP Snorlax (foe): 281 -> 172 / 393
+  The blossoms are curling in the heat... (1 more)
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 5 ---
+  [Ninetales 245/245 | Snorlax 172/393]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 4 turn(s)

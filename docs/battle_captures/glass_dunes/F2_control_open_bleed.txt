@@ -1,0 +1,201 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+F2. Control: the Bleed on a map without a pool (990) borrows from every field
+=============================================================================
+
+--- Battle start ---
+  field: BLEED | weather: None | terrain: None
+  Oh! A wild Snorlax appeared!
+  Go! Mew!
+    >> sent out (player): Mew Lv.85 [SYNCHRONIZE]
+## FIELD CHANGE: NONE -> BLEED
+  Reality frays at the edges... The Bleed is spreading!
+  The Bleed convulses... echoes of the Meadow tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:MEADOW] (was [])
+
+--- Turn 1 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Special Attack rose!
+  Mew's Attack fell!
+
+--- Turn 2 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Speed rose!
+  Mew's Defense fell!
+
+--- Turn 3 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Speed rose!
+  The wild Snorlax's Defense fell!
+  The Bleed convulses... echoes of the Flower Garden tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:FLOWER_GARDEN] (was [:MEADOW])
+
+--- Turn 4 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 5 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 6 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the New Moon tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:NEW_MOON] (was [:FLOWER_GARDEN])
+
+--- Turn 7 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 8 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped the wild Snorlax's power!
+    (anim: StatUp)
+  The wild Snorlax's Attack rose!
+  The wild Snorlax's Speed fell!
+
+--- Turn 9 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the Stormfront tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:STORMFRONT] (was [:NEW_MOON])
+
+--- Turn 10 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 11 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 12 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed warped Mew's power!
+    (anim: StatUp)
+  Mew's Attack rose!
+  Mew's Speed fell!
+  The Bleed convulses... echoes of the Factory tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:FACTORY] (was [:STORMFRONT])
+
+--- Turn 13 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 14 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+
+--- Turn 15 ---
+  [Mew 291/291 | Snorlax 393/393]
+  [AIField @ BLEED] Mew: Splash +0
+  [AIField @ BLEED] Snorlax: Splash +0
+  Mew used Splash!
+  But nothing happened!
+  The wild Snorlax used Splash!
+  But nothing happened!
+  (end of round)
+  The Bleed convulses... echoes of the Fairy Tale tear through the battlefield!
+## FIELD OVERLAY: BLEED now borrows [:FAIRY_TALE] (was [:FACTORY])
+
+--- Turn 16 ---
+  [Mew 291/291 | Snorlax 393/393]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 15 turn(s)

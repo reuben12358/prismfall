@@ -1,0 +1,174 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+G2. AI vs AI on 926: ASHKAAR_OFFICER Captain v1 vs Lv.85 challenger
+===================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  You are challenged by Ashkaar Officer Captain!
+  Ashkaar Officer Captain sent out Torkoal!
+    >> sent out (foe): Torkoal Lv.82 @HEATROCK [DROUGHT]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    [ability: Torkoal (foe)'s Drought]
+    (anim: Sun)
+  The sunlight turned harsh!
+
+--- Turn 1 ---
+  [Garchomp 304/304 | Torkoal 249/249]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Torkoal: Eruption +4 -> GLASS_DUNES (1/2), Earth Power +0, Solar Beam +0, Protect +0
+  Garchomp used Earthquake!
+  The dunes shifted under Garchomp's command!
+    HP Torkoal (foe): 249 -> 35 / 249
+  It's super effective!
+  The opposing Torkoal used Earth Power!
+  The dunes shifted under the opposing Torkoal's command!
+    HP Garchomp (player): 304 -> 246 / 304
+    (anim: StatDown)
+  Garchomp's Special Defense fell!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 2 ---
+  [Garchomp 246/304 | Torkoal 35/249]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Torkoal: Eruption +4 -> GLASS_DUNES (1/2), Earth Power +0, Solar Beam +0, Protect +0
+  The opposing Torkoal used Protect!
+  The opposing Torkoal protected itself!
+  Garchomp used Earthquake!
+    (anim: Protect)
+  The opposing Torkoal protected itself!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 3 ---
+  [Garchomp 246/304 | Torkoal 35/249]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Torkoal: Eruption +4 -> GLASS_DUNES (1/2), Earth Power +0, Solar Beam +0, Protect +0
+  Garchomp used Fire Fang!
+    HP Torkoal (foe): 35 -> 0 / 249
+  It's not very effective...
+  The opposing Torkoal fainted!
+    xx fainted: Torkoal (foe)
+  Garchomp got 2593 Exp. Points!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  Ashkaar Officer Captain is about to send out Coalossal. Will you switch your Pokémon?  [auto: No]
+  Ashkaar Officer Captain sent out Coalossal!
+    >> sent out (foe): Coalossal Lv.83 @SITRUSBERRY [STEAMENGINE]
+
+--- Turn 4 ---
+  [Garchomp 246/304 | Coalossal 318/318]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Coalossal: Rock Slide +0, Flare Blitz +0, High Horsepower +0, Protect +0
+  Garchomp used Earthquake!
+  The dunes shifted under Garchomp's command!
+    HP Coalossal (foe): 318 -> 0 / 318
+  It's super effective!
+  The opposing Coalossal fainted!
+    xx fainted: Coalossal (foe)
+  Garchomp got 4116 Exp. Points!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  Ashkaar Officer Captain is about to send out Garchomp. Will you switch your Pokémon?  [auto: No]
+  Ashkaar Officer Captain sent out Garchomp!
+    >> sent out (foe): Garchomp Lv.84 @LUMBERRY [ROUGHSKIN]
+
+--- Turn 5 ---
+  [Garchomp 246/304 | Garchomp 319/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Dragon Claw!
+    HP Garchomp (player): 246 -> 26 / 304
+  It's super effective!
+  Garchomp used Earthquake!
+  The dunes shifted under Garchomp's command!
+    HP Garchomp (foe): 319 -> 181 / 319
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 6 ---
+  [Garchomp 26/304 | Garchomp 181/319]
+  [AIField @ DESERT] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Stone Edge!
+    HP Garchomp (player): 26 -> 0 / 304
+  A critical hit!
+  It's not very effective...
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  Go for it, Starmie!
+    >> sent out (player): Starmie Lv.85 [ILLUMINATE]
+
+--- Turn 7 ---
+  [Starmie 223/223 | Garchomp 181/319]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Dragon Claw!
+    HP Starmie (player): 223 -> 104 / 223
+  Starmie used Ice Beam!
+  The desert heat blunted the cold...
+    HP Garchomp (foe): 181 -> 37 / 319
+  It's super effective!
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+
+--- Turn 8 ---
+  [Starmie 104/223 | Garchomp 37/319]
+  [AIField @ DESERT] Starmie: Surf +0 -> DESERT st2 (1/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Stomping Tantrum!
+  The dunes shifted under the opposing Garchomp's command!
+    HP Starmie (player): 104 -> 0 / 223
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  Your opponent's weak! Get 'em, Charizard!
+    >> sent out (player): Charizard Lv.85 [BLAZE]
+
+--- Turn 9 ---
+  [Charizard 253/253 | Garchomp 37/319]
+  [AIField @ DESERT] Charizard: Flamethrower +0, Air Slash +0, Dragon Pulse +0, Earthquake +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Stone Edge!
+    HP Charizard (player): 253 -> 0 / 253
+  It's super effective!
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  (end of round)
+    (anim: Sun)
+  The sunlight is strong.
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.85 [STEADFAST]
+
+--- Turn 10 ---
+  [Lucario 240/240 | Garchomp 37/319]
+  [AIField @ DESERT] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT] Garchomp: Dragon Claw +0, Stone Edge +0, Stomping Tantrum +0, Protect +0
+  The opposing Garchomp used Stomping Tantrum!
+  The dunes shifted under the opposing Garchomp's command!
+    HP Lucario (player): 240 -> 0 / 240
+  It's super effective!
+  Lucario fainted!
+    xx fainted: Lucario (player)
+  You have no more Pokémon that can fight!
+  You lost against Ashkaar Officer Captain!
+  You gave $6,720 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 9 turn(s)

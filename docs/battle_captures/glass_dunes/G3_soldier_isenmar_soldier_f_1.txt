@@ -1,0 +1,151 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+G3. AI vs AI on 926: ISENMAR_SOLDIER_F Soldier v1 vs Lv.85 challenger
+=====================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  You are challenged by Isenmar Soldier Soldier!
+  Isenmar Soldier Soldier sent out Politoed!
+    >> sent out (foe): Politoed Lv.80 @DAMPROCK [DRIZZLE]
+  Go! Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    [ability: Politoed (foe)'s Drizzle]
+    (anim: Rain)
+  It started to rain!
+## FIELD STAGE: DESERT is now stage 2
+  Rain on the dunes! Seeds sleeping in the sand burst into a superbloom!
+
+--- Turn 1 ---
+  [Garchomp 304/304 | Politoed 275/275]
+  [AIField @ DESERT st2] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +3 -> DESERT (1/2)
+  [AIField @ DESERT st2] Politoed: Scald +0, Ice Beam +0, Encore +0, Perish Song +0
+  Garchomp used Earthquake!
+    HP Politoed (foe): 275 -> 83 / 275
+  The opposing Politoed used Scald!
+    HP Garchomp (player): 304 -> 176 / 304
+    (anim: Burn)
+  Garchomp was burned!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Burn)
+    HP Garchomp (player): 176 -> 157 / 304
+  Garchomp was hurt by its burn!
+
+--- Turn 2 ---
+  [Garchomp 157/304 BURN | Politoed 83/275]
+  [AIField @ DESERT st2] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +3 -> DESERT (1/2)
+  [AIField @ DESERT st2] Politoed: Scald +0, Ice Beam +0, Encore +0, Perish Song +0
+  Garchomp used Earthquake!
+    HP Politoed (foe): 83 -> 0 / 275
+  The opposing Politoed fainted!
+    xx fainted: Politoed (foe)
+  Garchomp got 3721 Exp. Points!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+    (anim: Burn)
+    HP Garchomp (player): 157 -> 138 / 304
+  Garchomp was hurt by its burn!
+  Isenmar Soldier Soldier is about to send out Kingdra. Will you switch your Pokémon?  [auto: No]
+  Isenmar Soldier Soldier sent out Kingdra!
+    >> sent out (foe): Kingdra Lv.81 @SITRUSBERRY [SWIFTSWIM]
+
+--- Turn 3 ---
+  [Garchomp 138/304 BURN | Kingdra 254/254]
+  [AIField @ DESERT st2] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Fire Fang +2 -> DESERT (1/2)
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +2 -> FLOODED_DUNES (1/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Hydro Pump!
+    HP Garchomp (player): 138 -> 0 / 304
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  The water is rising through the bloom... (2 more)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  You're in charge, Starmie!
+    >> sent out (player): Starmie Lv.85 [ILLUMINATE]
+
+--- Turn 4 ---
+  [Starmie 223/223 | Kingdra 254/254]
+  [AIField @ DESERT st2] Starmie: Surf -2 -> FLOODED_DUNES (2/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +2 -> FLOODED_DUNES (2/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Ice Beam!
+    HP Starmie (player): 223 -> 187 / 223
+  It's not very effective...
+  Starmie used Psychic!
+    HP Kingdra (foe): 254 -> 156 / 254
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 5 ---
+  [Starmie 187/223 | Kingdra 156/254]
+  [AIField @ DESERT st2] Starmie: Surf -2 -> FLOODED_DUNES (2/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +2 -> FLOODED_DUNES (2/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Hydro Pump!
+  The opposing Kingdra's attack missed!
+  Starmie used Thunderbolt!
+    HP Kingdra (foe): 156 -> 92 / 254
+    (anim: EatBerry)
+    HP Kingdra (foe): 92 -> 155 / 254
+  The opposing Kingdra restored its health using its Sitrus Berry!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 6 ---
+  [Starmie 187/223 | Kingdra 155/254]
+  [AIField @ DESERT st2] Starmie: Surf -2 -> FLOODED_DUNES (2/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +2 -> FLOODED_DUNES (2/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Ice Beam!
+    HP Starmie (player): 187 -> 147 / 223
+  It's not very effective...
+    (anim: Frozen)
+  Starmie was frozen solid!
+  Starmie thawed out!
+  Starmie used Thunderbolt!
+    HP Kingdra (foe): 155 -> 59 / 254
+  A critical hit!
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+
+--- Turn 7 ---
+  [Starmie 147/223 | Kingdra 59/254]
+  [AIField @ DESERT st2] Starmie: Surf -2 -> FLOODED_DUNES (2/3), Ice Beam +0, Thunderbolt +0, Psychic +0
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +2 -> FLOODED_DUNES (2/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Draco Meteor!
+    HP Starmie (player): 147 -> 0 / 223
+    (anim: StatDown)
+  The opposing Kingdra's Special Attack harshly fell!
+  Starmie fainted!
+    xx fainted: Starmie (player)
+  (end of round)
+    (anim: Rain)
+  Rain continues to fall.
+  Your opponent's weak! Get 'em, Lucario!
+    >> sent out (player): Lucario Lv.85 [STEADFAST]
+
+--- Turn 8 ---
+  [Lucario 240/240 | Kingdra 59/254]
+  [AIField @ DESERT st2] Lucario: Aura Sphere +0, Flash Cannon +0, Extreme Speed +0, Close Combat +0
+  [AIField @ DESERT st2] Kingdra: Hydro Pump +3 -> FLOODED_DUNES (2/3), Draco Meteor +0, Ice Beam +0, Rain Dance +0
+  The opposing Kingdra used Ice Beam!
+    HP Lucario (player): 240 -> 217 / 240
+  It's not very effective...
+  Lucario used Aura Sphere!
+    HP Kingdra (foe): 59 -> 0 / 254
+  The opposing Kingdra fainted!
+    xx fainted: Kingdra (foe)
+  Lucario got 4130 Exp. Points!
+  You defeated Isenmar Soldier Soldier!
+  The whale's awake and I lose to you. Some war.
+  You got $3,888 for winning!
+  battle result code: 1
+  
+RESULT: player won after 7 turn(s)

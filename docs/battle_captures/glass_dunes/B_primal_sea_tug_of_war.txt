@@ -1,0 +1,131 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+B. Primal Kyogre (Primordial Sea) vs Reshiram on 926: flood at send-out, glass under the heavy rain
+===================================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Reshiram appeared!
+  Go! Kyogre!
+    >> sent out (player): Kyogre Lv.85 @LEFTOVERS [PRIMORDIALSEA]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+    [ability: Reshiram (foe)'s Turboblaze]
+  The wild Reshiram is radiating a blazing aura!
+    [ability: Kyogre (player)'s Primordial Sea]
+    (anim: HeavyRain)
+  A heavy rain began to fall!
+## FIELD CHANGE: DESERT -> FLOODED_DUNES
+  A sea-storm broke over the desert! The flood-sea is pouring in over the dunes!
+
+--- Turn 1 ---
+  [Kyogre 344/344 | Reshiram 404/404]
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Water Spout +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0
+  [AIField @ FLOODED_DUNES] Reshiram: Blue Flare +16 -> GLASS_DUNES (1/1), Fusion Flare +16 -> GLASS_DUNES (1/1), Dragon Pulse +0, Earth Power +0
+  The wild Reshiram used Blue Flare!
+  The Fire-type attack fizzled out in the heavy rain!
+## FIELD CHANGE: FLOODED_DUNES -> GLASS_DUNES
+  The white fire flashed the flood to steam and fused the drowned sand into glass!
+  Kyogre used Thunder!
+    HP Reshiram (foe): 404 -> 372 / 404
+  It's not very effective...
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+    (anim: UseItem)
+    HP Reshiram (foe): 372 -> 397 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 397 -> 404 / 404
+
+--- Turn 2 ---
+  [Kyogre 344/344 | Reshiram 404/404]
+  [AIField @ GLASS_DUNES] Kyogre: Origin Pulse +4 -> FLOODED_DUNES (1/2), Water Spout +3 -> FLOODED_DUNES (1/3), Ice Beam +3 -> FLOODED_DUNES (1/3), Thunder +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  The wild Reshiram used Dragon Pulse!
+    HP Kyogre (player): 344 -> 238 / 344
+  Kyogre used Origin Pulse!
+    HP Reshiram (foe): 404 -> 262 / 404
+  The sea is rising against the glass... (1 more)
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+    (anim: UseItem)
+    HP Reshiram (foe): 262 -> 287 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Kyogre (player): 238 -> 259 / 344
+  Kyogre restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 287 -> 312 / 404
+
+--- Turn 3 ---
+  [Kyogre 259/344 | Reshiram 312/404]
+  [AIField @ GLASS_DUNES] Kyogre: Origin Pulse +16 -> FLOODED_DUNES (2/2), Water Spout +3 -> FLOODED_DUNES (1/3), Ice Beam +3 -> FLOODED_DUNES (1/3), Thunder +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  The wild Reshiram used Dragon Pulse!
+    HP Kyogre (player): 259 -> 153 / 344
+  Kyogre used Origin Pulse!
+    HP Reshiram (foe): 312 -> 128 / 404
+## FIELD CHANGE: GLASS_DUNES -> FLOODED_DUNES
+  The flood-sea broke back in over the glass dunes!
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+    (anim: UseItem)
+    HP Reshiram (foe): 128 -> 153 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Kyogre (player): 153 -> 174 / 344
+  Kyogre restored a little HP using its Leftovers!
+
+--- Turn 4 ---
+  [Kyogre 174/344 | Reshiram 153/404]
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Water Spout +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0
+  [AIField @ FLOODED_DUNES] Reshiram: Blue Flare +16 -> GLASS_DUNES (1/1), Fusion Flare +16 -> GLASS_DUNES (1/1), Dragon Pulse +0, Earth Power +0
+  The wild Reshiram used Fusion Flare!
+  The Fire-type attack fizzled out in the heavy rain!
+## FIELD CHANGE: FLOODED_DUNES -> GLASS_DUNES
+  The white fire flashed the flood to steam and fused the drowned sand into glass!
+  Kyogre used Thunder!
+    HP Reshiram (foe): 153 -> 121 / 404
+  It's not very effective...
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+    (anim: UseItem)
+    HP Reshiram (foe): 121 -> 146 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Kyogre (player): 174 -> 195 / 344
+  Kyogre restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 146 -> 171 / 404
+
+--- Turn 5 ---
+  [Kyogre 195/344 | Reshiram 171/404]
+  [AIField @ GLASS_DUNES] Kyogre: Origin Pulse +4 -> FLOODED_DUNES (1/2), Water Spout +3 -> FLOODED_DUNES (1/3), Ice Beam +3 -> FLOODED_DUNES (1/3), Thunder +0
+  [AIField @ GLASS_DUNES] Reshiram: Blue Flare +0, Fusion Flare +0, Dragon Pulse +0, Earth Power +0
+  The wild Reshiram used Dragon Pulse!
+    HP Kyogre (player): 195 -> 89 / 344
+  Kyogre used Thunder!
+    HP Reshiram (foe): 171 -> 139 / 404
+  It's not very effective...
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+    (anim: UseItem)
+    HP Reshiram (foe): 139 -> 164 / 404
+  The wild Reshiram restored a little HP using its Leftovers!
+    (anim: UseItem)
+    HP Kyogre (player): 89 -> 110 / 344
+  Kyogre restored a little HP using its Leftovers!
+  The wild Reshiram drew warmth from the hot glass.
+    HP Reshiram (foe): 164 -> 189 / 404
+
+--- Turn 6 ---
+  [Kyogre 110/344 | Reshiram 189/404]
+  battle result code: 3
+  
+RESULT: fled/forfeit after 5 turn(s)

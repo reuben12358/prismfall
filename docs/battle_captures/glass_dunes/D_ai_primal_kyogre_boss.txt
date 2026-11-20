@@ -1,0 +1,74 @@
+LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 battle code + Prismfall plugins).
+Not a game screenshot: no EBDX visuals were rendered.
+
+D. AI vs AI: Primal Kyogre boss (2 bars) vs Reshiram, Charizard, Garchomp on 926
+================================================================================
+
+--- Battle start ---
+  field: DESERT | weather: None | terrain: None
+  Oh! A wild Kyogre appeared!
+  Go! Reshiram!
+    >> sent out (player): Reshiram Lv.85 [TURBOBLAZE]
+## FIELD CHANGE: NONE -> DESERT
+  Heat shimmers over the endless dunes...
+  Kyogre rises out of its flood-sea, Primal markings blazing!
+    [ability: Kyogre (foe)'s Primordial Sea]
+    (anim: HeavyRain)
+  A heavy rain began to fall!
+## FIELD CHANGE: DESERT -> FLOODED_DUNES
+  A sea-storm broke over the desert! The flood-sea is pouring in over the dunes!
+    [ability: Reshiram (player)'s Turboblaze]
+  Reshiram is radiating a blazing aura!
+
+--- Turn 1 ---
+  [Reshiram 291/291 | Kyogre 344/344]
+  [AIField @ FLOODED_DUNES] Reshiram: Blue Flare +16 -> GLASS_DUNES (1/1), Fusion Flare +16 -> GLASS_DUNES (1/1), Dragon Pulse +0, Earth Power +0
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0, Calm Mind +0
+  The wild Kyogre used Origin Pulse!
+  The wild Kyogre rode the flood-sea into the attack!
+    HP Reshiram (player): 291 -> 0 / 291
+  Reshiram fainted!
+    xx fainted: Reshiram (player)
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Garchomp!
+    >> sent out (player): Garchomp Lv.85 [SANDVEIL]
+
+--- Turn 2 ---
+  [Garchomp 304/304 | Kyogre 344/344]
+  [AIField @ FLOODED_DUNES] Garchomp: Earthquake +0, Dragon Claw +0, Stone Edge +0, Swords Dance +0
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Ice Beam -1 -> FROZEN_LAKE (1/3), Thunder +0, Calm Mind +0
+  Garchomp used Swords Dance!
+    (anim: StatUp)
+  Garchomp's Attack rose sharply!
+  The wild Kyogre used Ice Beam!
+  The wild Kyogre drew the sea-cold of the flood into Ice Beam!
+    HP Garchomp (player): 304 -> 0 / 304
+  It's super effective!
+  Garchomp fainted!
+    xx fainted: Garchomp (player)
+  Ice is creeping across the floodwater... (2 more)
+  (end of round)
+    (anim: HeavyRain)
+  It is raining heavily.
+  Use next Pokémon?  [auto: Yes]
+  You're in charge, Charizard!
+    >> sent out (player): Charizard Lv.85 [BLAZE]
+
+--- Turn 3 ---
+  [Charizard 253/253 | Kyogre 344/344]
+  [AIField @ FLOODED_DUNES] Charizard: Overheat +3 -> GLASS_DUNES (1/2), Air Slash +0, Solar Beam +0, Dragon Pulse +0
+  [AIField @ FLOODED_DUNES] Kyogre: Origin Pulse +0, Ice Beam -2 -> FROZEN_LAKE (2/3), Thunder +0, Calm Mind +0
+  Charizard used Air Slash!
+    HP Kyogre (foe): 344 -> 284 / 344
+  The wild Kyogre used Thunder!
+    HP Charizard (player): 253 -> 0 / 253
+  It's super effective!
+  Charizard fainted!
+    xx fainted: Charizard (player)
+  You have no more Pokémon that can fight!
+  battle result code: 2
+  
+RESULT: player lost after 2 turn(s)
