@@ -140,7 +140,7 @@ module FieldEffects
                      :in_weather, :on_terrain].freeze
   # Battler matcher (used by user:/target:/battlers:).
   BATTLER_MATCH_KEYS = [:types, :not_types, :abilities, :not_abilities, :items,
-                        :not_items, :grounded, :status, :condition,
+                        :not_items, :grounded, :status, :condition, :ai_safe,
                         :hp_below, :hp_above, :in_weather, :on_terrain].freeze
   # Things that happen to one battler (end_of_round, on_entry, seed).
   BATTLER_EFFECT_KEYS = [:battlers, :chance, :damage, :damage_type, :heal, :status,

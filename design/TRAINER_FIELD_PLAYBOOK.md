@@ -85,10 +85,10 @@ Reference: Reborn's Julia and Rejuvenation's Venam bring six at cap −3 .. cap 
 - **Counterplay.** Rock and Ghost (Nacli, Dwebble, Sandygast), stalling moves to calm the crowd, KO the singers first.
   No Fighting type exists before Gym 1 (Rev 16 distribution).
 - **The Saltmere audience (SPINE Rev 19).** The townsfolk met set the opening stage (0–6: 1, 7–13: 2, 14+: 3), and
-  from a good house up your fans heal your side 1/16 a round. **With your fans in, Standing Ovation's bask is for your
-  side only** (the house cheers you, not him; done 2026-11-20). Standard win rates (realistic six, 60 runs each):
-  sparse 48%, good 73%, full 58% with a Lv 15 team (180 runs each: 46 / 68 / 64%); 25 / 48 / 37% with a Lv 14 team.
-  Before the rule: 43 / 52 / 45% (Lv 14: 22 / 30 / 32%). Hard prepared 30 / 52 / 48%.
+  from a good house up your fans heal your side 1/16 a round. At Standing Ovation a good house lets his troupe bask
+  at half; a full house makes it yours: only your side basks, only your attacks get the crit stage, and Jigglypuff's
+  Sing can miss (done 2026-11-20). Standard (realistic six, 180 runs each): sparse 45%, good 63%, full 73%; Lv 14 team
+  22 / 32 / 45%; Hard prepared 33 / 50 / 62%. Before the rules: 43 / 52 / 45%.
 
 ### Pallbearer Thistle — Silkwood (Briarwick, before Gym 2, cap 19)
 Dustox 16, Foongus 17 (not on Casual), Phantump "Lowmarsh" 18. Hard adds Whirlipede.

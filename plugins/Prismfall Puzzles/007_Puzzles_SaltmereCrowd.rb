@@ -12,10 +12,11 @@
 #                        full   (14+): stage 3, Standing Ovation
 #   Your fans            from a good house up, the people you met cheer for YOUR side: at Encore and above your
 #                        Pokemon bask in the applause (1/16 HP a round), as Dorian's Normal types do at Standing
-#                        Ovation (the Grand Stage field reads FieldEffects.home_crowd?).  And the house cheers you,
-#                        not him: with your fans in, Standing Ovation's bask skips Dorian's troupe
-#                        (FieldEffects.home_crowd_foe?).  A full house is still a louder show, not a free win:
-#                        Dorian's Normal moves are x1.5 from the first turn.
+#                        Ovation (the Grand Stage field reads FieldEffects.home_crowd?).  And the bigger the house,
+#                        the more Standing Ovation is yours (FieldEffects.home_crowd_foe? / home_crowd_full?): at a
+#                        good house Dorian's troupe basks at half; at a full house only your side basks, only your
+#                        attacks get its +1 crit stage and his Sing can miss.  Still a show, not a free win: Dorian's
+#                        Normal moves are x1.5 from the first turn.
 #   The takings          after the win, your share of the box office: $150 a head.
 #
 # Townsfolk call pfm_audience(:key) from their own event (the map builder places the call: mapgen/REQUESTS.md);
@@ -115,5 +116,12 @@ module FieldEffects
   def self.home_crowd_foe?(battle, battler)
     return false if !$game_temp || !$game_temp.pf_home_crowd || !battler
     return battler.respond_to?(:opposes?) && battler.opposes?
+  end
+
+  # ...and is it a full house (14+)?  Then Standing Ovation is all yours: only your side basks, only your attacks get
+  # its crit stage, and Dorian's Sing can miss.  At a good house his troupe still basks, at half.
+  def self.home_crowd_full?(battle)
+    return false if !$game_temp || !$game_temp.pf_home_crowd
+    return $game_temp.pf_home_crowd >= PrismfallPuzzles::HOUSE[0][0]
   end
 end

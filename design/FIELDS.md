@@ -106,7 +106,8 @@ An opera house that plays to the crowd: songs, dances and showpieces build appla
 - Standing Ovation: every attack +1 critical-hit stage, Sing never misses, Normal types and Dancers bask in applause (1/16 HP).
 - Dancer +1 Speed, Punk Rock / Liquid Voice +1 Sp. Atk on entry. Indoors: no weather.
 - Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.
-- Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up. With your fans in, only your side basks at Standing Ovation.
+- Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up.
+- At Standing Ovation the house cheers you: with a good house his troupe basks at half; with a full house only your side basks, only your attacks get the extra crit stage, and his Sing can miss.
 
 **Changes:**
 - Dance moves x2 → stage +1

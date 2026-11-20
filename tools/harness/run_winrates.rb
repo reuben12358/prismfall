@@ -60,7 +60,9 @@ def wr_house(audience)
   $game_temp.pf_home_crowd = (audience >= 7) ? audience : nil if $game_temp.respond_to?(:pf_home_crowd=)
 end
 
-# Experiments on the full house (PRISM_EXP_HOUSE, harness only; proposals for the puzzle engineer / field owner):
+# Experiments on the full house (PRISM_EXP_HOUSE, harness only; proposals for the puzzle engineer / field owner).
+# Shipped since (102_Field_GrandStage.rb): good house = his troupe basks at half; full house = only your side basks,
+# only your attacks get the crit stage, his Sing can miss. These switches override those rules when set.
 #   crit   with your fans in, Standing Ovation's +1 crit stage is for your side only ("the house is yours")
 #   nobask with your fans in, Dorian's Normal types don't bask at Standing Ovation (the house cheers you, not him)
 #   halfbask with your fans in, Dorian's Normal types bask for 1/32 instead of 1/16

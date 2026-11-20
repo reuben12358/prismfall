@@ -209,10 +209,15 @@ module FieldEffects
     end
 
     # Battler matcher check without procs (other fields' procs may assume their
-    # own state). Rules with a :condition count as not matching.
+    # own state). Rules with a :condition count as not matching, unless the
+    # matcher says the proc is safe to call from the AI (:ai_safe => true: it
+    # reads only the battle, the battler and saved state, never the field's own).
     def static_match?(battle, spec, b)
       return true if !spec
-      return false if spec[:condition]
+      if spec[:condition]
+        return false if !spec[:ai_safe]
+        return false if !FieldEffects.safe_call(spec[:condition], battle, b)
+      end
       return false if spec[:types] && spec[:types].none? { |t| b.pbHasType?(t) }
       return false if spec[:not_types]&.any? { |t| b.pbHasType?(t) }
       return false if spec[:abilities] && !b.hasActiveAbility?(spec[:abilities])

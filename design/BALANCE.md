@@ -348,9 +348,9 @@ distribution allows by then (rare finds included). 60 fights per cell (20 per st
 | Picnicker Ada (Ch1 Windfall Row, Meadow; starter 9 + two catches) | 99% | 96% (Water 52 of 60) | 93% (Water 50 of 60) | — |
 | K1 Kestrel (Lv 5, can be lost) | 100% | 15% | 0% | — |
 | J1 Juno (Meadow) | 100% | 63% | 50% | 55% |
-| Gym 1 Dorian, sparse house (stage 1) | 100% | 48% | 3% | 30% |
-| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 73% | 10% | 52% |
-| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 58% | 10% | 48% |
+| Gym 1 Dorian, sparse house (stage 1) | 100% | 45% | 2% | 33% |
+| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 63% | 2% | 50% |
+| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 73% | 5% | 62% |
 | Gym 2 Tamsin (Silkwood, double) | 100% | 45% | 3% | 35% |
 | K2 Kestrel (Mountain) | 98% | 58% | 5% | 35% |
 | Gym 3 Marisol (Water Surface) | 82% | 23% | 0% | 37% |
@@ -377,14 +377,17 @@ six that found it wins **42%** on Standard (25 of 60; a second 60: 30%), Casual 
 teams: prepared 37%). Grass and Water starters that find it reach 73–80%. Pachirisu tested at 63% (too strong for a
 "modest" find); Emolga is the pick. The `G3E` cell in `run_winrates.rb` forces it into the team.
 
-**The Saltmere crowd (Gym 1 rows, 2026-11-20):** with your fans in (7+ met), Standing Ovation's bask is for your side
-only, so Dorian's all-Normal troupe no longer heals 1/16 a round at a full house ("the house cheers you, not him";
-`102_Field_GrandStage.rb`, `FieldEffects.home_crowd_foe?` in Puzzles `007_Puzzles_SaltmereCrowd.rb`). Before, on
-Standard: sparse / good / full **43 / 52 / 45%** (Lv 14 team 22 / 30 / 32%). After: **48 / 73 / 58%** at 60 fights a
-cell (180 a cell: **46 / 68 / 64%**), Lv 14 team **25 / 48 / 37%**. Meeting 7+ people is now worth about twenty points;
-a full house is about level with a good one (within noise at 180 fights; Standing Ovation's ×1.5 Normal moves and +1
-crit stage still cut both ways). The sparse house moved a few points only because the AI no longer counts the bask
-when it values pushing the applause up (rules with a condition are skipped by `AIField.static_match?`).
+**The Saltmere crowd (Gym 1 rows, 2026-11-20):** the bigger the house you gathered, the more Standing Ovation is
+yours (`102_Field_GrandStage.rb`; `FieldEffects.home_crowd_foe?` / `home_crowd_full?` in Puzzles
+`007_Puzzles_SaltmereCrowd.rb`). Sparse (0–6): unchanged. Good (7–13): your fans heal your side from Encore up, and at
+Standing Ovation Dorian's troupe basks at half (1/32). Full (14+): at Standing Ovation only your side basks, only your
+attacks get the +1 crit stage, and Dorian's Sing can miss (×1.3 instead of never missing; Jigglypuff's sure Sing was
+what made a full house no better than a good one). The crowd rules are `:ai_safe`, so both AIs still weigh who the
+house is cheering. Standard, realistic Lv 15 team, **180 fights a cell: sparse / good / full 45 / 63 / 73%** (before
+the crowd rules 43 / 52 / 45%; with only the home-side bask 46 / 68 / 64%). Lv 14 team (60 a cell) 22 / 32 / 45%,
+Hard prepared 33 / 50 / 62%, Casual 100%. Tried and dropped: the home-side crit alone (72 / 69%), Sing alone
+(73 / 76%), both at every house (76 / 73%): the good house also reaches Standing Ovation, so only full-house rules
+separate the two.
 
 Late fights (`/home/claude/work/trainers2/run_late.rb`, a well-built six at the cap, Full Restores, 8–10 runs): the
 Eevee Octave gauntlet (Lv 87 / 89) 9 of 10 Standard and 8 of 10 Hard with planned leads, 1 and 0 of 10 without; the war
@@ -424,5 +427,5 @@ in the validator, so they need no row.
   took the Bosses plugin over). Cap 85.
 - Little Crucible (Trials) re-levelled to the 2-badge band (19–21). K1 Standard: no type move (Reborn / Rejuvenation).
 - Pending: new maps' trainers as they are generated. Done: Gym 3's earned Electric answer for the Fire starter (the
-  Glade's night Emolga, §9); the Saltmere audience rule (with your fans in, Dorian's
-  troupe doesn't bask; §9).
+  Glade's night Emolga, §9); the Saltmere audience rules (the bigger the house, the more Standing
+  Ovation is yours; §9).

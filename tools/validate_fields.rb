@@ -158,7 +158,7 @@ def check_battler_matcher(where, m)
     when :types, :not_types         then check_ids(w, v, TYPES, "type")
     when :abilities, :not_abilities then check_ids(w, v, ABILITIES, "ability")
     when :items, :not_items         then check_ids(w, v, ITEMS, "item")
-    when :grounded                  then check_bool(w, v)
+    when :grounded, :ai_safe        then check_bool(w, v)
     when :status                    then check_enum(w, v, FieldEffects::STATUSES, "status")
     when :condition                 then check_proc(w, v)
     when :hp_below, :hp_above

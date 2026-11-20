@@ -713,6 +713,11 @@ No map file was edited.
    Dorian's side). Standard, Lv 15 team, 60 a cell: 43 / 52 / 45% → **48 / 73 / 58%** (180 a cell: 46 / 68 / 64%);
    Lv 14 team 22 / 30 / 32% → 25 / 48 / 37%. Good and full house come out about level. Docs: BALANCE.md §9,
    GYM_PUZZLES.md Gym 1, FIELDS.md, TRAINER_FIELD_PLAYBOOK.md.
+   **Follow-up 2026-11-20 (main: the win rate must rise with the crowd):** good and full came out level (68 / 64%)
+   because a good house also reaches Standing Ovation and Jigglypuff's sure Sing hurt most at a full one. Now: good
+   house = Dorian's troupe basks at half at Standing Ovation; full house = only your side basks, only your attacks get
+   the +1 crit stage, his Sing can miss (`FieldEffects.home_crowd_full?`). The crowd procs are `:ai_safe` (new matcher
+   key: the AI's field scores may call them). Standard, 180 a cell: **45 / 63 / 73%**.
 
 **For the field owner:**
 3. **Water Surface ↔ Underwater loop:** Dive into Underwater and Dive back to the surface are both transform strikes

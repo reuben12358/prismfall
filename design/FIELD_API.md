@@ -407,7 +407,9 @@ All three can be borrowed (§8).
 
 ### 12.2 New matcher and rule keys
 * Move matcher: `:in_weather => [ids]`, `:on_terrain => [ids]` (the weather / terrain currently up).
-* Battler matcher: `:hp_below => fraction`, `:hp_above => fraction`, `:in_weather`, `:on_terrain`.
+* Battler matcher: `:hp_below => fraction`, `:hp_above => fraction`, `:in_weather`, `:on_terrain`. `:ai_safe => true`
+  lets the AI's field valuation call the matcher's `:condition` proc (only for procs that read the battle, the battler
+  and saved state; without it a rule with a `:condition` is invisible to the AI's field scores).
 * `:effectiveness_mods` rules accept `:user` and `:target` battler matchers.
 * Battler-effect rules (§4.6, seeds): `:add_type => TYPE` adds a third type (default message "{1} became part {2} type!").
   New named `:effects`: `:tailwind :safeguard :mist :lucky_chant :reflect :light_screen :wish :taunt :stealth_rock

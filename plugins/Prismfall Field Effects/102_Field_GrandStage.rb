@@ -47,12 +47,28 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
   # Saltmere's audience (SPINE Rev 19; Prismfall Puzzles 007_Puzzles_SaltmereCrowd.rb): in Dorian's show, the townsfolk
   # you met are YOUR fans.  From Encore up, they cheer your side the way the house cheers Normal types at Standing Ovation.
   # Inactive in every other battle (FieldEffects.home_crowd? is false unless pf_house_rules set it up).
-  fans = { :battlers => { :condition => proc { |battle, b| FieldEffects.respond_to?(:home_crowd?) && FieldEffects.home_crowd?(battle, b) } },
+  # The crowd procs only read $game_temp and the battler's side, so the AI may call them (:ai_safe): Dorian and the
+  # player's side both see who the house is cheering when they weigh the applause.
+  fans = { :battlers => { :condition => proc { |battle, b| FieldEffects.respond_to?(:home_crowd?) && FieldEffects.home_crowd?(battle, b) },
+                          :ai_safe => true },
            :heal => 1/16r, :message => "Your friends in the stalls cheer {1} on!" }
   fans3 = { :battlers => fans[:battlers].merge(:not_types => [:NORMAL]), :heal => 1/16r, :message => fans[:message] }   # Normal types already bask
-  # With your fans in (a good house up), Standing Ovation's bask is for your side only: the house cheers you, not him.
-  # A sparse house (and every other Grand Stage battle) is unchanged: FieldEffects.home_crowd_foe? is false there.
-  not_house_foe = proc { |battle, b| !(FieldEffects.respond_to?(:home_crowd_foe?) && FieldEffects.home_crowd_foe?(battle, b)) }
+  # The bigger the house you gathered, the more Standing Ovation is yours (a sparse house, and every other Grand Stage
+  # battle, is unchanged: the procs below are false there):
+  #   good house (7-13)  Dorian's troupe basks at half (1/32); your side basks in full
+  #   full house (14+)   only your side basks, only your attacks get the +1 crit stage, and his Sing can miss (x1.3)
+  crowd     = lambda { |m, *args| FieldEffects.respond_to?(m) && FieldEffects.send(m, *args) }
+  house_foe = proc { |battle, b| crowd.call(:home_crowd_foe?, battle, b) }   # Dorian's side, with your fans in
+  full_foe  = proc { |battle, b| house_foe.call(battle, b) && crowd.call(:home_crowd_full?, battle) }
+  good_foe  = proc { |battle, b| house_foe.call(battle, b) && !crowd.call(:home_crowd_full?, battle) }
+  not_house_foe = proc { |battle, b| !house_foe.call(battle, b) }
+  not_full_foe  = proc { |battle, b| !full_foe.call(battle, b) }
+  bask = lambda do |cond, heal|
+    [{ :battlers => { :types => [:NORMAL], :condition => cond, :ai_safe => true }, :heal => heal,
+       :message => "{1} basked in the applause." },
+     { :battlers => { :abilities => [:DANCER], :not_types => [:NORMAL], :condition => cond, :ai_safe => true },
+       :heal => heal, :message => "{1} basked in the applause." }]
+  end
   stage_mods = lambda do |normal, show|
     {
       :type_mods   => { :NORMAL => normal },
@@ -80,7 +96,8 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
                        "Standing Ovation: every attack +1 critical-hit stage, Sing never misses, Normal types and Dancers bask in applause (1/16 HP).",
                        "Dancer +1 Speed, Punk Rock / Liquid Voice +1 Sp. Atk on entry. Indoors: no weather.",
                        "Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.",
-                       "Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up. With your fans in, only your side basks at Standing Ovation."],
+                       "Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up.",
+                       "At Standing Ovation the house cheers you: with a good house his troupe basks at half; with a full house only your side basks, only your attacks get the extra crit stage, and his Sing can miss."],
     :nature_power  => :HYPERVOICE,
     :camouflage    => :NORMAL,
     :secret_power  => 0,
@@ -125,16 +142,11 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
         :intro_message => "Standing ovation! The whole house is on its feet!",
         :type_mods     => stage_mods.call(1.5, 1.5)[:type_mods],
         :damage_mods   => stage_mods.call(1.5, 1.5)[:damage_mods],
-        :accuracy_mods => [{ :moves => [:SING], :always_hit => true },
+        :accuracy_mods => [{ :moves => [:SING], :user => { :condition => not_full_foe }, :always_hit => true },
+                           { :moves => [:SING], :user => { :condition => full_foe }, :mult => 1.3 },
                            { :moves => [:GRASSWHISTLE, :SUPERSONIC, :METALSOUND], :mult => 1.3 }],
-        :crit_mods     => [{ :category => :damaging, :add => 1 }],
-        :end_of_round  => [
-          { :battlers => { :types => [:NORMAL], :condition => not_house_foe }, :heal => 1/16r,
-            :message => "{1} basked in the applause." },
-          { :battlers => { :abilities => [:DANCER], :not_types => [:NORMAL], :condition => not_house_foe }, :heal => 1/16r,
-            :message => "{1} basked in the applause." },
-          fans3
-        ],
+        :crit_mods     => [{ :category => :damaging, :user => { :condition => not_full_foe }, :add => 1 }],
+        :end_of_round  => bask.call(not_house_foe, 1/16r) + bask.call(good_foe, 1/32r) + [fans3],
         :transitions   => applause.call(nil)
       }
     }
