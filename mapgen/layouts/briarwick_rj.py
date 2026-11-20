@@ -104,6 +104,11 @@ def build(preview=None):
     m.lane([(34.5, 57.4), (30, 57.2), (26.5, 56.6)], w=2.0, seed=60, wobble=0.15, **LN)
     m.rect(22, 10, 2, 3, 'd', only='.')                                          # shrine path above the stairs
     m.smooth('d', into='.', passes=2, only='.tT')
+    # map builder 9 (SWAP 1A): the North Gate lane up the ridge to Spinners' Rise; the old Thistledown Lea road ends at the
+    # stream (the Lea now joins the Gossamer's west eaves, not Briarwick)
+    m.lane([(42.5, 12.5), (46, 9.5), (51, 6), (53.5, 2), (53.5, 0)], w=3.2, seed=63, wobble=0.15, **LN)
+    m.rect(52, 0, 4, 3, 'd', only='.tT')
+    m.rect(0, 29, 4, 4, 'T', only='.d')
     m.blob(40.8, 32.0, 3.6, 2.0, '.', seed=61, rough=0.2, only='d')              # the island under the Gathering Tree
     # ---------------------------------------------------------------- buildings
     E = []
@@ -140,6 +145,8 @@ def build(preview=None):
     walkway(m, sx(30) - 2, sx(31) + 4, 30)                   # the Thistledown Lea road over the stream
     # ---------------------------------------------------------------- events
     P('To Gossamer Wood', (35, 63)); P('To Gossamer Wood b', (36, 63))
+    E.append({'type': 'sign', 'name': 'North Gate sign', 'at': list(m.snap(51, 4, '.d', r=3)), 'post': False,
+              'text': "NORTH GATE - Spinners' Rise, Frostwick Pass and the Hoar Road north."})
     P('Arrival', (34, 62)); P('Juno (arrival)', (36, 61)); P('Stage manager', (37, 62))
     gx, gy = d['gym']
     P('Loomhouse sign', (gx + 2, gy + 1))
@@ -203,11 +210,12 @@ def build(preview=None):
     m.paint()
     garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3)))
     m.scatter(9, seed=21, on='.T')
+    m.seal_edges([('N', 52, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'] + [(x, H - 1) for x in range(33, 39)])
     if preview: m.preview(preview, 0.5)
     head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},
             'tone': [-10, -22, 2, 4], 'fog': {'name': 'prismfall_spores', 'opacity': 46, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1},
-            'connections': [{'dir': 'W', 'offset': 29, 'to': 540, 'to_offset': 10}], '_file': '120_briarwick.yaml'}
+            'connections': [{'dir': 'N', 'offset': 52, 'to': 566, 'to_offset': 38}], '_file': '120_briarwick.yaml'}
     import yaml
     src = yaml.safe_load(open(os.path.join(K.HERE, 'layouts', 'briarwick_events.yaml')))[120]['head']
     for k in ('bgm', 'metadata', 'field', 'display_name'):

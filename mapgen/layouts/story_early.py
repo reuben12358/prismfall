@@ -762,7 +762,7 @@ add(120,
     hidden('HiddenItem rope bridge', 'XATTACK', 'It fell out of someone\'s pocket mid-bwoing.'),
     hidden('HiddenItem dye vats', 'TINYMUSHROOM', 'Dyed Elowen green. Still a mushroom.'),
     warp('To Gossamer Wood', link='WOOD_BRIAR', arrive=[35, 62, 'up']),
-    warp('To Gossamer Wood b', to={'map': 524, 'x': 25, 'y': 1, 'dir': 'down'}))
+    warp('To Gossamer Wood b', to={'map': 524, 'x': 45, 'y': 1, 'dir': 'down'}))   # map builder 9: 524 rebuilt at 90x110
 
 _bt, _, _ = parsed(r'^### Flavor townsfolk$', r'^\*\[after gym, village-wide')
 AFTER_GYM = {'Weaver at loom': LOOM_WEAVER_AFTER, 'Dyer': [N('Dyer', "Contract's a contract, says the linesman. So's a pitchfork, says I.")],

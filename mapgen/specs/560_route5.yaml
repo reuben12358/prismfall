@@ -15,8 +15,8 @@ metadata:
   Weather: [Snow, 10]
 tone: [-6, -2, 10, 10]
 connections:
-- {dir: E, offset: 12, to: 140, to_offset: 32}
-- {dir: W, offset: 10, to: 570, to_offset: 21}
+- {dir: E, offset: 12, to: 140, to_offset: 31}
+- {dir: N, offset: 2, to: 570, to_offset: 4}
 raw: data/raw/560.npy
 tileset: 52
 events:
@@ -32,7 +32,7 @@ events:
   at: [60, 11]
   text: 'FROSTFLAT CAUSEWAY
 
-    W: Frostwick   E: Saltmere'
+    N (at the west end): Frostwick   E: Saltmere'
   post: false
 - type: sign
   name: Old salt road
@@ -135,3 +135,71 @@ events:
 - type: item
   at: [45, 23]
   item: HEALPOWDER
+- type: event
+  name: Customs chain 1
+  at: [34, 11]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands:
+    - if: $game_player.x < 34
+      then:
+      - An Isenmar customs chain across the causeway, hooked on this side.
+      - You unhook it. The chain clanks into the snow.
+      - {script: "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']]\
+          \ = true if ev\nend\n$game_map.need_refresh = true"}
+      else: ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']
+  - cond: {self: A}
+    through: true
+    commands: []
+- type: event
+  name: Customs chain 2
+  at: [34, 12]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands:
+    - if: $game_player.x < 34
+      then:
+      - An Isenmar customs chain across the causeway, hooked on this side.
+      - You unhook it. The chain clanks into the snow.
+      - {script: "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']]\
+          \ = true if ev\nend\n$game_map.need_refresh = true"}
+      else: ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']
+  - cond: {self: A}
+    through: true
+    commands: []
+- type: event
+  name: Customs chain 3
+  at: [34, 13]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands:
+    - if: $game_player.x < 34
+      then:
+      - An Isenmar customs chain across the causeway, hooked on this side.
+      - You unhook it. The chain clanks into the snow.
+      - {script: "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']]\
+          \ = true if ev\nend\n$game_map.need_refresh = true"}
+      else: ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']
+  - cond: {self: A}
+    through: true
+    commands: []
+- type: event
+  name: Customs chain 4
+  at: [34, 14]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands:
+    - if: $game_player.x < 34
+      then:
+      - An Isenmar customs chain across the causeway, hooked on this side.
+      - You unhook it. The chain clanks into the snow.
+      - {script: "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']]\
+          \ = true if ev\nend\n$game_map.need_refresh = true"}
+      else: ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']
+  - cond: {self: A}
+    through: true
+    commands: []

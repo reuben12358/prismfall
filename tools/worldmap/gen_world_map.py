@@ -201,6 +201,9 @@ def zone_seeds():
     seeds = []
     for i, (n, x, y, r, k) in W.SETTLEMENTS.items():
         if k != 'Antumbra':
+            cx, cy = G.CROWNWALL['c']
+            if 'Crownhaven' in k and k != 'Crownhaven' and math.hypot(x + 0.5 - cx, y + 0.5 - cy) > G.CROWNWALL['r'] + 1.2:
+                k = 'Elowen'
             seeds.append((x + 0.5, y + 0.5, surface_kingdom(k)))
     for r, l in W.all_legs():
         if l['kingdom'] == 'Antumbra':
@@ -211,6 +214,9 @@ def zone_seeds():
             k = surface_kingdom(l['kingdom'])
             if 'Antumbra' in k:                  # gate borderlands take the colour of their real kingdom
                 k = k.replace('Antumbra', '').strip('/')
+            cx, cy = G.CROWNWALL['c']
+            if 'Crownhaven' in k and math.hypot(c[0] + 0.5 - cx, c[1] + 0.5 - cy) > G.CROWNWALL['r'] + 1.2:
+                k = 'Elowen'                     # the Pilgrim Pass is Accord ground on Elowen land
             seeds.append((c[0] + 0.5, c[1] + 0.5, k))
     for k, x, y in G.ANCHORS:
         seeds.append((x, y, k))
@@ -707,7 +713,8 @@ def paint_big(out_path):
         pl = [P(*p) for p in line]
         if style == 'air':
             for i in range(0, len(pl) - 1, 3):
-                d.line([pl[i], pl[i + 1]], fill=(250, 250, 255, 210), width=3)
+                d.line([pl[i], pl[i + 1]], fill=(40, 60, 96, 200), width=6)
+                d.line([pl[i], pl[i + 1]], fill=(250, 250, 255, 235), width=3)
             continue
         if style == 'under':
             for i in range(0, len(pl) - 1, 3):
@@ -782,14 +789,15 @@ def paint_big(out_path):
     # --- kingdom names: big, translucent, auto-placed where the kingdom has the most empty land
     kl = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     kd2 = ImageDraw.Draw(kl)
-    KSIZE = {'ISENMAR': 44, 'NADIR': 46, 'ZENITH': 54}
+    KSIZE = {'ISENMAR': 44, 'NADIR': 38, 'ZENITH': 46}
     fKs = font(F_SERIF_I, 26)
     busy = keep.astype(np.float32)
     for b in LB.boxes:
         busy[int(max(0, b[1])):int(max(0, b[3])), int(max(0, b[0])):int(max(0, b[2]))] = 1.0
-    ib = busy.cumsum(0).cumsum(1)
+    ib_ = [busy.cumsum(0).cumsum(1)]
 
     def busy_sum(x0, y0, x1, y1):
+        ib = ib_[0]
         if x0 < 8 or y0 < 8 or x1 > w - 8 or y1 > h - 8:
             return 1e9
         x0, y0, x1, y1 = int(x0), int(y0), int(x1), int(y1)
@@ -810,8 +818,10 @@ def paint_big(out_path):
         tb = kd2.textbbox((0, 0), spaced(nm, 1), font=fK, anchor='mm')
         tw, th = tb[2] - tb[0], tb[3] - tb[1] + 54
         best = None
+        if nm in getattr(G, 'KINGDOM_LABELS_FIXED', ()):     # hand-placed (crowded kingdoms)
+            best = (0, x * S, y * S)
         ki = [i for i, lab in enumerate(F.labels) if lab == nm.title()]
-        for oy in np.arange(-1.6, 1.61, 0.2):
+        for oy in (np.arange(-1.6, 1.61, 0.2) if best is None else []):
             for ox in np.arange(-2.4, 2.41, 0.2):
                 cx_, cy_ = (x + ox) * S, (y + oy) * S
                 if not (0 <= int(cx_) < w and 0 <= int(cy_) < h) or not F.land[int(cy_), int(cx_)]:
@@ -828,7 +838,10 @@ def paint_big(out_path):
                  stroke_fill=(240, 228, 196, 120))
         kd2.text((cx_, cy_ + 40), sub, font=fKs, fill=(60, 36, 24, 200), anchor='mm', stroke_width=2,
                  stroke_fill=(240, 228, 196, 150))
-        LB.add((cx_ - tw / 2, cy_ - th / 2 + 10, cx_ + tw / 2, cy_ + th / 2 + 6))
+        box = (cx_ - tw / 2, cy_ - th / 2 + 10, cx_ + tw / 2, cy_ + th / 2 + 6)
+        LB.add(box)
+        busy[int(max(0, box[1])):int(max(0, box[3])), int(max(0, box[0])):int(max(0, box[2]))] = 1.0   # later labels avoid it
+        ib_[0] = busy.cumsum(0).cumsum(1)
     img = Image.alpha_composite(img, kl)
     d = ImageDraw.Draw(img, 'RGBA')
     # --- landmarks (nudged off anything already placed) and seas
@@ -863,7 +876,7 @@ def paint_big(out_path):
     lm_names = {nm.lower().replace('the ', '') for nm, *_ in G.LANDMARKS}
     for r, l in W.all_legs():
         cells = [c for c in l['cells'] if not (c[0] >= 25 and c[1] >= 15)]
-        if not cells or l['name'].lower().replace('the ', '') in lm_names:
+        if not cells or l['name'].lower().replace('the ', '') in lm_names or l['kingdom'] == 'Crownhaven':
             continue
         mx = sum(c[0] for c in cells) / len(cells) + 0.5
         my = sum(c[1] for c in cells) / len(cells) + 0.5

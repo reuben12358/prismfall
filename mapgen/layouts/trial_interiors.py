@@ -60,6 +60,15 @@ def build():
           obj('Tally Mast', r.at(6, 0), 'THE TALLY MAST. Every notch a debt, every debt a name, every name sung once a year.'),
           obj('Tally board', r.at(10, 1), cmds=[{'script': 'pf_trial_board(:ISENMAR)'}])]
     specs.append(r.spec(head(168, 'The Net Loft', 160, 'Ebbmouth', 'EB_NETLOFT', metadata={}), ev, 'EB_NETLOFT'))
+    # ---------------------------------------------------------------- 542 The Brinewife's Rest (re-tiled from the stock house2 template)
+    r = Room(11, 7, door_x=4)
+    for fx in (2, 8): r.window(fx)
+    r.sf('bed_o', 0, 0); r.sf('bed_o', 8, 0); r.rug(3, 2, 5, 3); r.tf('table_dark', 4, 3); r.tf('stool', 3, 4); r.tf('stool', 7, 4)
+    r.tf('kitchen', 4, -1); r.tf('barrel_y', 0, 5); r.tf('bucket', 10, 5); r.tf('shelf_bottles', 9, -1) if False else None
+    ev = [{'type': 'event', 'name': 'Rest house keeper', 'at': r.at(6, 2), 'pages': [{'graphic': {'sprite': 'NPC 28', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+        "Brinewife: Marsh got you? It gets everyone. Sit. Rest. There's broth, and it's mostly salt, and it's good.", {'heal': True}, {'me': 'Pkmn healing'},
+        'Your Pokémon were fully restored.']}]}]
+    specs.append(r.spec(head(542, "The Brinewife's Rest", 541, 'Route 2', 'R4_REST', metadata={}), ev, 'R4_REST'))
     write('148_trial_interiors.yaml', specs,
           "# Trial interiors 148 / 126 / 168. WRITTEN BY layouts/trial_interiors.py - edit that script.\n")
 

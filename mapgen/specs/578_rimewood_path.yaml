@@ -1,0 +1,121 @@
+# Rimewood Path (578). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 578
+name: Rimewood Path
+parent: 0
+bgm: Natural Park
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: snow
+  Weather: [Snow, 10]
+rubric: true
+yards_ok: true
+biome: forest
+field: SILKWOOD
+tone: [-12, -8, 8, 16]
+connections:
+- {dir: S, offset: 40, to: 570, to_offset: 20}
+- {dir: N, offset: 36, to: 562, to_offset: 22}
+raw: data/raw/578.npy
+tileset: 52
+events:
+- type: sign
+  name: Road sign
+  at: [44, 82]
+  text: 'RIMEWOOD PATH -- The Hoar Road. v Frostwick (North Gate) - ^ The Rimewood. Blazes: white is the path. Blue is not.'
+  post: false
+- type: event
+  name: The Lantern Birch
+  at: [42, 33]
+  pages:
+  - trigger: action
+    commands:
+    - THE LANTERN BIRCH. Trappers hang a light here for whoever is late. Tonight it is out.
+    - if: PBDayNight.isNight? && !pfm?(:lantern_birch)
+      then:
+      - You relight the lantern. Somewhere down the path, someone laughs with relief.
+      - {script: 'pbReceiveItem(:NEVERMELTICE)'}
+      - {script: 'pfm_set(:lantern_birch)'}
+- type: event
+  name: Charcoal kiln
+  at: [20, 44]
+  pages:
+  - trigger: action
+    commands: ['The charcoal burners'' kiln, banked and smoking. Warm, for once.']
+- type: event
+  name: Charcoal burner
+  at: [22, 47]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Charcoal burner: Elowen wood, Isenmar fire. Best charcoal in two kingdoms. Neither will admit it.']
+- type: event
+  name: Trapper
+  at: [60, 74]
+  pages:
+  - graphic: {sprite: NPC 22, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - 'Trapper: Lean-to''s yours if you need it. The fire''s honest.'
+    - {heal: true}
+- type: event
+  name: Snare line
+  at: [56, 58]
+  pages:
+  - trigger: action
+    commands:
+    - A snare line along the brook. One snare has caught a very cross Teddiursa.
+    - if: '!pfm?(:teddiursa_freed)'
+      then:
+      - You loosen the wire. The Teddiursa bolts, then stops, and looks back at you for a long moment.
+      - {script: 'pfm_set(:teddiursa_freed)'}
+- type: event
+  name: Honey-stump hives
+  at: [33, 67]
+  pages:
+  - trigger: action
+    commands: ['Hives in old stumps, glazed with frost. The Combee inside are slow and very, very offended.']
+- type: event
+  name: Woodcutter
+  at: [46, 59]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Woodcutter: Sledge of logs for Frostwick. Pulling it uphill builds character. Pulling it downhill builds speed.']
+- type: event
+  name: Blue blaze
+  at: [46, 28]
+  pages:
+  - trigger: action
+    commands: [A blue blaze on a birch. The path is the white ones. This one points off into the trees.]
+- type: event
+  name: The Unblazed
+  at: [62, 18]
+  pages:
+  - trigger: action
+    commands: [(A clearing where the Stantler herd sleeps standing up. Stantler tracks lead in and out. One stag lowers its antlers at you.)]
+- type: event
+  name: Stantler
+  at: [64, 20]
+  pages:
+  - graphic: {sprite: Followers/STANTLER, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['(It watches you, unblinking. The herd does not move.)']
+- type: item
+  at: [60, 16]
+  item: ICEHEAL
+- type: item
+  at: [18, 48]
+  item: CHARCOAL
+- type: item
+  at: [66, 72]
+  item: SUPERPOTION
+- type: item
+  at: [28, 24]
+  item: NEVERMELTICE
+  hidden: true
+  name: HiddenItem (birch hollow)

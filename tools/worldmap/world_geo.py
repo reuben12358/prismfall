@@ -31,8 +31,8 @@ ISLANDS = [
     [(10.3, 19.3), (10.55, 19.25), (10.6, 19.45), (10.35, 19.5)],
 ]
 LAKES = {
-    'Lake Sallow': dict(poly=[(20.9, 10.3), (21.4, 9.95), (22.1, 10.1), (22.4, 10.6), (22.1, 11.2), (21.4, 11.35),
-                              (20.95, 10.9)], kind='sulfur'),
+    'Lake Sallow': dict(poly=[(21.45, 11.05), (21.95, 10.85), (22.65, 10.95), (22.95, 11.4), (22.6, 11.9), (21.95, 11.95),
+                              (21.5, 11.6)], kind='sulfur'),
     'Mirror Mere': dict(poly=[(10.2, 6.35), (10.6, 6.15), (10.9, 6.4), (10.8, 6.8), (10.4, 6.85), (10.15, 6.6)],
                         kind='mirror'),
     'Saltmere Lagoon': dict(poly=[(7.25, 17.55), (7.75, 17.35), (8.1, 17.6), (7.9, 18.0), (7.4, 18.05)], kind='salt'),
@@ -40,8 +40,8 @@ LAKES = {
 }
 # Zenith's plateau (the City Above) in the south: a raised tableland; its edge is the Escarpment. Nadir lies beneath
 # it (the same footprint): Ironreach and Mirefen at its north foot, Underveil on the drowned coast under its south cliff.
-PLATEAU = [(15.1, 13.95), (16.6, 13.85), (18.3, 13.95), (19.8, 13.8), (21.1, 13.95), (21.85, 14.6), (21.95, 15.6),
-           (21.6, 16.6), (20.9, 17.5), (19.9, 17.85), (18.4, 17.95), (17.1, 17.9), (15.9, 17.75), (15.2, 17.2),
+PLATEAU = [(15.1, 13.95), (16.6, 13.85), (18.3, 13.95), (19.8, 13.8), (20.6, 13.95), (21.0, 14.6), (21.05, 15.6),
+           (20.8, 16.6), (20.35, 17.5), (19.6, 17.85), (18.4, 17.95), (17.1, 17.9), (15.9, 17.75), (15.2, 17.2),
            (14.95, 16.2), (14.95, 14.9)]
 # mountain ridges: (polyline, height, width)
 RIDGES = [
@@ -49,13 +49,13 @@ RIDGES = [
     ([(1.9, 4.2), (2.6, 3.7)], 0.55, 0.45),                                                 # Stillwater fells
     ([(19.6, 1.85), (20.7, 1.65), (21.9, 1.9), (23.0, 2.2)], 0.9, 0.55),                   # the Crags of Ossaria
     ([(19.1, 2.3), (19.35, 3.1)], 0.7, 0.35),                                               # the Jawbone Ridge
-    ([(24.7, 10.2), (25.6, 10.8), (26.3, 11.6)], 1.0, 0.55),                               # the Cinderhorn's shoulders
+    ([(24.9, 11.0), (25.8, 11.5), (26.4, 12.1)], 1.0, 0.5),                               # the Cinderhorn's shoulders
     ([(23.5, 14.7), (24.4, 14.15), (25.3, 13.75)], 0.8, 0.4),                               # the Wyrmspine
     ([(9.0, 12.1), (10.2, 12.4)], 0.45, 0.6),                                               # the Spinners' fells
     ([(26.2, 5.0), (26.8, 6.5), (27.0, 8.0)], 0.6, 0.55),                                   # the Dragonback (east coast)
     ([(18.1, 4.7), (18.7, 5.25)], 0.35, 0.4),                                               # the Kneeling hills
 ]
-VOLCANO = (25.6, 9.4)               # the Cinderhorn, above Cindervault
+VOLCANO = (25.7, 10.3)               # the Cinderhorn, above Cindervault
 CROWNWALL = dict(c=(14.5, 9.5), r=1.6, w=0.42, gap_angle=27)   # gap: towards Pilgrim's Rest (south-east)
 GLACIER = [(6.15, 0.95), (6.9, 0.75), (7.3, 1.6), (7.1, 2.6), (6.4, 2.8), (6.0, 2.0)]
 FROZEN_SEA_EDGE_Y = 2.7             # Isenmar's frozen sea: north of this line and west of FROZEN_SEA_X_MAX
@@ -85,7 +85,7 @@ FORESTS = [
     (9.6, 9.1, 1.0, 'broad'), (13.2, 16.6, 0.6, 'broad'), (22.8, 16.8, 1.15, 'gloam'), (21.9, 17.7, 0.6, 'gloam'),
     (4.8, 10.6, 1.35, 'rime'), (5.9, 9.3, 1.15, 'rime'), (6.9, 10.6, 0.6, 'rime'), (5.0, 5.4, 1.0, 'pine'),
     (2.8, 4.9, 0.85, 'pine'), (7.5, 8.4, 0.6, 'pine'), (17.9, 12.3, 0.7, 'wired'), (11.2, 7.2, 0.7, 'glass'),
-    (13.6, 12.9, 0.6, 'fungus'), (23.4, 15.9, 0.8, 'ash'), (21.4, 8.1, 0.75, 'ash'), (22.7, 11.9, 0.55, 'ash'),
+    (13.6, 12.9, 0.6, 'fungus'), (23.4, 15.9, 0.8, 'ash'), (21.4, 8.1, 0.75, 'ash'), (23.1, 12.1, 0.5, 'ash'),
     (24.3, 5.4, 0.55, 'petrified'), (8.0, 13.9, 0.6, 'broad'), (7.0, 14.6, 0.5, 'broad'), (13.9, 15.4, 0.5, 'broad'),
     (17.9, 7.6, 0.7, 'broad'), (12.0, 10.4, 0.45, 'broad'), (19.0, 9.6, 0.55, 'broad'), (16.6, 5.9, 0.4, 'broad'),
 ]
@@ -93,7 +93,7 @@ MARSHES = [(20.8, 13.35, 0.8), (21.4, 12.6, 0.4), (6.6, 17.1, 0.6), (20.3, 9.0, 
 DESERT_DUNES = [(11.0, 2.6, 1.2), (13.6, 2.4, 1.1), (16.0, 3.2, 1.0), (14.4, 4.2, 0.8), (18.8, 4.4, 0.6),
                 (21.6, 3.4, 0.6), (9.8, 3.8, 0.6)]
 OBSIDIAN = [(23.8, 5.6, 0.85)]   # the Cinderglass Barrens
-SULFUR = [(21.7, 10.7, 1.0)]
+SULFUR = [(22.3, 11.0, 0.9)]
 
 # zone anchors (extra Voronoi seeds that shape the kingdoms; road cells and towns are seeds too). Nadir has no surface
 # zone: it is beneath Zenith (gen_world_map maps Nadir seeds to Zenith).
@@ -102,7 +102,9 @@ ANCHORS = [
     ('Elowen', 13.2, 15.3), ('Elowen', 10.9, 12.2), ('Elowen', 7.6, 10.4), ('Elowen', 9.8, 8.6), ('Elowen', 12.0, 6.0),
     ('Elowen', 13.2, 5.9), ('Elowen', 17.4, 6.2), ('Elowen', 18.8, 8.4), ('Elowen', 19.2, 10.2), ('Elowen', 17.6, 12.2),
     ('Elowen', 12.2, 10.4), ('Elowen', 16.6, 8.2), ('Elowen', 21.0, 6.4), ('Elowen', 22.5, 17.6), ('Elowen', 22.8, 15.4),
-    ('Elowen', 22.3, 13.2), ('Elowen', 10.0, 6.2), ('Elowen', 14.4, 12.6),
+    ('Elowen', 22.3, 13.2), ('Elowen', 10.0, 6.2), ('Elowen', 14.4, 12.6), ('Elowen', 22.2, 13.9),
+    ('Elowen', 22.3, 14.7), ('Elowen', 22.2, 15.6), ('Elowen', 22.0, 16.3), ('Elowen', 22.6, 12.6), ('Elowen', 21.4, 12.4),
+    ('Elowen', 20.0, 11.7), ('Elowen', 13.7, 11.45), ('Elowen', 15.4, 11.4), ('Elowen', 12.6, 10.9),
     ('Isenmar', 2.6, 4.6), ('Isenmar', 3.0, 6.1), ('Isenmar', 5.6, 3.3), ('Isenmar', 2.3, 2.4), ('Isenmar', 4.0, 5.6),
     ('Isenmar', 3.0, 7.0), ('Isenmar', 6.6, 4.6), ('Isenmar', 7.4, 5.6), ('Isenmar', 5.0, 1.6),
     ('Ossaria', 10.6, 3.2), ('Ossaria', 12.6, 3.6), ('Ossaria', 14.2, 1.8), ('Ossaria', 16.2, 2.0), ('Ossaria', 18.1, 2.6),
@@ -112,7 +114,7 @@ ANCHORS = [
     ('Ashkaar', 26.0, 4.0), ('Ashkaar', 26.6, 6.6), ('Ashkaar', 24.6, 7.0), ('Ashkaar', 24.8, 14.3), ('Ashkaar', 23.9, 9.8),
     ('Ashkaar', 25.0, 2.5),
     ('Zenith', 16.0, 14.8), ('Zenith', 18.0, 15.8), ('Zenith', 20.0, 15.0), ('Zenith', 17.0, 17.4), ('Zenith', 19.5, 16.6),
-    ('Zenith', 15.6, 16.8), ('Zenith', 21.0, 14.4), ('Zenith', 18.8, 13.6), ('Zenith', 20.9, 16.6),
+    ('Zenith', 15.6, 16.8), ('Zenith', 20.4, 14.6), ('Zenith', 18.8, 13.6), ('Zenith', 20.4, 16.4),
     ('Crownhaven', 14.5, 9.5), ('Crownhaven', 13.9, 9.0), ('Crownhaven', 15.1, 10.1),
 ]
 
@@ -126,12 +128,12 @@ LANDMARKS = [  # label, x, y, size, angle
     ("The Frostfang Mountains", 5.6, 4.15, 0.55, -38),
     ("The Escarpment", 14.55, 16.0, 0.42, -84),
     ("The Crags", 21.3, 1.15, 0.46, 0),
-    ("The Cinderhorn", 26.2, 10.3, 0.5, 0),
+    ("The Cinderhorn", 26.4, 11.2, 0.5, 0),
     ("The Crownwall", 14.5, 7.55, 0.45, 0),
     ("Gossamer Wood", 12.25, 15.05, 0.5, 0),
     ("The Gloamwood", 23.0, 18.25, 0.45, 0),
     ("The Rimewood", 4.6, 11.25, 0.5, 0),
-    ("Lake Sallow", 21.7, 11.85, 0.36, 0),
+    ("Lake Sallow", 22.2, 12.25, 0.34, 0),
     ("Mirror Mere", 10.1, 5.7, 0.34, 0),
     ("Lake Rime", 3.6, 3.45, 0.36, 0),
     ("River Ebb", 6.4, 7.95, 0.34, 0),
@@ -147,12 +149,13 @@ LANDMARKS = [  # label, x, y, size, angle
 KINGDOM_LABELS = [  # name, subtitle, x, y
     ("ELOWEN", "the Evergreen Crown", 9.2, 16.4),
     ("ISENMAR", "the Frozen Sea", 3.7, 0.62),
-    ("ZENITH", "the City Above", 18.5, 15.9),
-    ("NADIR", "the City Below (beneath Zenith)", 18.4, 17.3),
+    ("ZENITH", "the City Above", 17.75, 15.35),
+    ("NADIR", "the City Below", 19.25, 18.95),
     ("OSSARIA", "the Bone Sands", 18.0, 1.4),
     ("ASHKAAR", "the Dragonfire Dominion", 26.0, 11.6),
     ("CROWNHAVEN", "the Accord's Seat", 14.5, 11.1),
 ]
+KINGDOM_LABELS_FIXED = ('ZENITH', 'NADIR')   # Nadir is beneath Zenith: its name sits on the drowned coast
 SEA_LANES = [  # (points, kind, label)
     ([(12.5, 18.6), (12.4, 19.6), (12.0, 20.4)], 'ferry', "the Last Ferry (from beyond the Strait)"),
     ([(6.4, 18.7), (5.0, 19.4), (3.0, 18.6), (1.6, 14.0), (1.6, 9.5), (3.0, 7.7)], 'ferry', "the coast packet"),

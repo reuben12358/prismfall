@@ -14,7 +14,7 @@ metadata:
 tone: [-10, -22, 2, 4]
 fog: {name: prismfall_spores, opacity: 46, blend: 1, zoom: 100, sx: 1, sy: -1}
 connections:
-- {dir: W, offset: 29, to: 540, to_offset: 10}
+- {dir: N, offset: 52, to: 566, to_offset: 38}
 raw: data/raw/120.npy
 tileset: 50
 events:
@@ -65,8 +65,13 @@ events:
   at: [35, 63]
 - type: warp
   name: To Gossamer Wood b
-  to: {map: 524, x: 25, y: 1, dir: down}
+  to: {map: 524, x: 45, y: 1, dir: down}
   at: [36, 63]
+- type: sign
+  name: North Gate sign
+  at: [51, 4]
+  post: false
+  text: NORTH GATE - Spinners' Rise, Frostwick Pass and the Hoar Road north.
 - type: event
   name: Arrival
   pages:

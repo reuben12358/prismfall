@@ -204,7 +204,7 @@ def route5(prev=None):
                                                      {'script': "for i in 1..4\n  ev = $game_map.events.values.find { |e| e.name == \"Customs chain #{i}\" }\n  $game_self_switches[[560, ev.id, 'A']] = true if ev\nend\n$game_map.need_refresh = true"}],
              'else': ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']}]},
         {'cond': {'self': 'A'}, 'through': True, 'commands': []}]}
-    E += [chain(i + 1, y) for i, y in enumerate((11, 12, 13, 14))]
+    CHAINS = [chain(i + 1, y) for i, y in enumerate((11, 12, 13, 14))]
     E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
                   "[The Rehearsal, map 568: not built yet]"))
     E += [npc((33, 10), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
@@ -230,6 +230,8 @@ def route5(prev=None):
     m.near('sh_crates', 44, 20, on='.t', r=3); m.near('pf_barricade', 46, 21, on='.t', r=3); m.near('fw_sled', 47, 19, on='.t', r=3)
     E.append(item((45, 23), 'HEALPOWDER'))
     E = seat(m, E, on='.dt')
+    for e in CHAINS: m.taken[e['at'][1], e['at'][0]] = True
+    E += CHAINS
     for e in E:
         if e['type'] == 'sign' and e['name'] != 'Border Stones': signboard(m, e)
     # the causeway's north verge: a rope-and-post rail with gaps where tracks lead onto the flats
@@ -263,6 +265,7 @@ def route5(prev=None):
     reed_beds(m, 130, seed=561)
     road_tracks(m, 0.10, seed=560)
     drifts(m, 0.16, seed=560)
+    m.seal_edges([('E', 12, 3), ('N', 2, 3)])                                   # map builder 9: only the causeway meets Saltmere and Frostwick
     if prev: m.preview(prev, 0.5)
     m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},

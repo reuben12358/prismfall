@@ -1,0 +1,117 @@
+# Frostwick Pass (577). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 577
+name: Frostwick Pass
+parent: 0
+bgm: Route 2
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: snow
+  Weather: [Snow, 20]
+rubric: true
+yards_ok: true
+biome: route
+field: SNOWY_MOUNTAIN
+tone: [-6, -2, 10, 10]
+connections:
+- {dir: S, offset: 30, to: 566, to_offset: 42}
+- {dir: W, offset: 37, to: 570, to_offset: 23}
+raw: data/raw/577.npy
+tileset: 52
+events:
+- type: sign
+  name: Road sign
+  at: [34, 90]
+  text: FROSTWICK PASS -- The Hoar Road. v Spinners' Rise - <- Frostwick (East Gate). Two scripts on one post; the Isenmar half is longer.
+  post: false
+- type: event
+  name: The Handfast Arch
+  at: [12, 37]
+  pages:
+  - trigger: action
+    commands: ['THE HANDFAST ARCH: half whale-jaw, half living briar, raised when the border was last agreed.', A brass Meridian sunburst has been bolted
+        across the keystone. The bolts are new and very shiny.]
+- type: event
+  name: Toll hut ledgers
+  at: [40, 70]
+  pages:
+  - trigger: action
+    commands: ['Two ledgers on the empty toll hut''s counter, one per kingdom. They disagree about everything, including the date.']
+- type: event
+  name: Bothy keeper
+  at: [52, 84]
+  pages:
+  - graphic: {sprite: NPC 26, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - 'Bothy keeper: Sit. Drink. It''s hot and it''s brown. That''s all I promise.'
+    - {heal: true}
+- type: event
+  name: Ice-fishing hole
+  at: [44, 33]
+  pages:
+  - trigger: action
+    commands: ['A round hole cut in the tarn ice, a line still in it. Face the water and use a rod.']
+- type: event
+  name: Snowmen
+  at: [24, 58]
+  pages:
+  - trigger: action
+    commands: [A row of snowmen built by Frostwick children. One of them is blinking.]
+- type: event
+  name: Snorunt
+  at: [26, 58]
+  pages:
+  - graphic: {sprite: Followers/SNORUNT, dir: down}
+    trigger: action
+    move: fixed
+    commands: [(It is pretending very hard to be a snowman.)]
+- type: event
+  name: Avalanche fence
+  at: [60, 60]
+  pages:
+  - trigger: action
+    commands: [Avalanche fences of split larch. Somebody has painted EAT MORE CHEESE on one in Isenmar.]
+- type: event
+  name: Road Stone III-b
+  at: [30, 92]
+  pages:
+  - trigger: action
+    commands: [ROAD STONE III-b. THE HOAR ROAD. "Frostwick 1." The '1' is in Isenmar runes; the Elowen side says "nearly".]
+- type: event
+  name: Frozen fall
+  at: [54, 20]
+  pages:
+  - trigger: action
+    commands: ['(Behind the frozen fall, a hollow: carvings of a forester and a huscarl, their hands joined, and a bell on a ribbon.)']
+- type: item
+  at: [55, 23]
+  item: SOOTHEBELL
+- type: item
+  at: [8, 56]
+  item: ICEHEAL
+- type: item
+  at: [62, 46]
+  item: SUPERPOTION
+- type: item
+  at: [47, 28]
+  item: NEVERMELTICE
+  hidden: true
+  name: HiddenItem (tarn)
+- type: event
+  name: Huscarl
+  at: [20, 44]
+  pages:
+  - graphic: {sprite: NPC 21, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Huscarl: Elowen side, Isenmar side. The arch doesn''t care. Nor do I, mostly. Pass.']
+- type: event
+  name: Forester
+  at: [42, 80]
+  pages:
+  - graphic: {sprite: NPC 14, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']

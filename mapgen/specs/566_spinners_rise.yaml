@@ -1,0 +1,115 @@
+# Spinners' Rise (566). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 566
+name: Spinners' Rise
+parent: 0
+bgm: Route 3
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: MEADOW
+tone: [0, 0, 4, 6]
+connections:
+- {dir: S, offset: 38, to: 120, to_offset: 52}
+- {dir: N, offset: 42, to: 577, to_offset: 30}
+raw: data/raw/566.npy
+tileset: 53
+events:
+- type: sign
+  name: Road sign
+  at: [42, 112]
+  text: 'SPINNERS'' RISE -- The Hoar Road. v Briarwick (North Gate) - ^ Frostwick Pass. The drove road: sheep have right of way. Sheep know it.'
+  post: false
+- type: event
+  name: The Fleece Cross
+  at: [50, 34]
+  pages:
+  - trigger: action
+    commands: ['THE FLEECE CROSS. A market cross from the old wool fairs, hung with yarn tied by every spinner who ever sold here.', The newest ribbon is
+        dyed with all three of the Ford's colours. It is still wet.]
+- type: event
+  name: Ribbon-tier
+  at: [52, 36]
+  pages:
+  - graphic: {sprite: NPC 27, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Ribbon-tier: Tie one for the road. The cross remembers who passed. The tax-man does too, but the cross is kinder.']
+- type: event
+  name: Shepherd
+  at: [60, 88]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Shepherd: The hamlet sleeps anyone the fell catches out. Third cottage, door''s never locked. Mind the dog. The dog is a Lillipup and it
+        is in charge.']
+- type: event
+  name: Shepherd boy
+  at: [56, 77]
+  pages:
+  - graphic: {sprite: NPC 05, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Shepherd boy: Race you to the cross! My Skiddo knows every rock!', (He is gone in a scatter of gravel. You will see him at the top. He will
+        pretend he was always there.)]
+- type: event
+  name: Skiddo
+  at: [57, 77]
+  pages:
+  - graphic: {sprite: Followers/SKIDDO, dir: down}
+    trigger: action
+    move: random
+    commands: ['(It bleats, very pleased with itself.)']
+- type: event
+  name: Sheep-wash
+  at: [20, 57]
+  pages:
+  - trigger: action
+    commands: [A stone sheep-wash fed by a cold spring. The water comes out of the hill already freezing.]
+- type: event
+  name: Hill-fort ring
+  at: [40, 6]
+  pages:
+  - trigger: action
+    commands: ['A ring of old earthworks on the summit. From here the Gossamer is a grey-green sea, and beyond it, the real one.']
+- type: event
+  name: Road Stone III
+  at: [40, 116]
+  pages:
+  - trigger: action
+    commands: ['ROAD STONE III. THE HOAR ROAD. "Briarwick 0, Frostwick 2." The frost has started at the top of the stone.']
+- type: event
+  name: Waterfall at the sheep-wash
+  at: [14, 58]
+  pages:
+  - trigger: action
+    commands: ['Behind the little fall at the sheep-wash, the rock goes back further than it should. The shepherds say nothing. Shepherds never do.']
+- type: item
+  at: [15, 62]
+  item: SOFTSAND
+- type: event
+  name: Wooloo (lost lamb)
+  at: [13, 60]
+  pages:
+  - graphic: {sprite: Followers/WOOLOO, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['(A Wooloo lamb, hidden in the cave with the best fleece. It looks at you as if you might be its shepherd.)']
+- type: item
+  at: [60, 92]
+  item: POTION
+- type: item
+  at: [24, 40]
+  item: SUPERPOTION
+- type: item
+  at: [70, 18]
+  item: REPEL
+- type: item
+  at: [36, 10]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (hill fort)
+- type: berry
+  at: [64, 94]
+  berry: ASPEARBERRY

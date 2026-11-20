@@ -14,6 +14,7 @@ import numpy as np, yaml
 import rkit as K
 from rkit import C, STAMPS
 import routekit as RK
+import rimewood as RW
 from routekit import Route, trainer, npc, sign, item, hidden, talk, head
 import story_early as SE
 HERE = K.HERE
@@ -965,12 +966,184 @@ def build_524():
     r.write(h, '524_gossamer_wood.yaml', '# Gossamer Wood (524). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/524.png' if PREV else None)
 
 
+# ====================================================================================================== the Hoar Road (Ch4)
+def auto_crossings(r, lips, w=3):
+    """a stairway wherever the road crosses each terrace lip row (the lip is straightened there)"""
+    m = r.m
+    for yl, h in lips:
+        xs = [x for x in range(r.W) if r.road_mask[yl, x]]
+        if not xs: continue
+        x0 = min(xs) + max(0, (len(xs) - w) // 2)
+        r.flatten(x0, x0 + w - 1, yl, h); r.crossing(x0, yl, w=w, rows=3)
+
+
+def build_566():
+    """Spinners' Rise (80x120, MEADOW): the switchback drove road from Briarwick's forest edge up onto the open fell (the
+    trees thin as you climb); the shepherds' hamlet; the Fleece Cross; the hill-fort ring on the summit; the Ram Race;
+    the stone sheep-wash and cold spring; the first hoar near the top; Road Stone III; the Shearing Cave (secret)"""
+    W, H = 80, 120
+    r = Route(566, W, H, 'meadow', base='.')
+    m = r.m
+    lips = [(96, 1), (72, 2), (46, 3), (22, 4)]
+    r.terraces(lips, wobble=3.0)
+    r.forest_band('S', 26, wobble=6.0); r.forest_band('W', 8, wobble=4.0); r.forest_band('E', 8, wobble=4.0)
+    for cx, cy, rx, ry in ((20, 70, 6, 4), (62, 60, 5, 4), (16, 40, 4, 3)):
+        r.copse(cx, cy, rx, ry)
+    road = [(39, 119), (40, 108), (26, 100), (24, 88), (46, 82), (58, 74), (52, 62), (30, 56), (26, 44), (44, 36), (56, 28), (48, 14), (44, 0)]
+    r.road(road, w=3.0, open_=(2, 5))
+    r.exit('S', 38, 4); r.exit('N', 42, 4)
+    auto_crossings(r, lips)
+    r.clearing(62, 90, 7, 5); r.lane([(46, 84), (58, 90)], w=2.0)                    # the shepherds' hamlet
+    r.water(18, 60, 4, 2.5)                                                            # the sheep-wash and the cold spring
+    r.lane([(30, 58), (22, 60)], w=2.0)
+    r.clearing(40, 9, 9, 6)                                                            # the hill-fort ring on the summit
+    r.grass(thr=0.6, scale=6.0)
+    r.finish_plan()
+    J = lambda e, t: P('JUNO', e, t)
+    r.add(sign((42, 112), 'Road sign', "SPINNERS' RISE -- The Hoar Road. v Briarwick (North Gate) - ^ Frostwick Pass. The drove road: sheep have right of way. Sheep know it."),
+          obj('The Fleece Cross', (50, 34), ['THE FLEECE CROSS. A market cross from the old wool fairs, hung with yarn tied by every spinner who ever sold here.',
+              'The newest ribbon is dyed with all three of the Ford\'s colours. It is still wet.']),
+          talk('Ribbon-tier', (52, 36), 'NPC 27', ['Ribbon-tier: Tie one for the road. The cross remembers who passed. The tax-man does too, but the cross is kinder.']),
+          talk('Shepherd', (60, 88), 'NPC 20', ['Shepherd: The hamlet sleeps anyone the fell catches out. Third cottage, door\'s never locked. Mind the dog. The dog is a Lillipup and it is in charge.']),
+          talk('Shepherd boy', (56, 76), 'NPC 05', ['Shepherd boy: Race you to the cross! My Skiddo knows every rock!', '(He is gone in a scatter of gravel. You will see him at the top. He will pretend he was always there.)']),
+          talk('Skiddo', (57, 77), 'Followers/SKIDDO', ['(It bleats, very pleased with itself.)'], move='random'),
+          obj('Sheep-wash', (20, 58), ['A stone sheep-wash fed by a cold spring. The water comes out of the hill already freezing.']),
+          obj('Hill-fort ring', (40, 6), ['A ring of old earthworks on the summit. From here the Gossamer is a grey-green sea, and beyond it, the real one.']),
+          obj('Road Stone III', (40, 116), ['ROAD STONE III. THE HOAR ROAD. "Briarwick 0, Frostwick 2." The frost has started at the top of the stone.']),
+          obj('Waterfall at the sheep-wash', (14, 58), ['Behind the little fall at the sheep-wash, the rock goes back further than it should. The shepherds say nothing. Shepherds never do.']),
+          item((16, 61), 'SOFTSAND'), talk('Wooloo (lost lamb)', (13, 60), 'Followers/WOOLOO', ['(A Wooloo lamb, hidden in the cave with the best fleece. It looks at you as if you might be its shepherd.)']),
+          item((60, 92), 'POTION'), item((24, 40), 'SUPERPOTION'), item((70, 20), 'REPEL'), hidden((36, 10), 'STARDUST', 'HiddenItem (hill fort)'),
+          {'type': 'berry', 'at': [64, 94], 'berry': 'ASPEARBERRY'})
+    r.seat_events(on='.dt')
+    for n, x, y in (('gl_cot', 58, 86), ('sh_small', 66, 86), ('gl_shed', 70, 88)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.'): m.stamp(n, x, y)
+    m.fence(52, 74, 96, gaps=((60, 62),))
+    for n, x, y in (('fw_stone', 34, 8), ('fw_stone', 46, 8), ('fw_stone', 40, 4), ('fw_stone', 36, 13), ('fw_stone', 45, 13)):
+        r.near(n, x, y, on='.t', r=2)
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pine2'), n_trees=W * H // 300, copses=4, scatter=10)
+    r.paint(glint=0.0)
+    for y in range(0, 22):                                                           # the first hoar on the summit grass
+        for x in range(W):
+            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and r.rng.random() < 0.18 * (1 - y / 22.0):
+                m.L[1, y, x] = r.rng.choice([K.STAMPS['fw_drift0']['layers'][1][0][0], K.STAMPS['fw_drift1']['layers'][1][0][0]])
+    h = head(566, "Spinners' Rise", field='MEADOW', bgm='Route 3',
+             connections=[{'dir': 'S', 'offset': 38, 'to': 120, 'to_offset': 52}, {'dir': 'N', 'offset': 42, 'to': 577, 'to_offset': 30}], tone=[0, 0, 4, 6])
+    r.write(h, '566_spinners_rise.yaml', "# Spinners' Rise (566). WRITTEN BY layouts/routes_early.py - edit that script.\n", '/tmp/rt/566.png' if PREV else None)
+
+
+def build_577():
+    """Frostwick Pass (72x96, SNOWY_MOUNTAIN): the climb through hoar-crusted downs from Spinners' Rise (S) to Frostwick's
+    East Gate (W); the Handfast Arch with the Meridian sunburst bolted on; the wind gap; the empty toll hut with two
+    ledgers; the frozen tarn and its ice-fishing hole; avalanche fences; the bothy (rest); trappers' racks; the snowmen
+    (one is a Snorunt); Road Stone III-b; the Hollow of the Handfast behind the frozen fall (secret)"""
+    W, H = 72, 96
+    r = Route(577, W, H, 'snow', base='.', kit='shs')
+    m = r.m
+    lips = [(74, 1), (50, 2)]
+    r.terraces(lips, wobble=3.0)
+    r.forest_band('E', 10, wobble=4.0); r.forest_band('S', 6, wobble=3.0); r.forest_band('N', 8, wobble=3.0)
+    for cx, cy, rx, ry in ((14, 86, 8, 5), (12, 20, 8, 6), (56, 30, 6, 6)):
+        r.copse(cx, cy, rx, ry)
+    road = [(31, 95), (33, 86), (46, 78), (48, 66), (34, 56), (26, 46), (20, 40), (10, 38), (0, 38)]
+    r.road(road, w=3.0, open_=(2, 6))
+    r.exit('S', 30, 4); r.exit('W', 37, 4)
+    auto_crossings(r, lips)
+    m.blob(46, 30, 7, 4, 'p', seed=7, rough=0.4, only='.t')                           # the frozen tarn
+    r.lane([(30, 50), (40, 36)], w=2.0, open_=(1, 3))
+    r.pocket(54, 22, 4, 3, gate=None)                                                 # the Hollow of the Handfast
+    m.cls[24:28, 50:52] = '.'
+    r.grass(thr=0.62, scale=6.0)
+    r.finish_plan()
+    J = lambda e, t: P('JUNO', e, t)
+    r.add(sign((34, 90), 'Road sign', "FROSTWICK PASS -- The Hoar Road. v Spinners' Rise - <- Frostwick (East Gate). Two scripts on one post; the Isenmar half is longer."),
+          obj('The Handfast Arch', (12, 37), ['THE HANDFAST ARCH: half whale-jaw, half living briar, raised when the border was last agreed.',
+              'A brass Meridian sunburst has been bolted across the keystone. The bolts are new and very shiny.']),
+          obj('Toll hut ledgers', (40, 70), ['Two ledgers on the empty toll hut\'s counter, one per kingdom. They disagree about everything, including the date.']),
+          talk('Bothy keeper', (52, 84), 'NPC 26', ['Bothy keeper: Sit. Drink. It\'s hot and it\'s brown. That\'s all I promise.', {'heal': True}]),
+          obj('Ice-fishing hole', (44, 33), ['A round hole cut in the tarn ice, a line still in it. Face the water and use a rod.']),
+          obj('Snowmen', (24, 58), ['A row of snowmen built by Frostwick children. One of them is blinking.']),
+          talk('Snorunt', (26, 58), 'Followers/SNORUNT', ['(It is pretending very hard to be a snowman.)']),
+          obj('Avalanche fence', (60, 60), ['Avalanche fences of split larch. Somebody has painted EAT MORE CHEESE on one in Isenmar.']),
+          obj('Road Stone III-b', (30, 92), ['ROAD STONE III-b. THE HOAR ROAD. "Frostwick 1." The \'1\' is in Isenmar runes; the Elowen side says "nearly".']),
+          obj('Frozen fall', (54, 20), ['(Behind the frozen fall, a hollow: carvings of a forester and a huscarl, their hands joined, and a bell on a ribbon.)']),
+          item((55, 23), 'SOOTHEBELL'), item((8, 56), 'ICEHEAL'), item((62, 46), 'SUPERPOTION'), hidden((47, 28), 'NEVERMELTICE', 'HiddenItem (tarn)'),
+          talk('Huscarl', (20, 44), 'NPC 21', ['Huscarl: Elowen side, Isenmar side. The arch doesn\'t care. Nor do I, mostly. Pass.'], d='right'),
+          talk('Forester', (42, 80), 'NPC 14', ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']))
+    r.seat_events(on='.dtp')
+    for n, x, y in (('wb_gate', 10, 34), ('wb_hut', 36, 64), ('wb_short', 50, 78), ('fw_rack', 58, 76), ('fw_rack', 30, 60), ('fw_sled', 36, 72),
+                    ('fw_fall', 52, 15)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.dt'): m.stamp(n, x, y)
+        else: r.near(n, x, y, on='.t', r=3)
+    for x in range(54, 66, 1):
+        if m.free(x, 58, 1, 1, on='.'): m.stamp('fw_pal_h', x, 58, mark='B')
+    r.dress(trees=('pine2', 'kf_tree', 'pine2'), n_trees=W * H // 260, copses=3, scatter=10)
+    r.paint(glint=0.0)
+    RW.drifts(m, 0.14, seed=577); RW.road_tracks(m, 0.08, seed=577)
+    h = head(577, 'Frostwick Pass', field='SNOWY_MOUNTAIN', bgm='Route 2', weather=['Snow', 20],
+             connections=[{'dir': 'S', 'offset': 30, 'to': 566, 'to_offset': 42}, {'dir': 'W', 'offset': 37, 'to': 570, 'to_offset': 23}],
+             tone=[-6, -2, 10, 10])
+    h['metadata']['BattleBack'] = 'snow'
+    r.write(h, '577_frostwick_pass.yaml', '# Frostwick Pass (577). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/577.png' if PREV else None)
+
+
+def build_578():
+    """Rimewood Path (80x88, SILKWOOD under snow): from Frostwick's North Gate (S) into the Rimewood (N).  Hoar-birch
+    outskirts thickening into ice-glazed giants; the frozen brook; the charcoal burners' clearing and kiln; the trapper's
+    lean-to (heal); the snare line; honey-stump hives; the woodcutters' log sledge; the Lantern Birch; the Unblazed
+    (secret: leave the path at the blue blaze, follow the Stantler tracks to the herd)"""
+    W, H = 80, 88
+    r = Route(578, W, H, 'snow', base='T', kit='shs')
+    m = r.m
+    road = [(42, 87), (44, 76), (36, 64), (40, 52), (50, 42), (44, 30), (38, 18), (38, 8), (38, 0)]
+    r.road(road, w=3.0, open_=(2, 6))
+    r.exit('S', 40, 4); r.exit('N', 36, 4)
+    for x in range(W):                                                                 # the frozen brook, west to east
+        c = 58 + 2 * (RK.vnoise(x, 0, 578, 12.0) - 0.5) * 2
+        for y in range(int(c - 1), int(c + 2)):
+            if m.cls[y, x] in 'T.t': m.cls[y, x] = 'p'
+    r.clearing(20, 46, 7, 5); r.lane([(40, 50), (24, 46)], w=2.0, open_=(1, 2))     # charcoal burners
+    r.clearing(60, 72, 6, 4); r.lane([(44, 74), (58, 72)], w=2.0, open_=(1, 2))     # trapper's lean-to
+    r.clearing(62, 20, 6, 5); r.lane([(44, 28), (52, 24), (58, 22)], w=1.6, open_=(1, 2))   # the Unblazed (secret)
+    r.clearing(28, 26, 5, 3)
+    r.grass(thr=0.58, scale=5.0)
+    r.finish_plan(border=0)
+    r.add(sign((44, 82), 'Road sign', 'RIMEWOOD PATH -- The Hoar Road. v Frostwick (North Gate) - ^ The Rimewood. Blazes: white is the path. Blue is not.'),
+          obj('The Lantern Birch', (42, 34), ['THE LANTERN BIRCH. Trappers hang a light here for whoever is late. Tonight it is out.',
+              {'if': 'PBDayNight.isNight? && !pfm?(:lantern_birch)', 'then': ['You relight the lantern. Somewhere down the path, someone laughs with relief.',
+                                                                              {'script': 'pbReceiveItem(:NEVERMELTICE)'}, {'script': 'pfm_set(:lantern_birch)'}]}]),
+          obj('Charcoal kiln', (20, 44), ["The charcoal burners' kiln, banked and smoking. Warm, for once."]),
+          talk('Charcoal burner', (22, 47), 'NPC 03', ['Charcoal burner: Elowen wood, Isenmar fire. Best charcoal in two kingdoms. Neither will admit it.']),
+          talk('Trapper', (60, 74), 'NPC 22', ['Trapper: Lean-to\'s yours if you need it. The fire\'s honest.', {'heal': True}]),
+          obj('Snare line', (56, 60), ['A snare line along the brook. One snare has caught a very cross Teddiursa.',
+              {'if': '!pfm?(:teddiursa_freed)', 'then': ['You loosen the wire. The Teddiursa bolts, then stops, and looks back at you for a long moment.', {'script': 'pfm_set(:teddiursa_freed)'}]}]),
+          obj('Honey-stump hives', (30, 70), ['Hives in old stumps, glazed with frost. The Combee inside are slow and very, very offended.']),
+          talk('Woodcutter', (46, 62), 'NPC 25', ['Woodcutter: Sledge of logs for Frostwick. Pulling it uphill builds character. Pulling it downhill builds speed.']),
+          obj('Blue blaze', (46, 28), ['A blue blaze on a birch. The path is the white ones. This one points off into the trees.']),
+          obj('The Unblazed', (62, 18), ['(A clearing where the Stantler herd sleeps standing up. Stantler tracks lead in and out. One stag lowers its antlers at you.)']),
+          talk('Stantler', (64, 20), 'Followers/STANTLER', ['(It watches you, unblinking. The herd does not move.)']),
+          item((60, 16), 'ICEHEAL'), item((18, 48), 'CHARCOAL'), item((70, 74), 'SUPERPOTION'), hidden((28, 24), 'NEVERMELTICE', 'HiddenItem (birch hollow)'))
+    r.seat_events(on='.dtp')
+    for n, x, y in (('fw_wood', 18, 48), ('fw_rack', 24, 42), ('fw_sled', 48, 64), ('fw_wood', 50, 64), ('pf_lantern', 44, 32), ('fw_brazier', 58, 70)):
+        r.near(n, x, y, on='.td', r=3)
+    for n, x, y in (('pf_g_tree4p_ice', 8, 10), ('pf_g_tree2_ice', 64, 40), ('pf_g_tree4p_ice', 14, 66), ('pf_g_tree2_ice', 68, 4)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.tT'): m.stamp(n, x, y, mark='B', blend=True)
+    r.dress(trees=('pine2', 'kf_tree'), n_trees=W * H // 300, copses=0, scatter=10)
+    r.paint(glint=0.0)
+    RW.rime_silk(m, ((30, 12), (48, 22), (34, 40), (52, 50), (26, 78))) if hasattr(RW, 'rime_silk') else None
+    RW.drifts(m, 0.12, seed=578)
+    h = head(578, 'Rimewood Path', field='SILKWOOD', bgm='Natural Park', weather=['Snow', 10], biome='forest',
+             connections=[{'dir': 'S', 'offset': 40, 'to': 570, 'to_offset': 20}, {'dir': 'N', 'offset': 36, 'to': 562, 'to_offset': 22}],
+             tone=[-12, -8, 8, 16])
+    h['metadata']['BattleBack'] = 'snow'
+    r.write(h, '578_rimewood_path.yaml', '# Rimewood Path (578). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/578.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {520: build_520, 521: build_521, 524: build_524, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
+BUILD = {566: build_566, 577: build_577, 578: build_578, 520: build_520, 521: build_521, 524: build_524, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
 
 
 def main():

@@ -180,6 +180,13 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   eyes with pin-prick pupils, a big open mouth with teeth and tongue). To install: copy `JUNO_<e>_p3x.png` over
   `Portraits/JUNO_<e>.png` (wink -> `_wink`/`_smug`, shocked -> `_shocked`/`_panic`).
 
+- **Shocked fix (installed, `16g_juno_shocked.png`, `juno_shocked_fix.py`, files `JUNO_shocked_p3y{A,B}.png`):** the 16f shocked
+  face looked wall-eyed (one white blob, one pale oval) and its toothy mouth "unnatural". Now one eye stamp mirrored about the face
+  centre (x=25): her normal eye with the opening widened 1 px all round, same 2-row top lash, brown outer line, r/t inner line, tan
+  lower lid, and a rounded 3x4 green iris with a 1x2 pupil (dark iris corners read as an "x"; dropped). Mouth A, a small rounded
+  "O" in the surprised mouth's 1-px line, is installed as `_shocked` and `_panic`; B (soft trapezoid) read sulky. Only eye and
+  mouth boxes change (checked). Previous files in `passes/replaced_before_shocked_fix/`.
+
 ## 13. Early-cast battle fronts (2026-11-19)
 
 Tool: `sheet_cast.py <recipe>` exports `art/work/kitbash/<name>/<NAME>_<v>(_native80).png` and renders the review sheet

@@ -15,8 +15,9 @@ metadata:
 tone: [-8, -4, 12, 12]
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 100, sx: 1, sy: 0}
 connections:
-- {dir: N, offset: 20, to: 562, to_offset: 22}
-- {dir: E, offset: 21, to: 560, to_offset: 10}
+- {dir: N, offset: 20, to: 578, to_offset: 40}
+- {dir: E, offset: 21, to: 577, to_offset: 60}
+- {dir: S, offset: 4, to: 560, to_offset: 2}
 raw: data/raw/570.npy
 tileset: 52
 events:
@@ -200,3 +201,8 @@ events:
   at: [22, 10]
   item: NEVERMELTICE
   hidden: true
+- type: sign
+  name: South Gate sign
+  at: [8, 44]
+  text: SOUTH GATE - The Frostflat Causeway to Saltmere. Unhook the customs chain at the Border Stones on your way.
+  post: false

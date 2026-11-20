@@ -52,7 +52,8 @@ end
 module WR
   STARTERS = { "Grass" => [:BULBASAUR, :IVYSAUR], "Fire" => [:CHARMANDER, :CHARMELEON], "Water" => [:SQUIRTLE, :WARTORTLE] }
   # What a player can have caught before each fight, weighted by how often the player meets it: the best wild rate of
-  # each land / cave / Headbutt species on the maps walked before that fight (pbs/encounters.txt after the SPINE Rev 16
+  # each land / cave species on the maps walked before that fight (Headbutt and Rock Smash rates x0.3: a few trees and
+  # rocks per map) (pbs/encounters.txt after the SPINE Rev 16
   # distribution pass; fishing-only species left out) plus the hand-outs of design/POKEMON_AVAILABILITY.md 2a and
   # EVENT_POKEMON.md. Gated answers keep their 2-4% weight, so a realistic team holds one only now and then.
   # Regenerate the wild part with /home/claude/work/trainers2/pools.py-style counting if the tables change.
@@ -62,7 +63,7 @@ module WR
                 :NICKIT => 25, :MEOWTH => 15, :SPINARAK => 18, :TAROUNTULA => 15, :GOSSIFLEUR => 15, :ODDISH => 15,
                 :BOUNSWEET => 12, :SMOLIV => 12, :ZIGZAGOON => 12, :BUNEARY => 12, :NIDORANmA => 10, :NIDORANfE => 10,
                 :POOCHYENA => 10, :LECHONK => 15, :WOOLOO => 13, :NYMBLE => 13, :CUTIEFLY => 10, :NOIBAT => 10,
-                :FIDOUGH => 9, :TANDEMAUS => 16, :SQUAWKABILLY => 20, :COMBEE => 30, :KECLEON => 15,   # lantern quest
+                :FIDOUGH => 9, :TANDEMAUS => 16, :SQUAWKABILLY => 9, :COMBEE => 10, :KECLEON => 15,   # lantern quest
                 :FLETCHLING => 4, :SHINX => 4, :NACLI => 4, :DWEBBLE => 4, :ROLYCOLY => 3, :LITLEO => 3,
                 :BUNNELBY => 3, :SANDYGAST => 3 },
     # Before Gym 2 (1 badge): + the Weavers' Road (541, 544/545, 552, 540, 546, 524) and the Badge-1 hand-outs.
@@ -74,15 +75,15 @@ module WR
                 :BOUNSWEET => 12, :SENTRET => 12, :SUNKERN => 12, :SABLEYE => 12, :MAWILE => 12, :SINISTEA => 12,
                 :GASTLY => 12, :NIDORANmA => 10, :MANKEY => 10, :STUNKY => 10, :PURRLOIN => 10, :SNUBBULL => 10,
                 :FOONGUS => 10, :MORELULL => 10, :SURSKIT => 9, :SEWADDLE => 8, :PETILIL => 8, :SKIDDO => 8, :MEDITITE => 8,
-                :KECLEON => 10, :COMBEE => 30, :SQUAWKABILLY => 20,
+                :KECLEON => 10, :COMBEE => 12, :SQUAWKABILLY => 12,
                 :FLETCHLING => 4, :SHINX => 4, :NACLI => 4, :DWEBBLE => 4, :ROLYCOLY => 3, :LITLEO => 3, :SIZZLIPEDE => 3,
                 :ROGGENROLA => 4, :ARON => 4, :MAREEP => 5 },
     # Before K2 / Gym 3 (2 badges): + Deepwood, Cocoonfall, the Hoar Road, Frostwick, the Rimewood, Gullcry, Rock Smash
     # and the Badge-2 hand-outs (Charcadet, Litleo, Sudowoodo, Heracross or Pinsir, Spidops, Snom, Ditto).
     :ch4   => { :EEVEE => 60, :ABRA => 15, :TIMBURR => 20, :CRABRAWLER => 15, :RALTS => 15, :PONYTA_G => 10,
                 :CHARCADET => 15, :LITLEO => 15, :SUDOWOODO => 10, :HERACROSS => 10, :PINSIR => 8, :SPIDOPS => 10, :SNOM => 15,
-                :DWEBBLE => 50, :NACLI => 45, :ROGGENROLA => 30, :BINACLE => 20, :SNORUNT => 18, :SNOVER => 16, :SKIDDO => 15,
-                :SHUCKLE => 15, :DEERLING => 14, :CUBCHOO => 14, :SMOOCHUM => 14, :TEDDIURSA => 12, :GLAMEOW => 12,
+                :DWEBBLE => 15, :NACLI => 14, :ROGGENROLA => 9, :BINACLE => 6, :SNORUNT => 18, :SNOVER => 16, :SKIDDO => 15,
+                :SHUCKLE => 5, :DEERLING => 14, :CUBCHOO => 14, :SMOOCHUM => 14, :TEDDIURSA => 12, :GLAMEOW => 12,
                 :SPHEAL => 12, :YANMA => 12, :LEDYBA => 12, :DUCKLETT => 12, :DODUO => 12, :PIDOVE => 17, :WINGULL => 17,
                 :HOOTHOOT => 20, :SHUPPET => 20, :ZUBAT => 18, :GREAVARD => 18, :MACHOP => 13, :MANKEY => 10, :NICKIT => 15,
                 :LILLIPUP => 15, :FLABEBE => 18, :VENONAT => 15, :PHANTUMP => 15, :MAWILE => 12, :SABLEYE => 12,
