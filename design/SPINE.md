@@ -1,5 +1,17 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 21 (user, 2026-11-20 00:42): Mega timing <<<
+1. **The Mega Ring comes late, like Reborn and Rejuvenation** (user: "see how late reborn/rejuv give out the mega ring, its usually like later gyms").
+   - Reborn: the Mega-Z Ring quest finishes at the earliest after Badge 13, otherwise after Badge 15 (of 18).
+   - Rejuvenation: the Mega-Z Ring comes during Chapter 15's training month, at about 14 badges.
+   - **Ours: after Badge 13** (cap 63, before Gym 14), from a story beat. The "Ring-Day at 7 badges" plan is withdrawn.
+   - Stones found earlier stay as "they hum and wait" collectibles, as in Reborn.
+2. **Enemies use Megas before the player can** (user: "Every important story fight after level 50-55 ish should have mega evolutions").
+   - From an ace level of about 50 on (Gym 10, cap 51, onward), **every** important story fight has a Mega: every Warden, every rival fight, villain bosses, war bosses and the Festival of Champions.
+   - Nobody uses a Mega below that, which retires Brann's Gym 7 Mega Camerupt.
+   - Exceptions are not allowed for theme reasons. If one Mega clashes with a leader's field, choose a different Mega.
+   - The Eevee Octave keeps its Z-move design.
+
 ## >>> REVISION 20 (user, 2026-11-19 23:06) <<<
 **Mega Evolution is in the game,** alongside Z-moves (user: "speaking of adding z moves, u also gotta add mega evolutions").
 - Megas are earned the Reborn/Rejuvenation way:
