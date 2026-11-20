@@ -41,6 +41,7 @@
 163	160	Anglers' Guild
 164	160	Reyes House
 165	160	Net-mender's House
+167	160	Ebbmouth - Mill Quay
 168	160	The Net Loft
 170	160	Tidelock Gym - Lock Hall
 171	170	Tidelock Gym - Basins (Low Water)
@@ -78,6 +79,7 @@
 563	562	Rimewood Glade
 564	561	Gullcry Caves
 566	0	Spinners' Rise
+568	560	The Rehearsal
 570	0	Frostwick
 571	570	Frostwick Pokémon Center
 572	570	The Exchange

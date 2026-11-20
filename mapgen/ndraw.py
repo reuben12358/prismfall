@@ -811,6 +811,10 @@ def pieces():
     im, c = sluice(); out['df_sluice'] = (im, c, None)
     for v in range(2): im, c = waterwheel(v); out['eb_wheel%d' % v] = (im, c, None)
     im, c = lattice_intake(); out['eb_intake'] = (im, c, None)
+    out.update(crystals())
+    for v in range(2): out['bl_veil%d' % v] = (bleed_veil(v), ['V'], None)
+    for v in range(3): out['bl_gust%d' % v] = (frozen_gust(v), ['V'], None)
+    im, c = tipped_wagon(); out['pf_wagon'] = (im, c, None)
     return out
 
 
@@ -852,6 +856,68 @@ def lattice_intake():
     for x in (8, 38): d.rectangle([x, 26, x + 3, 31], fill=BR[1], outline=OUT); d.line([x + 1, 26, x + 1, 31], fill=BR[3])
     d.polygon([(10, 12), (14, 10), (14, 14)], fill=BR[3])
     d.ellipse([2, 28, 45, 31], fill=(0, 0, 0, 60))
+    return im, ['OOO', 'WWW']
+
+
+# ------------------------------------------------------------------ job 6 imports and the Rehearsal (568)
+CRYSTAL_COLS = ['blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'teal']
+
+
+def crystals():
+    """J-Treecko252's Crystal Tiles (x2 art, art/imports/crystals_jtreecko252.png), halved to the 16-px grid: per colour
+    a rounded crystal (1x2), a tall pillar (1x2, its top overhead) and a spiky cluster (1x1); clear and grey variants"""
+    src = Image.open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'art', 'imports', 'crystals_jtreecko252.png')).convert('RGBA')
+    half = lambda cx, cy, h=1: src.crop((cx * 32, cy * 32, cx * 32 + 32, cy * 32 + 32 * h)).resize((16, 16 * h), Image.NEAREST)
+    out = {}
+    for i, c in enumerate(CRYSTAL_COLS):
+        out['cr_%s_e' % c] = (half(i, 0, 2), ['O', 'W'], None)      # rounded crystal (1x2, mostly the lower tile)
+        out['cr_%s_t' % c] = (half(i, 2, 2), ['O', 'W'], None)      # tall pillar (1x2)
+        out['cr_%s_c' % c] = (half(i, 4), ['W'], None)              # spiky cluster (1x1)
+    out['cr_clear_t'] = (half(0, 5, 2), ['O', 'W'], None)
+    out['cr_clear_e'] = (half(1, 5, 2), ['O', 'W'], None)
+    out['cr_clear_c'] = (half(2, 5), ['W'], None)
+    out['cr_grey_c'] = (half(2, 6), ['W'], None)
+    out['cr_grey_t'] = (half(3, 5, 2), ['O', 'W'], None)
+    out['cr_grey_e'] = (half(4, 5, 2), ['O', 'W'], None)
+    return out
+
+
+def bleed_veil(v):
+    """the Bleed Veil's shimmer (a walk-through decal on the top layer): thin iridescent threads, pink to teal"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(880 + v)
+    cols = [(255, 140, 200), (190, 150, 255), (130, 220, 240), (255, 230, 250)]
+    for k in range(4):
+        x = (k * 4 + v * 2 + r.randrange(2)) % 16
+        for y in range(16):
+            xx = x + (1 if (y + k + v) % 6 < 2 else 0)
+            P(im, xx, y, cols[(y // 4 + k) % 4] + (70 + 40 * ((y + k) % 3),))
+    return im
+
+
+def frozen_gust(v):
+    """salt spray stopped mid-gust: a curl of white droplets hanging in the air (decal, walk-through)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(900 + v)
+    cx, cy = 3 + r.randrange(4), 4 + r.randrange(6)
+    for k in range(10):
+        a = k * 0.55; rr = 1.5 + k * 0.6
+        x, y = cx + rr * math.cos(a) + k * 0.6, cy + rr * math.sin(a) * 0.6
+        P(im, int(x), int(y), (250, 252, 255, 230)); P(im, int(x) + 1, int(y), (220, 230, 245, 140))
+    for _ in range(5): P(im, r.randrange(16), r.randrange(16), (255, 255, 255, 200))
+    return im
+
+
+def tipped_wagon():
+    """the Rehearsal's wagon, tipped on its side in the wheel-rut (3x2): the bed on edge, one wheel in the air, spilled
+    salt sacks"""
+    im, d = canvas(3, 2)
+    d.polygon([(4, 6), (40, 2), (44, 22), (8, 27)], fill=WOOD[2], outline=OUT)
+    for k in range(5): d.line([6 + k * 8, 5 - k, 9 + k * 8, 25 - k], fill=WOOD[1])
+    d.line([5, 15, 42, 11], fill=WOOD[3])
+    d.ellipse([30, 0, 44, 14], outline=WOOD[0], width=2); d.line([37, 1, 37, 13], fill=WOOD[1]); d.line([31, 7, 43, 7], fill=WOOD[1])
+    disc(im, 37, 7, 1, (70, 70, 80, 255))
+    for x, y in ((10, 26), (18, 27), (26, 25)):
+        d.ellipse([x - 4, y - 3, x + 4, y + 3], fill=(214, 200, 168, 255), outline=(150, 130, 100, 255))
+    d.ellipse([4, 27, 46, 31], fill=(0, 0, 0, 60))
     return im, ['OOO', 'WWW']
 
 if __name__ == '__main__':

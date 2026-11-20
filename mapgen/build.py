@@ -289,6 +289,9 @@ def pages_from(e, ctx, mid):
                               trigger=G.TRIGGERS[p.get('trigger', 'action')], move_type=G.MOVES[p.get('move', 'fixed')],
                               through=p.get('through', False), dir_fix=p.get('dir_fix', False),
                               step_anime=p.get('step_anime', False), on_top=p.get('on_top', False),
+                              speed=p.get('speed', 3), freq=p.get('freq', 3),
+                              # map builder 10: a page's own move route (move: custom), in rpg.route_cmds' DSL
+                              route=G.move_route(G.route_cmds(p['route']), repeat=p.get('repeat', True), skippable=True) if p.get('route') else None,
                               cmds=G.compile_cmds(p.get('commands', []))))
         return out
     raise ValueError('unknown event type %s' % t)
@@ -366,6 +369,7 @@ def build_map(spec, ctx):
     check_reach(spec, ctx, m)
     ctx.material_bad = getattr(ctx, 'material_bad', 0) + material_check(spec, ctx, layers, spec['_tileset'])
     ctx.slab_bad = getattr(ctx, 'slab_bad', 0) + slab_check(spec, ctx, layers, spec['_tileset'])
+    gate_check(spec, ctx, m)
     if spec.get('rubric'):
         walk_check(spec, ctx, m)
         r = rubric(layers)
@@ -470,6 +474,42 @@ def slab_check(spec, ctx, layers, tileset_id):
         z, y, x = hit[0]
         ctx.warn(spec['id'], 'OLD SLAB STAIRS: %d tiles of the flat plank slab (4992-4994), e.g. at %d,%d: use real steps' % (len(hit), x, y))
     return len(hit)
+
+
+def gate_check(spec, ctx, m):
+    """map builder 10 (playtest round 3 item 15): a story gate must really be shut.  spec `gates`: [{name, from: [[x, y],
+    ...], sealed_edge: N/S/E/W and/or sealed: [[x, y], ...]}].  Flood-fills from each `from` cell over walkable tiles with
+    every event that blocks on its FIRST page (a charset or a tile graphic, not Through) standing solid - the state before
+    any switch is set - and warns if a sealed cell, or any walkable cell on the sealed edge, is reached."""
+    gates = spec.get('gates')
+    if not gates: return
+    import render as R
+    ts = R.tilesets()[m.tileset_id]; lay = m.data.data; H, W = m.height, m.width
+    solid = set()
+    for e in m.events.values():
+        p0 = e.pages[0]
+        if (p0.graphic.character_name or p0.graphic.tile_id) and not p0.through: solid.add((e.x, e.y))
+    ok = np.array([[cell_passable(lay, ts, x, y) and (x, y) not in solid for x in range(W)] for y in range(H)])
+    for g in gates:
+        seen = np.zeros_like(ok); st = [tuple(p) for p in g['from'] if ok[p[1], p[0]]]
+        if not st: ctx.warn(spec['id'], 'GATE "%s": no walkable start cell' % g['name']); continue
+        while st:
+            x, y = st.pop()
+            if seen[y, x]: continue
+            seen[y, x] = True
+            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                X, Y = x + dx, y + dy
+                if 0 <= X < W and 0 <= Y < H and ok[Y, X] and not seen[Y, X]: st.append((X, Y))
+        cells = [tuple(c) for c in g.get('sealed', [])]
+        e = g.get('sealed_edge')
+        if e: cells += [(0, y) for y in range(H)] if e == 'W' else [(W - 1, y) for y in range(H)] if e == 'E' else \
+                       [(x, 0) for x in range(W)] if e == 'N' else [(x, H - 1) for x in range(W)]
+        leak = [c for c in cells if seen[c[1], c[0]]]
+        if leak:
+            ctx.warn(spec['id'], 'GATE "%s" LEAKS: %d cell(s) reachable with the gate shut, e.g. %d,%d' % (g['name'], len(leak), leak[0][0], leak[0][1]))
+            ctx.gate_bad = getattr(ctx, 'gate_bad', 0) + 1
+        else:
+            print('GATE ok   %d %s: shut (%d cells reachable from %s, none on the sealed side)' % (spec['id'], g['name'], int(seen.sum()), g['from']))
 
 
 def walk_check(spec, ctx, m):
@@ -763,6 +803,8 @@ def main():
         sys.exit('--strict: %d edge tiles that lead onto blocked ground across a map connection (see SEAM warnings)' % ctx.seam_bad)
     if '--strict' in sys.argv and getattr(ctx, 'slab_bad', 0):
         sys.exit('--strict: %d old slab-stair tiles (see OLD SLAB STAIRS warnings)' % ctx.slab_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'gate_bad', 0):
+        sys.exit('--strict: %d story gate(s) leak (see GATE warnings)' % ctx.gate_bad)
     if '--strict' in sys.argv and getattr(ctx, 'spot_bad', 0):
         sys.exit('--strict: %d HealingSpot / fly spot problem(s) (see SPOT warnings)' % ctx.spot_bad)
 

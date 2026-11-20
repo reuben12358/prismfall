@@ -222,7 +222,7 @@ def build_528():
     r.add(sign((105, 29), 'Road sign', 'MARRAM DOWN - Free Port of Saltmere, 1 mile. Pulling up the marram grass is fined. Yes, even that one.'),
           obj('Free Port charter stone', (4, 37), ['FREE PORT CHARTER STONE: "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN."',
               'Someone has carved underneath, smaller: "AND BOOS THE REST."']),
-          once('The Saltmere Beacon', (53, 14), ['(From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)',
+          once('The Saltmere Beacon', (53, 14), ['From the top of the dune the free port opens out below you: a white town on a salt lake, striped awnings, lantern masts, and a theatre on every second corner.',
                J('happy', "Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?"),
                J('happy', "The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing."),
                J('happy', 'So they make it all up instead. Every night. On purpose.')]),
@@ -242,10 +242,10 @@ def build_528():
           {'type': 'event', 'name': "The Prompter's Box", 'at': [33, 57], 'pages': [{'trigger': 'action', 'commands': [
               {'if': 'pfm?(:sm_prompter)', 'then': ['Only sand now. The barge has given up its secret.'],
                'else': [{'if': 'pfm_has?(:SANDSHOVEL)', 'then': [
-                   '(A theater barge lies half-buried in the dune, its name board reading THE WANDERING CHORUS.)', 'You dig at the stern with the shovel...',
+                   'A theatre barge lies half-buried in the dune. Its name board still reads THE WANDERING CHORUS.', 'You dig at the stern with the shovel...',
                    {'script': 'pfm_item(:PROMPTERSSCRIPT, 1, "Prompter\'s Script")'}, {'script': 'pfm_item(:NORMALGEM, 1, "Normal Gem")'},
                    {'script': 'pfm_set(:sm_prompter)'}],
-                   'else': ['(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.)',
+                   'else': ['A theatre barge lies half-buried in the dune. Its costume hampers have burst open in the sand, and a prop throne with three legs still stands on the deck.',
                             'Something square is buried at the stern. You\'d need a shovel.']}]}]}]},
           trainer((88, 33), 'BIRDKEEPER', 'Lark', "Wind off the lake's the best in Elowen.", 'My kite won. You beat the kite-flier, which is different.', d='left'),
           trainer((14, 37), 'POKEMONRANGER_F', 'Sedge', "Free port starts at the stile. Past that, the Queen's writ doesn't run, and neither do I.",
@@ -627,7 +627,7 @@ def build_541():
     ev = old_events('540_route3_route4.yaml', 541)
     r.add({'type': 'warp', 'name': 'Mine back door', 'at': [57, 49], 'link': 'R4_MINE', 'arrive': [57, 50, 'down'], 'se': 'Door exit'},
           sign((36, 104), 'Road sign', "THE GREY SALTINGS -- The Weavers' Road. v Saltmere (North Gate) - ^ The Dyers' Ford, Thistledown Lea & Briarwick.\nMind the pans. The pans do not mind you."),
-          once('The Saltings', (33, 98), ['(Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)',
+          once('The Saltings', (33, 98), ['Salt pans run to the horizon between white stacks and the smoke of the boiling-house. Behind them stands a chalk cliff with a mine mouth in it.',
                J('neutral', 'This is where Saltmere\'s salt comes from. "Grey" is the salt before it\'s washed.'), J('neutral', "...And the weather. It's mostly the weather.")]),
           trainer((24, 46), 'SAILOR', 'Morrow', "Salt barge went down in the mud in '88. Still there. Still salty.", "You're heavier than you look. In battle, I mean.", d='right'),
           trainer((40, 60), 'TUBER_F', 'Pip', "My floaty is a Wailmer! No it's not. It's a floaty.", 'Waaah! My floaty popped!', d='left'),
@@ -717,7 +717,7 @@ def build_552():
     flag = lambda i, x, y, extra=(): {'type': 'event', 'name': 'Survey flag %d' % i, 'at': [x, y], 'pages': [{'graphic': {'sprite': 'Object ball', 'dir': 'down'} if False else {}, 'trigger': 'action',
                                      'commands': ['An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.'] + list(extra)}]}
     r.add(sign((36, 66), 'Road sign', "THE DYERS' FORD -- The Weavers' Road. Briarwick Dye-Works. Do not drink the river. Do not bathe in the river. Do not stand in the red."),
-          once("The Dyers' Ford", (38, 62), ['(Below three vat-sheds, the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road.)',
+          once("The Dyers' Ford", (38, 62), ['Below the three vat-sheds the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road, so you walk under it as if down corridors.',
                J('happy', "The Briarwick dyers wash their cloth here, so the river runs in three colors! There's a fourth band nobody's allowed to dye. It's just water. People leave ribbons for it.")]),
           talk('Meridian Surveyor', (46, 26), 'trainer_SCIENTIST', ['Meridian Surveyor: Mind the orange flags. Survey line for the new Lattice. Straight up the river and through to the wood.',
                'Meridian Surveyor: Trees aren\'t in the plan, but trees rarely are.'], d='left'),

@@ -83,8 +83,8 @@ def deepwood():
     E.append({'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 18], 'link': 'WOOD_DEEP', 'arrive': [1, 18, 'right']})
     E.append({'type': 'warp', 'name': 'To Cocoonfall Hollow', 'at': [43, 20], 'link': 'DEEP_COCOON', 'arrive': [42, 20, 'left']})
     E.append(c.fog_event('prismfall_spores', 70, 0, 200, 1, 0))
-    E.append({'type': 'event', 'name': 'Crystal silk', 'at': [41, 20], 'pages': [
-        {'graphic': {'tile': CU['curtain'] + 8}, 'commands': [
+    E.append({'type': 'event', 'name': 'Crystal silk', 'at': [41, 20], 'pages': [       # map builder 10 (REQUESTS 17): a charset, so it blocks
+        {'graphic': {'sprite': 'pf_silk_curtain', 'dir': 'left'}, 'dir_fix': True, 'commands': [
             {'if': 'pf_choice(:ch2_tamsin)', 'then': [
                 "You hold up Mother Loom's shuttle. The crystal silk unpicks itself, thread by thread, and lets you through.",
                 setk(548, 'ESCORT'), {'selfswitch': ['A', True]}],
@@ -139,6 +139,12 @@ def deepwood():
     return c.write('', head, "# Gossamer Deepwood (525) and Cocoonfall Hollow (548). WRITTEN BY layouts/deepwood.py - edit that, not this file.\n")
 
 
+RAVINE = (9, 10)                                               # 548's glass ravine rows (map builder 10)
+XING = {'a': 28, 'b': 10, 'c': 19}                              # D3 bridges: a NE cocoon-house, b NW Shard house, c the nest
+ANCHORS = ((8, 22), (16, 22), (24, 22))                         # D3 anchors 1-3 at the hamlet's south edge
+BRIDGE_TILE = 17743                                             # tileset 40: the Bleed pier deck (walkable over water)
+
+
 def hollow():
     W, H = 38, 34
     c = Wild(W, H, 548, base='a')
@@ -158,12 +164,27 @@ def hollow():
         for x in range(W):
             if c.g[y][x] == 'C': c.g[y][x] = 'B'
             elif c.ht[y][x] == 1 and c.g[y][x] in 'aD': c.g[y][x] = 'U'
+    # map builder 10 (REQUESTS 20; DUNGEON_PUZZLES D3): the glass ravine across the crater's north third.  The hamlet keeps
+    # the floor; the Matriarch's nest (N centre), the Shard house (NW) and the TM81 cocoon-house (NE) stand beyond it, and
+    # three 1-wide crystal-silk bridges cross it: a (NE, x 28), b (NW, x 10), c (centre, x 19), rows 9-10
+    NX, NY = cx, 5
+    for y in RAVINE:
+        for x in range(W):
+            if c.g[y][x] in 'aD' and c.ht[y][x] == 0: c.g[y][x] = 'w'
+    c.path([(cx, cy), (cx, RAVINE[-1] + 1)], 1, 'D', 6, only='a')
+    c.path([(cx, RAVINE[0] - 1), (NX, NY + 2)], 1, 'D', 7, only='a')
+    for bx, hx in ((XING['b'], 10), (XING['a'], 28)):
+        c.path([(bx, RAVINE[-1] + 1), (bx + (1 if bx < cx else -1) * 2, 13), (cx, cy)], 1, 'D', 8 + bx, only='a')
+        c.path([(bx, RAVINE[0] - 1), (hx, 7)], 1, 'D', 9 + bx, only='a')
     west, south = (0, 16), (18, 33)
     c.need(west, south, (cx, cy + 3))
-    c.keep_clear([(0, 15), (0, 16), (0, 17), (18, 33), (17, 33), (19, 33)], 2)
-    P = {'matriarch': [cx, cy], 'house': c.spot(8, 7, 'a', r=4), 'tm': c.spot(29, 6, 'a', r=4), 'cocoons': c.spot(27, 22, 'a'),
+    c.keep_clear([(0, 15), (0, 16), (0, 17), (18, 33), (17, 33), (19, 33)] + [(x, y) for x in XING.values() for y in (RAVINE[0] - 1, RAVINE[-1] + 1)]
+                 + list(ANCHORS), 2)
+    P = {'matriarch': [NX, NY], 'house': c.spot(12, 6, 'aD', r=3, keep=False), 'tm': c.spot(26, 6, 'aD', r=3, keep=False), 'cocoons': c.spot(27, 22, 'a'),
          'note': c.spot(cx + 2, cy + 2, 'aD')}
     P['juno'] = c.spot(2, 14, 'aD', r=2); P['tamsin'] = c.spot(2, 18, 'aD', r=2)
+    c.keep_clear([tuple(P['house']), tuple(P['tm']), (NX, NY + 2), (NX - 1, NY + 2), (NX + 1, NY + 2)], 2)   # the north floor stays open
+    cy_ = cy; cy = NY                                           # the nest's dressing below sits at the nest
     for dy in range(-1, 3):                                     # the nest
         for dx in range(-2, 3):
             c.taken[cy + dy][cx + dx] = True
@@ -175,6 +196,7 @@ def hollow():
         c.o[1][cy + 2][cx + dx] = 1338 + B if False else 8137
         c.o[1][cy - 1][cx + dx] = 8153
     c.o[1][cy + 1][cx - 1] = 8080; c.o[1][cy + 1][cx + 1] = 8081
+    cy = cy_
     # crystal trees ringing the crater; glass thread strung between them like harp strings
     ring = []
     for k in range(18):
@@ -189,7 +211,7 @@ def hollow():
     c.trees(['cry_violet', 'cry_blue', 'cry_teal', 'r_cry_big', 'r_cry_spray', 'cry_violet_m', 'cry_blue_m'], 14, on='a', seed=2)
     c.trees(['cocoon', 'cocoon_big', 'cocoon_low', 'cocoon', 'cocoon_big'], 34, on='a', seed=3)
     c.trees(['cry_violet_s', 'cry_blue_s', 'cry_teal_s', 'r_cry_s', 'r_cry_s2'], 24, on='a', seed=5)
-    c.overlay('web_big', cx - 1, cy - 2)
+    c.overlay('web_big', NX - 1, NY - 2)
     for x, y in ((8, 9), (27, 8), (9, 21), (26, 22), (14, 4)):
         c.overlay('web_big', x, y)
     c.trees(['dead1', 'dead2', 'log_grey', 'stump_grey', 'gstump_dark'], 6, on='a', seed=4, bleed=True)
@@ -258,13 +280,40 @@ def hollow():
     E.append({'type': 'sign', 'at': P['cocoons'], 'post': False, 'name': 'Glass cocoons',
               'text': "Dozens of glass cocoons, hanging. Inside each, a moth, wings spread, perfectly still.\nOne of them twitches."})
     E.append({'type': 'item', 'at': P['tm'], 'item': 'TM81'})
+    # D3 (DUNGEON_PUZZLES): the bridges are taut while their switch is on (S511-S513, D3_BRIDGE_A/B/C) or once the
+    # Matriarch is done (the nest's thread snaps all three taut: the way home); every anchor flips two bridges
+    for k, sw in (('a', 'D3_BRIDGE_A'), ('b', 'D3_BRIDGE_B'), ('c', 'D3_BRIDGE_C')):
+        for y in RAVINE:
+            E.append({'type': 'event', 'name': 'Bridge %s %d' % (k, y - RAVINE[0] + 1), 'at': [XING[k], y], 'pages': [
+                {'through': True, 'commands': []},
+                {'cond': {'switch': sw}, 'graphic': {'tile': BRIDGE_TILE}, 'commands': []},
+                {'cond': {'switch': 'CH2_MATRIARCH_DONE'}, 'graphic': {'tile': BRIDGE_TILE}, 'commands': []}]})
+    flip = {1: (511, 512), 2: (512, 513), 3: (511, 513)}
+    for n, (ax, ay) in enumerate(ANCHORS, 1):
+        a, b = flip[n]
+        E.append({'type': 'event', 'name': 'Anchor %d' % n, 'at': [ax, ay], 'pages': [{'graphic': {'sprite': 'Object ball', 'dir': 'down'}, 'commands': [
+            'A cocoon anchor, its crystal threads running north to the ravine. %s' % ('The left one.' if n == 1 else 'The middle one.' if n == 2 else 'The right one.'),
+            {'if': 'pfm_has?(:MOTHERLOOMSSHUTTLE) || pf_choice(:ch2_tamsin)', 'then': [
+                {'choices': ['Re-thread it.', 'Leave it.'], 'cancel': 1, 'branches': [
+                    [{'script': '$game_switches[%d] = !$game_switches[%d]\n$game_switches[%d] = !$game_switches[%d]\n$game_map.need_refresh = true' % (a, a, b, b)},
+                     {'se': 'Mining reveal'}, 'Two threads sing as they change: one draws taut, one falls slack.'], []]}],
+             'else': ['The threads are glass. You would need something to re-thread them.']}]}]})
+    E.append({'type': 'event', 'name': 'D3 start', 'at': [0, 2], 'pages': [   # first entry: bridges a and b start taut
+        {'trigger': 'autorun', 'commands': [{'switch': ['D3_BRIDGE_A', True]}, {'switch': ['D3_BRIDGE_B', True]}, {'selfswitch': ['A', True]}]},
+        {'cond': {'self': 'A'}, 'trigger': 'parallel', 'commands': []}]})
     c.events = E
     head = {'id': 548, 'biome': 'bleed', 'name': 'Cocoonfall Hollow', 'palette': 'bleed', 'bgm': 'Route 3', 'parent': 540, 'field': 'BLEED', 'tone': [-46, -50, 4, 90],
-            'metadata': {'ShowArea': True, 'MapPosition': [0, 11, 22], 'BattleBack': 'forest'}}
+            'metadata': {'ShowArea': True, 'MapPosition': [0, 11, 22], 'BattleBack': 'forest'},
+            'walk_from': [[NX, NY + 2]]}                        # beyond the ravine: reached over the D3 bridges (events)
     return c.write('', head, '')
 
 
 if __name__ == '__main__':
+    if sys.argv[1:] == ['548']:                                 # map builder 10: 548 alone (525 is reskin.py's)
+        txt = hollow()                                          # (built first, so a failure never truncates the spec)
+        open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'specs', '525_deepwood_cocoonfall.yaml'), 'w').write(
+            '# Remaining maps of the old 525_deepwood_cocoonfall.yaml (not re-skinned). 548 is WRITTEN BY layouts/deepwood.py hollow(): run it with 548.\n' + txt)
+        raise SystemExit(0)
     raise SystemExit('superseded by layouts/reskin.py (MAPGEN 2h): running this would overwrite the PF Rejuv spec')
 if False:
     save('525_deepwood_cocoonfall.yaml', deepwood(), hollow())

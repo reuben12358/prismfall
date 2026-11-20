@@ -20,14 +20,20 @@ raw: data/raw/167.npy
 tileset: 52
 events:
 - type: event
+  name: Mill Quay steps
+  at: [28, 22]
+  pages:
+  - trigger: action
+    commands: ['Worn stone steps down the quay face into the black water. The Ebb laps the third step, then the fourth, then stops.']
+- type: event
   name: Mill Quay wheel sign
-  at: [28, 17]
+  at: [27, 17]
   pages:
   - trigger: action
     commands: ['THE MILL QUAY WHEEL. Cast ''EBB GUILD - AF 198''. Below the date somebody has scratched: ''AND STILL TURNING''.']
 - type: sign
   name: Quay sign
-  at: [29, 26]
+  at: [30, 26]
   text: THE MILL QUAY - Ebb Guild tidal mills. No Meridian vehicles past this sign. (By order of the Guild. And Bjorn.)
   post: false
 - type: event
@@ -71,7 +77,7 @@ events:
     move: fixed
     commands: ['Carter: Grain to the harbour, salt back up. When the river stops, the carts are all Ebbmouth has.']
 - type: item
-  at: [36, 28]
+  at: [37, 28]
   item: SUPERPOTION
 - type: item
   at: [2, 17]

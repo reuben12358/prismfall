@@ -77,7 +77,8 @@ events:
   pages:
   - trigger: touch
     commands:
-    - '(Below three vat-sheds, the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road.)'
+    - 'Below the three vat-sheds the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road, so you
+      walk under it as if down corridors.'
     - '\pf[JUNO,happy]Juno: The Briarwick dyers wash their cloth here, so the river runs in three colors! There''s a fourth band nobody''s allowed to dye.
       It''s just water. People leave ribbons for it.'
     - selfswitch: [A, true]

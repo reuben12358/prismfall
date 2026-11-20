@@ -95,7 +95,7 @@ events:
     commands: ['The Upper Mill''s wheel turns, stops dead, and turns again. The miller''s boy counts under his breath: ''nine... ten... go on, go on...''']
 - type: event
   name: Guild mill
-  at: [29, 34]
+  at: [29, 37]
   pages:
   - trigger: action
     commands: [The Guild Mill. Its race runs past Meridian's brass intake. When the river stutters the wheel freezes mid-turn and the whole quay holds its
@@ -116,7 +116,7 @@ events:
     commands: ['♪ Sleep, old whale, under the ice... When the whale wakes, the sea remembers it''s a sea. ♪']
 - type: event
   name: Guild striker
-  at: [19, 23]
+  at: [8, 26]
   pages:
   - graphic: {sprite: NPC 03, dir: down}
     trigger: action
@@ -132,7 +132,7 @@ events:
     commands: [Watch the mill-wheels. When the Ebb stutters they freeze mid-turn and we all hold our breath.]
 - type: event
   name: Guild organiser
-  at: [21, 23]
+  at: [22, 30]
   pages:
   - graphic: {sprite: NPC 27, dir: down}
     trigger: action
@@ -196,7 +196,7 @@ events:
   item: FRESHWATER
 - type: event
   name: Teo
-  at: [29, 33]
+  at: [29, 31]
   pages:
   - cond: {switch: CH4_K2_DONE}
     graphic: {sprite: trainer_BURGLAR, dir: down}

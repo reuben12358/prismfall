@@ -206,8 +206,7 @@ def route5(prev=None):
              'else': ['An Isenmar customs chain across the causeway. ISENMAR CUSTOMS: CLOSED. It is hooked from the far side.']}]},
         {'cond': {'self': 'A'}, 'through': True, 'commands': []}]}
     CHAINS = [chain(i + 1, y) for i, y in enumerate((11, 12, 13, 14))]
-    E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over.\n"
-                  "[The Rehearsal, map 568: not built yet]"))
+    E.append(sign((32, 27), 'Old salt road', "The old salt road dips toward a drowned pier village. Something replays there, over and over."))
     E += [npc((33, 10), 'Royal forester', 'NPC 14', ["Past the stones the trees wear coats. Ice ones. You'll see.",
                                                      "Elowen ends here, officially. Unofficially it ends wherever the honey runs out."],
               again=["Mind the frost-pans west of here. They're slick as a courtier."]),
@@ -226,11 +225,12 @@ def route5(prev=None):
                   "Ice'll break by summer. Probably.", 'down'),
           trainer((26, 21), 'BIRDKEEPER', 'Ailsa', "The gulls change colour past the stones. Watch!",
                   "Frostwick's gulls wear little ice hats. Not really.", 'up'),
-          item((62, 5), 'SUPERPOTION'), item((3, 8), 'ICEHEAL'), item((56, 23), 'SOFTSAND', True)]
+          item((56, 6), 'SUPERPOTION'), item((3, 8), 'ICEHEAL'), item((56, 23), 'SOFTSAND', True)]
     # the overturned salt wagon (HEALPOWDER inside): crates, a barricade, the sled on its side, spilled salt
     m.near('sh_crates', 44, 20, on='.t', r=3); m.near('pf_barricade', 46, 21, on='.t', r=3); m.near('fw_sled', 47, 19, on='.t', r=3)
     E.append(item((45, 23), 'HEALPOWDER'))
     E = seat(m, E, on='.dt')
+    E.append({'type': 'warp', 'name': 'To the Rehearsal', 'at': [30, 29], 'link': 'R5_REHEARSAL', 'arrive': [30, 28, 'up'], 'se': 'Door exit'})   # map builder 10: 568
     for e in CHAINS: m.taken[e['at'][1], e['at'][0]] = True
     E += CHAINS
     for e in E:

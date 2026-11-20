@@ -378,8 +378,11 @@ def props(r, kinds, n, box=None, on='.', seed=0, clump=0):
 def scatter_quiet(r, n=4, seed=None):
     """the kit's decor pass without the evenly sprinkled flowers (meadows do flowers): greens and rare props only"""
     m = r.m
-    from rkit import TUFTS, CLOVER                   # the noise patches get walkable tufts and clover, never solid bushes
-    groups = {'flowers': TUFTS + CLOVER, 'green': m.decor['green'], 'rare': m.decor['rare']}
+    from rkit import TUFTS, CLOVER                   # walkable decor only: tufts and clover, never the solid bushes, which
+    import render as R                              # can wall a talker or a whole field off (540, 568)
+    ts = R.tilesets()[m.tid]
+    walk = lambda ids: [t for t in ids if ts['passages'][t] & 0x0f != 0x0f]
+    groups = {'flowers': TUFTS + CLOVER, 'green': walk(m.decor['green']) + TUFTS + CLOVER, 'rare': walk(m.decor['rare']) or TUFTS}
     m.scatter(n, seed=r.mid if seed is None else seed, groups=groups)
 
 

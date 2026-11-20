@@ -40,7 +40,8 @@ events:
   name: Crystal silk
   at: [41, 20]
   pages:
-  - graphic: {tile: 17753}
+  - graphic: {sprite: pf_silk_curtain, dir: left}
+    dir_fix: true
     commands:
     - if: pf_choice(:ch2_tamsin)
       then:

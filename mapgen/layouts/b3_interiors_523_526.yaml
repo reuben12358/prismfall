@@ -45,13 +45,25 @@ events:
     commands:
     - if: $game_self_switches[[523, 0, 'BISCUIT']]
       then:
-      - '\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.'
+      - if: $game_variables[102] < 2
+        then:
+        - '\pf[WENNA,neutral]Wenna: Going up to the lighthouse? Give Hesper my love, and don''t let her give you any back. Bed''s yours whenever.'
+        else:
+        - '\pf[WENNA,happy]Wenna: I had Coll carve it. Don''t make it strange. Sit when you like.'
       else:
       - (Biscuit hops off your head and into Wenna's apron pocket. He rattles.)
-      - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here - and another tart, for the nerves. Mine.'
+      - '\pf[WENNA,happy]Wenna: Oh, you wretched animal. Thank you. Both of you. Here. And another tart, for the nerves. Mine.'
       - script: pbReceiveItem(:ORANBERRY, 3)
       - 'QUEST COMPLETE: "Biscuit".'
       - script: $game_self_switches[[523, 0, 'BISCUIT']] = true
+      - '\pf[WENNA,neutral]Wenna: Now. It''s getting dark, you''ve glass in your hair, and the inn''s full of people with nowhere to be.'
+      - 'Wenna: You''re sleeping here tonight. That wasn''t a question. I don''t do questions after sundown.'
+      - '\pf[JUNO,happy]Juno: You can have my bed! I''ll take the hayloft. I always take the hayloft when we have guests.'
+      - 'Juno: We''ve never had guests. I''m very excited about the hayloft.'
+      - '\pf[COLL,deadpan]Coll: (from the yard) Hayloft''s got a goat in it.'
+      - 'Juno: I''m excited about the goat.'
+      - '\pf[WENNA,happy]Wenna: Supper''s whenever you come in. Coll made the bed, so it''s made badly. But it''s made.'
+      - 'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)'
 - type: npc
   name: Farmer Hale
   at:
@@ -87,7 +99,8 @@ events:
       - Not now
       cancel: 2
       branches:
-      - - tone:
+      - &id001
+        - tone:
           - -255
           - -255
           - -255
@@ -101,8 +114,30 @@ events:
           - 0
           - 0
           - 16
-        - if: $game_switches[105] && $game_variables[102] < 2
-          then:
+      - []
+  - cond:
+      switch: CH1_ORCHARD_DONE
+    commands:
+    - if: $game_variables[102] < 2
+      then:
+      - Juno's bed. The pillow smells of crushed mint and seed packets. Sleep here tonight?
+      - choices:
+        - Sleep.
+        - Not yet.
+        cancel: 2
+        branches:
+        - - tone:
+            - -255
+            - -255
+            - -255
+            - 0
+            - 20
+          - wait: 24
+          - (Crickets. A goat, briefly.)
+          - '\pf[JUNO,happy]Juno: (from the hayloft across the yard) \PN? You awake? You can see all eighteen from up here tonight.'
+          - '\pf[JUNO,neutral]Juno: Usually it''s only the near ones. Fourteen. Fifteen if Dad''s not snoring. They''re brighter every year. Nobody says why.'
+          - '\pf[JUNO,happy]Juno: ...Night! The goat says night too. That was the goat.'
+          - heal: true
           - tone:
             - -255
             - -255
@@ -115,8 +150,8 @@ events:
           - '"Second such reading in my life."'
           - '"The first was in Crownhaven, AF 290."'
           - '"God help us, Ines."'
-          - (She closes the notebook. Across the harbor the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat stands
-            on the gallery, looking at the station.)
+          - (She closes the notebook. Across the harbor the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat stands on the gallery, looking
+            at the station.)
           - var:
             - STORY_CHAPTER
             - 2
@@ -126,8 +161,51 @@ events:
             - 0
             - 0
             - 20
-          else: []
-      - []
+          - if: '!pfm?(:ch2_sendoff)'
+            then:
+            - (Morning. Bramble tea, too many tarts, and a goat in the doorway. Wenna is packing a basket that keeps getting bigger. Coll is reading yesterday's Gale
+              Post upside down. Juno has straw in her blossoms.)
+            - '\pf[JUNO,happy]Juno: Morning! The goat and I have reached an understanding.'
+            - '\pf[WENNA,neutral]Wenna: Eat. You''ve two days of cliff ahead of you, and Saltmere charges for air.'
+            - '\pf[WENNA,sad]Wenna: Rowan was off before the cock crowed. Didn''t even take a tart. Twenty years I''ve known that man and he''s never not taken a
+              tart.'
+            - '\pf[JUNO,neutral]Juno: Warden business. It''s always Warden business.'
+            - '\pf[JUNO,happy]Juno: He''ll turn up in Saltmere, though. He never misses the Pageant.'
+            - (The door opens. Larch, in yesterday's coat, holding yesterday's cup. She has not slept.)
+            - '\pf[LARCH,deadpan]Larch: Don''t get up. Nobody ever does.'
+            - '\pf[WENNA,happy]Wenna: Imelda! Tart?'
+            - '\pf[LARCH,neutral]Larch: Two. ...Three. I''ve been up all night writing about your guest.'
+            - 'Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked across it -- so you go round by the
+              coast.'
+            - 'Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call you "darling" and mean it about a third
+              of the time.'
+            - 'Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two by post.'
+            - 'Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+            - '\pf[WENNA,deadpan]Wenna: Forty-one. One''s for the cart.'
+            - 'Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL glitter.'
+            - '\pf[LARCH,deadpan]Larch: They use salt.'
+            - '\pf[JUNO,shocked]Juno: ...Why would you tell me that.'
+            - script: pfm_item(:TOWNMAP, 1, "Town Map")
+            - (Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.)
+            - '\pf[COLL,neutral]Coll: Bell''s on your way. At the fork. I tied the clapper the night they shut the strait. Nothing left to ring for.'
+            - 'Coll: You come back with all eighteen, I''ll untie it.'
+            - '\pf[COLL,deadpan]Coll: Don''t make it strange.'
+            - '\pf[WENNA,shocked]Wenna: That''s MY line.'
+            - 'Coll: It''s a good line.'
+            - script: pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")
+            - script: pfm_set(:ch2_sendoff)
+            else: []
+        - - (The bed will keep.)
+      else:
+      - You could rest here.
+      - choices:
+        - Rest
+        - Not now
+        cancel: 2
+        branches:
+        - *id001
+        - []
+
 ---
 id: 526
 name: Woodward's Hut

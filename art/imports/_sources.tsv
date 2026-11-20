@@ -1,0 +1,2 @@
+file	source	artist	terms	density	note
+crystals_jtreecko252.png	https://www.deviantart.com/j-treecko252/art/Crystal-Tiles-884815350	J-Treecko252	free, credit J-Treecko252	x2 (verified: every 2x2 block one colour)	imported by map builder 10 (job 6); the whole Crystal Tiles.png, its red-X placeholder cells (cols 5-7, rows 5-6) blanked; halved to the 16-px grid in mapgen/ndraw.py and doubled back by rcustom

@@ -610,14 +610,9 @@ add(103,
     sign('Imprint scanner', 'An Imprint scanner hums quietly. Its last reading: NULL.', post=False),
     sign('Kettle', 'A blackened kettle. Something dark green is stewing in it. It smells like low tide, on purpose.', post=False))
 
-INN_REST = [IF('$game_switches[@@CH1_ORCHARD_DONE] && $game_variables[@@STORY_CHAPTER] < 2', [
-    N('Innkeeper', "You look like you've walked through a wall. One room's free. Don't ask whose it was."),
-    CH(['Rest.', 'Not yet.'], [[
-        {'tone': [-255, -255, -255, 0, 20]}, {'wait': 24}, {'heal': True}, {'me': 'Pkmn healing'}, {'wait': 40},
-        S('pfm_card(:PF_CH1_NOTEBOOK, "Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.", "Subject reads NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred.", "Second such reading in my life.", "The first was in Crownhaven, AF 290.", "God help us, Ines.")'),
-        'She closes the notebook. Outside the window, far across the harbor, the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat is standing on the gallery, looking at the station.',
-        {'var': ['STORY_CHAPTER', 2]}, {'tone': [10, 4, -12, 0, 30]}, 'Morning.'], []], cancel=2)], [
-    N('Innkeeper', 'Rooms are full of people who came home on the last boat with nowhere to be. First time I\'ve been full since the wedding of \'91.')])]
+INN_REST = [N('Innkeeper', 'Rooms are full of people who came home on the last boat with nowhere to be. First time I\'ve been full since the wedding of \'91.'),
+            IF('$game_switches[@@CH1_ORCHARD_DONE] && $game_variables[@@STORY_CHAPTER] < 2', [   # Ch1 close (2026-11-20): no inn bed, the Hales' farm
+                N('Innkeeper', "And Wenna Hale's been in. Said if I find you so much as a cot, she stops selling me tarts. I'm not risking the tarts. Farm's up the lane.")], [])]
 add(104, ev('Innkeeper', page(INN_REST, 'NPC 21', 'down')),
     talk('Inn Guest', 'NPC 26', 'right', [N('Inn Guest', "I left Velmora nine years ago to be a famous painter. I'm back to be a tired one.")]),
     talk('Inn Guest 2', 'NPC 13', 'left', [N('Inn Guest 2', "The Concert says we carry the Bleed. We don't carry it. It's not a cold. It's the ground.")]))

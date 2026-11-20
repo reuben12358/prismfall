@@ -512,6 +512,34 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   saltmere_rj, routes_early, trial_interiors`, then `build.py`, then **the layouts and `build.py --strict` once more**
   (edge sealing of town maps reads the neighbours' built maps where no span is given).
 
+## 2m. Map builder 10 (2026-11-19/20): crafted roads, the nature kit, Saltmere polish, Ebbmouth, the Rehearsal
+- **Crafted roads** (`layouts/routes_craft.py` on `layouts/craftkit.py`; `routes_early.main()` dispatches 520, 524, 527,
+  528, 540, 541, 552, 577, 568 there): elevation with cliffs, plateaus and stairs (`CK.plateau`, `CK.stair` protects its
+  landings), one-way ledges (`CK.ledge`, terrain tag 1, faces grass / chalk / dune), mixed species woods (`CK.woods` lattice
+  zones per palette ELOWEN / COAST / GOSSAMER / SNOWWOOD) with `fringe` trees and `undergrowth`, streams with stepping
+  stones, ponds, falls, shore detail (`CK.shore`: wet sand, wrack, shallows, rock pools), meadows and grass fields, salt
+  pans (`CK.pans_varied`, four brines), boardwalks, silk drapes. `CK.seat()` seats a building at the nearest legal spot.
+  `CK.scatter_quiet` lays walkable decor only (solid bushes walled a talker in on 540 and a field on 568).
+- **Nature kit** (`mapgen/ndraw.py`, appended to the `pf` part by `rdraw.pieces_late4`; rcustom dedups): ledges, coast,
+  chalk sea arches and stacks, landmarks, drystone walls, silk, the road mechanics' pieces, salt / dye / boardwalk, the stone
+  bridge, mill-wheels, the Lattice intake, Bleed veil and frozen gusts, the tipped wagon, and the imported J-Treecko252
+  crystals (`art/imports/`, x2 halved to the 16-px grid). **Adding a piece shifts every later id: after any sheet change
+  relay and rebuild every crafted map** (rcustom, rcompose, rstamps, then the layouts, then build.py), or SEAM warnings appear.
+  New tileset **56 "PF Rejuv Shore"** (the `shore` route theme).
+- **Mechanics** (flags V601-604, V536): 577 wind-gap gusts (`pfp_metronome`), 552 sluice stones and the cloth barge, 541's
+  night Drowned Lane, 528 sledge run, 566 Ram Race (`$stats.distance_walked`), 568's frame clock (`pfp_step_hook` +
+  `pfp_step_clock`). `build.py` event pages take `route:` (rpg.route_cmds DSL), `speed:`, `freq:`.
+- **Story gates are proven:** a spec's `gates: [{name, from: [[x, y]..], sealed_edge / sealed: [[x, y]..]}]` makes build.py
+  flood-fill with every first-page blocker standing solid and fail `--strict` on a leak (`GATE ok` lines in the log). 520's
+  Hale Bell roadblock and 568's gust walls use it; `tools/harness/playtest/seam_check.py --events` agrees.
+- **Saltmere** (`layouts/saltmere_rj.py`): curved and diagonal streets cut before the blocks (`street()`, `m.smask`; houses
+  step down a slanting street with `stepped_rank`), 147 rebuilt off-centre (no mirror), salt works packed per field
+  (`salt_works`, four brines, boardwalk jetties), green / salt-crust verges at the gates. Interiors 143-145
+  (`layouts/saltmere_interiors.py`; 145 is a hallkit theatre on tileset 54).
+- **Ebbmouth 160 + Mill Quay 167** (`layouts/ebbmouth.py`, PF Rejuv Snow with the Rimewood kit): open black river, lock,
+  bridges, mill-wheels, quays, the frozen reach. **568 The Rehearsal** in routes_craft. **548** gets its glass ravine
+  (`layouts/deepwood.py 548` writes 548 alone).
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

@@ -38,6 +38,11 @@ def wheel(m, name, x, y):
     over_tiles(m, name, x, y, z=2)
 
 
+def lay_ice(m):
+    """only the frozen reach is ice (class I); the river and the harbour stay open water"""
+    for y, x in np.argwhere(np.isin(m.cls, ['i', 'I'])): m.L[0, y, x] = RW.ice_at(x, y)
+
+
 def obj(at, name, lines):
     return {'type': 'event', 'name': name, 'at': list(at), 'pages': [{'trigger': 'action', 'commands': list(lines)}]}
 
@@ -50,15 +55,12 @@ def build_160():
     # ---- the river, the harbour basin, the sea and its frozen reach
     for y in range(0, 40):
         c = river_x(y)
-        for x in range(int(c - 2.6), int(c + 3.4)): m.cls[y, x] = 'w'
-    m.blob(44, 41.5, 14.5, 5.0, 'w', seed=161, rough=0.35)                       # the harbour basin
+        for x in range(int(c - 2.6), int(c + 3.4)): m.cls[y, x] = 'W'
+    m.blob(44, 41.5, 14.5, 5.0, 'W', seed=161, rough=0.35)                       # the harbour basin (open black water)
     for y in range(44, H):                                                       # the sea, south-east of the coast road
         for x in range(W):
             coast = 27 + 3 * vnoise(0, y, 162, 5.0) - (y - 44) * 0.15
             if x >= coast: m.cls[y, x] = 'W'
-    for y in range(36, 44):
-        for x in range(26, W):
-            if m.cls[y, x] == 'w' and y >= 42: m.cls[y, x] = 'W'
     for y in range(46, H):                                                       # the frozen reach beyond the breakwater
         for x in range(46, W):
             if m.cls[y, x] == 'W' and x >= 49 + 3 * vnoise(0, y, 163, 4.0) - (y - 46) * 0.4: m.cls[y, x] = 'o'
@@ -96,7 +98,7 @@ def build_160():
     # the quays round the basin (packed snow on stone), and the breakwater out to the light
     for y in range(32, 40):
         for x in range(38, W):
-            if m.cls[y, x] in '.T' and any(m.inb(x + dx, y + dy) and m.cls[y + dy, x + dx] == 'w' for dx in (-1, 0, 1) for dy in (-1, 0, 1, 2)):
+            if m.cls[y, x] in '.T' and any(m.inb(x + dx, y + dy) and m.cls[y + dy, x + dx] == 'W' for dx in (-1, 0, 1) for dy in (-1, 0, 1, 2)):
                 m.cls[y, x] = 'd'
     for i, (x, y) in enumerate([(57, 38), (56, 40), (55, 42), (53, 44), (51, 45), (49, 46)]):
         for dx in (0, 1, 2):
@@ -108,7 +110,7 @@ def build_160():
     d = {}
     d['reyes'] = m.stamp('wb_short', 3, 3, 'EB_REYES', 'Reyes House door')
     d['house'] = m.stamp('wb_hut', 12, 4, 'EB_HOUSE', "Net-mender's House door")
-    m.stamp('kf_aframe', 18, 2, None, 'x')
+    m.stamp('fw_rack', 18, 6) if False else None
     d['pc'] = m.stamp('wb_pc', 3, 15, 'EB_PC', 'Poke Center door')
     d['mart'] = m.stamp('wb_long', 9, 18, 'EB_MART', 'Mart door') if False else m.stamp('wb_long2', 12, 16, 'EB_MART', 'Mart door')
     d['angler'] = m.stamp('wb_long3', 2, 30, 'EB_ANGLER', "Anglers' Guild door")
@@ -118,7 +120,7 @@ def build_160():
     m.stamp('wb_smoke', 4, 38, None, 'x')                                         # the eel smokery
     m.stamp('wb_long', 38, 24, None, 'x') if False else None
     m.stamp('wb_short', 39, 1, None, 'x')                                         # the Upper Mill house (east bank)
-    m.stamp('kf_aframe', 25, 33, None, 'x')                                       # the Guild Mill house (west bank)
+    m.stamp('wb_hut', 25, 32, None, 'x')                                          # the Guild Mill house (west bank)
     m.events = [e for e in m.events if e.get('name') != 'x']
     for k, (dx, dy) in d.items(): doorstep(m, (dx, dy)); apron(m, (dx, dy))
     # ---- yards, market, quays
@@ -133,7 +135,11 @@ def build_160():
                      ('pf_lantern', 18, 36), ('pf_lantern', 23, 45), ('pf_lantern', 10, 12), ('pf_lantern', 31, 8), ('pf_lantern', 46, 19)):
         m.near(nm, x, y, on='.d', r=3)
     m.stamp('pf_wlamp', 49, 45) if m.free(49, 45, 1, 3, on='d') else m.near('pf_wlamp', 50, 44, on='d', r=2)   # the breakwater light
-    for cx, cy, n in ((6, 12, 2), (24, 5, 1), (2, 26, 1), (14, 40, 2), (8, 50, 3), (31, 14, 1), (56, 20, 2), (52, 26, 1), (36, 47, 0)):
+    for nm, x, y in (('fw_boat_over', 25, 47), ('fw_rack', 17, 48), ('fw_rack', 25, 50), ('fw_skull', 13, 51), ('hb_rope', 24, 44),
+                     ('fw_wood', 18, 45), ('ak_rock2', 11, 47), ('ak_boulder', 27, 52), ('fw_sled', 15, 46), ('pf_wlamp', 25, 41),
+                     ('fw_stall_e', 28, 44) if False else ('hb_barrel', 26, 45), ('fw_wood', 14, 15), ('sh_crates', 17, 4)):
+        m.near(nm, x, y, on='.d', r=3)
+    for cx, cy, n in ((6, 12, 2), (24, 5, 1), (2, 26, 1), (14, 40, 2), (8, 50, 3), (31, 14, 1), (56, 20, 2), (52, 26, 1), (19, 4, 2)):
         if n: m.trees(cx, cy, n, ['pine2', 'kf_tree', 'pine2'], r=2, on='.', seed=cx * 7 + cy)
     # ---- events
     E = [sign((22, 17), 'Gym sign', "TIDELOCK GYM\nWarden: Marisol Reyes - The Ebb runs both ways."),
@@ -145,9 +151,9 @@ def build_160():
          obj((29, 35), 'Guild mill', ["The Guild Mill. Its race runs past Meridian's brass intake. When the river stutters the wheel freezes mid-turn and the whole quay holds its breath."]),
          obj((52, 37), 'Harbour mast', ["A whaler's mast at the quay, its yard hung with nets. Gulls have opinions about it."]),
          npc((10, 33), 'Ice-fisher', 'trainer_FISHERMAN', ["♪ Sleep, old whale, under the ice... When the whale wakes, the sea remembers it's a sea. ♪"], d='up'),
-         npc((19, 23), 'Guild striker', 'NPC 03', ["Ebb Guild: Thane Eirik taxes our catch, Meridian lays us off. And the river stops dead for minutes now!"], move='random'),
+         npc((8, 26), 'Guild striker', 'NPC 03', ["Ebb Guild: Thane Eirik taxes our catch, Meridian lays us off. And the river stops dead for minutes now!"], move='random'),
          npc((49, 36), 'Dockworker', 'trainer_SAILOR', ["Watch the mill-wheels. When the Ebb stutters they freeze mid-turn and we all hold our breath."], d='left'),
-         npc((23, 23), 'Guild organiser', 'NPC 27', ["Guild organiser: Strike vote's at the bell. Marisol says she's 'neutral'. Marisol has never been neutral about anything in her life."]),
+         npc((22, 30), 'Guild organiser', 'NPC 27', ["Guild organiser: Strike vote's at the bell. Marisol says she's 'neutral'. Marisol has never been neutral about anything in her life."]),
          npc((13, 29), 'Eel-smoker', 'NPC 20', ["Smoked eel! Smoked char! Smoked anything you hold still long enough!", "The Warden buys two every night after a gym fight. Win or lose. Mostly win."]),
          npc((43, 20), 'Lock-keeper', 'NPC 25', ["Lock-keeper: The Tidelock lifts boats up the Ebb when the tide's in and lets them down when it's out.",
                                                  "Lately the river doesn't know which it is. Neither do the gates."], d='down'),
@@ -164,11 +170,11 @@ def build_160():
     m.greenfill(3)
     m.events = [e for e in m.events if e['type'] == 'door'] + E
     m.paint()
-    bridges(m, ((28, 30),), cls='w')                                             # the Market Bridge
-    bridges(m, ((16, 17),), cls='w')                                             # the lock gates' footway (the Tidelock)
+    bridges(m, ((28, 30),), cls='W')                                             # the Market Bridge
+    bridges(m, ((16, 17),), cls='W')                                             # the lock gates' footway (the Tidelock)
     for x in range(m.W):                                                         # sluice paddles at the lock ends
         for y in (15, 18):
-            if m.cls[y, x] == 'w' and m.cls[y - 1 if y == 15 else y + 1, x] == 'w' and (x % 2 == 0):
+            if m.cls[y, x] == 'W' and m.cls[y - 1 if y == 15 else y + 1, x] == 'W' and (x % 2 == 0):
                 over_tiles(m, 'df_sluice', x, y - 1 if y == 15 else y, z=2)
     wheel(m, 'eb_wheel0', int(river_x(4)) - 1, 2)                                # the Upper Mill's wheel
     wheel(m, 'eb_wheel1', int(river_x(33)) - 2, 32)                              # the Guild Mill's wheel
@@ -180,7 +186,7 @@ def build_160():
                 for i in range(L.shape[2]):
                     t = int(L[:, j, i].max())
                     if t: m.L[2, y + j, x + i] = t
-    ice(m)
+    lay_ice(m)
     dress_ice(m, 0.28, seed=160)
     reed_beds(m, 10, seed=160)
     for nm, x, y in (('fw_smoke_w', 6, 36), ('fw_smoke_w', 24, 18), ('fw_smoke_w', 6, 1), ('fw_smoke_w', 43, 4), ('fw_smoke_w', 50, 19)):
@@ -204,10 +210,10 @@ def build_167():
     W, H = 40, 30
     m = snowmap(W, H, 167)
     for y in range(0, H):                                                        # the Ebb, lined up with 160's at the seam
-        c = river_x(y + 54 * 0, base=34.5 - (H - 1 - y) * 0.12)
+        c = river_x(y - H)                                                       # continues 160's river across the seam
         for x in range(int(c - 2.6), int(c + 3.4)):
-            if m.inb(x, y): m.cls[y, x] = 'w'
-    m.blob(30, 8, 5.0, 3.0, 'w', seed=171, rough=0.35)                           # the mill pond above the head-race
+            if m.inb(x, y): m.cls[y, x] = 'W'
+    m.blob(30, 8, 5.0, 3.0, 'W', seed=171, rough=0.35)                           # the mill pond above the head-race
     for y in range(H):
         for x in range(W):
             if m.cls[y, x] != '.': continue
@@ -224,12 +230,9 @@ def build_167():
     m.lane([(10, 19), (9, 25), (12, 28)], 'd', 2.2, seed=178, wobble=0.3)
     m.lane([(27, 21), (27, 26)], 'd', 2.0, seed=179, wobble=0.1)
     smooth(m, 'd', into='.', passes=1)
-    # the Mill Quay steps: a stair down the quay face to the water (the river note's place)
-    for y in (22, 23):
-        for x in (24, 25): m.cls[y, x] = 'd'
     E = []
     m.stamp('wb_long3', 3, 4, None, 'x'); m.stamp('wb_long', 14, 3, None, 'x')    # the union halls (no interiors)
-    m.stamp('kf_aframe2', 20, 10, None, 'x') if False else m.stamp('kf_aframe', 22, 11, None, 'x')   # the tide mill
+    m.stamp('wb_smoke', 22, 10, None, 'x')                                        # the tide mill
     m.stamp('wb_hut', 3, 22, None, 'x')
     m.events = [e for e in m.events if e.get('name') != 'x']
     for nm, x, y in (('fw_brazier', 12, 17), ('fw_brazier', 22, 19), ('sh_crates', 18, 20), ('hb_barrels', 6, 16), ('fw_sled', 8, 20),
@@ -238,7 +241,8 @@ def build_167():
         m.near(nm, x, y, on='.d', r=3)
     for cx, cy, n in ((6, 26, 2), (19, 27, 1), (35, 27, 1)):
         m.trees(cx, cy, n, ['pine2', 'kf_tree'], r=2, on='.', seed=cx + cy)
-    E += [obj((27, 17), 'Mill Quay wheel sign', ["THE MILL QUAY WHEEL. Cast 'EBB GUILD - AF 198'. Below the date somebody has scratched: 'AND STILL TURNING'."]),
+    E += [obj((28, 22), 'Mill Quay steps', ["Worn stone steps down the quay face into the black water. The Ebb laps the third step, then the fourth, then stops."]),
+          obj((27, 17), 'Mill Quay wheel sign', ["THE MILL QUAY WHEEL. Cast 'EBB GUILD - AF 198'. Below the date somebody has scratched: 'AND STILL TURNING'."]),
           sign((30, 26), 'Quay sign', "THE MILL QUAY - Ebb Guild tidal mills. No Meridian vehicles past this sign. (By order of the Guild. And Bjorn.)"),
           npc((12, 18), 'Striker', 'NPC 03', ["Striker: No grain moves till the Thane drops the tax. No wheel turns till Meridian stops stopping it. Simple."], move='random'),
           npc((20, 18), 'Striker 2', 'NPC 21', ["Striker: My dad milled here. His dad milled here. Meridian says 'efficiency'. I say 'my dad'."]),
@@ -253,12 +257,8 @@ def build_167():
     m.events = [e for e in m.events if e['type'] == 'door'] + E
     m.paint()
     for i, (x, y) in enumerate(((30, 12), (31, 18), (32, 24))):                   # three tide-mill wheels down the race
-        cx = int(river_x(y, base=34.5 - (H - 1 - y) * 0.12)) - 3
-        wheel(m, 'eb_wheel%d' % (i % 2), max(cx, 28), y)
-    for y in (22, 23):                                                           # the steps down to the water
-        for i, x in enumerate((24, 25)):
-            m.L[2, y, x] = m.STAIRS[0 if i == 0 else 2]
-    ice(m)
+        wheel(m, 'eb_wheel%d' % (i % 2), int(river_x(y + 1 - H) - 2.6), y)
+    lay_ice(m)
     dress_ice(m, 0.2, seed=167)
     for nm, x, y in (('fw_smoke_w', 6, 2), ('fw_smoke_w', 17, 1), ('fw_smoke_w', 24, 9)): over_tiles(m, nm, x, y)
     m.scatter(5, seed=167)

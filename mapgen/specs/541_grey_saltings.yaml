@@ -121,7 +121,7 @@ events:
   pages:
   - trigger: touch
     commands:
-    - (Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)
+    - Salt pans run to the horizon between white stacks and the smoke of the boiling-house. Behind them stands a chalk cliff with a mine mouth in it.
     - '\pf[JUNO,neutral]Juno: This is where Saltmere''s salt comes from. "Grey" is the salt before it''s washed.'
     - '\pf[JUNO,neutral]Juno: ...And the weather. It''s mostly the weather.'
     - selfswitch: [A, true]

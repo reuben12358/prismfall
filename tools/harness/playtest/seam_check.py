@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Seam check for map edge connections (playtest tool; events are ignored, tile passability as in Essentials).
+"""Seam check for map edge connections (playtest tool; tile passability as in Essentials; events are ignored unless
+--events is given: then every event that blocks on its FIRST page (a charset or a tile graphic, not Through) stands
+solid - the map before any story switch is set - so a closed story gate such as 520's Hale Bell roadblock shows as
+"NOT reachable from start" on the edge it shuts).
 For every open edge tile of map A toward map B it prints the arrival tile on B and whether it is blocked, off the map,
 or how much open ground it reaches (400+ = fine). Optional start tile: also says which edge tiles A's start reaches.
   python3 -I seam_check.py MAPGEN_DIR DATA_DIR CONNECTIONS_TXT A B [sx sy]
@@ -8,6 +11,8 @@ DATA_DIR needs MapNNN.rxdata and Tilesets_prismfall.rxdata (maps_out/Data or an 
 import sys, os
 sys.path.insert(0, sys.argv[1])
 import rmarshal as M
+EVENTS = '--events' in sys.argv
+sys.argv = [a for a in sys.argv if a != '--events']
 data_dir, conn_file, A, B = sys.argv[2], sys.argv[3], int(sys.argv[4]), int(sys.argv[5])
 start = (int(sys.argv[6]), int(sys.argv[7])) if len(sys.argv) > 7 else None
 tsets = {}
@@ -21,8 +26,16 @@ class Map:
         self.tid = m['tileset_id']
         ts = tsets[m['tileset_id']]
         self.pas, self.pri = ts['passages'], ts['priorities']
+        self.solid = set()
+        if EVENTS:                                   # map builder 10: first-page blockers (charset or tile, not Through)
+            for e in (m.get('events') or {}).values():
+                ev = e.ivars; p0 = ev['pages'][0].ivars; g = p0['graphic'].ivars
+                name = g.get('character_name') or ''
+                name = name.decode() if isinstance(name, bytes) else str(name)
+                if (name or g.get('tile_id', 0)) and not p0.get('through'): self.solid.add((ev['x'], ev['y']))
     def valid(self, x, y): return 0 <= x < self.w and 0 <= y < self.h
     def tile_ok(self, x, y, d):
+        if (x, y) in self.solid: return False
         bit = (1 << (d // 2 - 1)) & 0x0f
         for z in (2, 1, 0):
             t = int(self.data.data[z, y, x])

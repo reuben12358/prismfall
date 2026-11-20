@@ -34,6 +34,8 @@ module PrismfallMaps
     126 => [6, 2, -6, 8],   # Briarwick Lantern House
     168 => [6, 2, -6, 8],   # The Net Loft
     542 => [6, 2, -6, 8],   # The Brinewife's Rest
+    160 => [-6, -4, 6, 18],   # Ebbmouth
+    167 => [-6, -4, 6, 18],   # Ebbmouth - Mill Quay
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
@@ -55,6 +57,7 @@ module PrismfallMaps
     562 => [-10, -4, 14, 16],   # The Rimewood
     563 => [-6, -2, 16, 12],   # Rimewood Glade
     566 => [0, 0, 4, 6],   # Spinners' Rise
+    568 => [-10, -22, 20, 60],   # The Rehearsal
     570 => [-8, -4, 12, 12],   # Frostwick
     571 => [6, 2, -6, 0],   # Frostwick Pokémon Center
     572 => [6, 2, -6, 0],   # The Exchange
@@ -74,10 +77,13 @@ module PrismfallMaps
     140 => ["prismfall_seamist", 0, 30, 0, 100, 2, 0],   # Saltmere
     146 => ["prismfall_seamist", 0, 36, 0, 100, 2, 0],   # Saltmere - Harbour & Breakwater
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
+    160 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth
+    167 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth - Mill Quay
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood
     541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
+    568 => ["prismfall_seamist", 0, 50, 0, 100, 1, 0],   # The Rehearsal
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }
 

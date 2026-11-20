@@ -325,7 +325,7 @@ def build_528():
           obj('Free Port charter stone', (4, 36), ['FREE PORT CHARTER STONE: "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN."',
               'Someone has carved underneath, smaller: "AND BOOS THE REST."']),
           obj('The stile', (2, 42), ['A toll-free stile into Saltmere. A painted board: "FREE PORT. NO TOLL. NO KINGS. MIND THE STEP."']),
-          once('The Saltmere Beacon', (55, 9), ['(From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)',
+          once('The Saltmere Beacon', (55, 9), ['From the top of the dune the free port opens out below you: a white town on a salt lake, striped awnings, lantern masts, and a theatre on every second corner.',
                J('happy', "Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?"),
                J('happy', "The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing."),
                J('happy', 'So they make it all up instead. Every night. On purpose.')]),
@@ -349,10 +349,10 @@ def build_528():
           {'type': 'event', 'name': "The Prompter's Box", 'at': [24, 61], 'pages': [{'trigger': 'action', 'commands': [
               {'if': 'pfm?(:sm_prompter)', 'then': ['Only sand now. The barge has given up its secret.'],
                'else': [{'if': 'pfm_has?(:SANDSHOVEL)', 'then': [
-                   '(A theater barge lies half-buried in the dune, its name board reading THE WANDERING CHORUS.)', 'You dig at the stern with the shovel...',
+                   'A theatre barge lies half-buried in the dune. Its name board still reads THE WANDERING CHORUS.', 'You dig at the stern with the shovel...',
                    {'script': 'pfm_item(:PROMPTERSSCRIPT, 1, "Prompter\'s Script")'}, {'script': 'pfm_item(:NORMALGEM, 1, "Normal Gem")'},
                    {'script': 'pfm_set(:sm_prompter)'}],
-                   'else': ['(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.)',
+                   'else': ['A theatre barge lies half-buried in the dune. Its costume hampers have burst open in the sand, and a prop throne with three legs still stands on the deck.',
                             'Something square is buried at the stern. You\'d need a shovel.']}]}]}]},
           trainer((92, 26), 'BIRDKEEPER', 'Lark', "Wind off the lake's the best in Elowen.", 'My kite won. You beat the kite-flier, which is different.', d='left'),
           trainer((10, 40), 'POKEMONRANGER_F', 'Sedge', "Free port starts at the stile. Past that, the Queen's writ doesn't run, and neither do I.",
@@ -367,6 +367,15 @@ def build_528():
         m.taken[y, bx] = True
     r.seat_events(on='.dtus')
     CK.clear_around(r)
+    # playtest round 3 item 5: Saltmere's East Gate meets the down properly - gateposts at the road's mouth on the W edge
+    # and a drystone wall running off north and south from them, the road widened into a trodden apron before the gate
+    for y in range(34, 46):
+        for x in range(0, 4):
+            if 38 <= y <= 41 and x < 4: m.cls[y, x] = 'd'
+    for y in list(range(28, 37)) + list(range(43, 52)):
+        if m.free(0, y, 1, 1, on='.tu') and not r.road_mask[y, 0]: m.stamp('nr_wall_v', 0, y, mark='B')
+    for y in (36, 42):
+        if m.free(1, y - 1, 1, 2, on='.tud'): m.stamp('nr_col', 1, y - 1, mark='B')
     # ---- the camp's purpose: wagons (stalls), the fire, the washing line, the props barrels, the morris column
     for n, x, y in (('pf_stall4', 64, 41), ('pf_stall2', 77, 41), ('pf_stall0', 79, 45), ('sh_campfire', 70, 45),
                     ('hb_washline', 66, 48), ('hb_tables', 75, 47), ('hb_barrels', 81, 43), ('pf_morris', 63, 44)):
@@ -548,7 +557,7 @@ def build_541():
     mx = 52; my = max(y for y in range(H) if m.ht[y, mx] == 1) + 2
     r.add({'type': 'warp', 'name': 'Mine back door', 'at': [mx, my], 'link': 'R4_MINE', 'arrive': [mx, my + 1, 'down'], 'se': 'Door exit', 'fixed': True},
           sign((36, 104), 'Road sign', "THE GREY SALTINGS -- The Weavers' Road. v Saltmere (North Gate) - ^ The Dyers' Ford, Thistledown Lea & Briarwick.\nMind the pans. The pans do not mind you."),
-          once('The Saltings', (33, 99), ['(Salt pans to the horizon, white stacks, the smoke of the boiling-house, and a chalk cliff behind with a mine mouth in it.)',
+          once('The Saltings', (33, 99), ['Salt pans run to the horizon between white stacks and the smoke of the boiling-house. Behind them stands a chalk cliff with a mine mouth in it.',
                J('neutral', 'This is where Saltmere\'s salt comes from. "Grey" is the salt before it\'s washed.'), J('neutral', "...And the weather. It's mostly the weather.")]),
           trainer((28, 58), 'SAILOR', 'Morrow', "Salt barge went down in the mud in '88. Still there. Still salty.", "You're heavier than you look. In battle, I mean.", d='right'),
           trainer((38, 72), 'TUBER_F', 'Pip', "My floaty is a Wailmer! No it's not. It's a floaty.", 'Waaah! My floaty popped!', d='left'),
@@ -718,7 +727,7 @@ def build_552():
                                      'commands': ['An orange survey flag on a stake. MERIDIAN LATTICE - LINE 7.'] + list(extra)}]}
     grate_t = K.P1('nr_wall_v')
     r.add(sign((36, 66), 'Road sign', "THE DYERS' FORD -- The Weavers' Road. Briarwick Dye-Works. Do not drink the river. Do not bathe in the river. Do not stand in the red."),
-          once("The Dyers' Ford", (39, cy[39] + 7), ['(Below three vat-sheds, the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road.)',
+          once("The Dyers' Ford", (39, cy[39] + 7), ['Below the three vat-sheds the River Selvedge runs in three bands: madder red, woad blue, weld yellow. Cloth dries on lines across the road, so you walk under it as if down corridors.',
                J('happy', "The Briarwick dyers wash their cloth here, so the river runs in three colors! There's a fourth band nobody's allowed to dye. It's just water. People leave ribbons for it.")]),
           talk('Meridian Surveyor', (44, 24), 'trainer_SCIENTIST', ['Meridian Surveyor: Mind the orange flags. Survey line for the new Lattice. Straight up the river and through to the wood.',
                'Meridian Surveyor: Trees aren\'t in the plan, but trees rarely are.'], d='left'),
@@ -1231,29 +1240,48 @@ def build_520():
     send = [{'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'trigger': 'touch', 'commands': [{'if': 'pfm?(:ch2_sendoff)', 'then': [], 'else': RE.SENDOFF_520}]}]
     r.events += [dict(e, fixed=True) for e in line_events(r, 'Juno tutorial', 90, 10, 30, tut)]
     r.events += [dict(e, fixed=True) for e in line_events(r, 'Stile send-off', 98, 8, 24, send)]
+    # playtest round 3 items 15-16: the send-off plays at the Hale Bell fork too (the farm is north of it, so a player who
+    # rests at the Hale Farmhouse never passes the stile): touch lines across the lane north and south of the fork
+    r.events += [dict(e, fixed=True) for e in line_events(r, 'Hale Bell send-off N', 68, 16, 30, send)]
+    r.events += [dict(e, fixed=True) for e in line_events(r, 'Hale Bell send-off S', 79, 16, 30, send)]
+    # the roadblock: the barricade spans the whole Strand Road (x 2, rows 72-75) and the ground either side of it is woods
+    # down to the map edge, so the barricade is the only way to the W edge; it opens on the Chapter 1 rest (V102 >= 2), not
+    # on the orchard (build.py `gates:` proves it shut)
+    for y in list(range(64, 72)) + list(range(76, 81)):
+        for x in range(0, 6):
+            if m.cls[y, x] not in 'wWs': m.cls[y, x] = 'T'; r.road_mask[y, x] = False
     B = barrier_tile()
-    bar = lambda i, y: {'type': 'event', 'name': 'Accord barrier %d' % i, 'at': [3, y], 'fixed': True, 'pages': [
+    bar = lambda i, y: {'type': 'event', 'name': 'Accord barrier %d' % i, 'at': [2, y], 'fixed': True, 'pages': [
         {'graphic': {'tile': B}, 'trigger': 'action', 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
-        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'through': True, 'commands': []}]}
-    for i, y in enumerate((72, 73, 74, 75)): r.events.append(bar(i + 1, y)); m.taken[y, 3] = True
-    r.add({'type': 'event', 'name': 'Professor Larch', 'at': [19, 97], 'pages': [
+        {'cond': {'var': ['STORY_CHAPTER', 2]}, 'through': True, 'commands': []}]}
+    for i, y in enumerate((72, 73, 74, 75)): r.events.append(bar(i + 1, y)); m.taken[y, 2] = True
+    r.add({'type': 'event', 'name': 'Professor Larch', 'at': [19, 70], 'pages': [
               {'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'graphic': {'sprite': 'trainer_PROFESSOR', 'dir': 'down'}, 'commands': [
                   {'if': 'pfm?(:ch2_sendoff)', 'then': [P('LARCH', 'neutral', 'Off you go. Lecture Two is already drafted.')], 'else': RE.SENDOFF_520}]},
               {'cond': {'self': 'A'}, 'commands': []}]},
-          {'type': 'event', 'name': 'Accord guard', 'at': [5, 71], 'pages': [
-              {'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
-              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+          {'type': 'event', 'name': 'Accord guard', 'at': [6, 71], 'pages': [                  # story/20_SCRIPT_CH0-2.md (Ch1 close, 2026-11-20)
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': [
+                  'Accord Guard: Hold. Quarantine order: nobody west of the Bell without papers.',
+                  "Accord Guard: ...A Badge Case. A challenger. Challengers pass, that's older law than the quarantine. But they pass at first light, with the cliff patrol. Not a minute before.",
+                  "Accord Guard: Go and get some sleep. The cliffs'll still be there in the morning. Mostly. They're chalk."]},
+              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': [
+                  'Accord Guard: Hold. Quarantine order: nobody west of the Bell without papers.',
+                  "Accord Guard: ...A Badge Case. A challenger. Challengers pass, that's older law than the quarantine. But they pass at first light, with the cliff patrol. Not a minute before.",
+                  "Accord Guard: Go and get some sleep. The cliffs'll still be there in the morning. Mostly. They're chalk.",
+                  "Accord Guard: You're the one stopping at the Hales'? Then eat whatever Wenna puts in front of you. That's an order. Hers, not mine."]},
+              {'cond': {'var': ['STORY_CHAPTER', 2]}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
                   'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.',
                   "Accord Guard: ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.",
                   'Accord Guard: "Eighteen in Concord, One in Keeping." On you go. Saltmere\'s two days west. Mind the cliff path in wind.']}]},
-          {'type': 'event', 'name': 'Accord guard (aside)', 'at': [6, 77], 'pages': [
+          {'type': 'event', 'name': 'Accord guard (aside)', 'at': [7, 76], 'pages': [
               {'graphic': {'sprite': 'NPC 07', 'dir': 'up'}, 'commands': ['Second Guard: Nobody past. Orders came down this morning.']},
-              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+              {'cond': {'var': ['STORY_CHAPTER', 2]}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
                   "Second Guard: (low) That's the null one from the dock. Captain said let them through, whatever happens.", 'Accord Guard: Which captain?',
                   "Second Guard: Didn't say. Came down from Crownhaven with a white seal on it.", '\\\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
                   'Accord Guard: Lovely weather.']}]},
           obj('The Hale Bell', (16, 70), ['THE HALE BELL: A ship\'s bell on a post above the sea cliff. The ferrymen rang it once the last boat was in.',
-              'A cloth has been tied round the clapper.', J('sad', "Dad tied that. The night they closed the strait. He said there wasn't anything left to ring for.")]),
+              'A cloth has been tied round the clapper.', J('sad', 'Dad tied that. The night they closed the strait.'),
+              J('happy', "He's never untied a knot in his life. He cuts them. So if he says he'll untie it, he's been practising.")]),
           talk('Hay-cart Driver', (26, 70), 'NPC 11', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
                "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
           sign((10, 76), 'Hale Bell fork sign', "THE HALE BELL. <- LACECLIFF WALK, Marram Down and SALTMERE (the Strand Road). ^ Windfall Row. v Ferrow's Landing."),
@@ -1328,6 +1356,9 @@ def build_520():
                           {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],
              fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0}, tone=[4, 4, -4, 0])
     h['walk_from'] = [[9, 97]]                                                    # the Ferryman's Rest (behind the Cut bramble)
+    # playtest round 3 item 15: with the barricade shut, nothing on the W edge (Lacecliff Walk) is reachable on foot from the
+    # Landing (S edge) or from Windfall Row (N edge); build.py checks it on every build
+    h['gates'] = [{'name': 'Hale Bell roadblock', 'from': [[16, 109], [31, 0]], 'sealed_edge': 'W'}]
     r.write(h, '520_ferrymens_mile.yaml', "# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_craft.py - edit that script.\n", '/tmp/rt/520.png' if PREV else None)
 
 
@@ -1435,3 +1466,166 @@ def build_577():
 
 RW = RE.RW
 BUILD[577] = build_577
+
+
+# ====================================================================================================== 568 The Rehearsal
+def frame_pages(k, gfx, cmds, solid=False):
+    """event pages that show `gfx` exactly while D8_FRAME == k (RMXP pages only test >=): one page per frame 0-4"""
+    pages = []
+    for j in range(5):
+        pg = {'cond': {'var': ['D8_FRAME', j]}} if j else {}
+        if j == k:
+            pg.update({'graphic': gfx, 'trigger': 'touch' if not solid else 'action', 'through': not solid, 'commands': list(cmds)})
+        else:
+            pg.update({'through': True, 'commands': []})
+        pages.append(pg)
+    return pages
+
+
+def gust_pages(parity, tile):
+    """a frozen salt gust: solid on the frames of the given parity (0: frames 0, 2, 4; 1: frames 1, 3), gone otherwise"""
+    pages = []
+    for j in range(5):
+        pg = {'cond': {'var': ['D8_FRAME', j]}} if j else {}
+        if j % 2 == parity:
+            pg.update({'graphic': {'tile': tile}, 'trigger': 'action', 'commands': ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']})
+        else:
+            pg.update({'through': True, 'commands': []})
+        pages.append(pg)
+    return pages
+
+
+def build_568():
+    """The Rehearsal (34x26, BLEED, optional; D8): a stretch of the old salt road off the Frostflat Causeway where five
+    seconds of a wagon crash replay forever.  Through the Bleed Veil (N, from 560's spur) the road runs down past the
+    wheel-rut where the wagon tips and the four onlookers who watch it every time, through bleached tall grass to the
+    drowned pier village (W); east, the salt flat is frozen mid-gust.  One frame per step (D8_FRAME, a step clock): the
+    Tauros and the driver come down the road a frame at a time; the gust walls stand on even frames (the salt-flat wall,
+    the pier neck) or odd ones (the second wall, the pier end), so the TM and the Bleed Shard need you to step in rhythm.
+    Pink crystals of the Bleed grow along the Veil and round the rut."""
+    W, H = 34, 26
+    r = Route(568, W, H, 'shore', kit={1: 'akc', 'default': 'akc'}, base='.')
+    m = r.m
+    # ---- the sea: south and the drowned pier village (W), the salt flat's shore (E)
+    for x in range(W):
+        for y in range(H):
+            coast = 21 + 1.5 * (vnoise(x, 0, 5681, 5.0) - 0.5) * 2 - (2 if x > 18 else 0) - (3 if x > 25 else 0)
+            if y >= coast: m.cls[y, x] = 'W' if y >= coast + 3 else 'w'
+            elif y >= coast - 1.2: m.cls[y, x] = 's'
+    for y in range(16, H):                                                       # the pier inlet (W): shallow water round the pilings
+        for x in range(0, 9):
+            if m.cls[y, x] == '.' and y >= 19 + 1.5 * vnoise(x, y, 5682, 3.0): m.cls[y, x] = 'w'
+    # ---- the salt flat (E), frozen mid-gust
+    for y in range(2, 16):
+        for x in range(18, W):
+            if m.cls[y, x] == '.' and x >= 18 + 2 * vnoise(0, y, 5683, 4.0): m.cls[y, x] = 'S'
+    # ---- the old salt road from the Veil to the pier, the wheel-rut, the tall grass
+    road = [(16, 0), (16, 4), (14.5, 8), (12.5, 11), (10, 15), (7, 18), (5, 20)]
+    r.road(road, w=3.0, open_=None, only='.tTS')
+    r.lane([(17, 6), (20, 8), (22, 9)], w=2.0, c='d', open_=None, only='.tS')    # onto the salt flat
+    r.exit('N', 15, 3)
+    for x in range(3, 6):                                                        # the pier: planks over the shallows to the end
+        for y in range(20, 26):
+            if m.cls[y, x] in 'wWs.': m.cls[y, x] = 'w'; r.deck.append((x, y))
+    r.forest_band('N', 2, wobble=1.0); r.forest_band('W', 2, wobble=1.0)
+    for y in range(0, 2):                                                        # chalk rock hems the salt flat's north
+        for x in range(18, W):
+            if m.cls[y, x] in '.S': m.cls[y, x] = 'T'
+    r.finish_plan(border=1)
+    CK.grass_fields(r, [(8, 13, 3.5), (12, 17, 3.0), (4, 12, 2.5), (14, 13, 2.0)])
+    # ---- events
+    gtile = STAMPS['bl_gust0']['layers'][2][0][0]
+    pass_ = ['You pass through the moment, and it shivers.']
+    ev = [{'type': 'warp', 'name': 'Bleed Veil', 'at': [16, 0], 'link': 'R5_REHEARSAL', 'arrive': [16, 1, 'down'], 'se': 'Door exit', 'fixed': True},
+          {'type': 'event', 'name': 'Frame clock', 'at': [0, 0], 'fixed': True, 'pages': [
+              {'trigger': 'parallel', 'commands': [
+                  {'script': 'pfp_step_hook(568, :rehearsal) { pfp_step_clock(536, 5); $game_map.need_refresh = true }'}, {'wait': 120}]}]},
+          obj('Wheel-rut', (12, 12), ['An old wheel-rut, worn deep, where the road bends. The frost in it is broken fresh, every five seconds.']),
+          sign((19, 4), 'Veil sign', 'THE OLD SALT ROAD. (Somebody has chalked under it: "it does it again".)'),
+          obj('Drowned pier', (6, 19), ['The pier of a village the sea took back. Pilings in a row, houses to the sills in water. The planks still hold.']),
+          obj('The tipped wagon', (11, 9), ['The wagon on its side, wheel still turning. Spilled salt sacks. It is always just now.'])]
+    T, D = 'Followers/TAUROS', 'NPC 11'
+    for k, (tx, ty) in enumerate(((16, 2), (16, 4), (15, 6), (14, 8), (13, 10))):            # the bolting Tauros, frame by frame
+        ev.append({'type': 'event', 'name': 'Tauros f%d' % k, 'at': [tx, ty], 'fixed': True,
+                   'pages': frame_pages(k, {'sprite': T, 'dir': 'down'}, pass_)})
+    for k, (tx, ty) in enumerate(((17, 1), (17, 3), (16, 5), (15, 7), (14, 9))):             # the driver hauling on the reins
+        ev.append({'type': 'event', 'name': 'Driver f%d' % k, 'at': [tx, ty], 'fixed': True,
+                   'pages': frame_pages(k, {'sprite': D, 'dir': 'down'}, pass_)})
+    ev.append({'type': 'event', 'name': 'The girl in the road (replay)', 'at': [12, 13], 'fixed': True, 'pages': [
+        {'graphic': {'sprite': 'NPC 07', 'dir': 'up'}, 'through': True, 'trigger': 'touch', 'commands': pass_},
+        {'cond': {'var': ['D8_FRAME', 3]}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'through': True, 'trigger': 'touch', 'commands': pass_}]})
+    words = [('left', 'centre', 'right'), ('first', 'second', 'third'), ('pink', 'grey', 'white'), ('soon', 'now', 'again')]
+    for i, (x, y) in enumerate(((8, 7), (9, 8), (7, 9), (9, 10))):                         # the onlookers: one word different each visit
+        opts = ', '.join('"Onlooker: It tips at the %s wheel. It always tips at the %s wheel."' % (w, w) if i == 0 else
+                         '"Onlooker: Step %s, step %s. That is how you cross the white."' % (w, w) if i == 1 else
+                         '"Onlooker: The horse is %s this time. It was %s last time. It is always %s."' % (w, w, w) if i == 2 else
+                         '"Onlooker: It will end %s. It never ends %s."' % (w, w) for w in words[i])
+        ev.append({'type': 'event', 'name': 'Onlooker %d' % (i + 1), 'at': [x, y], 'fixed': True, 'pages': [
+            {'graphic': {'sprite': ['NPC 02', 'NPC 13', 'NPC 24', 'NPC 09'][i], 'dir': 'right'}, 'trigger': 'action',
+             'commands': [{'script': 'pbMessage(_INTL([%s].sample))' % opts}]}]})
+    # the gust walls: across the salt flat (x 23 even, x 26 odd) and across the pier (row 22 even, row 24 odd)
+    walls = [(23, y, 0) for y in range(2, 16)] + [(26, y, 1) for y in range(2, 16)] + [(x, 22, 0) for x in (3, 4, 5)] + [(x, 24, 1) for x in (3, 4, 5)]
+    for i, (x, y, par) in enumerate(walls):
+        if m.cls[y, x] in 'Sdw.s':
+            ev.append({'type': 'event', 'name': 'Frozen gust %d' % (i + 1), 'at': [x, y], 'fixed': True, 'pages': gust_pages(par, gtile)})
+    ev += [item((31, 9), 'TM10'), item((4, 25), 'BLEEDSHARD') if False else
+           obj('Bleed Shard', (4, 25), ['A shard of something like glass, pink at the edges, humming one note.',
+                                         {'if': '!pfm?(:bleed_shard_3)', 'then': [{'script': 'pfm_set(:bleed_shard_3)'}, '(Bleed Shard #3. You pocket it. It keeps humming.)'],
+                                          'else': ['Only the hum is left.']}]),
+           hidden((29, 4), 'STARDUST', 'HiddenItem (salt flat)')]
+    for e in ev: e.setdefault('fixed', True)
+    r.add(*ev)
+    r.seat_events(on='.dtgS')
+    # ---- props: the drowned village, the Bleed's pink crystals, salt and frost
+    for nm, x, y in (('sh_small', 0, 13), ('gl_cot', 8, 18) if False else ('nr_ruin', 8, 21), ('hb_boat3', 0, 22), ('hb_posts3', 7, 23), ('hb_posts2', 1, 24)):
+        if nm.startswith('hb_'): continue
+        r.near(nm, x, y, on='.tsw', r=2)
+    m.stamp('pf_wagon', 9, 10) if m.free(9, 10, 3, 2, on='.dtg') else r.near('pf_wagon', 9, 10, on='.dtg', r=2)
+    for nm, x, y in (('cr_pink_t', 13, 2), ('cr_pink_c', 19, 3), ('cr_purple_e', 12, 3), ('cr_pink_e', 18, 1), ('cr_teal_c', 10, 12),
+                     ('cr_pink_c', 15, 13), ('cr_purple_c', 7, 15), ('cr_clear_t', 21, 12), ('cr_pink_t', 30, 13), ('cr_teal_e', 32, 4),
+                     ('cr_pink_c', 28, 7), ('cr_clear_c', 20, 6), ('cr_purple_t', 2, 9), ('cr_pink_c', 4, 6)):
+        r.near(nm, x, y, on='.tgS', r=2)
+    for (x0, y0, w, h, k) in ((20, 4, 2, 3, 'brx'), (20, 9, 2, 2, 'brp'), (20, 12, 2, 2, 'brx'), (24, 3, 2, 2, 'brp'), (24, 7, 2, 3, 'brx'),
+                              (24, 12, 2, 2, 'brx'), (28, 3, 3, 2, 'brx'), (28, 11, 2, 3, 'brp'), (31, 6, 2, 2, 'brx'), (29, 14, 3, 1, 'brx')):
+        if (m.cls[y0:y0 + h, x0:x0 + w] == 'S').all() and not m.taken[y0:y0 + h, x0:x0 + w].any():
+            for yy in range(y0, y0 + h):
+                for xx in range(x0, x0 + w):
+                    v = ('n' if yy == y0 else 's' if yy == y0 + h - 1 else '') + ('w' if xx == x0 else 'e' if xx == x0 + w - 1 else '')
+                    m.tile(K.P1('%s_%s' % (k, v or 'c')), xx, yy, 1); m.cls[yy, xx] = 'B'; m.under[yy, xx] = 'S'
+    CK.props(r, ['hb_salt0', 'hb_salt1', 'hb_salt2'], 5, box=(18, 2, 33, 16), on='S', clump=1, seed=5)
+    CK.props(r, ['nt_rocks_s0', 'ck_pebbles', 'nt_stump', 'nt_log'], 6, box=(0, 0, 18, 20), clump=1, seed=6)
+    CK.woods(r, [{'purp': 3, 'pinepurp': 2}, {'dead': 2, 'purp': 2}], scale=8.0) if False else None
+    CK.fringe(r, ['nt_deadtree', 'nt_birch_v', 'nt_dpine_sh', 'nt_tree_purp', 'nt_pine_purp'], 60, seed=1, near_forest=6)
+    CK.undergrowth(r, 140, kinds=('nt_reed0', 'nt_reed1', 'nt_fern1', 'nt_bush1', 'nt_shrub1'), seed=3)
+    for i, (cx, cy, rx, ry) in enumerate(((5, 8, 3, 2), (14, 16, 3, 2), (2, 15, 2, 2), (11, 5, 2, 1.5))):      # bleached sea-pinks
+        CK.meadow(r, cx, cy, rx, ry, tiles=[K.DECOR_SH['flowers'][k] for k in (8, 9, 10)], p=0.6, seed=i)
+    r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.25)
+    CK.paint_extras(r)
+    CK.crust_ground(r, [(x, y) for y, x in np.argwhere((m.cls == 'S') | ((m.cls == 'B') & (m.under == 'S')))])
+    CK.boardwalks(r, r.deck)
+    rng = random.Random(568)
+    for y in range(1, 4):                                                        # the Veil's shimmer across the road
+        for x in range(13, 20):
+            if m.L[2, y, x] == 0: m.L[2, y, x] = K.P1('bl_veil%d' % ((x + y) % 2))
+    for y, x in np.argwhere(m.cls == 'S'):                                       # salt spray frozen all over the flat
+        if m.L[2, y, x] == 0 and rng.random() < 0.34: m.L[2, y, x] = K.P1('bl_gust%d' % rng.randrange(3))
+    for y, x in np.argwhere(np.isin(m.cls, ['.', 'g'])):                         # the Bleed's shimmer drifts over the road's edges
+        if m.L[2, y, x] == 0 and vnoise(x, y, 5684, 3.0) > 0.72: m.L[2, y, x] = K.P1('bl_veil%d' % ((x * 3 + y) % 2))
+    for nm, x, y in (('hb_posts3', 6, 23), ('hb_posts2', 1, 21), ('hb_post1', 7, 20), ('hb_boat3', 0, 24)):
+        L = np.array(STAMPS[nm]['layers'])
+        for j in range(L.shape[1]):
+            for i in range(L.shape[2]):
+                t = int(L[:, j, i].max())
+                if t and m.inb(x + i, y + j) and m.cls[y + j, x + i] in 'wW' and m.L[2, y + j, x + i] == 0 and (x + i, y + j) not in r.deck:
+                    m.L[2, y + j, x + i] = t
+    CK.scatter_quiet(r, 24)
+    h = head(568, 'The Rehearsal', field='BLEED', bgm='Radio - Lullaby', biome='bleed', parent=560,
+             tone=[-10, -22, 20, 60], fog={'name': 'prismfall_seamist', 'opacity': 50, 'blend': 0, 'zoom': 100, 'sx': 1, 'sy': 0})
+    h['metadata']['MapPosition'] = [0, 4, 15]
+    h['gates'] = [{'name': 'Salt-flat gust walls (frame 0)', 'from': [[16, 1]], 'sealed': [[31, 9]]}]
+    r.write(h, '568_the_rehearsal.yaml', '# The Rehearsal (568, :BLEED). WRITTEN BY layouts/routes_craft.py (map builder 10) - edit that script.\n',
+            '/tmp/craft/568.png' if PREV else None)
+
+
+BUILD[568] = build_568

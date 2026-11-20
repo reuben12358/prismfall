@@ -197,7 +197,7 @@ Weather = Rain,30
 #-------------------------------
 [161]   # Ebbmouth Pokémon Center
 Name = Ebbmouth Pokémon Center
-HealingSpot = 160,10,31
+HealingSpot = 160,7,21
 MapPosition = 0,3,7
 #-------------------------------
 [162]   # Ebbmouth Mart
@@ -215,6 +215,14 @@ MapPosition = 0,3,7
 [165]   # Net-mender's House
 Name = Net-mender's House
 MapPosition = 0,3,7
+#-------------------------------
+[167]   # Ebbmouth - Mill Quay
+Name = Ebbmouth - Mill Quay
+Outdoor = true
+ShowArea = true
+MapPosition = 0,3,7
+BattleBack = field
+Weather = Rain,30
 #-------------------------------
 [170]   # Tidelock Gym - Lock Hall
 Name = Tidelock Gym - Lock Hall
@@ -411,6 +419,13 @@ Outdoor = true
 ShowArea = true
 BattleBack = field
 MapPosition = 0,10,12
+#-------------------------------
+[568]   # The Rehearsal
+Name = The Rehearsal
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,4,15
 #-------------------------------
 [570]   # Frostwick
 Name = Frostwick

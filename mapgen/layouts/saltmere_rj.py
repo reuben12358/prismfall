@@ -449,7 +449,8 @@ TOWN_SIGN = "SALTMERE - The Free Port.\nAnswers to the Accord and to No Crown. (
 def arrival_event():
     """first entry by the East Gate (script: Map 140 Arrival).  The tax-barge business is told, not animated."""
     P = SE.P
-    cmds = [{'se': 'Horse'}, '(Lamplit promenades along a white salt lake, striped awnings, salt-caramel smoke. A long green barge flying Elowen\'s briar crown rows across the lake toward the harbour mouth.)',
+    cmds = [{'se': 'Horse'}, 'Through the East Gate the whole port opens out below you: oil lamps along the promenade, striped awnings, the white salt lake beyond, and the smell of burnt sugar on the wind.',
+            'Out on the lake, a long green barge flying Elowen\'s briar crown is rowing for the harbour mouth.',
             {'se': 'Applause'}, 'The Breakwater: BOOOOOOOOOOOO.', '(The green barge turns, slowly, and rows away.)',
             P('JUNO', 'deadpan', "That's the Queen's tax-barge. They do that every week. It's tradition. The barge comes, everyone boos, the barge goes."),
             P('JUNO', 'neutral', 'Mum says it\'s the only time in history a tax has been defeated by noise.'),
@@ -678,17 +679,24 @@ def build_140(prev=None):
     pool = HOUSES + SHOPS
     block(m, 0, 39, 0, 7, HOUSES, 11, alley_every=16)                                # High Town, west of the gate
     block(m, 52, 87, 0, 7, HOUSES + ['sp_books', 'sp_cost'], 12, alley_every=16)
-    block(m, 0, 18, 14, 30, pool, 13)                                                # above West Street
+    block(m, 4, 18, 14, 30, pool, 13)                                                # above West Street
     block(m, 22, 42, 14, 24, HOUSES, 14)
     block(m, 49, 67, 14, 24, SHOPS, 15)
-    stepped_rank(m, 72, 87, 14, pool, 17, maxh=9)                                    # fronts stepping down the bent lane
-    block(m, 72, 87, 14, 43, pool, 117, alley_every=10)
+    stepped_rank(m, 72, 83, 14, pool, 17, maxh=9)                                    # fronts stepping down the bent lane
+    block(m, 72, 83, 14, 43, pool, 117, alley_every=10)
     block(m, 64, 80, 29, 43, pool, 22, alley_every=0)                                # under the lane, west of it
-    stepped_rank(m, 0, 18, 35, pool, 19, maxh=9)                                     # fronts stepping down the Slant
-    block(m, 0, 18, 35, 49, pool, 119)
+    stepped_rank(m, 4, 18, 35, pool, 19, maxh=9)                                     # fronts stepping down the Slant
+    block(m, 4, 18, 35, 49, pool, 119)
     block(m, 22, 39, 42, 49, SHOPS + HOUSES, 20)
     block(m, 50, 63, 42, 49, SHOPS, 21)
     m.cls[m.cls == 'T'] = 'c'
+    # playtest round 3 item 5: the town does not stop flush at the map edge.  Outside the gates the wall's foot is a green
+    # verge (grass, hedges, plane trees) so the East Gate meets Marram Down's turf, and the West Gate the Causeway's
+    # (west: the Frostflat salt road's white crust runs right up to the West Gate, meeting the Causeway's salt and frost)
+    for x0, x1, rows, c in ((84, 87, list(range(12, 38)) + list(range(54, 58)), '.'), (0, 3, list(range(12, 25)) + list(range(41, 58)), 'S')):
+        for y in rows:
+            for x in range(x0, x1 + 1):
+                if m.cls[y, x] in 'cf' and not m.taken[y, x] and not m.cliff[y, x] and m.ht[y, x] == 1: m.cls[y, x] = c; m.court[y, x] = False
     pavements(m)
     m.blob(43.5, 32, 6.5, 4.6, 'c', seed=21, rough=0.0, only='f'); m.blob(43.5, 32, 4.4, 3.2, 'f', seed=22, rough=0.0, only='c')
     # ---- events
@@ -758,6 +766,11 @@ def build_140(prev=None):
     parapets(m, 'rw', rows=(11,)); parapets(m, 'qy', rows=(LAKE - 1,))
     street_trees(m, [(8, 57), (20, 57), (32, 57), (50, 57), (70, 57), (84, 57), (25, 29), (61, 30), (24, 40), (61, 40), (2, 33), (82, 46)])
     gardens(m, 140); courts(m, 140)
+    for x, y in ((86, 14), (85, 20), (86, 27), (85, 33), (86, 56)):               # the east verge's trees
+        m.trees(x, y, 1, ['tr_oak2', 'tr_teal', 'tr_oak'], r=1, on='.')
+    for y in range(12, 38):                                                          # a clipped hedge along the wall's foot
+        if m.free(87, y, 1, 1, on='.') and (y % 4): m.stamp('nt_bush0' if y % 3 else 'nt_bush1', 87, y, mark='B')
+    props(m, (('hb_salt0', 1, 15), ('hb_salt1', 0, 20), ('hb_salt2', 1, 44), ('hb_tubs', 0, 48), ('hb_salt0', 1, 53)), on='S', r=2)
     # ---- the salt lake (map builder 10): pans of every size in four brines (blue new water, grey-green off the marsh,
     # halophile pink in the oldest pans, white crystallising pans ready to rake), plank boardwalks the rakers use from the
     # stair feet, heaps and tubs along the walks

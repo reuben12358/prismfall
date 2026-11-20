@@ -98,7 +98,7 @@ events:
 - type: sign
   name: West Gate sign
   text: WEST GATE - The Frostflat Causeway. (Chained at the Border Stones by order of Isenmar customs.)
-  at: [4, 31]
+  at: [3, 30]
   post: false
 - type: sign
   name: Harbour causeway sign
@@ -311,8 +311,9 @@ events:
     - if: '!pfm?(:sm_arrived) && $game_player.x >= 80'
       then:
       - {se: Horse}
-      - (Lamplit promenades along a white salt lake, striped awnings, salt-caramel smoke. A long green barge flying Elowen's briar crown rows across the
-        lake toward the harbour mouth.)
+      - 'Through the East Gate the whole port opens out below you: oil lamps along the promenade, striped awnings, the white salt lake beyond, and the smell
+        of burnt sugar on the wind.'
+      - Out on the lake, a long green barge flying Elowen's briar crown is rowing for the harbour mouth.
       - {se: Applause}
       - 'The Breakwater: BOOOOOOOOOOOO.'
       - (The green barge turns, slowly, and rows away.)
@@ -625,35 +626,35 @@ events:
   dir: right
   move: fixed
   text: The gate shuts at the Pageant. Tradition. Nobody remembers why. Probably a play.
-  at: [8, 52]
+  at: [76, 55]
 - type: npc
   name: Townsfolk 7
   sprite: NPC 14
   dir: up
   move: random
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [76, 55]
+  at: [62, 56]
 - type: npc
   name: Townsfolk 8
   sprite: NPC 06
   dir: down
   move: random
   text: My cousin's in the Hound chorus. He says 'GRR' professionally.
-  at: [62, 56]
+  at: [39, 51]
 - type: npc
   name: Townsfolk 9
   sprite: NPC 09
   dir: down
   move: fixed
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [39, 51]
+  at: [64, 51]
 - type: npc
   name: Townsfolk 10
   sprite: NPC 05
   dir: down
   move: fixed
   text: Dorian waved at me once. From a balcony. I think it was at me.
-  at: [64, 51]
+  at: [68, 54]
 - type: npc
   name: Townsfolk 1
   sprite: NPC 04

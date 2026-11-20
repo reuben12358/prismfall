@@ -6,7 +6,7 @@ template: pokecenter
 exit_link: EB_PC
 drop_template_events: [Bill]
 bgm: Poke Center
-metadata: {HealingSpot: [160, 10, 31], MapPosition: [0, 8, 20]}
+metadata: {HealingSpot: [160, 7, 21], MapPosition: [0, 8, 20]}
 events:
   - type: event
     name: Professor Larch

@@ -15,6 +15,12 @@ walk_from:
 - [17, 108]
 - [32, 1]
 - [1, 74]
+gates:
+- name: Hale Bell roadblock
+  from:
+  - [16, 109]
+  - [31, 0]
+  sealed_edge: W
 connections:
 - {dir: S, offset: 11, to: 100, to_offset: 28}
 - {dir: N, offset: 30, to: 521, to_offset: 58}
@@ -89,43 +95,75 @@ events:
   at: [18, 98]
   pages: *id002
 - type: event
+  name: Hale Bell send-off N 1
+  at: [23, 68]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off N 2
+  at: [24, 68]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off N 3
+  at: [25, 68]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off S 1
+  at: [21, 79]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off S 2
+  at: [22, 79]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off S 3
+  at: [23, 79]
+  pages: *id002
+- type: event
+  name: Hale Bell send-off S 4
+  at: [24, 79]
+  pages: *id002
+- type: event
   name: Accord barrier 1
-  at: [3, 72]
+  at: [2, 72]
   pages:
   - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
-  - cond: {switch: CH1_ORCHARD_DONE}
+  - cond:
+      var: [STORY_CHAPTER, 2]
     through: true
     commands: []
 - type: event
   name: Accord barrier 2
-  at: [3, 73]
+  at: [2, 73]
   pages:
   - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
-  - cond: {switch: CH1_ORCHARD_DONE}
+  - cond:
+      var: [STORY_CHAPTER, 2]
     through: true
     commands: []
 - type: event
   name: Accord barrier 3
-  at: [3, 74]
+  at: [2, 74]
   pages:
   - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
-  - cond: {switch: CH1_ORCHARD_DONE}
+  - cond:
+      var: [STORY_CHAPTER, 2]
     through: true
     commands: []
 - type: event
   name: Accord barrier 4
-  at: [3, 75]
+  at: [2, 75]
   pages:
   - graphic: {tile: 18119}
     trigger: action
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
-  - cond: {switch: CH1_ORCHARD_DONE}
+  - cond:
+      var: [STORY_CHAPTER, 2]
     through: true
     commands: []
 - type: cut_tree
@@ -133,7 +171,7 @@ events:
   name: CutTree
 - type: event
   name: Professor Larch
-  at: [19, 97]
+  at: [19, 70]
   pages:
   - commands: []
   - cond:
@@ -147,22 +185,32 @@ events:
     commands: []
 - type: event
   name: Accord guard
-  at: [5, 71]
+  at: [6, 71]
   pages:
   - graphic: {sprite: NPC 07, dir: down}
-    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+    commands: ['Accord Guard: Hold. Quarantine order: nobody west of the Bell without papers.', 'Accord Guard: ...A Badge Case. A challenger. Challengers
+        pass, that''s older law than the quarantine. But they pass at first light, with the cliff patrol. Not a minute before.', 'Accord Guard: Go and get
+        some sleep. The cliffs''ll still be there in the morning. Mostly. They''re chalk.']
   - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 07, dir: down}
+    commands: ['Accord Guard: Hold. Quarantine order: nobody west of the Bell without papers.', 'Accord Guard: ...A Badge Case. A challenger. Challengers
+        pass, that''s older law than the quarantine. But they pass at first light, with the cliff patrol. Not a minute before.', 'Accord Guard: Go and get
+        some sleep. The cliffs''ll still be there in the morning. Mostly. They''re chalk.', 'Accord Guard: You''re the one stopping at the Hales''? Then
+        eat whatever Wenna puts in front of you. That''s an order. Hers, not mine.']
+  - cond:
+      var: [STORY_CHAPTER, 2]
     graphic: {sprite: NPC 07, dir: right}
     commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.', 'Accord Guard: ...You''ve got a Badge Case. A challenger.
         Right. Challengers pass, that''s older law than the quarantine.', 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go. Saltmere''s two
         days west. Mind the cliff path in wind.']
 - type: event
   name: Accord guard (aside)
-  at: [6, 77]
+  at: [7, 76]
   pages:
   - graphic: {sprite: NPC 07, dir: up}
     commands: ['Second Guard: Nobody past. Orders came down this morning.']
-  - cond: {switch: CH1_ORCHARD_DONE}
+  - cond:
+      var: [STORY_CHAPTER, 2]
     graphic: {sprite: NPC 07, dir: right}
     commands: ['Second Guard: (low) That''s the null one from the dock. Captain said let them through, whatever happens.', 'Accord Guard: Which captain?',
       'Second Guard: Didn''t say. Came down from Crownhaven with a white seal on it.', '\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
@@ -173,7 +221,8 @@ events:
   pages:
   - trigger: action
     commands: ['THE HALE BELL: A ship''s bell on a post above the sea cliff. The ferrymen rang it once the last boat was in.', A cloth has been tied round
-        the clapper., '\pf[JUNO,sad]Juno: Dad tied that. The night they closed the strait. He said there wasn''t anything left to ring for.']
+        the clapper., '\pf[JUNO,sad]Juno: Dad tied that. The night they closed the strait.', '\pf[JUNO,happy]Juno: He''s never untied a knot in his life.
+        He cuts them. So if he says he''ll untie it, he''s been practising.']
 - type: event
   name: Hay-cart Driver
   at: [26, 70]

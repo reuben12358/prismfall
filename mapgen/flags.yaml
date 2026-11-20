@@ -17,6 +17,7 @@ variables:
   ROAD_SLUICE: 602    # the Dyers' Ford vat-yard sluice: colour stones stepped in order (0-3; 4 = open)
   ROAD_RAMRACE: 603   # Spinners' Rise Ram Race: 0 not raced, 1 running, 2 won, 3 lost (rematch allowed)
   ROAD_RAMSTEPS: 604  # the Ram Race's start: $stats.distance_walked when the boy said go
+  D8_FRAME: 536       # The Rehearsal (568): the replay's frame 0-4, one per step (pfp_step_clock from the map's parallel event)
 switches:
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on

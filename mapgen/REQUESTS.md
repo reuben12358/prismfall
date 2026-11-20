@@ -707,6 +707,12 @@ No map file was edited.
    (Lv 14 team: 37 / 37 / 43%), so the crowd you gathered pays off and the sparse house is untouched. If that is too
    generous, halving Dorian's bask with fans in (`halfbask`) gives 45% at a full house, about even with sparse. Giving the
    +1 crit stage to your side only (`crit`) adds little on top. I'd ship `nobask`.
+   **DONE 2026-11-20 (`nobask`, approved by main):** both Standing Ovation bask rules carry
+   `:condition => not_house_foe` in `102_Field_GrandStage.rb`, which reads `FieldEffects.home_crowd_foe?` (new, in
+   Puzzles `007_Puzzles_SaltmereCrowd.rb`: `$game_temp.pf_home_crowd` set by `pf_house_rules` and the battler is on
+   Dorian's side). Standard, Lv 15 team, 60 a cell: 43 / 52 / 45% → **48 / 73 / 58%** (180 a cell: 46 / 68 / 64%);
+   Lv 14 team 22 / 30 / 32% → 25 / 48 / 37%. Good and full house come out about level. Docs: BALANCE.md §9,
+   GYM_PUZZLES.md Gym 1, FIELDS.md, TRAINER_FIELD_PLAYBOOK.md.
 
 **For the field owner:**
 3. **Water Surface ↔ Underwater loop:** Dive into Underwater and Dive back to the surface are both transform strikes
@@ -948,3 +954,49 @@ plugin strings in `114_Quests_Megas.rb` now match it (string edits only; `run_tr
     `21_SCRIPT_CH3.md`, a portrait character's repeated same-expression lines are now `[name: X]` (58 and 6 lines). When
     you rebuild those events, put `\pf[...]` only where the script has a portrait tag. Generic NPCs, trainers and signs
     never get one, and none of the scripts give them one.
+
+## From map builder 10 (2026-11-20)
+**Doors and warps that moved** (links unchanged; build.py checks every arrival and seam):
+- **541** mine back door `R4_MINE` -> **(52, ~35)** (on the Brinecut lip); Brinewife's Rest `R4_REST` (12,58).
+- **540** mine mouth `R3_MINE` -> **(9, ~25)** (the west outcrop); manor `R3_MANOR` -> the sh_big front on the h2 terrace.
+- **524** Woodward's Hut `WOOD_HUT` -> **(70,51)**; `WOOD_DEEP` (89,48), Cut tree (82,48), Briarwick warps (44-46,0) and
+  the south warps (40-42,109) unchanged. **520**: events re-seated; the Hale Bell barrier is now at **(2,72)-(2,75)**.
+- **Ebbmouth 160 rebuilt** (60x54, PF Rejuv Snow): PC (7,20), Mart (14,21), Anglers' Guild (9,35), Reyes House (6,8),
+  Net-mender (14,8), Tidelock Gym `EB_GYM` **(46,13)**, Net Loft (52,26). HealingSpot **[160, 7, 21]** (161 spec and
+  `pbs/town_map.txt` updated). S edge to 561 unchanged (x 20-23); **new N edge to 167 Mill Quay** (towpath x 28-31).
+- **New maps:** 167 Ebbmouth - Mill Quay (40x30), 568 The Rehearsal (34x26, `:BLEED`; warp `R5_REHEARSAL` from 560 (30,29)
+  to 568 (16,0)), 143/144/145 rebuilt (145 Pageant Hall is a real theatre now, tileset 54; exits `SM_PAGEANT` at (18-19,24)).
+- **548 Cocoonfall Hollow:** the Matriarch's nest moved north to **(19,5)** behind the new glass ravine (rows 9-10).
+**New data:** tileset **56 "PF Rejuv Shore"** (install with merge_tilesets like 50-55); flags **V601-604** (road
+mechanics) and **V536 `D8_FRAME`** (the Rehearsal); `build.py` page keys `route:`/`speed:`/`freq:` (custom move routes) and a
+spec key **`gates:`** (a story gate must really be shut; `--strict` fails on a leak). New art: `art/imports/` (J-Treecko252
+crystals, x2, credited), pieces `cr_*`, `bl_veil*`, `bl_gust*`, `pf_wagon`, `eb_wheel0/1`, `eb_intake` (ndraw.py).
+
+**For the puzzle engineer:**
+- **Item 17 done:** 525's "Crystal silk" gate is the `pf_silk_curtain` charset (solid) in `layouts/old_525_wilds.yaml` (the
+  reskin source); the north-east pocket's terrain is untouched.
+- **Item 18:** 562 not touched. **Item 19:** 524's one-tile pinch points for the silk curtains: **teach (28,12)**, **twist
+  (21,86)** (`routes_craft.build_524` keeps them 1 wide).
+- **Item 20 done, and wired:** 548's ravine is rows 9-10 across the crater; crossings **a (28,9-10)** NE cocoon-house,
+  **b (10,9-10)** NW Shard house, **c (19,9-10)** the nest. I laid D3 per DUNGEON_PUZZLES so the story isn't blocked:
+  bridge events (tile 17743 while S511/S512/S513 or S107), anchors 1-3 at (8,22)/(16,22)/(24,22) flipping a+b / b+c / a+c
+  (needs the Shuttle or `:ch2_tamsin`), and a first-entry autorun setting a and b taut. Replace them with yours if you
+  prefer (same names: "Bridge a 1".., "Anchor 1"..), and please add the built-map proof.
+- **D8 (568) built** with the design's frame rule: `D8_FRAME` (V536) is a step clock (`pfp_step_hook(568, :rehearsal)`
+  from the map's parallel event), the Tauros and driver show one tile per frame (touch: "You pass through the moment..."),
+  gust walls x 23 (even frames), x 26 (odd), pier rows 22 (even) / 24 (odd). TM10 (31,9), Bleed Shard #3 (pier end, a
+  `pfm_set(:bleed_shard_3)` object: no shard item exists yet). `gates:` proves the TM is shut at frame 0; a rhythm proof is yours.
+**For the playtest:** items 15-16 fixed: the barricade spans the road at x 2 with woods on both sides to the edge; it
+opens on V102 >= 2. `build.py` prints `GATE ok 520 Hale Bell roadblock`; `tools/harness/playtest/seam_check.py` has
+`--events` (first-page blockers stand solid): `520 527 16 108 --events` shows all four W-edge tiles NOT reachable.
+Item 12: the stale J1 copy is gone from `layouts/saltmere_events.yaml`. The arrival text is narration now; the 140 east and
+west edges have a green verge / salt-crust verge and hedges instead of buildings flush to the edge; 528 has gateposts and
+drystone wall ends at the East Gate.
+**For the story editor:** Ch1 close built from your script (523 "Biscuit comes home", the bed, the send-off at the
+breakfast table with the Town Map and "Eighteen Roads"; the 520 guard pages; the Innkeeper on 104 (no inn bed now); the
+Hale Bell's new Juno line). The stile and Hale Bell send-off lines on 520 stay only as fallbacks behind `!pfm?(:ch2_sendoff)`.
+Not done: Juno as follower (no follower call exists yet), Coll's yard repeat line (no Coll event on 521), the 100 quay-stall
+copy of the Biscuit scene, and items 11-17 (Gym 2's lines are the puzzle engineer's maps). I rewrote four scene-setting
+parentheticals that read like stage directions as prose (528 the Beacon and the barge, 552 the Dyers' Ford, 541 the
+Saltings): your scripts keep the parenthetical form, so those lines now differ from the script on purpose.
+**For the distribution agent:** Spinners' Rise Ram Race sets `pfm_set(:ram_race_won)` (a Skiddo after Badge 3 can key on it).

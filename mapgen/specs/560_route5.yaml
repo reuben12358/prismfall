@@ -37,9 +37,7 @@ events:
 - type: sign
   name: Old salt road
   at: [32, 25]
-  text: 'The old salt road dips toward a drowned pier village. Something replays there, over and over.
-
-    [The Rehearsal, map 568: not built yet]'
+  text: The old salt road dips toward a drowned pier village. Something replays there, over and over.
   post: false
 - type: event
   name: Royal forester
@@ -123,7 +121,7 @@ events:
   intro: The gulls change colour past the stones. Watch!
   after: Frostwick's gulls wear little ice hats. Not really.
 - type: item
-  at: [62, 5]
+  at: [56, 6]
   item: SUPERPOTION
 - type: item
   at: [3, 8]
@@ -135,6 +133,12 @@ events:
 - type: item
   at: [45, 23]
   item: HEALPOWDER
+- type: warp
+  name: To the Rehearsal
+  at: [30, 29]
+  link: R5_REHEARSAL
+  arrive: [30, 28, up]
+  se: Door exit
 - type: event
   name: Customs chain 1
   at: [34, 11]

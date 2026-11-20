@@ -4316,27 +4316,10 @@ events:
   name: Innkeeper
   pages:
   - commands:
+    - 'Innkeeper: Rooms are full of people who came home on the last boat with nowhere to be. First time I''ve been full since the wedding of ''91.'
     - if: $game_switches[@@CH1_ORCHARD_DONE] && $game_variables[@@STORY_CHAPTER] < 2
-      then:
-      - 'Innkeeper: You look like you''ve walked through a wall. One room''s free. Don''t ask whose it was.'
-      - choices: [Rest., Not yet.]
-        branches:
-        - - tone: [-255, -255, -255, 0, 20]
-          - {wait: 24}
-          - {heal: true}
-          - {me: Pkmn healing}
-          - {wait: 40}
-          - {script: 'pfm_card(:PF_CH1_NOTEBOOK, "Night. Tidewatch Station, one lamp. Larch alone at the bench with a cold cup and the notebook.", "Subject reads
-              NULL. Calms Bleed-struck fauna on approach. No tint after one day; I do not expect one after a hundred.", "Second such reading in my life.", "The first
-              was in Crownhaven, AF 290.", "God help us, Ines.")'}
-          - She closes the notebook. Outside the window, far across the harbor, the lighthouse lamp turns. In its beam, for one frame, a figure in a too-big coat
-            is standing on the gallery, looking at the station.
-          - var: [STORY_CHAPTER, 2]
-          - tone: [10, 4, -12, 0, 30]
-          - Morning.
-        - []
-        cancel: 2
-      else: ['Innkeeper: Rooms are full of people who came home on the last boat with nowhere to be. First time I''ve been full since the wedding of ''91.']
+      then: ['Innkeeper: And Wenna Hale''s been in. Said if I find you so much as a cot, she stops selling me tarts. I''m not risking the tarts. Farm''s up the lane.']
+      else: []
     trigger: action
     move: fixed
     graphic: {sprite: NPC 21, dir: down}

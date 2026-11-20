@@ -16,6 +16,9 @@ EV = yaml.safe_load(open(os.path.join(HERE, 'layouts', 'saltmere_events.yaml')))
 
 
 def ev(key, at):
+    if key == 'Juno J1':                             # map builder 10: the one live J1 (S105 + :sm_arrived) is saltmere_rj's
+        import saltmere_rj as SR
+        e = SR.juno_j1(); e['at'] = list(at); return e
     for e in EV:
         if e.get('name') == key or str(e.get('text', '')).startswith(key):
             e = dict(e); e['at'] = list(at); return e

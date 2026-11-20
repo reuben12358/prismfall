@@ -12,6 +12,8 @@
 140,E,44,528,W,38
 # Ebbmouth (160) - Gullcry Cliffs (561)
 160,S,22,561,N,12
+# Ebbmouth (160) - Ebbmouth - Mill Quay (167)
+160,N,0,167,S,0
 # The Ferrymen's Mile (520) - Windfall Row (521)
 520,N,30,521,S,58
 # The Ferrymen's Mile (520) - Lacecliff Walk (527)

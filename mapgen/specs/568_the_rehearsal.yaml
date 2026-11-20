@@ -1,0 +1,1208 @@
+# The Rehearsal (568, :BLEED). WRITTEN BY layouts/routes_craft.py (map builder 10) - edit that script.
+id: 568
+name: The Rehearsal
+parent: 560
+bgm: Radio - Lullaby
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 4, 15]
+rubric: true
+yards_ok: true
+biome: bleed
+field: BLEED
+tone: [-10, -22, 20, 60]
+fog: {name: prismfall_seamist, opacity: 50, blend: 0, zoom: 100, sx: 1, sy: 0}
+gates:
+- name: Salt-flat gust walls (frame 0)
+  from:
+  - [16, 1]
+  sealed:
+  - [31, 9]
+connections: []
+walk_from:
+- [16, 1]
+raw: data/raw/568.npy
+tileset: 56
+events:
+- type: warp
+  name: Bleed Veil
+  at: [16, 0]
+  link: R5_REHEARSAL
+  arrive: [16, 1, down]
+  se: Door exit
+- type: event
+  name: Frame clock
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'pfp_step_hook(568, :rehearsal) { pfp_step_clock(536, 5); $game_map.need_refresh = true }'}
+    - {wait: 120}
+- type: event
+  name: Wheel-rut
+  at: [12, 12]
+  pages:
+  - trigger: action
+    commands: ['An old wheel-rut, worn deep, where the road bends. The frost in it is broken fresh, every five seconds.']
+- type: sign
+  name: Veil sign
+  at: [19, 4]
+  text: 'THE OLD SALT ROAD. (Somebody has chalked under it: "it does it again".)'
+  post: false
+- type: event
+  name: Drowned pier
+  at: [6, 19]
+  pages:
+  - trigger: action
+    commands: ['The pier of a village the sea took back. Pilings in a row, houses to the sills in water. The planks still hold.']
+- type: event
+  name: The tipped wagon
+  at: [11, 9]
+  pages:
+  - trigger: action
+    commands: ['The wagon on its side, wheel still turning. Spilled salt sacks. It is always just now.']
+- type: event
+  name: Tauros f0
+  at: [16, 2]
+  pages:
+  - graphic: {sprite: Followers/TAUROS, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Tauros f1
+  at: [16, 4]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {sprite: Followers/TAUROS, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Tauros f2
+  at: [15, 6]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {sprite: Followers/TAUROS, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Tauros f3
+  at: [14, 8]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {sprite: Followers/TAUROS, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Tauros f4
+  at: [13, 10]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {sprite: Followers/TAUROS, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+- type: event
+  name: Driver f0
+  at: [17, 1]
+  pages:
+  - graphic: {sprite: NPC 11, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Driver f1
+  at: [17, 3]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {sprite: NPC 11, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Driver f2
+  at: [16, 5]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {sprite: NPC 11, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Driver f3
+  at: [15, 7]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {sprite: NPC 11, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Driver f4
+  at: [14, 9]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {sprite: NPC 11, dir: down}
+    trigger: touch
+    through: true
+    commands: ['You pass through the moment, and it shivers.']
+- type: event
+  name: The girl in the road (replay)
+  at: [12, 13]
+  pages:
+  - graphic: {sprite: NPC 07, dir: up}
+    through: true
+    trigger: touch
+    commands: &id001 ['You pass through the moment, and it shivers.']
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {sprite: NPC 07, dir: right}
+    through: true
+    trigger: touch
+    commands: *id001
+- type: event
+  name: Onlooker 1
+  at: [8, 7]
+  pages:
+  - graphic: {sprite: NPC 02, dir: right}
+    trigger: action
+    commands:
+    - {script: 'pbMessage(_INTL(["Onlooker: It tips at the left wheel. It always tips at the left wheel.", "Onlooker: It tips at the centre wheel. It always
+        tips at the centre wheel.", "Onlooker: It tips at the right wheel. It always tips at the right wheel."].sample))'}
+- type: event
+  name: Onlooker 2
+  at: [9, 8]
+  pages:
+  - graphic: {sprite: NPC 13, dir: right}
+    trigger: action
+    commands:
+    - {script: 'pbMessage(_INTL(["Onlooker: Step first, step first. That is how you cross the white.", "Onlooker: Step second, step second. That is how
+        you cross the white.", "Onlooker: Step third, step third. That is how you cross the white."].sample))'}
+- type: event
+  name: Onlooker 3
+  at: [7, 9]
+  pages:
+  - graphic: {sprite: NPC 24, dir: right}
+    trigger: action
+    commands:
+    - {script: 'pbMessage(_INTL(["Onlooker: The horse is pink this time. It was pink last time. It is always pink.", "Onlooker: The horse is grey this time.
+        It was grey last time. It is always grey.", "Onlooker: The horse is white this time. It was white last time. It is always white."].sample))'}
+- type: event
+  name: Onlooker 4
+  at: [9, 10]
+  pages:
+  - graphic: {sprite: NPC 09, dir: right}
+    trigger: action
+    commands:
+    - {script: 'pbMessage(_INTL(["Onlooker: It will end soon. It never ends soon.", "Onlooker: It will end now. It never ends now.", "Onlooker: It will
+        end again. It never ends again."].sample))'}
+- type: event
+  name: Frozen gust 1
+  at: [23, 2]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 2
+  at: [23, 3]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 3
+  at: [23, 4]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 4
+  at: [23, 5]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 5
+  at: [23, 6]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 6
+  at: [23, 7]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 7
+  at: [23, 8]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 8
+  at: [23, 9]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 9
+  at: [23, 10]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 10
+  at: [23, 11]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 11
+  at: [23, 12]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 12
+  at: [23, 13]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 13
+  at: [23, 14]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 14
+  at: [23, 15]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 15
+  at: [26, 2]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 16
+  at: [26, 3]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 17
+  at: [26, 4]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 18
+  at: [26, 5]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 19
+  at: [26, 6]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 20
+  at: [26, 7]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 21
+  at: [26, 8]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 22
+  at: [26, 9]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 23
+  at: [26, 10]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 24
+  at: [26, 11]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 25
+  at: [26, 12]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 26
+  at: [26, 13]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 27
+  at: [26, 14]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 28
+  at: [26, 15]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 29
+  at: [3, 22]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 30
+  at: [4, 22]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 31
+  at: [5, 22]
+  pages:
+  - graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 1]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 2]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 3]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 4]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+- type: event
+  name: Frozen gust 32
+  at: [3, 24]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 33
+  at: [4, 24]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: event
+  name: Frozen gust 34
+  at: [5, 24]
+  pages:
+  - through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 1]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 2]
+    through: true
+    commands: []
+  - cond:
+      var: [D8_FRAME, 3]
+    graphic: {tile: 22928}
+    trigger: action
+    commands: ['Salt spray, frozen in mid-air. It hangs exactly where it hung a moment ago.']
+  - cond:
+      var: [D8_FRAME, 4]
+    through: true
+    commands: []
+- type: item
+  at: [31, 9]
+  item: TM10
+- type: event
+  name: Bleed Shard
+  at: [4, 25]
+  pages:
+  - trigger: action
+    commands:
+    - A shard of something like glass, pink at the edges, humming one note.
+    - if: '!pfm?(:bleed_shard_3)'
+      then:
+      - {script: 'pfm_set(:bleed_shard_3)'}
+      - '(Bleed Shard #3. You pocket it. It keeps humming.)'
+      else: [Only the hum is left.]
+- type: item
+  at: [29, 4]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (salt flat)
