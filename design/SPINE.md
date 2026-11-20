@@ -1,11 +1,11 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
-## >>> REVISION 22 (user, 2026-11-20 10:10): portraits are for the story cast only <<<
-User: "i dont think we need a portrait for every conversation".
-- Portrait bubbles appear only for the story cast (rivals, Wardens, villains, mentors, key NPCs) in story scenes, plus the occasional comedy beat.
-- Generic NPCs, townsfolk, shopkeepers, route trainers and quest-givers use the plain message box with a name label.
-- Even for the cast, put a portrait where a scene starts or the expression changes, not on every line.
-- This is enforced in code: `Prismfall::Portrait::CAST` and `cast?` in plugins/Prismfall Cutscenes/014_Portraits.rb. See story/13_CUTSCENES.md, "Portrait use".
+## >>> REVISION 22 (user, 2026-11-20 10:10 and 11:11): portraits and speech bubbles <<<
+User: "i dont think we need a portrait for every conversation" / "the speech bubble thing only needs to exist for like special scenes for like dramatic effect (usually comic relief)" / "portrait for main cast (like desolation) doesnt sound like a bad idea".
+- **Main-cast portraits, Desolation-style:** a framed 96x96 square face beside the message box (Desolation uses Essentials' face window at 96x96, on the left of the box). This is the default for the story cast whenever they talk, but only once that character has real portrait art. Until then they get a name box.
+- **Speech bubbles are rare and opt-in:** the round bubble with a tail pointing at the speaker on the map, plus emotes. Use it only for special dramatic moments, usually comic relief, marked per line by the script.
+- **Everyone else** (generic NPCs, townsfolk, shopkeepers, route trainers, quest-givers): the plain message box with a name label.
+- Cast list: `Prismfall::Portrait::CAST` in plugins/Prismfall Cutscenes/014_Portraits.rb. Usage notes: story/13_CUTSCENES.md, "Portrait use".
 
 ## >>> REVISION 21 (user, 2026-11-20 00:42): Mega timing <<<
 1. **The Mega Ring comes late, like Reborn and Rejuvenation** (user: "see how late reborn/rejuv give out the mega ring, its usually like later gyms").
