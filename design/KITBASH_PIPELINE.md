@@ -211,3 +211,5 @@ Tool: `sheet_cast.py <recipe>` exports `art/work/kitbash/<name>/<NAME>_<v>(_nati
 - **A repaint on the same body reads as a recolour beside the donor** (Edda A vs the Sailor). The 1x line-up with the donor class on
   the same strip is the honest test.
 - **Bug to avoid:** after `im = mat.patch(...)` or `mat.recolour(...)`, any `p = im.load()` taken earlier is stale.
+
+- 2026-11-19 21:46: the user asked to remove the shocked expression entirely. JUNO_shocked/JUNO_panic now point at the surprised face. Do not draw a separate shocked face for Juno.
