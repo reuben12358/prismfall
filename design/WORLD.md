@@ -274,22 +274,22 @@ No place is called "Route N" any more. Each **road** joins two gym towns and has
 | 1 | **The Strand Road** | Ferrow's Landing -> Saltmere | The Ferrymen's Mile 520 64x110 -> Windfall Row 521 120x70 (branch) -> Lacecliff Walk 527 140x64 -> Marram Down 528 110x80 | Ch 1-2 |
 | 2 | **The Weavers' Road** | Saltmere -> Briarwick | The Grey Saltings 541 70x110 -> The Dyers' Ford 552 80x72 -> Thistledown Lea 540 130x64 -> Gossamer Wood 524 90x110 | Ch 3 |
 | 3 | **The Hoar Road** | Briarwick -> Ebbmouth | Spinners' Rise 566 80x120 -> Frostwick Pass 577 72x96 -> Rimewood Path 578 80x88 -> The Rimewood 562 96x110 -> Gullcry Cliffs 561 64x130 -> Frostflat Causeway 560 140x64 (side) | Ch 4 |
-| 4 | **The Lock Road** | Ebbmouth -> Lumen City | The Reedholms 580 110x90 -> The Icecutters' Haul 592 110x70 -> The Icefall Locks 581 72x120 -> The Arc-Lamp Mile 593 110x64 | Ch 5 |
-| 5 | **The Brass Road** | Lumen City -> Duneholt | The Meridian Mainline 612 130x64 -> The Brass Dunes 600 130x72 -> The Rib Road 601 72x120 -> Sunbleach Flats 613 110x64 | Act II |
-| 6 | **The Leach Road** | Duneholt -> Mirefen | The Marrow Road 620 130x70 -> The Kneeling Stones 632 90x80 -> The Leach Canyons 621 100x100 -> The Gutterfall 633 80x96 | Act II |
+| 4 | **The Lock Road** | Ebbmouth -> Lumen City | The Reedholms 580 110x90 -> The Icecutters' Haul 592 110x70 -> The Icefall Locks 581 72x120 -> Coppice Ride 595 110x72 -> Wallshadow Row 594 150x80 -> The Arc-Lamp Mile 593 110x64 | Ch 5 |
+| 5 | **The Brass Road** | Lumen City -> Duneholt | The Meridian Mainline 612 130x64 -> Candle Down 602 110x110 -> The Highwold 603 130x80 -> The Brass Dunes 600 130x72 -> The Rib Road 601 72x120 -> Sunbleach Flats 613 110x64 | Act II |
+| 6 | **The Leach Road** | Duneholt -> Mirefen | The Marrow Road 620 130x70 -> The Kneeling Stones 632 90x80 -> The Leach Canyons 621 100x100 -> Wormwood Lea 634 90x130 -> The Gutterfall 633 80x96 | Act II |
 | 7 | **The Sulfur Road** | Mirefen -> Cindervault | Leechman's Walk 640 120x72 -> Lake Sallow 641 120x100 -> The Pyre Road 652 130x70 | Act II |
 | 8 | **The Iron Road** | Cindervault -> Ironreach | The Ashmarch 660 120x72 -> The Ironway 661 150x70 -> The Long Drop 672 64x130 -> The Cinderglass Barrens 662 130x90 (side) -> The Wyrmtongue 673 64x120 (side) | Act II |
 | 9 | **The Root Road** | Ironreach -> Verdance | The Tailings 692 100x70 -> The Rootdeep 680 72x130 -> Prism Falls 681 130x80 -> The Briarway 693 72x120 | Act III |
 | 10 | **The Hart Road** | Verdance -> Rimeholt | The Hart's Run 700 140x70 -> The Hoarwood 701 80x130 -> The Whalebone Road 712 72x120 | Act III |
 | 11 | **The Mast Road** | Rimeholt -> Skyreach | The Thane's Sled-Road 720 140x72 -> The Mast Glacier 721 72x130 -> The Tetherline 732 130x64 | Act III |
-| 12 | **The Glass Road** | Skyreach -> Lucent | Conductors' Causeway 740 72x130 -> The Wired Wood 741 80x130 -> The Looking-Glass Wood 752 100x90 -> Widdershins Walk 755 100x80 | Act III |
+| 12 | **The Glass Road** | Skyreach -> Lucent | Conductors' Causeway 740 72x130 -> The Wired Wood 741 80x130 -> Kingsmead 756 110x90 -> The Looking-Glass Wood 752 100x90 -> Widdershins Walk 755 100x80 | Act III |
 | 13 | **The Grave Road** | Lucent -> Cragholm | Yesterday's Road 772 110x64 -> The Obsidian Barrows 760 130x80 -> Spinefall Gorge 761 72x130 -> The Vertebrae 773 64x120 | Act IV |
 | 14 | **The Moor Road** | Cragholm -> Gravenmoor | The Jawbone Ridge 780 150x72 -> Hindmoor 781 80x130 -> Downflame Road 790 110x70 | Act IV |
-| 15 | **The Slag Road** | Gravenmoor -> Cogsworth | The Noonless Road 800 140x70 -> The Dry Tide 810 140x72 -> The Slag Mesa 801 80x130 -> The Smokestack Parade 811 120x64 | Act IV |
+| 15 | **The Slag Road** | Gravenmoor -> Cogsworth | The Noonless Road 800 140x70 -> The Slag Mesa 801 80x130 -> The Smokestack Parade 811 120x64 -> The Dry Tide 810 140x72 (side) | Act IV |
 | 16 | **The Drowned Road** | Cogsworth -> Underveil | The Brink 832 130x60 -> The Hanging Stair 820 72x150 -> The Drownings 821 120x120 | Act IV |
 | 17 | **The Blind Road** | Underveil -> Gloaming | The Throat 852 64x110 -> The Blindwater 840 150x80 -> The Gloamwood Verge 841 72x130 | Act V |
 | 18 | **The Truce Road** | Gloaming -> Wyrmrest | The Gloamwood 860 140x80 -> The Thornwar Marches 861 80x130 -> The Wyrmspine 872 150x72 | Act V |
-| 19 | **The Pilgrim Road** | Wyrmrest -> Crownhaven | Dominar's Toll 892 110x70 -> The Pilgrim Pass 880 80x140 -> The Coronation Road 893 150x64 | Act V |
+| 19 | **The Pilgrim Road** | Wyrmrest -> Crownhaven | Dominar's Toll 892 110x70 -> The Pilgrim Pass 880 140x80 -> The Coronation Road 893 150x64 | Act V |
 
 ### Road 1: The Strand Road (Ferrow's Landing -> Saltmere, Ch 1-2)
 
@@ -417,7 +417,7 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 
 ### Road 4: The Lock Road (Ebbmouth -> Lumen City, Ch 5)
 
-Borderland B, the Icefall Locks: up the River Ebb to the foot of Zenith's escarpment and up the frozen falls.
+West to south across the realm (Geography v2: Isenmar never touches Zenith). Up the River Ebb through borderland B, the Icefall Locks (Isenmar/Elowen), along Coppice Ride into the Crownlands, round the south of the Crownwall on Wallshadow Row (the Crown Road), then out through the orchards and lamp-posts of the Arc-Lamp Mile (borderland G) to Lumen.
 
 **The Reedholms (580)**, Isenmar, `:SNOWY_MOUNTAIN`, target **110x90** (was 52x42). 
 *Name:* The islets ('holms') of the Ebb delta, joined by boardwalks that are re-laid every spring.
@@ -427,115 +427,135 @@ Borderland B, the Icefall Locks: up the River Ebb to the foot of Zenith's escarp
 - **Fill:** a mesh of still channels and boardwalks in rain; eel-weirs and smoke huts; reed-cutters' punts (short ferry hops); a current that flips with day and night on two channels; heron islet; 6 trainers.
 - **Secret:** A punt left untied at night drifts to the Sunk Holm, an islet off the boardwalks.
 
-**The Icecutters' Haul (592)**, Borderland (Isenmar/Zenith), `:SNOWY_MOUNTAIN`, target **110x70** (new map). 
-*Name:* The sled road the ice-cutters' union drags its blocks down, from the falls to the Ebbmouth boats.
+**The Icecutters' Haul (592)**, Borderland (Isenmar/Elowen), `:SNOWY_MOUNTAIN`, target **110x70** (new map). 
+*Name:* The sled road the ice-cutters' union drags its blocks down, from the locks to the Ebbmouth boats.
 - **Landmark:** Sawyer's Cross: where the Haul meets the forest track from Snowbriar to the Frostfang Pass (gated until Act III).
 - **Exits:** W: the Reedholms. E: Brassfall. S gate: Snowbriar (Act III). N gate: Frostfang Pass (Act III).
-- **Wild:** Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel.
+- **Wild:** Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel, Deerling.
 - **Fill:** ice-sled ruts and block stacks; a union picket hut; haul-teams of Mudsdale; the crossroads gates; 5 trainers.
 - **Secret:** A dropped ice block has something frozen inside it; thaw it in Brassfall.
 
-**The Icefall Locks (581)**, Borderland (Isenmar/Zenith), `:SNOWY_MOUNTAIN`, target **72x120** (was 32x52). 
-*Name:* The frozen falls of the escarpment, cut into steps and locks by Zenith's engineers.
+**The Icefall Locks (581)**, Borderland (Isenmar/Elowen), `:SNOWY_MOUNTAIN`, target **72x120** (was 32x52). 
+*Name:* Where the Ebb falls off the Crownland downs into Isenmar's ice: frozen falls cut into steps and locks by Zenith's engineers, to feed the Lattice.
 - **Landmark:** The Ice Elevator and the fenced Meridian Extraction Lattice No. 4.
-- **Exits:** W: Brassfall. N: the Arc-Lamp Mile.
+- **Exits:** W: Brassfall. E (top of the falls): Coppice Ride.
 - **Wild:** Magnemite, Pawmi, Wattrel, Tadbulb, Bergmite, Snover, Plusle, Minun, Togedemaru.
 - **Fill:** switchbacks up the frozen falls; brass sluices and frozen turbine wheels; the cable lift; Lattice pylons; 6 trainers.
 - **Secret:** Behind the third lock gate, an ice cave with a maintenance ledger.
 
-**The Arc-Lamp Mile (593)**, Zenith, `:NEON_GRID`, target **110x64** (new map). 
+**Coppice Ride (595)**, Elowen, `:MEADOW`, target **110x72** (new map). 
+*Name:* The woodwards' ride through the hazel coppices of the Crownlands, cut back every seventh year since the Accord.
+- **Landmark:** The coppice stools in their numbered panels, and the Kingsferry where the ride crosses the Ebb.
+- **Exits:** W: the Icefall Locks (borderland B). E: Wallshadow Row, the Crown Road's west junction.
+- **Wild:** Skwovet, Deerling, Smoliv, Combee, Pikipek, Nymble, Petilil.
+- **Fill:** hazel coppice panels in seven ages (a different encounter slice in the tallest); the Kingsferry punt; a woodward's hut and charcoal clamp; a ride-side shrine where the first view of the Crownwall opens; 5 trainers.
+- **Secret:** A coppice panel that has not been cut since AF 0: inside it, a ring of old stools and a Miracle Seed.
+
+**Wallshadow Row (594)**, Elowen, `:MEADOW`, target **150x80** (new map). 
+*Name:* The farms in the Crownwall's shadow: sun for half the day, and the Accord's tithe for all of it.
+- **Landmark:** The Crownwall's white cliffs over the hedgerows, and the Southgate shrine where the Crown Road meets the road to Lumen.
+- **Exits:** W junction: Coppice Ride (to Isenmar) and Prism Falls (to Verdance). N: Kingsmead. S junction: the Arc-Lamp Mile (to Lumen) and the Long Drop (Nadir). E: Candle Down.
+- **Wild:** Lillipup, Wooloo, Smoliv, Fidough, Flabebe, Mareep. Night: Hoothoot, Spinarak, Morelull.
+- **Fill:** the Crown Road: a paved ring road with eighteen milestones round the Crownwall; tithe barns; hedge-lined fields in the wall's shadow line; the Southgate shrine at the south junction; the west junction's inn and signpost to four kingdoms; 6 trainers.
+- **Secret:** A shepherd's track up the Crownwall's foot to a cave the Accord bricked up; the bricks are loose.
+
+**The Arc-Lamp Mile (593)**, Borderland (Elowen/Zenith), `:NEON_GRID`, target **110x64** (new map). 
 *Name:* The first road in Velmora lit by electric arc lamps. Zenith counts its age from the night they were switched on.
-- **Landmark:** One hundred numbered arc lamps, and Lumen's South Gate at the end of them.
-- **Exits:** SW: the Icefall Locks. NE: Lumen South Gate.
-- **Wild:** Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite. Night: Joltik, Voltorb.
-- **Fill:** paved boulevard with lamp numbers; a tram stop without a tram; advertising hoardings; the lamplighters' depot; 5 trainers.
+- **Landmark:** One hundred numbered arc lamps running out of Lumen into the Crownland orchards, and Lumen's West Gate at the end of them.
+- **Exits:** NW: Wallshadow Row (the Crown Road). SE: Lumen West Gate.
+- **Wild:** Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite, Bounsweet. Night: Joltik, Voltorb.
+- **Fill:** paved boulevard with lamp numbers; orchards with clockwork pickers (borderland G); a tram stop without a tram; advertising hoardings; the lamplighters' depot; 5 trainers.
 - **Secret:** Lamp 47 has been dark for ten years; the reason is under its base plate.
 
 ### Roads 5-19 (outline)
 
 Each leg: name, target size, landmark, secret. Fill lists follow when the act is detailed.
 
-**Road 5, The Brass Road** (Lumen City -> Duneholt, Act II). Borderland C, the Brass Dunes: the railway east off the plateau and into the sand that buried it.
-- **The Meridian Mainline** (612, Zenith, `:MOUNTAIN`, 130x64): Zenith's first railway. You walk the service road beside the track. *Landmark:* The signal gantries and the mouth of the Static Tunnels. *Secret:* A signal box whose levers reroute a handcar to a siding.
-- **The Brass Dunes** (600, Borderland (Zenith/Ossaria), `:DESERT`, 130x72): Kept name: dunes the colour of the locomotives buried in them. *Landmark:* The broken viaduct and the half-buried engine 'Progress'. *Secret:* A carriage door under the sand opens into a buried dining car.
+**Road 5, The Brass Road** (Lumen City -> Duneholt, Act II). South to north through the middle of the realm (Zenith never touches Ossaria): the Meridian railway out of Lumen (borderland G), the Crown Road round the east of the Crownwall (Candle Down, the Highwold), then borderland C, the Brass Dunes, where the line ran into the sand, and on to Duneholt.
+- **The Meridian Mainline** (612, Borderland (Zenith/Elowen), `:MOUNTAIN`, 130x64): Zenith's first railway. You walk the service road beside the track. *Landmark:* The signal gantries, and the cutting where the line drops off the plateau into the Crownlands. *Secret:* A signal box whose levers reroute a handcar to a siding.
+- **Candle Down** (602, Elowen, `:MEADOW`, 110x110): The downs east of the Crown, where pilgrims light a candle on each cairn on their way to the Pilgrim's Rest. *Landmark:* The candle-cairns, and the view into the Crownwall's one gap. *Secret:* One cairn's candle never goes out; under it, a stair into the Crownwall's foot.
+- **The Highwold** (603, Elowen, `:MEADOW`, 130x80): The high wold north of the Crown: sheep, skylarks and the one road in Elowen that runs to the desert. *Landmark:* The Wold Stones, and the Crownwall's north face white in the sun. *Secret:* A dew-pond that never dries, even in the drought years; something drinks from it at night.
+- **The Brass Dunes** (600, Borderland (Elowen/Ossaria), `:DESERT`, 130x72): Kept name: dunes the colour of the locomotives buried in them. *Landmark:* The broken viaduct where the Mainline ran into the sand, and the half-buried engine 'Progress'. *Secret:* A carriage door under the sand opens into a buried dining car.
 - **The Rib Road** (601, Ossaria, `:DESERT`, 72x120): Waymarked by the ribs of a leviathan, one every hundred paces, set there before the Electors. *Landmark:* The Rib Gate: the two largest ribs, meeting overhead. *Secret:* Count the ribs: one is missing, and its socket is a stair.
 - **Sunbleach Flats** (613, Ossaria, `:DESERT`, 110x64): The flats before Duneholt, where bones and cloth alike go white in a season. *Landmark:* The bleaching frames of the linen-makers and Duneholt's Sandgate on the horizon. *Secret:* A mirage well that is real at noon only.
 
-**Road 6, The Leach Road** (Duneholt -> Mirefen, Act II). Borderland D, the Leach Canyons: down the poisoned river to Nadir's marsh.
+**Road 6, The Leach Road** (Duneholt -> Mirefen, Act II). Down the River Leach: south out of the desert through borderland D, the Leach Canyons (Ossaria/Elowen), along Wormwood Lea east of the Crown, and over the Gutterfall into the Mirefen marsh under Zenith's escarpment (Nadir, beneath Zenith).
 - **The Marrow Road** (620, Ossaria, `:DESERT`, 130x70): It runs through the fossil beds where the rock is the colour of marrow. *Landmark:* The dig terraces and the mouth of the Ossuary of Dunes. *Secret:* An unlabelled dig pit with a complete skeleton nobody has reported.
 - **The Kneeling Stones** (632, Ossaria, `:DESERT`, 90x80): Wind-cut pillars that look like bowed pilgrims. The crossroads of Ossaria. *Landmark:* The stones themselves, and the crossroads post: Duneholt, Charwell, Vigil. *Secret:* At dusk the stones' shadows point at one buried door.
-- **The Leach Canyons** (621, Borderland (Ossaria/Nadir), `:WASTELAND`, 100x100): Kept name: the canyons the River Leach cut, glowing blue with what Nadir puts in it. *Landmark:* The blue canals and the bone-char filter towers. *Secret:* A dry side canyon with a clean spring that neither side knows about.
-- **The Gutterfall** (633, Nadir, `:CORROSIVE_MIRE`, 80x96): Where the Leach drops off the canyon lip into the marsh. Nadir named it. *Landmark:* The blue waterfall and the ladder-town clinging beside it. *Secret:* A ledge behind the fall where the sump-folk leave their dead's lanterns.
+- **The Leach Canyons** (621, Borderland (Ossaria/Elowen), `:WASTELAND`, 100x100): Kept name: the red gorges the River Leach cut on its way out of the desert; the forest climbs in along the water. *Landmark:* Gallery forest in the gorge bottoms and the bone-char filter towers above. *Secret:* A dry side canyon with a clean spring that neither side knows about.
+- **Wormwood Lea** (634, Elowen, `:MEADOW`, 90x130): Bitter meadows along the Leach east of the Crown. The river is still clean here, and the wormwood keeps the leeches off. *Landmark:* The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses. *Secret:* Where the Leach first turns blue, a pipe comes out of the bank. It is warm.
+- **The Gutterfall** (633, Nadir, `:CORROSIVE_MIRE`, 80x96): Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it. *Landmark:* The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it. *Secret:* A ledge behind the fall where the sump-folk leave their dead's lanterns.
 
-**Road 7, The Sulfur Road** (Mirefen -> Cindervault, Act II). Borderland E, the Sulfur Reach: marsh causeways, the hot lake, then the Dominion's first road.
+**Road 7, The Sulfur Road** (Mirefen -> Cindervault, Act II). Out of the marsh by the leech-gatherers' causeway, round the sulfur lake of borderland E (the Sulfur Reach, Elowen/Ashkaar: burnt woods and hot springs), then the Dominion's first road.
 - **Leechman's Walk** (640, Nadir, `:CORROSIVE_MIRE`, 120x72): The plank causeway the leech-gatherers keep up. You pay them or you swim. *Landmark:* The leech-gatherers' stilts and the mouth of the Miasma Caverns. *Secret:* A sunk plank path that only shows when the marsh gas burns off.
-- **Lake Sallow** (641, Borderland (Nadir/Ashkaar), `:ASHEN_WASTE`, 120x100): Named for its colour. The whole lake is one hot spring. *Landmark:* The yellow lake, its geysers, and Lantern Isle steaming in the middle. *Secret:* A geyser that lifts a surfer onto the cliff shelf above the lake.
+- **Lake Sallow** (641, Borderland (Elowen/Ashkaar), `:ASHEN_WASTE`, 120x100): Named for its colour. The whole lake is one hot spring. *Landmark:* The yellow lake, its geysers, the scorched woods round its shore, and Lantern Isle steaming in the middle. *Secret:* A geyser that lifts a surfer onto the cliff shelf above the lake.
 - **The Pyre Road** (652, Ashkaar, `:ASHEN_WASTE`, 130x70): Lined with oath-pyres that are never let go out. Every legionary lights one before first posting. *Landmark:* The avenue of pyres and Cindervault's Caldera Gate. *Secret:* One pyre is cold. Lighting it calls the person it was lit for.
 
-**Road 8, The Iron Road** (Cindervault -> Ironreach, Act II). West again over the higher pass. The war road north (the Cinderglass Barrens) leaves from the same gate.
-- **The Ashmarch** (660, Ashkaar, `:ASHEN_WASTE`, 120x72): The legions' marching road. Ash falls on it every day and is swept every night. *Landmark:* The mile-forts and the Cinderhorn smoking to the east. *Secret:* A sweepers' tunnel under the road that the legion uses to move unseen.
-- **The Ironway** (661, Borderland (Ashkaar/Nadir), `:MOUNTAIN`, 150x70): Kept name: the pass the ore came down, on rails laid by Nadir and paid for by Ashkaar. *Landmark:* The ore-cart incline and the Truce Posts. *Secret:* A runaway ore cart you can ride down a closed spur.
-- **The Long Drop** (672, Nadir, `:SCRAPYARD`, 64x130): Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. *Landmark:* The winding-tower and the cage lift. *Secret:* A side adit sealed with a pit-fighter's handprint in iron.
-- **The Cinderglass Barrens** (662, Borderland (Ashkaar/Ossaria), `:ASHEN_WASTE`, 130x90, side road): Kept name: obsidian dunes where sand met fire. *Landmark:* Black glass dunes and lava tubes. *Secret:* A lava tube that comes out inside the Petrified Ashwood.
-- **The Wyrmtongue** (673, Ashkaar, `:VOLCANIC`, 64x120, side road): The spit of black lava that runs out to the Cape, forked at the end like a tongue. *Landmark:* The forked spit and the Warfort's beacon. *Secret:* At the fork's left tip, a sea cave that looks across at the Rime Isles.
+**Road 8, The Iron Road** (Cindervault -> Ironreach, Act II). West again: the Ashmarch, the Ironway pass out of the Dominion (borderland E), the Crown Road round the Crownwall's east (Candle Down), then down the Long Drop into Ironreach under Zenith's west rim (Nadir). The war road (the Cinderglass Barrens, borderland M) leaves Cindervault's north gate for the front in Ossaria.
+- **The Ashmarch** (660, Ashkaar, `:ASHEN_WASTE`, 120x72): The legions' marching road. Ash falls on it every day and is swept every night. *Landmark:* The mile-forts and the Cinderhorn smoking to the south-east. *Secret:* A sweepers' tunnel under the road that the legion uses to move unseen.
+- **The Ironway** (661, Borderland (Elowen/Ashkaar), `:MOUNTAIN`, 150x70): Kept name: the pass the ore came down, on rails laid by Nadir and paid for by Ashkaar. *Landmark:* The ore-cart incline down to the Leach ford, the burnt woods either side, and the Truce Posts. *Secret:* A runaway ore cart you can ride down a closed spur.
+- **The Long Drop** (672, Nadir, `:SCRAPYARD`, 64x130): Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. *Landmark:* The winding-tower at the Crown Road's south junction, and the cage lift. *Secret:* A side adit sealed with a pit-fighter's handprint in iron.
+- **The Cinderglass Barrens** (662, Borderland (Ashkaar/Ossaria), `:ASHEN_WASTE`, 130x90, side road): Kept name: obsidian dunes where sand met fire. *Landmark:* Black glass dunes and lava tubes: the volcanic ash desert where the Dominion meets the bone sands. *Secret:* A lava tube that comes out inside the Petrified Ashwood.
+- **The Wyrmtongue** (673, Ashkaar, `:VOLCANIC`, 64x120, side road): The spit of black lava that runs out to the Cape, forked at the end like a tongue. *Landmark:* The forked spit and the Warfort's beacon. *Secret:* At the fork's left tip, a sea cave that looks west along the coast to the smoke of the war in the sands.
 
-**Road 9, The Root Road** (Ironreach -> Verdance, Act III). Borderland F, the Rootdeep: out of the mines through the roots and up into Elowen's royal country.
+**Road 9, The Root Road** (Ironreach -> Verdance, Act III). Borderland F, the Rootdeep: out of the mines under Zenith's west rim through the Gossamer's roots, past Lanternroot, across the Crown Road's south-west and over Prism Falls into Elowen's royal country.
 - **The Tailings** (692, Nadir, `:SCRAPYARD`, 100x70): The mine-waste hills outside Ironreach. Kids sled down them on shovels. *Landmark:* Grey waste cones and the entrance to Grudgestone Quarry. *Secret:* A tailings slide that drops into a buried engine house.
-- **The Rootdeep** (680, Borderland (Nadir/Elowen), `:CAVE`, 72x130): Kept name: where Elowen's roots come through the roof of Nadir's mines. *Landmark:* Root-cathedrals and overgrown ore carts. *Secret:* A root that bleeds when cut: the start of Lanternroot's sidequest.
+- **The Rootdeep** (680, Borderland (Nadir/Elowen), `:CAVE`, 72x130): Kept name: where Elowen's roots come through the roof of Nadir's mines. *Landmark:* Root-cathedrals (the Gossamer's roots) and overgrown ore carts. *Secret:* A root that bleeds when cut: the start of Lanternroot's sidequest.
 - **Prism Falls** (681, Elowen, `:RAINBOW`, 130x80): Kept name: the falls throw a rainbow all day, every day. It is the Imprint. *Landmark:* The falls and the Rainbow Stair beside them. *Secret:* Behind the falls, a cave where the rainbow is the wrong way round.
 - **The Briarway** (693, Elowen, `:FAIRY_TALE`, 72x120): The royal road to Verdance, hedged with briar on both sides by the first monarch and clipped ever since. *Landmark:* The clipped briar walls, the royal milestones, the Kingsgate ahead. *Secret:* A gardeners' door in the hedge to the Royal Chase's back fence.
 
-**Road 10, The Hart Road** (Verdance -> Rimeholt, Act III). Borderland A again, in the north: royal hunting country, the snow-forest, over the Frostfang Pass to the frozen sea.
+**Road 10, The Hart Road** (Verdance -> Rimeholt, Act III). Borderland A2, the Hoarwood (Elowen/Isenmar), in the north-west: royal hunting country, the snow-forest, over the Frostfang Pass to the frozen sea.
 - **The Hart's Run** (700, Elowen, `:MEADOW`, 140x70): The line the royal hunt rides. No one else may gallop on it, and everyone does. *Landmark:* Hunting towers and the white hart carved into the chalk. *Secret:* The carved hart's eye is a trapdoor.
 - **The Hoarwood** (701, Borderland (Elowen/Isenmar), `:SNOWY_MOUNTAIN`, 80x130): What Isenmar calls the northern Rimewood: older, deeper, and white all year. *Landmark:* Royal hunting lodges and frozen Bride-briar hedges. *Secret:* A lodge with one room that is still warm.
 - **The Whalebone Road** (712, Isenmar, `:SNOWY_MOUNTAIN`, 72x120): Arched with whale ribs from the pass down to Rimeholt's Icewall Gate, one arch per thane. *Landmark:* The rib arches, each carved with a thane's name; the last is blank. *Secret:* The blank arch has a name on the inside.
 
-**Road 11, The Mast Road** (Rimeholt -> Skyreach, Act III). Borderland B again, in the north: along the frozen sea, across the Mast Glacier and up the Cloudstair.
-- **The Thane's Sled-Road** (720, Isenmar, `:SNOWY_MOUNTAIN`, 140x72): The coast road on the sea ice, kept open by the thane's own teams. *Landmark:* Sled posts, ice-fishing camps, the frozen sea to the north. *Secret:* A sled team that will run you out to a wreck locked in the ice.
-- **The Mast Glacier** (721, Borderland (Isenmar/Zenith), `:SNOWY_MOUNTAIN`, 72x130): Kept name: airships are ice-anchored along the glacier tongue, and their masts look like a winter forest. *Landmark:* The anchored airships. *Secret:* A crevasse with an airship that never left.
+**Road 11, The Mast Road** (Rimeholt -> Skyreach, Act III). Along the frozen coast on the thane's sled-road, up the Mast Glacier (borderland B2, Isenmar/Ossaria: tundra and permafrost dunes) to Anchorhold, where the airships moor; then by airship over Ossaria and Elowen to Skyreach's Cloudstair. The only road with an air leg (Act III, Skyreach's airships): Isenmar and Zenith share no border.
+- **The Thane's Sled-Road** (720, Isenmar, `:SNOWY_MOUNTAIN`, 140x72): The coast road on the sea ice, kept open by the thane's own teams. *Landmark:* Sled posts, ice-fishing camps, the frozen sea to the north, and the war-sleds going east. *Secret:* A sled team that will run you out to a wreck locked in the ice.
+- **The Mast Glacier** (721, Borderland (Isenmar/Ossaria), `:SNOWY_MOUNTAIN`, 72x130): Kept name: airships are ice-anchored along the glacier tongue, and their masts look like a winter forest. *Landmark:* The anchored airships, and the glacier's snout running out onto frozen dunes. *Secret:* A crevasse with an airship that never left.
 - **The Tetherline** (732, Zenith, `:STORMFRONT`, 130x64): The walkway strung under Skyreach's mooring cables. Zenith calls it safe. *Landmark:* Cable gantries over a long drop. *Secret:* A maintenance cradle that crosses to a mast nobody uses.
 
-**Road 12, The Glass Road** (Skyreach -> Lucent, Act III). South across the plateau, through borderlands G and H, and through the Mere into the kingdom behind the glass.
+**Road 12, The Glass Road** (Skyreach -> Lucent, Act III). North off the plateau through borderland G (Conductors' Causeway, the Wired Wood, Verdigris), round the Crownwall's north on the Crown Road (Candle Down, the Highwold, Kingsmead), into the Looking-Glass Wood (borderland H) and through Mirror Mere into the kingdom behind the glass.
 - **Conductors' Causeway** (740, Zenith, `:STORMFRONT`, 72x130): The road between the lightning rods ('conductors') that feed the Lattice. It hums. *Landmark:* Rows of conductors and Stormwatch Spire. *Secret:* One conductor is grounded, and something lives in the quiet.
 - **The Wired Wood** (741, Borderland (Zenith/Elowen), `:SILKWOOD`, 80x130): Kept name: forest grown up Zenith's pylons, or pylons planted in Elowen's forest, depending who you ask. *Landmark:* Vine-wrapped pylons and clockwork orchards. *Secret:* A greenhouse-factory whose clockwork bees have gone wild.
+- **Kingsmead** (756, Elowen, `:MEADOW`, 110x90): The king's meadow under the Crownwall's north-west face, where Elowen's royal horses grazed before there was an Accord. *Landmark:* The old paddock walls, and the Glassfall Scar glittering high on the wall above. *Secret:* The farrier's forge still has a fire in it; nobody tends it.
 - **The Looking-Glass Wood** (752, Borderland (Elowen/Antumbra), `:MINDSCAPE`, 100x90): Borderland H. The reflections in its pools do not always agree with what is standing over them. *Landmark:* Pools that reflect the wrong sky, and a stream that runs uphill. *Secret:* Walk a path backwards and it goes somewhere else.
 - **Widdershins Walk** (755, Antumbra, `:INVERSE`, 100x80): The first road in Antumbra. It can only be walked against the sun, and here the sun agrees. *Landmark:* A colonnade whose shadows fall toward the light. *Secret:* Turn sunwise three times and the road is not there.
 
-**Road 13, The Grave Road** (Lucent -> Cragholm, Act IV). Borderland I, the Obsidian Barrows: out of Antumbra through the tomb-mirrors into Ossaria's high crags.
+**Road 13, The Grave Road** (Lucent -> Cragholm, Act IV). Borderland I, the Obsidian Barrows: out of Antumbra through the Grave Glass at Vigil and up Spinefall Gorge to Ossaria's high crags.
 - **Yesterday's Road** (772, Antumbra, `:INVERSE`, 110x64): Travellers arrive at the far end before they set out. The Synod taxes both ends. *Landmark:* Milestones that count down, then up. *Secret:* A traveller on the road who is you, a little earlier.
 - **The Obsidian Barrows** (760, Borderland (Antumbra/Ossaria), `:INVERSE`, 130x80): Kept name: a necropolis of obsidian tomb-mirrors that became gates. *Landmark:* The tomb-mirrors and the desert hanging in the sky. *Secret:* A mirror with no tomb behind it.
 - **Spinefall Gorge** (761, Ossaria, `:DESERT`, 72x130): The river comes down over the backbone of something that was a mile long. *Landmark:* The waterfall over fossil vertebrae. *Secret:* A dry cave behind the fall with a nest of something revived.
 - **The Vertebrae** (773, Ossaria, `:MOUNTAIN`, 64x120): A stair of round stone drums up to Cragholm, each one a step and a bone. *Landmark:* The drum-stair and Cragholm's lift towers above. *Secret:* One drum is hollow.
 
 **Road 14, The Moor Road** (Cragholm -> Gravenmoor, Act IV). Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors.
-- **The Jawbone Ridge** (780, Ossaria, `:MOUNTAIN`, 150x72): A ridge with a toothed skyline. Cragholm says the teeth were cut; Vigil says they grew. *Landmark:* The teeth, and the Darkglass Mine headframe. *Secret:* A cave in the largest tooth.
+- **The Jawbone Ridge** (780, Ossaria, `:MOUNTAIN`, 150x72): A ridge with a toothed skyline. Cragholm says the teeth were cut; Vigil says they grew. *Landmark:* The teeth, the Darkglass Mine headframe, and the war's smoke to the west. *Secret:* A cave in the largest tooth.
 - **Hindmoor** (781, Antumbra, `:INVERSE`, 80x130): The moor that is only seen properly over your shoulder. Look straight at it and it is somewhere else. *Landmark:* Standing pools that show what is behind you. *Secret:* Walk it backwards and you find the cottage.
 - **Downflame Road** (790, Antumbra, `:INVERSE`, 110x70): Lit by candles whose flames hang below the wick. Gravenmoor makes them. *Landmark:* The candle-posts and the lantern hospice on the hill. *Secret:* Blow one candle out and a door-shaped piece of dark stays lit.
 
-**Road 15, The Slag Road** (Gravenmoor -> Cogsworth, Act IV). Out of Antumbra by the Barrows' east gate, over Ossaria's dry seabed to the crossroads, then borderland C' to the foundries.
+**Road 15, The Slag Road** (Gravenmoor -> Cogsworth, Act IV). Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa (borderland G, Zenith's eastern waste), then down the Smokestack Parade into the foundries. Side road: the Dry Tide, Ossaria's dry seabed west of Duneholt, out to the war's battlefield.
 - **The Noonless Road** (800, Antumbra, `:INVERSE`, 140x70): Antumbra has no noon. On this road your shadow never shortens. *Landmark:* Sundials with no shortest mark; the Barrow of the Wardens. *Secret:* A sundial that does work, for one minute.
-- **The Dry Tide** (810, Ossaria, `:DESERT`, 140x72): An old seabed, rippled like a beach the sea left one evening and never came back to. *Landmark:* Shell pavements and a stranded ship's ribs. *Secret:* At night you can hear the tide. Follow it.
-- **The Slag Mesa** (801, Borderland (Ossaria/Zenith), `:WASTELAND`, 80x130): Kept name: a mesa that is half rock and half what Cogsworth poured on it. *Landmark:* Slag falls, still warm. *Secret:* A cooled slag flow shaped round something large.
+- **The Slag Mesa** (801, Borderland (Elowen/Zenith), `:WASTELAND`, 80x130): Kept name: a mesa that is half rock and half what Cogsworth poured on it. *Landmark:* Slag falls, still warm, and the Slagglass: a cooled black pour that reflects Antumbra (gate C). *Secret:* A cooled slag flow shaped round something large.
 - **The Smokestack Parade** (811, Zenith, `:FACTORY`, 120x64): Cogsworth's ceremonial avenue: one chimney per founding patent. *Landmark:* The numbered stacks and three shift-clocks. *Secret:* Stack 9 has no furnace under it.
+- **The Dry Tide** (810, Ossaria, `:DESERT`, 140x72, side road): An old seabed, rippled like a beach the sea left one evening and never came back to. *Landmark:* Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought. *Secret:* At night you can hear the tide. Follow it.
 
-**Road 16, The Drowned Road** (Cogsworth -> Underveil, Act IV). Borderland L, the Hanging Stair: off the edge of Zenith and down the cliff to the drowned coast.
-- **The Brink** (832, Zenith, `:STORMFRONT`, 130x60): Where Zenith stops. A promenade with a brass rail and a very long view. *Landmark:* The rail, the lift-heads, the telescopes. *Secret:* One telescope is fixed on a window in Underveil.
+**Road 16, The Drowned Road** (Cogsworth -> Underveil, Act IV). Borderland L, the Hanging Stair: off the plateau's south-east rim and down the cliff to the drowned south coast, then by water over the towers of Aurelia to Underveil.
+- **The Brink** (832, Zenith, `:STORMFRONT`, 130x60): Where Zenith stops. A promenade with a brass rail and a very long view. *Landmark:* The rail, the lift-heads, the telescopes over the Hallow Strait. *Secret:* One telescope is fixed on a window in Underveil.
 - **The Hanging Stair** (820, Borderland (Zenith/Nadir), `:SCRAPYARD`, 72x150): Kept name: scaffolds, cable lifts and outflow falls down the cliff beneath Zenith. *Landmark:* Cable lifts and shanty scaffolds. *Secret:* A lift cage that stops between floors on purpose.
-- **The Drownings** (821, Borderland (Zenith/Nadir), `:WATER_SURFACE`, 120x120): Nadir's name for the coast that went under with Aurelia. *Landmark:* Tower-tops standing out of the sea. *Secret:* Dive below: Under the Drownings (822) and Aurelia.
+- **The Drownings** (821, Borderland (Zenith/Nadir), `:WATER_SURFACE`, 120x120): Nadir's name for the coast that went under with Aurelia. *Landmark:* Tower-tops standing out of the Hallow Strait. *Secret:* Dive below: Under the Drownings (822) and Aurelia.
 
-**Road 17, The Blind Road** (Underveil -> Gloaming, Act V). Borderland F again, underground: the river that runs south beneath half the realm and surfaces in Elowen's twilight.
+**Road 17, The Blind Road** (Underveil -> Gloaming, Act V). Borderland F again, underground: the river that runs east beneath Lumen's cliffs and surfaces in the Gloamwood, in Elowen's south-east.
 - **The Throat** (852, Nadir, `:NEW_MOON`, 64x110): The tunnel that swallows the river at Underveil. Boats go in. *Landmark:* The river mouth, in reverse. *Secret:* An air pocket with a smugglers' chapel.
-- **The Blindwater** (840, Borderland (Nadir/Elowen), `:CAVE`, 150x80): The underground river. Nothing in it has eyes, and the boatmen sing so the walls know where they are. *Landmark:* Root-arches over black water and the lamps of Mothwell. *Secret:* A side channel that loops under Crownhaven.
+- **The Blindwater** (840, Borderland (Nadir/Elowen), `:CAVE`, 150x80): The underground river. Nothing in it has eyes, and the boatmen sing so the walls know where they are. *Landmark:* Root-arches over black water and the lamps of Mothwell. *Secret:* A side channel that loops under Lumen's foundations.
 - **The Gloamwood Verge** (841, Elowen, `:SILKWOOD`, 72x130): Kept name: the edge of the twilight wood, where the river comes back into the light. *Landmark:* The river's rising and the first lantern-flowers. *Secret:* A clearing that is always one hour later than the rest.
 
 **Road 18, The Truce Road** (Gloaming -> Wyrmrest, Act V). Borderland J, the Thornwar Marches: twilight forest, burning forest, then the dragon ridge.
-- **The Gloamwood** (860, Elowen, `:FAIRY_TALE`, 140x80): Kept name: Elowen's heart, where it has been dusk for three hundred years. *Landmark:* The Great Tree on the skyline and paths that move. *Secret:* A path that only exists while you are not on it.
+- **The Gloamwood** (860, Elowen, `:FAIRY_TALE`, 140x80): Kept name: Elowen's twilight wood in the south-east, where it has been dusk for three hundred years. *Landmark:* The Great Tree on the skyline and paths that move. *Secret:* A path that only exists while you are not on it.
 - **The Thornwar Marches** (861, Borderland (Elowen/Ashkaar), `:MOUNTAIN`, 80x130): Kept name: where Elowen and Ashkaar fought the Thornwar. The trees still burn without dying. *Landmark:* Ember-leaved giants and Thornwar forts. *Secret:* A fort whose garrison never got the order to stand down.
 - **The Wyrmspine** (872, Ashkaar, `:DRAGONS_DEN`, 150x72): The ridge road to Wyrmrest, along a spine of rock that Ashkaar says is exactly that. *Landmark:* The vertebral crags and the dragon roost-poles. *Secret:* A rib-cave with a clutch of eggs and a very calm mother.
 
-**Road 19, The Pilgrim Road** (Wyrmrest -> Crownhaven, Act V). Borderland K: the only way overland into the Crown.
+**Road 19, The Pilgrim Road** (Wyrmrest -> Crownhaven, Act V). Borderland K, now on Elowen ground: from the Dominion's toll-fort west over the Pilgrim Pass (eighteen shrines across the Sulfur Reach and the Leach) to Pilgrim's Rest, then through Sovereign's Ascent in the Crownwall's one gap and down the Coronation Road. Every road in Velmora ends on the Crown Road; only this one goes in.
 - **Dominar's Toll** (892, Ashkaar, `:MOUNTAIN`, 110x70): The Dominion taxes a holy road here, and has for three hundred years. *Landmark:* The toll-fort across the whole valley. *Secret:* The toll-keeper's ledger lists one pilgrim who has paid every year since AF 0.
-- **The Pilgrim Pass** (880, Borderland (Ashkaar/Crownhaven), `:MOUNTAIN`, 80x140): Kept name: eighteen shrines, one per Plate, up the Crownwall. *Landmark:* The eighteen shrines. *Secret:* A nineteenth shrine, unfinished.
+- **The Pilgrim Pass** (880, Borderland (Elowen/Crownhaven), `:MOUNTAIN`, 140x80): Kept name: eighteen shrines, one per Plate, from the Dominion's border to the Crownwall's gap. *Landmark:* The eighteen shrines, the pilgrim camps, and the south bridge over the Leach. *Secret:* A nineteenth shrine, unfinished.
 - **The Coronation Road** (893, Crownhaven, `:GRAND_STAGE`, 150x64): Walked once by each Sovereign, on foot, from the Ascent to the Eighteen Gates. *Landmark:* Statues of every Sovereign; the last plinth is empty. *Secret:* The empty plinth already has a name cut on the back.
 
 ### What the map builder rebuilds

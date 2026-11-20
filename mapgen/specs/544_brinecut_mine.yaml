@@ -24,9 +24,9 @@ events:
       - graphic: {sprite: trainer_HIKER, dir: right}
         commands:
           - "Salt miner: Brinecut's been worked since before the Prismfall. Rockfalls every spring now, though."
-          - if: "Prismfall.has_badge?(2)"
+          - if: "pfm_gym_won?(:LEADER_DORIAN)"
             then:
-              - "Salt miner: Two badges? Then you can handle this. Smash what's in your way."
+              - "Salt miner: That's Dorian's badge on you? Good enough for salt. Here."
               - {script: "pbReceiveItem(:TM98)"}
               - {selfswitch: [A, true]}
             else: ["Salt miner: Come back with Dorian's badge and I'll teach you how we clear rubble."]

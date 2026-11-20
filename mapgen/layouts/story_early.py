@@ -705,10 +705,10 @@ add(120,
         MV('Juno (arrival)', [{'graphic': [SPR['JUNO'], 0, 8, 0]}, {'opacity': 255}]),
         P('JUNO', 'happy', "Briarwick! Smell that? That's mulberry and lanolin and— oh, the egg-seller's open. I'll find you at the gym! Don't start without me! Or do! I'll catch up!", 'sparkle', 'Juno (arrival)'),
         MV('Juno (arrival)', ['through_on', 'up', 'up', 'up', 'up', 'up', 'up', {'opacity': 0}]),
-        IF('$player.badge_count == 0', [SW('GLOAMING_DISGUISED_CELESTINE')]),
+        IF('!pfm_gym_won?(:LEADER_TAMSIN)', [SW('GLOAMING_DISGUISED_CELESTINE')]),
         {'selfswitch': ['A', True]}], trigger='autorun'), page([], cond={'self': 'A'})),
     ev('Juno (arrival)', page([], through=True)),
-    ev('Stage manager', page([S('if $player.badge_count >= 1\n'
+    ev('Stage manager', page([S('if pfm_gym_won?(:LEADER_TAMSIN)\n'
                                 '  $game_switches[@@GLOAMING_DISGUISED_CELESTINE] = false if $game_switches[@@GLOAMING_DISGUISED_CELESTINE]\n'
                                 '  pbSetSelfSwitch(%EV[Dusk petal]%, "A", true)\n'
                                 'end\n'
@@ -772,7 +772,7 @@ for n in _bt:
     e = npc_from(n, move='random' if n['name'] in ('Youngster', 'Apprentice') else 'fixed')
     if n['name'] in AFTER_GYM:    # [after gym]: badge 1 is not a switch, so the reactive line is a branch in each page
         for p in e['pages']:
-            p['commands'] = [IF('$player.badge_count >= 1', AFTER_GYM[n['name']], p['commands'])]
+            p['commands'] = [IF('pfm_gym_won?(:LEADER_TAMSIN)', AFTER_GYM[n['name']], p['commands'])]
     add(120, e)
 EVENTS[120]['Boy in dog mask'] = copy.deepcopy(EVENTS[120]['Girl in ogre mask']); EVENTS[120]['Boy in dog mask']['name'] = 'Boy in dog mask'
 for nm in ('Girl in ogre mask', 'Boy in dog mask'):
@@ -783,7 +783,7 @@ for nm in ('Girl in ogre mask', 'Boy in dog mask'):
 # ===================================================================================================== 121-125 interiors
 GALE = [IF('$game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ch2_close) && !pfm?(:gale2)', [
     'GALE POST. A letter is waiting.', '"Heard about the Hollow. Lecture Two enclosed. It is nine pages. Page nine says I\'m proud of you. Do not skip to page nine. — I.L."',
-    S('pfm_set(:gale2)'), {'var': ['STORY_CHAPTER', 3]}], [
+    S('pfm_set(:gale2)'), {'var': ['STORY_CHAPTER', 4]}], [
     IF('!pfm?(:gale1)', ['GALE POST. A letter is waiting.', '"Lecture Two is drafted. Do not make me send it. Eat something. — I.L."',
                          ITEM('POTION', 2), ITEM('KELPTEABAG', 1, 'Kelp Tea Bag'), 'You could throw it away. You don\'t.', S('pfm_set(:gale1)')],
        ['GALE POST. Write to Tidewatch Station, Ferrow\'s Landing. Larch reads every letter twice and answers half.'])])]
@@ -795,7 +795,7 @@ MART_BW = [IF('!pfm?(:bw_mart_hi)', [N('Clerk', "Antidotes go fast here. The mot
 HETT = [IF('$game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ledger_read) && !pfm?(:hett_reward)', [
     N('Hett', 'From the guild\'s teaching chest. Old Mother Loom would\'ve wanted a stranger to have it. She never trusted us with it.'),
     S('pfm_money(2000)'), ITEM('TMSTRINGSHOT', 1, 'TM String Shot'), S('pfm_set(:hett_reward)'), S('pfm_quest_done(:locked_ledger)')], [
-    IF('$player.badge_count >= 1', [N('Hett', "She signed WHAT? Alone? ...Poor fool child. Her gran would've made the whole village sign it with her, and then it'd be all our fault. That's what a guild's FOR.")], [
+    IF('pfm_gym_won?(:LEADER_TAMSIN)', [N('Hett', "She signed WHAT? Alone? ...Poor fool child. Her gran would've made the whole village sign it with her, and then it'd be all our fault. That's what a guild's FOR.")], [
         IF('pfm?(:ledger_read) && !pfm?(:ledger_told)', [
             N('Hett', "...Alone. She signed it alone. Don't say anything yet. Let me think how to say it kindly. I'm out of practice."), S('pfm_set(:ledger_told)')], [
             IF('pfm?(:hett_talked) && !pfm_quest?(:locked_ledger)', [
@@ -849,7 +849,7 @@ LEDGER = [IF('pfm?(:ledger_read)', ['The last page: "Received of the Meridian Co
 add(123, ev('Hett', page(HETT, 'NPC 14', 'down')),
     talk('Apprentice (guild)', 'NPC 24', 'right', [N('Apprentice', 'The loft is the Warden\'s. We\'re not to go up. I go up to look at the moths\' tally board. Don\'t tell Hett.')]),
     ev('Guild ledger', page(LEDGER)),
-    ev('Loft manager', page([S('pbSetSelfSwitch(%EV[Tamsin (loft)]%, "A", true) if $player.badge_count >= 1 && pf_choice(:ch2_tamsin).nil?'), {'erase': True}], trigger='parallel')),
+    ev('Loft manager', page([S('pbSetSelfSwitch(%EV[Tamsin (loft)]%, "A", true) if pfm_gym_won?(:LEADER_TAMSIN) && pf_choice(:ch2_tamsin).nil?'), {'erase': True}], trigger='parallel')),
     ev('Tamsin (loft)', page([]), page(CONFESS, SPR['TAMSIN'], 'down', cond={'self': 'A'}),
        page([P('TAMSIN', 'neutral', "Cocoonfall Hollow. Through the Deepwood. The Cutter will open the way. ...Come back, will you?")], SPR['TAMSIN'], 'down', cond={'self': 'B'})),
     ev('Juno (loft)', page([], through=True)),
@@ -866,7 +866,7 @@ add(124, talk('Retired Weaver', 'NPC 10', 'down', [N('Retired Weaver', 'I wove O
 
 add(125, ev('Cutter', page([N('Cutter', 'No.'), {'selfswitch': ['A', True]}], 'trainer_HIKER', 'down'),
             page([N('Cutter', "...What's the tree?"),
-                  IF('$player.badge_count >= 1',
+                  IF('pfm_gym_won?(:LEADER_TAMSIN)',
                      [IF('!pfm?(:hm_cut)', [N('Cutter', "Right. Here. Cut the dead ones. If you cut a live one I'll know. I won't know how. I'll just know."),
                                             ITEM('HM01'), S('pfm_set(:hm_cut)')],
                          [N('Cutter', "Dead ones only. I'll know.")])],

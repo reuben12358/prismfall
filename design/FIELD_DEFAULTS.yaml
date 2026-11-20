@@ -496,8 +496,12 @@ maps:
   591: {name: "Brassfall Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
   592: {name: "The Icecutters' Haul", kind: route, field: SNOWY_MOUNTAIN, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: Sawyer's Cross: where the Haul meets the forest track from Snowbriar to the Frostfang Pass (gated until Act II"}
   593: {name: "The Arc-Lamp Mile", kind: route, field: NEON_GRID, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: One hundred numbered arc lamps, and Lumen's South Gate at the end of them."}
+  594: {name: "Wallshadow Row", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Crownwall's white cliffs over the hedgerows, and the Southgate shrine where the Crown Road meets the road "}
+  595: {name: "Coppice Ride", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The coppice stools in their numbered panels, and the Kingsferry where the ride crosses the Ebb."}
   600: {name: "The Brass Dunes", kind: route, field: DESERT, battles: [], encounters: [Land], source: name, why: "name: \"Dune\""}
   601: {name: "The Rib Road", kind: route, field: DESERT, battles: [], encounters: [Land], source: spec, why: "world spec"}
+  602: {name: "Candle Down", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The candle-cairns, and the view into the Crownwall's one gap."}
+  603: {name: "The Highwold", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Wold Stones, and the Crownwall's north face white in the sun."}
   604: {name: "Static Tunnels", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
   605: {name: "Static Tunnels Depths", kind: dungeon, field: CAVE, battles: [], encounters: [Cave], source: spec, why: "world spec"}
   608: {name: "The Lowlight (Shattered)", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
@@ -514,6 +518,7 @@ maps:
   631: {name: "Charwell Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
   632: {name: "The Kneeling Stones", kind: route, field: DESERT, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The stones themselves, and the crossroads post: Duneholt, Charwell, Vigil."}
   633: {name: "The Gutterfall", kind: route, field: CORROSIVE_MIRE, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The blue waterfall and the ladder-town clinging beside it."}
+  634: {name: "Wormwood Lea", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses."}
   640: {name: "Leechman's Walk", kind: route, field: CORROSIVE_MIRE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Nadir route default"}
   641: {name: "Lake Sallow", kind: route, field: ASHEN_WASTE, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: hand, why: "Sulfur Reach: steam vents and geysers around the hot-spring lake (surfing -> Water Surface)"}
   644: {name: "Miasma Caverns", kind: dungeon, field: CORROSIVE_MIRE, battles: [], encounters: [Cave, Water], source: spec, why: "world spec"}
@@ -580,6 +585,7 @@ maps:
   753: {name: "Glassmere", kind: town, field: MINDSCAPE, source: hand, why: "Glassmere's doubled houses"}
   754: {name: "Glassmere Pokémon Center", kind: interior, field: NONE, source: name, why: "name: \"Pokémon Center\""}
   755: {name: "Widdershins Walk", kind: route, field: INVERSE, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: A colonnade whose shadows fall toward the light."}
+  756: {name: "Kingsmead", kind: route, field: MEADOW, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The old paddock walls, and the Glassfall Scar glittering high on the wall above."}
   760: {name: "The Obsidian Barrows", kind: route, field: INVERSE, battles: [], encounters: [Land], source: spec, why: "world spec"}
   761: {name: "Spinefall Gorge", kind: route, field: DESERT, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Ossaria route default"}
   764: {name: "Geode Hollow", kind: dungeon, field: CRYSTAL_CAVERN, battles: [], encounters: [Cave], source: spec, why: "world spec"}

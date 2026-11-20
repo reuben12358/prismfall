@@ -9,10 +9,9 @@
    ],
    "name": "The Rimewood",
    "crossings": [
-    "2->3 (Revision 14, north out of Briarwick: Frostwick Pass, Frostwick, Rimewood Path, the Rimewood, then Gullcry Cliffs in Isenmar; the Frostflat Causeway is the coast road back to Saltmere)",
-    "9->10 (north: the Hoarwood, Snowbriar)"
+    "2->3 (The Hoar Road: Frostwick Pass, Rimewood Path, The Rimewood, Frostflat Causeway)"
    ],
-   "biome": "Elowen oldwood frozen in permanent hoar: ice-glazed giant trees, frozen silk curtains drifted from the Gossamer Wood, rime-crusted salt flats on the coast, aurora clearings",
+   "biome": "The Gossamer's oldwood frozen in hoar: ice-glazed giant trees, frozen silk curtains, fells turning to frost north of Briarwick, salt flats turning to frost-flats along the coast road to Saltmere.",
    "landmarks": [
     "Border Stones (both arms, Meridian sunburst bolted over)",
     "the Frost Loom",
@@ -20,12 +19,11 @@
     "Hearth Stone"
    ],
    "field": "none (snow weather); Glade ice-slide",
-   "wild": "Grass/Bug/Normal/Fairy x Water/Ice: Snover, Snom, Cubchoo, Swinub, Bergmite, Vanillite, Deerling, Stantler, Teddiursa, Smoochum, Delibird",
+   "wild": "Snover, Snom, Cubchoo, Swinub, Bergmite, Vanillite, Deerling, Stantler, Teddiursa, Smoochum, Delibird",
    "routes": [
     560,
     562,
     563,
-    701,
     577,
     578
    ],
@@ -37,17 +35,17 @@
     "Elowen",
     "Isenmar"
    ],
-   "name": "The Rimewood (north)",
+   "name": "The Hoarwood",
    "crossings": [
-    "9->10"
+    "9->10 (The Hart Road: The Hoarwood)"
    ],
-   "biome": "deep snow-forest on the way to Lake Rime; royal hunting lodges",
+   "biome": "The northern Rimewood: deep snow-forest of royal hunting lodges.",
    "landmarks": [
     "Snowbriar lodge",
     "frozen Bride-briar hedges"
    ],
    "field": "SNOWY_MOUNTAIN",
-   "wild": "as A plus Abomasnow, Sawsbuck, Ursaring",
+   "wild": "as A + Abomasnow, Sawsbuck, Ursaring",
    "routes": [
     701
    ],
@@ -57,21 +55,20 @@
    "code": "B",
    "kingdoms": [
     "Isenmar",
-    "Zenith"
+    "Elowen"
    ],
    "name": "The Icefall Locks",
    "crossings": [
-    "3->4 (south: the Reedholms, the Icecutters' Haul, Brassfall, the Icefall Locks)",
-    "10->11 (north: the Mast Glacier, Anchorhold, the Cloudstair)"
+    "3->4 (The Lock Road: The Icecutters' Haul, The Icefall Locks)"
    ],
-   "biome": "Isenmar's frozen falls tumbling off the Zenith escarpment, harnessed by brass sluices, turbines and ice-lifts; Lattice pylons frozen into the ice",
+   "biome": "Where the Ebb falls off the Crownland downs onto Isenmar's frozen lowland: ice-falls cut into brass locks and sluices, frozen water-meadows, ice-cutters' sleds, Lattice pylons frozen into the ice.",
    "landmarks": [
     "the Ice Elevator (cable lift hauling cut ice up the cliff)",
     "frozen turbine wheels",
     "Voltaic Sluiceworks"
    ],
    "field": "none; Sluiceworks SCRAPYARD",
-   "wild": "Water/Ice x Electric/Steel/Flying: Magnemite, Pawmi, Wattrel, Tadbulb, Snover, Bergmite, Plusle/Minun, Delibird",
+   "wild": "Magnemite, Pawmi, Wattrel, Tadbulb, Snover, Bergmite, Deerling, Wooloo",
    "routes": [
     581,
     584,
@@ -84,46 +81,45 @@
    "code": "B2",
    "kingdoms": [
     "Isenmar",
-    "Zenith"
+    "Ossaria"
    ],
    "name": "The Mast Glacier",
    "crossings": [
-    "10->11"
+    "10->11 (The Mast Road: The Mast Glacier)"
    ],
-   "biome": "glacier tongue with Skyreach airships anchored by ice-anchors",
+   "biome": "Tundra and permafrost dunes: a glacier tongue running out onto frozen sand, wind-carved ice-dunes, and airship masts anchored in the ice.",
    "landmarks": [
     "Anchorhold's ice-anchors"
    ],
    "field": "SNOWY_MOUNTAIN",
-   "wild": "Ice x Flying/Steel",
+   "wild": "Swinub, Piloswine, Cetoddle, Alolan Sandshrew, Snom, Hippopotas, Bergmite, Skarmory",
    "routes": [
-    721,
-    724
+    721
    ],
    "town": 730
   },
   {
    "code": "C",
    "kingdoms": [
-    "Zenith",
+    "Elowen",
     "Ossaria"
    ],
    "name": "The Brass Dunes",
    "crossings": [
-    "4->5 (R9)",
-    "14->15 east (R30 Slag Mesa)"
+    "4->5 (The Brass Road: The Brass Dunes)"
    ],
-   "biome": "Zenith's rail and slag spilling into Ossaria's desert: dune-buried trains, sand-scoured brass machinery, mirage of glass towers, slag mesas near Cogsworth",
+   "biome": "Heath and dune scrub where the forest gives out: gorse and broom on the dune-feet, the buried Mainline, sand-scoured brass and a broken viaduct.",
    "landmarks": [
     "the broken viaduct",
     "dune-buried locomotive",
     "slag mesas"
    ],
    "field": "R9 none; R30 WASTELAND",
-   "wild": "Electric/Steel/Flying x Ground/Rock: Sandshrew, Silicobra, Hippopotas, Rufflet, Vullaby, Electrike, Orthworm, Flamigo",
+   "wild": "Sandshrew, Silicobra, Hippopotas, Phanpy, Cacnea, Skwovet, Rufflet, Orthworm",
    "routes": [
     600,
-    801
+    604,
+    605
    ],
    "town": 610
   },
@@ -131,20 +127,20 @@
    "code": "D",
    "kingdoms": [
     "Ossaria",
-    "Nadir"
+    "Elowen"
    ],
    "name": "The Leach Canyons",
    "crossings": [
-    "5->6 (R12)"
+    "5->6 (The Leach Road: The Leach Canyons)"
    ],
-   "biome": "Zenith's toxic runoff carving blue-glowing canals through Ossaria's sandstone; fossil beds leaching in poison; Nadir mine adits in the canyon walls",
+   "biome": "Red sandstone gorges with gallery forest along the River Leach; bone-char filter towers.",
    "landmarks": [
     "bone-char filter weirs",
     "glowing canal falls",
     "adit mouths"
    ],
    "field": "none",
-   "wild": "Ground/Rock x Poison/Dark/Fighting: Ekans, Gulpin, Shroodle, Maschiff, Skorupi, Croagunk, Drilbur, Krokorok, Glimmet, Makuhita",
+   "wild": "Sandile, Trapinch, Maractus, Gligar, Ekans, Skwovet, Deerling, Bramblin",
    "routes": [
     621
    ],
@@ -153,52 +149,27 @@
   {
    "code": "E",
    "kingdoms": [
-    "Nadir",
+    "Elowen",
     "Ashkaar"
    ],
    "name": "The Sulfur Reach",
    "crossings": [
-    "6->7 (R14 Lake Sallow)",
-    "7->8 (R16 Ironway)"
+    "6->7 (The Sulfur Road: Lake Sallow)",
+    "7->8 (The Iron Road: The Ironway)"
    ],
-   "biome": "acid hot-spring country where Nadir's runoff meets Ashkaar's magma: sulfur flats, boiling yellow pools, crystal crusts, steam vents; Lake Sallow turned to a vast hot spring",
+   "biome": "Ash woods and hot springs: scorched oaks around the sulfur lake, boiling yellow pools, the Ironway pass.",
    "landmarks": [
     "the Truce Baths",
     "sulfur mines",
     "the Ironway pass"
    ],
    "field": "R14 none; R16 MOUNTAIN",
-   "wild": "Poison/Dark/Fighting x Fire/Dragon: Salandit, Charcadet, Numel, Croagunk, Scraggy, Maschiff, Houndour, Capsakid, Cyclizar",
+   "wild": "Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar, Bramblin, Fletchinder",
    "routes": [
     641,
     661
    ],
    "town": 650
-  },
-  {
-   "code": "M",
-   "kingdoms": [
-    "Ashkaar",
-    "Ossaria"
-   ],
-   "name": "The Cinderglass Barrens",
-   "crossings": [
-    "war road (Cindervault -> Cinder Cape)",
-    "optional Cindervault <-> Duneholt link from 7 badges"
-   ],
-   "biome": "obsidian dunes of black volcanic glass sand, a petrified ash forest buried by an old Ashkaar eruption (Ossaria's fossil country), lava tubes, glass-storms",
-   "landmarks": [
-    "Glasswake's furnace chimneys",
-    "the Petrified Ashwood",
-    "glass-storm dunes"
-   ],
-   "field": "ASHEN_WASTE (Barrens), DESERT (Ashwood edges)",
-   "wild": "Fire/Dragon x Ground/Rock: Carkol, Magcargo, Numel, Torkoal, Vibrava, Gible, Sudowoodo, Onix, Rhyhorn, Golett",
-   "routes": [
-    662,
-    663
-   ],
-   "town": 670
   },
   {
    "code": "F",
@@ -208,17 +179,17 @@
    ],
    "name": "The Rootdeep",
    "crossings": [
-    "8->9 (R17)",
-    "16->17 (R33)"
+    "8->9 (The Root Road: The Rootdeep)",
+    "16->17 (The Blind Road: The Blindwater)"
    ],
-   "biome": "Elowen's giant roots breaking into Nadir's mine shafts: root-cathedrals, glowing fungus groves, overgrown mine carts, moth swarms",
+   "biome": "Under the plateau's foot: the Gossamer's roots through Nadir's mine shafts, glowing fungus, root-cathedrals; the Blindwater under the south coast. South hamlet: Mothwell (850).",
    "landmarks": [
     "Lanternroot's mushroom farms",
     "root-cathedral",
     "flooded root river (south)"
    ],
    "field": "CAVE",
-   "wild": "Poison/Dark/Fighting x Grass/Bug/Fairy: Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy",
+   "wild": "Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy",
    "routes": [
     680,
     840
@@ -233,17 +204,23 @@
    ],
    "name": "The Wired Wood",
    "crossings": [
-    "11->12 (R24, then Mirror Mere)"
+    "3->4 (The Lock Road: The Arc-Lamp Mile)",
+    "4->5 (The Brass Road: The Meridian Mainline)",
+    "11->12 (The Glass Road: The Wired Wood)",
+    "14->15 (The Slag Road: The Slag Mesa)"
    ],
-   "biome": "the forest edge wired with Meridian Lattice: vine-wrapped brass pylons, clockwork orchards, greenhouse-factories, Glasswood crystals creeping along the cables",
+   "biome": "Industrial fringe and orchards round the plateau: vine-wrapped pylons, clockwork orchards, greenhouse factories, the Mainline cutting, Cogsworth's slag on the Slag Mesa.",
    "landmarks": [
     "Verdigris orchard-factory",
     "crystallised pylon line"
    ],
    "field": "none",
-   "wild": "Electric/Steel/Flying x Fairy/Grass/Normal: Luxray, Manectric, Boltund, Klang, Floette, Granbull, Tinkatuff, Oinkologne",
+   "wild": "Luxray, Boltund, Klang, Floette, Granbull, Tinkatuff, Applin, Bounsweet",
    "routes": [
-    741
+    593,
+    612,
+    741,
+    801
    ],
    "town": 750
   },
@@ -255,15 +232,15 @@
    ],
    "name": "The Looking-Glass Wood",
    "crossings": [
-    "11->12 (Mirror Mere -> Antumbra Threshold)"
+    "11->12 (The Glass Road: The Looking-Glass Wood)"
    ],
-   "biome": "lakeside woods whose reflections disagree; rivers that run uphill near the gate",
+   "biome": "Reflections that disagree, rivers running uphill near Mirror Mere (gate A).",
    "landmarks": [
     "Mirror Mere",
     "Glassmere's doubled houses"
    ],
    "field": "none (Threshold INVERSE)",
-   "wild": "Grass/Bug/Fairy x Psychic/Ghost: Kirlia, Flittle, Rabsca, Ribombee, Shiinotic",
+   "wild": "Kirlia, Flittle, Rabsca, Ribombee",
    "routes": [
     742,
     743,
@@ -279,46 +256,20 @@
    ],
    "name": "The Obsidian Barrows",
    "crossings": [
-    "12->13 (R25)",
-    "13->14 (Grave Glass -> R28)",
-    "14->15 (R29 east gate -> R30)"
+    "12->13 (The Grave Road: The Obsidian Barrows)"
    ],
-   "biome": "Ossaria's old necropolis where obsidian tomb-mirrors (glass from the Cinderglass) became gates to Antumbra; shadows fall upward; the inverted desert hangs in the sky",
+   "biome": "A necropolis of obsidian tomb-mirrors that became gates (the Grave Glass, gate B); shadows fall upward.",
    "landmarks": [
     "the Grave Glass",
     "mirrored tomb facades",
     "Vigil's House of Echoes"
    ],
    "field": "INVERSE near the gates",
-   "wild": "Ghost/Psychic/Dark x Ground/Rock: Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Misdreavus, Houndstone",
+   "wild": "Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Houndstone",
    "routes": [
     760
    ],
    "town": 770
-  },
-  {
-   "code": "L",
-   "kingdoms": [
-    "Zenith",
-    "Nadir"
-   ],
-   "name": "The Hanging Stair",
-   "crossings": [
-    "15->16 (R31, R32)"
-   ],
-   "biome": "the vertical cliff beneath Zenith: foundations, cable lifts, outflow pipes and Nadir's shanty scaffolds meeting halfway; the drowned coast below",
-   "landmarks": [
-    "Midstair's lift towers",
-    "the outflow falls",
-    "rope-bridge streets"
-   ],
-   "field": "R31 SCRAPYARD; R32 WATER_SURFACE",
-   "wild": "Electric/Steel/Flying x Poison/Dark/Fighting: Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty, Kilowattrel, Corviknight",
-   "routes": [
-    820,
-    821
-   ],
-   "town": 830
   },
   {
    "code": "J",
@@ -328,16 +279,16 @@
    ],
    "name": "The Thornwar Marches",
    "crossings": [
-    "17->18 (R36)"
+    "17->18 (The Truce Road: The Thornwar Marches)"
    ],
-   "biome": "fire-scarred oldwood: ash-grey giant trees with ember-glowing leaves that burn without dying, charcoal-burners' clearings, dragon-scorched Thornwar forts, fire-lily meadows",
+   "biome": "Ash woods and burnt forest: ash-grey giants with ember leaves that burn without dying, charcoal clearings, Thornwar forts.",
    "landmarks": [
     "Thornwatch truce bell",
     "burnt Thornwar fort",
     "ember-leaf canopy"
    ],
    "field": "MOUNTAIN",
-   "wild": "Grass/Bug/Fairy x Fire/Dragon: Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon, Fraxure, Drampa",
+   "wild": "Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon",
    "routes": [
     861
    ],
@@ -346,24 +297,72 @@
   {
    "code": "K",
    "kingdoms": [
-    "Ashkaar",
+    "Elowen",
     "Crownhaven"
    ],
    "name": "The Pilgrim Pass",
    "crossings": [
-    "18->Festival (R37)"
+    "18->19 (The Pilgrim Road: The Pilgrim Pass)"
    ],
-   "biome": "the Wyrmrest pass climbing the Crown ring: shrines of all eighteen types, pilgrim camps, Ashkaar toll-forts",
+   "biome": "Eighteen roadside shrines from the Dominion's border to the Crownwall's gap; pilgrim camps of every kingdom.",
    "landmarks": [
     "the Eighteen Shrines",
     "Ashkaar toll-gate"
    ],
    "field": "MOUNTAIN",
-   "wild": "mixed high-level",
+   "wild": "mixed, high level",
    "routes": [
     880
    ],
    "town": 890
+  },
+  {
+   "code": "L",
+   "kingdoms": [
+    "Zenith",
+    "Nadir"
+   ],
+   "name": "The Hanging Stair",
+   "crossings": [
+    "15->16 (The Drowned Road: The Hanging Stair, The Drownings)"
+   ],
+   "biome": "The cliff under the plateau's south rim: cable lifts, outflow falls, shanty scaffolds, the drowned coast.",
+   "landmarks": [
+    "Midstair's lift towers",
+    "the outflow falls",
+    "rope-bridge streets"
+   ],
+   "field": "R31 SCRAPYARD; R32 WATER_SURFACE",
+   "wild": "Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty",
+   "routes": [
+    820,
+    821
+   ],
+   "town": 830
+  },
+  {
+   "code": "M",
+   "kingdoms": [
+    "Ashkaar",
+    "Ossaria"
+   ],
+   "name": "The Cinderglass Barrens",
+   "crossings": [
+    "7->8 (The Iron Road: The Cinderglass Barrens)"
+   ],
+   "biome": "Volcanic ash desert: obsidian dunes, a petrified ash forest, lava tubes, glass-storms.",
+   "landmarks": [
+    "Glasswake's furnace chimneys",
+    "the Petrified Ashwood",
+    "glass-storm dunes"
+   ],
+   "field": "ASHEN_WASTE (Barrens), DESERT (Ashwood edges)",
+   "wild": "Carkol, Magcargo, Torkoal, Vibrava, Gible, Sudowoodo, Onix, Rhyhorn, Golett",
+   "routes": [
+    662,
+    663
+   ],
+   "town": 670
   }
  ],
  "notes": [
@@ -377,7 +376,8 @@
   "branch_only maps exist only on one story branch; ruin_route maps only on the secret Ruin Route (IDs 960-979).",
   "Outline city exteriors do not list doors yet; links C<id>_PC / C<id>_MART are reserved for them.",
   "REV6: visual target = Pokemon Rejuvenation overworld (tall timber buildings, layered foliage, textured paths, weather/lighting overlays); tileset_kit names are ROLES to map onto Rejuvenation/Reborn/Desolation tilesets (credit artists in CREDITS.md). No Gen 3 look. 'tileset' is the stock placeholder used for prototypes; final art uses 'tileset_kit' (see WORLD.md section 8). 'border' says what forms the map edge (never generic tree walls). 'districts' lists a city's linked district maps. 'visual_brief' = landmarks, silhouette, materials, palette, set pieces.",
-  "REV13/14 (cartographer): every road is named (design/PLACE_NAMES.md) and planned as several large maps (design/ROUTES.yaml, WORLD.md section 11). `size` is the target; `size_was` the old size. `route_plan` holds the landmark, fill list, exits and secret. Saltmere (140) is Gym 1 and Briarwick (120) Gym 2: their maps keep their IDs, `segment` is authoritative. metadata.town_map_pos is set for every map (pbs/town_map.txt, mapgen/data/town_map_positions.json)."
+  "REV13/14 (cartographer): every road is named (design/PLACE_NAMES.md) and planned as several large maps (design/ROUTES.yaml, WORLD.md section 11). `size` is the target; `size_was` the old size. `route_plan` holds the landmark, fill list, exits and secret. Saltmere (140) is Gym 1 and Briarwick (120) Gym 2: their maps keep their IDs, `segment` is authoritative. metadata.town_map_pos is set for every map (pbs/town_map.txt, mapgen/data/town_map_positions.json).",
+  "GEOGRAPHY v2 (cartographer, Revision 18): Ossaria north, Isenmar west, Ashkaar east, Zenith (Nadir beneath it) south, Elowen in the middle touching every kingdom, Crownhaven at its heart. Kingdom fields, borderland records and members come from tools/worldmap/world_data.py BORDERLANDS; the war theatre (920-927) is on land in Ossaria. New Elowen transit maps: 594 Wallshadow Row, 595 Coppice Ride, 602 Candle Down, 603 the Highwold, 634 Wormwood Lea, 756 Kingsmead (the Crown Road and its spokes)."
  ],
  "id_scheme": {
   "100-479": "cities: block = 100 + 20*city_index (Ferrow's Landing=0, Briarwick=1 ... Wyrmrest=18); +0 exterior, +1 PC, +2 Mart, +3..+9 interiors, +10..+19 gym",
@@ -4127,8 +4127,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    },
    "layout": "Central district of a multi-map metropolis (Castelia-scale). White-stone boulevards between glass towers whose facades form the map's walls; central Prism fountain plaza; tram line E-W. Circuit Gym W. Exits: N-W to Council Ward (194), N to Skyport Terrace (196), E-N to Spire District (195), E-S down the stairs to the Lowlight (181), S gate viaduct to the Icefall Locks.",
@@ -4365,8 +4365,8 @@
     "note": "pre-Shatter version; post-Shatter (Act II) the street is replaced by Bleed map 608 via story switch",
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    },
    "connections": [
@@ -4443,8 +4443,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    },
    "connections": [
@@ -4550,8 +4550,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4615,8 +4615,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4695,8 +4695,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4749,8 +4749,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4794,8 +4794,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4839,8 +4839,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4884,8 +4884,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -4938,8 +4938,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5041,8 +5041,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5065,8 +5065,8 @@
     "dark": true,
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    },
    "connections": [
@@ -5198,8 +5198,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5303,8 +5303,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5396,8 +5396,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5464,8 +5464,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5534,8 +5534,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5604,8 +5604,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -5648,8 +5648,8 @@
     "story_gated": "Act IV",
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    },
    "tileset_kit": "G45_GRAND_INTERIOR",
@@ -5683,8 +5683,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    },
    "districts": [
@@ -5734,8 +5734,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    },
    "connections": [
@@ -5823,8 +5823,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -5854,8 +5854,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -5885,8 +5885,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -5916,8 +5916,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -5949,8 +5949,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -5980,8 +5980,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6011,8 +6011,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6042,8 +6042,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6073,8 +6073,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6104,8 +6104,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6135,8 +6135,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6166,8 +6166,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6197,8 +6197,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     4
+     17,
+     3
     ]
    }
   },
@@ -6230,8 +6230,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    },
    "tileset_kit": "G5_UNDERCITY",
@@ -6255,8 +6255,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    },
    "connections": [
@@ -6344,8 +6344,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6372,8 +6372,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6403,8 +6403,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6434,8 +6434,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6465,8 +6465,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6496,8 +6496,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     9
+     20,
+     13
     ]
    }
   },
@@ -6530,7 +6530,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    },
    "districts": [
@@ -6591,7 +6591,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    },
    "connections": [
@@ -6680,7 +6680,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6711,7 +6711,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6742,7 +6742,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6773,7 +6773,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6806,7 +6806,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6837,7 +6837,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6868,7 +6868,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6899,7 +6899,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6930,7 +6930,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6961,7 +6961,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -6992,7 +6992,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -7023,7 +7023,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -7054,7 +7054,7 @@
     "town_map_pos": [
      0,
      24,
-     10
+     8
     ]
    }
   },
@@ -7086,8 +7086,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    },
    "tileset_kit": "G5_UNDERCITY",
@@ -7111,8 +7111,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    },
    "connections": [
@@ -7200,8 +7200,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7228,8 +7228,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7259,8 +7259,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7290,8 +7290,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7321,8 +7321,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7352,8 +7352,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -7383,8 +7383,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     11
+     16,
+     13
     ]
    }
   },
@@ -8594,8 +8594,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    },
    "districts": [
@@ -8641,8 +8641,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    },
    "connections": [
@@ -8730,8 +8730,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8761,8 +8761,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8792,8 +8792,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8823,8 +8823,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8854,8 +8854,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8885,8 +8885,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8916,8 +8916,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8947,8 +8947,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -8978,8 +8978,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -9589,7 +9589,7 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    },
@@ -9614,7 +9614,7 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    },
@@ -9703,7 +9703,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -9731,7 +9731,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -9762,7 +9762,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -9793,7 +9793,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -9824,7 +9824,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -9855,7 +9855,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
+     21,
      2
     ]
    }
@@ -10262,8 +10262,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    },
    "tileset_kit": "G5_METROPOLIS",
@@ -10303,8 +10303,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    },
    "connections": [
@@ -10392,8 +10392,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10420,8 +10420,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10451,8 +10451,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10482,8 +10482,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10513,8 +10513,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10544,8 +10544,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     2
+     20,
+     15
     ]
    }
   },
@@ -10577,8 +10577,8 @@
     "outdoor": false,
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    },
    "districts": [
@@ -10626,8 +10626,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    },
    "connections": [
@@ -10715,8 +10715,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10746,8 +10746,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10777,8 +10777,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10808,8 +10808,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10839,8 +10839,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10872,8 +10872,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10903,8 +10903,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10934,8 +10934,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10965,8 +10965,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -10996,8 +10996,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -11027,8 +11027,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     1
+     16,
+     18
     ]
    }
   },
@@ -11060,7 +11060,7 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    },
@@ -11101,7 +11101,7 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    },
@@ -11190,7 +11190,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11218,7 +11218,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11249,7 +11249,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11280,7 +11280,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11311,7 +11311,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11342,7 +11342,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11373,7 +11373,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      17
     ]
    }
@@ -11406,8 +11406,8 @@
     "outdoor": true,
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    },
    "tileset_kit": "G4_VOLCANIC",
@@ -11441,8 +11441,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    },
    "connections": [
@@ -11530,8 +11530,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11561,8 +11561,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11592,8 +11592,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11623,8 +11623,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11654,8 +11654,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11685,8 +11685,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     15
+     25,
+     13
     ]
    }
   },
@@ -11750,8 +11750,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11777,8 +11777,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11808,8 +11808,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11839,8 +11839,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11870,8 +11870,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11901,8 +11901,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11932,8 +11932,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11965,8 +11965,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -11996,8 +11996,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12027,8 +12027,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12054,8 +12054,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12097,8 +12097,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12124,8 +12124,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12151,8 +12151,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12178,8 +12178,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12225,8 +12225,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12256,8 +12256,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12287,8 +12287,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12318,8 +12318,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -12346,8 +12346,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   },
@@ -16455,7 +16455,8 @@
      "change": "Isenmar levies drawn from the longhouses; Elowen side stays neutral; refugees at the inn"
     }
    ],
-   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder",
+   "borderland": "The Rimewood"
   },
   {
    "id": 571,
@@ -16519,7 +16520,8 @@
     }
    ],
    "tileset_kit": "G45_INTERIOR",
-   "border": "building walls (interior)"
+   "border": "building walls (interior)",
+   "borderland": "The Rimewood"
   },
   {
    "id": 572,
@@ -17260,7 +17262,7 @@
    "id": 581,
    "name": "The Icefall Locks",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "route",
    "size": [
     72,
@@ -17428,9 +17430,9 @@
     "road_name": "The Lock Road",
     "role": "main",
     "landmark": "The Ice Elevator and the fenced Meridian Extraction Lattice No. 4.",
-    "origin": "The frozen falls of the escarpment, cut into steps and locks by Zenith's engineers.",
+    "origin": "Where the Ebb falls off the Crownland downs into Isenmar's ice: frozen falls cut into steps and locks by Zenith's engineers, to feed the Lattice.",
     "wild": "Magnemite, Pawmi, Wattrel, Tadbulb, Bergmite, Snover, Plusle, Minun, Togedemaru.",
-    "exits": "W: Brassfall. N: the Arc-Lamp Mile.",
+    "exits": "W: Brassfall. E (top of the falls): Coppice Ride.",
     "fill": [
      "switchbacks up the frozen falls",
      "brass sluices and frozen turbine wheels",
@@ -17441,26 +17443,26 @@
     "secret": "Behind the third lock gate, an ice cave with a maintenance ledger.",
     "town_map": [
      [
-      9,
+      8,
       7
      ],
      [
       9,
-      6
+      8
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     9,
+     8,
      7
     ]
    }
   },
   {
    "id": 582,
-   "name": "Lumen South Gate",
+   "name": "Lumen West Gate",
    "act": 1,
    "kingdom": "Zenith",
    "kind": "interior",
@@ -17507,8 +17509,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     6
+     14,
+     14
     ]
    }
   },
@@ -17516,7 +17518,7 @@
    "id": 584,
    "name": "Voltaic Sluiceworks",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "dungeon",
    "size": [
     40,
@@ -17633,7 +17635,7 @@
    "id": 585,
    "name": "Sluiceworks Turbine Hall",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "dungeon",
    "size": [
     30,
@@ -17772,7 +17774,7 @@
    "id": 590,
    "name": "Brassfall",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "town",
    "size": [
     40,
@@ -17796,7 +17798,7 @@
     "heal_point_map": 591,
     "town_map_pos": [
      0,
-     8,
+     7,
      7
     ]
    },
@@ -17807,7 +17809,7 @@
    "id": 591,
    "name": "Brassfall Pok\u00e9mon Center",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "interior",
    "size": [
     15,
@@ -17821,7 +17823,7 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     8,
+     7,
      7
     ]
    },
@@ -17865,13 +17867,14 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Icefall Locks"
   },
   {
    "id": 592,
    "name": "The Icecutters' Haul",
    "act": 1,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Elowen)",
    "kind": "route",
    "size": [
     110,
@@ -17898,8 +17901,8 @@
     "road_name": "The Lock Road",
     "role": "main",
     "landmark": "Sawyer's Cross: where the Haul meets the forest track from Snowbriar to the Frostfang Pass (gated until Act III).",
-    "origin": "The sled road the ice-cutters' union drags its blocks down, from the falls to the Ebbmouth boats.",
-    "wild": "Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel.",
+    "origin": "The sled road the ice-cutters' union drags its blocks down, from the locks to the Ebbmouth boats.",
+    "wild": "Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel, Deerling.",
     "exits": "W: the Reedholms. E: Brassfall. S gate: Snowbriar (Act III). N gate: Frostfang Pass (Act III).",
     "fill": [
      "ice-sled ruts and block stacks",
@@ -17912,10 +17915,6 @@
     "town_map": [
      [
       6,
-      7
-     ],
-     [
-      7,
       7
      ]
     ]
@@ -17934,7 +17933,7 @@
    "id": 593,
    "name": "The Arc-Lamp Mile",
    "act": 1,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Zenith/Elowen)",
    "kind": "route",
    "size": [
     110,
@@ -17960,12 +17959,13 @@
     "road": 4,
     "road_name": "The Lock Road",
     "role": "main",
-    "landmark": "One hundred numbered arc lamps, and Lumen's South Gate at the end of them.",
+    "landmark": "One hundred numbered arc lamps running out of Lumen into the Crownland orchards, and Lumen's West Gate at the end of them.",
     "origin": "The first road in Velmora lit by electric arc lamps. Zenith counts its age from the night they were switched on.",
-    "wild": "Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite. Night: Joltik, Voltorb.",
-    "exits": "SW: the Icefall Locks. NE: Lumen South Gate.",
+    "wild": "Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite, Bounsweet. Night: Joltik, Voltorb.",
+    "exits": "NW: Wallshadow Row (the Crown Road). SE: Lumen West Gate.",
     "fill": [
      "paved boulevard with lamp numbers",
+     "orchards with clockwork pickers (borderland G)",
      "a tram stop without a tram",
      "advertising hoardings",
      "the lamplighters' depot",
@@ -17974,12 +17974,139 @@
     "secret": "Lamp 47 has been dark for ten years; the reason is under its base plate.",
     "town_map": [
      [
-      10,
-      6
+      14,
+      14
      ],
      [
+      15,
+      15
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     14,
+     14
+    ]
+   },
+   "added_by": "cartographer (SPINE Rev 13)",
+   "borderland": "The Wired Wood"
+  },
+  {
+   "id": 594,
+   "name": "Wallshadow Row",
+   "act": 1,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    150,
+    80
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 3,
+   "detail": "planned",
+   "connections_outline": [
+    "W junction: Coppice Ride (to Isenmar) and Prism Falls (to Verdance). N: Kingsmead. S junction: the Arc-Lamp Mile (to Lumen) and the Long Drop (Nadir). E: Candle Down."
+   ],
+   "key_features": [
+    "The Crownwall's white cliffs over the hedgerows, and the Southgate shrine where the Crown Road meets the road to Lumen.",
+    "the Crown Road: a paved ring road with eighteen milestones round the Crownwall",
+    "tithe barns",
+    "hedge-lined fields in the wall's shadow line"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 4,
+    "road_name": "The Lock Road",
+    "role": "main",
+    "landmark": "The Crownwall's white cliffs over the hedgerows, and the Southgate shrine where the Crown Road meets the road to Lumen.",
+    "origin": "The farms in the Crownwall's shadow: sun for half the day, and the Accord's tithe for all of it.",
+    "wild": "Lillipup, Wooloo, Smoliv, Fidough, Flabebe, Mareep. Night: Hoothoot, Spinarak, Morelull.",
+    "exits": "W junction: Coppice Ride (to Isenmar) and Prism Falls (to Verdance). N: Kingsmead. S junction: the Arc-Lamp Mile (to Lumen) and the Long Drop (Nadir). E: Candle Down.",
+    "fill": [
+     "the Crown Road: a paved ring road with eighteen milestones round the Crownwall",
+     "tithe barns",
+     "hedge-lined fields in the wall's shadow line",
+     "the Southgate shrine at the south junction",
+     "the west junction's inn and signpost to four kingdoms",
+     "6 trainers"
+    ],
+    "secret": "A shepherd's track up the Crownwall's foot to a cave the Accord bricked up; the bricks are loose.",
+    "town_map": [
+     [
       11,
-      6
+      9
+     ],
+     [
+      12,
+      11
+     ],
+     [
+      14,
+      12
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     11,
+     9
+    ]
+   }
+  },
+  {
+   "id": 595,
+   "name": "Coppice Ride",
+   "act": 1,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    110,
+    72
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 3,
+   "detail": "planned",
+   "connections_outline": [
+    "W: the Icefall Locks (borderland B). E: Wallshadow Row, the Crown Road's west junction."
+   ],
+   "key_features": [
+    "The coppice stools in their numbered panels, and the Kingsferry where the ride crosses the Ebb.",
+    "hazel coppice panels in seven ages (a different encounter slice in the tallest)",
+    "the Kingsferry punt",
+    "a woodward's hut and charcoal clamp"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 4,
+    "road_name": "The Lock Road",
+    "role": "main",
+    "landmark": "The coppice stools in their numbered panels, and the Kingsferry where the ride crosses the Ebb.",
+    "origin": "The woodwards' ride through the hazel coppices of the Crownlands, cut back every seventh year since the Accord.",
+    "wild": "Skwovet, Deerling, Smoliv, Combee, Pikipek, Nymble, Petilil.",
+    "exits": "W: the Icefall Locks (borderland B). E: Wallshadow Row, the Crown Road's west junction.",
+    "fill": [
+     "hazel coppice panels in seven ages (a different encounter slice in the tallest)",
+     "the Kingsferry punt",
+     "a woodward's hut and charcoal clamp",
+     "a ride-side shrine where the first view of the Crownwall opens",
+     "5 trainers"
+    ],
+    "secret": "A coppice panel that has not been cut since AF 0: inside it, a ring of old stools and a Miracle Seed.",
+    "town_map": [
+     [
+      10,
+      8
      ]
     ]
    },
@@ -17987,16 +18114,15 @@
     "town_map_pos": [
      0,
      10,
-     6
+     8
     ]
-   },
-   "added_by": "cartographer (SPINE Rev 13)"
+   }
   },
   {
    "id": 600,
    "name": "The Brass Dunes",
    "act": 2,
-   "kingdom": "Borderland (Zenith/Ossaria)",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "route",
    "size": [
     130,
@@ -18024,19 +18150,15 @@
     "road": 5,
     "road_name": "The Brass Road",
     "role": "main",
-    "landmark": "The broken viaduct and the half-buried engine 'Progress'.",
+    "landmark": "The broken viaduct where the Mainline ran into the sand, and the half-buried engine 'Progress'.",
     "origin": "Kept name: dunes the colour of the locomotives buried in them.",
-    "wild": "Sandshrew, Silicobra, Hippopotas, Phanpy, Electrike, Orthworm.",
+    "wild": "Sandshrew, Silicobra, Hippopotas, Phanpy, Electrike, Orthworm, Cacnea, Skwovet.",
     "exits": "",
     "fill": [],
     "secret": "A carriage door under the sand opens into a buried dining car.",
     "town_map": [
      [
-      15,
-      5
-     ],
-     [
-      16,
+      14,
       5
      ]
     ]
@@ -18044,7 +18166,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     15,
+     14,
      5
     ]
    }
@@ -18088,11 +18210,7 @@
     "secret": "Count the ribs: one is missing, and its socket is a stair.",
     "town_map": [
      [
-      18,
-      4
-     ],
-     [
-      19,
+      16,
       4
      ]
     ]
@@ -18100,8 +18218,132 @@
    "metadata": {
     "town_map_pos": [
      0,
-     18,
+     16,
      4
+    ]
+   }
+  },
+  {
+   "id": 602,
+   "name": "Candle Down",
+   "act": 2,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    110,
+    110
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "SW: Wallshadow Row (the south junction). SE: the Meridian Mainline and Verdigris. E junction: the Ironway (to Ashkaar) and the Pilgrim Pass. N: the Highwold."
+   ],
+   "key_features": [
+    "The candle-cairns, and the view into the Crownwall's one gap.",
+    "the Crown Road over open downs",
+    "candle-cairns (a cairn errand)",
+    "the east junction's coaching inn"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 5,
+    "road_name": "The Brass Road",
+    "role": "main",
+    "landmark": "The candle-cairns, and the view into the Crownwall's one gap.",
+    "origin": "The downs east of the Crown, where pilgrims light a candle on each cairn on their way to the Pilgrim's Rest.",
+    "wild": "Skiddo, Deerling, Swablu, Ponyta, Cottonee, Sentret. Night: Volbeat, Illumise, Litwick.",
+    "exits": "SW: Wallshadow Row (the south junction). SE: the Meridian Mainline and Verdigris. E junction: the Ironway (to Ashkaar) and the Pilgrim Pass. N: the Highwold.",
+    "fill": [
+     "the Crown Road over open downs",
+     "candle-cairns (a cairn errand)",
+     "the east junction's coaching inn",
+     "chalk hill-figure of a crown",
+     "5 trainers"
+    ],
+    "secret": "One cairn's candle never goes out; under it, a stair into the Crownwall's foot.",
+    "town_map": [
+     [
+      16,
+      11
+     ],
+     [
+      17,
+      9
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     16,
+     11
+    ]
+   }
+  },
+  {
+   "id": 603,
+   "name": "The Highwold",
+   "act": 2,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    130,
+    80
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 4,
+   "detail": "outline",
+   "connections_outline": [
+    "SE: Candle Down. N junction: the Brass Dunes (to Ossaria). W: Kingsmead."
+   ],
+   "key_features": [
+    "The Wold Stones, and the Crownwall's north face white in the sun.",
+    "the Crown Road along the wold top",
+    "sheepfolds and a dew-pond",
+    "the Wold Stones"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 5,
+    "road_name": "The Brass Road",
+    "role": "main",
+    "landmark": "The Wold Stones, and the Crownwall's north face white in the sun.",
+    "origin": "The high wold north of the Crown: sheep, skylarks and the one road in Elowen that runs to the desert.",
+    "wild": "Wooloo, Mareep, Skiddo, Rookidee, Hoppip, Bunnelby, Trapinch (on the north slope).",
+    "exits": "SE: Candle Down. N junction: the Brass Dunes (to Ossaria). W: Kingsmead.",
+    "fill": [
+     "the Crown Road along the wold top",
+     "sheepfolds and a dew-pond",
+     "the Wold Stones",
+     "the north junction's caravan yard (camels and ox-carts side by side)",
+     "5 trainers"
+    ],
+    "secret": "A dew-pond that never dries, even in the drought years; something drinks from it at night.",
+    "town_map": [
+     [
+      16,
+      7
+     ],
+     [
+      14,
+      6
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     16,
+     7
     ]
    }
   },
@@ -18109,7 +18351,7 @@
    "id": 604,
    "name": "Static Tunnels",
    "act": 2,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "dungeon",
    "size": [
     44,
@@ -18131,16 +18373,17 @@
    "metadata": {
     "town_map_pos": [
      0,
-     14,
-     6
+     15,
+     4
     ]
-   }
+   },
+   "borderland": "The Brass Dunes"
   },
   {
    "id": 605,
    "name": "Static Tunnels Depths",
    "act": 2,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "dungeon",
    "size": [
     36,
@@ -18162,10 +18405,11 @@
    "metadata": {
     "town_map_pos": [
      0,
-     14,
-     6
+     15,
+     4
     ]
-   }
+   },
+   "borderland": "The Brass Dunes"
   },
   {
    "id": 608,
@@ -18194,8 +18438,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     5
+     16,
+     16
     ]
    }
   },
@@ -18203,7 +18447,7 @@
    "id": 610,
    "name": "Copperdune",
    "act": 2,
-   "kingdom": "Borderland (Zenith/Ossaria)",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "town",
    "size": [
     40,
@@ -18227,8 +18471,8 @@
     "heal_point_map": 611,
     "town_map_pos": [
      0,
-     17,
-     4
+     15,
+     5
     ]
    },
    "tileset_kit": "BL_BRASS_DUNES",
@@ -18238,7 +18482,7 @@
    "id": 611,
    "name": "Copperdune Pok\u00e9mon Center",
    "act": 2,
-   "kingdom": "Borderland (Zenith/Ossaria)",
+   "kingdom": "Borderland (Elowen/Ossaria)",
    "kind": "interior",
    "size": [
     15,
@@ -18252,8 +18496,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     17,
-     4
+     15,
+     5
     ]
    },
    "connections": [
@@ -18296,13 +18540,14 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Brass Dunes"
   },
   {
    "id": 612,
    "name": "The Meridian Mainline",
    "act": 2,
-   "kingdom": "Zenith",
+   "kingdom": "Borderland (Zenith/Elowen)",
    "kind": "route",
    "size": [
     130,
@@ -18325,31 +18570,32 @@
     "road": 5,
     "road_name": "The Brass Road",
     "role": "main",
-    "landmark": "The signal gantries and the mouth of the Static Tunnels.",
+    "landmark": "The signal gantries, and the cutting where the line drops off the plateau into the Crownlands.",
     "origin": "Zenith's first railway. You walk the service road beside the track.",
-    "wild": "Electric and Steel: Magnemite, Klink, Varoom, Rufflet.",
-    "exits": "",
+    "wild": "Electric and Steel with orchard edges: Magnemite, Klink, Varoom, Rufflet, Applin.",
+    "exits": "S: Lumen. N: Candle Down (the Crown Road).",
     "fill": [],
     "secret": "A signal box whose levers reroute a handcar to a siding.",
     "town_map": [
      [
-      13,
-      5
+      17,
+      15
      ],
      [
-      14,
-      5
+      17,
+      13
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     5
+     17,
+     15
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "borderland": "The Wired Wood"
   },
   {
    "id": 613,
@@ -18386,20 +18632,16 @@
     "secret": "A mirage well that is real at noon only.",
     "town_map": [
      [
-      20,
-      4
-     ],
-     [
-      21,
-      4
+      16,
+      3
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     20,
-     4
+     16,
+     3
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -18443,20 +18685,16 @@
     "secret": "An unlabelled dig pit with a complete skeleton nobody has reported.",
     "town_map": [
      [
-      22,
-      5
-     ],
-     [
-      22,
-      6
+      17,
+      4
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     5
+     17,
+     4
     ]
    }
   },
@@ -18464,7 +18702,7 @@
    "id": 621,
    "name": "The Leach Canyons",
    "act": 2,
-   "kingdom": "Borderland (Ossaria/Nadir)",
+   "kingdom": "Borderland (Ossaria/Elowen)",
    "kind": "route",
    "size": [
     100,
@@ -18492,24 +18730,24 @@
     "road": 6,
     "road_name": "The Leach Road",
     "role": "main",
-    "landmark": "The blue canals and the bone-char filter towers.",
-    "origin": "Kept name: the canyons the River Leach cut, glowing blue with what Nadir puts in it.",
-    "wild": "Ekans, Gulpin, Shroodle, Maschiff, Skorupi, Krokorok, Glimmet.",
+    "landmark": "Gallery forest in the gorge bottoms and the bone-char filter towers above.",
+    "origin": "Kept name: the red gorges the River Leach cut on its way out of the desert; the forest climbs in along the water.",
+    "wild": "Sandile, Trapinch, Maractus, Skwovet, Deerling, Bramblin, Gligar, Ekans.",
     "exits": "",
     "fill": [],
     "secret": "A dry side canyon with a clean spring that neither side knows about.",
     "town_map": [
      [
-      20,
-      8
+      19,
+      5
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     20,
-     8
+     19,
+     5
     ]
    }
   },
@@ -18539,8 +18777,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     23,
-     6
+     16,
+     5
     ]
    }
   },
@@ -18571,8 +18809,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     23,
-     6
+     16,
+     5
     ]
    }
   },
@@ -18603,8 +18841,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     5
+     18,
+     3
     ]
    }
   },
@@ -18612,7 +18850,7 @@
    "id": 630,
    "name": "Charwell",
    "act": 2,
-   "kingdom": "Borderland (Ossaria/Nadir)",
+   "kingdom": "Borderland (Ossaria/Elowen)",
    "kind": "town",
    "size": [
     40,
@@ -18637,7 +18875,7 @@
     "town_map_pos": [
      0,
      19,
-     8
+     6
     ]
    },
    "tileset_kit": "BL_LEACH_CANYONS",
@@ -18647,7 +18885,7 @@
    "id": 631,
    "name": "Charwell Pok\u00e9mon Center",
    "act": 2,
-   "kingdom": "Borderland (Ossaria/Nadir)",
+   "kingdom": "Borderland (Ossaria/Elowen)",
    "kind": "interior",
    "size": [
     15,
@@ -18662,7 +18900,7 @@
     "town_map_pos": [
      0,
      19,
-     8
+     6
     ]
    },
    "connections": [
@@ -18705,7 +18943,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Leach Canyons"
   },
   {
    "id": 632,
@@ -18742,20 +18981,16 @@
     "secret": "At dusk the stones' shadows point at one buried door.",
     "town_map": [
      [
-      21,
-      6
-     ],
-     [
-      21,
-      7
+      18,
+      4
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     6
+     18,
+     4
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -18787,31 +19022,90 @@
     "road": 6,
     "road_name": "The Leach Road",
     "role": "main",
-    "landmark": "The blue waterfall and the ladder-town clinging beside it.",
-    "origin": "Where the Leach drops off the canyon lip into the marsh. Nadir named it.",
+    "landmark": "The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it.",
+    "origin": "Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it.",
     "wild": "Grimer, Croagunk, Trubbish, Stunky, Toxel.",
     "exits": "",
     "fill": [],
     "secret": "A ledge behind the fall where the sump-folk leave their dead's lanterns.",
     "town_map": [
      [
-      18,
-      8
-     ],
-     [
-      17,
-      8
+      20,
+      12
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     18,
-     8
+     20,
+     12
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
+  },
+  {
+   "id": 634,
+   "name": "Wormwood Lea",
+   "act": 2,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    90,
+    130
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 5,
+   "detail": "outline",
+   "connections_outline": [
+    "N: Charwell. S: the Gutterfall. Crossings: the Ironway at the ford, the Pilgrim Pass at the south bridge."
+   ],
+   "key_features": [
+    "The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses.",
+    "the river meadows in strips",
+    "the wormwood stills (a bitters errand)",
+    "the Ironway ford"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 6,
+    "road_name": "The Leach Road",
+    "role": "main",
+    "landmark": "The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses.",
+    "origin": "Bitter meadows along the Leach east of the Crown. The river is still clean here, and the wormwood keeps the leeches off.",
+    "wild": "Marill, Psyduck, Ducklett, Skiddo, Flabebe, Venonat, Wooper. Fishing: Basculin, Barboach.",
+    "exits": "N: Charwell. S: the Gutterfall. Crossings: the Ironway at the ford, the Pilgrim Pass at the south bridge.",
+    "fill": [
+     "the river meadows in strips",
+     "the wormwood stills (a bitters errand)",
+     "the Ironway ford",
+     "eel-traps",
+     "the south bridge with its first pilgrim shrine",
+     "5 trainers"
+    ],
+    "secret": "Where the Leach first turns blue, a pipe comes out of the bank. It is warm.",
+    "town_map": [
+     [
+      20,
+      8
+     ],
+     [
+      20,
+      10
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     20,
+     8
+    ]
+   }
   },
   {
    "id": 640,
@@ -18852,20 +19146,16 @@
     "secret": "A sunk plank path that only shows when the marsh gas burns off.",
     "town_map": [
      [
-      17,
-      10
-     ],
-     [
-      18,
-      10
+      21,
+      13
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     10
+     21,
+     13
     ]
    }
   },
@@ -18873,7 +19163,7 @@
    "id": 641,
    "name": "Lake Sallow",
    "act": 2,
-   "kingdom": "Borderland (Nadir/Ashkaar)",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
    "kind": "route",
    "size": [
     120,
@@ -18901,19 +19191,19 @@
     "road": 7,
     "road_name": "The Sulfur Road",
     "role": "main",
-    "landmark": "The yellow lake, its geysers, and Lantern Isle steaming in the middle.",
+    "landmark": "The yellow lake, its geysers, the scorched woods round its shore, and Lantern Isle steaming in the middle.",
     "origin": "Named for its colour. The whole lake is one hot spring.",
-    "wild": "Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar.",
+    "wild": "Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar, Bramblin, Fletchinder.",
     "exits": "",
     "fill": [],
     "secret": "A geyser that lifts a surfer onto the cliff shelf above the lake.",
     "town_map": [
      [
-      19,
+      22,
       10
      ],
      [
-      20,
+      23,
       10
      ]
     ]
@@ -18921,7 +19211,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
+     22,
      10
     ]
    }
@@ -18952,8 +19242,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     10
+     22,
+     13
     ]
    }
   },
@@ -18983,8 +19273,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     10
+     22,
+     13
     ]
    }
   },
@@ -19015,8 +19305,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     9
+     19,
+     12
     ]
    }
   },
@@ -19024,7 +19314,7 @@
    "id": 650,
    "name": "Scaldwater",
    "act": 2,
-   "kingdom": "Borderland (Nadir/Ashkaar)",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
    "kind": "town",
    "size": [
     40,
@@ -19048,8 +19338,8 @@
     "heal_point_map": 651,
     "town_map_pos": [
      0,
-     21,
-     10
+     23,
+     9
     ]
    },
    "visual_brief": {
@@ -19073,7 +19363,7 @@
    "id": 651,
    "name": "Scaldwater Pok\u00e9mon Center",
    "act": 2,
-   "kingdom": "Borderland (Nadir/Ashkaar)",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
    "kind": "interior",
    "size": [
     15,
@@ -19087,8 +19377,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     21,
-     10
+     23,
+     9
     ]
    },
    "connections": [
@@ -19131,7 +19421,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Sulfur Reach"
   },
   {
    "id": 652,
@@ -19168,20 +19459,16 @@
     "secret": "One pyre is cold. Lighting it calls the person it was lit for.",
     "town_map": [
      [
-      22,
-      10
-     ],
-     [
-      23,
-      10
+      24,
+      9
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     10
+     24,
+     9
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -19213,8 +19500,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     20,
-     9
+     22,
+     11
     ]
    }
   },
@@ -19259,7 +19546,7 @@
     "road": 8,
     "road_name": "The Iron Road",
     "role": "main",
-    "landmark": "The mile-forts and the Cinderhorn smoking to the east.",
+    "landmark": "The mile-forts and the Cinderhorn smoking to the south-east.",
     "origin": "The legions' marching road. Ash falls on it every day and is swept every night.",
     "wild": "Numel, Torkoal, Rolycoly, Slugma, Druddigon.",
     "exits": "",
@@ -19268,11 +19555,7 @@
     "town_map": [
      [
       23,
-      11
-     ],
-     [
-      22,
-      11
+      7
      ]
     ]
    },
@@ -19280,7 +19563,7 @@
     "town_map_pos": [
      0,
      23,
-     11
+     7
     ]
    }
   },
@@ -19288,7 +19571,7 @@
    "id": 661,
    "name": "The Ironway",
    "act": 2,
-   "kingdom": "Borderland (Ashkaar/Nadir)",
+   "kingdom": "Borderland (Elowen/Ashkaar)",
    "kind": "route",
    "size": [
     150,
@@ -19326,24 +19609,20 @@
     "road": 8,
     "road_name": "The Iron Road",
     "role": "main",
-    "landmark": "The ore-cart incline and the Truce Posts.",
+    "landmark": "The ore-cart incline down to the Leach ford, the burnt woods either side, and the Truce Posts.",
     "origin": "Kept name: the pass the ore came down, on rails laid by Nadir and paid for by Ashkaar.",
-    "wild": "Scraggy, Houndour, Cyclizar, Machop, Aron, Charcadet.",
-    "exits": "",
+    "wild": "Scraggy, Houndour, Cyclizar, Machop, Aron, Charcadet, Bramblin.",
+    "exits": "E: the Ashmarch. W: the Leach ford (Wormwood Lea), then Candle Down (the Crown Road's east junction).",
     "fill": [],
     "secret": "A runaway ore cart you can ride down a closed spur.",
     "town_map": [
      [
       21,
-      11
+      7
      ],
      [
       20,
-      11
-     ],
-     [
-      19,
-      11
+      7
      ]
     ]
    },
@@ -19351,7 +19630,7 @@
     "town_map_pos": [
      0,
      21,
-     11
+     7
     ]
    }
   },
@@ -19387,28 +19666,28 @@
     "road": 8,
     "road_name": "The Iron Road",
     "role": "side",
-    "landmark": "Black glass dunes and lava tubes.",
+    "landmark": "Black glass dunes and lava tubes: the volcanic ash desert where the Dominion meets the bone sands.",
     "origin": "Kept name: obsidian dunes where sand met fire.",
     "wild": "Carkol, Magcargo, Torkoal, Vibrava, Gible, Onix.",
-    "exits": "",
+    "exits": "S: Cindervault's north gate. N: Glasswake, then the war road west across Ossaria to the Ashkaar Siege Camp, or the Wyrmtongue to Cinder Cape.",
     "fill": [],
     "secret": "A lava tube that comes out inside the Petrified Ashwood.",
     "town_map": [
      [
-      25,
-      9
+      24,
+      6
      ],
      [
-      25,
-      8
+      23,
+      5
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     25,
-     9
+     24,
+     6
     ]
    }
   },
@@ -19440,7 +19719,7 @@
     "town_map_pos": [
      0,
      24,
-     8
+     5
     ]
    }
   },
@@ -19469,7 +19748,7 @@
     "town_map_pos": [
      0,
      25,
-     11
+     10
     ]
    }
   },
@@ -19498,7 +19777,7 @@
     "town_map_pos": [
      0,
      25,
-     11
+     10
     ]
    }
   },
@@ -19529,7 +19808,7 @@
     "town_map_pos": [
      0,
      25,
-     11
+     10
     ]
    }
   },
@@ -19561,7 +19840,7 @@
     "town_map_pos": [
      0,
      25,
-     10
+     7
     ]
    }
   },
@@ -19593,8 +19872,8 @@
     "heal_point_map": 671,
     "town_map_pos": [
      0,
-     25,
-     7
+     23,
+     4
     ]
    },
    "visual_brief": {
@@ -19632,8 +19911,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     25,
-     7
+     23,
+     4
     ]
    },
    "connections": [
@@ -19676,7 +19955,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Cinderglass Barrens"
   },
   {
    "id": 672,
@@ -19705,7 +19985,7 @@
     "road": 8,
     "road_name": "The Iron Road",
     "role": "main",
-    "landmark": "The winding-tower and the cage lift.",
+    "landmark": "The winding-tower at the Crown Road's south junction, and the cage lift.",
     "origin": "Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it.",
     "wild": "Timburr, Machop, Pawniard, Trubbish, Tinkatink.",
     "exits": "",
@@ -19713,16 +19993,16 @@
     "secret": "A side adit sealed with a pit-fighter's handprint in iron.",
     "town_map": [
      [
-      18,
-      11
+      16,
+      12
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     18,
-     11
+     16,
+     12
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -19759,23 +20039,23 @@
     "wild": "Fire and Dragon, high level; sea birds.",
     "exits": "",
     "fill": [],
-    "secret": "At the fork's left tip, a sea cave that looks across at the Rime Isles.",
+    "secret": "At the fork's left tip, a sea cave that looks west along the coast to the smoke of the war in the sands.",
     "town_map": [
      [
-      26,
-      5
+      24,
+      3
      ],
      [
-      26,
-      4
+      25,
+      3
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     26,
-     5
+     24,
+     3
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -19812,7 +20092,7 @@
     "road": 9,
     "road_name": "The Root Road",
     "role": "main",
-    "landmark": "Root-cathedrals and overgrown ore carts.",
+    "landmark": "Root-cathedrals (the Gossamer's roots) and overgrown ore carts.",
     "origin": "Kept name: where Elowen's roots come through the roof of Nadir's mines.",
     "wild": "Foongus, Paras, Shiinotic, Breloom, Toedscool, Bramblin, Machoke.",
     "exits": "",
@@ -19820,11 +20100,11 @@
     "secret": "A root that bleeds when cut: the start of Lanternroot's sidequest.",
     "town_map": [
      [
-      15,
-      12
+      14,
+      13
      ],
      [
-      14,
+      13,
       12
      ]
     ]
@@ -19832,8 +20112,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     12
+     14,
+     13
     ]
    }
   },
@@ -19876,10 +20156,6 @@
     "secret": "Behind the falls, a cave where the rainbow is the wrong way round.",
     "town_map": [
      [
-      12,
-      11
-     ],
-     [
       11,
       11
      ]
@@ -19888,7 +20164,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
+     11,
      11
     ]
    }
@@ -19950,8 +20226,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     13
+     15,
+     14
     ]
    }
   },
@@ -19979,8 +20255,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     13
+     15,
+     14
     ]
    }
   },
@@ -20012,7 +20288,7 @@
     "town_map_pos": [
      0,
      17,
-     12
+     14
     ]
    }
   },
@@ -20044,7 +20320,7 @@
     "heal_point_map": 691,
     "town_map_pos": [
      0,
-     13,
+     12,
      12
     ]
    },
@@ -20069,7 +20345,7 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     13,
+     12,
      12
     ]
    },
@@ -20113,7 +20389,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Rootdeep"
   },
   {
    "id": 692,
@@ -20150,16 +20427,16 @@
     "secret": "A tailings slide that drops into a buried engine house.",
     "town_map": [
      [
-      16,
-      12
+      15,
+      13
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     12
+     15,
+     13
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -20266,8 +20543,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     10
+     13,
+     14
     ]
    }
   },
@@ -20350,7 +20627,7 @@
    ],
    "tileset_kit": "G5_TEMPERATE",
    "border": "borderland edges: deep snow-forest on the way to Lake Rime; royal hunting lodges",
-   "borderland": "The Rimewood (north)",
+   "borderland": "The Hoarwood",
    "size_was": [
     32,
     56
@@ -20524,7 +20801,7 @@
    "field": null,
    "segment": 9,
    "detail": "outline",
-   "borderland": "The Rimewood (north)",
+   "borderland": "The Hoarwood",
    "key_features": [
     "royal hunting-lodge village of the Queen's foresters and Isenmar trappers",
     "trade: furs, venison, briar-honey",
@@ -20606,7 +20883,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Hoarwood"
   },
   {
    "id": 712,
@@ -20702,7 +20980,7 @@
     "road": 11,
     "road_name": "The Mast Road",
     "role": "main",
-    "landmark": "Sled posts, ice-fishing camps, the frozen sea to the north.",
+    "landmark": "Sled posts, ice-fishing camps, the frozen sea to the north, and the war-sleds going east.",
     "origin": "The coast road on the sea ice, kept open by the thane's own teams.",
     "wild": "Walrein, Dewgong, Cloyster, Mamoswine, Delibird.",
     "exits": "",
@@ -20731,7 +21009,7 @@
    "id": 721,
    "name": "The Mast Glacier",
    "act": 3,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Ossaria)",
    "kind": "route",
    "size": [
     72,
@@ -20769,19 +21047,19 @@
     "road": 11,
     "road_name": "The Mast Road",
     "role": "main",
-    "landmark": "The anchored airships.",
+    "landmark": "The anchored airships, and the glacier's snout running out onto frozen dunes.",
     "origin": "Kept name: airships are ice-anchored along the glacier tongue, and their masts look like a winter forest.",
-    "wild": "Ice with Flying or Steel: Swablu, Skarmory, Cryogonal, Bronzor.",
+    "wild": "Ice with Ground or Flying: Swinub, Cetoddle, Sandshrew (Alolan), Swablu, Skarmory, Hippopotas, Cryogonal.",
     "exits": "",
     "fill": [],
     "secret": "A crevasse with an airship that never left.",
     "town_map": [
      [
       6,
-      1
+      2
      ],
      [
-      6,
+      7,
       2
      ]
     ]
@@ -20790,7 +21068,7 @@
     "town_map_pos": [
      0,
      6,
-     1
+     2
     ]
    }
   },
@@ -20848,12 +21126,11 @@
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
    "border": "borderland edges: glacier tongue with Skyreach airships anchored by ice-anchors",
-   "borderland": "The Mast Glacier",
    "metadata": {
     "town_map_pos": [
      0,
-     8,
-     2
+     19,
+     15
     ]
    }
   },
@@ -20881,8 +21158,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     8,
-     2
+     19,
+     15
     ]
    }
   },
@@ -20910,8 +21187,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     8,
-     2
+     19,
+     15
     ]
    }
   },
@@ -20951,7 +21228,7 @@
    "id": 730,
    "name": "Anchorhold",
    "act": 3,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Ossaria)",
    "kind": "town",
    "size": [
     40,
@@ -20975,8 +21252,8 @@
     "heal_point_map": 731,
     "town_map_pos": [
      0,
-     7,
-     2
+     8,
+     3
     ]
    },
    "tileset_kit": "BL_MAST_GLACIER",
@@ -20986,7 +21263,7 @@
    "id": 731,
    "name": "Anchorhold Pok\u00e9mon Center",
    "act": 3,
-   "kingdom": "Borderland (Isenmar/Zenith)",
+   "kingdom": "Borderland (Isenmar/Ossaria)",
    "kind": "interior",
    "size": [
     15,
@@ -21000,8 +21277,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     7,
-     2
+     8,
+     3
     ]
    },
    "connections": [
@@ -21044,7 +21321,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Mast Glacier"
   },
   {
    "id": 732,
@@ -21081,20 +21359,16 @@
     "secret": "A maintenance cradle that crosses to a mast nobody uses.",
     "town_map": [
      [
-      8,
-      3
-     ],
-     [
-      9,
-      3
+      18,
+      15
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     8,
-     3
+     18,
+     15
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -21138,20 +21412,16 @@
     "secret": "One conductor is grounded, and something lives in the quiet.",
     "town_map": [
      [
-      10,
-      4
-     ],
-     [
-      10,
-      5
+      18,
+      13
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     4
+     18,
+     13
     ]
    }
   },
@@ -21195,20 +21465,16 @@
     "secret": "A greenhouse-factory whose clockwork bees have gone wild.",
     "town_map": [
      [
-      10,
-      7
-     ],
-     [
-      11,
-      8
+      18,
+      12
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     7
+     18,
+     12
     ]
    }
   },
@@ -21239,8 +21505,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     14,
-     10
+     10,
+     6
     ]
    }
   },
@@ -21248,7 +21514,7 @@
    "id": 743,
    "name": "Antumbra Threshold",
    "act": 3,
-   "kingdom": "Antumbra",
+   "kingdom": "Borderland (Elowen/Antumbra)",
    "kind": "dungeon",
    "size": [
     40,
@@ -21300,8 +21566,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     11,
-     3
+     19,
+     13
     ]
    }
   },
@@ -21329,8 +21595,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     11,
-     3
+     19,
+     13
     ]
    }
   },
@@ -21358,8 +21624,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     11,
-     3
+     19,
+     13
     ]
    }
   },
@@ -21390,8 +21656,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     9,
-     4
+     18,
+     14
     ]
    }
   },
@@ -21423,8 +21689,8 @@
     "heal_point_map": 751,
     "town_map_pos": [
      0,
-     11,
-     9
+     17,
+     11
     ]
    },
    "tileset_kit": "BL_WIRED_WOOD",
@@ -21448,8 +21714,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     11,
-     9
+     17,
+     11
     ]
    },
    "connections": [
@@ -21492,7 +21758,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Wired Wood"
   },
   {
    "id": 752,
@@ -21529,20 +21796,16 @@
     "secret": "Walk a path backwards and it goes somewhere else.",
     "town_map": [
      [
-      12,
-      9
-     ],
-     [
-      12,
-      10
+      11,
+      7
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     9
+     11,
+     7
     ]
    },
    "borderland": "The Looking-Glass Wood",
@@ -21576,8 +21839,8 @@
     "heal_point_map": 754,
     "town_map_pos": [
      0,
-     13,
-     10
+     11,
+     6
     ]
    },
    "tileset_kit": "BL_LOOKING-GLASS_WOOD",
@@ -21601,8 +21864,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     13,
-     10
+     11,
+     6
     ]
    },
    "connections": [
@@ -21645,7 +21908,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Looking-Glass Wood"
   },
   {
    "id": 755,
@@ -21701,6 +21965,63 @@
    "added_by": "cartographer (SPINE Rev 13)"
   },
   {
+   "id": 756,
+   "name": "Kingsmead",
+   "act": 3,
+   "kingdom": "Elowen",
+   "kind": "route",
+   "size": [
+    110,
+    90
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "MEADOW",
+   "segment": 11,
+   "detail": "outline",
+   "connections_outline": [
+    "E: the Highwold. S: Wallshadow Row. W: the Looking-Glass Wood (borderland H)."
+   ],
+   "key_features": [
+    "The old paddock walls, and the Glassfall Scar glittering high on the wall above.",
+    "the Crown Road through paddocks",
+    "the royal stud's ruined stables",
+    "a horse-fair ground (a racing errand)"
+   ],
+   "tileset_kit": "G5_TEMPERATE",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 12,
+    "road_name": "The Glass Road",
+    "role": "main",
+    "landmark": "The old paddock walls, and the Glassfall Scar glittering high on the wall above.",
+    "origin": "The king's meadow under the Crownwall's north-west face, where Elowen's royal horses grazed before there was an Accord.",
+    "wild": "Ponyta, Blitzle, Deerling, Swablu, Hoppip, Cottonee. Night: Morelull, Hatenna.",
+    "exits": "E: the Highwold. S: Wallshadow Row. W: the Looking-Glass Wood (borderland H).",
+    "fill": [
+     "the Crown Road through paddocks",
+     "the royal stud's ruined stables",
+     "a horse-fair ground (a racing errand)",
+     "5 trainers"
+    ],
+    "secret": "The farrier's forge still has a fire in it; nobody tends it.",
+    "town_map": [
+     [
+      12,
+      7
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     12,
+     7
+    ]
+   }
+  },
+  {
    "id": 760,
    "name": "The Obsidian Barrows",
    "act": 4,
@@ -21740,20 +22061,20 @@
     "secret": "A mirror with no tomb behind it.",
     "town_map": [
      [
-      22,
-      8
+      20,
+      4
      ],
      [
-      23,
-      8
+      21,
+      4
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     8
+     20,
+     4
     ]
    }
   },
@@ -21796,20 +22117,20 @@
     "secret": "A dry cave behind the fall with a nest of something revived.",
     "town_map": [
      [
-      24,
-      6
+      22,
+      4
      ],
      [
-      24,
-      5
+      22,
+      3
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     6
+     22,
+     4
     ]
    }
   },
@@ -21837,7 +22158,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     25,
+     22,
      5
     ]
    }
@@ -21866,7 +22187,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     25,
+     22,
      5
     ]
    }
@@ -21929,8 +22250,8 @@
     "heal_point_map": 771,
     "town_map_pos": [
      0,
-     23,
-     7
+     20,
+     3
     ]
    },
    "tileset_kit": "BL_OBSIDIAN_BARROWS",
@@ -21954,8 +22275,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     23,
-     7
+     20,
+     3
     ]
    },
    "connections": [
@@ -21998,7 +22319,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Obsidian Barrows"
   },
   {
    "id": 772,
@@ -22088,11 +22410,7 @@
     "secret": "One drum is hollow.",
     "town_map": [
      [
-      24,
-      4
-     ],
-     [
-      24,
+      21,
       3
      ]
     ]
@@ -22100,8 +22418,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     4
+     21,
+     3
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -22137,7 +22455,7 @@
     "road": 14,
     "road_name": "The Moor Road",
     "role": "main",
-    "landmark": "The teeth, and the Darkglass Mine headframe.",
+    "landmark": "The teeth, the Darkglass Mine headframe, and the war's smoke to the west.",
     "origin": "A ridge with a toothed skyline. Cragholm says the teeth were cut; Vigil says they grew.",
     "wild": "Tyranitar line, Lycanroc, Garganacl, Skarmory.",
     "exits": "",
@@ -22145,24 +22463,16 @@
     "secret": "A cave in the largest tooth.",
     "town_map": [
      [
-      23,
-      3
-     ],
-     [
-      23,
-      4
-     ],
-     [
-      23,
-      5
+      20,
+      2
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     23,
-     3
+     20,
+     2
     ]
    }
   },
@@ -22248,8 +22558,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     3
+     17,
+     2
     ]
    }
   },
@@ -22277,8 +22587,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     3
+     19,
+     2
     ]
    }
   },
@@ -22306,8 +22616,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     3
+     19,
+     2
     ]
    }
   },
@@ -22338,7 +22648,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
+     18,
      2
     ]
    }
@@ -22452,7 +22762,7 @@
    "id": 801,
    "name": "The Slag Mesa",
    "act": 4,
-   "kingdom": "Borderland (Ossaria/Zenith)",
+   "kingdom": "Borderland (Zenith/Elowen)",
    "kind": "route",
    "size": [
     80,
@@ -22471,7 +22781,7 @@
    ],
    "tileset_kit": "G5_METROPOLIS_OUTSKIRTS",
    "border": "borderland edges: Zenith's rail and slag spilling into Ossaria's desert",
-   "borderland": "The Brass Dunes",
+   "borderland": "The Wired Wood",
    "size_was": [
     32,
     56
@@ -22480,7 +22790,7 @@
     "road": 15,
     "road_name": "The Slag Road",
     "role": "main",
-    "landmark": "Slag falls, still warm.",
+    "landmark": "Slag falls, still warm, and the Slagglass: a cooled black pour that reflects Antumbra (gate C).",
     "origin": "Kept name: a mesa that is half rock and half what Cogsworth poured on it.",
     "wild": "Steel and Ground: Excadrill, Orthworm, Bronzong, Garbodor.",
     "exits": "",
@@ -22488,20 +22798,16 @@
     "secret": "A cooled slag flow shaped round something large.",
     "town_map": [
      [
-      18,
-      3
-     ],
-     [
-      17,
-      3
+      21,
+      14
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     18,
-     3
+     21,
+     14
     ]
    }
   },
@@ -22650,29 +22956,29 @@
    "route_plan": {
     "road": 15,
     "road_name": "The Slag Road",
-    "role": "main",
-    "landmark": "Shell pavements and a stranded ship's ribs.",
+    "role": "side",
+    "landmark": "Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought.",
     "origin": "An old seabed, rippled like a beach the sea left one evening and never came back to.",
     "wild": "Fossil ground types, Sandaconda, Palossand.",
-    "exits": "",
+    "exits": "E: Duneholt's west gate. W: the Glass Dunes (the war's battlefield; story-gated).",
     "fill": [],
     "secret": "At night you can hear the tide. Follow it.",
     "town_map": [
      [
-      20,
-      6
+      15,
+      3
      ],
      [
-      19,
-      6
+      14,
+      3
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     20,
-     6
+     15,
+     3
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -22712,16 +23018,16 @@
     "secret": "Stack 9 has no furnace under it.",
     "town_map": [
      [
-      17,
-      2
+      20,
+      14
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     17,
-     2
+     20,
+     14
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -22766,16 +23072,16 @@
     "secret": "A lift cage that stops between floors on purpose.",
     "town_map": [
      [
-      15,
-      1
+      19,
+      16
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     1
+     19,
+     16
     ]
    }
   },
@@ -22811,7 +23117,7 @@
     "road": 16,
     "road_name": "The Drowned Road",
     "role": "main",
-    "landmark": "Tower-tops standing out of the sea.",
+    "landmark": "Tower-tops standing out of the Hallow Strait.",
     "origin": "Nadir's name for the coast that went under with Aurelia.",
     "wild": "Water with Poison or Dark: Tentacruel, Sharpedo, Toxapex, Dragalge.",
     "exits": "",
@@ -22819,16 +23125,16 @@
     "secret": "Dive below: Under the Drownings (822) and Aurelia.",
     "town_map": [
      [
-      13,
-      1
+      18,
+      19
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     1
+     18,
+     19
     ]
    }
   },
@@ -22858,8 +23164,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     0
+     17,
+     19
     ]
    }
   },
@@ -22890,8 +23196,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     0
+     16,
+     19
     ]
    }
   },
@@ -22919,8 +23225,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     0
+     16,
+     19
     ]
    }
   },
@@ -22951,8 +23257,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     0
+     16,
+     19
     ]
    }
   },
@@ -22981,8 +23287,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
-     1
+     21,
+     16
     ]
    }
   },
@@ -23014,8 +23320,8 @@
     "heal_point_map": 831,
     "town_map_pos": [
      0,
-     14,
-     1
+     19,
+     17
     ]
    },
    "tileset_kit": "BL_HANGING_STAIR",
@@ -23039,8 +23345,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     14,
-     1
+     19,
+     17
     ]
    },
    "connections": [
@@ -23083,7 +23389,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Hanging Stair"
   },
   {
    "id": 832,
@@ -23112,7 +23419,7 @@
     "road": 16,
     "road_name": "The Drowned Road",
     "role": "main",
-    "landmark": "The rail, the lift-heads, the telescopes.",
+    "landmark": "The rail, the lift-heads, the telescopes over the Hallow Strait.",
     "origin": "Where Zenith stops. A promenade with a brass rail and a very long view.",
     "wild": "Flying and Steel.",
     "exits": "",
@@ -23120,16 +23427,16 @@
     "secret": "One telescope is fixed on a window in Underveil.",
     "town_map": [
      [
-      15,
-      2
+      20,
+      16
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     2
+     20,
+     16
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -23158,8 +23465,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     15
+     14,
+     10
     ]
    }
   },
@@ -23200,23 +23507,23 @@
     "wild": "Cave water: Woobat, Toedscruel, Shiinotic, Basculin.",
     "exits": "",
     "fill": [],
-    "secret": "A side channel that loops under Crownhaven.",
+    "secret": "A side channel that loops under Lumen's foundations.",
     "town_map": [
      [
-      14,
-      13
+      18,
+      18
      ],
      [
-      14,
-      14
+      19,
+      18
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     14,
-     13
+     18,
+     18
     ]
    }
   },
@@ -23259,20 +23566,16 @@
     "secret": "A clearing that is always one hour later than the rest.",
     "town_map": [
      [
-      15,
-      16
-     ],
-     [
-      16,
-      16
+      21,
+      17
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     15,
-     16
+     21,
+     17
     ]
    }
   },
@@ -23300,8 +23603,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     14
+     20,
+     17
     ]
    }
   },
@@ -23331,8 +23634,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     14
+     20,
+     17
     ]
    }
   },
@@ -23362,8 +23665,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     13,
-     13
+     18,
+     17
     ]
    }
   },
@@ -23395,8 +23698,8 @@
     "heal_point_map": 851,
     "town_map_pos": [
      0,
-     15,
-     15
+     21,
+     18
     ]
    },
    "tileset_kit": "BL_ROOTDEEP",
@@ -23420,8 +23723,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     15,
-     15
+     21,
+     18
     ]
    },
    "connections": [
@@ -23501,16 +23804,16 @@
     "secret": "An air pocket with a smugglers' chapel.",
     "town_map": [
      [
-      11,
-      1
+      17,
+      18
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     11,
-     1
+     17,
+     18
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -23545,18 +23848,14 @@
     "road_name": "The Truce Road",
     "role": "main",
     "landmark": "The Great Tree on the skyline and paths that move.",
-    "origin": "Kept name: Elowen's heart, where it has been dusk for three hundred years.",
+    "origin": "Kept name: Elowen's twilight wood in the south-east, where it has been dusk for three hundred years.",
     "wild": "Fairy, Grass, Bug, high level.",
     "exits": "",
     "fill": [],
     "secret": "A path that only exists while you are not on it.",
     "town_map": [
      [
-      17,
-      17
-     ],
-     [
-      18,
+      23,
       17
      ]
     ]
@@ -23564,7 +23863,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     17,
+     23,
      17
     ]
    }
@@ -23609,20 +23908,16 @@
     "secret": "A fort whose garrison never got the order to stand down.",
     "town_map": [
      [
-      19,
-      17
-     ],
-     [
-      20,
-      17
+      23,
+      16
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     17
+     23,
+     16
     ]
    }
   },
@@ -23650,8 +23945,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     16
+     25,
+     14
     ]
    }
   },
@@ -23681,8 +23976,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     24,
-     16
+     25,
+     14
     ]
    }
   },
@@ -23711,7 +24006,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     16,
+     22,
      18
     ]
    }
@@ -23744,8 +24039,8 @@
     "heal_point_map": 871,
     "town_map_pos": [
      0,
-     21,
-     17
+     23,
+     15
     ]
    },
    "tileset_kit": "BL_THORNWAR_MARCHES",
@@ -23769,8 +24064,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     21,
-     17
+     23,
+     15
     ]
    },
    "connections": [
@@ -23813,7 +24108,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Thornwar Marches"
   },
   {
    "id": 872,
@@ -23850,20 +24146,16 @@
     "secret": "A rib-cave with a clutch of eggs and a very calm mother.",
     "town_map": [
      [
-      22,
-      16
-     ],
-     [
-      23,
-      16
+      24,
+      14
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     22,
-     16
+     24,
+     14
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -23872,11 +24164,11 @@
    "id": 880,
    "name": "The Pilgrim Pass",
    "act": 5,
-   "kingdom": "Borderland (Ashkaar/Crownhaven)",
+   "kingdom": "Borderland (Elowen/Crownhaven)",
    "kind": "route",
    "size": [
-    80,
-    140
+    140,
+    80
    ],
    "tileset": "Outside",
    "bgm": "Ingido Plateau",
@@ -23898,8 +24190,8 @@
     "road": 19,
     "road_name": "The Pilgrim Road",
     "role": "main",
-    "landmark": "The eighteen shrines.",
-    "origin": "Kept name: eighteen shrines, one per Plate, up the Crownwall.",
+    "landmark": "The eighteen shrines, the pilgrim camps, and the south bridge over the Leach.",
+    "origin": "Kept name: eighteen shrines, one per Plate, from the Dominion's border to the Crownwall's gap.",
     "wild": "Mixed, every type, high level.",
     "exits": "",
     "fill": [],
@@ -23907,7 +24199,11 @@
     "town_map": [
      [
       22,
-      14
+      12
+     ],
+     [
+      20,
+      11
      ]
     ]
    },
@@ -23915,7 +24211,7 @@
     "town_map_pos": [
      0,
      22,
-     14
+     12
     ]
    }
   },
@@ -23945,8 +24241,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     13
+     16,
+     10
     ]
    }
   },
@@ -23974,8 +24270,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     13
+     16,
+     10
     ]
    }
   },
@@ -24003,8 +24299,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     21,
-     13
+     16,
+     10
     ]
    }
   },
@@ -24035,8 +24331,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     18,
-     13
+     13,
+     8
     ]
    }
   },
@@ -24044,7 +24340,7 @@
    "id": 890,
    "name": "Pilgrim's Rest",
    "act": 5,
-   "kingdom": "Borderland (Ashkaar/Crownhaven)",
+   "kingdom": "Borderland (Elowen/Crownhaven)",
    "kind": "town",
    "size": [
     40,
@@ -24068,8 +24364,8 @@
     "heal_point_map": 891,
     "town_map_pos": [
      0,
-     22,
-     13
+     18,
+     10
     ]
    },
    "tileset_kit": "BL_PILGRIM_PASS",
@@ -24079,7 +24375,7 @@
    "id": 891,
    "name": "Pilgrim's Rest Pok\u00e9mon Center",
    "act": 5,
-   "kingdom": "Borderland (Ashkaar/Crownhaven)",
+   "kingdom": "Borderland (Elowen/Crownhaven)",
    "kind": "interior",
    "size": [
     15,
@@ -24093,8 +24389,8 @@
     "heal_point": true,
     "town_map_pos": [
      0,
-     22,
-     13
+     18,
+     10
     ]
    },
    "connections": [
@@ -24137,7 +24433,8 @@
     }
    ],
    "border": "ruin/rock walls and Bleed shimmer",
-   "tileset_kit": "G4_RUINS"
+   "tileset_kit": "G4_RUINS",
+   "borderland": "The Pilgrim Pass"
   },
   {
    "id": 892,
@@ -24174,20 +24471,16 @@
     "secret": "The toll-keeper's ledger lists one pilgrim who has paid every year since AF 0.",
     "town_map": [
      [
-      23,
-      15
-     ],
-     [
-      23,
-      14
+      24,
+      12
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     23,
-     15
+     24,
+     12
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -24227,20 +24520,16 @@
     "secret": "The empty plinth already has a name cut on the back.",
     "town_map": [
      [
-      20,
-      13
-     ],
-     [
-      20,
-      14
+      15,
+      10
      ]
     ]
    },
    "metadata": {
     "town_map_pos": [
      0,
-     20,
-     13
+     15,
+     10
     ]
    },
    "added_by": "cartographer (SPINE Rev 13)"
@@ -24330,7 +24619,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
+     21,
      19
     ]
    }
@@ -24367,9 +24656,9 @@
   },
   {
    "id": 920,
-   "name": "The Rime Narrows",
+   "name": "The Rimed Sands",
    "act": 3,
-   "kingdom": "Isenmar",
+   "kingdom": "Ossaria (Isenmar lines)",
    "kind": "route",
    "size": [
     60,
@@ -24377,25 +24666,26 @@
    ],
    "tileset": "Outside",
    "bgm": null,
-   "field": "SNOWY_MOUNTAIN",
+   "field": "DESERT",
    "segment": 10,
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "Isenmar's front line on the strait ice off the Rime Isles: trenches cut in ice, burnt sled-forts"
+    "Isenmar's front in the western dunes: sand its host has frozen into white trench-lines, rime-crusted dune crests, burnt sled-forts dragged overland"
    ],
-   "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "frozen dunes and ice-glazed sandstone; the Steamline to the east",
    "metadata": {
     "town_map_pos": [
      0,
-     28,
-     1
+     11,
+     2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 921,
@@ -24414,13 +24704,13 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "besieged Isenmar fortress-port on the Rime Isles across the Shattered Ice strait: ice-and-granite curtain wall, breached gatehouse, dragonfire scorch"
+    "Isenmar's border fortress on Ossaria's western edge, besieged from the east: ice-and-granite curtain wall over the dunes, breached gatehouse, dragonfire scorch"
    ],
    "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "border": "frozen dunes, the Mast Glacier snout and granite outcrops",
    "visual_brief": {
     "landmarks": [
      "breached gatehouse",
@@ -24440,14 +24730,15 @@
    "metadata": {
     "town_map_pos": [
      0,
-     28,
-     0
+     9,
+     2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 922,
-   "name": "Skaldfast - Harbour Keep",
+   "name": "Skaldfast - Rime Keep",
    "act": 3,
    "kingdom": "Isenmar",
    "kind": "town",
@@ -24462,20 +24753,21 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "ice-locked harbour, chained longships, keep on the mole; refugees"
+    "Skaldfast's inner keep, built over a frozen spring; the war council's hall"
    ],
    "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "border": "fortress walls",
    "metadata": {
     "town_map_pos": [
      0,
-     28,
-     0
+     9,
+     2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 923,
@@ -24494,7 +24786,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
     "war council; field hospital in the mead hall"
@@ -24504,16 +24796,17 @@
    "metadata": {
     "town_map_pos": [
      0,
-     28,
-     0
+     9,
+     2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 924,
    "name": "Ashkaar Siege Camp",
    "act": 3,
-   "kingdom": "Ashkaar",
+   "kingdom": "Ossaria (Ashkaar camp)",
    "kind": "town",
    "size": [
     56,
@@ -24526,26 +24819,27 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "legion tents, dragon pickets, trebuchets on melting ice; Dominar's war-tent"
+    "legion tents, dragon pickets and trebuchets on the eastern dunes; the Dominar's war-tent"
    ],
-   "tileset_kit": "G4_VOLCANIC",
-   "border": "basalt cliffs, lava rivers, caldera walls",
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "dunes, sandstone mesas and the Ashkaar war road",
    "metadata": {
     "town_map_pos": [
      0,
-     28,
+     15,
      2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 925,
    "name": "The Steamline",
    "act": 3,
-   "kingdom": "Sea - the Shattered Ice strait (contested)",
+   "kingdom": "Ossaria (contested)",
    "kind": "route",
    "size": [
     64,
@@ -24558,26 +24852,27 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "no-man's-land where lava channels meet sea ice: permanent steam wall, dead ground between the fronts"
+    "no-man's-land where the two Imprints meet: ice on one side, fire on the other, a permanent steam wall and sand fused to glass between the fronts"
    ],
-   "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "steam walls, glassed dunes",
    "metadata": {
     "town_map_pos": [
      0,
-     27,
-     3
+     12,
+     1
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 926,
-   "name": "The Shattered Ice",
+   "name": "The Glass Dunes",
    "act": 3,
-   "kingdom": "Sea - the Shattered Ice strait (contested)",
+   "kingdom": "Ossaria (contested)",
    "kind": "dungeon",
    "size": [
     60,
@@ -24585,18 +24880,18 @@
    ],
    "tileset": "Outside",
    "bgm": null,
-   "field": "FROZEN_LAKE",
+   "field": "DESERT",
    "segment": 10,
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
-    "frozen-sea battlefield for the war climax (pixel-animated beam clash; field melts FROZEN_LAKE->WATER_SURFACE)"
+    "the war's battlefield in the dunes: in the climax Primal Kyogre drags a flood-sea into the desert and Reshiram's fire turns the dunes to glass (field transition: the fields team)"
    ],
-   "tileset_kit": "G4_SNOW_COAST",
-   "border": "frozen sea (pressure-ridged ice) and fjord cliffs; open water on the southern coast",
+   "tileset_kit": "G5_DESERT_CANYON",
+   "border": "dune ridges; glass after the climax",
    "visual_brief": {
     "landmarks": [
      "cracked ice plain",
@@ -24616,10 +24911,11 @@
    "metadata": {
     "town_map_pos": [
      0,
-     27,
+     13,
      2
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 927,
@@ -24638,7 +24934,7 @@
    "detail": "outline",
    "war_theatre": true,
    "connections_outline": [
-    "Isenmar side: sled-road across the frozen north sea from Rimeholt to the Rime Isles (Skaldfast). Ashkaar side: north road Cindervault -> Cinderglass Barrens (662) -> Glasswake (670) -> Cinder Cape (927). The two shores face each other across the Shattered Ice strait; there is no land border."
+    "Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). Isenmar side: from Rimeholt along the Thane's Sled-Road and over the Mast Glacier to Skaldfast, then east into the dunes (the Rimed Sands). Ashkaar side: from Cindervault's north gate through the Cinderglass Barrens and Glasswake, then west across the bone sands to the Ashkaar Siege Camp; Cinder Cape Warfort is the staging fortress on the north-east coast. Front: the Steamline, where the two Imprints meet; the battlefield is the Glass Dunes."
    ],
    "key_features": [
     "Ashkaar staging fortress on a basalt cape; dragon launch ramps"
@@ -24651,7 +24947,8 @@
      26,
      3
     ]
-   }
+   },
+   "geography_v2": "Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)"
   },
   {
    "id": 959,
@@ -24693,8 +24990,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     10,
-     3
+     19,
+     14
     ]
    }
   },
@@ -24722,7 +25019,7 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
+     13,
      15
     ]
    }
@@ -24780,8 +25077,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     12,
-     0
+     16,
+     19
     ]
    }
   },
@@ -24809,8 +25106,8 @@
    "metadata": {
     "town_map_pos": [
      0,
-     19,
-     14
+     14,
+     9
     ]
    }
   }

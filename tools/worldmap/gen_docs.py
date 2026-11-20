@@ -154,6 +154,102 @@ def check_edge_pairs(by):
     return bad
 
 
+# ----------------------------------------------------------------------------- Geography v2 (Revision 18)
+WAR_TEXT = {
+    920: dict(kingdom='Ossaria (Isenmar lines)', field='DESERT', tileset_kit='G5_DESERT_CANYON',
+              key_features=["Isenmar's front in the western dunes: sand its host has frozen into white trench-lines, "
+                            "rime-crusted dune crests, burnt sled-forts dragged overland"],
+              border='frozen dunes and ice-glazed sandstone; the Steamline to the east'),
+    921: dict(key_features=["Isenmar's border fortress on Ossaria's western edge, besieged from the east: ice-and-granite "
+                            "curtain wall over the dunes, breached gatehouse, dragonfire scorch"],
+              border='frozen dunes, the Mast Glacier snout and granite outcrops'),
+    922: dict(key_features=["Skaldfast's inner keep, built over a frozen spring; the war council's hall"],
+              border='fortress walls'),
+    924: dict(kingdom='Ossaria (Ashkaar camp)', tileset_kit='G5_DESERT_CANYON',
+              key_features=["legion tents, dragon pickets and trebuchets on the eastern dunes; the Dominar's war-tent"],
+              border='dunes, sandstone mesas and the Ashkaar war road'),
+    925: dict(kingdom='Ossaria (contested)', field='ASHEN_WASTE', tileset_kit='G5_DESERT_CANYON',
+              key_features=["no-man's-land where the two Imprints meet: ice on one side, fire on the other, a permanent "
+                            "steam wall and sand fused to glass between the fronts"],
+              border='steam walls, glassed dunes'),
+    926: dict(kingdom='Ossaria (contested)', field='DESERT', tileset_kit='G5_DESERT_CANYON',
+              key_features=["the war's battlefield in the dunes: in the climax Primal Kyogre drags a flood-sea into the "
+                            "desert and Reshiram's fire turns the dunes to glass (field transition: the fields team)"],
+              border='dune ridges; glass after the climax'),
+}
+WAR_OUTLINE = ("Revision 18: the war is fought on land, in Ossaria's western dunes (fire and ice share no border). "
+               "Isenmar side: " + W.WAR['isenmar'] + ". Ashkaar side: " + W.WAR['ashkaar'] + ". Front: " +
+               W.WAR['front'] + ".") if getattr(W, 'WAR', None) else ''
+
+
+def crossings_of(code):
+    """gym legs that cross a borderland, from the road table"""
+    out = []
+    members = set(W.BORDERLANDS[code][3]) | {W.BORDERLANDS[code][2]}
+    for r in W.ROADS:
+        hit = [l['name'] for l in r['legs'] if l['id'] in members]
+        via = [W.leg_by_id()[i][1]['name'] for i in getattr(W, 'VIA', {}).get(r['n'], []) if i in members]
+        if hit or via:
+            out.append('%d->%d (%s: %s)' % (r['n'] - 1, r['n'], r['name'], ', '.join(hit + via)))
+    return out
+
+
+def apply_geography_v2(d, by):
+    if not getattr(W, 'BORDERLANDS', None):
+        return
+    old = {b['code']: b for b in d.get('borderlands', [])}
+    recs = []
+    member_of = {}
+    for code, (name, ks, town, routes, biome, wild) in W.BORDERLANDS.items():
+        rec = dict(old.get(code) or {})
+        rec.update(code=code, kingdoms=list(ks), name=name, crossings=crossings_of(code), biome=biome, wild=wild,
+                   routes=list(routes), town=town)
+        rec.setdefault('landmarks', [])
+        rec.setdefault('field', '')
+        recs.append(rec)
+        for i in list(routes) + [town, town + 1] + ([850] if code == 'F' else []):
+            if i in by and (i == town or i in routes or by[i].get('kind') == 'interior' or i == 850):
+                member_of[i] = (name, ks)
+    d['borderlands'] = recs
+    for m in d['maps']:
+        if m['id'] in member_of:
+            name, ks = member_of[m['id']]
+            m['borderland'] = name
+            m['kingdom'] = 'Borderland (%s/%s)' % ks
+        elif m.get('borderland'):
+            m.pop('borderland')
+    legs = W.leg_by_id()
+    for i, (r, l) in legs.items():
+        if i in by and i not in member_of:
+            by[i]['kingdom'] = kingdom_field(l['kingdom'])
+    for i, (n, x, y, rank, k) in W.SETTLEMENTS.items():
+        if i in by and i not in member_of and '/' not in k:
+            by[i]['kingdom'] = k
+    for i, (oldn, new, origin) in getattr(W, 'REPLACED', {}).items():
+        if i in by:
+            by[i]['name'] = new
+    for i in getattr(W, 'WAR', {}).get('theatre', []):
+        m = by.get(i)
+        if not m:
+            continue
+        m['connections_outline'] = [WAR_OUTLINE]
+        for k, v in WAR_TEXT.get(i, {}).items():
+            m[k] = v
+        m['geography_v2'] = 'Revision 18: the war moved onto land in Ossaria (design/GEOGRAPHY_V2_STORY_FIXES.md)'
+    # Static Tunnels: the Mainline's buried tunnels under the Brass Dunes (side of 600)
+    for i in (604, 605):
+        if i in by:
+            by[i]['kingdom'] = 'Borderland (Elowen/Ossaria)'
+    notes = d.setdefault('notes', [])
+    tag = 'GEOGRAPHY v2 (cartographer, Revision 18)'
+    if not any(n.startswith(tag) for n in notes):
+        notes.append(tag + ': Ossaria north, Isenmar west, Ashkaar east, Zenith (Nadir beneath it) south, Elowen in the '
+                     'middle touching every kingdom, Crownhaven at its heart. Kingdom fields, borderland records and '
+                     'members come from tools/worldmap/world_data.py BORDERLANDS; the war theatre (920-927) is on land in '
+                     'Ossaria. New Elowen transit maps: 594 Wallshadow Row, 595 Coppice Ride, 602 Candle Down, 603 the '
+                     'Highwold, 634 Wormwood Lea, 756 Kingsmead (the Crown Road and its spokes).')
+
+
 def kingdom_field(k):
     return 'Borderland (%s)' % k if '/' in k else k
 
@@ -163,6 +259,8 @@ def load_maps():
 
 
 def leg_road_segment(r, l):
+    if l.get('seg') is not None:          # the Crown Road and other transit legs: first reached on an earlier road
+        return l['seg']
     if l['role'] == 'branch':
         return r['n'] - 1
     if l['id'] in (662, 673):
@@ -190,6 +288,9 @@ def name_table(maps):
     for i, (old, new, origin) in W.OTHER_RENAMES.items():
         e = out[i]
         e.update(old=old, new=new, origin=origin, status='renamed')
+    for i, (old, new, origin) in getattr(W, 'REPLACED', {}).items():
+        if i in out:          # Geography v2: a new place on an old ID; never auto-renamed in prose
+            out[i].update(old=old, new=new, origin=origin, status='replaced' if old != new else 'kept')
     for i, o in W.SETTLEMENT_ORIGINS.items():
         if i in out and not out[i]['origin']:
             out[i]['origin'] = o
@@ -241,6 +342,11 @@ def build_squares(maps):
     return sq
 
 
+def via_text(r):
+    legs = W.leg_by_id()
+    return ', '.join('%s (%d)' % (legs[i][1]['name'], i) for i in getattr(W, 'VIA', {}).get(r['n'], []))
+
+
 # ----------------------------------------------------------------------------- PLACE_NAMES.md
 def write_place_names(maps, names, sq):
     L = ['# PLACE_NAMES - every map of Velmora, old name -> new name',
@@ -259,7 +365,11 @@ def write_place_names(maps, names, sq):
     for k, v in W.VOICES.items():
         L.append('- **%s.** %s Examples: %s.' % (k, v['voice'], ', '.join(v['examples'])))
     L += ['- **Borderlands** blend both voices (Frostwick Pass: an Elowen word for an Isenmar pass; the Icecutters\' Haul: '
-          'Isenmar work on a Zenith road).', '',
+          'Isenmar work on an Elowen river).', '',
+          '**Geography v2** (user, 2026-11-19; SPINE Revision 18): Ossaria north, Isenmar west, Ashkaar east, Zenith (Nadir '
+          'beneath it) south, Elowen in the middle touching every kingdom, Crownhaven at its heart. Every journey between '
+          'kingdoms that do not border runs through Elowen, most of them round **the Crown Road** (Wallshadow Row, Candle '
+          'Down, the Highwold, Kingsmead). "via" lists legs a road walks that an earlier road introduced.', '',
           '## The Eighteen Roads (plus the Pilgrim Road)', '',
           '| Road | Name | From -> to | Maps in order |', '|---|---|---|---|']
     for r in W.ROADS:
@@ -267,10 +377,12 @@ def write_place_names(maps, names, sq):
         to = W.SETTLEMENTS[r['to']][0]
         legs = ', '.join('%s (%d)%s' % (l['name'], l['id'], '' if l['role'] == 'main' else ' [%s]' % l['role'])
                          for l in r['legs'])
-        L.append('| %d | %s | %s -> %s | %s |' % (r['n'], r['name'], frm, to, legs))
+        via = via_text(r)
+        L.append('| %d | %s | %s -> %s | %s%s |' % (r['n'], r['name'], frm, to, legs, ('; via ' + via) if via else ''))
     L += ['', '## Every map', '',
-          '`Status`: renamed / new / kept. `Square` = town-map square (x, y) on region 0 (Velmora). The rename script',
-          'uses rows whose Old and New differ.', '',
+          '`Status`: renamed / new / kept / replaced. `Square` = town-map square (x, y) on region 0 (Velmora). The rename',
+          'script uses `renamed` rows only; `replaced` rows are places re-conceived by Geography v2 / Revision 18 (the war',
+          'moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_STORY_FIXES.md).', '',
           '| ID | Old name | New name | Status | Kingdom | Square | Origin |', '|---|---|---|---|---|---|---|']
     for i in sorted(names):
         e = names[i]
@@ -313,12 +425,17 @@ def write_routes_yaml(maps, sq):
                      'town_map: squares on the Velmora town map (region 0); first square = MapPosition.',
                      'paths: the order of stops as drawn on the maps (style road / side / under / sea / inset; ints are map ids, '
                      'P:<id> a dungeon square, G:<letter> an Antumbra gate, pts:<name> a polyline in world_geo.py).',
-                     'connections for the Revision 14 early chain are in design/maps.json (rev14_connections).'],
+                     'connections for the Revision 14 early chain are in design/maps.json (rev14_connections).',
+                     'Geography v2 (Revision 18): Ossaria north, Isenmar west, Ashkaar east, Zenith/Nadir south, Elowen in '
+                     'the middle. via = legs of an earlier road this road walks (mostly the Crown Road round the '
+                     'Crownwall: crown_road). air = an airship lane (the Mast Road only).'],
+           'crown_road': getattr(W, 'CROWN_ROAD', []),
            'roads': []}
     for r in W.ROADS:
         R = {'n': r['n'], 'name': r['name'], 'from': r['frm'], 'from_name': W.SETTLEMENTS[r['frm']][0], 'to': r['to'],
              'to_name': W.SETTLEMENTS[r['to']][0], 'chapter': r['chapter'], 'detail': r['detail'], 'note': r['note'],
-             'paths': [{'style': st, 'stops': stops} for st, stops in W.ROAD_PATHS[r['n']]], 'legs': []}
+             'paths': [{'style': st, 'stops': stops} for st, stops in W.ROAD_PATHS[r['n']]],
+             'via': getattr(W, 'VIA', {}).get(r['n'], []), 'legs': []}
         for l in r['legs']:
             fld = (fdm.get(l['id']) or {}).get('field') or l['field']
             leg = {'id': l['id'], 'name': l['name'], 'old_name': l['old'], 'origin': l['origin'],
@@ -408,26 +525,7 @@ def update_maps_json(sq):
         s = sq.get(m['id'])
         if s:
             m.setdefault('metadata', {})['town_map_pos'] = [0, s[0], s[1]]
-    # borderland records: new road maps join their borderland
-    add = {'A': [577, 578], 'B': [592], 'H': [752]}
-    for b in d['borderlands']:
-        for i in add.get(b['code'], []):
-            if i not in b['routes']:
-                b['routes'].append(i)
-        if b['code'] == 'A':
-            b['crossings'] = ["2->3 (Revision 14, north out of Briarwick: Frostwick Pass, Frostwick, Rimewood Path, the "
-                              "Rimewood, then Gullcry Cliffs in Isenmar; the Frostflat Causeway is the coast road back to Saltmere)",
-                              "9->10 (north: the Hoarwood, Snowbriar)"]
-        if b['code'] == 'B':
-            b['crossings'] = ["3->4 (south: the Reedholms, the Icecutters' Haul, Brassfall, the Icefall Locks)",
-                              "10->11 (north: the Mast Glacier, Anchorhold, the Cloudstair)"]
-    for m in maps:
-        if m.get('borderland') is None and m['id'] in (577, 578):
-            m['borderland'] = 'The Rimewood'
-        if m['id'] == 592:
-            m['borderland'] = 'The Icefall Locks'
-        if m['id'] == 752:
-            m['borderland'] = 'The Looking-Glass Wood'
+    apply_geography_v2(d, by)
     maps.sort(key=lambda m: m['id'])
     notes = d.setdefault('notes', [])
     tag = 'REV13/14 (cartographer): every road is named (design/PLACE_NAMES.md) and planned as several large maps'
@@ -639,10 +737,10 @@ def main():
         extra = [{'id': int(l.split('\t')[0])} for l in open(mi, encoding='utf-8')
                  if l.strip() and not l.startswith('#') and int(l.split('\t')[0]) < 990]
     sq = build_squares(d['maps'] + [{'id': l['id']} for r, l in W.all_legs()] + extra)
+    if '--no-maps-json' not in sys.argv:
+        d = update_maps_json(sq)        # first: names and kingdoms below read the updated records (one pass)
     names = name_table(d['maps'])
     write_place_names(d['maps'], names, sq)
-    if '--no-maps-json' not in sys.argv:
-        d = update_maps_json(sq)
     write_routes_yaml(d['maps'], sq)
     n_pts = write_town_map(names, sq, d['maps'])
     nf = update_field_defaults()

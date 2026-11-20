@@ -61,7 +61,7 @@ events:
     pages:
       - graphic: {sprite: trainer_GENTLEMAN, dir: down}
         commands:
-          - if: "!Prismfall.has_badge?(2)"
+          - if: "!pfm_gym_won?(:LEADER_DORIAN)"
             then: ["Stage manager: Rehearsals, rehearsals. Opening night is after the Warden's own show - come back with his badge!"]
             else:
               - "Opening night: the Pageant of the Prismfall. You sit with Juno and Dorian in the front row."
@@ -82,7 +82,7 @@ events:
                   - "Dorian Pell: I've never staged it. I'm a coward with excellent diction."
                   - "One line is underlined: \"If heaven will not kneel, we'll build a chain.\""
                   - {switch: [CH3_PAGEANT_DONE, true]}
-                  - {var: [STORY_CHAPTER, 4]}
+                  - {var: [STORY_CHAPTER, 3]}
                   - {selfswitch: [A, true]}
       - cond: {self: A}
   - {type: npc, name: Audience, at: [2, 8], sprite: NPC 03, dir: up, text: "Shh! It's starting!"}

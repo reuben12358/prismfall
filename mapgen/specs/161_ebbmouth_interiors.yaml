@@ -14,7 +14,7 @@ events:
     pages:
       - graphic: {sprite: trainer_PROFESSOR, dir: left}
         commands:
-          - if: "Prismfall.has_badge?(3)"
+          - if: "pfm_gym_won?(:LEADER_MARISOL)"
             then:
               - "Professor Larch: Came by Gale Post with the tide data. Look. The stutters line up exactly with the Lattice draw peaks."
               - "Professor Larch: It's not the Hollow stopping the river. It's us. It's MY design."

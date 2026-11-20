@@ -14,6 +14,19 @@ notes:
 - 'paths: the order of stops as drawn on the maps (style road / side / under / sea / inset; ints are map ids, P:<id> a dungeon
   square, G:<letter> an Antumbra gate, pts:<name> a polyline in world_geo.py).'
 - connections for the Revision 14 early chain are in design/maps.json (rev14_connections).
+- 'Geography v2 (Revision 18): Ossaria north, Isenmar west, Ashkaar east, Zenith/Nadir south, Elowen in the middle. via
+  = legs of an earlier road this road walks (mostly the Crown Road round the Crownwall: crown_road). air = an airship lane
+  (the Mast Road only).'
+crown_road:
+- sq:11,9
+- sq:12,7
+- sq:14,6
+- sq:16,7
+- sq:17,9
+- sq:16,11
+- sq:14,12
+- sq:12,11
+- sq:11,9
 roads:
 - n: 1
   name: The Strand Road
@@ -37,6 +50,7 @@ roads:
     stops:
     - 520
     - 521
+  via: []
   legs:
   - id: 520
     name: The Ferrymen's Mile
@@ -131,7 +145,7 @@ roads:
     - 140
     - 64
     size_was: null
-    built: false
+    built: true
     town_map:
     - - 11
       - 18
@@ -168,7 +182,7 @@ roads:
     - 110
     - 80
     size_was: null
-    built: false
+    built: true
     town_map:
     - - 8
       - 18
@@ -208,6 +222,7 @@ roads:
     - 540
     - 524
     - 120
+  via: []
   legs:
   - id: 541
     name: The Grey Saltings
@@ -397,6 +412,7 @@ roads:
     - 140
     - 560
     - 570
+  via: []
   legs:
   - id: 566
     name: Spinners' Rise
@@ -639,7 +655,9 @@ roads:
   to_name: Lumen City
   chapter: Ch 5
   detail: medium
-  note: 'Borderland B, the Icefall Locks: up the River Ebb to the foot of Zenith''s escarpment and up the frozen falls.'
+  note: 'West to south across the realm (Geography v2: Isenmar never touches Zenith). Up the River Ebb through borderland
+    B, the Icefall Locks (Isenmar/Elowen), along Coppice Ride into the Crownlands, round the south of the Crownwall on Wallshadow
+    Row (the Crown Road), then out through the orchards and lamp-posts of the Arc-Lamp Mile (borderland G) to Lumen.'
   paths:
   - style: road
     stops:
@@ -648,8 +666,14 @@ roads:
     - 592
     - 590
     - 581
+    - 595
+    - sq:11,9
+  - style: road
+    stops:
+    - sq:14,12
     - 593
     - 180
+  via: []
   legs:
   - id: 580
     name: The Reedholms
@@ -690,8 +714,8 @@ roads:
   - id: 592
     name: The Icecutters' Haul
     old_name: null
-    origin: The sled road the ice-cutters' union drags its blocks down, from the falls to the Ebbmouth boats.
-    kingdom: Borderland (Isenmar/Zenith)
+    origin: The sled road the ice-cutters' union drags its blocks down, from the locks to the Ebbmouth boats.
+    kingdom: Borderland (Isenmar/Elowen)
     role: main
     mode: road
     segment: 3
@@ -704,11 +728,9 @@ roads:
     town_map:
     - - 6
       - 7
-    - - 7
-      - 7
     landmark: 'Sawyer''s Cross: where the Haul meets the forest track from Snowbriar to the Frostfang Pass (gated until
       Act III).'
-    wild: Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel.
+    wild: Bergmite, Snover, Mudbray, Pawmi, Magnemite, Wattrel, Deerling.
     exits: 'W: the Reedholms. E: Brassfall. S gate: Snowbriar (Act III). N gate: Frostfang Pass (Act III).'
     fill:
     - ice-sled ruts and block stacks
@@ -721,8 +743,9 @@ roads:
   - id: 581
     name: The Icefall Locks
     old_name: Route 8 - Icefall Locks
-    origin: The frozen falls of the escarpment, cut into steps and locks by Zenith's engineers.
-    kingdom: Borderland (Isenmar/Zenith)
+    origin: 'Where the Ebb falls off the Crownland downs into Isenmar''s ice: frozen falls cut into steps and locks by Zenith''s
+      engineers, to feed the Lattice.'
+    kingdom: Borderland (Isenmar/Elowen)
     role: main
     mode: road
     segment: 3
@@ -735,13 +758,13 @@ roads:
     - 52
     built: false
     town_map:
-    - - 9
+    - - 8
       - 7
     - - 9
-      - 6
+      - 8
     landmark: The Ice Elevator and the fenced Meridian Extraction Lattice No. 4.
     wild: Magnemite, Pawmi, Wattrel, Tadbulb, Bergmite, Snover, Plusle, Minun, Togedemaru.
-    exits: 'W: Brassfall. N: the Arc-Lamp Mile.'
+    exits: 'W: Brassfall. E (top of the falls): Coppice Ride.'
     fill:
     - switchbacks up the frozen falls
     - brass sluices and frozen turbine wheels
@@ -750,12 +773,75 @@ roads:
     - 6 trainers
     secret: Behind the third lock gate, an ice cave with a maintenance ledger.
     side_maps: []
+  - id: 595
+    name: Coppice Ride
+    old_name: null
+    origin: The woodwards' ride through the hazel coppices of the Crownlands, cut back every seventh year since the Accord.
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 3
+    field: MEADOW
+    size:
+    - 110
+    - 72
+    size_was: null
+    built: false
+    town_map:
+    - - 10
+      - 8
+    landmark: The coppice stools in their numbered panels, and the Kingsferry where the ride crosses the Ebb.
+    wild: Skwovet, Deerling, Smoliv, Combee, Pikipek, Nymble, Petilil.
+    exits: 'W: the Icefall Locks (borderland B). E: Wallshadow Row, the Crown Road''s west junction.'
+    fill:
+    - hazel coppice panels in seven ages (a different encounter slice in the tallest)
+    - the Kingsferry punt
+    - a woodward's hut and charcoal clamp
+    - a ride-side shrine where the first view of the Crownwall opens
+    - 5 trainers
+    secret: 'A coppice panel that has not been cut since AF 0: inside it, a ring of old stools and a Miracle Seed.'
+    side_maps: []
+  - id: 594
+    name: Wallshadow Row
+    old_name: null
+    origin: 'The farms in the Crownwall''s shadow: sun for half the day, and the Accord''s tithe for all of it.'
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 3
+    field: MEADOW
+    size:
+    - 150
+    - 80
+    size_was: null
+    built: false
+    town_map:
+    - - 11
+      - 9
+    - - 12
+      - 11
+    - - 14
+      - 12
+    landmark: The Crownwall's white cliffs over the hedgerows, and the Southgate shrine where the Crown Road meets the road
+      to Lumen.
+    wild: 'Lillipup, Wooloo, Smoliv, Fidough, Flabebe, Mareep. Night: Hoothoot, Spinarak, Morelull.'
+    exits: 'W junction: Coppice Ride (to Isenmar) and Prism Falls (to Verdance). N: Kingsmead. S junction: the Arc-Lamp
+      Mile (to Lumen) and the Long Drop (Nadir). E: Candle Down.'
+    fill:
+    - 'the Crown Road: a paved ring road with eighteen milestones round the Crownwall'
+    - tithe barns
+    - hedge-lined fields in the wall's shadow line
+    - the Southgate shrine at the south junction
+    - the west junction's inn and signpost to four kingdoms
+    - 6 trainers
+    secret: A shepherd's track up the Crownwall's foot to a cave the Accord bricked up; the bricks are loose.
+    side_maps: []
   - id: 593
     name: The Arc-Lamp Mile
     old_name: null
     origin: The first road in Velmora lit by electric arc lamps. Zenith counts its age from the night they were switched
       on.
-    kingdom: Zenith
+    kingdom: Borderland (Elowen/Zenith)
     role: main
     mode: road
     segment: 3
@@ -766,15 +852,17 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 10
-      - 6
-    - - 11
-      - 6
-    landmark: One hundred numbered arc lamps, and Lumen's South Gate at the end of them.
-    wild: 'Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite. Night: Joltik, Voltorb.'
-    exits: 'SW: the Icefall Locks. NE: Lumen South Gate.'
+    - - 14
+      - 14
+    - - 15
+      - 15
+    landmark: One hundred numbered arc lamps running out of Lumen into the Crownland orchards, and Lumen's West Gate at
+      the end of them.
+    wild: 'Yamper, Shinx, Pawmi, Rookidee, Klink, Magnemite, Bounsweet. Night: Joltik, Voltorb.'
+    exits: 'NW: Wallshadow Row (the Crown Road). SE: Lumen West Gate.'
     fill:
     - paved boulevard with lamp numbers
+    - orchards with clockwork pickers (borderland G)
     - a tram stop without a tram
     - advertising hoardings
     - the lamplighters' depot
@@ -790,23 +878,31 @@ roads:
   to_name: Duneholt
   chapter: Act II
   detail: outline
-  note: 'Borderland C, the Brass Dunes: the railway east off the plateau and into the sand that buried it.'
+  note: 'South to north through the middle of the realm (Zenith never touches Ossaria): the Meridian railway out of Lumen
+    (borderland G), the Crown Road round the east of the Crownwall (Candle Down, the Highwold), then borderland C, the Brass
+    Dunes, where the line ran into the sand, and on to Duneholt.'
   paths:
   - style: road
     stops:
     - 180
     - 612
+    - sq:16,11
+  - style: road
+    stops:
+    - sq:14,6
     - 600
     - 610
+    - P:604
     - 601
     - 613
     - 200
+  via: []
   legs:
   - id: 612
     name: The Meridian Mainline
     old_name: null
     origin: Zenith's first railway. You walk the service road beside the track.
-    kingdom: Zenith
+    kingdom: Borderland (Zenith/Elowen)
     role: main
     mode: road
     segment: 4
@@ -817,23 +913,82 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 13
-      - 5
-    - - 14
-      - 5
-    landmark: The signal gantries and the mouth of the Static Tunnels.
-    wild: 'Electric and Steel: Magnemite, Klink, Varoom, Rufflet.'
-    exits: ''
+    - - 17
+      - 15
+    - - 17
+      - 13
+    landmark: The signal gantries, and the cutting where the line drops off the plateau into the Crownlands.
+    wild: 'Electric and Steel with orchard edges: Magnemite, Klink, Varoom, Rufflet, Applin.'
+    exits: 'S: Lumen. N: Candle Down (the Crown Road).'
     fill: []
     secret: A signal box whose levers reroute a handcar to a siding.
-    side_maps:
-    - 604
-    - 605
+    side_maps: []
+  - id: 602
+    name: Candle Down
+    old_name: null
+    origin: The downs east of the Crown, where pilgrims light a candle on each cairn on their way to the Pilgrim's Rest.
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 4
+    field: MEADOW
+    size:
+    - 110
+    - 110
+    size_was: null
+    built: false
+    town_map:
+    - - 16
+      - 11
+    - - 17
+      - 9
+    landmark: The candle-cairns, and the view into the Crownwall's one gap.
+    wild: 'Skiddo, Deerling, Swablu, Ponyta, Cottonee, Sentret. Night: Volbeat, Illumise, Litwick.'
+    exits: 'SW: Wallshadow Row (the south junction). SE: the Meridian Mainline and Verdigris. E junction: the Ironway (to
+      Ashkaar) and the Pilgrim Pass. N: the Highwold.'
+    fill:
+    - the Crown Road over open downs
+    - candle-cairns (a cairn errand)
+    - the east junction's coaching inn
+    - chalk hill-figure of a crown
+    - 5 trainers
+    secret: One cairn's candle never goes out; under it, a stair into the Crownwall's foot.
+    side_maps: []
+  - id: 603
+    name: The Highwold
+    old_name: null
+    origin: 'The high wold north of the Crown: sheep, skylarks and the one road in Elowen that runs to the desert.'
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 4
+    field: MEADOW
+    size:
+    - 130
+    - 80
+    size_was: null
+    built: false
+    town_map:
+    - - 16
+      - 7
+    - - 14
+      - 6
+    landmark: The Wold Stones, and the Crownwall's north face white in the sun.
+    wild: Wooloo, Mareep, Skiddo, Rookidee, Hoppip, Bunnelby, Trapinch (on the north slope).
+    exits: 'SE: Candle Down. N junction: the Brass Dunes (to Ossaria). W: Kingsmead.'
+    fill:
+    - the Crown Road along the wold top
+    - sheepfolds and a dew-pond
+    - the Wold Stones
+    - the north junction's caravan yard (camels and ox-carts side by side)
+    - 5 trainers
+    secret: A dew-pond that never dries, even in the drought years; something drinks from it at night.
+    side_maps: []
   - id: 600
     name: The Brass Dunes
     old_name: Route 9 - The Brass Dunes
     origin: 'Kept name: dunes the colour of the locomotives buried in them.'
-    kingdom: Borderland (Zenith/Ossaria)
+    kingdom: Borderland (Elowen/Ossaria)
     role: main
     mode: road
     segment: 4
@@ -846,16 +1001,16 @@ roads:
     - 28
     built: false
     town_map:
-    - - 15
+    - - 14
       - 5
-    - - 16
-      - 5
-    landmark: The broken viaduct and the half-buried engine 'Progress'.
-    wild: Sandshrew, Silicobra, Hippopotas, Phanpy, Electrike, Orthworm.
+    landmark: The broken viaduct where the Mainline ran into the sand, and the half-buried engine 'Progress'.
+    wild: Sandshrew, Silicobra, Hippopotas, Phanpy, Electrike, Orthworm, Cacnea, Skwovet.
     exits: ''
     fill: []
     secret: A carriage door under the sand opens into a buried dining car.
-    side_maps: []
+    side_maps:
+    - 604
+    - 605
   - id: 601
     name: The Rib Road
     old_name: Route 10
@@ -873,9 +1028,7 @@ roads:
     - 56
     built: false
     town_map:
-    - - 18
-      - 4
-    - - 19
+    - - 16
       - 4
     landmark: 'The Rib Gate: the two largest ribs, meeting overhead.'
     wild: 'Ground and Rock: Sandile, Trapinch, Cacnea, Rolycoly, Cubone.'
@@ -898,10 +1051,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 20
-      - 4
-    - - 21
-      - 4
+    - - 16
+      - 3
     landmark: The bleaching frames of the linen-makers and Duneholt's Sandgate on the horizon.
     wild: Maractus, Hippopotas, Silicobra, Vullaby.
     exits: ''
@@ -916,7 +1067,8 @@ roads:
   to_name: Mirefen
   chapter: Act II
   detail: outline
-  note: 'Borderland D, the Leach Canyons: down the poisoned river to Nadir''s marsh.'
+  note: 'Down the River Leach: south out of the desert through borderland D, the Leach Canyons (Ossaria/Elowen), along Wormwood
+    Lea east of the Crown, and over the Gutterfall into the Mirefen marsh under Zenith''s escarpment (Nadir, beneath Zenith).'
   paths:
   - style: road
     stops:
@@ -925,8 +1077,10 @@ roads:
     - 632
     - 621
     - 630
+    - 634
     - 633
     - 220
+  via: []
   legs:
   - id: 620
     name: The Marrow Road
@@ -945,10 +1099,8 @@ roads:
     - 30
     built: false
     town_map:
-    - - 22
-      - 5
-    - - 22
-      - 6
+    - - 17
+      - 4
     landmark: The dig terraces and the mouth of the Ossuary of Dunes.
     wild: 'Fossil country: Cubone, Drilbur, Sandile, Baltoy, Nosepass.'
     exits: ''
@@ -972,10 +1124,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 21
-      - 6
-    - - 21
-      - 7
+    - - 18
+      - 4
     landmark: 'The stones themselves, and the crossroads post: Duneholt, Charwell, Vigil.'
     wild: Sigilyph, Baltoy, Gligar, Sandaconda.
     exits: ''
@@ -986,8 +1136,9 @@ roads:
   - id: 621
     name: The Leach Canyons
     old_name: Route 12 - The Leach Canyons
-    origin: 'Kept name: the canyons the River Leach cut, glowing blue with what Nadir puts in it.'
-    kingdom: Borderland (Ossaria/Nadir)
+    origin: 'Kept name: the red gorges the River Leach cut on its way out of the desert; the forest climbs in along the
+      water.'
+    kingdom: Borderland (Ossaria/Elowen)
     role: main
     mode: road
     segment: 5
@@ -1000,18 +1151,50 @@ roads:
     - 40
     built: false
     town_map:
-    - - 20
-      - 8
-    landmark: The blue canals and the bone-char filter towers.
-    wild: Ekans, Gulpin, Shroodle, Maschiff, Skorupi, Krokorok, Glimmet.
+    - - 19
+      - 5
+    landmark: Gallery forest in the gorge bottoms and the bone-char filter towers above.
+    wild: Sandile, Trapinch, Maractus, Skwovet, Deerling, Bramblin, Gligar, Ekans.
     exits: ''
     fill: []
     secret: A dry side canyon with a clean spring that neither side knows about.
     side_maps: []
+  - id: 634
+    name: Wormwood Lea
+    old_name: null
+    origin: Bitter meadows along the Leach east of the Crown. The river is still clean here, and the wormwood keeps the
+      leeches off.
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 5
+    field: MEADOW
+    size:
+    - 90
+    - 130
+    size_was: null
+    built: false
+    town_map:
+    - - 20
+      - 8
+    - - 20
+      - 10
+    landmark: The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses.
+    wild: 'Marill, Psyduck, Ducklett, Skiddo, Flabebe, Venonat, Wooper. Fishing: Basculin, Barboach.'
+    exits: 'N: Charwell. S: the Gutterfall. Crossings: the Ironway at the ford, the Pilgrim Pass at the south bridge.'
+    fill:
+    - the river meadows in strips
+    - the wormwood stills (a bitters errand)
+    - the Ironway ford
+    - eel-traps
+    - the south bridge with its first pilgrim shrine
+    - 5 trainers
+    secret: Where the Leach first turns blue, a pipe comes out of the bank. It is warm.
+    side_maps: []
   - id: 633
     name: The Gutterfall
     old_name: null
-    origin: Where the Leach drops off the canyon lip into the marsh. Nadir named it.
+    origin: Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it.
     kingdom: Nadir
     role: main
     mode: road
@@ -1023,11 +1206,9 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 18
-      - 8
-    - - 17
-      - 8
-    landmark: The blue waterfall and the ladder-town clinging beside it.
+    - - 20
+      - 12
+    landmark: The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it.
     wild: Grimer, Croagunk, Trubbish, Stunky, Toxel.
     exits: ''
     fill: []
@@ -1041,7 +1222,8 @@ roads:
   to_name: Cindervault
   chapter: Act II
   detail: outline
-  note: 'Borderland E, the Sulfur Reach: marsh causeways, the hot lake, then the Dominion''s first road.'
+  note: 'Out of the marsh by the leech-gatherers'' causeway, round the sulfur lake of borderland E (the Sulfur Reach, Elowen/Ashkaar:
+    burnt woods and hot springs), then the Dominion''s first road.'
   paths:
   - style: road
     stops:
@@ -1051,6 +1233,7 @@ roads:
     - 650
     - 652
     - 240
+  via: []
   legs:
   - id: 640
     name: Leechman's Walk
@@ -1069,10 +1252,8 @@ roads:
     - 32
     built: false
     town_map:
-    - - 17
-      - 10
-    - - 18
-      - 10
+    - - 21
+      - 13
     landmark: The leech-gatherers' stilts and the mouth of the Miasma Caverns.
     wild: Croagunk, Grimer, Shroodle, Wooper (Paldean), Scraggy.
     exits: ''
@@ -1086,7 +1267,7 @@ roads:
     name: Lake Sallow
     old_name: Route 14 - Sulfur Reach (Lake Sallow)
     origin: Named for its colour. The whole lake is one hot spring.
-    kingdom: Borderland (Nadir/Ashkaar)
+    kingdom: Borderland (Elowen/Ashkaar)
     role: main
     mode: road
     segment: 6
@@ -1099,12 +1280,12 @@ roads:
     - 46
     built: false
     town_map:
-    - - 19
+    - - 22
       - 10
-    - - 20
+    - - 23
       - 10
-    landmark: The yellow lake, its geysers, and Lantern Isle steaming in the middle.
-    wild: Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar.
+    landmark: The yellow lake, its geysers, the scorched woods round its shore, and Lantern Isle steaming in the middle.
+    wild: Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar, Bramblin, Fletchinder.
     exits: ''
     fill: []
     secret: A geyser that lifts a surfer onto the cliff shelf above the lake.
@@ -1125,10 +1306,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 22
-      - 10
-    - - 23
-      - 10
+    - - 24
+      - 9
     landmark: The avenue of pyres and Cindervault's Caldera Gate.
     wild: 'Fire and Dragon: Growlithe, Litleo, Torkoal, Axew, Fletchinder.'
     exits: ''
@@ -1143,13 +1322,19 @@ roads:
   to_name: Ironreach
   chapter: Act II
   detail: outline
-  note: West again over the higher pass. The war road north (the Cinderglass Barrens) leaves from the same gate.
+  note: 'West again: the Ashmarch, the Ironway pass out of the Dominion (borderland E), the Crown Road round the Crownwall''s
+    east (Candle Down), then down the Long Drop into Ironreach under Zenith''s west rim (Nadir). The war road (the Cinderglass
+    Barrens, borderland M) leaves Cindervault''s north gate for the front in Ossaria.'
   paths:
   - style: road
     stops:
     - 240
     - 660
     - 661
+    - sq:17,9
+  - style: road
+    stops:
+    - sq:16,11
     - 672
     - 260
   - style: side
@@ -1159,6 +1344,8 @@ roads:
     - 670
     - 673
     - 927
+  via:
+  - 602
   legs:
   - id: 660
     name: The Ashmarch
@@ -1178,10 +1365,8 @@ roads:
     built: false
     town_map:
     - - 23
-      - 11
-    - - 22
-      - 11
-    landmark: The mile-forts and the Cinderhorn smoking to the east.
+      - 7
+    landmark: The mile-forts and the Cinderhorn smoking to the south-east.
     wild: Numel, Torkoal, Rolycoly, Slugma, Druddigon.
     exits: ''
     fill: []
@@ -1195,7 +1380,7 @@ roads:
     name: The Ironway
     old_name: Route 16 - The Ironway
     origin: 'Kept name: the pass the ore came down, on rails laid by Nadir and paid for by Ashkaar.'
-    kingdom: Borderland (Ashkaar/Nadir)
+    kingdom: Borderland (Elowen/Ashkaar)
     role: main
     mode: road
     segment: 7
@@ -1209,14 +1394,12 @@ roads:
     built: false
     town_map:
     - - 21
-      - 11
+      - 7
     - - 20
-      - 11
-    - - 19
-      - 11
-    landmark: The ore-cart incline and the Truce Posts.
-    wild: Scraggy, Houndour, Cyclizar, Machop, Aron, Charcadet.
-    exits: ''
+      - 7
+    landmark: The ore-cart incline down to the Leach ford, the burnt woods either side, and the Truce Posts.
+    wild: Scraggy, Houndour, Cyclizar, Machop, Aron, Charcadet, Bramblin.
+    exits: 'E: the Ashmarch. W: the Leach ford (Wormwood Lea), then Candle Down (the Crown Road''s east junction).'
     fill: []
     secret: A runaway ore cart you can ride down a closed spur.
     side_maps: []
@@ -1235,9 +1418,9 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 18
-      - 11
-    landmark: The winding-tower and the cage lift.
+    - - 16
+      - 12
+    landmark: The winding-tower at the Crown Road's south junction, and the cage lift.
     wild: Timburr, Machop, Pawniard, Trubbish, Tinkatink.
     exits: ''
     fill: []
@@ -1260,13 +1443,14 @@ roads:
     - 40
     built: false
     town_map:
-    - - 25
-      - 9
-    - - 25
-      - 8
-    landmark: Black glass dunes and lava tubes.
+    - - 24
+      - 6
+    - - 23
+      - 5
+    landmark: 'Black glass dunes and lava tubes: the volcanic ash desert where the Dominion meets the bone sands.'
     wild: Carkol, Magcargo, Torkoal, Vibrava, Gible, Onix.
-    exits: ''
+    exits: 'S: Cindervault''s north gate. N: Glasswake, then the war road west across Ossaria to the Ashkaar Siege Camp,
+      or the Wyrmtongue to Cinder Cape.'
     fill: []
     secret: A lava tube that comes out inside the Petrified Ashwood.
     side_maps:
@@ -1286,15 +1470,15 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 26
-      - 5
-    - - 26
-      - 4
+    - - 24
+      - 3
+    - - 25
+      - 3
     landmark: The forked spit and the Warfort's beacon.
     wild: Fire and Dragon, high level; sea birds.
     exits: ''
     fill: []
-    secret: At the fork's left tip, a sea cave that looks across at the Rime Isles.
+    secret: At the fork's left tip, a sea cave that looks west along the coast to the smoke of the war in the sands.
     side_maps: []
 - n: 9
   name: The Root Road
@@ -1304,7 +1488,8 @@ roads:
   to_name: Verdance
   chapter: Act III
   detail: outline
-  note: 'Borderland F, the Rootdeep: out of the mines through the roots and up into Elowen''s royal country.'
+  note: 'Borderland F, the Rootdeep: out of the mines under Zenith''s west rim through the Gossamer''s roots, past Lanternroot,
+    across the Crown Road''s south-west and over Prism Falls into Elowen''s royal country.'
   paths:
   - style: road
     stops:
@@ -1315,6 +1500,12 @@ roads:
     - 681
     - 693
     - 280
+  - style: road
+    stops:
+    - sq:11,9
+    - 681
+  via:
+  - 594
   legs:
   - id: 692
     name: The Tailings
@@ -1331,8 +1522,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 16
-      - 12
+    - - 15
+      - 13
     landmark: Grey waste cones and the entrance to Grudgestone Quarry.
     wild: Trubbish, Roggenrola, Tinkatink, Scraggy, Varoom.
     exits: ''
@@ -1359,11 +1550,11 @@ roads:
     - 56
     built: false
     town_map:
-    - - 15
-      - 12
     - - 14
+      - 13
+    - - 13
       - 12
-    landmark: Root-cathedrals and overgrown ore carts.
+    landmark: Root-cathedrals (the Gossamer's roots) and overgrown ore carts.
     wild: Foongus, Paras, Shiinotic, Breloom, Toedscool, Bramblin, Machoke.
     exits: ''
     fill: []
@@ -1386,8 +1577,6 @@ roads:
     - 36
     built: false
     town_map:
-    - - 12
-      - 11
     - - 11
       - 11
     landmark: The falls and the Rainbow Stair beside them.
@@ -1428,8 +1617,8 @@ roads:
   to_name: Rimeholt
   chapter: Act III
   detail: outline
-  note: 'Borderland A again, in the north: royal hunting country, the snow-forest, over the Frostfang Pass to the frozen
-    sea.'
+  note: 'Borderland A2, the Hoarwood (Elowen/Isenmar), in the north-west: royal hunting country, the snow-forest, over the
+    Frostfang Pass to the frozen sea.'
   paths:
   - style: road
     stops:
@@ -1440,6 +1629,7 @@ roads:
     - P:704
     - 712
     - 300
+  via: []
   legs:
   - id: 700
     name: The Hart's Run
@@ -1531,7 +1721,9 @@ roads:
   to_name: Skyreach
   chapter: Act III
   detail: outline
-  note: 'Borderland B again, in the north: along the frozen sea, across the Mast Glacier and up the Cloudstair.'
+  note: 'Along the frozen coast on the thane''s sled-road, up the Mast Glacier (borderland B2, Isenmar/Ossaria: tundra and
+    permafrost dunes) to Anchorhold, where the airships moor; then by airship over Ossaria and Elowen to Skyreach''s Cloudstair.
+    The only road with an air leg (Act III, Skyreach''s airships): Isenmar and Zenith share no border.'
   paths:
   - style: road
     stops:
@@ -1539,9 +1731,16 @@ roads:
     - 720
     - 721
     - 730
+  - style: air
+    stops:
+    - 730
+    - P:724
+  - style: road
+    stops:
     - P:724
     - 732
     - 320
+  via: []
   legs:
   - id: 720
     name: The Thane's Sled-Road
@@ -1564,7 +1763,7 @@ roads:
       - 1
     - - 5
       - 1
-    landmark: Sled posts, ice-fishing camps, the frozen sea to the north.
+    landmark: Sled posts, ice-fishing camps, the frozen sea to the north, and the war-sleds going east.
     wild: Walrein, Dewgong, Cloyster, Mamoswine, Delibird.
     exits: ''
     fill: []
@@ -1575,7 +1774,7 @@ roads:
     name: The Mast Glacier
     old_name: Route 22 - Mast Glacier
     origin: 'Kept name: airships are ice-anchored along the glacier tongue, and their masts look like a winter forest.'
-    kingdom: Borderland (Isenmar/Zenith)
+    kingdom: Borderland (Isenmar/Ossaria)
     role: main
     mode: road
     segment: 10
@@ -1589,11 +1788,11 @@ roads:
     built: false
     town_map:
     - - 6
-      - 1
-    - - 6
       - 2
-    landmark: The anchored airships.
-    wild: 'Ice with Flying or Steel: Swablu, Skarmory, Cryogonal, Bronzor.'
+    - - 7
+      - 2
+    landmark: The anchored airships, and the glacier's snout running out onto frozen dunes.
+    wild: 'Ice with Ground or Flying: Swinub, Cetoddle, Sandshrew (Alolan), Swablu, Skarmory, Hippopotas, Cryogonal.'
     exits: ''
     fill: []
     secret: A crevasse with an airship that never left.
@@ -1613,10 +1812,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 8
-      - 3
-    - - 9
-      - 3
+    - - 18
+      - 15
     landmark: Cable gantries over a long drop.
     wild: 'Flying and Steel: Skarmory, Corviknight, Drifblim, Magneton.'
     exits: ''
@@ -1634,7 +1831,9 @@ roads:
   to_name: Lucent
   chapter: Act III
   detail: outline
-  note: South across the plateau, through borderlands G and H, and through the Mere into the kingdom behind the glass.
+  note: North off the plateau through borderland G (Conductors' Causeway, the Wired Wood, Verdigris), round the Crownwall's
+    north on the Crown Road (Candle Down, the Highwold, Kingsmead), into the Looking-Glass Wood (borderland H) and through
+    Mirror Mere into the kingdom behind the glass.
   paths:
   - style: road
     stops:
@@ -1642,6 +1841,10 @@ roads:
     - 740
     - 741
     - 750
+    - sq:17,9
+  - style: road
+    stops:
+    - sq:12,7
     - 752
     - 753
     - G:A
@@ -1650,6 +1853,9 @@ roads:
     - G:A
     - 755
     - 340
+  via:
+  - 602
+  - 603
   legs:
   - id: 740
     name: Conductors' Causeway
@@ -1668,10 +1874,8 @@ roads:
     - 28
     built: false
     town_map:
-    - - 10
-      - 4
-    - - 10
-      - 5
+    - - 18
+      - 13
     landmark: Rows of conductors and Stormwatch Spire.
     wild: 'Electric and Flying: Electabuzz, Kilowattrel, Emolga, Zebstrika.'
     exits: ''
@@ -1699,15 +1903,41 @@ roads:
     - 56
     built: false
     town_map:
-    - - 10
-      - 7
-    - - 11
-      - 8
+    - - 18
+      - 12
     landmark: Vine-wrapped pylons and clockwork orchards.
     wild: Luxray, Boltund, Klang, Floette, Granbull, Tinkatuff.
     exits: ''
     fill: []
     secret: A greenhouse-factory whose clockwork bees have gone wild.
+    side_maps: []
+  - id: 756
+    name: Kingsmead
+    old_name: null
+    origin: The king's meadow under the Crownwall's north-west face, where Elowen's royal horses grazed before there was
+      an Accord.
+    kingdom: Elowen
+    role: main
+    mode: road
+    segment: 11
+    field: MEADOW
+    size:
+    - 110
+    - 90
+    size_was: null
+    built: false
+    town_map:
+    - - 12
+      - 7
+    landmark: The old paddock walls, and the Glassfall Scar glittering high on the wall above.
+    wild: 'Ponyta, Blitzle, Deerling, Swablu, Hoppip, Cottonee. Night: Morelull, Hatenna.'
+    exits: 'E: the Highwold. S: Wallshadow Row. W: the Looking-Glass Wood (borderland H).'
+    fill:
+    - the Crown Road through paddocks
+    - the royal stud's ruined stables
+    - a horse-fair ground (a racing errand)
+    - 5 trainers
+    secret: The farrier's forge still has a fire in it; nobody tends it.
     side_maps: []
   - id: 752
     name: The Looking-Glass Wood
@@ -1724,10 +1954,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 12
-      - 9
-    - - 12
-      - 10
+    - - 11
+      - 7
     landmark: Pools that reflect the wrong sky, and a stream that runs uphill.
     wild: Kirlia, Flittle, Rabsca, Ribombee, Hatenna.
     exits: ''
@@ -1769,7 +1997,8 @@ roads:
   to_name: Cragholm
   chapter: Act IV
   detail: outline
-  note: 'Borderland I, the Obsidian Barrows: out of Antumbra through the tomb-mirrors into Ossaria''s high crags.'
+  note: 'Borderland I, the Obsidian Barrows: out of Antumbra through the Grave Glass at Vigil and up Spinefall Gorge to
+    Ossaria''s high crags.'
   paths:
   - style: inset
     stops:
@@ -1778,12 +2007,12 @@ roads:
     - G:B
   - style: road
     stops:
-    - G:C
+    - G:B
     - 760
-    - 770
     - 761
     - 773
     - 360
+  via: []
   legs:
   - id: 772
     name: Yesterday's Road
@@ -1828,10 +2057,10 @@ roads:
     - 32
     built: false
     town_map:
-    - - 22
-      - 8
-    - - 23
-      - 8
+    - - 20
+      - 4
+    - - 21
+      - 4
     landmark: The tomb-mirrors and the desert hanging in the sky.
     wild: Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Houndstone.
     exits: ''
@@ -1855,10 +2084,10 @@ roads:
     - 56
     built: false
     town_map:
-    - - 24
-      - 6
-    - - 24
-      - 5
+    - - 22
+      - 4
+    - - 22
+      - 3
     landmark: The waterfall over fossil vertebrae.
     wild: 'Ground and Rock with water: Quagsire, Relicanth, Tyrunt, Archen.'
     exits: ''
@@ -1882,9 +2111,7 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 24
-      - 4
-    - - 24
+    - - 21
       - 3
     landmark: The drum-stair and Cragholm's lift towers above.
     wild: Rhydon, Gliscor, Lairon, Archeops.
@@ -1914,6 +2141,7 @@ roads:
     - 781
     - 790
     - 380
+  via: []
   legs:
   - id: 780
     name: The Jawbone Ridge
@@ -1932,13 +2160,9 @@ roads:
     - 30
     built: false
     town_map:
-    - - 23
-      - 3
-    - - 23
-      - 4
-    - - 23
-      - 5
-    landmark: The teeth, and the Darkglass Mine headframe.
+    - - 20
+      - 2
+    landmark: The teeth, the Darkglass Mine headframe, and the war's smoke to the west.
     wild: Tyranitar line, Lycanroc, Garganacl, Skarmory.
     exits: ''
     fill: []
@@ -2005,8 +2229,9 @@ roads:
   to_name: Cogsworth
   chapter: Act IV
   detail: outline
-  note: Out of Antumbra by the Barrows' east gate, over Ossaria's dry seabed to the crossroads, then borderland C' to the
-    foundries.
+  note: 'Out of Antumbra by the Slagglass, the black mirror Cogsworth''s slag cooled into on the Slag Mesa (borderland G,
+    Zenith''s eastern waste), then down the Smokestack Parade into the foundries. Side road: the Dry Tide, Ossaria''s dry
+    seabed west of Duneholt, out to the war''s battlefield.'
   paths:
   - style: inset
     stops:
@@ -2016,11 +2241,15 @@ roads:
   - style: road
     stops:
     - G:C
-    - 632
-    - 810
     - 801
     - 811
     - 400
+  - style: side
+    stops:
+    - 200
+    - 810
+    - P:926
+  via: []
   legs:
   - id: 800
     name: The Noonless Road
@@ -2053,36 +2282,11 @@ roads:
     - 805
     - 806
     - 808
-  - id: 810
-    name: The Dry Tide
-    old_name: null
-    origin: An old seabed, rippled like a beach the sea left one evening and never came back to.
-    kingdom: Ossaria
-    role: main
-    mode: road
-    segment: 14
-    field: DESERT
-    size:
-    - 140
-    - 72
-    size_was: null
-    built: false
-    town_map:
-    - - 20
-      - 6
-    - - 19
-      - 6
-    landmark: Shell pavements and a stranded ship's ribs.
-    wild: Fossil ground types, Sandaconda, Palossand.
-    exits: ''
-    fill: []
-    secret: At night you can hear the tide. Follow it.
-    side_maps: []
   - id: 801
     name: The Slag Mesa
     old_name: Route 30 - Slag Mesa
     origin: 'Kept name: a mesa that is half rock and half what Cogsworth poured on it.'
-    kingdom: Borderland (Ossaria/Zenith)
+    kingdom: Borderland (Elowen/Zenith)
     role: main
     mode: road
     segment: 14
@@ -2095,11 +2299,9 @@ roads:
     - 56
     built: false
     town_map:
-    - - 18
-      - 3
-    - - 17
-      - 3
-    landmark: Slag falls, still warm.
+    - - 21
+      - 14
+    landmark: 'Slag falls, still warm, and the Slagglass: a cooled black pour that reflects Antumbra (gate C).'
     wild: 'Steel and Ground: Excadrill, Orthworm, Bronzong, Garbodor.'
     exits: ''
     fill: []
@@ -2120,13 +2322,38 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 17
-      - 2
+    - - 20
+      - 14
     landmark: The numbered stacks and three shift-clocks.
     wild: Klinklang, Magneton, Revavroom, Corviknight.
     exits: ''
     fill: []
     secret: Stack 9 has no furnace under it.
+    side_maps: []
+  - id: 810
+    name: The Dry Tide
+    old_name: null
+    origin: An old seabed, rippled like a beach the sea left one evening and never came back to.
+    kingdom: Ossaria
+    role: side
+    mode: road
+    segment: 14
+    field: DESERT
+    size:
+    - 140
+    - 72
+    size_was: null
+    built: false
+    town_map:
+    - - 15
+      - 3
+    - - 14
+      - 3
+    landmark: Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought.
+    wild: Fossil ground types, Sandaconda, Palossand.
+    exits: 'E: Duneholt''s west gate. W: the Glass Dunes (the war''s battlefield; story-gated).'
+    fill: []
+    secret: At night you can hear the tide. Follow it.
     side_maps: []
 - n: 16
   name: The Drowned Road
@@ -2136,7 +2363,8 @@ roads:
   to_name: Underveil
   chapter: Act IV
   detail: outline
-  note: 'Borderland L, the Hanging Stair: off the edge of Zenith and down the cliff to the drowned coast.'
+  note: 'Borderland L, the Hanging Stair: off the plateau''s south-east rim and down the cliff to the drowned south coast,
+    then by water over the towers of Aurelia to Underveil.'
   paths:
   - style: road
     stops:
@@ -2149,6 +2377,7 @@ roads:
     - 830
     - 821
     - 420
+  via: []
   legs:
   - id: 832
     name: The Brink
@@ -2165,9 +2394,9 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 15
-      - 2
-    landmark: The rail, the lift-heads, the telescopes.
+    - - 20
+      - 16
+    landmark: The rail, the lift-heads, the telescopes over the Hallow Strait.
     wild: Flying and Steel.
     exits: ''
     fill: []
@@ -2191,8 +2420,8 @@ roads:
     - 28
     built: false
     town_map:
-    - - 15
-      - 1
+    - - 19
+      - 16
     landmark: Cable lifts and shanty scaffolds.
     wild: Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty.
     exits: ''
@@ -2216,9 +2445,9 @@ roads:
     - 50
     built: false
     town_map:
-    - - 13
-      - 1
-    landmark: Tower-tops standing out of the sea.
+    - - 18
+      - 19
+    landmark: Tower-tops standing out of the Hallow Strait.
     wild: 'Water with Poison or Dark: Tentacruel, Sharpedo, Toxapex, Dragalge.'
     exits: ''
     fill: []
@@ -2236,7 +2465,8 @@ roads:
   to_name: Gloaming
   chapter: Act V
   detail: outline
-  note: 'Borderland F again, underground: the river that runs south beneath half the realm and surfaces in Elowen''s twilight.'
+  note: 'Borderland F again, underground: the river that runs east beneath Lumen''s cliffs and surfaces in the Gloamwood,
+    in Elowen''s south-east.'
   paths:
   - style: road
     stops:
@@ -2246,13 +2476,13 @@ roads:
     stops:
     - 852
     - pts:BLINDWATER
-    - 840
     - 850
   - style: road
     stops:
     - 850
     - 841
     - 440
+  via: []
   legs:
   - id: 852
     name: The Throat
@@ -2269,8 +2499,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 11
-      - 1
+    - - 17
+      - 18
     landmark: The river mouth, in reverse.
     wild: Dark and Poison.
     exits: ''
@@ -2294,15 +2524,15 @@ roads:
     - 32
     built: false
     town_map:
-    - - 14
-      - 13
-    - - 14
-      - 14
+    - - 18
+      - 18
+    - - 19
+      - 18
     landmark: Root-arches over black water and the lamps of Mothwell.
     wild: 'Cave water: Woobat, Toedscruel, Shiinotic, Basculin.'
     exits: ''
     fill: []
-    secret: A side channel that loops under Crownhaven.
+    secret: A side channel that loops under Lumen's foundations.
     side_maps:
     - 844
     - 845
@@ -2324,10 +2554,8 @@ roads:
     - 56
     built: false
     town_map:
-    - - 15
-      - 16
-    - - 16
-      - 16
+    - - 21
+      - 17
     landmark: The river's rising and the first lantern-flowers.
     wild: 'Fairy and Grass at dusk: Morgrem, Shiinotic, Trevenant.'
     exits: ''
@@ -2352,11 +2580,12 @@ roads:
     - 870
     - 872
     - 460
+  via: []
   legs:
   - id: 860
     name: The Gloamwood
     old_name: Route 35 - Gloamwood
-    origin: 'Kept name: Elowen''s heart, where it has been dusk for three hundred years.'
+    origin: 'Kept name: Elowen''s twilight wood in the south-east, where it has been dusk for three hundred years.'
     kingdom: Elowen
     role: main
     mode: road
@@ -2370,9 +2599,7 @@ roads:
     - 32
     built: false
     town_map:
-    - - 17
-      - 17
-    - - 18
+    - - 23
       - 17
     landmark: The Great Tree on the skyline and paths that move.
     wild: Fairy, Grass, Bug, high level.
@@ -2398,10 +2625,8 @@ roads:
     - 56
     built: false
     town_map:
-    - - 19
-      - 17
-    - - 20
-      - 17
+    - - 23
+      - 16
     landmark: Ember-leaved giants and Thornwar forts.
     wild: Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon.
     exits: ''
@@ -2423,10 +2648,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 22
-      - 16
-    - - 23
-      - 16
+    - - 24
+      - 14
     landmark: The vertebral crags and the dragon roost-poles.
     wild: Dragon and Fire, high level.
     exits: ''
@@ -2443,7 +2666,9 @@ roads:
   to_name: Crownhaven
   chapter: Act V
   detail: outline
-  note: 'Borderland K: the only way overland into the Crown.'
+  note: 'Borderland K, now on Elowen ground: from the Dominion''s toll-fort west over the Pilgrim Pass (eighteen shrines
+    across the Sulfur Reach and the Leach) to Pilgrim''s Rest, then through Sovereign''s Ascent in the Crownwall''s one
+    gap and down the Coronation Road. Every road in Velmora ends on the Crown Road; only this one goes in.'
   paths:
   - style: road
     stops:
@@ -2454,6 +2679,7 @@ roads:
     - P:884
     - 893
     - 480
+  via: []
   legs:
   - id: 892
     name: Dominar's Toll
@@ -2470,10 +2696,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 23
-      - 15
-    - - 23
-      - 14
+    - - 24
+      - 12
     landmark: The toll-fort across the whole valley.
     wild: Fire, Dragon, Fighting.
     exits: ''
@@ -2483,23 +2707,25 @@ roads:
   - id: 880
     name: The Pilgrim Pass
     old_name: Route 37 - Pilgrim Pass
-    origin: 'Kept name: eighteen shrines, one per Plate, up the Crownwall.'
-    kingdom: Borderland (Ashkaar/Crownhaven)
+    origin: 'Kept name: eighteen shrines, one per Plate, from the Dominion''s border to the Crownwall''s gap.'
+    kingdom: Borderland (Elowen/Crownhaven)
     role: main
     mode: road
     segment: 18
     field: MOUNTAIN
     size:
-    - 80
     - 140
+    - 80
     size_was:
     - 32
     - 56
     built: false
     town_map:
     - - 22
-      - 14
-    landmark: The eighteen shrines.
+      - 12
+    - - 20
+      - 11
+    landmark: The eighteen shrines, the pilgrim camps, and the south bridge over the Leach.
     wild: Mixed, every type, high level.
     exits: ''
     fill: []
@@ -2520,10 +2746,8 @@ roads:
     size_was: null
     built: false
     town_map:
-    - - 20
-      - 13
-    - - 20
-      - 14
+    - - 15
+      - 10
     landmark: Statues of every Sovereign; the last plinth is empty.
     wild: None on the road; Festival crowds.
     exits: ''
