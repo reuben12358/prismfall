@@ -109,7 +109,7 @@ em.register(:EL_GLASS_PONYTA, {
 #--- Chapter 3 after Badge 2: the Gossamer (524/525), Briarwick (120)
 em.register(:EL_HERACROSS, {
   :species => :HERACROSS, :level => 19, :ability => :MOXIE, :nature => :ADAMANT, :ivs => 25,
-  :moves => [:FURYATTACK, :HORNATTACK, :ARMTHRUST, :ENDURE],
+  :moves => [:FURYATTACK, :HORNATTACK, :REVENGE, :ENDURE],
   :kind => :battle, :on_ko => :retry, :field => :SILKWOOD, :badges => 2,
   :map => 524, :where => "The sap tree on the old trail, Gossamer Wood (after Badge 2)", :chapter => 3,
   :quest => :EL_HORN_AND_PINCER, :trigger => "Side with Pinsir; Heracross fights you",

@@ -160,3 +160,7 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   then re-shade procedurally: locks radiate from a crown point above the frame with a slight wave, each lock lit on one side and
   falling into a crease (sawtooth profile), 4 shades (pass 3's own two plus one darker, one lighter), one highlight arc that
   follows the dome and breaks at the creases. Black stays only on the outer silhouette.
+- **Middle ground (installed, `16b_juno_hair_middle.png`, `juno_hair_fix.py middle`, files `*_p3m`):** the user liked the flow
+  but missed pass 3's shape. Pass 3's internal strand lines come back only as lock divisions (runs of 4+ px, free ends trimmed
+  = tapered) in a dark brown two shades under the hair (never black), pass 3's darkest tone returns as the band the wreath sits
+  on, and the highlight is one crisp arc over the crown above the wreath. Previous set in `passes/replaced_p3h_before_middle/`.

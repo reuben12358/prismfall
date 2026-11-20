@@ -268,12 +268,167 @@ def build_528():
     r.write(h, '528_marram_down.yaml', '# Marram Down (528). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/528.png' if PREV else None)
 
 
+# ====================================================================================================== 520 The Ferrymen's Mile
+def old_events(fn, mid):
+    out = {}
+    for d in yaml.safe_load_all(open(os.path.join(HERE, 'specs', fn))):
+        if d and d['id'] == mid:
+            for e in d.get('events', []):
+                out[e.get('name') or (e.get('trainer') and e['trainer'][1]) or (e.get('text') or '')[:20] or '%s@%s' % (e['type'], e['at'])] = e
+    return out
+
+
+def at(e, x, y):
+    e = dict(e); e['at'] = [x, y]; return e
+
+
+def line_events(r, base, y, x0, x1, pages):
+    """a touch line across the road at row y (every road cell from x0 to x1)"""
+    out = []
+    xs = [x for x in range(x0, x1 + 1) if r.m.cls[y, x] in 'dg']
+    for i, x in enumerate(xs):
+        out.append({'type': 'event', 'name': '%s %d' % (base, i + 1), 'at': [x, y], 'pages': pages})
+        r.m.taken[y, x] = True
+    return out
+
+
+def barrier_tile():
+    return int(np.array(STAMPS['pf_barricade']['layers']).max())
+
+
+SENDOFF_520 = [P('LARCH', 'neutral', "Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off -- the Glasswood's walked across it -- so you go round by the coast.", '', 'Professor Larch'),
+               P('LARCH', 'neutral', 'Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden\'s Dorian Pell. He\'ll call you "darling" and mean it about a third of the time.', '', 'Professor Larch'),
+               P('LARCH', 'neutral', "Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.", '', 'Professor Larch'),
+               P('JUNO', 'happy', "I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!"),
+               P('JUNO', 'happy', "And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter."),
+               P('LARCH', 'deadpan', 'They use salt.', '', 'Professor Larch'), P('JUNO', 'shocked', '...Why would you tell me that.', 'shock'),
+               {'script': 'pfm_item(:TOWNMAP, 1, "Town Map")'}, '(Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.)',
+               {'script': 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'},
+               {'script': '$game_variables[102] = 2 if $game_variables[102] < 2'}, {'script': 'pfm_set(:ch2_sendoff)'},
+               {'script': "ev = $game_map.events.values.find { |e| e.name == 'Professor Larch' }\n$game_self_switches[[520, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}]
+
+
+def build_520():
+    """The Ferrymen's Mile (64x110, MEADOW): the lane north from Ferrow's Landing over the stile; the sea-cliff walk on the
+    south-west with Wingull posts and the Gullwatch lookout over the moored Dovetail; the old ferry-toll booth; the Hale
+    Bell at the fork where the Strand Road turns west (the quarantine roadblock, from Windfall Row); Hale's Bramble, six
+    berry terraces and a picking shed; the Minding Hedges; Juno's catching clearing; the sheepfold; Road Stone I; the
+    Smuggler's Stair (secret, Cut) down to the Ferryman's Rest cove"""
+    W, H = 64, 110
+    r = Route(520, W, H, 'coast', kit={1: 'ak', 2: 'sh3', 3: 'sh3', 'default': 'sh3'}, base='.')
+    m = r.m
+    # the sea on the south-west, under the cliff-walk; woods on the east and north
+    r.sea('W', 9, wobble=3.0, beach=3, deep=4, cliff=1, scale=10.0)
+    for y in range(0, 62): m.cls[y, :] = np.where(np.isin(m.cls[y, :], ['w', 'W', 's']), '.', m.cls[y, :]); m.ht[y, :] = np.where(m.ht[y, :] == 1, 0, m.ht[y, :])
+    m.ht[62:, :] = np.where(np.isin(m.cls[62:, :], ['w', 'W', 's']), 0, 1)
+    m.ht[62:66, :] = np.where(np.isin(m.cls[62:66, :], ['w', 'W', 's']), 0, m.ht[62:66, :])
+    r.forest_band('E', 9, wobble=4.0); r.forest_band('N', 4, wobble=2.0)
+    for cx, cy, rx, ry in ((52, 30, 6, 5), (8, 14, 6, 5), (46, 92, 7, 6), (54, 70, 5, 6), (10, 46, 5, 4)):
+        r.copse(cx, cy, rx, ry)
+    # Hale's Bramble: berry terraces climbing east of the lane (h1-h3), each with a stair
+    for (x0, x1, y0, y1, h) in ((36, 58, 36, 58, 1), (40, 58, 36, 51, 2), (44, 58, 36, 45, 3)):
+        m.ht[y0:y1 + 1, x0:x1 + 1] = np.maximum(m.ht[y0:y1 + 1, x0:x1 + 1], h)
+    road = [(15, 109), (15, 101), (19, 93), (24, 85), (22, 77), (22, 72), (27, 62), (31, 52), (28, 41), (33, 29), (31, 16), (31, 0)]
+    r.road(road, w=3.0, open_=None)
+    r.road([(22, 74), (12, 73), (0, 73)], w=3.0, open_=None)                        # the Hale Bell fork: west to Lacecliff Walk
+    r.exit('S', 14, 4); r.exit('N', 30, 4); r.exit('W', 72, 4)
+    for (sx, yl) in ((38, 58), (42, 51), (46, 45)):                                  # terrace stairs
+        r.crossing(sx, yl, w=2, rows=3)
+    r.lane([(32, 56), (38, 61)], w=2.0, open_=None)
+    # Minding Hedges (NW), Juno's clearing (S), the sheepfold (NE), the lookout path to the cliff edge
+    r.lane([(22, 84), (14, 84), (10, 86)], w=2.0, open_=None)
+    r.lane([(26, 60), (16, 62)], w=2.0, open_=None)
+    r.lane([(32, 24), (44, 22), (48, 18)], w=2.0, open_=None)
+    # the Smuggler's Stair: a pocket on the beach below the toll booth's cliff, behind a bramble (Cut)
+    r.pocket(5, 96, 3, 3, gate=None)
+    m.ht[93:100, 1:9] = 0; m.cls[93:100, 2:8] = 's'
+    r.flatten(8, 10, 92, 1); r.crossing(8, 92, w=3, rows=3)
+    r.grass(thr=0.6, scale=6.0)
+    r.finish_plan()
+    m.cls[86:89, 9:11] = '.'
+    ev = old_events('520_reskin.yaml', 520)
+    J = lambda e, t: P('JUNO', e, t)
+    tut = [{'cond': {'switch': 'CH1_K1_DONE'}, 'trigger': 'touch', 'commands': [{'if': "$game_self_switches[[520, 0, 'TUT']]", 'then': [], 'else': [
+        J('happy', "Catching tutorial! Weaken it, then throw. Don't throw the Ball AT it, throw it NEAR it."),
+        J('happy', 'I learned that the hard way. Sorry, Biscuit.'), {'script': 'pbReceiveItem(:POKEBALL, 5)'},
+        {'script': "$game_self_switches[[520, 0, 'TUT']] = true"}]}]}]
+    send = [{'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'trigger': 'touch', 'commands': [{'if': 'pfm?(:ch2_sendoff)', 'then': [], 'else': SENDOFF_520}]}]
+    r.events += line_events(r, 'Juno tutorial', 90, 10, 30, tut)
+    r.events += line_events(r, 'Stile send-off', 98, 8, 24, send)
+    B = barrier_tile()
+    bar = lambda i, y: {'type': 'event', 'name': 'Accord barrier %d' % i, 'at': [3, y], 'pages': [
+        {'graphic': {'tile': B}, 'trigger': 'action', 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'through': True, 'commands': []}]}
+    for i, y in enumerate((72, 73, 74, 75)): r.events.append(bar(i + 1, y)); m.taken[y, 3] = True
+    r.add(at(ev['Professor Larch'], 18, 99) if False else {'type': 'event', 'name': 'Professor Larch', 'at': [19, 97], 'pages': [
+              {'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'graphic': {'sprite': 'trainer_PROFESSOR', 'dir': 'down'}, 'commands': [
+                  {'if': 'pfm?(:ch2_sendoff)', 'then': [P('LARCH', 'neutral', 'Off you go. Lecture Two is already drafted.')], 'else': SENDOFF_520}]},
+              {'cond': {'self': 'A'}, 'commands': []}]},
+          {'type': 'event', 'name': 'Accord guard', 'at': [5, 71], 'pages': [
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
+              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+                  'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.',
+                  "Accord Guard: ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.",
+                  'Accord Guard: "Eighteen in Concord, One in Keeping." On you go. Saltmere\'s two days west. Mind the cliff path in wind.']}]},
+          {'type': 'event', 'name': 'Accord guard (aside)', 'at': [6, 77], 'pages': [
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'up'}, 'commands': ['Second Guard: Nobody past. Orders came down this morning.']},
+              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+                  "Second Guard: (low) That's the null one from the dock. Captain said let them through, whatever happens.", 'Accord Guard: Which captain?',
+                  "Second Guard: Didn't say. Came down from Crownhaven with a white seal on it.", '\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
+                  'Accord Guard: Lovely weather.']}]},
+          obj('The Hale Bell', (16, 70), ['THE HALE BELL: A ship\'s bell on a post above the sea cliff. The ferrymen rang it once the last boat was in.',
+              'A cloth has been tied round the clapper.', J('sad', "Dad tied that. The night they closed the strait. He said there wasn't anything left to ring for.")]),
+          talk('Hay-cart Driver', (26, 70), 'NPC 11', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
+               "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
+          sign((10, 75), 'Hale Bell fork sign', "THE HALE BELL. <- LACECLIFF WALK, Marram Down and SALTMERE (the Strand Road). ^ Windfall Row. v Ferrow's Landing."),
+          at(ev['THE FERRYMEN\'S MILE\nF'], 18, 104) if "THE FERRYMEN'S MILE\nF" in ev else sign((18, 104), 'Road sign', "THE FERRYMEN'S MILE\nFerrow's Landing - Hale's Bramble - Windfall Row.\nMind the hedges. The hedges mind you."),
+          at(ev['Pim'], 26, 66), at(ev['Dory'], 29, 46), at(ev['Farmhand'], 40, 62), at(ev['Under the stile'], 11, 99), at(ev['Stile'], 12, 98),
+          at(ev['Scarecrow'], 44, 56), at(ev['Lookout board'], 12, 62), at(ev['Waystone'], 33, 8), at(ev['Old well'], 20, 52),
+          trainer((36, 22), 'YOUNGSTER', 'Pip', "My squad's undefeated on this lane! It's a short lane.", 'Aw, my squad lost!', d='left'),
+          trainer((25, 34), 'LASS', 'Wren', 'Birdies! Go!', 'My birdies! Oh, well done.', d='right'),
+          obj('Ferry-toll booth', (13, 88), ['THE OLD FERRY-TOLL BOOTH. Fare board: "Landing to Saltmere, 3 coppers. Landing to the Strait, 5. Return, ask the captain."',
+              'Under it, chalked: "STRAIT CLOSED." Under that, smaller: "for now"']),
+          obj('Road Stone I', (34, 104) if False else (19, 107), ['ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.']),
+          obj("Hale's Bramble", (36, 60), ["HALE'S BRAMBLE. Six terraces of bramble and berry. Wenna's cousin sells tarts at the shed. The tarts are better than Wenna's. Don't tell Wenna."]),
+          talk("Wenna's cousin", (52, 38), 'NPC 16', ["Wenna's cousin: Berries are picked by the terrace. Bottom terrace is for tourists. Top terrace is for family.",
+               "Wenna's cousin: You look like family. ...No, you look tired. Here."], again=["Wenna's cousin: Mind the brambles on the way down."]),
+          {'type': 'berry', 'at': [40, 56], 'berry': 'ORANBERRY'}, {'type': 'berry', 'at': [46, 50], 'berry': 'PECHABERRY'},
+          {'type': 'berry', 'at': [52, 43], 'berry': 'CHERIBERRY'}, {'type': 'berry', 'at': [56, 39], 'berry': 'ORANBERRY'},
+          obj('The Minding Hedges', (16, 64), ['THE MINDING HEDGES. "Mind the hedges. The hedges mind you." A maze of three turns, planted by a ferryman who missed the sea.']),
+          hidden((12, 60), 'POTION', 'HiddenItem (hedge maze)'),
+          talk('Shepherd', (46, 20), 'NPC 20', ['Shepherd: Three of my Wooloo got out again. They roll. Downhill. Always downhill.',
+               "Shepherd: If you see a Wooloo, walk it uphill. It'll be so surprised it'll follow you."]),
+          talk('Wooloo', (40, 14), 'Followers/WOOLOO', ['Baaa. (It is rolling, very slowly, in no direction.)'], move='random'),
+          talk('Wooloo ', (50, 26), 'Followers/WOOLOO', ['Baaa.'], move='random'),
+          item((50, 12), 'POKEBALL'), item((8, 50), 'POTION'), hidden((4, 97), 'BIGPEARL', 'HiddenItem (Ferryman\'s Rest)'),
+          item((6, 95), 'REVIVE'), obj("The Ferryman's Rest", (3, 95), ["A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out."]),
+          {'type': 'cut_tree', 'at': [9, 88], 'name': 'CutTree'})
+    r.seat_events(on='.dts')
+    for x in range(36, 59, 3):
+        for y in (40, 47, 54):
+            if m.free(x, y, 2, 1, on='.') and m.ht[y, x] == m.ht[y, x + 1]: m.stamp('pf_logbench', x, y, mark='B') if False else None
+    for y in (82, 86):                                                                # Juno's clearing fence and the hedge maze
+        m.fence(26, 34, y)
+    m.fence(10, 20, 58, gaps=((14, 15),)); m.fence(10, 20, 66, gaps=((17, 18),)); m.fence(10, 18, 62, gaps=((11, 12),))
+    m.fence(38, 54, 10, gaps=((44, 45),)); m.fence(38, 54, 28)
+    r.stamp('gl_shed', 50, 31, mark='B') if m.free(50, 31, 4, 6, on='.') else None
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pink'), n_trees=W * H // 140, copses=8, scatter=12)
+    r.paint(glint=0.25)
+    flowers(r, 30, 84, 4, 2, p=0.4)
+    from dovetail_ship import place_moored if False else (lambda *a: None)
+    h = head(520, "The Ferrymen's Mile", field='MEADOW', bgm='Route 1',
+             connections=[{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
+                          {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],
+             fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0}, tone=[4, 4, -4, 0])
+    r.write(h, '520_ferrymens_mile.yaml', "# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_early.py - edit that script.\n", '/tmp/rt/520.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {527: build_527, 528: build_528}
+BUILD = {520: build_520, 527: build_527, 528: build_528}
 
 
 def main():

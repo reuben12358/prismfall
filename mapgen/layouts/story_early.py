@@ -307,12 +307,16 @@ ERRAND = [
     P('JUNO', 'happy', "Up the lane, past the stile! I'll be right behind you. Probably in front of you.", '', 'Juno (lab yard)'),
     S('pfm_set(:juno_errand)')]
 
-SENDOFF = [
-    P('LARCH', 'neutral', "Eighteen gyms. Briarwick's first, up through the Gossamer Wood. The Warden's a girl called Tamsin Loom. Go easy on her, she inherited the seat in spring and hasn't slept since.", '', 'Larch (sendoff)'),
+SENDOFF = [   # story/20_SCRIPT_CH0-2.md, Chapter 2 "Chapter start" (Revision 14: Saltmere is first; map builder 9 re-pour)
+    P('LARCH', 'neutral', "Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off -- the Glasswood's walked across it -- so you go round by the coast.", '', 'Larch (sendoff)'),
+    P('LARCH', 'neutral', 'Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden\'s Dorian Pell. He\'ll call you "darling" and mean it about a third of the time.', '', 'Larch (sendoff)'),
     P('LARCH', 'neutral', "Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post.", '', 'Larch (sendoff)'),
-    P('JUNO', 'happy', "I'm coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!", '', 'Juno (sendoff)'),
-    ITEM('TOWNMAP'), 'Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.',
-    QUEST('eighteen_roads', 'Eighteen Roads', 'Earn the first badge in Briarwick.'),
+    P('JUNO', 'happy', "I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!", '', 'Juno (sendoff)'),
+    P('JUNO', 'happy', "And I've wanted to see the Pageant since I was six. There's a bit where the Plates fall and they use REAL glitter.", '', 'Juno (sendoff)'),
+    P('LARCH', 'deadpan', 'They use salt.', '', 'Larch (sendoff)'),
+    P('JUNO', 'shocked', '...Why would you tell me that.', 'shock', 'Juno (sendoff)'),
+    ITEM('TOWNMAP'), 'Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.',
+    QUEST('eighteen_roads', 'Eighteen Roads', 'Earn the first badge in Saltmere, west along the coast.'),
     S('pfm_set(:ch2_sendoff)'), SELF('Larch (sendoff)'), SELF('Juno (sendoff)')]
 
 WINGULL_GIRL = [IF('pfm?(:wingull_back)', [N('Girl', "Captain Edda's grounded. She doesn't know what that means. Neither do I.")], [
@@ -429,7 +433,7 @@ add(100,
     *strip(ev('Sendoff', page([IF('!pfm?(:ch2_sendoff)', SENDOFF)], trigger='touch', cond={'var': ['STORY_CHAPTER', 2]})), 4),
     ev('Larch (sendoff)', page([]), page([P('LARCH', 'neutral', 'Off you go. Lecture Two is already drafted.')], SPR['LARCH'], 'down', cond={'var': ['STORY_CHAPTER', 2]}),
        page([], cond={'self': 'A'})),
-    ev('Juno (sendoff)', page([]), page([P('JUNO', 'happy', 'Briarwick! Silk-moth eggs! A GYM!')], SPR['JUNO'], 'down', cond={'var': ['STORY_CHAPTER', 2]}),
+    ev('Juno (sendoff)', page([]), page([P('JUNO', 'happy', 'Saltmere! Forty tarts! A PAGEANT!')], SPR['JUNO'], 'down', cond={'var': ['STORY_CHAPTER', 2]}),
        page([], cond={'self': 'A'})),
     # ---- sidequests
     ev('Girl with Wingull', page(WINGULL_GIRL, 'NPC 16', 'down')),

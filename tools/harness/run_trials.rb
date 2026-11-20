@@ -249,6 +249,83 @@ check("every wired scene is reachable from a TALK row or another scene", orphans
 per_trial = tr::TRIALS.keys.map { |t| [t, tr.quests_for(t).length] }.to_h
 check("quest scenes, conditions, steps, rewards, trainers valid (#{tr.quest_ids.length} quests)", cmd_errors.empty?, cmd_errors.first(8).join("; "))
 check("every Trial has at least 8 quests", per_trial.values.all? { |n| n >= 8 }, per_trial.inspect)
+# SPINE Revision 16 (design/warden_gates.json): nothing obtainable with b badges may be a type answer to Warden b+1..b+horizon.
+# The badge count is recomputed from the quest data: the unlock, every TALK row that reaches the scene and every
+# :if on the way to the gift or battle ("badges >= N"), and must equal the event's declared :badges.
+gates = JSON.parse(File.read(File.expand_path("../../design/warden_gates.json", HARNESS_DIR)))
+gwardens = gates["wardens"].select { |w| w["answers"] }
+horizon = gates["rules"]["gift_horizon"]
+need_b = lambda { |text| text.to_s.scan(/badges\s*>=\s*(\d+)/).flatten.map(&:to_i).max || 0 }
+found = Hash.new { |h, k| h[k] = [] }   # event id -> [badges needed on each path]
+scan_scene = nil
+scan_scene = lambda do |qid, list, b, seen|
+  Array(list).each do |e|
+    next if !e.is_a?(Hash)
+    if e[:choice]
+      e[:options].each { |o| scan_scene.call(qid, o[1], [b, need_b.call(o[2])].max, seen) }
+    elsif e.key?(:if)
+      scan_scene.call(qid, e[:then], [b, need_b.call(e[:if])].max, seen)
+      scan_scene.call(qid, e[:else], b, seen)
+    else
+      mon = e[:event_battle] || e[:gift] || e[:join]
+      found[mon] << b if mon
+      [:caught, :won, :lost, :fled].each { |k| scan_scene.call(qid, e[k], b, seen) if e[k] }
+      if e[:run] && !seen.include?([qid, e[:run]])
+        scan_scene.call(qid, (tr.get(qid)[:scenes] || {})[e[:run]], b, seen + [[qid, e[:run]]])
+      end
+    end
+  end
+end
+talk_need = Hash.new { |h, k| h[k] = [] }
+tr::TALK.each_value { |t| t[:rows].each { |q, c, sc| talk_need[[q, sc]] << need_b.call(c) } }
+tr.quest_ids.each do |qid|
+  q = tr.get(qid)
+  ub = need_b.call(q[:unlock])
+  (q[:scenes] || {}).each do |name, list|
+    entry = talk_need[[qid, name]]
+    next if entry.empty?                      # reached only through :run from another scene (scanned there)
+    scan_scene.call(qid, list, [ub, entry.min].max, [[qid, name]])
+  end
+  rb = (q[:reward] || {})[:pokemon]
+  found[rb] << ub if rb
+end
+types_upto = nil
+types_upto = lambda do |sp, cap, seen|
+  t = sp.types.dup
+  sp.get_evolutions(true).each do |evo|
+    nxt, meth, par = evo[0], evo[1], evo[2]
+    next if seen.include?(nxt) || !meth.to_s.start_with?("Level") || !par.is_a?(Integer) || par > cap
+    nsp = (GameData::Species.get_species_form(nxt, sp.form) rescue GameData::Species.get(nxt))
+    t |= types_upto.call(nsp, cap, seen + [sp.species])
+  end
+  t
+end
+gate_errors = []
+badge_errors = []
+em.ids.each do |id|
+  d = em.get(id)
+  next if d[:stub]
+  paths = found[id]
+  if (d[:chapter] || 99) <= 4 && !d.key?(:badges)
+    badge_errors << "#{id}: no :badges (Chapters 0-4 must declare when it can be obtained)"
+  end
+  next if !d.key?(:badges)
+  real = paths.empty? ? d[:badges] : paths.min
+  next if d[:kind] == :battle && d[:catchable] == false   # a spar hands nothing over
+  badge_errors << "#{id}: declared :badges #{d[:badges]}, quest data gives #{real} (#{paths.uniq.inspect})" if !paths.empty? && real != d[:badges]
+  sp = GameData::Species.get_species_form(d[:species], d[:form] || 0)
+  gwardens.each do |w|
+    n = w["n"]
+    next if real >= n || real < n - horizon
+    ts = types_upto.call(sp, w["cap"], []).map(&:to_s)
+    hit = ts & w["answers"]
+    gate_errors << "#{id} (#{ts.join('/')}, with #{real} badges) answers Warden #{n} #{w['warden']} (#{hit.join('/')})" if !hit.empty?
+  end
+end
+check("Revision 16: event Pokemon declare :badges and it matches the quest data (#{em.ids.count { |i| em.get(i).key?(:badges) }} declared)",
+      badge_errors.empty?, badge_errors.first(5).join("; "))
+check("Revision 16: no event Pokemon is a type answer to the next #{horizon} Wardens when it can be obtained",
+      gate_errors.empty?, gate_errors.first(5).join("; "))
 early = em.ids.count { |id| !em.get(id)[:stub] && (em.get(id)[:chapter] || 99) <= 2 }
 check("at least 8 event Pokemon in Chapters 0-2", early >= 8, "#{early}")
 check("at least 40 event Pokemon in all", em.ids.length >= 40, "#{em.ids.length}")
@@ -257,12 +334,14 @@ check("at least 40 event Pokemon in all", em.ids.length >= 40, "#{em.ids.length}
 section("2. The Little Crucible: offer -> 3-bout gauntlet -> boss -> join -> reward")
 #-------------------------------------------------------------------------------
 $player.badges = Array.new(18) { |i| i < 1 }
-$player.party = [mk(:MACHOKE, 19, [:KARATECHOP, :LOWSWEEP, :ROCKTOMB, :KNOCKOFF]),
-                 mk(:WARTORTLE, 19, [:WATERPULSE, :BITE, :RAPIDSPIN, :AQUATAIL]),
-                 mk(:GRAVELER, 19, [:ROCKTOMB, :BULLDOZE, :ROCKBLAST, :MAGNITUDE]),
-                 mk(:PIDGEOTTO, 19, [:WINGATTACK, :QUICKATTACK, :SANDATTACK, :GUST])]
+check("AS_LITTLE_CRUCIBLE locked with 1 badge (Revision 16: Litleo is Fire, Tamsin's answer)", tr.state(:AS_LITTLE_CRUCIBLE) != :available, tr.state(:AS_LITTLE_CRUCIBLE))
+$player.badges = Array.new(18) { |i| i < 2 }
+$player.party = [mk(:MACHOKE, 23, [:KARATECHOP, :LOWSWEEP, :ROCKTOMB, :KNOCKOFF]),
+                 mk(:WARTORTLE, 23, [:WATERPULSE, :BITE, :RAPIDSPIN, :AQUATAIL]),
+                 mk(:GRAVELER, 23, [:ROCKTOMB, :BULLDOZE, :ROCKBLAST, :MAGNITUDE]),
+                 mk(:PIDGEOTTO, 23, [:WINGATTACK, :QUICKATTACK, :SANDATTACK, :GUST])]
 money0 = $player.money
-check("AS_LITTLE_CRUCIBLE available with 1 badge", tr.state(:AS_LITTLE_CRUCIBLE) == :available, tr.state(:AS_LITTLE_CRUCIBLE))
+check("AS_LITTLE_CRUCIBLE available with 2 badges", tr.state(:AS_LITTLE_CRUCIBLE) == :available, tr.state(:AS_LITTLE_CRUCIBLE))
 srand(4242)
 scene(:AS_LITTLE_CRUCIBLE, :offer, ["Let's fight.", "Brand me.", "Sign."])
 if tr.state(:AS_LITTLE_CRUCIBLE) != :done   # a lost bout: heal and retry like a player would (up to 3 times)
@@ -275,7 +354,7 @@ if tr.state(:AS_LITTLE_CRUCIBLE) != :done   # a lost bout: heal and retry like a
 end
 litleo = $player.party.find { |p| p.isSpecies?(:LITLEO) }
 check("quest done", tr.state(:AS_LITTLE_CRUCIBLE) == :done, tr.state(:AS_LITTLE_CRUCIBLE))
-check("Cinderpaw (Litleo) joined at Lv 15 with Moxie", litleo && litleo.level == 15 && litleo.ability_id == :MOXIE,
+check("Cinderpaw (Litleo) joined at Lv 19 with Moxie", litleo && litleo.level == 19 && litleo.ability_id == :MOXIE,
       litleo ? "#{litleo.name} Lv#{litleo.level} #{litleo.ability_id}" : "no Litleo")
 check("event mon status :joined", em.status(:AS_LITLEO) == :joined, em.status(:AS_LITLEO))
 check("reward money +1200 (plus the three trainers' prize money)", $player.money - money0 >= 1200, "+#{$player.money - money0}")
@@ -319,9 +398,10 @@ check("Elowen points 2", tr.points(:ELOWEN) == 2, tr.points(:ELOWEN))
 section("4. Gift variant and quiet deeds")
 #-------------------------------------------------------------------------------
 $game_switches[108] = true
-scene(:EL_PAINT_LOFT, :offer, ["Let's paint.", "Footlights."])
+scene(:EL_PAINT_LOFT, :offer, ["Let's paint.", "The dunes on the way in."])
 brush = ($player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }).find { |p| p.isSpecies?(:SMEARGLE) }
-check("Smeargle 'Brush' got the Ember palette", brush && brush.hasMove?(:EMBER) && brush.hasMove?(:WILLOWISP) && brush.hasMove?(:SKETCH),
+check("Smeargle 'Brush' got the earth palette (no Fire or Grass palette before Tamsin/Marisol)",
+      brush && brush.hasMove?(:MUDSLAP) && brush.hasMove?(:SKETCH) && !brush.hasMove?(:EMBER),
       brush ? brush.moves.map(&:id).inspect : "none")
 scene(:EL_FIRST_LESSON, :offer, ["I'll try."])
 scene(:EL_FIRST_LESSON, :deed_rope, ["Turn it."])
@@ -332,13 +412,18 @@ check("silence: done, Harmony +1", tr.outcome(:EL_FIRST_LESSON) == :silent && Pr
 check("Elowen points 5 (2 + 1 + 2), rank Sapling", tr.points(:ELOWEN) == 5 && tr.rank_name(:ELOWEN) == "Sapling", tr.points(:ELOWEN))
 # The Last Plank, driven only through the map-event router (pf_trial_talk)
 talk = lambda { |key, answers = []| Prismfall::Trials.answers = answers.dup; TRANSCRIPT << "-- talk #{key}"; pf_trial_talk(key) }
+saved_badges = $player.badges.dup
+$player.badges = Array.new(18, false)
+check("Last Plank locked before Badge 1 (Revision 16: no Fighting type before Dorian)", tr.state(:EL_LAST_PLANK) != :available, tr.state(:EL_LAST_PLANK))
+check("Tide-Pool Feud locked before Badge 1", tr.state(:EL_TIDE_POOL_FEUD) != :available, tr.state(:EL_TIDE_POOL_FEUD))
+$player.badges = Array.new(18) { |i| i < 1 }
 talk.call(:BERTH_TIMBURR, ["Fetch the planks."])
 3.times { talk.call(:BOATYARD_PLANK) }
 check("Last Plank: three planks -> :finish", tr.at?(:EL_LAST_PLANK, :finish), tr.step(:EL_LAST_PLANK))
 talk.call(:BERTH_TIMBURR)
 plank = ($player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }).find { |p| p.isSpecies?(:TIMBURR) }
-check("Last Plank done via pf_trial_talk; Timburr 'Plank' has Mach Punch (Fighting before Gym 1)",
-      tr.done?(:EL_LAST_PLANK) && plank && plank.hasMove?(:MACHPUNCH), plank ? plank.name : "none")
+check("Last Plank done via pf_trial_talk after Badge 1; Timburr 'Plank' Lv 13 has Mach Punch",
+      tr.done?(:EL_LAST_PLANK) && plank && plank.hasMove?(:MACHPUNCH) && plank.level == 13, plank ? "#{plank.name} Lv#{plank.level}" : "none")
 talk.call(:BERTH_TIMBURR)
 check("after completion the berth event falls back to its idle line", TRANSCRIPT.last.include?("hammers a plank"), TRANSCRIPT.last)
 # A board-accepted quest: Master of Nothing taken from the Ferrow's lantern rope, then the giver's briefing
@@ -350,8 +435,29 @@ talk.call(:DOCKMASTER, ["I'll look."])
 check("giver still briefs a board-accepted quest once", TRANSCRIPT.any? { |l| l.include?("crackle in the rigging") } && !tr.flag(:EL_MASTER_OF_NOTHING, :from_board))
 talk.call(:DOVETAIL_NEST)
 talk.call(:DOCKMASTER)
-check("Master of Nothing done; Wattrel 'Mast' received", tr.done?(:EL_MASTER_OF_NOTHING) &&
-      ($player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }).any? { |p| p.isSpecies?(:WATTREL) && p.name == "Mast" })
+all_mons = lambda { $player.party + $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact } }
+check("Master of Nothing done; the Wattrel waits for a ship (no Flying/Electric gift before Badge 3)",
+      tr.done?(:EL_MASTER_OF_NOTHING) && all_mons.call.none? { |p| p.isSpecies?(:WATTREL) })
+check("Ebbmouth mast: nothing before Badge 3", !tr.talk_ready?(:EBB_MAST))
+$player.badges = Array.new(18) { |i| i < 3 }
+talk.call(:EBB_MAST)
+mast = all_mons.call.find { |p| p.isSpecies?(:WATTREL) && p.name == "Mast" }
+check("Ebbmouth mast after Badge 3: Wattrel 'Mast' Lv 20 joins", mast && mast.level == 20, mast ? "Lv#{mast.level}" : "none")
+check("the mast event then falls back to its idle line", !tr.talk_ready?(:EBB_MAST))
+# The Scarecrow Walks: a Chapter 1 spar that can't be caught; the catchable rematch opens at Badge 2
+$player.badges = Array.new(18, false)
+talk.call(:COLL, ["I'll look."])
+talk.call(:SCARECROW)
+talk.call(:WENNA)
+srand(31337)
+talk.call(:SCARECROW, ["Give it a squirt."])
+3.times { break if tr.done?(:EL_SCARECROW); $player.heal_party; talk.call(:SCARECROW, ["Give it a squirt."]) }
+check("Scarecrow: Ch1 spar won, quest done (:spooked), Sudowoodo not caught", tr.done?(:EL_SCARECROW) && tr.outcome(:EL_SCARECROW) == :spooked &&
+      all_mons.call.none? { |p| p.isSpecies?(:SUDOWOODO) }, "#{tr.state(:EL_SCARECROW)} #{tr.outcome(:EL_SCARECROW).inspect}")
+check("Scarecrow rematch closed with 1 badge", ($player.badges = Array.new(18) { |i| i < 1 }) && !tr.talk_ready?(:SCARECROW))
+$player.badges = Array.new(18) { |i| i < 2 }
+check("Scarecrow rematch (catchable EL_SUDOWOODO) open with 2 badges", tr.talk_ready?(:SCARECROW))
+$player.badges = saved_badges
 scene(:EL_PAINT_LOFT, :offer) # done quest: scene still runs, but no second gift via :complete
 check("a done quest can't complete twice", tr.record(:EL_PAINT_LOFT)[:times] >= 1)
 
@@ -398,8 +504,11 @@ check("Badge 2: Farfetch'd + Audino added, Badge 1 tier kept", land2.include?(:F
 check("unlocked tier on 520 is 2", bt.unlocked_tier(520) == 2, bt.unlocked_tier(520))
 Prismfall.award_badge(3, false)
 check("Badge 3: a Land-only tier (Swablu) also feeds LandNight", species_in.call(:LandNight).include?(:SWABLU) && species_in.call(:Land).include?(:SWABLU))
-pe.setup(527)
-check("527 (no base table yet) gets no overlay", tables.call.empty?, tables.call.keys.inspect)
+orig_ov = bt.method(:overlay)
+bt.define_singleton_method(:overlay) { |m, b, v = nil| orig_ov.call(m == 522 ? 520 : m, b, v) }
+pe.setup(522)
+check("a map with no base table (522, given 520's overlays by a stub) gets no overlay", tables.call.empty?, tables.call.keys.inspect)
+bt.define_singleton_method(:overlay, orig_ov)
 $PokemonGlobal.encounter_version = 1
 pe.setup(520)
 check("encounter_version 1 (Bleed-spread) table untouched (no 2xx overlays)", !species_in.call(:Land).include?(:TEDDIURSA), species_in.call(:Land).first(4).inspect)

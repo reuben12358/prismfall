@@ -26,16 +26,16 @@
 |---|---|---|---|---|---|---|---|---|
 | **The First Lesson** `EL_FIRST_LESSON` | 1 | `switch(103)` | Brother Teasel · the wayshrine by the Accord plaque (100) | ★ · 5 | Do one kind thing in Ferrow's Landing that nobody asked you to do. Then go back to Brother Teasel. | ORANBERRY x2; silent: RES+1; +2 pts | Resonance (Harmony +1 for keeping quiet); starts the realm-wide Quiet Deeds tally | wired |
 | **The Tart Thief** `EL_TART_THIEF` | 1 | `switch(103)` | Wenna Hale · the tart stall on the quay (100) | ★ · 7 | Someone keeps stealing Wenna Hale's bramble tarts. Brother Teasel's note on the lantern: "The thief is hungry, not wicked." | $200, ORANBERRY x3; told: KESTREL-1; +2 pts | Kestrel bond (+1 if you split the evidence, -1 if you tell on him) | wired |
-| **The Scarecrow Walks** `EL_SCARECROW` | 1 | `switch(103)` | Coll Hale · the Hale farmhouse (523) | ★ · 9 | Coll Hale's scarecrow keeps moving to a different field. Coll did not build a scarecrow. | caught: $300; spared: MIRACLESEED, RES+1; +2 pts | Resonance (Harmony +1 if you leave it be) | wired |
-| **Master of Nothing** `EL_MASTER_OF_NOTHING` | 1 | `switch(101) && switch(103)` | the Dockmaster · the Dockmaster's House (107) | ★ · 6 | The Dockmaster wants to close the Dovetail's ledger properly. Something is still aboard. | POTION x2; +2 pts | none (a quiet one) | wired |
-| **The Last Plank** `EL_LAST_PLANK` | 1 | `switch(103)` | the lantern rope (Brother Teasel's hand) · the empty ferry berth (100) | ★ · 6 | Every morning a Timburr carries a plank down to the empty berth and nails it in. Every night the tide takes it. Teasel's note: "Help it finish." | POTION x2; +2 pts | none (Fighting type before the Normal Gym 1) | wired |
-| **The Tide-Pool Feud** `EL_TIDE_POOL_FEUD` | 2 | `switch(103)` | Dobbs the shell-gatherer · the shell-gatherers' steps on Lacecliff Walk (527) | ★ · 12 | A Crabrawler and a Clobbopus have been fighting over one rock for three days. The shell-gatherers can't reach the pools. | SUPERPOTION x2; +2 pts | none; the side you help punches open a sea-cave under the cliff (flag :sea_cave, items inside) | wired |
+| **The Scarecrow Walks** `EL_SCARECROW` | 1 | `switch(103)` | Coll Hale · the Hale farmhouse (523) | ★ · 9 | Coll Hale's scarecrow keeps moving to a different field. Coll did not build a scarecrow. | spooked: $300; spared: MIRACLESEED, RES+1; +2 pts | Resonance (Harmony +1 if you leave it be); the Sudowoodo can be caught after Badge 2 | wired |
+| **Master of Nothing** `EL_MASTER_OF_NOTHING` | 1 | `switch(101) && switch(103)` | the Dockmaster · the Dockmaster's House (107) | ★ · 6 | The Dockmaster wants to close the Dovetail's ledger properly. Something is still aboard. | POTION x2; +2 pts | none (a quiet one); the Wattrel joins you in Ebbmouth after Badge 3 | wired |
+| **The Last Plank** `EL_LAST_PLANK` | 2 | `badges >= 1` | the lantern rope (Brother Teasel's hand) · the empty ferry berth (100) | ★ · 13 | Every morning a Timburr carries a plank down to the empty berth and nails it in. Every night the tide takes it. Teasel's note: "Help it finish." | POTION x2; +2 pts | none; a Fighting type only after Dorian's badge (Revision 16: no answer to the next Warden before the gym) | wired |
+| **The Tide-Pool Feud** `EL_TIDE_POOL_FEUD` | 2 | `badges >= 1` | Dobbs the shell-gatherer · the shell-gatherers' steps on Lacecliff Walk (527) | ★ · 14 | A Crabrawler and a Clobbopus have been fighting over one rock for three days. The shell-gatherers can't reach the pools. | SUPERPOTION x2; +2 pts | none; the side you help punches open a sea-cave under the cliff (flag :sea_cave, items inside) | wired |
 | **The Borrowed Lanterns** `EL_LANTERNS` | 2 | `switch(103)` | Sister Hollin · the Saltmere Lantern House (140) | ★ · 12 | The theatre district keeps 'borrowing' the Lantern House's lanterns as props. Five are missing before the Night of Floating. | SILKSCARF; left_one: $400, RES+1; +3 pts | Resonance (Harmony +1 if you leave the stagehand her lantern) | wired |
-| **A Hole in the Sky** `EL_PAINT_LOFT` | 2 | `badges >= 1 && switch(108)` | Marguerite Fane · the Lantern Theatre paint loft (145) | ★ · 13 | The Mourner walked straight through the Pageant's painted sky. The scene-painter needs a new backdrop, and a second opinion. | +1 pts | none; the colours you pick decide the Smeargle's moves (Water, Fire, Grass or Ghost coverage) | wired |
+| **A Hole in the Sky** `EL_PAINT_LOFT` | 2 | `badges >= 1 && switch(108)` | Marguerite Fane · the Lantern Theatre paint loft (145) | ★ · 13 | The Mourner walked straight through the Pageant's painted sky. The scene-painter needs a new backdrop, and a second opinion. | +1 pts | none; the colours you pick decide the Smeargle's moves (Water/Ice, Ghost, Fairy or Ground coverage) | wired |
 | **The Sound of Saltmere** `EL_SOUND_OF_SALTMERE` | 2 | `badges >= 1; after EL_LANTERNS` | Sister Hollin · the Saltmere Lantern House (140) | ★ · 14 | A koan: find the sound Saltmere makes when nobody is performing. | +3 pts | Resonance (Harmony +1) | wired |
 | **The Orchard Sings** `EL_GLASS_FOAL` | 2 | `badges >= 1 && switch(105)` | Brother Teasel · the Ferrow's Landing wayshrine (100) | ★ · 15 | Since your badge, folk on the orchard lane hear chiming at night, like hooves on glass. | MOONSTONE; +3 pts | Resonance (Harmony +1 if you approach slowly) | wired |
 | **Three Loyal, Three Knots** `EL_THREE_KNOTS` | 3 | `badges >= 1` | Mother Aldreth · the Briarwick Lantern House (120) | ★ · 16 | A pilgrimage: re-tie the silk knots at the three wayshrines of the Loyal Three, and answer what each shrine asks. | MAGICALSEED x2; +3 pts | Lore seed for the Loyal Three / Ogerpon arc (story/04_ACT_I, Elowen legendary arc) | wired |
-| **The Horn and the Pincer** `EL_HORN_AND_PINCER` | 3 | `badges >= 1` | the lantern rope (no one signed it) · the sap tree on the old trail, Gossamer Wood (524) | ★ · 15 | Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week. | HONEY x2; +2 pts | none; the one you help clears a shortcut (Heracross tears a silk wall, Pinsir crushes a log) | wired |
+| **The Horn and the Pincer** `EL_HORN_AND_PINCER` | 3 | `badges >= 2` | the lantern rope (no one signed it) · the sap tree on the old trail, Gossamer Wood (524) | ★ · 19 | Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week. | HONEY x2; +2 pts | none; the one you help clears a shortcut (Heracross tears a silk wall, Pinsir crushes a log) | wired |
 | **The Silkthief** `EL_SILKTHIEF` | 3 | `badges >= 2` | Hett · the Weavers' Guildhall (123) | ★★ · 20 | Somebody is stealing finished silk straight off the drying racks at night. Hett has a theory, and it has eight legs. | $800; guardian: SILVERPOWDER, RES+1; +3 pts | Resonance (Harmony +1 if you leave the Spidops guarding the moths); Briarwick's moth tally board | wired |
 | **Someone Apologising to Bugs** `EL_SHELLY` | 3 | `badges >= 2` | Mother Aldreth · the Briarwick Lantern House (120) | ★★ · 21 | A stranger with pink hair is lost in the Gossamer Deepwood, apologising to the Bug Pokemon. The spirits of the wood are uneasy. **Twist:** Board pointer to CAMEOS.md 'Lost in the Gossamer'. The cameo event calls Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true) and then pf_quest_complete(:EL_SHELLY). Moved from 'after Gym 1' to 'after Gym 2' by SPINE Rev 14. | SILVERPOWDER; +3 pts | Ledger cameo record (FESTIVAL_SHELLY); CAMEOS.md #1 | designed |
 | **The Rehearsal** `EL_REHEARSAL` | 4 | `badges >= 2` | Sister Maelon · the Half-Tally, Frostwick (573) | ★★ · 20 | Off the Frostflat Causeway, a stretch of road replays five seconds of a wagon crash, over and over. Something out there is practising a tragedy. | SPELLTAG; +3 pts | Resonance (Harmony +1) | wired |
@@ -63,7 +63,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
-| **Form 7-B** `ZE_FORM_7B` | 1 | `switch(103)` | Grant Kiosk P-3NNY · the Quarantine Customs Hall, Ferrow's Landing (108) | ★ · 5 | CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $500. | disposed: $500, MERIDIAN+1; adopted: POTION x2; +2 pts | Meridian standing (+1 if you sign the disposal form) | wired |
+| **Form 7-B** `ZE_FORM_7B` | 1 | `switch(103)` | Grant Kiosk P-3NNY · the Quarantine Customs Hall, Ferrow's Landing (108) | ★ · 5 | CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $500. | disposed: $500, MERIDIAN+1; adopted: POTION x2; +2 pts | Meridian standing (+1 if you sign the disposal form); the Charcadet is collected after Badge 2 | wired |
 | **Field Survey: Coastal** `ZE_FIELD_SURVEY` | 2 | `switch(103)` | Grant Kiosk P-3NNY · any P-3NNY kiosk (Ferrow's Landing, Saltmere, Ebbmouth) (108) | ★ · 10 | CALL FOR PROPOSALS #0002: RECORD BATTLES ON THREE (3) DIFFERENT FIELDS. DATA IS THE CURRENCY OF THE FUTURE. SO IS CURRENCY. | EXPCANDYS x3; +2 pts | Field Notes (fields_seen) | wired |
 | **The Lattice Hums Wrong** `ZE_LATTICE_HUM` | 4 | `badges >= 2` | Grant Kiosk P-3NNY/2 · the tidal Lattice station, Ebbmouth (160) | ★ · 20 | CALL FOR PROPOSALS #0003: ACOUSTIC SURVEY OF THE EBBMOUTH TIDAL LATTICE DURING 'STUTTER EVENTS'. RECORDER PROVIDED. | $300; meridian: $1500, MERIDIAN+1; guild: MARISOL+1; larch: EXPCANDYS x2; +3 pts | Meridian standing or Marisol bond, depending on who gets the recordings (foreshadows Larch's tide data in Ch4) | wired |
 | **Customer Support** `ZE_CUSTOMER_SUPPORT` | 5 | `badges >= 3` | Helpdesk Rotom · Meridian Spire lobby, Lumen City (185) | ★ · 24 | Walk a form through nine offices. The form is to cancel the form. **Twist:** Each office wants a different stamp first (circular dependency the player has to break by noticing office 4 has two doors). When the form is finally cancelled, it cancels itself out of existence. What's left on the desk is a Porygon, who was the form all along. | Porygon Lv 24 (DOWNLOAD); +3 pts | 15_COMEDY Zenith bit 'Customer Support' | designed |
@@ -91,7 +91,7 @@
 
 | Quest | Ch | Unlock | Giver · where (map) | Rank · Rec Lv | What happens | Reward | Touches | Status |
 |---|---|---|---|---|---|---|---|---|
-| **The Little Crucible** `AS_LITTLE_CRUCIBLE` | 2 | `badges >= 1` | Sergeant Brakka Emberhide · the Legion recruiting barge, Saltmere harbour (146) | ★ · 17 | WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less. | $1200, QUICKCLAW; +3 pts | Ashkaar flavour: honesty is law; signing up (flag :recruited) changes how later Legion NPCs greet you | wired |
+| **The Little Crucible** `AS_LITTLE_CRUCIBLE` | 4 | `badges >= 2` | Sergeant Brakka Emberhide · the Legion recruiting barge, Saltmere harbour (146) | ★ · 21 | WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less. | $1200, QUICKCLAW; +3 pts | Ashkaar flavour: honesty is law; signing up (flag :recruited) changes how later Legion NPCs greet you | wired |
 | **Seven Bouts** `AS_SEVEN_BOUTS` | 8 | `badges >= 6` | Legate Varra Kosk · the Crucible, Cindervault (240) | ★ · 38 | The Crucible's entry rite: seven legion fighters, back to back, on the caldera floor. No items. No healing. No complaining. **Twist:** Volcanic field; each bout raises the field's heat stage. Bout 4 is a double. Bout 7 is the Legate's adjutant on a Dragon's Den preview. The Herald introduces you with whatever the Saltmere barge called you. | CHARCOAL, FIRESTONE; +4 pts | Ashkaar recruitment flag from the Saltmere barge is honoured here (skip bout 1) | designed |
 | **The Lava-Tube Terror** `AS_DRUDDIGON` | 8 | `badges >= 6` | a Hearthguild smith · The Cinderhorn (664) | ★★ · 40 | A Druddigon has made the Cinderhorn lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed. **Twist:** Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying. | Druddigon Lv 37 (ROUGHSKIN); +4 pts | Honesty law: report how the fight really went (lying costs the reward) | designed |
 | **Adequate Swords** `AS_ADEQUATE_SWORDS` | 8 | `badges >= 6` | the owner of ADEQUATE SWORDS · Cindervault market (240) | ★ · 38 | A rival shop has opened across the street: EXCELLENT SWORDS. The owner of ADEQUATE SWORDS suspects a lie. Lying is a crime. **Twist:** You test the swords (a battle against the rival smith's Honedge on a 'sharpness' rule). The swords are excellent. ADEQUATE SWORDS loses the case, renames itself ADEQUATE SWORDS (STILL), and is happier. | METALCOAT; +2 pts | 15_COMEDY Ashkaar honest-signs bit | designed |
@@ -350,7 +350,7 @@ Coll Hale's scarecrow keeps moving to a different field. Coll did not build a sc
 
 **Quest log steps:** `ask`: Look at the 'scarecrow' in the Hale orchard on Windfall Row. Don't let it see you looking. · `bottle`: It hates the rain. Ask Wenna in Ferrow's Landing for her Squirt Bottle. · `water`: Water the scarecrow.
 
-**Reward:** caught: $300; spared: MIRACLESEED, RES+1; +2 pts. **Touches:** Resonance (Harmony +1 if you leave it be).
+**Reward:** spooked: $300; spared: MIRACLESEED, RES+1; +2 pts. **Touches:** Resonance (Harmony +1 if you leave it be); the Sudowoodo can be caught after Badge 2.
 
 **Scene `offer`** (event: `pf_quest_run(:EL_SCARECROW, :offer)`)
 
@@ -389,12 +389,11 @@ Coll Hale's scarecrow keeps moving to a different field. Coll did not build a sc
     - *You give it a squirt.*
     - *The 'scarecrow' screams, rips its roots out of the ground and charges!*
     - [battle] Sudowoodo Lv 10 (ROCKHEAD)
-      - on caught:
-        - **Coll** _(deadpan)_: ...It was a Sudowoodo.
-        - **Coll** _(neutral)_: Best scarecrow I ever had. Look after it.
-        - [quest complete: caught]
       - on won:
-        - *The Sudowoodo bolts into the plum rows, sobbing dry tears. It'll be back. It always comes back to the plums.*
+        - *The Sudowoodo bolts into the plum rows, sobbing dry tears. It was far too frightened to stay in a ball.*
+        - **Coll** _(deadpan)_: ...It was a Sudowoodo.
+        - **Coll** _(neutral)_: It'll be back. It always comes back to the plums. Come and try again when you've a couple of badges and it's calmed down.
+        - [quest complete: spooked]
       - on lost:
         - *The Sudowoodo stops attacking and goes back to being a tree, looking smug.*
   - > Leave it be.
@@ -405,12 +404,14 @@ Coll Hale's scarecrow keeps moving to a different field. Coll did not build a sc
 
 **Scene `rematch`** (event: `pf_quest_run(:EL_SCARECROW, :rematch)`)
 
-- *The Sudowoodo is guarding the plum rows. It eyes your Squirt Bottle warily.*
+- *The Sudowoodo is guarding the plum rows. It has stopped shaking. It eyes your badge case, then your Squirt Bottle.*
 - **CHOICE:** Challenge it?
   - > Challenge it.
-    - [battle] Sudowoodo Lv 10 (ROCKHEAD)
+    - [battle] Sudowoodo Lv 20 (ROCKHEAD)
       - on caught:
         - **Coll** _(neutral)_: Taking the scarecrow, then. Fair enough. I'll build a real one. Probably.
+      - on won:
+        - *The Sudowoodo retreats to the plums, sulking. It'll be back. It always is.*
   - > Leave it.
 
 #### Master of Nothing (`EL_MASTER_OF_NOTHING`)
@@ -419,9 +420,9 @@ Coll Hale's scarecrow keeps moving to a different field. Coll did not build a sc
 
 The Dockmaster wants to close the Dovetail's ledger properly. Something is still aboard.
 
-**Quest log steps:** `ask`: Search the laid-up Dovetail for whatever is still living aboard. · `ledger`: Take what you found back to the Dockmaster.
+**Quest log steps:** `ask`: Search the laid-up Dovetail for whatever is still living aboard. · `ledger`: Tell the Dockmaster what you found.
 
-**Reward:** POTION x2; +2 pts. **Touches:** none (a quiet one).
+**Reward:** POTION x2; +2 pts. **Touches:** none (a quiet one); the Wattrel joins you in Ebbmouth after Badge 3.
 
 **Scene `offer`** (event: `pf_quest_run(:EL_MASTER_OF_NOTHING, :offer)`)
 
@@ -439,27 +440,34 @@ The Dockmaster wants to close the Dovetail's ledger properly. Something is still
 - [stage] On the Dovetail's deck, under the furled mainsail: a nest of tarred rope fibre and fishing line.
 - *A Wattrel peers out of the nest. Its feathers crackle with static.*
 - *It's been waiting for the ferry to sail, so it can follow it home. The ferry is never going to sail.*
-- *The Wattrel looks at the empty sea, then at you. It hops onto your shoulder and settles there, crackling.*
+- *The Wattrel looks at the empty sea, then at you. It crackles, once, and tucks its head back under its wing. It's waiting for a ship. Any ship.*
 - [quest step: ledger]
 
 **Scene `ledger`** (event: `pf_quest_run(:EL_MASTER_OF_NOTHING, :ledger)`)
 
 - **Dockmaster** _(neutral)_: A Wattrel. Of course. They follow ships. That one followed the last one in and had nowhere left to follow.
 - [stage] He dips his pen and writes slowly.
-- **Dockmaster** _(neutral)_: 'Dovetail. Laid up. Crew discharged. One Wattrel, rehomed.'
-- **Dockmaster** _(happy)_: There. The first ledger line I've liked in a year.
-- [receive Wattrel "Mast" Lv 7 (VOLTABSORB)]
+- **Dockmaster** _(neutral)_: 'Dovetail. Laid up. Crew discharged. One Wattrel aboard, waiting for a ship.'
+- **Dockmaster** _(happy)_: There. The first ledger line I've liked in a year. The Gale Post boats still run north. It'll find one.
 - [quest complete]
+
+**Scene `homecoming`** (event: `pf_quest_run(:EL_MASTER_OF_NOTHING, :homecoming)`)
+
+- [stage] A Wattrel is perched on the Ebbmouth harbour mast, crackling. It has a strand of tarred rope in its beak.
+- *It's the Dovetail's rigging. It followed the first boat north out of Ferrow's Landing.*
+- *Your badge case hums its three-note chord. The Wattrel's feathers stand up with static, and it drops onto your shoulder like it was always going to.*
+- [receive Wattrel "Mast" Lv 20 (VOLTABSORB)]
+- *(Somewhere in Ferrow's Landing, a ledger line just changed: 'One Wattrel, rehomed.')*
 
 #### The Last Plank (`EL_LAST_PLANK`)
 
-*Chapter 1 · the lantern rope (Brother Teasel's hand), the empty ferry berth (map 100) · rank 1 · 2 points · unlock `switch(103)`*
+*Chapter 2 · the lantern rope (Brother Teasel's hand), the empty ferry berth (map 100) · rank 1 · 2 points · unlock `badges >= 1`*
 
 Every morning a Timburr carries a plank down to the empty berth and nails it in. Every night the tide takes it. Teasel's note: "Help it finish."
 
 **Quest log steps:** `ask`: Find the Timburr at the empty ferry berth at dawn. · `planks`: Carry the three loose planks from the boatyard to the berth. · `finish`: The berth is mended. Tell the Timburr.
 
-**Reward:** POTION x2; +2 pts. **Touches:** none (Fighting type before the Normal Gym 1).
+**Reward:** POTION x2; +2 pts. **Touches:** none; a Fighting type only after Dorian's badge (Revision 16: no answer to the next Warden before the gym).
 
 **Scene `berth`** (event: `pf_quest_run(:EL_LAST_PLANK, :berth)`)
 
@@ -486,12 +494,12 @@ Every morning a Timburr carries a plank down to the empty berth and nails it in.
 - *The Timburr looks at the sea for a long time. No ferry. It looks at you.*
 - **Dockmaster** _(neutral)_: It's done. Nothing left to mend here. Except, I suppose, whatever you're off to break.
 - *The Timburr puts its last plank on its shoulder and falls in beside you.*
-- [receive Timburr "Plank" Lv 8 (GUTS)]
+- [receive Timburr "Plank" Lv 13 (GUTS)]
 - [quest complete]
 
 #### The Tide-Pool Feud (`EL_TIDE_POOL_FEUD`)
 
-*Chapter 2 · Dobbs the shell-gatherer, the shell-gatherers' steps on Lacecliff Walk (map 527) · rank 1 · 2 points · unlock `switch(103)`*
+*Chapter 2 · Dobbs the shell-gatherer, the shell-gatherers' steps on Lacecliff Walk (map 527) · rank 1 · 2 points · unlock `badges >= 1`*
 
 A Crabrawler and a Clobbopus have been fighting over one rock for three days. The shell-gatherers can't reach the pools.
 
@@ -517,14 +525,14 @@ A Crabrawler and a Clobbopus have been fighting over one rock for three days. Th
 - **CHOICE:** Whose side are you on?
   - > Help the Clobbopus.
     - *The Clobbopus slaps the rock with a tentacle, delighted. The Crabrawler turns on you!*
-    - [battle] Crabrawler Lv 12 (IRONFIST)
+    - [battle] Crabrawler Lv 14 (IRONFIST)
       - on caught:
         - [continue: victory_clob]
       - on won:
         - [continue: victory_clob]
   - > Help the Crabrawler.
     - *The Crabrawler clacks its claws, delighted. The Clobbopus turns on you!*
-    - [battle] Clobbopus Lv 12 (TECHNICIAN)
+    - [battle] Clobbopus Lv 14 (TECHNICIAN)
       - on caught:
         - [continue: victory_crab]
       - on won:
@@ -653,7 +661,7 @@ The Mourner walked straight through the Pageant's painted sky. The scene-painter
 
 **Quest log steps:** `ask`: Help Marguerite Fane and her Smeargle choose the colours for the new backdrop.
 
-**Reward:** +1 pts. **Touches:** none; the colours you pick decide the Smeargle's moves (Water, Fire, Grass or Ghost coverage).
+**Reward:** +1 pts. **Touches:** none; the colours you pick decide the Smeargle's moves (Water/Ice, Ghost, Fairy or Ground coverage).
 
 **Scene `offer`** (event: `pf_quest_run(:EL_PAINT_LOFT, :offer)`)
 
@@ -675,12 +683,12 @@ The Mourner walked straight through the Pageant's painted sky. The scene-painter
   - > Fog on the breakwater.
     - *Brush slaps on grey-blue and white. The new sky is all fog and lamplight.*
     - [continue: finish_sea]
-  - > Footlights.
-    - *Brush paints in amber and red. The new sky is the inside of a lantern.*
-    - [continue: finish_ember]
-  - > The road inland.
-    - *Brush paints green. The new sky is the forest seen from underneath.*
-    - [continue: finish_grove]
+  - > Morning over the salt lake.
+    - *Brush paints pink and gold. The new sky is the minute before the lamps go out.*
+    - [continue: finish_dawn]
+  - > The dunes on the way in.
+    - *Brush paints ochre and sand. The new sky has a road in it, going somewhere.*
+    - [continue: finish_earth]
   - > After the show.
     - *Brush paints violet and black and one small star.*
     - [continue: finish_night]
@@ -688,25 +696,25 @@ The Mourner walked straight through the Pageant's painted sky. The scene-painter
 **Scene `finish_sea`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_sea)`)
 
 - [continue: finish]
-- [receive Smeargle "Brush" Lv 12 (TECHNICIAN) (sea palette)]
+- [receive Smeargle "Brush" Lv 14 (TECHNICIAN) (sea palette)]
 - [quest complete: sea]
 
-**Scene `finish_ember`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_ember)`)
+**Scene `finish_dawn`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_dawn)`)
 
 - [continue: finish]
-- [receive Smeargle "Brush" Lv 12 (TECHNICIAN) (ember palette)]
-- [quest complete: ember]
+- [receive Smeargle "Brush" Lv 14 (TECHNICIAN) (dawn palette)]
+- [quest complete: dawn]
 
-**Scene `finish_grove`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_grove)`)
+**Scene `finish_earth`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_earth)`)
 
 - [continue: finish]
-- [receive Smeargle "Brush" Lv 12 (TECHNICIAN) (grove palette)]
-- [quest complete: grove]
+- [receive Smeargle "Brush" Lv 14 (TECHNICIAN) (earth palette)]
+- [quest complete: earth]
 
 **Scene `finish_night`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish_night)`)
 
 - [continue: finish]
-- [receive Smeargle "Brush" Lv 12 (TECHNICIAN) (night palette)]
+- [receive Smeargle "Brush" Lv 14 (TECHNICIAN) (night palette)]
 - [quest complete: night]
 
 **Scene `finish`** (event: `pf_quest_run(:EL_PAINT_LOFT, :finish)`)
@@ -794,7 +802,7 @@ A koan: find the sound Saltmere makes when nobody is performing.
 - *A Ralts. Its horn glows faintly, the colour of the lamps behind you.*
 - *Ralts feel what people feel. In Saltmere everyone's feelings are performed. This one has been hiding out here, where the only feeling is the sea's.*
 - *It looks up at you as if you're the first quiet thing it's met in a long time.*
-- [receive Ralts Lv 12 (TRACE)]
+- [receive Ralts Lv 13 (TRACE)]
 - [effects: RES+1]
 - [quest complete]
 
@@ -940,7 +948,7 @@ A pilgrimage: re-tie the silk knots at the three wayshrines of the Loyal Three, 
 
 #### The Horn and the Pincer (`EL_HORN_AND_PINCER`)
 
-*Chapter 3 · the lantern rope (no one signed it), the sap tree on the old trail, Gossamer Wood (map 524) · rank 1 · 2 points · unlock `badges >= 1`*
+*Chapter 3 · the lantern rope (no one signed it), the sap tree on the old trail, Gossamer Wood (map 524) · rank 1 · 2 points · unlock `badges >= 2`*
 
 Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week.
 
@@ -955,7 +963,7 @@ Two great Bug Pokémon are fighting over the sap tree on the old trail. The trai
 - **CHOICE:** Who do you stand with?
   - > Stand with the Heracross.
     - *The Heracross bows. The Pinsir's mandibles open wide.*
-    - [battle] Pinsir Lv 15 (MOXIE)
+    - [battle] Pinsir Lv 19 (MOXIE)
       - on caught:
         - [continue: hera_helps]
       - on won:
@@ -963,7 +971,7 @@ Two great Bug Pokémon are fighting over the sap tree on the old trail. The trai
         - [continue: hera_helps]
   - > Stand with the Pinsir.
     - *The Pinsir clacks once, approving. The Heracross lowers its horn.*
-    - [battle] Heracross Lv 15 (MOXIE)
+    - [battle] Heracross Lv 19 (MOXIE)
       - on caught:
         - [continue: pinsir_helps]
       - on won:
@@ -1373,9 +1381,9 @@ Something is taking eggs off the Gullcry ledges. Old Asta wants it stopped. Then
 
 CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $500.
 
-**Quest log steps:** `ask`: Read Crate 7-B's paperwork at the customs kiosk. · `stamps`: Form 7-C (adoption) needs three stamps: Tidewatch Station, the Dockmaster, and the customs duty officer. · `warm`: The Charcadet in Crate 7-B is freezing. Take it up to the lighthouse lamp.
+**Quest log steps:** `ask`: Read Crate 7-B's paperwork at the customs kiosk. · `stamps`: Form 7-C (adoption) needs three stamps: Tidewatch Station, the Dockmaster, and the customs duty officer. · `warm`: The Charcadet in Crate 7-B is freezing. Take it up to the lighthouse lamp. Hesper keeps it there until you hold two badges.
 
-**Reward:** disposed: $500, MERIDIAN+1; adopted: POTION x2; +2 pts. **Touches:** Meridian standing (+1 if you sign the disposal form).
+**Reward:** disposed: $500, MERIDIAN+1; adopted: POTION x2; +2 pts. **Touches:** Meridian standing (+1 if you sign the disposal form); the Charcadet is collected after Badge 2.
 
 **Scene `offer`** (event: `pf_quest_run(:ZE_FORM_7B, :offer)`)
 
@@ -1447,9 +1455,15 @@ CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $5
 - **Hesper** _(deadpan)_: ...Put it nearer, then. Not touching the lens. Nobody touches the lens.
 - **Hesper** _(neutral)_: Fire-types used to winter up here when I was a girl. The lamp was better company than most people.
 - *The flames climb, steadier, brighter. Something in the crate sits up and looks at you.*
-- **Hesper** _(angry)_: Now take it and go. And shut the door. You're letting the warm out.
-- [receive Charcadet Lv 6 (FLAMEBODY)]
-- [quest complete: adopted]
+- [if `badges >= 2`]
+  - **Hesper** _(neutral)_: It's walking about on its own now. Been sitting by my lens every night, watching the road you went down.
+  - **Hesper** _(angry)_: Now take it and go. And shut the door. You're letting the warm out.
+  - [receive Charcadet Lv 18 (FLAMEBODY)]
+  - [quest complete: adopted]
+- [else]
+  - **Hesper** _(deadpan)_: It'll not last a day on the coast road in this fog. It stays by the lamp till it can walk on its own.
+  - **Hesper** _(angry)_: Come back when you've two of those badges rattling in your pocket. Not before. And shut the door.
+  - *(Hesper will keep the Charcadet by the lamp until you hold two badges.)*
 
 #### Field Survey: Coastal (`ZE_FIELD_SURVEY`)
 
@@ -1537,7 +1551,7 @@ CALL FOR PROPOSALS #0003: ACOUSTIC SURVEY OF THE EBBMOUTH TIDAL LATTICE DURING '
 
 #### The Little Crucible (`AS_LITTLE_CRUCIBLE`)
 
-*Chapter 2 · Sergeant Brakka Emberhide, the Legion recruiting barge, Saltmere harbour (map 146) · rank 1 · 3 points · unlock `badges >= 1`*
+*Chapter 4 · Sergeant Brakka Emberhide, the Legion recruiting barge, Saltmere harbour (map 146) · rank 1 · 3 points · unlock `badges >= 2`*
 
 WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less.
 
@@ -1580,7 +1594,7 @@ WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. W
 **Scene `mascot`** (event: `pf_quest_run(:AS_LITTLE_CRUCIBLE, :mascot)`)
 
 - **Barge herald** _(happy)_: AND NOW! UNDEFEATED ON THIS DECK! BITER OF OFFICERS! CINDERPAW!
-- [battle] Litleo "Cinderpaw" Lv 17 (MOXIE)
+- [battle] Litleo "Cinderpaw" Lv 21 (MOXIE)
   - on won:
     - *Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.*
     - **Sergeant Brakka** _(shocked)_: Huh. It's picked you. It's never picked anybody. It bit the last person who tried to pick it.

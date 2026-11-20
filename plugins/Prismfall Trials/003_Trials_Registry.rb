@@ -94,6 +94,7 @@ module Prismfall
       :variants,   # { variant => overrides } (e.g. Smeargle palettes)
       # design info (shown by the doc tool, not used by the engine)
       :where, :map, :chapter, :quest, :why, :trigger,
+      :badges,     # fewest badges with which it can be obtained (SPINE Rev 16; the headless test checks it)
       :stub,       # true = designed only (not placed yet)
       :special_moves # moves it knows by design though it can't normally learn them (event moves)
     ].freeze

@@ -27,6 +27,13 @@ def casual_iv(top):
 def casual_drop(top):
     return 2 if top < 40 else 3 if top < 70 else 4
 
+def hard_ev(spread, level):
+    """Hard's 252/252 spreads grow with the journey: at most 8 x level per stat (88 at Lv 11, 152 at 19, full from 32).
+    Reference: Reborn and Rejuvenation give trainers min(85, 1.5 x level) by default; 252s everywhere is Reborn's
+    Pulse-2 password, not its base game. Harness: flat 252s at Lv 11-15 beat even a prepared Gym 1 team 60/60."""
+    top = min(252, 8 * level)
+    return ",".join(str(min(int(v), top)) for v in spread.split(","))
+
 def bag(top, diff, boss=False):
     if top <= 15:   t = (["POTION"], ["SUPERPOTION"], [])          # Gym 1 stretch: approachable (SPINE Rev 14)
     elif top <= 23: t = (["SUPERPOTION"], ["SUPERPOTION"] * 2, [])   # BALANCE 1: one Super Potion up to cap 23
@@ -88,7 +95,7 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
             out.append("    IV = %d" % std_iv(top))
         elif diff == 1:
             out.append("    IV = " + (TR_IV if o.get("tr") else "31"))
-            out.append("    EV = " + EV[o["ev"]])
+            out.append("    EV = " + hard_ev(EV[o["ev"]], o["lv"]))
         else:
             out.append("    IV = %d" % casual_iv(top))
             out.append("    EV = 0")

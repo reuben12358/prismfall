@@ -133,12 +133,12 @@ def build():
     E.append({'type': 'berry', 'at': P['berry'], 'berry': 'ORANBERRY'})
     E.append(c.fog_event('prismfall_seamist', 36, 0, 200, 1, 0))
     # Chapter 2 opener (story/20_SCRIPT_CH0-2.md, "CHAPTER 2"): Larch sees the PC off at the stile
-    ch2 = [say('LARCH', 'neutral', "Eighteen gyms. Briarwick's first, up through the Gossamer Wood. The Warden's a girl called Tamsin Loom. Go easy on her, she inherited the seat in spring and hasn't slept since."),
+    ch2 = [say('LARCH', 'neutral', "Eighteen gyms. Saltmere's first. The forest road to Briarwick's corded off -- the Glasswood's walked across it -- so you go round by the coast."),
            say('LARCH', 'neutral', "Write to me. I mean it. Gale Post, every town. If I don't hear from you in a week I start Lecture Two by post."),
-           say('JUNO', 'happy', "I'm coming as far as Briarwick! Uncle Rowan wants silk-moth eggs, and I want to see a gym!"),
+           say('JUNO', 'happy', "I'm coming as far as Saltmere! Mum's promised forty tarts to the Pageant crowd and I'm the cart!"),
            {'script': 'pbReceiveItem(:TOWNMAP)'},
            "(Larch has drawn a skull on the Glassed Orchard, and a smaller skull on her own kettle.)",
-           "QUEST: \"Eighteen Roads\" - Earn the first badge in Briarwick.",
+           "QUEST: \"Eighteen Roads\" - Earn the first badge in Saltmere, west along the coast.",
            {'script': '$game_variables[102] = 2 if $game_variables[102] < 2'},
            {'script': "ev = $game_map.events.values.find { |e| e.name == 'Professor Larch' }\n$game_self_switches[[520, ev.id, 'A']] = true if ev\n$game_map.need_refresh = true"}]
     lx, ly = P['stile']

@@ -19,7 +19,11 @@ HI = H('f5a066')
 LINE = BLACK          # outer outline: very dark auburn instead of pure black, softer like the B2W2 busts' hair
 
 CROWN = (25.0, -7.0)
-LOCKS = 9.5        # the part sits above the frame; locks radiate from here
+LOCKS = 9.5
+BAND_W = 1.3
+BAND_R = 18.5
+BAND_SOLID = False
+LOCK_AMP = 0.27        # the part sits above the frame; locks radiate from here
 
 
 def classify(im):
@@ -77,10 +81,10 @@ def shade(x, y, face_mask):
     t = (wav * LOCKS / (2 * math.pi)) % 1.0                   # 0 at a lock's lit edge -> 1 at its crease
     lock = 1.0 - 2.0 * (t ** 1.4)                             # bright lit side, falling into a dark crease
     light = -0.007 * (x - 20) - 0.008 * (y - 20)              # light from the upper left
-    v = 0.55 + 0.27 * lock + light
+    v = 0.55 + LOCK_AMP * lock + light
     v -= 0.10 * face_mask                                     # soft contact shadow beside the face
     rh = math.hypot(x + 0.5 - 26.0, y + 0.5 - 24.0)
-    band = math.exp(-((rh - 18.5) / 1.3) ** 2) if y < 21 else 0.0   # highlight arc following the dome
+    band = math.exp(-((rh - BAND_R) / BAND_W) ** 2) if y < 21 else 0.0   # highlight arc following the dome
     v += 0.30 * band * (0.6 + 0.4 * max(0.0, lock))
     return v, band
 
@@ -108,7 +112,7 @@ def recolour_hair(im, region):
     out = im.copy(); q = out.load()
     for (x, y) in region:
         v, band = shade(x, y, near[(x, y)])
-        if band > 0.5 and lock_lit(x, y):
+        if band > 0.5 and (BAND_SOLID or lock_lit(x, y)):
             q[x, y] = HI
             continue
         if x >= 33 and y >= 22:
@@ -159,5 +163,68 @@ def main():
     print('ok')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__' and sys.argv[1:2] != ['middle']:
     main()
+
+
+# ---------------------------------------------------------------- middle ground (pass 3 structure + fix shading)
+DARK = H('4e1a14')          # inner lock contour: two shades under the hair's darkest, never black
+
+
+def contours(orig, region):
+    """pass 3's internal black strand lines, kept only where they are real lock divisions (runs of 4+ px), tapered by
+    trimming each run's free ends."""
+    hair, outer = classify(orig)
+    p = orig.load()
+    lines = set(q for q in hair if p[q] == BLACK) & region
+    comps, seen = [], set()
+    for q in lines:
+        if q in seen:
+            continue
+        st, comp = [q], []
+        while st:
+            c = st.pop()
+            if c in seen or c not in lines:
+                continue
+            seen.add(c); comp.append(c)
+            st += [(c[0] + dx, c[1] + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy]
+        comps.append(comp)
+    keep = set()
+    for comp in comps:
+        if len(comp) < 4:
+            continue
+        cs = set(comp)
+        ends = [c for c in comp if sum(1 for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                                       if (dx or dy) and (c[0] + dx, c[1] + dy) in cs) <= 1]
+        keep |= cs - set(ends)
+    return keep
+
+
+def middle(e):
+    orig = Image.open(P + '/p3_A_%s_48.png' % e).convert('RGBA')
+    hair, outer = classify(orig)
+    region = smooth_silhouette(orig, hair, outer)
+    out = fix(orig)
+    q = out.load(); po = orig.load()
+    # the dark band the wreath sits on (pass 3's darkest hair tone) comes back as the darkest shade
+    for (x, y) in region:
+        if po[x, y] == H('5a2018') and q[x, y] in set(SH) | {HI}:
+            q[x, y] = SH[0]
+    for (x, y) in contours(orig, region):
+        if q[x, y] in set(SH) | {HI}:
+            q[x, y] = DARK
+    return out
+
+
+def main_middle():
+    global BAND_W, LOCK_AMP, BAND_R, BAND_SOLID
+    BAND_W, LOCK_AMP, BAND_R, BAND_SOLID = 0.75, 0.22, 21.5, True   # one crisp band over the crown, above the wreath
+    for e in EXPR:
+        m = middle(e)
+        m.save(P + '/p3m_%s_48.png' % e)
+        kb.up(m, 2).save(J + '/JUNO_%s_p3m.png' % e)
+    print('middle ok')
+
+
+if __name__ == '__main__' and sys.argv[1:2] == ['middle']:
+    main_middle()

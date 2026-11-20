@@ -199,18 +199,20 @@ ev = ["# EVENT_POKEMON — quest-reward and event Pokémon",
       "> **Generated** by `ruby tools/trials_docs.rb` from `plugins/Prismfall Trials/13x_EventMons_*.rb` (edit those). Engine: `Prismfall::EventMons` (`006_Trials_EventMons.rb`): `pf_event_battle(:ID)`, `pf_event_gift(:ID)`, bosses through Prismfall Bosses.",
       "> The spirit of the user's examples (SPINE Rev 13): **chases** that end in a battle and a catch (Rejuvenation's Nidoran), **boss Pokémon that join or pay out** (Rejuvenation's Spidops/Litleo), **rival-bug duels** where you pick a side (Reborn's Pinsir/Heracross), **gifts for a kindness** (Reborn's Torchic).",
       "> Rules: every event Pokémon carries something its area lacks (a type, ability or move); levels sit just under the cap of its chapter; a knocked-out battle event can be retried (`:on_ko => :retry`) unless stated; boss rewards join at a lower level than the boss; moves are legal (level-up, TM/tutor or egg) except a listed `:special_moves` event move. The headless test checks all of this.",
+      "> **SPINE Revision 16** (`design/DISTRIBUTION_STUDY.md`, `design/warden_gates.json`): the **Badges** column is the fewest badges with which the Pokémon can be obtained (the test recomputes it from the quest unlock, the TALK rows and the scene's own gates). Nothing obtainable with *b* badges is a type answer to Warden *b*+1 or *b*+2 (Dorian: Fighting/Ghost; Tamsin: Fire/Flying/Rock; Marisol: Electric/Grass; Rook: Ground). A spar you can't catch (`:catchable => false`) hands nothing over.",
       ""]
 early = ids.count { |id| (EM.get(id)[:chapter] || 99) <= 2 }
 ev << "**#{ids.length} event Pokémon** (#{ids.count { |i| !EM.get(i)[:stub] }} implemented, the rest designed with data); **#{early} in Chapters 0–2.**"
 ev << ""
-ev << "| # | Pokémon | Kind | Ch | Where (map) | How it plays | Why it's worth having | Quest | Status |"
-ev << "|---|---|---|---|---|---|---|---|---|"
+ev << "| # | Pokémon | Kind | Ch | Badges | Where (map) | How it plays | Why it's worth having | Quest | Status |"
+ev << "|---|---|---|---|---|---|---|---|---|---|"
 ids.each_with_index do |id, i|
   d = EM.get(id)
   moves = d[:moves] ? " — " + d[:moves].join(", ") : ""
   moves = " — palettes: " + d[:variants].keys.join(" / ") if d[:variants]
   q = d[:quest] ? (TR.get(d[:quest]) ? "#{TR.get(d[:quest])[:title]} `#{d[:quest]}`" : d[:quest].to_s) : ""
-  ev << "| #{i + 1} | **#{mon_label(id)}**#{esc(moves)} `#{id}` | #{kinds[d[:kind]] || d[:kind]} | #{d[:chapter]} | #{esc(d[:where])} (#{d[:map]}) | " \
+  kind = (d[:kind] == :battle && d[:catchable] == false) ? "spar (can't be caught)" : (kinds[d[:kind]] || d[:kind])
+  ev << "| #{i + 1} | **#{mon_label(id)}**#{esc(moves)} `#{id}` | #{kind} | #{d[:chapter]} | #{d.key?(:badges) ? d[:badges] : ''} | #{esc(d[:where])} (#{d[:map]}) | " \
         "#{esc(d[:trigger])} | #{esc(d[:why])} | #{esc(q)} | #{d[:stub] ? 'designed' : 'implemented'} |"
 end
 File.write(File.join(ROOT, "design", "EVENT_POKEMON.md"), ev.join("\n") + "\n")

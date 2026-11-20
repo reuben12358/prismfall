@@ -50,32 +50,32 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Rekk sent out Sizzlipede!
     |     >> sent out (foe): Sizzlipede Lv.15 [FLASHFIRE]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 65/65 | Sizzlipede 43/43]
-    |   Machoke used Rock Tomb!
+    |   [Machoke 76/76 | Sizzlipede 43/43]
+    |   Machoke used Knock Off!
     |     HP Sizzlipede (foe): 43 -> 0 / 43
-    |   It's super effective!
     |   The opposing Sizzlipede fainted!
     |     xx fainted: Sizzlipede (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
-    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
     |   Ashkaar Soldier Rekk is about to send out Rolycoly. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Soldier Rekk sent out Rolycoly!
     |     >> sent out (foe): Rolycoly Lv.15 [STEAMENGINE]
     | 
     | --- Turn 2 ---
-    |   [Machoke 65/65 | Rolycoly 37/37]
-    |   Machoke used Karate Chop!
-    |   The pit erupted as Machoke pressed the attack!
+    |   [Machoke 76/76 | Rolycoly 37/37]
+    |   Machoke used Rock Tomb!
     |     HP Rolycoly (foe): 37 -> 0 / 37
-    |   It's super effective!
     |   The opposing Rolycoly fainted!
     |     xx fainted: Rolycoly (foe)
     |   The crowd went wild for Machoke!
@@ -93,46 +93,33 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Vasha sent out Capsakid!
     |     >> sent out (foe): Capsakid Lv.15 [CHLOROPHYLL]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 65/65 | Capsakid 43/43]
-    |   Machoke used Karate Chop!
-    |   The pit erupted as Machoke pressed the attack!
-    |     HP Capsakid (foe): 43 -> 3 / 43
-    |   The opposing Capsakid used Growth!
-    |     (anim: StatUp)
-    |   The opposing Capsakid's Attack rose!
-    |   The opposing Capsakid's Special Attack rose!
-    |   (end of round)
-    | 
-    | --- Turn 2 ---
-    |   [Machoke 65/65 | Capsakid 3/43]
-    |   Machoke used Karate Chop!
-    |   The pit erupted as Machoke pressed the attack!
-    |     HP Capsakid (foe): 3 -> 0 / 43
+    |   [Machoke 76/76 | Capsakid 43/43]
+    |   Machoke used Rock Tomb!
+    |     HP Capsakid (foe): 43 -> 0 / 43
     |   The opposing Capsakid fainted!
     |     xx fainted: Capsakid (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
-    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
     |   Ashkaar Soldier Vasha is about to send out Houndour. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Soldier Vasha sent out Houndour!
     |     >> sent out (foe): Houndour Lv.16 [EARLYBIRD]
     | 
-    | --- Turn 3 ---
-    |   [Machoke 65/65 | Houndour 43/43]
-    |   The opposing Houndour used Bite!
-    |     HP Machoke (player): 65 -> 59 / 65
-    |   It's not very effective...
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    | --- Turn 2 ---
+    |   [Machoke 76/76 | Houndour 43/43]
+    |   Machoke used Knock Off!
     |     HP Houndour (foe): 43 -> 0 / 43
-    |   It's super effective!
+    |   It's not very effective...
     |   The opposing Houndour fainted!
     |     xx fainted: Houndour (foe)
     |   The crowd went wild for Machoke!
@@ -150,48 +137,40 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Salandit!
     |     >> sent out (foe): Salandit Lv.16 [CORROSION]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 59/65 | Salandit 45/45]
-    |   The opposing Salandit used Poison Fang!
-    |     HP Machoke (player): 59 -> 51 / 65
-    |     (anim: Toxic)
-    |   Machoke was badly poisoned!
-    |   Machoke used Rock Tomb!
+    |   [Machoke 76/76 | Salandit 45/45]
+    |   The opposing Salandit used Smog!
+    |     HP Machoke (player): 76 -> 69 / 76
+    |   Machoke used Knock Off!
     |     HP Salandit (foe): 45 -> 0 / 45
-    |   It's super effective!
     |   The opposing Salandit fainted!
     |     xx fainted: Salandit (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
-    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
-    |     (anim: Toxic)
-    |     HP Machoke (player): 51 -> 47 / 65
-    |   Machoke was hurt by poison!
     |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Numel!
     |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
     | 
     | --- Turn 2 ---
-    |   [Machoke 47/65 POISON | Numel 49/49]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   [Machoke 69/76 | Numel 49/49]
+    |   Machoke used Knock Off!
     |     HP Numel (foe): 49 -> 0 / 49
-    |   A critical hit!
     |   The opposing Numel fainted!
     |     xx fainted: Numel (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
     |   (end of round)
-    |     (anim: Toxic)
-    |     HP Machoke (player): 47 -> 39 / 65
-    |   Machoke was hurt by poison!
     | ## FIELD STAGE: COLOSSEUM is now stage 2
     |   Two down! The crowd is in a frenzy!
     |   Ashkaar Officer Brakka is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
@@ -199,13 +178,16 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
     | 
     | --- Turn 3 ---
-    |   [Machoke 39/65 POISON | Fletchinder 52/52]
-    |   The opposing Fletchinder used Growl!
-    |     (anim: StatDown)
-    |   Machoke's Attack fell!
-    |   Machoke used Rock Tomb!
+    |   [Machoke 69/76 | Fletchinder 52/52]
+    |   The opposing Fletchinder used Ember!
+    |     HP Machoke (player): 69 -> 57 / 76
+    |   A critical hit!
+    |     (anim: Burn)
+    |   Machoke was burned!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Fletchinder (foe): 52 -> 0 / 52
-    |   It's super effective!
+    |   It's not very effective...
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
     |   The crowd went wild for Machoke!
@@ -223,43 +205,48 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   Oh! A wild Litleo appeared!
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.19 [GUTS]
+    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
+    |   The crowd chanted for Machoke!
+    |     (anim: StatUp)
+    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 39/65 POISON | Litleo 53/53]
+    |   [Machoke 57/76 BURN | Litleo 69/69]
     |   The wild Litleo used Work Up!
     |     (anim: StatUp)
     |   The wild Litleo's Attack rose!
     |   The wild Litleo's Special Attack rose!
-    |   Machoke used Rock Tomb!
-    |     HP Litleo (foe): 53 -> 1 / 53
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Litleo (foe): 69 -> 1 / 69
     |   It's super effective!
     |     (anim: StatDown)
     |   The wild Litleo's Speed fell!
     |   The wild Litleo's shield shattered!
-    |     HP Litleo (foe): 1 -> 53 / 53
+    |     HP Litleo (foe): 1 -> 69 / 69
     |   The wild Litleo roars, and the crowd roars back!
     |     (anim: StatUp)
     |   The wild Litleo's Special Attack rose!
     |   (end of round)
-    |     (anim: Poison)
-    |     HP Machoke (player): 39 -> 31 / 65
-    |   Machoke was hurt by poison!
+    |     (anim: Burn)
+    |     HP Machoke (player): 57 -> 53 / 76
+    |   Machoke was hurt by its burn!
     | 
     | --- Turn 2 ---
-    |   [Machoke 31/65 POISON | Litleo 53/53]
-    |   Machoke used Rock Tomb!
-    |     HP Litleo (foe): 53 -> 0 / 53
+    |   [Machoke 53/76 BURN | Litleo 69/69]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
+    |     HP Litleo (foe): 69 -> 0 / 69
     |   It's super effective!
     |   The wild Litleo fainted!
     |     xx fainted: Litleo (foe)
     |   The crowd went wild for Machoke!
     |     (anim: StatUp)
     |   Machoke's Attack rose!
-    |   Machoke is at the level cap (Lv. 19) and can't gain Exp. Points.
+    |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   battle result code: 1
     |   (overworld message) Tester obtained Litleo!
     |   (overworld message) Cinderpaw shakes its smoking mane, looks at the crew, looks at you... and trots over to sit at your feet.
@@ -364,7 +351,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
   NEW QUEST: "A Hole in the Sky" Help Marguerite Fane and her Smeargle choose the colours for the new backdrop.
   Brush looks at you, tail-brush raised.
   What does Saltmere look like to you?
-  Brush paints in amber and red. The new sky is the inside of a lantern.
+  Brush paints ochre and sand. The new sky has a road in it, going somewhere.
   Marguerite Fane: He's... he's painted Dorian's face in the corner. He always paints Dorian's face in the corner.
   Marguerite Fane: That's how I know he's better.
   Brush finishes, puts down his tail, and walks over to stand beside you. He doesn't walk back.
@@ -446,18 +433,51 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
 -- talk DOVETAIL_NEST
   A Wattrel peers out of the nest. Its feathers crackle with static.
   It's been waiting for the ferry to sail, so it can follow it home. The ferry is never going to sail.
-  The Wattrel looks at the empty sea, then at you. It hops onto your shoulder and settles there, crackling.
-  QUEST LOG: "Master of Nothing" Take what you found back to the Dockmaster.
+  The Wattrel looks at the empty sea, then at you. It crackles, once, and tucks its head back under its wing. It's waiting for a ship. Any ship.
+  QUEST LOG: "Master of Nothing" Tell the Dockmaster what you found.
 -- talk DOCKMASTER
   Dockmaster: A Wattrel. Of course. They follow ships. That one followed the last one in and had nowhere left to follow.
-  Dockmaster: 'Dovetail. Laid up. Crew discharged. One Wattrel, rehomed.'
-  Dockmaster: There. The first ledger line I've liked in a year.
-  Tester obtained Wattrel!
+  Dockmaster: 'Dovetail. Laid up. Crew discharged. One Wattrel aboard, waiting for a ship.'
+  Dockmaster: There. The first ledger line I've liked in a year. The Gale Post boats still run north. It'll find one.
   The lantern is lit and let go. It rises over the roofs.
   QUEST COMPLETE: "Master of Nothing"
   You obtained 2 Potions!
   You put the Potions in your Bag's Medicine pocket.
   Your standing in The Quiet Way rose to Bough!
+-- talk EBB_MAST
+  It's the Dovetail's rigging. It followed the first boat north out of Ferrow's Landing.
+  Your badge case hums its three-note chord. The Wattrel's feathers stand up with static, and it drops onto your shoulder like it was always going to.
+  Tester obtained Wattrel!
+  (Somewhere in Ferrow's Landing, a ledger line just changed: 'One Wattrel, rehomed.')
+-- talk COLL
+  Coll: Scarecrow's moved again.
+  Coll: Monday it was in the plum rows. Tuesday, the pears. This morning it was in my chair.
+  Coll: I didn't build a scarecrow.
+  Look into it?
+  NEW QUEST: "The Scarecrow Walks" Look at the 'scarecrow' in the Hale orchard on Windfall Row. Don't let it see you looking.
+  Coll: Have a look at it. Don't let it see you looking.
+-- talk SCARECROW
+  It's a scarecrow. Probably. It has a lot of very green hands.
+  A drop of rain lands on it. The scarecrow shudders, and edges sideways under the nearest tree.
+  Scarecrows don't do that. Wenna keeps a Squirt Bottle for her window boxes...
+  QUEST LOG: "The Scarecrow Walks" It hates the rain. Ask Wenna in Ferrow's Landing for her Squirt Bottle.
+-- talk WENNA
+  Wenna: Coll's scarecrow? We haven't got a scarecrow.
+  Wenna: Take the bottle. If it's a Pokémon, it'll thank you. If it's a scarecrow, nobody's lost anything but water.
+  You obtained a Squirt Bottle!
+  You put the Squirt Bottle in your Bag's Key Items pocket.
+  QUEST LOG: "The Scarecrow Walks" Water the scarecrow.
+-- talk SCARECROW
+  The scarecrow stands very, very still. It is trying extremely hard to be a tree.
+  Water the scarecrow?
+  You give it a squirt.
+  The 'scarecrow' screams, rips its roots out of the ground and charges!
+  The Sudowoodo bolts into the plum rows, sobbing dry tears. It was far too frightened to stay in a ball.
+  Coll: ...It was a Sudowoodo.
+  Coll: It'll be back. It always comes back to the plums. Come and try again when you've a couple of badges and it's calmed down.
+  The lantern is lit and let go. It rises over the roofs.
+  QUEST COMPLETE: "The Scarecrow Walks"
+  \PN received $300!
 -- EL_PAINT_LOFT / offer
   Marguerite Fane: Eleven weeks, that sky took. Eleven. And a man in a bark mask walks through it like a curtain.
   Marguerite Fane: Brush won't paint since. Sulks. Look at him.
@@ -465,7 +485,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
   Marguerite Fane: He paints whatever moves him. Nothing's moved him since. Tell him what Saltmere looks like to you. Maybe he'll listen to a stranger.
   Help pick the colours?  [choices: Let's paint. / Not now.]
   Brush looks at you, tail-brush raised.
-  What does Saltmere look like to you?  [choices: Fog on the breakwater. / Footlights. / The road inland. / After the show.]
+  What does Saltmere look like to you?  [choices: Fog on the breakwater. / Morning over the salt lake. / The dunes on the way in. / After the show.]
   Brush slaps on grey-blue and white. The new sky is all fog and lamplight.
   Marguerite Fane: He's... he's painted Dorian's face in the corner. He always paints Dorian's face in the corner.
   Marguerite Fane: That's how I know he's better.
@@ -478,6 +498,6 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
 
 === 5. Badge-tier encounter swap: the Ferrymen's Mile (520) ===
   rumour: Big pawprints in the heather on The Ferrymen's Mile. Something's been at the honey pots. At night the Lillipup there act oddly.
-  520 Land after Badge 2: SKWOVET(20) 3-5, LECHONK(15) 3-5, LILLIPUP(15) 3-5, FLETCHLING(10) 3-5, PIKIPEK(10) 4-6, ROLYCOLY(10) 4-6, WOOLOO(10) 4-6, ROOKIDEE(5) 3-5, YUNGOOS(5) 3-5, TEDDIURSA(4) 13-16, MUNCHLAX(3) 13-16, FARFETCHD(4) 17-20, AUDINO(3) 17-20, SWABLU(4) 21-24, HAWLUCHA(2) 21-24
+  520 Land after Badge 2: SKWOVET(20) 3-5, LECHONK(15) 3-5, LILLIPUP(15) 3-5, PIKIPEK(13) 4-6, WOOLOO(13) 4-6, YUNGOOS(9) 3-5, ROOKIDEE(8) 3-5, FLETCHLING(4) 4-6, ROLYCOLY(3) 4-6, TEDDIURSA(4) 13-16, MUNCHLAX(3) 13-16, FARFETCHD(4) 17-20, AUDINO(3) 17-20, SWABLU(4) 21-24, HAWLUCHA(2) 21-24
 
 === 6. Page conditions and save round trip ===
