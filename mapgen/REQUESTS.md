@@ -1064,3 +1064,69 @@ Lance, Marisol = Misty, the Dominar = Giovanni. Overworld charsets for the real 
 rumour ("Old woman by the brazier").
 **Note for every layout author:** a priority-0 decal on the top layer over a solid prop makes the prop walkable (Essentials
 reads the top tile first). `war.py decal()` and 568's veil now skip props; check your own decal passes.
+
+## From the Mega Evolution workstream (SPINE Revision 21: the late Ring, Megas from Lv 50), 2026-11-20
+Supersedes the Rev 20 entry above where they differ (its items 1, 2, 4, 5 and 9) and the story editor's Ring-Day items
+7–9. Design: `design/MEGA_EVOLUTION.md` (§1 rings, §4 the new Ring-Day, §5 stones and what moved, §6 who Megas, §8
+tests and win rates); trainer table also in `design/BALANCE.md` §6b. No map file was edited.
+
+**Map builder**
+1. **The Ring-Day moved to Cragholm** (13 badges): new event `BASTIAN_LAMPROOM` on **363 Cragholm - Lift Galleries**
+   (Bastian in his lamp-room at the bottom of the lowest gallery; Pip on a crate and Larch by the door while
+   `badges >= 13 && !quest_done(:OS_RING_DAY)`). Order in Ch14: Gym 13 → this scene → Larch takes the badge case apart →
+   the raid. If you built the Ch8 pieces (Rev 20 item 2's Brann Ring-Day, the story editor's item 9 inn nudge), drop
+   the Ring-Day part: Brann's Hearthguild event (244) now only carries his spare heartstone at 15 badges.
+2. **Stone events moved** (`TRIAL_EVENTS.yaml` "Mega Evolution"). Remove, if built: 577 Frostwick Pass (Absolite), 605
+   Static Tunnels Depths (Steelixite), 680 the Rootdeep (Swampertite), 685 Grudgestone Quarry B1F (Sablenite), 705
+   Frostfang Pass 2F (Glalitite), 726 Cloudstair Summit (Charizardite Y). Add: 801 the Slag Mesa (Absolite, 14), 804
+   Barrow of the Wardens (Sablenite, 14), 424 Underveil Sump Docks (Sharpedonite, 15), 821 the Drownings (Swampertite,
+   15, Surf), 832 the Brink (Charizardite Y, 15), 864 Wyrmscar Rift (Steelixite, 17). Same one-call pattern.
+3. **Conditions changed:** Corvin's gift on 223 is now `badges >= 18` (Bedside Manner is post-game); Old Cinder (248)
+   opens at 15 badges and is Lv 72. Notes on 223, 244, 248, 325 and 547 give the new badge counts.
+
+**Story editor**
+4. **The new Ring-Day scene** (Ch14, Cragholm; lines in `plugins/Prismfall Trials/114_Quests_Megas.rb` `OS_RING_DAY`,
+   summary in MEGA_EVOLUTION.md §4): Bastian gives the PC the odd ring Brann cut "ten years back" ("He sent it to me in
+   a sock... 'It sulks. Keep it where nobody asks questions.'"), plus the Aggronite. The ring sings; Pip hears it,
+   half-deaf Bastian feels it in the table; Larch lowers her book. No "reset", no Legend Plate (checked by run_mega.rb).
+   Brann isn't in it, so the Light Stone choice doesn't touch it. Please write it into `story/07_ACT_IV.md` Ch14 (after
+   Gym 13) and a script file if you keep one per chapter; `22_SCRIPT_CH8.md`'s withdrawn scene can point there; RD-1
+   in `13_CUTSCENES.md` becomes the lamp-room (lamplight on the chip instead of forge-light); 09_MYSTERIES #1's
+   "Ch8: the ring sings" clue is now Ch14.
+5. **Brann's follow-up, 15 badges** (`AS_FORGE_REMEMBERS`): he knows his ring on the PC's hand ("That's my ring. The odd
+   one. So old Ore finally gave it away"). **If `choice(:ch8_lightstone) == :dominar` he's hurt:** "I haven't forgotten
+   the Light Stone, mind... I'm not going to talk about it." Then the Cameruptite and "Your ring still singing? ...No.
+   Don't tell me."
+6. **Kestrel** (the user: "dont make one off exceptions, keep it in theme/story"): **no Mega and no borrowed ring
+   before Morwen's Ring reaches him.** If the PC gives it to him in Ch18, it answers him the first time he wears it:
+   his K8 Megas his Scizor (`PrismfallMega::MORWEN_RING`, automatic at battle start). A `megaOpp` line for it: "Mum.
+   Just this once. Answer me." Given at the SF instead, it first shows in the hijack tag battle (player's side). K9
+   (fallen) has no Mega. (This replaces the coordinator's earlier "Meridian band from K5" idea; nothing was posted for
+   it before this entry.)
+7. **Juno:** the Heartgarden scene (9 badges) no longer says "Yours sings": the PC has no ring yet ("It hummed when you
+   sat down, though. The stone, I mean."). At J4 Rowan's ring (hers with the seat) answers her and she Megas a
+   **Gardevoir "Veil"** (it replaces Comfey). Please give her the Gardevoir somewhere between Ch11 and the Festival
+   (Ralts are wild from 11 badges), ideally with a veil line.
+8. **Who has a ring** (MEGA_EVOLUTION.md §1.2): Wardens (Accord officers), Valen, Juno, and Meridian's own people (Voss,
+   Quent, Marchetti, Kroll, the Directorate Captain) on Lattice-glass keystones Meridian makes itself. **No ring, so no
+   Mega** (§6.3): the Mourner and Rowan (his ring is in the testament, then Juno's), Archseer Imre Dask, Morwen's Echo,
+   Theodric, the war officers. If the story would rather give any of them a ring, tell me and I'll add the Mega.
+9. **Meridian's keystones** need one line somewhere before Marchetti's Ch12 fight (her Mega Manectric is the first
+   Meridian Mega), e.g. a Larch or Rook remark that Meridian "makes its own heartstone keys out of Lattice-glass".
+10. **Quests moved by badge** (rule R4 with the ring at 13): The Doll Who Waited and Return to Sender at 14, Old Cinder
+    at 15 (its rider now died "on the Rimed Sands"), Bedside Manner post-game (18).
+11. **SPINE Rev 21 text** still says "Nobody uses a Mega below that, which retires Brann's Gym 7 Mega Camerupt"; the
+    user's amendment ("he could have one as long as its considered 'Weak'") is what's built: Brann (Gym 7) and the
+    Mourner (Ch9) have weak Megas on Standard and Hard (MEGA_EVOLUTION.md §6.1). **Brann's fight is kept exactly as
+    designed, per the user** (his set, Mega Camerupt, the Volcanic prime and its Sp. Atk boost): the Rev 20 entry's
+    item 5 ("Brann's Mega Camerupt needs tuning") is withdrawn.
+
+**Trainer designer (FYI, done in `gen.py`):** every Mega in BALANCE §6b; replaced slots and Casual cuts as listed there;
+from K7 Kestrel's Mismagius takes Krookodile's place (so the Scizor stays for K8) and K9's Genesect takes Staraptor's.
+Imre Dask's Rev 20 Hard-only Mega Sableye is removed (no ring in the story). Brann's team is untouched apart from the
+stone. Garret's v1 cameo (ace 46) no longer Megas. No other balance changes. `run_winrates.rb` has prepared-team cells
+G7, G10, M12, K5, G11 (`PRISM_PREPARED=1`) and `PRISM_FOE_NOMEGA=1` for the same fight without the foe's Mega; numbers
+in MEGA_EVOLUTION.md §8.
+
+**EBDX Bridge / battle speech (optional):** a `megaOpp` line per Mega fight (examples in MEGA_EVOLUTION.md §6.2).
+**Field Effects owner:** nothing new; no field file changed.

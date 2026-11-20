@@ -9,8 +9,29 @@ EV = {  # PBS order: HP, Atk, Def, Spe, SpA, SpD
     "BPD": "252,4,252,0,0,0", "SPD": "252,0,0,4,0,252",
 }
 TR_IV = "31,31,31,0,31,31"
-MEGA_STONES = {"SABLENITE", "GYARADOSITE", "TYRANITARITE", "LUCARIONITE", "METAGROSSITE", "GENGARITE", "SALAMENCITE", "GALLADITE", "GARDEVOIRITE",
-               "LATIASITE", "MAWILITE", "BANETTITE"}
+MEGA_STONES = {"VENUSAURITE", "CHARIZARDITEX", "CHARIZARDITEY", "BLASTOISINITE", "BEEDRILLITE", "PIDGEOTITE", "ALAKAZITE",
+               "SLOWBRONITE", "GENGARITE", "KANGASKHANITE", "PINSIRITE", "GYARADOSITE", "AERODACTYLITE", "AMPHAROSITE",
+               "STEELIXITE", "SCIZORITE", "HERACRONITE", "HOUNDOOMINITE", "TYRANITARITE", "SCEPTILITE", "BLAZIKENITE",
+               "SWAMPERTITE", "GARDEVOIRITE", "SABLENITE", "MAWILITE", "AGGRONITE", "MEDICHAMITE", "MANECTITE", "SHARPEDONITE",
+               "CAMERUPTITE", "ALTARIANITE", "BANETTITE", "ABSOLITE", "GLALITITE", "SALAMENCITE", "METAGROSSITE", "LATIASITE",
+               "LATIOSITE", "LOPUNNITE", "GARCHOMPITE", "LUCARIONITE", "ABOMASITE", "GALLADITE", "AUDINITE", "DIANCITE",
+               "MEWTWONITEX", "MEWTWONITEY"}
+# SPINE Revision 21 (plugins/Prismfall Mega 001: MEGA_FULL_LEVEL, WEAK_STONES; design/MEGA_EVOLUTION.md 6):
+# a fight whose level cap is MEGA_FROM or more Megas on every difficulty; below it only a Pokemon marked mega_low=True
+# with a WEAK stone Megas, on Standard and Hard. A P(..., mega="STONE") Pokemon holds the stone whenever its trainer
+# Megas (mega_set / mega_hard / mega_casual replace fields then); mega_modes=(...) overrides the modes.
+MEGA_FROM = 50
+WEAK_MEGA = {"CAMERUPTITE", "GLALITITE", "ABOMASITE", "BANETTITE", "AUDINITE", "STEELIXITE", "PIDGEOTITE", "BEEDRILLITE",
+             "SABLENITE", "AMPHAROSITE", "MANECTITE", "HOUNDOOMINITE", "ABSOLITE", "SHARPEDONITE"}
+
+def mega_modes(o, cap):
+    if o.get("mega_modes") is not None:
+        return o["mega_modes"]
+    if cap >= MEGA_FROM:
+        return (0, 1, 2)
+    if o.get("mega_low") and o["mega"] in WEAK_MEGA:
+        return (0, 1)
+    return ()
 
 def P(sp, lv, ab, item, nat, moves, ev="A", only=None, hard=None, casual=None, **kw):
     d = dict(sp=sp, lv=lv, ab=ab, item=item, nat=nat, moves=moves, ev=ev, only=only,
@@ -66,14 +87,20 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         elif diff == 2:
             o.update(m["casual"])
             o["lv"] = max(2, m["lv"] - (1 if route else casual_drop(top)))
+        if o.get("mega") and diff in mega_modes(o, cap):
+            o["item"] = o["mega"]
+            o.update(o.get(("mega_set", "mega_hard", "mega_casual")[diff]) or o.get("mega_set") or {})
+            o["mega_on"] = True
         built.append(o)
     items = [] if (route or nobag) else bag(top, diff)
-    if diff in ((0, 1) if mega_std else (1,)) and any(o["item"] in MEGA_STONES for o in built):
-        items = ["MEGARING"] + items
     if diff == 2:
         for o in built:
-            if o["item"] in MEGA_STONES:
+            if o["item"] in MEGA_STONES and not o.get("mega_on"):
                 o["item"] = o.get("casual_item_fallback", "SITRUSBERRY")
+    held = [o for o in built if o["item"] in MEGA_STONES]
+    assert len(held) <= 1, "%s %s v%d: %d Mega Stones" % (ttype, name, version, len(held))
+    if held and (held[0].get("mega_on") or diff in ((0, 1) if mega_std else (1,))):
+        items = ["MEGARING"] + items
     if items:
         out.append("Items = " + ",".join(items))
     out.append("LoseText = " + lose)
@@ -309,8 +336,10 @@ warden(7, "LEADER_BRANN", "Brann", 39, "VOLCANIC", "Ha! Tempered steel! That's w
       casual={"moves": "LAVAPLUME,BODYSLAM,WILLOWISP,PROTECT"},
       hard={"item": "HEATROCK", "moves": "LAVAPLUME,SOLARBEAM,EARTHPOWER,WILLOWISP", "nat": "MODEST", "ev": "BS"}),
     # Magma Armor: +1 Def on entry, 1/16 a turn, +1 Def/Sp. Def per eruption. Elemental Seed: +1 Atk/Sp. Atk/Speed, and Fire types can't be burned.
+    # SPINE Rev 21: Mega Camerupt, the one designed weak Mega below Lv 50 (Std + Hard). Kept exactly as designed, per the
+    # user: only the stone is added (it takes the Elemental Seed's place while it is held).
     P("CAMERUPT", 37, "MAGMAARMOR", "ELEMENTALSEED", "QUIET", "LAVAPLUME,EARTHPOWER,ROCKSLIDE,AMNESIA", "BS",
-      only="nocasual", hard={"moves": "ERUPTION,EARTHPOWER,ANCIENTPOWER,LAVAPLUME"}),
+      only="nocasual", hard={"moves": "ERUPTION,EARTHPOWER,ANCIENTPOWER,LAVAPLUME"}, mega="CAMERUPTITE", mega_low=True),
     P("CENTISKORCH", 38, "FLASHFIRE", "CHARCOAL", "ADAMANT", "FIRELASH,LUNGE,CRUNCH,COIL", "A", only="hard"),
     P("MAGMORTAR", 38, "FLAMEBODY", "CHARCOAL", "MODEST", "FLAMETHROWER,THUNDERBOLT,CLEARSMOG,CONFUSERAY", "S",
       hard={"moves": "FLAMETHROWER,THUNDERBOLT,FOCUSBLAST,SOLARBEAM", "item": "ELEMENTALSEED"}),
@@ -340,8 +369,10 @@ warden(8, "LEADER_KAITO", "Kaito", 43, "COLOSSEUM", "...Good. Your Pokémon figh
     # Inner Focus: +1 crit stage here; Scope Lens makes it 50%, a Frenzy makes it certain.
     P("LUCARIO", 43, "INNERFOCUS", "SCOPELENS", "MODEST", "AURASPHERE,FLASHCANNON,DARKPULSE,NASTYPLOT", "S",
       nick="Memory", casual={"item": "SITRUSBERRY"},
-      hard={"item": "LUCARIONITE", "ab": "JUSTIFIED", "nat": "JOLLY", "ev": "A",
-            "moves": "SWORDSDANCE,CLOSECOMBAT,METEORMASH,EXTREMESPEED"}),
+      hard={"item": "LIFEORB", "ab": "JUSTIFIED", "nat": "JOLLY", "ev": "A",
+            "moves": "SWORDSDANCE,CLOSECOMBAT,METEORMASH,EXTREMESPEED"},
+      # SPINE Rev 21: Mega Lucario isn't a weak Mega, so it waits for his Festival draw (v92, cap 92).
+      mega="LUCARIONITE"),
 ])
 # Gym 9 = J3 is generated with the rivals (rival versioning).
 warden(10, "LEADER_ANJA", "Anja", 51, "FROZEN_LAKE", "The ice held for you. It doesn't hold for many.", [
@@ -350,10 +381,12 @@ warden(10, "LEADER_ANJA", "Anja", 51, "FROZEN_LAKE", "The ice held for you. It d
       casual={"moves": "AURORAVEIL,ICEBEAM,DAZZLINGGLEAM,ICYWIND", "item": "SITRUSBERRY"}),
     # Rock Blast would freeze into an Ice move here, so Razor Shell is the Fire answer; it is x1.5 once the lake is open water.
     P("CLOYSTER", 49, "SKILLLINK", "WHITEHERB", "ADAMANT", "SHELLSMASH,ICICLESPEAR,RAZORSHELL,ICESHARD", "A",
-      casual={"moves": "ICICLESPEAR,RAZORSHELL,ICESHARD,PROTECT", "item": "SITRUSBERRY"},
-      hard={"item": "FOCUSSASH"}),
-    P("BEARTIC", 50, "SLUSHRUSH", "NEVERMELTICE", "ADAMANT", "ICICLECRASH,SUPERPOWER,AQUAJET,SWORDSDANCE", "A",
-      only="nocasual"),
+      only="nocasual", hard={"item": "FOCUSSASH"}),
+    # SPINE Rev 21: the first Mega of "every important fight from Lv 50". Mega Glalie (Refrigerate: Double-Edge is Ice)
+    # seals every crack in the lake once when it Mega Evolves (plugins/Prismfall Mega), undoing one Fire plan.
+    P("GLALIE", 50, "INNERFOCUS", "NEVERMELTICE", "JOLLY", "DOUBLEEDGE,ICESHARD,CRUNCH,TAUNT", "A",
+      mega="GLALITITE", hard={"moves": "DOUBLEEDGE,ICESHARD,CRUNCH,EXPLOSION"},
+      casual={"moves": "DOUBLEEDGE,ICEFANG,CRUNCH,ICESHARD"}),
     P("WALREIN", 50, "THICKFAT", "SITRUSBERRY", "MODEST", "BLIZZARD,SURF,ENCORE,PROTECT", "BS",
       hard={"ab": "ICEBODY", "item": "LEFTOVERS", "moves": "BLIZZARD,SURF,SUPERFANG,PROTECT"}),
     # Transition play: Body Press is a "heavy blow" - three crack the lake to Water Surface (x1.3 strike), which halves
@@ -378,12 +411,13 @@ warden(11, "LEADER_ODESSA", "Odessa", 55, "STORMFRONT", "Clear skies to you, fly
     P("NOIVERN", 54, "INFILTRATOR", "LIFEORB", "TIMID", "HURRICANE,HYPERVOICE,AIRSLASH,SUNNYDAY", "S",
       casual={"item": "SITRUSBERRY", "moves": "HURRICANE,HYPERVOICE,DRAGONPULSE,FLAMETHROWER"},
       hard={"moves": "HURRICANE,BOOMBURST,DRACOMETEOR,SUNNYDAY"}),
-    # Big Pecks: +1 Defense on entry here. Icy Wind is a wind move (x1.2) that slows both foes.
-    P("SWANNA", 53, "BIGPECKS", "LEFTOVERS", "TIMID", "HURRICANE,SCALD,ICYWIND,ROOST", "S", only="nocasual",
-      hard={"moves": "HURRICANE,SCALD,ICYWIND,PROTECT"}),
+    # SPINE Rev 21: Mega Pidgeot "Post", the Gale Post's courier bird (replaces Swanna). Big Pecks: +1 Defense on entry
+    # here; its Mega's No Guard Hurricane can't miss (Hurricane never misses on the Stormfront anyway).
+    P("PIDGEOT", 53, "BIGPECKS", "SHARPBEAK", "TIMID", "HURRICANE,HEATWAVE,ROOST,PROTECT", "S", nick="Post",
+      mega="PIDGEOTITE", hard={"moves": "HURRICANE,HEATWAVE,UTURN,PROTECT"}),
     # Elemental Seed on the Stormfront: +1 Speed and Charge - the first Electric Revelation Dance is doubled.
     P("ORICORIO", 54, "DANCER", "ELEMENTALSEED", "TIMID", "REVELATIONDANCE,HURRICANE,HELPINGHAND,ROOST", "S", form=1,
-      casual={"item": "SITRUSBERRY"}),
+      only="nocasual"),
     # The answer to Electric: Wind Power arrives charged on this field, and Electric is x1.3. Replaces Talonflame.
     P("KILOWATTREL", 54, "WINDPOWER", "SHARPBEAK", "TIMID", "THUNDERBOLT,HURRICANE,VOLTSWITCH,PROTECT", "S",
       casual={"ab": "VOLTABSORB", "moves": "THUNDERBOLT,HURRICANE,VOLTSWITCH,ROOST"},
@@ -395,13 +429,15 @@ warden(12, "LEADER_ILSA", "Ilsa", 59, "MINDSCAPE", "...Quiet, for once. Your tho
     # Trick Room lasts 2 turns longer in the Mindscape (3 on the Inverse Field). Extrasensory x1.3.
     P("BRONZONG", 57, "LEVITATE", "MENTALHERB", "RELAXED", "TRICKROOM,GYROBALL,EXTRASENSORY,STEALTHROCK", "PD", tr=True,
       hard={"moves": "TRICKROOM,GYROBALL,PSYCHIC,EXPLOSION"}),
-    # Forewarn: +1 Sp. Def on entry. Calm Mind is also a soothing move: two of them calm a Nightmare back into a Dream.
-    P("MUSHARNA", 57, "FOREWARN", "SITRUSBERRY", "QUIET", "PSYCHIC,MOONBLAST,YAWN,CALMMIND", "BS", tr=True,
-      only="nocasual", hard={"moves": "PSYCHIC,MOONBLAST,HYPNOSIS,DREAMEATER", "item": "LEFTOVERS"}),
+    # SPINE Rev 21: Mega Slowbro (Shell Armor) replaces Musharna - a Mega for a Trick Room team. Calm Mind is also a
+    # soothing move: two of them calm a Nightmare back into a Dream.
+    P("SLOWBRO", 57, "REGENERATOR", "LEFTOVERS", "QUIET", "PSYCHIC,SCALD,CALMMIND,SLACKOFF", "BS", tr=True,
+      mega="SLOWBRONITE", hard={"moves": "PSYSHOCK,SCALD,TRICKROOM,SLACKOFF"},
+      casual={"moves": "PSYCHIC,SCALD,YAWN,SLACKOFF"}),
     P("ESPEON", 58, "MAGICBOUNCE", "LIFEORB", "TIMID", "PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND", "S",
       casual={"ab": "SYNCHRONIZE", "item": "SITRUSBERRY"}),
     P("GOTHITELLE", 58, "COMPETITIVE", "LEFTOVERS", "QUIET", "PSYCHIC,THUNDERBOLT,TRICKROOM,CALMMIND", "BS", tr=True,
-      hard={"ab": "SHADOWTAG", "moves": "PSYCHIC,THUNDERBOLT,TRICKROOM,TAUNT"}),
+      only="nocasual", hard={"ab": "SHADOWTAG", "moves": "PSYCHIC,THUNDERBOLT,TRICKROOM,TAUNT"}),
     P("REUNICLUS", 58, "MAGICGUARD", "LIFEORB", "QUIET", "PSYCHIC,FOCUSBLAST,SHADOWBALL,RECOVER", "BS", tr=True,
       casual={"item": "SITRUSBERRY"}),
     # Transition play: Psychic Noise is a damaging sound move - the third one cracks the dream into the Inverse Field
@@ -421,8 +457,11 @@ warden(13, "LEADER_BASTIAN", "Bastian", 63, "CRYSTAL_CAVERN", "Flawless cut. I'd
     P("AURORUS", 62, "REFRIGERATE", "SITRUSBERRY", "MODEST", "HYPERVOICE,ANCIENTPOWER,EARTHPOWER,FLASHCANNON", "BS",
       casual={"moves": "HYPERVOICE,ANCIENTPOWER,EARTHPOWER,THUNDERWAVE"},
       hard={"item": "CHOICESPECS"}),
-    P("LYCANROC", 62, "TOUGHCLAWS", "LIFEORB", "JOLLY", "ACCELEROCK,STONEEDGE,CRUNCH,SWORDSDANCE", "A", form=2,
-      casual={"item": "SITRUSBERRY"}, hard={"moves": "ACCELEROCK,STONEEDGE,CLOSECOMBAT,SWORDSDANCE"}),
+    # SPINE Rev 21: Mega Aerodactyl "Amber", the miner's fossil (replaces Lycanroc). No Theme exception: Mega Tyranitar's
+    # Sand Stream would darken his own Crystal Cavern; Aerodactyl's Tough Claws doesn't touch it.
+    P("AERODACTYL", 62, "PRESSURE", "LIFEORB", "JOLLY", "ROCKSLIDE,DUALWINGBEAT,CRUNCH,ICEFANG", "A", nick="Amber",
+      mega="AERODACTYLITE", hard={"moves": "STONEEDGE,DUALWINGBEAT,FIREFANG,DRAGONDANCE"},
+      casual={"moves": "ROCKSLIDE,AERIALACE,CRUNCH,ICEFANG"}),
     P("RHYPERIOR", 62, "SOLIDROCK", "ASSAULTVEST", "ADAMANT", "STONEEDGE,EARTHQUAKE,MEGAHORN,ICEPUNCH", "HA"),
     # Sand Stream is gone: a sandstorm blots out his own crystals (-> Dark Crystal). Magical Seed: +1 Sp. Atk and a Light
     # Screen (7 turns here) against the Water and Grass specials; Power Gem is a light move.
@@ -433,7 +472,7 @@ warden(13, "LEADER_BASTIAN", "Bastian", 63, "CRYSTAL_CAVERN", "Flawless cut. I'd
 warden(14, "LEADER_YSOLDE", "Ysolde", 67, "HOLLOW_CATHEDRAL", "The candles are still lit. ...Morwen would have liked you.", [
     # Will-O-Wisp never misses here.
     P("SABLEYE", 65, "PRANKSTER", "LEFTOVERS", "CAREFUL", "WILLOWISP,FOULPLAY,RECOVER,SHADOWSNEAK", "SD",
-      hard={"moves": "WILLOWISP,FOULPLAY,RECOVER,TAUNT"}),
+      hard={"moves": "WILLOWISP,FOULPLAY,RECOVER,TAUNT"}, mega="SABLENITE", mega_modes=(0, 2)),
     # Answer to a consecration (3 holy moves, e.g. Dazzling Gleam): two Ghost rites by a Ghost type bring the spirits back.
     # Curse here, Destiny Bond on Gengar.
     P("SPIRITOMB", 65, "INFILTRATOR", "SITRUSBERRY", "ADAMANT", "SUCKERPUNCH,SHADOWSNEAK,WILLOWISP,CURSE", "HA",
@@ -446,7 +485,7 @@ warden(14, "LEADER_YSOLDE", "Ysolde", 67, "HOLLOW_CATHEDRAL", "The candles are s
       hard={"moves": "SHADOWBALL,BODYPRESS,IRONDEFENSE,PAINSPLIT"}),
     P("GENGAR", 66, "CURSEDBODY", "LIFEORB", "TIMID", "SHADOWBALL,SLUDGEBOMB,FOCUSBLAST,DESTINYBOND", "S",
       casual={"item": "SITRUSBERRY", "moves": "SHADOWBALL,SLUDGEBOMB,FOCUSBLAST,WILLOWISP"},
-      hard={"item": "GENGARITE", "moves": "SHADOWBALL,SLUDGEBOMB,FOCUSBLAST,PERISHSONG"}),
+      hard={"moves": "SHADOWBALL,SLUDGEBOMB,FOCUSBLAST,PERISHSONG"}, mega="GENGARITE", mega_modes=(1,)),
     # Ghostfire: Fire moves also hit as Ghost; Mystical Fire x1.3.
     P("CHANDELURE", 67, "FLASHFIRE", "SPELLTAG", "MODEST", "SHADOWBALL,MYSTICALFIRE,ENERGYBALL,CALMMIND", "S",
       nick="Vigil", hard={"item": "CHOICESPECS", "ab": "INFILTRATOR", "nat": "TIMID",
@@ -469,8 +508,8 @@ warden(15, "LEADER_MAGNUS", "Magnus", 71, "FACTORY", "Efficient. Unexpected. I'l
       hard={"item": "LIFEORB", "moves": "BULLETPUNCH,UTURN,DUALWINGBEAT,SWORDSDANCE"}),
     # Hammer Arm is a hammer (x1.3) and replaces Earthquake.
     P("METAGROSS", 71, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,HAMMERARM,BULLETPUNCH", "HA",
-      nick="Engine", hard={"item": "METAGROSSITE", "nat": "JOLLY", "ev": "A",
-                           "moves": "METEORMASH,ZENHEADBUTT,HAMMERARM,ICEPUNCH"}),
+      nick="Engine", hard={"nat": "JOLLY", "ev": "A", "moves": "METEORMASH,ZENHEADBUTT,HAMMERARM,ICEPUNCH"},
+      mega="METAGROSSITE"),
 ])
 warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were real the whole time.", [
     # DOUBLE battle (story: the illusion double). Lead pair: Prankster screens beside Weavile's Fake Out.
@@ -481,8 +520,10 @@ warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were rea
     P("WEAVILE", 73, "PRESSURE", "MAGICALSEED", "JOLLY", "FAKEOUT,NIGHTSLASH,ICICLECRASH,ICESHARD", "A",
       casual={"item": "SITRUSBERRY", "moves": "KNOCKOFF,ICICLECRASH,ICESHARD,SWORDSDANCE"},
       hard={"ab": "PICKPOCKET", "moves": "FAKEOUT,NIGHTSLASH,TRIPLEAXEL,ICESHARD"}),
-    P("MALAMAR", 74, "CONTRARY", "LEFTOVERS", "ADAMANT", "SUPERPOWER,KNOCKOFF,PSYCHOCUT,PROTECT", "BA",
-      only="nocasual"),
+    # SPINE Rev 21: Mega Absol "Omen" (replaces Malamar): Magic Bounce guards the Illusion games; Night Slash and Sucker
+    # Punch are shadow moves under the New Moon.
+    P("ABSOL", 74, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,SUCKERPUNCH,PLAYROUGH,PROTECT", "A", nick="Omen",
+      mega="ABSOLITE", hard={"moves": "KNOCKOFF,SUCKERPUNCH,PLAYROUGH,SWORDSDANCE"}),
     # Moonlight fails under the New Moon: Wish instead.
     # Snarl is a Dark spread move (x1.5 here) that cuts both foes' Sp. Atk; Helping Hand for the sweeper beside it.
     P("UMBREON", 74, "INNERFOCUS", "LEFTOVERS", "CALM", "FOULPLAY,SNARL,HELPINGHAND,WISH", "SD",
@@ -493,7 +534,7 @@ warden(16, "LEADER_NYX", "Nyx", 75, "NEW_MOON", "Lights on. ...Huh. You were rea
       nick="Nobody", casual={"item": "SITRUSBERRY", "moves": "NIGHTDAZE,FLAMETHROWER,FOCUSBLAST,NASTYPLOT"},
       hard={"item": "CHOICESPECS", "moves": "NIGHTDAZE,FLAMETHROWER,FOCUSBLAST,SLUDGEBOMB"}),
     P("HONCHKROW", 74, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,HEATWAVE", "A",
-      hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,SUPERPOWER"}),
+      only="nocasual", hard={"ab": "MOXIE", "item": "LIFEORB", "moves": "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,SUPERPOWER"}),
 ])
 warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale turns its final page. Happily, I hope.", [
     # Lead pair: Tinkaton (Fake Out) + Alcremie (Helping Hand on Tinkaton's hammer).
@@ -505,11 +546,12 @@ warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale t
     # pick, but the v21 AI only aims a NearOther move at foes, so it never decorated its partner in the harness).
     P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "HELPINGHAND,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
       casual={"item": "LEFTOVERS"}, hard={"moves": "CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER"}),
-    P("MIMIKYU", 78, "DISGUISE", "LIFEORB", "JOLLY", "PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE", "A",
-      only="nocasual"),
+    # SPINE Rev 21: Mega Mawile, the wolf in the storybook (replaces Mimikyu): Intimidate, then Huge Power.
+    P("MAWILE", 78, "INTIMIDATE", "LIFEORB", "ADAMANT", "PLAYROUGH,IRONHEAD,SUCKERPUNCH,PROTECT", "HA",
+      mega="MAWILITE", hard={"moves": "PLAYROUGH,IRONHEAD,SUCKERPUNCH,SWORDSDANCE"}),
     # Fire is no Steel answer here (dragonfire: Fire also hits as Dragon, which Steel resists). Superpower is.
     P("AZUMARILL", 79, "HUGEPOWER", "SITRUSBERRY", "ADAMANT", "AQUAJET,PLAYROUGH,LIQUIDATION,SUPERPOWER", "HA",
-      casual={"ab": "THICKFAT"}, hard={"moves": "AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM"}),
+      only="nocasual", hard={"moves": "AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM"}),
     # "Vigilant" guards: Follow Me draws the Steel and Poison hits meant for the ace; Dazzling Gleam hits both foes.
     P("TOGEKISS", 79, "SERENEGRACE", "LEFTOVERS", "BOLD", "FOLLOWME,AIRSLASH,DAZZLINGGLEAM,AURASPHERE", "BS",
       nick="Vigilant", casual={"moves": "AIRSLASH,DAZZLINGGLEAM,AURASPHERE,ROOST"}),
@@ -536,7 +578,9 @@ warden(18, "LEADER_SIGRUN", "Sigrun", 85, "DRAGONS_DEN", "The den is quiet. That
     # "The hoard protects its own": an Amulet Coin holder can't be statused in the Den.
     P("SALAMENCE", 85, "INTIMIDATE", "AMULETCOIN", "NAIVE", "DRAGONDANCE,OUTRAGE,EARTHQUAKE,FIREBLAST", "MX",
       nick="Dreamwing", casual={"item": "SITRUSBERRY", "moves": "DRAGONCLAW,FLY,EARTHQUAKE,FIREFANG"},
-      hard={"item": "SALAMENCITE", "nat": "ADAMANT", "ev": "A", "moves": "DRAGONDANCE,DOUBLEEDGE,EARTHQUAKE,ROOST"}),
+      hard={"nat": "ADAMANT", "ev": "A", "moves": "DRAGONDANCE,DOUBLEEDGE,EARTHQUAKE,ROOST"},
+      mega="SALAMENCITE", mega_set={"nat": "ADAMANT", "ev": "A", "moves": "DRAGONDANCE,DOUBLEEDGE,EARTHQUAKE,DRAGONCLAW"},
+      mega_hard={"moves": "DRAGONDANCE,DOUBLEEDGE,EARTHQUAKE,ROOST"}, mega_casual={"moves": "DRAGONCLAW,DOUBLEEDGE,EARTHQUAKE,FIREFANG"}),
 ])
 
 # ------------------------------------------------------------------------------
@@ -642,22 +686,25 @@ rival("RIVAL_KESTREL", "Kestrel", 4, 43, "It wasn't her. It was never her. ...Do
     starter_mon("RIVAL_KESTREL", s, 2, 42),
 ])
 def kestrel_late(lvs, mis, lose_num, ov=None):
-    """ov: {SPECIES: {field: value}} per-battle field tweaks (Standard set; 'hard'/'casual' keys replace those dicts)."""
+    """ov: {SPECIES: {field: value}} per-battle field tweaks (Standard set; 'hard'/'casual' keys replace those dicts).
+    SPINE Rev 21: Kestrel has no ring until Morwen's Ring reaches him (design/MEGA_EVOLUTION.md 1.2), so no Mega here.
+    Morwen's Mismagius (K7 on) takes Krookodile's place, so his Scizor stays: if the PC gives him the ring in Ch18,
+    plugins/Prismfall Mega hands that Scizor the Scizorite and the ring at K8 (MORWEN_RING)."""
     a, b, c, d, st, ace = lvs
     ov = ov or {}
     def f(s):
         team = [
             P("STARAPTOR", a, "RECKLESS", "CHOICEBAND", "JOLLY", "BRAVEBIRD,CLOSECOMBAT,DOUBLEEDGE,UTURN", "A",
-              casual={"ab": "INTIMIDATE", "item": "SITRUSBERRY"}),
-            P("KROOKODILE", b, "MOXIE", "LIFEORB", "JOLLY", "KNOCKOFF,EARTHQUAKE,STONEEDGE,CLOSECOMBAT", "A",
-              only="nocasual"),
+              casual={"ab": "INTIMIDATE", "item": "SITRUSBERRY"}, only=("nocasual" if mis else None)),
         ]
         if mis:
-            team.append(P("MISMAGIUS", c, "LEVITATE", "LIFEORB", "TIMID", "SHADOWBALL,MYSTICALFIRE,THUNDERBOLT,NASTYPLOT", "S",
+            team.append(P("MISMAGIUS", b, "LEVITATE", "LIFEORB", "TIMID", "SHADOWBALL,MYSTICALFIRE,THUNDERBOLT,NASTYPLOT", "S",
                           casual={"item": "SITRUSBERRY"}, hard={"moves": "SHADOWBALL,DAZZLINGGLEAM,THUNDERBOLT,NASTYPLOT"}))
         else:
-            team.append(P("SCIZOR", c, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA",
-                          casual={"item": "METALCOAT"}))
+            team.append(P("KROOKODILE", b, "MOXIE", "LIFEORB", "JOLLY", "KNOCKOFF,EARTHQUAKE,STONEEDGE,CLOSECOMBAT", "A",
+                          only="nocasual"))
+        team.append(P("SCIZOR", c, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA",
+                      casual={"item": "METALCOAT"}))
         if d < 64:
             team.append(P("ZWEILOUS", d, "HUSTLE", "EVIOLITE", "ADAMANT", "DRAGONRUSH,CRUNCH,BODYSLAM,WORKUP", "A",
                           casual={"moves": "DRAGONBREATH,CRUNCH,BODYSLAM,WORKUP"},
@@ -703,7 +750,7 @@ rival("RIVAL_KESTREL", "Kestrel", 8, 94, "If I lost, I lost to you. Not to them.
 def kestrel_fallen(s_):
     team = promote(kestrel_late((90, 91, 92, 92, 93, 94), True, 9, ov=PRISM_KESTREL)(s_))
     for i, m in enumerate(team):
-        if m["sp"] == "KROOKODILE":
+        if m["sp"] == "STARAPTOR":   # (was Krookodile, which Mismagius replaces from K7; the namesake raptor goes instead)
             # The Gauntlet: Techno Blast's type follows its Drive; with the Burn Drive it opens on the arena's Fire turn.
             team[i] = P("GENESECT", 91, "DOWNLOAD", "BURNDRIVE", "HASTY", "TECHNOBLAST,IRONHEAD,THUNDERBOLT,UTURN", "MX",
                         nick="Gauntlet", form=2, casual={"item": "SITRUSBERRY", "form": 0, "moves": "UTURN,IRONHEAD,THUNDERBOLT,FLAMETHROWER"})
@@ -777,7 +824,10 @@ rival("RIVAL_JUNO", "Juno", 4, 90, "We started on the same dock. ...You grew mor
     # opening turns; the Meadow Plate's turn (Flower Garden, rounds 10-12) is hers.
     P("LILLIGANT", 87, "OWNTEMPO", "MAGICALSEED", "TIMID", "PETALDANCE,GIGADRAIN,SLEEPPOWDER,QUIVERDANCE", "S",
       casual={"item": "MIRACLESEED", "moves": "PETALDANCE,GIGADRAIN,STUNSPORE,QUIVERDANCE"}, hard={"item": "LIFEORB"}),
-    P("COMFEY", 88, "TRIAGE", "MEADOWPLATE", "CALM", "DRAININGKISS,GIGADRAIN,CALMMIND,SYNTHESIS", "SD"),
+    # SPINE Rev 21: Rowan's ring answers her at last. Mega Gardevoir "Veil" (replaces Comfey; Pixilate Hyper Voice hits
+    # both sides of a double too). Not the starter: Core swaps it to the player's generation, and most lines have no Mega.
+    P("GARDEVOIR", 88, "TRACE", "MEADOWPLATE", "MODEST", "HYPERVOICE,PSYCHIC,MYSTICALFIRE,CALMMIND", "BS", nick="Veil",
+      mega="GARDEVOIRITE", hard={"moves": "HYPERVOICE,PSYCHIC,FOCUSBLAST,CALMMIND"}),
     starter_mon("RIVAL_JUNO", s, 2, 89, hidden_on_hard=True),
     P("TSAREENA", 90, "QUEENLYMAJESTY", "LIFEORB", "JOLLY", "POWERWHIP,HIGHJUMPKICK,KNOCKOFF,UTURN", "A",
       nick="Sweetpea", casual={"item": "SITRUSBERRY"}, hard={"item": "CHOICEBAND"}),
@@ -839,7 +889,7 @@ BOSSES.append(("CHAMPION_VALEN", "Valen", 96, "Order, not justice. I chose order
     # Meadow Plate (10-12) for Leaf Blade, Fist Plate (19-21, Colosseum) for Close Combat; Justified gets +1 Attack there.
     P("GALLADE", 94, "JUSTIFIED", "LIFEORB", "JOLLY", "CLOSECOMBAT,PSYCHOCUT,LEAFBLADE,SWORDSDANCE", "A",
       casual={"item": "SITRUSBERRY"},
-      hard={"item": "GALLADITE", "moves": "CLOSECOMBAT,ZENHEADBUTT,KNOCKOFF,SWORDSDANCE"}),
+      hard={"moves": "CLOSECOMBAT,ZENHEADBUTT,KNOCKOFF,SWORDSDANCE"}, mega="GALLADITE"),
     # Zap Plate (13-15, Neon Grid) for Thunderbolt, Icicle Plate (16-18, Frozen Lake) for Freeze-Dry.
     P("LAPRAS", 93, "WATERABSORB", "ASSAULTVEST", "MODEST", "FREEZEDRY,HYDROPUMP,THUNDERBOLT,SPARKLINGARIA", "BS",
       nick="Ferry"),
@@ -852,8 +902,10 @@ BOSSES.append(("MERIDIAN_VOSS", "Aurelian", 100, "The god owes us. It owes ME. .
     # PRISM_ARENA, "things men made". Ordered for the arena's opening: gears spin up in the quiet rounds; Archaludon
     # (Steel/Dragon, neutral to Fire) takes the Flame Plate's turn that the rest of a Steel team dreads; Magnezone gets the
     # Splash Plate's turn (Electric x1.5 against grounded targets) and later the Zap Plate's.
-    P("KLINKLANG", 96, "CLEARBODY", "SITRUSBERRY", "JOLLY", "SHIFTGEAR,GEARGRIND,WILDCHARGE,SUBSTITUTE", "A",
-      ),
+    # SPINE Rev 21: Mega Ampharos "Lumen" (replaces Klinklang), Meridian's lamp - "light for everyone" - on Voss's own
+    # Resonance band. Dragon resists the first four Plates (Fire, Water, Grass, Electric); Mold Breaker.
+    P("AMPHAROS", 96, "STATIC", "SITRUSBERRY", "MODEST", "THUNDERBOLT,DRAGONPULSE,FOCUSBLAST,AGILITY", "BS", nick="Lumen",
+      mega="AMPHAROSITE", hard={"moves": "THUNDERBOLT,DRAGONPULSE,FOCUSBLAST,POWERGEM"}),
     P("ARCHALUDON", 97, "STAMINA", "POWERHERB", "MODEST", "ELECTROSHOT,FLASHCANNON,DRACOMETEOR,BODYPRESS", "BS",
       casual={"item": "SITRUSBERRY", "moves": "THUNDERBOLT,FLASHCANNON,DRAGONPULSE,BODYPRESS"}),
     # Magical Seed on the arena: +1 Sp. Atk, +1 Sp. Def.
@@ -919,7 +971,7 @@ X("R16 - Marisol (Grievance) / Ebb Guild exhibition, field :WATER_SURFACE", "LEA
     P("BARRASKEWDA", 89, "SWIFTSWIM", "CHOICEBAND", "ADAMANT", "LIQUIDATION,CLOSECOMBAT,PSYCHICFANGS,AQUAJET", "A",
       casual={"item": "SITRUSBERRY"}),
     P("GYARADOS", 90, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "WATERFALL,DRAGONDANCE,CRUNCH,ICEFANG", "A", nick="Lucky",
-      hard={"item": "GYARADOSITE"}),
+      mega="GYARADOSITE"),
 ])
 X("R16 - Anja (exposed)", "LEADER_ANJA", "Anja", 90, 90, "Ice remembers.",
   relevel(drop_only(promote(warden_mons("Anja"))), [86, 87, 88, 88, 89, 90]))
@@ -956,7 +1008,7 @@ X("QF (Ruin) - Archseer Imre Dask of the Veiled Synod; suggested field :INVERSE"
   "Behind, welcome. ...Welcome, behind.", [
     P("BRONZONG", 88, "LEVITATE", "LIGHTCLAY", "RELAXED", "TRICKROOM,REFLECT,LIGHTSCREEN,GYROBALL", "PD", tr=True),
     P("SABLEYE", 89, "PRANKSTER", "LEFTOVERS", "CAREFUL", "WILLOWISP,FOULPLAY,RECOVER,QUASH", "SD",
-      hard={"item": "SABLENITE", "moves": "WILLOWISP,FOULPLAY,RECOVER,KNOCKOFF"}),
+      hard={"moves": "WILLOWISP,FOULPLAY,RECOVER,KNOCKOFF"}),   # SPINE Rev 21: no ring in the story, so no Mega
     P("ESPEON", 90, "MAGICBOUNCE", "LIFEORB", "TIMID", "PSYCHIC,SHADOWBALL,DAZZLINGGLEAM,CALMMIND", "S", casual={"item": "SITRUSBERRY"}),
     P("UMBREON", 90, "SYNCHRONIZE", "LEFTOVERS", "CALM", "FOULPLAY,WISH,YAWN,PROTECT", "SD"),
     # INVERSE (set by TRAINER_FIELDS): Trick Room lasts 8 turns, Foul Play x1.3, Psyshock x1.2, Magic Bounce +1 Sp. Def.
@@ -969,7 +1021,8 @@ X("QF (Ruin) - Archseer Imre Dask of the Veiled Synod; suggested field :INVERSE"
 ])
 X("Exhibition - Pageant Bout (2-vs-1 double with Rook v90): Dorian's half", "LEADER_DORIAN", "Dorian", 90, 90,
   "Encore! ENCORE!", [
-    P("AMBIPOM", 88, "TECHNICIAN", "LIFEORB", "JOLLY", "FAKEOUT,DOUBLEHIT,KNOCKOFF,UTURN", "A", casual={"item": "SILKSCARF"}),
+    # SPINE Rev 21: the pair's one Mega (Rook has none): Mega Lopunny (Scrappy), the encore's own heartstone.
+    P("LOPUNNY", 88, "LIMBER", "SILKSCARF", "JOLLY", "FAKEOUT,RETURN,HIGHJUMPKICK,ICEPUNCH", "A", mega="LOPUNNITE"),
     P("EXPLOUD", 89, "SCRAPPY", "THROATSPRAY", "MODEST", "BOOMBURST,FIREBLAST,FOCUSBLAST,ICEBEAM", "S"),
     # Grand Stage: Synthetic Seed = +1 Speed and Laser Focus; the Taunt costs an all-attack set nothing.
     P("KECLEON", 90, "PROTEAN", "SYNTHETICSEED", "ADAMANT", "FAKEOUT,SHADOWSNEAK,KNOCKOFF,DRAINPUNCH", "BA", nick="Encore",
@@ -986,7 +1039,8 @@ X("Hijack - Dr. Percival Quent (Voss removed)", "MERIDIAN_QUENT", "Percival", 99
     # PRISM_ARENA: Heatproof Bronzong sets Trick Room in the quiet rounds and is the one Steel type safe on the Flame
     # Plate's turn (rounds 4-6). Tri Attack is x1.3 on the arena; Magnezone holds the Magical Seed (+1 Sp. Atk, +1 Sp. Def).
     P("BRONZONG", 96, "HEATPROOF", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,EARTHQUAKE,EXPLOSION", "PD", tr=True),
-    P("METAGROSS", 97, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,EARTHQUAKE,BULLETPUNCH", "HA"),
+    P("METAGROSS", 97, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,EARTHQUAKE,BULLETPUNCH", "HA",
+      mega="METAGROSSITE"),
     P("JIRACHI", 97, "SERENEGRACE", "LEFTOVERS", "JOLLY", "IRONHEAD,ZENHEADBUTT,UTURN,FIREPUNCH", "A"),
     P("PORYGONZ", 98, "ADAPTABILITY", "CHOICESPECS", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,THUNDERBOLT", "S", casual={"item": "SITRUSBERRY"}),
     P("MAGNEZONE", 99, "MAGNETPULL", "MAGICALSEED", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,BODYPRESS", "BS",
@@ -1026,24 +1080,24 @@ X("Exhibition - Morwen's Echo (Night of Masques, Crownhaven Cathedral lantern)",
 X("Ch21 tag foe - Sabine Kroll", "MERIDIAN_KROLL", "Sabine", 21, 97, "Nothing personal. It never is.", [
     P("OBSTAGOON", 95, "GUTS", "FLAMEORB", "ADAMANT", "OBSTRUCT,KNOCKOFF,FACADE,CLOSECOMBAT", "A", casual={"item": "SITRUSBERRY"}),
     # Tag double on the PRISM_ARENA: Protect on the frail hitters, Obstruct on the lead.
-    P("CRAWDAUNT", 96, "ADAPTABILITY", "LIFEORB", "ADAMANT", "CRABHAMMER,KNOCKOFF,AQUAJET,PROTECT", "A", casual={"item": "SITRUSBERRY"}),
+    P("SHARPEDO", 96, "SPEEDBOOST", "LIFEORB", "ADAMANT", "CRUNCH,LIQUIDATION,ICEFANG,PROTECT", "A", mega="SHARPEDONITE"),
     P("KINGAMBIT", 97, "SUPREMEOVERLORD", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE", "HA"),
 ])
 X("Ch21 tag foe - Director Helene Marchetti", "MERIDIAN_MARCHETTI", "Helene", 21, 97, "Directorate, stand down. ...That's an order.", [
     P("MABOSSTIFF", 95, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,PSYCHICFANGS,WILDCHARGE", "BA"),
-    # Double Intimidate lead; Corviknight's Tailwind for the pair.
-    P("ARCANINE", 96, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,EXTREMESPEED,WILDCHARGE,PROTECT", "A"),
+    # Double Intimidate lead (Mega Manectric's own); Corviknight's Tailwind for the pair.
+    P("MANECTRIC", 96, "LIGHTNINGROD", "SITRUSBERRY", "TIMID", "THUNDERBOLT,FLAMETHROWER,SNARL,PROTECT", "S", mega="MANECTITE"),
     P("CORVIKNIGHT", 97, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,BODYPRESS,TAILWIND,ROOST", "BPD"),
 ])
 X("Ch21 tag foe - Dr. Percival Quent", "MERIDIAN_QUENT", "Percival", 21, 97, "Data! Glorious data! Do it again!", [
     # Heatproof for the Flame Plate's turn; Trick Room for the pair; Tri Attack x1.3 on the arena.
     P("BRONZONG", 95, "HEATPROOF", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,PSYCHIC,PROTECT", "PD", tr=True),
-    P("METAGROSS", 96, "CLEARBODY", "LIFEORB", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA", casual={"item": "SITRUSBERRY"}),
+    P("METAGROSS", 96, "CLEARBODY", "LIFEORB", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA", mega="METAGROSSITE"),
     P("PORYGONZ", 97, "ADAPTABILITY", "LIFEORB", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,PROTECT", "S", casual={"item": "SITRUSBERRY"}),
 ])
 X("Ch21 tag foe - Directorate Captain (when Marchetti is turned)", "MERIDIAN_DIRECTORATE", "Captain", 21, 97, "For the Concord.", [
     P("ALAKAZAM", 95, "MAGICGUARD", "LIFEORB", "TIMID", "PSYCHIC,FOCUSBLAST,DAZZLINGGLEAM,PROTECT", "S", casual={"item": "SITRUSBERRY"}),
-    P("SCIZOR", 96, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA", casual={"item": "METALCOAT"}),
+    P("SCIZOR", 96, "TECHNICIAN", "LIFEORB", "ADAMANT", "BULLETPUNCH,UTURN,KNOCKOFF,SWORDSDANCE", "HA", mega="SCIZORITE"),
     P("MAGNEZONE", 97, "MAGNETPULL", "CHOICESPECS", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,BODYPRESS", "BS", casual={"item": "SITRUSBERRY"}),
 ])
 # Ruin Route Gyms 15-18 (version 1): harder (Hard sets on Standard) with different leads
@@ -1141,9 +1195,10 @@ S("Ch9 - the Mourner in the reliquary (field :COLOSSEUM). He fights defensively 
 S("Ch12 - Director Marchetti on Skyreach's sorting-hall catwalks (field :STORMFRONT). Electric x1.3 for the guard dogs; "
   "Thunder never misses; Tailwind lasts 6 turns. No transition play: she holds a position, she doesn't remake it.",
   "MERIDIAN_MARCHETTI", "Helene", 0, 55, "You're not under arrest. You're under protection. Learn the difference.", [
-    P("MABOSSTIFF", 53, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,WILDCHARGE,PLAYROUGH,ROAR", "BA"),
-    # Lightning Rod takes the Electric answer aimed at Corviknight.
-    P("MANECTRIC", 54, "LIGHTNINGROD", "MAGNET", "TIMID", "THUNDER,FLAMETHROWER,SNARL,VOLTSWITCH", "S", only="nocasual"),
+    P("MABOSSTIFF", 53, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,WILDCHARGE,PLAYROUGH,ROAR", "BA", only="nocasual"),
+    # Lightning Rod takes the Electric answer aimed at Corviknight. SPINE Rev 21: Mega Manectric (Intimidate), on a
+    # Directorate-issue Resonance band.
+    P("MANECTRIC", 54, "LIGHTNINGROD", "MAGNET", "TIMID", "THUNDER,FLAMETHROWER,SNARL,VOLTSWITCH", "S", mega="MANECTITE"),
     P("ARCANINE", 54, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,WILDCHARGE,EXTREMESPEED,CRUNCH", "A",
       casual={"moves": "FIREFANG,WILDCHARGE,EXTREMESPEED,CRUNCH"}),
     P("MAGNEZONE", 54, "STURDY", "AIRBALLOON", "MODEST", "THUNDER,FLASHCANNON,VOLTSWITCH,THUNDERWAVE", "BS", only="hard"),
@@ -1152,9 +1207,11 @@ S("Ch12 - Director Marchetti on Skyreach's sorting-hall catwalks (field :STORMFR
 S("Ch13 - Sabine Kroll, unmasked at the Lucent tribunal (field :MINDSCAPE). Stage play: three Dark attacks curdle Ilsa's "
   "dream into a Nightmare (Dark x1.5, her Dark types heal 1/16 a turn, Fairy x0.8).",
   "MERIDIAN_KROLL", "Sabine", 0, 59, "Special Accounts thanks you for your testimony.", [
-    P("SKUNTANK", 57, "AFTERMATH", "BLACKSLUDGE", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT", "BA", only="nocasual"),
-    P("TOXICROAK", 57, "DRYSKIN", "LIFEORB", "JOLLY", "DRAINPUNCH,GUNKSHOT,SUCKERPUNCH,SWORDSDANCE", "A",
-      casual={"item": "BLACKSLUDGE"}),
+    # SPINE Rev 21: Special Accounts' shark. Mega Sharpedo (Strong Jaw; Speed Boost before it) replaces Skuntank; Crunch
+    # counts toward the Nightmare.
+    P("SHARPEDO", 57, "SPEEDBOOST", "LIFEORB", "ADAMANT", "CRUNCH,WATERFALL,ICEFANG,PROTECT", "A", mega="SHARPEDONITE",
+      hard={"moves": "CRUNCH,WATERFALL,PSYCHICFANGS,PROTECT"}),
+    P("TOXICROAK", 57, "DRYSKIN", "LIFEORB", "JOLLY", "DRAINPUNCH,GUNKSHOT,SUCKERPUNCH,SWORDSDANCE", "A", only="nocasual"),
     P("CRAWDAUNT", 58, "ADAPTABILITY", "SITRUSBERRY", "ADAMANT", "CRABHAMMER,KNOCKOFF,AQUAJET,SWORDSDANCE", "A", only="hard"),
     P("HONCHKROW", 58, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,ROOST", "A"),
     P("DRAPION", 59, "SNIPER", "BLACKGLASSES", "JOLLY", "KNOCKOFF,CROSSPOISON,EARTHQUAKE,SWORDSDANCE", "A",
@@ -1163,10 +1220,11 @@ S("Ch13 - Sabine Kroll, unmasked at the Lucent tribunal (field :MINDSCAPE). Stag
 S("Ch14 - Marchetti in the Darkglass gallery (field :DARK_CRYSTAL; she shot the lamps out). Dark x1.5, Dark contact moves +1 "
   "crit, the player aims at x0.9. Transition play: if the cavern is relit, one Dark Pulse darkens it again (x1.3 strike).",
   "MERIDIAN_MARCHETTI", "Helene", 1, 63, "Lights. ...Someone get the lights.", [
-    # Magical Seed in the dark: +1 Atk, +1 Sp. Atk.
+    # SPINE Rev 21: Mega Houndoom (Solar Power; Dark Pulse x1.5 in the dark). The PC has had a ring for a few hours:
+    # the first fight where both sides can Mega.
     P("HOUNDOOM", 61, "FLASHFIRE", "MAGICALSEED", "TIMID", "DARKPULSE,FLAMETHROWER,SLUDGEBOMB,NASTYPLOT", "S",
-      only="nocasual"),
-    P("ARCANINE", 62, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,CRUNCH,EXTREMESPEED,WILDCHARGE", "A"),
+      mega="HOUNDOOMINITE"),
+    P("ARCANINE", 62, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,CRUNCH,EXTREMESPEED,WILDCHARGE", "A", only="nocasual"),
     P("KINGAMBIT", 62, "DEFIANT", "BLACKGLASSES", "ADAMANT", "KOWTOWCLEAVE,IRONHEAD,SUCKERPUNCH,SWORDSDANCE", "HA", only="hard"),
     P("CORVIKNIGHT", 62, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,BODYPRESS,BULKUP,ROOST", "BPD"),
     P("MABOSSTIFF", 63, "INTIMIDATE", "BLACKGLASSES", "ADAMANT", "CRUNCH,JAWLOCK,PLAYROUGH,PSYCHICFANGS", "BA",
@@ -1175,7 +1233,9 @@ S("Ch14 - Marchetti in the Darkglass gallery (field :DARK_CRYSTAL; she shot the 
 S("Ch16 - Marchetti, tag DOUBLE with Quent v1 vs player + Rook on the casting floor (field :FACTORY). Fire x1.2 softens "
   "Steel plating; Iron Head x1.5.",
   "MERIDIAN_MARCHETTI", "Helene", 2, 71, "Doctor, if you break one more thing in here -", [
-    P("ARCANINE", 69, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "FLAREBLITZ,WILDCHARGE,EXTREMESPEED,PROTECT", "A"),
+    # SPINE Rev 21: the pair's one Mega (one per side; Quent has none). Fire x1.2 softens Steel plating here.
+    P("HOUNDOOM", 69, "FLASHFIRE", "SITRUSBERRY", "TIMID", "DARKPULSE,FLAMETHROWER,SLUDGEBOMB,PROTECT", "S",
+      mega="HOUNDOOMINITE"),
     P("CORVIKNIGHT", 70, "MIRRORARMOR", "LEFTOVERS", "IMPISH", "BRAVEBIRD,IRONHEAD,TAILWIND,ROOST", "BPD"),
     P("MABOSSTIFF", 71, "INTIMIDATE", "SITRUSBERRY", "ADAMANT", "CRUNCH,PLAYROUGH,WILDCHARGE,PROTECT", "BA"),
 ])
@@ -1193,8 +1253,9 @@ S("Ch16 - Dr. Quent, Marchetti's tag partner (field :FACTORY). Transition play b
 S("Ch17 - Kroll holds the Sun Court in drowned Aurelia (field :CAVE). The Hammer's play again: one quake cracks the "
   "ceiling, the next brings it down on everyone (1/8, Rock-scaled); Rock Slide is x1.5 here.",
   "MERIDIAN_KROLL", "Sabine", 1, 75, "Nothing personal. The cradle's already on the lift.", [
-    P("SKUNTANK", 73, "AFTERMATH", "BLACKSLUDGE", "ADAMANT", "NIGHTSLASH,POISONJAB,SUCKERPUNCH,EXPLOSION", "BA",
-      casual={"moves": "NIGHTSLASH,POISONJAB,SUCKERPUNCH,TAUNT"}),
+    # SPINE Rev 21: Mega Sharpedo again (replaces Skuntank).
+    P("SHARPEDO", 73, "SPEEDBOOST", "LIFEORB", "ADAMANT", "CRUNCH,LIQUIDATION,ICEFANG,PROTECT", "A", mega="SHARPEDONITE",
+      hard={"moves": "CRUNCH,LIQUIDATION,PSYCHICFANGS,PROTECT"}),
     P("TOXICROAK", 73, "DRYSKIN", "LIFEORB", "JOLLY", "DRAINPUNCH,GUNKSHOT,SUCKERPUNCH,EARTHQUAKE", "A", only="nocasual"),
     P("HONCHKROW", 74, "SUPERLUCK", "SCOPELENS", "ADAMANT", "NIGHTSLASH,BRAVEBIRD,SUCKERPUNCH,ROOST", "A"),
     P("OBSTAGOON", 74, "GUTS", "FLAMEORB", "ADAMANT", "OBSTRUCT,KNOCKOFF,FACADE,CLOSECOMBAT", "A", casual={"item": "SITRUSBERRY"}),
@@ -1206,7 +1267,8 @@ S("Ch17 (if Kroll was beaten publicly in Ch13) - Quent holds the Sun Court inste
   "MERIDIAN_QUENT", "Percival", 2, 75, "Oh, bother. Well. It was a very good reading.", [
     P("BRONZONG", 73, "LEVITATE", "LEFTOVERS", "RELAXED", "TRICKROOM,GYROBALL,ROCKSLIDE,METALSOUND", "PD", tr=True),
     P("MAGNEZONE", 73, "STURDY", "AIRBALLOON", "MODEST", "THUNDERBOLT,FLASHCANNON,VOLTSWITCH,METALSOUND", "BS", only="nocasual"),
-    P("METAGROSS", 74, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA"),
+    P("METAGROSS", 74, "CLEARBODY", "ASSAULTVEST", "ADAMANT", "METEORMASH,ZENHEADBUTT,ROCKSLIDE,BULLETPUNCH", "HA",
+      mega="METAGROSSITE"),
     P("ROTOM", 74, "LEVITATE", "LEFTOVERS", "MODEST", "HYDROPUMP,THUNDERBOLT,WILLOWISP,VOLTSWITCH", "S", form=2, only="hard"),
     P("PORYGONZ", 75, "ADAPTABILITY", "LIFEORB", "TIMID", "TRIATTACK,DARKPULSE,ICEBEAM,THUNDERBOLT", "S",
       casual={"item": "SITRUSBERRY"}),

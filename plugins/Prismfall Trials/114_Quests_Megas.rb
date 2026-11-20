@@ -1,6 +1,6 @@
 #===============================================================================
 # Prismfall Trials - 114 Mega Evolution: the Ring-Day and the stone quests
-# (SPINE Revision 20; design/MEGA_EVOLUTION.md). Written by the battle-mechanics
+# (SPINE Revisions 20 and 21; design/MEGA_EVOLUTION.md). Written by the battle-mechanics
 # workstream; the stones' badge gates are checked by tools/harness/run_mega.rb.
 #-------------------------------------------------------------------------------
 # Lore (MEGA_EVOLUTION.md section 1): a Mega Stone is a "heartstone", an Imprint
@@ -10,69 +10,73 @@
 # heartstone. One ring opens one heart at a time: one Mega to a side.
 # Map events: design/TRIAL_EVENTS.yaml ("Mega Evolution" maps); talk rows: 152_Talk_Megas.rb; bosses:
 # 132_EventMons_Megas.rb. Story quests (the Ring-Day, Juno, Brann's spare) are
-# hidden and finish quietly (no Trial gong).
+# hidden and finish quietly (no Trial gong). SPINE Revision 21 moved the Ring to
+# 13 badges: the Ring-Day is now Bastian's, in Cragholm after Gym 13 (Ch14).
 #===============================================================================
 tr = Prismfall::Trials
 tr::SPEAKERS.merge!({
   :BRANN => "Brann", :SAHAR => "Sahar", :DORIAN => "Dorian", :WENLOW => "Wenlow", :CORVIN => "Corvin",
   :TARN => "Roost-keeper Tarn", :POSTMASTER => "Postmaster Halloran", :WOODWARD => "The Woodward",
-  :KENNELMASTER => "Kennel-master Grisk", :KAITO => "Kaito"
+  :KENNELMASTER => "Kennel-master Grisk", :KAITO => "Kaito", :BASTIAN => "Bastian", :PIP => "Pip"
 })
 # Shown after a stone while the player has no Mega Ring yet (same words as PrismfallMega::TEASER_TEXT).
 mega_teaser = { :if => "!mega_ring", :then => ["The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something."] }
 
 #===============================================================================
-# THE RING-DAY (Chapter 8, Cindervault, after Gym 7 and the Caldera Crisis)
+# THE RING-DAY (Chapter 14, Cragholm, after Gym 13; SPINE Revision 21)
 #===============================================================================
-tr.quest(:AS_RING_DAY, {
-  :trial => :ASHKAAR, :title => "The Ring-Day", :giver => "Brann Holloway", :map => 244,
-  :where => "the Hearthguild Hall, Cindervault (the morning after the Caldera Crisis)", :points => 0, :chapter => 8,
-  :unlock => "badges >= 7 && made(:ch8_caldera) && !mega_ring", :board => false, :hidden => true, :tags => [:story, :mega],
-  :summary => "Brann has something for you at the Hearthguild Hall.",
-  :steps => { :ask => "Brann is waiting at the Hearthguild's anvil." },
+# Bastian Ore gives the PC the odd ring Brann cut "ten years back". He never says why it sings, and never names the
+# Legend Plate or the reset (09_MYSTERIES #5 and #6 are Ch15-17 reveals): the clue is the ring itself, and Brann's Ch8
+# chestnut slip ("ten years back") for a player who puts the two together.
+tr.quest(:OS_RING_DAY, {
+  :trial => :OSSARIA, :title => "The Ring-Day", :giver => "Bastian Ore", :map => 363,
+  :where => "Bastian's lamp-room, the lowest of the Cragholm Lift Galleries (after Gym 13)", :points => 0, :chapter => 14,
+  :unlock => "badges >= 13 && !mega_ring", :board => false, :hidden => true, :tags => [:story, :mega],
+  :summary => "Bastian wants you in his lamp-room.",
+  :steps => { :ask => "Bastian is waiting in his lamp-room in the deep seams." },
   :reward => { :items => [[:MEGARING, 1], [:AGGRONITE, 1]] },
   :touches => "Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings.",
   :scenes => {
     :ringday => [
-      { :map => "Morning. Brann is at the guild's great anvil with a folded cloth. Larch sits on a crate by the door with a book she isn't reading." },
-      { :if => "choice(:ch8_caldera) == :vent", :then => [
-          { :map => "The great forge is cold. One small candle-forge burns on the anvil." },
-          [:BRANN, :sad, "Cold for a season, thanks to you lot. Don't make that face, I've had worse winters. A ring wants a candle, not a caldera."]] },
-      { :if => "choice(:ch8_caldera) == :dampers", :then => [
-          [:BRANN, :happy, "Hear that? Every forge in the Vault, roaring. You kept 'em lit, and I won't forget it."]] },
-      { :if => "choice(:ch8_caldera) == :shutdown", :then => [
-          [:BRANN, :happy, "You shut a Meridian tap with your bare hands. The Dominar hasn't stopped talking about it. Neither have I."]] },
-      [:BRANN, :worried, "About last night. A fool talks too much over chestnuts. Forget the fool. Forget the chestnuts too. They were burnt."],
-      [:BRANN, :neutral, "Here's what a sober man says instead. Hold out your hand."],
-      "He opens the cloth: a plain gold band, and set in it a chip of stone with no colour at all.",
-      [:BRANN, :neutral, "A Warden's ring. 'Mega Ring', the Accord calls it. The guild's cut one for every seat since the Concordance. This one's the odd one out. I cut it ten years back, and it's sulked on every hand I've tried it on."],
-      [:BRANN, :neutral, "The chip's grind off the Crown's own stone. No colour of its own, so it'll take any colour you put to it. That's how it opens a heartstone."],
-      [:BRANN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
-      [:BRANN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double. ...Right. Let's see if it sulks on you."],
-      "He drops the ring into your palm. The colourless chip catches the forge-light... and sings: one clear note, like a wet finger round the rim of a glass.",
+      { :map => "The lowest gallery of the deep seams. Bastian's lamp-room: a cot, a kettle and forty years of lamps. Pip is perched on a crate; Larch sits by the door with a book she isn't reading." },
+      [:BASTIAN, :happy, "Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks."],
+      [:BASTIAN, :neutral, "You'll have been wondering what my old Amber did in there, changing like that. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild cuts one for every seat since the Concordance."],
+      [:BASTIAN, :neutral, "A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone."],
+      [:BASTIAN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
+      [:BASTIAN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double."],
+      "He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.",
+      [:BASTIAN, :neutral, "Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain."],
+      [:BASTIAN, :deadpan, "Two old men who don't ask each other things. That's how you get to seventy-four."],
+      [:BASTIAN, :neutral, "Rock's patient. I reckon this has waited long enough. Hold out your hand."],
+      "He drops the ring into your palm. The colourless chip catches the lamplight... and sings: one clear note, like a wet finger round the rim of a glass.",
       "Somewhere under your ribs, something answers it.",
-      [:BRANN, :shocked, "..."],
-      [:BRANN, :sad, "They don't sing. Thirty years at this anvil, and not one of them has ever sung."],
+      [:PIP, :shocked, "Grandad. Grandad, it's SINGING."],
+      [:BASTIAN, :neutral, "Is it? Can't hear a thing. Half-deaf, me."],
+      [:BASTIAN, :sad, "...I can feel it in the table, though. Holloway swore they don't sing. Thirty years at his anvil, and not one of them ever sang."],
       { :map => "Larch has lowered her book." },
-      [:BRANN, :worried, "...It's the forge-hum. That's a lie, and lying's a crime in Ashkaar, so you never heard it. Here: an iron heart to start you off."],
-      { :script => proc { |_ctx| Prismfall::Trials.complete(:AS_RING_DAY, nil, false) } },
+      [:BASTIAN, :worried, "Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts."],
+      { :script => proc { |_ctx| Prismfall::Trials.complete(:OS_RING_DAY, nil, false) } },
       { :if => "mega_stones > 1", :then => ["The other stones in your Bag are warm now, and quiet, as if they had stopped waiting."] },
-      [:BRANN, :happy, "Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do. Now go and show Kaito what a ferry child does with a Warden's ring."]
+      [:BASTIAN, :happy, "Wear it. If Meridian's linesmen come down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring."]
     ]
   }
 })
 
-# Act III return (10 badges): Brann's spare heartstone, the twin of his own Camerupt's.
+# 15 badges (Mega Camerupt is Fire/Ground: rule R4 keeps it until Magnus is behind you): Brann's spare heartstone,
+# the twin of his own Camerupt's. Brann sees his odd ring on the PC's hand.
 tr.quest(:AS_FORGE_REMEMBERS, {
   :trial => :ASHKAAR, :title => "The Forge Remembers", :giver => "Brann Holloway", :map => 244,
-  :where => "the Hearthguild Hall, Cindervault (Act III)", :points => 0, :chapter => 12,
-  :unlock => "badges >= 10 && quest_done(:AS_RING_DAY)", :requires => [:AS_RING_DAY], :board => false, :hidden => true,
+  :where => "the Hearthguild Hall, Cindervault (after the Ring)", :points => 0, :chapter => 17,
+  :unlock => "badges >= 15 && quest_done(:OS_RING_DAY)", :requires => [:OS_RING_DAY], :board => false, :hidden => true,
   :tags => [:story, :mega], :summary => "Brann found something in the slag.",
   :steps => { :ask => "Brann wants a word at the Hearthguild." },
   :reward => { :items => [[:CAMERUPTITE, 1]] },
   :scenes => {
     :spare => [
       [:BRANN, :happy, "There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot."],
+      [:BRANN, :shocked, "...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room."],
+      { :if => "choice(:ch8_lightstone) == :dominar", :then => [
+          [:BRANN, :sad, "I haven't forgotten the Light Stone, mind. Whose it should've gone to. I'm not going to talk about it. A ring doesn't care what its wearer said in a forge one bad night, so I won't either. Not today."]] },
       [:BRANN, :neutral, "You remember Kiln, my Camerupt? The one that tried to erupt on you."],
       [:BRANN, :neutral, "Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel."],
       [:BRANN, :smug, "I'd give it to a Warden. You'll do better than most Wardens."],
@@ -119,7 +123,7 @@ tr.quest(:EL_BRIDE_TREE_HEART, {
   :summary => "Juno is waiting under the Bride Tree.",
   :steps => { :ask => "Juno is under the Bride Tree." },
   :reward => { :items => [[:VENUSAURITE, 1]] },
-  :touches => "Sets up J4: the Grass Warden's ring won't answer Juno yet.",
+  :touches => "Sets up J4: the Grass Warden's ring won't answer Juno yet (it does by the Festival: her Mega Gardevoir).",
   :scenes => {
     :heart => [
       [:JUNO, :happy, "You came! Sit, sit. Mind the roots, they've got opinions."],
@@ -127,18 +131,18 @@ tr.quest(:EL_BRIDE_TREE_HEART, {
       "She opens her hand: a stone the green of new leaves, with a pink flower caught inside it.",
       [:JUNO, :neutral, "It grew in the Bride Tree's roots. A Venusaur's heart, the Listening Root says. Aunt Elin's been in bloom for twelve years. I suppose she had to put the extra somewhere."],
       [:JUNO, :sad, "He left me his ring, too. It was in with his testament. The Grass Warden's ring. It won't answer me. I hold it and it's just... his."],
-      [:JUNO, :happy, "Yours sings, though. Don't look at me like that, I can hear it from here. So you take the stone. Somebody should."],
-      { :script => proc { |_ctx| Prismfall::Trials.complete(:EL_BRIDE_TREE_HEART, nil, false) } },
+      [:JUNO, :happy, "It hummed when you sat down, though. The stone, I mean. Don't look at me like that, I can hear it from here. So you take it. Somebody should."],
+      { :script => proc { |_ctx| Prismfall::Trials.complete(:EL_BRIDE_TREE_HEART, nil, false) } }, mega_teaser,
       [:JUNO, :happy, "And next time we fight, I'll have the ring talking to me. You'll see. Probably. Hopefully."]
     ]
   }
 })
 
-# 9 badges: the doll in the Thistledown attic (Banettite).
+# 14 badges (Mega Banette is Ghost, an answer to Ysolde: R4 holds it until Gym 14): the doll in the Thistledown attic.
 tr.quest(:EL_DOLL_WHO_WAITED, {
   :trial => :ELOWEN, :title => "The Doll Who Waited", :giver => "A doll in the attic", :map => 547,
-  :where => "Thistledown Manor attic", :rank => 1, :points => 2, :rec_level => 50, :chapter => 11,
-  :unlock => "badges >= 9", :board => true, :tags => [:mega, :ghost, :kindness],
+  :where => "Thistledown Manor attic", :rank => 1, :points => 2, :rec_level => 68, :chapter => 16,
+  :unlock => "badges >= 14", :board => true, :tags => [:mega, :ghost, :kindness],
   :summary => "A lantern with a child's scrawl: 'SOMETHING KNOCKS IN THE THISTLEDOWN ATTIC. IT WANTS ITS BUTTONS.'",
   :steps => { :ask => "Something knocks in the Thistledown Manor attic.",
               :buttons => "The doll's three buttons are somewhere in the manor.",
@@ -248,11 +252,11 @@ tr.quest(:IS_CAUSEWAY_MATRIARCH, {
 #===============================================================================
 # ZENITH - the Prize Exchange
 #===============================================================================
-# 10 badges: the Gale Post's dead letters (Pidgeotite).
+# 14 badges (Mega Pidgeot is Normal, immune to Ysolde's Ghosts: R4 holds it until Gym 14): the Gale Post's dead letters.
 tr.quest(:ZE_RETURN_TO_SENDER, {
   :trial => :ZENITH, :title => "Return to Sender", :giver => "Postmaster Halloran", :map => 325,
-  :where => "Gale Post Hall, Skyreach", :rank => 1, :points => 2, :rec_level => 54, :chapter => 12,
-  :unlock => "badges >= 10", :board => true, :tags => [:mega, :delivery, :comedy],
+  :where => "Gale Post Hall, Skyreach", :rank => 1, :points => 2, :rec_level => 68, :chapter => 16,
+  :unlock => "badges >= 14", :board => true, :tags => [:mega, :delivery, :comedy],
   :summary => "CALL FOR PROPOSALS #0412: DEAD LETTERS, THREE (3). DELIVER BY HAND. PRIZE: ONE (1) DRAWER, CLEARED.",
   :steps => { :ask => "Postmaster Halloran has three dead letters for Skyreach.",
               :letters => "Deliver the three dead letters to their doors in Skyreach.",
@@ -282,18 +286,19 @@ tr.quest(:ZE_RETURN_TO_SENDER, {
 #===============================================================================
 # ASHKAAR - the Trial by Flames
 #===============================================================================
-# 11 badges: Old Cinder, a retired Legion war-Charizard (boss; Charizardite X).
+# 15 badges (Mega Charizard X is Fire/Dragon: usable only between Magnus and Nyx under R4): Old Cinder, a retired
+# Legion war-Charizard (boss; Charizardite X).
 tr.quest(:AS_OLD_CINDER, {
   :trial => :ASHKAAR, :title => "Old Cinder", :giver => "Roost-keeper Tarn", :map => 248,
-  :where => "Pyre Keep, the Dragon Roosts", :rank => 1, :points => 3, :rec_level => 58, :chapter => 13,
-  :unlock => "badges >= 11", :board => true, :tags => [:mega, :boss, :war],
+  :where => "Pyre Keep, the Dragon Roosts", :rank => 1, :points => 3, :rec_level => 72, :chapter => 17,
+  :unlock => "badges >= 15", :board => true, :tags => [:mega, :boss, :war],
   :summary => "WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell at the front. Bring it down, honourably.",
   :steps => { :ask => "Roost-keeper Tarn wants Old Cinder brought down from the high roost.",
               :fight => "Face Old Cinder on the high roost." },
   :reward => { :items => [[:CHARIZARDITEX, 1]] },
   :scenes => {
     :offer => [
-      [:TARN, :sad, "Old Cinder's rider died at the Glass Dunes. Since then it won't come down. It won't eat. It burns anyone who climbs."],
+      [:TARN, :sad, "Old Cinder's rider died on the Rimed Sands. Since then it won't come down. It won't eat. It burns anyone who climbs."],
       [:TARN, :neutral, "In Ashkaar we don't put a dragon down for grief. We give it a fight worth having. Then it remembers it's alive."],
       { :choice => "Climb to the high roost?", :options => [
           ["I'll fight it.", [{ :accept => true }, { :step => :fight }, [:TARN, :neutral, "Say true or say nothing, up there. It can tell."]]],
@@ -341,11 +346,12 @@ tr.quest(:AS_BRAZIER_WRIT, {
 #===============================================================================
 # NADIR - the Gutter Book
 #===============================================================================
-# 8 badges: Wenlow and the Quiet Ward (Audinite).
+# Post-game, 18 badges (Mega Audino is Normal/Fairy: it answers Ysolde, Nyx and Sigrun, so rule R4 holds it until the
+# last badge): Wenlow and the Quiet Ward (Audinite).
 tr.quest(:NA_BEDSIDE_MANNER, {
   :trial => :NADIR, :title => "Bedside Manner", :giver => "Wenlow", :map => 223,
-  :where => "Corvin Mott's Infirmary, Mirefen", :rank => 1, :points => 2, :rec_level => 44, :chapter => 10,
-  :unlock => "badges >= 8", :board => true, :tags => [:mega, :kindness],
+  :where => "Corvin Mott's Infirmary, Mirefen", :rank => 1, :points => 2, :rec_level => 86, :chapter => 21,
+  :unlock => "badges >= 18", :board => true, :tags => [:mega, :kindness],
   :summary => "CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W.",
   :steps => { :ask => "Wenlow wants someone to sit with the Quiet Ward's patients.",
               :beds => "Sit with three of the Quiet Ward's patients.",

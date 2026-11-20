@@ -50,157 +50,326 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
 RESULT: player won after 1 turn(s)
 
 
-=== 3. The AI Mega Evolving: Kaito's gym battle on Hard (v100) on the Colosseum ===
+=== 3. The AI Mega Evolving: Anja (Gym 10) and Brann's weak Mega (Gym 7); trainers.txt and the Rev 21 rules ===
 
-AI: Kaito's gym battle on Hard (v100) through Prismfall.gym_battle(8)
+AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)
 =====================================================================
 
 --- Battle start ---
-  field: COLOSSEUM | weather: None | terrain: None
-  You are challenged by Warden Kaito!
-  Warden Kaito sent out Hawlucha!
-    >> sent out (foe): Hawlucha Lv.42 @SYNTHETICSEED [UNBURDEN]
+  field: FROZEN_LAKE | weather: None | terrain: None
+  You are challenged by Warden Anja!
+  Warden Anja sent out Ninetales!
+    >> sent out (foe): Ninetales Lv.49 @LIGHTCLAY [SNOWWARNING]
   Go! Togekiss!
     >> sent out (player): Togekiss Lv.80 @LEFTOVERS [HUSTLE]
-## FIELD CHANGE: NONE -> COLOSSEUM
-  The crowd roars as the fighters enter the pit!
-    (anim: UseItem)
-  The opposing Hawlucha's Synthetic Seed fired it up to the roar of the crowd!
-    (anim: StatUp)
-  The opposing Hawlucha's Attack rose!
+## FIELD CHANGE: NONE -> FROZEN_LAKE
+  The battle is taking place on a frozen lake!
+    [ability: Ninetales (foe)'s Snow Warning]
+    (anim: Hail)
+  It started to snow!
 
 --- Turn 1 ---
-  [Togekiss 250/250 | Hawlucha 130/130]
-  The opposing Hawlucha used Thunder Punch!
-    HP Togekiss (player): 250 -> 157 / 250
+  [Togekiss 250/250 | Ninetales 151/151]
+  Togekiss used Flamethrower!
+    HP Ninetales (foe): 151 -> 0 / 151
   A critical hit!
   It's super effective!
-    (anim: Paralysis)
-  Togekiss is paralyzed! It may be unable to move!
-  Togekiss used Flamethrower!
-    HP Hawlucha (foe): 130 -> 0 / 130
-  The opposing Hawlucha fainted!
-    xx fainted: Hawlucha (foe)
-  The crowd went wild for Togekiss!
-    (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 630 Exp. Points!
+  The opposing Ninetales fainted!
+    xx fainted: Ninetales (foe)
+  The lake ice groaned and cracked! (2 more)
+  Togekiss got 923 Exp. Points!
   (end of round)
-    (anim: UseItem)
-    HP Togekiss (player): 157 -> 172 / 250
-  Togekiss restored a little HP using its Leftovers!
-  Warden Kaito sent out Medicham!
-    >> sent out (foe): Medicham Lv.41 @CHOICEBAND [PUREPOWER]
+    (anim: Hail)
+  Warden Anja is about to send out Walrein. Will you switch your Pokémon?  [auto: No]
+  Warden Anja sent out Walrein!
+    >> sent out (foe): Walrein Lv.50 @SITRUSBERRY [THICKFAT]
+  The opposing Walrein settled comfortably onto the ice!
+    (anim: StatUp)
+  The opposing Walrein's Defense rose!
 
 --- Turn 2 ---
-  [Togekiss 172/250 PARALYSIS | Medicham 113/113]
-  The opposing Medicham used Zen Headbutt!
-    HP Togekiss (player): 172 -> 119 / 250
+  [Togekiss 250/250 | Walrein 191/191]
   Togekiss used Flamethrower!
-    HP Medicham (foe): 113 -> 0 / 113
-  The opposing Medicham fainted!
-    xx fainted: Medicham (foe)
-  The crowd went wild for Togekiss!
-    (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 488 Exp. Points!
+    HP Walrein (foe): 191 -> 138 / 191
+  The lake ice groaned and cracked! (1 more)
+  The opposing Walrein used Blizzard!
+  The frozen lake lent its cold to Blizzard!
+    HP Togekiss (player): 250 -> 130 / 250
+  It's super effective!
+    (anim: Frozen)
+  Togekiss was frozen solid!
+  The cold sealed the cracks in the ice!
   (end of round)
+    (anim: Hail)
     (anim: UseItem)
-    HP Togekiss (player): 119 -> 134 / 250
+    HP Togekiss (player): 130 -> 145 / 250
   Togekiss restored a little HP using its Leftovers!
-## FIELD STAGE: COLOSSEUM is now stage 2
-  Two down! The crowd is in a frenzy!
-  Warden Kaito sent out Machamp!
-    >> sent out (foe): Machamp Lv.43 @SITRUSBERRY [NOGUARD]
-  The crowd chanted for the opposing Machamp!
-    (anim: StatUp)
-  The opposing Machamp's Attack rose!
 
 --- Turn 3 ---
-  [Togekiss 134/250 PARALYSIS | Machamp 170/170]
-  Togekiss used Flamethrower!
-    HP Machamp (foe): 170 -> 0 / 170
-  The opposing Machamp fainted!
-    xx fainted: Machamp (foe)
-  The crowd went wild for Togekiss!
-    (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 963 Exp. Points!
+  [Togekiss 145/250 FROZEN | Walrein 138/191]
+    (anim: Frozen)
+  Togekiss is frozen solid!
+  The opposing Walrein used Blizzard!
+  The frozen lake lent its cold to Blizzard!
+    HP Togekiss (player): 145 -> 25 / 250
+  It's super effective!
+  The cold sealed the cracks in the ice!
   (end of round)
+    (anim: Hail)
     (anim: UseItem)
-    HP Togekiss (player): 134 -> 149 / 250
+    HP Togekiss (player): 25 -> 40 / 250
   Togekiss restored a little HP using its Leftovers!
-  Warden Kaito sent out Conkeldurr!
-    >> sent out (foe): Conkeldurr Lv.43 @FLAMEORB [GUTS]
 
 --- Turn 4 ---
-  [Togekiss 149/250 PARALYSIS | Conkeldurr 183/183]
-  Togekiss used Air Slash!
-    HP Conkeldurr (foe): 183 -> 0 / 183
-  A critical hit!
+  [Togekiss 40/250 FROZEN | Walrein 138/191]
+    (anim: Frozen)
+  Togekiss is frozen solid!
+  The opposing Walrein used Blizzard!
+  The frozen lake lent its cold to Blizzard!
+    HP Togekiss (player): 40 -> 0 / 250
   It's super effective!
-  The opposing Conkeldurr fainted!
-    xx fainted: Conkeldurr (foe)
-  The crowd went wild for Togekiss!
-    (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 963 Exp. Points!
+  Togekiss fainted!
+    xx fainted: Togekiss (player)
   (end of round)
-    (anim: UseItem)
-    HP Togekiss (player): 149 -> 164 / 250
-  Togekiss restored a little HP using its Leftovers!
-  Warden Kaito sent out Hitmontop!
-    >> sent out (foe): Hitmontop Lv.43 @ASSAULTVEST [INTIMIDATE]
-    [ability: Hitmontop (foe)'s Intimidate]
-    (anim: StatDown)
-  Togekiss's Attack fell!
+    (anim: Hail)
+  Go for it, Slowbro!
+    >> sent out (player): Slowbro Lv.80 @LEFTOVERS [OBLIVIOUS]
 
 --- Turn 5 ---
-  [Togekiss 164/250 PARALYSIS | Hitmontop 136/136]
-  Togekiss used Air Slash!
-    HP Hitmontop (foe): 136 -> 0 / 136
-  A critical hit!
-  It's super effective!
-  The opposing Hitmontop fainted!
-    xx fainted: Hitmontop (foe)
-  The crowd went wild for Togekiss!
-    (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 606 Exp. Points!
+  [Slowbro 266/266 | Walrein 138/191]
+  The opposing Walrein used Blizzard!
+  The frozen lake lent its cold to Blizzard!
+    HP Slowbro (player): 266 -> 225 / 266
+  It's not very effective...
+  Slowbro used Psychic!
+    HP Walrein (foe): 138 -> 11 / 191
+    (anim: EatBerry)
+    HP Walrein (foe): 11 -> 58 / 191
+  The opposing Walrein restored its health using its Sitrus Berry!
+    (anim: StatDown)
+  The opposing Walrein's Special Defense fell!
   (end of round)
+    (anim: Hail)
     (anim: UseItem)
-    HP Togekiss (player): 164 -> 179 / 250
-  Togekiss restored a little HP using its Leftovers!
-  Warden Kaito sent out Memory!
-    >> sent out (foe): Memory Lv.43 @LUCARIONITE [JUSTIFIED]
-  The crowd chanted for the opposing Memory!
-    (anim: StatUp)
-  The opposing Memory's Attack rose!
+    HP Slowbro (player): 225 -> 241 / 266
+  Slowbro restored a little HP using its Leftovers!
 
 --- Turn 6 ---
-  [Togekiss 179/250 PARALYSIS | Memory 126/126]
-  The opposing Memory's Lucarionite is reacting to Warden Kaito's Mega Ring!
+  [Slowbro 241/266 | Walrein 58/191]
+  The opposing Walrein used Blizzard!
+  The frozen lake lent its cold to Blizzard!
+    HP Slowbro (player): 241 -> 199 / 266
+  It's not very effective...
+  Slowbro used Psychic!
+    HP Walrein (foe): 58 -> 0 / 191
+  The opposing Walrein fainted!
+    xx fainted: Walrein (foe)
+  Slowbro got 1451 Exp. Points!
+  (end of round)
+    (anim: Hail)
+    (anim: UseItem)
+    HP Slowbro (player): 199 -> 215 / 266
+  Slowbro restored a little HP using its Leftovers!
+  Warden Anja is about to send out Glalie. Will you switch your Pokémon?  [auto: No]
+  Warden Anja sent out Glalie!
+    >> sent out (foe): Glalie Lv.50 @GLALITITE [INNERFOCUS]
+
+--- Turn 7 ---
+  [Slowbro 215/266 | Glalie 161/161]
+  The opposing Glalie's Glalitite is reacting to Warden Anja's Mega Ring!
     (anim: MegaEvolution)
     (anim: MegaEvolution2)
-  The opposing Memory has Mega Evolved into Mega Lucario!
-  The opposing Memory used Swords Dance!
-    (anim: StatUp)
-  The opposing Memory's Attack rose sharply!
-  Togekiss used Flamethrower!
-    HP Memory (foe): 126 -> 0 / 126
+  The opposing Glalie has Mega Evolved into Mega Glalie!
+  The opposing Glalie used Crunch!
+    HP Slowbro (player): 215 -> 165 / 266
   It's super effective!
-  The opposing Memory fainted!
-    xx fainted: Memory (foe)
-  The crowd went wild for Togekiss!
+  Slowbro used Scald!
+    HP Glalie (foe): 161 -> 38 / 161
+  (end of round)
+    (anim: Hail)
+    (anim: UseItem)
+    HP Slowbro (player): 165 -> 181 / 266
+  Slowbro restored a little HP using its Leftovers!
+
+--- Turn 8 ---
+  [Slowbro 181/266 | Glalie 38/161]
+  Warden Anja used a Full Restore.
+    HP Glalie (foe): 38 -> 161 / 161
+  The opposing Glalie's HP was restored.
+  Slowbro used Scald!
+    HP Glalie (foe): 161 -> 36 / 161
+  (end of round)
+  The snow stopped.
+    (anim: UseItem)
+    HP Slowbro (player): 181 -> 197 / 266
+  Slowbro restored a little HP using its Leftovers!
+
+--- Turn 9 ---
+  [Slowbro 197/266 | Glalie 36/161]
+  Warden Anja used a Full Restore.
+    HP Glalie (foe): 36 -> 161 / 161
+  The opposing Glalie's HP was restored.
+  Slowbro used Scald!
+    HP Glalie (foe): 161 -> 46 / 161
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 197 -> 213 / 266
+  Slowbro restored a little HP using its Leftovers!
+
+--- Turn 10 ---
+  [Slowbro 213/266 | Glalie 46/161]
+  The opposing Glalie used Crunch!
+    HP Slowbro (player): 213 -> 164 / 266
+  It's super effective!
+  Slowbro used Scald!
+    HP Glalie (foe): 46 -> 0 / 161
+  The opposing Glalie fainted!
+    xx fainted: Glalie (foe)
+  Slowbro got 920 Exp. Points!
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 165 -> 181 / 267
+  Slowbro restored a little HP using its Leftovers!
+  Warden Anja is about to send out Cloyster. Will you switch your Pokémon?  [auto: No]
+  Warden Anja sent out Cloyster!
+    >> sent out (foe): Cloyster Lv.49 @WHITEHERB [SKILLLINK]
+
+--- Turn 11 ---
+  [Slowbro 181/267 | Cloyster 128/128]
+  The opposing Cloyster used Razor Shell!
+    HP Slowbro (player): 181 -> 167 / 267
+  It's not very effective...
+  Slowbro used Psychic!
+    HP Cloyster (foe): 128 -> 0 / 128
+  The opposing Cloyster fainted!
+    xx fainted: Cloyster (foe)
+  Slowbro got 960 Exp. Points!
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 167 -> 183 / 267
+  Slowbro restored a little HP using its Leftovers!
+  Warden Anja is about to send out Avalugg. Will you switch your Pokémon?  [auto: No]
+  Warden Anja sent out Avalugg!
+    >> sent out (foe): Avalugg Lv.50 @ROCKYHELMET [STURDY]
+
+--- Turn 12 ---
+  [Slowbro 183/267 | Avalugg 176/176]
+  Slowbro used Scald!
+    HP Avalugg (foe): 176 -> 1 / 176
+    [ability: Avalugg (foe)'s Sturdy]
+  The opposing Avalugg endured the hit!
+  The opposing Avalugg used Rapid Spin!
+  The opposing Avalugg spun like a top on the ice!
+    HP Slowbro (player): 183 -> 161 / 267
     (anim: StatUp)
-  Togekiss's Special Attack rose!
-  Togekiss got 701 Exp. Points!
-  You defeated Warden Kaito!
-  ...Good. Your Pokémon fight like they remember why.
-  You got $4,300 for winning!
+  The opposing Avalugg's Speed rose!
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 161 -> 177 / 267
+  Slowbro restored a little HP using its Leftovers!
+
+--- Turn 13 ---
+  [Slowbro 177/267 | Avalugg 1/176]
+  The opposing Avalugg used Recover!
+    HP Avalugg (foe): 1 -> 89 / 176
+  The opposing Avalugg's HP was restored.
+  Slowbro used Scald!
+    HP Avalugg (foe): 89 -> 0 / 176
+  The opposing Avalugg fainted!
+    xx fainted: Avalugg (foe)
+  Slowbro got 985 Exp. Points!
+  (end of round)
+    (anim: UseItem)
+    HP Slowbro (player): 177 -> 193 / 267
+  Slowbro restored a little HP using its Leftovers!
+  Warden Anja is about to send out Matriarch. Will you switch your Pokémon?  [auto: No]
+  Warden Anja sent out Matriarch!
+    >> sent out (foe): Matriarch Lv.51 @ELEMENTALSEED [THICKFAT]
+  The opposing Matriarch settled comfortably onto the ice!
+    (anim: StatUp)
+  The opposing Matriarch's Defense rose!
+    (anim: UseItem)
+    HP Matriarch (foe): 195 -> 171 / 195
+  The opposing Matriarch's Elemental Seed sent it skating at full speed - straight across the jagged ice!
+    (anim: StatUp)
+  The opposing Matriarch's Speed rose sharply!
+
+--- Turn 14 ---
+  [Slowbro 193/267 | Matriarch 171/195]
+  The opposing Matriarch used Knock Off!
+    HP Slowbro (player): 193 -> 118 / 267
+  It's super effective!
+  Slowbro dropped its Leftovers!
+  Slowbro used Scald!
+    HP Matriarch (foe): 171 -> 0 / 195
+  It's super effective!
+  The opposing Matriarch fainted!
+    xx fainted: Matriarch (foe)
+  Slowbro got 1520 Exp. Points!
+  You defeated Warden Anja!
+  The ice held for you. It doesn't hold for many.
+  You got $5,100 for winning!
   battle result code: 1
   
-RESULT: player won after 5 turn(s)
+RESULT: player won after 13 turn(s)
+
+
+AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50
+=============================================================================
+
+--- Battle start ---
+  field: VOLCANIC | weather: None | terrain: None
+  You are challenged by Warden Brann!
+  Warden Brann sent out Camerupt!
+    >> sent out (foe): Camerupt Lv.37 @CAMERUPTITE [MAGMAARMOR]
+  Go! Blissey!
+    >> sent out (player): Blissey Lv.39 @LEFTOVERS [NATURALCURE]
+## FIELD CHANGE: NONE -> VOLCANIC
+  Magma churns across the battlefield!
+  The opposing Camerupt's armor hardened in the magma!
+    (anim: StatUp)
+  The opposing Camerupt's Defense rose!
+
+--- Turn 1 ---
+  [Blissey 259/259 | Camerupt 112/112]
+  The opposing Camerupt's Cameruptite is reacting to Warden Brann's Mega Ring!
+    (anim: MegaEvolution)
+    (anim: MegaEvolution2)
+  The opposing Camerupt has Mega Evolved into Mega Camerupt!
+  The opposing Camerupt's Mega Evolution stirred the magma... the volcano is about to erupt!
+  Blissey used Seismic Toss!
+    HP Camerupt (foe): 112 -> 73 / 112
+  The opposing Camerupt used Lava Plume!
+  The opposing Camerupt drew fire up from the magma!
+  The lava surged up with the opposing Camerupt!
+    HP Blissey (player): 259 -> 85 / 259
+  A critical hit!
+  (end of round)
+    (anim: UseItem)
+    HP Blissey (player): 85 -> 101 / 259
+  Blissey restored a little HP using its Leftovers!
+  The volcano erupted!
+    HP Blissey (player): 101 -> 69 / 259
+  Lava rained down around Blissey!
+  The opposing Camerupt rode the eruption!
+    (anim: StatUp)
+  The opposing Camerupt's Special Attack rose!
+
+--- Turn 2 ---
+  [Blissey 69/259 | Camerupt 73/112]
+  Blissey used Seismic Toss!
+    HP Camerupt (foe): 73 -> 34 / 112
+  The opposing Camerupt used Rock Slide!
+  The rocks came out superheated!
+    HP Blissey (player): 69 -> 0 / 259
+  Blissey fainted!
+    xx fainted: Blissey (player)
+  You have no more Pokémon that can fight!
+  You lost against Warden Brann!
+  You gave $312 to the winner...
+  battle result code: 2
+  
+RESULT: player lost after 1 turn(s)
 
 
 === 4. A Mega and a Z-move in the same battle ===
@@ -215,7 +384,7 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
     >> sent out (foe): Lucario Lv.70 @LUCARIONITE [STEADFAST]
     >> sent out (foe): Vaporeon Lv.70 @WATERIUMZ [WATERABSORB]
   Go! Blissey and Snorlax!
-    >> sent out (player): Blissey Lv.100 @LEFTOVERS [NATURALCURE]
+    >> sent out (player): Blissey Lv.100 @LEFTOVERS [SERENEGRACE]
     >> sent out (player): Snorlax Lv.100 @LEFTOVERS [IMMUNITY]
 ## FIELD CHANGE: NONE -> WATER_SURFACE
   The battle is taking place on the open water!
@@ -240,7 +409,7 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
   Blissey used Seismic Toss!
     HP Lucario (foe): 199 -> 99 / 199
   Snorlax used Body Slam!
-    HP Vaporeon (foe): 283 -> 34 / 283
+    HP Vaporeon (foe): 283 -> 59 / 283
     (anim: Paralysis)
   The opposing Vaporeon is paralyzed! It may be unable to move!
   (end of round)
@@ -248,36 +417,35 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
     HP Snorlax (player): 320 -> 348 / 461
   Snorlax restored a little HP using its Leftovers!
   The opposing Vaporeon soaked up the spray.
-    HP Vaporeon (foe): 34 -> 52 / 283
+    HP Vaporeon (foe): 59 -> 77 / 283
 
 --- Turn 2 ---
-  [Blissey 651/651 | Lucario 99/199 | Snorlax 348/461 | Vaporeon 52/283 PARALYSIS]
+  [Blissey 651/651 | Lucario 99/199 | Snorlax 348/461 | Vaporeon 77/283 PARALYSIS]
   The opposing Lucario used Aura Sphere!
-    HP Snorlax (player): 348 -> 45 / 461
+    HP Snorlax (player): 348 -> 11 / 461
   It's super effective!
   Blissey used Seismic Toss!
-    HP Vaporeon (foe): 52 -> 0 / 283
+    HP Vaporeon (foe): 77 -> 0 / 283
   The opposing Vaporeon fainted!
     xx fainted: Vaporeon (foe)
   Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
   Snorlax used Body Slam!
-    HP Lucario (foe): 99 -> 16 / 199
+    HP Lucario (foe): 99 -> 24 / 199
   It's not very effective...
   (end of round)
     (anim: UseItem)
-    HP Snorlax (player): 45 -> 73 / 461
+    HP Snorlax (player): 11 -> 39 / 461
   Snorlax restored a little HP using its Leftovers!
 
 --- Turn 3 ---
-  [Blissey 651/651 | Lucario 16/199 | Snorlax 73/461]
-  The opposing Lucario used Aura Sphere!
-    HP Snorlax (player): 73 -> 0 / 461
-  It's super effective!
+  [Blissey 651/651 | Lucario 24/199 | Snorlax 39/461]
+  The opposing Lucario used Extreme Speed!
+    HP Snorlax (player): 39 -> 0 / 461
   Snorlax fainted!
     xx fainted: Snorlax (player)
   Blissey used Seismic Toss!
-    HP Lucario (foe): 16 -> 0 / 199
+    HP Lucario (foe): 24 -> 0 / 199
   The opposing Lucario fainted!
     xx fainted: Lucario (foe)
   You defeated Warden Marisol!
@@ -1323,28 +1491,40 @@ RESULT: player won after 0 turn(s)
   You obtained a Steelixite!
   You put the Steelixite in your Bag's Items pocket.
   The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something.
-  Brann: Forge is cold for a season, thanks to you lot. Don't look like that. A ring wants a candle, not a caldera.
-  Brann: About last night. The chestnuts. A fool talks too much over chestnuts. Forget the fool.
-  Brann: Here's what a sober man says instead. Hold out your hand.
-  He opens the cloth: a plain gold band, and set in it a chip of stone with no colour at all.
-  Brann: A Warden's ring. Mega Ring, the Accord calls it. The guild's cut one for every seat since the Concordance.
-  Brann: The chip is grind. Dust off the Crown's own stone, kept every time it's reset. The Legend Plate's every type and none, so a fleck of it opens any heartstone.
-  Brann: Heartstones. Mega Stones, if you're Accord. Where an Imprint soaks into one kind of Pokemon long enough, it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
-  Brann: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
-  He sets the ring in your palm. The colourless chip catches the forge-light... and sings: one clear note, like a struck glass.
+  Bastian: Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks.
+  Bastian: You'll have been wondering what my old Amber did in there, changing like that. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild cuts one for every seat since the Concordance.
+  Bastian: A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
+  Bastian: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
+  Bastian: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
+  He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.
+  Bastian: Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain.
+  Bastian: Two old men who don't ask each other things. That's how you get to seventy-four.
+  Bastian: Rock's patient. I reckon this has waited long enough. Hold out your hand.
+  He drops the ring into your palm. The colourless chip catches the lamplight... and sings: one clear note, like a wet finger round the rim of a glass.
   Somewhere under your ribs, something answers it.
-  Brann: ...
-  Brann: They don't sing. Thirty years at this anvil, and not one of them has ever sung.
-  Brann: ...Old fool. It's the forge-hum. Here: an iron heart to start you off. Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do.
+  Pip: Grandad. Grandad, it's SINGING.
+  Bastian: Is it? Can't hear a thing. Half-deaf, me.
+  Bastian: ...I can feel it in the table, though. Holloway swore they don't sing. Thirty years at his anvil, and not one of them ever sang.
+  Bastian: Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts.
   You obtained a Mega Ring!
   You put the Mega Ring in your Bag's Key Items pocket.
   You obtained an Aggronite!
   You put the Aggronite in your Bag's Items pocket.
   The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.
-  Brann: Now. Go and show Kaito what a ferry child does with a Warden's ring.
+  Bastian: Wear it. If Meridian's linesmen come down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
+  Sigrun will remember that.
+  Brann: There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot.
+  Brann: ...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room.
+  Brann: I haven't forgotten the Light Stone, mind. Whose it should've gone to. I'm not going to talk about it. A ring doesn't care what its wearer said in a forge one bad night, so I won't either. Not today.
+  Brann: You remember Kiln, my Camerupt? The one that tried to erupt on you.
+  Brann: Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel.
+  Brann: I'd give it to a Warden. You'll do better than most Wardens.
+  You obtained a Cameruptite!
+  You put the Cameruptite in your Bag's Items pocket.
+  Brann: Your ring still singing? ...No. Don't tell me. I sleep badly enough.
 -- EL_OLD_PINCER / offer
   The Woodward: There's a Pinsir in the Heartwood older than my hut. Old Pincer, we call it. This spring it took the great sap tree and nothing gets near it.
-  The Woodward: The silk-moths need that sap. So does the Loomhouse. I'd ask a Warden, but the Wardens are busy being at war.
+  The Woodward: The silk-moths need that sap. So does the Loomhouse. I'd ask Tamsin, but she's got half of Isenmar's refugees sleeping in the Loomhouse.
   Take on the Old Pincer?
   NEW QUEST: "The Old Pincer" The Woodward wants the Old Pincer out of the Heartwood's sap tree.
   QUEST LOG: "The Old Pincer" Face the Old Pincer at the sap tree in the Gossamer Heartwood.

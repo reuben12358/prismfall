@@ -3,7 +3,7 @@
 Real Essentials v21.1 battle code with Prismfall Core, Field Effects, Z-Power, Bosses, Trials and Mega; AI on both
 sides unless noted. Logic only: the EBDX animation is checked in the real engine (design/MEGA_EVOLUTION.md section 8).
 
-**59/59 checks passed.**
+**64/64 checks passed.**
 
 | | Check | Detail |
 |---|---|---|
@@ -12,13 +12,13 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | the Mega Ring is a key item with the MegaRing flag |  |
 | PASS | every stone is placed (44) or listed as unplaced (3) | missing [], unknown [] |
 | PASS | every STONES row has a badge gate, a known map and a known method | [] |
-| PASS | the Ring-Day is mid-Act II (Cindervault, after Gym 7) |  |
+| PASS | the Ring comes after Badge 13, like Reborn (13 at the earliest) and Rejuvenation (about 14): Cragholm, Bastian |  |
 | PASS | R4 with the Ring: no stone powers up an answer to the next 2 Wardens when it becomes usable |  |
-| PASS | stones before the Ring-Day are teasers only (5): Absolite, Manectite, Sharpedonite, Ampharosite, Steelixite |  |
+| PASS | stones before the Ring 'hum and wait' (12): Manectite, Glalitite, Ampharosite, Sceptilite, Blastoisinite, Venusaurite, Beedrillite, Altarianite, Slowbronite, Alakazite, Aerodactylite, Pinsirite |  |
 | PASS | the strongest stones come late (Reborn 12-17, Rejuvenation 11-15): none before 10 badges | [] |
 | PASS | legendary stones are post-game |  |
 | PASS | quests, story scenes, bosses and rank rewards hand out their stones at or after the gate |  |
-| PASS | rank-reward stones are reachable before the Ring-Day (so the R4 check holds for them) |  |
+| PASS | rank-reward stones are reachable before the Ring (so the R4 check holds for them) |  |
 | PASS | design/TRIAL_EVENTS.yaml places all 25 world stones (pf_mega_stone, badge-gated) and every Mega talk key |  |
 | PASS | Prismfall Z-Power is one Z per side too (owner key = side) |  |
 | PASS | the player's Camerupt Mega Evolved on turn 1 (ring in the Bag, Cameruptite held) | {:side=>0, :idx=>0, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:SOLIDROCK, :turn=>1, :field=>:V |
@@ -27,9 +27,13 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | Volcanic showpiece: a Fire-type Mega primes the volcano, which erupts at the end of the round |  |
 | PASS | the Mega happens before any move that turn | 14 < 18 |
 | PASS | only one Mega in the whole battle (1 turns) |  |
-| PASS | Kaito's Lucario Mega Evolved (AI, trainer holds MEGARING in its items) | {:side=>1, :idx=>1, :species=>:LUCARIO, :form=>1, :ability=>:ADAPTABILITY, :old_ability=>:JUSTIFIED, |
-| PASS | on the Colosseum (the gym's field): the crowd roars for it, unless it is already in a Frenzy | COLOSSEUM stage 2, kos 3, roared false |
-| PASS | the AI Mega Evolves the first turn its Lucario can act | 1 turn headers in between |
+| PASS | Anja's Glalie Mega Evolved on Standard (AI, MEGARING in her items) | {:side=>1, :idx=>1, :species=>:GLALIE, :form=>1, :ability=>:REFRIGERATE, :old_ability=>:INNERFOCUS,  |
+| PASS | the AI Mega Evolves the first turn its Glalie can act | 1 turn headers in between |
+| PASS | Brann's Camerupt Mega Evolves on Standard at Gym 7 (a designed weak Mega below Lv 50) | {:side=>1, :idx=>1, :species=>:CAMERUPT, :form=>1, :ability=>:SHEERFORCE, :old_ability=>:MAGMAARMOR, |
+| PASS | ...on Volcanic, and its Mega primes the eruption as designed (Brann's fight is kept as is, per the user) |  |
+| PASS | trainers.txt: every important fight from ace 50 Megas in all modes (39 Std / 39 Hard / 39 Casual); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it |  |
+| PASS | K8 without Morwen's Ring: no ring, no stone (Kestrel has no ring of his own) |  |
+| PASS | K8 with Morwen's Ring (:ch18_kestrel_ring = :give_now): the ring, and his Scizor holds the Scizorite | SCIZOR Lv92 @SCIZORITE |
 | PASS | the foe used one Mega (Lucario) and one Z-move (Hydro Vortex) in the same battle | megas 1, z [:HYDROVORTEX] |
 | PASS | both on turn 1 (the Mega first, before moves; the Z-move in the move phase) |  |
 | PASS | the player's side used one Mega and one Z-move in one battle | megas [:LUCARIO], z [:HYDROVORTEX] |
@@ -56,15 +60,16 @@ sides unless noted. Logic only: the EBDX animation is checked in the real engine
 | PASS | The Humming Lamp is locked at 2 badges |  |
 | PASS | at 3 badges Hesper gives the Ampharosite, and it hums (no ring yet) |  |
 | PASS | a world stone (pf_mega_stone) is received once; a second call gives nothing |  |
-| PASS | the Ring-Day is locked before Gym 7 |  |
-| PASS | ...and at 7 badges until the Caldera Crisis is decided |  |
-| PASS | after the Caldera Crisis the Ring-Day is available |  |
-| PASS | Brann gives the Mega Ring and the Aggronite; the quest finishes quietly |  |
-| PASS | the vent-branch line plays (the cold forge) and the ring sings |  |
-| PASS | Brann's spare (Cameruptite) waits for 10 badges |  |
+| PASS | the Ring-Day is locked before Gym 13 |  |
+| PASS | after Gym 13 the Ring-Day is available in Bastian's lamp-room |  |
+| PASS | Bastian gives the Mega Ring and the Aggronite; the quest finishes quietly |  |
+| PASS | the ring sings, Pip hears it, and the earlier stones stop waiting |  |
+| PASS | no early reveal: Bastian never says 'reset' or names the Legend Plate |  |
+| PASS | Brann's spare (Cameruptite) waits for 15 badges |  |
+| PASS | at 15 badges Brann knows his ring, gives the Cameruptite, and is hurt about the Light Stone (it went to the Dominar) |  |
 | PASS | the Old Pincer (a 2-bar wild boss on Silkwood) guards the Pinsirite; beating it pays out | status :won |
 | PASS | the player's Charizard Mega Evolved in the boss fight |  |
 | PASS | The Brazier Writ: a lie at the brazier burns the writ (no stone, quest still open) |  |
 | PASS | ...the truth earns the Salamencite |  |
 
-Megas logged: 19; Z-moves logged: 6. Battle transcripts: `transcript.txt`.
+Megas logged: 20; Z-moves logged: 6. Battle transcripts: `transcript.txt`.

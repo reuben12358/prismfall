@@ -17,8 +17,10 @@
 # Events: :prismfall_mega_evolved (battle, battler, old_ability_id)
 #===============================================================================
 module PrismfallMega
-  RING = :MEGARING          # the base project's Mega Ring (Flags = KeyItem,MegaRing); Brann gives it in Chapter 8
-  RING_BADGES = 7           # the Ring-Day: Cindervault, after Gym 7 and the Caldera Crisis
+  RING = :MEGARING          # the base project's Mega Ring (Flags = KeyItem,MegaRing). Bastian gives it in Chapter 14.
+  # The Ring beat (SPINE Revision 21, "like Reborn and Rejuvenation": Reborn's Mega-Z Ring after Badge 13 at the
+  # earliest, Rejuvenation's at about 14): Cragholm, after Gym 13 (cap 63, before Gym 14). Quest OS_RING_DAY.
+  RING_BADGES = 13
 
   # :side = one Mega per side per battle (SPINE Rev 20); :trainer = Essentials' default (one per trainer)
   LIMIT = :side
@@ -26,7 +28,22 @@ module PrismfallMega
   Z_LIMIT = :side
   Z_CRYSTAL_BLOCKS_MEGA = true
 
-  # Shown once when the player picks up a Mega Stone before the Ring-Day.
+  # SPINE Revision 21: from an ace level of about 50 (Gym 10, cap 51) every important story fight has a Mega, any tier,
+  # if the story gives that fighter a ring (Wardens, Valen, Meridian, Juno; MEGA_EVOLUTION.md 1.2 and 6.3). Below that a
+  # fight may use one only if its design calls for it, and only a WEAK Mega (6.1): Brann's Camerupt, kept as designed.
+  # tools/trainer_gen/gen.py applies the same two constants; tools/harness/run_mega.rb checks pbs/trainers.txt for them.
+  MEGA_FULL_LEVEL = 50
+  WEAK_STONES = [:CAMERUPTITE, :GLALITITE, :ABOMASITE, :BANETTITE, :AUDINITE, :STEELIXITE, :PIDGEOTITE, :BEEDRILLITE,
+                 :SABLENITE, :AMPHAROSITE, :MANECTITE, :HOUNDOOMINITE, :ABSOLITE, :SHARPEDONITE].freeze
+
+  # Kestrel (design/MEGA_EVOLUTION.md 1.2): no ring of his own until Morwen's Ring reaches him through the PC. If the PC
+  # gives it to him in Ch18 (choice :ch18_kestrel_ring = :give_now), his K8 trainer gets the ring at battle start and his
+  # Scizor (his duelist since K3) the Scizorite. (Given at the SF instead, after K8, it first shows in the hijack tag
+  # battle on the player's side, where the player's Mega has priority; K9 only happens when he never got it.)
+  MORWEN_RING_CHOICE = [:ch18_kestrel_ring, :give_now]
+  MORWEN_RING = { :trainer => :RIVAL_KESTREL, :species => :SCIZOR, :item => :SCIZORITE, :min_level => 90 }.freeze
+
+  # Shown once when the player picks up a Mega Stone before the Ring (13 badges).
   TEASER_TEXT = "The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something."
 
   #-----------------------------------------------------------------------------
@@ -39,53 +56,57 @@ module PrismfallMega
   # the next two Wardens), against the quests that hand it out, and against design/TRIAL_EVENTS.yaml ("Mega Evolution" maps).
   #-----------------------------------------------------------------------------
   STONES = {
-    # Before the Ring-Day: "they hum and wait" (Reborn and Rejuvenation both hand out stones before the ring)
-    :ABSOLITE      => { :badges => 2,  :how => :hidden, :map => 577, :where => "Frostwick Pass, the avalanche gully (Rock Smash)", :source => :MEGA_STONE_ABSOLITE },
+    # Before the Ring (13 badges): "they hum and wait", as in Reborn. Only stones whose types answer neither Warden 14
+    # (Ghost) nor Warden 15 (Steel) may come this early: they all become usable at 13 (SPINE Revision 21).
     :MANECTITE     => { :badges => 2,  :how => :rank,   :map => 194, :where => "The Prize Exchange, rank 3 (Fellow)", :source => :ZENITH },
-    :SHARPEDONITE  => { :badges => 2,  :how => :rank,   :map => 306, :where => "The Tally, rank 3 (Harpooner)", :source => :ISENMAR },
+    :GLALITITE     => { :badges => 2,  :how => :rank,   :map => 306, :where => "The Tally, rank 3 (Harpooner)", :source => :ISENMAR },
     :AMPHAROSITE   => { :badges => 3,  :how => :quest,  :map => 106, :where => "Ferrow Lighthouse lamp room: Hesper's lamp lens", :source => :EL_LAMP_LENS },
-    :STEELIXITE    => { :badges => 4,  :how => :hidden, :map => 605, :where => "Static Tunnels Depths, the magnetite seam (Flash)", :source => :MEGA_STONE_STEELIXITE },
-    # The Ring-Day (7 badges)
-    :AGGRONITE     => { :badges => 7,  :how => :story,  :map => 244, :where => "Hearthguild Hall, Cindervault: Brann, with the Mega Ring", :source => :AS_RING_DAY },
-    :SABLENITE     => { :badges => 8,  :how => :hidden, :map => 685, :where => "Grudgestone Quarry B1F, the gem seam the Sableye feed on", :source => :MEGA_STONE_SABLENITE },
-    :SCEPTILITE    => { :badges => 8,  :how => :item  , :map => 682, :where => "The Royal Chase, the old hunting lodge's mantel", :source => :MEGA_STONE_SCEPTILITE },
-    :SWAMPERTITE   => { :badges => 8,  :how => :hidden, :map => 680, :where => "The Rootdeep, the underground river (Surf)", :source => :MEGA_STONE_SWAMPERTITE },
+    :SCEPTILITE    => { :badges => 8,  :how => :item,   :map => 682, :where => "The Royal Chase, the old hunting lodge's mantel", :source => :MEGA_STONE_SCEPTILITE },
     :BLASTOISINITE => { :badges => 8,  :how => :hidden, :map => 681, :where => "Prism Falls, behind the falls (Surf)", :source => :MEGA_STONE_BLASTOISINITE },
-    :AUDINITE      => { :badges => 8,  :how => :quest,  :map => 223, :where => "Corvin Mott's Infirmary, Mirefen: Wenlow", :source => :NA_BEDSIDE_MANNER },
     :VENUSAURITE   => { :badges => 9,  :how => :story,  :map => 294, :where => "The Heartgarden, Verdance: Juno, after J3", :source => :EL_BRIDE_TREE_HEART },
     :BEEDRILLITE   => { :badges => 9,  :how => :hidden, :map => 703, :where => "Gossamer Heartwood, inside the old hive", :source => :MEGA_STONE_BEEDRILLITE },
-    :BANETTITE     => { :badges => 9,  :how => :quest,  :map => 547, :where => "Thistledown Manor attic: the doll who waited", :source => :EL_DOLL_WHO_WAITED },
-    :CHARIZARDITEY => { :badges => 10, :how => :hidden, :map => 726, :where => "Cloudstair Summit, the wind-scoured ledge", :source => :MEGA_STONE_CHARIZARDITEY },
-    :PIDGEOTITE    => { :badges => 10, :how => :quest,  :map => 325, :where => "Gale Post Hall, Skyreach: the dead-letter bag", :source => :ZE_RETURN_TO_SENDER },
-    :ALTARIANITE   => { :badges => 10, :how => :item  , :map => 732, :where => "The Tetherline, a cloud-nest on a tether pylon", :source => :MEGA_STONE_ALTARIANITE },
+    :ALTARIANITE   => { :badges => 10, :how => :item,   :map => 732, :where => "The Tetherline, a cloud-nest on a tether pylon", :source => :MEGA_STONE_ALTARIANITE },
     :SLOWBRONITE   => { :badges => 10, :how => :hidden, :map => 723, :where => "Ebbmouth Sea Grotto, the tide-pool shelf", :source => :MEGA_STONE_SLOWBRONITE },
-    :CAMERUPTITE   => { :badges => 10, :how => :quest,  :map => 244, :where => "Hearthguild Hall, Cindervault: Brann's spare", :source => :AS_FORGE_REMEMBERS },
-    :CHARIZARDITEX => { :badges => 11, :how => :boss,   :map => 248, :where => "Pyre Keep Dragon Roosts: Old Cinder, a retired Legion war-Charizard", :source => :AS_OLD_CINDER },
-    :GLALITITE     => { :badges => 11, :how => :item  , :map => 705, :where => "Frostfang Pass 2F, behind the thawed ice wall", :source => :MEGA_STONE_GLALITITE },
     :ALAKAZITE     => { :badges => 12, :how => :puzzle, :map => 345, :where => "Lucent Athenaeum, the Sealed Stacks: the Unread Shelf", :source => :MEGA_STONE_ALAKAZITE },
     :AERODACTYLITE => { :badges => 12, :how => :quest,  :map => 209, :where => "Sahar's Dig Lab, Duneholt: bring her a revived Aerodactyl", :source => :OS_AMBER_AGAIN },
     :PINSIRITE     => { :badges => 12, :how => :boss,   :map => 703, :where => "Gossamer Heartwood: the Old Pincer", :source => :EL_OLD_PINCER },
+    # The Ring (13 badges): Cragholm, after Gym 13
+    :AGGRONITE     => { :badges => 13, :how => :story,  :map => 363, :where => "Cragholm Lift Galleries, Bastian's lamp-room in the deep seams: with the Mega Ring", :source => :OS_RING_DAY },
     :GARDEVOIRITE  => { :badges => 13, :how => :puzzle, :map => 752, :where => "The Looking-Glass Wood, the heart of the mirror maze", :source => :MEGA_STONE_GARDEVOIRITE },
     :MAWILITE      => { :badges => 13, :how => :quest,  :map => 346, :where => "The Speculum, Lucent: the smile behind the glass (Rite of Reflection rank 2)", :source => :AN_SMILE_BEHIND_GLASS },
     :SCIZORITE     => { :badges => 13, :how => :item,   :map => 383, :where => "Vane Hall, Gravenmoor: Morwen Vane's trophy case", :source => :MEGA_STONE_SCIZORITE },
     :ABOMASITE     => { :badges => 13, :how => :hidden, :map => 701, :where => "The Hoarwood, under the frost-giant pine", :source => :MEGA_STONE_ABOMASITE },
+    # 14 badges (after Ysolde): Dark, Ghost and Normal Megas no longer answer the next two Wardens
+    :ABSOLITE      => { :badges => 14, :how => :hidden, :map => 801, :where => "The Slag Mesa, under the warning-cairn on the mesa's lip", :source => :MEGA_STONE_ABSOLITE },
+    :SABLENITE     => { :badges => 14, :how => :hidden, :map => 804, :where => "Barrow of the Wardens, a looted grave-niche the Sableye mine for its gems", :source => :MEGA_STONE_SABLENITE },
+    :BANETTITE     => { :badges => 14, :how => :quest,  :map => 547, :where => "Thistledown Manor attic: the doll who waited", :source => :EL_DOLL_WHO_WAITED },
+    :PIDGEOTITE    => { :badges => 14, :how => :quest,  :map => 325, :where => "Gale Post Hall, Skyreach: the dead-letter bag", :source => :ZE_RETURN_TO_SENDER },
     :METAGROSSITE  => { :badges => 14, :how => :puzzle, :map => 403, :where => "Strade Works Foundry Floor, the sorting-line puzzle", :source => :MEGA_STONE_METAGROSSITE },
-    :GENGARITE     => { :badges => 14, :how => :item  , :map => 805, :where => "Barrow Sanctum, the altar of the nameless Warden", :source => :MEGA_STONE_GENGARITE },
+    :GENGARITE     => { :badges => 14, :how => :item,   :map => 805, :where => "Barrow Sanctum, the altar of the nameless Warden", :source => :MEGA_STONE_GENGARITE },
+    # 15 badges (after Magnus): Fire and Ground Megas
+    :SHARPEDONITE  => { :badges => 15, :how => :hidden, :map => 424, :where => "Underveil Sump Docks, a harpooned Sharpedo jaw in the net-loft", :source => :MEGA_STONE_SHARPEDONITE },
+    :SWAMPERTITE   => { :badges => 15, :how => :hidden, :map => 821, :where => "The Drownings, a mud-bank islet (Surf)", :source => :MEGA_STONE_SWAMPERTITE },
+    :CHARIZARDITEY => { :badges => 15, :how => :hidden, :map => 832, :where => "The Brink, the wind-scoured ledge above the drop", :source => :MEGA_STONE_CHARIZARDITEY },
+    :CAMERUPTITE   => { :badges => 15, :how => :quest,  :map => 244, :where => "Hearthguild Hall, Cindervault: Brann's spare", :source => :AS_FORGE_REMEMBERS },
+    :CHARIZARDITEX => { :badges => 15, :how => :boss,   :map => 248, :where => "Pyre Keep Dragon Roosts: Old Cinder, a retired Legion war-Charizard", :source => :AS_OLD_CINDER },
     :GYARADOSITE   => { :badges => 15, :how => :hidden, :map => 824, :where => "Aurelia - Drowned Spires, the flooded bell (Dive)", :source => :MEGA_STONE_GYARADOSITE },
     :HOUNDOOMINITE => { :badges => 15, :how => :quest,  :map => 423, :where => "Underveil Moon Market: the Barons' kennel (Gutter Book)", :source => :NA_MOON_MARKET_DOGS },
     :TYRANITARITE  => { :badges => 15, :how => :quest,  :map => 360, :where => "Cragholm rack: the tyrant's heart (Rolls of Unearthing rank 2)", :source => :OS_TYRANT_HEART },
     :GARCHOMPITE   => { :badges => 15, :how => :hidden, :map => 810, :where => "The Dry Tide, a sand-sunk caravan", :source => :MEGA_STONE_GARCHOMPITE },
     :SALAMENCITE   => { :badges => 15, :how => :quest,  :map => 240, :where => "The Crucible, Cindervault: the brazier writ (Trial by Flames rank 2)", :source => :AS_BRAZIER_WRIT },
-    :GALLADITE     => { :badges => 16, :how => :item  , :map => 841, :where => "The Gloamwood Verge, the knight's barrow", :source => :MEGA_STONE_GALLADITE },
+    :GALLADITE     => { :badges => 16, :how => :item,   :map => 841, :where => "The Gloamwood Verge, the knight's barrow", :source => :MEGA_STONE_GALLADITE },
     :MEDICHAMITE   => { :badges => 16, :how => :hidden, :map => 263, :where => "The Iron Pit, the meditation shelf above the top tier (Rock Climb)", :source => :MEGA_STONE_MEDICHAMITE },
     :HERACRONITE   => { :badges => 16, :how => :hidden, :map => 524, :where => "Gossamer Wood, the old sap tree", :source => :MEGA_STONE_HERACRONITE },
     :LOPUNNITE     => { :badges => 16, :how => :quest,  :map => 154, :where => "Pell Playhouse, the Grand Stage: Dorian's encore", :source => :EL_ENCORE },
     :KANGASKHANITE => { :badges => 16, :how => :boss,   :map => 560, :where => "Frostflat Causeway: the Causeway Matriarch", :source => :IS_CAUSEWAY_MATRIARCH },
+    # 17 badges: Steel/Ground is safe only before the last Warden (Dragon)
+    :STEELIXITE    => { :badges => 17, :how => :hidden, :map => 864, :where => "Wyrmscar Rift, an iron-snake's shed skin in the rift wall", :source => :MEGA_STONE_STEELIXITE },
     :BLAZIKENITE   => { :badges => 17, :how => :hidden, :map => 870, :where => "Thornwatch, the war-brazier on the gate tower", :source => :MEGA_STONE_BLAZIKENITE },
     :LUCARIONITE   => { :badges => 17, :how => :quest,  :map => 260, :where => "The Last Rung, Ironreach: the Memory Kata (Gutter Book rank 2)", :source => :NA_MEMORY_KATA },
-    # Post-game
-    :LATIASITE     => { :badges => 18, :how => :item  , :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIASITE },
-    :LATIOSITE     => { :badges => 18, :how => :item  , :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIOSITE }
+    # Post-game (Normal/Fairy answers Ysolde, Nyx and Sigrun: Audino waits for the eighteenth badge)
+    :AUDINITE      => { :badges => 18, :how => :quest,  :map => 223, :where => "Corvin Mott's Infirmary, Mirefen: Wenlow (post-game)", :source => :NA_BEDSIDE_MANNER },
+    :LATIASITE     => { :badges => 18, :how => :item,   :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIASITE },
+    :LATIOSITE     => { :badges => 18, :how => :item,   :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIOSITE }
   }.freeze
   # In the base data but not placed: their species are not in Velmora (POKEMON_AVAILABILITY.md section 4).
   UNPLACED = [:MEWTWONITEX, :MEWTWONITEY, :DIANCITE].freeze

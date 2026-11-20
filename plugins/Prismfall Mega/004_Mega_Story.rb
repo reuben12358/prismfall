@@ -4,10 +4,11 @@
 # Map events for stones (design/TRIAL_EVENTS.yaml ("Mega Evolution" maps)) make ONE call:
 #   pf_mega_stone(:ABSOLITE)                       the item jingle + "obtained"
 #   pf_mega_stone(:ABSOLITE, "A black stone...")   a line first
-# Before the Ring-Day the first stone also gets PrismfallMega::TEASER_TEXT.
+# Before the Ring (13 badges) the first stone also gets PrismfallMega::TEASER_TEXT.
 # The Mega Ring and the quest stones come from Trials scenes
 # (plugins/Prismfall Trials/114_Quests_Megas.rb), so all dialogue lives in one place.
 # Conditions (Prismfall::Conditions): mega_ring, mega_stones (count in the Bag).
+# Kestrel and Morwen's Ring: MORWEN_RING (001), applied when his trainer is loaded.
 #===============================================================================
 module PrismfallMega
   def self.stones_owned
@@ -49,6 +50,36 @@ module PrismfallMega
     return true
   end
 end
+
+module PrismfallMega
+  def self.morwen_ring_given?
+    key, val = MORWEN_RING_CHOICE
+    return false if !defined?(Prismfall::Choices)
+    return Prismfall::Choices.get(key) == val
+  rescue StandardError
+    return false
+  end
+
+  # K8 with Morwen's Ring: the ring and the Scizorite. Rival battles load through pbLoadTrainer, which doesn't pass the
+  # version on, so this goes by the Scizor's level (K8 and K9 are his only battles at 90+, and K9 happens only when the
+  # ring was kept). TrainerBattle.start fires :on_trainer_load for every trainer it loads.
+  def self.morwen_ring_swap(trainer, force = false)
+    mr = MORWEN_RING
+    return false if !trainer.respond_to?(:trainer_type) || trainer.trainer_type != mr[:trainer]
+    return false if !force && !morwen_ring_given?
+    pkmn = trainer.party.find { |p| p && p.species == mr[:species] && p.level >= mr[:min_level] }
+    return false if !pkmn
+    pkmn.item = mr[:item]
+    trainer.items.unshift(RING) if trainer.respond_to?(:items) && !trainer.items.include?(RING)
+    return true
+  end
+end
+
+EventHandlers.add(:on_trainer_load, :prismfall_mega_morwen_ring,
+  proc { |trainer|
+    PrismfallMega.morwen_ring_swap(trainer) if trainer
+  }
+)
 
 def pf_mega_stone(item, text = nil)
   return PrismfallMega.give_stone(item, text)

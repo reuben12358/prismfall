@@ -17,7 +17,7 @@ are defined; Gyms 8–18 fields are designed to their theme, assumptions marked 
 | Team size | Standard −1 (min 2); Festival always 6 | see §3 | Standard +1 (max 6) |
 | Levels | Standard −2 (cap <40), −3 (<70), −4 (70+) | Ace **at the cap**, others 1–5 below | Same as Standard through cap 23; from cap 27, others +1 (never above cap) (harness: +1 at Gyms 1–3 cost prepared teams 10–15 points) |
 | IVs / EVs | IV 4→20 by tier, **EV 0** | IV 12 / 18 / 24 / 28 / 31 (caps ≤23 / ≤35 / ≤51 / ≤71 / 72+), default EVs (min(lv×1.5, 85) each) | IV Standard + 8 (20 to cap 23, 26 to cap 35), 31 from cap 39 (Trick Room mons Spe IV 0); 252/252/4-style EVs by role, **at most 6 × level per stat** (60 at Lv 10, the full 252 from Lv 42) |
-| Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present | Upgraded coverage, Hidden Abilities, Megas (trainer gets `MEGARING`), Choice/Life Orb/Weakness Policy, one extra synergy piece |
+| Sets | Standard sets minus the nastiest tool (setup / sleep / signature ability swapped, e.g. Toxapex Limber, Araquanid-free) | Full sets: 4 moves, ability, item, nature; field-synergy core of each team is present | Upgraded coverage, Hidden Abilities, Choice/Life Orb/Weakness Policy, one extra synergy piece. **Megas (all modes, §6b):** every important fight from ace 50 has one; below that only designed weak ones (Std + Hard) |
 | Bag items | Standard −1 | 1 Potion (cap 15) → 1 Super (to 23) → 2 Super → 2 Hyper → 2 Full Restore | 2 Super → 2 Hyper → 2 → 3 Full Restore |
 | AI skill | trainer type's own (Core sets no ceiling) | trainer type's own | Core floor 48 (`ai_skill_min`) |
 
@@ -111,18 +111,18 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 | 4 | Rook, Neon Grid, 27 | Luxio, Electabuzz *(−C)*, **+Hard** Heliolisk, Toxtricity, Rotom-Wash "Camera" | Electabuzz: Synthetic Seed | Charge reboots a Blackout |
 | 5 | Sahar, Desert, 31 | Hippopotas, **+Hard** Dugtrio, Sandaconda *(−C)*, Krokorok, Claydol "Effigy" | Sandaconda: Telluric Seed | sandstorm or Fire Fang bakes a Superbloom back |
 | 6 | Corvin, Corrosive Mire, 35, **double** | Galarian Weezing (never Misty Surge), Crobat *(−C)*, **+Hard** Salazzle, Amoonguss, Drapion, Toxapex "Ward" | Crobat: Synthetic Seed | Weezing's Heat Wave ×2 → Wasteland |
-| 7 | Brann, Volcanic, 39 | Torkoal, Camerupt *(−C)* (Magma Armor), **+Hard** Centiskorch, Magmortar, Arcanine, Coalossal "Anvil" | Camerupt: Elemental Seed | Lava Plume ×3 re-melts Cinderglass; Anvil is built for Cinderglass |
-| 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; **Hard Mega**) | Hawlucha: Synthetic Seed + Unburden | Frenzy by knockouts |
+| 7 | Brann, Volcanic, 39 | Torkoal, Camerupt *(−C)* (Magma Armor; **Mega**, Std + Hard, §6b: kept as designed, per the user), **+Hard** Centiskorch, Magmortar, Arcanine, Coalossal "Anvil" | Camerupt: Elemental Seed (the Cameruptite while it Megas) | Lava Plume ×3 re-melts Cinderglass; Anvil is built for Cinderglass |
+| 8 | Kaito, Colosseum, 43 | Hawlucha, **+Hard** Medicham, Machamp, Hitmontop *(−C)*, Conkeldurr, Lucario "Memory" (Std Scope Lens; Hard Life Orb; Mega only at the Festival) | Hawlucha: Synthetic Seed + Unburden | Frenzy by knockouts |
 | 9 | Juno (J3), Flower Garden, 47 | see §5 | Whimsicott: Telluric Seed | growth moves; regrow from Embers |
-| 10 | Anja, Frozen Lake, 51 | Alolan Ninetales, Cloyster, Beartic *(−C)*, Walrein, Avalugg, Mamoswine "Matriarch" | Matriarch: Elemental Seed (Hard: Life Orb) | Body Press / High Horsepower crack the lake → Water Surface; Ice moves refreeze |
-| 11 | Odessa, Stormfront, 55, **double** | Pelipper (Keen Eye, Tailwind), Swanna *(−C)*, Pom-Pom Oricorio, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
-| 12 | Ilsa, Mindscape, 59 | Bronzong, Musharna *(−C)*, Espeon, Gothitelle (Hard: Shadow Tag), Reuniclus, Hatterene "Hush" | — | Hush's Psychic Noise ×3 → Inverse; Calm Mind ×2 calms a Nightmare |
-| 13 | Bastian, Crystal Cavern, 63 | Carbink, Alolan Golem *(−C)*, Aurorus, Dusk Lycanroc, Rhyperior, Gigalith "Geode" (Sturdy, no Sand Stream) | Geode: Magical Seed (Hard: Weakness Policy + Meteor Beam) | Golem's Explosion or 3 quakes → Cave; light moves relight a Dark Crystal |
-| 14 | Ysolde, Hollow Cathedral, 67 | Sableye, Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
-| 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Hard Mega**) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
-| 16 | Nyx, New Moon, 75, **double** | Grimmsnarl, Weavile, Malamar *(−C)*, Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
-| 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, Mimikyu *(−C)*, Azumarill, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
-| 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Hard Mega**) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
+| 10 | Anja, Frozen Lake, 51 | Alolan Ninetales, Cloyster *(−C)*, **Glalie (Mega**, replaces Beartic), Walrein, Avalugg, Mamoswine "Matriarch" | Matriarch: Elemental Seed (Hard: Life Orb) | Body Press / High Horsepower crack the lake → Water Surface; Ice moves refreeze |
+| 11 | Odessa, Stormfront, 55, **double** | Pelipper (Keen Eye, Tailwind), **Pidgeot "Post" (Mega**, replaces Swanna), Pom-Pom Oricorio *(−C)*, Noivern, **Kilowattrel** (replaces Talonflame), Corviknight "Taxi" | Oricorio: Elemental Seed | Noivern's Sunny Day ×2 → Rainbow |
+| 12 | Ilsa, Mindscape, 59 | Bronzong, **Slowbro (Mega**, Trick Room; replaces Musharna), Espeon, Gothitelle *(−C)* (Hard: Shadow Tag), Reuniclus, Hatterene "Hush" | — | Hush's Psychic Noise ×3 → Inverse; Calm Mind ×2 calms a Nightmare |
+| 13 | Bastian, Crystal Cavern, 63 | Carbink, Alolan Golem *(−C)*, Aurorus, **Aerodactyl "Amber" (Mega**, replaces Dusk Lycanroc), Rhyperior, Gigalith "Geode" (Sturdy, no Sand Stream) | Geode: Magical Seed (Hard: Weakness Policy + Meteor Beam) | Golem's Explosion or 3 quakes → Cave; light moves relight a Dark Crystal |
+| 14 | Ysolde, Hollow Cathedral, 67 | Sableye (**Std/Casual Mega**), Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
+| 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Mega**, every mode) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
+| 16 | Nyx, New Moon, 75, **double** | Grimmsnarl, Weavile, **Absol "Omen" (Mega**, replaces Malamar), Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow *(−C)* | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
+| 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, **Mawile (Mega**, replaces Mimikyu), Azumarill *(−C)*, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
+| 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Mega**, every mode) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
 
 ## 4b. Route and gym trainers (stock trainer types)
 
@@ -201,37 +201,58 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   only, 90. Cameo visitors may run ahead of the level-up curve (the validator doesn't warn for `FESTIVAL_*`).
   Festival cameo versions 0/1/2/3/9 are gone.
 
-## 6b. Mega Evolution (SPINE Rev 20) — assignments for the trainer designer
+## 6b. Mega Evolution (SPINE Revs 20–21) — trainer Megas (done in `gen.py`)
 
 Design and reasons: `design/MEGA_EVOLUTION.md` §6. Engine rules (plugin `Prismfall Mega`): **one Mega per side per
 battle** (one Z-move per side as well; a side may use one of each). The AI Megas the first turn its Mega holder can act.
-An NPC Megas only if its trainer's `Items` include `MEGARING`. A Pokémon with a Z-crystal can't Mega. **No trainer Megas
-before the Ring-Day (7 badges).** Replace the old "Hard-only Megas" rule with this table:
+An NPC Megas only if its trainer's `Items` include `MEGARING`. A Pokémon with a Z-crystal can't Mega.
 
-| Trainer / versions | Mega (stone) | Std | Hard | Casual | Notes |
-|---|---|---|---|---|---|
-| `LEADER_BRANN` 0 (Gym 7, Volcanic, 39) | Camerupt "Kiln" (`CAMERUPTITE`) | yes | yes | no (Camerupt is *(−C)*) | slot 5, before Anvil; move the Elemental Seed to Torkoal. **Engine run:** a Lv 56 Mega Camerupt on Volcanic beat a Lv 60 Mega Charizard X and a Snorlax. Its Mega primes an eruption (+1 Sp. Atk), Earth Power primes more, and the snowball is real. Keep one primer (Earth Power *or* Lava Plume) and add Yawn or Will-O-Wisp; Sheer Force removes Lava Plume's burn. 4× Water is the answer, and Surf ×2 quenches the field. |
-| `RIVAL_KESTREL` K8 (SF, 94) and K9, **only with Morwen's Ring** | Scizor (`SCIZORITE`) | yes | yes | yes | **No Mega at K4–K7** (story editor, 2026-11-20). His mother's ring is the Key Item Morwen's Ring: Edda holds it until Ch15 and it reaches Kestrel only through the PC (`:ch18_kestrel_ring`). Add `MEGARING` to his K8/K9 Items only when `choice(:ch18_kestrel_ring) == :give_now`: a ring variant, or a Core hook that adds the item at battle start. Giving the ring makes him safe from falling and makes the SF harder. |
-| `LEADER_KAITO` 0 (Gym 8, Colosseum, 43) | Lucario "Memory" (`LUCARIONITE`) | yes (was Scope Lens) | yes | no | the crowd counts its Mega toward the Frenzy |
-| `RIVAL_JUNO` J4 (90) and J7 (Ch21 partner) | starter: the Gen 1 line holds its stone (slot 0 `BLASTOISINITE`, 1 `VENUSAURITE`, 2 `CHARIZARDITEX`) | yes | yes | yes | Core remaps it to the swapped starter's stone, or Life Orb. **J3 (Gym 9): no Mega** (the ring won't answer her yet). |
-| `LEADER_ANJA` 0 (Gym 10, Frozen Lake, 51) | Glalie (`GLALITITE`) in Beartic's slot | no | **yes** | no | on the Frozen Lake its Mega seals every crack once |
-| `LEADER_ODESSA` 0 (Gym 11, double, 55) | Pidgeot "Post" (`PIDGEOTITE`) in Swanna's slot | yes | yes | no | No Guard Hurricane on Stormfront |
-| `LEADER_ILSA` 0 (Gym 12, 59) | Alakazam (`ALAKAZITE`) in Musharna's slot | yes | yes | no | Hard still has the Hatterene 2-bar boss: one Mega per side doesn't limit that |
-| `LEADER_BASTIAN` (Gym 13) | none | | | | Sand Stream (Mega Tyranitar) would darken his own Crystal Cavern |
-| `LEADER_YSOLDE` 0 (Gym 14, 67) | Std: Sableye (`SABLENITE`, lead); Hard: Gengar (`GENGARITE`, as now) | Sableye | Gengar | no | either Ghost Mega re-haunts a consecrated nave |
-| `LEADER_MAGNUS` 0 (Gym 15, 71) | Metagross "Engine" (`METAGROSSITE`) | yes (was Hard only) | yes | yes | the Factory gives a Steel Mega +1 Def |
-| `LEADER_NYX` 0 (Gym 16, double, 75) | Absol (`ABSOLITE`) in Malamar's slot | yes | yes | no | Magic Bounce for the Illusion team |
-| `LEADER_CELESTINE` 0 (Gym 17, double, 80) | Mawile (`MAWILITE`) in Mimikyu's slot | yes | yes | no | the wolf in the storybook |
-| `LEADER_SIGRUN` 0 (Gym 18, 85) | Salamence "Dreamwing" (`SALAMENCITE`) | yes (was Hard only) | yes | yes | Dreamwing loses the Amulet Coin: give the status-proofing to another slot |
-| `CHAMPION_VALEN` 0 / 1 | Gallade (`GALLADITE`) | yes (was Hard only) | yes | yes | |
-| `LEADER_MARISOL` 90 (Festival) | Gyarados "Lucky" (`GYARADOSITE`) | yes (was Hard only) | yes | yes | |
-| Festival v92 draws (Kaito, Ysolde, Sigrun, Odessa, Celestine), `LEADER_BRANN` 96 | their gym Mega | yes | yes | yes | |
-| Cameos (Garret 46 …) | unchanged | | | | all after the Ring-Day |
-| Voss, Quent, the Mourner, the Octave singers | none | | | | MEGA_EVOLUTION.md §6 |
+**SPINE Rev 21 (user):** the player's Mega Ring comes after Badge 13. **From an ace of about Lv 50 (Gym 10 on) every
+important story fight has one Mega on every difficulty, if the story gives that fighter a ring** (Wardens, Valen,
+Meridian's own tech, Juno; "keep it in theme/story", no one-off rings: the Mega-less list is MEGA_EVOLUTION.md §6.3) below that only a **weak** Mega (MEGA_EVOLUTION §6.1: Camerupt,
+Glalie, Abomasnow, Banette, Audino, Steelix, Pidgeot, Beedrill, Sableye, Ampharos, Manectric, Houndoom, Absol, Sharpedo),
+only where the design calls for it, on Standard and Hard. No theme exceptions; the Eevee Octave keeps Z.
+This replaces the Rev 20 "Hard-only Megas" rule and the Rev 20 table.
 
-`tools/trainer_gen/gen.py`'s `MEGA_STONES` set needs `CAMERUPTITE`, `SCIZORITE`, `ALAKAZITE`, `PIDGEOTITE`, `GLALITITE`,
-`ABSOLITE`, `MAWILITE` and the starter stones. Its `mega_std` flag already handles "Megas on Standard too" (it adds
-`MEGARING` to the Items). Optional: an EBDX `megaOpp` battle-speech line per Mega Warden.
+**In `tools/trainer_gen/gen.py`:** `P(..., mega="STONE")` marks a team's Mega holder. The trainer Megas on every mode
+when its cap is `MEGA_FROM` (50) or more; below that only with `mega_low=True` and a `WEAK_MEGA` stone, on Standard and
+Hard. `mega_set` / `mega_hard` / `mega_casual` replace fields while it holds the stone; `mega_modes=(...)` overrides the
+modes (Ysolde and Morwen's Echo: Sableye / Banette on Standard and Casual, Gengar on Hard, because Shadow Tag is
+Hard-only). `render()` adds `MEGARING`, keeps the stone on Casual, and asserts at most one stone per team. `promote()`
+carries the key, so Festival and Ruin copies Mega as their Wardens do. `tools/harness/run_mega.rb` checks the generated
+`pbs/trainers.txt`: 39 Standard / 39 Hard / 39 Casual entries at ace 50+ with one Mega each, one below (Brann), the
+story's ring-less fighters without one, no stone beside a Z-crystal, partners and the second trainer of a pair without one.
+
+| Fight (cap) | Mega | Team change |
+|---|---|---|
+| Brann, Gym 7 (39) | Camerupt, **weak**, Std + Hard | **kept as designed, per the user**: his set as committed, only the stone added (`mega="CAMERUPTITE", mega_low=True`); the Volcanic showpiece primes the eruption for its Mega, Sp. Atk snowball and all. No nerf. |
+| Kaito, Gym 8 (43) | none | Hard Lucario: Life Orb (Mega Lucario isn't weak); his Festival v92 Megas it |
+| Anja, Gym 10 (51) | Glalie | replaces Beartic; Cloyster is the Casual cut |
+| Marchetti Ch12 (55) / Ch14 (63) / Ch16 tag (71) / Ch21 (97) | Manectric / Houndoom / Houndoom / Manectric | Ch16: Houndoom replaces Arcanine; Ch21: Manectric replaces Arcanine; Casual cuts Mabosstiff (Ch12), Arcanine (Ch14) |
+| Kestrel K5–K7, K9 / K8 | none (no ring of his own) / Scizor only with Morwen's Ring (Ch18) | from K7 Mismagius replaces Krookodile (Staraptor is the Casual cut), so the Scizor stays; K9's Genesect replaces Staraptor; K8's ring and stone come from `PrismfallMega::MORWEN_RING` at battle start |
+| Odessa, Gym 11 (55) | Pidgeot "Post" | replaces Swanna; Oricorio is the Casual cut |
+| Kroll Ch13 (59) / Ch17 (75) / Ch21 (97) | Sharpedo | replaces Skuntank / Skuntank / Crawdaunt; Ch13 Casual cuts Toxicroak |
+| Ilsa, Gym 12 (59) | Slowbro (Trick Room) | replaces Musharna; Gothitelle is the Casual cut |
+| Bastian, Gym 13 (63) | Aerodactyl "Amber" | replaces Lycanroc |
+| Ysolde, Gym 14 (67) | Std/Casual Sableye, Hard Gengar | |
+| Magnus, Gym 15 (71) | Metagross "Engine" | was Hard only |
+| Quent Ch17 alt. (75), hijack (100), Ch21 (97) | Metagross | Ch16 Quent: none (Marchetti's) |
+| Nyx, Gym 16 (75) | Absol "Omen" | replaces Malamar; Honchkrow is the Casual cut |
+| Celestine, Gym 17 (80) | Mawile | replaces Mimikyu; Azumarill is the Casual cut |
+| Sigrun, Gym 18 (85) | Salamence "Dreamwing" | was Hard only |
+| Juno J4 (90) | Gardevoir "Veil" | replaces Comfey (not the starter: Core swaps it, and most lines have no Mega); J7 (partner): none |
+| Festival draws | Marisol Gyarados, Anja Glalie, Sigrun, Odessa, Celestine, Kaito Lucario, Ysolde, Brann v96 Camerupt, Dorian Lopunny (replaces Ambipom; Rook none) | Rowan, Imre Dask: none (no ring; Imre's Rev 20 Hard Mega Sableye removed) |
+| Valen (96) | Gallade | was Hard only |
+| Voss (100) | Ampharos "Lumen" | replaces Klinklang |
+| Directorate Captain (97) | Scizor | |
+| Cameo Garret | v1 (46): none now; v2 (100): Lucario on every mode | `cameos.py` |
+
+**Mega-less for story reasons** (no ring by then): the Mourner and Rowan, Kestrel before Morwen's Ring, Imre Dask,
+Morwen's Echo, Theodric, the war officers (MEGA_EVOLUTION.md §6.3).
+
+**Win rates** (prepared team at the cap, no Mega on the player's side; `run_winrates.rb` cells G7, G10, M12, K5, G11
+with `PRISM_PREPARED=1`, 60 fights a cell; `PRISM_FOE_NOMEGA=1` is the same fight with the foe's ring taken away):
+MEGA_EVOLUTION.md §8.
 
 ## 7. True finale — Arceus boss spec (for Core / Field Effects / EBDX Bridge)
 

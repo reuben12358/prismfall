@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Mega Evolution - headless integration test (SPINE Revision 20)
+# Prismfall Mega Evolution - headless integration test (SPINE Revisions 20 and 21)
 #   PRISM_RUN_DIR=<private run copy> PRISM_COMPILE=1 ruby tools/harness/run_mega.rb
 # The run copy needs the Prismfall Core, Field Effects, Z-Power, Bosses, Trials and Mega plugins (symlinks to the
 # kit's plugins/ folder) and the kit's pbs/ files copied in with the package.sh names (town_map.txt left out).
@@ -8,14 +8,18 @@
 #      as unplaced), the Ring-Day gate, every stone against the Warden answers (rule R4 with the Ring), the quests and
 #      rank rewards that hand stones out, the map events (design/TRIAL_EVENTS.yaml) that place the rest
 #   2. a Mega in a field battle (the player's side, AI-controlled): Camerupt on Volcanic primes an eruption
-#   3. the AI Mega Evolving: Kaito (Hard, v100) and his Lucario on the Colosseum (the crowd roars)
+#   3. the AI Mega Evolving: Anja's gym battle (Gym 10, Standard) on the Frozen Lake; Brann's weak Mega Camerupt
+#      (Gym 7, Standard, kept as designed) Megas and primes the volcano; pbs/trainers.txt against the Rev 21 rules (every
+#      important fight from ace 50 has one Mega in every mode, below 50 only designed weak ones); Kestrel's K8 with
+#      Morwen's Ring (the ring and Mega Scizor at battle start)
 #   4. a Mega and a Z-move in the same battle: one trainer's double (Mega Lucario + Hydro Vortex), the player's
 #      side on Water Surface (ring + Z-Power Ring), and two trainers on one side
 #   5. one Mega and one Z per SIDE: two foe trainers with a Mega Stone each / a Z-crystal each, side vs trainer limit
 #   6. rules: no ring -> no Mega; wild Pokemon never Mega Evolve; a Z-crystal blocks Rayquaza's Mega
 #   7. field showpieces (Grand Stage, Volcanic, Colosseum, Frozen Lake, Crystal Cavern, Hollow Cathedral, Factory,
 #      Bleed) and the Mega's new ability on entry rules (Inverse: Magic Bounce; Colosseum: No Guard); Field Notes
-#   8. the quests: the teaser before the Ring, the Ring-Day, a boss stone (the Old Pincer), the brazier writ
+#   8. the quests: the teaser before the Ring, the Ring-Day (Bastian, 13 badges), Brann's spare and the Light Stone,
+#      a boss stone (the Old Pincer), the brazier writ
 # Writes docs/mega_test/REPORT.md and transcript.txt. Exit 1 on any failure.
 #===============================================================================
 require "fileutils"
@@ -165,7 +169,9 @@ check("every stone is placed (#{pm::STONES.length}) or listed as unplaced (#{pm:
       "missing #{(stones - covered).inspect}, unknown #{(covered - stones).inspect}")
 bad_rows = pm::STONES.reject { |_s, d| d[:badges].is_a?(Integer) && MAPS[d[:map]] && [:hidden, :item, :quest, :rank, :boss, :puzzle, :story].include?(d[:how]) }
 check("every STONES row has a badge gate, a known map and a known method", bad_rows.empty?, bad_rows.keys.inspect)
-check("the Ring-Day is mid-Act II (Cindervault, after Gym 7)", pm::RING_BADGES == 7 && pm::STONES[:AGGRONITE][:map] == 244)
+check("the Ring comes after Badge 13, like Reborn (13 at the earliest) and Rejuvenation (about 14): Cragholm, Bastian",
+      pm::RING_BADGES == 13 && pm::STONES[:AGGRONITE][:map] == 363 && pm::STONES[:AGGRONITE][:source] == :OS_RING_DAY &&
+      tr.get(:OS_RING_DAY) && tr.get(:OS_RING_DAY)[:unlock].include?("badges >= 13"))
 
 # Warden answers: warden_gates.json where the trainer designer has set them (R9), else the type chart (super-effective
 # attacking types, plus types immune to the Warden's type).
@@ -204,8 +210,10 @@ end
 check("R4 with the Ring: no stone powers up an answer to the next #{horizon} Wardens when it becomes usable",
       gate_errors.empty?, gate_errors.first(4).join("; "))
 teasers = pm::STONES.select { |_s, d| d[:badges] < pm::RING_BADGES }.keys
-check("stones before the Ring-Day are teasers only (#{teasers.length}): #{teasers.map { |s| GameData::Item.get(s).name }.join(', ')}",
-      teasers.length.between?(3, 6))
+# Reborn hands out 4-5 stones before its ring and Rejuvenation about 6; ours were placed for a ring at 7 badges and the
+# safe ones stay as "hum and wait" collectibles (SPINE Rev 21), so the band is wider.
+check("stones before the Ring 'hum and wait' (#{teasers.length}): #{teasers.map { |s| GameData::Item.get(s).name }.join(', ')}",
+      teasers.length.between?(6, 14))
 s_tier = [:KANGASKHANITE, :MAWILITE, :MEDICHAMITE, :METAGROSSITE, :SALAMENCITE, :GENGARITE, :LOPUNNITE, :GARDEVOIRITE,
           :LUCARIONITE, :TYRANITARITE, :GARCHOMPITE, :ALAKAZITE, :GYARADOSITE, :SCIZORITE, :BLAZIKENITE, :CHARIZARDITEX, :CHARIZARDITEY]
 early_s = s_tier.select { |s| pm::STONES[s][:badges] < 10 }
@@ -252,7 +260,7 @@ pm::STONES.select { |_s, d| d[:how] == :rank }.each do |s, d|
   need = tr::RANK_POINTS[(rank || 99) - 1] || 999
   rank_late << "#{s}: #{d[:source]} rank #{rank} needs #{need} points, #{have} available before the Ring" if have < need
 end
-check("rank-reward stones are reachable before the Ring-Day (so the R4 check holds for them)", rank_late.empty?, rank_late.join("; "))
+check("rank-reward stones are reachable before the Ring (so the R4 check holds for them)", rank_late.empty?, rank_late.join("; "))
 
 spec = YAML.safe_load(File.read(File.expand_path("../../design/TRIAL_EVENTS.yaml", HARNESS_DIR)))
 placed = {}
@@ -308,7 +316,7 @@ check("the Mega happens before any move that turn", i_mega && i_move && i_mega <
 check("only one Mega in the whole battle (#{log.turns} turns)", MEGAS[n0..].count { |x| x[:side] == 0 } == 1)
 
 #-------------------------------------------------------------------------------
-section("3. The AI Mega Evolving: Kaito's gym battle on Hard (v100) on the Colosseum")
+section("3. The AI Mega Evolving: Anja (Gym 10) and Brann's weak Mega (Gym 7); trainers.txt and the Rev 21 rules")
 #-------------------------------------------------------------------------------
 strong = lambda do
   [mk(:TOGEKISS, 80, [:AIRSLASH, :DAZZLINGGLEAM, :FLAMETHROWER, :ROOST], :LEFTOVERS),
@@ -317,22 +325,89 @@ strong = lambda do
 end
 $player.party = strong.call
 n0 = MEGAS.length
-diff0 = Prismfall::Difficulty.current
-Prismfall::Difficulty.set(:HARD)
-log = run("AI: Kaito's gym battle on Hard (v100) through Prismfall.gym_battle(8)", :seed => 11) do
-  Prismfall.gym_battle(8, can_lose: true)
+log = run("AI: Anja's gym battle (Standard, v0) through Prismfall.gym_battle(10)", :seed => 11) do
+  Prismfall.gym_battle(10, can_lose: true)
 end
-Prismfall::Difficulty.set(diff0)
 k = MEGAS[n0..].find { |x| x[:side] == 1 } || {}
-check("Kaito's Lucario Mega Evolved (AI, trainer holds MEGARING in its items)", k[:species] == :LUCARIO && k[:form] == 1, k.inspect[0, 100])
-roared = log.include?(/The crowd roars at the opposing .*'s Mega Evolution/)
-check("on the Colosseum (the gym's field): the crowd roars for it, unless it is already in a Frenzy",
-      k[:field] == :COLOSSEUM && (roared ? k[:kos].to_i >= 1 : k[:stage] == FieldEffects.max_stage(:COLOSSEUM)),
-      "#{k[:field]} stage #{k[:stage]}, kos #{k[:kos].inspect}, roared #{roared}")
-lucario_out = log.lines.index { |l| l =~ />> sent out \(foe\): .*@LUCARIONITE/ }
-lucario_mega = log.lines.index { |l| l =~ /has Mega Evolved into Mega Lucario/ }
-turn_between = lucario_out && lucario_mega ? log.lines[lucario_out..lucario_mega].count { |l| l.start_with?("--- Turn") } : 99
-check("the AI Mega Evolves the first turn its Lucario can act", turn_between <= 1, "#{turn_between} turn headers in between")
+check("Anja's Glalie Mega Evolved on Standard (AI, MEGARING in her items)", k[:species] == :GLALIE && k[:form] == 1 && k[:field] == :FROZEN_LAKE,
+      k.inspect[0, 100])
+g_out = log.lines.index { |l| l =~ />> sent out \(foe\): .*@GLALITITE/ }
+g_mega = log.lines.index { |l| l =~ /has Mega Evolved into Mega Glalie/ }
+turn_between = g_out && g_mega ? log.lines[g_out..g_mega].count { |l| l.start_with?("--- Turn") } : 99
+check("the AI Mega Evolves the first turn its Glalie can act", turn_between <= 1, "#{turn_between} turn headers in between")
+
+# Brann's own Standard Camerupt (pbs/trainers.txt, v0), alone, on his Volcanic field, against a wall that lasts.
+brann = pbLoadTrainer(:LEADER_BRANN, "Brann", 0)
+brann.party.select! { |p| p.species == :CAMERUPT }
+$player.party = [mk(:BLISSEY, 39, [:SOFTBOILED, :SEISMICTOSS], :LEFTOVERS)]
+n0 = MEGAS.length
+log = run("AI: Brann's Standard Camerupt (v0) alone on Volcanic: a weak Mega below Lv 50", :seed => 3) do
+  setBattleRule("canLose"); setBattleRule("field", :VOLCANIC)
+  TrainerBattle.start(brann)
+end
+k = MEGAS[n0..].find { |x| x[:side] == 1 } || {}
+check("Brann's Camerupt Mega Evolves on Standard at Gym 7 (a designed weak Mega below Lv 50)", k[:species] == :CAMERUPT && k[:form] == 1,
+      k.inspect[0, 100])
+check("...on Volcanic, and its Mega primes the eruption as designed (Brann's fight is kept as is, per the user)",
+      k[:field] == :VOLCANIC && log.include?(/Mega Evolution stirred the magma/))
+
+# pbs/trainers.txt: every important fight from an ace of MEGA_FULL_LEVEL holds exactly one Mega Stone and the ring in
+# every mode, unless the story gives the fighter no ring (MEGA_EVOLUTION.md 6.3; the user: story and theme win over the
+# rule); below it only the designed weak Mega (Brann) on Standard and Hard; nobody holds a stone and a Z-crystal.
+# Partners on the player's side and one trainer of a pair that shares a side are exceptions too.
+important = /\A(LEADER_|RIVAL_|CHAMPION_|MERIDIAN_|HOLLOW_MOURNER|ECHO_MORWEN|GILDED_THEODRIC|ARCHSEER_DASK|ASHKAAR_OFFICER|ISENMAR_OFFICER)/
+no_mega_ok = { [:LEADER_SIGRUN, 19] => "war partner (the player's side)", [:LEADER_MARISOL, 19] => "war partner",
+               [:RIVAL_JUNO, 70] => "Ch21 partner", [:RIVAL_JUNO, 71] => "Ch21 partner", [:RIVAL_JUNO, 72] => "Ch21 partner",
+               [:MERIDIAN_QUENT, 1] => "shares a side with Marchetti v2 (Mega Houndoom)",
+               [:LEADER_ROOK, 90] => "shares a side with Dorian v90 (Mega Lopunny)" }
+# No ring in the story (MEGA_EVOLUTION.md 6.3). Kestrel's K8 gets one at battle start only with Morwen's Ring.
+no_ring = [:RIVAL_KESTREL, :LEADER_ROWAN, :ARCHSEER_DASK, :ECHO_MORWEN, :GILDED_THEODRIC, :ASHKAAR_OFFICER, :ISENMAR_OFFICER]
+weak_ok = { :LEADER_BRANN => [0] }
+rule_errors = []
+counted = Hash.new(0)
+GameData::Trainer.each do |t|
+  next if t.trainer_type.to_s !~ important || t.trainer_type.to_s =~ /[a-z]/   # Prismfall's types only (not the base kit's)
+  base = t.version % 100
+  mode = t.version / 100
+  ace = t.pokemon.map { |p| p[:level] }.max || 0
+  ace_std = (GameData::Trainer.try_get(t.trainer_type, t.real_name, base) || t).pokemon.map { |p| p[:level] }.max || ace
+  st = t.pokemon.select { |p| p[:item] && GameData::Item.get(p[:item]).is_mega_stone? }
+  zc = t.pokemon.select { |p| p[:item] && PrismfallZ.crystal?(p[:item]) }
+  ring = t.items.include?(:MEGARING)
+  key = "#{t.trainer_type},#{t.real_name},#{t.version}"
+  rule_errors << "#{key}: #{st.length} stones" if st.length > 1
+  rule_errors << "#{key}: a stone and a Z-crystal" if !st.empty? && !zc.empty?
+  rule_errors << "#{key}: a stone without MEGARING" if !st.empty? && !ring
+  if ace_std >= pm::MEGA_FULL_LEVEL
+    next if no_mega_ok[[t.trainer_type, base]]
+    if no_ring.include?(t.trainer_type)
+      rule_errors << "#{key}: has a Mega, but the story gives them no ring" if !st.empty?
+      next
+    end
+    if st.empty? then rule_errors << "#{key}: ace #{ace_std}, no Mega"
+    else counted[mode] += 1
+    end
+  elsif !st.empty?
+    weak = st.all? { |p| pm::WEAK_STONES.include?(p[:item]) }
+    designed = (weak_ok[t.trainer_type] || []).include?(base) && mode != 2
+    rule_errors << "#{key}: ace #{ace_std}, #{st.map { |p| p[:item] }.join(',')} below Lv #{pm::MEGA_FULL_LEVEL}" if !(weak && designed)
+  end
+end
+check("trainers.txt: every important fight from ace #{pm::MEGA_FULL_LEVEL} Megas in all modes (#{counted[0]} Std / #{counted[1]} Hard / " \
+      "#{counted[2]} Casual); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it", rule_errors.empty?,
+      rule_errors.first(5).join("; "))
+
+# Kestrel's K8: no ring of his own; with Morwen's Ring (Ch18) the ring and the Scizorite at battle start.
+k8 = pbLoadTrainer(:RIVAL_KESTREL, "Kestrel", 80)
+EventHandlers.trigger(:on_trainer_load, k8)
+plain = k8 && !k8.items.include?(:MEGARING) && k8.party.none? { |p| GameData::Item.get(p.item_id).is_mega_stone? rescue false }
+check("K8 without Morwen's Ring: no ring, no stone (Kestrel has no ring of his own)", plain)
+Prismfall::Choices.make(:ch18_kestrel_ring, :give_now, false)
+k8c = pbLoadTrainer(:RIVAL_KESTREL, "Kestrel", 80)
+EventHandlers.trigger(:on_trainer_load, k8c)   # what TrainerBattle.start does with every trainer it loads
+sc = k8c && k8c.party.find { |p| p.species == :SCIZOR }
+check("K8 with Morwen's Ring (:ch18_kestrel_ring = :give_now): the ring, and his Scizor holds the Scizorite",
+      k8c && k8c.items.include?(:MEGARING) && sc && sc.item_id == :SCIZORITE && sc.level == 92, sc ? "#{sc.species} Lv#{sc.level} @#{sc.item_id}" : "no Scizor")
 
 #-------------------------------------------------------------------------------
 section("4. A Mega and a Z-move in the same battle")
@@ -486,19 +561,26 @@ check("at 3 badges Hesper gives the Ampharosite, and it hums (no ring yet)", $ba
       TRANSCRIPT[t0..].any? { |l| l.include?("hums faintly") })
 got = pf_mega_stone(:STEELIXITE)
 check("a world stone (pf_mega_stone) is received once; a second call gives nothing", got && $bag.has?(:STEELIXITE) && !pf_mega_stone(:STEELIXITE))
-set_badges(6)
-check("the Ring-Day is locked before Gym 7", tr.state(:AS_RING_DAY) == :locked)
-set_badges(7)
-check("...and at 7 badges until the Caldera Crisis is decided", tr.state(:AS_RING_DAY) == :locked)
-Prismfall::Choices.make(:ch8_caldera, :vent)
-check("after the Caldera Crisis the Ring-Day is available", tr.state(:AS_RING_DAY) == :available && pf_trial_ready?(:BRANN_HEARTHGUILD))
+set_badges(12)
+check("the Ring-Day is locked before Gym 13", tr.state(:OS_RING_DAY) == :locked)
+set_badges(13)
+check("after Gym 13 the Ring-Day is available in Bastian's lamp-room", tr.state(:OS_RING_DAY) == :available && pf_trial_ready?(:BASTIAN_LAMPROOM))
+t0 = TRANSCRIPT.length
+pf_trial_talk(:BASTIAN_LAMPROOM)
+check("Bastian gives the Mega Ring and the Aggronite; the quest finishes quietly", $bag.has?(:MEGARING) && $bag.has?(:AGGRONITE) &&
+      tr.done?(:OS_RING_DAY) && TRANSCRIPT[t0..].none? { |l| l.include?("Wall of the Proven") })
+lines = TRANSCRIPT[t0..].join("\n")
+check("the ring sings, Pip hears it, and the earlier stones stop waiting", lines.include?("sings") && lines.include?("SINGING") &&
+      lines.include?("stopped waiting"))
+check("no early reveal: Bastian never says 'reset' or names the Legend Plate", lines !~ /reset|Legend Plate/i)
+check("Brann's spare (Cameruptite) waits for 15 badges", tr.state(:AS_FORGE_REMEMBERS) == :locked)
+set_badges(15)
+Prismfall::Choices.make(:ch8_lightstone, :dominar)
 t0 = TRANSCRIPT.length
 pf_trial_talk(:BRANN_HEARTHGUILD)
-check("Brann gives the Mega Ring and the Aggronite; the quest finishes quietly", $bag.has?(:MEGARING) && $bag.has?(:AGGRONITE) &&
-      tr.done?(:AS_RING_DAY) && TRANSCRIPT[t0..].none? { |l| l.include?("Wall of the Proven") })
-check("the vent-branch line plays (the cold forge) and the ring sings", TRANSCRIPT[t0..].any? { |l| l.include?("candle, not a caldera") } &&
-      TRANSCRIPT[t0..].any? { |l| l.include?("sings") })
-check("Brann's spare (Cameruptite) waits for 10 badges", tr.state(:AS_FORGE_REMEMBERS) == :locked)
+lines = TRANSCRIPT[t0..].join("\n")
+check("at 15 badges Brann knows his ring, gives the Cameruptite, and is hurt about the Light Stone (it went to the Dominar)",
+      $bag.has?(:CAMERUPTITE) && tr.done?(:AS_FORGE_REMEMBERS) && lines.include?("my ring") && lines.include?("Light Stone"))
 set_badges(12)
 $player.party = [mk(:CHARIZARD, 75, [:FLAMETHROWER, :AIRSLASH, :ROOST, :DRAGONPULSE], :CHARIZARDITEY),
                  mk(:TOGEKISS, 75, [:AIRSLASH, :DAZZLINGGLEAM, :ROOST, :FLAMETHROWER], :LEFTOVERS)]

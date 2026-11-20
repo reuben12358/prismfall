@@ -14,6 +14,9 @@
 #   PRISM_MODES=CASUAL,STANDARD,HARD   PRISM_FIGHTS=K1,J1,G1,G2,G3,K2   PRISM_SEEDS=20 (per starter)
 #   PRISM_STARTERS=Fire (only those starters)   PRISM_FORCE=SPECIES (the first catch is that species: "a player who
 #   found it"; a fight's own :force list does the same for every run of that fight)
+#   PRISM_FOE_NOMEGA=1 takes MEGARING from every foe (the same fight without its Mega, for comparison)
+#   G7, G10, M12, K5 and G11 (SPINE Rev 21: the first Mega fights, and K5 without one) have PREPARED pools only: run
+#   them with PRISM_PREPARED=1.
 # Writes WINRATES.md and winrates.json to PRISM_OUT (default docs/battle_captures/winrates).
 #===============================================================================
 require "json"
@@ -150,21 +153,34 @@ module WR
   }
   # TMs the story has handed over by then (TM42 Facade from Dorian, TM98 Rock Smash at Brinecut, TM89 U-turn from Tamsin):
   # each goes to the first party member that can learn it, replacing its weakest move.
-  TMS = { :none => [], :g2 => [:FACADE, :ROCKSMASH], :g3 => [:FACADE, :ROCKSMASH, :UTURN] }
+  TMS = { :none => [], :g2 => [:FACADE, :ROCKSMASH], :g3 => [:FACADE, :ROCKSMASH, :UTURN],
+          :late => [:FACADE, :ROCKSMASH, :UTURN, :SURF] }   # Surf: Volcanic's advertised answer (two quench it)
   # The team is built over the whole journey: later pools include the earlier ones (a species keeps its best weight).
   POOLS[:ch3] = POOLS[:ch1_2].merge(POOLS[:ch3]) { |_k, a, b| [a, b].max }
+  %i[g7 g10 k5 g11 m12].each { |k| POOLS[k] = POOLS[:ch4] }   # (realistic runs of the late cells fall back to Chapter 4: use PREPARED)
   POOLS[:ch4] = POOLS[:ch3].merge(POOLS[:ch4]) { |_k, a, b| [a, b].max }
   # A PREPARED player (PRISM_PREPARED=1): grinds every catch to the cap, keeps its strongest moves and hunts the best
   # type answers the availability doc allows by then (rare finds included), first listed first.
   PREPARED = {
     :ch1_2 => [:NACLI, :DWEBBLE, :SANDYGAST, :ROLYCOLY, :NICKIT, :KECLEON, :SHINX, :FLETCHLING],
+    # SPINE Rev 21, the first Mega fights (POKEMON_AVAILABILITY.md 5, level-up evolution only; no ring: the player Megas
+    # from 13 badges). Gym 7 (6 badges): Water, Ground, Rock for Brann.
+    :g7  => [:WOOPER, :BARBOACH, :HIPPOPOTAS, :TYMPOLE, :BINACLE, :MUDBRAY],
+    # Gym 10 (9 badges): Fire, Fighting, Steel and Electric for Anja.
+    :g10 => [:MAKUHITA, :MIENFOO, :KLINK, :SKARMORY, :MAREEP, :HOUNDOUR],
+    # K5 (10 badges): Fire for Scizor and Aegislash, Electric / Ice for Staraptor, Fighting and Fairy for the Dark types.
+    :k5  => [:HOUNDOUR, :LAPRAS, :MAKUHITA, :SNUBBULL, :MAREEP, :FLETCHLING],
+    # Gym 11 (10 badges): Electric, Rock, Ice for Odessa's fliers.
+    :g11 => [:MAREEP, :ELECTRIKE, :RHYHORN, :LAPRAS, :ROCKRUFF, :BLITZLE],
+    # Ch12 Marchetti (10 badges): Ground, Fighting, Fire for the Directorate's dogs and Corviknight.
+    :m12 => [:HIPPOPOTAS, :MAKUHITA, :RHYHORN, :LAPRAS, :HOUNDOUR, :MIENFOO],
     :ch3   => [:PONYTA, :NACLI, :DWEBBLE, :FLETCHLING, :SPEAROW, :DODUO, :HOOTHOOT, :LITLEO],
     :ch4   => [:EMOLGA, :MAREEP, :SHINX, :JOLTIK, :SKIDDO, :SNOVER, :DEERLING, :HERACROSS]
   }
   PREP = ENV["PRISM_PREPARED"] == "1"
   FORCE = ENV["PRISM_FORCE"]&.split(",")&.map { |x| x.strip.upcase.to_sym }
   BAG = { :none => [], :ch1 => [:POTION] * 2, :g1 => [:POTION] * 3, :g2 => [:POTION, :POTION, :SUPERPOTION, :SUPERPOTION],
-          :g3 => [:SUPERPOTION] * 3 }
+          :g3 => [:SUPERPOTION] * 3, :late => [:HYPERPOTION] * 3 }
   # fight => level cap, badges held, team size (starter included), catch pool, bag, how it starts
   FIGHTS = {
     # Chapter 1, Windfall Row (521, Meadow): Picnicker Ada (Oddish 6, Budew 7), the playtest's wall for the Water starter.
@@ -206,7 +222,21 @@ module WR
     # The earned Electric answer for a Fire starter: the night-only Emolga of the secret Rimewood Glade (5%, Lv 17-19).
     "G3E" => { :label => "Gym 3 Marisol, a team that found the Glade's night Emolga", :cap => 23, :badges => 2, :size => 6,
                :pool => :ch4, :bag => :g3, :tms => :g3, :stage => 1, :force => [:EMOLGA],
-               :start => proc { Prismfall.gym_battle(3, :can_lose => true) } }
+               :start => proc { Prismfall.gym_battle(3, :can_lose => true) } },
+    # SPINE Rev 21: the first Mega fights, prepared teams only (PRISM_PREPARED=1), no Mega on the player's side.
+    "G7" => { :label => "Gym 7 Brann (Volcanic; weak Mega Camerupt)", :cap => 39, :badges => 6, :size => 6, :pool => :g7,
+              :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(7, :can_lose => true) } },
+    "G10" => { :label => "Gym 10 Anja (Frozen Lake; Mega Glalie)", :cap => 51, :badges => 9, :size => 6, :pool => :g10,
+               :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(10, :can_lose => true) } },
+    "K5" => { :label => "K5 Kestrel (Skyreach, Stormfront; no Mega: no ring yet)", :cap => 55, :badges => 10, :size => 6, :pool => :k5,
+              :bag => :late, :tms => :late, :stage => 1,
+              :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 5, :can_lose => true, :field => :STORMFRONT) } },
+    "M12" => { :label => "Ch12 Marchetti (Skyreach catwalks, Stormfront; Mega Manectric)", :cap => 55, :badges => 10, :size => 6,
+               :pool => :m12, :bag => :late, :tms => :late, :stage => 1,
+               :start => proc { setBattleRule("canLose"); setBattleRule("field", :STORMFRONT)
+                                TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene", 0) } },
+    "G11" => { :label => "Gym 11 Odessa (Stormfront, double; Mega Pidgeot)", :cap => 55, :badges => 10, :size => 6, :pool => :g11,
+               :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(11, :can_lose => true) } }
   }
   FILLER = [:GROWL, :LEER, :TAILWHIP, :BABYDOLLEYES, :SANDATTACK, :SMOKESCREEN, :SWEETSCENT, :STRINGSHOT, :SPLASH,
             :HARDEN, :WITHDRAW, :DEFENSECURL, :CHARM, :PLAYNICE, :HELPINGHAND, :FOCUSENERGY, :ODORSLEUTH,
@@ -242,6 +272,75 @@ module WR
     :SUDOWOODO => [:ROCKHEAD, 20, [:ROCKTHROW, :FLAIL, :FAKETEARS, :COPYCAT]],
     :SNOM => [:ICESCALES, 15, [:POWDERSNOW, :STRUGGLEBUG, :MIRRORCOAT, :FAIRYWIND]]
   }
+  # SPINE Rev 21 late cells (G7, G10, K5, G11): a PREPARED late-game player has more than level-up moves. Fixed sets
+  # with the mid-game TMs (Surf, Rock Slide, Bulldoze by Gym 7; Earthquake, Flamethrower, Ice Beam, Thunderbolt and the
+  # like by Gym 10), IV 20-31, EV 85 each (Standard trainers' own default), a fitting nature; the starter (at the cap)
+  # gets its own set; five of the six listed answers, shuffled by seed. No Mega: the player has no ring before 13.
+  # [species, ability, nature, moves]
+  LATE = {
+    :g7 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :BULLDOZE, :SLEEPPOWDER]],
+             "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :DRAGONCLAW, :ROCKSLIDE]],
+             "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :BULLDOZE, :PROTECT]],
+             :team => [[:QUAGSIRE, :WATERABSORB, :RELAXED, [:SURF, :BULLDOZE, :YAWN, :PROTECT]],
+                       [:WHISCASH, :OBLIVIOUS, :ADAMANT, [:WATERFALL, :BULLDOZE, :ROCKSLIDE, :ZENHEADBUTT]],
+                       [:HIPPOWDON, :SANDSTREAM, :IMPISH, [:BULLDOZE, :ROCKSLIDE, :CRUNCH, :SLACKOFF]],
+                       [:SEISMITOAD, :SWIFTSWIM, :MODEST, [:SURF, :BULLDOZE, :SLUDGEBOMB, :FOCUSBLAST]],
+                       [:BARBARACLE, :TOUGHCLAWS, :ADAMANT, [:RAZORSHELL, :ROCKSLIDE, :XSCISSOR, :NIGHTSLASH]],
+                       [:MUDSDALE, :STAMINA, :ADAMANT, [:HIGHHORSEPOWER, :ROCKSLIDE, :HEAVYSLAM, :BODYPRESS]]] },
+    :g10 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :EARTHPOWER, :SLEEPPOWDER]],
+              "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :DRAGONPULSE, :FOCUSBLAST]],
+              "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :DARKPULSE, :FOCUSBLAST]],
+              # Fire, Fighting and Steel that don't drown in Walrein's Water or Mamoswine's Ground; Electric for the
+              # Water-Ice pair (the Rock types are 4x weak to Anja's coverage).
+              :team => [[:HARIYAMA, :THICKFAT, :ADAMANT, [:CLOSECOMBAT, :KNOCKOFF, :BULLETPUNCH, :HEAVYSLAM]],
+                        [:MIENSHAO, :REGENERATOR, :JOLLY, [:CLOSECOMBAT, :STONEEDGE, :KNOCKOFF, :UTURN]],
+                        [:KLINKLANG, :CLEARBODY, :ADAMANT, [:GEARGRIND, :WILDCHARGE, :SHIFTGEAR, :PROTECT]],
+                        [:SKARMORY, :STURDY, :IMPISH, [:BODYPRESS, :IRONHEAD, :BRAVEBIRD, :ROOST]],
+                        [:AMPHAROS, :STATIC, :MODEST, [:THUNDERBOLT, :DISCHARGE, :FOCUSBLAST, :POWERGEM]],
+                        [:HOUNDOOM, :FLASHFIRE, :TIMID, [:FLAMETHROWER, :DARKPULSE, :SLUDGEBOMB, :NASTYPLOT]]] },
+    :k5 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :EARTHPOWER, :SLEEPPOWDER]],
+             "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :DRAGONPULSE, :FOCUSBLAST]],
+             "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :DARKPULSE, :FOCUSBLAST]],
+             # Fire for Scizor and Aegislash, Water / Ice for Krookodile and Zweilous, Electric for Staraptor, Fighting
+             # and Fairy for the Dark types.
+             :team => [[:HOUNDOOM, :FLASHFIRE, :TIMID, [:FLAMETHROWER, :DARKPULSE, :SLUDGEBOMB, :NASTYPLOT]],
+                       [:LAPRAS, :WATERABSORB, :MODEST, [:SURF, :ICEBEAM, :THUNDERBOLT, :FREEZEDRY]],
+                       [:HARIYAMA, :THICKFAT, :ADAMANT, [:CLOSECOMBAT, :KNOCKOFF, :BULLETPUNCH, :STONEEDGE]],
+                       [:GRANBULL, :INTIMIDATE, :ADAMANT, [:PLAYROUGH, :CLOSECOMBAT, :FIREFANG, :THUNDERFANG]],
+                       [:AMPHAROS, :STATIC, :MODEST, [:THUNDERBOLT, :DRAGONPULSE, :FOCUSBLAST, :POWERGEM]],
+                       [:TALONFLAME, :FLAMEBODY, :ADAMANT, [:FLAREBLITZ, :BRAVEBIRD, :UTURN, :ROOST]]] },
+    :m12 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :EARTHPOWER, :SLEEPPOWDER]],
+              "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :DRAGONPULSE, :FOCUSBLAST]],
+              "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :DARKPULSE, :FOCUSBLAST]],
+              # Ground for the Electric dogs and Arcanine, Fighting for Mabosstiff, Fire for Corviknight.
+              :team => [[:HIPPOWDON, :SANDSTREAM, :IMPISH, [:EARTHQUAKE, :STONEEDGE, :CRUNCH, :SLACKOFF]],
+                        [:HARIYAMA, :THICKFAT, :ADAMANT, [:CLOSECOMBAT, :KNOCKOFF, :BULLETPUNCH, :STONEEDGE]],
+                        [:RHYDON, :LIGHTNINGROD, :ADAMANT, [:STONEEDGE, :EARTHQUAKE, :MEGAHORN, :FIREPUNCH]],
+                        [:LAPRAS, :WATERABSORB, :MODEST, [:SURF, :ICEBEAM, :THUNDERBOLT, :FREEZEDRY]],
+                        [:HOUNDOOM, :FLASHFIRE, :TIMID, [:FLAMETHROWER, :DARKPULSE, :SLUDGEBOMB, :NASTYPLOT]],
+                        [:MIENSHAO, :REGENERATOR, :JOLLY, [:CLOSECOMBAT, :STONEEDGE, :KNOCKOFF, :UTURN]]] },
+    :g11 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :EARTHPOWER, :PROTECT]],
+              "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :ROCKSLIDE, :PROTECT]],
+              "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :FLASHCANNON, :PROTECT]],
+              :team => [[:AMPHAROS, :STATIC, :MODEST, [:THUNDERBOLT, :DISCHARGE, :POWERGEM, :PROTECT]],
+                        [:MANECTRIC, :LIGHTNINGROD, :TIMID, [:THUNDERBOLT, :FLAMETHROWER, :SNARL, :PROTECT]],
+                        [:RHYDON, :LIGHTNINGROD, :ADAMANT, [:ROCKSLIDE, :STONEEDGE, :EARTHQUAKE, :PROTECT]],
+                        [:LAPRAS, :WATERABSORB, :MODEST, [:ICEBEAM, :THUNDERBOLT, :SURF, :PROTECT]],
+                        [:LYCANROC, :SANDRUSH, :JOLLY, [:ROCKSLIDE, :STONEEDGE, :CRUNCH, :PROTECT]],
+                        [:ZEBSTRIKA, :LIGHTNINGROD, :TIMID, [:THUNDERBOLT, :DISCHARGE, :OVERHEAT, :PROTECT]]] }
+  }
+  def self.late_mon(entry, level, rng)
+    sp, ab, nat, moves = entry
+    p = Pokemon.new(sp, level)
+    GameData::Stat.each_main { |s| p.iv[s.id] = 20 + rng.rand(12); p.ev[s.id] = 85 }
+    p.ability = ab if p.species_data.abilities.include?(ab) || p.species_data.hidden_abilities.include?(ab)
+    p.nature = nat
+    p.forget_all_moves
+    moves.each { |m| p.learn_move(m) }
+    p.calc_stats
+    p
+  end
+
   EVENT_IN = { :ch1a => [:NICKIT], :ch1_2 => [:KECLEON, :NICKIT], :ch3 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :SMEARGLE, :RALTS, :PONYTA_G],
                :ch4 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :RALTS, :PONYTA_G, :HERACROSS, :PINSIR, :SPIDOPS,
                         :LITLEO, :CHARCADET, :SUDOWOODO, :SNOM] }
@@ -284,6 +383,15 @@ module WR
   def self.party(fight, starter_lines, seed)
     rng = Random.new(seed)
     f = FIGHTS[fight]
+    if PREP && LATE[f[:pool]]
+      late = LATE[f[:pool]]
+      sname = STARTERS.key(starter_lines)
+      party = [late_mon(late[sname], f[:cap], rng)]
+      late[:team].shuffle(random: rng).first(f[:size] - 1).each { |e| party << late_mon(e, f[:cap], rng) }
+      party = party.rotate(rng.rand(party.size))
+      party[0].item = :ORANBERRY
+      return party
+    end
     st = starter_lines[f[:stage]] || starter_lines[0]
     list = [[st, f[:cap]]]
     if PREP
@@ -322,6 +430,9 @@ module WR
 end
 
 Harness.new_game_state
+if ENV["PRISM_FOE_NOMEGA"] == "1"
+  EventHandlers.add(:on_trainer_load, :winrates_foe_nomega, proc { |tr| tr.items.delete(:MEGARING) if tr && tr.respond_to?(:items) })
+end
 RESULTS = []
 ERRORS = []
 MODES.each do |mode|

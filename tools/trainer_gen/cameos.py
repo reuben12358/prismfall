@@ -101,9 +101,11 @@ def CAMEOS(P):
         P("PANGORO", -2, "IRONFIST", "ASSAULTVEST", "ADAMANT", "DRAINPUNCH,KNOCKOFF,ICEPUNCH,BULLETPUNCH", "HA"),
         # Colosseum (v1): Steadfast is +1 crit stage here and the Leek +2, so every hit is a critical hit.
         P("SIRFETCHD", -1, "STEADFAST", "LEEK", "JOLLY", "METEORASSAULT,CLOSECOMBAT,BRAVEBIRD,KNOCKOFF", "A"),
-        P("LUCARIO", 0, "JUSTIFIED", "LUCARIONITE", "JOLLY", "SWORDSDANCE,CLOSECOMBAT,METEORMASH,EXTREMESPEED", "A",
-          casual_item_fallback="LIFEORB"),
-    ], mega_std=True)
+        # SPINE Rev 21: Mega Lucario isn't a weak Mega, so the Act II sidequest fight (v1, ace 46) has none; the post-game
+        # rematch (v2, ace 100) Megas on every difficulty (gen.py MEGA_FROM).
+        P("LUCARIO", 0, "JUSTIFIED", "LIFEORB", "JOLLY", "SWORDSDANCE,CLOSECOMBAT,METEORMASH,EXTREMESPEED", "A",
+          mega="LUCARIONITE"),
+    ])
     c("FESTIVAL_MELIA", "Melia", 92, "You decided. I can see it. ...I'm glad.", [
         P("SNORLAX", -3, "THICKFAT", "LEFTOVERS", "CAREFUL", "BODYSLAM,CURSE,REST,EARTHQUAKE", "SPD"),
         P("LOPUNNY", -2, "LIMBER", "LIFEORB", "JOLLY", "FAKEOUT,HIGHJUMPKICK,RETURN,ICEPUNCH", "A", casual={"item": "SITRUSBERRY"}),

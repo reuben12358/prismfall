@@ -125,13 +125,13 @@ module Prismfall
 
     # Rank-up rewards, given by the hall keeper when a rank is reached (rank 2..5).
     # Values use the same reward keys as quests (see 005_Trials_Quests.rb).
-    # Mega Stones (SPINE Rev 20, design/MEGA_EVOLUTION.md): rank rewards are not badge-gated, so only stones that are
-    # safe whenever they arrive go here (Sharpedonite, Manectite: usable from the Ring-Day, 7 badges); later stones
+    # Mega Stones (SPINE Revs 20-21, design/MEGA_EVOLUTION.md): rank rewards are not badge-gated, so only stones that are
+    # safe whenever they arrive go here (Glalitite, Manectite: usable from the Ring-Day, 13 badges); later stones
     # are rank-gated commissions with a badge unlock (114_Quests_Megas.rb).
     RANK_REWARDS = {
       :ELOWEN  => { 2 => { :items => [[:SOOTHEBELL, 1]] }, 3 => { :items => [[:TM20, 1]] },
                     4 => { :pokemon => :EL_RANK_COMFEY }, 5 => { :items => [[:MAGICALSEED, 3]] } },
-      :ISENMAR => { 2 => { :items => [[:MYSTICWATER, 1]] }, 3 => { :items => [[:TM72, 1], [:SHARPEDONITE, 1]] },
+      :ISENMAR => { 2 => { :items => [[:MYSTICWATER, 1]] }, 3 => { :items => [[:TM72, 1], [:GLALITITE, 1]] },
                     4 => { :items => [[:NEVERMELTICE, 1]] }, 5 => { :pokemon => :IS_RANK_LAPRAS } },
       :ZENITH  => { 2 => { :items => [[:EXPCANDYS, 3]] }, 3 => { :items => [[:CELLBATTERY, 2], [:MANECTITE, 1]] },
                     4 => { :items => [[:SYNTHETICSEED, 3]] }, 5 => { :items => [[:ABILITYPATCH, 1]] } },

@@ -8,10 +8,11 @@
 # quests: their events call pf_mega_stone(:ITEM) (plugins/Prismfall Mega).
 #===============================================================================
 Prismfall::Trials::TALK.merge!({
+  #--- Cragholm, the Lift Galleries (363): Bastian's lamp-room, the Ring-Day (SPINE Revision 21) ----------
+  :BASTIAN_LAMPROOM => { :rows => [[:OS_RING_DAY, "quest_state(:SELF) == :available", :ringday]],
+                         :idle => "Bastian is cleaning a lamp he can't possibly need. He hums, flat, a note behind the tune." },
   #--- Cindervault, the Hearthguild Hall (244): Brann ------------------------------------
-  :BRANN_HEARTHGUILD => { :rows => [
-    [:AS_RING_DAY, "quest_state(:SELF) == :available", :ringday],
-    [:AS_FORGE_REMEMBERS, "quest_state(:SELF) == :available", :spare]],
+  :BRANN_HEARTHGUILD => { :rows => [[:AS_FORGE_REMEMBERS, "quest_state(:SELF) == :available", :spare]],
     :idle => "Brann hums at the anvil, badly, and very loudly." },
   #--- Verdance, the Heartgarden (294): Juno, after J3 --------------------------------------
   :JUNO_BRIDE_TREE => { :rows => [[:EL_BRIDE_TREE_HEART, "quest_state(:SELF) == :available", :heart]],

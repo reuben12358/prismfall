@@ -4,20 +4,20 @@
 # Three Rejuvenation-style wild bosses that guard a Mega Stone. None of them joins
 # (no :joins): they are someone's (Old Cinder), something's guardian (the Old
 # Pincer), or a mother (the Matriarch). Levels: at or just under the cap of the
-# badge count that opens them (11 badges -> cap 59, 12 -> 63, 16 -> 80).
+# badge count that opens them (12 badges -> cap 63, 15 -> 75, 16 -> 80).
 # Wild Pokemon never Mega Evolve (Essentials), so the bosses fight in base form.
 #===============================================================================
 em = Prismfall::EventMons
 
 em.register(:AS_OLD_CINDER, {
-  :species => :CHARIZARD, :level => 58, :ability => :SOLARPOWER, :nature => :MODEST, :ivs => 28, :nickname => "Old Cinder",
+  :species => :CHARIZARD, :level => 72, :ability => :SOLARPOWER, :nature => :MODEST, :ivs => 28, :nickname => "Old Cinder",
   :moves => [:FLAMETHROWER, :AIRSLASH, :DRAGONPULSE, :ROOST],
-  :kind => :boss, :field => :VOLCANIC, :badges => 11,
+  :kind => :boss, :field => :VOLCANIC, :badges => 15,
   :boss => { :bars => { :CASUAL => 1, :STANDARD => 2, :HARD => 3, :default => 2 },
              :stat_mults => { :HP => 1.2, :SPECIAL_DEFENSE => 1.1 },
              :intro => "Old Cinder spreads its scarred wings over the roost. The magma below flares to meet it!",
              :breaks => { 1 => { :message => "{1} remembers the front - and roars like it's still there!", :stats => { :SPECIAL_ATTACK => 1 } } } },
-  :map => 248, :where => "Pyre Keep, the Dragon Roosts (high roost)", :chapter => 13,
+  :map => 248, :where => "Pyre Keep, the Dragon Roosts (high roost)", :chapter => 17,
   :quest => :AS_OLD_CINDER, :trigger => "Climb to the high roost and fight the grieving war-Charizard",
   :why => "Rejuvenation's boss-guarded stones; the reward is its old war-stone (Charizardite X), not the Charizard"
 })

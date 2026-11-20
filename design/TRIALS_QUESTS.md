@@ -13,8 +13,8 @@
 | The Tally (Isenmar) | 12 | 6 |
 | The Prize Exchange (Zenith) | 11 | 5 |
 | The Gutter Book (Nadir) | 13 | 4 |
-| The Trial by Flames (Ashkaar) | 14 | 6 |
-| The Rolls of Unearthing (Ossaria) | 11 | 3 |
+| The Trial by Flames (Ashkaar) | 13 | 5 |
+| The Rolls of Unearthing (Ossaria) | 12 | 4 |
 | The Rite of Reflection (Antumbra) | 10 | 2 |
 | The Hall of Petitions (Crownhaven) | 10 | 2 |
 
@@ -44,9 +44,9 @@
 | **Gerald** `EL_GERALD` | 10 | `badges >= 8 && switch(126)` | the Queen's Keeper of Small Creatures · the Royal Chase (682) | ★★★ · 44 | Queen Maelis's named Scatterbugs have escaped into the Royal Chase. Each one has a personality file. Gerald's is four pages long. **Twist:** Six hide-and-seek finds, each solved by reading its file (Doris likes warm stones, Percival hates the colour blue...). Gerald hides inside the Queen's own crown on its stand in the hunting lodge. Reward: Gerald, a Fancy-pattern Scatterbug. | SHINYSTONE, Scatterbug "Gerald" Lv 40 (COMPOUNDEYES); +3 pts | Elowen Crown favour (flavour); Queen Maelis comedy (15_COMEDY 'The Royal We') | designed |
 | **The Rootward Wake** `EL_ROOTWARD_WAKE` | 10 | `badges >= 8` | a Rootward laundress · the Rootward slums, Verdance (296) | ★★★ · 44 | In Verdance nothing rots, so nothing is ever properly buried. The Rootward wants one funeral done right. **Twist:** Fetch a candle that's allowed to burn out, a flower picked from outside Verdance (it wilts on the way: that's the point) and a song nobody's sung since the Bleed. A Phantump comes to the wake and sits with the mourners. If Rowan's arc has turned (S124), one mourner is a Hollow sympathiser and says so. | CLEANSETAG, TM20; +3 pts | Resonance; Rowan's theme ('everything that grows must be allowed to die') | designed |
 | **What the Bride Tree Hears** `EL_EVER_BLOOM` | 10 | `badges >= 8 && switch(125)` | Juno · the Heartgarden, Verdance (294) | ★★★ · 46 | Juno wants to know whether her Aunt Elin can still hear her. The Quiet Way says the Root carries voices. Juno says she'd like proof. **Twist:** A Mindscape-light puzzle under the Heartgarden: the roots repeat whatever you place against them, late, like an echo. Juno places a seed packet. Nothing. She places her bouquet. The roots hum the counting rhyme. Juno laughs and cries at once. Reward: a white Floette grown from the Bride Tree's blossoms (Juno names it Ever-Bloom). | Floette "Ever-Bloom" Lv 44 (FLOWERVEIL), JUNO+2; +4 pts | Juno bond (+2); Elin / Homecoming foreshadowing | designed |
-| **The Bride Tree's Heart** `EL_BRIDE_TREE_HEART` | 11 | `badges >= 9` | Juno Hale · the Heartgarden, Verdance, under the Bride Tree (after J3) (294) | ★ ·  | Juno is waiting under the Bride Tree. | VENUSAURITE; +0 pts | Sets up J4: the Grass Warden's ring won't answer Juno yet. | wired |
-| **The Doll Who Waited** `EL_DOLL_WHO_WAITED` | 11 | `badges >= 9` | A doll in the attic · Thistledown Manor attic (547) | ★ · 50 | A lantern with a child's scrawl: 'SOMETHING KNOCKS IN THE THISTLEDOWN ATTIC. IT WANTS ITS BUTTONS.' | BANETTITE; +2 pts |  | wired |
+| **The Bride Tree's Heart** `EL_BRIDE_TREE_HEART` | 11 | `badges >= 9` | Juno Hale · the Heartgarden, Verdance, under the Bride Tree (after J3) (294) | ★ ·  | Juno is waiting under the Bride Tree. | VENUSAURITE; +0 pts | Sets up J4: the Grass Warden's ring won't answer Juno yet (it does by the Festival: her Mega Gardevoir). | wired |
 | **The Old Pincer** `EL_OLD_PINCER` | 14 | `badges >= 12` | the Woodward · the Woodward's Hut, Gossamer Wood; the fight is in the Gossamer Heartwood (526) | ★★ · 62 | A lantern from the Woodward: 'THE OLD PINCER HAS TAKEN THE HEARTWOOD SAP. BRING SOMEONE STRONG.' | PINSIRITE; +3 pts |  | wired |
+| **The Doll Who Waited** `EL_DOLL_WHO_WAITED` | 16 | `badges >= 14` | A doll in the attic · Thistledown Manor attic (547) | ★ · 68 | A lantern with a child's scrawl: 'SOMETHING KNOCKS IN THE THISTLEDOWN ATTIC. IT WANTS ITS BUTTONS.' | BANETTITE; +2 pts |  | wired |
 | **Encore** `EL_ENCORE` | 18 | `badges >= 16` | Dorian Pell · the Grand Stage, Pell Playhouse, Saltmere (154) | ★ · 80 | A gilt-edged lantern: 'ONE NIGHT ONLY. THE PLAYHOUSE REQUIRES A STAR. - D.P.' | LOPUNNITE; +2 pts |  | wired |
 | **The Twilight Cloister** `EL_TWILIGHT_CLOISTER` | 18 | `badges >= 16` | the Abbess · the Twilight Cloister, Gloaming (440) | ★★★★★ · 78 | The last trial of the Quiet Way: walk the dusk-chapels from end to end without saying anything at all. **Twist:** Every chapel stages a scene that begs a response (a child asks the way, a Thornguard insults you, a ghost of someone you failed). Each choice list has a silent option, worded differently each time. Speaking costs nothing but resets you to the first chapel. Celestine watches from the eighth and finally speaks to you as herself. | MAGICALSEED x3; +5 pts | Resonance (Harmony +2); unlocks the Quiet Way's Evergreen rank | designed |
 
@@ -79,8 +79,8 @@
 | **The Machine Wants Compliments** `ZE_FIZZBOLT` | 5 | `badges >= 3` | a Fizzbolt vending machine · Lumen City Concourse (180) | ★ · 24 | A Lumen vending machine has gained sentience from the free current and only sells Fizzbolt to people who compliment it. **Twist:** Five compliments across five visits; each needs a fresh one (choice lists rotate). Repeat a compliment and it sulks for a day. On the fifth it dispenses everything at once and a Rotom flies out to thank you, then back in. | CELLBATTERY; +2 pts | none | designed |
 | **Product Recall** `ZE_ROTOM_RECALL` | 5 | `badges >= 3` | the Lumen Arcade floor manager · Lumen Arcade Dept. Store (183) | ★★ · 26 | Five display appliances have walked off the shop floor. They were not supposed to be able to walk. **Twist:** A hide-and-seek in the department store; each appliance (fan, mower, fridge, washer, oven) dashes between counters when you look away. Reward: a voucher the Sluiceworks Rotom can use to change form at the Arcade. | EXPCANDYM x2; +3 pts | Teaches Rotom forms before the Sluiceworks Rotom | designed |
 | **Ten Years of Light** `ZE_LOWLIGHT_LAMPS` | 6 | `switch(114)` | a Lowlight lamp-tender · the Lowlight (Shattered) (608) | ★★ · 28 | After the Shatter, someone has been lighting small lamps at the feet of the glassed people. Nobody admits to it. **Twist:** It's Dex's Pichu, who escaped the Shatter and has been carrying spark-lamps to every glassed figure, starting with his. If you sit by the shrine it comes to you. No battle; it chooses you. It knows Volt Tackle. | Pichu "Spark" Lv 25 (LIGHTNINGROD); +3 pts | Dex shrine (S164); Homecoming foreshadowing | designed |
-| **Return to Sender** `ZE_RETURN_TO_SENDER` | 12 | `badges >= 10` | Postmaster Halloran · Gale Post Hall, Skyreach (325) | ★ · 54 | CALL FOR PROPOSALS #0412: DEAD LETTERS, THREE (3). DELIVER BY HAND. PRIZE: ONE (1) DRAWER, CLEARED. | PIDGEOTITE; +2 pts |  | wired |
 | **Cut Loose** `ZE_COURIER` | 12 | `badges >= 10` | a pilot at the anchor-smithy · Anchorhold (730) | ★★★ · 52 | Deliver a sealed key-ring to an airship before the embargo inspectors board. The key-ring jingles by itself. **Twist:** The key-ring is a Klefki carrying the airship's ignition keys. Give it up and Meridian thanks you; hide it in your bag and the ship cuts loose, and the Klefki, having nobody left to hold keys for, holds yours. | Klefki Lv 50 (PRANKSTER); +4 pts | Meridian standing (handing it to the inspectors) vs the smugglers (WORLD 'Cut Loose') | designed |
+| **Return to Sender** `ZE_RETURN_TO_SENDER` | 16 | `badges >= 14` | Postmaster Halloran · Gale Post Hall, Skyreach (325) | ★ · 68 | CALL FOR PROPOSALS #0412: DEAD LETTERS, THREE (3). DELIVER BY HAND. PRIZE: ONE (1) DRAWER, CLEARED. | PIDGEOTITE; +2 pts |  | wired |
 | **The Laureate's Prize** `ZE_LAUREATE` | 16 | `badges >= 14` | Registrar Odalys Venn · the Prize Exchange, Lumen City (194) | ★★★★★ · 72 | The Exchange's highest prize: enter a machine of your own design in the Cogsworth Invention Bout. Your machine is your team. **Twist:** Rounds: Steel-only, no items, and Factory-to-Scrapyard mid-battle. The Registrar admits the prize was always rigged for Meridian entrants and that you won anyway. | ABILITYPATCH; +5 pts | Magnus / Meridian politics (MAGNUS_KEPT_FAITH flavour) | designed |
 
 ### The Gutter Book — Nadir
@@ -94,12 +94,12 @@
 | **Pit Ringer** `NA_PIT_RINGER` | 9 | `badges >= 7` | the Iron Pit announcer · the Iron Pit, Ironreach (263) | ★★ · 41 | An unlicensed pit in the old mine shafts: six fights, no breaks, and the house brings a brass formation for the last one. **Twist:** Gauntlet on :COLOSSEUM with crowd-mood effects; the last bout is a boss Falinks whose break summons the rest of the troop. Win and the troop's runt follows you out. | Falinks Lv 38 (DEFIANT); +4 pts | Kaito / Ironreach Open foreshadowing; the announcer narrates everything (15_COMEDY) | designed |
 | **Lamplighter Kids** `NA_LAMPLIGHTER_KIDS` | 9 | `badges >= 7` | Pip's friend from the lamp-runners · Ironreach (260) | ★★ · 40 | Three lamp-runner children went into the old sumps after a rumour of treasure. Their lamps are running out. **Twist:** Darkness puzzle: each found child carries a lamp that lights a radius; you choose the route by which shafts their lamps can reach. The 'treasure' is a Sableye's gem hoard, which the Sableye would like back. | EXPCANDYM x3; +3 pts | none | designed |
 | **Two Lucarios** `NA_GARRET` | 9 | `switch(123)` | Six-Fingers Ottoline · Ironreach's lower shafts (263) | ★★★ · 46 | A foreign trainer is asking every pit-fighter in Ironreach the same question about his Lucario. **Twist:** Board pointer for the Garret cameo; his event completes the quest. | BLACKBELT; +3 pts | CAMEOS.md #3 'Two Lucarios' (FESTIVAL_GARRET) | designed |
-| **Bedside Manner** `NA_BEDSIDE_MANNER` | 10 | `badges >= 8` | Wenlow · Corvin Mott's Infirmary, Mirefen (223) | ★ · 44 | CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W. | AUDINITE; +2 pts |  | wired |
 | **The Lift Strike** `NA_LIFT_STRIKE` | 16 | `badges >= 14` | the lift-workers' union · Midstair (830) | ★★★ · 70 | The cable-lift workers have stopped every lift between Zenith and Nadir. The Directorate wants them moving by morning. **Twist:** A vertical map of stalled lift cages; you climb between them. The Directorate officer is a MERIDIAN_DIRECTORATE battle if you side with the union. | $6000; +4 pts | Meridian vs Hollow standing; Mandate (S115) state | designed |
 | **Dogs of the Moon Market** `NA_MOON_MARKET_DOGS` | 17 | `badges >= 15` | Six-Fingers Ottoline · the Moon Market, Underveil (423) | ★ · 74 | CHALK: BARONS' KENNEL. THREE CAGES. NOBODY SAW NOTHING. | HOUNDOOMINITE; +3 pts |  | wired |
 | **Mother Gutter's Ledger** `NA_GUTTER_DEBTS` | 17 | `badges >= 15` | Mother Gutter · the Moon Market, Underveil (423) | ★★★ · 72 | Collect five debts for the oldest sump-baron in Nadir. Or don't collect them. She'll know either way. **Twist:** Each debtor has a reason (a sick Pokemon, a Mandate fine, a lie). You can pay one debt yourself, forgive one, fight one. Mother Gutter rewards whatever you did, as long as you did it on purpose. Her Muk is the size of a cart and attends the meeting. | $8000; +4 pts | Nadir independence arc (S149); Nyx bond flavour | designed |
 | **Sweetrot** `NA_SWEETROT` | 18 | `switch(150)` | a Sweetrot vendor · the Moon Market, Underveil (423) | ★★★★ · 76 | The Sweetrot vendors woke from Pecharunt's spell craving tea. Terrible tea. One cup in particular. **Twist:** The only tea bitter enough is Larch's kelp tea. Bring a cup (mailed from Tidewatch at your request, with a furious note). A Poltchageist climbs into the cup and refuses to leave. | Poltchageist Lv 72 (HOSPITALITY); +4 pts | Running gag 1 (Larch's kelp tea) | designed |
 | **The Memory Kata** `NA_MEMORY_KATA` | 19 | `badges >= 17` | Six-Fingers Ottoline · the Last Rung, Ironreach (260) | ★★ · 82 | CHALK: PAWN SHELF, TOP ROW. A WARDGUARD STONE. THE OWNER WANTS IT GONE TO SOMEONE WHO'LL USE IT. | LUCARIONITE; +4 pts |  | wired |
+| **Bedside Manner** `NA_BEDSIDE_MANNER` | 21 | `badges >= 18` | Wenlow · Corvin Mott's Infirmary, Mirefen (223) | ★ · 86 | CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W. | AUDINITE; +2 pts |  | wired |
 
 ### The Trial by Flames — Ashkaar
 
@@ -107,7 +107,6 @@
 |---|---|---|---|---|---|---|---|---|
 | **The Little Crucible** `AS_LITTLE_CRUCIBLE` | 4 | `badges >= 2` | Sergeant Brakka Emberhide · the Legion recruiting barge, Saltmere harbour (146) | ★ · 21 | WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less. | $1200, QUICKCLAW; +3 pts | Ashkaar flavour: honesty is law; signing up (flag :recruited) changes how later Legion NPCs greet you | wired |
 | **Too Loud for the Choir** `AS_OCTAVE_TOO_LOUD` | 8 | `badges >= 6` | Forte of the Octave · the Crucible on the caldera rim, Cindervault (240) | ★ · 38 | Writ of Flame: a Choir singer wants a Writ. The Crucible will hear her if she brings a second. | $2000, HEATROCK; +3 pts | The Octave: Forte (6 of 8 in gym order); Ashkaar honesty (she must say who she is) | wired |
-| **The Ring-Day** `AS_RING_DAY` | 8 | `badges >= 7 && made(:ch8_caldera) && !mega_ring` | Brann Holloway · the Hearthguild Hall, Cindervault (the morning after the Caldera Crisis) (244) | ★ ·  | Brann has something for you at the Hearthguild Hall. | MEGARING, AGGRONITE; +0 pts | Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings. | wired |
 | **Seven Bouts** `AS_SEVEN_BOUTS` | 8 | `badges >= 6` | Legate Varra Kosk · the Crucible, Cindervault (240) | ★ · 38 | The Crucible's entry rite: seven legion fighters, back to back, on the caldera floor. No items. No healing. No complaining. **Twist:** Volcanic field; each bout raises the field's heat stage. Bout 4 is a double. Bout 7 is the Legate's adjutant on a Dragon's Den preview. The Herald introduces you with whatever the Saltmere barge called you. | CHARCOAL, FIRESTONE; +4 pts | Ashkaar recruitment flag from the Saltmere barge is honoured here (skip bout 1) | designed |
 | **The Lava-Tube Terror** `AS_DRUDDIGON` | 8 | `badges >= 6` | a Hearthguild smith · The Cinderhorn (664) | ★★ · 40 | A Druddigon has made the Cinderhorn lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed. **Twist:** Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying. | Druddigon Lv 37 (ROUGHSKIN); +4 pts | Honesty law: report how the fight really went (lying costs the reward) | designed |
 | **Adequate Swords** `AS_ADEQUATE_SWORDS` | 8 | `badges >= 6` | the owner of ADEQUATE SWORDS · Cindervault market (240) | ★ · 38 | A rival shop has opened across the street: EXCELLENT SWORDS. The owner of ADEQUATE SWORDS suspects a lie. Lying is a crime. **Twist:** You test the swords (a battle against the rival smith's Honedge on a 'sharpness' rule). The swords are excellent. ADEQUATE SWORDS loses the case, renames itself ADEQUATE SWORDS (STILL), and is happier. | METALCOAT; +2 pts | 15_COMEDY Ashkaar honest-signs bit | designed |
@@ -115,8 +114,8 @@
 | **Ashes Home** `AS_ASHES` | 8 | `badges >= 6` | the Legion quartermaster · Scaldwater (650) | ★★ · 37 | A Nadir-born legionnaire died at the caldera. His Houndour won't leave his urn. Somebody has to carry both of them home to Scaldwater. **Twist:** No battles unless you take the short road (Legion deserters who want the urn's silver). At the door the mother takes the urn and tells the Houndour to go and keep marching, with someone who will come back. | Houndour Lv 34 (FLASHFIRE); +4 pts | War arc: Ashkaar recruiting Nadir youths (WORLD border E); Harmony | designed |
 | **The Trial of Truth** `AS_TRIAL_OF_TRUTH` | 8 | `badges >= 6 && switch(120)` | Herald Pyke · the Hall of Oaths, Cindervault (247) | ★★★ · 41 | Ashkaar judges a lie by combat. A Hearthguild officer swears the caldera crisis wasn't the Legion's fault. You were there. **Twist:** Whatever you say is a choice with consequences; contradicting the officer starts an ASHKAAR_OFFICER duel on :VOLCANIC under 'oath rules' (if you switch, you concede). Win and the Legion admits fault publicly, which nobody in the hall has seen before. | FLAMEORB; +4 pts | Caldera result (V110) and Brann's bond flavour; Ashkaar war politics (S121) | designed |
 | **The Egg Run** `AS_EGG_RUN` | 9 | `badges >= 7` | the Roost-mistress · the Dragon Roosts, Cindervault (248) | ★★★ · 42 | Carry a warm dragon egg across the Cinderhorn to the far roost. Egg-hunters know the route. The egg must not get cold. **Twist:** A warmth meter (steps since the last vent) instead of a timer; egg-hunter ambushes (trainer battles) at the vents. At the far roost the egg hatches early in your hands. It decides you're its roost. | Axew Lv 1; +4 pts | none; earliest Axew (wild only from Badge 17) | designed |
-| **The Forge Remembers** `AS_FORGE_REMEMBERS` | 12 | `badges >= 10 && quest_done(:AS_RING_DAY); after AS_RING_DAY` | Brann Holloway · the Hearthguild Hall, Cindervault (Act III) (244) | ★ ·  | Brann found something in the slag. | CAMERUPTITE; +0 pts |  | wired |
-| **Old Cinder** `AS_OLD_CINDER` | 13 | `badges >= 11` | Roost-keeper Tarn · Pyre Keep, the Dragon Roosts (248) | ★ · 58 | WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell at the front. Bring it down, honourably. | CHARIZARDITEX; +3 pts |  | wired |
+| **The Forge Remembers** `AS_FORGE_REMEMBERS` | 17 | `badges >= 15 && quest_done(:OS_RING_DAY); after OS_RING_DAY` | Brann Holloway · the Hearthguild Hall, Cindervault (after the Ring) (244) | ★ ·  | Brann found something in the slag. | CAMERUPTITE; +0 pts |  | wired |
+| **Old Cinder** `AS_OLD_CINDER` | 17 | `badges >= 15` | Roost-keeper Tarn · Pyre Keep, the Dragon Roosts (248) | ★ · 72 | WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell at the front. Bring it down, honourably. | CHARIZARDITEX; +3 pts |  | wired |
 | **The Brazier Writ** `AS_BRAZIER_WRIT` | 17 | `badges >= 15` | Legate Varra Kosk · the Crucible, Cindervault (240) | ★★ · 75 | WRIT OF THE BRAZIER: the Crucible keeps one heartstone for one who earns it without being born to a dragon. | SALAMENCITE; +4 pts |  | wired |
 | **Dragonsworn** `AS_DRAGONSWORN` | 19 | `badges >= 17` | Legate Varra Kosk · the Wyrmrest proving ground (460) | ★★★★★ · 83 | The highest brand in Ashkaar. Stand in the Dragon's Den and fight the Legate's own dragon while the legions watch. **Twist:** ASHKAAR_OFFICER Legate team ending in a boss Haxorus. Afterwards you're offered the Dragonsworn oath (to the Dominar). Refusing is also honoured: 'Strength that won't kneel. Good.' | LIFEORB; +5 pts | DOMINAR_SWAYED flavour; Sigrun bond (she watches) | designed |
 
@@ -130,6 +129,7 @@
 | **Tomb Freight** `OS_TOMB_FREIGHT` | 6 | `badges >= 4` | the freight-depot foreman · Copperdune (610) | ★★ · 30 | A locked railway car bound for Lumen is heavier than its manifest. Meridian says machine parts. The tomb-guild says grave goods. **Twist:** Stealth into the depot at night; the car holds an Elector's sarcophagus with an Unown inscription that names the Prismfall. | $3500; +3 pts | Meridian vs Ossarian Electors (WORLD 'Tomb Freight'); Prince-Elector Kassan | designed |
 | **The Mural Gallery's Missing Letter** `OS_UNOWN_MURALS` | 6 | `switch(116)` | Curator-Elect Nasrin Vael · the Mural Gallery, Duneholt (207) | ★★ · 30 | One Unown is missing from the gallery's great inscription, and the sentence is wrong without it. **Twist:** Catch the Unown form the sentence needs (the inscription tells you which by grammar). The corrected sentence reads differently from the one Sahar teaches: 'nineteen fell'. | TM28; +3 pts | Lore (Prismfall, Legend Plate seed) | designed |
 | **Something in the Sinkholes** `OS_SINKFIELD` | 7 | `badges >= 5` | a Sinkwells water-carrier · Sinkfield (628) | ★★ · 31 | Something flat and grinning is dragging water-carriers' Pokemon into the Sinkfield sinkholes. **Twist:** Boss Galarian Stunfisk (trap-jaw) on :DESERT/:BLEED that hides in random sinkholes between turns of a little overworld puzzle; beaten, it gives back the carriers' Pokemon and joins. | Galarian Stunfisk Lv 31 (MIMICRY); +4 pts | Bleed zone; Imprinted variant | designed |
+| **The Ring-Day** `OS_RING_DAY` | 14 | `badges >= 13 && !mega_ring` | Bastian Ore · Bastian's lamp-room, the lowest of the Cragholm Lift Galleries (after Gym 13) (363) | ★ ·  | Bastian wants you in his lamp-room. | MEGARING, AGGRONITE; +0 pts | Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings. | wired |
 | **Amber, Again** `OS_AMBER_AGAIN` | 14 | `badges >= 12` | Sahar Ostrand · Sahar's Dig Lab, Duneholt (209) | ★ · 60 | TABLET: The Old Amber held two things. The Warden kept one. Bring her the other, alive. | AERODACTYLITE; +2 pts |  | wired |
 | **The Unquiet Elector** `OS_UNQUIET_ELECTOR` | 14 | `badges >= 12` | an embalmer of Vigil · Vigil (770) | ★★★ · 62 | A dead Elector keeps walking out of his tomb-mirror to vote. The Veiled Synod says the dead are theirs. Vigil says the dead are Vigil's. **Twist:** A mirror-mystery across the Obsidian Barrows; the Elector never got to cast the vote that would have stopped the Prince-Elector's grandfather. You stage it. He votes, and rests. His Galarian Yamask stays with you. | Galarian Yamask Lv 60 (WANDERINGSPIRIT); +4 pts | Tomb-law vs the Synod (WORLD 'The Unquiet Elector'); Antumbra joint points | designed |
 | **Where the Well Went** `OS_UNDERSANDS` | 14 | `badges >= 12 && switch(137)` | Sahar's foreman · the Duneholt Undersands (783) | ★★★★ · 62 | Duneholt's well is dry. The diggers think the water went down. They want someone to follow it. **Twist:** Strength-boulder escort through collapsing galleries; the crew can fall behind. At the bottom: warm stone breathing like something asleep. | TELLURICSEED x2, EXPCANDYL x2; +4 pts | Groudon arc prelude (S140); V109 DUNEHOLT_WELL | designed |
@@ -1224,7 +1224,7 @@ Juno is waiting under the Bride Tree.
 
 **Quest log steps:** `ask`: Juno is under the Bride Tree.
 
-**Reward:** VENUSAURITE; +0 pts. **Touches:** Sets up J4: the Grass Warden's ring won't answer Juno yet..
+**Reward:** VENUSAURITE; +0 pts. **Touches:** Sets up J4: the Grass Warden's ring won't answer Juno yet (it does by the Festival: her Mega Gardevoir)..
 
 **Scene `heart`** (event: `pf_quest_run(:EL_BRIDE_TREE_HEART, :heart)`)
 
@@ -1233,13 +1233,15 @@ Juno is waiting under the Bride Tree.
 - *She opens her hand: a stone the green of new leaves, with a pink flower caught inside it.*
 - **Juno** _(neutral)_: It grew in the Bride Tree's roots. A Venusaur's heart, the Listening Root says. Aunt Elin's been in bloom for twelve years. I suppose she had to put the extra somewhere.
 - **Juno** _(sad)_: He left me his ring, too. It was in with his testament. The Grass Warden's ring. It won't answer me. I hold it and it's just... his.
-- **Juno** _(happy)_: Yours sings, though. Don't look at me like that, I can hear it from here. So you take the stone. Somebody should.
+- **Juno** _(happy)_: It hummed when you sat down, though. The stone, I mean. Don't look at me like that, I can hear it from here. So you take it. Somebody should.
 - [script]
+- [if `!mega_ring`]
+  - *The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something.*
 - **Juno** _(happy)_: And next time we fight, I'll have the ring talking to me. You'll see. Probably. Hopefully.
 
 #### The Doll Who Waited (`EL_DOLL_WHO_WAITED`)
 
-*Chapter 11 · A doll in the attic, Thistledown Manor attic (map 547) · rank 1 · 2 points · unlock `badges >= 9`*
+*Chapter 16 · A doll in the attic, Thistledown Manor attic (map 547) · rank 1 · 2 points · unlock `badges >= 14`*
 
 A lantern with a child's scrawl: 'SOMETHING KNOCKS IN THE THISTLEDOWN ATTIC. IT WANTS ITS BUTTONS.'
 
@@ -1928,7 +1930,7 @@ CALL FOR PROPOSALS #0031: NOISE COMPLIANCE, LOWLIGHT BLOCK 9. A STREET DRUMMER'S
 
 #### Return to Sender (`ZE_RETURN_TO_SENDER`)
 
-*Chapter 12 · Postmaster Halloran, Gale Post Hall, Skyreach (map 325) · rank 1 · 2 points · unlock `badges >= 10`*
+*Chapter 16 · Postmaster Halloran, Gale Post Hall, Skyreach (map 325) · rank 1 · 2 points · unlock `badges >= 14`*
 
 CALL FOR PROPOSALS #0412: DEAD LETTERS, THREE (3). DELIVER BY HAND. PRIZE: ONE (1) DRAWER, CLEARED.
 
@@ -2034,7 +2036,7 @@ Chalk job: someone keeps putting out the night-ferry lamps on the marsh. The fer
 
 #### Bedside Manner (`NA_BEDSIDE_MANNER`)
 
-*Chapter 10 · Wenlow, Corvin Mott's Infirmary, Mirefen (map 223) · rank 1 · 2 points · unlock `badges >= 8`*
+*Chapter 21 · Wenlow, Corvin Mott's Infirmary, Mirefen (map 223) · rank 1 · 2 points · unlock `badges >= 18`*
 
 CHALK: INFIRMARY NEEDS VISITORS. NOT DOCTORS. JUST VISITORS. - W.
 
@@ -2269,47 +2271,9 @@ Writ of Flame: a Choir singer wants a Writ. The Crucible will hear her if she br
 
 - **Forte** _(happy)_: I'm a Legion recruit AND I'm in the Octave. Vesper cried. Happy crying. I think.
 
-#### The Ring-Day (`AS_RING_DAY`)
-
-*Chapter 8 · Brann Holloway, the Hearthguild Hall, Cindervault (the morning after the Caldera Crisis) (map 244) · rank 1 · 0 points · unlock `badges >= 7 && made(:ch8_caldera) && !mega_ring`*
-
-Brann has something for you at the Hearthguild Hall.
-
-**Quest log steps:** `ask`: Brann is waiting at the Hearthguild's anvil.
-
-**Reward:** MEGARING, AGGRONITE; +0 pts. **Touches:** Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings..
-
-**Scene `ringday`** (event: `pf_quest_run(:AS_RING_DAY, :ringday)`)
-
-- [stage] Morning. Brann is at the guild's great anvil with a folded cloth. Larch sits on a crate by the door with a book she isn't reading.
-- [if `choice(:ch8_caldera) == :vent`]
-  - [stage] The great forge is cold. One small candle-forge burns on the anvil.
-  - **Brann** _(sad)_: Cold for a season, thanks to you lot. Don't make that face, I've had worse winters. A ring wants a candle, not a caldera.
-- [if `choice(:ch8_caldera) == :dampers`]
-  - **Brann** _(happy)_: Hear that? Every forge in the Vault, roaring. You kept 'em lit, and I won't forget it.
-- [if `choice(:ch8_caldera) == :shutdown`]
-  - **Brann** _(happy)_: You shut a Meridian tap with your bare hands. The Dominar hasn't stopped talking about it. Neither have I.
-- **Brann** _(worried)_: About last night. A fool talks too much over chestnuts. Forget the fool. Forget the chestnuts too. They were burnt.
-- **Brann** _(neutral)_: Here's what a sober man says instead. Hold out your hand.
-- *He opens the cloth: a plain gold band, and set in it a chip of stone with no colour at all.*
-- **Brann** _(neutral)_: A Warden's ring. 'Mega Ring', the Accord calls it. The guild's cut one for every seat since the Concordance. This one's the odd one out. I cut it ten years back, and it's sulked on every hand I've tried it on.
-- **Brann** _(neutral)_: The chip's grind off the Crown's own stone. No colour of its own, so it'll take any colour you put to it. That's how it opens a heartstone.
-- **Brann** _(neutral)_: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
-- **Brann** _(deadpan)_: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double. ...Right. Let's see if it sulks on you.
-- *He drops the ring into your palm. The colourless chip catches the forge-light... and sings: one clear note, like a wet finger round the rim of a glass.*
-- *Somewhere under your ribs, something answers it.*
-- **Brann** _(shocked)_: ...
-- **Brann** _(sad)_: They don't sing. Thirty years at this anvil, and not one of them has ever sung.
-- [stage] Larch has lowered her book.
-- **Brann** _(worried)_: ...It's the forge-hum. That's a lie, and lying's a crime in Ashkaar, so you never heard it. Here: an iron heart to start you off.
-- [script]
-- [if `mega_stones > 1`]
-  - *The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.*
-- **Brann** _(happy)_: Aron burrow under the Brinecut cliffs. Raise one into an Aggron and it'll know what to do. Now go and show Kaito what a ferry child does with a Warden's ring.
-
 #### The Forge Remembers (`AS_FORGE_REMEMBERS`)
 
-*Chapter 12 · Brann Holloway, the Hearthguild Hall, Cindervault (Act III) (map 244) · rank 1 · 0 points · unlock `badges >= 10 && quest_done(:AS_RING_DAY)`*
+*Chapter 17 · Brann Holloway, the Hearthguild Hall, Cindervault (after the Ring) (map 244) · rank 1 · 0 points · unlock `badges >= 15 && quest_done(:OS_RING_DAY)`*
 
 Brann found something in the slag.
 
@@ -2320,6 +2284,9 @@ Brann found something in the slag.
 **Scene `spare`** (event: `pf_quest_run(:AS_FORGE_REMEMBERS, :spare)`)
 
 - **Brann** _(happy)_: There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot.
+- **Brann** _(shocked)_: ...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room.
+- [if `choice(:ch8_lightstone) == :dominar`]
+  - **Brann** _(sad)_: I haven't forgotten the Light Stone, mind. Whose it should've gone to. I'm not going to talk about it. A ring doesn't care what its wearer said in a forge one bad night, so I won't either. Not today.
 - **Brann** _(neutral)_: You remember Kiln, my Camerupt? The one that tried to erupt on you.
 - **Brann** _(neutral)_: Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel.
 - **Brann** _(smug)_: I'd give it to a Warden. You'll do better than most Wardens.
@@ -2328,7 +2295,7 @@ Brann found something in the slag.
 
 #### Old Cinder (`AS_OLD_CINDER`)
 
-*Chapter 13 · Roost-keeper Tarn, Pyre Keep, the Dragon Roosts (map 248) · rank 1 · 3 points · unlock `badges >= 11`*
+*Chapter 17 · Roost-keeper Tarn, Pyre Keep, the Dragon Roosts (map 248) · rank 1 · 3 points · unlock `badges >= 15`*
 
 WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell at the front. Bring it down, honourably.
 
@@ -2338,7 +2305,7 @@ WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell
 
 **Scene `offer`** (event: `pf_quest_run(:AS_OLD_CINDER, :offer)`)
 
-- **Roost-keeper Tarn** _(sad)_: Old Cinder's rider died at the Glass Dunes. Since then it won't come down. It won't eat. It burns anyone who climbs.
+- **Roost-keeper Tarn** _(sad)_: Old Cinder's rider died on the Rimed Sands. Since then it won't come down. It won't eat. It burns anyone who climbs.
 - **Roost-keeper Tarn** _(neutral)_: In Ashkaar we don't put a dragon down for grief. We give it a fight worth having. Then it remembers it's alive.
 - **CHOICE:** Climb to the high roost?
   - > I'll fight it.
@@ -2351,7 +2318,7 @@ WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell
 **Scene `fight`** (event: `pf_quest_run(:AS_OLD_CINDER, :fight)`)
 
 - *On the high roost, a scarred black-eyed Charizard lifts its head. A cracked Legion harness still hangs from its neck.*
-- [battle] Charizard "Old Cinder" Lv 58 (SOLARPOWER)
+- [battle] Charizard "Old Cinder" Lv 72 (SOLARPOWER)
   - on won:
     - *Old Cinder folds its wings and lowers its head to you, the way it must once have lowered it to its rider.*
     - *From the harness, Tarn unclips a stone as black as the Pyre Road, with a blue flame caught in it.*
@@ -2450,6 +2417,40 @@ Clay tablet: the old sun temple's light-shaft has filled with sand. Its keeper n
 **Scene `after`** (event: `pf_quest_run(:OS_OCTAVE_NOON_BELL, :after)`)
 
 - **Sona** _(neutral)_: You're going to ask if Noon is happy. Yes. You're going to ask if I am. ...Come back another day and ask that.
+
+#### The Ring-Day (`OS_RING_DAY`)
+
+*Chapter 14 · Bastian Ore, Bastian's lamp-room, the lowest of the Cragholm Lift Galleries (after Gym 13) (map 363) · rank 1 · 0 points · unlock `badges >= 13 && !mega_ring`*
+
+Bastian wants you in his lamp-room.
+
+**Quest log steps:** `ask`: Bastian is waiting in his lamp-room in the deep seams.
+
+**Reward:** MEGARING, AGGRONITE; +0 pts. **Touches:** Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings..
+
+**Scene `ringday`** (event: `pf_quest_run(:OS_RING_DAY, :ringday)`)
+
+- [stage] The lowest gallery of the deep seams. Bastian's lamp-room: a cot, a kettle and forty years of lamps. Pip is perched on a crate; Larch sits by the door with a book she isn't reading.
+- **Bastian** _(happy)_: Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks.
+- **Bastian** _(neutral)_: You'll have been wondering what my old Amber did in there, changing like that. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild cuts one for every seat since the Concordance.
+- **Bastian** _(neutral)_: A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
+- **Bastian** _(neutral)_: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
+- **Bastian** _(deadpan)_: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
+- *He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.*
+- **Bastian** _(neutral)_: Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain.
+- **Bastian** _(deadpan)_: Two old men who don't ask each other things. That's how you get to seventy-four.
+- **Bastian** _(neutral)_: Rock's patient. I reckon this has waited long enough. Hold out your hand.
+- *He drops the ring into your palm. The colourless chip catches the lamplight... and sings: one clear note, like a wet finger round the rim of a glass.*
+- *Somewhere under your ribs, something answers it.*
+- **Pip** _(shocked)_: Grandad. Grandad, it's SINGING.
+- **Bastian** _(neutral)_: Is it? Can't hear a thing. Half-deaf, me.
+- **Bastian** _(sad)_: ...I can feel it in the table, though. Holloway swore they don't sing. Thirty years at his anvil, and not one of them ever sang.
+- [stage] Larch has lowered her book.
+- **Bastian** _(worried)_: Well. It isn't sulking, anyway. Here: an iron heart to start you off. The Aron down the east seam wear these like warts.
+- [script]
+- [if `mega_stones > 1`]
+  - *The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.*
+- **Bastian** _(happy)_: Wear it. If Meridian's linesmen come down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
 
 #### Amber, Again (`OS_AMBER_AGAIN`)
 
