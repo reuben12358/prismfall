@@ -49,15 +49,17 @@ events:
     Step on a tight one and it throws you, three good bounds, the way you stepped on. Step on a sticky one and it keeps you.'
   - 'Gym Guide: The Joltik up there feed on the strands. When one sparks, every web on its strand changes its mind.'
   - 'Gym Guide: And Tamsin fights two at a time. A thread holds because it''s twisted with others.'
+  - 'Gym Guide: Old Mother Loom never once went up there. Said the Bugs had better hands than hers. Tamsin added the safety
+    nets. And the apology cards.'
 - type: npc
-  name: Weaver
+  name: Weaver Tibb
   at:
   - 13
   - 8
   sprite: NPC 05
   dir: left
   commands:
-  - 'Weaver Pim: The looms down here are Granny Loom''s. The webs up there are the Bugs''. Tamsin says that''s the difference
+  - 'Weaver Tibb: The looms down here are Granny Loom''s. The webs up there are the Bugs''. Tamsin says that''s the difference
     between a weaver and a Warden: a weaver makes cloth, a Warden makes room for things to make themselves.'
 - type: event
   name: Apology card
@@ -354,8 +356,8 @@ events:
     - script: 'pfp_cycle(305, 2)
 
         pfp_cycle(306, 2)'
-    - 'The Joltik sparks! The charge runs its whole gold strand, and webs A and B change: the taut one goes slack, the slack
-      one snaps taut.'
+    - 'The Joltik sparks! The charge runs the whole gold strand, and every web hanging on it flips: slack snaps taut, taut
+      sags slack.'
 - type: event
   name: Joltik 2
   at:
@@ -376,8 +378,8 @@ events:
     - script: 'pfp_cycle(306, 2)
 
         pfp_cycle(307, 2)'
-    - 'The Joltik sparks! The charge runs its whole blue strand, and webs B and C change: the taut one goes slack, the slack
-      one snaps taut.'
+    - 'The Joltik sparks! The charge runs the whole blue strand, and every web hanging on it flips: slack snaps taut, taut
+      sags slack.'
 - type: warp
   name: Down to the lobby
   at:
@@ -403,18 +405,20 @@ events:
       - '\pf[TAMSIN,neutral]Tamsin: Again? Good. I mean— sorry. I mean good.'
       else:
       - (Tamsin stands at the top of the hollow, among the webs. She has stopped fidgeting.)
-      - '\pf[TAMSIN,neutral]Tamsin: My grandmother wove the looms downstairs. The webs up here, the Bugs wove. She held this
-        village together for fifty years with thread and shouting.'
-      - '\pf[TAMSIN,sad]Tamsin: I''ve had it since spring. I can''t shout.'
+      - '\pf[TAMSIN,neutral]Tamsin: Gran wove the looms downstairs. She never came up here. She said the Bugs had better hands
+        than hers, and she was right.'
+      - '\pf[TAMSIN,sad]Tamsin: She held this village together for fifty years with thread and shouting. I''ve had it since
+        spring. I can''t shout.'
       - '\pf[TAMSIN,neutral]Tamsin: Dorian goes first because he makes people brave. I go second because by then you think
         you know what a gym is.'
-      - '\pf[TAMSIN,angry]Tamsin: But I can weave. Granny Loom wove this room. Don''t you dare tear it.'
+      - '\pf[TAMSIN,angry]Tamsin: But I can hold a thread. So can they. We spun this whole hollow together, the Bugs and me.
+        Don''t you dare tear it.'
     - script: $game_self_switches[[131, 0, 'TRIED']] = true
     - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)'
       then:
       - '\pf[TAMSIN,shocked]Tamsin: ...It held, and you still came through it.'
-      - '\pf[TAMSIN,happy]Tamsin: That''s allowed. Granny said the room''s meant to lose to the right person. I didn''t think
-        I''d ever meet one.'
+      - '\pf[TAMSIN,happy]Tamsin: That''s allowed. Gran said a good web always leaves one way through, for the right one.
+        I didn''t think I''d ever meet one.'
       - script: Prismfall.award_badge(pfm_gym(:LEADER_TAMSIN))
       - (You open the Badge Case and set the badge beside Dorian's. The first note, then a second, higher, in tune with it.
         The two hang in the air together.)
@@ -440,19 +444,19 @@ events:
         - -10
         - 30
         - 12
-      - '(The loft above the hall: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won''t sit.)'
+      - '(The Warden''s loft, high in the elder above the webs: a ledger open on a table, a contract with a gold sunburst
+        seal. Tamsin won''t sit.)'
       - '\pf[TAMSIN,sad]Tamsin: That woman at the pylon. With the shears. She was right. I signed it.'
-      - '\pf[TAMSIN,sad]Tamsin: Briarwick''s bankrupt. It has been for three years. Gran hid it. I found the accounts the
-        week I buried her.'
-      - '\pf[TAMSIN,sad]Tamsin: Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I
-        signed it by myself, at night, so nobody would have to know how bad it was.'
+      - 'Tamsin: Briarwick''s bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her.'
+      - 'Tamsin: Meridian offered four hundred thousand for "stewardship rights". One pylon. Free light. I signed it by myself,
+        at night, so nobody would have to know how bad it was.'
       - '\pf[TAMSIN,neutral]Tamsin: And it WORKS. That''s the thing. The looms ran till midnight for a week. Everyone was
         so happy. Nobody had been happy since the funeral.'
       - '\pf[TAMSIN,crying]Tamsin: And now the Glasswood''s walking up the survey line like it was invited. Fourteen moths
         this week. I count them. I count them every morning.'
       - '\pf[TAMSIN,sad]Tamsin: The man in Saltmere told everyone to ask their Warden. Nobody''s asked me yet. They''re all
         too kind. The guild meets tonight.'
-      - '\pf[TAMSIN,sad]Tamsin: Tell me what to do. Please. I''ve run out of thread.'
+      - 'Tamsin: Tell me what to do. Please. I''ve run out of thread.'
       - if: pf_choice(:ch2_tamsin)
         then:
         - (You've already given her your answer.)
@@ -663,11 +667,11 @@ events:
     commands:
     - if: $game_self_switches[[131, 0, 'JUNO']]
       then:
-      - '\pf[JUNO,happy]Juno: Go on, I''ll be loud. Quietly. I learned that in Saltmere.'
+      - '\pf[JUNO,happy]Juno: (a whisper you can hear from the top of the tree) GO ON, \PN!'
       else:
       - (Juno is at the foot of the hollow, holding a hatbox with great care.)
       - '\pf[JUNO,happy]Juno: Forty eggs! In a hatbox! Don''t knock the hatbox! And don''t fall on me!'
-      - '\pf[JUNO,happy]Juno: Go on, I''ll be loud. Quietly. I learned that in Saltmere.'
+      - 'Juno: Go on, I''ll be loud. Quietly. I learned that in Saltmere.'
       - script: $game_self_switches[[131, 0, 'JUNO']] = true
 - type: event
   name: Moth 0

@@ -30,7 +30,8 @@ if defined?(PrismfallPuzzles)
     :start => [12, 33, 8],
     :reset => { :vars => { 305 => 0, 306 => 0, 307 => 0 } },
     :solved => { :vars => { 305 => 1, 306 => 0, 307 => 1 } },
-    :hints => ["A Joltik's spark runs the whole strand. Look at which webs hang on each one.", "Up there you want to go up, stop, then go across. Taut throws, sticky stops.", "Zap the Joltik on this ledge and the one on the west perch, once each. Web A throws you up onto B, B holds you, and C throws you across to Tamsin's ledge."],
+    :hints => ["A Joltik's spark runs the whole strand. Look at which webs hang on each one.", "Up there you want to go up, stop, then go across. Taut throws, sticky stops.", "Spark both Joltik, once each: the one on the third ledge and the one on the west perch. Then the bottom web throws you up, the middle one holds you, and the top one throws you across to Tamsin."],
+    :reset_text => "(He clicks his tongue; somewhere above, a Joltik yawns.) There. Every strand as Tamsin left it.",
   })
   PrismfallPuzzles.web_room(131, { :room => :lh_canopy, :jump => 3, :start => [12, 33],
     :webs => { [2, 7] => "w", [2, 9] => "w", [5, 13] => "w", [6, 13] => "s", [6, 16] => "w", [7, 13] => "w", [10, 12] => "s", [10, 13] => "s", [11, 13] => "w", [12, 6] => [306, false], [12, 9] => [305, false], [12, 28] => "w", [13, 6] => [307, false], [14, 16] => "w", [18, 20] => "w", [18, 23] => "w" },

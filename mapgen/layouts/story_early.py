@@ -800,7 +800,8 @@ GALE = [IF('$game_switches[@@CH2_MATRIARCH_DONE] && pfm?(:ch2_close) && !pfm?(:g
     IF('!pfm?(:gale1)', ['GALE POST. A letter is waiting.', '"Lecture Two is drafted. Do not make me send it. Eat something. — I.L."',
                          ITEM('POTION', 2), ITEM('KELPTEABAG', 1, 'Kelp Tea Bag'), 'You could throw it away. You don\'t.', S('pfm_set(:gale1)')],
        ['GALE POST. Write to Tidewatch Station, Ferrow\'s Landing. Larch reads every letter twice and answers half.'])])]
-add(121, talk('Trainer', 'NPC 20', 'down', [N('Trainer', "The gym's all planks and looms. Pull the wrong lever and the floor leaves. I've met the basement twice.")]),
+add(121, talk('Trainer', 'NPC 20', 'down', [N('Trainer', "The gym's all webs. Step on the wrong one and it throws you into the net. Tamsin apologises to you all the way down.")]),
+    talk('Trainer 2', 'NPC 22', 'left', [N('Trainer', "She fights two at once. Two! Bring a partner that likes company.")]),
     ev('Gale Post desk', page(GALE)))
 add(122, talk('Customer', 'NPC 23', 'up', [N('Customer', 'I asked for a Synthetic Seed and the old ladies in the queue went silent. I put it back.')]))
 MART_BW = [IF('!pfm?(:bw_mart_hi)', [N('Clerk', "Antidotes go fast here. The moths don't mean it."), S('pfm_set(:bw_mart_hi)')])]

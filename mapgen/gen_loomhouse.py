@@ -21,6 +21,11 @@ def say(who, expr, text):
     return '\\pf[%s,%s]%s: %s' % (who.upper(), expr, who.capitalize(), text)
 
 
+def named(who, text):
+    """a line with only a name box (story/13_CUTSCENES.md "Portrait use": same speaker, same expression)"""
+    return '%s: %s' % (who.capitalize(), text)
+
+
 def key(m, k): return "$game_self_switches[[%d, 0, '%s']]" % (m, k)
 
 
@@ -115,7 +120,7 @@ def main():
     # story/21_SCRIPT_CH3.md, Map 131 (Revision 14 lines)
     win = [
         say('TAMSIN', 'shocked', "...It held, and you still came through it."),
-        say('TAMSIN', 'happy', "That's allowed. Granny said the room's meant to lose to the right person. I didn't think I'd ever meet one."),
+        say('TAMSIN', 'happy', "That's allowed. Gran said a good web always leaves one way through, for the right one. I didn't think I'd ever meet one."),
         {'script': 'Prismfall.award_badge(pfm_gym(:LEADER_TAMSIN))'},
         "(You open the Badge Case and set the badge beside Dorian's. The first note, then a second, higher, in tune with it. The two hang in the air together.)",
         "\\pf[JUNO,shocked,shock]Juno: It's doing a CHORD.",
@@ -126,14 +131,14 @@ def main():
         say('TAMSIN', 'neutral', "That's the Accord's word that Pokémon up to level twenty-three will heed you. And the Cutter will give you Cut now. He'll say no first. Wait for the second answer."),
         say('TAMSIN', 'sad', "\\PN... could you come up to the loft? There's something I should say to someone, and you've an honest sort of silence."),
         {'tone': [-255, -255, -255, 0, 12]}, {'wait': 14}, {'tone': [-30, -20, -10, 30, 12]},
-        "(The loft above the hall: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)",
+        "(The Warden's loft, high in the elder above the webs: a ledger open on a table, a contract with a gold sunburst seal. Tamsin won't sit.)",
         say('TAMSIN', 'sad', "That woman at the pylon. With the shears. She was right. I signed it."),
-        say('TAMSIN', 'sad', "Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her."),
-        say('TAMSIN', 'sad', "Meridian offered four hundred thousand for \"stewardship rights\". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was."),
+        named('TAMSIN', "Briarwick's bankrupt. It has been for three years. Gran hid it. I found the accounts the week I buried her."),
+        named('TAMSIN', "Meridian offered four hundred thousand for \"stewardship rights\". One pylon. Free light. I signed it by myself, at night, so nobody would have to know how bad it was."),
         say('TAMSIN', 'neutral', "And it WORKS. That's the thing. The looms ran till midnight for a week. Everyone was so happy. Nobody had been happy since the funeral."),
         say('TAMSIN', 'crying', "And now the Glasswood's walking up the survey line like it was invited. Fourteen moths this week. I count them. I count them every morning."),
         say('TAMSIN', 'sad', "The man in Saltmere told everyone to ask their Warden. Nobody's asked me yet. They're all too kind. The guild meets tonight."),
-        say('TAMSIN', 'sad', "Tell me what to do. Please. I've run out of thread."),
+        named('TAMSIN', "Tell me what to do. Please. I've run out of thread."),
         {'if': 'pf_choice(:ch2_tamsin)', 'then': ["(You've already given her your answer.)"], 'else': [
             {'choices': ["Tell them the truth. I'll stand next to you.", "They deserve to know. If you won't say it, I will.", "It's your secret. I won't tell."],
              'cancel': 0, 'branches': [
@@ -159,10 +164,10 @@ def main():
     tamsin_fight = [
         {'if': key(131, 'TRIED'), 'then': [say('TAMSIN', 'neutral', "Again? Good. I mean— sorry. I mean good.")], 'else': [
             "(Tamsin stands at the top of the hollow, among the webs. She has stopped fidgeting.)",
-            say('TAMSIN', 'neutral', "My grandmother wove the looms downstairs. The webs up here, the Bugs wove. She held this village together for fifty years with thread and shouting."),
-            say('TAMSIN', 'sad', "I've had it since spring. I can't shout."),
+            say('TAMSIN', 'neutral', "Gran wove the looms downstairs. She never came up here. She said the Bugs had better hands than hers, and she was right."),
+            say('TAMSIN', 'sad', "She held this village together for fifty years with thread and shouting. I've had it since spring. I can't shout."),
             say('TAMSIN', 'neutral', "Dorian goes first because he makes people brave. I go second because by then you think you know what a gym is."),
-            say('TAMSIN', 'angry', "But I can weave. Granny Loom wove this room. Don't you dare tear it.")]},
+            say('TAMSIN', 'angry', "But I can hold a thread. So can they. We spun this whole hollow together, the Bugs and me. Don't you dare tear it.")]},
         {'script': key(131, 'TRIED') + ' = true'},
         {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)', 'then': win}]
     # ---------------------------------------------------------------- 130 Lobby (the weavers' hall at the elder's foot)
@@ -189,9 +194,10 @@ def main():
               "Gym Guide: The gym's up the stair, in the hollow of the elder itself. Tamsin's Bug Pokémon have strung it with webs. "
               "Step on a tight one and it throws you, three good bounds, the way you stepped on. Step on a sticky one and it keeps you.",
               "Gym Guide: The Joltik up there feed on the strands. When one sparks, every web on its strand changes its mind.",
-              "Gym Guide: And Tamsin fights two at a time. A thread holds because it's twisted with others."]},
-          {'type': 'npc', 'name': 'Weaver', 'at': list(A['weaver']), 'sprite': 'NPC 05', 'dir': 'left', 'commands': [
-              "Weaver Pim: The looms down here are Granny Loom's. The webs up there are the Bugs'. Tamsin says that's the difference "
+              "Gym Guide: And Tamsin fights two at a time. A thread holds because it's twisted with others.",
+              "Gym Guide: Old Mother Loom never once went up there. Said the Bugs had better hands than hers. Tamsin added the safety nets. And the apology cards."]},
+          {'type': 'npc', 'name': 'Weaver Tibb', 'at': list(A['weaver']), 'sprite': 'NPC 05', 'dir': 'left', 'commands': [
+              "Weaver Tibb: The looms down here are Granny Loom's. The webs up there are the Bugs'. Tamsin says that's the difference "
               "between a weaver and a Warden: a weaver makes cloth, a Warden makes room for things to make themselves."]},
           sign('Apology card', A['card'], "A card pinned by the stair: \"The gym is UP. If a web throws you somewhere silly, the nets are soft. Sorry! — T.L.\""),
           sign('Portrait', A['portrait'], "A fierce old woman at a loom. Brass plate: \"Mother Loom, Warden AF 247–299. 'Twist it or lose it.'\""),
@@ -269,15 +275,14 @@ def main():
             name = {C.V_A: 'CANOPY_WEB_A', C.V_B: 'CANOPY_WEB_B', C.V_C: 'CANOPY_WEB_C'}[var]
             pages = [taut if as_built_taut else sticky, dict(sticky if as_built_taut else taut, cond={'var': [name, 1]})]
         ev.append({'type': 'event', 'name': 'Web %s %d,%d' % (ch, x, y), 'at': [x, y], 'pages': pages})
-    WHAT = {1: 'webs A and B', 2: 'webs B and C'}
     for n, (x, y) in C.JOLTIK.items():
         a_, b_ = C.JOLT_ZAPS[n]
         va, vb = [{'A': C.V_A, 'B': C.V_B, 'C': C.V_C}[w] for w in (a_, b_)]
         ev.append({'type': 'event', 'name': 'Joltik %d' % n, 'at': [x, y], 'pages': [
             {'graphic': {'sprite': 'Followers/JOLTIK', 'dir': 'down'}, 'step_anime': True, 'commands': [
                 {'se': 'Anim/Thunder1'}, {'raw': [225, [2, 4, 6]]}, {'script': 'pfp_cycle(%d, 2)\npfp_cycle(%d, 2)' % (va, vb)},
-                "The Joltik sparks! The charge runs its whole %s strand, and %s change: the taut one goes slack, the slack one "
-                "snaps taut." % ('gold' if n == 1 else 'blue', WHAT[n])]}]})
+                "The Joltik sparks! The charge runs the whole %s strand, and every web hanging on it flips: slack snaps taut, "
+                "taut sags slack." % ('gold' if n == 1 else 'blue')]}]})
     ev += [
         {'type': 'warp', 'name': 'Down to the lobby', 'at': list(A['entrance']), 'to': {'map': 130, 'x': g1.LOBBY_AT['arrive'][0], 'y': g1.LOBBY_AT['arrive'][1], 'dir': 'down'}},
         {'type': 'event', 'name': 'Tamsin', 'at': list(A['tamsin']), 'pages': [
@@ -307,10 +312,10 @@ def main():
         {'type': 'event', 'name': 'Juno', 'at': list(A['juno']), 'pages': [
             {'commands': []},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'up'}, 'commands': [
-                {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "Go on, I'll be loud. Quietly. I learned that in Saltmere.")],
+                {'if': key(131, 'JUNO'), 'then': [say('JUNO', 'happy', "(a whisper you can hear from the top of the tree) GO ON, \\PN!")],
                  'else': ["(Juno is at the foot of the hollow, holding a hatbox with great care.)",
                           say('JUNO', 'happy', "Forty eggs! In a hatbox! Don't knock the hatbox! And don't fall on me!"),
-                          say('JUNO', 'happy', "Go on, I'll be loud. Quietly. I learned that in Saltmere."), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
+                          named('JUNO', "Go on, I'll be loud. Quietly. I learned that in Saltmere."), {'script': key(131, 'JUNO') + ' = true'}]}]}]}]
     for i, (x, y, spr) in enumerate(((8, 15, 'DUSTOX'), (17, 21, 'MOTHIM'), (20, 13, 'BEAUTIFLY'), (5, 27, 'MASQUERAIN'), (9, 5, 'VENOMOTH'))):
         if rows[y][x] == 'v':                           # moths on the wing over the drop (decor)
             ev.append({'type': 'event', 'name': 'Moth %d' % i, 'at': [x, y], 'pages': [

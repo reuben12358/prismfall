@@ -848,6 +848,7 @@ ROADS = [
 
 # ----------------------------------------------------------------------------- other renames (not route legs)
 OTHER_RENAMES = {
+    130: ("Loomhouse Gym - Foyer", "Loomhouse Gym - Lobby", "The weavers' hall at the foot of the elder: Granny Loom's looms, and the stair up into the tree."),
     542: ("Marsh Rest House", "The Brinewife's Rest", "A salt-boiler's widow keeps a bed for anyone the marsh has soaked."),
     664: ("Mt. Cinder 1F", "The Cinderhorn 1F", "The volcano above Cindervault, named for its shape: a horn, still smoking."),
     665: ("Mt. Cinder 2F", "The Cinderhorn 2F", "As 664."),
@@ -858,6 +859,8 @@ OTHER_RENAMES = {
 # PLACE_NAMES marks them `replaced`: rename_places.py does NOT rewrite them in prose (the story lines that describe
 # them are in design/GEOGRAPHY_V2_STORY_FIXES.md).
 REPLACED = {
+    131: ("Loomhouse Gym - Weaving Hall", "Loomhouse Gym - The Canopy",
+          "Gym 2 since SPINE Revision 19: the hollow of the elder, strung with the Bugs' web trampolines (the heddle hall is retired)."),
     582: ("Lumen South Gate", "Lumen West Gate", "Lumen's gate at the end of the Arc-Lamp Mile, facing the Crownlands."),
     920: ("The Rime Narrows", "The Rimed Sands",
           "Isenmar's front in the western dunes: sand its host has frozen into white trench-lines."),

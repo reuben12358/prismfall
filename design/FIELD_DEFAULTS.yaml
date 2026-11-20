@@ -212,8 +212,8 @@ maps:
   123: {name: "Weavers' Guildhall", kind: interior, field: SILKWOOD, built: true, battles: [], source: hand, why: "Weavers' Guildhall: looms and silk everywhere (guild trainers)"}
   124: {name: "Treetop House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
   125: {name: "Cutter's House", kind: interior, field: NONE, built: true, battles: [], source: hand, why: "house"}
-  130: {name: "Loomhouse Gym - Foyer", kind: gym, field: SILKWOOD, built: true, battles: [], source: spec, why: "world spec"}
-  131: {name: "Loomhouse Gym - Weaving Hall", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
+  130: {name: "Loomhouse Gym - Lobby", kind: gym, field: SILKWOOD, built: true, battles: [], source: spec, why: "world spec"}
+  131: {name: "Loomhouse Gym - The Canopy", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
   132: {name: "Loomhouse Gym - Canopy Lofts", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
   133: {name: "Loomhouse Gym - The Spindle", kind: gym, field: SILKWOOD, built: true, battles: [trainer], source: spec, why: "world spec"}
   140: {name: "Saltmere - Promenade & Market", kind: town, field: BEACH, built: true, battles: [trainer], encounters: [GoodRod, OldRod, SuperRod, Water], source: hand, why: "Saltmere's promenade on the salt lagoon"}

@@ -790,11 +790,19 @@ events:
 - type: event
   name: Trainer
   pages:
-  - commands: ['Trainer: The gym''s all planks and looms. Pull the wrong lever and the floor leaves. I''ve met the basement twice.']
+  - commands: ['Trainer: The gym''s all webs. Step on the wrong one and it throws you into the net. Tamsin apologises to you all the way down.']
     trigger: action
     move: fixed
     graphic: {sprite: NPC 20, dir: down}
   at: [5, 10]
+- type: event
+  name: Trainer 2
+  pages:
+  - commands: ['Trainer: She fights two at once. Two! Bring a partner that likes company.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 22, dir: left}
+  at: [12, 10]
 - type: event
   name: Gale Post desk
   pages:

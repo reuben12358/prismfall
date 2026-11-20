@@ -1663,7 +1663,7 @@
   },
   {
    "id": 130,
-   "name": "Loomhouse Gym - Foyer",
+   "name": "Loomhouse Gym - Lobby",
    "act": 1,
    "kingdom": "Elowen",
    "kind": "gym",
@@ -1725,7 +1725,7 @@
   },
   {
    "id": 131,
-   "name": "Loomhouse Gym - Weaving Hall",
+   "name": "Loomhouse Gym - The Canopy",
    "act": 1,
    "kingdom": "Elowen",
    "kind": "gym",

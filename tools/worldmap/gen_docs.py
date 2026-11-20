@@ -366,6 +366,9 @@ def name_table(maps):
     for i, (old, new, origin) in getattr(W, 'REPLACED', {}).items():
         if i in out:          # Geography v2: a new place on an old ID; never auto-renamed in prose
             out[i].update(old=old, new=new, origin=origin, status='replaced' if old != new else 'kept')
+    for i, why in RETIRED.items():
+        if i in out:          # in the plan but never built (GYM_PUZZLES)
+            out[i].update(status='retired (unbuilt)')
     for i, o in W.SETTLEMENT_ORIGINS.items():
         if i in out and not out[i]['origin']:
             out[i]['origin'] = o

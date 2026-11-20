@@ -72,10 +72,10 @@ moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_S
 | 123 | Weavers' Guildhall | Weavers' Guildhall | kept | Elowen | 11, 13 |  |
 | 124 | Treetop House | Treetop House | kept | Elowen | 11, 13 |  |
 | 125 | Cutter's House | Cutter's House | kept | Elowen | 11, 13 |  |
-| 130 | Loomhouse Gym - Foyer | Loomhouse Gym - Foyer | kept | Elowen | 11, 13 |  |
-| 131 | Loomhouse Gym - Weaving Hall | Loomhouse Gym - Weaving Hall | kept | Elowen | 11, 13 |  |
+| 130 | Loomhouse Gym - Foyer | Loomhouse Gym - Lobby | renamed | Elowen | 11, 13 | The weavers' hall at the foot of the elder: Granny Loom's looms, and the stair up into the tree. |
+| 131 | Loomhouse Gym - Weaving Hall | Loomhouse Gym - The Canopy | replaced | Elowen | 11, 13 | Gym 2 since SPINE Revision 19: the hollow of the elder, strung with the Bugs' web trampolines (the heddle hall is retired). |
 | 132 | Loomhouse Gym - Canopy Lofts | Loomhouse Gym - Canopy Lofts | kept | Elowen | 11, 13 |  |
-| 133 | Loomhouse Gym - The Spindle | Loomhouse Gym - The Spindle | kept | Elowen | 11, 13 |  |
+| 133 | Loomhouse Gym - The Spindle | Loomhouse Gym - The Spindle | retired (unbuilt) | Elowen | 11, 13 |  |
 | 134 | Loomhouse Upper Lofts - Granny's Knot | Loomhouse Upper Lofts - Granny's Knot | kept | Elowen | 11, 13 |  |
 | 140 | Saltmere - Promenade & Market | Saltmere - Promenade & Market | kept | Elowen | 6, 18 | A salt lake behind a sandbar: the town's wealth and its name. Elowen's chartered free port. |
 | 141 | Saltmere Pokémon Center | Saltmere Pokémon Center | kept | Elowen | 6, 18 |  |

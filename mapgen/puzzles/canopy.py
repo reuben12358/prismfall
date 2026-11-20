@@ -174,8 +174,9 @@ ROOMS = {
                       solved=dict(vars={V_A: 1, V_B: 0, V_C: 1}),
                       hints=["A Joltik's spark runs the whole strand. Look at which webs hang on each one.",
                              "Up there you want to go up, stop, then go across. Taut throws, sticky stops.",
-                             "Zap the Joltik on this ledge and the one on the west perch, once each. Web A throws you up onto B, "
-                             "B holds you, and C throws you across to Tamsin's ledge."]),
+                             "Spark both Joltik, once each: the one on the third ledge and the one on the west perch. Then the bottom "
+                             "web throws you up, the middle one holds you, and the top one throws you across to Tamsin."],
+                      reset_text="(He clicks his tongue; somewhere above, a Joltik yawns.) There. Every strand as Tamsin left it."),
 }
 
 
