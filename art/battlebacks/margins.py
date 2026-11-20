@@ -317,12 +317,13 @@ def extend_vanilla(bg, origin=bblib.VANILLA_ORIGIN, floor_band=110, floor_scale=
     if plan is None:
         return _orig_extend(bg, origin=origin, floor_band=floor_band, floor_scale=floor_scale, blur_out=blur_out,
                             side_mode=side_mode, top_mode=top_mode, darken=darken)
-    ck = (k, tuple(origin), blur_out, darken)
+    ck = (k, tuple(origin), blur_out, darken, side_mode, top_mode, floor_band, floor_scale)
     if ck not in _cache:
+        # `old`: the builder's own (mirrored) extension, unsoftened, with every argument it asked for (side_mode...):
+        # plans keep it everywhere they don't repaint
         _cache[ck] = plan(bg, origin, blur_out=blur_out, darken=darken,
-                          old=lambda **kw: _orig_extend(bg, origin=origin, floor_band=floor_band,
-                                                        floor_scale=floor_scale, side_mode=side_mode,
-                                                        top_mode=top_mode, **kw))
+                          old=lambda: _orig_extend(bg, origin=origin, floor_band=floor_band, floor_scale=floor_scale,
+                                                   side_mode=side_mode, top_mode=top_mode, blur_out=False))
     return _cache[ck].copy()
 
 

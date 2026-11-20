@@ -28,14 +28,14 @@ class Plan:
     margins (panel art coords); sides = (left rows, right rows) repainted below the panel's top edge."""
 
     def __init__(self, labels, layout, nlab, sides=(0, 0), block=16, seed=1, top=True, feather=6, post=None,
-                 relight=0):
+                 relight=0, lam=2500.0, pre=None):
         self.labels, self.layout, self.nlab = labels, layout, nlab
         self.sides, self.block, self.seed, self.top, self.feather = sides, block, seed, top, feather
-        self.post, self.relight = post, relight
+        self.post, self.relight, self.lam, self.pre = post, relight, lam, pre
 
-    def room(self, bg, origin):
+    def room(self, bg, origin, old=None):
         """The filled art-pixel room (margins painted where the plan says, the old extension elsewhere)."""
-        old = M._orig_extend(bg, origin=origin, blur_out=False)
+        old = old() if old else M._orig_extend(bg, origin=origin, blur_out=False)
         R = M.Room(bg, origin)
         lab = self.labels(R.panel)
         R.set_labels_panel(np.where(lab < 0, -1, lab))
@@ -49,6 +49,8 @@ class Plan:
         keep[R.T:R.T + rr, R.L + R.bw:] = False
         keep &= ~R.P
         R.A[keep] = a[keep]; R.K |= keep; R.P |= keep
+        if self.pre:
+            self.pre(R, lab)                                  # fixed structures, known + protected before quilting
         ex = M.Exemplar(R.panel, lab, self.nlab, self.block)
         order = []
         if rl:
@@ -57,7 +59,7 @@ class Plan:
             order.append(("right", (R.T, R.T + rr, R.L + R.bw, R.W)))
         if self.top:
             order.append("top")
-        R.fill(ex, order=order, seed=self.seed)
+        R.fill(ex, order=order, seed=self.seed, lam=self.lam)
         if self.relight:
             # smooth (non pixel-art) panels: keep the patches' detail but take the large-scale shading from the old
             # extension (blurred far past any recognisable shape), so patch seams don't show as light/dark blocks
@@ -89,7 +91,7 @@ class Plan:
         return m
 
     def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
-        R, old_raw = self.room(bg, origin)
+        R, old_raw = self.room(bg, origin, old)
         new = R.hd()
         m = self.region(R)[..., None]
         out = bblib.arr(old_raw) * (1 - m) + bblib.arr(new) * m
@@ -364,10 +366,10 @@ class GradPlan(Plan):
         self.zenith_mul, self.glow = zenith_mul, glow
 
     def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
-        old_raw = M._orig_extend(bg, origin=origin, blur_out=False)
+        old_raw = old() if old else M._orig_extend(bg, origin=origin, blur_out=False)
         a = bblib.arr(old_raw)
         top = int(origin[1]) - 2
-        src = bblib.arr(_sky_top(bg, origin, self.zenith_mul, self.glow))
+        src = bblib.arr(_sky_top(bg, origin, self.zenith_mul, self.glow, old_raw))
         a[:top] = src[:top]
         out = bblib.img(a)
         return depth_soften(out, darken=darken) if blur_out else out
@@ -378,10 +380,10 @@ class GradPlan(Plan):
         return m
 
 
-def _sky_top(bg, origin, zenith_mul, glow):
+def _sky_top(bg, origin, zenith_mul, glow, hd=None):
     """skies.extend_with_sky without its final softening (same maths)."""
     import math as _m
-    hd = M._orig_extend(bg, origin=origin, blur_out=False)
+    hd = hd if hd is not None else M._orig_extend(bg, origin=origin, blur_out=False)
     a = bblib.arr(hd)
     oy = int(origin[1]); top = oy - 2
     row0 = np.asarray(bg.convert("RGB"))[0].reshape(-1, 3)
@@ -404,6 +406,218 @@ def _sky_top(bg, origin, zenith_mul, glow):
 PLANS["9cf6fafc5a"] = GradPlan(zenith_mul=(0.8, 0.84, 0.88), glow=10)    # UNDERWATER: deeper water above
 PLANS["f184641a67"] = GradPlan(zenith_mul=(0.9, 0.92, 0.96), glow=30)    # FROZEN_LAKE: overcast sky
 PLANS["b673189225"] = GradPlan(zenith_mul=(0.82, 0.88, 0.96), glow=24)   # WATER_SURFACE
+
+
+#---------------------------------------------------------------------------------------------
+# Built structures: above the panel the structure's own band repeats upright (a second arcade tier over the
+# colosseum's, the garden's trellis wall going higher, the neon towers rising), each repeat a little darker.
+#---------------------------------------------------------------------------------------------
+class TilePlan(Plan):
+    """Above the panel, HD row y (< origin y) takes panel row r0 + ((y - oy) mod period): the band
+    [r0, r0 + period) of panel rows repeated upward, never flipped. `fade`: brightness kept per repeat."""
+
+    def __init__(self, r0, period, fade=0.9):
+        Plan.__init__(self, None, None, 1)
+        self.r0, self.period, self.fade = r0, period, fade
+
+    def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
+        old_raw = old() if old else M._orig_extend(bg, origin=origin, blur_out=False)
+        a = bblib.arr(old_raw)
+        oy = int(origin[1])
+        P = self.period
+        for y in range(oy):
+            d = oy - y                                     # rows above the panel's top edge
+            k = (d - 1) // P + 1                           # which repeat
+            src = self.r0 + ((-d) % P)
+            a[y] = a[oy + src] * np.array([self.fade ** k] * 3 + [1.0], np.float32)
+        out = bblib.img(a)
+        return depth_soften(out, darken=darken) if blur_out else out
+
+    def region(self, R):
+        m = np.zeros((HD[1], HD[0]), np.float32)
+        m[:R.oy, :] = 1
+        return m
+
+
+PLANS["27a24fdcb9"] = TilePlan(0, 124, fade=0.88)       # COLOSSEUM: an upper arcade on the cornice
+PLANS["f3d5a10597"] = TilePlan(8, 32, fade=0.95)        # FLOWER_GARDEN 1-3: the trellis wall goes higher
+PLANS["52dcc239c2"] = TilePlan(8, 32, fade=0.95)
+PLANS["9bae59a29e"] = TilePlan(8, 32, fade=0.95)
+PLANS["7b90eb1361"] = TilePlan(0, 64, fade=0.96)        # FLOWER_GARDEN 4-5: the flower towers grow on
+PLANS["8246117502"] = TilePlan(0, 64, fade=0.96)
+PLANS["8d75491748"] = TilePlan(0, 34, fade=0.92)        # NEON_GRID (+ blackout): towers rise, no upside-down slab
+
+
+#---------------------------------------------------------------------------------------------
+# RAINBOW: the bow is an arc; beyond the panel every pixel takes the panel's colour at the same distance from the
+# arc's centre, so the bands carry on round the arc (no chevron where the panel's edges used to mirror it).
+#---------------------------------------------------------------------------------------------
+class ArcPlan(Plan):
+    """The bow's yellow/green and green/blue boundaries are found on every row and fitted with concentric circles;
+    every margin pixel then takes the panel's (median) colour at its distance from the common centre, so the bands
+    carry on round the arc instead of folding into a chevron at the panel's edges."""
+
+    def __init__(self):
+        Plan.__init__(self, None, None, 1)
+
+    def fit(self, a):
+        r, g, b = a[..., 0], a[..., 1], a[..., 2]
+        yel = (r > 150) & (g > 150) & (b < 130)
+        grn = (g > 150) & (r < 120) & (b < 120)
+        blu = (b > 150) & (r < 80)
+        pts = []
+        for y in range(a.shape[0]):
+            for A, B, k in ((yel, grn, 0), (grn, blu, 1)):
+                xa, xb = np.nonzero(A[y])[0], np.nonzero(B[y])[0]
+                if len(xa) < 6 or len(xb) < 6:
+                    continue
+                # the band A ends where band B starts (A lies left of B on every row of this bow)
+                after = xb[xb > xa.min()]
+                if not len(after):
+                    continue
+                x1 = after.min()
+                x0 = xa[xa < x1].max() if (xa < x1).any() else None
+                if x0 is not None and x1 - x0 < 24:
+                    pts.append(((x0 + x1) / 2.0, y, k))
+        P = np.array(pts, np.float64)
+        M_ = np.zeros((len(P), 4))
+        M_[:, 0] = 2 * P[:, 0]; M_[:, 1] = 2 * P[:, 1]
+        M_[P[:, 2] == 0, 2] = 1; M_[P[:, 2] == 1, 3] = 1
+        sol = np.linalg.lstsq(M_, (P[:, :2] ** 2).sum(1), rcond=None)[0]
+        return sol[0], sol[1]
+
+    SKY = (236, 222, 242)          # pale festival sky beyond the bow's outer (red) band
+    RIM = 12                       # the panel's own baked-in light rim (left, top, right): repainted too
+
+    def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
+        old_raw = old() if old else M._orig_extend(bg, origin=origin, blur_out=False)
+        a = np.asarray(bg.convert("RGB"), np.float32)
+        cx, cy = self.fit(a)
+        H, W = a.shape[:2]
+        I = self.RIM
+        ys, xs = np.mgrid[I:H, I:W - I]
+        rad = np.sqrt((xs - cx) ** 2 + (ys - cy) ** 2)
+        ang = np.arctan2(ys - cy, xs - cx)
+        ri = np.round(rad).astype(int)
+        lo, hi = ri.min(), ri.max()
+        amin = np.full(hi - lo + 1, np.inf); amax = np.full(hi - lo + 1, -np.inf)
+        np.minimum.at(amin, ri.ravel() - lo, ang.ravel()); np.maximum.at(amax, ri.ravel() - lo, ang.ravel())
+        out = bblib.arr(old_raw)
+        ox, oy = int(origin[0]), int(origin[1])
+        Y, X = np.mgrid[0:HD[1], 0:HD[0]]
+        X2, Y2 = (X // 2) * 2 - ox, (Y // 2) * 2 - oy              # panel coords, the art's 2x2 pixel steps
+        r = np.sqrt((X2 - cx) ** 2 + (Y2 - cy) ** 2)
+        t = np.arctan2(Y2 - cy, X2 - cx)
+        k = np.clip(np.round(r).astype(int), lo, hi) - lo
+        # follow the pixel's own arc back to where it leaves the panel (a little inside), take that colour
+        rc = np.clip(r, lo + 1, hi - 1)
+        pad = 3.0 / np.maximum(rc, 1)
+        tc = np.clip(t, amin[k] + pad, amax[k] - pad)
+        sx = np.clip(np.round(cx + rc * np.cos(tc)).astype(int), I, W - 1 - I)
+        sy = np.clip(np.round(cy + rc * np.sin(tc)).astype(int), I, H - 1)
+        col = a[sy, sx]
+        beyond = np.clip((r - (hi - 4)) / 40.0, 0, 1)[..., None]     # past the outer band: into the sky
+        col = col * (1 - beyond) + np.array(self.SKY, np.float32) * beyond
+        col = np.round(col / 4) * 4
+        mask = self.region_mask(origin, bg.size)
+        out[..., :3] = out[..., :3] * (1 - mask[..., None]) + col * mask[..., None]
+        out = bblib.img(out)
+        return depth_soften(out, darken=darken) if blur_out else out
+
+    def region_mask(self, origin, size):
+        m = np.zeros((HD[1], HD[0]), np.float32)
+        ox, oy = int(origin[0]), int(origin[1])
+        W, H, I = size[0], size[1], self.RIM
+        m[:oy, :] = 1
+        m[oy:oy + H, :ox] = 1
+        m[oy:oy + H, ox + W:] = 1
+        # the rim inside the panel: full over its outer I-4 px, fading out over the last 4
+        ramp = np.clip((I - np.arange(I + 1)) / 4.0, 0, 1)            # distance in from the edge -> weight
+        for d in range(I + 1):
+            w = ramp[d]
+            m[oy:oy + H, ox + d] = np.maximum(m[oy:oy + H, ox + d], w)
+            m[oy:oy + H, ox + W - 1 - d] = np.maximum(m[oy:oy + H, ox + W - 1 - d], w)
+            m[oy + d, ox:ox + W] = np.maximum(m[oy + d, ox:ox + W], w)
+        return m
+
+    def region(self, R):
+        return self.region_mask((R.ox, R.oy), R.bg.size)
+
+
+PLANS["0289ba330e"] = ArcPlan()
+
+
+#---------------------------------------------------------------------------------------------
+# HOLLOW_CATHEDRAL: above the panel its stone wall goes on (no upside-down tree, window or banner)
+#---------------------------------------------------------------------------------------------
+# Panel art columns: lancet window 0..28 (framed inside the panel), banner 59..76, pillar 101..134, tree crown
+# 143..250, a second pillar cut by the right edge (the centre pillar's columns shifted by 149).
+CATH_WALL_X = ((29, 59), (77, 101), (135, 143))
+
+
+def cathedral_labels(p):
+    r, g, b, s, v = hsv(p)
+    lab = np.full(p.shape[:2], -1, np.int16)
+    y, x = rows(lab), cols(lab)
+    for x0, x1 in CATH_WALL_X:
+        lab[(y < 38) & (x >= x0) & (x < x1)] = 0
+    xs = np.nonzero(g[0] * 255 > r[0] * 255 + 15)[0]
+    xs = xs[(xs >= 143) & (xs < 251)]
+    lab[(x >= xs.min() + 2) & (x <= xs.max() - 2) & (y < 24)] = 1     # the crown's top band, outlines included
+    lab[(lab == 1) & (r > g)] = -1                                    # no branch or trunk pixels
+    return lab
+
+
+def cathedral_layout(x, y, lab):
+    L = np.zeros(x.shape, np.int16)
+    xs = np.nonzero(lab[0] == 1)[0]
+    if len(xs):
+        a, b = xs.min() - 2, min(xs.max() + 2, 247)
+        xc, hw = (a + b) / 2.0, (b - a) / 2.0
+        h = 22 * np.sqrt(np.clip(1 - ((x - xc) / hw) ** 2, 0, 1)) + wob(x, 2.0, 31) * (np.abs(x - xc) < hw)
+        L[(y < 0) & (-y < h)] = 1
+    return L
+
+
+def cathedral_pre(R, lab):
+    T, Lx, P = R.T, R.L, R.panel
+    W = R.W
+
+    def put(y, x, c):
+        if 0 <= Lx + x < W and 0 <= T + y < R.H:
+            R.A[T + y, Lx + x] = c; R.K[T + y, Lx + x] = True; R.P[T + y, Lx + x] = True
+
+    # the window runs on up to the room's top: panes and divider bars, period 19 (rows 10..28), never flipped
+    for y in range(-T, 0):
+        src = 10 + ((y - 10) % 19)
+        for x in range(0, 29):
+            put(y, x, P[src, x])
+    # its outer edge beyond the panel's left edge: the same frame shading as its right edge (outline, then shade)
+    edge = [P[20, 24], P[20, 24], P[20, 24], P[20, 27], P[20, 27]]
+    for y in range(-T, 35):
+        for i, c in enumerate(edge):
+            put(y, -1 - i, c if y < 33 else P[min(y, 143), 29])
+    # both pillars carry on up (vertically uniform shafts); the right one also beyond the panel's right edge
+    for y in range(-T, 0):
+        for x in range(101, 135):
+            put(y, x, P[0, x])
+    for x in range(250, 250 + 36):
+        sx = x - 149
+        for y in (range(-T, 45) if x >= 256 else range(-T, 0)):
+            put(y, x, P[max(y, 0), sx])
+    # the banner hangs from a gilt rod a few rows above the panel's top edge
+    for y in range(-6, 0):
+        for x in range(59, 77):
+            put(y, x, P[2, x])
+    gold, dark, deep = P[20, 60], np.array((60, 57, 71), np.float32), np.array((160, 43, 80), np.float32)
+    for x in range(56, 80):
+        put(-8, x, gold); put(-7, x, deep if 58 < x < 77 else dark)
+    for x in (55, 56, 79, 80):
+        put(-9, x, gold); put(-8, x, gold); put(-7, x, dark)
+
+
+PLANS["fbfe12b060"] = Plan(cathedral_labels, cathedral_layout, 2, sides=(46, 46), block=14, seed=21,
+                           pre=cathedral_pre)
 
 
 #---------------------------------------------------------------------------------------------
