@@ -147,6 +147,15 @@ FACTORY→SCRAPYARD, and FLOWER_GARDEN stages 1–5.
   - `"vacuum"` dark rings.
   - `"imgNNN" => { :bitmap => ..., :scrolling/:sheet/:rainbow/:effect => ... }` your own animated layers from `elements/`
     (see the [EBDX environment docs](https://luka-sj.com/essentials/resources/EBDX/docs?page=24)).
+    Prismfall adds `:parallax => [px, py]` (the layer follows the camera by that fraction, for far sky layers).
+- **Clouds and other sky layers go behind the scenery.** An `img` strip only sits above or below the *whole* room
+  bitmap, so a cloud strip over the room crosses every tree and mast painted into it. Split the room instead
+  (`art/battlebacks/skies.py`): room at z 0, the scrolling sky strip at z 0 (drawn after it), and a sky-less
+  cut-out of the room (`pf_<field>_front`) at z 1 above both. MEADOW and STORMFRONT work this way.
+- **Don't mirror scenery above the horizon.** The top margin of an extended room is on screen whenever EBDX's camera
+  pulls back (intro, send-out). Continue the sky there (`skies.extend_with_sky`) or paint what belongs above the
+  frame (MEADOW: the oak's crown), never an upside-down copy of the source.
+- With a `*_night` room, any `:art_extras` or `:layers` element that has a `<bitmap>_night.png` uses it.
 - Trainer intro backgrounds are a separate EBDX feature (`Graphics/EBDX/Transitions/`). They aren't needed for fields.
 
 ## 5. Asset checklist

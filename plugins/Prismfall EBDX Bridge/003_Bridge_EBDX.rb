@@ -91,6 +91,10 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
     #---------------------------------------------------------------------------
     alias prismfall_ebdx_refresh refresh unless method_defined?(:prismfall_ebdx_refresh)
     def refresh(*args)
+      if args[0].is_a?(Hash)
+        @pf_parallax = nil
+        @pf_par_home = nil
+      end
       prismfall_ebdx_refresh(*args)
       return if !args[0].is_a?(Hash)
       begin
@@ -119,6 +123,49 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
         end
       end
       prismfall_ebdx_update
+    end
+
+    #---------------------------------------------------------------------------
+    # Parallax. EBDX's #position places every room sprite rigidly in room space.
+    # Image layers with :parallax => [px, py] (far sky: clouds) instead follow
+    # the camera centre by that fraction, so the intro sweep and every camera
+    # move slide them less than the ground. Zoom stays rigid (a camera zoom
+    # magnifies every depth alike). The home point is the MAIN camera, where the
+    # layer sits exactly where it was painted.
+    #---------------------------------------------------------------------------
+    alias prismfall_ebdx_position position unless method_defined?(:prismfall_ebdx_position)
+    def position
+      prismfall_ebdx_position
+      prismfall_parallax
+    end
+
+    def prismfall_parallax
+      @pf_parallax ||= @data.keys.select do |k|
+        k.is_a?(String) && k.include?("img") && @data[k].is_a?(Hash) && @data[k][:parallax]
+      end
+      return if @pf_parallax.empty?
+      bg = @sprites["bg"]
+      return if !bg || bg.disposed? || !bg.bitmap || bg.zoom_x <= 0 || bg.zoom_y <= 0
+      hw = @viewport.rect.width / 2.0
+      hh = @viewport.rect.height / 2.0
+      if !@pf_par_home
+        sx, sy = @scene.vector.spoof(@defaultvector)
+        sc = (@scale || bg.zoom_x).to_f
+        @pf_par_home = [bg.ox + ((hw - sx) / sc), bg.oy + ((hh - sy) / sc)]
+      end
+      cx = bg.ox + ((hw - bg.x) / bg.zoom_x)
+      cy = bg.oy + ((hh - bg.y) / bg.zoom_y)
+      @pf_parallax.each do |k|
+        spr = @sprites[k]
+        next if !spr || spr.disposed?
+        p = @data[k][:parallax]
+        px, py = p.is_a?(Array) ? [p[0].to_f, (p[1] || p[0]).to_f] : [p.to_f, p.to_f]
+        spr.x = bg.x - ((bg.ox - spr.ex - (px * (cx - @pf_par_home[0]))) * bg.zoom_x)
+        spr.y = bg.y - ((bg.oy - spr.ey - (py * (cy - @pf_par_home[1]))) * bg.zoom_y)
+      end
+    rescue StandardError => e
+      @pf_parallax = []
+      PrismfallEBDX.log_error("BattleSceneRoom#prismfall_parallax", e)
     end
 
     #---------------------------------------------------------------------------

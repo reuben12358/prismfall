@@ -7,6 +7,10 @@
 #   BD_TIME=day|night|eve          forces PBDayNight (default day)
 #   BD_WAIT=150                    frames to run before the shot
 #   BD_VECTORS=1                   also shoot the PLAYER / ENEMY / SENDOUT camera framings
+#   BD_INTRO=1                     dump EVERY frame from the battle start (transition, EBDX intro
+#                                  camera sweep, send-out) through the hold, to Captures/bd_<shot>/
+#   BD_OUTDOOR=1                   treat the map as outdoor (EBDX day/night tint + *_night rooms)
+#   BD_CAMLOG=1                    log the room camera (bg x/y/zoom) per frame to Captures/camlog_<shot>.tsv
 # Output: Captures/backdrops/<field>[_s<stage>][_<time>].png (+ _clean = no databoxes)
 #===============================================================================
 module BackdropStills
@@ -56,6 +60,9 @@ module BackdropStills
       foe = FOES[id] || :DITTO
       foe = :DITTO if !GameData::Species.exists?(foe)
       party = [DemoRun.mon(:LUCARIO, 50, [:AURASPHERE])]
+      DemoRun.every = intro? ? 1 : 100000
+      @camlog = (ENV["BD_CAMLOG"] == "1") ? "Captures/camlog_#{shot_name(id, stage)}.tsv" : nil
+      File.write(@camlog, "frame\tbg_x\tbg_y\tzoom_x\tzoom_y\tox\toy\tsky_x\tsky_y\tsky_rigid_x\tsky_rigid_y\n") if @camlog
       DemoRun.battle("bd_#{shot_name(id, stage)}", party, :turns => 1) do
         $game_temp.clear_battle_rules
         setBattleRule("field", id)
@@ -68,7 +75,27 @@ module BackdropStills
           WildBattle.start(foe, 50)
         end
       end
+      DemoRun.every = 100000
+      @camlog = nil
       DemoRun.log("backdrop still #{id} stage #{stage}: #{@done ? 'ok' : 'NO SHOT'}")
+    end
+  end
+
+  def intro?; ENV["BD_INTRO"] == "1"; end
+
+  def camlog(room)
+    return if !@camlog
+    sprites = room.instance_variable_get(:@sprites) rescue nil
+    bg = sprites && sprites["bg"]
+    return if !bg || bg.disposed?
+    # the first parallax layer (if any): where it is vs where EBDX's rigid placement would put it
+    data = room.instance_variable_get(:@data) || {}
+    k = data.keys.find { |key| data[key].is_a?(Hash) && data[key][:parallax] }
+    sky = k && sprites[k]
+    sk = sky ? [sky.x, sky.y, (bg.x - ((bg.ox - sky.ex) * bg.zoom_x)).round(1), (bg.y - ((bg.oy - sky.ey) * bg.zoom_y)).round(1)] : []
+    File.open(@camlog, "a") do |f|
+      f.puts(([DemoRun.frame, bg.x.round(2), bg.y.round(2), bg.zoom_x.round(4), bg.zoom_y.round(4), bg.ox.round(2),
+               bg.oy.round(2)] + sk).join("\t"))
     end
   end
 
@@ -145,6 +172,7 @@ module BackdropStills
     @done = true
     wait = (ENV["BD_WAIT"] || 150).to_i
     wait.times { scene.pbUpdate }
+    DemoRun.every = 100000     # BD_INTRO: the frame dump ends with the hold
     name = shot_name(*@current)
     Graphics.screenshot("Captures/backdrops/#{name}.png")
     sprites = scene.sprites
@@ -203,6 +231,20 @@ if ENV["DEMO_PLAN"].to_s.start_with?("backdrops")
       def isEvening?(*a); BackdropStills.time_mode == "eve"; end
       def isMorning?(*a); false; end
       def isDay?(*a);     BackdropStills.time_mode == "day"; end
+    end
+  end
+
+  if ENV["BD_OUTDOOR"] == "1" && defined?(PrismfallEBDX)
+    PrismfallEBDX.define_singleton_method(:ebdx_outdoor_now?) { true }
+  end
+
+  if ENV["BD_CAMLOG"] == "1" && defined?(BattleSceneRoom)
+    class BattleSceneRoom
+      alias bd_cam_update update unless method_defined?(:bd_cam_update)
+      def update
+        bd_cam_update
+        BackdropStills.camlog(self)
+      end
     end
   end
 

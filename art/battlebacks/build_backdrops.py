@@ -13,10 +13,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bblib import *
 from paint import *
 from rubygen import S, rb
-import fields_a, fields_b, fields_c, fields_d, fields_e, fields_f, fields_g
+import fields_a, fields_b, fields_c, fields_d, fields_e, fields_f, fields_g, fields_h
 
 REGISTRY = {}
-for mod in (fields_a, fields_b, fields_c, fields_d, fields_e, fields_f, fields_g):
+for mod in (fields_a, fields_b, fields_c, fields_d, fields_e, fields_f, fields_g, fields_h):
     REGISTRY.update(mod.BUILDERS)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))

@@ -2230,7 +2230,7 @@ module PrismfallEBDX
           :bitmap => "pf_glass_dunes_facets",
           :hd => true,
           :x => 9.78,
-          :y => 50.22,
+          :y => 100.89,
           :ox => 0,
           :oy => 0,
           :z => 1,
@@ -3036,17 +3036,17 @@ module PrismfallEBDX
         "img001" => {
           :bitmap => "pf_meadow_clouds",
           :scrolling => true,
-          :speed => 0.5,
+          :speed => 0.17,
           :direction => 1,
           :flat => true,
           :ox => 0,
           :oy => 0,
-          :x => 0,
-          :y => 61.33,
+          :x => -64.0,
+          :y => 0.0,
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
-          :z => 1,
-          :opacity => 230
+          :z => 0,
+          :parallax => [0.35, 0.18]
         },
         "img002" => {
           :bitmap => "pf_meadow_breeze",
@@ -3061,7 +3061,8 @@ module PrismfallEBDX
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
           :z => 3
-        }
+        },
+        "img003" => { :bitmap => "pf_meadow_front", :flat => true, :x => 0, :y => 0, :ox => 0, :oy => 0, :zoom_x => 0.444444444, :zoom_y => 0.444444444, :z => 1 }
       },
       :layers => [
         { :bitmap => "pf_meadow_sails", :hd => true, :x => 272.0, :y => 93.33, :ox => 27, :oy => 27, :z => 1, :anim => :rotate, :speed => 0.8 },
@@ -4568,16 +4569,17 @@ module PrismfallEBDX
         "img001" => {
           :bitmap => "pf_stormfront_scud",
           :scrolling => true,
-          :speed => 3,
+          :speed => 1,
           :direction => -1,
           :flat => true,
           :ox => 0,
           :oy => 0,
-          :x => 0,
-          :y => 17.78,
+          :x => -64.0,
+          :y => 0.0,
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
-          :z => 1
+          :z => 0,
+          :parallax => [0.3, 0.15]
         },
         "img002" => {
           :bitmap => "pf_stormfront_mist",
@@ -4592,7 +4594,8 @@ module PrismfallEBDX
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
           :z => 26
-        }
+        },
+        "img003" => { :bitmap => "pf_stormfront_front", :flat => true, :x => 0, :y => 0, :ox => 0, :oy => 0, :zoom_x => 0.444444444, :zoom_y => 0.444444444, :z => 1 }
       },
       :layers => [
         { :bitmap => "pf_stormfront_pennant", :hd => true, :x => 114.22, :y => 7.56, :ox => 2, :oy => 13, :z => 2, :anim => :sway, :amp => 8, :period => 40 },

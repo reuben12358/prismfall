@@ -163,6 +163,7 @@ module PrismfallEBDX
         data["img090"] = { :bitmap => bd + "_fog", :scrolling => true, :speed => 0.5,
                            :oy => 0, :z => 30, :flat => true }
       end
+      night_art = art.end_with?("_night")
       (profile[:art_extras] || {}).each do |k, v|
         # Skip (and log) EBDX image layers whose graphic is missing, so a partial art drop never crashes.
         if v.is_a?(Hash) && v[:bitmap] && !pbResolveBitmap(v[:bitmap].to_s) &&
@@ -170,7 +171,12 @@ module PrismfallEBDX
           log("Missing element '#{v[:bitmap]}' for :#{field_id} (#{k}); layer skipped.")
           next
         end
-        data[k] = deep_dup(v)
+        v = deep_dup(v)
+        # With the *_night room, an element that has its own *_night version uses it (sky cut-outs, clouds).
+        if night_art && v.is_a?(Hash) && v[:bitmap] && pbResolveBitmap(EBDX_ELEMENTS + v[:bitmap].to_s + "_night")
+          v[:bitmap] = v[:bitmap].to_s + "_night"
+        end
+        data[k] = v
       end
       data["prismfall_tone"] = profile[:art_tone] if profile[:art_tone]
     else
@@ -184,7 +190,14 @@ module PrismfallEBDX
     # Animated art layers only belong to the field's own art (the fallback room has none of it).
     if art && AMBIENT_LAYERS
       layers = (profile[:layers] || []).select { |l| l[:bitmap].nil? || pbResolveBitmap(EBDX_ELEMENTS + l[:bitmap].to_s) }
-      data["prismfall_layers"] = deep_dup(layers)
+      layers = deep_dup(layers)
+      if art.end_with?("_night")
+        layers.each do |l|
+          next if !l.is_a?(Hash) || !l[:bitmap] || !pbResolveBitmap(EBDX_ELEMENTS + l[:bitmap].to_s + "_night")
+          l[:bitmap] = l[:bitmap].to_s + "_night"
+        end
+      end
+      data["prismfall_layers"] = layers
     end
     data["prismfall_field"] = field_id
     return data

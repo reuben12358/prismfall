@@ -521,18 +521,33 @@
    "battlebg/field_meadow_night.png",
    "battlebg/field_meadow_night_hd.png",
    "elements/pf_meadow_breeze.png",
+   "elements/pf_meadow_breeze_night.png",
    "elements/pf_meadow_clouds.png",
+   "elements/pf_meadow_clouds_night.png",
+   "elements/pf_meadow_front.png",
+   "elements/pf_meadow_front_night.png",
    "elements/pf_meadow_grass0.png",
+   "elements/pf_meadow_grass0_night.png",
    "elements/pf_meadow_grass1.png",
+   "elements/pf_meadow_grass1_night.png",
    "elements/pf_meadow_grass2.png",
+   "elements/pf_meadow_grass2_night.png",
    "elements/pf_meadow_grass3.png",
+   "elements/pf_meadow_grass3_night.png",
    "elements/pf_meadow_grass4.png",
+   "elements/pf_meadow_grass4_night.png",
    "elements/pf_meadow_grass5.png",
+   "elements/pf_meadow_grass5_night.png",
    "elements/pf_meadow_grass6.png",
+   "elements/pf_meadow_grass6_night.png",
    "elements/pf_meadow_sails.png",
+   "elements/pf_meadow_sails_night.png",
    "elements/pf_meadow_shaft0.png",
+   "elements/pf_meadow_shaft0_night.png",
    "elements/pf_meadow_shaft1.png",
-   "elements/pf_meadow_shaft2.png"
+   "elements/pf_meadow_shaft1_night.png",
+   "elements/pf_meadow_shaft2.png",
+   "elements/pf_meadow_shaft2_night.png"
   ],
   "sources": [
    [
@@ -541,7 +556,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "windmill with turning sails, light shafts, wildflowers, swaying tall-grass clumps, clouds, breeze, pollen"
+    "zenith sky and the oak's crown above the panel, sky-less front cut-out, drifting cumulus (day and night), windmill with turning sails, light shafts, wildflowers, swaying tall-grass clumps, breeze, pollen"
    ]
   ]
  },
@@ -812,6 +827,7 @@
   "files": [
    "battlebg/field_stormfront.png",
    "battlebg/field_stormfront_hd.png",
+   "elements/pf_stormfront_front.png",
    "elements/pf_stormfront_lightning.png",
    "elements/pf_stormfront_mist.png",
    "elements/pf_stormfront_pennant.png",
@@ -824,7 +840,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "airship deck, rail, mast and rigging, pennant, scud clouds, lightning glow"
+    "airship deck, rail, mast and rigging, pennant, storm scud racing behind the rigging, sky-less front cut-out, lightning glow"
    ]
   ]
  },

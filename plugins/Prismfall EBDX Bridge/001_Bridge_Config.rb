@@ -170,7 +170,10 @@ module PrismfallEBDX
   #                used when the field's own room image is missing
   #   :tone        tone applied to the fallback room
   #   :art_tone    tone applied even when the field's own art exists (rarely needed)
-  #   :art_extras  EBDX room keys merged over the field's own art ("water", "lightsC"...)
+  #   :art_extras  EBDX room keys merged over the field's own art ("water", "lightsC"...).
+  #                An "imgNNN" entry may add :parallax => [px, py] (far layers such
+  #                as sky clouds follow the camera by that fraction); with the
+  #                *_night room, an element with its own <bitmap>_night uses it.
   #   :fallback_extras  EBDX room keys merged over the fallback room
   #   :outdoor     true = EBDX day/night tint + *_night art variant apply
   #   :transition  transition INTO this field (see TRANSITIONS)

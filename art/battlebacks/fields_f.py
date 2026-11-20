@@ -32,9 +32,16 @@ def sheet_layer(F, tag, sheet, x, y, frames, frame_time, z=2, zoom=1.0, phase=0,
 
 
 #---------------------------------------------------------------------------------------------
+def desert_base():
+    """aveontrainer's dunes, extended; above the horizon the sky simply continues (skies.extend_with_sky), so no
+    upside-down mesa hangs over the room when EBDX's camera pulls back. Shared by FLOODED_DUNES / GLASS_DUNES."""
+    import skies
+    return skies.extend_with_sky(art("battlebgdesert_by_aveontrainer_ddp4tzl.png"), origin=O)
+
+
 def desert():
     F = "desert"
-    hd = room_from(art("battlebgdesert_by_aveontrainer_ddp4tzl.png"))
+    hd = desert_base()
     fields_a.plat_pair(hd, (236, 196, 120), (176, 126, 70), speckle=([(214, 168, 100), (250, 226, 160)], 160))
     fields_a.save_room("field_desert", hd)
     layers = [layer(F, "sun", soft_glow((212, 176), 150, (255, 252, 220), alpha=190), z=1, blend=1, anim=S("pulse"),

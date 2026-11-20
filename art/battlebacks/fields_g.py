@@ -14,7 +14,7 @@ SEA_HORIZON = 232      # HD y where the far sea meets the low sky (in the valley
 
 
 def _bare():
-    return extend_vanilla(art("battlebgdesert_by_aveontrainer_ddp4tzl.png"), origin=O)
+    return fields_f.desert_base()
 
 
 def _masks(hd):
@@ -26,6 +26,12 @@ def _masks(hd):
     sand = ~sky & ~cactus & ~rock
     H, W = sand.shape
     ys, xs = np.mgrid[0:H, 0:W].astype(np.float32)
+    above = ys < O[1] - 2                   # desert_base: only open sky above the source (no mirrored scenery)
+    glare = (ys < O[1] + 40) & (b > r - 20) & (b > 115) & (g > 115)   # the sun glare, also where depth-dimmed
+    extra = (above | glare) & ~sky
+    sky = sky | extra
+    cactus = cactus & ~extra & (ys >= O[1] + 40)    # no cactus reaches that high; greenish glow there is sky
+    rock, sand = rock & ~extra, sand & ~extra
     n = noise((W, H), 9, 801, 2)
     shore = 284 + (n - 0.5) * 14                                        # where the far dunes meet the flooded valley
     hump = np.where(xs < 150, 392, 392 - (xs - 150) * 0.52) + (n - 0.5) * 18   # the left dune slope stays a crest
