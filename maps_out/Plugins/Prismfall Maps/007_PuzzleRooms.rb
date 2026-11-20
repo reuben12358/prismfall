@@ -89,6 +89,14 @@ if defined?(PrismfallPuzzles)
     :solved => { :switches => { 531 => true, 532 => true, 533 => true } },
     :hints => ["Each thread runs to more than one curtain. Count the cracks, not the pulls.", "The middle thread would refreeze the second curtain if anything else had broken it.", "Pull the left thread and the right thread, once each."],
   })
+  PrismfallPuzzles.room(:d2_lantern_hollow, {
+    :name => "The lantern hollow",
+    :map => 525,
+    :home => false,
+    :reset => { :switches => { 506 => false, 507 => false, 508 => false } },
+    :solved => { :switches => { 506 => true, 507 => false, 508 => true } },
+    :hints => ["The chevron in each curtain's sag points the way it lets you through.", "Each post lights two cocoons. One post is outside the thicket, one inside it.", "Touch the outside post, go in by the first curtain, touch the inside post, and go on north."],
+  })
   PrismfallPuzzles.room(:d3_anchors, {
     :name => "Cocoonfall anchors",
     :map => 548,
@@ -96,6 +104,19 @@ if defined?(PrismfallPuzzles)
     :reset => { :switches => { 511 => true, 512 => true, 513 => false } },
     :hints => ["Every anchor pulls two threads at once. Three threads can't all be tight.", "Cross the two bridges that are already taut before you touch anything.", "Visit both houses first. Then pull the middle or the right anchor: one house bridge goes slack and the nest's pulls tight."],
   })
+  # D2 the Deepwood: one-way silk.  natural = the way the curtain leans when its cocoon is dark; sw = the cocoon (0 = none).
+  def pfp_silk(natural, sw)
+    flip = { "N" => "S", "S" => "N", "E" => "W", "W" => "E" }
+    lean = (sw > 0 && $game_switches[sw]) ? flip[natural] : natural
+    d = { "N" => 8, "S" => 2, "E" => 6, "W" => 4 }[lean]
+    if $game_player.direction == d
+      dx, dy = { 8 => [0, -1], 2 => [0, 1], 6 => [1, 0], 4 => [-1, 0] }[d]
+      pbSEPlay("Door slide", 60, 130) rescue nil
+      PrismfallPuzzles.ride($game_player.x + dx * 2, $game_player.y + dy * 2)
+    else
+      pbMessage(_INTL("The silk holds fast. Its threads lean the other way."))
+    end
+  end
   # D1 the Glassed Orchard: ring the cracked trees in the gate phrase's order (low, middle, high).
   def pfp_chime(note)
     order = [:L, :M, :H]

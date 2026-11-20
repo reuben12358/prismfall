@@ -33,6 +33,76 @@ def d3():
     return machine('d3_anchors (548)', (1, 1, 0), actions, lambda v: v[2] == 1, moves=1, invariant=lambda v: sum(v) in (0, 2), rating=2)
 
 
+# ---- D2 the Deepwood (525): the lantern hollow ------------------------------------------------------------------------
+# Silk leans one way: a curtain lets you through only the way its threads lean (a chevron in the sag); from the other side
+# it is a wall.  A lit lantern cocoon makes its curtain lean the other way.  Post alpha lights cocoons 1 and 2, post beta
+# 2 and 3 (a Joltik on each post sends the spark along the strand: Electroweb runs the threads, the field's own rule).
+# The hollow is walled with silk round the Deepwood's north-east pocket: outside -> C1 -> the thicket -> C3 -> the island
+# (Silver Powder and TM19).  Post alpha stands outside, post beta inside the thicket, so the order is forced: alpha then
+# beta.  Cocoon 2 is lit twice and goes dark again, so C2 (the thicket's back door) is open the way out at the end.
+D2_COCOONS = {1: (29, 7), 2: (30, 10), 3: (33, 6)}                            # hung in the silk wall beside their curtains
+D2_WALLS = [c for c in [(30, 5), (29, 7), (29, 9), (30, 10), (32, 10), (37, 7), (37, 8), (37, 9)] + [(x, 6) for x in range(30, 41) if x != 34]
+            if c not in D2_COCOONS.values()]
+D2_CURTAINS = {1: ((29, 8), 'W'), 2: ((31, 10), 'S'), 3: ((34, 6), 'S')}      # cocoon n -> (cell, natural lean)
+D2_EXIT = ((30, 4), 'W')                                                        # the island's one-way way home
+D2_POSTS = {'alpha': ((25, 7), (0, 1)), 'beta': ((33, 9), (1, 2))}
+D2_START, D2_GOAL = (24, 8), (39, 1)
+D2_LEAN = {'N': (0, -1), 'S': (0, 1), 'E': (1, 0), 'W': (-1, 0)}
+D2_FLIP = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
+MAP525 = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'maps_out', 'Data', 'Map525.rxdata')
+
+
+class SilkModel(Model):
+    """One-way silk: stepping into a curtain moving the way it leans carries you through to the far side."""
+    rebuild_same_class = True
+
+    def leans(self, v):
+        out = {c: lean for c, lean in [D2_EXIT]}
+        for n, (c, lean) in D2_CURTAINS.items():
+            out[c] = D2_FLIP[lean] if v[n - 1] else lean
+        return out
+
+    def region(self, cell, v):
+        lean = self.leans(v)
+        seen = {cell}; q = [cell]
+        while q:
+            m, x, y = q.pop()
+            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                c = (x + dx, y + dy)
+                if c in lean:
+                    if D2_LEAN[lean[c]] != (dx, dy): continue
+                    n = (m, c[0] + dx, c[1] + dy)
+                    if n not in self.cells or not self.passable(n, v): continue
+                elif (m,) + c in self.cells and self.passable((m,) + c, v):
+                    n = (m,) + c
+                else:
+                    continue
+                if n not in seen: seen.add(n); q.append(n)
+        return frozenset(seen)
+
+
+def silk_model():
+    from .built import load
+    import render as R, build as B
+    m = load(525); ts = R.tilesets()[m.tileset_id]; L = m.data.data
+    block = set(D2_WALLS) | {c for c, _ in D2_CURTAINS.values()} | {D2_EXIT[0]} | {p for p, _ in D2_POSTS.values()} | set(D2_COCOONS.values())
+    ev = {(e.x, e.y) for e in m.events.values() if e.name in ('Item', 'HiddenItem') or e.name.startswith('Trainer(')} | {D2_GOAL}
+    cells = {(525, x, y) for y in range(m.height) for x in range(m.width)
+             if B.cell_passable(L, ts, x, y) and (x, y) not in block and (x, y) not in ev}
+
+    def lights(lines):
+        def act(v, c):
+            v = list(v)
+            for i in lines: v[i] ^= 1
+            return tuple(v), c
+        return act
+    dev = [Device('post %s' % n, [c for c in around(525, *p) if c in cells], lights(lines), 'post %s' % n) for n, (p, lines) in D2_POSTS.items()]
+    mdl = SilkModel('d2_lantern_hollow (525)', cells, lambda c, v: True, (525,) + D2_START, (0, 0, 0), dev,
+                    [c for c in around(525, *D2_GOAL) if c in cells], resets=[(525,) + D2_START])
+    mdl.game = lambda v: ({}, {S_COCOON[i]: bool(v[i]) for i in range(3)})
+    return mdl
+
+
 # ---- D7 the Rimewood (562): the Frost Loom ------------------------------------------------------------------------
 # Three frozen threads (pegs) hold three icicle curtains across the east side path, a dead end whose pocket hides the
 # trapper's cache.  Pulling a thread runs frost along it: every curtain on its line cracks if frozen, refreezes if broken.
@@ -83,7 +153,8 @@ def d7_unique():
     return ok, ['%s d7_frost_loom: unique answer over Z2: %r' % ('ok  ' if ok else 'FAIL', sols)]
 
 
-CHECKS = [(frost_model, dict(moves=2, rating=3, without={'the right thread': ['right thread']}))] if os.path.exists(MAP562) else []
+CHECKS = ([(frost_model, dict(moves=2, rating=3, without={'the right thread': ['right thread']}))] if os.path.exists(MAP562) else []) + \
+         ([(silk_model, dict(moves=2, rating=2, without={'post alpha': ['post alpha'], 'post beta': ['post beta']}))] if os.path.exists(MAP525) else [])
 EXTRA = [d1, d2, d3, d7_unique]
 
 ROOMS = {
@@ -103,6 +174,12 @@ ROOMS = {
                           hints=["Each thread runs to more than one curtain. Count the cracks, not the pulls.",
                                  "The middle thread would refreeze the second curtain if anything else had broken it.",
                                  "Pull the left thread and the right thread, once each."]),
+    'd2_lantern_hollow': dict(name='The lantern hollow', map=525, home=False,
+                              reset=dict(switches={S_COCOON[0]: False, S_COCOON[1]: False, S_COCOON[2]: False}),
+                              solved=dict(switches={S_COCOON[0]: True, S_COCOON[1]: False, S_COCOON[2]: True}),
+                              hints=["The chevron in each curtain's sag points the way it lets you through.",
+                                     "Each post lights two cocoons. One post is outside the thicket, one inside it.",
+                                     "Touch the outside post, go in by the first curtain, touch the inside post, and go on north."]),
     'd3_anchors': dict(name='Cocoonfall anchors', map=548, home=False,
                        reset=dict(switches={S_BRIDGE[0]: True, S_BRIDGE[1]: True, S_BRIDGE[2]: False}),
                        hints=["Every anchor pulls two threads at once. Three threads can't all be tight.",
@@ -172,9 +249,58 @@ def _d7_events():
     return ev
 
 
-EVENTS = {522: _d1_events(), 562: _d7_events()}
+def _d2_events():
+    DIR = {'S': 'down', 'W': 'left', 'E': 'right', 'N': 'up'}
+    WAY = {'S': 'south', 'W': 'west', 'E': 'east', 'N': 'north'}
+    ev = []
+    for i, (x, y) in enumerate(D2_WALLS):
+        ev.append({'type': 'event', 'name': 'Silk wall %d' % i, 'at': [x, y], 'pages': [
+            {'graphic': {'sprite': 'pf_silk_wall', 'dir': 'down'}, 'dir_fix': True}]})
+    curt = [(n, c, lean) for n, (c, lean) in D2_CURTAINS.items()] + [(0, D2_EXIT[0], D2_EXIT[1])]
+    for n, (x, y), lean in curt:
+        def page(l, cond=None):
+            pg = {'graphic': {'sprite': 'pf_silk_curtain', 'dir': DIR[l]}, 'dir_fix': True, 'trigger': 'touch',
+                  'commands': [{'script': 'pfp_silk("%s", %d)' % (lean, S_COCOON[n - 1] if n else 0)}]}
+            if cond: pg['cond'] = cond
+            return pg
+        pages = [page(lean)]
+        if n: pages.append(page(D2_FLIP[lean], {'switch': S_COCOON[n - 1]}))
+        ev.append({'type': 'event', 'name': 'Silk curtain %d' % n if n else 'Silk curtain home', 'at': [x, y], 'pages': pages})
+    for n, (x, y) in D2_COCOONS.items():
+        ev.append({'type': 'event', 'name': 'Lantern cocoon %d' % n, 'at': [x, y], 'pages': [
+            {'graphic': {'sprite': 'pf_lantern_cocoon', 'dir': 'down'}, 'dir_fix': True,
+             'commands': ['A cocoon hung on a strand, dark. When it glows, the silk beside it leans the other way.']},
+            {'cond': {'switch': S_COCOON[n - 1]}, 'graphic': {'sprite': 'pf_lantern_cocoon', 'dir': 'up'}, 'dir_fix': True,
+             'commands': ['The cocoon glows like a lantern. The silk beside it has swung the other way.']}]})
+    for name, ((x, y), lines) in D2_POSTS.items():
+        sc = '\n'.join('pfp_flip(%d)' % S_COCOON[i] for i in lines)
+        ev.append({'type': 'event', 'name': 'Anchor post %s' % name, 'at': [x, y], 'pages': [
+            {'graphic': {'sprite': 'Followers/JOLTIK', 'dir': 'down'}, 'step_anime': True, 'dir_fix': True, 'commands': [
+                "A Joltik clings to the anchor post where two silk strands are tied.",
+                {'choices': ['Touch the strands', 'Leave it'], 'cancel': 2, 'branches': [[
+                    {'se': 'Anim/Thunder1'}, {'script': sc},
+                    "The Joltik sparks! The charge runs both strands, and every cocoon on them changes: dark ones glow, glowing ones go dark."], []]}]}]})
+    ev.append({'type': 'item', 'at': list(D2_GOAL), 'item': 'TM19'})
+    ev.append({'type': 'sign', 'at': [25, 9], 'text': '"SILK ONLY LETS YOU GO THE WAY IT\'S BEEN PULLED. A LIT COCOON PULLS IT THE OTHER WAY. -- Woodward"'})
+    return ev
+
+
+EVENTS = {522: _d1_events(), 562: _d7_events(), 525: _d2_events()}
 
 RUBY = """
+# D2 the Deepwood: one-way silk.  natural = the way the curtain leans when its cocoon is dark; sw = the cocoon (0 = none).
+def pfp_silk(natural, sw)
+  flip = { "N" => "S", "S" => "N", "E" => "W", "W" => "E" }
+  lean = (sw > 0 && $game_switches[sw]) ? flip[natural] : natural
+  d = { "N" => 8, "S" => 2, "E" => 6, "W" => 4 }[lean]
+  if $game_player.direction == d
+    dx, dy = { 8 => [0, -1], 2 => [0, 1], 6 => [1, 0], 4 => [-1, 0] }[d]
+    pbSEPlay("Door slide", 60, 130) rescue nil
+    PrismfallPuzzles.ride($game_player.x + dx * 2, $game_player.y + dy * 2)
+  else
+    pbMessage(_INTL("The silk holds fast. Its threads lean the other way."))
+  end
+end
 # D1 the Glassed Orchard: ring the cracked trees in the gate phrase's order (low, middle, high).
 def pfp_chime(note)
   order = [:L, :M, :H]
