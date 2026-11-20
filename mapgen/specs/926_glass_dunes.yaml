@@ -1,0 +1,253 @@
+# The Glass Dunes (926). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 926
+name: The Glass Dunes
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 13, 15]
+rubric: true
+yards_ok: true
+biome: desert
+field: DESERT
+tone: [14, 8, 0, 10]
+gates:
+- name: The crest (only from the Steamline)
+  from:
+  - [56, 31]
+  - [7, 3]
+  - [51, 3]
+  sealed:
+  - [30, 4]
+  - [30, 6]
+connections:
+- {dir: N, offset: 0, to: 925, to_offset: 2}
+- {dir: E, offset: 30, to: 930, to_offset: 15}
+walk_from:
+- [30, 1]
+- [58, 32]
+raw: data/raw/926.npy
+tileset: 56
+events:
+- type: warp
+  name: To the Rimed Sands
+  at: [7, 1]
+  link: WAR_RIMED_DUNES
+  arrive: [7, 2, down]
+- type: warp
+  name: To the Siege Camp
+  at: [51, 1]
+  link: WAR_CAMP_DUNES
+  arrive: [51, 2, down]
+- type: trainer
+  at: [27, 8]
+  sight: 4
+  dir: down
+  sprite: trainer_CRUSHGIRL
+  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
+  intro: The crest is held. By me, for now.
+  after: For now.
+  cond: {switch: WAR_SIDE_ASH}
+- type: trainer
+  at: [33, 8]
+  sight: 4
+  dir: down
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
+  intro: One more between you and the crest.
+  after: Go. Look at what we did.
+  cond: {switch: WAR_SIDE_ASH}
+- type: trainer
+  at: [27, 9]
+  sight: 4
+  dir: down
+  sprite: trainer_CRUSHGIRL
+  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
+  intro: The crest is held. By me, for now.
+  after: For now.
+  cond: {switch: WAR_SIDE_ISE}
+- type: trainer
+  at: [33, 9]
+  sight: 4
+  dir: down
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
+  intro: One more between you and the crest.
+  after: Go. Look at what we did.
+  cond: {switch: WAR_SIDE_ISE}
+- type: trainer
+  at: [27, 10]
+  sight: 4
+  dir: down
+  sprite: trainer_CRUSHGIRL
+  trainer: [ASHKAAR_SOLDIER_F, Soldier, 1]
+  intro: The crest is held. By me, for now.
+  after: For now.
+  cond: {switch: WAR_SIDE_MID}
+- type: trainer
+  at: [33, 10]
+  sight: 4
+  dir: down
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_SOLDIER_F, Soldier, 1]
+  intro: One more between you and the crest.
+  after: Go. Look at what we did.
+  cond: {switch: WAR_SIDE_MID}
+- type: event
+  name: Partner
+  at: [30, 4]
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_MID}
+    graphic: {sprite: trainer_ELITEFOUR_Lance, dir: down}
+    trigger: action
+    commands:
+    - 'Sigrun: Between them? Then we hold the middle. Both captains are coming. Back to back.'
+    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
+    - {script: setBattleRule("double")}
+    - if: TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ASHKAAR_OFFICER, "Captain", 1)
+      then:
+      - &id001 {script: pbDeregisterPartner rescue ($PokemonGlobal.partner = nil)}
+      - 'Sigrun: Still standing. Both of us. Look up.'
+      - {script: 'pfm_set(:war_partner_done)'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {switch: WAR_SIDE_ASH}
+    graphic: {sprite: trainer_ELITEFOUR_Lance, dir: down}
+    trigger: action
+    commands:
+    - 'Sigrun: With us, then. The Isenmar line breaks here or nowhere.'
+    - {script: 'pbRegisterPartner(:LEADER_SIGRUN, "Sigrun", 19)'}
+    - {script: setBattleRule("double")}
+    - if: TrainerBattle.start(:ISENMAR_OFFICER, "Captain", 1, :ISENMAR_SOLDIER_M, "Soldier", 2)
+      then:
+      - *id001
+      - 'Sigrun: It broke. Now the sky.'
+      - {script: 'pfm_set(:war_partner_done)'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {switch: WAR_SIDE_ISE}
+    graphic: {sprite: trainer_LEADER_Misty, dir: down}
+    trigger: action
+    commands:
+    - 'Marisol: Kid. You came. Course you came. Stand on my left; the sea''s on my right.'
+    - {script: 'pbRegisterPartner(:LEADER_MARISOL, "Marisol", 19)'}
+    - {script: setBattleRule("double")}
+    - if: TrainerBattle.start(:ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2)
+      then:
+      - *id001
+      - 'Marisol: Ha! The Ebb runs both ways, and today it ran ours.'
+      - {script: 'pfm_set(:war_partner_done)'}
+      - selfswitch: [A, true]
+      else:
+      - *id001
+  - cond: {self: A}
+    commands: [(The ground under the crest is humming. Something enormous is coming.)]
+- type: event
+  name: The legend
+  at: [30, 2]
+  pages:
+  - commands: []
+  - cond: {switch: WAR_SIDE_MID}
+    trigger: action
+    commands: &id002
+    - if: '!pfm?(:war_partner_done)'
+      then: [(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.)]
+      else:
+      - if: pfm?(:war_battle_done)
+        then: ['(The glass hums underfoot, quietly. It is over.)']
+        else:
+        - {script: "legend = (pf_choice(:war_legend) rescue nil)\nif legend != :neither\n  Prismfall::Bosses.wild_battle($game_switches[605] ? :KYOGRE_GLASS_DUNES\
+            \ : :RESHIRAM_GLASS_DUNES)\nend"}
+        - if: ((pf_choice(:war_legend) rescue nil) == :neither) || ((Prismfall::Bosses.last_result || {})[:result] == :turned_back)
+          then:
+          - {script: 'Prismfall::Cutscene.play(:WAR_CLIMAX) rescue nil'}
+          - {script: 'pfm_set(:war_battle_done)'}
+          else: [(It wheels away over the flood and comes round again. The crest shakes.)]
+  - cond: {switch: WAR_SIDE_ASH}
+    trigger: action
+    commands: *id002
+  - cond: {switch: WAR_SIDE_ISE}
+    trigger: action
+    commands: *id002
+- type: event
+  name: Goat-path
+  at: [30, 46]
+  pages:
+  - trigger: action
+    commands:
+    - if: pfm?(:war_battle_done)
+      then:
+      - A goat-path up the sandstone to the mesa, where Meridian's white tents stand.
+      - {se: Door exit}
+      - transfer: {map: 929, x: 17, y: 26, dir: up}
+      else: ['A goat-path up the sandstone mesa. Meridian guards in white at the top, with brass glasses on everything. "Observers only."']
+- type: event
+  name: War front
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'c = (pf_choice(:war_climax) rescue nil)
+
+        $game_switches[605] = (c == :back_ashkaar)
+
+        $game_switches[606] = (c == :back_isenmar)
+
+        $game_switches[607] = (c == :stand_between)'}
+    - {wait: 60}
+- type: sign
+  name: Field marker
+  at: [27, 1]
+  text: THE CREST. Below it, the caravan road and the wells. Above it, everything else.
+  post: false
+- type: event
+  name: Caravan well
+  at: [36, 32]
+  pages:
+  - trigger: action
+    commands: ['A caravan well between the lines. A white ribbon on the sweep: the bone-carters'' sign. No blood at a well. Both armies keep that.']
+- type: event
+  name: 'Caravan well '
+  at: [18, 26]
+  pages:
+  - trigger: action
+    commands: ['The second well, its bucket gone, its rope cut. Someone has left a full waterskin on the rim for whoever comes next.']
+- type: event
+  name: Bone-carters' banner
+  at: [40, 9]
+  pages:
+  - trigger: action
+    commands: ['The bone-carters'' white banner on the crest''s east shoulder. Under it, a tally-stick for every soldier carried off the sand. Both armies''
+        names.']
+- type: event
+  name: Wrecked sled
+  at: [10, 17]
+  pages:
+  - trigger: action
+    commands: ['An Isenmar sled-fort, overturned, its runners in the air, burnt to the iron on the eastern side.']
+- type: event
+  name: Bone-carter
+  at: [40, 37]
+  pages:
+  - graphic: {sprite: NPC 27, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Bone-carter: We carry them out. Whose they were doesn''t matter. Whose they are now does: Ossaria''s. Tomb-law.']
+- type: item
+  at: [56, 44]
+  item: FULLRESTORE
+- type: item
+  at: [4, 40]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (dunes)
+- type: item
+  at: [38, 4]
+  item: BIGNUGGET
+  hidden: true
+  name: HiddenItem (the crest)

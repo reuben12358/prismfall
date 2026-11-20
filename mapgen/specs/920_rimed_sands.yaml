@@ -1,0 +1,130 @@
+# The Rimed Sands (920). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 920
+name: The Rimed Sands
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  Weather: [Snow, 10]
+  MapPosition: [0, 12, 14]
+rubric: true
+yards_ok: true
+biome: desert
+field: DESERT
+tone: [10, 6, 14, 10]
+fog: {name: prismfall_seamist, opacity: 24, blend: 0, zoom: 200, sx: 1, sy: 0}
+connections:
+- {dir: E, offset: 13, to: 925, to_offset: 13}
+walk_from:
+- [1, 15]
+- [58, 15]
+raw: data/raw/920.npy
+tileset: 56
+events:
+- type: event
+  name: War front
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'c = (pf_choice(:war_climax) rescue nil)
+
+        $game_switches[605] = (c == :back_ashkaar)
+
+        $game_switches[606] = (c == :back_isenmar)
+
+        $game_switches[607] = (c == :stand_between)'}
+    - {wait: 60}
+- type: warp
+  name: To the Glass Dunes
+  at: [8, 35]
+  link: WAR_RIMED_DUNES
+  arrive: [8, 34, up]
+- type: trainer
+  at: [19, 14]
+  sight: 4
+  dir: left
+  sprite: trainer_POKEMONRANGER_M
+  trainer: [ISENMAR_SOLDIER_M, Soldier, 0]
+  intro: You came with the dragons. You leave without them.
+  after: The line holds behind me. You will see.
+  cond: {switch: WAR_SIDE_ASH}
+- type: trainer
+  at: [33, 15]
+  sight: 4
+  dir: left
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [ISENMAR_SOLDIER_F, Soldier, 0]
+  intro: The Thane said the sand would never be cold. Ask the sand.
+  after: Go, then. Tell them the Rimed Sands were held.
+  cond: {switch: WAR_SIDE_ASH}
+- type: trainer
+  at: [47, 14]
+  sight: 4
+  dir: left
+  sprite: trainer_COOLTRAINER_M
+  trainer: [ISENMAR_OFFICER, Captain, 0]
+  intro: Third line. Nobody has passed the third line.
+  after: Somebody has passed the third line. Mark it in the tally.
+  cond: {switch: WAR_SIDE_ASH}
+- type: sign
+  name: Road sign
+  at: [3, 12]
+  text: 'THE RIMED SANDS. W: Skaldfast (under siege: the road is barricaded). E: the Steamline. S: the Glass Dunes.'
+  post: false
+- type: event
+  name: Siege barricade
+  at: [1, 17]
+  pages:
+  - trigger: action
+    commands: ['Sledges on their sides, lashed with whale-gut, piled with frozen sand. Skaldfast is two miles west, and burning.']
+- type: event
+  name: Sled-yard
+  at: [12, 6]
+  pages:
+  - trigger: action
+    commands: ['Sled-forts dragged over the Mast Glacier, two hundred miles, on bone runners. Most are burnt black on the eastern side.']
+- type: event
+  name: Isenmar picket
+  at: [15, 13]
+  pages:
+  - graphic: {sprite: NPC 11, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Isenmar picket: The sand was hot when we got here. We fixed that.', 'Picket: Our Glaceon froze it a yard deep. You can feel the cold through
+        your boots. That''s the line.']
+- type: event
+  name: Skald
+  at: [28, 17]
+  pages:
+  - graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Skald: I''m here to remember it. Somebody has to, and it may as well be someone who rhymes.']
+- type: event
+  name: Ice-rider
+  at: [44, 12]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Ice-rider: My Mamoswine walked over the glacier. It will walk back. I promised it.']
+- type: event
+  name: Frozen trench
+  at: [20, 19]
+  pages:
+  - trigger: action
+    commands: ['A trench cut in sand and frozen hard, its walls glazed white. Someone has carved a tally of days into the ice. It is a long tally.']
+- type: item
+  at: [52, 4]
+  item: NEVERMELTICE
+- type: item
+  at: [26, 30]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (rimed dune)
+- type: item
+  at: [5, 28]
+  item: FULLRESTORE

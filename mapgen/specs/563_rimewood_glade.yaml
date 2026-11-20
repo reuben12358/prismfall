@@ -23,7 +23,7 @@ events:
   sprite: trainer_POKEMONRANGER_M
   trainer: [POKEMONRANGER_M, Sigurd]
   intro: Isenmar ranger. Nobody finds this glade by accident.
-  after: '...So you cut your way in. Fair.'
+  after: '...So you cut your way in. Fair. Stay till dark if you''ve the nerve. Something glides between the boles up here, and it crackles.'
 - type: item
   at: [19, 14]
   item: NEVERMELTICE

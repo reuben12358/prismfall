@@ -493,13 +493,22 @@ def gate_check(spec, ctx, m):
     for g in gates:
         seen = np.zeros_like(ok); st = [tuple(p) for p in g['from'] if ok[p[1], p[0]]]
         if not st: ctx.warn(spec['id'], 'GATE "%s": no walkable start cell' % g['name']); continue
+
+        def edge_ok(x, y, d):                       # directional passage bits as Essentials reads them (one-way ledges)
+            bit = 1 << (d // 2 - 1)
+            for z in (2, 1, 0):
+                t = int(lay[z, y, x])
+                if t == 0: continue
+                if ts['passages'][t] & bit: return False
+                if ts['priorities'][t] == 0: return True
+            return True
         while st:
             x, y = st.pop()
             if seen[y, x]: continue
             seen[y, x] = True
-            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            for dx, dy, d in ((0, 1, 2), (0, -1, 8), (1, 0, 6), (-1, 0, 4)):
                 X, Y = x + dx, y + dy
-                if 0 <= X < W and 0 <= Y < H and ok[Y, X] and not seen[Y, X]: st.append((X, Y))
+                if 0 <= X < W and 0 <= Y < H and ok[Y, X] and not seen[Y, X] and edge_ok(x, y, d) and edge_ok(X, Y, 10 - d): st.append((X, Y))
         cells = [tuple(c) for c in g.get('sealed', [])]
         e = g.get('sealed_edge')
         if e: cells += [(0, y) for y in range(H)] if e == 'W' else [(W - 1, y) for y in range(H)] if e == 'E' else \

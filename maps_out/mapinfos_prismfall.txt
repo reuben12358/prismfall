@@ -89,4 +89,11 @@
 576	570	Halvard's Smokehouse
 577	0	Frostwick Pass
 578	0	Rimewood Path
+920	0	The Rimed Sands
+924	0	Ashkaar Siege Camp
+925	0	The Steamline
+926	0	The Glass Dunes
+928	924	Ashkaar Siege Camp - Command Pavilion
+929	0	The Observers' Mesa
+930	0	The Bone-Carters' Camp
 990	0	Prismfall Test Arena

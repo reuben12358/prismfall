@@ -38,3 +38,11 @@
 570,E,23,577,W,37
 # Rimewood Path (578) - The Rimewood (562)
 578,N,36,562,S,26
+# The Rimed Sands (920) - The Steamline (925)
+920,E,13,925,W,13
+# Ashkaar Siege Camp (924) - The Steamline (925)
+924,W,18,925,E,13
+# The Steamline (925) - The Glass Dunes (926)
+925,S,2,926,N,0
+# The Glass Dunes (926) - The Bone-Carters' Camp (930)
+926,E,30,930,W,15

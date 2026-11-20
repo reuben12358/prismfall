@@ -1034,3 +1034,33 @@ strike, `:strike_turn`), the dead Octave rows, and Gym 3 for a Fire starter.
 **For the playtest:** Psycho Shift no longer crashes a battle (Base Fixes 003); Ada is a wall only for a team that never
 heals or catches a bird (`BALANCE.md` §9).
 
+
+## From map builder 10: the war theatre (2026-11-20)
+**Built (`layouts/war.py`, PF Rejuv Shore + the war kit `wr_*` in ndraw.py):** 920 The Rimed Sands, 924 Ashkaar Siege Camp,
+925 The Steamline (`:BLEED`), 926 The Glass Dunes, 928 the Command Pavilion (interior, tileset 54), 929 The Observers'
+Mesa, 930 The Bone-Carters' Camp. **Not built:** Skaldfast 921-923 and Cinder Cape 927 (920's W road ends at a siege
+barricade; 924's E war road at a guarded barricade; 930's E road to the Dry Tide 810 is open but unconnected).
+**Graph:** 920 E <-> 925 W; 925 E <-> 924 W; 925 S <-> 926 N (the crest, x 28-31); 930 W <-> 926 E. Warps: 920 S (8,35)
+`WAR_RIMED_DUNES` 926 (7,1); 924 S (8,39) `WAR_CAMP_DUNES` 926 (51,1); 924 war-tent door `WAR_TENT` 928 (11-12,16).
+926 (30,46) "Goat-path" -> 929 (17,26) after `pfm?(:war_battle_done)`.
+**Ch19 wiring (trainer designer round 3, items 6-8):** switches **S605-607 `WAR_SIDE_ASH/_ISE/_MID`** mirror
+`pf_choice(:war_climax)` (each war map's "War front" parallel event). Gauntlets: 920 Isenmar M0/F0/Captain0 (back
+Ashkaar, one per trench-line sally port); 924 Ashkaar M0/F0/Captain0 (back Isenmar, the two earthwork gates and the
+war-tent); 925 Ashkaar M1 + Isenmar M1 (stand between). 926 crest singles (Ashkaar F1, Isenmar F1, every side). 926
+"Partner" (30,4): Sigrun 19 vs Isenmar Captain1 + Soldier M2 (back Ashkaar) or both Captains1 (stand between); Marisol 19
+vs Ashkaar Captain1 + Soldier M2 (back Isenmar); `pbDeregisterPartner` after. 926 "The legend" (30,2), after the partner
+battle: `Prismfall::Bosses.wild_battle(:KYOGRE_GLASS_DUNES)` if backing Ashkaar else `:RESHIRAM_GLASS_DUNES` (skipped when
+`:war_legend == :neither`); on `:turned_back` it plays `Prismfall::Cutscene.play(:WAR_CLIMAX)` and sets `:war_battle_done`.
+The crest is reachable only from the Steamline: `gates:` proves it (`GATE ok 926`).
+**For the story / cutscene owners:** the choice itself (`:war_climax`) and `:war_terms` are not asked on these maps (your
+scenes); 928 has anchors "Dominar Hrothgar" (the petition, `:ch19_dominar`) and "Anja (cage)" (`:war_prisoner`) with
+placeholder lines; 926's "Caravan well" is the exchange site; 930's "Elder Ossa" is the elder's quest giver (lines only).
+WAR-1's stage picture (`Graphics/Pictures/pfw_glass_dunes.png`) is still the composed one: export 926's render if you
+want the real map behind the scene (the crest is x 18-42, y 0-14; Isenmar west, Ashkaar east).
+**For the sprite artist:** the war classes use base-project stand-ins (`war.py` SPRITE): Isenmar soldiers = Pokémon
+Ranger M/F, Isenmar Captain = Cool Trainer M, Ashkaar soldiers = Black Belt / Crush Girl, Ashkaar Captain = Tamer, Sigrun =
+Lance, Marisol = Misty, the Dominar = Giovanni. Overworld charsets for the real classes are wanted.
+**Also (fixes agent, Emolga):** Ranger Sigurd's after-line on 563 now points at the night glade; Frostwick (570) has the
+rumour ("Old woman by the brazier").
+**Note for every layout author:** a priority-0 decal on the top layer over a solid prop makes the prop walkable (Essentials
+reads the top tile first). `war.py decal()` and 568's veil now skip props; check your own decal passes.

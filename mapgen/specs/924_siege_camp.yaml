@@ -1,0 +1,162 @@
+# Ashkaar Siege Camp (924). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 924
+name: Ashkaar Siege Camp
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 14, 14]
+rubric: true
+yards_ok: true
+biome: desert
+field: ASHEN_WASTE
+tone: [18, 4, -10, 10]
+connections:
+- {dir: W, offset: 18, to: 925, to_offset: 13}
+walk_from:
+- [1, 20]
+- [54, 20]
+raw: data/raw/924.npy
+tileset: 56
+events:
+- type: warp
+  name: To the Glass Dunes
+  at: [8, 39]
+  link: WAR_CAMP_DUNES
+  arrive: [8, 38, up]
+- type: trainer
+  at: [11, 19]
+  sight: 4
+  dir: left
+  sprite: trainer_BLACKBELT
+  trainer: [ASHKAAR_SOLDIER_M, Soldier, 0]
+  intro: Isenmar sends children now? Then I fight children.
+  after: '...Not children. Go on, then. The next gate won''t be so polite.'
+  cond: {switch: WAR_SIDE_ISE}
+- type: trainer
+  at: [21, 20]
+  sight: 4
+  dir: left
+  sprite: trainer_CRUSHGIRL
+  trainer: [ASHKAAR_SOLDIER_F, Soldier, 0]
+  intro: Second gate. The fire behind it is real.
+  after: The fire behind it is real. So is that.
+  cond: {switch: WAR_SIDE_ISE}
+- type: trainer
+  at: [35, 16]
+  sight: 4
+  dir: down
+  sprite: trainer_TAMER
+  trainer: [ASHKAAR_OFFICER, Captain, 0]
+  intro: You want the Dominar's tent? Through me. That is how it works here.
+  after: That is how it works here. Pass.
+  cond: {switch: WAR_SIDE_ISE}
+- type: door
+  at: [36, 13]
+  gfx: ['', 0, 2]
+  name: War-tent door
+  link: WAR_TENT
+- type: event
+  name: War front
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'c = (pf_choice(:war_climax) rescue nil)
+
+        $game_switches[605] = (c == :back_ashkaar)
+
+        $game_switches[606] = (c == :back_isenmar)
+
+        $game_switches[607] = (c == :stand_between)'}
+    - {wait: 60}
+- type: sign
+  name: Camp sign
+  at: [4, 17]
+  text: ASHKAAR SIEGE CAMP - by the Dominar's leave and the Elector's Lease. Lies are a capital crime in this camp.
+  post: false
+- type: event
+  name: Earthwork
+  at: [9, 14]
+  pages:
+  - trigger: action
+    commands: ['A rampart of sand and black glass, packed hard and baked: the legion engineers fire it with Torkoal until it rings.']
+- type: event
+  name: Forge
+  at: [44, 25]
+  pages:
+  - trigger: action
+    commands: ['A field forge, roaring. Spearheads for the legion, shoes for the Rapidash, and a dragon''s neck-plate the size of a door.']
+- type: event
+  name: Mess fire
+  at: [28, 25]
+  pages:
+  - trigger: action
+    commands: [The mess fire. Somebody is stirring a pot of red lentils as big as a bath and singing a marching song badly.]
+- type: event
+  name: Legionary
+  at: [26, 16]
+  pages:
+  - graphic: {sprite: NPC 21, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Legionary: The steam''s a wall. The wall''s a Bleed. The Bleed''s Isenmar''s fault. That''s the briefing.']
+- type: event
+  name: Dragon handler
+  at: [40, 22]
+  pages:
+  - graphic: {sprite: NPC 20, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Dragon handler: Don''t look them in the eye. Don''t look them in the tail either. Just walk.']
+- type: event
+  name: Quartermaster
+  at: [47, 31]
+  pages:
+  - graphic: {sprite: NPC 25, dir: up}
+    trigger: action
+    move: fixed
+    commands: ['Quartermaster: Fire we have. Water we buy. From Ossaria. At Ossarian prices.']
+- type: event
+  name: Scout
+  at: [15, 26]
+  pages:
+  - graphic: {sprite: NPC 22, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Scout: The bone-carters walk straight across. Nobody shoots a bone-carter. Not twice.']
+- type: event
+  name: Dragonite
+  at: [46, 12]
+  pages:
+  - graphic: {sprite: Followers/DRAGONITE, dir: down}
+    trigger: action
+    move: random
+    commands: ['(It is chained to the picket. It looks at the chain, then at you, then sighs.)']
+- type: event
+  name: Charizard
+  at: [50, 14]
+  pages:
+  - graphic: {sprite: Followers/CHARIZARD, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['(A war-mount, scarred. It warms the sand where it lies.)']
+- type: event
+  name: Barricade (war road)
+  at: [53, 22]
+  pages:
+  - trigger: action
+    commands: ['The war road east to Glasswake, barricaded and guarded. Supplies come in; nobody goes out.']
+- type: item
+  at: [52, 36]
+  item: CHARCOAL
+- type: item
+  at: [30, 5]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (dune)
+- type: item
+  at: [3, 36]
+  item: HYPERPOTION

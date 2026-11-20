@@ -815,6 +815,31 @@ def pieces():
     for v in range(2): out['bl_veil%d' % v] = (bleed_veil(v), ['V'], None)
     for v in range(3): out['bl_gust%d' % v] = (frozen_gust(v), ['V'], None)
     im, c = tipped_wagon(); out['pf_wagon'] = (im, c, None)
+    # the war theatre (map builder 10)
+    out['wr_tent_r'] = (tent(RED), ['OOO', 'WWW', 'WDW'][:0] or ['OOO', 'WWW', 'WWW'], None)
+    out['wr_tent_b'] = (tent(BLUE), ['OOO', 'WWW', 'WWW'], None)
+    out['wr_tent_w'] = (tent(CANVAS_W), ['OOO', 'WWW', 'WWW'], None)
+    out['wr_tent_bone'] = (tent(BONE, stripe=(150, 140, 120, 255)), ['OOO', 'WWW', 'WWW'], None)
+    im, c = war_tent(); out['wr_wartent'] = (im, c, (2, 3))
+    im, c = trebuchet(); out['wr_trebuchet'] = (im, c, None)
+    im, c = dragon_picket(); out['wr_picket'] = (im, c, None)
+    im, c = sled_fort(); out['wr_sledfort'] = (im, c, None)
+    im, c = sled_fort(False); out['wr_sledfort2'] = (im, c, None)
+    for nm, cols, em in (('wr_ban_ash', RED, 'dragon'), ('wr_ban_ise', BLUE, 'whale'), ('wr_ban_bone', BONE, 'bone')):
+        im, c = banner(cols, em); out[nm] = (im, c, None)
+    im, c = caravan_well(); out['wr_well'] = (im, c, None)
+    im, c = bone_cart(); out['wr_bonecart'] = (im, c, None)
+    im, c = tally_wall(); out['wr_tally'] = (im, c, None)
+    im, c = tripod(); out['wr_tripod'] = (im, c, None)
+    im, c = dial_box(); out['wr_dial'] = (im, c, None)
+    im, c = telegraph(); out['wr_telegraph'] = (im, c, None)
+    for v in range(2): out['wr_trench%d' % v] = (trench(v), ['V'], None)
+    for v in range(3): out['wr_ember%d' % v] = (embers(v), ['V'], None)
+    for v in range(3): out['wr_frost%d' % v] = (frost_crust(v), ['V'], None)
+    for v in range(3): out['wr_steam%d' % v] = (steam(v), ['V'], None)
+    for v in range(3): out['wr_ripple%d' % v] = (ripple(v), ['V'], None)
+    for v in range(2): out['wr_bones%d' % v] = (bones(v), ['V'], None)
+    for v in range(2): out['wr_rut%d' % v] = (rut(v), ['V'], None)
     return out
 
 
@@ -919,6 +944,225 @@ def tipped_wagon():
         d.ellipse([x - 4, y - 3, x + 4, y + 3], fill=(214, 200, 168, 255), outline=(150, 130, 100, 255))
     d.ellipse([4, 27, 46, 31], fill=(0, 0, 0, 60))
     return im, ['OOO', 'WWW']
+
+
+# ------------------------------------------------------------------ the war theatre (920-930), map builder 10
+RED = [(92, 24, 28, 255), (150, 40, 40, 255), (196, 72, 56, 255), (232, 120, 84, 255)]
+BLUE = [(30, 48, 92, 255), (52, 86, 150, 255), (96, 134, 196, 255), (176, 204, 236, 255)]
+BONE = [(150, 140, 120, 255), (196, 188, 166, 255), (226, 220, 202, 255), (248, 246, 236, 255)]
+CANVAS_W = [(140, 132, 118, 255), (186, 178, 160, 255), (222, 216, 198, 255), (244, 240, 228, 255)]
+
+
+def tent(cols, w=3, h=3, door=True, stripe=None):
+    """a ridge tent seen from the south: roof in two pitches, a flap door, guy ropes and pegs"""
+    im, d = canvas(w, h); W, Hh = w * 16, h * 16
+    top, eave = 6, Hh - 14
+    d.polygon([(2, eave), (W // 2, top), (W - 3, eave)], fill=cols[1], outline=OUT)
+    d.polygon([(W // 2, top), (W - 3, eave), (W // 2 + 2, eave)], fill=cols[0])
+    d.line([2, eave, W // 2, top], fill=cols[3]); d.line([W // 2, top, W // 2, eave], fill=cols[2])
+    d.rectangle([4, eave, W - 5, Hh - 3], fill=cols[2], outline=OUT)
+    if stripe: d.rectangle([4, eave + 2, W - 5, eave + 3], fill=stripe)
+    if door:
+        d.polygon([(W // 2 - 5, Hh - 3), (W // 2, eave - 4), (W // 2 + 5, Hh - 3)], fill=(40, 30, 30, 255))
+        d.line([W // 2 - 5, Hh - 3, W // 2, eave - 4], fill=cols[3])
+    for x0, x1 in ((2, 0), (W - 3, W - 1)): d.line([x0, eave + 1, x1, Hh - 1], fill=(120, 100, 80, 255))
+    d.line([W // 2, top, W // 2, top - 5], fill=WOOD[0]); P(im, W // 2, top - 6, cols[3])
+    d.ellipse([2, Hh - 4, W - 3, Hh - 1], fill=(0, 0, 0, 50))
+    return im
+
+
+def war_tent():
+    """the Dominar's war-tent (5x4): red lacquer and gold, a great flap door (the door to 928), dragon standards"""
+    im = tent(RED, 5, 4, stripe=(214, 170, 60, 255))
+    d = ImageDraw.Draw(im)
+    for x in (6, 72):
+        d.line([x, 4, x, 60], fill=WOOD[0], width=2); d.polygon([(x, 4), (x + 8, 7), (x, 11)], fill=(214, 170, 60, 255))
+    return im, ['OOOOO', 'OOOOO', 'WWWWW', 'WWDWW']
+
+
+def trebuchet():
+    """a legion trebuchet (3x3): A-frame, throwing arm cocked back, sling, counterweight crate"""
+    im, d = canvas(3, 3)
+    d.polygon([(8, 44), (24, 14), (40, 44)], outline=WOOD[0]); d.line([9, 44, 24, 15], fill=WOOD[1], width=3); d.line([39, 44, 24, 15], fill=WOOD[1], width=3)
+    d.line([4, 44, 44, 44], fill=WOOD[0], width=3); d.line([14, 34, 34, 34], fill=WOOD[1], width=2)
+    d.line([24, 16, 6, 4], fill=WOOD[2], width=3); d.line([24, 16, 34, 24], fill=WOOD[2], width=3)
+    d.rectangle([30, 22, 40, 32], fill=(90, 80, 74, 255), outline=OUT)
+    d.line([6, 4, 4, 14], fill=(160, 150, 130, 255)); d.ellipse([1, 13, 7, 18], fill=(110, 100, 90, 255))
+    disc(im, 24, 16, 2, (70, 70, 80, 255))
+    d.ellipse([3, 43, 45, 47], fill=(0, 0, 0, 60))
+    return im, ['OOO', 'OOO', 'WWW']
+
+
+def dragon_picket():
+    """a dragon picket (1x2): an iron post with a heavy chain lying in scorched sand"""
+    im, d = canvas(1, 2)
+    d.rectangle([6, 4, 9, 28], fill=(60, 60, 70, 255), outline=OUT); d.line([7, 5, 7, 27], fill=(120, 120, 134, 255))
+    d.ellipse([4, 1, 11, 6], fill=(214, 170, 60, 255), outline=OUT)
+    for k in range(5): d.ellipse([9 + k, 22 + (k % 2), 12 + k, 25 + (k % 2)], outline=(90, 90, 100, 255))
+    d.ellipse([1, 27, 15, 31], fill=(40, 30, 28, 110))
+    return im, ['O', 'W']
+
+
+def sled_fort(burnt=True):
+    """a sled-fort dragged overland (3x2): a timber stockade on runners, scorched black where dragonfire caught it"""
+    im, d = canvas(3, 2)
+    for i, x in enumerate(range(3, 45, 5)):
+        top = 4 + (i % 2) * 2
+        c = (40, 34, 32, 255) if burnt and i % 3 != 1 else WOOD[2]
+        d.rectangle([x, top, x + 4, 24], fill=c, outline=OUT); d.polygon([(x, top), (x + 2, top - 3), (x + 4, top)], fill=c)
+    d.line([1, 27, 46, 27], fill=WOOD[0], width=2); d.arc([0, 22, 6, 30], 90, 270, fill=WOOD[0])
+    if burnt:
+        for k in range(6): P(im, 8 + k * 6, 3 + k % 3, (255, 140, 60, 200))
+    d.ellipse([2, 28, 46, 31], fill=(0, 0, 0, 60))
+    return im, ['OOO', 'WWW']
+
+
+def banner(cols, emblem):
+    """a war banner on a pole (1x3): Ashkaar's red dragon, Isenmar's blue whale, the bone-carters' white"""
+    im, d = canvas(1, 3)
+    d.line([3, 2, 3, 46], fill=WOOD[0], width=2)
+    d.rectangle([4, 4, 14, 22], fill=cols[1], outline=OUT); d.polygon([(4, 22), (9, 27), (14, 22)], fill=cols[1], outline=OUT)
+    d.line([5, 5, 13, 5], fill=cols[3])
+    if emblem == 'dragon': d.polygon([(6, 16), (9, 8), (12, 16), (9, 13)], fill=(214, 170, 60, 255))
+    elif emblem == 'whale': d.ellipse([6, 10, 13, 15], fill=cols[3]); d.polygon([(6, 12), (5, 9), (7, 11)], fill=cols[3])
+    else: d.ellipse([7, 9, 11, 13], fill=BONE[0]); d.line([9, 13, 9, 19], fill=BONE[0]); d.line([7, 16, 11, 16], fill=BONE[0])
+    d.ellipse([0, 44, 8, 47], fill=(0, 0, 0, 60))
+    return im, ['O', 'O', 'W']
+
+
+def caravan_well():
+    """a caravan well (2x2): a ring of sandstone, a timber sweep, a bucket; the bone-carters' ribbon on the post"""
+    im, d = canvas(2, 2)
+    d.ellipse([3, 12, 28, 29], fill=(176, 146, 104, 255), outline=OUT); d.ellipse([7, 15, 24, 25], fill=(40, 52, 70, 255))
+    d.line([6, 14, 25, 14], fill=(214, 186, 140, 255))
+    d.line([27, 28, 27, 4], fill=WOOD[1], width=2); d.line([10, 2, 30, 8], fill=WOOD[2], width=2)
+    d.rectangle([9, 2, 12, 7], fill=WOOD[0]); P(im, 28, 9, BONE[3]); P(im, 29, 10, BONE[3])
+    d.ellipse([2, 28, 30, 31], fill=(0, 0, 0, 60))
+    return im, ['OO', 'WW']
+
+
+def bone_cart():
+    """a burial cart (2x2): a two-wheeled handcart under white cloth, a bone-white pennant"""
+    im, d = canvas(2, 2)
+    d.rectangle([3, 10, 26, 21], fill=WOOD[2], outline=OUT); d.polygon([(4, 10), (14, 3), (25, 10)], fill=BONE[2], outline=OUT)
+    d.line([5, 9, 24, 9], fill=BONE[3])
+    for cx in (8, 21): d.ellipse([cx - 5, 17, cx + 5, 28], outline=WOOD[0], width=2); disc(im, cx, 22, 1, WOOD[0])
+    d.line([27, 18, 31, 22], fill=WOOD[1], width=2); d.line([4, 2, 4, 12], fill=WOOD[0]); d.polygon([(5, 2), (10, 4), (5, 6)], fill=BONE[3])
+    d.ellipse([2, 28, 30, 31], fill=(0, 0, 0, 60))
+    return im, ['OO', 'WW']
+
+
+def tally_wall():
+    """the tally-wall of names (3x2): whitewashed mud brick, names in charcoal, bone tokens hung on nails"""
+    im, d = canvas(3, 2); r = random.Random(71)
+    d.rectangle([2, 6, 45, 28], fill=BONE[2], outline=OUT); d.line([3, 7, 44, 7], fill=BONE[3])
+    for y in range(10, 26, 3):
+        x = 5
+        while x < 42:
+            L = r.randrange(3, 7); d.line([x, y, x + L, y], fill=(70, 66, 62, 255)); x += L + 2
+    for x in range(6, 44, 7): P(im, x, 8, BONE[0]); P(im, x, 9, BONE[1])
+    d.ellipse([2, 28, 46, 31], fill=(0, 0, 0, 60))
+    return im, ['OOO', 'WWW']
+
+
+def tripod():
+    """a Meridian brass survey tripod (1x2) with a lens head"""
+    im, d = canvas(1, 2)
+    for x1 in (2, 8, 14): d.line([8, 8, x1, 30], fill=(150, 112, 44, 255))
+    d.rectangle([5, 3, 11, 9], fill=(206, 164, 72, 255), outline=OUT); disc(im, 8, 6, 1, (150, 214, 236, 255))
+    d.ellipse([1, 28, 15, 31], fill=(0, 0, 0, 50))
+    return im, ['O', 'W']
+
+
+def dial_box():
+    im, d = canvas(1, 1)
+    d.rectangle([2, 4, 13, 14], fill=(150, 112, 44, 255), outline=OUT); disc(im, 7, 9, 3, (230, 232, 220, 255)); d.line([7, 9, 9, 7], fill=(200, 60, 60, 255))
+    return im, ['W']
+
+
+def telegraph():
+    """a field-telegraph pole (1x3): crossbar, glass insulators, a wire sagging off east"""
+    im, d = canvas(1, 3)
+    d.line([7, 4, 7, 46], fill=WOOD[1], width=2); d.line([1, 7, 14, 7], fill=WOOD[0], width=2)
+    for x in (2, 12): P(im, x, 5, (150, 214, 236, 255)); P(im, x, 6, (150, 214, 236, 255))
+    d.line([12, 6, 16, 9], fill=(40, 40, 40, 255))
+    d.ellipse([3, 44, 11, 47], fill=(0, 0, 0, 60))
+    return im, ['O', 'O', 'W']
+
+
+def trench(v):
+    """frozen trench-line (decal on the top layer: the trench's white rim of frozen sand and its shadowed cut)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(950 + v)
+    for x in range(16):
+        P(im, x, 4, (240, 246, 252, 230)); P(im, x, 5, (210, 224, 240, 220))
+        for y in range(6, 12): P(im, x, y, (70, 84, 104, 150 + (y - 6) * 8))
+        P(im, x, 12, (220, 232, 244, 200))
+    for _ in range(6): P(im, r.randrange(16), r.randrange(3, 13), (255, 255, 255, 230))
+    return im
+
+
+def embers(v):
+    """scorch and embers on the sand (decal): black glass streaks, a few live coals"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(960 + v)
+    for _ in range(3):
+        x, y, L = r.randrange(0, 10), r.randrange(2, 14), r.randrange(4, 9)
+        for k in range(L): P(im, x + k, y + (k // 4), (40, 30, 32, 150)); P(im, x + k, y + 1 + (k // 4), (70, 50, 46, 90))
+    for _ in range(3): P(im, r.randrange(16), r.randrange(16), (255, 140, 60, 230))
+    return im
+
+
+def frost_crust(v):
+    """rime on sand (decal): white frost feathers"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(970 + v)
+    for _ in range(4):
+        x, y = r.randrange(16), r.randrange(16)
+        for k in range(r.randrange(3, 6)):
+            P(im, x + k, y - k // 2, (244, 250, 255, 210)); P(im, x + k, y + k // 2, (214, 232, 248, 170))
+    return im
+
+
+def steam(v):
+    """the Steamline's wall of steam (decal, walk-through): drifting white columns with an iridescent Bleed edge"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(980 + v)
+    for _ in range(26):
+        x, y = r.randrange(16), r.randrange(16)
+        P(im, x, y, (250, 252, 255, 90 + r.randrange(70)))
+    for y in range(16):
+        x = int(8 + 4 * math.sin((y + v * 5) / 3.0)); P(im, x, y, (255, 200, 236, 110)); P(im, x + 1, y, (190, 240, 250, 90))
+    return im
+
+
+def ripple(v):
+    """wind ripples on dune sand (decal): long soft crests with a shadow under each"""
+    im = Image.new('RGBA', (16, 16), CLEAR)
+    for k, y0 in enumerate((3, 8, 13)):
+        for x in range(16):
+            y = y0 + int(1.2 * math.sin((x + v * 5 + k * 3) / 2.6))
+            P(im, x, y, (236, 220, 176, 150)); P(im, x, y + 1, (176, 150, 104, 110))
+    return im
+
+
+def bones(v):
+    """old bones half-buried in the sand (decal): a rib arc or a skull"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
+    if v == 0:
+        for k in range(4): d.arc([2 + k * 3, 4, 8 + k * 3, 14], 200, 340, fill=BONE[2])
+        d.line([2, 12, 14, 12], fill=BONE[1])
+    else:
+        d.ellipse([4, 4, 12, 11], fill=BONE[2], outline=BONE[0]); P(im, 6, 7, (60, 50, 40, 255)); P(im, 10, 7, (60, 50, 40, 255))
+        d.line([5, 12, 11, 12], fill=BONE[1])
+    return im
+
+
+def rut(v):
+    """cart ruts and boot-scuffs along a desert road (decal)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(990 + v)
+    for y0 in (4, 11):
+        for x in range(16):
+            y = y0 + (1 if (x + v * 3) % 9 < 2 else 0)
+            P(im, x, y, (128, 98, 66, 210)); P(im, x, y + 1, (236, 216, 170, 150))
+    for _ in range(3): P(im, r.randrange(16), r.randrange(6, 10), (140, 110, 80, 120))
+    return im
 
 if __name__ == '__main__':
     ps = pieces()

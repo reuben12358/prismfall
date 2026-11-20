@@ -416,6 +416,8 @@ def frostwick(prev=None):
           npc((57, 22), 'Forester', 'NPC 14', ["Elowen's watch. Isenmar's watch. Same gate, same cold. We split the shifts."], d='left'),
           npc((32, 17), 'Ice-fisher', 'trainer_FISHERMAN', ["See the dark holes in the brook ice? Fish come up to breathe.",
                                                              "Face the open water and use a rod. Even an Old Rod works here."], d='down'),
+          npc((30, 33), 'Old woman by the brazier', 'NPC 28', ["Lights in the Glade after dark. Flying squirrels, my gran said. Shocking little things.",
+                                                                 "The Glade? Up the Rimewood path, if you can get past the sapling. Nobody can. That's why it's still got squirrels."]),   # map builder 10: the Emolga hint (REQUESTS)
           npc((50, 39), 'Swinub herder', 'NPC 17', ["The sled-Swinub. Mamoswine by spring if they eat their greens.",
                                                      "They don't eat greens. They eat everything else."]),
           npc((7, 10), 'Rime-silk weaver', 'NPC 09', ["Up here we weave the silk that froze in the Rimewood. It never thaws, so it never frays.",
@@ -774,7 +776,8 @@ def glade(prev=None):
         for x in range(17, 23): m.cls[y, x] = 'f'
     m.rect(2, 22, 10, 6, 't', only='.')
     m.blob(27, 10, 3.5, 2.2, 't', seed=8, only='.', rough=0.6); m.blob(7, 9, 2.5, 2.0, 'p', seed=9, only='.T', rough=0.3)   # break the symmetry
-    E = [trainer((20, 24), 'POKEMONRANGER_M', 'Sigurd', "Isenmar ranger. Nobody finds this glade by accident.", "...So you cut your way in. Fair.", 'left'),
+    E = [trainer((20, 24), 'POKEMONRANGER_M', 'Sigurd', "Isenmar ranger. Nobody finds this glade by accident.",
+                 "...So you cut your way in. Fair. Stay till dark if you've the nerve. Something glides between the boles up here, and it crackles.", 'left'),
          item((19, 14), 'NEVERMELTICE'), item((30, 3), 'REVIVE', True),
          sign((28, 21), 'Snowveil Shrine', "THE SNOWVEIL SHRINE\nA pot of honey and a smoked eel sit side by side on the altar.\nNeither has been touched by the other."),
          sign((16, 9), 'Silk-fall', "THE SILK-FALL\nA waterfall of Gossamer silk, frozen as it fell. It rings faintly when the wind moves."),

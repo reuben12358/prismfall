@@ -19,6 +19,9 @@ variables:
   ROAD_RAMSTEPS: 604  # the Ram Race's start: $stats.distance_walked when the boy said go
   D8_FRAME: 536       # The Rehearsal (568): the replay's frame 0-4, one per step (pfp_step_clock from the map's parallel event)
 switches:
+  WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
+  WAR_SIDE_ISE: 606   # ... == :back_isenmar
+  WAR_SIDE_MID: 607   # ... == :stand_between
   PUZZLE_SKIP: 301    # mirror of the `puzzleskip` password (Core 020_Passwords.rb): apprentices offer "Skip this room"
   PUZZLE_ASSIST: 302  # reserved: hints on
   LOOM_ALPHA: 305     # Upper Lofts cords

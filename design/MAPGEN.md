@@ -539,6 +539,12 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
 - **Ebbmouth 160 + Mill Quay 167** (`layouts/ebbmouth.py`, PF Rejuv Snow with the Rimewood kit): open black river, lock,
   bridges, mill-wheels, quays, the frozen reach. **568 The Rehearsal** in routes_craft. **548** gets its glass ravine
   (`layouts/deepwood.py 548` writes 548 alone).
+- **The war theatre** (`layouts/war.py`): 920, 924, 925, 926, 928, 929, 930 on PF Rejuv Shore with the war kit (`wr_*`:
+  tents, the war-tent, trebuchet, pickets, sled-forts, banners, wells, burial carts, tally-wall, Meridian tripods and
+  telegraph; trench, ember, frost, steam, ripple, rut and bone decals). Desert ground is the Dirt autotile with layer-1
+  variants (`frozen_ground`, `ground_var`) and top-layer decals; dune crests are one-way sand ledges (plateaus on sand
+  show the kit's grass rim). `gate_check` reads passage bits directionally, so one-way ledges count; a stepped ledge line
+  leaks at every step, so story ledges run straight. Never lay a priority-0 decal over a solid prop.
 
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's

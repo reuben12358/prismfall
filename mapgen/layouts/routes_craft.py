@@ -1607,7 +1607,7 @@ def build_568():
     rng = random.Random(568)
     for y in range(1, 4):                                                        # the Veil's shimmer across the road
         for x in range(13, 20):
-            if m.L[2, y, x] == 0: m.L[2, y, x] = K.P1('bl_veil%d' % ((x + y) % 2))
+            if m.L[2, y, x] == 0 and not m.taken[y, x] and m.cls[y, x] != 'B': m.L[2, y, x] = K.P1('bl_veil%d' % ((x + y) % 2))
     for y, x in np.argwhere(m.cls == 'S'):                                       # salt spray frozen all over the flat
         if m.L[2, y, x] == 0 and rng.random() < 0.34: m.L[2, y, x] = K.P1('bl_gust%d' % rng.randrange(3))
     for y, x in np.argwhere(np.isin(m.cls, ['.', 'g'])):                         # the Bleed's shimmer drifts over the road's edges

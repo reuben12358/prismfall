@@ -482,5 +482,52 @@ BattleBack = snow
 Weather = Snow,10
 MapPosition = 0,6,11
 #-------------------------------
+[920]   # The Rimed Sands
+Name = The Rimed Sands
+Outdoor = true
+ShowArea = true
+BattleBack = field
+Weather = Snow,10
+MapPosition = 0,11,2
+#-------------------------------
+[924]   # Ashkaar Siege Camp
+Name = Ashkaar Siege Camp
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,15,2
+#-------------------------------
+[925]   # The Steamline
+Name = The Steamline
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,12,1
+#-------------------------------
+[926]   # The Glass Dunes
+Name = The Glass Dunes
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,13,2
+#-------------------------------
+[928]   # Ashkaar Siege Camp - Command Pavilion
+Name = Ashkaar Siege Camp - Command Pavilion
+MapPosition = 0,15,2
+#-------------------------------
+[929]   # The Observers' Mesa
+Name = The Observers' Mesa
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,13,3
+#-------------------------------
+[930]   # The Bone-Carters' Camp
+Name = The Bone-Carters' Camp
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,14,3
+#-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

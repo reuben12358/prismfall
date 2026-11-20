@@ -177,6 +177,15 @@ events:
     move: fixed
     commands: ['See the dark holes in the brook ice? Fish come up to breathe.', Face the open water and use a rod. Even an Old Rod works here.]
 - type: event
+  name: Old woman by the brazier
+  at: [30, 33]
+  pages:
+  - graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Lights in the Glade after dark. Flying squirrels, my gran said. Shocking little things.', 'The Glade? Up the Rimewood path, if you can get
+        past the sapling. Nobody can. That''s why it''s still got squirrels.']
+- type: event
   name: Swinub herder
   at: [50, 39]
   pages:

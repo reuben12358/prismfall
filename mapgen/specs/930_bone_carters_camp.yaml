@@ -1,0 +1,94 @@
+# The Bone-Carters' Camp (930). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 930
+name: The Bone-Carters' Camp
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 14, 3]
+rubric: true
+yards_ok: true
+biome: desert
+field: DESERT
+tone: [14, 8, 0, 6]
+connections:
+- {dir: W, offset: 15, to: 926, to_offset: 30}
+walk_from:
+- [1, 17]
+- [42, 17]
+raw: data/raw/930.npy
+tileset: 56
+events:
+- type: event
+  name: War front
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'c = (pf_choice(:war_climax) rescue nil)
+
+        $game_switches[605] = (c == :back_ashkaar)
+
+        $game_switches[606] = (c == :back_isenmar)
+
+        $game_switches[607] = (c == :stand_between)'}
+    - {wait: 60}
+- type: sign
+  name: Road sign
+  at: [40, 13]
+  text: 'THE BONE-CARTERS'' CAMP. E: the Dry Tide to Duneholt. W: the front. (Bone-carters walk where they like.)'
+  post: false
+- type: event
+  name: Elder Ossa
+  at: [24, 11]
+  pages:
+  - graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Elder Ossa: We carry out the dead the armies leave. Ours by tomb-law, whoever they were.', 'Elder Ossa: The carts can''t reach the glass.
+        If you walk where we can''t, bring them home. One tally-stick each. We''ll do the rest.']
+- type: event
+  name: Embalmer
+  at: [33, 22]
+  pages:
+  - graphic: {sprite: NPC 20, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Embalmer: Salt, resin and a song. The song matters most. Nobody believes that until they hear it.']
+- type: event
+  name: Carter
+  at: [12, 21]
+  pages:
+  - graphic: {sprite: NPC 25, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Carter: Isenmar boy, Ashkaar girl, same cart this morning. The sand doesn''t sort them. Neither do we.']
+- type: event
+  name: 'Carter '
+  at: [16, 12]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Carter: White banner, white cloth, white bones. Both armies hold fire when they see white. Mostly.']
+- type: sign
+  name: Tally-wall
+  at: [28, 9]
+  post: false
+  text: 'The tally-wall: names in charcoal, rows on rows, Isenmar and Ashkaar mixed together in the order they were carried in. The newest row is still
+    wet.'
+- type: sign
+  name: Landing stone
+  at: [21, 21]
+  post: false
+  text: A flat stone scorched in a ring, where Sigrun's dragon sets down. Somebody has left a waterskin on it, for whoever comes next.
+- type: item
+  at: [40, 28]
+  item: FULLRESTORE
+- type: item
+  at: [6, 5]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (dune)

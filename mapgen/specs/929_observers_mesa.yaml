@@ -1,0 +1,73 @@
+# The Observers' Mesa (929). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 929
+name: The Observers' Mesa
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 13, 16]
+rubric: true
+yards_ok: true
+biome: desert
+field: DESERT
+tone: [16, 8, 0, 10]
+connections: []
+raw: data/raw/929.npy
+tileset: 56
+events:
+- type: event
+  name: Goat-path
+  at: [17, 27]
+  pages:
+  - trigger: touch
+    through: true
+    commands:
+    - {se: Door exit}
+    - transfer: {map: 926, x: 30, y: 45, dir: down}
+- type: event
+  name: Dr. Quent
+  at: [14, 9]
+  pages:
+  - graphic: {sprite: trainer_SCIENTIST, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Dr. Quent: Don''t touch the dials. They are still reading. Everything down there is still reading.', 'Dr. Quent: A battle? To you. To the
+        Engine it was a calibration. A very good one. Pack the lenses, Tobin.']
+- type: event
+  name: Observer Tobin
+  at: [21, 12]
+  pages:
+  - graphic: {sprite: NPC 12, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Observer Tobin: Two Imprints at full draw and a Bleed dome at the meeting point. I''ve never seen the needle do that.', 'Observer Tobin:
+        Dr. Quent says we were never here. I''ve written that down too.']
+- type: event
+  name: Telegraphist
+  at: [27, 9]
+  pages:
+  - graphic: {sprite: NPC 18, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Telegraphist: Tap tap tap. Meridian Spire wants it in words of one syllable. ''IT WORKED.'' That''s three.']
+- type: sign
+  name: The rim
+  at: [17, 3]
+  post: false
+  text: 'From the north rim the whole battlefield is spread out below: the white trench-lines, the red camp, the Steamline''s steam, and the glass where
+    the beams met, still smoking.'
+- type: sign
+  name: Dial-box
+  at: [9, 13]
+  post: false
+  text: A brass dial-box. Its needle is pinned hard right, past a mark labelled 'THEORETICAL'.
+- type: item
+  at: [30, 20]
+  item: RARECANDY
+- type: item
+  at: [5, 20]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (mesa)

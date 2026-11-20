@@ -1,0 +1,115 @@
+# The Steamline (925, :BLEED). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+id: 925
+name: The Steamline
+parent: 0
+bgm: Route 9
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: field
+  MapPosition: [0, 13, 14]
+rubric: true
+yards_ok: true
+biome: bleed
+field: BLEED
+tone: [6, -4, 10, 30]
+fog: {name: prismfall_seamist, opacity: 60, blend: 0, zoom: 150, sx: 2, sy: 0}
+connections:
+- {dir: W, offset: 13, to: 920, to_offset: 13}
+- {dir: E, offset: 13, to: 924, to_offset: 18}
+- {dir: S, offset: 2, to: 926, to_offset: 0}
+walk_from:
+- [1, 15]
+- [62, 15]
+- [32, 30]
+raw: data/raw/925.npy
+tileset: 56
+events:
+- type: trainer
+  at: [27, 14]
+  sight: 4
+  dir: right
+  sprite: trainer_POKEMONRANGER_M
+  trainer: [ISENMAR_SOLDIER_M, Soldier, 1]
+  intro: Between the lines? Then you're nobody's. Nobody's is fair game.
+  after: '...You really are nobody''s. All right.'
+  cond: {switch: WAR_SIDE_MID}
+- type: trainer
+  at: [36, 16]
+  sight: 4
+  dir: left
+  sprite: trainer_BLACKBELT
+  trainer: [ASHKAAR_SOLDIER_M, Soldier, 1]
+  intro: You walked out of the steam like it was a door. Show me the rest.
+  after: The steam lets you through. So will I.
+  cond: {switch: WAR_SIDE_MID}
+- type: event
+  name: War front
+  at: [0, 0]
+  pages:
+  - trigger: parallel
+    commands:
+    - {script: 'c = (pf_choice(:war_climax) rescue nil)
+
+        $game_switches[605] = (c == :back_ashkaar)
+
+        $game_switches[606] = (c == :back_isenmar)
+
+        $game_switches[607] = (c == :stand_between)'}
+    - {wait: 60}
+- type: sign
+  name: Field marker
+  at: [10, 12]
+  text: ISENMAR LINES -> W.  The rest is anybody's.
+  post: false
+- type: sign
+  name: 'Field marker '
+  at: [54, 12]
+  text: 'ASHKAAR LINES -> E.  (Somebody has scratched under it: "and the glass is nobody''s.")'
+  post: false
+- type: event
+  name: The steam wall
+  at: [29, 8]
+  pages:
+  - trigger: action
+    commands: ['Where ice meets fire the air is a wall: steam that never thins, and inside it the Bleed ringing like a struck glass.', Soldiers who walk
+        in come out with frost on one side of their face and burns on the other. You walk in. It goes quiet.]
+- type: event
+  name: Glassed sand
+  at: [35, 22]
+  pages:
+  - trigger: action
+    commands: ['Sand fused to glass a foot deep, clouded, with things in it: a boot, a spearhead, a whole Sandile, curled up.']
+- type: event
+  name: Convoy marker
+  at: [20, 17]
+  pages:
+  - trigger: action
+    commands: ['A cairn of sled runners with a white rag tied on: the convoys from Duneholt stop here and wait for someone who can walk them through.']
+- type: event
+  name: Isenmar sentry
+  at: [18, 13]
+  pages:
+  - graphic: {sprite: NPC 11, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Isenmar sentry: Past this point the ground can''t decide what it is. Neither can you, after a while.']
+- type: event
+  name: Ashkaar sentry
+  at: [45, 17]
+  pages:
+  - graphic: {sprite: NPC 21, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Ashkaar sentry: The Dominar says the glass is ours by right of fire. The glass hasn''t said.']
+- type: item
+  at: [33, 3]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (the glass)
+- type: item
+  at: [60, 28]
+  item: FIRESTONE
+- type: item
+  at: [3, 28]
+  item: ICESTONE
