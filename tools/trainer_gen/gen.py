@@ -139,14 +139,14 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
     P("AIPOM", 10, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,ASTONISH,SCRATCH,BATONPASS", "A",
       casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
-      hard={"moves": "FAKEOUT,SWIFT,ASTONISH,TICKLE"}),
+      hard={"moves": "FAKEOUT,ASTONISH,SCRATCH,TICKLE"}),
     # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB here); Echoed Voice doubles each
     #    turn it is repeated, so the echo and the applause climb together where the player can see it - switch, or KO
     #    the singer. Encore lasts two turns longer on this stage (it locks a player who set up); Baby-Doll Eyes also
     #    lowers Sp. Atk here.
     P("MINCCINO", 10, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
       casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
-      hard={"nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),
+      hard={"moves": "ECHOEDVOICE,ROUND,ENCORE,SING"}),
     # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
@@ -154,11 +154,11 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # Hard only: the understudy who shouts. Soundproof ignores the player's sound moves (and Dorian's own songs), and
     #    its Round is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
     #    (Furfrou's Fur Coat + Headbutt and a Chatter Chatot both swept prepared teams at Lv 13-14 in the harness.)
-    P("WHISMUR", 13, "SOUNDPROOF", "ORANBERRY", "MODEST", "ROUND,ASTONISH,POUND,HOWL", "S", only="hard"),
+    P("WHISMUR", 12, "SOUNDPROOF", "ORANBERRY", "HARDY", "ROUND,ASTONISH,POUND,HOWL", "S", only="hard"),
     # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
     #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
     P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
-      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,ROUND,DISARMINGVOICE,DEFENSECURL"}),
+      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,DISARMINGVOICE,ROUND,DEFENSECURL"}),
     # 5. The quick-change artist: Color Change is a costume change (it becomes the type of the move that hit it - hit
     #    it once with Fighting, then switch). It opens with its own Fake Out ("Costume change!"); Fury Swipes hits 2-5
     #    times and every critical hit is applause. Hard: Protean and the Synthetic Seed (Laser Focus: a sure crit).

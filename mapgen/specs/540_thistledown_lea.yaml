@@ -1,0 +1,208 @@
+# Thistledown Lea (540). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 540
+name: Thistledown Lea
+parent: 0
+bgm: Route 3
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: MEADOW
+tone: [6, 4, -2, 0]
+connections:
+- {dir: S, offset: 20, to: 552, to_offset: 39}
+- {dir: E, offset: 30, to: 524, to_offset: 50}
+raw: data/raw/540.npy
+tileset: 53
+events:
+- type: warp
+  name: Mine mouth
+  at: [8, 21]
+  link: R3_MINE
+  arrive: [8, 25, down]
+  se: Door exit
+- type: sign
+  name: Road sign
+  at: [25, 44]
+  text: THISTLEDOWN LEA -- The lands of House Thistledown (extinct). <- The Dyers' Ford - -> Gossamer Wood & Briarwick - ^ Thistledown Manor (PRIVATE. DECEASED.)
+  post: false
+- type: event
+  name: The Lea
+  at: [20, 46]
+  pages:
+  - trigger: touch
+    commands:
+    - '\pf[JUNO,happy]Juno: Mum says the Thistledowns were actors. All of them. Even the dog. They played Saltmere for a hundred years and then they all
+      died in the same winter.'
+    - '\pf[JUNO,neutral]Juno: People say they''re still up there. Rehearsing. I''d like to see that. From a distance. A long distance.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    commands: []
+- type: sign
+  name: Manor sign
+  at: [60, 23]
+  text: 'THISTLEDOWN MANOR
+
+    Home of the Thistledown Players. Closed since AF 211.'
+  post: false
+- type: event
+  name: Drover
+  at: [40, 26]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Drover: Race you to the fence!', (He wins. He always wins. He has a Ponyta.)]
+- type: event
+  name: Ponyta
+  at: [44, 22]
+  pages:
+  - graphic: {sprite: Followers/PONYTA, dir: down}
+    trigger: action
+    move: random
+    commands: [(It tosses its mane. Show-off.)]
+- type: event
+  name: Fisherman on the bridge
+  at: [24, 47]
+  pages:
+  - graphic: {sprite: trainer_FISHERMAN, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Fisherman: Bridge toll''s a copper. Nobody''s collected it since the house died. I just tell people. Habit.']
+- type: item
+  at: [24, 57]
+  item: GREATBALL
+  hidden: true
+  name: HiddenItem (under the bridge)
+- type: event
+  name: Mower
+  at: [80, 40]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    commands:
+    - 'Mower: Nobody''s mown the Lea in sixty years. You can''t buy land off a dead family. They won''t come to the door.'
+    - if: '!pfm?(:mowers_heal)'
+      then:
+      - 'Mower: Sit by the fire a bit. Kettle''s on.'
+      - {heal: true}
+      - {script: 'pfm_set(:mowers_heal)'}
+  - cond: {switch: CH2_THISTLE_DONE}
+    graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    commands: ['Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.']
+- type: trainer
+  at: [52, 40]
+  sight: 4
+  dir: down
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Edie]
+  intro: Ada beat me on Windfall Row last year. I've been training on the Lea all spring.
+  after: '...I''ll write to Ada. I''ll lie.'
+- type: trainer
+  at: [36, 30]
+  sight: 4
+  dir: down
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Bryony]
+  intro: Meadow picnic! Battle before the sandwiches, not after!
+  after: The river's lovely from the bridge.
+- type: trainer
+  at: [74, 46]
+  sight: 4
+  dir: down
+  sprite: trainer_FISHERMAN
+  trainer: [FISHERMAN, Hale]
+  intro: You scared the fish! Now you owe me a battle.
+  after: Reeled in a loss. Happens.
+- type: trainer
+  at: [92, 28]
+  sight: 4
+  dir: down
+  sprite: trainer_TWINS
+  trainer: [TWINS, Bel & Bea]
+  intro: 'Twins: We battle together! Always together!'
+  after: 'Twins: Saltmere''s south. They do plays there!'
+  rules: [setBattleRule("double")]
+- type: trainer
+  at: [112, 36]
+  sight: 4
+  dir: left
+  sprite: trainer_YOUNGSTER
+  trainer: [YOUNGSTER, Corin]
+  intro: Saltmere badge? Prove it!
+  after: My team's the coolest! ...Was.
+- type: event
+  name: Broken mill
+  at: [96, 42]
+  pages:
+  - trigger: action
+    commands: [The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.]
+- type: event
+  name: Bamboo stand
+  at: [110, 18]
+  pages:
+  - trigger: action
+    commands: ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']
+- type: event
+  name: Pancham
+  at: [108, 20]
+  pages:
+  - graphic: {sprite: Followers/PANCHAM, dir: down}
+    trigger: action
+    move: random
+    commands: [(It glares at you over a bamboo shoot. Respect.)]
+- type: event
+  name: Road Stone II-b
+  at: [120, 30]
+  pages:
+  - trigger: action
+    commands: [ROAD STONE II-b. THE WEAVERS' ROAD. "Briarwick 1." The '1' has been scratched to a '2' and back again.]
+- type: event
+  name: Gateposts
+  at: [62, 23]
+  pages:
+  - trigger: action
+    commands: [Two stone gateposts with the Thistledown thistle carved on them. No gate. Gates are for people who expect visitors.]
+- type: event
+  name: The Ha-ha
+  at: [87, 8]
+  pages:
+  - trigger: action
+    commands: ['(The sunken wall''s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging
+        behind it.)']
+- type: event
+  name: Greavard
+  at: [85, 6]
+  pages:
+  - graphic: {sprite: Followers/GREAVARD, dir: down}
+    trigger: action
+    move: random
+    commands: [(It is digging very seriously. It does not want to be interrupted. It wags anyway.)]
+- type: item
+  at: [88, 5]
+  item: RAREBONE
+  hidden: true
+  name: HiddenItem (the Ha-ha)
+- type: berry
+  at: [30, 34]
+  berry: CHERIBERRY
+- type: item
+  at: [126, 20]
+  item: SUPERPOTION
+- type: item
+  at: [4, 34]
+  item: POKEBALL
+- type: item
+  at: [70, 51]
+  item: GREATBALL
+- type: sign
+  name: Locked door
+  at: [59, 14]
+  post: false
+  text: The door is barred from the inside.
+- type: door
+  at: [64, 14]
+  gfx: ['', 0, 2]
+  name: Manor door
+  link: R3_MANOR
