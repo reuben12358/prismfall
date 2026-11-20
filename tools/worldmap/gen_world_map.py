@@ -136,6 +136,11 @@ def stop_points(stop):
         if stop in legs:
             return [cell_center(c) for c in legs[stop][1]['cells']]
     if isinstance(stop, str):
+        if stop.startswith('sq:'):
+            x, y = (int(v) for v in stop[3:].split(','))
+            return [(x + 0.5, y + 0.5)]
+        if stop.startswith('rev:'):
+            return [cell_center(c) for c in reversed(legs[int(stop[4:])][1]['cells'])]
         if stop.startswith('P:'):
             return [cell_center(W.OWN_SQUARE[int(stop[2:])])]
         if stop.startswith('pts:'):
@@ -143,6 +148,25 @@ def stop_points(stop):
         if stop.startswith('G:'):
             return None
     raise KeyError(stop)
+
+
+def ring_points(pts, n=96):
+    """the Crown Road: a smooth closed ring through its squares (centred on the Crownwall)"""
+    cx, cy = G.CROWNWALL['c']
+    ang = [math.atan2(y - cy, x - cx) for x, y in pts[:-1]]
+    rad = [math.hypot(x - cx, y - cy) for x, y in pts[:-1]]
+    order = sorted(range(len(ang)), key=lambda i: ang[i])
+    a_s = [ang[i] for i in order] + [ang[order[0]] + 2 * math.pi]
+    r_s = [rad[i] for i in order] + [rad[order[0]]]
+    out = []
+    for k in range(n + 1):
+        a = a_s[0] + (a_s[-1] - a_s[0]) * k / n
+        j = max(i for i in range(len(a_s) - 1) if a_s[i] <= a + 1e-9) if a < a_s[-1] else len(a_s) - 2
+        t = (a - a_s[j]) / (a_s[j + 1] - a_s[j])
+        t = t * t * (3 - 2 * t)
+        r = r_s[j] + (r_s[j + 1] - r_s[j]) * t
+        out.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    return out
 
 
 def road_polylines():
@@ -157,6 +181,18 @@ def road_polylines():
                 else:
                     pts += stop_points(st)
             yield n, style, pts
+    if getattr(W, 'CROWN_ROAD', None):
+        pts = []
+        for st in W.CROWN_ROAD:
+            pts += stop_points(st)
+        yield 0, 'ring', pts
+
+
+def surface_kingdom(k):
+    """Nadir lies beneath Zenith (Geography v2: the same footprint), so it has no surface zone of its own"""
+    ks = ['Zenith' if x == 'Nadir' else x for x in k.split('/')]
+    ks = list(dict.fromkeys(ks))
+    return '/'.join(ks)
 
 
 def zone_seeds():
@@ -165,14 +201,17 @@ def zone_seeds():
     seeds = []
     for i, (n, x, y, r, k) in W.SETTLEMENTS.items():
         if k != 'Antumbra':
-            seeds.append((x + 0.5, y + 0.5, k))
+            seeds.append((x + 0.5, y + 0.5, surface_kingdom(k)))
     for r, l in W.all_legs():
         if l['kingdom'] == 'Antumbra':
             continue
         for c in l['cells']:
             if c[0] >= 25 and c[1] >= 15:
                 continue
-            seeds.append((c[0] + 0.5, c[1] + 0.5, l['kingdom']))
+            k = surface_kingdom(l['kingdom'])
+            if 'Antumbra' in k:                  # gate borderlands take the colour of their real kingdom
+                k = k.replace('Antumbra', '').strip('/')
+            seeds.append((c[0] + 0.5, c[1] + 0.5, k))
     for k, x, y in G.ANCHORS:
         seeds.append((x, y, k))
     return seeds
@@ -252,9 +291,14 @@ class Fields:
         self.dunes = self._density([(x, y, r, 'd') for x, y, r in G.DESERT_DUNES], 45)
         self.obsid = self._density([(x, y, r, 'o') for x, y, r in G.OBSIDIAN], 46)
         self.sulfur = self._density([(x, y, r, 's') for x, y, r in G.SULFUR], 47)
-        self.frozen = self.sea & (gy + (fnoise(w, h, 9, 48, 4) - 0.5) * 0.8 < G.FROZEN_SEA_EDGE_Y) & (gx < 26.6)
-        x0, y0, x1, y1 = G.SHATTERED_ICE
-        self.shattered = self.sea & (gx > x0) & (gx < x1) & (gy > y0 - 1.5) & (gy < y1)
+        xmax = getattr(G, 'FROZEN_SEA_X_MAX', 26.6)
+        edge = fnoise(w, h, 9, 48, 4) - 0.5
+        self.frozen = self.sea & (gy + edge * 0.8 < G.FROZEN_SEA_EDGE_Y) & (gx + edge * 1.2 < xmax)
+        if G.SHATTERED_ICE:
+            x0, y0, x1, y1 = G.SHATTERED_ICE
+            self.shattered = self.sea & (gx > x0) & (gx < x1) & (gy > y0 - 1.5) & (gy < y1)
+        else:
+            self.shattered = np.zeros_like(self.sea)
         self.forest_kind = self._kind_map()
 
     def _density(self, items, seed):
@@ -457,7 +501,9 @@ def paint_big(out_path):
     for n, style, pts in road_polylines():
         if style == 'inset':
             continue
-        road_lines.append((n, style, catmull(pts, 14)))
+        if style == 'ring':
+            pts = ring_points(pts)
+        road_lines.append((n, style, catmull(pts, 14) if style not in ('ring',) else pts))
     kd = Image.new('L', (w, h), 0)
     kdd = ImageDraw.Draw(kd)
     for n, style, line in road_lines:
@@ -659,6 +705,10 @@ def paint_big(out_path):
     # --- roads
     for n, style, line in road_lines:
         pl = [P(*p) for p in line]
+        if style == 'air':
+            for i in range(0, len(pl) - 1, 3):
+                d.line([pl[i], pl[i + 1]], fill=(250, 250, 255, 210), width=3)
+            continue
         if style == 'under':
             for i in range(0, len(pl) - 1, 3):
                 d.line([pl[i], pl[i + 1]], fill=(50, 40, 60, 70), width=3)
@@ -667,10 +717,14 @@ def paint_big(out_path):
             for i in range(0, len(pl) - 1, 2):
                 d.line([pl[i], pl[i + 1]], fill=(40, 60, 90, 220), width=4)
             continue
-        wdt = 7 if style == 'road' else 5
+        wdt = 7 if style in ('road', 'ring') else 5
         d.line(pl, fill=(60, 40, 22, 235), width=wdt + 4, joint='curve')
-        d.line(pl, fill=(236, 214, 160, 255) if style == 'road' else (214, 196, 150, 255), width=wdt, joint='curve')
+        d.line(pl, fill=(236, 214, 160, 255) if style in ('road', 'ring') else (214, 196, 150, 255), width=wdt,
+               joint='curve')
 
+    # --- the war in the sands (Revision 18): marches, the front (the Steamline) and the battlefield
+    if getattr(G, 'WAR', None):
+        draw_war_big(d, P, S)
     # --- Antumbra gates on the real map
     for g, (real, inset, nm) in W.GATES.items():
         x, y = P(*cell_center(real))
@@ -788,6 +842,16 @@ def paint_big(out_path):
                 break
         else:
             print('  landmark dropped:', nm)
+    for nm, x, y, sz in (G.WAR['labels'] if getattr(G, 'WAR', None) else []):
+        f = font(F_SERIF_BI, 44 * sz)
+        for ox, oy in ((0, 0), (0, 0.25), (0, -0.25), (0.35, 0), (-0.35, 0)):
+            box = rot_box(P(x + ox, y + oy), nm, f, 0)
+            if LB.free(box, pad=0):
+                draw_rot_text(img, P(x + ox, y + oy), nm, f, (130, 22, 16, 245), 0, halo=(244, 234, 206, 200))
+                LB.add(box)
+                break
+        else:
+            print('  war label dropped:', nm)
     d = ImageDraw.Draw(img, 'RGBA')
     for nm, x, y, a, sz in G.SEAS:
         f = font(F_SERIF_I, 34 * sz + 6)
@@ -957,6 +1021,38 @@ def draw_volcano(d, x, y):
     d.ellipse([x - 32, y - 64, x + 32, y - 52], fill=(230, 90, 30, 255), outline=INK + (255,))
     d.line([(x - 8, y - 54), (x - 20, y - 20), (x - 14, y + 4)], fill=(240, 110, 40, 255), width=4)
     d.line([(x + 12, y - 54), (x + 26, y - 14)], fill=(240, 110, 40, 255), width=3)
+
+
+def draw_swords(d, x, y, s, col=(150, 26, 20, 255), ink=(40, 20, 16, 255)):
+    for sgn in (-1, 1):
+        d.line([(x - s * sgn, y - s), (x + s * sgn, y + s)], fill=ink, width=7)
+        d.line([(x - s * sgn, y - s), (x + s * sgn, y + s)], fill=(236, 230, 220, 255), width=3)
+        d.line([(x + s * sgn * 0.45 - s * 0.35, y + s * 0.45 + s * 0.35 * sgn),
+                (x + s * sgn * 0.45 + s * 0.35, y + s * 0.45 - s * 0.35 * sgn)], fill=col, width=5)
+
+
+def draw_war_big(d, P, S):
+    war = G.WAR
+    for key, c in (('isenmar', (40, 70, 130, 230)), ('ashkaar', (170, 40, 30, 230))):
+        line = catmull(war[key], 10)
+        for i in range(0, len(line) - 1, 2):
+            d.line([P(*line[i]), P(*line[i + 1])], fill=c, width=4)
+        (x1, y1), (x2, y2) = line[-2], line[-1]           # arrowhead at the front
+        a = math.atan2(y2 - y1, x2 - x1)
+        tip = P(x2, y2)
+        d.polygon([tip, (tip[0] - 22 * math.cos(a - 0.45), tip[1] - 22 * math.sin(a - 0.45)),
+                   (tip[0] - 22 * math.cos(a + 0.45), tip[1] - 22 * math.sin(a + 0.45))], fill=c)
+    fr = catmull(war['front'], 8)
+    d.line([P(*p) for p in fr], fill=(120, 20, 16, 240), width=9, joint='curve')
+    d.line([P(*p) for p in fr], fill=(240, 160, 90, 255), width=3, joint='curve')
+    bx, by = P(*war['battlefield'])
+    d.ellipse([bx - 26, by - 26, bx + 26, by + 26], fill=(244, 236, 210, 200), outline=(120, 20, 16, 255), width=3)
+    draw_swords(d, bx, by, 15)
+    for key, (x, y) in war['camps'].items():
+        px, py = P(x, y)
+        c = (40, 70, 130, 255) if key == 'isenmar' else (170, 40, 30, 255)
+        d.line([(px + 16, py - 4), (px + 16, py - 40)], fill=INK + (255,), width=3)
+        d.polygon([(px + 17, py - 40), (px + 40, py - 33), (px + 17, py - 26)], fill=c, outline=INK + (255,))
 
 
 def draw_gate(d, x, y, letter):
@@ -1134,8 +1230,8 @@ def frame_and_panel(img):
         d.text((lx + 44, yy), t, font=f, fill=INK, anchor='lm')
     lx2 = lx + 500
     rows2 = [('road', 'Road (each named stretch is one or more maps)'), ('under', 'Underground road (the Blindwater)'),
-             ('sea', 'Sea lane / ferry / sled-road over the ice'), ('war', 'War crossing (Ashkaar-Isenmar)'),
-             ('air', 'Airship lane (from Act III)'), ('border', 'Kingdom border (mottled land = borderland)'),
+             ('sea', 'Sea lane / ferry'), ('war', 'The war in the sands: marches and front'),
+             ('air', 'Airship lane (the Mast Road, Act III)'), ('border', 'Kingdom border (mottled land = borderland)'),
              ('gate', 'Gate into Antumbra')]
     for i, (k, t) in enumerate(rows2):
         yy = py + 22 + i * 33
@@ -1159,8 +1255,8 @@ def frame_and_panel(img):
         row = i % 6
         nm = W.SETTLEMENTS[tid][0]
         d.text((gx0 + col_ * 175, py + 48 + row * 30), '%d  %s' % (i + 1, nm), font=fs, fill=INK, anchor='la')
-    d.text((gx0, py + 48 + 6 * 30 + 4), 'then the Pilgrim Road to the Festival in Crownhaven', font=font(F_SERIF_I, 17),
-           fill=(96, 70, 50), anchor='la')
+    d.text((gx0, py + 48 + 6 * 30 + 4), 'then the Pilgrim Road to the Festival in Crownhaven, at the heart of the Crown Road',
+           font=font(F_SERIF_I, 17), fill=(96, 70, 50), anchor='la')
     return out
 
 
@@ -1239,6 +1335,8 @@ def paint_town_map(out_path):
     for n, style, pts in road_polylines():
         if style == 'inset':
             continue
+        if style == 'ring':
+            pts = ring_points(pts, 48)
         for (x1, y1), (x2, y2) in zip(pts[:-1], pts[1:]):
             for t in np.linspace(0, 1, 40):
                 px_, py_ = int((x1 + (x2 - x1) * t) * S), int((y1 + (y2 - y1) * t) * S)
@@ -1315,7 +1413,17 @@ def paint_town_map(out_path):
     for n, style, pts in road_polylines():
         if style == 'inset':
             continue
+        if style == 'ring':
+            pts = ring_points(pts, 48)
         line = [(x * S, y * S) for x, y in pts]
+        if style == 'air':
+            for (x1, y1), (x2, y2) in zip(line[:-1], line[1:]):
+                L = max(1, int(math.hypot(x2 - x1, y2 - y1) / 4))
+                for k in range(0, L, 2):
+                    a, b = k / L, (k + 1) / L
+                    d.line([(x1 + (x2 - x1) * a, y1 + (y2 - y1) * a), (x1 + (x2 - x1) * b, y1 + (y2 - y1) * b)],
+                           fill=(250, 250, 255), width=1)
+            continue
         if style in ('under', 'sea'):
             for (x1, y1), (x2, y2) in zip(line[:-1], line[1:]):
                 L = max(1, int(math.hypot(x2 - x1, y2 - y1) / 6))
@@ -1326,6 +1434,15 @@ def paint_town_map(out_path):
             continue
         d.line(line, fill=(72, 56, 40), width=6, joint='curve')
         d.line(line, fill=(248, 236, 200), width=4, joint='curve')
+    # the war in the sands: the front (red), the two hosts' flags and the battlefield's crossed swords
+    if getattr(G, 'WAR', None):
+        fr = [(x * S, y * S) for x, y in G.WAR['front']]
+        for (x1, y1), (x2, y2) in zip(fr[:-1], fr[1:]):
+            d.line([(x1, y1), (x2, y2)], fill=(168, 32, 24), width=2)
+        for key, (x, y) in G.WAR['camps'].items():
+            px, py = int(x * S) + 5, int(y * S) - 6
+            d.line([(px, py), (px, py + 7)], fill=(40, 32, 28))
+            d.rectangle([px + 1, py, px + 4, py + 2], fill=(64, 112, 176) if key == 'isenmar' else (192, 40, 30))
     # dungeons / landmarks
     for mid, c in W.OWN_SQUARE.items():
         if c[0] >= 25 and c[1] >= 15:
@@ -1352,6 +1469,12 @@ def paint_town_map(out_path):
     for g, (real, inset, nm) in W.GATES.items():
         cx, cy = (real[0] + 0.5) * S, (real[1] + 0.5) * S
         d.ellipse([cx - 3, cy - 4, cx + 3, cy + 4], fill=(150, 130, 210), outline=(40, 30, 60))
+    if getattr(G, 'WAR', None):         # crossed swords over the Glass Dunes (drawn last so nothing covers them)
+        bx, by = int(G.WAR['battlefield'][0] * S), int(G.WAR['battlefield'][1] * S)
+        for sx in (-1, 1):
+            d.line([(bx - 4 * sx, by - 4), (bx + 4 * sx, by + 4)], fill=(40, 24, 20), width=3)
+            d.line([(bx - 4 * sx, by - 4), (bx + 4 * sx, by + 4)], fill=(236, 232, 224), width=1)
+        d.point([(bx - 2, by + 2), (bx + 2, by + 2)], fill=(192, 40, 30))
     # Antumbra inset
     x0, y0, x1, y1 = W.ANTUMBRA_INSET
     bx0, by0, bx1, by1 = x0 * S + 2, y0 * S + 2, (x1 + 1) * S - 3, (y1 + 1) * S - 3

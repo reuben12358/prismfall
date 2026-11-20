@@ -487,19 +487,28 @@ def build_521():
     ev = old_events('521_reskin.yaml', 521)
     J = lambda e, t: P('JUNO', e, t)
     cord = {'type': 'event', 'name': 'Forest-road cordon', 'at': [3, 9], 'pages': [{'graphic': {'tile': barrier_tile()}, 'trigger': 'action', 'commands': [
-        '(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)']}]}
+        '(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)']},
+        {'cond': {'var': ['BRIARWICK_GLASSWOOD', 1]}, 'through': True, 'commands': []}]}
     r.events += [dict(cord, at=[3, y], name='Forest-road cordon %d' % (i + 1)) for i, y in enumerate((9, 10, 11))]
     for y in (9, 10, 11): m.taken[y, 3] = True
     r.add({'type': 'door', 'at': [0, 0], 'name': 'placeholder'} if False else None,
-          {'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 10], 'link': 'R2_WOOD', 'arrive': [1, 10, 'right']},
-          {'type': 'warp', 'name': 'To Gossamer Wood 2', 'at': [0, 9], 'to': {'map': 524, 'x': 22, 'y': 56, 'dir': 'up'}},
-          {'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 24, 'y': 56, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 10], 'to': {'map': 524, 'x': 41, 'y': 108, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To Gossamer Wood 2', 'at': [0, 9], 'to': {'map': 524, 'x': 40, 'y': 108, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 42, 'y': 108, 'dir': 'up'}},
           {'type': 'warp', 'name': 'To the Glassed Orchard', 'at': [61, 23], 'link': 'R2_ORCHARD', 'arrive': [60, 23, 'left']},
           {'type': 'warp', 'name': 'To the Glassed Orchard 2', 'at': [61, 22], 'to': {'map': 522, 'x': 2, 'y': 37, 'dir': 'right'}},
           talk('Cordon Warden', (6, 12), 'NPC 07', ["Cordon Warden: Forest road's shut. The Glasswood's across it. Nobody walks it till the Warden in Briarwick says so.",
                "Cordon Warden: Go round by the coast like everyone else. Saltmere, then the Weavers' Road up the river. It's two days. It's a nice two days.",
                J('sad', 'It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.'),
-               J('neutral', 'Parsnip hated the forest. Parsnip was right, as it turns out.')], d='right'),
+               J('neutral', 'Parsnip hated the forest. Parsnip was right, as it turns out.')], d='right') if False else
+          {'type': 'event', 'name': 'Cordon Warden', 'at': [6, 12], 'pages': [
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'trigger': 'action', 'commands': [
+                  "Cordon Warden: Forest road's shut. The Glasswood's across it. Nobody walks it till the Warden in Briarwick says so.",
+                  "Cordon Warden: Go round by the coast like everyone else. Saltmere, then the Weavers' Road up the river. It's two days. It's a nice two days.",
+                  J('sad', 'It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.'),
+                  J('neutral', 'Parsnip hated the forest. Parsnip was right, as it turns out.')]},
+              {'cond': {'var': ['BRIARWICK_GLASSWOOD', 1]}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'trigger': 'action', 'commands': [
+                  "Cordon Warden: The glass went back a mile overnight. Road's open. Don't ask me how. I just roll up tape."]}]},
           sign((56, 64), 'Road sign', 'WINDFALL ROW -- <- Gossamer Wood & Briarwick (ROAD CLOSED BY ORDER OF THE ACCORD).\nOrchard law: keep what has fallen, and nothing else.'),
           at(ev['Wim'], 46, 30), at(ev['Ada'], 76, 44), at(ev['Joss'], 22, 18),
           trainer((84, 36), 'BUGCATCHER', 'Dell', 'My Metapod is going to evolve THIS time. Watch!', 'My Metapod was supposed to evolve this time...', d='down'),
@@ -855,12 +864,113 @@ def build_540():
     r.write(h, '540_thistledown_lea.yaml', '# Thistledown Lea (540). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/540.png' if PREV else None)
 
 
+# ====================================================================================================== 524 Gossamer Wood
+def build_524():
+    """Gossamer Wood (90x110, SILKWOOD): giant silk-hung trees.  The silk-curtain trail from Thistledown Lea's edge (W) to
+    Briarwick's gate (N, WOOD_BRIAR) with two side loops; the central clearing with Woodward's Hut (WOOD_HUT); the cocoon
+    grove and silk-harvest racks; the fallen giant used as a tunnel; the mushroom ring; the Bleed Veil to the Deepwood
+    behind a Cut tree (E); the corded forest road south to Windfall Row (opens when V105 >= 1); the Unpicked Seam (secret)"""
+    W, H = 90, 110
+    r = Route(524, W, H, 'forest', base='T')
+    m = r.m
+    trail = [(0, 51), (12, 50), (22, 56), (30, 66), (40, 62), (46, 52), (44, 40), (36, 30), (40, 18), (45, 8), (45, 0)]
+    r.road(trail, w=3.0, open_=(2, 5))
+    r.exit('W', 50, 4)
+    m.cls[0:3, 44:47] = 'd'
+    r.clearing(58, 52, 9, 7)                                                         # the central clearing: Woodward's Hut
+    r.lane([(46, 52), (56, 52)], w=2.0, open_=(1, 3))
+    r.lane([(56, 52), (72, 48), (84, 48), (89, 48)], w=2.0, open_=(1, 3))            # east to the Veil (Cut) and the Deepwood
+    r.lane([(30, 66), (34, 80), (40, 94), (41, 106), (41, 109)], w=2.5, open_=(1, 3))   # the corded forest road south
+    r.lane([(22, 56), (12, 72), (14, 86), (26, 84), (34, 80)], w=2.0, open_=(1, 3))   # side loop SW: the cocoon grove
+    r.clearing(12, 80, 6, 5)
+    r.lane([(36, 30), (22, 24), (14, 14), (26, 10), (40, 18)], w=2.0, open_=(1, 3))  # side loop NW: the mushroom ring
+    r.clearing(18, 14, 6, 4)
+    r.lane([(44, 40), (62, 34), (70, 24)], w=2.0, open_=(1, 2))                       # to the Giga Drain grove
+    r.clearing(72, 20, 6, 5)
+    r.pocket(76, 84, 6, 5, gate=None)                                                # the Unpicked Seam (behind a night silk wall)
+    r.lane([(58, 58), (66, 70), (74, 80)], w=2.0, open_=(1, 2))
+    r.grass(thr=0.55, scale=5.0)
+    r.finish_plan(border=0)
+    m.cls[106:110, 40:43] = 'd'
+    J = lambda e, t: P('JUNO', e, t)
+    ev = old_events('524_reskin.yaml', 524)
+    entry = ev['Wood entry 1']['pages']
+    r.events += line_events(r, 'Wood entry', 52, 3, 3, entry) if False else []
+    for i, y in enumerate((50, 51, 52, 53)):
+        r.events.append({'type': 'event', 'name': 'Wood entry %d' % (i + 1), 'at': [4, y], 'pages': entry}); m.taken[y, 4] = True
+    veil = ev['Juno at the Veil 1']['pages']
+    tape = lambda i, x: {'type': 'event', 'name': 'Accord cordon %d' % i, 'at': [x, 104], 'pages': [
+        {'graphic': {'tile': barrier_tile()}, 'trigger': 'action', 'commands': [
+            'ACCORD CORDON: The forest road back to Windfall Row and the Landing, taped off. A sign faces the farms: CLOSED BY ORDER OF THE ACCORD.',
+            J('sad', "That's the way I used to come. Four hours with Parsnip. Now it's two days and a pageant.")]},
+        {'cond': {'var': ['BRIARWICK_GLASSWOOD', 1]}, 'through': True, 'commands': []}]}
+    for i, x in enumerate((40, 41, 42)): r.events.append(tape(i + 1, x)); m.taken[104, x] = True
+    r.add({'type': 'warp', 'name': 'To Windfall Row', 'at': [41, 109], 'to': {'map': 521, 'x': 1, 'y': 10, 'dir': 'left'}},
+          {'type': 'warp', 'name': 'To Windfall Row b', 'at': [40, 109], 'to': {'map': 521, 'x': 1, 'y': 9, 'dir': 'left'}},
+          {'type': 'warp', 'name': 'To Windfall Row c', 'at': [42, 109], 'to': {'map': 521, 'x': 1, 'y': 11, 'dir': 'left'}},
+          {'type': 'warp', 'name': 'To Briarwick', 'at': [44, 0], 'link': 'WOOD_BRIAR', 'arrive': [44, 1, 'down']},
+          {'type': 'warp', 'name': 'To Briarwick b', 'at': [45, 0], 'to': {'map': 120, 'x': 36, 'y': 62, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To Briarwick c', 'at': [46, 0], 'to': {'map': 120, 'x': 36, 'y': 62, 'dir': 'up'}},
+          {'type': 'cut_tree', 'at': [82, 48], 'name': 'CutTree'},
+          {'type': 'warp', 'name': 'To Deepwood', 'at': [89, 48], 'link': 'WOOD_DEEP', 'arrive': [88, 48, 'left']},
+          sign((44, 103), 'Cordon notice', 'CLOSED BY ORDER OF THE ACCORD. From this side you can see the glass across the lane, a mile on.'),
+          at(ev['Silk-picker'], 54, 46), at(ev['Old Weaver'], 30, 62),
+          obj('Shrine stone', (16, 12), ['A small mossy shrine stone. A carving of three beasts chasing a masked figure. Someone has left a honey bun in front of the masked one, not the three.',
+              J('neutral', "That's the Pageant. That's the play we saw. ...Somebody likes the Ogre better.")]),
+          talk('Kestrel', (44, 6), 'trainer_RIVAL1', ["Kestrel: Briarwick's just ahead. Try not to get lost in the webs. ...Not that I'd come looking."]),
+          trainer((38, 32), 'TWINS', 'Mo & Jo', 'We battle together!', 'We lose together.', d='right', double=True),
+          trainer((30, 70), 'BUGCATCHER', 'Tobin', 'My bugs love the silk here!', 'Careful in the webs past here!', d='down'),
+          trainer((46, 46), 'BUGCATCHER', 'Reed', 'You walked right into my web!', "The wood's full of better bugs than mine, huh.", d='left'),
+          trainer((40, 18), 'AROMALADY', 'Petra', 'Smell that? Night-blooming gossamer.', 'What a lovely, fierce scent you have.', d='down'),
+          trainer((14, 52), 'CAMPER', 'Bram', 'Camping in Gossamer? Battle first, questions later!', "Lost to a tourist. Don't tell anyone.", d='down'),
+          item((70, 18), 'TM19'), item((8, 82), 'REPEL'), item((62, 50), 'POTION'), item((34, 34), 'ETHER'),
+          {'type': 'event', 'name': 'HiddenItem', 'at': [22, 16], 'pages': ev['HiddenItem']['pages']},
+          obj('Cocoon grove', (12, 78), ['A grove of silk cocoons the size of lanterns, hung in rows. Each has a weaver\'s knot-mark tied to it.']),
+          talk('Weaver (harvest)', (16, 82), 'NPC 13', ['Weaver: One cocoon in three. Always leave two. The wood counts.']),
+          talk('Weaver (racks)', (8, 84), 'NPC 27', ['Weaver: The racks dry the silk in the dark. Sun makes it brittle. Like Kestrel.']),
+          obj('Mushroom ring', (18, 15), ['A ring of pale mushrooms. At night, they say, it glows, and the Morelull dance.']),
+          trial('Monkey shrine', (20, 12), 'SHRINE_WOOD'),
+          obj('Fallen giant', (58, 66), ['A fallen giant tree, hollow end to end. The weavers use it as a shortcut. The Venonat use it as a hotel.']),
+          {'type': 'event', 'name': 'Silk seam', 'at': [74, 79], 'pages': [{'graphic': {'tile': int(np.array(STAMPS['pf_p_silk1']['layers']).max())}, 'trigger': 'action', 'commands': [
+              {'if': 'PBDayNight.isNight?', 'then': ['The silk wall has loosened in the dark. It parts like a curtain.', {'selfswitch': ['A', True]}],
+               'else': ['A wall of silk, tight as a drum. At night, the weavers say, the seams unpick themselves.']}]},
+              {'cond': {'self': 'A'}, 'through': True, 'commands': []}]},
+          {'type': 'event', 'name': 'Sap tree duel', 'at': [78, 84], 'pages': [{'graphic': {'sprite': 'Followers/HERACROSS', 'dir': 'left'}, 'trigger': 'action',
+                                                                                'commands': [{'script': 'pf_trial_talk(:SAP_TREE)'}]}]},
+          obj('Sap tree', (80, 83), ['A weeping sap tree. Two very large beetles are disputing ownership of it.']))
+    for i, y in enumerate((47, 48, 49)): r.events.append({'type': 'event', 'name': 'Juno at the Veil %d' % (i + 1), 'at': [79, y], 'pages': veil}); m.taken[y, 79] = True
+    r.seat_events(on='.dt')
+    fd = m.front('gl_shed', 58, 51, 'WOOD_HUT', "Woodward's Hut door")
+    r.events += [e for e in m.events if e.get('link') == 'WOOD_HUT']; m.events = []
+    for n, x, y in (('pf_p_loom', 60, 55), ('pf_p_net', 52, 56), ('pf_p_laundry', 62, 48), ('pf_logbench', 54, 54), ('pf_p_lantern', 64, 52)):
+        r.near(n, x, y, on='.d', r=3)
+    for x, y in ((56, 66), (58, 66), (60, 66)):
+        pass
+    gts = 0
+    for n, x, y in (('pf_g_tree6', 24, 36), ('pf_g_tree4', 52, 24), ('pf_g_tree6', 62, 88), ('pf_g_tree4', 20, 92), ('pf_g_tree2', 66, 40), ('pf_g_tree4', 8, 26),
+                    ('pf_g_tree2', 30, 46), ('pf_g_tree6', 72, 60)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.tT'):
+            m.stamp(n, x, y, mark='B', blend=True); gts += 1
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine'), n_trees=W * H // 220, copses=0, scatter=10)
+    for _ in range(W * H // 50):                                                     # the Gossamer's silk: webs and strands
+        nm = r.rng.choice(['pf_p_web', 'pf_p_web1', 'pf_p_silk', 'pf_p_strand_w', 'pf_p_strand_p'])
+        x, y = r.rng.randrange(W), r.rng.randrange(H); st = STAMPS[nm]
+        if m.free(x, y, st['w'], st['h'], on='.'): m.stamp(nm, x, y, mark=None)
+    r.paint(glint=0.0)
+    for x, y in ((56, 65), (58, 65), (60, 65)): pass
+    h = head(524, 'Gossamer Wood', field='SILKWOOD', bgm='Route 3', biome='forest',
+             connections=[{'dir': 'W', 'offset': 50, 'to': 540, 'to_offset': 30}], tone=[-28, -8, -30, 25],
+             fog={'name': 'prismfall_spores', 'opacity': 40, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1})
+    h['metadata']['BattleBack'] = 'forest'
+    r.write(h, '524_gossamer_wood.yaml', '# Gossamer Wood (524). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/524.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {520: build_520, 521: build_521, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
+BUILD = {520: build_520, 521: build_521, 524: build_524, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
 
 
 def main():

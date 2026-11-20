@@ -51,6 +51,10 @@ events:
   - graphic: {tile: 18119}
     trigger: action
     commands: ['(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)']
+  - cond:
+      var: [BRIARWICK_GLASSWOOD, 1]
+    through: true
+    commands: []
 - type: event
   name: Forest-road cordon 2
   at: [2, 10]
@@ -62,16 +66,15 @@ events:
 - type: warp
   name: To Gossamer Wood
   at: [0, 10]
-  link: R2_WOOD
-  arrive: [1, 10, right]
+  to: {map: 524, x: 41, y: 108, dir: up}
 - type: warp
   name: To Gossamer Wood 2
   at: [0, 9]
-  to: {map: 524, x: 22, y: 56, dir: up}
+  to: {map: 524, x: 40, y: 108, dir: up}
 - type: warp
   name: To Gossamer Wood 3
   at: [0, 11]
-  to: {map: 524, x: 24, y: 56, dir: up}
+  to: {map: 524, x: 42, y: 108, dir: up}
 - type: warp
   name: To the Glassed Orchard
   at: [61, 23]
@@ -87,11 +90,15 @@ events:
   pages:
   - graphic: {sprite: NPC 07, dir: right}
     trigger: action
-    move: fixed
     commands: ['Cordon Warden: Forest road''s shut. The Glasswood''s across it. Nobody walks it till the Warden in Briarwick says so.', 'Cordon Warden:
         Go round by the coast like everyone else. Saltmere, then the Weavers'' Road up the river. It''s two days. It''s a nice two days.', '\pf[JUNO,sad]Juno:
         It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.', '\pf[JUNO,neutral]Juno: Parsnip hated the forest.
         Parsnip was right, as it turns out.']
+  - cond:
+      var: [BRIARWICK_GLASSWOOD, 1]
+    graphic: {sprite: NPC 07, dir: right}
+    trigger: action
+    commands: ['Cordon Warden: The glass went back a mile overnight. Road''s open. Don''t ask me how. I just roll up tape.']
 - type: sign
   name: Road sign
   at: [56, 64]

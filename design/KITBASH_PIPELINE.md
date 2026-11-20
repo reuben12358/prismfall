@@ -175,3 +175,25 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
   edge: the crown gets a rounded outline at y=2 (2 px clear above) that curves down toward the left edge, steps between columns
   filled so the line is continuous; no shift, nothing else moved. Previous set in `passes/replaced_p3c_before_crown/`.
   Rule for future portraits: close the silhouette inside the 48-px frame; the round bubble exposes any straight cut at the top.
+- **Extras (not installed, `16f_juno_extras.png`, `juno_extras.py`, files `*_p3x`):** the tan band across the eye line removed
+  (row 29, d8a078 -> skin, 12 px per face), a WINK (happy face, her left eye shut in a thick arc) and a proper SHOCKED (white
+  eyes with pin-prick pupils, a big open mouth with teeth and tongue). To install: copy `JUNO_<e>_p3x.png` over
+  `Portraits/JUNO_<e>.png` (wink -> `_wink`/`_smug`, shocked -> `_shocked`/`_panic`).
+
+## 13. Early-cast battle fronts (2026-11-19)
+
+Tool: `sheet_cast.py <recipe>` exports `art/work/kitbash/<name>/<NAME>_<v>(_native80).png` and renders the review sheet
+(variations at 4x/2x/1x, official references at the same density, a 1x line-up on the battle field, donors strip). Each recipe
+(`kestrel.py`, `dorian.py`, `tamsin.py`, `larch.py`, `edda.py`) exposes NAME, SHEET, TITLE, VARIANTS, PICK, REFS, DONORS, NOTE and
+`build(key)`. Sheets 17-21. Nothing installed.
+
+- **Trainer classes are the safe donors**; named characters (Gladion, Sycamore, Eusine) carry recognisable poses.
+- **Props are the personality**: Honedge, the cane/top hat, the moth shawl (Dustox wings mirrored), the kelp-tea mug, the lantern.
+  Battler props are front density but often too big: Honedge at battler size dwarfed Kestrel. Since scaling is banned, redraw
+  straight hardware (blade, guard) in the Pokemon's own palette and crop the organic part (cloth) from the battler.
+- **Capes must come from a sprite where they read as cloth** (Diantha's). Lance's spread cape read as a slab, the Juggler's as a bag.
+- **Head swaps**: line up the chins, then re-check the mouth row against the chin outline (Kestrel's first mouth sat on the chin
+  line and read as an open mouth).
+- **A repaint on the same body reads as a recolour beside the donor** (Edda A vs the Sailor). The 1x line-up with the donor class on
+  the same strip is the honest test.
+- **Bug to avoid:** after `im = mat.patch(...)` or `mat.recolour(...)`, any `p = im.load()` taken earlier is stale.
