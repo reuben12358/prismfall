@@ -450,15 +450,29 @@ def orchard_rows(r, x0, y0, x1, y1, kind, gap=5, name=None, sign_at=None, skip_r
 
 
 def coll_yard(e):
-    """Coll in the farm yard (story/20_SCRIPT_CH0-2.md, Map 523): after S105 and before the night he has the goat line,
+    """Coll in the farm yard (story/20_SCRIPT_CH0-2.md, Map 523): after S105 and before the night he has the Parsnip line,
     then the Headbutt offer as always."""
     offer = list(e['commands'])
-    line = SE.P('COLL', 'neutral', "Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.")
+    line = SE.P('COLL', 'neutral', "Skiddo's called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn't hold with new names.")
     g = {'sprite': e['sprite'], 'dir': e.get('dir', 'down')}
     return {'type': 'event', 'name': e['name'], 'at': e['at'], 'pages': [
         {'graphic': g, 'trigger': 'action', 'commands': offer},
         {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': g, 'trigger': 'action',
          'commands': [{'if': '$game_variables[102] < 2', 'then': [line], 'else': []}] + offer}]}
+
+
+PARSNIP_TALK = [{'se': 'Cries/SKIDDO'}, 'Parsnip chews your sleeve. Baa-aa!']
+
+
+def parsnip_yard(at_):
+    """Parsnip the Skiddo in the farm yard by the Hale Farmhouse door; at breakfast on the send-off morning (Chapter 2) he is
+    in the farmhouse doorway instead (523), so the yard is empty for that chapter."""
+    g = {'sprite': 'Followers/SKIDDO', 'dir': 'down'}
+    return {'type': 'event', 'name': 'Parsnip', 'at': list(at_), 'pages': [
+        {'graphic': g, 'trigger': 'action', 'move': 'random', 'step_anime': True, 'commands': PARSNIP_TALK},
+        {'cond': {'var': ['STORY_CHAPTER', 2]}, 'commands': []},
+        {'cond': {'var': ['STORY_CHAPTER', 3]}, 'graphic': g, 'trigger': 'action', 'move': 'random', 'step_anime': True,
+         'commands': PARSNIP_TALK}]}
 
 
 def build_521():
@@ -529,7 +543,7 @@ def build_521():
           trainer((104, 40), 'PICNICKER', 'Mae', 'Battle first, sandwich after! House rules.', 'You can have a sandwich anyway!', d='left'),
           talk('Hay-cart Driver', (62, 44), 'NPC 25', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
                "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
-          coll_yard(at(ev['Coll (Headbutt tutor)'], 52, 50)), at(ev['Wayside shrine'], 26, 22),
+          coll_yard(at(ev['Coll (Headbutt tutor)'], 52, 50)), parsnip_yard((47, 47)), at(ev['Wayside shrine'], 26, 22),
           {'type': 'berry', 'at': [36, 46], 'berry': 'PECHABERRY'}, {'type': 'berry', 'at': [70, 30], 'berry': 'ORANBERRY'},
           item((14, 36), 'POKEBALL'), item((114, 46), 'POTION'), hidden((80, 20), 'ORANBERRY', 'HiddenItem (windfall)'),
           obj('Cider press', (101, 54), ['THE CIDER PRESS. A screw press as big as a cart, smelling of last autumn. A sign: "WINDFALLS ONLY. WE CAN TELL."']),
@@ -1045,7 +1059,7 @@ def build_566():
                             {'choices': ['Race him!', 'Not now.'], 'cancel': 1, 'branches': [
                                 [{'script': '$game_variables[603] = 1\n$game_variables[604] = $stats.distance_walked'},
                                  '(He is gone in a scatter of gravel. Up the drove road to the cross -- go!)', {'selfswitch': ['A', True]}],
-                                ['Shepherd boy: Scared of a goat? Fair.']]}]}]},
+                                ['Shepherd boy: Scared of a Skiddo? Fair. He headbutts.']]}]}]},
               {'cond': {'self': 'A'}, 'commands': []}]},
           talk('Skiddo', (57, 77), 'Followers/SKIDDO', ['(It bleats, very pleased with itself.)'], move='random'),
           {'type': 'event', 'name': 'Shepherd boy at the cross', 'at': [53, 35], 'pages': [

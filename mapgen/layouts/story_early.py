@@ -359,8 +359,8 @@ BISCUIT_HOME = [
     N('Wenna', "You're sleeping here tonight. That wasn't a question. I don't do questions after sundown."),
     P('JUNO', 'happy', "You can have my bed! I'll take the hayloft. I always take the hayloft when we have guests."),
     N('Juno', "We've never had guests. I'm very excited about the hayloft."),
-    P('COLL', 'deadpan', "Hayloft's got a goat in it.", '', 'Coll Hale'),
-    N('Juno', "I'm excited about the goat."),
+    P('COLL', 'deadpan', "Hayloft's got a Skiddo in it.", '', 'Coll Hale'),
+    N('Juno', "I'm excited about the Skiddo."),
     P('WENNA', 'happy', "Supper's whenever you come in. Coll made the bed, so it's made badly. But it's made."),
     'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)']
 
@@ -429,7 +429,7 @@ add(100,
           P('COLL', 'neutral', "Farm's up the lane if you need a bed. Wenna'll say the same but with more words."),
           P('COLL', 'deadpan', "...Did she give you a tart? Then you're family. That's how it works. I didn't make the rules.")],
          after=[({'switch': 'CH1_ORCHARD_DONE'}, [IF("$game_self_switches[[523, 0, 'BISCUIT']] && $game_variables[102] < 2", [
-             P('COLL', 'neutral', "Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.")], [
+             P('COLL', 'neutral', "Skiddo's called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn't hold with new names.")], [
              P('COLL', 'neutral', "Orchard went glass the same week my hens stopped laying. Don't know that it's connected. Don't know that it isn't.")])])]),
     ev('Odo',
        page([IF('!pfm?(:odo_rod)', [N('Odo', "You fish? No? Everybody fishes. You just haven't yet."), ITEM('OLDROD'),

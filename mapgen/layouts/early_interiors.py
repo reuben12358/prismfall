@@ -179,7 +179,7 @@ def build():
     r.tf('kitchen', 0, -1); r.tf('shelf_bottles', 4, -1); r.rug(4, 2, 6, 4); r.tf('dining', 5, 2); r.tf('clock', 11, -2)
     r.sf('bed_o', 12, 0); r.tf('bookcase', 10, -2); r.sf('plants3', 12, 5); r.tf('barrel_y', 0, 6); r.tf('crate_i', 1, 6)
     r.tf('sideboard', 0, 2); r.tf('stool', 9, 3); r.tf('painting1', 6, -2); r.tf('bucket', 11, 6)
-    b = B3[523]; at = {'Kitchen table': (6, 1), 'Wenna': (4, 3), 'Farmer Hale': (10, 5), 'Bookshelf': (10, 0), "Juno's seed packets": (8, 0), 'Bed': (13, 2)}
+    b = B3[523]; at = {'Kitchen table': (6, 1), 'Wenna': (4, 3), 'Farmer Hale': (10, 5), 'Bookshelf': (10, 0), "Juno's seed packets": (8, 0), 'Bed': (13, 2), 'Parsnip': (8, 7)}
     h523 = {k: b[k] for k in KEEP if k in b}; h523['tone'] = [10, 4, -12, 0]
     s523 = r.spec(h523, [dict(e, at=r.at(*at[e['name']])) for e in b['events']], b['exit_link'])
     r = Room(9, 7); r.window(2)

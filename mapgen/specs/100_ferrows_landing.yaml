@@ -816,8 +816,8 @@ events:
       - 'Wenna: You''re sleeping here tonight. That wasn''t a question. I don''t do questions after sundown.'
       - '\pf[JUNO,happy]Juno: You can have my bed! I''ll take the hayloft. I always take the hayloft when we have guests.'
       - 'Juno: We''ve never had guests. I''m very excited about the hayloft.'
-      - '\pf[COLL,deadpan,,Coll Hale]Coll: Hayloft''s got a goat in it.'
-      - 'Juno: I''m excited about the goat.'
+      - '\pf[COLL,deadpan,,Coll Hale]Coll: Hayloft''s got a Skiddo in it.'
+      - 'Juno: I''m excited about the Skiddo.'
       - '\pf[WENNA,happy]Wenna: Supper''s whenever you come in. Coll made the bed, so it''s made badly. But it''s made.'
       - 'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)'
       - {script: 'pfm_set(:biscuit_reward)'}
@@ -840,7 +840,7 @@ events:
     graphic: {sprite: NPC 03, dir: down}
   - commands:
     - if: $game_self_switches[[523, 0, 'BISCUIT']] && $game_variables[102] < 2
-      then: ['\pf[COLL,neutral]Coll: Goat''s called Parsnip. Second Parsnip. First one was a donkey. Juno doesn''t hold with new names.']
+      then: ['\pf[COLL,neutral]Coll: Skiddo''s called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn''t hold with new names.']
       else: ['\pf[COLL,neutral]Coll: Orchard went glass the same week my hens stopped laying. Don''t know that it''s connected. Don''t know that it isn''t.']
     trigger: action
     move: fixed

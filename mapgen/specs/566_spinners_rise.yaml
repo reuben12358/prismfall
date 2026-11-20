@@ -75,7 +75,7 @@ events:
               $game_variables[604] = $stats.distance_walked'}
           - (He is gone in a scatter of gravel. Up the drove road to the cross -- go!)
           - selfswitch: [A, true]
-        - ['Shepherd boy: Scared of a goat? Fair.']
+        - ['Shepherd boy: Scared of a Skiddo? Fair. He headbutts.']
   - cond: {self: A}
     commands: []
 - type: event

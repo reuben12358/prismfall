@@ -6254,10 +6254,25 @@ events:
       - 'Wenna: You''re sleeping here tonight. That wasn''t a question. I don''t do questions after sundown.'
       - '\pf[JUNO,happy]Juno: You can have my bed! I''ll take the hayloft. I always take the hayloft when we have guests.'
       - 'Juno: We''ve never had guests. I''m very excited about the hayloft.'
-      - '\pf[COLL,deadpan]Coll: (from the yard) Hayloft''s got a goat in it.'
-      - 'Juno: I''m excited about the goat.'
+      - '\pf[COLL,deadpan]Coll: (from the yard) Hayloft''s got a Skiddo in it.'
+      - 'Juno: I''m excited about the Skiddo.'
       - '\pf[WENNA,happy]Wenna: Supper''s whenever you come in. Coll made the bed, so it''s made badly. But it''s made.'
       - 'OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)'
+- type: event
+  name: Parsnip
+  at: [11, 12]
+  pages:
+  - commands: []
+  - cond:
+      var: [STORY_CHAPTER, 2]
+    graphic: {sprite: Followers/SKIDDO, dir: left}
+    step_anime: true
+    commands:
+    - {se: Cries/SKIDDO}
+    - Parsnip chews your sleeve. Baa-aa!
+  - cond:
+      var: [STORY_CHAPTER, 3]
+    commands: []
 - type: npc
   name: Farmer Hale
   at: [13, 10]
@@ -6300,10 +6315,10 @@ events:
         - - {script: pfm_juno_part}
           - tone: [-255, -255, -255, 0, 20]
           - {wait: 24}
-          - (Crickets. A goat, briefly.)
+          - (Crickets. A Skiddo bleats, briefly.)
           - '\pf[JUNO,happy]Juno: (from the hayloft across the yard) \PN? You awake? You can see all eighteen from up here tonight.'
           - '\pf[JUNO,neutral]Juno: Usually it''s only the near ones. Fourteen. Fifteen if Dad''s not snoring. They''re brighter every year. Nobody says why.'
-          - '\pf[JUNO,happy]Juno: ...Night! The goat says night too. That was the goat.'
+          - '\pf[JUNO,happy]Juno: ...Night! Parsnip says night too. That was Parsnip.'
           - {heal: true}
           - tone: [-255, -255, -255, 0, 20]
           - {wait: 24}
@@ -6318,9 +6333,9 @@ events:
           - tone: [0, 0, 0, 0, 20]
           - if: '!pfm?(:ch2_sendoff)'
             then:
-            - (Morning. Bramble tea, too many tarts, and a goat in the doorway. Wenna is packing a basket that keeps getting bigger. Coll is reading yesterday's Gale
-              Post upside down. Juno has straw in her blossoms.)
-            - '\pf[JUNO,happy]Juno: Morning! The goat and I have reached an understanding.'
+            - (Morning. Bramble tea, too many tarts, and Parsnip the Skiddo in the doorway, chewing the doormat. Wenna is packing a basket that keeps getting bigger.
+              Coll is reading yesterday's Gale Post upside down. Juno has straw in her blossoms.)
+            - '\pf[JUNO,happy]Juno: Morning! Parsnip and I have reached an understanding.'
             - '\pf[WENNA,neutral]Wenna: Eat. You''ve two days of cliff ahead of you, and Saltmere charges for air.'
             - '\pf[WENNA,sad]Wenna: Rowan was off before the cock crowed. Didn''t even take a tart. Twenty years I''ve known that man and he''s never not taken a
               tart.'

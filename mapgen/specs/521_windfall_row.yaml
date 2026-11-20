@@ -171,10 +171,31 @@ events:
     trigger: action
     commands:
     - if: $game_variables[102] < 2
-      then: ['\pf[COLL,neutral]Coll: Goat''s called Parsnip. Second Parsnip. First one was a donkey. Juno doesn''t hold with new names.']
+      then: ['\pf[COLL,neutral]Coll: Skiddo''s called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn''t hold with new names.']
       else: []
     - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
     - *id003
+- type: event
+  name: Parsnip
+  at: [47, 47]
+  pages:
+  - graphic: &id004 {sprite: Followers/SKIDDO, dir: down}
+    trigger: action
+    move: random
+    step_anime: true
+    commands: &id005
+    - {se: Cries/SKIDDO}
+    - Parsnip chews your sleeve. Baa-aa!
+  - cond:
+      var: [STORY_CHAPTER, 2]
+    commands: []
+  - cond:
+      var: [STORY_CHAPTER, 3]
+    graphic: *id004
+    trigger: action
+    move: random
+    step_anime: true
+    commands: *id005
 - type: sign
   at: [26, 22]
   post: false
