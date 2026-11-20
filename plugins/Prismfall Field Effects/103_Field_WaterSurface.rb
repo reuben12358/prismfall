@@ -20,7 +20,7 @@ FieldEffects.register(:WATER_SURFACE, (lambda do
                        "Grounded non-Water Pokemon wade at x0.75 Speed. Water attacks may sweep grounded non-Water targets along (Speed -1).",
                        "The cool water soothes grounded Pokemon's burns. Water Absorb sips 1/16 HP a turn. Water Compaction +1 Def, Propeller Tail +1 Speed on entry.",
                        "Rain lasts 3 turns longer, Misty Terrain 2 turns longer. Grassy Terrain can't take root.",
-                       "Dive or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.",
+                       "Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.",
                        "Elemental Seed: +1 Speed and Aqua Ring."],
     :nature_power  => :WHIRLPOOL,
     :camouflage    => :WATER,
@@ -71,7 +71,9 @@ FieldEffects.register(:WATER_SURFACE, (lambda do
     :terrain       => { :block => [:Grassy], :block_message => "Nothing can take root on open water!",
                         :extend => { :Misty => 2 } },
     :transitions   => [
-      { :moves => [:DIVE], :to => :UNDERWATER, :message => "The battle plunged beneath the waves!" },
+      # Dive takes the battle down on the turn it strikes (Reborn), so that hit is the transform strike (x1.3) and one
+      # Dive is one change. Surfacing again is not a strike (104_Field_Underwater.rb): the bonus is one-way, no Dive loop.
+      { :moves => [:DIVE], :strike_turn => true, :to => :UNDERWATER, :message => "The battle plunged beneath the waves!" },
       { :moves => [:GRAVITY], :to => :UNDERWATER, :message => "Gravity dragged the whole battle under the surface!" },
       { :moves => big_ice, :category => :damaging, :to => :FROZEN_LAKE, :uses => 3,
         :progress_message => "Ice is spreading across the water... ({1} more)",

@@ -106,6 +106,7 @@ An opera house that plays to the crowd: songs, dances and showpieces build appla
 - Standing Ovation: every attack +1 critical-hit stage, Sing never misses, Normal types and Dancers bask in applause (1/16 HP).
 - Dancer +1 Speed, Punk Rock / Liquid Voice +1 Sp. Atk on entry. Indoors: no weather.
 - Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.
+- Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up. With your fans in, only your side basks at Standing Ovation.
 
 **Changes:**
 - Dance moves x2 → stage +1
@@ -137,7 +138,7 @@ Swimmers ride the currents, electricity races across the surface and flames hiss
 - Grounded non-Water Pokemon wade at x0.75 Speed. Water attacks may sweep grounded non-Water targets along (Speed -1).
 - The cool water soothes grounded Pokemon's burns. Water Absorb sips 1/16 HP a turn. Water Compaction +1 Def, Propeller Tail +1 Speed on entry.
 - Rain lasts 3 turns longer, Misty Terrain 2 turns longer. Grassy Terrain can't take root.
-- Dive or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.
+- Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.
 - Elemental Seed: +1 Speed and Aqua Ring.
 
 **Changes:**
@@ -163,7 +164,7 @@ The deep belongs to swimmers: Water and Electric surge, sound carries, silt join
 - Fire moves fizzle. Fly, Bounce, Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.
 - Non-Water Pokemon move at half Speed. Torrent, Swift Swim (x2 Speed) and Hydration act as if it were raining.
 - No weather or terrain reaches the depths. Water Absorb and Dry Skin drink in the sea (1/16 HP).
-- Dive, Bounce, Fly or Sky Drop -> back to the Water Surface. 2 Sludge Waves -> Corrosive Mire.
+- Dive, Bounce, Fly or Sky Drop -> back to the Water Surface (surfacing is not a transform strike). 2 Sludge Waves -> Corrosive Mire.
 - Elemental Seed: +1 Speed and Aqua Ring, and the holder adapts to the deep (becomes pure Water type).
 
 **Changes:**

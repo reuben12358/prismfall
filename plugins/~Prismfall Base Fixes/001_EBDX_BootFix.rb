@@ -17,12 +17,24 @@
 #===============================================================================
 module PluginManager
   PRISMFALL_EBDX_SPRITE_LINE = /^class PokemonSprite\s*<\s*SpriteWrapper\s*$/
+  # In-memory line patches for base-project plugin files, applied as each file is evaluated (no file is changed):
+  # key => { :file => file name suffix, :line => Regexp, :with => replacement, :note => log text }. A patch whose line
+  # is not found (already fixed by hand, or a newer base project) does nothing. Later Base Fixes files add their own
+  # rows (003_Gen9_PsychoShift.rb).
+  PRISMFALL_SOURCE_PATCHES = {} if !const_defined?(:PRISMFALL_SOURCE_PATCHES)
+  PRISMFALL_SOURCE_PATCHES[:ebdx_pokemon_sprite] = {
+    :file => "UI Fixes.rb", :line => PRISMFALL_EBDX_SPRITE_LINE,
+    :with => "class PokemonSprite   # superclass dropped by Prismfall Base Fixes",
+    :note => "dropped the PokemonSprite superclass (EBDX boot fix)"
+  }
 
   def self.eval(code, *args)
-    if args[1].is_a?(String) && args[1].end_with?("UI Fixes.rb") &&
-       code.is_a?(String) && code.match?(PRISMFALL_EBDX_SPRITE_LINE)
-      code = code.sub(PRISMFALL_EBDX_SPRITE_LINE, "class PokemonSprite   # superclass dropped by Prismfall Base Fixes")
-      echoln("[Prismfall Base Fixes] #{args[1]}: dropped the PokemonSprite superclass (EBDX boot fix)")
+    if args[1].is_a?(String) && code.is_a?(String)
+      PRISMFALL_SOURCE_PATCHES.each_value do |pt|
+        next if !args[1].end_with?(pt[:file]) || !code.match?(pt[:line])
+        code = code.sub(pt[:line], pt[:with])
+        echoln("[Prismfall Base Fixes] #{args[1]}: #{pt[:note]}")
+      end
     end
     return super(code, *args)
   end

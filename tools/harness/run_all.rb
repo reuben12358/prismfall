@@ -12,6 +12,7 @@ require "fileutils"
 load File.join(__dir__, "boot.rb")
 load File.join(HARNESS_DIR, "log_scene.rb")
 load File.join(HARNESS_DIR, "probes.rb")
+load File.join(HARNESS_DIR, "regressions.rb")
 
 OUT_DIR = ENV["PRISM_OUT"] || File.expand_path("../../docs/battle_captures", HARNESS_DIR)
 FileUtils.mkdir_p(File.join(OUT_DIR, "logs"))
@@ -106,7 +107,7 @@ Prismfall.record_starter(:CHARMANDER)   # the rival-starter system needs a recor
 RESULTS = { :boot => { :engine_scripts => Harness::BOOT[:scripts].size, :plugins => PluginManager.plugins,
                        :species => GameData::Species.count, :moves => GameData::Move.count,
                        :trainers => GameData::Trainer.count, :fields => FieldEffects.ids.size },
-            :battles => [], :probes => {}, :bosses => [], :errors => [] }
+            :battles => [], :probes => {}, :bosses => [], :regressions => [], :errors => [] }
 
 def record_errors(kind, name, log)
   log.errors.each { |e| RESULTS[:errors] << e.merge(:kind => kind, :name => name) }
@@ -205,7 +206,24 @@ end
 
 
 #-------------------------------------------------------------------------------
-# 4. Summary table
+# 4. Regression checks (tools/harness/regressions.rb): Psycho Shift (Gen 9 Pack), the Dive loop.
+#-------------------------------------------------------------------------------
+if !ONLY || ONLY.include?(:REGRESSIONS)
+  FileUtils.mkdir_p(File.join(OUT_DIR, "regressions"))
+  Harness::Regressions.run.each do |r|
+    log = r.delete(:log)
+    file = r[:name].downcase.gsub(/[^a-z0-9]+/, "_").sub(/_+\z/, "")
+    Harness.write_log("regressions", file, log)
+    record_errors(:regression, r[:name], log)
+    RESULTS[:regressions] << r.merge(:log => "regressions/#{file}.txt")
+    RESULTS[:errors] << { :class => "RegressionFailed", :message => "#{r[:name]}: #{r[:detail]}", :backtrace => ["regressions.rb"],
+                          :kind => :regression, :name => r[:name] } if !r[:ok]
+    puts format("check  %-58s %-4s %s", r[:name], r[:ok] ? "ok" : "FAIL", r[:detail])
+  end
+end
+
+#-------------------------------------------------------------------------------
+# 5. Summary table
 #-------------------------------------------------------------------------------
 def tick(ok); ok ? "yes" : "**NO**"; end
 def frac(list); list.empty? ? "none defined" : "#{list.count { |r| r[:ok] }}/#{list.size}"; end
@@ -230,6 +248,7 @@ if !ONLY
   md << "- Plugins, in PluginManager order: #{boot[:plugins].join(', ')}."
   md << "- PBS compiled by the real Compiler: #{boot[:species]} species, #{boot[:moves]} moves, #{boot[:trainers]} trainers" \
         " (incl. the kit's trainers/trainer types/seed items); #{boot[:fields]} fields registered."
+  md << "- `~Prismfall Base Fixes` first (from the kit by `boot.rb` when the run folder doesn't link it): it patches base-project plugin lines as they load."
   md << "- Not loaded: Elite Battle DX, Prismfall EBDX Bridge, Cutscenes, Debug Tools, maps, encounters."
   md << ""
   md << "## Result"
@@ -264,6 +283,11 @@ if !ONLY
     fc = "Plate turns: " + b[:rotations].map { |t, ids| "T#{t} #{ids.join('+')}" }.join(", ") if b[:rotations]
     md << "| #{b[:name]} | #{b[:outcome_text]} | #{b[:turns]} | #{b[:bar_breaks].size} | #{fc.empty? ? '-' : fc} | `#{b[:log]}` |"
   end
+  md << ""
+  md << "## Regression checks"
+  md << "| Check | OK? | Detail | Log |"
+  md << "|---|---|---|---|"
+  RESULTS[:regressions].each { |r| md << "| #{r[:name]} | #{tick(r[:ok])} | #{r[:detail]} | `#{r[:log]}` |" }
   md << ""
   md << "## Probe detail"
   RESULTS[:probes].each do |field, s|

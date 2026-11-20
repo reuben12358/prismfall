@@ -718,9 +718,14 @@ No map file was edited.
 3. **Water Surface ↔ Underwater loop:** Dive into Underwater and Dive back to the surface are both transform strikes
    (×1.3, and Dive is ×1.5 underwater): 103 knockouts in 60 Gym 3 runs came from it, so Marisol no longer has Dive.
    Suggest: the return trip is not a strike (or one strike per battle).
+   **DONE 2026-11-20:** one-way. Dive now moves the battle on the turn it strikes (new transition key `:strike_turn`,
+   Reborn's timing: one Dive = one change, not down-and-back-up in one use), diving down is the transform strike (×1.3)
+   and surfacing (Dive, Bounce, Fly, Sky Drop) is not (`:boost => false`). Harness: `tools/harness/regressions.rb`
+   (run_all section 4): Surface Dive 63 dmg with the strike vs 49 without; Underwater Dive 56 = 56; two Dives = down, up.
 4. `FIELD_DEFAULTS.yaml` `exceptions.trainers`: the `OCTAVE_SINGER` v1–8 and `OCTAVE_VESPER` v2 rows are dead (retired
    versions); `OCTAVE_SINGER` v0 is Lyra now (the row's text says Carol; the field, Grand Stage, is right). The v60 bouts
-   need no rows (the quest sets the field). In `012_FieldEffects_TrainerPlays.rb` (mine) I emptied `ENTRY_FIELDS`
+   need no rows (the quest sets the field). **DONE 2026-11-20:** singer 1–8 and Vesper 2 rows removed, v0 texts say Lyra,
+   `011_FieldEffects_MapDefaults.rb` regenerated (`--check` clean). In `012_FieldEffects_TrainerPlays.rb` (mine) I emptied `ENTRY_FIELDS`
    (only Vesper v2 used it) and added the war WANTS exactly as you suggested, plus the partners'.
 5. The war teams are rebuilt for your sequence: Desert on 920 / 926 (rain → Superbloom → flood; two searing moves →
    glass; no quakes in the Ashkaar glass line), the Bleed on 925, Cinderglass on 924. Harness: with the WANTS the
@@ -767,7 +772,11 @@ No map file was edited.
 **For the Base Fixes owner:**
 12. Gen 9 Pack `[003] Moves/[000] Move Functions.rb`, the Psycho Shift override (`GiveUserStatusToTarget`, ~line 27)
     calls `paldea_pbEffectAgainstTarget` with no arguments: an ArgumentError whenever Psycho Shift is used without
-    Drowsy / Frostbite. It should be `paldea_pbEffectAgainstTarget(user, target)`.
+    Drowsy / Frostbite. It should be `paldea_pbEffectAgainstTarget(user, target)`. **DONE 2026-11-20:**
+    `plugins/~Prismfall Base Fixes/003_Gen9_PsychoShift.rb` restores the arguments in memory as the file loads (the
+    001 hook now takes a table of line patches; no base file is changed; the Renovation fork's 3.3.8 is already fixed and
+    is left alone). `tools/harness/boot.rb` loads Base Fixes when a run folder doesn't link it, and run_all checks Psycho
+    Shift with a burn, with paralysis and with no status (0 exceptions; without the fix: ArgumentError).
 
 **For the distribution owner:** Tamsin's answer to the common birds is Dwebble (Smack Down grounds them into the silk,
 Rock Tomb), not a new Flying weakness; the Little Crucible is in the 2-badge band; K1's Standard starter has no type
@@ -1000,3 +1009,28 @@ copy of the Biscuit scene, and items 11-17 (Gym 2's lines are the puzzle enginee
 parentheticals that read like stage directions as prose (528 the Beacon and the barge, 552 the Dyers' Ford, 541 the
 Saltings): your scripts keep the parenthetical form, so those lines now differ from the script on purpose.
 **For the distribution agent:** Spinners' Rise Ram Race sets `pfm_set(:ram_race_won)` (a Skiddo after Badge 3 can key on it).
+
+## From the fields / balance pass (trainer designer's hand-offs 1–4 and 12, Gym 3, Picnicker Ada), 2026-11-20
+No map file was edited. Done here (details in the items above and `design/BALANCE.md` §9): the Saltmere crowd rule
+(Dorian's troupe doesn't bask when your fans are in), the Psycho Shift crash (Base Fixes 003), the Dive loop (one-way
+strike, `:strike_turn`), the dead Octave rows, and Gym 3 for a Fire starter.
+
+**For map builder 10 (one request, Rimewood Glade 563):**
+1. **Gym 3's earned Electric answer.** `pbs/encounters.txt` gives the secret Rimewood Glade (563, behind the Cut sapling) a
+   **LandNight** table: the day species plus **Emolga 5% (Lv 17–19)** and Joltik 3% (the 8% cap for Marisol's answers).
+   It uses the glade's existing grass, so no tiles are needed, but the player should be told it is there. Please change
+   Ranger Sigurd's `after:` line in `layouts/rimewood.py` (563) to something like *"...So you cut your way in. Fair.
+   Stay till dark if you've the nerve. Something glides between the boles up here, and it crackles."*, and, if you have
+   a spare villager, one rumour in Frostwick (570) or at the trapper's lean-to (562): *"Lights in the Glade after dark.
+   Flying squirrels, my gran said. Shocking little things."* Nothing else changes on the map.
+
+**For the trainer designer:**
+2. Harness cells added to `tools/harness/run_winrates.rb`: `G3E` (a team that found the Glade's Emolga; Fire starter
+   42% on Standard, 0 of 20 / 2 of 60 without it), `ADA` / `ADA1` (Picnicker Ada vs a sensible Ch1 player / the starter
+   alone), `PRISM_FORCE=SPECIES` and `PRISM_STARTERS=Fire`. The prepared Ch4 list leads with Emolga now. Lucky (Gym 3)
+   could have Dive back now that the loop is gone; I left the team as it is.
+3. Picnicker Ada needs no change: a sensible Water-starter player wins 87% on Standard (alone: 50%).
+
+**For the playtest:** Psycho Shift no longer crashes a battle (Base Fixes 003); Ada is a wall only for a team that never
+heals or catches a bird (`BALANCE.md` §9).
+

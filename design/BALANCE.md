@@ -324,22 +324,46 @@ distribution allows by then (rare finds included). 60 fights per cell (20 per st
 
 | Fight | Casual | Standard | Hard (realistic) | Hard (prepared) |
 |---|---|---|---|---|
+| Picnicker Ada (Ch1 Windfall Row, Meadow; starter 9 + two catches) | 99% | 96% (Water 52 of 60) | 93% (Water 50 of 60) | — |
 | K1 Kestrel (Lv 5, can be lost) | 100% | 15% | 0% | — |
 | J1 Juno (Meadow) | 100% | 63% | 50% | 55% |
-| Gym 1 Dorian, sparse house (stage 1) | 100% | 43% | 2% | 33% |
-| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 52% | 7% | 37% |
-| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 45% | 0% | 43% |
+| Gym 1 Dorian, sparse house (stage 1) | 100% | 48% | 3% | 30% |
+| Gym 1 Dorian, good house (stage 2 + fans) | 100% | 73% | 10% | 52% |
+| Gym 1 Dorian, full house (stage 3 + fans) | 100% | 58% | 10% | 48% |
 | Gym 2 Tamsin (Silkwood, double) | 100% | 45% | 3% | 35% |
-| K2 Kestrel (Mountain) | 98% | 58% | 5% | 30% |
-| Gym 3 Marisol (Water Surface) | 83% | 25% | 0% | 30% |
+| K2 Kestrel (Mountain) | 98% | 58% | 5% | 35% |
+| Gym 3 Marisol (Water Surface) | 82% | 23% | 0% | 37% |
+| Gym 3 Marisol, a team that found the Glade's night Emolga | 98% | 63% (Fire 8 of 20; 60 Fire runs: 42%) | 3% | — |
 
 Reading: the AI challenger plays worse than a person (no planned leads, little stalling), so Standard's 25–60% means
 "a realistic team loses a few times and wins with the field notes"; a **prepared** team wins Standard J1 83%, Gym 1
-95%, Gym 2 98% (one run crashed on the Gen 9 Pack's Psycho Shift bug, counted as a loss), K2 73%, Gym 3 97%. Hard is for prepared teams (30–55%); a realistic team loses there, as on Reborn's harder modes. Casual
-is 83–100%. Weak spots: Gym 3 with the Fire starter (0 of 20 realistic: Electric and Grass catches are rare before
-Ebbmouth) and the Saltmere crowd, which doesn't reward the player yet: about even across the houses with a Lv 15 team
-(43 / 52 / 45%; an earlier run with Baton Pass Aipom, 50 / 52 / 37%), worse with a Lv 14 team (37 / 25 / 35%).
-Proposal: Dorian's troupe stops basking when your fans are in (harness 50 / 63 / 73%, mapgen/REQUESTS.md).
+95%, Gym 2 98% (one run crashed on the Gen 9 Pack's Psycho Shift bug, counted as a loss; fixed since, Base Fixes 003), K2 85%, Gym 3 100%. Hard is for prepared teams (30–55%); a realistic team loses there, as on Reborn's harder modes. Casual
+is 82–100%.
+
+**Picnicker Ada (2026-11-20):** the playtest's "Ch1 wall" (Oddish 6, Budew 7 beat the bot's Water starter 7 of 8) is the
+bot's way of playing (it heals only by blacking out). A sensible player at Windfall Row (starter Lv 9, two catches from
+520 / 521 at Lv 6–7, two Potions; cells `ADA` / `ADA1`, 60 fights per starter): Water starter **87%** on Standard (Grass
+and Fire 100%), 83% on Hard; the Water starter **alone** wins 50%. A real Grass wall for a lone Water starter, gone once
+it has a bird (Pidove, Pikipek, Rookidee and Hoothoot are 8–20% on those two roads): Reborn-style, so her set is unchanged.
+
+**Gym 3 with a Fire starter (2026-11-20):** a realistic Fire-starter six wins **0 of 20** (2 of 60) on Standard: Marisol's
+Gyarados (Whirlpool ×2 on the surface) sweeps it, and a Lv 22 Flaaffy, Luxio, Joltik or Grass catch lifts that only to
+0–13% (a forced catch, 30 runs each; Chinchou's Volt Absorb walls the slow ones). No counter is handed out (rule R4
+forbids an Electric or Grass gift with 1–2 badges). Instead the answer is **earned, Reborn-style (P5: a time condition
+on a side map):** **Emolga, 5% at night only, in the secret Rimewood Glade** (563, behind the Cut sapling; its night
+table is Emolga 5 + Joltik 3, the 8% cap). Lv 17–19, Nuzzle / Quick Attack / Thunder Shock (Charge at 20). A Fire-starter
+six that found it wins **42%** on Standard (25 of 60; a second 60: 30%), Casual 95%, Hard 0% (Hard is for prepared
+teams: prepared 37%). Grass and Water starters that find it reach 73–80%. Pachirisu tested at 63% (too strong for a
+"modest" find); Emolga is the pick. The `G3E` cell in `run_winrates.rb` forces it into the team.
+
+**The Saltmere crowd (Gym 1 rows, 2026-11-20):** with your fans in (7+ met), Standing Ovation's bask is for your side
+only, so Dorian's all-Normal troupe no longer heals 1/16 a round at a full house ("the house cheers you, not him";
+`102_Field_GrandStage.rb`, `FieldEffects.home_crowd_foe?` in Puzzles `007_Puzzles_SaltmereCrowd.rb`). Before, on
+Standard: sparse / good / full **43 / 52 / 45%** (Lv 14 team 22 / 30 / 32%). After: **48 / 73 / 58%** at 60 fights a
+cell (180 a cell: **46 / 68 / 64%**), Lv 14 team **25 / 48 / 37%**. Meeting 7+ people is now worth about twenty points;
+a full house is about level with a good one (within noise at 180 fights; Standing Ovation's ×1.5 Normal moves and +1
+crit stage still cut both ways). The sparse house moved a few points only because the AI no longer counts the bask
+when it values pushing the applause up (rules with a condition are skipped by `AIField.static_match?`).
 
 Late fights (`/home/claude/work/trainers2/run_late.rb`, a well-built six at the cap, Full Restores, 8–10 runs): the
 Eevee Octave gauntlet (Lv 87 / 89) 9 of 10 Standard and 8 of 10 Hard with planned leads, 1 and 0 of 10 without; the war
@@ -378,5 +402,6 @@ in the validator, so they need no row.
   `:RESHIRAM_GLASS_DUNES` / `:KYOGRE_GLASS_DUNES` in Prismfall Bosses (`106_Boss_WarLegends.rb`; the trainer designer
   took the Bosses plugin over). Cap 85.
 - Little Crucible (Trials) re-levelled to the 2-badge band (19–21). K1 Standard: no type move (Reborn / Rejuvenation).
-- Pending: new maps' trainers as they are generated; the Saltmere audience rule (proposal in REQUESTS: Dorian's troupe
-  doesn't bask when your fans are in).
+- Pending: new maps' trainers as they are generated. Done: Gym 3's earned Electric answer for the Fire starter (the
+  Glade's night Emolga, §9); the Saltmere audience rule (with your fans in, Dorian's
+  troupe doesn't bask; §9).

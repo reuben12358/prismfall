@@ -18,7 +18,7 @@ FieldEffects.register(:UNDERWATER, {
                      "Fire moves fizzle. Fly, Bounce, Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.",
                      "Non-Water Pokemon move at half Speed. Torrent, Swift Swim (x2 Speed) and Hydration act as if it were raining.",
                      "No weather or terrain reaches the depths. Water Absorb and Dry Skin drink in the sea (1/16 HP).",
-                     "Dive, Bounce, Fly or Sky Drop -> back to the Water Surface. 2 Sludge Waves -> Corrosive Mire.",
+                     "Dive, Bounce, Fly or Sky Drop -> back to the Water Surface (surfacing is not a transform strike). 2 Sludge Waves -> Corrosive Mire.",
                      "Elemental Seed: +1 Speed and Aqua Ring, and the holder adapts to the deep (becomes pure Water type)."],
   :nature_power  => :WATERPULSE,
   :camouflage    => :WATER,
@@ -74,7 +74,11 @@ FieldEffects.register(:UNDERWATER, {
   :terrain       => { :block => [:Electric, :Grassy, :Misty, :Psychic],
                       :block_message => "Nothing can settle on the shifting sea floor!" },
   :transitions   => [
-    { :moves => [:DIVE, :BOUNCE, :FLY, :SKYDROP], :even_if_failed => true, :to => :WATER_SURFACE,
+    # Surfacing is not a transform strike (:boost => false): only diving down is (103_Field_WaterSurface.rb), so Dive
+    # can't be looped for x1.3 both ways. Dive surfaces on the turn it strikes (Reborn): one Dive, one change.
+    { :moves => [:DIVE], :even_if_failed => true, :strike_turn => true, :boost => false, :to => :WATER_SURFACE,
+      :message => "The battle burst back up to the surface!" },
+    { :moves => [:BOUNCE, :FLY, :SKYDROP], :even_if_failed => true, :boost => false, :to => :WATER_SURFACE,
       :message => "The battle burst back up to the surface!" },
     { :moves => [:SLUDGEWAVE], :to => :CORROSIVE_MIRE, :uses => 2,
       :progress_message => "A toxic cloud is spreading through the water... ({1} more)",

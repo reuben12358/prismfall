@@ -12,6 +12,8 @@
 # uses the few healing items a player carries (BAG below; Hard forbids the Bag in trainer battles).
 #
 #   PRISM_MODES=CASUAL,STANDARD,HARD   PRISM_FIGHTS=K1,J1,G1,G2,G3,K2   PRISM_SEEDS=20 (per starter)
+#   PRISM_STARTERS=Fire (only those starters)   PRISM_FORCE=SPECIES (the first catch is that species: "a player who
+#   found it"; a fight's own :force list does the same for every run of that fight)
 # Writes WINRATES.md and winrates.json to PRISM_OUT (default docs/battle_captures/winrates).
 #===============================================================================
 require "json"
@@ -105,6 +107,14 @@ module WR
   # EVENT_POKEMON.md. Gated answers keep their 2-4% weight, so a realistic team holds one only now and then.
   # Regenerate the wild part with /home/claude/work/trainers2/pools.py-style counting if the tables change.
   POOLS = {
+    # Chapter 1 at Windfall Row (Picnicker Ada): the Ferrymen's Mile 520 and Windfall Row 521 (day and night, Headbutt
+    # x0.3) plus the Tart Thief's Nickit (Ch1 quest). Flying is common (Pidove, Pikipek, Rookidee, Hoothoot).
+    :ch1a  => { :SKWOVET => 20, :LECHONK => 15, :LILLIPUP => 15, :WOOLOO => 13, :PIKIPEK => 13, :YUNGOOS => 9,
+                :ROOKIDEE => 8, :FLETCHLING => 4, :ROLYCOLY => 3, :HOOTHOOT => 20, :NICKIT => 25, :TAROUNTULA => 15,
+                :RATTATA => 8, :SPINARAK => 15, :PIDOVE => 17, :BOUNSWEET => 12, :GOSSIFLEUR => 10, :SMOLIV => 12,
+                :FIDOUGH => 9, :NIDORANfE => 10, :NIDORANmA => 10, :ZIGZAGOON => 12, :PIDGEY => 5, :SHINX => 4,
+                :LITLEO => 3, :MEOWTH => 15, :POOCHYENA => 10, :NYMBLE => 10, :ODDISH => 15, :PINECO => 12,
+                :COMBEE => 9, :BURMY => 6, :SQUAWKABILLY => 6, :AIPOM => 3 },
     # Before Gym 1 / J1 (0 badges): 520, 521, 522, 527, 528, Saltmere. No Fighting type at all; Ghost = Sandygast 3%.
     :ch1_2 => { :PIDOVE => 17, :HOOTHOOT => 20, :PIKIPEK => 15, :WINGULL => 15, :SKWOVET => 20, :LILLIPUP => 15,
                 :NICKIT => 25, :MEOWTH => 15, :SPINARAK => 18, :TAROUNTULA => 15, :GOSSIFLEUR => 15, :ODDISH => 15,
@@ -135,7 +145,8 @@ module WR
                 :HOOTHOOT => 20, :SHUPPET => 20, :ZUBAT => 18, :GREAVARD => 18, :MACHOP => 13, :MANKEY => 10, :NICKIT => 15,
                 :LILLIPUP => 15, :FLABEBE => 18, :VENONAT => 15, :PHANTUMP => 15, :MAWILE => 12, :SABLEYE => 12,
                 :SWABLU => 10, :SNEASEL => 5, :STANTLER => 6, :SPINDA => 10, :DUNSPARCE => 10, :KECLEON => 10,
-                :SHINX => 4, :MAREEP => 5, :JOLTIK => 5, :BLITZLE => 4, :GRUBBIN => 4 }
+                :SHINX => 4, :MAREEP => 5, :JOLTIK => 5, :BLITZLE => 4, :GRUBBIN => 4,
+                :EMOLGA => 2 }   # 5% at night only, in the secret Rimewood Glade (563, behind the Cut sapling)
   }
   # TMs the story has handed over by then (TM42 Facade from Dorian, TM98 Rock Smash at Brinecut, TM89 U-turn from Tamsin):
   # each goes to the first party member that can learn it, replacing its weakest move.
@@ -148,13 +159,24 @@ module WR
   PREPARED = {
     :ch1_2 => [:NACLI, :DWEBBLE, :SANDYGAST, :ROLYCOLY, :NICKIT, :KECLEON, :SHINX, :FLETCHLING],
     :ch3   => [:PONYTA, :NACLI, :DWEBBLE, :FLETCHLING, :SPEAROW, :DODUO, :HOOTHOOT, :LITLEO],
-    :ch4   => [:MAREEP, :SHINX, :JOLTIK, :SKIDDO, :SNOVER, :DEERLING, :HERACROSS, :ODDISH]
+    :ch4   => [:EMOLGA, :MAREEP, :SHINX, :JOLTIK, :SKIDDO, :SNOVER, :DEERLING, :HERACROSS]
   }
   PREP = ENV["PRISM_PREPARED"] == "1"
-  BAG = { :none => [], :g1 => [:POTION] * 3, :g2 => [:POTION, :POTION, :SUPERPOTION, :SUPERPOTION],
+  FORCE = ENV["PRISM_FORCE"]&.split(",")&.map { |x| x.strip.upcase.to_sym }
+  BAG = { :none => [], :ch1 => [:POTION] * 2, :g1 => [:POTION] * 3, :g2 => [:POTION, :POTION, :SUPERPOTION, :SUPERPOTION],
           :g3 => [:SUPERPOTION] * 3 }
   # fight => level cap, badges held, team size (starter included), catch pool, bag, how it starts
   FIGHTS = {
+    # Chapter 1, Windfall Row (521, Meadow): Picnicker Ada (Oddish 6, Budew 7), the playtest's wall for the Water starter.
+    # A sensible player there: the starter at Lv 9 (the playtest's Mudkip was 9-11), two catches from 520 / 521 at Lv 7
+    # and 6, two Potions, healed at the Ferrow Poke Center before the road.
+    "ADA" => { :label => "Picnicker Ada (Windfall Row, Ch1, Meadow)", :cap => 9, :lvcap => 15, :badges => 0, :size => 3,
+               :pool => :ch1a, :bag => :ch1, :stage => 0, :offsets => [2, 3],
+               :start => proc { setBattleRule("field", :MEADOW); setBattleRule("canLose"); TrainerBattle.start(:PICNICKER, "Ada") } },
+    # The same fight with the starter alone (no catches: the wall a Water starter meets if it skips the grass).
+    "ADA1" => { :label => "Picnicker Ada, the starter alone (Lv 9)", :cap => 9, :lvcap => 15, :badges => 0, :size => 1,
+                :pool => :ch1a, :bag => :ch1, :stage => 0,
+                :start => proc { setBattleRule("field", :MEADOW); setBattleRule("canLose"); TrainerBattle.start(:PICNICKER, "Ada") } },
     "K1" => { :label => "K1 Kestrel (intro, Lv 5 starter alone)", :cap => 5, :lvcap => 15, :badges => 0, :size => 1, :pool => :ch1_2,
               :bag => :none, :stage => 0, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 1, :can_lose => true) } },
     "J1" => { :label => "J1 Juno (Saltmere green, before Gym 1)", :cap => 15, :badges => 0, :size => 6, :pool => :ch1_2,
@@ -180,7 +202,11 @@ module WR
     "K2" => { :label => "K2 Kestrel (Gullcry Cliffs, before Gym 3)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
               :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2, :can_lose => true) } },
     "G3" => { :label => "Gym 3 Marisol (Water Surface)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
-              :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.gym_battle(3, :can_lose => true) } }
+              :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.gym_battle(3, :can_lose => true) } },
+    # The earned Electric answer for a Fire starter: the night-only Emolga of the secret Rimewood Glade (5%, Lv 17-19).
+    "G3E" => { :label => "Gym 3 Marisol, a team that found the Glade's night Emolga", :cap => 23, :badges => 2, :size => 6,
+               :pool => :ch4, :bag => :g3, :tms => :g3, :stage => 1, :force => [:EMOLGA],
+               :start => proc { Prismfall.gym_battle(3, :can_lose => true) } }
   }
   FILLER = [:GROWL, :LEER, :TAILWHIP, :BABYDOLLEYES, :SANDATTACK, :SMOKESCREEN, :SWEETSCENT, :STRINGSHOT, :SPLASH,
             :HARDEN, :WITHDRAW, :DEFENSECURL, :CHARM, :PLAYNICE, :HELPINGHAND, :FOCUSENERGY, :ODORSLEUTH,
@@ -216,7 +242,7 @@ module WR
     :SUDOWOODO => [:ROCKHEAD, 20, [:ROCKTHROW, :FLAIL, :FAKETEARS, :COPYCAT]],
     :SNOM => [:ICESCALES, 15, [:POWDERSNOW, :STRUGGLEBUG, :MIRRORCOAT, :FAIRYWIND]]
   }
-  EVENT_IN = { :ch1_2 => [:KECLEON, :NICKIT], :ch3 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :SMEARGLE, :RALTS, :PONYTA_G],
+  EVENT_IN = { :ch1a => [:NICKIT], :ch1_2 => [:KECLEON, :NICKIT], :ch3 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :SMEARGLE, :RALTS, :PONYTA_G],
                :ch4 => [:KECLEON, :NICKIT, :TIMBURR, :CRABRAWLER, :RALTS, :PONYTA_G, :HERACROSS, :PINSIR, :SPIDOPS,
                         :LITLEO, :CHARCADET, :SUDOWOODO, :SNOM] }
 
@@ -272,6 +298,10 @@ module WR
         catches << bag_w.delete_at(i)[0]
       end
     end
+    forced = FORCE || f[:force]
+    if forced   # the player found it: it takes the first catch slot (cap - 1)
+      catches = (forced + (catches - forced)).first(f[:size] - 1)
+    end
     offsets = f[:offsets] || [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
     catches.each_with_index { |sp, i| list << [sp, f[:cap] - (PREP ? 0 : offsets[i % offsets.size])] }   # prepared = grinded to the cap
     party = list.map { |sp, lv| mon(sp, lv, rng, f[:pool]) }
@@ -299,6 +329,7 @@ MODES.each do |mode|
   FIGHTS.each do |fight|
     f = WR::FIGHTS[fight] or next
     WR::STARTERS.each do |sname, lines|
+      next if ENV["PRISM_STARTERS"] && !ENV["PRISM_STARTERS"].split(",").map(&:strip).include?(sname)
       Prismfall.record_starter(lines[0])
       runs = (1..SEEDS).map do |s|
         seed = 40_000 + fight.sum * 7 + s * 101 + lines[0].to_s.sum

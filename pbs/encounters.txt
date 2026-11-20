@@ -618,6 +618,19 @@ Land
     5,STANTLER,18,20
     3,CRYOGONAL,20
     5,EISCUE,18,20
+LandNight
+    18,SNOM,17,20
+    12,VANILLITE,17,20
+    10,SNOVER,17,20
+    10,CUBCHOO,17,20
+    10,SMOOCHUM,17,20
+    8,SPRITZEE,17,20
+    8,DEERLING,17,20
+    5,STANTLER,18,20
+    5,EISCUE,18,20
+    6,CRYOGONAL,20
+    3,JOLTIK,17,20
+    5,EMOLGA,17,19
 #-------------------------------
 [570] # Frostwick
 OldRod

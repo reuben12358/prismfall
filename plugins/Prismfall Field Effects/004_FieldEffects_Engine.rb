@@ -655,6 +655,8 @@ module FieldEffects
     self.transitions(battle).each_with_index do |rule, i|
       next if !self.move_trigger?(rule)
       next if user.lastMoveFailed && !rule[:even_if_failed]
+      # :strike_turn - a two-turn move counts on the turn it strikes, not the turn it charges (Reborn).
+      next if rule[:strike_turn] && user.effects[PBEffects::TwoTurnAttack]
       next if !self.move_matches?(rule, battle, user, targets.first, move, move.calcType)
       return if self.count_transition(battle, rule, i)
     end

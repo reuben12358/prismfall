@@ -258,9 +258,14 @@ y29    the lobby doors (12,29)
     so a bigger house on its own makes him hit harder from turn one. Your fans balance it: from a good house up, the
     people you met cheer for your side, so from Encore on your Pokémon also bask in the applause (1/16 HP a round; at
     Standing Ovation non-Normal ones, since Normal types already do), and your own sound, dance and Normal moves get the
-    same boost. A full house is a louder, swingier show rather than a free win, and the box office sends up your share of
-    the takings after it ($150 a head). Runtime: `plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb`; the fans' rule
-    is one guarded line in `102_Field_GrandStage.rb` (active only in Dorian's battle).
+    same boost. **The house cheers you, not him:** with your fans in (7+ met), Standing Ovation's bask is for your side
+    only, so Dorian's troupe never heals from the applause (a sparse house is unchanged: his Normal types bask if the
+    show reaches Standing Ovation). Harness, a realistic Lv 15 team on Standard: sparse 48% / good 73% / full 58%
+    (180 fights a cell: 46 / 68 / 64%), up from 43 / 52 / 45% before the rule (BALANCE.md §9). A full house is a louder
+    show rather than a free win (his Normal moves are ×1.5 from turn one), and the box office sends up your share of the
+    takings after it ($150 a head). Runtime: `plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb`
+    (`FieldEffects.home_crowd?` / `home_crowd_foe?`); the fans' rule and the bask condition are guarded lines in
+    `102_Field_GrandStage.rb` (active only in Dorian's battle).
 - **Field Notes:** on the first step up the aisle, the Grand Stage pop-up from the script ("the audience reacts…", with
   Larch's margin note), once per save (`pfm(:fn_grand_stage)`).
 - **The one interaction:** the curtain is in. The stagehand: "He won't come out till the curtain's up. That rope, there."

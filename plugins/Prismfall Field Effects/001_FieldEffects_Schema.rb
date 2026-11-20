@@ -170,7 +170,7 @@ module FieldEffects
     :speed_mods         => [:battlers, :mult],
     :transitions        => MOVE_MATCH_KEYS + [:to, :stage, :stage_delta, :message, :uses,
                                               :progress_message, :weather, :terrain, :turns,
-                                              :check, :even_if_failed, :id, :rewind, :boost],
+                                              :check, :even_if_failed, :strike_turn, :id, :rewind, :boost],
     :seed               => BATTLER_EFFECT_KEYS + [:item],
     :status_immunity    => [:battlers, :status, :message]
   }.freeze

@@ -414,6 +414,8 @@ All three can be borrowed (§8).
   :spikes :toxic_spikes :sticky_web` (side effects go to the battler's own side; hazards and `:taunt` are for
   trade-off seeds and hooks).
 * Transitions: `:boost => false` switches off the transform strike (§12.3) for that rule; `:boost => true` switches it on for a stage rule.
+  `:strike_turn => true`: a two-turn move (Dive, Fly...) counts on the turn it strikes, not on its charging turn (Reborn's
+  timing; Water Surface ↔ Underwater Dive uses it, so one Dive is one change).
 
 ### 12.3 Transform strike
 The move that completes a transition to another field (or a stage rule marked `:boost => true`) gets ×1.3 power (`TRANSFORM_BOOST`), as in Reborn.

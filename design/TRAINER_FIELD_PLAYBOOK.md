@@ -85,11 +85,10 @@ Reference: Reborn's Julia and Rejuvenation's Venam bring six at cap −3 .. cap 
 - **Counterplay.** Rock and Ghost (Nacli, Dwebble, Sandygast), stalling moves to calm the crowd, KO the singers first.
   No Fighting type exists before Gym 1 (Rev 16 distribution).
 - **The Saltmere audience (SPINE Rev 19).** The townsfolk met set the opening stage (0–6: 1, 7–13: 2, 14+: 3), and
-  from a good house up your fans heal your side 1/16 a round. Standard win rates (realistic six, 60 runs each):
-  sparse 43%, good 52%, full 45% with a Lv 15 team (50 / 52 / 37% in an earlier run); 37 / 25 / 35% with a Lv 14
-  team. The crowd you gathered doesn't pay off yet, because of the Standing Ovation bask (his troupe is all Normal): harness-only, with your fans in **Dorian's troupe not basking** gave
-  sparse 50 / good 63 / full 73% (Lv 14: 37 / 37 / 43%). Halving the bask gave 45% at a full house. Proposal for the
-  puzzle engineer / field owner in mapgen/REQUESTS.md (trainer designer, round 3).
+  from a good house up your fans heal your side 1/16 a round. **With your fans in, Standing Ovation's bask is for your
+  side only** (the house cheers you, not him; done 2026-11-20). Standard win rates (realistic six, 60 runs each):
+  sparse 48%, good 73%, full 58% with a Lv 15 team (180 runs each: 46 / 68 / 64%); 25 / 48 / 37% with a Lv 14 team.
+  Before the rule: 43 / 52 / 45% (Lv 14: 22 / 30 / 32%). Hard prepared 30 / 52 / 48%.
 
 ### Pallbearer Thistle — Silkwood (Briarwick, before Gym 2, cap 19)
 Dustox 16, Foongus 17 (not on Casual), Phantump "Lowmarsh" 18. Hard adds Whirlipede.
@@ -131,10 +130,15 @@ Buizel, Tailwind Pelipper, Ice Fang Lucky.
 - **Plan.** Water ×1.5, Swift Swim without rain, and the player's grounded non-Water Pokémon wade at ×0.75 Speed.
   Lucky's **Whirlpool** is ×2 here and traps.
 - **No Dive (round 3).** The Water Surface ↔ Underwater loop strikes ×1.3 both ways (Dive in, Dive out): it was 103
-  knockouts in 60 harness runs, so neither Standard nor Hard Lucky has Dive. Field owner asked about the loop.
+  knockouts in 60 harness runs, so neither Standard nor Hard Lucky has Dive. **Loop fixed (field owner, 2026-11-20):**
+  Dive now moves the battle on the turn it strikes, diving down is the only transform strike and surfacing is not
+  (`:strike_turn` / `:boost => false`), so one Dive is one change. Lucky can have Dive back if wanted.
 - **Answer to the flip.** Chinchou's Volt Absorb takes the Electric answer and its Spark is ×1.5 against grounded
   targets; Pelipper's Flying moves cover Grass.
 - **Counterplay.** Electric from a Pokémon that isn't grounded, or Grass; hazards and Ground moves fail on the water.
+- **The Fire starter's way in (2026-11-20):** Emolga, 5% at night in the secret Rimewood Glade (563): airborne, so
+  the surface doesn't slow it, and faster than everything but Swift Swim Buizel. A Fire-starter six with it wins 42% on
+  Standard (without it 0–3%); BALANCE.md §9.
 - Standard tuning: Buizel for Floatzel (Ice Fang Floatzel was a top killer), Modest Lucky, Oran Berries.
 
 ### Route trainers, Chapters 0–3

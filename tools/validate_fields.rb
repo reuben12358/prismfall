@@ -206,7 +206,7 @@ def check_rule(where, key, rule, all_ids)
     when :stats, :user_stats, :target_stats then check_stats(w, v)
     when :damage, :heal                 then check_fraction(w, v)
     when :effects                       then check_enum(w, v, FieldEffects::BATTLER_EFFECTS, "battler effect")
-    when :confuse, :flinch, :cure_status, :always_hit, :always, :also_on_change, :even_if_failed
+    when :confuse, :flinch, :cure_status, :always_hit, :always, :also_on_change, :even_if_failed, :strike_turn
       check_bool(w, v)
     when :item
       check_ids(w, v, ITEMS, "item")
