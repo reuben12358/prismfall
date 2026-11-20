@@ -25,6 +25,9 @@ module PrismfallMaps
     132 => [-14, -8, -20, 15],   # Loomhouse Upper Lofts - Canopy Lofts
     134 => [-16, -10, -20, 15],   # Loomhouse Upper Lofts - Granny's Knot
     140 => [8, 4, -12, 0],   # Saltmere
+    143 => [6, 2, -8, 0],   # Saltmere Harbour Office
+    144 => [6, 2, -6, 0],   # Saltwife's House
+    145 => [4, 0, -6, 0],   # Pageant Hall
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
     148 => [6, 2, -6, 8],   # Saltmere Lantern House

@@ -1,2 +1,3 @@
 # map_id<TAB>TrainerBattle.start arguments used by generated events (must exist in PBS trainers)
-140	Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)
+145	:HOLLOW_GRUNT_M, "Grunt", :HOLLOW_GRUNT_F, "Grunt"
+145	:OCTAVE_VESPER, "Vesper", 0, :OCTAVE_SINGER, "Lyra", 0

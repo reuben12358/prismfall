@@ -809,8 +809,50 @@ def pieces():
     for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
         out['df_slab_' + nm] = (slab(col), ['F'], None)
     im, c = sluice(); out['df_sluice'] = (im, c, None)
+    for v in range(2): im, c = waterwheel(v); out['eb_wheel%d' % v] = (im, c, None)
+    im, c = lattice_intake(); out['eb_intake'] = (im, c, None)
     return out
 
+
+
+# ------------------------------------------------------------------ Ebbmouth (map builder 10, job 5)
+def waterwheel(phase):
+    """an undershot mill-wheel (3x3) standing in the race against its mill wall: a double timber rim, eight spokes round
+    an iron hub, twelve paddles; phase 1 is turned half a paddle (two frames read as a wheel that turns)"""
+    im, d = canvas(3, 3); cx, cy, R = 24, 22, 19
+    a0 = math.pi / 12 * phase
+    for k in range(12):                                                   # paddles, radial boards past the rim
+        a = a0 + k * math.pi / 6
+        x0, y0 = cx + (R - 3) * math.cos(a), cy + (R - 3) * math.sin(a)
+        x1, y1 = cx + (R + 4) * math.cos(a), cy + (R + 4) * math.sin(a)
+        d.line([x0, y0, x1, y1], fill=WOOD[0], width=4); d.line([x0, y0, x1, y1], fill=WOOD[2], width=2)
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=WOOD[0], width=5)
+    d.ellipse([cx - R + 1, cy - R + 1, cx + R - 1, cy + R - 1], outline=WOOD[2], width=3)
+    d.ellipse([cx - R + 2, cy - R + 2, cx + R - 2, cy + R - 2], outline=WOOD[3], width=1)
+    for k in range(8):                                                    # spokes
+        a = a0 + k * math.pi / 4
+        d.line([cx, cy, cx + (R - 4) * math.cos(a), cy + (R - 4) * math.sin(a)], fill=WOOD[0], width=3)
+        d.line([cx, cy, cx + (R - 4) * math.cos(a), cy + (R - 4) * math.sin(a)], fill=WOOD[2], width=1)
+    disc(im, cx, cy, 4, (60, 62, 72, 255)); disc(im, cx - 1, cy - 1, 2, (140, 144, 156, 255))
+    for x in range(2, 46):                                                # the race's white water churned at the foot
+        if (x + phase * 3) % 5 < 3: P(im, x, 44, (236, 246, 252, 220)); P(im, x + 1, 45, (184, 216, 248, 170))
+        if (x * 7 + phase) % 9 < 2: P(im, x, 46, (236, 246, 252, 150))
+    return im, ['OOO', 'XXX', 'XXX']
+
+
+def lattice_intake():
+    """Meridian Tidal Lattice Unit 2 (3x2): a brass intake housing on the bank, a glass dial, ribbed pipes into the water,
+    a sunburst plate bolted on"""
+    im, d = canvas(3, 2)
+    BR = [(92, 66, 30, 255), (150, 112, 44, 255), (206, 164, 72, 255), (244, 214, 128, 255)]
+    d.rectangle([3, 4, 44, 26], fill=BR[1], outline=OUT)
+    d.rectangle([4, 5, 43, 8], fill=BR[2]); d.line([4, 5, 43, 5], fill=BR[3])
+    for x in range(8, 42, 6): d.line([x, 9, x, 25], fill=BR[0])
+    disc(im, 24, 16, 6, (60, 70, 86, 255)); disc(im, 24, 16, 5, (150, 214, 236, 255)); d.line([24, 16, 27, 12], fill=(200, 60, 60, 255))
+    for x in (8, 38): d.rectangle([x, 26, x + 3, 31], fill=BR[1], outline=OUT); d.line([x + 1, 26, x + 1, 31], fill=BR[3])
+    d.polygon([(10, 12), (14, 10), (14, 14)], fill=BR[3])
+    d.ellipse([2, 28, 45, 31], fill=(0, 0, 0, 60))
+    return im, ['OOO', 'WWW']
 
 if __name__ == '__main__':
     ps = pieces()

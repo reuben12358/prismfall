@@ -426,7 +426,7 @@ module PlayBot
         @step_frames = 0
         log("step #{@step}: #{step.inspect}")
       end
-      @step_frames += 1                # only frames with the map free count (cutscenes can be long)
+      @step_frames += 1 if $game_map.map_id == map || !map.is_a?(Integer)   # map free, on the step's map (not walking back)
       return wait_for_map if ![:done, :debug_install, :run_checks, :arrive, :need_map, :eval_conditions].include?(kind) &&
                              $game_map.map_id != map
       @routing = false

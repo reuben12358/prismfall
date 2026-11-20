@@ -309,7 +309,7 @@ fixed**: `export_tilesets_rxdata.py` warns about nothing and 521 draws without t
     old 521 (62x48): `520,N,30,521,S,58` put all four open tiles of 520's north row onto blocked 521 tiles, so Windfall
     Row was unreachable. Fixed by the 21:56 rebuild of 521. A seam check would catch it at build time: for every open
     edge tile, the arrival tile on the neighbour must be passable and connected (the playtest's offline checker,
-    `/home/claude/run_pt/scripts/seam.py`, reads Map*.rxdata + Tilesets_prismfall.rxdata; happy to move it into mapgen).
+    `tools/harness/playtest/seam_check.py`, reads Map*.rxdata + Tilesets_prismfall.rxdata; happy to move it into mapgen).
 15. **The Hale Bell roadblock leaks (map 520, 22:11 build): Chapter 1 can be skipped.** The four "Accord barrier" events
     (3,71), (2,73), (2,74), (2,75) don't close the road to the west edge (the 520 W <-> 527 seam is rows 72-75 at x 0).
     Row 72 is open from x 0 to 11 with no barrier on (2,72), and (1,70)-(1,71), (2,68)-(2,70) and (1,76)-(2,76) are open

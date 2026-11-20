@@ -12,8 +12,10 @@
 #                        full   (14+): stage 3, Standing Ovation
 #   Your fans            from a good house up, the people you met cheer for YOUR side: at Encore and above your
 #                        Pokemon bask in the applause (1/16 HP a round), as Dorian's Normal types do at Standing
-#                        Ovation (the Grand Stage field reads FieldEffects.home_crowd?).  A full house is a louder,
-#                        swingier show, not a free win: Dorian's Normal moves are x1.5 from the first turn.
+#                        Ovation (the Grand Stage field reads FieldEffects.home_crowd?).  And the house cheers you,
+#                        not him: with your fans in, Standing Ovation's bask skips Dorian's troupe
+#                        (FieldEffects.home_crowd_foe?).  A full house is still a louder show, not a free win:
+#                        Dorian's Normal moves are x1.5 from the first turn.
 #   The takings          after the win, your share of the box office: $150 a head.
 #
 # Townsfolk call pfm_audience(:key) from their own event (the map builder places the call: mapgen/REQUESTS.md);
@@ -106,5 +108,12 @@ module FieldEffects
   def self.home_crowd?(battle, battler)
     return false if !$game_temp || !$game_temp.pf_home_crowd || !battler
     return battler.respond_to?(:pbOwnedByPlayer?) && battler.pbOwnedByPlayer?
+  end
+
+  # ...and is this battler on the other side of that house?  With your fans in, Standing Ovation's bask skips Dorian's
+  # troupe: the house cheers you, not him.
+  def self.home_crowd_foe?(battle, battler)
+    return false if !$game_temp || !$game_temp.pf_home_crowd || !battler
+    return battler.respond_to?(:opposes?) && battler.opposes?
   end
 end

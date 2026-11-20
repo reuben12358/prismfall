@@ -1,0 +1,79 @@
+# Ebbmouth - Mill Quay (167). WRITTEN BY layouts/ebbmouth.py (map builder 10, PF Rejuv Snow) - edit that script.
+id: 167
+name: Ebbmouth - Mill Quay
+parent: 160
+rubric: true
+yards_ok: true
+biome: village
+bgm: Lerucean Town
+metadata:
+  Outdoor: true
+  ShowArea: true
+  MapPosition: [0, 3, 7]
+  BattleBack: field
+  Weather: [Rain, 30]
+tone: [-6, -4, 6, 18]
+fog: {name: prismfall_seamist, opacity: 40, blend: 0, zoom: 100, sx: 1, sy: 0}
+connections:
+- {dir: S, offset: 0, to: 160, to_offset: 0}
+raw: data/raw/167.npy
+tileset: 52
+events:
+- type: event
+  name: Mill Quay wheel sign
+  at: [28, 17]
+  pages:
+  - trigger: action
+    commands: ['THE MILL QUAY WHEEL. Cast ''EBB GUILD - AF 198''. Below the date somebody has scratched: ''AND STILL TURNING''.']
+- type: sign
+  name: Quay sign
+  at: [29, 26]
+  text: THE MILL QUAY - Ebb Guild tidal mills. No Meridian vehicles past this sign. (By order of the Guild. And Bjorn.)
+  post: false
+- type: event
+  name: Striker
+  at: [11, 18]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: random
+    commands: ['Striker: No grain moves till the Thane drops the tax. No wheel turns till Meridian stops stopping it. Simple.']
+- type: event
+  name: Striker 2
+  at: [20, 18]
+  pages:
+  - graphic: {sprite: NPC 21, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Striker: My dad milled here. His dad milled here. Meridian says ''efficiency''. I say ''my dad''.']
+- type: event
+  name: Union steward
+  at: [8, 10]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Union steward: Every hall on the quay votes. Even the Wooloo-shearers, and they''re not even from here.']
+- type: event
+  name: Miller
+  at: [26, 23]
+  pages:
+  - graphic: {sprite: NPC 28, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Miller: Listen. Under the wheel. When the river stops, you can hear something down there. Like a note held too long.']
+- type: event
+  name: Carter
+  at: [5, 19]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Carter: Grain to the harbour, salt back up. When the river stops, the carts are all Ebbmouth has.']
+- type: item
+  at: [36, 28]
+  item: SUPERPOTION
+- type: item
+  at: [2, 17]
+  item: HEARTSCALE
+  hidden: true

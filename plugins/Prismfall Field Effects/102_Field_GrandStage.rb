@@ -50,6 +50,9 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
   fans = { :battlers => { :condition => proc { |battle, b| FieldEffects.respond_to?(:home_crowd?) && FieldEffects.home_crowd?(battle, b) } },
            :heal => 1/16r, :message => "Your friends in the stalls cheer {1} on!" }
   fans3 = { :battlers => fans[:battlers].merge(:not_types => [:NORMAL]), :heal => 1/16r, :message => fans[:message] }   # Normal types already bask
+  # With your fans in (a good house up), Standing Ovation's bask is for your side only: the house cheers you, not him.
+  # A sparse house (and every other Grand Stage battle) is unchanged: FieldEffects.home_crowd_foe? is false there.
+  not_house_foe = proc { |battle, b| !(FieldEffects.respond_to?(:home_crowd_foe?) && FieldEffects.home_crowd_foe?(battle, b)) }
   stage_mods = lambda do |normal, show|
     {
       :type_mods   => { :NORMAL => normal },
@@ -77,7 +80,7 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
                        "Standing Ovation: every attack +1 critical-hit stage, Sing never misses, Normal types and Dancers bask in applause (1/16 HP).",
                        "Dancer +1 Speed, Punk Rock / Liquid Voice +1 Sp. Atk on entry. Indoors: no weather.",
                        "Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.",
-                       "Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up."],
+                       "Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up. With your fans in, only your side basks at Standing Ovation."],
     :nature_power  => :HYPERVOICE,
     :camouflage    => :NORMAL,
     :secret_power  => 0,
@@ -126,8 +129,9 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
                            { :moves => [:GRASSWHISTLE, :SUPERSONIC, :METALSOUND], :mult => 1.3 }],
         :crit_mods     => [{ :category => :damaging, :add => 1 }],
         :end_of_round  => [
-          { :battlers => { :types => [:NORMAL] }, :heal => 1/16r, :message => "{1} basked in the applause." },
-          { :battlers => { :abilities => [:DANCER], :not_types => [:NORMAL] }, :heal => 1/16r,
+          { :battlers => { :types => [:NORMAL], :condition => not_house_foe }, :heal => 1/16r,
+            :message => "{1} basked in the applause." },
+          { :battlers => { :abilities => [:DANCER], :not_types => [:NORMAL], :condition => not_house_foe }, :heal => 1/16r,
             :message => "{1} basked in the applause." },
           fans3
         ],

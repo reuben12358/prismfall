@@ -141,11 +141,10 @@ def pageant_hall(old145):
         for y in (7, 8): h.put(rnd.choice(BOARDS), x, y, 0)
     h.obj('shelf', 1, 2); h.obj('shelf', 3, 2)
     h.block([[CU('flat_A'), CU('flat_B'), CU('flat_C')]], 5, 3, 1)
-    h.stamp('hb_crates4', 6, 7) if False else None
-    for x, y, n in ((2, 8, 'hb_crates4'), (6, 8, 'hb_boxes'), (8, 5, 'hb_barrel')):
-        h.stamp(n, x, y, zmap={0: 1, 1: 1, 2: 2})
-    h.obj('lantern', 1, 6)
-    h.obj('rope_h', 5, 9) if False else None
+    for x, y, n in ((2, 8, 'basket'), (3, 8, 'spool'), (8, 4, 'basket'), (8, 8, 'log'), (1, 9, 'plank')):
+        h.put(CU(n), x, y, 1)
+    h.obj('couch_r', 8, 6) if False else None
+    h.obj('lantern', 1, 5); h.obj('urn', 8, 2) if False else None
     # the right wing: Dorian's dressing room (couch, rug, mirror-lights) and the paint loft under the torn drop
     for x in range(WR[0], WR[1] + 1):
         for y in range(3, 10): h.put(rnd.choice(BOARDS), x, y, 0)
@@ -166,7 +165,7 @@ def pageant_hall(old145):
     pg = [e for e in old145['events'] if e.get('name') == 'Pageant'][0]
     pg = dict(pg); pg['at'] = [18, 7]
     ev.append(pg)
-    ev += [obj([2, 3], 'Prop shelf', ['The prop room shelf: crowns, a papier-mache Plate, three identical daggers and a labelled jar of "STAGE BLOOD (JAM)".']),
+    ev += [obj([2, 5], 'Prop shelf', ['The prop room shelf: crowns, a papier-mache Plate, three identical daggers and a labelled jar of "STAGE BLOOD (JAM)".']),
            obj([34, 4], 'Torn backdrop', ["An old drop, torn top to bottom: a forest on one side, a throne room on the other. Someone has been painting the tear shut, leaf by leaf."]),
            obj([31, 3], "Dorian's mirror", ["Dorian's mirror, ringed with bulbs. Telegrams tucked in the frame: 'BREAK A LEG', 'BREAK BOTH', 'PAY YOUR RENT'."]),
            talk([4, 6], 'Chorus singer', 'NPC 13', ['Chorus singer: We sing the hymns between the scenes. Tonight the hymn was screaming. We were very good at it.'], d='right'),
@@ -207,7 +206,8 @@ def pageant_hall(old145):
         {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'graphic': {'sprite': 'Followers/EEVEE', 'dir': 'left'}, 'trigger': 'action',
          'commands': ['(The Eevee sniffs at Understudy, then sits very straight, as if it has been told to.)']}]})
     # the audience before the show (sit facing the stage)
-    seats = [(x, y) for y in (14, 15, 16, 17, 19, 20, 21, 22) for x in (3, 4, 6, 9, 11, 14, 15, 22, 23, 26, 28, 31, 33, 34)]
+    seats = [(x, y) for y in (14, 15, 16, 17, 19, 20, 21, 22) for x in (3, 4, 6, 9, 11, 14, 15, 22, 23, 26, 28, 31, 33, 34)
+             if x in (3, 15, 22, 34) or y == 22]
     rnd.shuffle(seats)
     SP = ['NPC 02', 'NPC 04', 'NPC 06', 'NPC 09', 'NPC 10', 'NPC 13', 'trainer_LADY', 'trainer_GENTLEMAN', 'trainer_BEAUTY', 'NPC 21', 'NPC 24', 'NPC 26']
     LINES = ['Shh! It\'s starting!', 'The Loyal Three piece is my favourite.', "Is that the real Dorian Pell? Of course it is. Who else would wear that coat.",
