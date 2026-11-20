@@ -369,6 +369,7 @@ def build_map(spec, ctx):
     check_reach(spec, ctx, m)
     ctx.material_bad = getattr(ctx, 'material_bad', 0) + material_check(spec, ctx, layers, spec['_tileset'])
     ctx.slab_bad = getattr(ctx, 'slab_bad', 0) + slab_check(spec, ctx, layers, spec['_tileset'])
+    ctx.pass_bad = getattr(ctx, 'pass_bad', 0) + pass_check(spec, ctx, m)
     gate_check(spec, ctx, m)
     if spec.get('rubric'):
         walk_check(spec, ctx, m)
@@ -474,6 +475,21 @@ def slab_check(spec, ctx, layers, tileset_id):
         z, y, x = hit[0]
         ctx.warn(spec['id'], 'OLD SLAB STAIRS: %d tiles of the flat plank slab (4992-4994), e.g. at %d,%d: use real steps' % (len(hit), x, y))
     return len(hit)
+
+
+def pass_check(spec, ctx, m):
+    """map builder 11 (the passability audit): a passable priority-0 decoration above a solid tile makes that tile
+    walkable in Essentials (playerPassable? stops at the first such tile, top layer first).  passguard.hits() lists the
+    cells the player can really walk onto because of one; layout writers fix them with passguard.guard()."""
+    import render as R
+    import passguard as PG
+    ts = R.tilesets()[m.tileset_id]
+    hs = PG.hits(m.data.data, ts, [(e.x, e.y) for e in m.events.values()])
+    if hs:
+        x, y, z, t = hs[0]
+        ctx.warn(spec['id'], 'PASS %d decorated solid cell(s) walkable, e.g. %s (tile %d, layer %d) at %d,%d: '
+                 'passguard.guard() in the layout writer' % (len(hs), PG.tile_name(m.tileset_id, t) or 'sheet tile', t, z + 1, x, y))
+    return len(hs)
 
 
 def gate_check(spec, ctx, m):
@@ -812,6 +828,8 @@ def main():
         sys.exit('--strict: %d edge tiles that lead onto blocked ground across a map connection (see SEAM warnings)' % ctx.seam_bad)
     if '--strict' in sys.argv and getattr(ctx, 'slab_bad', 0):
         sys.exit('--strict: %d old slab-stair tiles (see OLD SLAB STAIRS warnings)' % ctx.slab_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'pass_bad', 0):
+        sys.exit('--strict: %d decorated solid cell(s) the player can walk onto (see PASS warnings; mapgen/passguard.py)' % ctx.pass_bad)
     if '--strict' in sys.argv and getattr(ctx, 'gate_bad', 0):
         sys.exit('--strict: %d story gate(s) leak (see GATE warnings)' % ctx.gate_bad)
     if '--strict' in sys.argv and getattr(ctx, 'spot_bad', 0):

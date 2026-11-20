@@ -176,9 +176,11 @@ class Hall:
         for z, rows in enumerate(pf_stamp(name)):
             self.block(rows, x, y, (zmap or {}).get(z, z))
 
-    def write(self, mid):
+    def write(self, mid, event_cells=()):
         os.makedirs(os.path.join(HERE, 'data', 'raw'), exist_ok=True)
         rel = 'data/raw/%03d.npy' % mid
+        import passguard                      # map builder 11: no decoration may make a solid tile walkable
+        passguard.guard(self.L, TID, event_cells, 'map %d' % mid)
         np.save(os.path.join(HERE, rel), self.L)
         return {'raw': rel, 'tileset': TID}
 

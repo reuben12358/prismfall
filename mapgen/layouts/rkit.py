@@ -738,6 +738,8 @@ class RMap:
 
     def write(self, mid, head, comment=''):
         Lr = RC.resolve(self.L, self.tid).astype(np.int32)
+        import passguard                      # map builder 11: no decoration may make a solid tile walkable
+        passguard.guard(Lr, self.tid, [tuple(e['at']) for e in self.events if e and e.get('at')], 'map %d' % mid)
         os.makedirs(os.path.join(HERE, 'data', 'raw'), exist_ok=True)
         rel = 'data/raw/%03d.npy' % mid
         np.save(os.path.join(HERE, rel), Lr)
