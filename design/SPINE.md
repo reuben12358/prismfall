@@ -1,5 +1,12 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 22 (user, 2026-11-20 10:10): portraits are for the story cast only <<<
+User: "i dont think we need a portrait for every conversation".
+- Portrait bubbles appear only for the story cast (rivals, Wardens, villains, mentors, key NPCs) in story scenes, plus the occasional comedy beat.
+- Generic NPCs, townsfolk, shopkeepers, route trainers and quest-givers use the plain message box with a name label.
+- Even for the cast, put a portrait where a scene starts or the expression changes, not on every line.
+- This is enforced in code: `Prismfall::Portrait::CAST` and `cast?` in plugins/Prismfall Cutscenes/014_Portraits.rb. See story/13_CUTSCENES.md, "Portrait use".
+
 ## >>> REVISION 21 (user, 2026-11-20 00:42): Mega timing <<<
 1. **The Mega Ring comes late, like Reborn and Rejuvenation** (user: "see how late reborn/rejuv give out the mega ring, its usually like later gyms").
    - Reborn: the Mega-Z Ring quest finishes at the earliest after Badge 13, otherwise after Badge 15 (of 18).
@@ -8,7 +15,8 @@
    - Stones found earlier stay as "they hum and wait" collectibles, as in Reborn.
 2. **Enemies use Megas before the player can** (user: "Every important story fight after level 50-55 ish should have mega evolutions").
    - From an ace level of about 50 on (Gym 10, cap 51, onward), **every** important story fight has a Mega: every Warden, every rival fight, villain bosses, war bosses and the Festival of Champions.
-   - Nobody uses a Mega below that, which retires Brann's Gym 7 Mega Camerupt.
+   - Below about Lv 50, an important fight may use only a **weak** Mega, and only where the character's design calls for it (user, 01:00: "he could have one as long as its considered 'Weak'"). Brann keeps Mega Camerupt, tuned as weak.
+   - Kestrel Megas from K5 with a non-family ring. When Morwen's Ring reaches him (Ch18/SF), his Mega switches to one that echoes her Ghost Warden past.
    - Exceptions are not allowed for theme reasons. If one Mega clashes with a leader's field, choose a different Mega.
    - The Eevee Octave keeps its Z-move design.
 
