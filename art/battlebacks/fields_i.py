@@ -321,6 +321,92 @@ PLANS["f6bc3067b7"] = Plan(cave_labels(70, 0.0, smax=0.78), all_wall, 1, sides=(
 
 
 #---------------------------------------------------------------------------------------------
+# Forest rooms whose canopy runs along the panel's whole top edge: above it the canopy simply goes on (quilted from
+# the canopy band), beside it the canopy band continues; trunks below keep their (upright) side extension.
+#---------------------------------------------------------------------------------------------
+def band_labels(r0, r1, bad=None):
+    def fn(p):
+        lab = np.full(p.shape[:2], -1, np.int16)
+        y = rows(lab)
+        ok = (y >= r0) & (y < r1)
+        if bad is not None:
+            ok &= ~bad(p)
+        lab[ok] = 0
+        return lab
+    return fn
+
+
+PLANS["ea05019cda"] = Plan(band_labels(0, 22), all_wall, 1, sides=(30, 30), block=16, seed=11)   # FAIRY_TALE
+PLANS["cad33552c5"] = Plan(band_labels(0, 20), all_wall, 1, sides=(26, 26), block=16, seed=12)   # SILKWOOD
+PLANS["c9861069ac"] = Plan(band_labels(0, 24), all_wall, 1, sides=(34, 34), block=16, seed=13)   # WILDFIRE (+embers)
+PLANS["725fac2b17"] = Plan(band_labels(0, 22), all_wall, 1, sides=(30, 30), block=16, seed=14)   # WASTELAND
+
+
+#---------------------------------------------------------------------------------------------
+# Open skies: above the horizon the sky (and its clouds) goes on, quilted from the panel's upper sky only
+#---------------------------------------------------------------------------------------------
+def beach_bad(p):
+    r, g, b, s, v = hsv(p)
+    x = cols(p[..., 0])
+    return (x > 170) & (x < 330)                         # the sun and its rays: never copied
+
+
+PLANS["453a1ba8d8"] = Plan(band_labels(0, 36, bad=beach_bad), all_wall, 1, sides=(36, 36), block=14, seed=15)  # BEACH
+PLANS["e94eae6c5d"] = Plan(band_labels(0, 60), all_wall, 1, sides=(0, 0), block=20, seed=16)        # STORMFRONT
+
+
+class GradPlan(Plan):
+    """Smooth (gradient) skies and water: above the panel its top row simply deepens toward the zenith
+    (skies.extend_with_sky), with no bubbles, clouds or horizon copied."""
+
+    def __init__(self, zenith_mul=(0.86, 0.9, 0.97), glow=18):
+        Plan.__init__(self, None, None, 1)
+        self.zenith_mul, self.glow = zenith_mul, glow
+
+    def __call__(self, bg, origin, blur_out=True, darken=0.22, old=None):
+        old_raw = M._orig_extend(bg, origin=origin, blur_out=False)
+        a = bblib.arr(old_raw)
+        top = int(origin[1]) - 2
+        src = bblib.arr(_sky_top(bg, origin, self.zenith_mul, self.glow))
+        a[:top] = src[:top]
+        out = bblib.img(a)
+        return depth_soften(out, darken=darken) if blur_out else out
+
+    def region(self, R):
+        m = np.zeros((HD[1], HD[0]), np.float32)
+        m[:R.oy - 2, :] = 1
+        return m
+
+
+def _sky_top(bg, origin, zenith_mul, glow):
+    """skies.extend_with_sky without its final softening (same maths)."""
+    import math as _m
+    hd = M._orig_extend(bg, origin=origin, blur_out=False)
+    a = bblib.arr(hd)
+    oy = int(origin[1]); top = oy - 2
+    row0 = np.asarray(bg.convert("RGB"))[0].reshape(-1, 3)
+    vals, counts = np.unique(row0, axis=0, return_counts=True)
+    plain = np.array(list(vals[counts.argmax()]) + [255], np.float32)
+    zen = plain.copy(); zen[:3] *= np.array(zenith_mul, np.float32)
+    excess = np.clip(a[top] - plain[None, :], 0, None); excess[:, 3] = 0
+    k = 41
+    pad = np.concatenate([np.repeat(excess[:1], k, 0), excess, np.repeat(excess[-1:], k, 0)], 0)
+    ker = np.ones(k, np.float32) / k
+    excess = np.stack([np.convolve(pad[:, c], ker, mode="same") for c in range(4)], -1)[k:-k]
+    for y in range(top):
+        d = top - y; t = d / float(top)
+        a[y] = (plain * (1 - t) + zen * t)[None, :] + excess * _m.exp(-d / float(glow))
+    a[:top, :, 3] = 255
+    a[:top, :, :3] = np.round(np.clip(a[:top, :, :3], 0, 255) / 4) * 4
+    return bblib.img(a)
+
+
+PLANS["9cf6fafc5a"] = GradPlan(zenith_mul=(0.8, 0.84, 0.88), glow=10)    # UNDERWATER: deeper water above
+PLANS["f184641a67"] = GradPlan(zenith_mul=(0.9, 0.92, 0.96), glow=30)    # FROZEN_LAKE: overcast sky
+PLANS["b673189225"] = GradPlan(zenith_mul=(0.82, 0.88, 0.96), glow=24)   # WATER_SURFACE
+
+
+#---------------------------------------------------------------------------------------------
 def install():
     import sys
     M.PLANS.update(PLANS)
