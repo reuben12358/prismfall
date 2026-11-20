@@ -41,6 +41,8 @@ module PrismfallMaps
     524 => [-28, -8, -30, 25],   # Gossamer Wood
     548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
     525 => [-40, -24, -30, 40],   # Gossamer Deepwood
+    527 => [6, 4, -6, 0],   # Lacecliff Walk
+    528 => [8, 4, -8, 0],   # Marram Down
     560 => [-6, -2, 10, 10],   # Frostflat Causeway
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs
     562 => [-10, -4, 14, 16],   # The Rimewood

@@ -170,7 +170,110 @@ def build_527():
             '/tmp/rt/527.png' if PREV else None)
 
 
-BUILD = {527: build_527}
+# ====================================================================================================== 528 Marram Down
+def ship_part(r, dx, dy, max_row, on='su.'):
+    """part of the moored two-master's hull (rows up to max_row of its art) laid on sand: a wreck half-buried in a dune"""
+    m = r.m
+    for x, y, z, t in K.SHIP:
+        if y > max_row: continue
+        X, Y = x + dx, y + dy
+        if m.inb(X, Y) and m.cls[Y, X] in on:
+            m.L[1 if z == 0 else 2, Y, X] = t
+            if z == 0: m.taken[Y, X] = True; m.cls[Y, X] = 'B'
+
+
+def build_528():
+    """Marram Down (110x80, BEACH): dune-down held by marram grass; the Saltmere Beacon on the highest dune (heals once,
+    the first view of the port); the players' camp of wagons; the theatre barge half-buried in the sand (the Prompter's
+    Box); the bird-hide over a brackish pool; the stile and the Free Port charter stone at the East Gate"""
+    W, H = 110, 80
+    r = Route(528, W, H, 'dunes', kit={1: 'ak', 'default': 'ak'}, base='.')
+    m = r.m
+    r.sea('S', 11, wobble=3.5, beach=5, deep=4, scale=14.0)
+    r.forest_band('N', 5, wobble=3.0)
+    for cx, cy, rx, ry in ((14, 12, 8, 4), (90, 10, 7, 3), (102, 52, 5, 4), (6, 58, 5, 4)):
+        r.copse(cx, cy, rx, ry)
+    # dunes: sandy ground (RJ Dirt) in long drifts, marram tall grass in their hollows
+    for cx, cy, rx, ry in ((30, 50, 22, 9), (72, 54, 24, 8), (50, 28, 14, 7), (88, 36, 12, 6), (14, 36, 10, 6), (60, 66, 40, 4)):
+        m.blob(cx, cy, rx, ry, 'u', seed=int(cx * 7 + cy), rough=0.7, only='.')
+    # the Beacon dune (raised) with stairs on its south face
+    m.blob(54, 15, 10, 6, None, ht=1, seed=31, rough=0.35)
+    r.flatten(52, 54, 20, 1); r.crossing(52, 20, w=3, rows=3)
+    road = [(109, 31), (96, 30), (84, 36), (68, 34), (54, 37), (38, 35), (22, 40), (0, 39)]
+    r.road(road, w=3.0, open_=None)
+    r.exit('E', 30, 4); r.exit('W', 38, 4)
+    r.lane([(53, 34), (53, 24)], w=2.0, open_=None)                                  # up to the Beacon
+    r.lane([(84, 34), (90, 24), (92, 20)], w=2.0, open_=None)                        # side path to the bird hide
+    r.water(95, 16, 5, 3)                                                            # the brackish pool
+    r.lane([(30, 38), (28, 50), (30, 57)], w=2.0, open_=None)                        # down to the barge
+    r.lane([(76, 37), (78, 46)], w=2.0, open_=None)                                  # into the players' camp
+    m.blob(79, 49, 7, 4, 'd', seed=44, rough=0.4, only='.ut')
+    r.grass(thr=0.63, scale=5.0)
+    r.finish_plan()
+    # ---- the camp, the barge, the hide, the beacon
+    for n, x, y in (('pf_stall4', 74, 46), ('pf_stall2', 82, 45), ('pf_stall0', 85, 50), ('sh_campfire', 77, 50), ('hb_washline', 72, 50),
+                    ('hb_tables', 80, 52), ('hb_barrels', 87, 47), ('pf_morris', 71, 47)):
+        r.near(n, x, y, on='d.u', r=3)
+    r.stamp('gl_shed', 55, 10, mark='B')                                             # the beacon keeper's hut
+    r.near('fw_brazier', 50, 12, on='.', r=3)
+    r.near('gl_shed', 99, 12, on='.', r=4)                                           # the bird hide
+    J = lambda e, t: P('JUNO', e, t)
+    r.add(sign((105, 29), 'Road sign', 'MARRAM DOWN - Free Port of Saltmere, 1 mile. Pulling up the marram grass is fined. Yes, even that one.'),
+          obj('Free Port charter stone', (4, 37), ['FREE PORT CHARTER STONE: "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN."',
+              'Someone has carved underneath, smaller: "AND BOOS THE REST."']),
+          once('The Saltmere Beacon', (53, 14), ['(From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)',
+               J('happy', "Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?"),
+               J('happy', "The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing."),
+               J('happy', 'So they make it all up instead. Every night. On purpose.')]),
+          {'type': 'event', 'name': 'Beacon Keeper', 'at': [56, 13], 'pages': [
+              {'graphic': {'sprite': 'NPC 26', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  "Beacon Keeper: Tea? It's not kelp. I've heard about the kelp.", {'heal': True}, '(The party is rested.)', {'selfswitch': ['A', True]}]},
+              {'cond': {'self': 'A'}, 'graphic': {'sprite': 'NPC 26', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  'Beacon Keeper: The pot\'s cold. Come back when I\'ve forgotten you.']}]},
+          talk('Hound Number One', (76, 48), 'NPC 03', ['Hound Number One: And SO the Loyal Three drove the Gossamer Ogre from the wood--']),
+          talk('Ogre', (79, 47), 'NPC 25', ["Ogre: (muffled) Can I take the mask off? It's very hot in the Ogre.", 'Ogre: (muffled) Why does he look so sad, though? He\'s the villain.'], move='random'),
+          talk('Director with script', (82, 48), 'NPC 18', ['Director: The Ogre does NOT take the mask off. The Ogre has never taken the mask off. It\'s in the text.',
+               'Director: Because the carver was having a bad week in AF 140! Places!']),
+          trainer((80, 44), 'JUGGLER', 'Hounds', 'A rehearsal audience! Quick, a scene!', 'Notes: we were bitten. Again.', d='down', double=True),
+          talk('Prop-mistress', (73, 49), 'NPC 27', ["Prop-mistress: If you're digging in the old barge, there's a shovel by the wagon.",
+               "Prop-mistress: The prompter's box went down with it in '71. Nobody's had the heart.",
+               {'if': '!pfm_has?(:SANDSHOVEL)', 'then': [{'script': 'pfm_item(:SANDSHOVEL, 1, "Sand Shovel")'}]}]),
+          {'type': 'event', 'name': "The Prompter's Box", 'at': [33, 57], 'pages': [{'trigger': 'action', 'commands': [
+              {'if': 'pfm?(:sm_prompter)', 'then': ['Only sand now. The barge has given up its secret.'],
+               'else': [{'if': 'pfm_has?(:SANDSHOVEL)', 'then': [
+                   '(A theater barge lies half-buried in the dune, its name board reading THE WANDERING CHORUS.)', 'You dig at the stern with the shovel...',
+                   {'script': 'pfm_item(:PROMPTERSSCRIPT, 1, "Prompter\'s Script")'}, {'script': 'pfm_item(:NORMALGEM, 1, "Normal Gem")'},
+                   {'script': 'pfm_set(:sm_prompter)'}],
+                   'else': ['(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.)',
+                            'Something square is buried at the stern. You\'d need a shovel.']}]}]}]},
+          trainer((88, 33), 'BIRDKEEPER', 'Lark', "Wind off the lake's the best in Elowen.", 'My kite won. You beat the kite-flier, which is different.', d='left'),
+          trainer((14, 37), 'POKEMONRANGER_F', 'Sedge', "Free port starts at the stile. Past that, the Queen's writ doesn't run, and neither do I.",
+                  "I'm going to sit down now. That's allowed in a free port.", d='right'),
+          talk('Sand-sculptor', (40, 44), 'NPC 15', ["Sand-sculptor: It's the Sovereign's Crown! In sand!", "Sand-sculptor: ...Don't look at the stone. I ran out of the good sand."]),
+          talk('Birdwatcher', (97, 21), 'NPC 09', ['Birdwatcher: Brackish pool. Half sea, half rain. The Wingull come to wash the salt off. Shh.']),
+          hidden((62, 64), 'SOFTSAND', 'HiddenItem (sledge run)'), obj('Sledge run', (58, 24), ['THE SLEDGE RUN. Down the Beacon to the shore in nine seconds. The record is seven, and a broken arm.']),
+          item((8, 64), 'POTION'), item((100, 20), 'GREATBALL'), item((24, 26), 'REPEL'))
+    r.seat_events(on='.dtus')
+    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 260, copses=4, scatter=10)
+    for _ in range(40):
+        x, y = r.rng.randrange(W - 2), r.rng.randrange(6, 66)
+        if m.free(x, y, 2, 2, on='.u'): m.stamp('ak_fern', x, y)
+    ship_part(r, -6, 4, 53)                                                         # the Wandering Chorus, half-buried
+    r.paint(glint=0.3)
+    flowers(r, 20, 22, 8, 4, p=0.3)
+    for x, y in ((14, 74), (44, 76), (86, 73), (100, 76)): water_stamp(r, 'ak_rock2', x, y)
+    h = head(528, 'Marram Down', field='BEACH', bgm='Route 3',
+             connections=[{'dir': 'E', 'offset': 30, 'to': 527, 'to_offset': 18}, {'dir': 'W', 'offset': 38, 'to': 140, 'to_offset': 44}],
+             tone=[8, 4, -8, 0])
+    r.write(h, '528_marram_down.yaml', '# Marram Down (528). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/528.png' if PREV else None)
+
+
+def vn_mask(r, thr):
+    from terrain import vnoise
+    return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
+
+
+BUILD = {527: build_527, 528: build_528}
 
 
 def main():

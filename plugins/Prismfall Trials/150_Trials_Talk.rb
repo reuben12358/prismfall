@@ -39,7 +39,8 @@ module Prismfall
         [:EL_MASTER_OF_NOTHING, "quest_state(:SELF) == :available", :offer],
         [:EL_MASTER_OF_NOTHING, "quest_step(:SELF) == :ledger", :ledger],
         [:ZE_FORM_7B, "quest_step(:SELF) == :stamps && !quest_flag(:SELF, :dock)", :stamp_dock]] },
-      :DOVETAIL_NEST => { :rows => [[:EL_MASTER_OF_NOTHING, "quest_step(:SELF) == :ask", :rigging]] },
+      :DOVETAIL_NEST => { :rows => [[:EL_MASTER_OF_NOTHING, "quest_step(:SELF) == :ask", :rigging]],
+                          :idle => "The Wattrel is asleep in its nest of tarred rope, waiting for a ship." },
       :LARCH => { :rows => [[:ZE_FORM_7B, "quest_step(:SELF) == :stamps && !quest_flag(:SELF, :larch)", :stamp_larch]] },
       :HESPER => { :rows => [[:ZE_FORM_7B, "quest_step(:SELF) == :warm", :warm]] },
       :KIOSK_PENNY => { :board => :ZENITH, :rows => [
@@ -51,7 +52,7 @@ module Prismfall
       :SCARECROW => { :rows => [
         [:EL_SCARECROW, "quest_step(:SELF) == :ask", :watch],
         [:EL_SCARECROW, "quest_step(:SELF) == :water", :water],
-        [:EL_SCARECROW, "quest_outcome(:SELF) == :spared && event_mon(:EL_SUDOWOODO) != :caught", :rematch]],
+        [:EL_SCARECROW, "quest_done(:SELF) && badges >= 2 && event_mon(:EL_SUDOWOODO) != :caught", :rematch]],
         :idle => "It's a scarecrow. Probably." },
       :ORCHARD_HOOFPRINT => { :rows => [[:EL_GLASS_FOAL, "quest_active(:SELF) && chase(:SELF) <= 2 && quest_step(:SELF) != :foal", :hoofprint]] },
       :GLASS_FOAL => { :rows => [[:EL_GLASS_FOAL, "quest_step(:SELF) == :foal", :foal]] },
@@ -90,7 +91,7 @@ module Prismfall
       :SHRINE_FORD   => { :rows => [[:EL_THREE_KNOTS, "quest_active(:SELF) && !quest_flag(:SELF, :river)", :shrine_river]] },
       :SHRINE_WOOD   => { :rows => [[:EL_THREE_KNOTS, "quest_active(:SELF) && !quest_flag(:SELF, :wood)", :shrine_wood]] },
       :SHRINE_SQUARE => { :rows => [[:EL_THREE_KNOTS, "quest_active(:SELF) && !quest_flag(:SELF, :square)", :shrine_square]] },
-      :SAP_TREE => { :rows => [[:EL_HORN_AND_PINCER, "!quest_done(:SELF)", :tree]] },
+      :SAP_TREE => { :rows => [[:EL_HORN_AND_PINCER, "badges >= 2 && !quest_done(:SELF)", :tree]] },
       :HETT => { :rows => [
         [:EL_SILKTHIEF, "quest_state(:SELF) == :available", :offer],
         [:EL_SILKTHIEF, "quest_step(:SELF) == :report", :report]] },
@@ -105,6 +106,8 @@ module Prismfall
       :RIMEWOOD_HIVE => { :rows => [[:IS_TWO_HEARTHS, "quest_step(:SELF) == :ask", :hive]], :idle => "The hive hums." },
       :HALVARD => { :rows => [[:IS_TWO_HEARTHS, "quest_step(:SELF) == :ask", :smokehouse]] },
       :PARCEL_RATTLE => { :rows => [[:IS_OATH_PARCEL, "quest_step(:SELF) == :carry && !quest_flag(:SELF, :rattled)", :rattle]] },
+      :EBB_MAST => { :rows => [[:EL_MASTER_OF_NOTHING, "quest_done(:SELF) && badges >= 3 && event_mon(:EL_WATTREL) != :gifted", :homecoming]],
+                     :idle => "Gulls on the harbour mast. One of them crackles." },
       :ASTA => { :rows => [
         [:IS_EGG_THIEF, "quest_state(:SELF) == :available", :offer],
         [:IS_EGG_THIEF, "quest_step(:SELF) == :report", :report]] },

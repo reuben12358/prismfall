@@ -197,12 +197,14 @@ tr.quest(:EL_SCARECROW, {
   :where => "the Hale farmhouse", :rank => 1, :points => 2, :rec_level => 9, :chapter => 1,
   :unlock => "switch(103)", :board => true, :tags => [:mystery, :event_mon, :comedy],
   :summary => "Coll Hale's scarecrow keeps moving to a different field. Coll did not build a scarecrow.",
+  # Revision 16: the Sudowoodo is a Rock type (an answer to Tamsin), so in Chapter 1 it is only a spar; it can be
+  # caught from Badge 2 on, in the :rematch scene (EL_SUDOWOODO), like Reborn's Pinsir/Heracross you can't catch yet.
   :steps => { :ask => "Look at the 'scarecrow' in the Hale orchard on Windfall Row. Don't let it see you looking.",
               :bottle => "It hates the rain. Ask Wenna in Ferrow's Landing for her Squirt Bottle.",
               :water => "Water the scarecrow." },
   :reward => {},
-  :outcomes => { :caught => { :money => 300 }, :spared => { :items => [[:MIRACLESEED, 1]], :effects => "RES+1" } },
-  :touches => "Resonance (Harmony +1 if you leave it be)",
+  :outcomes => { :spooked => { :money => 300 }, :spared => { :items => [[:MIRACLESEED, 1]], :effects => "RES+1" } },
+  :touches => "Resonance (Harmony +1 if you leave it be); the Sudowoodo can be caught after Badge 2",
   :scenes => {
     :offer => [
       [:COLL, :deadpan, "Scarecrow's moved again."],
@@ -229,10 +231,11 @@ tr.quest(:EL_SCARECROW, {
       { :choice => "Water the scarecrow?", :options => [
           ["Give it a squirt.", [
              "You give it a squirt.", "The 'scarecrow' screams, rips its roots out of the ground and charges!",
-             { :event_battle => :EL_SUDOWOODO,
-               :caught => [[:COLL, :deadpan, "...It was a Sudowoodo."], [:COLL, :neutral, "Best scarecrow I ever had. Look after it."],
-                           { :complete => :caught }],
-               :won => ["The Sudowoodo bolts into the plum rows, sobbing dry tears. It'll be back. It always comes back to the plums."],
+             { :event_battle => :EL_SCARECROW_SPAR,
+               :won => ["The Sudowoodo bolts into the plum rows, sobbing dry tears. It was far too frightened to stay in a ball.",
+                        [:COLL, :deadpan, "...It was a Sudowoodo."],
+                        [:COLL, :neutral, "It'll be back. It always comes back to the plums. Come and try again when you've a couple of badges and it's calmed down."],
+                        { :complete => :spooked }],
                :lost => ["The Sudowoodo stops attacking and goes back to being a tree, looking smug."] }]],
           ["Leave it be.", [
              "You put the bottle away. The scarecrow relaxes so hard that a leaf falls off.",
@@ -240,12 +243,13 @@ tr.quest(:EL_SCARECROW, {
              [:COLL, :neutral, "...Leaving it, are you. All right. It's a better scarecrow than a scarecrow, I'll give it that."],
              { :complete => :spared }]]] }
     ],
-    # Afterwards: the spared Sudowoodo can still be challenged (map event condition: quest_outcome(:EL_SCARECROW) == :spared).
+    # After Badge 2 (TALK row: quest_done && badges >= 2): the calmer Sudowoodo can be caught (EL_SUDOWOODO).
     :rematch => [
-      "The Sudowoodo is guarding the plum rows. It eyes your Squirt Bottle warily.",
+      "The Sudowoodo is guarding the plum rows. It has stopped shaking. It eyes your badge case, then your Squirt Bottle.",
       { :choice => "Challenge it?", :options => [
           ["Challenge it.", [{ :event_battle => :EL_SUDOWOODO,
-                               :caught => [[:COLL, :neutral, "Taking the scarecrow, then. Fair enough. I'll build a real one. Probably."]] }]],
+                               :caught => [[:COLL, :neutral, "Taking the scarecrow, then. Fair enough. I'll build a real one. Probably."]],
+                               :won => ["The Sudowoodo retreats to the plums, sulking. It'll be back. It always is."] }]],
           ["Leave it.", []]] }
     ]
   }
@@ -256,10 +260,12 @@ tr.quest(:EL_MASTER_OF_NOTHING, {
   :where => "the Dockmaster's House", :rank => 1, :points => 2, :rec_level => 6, :chapter => 1,
   :unlock => "switch(101) && switch(103)", :board => true, :tags => [:kindness, :event_mon],
   :summary => "The Dockmaster wants to close the Dovetail's ledger properly. Something is still aboard.",
+  # Revision 16: Wattrel is Flying (an answer to Tamsin) and Electric (to Marisol), so the bird stays with the ship;
+  # it turns up on the Ebbmouth harbour mast after Badge 3 (:homecoming, TALK key :EBB_MAST).
   :steps => { :ask => "Search the laid-up Dovetail for whatever is still living aboard.",
-              :ledger => "Take what you found back to the Dockmaster." },
+              :ledger => "Tell the Dockmaster what you found." },
   :reward => { :items => [[:POTION, 2]] },
-  :touches => "none (a quiet one)",
+  :touches => "none (a quiet one); the Wattrel joins you in Ebbmouth after Badge 3",
   :scenes => {
     :offer => [
       [:DOCKMASTER, :neutral, "Every ship gets a last line in the ledger. 'Laid up. Crew discharged. Nothing aboard.'"],
@@ -273,29 +279,37 @@ tr.quest(:EL_MASTER_OF_NOTHING, {
       { :map => "On the Dovetail's deck, under the furled mainsail: a nest of tarred rope fibre and fishing line." },
       "A Wattrel peers out of the nest. Its feathers crackle with static.",
       "It's been waiting for the ferry to sail, so it can follow it home. The ferry is never going to sail.",
-      "The Wattrel looks at the empty sea, then at you. It hops onto your shoulder and settles there, crackling.",
+      "The Wattrel looks at the empty sea, then at you. It crackles, once, and tucks its head back under its wing. It's waiting for a ship. Any ship.",
       { :step => :ledger }
     ],
     :ledger => [
       [:DOCKMASTER, :neutral, "A Wattrel. Of course. They follow ships. That one followed the last one in and had nowhere left to follow."],
       { :map => "He dips his pen and writes slowly." },
-      [:DOCKMASTER, :neutral, "'Dovetail. Laid up. Crew discharged. One Wattrel, rehomed.'"],
-      [:DOCKMASTER, :happy, "There. The first ledger line I've liked in a year."],
-      { :gift => :EL_WATTREL }, { :complete => true }
+      [:DOCKMASTER, :neutral, "'Dovetail. Laid up. Crew discharged. One Wattrel aboard, waiting for a ship.'"],
+      [:DOCKMASTER, :happy, "There. The first ledger line I've liked in a year. The Gale Post boats still run north. It'll find one."],
+      { :complete => true }
+    ],
+    # Ebbmouth harbour mast, after Badge 3 (TALK :EBB_MAST: quest_done && badges >= 3 && event_mon(:EL_WATTREL) != :gifted).
+    :homecoming => [
+      { :map => "A Wattrel is perched on the Ebbmouth harbour mast, crackling. It has a strand of tarred rope in its beak." },
+      "It's the Dovetail's rigging. It followed the first boat north out of Ferrow's Landing.",
+      "Your badge case hums its three-note chord. The Wattrel's feathers stand up with static, and it drops onto your shoulder like it was always going to.",
+      { :gift => :EL_WATTREL },
+      "(Somewhere in Ferrow's Landing, a ledger line just changed: 'One Wattrel, rehomed.')"
     ]
   }
 })
 
 tr.quest(:EL_LAST_PLANK, {
   :trial => :ELOWEN, :title => "The Last Plank", :giver => "the lantern rope (Brother Teasel's hand)", :map => 100,
-  :where => "the empty ferry berth", :rank => 1, :points => 2, :rec_level => 6, :chapter => 1,
-  :unlock => "switch(103)", :board => true, :tags => [:kindness, :event_mon],
+  :where => "the empty ferry berth", :rank => 1, :points => 2, :rec_level => 13, :chapter => 2,
+  :unlock => "badges >= 1", :board => true, :tags => [:kindness, :event_mon],
   :summary => "Every morning a Timburr carries a plank down to the empty berth and nails it in. Every night the tide takes it. Teasel's note: \"Help it finish.\"",
   :steps => { :ask => "Find the Timburr at the empty ferry berth at dawn.",
               :planks => "Carry the three loose planks from the boatyard to the berth.",
               :finish => "The berth is mended. Tell the Timburr." },
   :reward => { :items => [[:POTION, 2]] },
-  :touches => "none (Fighting type before the Normal Gym 1)",
+  :touches => "none; a Fighting type only after Dorian's badge (Revision 16: no answer to the next Warden before the gym)",
   :scenes => {
     :berth => [
       { :map => "Dawn at the empty berth. A Timburr with a plank on its shoulder hammers it into the jetty, steps back, and stares at the sea." },
@@ -326,8 +340,8 @@ tr.quest(:EL_LAST_PLANK, {
 #===============================================================================
 tr.quest(:EL_TIDE_POOL_FEUD, {
   :trial => :ELOWEN, :title => "The Tide-Pool Feud", :giver => "Dobbs the shell-gatherer", :map => 527,
-  :where => "the shell-gatherers' steps on Lacecliff Walk", :rank => 1, :points => 2, :rec_level => 12, :chapter => 2,
-  :unlock => "switch(103)", :board => true, :tags => [:rival_duel, :event_mon],
+  :where => "the shell-gatherers' steps on Lacecliff Walk", :rank => 1, :points => 2, :rec_level => 14, :chapter => 2,
+  :unlock => "badges >= 1", :board => true, :tags => [:rival_duel, :event_mon],
   :summary => "A Crabrawler and a Clobbopus have been fighting over one rock for three days. The shell-gatherers can't reach the pools.",
   :steps => { :ask => "Settle the feud at the big tide-pool below Lacecliff Walk." },
   :reward => { :items => [[:SUPERPOTION, 2]] },
@@ -463,7 +477,7 @@ tr.quest(:EL_PAINT_LOFT, {
   :summary => "The Mourner walked straight through the Pageant's painted sky. The scene-painter needs a new backdrop, and a second opinion.",
   :steps => { :ask => "Help Marguerite Fane and her Smeargle choose the colours for the new backdrop." },
   :reward => {},
-  :touches => "none; the colours you pick decide the Smeargle's moves (Water, Fire, Grass or Ghost coverage)",
+  :touches => "none; the colours you pick decide the Smeargle's moves (Water/Ice, Ghost, Fairy or Ground coverage)",
   :scenes => {
     :offer => [
       { :map => "The paint loft. A torn backdrop of the Plates falling hangs from the rigging with a person-shaped hole in it." },
@@ -479,13 +493,13 @@ tr.quest(:EL_PAINT_LOFT, {
       "Brush looks at you, tail-brush raised.",
       { :choice => "What does Saltmere look like to you?", :options => [
           ["Fog on the breakwater.", [{ :flag => [:palette, :sea] }, "Brush slaps on grey-blue and white. The new sky is all fog and lamplight.", { :run => :finish_sea }]],
-          ["Footlights.", [{ :flag => [:palette, :ember] }, "Brush paints in amber and red. The new sky is the inside of a lantern.", { :run => :finish_ember }]],
-          ["The road inland.", [{ :flag => [:palette, :grove] }, "Brush paints green. The new sky is the forest seen from underneath.", { :run => :finish_grove }]],
+          ["Morning over the salt lake.", [{ :flag => [:palette, :dawn] }, "Brush paints pink and gold. The new sky is the minute before the lamps go out.", { :run => :finish_dawn }]],
+          ["The dunes on the way in.", [{ :flag => [:palette, :earth] }, "Brush paints ochre and sand. The new sky has a road in it, going somewhere.", { :run => :finish_earth }]],
           ["After the show.", [{ :flag => [:palette, :night] }, "Brush paints violet and black and one small star.", { :run => :finish_night }]]] }
     ],
     :finish_sea   => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :sea },   { :complete => :sea }],
-    :finish_ember => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :ember }, { :complete => :ember }],
-    :finish_grove => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :grove }, { :complete => :grove }],
+    :finish_dawn  => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :dawn },  { :complete => :dawn }],
+    :finish_earth => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :earth }, { :complete => :earth }],
     :finish_night => [{ :run => :finish }, { :gift => :EL_SMEARGLE, :variant => :night }, { :complete => :night }],
     :finish => [
       [:FANE, :shocked, "He's... he's painted Dorian's face in the corner. He always paints Dorian's face in the corner."],
@@ -662,9 +676,10 @@ tr.quest(:EL_THREE_KNOTS, {
 
 tr.quest(:EL_HORN_AND_PINCER, {
   :trial => :ELOWEN, :title => "The Horn and the Pincer", :giver => "the lantern rope (no one signed it)", :map => 524,
-  :where => "the sap tree on the old trail, Gossamer Wood", :rank => 1, :points => 2, :rec_level => 15, :chapter => 3,
-  :unlock => "badges >= 1", :board => true, :tags => [:rival_duel, :event_mon],
+  :where => "the sap tree on the old trail, Gossamer Wood", :rank => 1, :points => 2, :rec_level => 19, :chapter => 3,
+  :unlock => "badges >= 2", :board => true, :tags => [:rival_duel, :event_mon],
   :summary => "Two great Bug Pokémon are fighting over the sap tree on the old trail. The trail has been blocked for a week.",
+  # Revision 16: a strong Pokemon earned by exploration after Tamsin's badge (Reborn's Aventurine Woods duel).
   :steps => { :ask => "Find the sap tree on the old trail in Gossamer Wood and end the fight." },
   :reward => { :items => [[:HONEY, 2]] },
   :touches => "none; the one you help clears a shortcut (Heracross tears a silk wall, Pinsir crushes a log)",

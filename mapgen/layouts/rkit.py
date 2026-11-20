@@ -670,6 +670,33 @@ class RMap:
         self.grass_variation()
         return self.L
 
+    def seal_edges(self, spans, filler=None, keep=()):
+        """map builder 9: close every walkable cell on the map's border except the connection openings (spans =
+        [(side, offset, width)]) and `keep` cells (warp mats), so no edge tile leads onto blocked ground next door (the
+        seam trap of REQUESTS item 11).  A solid bush tile goes on the cell's top free layer."""
+        filler = filler or 7094
+        ts = self.ts()
+        def opening(side, i):
+            return any(s == side and o <= i < o + w for s, o, w in spans)
+        cells = [(x, 0, 'N', x) for x in range(self.W)] + [(x, self.H - 1, 'S', x) for x in range(self.W)] + \
+                [(0, y, 'W', y) for y in range(self.H)] + [(self.W - 1, y, 'E', y) for y in range(self.H)]
+        n = 0
+        Lr = RC.resolve(self.L, self.tid)
+        for x, y, side, i in cells:
+            if opening(side, i) or (x, y) in keep: continue
+            if self.cls[y, x] in 'wWo': continue
+            st = [int(v) for v in Lr[:, y, x]]
+            blocked = False
+            for t in reversed(st):
+                if t <= 0: continue
+                if ts['passages'][t] & 15 == 15: blocked = True; break
+                if ts['priorities'][t] == 0: break
+            if blocked: continue
+            z = 2 if self.L[2, y, x] == 0 else 1
+            if self.L[z, y, x] and z == 1: continue
+            self.L[z, y, x] = filler; n += 1
+        return n
+
     # ------------------------------------------------------------ output
     def rubric(self):
         import build as B

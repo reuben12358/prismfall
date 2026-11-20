@@ -277,9 +277,9 @@ def main():
                     "Audience Member: Shh!",
                     say('JUNO', 'happy', "(whispering) I'll be loud quietly."),
                     {'script': "$game_self_switches[[154, 0, 'JUNO']] = true"}]}]}]},
-        trainer(T['ferdie'], 'JUGGLER', 'Florian', 3, 'right', "A challenger in the aisle! The show starts NOW!",
+        trainer(T['ferdie'], 'JUGGLER', 'Florian', 2, 'right', "A challenger in the aisle! The show starts NOW!",
                 "I'll be in the bar. There is no bar. I'll be in the lobby."),
-        trainer(T['rosalind'], 'BEAUTY', 'Rosalind', 3, 'left', "Every great entrance needs a rival. Tonight, that's me.",
+        trainer(T['rosalind'], 'BEAUTY', 'Rosalind', 2, 'left', "Every great entrance needs a rival. Tonight, that's me.",
                 "...Upstaged. In my own aisle."),
         trainer(T['crewe'], 'JUGGLER', 'Ambrose', 3, 'down', "Side aisle, cheap seats, best view! Let's have a scene!", "Encore? No? No.")]
     d = head(154, 'Pell Playhouse - Auditorium', 150, {'metadata': dict(M, SnapEdges=True)}); d.update(h.write(154)); d['events'] = ev; docs.append(d)

@@ -402,7 +402,12 @@ module PlayBot
     end
 
     def drive_plan
-      return after_blackout if @rewind && @idle >= 30
+      # After a blackout, do nothing until the rewind: otherwise wait_for_map would run the remaining steps as
+      # "no way from map 101" while the Poke Center is still settling (seen 2026-11-19)
+      if @rewind
+        after_blackout if @idle >= 30
+        return
+      end
       step = plan[@step]
       return if !step
       kind, map = step

@@ -61,6 +61,8 @@
 524	0	Gossamer Wood
 525	524	Gossamer Deepwood
 526	524	Woodward's Hut
+527	0	Lacecliff Walk
+528	0	Marram Down
 540	0	Thistledown Lea
 541	0	The Grey Saltings
 542	541	The Brinewife's Rest

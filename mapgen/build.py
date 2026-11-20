@@ -723,6 +723,7 @@ def main():
                             if not (0 <= c.parameters[2] < tw and 0 <= c.parameters[3] < th):
                                 ctx.warn(s['id'], 'event "%s" transfers outside map %d' % (ev.name, tm))
     ctx.arrival_bad = check_arrivals(selected, specs, ctx)
+    ctx.seam_bad = check_seams(specs, ctx)
     # trainers referenced by events -> list for the trainer-data owner
     need = set()
     for s in selected:
@@ -748,6 +749,8 @@ def main():
         sys.exit('--strict: %d puzzle proof(s) failed (see PUZZLE FAIL lines; mapgen/puzzles/)' % ctx.puzzle_bad)
     if '--strict' in sys.argv and getattr(ctx, 'arrival_bad', 0):
         sys.exit('--strict: %d blocked arrival / door tiles (see ARRIVAL warnings)' % ctx.arrival_bad)
+    if '--strict' in sys.argv and getattr(ctx, 'seam_bad', 0):
+        sys.exit('--strict: %d edge tiles that lead onto blocked ground across a map connection (see SEAM warnings)' % ctx.seam_bad)
     if '--strict' in sys.argv and getattr(ctx, 'slab_bad', 0):
         sys.exit('--strict: %d old slab-stair tiles (see OLD SLAB STAIRS warnings)' % ctx.slab_bad)
 
@@ -802,6 +805,60 @@ def check_arrivals(selected, specs, ctx):
                         ctx.warn(s['id'], 'ARRIVAL: "%s" lands on door "%s" (map %d), but the step out (%d,%d) is blocked'
                                  % (ev.name, door_here.name, tm, tx, ty + 1)); bad += 1
                     break
+    return bad
+
+
+def check_seams(specs, ctx):
+    """map builder 9 (REQUESTS item 11): every connection edge, tile by tile.  A walkable tile on one map's joined edge
+    must meet a walkable tile across the seam (and that tile must reach the neighbour's first door/warp or another
+    edge), or walking off the edge strands the player.  Returns the number of SEAM problems."""
+    import render as R
+    by_id = {s['id']: s for s in specs}
+    cache = {}
+
+    def load(mid):
+        if mid not in cache:
+            p = os.path.join(OUT, 'Data', 'Map%03d.rxdata' % mid)
+            if not os.path.exists(p): cache[mid] = None
+            else:
+                m = M.load_file(p); ts = R.tilesets()[m.tileset_id]; lay = m.data.data
+                solid = {(e.x, e.y) for e in m.events.values() if (e.pages[0].graphic.character_name or e.pages[0].graphic.tile_id) and not e.pages[0].through}
+                ok = np.array([[cell_passable(lay, ts, x, y) and (x, y) not in solid for x in range(m.width)] for y in range(m.height)])
+                cache[mid] = (m, ok)
+        return cache[mid]
+    OPP = {'N': 'S', 'S': 'N', 'W': 'E', 'E': 'W'}
+    bad = 0; done = set()
+    for s in specs:
+        for c in s.get('connections', []) or []:
+            a, b_ = s['id'], c['to']
+            key = tuple(sorted((a, b_)))
+            if key in done or b_ not in by_id: continue
+            done.add(key)
+            A, B = load(a), load(b_)
+            if not A or not B: continue
+            (ma, oka), (mb, okb) = A, B
+            d = c['dir'][0].upper(); oa, ob = c.get('offset', 0), c.get('to_offset', 0)
+            if d in 'NS':
+                ya = 0 if d == 'N' else ma.height - 1; yb = mb.height - 1 if d == 'N' else 0
+                pairs = [((x, ya), (x - oa + ob, yb)) for x in range(ma.width)]
+            else:
+                xa = 0 if d == 'W' else ma.width - 1; xb = mb.width - 1 if d == 'W' else 0
+                pairs = [((xa, y), (xb, y - oa + ob)) for y in range(ma.height)]
+            opened = 0; ab = []; ba = []
+            for (x1, y1), (x2, y2) in pairs:
+                inb = 0 <= x2 < mb.width and 0 <= y2 < mb.height
+                pa = oka[y1, x1]; pb = okb[y2, x2] if inb else False
+                if pa and pb: opened += 1
+                elif pa and not pb: ab.append((x1, y1, x2, y2))
+                elif pb and not pa and inb: ba.append((x2, y2, x1, y1))
+            if ab:
+                x1, y1, x2, y2 = ab[0]
+                ctx.warn(a, 'SEAM: %d tile(s) of %d\'s %s edge lead onto blocked ground of map %d, e.g. (%d,%d) -> (%d,%d)' % (len(ab), a, d, b_, x1, y1, x2, y2)); bad += len(ab)
+            if ba:
+                x1, y1, x2, y2 = ba[0]
+                ctx.warn(b_, 'SEAM: %d tile(s) of %d\'s %s edge lead onto blocked ground of map %d, e.g. (%d,%d) -> (%d,%d)' % (len(ba), b_, OPP[d], a, x1, y1, x2, y2)); bad += len(ba)
+            if not opened:
+                ctx.warn(a, 'SEAM: connection %d %s <-> %d has no walkable crossing at all' % (a, d, b_)); bad += 1
     return bad
 
 

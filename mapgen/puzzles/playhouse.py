@@ -31,8 +31,7 @@ LOBBY = ["#########################",
          "#.......................#",
          "#.......................#",
          "#.......................#",
-         "############.############",
-         "#########################"]
+         "############.############"]
 LOBBY_AT = dict(doors=(12, 5), exit=(12, 14), usher=(10, 7), guide=(19, 9), lady=(4, 11), clerk=(3, 7), poster_l=(2, 2), poster_r=(20, 2))
 
 
@@ -74,7 +73,7 @@ THEATRE = ["#########################",
 THEATRE_SOLID = '#KPBpors'                                              # the model's walls
 CURTAIN = [(x, y) for y in range(3, 11) for x in range(6, 19)]       # the house curtain, in: the drop and the stage, inside the legs
 THEATRE_AT = dict(dorian=(12, 7), front=(12, 8), rope=(21, 11), stagehand=(22, 11), start=(12, 28), doors=(12, 29),
-                  wing=(2, 10), ferdie=(10, 25), rosalind=(14, 20), crewe=(1, 18), mark=(12, 11), juno=(10, 18))
+                  wing=(2, 10), ferdie=(11, 25), rosalind=(13, 20), crewe=(1, 18), mark=(12, 11), juno=(10, 18))
 
 
 def theatre_model():

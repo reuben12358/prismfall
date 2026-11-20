@@ -19,7 +19,7 @@ def _gym():
     W = 20
     wall, stair = '###' + 'W' * 14 + '###', '###' + 'W' * 12 + 'SW' + '###'
     fl, bed = '###' + '.' * 14 + '###', '###' + 'v' * 14 + '###'
-    return ['#' * W, '#' * W, wall, wall, stair, stair] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########', '#' * W]
+    return ['#' * W, '#' * W, wall, wall, stair, stair] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########']
 
 
 GYM = _gym()
@@ -56,7 +56,7 @@ def _hall():
     seg = '#....oooooo...oooooo....#'
     wall, stair = '#' + 'W' * 23 + '#', '#' + 'W' * 11 + 'S' + 'W' * 11 + '#'
     return (['#' * W, wall, wall, stair, stair, full, full] + [gap] * 4 + [seg, seg] + [gap] * 3 + [seg, seg] + [gap] * 4 +
-            [full, full, '#' * 12 + '.' + '#' * 12, '#' * W])
+            [full, full, '#' * 12 + '.' + '#' * 12])
 
 
 HALL = _hall()

@@ -308,6 +308,20 @@ ShowArea = true
 MapPosition = 0,12,14
 BattleBack = forest
 #-------------------------------
+[527]   # Lacecliff Walk
+Name = Lacecliff Walk
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,11,18
+#-------------------------------
+[528]   # Marram Down
+Name = Marram Down
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,8,18
+#-------------------------------
 [540]   # Thistledown Lea
 Name = Thistledown Lea
 Outdoor = true

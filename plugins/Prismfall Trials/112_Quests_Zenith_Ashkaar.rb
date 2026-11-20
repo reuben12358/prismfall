@@ -26,10 +26,12 @@ tr.quest(:ZE_FORM_7B, {
   :summary => "CALL FOR PROPOSALS #0001: DISPOSAL OF UNCLAIMED LIVESTOCK, CRATE 7-B. BOUNTY: $500.",
   :steps => { :ask => "Read Crate 7-B's paperwork at the customs kiosk.",
               :stamps => "Form 7-C (adoption) needs three stamps: Tidewatch Station, the Dockmaster, and the customs duty officer.",
-              :warm => "The Charcadet in Crate 7-B is freezing. Take it up to the lighthouse lamp." },
+              :warm => "The Charcadet in Crate 7-B is freezing. Take it up to the lighthouse lamp. Hesper keeps it there until you hold two badges." },
+  # Revision 16: Charcadet is a Fire type (Tamsin's answer), so the form is filed in Chapter 1 but the crate stays
+  # by the lamp until Badge 2; the player collects it on a "2 Badge Quests" trip back down the coast.
   :reward => {},
   :outcomes => { :disposed => { :money => 500, :effects => "MERIDIAN+1" }, :adopted => { :items => [[:POTION, 2]] } },
-  :touches => "Meridian standing (+1 if you sign the disposal form)",
+  :touches => "Meridian standing (+1 if you sign the disposal form); the Charcadet is collected after Badge 2",
   :scenes => {
     :offer => [
       { :map => "A brass kiosk by the scanner gates. Inside the glass, a Rotom has made itself at home in the ticket machine." },
@@ -86,8 +88,15 @@ tr.quest(:ZE_FORM_7B, {
       [:HESPER, :deadpan, "...Put it nearer, then. Not touching the lens. Nobody touches the lens."],
       [:HESPER, :neutral, "Fire-types used to winter up here when I was a girl. The lamp was better company than most people."],
       "The flames climb, steadier, brighter. Something in the crate sits up and looks at you.",
-      [:HESPER, :angry, "Now take it and go. And shut the door. You're letting the warm out."],
-      { :gift => :ZE_CHARCADET }, { :complete => :adopted }
+      { :if => "badges >= 2", :then => [
+          [:HESPER, :neutral, "It's walking about on its own now. Been sitting by my lens every night, watching the road you went down."],
+          [:HESPER, :angry, "Now take it and go. And shut the door. You're letting the warm out."],
+          { :gift => :ZE_CHARCADET }, { :complete => :adopted }
+        ], :else => [
+          [:HESPER, :deadpan, "It'll not last a day on the coast road in this fog. It stays by the lamp till it can walk on its own."],
+          [:HESPER, :angry, "Come back when you've two of those badges rattling in your pocket. Not before. And shut the door."],
+          "(Hesper will keep the Charcadet by the lamp until you hold two badges.)"
+        ] }
     ]
   }
 })
@@ -166,8 +175,9 @@ tr.quest(:ZE_LATTICE_HUM, {
 #===============================================================================
 tr.quest(:AS_LITTLE_CRUCIBLE, {
   :trial => :ASHKAAR, :title => "The Little Crucible", :giver => "Sergeant Brakka Emberhide", :map => 146,
-  :where => "the Legion recruiting barge, Saltmere harbour", :rank => 1, :points => 3, :rec_level => 17, :chapter => 2,
-  :unlock => "badges >= 1", :board => true, :tags => [:arena, :gauntlet, :boss, :event_mon],
+  :where => "the Legion recruiting barge, Saltmere harbour", :rank => 1, :points => 3, :rec_level => 21, :chapter => 4,
+  :unlock => "badges >= 2", :board => true, :tags => [:arena, :gauntlet, :boss, :event_mon],
+  # Revision 16: the Legion barge docks in Saltmere after Badge 2 (Litleo is Fire, Tamsin's answer); reached by the Frostflat Causeway.
   :summary => "WRIT OF FLAME: three bouts, back to back, no healing. Then the barge's mascot. Win and the Legion respects you. Lose and the Legion respects you less.",
   :steps => { :ask => "Fight the barge's three recruits in a row (no healing between bouts).",
               :mascot => "The recruits are beaten. Now face Cinderpaw, the barge's mascot." },

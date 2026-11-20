@@ -73,7 +73,7 @@ maps:
     name: The Dovetail - Deck
     events:
     - {name: Wattrel nest, key: DOVETAIL_NEST, near: "under the furled mainsail", sprite: "Wattrel in a rope-fibre nest", trigger: action,
-       condition: "quest_step(:EL_MASTER_OF_NOTHING) == :ask",
+       condition: "quest_step(:EL_MASTER_OF_NOTHING) == :ask || (quest_done(:EL_MASTER_OF_NOTHING) && badges < 3)",
        request: "the laid-up Dovetail must be boardable after Ch1 (gangplank event at the berth on 100 -> 109)"}
   521:
     name: Windfall Row
@@ -157,7 +157,8 @@ maps:
     events:
     - {name: Monkey shrine, key: SHRINE_WOOD, near: "a shrine in a hollow of silk", trigger: action}
     - {name: Sap tree duel, key: SAP_TREE, near: "the weeping sap tree on the old trail", sprite: "Heracross and Pinsir locked together",
-       trigger: action, condition: "!quest_done(:EL_HORN_AND_PINCER)"}
+       trigger: action, condition: "badges >= 2 && !quest_done(:EL_HORN_AND_PINCER)",
+       note: "Revision 16: the duel appears after Tamsin's badge; before that the trail is just blocked by the two silk/log obstacles"}
     - {name: Silk wall, near: "a shortcut toward Briarwick", condition: "quest_flag(:EL_HORN_AND_PINCER, :helper) != :heracross",
        note: "impassable silk wall; gone once Heracross tears it down"}
     - {name: Fallen log, near: "a second shortcut", condition: "quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir",
@@ -208,6 +209,9 @@ maps:
     events:
     - {name: Net Loft door, request: "an interior 'the Net Loft' for skald Bersi Gullsong (suggest map 168); tally mast, nets, a feast table"}
     - {name: Gorm, key: GORM, near: "his crates on the quay", sprite: "stocky sailor", trigger: action}
+    - {name: Harbour mast Wattrel, key: EBB_MAST, near: "the harbour mast by the Gale Post jetty", sprite: "Wattrel perched on a mast",
+       trigger: action, condition: "quest_done(:EL_MASTER_OF_NOTHING) && badges >= 3 && event_mon(:EL_WATTREL) != :gifted",
+       note: "Revision 16: the Dovetail's Wattrel (Master of Nothing) waits here after Badge 3"}
     - {name: Grant Kiosk P-3NNY/2, key: KIOSK_PENNY_EBB, near: "the tidal Lattice station gate", sprite: "tile: brass kiosk", trigger: action}
     - {name: Upper mill-wheel, key: WHEEL_UPPER, near: "the upper wheel on the Ebb", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :upper)"}
     - {name: Guild mill-wheel, key: WHEEL_GUILD, near: "the wheel by the Guild hall", trigger: action, condition: "quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :guild)"}

@@ -104,14 +104,14 @@ class Route:
         """encounter fields: noise patches of tall grass on open land, kept off the road edge"""
         m = self.m; s = self.seed + 202 if seed is None else seed
         x0, y0, x1, y1 = box or (0, 0, self.W, self.H)
-        road = np.isin(m.cls, list('dgsu'))
+        road = np.isin(m.cls, list('dgs')) | self.road_mask
         pad = np.pad(road, keep_road); near = np.zeros_like(road)
         for dy in range(-keep_road, keep_road + 1):
             for dx in range(-keep_road, keep_road + 1):
                 near |= pad[keep_road + dy:keep_road + dy + self.H, keep_road + dx:keep_road + dx + self.W]
         for y in range(y0, y1):
             for x in range(x0, x1):
-                if m.cls[y, x] == '.' and not near[y, x] and vnoise(x, y, s, scale) > thr: m.cls[y, x] = 't'
+                if m.cls[y, x] in '.u' and not near[y, x] and vnoise(x, y, s, scale) > thr: m.cls[y, x] = 't'
 
     def water(self, cx, cy, rx, ry, c='w', rough=0.6):
         self.m.blob(cx, cy, rx, ry, c, seed=self.seed + int(cx + cy * 7), rough=rough, only=None)
@@ -234,6 +234,8 @@ class Route:
         for x, y in self.deck:
             if m.inb(x, y): m.L[1, y, x] = C('sh', 497)
         m.scatter(self._scatter if hasattr(self, '_scatter') else 9, seed=self.mid)
+        keep = [tuple(e['at']) for e in self.events if e.get('type') in ('warp',)]
+        self.sealed = m.seal_edges(self.exits, keep=keep)
         if glint:
             G = [K.P1('hb_glint%d' % i) for i in range(4)]
             for y, x in np.argwhere(np.isin(m.cls, ['w', 'W'])):
