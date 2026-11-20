@@ -2059,11 +2059,11 @@ tiles:
   at: [15, 29]
   layer: 2
 events:
-- type: warp
-  name: To Thistledown Lea
+- type: sign
+  name: Glass-choked way
   at: [18, 33]
-  link: R3_COCOON
-  arrive: [18, 32, up]
+  post: false
+  text: The old way south to Thistledown Lea is choked with glass. The Deepwood is the only way in or out now.
 - type: warp
   name: To the Deepwood
   at: [0, 16]

@@ -21,7 +21,7 @@ Prismfall::Trials::BadgeTiers::RUMOURS.merge!({
   [521, 2] => "An Eevee in the {map} hedgerows again, first in years. Seeds blowing upward, too. And the shy shell-bug is back in the old trees.",
   [521, 3] => "Mushrooms walking out of the {map} ditches, and a little electric mouse stealing from the Hales' hens.",
   [521, 4] => "Something with blades for arms in the {map} orchard at dusk. The pickers have stopped working late.",
-  [527, 1] => "Crabs on the {map} rocks, and barnacles that wave back.",
+  [527, 1] => "Barnacles on the {map} rocks that wave back, and a bad-tempered bird nesting right on the cliff path.",
   [527, 2] => "The tide-pools on {map} have a new resident. If you step on it, it punches you. With its insides.",
   [527, 3] => "Something small and silver scurries away screaming whenever anyone walks the {map} shore.",
   [527, 4] => "A steel bird nests on the {map} cliffs, shedding razors. And a seabird swallowed a fisherman's hat.",

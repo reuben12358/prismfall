@@ -199,7 +199,7 @@ def hollow():
         for y in range(13, 20):
             if x == 4: c.o[2][y][x] = c.o[2][y][x] or CU['veil']
     E = []
-    E.append({'type': 'warp', 'name': 'To Thistledown Lea', 'at': [18, 33], 'link': 'R3_COCOON', 'arrive': [18, 32, 'up']})
+    E.append({'type': 'sign', 'name': 'Glass-choked way', 'at': [18, 33], 'post': False, 'text': 'The old way south to Thistledown Lea is choked with glass. The Deepwood is the only way in or out now.'})   # map builder 9: Rev 14, no R3_COCOON
     E.append({'type': 'warp', 'name': 'To the Deepwood', 'at': [0, 16], 'link': 'DEEP_COCOON', 'arrive': [1, 16, 'right']})
     E.append(c.fog_event('prismfall_glass', 90, 1, 200, 1, 1))
     E.append({'type': 'event', 'name': 'Escort setup', 'at': [0, 1], 'pages': [

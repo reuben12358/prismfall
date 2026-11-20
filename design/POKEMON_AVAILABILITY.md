@@ -22,7 +22,7 @@ Regenerate §5–6 with `--summary`; list every answer to the early Wardens with
 | after B1 | Saltmere playhouse (stage magician) | Abra Lv 12 (no wild Abra line) | Psychic: no answer to Bug or Water |
 | Ch3 | Thistledown Manor, after the three scenes | **Sinistea** Lv 14 (was Litwick: Fire is Tamsin's answer; `mapgen/REQUESTS.md`) | Litwick stays a Badge-2 overlay in the manor |
 | Ch1 | the Glassed Orchard | Carbink: a glimpse only before Badge 2, catchable Lv 20 after it (map request) | Rock answers Tamsin |
-| after B3 | Briarwick or the Dyers' Ford dyer | one of Pansage / Pansear / Panpour (red, blue or yellow vat) | Pansear is Fire (Tamsin) and Pansage Grass (Marisol): the dyer waits for Badge 3 |
+| after B2 | the Dyers' Ford dye-master | Pansear (red vat) **or** Panpour (blue vat); Pansage (yellow vat) only after B5 | Pansear is Fire (Tamsin's answer), so the dyer waits for Badge 2; Pansage is Grass (Marisol, and Sahar once her gates are set, R9) |
 | after B4 | Lumen Fossil Lab | revives Old Amber (Brinecut B1F) → Aerodactyl Lv 25. Dome/Helix found in Ossuary | |
 | after B6 | Mirefen ward | starter egg: player picks any **Grass** starter not chosen | check against Wardens 7–8 when their gates are set (R9) |
 | after B9 | Verdance (Juno) | starter egg: any **Fire** starter | (R9) |

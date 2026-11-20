@@ -10,7 +10,7 @@ DOCS = os.path.join(HERE, '..', '..', '..', 'docs', 'playtest', 'puzzles')
 CAP = {
     'g1_00': 'Gym 1: outside the Pell Playhouse (map 147)', 'g1_01': 'Gym 1 lobby (map 150)',
     'g1_02': 'Gym 1 auditorium (map 154): the aisle runs between the seat rows to the stage',
-    'g1_03': 'Up the aisle (the actors on the aisle edge battle you)', 'g1_04': 'On the apron: the house curtain is in',
+    'g1_03': 'Up the aisle: the actors in the aisle battle you', 'g1_04': 'On the apron: the house curtain is in',
     'g1_05': 'The one interaction: haul the curtain rope; the curtain flies out', 'g1_06': 'Before Warden Dorian', 'g1_07': 'After the battle: the badge',
     'g2_00': 'Gym 2: outside the Loomhouse (map 120)', 'g2_01': 'Gym 2 foyer (map 130): one loom bed across the aisle',
     'g2_02': 'The plank sits off to the left; a silk thread runs to the heddle', 'g2_03': 'One pull: the plank slides into the aisle',
@@ -23,7 +23,7 @@ CAP = {
     'bs_04': 'Fly Loft (map 152)', 'bs_05': 'RIGHT rail: rope 2 flies flats B and C', 'bs_06': 'Rope 3 flies A and drops the rostrum back in',
     'bs_07': 'Down the right ladder: cue the Throne', 'bs_08': 'Through the gap where flat B stood', 'bs_09': 'On the rostrum, flat A gone, the dais ahead',
     'bs_10': 'The upstage door: the old script, and back to the auditorium',
-    'lf_00': 'Upper Lofts (optional, after Badge 1): the stairs behind the Warden', 'lf_01': 'Weaving Hall: start (the middle bed has no plank at all)',
+    'lf_00': 'Upper Lofts (optional, after Badge 2): the stairs behind the Warden', 'lf_01': 'Weaving Hall: start (the middle bed has no plank at all)',
     'lf_02': 'Weaving Hall: Red heddle lifts beds A and B', 'lf_03': 'Weaving Hall: Gold lifts B and C',
     'lf_04': 'Weaving Hall: Green lifts C and A: every bed lifted twice, all planks on the right', 'lf_05': 'Weaving Hall: climbing the right-hand column',
     'lf_06': 'Canopy Lofts: first deck', 'lf_07': 'Canopy Lofts: alpha cord, then the spool throws you west',

@@ -110,6 +110,8 @@ def sea_rocks(m, seed):
 
 def main():
     a = [int(x) for x in sys.argv[1:] if x.isdigit()]
+    moved = [x for x in a if x in (520, 521, 524)]          # map builder 9: these are rebuilt by layouts/routes_early.py now
+    if moved: print('reskin: %s are built by layouts/routes_early.py now; skipped' % moved); a = [x for x in a if x not in moved]
     for mid in a:
         docs, fn = load(mid)
         out_docs = []

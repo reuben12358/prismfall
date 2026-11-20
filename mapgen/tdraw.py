@@ -1158,6 +1158,27 @@ def chalk_arch():
     return im, code
 
 
+def dye(col, v):
+    """dyed water (1x1 overlay for the Dyers' Ford): a translucent wash of madder, woad or weld with paler crests"""
+    im = Image.new('RGBA', (16, 16), col + (96,)); rng = random.Random(800 + v + sum(col))
+    hi = tuple(min(255, c + 70) for c in col)
+    for _ in range(3):
+        x, y = rng.randrange(0, 12), rng.randrange(1, 15)
+        for k in range(rng.randrange(3, 6)): P(im, (x + k) % 16, y - (1 if 0 < k < 3 else 0), hi + (200,))
+    return im
+
+
+def stepstone(v):
+    """a flat stepping stone in the shallows (1x1, walkable)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(900 + v)
+    x0, y0 = 2 + rng.randrange(2), 3 + rng.randrange(2)
+    d.ellipse([x0, y0 + 2, x0 + 11, y0 + 10], fill=(70, 96, 120, 160))
+    d.ellipse([x0, y0, x0 + 11, y0 + 8], fill=QY[2] + (255,), outline=OUT)
+    d.ellipse([x0 + 2, y0 + 1, x0 + 7, y0 + 4], fill=QY[4] + (255,))
+    P(im, x0 + 8, y0 + 5, (96, 128, 84, 255))
+    return im
+
+
 def stall(cols, goods, seed):
     """a market stall (3x2): a striped canvas roof on poles over a plank counter with goods"""
     im = Image.new('RGBA', (48, 32), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(seed)
@@ -1393,6 +1414,9 @@ def city_pieces():
         out['rw_rail_' + e] = (balustrade(e), ['W'], None); out['qy_rail_' + e] = (balustrade(e, iron=True), ['W'], None)
     for v in range(4): out['hb_glint%d' % v] = (glint(v), ['O'], None)
     im, c = chalk_arch(); out['pf_chalkarch'] = (im, c, None)
+    for nm, col in (('red', (196, 52, 64)), ('blue', (52, 84, 186)), ('yellow', (228, 196, 60))):
+        for v in range(2): out['dye_%s%d' % (nm, v)] = (dye(col, v), ['O'], None)
+    for v in range(2): out['pf_stepstone%d' % v] = (stepstone(v), ['F'], None)
     for v in range(2): out['rw_ivy%d' % v] = (ivy_face(v), ['W'], None)
     for kind in ('W', 'E'):                     # map builder 9: solid side copings for terraces on land (no stepping off the side)
         out['rw_%s0' % kind] = (quay(kind + 'm', 0), ['W'], None)

@@ -152,13 +152,13 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
       only="nocasual", hard={"moves": "TEETERDANCE,PSYBEAM,COPYCAT,TACKLE", "item": "SITRUSBERRY"}),
     # Hard only: the understudy who shouts. Soundproof ignores the player's sound moves (and Dorian's own songs), and
-    #    its Echoed Voice is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
+    #    its Round is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
     #    (Furfrou's Fur Coat + Headbutt and a Chatter Chatot both swept prepared teams at Lv 13-14 in the harness.)
-    P("WHISMUR", 13, "SOUNDPROOF", "ORANBERRY", "MODEST", "ECHOEDVOICE,ASTONISH,POUND,HOWL", "S", only="hard"),
+    P("WHISMUR", 13, "SOUNDPROOF", "ORANBERRY", "MODEST", "ROUND,ASTONISH,POUND,HOWL", "S", only="hard"),
     # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
     #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
     P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",
-      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,ROUND,DISARMINGVOICE,ECHOEDVOICE"}),
+      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY", "moves": "SING,ROUND,DISARMINGVOICE,DEFENSECURL"}),
     # 5. The quick-change artist: Color Change is a costume change (it becomes the type of the move that hit it - hit
     #    it once with Fighting, then switch). It opens with its own Fake Out ("Costume change!"); Fury Swipes hits 2-5
     #    times and every critical hit is applause. Hard: Protean and the Synthetic Seed (Laser Focus: a sure crit).

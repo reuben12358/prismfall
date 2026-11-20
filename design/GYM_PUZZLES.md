@@ -60,7 +60,8 @@ Optional Mastery rooms may sit up to **two points above** their gym; they never 
 | 17 | Celestine · Gloaming | Fairy · Fairy Tale | **10** | 40 min | Truth-bound storybook logic | — |
 | 18 | Sigrun · Wyrmrest | Dragon · Dragon's Den | **10** | 45 min | Scales, statues and the magma tide | — |
 
-**Built and proven today** (`python3 -I mapgen/puzzle_check.py`, and again on the built maps by `build.py`):
+**Built and proven** (`python3 -I mapgen/puzzle_check.py`, and again on the built maps by `build.py`; re-proved after the
+2026-11-19 art pass, which moved coordinates but no puzzle logic):
 Gym 1 auditorium 1 move / 2 states (1/10) · Gym 2 foyer 1 / 2 (1/10) · Gym 2 Weaving Hall 3 / 27 (3/10) · Upper Lofts
 7 / 93 (4/10, unsolvable without the brass wire) · Granny's Knot 3 / 32 (3/10, unique) · Playhouse Backstage stage + loft
 5 / 39 (4/10, unsolvable without each scene and without the loft) · Trap Room 3 / 6 (3/10).
@@ -213,32 +214,43 @@ the first field: the house loves a show.
 **Layout and logic:** `mapgen/puzzles/playhouse.py` (`LOBBY`, `THEATRE`; authoritative coordinates), painted by
 `mapgen/gen_playhouse.py` on tileset 54 "PF Rejuv Halls" (Rejuvenation's Goldenleaf Theatre tiles).
 
-### 150 Lobby (22×14)
-Mauve panelled walls with purple pillars, framed playbills (*The Gilded King*, pasted over "closed"; *The Lady in Red*),
-gilded urns and velvet ropes, couches, a rug. The usher, the **gym guide** (teaches the field: sound and dance moves get a
-cheer; Fighting is good, Ghosts don't care) and a regular. The auditorium doors are in the back wall. Exit mat → Saltmere
-(`SM_GYM`, map 147).
+### 150 Lobby (25×15) — art pass 2026-11-19
+A grand foyer on Rejuvenation's theatre tiles (Goldenleaf Theatre and the Nightbox Theater, tileset 54): mauve panelled
+walls with purple pilasters; four framed bills (*Rain Fall*, *The Lady in Red*, a green one, and the oldest, pasted over
+years ago with "...ED K..." showing through: the script's poster, not a *Gilded King* reveal); the comedy-and-tragedy crest
+and a gilded beam over the auditorium doors, small chandeliers either side; a great chandelier over the red runner; velvet
+ropes, gilded urns, flowers, velvet loveseats and a sofa; the box office (talk across the counter). People: the usher, the
+**gym guide** (teaches the field: sound and dance moves get a cheer; Fighting is good, Ghosts don't care), a regular, the
+box-office clerk and five theatregoers. Doors (12,5) → auditorium; exit mat (12,14) → Saltmere (`SM_GYM`, map 147).
+`SnapEdges` is on for every gym room, so the camera never shows the black beyond a room's walls.
 
-### 154 Auditorium — the gym (25×25)
+### 154 Auditorium — the gym (25×30) — art pass 2026-11-19
 ```
-y2-3   red drape backdrop
-y4-8   the stage, house curtain IN (tile events, var STAGE_CURTAIN = V311)    Dorian (12,5) behind it
-y9     the apron: wing steps (1,9) · curtain rope (21,9) · stagehand (22,9)
-y10    the stage lip, steps at (12,10)
-y11    cross aisle
-y12-14 seat blocks x2-10 | central aisle x11-13 (velvet runner) | x14-22;  Rosalind (14,14) faces the aisle
-y15    cross aisle                                                          Ambrose (1,13) watches the side aisle
-y16-19 seat blocks;  Florian (10,18) faces the aisle
-y20-21 back of the house;  doors (12,23) → lobby
+y2     the gilded proscenium beam, the comedy-and-tragedy crest
+y3-5   the painted drop (Saltmere harbour at dusk) under the valance swag; the house curtain (V311) covers y3-10, x6-18
+y2-10  box seats in both side walls (x1-3, x21-23), each with a couple in it; gilded pilasters x4 and x20; the curtain's
+       gathered legs x5 and x19; the stage-left wing door (x1-3, y9-10; warp at (2,10)) and the dressing-room door (x21-23)
+y6-10  the stage: polished boards, tape marks; Dorian (12,7) behind the curtain
+y11    the apron, lit by the footlights; curtain rope (21,11), stagehand (22,11)
+y12    the stage front: a footlight per tile; steps (12,12)
+y13-15 the orchestra pit, a storey down: grand piano, five musicians at their stands, the conductor (10,15); crossed by
+       the gangway x11-13
+y16    the brass pit rail
+y17-28 the stalls: two blocks of 4×9 velvet seats either side of the red runner (x11-13), about 40 seated audience
+       members (the aisle seats talk), a great chandelier over the aisle, candelabra at the side aisles
+y29    the lobby doors (12,29)
 ```
-- **Trainers:** Juggler Florian and Beauty Rosalind stand at the aisle's edge, so walking up it means two battles; Juggler
-  Ambrose in the side aisle is optional. All use the Grand Stage field.
+- **Trainers:** Juggler Florian (11,25) and Beauty Rosalind (13,20) stand in the aisle (sight 2), so walking up it means
+  two battles; Juggler Ambrose (1,18) in the side aisle is optional. All use the Grand Stage field. Juno appears in the
+  front row (10,18) once one actor is beaten.
+- **Field Notes:** on the first step up the aisle, the Grand Stage pop-up from the script ("the audience reacts…", with
+  Larch's margin note), once per save (`pfm(:fn_grand_stage)`).
 - **The one interaction:** the curtain is in. The stagehand: "He won't come out till the curtain's up. That rope, there."
-  Pull it: V311 = 1, a small screen shake, the curtain events vanish and Dorian's page appears.
+  Pull it: V311 = 1, a small screen shake, the curtain events vanish, the painted drop and Dorian appear.
 - **Dorian:** `Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)`. Win → badge, TM42 Facade, Eevee
   "Understudy" (S110), the Pageant invitation.
 - **Apprentice:** none needed (nothing can go wrong). The room is still registered (`:ph_theatre`) so Debug reset/solve work.
-- **Proof:** 1 move, 2 states (rating 1).
+- **Proof:** 1 move, 2 states (rating 1), on the design grid and on the built map.
 - **After Tamsin's badge,** Dorian points at the stage-left wing: the **Playhouse Backstage** (DUNGEON_PUZZLES D9),
   which is the Revision 10 Gym 2 puzzle, kept whole.
 
@@ -265,22 +277,24 @@ It is not on the pattern card, and it moves something nobody expects: Tamsin's s
 ### State
 | ID | Name | Values | Room |
 |---|---|---|---|
-| V305 / V306 / V307 | `G1_HEDDLE_A/B/C` | 0–2 (plank column of gaps A, B, C) | 131 |
-| V308 | `G1_FOYER_HEDDLE` | 0–2 | 130 |
-| V309 | `G1_LOFT_BRIDGE` | 0 none · 1 P5→P6 · 2 P4→P6 | 132 |
-| S305 | `G1_CORD_ALPHA` | spool s1 destination | 132 |
-| S306 | `G1_CORD_BRASS` | spools s3/s4 destination (the brass wire also cycles V309) | 132 |
-| S307 | `G1_CORD_GAMMA` | spools s2/s5 destination | 132 |
-| S308 | `G1_KNOT_DONE` | Granny's Knot solved | 134 |
+| V305 / V306 / V307 | `LOOM_A/B/C` | 0–2 (plank column of loom beds A, B, C) | 131 |
+| V308 | `LOOM_FOYER` | 0–1 | 130 |
+| V309 | `LOOM_BRIDGE` | 0 none · 1 P5→P6 · 2 P4→P6 | 132 |
+| S305 | `LOOM_ALPHA` | spool s1 destination | 132 |
+| S306 | `LOOM_BRASS` | spools s3/s4 destination (the brass wire also cycles V309) | 132 |
+| S307 | `LOOM_GAMMA` | spools s2/s5 destination | 132 |
+| S308 | `LOOM_KNOT` | Granny's Knot solved | 134 |
 | S309 | spare | | |
 
 Tiles: `PLANK` = 3807 (passable cross-board, used today). Hanging threads use the `custom` strand tiles (`CU['strand_*']`).
 
-### 130 Foyer — TEACH "the first thread" (20×24 as built)
-**As built (Rev 14):** a straight hall: looms in pairs either side of an aisle, one loom bed across it. The plank starts at
-x5–6 (left); the heddle beside the aisle (11,10) is tied by a visible silk thread to it; **one pull** slides it into the
-aisle (V308 0/1). Bug Catcher Nell and Lass Orla flank the aisle; Tamsin's apology spiral; Pim (apprentice, `:lh_foyer`);
-the first loom (Ledger key). Stairs (15,2) → 131. Proof: 1 move, 2 states.
+### 130 Foyer — TEACH "the first thread" (20×25 as built, art pass 2026-11-19)
+**As built:** a straight hall, wall to wall: a four-row timber wall with two tall arched windows (their light falls across
+the floor and on into the loom bed), yarn shelves, silk drying on frames, dye vats, looms in pairs either side of a red
+runner, one loom bed across the room (its front beam, the floor a storey below, the warp over it). The plank starts at
+x5–6 (left); the heddle frame beside the aisle (11,12) is tied by a visible silk thread to it; **one pull** slides it into
+the aisle (V308 0/1). Bug Catcher Nell and Lass Orla flank the aisle; Tamsin's apology spiral; Pim (apprentice,
+`:lh_foyer`); the first loom (Ledger key). Stairs (15,4) → 131. Proof: 1 move, 2 states.
 
 *Revision 10 version (three balconies, period-3 heddle), kept for reference:*
 ```
@@ -315,10 +329,15 @@ pull is rewarded either way (balcony B holds the hint card, A the Potion).
 There is no failure state.
 
 ### 131 Weaving Hall — TWIST "two threads per heddle" (25×24 as built) — the gym's puzzle
-**As built (Rev 14):** the grid below shifted down two rows (three loom beds at rows 5–8, 11–13, 16–19). Tamsin stands on
-the top ledge at (11,3); the stairs behind her (12,1) go to the Upper Lofts once you hold her badge. Gentleman Bram is on the
-top ledge; Nell and Orla moved to the Foyer. Battle: `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`.
-Proof on the built map: 3 moves (Red, Gold, Green once each), 27 states, no soft-lock.
+**As built (art pass 2026-11-19):** the grid below shifted down four rows (three loom beds at rows 7–10, 13–15, 18–21).
+The north wall is four rows of timber with four tall arched windows; their light falls across the top walkway and into
+loom bed A. Each loom bed shows its depth: the walkway's front beam with the warp tied over it, the hall's floor a storey
+below in shadow (bolts of silk, yarn baskets, support posts at both ends), the warp stretched across, the back beam. The
+two heddles that lift a bed are tied round its beam in their colours at the left and right ends. Heddles are frames
+(colour + header), not posts. Tamsin stands on the top ledge at (11,5); the stairs behind her (12,3) go to the Upper
+Lofts once you hold her badge. Gentleman Bram is on the top ledge; Nell and Orla are in the Foyer. Battle:
+`Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`. Proof on the built map: 3 moves (Red, Gold, Green once
+each), 27 states, no soft-lock.
 ```
      0123456789012345678901234
 y0   ############E############    E (12,0) → 132 (2,22)
@@ -410,7 +429,7 @@ isn't Gran's. Pull it and watch the far side of the canopy." 3 the solution.
 **Reset:** Mossy → S305–307 OFF, V309 = 0, back to P1.
 
 ### 133 The Spindle — retired (Rev 14): Tamsin battles on 131's top ledge. Map 133 is no longer built.
-Tamsin, single battle, `:SILKWOOD`. Badge 1, TM89 U-turn, then the existing confession scene (`:ch2_tamsin`). New
+Tamsin, double battle, `:SILKWOOD`. Badge 2 (the Weft Badge), TM89 U-turn, then the confession scene (`:ch2_tamsin`). New
 line if S308 is on: "You finished Gran's row. ...She'd have shouted. Happily. Sorry — I'm crying, that's the Silkwood,
 it's very dusty."
 

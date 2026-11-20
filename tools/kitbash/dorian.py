@@ -14,8 +14,8 @@ from PIL import Image
 
 OUT = kb.WORK + '/passes'
 NAME, SHEET = 'DORIAN', '18_dorian.png'
-TITLE = ('DORIAN PELL - Gym 1 Warden (Normal), 56, former matinee idol. Battle front kitbash (80-px art, file 160x160). '
-         'Concept: the curtain call that never ended. Plum velvet + silver, white silk scarf, a silver-topped cane he doesn\'t need.')
+TITLE = ('DORIAN PELL, pass 2 - Gym 1 Warden (Normal), 56, former matinee idol. Battle front kitbash (80-px art, file 160x160). '
+         'Concept: the curtain call that never ended. Plum velvet + silver: opera cape with a silver lining, top hat, silk.')
 
 
 def sd(n):
@@ -154,7 +154,54 @@ def clean_lines(im):
 CAPE = None
 
 
+SYC = {H('f4f5f7'): H('8c3a7e'), H('ffffff'): H('b860a6'), H('aaabc1'): H('64205a'), H('626388'): H('3c0e34'),
+       H('4457ae'): H('f4f4fa'), H('293569'): H('c4c4d4'),                          # shirt -> white silk
+       H('2b2733'): H('1a0a18'), H('4e485b'): H('2c1428'), H('3e3748'): H('22101e'), H('575362'): H('3a1c36'),
+       H('3e3a49'): H('22101e')}
+
+
+def diantha_cape():
+    n = sd('diantha')
+    reg = mat.region(n.size, [[(33, 18), (51, 18), (52, 27), (47, 29), (47, 36), (58, 40), (65, 44), (62, 51), (52, 55),
+                               (40, 55), (34, 50), (33, 38)]])
+    c = mat.keep(n, reg)
+    m = {H('ffffff'): H('cfcadf'), H('f9e6e4'): H('e4e0ee'), H('dbc1d9'): H('9690ae'), H('aa9cb4'): H('6e6a88'),
+         H('8e688a'): H('5a2a54'), H('784858'): H('3a1a36'), BLACK: BLACK, H('dab2ae'): H('b860a6'), H('a6706e'): H('8c3a7e')}
+    p = c.load()
+    for y in range(80):
+        for x in range(80):
+            if p[x, y][3]:
+                p[x, y] = m.get(p[x, y], CLEAR)
+    return mat.clean_orphans(c)
+
+
+def top_hat(im, x, y):
+    T = dict(X); T.update({'h': H('1a1a24'), 'H': H('3a3a4c'), 'p': H('8c3a7e'), 'P': H('b860a6')})
+    return mat.patch(im, x, y, ['.kkkkkk.',
+                                '.khHHhk.',
+                                '.khHhhk.',
+                                '.khHhhk.',
+                                '.kpPppk.',
+                                'kkkkkkkk',
+                                'khhhhhhk',
+                                '.kkkkkk.'], T)
+
+
+def showman():
+    b = sd('sycamore')
+    b = mat.erase(b, mat.region(b.size, [[(32, 0), (54, 0), (54, 16), (48, 21), (36, 21), (32, 16)]]))
+    b = mat.recolour(b, SYC)
+    t = Image.new('RGBA', (80, 80), CLEAR); t.paste(owner_head(), (11, -1)); b.alpha_composite(t)
+    b = head_edits(b, 11, -1)
+    b = mat.under(b, diantha_cape(), 14, 2)                                     # the opera cape swept off his shoulder
+    b = top_hat(b, 9, 9)                                                         # hat sweep in the raised hand
+    b = mat.patch(b, 47, 24, ['.q.', 'qQq', '.g.'], {'q': H('d0304a'), 'Q': H('ff6a7a'), 'g': H('2e5a3a')})
+    return b
+
+
 def build(var='A'):
+    if var == 'S':
+        return showman()
     if var == 'A':
         fig = Image.new('RGBA', (80, 80), CLEAR)
         fig.paste(owner_body(), (6, 0))
@@ -192,16 +239,20 @@ def juggler():
     return j
 
 
-VARIANTS = [('A', "A: curtain call. One arm flung out to the house, the silver-topped cane hoisted like a baton, head back "
+VARIANTS = [('S', "S (pass 2): showman. Both arms wide to the house, top hat swept off and held aloft, head back laughing; a plum "
+                  "velvet frock coat with long tails over white silk, and an opera cape flung off one shoulder, its silver satin "
+                  "lining catching the light. Sycamore body (lab coat -> frock coat), Owner head re-made, Diantha's cape."),
+            ('A', "A (pass 1): curtain call. One arm flung out to the house, the silver-topped cane hoisted like a baton, head back "
                   "laughing. Plum velvet suit, white silk opera scarf, red rose. Owner class body; glasses off, pencil moustache, pompadour."),
             ('B', "B: the cane he doesn't need. Leaning on it like a man twice his age, grinning at the joke. Gentleman class body "
                   "(scarf and cane kept), Owner's head with the same edits, plum velvet, silver cane collar.")]
-PICK = 'A'
+PICK = 'S'
 REFS = [('sd:gentleman', 'Gentleman (official BW)'), ('sd:grimsley', 'Grimsley (official BW)'), ('sd:alder', 'Alder (official BW)'),
         ('rejuv:139', 'Rejuvenation front (Angie)')]
-DONORS = [('sd:owner', 'owner: body, flung arm, head (laugh kept) for A and B'),
+DONORS = [('sd:sycamore', 'sycamore: S body, arms wide, coat tails (repainted velvet)'), ('sd:diantha', 'diantha: cape cloth for S, silver lining'),
+          ('sd:owner', 'owner: head for all (glasses off, moustache, pompadour); body for A'),
           ('sd:gentleman', 'gentleman: silk scarf (A), whole body + cane for B')]
-NOTE = ('Hand pixels: eyes and brows where the glasses were, pencil moustache, pompadour wave, the cane in A (straight shaft + silver knob) '
+NOTE = ('Hand pixels: top hat (S), eyes and brows where the glasses were, pencil moustache, pompadour wave, the cane in A (straight shaft + silver knob) '
         'and the fist round it, B\'s silver cane collar, the rose. Tried and dropped: Lance\'s cape (read as a flat slab), the Juggler\'s cape '
         '(a bag under the arm) and a Juggler body (read as a vampire). Who does it look like? No named character: Owner and Gentleman are classes.')
 
