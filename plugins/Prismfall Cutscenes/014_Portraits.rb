@@ -54,11 +54,38 @@ module Prismfall
     @people = {}
     @current = nil
 
+    # Portrait use (user, 2026-11-20: "i dont think we need a portrait for every
+    # conversation"). Only the story cast gets a bubble. Anyone else tagged with
+    # \pf[...] or pf_say gets the plain message box with their "Name: " label.
+    # Add a character with `Portrait.register(:ID, cast: true)` or by listing them here.
+    # See story/13_CUTSCENES.md, "Portrait use".
+    ONLY_CAST = true
+    CAST = %i[
+      PLAYER
+      KESTREL JUNO
+      VOSS VALEN MOURNER ROWAN
+      LARCH EDDA WICK CALLA
+      DORIAN TAMSIN MARISOL ROOK SAHAR CORVIN BRANN KAITO ANJA
+      ODESSA ILSA BASTIAN YSOLDE MAGNUS NYX CELESTINE SIGRUN
+      HESPER TEO THISTLE SABLE KROLL QUENT MARCHETTI HOLLIS PIP MAUD DEX MORWEN
+      MAELIS DASK EIRIK HROTHGAR KASSAN RENATA GUTTER DELPHINE
+      VESPER WENNA MARTIN
+    ]
+
     class << self
       attr_reader :current
 
       def register(id, **data); @people[id.to_s.upcase.to_sym] = data; end
       def person(id); return @people[id.to_s.upcase.to_sym] || {}; end
+
+      # true when this speaker should get a portrait bubble
+      def cast?(id)
+        return true if !ONLY_CAST
+        key = id.to_s.upcase.to_sym
+        base = key.to_s.sub(/_[AB]\z/, "").to_sym   # PLAYER_A / PLAYER_B
+        return true if CAST.include?(key) || CAST.include?(base)
+        return person(key)[:cast] == true
+      end
 
       def display_name(id)
         return person(id)[:name] || id.to_s.split("_").map(&:capitalize).join(" ")
@@ -495,6 +522,8 @@ if defined?(pbMessageDisplay) && !defined?(prismfall_portrait_pbMessageDisplay)
   def pbMessageDisplay(msgwindow, message, letterbyletter = true, commandProc = nil, &block)
     text, spec = Prismfall::Portrait.extract(message)
     return prismfall_portrait_pbMessageDisplay(msgwindow, message, letterbyletter, commandProc, &block) if !spec
+    # Not story cast: plain message box, tag stripped (the "Name: " label stays).
+    return prismfall_portrait_pbMessageDisplay(msgwindow, text, letterbyletter, commandProc, &block) if !Prismfall::Portrait.cast?(spec[:id])
     bubble = Prismfall::Portrait.open(spec, msgwindow)
     begin
       return prismfall_portrait_pbMessageDisplay(msgwindow, text, letterbyletter, commandProc) do

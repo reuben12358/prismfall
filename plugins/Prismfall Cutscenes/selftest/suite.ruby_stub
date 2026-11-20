@@ -407,6 +407,11 @@ check "silhouette fallback + face emotes", b && b.art_kind == :silhouette && b.e
 $shown = []
 pbMessage("Just text.")
 check "plain message passes through", $shown.last == "Just text." && seen.length == 1
+n_before = seen.length
+pbMessage("\\pf[SHOPKEEPER,happy]Shopkeeper: Welcome!")
+pf_say(:ACCORD_GUARD, :angry, "Halt.")
+check "non-cast speakers get the plain box, no bubble", seen.length == n_before && $shown.last == "Accord Guard: Halt." && P.current.nil?, [seen.length, $shown.last].inspect
+P.register(:NOBODY, cast: true)
 pf_say(:NOBODY, :deadpan, "Hm.")
 # event 2 stands near the top edge, so the bubble sits beside it instead of over it
 check "pf_say falls back to the running event", $shown.last == "Nobody: Hm." && (seen.last.center[0] - 400).abs.between?(60, 110), [$shown.last, seen.last.center].inspect
