@@ -1,5 +1,8 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 17 (user, 2026-11-19 17:17) <<<
+**Juno's portrait is the pass-3 "composite A"** (the middle row of art/previews/15_juno_portraits.png). User: "juno pass 5 looks bad, i much rather prefer at the middle one, she looks damn near cool in that" and "something about she looking like burgh in pass 1 is still unsettling to me". Pass 3 is reinstalled. Any polish must keep that face and look: no rebuild onto a different base face. Lesson for the whole cast: the user prefers the cleaner, brighter, bigger-eyed B2W2-VS style of pass 3 over the more realistic, painterly Rejuvenation/Desolation faces, and anything that reads even slightly like a known character (Burgh) is a fail.
+
 ## >>> REVISION 16 (user, 2026-11-19 15:48) <<<
 **The game is meant to be challenging. No handing out counters to the next gym.** The user: "we cant go around giving out strong fighting types before the gyms! the game is meant to be challenging!!! look at how reborn and rejuv distribute pokemon, do it like that."
 - **Pokémon distribution follows Reborn and Rejuvenation**, studied from their actual encounter, gift and event data, not from memory.

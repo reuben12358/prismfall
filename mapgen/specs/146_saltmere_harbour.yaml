@@ -1,4 +1,4 @@
-# Saltmere - The Harbour (146). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv) - edit that script.
+# Saltmere - The Harbour (146). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.
 id: 146
 name: Saltmere - Harbour & Breakwater
 bgm: Lerucean Town
@@ -14,42 +14,54 @@ metadata:
   BattleBack: field
   Weather: [Rain, 10]
 biome: harbour
+connections: []
+fog: {name: prismfall_seamist, opacity: 36, blend: 0, zoom: 100, sx: 2, sy: 0}
 raw: data/raw/146.npy
-tileset: 51
+tileset: 55
 events:
 - type: door
-  at: [52, 26]
+  at: [55, 21]
   gfx: ['', 0, 2]
   name: Harbour Office door
   link: SM_HARBOUR
 - type: warp
-  at: [42, 3]
+  at: [42, 0]
   to: {map: 140, x: 56, y: 70, dir: retain}
 - type: warp
-  at: [43, 3]
+  at: [43, 0]
   to: {map: 140, x: 57, y: 70, dir: retain}
 - type: warp
-  at: [44, 3]
+  at: [44, 0]
   to: {map: 140, x: 58, y: 70, dir: retain}
 - type: warp
-  at: [45, 3]
+  at: [45, 0]
   to: {map: 140, x: 59, y: 70, dir: retain}
 - type: warp
-  at: [46, 3]
+  at: [46, 0]
   to: {map: 140, x: 60, y: 70, dir: retain}
 - type: warp
-  at: [47, 3]
+  at: [47, 0]
   to: {map: 140, x: 61, y: 70, dir: retain}
 - type: sign
-  at: [53, 27]
+  name: Harbour Office sign
   text: 'SALTMERE HARBOUR OFFICE
 
-    All ferries suspended by order of the quarantine.'
-  name: SALTMERE HARBOUR OFFICE
+    All ferries suspended by order of the Accord. Dues payable within. Biscuits are not a bribe.'
+  at: [57, 22]
+  post: false
+- type: sign
+  name: Breakwater sign
+  text: THE BREAKWATER. By tradition, the Queen's barge is booed from here. Please boo responsibly.
+  at: [30, 61]
+  post: false
+- type: sign
+  name: Quay sign
+  text: 'QUAY STREET - The West Mole, the fish market and the boat steps. East: the Legion berth and the breakwater.'
+  at: [44, 32]
   post: false
 - type: npc
   name: Stevedore
-  at: [30, 37]
+  at: [26, 34]
   sprite: NPC 07
   dir: down
   move: random
@@ -57,19 +69,200 @@ events:
 
     Free port means free. [TODO story]'
 - type: npc
-  name: Salt raker
-  at: [9, 10]
-  sprite: NPC 11
-  dir: right
-  text: 'Salt raker: The pans glitter best at low sun. Mind the brine. [TODO story]'
-- type: npc
   name: Old angler
-  at: [41, 54]
+  at: [8, 57]
   sprite: NPC 05
   dir: down
   text: 'Old angler: Something big has been circling the breakwater since the Shatter talk began. [TODO story]'
-- type: sign
-  at: [70, 59]
-  text: The breakwater. By tradition, the Queen's tax-barges are turned back here - and booed.
-  name: THE BREAKWATER BY TRADITION THE QUEENS TAXBARGES ARE TURNED BACK HERE  AND BOOED
-  post: false
+- type: npc
+  name: Salt raker
+  at: [36, 8]
+  sprite: NPC 11
+  dir: right
+  text: 'Salt raker: The pans glitter best at low sun. Mind the brine. [TODO story]'
+- type: event
+  name: Fisherman
+  pages:
+  - commands: ['Fisherman: Ordinary fish. Ordinary sea. Fifty years and never seen a thing out of the way. I find that very restful.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_FISHERMAN, dir: down}
+  at: [4, 45]
+- type: event
+  name: Old Sailor
+  pages:
+  - commands: ['Old Sailor: Saltmere won''t wilt you, they say. Born here, live anywhere. It''s the one Plate that doesn''t hold on. Kindest Plate there
+        is.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: trainer_SAILOR, dir: down}
+  at: [84, 40]
+- type: event
+  name: Stagehand on a smoke break
+  pages:
+  - commands:
+    - 'Stagehand on a smoke break: Opening night''s tonight. The Accord sends an inspector to make sure we say every line of the official text.'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 20, dir: down}
+  - commands: ['Stagehand on a smoke break: He sleeps through the second act. We''ve timed it. Eleven minutes in, every year.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 20, dir: down}
+    cond: {self: A}
+  at: [38, 27]
+- type: event
+  name: HiddenItem stardust
+  pages:
+  - commands:
+    - if: pbItemBall(:STARDUST)
+      then:
+      - It blew in on the salt.
+      - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+  - commands: []
+    trigger: action
+    move: fixed
+    cond: {self: A}
+  at: [23, 61]
+- type: npc
+  name: Legion recruiter
+  sprite: NPC 21
+  dir: left
+  text: 'Legion recruiter: The Ashkaar Legion pays in coin and glory! ...Mostly coin. The glory''s on back order.'
+  at: [80, 47]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 08
+  dir: down
+  move: fixed
+  text: Don't stand under the gulls by the fish stalls.
+  at: [45, 30]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 06
+  dir: right
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [40, 29]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 14
+  dir: left
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [48, 22]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 15
+  dir: down
+  move: random
+  text: My cousin's in the Hound chorus. He says 'GRR' professionally.
+  at: [55, 31]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 15
+  dir: right
+  move: random
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [52, 32]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 09
+  dir: up
+  move: random
+  text: You can tell an outlander by the way they look up at the roofs.
+  at: [43, 22]
+- type: npc
+  name: Townsfolk 7
+  sprite: NPC 06
+  dir: down
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [30, 31]
+- type: npc
+  name: Townsfolk 8
+  sprite: NPC 03
+  dir: left
+  move: random
+  text: The free port's free. The rent isn't.
+  at: [54, 29]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 09
+  dir: up
+  move: random
+  text: Salt's up a copper a sack. Blame the weather. Everyone does.
+  at: [2, 35]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 15
+  dir: down
+  move: random
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [39, 35]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 21
+  dir: left
+  move: fixed
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [87, 35]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 11
+  dir: up
+  move: fixed
+  text: My grandmother booed a Queen's barge in AF 92. She still has the voice for it.
+  at: [42, 34]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 07
+  dir: right
+  move: fixed
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [12, 34]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 12
+  dir: right
+  move: random
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [66, 34]
+- type: npc
+  name: Townsfolk 7
+  sprite: NPC 20
+  dir: right
+  move: random
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [49, 35]
+- type: npc
+  name: Townsfolk 8
+  sprite: NPC 22
+  dir: down
+  move: random
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [74, 35]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 08
+  dir: right
+  move: fixed
+  text: My cousin's in the Hound chorus. He says 'GRR' professionally.
+  at: [87, 60]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 02
+  dir: right
+  move: fixed
+  text: Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.
+  at: [80, 59]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 23
+  dir: left
+  move: fixed
+  text: Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.
+  at: [83, 57]

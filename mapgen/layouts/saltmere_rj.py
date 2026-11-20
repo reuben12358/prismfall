@@ -472,6 +472,104 @@ def build_140(prev=None):
     return d
 
 
+# ====================================================================================================== 146
+def build_146(prev=None):
+    """The Harbour: the causeway lands on the quay town; Harbour Square and the customs house; warehouse row on Quay
+    Street with cranes; the basin between the West Mole and the East Mole with two ships moored; the fish market;
+    the Legion barge berth; the breakwater with the striped light at its end"""
+    W, H = 88, 72
+    m = new_map(146, {1: 'qy', 2: 'rw'})
+    m.cls[:, :] = 'w'; m.ht[:, :] = 0
+    TOWN0, QUAY = 6, 36                                                              # town plateau rows 6..36 (lip 36)
+    m.ht[TOWN0:QUAY + 1, :] = 1; m.cls[TOWN0:QUAY + 1, :] = 'T'
+    m.ht[:TOWN0, 42:48] = 1; m.cls[:TOWN0, 42:48] = 'f'                            # the causeway from the Upper Town
+    m.ht[QUAY + 1:59, 0:10] = 1; m.cls[QUAY + 1:59, 0:10] = 'f'                     # the West Mole
+    m.ht[QUAY + 1:63, 78:88] = 1; m.cls[QUAY + 1:63, 78:88] = 'f'                   # the East Mole
+    m.ht[60:63, 24:88] = 1; m.cls[60:63, 24:88] = 'f'                               # the breakwater
+    m.ht[55:63, 20:27] = 1; m.cls[55:63, 20:27] = 'f'                               # the light's footing at its west end
+    m.cls[63:, :] = 'W'; m.cls[64:, :] = 'W'
+    m.blob(80, 68, 6, 3, 'w', seed=3, only='W'); m.blob(12, 66, 8, 4, 'w', seed=4, only='W')
+    # ---- stairs: down to the boat steps on both moles, onto the breakwater's landing
+    m.stairs(30, QUAY, w=3, kit_rows=3, c='c')
+    m.plan_cliffs()
+    S = lambda x, y, w, h, c='c': m.rect(x, y, w, h, c, only='T.')
+    S(42, TOWN0, 6, 16)                                                              # Customs Street (the causeway's end)
+    S(0, TOWN0, 88, 3)                                                               # the Rope Walk along the lake wall
+    S(18, 9, 2, 24); S(70, 9, 2, 24)                                                 # Net Lane, Tar Lane
+    m.rect(30, 22, 31, 11, 'f', only='T.c')                                         # Harbour Square
+    m.rect(0, 33, 88, 4, 'f', only='T.c')                                           # Quay Street (the apron)
+    # ---- civic: the customs house (Harbour Office) on the square; the fish market hall
+    d = {}
+    d['office'] = put(m, 'cv_customs', 50, 14, 'SM_HARBOUR', 'Harbour Office door')
+    keep_door_clear(m, d['office'])
+    put(m, 'gt_tower', 30, 16)                                                       # the harbour bell tower
+    # ---- warehouse row on Quay Street, shops and lodgings behind
+    block(m, 0, 17, 9, 32, WARES + SHOPS, 31, alley_every=0, setback=0)
+    block(m, 20, 41, 9, 21, HOUSES + SHOPS, 32, alley_every=12)
+    block(m, 20, 29, 22, 32, WARES, 33, alley_every=0, setback=0)
+    block(m, 48, 49, 9, 21, HOUSES, 34)
+    block(m, 60, 69, 9, 21, SHOPS + HOUSES, 35)
+    block(m, 61, 69, 22, 32, WARES, 36, alley_every=0, setback=0)
+    block(m, 72, 87, 9, 32, WARES + ['sp_tav', 'sp_inn', 'sp_fish', 'sp_chand'], 37, alley_every=0, setback=0)
+    m.cls[m.cls == 'T'] = 'c'
+    # ---- events
+    E = [{'type': 'warp', 'at': [42 + i, 0], 'to': {'map': 140, 'x': 56 + i, 'y': 70, 'dir': 'retain'}} for i in range(6)]
+    ev = old_events(146); tf = townsfolk()
+    E.append(seat(m, {'type': 'sign', 'name': 'Harbour Office sign', 'text': 'SALTMERE HARBOUR OFFICE\nAll ferries suspended by order of the Accord. Dues payable within. Biscuits are not a bribe.'}, d['office'][0] + 2, d['office'][1] + 1, 'f'))
+    E.append(seat(m, {'type': 'sign', 'name': 'Breakwater sign', 'text': ev.get('THE BREAKWATER', {}).get('text') or "THE BREAKWATER. By tradition, the Queen's barge is booed from here. Please boo responsibly."}, 30, 61, 'f'))
+    E.append(seat(m, {'type': 'sign', 'name': 'Quay sign', 'text': 'QUAY STREET - The West Mole, the fish market and the boat steps. East: the Legion berth and the breakwater.'}, 44, 32, 'f'))
+    E.append(seat(m, ev['Stevedore'], 26, 34, 'f'))
+    E.append(seat(m, ev['Old angler'], 8, 57, 'f'))
+    E.append(seat(m, ev['Salt raker'], 36, 8, 'c'))
+    for n, x, y in (('Fisherman', 4, 45), ('Old Sailor', 84, 40), ('Stagehand on a smoke break', 38, 27)):
+        if n in tf: E.append(seat(m, tf[n], x, y))
+    E.append(seat(m, SE.hidden('HiddenItem stardust', 'STARDUST', 'It blew in on the salt.'), 23, 61, 'f'))
+    E.append(seat(m, {'type': 'npc', 'name': 'Legion recruiter', 'sprite': 'NPC 21', 'dir': 'left', 'text':
+                      "Legion recruiter: The Ashkaar Legion pays in coin and glory! ...Mostly coin. The glory's on back order."}, 80, 47, 'f'))
+    m.events += E
+    for e in E: m.taken[e['at'][1], e['at'][0]] = True
+    for x, y in K.incoming(146): m.taken[y, x] = True
+    # ---- the square and the quay: cranes, freight, the fish market, nets, bollards; the berth and the breakwater
+    props(m, (('hb_crane', 22, 31), ('hb_crane', 34, 31), ('hb_crane', 58, 31), ('hb_crane', 66, 31)), on='f', r=2)
+    props(m, (('pf_fountain', 43, 25), ('pf_stall0', 32, 25), ('pf_stall2', 32, 29), ('hb_fishstall', 52, 23), ('pf_stall3', 56, 28),
+              ('hb_tubs', 36, 29), ('pf_logbench', 40, 31), ('pf_logbench', 48, 31), ('pf_morris', 40, 23), ('pf_well', 58, 24),
+              ('hb_fish', 49, 27), ('hb_tables', 36, 23)), on='f')
+    props(m, (('hb_crates4', 3, 33), ('hb_boxes', 9, 34), ('hb_barrels', 16, 33), ('hb_boxes2', 21, 34), ('hb_cask', 28, 33),
+              ('hb_crates4', 60, 33), ('hb_barrels', 64, 34), ('hb_boxes', 68, 33), ('hb_keg', 77, 34), ('hb_crates4', 81, 33),
+              ('hb_rugline', 6, 40), ('hb_washline', 3, 50), ('hb_boxes2', 6, 54), ('hb_tubs', 2, 42),
+              ('sh_campfire', 81, 49), ('hb_rope', 84, 51), ('hb_banner', 86, 44), ('hb_banner', 79, 44), ('hb_barrels', 85, 55),
+              ('hb_crates4', 40, 61), ('hb_rope', 50, 61), ('hb_crates4', 66, 61), ('pf_logbench', 58, 61)), on='f')
+    for x in (2, 12, 20, 27, 37, 44, 52, 60, 68, 76, 86):
+        if not (30 <= x <= 32): overs(m, 'hb_bollard%d' % (x % 2), x, QUAY, z=2); m.taken[QUAY, x] = True
+    for y in (40, 46, 52): overs(m, 'hb_bollard0', 9, y, z=2); overs(m, 'hb_bollard1', 78, y + 2, z=2)
+    props(m, (('hb_fishstall', 2, 44), ('hb_tubs', 6, 47), ('hb_fish', 2, 49), ('hb_crates4', 4, 52), ('hb_barrel', 7, 55)), on='f')
+    lamps(m, [(x, 33) for x in range(6, 86, 10)] + [(x, 60) for x in range(30, 86, 9)] + [(8, 40), (8, 50), (79, 40), (79, 56), (42, 12), (47, 12),
+              (31, 22), (60, 22), (10, 8), (30, 8), (60, 8), (80, 8)])
+    string_lights(m, 30, 41, 22); string_lights(m, 72, 87, 32)
+    gardens(m, 146); courts(m, 146)
+    sq = [(x, y) for y in range(22, 33) for x in range(30, 61)]; qy = [(x, y) for y in range(33, 36) for x in range(0, 88)]
+    crowd(m, sq, 8, 1461); crowd(m, qy, 8, 1462); crowd(m, [(x, y) for y in range(37, 62) for x in range(78, 88)], 3, 1463)
+    m.paint(); dry_footings(m)
+    ship(m, 21, -11); ship(m, -6, -11)                                               # two ships alongside Quay Street
+    boats(m, (('hb_boat1', 40, 47), ('hb_boat2', 46, 52), ('hb_boat3', 36, 55), ('hb_boat4', 14, 62), ('hb_boat1', 62, 64),
+              ('hb_boat2', 70, 56), ('hb_boat3', 10, 4), ('hb_boat4', 60, 2)))
+    for x, y in ((50, 68), (6, 69), (31, 66)):
+        props(m, (('ak_rock2', x, y),), on='W', r=1) if False else None
+    m.stamps.append(('lighthouse', 21, 46))
+    for dy in range(9, 16): m.taken[46 + dy, 21:26] = True
+    L = np.array(STAMPS['lighthouse']['layers'])
+    for z in range(3):
+        for dy in range(L.shape[1]):
+            for dx in range(L.shape[2]):
+                t = int(L[z, dy, dx])
+                if t: m.L[2 if 46 + dy < 56 else max(1, z), 46 + dy, 21 + dx] = t
+    h = head(146, '146_saltmere_harbour.yaml', biome='harbour', tone=[6, 4, -8, 0], connections=[],
+             fog={'name': 'prismfall_seamist', 'opacity': 36, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0})
+    m.write(146, h, "# Saltmere - The Harbour (146). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.\n")
+    if prev: m.preview(prev, 0.5)
+    return d
+
+
 def main():
     a = sys.argv[1:]
     which = [x for x in a if x.isdigit()] or ['140', '146', '147']

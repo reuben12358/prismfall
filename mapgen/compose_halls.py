@@ -24,19 +24,23 @@ REG = os.path.join(OUT, 'tilesets_prismfall.json')
 TID, NAME = 54, 'PF Rejuv Halls'
 MI = ('rejuvenation', 17, 'Multi-Interiors', (7, 17, 220))
 MG = ('rejuvenation', 120, 'Multi-Gym Interior', (400, 401))
+NM = ('rejuvenation', 123, 'Nightmare City', (151,))      # Nightbox Theater: box seats, chandeliers, velvet seats, the mask banner
+CH = ('rejuvenation', 72, 'Chrisola Hotel', [45, 46, 47, 48, 135, 136, 137])   # sheet rows: the grand pianos (side view, open from above)
 SOLID_PF = (17876, 17877)      # the loom's upper row: looms are walls between the Weaving Hall's walkways
 SOLID_MG = (4691, 4692, 4697,  # theatre seats and the house curtain's fringe: solid (the aisles are the way through)
             4704, 4705, 4706, 4712, 4713, 4714, 4720, 4721, 4722, 4634, 4635, 4636, 4642, 4643, 4644, 4650, 4651, 4652,
             5184, 5185, 5186, 5192, 5193, 5194, 5200, 5201, 5202)   # wall posters: never a way onto the wall
 PF_STAMPS = ['pf_p_lantern', 'pf_p_silk', 'pf_p_silk1', 'pf_p_strand_w', 'pf_p_strand_p', 'pf_p_web', 'pf_p_web1', 'pf_p_loom',
-             'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y', 'pf_p_laundry', 'pf_p_awning', 'pf_lantern']
+             'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y', 'pf_p_laundry', 'pf_p_awning', 'pf_lantern',
+             'hb_dyeline', 'hb_rugline', 'hb_rugline2', 'hb_washline', 'hb_crates4', 'hb_barrels', 'hb_banner']
 
 
 def rows_part(game, tid, fname, maps):
+    """maps: a tuple of map ids (take every sheet row those maps use) or a list of sheet rows."""
     ts = RR.tileset(game, tid)
     sheet = Image.open(os.path.join(RR.GAMES[game], 'Graphics', 'Tilesets', fname + '.png')).convert('RGBA')
-    rows = set()
-    for mid in maps:
+    rows = set(maps) if isinstance(maps, list) else set()
+    for mid in (maps if isinstance(maps, tuple) else ()):
         L, _ = RR.load(game, mid)
         rows |= {(int(t) - 384) // 8 for t in np.unique(L) if t >= 384}
     rows = sorted(r for r in rows if (r + 1) * 32 <= sheet.height)
@@ -169,10 +173,10 @@ def spool():
 
 
 def main():
-    parts = []; data = {'mi': {}, 'mg': {}, 'pf': {}, 'cu': {}}
+    parts = []; data = {'mi': {}, 'mg': {}, 'nm': {}, 'ch': {}, 'pf': {}, 'cu': {}}
     pas = [0] * 384; pri = [0] * 384; row = 0
     tiles_by_part = {}
-    for key, (game, tid, fname, maps) in (('mi', MI), ('mg', MG)):
+    for key, (game, tid, fname, maps) in (('mi', MI), ('mg', MG), ('nm', NM), ('ch', CH)):
         im, mp, p, q = rows_part(game, tid, fname, maps)
         for src, (i, c) in mp.items():
             data[key][str(src)] = 384 + (row + i) * 8 + c
@@ -216,6 +220,37 @@ def main():
         add('flat_%s_hung' % n, glyph(tint(src('mg', 4689), 0.08, 0.25, 0.8), n, (240, 230, 200, 255)), 15)
     add('gangplank', tint(plank, 0.58, 0.5, 1.1)); add('log', tint(plank, 0.09, 1.1, 0.8)); add('dais', tint(plank, 0.0, 1.2, 1.0))
     add('rostrum', tint(plank, 0.13, 0.9, 1.25))
+    # ---- art pass (2026-11-19): the Playhouse's proscenium, painted drop, footlights and orchestra pit; the Weaving
+    # Hall's depth under the loom beds (hall_art.py, drawn on the 16-px grid and doubled like the tiles around them)
+    import hall_art as HA
+    for (cx, cy), t in HA.tiles(HA.backdrop()).items(): add('backdrop_%d_%d' % (cx, cy), t, 15)
+    for p in ('cap', 'shaft', 'base'): add('column_' + p, HA.gold_column(p), 15)
+    for p in ('l', 'mid', 'r'): add('beam_' + p, HA.proscenium_beam(p), 15)
+    for (cx, cy), t in HA.tiles(HA.mask_crest()).items(): add('crest_%d' % cx, t, 15)
+    add('footlight', HA.footlight(), 15); add('glow', HA.glow(), 0)
+    for i, f in enumerate((1241, 1242, 1243)): add('pit_%d' % i, HA.pit_floor(src('mi', f)), 15)
+    for p in ('l', 'mid', 'r'): add('pit_rail_' + p, HA.pit_rail(p), 15)
+    add('music_stand', HA.music_stand(), 15)
+    for p in ('l', 'mid', 'r'): add('loom_face_' + p, HA.loom_face(p), 15)
+    for n in ('red', 'gold', 'green'): add('loom_face_' + n, HA.loom_face('mid', COLS[n]), 15)
+    for dpt in range(4):
+        for i, f in enumerate((1241, 1242, 1243)): add('lower_%d_%d' % (dpt, i), HA.lower_floor(src('mi', f), dpt), 15)
+    add('warp_mid', HA.warp_overlay('mid'), 15); add('warp_back', HA.warp_overlay('bot'), 15)
+    for k in ('full', 'l', 'r'):
+        add('light_' + k, HA.light(k), 0)                          # on walkable boards
+        add('light_%s_x' % k, HA.light(k), 15)                     # over a loom bed (keeps it solid)
+    for p in ('mid', 'band', 'base'): add('tpost_' + p, HA.post(p), 15)
+    for p in ('top', 'mid', 'sill'):
+        for (cx, cy), t in HA.tiles(HA.window(p)).items(): add('window_%s_%d' % (p, cx), t, 15)
+    for n in ('red', 'gold', 'green'):
+        add('heddle_%s_top' % n, HA.heddle_frame(COLS[n], 'top'), 0, 1)   # the frame's header, drawn over the walker
+        add('heddle_%s_bot' % n, HA.heddle_frame(COLS[n], 'bot'), 15)
+    for n, c in (('bolt_r', (170, 50, 60)), ('bolt_b', (60, 90, 170)), ('bolt_y', (200, 160, 60)), ('bolt_p', (150, 70, 150))):
+        add(n, HA.dim(HA.silk_bolt(c)), 15)
+    add('basket', HA.dim(HA.yarn_basket([RED, GOLD, GREEN])), 15)
+    for n in ('hb_crates4', 'hb_barrels', 'pf_p_silk', 'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y'):   # props on the floor below, dimmed
+        for t in sorted({int(t) for t in np.array(st[n]['layers']).reshape(-1) if t}):
+            k = t - 384; add('dim_%d' % t, HA.dim(pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32))), 15)
     cu = Image.new('RGBA', (256, 32 * ((len(cells) + 7) // 8)), (0, 0, 0, 0))
     for i, (im, p, q, (key, name)) in enumerate(cells):
         cu.paste(im, (i % 8 * 32, i // 8 * 32)); data[key][name] = 384 + row * 8 + i
