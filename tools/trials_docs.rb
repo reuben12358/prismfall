@@ -228,6 +228,7 @@ ids.each_with_index do |id, i|
   moves = " — palettes: " + d[:variants].keys.join(" / ") if d[:variants]
   q = d[:quest] ? (TR.get(d[:quest]) ? "#{TR.get(d[:quest])[:title]} `#{d[:quest]}`" : d[:quest].to_s) : ""
   kind = (d[:kind] == :battle && d[:catchable] == false) ? "spar (can't be caught)" : (kinds[d[:kind]] || d[:kind])
+  kind = "boss battle (guards a reward; doesn't join)" if d[:kind] == :boss && !d[:joins]
   ev << "| #{i + 1} | **#{mon_label(id)}**#{esc(moves)} `#{id}` | #{kind} | #{d[:chapter]} | #{d.key?(:badges) ? d[:badges] : ''} | #{esc(d[:where])} (#{d[:map]}) | " \
         "#{esc(d[:trigger])} | #{esc(d[:why])} | #{esc(q)} | #{d[:stub] ? 'designed' : 'implemented'} |"
 end

@@ -48,7 +48,7 @@ module PrismfallMega
     # The Ring-Day (7 badges)
     :AGGRONITE     => { :badges => 7,  :how => :story,  :map => 244, :where => "Hearthguild Hall, Cindervault: Brann, with the Mega Ring", :source => :AS_RING_DAY },
     :SABLENITE     => { :badges => 8,  :how => :hidden, :map => 685, :where => "Grudgestone Quarry B1F, the gem seam the Sableye feed on", :source => :MEGA_STONE_SABLENITE },
-    :SCEPTILITE    => { :badges => 8,  :how => :hidden, :map => 682, :where => "The Royal Chase, the old hunting lodge's mantel", :source => :MEGA_STONE_SCEPTILITE },
+    :SCEPTILITE    => { :badges => 8,  :how => :item  , :map => 682, :where => "The Royal Chase, the old hunting lodge's mantel", :source => :MEGA_STONE_SCEPTILITE },
     :SWAMPERTITE   => { :badges => 8,  :how => :hidden, :map => 680, :where => "The Rootdeep, the underground river (Surf)", :source => :MEGA_STONE_SWAMPERTITE },
     :BLASTOISINITE => { :badges => 8,  :how => :hidden, :map => 681, :where => "Prism Falls, behind the falls (Surf)", :source => :MEGA_STONE_BLASTOISINITE },
     :AUDINITE      => { :badges => 8,  :how => :quest,  :map => 223, :where => "Corvin Mott's Infirmary, Mirefen: Wenlow", :source => :NA_BEDSIDE_MANNER },
@@ -57,11 +57,11 @@ module PrismfallMega
     :BANETTITE     => { :badges => 9,  :how => :quest,  :map => 547, :where => "Thistledown Manor attic: the doll who waited", :source => :EL_DOLL_WHO_WAITED },
     :CHARIZARDITEY => { :badges => 10, :how => :hidden, :map => 726, :where => "Cloudstair Summit, the wind-scoured ledge", :source => :MEGA_STONE_CHARIZARDITEY },
     :PIDGEOTITE    => { :badges => 10, :how => :quest,  :map => 325, :where => "Gale Post Hall, Skyreach: the dead-letter bag", :source => :ZE_RETURN_TO_SENDER },
-    :ALTARIANITE   => { :badges => 10, :how => :hidden, :map => 732, :where => "The Tetherline, a cloud-nest on a tether pylon", :source => :MEGA_STONE_ALTARIANITE },
+    :ALTARIANITE   => { :badges => 10, :how => :item  , :map => 732, :where => "The Tetherline, a cloud-nest on a tether pylon", :source => :MEGA_STONE_ALTARIANITE },
     :SLOWBRONITE   => { :badges => 10, :how => :hidden, :map => 723, :where => "Ebbmouth Sea Grotto, the tide-pool shelf", :source => :MEGA_STONE_SLOWBRONITE },
     :CAMERUPTITE   => { :badges => 10, :how => :quest,  :map => 244, :where => "Hearthguild Hall, Cindervault: Brann's spare", :source => :AS_FORGE_REMEMBERS },
     :CHARIZARDITEX => { :badges => 11, :how => :boss,   :map => 248, :where => "Pyre Keep Dragon Roosts: Old Cinder, a retired Legion war-Charizard", :source => :AS_OLD_CINDER },
-    :GLALITITE     => { :badges => 11, :how => :hidden, :map => 705, :where => "Frostfang Pass 2F, behind the thawed ice wall", :source => :MEGA_STONE_GLALITITE },
+    :GLALITITE     => { :badges => 11, :how => :item  , :map => 705, :where => "Frostfang Pass 2F, behind the thawed ice wall", :source => :MEGA_STONE_GLALITITE },
     :ALAKAZITE     => { :badges => 12, :how => :puzzle, :map => 345, :where => "Lucent Athenaeum, the Sealed Stacks: the Unread Shelf", :source => :MEGA_STONE_ALAKAZITE },
     :AERODACTYLITE => { :badges => 12, :how => :quest,  :map => 209, :where => "Sahar's Dig Lab, Duneholt: bring her a revived Aerodactyl", :source => :OS_AMBER_AGAIN },
     :PINSIRITE     => { :badges => 12, :how => :boss,   :map => 703, :where => "Gossamer Heartwood: the Old Pincer", :source => :EL_OLD_PINCER },
@@ -70,13 +70,13 @@ module PrismfallMega
     :SCIZORITE     => { :badges => 13, :how => :item,   :map => 383, :where => "Vane Hall, Gravenmoor: Morwen Vane's trophy case", :source => :MEGA_STONE_SCIZORITE },
     :ABOMASITE     => { :badges => 13, :how => :hidden, :map => 701, :where => "The Hoarwood, under the frost-giant pine", :source => :MEGA_STONE_ABOMASITE },
     :METAGROSSITE  => { :badges => 14, :how => :puzzle, :map => 403, :where => "Strade Works Foundry Floor, the sorting-line puzzle", :source => :MEGA_STONE_METAGROSSITE },
-    :GENGARITE     => { :badges => 14, :how => :hidden, :map => 805, :where => "Barrow Sanctum, the altar of the nameless Warden", :source => :MEGA_STONE_GENGARITE },
+    :GENGARITE     => { :badges => 14, :how => :item  , :map => 805, :where => "Barrow Sanctum, the altar of the nameless Warden", :source => :MEGA_STONE_GENGARITE },
     :GYARADOSITE   => { :badges => 15, :how => :hidden, :map => 824, :where => "Aurelia - Drowned Spires, the flooded bell (Dive)", :source => :MEGA_STONE_GYARADOSITE },
     :HOUNDOOMINITE => { :badges => 15, :how => :quest,  :map => 423, :where => "Underveil Moon Market: the Barons' kennel (Gutter Book)", :source => :NA_MOON_MARKET_DOGS },
     :TYRANITARITE  => { :badges => 15, :how => :quest,  :map => 360, :where => "Cragholm rack: the tyrant's heart (Rolls of Unearthing rank 2)", :source => :OS_TYRANT_HEART },
     :GARCHOMPITE   => { :badges => 15, :how => :hidden, :map => 810, :where => "The Dry Tide, a sand-sunk caravan", :source => :MEGA_STONE_GARCHOMPITE },
     :SALAMENCITE   => { :badges => 15, :how => :quest,  :map => 240, :where => "The Crucible, Cindervault: the brazier writ (Trial by Flames rank 2)", :source => :AS_BRAZIER_WRIT },
-    :GALLADITE     => { :badges => 16, :how => :hidden, :map => 841, :where => "The Gloamwood Verge, the knight's barrow", :source => :MEGA_STONE_GALLADITE },
+    :GALLADITE     => { :badges => 16, :how => :item  , :map => 841, :where => "The Gloamwood Verge, the knight's barrow", :source => :MEGA_STONE_GALLADITE },
     :MEDICHAMITE   => { :badges => 16, :how => :hidden, :map => 263, :where => "The Iron Pit, the meditation shelf above the top tier (Rock Climb)", :source => :MEGA_STONE_MEDICHAMITE },
     :HERACRONITE   => { :badges => 16, :how => :hidden, :map => 524, :where => "Gossamer Wood, the old sap tree", :source => :MEGA_STONE_HERACRONITE },
     :LOPUNNITE     => { :badges => 16, :how => :quest,  :map => 154, :where => "Pell Playhouse, the Grand Stage: Dorian's encore", :source => :EL_ENCORE },
@@ -84,8 +84,8 @@ module PrismfallMega
     :BLAZIKENITE   => { :badges => 17, :how => :hidden, :map => 870, :where => "Thornwatch, the war-brazier on the gate tower", :source => :MEGA_STONE_BLAZIKENITE },
     :LUCARIONITE   => { :badges => 17, :how => :quest,  :map => 260, :where => "The Last Rung, Ironreach: the Memory Kata (Gutter Book rank 2)", :source => :NA_MEMORY_KATA },
     # Post-game
-    :LATIASITE     => { :badges => 18, :how => :hidden, :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIASITE },
-    :LATIOSITE     => { :badges => 18, :how => :hidden, :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIOSITE }
+    :LATIASITE     => { :badges => 18, :how => :item  , :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIASITE },
+    :LATIOSITE     => { :badges => 18, :how => :item  , :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIOSITE }
   }.freeze
   # In the base data but not placed: their species are not in Velmora (POKEMON_AVAILABILITY.md section 4).
   UNPLACED = [:MEWTWONITEX, :MEWTWONITEY, :DIANCITE].freeze

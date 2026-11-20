@@ -201,6 +201,38 @@ player) 0→Squirtle, 1→Bulbasaur, 2→Charmander. Stage: K1 base · K2–K3, 
   only, 90. Cameo visitors may run ahead of the level-up curve (the validator doesn't warn for `FESTIVAL_*`).
   Festival cameo versions 0/1/2/3/9 are gone.
 
+## 6b. Mega Evolution (SPINE Rev 20) — assignments for the trainer designer
+
+Design and reasons: `design/MEGA_EVOLUTION.md` §6. Engine rules (plugin `Prismfall Mega`): **one Mega per side per
+battle** (one Z-move per side as well; a side may use one of each). The AI Megas the first turn its Mega holder can act.
+An NPC Megas only if its trainer's `Items` include `MEGARING`. A Pokémon with a Z-crystal can't Mega. **No trainer Megas
+before the Ring-Day (7 badges).** Replace the old "Hard-only Megas" rule with this table:
+
+| Trainer / versions | Mega (stone) | Std | Hard | Casual | Notes |
+|---|---|---|---|---|---|
+| `LEADER_BRANN` 0 (Gym 7, Volcanic, 39) | Camerupt "Kiln" (`CAMERUPTITE`) | yes | yes | no (Camerupt is *(−C)*) | slot 5, before Anvil; move the Elemental Seed to Torkoal. **Engine run:** a Lv 56 Mega Camerupt on Volcanic beat a Lv 60 Mega Charizard X and a Snorlax. Its Mega primes an eruption (+1 Sp. Atk), Earth Power primes more, and the snowball is real. Keep one primer (Earth Power *or* Lava Plume) and add Yawn or Will-O-Wisp; Sheer Force removes Lava Plume's burn. 4× Water is the answer, and Surf ×2 quenches the field. |
+| `RIVAL_KESTREL` K4 (42) → K8, K9 | Scizor (`SCIZORITE`) | yes | yes | from K5 | his mother's ring; add `MEGARING` to his Items from K4 |
+| `LEADER_KAITO` 0 (Gym 8, Colosseum, 43) | Lucario "Memory" (`LUCARIONITE`) | yes (was Scope Lens) | yes | no | the crowd counts its Mega toward the Frenzy |
+| `RIVAL_JUNO` J4 (90) and J7 (Ch21 partner) | starter: the Gen 1 line holds its stone (slot 0 `BLASTOISINITE`, 1 `VENUSAURITE`, 2 `CHARIZARDITEX`) | yes | yes | yes | Core remaps it to the swapped starter's stone, or Life Orb. **J3 (Gym 9): no Mega** (the ring won't answer her yet). |
+| `LEADER_ANJA` 0 (Gym 10, Frozen Lake, 51) | Glalie (`GLALITITE`) in Beartic's slot | no | **yes** | no | on the Frozen Lake its Mega seals every crack once |
+| `LEADER_ODESSA` 0 (Gym 11, double, 55) | Pidgeot "Post" (`PIDGEOTITE`) in Swanna's slot | yes | yes | no | No Guard Hurricane on Stormfront |
+| `LEADER_ILSA` 0 (Gym 12, 59) | Alakazam (`ALAKAZITE`) in Musharna's slot | yes | yes | no | Hard still has the Hatterene 2-bar boss: one Mega per side doesn't limit that |
+| `LEADER_BASTIAN` (Gym 13) | none | | | | Sand Stream (Mega Tyranitar) would darken his own Crystal Cavern |
+| `LEADER_YSOLDE` 0 (Gym 14, 67) | Std: Sableye (`SABLENITE`, lead); Hard: Gengar (`GENGARITE`, as now) | Sableye | Gengar | no | either Ghost Mega re-haunts a consecrated nave |
+| `LEADER_MAGNUS` 0 (Gym 15, 71) | Metagross "Engine" (`METAGROSSITE`) | yes (was Hard only) | yes | yes | the Factory gives a Steel Mega +1 Def |
+| `LEADER_NYX` 0 (Gym 16, double, 75) | Absol (`ABSOLITE`) in Malamar's slot | yes | yes | no | Magic Bounce for the Illusion team |
+| `LEADER_CELESTINE` 0 (Gym 17, double, 80) | Mawile (`MAWILITE`) in Mimikyu's slot | yes | yes | no | the wolf in the storybook |
+| `LEADER_SIGRUN` 0 (Gym 18, 85) | Salamence "Dreamwing" (`SALAMENCITE`) | yes (was Hard only) | yes | yes | Dreamwing loses the Amulet Coin: give the status-proofing to another slot |
+| `CHAMPION_VALEN` 0 / 1 | Gallade (`GALLADITE`) | yes (was Hard only) | yes | yes | |
+| `LEADER_MARISOL` 90 (Festival) | Gyarados "Lucky" (`GYARADOSITE`) | yes (was Hard only) | yes | yes | |
+| Festival v92 draws (Kaito, Ysolde, Sigrun, Odessa, Celestine), `LEADER_BRANN` 96 | their gym Mega | yes | yes | yes | |
+| Cameos (Garret 46 …) | unchanged | | | | all after the Ring-Day |
+| Voss, Quent, the Mourner, the Octave singers | none | | | | MEGA_EVOLUTION.md §6 |
+
+`tools/trainer_gen/gen.py`'s `MEGA_STONES` set needs `CAMERUPTITE`, `SCIZORITE`, `ALAKAZITE`, `PIDGEOTITE`, `GLALITITE`,
+`ABSOLITE`, `MAWILITE` and the starter stones. Its `mega_std` flag already handles "Megas on Standard too" (it adds
+`MEGARING` to the Items). Optional: an EBDX `megaOpp` battle-speech line per Mega Warden.
+
 ## 7. True finale — Arceus boss spec (for Core / Field Effects / EBDX Bridge)
 
 Core already runs this stage through `EliteBattle.bossBattle(:ARCEUS, 100, 1, false, options)` on `:PRISM_ARENA`

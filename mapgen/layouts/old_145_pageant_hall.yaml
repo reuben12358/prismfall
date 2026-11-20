@@ -1,0 +1,83 @@
+id: 145
+name: Pageant Hall
+parent: 140
+template: arena
+drop_template_events:
+- Champion
+- Door
+- Entrance
+tile_edits:
+- - 1
+  - 6
+  - 11
+  - 0
+bgm: Lerucean Town
+metadata:
+  MapPosition:
+  - 0
+  - 10
+  - 25
+events:
+- type: exit
+  at:
+  - 6
+  - 12
+  link: SM_PAGEANT
+- type: event
+  name: Pageant
+  at:
+  - 6
+  - 4
+  pages:
+  - graphic:
+      sprite: trainer_GENTLEMAN
+      dir: down
+    commands:
+    - if: '!pfm_gym_won?(:LEADER_DORIAN)'
+      then:
+      - 'Stage manager: Rehearsals, rehearsals. Opening night is after the Warden''s own show - come back with his badge!'
+      else:
+      - 'Opening night: the Pageant of the Prismfall. You sit with Juno and Dorian in the front row.'
+      - Mid-performance the stage lights go grey.
+      - 'A figure steps out of the painted backdrop of the falling Plates: ash-bark mask, a single white lily.'
+      - 'The Mourner: Three hundred years of pageantry.'
+      - 'The Mourner: Ask your Warden why nothing in Verdance ever rots. Ask your Sovereign why the old capital is underwater.'
+      - 'The Mourner: Ask why the Loyal Three wore poison on their collars. Let the land grieve.'
+      - Hollow banners drop from the flies. The crowd panics - two grunts block the aisle!
+      - if: TrainerBattle.start(:HOLLOW_GRUNT_M, "Grunt", :HOLLOW_GRUNT_F, "Grunt")
+        then:
+        - The Mourner looks straight at you across the theatre - and goes still.
+        - 'The Mourner: ...You.'
+        - Then he's gone, in a burst of Cotton Spore.
+        - 'Juno: He sounded sad. Isn''t that weird? I thought he''d sound evil.'
+        - Dorian, pale, pulls you into his dressing room and presses a yellowed page into your hands.
+        - 'Dorian Pell: The prologue of The Gilded King. Ansel Crewe wrote it in AF 52. They hanged him for it.'
+        - 'Dorian Pell: I''ve never staged it. I''m a coward with excellent diction.'
+        - 'One line is underlined: "If heaven will not kneel, we''ll build a chain."'
+        - switch:
+          - CH3_PAGEANT_DONE
+          - true
+        - var:
+          - STORY_CHAPTER
+          - 3
+        - selfswitch:
+          - A
+          - true
+  - cond:
+      self: A
+- type: npc
+  name: Audience
+  at:
+  - 2
+  - 8
+  sprite: NPC 03
+  dir: up
+  text: Shh! It's starting!
+- type: npc
+  name: Audience 2
+  at:
+  - 10
+  - 8
+  sprite: NPC 11
+  dir: up
+  text: The Loyal Three piece is my favourite.

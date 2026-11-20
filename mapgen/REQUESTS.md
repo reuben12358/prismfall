@@ -766,3 +766,103 @@ No map file was edited.
 **For the distribution owner:** Tamsin's answer to the common birds is Dwebble (Smack Down grounds them into the silk,
 Rock Tomb), not a new Flying weakness; the Little Crucible is in the 2-badge band; K1's Standard starter has no type
 move (Reborn / Rejuvenation do the same), so the realistic upset rate is about one in six.
+
+## From the Mega Evolution workstream (SPINE Revision 20), 2026-11-20
+Design: **`design/MEGA_EVOLUTION.md`** (the lore, a study of how Reborn and Rejuvenation hand out Megas, the mechanics,
+the Ring-Day, all 47 stones, who Mega Evolves, the tests). No map file and nothing in `pbs/trainers.txt` was edited.
+New plugin `plugins/Prismfall Mega` (no PBS: the Mega Ring, the stones and the forms are base data). Trials data:
+`114_Quests_Megas.rb`, `132_EventMons_Megas.rb`, `152_Talk_Megas.rb`, plus two rank rewards in `001_Trials_Config.rb`.
+Tests: `tools/harness/run_mega.rb` 59/59, `run_trials.rb` still 142/142, and an engine capture
+(`docs/battle_captures/mega/mega_evolution_ebdx.gif`).
+
+**Map builder**
+1. **`design/TRIAL_EVENTS.yaml`, section "Mega Evolution"** (42 new map blocks, plus one event added to 524 Gossamer Wood).
+   - **25 Mega Stone events.** Each is one call, `{script: 'pf_mega_stone(:ITEM, "line")'}`, with the visibility
+     condition `badges >= N && !has_item(:ITEM)` and self switch A. 14 are hidden (no graphic, Itemfinder target) and
+     8 are visible (item ball). The other 3 are puzzle rewards (item 3).
+   - Some sit behind HMs, as `near:` says: Rock Smash (577), Flash (605), Surf (680, 681), Dive (824) and Rock Climb (263).
+2. **Quest NPCs and objects** (pattern as in 151/152: one `pf_trial_talk(:KEY)`):
+   - **The Ring-Day:** Brann at the Hearthguild anvil (244).
+   - **Story gift:** Juno under the Bride Tree (294).
+   - **The doll quest:** the attic doll (547) and three buttons (546).
+   - **The Old Pincer:** the Woodward (526) and the Pincer (703).
+   - **The Matriarch:** the Matriarch on the Frostflat Causeway (560), with two or three young Kangaskhan as decor.
+   - **Return to Sender:** the Postmaster (325) and three dead-letter doors (320/323/324).
+   - **Old Cinder:** Tarn and Old Cinder (248).
+   - **Bedside Manner:** Wenlow (223, page on S179 `WENLOW_ALIVE`), Corvin (223, only once S179 is off) and three ward beds.
+   - **Dogs of the Moon Market:** Ottoline and three kennel cages (423).
+   - **The Memory Kata:** Ottoline at the Last Rung (260).
+   - **The tyrant's heart:** Nasrin (360) and the third vertebra (773).
+   - **The Speculum:** Saffi and the third pane (346).
+   - **Patches:** Dorian (154) and Sahar (209). Hesper (106) and the Crucible Legate (240) need nothing: their talk keys
+     gained rows.
+3. **Puzzle team (optional wings):** the Alakazite (Lucent Sealed Stacks, 345, "the Unread Shelf"), the Gardevoirite
+   (the Looking-Glass Wood's mirror maze, 752) and the Metagrossite (Strade Works sorting line, 403) sit behind
+   puzzles. Their events are in the YAML. The puzzle itself is yours to design (`note:` says the idea).
+
+**Trainer designer** (`design/BALANCE.md` §6b has the full table)
+4. **Megas from the Ring-Day (7 badges) on.** Most are Standard and Hard; a few are Hard-only or all difficulties.
+   - Brann: Mega Camerupt "Kiln".
+   - Kestrel K4–K9: Mega Scizor (his mother's ring).
+   - Kaito: Lucario (Lucarionite on Standard now).
+   - Juno: her starter's stone at J4/J7, none at J3.
+   - Anja: Glalie, **Hard only**.
+   - Odessa: Pidgeot "Post".
+   - Ilsa: Alakazam.
+   - Ysolde: Sableye on Standard, Gengar on Hard.
+   - Magnus: Metagross. Nyx: Absol. Celestine: Mawile. Sigrun: Salamence. Valen: Gallade. Marisol v90: Gyarados.
+   - **No one before 7 badges.**
+   Add `MEGARING` to each trainer's Items and the new stones to `tools/trainer_gen/gen.py` `MEGA_STONES`.
+5. **Brann's Mega Camerupt needs tuning.** In the engine run, a Lv 56 Mega Camerupt on Volcanic beat a Lv 60 Mega
+   Charizard X and a Snorlax: each eruption gives +1 Sp. Atk, and the Mega primes one. Suggested set: one primer, plus
+   Yawn or Will-O-Wisp.
+6. **Three wild bosses guard stones** (`132_EventMons_Megas.rb`): Old Cinder (Charizard Lv 58, 11 badges), the Old
+   Pincer (Pinsir Lv 62, 12) and the Causeway Matriarch (Kangaskhan Lv 78, 16 badges, 3 bars). None of them joins.
+   Tune them with the rest.
+
+**Z-Power owner**
+7. **One Z-move per side** (SPINE Rev 20). `Prismfall Mega` alias-chains `PrismfallZ.owner_key` to the side
+   (`PrismfallMega::Z_LIMIT`). No Z-Power file was edited. Please move it into your config (one line), and the alias
+   can go. The tests cover it: two foe trainers with crystals get one Z between them, and a Mega plus a Z on one side
+   both work.
+8. **Proposal: a shared Mega/Z "power" button on EBDX's Fight menu.** This is also for the EBDX Bridge owner; details
+   in MEGA_EVOLUTION.md §9.
+   - Reuse EBDX's Mega button slot. It shows Mega or Z depending on the battler (a stone holder can't hold a crystal).
+   - Action toggles it. In Z mode the move buttons preview the Z-move names and power, and the Yes/No box goes away.
+   - Hook points: `FightWindowEBDX#megaButton` and the `-2` toggle in the Fight menu block. `after_register` reads the
+     pending Z.
+
+**Story editor**
+9. **The Ring-Day (Ch8, Cindervault, map 244).** It plays the morning after the Caldera Crisis, before the Dominar's
+   herald. The scene is written in `114_Quests_Megas.rb` (`AS_RING_DAY`) and summarised in MEGA_EVOLUTION.md §4.
+   Lore to review (§1):
+   - A Mega Stone is a "heartstone": an Imprint that pearls inside one line of Pokémon.
+   - A Mega Ring is a Warden's ring: grind from the Crown's stone, kept by the Hearthguild each time the stone is reset.
+   - One Mega to a side: two rings on one side ring against each other.
+   - The PC's ring sings. This foreshadows the splinter and lands Brann's chestnut line.
+   - Kestrel wears Morwen's ring; it answers him for the first time at K4.
+   - Juno inherits Rowan's ring, which won't answer at J3 (the Heartgarden scene) and does at J4.
+   - The Mourner wears no ring while masked; Rowan's ring is on his hand at the unmasking.
+   - Hesper's lighthouse lens holds Morwen's old Ampharosite (3 badges).
+   - Wenlow leaves the Audinite to the PC; after Ch16, Corvin hands it over.
+   No new story flags (the conditions use `has_item(:MEGARING)` and `made(:ch8_caldera)`).
+
+**Trials owner**
+10. My quest ids avoid your stubs: `AS_DRAGONSWORN` and `OS_BONEWRIGHT` stay untouched, and mine are `AS_BRAZIER_WRIT`
+    and `OS_TYRANT_HEART`.
+    - Rank rewards aren't badge-gated, so only Manectite (Zenith rank 3) and Sharpedonite (Isenmar rank 3) went into
+      `RANK_REWARDS`. Both are reachable before the Ring-Day and safe at 7 badges.
+    - Later "rank rewards" are commissions with `:rank => 2` plus a badge unlock (Mawilite, Tyranitarite, Salamencite,
+      Lucarionite). Raise their `:rank` as more quests are wired.
+
+**Field workstream:** nothing in `plugins/Prismfall Field Effects` was edited.
+- `Prismfall Mega` fires a field's ability-keyed `:on_entry` rules for the ability a Pokémon gains when it Mega Evolves
+  (it was an integration gap; Reborn does the same).
+- It adds eight Mega showpieces (Grand Stage, Volcanic, Colosseum, Frozen Lake, Crystal Cavern, Hollow Cathedral,
+  Factory, Bleed) and appends Field Notes lines through an alias on `FieldNotes.effect_lines`.
+- When FIELDS.md is next generated, please include `PrismfallMega::FIELD_NOTES`.
+
+**Bosses owner (proposal):** add an optional `:mega => true` break effect, so a trainer boss Mega Evolves when its first
+shield breaks (Rejuvenation's Latios in its second bar). Wild bosses can't Mega Evolve in Essentials.
+
+**Packaging:** add the new folder `plugins/Prismfall Mega`. `tools/package.sh` already copies `plugins/` wholesale.
