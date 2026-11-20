@@ -1,5 +1,16 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 19 (user, 2026-11-19 18:06–21:44) <<<
+1. **The Eevee quest.** One Eevee trainer per kingdom, with the last trainer met in Crownhaven. User's assignments: fire → Flareon, water → Vaporeon, Zenith ("the piltover place") → Jolteon, the dark place (Nadir) → Umbreon. Ours: Elowen → Leafeon, Ossaria → Espeon (desert sun temple), Antumbra → Glaceon (the frozen Mirror Mere), Crownhaven (the last) → Sylveon.
+   - Each trainer gets their own quest.
+   - After all eight are helped, a trainer appears in Crownhaven: the Eeveelution trainers want to thank you and test whether you're worthy of carrying the power of Eevee.
+   - **The gauntlet:** a chain of battles in the order you helped them. Each uses its Eeveelution with its type's attacking Z-move (e.g. Jolteon has Thunderbolt and an Electric Z-crystal). Last comes the host's Eevee with Extreme Evoboost.
+   - **Reward:** an Eevee plus the Eevium Z.
+   - This reshapes the existing Eevee Octave and Vesper; Vesper is the natural host.
+   - Needs Z-move support on v21.1 + EBDX.
+2. **Gym 2 redo.** The user: "I dont understand gym 2, i dont get how the hall is supposed to represent a clearly bug type gym leader, can we redo the puzzle to be some type of web based trampoline puzzle?" Tamsin's gym becomes a giant silk web canopy: web trampolines that launch you, with Bug/silk logic. Keep the weaver touches in the lobby only.
+3. **Gym 1 crowd idea.** "the more people you meet around town, the more audience shows up for your fight... based on the number of people in the crowd, the battle starts at a specific stage of [the field]." The people you meet and help in Saltmere fill the theatre. The size of the crowd sets the Grand Stage's starting stage for Dorian's fight, played as a concert-style show on stage.
+
 ## >>> REVISION 18 (user, 2026-11-19 17:24): world geography v2 <<<
 The user's words: "I dont like how the city above connects to the ice region directly, i think the grass region should connect to everything at some extent. the ice region should connect to the forest and the desert. the fire region should connect to the desert and the forest and shouldnt connect to the ice. the grass region should be in the middle of the region and the desert should be north. maybe move lumen city to the south?"
 
