@@ -15,13 +15,16 @@ OUT = kb.WORK + '/passes'
 NAME, SHEET = 'KESTREL', '17_kestrel.png'
 TITLE = ('KESTREL VANE - battle front kitbash (80-px art, file 160x160, same as Juno). Concept: a broke 16-year-old drowning in '
          'his dead mother\'s greatcoat, with her blade\'s child (Honedge) at his side. Black + crimson, split coat tails.')
-VARIANTS = [('A', "A: the inheritance. Teen head on a grown man's greatcoat (a size too big), sleeves past the hands, collar up, "
+VARIANTS = [('A2', "A2 (pass 2): the inheritance, follow-ups. Honedge cut to about two-thirds (blade and crossguard redrawn as "
+                    "hardware in its own palette, the battler's ribbon cropped), held hanging from the sleeve that hides his hand; "
+                    "lighter fold lines on the coat."),
+            ('C2', "C2 (pass 2): Meridian-sponsored, but the greatcoat stays. An ivory/cobalt sponsor sash over his mother's coat "
+                   "with the gold sunburst, the Resonance Gauntlet on the sword hand."),
+            ('A', "A (pass 1): the inheritance. Teen head on a grown man's greatcoat (a size too big), sleeves past the hands, collar up, "
                   "split crimson-lined tails; Honedge hangs from his hand, its cloth wound across the coat. One-sided sneer."),
             ('B', 'B: the tic. Angry, two fingers jabbing his own sternum, the empty sleeve flung out, Honedge riding '
-                  'his back with the hilt over the shoulder.'),
-            ('C', 'C: K5+ Meridian-sponsored. Ivory/cobalt sponsor jacket with the gold sunburst, the Resonance Gauntlet '
-                  'on the raised fist; he still wears the crimson feather pin.')]
-PICK = 'A'
+                  'his back with the hilt over the shoulder.')]
+PICK = 'A2'
 REFS = [('sd:hugh', 'Hugh (official BW2 rival)'), ('sd:silver', 'Silver (official rival)'), ('sd:n', 'N (official BW)'),
         ('reborn:093', 'Reborn front (Julia)')]
 DONORS = [('sd:veteran', 'veteran: body, greatcoat, raised collar (A, B)'), ('sd:acetrainer', 'acetrainer: head, fringe over one eye; hair repainted, mouth/brow hand-set'),
@@ -189,6 +192,19 @@ GAUNT = {H('ffd5bd'): H('8aa2d8'), H('dea47b'): H('3c64c8'), H('b88060'): H('284
          H('7b4141'): H('101830'), H('957d69'): H('182c70'), H('a86a31'): H('e8b030'), H('cf8f34'): H('e8b030')}
 
 
+def sponsored_coat():
+    out = build('C0')
+    S = {'i': H('f6f1e2'), 'I': H('d6cdb4'), 'c': H('3c64c8'), 'C': H('182c70'), 'y': H('e8b030'), 'Y': H('fff0a0'), 'k': BLACK}
+    # Meridian sponsor sash over the greatcoat: ivory with cobalt edges, shoulder to hip, a gold sunburst patch
+    for i in range(22):
+        x, y = 50 - i, 24 + i
+        out = mat.patch(out, x - 1, y, ['ciiIc'], S)
+    out = mat.patch(out, 38, 33, ['y.y.y', '.yYy.', 'yYYYy', '.yYy.', 'y.y.y'], S)
+    # Resonance Gauntlet on the outstretched hand (the sleeve end becomes cobalt plate with a teal core)
+    out = mat.patch(out, 20, 32, ['.kkkk.', 'kcccCk', 'kcyycC', 'kcytyk', 'kCcccC', '.kkkk.'], dict(S, t=H('7ff0e0')))
+    return out
+
+
 def sponsored():
     b = sd('leaguestaff')
     b = mat.erase(b, mat.region(b.size, [[(26, 0), (52, 0), (52, 20), (46, 23), (34, 23), (28, 20)]]))
@@ -203,7 +219,62 @@ def sponsored():
     return b
 
 
+HN = {'k': H('101010'), 'w': H('dddfdf'), 'g': H('9ca2a2'), 'G': H('555f5f'), 'y': H('f3d9a5'), 'Y': H('c0985c'),
+      'o': H('3d2d27'), 'e': H('61c4d8'), 'E': H('9eeeff'), 'b': H('0080a0'), 'B': H('09343f'), 'h': H('976d43')}
+
+
+def small_honedge():
+    """Honedge at about two-thirds of the battler: blade and crossguard are straight hardware, drawn in the battler's own
+    palette; the cloth is the battler's ribbon arc cropped."""
+    im = Image.new('RGBA', (40, 48), CLEAR)
+    im = mat.patch(im, 13, 6, ['...oo....',
+                               '..oYYo...',
+                               'ooyyyyYoo',
+                               'oyyeEeyYo',
+                               'oYyebeYYo',
+                               '.ooYyYoo.',
+                               '...oYo...'], HN)
+    # blade: 3 px wide, leaning one pixel left every 5 rows, tapering to a point
+    for i in range(24):
+        y = 13 + i; x = 16 - i // 5
+        if i < 22:
+            im = mat.patch(im, x, y, ['kwgk'], HN)
+        elif i == 22:
+            im = mat.patch(im, x, y, ['.kgk'], HN)
+        else:
+            im = mat.patch(im, x, y, ['..k.'], HN)
+    # the cloth: the battler's ribbon arc, cropped, hung from the crossguard
+    n = kb.native(kb.load(B + 'honedge.png').crop((0, 0, 192, 192)))[0]
+    rib = n.crop((40, 22, 60, 46)); p = rib.load()
+    teal = (H('0080a0'), H('09343f'), H('61c4d8'), H('9eeeff'), H('101010'))
+    for y in range(rib.size[1]):
+        for x in range(rib.size[0]):
+            if p[x, y] not in teal:
+                p[x, y] = CLEAR
+    rib = mat.clean_orphans(rib)
+    out = Image.new('RGBA', im.size, CLEAR); out.paste(rib, (17, 0)); out.alpha_composite(im)
+    return out
+
+
+def coat_highlights(im):
+    # a few lighter fold lines so the coat isn't one black mass at 1x (along the shoulder, the lapel edge, the hem folds)
+    hi = H('6a687e')
+    pts = [(47, 23), (48, 24), (49, 25), (50, 26), (52, 27), (53, 28), (54, 29),          # right shoulder seam
+           (38, 30), (38, 31), (38, 33), (38, 35), (38, 37),                              # lapel edge
+           (44, 50), (45, 52), (45, 54), (46, 56), (34, 52), (34, 54), (33, 56), (33, 58)]   # hem folds
+    p = im.load()
+    for (x, y) in pts:
+        if p[x, y] in COAT:
+            p[x, y] = hi
+    return im
+
+
 def build(var='A'):
+    if var == 'A2':
+        out = build('A0')
+        return out
+    if var == 'C2':
+        return sponsored_coat()
     if var == 'C':
         out = sponsored()
         return face_at(out, -4, 3, 'brood')
@@ -214,6 +285,11 @@ def build(var='A'):
     if var == 'A':
         hn = honedge()
         t = Image.new('RGBA', (80, 80), CLEAR); t.paste(hn, (-18, -6)); out.alpha_composite(t)
+    if var in ('A0', 'C0'):
+        out = sleeve_end(out)
+        out = coat_highlights(out)
+        hn = small_honedge()
+        t = Image.new('RGBA', (80, 80), CLEAR); t.paste(hn, (5, 28)); out.alpha_composite(t)
     if var == 'B':
         out = sleeve_end(tap_arm(out))
         hn = mat.flip(honedge())

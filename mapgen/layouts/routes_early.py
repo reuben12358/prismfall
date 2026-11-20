@@ -770,12 +770,97 @@ def overs_tile(r, n, x, y):
                 if t: r.m.over.append((2, x + dx, y + dy, t))
 
 
+# ====================================================================================================== 540 Thistledown Lea
+def build_540():
+    """Thistledown Lea (130x64, MEADOW): the extinct House Thistledown's river meadows.  The Selvedge along the south with
+    the old stone bridge (toll nobody collects) and two islets; wildflower bands and four tall-grass fields; Thistledown
+    Manor on its hill (R3_MANOR) with ruined wall, gateposts and topiary; the Brinecut mine mouth (R3_MINE) in the west
+    outcrop; the Ponyta paddock; the broken mill and mill-race; the mowers' camp (heals once); the bamboo stand; Road
+    Stone II-b; the Ha-ha (secret: the sunken wall's ditch to the manor's back garden)"""
+    W, H = 130, 64
+    r = Route(540, W, H, 'meadow', base='.')
+    m = r.m
+    r.forest_band('N', 4, wobble=2.0)
+    for cx, cy, rx, ry in ((116, 10, 9, 6), (100, 46, 6, 4), (6, 40, 5, 5), (40, 8, 7, 4)):
+        r.copse(cx, cy, rx, ry)
+    # the Selvedge along the south third, islets
+    for x in range(W):
+        c = 52 + 2.5 * (RK.vnoise(x, 0, 540, 16.0) - 0.5) * 2
+        for y in range(int(c - 4), int(c + 5)):
+            if 0 <= y < H: m.cls[y, x] = 'w'
+    m.blob(70, 52, 4, 1.6, '.', seed=3, rough=0.3, only='w'); m.blob(100, 53, 3, 1.4, '.', seed=4, rough=0.3, only='w')
+    # the manor hill (h1 / h2) and the west outcrop with the mine mouth
+    m.blob(64, 9, 17, 10, None, ht=1, seed=11, rough=0.3)
+    for y in range(0, 26):
+        for x in range(0, 18):
+            if x < 14 + 3 * RK.vnoise(0, y, 541, 7.0) and y < 22 + 2 * RK.vnoise(x, 0, 543, 7.0): m.ht[y, x] = max(m.ht[y, x], 1)
+    road = [(21, 63), (21, 52), (24, 42), (40, 36), (60, 34), (84, 33), (104, 31), (129, 31)]
+    r.road(road, w=3.0, open_=None, only='T.tw')
+    bridge = [(x, y) for y in range(H) for x in range(W) if r.road_mask[y, x] and RK.np.isin(m.cls[y, x], ['d']) and 44 <= y <= 60]
+    r.exit('S', 20, 4); r.exit('E', 30, 4)
+    r.flatten(63, 65, 18, 1); r.crossing(63, 18, w=3, rows=3)
+    r.lane([(64, 33), (64, 21)], w=2.0, open_=None)
+    r.flatten(7, 9, 22, 1)
+    r.lane([(24, 40), (14, 30), (8, 26)], w=2.0, open_=None)                          # to the mine mouth
+    r.lane([(84, 33), (90, 42), (96, 44)], w=2.0, open_=None)                         # to the broken mill
+    # the Ha-ha: a ditch round the back of the manor hill to the back garden (NE of the hill)
+    r.pocket(86, 6, 4, 3, gate=None)
+    r.lane([(84, 20), (88, 12), (87, 8)], w=1.6, open_=None)
+    r.grass(thr=0.58, scale=7.0, box=(26, 20, 128, 46))
+    r.finish_plan()
+    for (x, y) in bridge: m.cls[y, x] = 'w'; r.deck.append((x, y))
+    J = lambda e, t: P('JUNO', e, t)
+    ev = old_events('540_route3_route4.yaml', 540)
+    r.add({'type': 'warp', 'name': 'Mine mouth', 'at': [8, 24], 'link': 'R3_MINE', 'arrive': [8, 25, 'down'], 'se': 'Door exit'},
+          sign((26, 58) if False else (25, 44), 'Road sign', "THISTLEDOWN LEA -- The lands of House Thistledown (extinct). <- The Dyers' Ford - -> Gossamer Wood & Briarwick - ^ Thistledown Manor (PRIVATE. DECEASED.)"),
+          once('The Lea', (22, 46), [J('happy', 'Mum says the Thistledowns were actors. All of them. Even the dog. They played Saltmere for a hundred years and then they all died in the same winter.'),
+               J('neutral', "People say they're still up there. Rehearsing. I'd like to see that. From a distance. A long distance.")]),
+          sign((60, 22), 'Manor sign', 'THISTLEDOWN MANOR\nHome of the Thistledown Players. Closed since AF 211.'),
+          talk('Drover', (40, 26), 'NPC 25', ['Drover: Race you to the fence!', '(He wins. He always wins. He has a Ponyta.)']),
+          talk('Ponyta', (44, 22), 'Followers/PONYTA', ['(It tosses its mane. Show-off.)'], move='random'),
+          talk('Fisherman on the bridge', (23, 50), 'trainer_FISHERMAN', ["Fisherman: Bridge toll's a copper. Nobody's collected it since the house died. I just tell people. Habit."], d='left'),
+          hidden((19, 52) if False else (24, 57), 'GREATBALL', 'HiddenItem (under the bridge)'),
+          {'type': 'event', 'name': 'Mower', 'at': [80, 40], 'pages': [
+              {'graphic': {'sprite': 'NPC 03', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  "Mower: Nobody's mown the Lea in sixty years. You can't buy land off a dead family. They won't come to the door.",
+                  {'if': '!pfm?(:mowers_heal)', 'then': ['Mower: Sit by the fire a bit. Kettle\'s on.', {'heal': True}, {'script': 'pfm_set(:mowers_heal)'}]}]},
+              {'cond': {'switch': 'CH2_THISTLE_DONE'}, 'graphic': {'sprite': 'NPC 03', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  'Mower: Woman in grey came through at dawn with two others. Shears in her belt. Nodded to me. Mannerly. Went toward the wood.']}]},
+          trainer((52, 40), 'PICNICKER', 'Edie', "Ada beat me on Windfall Row last year. I've been training on the Lea all spring.", "...I'll write to Ada. I'll lie.", d='down'),
+          at(ev['Bryony'], 36, 30), at(ev['Hale'], 70, 48) if False else trainer((74, 46), 'FISHERMAN', 'Hale', 'You scared the fish! Now you owe me a battle.', 'Reeled in a loss. Happens.', d='down'),
+          trainer((92, 28), 'TWINS', 'Bel & Bea', 'Twins: We battle together! Always together!', "Twins: Saltmere's south. They do plays there!", d='down', double=True),
+          trainer((112, 36), 'YOUNGSTER', 'Corin', "Saltmere badge? Prove it!", "My team's the coolest! ...Was.", d='left'),
+          obj('Broken mill', (96, 42), ['The broken mill. The wheel is stuck half in the race. Someone has fished it clean of Magikarp.']),
+          obj('Bamboo stand', (110, 18), ['A bamboo stand, planted by a Thistledown who wanted "something foreign". The Pancham agree.']),
+          talk('Pancham', (108, 20), 'Followers/PANCHAM', ['(It glares at you over a bamboo shoot. Respect.)'], move='random'),
+          obj('Road Stone II-b', (120, 30), ["ROAD STONE II-b. THE WEAVERS' ROAD. \"Briarwick 1.\" The '1' has been scratched to a '2' and back again."]),
+          obj('Gateposts', (62, 23), ['Two stone gateposts with the Thistledown thistle carved on them. No gate. Gates are for people who expect visitors.']),
+          obj('The Ha-ha', (87, 8), ['(The sunken wall\'s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging behind it.)']),
+          talk('Greavard', (85, 6), 'Followers/GREAVARD', ['(It is digging very seriously. It does not want to be interrupted. It wags anyway.)'], move='random'),
+          hidden((88, 5), 'RAREBONE', 'HiddenItem (the Ha-ha)'),
+          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((126, 20), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 51), 'GREATBALL'))
+    r.seat_events(on='.dt')
+    fd = m.front('sh_big', 64, 14, 'R3_MANOR', 'Manor door')
+    r.events += [e for e in m.events if e.get('link') == 'R3_MANOR' or e.get('name') == 'Locked door']; m.events = []
+    for n, x, y in (('sh_campfire', 78, 42), ('hb_tables', 82, 42), ('hb_shed', 84, 38), ('pf_logbench', 76, 44)):
+        r.near(n, x, y, on='.d', r=3)
+    m.fence(36, 50, 20, gaps=((42, 44),)); m.fence(36, 50, 28, gaps=((40, 41),))
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pink', 'tr_pine'), n_trees=W * H // 180, copses=6, scatter=12)
+    r.paint(glint=0.0)
+    cave_mouth(m, 8, 24)
+    for (cx, cy, rx, ry, k) in ((40, 14, 10, 4, 0), (90, 22, 9, 3, 1), (108, 42, 8, 3, 2), (30, 26, 6, 2, 3)):
+        flowers(r, cx, cy, rx, ry, tiles=[K.DECOR_SH['flowers'][k], K.DECOR_SH['flowers'][k + 4]], p=0.5)
+    h = head(540, 'Thistledown Lea', field='MEADOW', bgm='Route 3',
+             connections=[{'dir': 'S', 'offset': 20, 'to': 552, 'to_offset': 39}, {'dir': 'E', 'offset': 30, 'to': 524, 'to_offset': 50}], tone=[6, 4, -2, 0])
+    r.write(h, '540_thistledown_lea.yaml', '# Thistledown Lea (540). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/540.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {520: build_520, 521: build_521, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
+BUILD = {520: build_520, 521: build_521, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
 
 
 def main():

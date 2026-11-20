@@ -12,6 +12,7 @@ snow (52, rimewood.snowmap)."""
 import os, sys, math, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
+np = np
 import rkit as K
 from rkit import C, STAMPS
 from terrain import vnoise
