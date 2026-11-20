@@ -63,7 +63,35 @@ def mug(im, x, y):
                                         '.kkkkk..'], X)
 
 
+VF = {H('303038'): H('9a7020'), H('505050'): H('c89a30'), H('403838'): H('7a5418'), H('202020'): H('5a3e10'),
+      H('c8c8c8'): H('7a8898'), H('f8f8f8'): H('a4b2c0'), H('b04848'): H('5a6676'), H('784040'): H('3a4250'),
+      H('483030'): H('2a3038')}
+VF_HAIR = {H('303038'): H('5a5e6a'), H('505050'): H('a6a6b2'), H('403838'): H('888896'), H('202020'): H('3e424c'),
+           H('786050'): H('b6b6c0')}
+
+
+def build_b():
+    v = sd('veteranf')
+    hair = mat.region(v.size, [[(20, 6), (44, 6), (44, 22), (36, 24), (30, 30), (20, 26)]])
+    v = mat.recolour(v, VF_HAIR, hair)
+    v = mat.recolour(v, VF, mat.mask_not(hair))
+    # the raised hand: the hook goes, the kelp-tea mug comes up to her chin
+    p = v.load()
+    for y in range(10, 20):
+        for x in range(46, 60):
+            if p[x, y][3] and p[x, y] not in (H('f8d0b8'), H('d8a078'), H('b08058')):
+                p[x, y] = CLEAR
+    v = mug(v, 47, 18)
+    v = braid(v, [(31, 22), (31, 24), (31, 26), (32, 28), (32, 30), (32, 32), (32, 34), (33, 36), (33, 38), (33, 40), (33, 42)])
+    v = mat.patch(v, 32, 44, ['.kyk', 'kbak', '.kk.'], X)
+    v = mat.patch(v, 33, 17, ['aa.'], X)                       # a low, unimpressed brow
+    v = mat.patch(v, 38, 26, ['o...', '.o..', '..o.', 'kk..', 'Vk..'], X)   # glasses swinging on their chain
+    return v
+
+
 def build(var='A'):
+    if var == 'B':
+        return build_b()
     v = sd('veteranf-gen6')
     v = mat.erase(v, mat.region(v.size, [[(28, 0), (50, 0), (50, 15), (45, 21), (34, 21), (28, 15)]]))
     legs = mat.region(v.size, rect=(0, 53, 79, 79))
@@ -90,11 +118,13 @@ def build(var='A'):
 
 
 VARIANTS = [('A', 'A: "Drink your tea." Holding out a steaming mug of murky kelp tea like a peace offering; mustard oilskin knee coat '
-                  'with a slate stole flying, rope-thick grey braid over the shoulder, glasses on a chain, mouth set flat.')]
+                  'with a slate stole flying, rope-thick grey braid over the shoulder, glasses on a chain, mouth set flat.'),
+            ('B', 'B: tea break. Side-on in the long oilskin, the mug raised to her chin, an unimpressed brow, tool satchel at '
+                  'her hip, braid down the front. Veteran F (BW) body; hair repainted grey.')]
 PICK = 'A'
-REFS = [('sd:juniper', 'Juniper (official BW professor)'), ('sd:bertha', 'Bertha (official)'), ('sd:veteranf', 'Veteran F (official BW)'),
+REFS = [('sd:juniper', 'Juniper (official BW professor)'), ('sd:bertha', 'Bertha (official)'), ('sd:fennel', 'Fennel (official BW)'),
         ('reborn:093', 'Reborn front (Julia)')]
-DONORS = [('sd:veteranf-gen6', 'veteranf-gen6: body, knee coat, stole, held-out arm'), ('sd:madame-gen6', 'madame-gen6: older head, hair repainted grey')]
+DONORS = [('sd:veteranf-gen6', 'veteranf-gen6: body, knee coat, stole, held-out arm'), ('sd:veteranf', 'veteranf (BW): B body, raised hand, satchel'), ('sd:madame-gen6', 'madame-gen6: older head, hair repainted grey')]
 NOTE = 'Hand pixels: the braid (repeating plait), mug + kelp + steam, glasses and chain, flat mouth and brows.'
 
 if __name__ == '__main__':

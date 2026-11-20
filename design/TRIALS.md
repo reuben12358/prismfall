@@ -194,19 +194,19 @@ can be **joint** (`:joint => { :ELOWEN => 2 }`), like *Two Hearths, One Pot*.
 |---|---|---|---|---|
 | 1 | The First Lesson (Elowen) | Ferrow's wayshrine (100) | do one unasked kindness; *don't tell* the monk | Harmony +1, 2 pts; starts Quiet Deeds |
 | 1 | The Tart Thief (Elowen) | Ferrow's Landing (100, 103) | chase a Nickit round the village; it has been feeding Kestrel | **Nickit** (Stakeout); Kestrel ±1 |
-| 1 | The Scarecrow Walks (Elowen) | Windfall Row (521, 523) | Coll didn't build a scarecrow; water it | **Sudowoodo**, or spare it (Harmony) |
-| 1 | Master of Nothing (Elowen) | Dockmaster's House, the Dovetail (107, 109) | something is still aboard the last ferry | **Wattrel "Mast"** |
-| 1 | The Last Plank (Elowen) | the empty berth (100) | a Timburr mends a berth for a ferry that won't come | **Timburr "Plank"** (Mach Punch) |
-| 1 | Form 7-B (Zenith) | customs hall, lighthouse (108, 103, 106, 107) | sign the disposal or chase three stamps; Hesper warms the crate | **Charcadet**, or $500 + Meridian |
-| 2 | The Tide-Pool Feud (Elowen) | Lacecliff Walk (527) | Reborn-style rival duel: pick a side; the winner punches open a sea-cave | **Crabrawler** or **Clobbopus** |
+| 1 | The Scarecrow Walks (Elowen) | Windfall Row (521, 523) | Coll didn't build a scarecrow; water it | a Sudowoodo spar (can't be caught), or spare it (Harmony); **Sudowoodo** catchable after Badge 2 |
+| 1 | Master of Nothing (Elowen) | Dockmaster's House, the Dovetail (107, 109) | something is still aboard the last ferry; it waits for a ship | Potions; **Wattrel "Mast"** on the Ebbmouth mast after Badge 3 |
+| 2 | The Last Plank (Elowen, after Badge 1) | the empty berth (100) | a Timburr mends a berth for a ferry that won't come | **Timburr "Plank"** (Mach Punch) |
+| 1 | Form 7-B (Zenith) | customs hall, lighthouse (108, 103, 106, 107) | sign the disposal or chase three stamps; Hesper keeps the crate by the lamp | **Charcadet** after Badge 2, or $500 + Meridian |
+| 2 | The Tide-Pool Feud (Elowen, after Badge 1) | Lacecliff Walk (527) | Reborn-style rival duel: pick a side; the winner punches open a sea-cave | **Crabrawler** or **Clobbopus** |
 | 2 | The Borrowed Lanterns (Elowen) | Saltmere (140, 145–147) | five lanterns; one is a Kecleon; one is a stagehand's only audience | **Kecleon** (Protean), Silk Scarf |
 | 2 | Field Survey: Coastal (Zenith) | any P-3NNY kiosk | battle on three fields | Exp. Candies |
-| 2 | The Little Crucible (Ashkaar) | Legion barge (146) | three bouts, no healing; then the mascot boss | **Litleo "Cinderpaw"** (boss joins) |
-| 2 | A Hole in the Sky (Elowen) | Lantern Theatre paint loft (145) | the Mourner walked through the painted sky; repaint it | **Smeargle "Brush"** (your palette) |
+| 4 | The Little Crucible (Ashkaar, after Badge 2) | Legion barge (146), by the Frostflat Causeway | three bouts, no healing; then the mascot boss | **Litleo "Cinderpaw"** (boss joins) |
+| 2 | A Hole in the Sky (Elowen) | Lantern Theatre paint loft (145) | the Mourner walked through the painted sky; repaint it | **Smeargle "Brush"** (sea, night, dawn or earth palette) |
 | 2 | The Sound of Saltmere (Elowen) | Saltmere, breakwater (140, 146, 147) | koan: three silences | **Ralts** |
 | 2 | The Orchard Sings (Elowen) | the Glassed Orchard (522) | chiming hoofprints in the glass | **Galarian Ponyta** |
 | 3 | Three Loyal, Three Knots (Elowen) | Dyers' Ford, Gossamer, Briarwick (552, 524, 120) | three riddling shrines tell the true Loyal Three story | Magical Seeds; lore |
-| 3 | The Horn and the Pincer (Elowen) | Gossamer Wood (524) | Heracross vs Pinsir; the one you help clears a shortcut | **Heracross** or **Pinsir** (Moxie) |
+| 3 | The Horn and the Pincer (Elowen, after Badge 2) | Gossamer Wood (524) | Heracross vs Pinsir; the one you help clears a shortcut | **Heracross** or **Pinsir** (Moxie) |
 | 3 | The Silkthief (Elowen) | Guildhall, Deepwood (123, 525) | the silk thief was keeping the moths warm | **Spidops** (boss) or leave it guarding |
 | 4 | Two Hearths, One Pot (Isenmar + Elowen) | Frostwick, Rimewood, Halvard's (573, 562, 576) | 19-year cook-off; or put both in one pot | joint points, Rare Candy |
 | 4 | The Oathbound Parcel (Isenmar) | Frostwick → Ebbmouth (573, 561, 168) | don't open it; it's a Snom eating the oath | **Snom** (Ice Scales) |
@@ -215,9 +215,13 @@ can be **joint** (`:joint => { :ELOWEN => 2 }`), like *Two Hearths, One Pot*.
 | 4 | The Lattice Hums Wrong (Zenith) | Ebbmouth mill-wheels (160, 167) | who gets the recordings | Meridian +1 / Marisol +1 / Larch |
 | 4 | The Egg Thief of Gullcry (Isenmar) | Gullcry Cliffs (561) | it's a Bombirdier delivering eggs to the wrong nests | **Bombirdier** (boss) or let it work |
 
-**Fighting before the Normal Gym 1** (SWAP_GYM1_GYM2 §8): Timburr (Ferrow's, Ch1) and the Crabrawler/Clobbopus duel
-(Lacecliff Walk, Ch2), both before Saltmere. Eevee "Understudy" now comes with Badge 1, and the Saltmere Eevee breeder
-and Abra magician rows in POKEMON_AVAILABILITY moved to after Badge 1.
+**No answers to the next Warden before the gym** (SPINE Revision 16, `design/DISTRIBUTION_STUDY.md`). Revision 14's
+"a Fighting type before Saltmere" is withdrawn: Timburr and the tide-pool duel are "1 Badge Quests" (Reborn hands out its
+first Ground types, Numel and Onyx, right after Julia the same way). Fire, Flying and Rock (Tamsin's answers) wait for
+Badge 2: Charcadet stays by Hesper's lamp, the Sudowoodo is a spar you can't catch yet, the Litleo barge docks after
+Tamsin. The Wattrel (Flying and Electric) waits for Badge 3. The headless test recomputes when each event Pokémon can be
+obtained and fails on any type answer to the next two Wardens (`design/warden_gates.json`). Eevee "Understudy" comes
+with Badge 1.
 
 **Sister-game cameos** stay where `CAMEOS.md` puts them, but each now has a board entry so players can find it: Shelly
 (Elowen, Deepwood, after Gym 2 since Rev 14), Venam and Garret (Nadir), Alexandra (Isenmar), Shiv (Antumbra board,

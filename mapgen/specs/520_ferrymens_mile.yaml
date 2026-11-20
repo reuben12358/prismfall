@@ -1,0 +1,369 @@
+# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 520
+name: The Ferrymen's Mile
+parent: 0
+bgm: Route 1
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: MEADOW
+fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 200, sx: 1, sy: 0}
+tone: [4, 4, -4, 0]
+connections:
+- {dir: S, offset: 10, to: 100, to_offset: 28}
+- {dir: N, offset: 30, to: 521, to_offset: 58}
+- {dir: W, offset: 72, to: 527, to_offset: 22}
+raw: data/raw/520.npy
+tileset: 51
+events:
+- type: event
+  name: Juno tutorial 1
+  at: [20, 89]
+  pages: &id001
+  - cond: {switch: CH1_K1_DONE}
+    trigger: touch
+    commands:
+    - if: $game_self_switches[[520, 0, 'TUT']]
+      then: []
+      else:
+      - '\pf[JUNO,happy]Juno: Catching tutorial! Weaken it, then throw. Don''t throw the Ball AT it, throw it NEAR it.'
+      - '\pf[JUNO,happy]Juno: I learned that the hard way. Sorry, Biscuit.'
+      - {script: 'pbReceiveItem(:POKEBALL, 5)'}
+      - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
+- type: event
+  name: Juno tutorial 2
+  at: [21, 89]
+  pages: *id001
+- type: event
+  name: Juno tutorial 3
+  at: [22, 89]
+  pages: *id001
+- type: event
+  name: Juno tutorial 4
+  at: [23, 89]
+  pages: *id001
+- type: event
+  name: Stile send-off 1
+  at: [16, 97]
+  pages: &id002
+  - commands: []
+  - cond:
+      var: [STORY_CHAPTER, 2]
+    trigger: touch
+    commands:
+    - if: pfm?(:ch2_sendoff)
+      then: []
+      else: &id003
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: Eighteen gyms. Saltmere''s first. The forest road to Briarwick''s corded off -- the Glasswood''s walked
+        across it -- so you go round by the coast.'
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: Two days on foot. Chalk cliffs, then dunes, then the free port. The Warden''s Dorian Pell. He''ll call
+        you "darling" and mean it about a third of the time.'
+      - '\pf[LARCH,neutral,,Professor Larch]Larch: Write to me. I mean it. Gale Post, every town. If I don''t hear from you in a week I start Lecture Two
+        by post.'
+      - '\pf[JUNO,happy]Juno: I''m coming as far as Saltmere! Mum''s promised forty tarts to the Pageant crowd and I''m the cart!'
+      - '\pf[JUNO,happy]Juno: And I''ve wanted to see the Pageant since I was six. There''s a bit where the Plates fall and they use REAL glitter.'
+      - '\pf[LARCH,deadpan,,Professor Larch]Larch: They use salt.'
+      - '\pf[JUNO,shocked,shock]Juno: ...Why would you tell me that.'
+      - {script: 'pfm_item(:TOWNMAP, 1, "Town Map")'}
+      - (Larch has drawn a skull on the Glassed Orchard, a skull on the forest road, and a smaller skull on her own kettle.)
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the first badge in Saltmere, west along the coast.")'}
+      - {script: '$game_variables[102] = 2 if $game_variables[102] < 2'}
+      - {script: 'pfm_set(:ch2_sendoff)'}
+      - {script: 'ev = $game_map.events.values.find { |e| e.name == ''Professor Larch'' }
+
+          $game_self_switches[[520, ev.id, ''A'']] = true if ev
+
+          $game_map.need_refresh = true'}
+- type: event
+  name: Stile send-off 2
+  at: [16, 99]
+  pages: *id002
+- type: event
+  name: Stile send-off 3
+  at: [17, 97]
+  pages: *id002
+- type: event
+  name: Accord barrier 1
+  at: [7, 72]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands: []
+- type: event
+  name: Accord barrier 2
+  at: [7, 71]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands: []
+- type: event
+  name: Accord barrier 3
+  at: [7, 70]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands: []
+- type: event
+  name: Accord barrier 4
+  at: [8, 75]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    through: true
+    commands: []
+- type: event
+  name: Professor Larch
+  at: [19, 97]
+  pages:
+  - commands: []
+  - cond:
+      var: [STORY_CHAPTER, 2]
+    graphic: {sprite: trainer_PROFESSOR, dir: down}
+    commands:
+    - if: pfm?(:ch2_sendoff)
+      then: ['\pf[LARCH,neutral]Larch: Off you go. Lecture Two is already drafted.']
+      else: *id003
+  - cond: {self: A}
+    commands: []
+- type: event
+  name: Accord guard
+  at: [7, 69]
+  pages:
+  - graphic: {sprite: NPC 07, dir: down}
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 07, dir: right}
+    commands: ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.', 'Accord Guard: ...You''ve got a Badge Case. A challenger.
+        Right. Challengers pass, that''s older law than the quarantine.', 'Accord Guard: "Eighteen in Concord, One in Keeping." On you go. Saltmere''s two
+        days west. Mind the cliff path in wind.']
+- type: event
+  name: Accord guard (aside)
+  at: [9, 77]
+  pages:
+  - graphic: {sprite: NPC 07, dir: up}
+    commands: ['Second Guard: Nobody past. Orders came down this morning.']
+  - cond: {switch: CH1_ORCHARD_DONE}
+    graphic: {sprite: NPC 07, dir: right}
+    commands: ['Second Guard: (low) That''s the null one from the dock. Captain said let them through, whatever happens.', 'Accord Guard: Which captain?',
+      'Second Guard: Didn''t say. Came down from Crownhaven with a white seal on it.', '\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
+      'Accord Guard: Lovely weather.']
+- type: event
+  name: The Hale Bell
+  at: [16, 70]
+  pages:
+  - trigger: action
+    commands: ['THE HALE BELL: A ship''s bell on a post above the sea cliff. The ferrymen rang it once the last boat was in.', A cloth has been tied round
+        the clapper., '\pf[JUNO,sad]Juno: Dad tied that. The night they closed the strait. He said there wasn''t anything left to ring for.']
+- type: event
+  name: Hay-cart Driver
+  at: [26, 70]
+  pages:
+  - graphic: {sprite: NPC 11, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.', 'Hay-cart Driver: Now it''s all glass and I go round
+        by Saltmere. Two days. Glass doesn''t pay my horse.']
+- type: sign
+  name: Hale Bell fork sign
+  at: [10, 75]
+  text: THE HALE BELL. <- LACECLIFF WALK, Marram Down and SALTMERE (the Strand Road). ^ Windfall Row. v Ferrow's Landing.
+  post: false
+- type: sign
+  name: Road sign
+  at: [18, 104]
+  text: 'THE FERRYMEN''S MILE
+
+    Ferrow''s Landing - Hale''s Bramble - Windfall Row.
+
+    Mind the hedges. The hedges mind you.'
+  post: false
+- type: trainer
+  at: [26, 66]
+  sight: 4
+  dir: down
+  sprite: trainer_YOUNGSTER
+  trainer: [YOUNGSTER, Pim]
+  intro: A trainer! With a real partner! Fight me, I've got a Bidoof and a dream!
+  after: The dream's fine. The Bidoof needs a minute.
+- type: trainer
+  at: [29, 46]
+  sight: 4
+  dir: left
+  sprite: trainer_LASS
+  trainer: [LASS, Dory]
+  intro: My Fletchling only knows Tackle and judgment.
+  after: It's judging me now.
+- type: npc
+  name: Farmhand
+  at: [40, 63]
+  sprite: NPC 03
+  dir: down
+  move: random
+  text: 'Farmhand: Tall grass is where the wild ones are. Juno''ll tell you their Latin names. Nobody asked her to learn those.'
+- type: item
+  at: [12, 99]
+  item: POTION
+  hidden: true
+  name: Under the stile
+- type: sign
+  at: [12, 98]
+  post: false
+  name: Stile
+  text: A stile over the hedge bank. Somebody has carved a tally of Wingull into the top rail.
+- type: sign
+  at: [44, 56]
+  post: false
+  name: Scarecrow
+  text: It's wearing a Meridian linesman's cap. Somebody has a sense of humor.
+- type: sign
+  at: [11, 62]
+  post: false
+  name: Lookout board
+  text: 'GULLWATCH LOOKOUT
+
+    On a clear day you can see the Dovetail turn for home.'
+- type: sign
+  at: [33, 8]
+  post: false
+  name: Waystone
+  text: A waystone, older than the lane. EIGHTEEN IN CONCORD, it says. The last line has been chiselled off.
+- type: sign
+  at: [20, 52]
+  post: false
+  name: Old well
+  text: A dry well. Something small has made a nest of ferry tickets at the bottom.
+- type: trainer
+  at: [36, 22]
+  sight: 4
+  dir: left
+  sprite: trainer_YOUNGSTER
+  trainer: [YOUNGSTER, Pip]
+  intro: My squad's undefeated on this lane! It's a short lane.
+  after: Aw, my squad lost!
+- type: trainer
+  at: [25, 34]
+  sight: 4
+  dir: right
+  sprite: trainer_LASS
+  trainer: [LASS, Wren]
+  intro: Birdies! Go!
+  after: My birdies! Oh, well done.
+- type: event
+  name: Ferry-toll booth
+  at: [13, 88]
+  pages:
+  - trigger: action
+    commands: ['THE OLD FERRY-TOLL BOOTH. Fare board: "Landing to Saltmere, 3 coppers. Landing to the Strait, 5. Return, ask the captain."', 'Under it,
+        chalked: "STRAIT CLOSED." Under that, smaller: "for now"']
+- type: event
+  name: Road Stone I
+  at: [19, 107]
+  pages:
+  - trigger: action
+    commands: [ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.]
+- type: event
+  name: Hale's Bramble
+  at: [35, 60]
+  pages:
+  - trigger: action
+    commands: [HALE'S BRAMBLE. Six terraces of bramble and berry. Wenna's cousin sells tarts at the shed. The tarts are better than Wenna's. Don't tell
+        Wenna.]
+- type: event
+  name: Wenna's cousin
+  at: [52, 38]
+  pages:
+  - graphic: {sprite: NPC 16, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - 'Wenna''s cousin: Berries are picked by the terrace. Bottom terrace is for tourists. Top terrace is for family.'
+    - 'Wenna''s cousin: You look like family. ...No, you look tired. Here.'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 16, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Wenna''s cousin: Mind the brambles on the way down.']
+- type: berry
+  at: [40, 56]
+  berry: ORANBERRY
+- type: berry
+  at: [46, 50]
+  berry: PECHABERRY
+- type: berry
+  at: [52, 43]
+  berry: CHERIBERRY
+- type: berry
+  at: [54, 39]
+  berry: ORANBERRY
+- type: event
+  name: The Minding Hedges
+  at: [16, 64]
+  pages:
+  - trigger: action
+    commands: ['THE MINDING HEDGES. "Mind the hedges. The hedges mind you." A maze of three turns, planted by a ferryman who missed the sea.']
+- type: item
+  at: [11, 60]
+  item: POTION
+  hidden: true
+  name: HiddenItem (hedge maze)
+- type: event
+  name: Shepherd
+  at: [46, 20]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Shepherd: Three of my Wooloo got out again. They roll. Downhill. Always downhill.', 'Shepherd: If you see a Wooloo, walk it uphill. It''ll
+        be so surprised it''ll follow you.']
+- type: event
+  name: Wooloo
+  at: [40, 14]
+  pages:
+  - graphic: {sprite: Followers/WOOLOO, dir: down}
+    trigger: action
+    move: random
+    commands: ['Baaa. (It is rolling, very slowly, in no direction.)']
+- type: event
+  name: 'Wooloo '
+  at: [50, 25]
+  pages:
+  - graphic: {sprite: Followers/WOOLOO, dir: down}
+    trigger: action
+    move: random
+    commands: [Baaa.]
+- type: item
+  at: [50, 12]
+  item: POKEBALL
+- type: item
+  at: [8, 50]
+  item: POTION
+- type: item
+  at: [4, 97]
+  item: BIGPEARL
+  hidden: true
+  name: HiddenItem (Ferryman's Rest)
+- type: item
+  at: [5, 95]
+  item: REVIVE
+- type: event
+  name: The Ferryman's Rest
+  at: [3, 95]
+  pages:
+  - trigger: action
+    commands: ['A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out.']
+- type: cut_tree
+  at: [9, 88]
+  name: CutTree

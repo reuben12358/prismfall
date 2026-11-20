@@ -271,7 +271,10 @@ def build_528():
 # ====================================================================================================== 520 The Ferrymen's Mile
 def old_events(fn, mid):
     out = {}
-    for d in yaml.safe_load_all(open(os.path.join(HERE, 'specs', fn))):
+    p = os.path.join(HERE, 'layouts', 'old_' + fn)
+    if not os.path.exists(p):                                         # first run: keep the old spec as the events' source
+        os.rename(os.path.join(HERE, 'specs', fn), p)
+    for d in yaml.safe_load_all(open(p)):
         if d and d['id'] == mid:
             for e in d.get('events', []):
                 out[e.get('name') or (e.get('trainer') and e['trainer'][1]) or (e.get('text') or '')[:20] or '%s@%s' % (e['type'], e['at'])] = e
@@ -415,7 +418,6 @@ def build_520():
     r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pink'), n_trees=W * H // 140, copses=8, scatter=12)
     r.paint(glint=0.25)
     flowers(r, 30, 84, 4, 2, p=0.4)
-    from dovetail_ship import place_moored if False else (lambda *a: None)
     h = head(520, "The Ferrymen's Mile", field='MEADOW', bgm='Route 1',
              connections=[{'dir': 'S', 'offset': 10, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
                           {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],
