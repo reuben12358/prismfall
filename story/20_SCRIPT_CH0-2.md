@@ -566,22 +566,22 @@ HEADBUTT TUTOR (farmhand in the yard): Want your partner to learn to headbutt tr
 [name: Wenna] You're sleeping here tonight. That wasn't a question. I don't do questions after sundown.
 [portrait: JUNO, happy] You can have my bed! I'll take the hayloft. I always take the hayloft when we have guests.
 [name: Juno] We've never had guests. I'm very excited about the hayloft.
-[portrait: COLL, deadpan] *(from the yard)* Hayloft's got a goat in it.
-[name: Juno] I'm excited about the goat.
+[portrait: COLL, deadpan] *(from the yard)* Hayloft's got a Skiddo in it.
+[name: Juno] I'm excited about the Skiddo.
 [portrait: WENNA, happy] Supper's whenever you come in. Coll made the bed, so it's made badly. But it's made.
 OBJECTIVE: Sleep at the Hale Farmhouse. (Nobody takes the Strand Road west after dark.)
 ```
 *Wenna, again (after S105, before the night):* `[portrait: WENNA, neutral] Going up to the lighthouse? Give Hesper my love, and don't let her give you any back. Bed's yours whenever.`
-*Coll, in the yard (after S105, before the night):* `[portrait: COLL, neutral] Goat's called Parsnip. Second Parsnip. First one was a donkey. Juno doesn't hold with new names.`
+*Coll, in the yard (after S105, before the night):* `[portrait: COLL, neutral] Skiddo's called Parsnip. Second Parsnip. First one was a Mudbray. Juno doesn't hold with new names.`
 
 ### BED (action, after S105 and V102 < 2) [NEW lines]
 ```
 Juno's bed. The pillow smells of crushed mint and seed packets. Sleep here tonight?
 > Sleep.
-  (Fade out. Crickets. A goat, briefly.)
+  (Fade out. Crickets. A Skiddo bleats, briefly.)
   [portrait: JUNO, happy] *(from the hayloft across the yard)* \PN? You awake? You can see all eighteen from up here tonight.
   [portrait: JUNO, neutral] Usually it's only the near ones. Fourteen. Fifteen if Dad's not snoring. They're brighter every year. Nobody says why.
-  [portrait: JUNO, happy] ...Night! The goat says night too. That was the goat.
+  [portrait: JUNO, happy] ...Night! Parsnip says night too. That was Parsnip.
   (Heals the party. → End of Chapter 1 cutscene, below.)
 > Not yet.
   (The bed will keep.)
@@ -707,8 +707,8 @@ V102 STORY_CHAPTER = 2.
 
 ### EV "The send-off" (523, autorun after the night cutscene; V102 = 2)
 ```
-(Morning. Bramble tea, too many tarts, and a goat in the doorway. Wenna is packing a basket that keeps getting bigger. Coll is reading yesterday's Gale Post upside down. Juno has straw in her blossoms.)
-[portrait: JUNO, happy] Morning! The goat and I have reached an understanding. *(straw falls out of her wreath)*
+(Morning. Bramble tea, too many tarts, and Parsnip the Skiddo in the doorway, chewing the doormat. Wenna is packing a basket that keeps getting bigger. Coll is reading yesterday's Gale Post upside down. Juno has straw in her blossoms.)
+[portrait: JUNO, happy] Morning! Parsnip and I have reached an understanding. *(straw falls out of her wreath)*
 [portrait: WENNA, neutral] Eat. You've two days of cliff ahead of you, and Saltmere charges for air.
 [portrait: WENNA, sad] Rowan was off before the cock crowed. Didn't even take a tart. Twenty years I've known that man and he's never not taken a tart.
 [portrait: JUNO, neutral] Warden business. It's always Warden business.
