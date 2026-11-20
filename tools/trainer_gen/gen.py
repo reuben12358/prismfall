@@ -28,10 +28,10 @@ def casual_drop(top):
     return 2 if top < 40 else 3 if top < 70 else 4
 
 def hard_ev(spread, level):
-    """Hard's 252/252 spreads grow with the journey: at most 8 x level per stat (88 at Lv 11, 152 at 19, full from 32).
+    """Hard's 252/252 spreads grow with the journey: at most 6 x level per stat (66 at Lv 11, 114 at 19, full from 42).
     Reference: Reborn and Rejuvenation give trainers min(85, 1.5 x level) by default; 252s everywhere is Reborn's
     Pulse-2 password, not its base game. Harness: flat 252s at Lv 11-15 beat even a prepared Gym 1 team 60/60."""
-    top = min(252, 8 * level)
+    top = min(252, 6 * level)
     return ",".join(str(min(int(v), top)) for v in spread.split(","))
 
 def bag(top, diff, boss=False):
@@ -150,7 +150,7 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
-      only="nocasual", hard={"moves": "TEETERDANCE,HEADBUTT,PSYBEAM,COPYCAT", "item": "SITRUSBERRY"}),
+      only="nocasual", hard={"moves": "TEETERDANCE,PSYBEAM,COPYCAT,TACKLE", "item": "SITRUSBERRY"}),
     # Hard only: the understudy who shouts. Soundproof ignores the player's sound moves (and Dorian's own songs), and
     #    its Echoed Voice is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
     #    (Furfrou's Fur Coat + Headbutt and a Chatter Chatot both swept prepared teams at Lv 13-14 in the harness.)

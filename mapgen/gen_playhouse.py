@@ -263,6 +263,14 @@ def main():
             {'if': 'pfm_gym_won?(:LEADER_TAMSIN)', 'then': [
                 {'se': 'Door exit'}, {'transfer': {'map': 151, 'x': P.STAGE_AT['exit'][0], 'y': P.STAGE_AT['exit'][1] - 1, 'dir': 'up'}}],
              'else': ['A door in the wings, chalked: "OLD REVOLVE - CREW ONLY. Come back with a second badge, darling. - D.P."']}]}]},
+        {'type': 'event', 'name': 'Field Notes', 'at': [0, 1], 'pages': [    # the first field's pop-up, once, on the first step up the aisle
+            {'trigger': 'parallel', 'commands': [
+                {'if': '!pfm?(:fn_grand_stage) && $game_player.y <= %d && !$game_temp.message_window_showing' % (T['start'][1] - 1), 'then': [
+                    {'script': 'pfm_set(:fn_grand_stage)'},
+                    "FIELD NOTES: GRAND STAGE - the audience reacts. Sound moves and dances earn applause, and applause lifts the next move. "
+                    "Nothing on this stage is real, which is the point.",
+                    "(Larch, in the margin: 'Saltmere. The one place I never worry about you. Don't make me start.')"]},
+                {'wait': 6}]}]},
         {'type': 'event', 'name': 'Juno reveal', 'at': [0, 0], 'pages': [   # Juno comes into the stalls once one actor is beaten
             {'trigger': 'parallel', 'commands': [
                 {'if': "$game_map.events.values.count { |e| e.name[/^Trainer\\(/] && $game_self_switches[[154, e.id, 'A']] } >= 1",

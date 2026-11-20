@@ -107,13 +107,13 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   - **b** to the Shard house (NW);
   - **c** to the Matriarch's nest (N centre).
   Anchors stand at the hamlet's south edge (8,22), (16,22), (24,22).
-- **Start:** a taut, b and c slack.
+- **Start:** a and b taut, c slack (the design fix proved in `mapgen/puzzles/dungeons.py`; the first draft started with only
+  a taut, and anchor 2 then tightened all three in one pull, so the parity lesson never happened).
 - **The aha (parity):**
-  - Every anchor flips *two* bridges, so the number of taut bridges is always odd. You can never have all three, or
-    exactly two of a, b, c chosen freely.
-  - You must choose: the nest (c) needs **c taut**. The cheapest way is anchor 3 (a slack, c taut).
-  - For the optional houses, visit a first (start state), then b via anchor 1 (a slack, b taut), then c via anchor 2
-    (b slack, c taut).
+  - Every anchor flips *two* bridges, so the number of taut bridges stays even: two or none. You can never have all three.
+  - The two houses are open on arrival: visit them first (a to the TM81 cocoon-house, b to the Shard house).
+  - The nest (c) needs **c taut**, and every pull that tightens c slackens a or b: anchor 2 (b slack, c taut) or anchor 3
+    (a slack, c taut). Opening the nest always costs a house, so the order matters: houses first, then the nest.
 - Juno (outside the Veil): "Granny Loom always said three threads can't all be tight at once. I thought she meant
   feelings."
 - **State:** S511 / S512 / S513 = bridges a/b/c taut.
@@ -338,8 +338,9 @@ y10  #####@######    @ (5,10) ladder up to 152 p
   with it — swings a quarter-turn."
 - **Solution (verified, BFS):** walk to (4,5) and crank three times. You ride from west to north to east to south.
   Then walk east (6,6) → (7,6) → (8,6) and north up the right-hand corridor to the chest.
-- **Reward:** Magical Seed ×2 (on Grand Stage: +1 Speed and Laser Focus), PP Up, and the prop crown of the Gilded King
-  (flavour; Dorian comments in 154).
+- **Reward:** Magical Seed ×2 (on Grand Stage: +1 Speed and Laser Focus), PP Up, and the old Crown prop with its original
+  stone still whole (`pfm?(:old_crown_prop)`; a match for Saltmere's prop-room scene, Crown seed 2). Not the Gilded King's
+  crown: Dorian keeps *The Gilded King* and hands over only the prologue page (story editor's ruling, SWAP_GYM1_GYM2 §2).
 - **Reset:** the apprentice "Old Joss" (by the ladder) → V312 = 0.
 
 ---
