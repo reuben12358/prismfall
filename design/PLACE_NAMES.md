@@ -73,6 +73,7 @@ uses rows whose Old and New differ.
 | 131 | Loomhouse Gym - Weaving Hall | Loomhouse Gym - Weaving Hall | kept | Elowen | 11, 13 |  |
 | 132 | Loomhouse Gym - Canopy Lofts | Loomhouse Gym - Canopy Lofts | kept | Elowen | 11, 13 |  |
 | 133 | Loomhouse Gym - The Spindle | Loomhouse Gym - The Spindle | kept | Elowen | 11, 13 |  |
+| 134 | Loomhouse Upper Lofts - Granny's Knot | Loomhouse Upper Lofts - Granny's Knot | kept | Elowen | 11, 13 |  |
 | 140 | Saltmere - Promenade & Market | Saltmere - Promenade & Market | kept | Elowen | 6, 18 | A salt lake behind a sandbar: the town's wealth and its name. Elowen's chartered free port. |
 | 141 | Saltmere Pokémon Center | Saltmere Pokémon Center | kept | Elowen | 6, 18 |  |
 | 142 | Saltmere Mart | Saltmere Mart | kept | Elowen | 6, 18 |  |

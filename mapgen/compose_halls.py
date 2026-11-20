@@ -223,11 +223,12 @@ def main():
     # ---- art pass (2026-11-19): the Playhouse's proscenium, painted drop, footlights and orchestra pit; the Weaving
     # Hall's depth under the loom beds (hall_art.py, drawn on the 16-px grid and doubled like the tiles around them)
     import hall_art as HA
-    for (cx, cy), t in HA.tiles(HA.backdrop()).items(): add('backdrop_%d_%d' % (cx, cy), t, 15)
+    for (cx, cy), t in HA.tiles(HA.backdrop(15, 3)).items(): add('backdrop_%d_%d' % (cx, cy), t, 15)
     for p in ('cap', 'shaft', 'base'): add('column_' + p, HA.gold_column(p), 15)
     for p in ('l', 'mid', 'r'): add('beam_' + p, HA.proscenium_beam(p), 15)
     for (cx, cy), t in HA.tiles(HA.mask_crest()).items(): add('crest_%d' % cx, t, 15)
     add('footlight', HA.footlight(), 15); add('glow', HA.glow(), 0)
+    for (cx, cy), t in HA.tiles(HA.old_poster()).items(): add('paste_%d_%d' % (cx, cy), t, 15)
     for i, f in enumerate((1241, 1242, 1243)): add('pit_%d' % i, HA.pit_floor(src('mi', f)), 15)
     for p in ('l', 'mid', 'r'): add('pit_rail_' + p, HA.pit_rail(p), 15)
     add('music_stand', HA.music_stand(), 15)

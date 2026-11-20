@@ -19,3 +19,40 @@ module Compiler
     end
   end
 end
+
+#-------------------------------------------------------------------------------
+# Fly follows the town's live HealingSpot. A Point's fly coordinates are copied from the PC's HealingSpot when
+# tools/worldmap/gen_docs.py runs; when a map rebuild moves the PC door, the town map would send Fly to the old
+# tile until gen_docs is re-run. Here the spot comes from map metadata (the PC map whose HealingSpot names the same
+# town) and the PBS coordinates are only the fallback. Nothing changes for towns whose spot is already right.
+#-------------------------------------------------------------------------------
+module Prismfall
+  module TownMapFly
+    module_function
+
+    def live_spot(map_id)
+      @spots ||= {}
+      return @spots[map_id] if @spots.key?(map_id)
+      found = nil
+      GameData::MapMetadata.each do |md|
+        dest = md.teleport_destination
+        next if !dest || dest[0] != map_id
+        found = [dest[0], dest[1], dest[2]]
+        break
+      end
+      @spots[map_id] = found
+    end
+  end
+end
+
+class PokemonRegionMap_Scene
+  if method_defined?(:pbGetHealingSpot) && !method_defined?(:prismfall_pbGetHealingSpot)
+    alias_method :prismfall_pbGetHealingSpot, :pbGetHealingSpot
+
+    def pbGetHealingSpot(x, y)
+      spot = prismfall_pbGetHealingSpot(x, y)
+      return spot if !spot || @editor
+      Prismfall::TownMapFly.live_spot(spot[0]) || spot
+    end
+  end
+end

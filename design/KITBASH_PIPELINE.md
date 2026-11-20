@@ -135,3 +135,18 @@ Sheet: `art/previews/14_juno_portraits.png`. Script: `juno_portraits_p4.py`, `sh
 - **Sprite busts** (32x32 crop of the 80-px front, x3): match the battle sprite exactly, but the face is 8 px wide, so expressions
   barely differ and the pixels are 1.5x coarser than a 48-px portrait. Usable as a consistent fallback, not as Rejuvenation-style art.
 - Installed portraits: the pass-3 composite A set (stopgap, replaces the Burgh-based set).
+
+## 11. Portrait pass 5, rejected (2026-11-19)
+
+Sheet: `art/previews/15_juno_portraits.png`. Script: `juno_portraits_p5.py`, `sheet15.py`. Composite A's look was rebuilt on a
+Rejuvenation VS-bust face (RJ `vsTrainer150` face/fringe, `vsTrainer143` bloom, `vsPlayer6_2` curls, hand mouths for five
+expressions). It was installed and then reverted: the pass-3 set is back in `art/out/Graphics/Portraits/`, pass 5 is in
+`passes/replaced_p5_portraits/`.
+
+- **Taste lesson:** the user prefers the cleaner, brighter, bigger-eyed **official B2W2-VS look** of pass 3 ("she looks damn
+  near cool in that") over the realistic, painterly Rejuvenation/Desolation faces. Matching the reference games' shading depth is
+  not the goal on its own. Pass 5 "reads like Burgh" to him (the pass-2 Burgh set left a bad memory, and the 3/4 tilted grin
+  with a big hair mass brought it back).
+- **Anything that reads even slightly like a known character fails.** Before showing any face or sprite, ask "who does this look
+  like?" and check against the obvious official characters (Burgh, Rosa, Hilda, Bianca...) as well as the donors.
+- Polish of an accepted look stays inside that look: keep face, eyes and style exactly; only fix the listed faults.

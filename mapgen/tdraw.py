@@ -1092,6 +1092,41 @@ def ivy_face(v):
     return im
 
 
+def balustrade(end='m', iron=False):
+    """a parapet along a terrace or sea-wall lip (1x1, drawn over the coping): stone balusters under a capping rail, or
+    an iron railing with finials for the promenade; end 'w' / 'e' adds the pier post"""
+    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im)
+    if iron:
+        IR = D.IRON
+        d.line([0, 5, 15, 5], fill=IR[0]); d.line([0, 6, 15, 6], fill=IR[2])
+        d.line([0, 12, 15, 12], fill=IR[1])
+        for x in range(1, 16, 3):
+            d.line([x, 5, x, 13], fill=IR[1]); P(im, x, 4, IR[3]); P(im, x, 3, IR[2])
+        d.line([0, 14, 15, 14], fill=(0, 0, 0, 50))
+    else:
+        d.rectangle([0, 3, 15, 5], fill=QY[4] + (255,)); d.line([0, 3, 15, 3], fill=QY[5] + (255,)); d.line([0, 5, 15, 5], fill=QY[1] + (255,))
+        for x in range(1, 16, 4):
+            d.rectangle([x, 6, x + 2, 12], fill=QY[3] + (255,)); d.line([x + 2, 6, x + 2, 12], fill=QY[1] + (255,))
+            P(im, x + 1, 8, QY[5] + (255,)); d.line([x, 9, x + 2, 9], fill=QY[2] + (255,))
+        d.rectangle([0, 12, 15, 14], fill=QY[2] + (255,)); d.line([0, 12, 15, 12], fill=QY[4] + (255,)); d.line([0, 14, 15, 14], fill=QY[0] + (255,))
+    if end in 'we':
+        x = 0 if end == 'w' else 12
+        d.rectangle([x, 1, x + 3, 14], fill=(QY[3] if not iron else D.IRON[1][:3]) + (255,), outline=OUT)
+        d.line([x + 1, 2, x + 1, 13], fill=(QY[5] if not iron else D.IRON[3][:3]) + (255,))
+    return im
+
+
+def glint(v):
+    """sparse wave crests for open water (1x1, overlay; passability falls through to the water below)"""
+    im = Image.new('RGBA', (16, 16), CLEAR); rng = random.Random(700 + v)
+    for _ in range(2 + v % 2):
+        x, y = rng.randrange(1, 12), rng.randrange(2, 14); L = rng.randrange(3, 6)
+        for k in range(L):
+            P(im, x + k, y - (1 if 0 < k < L - 1 else 0), (236, 246, 252, 210))
+        P(im, x + 1, y + 1, (150, 196, 230, 160))
+    return im
+
+
 def stall(cols, goods, seed):
     """a market stall (3x2): a striped canvas roof on poles over a plank counter with goods"""
     im = Image.new('RGBA', (48, 32), CLEAR); d = ImageDraw.Draw(im); rng = random.Random(seed)
@@ -1323,6 +1358,9 @@ def city_pieces():
     im, c = monument(); out['pf_hounds'] = (im, c, None)
     for v in range(4): out['pf_planter%d' % v] = (planter(v), ['W', 'W'][:1] * 1 if False else ['WW'], None)
     im, c = well(); out['pf_well'] = (im, c, None)
+    for e in 'wme':
+        out['rw_rail_' + e] = (balustrade(e), ['W'], None); out['qy_rail_' + e] = (balustrade(e, iron=True), ['W'], None)
+    for v in range(4): out['hb_glint%d' % v] = (glint(v), ['O'], None)
     for v in range(2): out['rw_ivy%d' % v] = (ivy_face(v), ['W'], None)
     for kind in ('W', 'E'):                     # map builder 9: solid side copings for terraces on land (no stepping off the side)
         out['rw_%s0' % kind] = (quay(kind + 'm', 0), ['W'], None)

@@ -43,7 +43,7 @@ if defined?(PrismfallPuzzles)
   PrismfallPuzzles.room(:ph_theatre, {
     :name => "Pell Playhouse auditorium",
     :map => 154,
-    :start => [12, 21, 8],
+    :start => [12, 28, 8],
     :reset => { :vars => { 311 => 0 } },
     :solved => { :vars => { 311 => 1 } },
     :hints => ["Up the aisle, love, and onto the apron. The show can't start with the curtain in.", "The rope by the stagehand on the right of the apron flies the curtain out."],

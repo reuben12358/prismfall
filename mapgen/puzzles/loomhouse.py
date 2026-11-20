@@ -13,19 +13,22 @@ S_ALPHA, S_BRASS, S_GAMMA, S_KNOT = 305, 306, 307, 308
 # ------------------------------------------------------------------------------------------------ 130 Foyer
 # TEACH: a straight, handsome hall; ONE heddle beside the aisle, tied by a visible silk thread to a plank that sits
 # off to the left of the loom bed; one pull slides it into the aisle.  The stairs at the top go to the Weaving Hall.
+# Art pass (2026-11-19): the walls are four rows tall (tall windows, roof beams), so everything below sits two rows lower
+# than the Revision 14 build.  Every coordinate below is the built one.
 def _gym():
     W = 20
-    wall = '###' + 'W' * 12 + 'SW' + '###'
+    wall, stair = '###' + 'W' * 14 + '###', '###' + 'W' * 12 + 'SW' + '###'
     fl, bed = '###' + '.' * 14 + '###', '###' + 'v' * 14 + '###'
-    return ['#' * W, '#' * W, wall, wall] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########', '#' * W]
+    return ['#' * W, '#' * W, wall, wall, stair, stair] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########', '#' * W]
 
 
 GYM = _gym()
-GYM_PLANKS = {0: (5, 6), 1: (9, 10)}          # V308 -> plank columns (rows 8-9); the aisle is x9-10
-GYM_LOOMS = [(4, 6), (6, 6), (12, 12), (14, 12), (4, 12), (6, 12), (4, 15), (6, 15), (12, 15), (14, 15), (4, 18), (12, 18)]   # 2x2 each
-GYM_AT = dict(heddle=(11, 10), exit=(9, 22), start=(9, 21), stair=(15, 2), pim=(13, 20), guide=(6, 20), tamsin_foyer=(10, 19),
-              nell=(8, 14), orla=(11, 17), first_loom=(4, 19), item=(15, 6),
-              card_a=(5, 3), card_b=(12, 3), portrait=(8, 3))
+GYM_BED = (10, 11)                            # the loom bed's rows
+GYM_PLANKS = {0: (5, 6), 1: (9, 10)}          # V308 -> plank columns; the aisle is x9-10
+GYM_LOOMS = [(4, 8), (6, 8), (12, 14), (14, 14), (4, 14), (6, 14), (4, 17), (6, 17), (12, 17), (14, 17), (4, 20), (12, 20)]   # 2x2 each
+GYM_AT = dict(heddle=(11, 12), exit=(9, 24), start=(9, 23), stair=(15, 4), arrive=(15, 6), pim=(13, 22), guide=(6, 22), tamsin_foyer=(10, 21),
+              nell=(8, 16), orla=(11, 19), first_loom=(4, 21), item=(15, 8),
+              card_a=(5, 5), card_b=(13, 5), portrait=(8, 5))
 
 
 def gym_model():
@@ -51,16 +54,17 @@ def _hall():
     W = 25
     full, gap = '#' + '.' * 23 + '#', '#' + 'v' * 23 + '#'
     seg = '#....oooooo...oooooo....#'
-    wall = '#' + 'W' * 11 + 'S' + 'W' * 11 + '#'
-    return (['#' * W, wall, wall, full, full] + [gap] * 4 + [seg, seg] + [gap] * 3 + [seg, seg] + [gap] * 4 +
+    wall, stair = '#' + 'W' * 23 + '#', '#' + 'W' * 11 + 'S' + 'W' * 11 + '#'
+    return (['#' * W, wall, wall, stair, stair, full, full] + [gap] * 4 + [seg, seg] + [gap] * 3 + [seg, seg] + [gap] * 4 +
             [full, full, '#' * 12 + '.' + '#' * 12, '#' * W])
 
 
 HALL = _hall()
 HALL_COLS = (3, 12, 21)
-HALL_GAPS = {'A': (range(5, 9), V_A, (3, 12, 21)), 'B': (range(11, 14), V_B, (None, 12, 21)), 'C': (range(16, 20), V_C, (3, 12, 21))}
-HALL_HEDDLES = {'Red': ((1, 21), (V_A, V_B), 'A and B'), 'Gold': ((9, 21), (V_B, V_C), 'B and C'), 'Green': ((23, 21), (V_C, V_A), 'C and A')}
-HALL_AT = dict(stair=(12, 1), entrance=(12, 22), start=(12, 21), pim=(15, 21), bram=(2, 3), tamsin=(11, 3), sign=(2, 10))
+HALL_GAPS = {'A': (range(7, 11), V_A, (3, 12, 21)), 'B': (range(13, 16), V_B, (None, 12, 21)), 'C': (range(18, 22), V_C, (3, 12, 21))}
+HALL_HEDDLES = {'Red': ((1, 23), (V_A, V_B), 'A and B'), 'Gold': ((9, 23), (V_B, V_C), 'B and C'), 'Green': ((23, 23), (V_C, V_A), 'C and A')}
+HALL_AT = dict(stair=(12, 3), entrance=(12, 24), start=(12, 23), pim=(15, 23), bram=(2, 5), tamsin=(11, 5), sign=(2, 12), juno=(13, 23),
+               arrive_from_lofts=(12, 5))
 
 
 def hall_model():
@@ -85,7 +89,7 @@ def hall_model():
     m = Model('lh_hall (131)', cells, passable, (131,) + HALL_AT['start'], (0, 0, 0), dev,
               [c for c in around(131, *HALL_AT['tamsin']) if c in cells], resets=around(131, *HALL_AT['pim']))
     m.game = lambda v: ({V_A: v[0], V_B: v[1], V_C: v[2]}, {})
-    m.exits = [(131,) + HALL_AT['stair'], (131, 12, 2)]          # the Upper Lofts stair (after the badge)
+    m.exits = [(131,) + HALL_AT['stair'], (131, 12, 4)]          # the Upper Lofts stair (after the badge)
     return m
 
 

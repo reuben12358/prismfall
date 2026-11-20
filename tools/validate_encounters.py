@@ -170,6 +170,66 @@ def base_unlock(etype):
     return 0
 
 
+# ---- Warden gates (SPINE Rev 16; design/warden_gates.json, DISTRIBUTION_STUDY.md section 4) ------------------
+GATES_FILE = os.path.join(ROOT, "design", "warden_gates.json")
+
+
+def load_gates(path=GATES_FILE):
+    """The checked Wardens (those with 'answers') and the shared rule numbers, or (None, None)."""
+    try:
+        d = json.load(open(path, encoding="utf-8"))
+    except (OSError, ValueError):
+        return None, None
+    return [w for w in d["wardens"] if w.get("answers")], d["rules"]
+
+
+def line_types(sp, s, cap, seen=frozenset()):
+    """Types of s plus every type its level-up line reaches at or below `cap` (evolution-aware gates)."""
+    out = set(sp[s]["types"])
+    evos = sp[s]["evos"] or sp.get(sp[s]["base"], {}).get("evos", [])
+    for tgt, meth, par in evos:
+        if tgt in sp and tgt not in seen and par.isdigit() and int(par) <= cap and \
+                (meth.startswith("Level") or meth in LEVEL_METHODS):
+            out |= line_types(sp, tgt, cap, seen | {s})
+    return out
+
+
+def gate_kind(types, w):
+    """'zero', 'gated', 'blunted' or None: how a Pokemon of these types counts against Warden w."""
+    t = set(types)
+    if t & set(w.get("zero", [])): return "zero"
+    if t & set(w.get("gated", [])): return "gated"
+    if w.get("own_type_fliers") and "FLYING" in t and w["type"] in t: return "gated"
+    if t & set(w.get("blunted", [])): return "blunted"
+    return None
+
+
+def gate_check(slots, eff, sp, gates, rules, tag, errors):
+    """slots: [(weight, species, ...)] of ONE encounter type usable from `eff` badges. Errors for gated answers."""
+    if not gates or eff is None: return
+    tot = sum(s[0] for s in slots) or 1
+    for w in gates:
+        if eff >= w["n"]: continue
+        total, worst = 0.0, []
+        for sl in slots:
+            wt, s = sl[0], sl[1]
+            if s not in sp: continue
+            k = gate_kind(line_types(sp, s, w["cap"]), w)
+            pct = 100.0 * wt / tot
+            if k == "zero":
+                errors.append(f"{tag}: {s} is a {'/'.join(sorted(set(sp[s]['types'])))} answer to Warden {w['n']} "
+                              f"({w['warden']}, {w['type']}) and none may appear before that gym (Revision 16)")
+            elif k == "gated":
+                total += pct
+                if pct > rules["rare_slot_pct"] + 1e-9:
+                    errors.append(f"{tag}: {s} ({pct:.0f}%) answers Warden {w['n']} ({w['warden']}, {w['type']}); "
+                                  f"before that gym an answer may be at most {rules['rare_slot_pct']}% of a table")
+                worst.append(s)
+        if total > rules["rare_table_pct"] + 1e-9:
+            errors.append(f"{tag}: answers to Warden {w['n']} ({', '.join(worst)}) add up to {total:.0f}% "
+                          f"(max {rules['rare_table_pct']}% of a table before Gym {w['n']})")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", default=os.path.join(ROOT, "pbs", "encounters.txt"))
@@ -177,9 +237,13 @@ def main():
     ap.add_argument("--scripts", default="/home/claude/ref/essentials/Data/Scripts")
     ap.add_argument("--maps", default=os.path.join(ROOT, "design", "maps.json"))
     ap.add_argument("--summary", action="store_true")
+    ap.add_argument("--gates", action="store_true", help="list every answer to Wardens 1-4 usable before their gyms")
     ap.add_argument("--strict", action="store_true")
     a = ap.parse_args()
     errors, warns = [], []
+    gates, grules = load_gates()
+    if gates is None: warns.append(f"{GATES_FILE} missing: Warden gates (Revision 16) not checked")
+    gate_rows = defaultdict(list)   # warden n -> [(kind, species, pct, map tag, method, levels)]
     sp, prevo = parse_species(a.pbs)
     enc_types = parse_enc_types(a.scripts)
     if not enc_types: print("FATAL: no encounter types found in", a.scripts); return 2
@@ -251,6 +315,14 @@ def main():
                 fam = family_root(s)
                 key = eff if eff is not None else 99
                 if fam not in first_seen or key < first_seen[fam][0]: first_seen[fam] = (key, mid, s)
+            gate_check(slots, eff, sp, gates, grules, f"{tag} {t}", errors)
+            if a.gates and gates and eff is not None:
+                for w in gates:
+                    if eff >= w["n"]: continue
+                    for (wt, s, lo, hi, no) in slots:
+                        if s in sp:
+                            k = gate_kind(line_types(sp, s, w["cap"]), w)
+                            if k: gate_rows[w["n"]].append((k, s, 100.0 * wt / tot, tag, t, f"{lo}-{hi}"))
             if kdenom and not info.get("wild_theme_exempt") and 100 * kshare // kdenom < KINGDOM_SHARE_MIN:
                 warns.append(f"{tag} {t}: only {100*kshare//kdenom}% {info['kingdom']}-type (target ~70)")
 
@@ -277,6 +349,11 @@ def main():
         miss = sorted(roots - set(first_seen))
         print(f"\n## Non-legendary families with no wild slot ({len(miss)}): gifts/statics must cover these\n")
         print(", ".join(miss))
+    if a.gates and gates:
+        for w in gates:
+            print(f"\n## Answers to Warden {w['n']} ({w['warden']}, {w['type']}, cap {w['cap']}) usable before the gym\n")
+            for (k, s, pct, tag, t, lv) in sorted(gate_rows[w["n"]], key=lambda r: (r[0], -r[2], r[1])):
+                print(f"- {k:8s} {s:12s} {pct:5.1f}%  {t:12s} Lv{lv:7s} {tag}")
     print(f"\n{len(maps)} encounter tables, {len(errors)} errors, {len(warns)} warnings")
     return 1 if errors or (a.strict and warns) else 0
 

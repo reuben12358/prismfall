@@ -43,35 +43,62 @@ for i in (525, 548, 151, 152, 153, 132, 134):      # after Tamsin's badge (SWAP_
     SEG_FIX[i] = 2
 
 E = lambda d, to, note='': dict(type='edge', dir=d, to=to, **({'note': note} if note else {}))
-# Revision 14 connections (SWAP_GYM1_GYM2.md 1A). Edge spans for new or moved edges are left to the map builder.
+WP = lambda at, to, link, note='': dict(type='warp', at=list(at), to=to, link=link, **({'note': note} if note else {}))
+# Revision 14 connections (SWAP_GYM1_GYM2.md 1A), declarative: `edges` is the COMPLETE edge list of the map and is
+# rebuilt from this table on every run, so the script is idempotent (the old retarget/add form stacked a new
+# "570 south -> 577" edge on each run). Every edge pair joins opposite sides, as Essentials requires. A `span` the
+# map builder wrote is kept while the edge stays on the same side; `to_span` only while the neighbour is the same.
+# Warps/doors are kept, except `drop_links`; `links` adds or updates warps by link name; `notes` annotate by link.
 REV14 = {
-    520: dict(add=[E('west', 527, 'at the Hale Bell; the quarantine roadblock (Accord guards) moves here from 521 and lifts on S105')]),
-    521: dict(note={'R2_WOOD': 'the corded forest road: a "Forest-road cordon" event blocks it from this side always, and '
-                               'from 524\'s side until V105 BRIARWICK_GLASSWOOD >= 1'}),
-    527: dict(set=[E('east', 520, 'the Hale Bell exit'), E('west', 528)]),
-    528: dict(set=[E('east', 527), E('west', 140, 'Saltmere East Gate')]),
-    140: dict(add=[E('east', 528, 'East Gate (from Marram Down)')],
-              note={541: 'North Gate: closed until S108 (Gate Warden event, Chapter 2 close)',
-                    560: 'West Gate: the Frostflat Causeway, chained at the Border Stones until the player reaches Frostwick'}),
-    541: dict(retarget={540: 552}),
-    552: dict(set=[E('south', 541), E('north', 540)]),
-    540: dict(retarget={541: 552, 120: 524}, drop_links=['R3_COCOON'],
-              note={552: 'replaces the Grey Saltings edge (the built map joins it on its south edge, x 2-9)',
-                    524: "the Gossamer's west eaves (replaces the Briarwick edge)"}),
-    524: dict(add=[E('west', 540, 'from Thistledown Lea')],
-              note={'R2_WOOD': 'the corded forest road to Windfall Row: opens from this side when V105 >= 1',
-                    'WOOD_DEEP': 'behind a CUT tree: HM01 from the Cutter after Tamsin\'s badge (Badge 2)'}),
-    120: dict(drop_to=[540], add=[E('north', 566, 'North Gate')]),
-    566: dict(set=[E('south', 120, 'Briarwick North Gate'), E('north', 577)]),
-    577: dict(set=[E('south', 566), E('west', 570, 'Frostwick East Gate')]),
-    570: dict(retarget={560: 577, 562: 578},
-              add=[E('south', 560, 'South Gate: the Frostflat Causeway, the side road back to Saltmere')]),
-    578: dict(set=[E('south', 570, 'Frostwick North Gate'), E('north', 562)]),
-    562: dict(retarget={570: 578}),
-    560: dict(retarget={570: 570}, redir={570: 'north'},
-              note={570: "to Frostwick's South Gate: Essentials joins opposite edges, so turn the Causeway's last stretch "
-                         "north (N edge <-> 570 S) or use a warp. The chain at the Border Stones opens from the Frostwick side"}),
+    520: dict(edges=[E('south', 100), E('north', 521),
+                     E('west', 527, 'at the Hale Bell; the quarantine roadblock (Accord guards) moves here from 521 and '
+                                    'lifts on S105')]),
+    521: dict(edges=[E('south', 520)],
+              notes={'R2_WOOD': 'the corded forest road: a "Forest-road cordon" event blocks it from this side always, '
+                                'and from 524\'s side until V105 BRIARWICK_GLASSWOOD >= 1'}),
+    527: dict(edges=[E('east', 520, 'the Hale Bell exit'), E('west', 528)]),
+    528: dict(edges=[E('east', 527), E('west', 140, 'Saltmere East Gate')]),
+    140: dict(edges=[E('north', 541, 'North Gate: closed until S108 (Gate Warden event, Chapter 2 close)'),
+                     E('west', 560, 'West Gate: the Frostflat Causeway, chained at the Border Stones until the player '
+                                    'reaches Frostwick'),
+                     E('east', 528, 'East Gate (from Marram Down)')]),
+    541: dict(edges=[E('north', 552), E('south', 140, 'North Gate')]),
+    552: dict(edges=[E('south', 541), E('north', 540)]),
+    540: dict(edges=[E('east', 524, "the Gossamer's west eaves (replaces the Briarwick edge)"),
+                     E('south', 552, 'replaces the Grey Saltings edge (the built map already has its 541 edge on the '
+                                     'south side, x 2-9)')],
+              drop_links=['R3_COCOON']),
+    524: dict(edges=[E('west', 540, 'from Thistledown Lea')],
+              notes={'R2_WOOD': 'the corded forest road to Windfall Row: opens from this side when V105 >= 1',
+                     'WOOD_DEEP': 'behind a CUT tree: HM01 from the Cutter after Tamsin\'s badge (Badge 2)'}),
+    525: dict(links=[WP((43, 20), 548, 'DEEP_COCOON', 'through the Veil (Juno and Tamsin wait here): the only way into '
+                                                      'Cocoonfall Hollow')]),
+    548: dict(drop_links=['R3_COCOON'],
+              links=[WP((0, 16), 525, 'DEEP_COCOON', 'back to the Deepwood; the Thistledown Lea warp (R3_COCOON) is gone')]),
+    132: dict(links=[WP((22, 2), 134, 'BWG_3', "Granny's door (it led to 133 The Spindle before Revision 14)")]),
+    120: dict(edges=[E('north', 566, 'North Gate')]),
+    566: dict(edges=[E('south', 120, 'Briarwick North Gate'), E('north', 577)]),
+    577: dict(edges=[E('south', 566), E('west', 570, 'Frostwick East Gate')]),
+    570: dict(edges=[E('east', 577, 'East Gate (the whale-rib palisade)'), E('north', 578, 'North Gate'),
+                     E('south', 560, 'South Gate: the Frostflat Causeway, the side road back to Saltmere')]),
+    578: dict(edges=[E('south', 570, 'Frostwick North Gate'), E('north', 562)]),
+    562: dict(edges=[E('south', 578), E('north', 561)],
+              notes={'RIME_GLADE': 'behind a frosted sapling (Cut: HM01 comes after Badge 2)'}),
+    560: dict(edges=[E('east', 140),
+                     E('north', 570, "to Frostwick's South Gate: Essentials joins opposite edges, so turn the Causeway's "
+                                     "last stretch north (N edge <-> 570 S) or use a warp. The chain at the Border Stones "
+                                     "opens from the Frostwick side")]),
 }
+# maps the builder has built that maps.json did not list (Revision 14 segments must be explicit for them)
+EXTRA_MAPS = {
+    134: dict(id=134, name="Loomhouse Upper Lofts - Granny's Knot", act=1, kingdom='Elowen', kind='gym', size=[20, 15],
+              tileset='Gyms interior', bgm='Gym', field='SILKWOOD', segment=2, puzzle='GYM_PUZZLES.md#134',
+              connections=[dict(type='warp', at=[9, 12], to=132, link='BWG_3', note="back to the Canopy Lofts")],
+              note='Upper Lofts mastery room (optional, after Tamsin\'s badge); added by the cartographer so its segment '
+                   'is explicit (validate_encounters falls back to the pre-swap ID scheme otherwise)',
+              tileset_kit='G5_GYM_INTERIOR', border='building walls (interior)'),
+}
+RETIRED = {133: 'GYM_PUZZLES.md: retired in Revision 14 (Tamsin battles on 131\'s top ledge); not built'}
 
 
 def apply_rev14(by):
@@ -80,30 +107,51 @@ def apply_rev14(by):
         if m is None:
             continue
         cs = list(m.get('connections') or [])
-        if 'set' in r:
-            keep = [c for c in cs if c.get('type') not in ('edge',)]
-            cs = keep + [dict(c) for c in r['set']]
-        for old, new in (r.get('retarget') or {}).items():
-            for c in cs:
-                if c.get('type') == 'edge' and c.get('to') == old:
-                    if new != old:
-                        c['to'] = new
-                        c.pop('to_span', None)
-                    if mid in (r.get('redir') or {}) or old in (r.get('redir') or {}):
-                        c['dir'] = r['redir'][old]
-                        c.pop('span', None)
-                        c.pop('to_span', None)
-        cs = [c for c in cs if not (c.get('type') == 'edge' and c.get('to') in (r.get('drop_to') or []))]
-        cs = [c for c in cs if c.get('link') not in (r.get('drop_links') or [])]
-        for a in r.get('add') or []:
-            if not any(c.get('type') == 'edge' and c.get('to') == a['to'] and c.get('dir') == a['dir'] for c in cs):
-                cs.append(dict(a))
-        for key, note in (r.get('note') or {}).items():
-            for c in cs:
-                if (isinstance(key, int) and c.get('to') == key and c.get('type') == 'edge') or c.get('link') == key:
+        old_edges = [c for c in cs if c.get('type') == 'edge']
+        others = [dict(c) for c in cs if c.get('type') != 'edge' and c.get('link') not in (r.get('drop_links') or [])]
+        if 'edges' in r:
+            edges = []
+            for e in r['edges']:
+                ne = dict(type='edge', dir=e['dir'], to=e['to'])
+                side = next((c for c in old_edges if c.get('dir') == e['dir']), None)
+                if side and 'span' in side:
+                    ne['span'] = side['span']
+                if side and side.get('to') == e['to'] and 'to_span' in side:
+                    ne['to_span'] = side['to_span']
+                if e.get('note'):
+                    ne['note'] = e['note']
+                edges.append(ne)
+        else:
+            edges = [dict(c) for c in old_edges]
+        for w in r.get('links') or []:
+            ex = next((c for c in others if c.get('link') == w['link']), None)
+            if ex is None:
+                others.append(dict(w))
+            else:
+                ex.update(w)
+        for link, note in (r.get('notes') or {}).items():
+            for c in others:
+                if c.get('link') == link:
                     c['note'] = note
-        m['connections'] = cs
+        m['connections'] = edges + others
         m['rev14_connections'] = 'SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder'
+
+
+def check_edge_pairs(by):
+    """every edge in the early chain must be answered by the neighbour's opposite edge"""
+    opp = {'north': 'south', 'south': 'north', 'east': 'west', 'west': 'east'}
+    bad = []
+    for mid in REV14:
+        for c in (by.get(mid) or {}).get('connections') or []:
+            if c.get('type') != 'edge':
+                continue
+            n = by.get(c['to'])
+            if n is None:
+                continue
+            if not any(x.get('type') == 'edge' and x.get('to') == mid and x.get('dir') == opp[c['dir']]
+                       for x in n.get('connections') or []):
+                bad.append('%d %s -> %d' % (mid, c['dir'], c['to']))
+    return bad
 
 
 def kingdom_field(k):
@@ -332,10 +380,30 @@ def update_maps_json(sq):
                      'route_plan': plan}
                 maps.append(m)
                 by[m['id']] = m
+    for i, e in EXTRA_MAPS.items():
+        if i not in by:
+            m = json.loads(json.dumps(e))
+            maps.append(m)
+            by[i] = m
+    for i, why in RETIRED.items():
+        if i in by:
+            by[i]['retired'] = why
     for i, s in SEG_FIX.items():
         if i in by:
             by[i]['segment'] = s
     apply_rev14(by)
+    for m in maps:                      # safety net: never keep two identical connections
+        seen, keep = set(), []
+        for c in m.get('connections') or []:
+            k = json.dumps(c, sort_keys=True)
+            if k not in seen:
+                seen.add(k)
+                keep.append(c)
+        if 'connections' in m:
+            m['connections'] = keep
+    bad = check_edge_pairs(by)
+    if bad:
+        print('WARNING: early-chain edges without an opposite edge on the neighbour: ' + ', '.join(bad))
     for m in maps:
         s = sq.get(m['id'])
         if s:
@@ -563,6 +631,8 @@ def update_world_md(sq):
 
 def main():
     d = load_maps()
+    have = {m['id'] for m in d['maps']}
+    d['maps'] += [json.loads(json.dumps(e)) for i, e in EXTRA_MAPS.items() if i not in have]   # one pass: names too
     extra = []
     mi = os.path.join(ROOT, 'maps_out', 'mapinfos_prismfall.txt')
     if os.path.exists(mi):          # built maps that maps.json does not list (e.g. 134 Granny's Knot)

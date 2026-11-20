@@ -92,7 +92,7 @@ def backdrop(w=15, h=4, seed=7):
     d.polygon([(129, horizon - 10), (129, horizon - 3), (133, horizon - 4)], fill=(232, 200, 190))
     for x in range(0, W, 40):                                         # canvas seams and the batten at the foot of the drop
         for y in range(0, H - 3):
-            if y % 3: continue
+            if y % 5: continue
             p = im.getpixel((x, y)); im.putpixel((x, y), tuple(max(0, c - 18) for c in p[:3]) + (255,))
     d.rectangle([0, H - 3, W, H - 2], fill=WOOD[2]); d.line([(0, H - 1), (W, H - 1)], fill=WOOD[0]); d.line([(0, H - 3), (W, H - 3)], fill=WOOD[4])
     return up(im)
@@ -140,10 +140,13 @@ def proscenium_beam(part='mid'):
 
 
 def mask_crest():
-    """Comedy-and-tragedy crest for the centre of the proscenium beam (2 tiles wide)."""
-    im = blank(32, 16); d = ImageDraw.Draw(im)
-    d.ellipse([6, 0, 26, 15], fill=GOLD[2], outline=GOLD[0]); d.ellipse([8, 1, 24, 14], fill=GOLD[3])
-    for cx, smile in ((12, True), (20, False)):
+    """Comedy-and-tragedy crest for the centre of the proscenium beam (3 tiles wide: gilded scrolls either side)."""
+    im = blank(48, 16); d = ImageDraw.Draw(im)
+    for x0, dx in ((2, 1), (45, -1)):                                 # acanthus scrolls running out along the beam
+        for k in range(4):
+            x = x0 + dx * k * 3; d.ellipse([min(x, x + dx * 4), 5 - k % 2, max(x, x + dx * 4), 10 - k % 2], fill=GOLD[3], outline=GOLD[0])
+    d.ellipse([14, 0, 34, 15], fill=GOLD[2], outline=GOLD[0]); d.ellipse([16, 1, 32, 14], fill=GOLD[3])
+    for cx, smile in ((20, True), (28, False)):
         d.ellipse([cx - 4, 3, cx + 4, 12], fill=(246, 238, 224), outline=GOLD[0])
         d.point((cx - 2, 6), fill=(30, 20, 30)); d.point((cx + 2, 6), fill=(30, 20, 30))
         if smile: d.arc([cx - 3, 6, cx + 3, 11], 20, 160, fill=(150, 30, 40))
@@ -338,3 +341,28 @@ def dim(im, k=0.55, blue=8):
             r, g, b, a = px[x, y]
             if a: px[x, y] = (int(r * k), int(g * k), min(255, int(b * k) + blue), a)
     return im
+
+
+FONT = {'E': ['111', '100', '110', '100', '111'], 'D': ['110', '101', '101', '101', '110'], 'K': ['101', '110', '100', '110', '101'],
+        '.': ['0', '0', '0', '0', '1'], ' ': ['0', '0', '0', '0', '0']}
+
+
+def old_poster():
+    """The Playhouse lobby's oldest poster: a red-and-gold bill pasted over with a plain cream notice years ago; where
+    the paste has lifted, the old title shows through: "...ED K..."  (3 x 3 tiles, in a gilt frame)."""
+    im = blank(48, 48); d = ImageDraw.Draw(im)
+    d.rectangle([1, 1, 46, 46], fill=GOLD[1], outline=GOLD[0]); d.rectangle([2, 2, 45, 45], outline=GOLD[4])
+    d.rectangle([4, 4, 43, 43], fill=RED[2]); d.rectangle([5, 5, 42, 42], outline=GOLD[3])
+    d.polygon([(4, 4), (43, 4), (43, 22), (36, 25), (30, 21), (24, 26), (17, 22), (10, 26), (4, 23)], fill=(226, 214, 186))
+    d.polygon([(4, 34), (12, 31), (20, 35), (30, 32), (43, 35), (43, 43), (4, 43)], fill=(214, 202, 174))
+    for y in (9, 13, 17): d.line([(9, y), (38, y)], fill=(170, 156, 130))
+    for y in (37, 40): d.line([(9, y), (34, y)], fill=(160, 146, 120))
+    x = 9
+    for ch in '...ED K...':                                          # the old gilt title showing through the gap
+        g = FONT[ch]
+        for yy, row in enumerate(g):
+            for xx, b in enumerate(row):
+                if b == '1': im.putpixel((x + xx, 26 + yy), GOLD[4] + (255,))
+        x += len(g[0]) + 1
+    d.line([(4, 23), (10, 26), (17, 22), (24, 26), (30, 21), (36, 25), (43, 22)], fill=(150, 136, 110))
+    return up(im)

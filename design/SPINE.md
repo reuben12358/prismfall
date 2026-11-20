@@ -1,5 +1,17 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 18 (user, 2026-11-19 17:24): world geography v2 <<<
+The user's words: "I dont like how the city above connects to the ice region directly, i think the grass region should connect to everything at some extent. the ice region should connect to the forest and the desert. the fire region should connect to the desert and the forest and shouldnt connect to the ice. the grass region should be in the middle of the region and the desert should be north. maybe move lumen city to the south?"
+
+New layout:
+- North: Ossaria (desert).
+- West: Isenmar (ice), bordering Ossaria and Elowen.
+- East: Ashkaar (fire), bordering Ossaria and Elowen, never Isenmar.
+- Centre: Elowen, which borders everything, with Crownhaven at its heart.
+- South: Zenith over Nadir (Lumen City in the south), bordering Elowen only.
+- Fire and ice meet only across the northern sea (the war front).
+- The start (Ferrow's Landing, Saltmere, Briarwick, Rimewood, then Ebbmouth) is unchanged, on Elowen's south-west coast.
+
 ## >>> REVISION 17 (user, 2026-11-19 17:17) <<<
 **Juno's portrait is the pass-3 "composite A"** (the middle row of art/previews/15_juno_portraits.png). User: "juno pass 5 looks bad, i much rather prefer at the middle one, she looks damn near cool in that" and "something about she looking like burgh in pass 1 is still unsettling to me". Pass 3 is reinstalled. Any polish must keep that face and look: no rebuild onto a different base face. Lesson for the whole cast: the user prefers the cleaner, brighter, bigger-eyed B2W2-VS style of pass 3 over the more realistic, painterly Rejuvenation/Desolation faces, and anything that reads even slightly like a known character (Burgh) is a fail.
 

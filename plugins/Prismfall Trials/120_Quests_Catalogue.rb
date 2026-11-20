@@ -247,9 +247,9 @@ stub.call(:AS_SEVEN_BOUTS, {
   :design => "Volcanic field; each bout raises the field's heat stage. Bout 4 is a double. Bout 7 is the Legate's adjutant on a Dragon's Den preview. The Herald introduces you with whatever the Saltmere barge called you."
 })
 stub.call(:AS_DRUDDIGON, {
-  :trial => :ASHKAAR, :title => "The Lava-Tube Terror", :giver => "a Hearthguild smith", :map => 664, :where => "Mt. Cinder",
+  :trial => :ASHKAAR, :title => "The Lava-Tube Terror", :giver => "a Hearthguild smith", :map => 664, :where => "The Cinderhorn",
   :rank => 2, :points => 4, :rec_level => 40, :chapter => 8, :unlock => "badges >= 6", :tags => [:boss, :hunt, :event_mon],
-  :summary => "A Druddigon has made the Mt. Cinder lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed.",
+  :summary => "A Druddigon has made the Cinderhorn lava tubes its own. Three smiths' Pokemon came back scorched. The Legion wants it beaten, not killed.",
   :steps => { :ask => "Track the Druddigon through the lava tubes (follow the scorched claw marks).", :den => "Fight it in its den." },
   :reward => { :pokemon => :AS_DRUDDIGON }, :touches => "Honesty law: report how the fight really went (lying costs the reward)",
   :design => "Boss Druddigon (Rough Skin, 2 bars) on :VOLCANIC; it joins after. Back at the Crucible the Herald asks how it went. Exaggerate (Isenmar-style) and you're fined for lying."
@@ -281,8 +281,8 @@ stub.call(:AS_ASHES, {
 stub.call(:AS_EGG_RUN, {
   :trial => :ASHKAAR, :title => "The Egg Run", :giver => "the Roost-mistress", :map => 248, :where => "the Dragon Roosts, Cindervault",
   :rank => 3, :points => 4, :rec_level => 42, :chapter => 9, :unlock => "badges >= 7", :tags => [:escort, :stealth, :event_mon],
-  :summary => "Carry a warm dragon egg across Mt. Cinder to the far roost. Egg-hunters know the route. The egg must not get cold.",
-  :steps => { :ask => "Cross Mt. Cinder with the egg; stay near lava vents to keep it warm.", :roost => "Hand the egg over at the far roost." },
+  :summary => "Carry a warm dragon egg across the Cinderhorn to the far roost. Egg-hunters know the route. The egg must not get cold.",
+  :steps => { :ask => "Cross the Cinderhorn with the egg; stay near lava vents to keep it warm.", :roost => "Hand the egg over at the far roost." },
   :reward => { :pokemon => :AS_AXEW_EGG }, :touches => "none; earliest Axew (wild only from Badge 17)",
   :design => "A warmth meter (steps since the last vent) instead of a timer; egg-hunter ambushes (trainer battles) at the vents. At the far roost the egg hatches early in your hands. It decides you're its roost."
 })

@@ -234,7 +234,8 @@ ROADS = [
       landmark="Thistledown Manor on its hill, and the old stone bridge over the Selvedge.",
       wild="Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. "
            "Water: Marill, Buizel, Psyduck.",
-      exits="W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). "
+      exits="S: the Dyers' Ford (replaces the old Grey Saltings edge, on the same south side). E: Gossamer Wood (the "
+            "wood's west eaves). "
             "N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall "
             "Hollow any more: it is entered through the Deepwood.",
       fill=["wildflower meadow in bands of colour, tall grass in four separate fields",
@@ -299,7 +300,7 @@ ROADS = [
       landmark="The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a "
                "brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).",
       wild="Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.",
-      exits="E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).",
+      exits="S: Spinners' Rise (the drove road comes up from the south). W: Frostwick (East Gate, the whale-rib palisade).",
       fill=["the climb through hoar-crusted downs",
             "the wind gap: gust tiles that push you back unless you move between gusts",
             "the empty toll hut with two ledgers, one per kingdom, that disagree",
@@ -360,7 +361,7 @@ ROADS = [
       role='side',
       landmark="The Border Stones: Elowen's briar crown and Isenmar's whale and axe, with a Meridian sunburst bolted over both.",
       wild="Spheal, Cetoddle, Snom, Swinub, Wiglett, Skitty, Miltank, Tauros, Dunsparce. Night: Smoochum, Snorunt.",
-      exits="S: Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). "
+      exits="E (the south end): Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). "
             "Closed at the Border Stones by an Isenmar customs chain until you arrive in Frostwick by the Pass; "
             "then it is the quick road back to Saltmere.",
       fill=["raised causeway with wind-fences and marker poles",

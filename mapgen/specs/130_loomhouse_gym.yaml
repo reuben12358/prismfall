@@ -31,7 +31,7 @@ events:
   - 8
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_FOYER
@@ -43,7 +43,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_FOYER
@@ -55,7 +55,7 @@ events:
   - 8
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_FOYER
@@ -67,7 +67,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_FOYER
@@ -84,7 +84,7 @@ events:
       - LOOM_FOYER
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank 9,9
   at:
@@ -97,7 +97,7 @@ events:
       - LOOM_FOYER
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank 10,8
   at:
@@ -110,7 +110,7 @@ events:
       - LOOM_FOYER
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank 10,9
   at:
@@ -123,7 +123,7 @@ events:
       - LOOM_FOYER
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Heddle
   at:
@@ -131,7 +131,7 @@ events:
   - 10
   pages:
   - graphic:
-      tile: 2526
+      tile: 3047
     commands:
     - se: Door exit
     - script: pfp_cycle(308, 2)
@@ -307,7 +307,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -319,7 +319,7 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -331,7 +331,7 @@ events:
   - 7
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -343,7 +343,7 @@ events:
   - 8
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -360,7 +360,7 @@ events:
       - LOOM_A
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -377,7 +377,7 @@ events:
       - LOOM_A
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -394,7 +394,7 @@ events:
       - LOOM_A
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -411,7 +411,7 @@ events:
       - LOOM_A
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_A
@@ -428,7 +428,7 @@ events:
       - LOOM_A
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank A 21,6
   at:
@@ -441,7 +441,7 @@ events:
       - LOOM_A
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank A 21,7
   at:
@@ -454,7 +454,7 @@ events:
       - LOOM_A
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank A 21,8
   at:
@@ -467,7 +467,7 @@ events:
       - LOOM_A
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank B 12,11
   at:
@@ -480,7 +480,7 @@ events:
       - LOOM_B
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_B
@@ -497,7 +497,7 @@ events:
       - LOOM_B
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_B
@@ -514,7 +514,7 @@ events:
       - LOOM_B
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_B
@@ -531,7 +531,7 @@ events:
       - LOOM_B
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank B 21,12
   at:
@@ -544,7 +544,7 @@ events:
       - LOOM_B
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank B 21,13
   at:
@@ -557,7 +557,7 @@ events:
       - LOOM_B
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank C 3,16
   at:
@@ -565,7 +565,7 @@ events:
   - 16
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -577,7 +577,7 @@ events:
   - 17
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -589,7 +589,7 @@ events:
   - 18
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -601,7 +601,7 @@ events:
   - 19
   pages:
   - graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -618,7 +618,7 @@ events:
       - LOOM_C
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -635,7 +635,7 @@ events:
       - LOOM_C
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -652,7 +652,7 @@ events:
       - LOOM_C
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -669,7 +669,7 @@ events:
       - LOOM_C
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_C
@@ -686,7 +686,7 @@ events:
       - LOOM_C
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank C 21,17
   at:
@@ -699,7 +699,7 @@ events:
       - LOOM_C
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank C 21,18
   at:
@@ -712,7 +712,7 @@ events:
       - LOOM_C
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Plank C 21,19
   at:
@@ -725,7 +725,7 @@ events:
       - LOOM_C
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Red heddle
   at:
@@ -733,7 +733,7 @@ events:
   - 21
   pages:
   - graphic:
-      tile: 2498
+      tile: 3019
     commands:
     - se: Door exit
     - script: 'pfp_cycle(305, 3)
@@ -747,7 +747,7 @@ events:
   - 21
   pages:
   - graphic:
-      tile: 2505
+      tile: 3026
     commands:
     - se: Door exit
     - script: 'pfp_cycle(306, 3)
@@ -761,7 +761,7 @@ events:
   - 21
   pages:
   - graphic:
-      tile: 2512
+      tile: 3033
     commands:
     - se: Door exit
     - script: 'pfp_cycle(307, 3)
@@ -950,7 +950,7 @@ events:
   - commands:
     - 'A card on a post: "The left warp of the middle bed snapped. Sorry! Use the other two. — T.L."'
     graphic:
-      tile: 2526
+      tile: 3047
 - type: npc
   name: Apprentice Pim
   at:
@@ -1026,7 +1026,7 @@ events:
   - 22
   pages:
   - graphic:
-      tile: 2539
+      tile: 3060
     trigger: touch
     commands:
     - se: Door exit
@@ -1038,7 +1038,7 @@ events:
   - 20
   pages:
   - graphic:
-      tile: 2539
+      tile: 3060
     trigger: touch
     commands:
     - se: Door exit
@@ -1050,7 +1050,7 @@ events:
   - 12
   pages:
   - graphic:
-      tile: 2539
+      tile: 3060
     trigger: touch
     commands:
     - se: Door exit
@@ -1062,7 +1062,7 @@ events:
   - 14
   pages:
   - graphic:
-      tile: 2539
+      tile: 3060
     trigger: touch
     commands:
     - se: Door exit
@@ -1074,7 +1074,7 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2539
+      tile: 3060
     trigger: touch
     commands:
     - se: Door exit
@@ -1086,7 +1086,7 @@ events:
   - 21
   pages:
   - graphic:
-      tile: 2526
+      tile: 3047
     commands:
     - if: pfp_flip(305)
       then:
@@ -1100,7 +1100,7 @@ events:
   - 13
   pages:
   - graphic:
-      tile: 2526
+      tile: 3047
     commands:
     - if: pfp_flip(307)
       then:
@@ -1114,7 +1114,7 @@ events:
   - 11
   pages:
   - graphic:
-      tile: 2519
+      tile: 3040
     commands:
     - if_self:
       - A
@@ -1281,7 +1281,7 @@ events:
       - LOOM_BRIDGE
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_BRIDGE
@@ -1298,7 +1298,7 @@ events:
       - LOOM_BRIDGE
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_BRIDGE
@@ -1315,7 +1315,7 @@ events:
       - LOOM_BRIDGE
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_BRIDGE
@@ -1332,7 +1332,7 @@ events:
       - LOOM_BRIDGE
       - 1
     graphic:
-      tile: 2494
+      tile: 3015
   - cond:
       var:
       - LOOM_BRIDGE
@@ -1349,7 +1349,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,7
   at:
@@ -1362,7 +1362,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,8
   at:
@@ -1375,7 +1375,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,9
   at:
@@ -1388,7 +1388,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,10
   at:
@@ -1401,7 +1401,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,11
   at:
@@ -1414,7 +1414,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: event
   name: Bridge 2 20,12
   at:
@@ -1427,7 +1427,7 @@ events:
       - LOOM_BRIDGE
       - 2
     graphic:
-      tile: 2494
+      tile: 3015
 - type: warp
   name: Down to Weaving Hall
   at:
@@ -1535,11 +1535,11 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2537
+      tile: 3058
   - cond:
       self: A
     graphic:
-      tile: 2536
+      tile: 3057
 - type: event
   name: T2
   at:
@@ -1547,11 +1547,11 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2537
+      tile: 3058
   - cond:
       self: A
     graphic:
-      tile: 2536
+      tile: 3057
 - type: event
   name: T3
   at:
@@ -1559,11 +1559,11 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2537
+      tile: 3058
   - cond:
       self: A
     graphic:
-      tile: 2536
+      tile: 3057
 - type: event
   name: T4
   at:
@@ -1571,11 +1571,11 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2537
+      tile: 3058
   - cond:
       self: A
     graphic:
-      tile: 2536
+      tile: 3057
 - type: event
   name: T5
   at:
@@ -1583,11 +1583,11 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 2537
+      tile: 3058
   - cond:
       self: A
     graphic:
-      tile: 2536
+      tile: 3057
 - type: event
   name: Treadle 1
   at:
@@ -1595,7 +1595,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2535
+      tile: 3056
     commands:
     - se: Door exit
     - script: pfp_flip_self(%w[T1 T2])
@@ -1613,7 +1613,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2535
+      tile: 3056
     commands:
     - se: Door exit
     - script: pfp_flip_self(%w[T1 T3])
@@ -1631,7 +1631,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2535
+      tile: 3056
     commands:
     - se: Door exit
     - script: pfp_flip_self(%w[T1 T4])
@@ -1649,7 +1649,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2535
+      tile: 3056
     commands:
     - se: Door exit
     - script: pfp_flip_self(%w[T1 T5])
@@ -1667,7 +1667,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 2535
+      tile: 3056
     commands:
     - se: Door exit
     - script: pfp_flip_self(%w[T1 T2 T3])
@@ -1708,7 +1708,7 @@ events:
   - 10
   pages:
   - graphic:
-      tile: 2526
+      tile: 3047
     commands:
     - The re-thread lever. Lower every thread?
     - choices:

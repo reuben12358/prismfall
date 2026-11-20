@@ -120,27 +120,40 @@ def warden(gym, ttype, name, cap, field, lose, mons):
 # Field logic per team: design/TRAINER_FIELD_PLAYBOOK.md. Field data: plugins/Prismfall Field Effects/1xx_Field_*.rb.
 # SPINE Revision 14: Gym 1 is Dorian (Saltmere, Normal, single), Gym 2 is Tamsin (Briarwick, Bug, double).
 warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The audience is yours tonight!", [
-    # Gym 1, a SINGLE battle and the player's first field. Warm and gentle: neutral natures, no sleep, no seed, no
-    # accuracy drops on Standard, and the openers sit well below the cap, because the Grand Stage already makes every
-    # Normal move x1.3 (and sound moves x1.3 more). The lesson is the applause: two damaging sound moves raise it a
-    # stage, with a big message, and each stage makes Normal and sound moves hit harder. Stalling (Protect, Recover...)
-    # calms the crowd - the player's first counterplay. Std 3 / Hard 4 / Casual 2.
-    P("AIPOM", 11, "RUNAWAY", "ORANBERRY", "HARDY", "SCRATCH,ASTONISH,TAILWHIP", "A",
-      only="nocasual", hard={"ab": "SKILLLINK", "nat": "JOLLY", "moves": "FAKEOUT,SWIFT,ASTONISH,SANDATTACK"}),
-    # The teacher: Echoed Voice and Round are both damaging sound moves, so the crowd rises on Minccino's second song
-    # (a big "the audience is warming up" message) and Echoed Voice grows each turn it is used - the player sees the
-    # stage and the echo build together. Cute Charm Minccino has a tiny Sp. Atk, so the songs teach without sweeping.
-    P("MINCCINO", 12, "CUTECHARM", "ORANBERRY", "HARDY", "ECHOEDVOICE,ROUND,POUND,BABYDOLLEYES", "A",
+    # Gym 1, a SINGLE battle and the player's first field. Reference calibration (BALANCE.md 1b): Reborn's Julia and
+    # Rejuvenation's Venam bring SIX Pokemon to the first gym, two to five levels under the cap, with real natures, Oran
+    # Berries, a Gem and field plays (Charge Beam on Electric Terrain, Fake Out / Rollout on the Concert Venue). Dorian's
+    # troupe is built the same way: Std 5 / Hard 6 / Casual 3, cap-3 .. cap.
+    # THE SHOW BUILDS. Grand Stage: Normal x1.3 (x1.5 from Encore up), damaging sound and dances x1.3 / x1.4 / x1.5,
+    # Fake Out x1.5. Two showpieces, two dances or two damaging sound moves raise the applause a stage; any crit does too.
+    # At Standing Ovation (stage 3) every attack gets +1 crit stage and SING NEVER MISSES - the play that punishes a
+    # careless player who lets the crowd climb. Counterplay: KO the singers first, stall (Protect, Endure, Splash...)
+    # to calm the crowd, Rock and Ghost types (Rolycoly, Sudowoodo, Sandygast) shrug off the Normal moves.
+    # 1. The stagehand opens the show: Fake Out is a showpiece (x1.5 here) - one more and the crowd rises.
+    P("AIPOM", 12, "PICKUP", "ORANBERRY", "JOLLY", "FAKEOUT,SWIFT,ASTONISH,BATONPASS", "A",
+      casual={"moves": "SCRATCH,ASTONISH,TAILWHIP,BATONPASS"},
+      hard={"ab": "SKILLLINK", "item": "SILKSCARF", "moves": "FAKEOUT,DOUBLEHIT,ASTONISH,TICKLE"}),
+    # 2. The chorus: Echoed Voice and Round are damaging sound moves (x1.3 x1.3 STAB), Echoed Voice grows each turn,
+    #    and Encore lasts two turns longer on this stage (it locks a player who set up). Baby-Doll Eyes also lowers Sp. Atk here.
+    P("MINCCINO", 12, "CUTECHARM", "ORANBERRY", "MODEST", "ECHOEDVOICE,ROUND,ENCORE,BABYDOLLEYES", "S",
       casual={"moves": "ECHOEDVOICE,POUND,BABYDOLLEYES"},
-      hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "ECHOEDVOICE,TAILSLAP,SING,ROUND"}),
-    # Hard only: Dorian's voice. Big Pecks +1 Def, Hyper Voice / Chatter at Modest, Sing and Encore.
+      hard={"ab": "TECHNICIAN", "nat": "JOLLY", "moves": "TAILSLAP,ECHOEDVOICE,SING,ENCORE"}),
+    # 3. The dancer: Teeter Dance is a dance (+1 Speed and a step toward the next stage) that confuses the target;
+    #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
+    P("SPINDA", 13, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,HEADBUTT,COPYCAT,TACKLE", "A",
+      only="nocasual", hard={"moves": "TEETERDANCE,HEADBUTT,PSYBEAM,FAKEOUT", "item": "SITRUSBERRY"}),
+    # Hard only: Dorian's voice. Big Pecks +1 Def, Hyper Voice / Chatter (sound, x1.3 x1.3) at Modest, Sing and Encore.
     P("CHATOT", 14, "BIGPECKS", "SITRUSBERRY", "MODEST", "CHATTER,HYPERVOICE,ENCORE,SING", "S", only="hard"),
-    # The quick-change artist: Color Change is a costume change (it turns into the type of the move that hit it - hit
-    # it once with Fighting, then switch). Fury Swipes hits 2-5 times and any critical hit raises the applause.
-    # Hard: Protean, Fake Out (a showpiece) and the Synthetic Seed (Laser Focus).
-    P("KECLEON", 15, "COLORCHANGE", "ORANBERRY", "HARDY", "FURYSWIPES,SHADOWSNEAK,LICK,TAILWHIP", "BA",
-      casual={"moves": "SCRATCH,LICK,TAILWHIP,BIND"},
-      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "nat": "ADAMANT", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,FEINT"}),
+    # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
+    #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
+    P("JIGGLYPUFF", 13, "CUTECHARM", "ORANBERRY", "MODEST", "SING,ROUND,DISARMINGVOICE,ECHOEDVOICE", "BS",
+      only="nocasual", hard={"ab": "COMPETITIVE", "item": "SITRUSBERRY"}),
+    # 5. The quick-change artist: Color Change is a costume change (it becomes the type of the move that hit it - hit
+    #    it once with Fighting, then switch). It opens with its own Fake Out ("Costume change!"); Fury Swipes hits 2-5
+    #    times and every critical hit is applause. Hard: Protean and the Synthetic Seed (Laser Focus: a sure crit).
+    P("KECLEON", 15, "COLORCHANGE", "SITRUSBERRY", "ADAMANT", "FAKEOUT,FURYSWIPES,SHADOWSNEAK,FEINT", "BA",
+      casual={"item": "ORANBERRY", "moves": "SCRATCH,LICK,TAILWHIP,BIND"},
+      hard={"ab": "PROTEAN", "item": "SYNTHETICSEED", "moves": "FAKEOUT,FURYSWIPES,SHADOWSNEAK,KNOCKOFF"}),
 ])
 warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every stitch. Well sewn, challenger.", [
     # Gym 2, a DOUBLE battle: "a thread holds because it's twisted with others". Std 4 / Hard 5 / Casual 3.
@@ -519,14 +532,20 @@ SLOT_LINE = {"RIVAL_KESTREL": {0: "FIRE", 1: "WATER", 2: "GRASS"},
              "RIVAL_JUNO": {0: "WATER", 1: "GRASS", 2: "FIRE"},
              "LEADER_JUNO": {0: "WATER", 1: "GRASS", 2: "FIRE"}}
 
-def starter_mon(ttype, slot, stage, lv, hidden_on_hard=False, pos_note=""):
+def starter_mon(ttype, slot, stage, lv, hidden_on_hard=False, pos_note="", moves=None, item=None, casual=None):
+    """moves / item: {line: value} Standard overrides for this battle. They only show when the player picked a Gen 1
+    starter: for any other generation Core swaps the species and regenerates its level-up moves (item kept)."""
     line = SLOT_LINE[ttype][slot]
     ms, mh, nat, ev, it, ith = SETS[stage][line]
+    if moves and line in moves:
+        ms = moves[line]
+    if item and line in item:
+        it = item[line]
     sp = LINES[line][stage]
     hard = {"moves": mh, "item": ith}
     if hidden_on_hard:
         hard["abidx"] = 2
-    return P(sp, lv, None, it, nat, ms, ev, abidx=0, hard=hard)
+    return P(sp, lv, None, it, nat, ms, ev, abidx=0, hard=hard, casual=(casual or {}).get(line))
 
 RIVALS = []
 def rival(ttype, name, num, cap, lose, build):
@@ -534,18 +553,29 @@ def rival(ttype, name, num, cap, lose, build):
 
 # --- Kestrel -----------------------------------------------------------------
 rival("RIVAL_KESTREL", "Kestrel", 1, 7, "Whatever. Beginner's luck. Don't get used to it.", lambda s: [
+    # K1, the tutorial on Ferrow's Landing (can be lost). Reborn's Cain / Victoria and Rejuvenation's Ren open with a
+    # Lv 5 starter and basic moves; Kestrel picks the starter with the type edge, so Standard matches the player's level
+    # (Lv 5) instead of out-levelling it. Hard: Lv 6 with Starly; Casual: Lv 3 (no type move yet on a Gen 1 pick).
     P("STARLY", 5, "KEENEYE", None, "JOLLY", "TACKLE,GROWL,QUICKATTACK", "A", only="hard"),
-    dict(starter_mon("RIVAL_KESTREL", s, 0, 6), hard={"moves": SETS[0][SLOT_LINE["RIVAL_KESTREL"][s]][1],
-                                                     "item": "ORANBERRY"}),
+    dict(starter_mon("RIVAL_KESTREL", s, 0, 5), hard={"moves": SETS[0][SLOT_LINE["RIVAL_KESTREL"][s]][1],
+                                                     "item": "ORANBERRY"},
+         casual={"moves": {"FIRE": "SCRATCH,GROWL", "WATER": "TACKLE,TAILWHIP", "GRASS": "TACKLE,GROWL"}[SLOT_LINE["RIVAL_KESTREL"][s]]}),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way, then. I mean it.", lambda s: [
-    # K2 is on the Gullcry Cliffs (MOUNTAIN): Flying x1.2, and the Telluric Seed gives +1 Speed and a Tailwind for his side.
-    P("STARAVIA", 19, "INTIMIDATE", "TELLURICSEED", "JOLLY", "WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR", "A",
+    # K2 is on the Gullcry Cliffs (MOUNTAIN): Rock x1.5, Flying x1.2, wind moves x1.3, Tailwind 2 turns longer. Reference
+    # rivals at this point (Reborn's Fern 2, Rejuvenation's Ren 4) bring four Pokemon at cap-3 .. cap-1 with items.
+    # Staravia's Telluric Seed gives +1 Speed and a Tailwind (6 turns here) for his side; Sandile's Rock Tomb is x1.5
+    # on the cliffs and slows; Moxie snowballs. Counterplay: Protect / switch out the Tailwind turns, Water and Grass for
+    # Sandile, Ghost and Dark for Morwen.
+    P("STARAVIA", 20, "INTIMIDATE", "TELLURICSEED", "JOLLY", "WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR", "A",
       only="nocasual", hard={"moves": "WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN", "ab": "RECKLESS"}),
-    P("SANDILE", 19, "MOXIE", "ORANBERRY", "JOLLY", "BITE,SANDTOMB,SANDATTACK,HONECLAWS", "A", only="hard"),
-    P("HONEDGE", 19, "NOGUARD", "ORANBERRY", "ADAMANT", "FURYCUTTER,SHADOWSNEAK,AERIALACE,METALSOUND", "BA",
+    P("SANDILE", 20, "MOXIE", "ORANBERRY", "JOLLY", "BITE,ROCKTOMB,SANDTOMB,HONECLAWS", "A", only="nocasual",
+      hard={"moves": "BITE,ROCKTOMB,DIG,HONECLAWS"}),
+    # Hard only: the Deino that becomes Hydreigon (K5+), already mean.
+    P("DEINO", 21, "HUSTLE", "ORANBERRY", "ADAMANT", "DRAGONBREATH,BITE,HEADBUTT,ROAR", "A", only="hard"),
+    P("HONEDGE", 20, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
       nick="Morwen", hard={"moves": "SHADOWSNEAK,IRONHEAD,AERIALACE,SWORDSDANCE", "item": "EVIOLITE"}),
-    starter_mon("RIVAL_KESTREL", s, 1, 21),
+    starter_mon("RIVAL_KESTREL", s, 1, 22),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don't get it. Nobody does.", lambda s: [
     P("STARAVIA", 31, "INTIMIDATE", "SHARPBEAK", "JOLLY", "AERIALACE,QUICKATTACK,TAKEDOWN,DOUBLETEAM", "A",
@@ -643,16 +673,24 @@ rival("RIVAL_KESTREL", "Kestrel", 9, 94, "...It won't let go. Why won't it let g
 
 # --- Juno --------------------------------------------------------------------
 rival("RIVAL_JUNO", "Juno", 1, 15, "Aww, you're so good at this! Okay, again soon, okay?", lambda s: [
-    # J1 is on Saltmere's promenade green (MEADOW, set by TRAINER_FIELDS): Fairy Wind and Razor Leaf x1.5, Leaf Guard always on.
-    # Transition play: a Prankster Grassy Terrain turns the Meadow into a Flower Garden at once (the field she will defend
-    # at Gym 9); the terrain lasts 8 turns there. Hard Petilil's Growth / Aromatherapy keep the garden growing.
-    # SPINE Rev 14: J1 is in Saltmere before Gym 1 now (cap 15), so the levels came down and her starter is unevolved.
+    # J1 is on Saltmere's promenade green (MEADOW, set by TRAINER_FIELDS), just before Gym 1: Grass and Bug x1.2, Fairy Wind
+    # and Razor Leaf x1.5 in the breeze, Leaf Guard always on, powders x1.25 accurate.
+    # Transition play: Cottonee's Prankster Grassy Terrain - or Petilil's two tending moves (Growth, Aromatherapy) - turn
+    # the Meadow into a Flower Garden, the field she will defend at Gym 9 (Grass x1.5 from stage 2).
+    # Reference: Reborn's Fern 0 (three at 13-14, Oran Berry, Potion) and Rejuvenation's Ren (four at 13-16): Std 4 here.
+    # Counterplay: two Fire attacks burn the Meadow away (one in sun); Flying and Poison for the Grass types.
     P("COTTONEE", 12, "PRANKSTER", "ORANBERRY", "BOLD", "FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE", "SD",
       only="nocasual"),
-    P("PETILIL", 13, "OWNTEMPO", "ORANBERRY", "MODEST", "MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE", "S", only="hard"),
-    P("BOUNSWEET", 12, "LEAFGUARD", "ORANBERRY", "ADAMANT", "RAZORLEAF,RAPIDSPIN,PLAYNICE", "BA",
-      nick="Sweetpea", hard={"item": "EVIOLITE"}, casual={"moves": "RAPIDSPIN,PLAYNICE,SPLASH"}),
-    starter_mon("RIVAL_JUNO", s, 0, 14),
+    P("PETILIL", 13, "OWNTEMPO", "ORANBERRY", "MODEST", "MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE", "S", only="nocasual"),
+    P("BOUNSWEET", 13, "LEAFGUARD", "ORANBERRY", "ADAMANT", "RAZORLEAF,RAPIDSPIN,PLAYNICE,SPLASH", "BA",
+      nick="Sweetpea", hard={"item": "EVIOLITE", "moves": "RAZORLEAF,RAPIDSPIN,PLAYNICE,MAGICALLEAF"},
+      casual={"moves": "RAPIDSPIN,PLAYNICE,SPLASH"}),
+    # Hard only: the farm's Fidough (Fairy; Own Tempo), Covet and Bite.
+    P("FIDOUGH", 13, "OWNTEMPO", "ORANBERRY", "IMPISH", "COVET,BITE,LICK,TAILWHIP", "BA", only="hard"),
+    starter_mon("RIVAL_JUNO", s, 0, 14, moves={"GRASS": "VINEWHIP,RAZORLEAF,LEECHSEED,TACKLE",
+                                              "FIRE": "EMBER,DRAGONBREATH,SCRATCH,SMOKESCREEN",
+                                              "WATER": "WATERGUN,RAPIDSPIN,TACKLE,WITHDRAW"},
+                item={"GRASS": "ORANBERRY", "FIRE": "ORANBERRY", "WATER": "ORANBERRY"}),
 ])
 rival("RIVAL_JUNO", "Juno", 2, 35, "That's not his name in the ledger. It can't be. ...Good battle, though.", lambda s: [
     # J2 is on Mirefen's stilt-walk (CORROSIVE_MIRE), where her Grass moves also hit as Poison. Transition play: a Prankster

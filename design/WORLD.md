@@ -350,7 +350,7 @@ Inland from the port up the River Selvedge to the silk forest: the road Briarwic
 **Thistledown Lea (540)**, Elowen, `:MEADOW`, target **130x64** (was 64x28). 
 *Name:* The river meadows held by House Thistledown until the house died out. Nobody has mown them since.
 - **Landmark:** Thistledown Manor on its hill, and the old stone bridge over the Selvedge.
-- **Exits:** W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.
+- **Exits:** S: the Dyers' Ford (replaces the old Grey Saltings edge, on the same south side). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.
 - **Wild:** Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. Water: Marill, Buizel, Psyduck.
 - **Fill:** wildflower meadow in bands of colour, tall grass in four separate fields; the River Selvedge along the south third with two islets (Surf later); stone bridge with a fisherman and a toll that nobody collects; the manor's ruined wall, gateposts and overgrown topiary garden; Ponyta paddock and a drover who races you along the fence; broken mill and mill-race (Old Rod); mowers' camp with hay-ricks and a cook-fire (heal once); bamboo stand with Pancham; 6 trainers including a double battle; Road Stone II-b.
 - **Secret:** The Ha-ha: a sunken wall runs round the manor hill. Its ditch is a hidden path to the back garden and a cellar door into the manor's crypt (a second way in, with a Greavard digging there).
@@ -378,7 +378,7 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 **Frostwick Pass (577)**, Borderland (Elowen/Isenmar), `:SNOWY_MOUNTAIN`, target **72x96** (new map). 
 *Name:* The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut.
 - **Landmark:** The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).
-- **Exits:** E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).
+- **Exits:** S: Spinners' Rise (the drove road comes up from the south). W: Frostwick (East Gate, the whale-rib palisade).
 - **Wild:** Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.
 - **Fill:** the climb through hoar-crusted downs; the wind gap: gust tiles that push you back unless you move between gusts; the empty toll hut with two ledgers, one per kingdom, that disagree; a frozen tarn with an ice-fishing hole (Old Rod); avalanche fences and a snow-buried signpost in two scripts; shepherd's bothy (rest and a hot drink); trappers' drying racks; a row of snowmen built by Frostwick children; one is a Snorunt; 4 trainers: a huscarl, a forester, two sledgers; Road Stone III-b.
 - **Secret:** Behind the frozen waterfall at the tarn is the Hollow of the Handfast: love-carvings of a forester and a huscarl and a Soothe Bell. It feeds Frostwick's sidequest 'The Two Hearths'.
@@ -410,7 +410,7 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 **Frostflat Causeway (560)**, Borderland (Elowen/Isenmar), `:SNOWY_MOUNTAIN`, target **140x64** (was 64x30). *Side road.* 
 *Name:* The raised salt road up the coast from Saltmere. Halfway along, the white underfoot stops being salt.
 - **Landmark:** The Border Stones: Elowen's briar crown and Isenmar's whale and axe, with a Meridian sunburst bolted over both.
-- **Exits:** S: Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). Closed at the Border Stones by an Isenmar customs chain until you arrive in Frostwick by the Pass; then it is the quick road back to Saltmere.
+- **Exits:** E (the south end): Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). Closed at the Border Stones by an Isenmar customs chain until you arrive in Frostwick by the Pass; then it is the quick road back to Saltmere.
 - **Wild:** Spheal, Cetoddle, Snom, Swinub, Wiglett, Skitty, Miltank, Tauros, Dunsparce. Night: Smoochum, Snorunt.
 - **Fill:** raised causeway with wind-fences and marker poles; salt-to-frost gradient along the whole map (the tiles change, then the weather); the Border Stones and a Meridian survey camp with pegs and a theodolite; drovers with a Miltank and Tauros herd blocking and unblocking the road; stranded salt wagon (errand: find the wheel pin); first ice-slide tiles on frozen brine pools; children sledging on the frost-flat; brine pools with Wiglett; 5 trainers: Lass Tilde, Sailor Haakon, Bird Keeper Ailsa and two more; Road Stone III-d.
 - **Secret:** The Old Causeway: the first road lies under the ice beside the new one. An ice-slide run along it ends at a cairn with an Icy Rock and the name of whoever built it scratched out.

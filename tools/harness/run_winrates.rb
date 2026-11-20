@@ -64,6 +64,9 @@ module WR
     :ch4   => [:EEVEE, :LUXIO, :NIDORINO, :TRUMBEAK, :MACHOP, :KECLEON, :RALTS, :HERACROSS, :SNOVER, :STANTLER, :TEDDIURSA,
                :DEERLING, :CUBCHOO, :SNOM, :FLETCHINDER, :MAREEP, :SKIDDO, :WINGULL]
   }
+  # TMs the story has handed over by then (TM42 Facade from Dorian, TM98 Rock Smash at Brinecut, TM89 U-turn from Tamsin):
+  # each goes to the first party member that can learn it, replacing its weakest move.
+  TMS = { :none => [], :g2 => [:FACADE, :ROCKSMASH], :g3 => [:FACADE, :ROCKSMASH, :UTURN] }
   BAG = { :none => [], :g1 => [:POTION] * 3, :g2 => [:POTION, :POTION, :SUPERPOTION, :SUPERPOTION],
           :g3 => [:SUPERPOTION] * 3 }
   # fight => level cap, badges held, team size (starter included), catch pool, bag, how it starts
@@ -75,11 +78,11 @@ module WR
     "G1" => { :label => "Gym 1 Dorian (Grand Stage, single)", :cap => 15, :badges => 0, :size => 4, :pool => :ch1_2,
               :bag => :g1, :stage => 0, :start => proc { Prismfall.gym_battle(1, :can_lose => true) } },
     "G2" => { :label => "Gym 2 Tamsin (Silkwood, double)", :cap => 19, :badges => 1, :size => 5, :pool => :ch3,
-              :bag => :g2, :stage => 1, :start => proc { Prismfall.gym_battle(2, :can_lose => true) } },
+              :bag => :g2, :tms => :g2, :stage => 1, :start => proc { Prismfall.gym_battle(2, :can_lose => true) } },
     "K2" => { :label => "K2 Kestrel (Gullcry Cliffs, before Gym 3)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
-              :bag => :g3, :stage => 1, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2, :can_lose => true) } },
+              :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 2, :can_lose => true) } },
     "G3" => { :label => "Gym 3 Marisol (Water Surface)", :cap => 23, :badges => 2, :size => 6, :pool => :ch4,
-              :bag => :g3, :stage => 1, :start => proc { Prismfall.gym_battle(3, :can_lose => true) } }
+              :bag => :g3, :tms => :g3, :stage => 1, :start => proc { Prismfall.gym_battle(3, :can_lose => true) } }
   }
   FILLER = [:GROWL, :LEER, :TAILWHIP, :BABYDOLLEYES, :SANDATTACK, :SMOKESCREEN, :SWEETSCENT, :STRINGSHOT, :SPLASH,
             :HARDEN, :WITHDRAW, :DEFENSECURL, :CHARM, :PLAYNICE, :HELPINGHAND, :FOCUSENERGY, :ODORSLEUTH,
@@ -119,6 +122,16 @@ module WR
     offsets = [1, 1, 2, 2, 1]
     catches.each_with_index { |sp, i| list << [sp, f[:cap] - offsets[i % offsets.size]] }
     party = list.map { |sp, lv| mon(sp, lv, rng) }
+    TMS[f[:tms] || :none].each do |tm|
+      pk = party.find { |pp| pp.compatible_with_move?(tm) && !pp.hasMove?(tm) }
+      next if !pk
+      if pk.numMoves < 4
+        pk.learn_move(tm)
+      else
+        weakest = pk.moves.min_by { |m| m.power.to_i }
+        pk.moves[pk.moves.index(weakest)] = Pokemon::Move.new(tm)
+      end
+    end
     party = party.rotate(rng.rand(party.size)) if party.size > 1   # the starter does not always lead
     party[0].item = :ORANBERRY if f[:size] > 1
     party

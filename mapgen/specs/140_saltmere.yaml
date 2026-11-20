@@ -378,70 +378,70 @@ events:
   dir: up
   move: fixed
   text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
-  at: [47, 26]
+  at: [33, 36]
 - type: npc
   name: Townsfolk 4
   sprite: NPC 04
   dir: up
   move: random
   text: Three plays tonight and I've tickets to two. Choices!
-  at: [33, 36]
+  at: [52, 32]
 - type: npc
   name: Townsfolk 5
   sprite: NPC 23
   dir: right
   move: fixed
   text: I came for a week. That was eleven years ago.
-  at: [52, 32]
+  at: [29, 32]
 - type: npc
   name: Townsfolk 6
   sprite: NPC 15
   dir: down
   move: random
   text: Three plays tonight and I've tickets to two. Choices!
-  at: [29, 32]
+  at: [44, 28]
 - type: npc
   name: Townsfolk 7
   sprite: NPC 03
   dir: up
   move: random
   text: Three plays tonight and I've tickets to two. Choices!
-  at: [44, 28]
+  at: [57, 34]
 - type: npc
   name: Townsfolk 8
   sprite: NPC 23
   dir: left
   move: random
   text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
-  at: [57, 34]
+  at: [49, 34]
 - type: npc
   name: Townsfolk 9
   sprite: NPC 22
   dir: down
   move: fixed
   text: Meridian wants to put glowing glass in the lamps. The Warden said the lamps have tenure.
-  at: [49, 34]
+  at: [28, 40]
 - type: npc
   name: Townsfolk 10
   sprite: NPC 03
   dir: down
   move: random
   text: Mind your purse. Not because of thieves. Because of the caramel.
-  at: [28, 40]
+  at: [39, 33]
 - type: npc
   name: Townsfolk 11
   sprite: NPC 11
   dir: right
   move: fixed
   text: Lamplighter's late. He's always late. The lamps forgive him.
-  at: [59, 40]
+  at: [23, 32]
 - type: npc
   name: Townsfolk 12
   sprite: NPC 01
   dir: up
   move: random
   text: Mind your purse. Not because of thieves. Because of the caramel.
-  at: [39, 33]
+  at: [47, 31]
 - type: npc
   name: Townsfolk 1
   sprite: NPC 18
@@ -455,63 +455,63 @@ events:
   dir: left
   move: random
   text: Don't stand under the gulls by the fish stalls.
-  at: [50, 56]
+  at: [58, 53]
 - type: npc
   name: Townsfolk 3
   sprite: NPC 04
   dir: down
   move: fixed
   text: Mind your purse. Not because of thieves. Because of the caramel.
-  at: [83, 55]
+  at: [35, 56]
 - type: npc
   name: Townsfolk 4
   sprite: NPC 20
   dir: down
   move: random
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [58, 53]
+  at: [12, 56]
 - type: npc
   name: Townsfolk 5
   sprite: NPC 03
   dir: down
   move: fixed
   text: Fresh mackerel! Ordinary mackerel! Very ordinary!
-  at: [35, 56]
+  at: [64, 56]
 - type: npc
   name: Townsfolk 6
   sprite: NPC 11
   dir: right
   move: fixed
   text: The gate shuts at the Pageant. Tradition. Nobody remembers why. Probably a play.
-  at: [12, 56]
+  at: [8, 52]
 - type: npc
   name: Townsfolk 7
   sprite: NPC 14
   dir: up
   move: random
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [64, 56]
+  at: [76, 55]
 - type: npc
   name: Townsfolk 8
   sprite: NPC 06
   dir: down
   move: random
   text: My cousin's in the Hound chorus. He says 'GRR' professionally.
-  at: [3, 54]
+  at: [62, 56]
 - type: npc
   name: Townsfolk 9
   sprite: NPC 09
   dir: down
   move: fixed
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [8, 52]
+  at: [39, 51]
 - type: npc
   name: Townsfolk 10
   sprite: NPC 05
   dir: down
   move: fixed
   text: Dorian waved at me once. From a balcony. I think it was at me.
-  at: [16, 53]
+  at: [64, 51]
 - type: npc
   name: Townsfolk 1
   sprite: NPC 04
@@ -525,18 +525,18 @@ events:
   dir: down
   move: fixed
   text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
-  at: [64, 10]
+  at: [66, 9]
 - type: npc
   name: Townsfolk 3
   sprite: NPC 03
   dir: down
   move: random
   text: Don't stand under the gulls by the fish stalls.
-  at: [66, 9]
+  at: [36, 9]
 - type: npc
   name: Townsfolk 4
   sprite: NPC 14
   dir: up
   move: fixed
   text: Three plays tonight and I've tickets to two. Choices!
-  at: [36, 9]
+  at: [71, 9]

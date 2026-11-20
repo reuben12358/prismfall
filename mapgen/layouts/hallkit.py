@@ -16,8 +16,19 @@ TID = 54
 
 def MI(i): return _H['mi'][str(i)]
 def MG(i): return _H['mg'][str(i)]
+def NM(i): return _H['nm'][str(i)]          # Rejuvenation "Nightmare City" (Nightbox Theater): boxes, chandeliers, velvet
+def CH(i): return _H['ch'][str(i)]          # Rejuvenation "Chrisola Hotel": the grand pianos
 def PF(i): return _H['pf'][str(i)]
 def CU(n): return _H['cu'][n]
+_ST = None
+
+
+def pf_stamp(name):
+    """A PF Rejuv stamp (data/stamps_rjc.json) as tileset-54 ids: [3][h][w] (0 = empty)."""
+    global _ST
+    if _ST is None: _ST = json.load(open(os.path.join(HERE, 'data', 'stamps_rjc.json')))
+    L = np.array(_ST[name]['layers'])
+    return [[[PF(int(t)) if t else 0 for t in row] for row in z] for z in L]
 
 
 STYLES = {
@@ -151,7 +162,19 @@ class Hall:
     def obj(self, name, x, y):
         rows, zs = OBJ[name]
         for dy, (r, z) in enumerate(zip(rows, zs)):
-            for dx, t in enumerate(r): self.put(t, x + dx, y + dy, z)
+            for dx, t in enumerate(r):
+                if t: self.put(t, x + dx, y + dy, z)
+
+    def block(self, rows, x, y, z):
+        """rows of tile ids (0 = leave) at (x, y) on layer z."""
+        for dy, r in enumerate(rows):
+            for dx, t in enumerate(r):
+                if t: self.put(t, x + dx, y + dy, z)
+
+    def stamp(self, name, x, y, zmap=None):
+        """A PF Rejuv stamp; zmap remaps its layers (e.g. {0: 1})."""
+        for z, rows in enumerate(pf_stamp(name)):
+            self.block(rows, x, y, (zmap or {}).get(z, z))
 
     def write(self, mid):
         os.makedirs(os.path.join(HERE, 'data', 'raw'), exist_ok=True)

@@ -35,7 +35,7 @@ later.call(:NA_POLTCHAGEIST, { :species => :POLTCHAGEIST, :level => 72, :ability
 #--- Ashkaar ------------------------------------------------------------------------
 later.call(:AS_DRUDDIGON, { :species => :DRUDDIGON, :level => 37, :ability => :ROUGHSKIN, :kind => :boss, :chapter => 8, :field => :VOLCANIC,
   :boss => { :bars => 2, :stat_mults => { :HP => 1.15 } }, :joins => { :level => 35 },
-  :map => 664, :where => "Mt. Cinder lava tubes", :quest => :AS_DRUDDIGON, :trigger => "Beat the lava-tube boss",
+  :map => 664, :where => "The Cinderhorn lava tubes", :quest => :AS_DRUDDIGON, :trigger => "Beat the lava-tube boss",
   :why => "Rough Skin Dragon with Dragon Tail; Dragon has 13 families by Badge 8 and this is the bulkiest" })
 later.call(:AS_NOIBAT, { :species => :NOIBAT, :level => 36, :ability => :INFILTRATOR, :kind => :gift, :chapter => 8,
   :map => 248, :where => "the Dragon Roosts, Cindervault", :quest => :AS_AFRAID_OF_HEIGHTS, :trigger => "Train Tamm's Trapinch until it flies",
@@ -45,7 +45,7 @@ later.call(:AS_HOUNDOUR, { :species => :HOUNDOUR, :level => 34, :ability => :FLA
   :map => 650, :where => "Scaldwater", :quest => :AS_ASHES, :trigger => "Carry a legionnaire's urn home",
   :why => "Sucker Punch Houndour (egg move) and a story about who the war is spending" })
 later.call(:AS_AXEW_EGG, { :species => :AXEW, :level => 1, :kind => :egg, :chapter => 9,
-  :map => 248, :where => "the far roost, Mt. Cinder", :quest => :AS_EGG_RUN, :trigger => "Keep the egg warm across Mt. Cinder",
+  :map => 248, :where => "the far roost, the Cinderhorn", :quest => :AS_EGG_RUN, :trigger => "Keep the egg warm across the Cinderhorn",
   :why => "The earliest Axew (wild only from Badge 17): Haxorus" })
 
 #--- Ossaria ------------------------------------------------------------------------

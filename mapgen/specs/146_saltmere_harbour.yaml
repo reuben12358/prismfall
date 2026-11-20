@@ -146,56 +146,56 @@ events:
   dir: right
   move: fixed
   text: Lamplighter's late. He's always late. The lamps forgive him.
-  at: [40, 29]
+  at: [48, 22]
 - type: npc
   name: Townsfolk 3
   sprite: NPC 14
   dir: left
   move: random
   text: Mind your purse. Not because of thieves. Because of the caramel.
-  at: [48, 22]
+  at: [30, 30]
 - type: npc
   name: Townsfolk 4
   sprite: NPC 15
   dir: down
   move: random
   text: My cousin's in the Hound chorus. He says 'GRR' professionally.
-  at: [55, 31]
+  at: [52, 32]
 - type: npc
   name: Townsfolk 5
   sprite: NPC 15
   dir: right
   move: random
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [52, 32]
+  at: [43, 22]
 - type: npc
   name: Townsfolk 6
   sprite: NPC 09
   dir: up
   move: random
   text: You can tell an outlander by the way they look up at the roofs.
-  at: [43, 22]
+  at: [54, 29]
 - type: npc
   name: Townsfolk 7
   sprite: NPC 06
   dir: down
   move: random
   text: Mind your purse. Not because of thieves. Because of the caramel.
-  at: [30, 31]
+  at: [58, 31]
 - type: npc
   name: Townsfolk 8
   sprite: NPC 03
   dir: left
   move: random
   text: The free port's free. The rent isn't.
-  at: [54, 29]
+  at: [32, 32]
 - type: npc
   name: Townsfolk 1
   sprite: NPC 09
   dir: up
   move: random
   text: Salt's up a copper a sack. Blame the weather. Everyone does.
-  at: [2, 35]
+  at: [56, 35]
 - type: npc
   name: Townsfolk 2
   sprite: NPC 15
@@ -209,42 +209,42 @@ events:
   dir: left
   move: fixed
   text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
-  at: [87, 35]
+  at: [42, 34]
 - type: npc
   name: Townsfolk 4
   sprite: NPC 11
   dir: up
   move: fixed
   text: My grandmother booed a Queen's barge in AF 92. She still has the voice for it.
-  at: [42, 34]
+  at: [12, 34]
 - type: npc
   name: Townsfolk 5
   sprite: NPC 07
   dir: right
   move: fixed
   text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
-  at: [12, 34]
+  at: [66, 34]
 - type: npc
   name: Townsfolk 6
   sprite: NPC 12
   dir: right
   move: random
   text: Lamplighter's late. He's always late. The lamps forgive him.
-  at: [66, 34]
+  at: [49, 35]
 - type: npc
   name: Townsfolk 7
   sprite: NPC 20
   dir: right
   move: random
   text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
-  at: [49, 35]
+  at: [74, 35]
 - type: npc
   name: Townsfolk 8
   sprite: NPC 22
   dir: down
   move: random
   text: Three plays tonight and I've tickets to two. Choices!
-  at: [74, 35]
+  at: [80, 35]
 - type: npc
   name: Townsfolk 1
   sprite: NPC 08

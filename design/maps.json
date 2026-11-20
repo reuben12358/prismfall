@@ -1231,6 +1231,12 @@
    "layout": "Town built in and around six colossal hollow trees linked by rope bridges (bridge tiles over ground). The Loomhouse Gym is the largest tree (north centre). Silk-dyeing vats along a stream (west).",
    "connections": [
     {
+     "type": "edge",
+     "dir": "north",
+     "to": 566,
+     "note": "North Gate"
+    },
+    {
      "type": "warp",
      "at": [
       22,
@@ -1292,12 +1298,6 @@
       32
      ],
      "link": "BW_HOUSE2"
-    },
-    {
-     "type": "edge",
-     "dir": "north",
-     "to": 566,
-     "note": "North Gate"
     }
    ],
    "features": [
@@ -1909,10 +1909,11 @@
      "type": "warp",
      "at": [
       22,
-      0
+      2
      ],
-     "to": 133,
-     "link": "BWG_3"
+     "to": 134,
+     "link": "BWG_3",
+     "note": "Granny's door (it led to 133 The Spindle before Revision 14)"
     }
    ],
    "features": [
@@ -1987,7 +1988,8 @@
      11,
      13
     ]
-   }
+   },
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 133,
@@ -2033,6 +2035,45 @@
      "name": "giant loom (Bug Plate housing)"
     }
    ],
+   "tileset_kit": "G5_GYM_INTERIOR",
+   "border": "building walls (interior)",
+   "metadata": {
+    "town_map_pos": [
+     0,
+     11,
+     13
+    ]
+   },
+   "retired": "GYM_PUZZLES.md: retired in Revision 14 (Tamsin battles on 131's top ledge); not built"
+  },
+  {
+   "id": 134,
+   "name": "Loomhouse Upper Lofts - Granny's Knot",
+   "act": 1,
+   "kingdom": "Elowen",
+   "kind": "gym",
+   "size": [
+    20,
+    15
+   ],
+   "tileset": "Gyms interior",
+   "bgm": "Gym",
+   "field": "SILKWOOD",
+   "segment": 2,
+   "puzzle": "GYM_PUZZLES.md#134",
+   "connections": [
+    {
+     "type": "warp",
+     "at": [
+      9,
+      12
+     ],
+     "to": 132,
+     "link": "BWG_3",
+     "note": "back to the Canopy Lofts"
+    }
+   ],
+   "note": "Upper Lofts mastery room (optional, after Tamsin's badge); added by the cartographer so its segment is explicit (validate_encounters falls back to the pre-swap ID scheme otherwise)",
    "tileset_kit": "G5_GYM_INTERIOR",
    "border": "building walls (interior)",
    "metadata": {
@@ -2096,6 +2137,12 @@
      "note": "West Gate: the Frostflat Causeway, chained at the Border Stones until the player reaches Frostwick"
     },
     {
+     "type": "edge",
+     "dir": "east",
+     "to": 528,
+     "note": "East Gate (from Marram Down)"
+    },
+    {
      "type": "door",
      "name": "Pok\u00e9mon Center",
      "at": [
@@ -2148,12 +2195,6 @@
       12
      ],
      "link": "SM_PAGEANT"
-    },
-    {
-     "type": "edge",
-     "dir": "east",
-     "to": 528,
-     "note": "East Gate (from Marram Down)"
     }
    ],
    "features": [
@@ -12922,6 +12963,12 @@
    "layout": "Dense forest maze: one main trail S->N with two loops. Silk-web walls (impassable decor events) channel the path. A Cut tree (east) blocks Deepwood until Badge 1. Woodward's hut at the centre clearing.",
    "connections": [
     {
+     "type": "edge",
+     "dir": "west",
+     "to": 540,
+     "note": "from Thistledown Lea"
+    },
+    {
      "type": "warp",
      "at": [
       24,
@@ -12958,12 +13005,6 @@
       24
      ],
      "link": "WOOD_HUT"
-    },
-    {
-     "type": "edge",
-     "dir": "west",
-     "to": 540,
-     "note": "from Thistledown Lea"
     }
    ],
    "features": [
@@ -13203,6 +13244,16 @@
      ],
      "to": 524,
      "link": "WOOD_DEEP"
+    },
+    {
+     "type": "warp",
+     "at": [
+      43,
+      20
+     ],
+     "to": 548,
+     "link": "DEEP_COCOON",
+     "note": "through the Veil (Juno and Tamsin wait here): the only way into Cocoonfall Hollow"
     }
    ],
    "features": [
@@ -13296,7 +13347,8 @@
     }
    ],
    "tileset_kit": "G4_OLDWOOD",
-   "border": "pond banks, root walls, silk canopy"
+   "border": "pond banks, root walls, silk canopy",
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 526,
@@ -13534,13 +13586,9 @@
     },
     {
      "type": "edge",
-     "dir": "west",
+     "dir": "south",
      "to": 552,
-     "span": [
-      8,
-      14
-     ],
-     "note": "replaces the Grey Saltings edge (the built map joins it on its south edge, x 2-9)"
+     "note": "replaces the Grey Saltings edge (the built map already has its 541 edge on the south side, x 2-9)"
     },
     {
      "type": "warp",
@@ -13725,7 +13773,7 @@
     "landmark": "Thistledown Manor on its hill, and the old stone bridge over the Selvedge.",
     "origin": "The river meadows held by House Thistledown until the house died out. Nobody has mown them since.",
     "wild": "Ponyta, Blitzle, Flabebe, Cottonee, Sentret, Doduo, Pancham, Mankey. Night: Morelull, Snubbull, Stunky. Water: Marill, Buizel, Psyduck.",
-    "exits": "W/S: the Dyers' Ford (replaces the old Grey Saltings edge). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.",
+    "exits": "S: the Dyers' Ford (replaces the old Grey Saltings edge, on the same south side). E: Gossamer Wood (the wood's west eaves). N hill: Thistledown Manor. Cave: Brinecut Mine (the shortcut back to the Saltings). No warp to Cocoonfall Hollow any more: it is entered through the Deepwood.",
     "fill": [
      "wildflower meadow in bands of colour, tall grass in four separate fields",
      "the River Selvedge along the south third with two islets (Surf later)",
@@ -13795,7 +13843,8 @@
      "to_span": [
       20,
       26
-     ]
+     ],
+     "note": "North Gate"
     },
     {
      "type": "warp",
@@ -14429,11 +14478,12 @@
     {
      "type": "warp",
      "at": [
-      16,
-      27
+      0,
+      16
      ],
-     "to": 540,
-     "link": "R3_COCOON"
+     "to": 525,
+     "link": "DEEP_COCOON",
+     "note": "back to the Deepwood; the Thistledown Lea warp (R3_COCOON) is gone"
     }
    ],
    "features": [
@@ -14479,7 +14529,8 @@
     }
    ],
    "tileset_kit": "G4_FOREST_TOWN+BLEED_OVERLAY",
-   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland; Bleed Veil shimmer at the entrance"
+   "border": "Elowen oldwood canopy: giant trunks with overhanging canopy layer and root walls (forest maps); hedgerows, drystone walls and streams on farmland; Bleed Veil shimmer at the entrance",
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
   },
   {
    "id": 552,
@@ -14896,7 +14947,7 @@
     "landmark": "The Border Stones: Elowen's briar crown and Isenmar's whale and axe, with a Meridian sunburst bolted over both.",
     "origin": "The raised salt road up the coast from Saltmere. Halfway along, the white underfoot stops being salt.",
     "wild": "Spheal, Cetoddle, Snom, Swinub, Wiglett, Skitty, Miltank, Tauros, Dunsparce. Night: Smoochum, Snorunt.",
-    "exits": "S: Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). Closed at the Border Stones by an Isenmar customs chain until you arrive in Frostwick by the Pass; then it is the quick road back to Saltmere.",
+    "exits": "E (the south end): Saltmere (West Gate). N: Frostwick (South Gate). Spur: the Rehearsal (Bleed Veil). Closed at the Border Stones by an Isenmar customs chain until you arrive in Frostwick by the Pass; then it is the quick road back to Saltmere.",
     "fill": [
      "raised causeway with wind-fences and marker poles",
      "salt-to-frost gradient along the whole map (the tiles change, then the weather)",
@@ -15274,7 +15325,7 @@
      ],
      "to": 563,
      "link": "RIME_GLADE",
-     "note": "behind a frosted sapling (CUT, 1 badge)"
+     "note": "behind a frosted sapling (Cut: HM01 comes after Badge 2)"
     }
    ],
    "features": [
@@ -16159,7 +16210,8 @@
      "span": [
       18,
       24
-     ]
+     ],
+     "note": "East Gate (the whale-rib palisade)"
     },
     {
      "type": "edge",
@@ -16168,7 +16220,14 @@
      "span": [
       20,
       26
-     ]
+     ],
+     "note": "North Gate"
+    },
+    {
+     "type": "edge",
+     "dir": "south",
+     "to": 560,
+     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
     },
     {
      "type": "door",
@@ -16224,36 +16283,6 @@
       10
      ],
      "link": "FW_SMOKE"
-    },
-    {
-     "type": "edge",
-     "dir": "south",
-     "to": 577,
-     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
-    },
-    {
-     "type": "edge",
-     "dir": "south",
-     "to": 577,
-     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
-    },
-    {
-     "type": "edge",
-     "dir": "south",
-     "to": 577,
-     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
-    },
-    {
-     "type": "edge",
-     "dir": "south",
-     "to": 577,
-     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
-    },
-    {
-     "type": "edge",
-     "dir": "south",
-     "to": 560,
-     "note": "South Gate: the Frostflat Causeway, the side road back to Saltmere"
     }
    ],
    "features": [
@@ -16886,7 +16915,7 @@
     "landmark": "The Handfast Arch: half whale-jaw, half living briar, raised when the border was last agreed, with a brass Meridian sunburst newly bolted across its keystone (the Chapter 4 border beat).",
     "origin": "The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut.",
     "wild": "Snom, Swinub, Snorunt, Stantler, Deerling, Cubchoo, Delibird. Night: Sneasel, Smoochum.",
-    "exits": "E: Spinners' Rise. W: Frostwick (East Gate, the whale-rib palisade).",
+    "exits": "S: Spinners' Rise (the drove road comes up from the south). W: Frostwick (East Gate, the whale-rib palisade).",
     "fill": [
      "the climb through hoar-crusted downs",
      "the wind gap: gust tiles that push you back unless you move between gusts",

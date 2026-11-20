@@ -1,4 +1,4 @@
-# Saltmere - Old Town (147). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv) - edit that script.
+# Saltmere - The Old Town (147). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.
 id: 147
 name: Saltmere - Old Town
 bgm: Lerucean Town
@@ -13,51 +13,319 @@ metadata:
   MapPosition: [0, 10, 25]
   BattleBack: field
   Weather: [Rain, 10]
-biome: village
+biome: harbour
+connections: []
+fog: {name: prismfall_seamist, opacity: 24, blend: 0, zoom: 100, sx: 2, sy: 0}
 raw: data/raw/147.npy
-tileset: 51
+tileset: 55
 events:
 - type: door
-  at: [44, 18]
+  at: [44, 33]
   gfx: ['', 0, 2]
   name: Playhouse door
   link: SM_GYM
 - type: warp
-  at: [0, 36]
-  to: {map: 140, x: 86, y: 42, dir: retain}
+  at: [40, 0]
+  to: {map: 140, x: 9, y: 70, dir: retain}
 - type: warp
-  at: [0, 37]
-  to: {map: 140, x: 86, y: 43, dir: retain}
+  at: [41, 0]
+  to: {map: 140, x: 10, y: 70, dir: retain}
 - type: warp
-  at: [0, 38]
-  to: {map: 140, x: 86, y: 44, dir: retain}
+  at: [42, 0]
+  to: {map: 140, x: 11, y: 70, dir: retain}
 - type: warp
-  at: [0, 39]
-  to: {map: 140, x: 86, y: 45, dir: retain}
+  at: [43, 0]
+  to: {map: 140, x: 12, y: 70, dir: retain}
+- type: warp
+  at: [44, 0]
+  to: {map: 140, x: 13, y: 70, dir: retain}
+- type: warp
+  at: [45, 0]
+  to: {map: 140, x: 14, y: 70, dir: retain}
 - type: sign
-  at: [47, 19]
   name: Playhouse sign
-  text: 'THE PELL PLAYHOUSE - SALTMERE GYM
+  text: 'THE PELL PLAYHOUSE - SALTMERE GYM. WARDEN: DORIAN PELL.
 
-    Warden: Dorian Pell. Tonight: The Gilded King.'
+    "Every pageant is a lie. The trick is choosing which lie to tell."'
+  at: [41, 34]
   post: false
 - type: sign
-  at: [4, 41]
-  text: 'PLAYERS'' GATE
-
-    West: Saltmere market and the harbour stairs.'
-  name: PLAYERS GATE
+  name: Little Lantern sign
+  text: THE LITTLE LANTERN - "THE PAGEANT OF THE PAGEANT." Held over. Held over again. Held over by D. Pell, who has bought every Thursday.
+  at: [62, 37]
+  post: false
+- type: sign
+  name: Little Lantern door
+  at: [60, 35]
+  post: false
+  text: 'SOLD OUT. (A hand-lettered card adds: "and the matinee. and tomorrow.")'
+- type: sign
+  name: Players' Gate sign
+  text: 'THE PLAYERS'' GATE - North: the Players'' Causeway to the Upper Town and the market.'
+  at: [39, 16]
+  post: false
+- type: sign
+  name: Playbill wall
+  text: 'Playbills, ten deep: "THE LOYAL THREE", "THE DROWNED DUKE", "...ED K..." (pasted over, twice), "THE PAGEANT OF THE PAGEANT".'
+  at: [22, 42]
   post: false
 - type: npc
   name: Costumier
-  at: [26, 41]
+  at: [27, 37]
   sprite: NPC 12
   dir: down
   text: 'Costumier: Every mask in the Pageant is stitched on this lane. Even the ones nobody ordered. [TODO story]'
 - type: npc
   name: Street player
-  at: [48, 38]
+  at: [44, 46]
   sprite: NPC 08
   dir: down
   move: random
   text: 'Street player: A stage is anywhere two people stop to look. Dorian taught us that. [TODO story]'
+- type: event
+  name: Rival Theatre Barker
+  pages:
+  - commands:
+    - 'Rival Theatre Barker: TONIGHT at the Little Lantern: "THE PAGEANT OF THE PAGEANT", a play about a man who stages a pageant! Starring nobody you''d
+      know!'
+    - selfswitch: [A, true]
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 23, dir: down}
+  - commands: ['Rival Theatre Barker: Dorian''s seen it nine times. He says it''s "to gather evidence". He laughs at all the right parts.']
+    trigger: action
+    move: fixed
+    graphic: {sprite: NPC 23, dir: down}
+    cond: {self: A}
+  at: [59, 37]
+- type: npc
+  name: Street Juggler
+  sprite: NPC 06
+  dir: down
+  move: fixed
+  text: 'Street Juggler: I juggle for coins. In Saltmere the coins are the only thing that falls the way you expect.'
+  at: [30, 45]
+- type: npc
+  name: Costumed Usher
+  sprite: NPC 18
+  dir: down
+  move: fixed
+  text: 'Costumed Usher: Programmes! A copper! Dorian''s face on every page, free of charge!'
+  at: [49, 35]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 01
+  dir: down
+  move: fixed
+  text: I came for a week. That was eleven years ago.
+  at: [39, 44]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 11
+  dir: left
+  move: fixed
+  text: Dorian waved at me once. From a balcony. I think it was at me.
+  at: [50, 49]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 05
+  dir: left
+  move: fixed
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [43, 49]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 23
+  dir: down
+  move: random
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [39, 47]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 12
+  dir: up
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [52, 43]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 13
+  dir: left
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [30, 48]
+- type: npc
+  name: Townsfolk 7
+  sprite: NPC 14
+  dir: up
+  move: fixed
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [36, 43]
+- type: npc
+  name: Townsfolk 8
+  sprite: NPC 22
+  dir: left
+  move: fixed
+  text: That's real salt on the steps, not frost. Mind your footing.
+  at: [36, 46]
+- type: npc
+  name: Townsfolk 9
+  sprite: NPC 03
+  dir: down
+  move: fixed
+  text: The gate shuts at the Pageant. Tradition. Nobody remembers why. Probably a play.
+  at: [48, 46]
+- type: npc
+  name: Townsfolk 10
+  sprite: NPC 21
+  dir: left
+  move: random
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [44, 44]
+- type: npc
+  name: Townsfolk 11
+  sprite: NPC 02
+  dir: left
+  move: fixed
+  text: That's real salt on the steps, not frost. Mind your footing.
+  at: [48, 44]
+- type: npc
+  name: Townsfolk 12
+  sprite: NPC 23
+  dir: down
+  move: fixed
+  text: That's real salt on the steps, not frost. Mind your footing.
+  at: [65, 42]
+- type: npc
+  name: Townsfolk 13
+  sprite: NPC 07
+  dir: up
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [54, 46]
+- type: npc
+  name: Townsfolk 14
+  sprite: NPC 07
+  dir: left
+  move: random
+  text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
+  at: [62, 44]
+- type: npc
+  name: Townsfolk 15
+  sprite: NPC 15
+  dir: right
+  move: random
+  text: The free port's free. The rent isn't.
+  at: [24, 44]
+- type: npc
+  name: Townsfolk 16
+  sprite: NPC 23
+  dir: up
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [33, 46]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 01
+  dir: down
+  move: random
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [37, 36]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 21
+  dir: down
+  move: fixed
+  text: Lamplighter's late. He's always late. The lamps forgive him.
+  at: [42, 38]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 15
+  dir: left
+  move: fixed
+  text: The free port's free. The rent isn't.
+  at: [46, 36]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 20
+  dir: left
+  move: random
+  text: Fresh mackerel! Ordinary mackerel! Very ordinary!
+  at: [78, 34]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 16
+  dir: left
+  move: random
+  text: They paint the playbills fresh every morning. The rain washes them by noon.
+  at: [1, 36]
+- type: npc
+  name: Townsfolk 6
+  sprite: NPC 01
+  dir: left
+  move: random
+  text: Fresh mackerel! Ordinary mackerel! Very ordinary!
+  at: [10, 34]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 02
+  dir: right
+  move: random
+  text: The Lantern's doing the Loyal Three again. I could recite it. I have. At dinner.
+  at: [24, 58]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 13
+  dir: right
+  move: random
+  text: My grandmother booed a Queen's barge in AF 92. She still has the voice for it.
+  at: [81, 58]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 19
+  dir: up
+  move: random
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [26, 58]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 15
+  dir: up
+  move: random
+  text: I came for a week. That was eleven years ago.
+  at: [67, 58]
+- type: npc
+  name: Townsfolk 5
+  sprite: NPC 15
+  dir: right
+  move: random
+  text: If you get lost, walk downhill. Everything in Saltmere ends at the water.
+  at: [41, 58]
+- type: npc
+  name: Townsfolk 1
+  sprite: NPC 17
+  dir: down
+  move: fixed
+  text: Three plays tonight and I've tickets to two. Choices!
+  at: [9, 16]
+- type: npc
+  name: Townsfolk 2
+  sprite: NPC 02
+  dir: right
+  move: fixed
+  text: My grandmother booed a Queen's barge in AF 92. She still has the voice for it.
+  at: [3, 16]
+- type: npc
+  name: Townsfolk 3
+  sprite: NPC 12
+  dir: down
+  move: fixed
+  text: I came for a week. That was eleven years ago.
+  at: [19, 16]
+- type: npc
+  name: Townsfolk 4
+  sprite: NPC 06
+  dir: up
+  move: fixed
+  text: Mind your purse. Not because of thieves. Because of the caramel.
+  at: [43, 16]

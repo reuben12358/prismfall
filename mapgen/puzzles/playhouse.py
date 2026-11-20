@@ -15,60 +15,72 @@ V_SCENE, V_CURTAIN, V_TURN = 310, 311, 312
 S_A, S_B, S_C, S_TRAP = 310, 311, 312, 314
 
 # ------------------------------------------------------------------------------------------------ 150 Lobby
-LOBBY = ["######################",
-         "######################",
-         "#WWWWWWWWWDDDWWWWWWWW#",
-         "#WWWWWWWWWDDDWWWWWWWW#",
-         "#WWWWWWWWWDDDWWWWWWWW#",
-         "#....................#",
-         "#....................#",
-         "#....................#",
-         "#....................#",
-         "#....................#",
-         "#....................#",
-         "#....................#",
-         "##########..##########",
-         "######################"]
-LOBBY_AT = dict(doors=(11, 4), exit=(10, 12), usher=(8, 6), guide=(15, 9), lady=(3, 9), poster_l=(4, 3), poster_r=(16, 3))
+# Art pass (2026-11-19): a grand foyer.  W wall face, D the auditorium doors, B the box office counter (solid),
+# s sofas / flowers / urns placed by the generator are decor events or solid tiles on '.' cells listed in LOBBY_SOLID.
+LOBBY = ["#########################",
+         "#########################",
+         "#WWWWWWWWWWWWWWWWWWWWWWW#",
+         "#WWWWWWWWWWWWWWWWWWWWWWW#",
+         "#WWWWWWWWWWDDDWWWWWWWWWW#",
+         "#WWWWWWWWWWDDDWWWWWWWWWW#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "#.......................#",
+         "############.############",
+         "#########################"]
+LOBBY_AT = dict(doors=(12, 5), exit=(12, 14), usher=(10, 7), guide=(19, 9), lady=(4, 11), clerk=(3, 7), poster_l=(2, 2), poster_r=(20, 2))
 
 
 # ------------------------------------------------------------------------------------------------ 154 Auditorium (Gym 1)
-# p = the stage front lip (solid), S = stage steps, s = seat block (solid), , = house carpet
+# Art pass (2026-11-19): a lavish small theatre.  Top to bottom: the gilded proscenium (P) framing the stage, the painted
+# drop (B) behind the house curtain, box seats in the side walls (K) with the stage-left wing door (D, to the Backstage
+# after Badge 2), the apron (a), the footlights on the stage front (p) with the steps (S), the orchestra pit (o) crossed by
+# the gangway (g), the pit rail (r), the stalls (s = seats, solid) either side of the centre aisle, the lobby doors.
 THEATRE = ["#########################",
            "#########################",
-           "#WWWWWWWWWWWWWWWWWWWWWWW#",
-           "#WWWWWWWWWWWWWWWWWWWWWWW#",
-           "#.......................#",
-           "#.......................#",
-           "#.......................#",
-           "#.......................#",
-           "#.......................#",
-           "#.......................#",
+           "#KKKPPPPPPPPPPPPPPPPPKKK#",
+           "#KKKPPBBBBBBBBBBBBBPPKKK#",
+           "#KKKPPBBBBBBBBBBBBBPPKKK#",
+           "#KKKPPBBBBBBBBBBBBBPPKKK#",
+           "#KKKPP.............PPKKK#",
+           "#KKKPP.............PPKKK#",
+           "#KKKPP.............PPKKK#",
+           "#DDDPP.............PPKKK#",
+           "#DDDPP.............PPKKK#",
+           "#aaaaaaaaaaaaaaaaaaaaaaa#",
            "#pppppppppppSppppppppppp#",
+           "#oooooooooogggoooooooooo#",
+           "#oooooooooogggoooooooooo#",
+           "#oooooooooogggoooooooooo#",
+           "#rrrrrrrrrr,,,rrrrrrrrrr#",
            "#,,,,,,,,,,,,,,,,,,,,,,,#",
            "#,sssssssss,,,sssssssss,#",
            "#,sssssssss,,,sssssssss,#",
            "#,sssssssss,,,sssssssss,#",
-           "#,,,,,,,,,,,,,,,,,,,,,,,#",
-           "#,sssssssss,,,sssssssss,#",
-           "#,sssssssss,,,sssssssss,#",
-           "#,sssssssss,,,sssssssss,#",
            "#,sssssssss,,,sssssssss,#",
            "#,,,,,,,,,,,,,,,,,,,,,,,#",
+           "#,sssssssss,,,sssssssss,#",
+           "#,sssssssss,,,sssssssss,#",
+           "#,sssssssss,,,sssssssss,#",
+           "#,sssssssss,,,sssssssss,#",
            "#,,,,,,,,,,,,,,,,,,,,,,,#",
-           "#WWWWWWWWWWDDDWWWWWWWWWW#",
-           "#WWWWWWWWWWDDDWWWWWWWWWW#",
-           "#########################"]
-CURTAIN = [(x, y) for y in range(4, 9) for x in range(1, 24)]       # the house curtain, closed: stage rows 4-8
-THEATRE_AT = dict(dorian=(12, 5), front=(12, 6), rope=(21, 9), stagehand=(22, 9), start=(12, 21), doors=(12, 23),
-                  wing=(1, 9), ferdie=(11, 18), rosalind=(13, 14), crewe=(1, 12), mark=(12, 9))
+           "#,,,,,,,,,,,,,,,,,,,,,,,#",
+           "############,############"]
+THEATRE_SOLID = '#KPBpors'                                              # the model's walls
+CURTAIN = [(x, y) for y in range(3, 11) for x in range(6, 19)]       # the house curtain, in: the drop and the stage, inside the legs
+THEATRE_AT = dict(dorian=(12, 7), front=(12, 8), rope=(21, 11), stagehand=(22, 11), start=(12, 28), doors=(12, 29),
+                  wing=(2, 10), ferdie=(10, 25), rosalind=(14, 20), crewe=(1, 18), mark=(12, 11), juno=(10, 18))
 
 
 def theatre_model():
-    cells, _ = grid_cells(154, THEATRE, '#Wps')
-    cells |= {(154, 12, 10)}                                        # the stage steps
-    cells -= {(154,) + THEATRE_AT[k] for k in ('rope', 'stagehand', 'dorian', 'ferdie', 'rosalind', 'crewe')}
-    cells -= {(154, 12, 22), (154, 11, 22), (154, 13, 22), (154, 12, 23)}
+    cells, _ = grid_cells(154, THEATRE, THEATRE_SOLID)
+    cells -= {(154,) + THEATRE_AT[k] for k in ('rope', 'stagehand', 'dorian', 'ferdie', 'rosalind', 'crewe', 'juno')}
+    cells -= {(154,) + THEATRE_AT['doors']}
 
     def passable(c, v):
         return v[0] == 1 or (c[1], c[2]) not in CURTAIN
@@ -76,7 +88,7 @@ def theatre_model():
     m = Model('ph_theatre (154)', cells, passable, (154,) + THEATRE_AT['start'], (0,), dev, [(154,) + THEATRE_AT['front']],
               resets=[(154,) + THEATRE_AT['start']])
     m.game = lambda v: ({V_CURTAIN: v[0]}, {})
-    m.exits = [(154,) + THEATRE_AT['wing']]
+    m.exits = [(154, x, y) for x, y in ((1, 9), (2, 9), (3, 9), (1, 10), (2, 10), (3, 10))]     # the wing door (Backstage)
     return m
 
 

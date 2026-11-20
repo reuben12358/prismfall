@@ -145,13 +145,27 @@ MapPosition = 0,6,18
 BattleBack = field
 Weather = Rain,10
 #-------------------------------
+[148]   # Saltmere Lantern House
+Name = Saltmere Lantern House
+MapPosition = 0,6,18
+#-------------------------------
+[126]   # Briarwick Lantern House
+Name = Briarwick Lantern House
+MapPosition = 0,11,13
+#-------------------------------
+[168]   # The Net Loft
+Name = The Net Loft
+MapPosition = 0,3,7
+#-------------------------------
 [150]   # Pell Playhouse - Lobby
 Name = Pell Playhouse - Lobby
 MapPosition = 0,6,18
+SnapEdges = true
 #-------------------------------
 [154]   # Pell Playhouse - Auditorium
 Name = Pell Playhouse - Auditorium
 MapPosition = 0,6,18
+SnapEdges = true
 #-------------------------------
 [151]   # Pell Playhouse Backstage - The Old Revolve
 Name = Pell Playhouse Backstage - The Old Revolve

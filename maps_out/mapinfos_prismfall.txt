@@ -16,6 +16,7 @@
 123	120	Weavers' Guildhall
 124	120	Treetop House
 125	120	Cutter's House
+126	120	Briarwick Lantern House
 130	120	Loomhouse Gym - Foyer
 131	130	Loomhouse Gym - Weaving Hall
 132	130	Loomhouse Upper Lofts - Canopy Lofts
@@ -28,6 +29,7 @@
 145	140	Pageant Hall
 146	140	Saltmere - Harbour & Breakwater
 147	140	Saltmere - Old Town
+148	140	Saltmere Lantern House
 150	147	Pell Playhouse - Lobby
 151	150	Pell Playhouse Backstage - The Old Revolve
 152	150	Pell Playhouse Backstage - Fly Loft
@@ -39,6 +41,7 @@
 163	160	Anglers' Guild
 164	160	Reyes House
 165	160	Net-mender's House
+168	160	The Net Loft
 170	160	Tidelock Gym - Lock Hall
 171	170	Tidelock Gym - Basins (Low Water)
 172	170	Tidelock Gym - Basins (Mid Water)

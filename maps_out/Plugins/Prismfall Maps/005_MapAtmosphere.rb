@@ -27,6 +27,9 @@ module PrismfallMaps
     140 => [8, 4, -12, 0],   # Saltmere
     146 => [6, 4, -8, 0],   # Saltmere - Harbour & Breakwater
     147 => [12, 4, -18, 0],   # Saltmere - Old Town
+    148 => [6, 2, -6, 8],   # Saltmere Lantern House
+    126 => [6, 2, -6, 8],   # Briarwick Lantern House
+    168 => [6, 2, -6, 8],   # The Net Loft
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
@@ -57,6 +60,8 @@ module PrismfallMaps
     109 => ["prismfall_seamist", 0, 55, 0, 100, 3, 0],   # The Dovetail - Deck
     120 => ["prismfall_spores", 0, 46, 1, 100, 1, -1],   # Briarwick
     140 => ["prismfall_seamist", 0, 30, 0, 100, 2, 0],   # Saltmere
+    146 => ["prismfall_seamist", 0, 36, 0, 100, 2, 0],   # Saltmere - Harbour & Breakwater
+    147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }
