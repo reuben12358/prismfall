@@ -161,6 +161,10 @@ MapPosition = 0,11,13
 Name = The Net Loft
 MapPosition = 0,3,7
 #-------------------------------
+[542]   # The Brinewife's Rest
+Name = The Brinewife's Rest
+MapPosition = 0,6,17
+#-------------------------------
 [150]   # Pell Playhouse - Lobby
 Name = Pell Playhouse - Lobby
 MapPosition = 0,6,18
@@ -281,8 +285,8 @@ MapPosition = 0,12,17
 Name = Windfall Row
 Outdoor = true
 ShowArea = true
-MapPosition = 0,12,16
 BattleBack = field
+MapPosition = 0,12,16
 #-------------------------------
 [522]   # The Glassed Orchard
 Name = The Glassed Orchard
@@ -292,9 +296,10 @@ BattleBack = field
 #-------------------------------
 [524]   # Gossamer Wood
 Name = Gossamer Wood
+Outdoor = true
 ShowArea = true
-MapPosition = 0,11,15
 BattleBack = forest
+MapPosition = 0,11,15
 #-------------------------------
 [548]   # Cocoonfall Hollow
 Name = Cocoonfall Hollow
@@ -326,18 +331,14 @@ MapPosition = 0,8,18
 Name = Thistledown Lea
 Outdoor = true
 ShowArea = true
-MapPosition = 0,9,15
 BattleBack = field
+MapPosition = 0,9,15
 #-------------------------------
 [541]   # The Grey Saltings
 Name = The Grey Saltings
 Outdoor = true
 ShowArea = true
-MapPosition = 0,6,17
 BattleBack = field
-#-------------------------------
-[542]   # The Brinewife's Rest
-Name = The Brinewife's Rest
 MapPosition = 0,6,17
 #-------------------------------
 [544]   # Brinecut Mine 1F
@@ -359,6 +360,13 @@ MapPosition = 0,9,14
 Name = Thistledown Manor - Attic
 DarkMap = true
 MapPosition = 0,9,14
+#-------------------------------
+[552]   # The Dyers' Ford
+Name = The Dyers' Ford
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,8,15
 #-------------------------------
 [560]   # Frostflat Causeway
 Name = Frostflat Causeway
@@ -396,6 +404,13 @@ Weather = Snow,20
 Name = Gullcry Caves
 MapPosition = 0,2,8
 BattleBack = cave1
+#-------------------------------
+[566]   # Spinners' Rise
+Name = Spinners' Rise
+Outdoor = true
+ShowArea = true
+BattleBack = field
+MapPosition = 0,10,12
 #-------------------------------
 [570]   # Frostwick
 Name = Frostwick
@@ -435,6 +450,22 @@ MapPosition = 0,6,12
 Name = Halvard's Smokehouse
 ShowArea = false
 MapPosition = 0,6,12
+#-------------------------------
+[577]   # Frostwick Pass
+Name = Frostwick Pass
+Outdoor = true
+ShowArea = true
+BattleBack = snow
+Weather = Snow,20
+MapPosition = 0,8,12
+#-------------------------------
+[578]   # Rimewood Path
+Name = Rimewood Path
+Outdoor = true
+ShowArea = true
+BattleBack = snow
+Weather = Snow,10
+MapPosition = 0,6,11
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

@@ -30,23 +30,28 @@ module PrismfallMaps
     148 => [6, 2, -6, 8],   # Saltmere Lantern House
     126 => [6, 2, -6, 8],   # Briarwick Lantern House
     168 => [6, 2, -6, 8],   # The Net Loft
+    542 => [6, 2, -6, 8],   # The Brinewife's Rest
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
     287 => [8, 4, -10, 0],   # Briar Hall - Throne Room
     295 => [4, 8, -6, 0],   # Cathedral of the Evergreen
     520 => [4, 4, -4, 0],   # The Ferrymen's Mile
-    521 => [8, 4, -10, 0],   # Windfall Row
+    521 => [6, 4, -4, 0],   # Windfall Row
     522 => [-18, -22, 26, 70],   # The Glassed Orchard
     524 => [-28, -8, -30, 25],   # Gossamer Wood
     548 => [-46, -50, 4, 90],   # Cocoonfall Hollow
     525 => [-40, -24, -30, 40],   # Gossamer Deepwood
     527 => [6, 4, -6, 0],   # Lacecliff Walk
     528 => [8, 4, -8, 0],   # Marram Down
+    540 => [6, 4, -2, 0],   # Thistledown Lea
+    541 => [0, 0, 4, 18],   # The Grey Saltings
+    552 => [6, 4, -2, 0],   # The Dyers' Ford
     560 => [-6, -2, 10, 10],   # Frostflat Causeway
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs
     562 => [-10, -4, 14, 16],   # The Rimewood
     563 => [-6, -2, 16, 12],   # Rimewood Glade
+    566 => [0, 0, 4, 6],   # Spinners' Rise
     570 => [-8, -4, 12, 12],   # Frostwick
     571 => [6, 2, -6, 0],   # Frostwick Pokémon Center
     572 => [6, 2, -6, 0],   # The Exchange
@@ -54,6 +59,8 @@ module PrismfallMaps
     574 => [6, 2, -6, 0],   # Rime-silk Loft
     575 => [6, 2, -6, 0],   # Border House
     576 => [6, 2, -6, 0],   # Halvard's Smokehouse
+    577 => [-6, -2, 10, 10],   # Frostwick Pass
+    578 => [-12, -8, 8, 16],   # Rimewood Path
   }
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
@@ -65,6 +72,8 @@ module PrismfallMaps
     146 => ["prismfall_seamist", 0, 36, 0, 100, 2, 0],   # Saltmere - Harbour & Breakwater
     147 => ["prismfall_seamist", 0, 24, 0, 100, 2, 0],   # Saltmere - Old Town
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
+    524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood
+    541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
   }

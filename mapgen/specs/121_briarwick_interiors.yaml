@@ -804,7 +804,7 @@ events:
       - GALE POST. A letter is waiting.
       - '"Heard about the Hollow. Lecture Two enclosed. It is nine pages. Page nine says I''m proud of you. Do not skip to page nine. — I.L."'
       - {script: 'pfm_set(:gale2)'}
-      - var: [STORY_CHAPTER, 3]
+      - var: [STORY_CHAPTER, 4]
       else:
       - if: '!pfm?(:gale1)'
         then:
@@ -3075,7 +3075,7 @@ events:
       - {script: 'pfm_set(:hett_reward)'}
       - {script: 'pfm_quest_done(:locked_ledger)'}
       else:
-      - if: $player.badge_count >= 1
+      - if: pfm_gym_won?(:LEADER_TAMSIN)
         then: ['Hett: She signed WHAT? Alone? ...Poor fool child. Her gran would''ve made the whole village sign it with her, and then it''d be all our fault. That''s
             what a guild''s FOR.']
         else:
@@ -3122,7 +3122,7 @@ events:
   name: Loft manager
   pages:
   - commands:
-    - {script: 'pbSetSelfSwitch(%EV[Tamsin (loft)]%, "A", true) if $player.badge_count >= 1 && pf_choice(:ch2_tamsin).nil?'}
+    - {script: 'pbSetSelfSwitch(%EV[Tamsin (loft)]%, "A", true) if pfm_gym_won?(:LEADER_TAMSIN) && pf_choice(:ch2_tamsin).nil?'}
     - {erase: true}
     trigger: parallel
     move: fixed
@@ -5239,7 +5239,7 @@ events:
     graphic: {sprite: trainer_HIKER, dir: down}
   - commands:
     - 'Cutter: ...What''s the tree?'
-    - if: $player.badge_count >= 1
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
       then:
       - if: '!pfm?(:hm_cut)'
         then:

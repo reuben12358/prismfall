@@ -98,7 +98,7 @@ events:
         - up
         - {opacity: 0}
         wait: true
-    - if: $player.badge_count == 0
+    - if: '!pfm_gym_won?(:LEADER_TAMSIN)'
       then:
       - switch: [GLOAMING_DISGUISED_CELESTINE, true]
     - selfswitch: [A, true]
@@ -121,7 +121,7 @@ events:
   name: Stage manager
   pages:
   - commands:
-    - {script: "if $player.badge_count >= 1\n  $game_switches[@@GLOAMING_DISGUISED_CELESTINE] = false if $game_switches[@@GLOAMING_DISGUISED_CELESTINE]\n\
+    - {script: "if pfm_gym_won?(:LEADER_TAMSIN)\n  $game_switches[@@GLOAMING_DISGUISED_CELESTINE] = false if $game_switches[@@GLOAMING_DISGUISED_CELESTINE]\n\
         \  pbSetSelfSwitch(%EV[Dusk petal]%, \"A\", true)\nend\npbSetSelfSwitch(%EV[Charcoal child]%, \"A\", true) if $game_switches[@@CH2_MATRIARCH_DONE]\
         \ && !pfm?(:ch2_close)"}
     - {erase: true}
@@ -571,7 +571,7 @@ events:
   name: Weaver at loom
   pages:
   - commands:
-    - if: $player.badge_count >= 1
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
       then: &id001 ['Weaver at loom: She told us. All of it, or you did. Either way the looms stopped for a whole minute. First time since the funeral.']
       else:
       - 'Weaver at loom: Clack-clack. Sixty picks a minute. Don''t talk to me on the downstroke.'
@@ -580,7 +580,7 @@ events:
     move: fixed
     graphic: {sprite: NPC 16, dir: down}
   - commands:
-    - if: $player.badge_count >= 1
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
       then: *id001
       else: ['Weaver at loom: That was the downstroke.']
     trigger: action
@@ -700,7 +700,7 @@ events:
   name: Dyer
   pages:
   - commands:
-    - if: $player.badge_count >= 1
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
       then: ['Dyer: Contract''s a contract, says the linesman. So''s a pitchfork, says I.']
       else: ['Dyer: Elowen green, that''s my vat. The Queen''s own shade. She''s never paid for a yard of it. "The Crown''s by right of soil," says the
           taxman. So''s the mud, I said.']
@@ -743,7 +743,7 @@ events:
   name: Tired Mother
   pages:
   - commands:
-    - if: $player.badge_count >= 1
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
       then: ['Tired Mother: Still sleeping well.']
       else: ['Tired Mother: Three nights running somebody''s cut the survey flags. I''m not saying who. I''m saying I slept very well through it.']
     trigger: action

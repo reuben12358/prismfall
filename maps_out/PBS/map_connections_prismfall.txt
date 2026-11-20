@@ -2,8 +2,8 @@
 #-------------------------------
 # Ferrow's Landing (100) - The Ferrymen's Mile (520)
 100,N,28,520,S,11
-# Briarwick (120) - Thistledown Lea (540)
-120,W,29,540,E,10
+# Briarwick (120) - Spinners' Rise (566)
+120,N,52,566,S,38
 # Saltmere (140) - The Grey Saltings (541)
 140,N,43,541,S,12
 # Saltmere (140) - Frostflat Causeway (560)
@@ -16,13 +16,23 @@
 520,N,30,521,S,58
 # The Ferrymen's Mile (520) - Lacecliff Walk (527)
 520,W,72,527,E,22
+# Gossamer Wood (524) - Thistledown Lea (540)
+524,W,50,540,E,30
 # Lacecliff Walk (527) - Marram Down (528)
 527,W,18,528,E,30
-# Thistledown Lea (540) - The Grey Saltings (541)
-540,S,2,541,N,2
+# Thistledown Lea (540) - The Dyers' Ford (552)
+540,S,20,552,N,39
+# The Grey Saltings (541) - The Dyers' Ford (552)
+541,N,34,552,S,38
 # Frostflat Causeway (560) - Frostwick (570)
-560,W,10,570,E,21
+560,N,2,570,S,4
 # Gullcry Cliffs (561) - The Rimewood (562)
 561,S,10,562,N,12
-# Frostwick (570) - The Rimewood (562)
-570,N,20,562,S,22
+# Spinners' Rise (566) - Frostwick Pass (577)
+566,N,42,577,S,30
+# Frostwick (570) - Rimewood Path (578)
+570,N,20,578,S,40
+# Frostwick (570) - Frostwick Pass (577)
+570,E,21,577,W,60
+# Rimewood Path (578) - The Rimewood (562)
+578,N,36,562,S,22

@@ -71,11 +71,13 @@
 546	540	Thistledown Manor
 547	546	Thistledown Manor - Attic
 548	540	Cocoonfall Hollow
+552	0	The Dyers' Ford
 560	0	Frostflat Causeway
 561	0	Gullcry Cliffs
 562	0	The Rimewood
 563	562	Rimewood Glade
 564	561	Gullcry Caves
+566	0	Spinners' Rise
 570	0	Frostwick
 571	570	Frostwick Pokémon Center
 572	570	The Exchange
@@ -83,4 +85,6 @@
 574	570	Rime-silk Loft
 575	570	Border House
 576	570	Halvard's Smokehouse
+577	0	Frostwick Pass
+578	0	Rimewood Path
 990	0	Prismfall Test Arena

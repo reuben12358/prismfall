@@ -296,8 +296,12 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[591] = :NONE   # Brassfall Pokémon Center
   FieldEffects::MAP_FIELDS[592] = :SNOWY_MOUNTAIN   # The Icecutters' Haul
   FieldEffects::MAP_FIELDS[593] = :NEON_GRID   # The Arc-Lamp Mile
+  FieldEffects::MAP_FIELDS[594] = :MEADOW   # Wallshadow Row
+  FieldEffects::MAP_FIELDS[595] = :MEADOW   # Coppice Ride
   FieldEffects::MAP_FIELDS[600] = :DESERT   # The Brass Dunes
   FieldEffects::MAP_FIELDS[601] = :DESERT   # The Rib Road
+  FieldEffects::MAP_FIELDS[602] = :MEADOW   # Candle Down
+  FieldEffects::MAP_FIELDS[603] = :MEADOW   # The Highwold
   FieldEffects::MAP_FIELDS[604] = :CAVE   # Static Tunnels
   FieldEffects::MAP_FIELDS[605] = :CAVE   # Static Tunnels Depths
   FieldEffects::MAP_FIELDS[608] = :BLEED   # The Lowlight (Shattered)
@@ -314,6 +318,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[631] = :NONE   # Charwell Pokémon Center
   FieldEffects::MAP_FIELDS[632] = :DESERT   # The Kneeling Stones
   FieldEffects::MAP_FIELDS[633] = :CORROSIVE_MIRE   # The Gutterfall
+  FieldEffects::MAP_FIELDS[634] = :MEADOW   # Wormwood Lea
   FieldEffects::MAP_FIELDS[640] = :CORROSIVE_MIRE   # Leechman's Walk
   FieldEffects::MAP_FIELDS[641] = :ASHEN_WASTE   # Lake Sallow
   FieldEffects::MAP_FIELDS[644] = :CORROSIVE_MIRE   # Miasma Caverns
@@ -380,6 +385,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[753] = :MINDSCAPE   # Glassmere
   FieldEffects::MAP_FIELDS[754] = :NONE   # Glassmere Pokémon Center
   FieldEffects::MAP_FIELDS[755] = :INVERSE   # Widdershins Walk
+  FieldEffects::MAP_FIELDS[756] = :MEADOW   # Kingsmead
   FieldEffects::MAP_FIELDS[760] = :INVERSE   # The Obsidian Barrows
   FieldEffects::MAP_FIELDS[761] = :DESERT   # Spinefall Gorge
   FieldEffects::MAP_FIELDS[764] = :CRYSTAL_CAVERN   # Geode Hollow
