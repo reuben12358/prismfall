@@ -179,10 +179,12 @@
    ],
    "name": "The Rootdeep",
    "crossings": [
+    "5->6 (The Leach Road: The Gutterfall)",
+    "7->8 (The Iron Road: The Long Drop)",
     "8->9 (The Root Road: The Rootdeep)",
     "16->17 (The Blind Road: The Blindwater)"
    ],
-   "biome": "Under the plateau's foot: the Gossamer's roots through Nadir's mine shafts, glowing fungus, root-cathedrals; the Blindwater under the south coast. South hamlet: Mothwell (850).",
+   "biome": "Under the plateau's foot: the Gossamer's roots through Nadir's mine shafts, glowing fungus, root-cathedrals; the roads that go down off the Crownland edge into Nadir (the Gutterfall under the north cliff, the Long Drop under the west rim); the Blindwater under the south coast. South hamlet: Mothwell (850).",
    "landmarks": [
     "Lanternroot's mushroom farms",
     "root-cathedral",
@@ -192,7 +194,9 @@
    "wild": "Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy",
    "routes": [
     680,
-    840
+    840,
+    633,
+    672
    ],
    "town": 690
   },
@@ -18999,7 +19003,7 @@
    "id": 633,
    "name": "The Gutterfall",
    "act": 2,
-   "kingdom": "Nadir",
+   "kingdom": "Borderland (Nadir/Elowen)",
    "kind": "route",
    "size": [
     80,
@@ -19042,7 +19046,8 @@
      12
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "borderland": "The Rootdeep"
   },
   {
    "id": 634,
@@ -19962,7 +19967,7 @@
    "id": 672,
    "name": "The Long Drop",
    "act": 2,
-   "kingdom": "Nadir",
+   "kingdom": "Borderland (Nadir/Elowen)",
    "kind": "route",
    "size": [
     64,
@@ -20005,7 +20010,8 @@
      12
     ]
    },
-   "added_by": "cartographer (SPINE Rev 13)"
+   "added_by": "cartographer (SPINE Rev 13)",
+   "borderland": "The Rootdeep"
   },
   {
    "id": 673,

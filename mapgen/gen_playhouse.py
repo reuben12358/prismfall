@@ -84,8 +84,11 @@ def main():
     ev = [{'type': 'exit', 'at': list(A['exit']), 'link': 'SM_GYM', 'se': 'Door exit'},
           {'type': 'warp', 'name': 'Auditorium doors', 'at': list(A['doors']),
            'to': {'map': 154, 'x': P.THEATRE_AT['start'][0], 'y': P.THEATRE_AT['start'][1], 'dir': 'up'}},
+          {'type': 'event', 'name': 'House count', 'at': [0, 1], 'pages': [{'trigger': 'parallel', 'commands': [
+              {'script': 'pf_audience_sync'}, {'raw': [116, []]}]}]},
           {'type': 'npc', 'name': 'Usher', 'at': list(A['usher']), 'sprite': 'trainer_GENTLEMAN', 'dir': 'down', 'commands': [
               "Usher: Ah, our challenger! Tonight's bill: Dorian Pell, in person. Through the doors, up the aisle, onto the stage.",
+              {'script': 'pbMessage(_INTL("Usher: And tonight we have {1}. Everyone you shake hands with in Saltmere ends up in a seat, you know. It\'s that sort of town.", pf_house_name))'},
               "Usher: The cast may want a word on your way. Actors. They always want a word."]},
           {'type': 'npc', 'name': 'Gym guide', 'at': list(A['guide']), 'sprite': 'NPC 01', 'dir': 'left', 'commands': [
               "Gym Guide: Your first Warden! Dorian uses Normal-types, on the Grand Stage field.",
@@ -189,16 +192,53 @@ def main():
              "The footlights make everyone look braver. Even me.", "I came for the chandelier, honestly.",
              "My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.",
              "Psst. If you're the challenger: he hates being boring more than he hates losing."]
+    # SPINE Rev 19: the Saltmere audience (V313 STAGE_AUDIENCE; plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb).
+    # Three layers: ten regulars who are always in; every townsperson you met, in their own seat by the aisle (event
+    # "Fan <key>", shown by the house manager on self switch A); and the rest of the town, four more seats per head
+    # counted ([V313 >= k]).  Sparse house 0-6, good house 7-13, full house 14+.
     seats = [(x, y) for y in list(range(18, 22)) + list(range(23, 27)) for x in list(range(2, 11)) + list(range(14, 23))]
     busy = {T['ferdie'], T['rosalind'], T['juno']}
-    picked = [c for c in seats if c not in busy and rnd.random() < 0.42]
-    for i, (x, y) in enumerate(picked):
-        e = {'type': 'npc', 'name': 'Audience %d' % i, 'at': [x, y], 'sprite': SEATED[rnd.randrange(len(SEATED))], 'dir': 'up'}
-        if any(rows[y + dy][x + dx] == ',' for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):   # only the aisle seats can be talked to
-            e['text'] = '(whispering) ' + LINES[rnd.randrange(len(LINES))]
-        else:                                                         # the middle of a row: pure decor (a graphic, no commands)
-            e = {'type': 'event', 'name': e['name'], 'at': [x, y], 'pages': [{'graphic': {'sprite': e['sprite'], 'dir': 'up'}}]}
-        ev.append(e)
+    talkable = lambda x, y: any(rows[y + dy][x + dx] == ',' for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+    FANS = [('caramel_seller', 'NPC 29', "Caramel Seller: Salt-caramel for the interval! You're my best customer, so you get the crunchy bits."),
+            ('busker', 'NPC 27', "Busker: I'll play you on. Quietly. The conductor glares."),
+            ('ogre_child', 'NPC 17', "Child with an Ogre puppet: The Ogre came to watch you! He says GRAAH. That means good luck."),
+            ('retired_actor', 'NPC 24', "Retired Actor: Breathe from the belly. Stand like you own the boards. You do, tonight."),
+            ('hound_two', 'NPC 23', "Hound Number Two: GRR. On the beat. For you!"),
+            ('fishwife', 'trainer_FISHERMAN', "Fishwife: No tint at all, and look at you, top of the bill. I'll gossip about you for a WEEK."),
+            ('ferry_woman', 'NPC 13', "Woman from the ferry: From the Dovetail to the Playhouse! I told everyone on the quay."),
+            ('eevee_breeder', 'NPC 25', "Breeder: The troupe's Eevee is in the wings tonight. Forty auditions. Maybe forty-one."),
+            ('salt_raker', 'NPC 19', "Salt raker: Rake it white, cheer it loud."),
+            ('harbourmaster', 'trainer_SAILOR', "Harbourmaster: Free port, free seats. Don't tell Dorian I said that."),
+            ('saltwife', 'NPC 28', "Saltwife: Forty years raking and I've never missed an opening night. Win it."),
+            ('stevedore', 'NPC 07', "Stevedore: I can shout over a crane. I'll shout over HIM."),
+            ('old_angler', 'NPC 05', "Old angler: Something big's circling the breakwater. Something big's on that stage. Same advice: patience."),
+            ('fisherman', 'trainer_FISHERMAN', "Fisherman: Ordinary night. Extraordinary seats."),
+            ('old_sailor', 'trainer_SAILOR', "Old Sailor: Born here, live anywhere. Tonight I live in row three."),
+            ('smoke_stagehand', 'NPC 20', "Stagehand: I'm off shift. I'm watching like a civilian. A loud civilian."),
+            ('costumier', 'NPC 12', "Costumier: I stitched his cape. If you tear it I'll stitch you a worse one."),
+            ('street_player', 'NPC 08', "Street player: A stage is anywhere two people stop to look. Two hundred people stopped. Go on."),
+            ('quest_EL_LANTERNS', 'NPC 26', "Lantern-bearer: Sister Hollin sent us. We brought our own lanterns. We're keeping them."),
+            ('quest_EL_LANTERNS', 'NPC 26', "Sister Hollin: The lanterns came home. So did we. Listen to the house, child."),
+            ('quest_EL_LANTERNS', 'NPC 14', "Lantern-bearer: We're the quiet section. Mostly.")]
+    fan_seats = [c for c in seats if c not in busy and talkable(*c) and c[0] in (10, 14)]
+    fan_seats += [c for c in seats if c not in busy and talkable(*c) and c[0] in (2, 22)]
+    for (key, spr, line), (x, y) in zip(FANS, fan_seats):
+        ev.append({'type': 'event', 'name': 'Fan %s' % key, 'at': [x, y], 'pages': [
+            {}, {'cond': {'self': 'A'}, 'graphic': {'sprite': spr, 'dir': 'up'}, 'commands': [line]}]})
+    free = [c for c in seats if c not in busy and c not in fan_seats[:len(FANS)]]
+    rnd.shuffle(free)
+    regulars, rest = free[:10], free[10:]
+    for i, (x, y) in enumerate(regulars + rest[:84]):
+        spr = SEATED[rnd.randrange(len(SEATED))]
+        pg = {'graphic': {'sprite': spr, 'dir': 'up'}}
+        if talkable(x, y): pg['commands'] = ['(whispering) ' + LINES[rnd.randrange(len(LINES))]]
+        if i < 10:
+            ev.append({'type': 'event', 'name': 'Audience %d' % i, 'at': [x, y], 'pages': [pg]})
+        else:                                                         # the rest of the town: 4 seats per head counted
+            k = (i - 10) // 4 + 1
+            ev.append({'type': 'event', 'name': 'Audience %d' % i, 'at': [x, y], 'pages': [{}, dict(pg, cond={'var': ['STAGE_AUDIENCE', k]})]})
+    ev.append({'type': 'event', 'name': 'House manager', 'at': [0, 2], 'pages': [   # counts the quests, seats the people you met
+        {'trigger': 'parallel', 'commands': [{'script': 'pf_audience_sync'}, {'raw': [116, []]}]}]})
     for i, (x, y, spr) in enumerate(((6, 13, 'NPC 05'), (8, 14, 'NPC 18'), (16, 13, 'NPC 20'), (18, 14, 'NPC 03'), (21, 13, 'NPC 22'))):
         ev.append({'type': 'event', 'name': 'Musician %d' % i, 'at': [x, y], 'pages': [{'graphic': {'sprite': spr, 'dir': 'down'}}]})
     ev.append({'type': 'npc', 'name': 'Conductor', 'at': [10, 15], 'sprite': 'trainer_GENTLEMAN', 'dir': 'up', 'commands': [
@@ -216,6 +256,7 @@ def main():
            say('DORIAN', 'neutral', "..."), say('DORIAN', 'happy', "Do it again."),
            "(Nothing. The case is quiet.)",
            say('DORIAN', 'deadpan', "One night only. The best kind."),
+           {'if': 'pf_audience > 0', 'then': [{'script': 'n = pf_audience * 150\n$player.money += n\npbMessage(_INTL("(The box office sends up your share of the takings: ${1}.)", n.to_s_formatted))'}]},
            {'script': 'pbReceiveItem(:TM42)'},
            say('DORIAN', 'neutral', "Facade. The art of turning a bad night into a standing ovation. You'll need it more often than you'd think."),
            say('DORIAN', 'neutral', "That badge is the Accord's word that Pokémon up to level nineteen will heed you. Briarwick's will let you cut the dead wood, when you've earned it. They have a man for that."),
@@ -252,7 +293,15 @@ def main():
                     say('DORIAN', 'neutral', "Your first Warden. Your first field. Your first audience. I envy you, darling. You only get one of each."),
                     say('DORIAN', 'smug', "On my stage the house loves a show. Sing, dance, dazzle them, and they'll carry you. Bore them, and they'll let you fall."),
                     say('DORIAN', 'happy', "Shall we give them something to remember?")]},
+                {'if': 'pf_house_stage >= 3', 'then': [
+                    say('DORIAN', 'shocked', "...A FULL house. Darling, did you shake every hand in Saltmere? They're here for YOU."),
+                    say('DORIAN', 'happy', "Then we start at a standing ovation. Don't let them sit down.")],
+                 'else': [{'if': 'pf_house_stage == 2', 'then': [
+                    say('DORIAN', 'happy', "A good house tonight! Half the town seems to know your name already. We'll open on an encore."),
+                    ], 'else': [
+                    say('DORIAN', 'neutral', "A sparse house. Intimate. Every seat a front-row seat. We'll make them remember us anyway.")]}]},
                 {'script': "$game_self_switches[[154, 0, 'TRIED']] = true"},
+                {'script': 'pf_house_rules'},
                 {'if': 'Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)', 'then': win}]},
             {'cond': {'self': 'A'}, 'graphic': {'sprite': 'trainer_GENTLEMAN', 'dir': 'down'}, 'commands': [
                 say('DORIAN', 'happy', "Rehearsal at the Lantern Theatre, darling! Opening night at eight!"),

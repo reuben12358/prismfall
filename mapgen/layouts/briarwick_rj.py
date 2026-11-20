@@ -28,7 +28,7 @@ def sx(y):
 
 def ridge(x):
     """last row of the north ridge (h=1)"""
-    if 28 <= x <= 44: return 14
+    if 28 <= x <= 50: return 14                    # map builder 9: the knoll runs on to the North Gate lane
     if 18 <= x <= 27: return 12 + (1 if x > 22 else 0)
     return 10 + int(round(1.5 * math.sin(x / 5.0) + 1.5 * (vnoise(x, 0, 3, 6.0) - 0.5)))
 
@@ -123,13 +123,20 @@ def build(preview=None):
     d['house2'] = m.stamp('pf_g_tree4', 40, 44, 'BW_HOUSE2', "Cutter's House door")
     m.stamp('pf_g_tree2', 39, 27)                                                # the Gathering Tree on the green
     hd = []
-    for nm, x, y in (('pf_g_tree4p', 20, 36), ('pf_g_tree2', 47, 8), ('pf_g_tree2', 66, 14),
+    for nm, x, y in (('pf_g_tree4p', 20, 36), ('pf_g_tree2', 57, 7), ('pf_g_tree2', 66, 14),
                      ('pf_g_tree2', 46, 50), ('sh_small', 65, 22), ('sh_small', 50, 35), ('sh_ell', 23, 49), ('pf_g_tree2', 8, 54),
                      ('pf_g_tree2', 67, 40)):
-        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.dT'):
+        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.dT') and not (nm.startswith('pf_g') and (m.cls[y:y + STAMPS[nm]['h'], x:x + STAMPS[nm]['w']] == 'd').any()):
             m.stamp(nm, x, y)
             if 'door' in STAMPS[nm]: dd = STAMPS[nm]['door']; hd.append((x + dd[0], y + dd[1]))
         else: print('  (no room for %s at %d,%d)' % (nm, x, y))
+    # map builder 9: the Briarwick Lantern House (126, Trials) is a hollow tree under the Loyal Three shrine
+    for lx, ly in ((24, 2), (23, 1), (25, 1), (12, 3), (14, 2), (10, 4), (16, 3)):
+        sub = m.ht[ly:ly + 9, lx:lx + 6]; dx_, dy_ = lx + 2, ly + 6
+        if m.free(lx, ly, STAMPS['pf_g_tree4']['w'], STAMPS['pf_g_tree4']['h'], on='.dT') and not m.cliff[ly:ly + 9, lx:lx + 6].any() \
+                and sub.min() == sub.max() and m.cls[dy_ + 1, dx_] in '.d' and m.cls[dy_ + 2, dx_] in '.d' and not m.taken[dy_ + 1:dy_ + 3, dx_].any():
+            d['lantern'] = m.stamp('pf_g_tree4', lx, ly, 'BW_LANTERN', 'Lantern House door', blend=True); break
+    else: print('  (no room for the Lantern House tree)')
     for dx, dy in list(d.values()) + hd: m.doorpath((dx, dy), depth=8)
     for y in range(58, 63):                                  # a clearing round the weavers' row house: no canopy over its eaves
         for x in range(20, 34):
@@ -149,7 +156,7 @@ def build(preview=None):
               'text': "NORTH GATE - Spinners' Rise, Frostwick Pass and the Hoar Road north."})
     P('Arrival', (34, 62)); P('Juno (arrival)', (36, 61)); P('Stage manager', (37, 62))
     gx, gy = d['gym']
-    P('Loomhouse sign', (gx + 2, gy + 1))
+    P('Loomhouse sign', (gx + 4, gy))                       # map builder 9: off the 1-row knoll walk to the North Gate lane
     P('Loyal Three shrine', (21, 8)); P('Old woman at the shrine', (22, 9)); P('Dusk petal', (23, 8))
     P('Lattice pylon', (69, 30)); P('Survey flags', (67, 33))
     for i, y in enumerate((30, 31, 32)): P('Pylon watch %d' % (i + 1), (63, y))
@@ -210,7 +217,7 @@ def build(preview=None):
     m.paint()
     garlands(m, ((33, 48, 28, 0), (33, 48, 38, 1), (44, 50, 27, 2), (17, 28, 30, 3), (50, 54, 33, 1), (33, 38, 56, 2), (32, 37, 45, 3)))
     m.scatter(9, seed=21, on='.T')
-    m.seal_against([{'dir': 'N', 'offset': 52, 'to': 566, 'to_offset': 38}], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
+    m.seal_against([{'dir': 'N', 'offset': 52, 'to': 566, 'to_offset': 38}], spans=[('N', 52, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
     if preview: m.preview(preview, 0.5)
     head = {'id': 120, 'biome': 'forest', 'name': 'Briarwick', 'parent': 0, 'bgm': 'Lappet Town', 'rubric': True, 'yards_ok': True,
             'metadata': {'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 12, 22], 'BattleBack': 'forest'},

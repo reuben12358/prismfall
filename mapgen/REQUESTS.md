@@ -294,3 +294,93 @@ request 1), or keep the Litwick line and have it "follow you out" only after Bad
 it is now in the Gossamer Wood only (3%), and Windfall Row's Litleo (3%) and Shinx (4%) are rare finds. The new base tables
 for 527, 528, 552, 566, 577 and 578 follow the ROUTES.yaml fill lists, except Smeargle at the Dyers' Ford, which arrives with
 Badge 2 (overlay) so that the Saltmere paint-loft gift comes first.
+
+## From the engine playtest, round 3 (fresh installs of the 17:11 and 17:55 kits, 2026-11-19)
+No map file was edited. Status of earlier playtest items: **1 (103 arrival tile) and 7 (100 door tiles) verified fixed in
+the engine** (in and out of the lab, Poké Center and Mart with no Debug walk-through). **10 (event tiles beyond tileset)
+fixed**: `export_tilesets_rxdata.py` warns about nothing and 521 draws without the bot blanking anything.
+12. ~~J1 never appears (map 140)~~ **fixed in the 21:56 build** (seen in the 17:55 kit). The built event now opens on S105 +
+    `pfm?(:sm_arrived)` (from `layouts/saltmere_rj.py`). Note: `layouts/saltmere_events.yaml` still has the old
+    `cond: switch: CH2_MATRIARCH_DONE` J1 page; only the older `saltmere_city.py` reads it, but it is a stale copy that
+    could come back if that layout is rebuilt.
+13. ~~Windfall Row (521) still pre-swap~~ **fixed in the 21:56 build** (seen in the 17:55 kit, where the forest warp was
+    open after S105). 521 now has the Forest-road cordon (lifts on V105 >= 1) and the Cordon Warden.
+14. **Build snapshots: a kit packaged mid-rebuild can strand the player.** The 17:55 kit had the new 520 (64x110) with the
+    old 521 (62x48): `520,N,30,521,S,58` put all four open tiles of 520's north row onto blocked 521 tiles, so Windfall
+    Row was unreachable. Fixed by the 21:56 rebuild of 521. A seam check would catch it at build time: for every open
+    edge tile, the arrival tile on the neighbour must be passable and connected (the playtest's offline checker,
+    `/home/claude/run_pt/scripts/seam.py`, reads Map*.rxdata + Tilesets_prismfall.rxdata; happy to move it into mapgen).
+
+## From the puzzle engineer: the Saltmere audience (SPINE Revision 19, item 3), 2026-11-19
+**For map builder 9 (Saltmere 140/143/144/146/147 are yours; I have not edited them).** "The more people you meet around town,
+the more audience shows up for your fight." The count lives in **V313 `STAGE_AUDIENCE`** (`mapgen/flags.yaml`). Runtime:
+`plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb`. Map 154 already reads it: each person below has their own seat by the
+aisle, the rest of the town fills four seats per head, and the count sets the Grand Stage's opening stage for Dorian
+(0-6 sparse = stage 1, 7-13 good = stage 2, 14+ full = stage 3).
+14. **Add one line to each of these events, as the first command of their talk page:** `{script: 'pfm_audience(:KEY)'}`
+    (it counts each person once, so it is safe on every talk, and returns quietly afterwards). Keys are fixed: map 154's
+    seats are named after them.
+
+    | Key | Event (map, at) |
+    |---|---|
+    | `:caramel_seller` | Caramel Seller (140, 30,38) |
+    | `:busker` | Busker (140, 54,33) |
+    | `:ogre_child` | Child with an Ogre puppet (140, 36,34) |
+    | `:retired_actor` | Retired Actor on a bench (140, 28,55) |
+    | `:hound_two` | Hound Number Two (140, 49,52) |
+    | `:fishwife` | Fishwife (140, 66,46) |
+    | `:ferry_woman` | Woman from the ferry (140, 76,46) |
+    | `:eevee_breeder` | Eevee breeder (140, 58,38) |
+    | `:salt_raker` | Salt raker (140, 40,66) **and** Salt raker (146, 36,8): same key, either one counts |
+    | `:harbourmaster` | Harbourmaster (143, 6,5) |
+    | `:saltwife` | Saltwife (144, 7,4) |
+    | `:stevedore` | Stevedore (146, 26,34) |
+    | `:old_angler` | Old angler (146, 8,57) |
+    | `:fisherman` | Fisherman (146, 4,45) |
+    | `:old_sailor` | Old Sailor (146, 84,40) |
+    | `:smoke_stagehand` | Stagehand on a smoke break (146, 38,27) |
+    | `:costumier` | Costumier (147, 27,37) |
+    | `:street_player` | Street player (147, 44,46) |
+
+    Not counted on purpose: the Accord Inspector, the Meridian Clerk, the Gate Warden, the Legion recruiter (none of them would
+    cheer you) and the Grey Pilgrim. The generic "Townsfolk N" don't count either; if you give any of them a name and a line
+    of their own, they can join (tell me the key and I'll give them a seat).
+15. **The Trial board needs nothing from you:** `EL_LANTERNS` (Sister Hollin) counts 3 when map 150 or 154 loads.
+16. If an event above moves or is renamed, keep its key. If one is cut, tell me: its seat in 154 would stay empty.
+
+**For the story editor (SPINE Revision 19, Gym 2 redo):** map 131 is now **The Canopy** (web trampolines in the elder's
+hollow; GYM_PUZZLES Gym 2) and 130 the weavers' lobby. `story/21_SCRIPT_CH3.md` still describes the Weaving Hall: lines 307
+(trainer: "planks and looms... the wrong heddle"), 361 (gym guide: heddles, "count lifts, not pulls"), 363-364 (apology cards
+about the loom bed / "the Weaving Hall is upstairs"), 367 (Orla: "Mind the loom bed"), 379, 382 (map 131 heading), 392
+("the great loom on the top ledge") and 537. The built maps already use web lines for these (gen_loomhouse.py: the gym
+guide explains taut and sticky webs and the Joltik; Orla bounced into the net; the cards are about webs; Tamsin's first
+line is "My grandmother wove the looms downstairs. The webs up here, the Bugs wove."). Tamsin's battle, win and confession
+lines are unchanged. Nell and Orla are in the Canopy now (Orla on ledge 2, Nell on ledge 1), Bram on Tamsin's ledge.
+
+## From the world cartographer, round 2 (Geography v2 and the land war, SPINE Revision 18), 2026-11-19
+Elowen is now the middle of Velmora (Ossaria north, Isenmar west, Ashkaar east, Zenith/Nadir south) and the war is
+fought on land in Ossaria. Sources and generated files as in my round 1 above; the geography in words is
+`design/WORLD_MAP.md`, the borderlands and gym-order crossings are WORLD.md §10, the war theatre §9.
+**No built map needs a change.** The start chain (100–578) did not move, every map ID is kept, and the 88 `MapPosition`
+values in `maps_out/PBS/map_metadata_prismfall.txt` already match `mapgen/data/town_map_positions.json`.
+1. **Revision 14 links are final in maps.json** (declarative, a second gen_docs run changes nothing): 540 S <-> 552;
+   Cocoonfall Hollow 548 is entered only by DEEP_COCOON from Gossamer Deepwood 525 (your 525 specs already use that
+   link; no R3_COCOON is left in the specs); 132 <-> 134 by warp; **134 "Loomhouse Upper Lofts - Granny's Knot"** (20x15,
+   segment 2) is in maps.json; 133 is retired; Frostwick 570's duplicate south edges are gone. Segment 2 (after Badge 2):
+   525, 548, 151–153, 132, 134.
+2. **New planned maps** (outline; ROUTES.yaml has size, fill, exits, landmark): 595 Coppice Ride and 594 Wallshadow Row
+   (Road 4), 602 Candle Down and 603 the Highwold (Road 5), 634 Wormwood Lea (Road 6), 756 Kingsmead (Road 12). With
+   them the **Crown Road** rings the Crownwall; Roads 8 and 12 reuse Candle Down and the Highwold (ROUTES.yaml `via`).
+   The Gutterfall 633 and the Long Drop 672 are now borderland F (Nadir/Elowen) maps.
+3. **Renamed (not built):** 582 Lumen West Gate (was Lumen South Gate; Lumen is entered from the west off the Arc-Lamp
+   Mile), 920 The Rimed Sands (was the Rime Narrows), 922 Skaldfast - Rime Keep (was Harbour Keep), 926 The Glass Dunes
+   (was the Shattered Ice).
+4. **The war theatre is land** (920–927, maps.json `war_theatre` and `connections_outline`): 920/924/925/926 use
+   `G5_DESERT_CANYON`; Skaldfast 921–923 is Isenmar's border fortress on Ossaria's west edge at the foot of the Mast
+   Glacier, not a port; Cinder Cape Warfort 927 stays on Ashkaar's coast. 926's default field is DESERT
+   (FIELD_DEFAULTS.yaml synced; `011_FieldEffects_MapDefaults.rb` regenerated with `tools/field_defaults_to_rb.rb`).
+5. **Road 11 has an air leg:** Anchorhold 730 -> airship -> the Tetherline 732 (Isenmar and Zenith share no border).
+   When you build them, it is a warp/event from Anchorhold's mooring to the Tetherline, not a map edge.
+6. **(done) Fly follows the live HealingSpot:** `mapgen/ruby/009_TownMap.rb` (copy in maps_out/Plugins/Prismfall Maps
+   is identical) wraps `PokemonRegionMap_Scene#pbGetHealingSpot`, so when a rebuild moves a PC door, Fly uses the map
+   metadata's `HealingSpot` instead of the coordinates in `town_map.txt`. Nothing to do on your side.

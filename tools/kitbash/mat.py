@@ -261,3 +261,25 @@ def reduce_colours(im, n, protect=()):
     for i, (x, y) in enumerate(pix):
         op[x, y] = qp[i, 0] + (255,)
     return out
+
+
+def drop_specks(im, min_px=8):
+    """remove 8-connected opaque components smaller than min_px (stray bits left after a cut)."""
+    out = im.copy(); p = out.load(); w, h = im.size
+    seen = set()
+    for y in range(h):
+        for x in range(w):
+            if (x, y) in seen or not p[x, y][3]:
+                continue
+            comp = []; st = [(x, y)]; seen.add((x, y))
+            while st:
+                cx, cy = st.pop(); comp.append((cx, cy))
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        nx, ny = cx + dx, cy + dy
+                        if 0 <= nx < w and 0 <= ny < h and (nx, ny) not in seen and p[nx, ny][3]:
+                            seen.add((nx, ny)); st.append((nx, ny))
+            if len(comp) < min_px:
+                for (cx, cy) in comp:
+                    p[cx, cy] = CLEAR
+    return out

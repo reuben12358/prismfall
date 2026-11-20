@@ -154,12 +154,12 @@ def build_527():
     for _ in range(70):                                                    # gorse bushes on the heath
         x, y = r.rng.randrange(W - 2), r.rng.randrange(8, 40)
         if m.free(x, y, 2, 2, on='.'): m.stamp('ak_fern', x, y)
-    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 200, copses=6, scatter=12, greenfill=None)
+    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2', 'tr_oak'), n_trees=W * H // 80, copses=18, scatter=16, greenfill=None)
     m.taken = was | (m.taken & ~lipkeep)
     for n, x, y in (('ak_rock2', 12, 45), ('hb_plank', 56, 47), ('hb_rope', 31, 44), ('hb_buoy', 88, 48), ('ak_rock2', 118, 46),
                     ('hb_boxes', 70, 44), ('hb_plank', 126, 47), ('hb_barrel', 108, 44), ('ak_rock2', 136, 45), ('hb_post1', 50, 43)):
         r.near(n, x, y, on='s', r=4)
-    r.paint(glint=0.25)
+    r.paint(glint=0.45)
     flowers(r, 70, 9, 10, 4); flowers(r, 22, 9, 7, 3); flowers(r, 118, 9, 8, 4, p=0.3)
     for x, y in ((20, 55), (60, 56), (120, 54), (84, 58), (8, 52), (132, 57)): water_stamp(r, 'ak_rock2', x, y)
     water_stamp(r, 'ak_boulder', 26, 51)
@@ -191,8 +191,8 @@ def build_528():
     r = Route(528, W, H, 'dunes', kit={1: 'ak', 'default': 'ak'}, base='.')
     m = r.m
     r.sea('S', 11, wobble=3.5, beach=5, deep=4, scale=14.0)
-    r.forest_band('N', 5, wobble=3.0)
-    for cx, cy, rx, ry in ((14, 12, 8, 4), (90, 10, 7, 3), (102, 52, 5, 4), (6, 58, 5, 4)):
+    r.forest_band('N', 8, wobble=4.0)
+    for cx, cy, rx, ry in ((14, 12, 8, 4), (90, 10, 7, 3), (102, 52, 5, 4), (6, 58, 5, 4), (100, 24, 5, 4), (36, 20, 5, 3), (62, 44, 4, 3), (18, 50, 4, 3)):
         r.copse(cx, cy, rx, ry)
     # dunes: sandy ground (RJ Dirt) in long drifts, marram tall grass in their hollows
     for cx, cy, rx, ry in ((30, 50, 22, 9), (72, 54, 24, 8), (50, 28, 14, 7), (88, 36, 12, 6), (14, 36, 10, 6), (60, 66, 40, 4)):
@@ -255,7 +255,7 @@ def build_528():
           hidden((62, 64), 'SOFTSAND', 'HiddenItem (sledge run)'), obj('Sledge run', (58, 24), ['THE SLEDGE RUN. Down the Beacon to the shore in nine seconds. The record is seven, and a broken arm.']),
           item((8, 64), 'POTION'), item((100, 20), 'GREATBALL'), item((24, 26), 'REPEL'))
     r.seat_events(on='.dtus')
-    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 260, copses=4, scatter=10)
+    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2', 'tr_oak'), n_trees=W * H // 70, copses=18, scatter=16)
     for _ in range(40):
         x, y = r.rng.randrange(W - 2), r.rng.randrange(6, 66)
         if m.free(x, y, 2, 2, on='.u'): m.stamp('ak_fern', x, y)
@@ -593,7 +593,7 @@ def build_541():
         for x in range(46, 70):
             if x >= 48 + 4 * RK.vnoise(0, y, 541, 8.0) and y < 46 + 3 * RK.vnoise(x, 0, 542, 8.0): m.ht[y, x] = 1
     m.ht[40:47, 54:62] = 1; m.ht[47:52, 54:62] = 0
-    r.forest_band('W', 4, wobble=2.0); r.forest_band('N', 3, wobble=2.0)
+    r.forest_band('W', 8, wobble=3.0); r.forest_band('N', 5, wobble=2.0); r.forest_band('E', 5, wobble=2.0)
     # tidal pools and mudflats in the middle, the salt flats in the south-west
     for cx, cy, rx, ry in ((22, 30, 7, 4), (36, 46, 6, 3), (14, 56, 5, 3), (40, 64, 8, 4), (26, 82, 5, 3), (52, 86, 6, 4), (48, 22, 4, 3)):
         r.water(cx, cy, rx, ry)
@@ -670,8 +670,8 @@ def build_541():
     for n, x, y in (('hb_salt0', 8, 92), ('hb_salt1', 24, 100), ('hb_salt2', 12, 102), ('hb_salt0', 26, 92), ('hb_tubs', 6, 98), ('hb_barrel', 20, 88)):
         r.near(n, x, y, on='S', r=3)
     pans(r, 4, 88, 29, 106)
-    r.dress(trees=('tr_pine', 'tr_pine2'), n_trees=W * H // 400, copses=2, scatter=8)
-    r.paint(glint=0.15)
+    r.dress(trees=('tr_pine', 'tr_pine2', 'tr_oak2'), n_trees=W * H // 150, copses=8, scatter=18)
+    r.paint(glint=0.45)
     salt_ground(r, [(x, y) for y, x in np.argwhere(m.cls == 'S')])
     cave_mouth(m, 57, 49)
     ship_part(r, -14, -15, 51, on='d.')
@@ -756,7 +756,7 @@ def build_552():
         r.near(n, x, y, on='.d', r=3)
     r.stamp('gl_flat2', 10, 36, mark='B') if m.free(10, 36, 7, 6, on='.') else r.near('gl_flat2', 12, 36, on='.', r=4)
     for x in (40, 41, 42, 39): overs_tile(r, 'pf_p_laundry', x - 1, 23)
-    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pink'), n_trees=W * H // 200, copses=4, scatter=12)
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pink'), n_trees=W * H // 110, copses=8, scatter=18)
     r.paint(glint=0.0)
     ST = [K.P1('pf_stepstone0'), K.P1('pf_stepstone1')]
     for i, (x, y) in enumerate(stones): m.L[1, y, x] = ST[(x + y) % 2]
@@ -791,8 +791,8 @@ def build_540():
     W, H = 130, 64
     r = Route(540, W, H, 'meadow', base='.')
     m = r.m
-    r.forest_band('N', 4, wobble=2.0)
-    for cx, cy, rx, ry in ((116, 10, 9, 6), (100, 46, 6, 4), (6, 40, 5, 5), (40, 8, 7, 4)):
+    r.forest_band('N', 7, wobble=3.0); r.forest_band('S', 4, wobble=2.0)
+    for cx, cy, rx, ry in ((116, 10, 9, 6), (100, 46, 6, 4), (6, 40, 5, 5), (40, 8, 7, 4), (124, 46, 5, 4), (84, 12, 4, 3), (14, 8, 5, 4)):
         r.copse(cx, cy, rx, ry)
     # the Selvedge along the south third, islets
     for x in range(W):
@@ -849,14 +849,14 @@ def build_540():
           obj('The Ha-ha', (87, 8), ['(The sunken wall\'s ditch runs round the back of the hill to an overgrown garden. A cellar door, barred from inside. Something is digging behind it.)']),
           talk('Greavard', (85, 6), 'Followers/GREAVARD', ['(It is digging very seriously. It does not want to be interrupted. It wags anyway.)'], move='random'),
           hidden((88, 5), 'RAREBONE', 'HiddenItem (the Ha-ha)'),
-          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((126, 20), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 51), 'GREATBALL'))
+          {'type': 'berry', 'at': [30, 34], 'berry': 'CHERIBERRY'}, item((126, 20), 'SUPERPOTION'), item((4, 34), 'POKEBALL'), item((70, 46), 'GREATBALL'))
     r.seat_events(on='.dt')
     fd = m.front('sh_big', 64, 14, 'R3_MANOR', 'Manor door')
     r.events += [e for e in m.events if e.get('link') == 'R3_MANOR' or e.get('name') == 'Locked door']; m.events = []
     for n, x, y in (('sh_campfire', 78, 42), ('hb_tables', 82, 42), ('hb_shed', 84, 38), ('pf_logbench', 76, 44)):
         r.near(n, x, y, on='.d', r=3)
     m.fence(36, 50, 20, gaps=((42, 44),)); m.fence(36, 50, 28, gaps=((40, 41),))
-    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pink', 'tr_pine'), n_trees=W * H // 180, copses=6, scatter=12)
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pink', 'tr_pine'), n_trees=W * H // 100, copses=14, scatter=18)
     r.paint(glint=0.0)
     cave_mouth(m, 8, 24)
     for (cx, cy, rx, ry, k) in ((40, 14, 10, 4, 0), (90, 22, 9, 3, 1), (108, 42, 8, 3, 2), (30, 26, 6, 2, 3)):
@@ -937,9 +937,20 @@ def build_524():
               {'if': 'PBDayNight.isNight?', 'then': ['The silk wall has loosened in the dark. It parts like a curtain.', {'selfswitch': ['A', True]}],
                'else': ['A wall of silk, tight as a drum. At night, the weavers say, the seams unpick themselves.']}]},
               {'cond': {'self': 'A'}, 'through': True, 'commands': []}]},
-          {'type': 'event', 'name': 'Sap tree duel', 'at': [78, 84], 'pages': [{'graphic': {'sprite': 'Followers/HERACROSS', 'dir': 'left'}, 'trigger': 'action',
-                                                                                'commands': [{'script': 'pf_trial_talk(:SAP_TREE)'}]}]},
+          {'type': 'event', 'name': 'Sap tree duel', 'at': [78, 84], 'pages': [{'commands': []},
+              {'graphic': {'sprite': 'Followers/HERACROSS', 'dir': 'left'}, 'trigger': 'action',
+               'commands': [{'comment': 'Condition: badges >= 2 && !quest_done(:EL_HORN_AND_PINCER)'}, {'script': 'pf_trial_talk(:SAP_TREE)'}]}]},
           obj('Sap tree', (80, 83), ['A weeping sap tree. Two very large beetles are disputing ownership of it.']))
+    # the two Horn-and-Pincer shortcuts (TRIAL_EVENTS 524): a silk wall on the cut from the clearing to the north trail, a fallen
+    # log on the cut from the cocoon grove to the south road; each stays until its beetle clears it
+    r.lane([(52, 46), (48, 40)], w=1.6, open_=None); r.lane([(16, 82), (24, 92), (36, 94)], w=1.6, open_=None)
+    silk = int(np.array(STAMPS['pf_p_silk1']['layers']).max()); logt = int(np.array(STAMPS['fw_log_m']['layers']).max())
+    r.events.append({'type': 'event', 'name': 'Silk wall', 'at': [50, 43], 'fixed': True, 'pages': [{'commands': []},
+        {'graphic': {'tile': silk}, 'trigger': 'action', 'commands': [{'comment': "Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :heracross"},
+                                                                       'A wall of silk, tight as a drum. Something with a horn could tear it.']}]})
+    r.events.append({'type': 'event', 'name': 'Fallen log', 'at': [24, 92], 'fixed': True, 'pages': [{'commands': []},
+        {'graphic': {'tile': logt}, 'trigger': 'action', 'commands': [{'comment': "Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir"},
+                                                                       'A fallen log across the path. Something with pincers could crush it.']}]})
     for i, y in enumerate((47, 48, 49)): r.events.append({'type': 'event', 'name': 'Juno at the Veil %d' % (i + 1), 'at': [79, y], 'pages': veil}); m.taken[y, 79] = True
     r.seat_events(on='.dt')
     fd = m.front('gl_shed', 58, 51, 'WOOD_HUT', "Woodward's Hut door")
@@ -1021,7 +1032,7 @@ def build_566():
     m.fence(52, 74, 96, gaps=((60, 62),))
     for n, x, y in (('fw_stone', 34, 8), ('fw_stone', 46, 8), ('fw_stone', 40, 4), ('fw_stone', 36, 13), ('fw_stone', 45, 13)):
         r.near(n, x, y, on='.t', r=2)
-    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pine2'), n_trees=W * H // 300, copses=4, scatter=10)
+    r.dress(trees=('tr_oak', 'tr_oak2', 'tr_pine', 'tr_pine2'), n_trees=W * H // 150, copses=8, scatter=16)
     r.paint(glint=0.0)
     for y in range(0, 22):                                                           # the first hoar on the summit grass
         for x in range(W):
@@ -1079,7 +1090,7 @@ def build_577():
         if m.free(x, 58, 1, 1, on='.'): m.stamp('fw_pal_h', x, 58, mark='B')
     r.dress(trees=('pine2', 'kf_tree', 'pine2'), n_trees=W * H // 260, copses=3, scatter=10)
     r.paint(glint=0.0)
-    RW.drifts(m, 0.14, seed=577); RW.road_tracks(m, 0.08, seed=577)
+    RW.drifts(m, 0.3, seed=577); RW.road_tracks(m, 0.12, seed=577); RW.dress_ice(m, 0.5, seed=577); RW.reed_beds(m, 60, seed=577)
     h = head(577, 'Frostwick Pass', field='SNOWY_MOUNTAIN', bgm='Route 2', weather=['Snow', 20],
              connections=[{'dir': 'S', 'offset': 30, 'to': 566, 'to_offset': 42}, {'dir': 'W', 'offset': 37, 'to': 570, 'to_offset': 23}],
              tone=[-6, -2, 10, 10])
@@ -1096,7 +1107,7 @@ def build_578():
     r = Route(578, W, H, 'snow', base='T', kit='shs')
     m = r.m
     road = [(42, 87), (44, 76), (36, 64), (40, 52), (50, 42), (44, 30), (38, 18), (38, 8), (38, 0)]
-    r.road(road, w=3.0, open_=(2, 6))
+    r.road(road, w=3.0, open_=(3, 8))
     r.exit('S', 40, 4); r.exit('N', 36, 4)
     for x in range(W):                                                                 # the frozen brook, west to east
         c = 58 + 2 * (RK.vnoise(x, 0, 578, 12.0) - 0.5) * 2
@@ -1131,7 +1142,7 @@ def build_578():
     r.dress(trees=('pine2', 'kf_tree'), n_trees=W * H // 300, copses=0, scatter=10)
     r.paint(glint=0.0)
     RW.rime_silk(m, ((30, 12), (48, 22), (34, 40), (52, 50), (26, 78))) if hasattr(RW, 'rime_silk') else None
-    RW.drifts(m, 0.12, seed=578)
+    RW.drifts(m, 0.3, seed=578); RW.road_tracks(m, 0.12, seed=578); RW.dress_ice(m, 0.5, seed=578); RW.reed_beds(m, 50, seed=578)
     h = head(578, 'Rimewood Path', field='SILKWOOD', bgm='Natural Park', weather=['Snow', 10], biome='forest',
              connections=[{'dir': 'S', 'offset': 40, 'to': 570, 'to_offset': 27}, {'dir': 'N', 'offset': 36, 'to': 562, 'to_offset': 26}],
              tone=[-12, -8, 8, 16])

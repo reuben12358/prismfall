@@ -6,7 +6,8 @@
 # The challenger is a REALISTIC player, not an ideal-counter team: a starter plus what design/POKEMON_AVAILABILITY.md
 # and design/EVENT_POKEMON.md make available before that fight (POOLS below), caught and grinded a little (starter at
 # the cap, the rest 1-2 under), evolved by level where the level allows, the moves the game teaches by level-up (no
-# TMs, no Move Relearner), random natures and IVs 5-25, one Oran Berry. The challenger is piloted by the v21 AI at
+# TMs but the story's, no Move Relearner; when a new move is learned the weakest attack goes), random natures and IVs
+# 5-25, one Oran Berry. The challenger is piloted by the v21 AI at
 # PRISM_PLAYER_SKILL (default 100: the AI's best play, i.e. sensible moves and switches) and, on Casual and Standard,
 # uses the few healing items a player carries (BAG below; Hard forbids the Bag in trainer battles).
 #
@@ -93,6 +94,9 @@ module WR
   # TMs the story has handed over by then (TM42 Facade from Dorian, TM98 Rock Smash at Brinecut, TM89 U-turn from Tamsin):
   # each goes to the first party member that can learn it, replacing its weakest move.
   TMS = { :none => [], :g2 => [:FACADE, :ROCKSMASH], :g3 => [:FACADE, :ROCKSMASH, :UTURN] }
+  # The team is built over the whole journey: later pools include the earlier ones (a species keeps its best weight).
+  POOLS[:ch3] = POOLS[:ch1_2].merge(POOLS[:ch3]) { |_k, a, b| [a, b].max }
+  POOLS[:ch4] = POOLS[:ch3].merge(POOLS[:ch4]) { |_k, a, b| [a, b].max }
   # A PREPARED player (PRISM_PREPARED=1): grinds every catch to the cap, keeps its strongest moves and hunts the best
   # type answers the availability doc allows by then (rare finds included), first listed first.
   PREPARED = {
@@ -164,8 +168,8 @@ module WR
     GameData::Stat.each_main { |s| p.iv[s.id] = 5 + rng.rand(21) }
     p.nature = GameData::Nature.keys.sample(random: rng)
     learned = p.species_data.moves.select { |lv, _m| lv <= level }.map { |_lv, m| m }.uniq.reverse
-    if PREP
-      # A thoughtful player declines the weak moves: the three strongest attacks (power x STAB x accuracy), then the
+    if true
+      # A player declines the weak moves when a new one is learned: the three strongest attacks (power x STAB x accuracy), then the
       # best of what is left (a fourth attack, or the newest non-filler status move).
       score = lambda do |m|
         mv = GameData::Move.get(m)

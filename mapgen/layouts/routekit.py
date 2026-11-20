@@ -260,7 +260,7 @@ class Route:
         connections = head.pop('connections', [])
         head['connections'] = connections
         head['_file'] = fname
-        self.sealed = m.seal_against(connections, keep=getattr(self, '_keep', []))
+        self.sealed = m.seal_against(connections, keep=getattr(self, '_keep', []), spans=self.exits)
         seeds = []
         for side, off, w in self.exits:                                # reachability seeds at every exit (the first warp may sit apart)
             i = off + w // 2

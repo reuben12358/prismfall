@@ -1105,11 +1105,15 @@ events:
   pages:
   - graphic: {sprite: Followers/CARBINK, dir: left}
     commands:
-    - It is licking a glass tree. It seems very happy about the whole situation.
-    - {script: 'setBattleRule("field", :BLEED)
+    - It licks a glass tree, sees you, and phases into the glass.
+    - {comment: 'map builder 9 (REQUESTS, distribution pass item 2): a glimpse only before Tamsin''s badge'}
+    - if: pfm_gym_won?(:LEADER_TAMSIN)
+      then:
+      - It is licking a glass tree. It seems very happy about the whole situation.
+      - {script: 'setBattleRule("field", :BLEED)
 
-        WildBattle.start(:CARBINK, 8)'}
-    - selfswitch: [A, true]
+          WildBattle.start(:CARBINK, 20)'}
+      - selfswitch: [A, true]
   - cond: {self: A}
 - type: event
   name: Lost Skwovet

@@ -12,6 +12,7 @@
 #   bash run_puzzles.sh lofts      # optional Upper Lofts (Tamsin's badge): spools + brass wire, Granny's Knot
 #   bash run_puzzles.sh backstage  # optional Playhouse Backstage (D9): the old revolving stage + Fly Loft
 #   bash run_puzzles.sh d1         # the Glassed Orchard chime rows (one wrong note first, then the phrase)
+#   bash run_puzzles.sh house0|house7|house21   # Gym 1 (Rev 19): the auditorium with 0 / 7 / 21 Saltmere townsfolk met (empty, good, full house)
 #   python3 -I make_puzzle_media.py gym1|gym2   # shots + slow GIF -> docs/playtest/puzzles/
 #   bash run_puzzles.sh stop       # stops only this copy's engine
 #===============================================================================
@@ -73,6 +74,6 @@ stop() {
 case "${1:-}" in
   assemble) assemble ;;
   stop) stop ;;
-  install|gym1|gym2|lofts|backstage|d1) session "$1" ;;
+  install|gym1|gym2|lofts|backstage|d1|house0|house7|house21) session "$1" ;;
   *) echo "usage: $0 assemble | install | gym1 | gym2 | lofts | backstage | d1 | stop"; exit 1 ;;
 esac

@@ -54,7 +54,7 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         o = dict(m)
         if diff == 1:
             o.update(m["hard"])
-            if m["lv"] < cap and m.get("only") != "hard":
+            if m["lv"] < cap and m.get("only") != "hard" and not __import__("os").environ.get("EXP_NOLV"):
                 o["lv"] = min(cap, m["lv"] + 1)
         elif diff == 2:
             o.update(m["casual"])
@@ -94,8 +94,8 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         elif diff == 0:
             out.append("    IV = %d" % std_iv(top))
         elif diff == 1:
-            out.append("    IV = " + (TR_IV if o.get("tr") else "31"))
-            out.append("    EV = " + hard_ev(EV[o["ev"]], o["lv"]))
+            out.append("    IV = " + (str(std_iv(top)) if __import__("os").environ.get("EXP_IV") else (TR_IV if o.get("tr") else "31")))
+            if not __import__("os").environ.get("EXP_NOEV"): out.append("    EV = " + hard_ev(EV[o["ev"]], o["lv"]))
         else:
             out.append("    IV = %d" % casual_iv(top))
             out.append("    EV = 0")
@@ -180,7 +180,7 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     P("JOLTIK", 14, "COMPOUNDEYES", "ORANBERRY", "HARDY", "ELECTROWEB,ABSORB,STRINGSHOT,FURYCUTTER", "S",
       casual={"moves": "ELECTROWEB,FURYCUTTER,ABSORB,PROTECT"},
       hard={"item": "FOCUSSASH", "nat": "MODEST", "moves": "ELECTROWEB,STRUGGLEBUG,THUNDERWAVE,PROTECT"}),
-    P("SURSKIT", 14, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
+    P("SURSKIT", 15, "SWIFTSWIM", "ORANBERRY", "HARDY", "RAINDANCE,WATERGUN,STRUGGLEBUG,QUICKATTACK", "S",
       hard={"item": "DAMPROCK", "nat": "TIMID", "moves": "RAINDANCE,BUBBLEBEAM,STRUGGLEBUG,QUICKATTACK"},
       casual={"moves": "WATERGUN,STRUGGLEBUG,QUICKATTACK,SWEETSCENT"}),
     # Hard: Rage Powder (powders x1.2 accurate here) pulls single-target hits off Bobbin.
@@ -191,12 +191,12 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     # grounds them for the partner's Struggle Bug and String Shot; Rock Tomb slows both foes' Speed race. Bug/Rock also
     # RESISTS Fire and stands in front of the rare Fire answer; Sturdy survives one big hit. Counterplay: Water, Grass,
     # Fighting and Steel (Crabrawler's Rock Smash, Timburr's Low Kick: 4x... 2x on Bug/Rock).
-    P("DWEBBLE", 15, "STURDY", "ORANBERRY", "IMPISH", "SMACKDOWN,ROCKTOMB,BUGBITE,FURYCUTTER", "BA",
+    P("DWEBBLE", 16, "STURDY", "ORANBERRY", "IMPISH", "SMACKDOWN,ROCKTOMB,BUGBITE,FURYCUTTER", "BA",
       only="nocasual", hard={"ab": "SHELLARMOR", "item": "SITRUSBERRY", "moves": "SMACKDOWN,ROCKTOMB,BUGBITE,STEALTHROCK"}),
     # The trap spider (Hard only on the Standard roster since the bird answer took its slot; the harness saw it hold
     # 51 of 52 realistic losses behind Silk Trap): Silk Trap guards it while its partner attacks, and binds tighter here.
-    P("SPIDOPS", 15, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,BUGBITE,FEINT,STRINGSHOT", "BA",
-      only="nocasual", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,LUNGE,STRUGGLEBUG,ASSURANCE"}),
+    P("SPIDOPS", 16, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,STRUGGLEBUG,FEINT,STRINGSHOT", "BA",
+      only="hard", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,LUNGE,STRUGGLEBUG,ASSURANCE"}),
     # Telluric Seed: +1 Def, +1 Sp. Def, -1 Speed - a silk cocoon. Razor Leaf hits both foes (Grass x1.2, Overgrow on).
     P("SWADLOON", 19, "OVERCOAT", "TELLURICSEED", "HARDY", "RAZORLEAF,BUGBITE,STRUGGLEBUG,PROTECT", "BA",
       nick="Bobbin", casual={"ab": "LEAFGUARD", "item": "ORANBERRY", "moves": "RAZORLEAF,BUGBITE,STRINGSHOT,PROTECT"},
@@ -207,25 +207,31 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     # of the field made Water Pulse a one-hit KO at Gym 3). Hard keeps Drizzle + Damp Rock: rain lasts 8+3 turns here.
     # Standard is tuned down for an approachable Gym 3 (harness: realistic teams lost 29/30): neutral natures, the
     # openers two levels under the cap, Water Gun on Pelipper. Water x1.5 on the field still makes every hit count.
-    P("PELIPPER", 20, "KEENEYE", "ORANBERRY", "HARDY", "WATERGUN,WINGATTACK,SUPERSONIC,PROTECT", "BS",
+    P("PELIPPER", 19, "KEENEYE", "ORANBERRY", "HARDY", "WATERGUN,WINGATTACK,SUPERSONIC,PROTECT", "BS",
       hard={"ab": "DRIZZLE", "item": "DAMPROCK", "nat": "MODEST", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
     # Volt Absorb punishes the Electric answer; its own Spark is x1.5 against grounded targets. Elemental Seed: +1 Speed, Aqua Ring.
     # Standard: the lantern-fish is still a Chinchou (Lanturn walled realistic teams: 64 knockouts in 30 runs).
     # Volt Absorb still punishes the Electric answer, and its Spark is x1.5 against grounded targets. Hard: Lanturn
     # with the Elemental Seed (+1 Speed, Aqua Ring).
-    P("CHINCHOU", 21, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
+    P("CHINCHOU", 20, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
       only="nocasual", hard={"sp": "LANTURN", "item": "ELEMENTALSEED", "nat": "MODEST",
                              "moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),
     P("ARAQUANID", 22, "WATERBUBBLE", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
       only="hard", hard={"moves": "LIQUIDATION,LEECHLIFE,CRUNCH,AQUARING"}),
-    P("FLOATZEL", 21, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
-      hard={"moves": "AQUAJET,WATERPULSE,CRUNCH,ICEFANG", "nat": "NAIVE"}),
-    # Transition play: Dive drags the fight Underwater (x1.3 strike), "a current that changes direction mid-fight".
-    # Standard Lucky (harness: the ace swept 25 of 30 realistic teams after they beat the other three): Hardy, Brine
-    # (special, Gyarados's weak side) instead of Waterfall, and the Dive play kept. Hard: Adamant Waterfall + Dragon Dance.
-    P("GYARADOS", 23, "INTIMIDATE", "SITRUSBERRY", "HARDY", "BRINE,BITE,ICEFANG,DIVE", "A",
+    # The swimmer: Swift Swim is on without rain here (x2 Speed). Standard brings the Buizel (a Lv 20 Floatzel took
+    # 63 knockouts in 60 realistic fights with Water Pulse alone); Hard brings the Floatzel.
+    P("BUIZEL", 20, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
+      hard={"sp": "FLOATZEL", "moves": "AQUAJET,WATERPULSE,CRUNCH,ICEFANG", "nat": "NAIVE"}),
+    # Transition play (Hard): Dive drags the fight Underwater (x1.3 strike), "a current that changes direction mid-fight".
+    # On Standard the Dive is gone: each Dive surfaces again with a second transform strike, so the AI looped it
+    # (Water x1.5, Dive x1.5 / x1.3, strike x1.3, STAB) and it OHKO'd full-HP neutral targets every other turn - 103
+    # knockouts in 60 realistic fights. Standard Lucky keeps the current instead: Whirlpool is x2 on Water Surface and
+    # binds, Brine doubles on a wounded foe; Modest, special, so Lucky is a bulky trapper rather than the physical
+    # sweeper (Ice Fang alone took 85 knockouts in 60 fights after the Dive went). Pelipper's Flying moves stay the
+    # answer to Grass (R3). Hard keeps Adamant, Dive, Ice Fang and Dragon Dance.
+    P("GYARADOS", 23, "INTIMIDATE", "ORANBERRY", "MODEST", "WHIRLPOOL,BRINE,TWISTER,BITE", "BS",
       nick="Lucky", casual={"moves": "BITE,TWISTER,BRINE,LEER"},
-      hard={"nat": "ADAMANT", "moves": "WATERFALL,DIVE,ICEFANG,DRAGONDANCE"}),
+      hard={"nat": "ADAMANT", "item": "SITRUSBERRY", "moves": "WATERFALL,DIVE,ICEFANG,DRAGONDANCE"}),
 ])
 warden(4, "LEADER_ROOK", "Rook", 27, "NEON_GRID", "Cut! ...Okay, okay, that's going in the highlight reel. You earned it.", [
     # Charge reboots a blacked-out grid (2 charging moves); Bite is his hedge for the Blackout (Dark x1.3).
@@ -585,15 +591,15 @@ rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way,
     # Staravia's Telluric Seed gives +1 Speed and a Tailwind (6 turns here) for his side; Sandile's Rock Tomb is x1.5
     # on the cliffs and slows; Moxie snowballs. Counterplay: Protect / switch out the Tailwind turns, Water and Grass for
     # Sandile, Ghost and Dark for Morwen.
-    P("STARAVIA", 20, "INTIMIDATE", "TELLURICSEED", "JOLLY", "WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR", "A",
+    P("STARAVIA", 21, "INTIMIDATE", "TELLURICSEED", "JOLLY", "WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR", "A",
       only="nocasual", hard={"moves": "WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN", "ab": "RECKLESS"}),
-    P("SANDILE", 20, "MOXIE", "ORANBERRY", "JOLLY", "BITE,ROCKTOMB,SANDTOMB,HONECLAWS", "A", only="nocasual",
+    P("SANDILE", 21, "MOXIE", "ORANBERRY", "JOLLY", "BITE,ROCKTOMB,SANDTOMB,HONECLAWS", "A", only="nocasual",
       hard={"moves": "BITE,ROCKTOMB,DIG,HONECLAWS"}),
     # Hard only: the Deino that becomes Hydreigon (K5+), already mean.
     P("DEINO", 21, "HUSTLE", "ORANBERRY", "ADAMANT", "DRAGONBREATH,BITE,HEADBUTT,ROAR", "A", only="hard"),
-    P("HONEDGE", 20, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
+    P("HONEDGE", 21, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
       nick="Morwen", hard={"moves": "SHADOWSNEAK,IRONHEAD,AERIALACE,SWORDSDANCE", "item": "EVIOLITE"}),
-    starter_mon("RIVAL_KESTREL", s, 1, 22),
+    starter_mon("RIVAL_KESTREL", s, 1, 23),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don't get it. Nobody does.", lambda s: [
     P("STARAVIA", 31, "INTIMIDATE", "SHARPBEAK", "JOLLY", "AERIALACE,QUICKATTACK,TAKEDOWN,DOUBLETEAM", "A",
@@ -697,7 +703,7 @@ rival("RIVAL_JUNO", "Juno", 1, 15, "Aww, you're so good at this! Okay, again soo
     # the Meadow into a Flower Garden, the field she will defend at Gym 9 (Grass x1.5 from stage 2).
     # Reference: Reborn's Fern 0 (three at 13-14, Oran Berry, Potion) and Rejuvenation's Ren (four at 13-16): Std 4 here.
     # Counterplay: two Fire attacks burn the Meadow away (one in sun); Flying and Poison for the Grass types.
-    P("COTTONEE", 12, "PRANKSTER", "ORANBERRY", "BOLD", "FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE", "SD",
+    P("COTTONEE", 13, "PRANKSTER", "ORANBERRY", "BOLD", "FAIRYWIND,MEGADRAIN,GRASSYTERRAIN,STUNSPORE", "SD",
       only="nocasual"),
     P("PETILIL", 13, "OWNTEMPO", "ORANBERRY", "MODEST", "MEGADRAIN,GROWTH,AROMATHERAPY,STUNSPORE", "S", only="nocasual"),
     P("BOUNSWEET", 13, "LEAFGUARD", "ORANBERRY", "ADAMANT", "RAZORLEAF,RAPIDSPIN,PLAYNICE,SPLASH", "BA",
@@ -705,7 +711,7 @@ rival("RIVAL_JUNO", "Juno", 1, 15, "Aww, you're so good at this! Okay, again soo
       casual={"moves": "RAPIDSPIN,PLAYNICE,SPLASH"}),
     # Hard only: the farm's Fidough (Fairy; Own Tempo), Covet and Bite.
     P("FIDOUGH", 13, "OWNTEMPO", "ORANBERRY", "IMPISH", "COVET,BITE,LICK,TAILWHIP", "BA", only="hard"),
-    starter_mon("RIVAL_JUNO", s, 0, 14, moves={"GRASS": "VINEWHIP,RAZORLEAF,LEECHSEED,TACKLE",
+    starter_mon("RIVAL_JUNO", s, 0, 15, moves={"GRASS": "VINEWHIP,RAZORLEAF,LEECHSEED,TACKLE",
                                               "FIRE": "EMBER,DRAGONBREATH,SCRATCH,SMOKESCREEN",
                                               "WATER": "WATERGUN,RAPIDSPIN,TACKLE,WITHDRAW"},
                 item={"GRASS": "ORANBERRY", "FIRE": "ORANBERRY", "WATER": "ORANBERRY"}),

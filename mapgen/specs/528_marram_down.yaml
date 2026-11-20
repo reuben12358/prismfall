@@ -150,7 +150,7 @@ events:
     commands: ['Sand-sculptor: It''s the Sovereign''s Crown! In sand!', 'Sand-sculptor: ...Don''t look at the stone. I ran out of the good sand.']
 - type: event
   name: Birdwatcher
-  at: [97, 21]
+  at: [97, 20]
   pages:
   - graphic: {sprite: NPC 09, dir: down}
     trigger: action

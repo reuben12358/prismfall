@@ -371,7 +371,7 @@ moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_S
 | 630 | Charwell | Charwell | kept | Borderland (Ossaria/Elowen) | 19, 6 | Char-well: the well that bone-char keeps clean. |
 | 631 | Charwell Pokémon Center | Charwell Pokémon Center | kept | Borderland (Ossaria/Elowen) | 19, 6 |  |
 | 632 | - | The Kneeling Stones | new | Ossaria | 18, 4 | Wind-cut pillars that look like bowed pilgrims. The crossroads of Ossaria. |
-| 633 | - | The Gutterfall | new | Nadir | 20, 12 | Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it. |
+| 633 | - | The Gutterfall | new | Borderland (Nadir/Elowen) | 20, 12 | Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it. |
 | 634 | - | Wormwood Lea | new | Elowen | 20, 8 | Bitter meadows along the Leach east of the Crown. The river is still clean here, and the wormwood keeps the leeches off. |
 | 640 | Route 13 | Leechman's Walk | renamed | Nadir | 21, 13 | The plank causeway the leech-gatherers keep up. You pay them or you swim. |
 | 641 | Route 14 - Sulfur Reach (Lake Sallow) | Lake Sallow | renamed | Borderland (Elowen/Ashkaar) | 22, 10 | Named for its colour. The whole lake is one hot spring. |
@@ -392,7 +392,7 @@ moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_S
 | 668 | Emberfall | Emberfall | kept | Ashkaar | 25, 7 |  |
 | 670 | Glasswake | Glasswake | kept | Borderland (Ashkaar/Ossaria) | 23, 4 | The glass-wake: the black glass a lava flow leaves behind it, and the furnace town that sells it. |
 | 671 | Glasswake Pokémon Center | Glasswake Pokémon Center | kept | Borderland (Ashkaar/Ossaria) | 23, 4 |  |
-| 672 | - | The Long Drop | new | Nadir | 16, 12 | Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. |
+| 672 | - | The Long Drop | new | Borderland (Nadir/Elowen) | 16, 12 | Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. |
 | 673 | - | The Wyrmtongue | new | Ashkaar | 24, 3 | The spit of black lava that runs out to the Cape, forked at the end like a tongue. |
 | 680 | Route 17 - The Rootdeep | The Rootdeep | renamed | Borderland (Nadir/Elowen) | 14, 13 | Kept name: where Elowen's roots come through the roof of Nadir's mines. |
 | 681 | Route 18 - Prism Falls | Prism Falls | renamed | Elowen | 11, 11 | Kept name: the falls throw a rainbow all day, every day. It is the Imprint. |

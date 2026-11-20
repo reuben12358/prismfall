@@ -1,5 +1,5 @@
 #===============================================================================
-# GRAND_STAGE - Gym 2 (Normal), Saltmere's Pell Playhouse. The show must go on.
+# GRAND_STAGE - Gym 1 (Normal), Saltmere's Pell Playhouse. The show must go on.
 # An applause ladder (Rejuvenation's Concert / Reborn's Big Top logic):
 #   1 Opening Night -> 2 Encore -> 3 Standing Ovation
 # Showpieces (dances, songs, flourishes, critical hits) win the crowd over;
@@ -44,6 +44,12 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
                 :message => "A standing ovation for {1}!" }
   charm = { :moves => [:CHARM, :CAPTIVATE, :TEARFULLOOK, :BABYDOLLEYES], :target_stats => { :SPECIAL_ATTACK => -1 },
             :message => "{1} won the crowd over!" }
+  # Saltmere's audience (SPINE Rev 19; Prismfall Puzzles 007_Puzzles_SaltmereCrowd.rb): in Dorian's show, the townsfolk
+  # you met are YOUR fans.  From Encore up, they cheer your side the way the house cheers Normal types at Standing Ovation.
+  # Inactive in every other battle (FieldEffects.home_crowd? is false unless pf_house_rules set it up).
+  fans = { :battlers => { :condition => proc { |battle, b| FieldEffects.respond_to?(:home_crowd?) && FieldEffects.home_crowd?(battle, b) } },
+           :heal => 1/16r, :message => "Your friends in the stalls cheer {1} on!" }
+  fans3 = { :battlers => fans[:battlers].merge(:not_types => [:NORMAL]), :heal => 1/16r, :message => fans[:message] }   # Normal types already bask
   stage_mods = lambda do |normal, show|
     {
       :type_mods   => { :NORMAL => normal },
@@ -70,7 +76,8 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
                        "Status dances also give +1 Speed; Celebrate raises every stat; Charm-style moves also lower Sp. Atk. Encore lasts 2 turns longer.",
                        "Standing Ovation: every attack +1 critical-hit stage, Sing never misses, Normal types and Dancers bask in applause (1/16 HP).",
                        "Dancer +1 Speed, Punk Rock / Liquid Voice +1 Sp. Atk on entry. Indoors: no weather.",
-                       "Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder."],
+                       "Synthetic Seed: +1 Speed and Laser Focus, but the spotlight Taunts the holder.",
+                       "Saltmere's house: the more townsfolk you've met, the higher Dorian's show starts, and your fans cheer your side from Encore up."],
     :nature_power  => :HYPERVOICE,
     :camouflage    => :NORMAL,
     :secret_power  => 0,
@@ -104,6 +111,7 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
       2 => {
         :backdrop      => "field_grand_stage_2",
         :intro_message => "The audience calls for an encore!",
+        :end_of_round  => [fans],
         :type_mods     => stage_mods.call(1.5, 1.4)[:type_mods],
         :damage_mods   => stage_mods.call(1.5, 1.4)[:damage_mods],
         :transitions   => applause.call("Standing ovation! The whole house is on its feet!")
@@ -120,7 +128,8 @@ FieldEffects.register(:GRAND_STAGE, (lambda do
         :end_of_round  => [
           { :battlers => { :types => [:NORMAL] }, :heal => 1/16r, :message => "{1} basked in the applause." },
           { :battlers => { :abilities => [:DANCER], :not_types => [:NORMAL] }, :heal => 1/16r,
-            :message => "{1} basked in the applause." }
+            :message => "{1} basked in the applause." },
+          fans3
         ],
         :transitions   => applause.call(nil)
       }

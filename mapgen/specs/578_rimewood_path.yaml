@@ -29,7 +29,7 @@ events:
   post: false
 - type: event
   name: The Lantern Birch
-  at: [42, 33]
+  at: [42, 34]
   pages:
   - trigger: action
     commands:
@@ -76,7 +76,7 @@ events:
       - {script: 'pfm_set(:teddiursa_freed)'}
 - type: event
   name: Honey-stump hives
-  at: [33, 67]
+  at: [31, 67]
   pages:
   - trigger: action
     commands: ['Hives in old stumps, glazed with frost. The Combee inside are slow and very, very offended.']

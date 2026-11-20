@@ -195,8 +195,10 @@ def build():
          'commands': ["It's asleep. Its crystal hums, very quietly, in time with your breathing."]}]})
     E.append({'type': 'event', 'name': 'Wild Carbink', 'at': P['carbink'], 'pages': [
         {'graphic': {'sprite': 'Followers/CARBINK', 'dir': 'left'}, 'commands': [
-            "It is licking a glass tree. It seems very happy about the whole situation.",
-            {'script': 'setBattleRule("field", :BLEED)\nWildBattle.start(:CARBINK, 8)'}, {'selfswitch': ['A', True]}]},
+            {'if': 'pfm_gym_won?(:LEADER_TAMSIN)', 'then': [
+                "It is licking a glass tree. It seems very happy about the whole situation.",
+                {'script': 'setBattleRule("field", :BLEED)\nWildBattle.start(:CARBINK, 20)'}, {'selfswitch': ['A', True]}],
+             'else': ['It licks a glass tree, sees you, and phases into the glass.']}]},
         {'cond': {'self': 'A'}}]})
     E.append({'type': 'event', 'name': 'Lost Skwovet', 'at': P['biscuit'], 'pages': [
         {'cond': {'switch': 'CH1_K1_DONE'}, 'graphic': {'sprite': 'Followers/SKWOVET', 'dir': 'down'}, 'move': 'random', 'commands': [

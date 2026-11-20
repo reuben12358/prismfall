@@ -379,6 +379,141 @@ def gate_warden(x):
             'Gate Warden: The gate\'s open. After last night... mind the Grey Saltings. And mind who you talk to.']}]}
 
 
+# ------------------------------------------------------------------ Chapter 2 script events (story/20_SCRIPT_CH0-2.md, map builder 9 re-pour)
+def _P(who, e, t, emote=''):
+    return SE.P(who, e, t, emote)
+
+
+def juno_j1():
+    """J1 on the promenade green, before Gym 1 (S109 CH3_J1_DONE); field :MEADOW comes from FIELD_DEFAULTS exceptions"""
+    J = lambda e, t, em='': _P('JUNO', e, t, em)
+    fight = [{'if': 'Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)',
+              'then': [J('happy', "You're good. You're REALLY good. That's so annoying. I'm so happy.")],
+              'else': [J('surprised', "I WON? ...Did you let me win? Don't tell me. I'm keeping it.", 'shock')]},
+             J('happy', "Here, for your partner. They're from the farm."), {'script': 'pbReceiveItem(:ORANBERRY, 2)'},
+             J('happy', "Go on, then. The Playhouse is in the Old Town. I'll be in the cheap seats. I'll be LOUD."),
+             {'switch': ['CH3_J1_DONE', True]}]
+    first = ['(Juno is on the promenade green beside the planters, practising a victory pose with an empty tart basket.)',
+             J('happy', 'There you are! Tarts delivered! Forty! I ate one. Thirty-nine!'), J('neutral', 'Before you go in there... fight me?'),
+             J('happy', "Not a FIGHT fight. A spar. I want to know if I'm any good before you go off and get good without me."),
+             J('neutral', "And I want to know if YOU are. I'm going to be in the audience. I'd like to know what I'm cheering for."),
+             {'choices': ["Let's go.", 'Are you sure?'], 'cancel': 0, 'branches': [
+                 fight, [J('deadpan', "My partner's weak to yours and I chose it on purpose. I've never been less sure of anything. Let's go!")] + fight]}]
+    return {'type': 'event', 'name': 'Juno J1', 'pages': [
+        {'commands': []},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'down'}, 'trigger': 'action',
+         'commands': [{'if': 'pfm?(:sm_arrived)', 'then': first, 'else': [J('happy', 'Tarts first! Then the green! Then the GYM!')]}]},
+        {'cond': {'switch': 'CH3_J1_DONE'}, 'commands': []}]}
+
+
+def dorian_breakwater():
+    D = lambda e, t, em='': _P('DORIAN', e, t, em)
+    meet = ['(At the end of the breakwater, a man in a velvet coat lowers a silver-topped cane he very clearly does not need. He was conducting the booing.)',
+            D('happy', "*Enter, stage left, a stranger!* No -- a challenger. That's a Badge Case. On booing day! The gods of theater are kind."),
+            D('smug', "Dorian Pell. Warden of Saltmere, Pageant-Master to the Accord, and for thirty-one consecutive years, Saltmere's Most Eligible Something."),
+            D('neutral', 'You saw the barge? The Queen sends it every week. Our charter says we answer to no crown. Every week we remind her, in the only language a crown understands.'),
+            {'choices': ['Booing?', "Isn't that rude?", '...'], 'cancel': 2, 'branches': [
+                [D('happy', 'Volume, darling. Volume.')], [D('smug', "Profoundly. That's what makes it diplomacy.")],
+                [D('neutral', 'Ah. A critic. We get a few. We feed them to the Ogre.')]]},
+            D('neutral', 'Saltmere is the only city in Velmora where nothing is a miracle, darling. So we built our own. Every night, at eight.'),
+            D('neutral', 'The Playhouse is in the Old Town. Come when you\'re ready, not before. A first gym should be an occasion.'),
+            D('happy', "And the Pageant opens tonight at the Lantern Theatre. I wrote none of it and I'm in all of it."), {'script': 'pfm_set(:met_dorian)'}]
+    return {'type': 'event', 'name': 'Dorian at the breakwater', 'pages': [
+        {'graphic': {'sprite': 'trainer_GENTLEMAN', 'dir': 'down'}, 'trigger': 'action',
+         'commands': [{'if': 'pfm?(:met_dorian)', 'then': [D('happy', 'The Playhouse, darling. The Old Town. The curtain waits for no one, except me.')], 'else': meet}]},
+        {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'graphic': {'sprite': 'trainer_GENTLEMAN', 'dir': 'down'}, 'trigger': 'action',
+         'commands': [D('sad', "I've stood on this breakwater for thirty years telling a queen she can't have us. Last night someone walked onto my stage and took us anyway.")]}]}
+
+
+def salt_caramel():
+    """sunset on the breakwater after Gym 1, before the Pageant: the :ch3_juno_talk choice"""
+    J = lambda e, t, em='': _P('JUNO', e, t, em)
+    cmds = ['(Sunset. You and Juno sit on the end of the breakwater with your feet over the lagoon, sharing a paper cone of salt-caramel.)',
+            J('happy', "It's mostly salt. Is that the point? I think that's the point."),
+            J('neutral', "Your first badge. And it HUMMED. I'm writing that down. I'm writing everything down."), J('neutral', '...Can I tell you something boring?'),
+            {'choices': ['Go on.', 'Is it about larches?', '...'], 'cancel': 2, 'branches': [[], [J('deadpan', "It's not about larches. ...It's a bit about larches.")], []]},
+            J('neutral', 'Everyone asks about the flowers. "Which play, dear?" "Are you a bride, dear?" I\'m fifteen.'),
+            J('neutral', "They're from Aunt Elin. She's the Bride Tree, in Uncle Rowan's garden. When I was three she went to glass, except she didn't, she went to blossom, and she never stopped."),
+            J('happy', "I'd worn some to her wedding party. She'd only been married a year. So I just... kept wearing them. They don't wilt."),
+            J('neutral', "Uncle Rowan says that's the problem. I don't know what he means. I think it's the best thing in the world."),
+            J('sad', '...Mostly I think that.'),
+            J('neutral', "Your turn. That gate at the dock. It didn't give you a color. Mum heard from the fishwife. Everyone's heard."),
+            {'choices': ['Tell her what it said: NULL.', "It's nothing. A broken gate.", '...'], 'cancel': 2, 'branches': [
+                [{'script': 'pf_choose(:ch3_juno_talk, :told)'}, J('surprised', 'Null. Like... nothing?', 'shock'),
+                 J('happy', "Well. I'm a walking bouquet and you're a blank page. We should start a club."),
+                 J('neutral', "I won't tell anyone. Not Mum. Not Kestrel. Not even Uncle Rowan. I'm good at secrets. I just don't look it.")],
+                [{'script': 'pf_choose(:ch3_juno_talk, :deflect)'}, J('sad', '...Okay.'),
+                 J('neutral', "If it's ever not nothing, I'm here. I'm very easy to find. I'm the one wearing a tree.")],
+                [{'script': 'pf_choose(:ch3_juno_talk, :silent)'}, J('neutral', "That's fine. Sitting's fine. Sitting is underrated."), '(She hands you the last caramel.)']]},
+            {'se': 'Bell1'}, J('happy', "Opening night! Come ON! If we're late Dorian will make us sit in the Ogre's row!"), {'script': 'pfm_set(:sm_caramel)'}]
+    return {'type': 'event', 'name': 'Salt-caramel (Juno)', 'pages': [
+        {'commands': []},
+        {'cond': {'switch': 'CH3_UNDERSTUDY_GOT'}, 'graphic': {'sprite': 'trainer_RIVAL2', 'dir': 'down'}, 'trigger': 'action',
+         'commands': [{'if': 'pf_choice(:ch3_juno_talk).nil?', 'then': cmds, 'else': [J('happy', 'The Lantern Theatre! Eight o\'clock! Go go go!')]}]},
+        {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'commands': []}]}
+
+
+def kestrel_after():
+    K_ = lambda e, t, em='': _P('KESTREL', e, t, em)
+    cmds = ['(The crowd is thinning. Against the wall by the stage door, a boy in a too-big black coat is breathing very fast.)',
+            K_('surprised', 'You were in there. You heard him.'), K_('angry', 'Did you hear his VOICE?', 'anger'),
+            {'choices': ['I heard him.', 'Kestrel? What are you doing here?', '...'], 'cancel': 2, 'branches': [
+                [], [K_('angry', "Following a rumor. Shut up. That's not the point.")], []]},
+            K_('neutral', 'Under the doubling. Under the second voice. The way he said "grieve". Like it had two syllables.'),
+            K_('surprised', "That's -- the way she talks -- no."), K_('angry', 'No.'),
+            '(Kestrel runs, shoving through the crowd, north toward the North Gate.)', _P('JUNO', 'sad', '...Who talks like that?'),
+            {'var': ['KESTREL_STAGE', 1]}, {'selfswitch': ['A', True]}]
+    return {'type': 'event', 'name': 'Kestrel', 'pages': [
+        {'commands': []},
+        {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'graphic': {'sprite': 'trainer_RIVAL1', 'dir': 'left'}, 'trigger': 'action', 'commands': cmds},
+        {'cond': {'self': 'A'}, 'commands': []}]}
+
+
+def chapter2_close():
+    D = lambda e, t, em='': _P('DORIAN', e, t, em); J = lambda e, t, em='': _P('JUNO', e, t, em)
+    cmds = ['(Next morning. A herald in Elowen green is pasting a notice to the charter stone. A small crowd watches without booing, which in Saltmere is a kind of booing.)',
+            'NOTICE: "HER MAJESTY QUEEN MAELIS notes with grief the Hollow outrage in HER free port of Saltmere, where the Crown\'s protection was refused. The Crown\'s protection remains available. -- By Order, Briar Keep."',
+            '(Dorian walks up, reads it, and tears it down in one long rip.)',
+            D('angry', '"HER" free port.', 'anger'), D('neutral', "Somebody fetch the paste. We'll put the charter back up where it belongs."),
+            D('smug', "And tell the breakwater to warm up. It's booing day on a Thursday this week."),
+            J('neutral', 'Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.'),
+            J('neutral', "I'm not sending for them. I'm not letting you walk into the Gossamer by yourself after last night."),
+            J('happy', "Also I've never seen a gym puzzle from the INSIDE."),
+            {'script': 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the second badge in Briarwick, up the Weavers\' Road.")'},
+            {'var': ['STORY_CHAPTER', 3]}, {'script': 'pfm_set(:ch2_closed)'}, {'selfswitch': ['A', True]}]
+    return {'type': 'event', 'name': 'Royal notice', 'pages': [
+        {'commands': []},
+        {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'trigger': 'action', 'commands': [{'if': 'pfm?(:ch2_closed)', 'then': [], 'else': cmds}]},
+        {'cond': {'self': 'A'}, 'trigger': 'action', 'commands': ['The charter is back up on the stone. Someone has pasted it on twice, for emphasis.']}]}
+
+
+def eevee_breeder():
+    return {'type': 'npc', 'name': 'Eevee breeder', 'sprite': 'NPC 25', 'dir': 'down',
+            'text': "Breeder: Dorian's troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage."}
+
+
+AUDIENCE = {'Caramel Seller': 'caramel_seller', 'Busker': 'busker', 'Child with an Ogre puppet': 'ogre_child', 'Retired Actor on a bench': 'retired_actor',
+            'Hound Number Two': 'hound_two', 'Fishwife': 'fishwife', 'Woman from the ferry': 'ferry_woman', 'Eevee breeder': 'eevee_breeder',
+            'Salt raker': 'salt_raker', 'Stevedore': 'stevedore', 'Old angler': 'old_angler', 'Fisherman': 'fisherman', 'Old Sailor': 'old_sailor',
+            'Stagehand on a smoke break': 'smoke_stagehand', 'Costumier': 'costumier', 'Street player': 'street_player'}
+
+
+def audience(E):
+    """the puzzle engineer's Saltmere audience (REQUESTS item 14): people met in town fill Dorian's theatre (V313)"""
+    for e in E:
+        key = AUDIENCE.get(e.get('name'))
+        if not key: continue
+        cmd = {'script': 'pfm_audience(:%s)' % key}
+        if e.get('type') == 'npc':
+            own = list(e.get('commands') or ([e['text']] if e.get('text') else []))
+            e['commands'] = [cmd] + own; e.pop('text', None)
+        else:
+            for pg in e.get('pages') or []:
+                if pg.get('graphic') and pg.get('trigger', 'action') == 'action':
+                    pg['commands'] = [cmd] + list(pg.get('commands') or [])
+    return E
+
+
 # ====================================================================================================== 140
 def new_map(mid, kit):
     W, H = 88, 72
@@ -472,11 +607,16 @@ def build_140(prev=None):
     E.append(seat(m, {'type': 'sign', 'name': 'Festival poster', 'text': "The same poster as the Landing's. The painted Crown's stone has the same tiny dark fleck. Nobody here has bothered to circle it."}, 50, 26))
     E.append(seat(m, {'type': 'sign', 'name': 'Promenade lamps', 'text': 'Oil lamps on iron posts. Each has a number, and a playbill pasted to it.'}, 66, 52))
     E.append(seat(m, {'type': 'sign', 'name': 'Bell tower', 'text': 'THE SALT BELL. Rung for the tax-barge, for fire, and for curtain-up. Mostly for curtain-up.'}, 42, 25))
-    E.append(seat(m, ev['Juno J1'], 37, 53, '.f'))
-    E.append(seat(m, ev['Royal notice'], 47, 41, 'f'))
-    E.append(seat(m, ev['Kestrel'], 36, 27, 'f'))
-    E.append(seat(m, ev['Eevee breeder'], 58, 38, 'f'))
+    E.append(seat(m, juno_j1(), 37, 53, '.f'))
+    E.append(seat(m, chapter2_close(), 47, 41, 'f'))
+    E.append(seat(m, kestrel_after(), 36, 27, 'f'))
+    E.append(seat(m, eevee_breeder(), 58, 38, 'f'))
     E.append(seat(m, gate_warden(45), 46, 9, 'c'))
+    bar = int(np.array(STAMPS['pf_barricade']['layers']).max())              # the North Gate is shut until the Pageant is over (S108)
+    for x in range(43, 49):
+        E.append({'type': 'event', 'name': 'North Gate bar %d' % (x - 42), 'at': [x, 6], 'pages': [
+            {'graphic': {'tile': bar}, 'trigger': 'action', 'commands': ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']},
+            {'cond': {'switch': 'CH3_PAGEANT_DONE'}, 'through': True, 'commands': []}]})
     E.append(seat(m, arrival_event(), 85, 46, 'c'))
     for n, x, y in (('Caramel Seller', 30, 38), ('Busker', 54, 33), ('Lamplighter', 72, 53), ('Child with an Ogre puppet', 36, 34),
                     ('Retired Actor on a bench', 28, 55), ('Hound Number Two', 49, 52), ('Grey Pilgrim', 60, 55), ('Accord Inspector', 37, 29),
@@ -487,7 +627,7 @@ def build_140(prev=None):
                       "Woman from the ferry: You! From the Dovetail! I'm home! I'm not grey anymore. Look at me. I'm BEIGE.\nWoman from the ferry: Blank tint. Saltmere. The gate said so. My sister cried."}, 76, 46))
     E.append(seat(m, {'type': 'npc', 'name': 'Salt raker', 'sprite': 'NPC 19', 'dir': 'up', 'move': 'random', 'text':
                       'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'}, 40, 66, 'S'))
-    m.events += E
+    m.events += audience(E)
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(140): m.taken[y, x] = True
     # ---- the square: the fountain on its flagged dais, stalls in two arcs, benches, columns, lamps
@@ -530,7 +670,7 @@ def build_140(prev=None):
     m.scatter(5, seed=140, on='.')
     conn = [{'dir': 'N', 'offset': 43, 'to': 541, 'to_offset': 30}, {'dir': 'W', 'offset': 31, 'to': 560, 'to_offset': 12},
             {'dir': 'E', 'offset': 44, 'to': 528, 'to_offset': 38}]
-    m.seal_against(conn, keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
+    m.seal_against(conn, spans=[('N', 43, 6), ('W', 31, 3), ('E', 44, 4)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])
     h = head(140, '140_saltmere.yaml', biome='harbour', tone=[8, 4, -12, 0], connections=conn,
              fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 100, 'sx': 2, 'sy': 0})
     m.write(140, h, "# Saltmere - The Upper Town (140). WRITTEN BY layouts/saltmere_rj.py (PF Rejuv City, tileset 55) - edit that script.\n")
@@ -592,9 +732,10 @@ def build_146(prev=None):
     for n, x, y in (('Fisherman', 4, 45), ('Old Sailor', 84, 40), ('Stagehand on a smoke break', 38, 27)):
         if n in tf: E.append(seat(m, tf[n], x, y))
     E.append(seat(m, SE.hidden('HiddenItem stardust', 'STARDUST', 'It blew in on the salt.'), 23, 61, 'f'))
+    E.append(seat(m, dorian_breakwater(), 26, 61, 'f')); E.append(seat(m, salt_caramel(), 29, 61, 'f'))
     E.append(seat(m, {'type': 'npc', 'name': 'Legion recruiter', 'sprite': 'NPC 21', 'dir': 'left', 'text':
                       "Legion recruiter: The Ashkaar Legion pays in coin and glory! ...Mostly coin. The glory's on back order."}, 80, 47, 'f'))
-    m.events += E
+    m.events += audience(E)
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(146): m.taken[y, x] = True
     brine_pans(m, 1, 0, 36, 4, 146, pw=(3, 5), ph=(2, 2))
@@ -715,7 +856,7 @@ def build_147(prev=None):
         {'cond': {}, 'commands': []},
         {'cond': {'self': None}, 'commands': []}]}, 62, 37, 'c') if False else None)
     E = [e for e in E if e]
-    m.events += E
+    m.events += audience(E)
     for e in E: m.taken[e['at'][1], e['at'][0]] = True
     for x, y in K.incoming(147): m.taken[y, x] = True
     # ---- playbills on the walls, columns, lantern strings, stalls, benches, the crowd

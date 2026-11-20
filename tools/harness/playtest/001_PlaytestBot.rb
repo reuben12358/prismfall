@@ -49,12 +49,11 @@ module PlayBot
     [:to, 520, 527], [:spot_all, 527], [:to, 527, 528], [:spot_all, 528], [:to, 528, 140], [:arrive, 140],
     [:to, 140, 141], [:talk, 141, "Nurse"], [:to, 141, 140],
     [:talk, 140, "Juno J1"],                       # J1 on the promenade green, before the gym
-    [:to, 140, 147], [:to, 147, 150], [:to, 150, 154], [:spot_all, 154],   # the Pell Playhouse: lobby, auditorium
-    [:talk, 154, "Curtain rope"], [:talk, 154, "Dorian"],                  # one rope, then Warden Dorian
-    [:arrive, 154],
+    [:to, 140, 147], [:arrive, 147],               # Old Town, outside the Pell Playhouse
+    # Gym 1 (147 -> 150 -> 154: [:spot_all, 154], [:talk, 154, "Curtain rope"], [:talk, 154, "Dorian"]) is held back:
+    # the puzzle engineer is adding crowd logic (2026-11-19), so no gym is attempted until they report.
     [:done]
   ]
-  REWIND = PLAN.index([:to, 100, 520])   # after a blackout: walk out of Ferrow's Landing again
   MAX_BLACKOUTS = (ENV["PLAYBOT_MAX_BLACKOUTS"] || 5).to_i
   # PLAYBOT_SESSION=route1: start on Route 1 after K1 (dev shortcut) to re-check the Route 1 trainers quickly
   ROUTE1_PLAN = [[:goto, 520, "Juno tutorial 4"], [:spot_all, 520], [:done]]
@@ -83,6 +82,7 @@ module PlayBot
   @seen = {}; @nshot = 0; @nframe = 0; @recording = false; @fatal = nil; @use_tick = 0
   @map_arrival = nil; @battle_frames = 0; @debug_phase = nil; @entry = nil; @step_ran_event = false
   @last_map = nil; @ready = 0; @went_busy = 0; @typed = 0; @entry_done = false
+  @spot_i = 0; @spot_wait = 0; @map_wait = 0; @talk_n = 0; @bumps = 0; @nopath = 0
 
   class << self
     attr_accessor :recording, :debug_phase, :battle_tag
@@ -225,6 +225,7 @@ module PlayBot
         @last_map = id
         @map_arrival = @frame
         @path = nil
+        @map_wait = 0
       end
       age = @frame - @map_arrival
       shot("map#{id}_arrival") if age == 45
@@ -513,9 +514,10 @@ module PlayBot
     def wait_for_map
       later = plan[@step..].index { |s| s[1] == $game_map.map_id }
       if !later && plan[@step] && plan[@step][1].is_a?(Integer) && plan[@step][1] != $game_map.map_id
-        # e.g. woke up in a Poke Center after a blackout: walk back to the step's map if a door or edge leads there
+        # e.g. woke up in a Poke Center after a blackout: walk back to the step's map, one plan link at a time
         @map_wait = (@map_wait || 0) + 1
-        return to_map(plan[@step][1]) if @map_wait < 1500 && @idle >= 12
+        hop = next_hop($game_map.map_id, plan[@step][1])
+        return to_map(hop) if hop && @map_wait < 1500 && @idle >= 12
       end
       if !later
         @map_wait = (@map_wait || 0) + 1
@@ -529,6 +531,29 @@ module PlayBot
       @step += later
       @step_start = 0
       log("now on map #{$game_map.map_id}: skipping to step #{@step}")
+    end
+
+    # Next map on the shortest way from map `from` to map `dest`, over the links the plan's [:to, a, b] steps walk
+    # (both ways), e.g. 101 -> 100 -> 520 -> 527 after a blackout on the Strand Road
+    def next_hop(from, dest)
+      @graph ||= begin
+        g = Hash.new { |h, k| h[k] = [] }
+        plan.each { |st| (g[st[1]] << st[2]; g[st[2]] << st[1]) if st[0] == :to }
+        g.each_value(&:uniq!)
+        g
+      end
+      return nil if from == dest
+      prev = { from => nil }
+      queue = [from]
+      until queue.empty?
+        m = queue.shift
+        break if m == dest
+        @graph[m].each { |n| next if prev.has_key?(n); prev[n] = m; queue.push(n) }
+      end
+      return nil if !prev.has_key?(dest)
+      m = dest
+      m = prev[m] while prev[m] != from
+      return m
     end
 
     def next_step
@@ -815,6 +840,7 @@ module PlayBot
       return if !st
       @step, @nframe, @blackouts = st
       @step_start = 0
+      @spot_i = 0; @spot_wait = 0; @map_wait = 0; @talk_n = 0; @bumps = 0; @nopath = 0   # what next_step resets
       @reinstall = (ENV["PLAYBOT_REINSTALL"] == "1")
       log("RESUMED from the autosave at step #{@step} #{plan[@step].inspect}" +
           (@reinstall ? " after a kit update: Debug > Files > Install Prismfall maps first" : " (host restart; not one unbroken run)"))
@@ -833,9 +859,9 @@ module PlayBot
         log("STOPPING: #{@blackouts} blackouts (difficulty wall for this one-or-two-Pokemon AI team)")
         return finish
       end
-      @step = REWIND if SESSION != "ch1" && @step > REWIND
       @step_start = 0
-      log("after blackout: on map #{$game_map.map_id}, replaying the plan from step #{@step}")
+      @spot_i = 0; @spot_wait = 0; @map_wait = 0; @talk_n = 0; @bumps = 0; @nopath = 0; @path = nil; @to = nil
+      log("after blackout: on map #{$game_map.map_id}, walking back to step #{@step} #{plan[@step].inspect}")
     end
 
     def want_catch?

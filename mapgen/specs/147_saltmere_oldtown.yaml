@@ -74,14 +74,18 @@ events:
   at: [27, 37]
   sprite: NPC 12
   dir: down
-  text: 'Costumier: Every mask in the Pageant is stitched on this lane. Even the ones nobody ordered. [TODO story]'
+  commands:
+  - {script: 'pfm_audience(:costumier)'}
+  - 'Costumier: Every mask in the Pageant is stitched on this lane. Even the ones nobody ordered. [TODO story]'
 - type: npc
   name: Street player
   at: [44, 46]
   sprite: NPC 08
   dir: down
   move: random
-  text: 'Street player: A stage is anywhere two people stop to look. Dorian taught us that. [TODO story]'
+  commands:
+  - {script: 'pfm_audience(:street_player)'}
+  - 'Street player: A stage is anywhere two people stop to look. Dorian taught us that. [TODO story]'
 - type: event
   name: Rival Theatre Barker
   pages:

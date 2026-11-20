@@ -12,7 +12,8 @@
 #                 [:shot, map, "name"]         screenshot when the map is idle
 #===============================================================================
 module PlayBot
-  PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 11, 6], "backstage" => [154, 2, 11],
+  PUZZLE_START = { "gym1" => [147, :door, 150], "gym2" => [120, :door, 130], "lofts" => [131, 19, 5], "backstage" => [154, 2, 11],
+                   "house0" => [154, 12, 28], "house7" => [154, 12, 28], "house21" => [154, 12, 28],
                    "d1" => [522, 6, 36] }
   # Gym 1 (SPINE Rev 14): the Pell Playhouse. A walk-through: lobby, up the aisle past the actors, one curtain rope.
   GYM1_PLAN = [
@@ -29,29 +30,44 @@ module PlayBot
     [:shot, 154, "g1_07_badge"],
     [:done]
   ]
-  # Gym 2 (SPINE Rev 14): the Loomhouse. One heddle in the foyer, three linked heddles in the Weaving Hall.
+  # SPINE Rev 19: the Saltmere audience. PLAYBOT_SESSION=house0 / house7 / house21 starts in the auditorium with that many
+  # townsfolk met (the first N of PrismfallPuzzles::AUDIENCE_PEOPLE, then the lantern quest), the aisle actors already
+  # beaten, and shows the house, then Dorian's fight starting at the stage the house sets.
+  HOUSE_PLAN = [
+    [:shot, 154, "hs_00_back_of_the_house"],
+    [:goto, 154, 12, 21], [:shot, 154, "hs_01_the_stalls"],
+    [:goto, 154, 12, 11], [:use_from, 154, 20, 11, 6],
+    [:goto, 154, 12, 8], [:talk, 154, 12, 7],
+    [:shot, 154, "hs_02_after_the_show"],
+    [:done]
+  ]
+  # Gym 2 (SPINE Rev 19): the Loomhouse lobby, then the Canopy: web trampolines, sticky webs, two Joltik.
   GYM2_PLAN = [
     [:shot, 120, "g2_00_outside_the_loomhouse"],
     [:door, 120, 130],                    # map 120's Loomhouse door
-    [:shot, 130, "g2_01_foyer"],
-    [:goto, 130, 9, 14], [:shot, 130, "g2_02_at_the_loom_bed"],
-    [:talk, 130, 11, 12], [:shot, 130, "g2_03_heddle_pulled"],
-    [:goto, 130, 9, 11], [:shot, 130, "g2_04_on_the_plank"],
-    [:goto, 130, 15, 4],
-    [:shot, 131, "g2_05_hall_start"],
-    [:talk, 131, 1, 23],  [:shot, 131, "g2_06_hall_red"],
-    [:talk, 131, 9, 23],  [:shot, 131, "g2_07_hall_gold"],
-    [:talk, 131, 23, 23], [:shot, 131, "g2_08_hall_green_all_right"],
-    [:goto, 131, 21, 20], [:shot, 131, "g2_09_hall_on_the_planks"],
-    [:goto, 131, 21, 12], [:goto, 131, 21, 6], [:shot, 131, "g2_10_hall_top"],
-    [:goto, 131, 12, 5],  [:shot, 131, "g2_11_before_tamsin"],
-    [:talk, 131, 11, 5],                  # Warden Tamsin, double battle (the AI plays it)
-    [:shot, 131, "g2_12_badge"],
+    [:shot, 130, "g2_01_lobby"],
+    [:goto, 130, 15, 4],                  # the stair up into the tree
+    [:shot, 131, "g2_02_canopy_floor"],
+    [:goto, 131, 12, 29], [:shot, 131, "g2_03_first_web"],
+    [:ride, 131, 12, 29, 8], [:shot, 131, "g2_04_thrown_to_ledge_one"],
+    [:ride, 131, 18, 24, 8],              # a web throws you onto a web: up to ledge two (Lass Orla is waiting)
+    [:shot, 131, "g2_05_web_onto_web"],
+    [:ride, 131, 6, 17, 8], [:shot, 131, "g2_06_held_by_a_sticky_web"],
+    [:ride, 131, 6, 13, 6], [:shot, 131, "g2_07_thrown_sideways"],
+    [:goto, 131, 10, 11], [:shot, 131, "g2_08_ledge_three"],
+    [:talk, 131, 16, 10], [:shot, 131, "g2_09_joltik_one"],
+    [:ride, 131, 2, 10, 8], [:talk, 131, 1, 5], [:shot, 131, "g2_10_joltik_two"],
+    [:ride, 131, 2, 6, 2],
+    [:ride, 131, 12, 10, 8], [:shot, 131, "g2_11_up_onto_b"],
+    [:ride, 131, 12, 6, 6], [:shot, 131, "g2_12_across_to_tamsin"],
+    [:goto, 131, 16, 5],
+    [:talk, 131, 17, 5],                  # Warden Tamsin, double battle (the AI plays it)
+    [:shot, 131, "g2_13_badge"],
     [:done]
   ]
   # The optional Upper Lofts (after Tamsin's badge): spools + the brass Meridian wire, then Granny's Knot.
   LOFTS_PLAN = [
-    [:goto, 131, 12, 4], [:goto, 131, 12, 3],   # the stairs behind Tamsin (a touch event on the top step)
+    [:goto, 131, 20, 4], [:goto, 131, 20, 3], [:goto, 131, 20, 2],   # the stair behind Tamsin (a touch event on the top step)
     [:shot, 132, "lf_06_lofts_start"],
     [:talk, 132, 1, 21],                  # alpha cord
     [:ride, 132, 3, 22, 6],               # spool s1 -> west deck
@@ -119,6 +135,7 @@ module PlayBot
       return LOFTS_PLAN if SESSION == "lofts"
       return BACKSTAGE_PLAN if SESSION == "backstage"
       return D1_PLAN if SESSION == "d1"
+      return HOUSE_PLAN if SESSION.start_with?("house")
       return puz_plan
     end
 
@@ -206,6 +223,14 @@ module Game
         $player.badges[(pfm_gym(:LEADER_DORIAN) || 1) - 1] = true
       end
       (101..110).each { |i| $game_switches[i] = true }      # the story so far (Chapters 0-2 flags), as on a real save
+      if PlayBot::SESSION.start_with?("house")               # meet N Saltmere townsfolk, beat the aisle actors
+        n = PlayBot::SESSION[/\d+/].to_i
+        PrismfallPuzzles::AUDIENCE_PEOPLE.keys.first([n, 18].min).each { |k| pfm_audience(k) }
+        PrismfallPuzzles.audience_add("quest_EL_LANTERNS", 3) if n > 18
+        $game_map.events.each_value { |e| $game_self_switches[[154, e.id, "A"]] = true if e.name[/^Trainer\(/] }
+        PrismfallPuzzles.seat_fans
+        PlayBot.log("house session: audience #{pf_audience} (#{pf_house_name}), Grand Stage starts at stage #{pf_house_stage}")
+      end
       $game_map.need_refresh = true
       PlayBot.recording = true
       PlayBot.log("puzzle session #{PlayBot::SESSION}: start #{st.inspect}; puzzle rooms #{defined?(PrismfallPuzzles) ? PrismfallPuzzles::ROOMS.keys.inspect : 'PLUGIN MISSING'}")

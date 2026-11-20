@@ -5,40 +5,49 @@ Gym puzzles: `GYM_PUZZLES.md`. Species: `POKEMON_AVAILABILITY.md`. Wild data: `p
 Names that the story team hasn't fixed yet are marked *(prov.)*.
 
 ---
-## 1. Region layout: seven kingdoms around Crownhaven
+## 1. Region layout: Elowen in the middle, Crownhaven at its heart (Geography v2, SPINE Rev 18)
 
 **The region map is `art/previews/world_map.png`** (painted) and the in-game Town Map is
 `graphics/UI/Town Map/prismfall_velmora.png`; the geography in words is **`design/WORLD_MAP.md`**. Both images and the
-town-map squares come from `tools/worldmap/` (Revision 13). Gym numbers below follow Revision 14 (Saltmere 1, Briarwick 2).
+town-map squares come from `tools/worldmap/` (Revision 13; re-laid for Geography v2 in Revision 18). Gym numbers
+follow Revision 14 (Saltmere 1, Briarwick 2). Story lines that the move made wrong are listed in
+`design/GEOGRAPHY_V2_STORY_FIXES.md`.
 ```
  Schematic, not to scale (N up). Kingdoms touch ONLY through the borderlands in [brackets]; adjacency is authoritative in §10.
- ~~~~~~~~~~~~ THE FROZEN NORTH SEA (Isenmar's sea-ice; the Thane's sled-road runs on it) ~~~~~~~~~~~  Rime Isles: Skaldfast
- (10)Rimeholt  [B2 Anchorhold]  (11)Skyreach  (16)Underveil, Midstair[L]  (15)Cogsworth   (13)Cragholm  ~Shattered Ice~
-   ISENMAR      Frostfang Mts     ZENITH PLATEAU (the City Above)             OSSARIA (the Bone Sands)    Cinder Cape
- (3)Ebbmouth --[B Brassfall]-- (4)LUMEN CITY --[C Copperdune]-- (5)Duneholt   [I Vigil]  [M Glasswake]   (Ashkaar)
-   [A2 Snowbriar]   [G Verdigris]    NADIR lowlands: (6)Mirefen  [D Charwell]  [E Scaldwater] -- (7)Cindervault
- [A Rimewood]   (9)Verdance  [H Glassmere] Mirror Mere   (8)Ironreach           ASHKAAR (the Dragonfire Dominion)
-   Frostwick       [F Lanternroot]           ( CROWNHAVEN inside the Crownwall )  [K Pilgrim's Rest]
- (2)Briarwick (in the Gossamer Wood)  [F Mothwell]                                   (18)Wyrmrest
- (1)Saltmere ------- (0)Ferrow's Landing      (17)Gloaming --[J Thornwatch]--      [ANTUMBRA, behind the glass:
- ~~~~~~~~~~~~~~~~~~~~ THE HALLOW STRAIT ~~~~~~~~~~~~~ Shardfall Isles ~~~~~~~~~~~~    (12)Lucent, (14)Gravenmoor]
- ANTUMBRA (mirror realm) has three stable gates: A Mirror Mere (Elowen, border H), B the Grave Glass at Vigil and
- C the Obsidian Barrows' east gate (both Ossaria, border I). The map draws it as an inset in the south-east sea.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ THE NORTHERN SEA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          (10)Rimeholt ==sled-road== Skaldfast> Rimed Sands |Steamline| Glass Dunes <Siege Camp      (13)Cragholm
+ ~frozen     ISENMAR       [B2 Anchorhold]    OSSARIA, the Bone Sands: the war front  (5)Duneholt  [I Vigil]    Cinder Cape
+   sea~                                                                                         [M Glasswake]  Warfort
+          (3)Ebbmouth           Mirror Mere [H Glassmere]  [C Copperdune]    [D Charwell]              ASHKAAR
+                        [B Brassfall]       .------ the Crown Road ------.
+                  [A2 Snowbriar]  (9)Verdance  (       CROWNHAVEN        )  [K Pilgrim's Rest]  [E Scaldwater] (7)Cindervault
+                                              '--------------------------'  [G Verdigris]
+                       [A Frostwick]      [F Lanternroot]  (8)Ironreach*        (6)Mirefen*            (18)Wyrmrest
+              ELOWEN: the middle, borders every kingdom      (11)Skyreach   (15)Cogsworth   [J Thornwatch]
+                                    (2)Briarwick     ZENITH plateau (the City Above)
+                                                     (4)Lumen City   [L Midstair]     (17)Gloaming    [ANTUMBRA inset:
+                       (1)Saltmere        (0)Ferrow's     NADIR* beneath: (16)Underveil   [F Mothwell]  (12)Lucent, (14)Gravenmoor]
+ ~~~~~~~~~~~~~~~~~~~~~~~~~ THE HALLOW STRAIT ~~~~~~~ drowned Aurelia (south coast) ~~~~~~~ Shardfall Isles ~~~~~~~~~~~~~~~~~
+ * Nadir has Zenith's footprint, underneath it: Mirefen's marsh at the north cliff's foot, Ironreach under the west rim,
+   Underveil under the south cliff. ANTUMBRA (mirror realm) has three stable gates: A Mirror Mere (Elowen, border H),
+   B the Grave Glass at Vigil (Ossaria, border I) and C the Slagglass at the Slag Mesa (Zenith/Elowen, border G).
+   The map draws it as an inset in the south-east sea.
 ```
 
 | Kingdom | Where | Wild types (~70%) | Visits (gym #) | What changes on return |
 |---|---|---|---|---|
-| Elowen | south & south-west forest | Fairy, Grass, Bug, Normal | 1,2 → 9 → 17 | Act III: Verdance's runaway bloom opens Gossamer Heartwood; Act V: forest heart (Gloamwood) at twilight, Bleed visibly spreading from Briarwick |
-| Isenmar | west & north coast | Water, Ice | 3 → 10 | Act III: Rimeholt's lake thawing under a Meridian Lattice; Ebbmouth Sea Grotto opens (Surf) |
-| Zenith | north-central plateau | Electric, Steel, Flying | 4 → 11 → 15 | Act II: Lowlight Shattered (Bleed); Act III: Mandate checkpoints; Act IV: foundry district under martial law |
-| Nadir | beneath Lumen + its runoff marsh | Poison, Dark, Fighting | 6, 8 → 16 | Act IV: the Fault drains the north coast, Underveil opens onto drowned Aurelia |
-| Ashkaar | east / south-east volcanic | Fire, Dragon | 7 → 18 | Act V: caldera tap damage, dragon-lords mobilised |
-| Ossaria | north-east desert & canyons | Ground, Rock | 5 → 13 | Act IV: Duneholt Undersands (deeper ruins) open |
-| Antumbra | mirror realm behind Elowen | Ghost, Psychic, Dark | 12 → 14 | postgame: Distortion Core (Giratina) |
-| Crownhaven | centre, on the Crown ring | — | Act V | Festival |
+| Elowen | the middle: from the south-west coast (the start chain) to the Gloamwood in the south-east; the Crown Road rings the Crownwall | Fairy, Grass, Bug, Normal | 1,2 → 9 → 17 | Act III: Verdance's runaway bloom opens Gossamer Heartwood; Act V: the Gloamwood at twilight, the dusk spreading west toward Briarwick |
+| Isenmar | west and north-west: the frozen sea, fjords, Rimeholt on Lake Rime, Ebbmouth on the west coast | Water, Ice | 3 → 10 | Act III: Rimeholt's lake thawing under a Meridian Lattice; Ebbmouth Sea Grotto opens (Surf); Act IV–V: its host holds Skaldfast and the Rimed Sands |
+| Zenith | the south: the plateau of the City Above, Lumen City on its south brink, Skyreach and Cogsworth on its east side | Electric, Steel, Flying | 4 → 11 → 15 | Act II: Lowlight Shattered (Bleed); Act III: Mandate checkpoints; Act IV: foundry district under martial law |
+| Nadir | beneath Zenith (same footprint) and the marsh and mines at the plateau's foot | Poison, Dark, Fighting | 6, 8 → 16 | Act IV: the Fault drains the south coast, Underveil opens onto drowned Aurelia |
+| Ashkaar | the east: Cindervault and the Cinderhorn, the Wyrmspine and Wyrmrest; Cinder Cape at the north-east tip | Fire, Dragon | 7 → 18 | Act V: caldera tap damage; the legions are away at the front in Ossaria |
+| Ossaria | the north: bone sands along the north coast, the crags and canyons; neutral ground for the war | Ground, Rock | 5 → 13 | Act IV: Duneholt Undersands (deeper ruins) open; Act IV–V: two foreign armies in its western dunes |
+| Antumbra | behind the glass (three gates) | Ghost, Psychic, Dark | 12 → 14 | postgame: Distortion Core (Giratina) |
+| Crownhaven | Elowen's heart, inside the Crownwall (one way in: the Pilgrim Pass) | — | Act V | Festival |
 
 Borderland routes (marked `Borderland (A/B)` in maps.json) mix both kingdoms' types ~50/50.
-**Story note:** Aurelia (the drowned capital) sits under Underveil on the **north** coast below Lumen's cliffs. 00_OVERVIEW says "south coast"; story team please reconcile (Revision 2 put the Nadir beneath Lumen).
+**Story note:** Aurelia (the drowned capital) is under Underveil on the **south** coast, below Zenith's south cliff
+(00_OVERVIEW's "south coast" is now right; the story's "north coast" lines are listed in GEOGRAPHY_V2_STORY_FIXES.md).
 **Town map:** Velmora must be **region 0** in `town_map.txt`. Essentials' form handlers turn Pikachu/Exeggcute/Cubone Alolan in region 1 and Koffing/Mime Jr. Galarian in region 2.
 
 ---
@@ -69,22 +78,22 @@ Wild level band ≈ previous cap −3 … next cap −2. Field = default battle 
 | 0 | I | Ferrow's → Saltmere (G1 cap 15) — the Strand Road, Ch1–2 | The Ferrymen's Mile 520, Windfall Row 521 (branch) + Hale Farmhouse 523, **Glassed Orchard 522** BLEED (story), Lacecliff Walk 527 BEACH, Marram Down 528 BEACH; Saltmere 140–147 and the Pell Playhouse 150/154 | 3–12 |
 | 1 | I | Saltmere → Briarwick (G2 19) — the Weavers' Road, Ch3 | The Grey Saltings 541 BEACH, Brinecut Mine 544/545 CAVE, The Dyers' Ford 552, Thistledown Lea 540, Thistledown Manor 546/547 (haunted house), Gossamer Wood 524 SILKWOOD, Woodward's Hut 526; Briarwick 120–125 and the Loomhouse 130/131 | 12–17 |
 | 2 | I | Briarwick → Ebbmouth (G3 23) — the Hoar Road, Ch4 | After Tamsin's badge: Gossamer Deepwood 525 SILKWOOD (Cut), **Cocoonfall Hollow 548** BLEED, the Loomhouse Upper Lofts 132/134 and the Playhouse Backstage 151–153 (optional). **Borderland A (the Rimewood):** Spinners' Rise 566, Frostwick Pass 577, **Frostwick 570** (+571–576), Rimewood Path 578, The Rimewood 562, Rimewood Glade 563 (Cut). Then Isenmar: Gullcry Cliffs 561, Gullcry Caves 564/565 CAVE; K2 on 561. Side road: Frostflat Causeway 560 (Frostwick ↔ Saltmere) with **The Rehearsal 568** BLEED | 16–21 |
-| 3 | I | Ebbmouth → Lumen City (G4 27) | The Reedholms 580, the Icefall Locks 581, Voltaic Sluiceworks 584/585 SCRAPYARD (Rotom), **Ebb Hollow 588** BLEED | 18–25 |
-| 4 | II | Lumen → Duneholt (G5 31) | The Brass Dunes 600, the Rib Road 601 DESERT, Static Tunnels 604/605 CAVE (Flash), **The Lowlight (Shattered) 608** BLEED (story) | 22–29 |
-| 5 | II | Duneholt → Mirefen (G6 35) | R11 620 DESERT, R12 621, Ossuary of Dunes 624/625 CAVE (Strength, Unown ruins), **Sinkfield 628** | 26–33 |
-| 6 | II | Mirefen → Cindervault (G7 39) | Leechman's Walk 640, Lake Sallow 641 (Surf), Miasma Caverns 644/645 CORROSIVE_MIRE, **Weeping Fen 648**, Lantern Isle 658 BEACH (opt.) | 30–37 |
-| 7 | II | Cindervault → Ironreach (G8 43) | The Ashmarch 660 ASHEN_WASTE, the Ironway 661 MOUNTAIN, the Cinderhorn 664–666 VOLCANIC, **Emberfall 668**; optional/war road: **Cinderglass Barrens 662**, Petrified Ashwood 663, **Glasswake 670** (border M) | 34–41 |
-| 8 | III | Ironreach → Verdance (G9 47) | The Rootdeep 680 CAVE + **Lanternroot 690** (border F), Prism Falls 681 RAINBOW, **Royal Chase 682** (Safari-style reserve), Grudgestone Quarry 684/685 CAVE, **Echo Coliseum 688** | 38–45 |
-| 9 | III | Verdance → Rimeholt (G10 51) | The Hart's Run 700, the Hoarwood 701 SNOWY_MOUNTAIN, Gossamer Heartwood 703 SILKWOOD (revisit), Frostfang Pass 704/705 SNOWY_MOUNTAIN, **Bride Grove 708** (story) | 42–49 |
-| 10 | III | Rimeholt → Skyreach (G11 55) | The Thane's Sled-Road 720, the Mast Glacier 721 SNOWY_MOUNTAIN, Ebbmouth Sea Grotto 723 (revisit), Cloudstair 724–726 MOUNTAIN (Rock Climb), **Stillwater 728** | 46–53 |
-| 11 | III | Skyreach → Lucent (G12 59) | Conductors' Causeway 740 STORMFRONT, the Wired Wood 741, Mirror Mere 742, **Antumbra Threshold 743 INVERSE**, Stormwatch Spire 744–746 STORMFRONT, **Shattered Sky 748** | 50–57 |
-| 12 | IV | Lucent → Cragholm (G13 63) | The Obsidian Barrows 760 INVERSE (Antumbra), Spinefall Gorge 761 (Waterfall), Geode Hollow 764/765 CRYSTAL_CAVERN, **Dreaming Quarter 768** | 54–61 |
-| 13 | IV | Cragholm → Gravenmoor (G14 67) | The Jawbone Ridge 780 MOUNTAIN, Hindmoor 781 (Antumbra moors), Duneholt Undersands 783 DESERT (revisit, Groudon arc), Darkglass Mine 784/785 DARK_CRYSTAL, **Stonesleep 788** (fossils) | 58–65 |
-| 14 | IV | Gravenmoor → Cogsworth (G15 71) | The Noonless Road 800, the Slag Mesa 801 WASTELAND, Barrow of the Wardens 804/805 (CAVE/HOLLOW_CATHEDRAL), Giratina's Reverse Depths 806 INVERSE, **The Hush 808** | 62–69 |
-| 15 | IV | Cogsworth → Underveil (G16 75) | The Hanging Stair 820 SCRAPYARD, the Drownings 821 WATER_SURFACE, Under the Drownings 822 UNDERWATER (Dive), **Aurelia** 824 UNDERWATER / 825–826 CAVE, **Ironbloom 828** | 66–73 |
-| 16 | V | Underveil → Gloaming (G17 80) | The Blindwater 840 CAVE, the Gloamwood Verge 841, Lightless Deep 844 DARK_CRYSTAL / 845 NEW_MOON (Pecharunt arc), **Inverted Ward 848 INVERSE** | 70–78 |
-| 17 | V | Gloaming → Wyrmrest (G18 85) | The Gloamwood 860 FAIRY_TALE, the Thornwar Marches 861 MOUNTAIN, Wyrmscar Rift 864 CAVE / 865 DRAGONS_DEN (Reshiram arc), **Rainbow Scar 868 RAINBOW** | 75–83 |
-| 18 | V | Wyrmrest → Crownhaven (Festival 90) | R37 880 MOUNTAIN, Sovereign's Ascent 884–886, **Glassfall Scar 888** | 80–88 |
+| 3 | I | Ebbmouth → Lumen City (G4 27) | The Reedholms 580, the Icecutters' Haul 592, the Icefall Locks 581, Coppice Ride 595, Wallshadow Row 594 (Crown Road), the Arc-Lamp Mile 593, Lumen West Gate 582, Voltaic Sluiceworks 584/585 SCRAPYARD (Rotom), **Ebb Hollow 588** BLEED | 18–25 |
+| 4 | II | Lumen → Duneholt (G5 31) | The Meridian Mainline 612, Candle Down 602 and the Highwold 603 (Crown Road), the Brass Dunes 600, Sunbleach Flats 613, the Rib Road 601 DESERT, Static Tunnels 604/605 CAVE (Flash), **The Lowlight (Shattered) 608** BLEED (story) | 22–29 |
+| 5 | II | Duneholt → Mirefen (G6 35) | The Marrow Road 620 DESERT, the Kneeling Stones 632, the Leach Canyons 621, Wormwood Lea 634, the Gutterfall 633, Ossuary of Dunes 624/625 CAVE (Strength, Unown ruins), **Sinkfield 628** | 26–33 |
+| 6 | II | Mirefen → Cindervault (G7 39) | Leechman's Walk 640, Lake Sallow 641 (Surf), the Pyre Road 652, Miasma Caverns 644/645 CORROSIVE_MIRE, **Weeping Fen 648**, Lantern Isle 658 BEACH (opt.) | 30–37 |
+| 7 | II | Cindervault → Ironreach (G8 43) | The Ashmarch 660 ASHEN_WASTE, the Ironway 661 MOUNTAIN, the Long Drop 672, the Wyrmtongue 673 (side, to Cinder Cape), the Cinderhorn 664–666 VOLCANIC, **Emberfall 668**; optional/war road: **Cinderglass Barrens 662**, Petrified Ashwood 663, **Glasswake 670** (border M) | 34–41 |
+| 8 | III | Ironreach → Verdance (G9 47) | The Tailings 692, the Briarway 693, the Rootdeep 680 CAVE + **Lanternroot 690** (border F), Prism Falls 681 RAINBOW, **Royal Chase 682** (Safari-style reserve), Grudgestone Quarry 684/685 CAVE, **Echo Coliseum 688** | 38–45 |
+| 9 | III | Verdance → Rimeholt (G10 51) | The Hart's Run 700, the Hoarwood 701 SNOWY_MOUNTAIN, the Whalebone Road 712, Gossamer Heartwood 703 SILKWOOD (revisit), Frostfang Pass 704/705 SNOWY_MOUNTAIN, **Bride Grove 708** (story) | 42–49 |
+| 10 | III | Rimeholt → Skyreach (G11 55) | The Thane's Sled-Road 720, the Mast Glacier 721 SNOWY_MOUNTAIN, Anchorhold 730, the air leg to the Tetherline 732, Ebbmouth Sea Grotto 723 (revisit, a detour south from Rimeholt), Cloudstair 724–726 MOUNTAIN (Rock Climb), **Stillwater 728** | 46–53 |
+| 11 | III | Skyreach → Lucent (G12 59) | Conductors' Causeway 740 STORMFRONT, the Wired Wood 741, Kingsmead 756 (Crown Road), the Looking-Glass Wood 752, Widdershins Walk 755, Mirror Mere 742, **Antumbra Threshold 743 INVERSE**, Stormwatch Spire 744–746 STORMFRONT, **Shattered Sky 748** | 50–57 |
+| 12 | IV | Lucent → Cragholm (G13 63) | Yesterday's Road 772, the Obsidian Barrows 760 INVERSE (Antumbra), the Vertebrae 773, Spinefall Gorge 761 (Waterfall), Geode Hollow 764/765 CRYSTAL_CAVERN, **Dreaming Quarter 768** | 54–61 |
+| 13 | IV | Cragholm → Gravenmoor (G14 67) | The Jawbone Ridge 780 MOUNTAIN, Hindmoor 781 (Antumbra moors), Downflame Road 790, Duneholt Undersands 783 DESERT (revisit, Groudon arc), Darkglass Mine 784/785 DARK_CRYSTAL, **Stonesleep 788** (fossils) | 58–65 |
+| 14 | IV | Gravenmoor → Cogsworth (G15 71) | The Noonless Road 800, the Slag Mesa 801 WASTELAND (gate C), the Smokestack Parade 811, the Dry Tide 810 (side), Barrow of the Wardens 804/805 (CAVE/HOLLOW_CATHEDRAL), Giratina's Reverse Depths 806 INVERSE, **The Hush 808** | 62–69 |
+| 15 | IV | Cogsworth → Underveil (G16 75) | The Brink 832, the Hanging Stair 820 SCRAPYARD, the Drownings 821 WATER_SURFACE, Under the Drownings 822 UNDERWATER (Dive), **Aurelia** 824 UNDERWATER / 825–826 CAVE, **Ironbloom 828** | 66–73 |
+| 16 | V | Underveil → Gloaming (G17 80) | The Throat 852, the Blindwater 840 CAVE, the Gloamwood Verge 841, Lightless Deep 844 DARK_CRYSTAL / 845 NEW_MOON (Pecharunt arc), **Inverted Ward 848 INVERSE** | 70–78 |
+| 17 | V | Gloaming → Wyrmrest (G18 85) | The Gloamwood 860 FAIRY_TALE, the Thornwar Marches 861 MOUNTAIN, the Wyrmspine 872, Wyrmscar Rift 864 CAVE / 865 DRAGONS_DEN (Reshiram arc), **Rainbow Scar 868 RAINBOW** | 75–83 |
+| 18 | V | Wyrmrest → Crownhaven (Festival 90) | Dominar's Toll 892, the Pilgrim Pass 880 MOUNTAIN, the Coronation Road 893, Sovereign's Ascent 884–886, **Glassfall Scar 888** | 80–88 |
 | PG | — | postgame | Hallow Strait 900, Seabed 901, Shardfall Isles 905, Antumbra Distortion Core 910 | 80–95 |
 
 Each kingdom has one legendary arc with a boss battle (see POKEMON_AVAILABILITY §4): Elowen = Ogerpon + Loyal Three, Isenmar = Kyogre, Zenith = Zekrom, Nadir = Pecharunt, Ashkaar = Reshiram, Ossaria = Groudon, Antumbra = Giratina.
@@ -148,65 +157,76 @@ Key items: Badge case (Voss, prologue; records the shard, story), Bicycle (Lumen
 **Festival grounds:** the **Temple-Arena of the Blessing** (the rebuilt Meridian Prism Arena) is a colosseum fused with a cathedral: Processional Plaza 495, Hall of Eighteen Doors 490, Altar Stage 491 (`:PRISM_ARENA`). Next to it is the Court of Eight Pavilions 499, one pavilion per delegation.
 **Other cities at their own scale:** Saltmere gains Harbour & Breakwater 146 and Old Town 147. Ebbmouth gains Mill Quay 167. Skyreach is vertical (323–326). Ferrow's Landing and Briarwick stay villages. Story landmarks added: Corvin's Infirmary 223, the Iron Pit 263, Vane Hall 383, Lantern Hospice 384, Strade Works 403, Cragholm Lift Galleries 363, Great Tree Roots 443.
 
-## 9. The Ashkaar–Isenmar war (Revision 6)
-Ashkaar and Isenmar share **no land border** (Revision 9). The war is fought across the **Shattered Ice strait** in the north-east sea. On one side are Isenmar's **Rime Isles** (Skaldfast), at the far end of its frozen north sea. On the other is Ashkaar's **Cinder Cape**, the north-eastern tip of the Dominion, reached overland through the Cinderglass Barrens (border M). War-theatre maps are **920–939** (all *prov.* names; the story team sets the act):
-| ID | Map | Role |
-|---|---|---|
-| 920 | The Rime Narrows | front line on the ice: trenches, burnt sled-forts |
-| 921–923 | **Skaldfast**: Outer Walls, Harbour Keep, Great Hall | the besieged Isenmar fortress-port |
-| 924 | Ashkaar Siege Camp | legion tents, dragon pickets, the Dominar's war-tent |
-| 925 | The Steamline | no-man's-land where lava meets sea ice |
-| 926 | **The Shattered Ice** | frozen-sea battlefield for the climax cutscene (beam clash; FROZEN_LAKE → WATER_SURFACE) |
-| 927 | Cinder Cape Warfort | Ashkaar's staging fortress |
-Access: the Isenmar side is the sled-road from Rimeholt across the frozen north sea. The Ashkaar side is the north road Cindervault → Cinderglass Barrens 662 → Glasswake 670 → Cinder Cape 927. 925/926 are sea, not borderland. A `war` state is defined on Rimeholt 300/304, Cindervault 240, Ebbmouth 160, Routes 21/22/15/16 and Wyrmrest 460.
+## 9. The Ashkaar–Isenmar war (Revisions 6 and 18)
+Ashkaar and Isenmar share **no border**. Since Revision 18 the war is fought **on land, in Ossaria**: both armies march
+into the neutral bone sands along the north coast, and the front lies in Ossaria's western dunes, between Isenmar's
+border fortress and Ashkaar's siege camp. In the climax Primal Kyogre drags a flood-sea into the desert and Reshiram's
+fire turns the dunes to glass. This replaces the Shattered Ice strait (the north sea is no longer a battlefield).
+War-theatre maps are **920–939** (*prov.* names; the story team sets the act):
+| ID | Map | Kingdom | Role |
+|---|---|---|---|
+| 920 | **The Rimed Sands** (was the Rime Narrows) | Ossaria (Isenmar lines) | Isenmar's front: sand its host has frozen into white trench-lines, burnt sled-forts |
+| 921–923 | **Skaldfast**: Outer Walls, Rime Keep (was Harbour Keep), Great Hall | Isenmar | Isenmar's border fortress on Ossaria's west edge, at the foot of the Mast Glacier; besieged in Ch15; the armistice table |
+| 924 | Ashkaar Siege Camp | Ossaria (Ashkaar camp) | legion tents, dragon pickets, the Dominar's war-tent, on the eastern dunes |
+| 925 | The Steamline | Ossaria (contested) | no-man's-land where the two Imprints meet: ice on one side, fire on the other, steam-glass between (a Bleed line) |
+| 926 | **The Glass Dunes** (was the Shattered Ice) | Ossaria (contested) | the battlefield of the climax cutscene (beam clash); default field DESERT, the flood-then-glass transition is the fields team's |
+| 927 | Cinder Cape Warfort | Ashkaar | Ashkaar's staging fortress on its own north-east coast, behind the lines |
+Access: the Isenmar side is Rimeholt → the Thane's Sled-Road 720 → the Mast Glacier 721 (border B2) → Skaldfast 921 →
+the Rimed Sands 920. The Ashkaar side is Cindervault's north gate → the Cinderglass Barrens 662 (border M) → Glasswake
+670 → west across the sands → the Siege Camp 924; the Wyrmtongue 673 runs out to Cinder Cape 927. From Cragholm (Gym 13)
+the front is a westward walk across the sands (War 2 `:war_convoy`, War 3 `:war_prisoner`); from Wyrmrest (Ch19)
+Sigrun flies the PC there. A `war` state is defined on Rimeholt 300/304, Cindervault 240, Ebbmouth 160, the Sled-Road
+720, the Mast Glacier 721, the Ashmarch 660, the Ironway 661 and Wyrmrest 460.
 
 ---
-## 10. Borderlands (Revision 9)
-Kingdoms touch **only** through borderlands. Each borderland blends both biomes, cultures and wild types (≈50/50; the validator skips the kingdom-share check on `Borderland (A/B)` maps) and has at least one intermediate town. maps.json carries the full records under the top-level `borderlands` key; every member map has `borderland`.
+## 10. Borderlands (Revision 9; re-laid for Geography v2, Revision 18)
+Kingdoms touch **only** through borderlands. Each borderland blends both biomes, cultures and wild types (≈50/50; the validator skips the kingdom-share check on `Borderland (A/B)` maps) and has at least one intermediate town. maps.json carries the full records under the top-level `borderlands` key; every member map has `borderland`. The records (and the tables below) come from `BORDERLANDS` in `tools/worldmap/world_data.py`. Biome blends: ice–forest = the Rimewood/Hoarwood; ice–desert = tundra and permafrost dunes (the Mast Glacier); fire–desert = volcanic ash desert (the Cinderglass Barrens); fire–forest = ash woods and burnt forest (the Sulfur Reach, the Thornwar Marches); forest–Zenith = industrial fringe and orchards (the Wired Wood); forest–desert = the Brass Dunes and the Leach Canyons.
 
-**Adjacency graph** (13 edges): Elowen–Isenmar (A) · Isenmar–Zenith (B) · Zenith–Ossaria (C) · Ossaria–Nadir (D) · Nadir–Ashkaar (E) · Nadir–Elowen (F) · Zenith–Elowen (G) · Elowen–Antumbra (H, Mirror Mere) · Antumbra–Ossaria (I, Grave Glass) · Elowen–Ashkaar (J) · Ashkaar–Crownhaven (K, the only overland way into the Crown) · Zenith–Nadir (L, vertical) · Ashkaar–Ossaria (M).
-**Not adjacent:** Isenmar–Ashkaar (sea war only), Isenmar–Ossaria, Isenmar–Nadir, Elowen–Ossaria, Antumbra–anything but Elowen/Ossaria, Crownhaven–anything but Ashkaar. Long jumps are optional only: Skyreach airships (Act III+), Fly (B8).
+**Adjacency graph** (Elowen borders every kingdom):
+Elowen–Isenmar (A the Rimewood, A2 the Hoarwood, B the Icefall Locks) · Elowen–Ossaria (C the Brass Dunes, D the Leach Canyons) · Elowen–Ashkaar (E the Sulfur Reach, J the Thornwar Marches) · Elowen–Zenith (G the Wired Wood) · Elowen–Nadir (F the Rootdeep) · Elowen–Antumbra (H the Looking-Glass Wood, gate A Mirror Mere) · Elowen–Crownhaven (K the Pilgrim Pass, the only way in) · Isenmar–Ossaria (B2 the Mast Glacier) · Ossaria–Ashkaar (M the Cinderglass Barrens) · Ossaria–Antumbra (I the Obsidian Barrows, gate B the Grave Glass) · Zenith–Nadir (L the Hanging Stair, vertical) · Antumbra–the Slag Mesa (gate C the Slagglass, inside G).
+**Not adjacent:** Isenmar–Ashkaar (ice and fire never border; their war is fought in Ossaria) · Isenmar–Zenith/Nadir · Ossaria–Zenith/Nadir · Ashkaar–Zenith/Nadir · Crownhaven–anything but Elowen. The one long jump on the gym path is the **air leg** on Road 11 (Anchorhold's airships to Skyreach, Act III). Fly (B8) is optional.
+The **Crown Road** rings the Crownwall on Elowen ground (Wallshadow Row west and south, Candle Down east, the Highwold north, Kingsmead north-west); "all roads lead to it". Forced trips that would cross a forbidden border go round it instead (column "Elowen in between").
 
-**Walking the gym order** (crossings in order):
-| Leg | From → to | Crossing(s) |
-|---|---|---|
-| 0→1→2 | Ferrow's → Saltmere → Briarwick | inside Elowen: the Strand Road along the coast, then the Weavers' Road inland (the direct forest road is corded off until the Glass Matriarch falls) |
-| 2→3 | Briarwick → Ebbmouth | **A** Rimewood (south): Spinners' Rise, Frostwick Pass, Frostwick, Rimewood Path, the Rimewood; side road Frostflat Causeway back to Saltmere |
-| 3→4 | Ebbmouth → Lumen | **B** Icefall Locks: The Icefall Locks, Brassfall, Sluiceworks |
-| 4→5 | Lumen → Duneholt | **C** Brass Dunes: The Brass Dunes, Copperdune |
-| 5→6 | Duneholt → Mirefen | **D** Leach Canyons: The Leach Canyons, Charwell |
-| 6→7 | Mirefen → Cindervault | **E** Sulfur Reach: Lake Sallow, Scaldwater |
-| 7→8 | Cindervault → Ironreach | **E** again via the Ironway |
-| 8→9 | Ironreach → Verdance | **F** Rootdeep: The Rootdeep, Lanternroot |
-| 9→10 | Verdance → Rimeholt | **A2** northern Rimewood: The Hoarwood, Snowbriar |
-| 10→11 | Rimeholt → Skyreach | **B2** Mast Glacier: The Mast Glacier, Anchorhold, Cloudstair |
-| 11→12 | Skyreach → Lucent | **G** Wired Wood (Verdigris), then **H** Mirror Mere (Glassmere) → Antumbra Threshold |
-| 12→13 | Lucent → Cragholm | **I** Obsidian Barrows: The Obsidian Barrows, Vigil |
-| 13→14 | Cragholm → Gravenmoor | **I** again: Vigil's Grave Glass → Hindmoor |
-| 14→15 | Gravenmoor → Cogsworth | **I** (The Noonless Road's east gate) then **C'** Slag Mesa |
-| 15→16 | Cogsworth → Underveil | **L** Hanging Stair: The Hanging Stair, Midstair, the Drownings |
-| 16→17 | Underveil → Gloaming | **F** again (south): The Blindwater, Mothwell |
-| 17→18 | Gloaming → Wyrmrest | **J** Thornwar Marches: The Thornwar Marches, Thornwatch |
-| 18→Festival | Wyrmrest → Crownhaven | **K** Pilgrim Pass: R37, Pilgrim's Rest |
-| war arc | Cindervault → Cinder Cape | **M** Cinderglass Barrens 662/663, Glasswake (the war itself is across the sea) |
+**Walking the gym order** (crossings in order; the full leg lists are in §11 and ROUTES.yaml):
+| Leg | From → to | Crossing(s) | Elowen in between |
+|---|---|---|---|
+| 0→1→2 | Ferrow's → Saltmere → Briarwick | inside Elowen: the Strand Road along the coast, then the Weavers' Road inland (the direct forest road is corded off until the Glass Matriarch falls) | — |
+| 2→3 | Briarwick → Ebbmouth | **A** the Rimewood: Spinners' Rise, Frostwick Pass, Frostwick, Rimewood Path, the Rimewood; side road Frostflat Causeway back to Saltmere | — |
+| 3→4 | Ebbmouth → Lumen | **B** the Icefall Locks (the Icecutters' Haul, the Icefall Locks, Brassfall, Sluiceworks), then **G** the Arc-Lamp Mile into Lumen West Gate 582 | Coppice Ride 595, Wallshadow Row 594 |
+| 4→5 | Lumen → Duneholt | **G** the Meridian Mainline off the plateau, then **C** the Brass Dunes (Copperdune, Static Tunnels) | Candle Down 602, the Highwold 603 |
+| 5→6 | Duneholt → Mirefen | **D** the Leach Canyons (Charwell), then **F** the Gutterfall down into Nadir | Wormwood Lea 634 |
+| 6→7 | Mirefen → Cindervault | **E** Lake Sallow (Scaldwater) | — (Lake Sallow is the Elowen/Ashkaar borderland itself) |
+| 7→8 | Cindervault → Ironreach | **E** the Ironway, then **F** the Long Drop under Zenith's west rim | Candle Down 602 |
+| 8→9 | Ironreach → Verdance | **F** the Rootdeep (Lanternroot) | Prism Falls 681, the Briarway 693 |
+| 9→10 | Verdance → Rimeholt | **A2** the Hoarwood (Snowbriar) | the Hart's Run 700 |
+| 10→11 | Rimeholt → Skyreach | **B2** the Mast Glacier (Anchorhold), then the **air leg** over Ossaria and Elowen to the Tetherline 732 and the Cloudstair | (by air) |
+| 11→12 | Skyreach → Lucent | **G** the Wired Wood (Verdigris), then **H** the Looking-Glass Wood and Mirror Mere (Glassmere, gate A) | Candle Down 602, the Highwold 603, Kingsmead 756 |
+| 12→13 | Lucent → Cragholm | **I** the Obsidian Barrows (Vigil) | — |
+| 13→14 | Cragholm → Gravenmoor | **I** again: Vigil's Grave Glass (gate B) → Hindmoor | — |
+| 14→15 | Gravenmoor → Cogsworth | gate **C** the Slagglass out onto **G** the Slag Mesa | — |
+| 15→16 | Cogsworth → Underveil | **L** the Hanging Stair (Midstair), the Drownings | — |
+| 16→17 | Underveil → Gloaming | **F** again (south): the Blindwater (Mothwell) | the Gloamwood Verge 841 |
+| 17→18 | Gloaming → Wyrmrest | **J** the Thornwar Marches (Thornwatch) | the Gloamwood 860 |
+| 18→Festival | Wyrmrest → Crownhaven | **K** the Pilgrim Pass (Pilgrim's Rest), on Elowen ground, then Sovereign's Ascent | — |
+| war arc | Cindervault → the front | **M** the Cinderglass Barrens 662/663, Glasswake, then west across Ossaria's sands (§9) | — |
 
-| Code | Borderland | Biome blend and signature landmarks | Wild mix | Town (ID): trade · culture mix · tension · sidequest |
+| Code | Borderland | Biome blend, landmarks and member maps | Wild mix | Town (ID): trade · culture mix · tension · sidequest |
 |---|---|---|---|---|
-| A | **The Rimewood** (Elowen/Isenmar) | The Gossamer's oldwood frozen in hoar: ice-glazed giant trees, frozen silk curtains, fells turning to frost north of Briarwick, and salt flats turning to frost-flats along the coast road to Saltmere. Handfast Arch, Border Stones, Frost Loom, Silk-fall | Snover, Snom, Cubchoo, Swinub, Bergmite, Vanillite, Deerling, Stantler, Teddiursa, Smoochum, Delibird | **Frostwick 570**: rime-silk, honey and silk for furs, eel and whale oil · Elowen treehouses above Isenmar longhouses · Meridian survey pegs and the sunburst stamped over both seals · "The Two Hearths" |
-| A2 | Northern Rimewood | deep snow-forest of royal hunting lodges | as A + Abomasnow, Sawsbuck, Ursaring | **Snowbriar 710**: furs, venison · lodges + trappers · game laws vs clan rights · "The White Stag" |
-| B | **The Icefall Locks** (Isenmar/Zenith) | Frozen falls off the escarpment harnessed by brass sluices, turbines and an ice-lift. Lattice pylons frozen into the ice | Magnemite, Pawmi, Wattrel, Tadbulb, Snover, Bergmite, Plusle/Minun | **Brassfall 590**: cut ice for batteries and scrip · ice-cutters' union + lock engineers · scrip vs pay; the Lattice drains the Ebb · "The Ice Elevator" |
-| B2 | The Mast Glacier | airships ice-anchored to a glacier tongue | Ice × Flying/Steel | **Anchorhold 730**: mooring rights · anchor-smiths + pilots · smugglers vs embargo · "Cut Loose" |
-| C / C' | **The Brass Dunes** (Zenith/Ossaria) | Dune-buried locomotives, sand-scoured brass, a broken viaduct; slag mesas near Cogsworth | Sandshrew, Silicobra, Hippopotas, Phanpy, Rufflet, Electrike, Orthworm | **Copperdune 610**: fossils for coal and rails · caravanserai + freight depot · Meridian drill crews, tomb-robbers · "Tomb Freight" |
-| D | **The Leach Canyons** (Ossaria/Nadir) | Blue-glowing toxic canals through sandstone, poisoned fossil beds, mine adits | Ekans, Gulpin, Shroodle, Maschiff, Skorupi, Krokorok, Glimmet | **Charwell 630**: Ossarian bone-char filters clean Nadir's poison · char-burners + sump-folk · who owns clean water · "Clean Water" |
-| E | **The Sulfur Reach** (Nadir/Ashkaar) | Acid hot springs, sulfur flats, boiling yellow pools; Lake Sallow as a vast hot spring; the Ironway pass | Salandit, Charcadet, Numel, Scraggy, Houndour, Capsakid, Cyclizar | **Scaldwater 650**: sulfur, spa rights, mercenary contracts · the Truce of the Baths · Ashkaar recruiting Nadir youths for the war · "Truce of the Waters" (comic brawl) |
-| M | **The Cinderglass Barrens** (Ashkaar/Ossaria) | Obsidian dunes, a petrified ash forest, lava tubes, glass-storms | Carkol, Magcargo, Torkoal, Vibrava, Gible, Sudowoodo, Onix, Rhyhorn, Golett | **Glasswake 670**: glass, lenses, black mirrors (the source of the Grave Glass) · furnace-masters + sand-merchants · conscripted glassblowers, Elector tariffs · "The Glassblower's Apprentice" |
-| F | **The Rootdeep** (Nadir/Elowen) | Giant roots through mine shafts, glowing fungus, root-cathedrals, overgrown carts | Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy | **Lanternroot 690**: lamp-moss and mushroom ale for ore · fungus-growers + miners · sacred roots vs seams · "The Root That Bleeds". South hamlet **Mothwell 850** |
-| G | **The Wired Wood** (Zenith/Elowen) | Vine-wrapped Lattice pylons, clockwork orchards, greenhouse-factories, Glasswood crystals along the cables | Luxray, Boltund, Klang, Floette, Granbull, Tinkatuff | **Verdigris 750**: fruit and silk for tools · Meridian managers + orchard workers · the crystal creep · "Clockwork Bees" |
-| H | **The Looking-Glass Wood** (Elowen/Antumbra) | Reflections that disagree, rivers running uphill near Mirror Mere | Kirlia, Flittle, Rabsca, Ribombee | **Glassmere 753**: mirror-readings for bread · fisherfolk + "reflections" · people coming back reversed · "Your Other Half" |
-| I | **The Obsidian Barrows** (Antumbra/Ossaria) | A necropolis of obsidian tomb-mirrors that became gates; shadows fall upward; the inverted desert hangs in the sky | Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Houndstone | **Vigil 770**: embalming, consulting echoes · embalmers + mediums · tomb-law vs the Synod's claim on the dead · "The Unquiet Elector" |
-| L | **The Hanging Stair** (Zenith/Nadir) | The cliff beneath Zenith: cable lifts, outflow falls, shanty scaffolds, the drowned coast | Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty | **Midstair 830**: tolls on everything going up or down · servants + workers · Meridian curfews · "The Lift Strike" |
-| J | **The Thornwar Marches** (Elowen/Ashkaar) | Ash-grey giants with ember leaves that burn without dying, charcoal clearings, Thornwar forts, fire-lily meadows | Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon | **Thornwatch 870**: charcoal for tools · burners + smiths · Thornwar memory, the Dominar's legions · "The Truce Bell" |
-| K | **The Pilgrim Pass** (Ashkaar/Crownhaven) | Eighteen roadside shrines, pilgrim camps, Ashkaar toll-forts | mixed high level | **Pilgrim's Rest 890**: lodging, relics · every kingdom's pilgrims · tolls on a sacred road · "Eighteen Shrines" |
+| A | **The Rimewood** (Elowen/Isenmar) | The Gossamer's oldwood frozen in hoar: ice-glazed giant trees, frozen silk curtains, fells turning to frost north of Briarwick, salt flats turning to frost-flats along the coast road to Saltmere. Border Stones (both arms, Meridian sunburst bolted over). The Frost Loom. The Silk-fall. Hearth Stone. Maps: Frostflat Causeway 560, The Rimewood 562, Rimewood Glade 563, Frostwick Pass 577, Rimewood Path 578 | Snover, Snom, Cubchoo, Swinub, Bergmite, Vanillite, Deerling, Stantler, Teddiursa, Smoochum, Delibird | **Frostwick 570**: rime-silk, honey and silk for furs, eel and whale oil · Elowen treehouses above Isenmar longhouses · Meridian survey pegs and the sunburst stamped over both seals · "The Two Hearths" |
+| A2 | **The Hoarwood** (Elowen/Isenmar) | The northern Rimewood: deep snow-forest of royal hunting lodges. Snowbriar lodge. Frozen Bride-briar hedges. Maps: The Hoarwood 701 | as A + Abomasnow, Sawsbuck, Ursaring | **Snowbriar 710**: furs, venison · lodges + trappers · game laws vs clan rights · "The White Stag" |
+| B | **The Icefall Locks** (Isenmar/Elowen) | Where the Ebb falls off the Crownland downs onto Isenmar's frozen lowland: ice-falls cut into brass locks and sluices, frozen water-meadows, ice-cutters' sleds, Lattice pylons frozen into the ice. The Ice Elevator (cable lift hauling cut ice up the cliff). Frozen turbine wheels. Voltaic Sluiceworks. Maps: The Icefall Locks 581, Voltaic Sluiceworks 584, Sluiceworks Turbine Hall 585, The Icecutters' Haul 592 | Magnemite, Pawmi, Wattrel, Tadbulb, Snover, Bergmite, Deerling, Wooloo | **Brassfall 590**: cut ice for batteries and scrip · ice-cutters' union + lock engineers · scrip vs pay; the Lattice drains the Ebb · "The Ice Elevator" |
+| B2 | **The Mast Glacier** (Isenmar/Ossaria) | Tundra and permafrost dunes: a glacier tongue running out onto frozen sand, wind-carved ice-dunes, and airship masts anchored in the ice. Anchorhold's ice-anchors. Maps: The Mast Glacier 721 | Swinub, Piloswine, Cetoddle, Alolan Sandshrew, Snom, Hippopotas, Bergmite, Skarmory | **Anchorhold 730**: mooring rights · anchor-smiths + pilots · smugglers vs embargo · "Cut Loose" |
+| C | **The Brass Dunes** (Elowen/Ossaria) | Heath and dune scrub where the forest gives out: gorse and broom on the dune-feet, the buried Mainline, sand-scoured brass and a broken viaduct. The broken viaduct. Dune-buried locomotive. Slag mesas. Maps: The Brass Dunes 600, Static Tunnels 604, Static Tunnels Depths 605 | Sandshrew, Silicobra, Hippopotas, Phanpy, Cacnea, Skwovet, Rufflet, Orthworm | **Copperdune 610**: fossils for coal and rails · caravanserai + freight depot · Meridian drill crews, tomb-robbers · "Tomb Freight" |
+| D | **The Leach Canyons** (Ossaria/Elowen) | Red sandstone gorges with gallery forest along the River Leach; bone-char filter towers. Bone-char filter weirs. Glowing canal falls. Adit mouths. Maps: The Leach Canyons 621 | Sandile, Trapinch, Maractus, Gligar, Ekans, Skwovet, Deerling, Bramblin | **Charwell 630**: Ossarian bone-char filters clean the Leach before it reaches Nadir · char-burners + Elowen river-folk · who owns clean water · "Clean Water" |
+| E | **The Sulfur Reach** (Elowen/Ashkaar) | Ash woods and hot springs: scorched oaks around the sulfur lake, boiling yellow pools, the Ironway pass. The Truce Baths. Sulfur mines. The Ironway pass. Maps: Lake Sallow 641, The Ironway 661 | Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar, Bramblin, Fletchinder | **Scaldwater 650**: sulfur, spa rights, mercenary contracts · the Truce of the Baths · Ashkaar recruiting Elowen's lake-folk for the war · "Truce of the Waters" (comic brawl) |
+| F | **The Rootdeep** (Nadir/Elowen) | Under the plateau's foot: the Gossamer's roots through Nadir's mine shafts, glowing fungus, root-cathedrals; the roads that go down off the Crownland edge into Nadir (the Gutterfall under the north cliff, the Long Drop under the west rim); the Blindwater under the south coast. South hamlet: Mothwell (850). Lanternroot's mushroom farms. Root-cathedral. Flooded root river (south). Maps: The Rootdeep 680, The Blindwater 840, The Gutterfall 633, The Long Drop 672 | Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy | **Lanternroot 690**: lamp-moss and mushroom ale for ore · fungus-growers + miners · sacred roots vs seams · "The Root That Bleeds". South hamlet **Mothwell 850** |
+| G | **The Wired Wood** (Zenith/Elowen) | Industrial fringe and orchards round the plateau: vine-wrapped pylons, clockwork orchards, greenhouse factories, the Mainline cutting, Cogsworth's slag on the Slag Mesa. Verdigris orchard-factory. Crystallised pylon line. Maps: The Arc-Lamp Mile 593, The Meridian Mainline 612, The Wired Wood 741, The Slag Mesa 801 | Luxray, Boltund, Klang, Floette, Granbull, Tinkatuff, Applin, Bounsweet | **Verdigris 750**: fruit and silk for tools · Meridian managers + orchard workers · the crystal creep · "Clockwork Bees" |
+| H | **The Looking-Glass Wood** (Elowen/Antumbra) | Reflections that disagree, rivers running uphill near Mirror Mere (gate A). Mirror Mere. Glassmere's doubled houses. Maps: Mirror Mere 742, Antumbra Threshold 743, The Looking-Glass Wood 752 | Kirlia, Flittle, Rabsca, Ribombee | **Glassmere 753**: mirror-readings for bread · fisherfolk + "reflections" · people coming back reversed · "Your Other Half" |
+| I | **The Obsidian Barrows** (Antumbra/Ossaria) | A necropolis of obsidian tomb-mirrors that became gates (the Grave Glass, gate B); shadows fall upward. The Grave Glass. Mirrored tomb facades. Vigil's House of Echoes. Maps: The Obsidian Barrows 760 | Palossand, Golurk, Claydol, Runerigus, Inkay, Absol, Houndstone | **Vigil 770**: embalming, consulting echoes · embalmers + mediums · tomb-law vs the Synod's claim on the dead · "The Unquiet Elector" |
+| J | **The Thornwar Marches** (Elowen/Ashkaar) | Ash woods and burnt forest: ash-grey giants with ember leaves that burn without dying, charcoal clearings, Thornwar forts. Thornwatch truce bell. Burnt Thornwar fort. Ember-leaf canopy. Maps: The Thornwar Marches 861 | Scovillain, Centiskorch, Volcarona, Talonflame, Leavanny, Flygon | **Thornwatch 870**: charcoal for tools · burners + smiths · Thornwar memory, the Dominar's legions · "The Truce Bell" |
+| K | **The Pilgrim Pass** (Elowen/Crownhaven) | Eighteen roadside shrines from the Dominion's border to the Crownwall's gap; pilgrim camps of every kingdom. The Eighteen Shrines. Ashkaar toll-gate. Maps: The Pilgrim Pass 880 | mixed, high level | **Pilgrim's Rest 890**: lodging, relics · every kingdom's pilgrims · the Dominar's tolls on a sacred road · "Eighteen Shrines" |
+| L | **The Hanging Stair** (Zenith/Nadir) | The cliff under the plateau's south rim: cable lifts, outflow falls, shanty scaffolds, the drowned coast. Midstair's lift towers. The outflow falls. Rope-bridge streets. Maps: The Hanging Stair 820, The Drownings 821 | Magneton, Klang, Bisharp, Skuntank, Muk, Scrafty | **Midstair 830**: tolls on everything going up or down · servants + workers · Meridian curfews · "The Lift Strike" |
+| M | **The Cinderglass Barrens** (Ashkaar/Ossaria) | Volcanic ash desert: obsidian dunes, a petrified ash forest, lava tubes, glass-storms. Glasswake's furnace chimneys. The Petrified Ashwood. Glass-storm dunes. Maps: The Cinderglass Barrens 662, The Petrified Ashwood 663 | Carkol, Magcargo, Torkoal, Vibrava, Gible, Sudowoodo, Onix, Rhyhorn, Golett | **Glasswake 670**: glass, lenses, black mirrors (the source of the Grave Glass) · furnace-masters + sand-merchants · conscripted glassblowers, Elector tariffs · "The Glassblower's Apprentice" |
 Full Act I spec (Rimewood stretch) is in maps.json (560, 562, 563, 570–576, 561, 564, 565, 568) and §7. The rest are outlines.
 
 ---
@@ -484,7 +504,7 @@ Each leg: name, target size, landmark, secret. Fill lists follow when the act is
 - **The Kneeling Stones** (632, Ossaria, `:DESERT`, 90x80): Wind-cut pillars that look like bowed pilgrims. The crossroads of Ossaria. *Landmark:* The stones themselves, and the crossroads post: Duneholt, Charwell, Vigil. *Secret:* At dusk the stones' shadows point at one buried door.
 - **The Leach Canyons** (621, Borderland (Ossaria/Elowen), `:WASTELAND`, 100x100): Kept name: the red gorges the River Leach cut on its way out of the desert; the forest climbs in along the water. *Landmark:* Gallery forest in the gorge bottoms and the bone-char filter towers above. *Secret:* A dry side canyon with a clean spring that neither side knows about.
 - **Wormwood Lea** (634, Elowen, `:MEADOW`, 90x130): Bitter meadows along the Leach east of the Crown. The river is still clean here, and the wormwood keeps the leeches off. *Landmark:* The Leach's water-meadows, the wormwood stills, and the ford where the Ironway crosses. *Secret:* Where the Leach first turns blue, a pipe comes out of the bank. It is warm.
-- **The Gutterfall** (633, Nadir, `:CORROSIVE_MIRE`, 80x96): Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it. *Landmark:* The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it. *Secret:* A ledge behind the fall where the sump-folk leave their dead's lanterns.
+- **The Gutterfall** (633, Borderland (Nadir/Elowen), `:CORROSIVE_MIRE`, 80x96): Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it. *Landmark:* The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it. *Secret:* A ledge behind the fall where the sump-folk leave their dead's lanterns.
 
 **Road 7, The Sulfur Road** (Mirefen -> Cindervault, Act II). Out of the marsh by the leech-gatherers' causeway, round the sulfur lake of borderland E (the Sulfur Reach, Elowen/Ashkaar: burnt woods and hot springs), then the Dominion's first road.
 - **Leechman's Walk** (640, Nadir, `:CORROSIVE_MIRE`, 120x72): The plank causeway the leech-gatherers keep up. You pay them or you swim. *Landmark:* The leech-gatherers' stilts and the mouth of the Miasma Caverns. *Secret:* A sunk plank path that only shows when the marsh gas burns off.
@@ -494,7 +514,7 @@ Each leg: name, target size, landmark, secret. Fill lists follow when the act is
 **Road 8, The Iron Road** (Cindervault -> Ironreach, Act II). West again: the Ashmarch, the Ironway pass out of the Dominion (borderland E), the Crown Road round the Crownwall's east (Candle Down), then down the Long Drop into Ironreach under Zenith's west rim (Nadir). The war road (the Cinderglass Barrens, borderland M) leaves Cindervault's north gate for the front in Ossaria.
 - **The Ashmarch** (660, Ashkaar, `:ASHEN_WASTE`, 120x72): The legions' marching road. Ash falls on it every day and is swept every night. *Landmark:* The mile-forts and the Cinderhorn smoking to the south-east. *Secret:* A sweepers' tunnel under the road that the legion uses to move unseen.
 - **The Ironway** (661, Borderland (Elowen/Ashkaar), `:MOUNTAIN`, 150x70): Kept name: the pass the ore came down, on rails laid by Nadir and paid for by Ashkaar. *Landmark:* The ore-cart incline down to the Leach ford, the burnt woods either side, and the Truce Posts. *Secret:* A runaway ore cart you can ride down a closed spur.
-- **The Long Drop** (672, Nadir, `:SCRAPYARD`, 64x130): Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. *Landmark:* The winding-tower at the Crown Road's south junction, and the cage lift. *Secret:* A side adit sealed with a pit-fighter's handprint in iron.
+- **The Long Drop** (672, Borderland (Nadir/Elowen), `:SCRAPYARD`, 64x130): Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it. *Landmark:* The winding-tower at the Crown Road's south junction, and the cage lift. *Secret:* A side adit sealed with a pit-fighter's handprint in iron.
 - **The Cinderglass Barrens** (662, Borderland (Ashkaar/Ossaria), `:ASHEN_WASTE`, 130x90, side road): Kept name: obsidian dunes where sand met fire. *Landmark:* Black glass dunes and lava tubes: the volcanic ash desert where the Dominion meets the bone sands. *Secret:* A lava tube that comes out inside the Petrified Ashwood.
 - **The Wyrmtongue** (673, Ashkaar, `:VOLCANIC`, 64x120, side road): The spit of black lava that runs out to the Cape, forked at the end like a tongue. *Landmark:* The forked spit and the Warfort's beacon. *Secret:* At the fork's left tip, a sea cave that looks west along the coast to the smoke of the war in the sands.
 

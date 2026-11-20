@@ -194,7 +194,7 @@ events:
       - - {script: 'pbFadeOutIn { $game_player.moveto(48, 96) }'}
       - []
 - type: item
-  at: [10, 30]
+  at: [11, 30]
   item: POTION
 - type: item
   at: [40, 18]

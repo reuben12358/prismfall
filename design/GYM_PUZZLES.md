@@ -42,7 +42,7 @@ Optional Mastery rooms may sit up to **two points above** their gym; they never 
 | Gym | Warden · town | Type · field | Rating | Expected solve | Required puzzle (what you must do) | Moved out to stay in budget |
 |---|---|---|---|---|---|---|
 | 1 | Dorian · Saltmere (150, 154) | Normal · Grand Stage | **1** | 2 min | Walk up the aisle past three actors, pull one curtain rope, battle | The whole revolving stage → **D9 Playhouse Backstage** (optional, 4/10) |
-| 2 | Tamsin · Briarwick (130, 131) | Bug · Silkwood (doubles) | **3** | 6–10 min | One heddle (teach), then three linked heddles: each lifts two loom beds | Spools + brass Meridian wire + Granny's Knot → **Upper Lofts** (optional, 4/10 and 3/10) |
+| 2 | Tamsin · Briarwick (130, 131) | Bug · Silkwood (doubles) | **3** | 6–10 min | (Rev 19) Web trampolines in the elder's hollow: taut webs throw you, sticky webs hold you, two Joltik flip the webs on their strands | Spools + brass Meridian wire + Granny's Knot → **Upper Lofts** (optional, 4/10 and 3/10); the linked-heddle loom idea is parked for a later dungeon |
 | 3 | Marisol · Ebbmouth | Water · Water Surface | **4** | 10–15 min | Practice lock, then ONE basin: level wheel + drifting raft (≤ 8 actions) | Tide bell × lock gate combination → Overflow Culvert Mastery (6/10) |
 | 4 | Rook · Lumen City | Electric · Neon Grid | **5** | 15 min | Rotate conduits, tees and the alarm lamp | Drone-as-wire + latches → Live Wire Hall stays, but the latch board is the Edit Bay Mastery |
 | 5 | Sahar · Duneholt | Ground · Desert | **5** | 15–20 min | Sun-mirrors decide crust or sink; one drop is the way across | Two-floor loop of drops → Mural Gallery Mastery |
@@ -62,7 +62,7 @@ Optional Mastery rooms may sit up to **two points above** their gym; they never 
 
 **Built and proven** (`python3 -I mapgen/puzzle_check.py`, and again on the built maps by `build.py`; re-proved after the
 2026-11-19 art pass, which moved coordinates but no puzzle logic):
-Gym 1 auditorium 1 move / 2 states (1/10) · Gym 2 foyer 1 / 2 (1/10) · Gym 2 Weaving Hall 3 / 27 (3/10) · Upper Lofts
+Gym 1 auditorium 1 move / 2 states (1/10) · Gym 2 Canopy 2 / 4 (3/10; Rev 19 web trampolines) · Upper Lofts
 7 / 93 (4/10, unsolvable without the brass wire) · Granny's Knot 3 / 32 (3/10, unique) · Playhouse Backstage stage + loft
 5 / 39 (4/10, unsolvable without each scene and without the loft) · Trap Room 3 / 6 (3/10).
 **Gym 3 needs a trim before it is rebuilt** (owner of `gen_gym3.py`): its spec'd basins take 16 actions, which is a 6/10 room.
@@ -161,7 +161,7 @@ them, or where a state crosses maps.
 | # | Warden · field | Core rule | Teach → Twist → Combine → Mastery | ★ (see §0b for the 1–10 ratings) |
 |---|---|---|---|---|
 | 1 | Dorian · Grand Stage | **A walk-through** (Rev 14): the house loves a show | aisle, three actors, raise the curtain (D9 Backstage keeps the old revolving-stage puzzle) | 1/10 |
-| 2 | Tamsin · Silkwood | **Follow the thread**: each heddle moves what its silk ties to | one heddle → three linked heddles (Upper Lofts: spools + brass wire → Granny's Knot, optional) | 3/10 |
+| 2 | Tamsin · Silkwood | **A web throws you** (Rev 19): taut webs launch you, sticky webs hold you, Joltik change which is which | one web → a web onto a web → sticky webs to turn in mid-air → two Joltik on coupled strands (Upper Lofts: spools + brass wire → Granny's Knot, optional) | 3/10 |
 | 3 | Marisol · Water Surface | **Water lifts what floats, the current carries what's loose** | practice lock → three water levels × a drifting raft × the tide bell × a lock gate → snag culvert | 3 |
 | 4 | Rook · Neon Grid | **Route the power, never the alarm** | rotate conduits → tees and an alarm lamp → Rotom drone as a portable wire + latching relays → the empty Plate socket | 4 |
 | 5 | Sahar · Desert | **Sun hardens, shade sinks**: falling is a way across | one drop → sun-mirrors decide which lanes are crust and which sink → a two-floor loop where drops are transport → mural rubbing | 5 |
@@ -243,6 +243,24 @@ y29    the lobby doors (12,29)
 - **Trainers:** Juggler Florian (11,25) and Beauty Rosalind (13,20) stand in the aisle (sight 2), so walking up it means
   two battles; Juggler Ambrose (1,18) in the side aisle is optional. All use the Grand Stage field. Juno appears in the
   front row (10,18) once one actor is beaten.
+- **The Saltmere audience (SPINE Rev 19):** "the more people you meet around town, the more audience shows up for your
+  fight... based on the number of people in the crowd, the battle starts at a specific stage." V313 `STAGE_AUDIENCE`
+  counts the named Saltmere townsfolk you have talked to (18 of them, each once: `pfm_audience(:key)` on their events,
+  placed by the map builder, REQUESTS item 14) plus Sister Hollin's lantern quest (`EL_LANTERNS`, 3 seats).
+  - **The house fills:** ten regulars are always in; every person you met takes their own seat by the aisle (you can
+    talk to them: the Caramel Seller brought caramel for the interval); four more seats fill per head counted.
+  - **The show:** 0–6 is a sparse house, Grand Stage opens at stage 1 (Opening Night); 7–13 a good house, stage 2
+    (Encore); 14+ a full house, stage 3 (Standing Ovation): `setBattleRule("fieldStage", n)` before Dorian's battle
+    (`pf_house_rules`), and Dorian greets the house he sees.
+  - **What a bigger crowd does:** the Grand Stage's stages favour Normal moves (×1.3 → ×1.5), damaging sound and dance
+    moves (×1.3 → ×1.4 → ×1.5), and at Standing Ovation +1 critical-hit stage for every attack and 1/16 HP a round for
+    Normal types. Dorian's whole team is Normal (Aipom, Minccino with Echoed Voice and Round, Kecleon with Fury Swipes),
+    so a bigger house on its own makes him hit harder from turn one. Your fans balance it: from a good house up, the
+    people you met cheer for your side, so from Encore on your Pokémon also bask in the applause (1/16 HP a round; at
+    Standing Ovation non-Normal ones, since Normal types already do), and your own sound, dance and Normal moves get the
+    same boost. A full house is a louder, swingier show rather than a free win, and the box office sends up your share of
+    the takings after it ($150 a head). Runtime: `plugins/Prismfall Puzzles/007_Puzzles_SaltmereCrowd.rb`; the fans' rule
+    is one guarded line in `102_Field_GrandStage.rb` (active only in Dorian's battle).
 - **Field Notes:** on the first step up the aisle, the Grand Stage pop-up from the script ("the audience reacts…", with
   Larch's margin note), once per save (`pfm(:fn_grand_stage)`).
 - **The one interaction:** the curtain is in. The stagehand: "He won't come out till the curtain's up. That rope, there."
@@ -257,126 +275,65 @@ y29    the lobby doors (12,29)
 ---
 ## Gym 2 — Briarwick, the Loomhouse · Tamsin Loom (Bug, `:SILKWOOD`, cap 19, double battle) · 3/10, 6–10 min
 
-**SPINE Rev 14:** this was Gym 1; it is now the first real puzzle. The gym itself is two rooms (130 Foyer, 131 Weaving Hall);
-Tamsin waits on the Weaving Hall's top ledge. The spools, the brass Meridian wire and Granny's Knot became the optional
-**Upper Lofts** (132, 134), up the stairs behind her after the badge. Coordinates: `mapgen/puzzles/loomhouse.py`
-(authoritative; the tables below give the design, the module gives the built positions). Painted by `mapgen/gen_loomhouse.py`
-on tileset 54 (Rejuvenation timber-hall tiles + Prismfall looms, dye vats, silk bales, webs).
-Rejected Rev 13 interim (one-room hall with the Warden at the top): superseded by Rev 14 the same day.
+**SPINE Revision 19 (user):** "I dont understand gym 2, i dont get how the hall is supposed to represent a clearly bug type
+gym leader, can we redo the puzzle to be some type of web based trampoline puzzle?" The Weaving Hall (linked heddles over
+loom beds) is retired; its coupled-lever idea is parked for a later dungeon. Map IDs are unchanged: **130** is the weavers'
+lobby at the foot of Briarwick's elder tree (Granny Loom's looms, no puzzle) and **131 The Canopy** is the hollow of the
+elder itself, where Tamsin's Bug Pokémon spin silk across the drop. Tamsin waits on the top ledge; the Upper Lofts (132,
+134, optional after her badge) are up the stair behind her. Layout and logic: `mapgen/puzzles/canopy.py` (authoritative
+coordinates, the solver and the runtime registry); painted by `mapgen/gen_loomhouse.py` on tileset 54 (the elder's own
+bark from PF Rejuv, Sensei's House timber decks, webs, knot-holes, the drop and roots drawn in `hall_art.py`); the runtime
+is `plugins/Prismfall Puzzles/008_Puzzles_Webs.rb` (`pfp_web`).
 
-**Original design (Revision 10), adjusted:**
+**Core rule: a web throws you.** Step onto a TAUT web (drum-tight silver silk) and it launches you three tiles on, the way
+you stepped onto it. Land on another taut web and it throws you again, the same way. Land on a ledge or a STICKY web
+(sagging, yellow with dew) and you stop. Land on nothing and you drop into Tamsin's safety net, which lowers you back to the
+floor of the hollow (a free reset, with a "Sorry! — T.L." card pinned to it).
+**Warden link:** "A thread holds because it's twisted with others": the webs only work together. **Field link:**
+Silkwood (Electroweb runs the threads; the Joltik literally do it). **Bug, loudly:** webs, cocoons hung in the drop, moths
+on the wing (Dustox, Mothim, Beautifly, Masquerain, Venomoth), Spinarak, Sewaddle and Swadloon, a Leavanny tailoring a
+challenger's cloak, Joltik on the strands.
 
-**Core rule: follow the thread.** Every lever (a *heddle*) is tied by visible silk to what it moves. One pull can lift two
-things. Every pattern repeats after three pulls.
-**Warden link:** "A thread holds because it's twisted with others." Tamsin's coupled levers *are* that line. Her apology
-cards are the hint system. **The aha** belongs to the story: one cord in the Lofts is not silk but **brass Meridian wire**.
-It is not on the pattern card, and it moves something nobody expects: Tamsin's secret contract, felt as a puzzle mechanic.
-**Field link:** Silkwood (Electroweb runs the threads). Trainers carry Electroweb and Struggle Bug.
-**Kingdom:** Elowen weavers' guild craft. Every device is a loom part.
+### 130 Lobby (20×16) — the weavers
+Granny Loom's looms in rows, her first loom (the Ledger key) and portrait, dye vats, silk drying on a frame, yarn shelves,
+two tall windows with their light across the floor, a red runner to the stair up into the tree (15,4). The gym guide
+explains the webs and the Joltik; Weaver Pim; Tamsin's apology spiral. Exit mat (9,15) → Briarwick (`BW_GYM`).
 
-### State
-| ID | Name | Values | Room |
-|---|---|---|---|
-| V305 / V306 / V307 | `LOOM_A/B/C` | 0–2 (plank column of loom beds A, B, C) | 131 |
-| V308 | `LOOM_FOYER` | 0–1 | 130 |
-| V309 | `LOOM_BRIDGE` | 0 none · 1 P5→P6 · 2 P4→P6 | 132 |
-| S305 | `LOOM_ALPHA` | spool s1 destination | 132 |
-| S306 | `LOOM_BRASS` | spools s3/s4 destination (the brass wire also cycles V309) | 132 |
-| S307 | `LOOM_GAMMA` | spools s2/s5 destination | 132 |
-| S308 | `LOOM_KNOT` | Granny's Knot solved | 134 |
-| S309 | spare | | |
-
-Tiles: `PLANK` = 3807 (passable cross-board, used today). Hanging threads use the `custom` strand tiles (`CU['strand_*']`).
-
-### 130 Foyer — TEACH "the first thread" (20×25 as built, art pass 2026-11-19)
-**As built:** a straight hall, wall to wall: a four-row timber wall with two tall arched windows (their light falls across
-the floor and on into the loom bed), yarn shelves, silk drying on frames, dye vats, looms in pairs either side of a red
-runner, one loom bed across the room (its front beam, the floor a storey below, the warp over it). The plank starts at
-x5–6 (left); the heddle frame beside the aisle (11,12) is tied by a visible silk thread to it; **one pull** slides it into
-the aisle (V308 0/1). Bug Catcher Nell and Lass Orla flank the aisle; Tamsin's apology spiral; Pim (apprentice,
-`:lh_foyer`); the first loom (Ledger key). Stairs (15,4) → 131. Proof: 1 move, 2 states.
-
-*Revision 10 version (three balconies, period-3 heddle), kept for reference:*
+### 131 The Canopy — the gym (25×35)
 ```
-     012345678901234
-y0   vvvvvvvvvvvvvvv
-y1   vvvvvvvvvvvvEvv    E (12,1) stair → 131 (12,19)
-y2   vvv...v...v...v    balconies: A x3-5 · B x7-9 · C x11-13
-y3   vvv.i.v.c.v...v    i (4,3) Potion · c (8,3) apology card
-y4   vvvvvvvvvvvvvvv    gap, rows 4-5. Plank columns x4 / x8 / x12
-y5   vvvvvvvvvvvvvvv
-y6   v.............v
-y7   v..1..........v    1 = Training heddle (3,7)
-y8   v.........g...v    g gym guide (10,8)
-y9   v...s.......L.v    s apology card (4,9) · L "First loom" (12,9)
-y10  vvv.....A...vvv    A apprentice "Weaver Pim" (8,10)
-y11  vvvvvv...vvvvvv
-y12  vvvvvvv@vvvvvvv    @ exit mat (7,12), link BW_GYM
+y1-3   the elder's bark (knot-holes, webs in the corners); the Upper Lofts stair (20,2-3)
+y4-7   Tamsin's ledge x15-23: Tamsin (17,5), Gentleman Bram (22,6)          the Joltik perch x1-3 y5-6: Joltik 2 (1,5)
+y4-9   COMBINE drop: web B (12,6) and C (13,6), web A (12,9); the perch webs (2,9) up and (2,7) down
+y10-11 ledge 3: Joltik 1 (16,10), the Joltik card
+y12-16 TWIST drop: web (6,16) up → sticky (6,13); web (7,13) → sticky (10,13); sticky (10,12) → ledge 3.
+       Traps: (5,13) and (11,13) throw you sideways into the drop; (14,16) throws you up into it.
+y17-18 ledge 2: Lass Orla (20,17) watches the landing; the sticky card
+y19-23 TEACH 2: web (18,23) throws you onto web (18,20), which throws you on to ledge 2
+y24-25 ledge 1: Bug Catcher Nell (4,24, optional), Leavanny tailoring
+y26-28 TEACH 1: web (12,28) → ledge 1
+y29-33 the floor of the hollow: the first card, Pim (apprentice, `:lh_canopy`), Juno with the hatbox; stair down (12,34)
 ```
-| Event | Pages |
-|---|---|
-| `Plank F 4,y` (y = 4, 5) | P0 [—] tile PLANK · P1 [V308≥1] blank |
-| `Plank F 8,y` | P0 [—] blank · P1 [V308≥1] tile PLANK · P2 [V308≥2] blank |
-| `Plank F 12,y` | P0 [—] blank · P1 [V308≥2] tile PLANK |
-| `Training heddle` (3,7) | P0 [—] lever graphic · action → `pfp_cycle(308, 3)`, SE "Door exit", text "You pull the heddle. The silk thread running up from it twitches, and out over the gap a plank slides along." |
-| `Tamsin` (7,8) | the existing apology spiral, then she walks off east and erases (self A) |
-| `First loom` (12,9) | the existing Ledger-key branch. The `else` text adds the pattern: "The warp stops mid-row: *up, down, up, down, up* — and then nothing, as if she meant to come back to it." (This is the Mastery target, 134.) |
-| Apology card c (8,3) | "Three pulls and it's back where it started. Sorry! I didn't design it. — T.L." |
-
-**Solution:** pull twice: the plank goes x4 → x8 → x12. Walk the x12 plank to balcony C and climb the stairs. The first
-pull is rewarded either way (balcony B holds the hint card, A the Potion).
-**Teaches:** that a lever moves something far away, that a visible thread shows the link, and that the cycle has period 3.
-There is no failure state.
-
-### 131 Weaving Hall — TWIST "two threads per heddle" (25×24 as built) — the gym's puzzle
-**As built (art pass 2026-11-19):** the grid below shifted down four rows (three loom beds at rows 7–10, 13–15, 18–21).
-The north wall is four rows of timber with four tall arched windows; their light falls across the top walkway and into
-loom bed A. Each loom bed shows its depth: the walkway's front beam with the warp tied over it, the hall's floor a storey
-below in shadow (bolts of silk, yarn baskets, support posts at both ends), the warp stretched across, the back beam. The
-two heddles that lift a bed are tied round its beam in their colours at the left and right ends. Heddles are frames
-(colour + header), not posts. Tamsin stands on the top ledge at (11,5); the stairs behind her (12,3) go to the Upper
-Lofts once you hold her badge. Gentleman Bram is on the top ledge; Nell and Orla are in the Foyer. Battle:
-`Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`. Proof on the built map: 3 moves (Red, Gold, Green once
-each), 27 states, no soft-lock.
-```
-     0123456789012345678901234
-y0   ############E############    E (12,0) → 132 (2,22)
-y1   #.T.....................#    T Gentleman Bram (2,1)
-y2   #.......................#    ledge N (full)
-y3   #vvvvvvvvvvvvvvvvvvvvvvv#    gap A rows 3-6: planks x3 / x12 / x21
-y4   #vvvvvvvvvvvvvvvvvvvvvvv#
-y5   #vvvvvvvvvvvvvvvvvvvvvvv#
-y6   #vvvvvvvvvvvvvvvvvvvvvvv#
-y7   #....oooooo...oooooo..T.#    ledge 2: segments x1-4 | x11-13 | x20-23 · T Lass Orla (22,7)
-y8   #.n..oooooo...oooooo....#    n torn-net sign (2,8)
-y9   #vvvvvvvvvvvvvvvvvvvvvvv#    gap B rows 9-11: planks x12 / x21 ONLY (x3 is torn)
-y10  #vvvvvvvvvvvvvvvvvvvvvvv#
-y11  #vvvvvvvvvvvvvvvvvvvvvvv#
-y12  #....oooooo...oooooo....#    ledge 1: same three segments
-y13  #....ooooooT..oooooo....#    T Bug Catcher Nell (11,13), facing east (x12 landings stay clear)
-y14  #vvvvvvvvvvvvvvvvvvvvvvv#    gap C rows 14-17: planks x3 / x12 / x21
-y15  #vvvvvvvvvvvvvvvvvvvvvvv#
-y16  #vvvvvvvvvvvvvvvvvvvvvvv#
-y17  #vvvvvvvvvvvvvvvvvvvvvvv#
-y18  #.......................#    ledge S (plank landings x3 / x12 / x21 stay clear)
-y19  #....R...G..@..A...N....#    heddles R (5,19) G (9,19) N=Green (19,19) · A apprentice (15,19)
-y20  ############.############    entrance (12,20) from 130
-```
-- **Heddles** (mod 3): **Red lifts A and B · Gold lifts B and C · Green lifts C and A.** Each is a lever event,
-  action → `pfp_cycle(305,3)` + `pfp_cycle(306,3)` (Red), and so on. Text: "The red heddle rises. Two threads lift with it."
-  A strand of the heddle's colour runs up the east and west walls to the two gaps it lifts (decor, layer 2).
-- **Planks**: for gap A at y = 3–6 and gap C at y = 14–17, the columns x3 / x12 / x21 use the same 2–3 page pattern as 130
-  (column k shown at V == k). Gap B (y = 9–11) has columns x12 and x21 only. Column x3 of gap B is never drawn.
-  Sign n: "The x3 warp snapped. Sorry! Use the other two. — T.L."
-- **Geometry rule:** the silk walls split ledges 1 and 2 into three segments, one per column. So you can only climb when
-  **all three planks share a column**. Column x3 is out (torn), so the targets are **(1,1,1) or (2,2,2)**.
-- **Solution (verified, BFS):** pull **Red, Gold, Green once each** → (2,2,2). Climb the x21 column (Orla battles you on
-  ledge 2). The longer alternative is each heddle twice → (1,1,1), the middle column.
-- **The twist:** a player who fixes one row at a time breaks the row they just fixed. Pulling all three once lifts every
-  thread exactly twice. That is the pattern card's own wording ("Red lifts the warp and the weft…").
-- **Hints (Pim):** 1 "Every heddle lifts two rows. Count lifts, not pulls." 2 "Three heddles, three rows: what if
-  each row got lifted the same number of times?" 3 the solution.
-- **Reset:** Pim → V305–307 = 0. Pulls are also self-undoing (three pulls = no change).
+- **Teach:** one web, straight up (and a card: "mind which way you're facing"); then a web that throws you onto a web.
+- **Twist (sticky webs):** bounce up onto a sticky web in mid-air, step sideways onto a taut one and you are thrown
+  sideways onto the next sticky web; walk up the last one to ledge 3. Sticky webs are how you turn round in the air. The two
+  webs either side of the first sticky web, and the one beside the start, throw you into the drop.
+- **Combine (Joltik):** a Joltik sparks its strand and every web on it changes: taut goes slack (sticky), slack goes
+  taut. The strands are drawn: gold from Joltik 1 to webs A and B, blue from Joltik 2 to webs B and C (B hangs on both).
+  All three start slack. Tamsin's ledge needs A taut (throws you up), B sticky (holds you), C taut (throws you across).
+  - Joltik 1 alone makes A and B taut: they throw you straight up the trunk and into the net (the trap the obvious
+    move walks into).
+  - Joltik 2 is on a perch you reach by a web from ledge 3 (and leave by another).
+  - **Solution:** spark both Joltik once each → A taut, B slack, C taut. Up, stop, across.
+- **State:** V305 / V306 / V307 `CANOPY_WEB_A/B/C` (0 as built, 1 sparked). V308 is free.
+- **Hints (Pim):** 1 "A Joltik's spark runs the whole strand. Look at which webs hang on each one." 2 "Up there you want to
+  go up, stop, then go across. Taut throws, sticky stops." 3 the solution.
+- **Proof** (`puzzle_check.py`, and on the built map): 2 moves (Joltik 1, Joltik 2), rating 3; unsolvable without either
+  Joltik; Joltik 1 alone throws you into the net; every web lands where the design says. The built-map proof keeps the web
+  rules, so a prop dropped on a landing tile fails the build (it caught a Kakuna on the perch's landing).
+- **Battle:** `Prismfall.gym_battle(pfm_gym(:LEADER_TAMSIN), double: true)`; win → the Weft Badge, TM89, the confession
+  (`:ch2_tamsin`), the Shuttle.
+- **Trainers:** Lass Orla (ledge 2, unavoidable: she watches the landing), Bug Catcher Nell (ledge 1, optional),
+  Gentleman Bram (Tamsin's ledge, optional).
 
 ### 132 Canopy Lofts — UPPER LOFTS, optional after the badge (4/10) "spools, cords and the brass wire" (25×26)
 **As built:** P6's exit leads to Granny's Knot (134); there is no trunk door. Proof: **7** actions (the spec said 8; the

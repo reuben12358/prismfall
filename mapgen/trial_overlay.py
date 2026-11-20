@@ -1,0 +1,171 @@
+"""trial_overlay.py - the Trial events of design/TRIAL_EVENTS.yaml (Chapters 0-4) laid over maps whose layouts other
+scripts own (map builder 9).  build.py calls apply(specs, cell_passable) after loading the specs, the way it merges the
+puzzle modules' EVENTS, so the layout scripts stay untouched and a re-run of any of them keeps these events.
+
+  EVENTS[mid] = [event, ...]   an event's `near` is an (x, y) anchor or '@Event name'; it is seated on the nearest free
+                               walkable cell (Essentials' passability on the spec's own layers) with a free neighbour.
+  PATCHES[mid] = {event name: KEY}   an existing story NPC gets the branch
+                               {if: pf_trial_ready?(:KEY), then: pf_trial_talk(:KEY), else: <its own lines>}.
+Skipped on purpose (a distribution agent is moving them): the Timburr gift at Ferrow's berth with its three boatyard
+planks (EL_LAST_PLANK), and the Crabrawler/Clobbopus tide-pool feud with its sea cave on Lacecliff Walk.
+Visibility conditions are the plugin's {comment: 'Condition: ...'} first command, on a page after an empty first page."""
+import os, json
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+TALK = lambda key: {'script': 'pf_trial_talk(:%s)' % key}
+
+
+def ev(name, near, key=None, sprite=None, tile=None, cond=None, condition=None, trigger='action', cmds=None, d='down', move='fixed', through=False):
+    pg = {'trigger': trigger, 'commands': ([{'comment': 'Condition: ' + condition}] if condition else []) + (cmds or [TALK(key)])}
+    if sprite: pg['graphic'] = {'sprite': sprite, 'dir': d}
+    if tile: pg['graphic'] = {'tile': tile}
+    if cond: pg['cond'] = cond
+    if move != 'fixed': pg['move'] = move
+    if through: pg['through'] = True
+    pages = [{'commands': []}, pg] if (condition or cond) else [pg]
+    return {'type': 'event', 'name': name, 'near': near, 'pages': pages}
+
+
+ST = {'switch': 'CH1_STARTER_GOT'}
+KIOSK = 4787            # tileset 34 (Tectonic Inside) console: the brass Grant Kiosk P-3NNY
+EVENTS = {
+    100: [ev('Brother Teasel', '@Accord plaque', 'TEASEL', 'NPC 23', cond=ST),
+          ev('Lantern rope', '@Accord plaque', cond=ST, cmds=[{'script': 'pf_trial_board(:ELOWEN)'}], sprite='Object ball'),
+          ev('Tart stall (thief)', '@Wenna Hale', 'TART_STALL', 'Followers/NICKIT', condition='quest_step(:EL_TART_THIEF) == :ask', trigger='touch'),
+          ev('Nickit (kelp racks)', '@Kelp-drier', 'NICKIT_SIGHTING', 'Followers/NICKIT', trigger='touch',
+             condition='quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 1'),
+          ev('Nickit (under the pier)', '@Old Sailor', 'NICKIT_SIGHTING', 'Followers/NICKIT', trigger='touch',
+             condition='quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 2'),
+          ev('Nickit (lighthouse steps)', '@Lighthouse door', 'NICKIT_SIGHTING', 'Followers/NICKIT', trigger='touch',
+             condition='quest_step(:EL_TART_THIEF) == :chase && chase(:EL_TART_THIEF) == 3'),
+          ev('Washing line', '@Woman hanging washing', 'DEED_WASHING', condition='!deed(:fl_washing)'),
+          ev('Tipped kelp basket', (31, 45), 'DEED_KELP', condition='!deed(:fl_kelp)'),
+          # the laid-up Dovetail can be boarded after Chapter 1 (Master of Nothing): a gangplank at the berth
+          ev('Dovetail gangplank', (34, 52), cond={'switch': 'CH1_ORCHARD_DONE'}, cmds=[
+              'The Dovetail lies at her berth, laid up for the closed strait. A gangplank is down.',
+              {'choices': ['Go aboard.', 'Not now.'], 'cancel': 1, 'branches': [[{'transfer': {'map': 109, 'x': 9, 'y': 14, 'dir': 'up'}}], []]}])],
+    103: [ev('Nickit (loft)', '@Kestrel (loft)', 'LOFT_NICKIT', 'Followers/NICKIT', condition='quest_step(:EL_TART_THIEF) == :loft')],
+    108: [ev('Grant Kiosk P-3NNY', '@Customs officer', 'KIOSK_PENNY', tile=KIOSK, cond=ST),
+          ev('Crate 7-B', '@Customs officer', tile=4168, condition='!quest_done(:ZE_FORM_7B)',
+             cmds=['Two small flames flicker between the slats. They are very low.'])],
+    109: [ev('Wattrel nest', (12, 9), 'DOVETAIL_NEST', 'Followers/WATTREL',
+             condition='quest_step(:EL_MASTER_OF_NOTHING) == :ask || (quest_done(:EL_MASTER_OF_NOTHING) && badges < 3)')],
+    522: [ev('Glass hoofprints 1', (8, 34), 'ORCHARD_HOOFPRINT', trigger='touch', condition='quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 0'),
+          ev('Glass hoofprints 2', (18, 20), 'ORCHARD_HOOFPRINT', trigger='touch', condition='quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 1'),
+          ev('Glass hoofprints 3', (30, 12), 'ORCHARD_HOOFPRINT', trigger='touch', condition='quest_active(:EL_GLASS_FOAL) && chase(:EL_GLASS_FOAL) == 2'),
+          ev('Glass foal', (34, 10), 'GLASS_FOAL', 'Followers/PONYTA_1', condition='quest_step(:EL_GLASS_FOAL) == :foal')],
+    143: [ev('Grant Kiosk P-3NNY/1', (9, 5), 'KIOSK_PENNY_SALTMERE', tile=KIOSK)],
+    145: [ev('Prop lantern', (2, 4), 'PROP_LANTERN', 'Followers/KECLEON', condition='quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :prop_room)'),
+          ev('Ottilie', (6, 6), 'STAGEHAND', 'NPC 16', condition='!quest_flag(:EL_LANTERNS, :stagehand) || quest_done(:EL_LANTERNS)'),
+          ev('Empty stage (silence)', (8, 8), 'SILENCE_STAGE', condition='quest_step(:EL_SOUND_OF_SALTMERE) == :ask && !quest_flag(:EL_SOUND_OF_SALTMERE, :stage)'),
+          ev('Marguerite Fane', (10, 4), 'FANE', 'NPC 18', cond={'switch': 'CH3_PAGEANT_DONE'}, condition='quest_state(:EL_PAINT_LOFT) != :done')],
+    146: [ev('Boat lantern', (39, 37), 'BOAT_LANTERN', condition='quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :boat)'),
+          ev('Breakwater end', (84, 61), 'BREAKWATER_END', condition='quest_active(:EL_SOUND_OF_SALTMERE)'),
+          ev('Sergeant Brakka', (84, 50), 'BRAKKA', 'NPC 21'),
+          ev('Barge herald', (82, 52), sprite='NPC 22', cmds=['Barge herald: Brand up with the Sergeant. The gong does not ring itself. Well. Once. There was a storm.'])],
+    147: [ev('Ropewalk lantern', (40, 58), 'ROPEWALK_LANTERN', condition='quest_step(:EL_LANTERNS) == :search && !quest_flag(:EL_LANTERNS, :ropewalk)'),
+          ev('Empty ropewalk (silence)', (84, 58), 'SILENCE_ROPEWALK',
+             condition='quest_step(:EL_SOUND_OF_SALTMERE) == :ask && !quest_flag(:EL_SOUND_OF_SALTMERE, :ropewalk)')],
+    525: [ev('Moth nests', (30, 20), 'MOTH_NESTS')],
+    562: [ev('Frost hive', (30, 30), 'RIMEWOOD_HIVE', tile=None)],
+    573: [ev('Ingrith', (4, 6), 'INGRITH', 'NPC 22'), ev('Sister Maelon', (12, 6), 'MAELON', 'NPC 28'), ev('Brenna and Sigvald', (8, 8), 'BRENNA_SIGVALD', 'NPC 14')],
+    561: [ev('Parcel rattle', (15, 10), 'PARCEL_RATTLE', trigger='touch', condition='quest_step(:IS_OATH_PARCEL) == :carry && !quest_flag(:IS_OATH_PARCEL, :rattled)'),
+          ev('Old Asta', (8, 30), 'ASTA', 'NPC 27'),
+          ev('Egg ledge', (22, 18), 'EGG_LEDGE', 'Followers/BOMBIRDIER', condition='quest_step(:IS_EGG_THIEF) == :ask')],
+    160: [ev('Gorm', (24, 31), 'GORM', 'NPC 21'), ev('Grant Kiosk P-3NNY/2', (24, 20), 'KIOSK_PENNY_EBB', 'Object ball'),
+          ev('Upper mill-wheel', (14, 12), 'WHEEL_UPPER', condition='quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :upper)'),
+          ev('Guild mill-wheel', (10, 20), 'WHEEL_GUILD', condition='quest_step(:ZE_LATTICE_HUM) == :ask && !quest_flag(:ZE_LATTICE_HUM, :guild)'),
+          ev('Harbour mast Wattrel', (31, 31), 'EBB_MAST', 'Followers/WATTREL',
+             condition='quest_done(:EL_MASTER_OF_NOTHING) && badges >= 3 && event_mon(:EL_WATTREL) != :gifted')],
+}
+PATCHES = {100: {'Wenna Hale': 'WENNA', 'Rope-skipping Girl 1': 'DEED_ROPE', 'Old Sailor': 'DEED_SAILOR'},
+           103: {'Professor Larch': 'LARCH'}, 106: {'Hesper Vane': 'HESPER'}, 107: {'Dockmaster': 'DOCKMASTER'},
+           108: {'Customs officer': 'CUSTOMS_OFFICER'}, 523: {'Farmer Hale': 'COLL'}, 140: {'Caramel Seller': 'CARAMEL_SELLER'},
+           120: {'Loyal Three shrine': 'SHRINE_SQUARE'}, 123: {'Hett': 'HETT'}, 576: {"Halvard's daughter": 'HALVARD'}}
+
+
+def _layers(spec):
+    """the spec's own tile layers (raw specs: the .npy; Room interiors: the tiles list); None if not knowable here"""
+    if spec.get('raw'):
+        return np.load(os.path.join(HERE, spec['raw'])).astype(np.int32), spec['tileset']
+    if spec.get('tiles') and spec.get('palette') == 'interior' and spec.get('map'):
+        rows = spec['map'].strip('\n').split('\n'); H, W = len(rows), len(rows[0])
+        L = np.zeros((3, H, W), np.int32)
+        for t in spec['tiles']:
+            x, y = t['at']; L[t.get('layer', 0), y, x] = t['tile']
+        return L, 34
+    return None
+
+
+def _seat(spec, near, taken, passable, tilesets):
+    got = _layers(spec)
+    x0, y0 = near
+    if got is None: return [x0, y0]
+    L, tid = got; ts = tilesets[tid]; H, W = L.shape[1:]
+    pas = np.array([[passable(L, ts, x, y) for x in range(W)] for y in range(H)])
+    seeds = [tuple(e['at'][:2]) for e in spec.get('events', []) if e.get('type') in ('warp', 'door', 'exit') and e.get('at')]
+    seeds += [tuple(p) for p in spec.get('walk_from', [])]
+    reach = np.zeros_like(pas); st = []
+    for sx, sy in seeds:
+        for dx, dy in ((0, 0), (0, 1), (0, -1), (1, 0), (-1, 0)):
+            if 0 <= sx + dx < W and 0 <= sy + dy < H and pas[sy + dy, sx + dx]: st.append((sx + dx, sy + dy))
+    while st:
+        x, y = st.pop()
+        if reach[y, x]: continue
+        reach[y, x] = True
+        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            if 0 <= x + dx < W and 0 <= y + dy < H and pas[y + dy, x + dx] and not reach[y + dy, x + dx]: st.append((x + dx, y + dy))
+    if not reach.any(): reach = pas
+    ok = lambda x, y: 0 <= x < W and 0 <= y < H and reach[y, x] and (x, y) not in taken
+    for r in range(0, 16):
+        best = None
+        for y in range(y0 - r, y0 + r + 1):
+            for x in range(x0 - r, x0 + r + 1):
+                if max(abs(x - x0), abs(y - y0)) != r or not ok(x, y): continue
+                if sum(ok(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))) < 2: continue
+                if any((x + dx, y + dy) in taken for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))): continue
+                d = abs(x - x0) + abs(y - y0)
+                if best is None or d < best[0]: best = (d, x, y)
+        if best: return [best[1], best[2]]
+    return [x0, y0]
+
+
+def _branch(e, key):
+    test = 'pf_trial_ready?(:%s)' % key
+    if e.get('type') in ('npc',) or (e.get('type') == 'sign'):
+        own = list(e.get('commands') or ([e['text']] if e.get('text') else []))
+        head = [own.pop(0)] if own and isinstance(own[0], dict) and 'pfm_audience' in str(own[0].get('script', '')) else []
+        if e.get('type') == 'sign':
+            e['type'] = 'event'; e['pages'] = [{'trigger': 'action', 'commands': [{'if': test, 'then': [TALK(key)], 'else': own}]}]
+            e.pop('text', None); return
+        e['commands'] = head + [{'if': test, 'then': [TALK(key)], 'else': own}]; e.pop('text', None); return
+    for pg in e.get('pages') or []:
+        cmds = list(pg.get('commands') or [])
+        if pg.get('trigger', 'action') == 'action' and pg.get('graphic') and cmds:
+            head = [cmds.pop(0)] if isinstance(cmds[0], dict) and 'pfm_audience' in str(cmds[0].get('script', '')) else []
+            pg['commands'] = head + [{'if': test, 'then': [TALK(key)], 'else': cmds}]
+
+
+def apply(specs, passable, tilesets):
+    by = {s['id']: s for s in specs}
+    import copy
+    for mid, evs in EVENTS.items():
+        s = by.get(mid)
+        if not s: continue
+        s.setdefault('events', [])
+        taken = {tuple(e['at'][:2]) for e in s['events'] if e.get('at')}
+        names = {e.get('name'): tuple(e['at'][:2]) for e in s['events'] if e.get('at')}
+        for e in copy.deepcopy(evs):
+            near = e.pop('near')
+            if isinstance(near, str) and near.startswith('@'):
+                near = names.get(near[1:], (5, 5))
+            e['at'] = _seat(s, tuple(near), taken, passable, tilesets)
+            taken.add(tuple(e['at'])); s['events'].append(e)
+    for mid, pats in PATCHES.items():
+        s = by.get(mid)
+        if not s: continue
+        for e in s.get('events', []):
+            if e.get('name') in pats and not e.get('_trial'):
+                _branch(e, pats[e['name']]); e['_trial'] = True
+        for e in s.get('events', []): e.pop('_trial', None)

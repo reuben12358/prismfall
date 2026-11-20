@@ -30,6 +30,18 @@ events:
     x: 12
     y: 28
     dir: up
+- type: event
+  name: House count
+  at:
+  - 0
+  - 1
+  pages:
+  - trigger: parallel
+    commands:
+    - script: pf_audience_sync
+    - raw:
+      - 116
+      - []
 - type: npc
   name: Usher
   at:
@@ -39,6 +51,8 @@ events:
   dir: down
   commands:
   - 'Usher: Ah, our challenger! Tonight''s bill: Dorian Pell, in person. Through the doors, up the aisle, onto the stage.'
+  - script: 'pbMessage(_INTL("Usher: And tonight we have {1}. Everyone you shake hands with in Saltmere ends up in a seat,
+      you know. It''s that sort of town.", pf_house_name))'
   - 'Usher: The cast may want a word on your way. Actors. They always want a word.'
 - type: npc
   name: Gym guide
@@ -1396,533 +1410,1676 @@ events:
       var:
       - STAGE_CURTAIN
       - 1
-- type: npc
-  name: Audience 0
+- type: event
+  name: Fan caramel_seller
   at:
-  - 9
+  - 14
   - 18
-  sprite: trainer_BEAUTY
-  dir: up
-  text: (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
-- type: npc
-  name: Audience 1
-  at:
-  - 15
-  - 18
-  sprite: NPC 23
-  dir: up
-  text: (whispering) Shh! It's about to start.
-- type: npc
-  name: Audience 2
-  at:
-  - 16
-  - 18
-  sprite: trainer_LADY
-  dir: up
-  text: (whispering) I came for the chandelier, honestly.
-- type: npc
-  name: Audience 3
-  at:
-  - 19
-  - 18
-  sprite: trainer_LADY
-  dir: up
-  text: (whispering) I came for the chandelier, honestly.
-- type: npc
-  name: Audience 4
-  at:
-  - 21
-  - 18
-  sprite: trainer_PAINTER
-  dir: up
-  text: (whispering) Third night running. I know every line. Don't tell him.
-- type: npc
-  name: Audience 5
-  at:
-  - 2
-  - 19
-  sprite: NPC 21
-  dir: up
-  text: (whispering) The footlights make everyone look braver. Even me.
-- type: event
-  name: Audience 6
-  at:
-  - 3
-  - 19
   pages:
-  - graphic:
-      sprite: trainer_GAMBLER
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 29
       dir: up
+    commands:
+    - 'Caramel Seller: Salt-caramel for the interval! You''re my best customer, so you get the crunchy bits.'
 - type: event
-  name: Audience 7
-  at:
-  - 4
-  - 19
-  pages:
-  - graphic:
-      sprite: trainer_SCIENTIST
-      dir: up
-- type: event
-  name: Audience 8
-  at:
-  - 5
-  - 19
-  pages:
-  - graphic:
-      sprite: NPC 09
-      dir: up
-- type: event
-  name: Audience 9
-  at:
-  - 7
-  - 19
-  pages:
-  - graphic:
-      sprite: NPC 17
-      dir: up
-- type: event
-  name: Audience 10
-  at:
-  - 8
-  - 19
-  pages:
-  - graphic:
-      sprite: NPC 10
-      dir: up
-- type: event
-  name: Audience 11
-  at:
-  - 9
-  - 19
-  pages:
-  - graphic:
-      sprite: NPC 09
-      dir: up
-- type: npc
-  name: Audience 12
+  name: Fan busker
   at:
   - 10
   - 19
-  sprite: trainer_PAINTER
-  dir: up
-  text: '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
-- type: npc
-  name: Audience 13
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 27
+      dir: up
+    commands:
+    - 'Busker: I''ll play you on. Quietly. The conductor glares.'
+- type: event
+  name: Fan ogre_child
   at:
   - 14
   - 19
-  sprite: NPC 02
-  dir: up
-  text: (whispering) Third night running. I know every line. Don't tell him.
-- type: event
-  name: Audience 14
-  at:
-  - 18
-  - 19
   pages:
-  - graphic:
-      sprite: trainer_SCIENTIST
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 17
       dir: up
+    commands:
+    - 'Child with an Ogre puppet: The Ogre came to watch you! He says GRAAH. That means good luck.'
 - type: event
-  name: Audience 15
+  name: Fan retired_actor
   at:
+  - 10
   - 20
-  - 19
   pages:
-  - graphic:
-      sprite: trainer_GAMBLER
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 24
       dir: up
+    commands:
+    - 'Retired Actor: Breathe from the belly. Stand like you own the boards. You do, tonight.'
 - type: event
-  name: Audience 16
+  name: Fan hound_two
   at:
+  - 14
+  - 20
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 23
+      dir: up
+    commands:
+    - 'Hound Number Two: GRR. On the beat. For you!'
+- type: event
+  name: Fan fishwife
+  at:
+  - 10
   - 21
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_FISHERMAN
+      dir: up
+    commands:
+    - 'Fishwife: No tint at all, and look at you, top of the bill. I''ll gossip about you for a WEEK.'
+- type: event
+  name: Fan ferry_woman
+  at:
+  - 14
+  - 21
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 13
+      dir: up
+    commands:
+    - 'Woman from the ferry: From the Dovetail to the Playhouse! I told everyone on the quay.'
+- type: event
+  name: Fan eevee_breeder
+  at:
+  - 10
+  - 23
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 25
+      dir: up
+    commands:
+    - 'Breeder: The troupe''s Eevee is in the wings tonight. Forty auditions. Maybe forty-one.'
+- type: event
+  name: Fan salt_raker
+  at:
+  - 14
+  - 23
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 19
+      dir: up
+    commands:
+    - 'Salt raker: Rake it white, cheer it loud.'
+- type: event
+  name: Fan harbourmaster
+  at:
+  - 10
+  - 24
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    commands:
+    - 'Harbourmaster: Free port, free seats. Don''t tell Dorian I said that.'
+- type: event
+  name: Fan saltwife
+  at:
+  - 14
+  - 24
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 28
+      dir: up
+    commands:
+    - 'Saltwife: Forty years raking and I''ve never missed an opening night. Win it.'
+- type: event
+  name: Fan stevedore
+  at:
+  - 10
+  - 25
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 07
+      dir: up
+    commands:
+    - 'Stevedore: I can shout over a crane. I''ll shout over HIM.'
+- type: event
+  name: Fan old_angler
+  at:
+  - 14
+  - 25
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 05
+      dir: up
+    commands:
+    - 'Old angler: Something big''s circling the breakwater. Something big''s on that stage. Same advice: patience.'
+- type: event
+  name: Fan fisherman
+  at:
+  - 10
+  - 26
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_FISHERMAN
+      dir: up
+    commands:
+    - 'Fisherman: Ordinary night. Extraordinary seats.'
+- type: event
+  name: Fan old_sailor
+  at:
+  - 14
+  - 26
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    commands:
+    - 'Old Sailor: Born here, live anywhere. Tonight I live in row three.'
+- type: event
+  name: Fan smoke_stagehand
+  at:
+  - 2
+  - 18
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 20
+      dir: up
+    commands:
+    - 'Stagehand: I''m off shift. I''m watching like a civilian. A loud civilian.'
+- type: event
+  name: Fan costumier
+  at:
+  - 22
+  - 18
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 12
+      dir: up
+    commands:
+    - 'Costumier: I stitched his cape. If you tear it I''ll stitch you a worse one.'
+- type: event
+  name: Fan street_player
+  at:
+  - 2
   - 19
   pages:
-  - graphic:
-      sprite: trainer_PAINTER
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 08
       dir: up
-- type: npc
-  name: Audience 17
+    commands:
+    - 'Street player: A stage is anywhere two people stop to look. Two hundred people stopped. Go on.'
+- type: event
+  name: Fan quest_EL_LANTERNS
   at:
   - 22
   - 19
-  sprite: NPC 24
-  dir: up
-  text: (whispering) Shh! It's about to start.
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 26
+      dir: up
+    commands:
+    - 'Lantern-bearer: Sister Hollin sent us. We brought our own lanterns. We''re keeping them.'
 - type: event
-  name: Audience 18
+  name: Fan quest_EL_LANTERNS
   at:
-  - 4
+  - 2
   - 20
   pages:
-  - graphic:
-      sprite: NPC 24
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 26
       dir: up
+    commands:
+    - 'Sister Hollin: The lanterns came home. So did we. Listen to the house, child.'
 - type: event
-  name: Audience 19
+  name: Fan quest_EL_LANTERNS
+  at:
+  - 22
+  - 20
+  pages:
+  - {}
+  - cond:
+      self: A
+    graphic:
+      sprite: NPC 14
+      dir: up
+    commands:
+    - 'Lantern-bearer: We''re the quiet section. Mostly.'
+- type: event
+  name: Audience 0
   at:
   - 5
   - 20
+  pages:
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+- type: event
+  name: Audience 1
+  at:
+  - 8
+  - 23
+  pages:
+  - graphic:
+      sprite: NPC 26
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+- type: event
+  name: Audience 2
+  at:
+  - 21
+  - 21
   pages:
   - graphic:
       sprite: trainer_PICNICKER
       dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
 - type: event
-  name: Audience 20
-  at:
-  - 6
-  - 20
-  pages:
-  - graphic:
-      sprite: NPC 10
-      dir: up
-- type: event
-  name: Audience 21
-  at:
-  - 7
-  - 20
-  pages:
-  - graphic:
-      sprite: NPC 17
-      dir: up
-- type: event
-  name: Audience 22
-  at:
-  - 9
-  - 20
-  pages:
-  - graphic:
-      sprite: NPC 27
-      dir: up
-- type: event
-  name: Audience 23
-  at:
-  - 15
-  - 20
-  pages:
-  - graphic:
-      sprite: trainer_SAILOR
-      dir: up
-- type: event
-  name: Audience 24
+  name: Audience 3
   at:
   - 18
-  - 20
-  pages:
-  - graphic:
-      sprite: trainer_POKEMANIAC
-      dir: up
-- type: event
-  name: Audience 25
-  at:
-  - 21
-  - 20
-  pages:
-  - graphic:
-      sprite: NPC 27
-      dir: up
-- type: npc
-  name: Audience 26
-  at:
-  - 2
-  - 21
-  sprite: NPC 17
-  dir: up
-  text: (whispering) Third night running. I know every line. Don't tell him.
-- type: npc
-  name: Audience 27
-  at:
-  - 8
-  - 21
-  sprite: trainer_SAILOR
-  dir: up
-  text: (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
-- type: npc
-  name: Audience 28
-  at:
-  - 9
-  - 21
-  sprite: trainer_BEAUTY
-  dir: up
-  text: (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
-- type: npc
-  name: Audience 29
-  at:
-  - 10
-  - 21
-  sprite: trainer_SCIENTIST
-  dir: up
-  text: '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
-- type: npc
-  name: Audience 30
-  at:
-  - 14
-  - 21
-  sprite: trainer_LADY
-  dir: up
-  text: '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
-- type: npc
-  name: Audience 31
-  at:
-  - 16
-  - 21
-  sprite: trainer_LADY
-  dir: up
-  text: (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
-- type: npc
-  name: Audience 32
-  at:
-  - 17
-  - 21
-  sprite: NPC 19
-  dir: up
-  text: (whispering) The footlights make everyone look braver. Even me.
-- type: npc
-  name: Audience 33
-  at:
-  - 20
-  - 21
-  sprite: trainer_SCIENTIST
-  dir: up
-  text: (whispering) Shh! It's about to start.
-- type: npc
-  name: Audience 34
-  at:
-  - 21
-  - 21
-  sprite: trainer_BEAUTY
-  dir: up
-  text: (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
-- type: npc
-  name: Audience 35
-  at:
-  - 3
-  - 23
-  sprite: trainer_GENTLEMAN
-  dir: up
-  text: (whispering) The footlights make everyone look braver. Even me.
-- type: npc
-  name: Audience 36
-  at:
-  - 4
-  - 23
-  sprite: NPC 13
-  dir: up
-  text: (whispering) I came for the chandelier, honestly.
-- type: npc
-  name: Audience 37
-  at:
-  - 6
-  - 23
-  sprite: NPC 06
-  dir: up
-  text: (whispering) Third night running. I know every line. Don't tell him.
-- type: npc
-  name: Audience 38
-  at:
-  - 8
-  - 23
-  sprite: NPC 02
-  dir: up
-  text: (whispering) Shh! It's about to start.
-- type: npc
-  name: Audience 39
-  at:
-  - 9
-  - 23
-  sprite: trainer_SCIENTIST
-  dir: up
-  text: (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
-- type: npc
-  name: Audience 40
-  at:
-  - 16
-  - 23
-  sprite: trainer_PICNICKER
-  dir: up
-  text: (whispering) The footlights make everyone look braver. Even me.
-- type: npc
-  name: Audience 41
-  at:
-  - 2
-  - 24
-  sprite: NPC 19
-  dir: up
-  text: (whispering) I came for the chandelier, honestly.
-- type: event
-  name: Audience 42
-  at:
-  - 4
-  - 24
+  - 18
   pages:
   - graphic:
       sprite: trainer_PAINTER
       dir: up
+    commands:
+    - (whispering) I came for the chandelier, honestly.
 - type: event
-  name: Audience 43
-  at:
-  - 5
-  - 24
-  pages:
-  - graphic:
-      sprite: NPC 09
-      dir: up
-- type: event
-  name: Audience 44
+  name: Audience 4
   at:
   - 8
-  - 24
+  - 21
+  pages:
+  - graphic:
+      sprite: NPC 14
+      dir: up
+    commands:
+    - (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
+- type: event
+  name: Audience 5
+  at:
+  - 8
+  - 20
   pages:
   - graphic:
       sprite: NPC 23
       dir: up
 - type: event
-  name: Audience 45
-  at:
-  - 9
-  - 24
-  pages:
-  - graphic:
-      sprite: NPC 24
-      dir: up
-- type: event
-  name: Audience 46
-  at:
-  - 18
-  - 24
-  pages:
-  - graphic:
-      sprite: NPC 24
-      dir: up
-- type: event
-  name: Audience 47
-  at:
-  - 19
-  - 24
-  pages:
-  - graphic:
-      sprite: NPC 21
-      dir: up
-- type: event
-  name: Audience 48
-  at:
-  - 3
-  - 25
-  pages:
-  - graphic:
-      sprite: NPC 14
-      dir: up
-- type: event
-  name: Audience 49
-  at:
-  - 4
-  - 25
-  pages:
-  - graphic:
-      sprite: trainer_GAMBLER
-      dir: up
-- type: event
-  name: Audience 50
-  at:
-  - 6
-  - 25
-  pages:
-  - graphic:
-      sprite: trainer_SCIENTIST
-      dir: up
-- type: event
-  name: Audience 51
-  at:
-  - 7
-  - 25
-  pages:
-  - graphic:
-      sprite: trainer_SCIENTIST
-      dir: up
-- type: event
-  name: Audience 52
+  name: Audience 6
   at:
   - 8
-  - 25
+  - 19
   pages:
   - graphic:
-      sprite: NPC 02
+      sprite: NPC 19
       dir: up
 - type: event
-  name: Audience 53
+  name: Audience 7
   at:
-  - 9
-  - 25
+  - 5
+  - 24
+  pages:
+  - graphic:
+      sprite: trainer_POKEMANIAC
+      dir: up
+- type: event
+  name: Audience 8
+  at:
+  - 20
+  - 18
   pages:
   - graphic:
       sprite: trainer_GENTLEMAN
       dir: up
-- type: npc
-  name: Audience 54
-  at:
-  - 14
-  - 25
-  sprite: trainer_SAILOR
-  dir: up
-  text: (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    commands:
+    - (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
 - type: event
-  name: Audience 55
+  name: Audience 9
   at:
-  - 16
-  - 25
+  - 8
+  - 18
   pages:
   - graphic:
       sprite: NPC 24
       dir: up
+    commands:
+    - (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
 - type: event
-  name: Audience 56
+  name: Audience 10
+  at:
+  - 9
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 1
+- type: event
+  name: Audience 11
+  at:
+  - 5
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 1
+- type: event
+  name: Audience 12
+  at:
+  - 20
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_POKEMANIAC
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 1
+- type: event
+  name: Audience 13
+  at:
+  - 22
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 27
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 1
+- type: event
+  name: Audience 14
+  at:
+  - 4
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 2
+- type: event
+  name: Audience 15
+  at:
+  - 4
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 2
+- type: event
+  name: Audience 16
+  at:
+  - 4
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 19
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 2
+- type: event
+  name: Audience 17
+  at:
+  - 7
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 2
+- type: event
+  name: Audience 18
+  at:
+  - 2
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 3
+- type: event
+  name: Audience 19
+  at:
+  - 17
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 02
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 3
+- type: event
+  name: Audience 20
+  at:
+  - 8
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 3
+- type: event
+  name: Audience 21
+  at:
+  - 15
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 3
+- type: event
+  name: Audience 22
+  at:
+  - 18
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 4
+- type: event
+  name: Audience 23
+  at:
+  - 5
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 14
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 4
+- type: event
+  name: Audience 24
+  at:
+  - 3
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 10
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 4
+- type: event
+  name: Audience 25
+  at:
+  - 6
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 4
+- type: event
+  name: Audience 26
+  at:
+  - 20
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 19
+      dir: up
+    commands:
+    - (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 5
+- type: event
+  name: Audience 27
+  at:
+  - 19
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 14
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 5
+- type: event
+  name: Audience 28
+  at:
+  - 4
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 5
+- type: event
+  name: Audience 29
+  at:
+  - 15
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 5
+- type: event
+  name: Audience 30
+  at:
+  - 19
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 02
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 6
+- type: event
+  name: Audience 31
+  at:
+  - 21
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 17
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 6
+- type: event
+  name: Audience 32
+  at:
+  - 18
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 6
+- type: event
+  name: Audience 33
+  at:
+  - 16
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 13
+      dir: up
+    commands:
+    - (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 6
+- type: event
+  name: Audience 34
+  at:
+  - 6
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 7
+- type: event
+  name: Audience 35
+  at:
+  - 17
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 06
+      dir: up
+    commands:
+    - (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 7
+- type: event
+  name: Audience 36
+  at:
+  - 7
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 7
+- type: event
+  name: Audience 37
+  at:
+  - 18
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 7
+- type: event
+  name: Audience 38
+  at:
+  - 20
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_AROMALADY
+      dir: up
+    commands:
+    - (whispering) Shh! It's about to start.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 8
+- type: event
+  name: Audience 39
+  at:
+  - 21
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    commands:
+    - (whispering) I came for the chandelier, honestly.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 8
+- type: event
+  name: Audience 40
+  at:
+  - 6
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_GENTLEMAN
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 8
+- type: event
+  name: Audience 41
+  at:
+  - 17
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PAINTER
+      dir: up
+    commands:
+    - (whispering) I came for the chandelier, honestly.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 8
+- type: event
+  name: Audience 42
+  at:
+  - 3
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 10
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 9
+- type: event
+  name: Audience 43
   at:
   - 18
   - 25
   pages:
+  - {}
+  - graphic:
+      sprite: NPC 10
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 9
+- type: event
+  name: Audience 44
+  at:
+  - 9
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 9
+- type: event
+  name: Audience 45
+  at:
+  - 16
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 9
+- type: event
+  name: Audience 46
+  at:
+  - 17
+  - 19
+  pages:
+  - {}
   - graphic:
       sprite: NPC 21
       dir: up
-- type: npc
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 10
+- type: event
+  name: Audience 47
+  at:
+  - 5
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 10
+- type: event
+  name: Audience 48
+  at:
+  - 21
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 10
+- type: event
+  name: Audience 49
+  at:
+  - 5
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 10
+- type: event
+  name: Audience 50
+  at:
+  - 19
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 11
+- type: event
+  name: Audience 51
+  at:
+  - 15
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 11
+- type: event
+  name: Audience 52
+  at:
+  - 20
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 11
+- type: event
+  name: Audience 53
+  at:
+  - 2
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 02
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 11
+- type: event
+  name: Audience 54
+  at:
+  - 19
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 12
+- type: event
+  name: Audience 55
+  at:
+  - 9
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 12
+- type: event
+  name: Audience 56
+  at:
+  - 8
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PAINTER
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 12
+- type: event
   name: Audience 57
+  at:
+  - 7
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 12
+- type: event
+  name: Audience 58
+  at:
+  - 6
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 13
+- type: event
+  name: Audience 59
+  at:
+  - 15
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_POKEMANIAC
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 13
+- type: event
+  name: Audience 60
+  at:
+  - 19
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 13
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 13
+- type: event
+  name: Audience 61
   at:
   - 3
   - 26
-  sprite: NPC 23
-  dir: up
-  text: (whispering) Shh! It's about to start.
-- type: npc
-  name: Audience 58
-  at:
-  - 4
-  - 26
-  sprite: trainer_POKEMANIAC
-  dir: up
-  text: (whispering) Third night running. I know every line. Don't tell him.
-- type: npc
-  name: Audience 59
-  at:
-  - 10
-  - 26
-  sprite: trainer_AROMALADY
-  dir: up
-  text: (whispering) Shh! It's about to start.
-- type: npc
-  name: Audience 60
-  at:
-  - 16
-  - 26
-  sprite: NPC 23
-  dir: up
-  text: (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
-- type: npc
-  name: Audience 61
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 21
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 13
+- type: event
+  name: Audience 62
   at:
   - 22
   - 26
-  sprite: trainer_SAILOR
-  dir: up
-  text: '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_GAMBLER
+      dir: up
+    commands:
+    - (whispering) Is he on yet? Is that him? That's the curtain. I knew that.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 14
+- type: event
+  name: Audience 63
+  at:
+  - 15
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 17
+      dir: up
+    commands:
+    - (whispering) Third night running. I know every line. Don't tell him.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 14
+- type: event
+  name: Audience 64
+  at:
+  - 22
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 09
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 14
+- type: event
+  name: Audience 65
+  at:
+  - 15
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 02
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 14
+- type: event
+  name: Audience 66
+  at:
+  - 7
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_GAMBLER
+      dir: up
+    commands:
+    - (whispering) Third night running. I know every line. Don't tell him.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 15
+- type: event
+  name: Audience 67
+  at:
+  - 7
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    commands:
+    - (whispering) I came for the chandelier, honestly.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 15
+- type: event
+  name: Audience 68
+  at:
+  - 6
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 04
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 15
+- type: event
+  name: Audience 69
+  at:
+  - 9
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 24
+      dir: up
+    commands:
+    - (whispering) Third night running. I know every line. Don't tell him.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 15
+- type: event
+  name: Audience 70
+  at:
+  - 16
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 17
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 16
+- type: event
+  name: Audience 71
+  at:
+  - 22
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    commands:
+    - (whispering) My seat's the best in the house. Everyone's seat is the best in the house. He wrote that on the tickets.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 16
+- type: event
+  name: Audience 72
+  at:
+  - 18
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 17
+      dir: up
+    commands:
+    - (whispering) Third night running. I know every line. Don't tell him.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 16
+- type: event
+  name: Audience 73
+  at:
+  - 7
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SAILOR
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 16
+- type: event
+  name: Audience 74
+  at:
+  - 17
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 06
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 17
+- type: event
+  name: Audience 75
+  at:
+  - 3
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    commands:
+    - (whispering) Sound moves get a cheer in here. Watch the crowd when someone sings.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 17
+- type: event
+  name: Audience 76
+  at:
+  - 15
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 17
+- type: event
+  name: Audience 77
+  at:
+  - 3
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 17
+- type: event
+  name: Audience 78
+  at:
+  - 17
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_GENTLEMAN
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 18
+- type: event
+  name: Audience 79
+  at:
+  - 5
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_LADY
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 18
+- type: event
+  name: Audience 80
+  at:
+  - 6
+  - 21
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 27
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 18
+- type: event
+  name: Audience 81
+  at:
+  - 19
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 18
+- type: event
+  name: Audience 82
+  at:
+  - 8
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_POKEMANIAC
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 19
+- type: event
+  name: Audience 83
+  at:
+  - 16
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 21
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 19
+- type: event
+  name: Audience 84
+  at:
+  - 19
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_SCIENTIST
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 19
+- type: event
+  name: Audience 85
+  at:
+  - 9
+  - 20
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PICNICKER
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 19
+- type: event
+  name: Audience 86
+  at:
+  - 21
+  - 24
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 04
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 20
+- type: event
+  name: Audience 87
+  at:
+  - 21
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 20
+- type: event
+  name: Audience 88
+  at:
+  - 19
+  - 18
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 26
+      dir: up
+    commands:
+    - '(whispering) Psst. If you''re the challenger: he hates being boring more than he hates losing.'
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 20
+- type: event
+  name: Audience 89
+  at:
+  - 18
+  - 23
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_BEAUTY
+      dir: up
+    commands:
+    - (whispering) The footlights make everyone look braver. Even me.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 20
+- type: event
+  name: Audience 90
+  at:
+  - 5
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 13
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 21
+- type: event
+  name: Audience 91
+  at:
+  - 16
+  - 19
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 23
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 21
+- type: event
+  name: Audience 92
+  at:
+  - 16
+  - 25
+  pages:
+  - {}
+  - graphic:
+      sprite: NPC 06
+      dir: up
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 21
+- type: event
+  name: Audience 93
+  at:
+  - 4
+  - 26
+  pages:
+  - {}
+  - graphic:
+      sprite: trainer_PAINTER
+      dir: up
+    commands:
+    - (whispering) Third night running. I know every line. Don't tell him.
+    cond:
+      var:
+      - STAGE_AUDIENCE
+      - 21
+- type: event
+  name: House manager
+  at:
+  - 0
+  - 2
+  pages:
+  - trigger: parallel
+    commands:
+    - script: pf_audience_sync
+    - raw:
+      - 116
+      - []
 - type: event
   name: Musician 0
   at:
@@ -2078,7 +3235,20 @@ events:
       - '\pf[DORIAN,smug]Dorian: On my stage the house loves a show. Sing, dance, dazzle them, and they''ll carry you. Bore
         them, and they''ll let you fall.'
       - '\pf[DORIAN,happy]Dorian: Shall we give them something to remember?'
+    - if: pf_house_stage >= 3
+      then:
+      - '\pf[DORIAN,shocked]Dorian: ...A FULL house. Darling, did you shake every hand in Saltmere? They''re here for YOU.'
+      - '\pf[DORIAN,happy]Dorian: Then we start at a standing ovation. Don''t let them sit down.'
+      else:
+      - if: pf_house_stage == 2
+        then:
+        - '\pf[DORIAN,happy]Dorian: A good house tonight! Half the town seems to know your name already. We''ll open on an
+          encore.'
+        else:
+        - '\pf[DORIAN,neutral]Dorian: A sparse house. Intimate. Every seat a front-row seat. We''ll make them remember us
+          anyway.'
     - script: $game_self_switches[[154, 0, 'TRIED']] = true
+    - script: pf_house_rules
     - if: 'Prismfall.gym_battle(pfm_gym(:LEADER_DORIAN), double: false)'
       then:
       - '\pf[DORIAN,shocked]Dorian: ...They''re standing. Look at them. They''re on their FEET.'
@@ -2091,6 +3261,13 @@ events:
       - '\pf[DORIAN,happy]Dorian: Do it again.'
       - (Nothing. The case is quiet.)
       - '\pf[DORIAN,deadpan]Dorian: One night only. The best kind.'
+      - if: pf_audience > 0
+        then:
+        - script: 'n = pf_audience * 150
+
+            $player.money += n
+
+            pbMessage(_INTL("(The box office sends up your share of the takings: ${1}.)", n.to_s_formatted))'
       - script: pbReceiveItem(:TM42)
       - '\pf[DORIAN,neutral]Dorian: Facade. The art of turning a bad night into a standing ovation. You''ll need it more often
         than you''d think.'
@@ -2265,7 +3442,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2282,7 +3459,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3078
+      tile: 3085
 - type: warp
   name: Ladder L
   at:
@@ -2305,7 +3482,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2360,7 +3537,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2372,7 +3549,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3070
+      tile: 3077
   - cond:
       switch: STAGE_FLAT_A
 - type: event
@@ -2382,7 +3559,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3070
+      tile: 3077
   - cond:
       switch: STAGE_FLAT_A
 - type: event
@@ -2392,7 +3569,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3070
+      tile: 3077
   - cond:
       switch: STAGE_FLAT_A
 - type: event
@@ -2402,7 +3579,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3070
+      tile: 3077
   - cond:
       switch: STAGE_FLAT_A
 - type: event
@@ -2412,7 +3589,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3070
+      tile: 3077
   - cond:
       switch: STAGE_FLAT_A
 - type: event
@@ -2427,7 +3604,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2444,7 +3621,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2461,7 +3638,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2478,7 +3655,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3062
+      tile: 3069
   - cond:
       var:
       - STAGE_SCENE
@@ -2495,7 +3672,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: t 22,6
   at:
@@ -2508,7 +3685,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: t 23,6
   at:
@@ -2521,7 +3698,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: f 5,7
   at:
@@ -2534,7 +3711,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2551,7 +3728,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2568,7 +3745,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2585,7 +3762,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2597,7 +3774,7 @@ events:
   - 7
   pages:
   - graphic:
-      tile: 3079
+      tile: 3086
   - cond:
       switch: STAGE_FLAT_C
 - type: event
@@ -2612,7 +3789,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2629,7 +3806,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2646,7 +3823,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2663,7 +3840,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2680,7 +3857,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2697,7 +3874,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2737,7 +3914,7 @@ events:
   - 10
   pages:
   - graphic:
-      tile: 3072
+      tile: 3079
   - cond:
       switch: STAGE_FLAT_B
 - type: event
@@ -2752,7 +3929,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2769,7 +3946,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: t 17,11
   at:
@@ -2782,7 +3959,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: t 18,11
   at:
@@ -2795,7 +3972,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: t 19,11
   at:
@@ -2808,7 +3985,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3068
+      tile: 3075
 - type: event
   name: f 20,11
   at:
@@ -2821,7 +3998,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2838,7 +4015,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2855,7 +4032,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2872,7 +4049,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2889,7 +4066,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2906,7 +4083,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2923,7 +4100,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2940,7 +4117,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2957,7 +4134,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2974,7 +4151,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3065
+      tile: 3072
   - cond:
       var:
       - STAGE_SCENE
@@ -2991,7 +4168,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3076
+      tile: 3083
   - cond:
       var:
       - STAGE_SCENE
@@ -3008,7 +4185,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3077
+      tile: 3084
   - cond:
       var:
       - STAGE_SCENE
@@ -3025,7 +4202,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3078
+      tile: 3085
 - type: event
   name: S 4,15
   at:
@@ -3038,7 +4215,7 @@ events:
       - STAGE_SCENE
       - 1
     graphic:
-      tile: 3076
+      tile: 3083
   - cond:
       var:
       - STAGE_SCENE
@@ -3055,7 +4232,7 @@ events:
       - STAGE_SCENE
       - 2
     graphic:
-      tile: 3077
+      tile: 3084
   - cond:
       var:
       - STAGE_SCENE
@@ -3072,7 +4249,7 @@ events:
       - STAGE_SCENE
       - 3
     graphic:
-      tile: 3078
+      tile: 3085
 - type: event
   name: Rope 1
   at:
@@ -3221,7 +4398,7 @@ events:
   - cond:
       switch: STAGE_FLAT_A
     graphic:
-      tile: 3071
+      tile: 3078
 - type: event
   name: b 11,3
   at:
@@ -3232,7 +4409,7 @@ events:
   - cond:
       switch: STAGE_FLAT_B
     graphic:
-      tile: 3073
+      tile: 3080
 - type: event
   name: c 16,3
   at:
@@ -3243,7 +4420,7 @@ events:
   - cond:
       switch: STAGE_FLAT_C
     graphic:
-      tile: 3075
+      tile: 3082
 - type: warp
   name: Ladder L
   at:
@@ -3264,7 +4441,7 @@ events:
   - cond:
       switch: STAGE_FLAT_A
     graphic:
-      tile: 3071
+      tile: 3078
 - type: event
   name: b 11,4
   at:
@@ -3275,7 +4452,7 @@ events:
   - cond:
       switch: STAGE_FLAT_B
     graphic:
-      tile: 3073
+      tile: 3080
 - type: event
   name: c 16,4
   at:
@@ -3286,7 +4463,7 @@ events:
   - cond:
       switch: STAGE_FLAT_C
     graphic:
-      tile: 3075
+      tile: 3082
 - type: warp
   name: Ladder K
   at:
@@ -3307,7 +4484,7 @@ events:
   - cond:
       switch: STAGE_FLAT_A
     graphic:
-      tile: 3071
+      tile: 3078
 - type: event
   name: b 11,5
   at:
@@ -3318,7 +4495,7 @@ events:
   - cond:
       switch: STAGE_FLAT_B
     graphic:
-      tile: 3073
+      tile: 3080
 - type: event
   name: c 16,5
   at:
@@ -3329,7 +4506,7 @@ events:
   - cond:
       switch: STAGE_FLAT_C
     graphic:
-      tile: 3075
+      tile: 3082
 - type: event
   name: Loft rope 1 L
   at:
@@ -3380,7 +4557,7 @@ events:
   - cond:
       switch: STAGE_FLAT_A
     graphic:
-      tile: 3071
+      tile: 3078
 - type: event
   name: b 11,6
   at:
@@ -3391,7 +4568,7 @@ events:
   - cond:
       switch: STAGE_FLAT_B
     graphic:
-      tile: 3073
+      tile: 3080
 - type: event
   name: c 16,6
   at:
@@ -3402,7 +4579,7 @@ events:
   - cond:
       switch: STAGE_FLAT_C
     graphic:
-      tile: 3075
+      tile: 3082
 - type: event
   name: Loft rope 1 R
   at:
@@ -3495,7 +4672,7 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3505,7 +4682,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 4,3
   at:
@@ -3513,25 +4690,25 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 5,3
   at:
@@ -3539,13 +4716,13 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3555,7 +4732,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 6,3
   at:
@@ -3563,13 +4740,13 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3585,7 +4762,7 @@ events:
   - 5
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3595,7 +4772,7 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3607,7 +4784,7 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3621,7 +4798,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 4,4
   at:
@@ -3629,7 +4806,7 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3643,7 +4820,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 5,4
   at:
@@ -3651,7 +4828,7 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3661,7 +4838,7 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3673,13 +4850,13 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3695,25 +4872,25 @@ events:
   - 6
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 3,5
   at:
@@ -3721,7 +4898,7 @@ events:
   - 7
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3731,13 +4908,13 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 4,5
   at:
@@ -3750,7 +4927,7 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3760,7 +4937,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 6,5
   at:
@@ -3773,7 +4950,7 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3783,7 +4960,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 7,5
   at:
@@ -3791,19 +4968,19 @@ events:
   - 7
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3815,25 +4992,25 @@ events:
   - 8
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 4,6
   at:
@@ -3850,13 +5027,13 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 5,6
   at:
@@ -3864,7 +5041,7 @@ events:
   - 8
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3874,7 +5051,7 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3891,13 +5068,13 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3914,13 +5091,13 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3932,7 +5109,7 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3942,7 +5119,7 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -3963,13 +5140,13 @@ events:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 5,7
   at:
@@ -3982,19 +5159,19 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 6,7
   at:
@@ -4002,25 +5179,25 @@ events:
   - 9
   pages:
   - graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 2
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Table 7,7
   at:
@@ -4033,7 +5210,7 @@ events:
       - STAGE_TURNTABLE
       - 1
     graphic:
-      tile: 3059
+      tile: 3066
   - cond:
       var:
       - STAGE_TURNTABLE
@@ -4043,7 +5220,7 @@ events:
       - STAGE_TURNTABLE
       - 3
     graphic:
-      tile: 3059
+      tile: 3066
 - type: event
   name: Crank
   at:

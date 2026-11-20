@@ -17,8 +17,8 @@
 124	120	Treetop House
 125	120	Cutter's House
 126	120	Briarwick Lantern House
-130	120	Loomhouse Gym - Foyer
-131	130	Loomhouse Gym - Weaving Hall
+130	120	Loomhouse Gym - Lobby
+131	130	Loomhouse Gym - The Canopy
 132	130	Loomhouse Upper Lofts - Canopy Lofts
 134	130	Loomhouse Upper Lofts - Granny's Knot
 140	0	Saltmere

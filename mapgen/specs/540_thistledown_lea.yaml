@@ -197,7 +197,7 @@ events:
   at: [4, 34]
   item: POKEBALL
 - type: item
-  at: [70, 51]
+  at: [70, 46]
   item: GREATBALL
 - type: sign
   name: Locked door

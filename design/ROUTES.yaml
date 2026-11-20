@@ -1195,7 +1195,7 @@ roads:
     name: The Gutterfall
     old_name: null
     origin: Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. Nadir named it.
-    kingdom: Nadir
+    kingdom: Borderland (Nadir/Elowen)
     role: main
     mode: road
     segment: 5
@@ -1407,7 +1407,7 @@ roads:
     name: The Long Drop
     old_name: null
     origin: 'Ironreach''s front door: a shaft road that goes down for an hour. Named by people who carried things up it.'
-    kingdom: Nadir
+    kingdom: Borderland (Nadir/Elowen)
     role: main
     mode: road
     segment: 7

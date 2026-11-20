@@ -133,56 +133,105 @@ events:
   post: false
 - type: event
   name: Juno J1
-  at: [37, 53]
   pages:
-  - cond: {switch: CH2_MATRIARCH_DONE}
+  - commands: []
+  - cond: {switch: CH1_ORCHARD_DONE}
     graphic: {sprite: trainer_RIVAL2, dir: down}
+    trigger: action
     commands:
-    - 'Juno: There you are! I came down by cart with Dad''s seed-sacks. Spar with me? Just for fun!'
-    - if: 'Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)'
-      then: ['Juno: Ha! You''re getting scary-good.']
-      else: ['Juno: I won? I WON! ...Sorry. Again tomorrow?']
-    - {heal: true}
-    - You sit on the breakwater with Juno, sharing a paper bag of salt-caramel.
-    - 'Juno: Can I ask? At the orchard. The Veil. How did you do that?'
-    - choices: [Tell her about the NULL scan, Deflect, Say nothing]
-      cancel: 0
-      branches:
-      - - {script: 'pf_choose(:ch3_juno_talk, :told)'}
-        - 'Juno: NULL? ...Okay. That stays between us. Pinkie swear. I mean it.'
-      - - {script: 'pf_choose(:ch3_juno_talk, :deflect)'}
-        - 'Juno: Fine, keep your secrets. More caramel for me.'
-      - - {script: 'pf_choose(:ch3_juno_talk, :silent)'}
-        - 'Juno: ...That''s okay. You don''t have to.'
-    - switch: [CH3_J1_DONE, true]
+    - if: pfm?(:sm_arrived)
+      then:
+      - (Juno is on the promenade green beside the planters, practising a victory pose with an empty tart basket.)
+      - '\pf[JUNO,happy]Juno: There you are! Tarts delivered! Forty! I ate one. Thirty-nine!'
+      - '\pf[JUNO,neutral]Juno: Before you go in there... fight me?'
+      - '\pf[JUNO,happy]Juno: Not a FIGHT fight. A spar. I want to know if I''m any good before you go off and get good without me.'
+      - '\pf[JUNO,neutral]Juno: And I want to know if YOU are. I''m going to be in the audience. I''d like to know what I''m cheering for.'
+      - choices: [Let's go., 'Are you sure?']
+        cancel: 0
+        branches:
+        - - &id001
+            if: 'Prismfall.rival_battle(:RIVAL_JUNO, "Juno", 1, can_lose: true)'
+            then: ['\pf[JUNO,happy]Juno: You''re good. You''re REALLY good. That''s so annoying. I''m so happy.']
+            else: ['\pf[JUNO,surprised,shock]Juno: I WON? ...Did you let me win? Don''t tell me. I''m keeping it.']
+          - '\pf[JUNO,happy]Juno: Here, for your partner. They''re from the farm.'
+          - &id002 {script: 'pbReceiveItem(:ORANBERRY, 2)'}
+          - '\pf[JUNO,happy]Juno: Go on, then. The Playhouse is in the Old Town. I''ll be in the cheap seats. I''ll be LOUD.'
+          - &id003
+            switch: [CH3_J1_DONE, true]
+        - - '\pf[JUNO,deadpan]Juno: My partner''s weak to yours and I chose it on purpose. I''ve never been less sure of anything. Let''s go!'
+          - *id001
+          - '\pf[JUNO,happy]Juno: Here, for your partner. They''re from the farm.'
+          - *id002
+          - '\pf[JUNO,happy]Juno: Go on, then. The Playhouse is in the Old Town. I''ll be in the cheap seats. I''ll be LOUD.'
+          - *id003
+      else: ['\pf[JUNO,happy]Juno: Tarts first! Then the green! Then the GYM!']
   - cond: {switch: CH3_J1_DONE}
-    graphic: {sprite: trainer_RIVAL2, dir: down}
-    commands: ['Juno: Same breakwater, same caramel, next time. Deal?']
+    commands: []
+  at: [37, 53]
 - type: event
   name: Royal notice
-  at: [47, 41]
   pages:
+  - commands: []
   - cond: {switch: CH3_PAGEANT_DONE}
-    commands: ['A royal notice: Queen Maelis "notes with grief" the Hollow outrage in her free port, "where the Crown''s protection was refused."', 'Someone
-        - Dorian, by the velvet thread - has torn it half down.']
+    trigger: action
+    commands:
+    - if: pfm?(:ch2_closed)
+      then: []
+      else:
+      - (Next morning. A herald in Elowen green is pasting a notice to the charter stone. A small crowd watches without booing, which in Saltmere is a kind
+        of booing.)
+      - 'NOTICE: "HER MAJESTY QUEEN MAELIS notes with grief the Hollow outrage in HER free port of Saltmere, where the Crown''s protection was refused.
+        The Crown''s protection remains available. -- By Order, Briar Keep."'
+      - (Dorian walks up, reads it, and tears it down in one long rip.)
+      - '\pf[DORIAN,angry,anger]Dorian: "HER" free port.'
+      - '\pf[DORIAN,neutral]Dorian: Somebody fetch the paste. We''ll put the charter back up where it belongs.'
+      - '\pf[DORIAN,smug]Dorian: And tell the breakwater to warm up. It''s booing day on a Thursday this week.'
+      - '\pf[JUNO,neutral]Juno: Uncle Rowan wants silk-moth eggs from Briarwick. Forty. I was going to send for them.'
+      - '\pf[JUNO,neutral]Juno: I''m not sending for them. I''m not letting you walk into the Gossamer by yourself after last night.'
+      - '\pf[JUNO,happy]Juno: Also I''ve never seen a gym puzzle from the INSIDE.'
+      - {script: 'pfm_quest(:eighteen_roads, "Eighteen Roads", "Earn the second badge in Briarwick, up the Weavers'' Road.")'}
+      - var: [STORY_CHAPTER, 3]
+      - {script: 'pfm_set(:ch2_closed)'}
+      - selfswitch: [A, true]
+  - cond: {self: A}
+    trigger: action
+    commands: ['The charter is back up on the stone. Someone has pasted it on twice, for emphasis.']
+  at: [47, 41]
 - type: event
   name: Kestrel
-  at: [36, 27]
   pages:
+  - commands: []
   - cond: {switch: CH3_PAGEANT_DONE}
     graphic: {sprite: trainer_RIVAL1, dir: left}
+    trigger: action
     commands:
-    - Kestrel is outside the Hall, white-faced.
-    - 'Kestrel: That voice. The way she talks... no. NO.'
-    - He runs.
+    - (The crowd is thinning. Against the wall by the stage door, a boy in a too-big black coat is breathing very fast.)
+    - '\pf[KESTREL,surprised]Kestrel: You were in there. You heard him.'
+    - '\pf[KESTREL,angry,anger]Kestrel: Did you hear his VOICE?'
+    - choices: [I heard him., 'Kestrel? What are you doing here?', '...']
+      cancel: 2
+      branches:
+      - []
+      - ['\pf[KESTREL,angry]Kestrel: Following a rumor. Shut up. That''s not the point.']
+      - []
+    - '\pf[KESTREL,neutral]Kestrel: Under the doubling. Under the second voice. The way he said "grieve". Like it had two syllables.'
+    - '\pf[KESTREL,surprised]Kestrel: That''s -- the way she talks -- no.'
+    - '\pf[KESTREL,angry]Kestrel: No.'
+    - (Kestrel runs, shoving through the crowd, north toward the North Gate.)
+    - '\pf[JUNO,sad]Juno: ...Who talks like that?'
+    - var: [KESTREL_STAGE, 1]
     - selfswitch: [A, true]
   - cond: {self: A}
+    commands: []
+  at: [36, 27]
 - type: npc
   name: Eevee breeder
-  at: [58, 38]
   sprite: NPC 25
   dir: down
-  text: 'Breeder: Dorian''s troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage.'
+  at: [58, 38]
+  commands:
+  - {script: 'pfm_audience(:eevee_breeder)'}
+  - 'Breeder: Dorian''s troupe raised an Eevee for forty auditions. Never cast. Win your badge and maybe it finds its stage.'
 - type: event
   name: Gate Warden
   pages:
@@ -193,6 +242,66 @@ events:
     graphic: {sprite: trainer_GENTLEMAN, dir: left}
     commands: ['Gate Warden: The gate''s open. After last night... mind the Grey Saltings. And mind who you talk to.']
   at: [46, 9]
+- type: event
+  name: North Gate bar 1
+  at: [43, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
+- type: event
+  name: North Gate bar 2
+  at: [44, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
+- type: event
+  name: North Gate bar 3
+  at: [45, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
+- type: event
+  name: North Gate bar 4
+  at: [46, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
+- type: event
+  name: North Gate bar 5
+  at: [47, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
+- type: event
+  name: North Gate bar 6
+  at: [48, 6]
+  pages:
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['The North Gate is barred. A card on the bar: "CLOSED FOR THE PAGEANT. By order of the Warden (and the Accord, who agreed)."']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    through: true
+    commands: []
 - type: event
   name: Arrival (East Gate)
   pages:
@@ -222,12 +331,15 @@ events:
   name: Caramel Seller
   pages:
   - commands:
+    - &id004 {script: 'pfm_audience(:caramel_seller)'}
     - 'Caramel Seller: Salt-caramel! Fresh salt-caramel! Pageant tonight — the Loyal Three companion piece!'
     - selfswitch: [A, true]
     trigger: action
     move: fixed
     graphic: {sprite: NPC 29, dir: down}
-  - commands: ['Caramel Seller: It''s mostly salt. That''s the secret. Don''t tell anyone. Everyone knows.']
+  - commands:
+    - *id004
+    - 'Caramel Seller: It''s mostly salt. That''s the secret. Don''t tell anyone. Everyone knows.'
     trigger: action
     move: fixed
     graphic: {sprite: NPC 29, dir: down}
@@ -237,12 +349,15 @@ events:
   name: Busker
   pages:
   - commands:
+    - &id005 {script: 'pfm_audience(:busker)'}
     - 'Busker: Saltmere''s Plate makes everything ordinary — no Bleed, no miracles. So we make our own, on stage!'
     - selfswitch: [A, true]
     trigger: action
     move: random
     graphic: {sprite: NPC 27, dir: down}
-  - commands: ['Busker: I''ve played this corner twenty years. Not one strange thing has happened to me. I find it very hard to write songs.']
+  - commands:
+    - *id005
+    - 'Busker: I''ve played this corner twenty years. Not one strange thing has happened to me. I find it very hard to write songs.'
     trigger: action
     move: random
     graphic: {sprite: NPC 27, dir: down}
@@ -261,12 +376,15 @@ events:
   name: Child with an Ogre puppet
   pages:
   - commands:
+    - &id006 {script: 'pfm_audience(:ogre_child)'}
     - 'Child with an Ogre puppet: The Ogre steals the Plates and the Three bite him! Then everyone claps! Then there''s caramel!'
     - selfswitch: [A, true]
     trigger: action
     move: random
     graphic: {sprite: NPC 17, dir: down}
-  - commands: ['Child with an Ogre puppet: I like the Ogre. Don''t tell anyone. He''s got a nice face.']
+  - commands:
+    - *id006
+    - 'Child with an Ogre puppet: I like the Ogre. Don''t tell anyone. He''s got a nice face.'
     trigger: action
     move: random
     graphic: {sprite: NPC 17, dir: down}
@@ -276,12 +394,15 @@ events:
   name: Retired Actor on a bench
   pages:
   - commands:
+    - &id007 {script: 'pfm_audience(:retired_actor)'}
     - 'Retired Actor on a bench: I played a king once. In a play they closed before the dress. I''m not allowed to say which.'
     - selfswitch: [A, true]
     trigger: action
     move: fixed
     graphic: {sprite: NPC 24, dir: down}
-  - commands: ['Retired Actor on a bench: Better part than Ogre, I''ll tell you that. The Ogre never gets a speech.']
+  - commands:
+    - *id007
+    - 'Retired Actor on a bench: Better part than Ogre, I''ll tell you that. The Ogre never gets a speech.'
     trigger: action
     move: fixed
     graphic: {sprite: NPC 24, dir: down}
@@ -290,8 +411,9 @@ events:
 - type: event
   name: Hound Number Two
   pages:
-  - commands: ['Hound Number Two: I''m Hound Number Two! I bite on the beat! The beat is "GRR". I have to wait for Hound Number One''s "GRR" and then I
-        go "GRR".']
+  - commands:
+    - {script: 'pfm_audience(:hound_two)'}
+    - 'Hound Number Two: I''m Hound Number Two! I bite on the beat! The beat is "GRR". I have to wait for Hound Number One''s "GRR" and then I go "GRR".'
     trigger: action
     move: random
     graphic: {sprite: NPC 23, dir: down}
@@ -323,7 +445,9 @@ events:
 - type: event
   name: Fishwife
   pages:
-  - commands: ['Fishwife: You''ve no tint at all? In Saltmere that''s barely worth gossip. We''re all Blank here. You''re just Blanker.']
+  - commands:
+    - {script: 'pfm_audience(:fishwife)'}
+    - 'Fishwife: You''ve no tint at all? In Saltmere that''s barely worth gossip. We''re all Blank here. You''re just Blanker.'
     trigger: action
     move: fixed
     graphic: {sprite: trainer_FISHERMAN, dir: down}
@@ -347,17 +471,21 @@ events:
   name: Woman from the ferry
   sprite: NPC 13
   dir: down
-  text: 'Woman from the ferry: You! From the Dovetail! I''m home! I''m not grey anymore. Look at me. I''m BEIGE.
+  at: [76, 46]
+  commands:
+  - {script: 'pfm_audience(:ferry_woman)'}
+  - 'Woman from the ferry: You! From the Dovetail! I''m home! I''m not grey anymore. Look at me. I''m BEIGE.
 
     Woman from the ferry: Blank tint. Saltmere. The gate said so. My sister cried.'
-  at: [76, 46]
 - type: npc
   name: Salt raker
   sprite: NPC 19
   dir: up
   move: random
-  text: 'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'
   at: [40, 66]
+  commands:
+  - {script: 'pfm_audience(:salt_raker)'}
+  - 'Salt raker: Rake it white, stack it high, sell it to people who think it tastes of something.'
 - type: npc
   name: Townsfolk 1
   sprite: NPC 17

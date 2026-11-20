@@ -31,7 +31,7 @@ metadata: {MapPosition: [0, 10, 25]}
 events:
   - {type: exit, at: [8, 2], link: SM_HARBOUR, arrive: [8, 3, down]}
   - {type: npc, name: Harbourmaster, at: [6, 5], sprite: trainer_SAILOR, dir: down,
-     text: "Harbourmaster: Free port means free. No Crown tariffs, no Meridian tolls. Long may it last."}
+     commands: [{script: "pfm_audience(:harbourmaster)"}, "Harbourmaster: Free port means free. No Crown tariffs, no Meridian tolls. Long may it last."]}
 ---
 id: 144
 name: Saltwife's House
@@ -43,7 +43,7 @@ bgm: Lerucean Town
 metadata: {MapPosition: [0, 10, 25]}
 events:
   - {type: npc, name: Saltwife, at: [7, 4], sprite: NPC 28, dir: down,
-     text: "Saltwife: Forty years raking the pans. The salt tastes the same as ever. Only place in Velmora that can say so."}
+     commands: [{script: "pfm_audience(:saltwife)"}, "Saltwife: Forty years raking the pans. The salt tastes the same as ever. Only place in Velmora that can say so."]}
 ---
 id: 145
 name: Pageant Hall

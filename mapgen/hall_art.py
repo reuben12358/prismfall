@@ -369,3 +369,107 @@ def old_poster():
         x += len(g[0]) + 1
     d.line([(4, 23), (10, 26), (17, 22), (24, 26), (30, 21), (36, 25), (43, 22)], fill=(150, 136, 110))
     return up(im)
+
+
+# ---------------------------------------------------------------------------------------------- the Canopy (Gym 2, Rev 19)
+HOLLOW = [(24, 15, 12), (33, 22, 16), (42, 29, 21), (54, 37, 27), (68, 47, 34)]
+MOSS = [(40, 64, 30), (58, 88, 40), (84, 120, 54)]
+
+
+def hollow(depth=2, seed=0):
+    """The drop inside the elder tree, seen from above: the hollow's inner wood many feet down, in shadow, its grain running
+    the way the tree grew, with moss and pale fungus where the light reaches.  depth 0 = just under a ledge (darkest) .. 2."""
+    r = random.Random(seed * 7 + depth)
+    base = HOLLOW[max(0, min(2, depth))]
+    im = blank(16, 16, base + (255,)); d = ImageDraw.Draw(im)
+    for _ in range(6):                                               # the grain of the inner wood
+        x = r.randrange(16); y0 = r.randrange(-4, 16); n = r.randint(4, 12)
+        d.line([(x, max(0, y0)), (x, min(15, y0 + n))], fill=HOLLOW[min(4, depth + 1)])
+        if r.random() < 0.5: d.line([(x + 1, max(0, y0 + 1)), (x + 1, min(15, y0 + n - 2))], fill=HOLLOW[max(0, depth - 1)])
+    if r.random() < 0.5:                                             # a mossy patch
+        x, y = r.randrange(2, 13), r.randrange(2, 13)
+        for _ in range(5): im.putpixel((min(15, x + r.randint(-2, 2)), min(15, y + r.randint(-1, 1))), MOSS[min(2, depth)] + (255,))
+    if r.random() < 0.35:                                            # pale fungus that glows a little
+        x, y = r.randrange(2, 14), r.randrange(2, 14)
+        im.putpixel((x, y), (190, 220, 170, 255)); im.putpixel((x + 1, y), (150, 190, 140, 255))
+    return up(im)
+
+
+def root(seed=0):
+    """A root or vine hanging down the drop (overlay)."""
+    r = random.Random(seed)
+    im = blank(); d = ImageDraw.Draw(im)
+    x = r.randrange(4, 12)
+    pts = [(x + r.randint(-1, 1), y) for y in range(0, 17, 4)]
+    d.line(pts, fill=WOOD[2], width=2); d.line([(p[0] - 1, p[1]) for p in pts], fill=WOOD[3])
+    for _ in range(3):
+        y = r.randrange(2, 14); im.putpixel((pts[0][0] + 2, y), MOSS[1] + (255,)); im.putpixel((pts[0][0] + 3, y + 1), MOSS[2] + (255,))
+    return up(im)
+
+
+def trunk_side(src, k=0.55):
+    """The hollow's own wall where it curves in at the sides: the elder's bark, in shadow."""
+    return dim(src, k, 0)
+
+
+def ledge_face(part='mid'):
+    """The front of a deck seen across the drop: the plank edge, a joist end, a bracket, then darkness falling away."""
+    im = blank(16, 16, HOLLOW[1] + (255,)); d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, 15, 3], fill=WOOD[3]); d.line([(0, 0), (15, 0)], fill=WOOD[5]); d.line([(0, 3), (15, 3)], fill=WOOD[1])
+    for x in (3, 11):
+        d.rectangle([x, 4, x + 2, 8], fill=WOOD[2]); d.line([(x, 4), (x, 8)], fill=WOOD[3])
+        d.line([(x + 1, 9), (x + 1, 13)], fill=WOOD[1])               # a bracket running back into the dark
+    for y in range(4, 16):
+        for x in range(16):
+            p = im.getpixel((x, y)); k = 1 - (y - 4) * 0.06
+            im.putpixel((x, y), (int(p[0] * k), int(p[1] * k), int(p[2] * k), 255))
+    if part == 'l': d.line([(0, 0), (0, 15)], fill=WOOD[0])
+    if part == 'r': d.line([(15, 0), (15, 15)], fill=WOOD[0])
+    return up(im)
+
+
+def web(kind):
+    """A web strung across the drop, seen from above.  'taut': drum-tight silver silk with a bright hub, a trampoline;
+    'sticky': sagging, heavy with yellow dew, it holds whatever lands in it."""
+    im = blank(); d = ImageDraw.Draw(im)
+    if kind == 'taut':
+        c, c2, hub = (236, 236, 244, 255), (176, 180, 196, 230), (255, 255, 255, 255)
+        for a, b in (((0, 0), (15, 15)), ((15, 0), (0, 15)), ((8, 0), (8, 15)), ((0, 8), (15, 8))):
+            d.line([a, b], fill=c2)
+        for rr in (2, 4, 6):
+            d.rectangle([8 - rr, 8 - rr, 8 + rr, 8 + rr], outline=c)
+        d.rectangle([7, 7, 9, 9], fill=hub)
+        for p in ((1, 1), (14, 1), (1, 14), (14, 14)): im.putpixel(p, (255, 255, 255, 255))
+    else:
+        c, c2, dew = (214, 206, 150, 240), (160, 150, 110, 220), (236, 214, 90, 255)
+        for a, b in (((0, 1), (15, 14)), ((15, 1), (0, 14)), ((8, 0), (8, 15)), ((0, 7), (15, 9))):
+            d.line([a, b], fill=c2)
+        for rr in (2, 4, 6):
+            d.ellipse([8 - rr, 9 - rr, 8 + rr, 9 + rr - 1], outline=c)  # sagging: the rings droop
+        for p in ((5, 6), (11, 7), (8, 12), (3, 11), (12, 12), (8, 4)):
+            d.rectangle([p[0], p[1], p[0] + 1, p[1] + 1], fill=dew); im.putpixel(p, (255, 248, 180, 255))
+        d.ellipse([6, 7, 10, 11], fill=(196, 180, 110, 255))
+    return up(im)
+
+
+def web_anchor(side):
+    """The guy-lines that hold a web to the trunk: silk running out from the web's edge (side 'l' or 'r' of the web)."""
+    im = blank(); d = ImageDraw.Draw(im)
+    c = (210, 212, 224, 200)
+    if side == 'l':
+        for y0, y1 in ((8, 2), (8, 8), (8, 14)): d.line([(15, y0), (0, y1)], fill=c)
+    else:
+        for y0, y1 in ((8, 2), (8, 8), (8, 14)): d.line([(0, y0), (15, y1)], fill=c)
+    return up(im)
+
+
+def knot_hole(part):
+    """A knot-hole in the bark high up the hollow: green leaf-light and a scrap of sky (2 x 2, parts 'tl','tr','bl','br')."""
+    im = blank(32, 32); d = ImageDraw.Draw(im)
+    d.ellipse([2, 3, 29, 30], fill=(40, 26, 18)); d.ellipse([4, 5, 27, 28], fill=(120, 170, 200))
+    d.ellipse([5, 14, 26, 30], fill=(80, 150, 80)); d.ellipse([8, 19, 23, 30], fill=(60, 120, 60))
+    for p in ((10, 9), (19, 8), (14, 12)): d.point(p, fill=(230, 244, 250))
+    d.arc([2, 3, 29, 30], 200, 340, fill=(88, 60, 40)); d.arc([3, 4, 28, 29], 20, 160, fill=(24, 14, 10))
+    full = up(im)
+    k = {'tl': (0, 0), 'tr': (32, 0), 'bl': (0, 32), 'br': (32, 32)}[part]
+    return full.crop((k[0], k[1], k[0] + 32, k[1] + 32))

@@ -425,8 +425,8 @@ class RMap:
         for y in range(self.H):
             for x in range(self.W):
                 L[0, y, x] = (g2 if g2 and vnoise(x, y, self.seed + 77, 4.0) > 0.52 else self.grass)[y % 2][x % 2]
-        for y, x in np.argwhere(self.cls == 't'):
-            L[0, y, x] = self.tall[(x * 7 + y * 3) % len(self.tall)] if isinstance(self.tall, list) else self.tall
+        for y, x in np.argwhere(self.cls == 't'):          # map builder 9: tall grass stands on layer 2 over the ground grass
+            L[1, y, x] = self.tall[(x * 7 + y * 3) % len(self.tall)] if isinstance(self.tall, list) else self.tall
 
     def grass_variation(self, dark=0.6, worn=True):
         """Rejuvenation's grass is never one flat colour (map builder 8): darker shade patches drift through the lawn
@@ -670,42 +670,40 @@ class RMap:
         self.grass_variation()
         return self.L
 
-    def seal_edges(self, spans, filler=None, keep=()):
-        """map builder 9: close every walkable cell on the map's border except the connection openings (spans =
-        [(side, offset, width)]) and `keep` cells (warp mats), so no edge tile leads onto blocked ground next door (the
-        seam trap of REQUESTS item 11).  A solid bush tile goes on the cell's top free layer."""
-        filler = filler or 7094
+    def seal_edges(self, spans, filler=None, keep=(), sides='NSWE'):
+        """map builder 9: on the map sides that have a connection (`sides`), close every walkable border cell except the
+        crossings (spans = [(side, offset, width)]) and `keep` cells (warp mats), so no edge tile leads onto blocked
+        ground next door (the seam trap of REQUESTS item 11).  Walkability is Essentials' own rule (build.cell_passable
+        on the resolved layers).  A solid bush (a snowy rock on snow maps) goes on the cell's top free layer."""
+        import build as B
+        if filler is None:
+            filler = self.SEAL if getattr(self, 'SEAL', None) else 7094
         ts = self.ts()
         def opening(side, i):
             return any(s == side and o <= i < o + w for s, o, w in spans)
         cells = [(x, 0, 'N', x) for x in range(self.W)] + [(x, self.H - 1, 'S', x) for x in range(self.W)] + \
                 [(0, y, 'W', y) for y in range(self.H)] + [(self.W - 1, y, 'E', y) for y in range(self.H)]
         n = 0
-        Lr = RC.resolve(self.L, self.tid)
+        Lr = RC.resolve(self.L, self.tid).astype(np.int32)
         for x, y, side, i in cells:
-            if opening(side, i) or (x, y) in keep: continue
-            if self.cls[y, x] in 'wW': continue
-            st = [int(v) for v in Lr[:, y, x]]
-            blocked = False
-            for t in reversed(st):
-                if t <= 0: continue
-                if ts['passages'][t] & 15 == 15: blocked = True; break
-                if ts['priorities'][t] == 0: break
-            if blocked: continue
-            z = 2 if self.L[2, y, x] == 0 else 1                    # under an overhead roof or crown: the filler goes below it
-            if z == 1 and self.L[1, y, x] and self.L[1, y, x] < RC.VBASE: self.L[0, y, x] = self.L[1, y, x] if self.L[0, y, x] == 0 else self.L[0, y, x]
-            self.L[z, y, x] = filler; n += 1
+            if side not in sides or opening(side, i) or (x, y) in keep: continue
+            if not B.cell_passable(Lr, ts, x, y): continue
+            if self.L[2, y, x] and self.L[1, y, x] == 0: self.L[1, y, x] = self.L[2, y, x]   # keep a decal one layer down
+            self.L[2, y, x] = filler; n += 1                        # the top layer decides Essentials' passability
         return n
 
-    def seal_against(self, conns, keep=(), extra=()):
-        """map builder 9: seal every border cell except those that meet walkable ground across a connection (read from
-        the neighbour's last built map in maps_out/Data) and the `extra` spans; run on both sides, the openings converge
-        to exactly the shared crossing"""
+    def seal_against(self, conns, keep=(), extra=(), spans=None):
+        """map builder 9: seal every border cell of a connected side except the crossing.  The crossing is given in
+        `spans` [(side, start, width)] (both maps of a connection carry matching spans), else it is read from the
+        neighbour's last built map (cells walkable on both sides)."""
         import build as B, rmarshal as M
-        spans = list(extra)
+        given = list(spans or [])
+        fixed = {s for s, o, w in given}
+        spans = list(extra) + given
         for c in conns:
             p = os.path.join(HERE, '..', 'maps_out', 'Data', 'Map%03d.rxdata' % c['to'])
             d = c['dir'][0].upper(); oa, ob = c.get('offset', 0), c.get('to_offset', 0)
+            if d in fixed: continue                                  # an explicit crossing: both sides agree by design
             if not os.path.exists(p):
                 spans.append((d, 0, max(self.W, self.H))); continue
             nb = M.load_file(p); nts = R.tilesets()[nb.tileset_id]; lay = nb.data.data
@@ -720,7 +718,7 @@ class RMap:
                     if not 0 <= j < nb.height: continue
                     xx = nb.width - 1 if d == 'W' else 0
                     if B.cell_passable(lay, nts, xx, j): spans.append((d, i, 1))
-        return self.seal_edges(spans, keep=keep)
+        return self.seal_edges(spans, keep=keep, sides=''.join(sorted({c['dir'][0].upper() for c in conns})))
 
     # ------------------------------------------------------------ output
     def rubric(self):

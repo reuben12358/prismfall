@@ -83,7 +83,8 @@ def rebuild(model):
             return None if r is None else (r[0], sh(r[1]))
         stand = [sh(c) for c in d.stand]
         devs.append(Device(d.name, stand, act, d.label))
-    m = Model(model.name + ' [built map]', cells | extra, passable, sh(model.start), model.vars0, devs,
+    cls = model.__class__ if getattr(model, 'rebuild_same_class', False) else Model   # e.g. the Canopy's web throws
+    m = cls(model.name + ' [built map]', cells | extra, passable, sh(model.start), model.vars0, devs,
               [sh(c) if c[1] >= 0 else c for c in model.goal], links={sh(k): sh(v) for k, v in model.links.items()},
               resets=[sh(c) for c in model.resets])
     return m, b

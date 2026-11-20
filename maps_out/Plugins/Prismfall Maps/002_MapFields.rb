@@ -18,8 +18,8 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[123] = :SILKWOOD   # Weavers' Guildhall
   FieldEffects::MAP_FIELDS[124] = :NONE   # Treetop House
   FieldEffects::MAP_FIELDS[125] = :NONE   # Cutter's House
-  FieldEffects::MAP_FIELDS[130] = :SILKWOOD   # Loomhouse Gym - Foyer
-  FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Gym - Weaving Hall
+  FieldEffects::MAP_FIELDS[130] = :SILKWOOD   # Loomhouse Gym - Lobby
+  FieldEffects::MAP_FIELDS[131] = :SILKWOOD   # Loomhouse Gym - The Canopy
   FieldEffects::MAP_FIELDS[132] = :SILKWOOD   # Loomhouse Upper Lofts - Canopy Lofts
   FieldEffects::MAP_FIELDS[133] = :SILKWOOD   # Loomhouse Gym - The Spindle
   FieldEffects::MAP_FIELDS[134] = :SILKWOOD   # Loomhouse Upper Lofts - Granny's Knot
@@ -288,7 +288,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[578] = :SILKWOOD   # Rimewood Path
   FieldEffects::MAP_FIELDS[580] = :SNOWY_MOUNTAIN   # The Reedholms
   FieldEffects::MAP_FIELDS[581] = :SNOWY_MOUNTAIN   # The Icefall Locks
-  FieldEffects::MAP_FIELDS[582] = :NONE   # Lumen South Gate
+  FieldEffects::MAP_FIELDS[582] = :NONE   # Lumen West Gate
   FieldEffects::MAP_FIELDS[584] = :SCRAPYARD   # Voltaic Sluiceworks
   FieldEffects::MAP_FIELDS[585] = :SCRAPYARD   # Sluiceworks Turbine Hall
   FieldEffects::MAP_FIELDS[588] = :BLEED   # Ebb Hollow
@@ -450,13 +450,13 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[901] = :UNDERWATER   # Hallow Strait Seabed
   FieldEffects::MAP_FIELDS[905] = :BEACH   # Shardfall Isles
   FieldEffects::MAP_FIELDS[910] = :INVERSE   # Antumbra - Distortion Core
-  FieldEffects::MAP_FIELDS[920] = :SNOWY_MOUNTAIN   # The Rime Narrows
+  FieldEffects::MAP_FIELDS[920] = :DESERT   # The Rimed Sands
   FieldEffects::MAP_FIELDS[921] = :SNOWY_MOUNTAIN   # Skaldfast - Outer Walls
-  FieldEffects::MAP_FIELDS[922] = :FROZEN_LAKE   # Skaldfast - Harbour Keep
+  FieldEffects::MAP_FIELDS[922] = :FROZEN_LAKE   # Skaldfast - Rime Keep
   FieldEffects::MAP_FIELDS[923] = :FROZEN_LAKE   # Skaldfast - Great Hall
   FieldEffects::MAP_FIELDS[924] = :ASHEN_WASTE   # Ashkaar Siege Camp
   FieldEffects::MAP_FIELDS[925] = :ASHEN_WASTE   # The Steamline
-  FieldEffects::MAP_FIELDS[926] = :FROZEN_LAKE   # The Shattered Ice
+  FieldEffects::MAP_FIELDS[926] = :DESERT   # The Glass Dunes
   FieldEffects::MAP_FIELDS[927] = :VOLCANIC   # Cinder Cape Warfort
   FieldEffects::MAP_FIELDS[959] = :NONE   # Skyport Customs
   FieldEffects::MAP_FIELDS[960] = :BLEED   # The Ledger Hall

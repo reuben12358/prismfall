@@ -84,13 +84,13 @@ MapPosition = 0,12,16
 Name = Woodward's Hut
 MapPosition = 0,11,14
 #-------------------------------
-[130]   # Loomhouse Gym - Foyer
-Name = Loomhouse Gym - Foyer
+[130]   # Loomhouse Gym - Lobby
+Name = Loomhouse Gym - Lobby
 MapPosition = 0,11,13
 SnapEdges = true
 #-------------------------------
-[131]   # Loomhouse Gym - Weaving Hall
-Name = Loomhouse Gym - Weaving Hall
+[131]   # Loomhouse Gym - The Canopy
+Name = Loomhouse Gym - The Canopy
 MapPosition = 0,11,13
 SnapEdges = true
 #-------------------------------

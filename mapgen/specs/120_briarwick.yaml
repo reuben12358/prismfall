@@ -58,6 +58,11 @@ events:
   gfx: ['', 0, 2]
   name: Cutter's House door
   link: BW_HOUSE2
+- type: door
+  at: [26, 8]
+  gfx: ['', 0, 2]
+  name: Lantern House door
+  link: BW_LANTERN
 - type: warp
   name: To Gossamer Wood
   link: WOOD_BRIAR
@@ -134,7 +139,7 @@ events:
   text: 'LOOMHOUSE GYM. WARDEN: Old Mother Loom (painted over) TAMSIN LOOM.
 
     "A thread holds because it''s twisted with others."'
-  at: [38, 13]
+  at: [40, 12]
 - type: sign
   name: Loyal Three shrine
   post: false

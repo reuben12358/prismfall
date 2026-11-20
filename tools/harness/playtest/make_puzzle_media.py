@@ -12,12 +12,13 @@ CAP = {
     'g1_02': 'Gym 1 auditorium (map 154): the aisle runs between the seat rows to the stage',
     'g1_03': 'Up the aisle: the actors in the aisle battle you', 'g1_04': 'On the apron: the house curtain is in',
     'g1_05': 'The one interaction: haul the curtain rope; the curtain flies out', 'g1_06': 'Before Warden Dorian', 'g1_07': 'After the battle: the badge',
-    'g2_00': 'Gym 2: outside the Loomhouse (map 120)', 'g2_01': 'Gym 2 foyer (map 130): one loom bed across the aisle',
-    'g2_02': 'The plank sits off to the left; a silk thread runs to the heddle', 'g2_03': 'One pull: the plank slides into the aisle',
-    'g2_04': 'Across the loom bed', 'g2_05': 'Weaving Hall (map 131): the middle bed has no left plank at all',
-    'g2_06': 'Red heddle lifts beds A and B', 'g2_07': 'Gold lifts B and C',
-    'g2_08': 'Green lifts C and A: every bed lifted twice, all planks on the right', 'g2_09': 'Climbing the right-hand column',
-    'g2_10': 'Top ledge', 'g2_11': 'Before Warden Tamsin (double battle)', 'g2_12': 'After the battle: the badge',
+    'g2_00': 'Gym 2: outside the Loomhouse, the elder tree (map 120)', 'g2_01': "Gym 2 lobby (map 130): Granny Loom's weavers",
+    'g2_02': 'The Canopy (map 131): the hollow of the elder, webs across the drop', 'g2_03': 'A taut web: step on it',
+    'g2_04': 'It throws you three bounds the way you stepped on', 'g2_05': 'A web can throw you onto a web',
+    'g2_06': 'A sticky web holds you in mid-air', 'g2_07': 'Step sideways off it onto a taut web: thrown sideways',
+    'g2_08': 'Ledge three: the Joltik strands', 'g2_09': 'Joltik 1 sparks the gold strand: webs A and B change',
+    'g2_10': 'Joltik 2 on the perch sparks the blue strand: B and C', 'g2_11': 'A throws you up onto B, which holds you',
+    'g2_12': "C throws you across to Tamsin's ledge", 'g2_13': 'After the double battle: the badge',
     'bs_00': 'Playhouse Backstage (D9, map 151): work lights', 'bs_01': 'Cue the Shipwreck from the mark: a gangplank crosses the pit',
     'bs_02': 'Over the gangplank to stage left', 'bs_03': 'Cue the Forest: the ship drops go, the ladder is free',
     'bs_04': 'Fly Loft (map 152)', 'bs_05': 'RIGHT rail: rope 2 flies flats B and C', 'bs_06': 'Rope 3 flies A and drops the rostrum back in',
@@ -31,8 +32,10 @@ CAP = {
     'lf_10': 'Canopy Lofts: on the bridge only the brass wire opens', 'lf_11': "Granny's Knot: five threads, five treadles",
     'lf_12': "Granny's Knot: treadles 1, 4, 5: up, down, up, down, up", 'lf_13': "Granny's chest opens",
     'd1_00': 'D1 Glassed Orchard: the chime spur plays low, middle, high', 'd1_01': 'A wrong note first: the failure line says which note was wanted',
+    'hs_00': 'Gym 1 auditorium: the house tonight', 'hs_01': 'The stalls: everyone you met in Saltmere has a seat by the aisle',
+    'hs_02': "After Dorian's show",
     'd1_02': 'Low', 'd1_03': 'Middle', 'd1_04': 'High: the glass hedge shatters', 'd1_05': 'Past where the hedge stood', 'd1_06': "The lost child's satchel"}
-ROOM = {130: 'Loomhouse foyer', 131: 'Weaving Hall', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
+ROOM = {130: 'Loomhouse lobby', 131: 'The Canopy', 154: 'Auditorium', 150: 'Lobby', 151: 'Old revolve', 152: 'Fly Loft', 132: 'Canopy Lofts', 134: "Granny's Knot", 120: 'outside (map 120)', 147: 'outside (map 147)', 522: 'The Glassed Orchard',
         }
 
 

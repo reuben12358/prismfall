@@ -35,6 +35,7 @@ def snowmap(W, H, mid, kit='shs', sea=False):
     m.STAIRS = tuple(STAMPS['fw_stair_' + k]['layers'][1][0][0] for k in 'lmr')      # snowy timber stairs (rdraw)
     m.grass2 = None
     m.lattice = K.RMap.TREES_SNOW
+    m.SEAL = int(np.array(STAMPS['fw_stone']['layers']).max()) if 'fw_stone' in STAMPS else None   # map builder 9: edge filler
     m.auto = {'d': ('Packed Snow', 'pf'), 'e': ('KristilineDirt', 'rejuvenation'), 'w': ('Still water snow', 'reborn'),
               'o': ('KristilineWatersFrozen', 'rejuvenation'), 'p': ('Frozen Pond', 'pf'), 'W': ('Sea deep', 'rejuvenation')}
     if sea: m.auto['w'] = ('Sea deep', 'rejuvenation'); m.auto.pop('W')
@@ -265,7 +266,7 @@ def route5(prev=None):
     reed_beds(m, 130, seed=561)
     road_tracks(m, 0.10, seed=560)
     drifts(m, 0.16, seed=560)
-    m.seal_against([{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 31}, {'dir': 'N', 'offset': 2, 'to': 570, 'to_offset': 4}])   # map builder 9
+    m.seal_against([{'dir': 'E', 'offset': 12, 'to': 140, 'to_offset': 31}, {'dir': 'N', 'offset': 2, 'to': 570, 'to_offset': 4}], spans=[('E', 12, 3), ('N', 2, 3)])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(560, head(560, 'Frostflat Causeway', biome='route', display_name='Frostflat Causeway', bgm='Route 2',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 22], 'BattleBack': 'snow', 'Weather': ['Snow', 10]},
@@ -469,7 +470,7 @@ def frostwick(prev=None):
             m.L[1, y, x] = STAMPS['fw_crack%d' % ((x + y) % 3)]['layers'][1][0][0] if (x * 3 + y) % 2 else STAMPS['fw_drift%d' % ((x + y) % 3)]['layers'][1][0][0]
     road_tracks(m, 0.07, seed=570)
     drifts(m, 0.07, seed=570)
-    m.seal_against(FW_CONN, keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
+    m.seal_against(FW_CONN, spans=[('N', 27, 4), ('E', 23, 4), ('S', 4, 3)], keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(570, head(570, 'Frostwick', biome='village', bgm='Lerucean Town',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 21], 'BattleBack': 'snow', 'Weather': ['Snow', 20]},
@@ -680,7 +681,7 @@ def rimewood(prev=None):
     rime_silk(m, ((6, 8), (12, 20), (30, 30), (40, 20), (20, 44), (34, 50)))
     m.scatter(8, seed=6)
     dress_ice(m, 0.25, seed=562); reed_beds(m, 45, seed=562); drifts(m, 0.08, seed=562)
-    m.seal_against([{'dir': 'N', 'offset': 12, 'to': 561, 'to_offset': 10}, {'dir': 'S', 'offset': 26, 'to': 578, 'to_offset': 36}],
+    m.seal_against([{'dir': 'N', 'offset': 12, 'to': 561, 'to_offset': 10}, {'dir': 'S', 'offset': 26, 'to': 578, 'to_offset': 36}], spans=[('S', 26, 4)],
                    keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
     if prev: m.preview(prev, 0.5)
     m.write(562, head(562, 'The Rimewood', biome='forest', bgm='Natural Park',

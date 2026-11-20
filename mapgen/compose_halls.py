@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""compose_halls.py - tileset 54 "PF Rejuv Halls": the puzzle interiors (Gym 1 Loomhouse, Gym 2 Pell Playhouse).
+"""compose_halls.py - tileset 54 "PF Rejuv Halls": the puzzle interiors (Gym 1 Pell Playhouse, Gym 2 Loomhouse and its Canopy).
 
 A compact sheet in the PF Rejuv family (owner: puzzle engineer; nothing here touches tilesets 50-53):
   mi  Rejuvenation `Multi-Interiors` (timber halls: Sensei's House, Goldenleaf interiors) - only the sheet rows that
@@ -30,6 +30,7 @@ SOLID_PF = (17876, 17877)      # the loom's upper row: looms are walls between t
 SOLID_MG = (4691, 4692, 4697,  # theatre seats and the house curtain's fringe: solid (the aisles are the way through)
             4704, 4705, 4706, 4712, 4713, 4714, 4720, 4721, 4722, 4634, 4635, 4636, 4642, 4643, 4644, 4650, 4651, 4652,
             5184, 5185, 5186, 5192, 5193, 5194, 5200, 5201, 5202)   # wall posters: never a way onto the wall
+BARK = [18036, 18037, 18038, 18039, 18044, 18045, 18046, 18047, 18052, 18053, 18054, 18055]   # the elder tree's mossy bark
 PF_STAMPS = ['pf_p_lantern', 'pf_p_silk', 'pf_p_silk1', 'pf_p_strand_w', 'pf_p_strand_p', 'pf_p_web', 'pf_p_web1', 'pf_p_loom',
              'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y', 'pf_p_laundry', 'pf_p_awning', 'pf_lantern',
              'hb_dyeline', 'hb_rugline', 'hb_rugline2', 'hb_washline', 'hb_crates4', 'hb_barrels', 'hb_banner']
@@ -199,13 +200,13 @@ def main():
 
     def add(name, im, p=0, q=0): cells.append((im, p, q, ('cu', name)))
     RED, GOLD, GREEN, BRASS, WHITE = (214, 64, 64), (236, 190, 60), (70, 176, 96), (190, 150, 70), (236, 232, 220)
-    COLS = {'red': RED, 'gold': GOLD, 'green': GREEN, 'brass': BRASS, 'silk': WHITE}
+    COLS = {'red': RED, 'gold': GOLD, 'green': GREEN, 'brass': BRASS, 'silk': WHITE, 'blue': (90, 176, 240)}
     plank = src('mi', 962)
     add('plank', plank)                                             # walkable board across a loom bed
     add('warp', warp(), 15); add('warp_top', warp(top=True), 15); add('warp_bot', warp(bottom=True), 15)
     for n, c in COLS.items():
         add('post_' + n, post(c, c), 15)
-        for k in ('v', 'h', 'ne', 'nw', 'se', 'sw'): add('thread_%s_%s' % (n, k), thread(c, k))
+        for k in ('v', 'h', 'ne', 'nw', 'se', 'sw'): add('thread_%s_%s' % (n, k), thread(c, k), 0 if n in ('silk', 'brass') else 15)  # coloured strands hang over drops
     add('mark', mark())
     add('treadle_up', treadle(True), 15); add('treadle_down', treadle(False), 15)
     add('knot_up', knot(True), 15); add('knot_down', knot(False), 15)
@@ -252,6 +253,19 @@ def main():
     for n in ('hb_crates4', 'hb_barrels', 'pf_p_silk', 'pf_p_vat_b', 'pf_p_vat_r', 'pf_p_vat_y'):   # props on the floor below, dimmed
         for t in sorted({int(t) for t in np.array(st[n]['layers']).reshape(-1) if t}):
             k = t - 384; add('dim_%d' % t, HA.dim(pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32))), 15)
+    # ---- the Canopy (Gym 2 redo, SPINE Rev 19): the hollow of Briarwick's elder tree, webs strung across the drop
+    for dpt in range(3):
+        for sd in range(3): add('hollow_%d_%d' % (dpt, sd), HA.hollow(dpt, sd), 15)
+    for p in ('l', 'mid', 'r'): add('ledge_face_' + p, HA.ledge_face(p), 15)
+    for sd in range(4): add('root_%d' % sd, HA.root(sd), 15)
+    add('web_taut', HA.web('taut'), 0); add('web_sticky', HA.web('sticky'), 0)        # webs are events; the tiles are walkable
+    add('web_anchor_l', HA.web_anchor('l'), 15); add('web_anchor_r', HA.web_anchor('r'), 15)
+    for p in ('tl', 'tr', 'bl', 'br'): add('knot_hole_' + p, HA.knot_hole(p), 15)
+    for nm_, t in (('cocoon_top', 17752), ('cocoon_bot', 17753)):     # silk cocoons hung over the drop: solid copies
+        k = t - 384; add(nm_, pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32)), 15)
+    for t in BARK:                                                  # the elder's bark, for the hollow's walls (PF Rejuv pf part)
+        k = t - 384; tile = pfs.crop((k % 8 * 32, k // 8 * 32, k % 8 * 32 + 32, k // 8 * 32 + 32))
+        add('bark_%d' % t, tile, 15); add('bark_dim_%d' % t, HA.trunk_side(tile), 15)
     cu = Image.new('RGBA', (256, 32 * ((len(cells) + 7) // 8)), (0, 0, 0, 0))
     for i, (im, p, q, (key, name)) in enumerate(cells):
         cu.paste(im, (i % 8 * 32, i // 8 * 32)); data[key][name] = 384 + row * 8 + i

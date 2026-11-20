@@ -488,7 +488,7 @@ maps:
   578: {name: "Rimewood Path", kind: route, field: SILKWOOD, battles: [trainer], encounters: [Land], source: hand, why: "ROUTES.yaml: The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late."}
   580: {name: "The Reedholms", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [GoodRod, Land, OldRod, SuperRod, Water], source: kingdom, why: "Isenmar route default"}
   581: {name: "The Icefall Locks", kind: route, field: SNOWY_MOUNTAIN, battles: [], encounters: [Land], source: name, why: "name: \"Icefall\""}
-  582: {name: "Lumen South Gate", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
+  582: {name: "Lumen West Gate", kind: interior, field: NONE, source: rule, why: "interior with no battle venue in its spec"}
   584: {name: "Voltaic Sluiceworks", kind: dungeon, field: SCRAPYARD, battles: [], encounters: [Cave, GoodRod, OldRod, SuperRod, Water], source: spec, why: "world spec"}
   585: {name: "Sluiceworks Turbine Hall", kind: dungeon, field: SCRAPYARD, battles: [], encounters: [Cave], source: spec, why: "world spec"}
   588: {name: "Ebb Hollow", kind: bleed_zone, field: BLEED, battles: [], encounters: [Land], source: spec, why: "world spec"}
@@ -650,13 +650,13 @@ maps:
   901: {name: "Hallow Strait Seabed", kind: dungeon, field: UNDERWATER, battles: [], encounters: [Land], source: spec, why: "world spec"}
   905: {name: "Shardfall Isles", kind: route, field: BEACH, battles: [], encounters: [Land], source: borderland, why: "blend of islands"}
   910: {name: "Antumbra - Distortion Core", kind: dungeon, field: INVERSE, source: spec, why: "world spec"}
-  920: {name: "The Rime Narrows", kind: route, field: SNOWY_MOUNTAIN, source: spec, why: "world spec"}
+  920: {name: "The Rimed Sands", kind: route, field: DESERT, source: spec, why: "world spec"}
   921: {name: "Skaldfast - Outer Walls", kind: town, field: SNOWY_MOUNTAIN, source: spec, why: "world spec"}
-  922: {name: "Skaldfast - Harbour Keep", kind: town, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  922: {name: "Skaldfast - Rime Keep", kind: town, field: FROZEN_LAKE, source: spec, why: "world spec"}
   923: {name: "Skaldfast - Great Hall", kind: interior, field: FROZEN_LAKE, source: name, why: "name: \"Great Hall\" (Isenmar)"}
   924: {name: "Ashkaar Siege Camp", kind: town, field: ASHEN_WASTE, source: spec, why: "world spec"}
   925: {name: "The Steamline", kind: route, field: ASHEN_WASTE, source: spec, why: "world spec"}
-  926: {name: "The Shattered Ice", kind: dungeon, field: FROZEN_LAKE, source: spec, why: "world spec"}
+  926: {name: "The Glass Dunes", kind: dungeon, field: DESERT, source: spec, why: "world spec"}
   927: {name: "Cinder Cape Warfort", kind: town, field: VOLCANIC, source: spec, why: "world spec"}
   959: {name: "Skyport Customs", kind: interior, field: NONE, source: hand, why: "customs hall"}
   960: {name: "The Ledger Hall", kind: interior, field: BLEED, source: spec, why: "world spec"}

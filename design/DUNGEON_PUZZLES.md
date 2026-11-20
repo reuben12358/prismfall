@@ -343,6 +343,13 @@ y10  #####@######    @ (5,10) ladder up to 152 p
   crown: Dorian keeps *The Gilded King* and hands over only the prologue page (story editor's ruling, SWAP_GYM1_GYM2 §2).
 - **Reset:** the apprentice "Old Joss" (by the ladder) → V312 = 0.
 
+## Parked for a later dungeon: the linked heddles (SPINE Revision 19)
+Gym 2 became the web Canopy (GYM_PUZZLES Gym 2). Its Revision 14 puzzle, the Weaving Hall, is kept here as an idea for
+a later weavers' dungeon (the Gossamer Heartwood's warp roots are the natural home): three loom beds crossed on planks;
+three heddles, each lifting two beds a column (mod 3: Red A+B, Gold B+C, Green C+A); you can climb only when all three
+planks share a column, so fixing one bed at a time undoes the last ("count lifts, not pulls"). Proven at 3 moves / 27
+states when it was built; the model is in the 2026-11-19 history of `mapgen/puzzles/loomhouse.py`.
+
 ---
 # PART 2 — ONE SIGNATURE PUZZLE DUNGEON PER KINGDOM
 

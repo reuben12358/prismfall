@@ -589,6 +589,9 @@ def main():
         for mid, evs in getattr(mod, 'EVENTS', {}).items():
             for s in specs:
                 if s['id'] == mid: s.setdefault('events', []); s['events'] = list(s['events']) + copy.deepcopy(evs)
+    import trial_overlay                        # map builder 9: Trial events (design/TRIAL_EVENTS.yaml) over other scripts' maps
+    import render as _R
+    trial_overlay.apply(specs, cell_passable, _R.tilesets())
     ids = [s['id'] for s in specs]
     if len(ids) != len(set(ids)):
         sys.exit('duplicate map ids in specs')

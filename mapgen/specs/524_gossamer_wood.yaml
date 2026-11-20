@@ -51,6 +51,26 @@ events:
   link: WOOD_DEEP
   arrive: [88, 48, left]
 - type: event
+  name: Silk wall
+  at: [50, 43]
+  pages:
+  - commands: []
+  - graphic: {tile: 17758}
+    trigger: action
+    commands:
+    - {comment: 'Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :heracross'}
+    - A wall of silk, tight as a drum. Something with a horn could tear it.
+- type: event
+  name: Fallen log
+  at: [24, 92]
+  pages:
+  - commands: []
+  - graphic: {tile: 19313}
+    trigger: action
+    commands:
+    - {comment: 'Condition: quest_flag(:EL_HORN_AND_PINCER, :helper) != :pinsir'}
+    - A fallen log across the path. Something with pincers could crush it.
+- type: event
   name: Wood entry 1
   at: [4, 49]
   pages: &id001
@@ -269,9 +289,11 @@ events:
   name: Sap tree duel
   at: [78, 84]
   pages:
+  - commands: []
   - graphic: {sprite: Followers/HERACROSS, dir: left}
     trigger: action
     commands:
+    - {comment: 'Condition: badges >= 2 && !quest_done(:EL_HORN_AND_PINCER)'}
     - {script: 'pf_trial_talk(:SAP_TREE)'}
 - type: event
   name: Sap tree

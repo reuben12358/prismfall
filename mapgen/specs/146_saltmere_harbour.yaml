@@ -65,7 +65,9 @@ events:
   sprite: NPC 07
   dir: down
   move: random
-  text: 'Stevedore: Tax-barges tie up outside the breakwater and no further.
+  commands:
+  - {script: 'pfm_audience(:stevedore)'}
+  - 'Stevedore: Tax-barges tie up outside the breakwater and no further.
 
     Free port means free. [TODO story]'
 - type: npc
@@ -73,17 +75,23 @@ events:
   at: [8, 57]
   sprite: NPC 05
   dir: down
-  text: 'Old angler: Something big has been circling the breakwater since the Shatter talk began. [TODO story]'
+  commands:
+  - {script: 'pfm_audience(:old_angler)'}
+  - 'Old angler: Something big has been circling the breakwater since the Shatter talk began. [TODO story]'
 - type: npc
   name: Salt raker
   at: [36, 8]
   sprite: NPC 11
   dir: right
-  text: 'Salt raker: The pans glitter best at low sun. Mind the brine. [TODO story]'
+  commands:
+  - {script: 'pfm_audience(:salt_raker)'}
+  - 'Salt raker: The pans glitter best at low sun. Mind the brine. [TODO story]'
 - type: event
   name: Fisherman
   pages:
-  - commands: ['Fisherman: Ordinary fish. Ordinary sea. Fifty years and never seen a thing out of the way. I find that very restful.']
+  - commands:
+    - {script: 'pfm_audience(:fisherman)'}
+    - 'Fisherman: Ordinary fish. Ordinary sea. Fifty years and never seen a thing out of the way. I find that very restful.'
     trigger: action
     move: fixed
     graphic: {sprite: trainer_FISHERMAN, dir: down}
@@ -91,8 +99,9 @@ events:
 - type: event
   name: Old Sailor
   pages:
-  - commands: ['Old Sailor: Saltmere won''t wilt you, they say. Born here, live anywhere. It''s the one Plate that doesn''t hold on. Kindest Plate there
-        is.']
+  - commands:
+    - {script: 'pfm_audience(:old_sailor)'}
+    - 'Old Sailor: Saltmere won''t wilt you, they say. Born here, live anywhere. It''s the one Plate that doesn''t hold on. Kindest Plate there is.'
     trigger: action
     move: fixed
     graphic: {sprite: trainer_SAILOR, dir: down}
@@ -101,12 +110,15 @@ events:
   name: Stagehand on a smoke break
   pages:
   - commands:
+    - &id001 {script: 'pfm_audience(:smoke_stagehand)'}
     - 'Stagehand on a smoke break: Opening night''s tonight. The Accord sends an inspector to make sure we say every line of the official text.'
     - selfswitch: [A, true]
     trigger: action
     move: fixed
     graphic: {sprite: NPC 20, dir: down}
-  - commands: ['Stagehand on a smoke break: He sleeps through the second act. We''ve timed it. Eleven minutes in, every year.']
+  - commands:
+    - *id001
+    - 'Stagehand on a smoke break: He sleeps through the second act. We''ve timed it. Eleven minutes in, every year.'
     trigger: action
     move: fixed
     graphic: {sprite: NPC 20, dir: down}
@@ -127,6 +139,84 @@ events:
     move: fixed
     cond: {self: A}
   at: [23, 61]
+- type: event
+  name: Dorian at the breakwater
+  pages:
+  - graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    trigger: action
+    commands:
+    - if: pfm?(:met_dorian)
+      then: ['\pf[DORIAN,happy]Dorian: The Playhouse, darling. The Old Town. The curtain waits for no one, except me.']
+      else:
+      - (At the end of the breakwater, a man in a velvet coat lowers a silver-topped cane he very clearly does not need. He was conducting the booing.)
+      - '\pf[DORIAN,happy]Dorian: *Enter, stage left, a stranger!* No -- a challenger. That''s a Badge Case. On booing day! The gods of theater are kind.'
+      - '\pf[DORIAN,smug]Dorian: Dorian Pell. Warden of Saltmere, Pageant-Master to the Accord, and for thirty-one consecutive years, Saltmere''s Most Eligible
+        Something.'
+      - '\pf[DORIAN,neutral]Dorian: You saw the barge? The Queen sends it every week. Our charter says we answer to no crown. Every week we remind her,
+        in the only language a crown understands.'
+      - choices: ['Booing?', 'Isn''t that rude?', '...']
+        cancel: 2
+        branches:
+        - ['\pf[DORIAN,happy]Dorian: Volume, darling. Volume.']
+        - ['\pf[DORIAN,smug]Dorian: Profoundly. That''s what makes it diplomacy.']
+        - ['\pf[DORIAN,neutral]Dorian: Ah. A critic. We get a few. We feed them to the Ogre.']
+      - '\pf[DORIAN,neutral]Dorian: Saltmere is the only city in Velmora where nothing is a miracle, darling. So we built our own. Every night, at eight.'
+      - '\pf[DORIAN,neutral]Dorian: The Playhouse is in the Old Town. Come when you''re ready, not before. A first gym should be an occasion.'
+      - '\pf[DORIAN,happy]Dorian: And the Pageant opens tonight at the Lantern Theatre. I wrote none of it and I''m in all of it.'
+      - {script: 'pfm_set(:met_dorian)'}
+  - cond: {switch: CH3_PAGEANT_DONE}
+    graphic: {sprite: trainer_GENTLEMAN, dir: down}
+    trigger: action
+    commands: ['\pf[DORIAN,sad]Dorian: I''ve stood on this breakwater for thirty years telling a queen she can''t have us. Last night someone walked onto
+        my stage and took us anyway.']
+  at: [26, 61]
+- type: event
+  name: Salt-caramel (Juno)
+  pages:
+  - commands: []
+  - cond: {switch: CH3_UNDERSTUDY_GOT}
+    graphic: {sprite: trainer_RIVAL2, dir: down}
+    trigger: action
+    commands:
+    - if: pf_choice(:ch3_juno_talk).nil?
+      then:
+      - (Sunset. You and Juno sit on the end of the breakwater with your feet over the lagoon, sharing a paper cone of salt-caramel.)
+      - '\pf[JUNO,happy]Juno: It''s mostly salt. Is that the point? I think that''s the point.'
+      - '\pf[JUNO,neutral]Juno: Your first badge. And it HUMMED. I''m writing that down. I''m writing everything down.'
+      - '\pf[JUNO,neutral]Juno: ...Can I tell you something boring?'
+      - choices: [Go on., 'Is it about larches?', '...']
+        cancel: 2
+        branches:
+        - []
+        - ['\pf[JUNO,deadpan]Juno: It''s not about larches. ...It''s a bit about larches.']
+        - []
+      - '\pf[JUNO,neutral]Juno: Everyone asks about the flowers. "Which play, dear?" "Are you a bride, dear?" I''m fifteen.'
+      - '\pf[JUNO,neutral]Juno: They''re from Aunt Elin. She''s the Bride Tree, in Uncle Rowan''s garden. When I was three she went to glass, except she
+        didn''t, she went to blossom, and she never stopped.'
+      - '\pf[JUNO,happy]Juno: I''d worn some to her wedding party. She''d only been married a year. So I just... kept wearing them. They don''t wilt.'
+      - '\pf[JUNO,neutral]Juno: Uncle Rowan says that''s the problem. I don''t know what he means. I think it''s the best thing in the world.'
+      - '\pf[JUNO,sad]Juno: ...Mostly I think that.'
+      - '\pf[JUNO,neutral]Juno: Your turn. That gate at the dock. It didn''t give you a color. Mum heard from the fishwife. Everyone''s heard.'
+      - choices: ['Tell her what it said: NULL.', It's nothing. A broken gate., '...']
+        cancel: 2
+        branches:
+        - - {script: 'pf_choose(:ch3_juno_talk, :told)'}
+          - '\pf[JUNO,surprised,shock]Juno: Null. Like... nothing?'
+          - '\pf[JUNO,happy]Juno: Well. I''m a walking bouquet and you''re a blank page. We should start a club.'
+          - '\pf[JUNO,neutral]Juno: I won''t tell anyone. Not Mum. Not Kestrel. Not even Uncle Rowan. I''m good at secrets. I just don''t look it.'
+        - - {script: 'pf_choose(:ch3_juno_talk, :deflect)'}
+          - '\pf[JUNO,sad]Juno: ...Okay.'
+          - '\pf[JUNO,neutral]Juno: If it''s ever not nothing, I''m here. I''m very easy to find. I''m the one wearing a tree.'
+        - - {script: 'pf_choose(:ch3_juno_talk, :silent)'}
+          - '\pf[JUNO,neutral]Juno: That''s fine. Sitting''s fine. Sitting is underrated.'
+          - (She hands you the last caramel.)
+      - {se: Bell1}
+      - '\pf[JUNO,happy]Juno: Opening night! Come ON! If we''re late Dorian will make us sit in the Ogre''s row!'
+      - {script: 'pfm_set(:sm_caramel)'}
+      else: ['\pf[JUNO,happy]Juno: The Lantern Theatre! Eight o''clock! Go go go!']
+  - cond: {switch: CH3_PAGEANT_DONE}
+    commands: []
+  at: [29, 61]
 - type: npc
   name: Legion recruiter
   sprite: NPC 21

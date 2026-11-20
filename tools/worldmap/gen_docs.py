@@ -551,6 +551,23 @@ def update_field_defaults():
         m = re.match(r'^  (\d+): ', ln)
         if m:
             existing.add(int(m.group(1)))
+    # keep existing entries in step with maps.json: names always (renames such as the Rev 18 war sites), and the
+    # field of entries whose source is the world spec
+    maps = {int(m['id']): m for m in load_maps()['maps']}
+    synced = 0
+    for i in range(start + 1, len(lines)):
+        m = re.match(r'^  (\d+): \{name: "((?:[^"\\]|\\.)*)"', lines[i])
+        if not m or int(m.group(1)) not in maps:
+            continue
+        mp = maps[int(m.group(1))]
+        ln = lines[i]
+        if mp.get('name') and mp['name'] != m.group(2).replace('\\"', '"'):
+            ln = ln[:m.start(2)] + mp['name'].replace('"', "'") + ln[m.end(2):]
+        if 'source: spec,' in ln and mp.get('field'):
+            ln = re.sub(r'(field: )[A-Z_]+', lambda q: q.group(1) + mp['field'], ln, count=1)
+        if ln != lines[i]:
+            lines[i] = ln
+            synced += 1
     new = {}
     for r, l in W.all_legs():
         if l['id'] in existing:
@@ -559,6 +576,8 @@ def update_field_defaults():
                        'why: "ROUTES.yaml: %s"}' % (l['id'], l['name'].replace('"', "'"), l['field'],
                                                    l['landmark'].replace('"', "'")[:110])
     if not new:
+        if synced:
+            open(p, 'w', encoding='utf-8').write('\n'.join(lines))
         return 0
     out = lines[:start + 1]
     body = lines[start + 1:]

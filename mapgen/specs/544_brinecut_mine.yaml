@@ -167,8 +167,8 @@ events:
                 branches:
                   - - "Lady Thistledown: ...A pity. Then take your bouquet. Every star needs one."
                     - {script: "pbReceiveItem(:SPELLTAG)"}
-                    - "A small candle-flame drifts out of the footlights and follows you."
-                    - {script: "pbAddPokemon(:LITWICK, 14)"}
+                    - "A chipped teacup rattles off the mantel and follows you."
+                    - {script: "pbAddPokemon(:SINISTEA, 14)"}
                     - {switch: [THISTLEDOWN_CLEARED, true]}
                     - {selfswitch: [A, true]}
                   - - {script: "Prismfall.game_over(:GO_CURTAIN_CALL)"}

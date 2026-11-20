@@ -529,7 +529,7 @@ ROADS = [
       secret="Where the Leach first turns blue, a pipe comes out of the bank. It is warm."),
     L(633, None, "The Gutterfall", "Where the Leach drops off the Crownland edge into the marsh under Zenith's escarpment. "
                                   "Nadir named it.",
-      'Nadir', [(20, 12)], [80, 96], None, 'CORROSIVE_MIRE',
+      'Nadir/Elowen', [(20, 12)], [80, 96], None, 'CORROSIVE_MIRE',
       landmark="The blue waterfall (Zenith's outfall joins the Leach at the lip) and the ladder-town clinging beside it.",
       wild="Grimer, Croagunk, Trubbish, Stunky, Toxel.",
       secret="A ledge behind the fall where the sump-folk leave their dead's lanterns."),
@@ -573,7 +573,7 @@ ROADS = [
       secret="A runaway ore cart you can ride down a closed spur."),
     L(672, None, "The Long Drop",
       "Ironreach's front door: a shaft road that goes down for an hour. Named by people who carried things up it.",
-      'Nadir', [(16, 12)], [64, 130], None, 'SCRAPYARD',
+      'Nadir/Elowen', [(16, 12)], [64, 130], None, 'SCRAPYARD',
       landmark="The winding-tower at the Crown Road's south junction, and the cage lift.",
       wild="Timburr, Machop, Pawniard, Trubbish, Tinkatink.",
       secret="A side adit sealed with a pit-fighter's handprint in iron."),
@@ -978,9 +978,10 @@ BORDERLANDS = {
     'E': ("The Sulfur Reach", ('Elowen', 'Ashkaar'), 650, [641, 661],
           "Ash woods and hot springs: scorched oaks around the sulfur lake, boiling yellow pools, the Ironway pass.",
           "Salandit, Charcadet, Numel, Houndour, Capsakid, Cyclizar, Bramblin, Fletchinder"),
-    'F': ("The Rootdeep", ('Nadir', 'Elowen'), 690, [680, 840],
+    'F': ("The Rootdeep", ('Nadir', 'Elowen'), 690, [680, 840, 633, 672],
           "Under the plateau's foot: the Gossamer's roots through Nadir's mine shafts, glowing fungus, root-cathedrals; "
-          "the Blindwater under the south coast. South hamlet: Mothwell (850).",
+          "the roads that go down off the Crownland edge into Nadir (the Gutterfall under the north cliff, the Long "
+          "Drop under the west rim); the Blindwater under the south coast. South hamlet: Mothwell (850).",
           "Foongus, Parasect, Shiinotic, Breloom, Toedscruel, Bramblin, Machoke, Scraggy"),
     'G': ("The Wired Wood", ('Zenith', 'Elowen'), 750, [593, 612, 741, 801],
           "Industrial fringe and orchards round the plateau: vine-wrapped pylons, clockwork orchards, greenhouse "

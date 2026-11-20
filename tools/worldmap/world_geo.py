@@ -172,5 +172,5 @@ WAR = dict(
     battlefield=(13.5, 2.5),        # the Glass Dunes (map 926)
     camps={'isenmar': (9.5, 2.5), 'ashkaar': (15.5, 2.5)},   # Skaldfast; the Ashkaar Siege Camp (924)
     labels=[("The Glass Dunes", 13.6, 3.25, 0.42), ("the Steamline", 12.6, 0.62, 0.3),
-            ("The Rimed Sands", 11.3, 1.55, 0.32), ("Siege Camp", 15.9, 1.55, 0.3)],
+            ("The Rimed Sands", 11.3, 1.55, 0.32), ("Siege Camp", 15.85, 2.85, 0.3)],
 )
