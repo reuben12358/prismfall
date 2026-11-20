@@ -202,7 +202,7 @@ warden(2, "LEADER_TAMSIN", "Tamsin", 19, "SILKWOOD", "Oh! You've unpicked every 
     # The trap spider (Hard only on the Standard roster since the bird answer took its slot; the harness saw it hold
     # 51 of 52 realistic losses behind Silk Trap): Silk Trap guards it while its partner attacks, and binds tighter here.
     P("SPIDOPS", 16, "INSOMNIA", "ORANBERRY", "HARDY", "SILKTRAP,STRUGGLEBUG,FEINT,STRINGSHOT", "BA",
-      only="hard", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,LUNGE,STRUGGLEBUG,ASSURANCE"}),
+      only="hard", hard={"ab": "STAKEOUT", "item": "SITRUSBERRY", "nat": "ADAMANT", "moves": "SILKTRAP,BUGBITE,STRUGGLEBUG,ASSURANCE"}),
     # Telluric Seed: +1 Def, +1 Sp. Def, -1 Speed - a silk cocoon. Razor Leaf hits both foes (Grass x1.2, Overgrow on).
     P("SWADLOON", 19, "OVERCOAT", "TELLURICSEED", "HARDY", "RAZORLEAF,BUGBITE,STRUGGLEBUG,PROTECT", "BA",
       nick="Bobbin", casual={"ab": "LEAFGUARD", "item": "ORANBERRY", "moves": "RAZORLEAF,BUGBITE,STRINGSHOT,PROTECT"},
@@ -214,7 +214,7 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     # Standard is tuned down for an approachable Gym 3 (harness: realistic teams lost 29/30): neutral natures, the
     # openers two levels under the cap, Water Gun on Pelipper. Water x1.5 on the field still makes every hit count.
     P("PELIPPER", 19, "KEENEYE", "ORANBERRY", "HARDY", "WATERGUN,WINGATTACK,SUPERSONIC,PROTECT", "BS",
-      hard={"ab": "DRIZZLE", "item": "DAMPROCK", "nat": "MODEST", "moves": "WATERPULSE,AIRSLASH,ROOST,TAILWIND"}),
+      hard={"item": "SITRUSBERRY", "nat": "MODEST", "moves": "WATERPULSE,WINGATTACK,ROOST,TAILWIND"}),
     # Volt Absorb punishes the Electric answer; its own Spark is x1.5 against grounded targets. Elemental Seed: +1 Speed, Aqua Ring.
     # Standard: the lantern-fish is still a Chinchou (Lanturn walled realistic teams: 64 knockouts in 30 runs).
     # Volt Absorb still punishes the Electric answer, and its Spark is x1.5 against grounded targets. Hard: Lanturn
@@ -222,8 +222,10 @@ warden(3, "LEADER_MARISOL", "Marisol", 23, "WATER_SURFACE", "Ha! Tide's turned. 
     P("CHINCHOU", 20, "VOLTABSORB", "ORANBERRY", "HARDY", "WATERGUN,SPARK,CONFUSERAY,SUPERSONIC", "BS",
       only="nocasual", hard={"sp": "LANTURN", "item": "ELEMENTALSEED", "nat": "MODEST",
                              "moves": "BUBBLEBEAM,SPARK,ELECTROBALL,THUNDERWAVE"}),
-    P("ARAQUANID", 22, "WATERBUBBLE", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
-      only="hard", hard={"moves": "LIQUIDATION,LEECHLIFE,CRUNCH,AQUARING"}),
+    # Hard only. Water Absorb, not Water Bubble: Water Bubble Liquidation on Water Surface OHKO'd prepared teams
+    # (122 knockouts in 60 fights). Water Absorb heals it on the field instead.
+    P("ARAQUANID", 22, "WATERABSORB", "SITRUSBERRY", "ADAMANT", "BUBBLEBEAM,BUGBITE,BITE,AQUARING", "BA",
+      only="hard"),
     # The swimmer: Swift Swim is on without rain here (x2 Speed). Standard brings the Buizel (a Lv 20 Floatzel took
     # 63 knockouts in 60 realistic fights with Water Pulse alone); Hard brings the Floatzel.
     P("BUIZEL", 20, "SWIFTSWIM", "ORANBERRY", "HARDY", "WATERPULSE,BITE,QUICKATTACK,SWIFT", "A",
@@ -598,13 +600,13 @@ rival("RIVAL_KESTREL", "Kestrel", 2, 23, "...Fine. Stay out of the Hollow's way,
     # on the cliffs and slows; Moxie snowballs. Counterplay: Protect / switch out the Tailwind turns, Water and Grass for
     # Sandile, Ghost and Dark for Morwen.
     P("STARAVIA", 21, "INTIMIDATE", "TELLURICSEED", "JOLLY", "WINGATTACK,QUICKATTACK,AERIALACE,ENDEAVOR", "A",
-      only="nocasual", hard={"moves": "WINGATTACK,QUICKATTACK,DOUBLEEDGE,UTURN", "ab": "RECKLESS"}),
+      only="nocasual", hard={"moves": "WINGATTACK,QUICKATTACK,AERIALACE,UTURN"}),
     P("SANDILE", 21, "MOXIE", "ORANBERRY", "JOLLY", "BITE,ROCKTOMB,SANDTOMB,HONECLAWS", "A", only="nocasual",
       hard={"moves": "BITE,ROCKTOMB,DIG,HONECLAWS"}),
     # Hard only: the Deino that becomes Hydreigon (K5+), already mean.
     P("DEINO", 21, "HUSTLE", "ORANBERRY", "ADAMANT", "DRAGONBREATH,BITE,HEADBUTT,ROAR", "A", only="hard"),
     P("HONEDGE", 21, "NOGUARD", "ORANBERRY", "ADAMANT", "SLASH,SHADOWSNEAK,AERIALACE,FURYCUTTER", "BA",
-      nick="Morwen", hard={"moves": "SHADOWSNEAK,IRONHEAD,AERIALACE,SWORDSDANCE", "item": "EVIOLITE"}),
+      nick="Morwen", hard={"moves": "SHADOWSNEAK,SLASH,AERIALACE,SWORDSDANCE", "item": "EVIOLITE"}),
     starter_mon("RIVAL_KESTREL", s, 1, 23),
 ])
 rival("RIVAL_KESTREL", "Kestrel", 3, 35, "She had a seat, and a Plate... You don't get it. Nobody does.", lambda s: [

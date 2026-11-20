@@ -20,7 +20,7 @@ New layout:
 - East: Ashkaar (fire), bordering Ossaria and Elowen, never Isenmar.
 - Centre: Elowen, which borders everything, with Crownhaven at its heart.
 - South: Zenith over Nadir (Lumen City in the south), bordering Elowen only.
-- Fire and ice meet only across the northern sea (the war front).
+- Fire and ice never share a border. Their war is fought on land in Ossaria (see the next bullet).
 - The start (Ferrow's Landing, Saltmere, Briarwick, Rimewood, then Ebbmouth) is unchanged, on Elowen's south-west coast.
 
 - **The war is fought on land, in Ossaria** (user, 17:26: "seems weird designating the north sea as a fighting spot considering its water and we have a fire region... u could also make it so that the fight is fought in ossaria or even in elowen"). Ossaria's bone sands lie between the two kingdoms, so both armies march into neutral ground. In the climax, Primal Kyogre drags a flood-sea into the desert and Reshiram's fire turns the dunes to glass. The beam clash happens over the glassing dunes. This replaces the "Shattered Ice" / north-sea front; fire and ice still never share a border.
@@ -85,7 +85,7 @@ Character art v5 (the four Juno concept thumbnails) was rejected: "it looks god 
 ## >>> REVISION 9 (user feedback, 2026-11-16 23:36) <<<
 **Borderlands.** Kingdoms connect only through borderland regions that blend the two kingdoms' biomes, cultures and
 wild Pokémon, each with at least one intermediate town showcasing how the two peoples live and trade together (or don't).
-Ashkaar (fire) and Isenmar (ice) must NOT share a border; their war is fought across the sea (the Shattered Ice strait).
+Ashkaar (fire) and Isenmar (ice) must NOT share a border; their war is fought on land in Ossaria (the Glass Dunes; see Revision 18).
 User's examples: Ashkaar–Ossaria = a volcanic, ash-laden desert/forest; Isenmar–Elowen = frozen forests. World design defines
 the full adjacency graph, every borderland and its town, consistent with the locked gym order.
 
