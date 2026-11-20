@@ -195,9 +195,11 @@ def stair(r, x, y_lip, w=3, h=None):
     r.flatten(x, x + w - 1, y_lip, h); r.crossing(x, y_lip, w=w, rows=len(K.KITS[m.kit.get(h, m.kit.get('default')) if isinstance(m.kit, dict) else m.kit]['rows']))
 
 
-def ledge(r, x0, x1, y, chalk=False):
-    """a one-way ledge across x0..x1 at row y (jump down southward).  Cells stay grass class; the tiles go on layer 2."""
-    m = r.m; pre = 'lgc_' if chalk else 'lg_'
+def ledge(r, x0, x1, y, chalk=False, face=None):
+    """a one-way ledge across x0..x1 at row y (jump down southward).  Cells stay grass class; the tiles go on layer 2.
+    face: 'chalk', 'dune' or None (earth)"""
+    m = r.m; face = face or ('chalk' if chalk else None)
+    pre = {'chalk': 'lgc_', 'dune': 'lgd_'}.get(face, 'lg_')
     for x in range(x0, x1 + 1):
         if not m.inb(x, y): continue
         t = P1(pre + ('w' if x == x0 else 'e' if x == x1 else 'm'))

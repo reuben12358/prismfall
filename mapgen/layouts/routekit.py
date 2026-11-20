@@ -104,9 +104,9 @@ class Route:
     def clearing(self, cx, cy, rx, ry, c='.', rough=0.5, only='T'):
         self.m.blob(cx, cy, rx, ry, c, seed=self.seed + int(cx * 13 + cy), rough=rough, only=only)
 
-    def lane(self, pts, w=2.0, c='d', open_=(1, 3)):
+    def lane(self, pts, w=2.0, c='d', open_=(1, 3), only='T.t'):
         """a side path (narrower), with a little open land"""
-        self.road(pts, w=w, c=c, open_=open_, wobble=0.3)
+        self.road(pts, w=w, c=c, open_=open_, wobble=0.3, only=only)
 
     def grass(self, thr=0.58, scale=6.0, keep_road=2, box=None, seed=None):
         """encounter fields: noise patches of tall grass on open land, kept off the road edge"""

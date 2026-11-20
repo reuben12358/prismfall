@@ -66,6 +66,9 @@ if CHALKT:                                  # map builder 10: chalk copies of th
     def CK(key, sid): return CHALKT['%s:%d' % (key, sid)]
     KITS['akc'] = dict(N=tuple(CK('cliff_ak', 440 + i) for i in range(3)), W=CK('cliff_ak', 448), E=CK('cliff_ak', 450),
                        rows=[tuple(CK('cliff_ak', b + i) for i in range(3)) for b in (456, 464, 472)], inW=None, inE=None, l0=False)
+    if 'dune_ak:440' in CHALKT:
+        KITS['akd'] = dict(N=tuple(CK('dune_ak', 440 + i) for i in range(3)), W=CK('dune_ak', 448), E=CK('dune_ak', 450),
+                           rows=[tuple(CK('dune_ak', b + i) for i in range(3)) for b in (456, 464, 472)], inW=None, inE=None, l0=False)
     KITS['shc'] = dict(N=(CK('cliff_sh', 1624), CK('cliff_sh', 1625), CK('cliff_sh', 1627)), W=CK('cliff_sh', 1632), E=CK('cliff_sh', 1634),
                        rows=[tuple(CK('cliff_sh', b + i) for i in range(3)) for b in (1640, 1648, 1656)],
                        inW=(CK('cliff_sh', 1636), CK('cliff_sh', 1644)), inE=(CK('cliff_sh', 1635), CK('cliff_sh', 1643)), l0=True)

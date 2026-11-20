@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Puzzle engine proof media: python3 -I make_puzzle_media.py gym1|gym2|lofts|d1 [--step 7] [--ms 220]
+"""Puzzle engine proof media: python3 -I make_puzzle_media.py gym1|gym2|lofts|d1 [--step 7] [--ms 220] [--skip-maps 120,147]
 Reads $RUN/puzzle_out/<session>/ (bot.log, shots/, frames/) and writes docs/playtest/puzzles/<session>_NN_*.png
 (real engine frames, caption strip added below) and <session>_solve.gif (slow, battles cut, a card between rooms)."""
 import os, re, subprocess, sys
@@ -70,6 +70,9 @@ def main():
         if t.startswith('plan done') and cur:
             segs.append((cur[0], cur[1], idx(f)))
     segs = [s for s in segs if s[2] - s[1] > 10]
+    if '--skip-maps' in sys.argv:                     # e.g. the town outside the gym, where the bot only waits out a cutscene
+        skip = {int(m) for m in sys.argv[sys.argv.index('--skip-maps') + 1].split(',')}
+        segs = [s for s in segs if s[0] not in skip]
     shots = []
     for fn in sorted(os.listdir(os.path.join(run, 'shots'))):
         m = re.match(r'\d+_([a-z][a-z0-9]_\d\d)_', fn)

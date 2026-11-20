@@ -523,6 +523,7 @@ module PlayBot
         @step += later
         @step_start = 0
         log("now on map #{here}: skipping to step #{@step}")
+        autosave          # checkpoint here too (the environment can restart at any time)
         return
       end
       target = plan[@step] && plan[@step][1]
@@ -692,6 +693,8 @@ module PlayBot
         if !$game_self_switches[[mid, @spot_cur, "A"]]
           log("spot_all: could not engage trainer event #{@spot_cur} on map #{mid}")
           @spot_skip[[mid, @spot_cur]] = true
+        else
+          autosave        # a trainer beaten: checkpoint (resume repeats this spot_all step, beaten trainers are skipped)
         end
         @spot_cur = nil; @spot_i = 0; @spot_wait = 0
       end

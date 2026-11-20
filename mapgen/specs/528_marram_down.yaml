@@ -1,4 +1,4 @@
-# Marram Down (528). WRITTEN BY layouts/routes_early.py - edit that script.
+# Marram Down (528). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 528
 name: Marram Down
 parent: 0
@@ -16,8 +16,33 @@ walk_from:
 - [108, 32]
 - [1, 40]
 raw: data/raw/528.npy
-tileset: 51
+tileset: 56
 events:
+- type: event
+  name: Sledge run
+  at: [52, 14]
+  pages:
+  - trigger: action
+    commands:
+    - (A waxed sledge at the top of the run. The sand drops away to the sea.)
+    - choices: [Ride it down!, Not today.]
+      cancel: 1
+      branches:
+      - - move:
+            who: -1
+            route:
+            - turn_down
+            - dir_fix_on
+            - through_on
+            - {speed: 5}
+            - down 50
+            - {speed: 4}
+            - through_off
+            - dir_fix_off
+        - {se: Slots stop}
+        - {script: 'pfm_add(:sledge_runs, 1) rescue nil'}
+        - (Nine seconds, maybe ten. The record is seven, and a broken arm.)
+      - [(You'd need a running start. And a will.)]
 - type: sign
   name: Road sign
   at: [105, 29]
@@ -25,14 +50,20 @@ events:
   post: false
 - type: event
   name: Free Port charter stone
-  at: [4, 37]
+  at: [4, 36]
   pages:
   - trigger: action
     commands: ['FREE PORT CHARTER STONE: "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN."', 'Someone has carved underneath,
         smaller: "AND BOOS THE REST."']
 - type: event
+  name: The stile
+  at: [2, 42]
+  pages:
+  - trigger: action
+    commands: ['A toll-free stile into Saltmere. A painted board: "FREE PORT. NO TOLL. NO KINGS. MIND THE STEP."']
+- type: event
   name: The Saltmere Beacon
-  at: [53, 14]
+  at: [55, 9]
   pages:
   - trigger: touch
     commands:
@@ -46,7 +77,7 @@ events:
     commands: []
 - type: event
   name: Beacon Keeper
-  at: [54, 13]
+  at: [58, 9]
   pages:
   - graphic: {sprite: NPC 26, dir: down}
     trigger: action
@@ -60,8 +91,23 @@ events:
     trigger: action
     commands: ['Beacon Keeper: The pot''s cold. Come back when I''ve forgotten you.']
 - type: event
+  name: Sledge run sign
+  at: [54, 14]
+  pages:
+  - trigger: action
+    commands: ['THE SLEDGE RUN. Down the Beacon to the shore in nine seconds. The record is seven, and a broken arm.', 'One way only. The sand does not
+        go back up, and neither do you.']
+- type: event
+  name: Sledge boy
+  at: [53, 65]
+  pages:
+  - graphic: {sprite: NPC 05, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Sledge boy: You came down the run? Leave the sledge, I drag them back up. Two coppers a drag. ...Fine. Free. This once.']
+- type: event
   name: Hound Number One
-  at: [76, 48]
+  at: [68, 44]
   pages:
   - graphic: {sprite: NPC 03, dir: down}
     trigger: action
@@ -69,7 +115,7 @@ events:
     commands: ['Hound Number One: And SO the Loyal Three drove the Gossamer Ogre from the wood--']
 - type: event
   name: Ogre
-  at: [79, 47]
+  at: [71, 43]
   pages:
   - graphic: {sprite: NPC 25, dir: down}
     trigger: action
@@ -77,7 +123,7 @@ events:
     commands: ['Ogre: (muffled) Can I take the mask off? It''s very hot in the Ogre.', 'Ogre: (muffled) Why does he look so sad, though? He''s the villain.']
 - type: event
   name: Director with script
-  at: [82, 48]
+  at: [75, 44]
   pages:
   - graphic: {sprite: NPC 18, dir: down}
     trigger: action
@@ -85,7 +131,7 @@ events:
     commands: ['Director: The Ogre does NOT take the mask off. The Ogre has never taken the mask off. It''s in the text.', 'Director: Because the carver
         was having a bad week in AF 140! Places!']
 - type: trainer
-  at: [80, 44]
+  at: [73, 41]
   sight: 4
   dir: down
   sprite: trainer_JUGGLER
@@ -95,7 +141,7 @@ events:
   rules: [setBattleRule("double")]
 - type: event
   name: Prop-mistress
-  at: [73, 49]
+  at: [66, 46]
   pages:
   - graphic: {sprite: NPC 27, dir: down}
     trigger: action
@@ -108,7 +154,7 @@ events:
       - {script: 'pfm_item(:SANDSHOVEL, 1, "Sand Shovel")'}
 - type: event
   name: The Prompter's Box
-  at: [33, 57]
+  at: [24, 61]
   pages:
   - trigger: action
     commands:
@@ -125,7 +171,7 @@ events:
         else: [(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.), Something square is buried at the stern.
             You'd need a shovel.]
 - type: trainer
-  at: [88, 33]
+  at: [91, 25]
   sight: 4
   dir: left
   sprite: trainer_BIRDKEEPER
@@ -133,7 +179,7 @@ events:
   intro: Wind off the lake's the best in Elowen.
   after: My kite won. You beat the kite-flier, which is different.
 - type: trainer
-  at: [14, 37]
+  at: [10, 40]
   sight: 4
   dir: right
   sprite: trainer_POKEMONRANGER_F
@@ -142,7 +188,7 @@ events:
   after: I'm going to sit down now. That's allowed in a free port.
 - type: event
   name: Sand-sculptor
-  at: [40, 44]
+  at: [44, 63]
   pages:
   - graphic: {sprite: NPC 15, dir: down}
     trigger: action
@@ -150,29 +196,31 @@ events:
     commands: ['Sand-sculptor: It''s the Sovereign''s Crown! In sand!', 'Sand-sculptor: ...Don''t look at the stone. I ran out of the good sand.']
 - type: event
   name: Birdwatcher
-  at: [97, 20]
+  at: [93, 18]
   pages:
   - graphic: {sprite: NPC 09, dir: down}
     trigger: action
     move: fixed
     commands: ['Birdwatcher: Brackish pool. Half sea, half rain. The Wingull come to wash the salt off. Shh.']
 - type: item
-  at: [62, 64]
+  at: [51, 64]
   item: SOFTSAND
   hidden: true
   name: HiddenItem (sledge run)
-- type: event
-  name: Sledge run
-  at: [58, 25]
-  pages:
-  - trigger: action
-    commands: ['THE SLEDGE RUN. Down the Beacon to the shore in nine seconds. The record is seven, and a broken arm.']
 - type: item
   at: [8, 64]
   item: POTION
 - type: item
-  at: [100, 20]
+  at: [101, 18]
   item: GREATBALL
 - type: item
-  at: [24, 26]
+  at: [24, 24]
   item: REPEL
+- type: item
+  at: [36, 15]
+  item: ESCAPEROPE
+- type: item
+  at: [70, 4]
+  item: STARDUST
+  hidden: true
+  name: HiddenItem (dune crest)

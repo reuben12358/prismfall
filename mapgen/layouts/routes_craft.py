@@ -231,3 +231,183 @@ def build_527():
 
 
 BUILD = {527: build_527}
+
+
+# ====================================================================================================== 528 Marram Down
+def build_528():
+    """Marram Down (110x80, BEACH): dune-down held by marram grass, in terraces.  The road winds through the slack
+    between the dune belt (north, three levels to the Saltmere Beacon on the highest dune: heals once, the first view
+    of the port) and the foredune ridge over the beach.  The sledge run slides from the Beacon to the shore (a real
+    slide: one way, down).  In a dune hollow, the players' camp of wagons rehearsing; the theatre barge half-buried in
+    the foredune (the Prompter's Box); the bird hide over the brackish pool (Old Rod); marram ledges drop from the
+    slack to the camp (one way); the toll-free stile into Saltmere with the Free Port charter stone."""
+    W, H = 110, 80
+    r = Route(528, W, H, 'shore', kit={1: 'akd', 2: 'akd', 3: 'akd', 'default': 'akd'}, base='.')
+    m = r.m
+    # ---- the sea, the beach and the foredune ridge (h1)
+    for x in range(W):
+        sea = 67 + 2.0 * (vnoise(x, 0, 5281, 10.0) - 0.5) * 2 + bump(x, 20, 10, 2) - bump(x, 70, 12, 2)
+        fd = 54 + 2.5 * (vnoise(x, 1, 5282, 9.0) - 0.5) * 2 + bump(x, 28, 7, 3) + bump(x, 92, 8, 2)
+        for y in range(H):
+            if y >= sea: m.cls[y, x] = 'W' if y >= sea + 6 + 2 * vnoise(x, 2, 5283, 6.0) else 'w'
+            elif y >= fd + 3: m.cls[y, x] = 's'
+        for y in range(int(fd) - 5 + int(2 * vnoise(x, 3, 5284, 5.0)), int(fd) + 1):
+            if 0 <= y < H: m.ht[y, x] = 1
+    CK.smooth_sea(m, 3)
+    # ---- the dune belt (north): three levels up to the Beacon
+    for x in range(W):
+        d1 = 26 + 3.0 * (vnoise(x, 4, 5285, 9.0) - 0.5) * 2 - bump(x, 14, 9, 6) - bump(x, 100, 8, 5)
+        d2 = 18 + 2.5 * (vnoise(x, 5, 5286, 8.0) - 0.5) * 2 - bump(x, 20, 12, 8) - bump(x, 96, 12, 6)
+        for y in range(H):
+            if y <= d1: m.ht[y, x] = max(m.ht[y, x], 1)
+            if y <= d2: m.ht[y, x] = max(m.ht[y, x], 2)
+    CK.plateau(r, 55, 10, 9, 5, 3, rough=0.35, seed=1)
+    for h in (1, 2): CK.smooth_ht(m, h, 2)
+    CK.smooth_ht(m, 3, 2, box=(40, 0, 72, 20))
+    # ---- sand: dune tops and slopes are bare sand (the Dirt autotile), slacks are grass
+    for i, (cx, cy, rx, ry) in enumerate(((55, 10, 10, 6), (36, 18, 9, 4), (76, 17, 8, 4), (20, 26, 7, 3), (92, 24, 8, 3),
+                                          (48, 26, 6, 2.5), (64, 46, 6, 3), (40, 50, 9, 3), (86, 52, 9, 3), (14, 52, 7, 3),
+                                          (102, 40, 5, 4), (30, 40, 5, 3))):
+        m.blob(cx, cy, rx, ry, 'u', seed=5300 + i, rough=0.75, only='.')
+    # ---- the road through the slack, the stairs up the belt, the beach path through the foredune
+    road = [(109, 31.5), (100, 33), (90, 36), (80, 34), (70, 36), (58, 38), (46, 36), (34, 37), (22, 40), (12, 39), (0, 39.5)]
+    r.road(road, w=3.0, c='d', open_=None, only='.tTu')
+    r.exit('E', 30, 4); r.exit('W', 38, 4)
+    for x0, h in ((61, 1), (57, 2), (53, 3)):
+        yy = max(y for y in range(H) if m.ht[y, x0 + 1] == h)
+        CK.stair(r, x0, yy, w=3, h=h)
+    r.lane([(62, 36), (62, 30), (58, 26), (58, 21), (54, 17)], w=2.0, c='d', open_=None, only='.tTu')
+    r.lane([(98, 33), (99, 26), (96, 22)], w=2.0, c='d', open_=None, only='.tTu')       # to the bird hide
+    yy = max(y for y in range(H) if m.ht[y, 99] == 1); CK.stair(r, 98, yy, w=3, h=1)
+    for x0 in (29, 84):                                                                 # down through the foredune to the beach
+        yy = max(y for y in range(H) if m.ht[y, x0 + 1] == 1)
+        CK.stair(r, x0, yy, w=3, h=1)
+    r.lane([(30, 38), (30, 46)], w=2.0, c='d', open_=None, only='.tTu')
+    r.lane([(85, 36), (85, 47)], w=2.0, c='d', open_=None, only='.tTu')
+    # the brackish pool and the bird hide (on the belt, north-east)
+    CK.pond(r, 96, 15, 5.5, 2.6, c='p', rough=0.3)
+    # the players' camp: a trodden hollow in the slack south of the road
+    m.blob(72, 44, 7, 3.2, 'd', seed=44, rough=0.45, only='.tu')
+    r.finish_plan(border=0)
+    r.forest_band('N', 3, wobble=1.5)
+    for cx, cy, rx, ry in ((8, 6, 7, 4), (104, 6, 6, 4), (30, 8, 5, 3), (84, 8, 5, 3), (4, 30, 3, 6), (106, 46, 3, 5)):
+        r.copse(cx, cy, rx, ry)
+    # marram ledges: from the slack south of the road, one way down to the camp's hollow
+    CK.ledge(r, 44, 60, 41, face='dune'); CK.ledge(r, 88, 96, 42, face='dune')
+    for y in (40, 41, 42):
+        for x in (43, 61, 87, 97):
+            if m.cls[y, x] in '.tu': m.cls[y, x] = 'T'
+    # marram tall grass in the slacks and hollows
+    CK.grass_fields(r, [(12, 33, 4), (26, 33, 3), (40, 30, 3.5), (76, 28, 3), (88, 30, 3), (104, 36, 3), (50, 46, 3.5),
+                        (18, 46, 4), (96, 46, 3), (60, 50, 2.5), (36, 22, 3), (72, 20, 3), (88, 20, 2.5), (22, 18, 3),
+                        (46, 8, 2.5), (66, 6, 2.5), (8, 44, 3), (78, 50, 2.5)])
+    CK.woods(r, CK.COAST, scale=10.0)
+    # ---- events
+    SLIDE = 'mr_sledge'
+    def slide_page(n):
+        return [{'trigger': 'action', 'commands': [
+            '(A waxed sledge at the top of the run. The sand drops away to the sea.)',
+            {'choices': ['Ride it down!', 'Not today.'], 'cancel': 1, 'branches': [
+                [{'move': {'who': -1, 'route': ['turn_down', 'dir_fix_on', 'through_on', {'speed': 5}, 'down %d' % n,
+                                                {'speed': 4}, 'through_off', 'dir_fix_off']}},
+                 {'se': 'Slots stop'}, {'script': 'pfm_add(:sledge_runs, 1) rescue nil'},
+                 '(Nine seconds, maybe ten. The record is seven, and a broken arm.)'],
+                ["(You'd need a running start. And a will.)"]]}]}]
+    bx = 52
+    top_y = max(y for y in range(H) if m.ht[y, bx] == 3) - 1
+    land_y = min(y for y in range(H) if m.cls[y, bx] in 'wW') - 3
+    r.chute = (bx, top_y + 1, land_y)
+    r.add(sign((105, 29), 'Road sign', 'MARRAM DOWN - Free Port of Saltmere, 1 mile. Pulling up the marram grass is fined. Yes, even that one.'),
+          obj('Free Port charter stone', (4, 36), ['FREE PORT CHARTER STONE: "By grant of Sovereign Maren, AF 41: SALTMERE ANSWERS TO THE ACCORD AND TO NO CROWN."',
+              'Someone has carved underneath, smaller: "AND BOOS THE REST."']),
+          obj('The stile', (2, 42), ['A toll-free stile into Saltmere. A painted board: "FREE PORT. NO TOLL. NO KINGS. MIND THE STEP."']),
+          once('The Saltmere Beacon', (55, 9), ['(From the top of the dune, the free port opens below: a white town on a salt lake, striped awnings, lantern masts, and a theater on every second corner.)',
+               J('happy', "Saltmere! Look at it! Everything's ordinary! Isn't it WONDERFUL?"),
+               J('happy', "The Blank Plate's under there somewhere. Nothing strange ever happens in Saltmere. No Bleed, no glowing rivers, nothing."),
+               J('happy', 'So they make it all up instead. Every night. On purpose.')]),
+          {'type': 'event', 'name': 'Beacon Keeper', 'at': [58, 9], 'pages': [
+              {'graphic': {'sprite': 'NPC 26', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  "Beacon Keeper: Tea? It's not kelp. I've heard about the kelp.", {'heal': True}, '(The party is rested.)', {'selfswitch': ['A', True]}]},
+              {'cond': {'self': 'A'}, 'graphic': {'sprite': 'NPC 26', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  'Beacon Keeper: The pot\'s cold. Come back when I\'ve forgotten you.']}]},
+          {'type': 'event', 'name': 'Sledge run', 'at': [bx, top_y], 'fixed': True, 'pages': slide_page(land_y - top_y)},
+          obj('Sledge run sign', (bx + 2, top_y), ['THE SLEDGE RUN. Down the Beacon to the shore in nine seconds. The record is seven, and a broken arm.',
+              'One way only. The sand does not go back up, and neither do you.']),
+          talk('Sledge boy', (bx + 1, land_y + 1), 'NPC 05', ["Sledge boy: You came down the run? Leave the sledge, I drag them back up. Two coppers a drag. ...Fine. Free. This once."]),
+          talk('Hound Number One', (68, 44), 'NPC 03', ['Hound Number One: And SO the Loyal Three drove the Gossamer Ogre from the wood--']),
+          talk('Ogre', (71, 43), 'NPC 25', ["Ogre: (muffled) Can I take the mask off? It's very hot in the Ogre.", 'Ogre: (muffled) Why does he look so sad, though? He\'s the villain.'], move='random'),
+          talk('Director with script', (75, 44), 'NPC 18', ['Director: The Ogre does NOT take the mask off. The Ogre has never taken the mask off. It\'s in the text.',
+               'Director: Because the carver was having a bad week in AF 140! Places!']),
+          trainer((73, 41), 'JUGGLER', 'Hounds', 'A rehearsal audience! Quick, a scene!', 'Notes: we were bitten. Again.', d='down', double=True),
+          talk('Prop-mistress', (66, 46), 'NPC 27', ["Prop-mistress: If you're digging in the old barge, there's a shovel by the wagon.",
+               "Prop-mistress: The prompter's box went down with it in '71. Nobody's had the heart.",
+               {'if': '!pfm_has?(:SANDSHOVEL)', 'then': [{'script': 'pfm_item(:SANDSHOVEL, 1, "Sand Shovel")'}]}]),
+          {'type': 'event', 'name': "The Prompter's Box", 'at': [24, 61], 'pages': [{'trigger': 'action', 'commands': [
+              {'if': 'pfm?(:sm_prompter)', 'then': ['Only sand now. The barge has given up its secret.'],
+               'else': [{'if': 'pfm_has?(:SANDSHOVEL)', 'then': [
+                   '(A theater barge lies half-buried in the dune, its name board reading THE WANDERING CHORUS.)', 'You dig at the stern with the shovel...',
+                   {'script': 'pfm_item(:PROMPTERSSCRIPT, 1, "Prompter\'s Script")'}, {'script': 'pfm_item(:NORMALGEM, 1, "Normal Gem")'},
+                   {'script': 'pfm_set(:sm_prompter)'}],
+                   'else': ['(A theater barge lies half-buried in the dune. Costume hampers. A prop throne with three legs.)',
+                            'Something square is buried at the stern. You\'d need a shovel.']}]}]}]},
+          trainer((92, 26), 'BIRDKEEPER', 'Lark', "Wind off the lake's the best in Elowen.", 'My kite won. You beat the kite-flier, which is different.', d='left'),
+          trainer((10, 40), 'POKEMONRANGER_F', 'Sedge', "Free port starts at the stile. Past that, the Queen's writ doesn't run, and neither do I.",
+                  "I'm going to sit down now. That's allowed in a free port.", d='right'),
+          talk('Sand-sculptor', (44, 63), 'NPC 15', ["Sand-sculptor: It's the Sovereign's Crown! In sand!", "Sand-sculptor: ...Don't look at the stone. I ran out of the good sand."]),
+          talk('Birdwatcher', (93, 18), 'NPC 09', ['Birdwatcher: Brackish pool. Half sea, half rain. The Wingull come to wash the salt off. Shh.']),
+          hidden((bx - 1, land_y), 'SOFTSAND', 'HiddenItem (sledge run)'),
+          item((8, 64), 'POTION'), item((101, 18), 'GREATBALL'), item((24, 24), 'REPEL'), item((36, 15), 'ESCAPEROPE'), hidden((70, 4), 'STARDUST', 'HiddenItem (dune crest)'))
+    # keep the chute clear: nothing may stand on the slide column
+    for y in range(top_y, land_y + 1):
+        m.taken[y, bx] = True
+    r.seat_events(on='.dtus')
+    # ---- the camp's purpose: wagons (stalls), the fire, the washing line, the props barrels, the morris column
+    for n, x, y in (('pf_stall4', 64, 41), ('pf_stall2', 77, 41), ('pf_stall0', 79, 45), ('sh_campfire', 70, 45),
+                    ('hb_washline', 66, 48), ('hb_tables', 75, 47), ('hb_barrels', 81, 43), ('pf_morris', 63, 44)):
+        r.near(n, x, y, on='d.u', r=3)
+    r.near('gl_shed', 99, 17, on='.u', r=4)                                          # the bird hide
+    r.near('pf_beacon', 54, 5, on='.u', r=3)                                         # the Saltmere Beacon
+    r.near('pf_sledge', bx + 1, top_y - 1, on='.u', r=2)
+    r.near('pf_roadstone', 5, 34, on='.u', r=3)
+    m.fence(0, 6, 43, gaps=((2, 2),)); m.fence(0, 6, 34)
+    # dune rocks, driftwood, pebbles; reeds round the brackish pool
+    CK.props(r, ['dk_boulder', 'dk_pebbles', 'dk_boulder', 'nt_log'], 30, box=(0, 12, W, 60), clump=4, seed=7)
+    for (x, y) in ((40, 26), (82, 22), (16, 48), (100, 50), (48, 14)):
+        r.near('dk_rock_big', x, y, on='.ut', r=3)
+    for (x, y) in ((90, 14), (101, 14), (91, 17), (102, 16), (95, 18)):
+        r.near('nt_reed1', x, y, on='.u', r=2)
+    CK.fringe(r, CK.FRINGE['coast'], 120, seed=1, near_forest=4)
+    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_dpine_sh'], 14, box=(0, 18, W, 56), seed=2, near_forest=0)
+    CK.undergrowth(r, 160, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'ak_fern', 'nt_reed1'), seed=3)
+    r.dress(trees=('nt_pine_a',), n_trees=0, copses=0, scatter=0)
+    ship_part_sand(r, 6, 54, 53)                                                     # the Wandering Chorus, half-buried
+    r.paint(glint=0.35)
+    CK.paint_extras(r)
+    for y in range(top_y + 1, land_y + 1):                                           # the polished chute (walkable decal)
+        if m.cls[y, bx] in '.ust' and not m.cliff[y, bx] and m.L[2, y, bx] == 0: m.L[2, y, bx] = K.P1('mr_chute%d' % (y % 2))
+    for n, x, y in (('pf_seastack2', 60, 74), ('hb_boat2', 94, 70), ('pf_seastack', 12, 73)):
+        CK.water_stamp(r, n, x, y)
+    CK.shore(r, wet=1, wet_noise=0.45, wrack=0.7, chalk_rocks=False)
+    sea_pinks = [K.DECOR_SH['flowers'][i] for i in (2, 3)]
+    for i, (cx, cy, rx, ry) in enumerate(((26, 30, 5, 2), (84, 36, 4, 2), (46, 20, 4, 2), (100, 28, 3, 2), (14, 36, 3, 2), (70, 26, 4, 2))):
+        CK.meadow(r, cx, cy, rx, ry, p=0.65, seed=i)
+    CK.meadow(r, 36, 57, 6, 1.6, tiles=sea_pinks, p=0.6, seed=9)
+    CK.scatter_quiet(r, 8)
+    h = head(528, 'Marram Down', field='BEACH', bgm='Route 3',
+             connections=[{'dir': 'E', 'offset': 30, 'to': 527, 'to_offset': 18}, {'dir': 'W', 'offset': 38, 'to': 140, 'to_offset': 44}],
+             tone=[8, 4, -8, 0])
+    r.write(h, '528_marram_down.yaml', '# Marram Down (528). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/528.png' if PREV else None)
+
+
+def ship_part_sand(r, dx, dy, max_row):
+    """the moored two-master's hull (rows up to max_row) laid on the sand: a wreck half-buried in the foredune"""
+    m = r.m
+    for x, y, z, t in K.SHIP:
+        if y > max_row: continue
+        X, Y = x + dx, y + dy
+        if m.inb(X, Y) and m.cls[Y, X] in 'su.d' and not m.taken[Y, X]:
+            m.L[1 if z == 0 else 2, Y, X] = t
+            if z == 0: m.taken[Y, X] = True; m.under[Y, X] = m.cls[Y, X]; m.cls[Y, X] = 'B'
+
+
+BUILD[528] = build_528

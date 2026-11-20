@@ -50,17 +50,15 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Rekk sent out Sizzlipede!
     |     >> sent out (foe): Sizzlipede Lv.15 [FLASHFIRE]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
+    |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
-    |   The crowd chanted for Machoke!
-    |     (anim: StatUp)
-    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Sizzlipede 43/43]
-    |   Machoke used Knock Off!
+    |   Machoke used Rock Tomb!
     |     HP Sizzlipede (foe): 43 -> 0 / 43
+    |   It's super effective!
     |   The opposing Sizzlipede fainted!
     |     xx fainted: Sizzlipede (foe)
     |   The crowd went wild for Machoke!
@@ -74,7 +72,7 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Rolycoly 37/37]
-    |   Machoke used Rock Tomb!
+    |   Machoke used Knock Off!
     |     HP Rolycoly (foe): 37 -> 0 / 37
     |   The opposing Rolycoly fainted!
     |     xx fainted: Rolycoly (foe)
@@ -93,16 +91,14 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Soldier Vasha sent out Capsakid!
     |     >> sent out (foe): Capsakid Lv.15 [CHLOROPHYLL]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
+    |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
-    |   The crowd chanted for Machoke!
-    |     (anim: StatUp)
-    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Capsakid 43/43]
-    |   Machoke used Rock Tomb!
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Capsakid (foe): 43 -> 0 / 43
     |   The opposing Capsakid fainted!
     |     xx fainted: Capsakid (foe)
@@ -117,9 +113,10 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     | 
     | --- Turn 2 ---
     |   [Machoke 76/76 | Houndour 43/43]
-    |   Machoke used Knock Off!
+    |   Machoke used Karate Chop!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Houndour (foe): 43 -> 0 / 43
-    |   It's not very effective...
+    |   It's super effective!
     |   The opposing Houndour fainted!
     |     xx fainted: Houndour (foe)
     |   The crowd went wild for Machoke!
@@ -137,19 +134,18 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Ashkaar Officer Brakka sent out Salandit!
     |     >> sent out (foe): Salandit Lv.16 [CORROSION]
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
+    |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
-    |   The crowd chanted for Machoke!
-    |     (anim: StatUp)
-    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
     |   [Machoke 76/76 | Salandit 45/45]
-    |   The opposing Salandit used Smog!
-    |     HP Machoke (player): 76 -> 69 / 76
-    |   Machoke used Knock Off!
+    |   The opposing Salandit used Poison Gas!
+    |     (anim: Poison)
+    |   Machoke was poisoned!
+    |   Machoke used Rock Tomb!
     |     HP Salandit (foe): 45 -> 0 / 45
+    |   It's super effective!
     |   The opposing Salandit fainted!
     |     xx fainted: Salandit (foe)
     |   The crowd went wild for Machoke!
@@ -157,13 +153,17 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   Machoke's Attack rose!
     |   Machoke is at the level cap (Lv. 23) and can't gain Exp. Points.
     |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 76 -> 67 / 76
+    |   Machoke was hurt by poison!
     |   Ashkaar Officer Brakka is about to send out Numel. Will you switch your Pokémon?  [auto: No]
     |   Ashkaar Officer Brakka sent out Numel!
     |     >> sent out (foe): Numel Lv.16 [OBLIVIOUS]
     | 
     | --- Turn 2 ---
-    |   [Machoke 69/76 | Numel 49/49]
-    |   Machoke used Knock Off!
+    |   [Machoke 67/76 POISON | Numel 49/49]
+    |   Machoke used Low Sweep!
+    |   The pit erupted as Machoke pressed the attack!
     |     HP Numel (foe): 49 -> 0 / 49
     |   The opposing Numel fainted!
     |     xx fainted: Numel (foe)
@@ -171,6 +171,9 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     (anim: StatUp)
     |   Machoke's Attack rose!
     |   (end of round)
+    |     (anim: Poison)
+    |     HP Machoke (player): 67 -> 58 / 76
+    |   Machoke was hurt by poison!
     | ## FIELD STAGE: COLOSSEUM is now stage 2
     |   Two down! The crowd is in a frenzy!
     |   Ashkaar Officer Brakka is about to send out Fletchinder. Will you switch your Pokémon?  [auto: No]
@@ -178,15 +181,14 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     >> sent out (foe): Fletchinder Lv.17 [FLAMEBODY]
     | 
     | --- Turn 3 ---
-    |   [Machoke 69/76 | Fletchinder 52/52]
-    |   The opposing Fletchinder used Ember!
-    |     HP Machoke (player): 69 -> 57 / 76
-    |   A critical hit!
-    |     (anim: Burn)
-    |   Machoke was burned!
+    |   [Machoke 58/76 POISON | Fletchinder 52/52]
+    |   The opposing Fletchinder used Growl!
+    |     (anim: StatDown)
+    |   Machoke's Attack fell!
     |   Machoke used Low Sweep!
     |   The pit erupted as Machoke pressed the attack!
     |     HP Fletchinder (foe): 52 -> 0 / 52
+    |   A critical hit!
     |   It's not very effective...
     |   The opposing Fletchinder fainted!
     |     xx fainted: Fletchinder (foe)
@@ -205,22 +207,18 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |   field: COLOSSEUM | weather: None | terrain: None
     |   Oh! A wild Litleo appeared!
     |   Go! Machoke!
-    |     >> sent out (player): Machoke Lv.23 [NOGUARD]
+    |     >> sent out (player): Machoke Lv.23 [GUTS]
     | ## FIELD CHANGE: NONE -> COLOSSEUM
     |   The crowd roars as the fighters enter the pit!
     |   Cinderpaw shakes its ember mane. The barge deck shudders under its paws!
-    |   The crowd chanted for Machoke!
-    |     (anim: StatUp)
-    |   Machoke's Attack rose!
     | 
     | --- Turn 1 ---
-    |   [Machoke 57/76 BURN | Litleo 69/69]
+    |   [Machoke 58/76 POISON | Litleo 69/69]
     |   The wild Litleo used Work Up!
     |     (anim: StatUp)
     |   The wild Litleo's Attack rose!
     |   The wild Litleo's Special Attack rose!
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   Machoke used Rock Tomb!
     |     HP Litleo (foe): 69 -> 1 / 69
     |   It's super effective!
     |     (anim: StatDown)
@@ -231,14 +229,13 @@ LOGIC-TEST OUTPUT (headless harness, real Essentials v21.1 code).
     |     (anim: StatUp)
     |   The wild Litleo's Special Attack rose!
     |   (end of round)
-    |     (anim: Burn)
-    |     HP Machoke (player): 57 -> 53 / 76
-    |   Machoke was hurt by its burn!
+    |     (anim: Poison)
+    |     HP Machoke (player): 58 -> 49 / 76
+    |   Machoke was hurt by poison!
     | 
     | --- Turn 2 ---
-    |   [Machoke 53/76 BURN | Litleo 69/69]
-    |   Machoke used Low Sweep!
-    |   The pit erupted as Machoke pressed the attack!
+    |   [Machoke 49/76 POISON | Litleo 69/69]
+    |   Machoke used Rock Tomb!
     |     HP Litleo (foe): 69 -> 0 / 69
     |   It's super effective!
     |   The wild Litleo fainted!
@@ -1687,7 +1684,7 @@ RESULT: player lost after 1 turn(s)
     |   (overworld message) Your standing in The Hall of Petitions rose to Courier!
 -- talk VESPER_GARDEN
   Vesper: You came. Everyone, it's them.
-  Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+  Vesper: All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
   Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
   Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
   Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
@@ -1698,7 +1695,7 @@ RESULT: player lost after 1 turn(s)
     | talk VESPER_GARDEN
     | ==================
     |   (overworld message) Vesper: You came. Everyone, it's them.
-    |   (overworld message) Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+    |   (overworld message) Vesper: All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
     |   (overworld message) Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
     |   (overworld message) Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
     |   (overworld message) Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
@@ -1733,7 +1730,7 @@ RESULT: player lost after 1 turn(s)
     |   (overworld message) Vesper: Rest. Sing it again when you're ready. We aren't going anywhere. We never miss a Festival.
 -- talk VESPER_GARDEN
   Vesper: You came. Everyone, it's them.
-  Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+  Vesper: All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
   Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
   Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
   Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.
@@ -1764,7 +1761,7 @@ RESULT: player lost after 1 turn(s)
     | talk VESPER_GARDEN
     | ==================
     |   (overworld message) Vesper: You came. Everyone, it's them.
-    |   (overworld message) Vesper: All eight of us have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
+    |   (overworld message) Vesper: All eight of them have written to the Choir about you. Lyra's Eevee came down off its stone. Aria got Brine back out of the river. Cadence still has her job, somehow.
     |   (overworld message) Vesper: Sona's bell rings at noon again. Noct's lamp-runners sleep in a bed. Forte has a Writ of Flame. Lento's reflection comes and goes as it likes. And Carol finished her song.
     |   (overworld message) Vesper: They wanted to thank you. Properly. And the Choir has a custom: before we pass on the power of Eevee, someone has to prove they can carry it.
     |   (overworld message) Vesper: So: all eight of them, in the order you helped them, one after another. Then me, and Amen. No rest between.

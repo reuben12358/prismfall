@@ -721,7 +721,9 @@ ROADS = [
       secret="One drum is hollow."),
   ]),
   dict(n=14, name="The Moor Road", frm=360, to=380, chapter="Act IV", detail='outline',
-       note="Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors.",
+       note="Along the ridge back to Vigil, through the Grave Glass, and across Antumbra's moors. Side road: the "
+            "Dry Tide, Ossaria's dry seabed from Duneholt's west gate out to the war in the sands (the bone-carters' "
+            "camp at its end; Ch14-16 convoy and prisoner trips, and Sigrun's landing in Ch19).",
        legs=[
     L(780, "Route 27", "The Jawbone Ridge",
       "A ridge with a toothed skyline. Cragholm says the teeth were cut; Vigil says they grew.",
@@ -734,6 +736,14 @@ ROADS = [
       'Antumbra', [(25, 17), (25, 18)], [80, 130], [32, 56], 'INVERSE',
       landmark="Standing pools that show what is behind you.", wild="Ghost and Dark: Greavard, Dreepy, Absol, Mimikyu.",
       secret="Walk it backwards and you find the cottage."),
+    L(810, None, "The Dry Tide", "An old seabed, rippled like a beach the sea left one evening and never came back to.",
+      'Ossaria', [(15, 3), (14, 3)], [140, 72], None, 'DESERT', role='side',
+      landmark="Shell pavements, a stranded ship's ribs, the bone-carters' white banner over their camp at the west end, "
+               "and the Glass Dunes beyond, where the war is fought.",
+      wild="Fossil ground types, Sandaconda, Palossand.",
+      exits="E: Duneholt's west gate. W end: the bone-carters' camp (930); past it the war maps (the Siege Camp 924 and "
+            "the Glass Dunes 926; story-gated). The observers' mesa (929, Ch19) stands south of the battlefield.",
+      secret="At night you can hear the tide. Follow it."),
     L(790, None, "Downflame Road", "Lit by candles whose flames hang below the wick. Gravenmoor makes them.",
       'Antumbra', [(26, 18)], [110, 70], None, 'INVERSE',
       landmark="The candle-posts and the lantern hospice on the hill.",
@@ -741,8 +751,7 @@ ROADS = [
   ]),
   dict(n=15, name="The Slag Road", frm=380, to=400, chapter="Act IV", detail='outline',
        note="Out of Antumbra by the Slagglass, the black mirror Cogsworth's slag cooled into on the Slag Mesa "
-            "(borderland G, Zenith's eastern waste), then down the Smokestack Parade into the foundries. Side road: the "
-            "Dry Tide, Ossaria's dry seabed west of Duneholt, out to the war's battlefield.",
+            "(borderland G, Zenith's eastern waste), then down the Smokestack Parade into the foundries.",
        legs=[
     L(800, "Route 29", "The Noonless Road", "Antumbra has no noon. On this road your shadow never shortens.",
       'Antumbra', [(28, 18), (29, 18)], [140, 70], [60, 30], 'INVERSE',
@@ -757,12 +766,6 @@ ROADS = [
       'Zenith', [(20, 14)], [120, 64], None, 'FACTORY',
       landmark="The numbered stacks and three shift-clocks.", wild="Klinklang, Magneton, Revavroom, Corviknight.",
       secret="Stack 9 has no furnace under it."),
-    L(810, None, "The Dry Tide", "An old seabed, rippled like a beach the sea left one evening and never came back to.",
-      'Ossaria', [(15, 3), (14, 3)], [140, 72], None, 'DESERT', role='side',
-      landmark="Shell pavements, a stranded ship's ribs, and the Glass Dunes beyond, where the war is fought.",
-      wild="Fossil ground types, Sandaconda, Palossand.",
-      exits="E: Duneholt's west gate. W: the Glass Dunes (the war's battlefield; story-gated).",
-      secret="At night you can hear the tide. Follow it."),
   ]),
   dict(n=16, name="The Drowned Road", frm=400, to=420, chapter="Act IV", detail='outline',
        note="Borderland L, the Hanging Stair: off the plateau's south-east rim and down the cliff to the drowned south "
@@ -877,11 +880,13 @@ OWN_SQUARE = {
     788: (18, 2), 804: (29, 17), 806: (29, 19), 808: (26, 19), 822: (17, 19), 824: (16, 19), 828: (21, 16),
     838: (14, 10), 844: (20, 17), 848: (18, 17), 864: (25, 14), 868: (22, 18), 884: (16, 10), 888: (13, 8),
     900: (13, 19), 905: (21, 19), 910: (28, 19), 920: (11, 2), 924: (15, 2), 925: (12, 1), 926: (13, 2),
+    929: (13, 3), 930: (14, 3),
     959: (19, 14), 960: (13, 15), 961: (14, 16), 962: (16, 19), 963: (14, 9), 109: (12, 19), 110: (12, 19),
 }
 OWN_SQUARE_INHERIT = {545: 544, 547: 546, 565: 564, 585: 584, 605: 604, 625: 624, 645: 644, 665: 664, 666: 664,
                       685: 684, 705: 704, 725: 724, 726: 724, 745: 744, 746: 744, 765: 764, 785: 784, 805: 804,
-                      825: 824, 826: 824, 845: 844, 865: 864, 885: 884, 886: 884, 901: 900, 523: (12, 16), 526: (11, 14)}
+                      825: 824, 826: 824, 845: 844, 865: 864, 885: 884, 886: 884, 901: 900, 523: (12, 16), 526: (11, 14),
+                      928: 924}
 EXTRA_POINTS = {  # town-map squares that name a place with no map yet (landmarks)
     (12, 19): "Hallow Strait", (26, 17): "The Grave Glass", (29, 17): "The Slagglass", (25, 16): "Mirror Mere",
 }
@@ -927,8 +932,8 @@ ROAD_PATHS = {
     11: [('road', [300, 720, 721, 730]), ('air', [730, 'P:724']), ('road', ['P:724', 732, 320])],
     12: [('road', [320, 740, 741, 750, 'sq:17,9']), ('road', ['sq:12,7', 752, 753, 'G:A']), ('inset', ['G:A', 755, 340])],
     13: [('inset', [340, 772, 'G:B']), ('road', ['G:B', 760, 761, 773, 360])],
-    14: [('road', [360, 780, 770, 'G:B']), ('inset', ['G:B', 781, 790, 380])],
-    15: [('inset', [380, 800, 'G:C']), ('road', ['G:C', 801, 811, 400]), ('side', [200, 810, 'P:926'])],
+    14: [('road', [360, 780, 770, 'G:B']), ('inset', ['G:B', 781, 790, 380]), ('side', [200, 810, 'P:926'])],
+    15: [('inset', [380, 800, 'G:C']), ('road', ['G:C', 801, 811, 400])],
     16: [('road', [400, 832, 820, 830]), ('sea', [830, 821, 420])],
     17: [('road', [420, 852]), ('under', [852, 'pts:BLINDWATER', 850]), ('road', [850, 841, 440])],
     18: [('road', [440, 860, 861, 870, 872, 460])],
@@ -1058,4 +1063,7 @@ SETTLEMENT_ORIGINS = {
     921: "Skald-fast: the skalds' fastness, Isenmar's oldest fort, on the edge of the bone sands where the thanes "
          "first stood against the desert. The besieged Isenmar fortress of the war.",
     927: "The Dominion's warfort on the Cape of Cinders: the staging fortress for the war in the sands.",
+    928: "The Dominar's war-tent: red lacquer, an oath-brazier and a map table, pitched at the heart of the Siege Camp.",
+    929: "A flat-topped sandstone mesa behind the lines, where Meridian's observers set up their instruments.",
+    930: "Where Ossaria's burial guild camps at the edge of the war, under the white bone-banner both armies let pass.",
 }
