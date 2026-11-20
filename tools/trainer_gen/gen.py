@@ -1289,56 +1289,58 @@ octave_duel("Carol", 90, "CR_OCTAVE_NINTH_VERSE, the Glassfall Memorial Garden, 
 ])
 # -- v60: the Crownhaven gauntlet. Each Eeveelution shines on its home field with its Z-move (a Z-move is its type
 #    for every field rule; base-move rules don't carry over; on the Grand Stage a Z-move raises the applause).
+OCT_BOUT_LV, OCT_HOST_LV = 87, 89   # Festival cap 90; Hard +1, Casual -4 (variants()). Harness: 88 / 90 gave a
+                                   # well-built Lv 90 team 1 full clear in 10 (6.5 of 9 bouts on average).
 def octave_bout(name, lose, mon):
     S("Gauntlet bout - %s (v60; the quest sets the field: plugins/Prismfall Trials/012_Trials_Octave.rb SINGERS)" % name,
       "OCTAVE_SINGER", name, 60, 90, lose, [mon], nobag=True)
 # Flower Garden stage 3: Grass x1.5 for Bloom Doom (Leaf Blade 90 -> 175), and the Z-move grows the garden; Swords Dance
 # first if it can. Leaf Guard keeps it status-free in the meadow. Knock Off for the Ghosts and Psychics.
 octave_bout("Lyra", "It bloomed for you. It doesn't do that for everyone.",
-    P("LEAFEON", 88, "LEAFGUARD", "GRASSIUMZ", "JOLLY", "LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS", "A", nick="Moss",
+    P("LEAFEON", OCT_BOUT_LV, "LEAFGUARD", "GRASSIUMZ", "JOLLY", "LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS", "A", nick="Moss",
       casual={"moves": "LEAFBLADE,KNOCKOFF,QUICKATTACK,SYNTHESIS"}))
 # Water Surface: Water Absorb sips 1/16 a turn, Water x1.5 for Hydro Vortex (Scald 80 -> 160); Wish keeps it afloat
 # through a chain; Ice Beam for the Grass and Dragon answers.
 octave_bout("Aria", "The tide took the note. That's all right. It brings them back.",
-    P("VAPOREON", 88, "WATERABSORB", "WATERIUMZ", "BOLD", "SCALD,ICEBEAM,WISH,PROTECT", "BPD", nick="Brine",
+    P("VAPOREON", OCT_BOUT_LV, "WATERABSORB", "WATERIUMZ", "BOLD", "SCALD,ICEBEAM,WISH,PROTECT", "BPD", nick="Brine",
       casual={"moves": "SCALD,ICEBEAM,WISH,HAZE"}))
 # Neon Grid: Volt Absorb starts charged and heals every turn, Electric x1.5 for Gigavolt Havoc (Thunderbolt 90 -> 175);
 # Shadow Ball for the Ghosts and Psychics; Discharge reboots a Blackout (the player's quakes and floods short the grid).
 octave_bout("Cadence", "Off the beat. Mine, not yours.",
-    P("JOLTEON", 88, "VOLTABSORB", "ELECTRIUMZ", "TIMID", "THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE", "S", nick="Snare",
+    P("JOLTEON", OCT_BOUT_LV, "VOLTABSORB", "ELECTRIUMZ", "TIMID", "THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE", "S", nick="Snare",
       casual={"moves": "THUNDERBOLT,SHADOWBALL,DISCHARGE,QUICKATTACK"}))
 # Mindscape: Psychic x1.5 for Shattered Psyche (Psychic 90 -> 175), Magic Bounce sends hazards and status home, and
 # three damaging sound moves (Hyper Voice) crack the dream into the Inverse Field, where Dark and Bug answers resist.
 octave_bout("Sona", "I heard that coming. I still couldn't stop it.",
-    P("ESPEON", 88, "MAGICBOUNCE", "PSYCHIUMZ", "TIMID", "PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND", "S", nick="Noon",
+    P("ESPEON", OCT_BOUT_LV, "MAGICBOUNCE", "PSYCHIUMZ", "TIMID", "PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND", "S", nick="Noon",
       casual={"ab": "SYNCHRONIZE", "moves": "PSYCHIC,SHADOWBALL,HYPERVOICE,MORNINGSUN"}))
 # New Moon: Dark x1.5 for Black Hole Eclipse (Dark Pulse 80 -> 160); the wall of the Octave: Wish (Moonlight fails
 # under a new moon), Snarl to blunt special answers, Foul Play turns a physical sweeper's Attack against it.
 octave_bout("Noct", "...Good night.",
-    P("UMBREON", 88, "INNERFOCUS", "DARKINIUMZ", "CALM", "DARKPULSE,FOULPLAY,SNARL,WISH", "SD", nick="Wick",
+    P("UMBREON", OCT_BOUT_LV, "INNERFOCUS", "DARKINIUMZ", "CALM", "DARKPULSE,FOULPLAY,SNARL,WISH", "SD", nick="Wick",
       casual={"moves": "DARKPULSE,FOULPLAY,SNARL,YAWN"}))
 # Volcanic: Lava Plume primes eruptions (+1 to Fire types, lava on grounded foes); Inferno Overdrive from Flare Blitz
 # (120 -> 190). Guts, not Flash Fire: the field lights Flash Fire, and a lit Inferno Overdrive one-shot a Lv 95
 # Vaporeon through the resist in the Octave workstream's real-engine run. Guts pays off if the lava burns it.
 octave_bout("Forte", "Too loud? ...No. Just right, and you were louder.",
-    P("FLAREON", 88, "GUTS", "FIRIUMZ", "ADAMANT", "FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME", "A", nick="Bellows",
+    P("FLAREON", OCT_BOUT_LV, "GUTS", "FIRIUMZ", "ADAMANT", "FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME", "A", nick="Bellows",
       casual={"moves": "FLAREBLITZ,SUPERPOWER,QUICKATTACK,BITE"}))
 # Frozen Lake: Ice Body heals without hail, Ice x1.5 for Subzero Slammer (Ice Beam 90 -> 175); Ice Shard slides (+1
 # Speed) and reseals a crack; Freeze-Dry for the Water types the cracked lake would favour.
 octave_bout("Lento", "Slowly, slowly. You got there first anyway.",
-    P("GLACEON", 88, "ICEBODY", "ICIUMZ", "MODEST", "ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD", "S", nick="Hush",
+    P("GLACEON", OCT_BOUT_LV, "ICEBODY", "ICIUMZ", "MODEST", "ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD", "S", nick="Hush",
       casual={"moves": "ICEBEAM,FREEZEDRY,SHADOWBALL,MIRRORCOAT"}))
 # Fairy Tale: Fairy x1.5 for Twinkle Tackle (Moonblast 95 -> 175); Draining Kiss x2 here; Pixilate Hyper Voice is a
 # second Fairy attack; Mystical Fire for the Steel answer.
 octave_bout("Carol", "And they all lived. That's the whole ending.",
-    P("SYLVEON", 88, "PIXILATE", "FAIRIUMZ", "MODEST", "MOONBLAST,HYPERVOICE,MYSTICALFIRE,DRAININGKISS", "BS", nick="Ribbon",
+    P("SYLVEON", OCT_BOUT_LV, "PIXILATE", "FAIRIUMZ", "MODEST", "MOONBLAST,HYPERVOICE,MYSTICALFIRE,DRAININGKISS", "BS", nick="Ribbon",
       casual={"ab": "CUTECHARM", "moves": "MOONBLAST,SWIFT,MYSTICALFIRE,DRAININGKISS"}))
 # The host: Eevee "Amen" on the Grand Stage. Extreme Evoboost (Last Resort + Eevium Z: +2 to every stat) is a showpiece
 # that lifts the applause; then Stored Power (20 + 20 per boost) or Last Resort (Normal x1.3/x1.5 on the stage, x1.3
 # as the grand finale, Adaptability). Shadow Ball for the Ghosts that ignore Last Resort; Quick Attack to finish.
 S("Gauntlet finale - Vesper's Eevee 'Amen' with the Eevium Z (v60; field :GRAND_STAGE from the quest)",
   "OCTAVE_VESPER", "Vesper", 60, 90, "There. That's every note we have. ...You were worth all of them.", [
-    P("EEVEE", 90, "ADAPTABILITY", "EEVIUMZ", "HASTY", "LASTRESORT,STOREDPOWER,SHADOWBALL,QUICKATTACK", "MX", nick="Amen",
+    P("EEVEE", OCT_HOST_LV, "ADAPTABILITY", "EEVIUMZ", "HASTY", "LASTRESORT,STOREDPOWER,SHADOWBALL,QUICKATTACK", "MX", nick="Amen",
       casual={"moves": "LASTRESORT,SWIFT,SHADOWBALL,QUICKATTACK"}),
 ], nobag=True)
 

@@ -86,9 +86,22 @@ def flooded_dunes():
     out = a.copy()
     # low rain sky with the grey Northern Sea on the horizon
     skycol = _sky(m, (84, 98, 116), (176, 188, 196), sea=(96, 120, 124))
-    cl = noise(HD, 30, 811, 3)
-    skycol = skycol * (0.9 + 0.18 * np.round(cl * 4)[..., None] / 4)
+    cl = noise(HD, 60, 811, 2)
+    band = (np.sin(m["ys"] / 14.0 + cl * 4) > 0.55)
+    skycol = np.where(band[..., None] & (m["ys"] < SEA_HORIZON)[..., None], skycol * 0.9, skycol)
     out[..., :3] = np.where(m["sky"][..., None], skycol, out[..., :3])
+    # storm clouds painted into the sky only (behind the mesa and dunes)
+    sn = noise((144, 70), 5, 812, 3)                                   # stretched 6x wide: low stratus decks
+    sn = np.asarray(Image.fromarray((sn * 255).astype(np.uint8)).resize((864, 140), Image.BICUBIC), np.float32) / 255
+    tone = np.round(np.clip((sn - 0.35) / 0.4, 0, 1) * 3) / 3
+    cb = np.zeros((140, 864, 4), np.float32)
+    for c, (lo, hi) in enumerate(((70, 138), (80, 150), (96, 162))):
+        cb[..., c] = lo + (hi - lo) * tone
+    cb[..., 3] = np.where(tone > 0, 255, 0)
+    cl_layer = np.zeros_like(out)
+    cl_layer[110:250] = cb
+    cm = (cl_layer[..., 3] > 0) & m["sky"] & (m["ys"] < SEA_HORIZON)
+    out[..., :3] = np.where(cm[..., None], cl_layer[..., :3], out[..., :3])
     # pale wet bone-white sand
     sand_rgb = _ramp(lum, [(0.2, (82, 76, 66)), (0.45, (150, 142, 124)), (0.62, (198, 192, 174)),
                            (0.78, (226, 222, 206)), (1.0, (244, 242, 232))])
@@ -98,7 +111,7 @@ def flooded_dunes():
     # wet dark rock and cacti
     rock_rgb = _ramp(lum, [(0.1, (30, 22, 26)), (0.35, (78, 52, 50)), (0.6, (124, 88, 74)), (1.0, (170, 138, 116))])
     out[..., :3] = np.where(m["rock"][..., None], rock_rgb, out[..., :3])
-    out[..., :3] = np.where(m["cactus"][..., None], out[..., :3] * np.array([0.7, 0.82, 0.86]), out[..., :3])
+    out[..., :3] = np.where(m["cactus"][..., None], out[..., :3] * np.array([0.82, 0.9, 0.9]), out[..., :3])
     # the flood-sea: shallow turquoise-grey at the shores, deep green-grey in the hollows, swell lines
     dep = _depth(m["water"])
     sea = np.array([126, 168, 160], np.float32) * (1 - dep[..., None]) + np.array([48, 86, 92], np.float32) * dep[..., None]
@@ -141,8 +154,8 @@ def flooded_dunes():
                     anim=[S("bob"), S("pulse")], amp=2.5, min=90, max=230, period=180),
               layer(F, "sheen", soft_glow((470, 420), 420, (200, 230, 255), alpha=70, squash=0.4), z=1, blend=1,
                     anim=S("pulse"), min=20, max=70, period=240)]
-    clouds = fog_strip(864, 130, (70, 82, 98), seed=812, scale=30, density=0.65, alpha=170, fade_top=False)
-    extras = {"img001": strip(F, "rainclouds", clouds, 150, speed=1, direction=-1, z=1),
+    wisps = fog_strip(864, 46, (150, 162, 176), seed=814, scale=14, density=0.45, alpha=110)
+    extras = {"img001": strip(F, "wisps", wisps, 150, speed=1, direction=-1, z=1),
               "img002": strip(F, "spray", fog_strip(864, 70, (236, 246, 250), seed=813, scale=12, density=0.45,
                                                     alpha=110), SEA_HORIZON - 30, speed=2, direction=1, z=2)}
     fx = [P(type=":streak", count=40, shape=":rect", w=12, h=1, colors=[[210, 225, 240], [180, 200, 220]],
@@ -214,17 +227,24 @@ def glass_dunes():
     cac = _ramp(lum, [(0.0, (4, 20, 14)), (0.4, (20, 80, 56)), (0.7, (70, 170, 120)), (1.0, (200, 255, 220))])
     out[..., :3] = np.where(m["cactus"][..., None], cac, out[..., :3])
     # boiling pools in the deepest hollows
-    deep = ndi.binary_erosion(m["water"], iterations=16)
-    deep = ndi.binary_opening(deep, iterations=3)
-    pool = np.array([96, 186, 168], np.float32)
+    # a few boiling pools in the old hollows (hand-placed so they read as puddles, not a sea)
+    nn = noise(HD, 6, 831, 2)
+    deep = np.zeros(m["water"].shape, bool)
+    for (cx, cy, rx, ry) in ((430, 300, 46, 9), (612, 418, 62, 13), (360, 470, 74, 16), (630, 606, 90, 19),
+                             (150, 470, 70, 15)):
+        deep |= (((m["xs"] - cx) / rx) ** 2 + ((m["ys"] - cy) / ry) ** 2 + (nn - 0.5) * 0.5) < 1.0
+    deep &= m["water"]
+    pool = np.array([60, 140, 128], np.float32)
     out[..., :3] = np.where(deep[..., None], pool, out[..., :3])
+    ring = (noise(HD, 2, 832, 1) > 0.8) & ndi.binary_erosion(deep, iterations=3)
+    out[..., :3] = np.where(ring[..., None], np.array([150, 214, 198], np.float32), out[..., :3])
     pr = _shore_band(deep, 2) & ~deep
     out[..., :3] = np.where(pr[..., None], np.array([210, 250, 236], np.float32), out[..., :3])
     hd = img(out)
     # amber seams where the glass is still cooling
-    sn = noise(HD, 26, 821, 3)
-    seam = (np.abs(sn - 0.5) < 0.012) & land & ~deep & (m["ys"] > 260)
-    seam = ndi.binary_dilation(seam, iterations=1)
+    sn = noise(HD, 9, 821, 2)
+    gate = noise(HD, 40, 823, 2) > 0.55
+    seam = (np.abs(sn - 0.5) < 0.006) & gate & land & ~deep & (m["ys"] > 270)
     sa = arr(hd); sa[seam] = [255, 176, 70, 255]
     hd = img(sa)
     # the breaking wave set in glass, between the mesa and the foe
@@ -244,7 +264,7 @@ def glass_dunes():
     centers = []
     for i in range(1, npool + 1):
         ys_, xs_ = np.nonzero(pools_lbl == i)
-        if len(xs_) < 120:
+        if len(xs_) < 40:
             continue
         centers.append((int(xs_.mean()), int(ys_.min()) + 4, len(xs_)))
     centers = sorted(centers, key=lambda c: -c[2])[:4]
@@ -252,14 +272,14 @@ def glass_dunes():
                     z=1, blend=1, anim=S("pulse"), min=70, max=210, period=95),
               layer(F, "facets", glow_from_mask(spec, (220, 255, 235), radius=3, gain=1.2, core=0.5), z=1, blend=1,
                     anim=S("pulse"), min=40, max=170, period=130, phase=1.2),
-              layer(F, "pools", glow_from_mask(deep.astype(np.float32), (160, 255, 220), radius=6, gain=0.8, core=0.15),
-                    z=1, blend=1, anim=S("pulse"), min=40, max=130, period=60),
+              layer(F, "pools", glow_from_mask(deep.astype(np.float32), (140, 240, 210), radius=5, gain=0.5, core=0.05),
+                    z=1, blend=1, anim=S("pulse"), min=20, max=70, period=60),
               layer(F, "sun", soft_glow((560, 170), 200, (255, 255, 250), alpha=180), z=1, blend=1, anim=S("pulse"),
                     min=110, max=190, period=210)]
     sheet = plume_sheet(color=(240, 250, 246), shade=(186, 214, 204))
     for i, (x, y, _) in enumerate(centers):
         layers.append(sheet_layer(F, "plume", sheet, x, y, 8, 10 + i * 2, z=3 if y < 420 else 23,
-                                  zoom=0.9 if y < 420 else 1.3, phase=i * 31, opacity=210))
+                                  zoom=0.9 if y < 420 else 1.1, phase=i * 31, opacity=200))
     # the prismatic Bleed shimmer where the two Imprints lock: a faint hue-cycling band (EBDX RainbowSprite)
     band = np.zeros((150, 864, 4), np.float32)
     xs = np.arange(864)[None, :]

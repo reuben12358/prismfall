@@ -68,7 +68,13 @@ module PrismfallEBDX
     [:SILKWOOD, :WILDFIRE]            => [255, 120, 30],    # the forest catches
     [:FLOWER_GARDEN, :WILDFIRE]       => [255, 120, 30],
     # Revision 10 field web (design/FIELD_BACKDROPS_NEEDED.md)
-    [:DESERT, :ASHEN_WASTE]           => [255, 200, 120],   # sand glassed white-hot
+    [:DESERT, :FLOODED_DUNES]         => [150, 210, 255],   # the flood-sea pours in
+    [:DESERT, :GLASS_DUNES]           => [235, 255, 240],   # white fire glasses the sand
+    [:FLOODED_DUNES, :GLASS_DUNES]    => [235, 255, 240],
+    [:GLASS_DUNES, :FLOODED_DUNES]    => [150, 210, 255],
+    [:GLASS_DUNES, :DESERT]           => [230, 220, 190],   # the glass shatters into glittering sand
+    [:FLOODED_DUNES, :DESERT]         => [200, 255, 170],   # the tide drains, the wet sand blooms
+    [:FLOODED_DUNES, :FROZEN_LAKE]    => :white,
     [:ASHEN_WASTE, :VOLCANIC]         => [255, 90, 20],
     [:ASHEN_WASTE, :WATER_SURFACE]    => [200, 220, 235],
     [:WILDFIRE, :MEADOW]              => [200, 255, 170],
@@ -447,6 +453,27 @@ module PrismfallEBDX
         { :type => :fall, :count => 6, :shape => :dot, :size => 2, :colors => EMBER,
           :area => [60, 0, 324, 220], :speed => [2.0, 3.5], :sway => 3, :zoom => [0.5, 0.8], :opacity => [200, 255],
           :layers => [:back, :mid], :blend => 1 }
+      ]
+    },
+    # Ch19 war fields: the DESERT room flooded, then glassed (art: art/battlebacks/fields_g.py)
+    :FLOODED_DUNES => {
+      :fallback => { "backdrop" => "Sand", "sky" => true }, :outdoor => true, :tone => [-20, 0, 25, 20],
+      :fallback_extras => { "water" => true }, :transition => [150, 210, 255],
+      :fx => [
+        { :type => :drift, :count => 14, :shape => :dot, :size => 2, :colors => [[255, 255, 255], [210, 235, 250]],
+          :dir => 1, :speed => [1.0, 2.0], :sway => 10, :zoom => [0.5, 0.9], :opacity => [150, 230], :layers => [:back, :mid, :front] },
+        { :type => :twinkle, :count => 14, :shape => :spark, :size => 5, :colors => [[255, 255, 255]],
+          :area => [0, 150, 384, 300], :speed => [2, 5], :zoom => [0.5, 0.9], :opacity => [160, 255], :layers => [:back, :mid], :blend => 1 }
+      ]
+    },
+    :GLASS_DUNES => {
+      :fallback => { "backdrop" => "Sand", "sky" => true }, :outdoor => true, :tone => [-35, 0, -20, 40],
+      :transition => [235, 255, 240],
+      :fx => [
+        { :type => :rise, :count => 8, :shape => :puff, :size => 18, :colors => STEAM, :speed => [0.25, 0.5],
+          :sway => 6, :zoom => [0.5, 0.8], :grow => 1.6, :opacity => [50, 95], :layers => [:back, :mid] },
+        { :type => :twinkle, :count => 18, :shape => :spark, :size => 7, :colors => [[255, 255, 255], [200, 255, 220]],
+          :speed => [4, 8], :zoom => [0.4, 0.9], :opacity => [170, 255], :layers => [:back, :mid], :blend => 1 }
       ]
     },
     :MEADOW => {

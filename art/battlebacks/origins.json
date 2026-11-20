@@ -324,6 +324,28 @@
    ]
   ]
  },
+ "FLOODED_DUNES": {
+  "files": [
+   "battlebg/field_flooded_dunes.png",
+   "battlebg/field_flooded_dunes_hd.png",
+   "elements/pf_flooded_dunes_sheen.png",
+   "elements/pf_flooded_dunes_spray.png",
+   "elements/pf_flooded_dunes_swellA.png",
+   "elements/pf_flooded_dunes_swellB.png",
+   "elements/pf_flooded_dunes_tide.png",
+   "elements/pf_flooded_dunes_wisps.png"
+  ],
+  "sources": [
+   [
+    "aveontrainer (DeviantArt battle backgrounds; credit)",
+    "battlebgdesert (the DESERT room's painted dunes, mesa and cacti, recoloured wet bone-white)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "flood-sea filling the hollows (depth-stepped), foam lines, wet sand bands, rain sky with the grey sea on the horizon, sandbar platforms, swell and tide-line layers, rain, spray, glints"
+   ]
+  ]
+ },
  "FLOWER_GARDEN": {
   "files": [
    "battlebg/field_flower_garden.png",
@@ -374,6 +396,29 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "ice-fishing hut with lit window and chimney smoke, ice blocks"
+   ]
+  ]
+ },
+ "GLASS_DUNES": {
+  "files": [
+   "battlebg/field_glass_dunes.png",
+   "battlebg/field_glass_dunes_hd.png",
+   "elements/pf_glass_dunes_facets.png",
+   "elements/pf_glass_dunes_plume.png",
+   "elements/pf_glass_dunes_pools.png",
+   "elements/pf_glass_dunes_prism.png",
+   "elements/pf_glass_dunes_seams.png",
+   "elements/pf_glass_dunes_steam.png",
+   "elements/pf_glass_dunes_sun.png"
+  ],
+  "sources": [
+   [
+    "aveontrainer (DeviantArt battle backgrounds; credit)",
+    "battlebgdesert (the DESERT room's dunes fused to black-green glass by gradient map)"
+   ],
+   [
+    "Prismfall (procedural, art/battlebacks/*.py)",
+    "glassed flood ridges, boiling pools, amber cooling seams, breaking wave set in glass, glass cacti and platforms, steam plumes (8-cell sheets), facet glints, white-fire sun, hue-cycling prismatic shimmer band (EBDX rainbow layer), steam strip"
    ]
   ]
  },

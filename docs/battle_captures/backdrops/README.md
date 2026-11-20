@@ -1,6 +1,6 @@
 # Field backdrops: real-engine stills
 
-One still per field and stage (49: 33 fields + 16 extra stages; Cave 2 and Colosseum 2 now have their own art), taken in the real engine (mkxp-z 2.4.2 + Essentials v21.1 + Elite Battle: DX +
+One still per field and stage (51: 35 fields + 16 extra stages, including the Ch19 war fields Flooded Dunes and Glass Dunes), taken in the real engine (mkxp-z 2.4.2 + Essentials v21.1 + Elite Battle: DX +
 the Prismfall plugins): a wild battle started with `setBattleRule("field", ...)`, held on the first command phase
 for 150 frames so the animated layers and particles are running, then `Graphics.screenshot`. Daytime forced.
 `contact_sheet.png` shows them all at half size; `<field>[_s<stage>].png` are the full frames.
@@ -17,7 +17,10 @@ Meadow -> Wildfire -> Embers, driven by the field plugin's own `Battle#change_fi
 
 Move-triggered transitions (`move_*.gif`, half speed): real battles where the AI player keeps using one move until
 the field's own rule fires. Surf x2 quenches Volcanic into Cinderglass; Flamethrower sets Meadow ablaze into Wildfire
-(`BD_MOVES="VOLCANIC:VAPOREON:SURF;MEADOW:ARCANINE:FLAMETHROWER"`). Doubles: `double_prism_arena.png`,
+(`BD_MOVES="VOLCANIC:VAPOREON:SURF;MEADOW:ARCANINE:FLAMETHROWER"`). The war fields (one place in three states): `transition_desert_flood_glass.gif` (chain via `change_field`),
+`move_originpulse_desert_to_flooded.gif` (Kyogre: Drizzle blooms the Desert, Origin Pulse floods it) and
+`move_blueflare_flooded_to_glass.gif` (Reshiram: Blue Flare glasses the flood), all half speed with `_keys.png` strips.
+Doubles: `double_prism_arena.png`,
 `double_silkwood.png` (`BD_DOUBLE=1`). Night: `*_night.png` (`BD_TIME=night`).
 
 Not verified: Windows / real GPU, double battles, night tint on outdoor rooms; other transition pairs.

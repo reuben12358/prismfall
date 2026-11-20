@@ -23,7 +23,7 @@ events:
   name: Sluice stone red
   at: [49, 18]
   pages:
-  - graphic: {tile: 22834}
+  - graphic: {tile: 22837}
     trigger: touch
     through: true
     commands:
@@ -35,7 +35,7 @@ events:
   name: Sluice stone blue
   at: [51, 18]
   pages:
-  - graphic: {tile: 22835}
+  - graphic: {tile: 22838}
     trigger: touch
     through: true
     commands:
@@ -47,7 +47,7 @@ events:
   name: Sluice stone yellow
   at: [53, 18]
   pages:
-  - graphic: {tile: 22836}
+  - graphic: {tile: 22839}
     trigger: touch
     through: true
     commands:

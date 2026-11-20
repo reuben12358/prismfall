@@ -8,7 +8,7 @@ Add art in any order.
 
 ## 0. Status (Revision 10): every field and stage has shipped art
 
-All 33 fields and their stages (49 field/stage rooms, plus one night variant) have finished backdrops. They live in the kit folder
+All 35 fields and their stages (51 field/stage rooms, plus night variants) have finished backdrops. They live in the kit folder
 **`graphics/EBDX/Battlebacks/`** (`battlebg/` rooms, `elements/` animated layers), which `tools/package.sh` copies to
 `Graphics/EBDX/Battlebacks/` in the dev kit. Real-engine stills: `docs/battle_captures/backdrops/contact_sheet.png`.
 
@@ -25,7 +25,8 @@ All 33 fields and their stages (49 field/stage rooms, plus one night variant) ha
 - **Stage keys with art:** `field_flower_garden_2..5`, `field_grand_stage_2/_3`, `field_neon_grid_blackout`,
   `field_desert_bloom`, `field_mindscape_nightmare`, `field_hollow_cathedral_consecrated`, `field_new_moon_abyss`,
   `field_new_moon_lamplight`, `field_dragons_den_wyrmfire`, `field_wildfire_embers`. New fields: `field_wildfire`,
-  `field_meadow`. `field_ashen_waste` is now **Cinderglass** (Volcanic's layout quenched to black glass).
+  `field_meadow`, and the Ch19 war fields `field_flooded_dunes` / `field_glass_dunes` (the DESERT room flooded, then
+  glassed: same dunes, horizon and platform spots; `art/battlebacks/fields_g.py`). `field_ashen_waste` is now **Cinderglass** (Volcanic's layout quenched to black glass).
   CAVE 2 and COLOSSEUM 2 have bridge-side art (`field_cave_cracked`, `field_colosseum_frenzy`): their field
   definitions carry no stage key, so the bridge profile names it (`:stages => { 2 => { :backdrop => ... } }`).
   Night variants: `field_frozen_lake_night` (aurora), `field_meadow_night`.

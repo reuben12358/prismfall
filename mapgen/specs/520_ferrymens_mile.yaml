@@ -1,4 +1,4 @@
-# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_early.py - edit that script.
+# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_craft.py - edit that script.
 id: 520
 name: The Ferrymen's Mile
 parent: 0
@@ -10,23 +10,21 @@ biome: route
 field: MEADOW
 fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 200, sx: 1, sy: 0}
 tone: [4, 4, -4, 0]
+walk_from:
+- [9, 97]
+- [17, 108]
+- [32, 1]
+- [1, 74]
 connections:
 - {dir: S, offset: 11, to: 100, to_offset: 28}
 - {dir: N, offset: 30, to: 521, to_offset: 58}
 - {dir: W, offset: 72, to: 527, to_offset: 22}
-walk_from:
-- [17, 108]
-- [32, 1]
-- [1, 74]
 raw: data/raw/520.npy
-tileset: 51
+tileset: 56
 events:
-- type: cut_tree
-  at: [13, 89]
-  name: CutTree
 - type: event
   name: Juno tutorial 1
-  at: [20, 89]
+  at: [20, 90]
   pages: &id001
   - cond: {switch: CH1_K1_DONE}
     trigger: touch
@@ -40,19 +38,19 @@ events:
       - {script: '$game_self_switches[[520, 0, ''TUT'']] = true'}
 - type: event
   name: Juno tutorial 2
-  at: [21, 89]
+  at: [21, 90]
   pages: *id001
 - type: event
   name: Juno tutorial 3
-  at: [22, 89]
+  at: [22, 90]
   pages: *id001
 - type: event
   name: Juno tutorial 4
-  at: [23, 89]
+  at: [23, 90]
   pages: *id001
 - type: event
   name: Stile send-off 1
-  at: [16, 99]
+  at: [16, 98]
   pages: &id002
   - commands: []
   - cond:
@@ -84,15 +82,15 @@ events:
           $game_map.need_refresh = true'}
 - type: event
   name: Stile send-off 2
-  at: [17, 99]
+  at: [17, 98]
   pages: *id002
 - type: event
   name: Stile send-off 3
-  at: [18, 97]
+  at: [18, 98]
   pages: *id002
 - type: event
   name: Accord barrier 1
-  at: [3, 71]
+  at: [3, 72]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -102,7 +100,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 2
-  at: [2, 73]
+  at: [3, 73]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -112,7 +110,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 3
-  at: [2, 74]
+  at: [3, 74]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -122,7 +120,7 @@ events:
     commands: []
 - type: event
   name: Accord barrier 4
-  at: [2, 75]
+  at: [3, 75]
   pages:
   - graphic: {tile: 18119}
     trigger: action
@@ -130,6 +128,9 @@ events:
   - cond: {switch: CH1_ORCHARD_DONE}
     through: true
     commands: []
+- type: cut_tree
+  at: [13, 89]
+  name: CutTree
 - type: event
   name: Professor Larch
   at: [19, 97]
@@ -164,7 +165,7 @@ events:
   - cond: {switch: CH1_ORCHARD_DONE}
     graphic: {sprite: NPC 07, dir: right}
     commands: ['Second Guard: (low) That''s the null one from the dock. Captain said let them through, whatever happens.', 'Accord Guard: Which captain?',
-      'Second Guard: Didn''t say. Came down from Crownhaven with a white seal on it.', '\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
+      'Second Guard: Didn''t say. Came down from Crownhaven with a white seal on it.', '\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
       'Accord Guard: Lovely weather.']
 - type: event
   name: The Hale Bell
@@ -184,7 +185,7 @@ events:
         by Saltmere. Two days. Glass doesn''t pay my horse.']
 - type: sign
   name: Hale Bell fork sign
-  at: [10, 75]
+  at: [10, 76]
   text: THE HALE BELL. <- LACECLIFF WALK, Marram Down and SALTMERE (the Strand Road). ^ Windfall Row. v Ferrow's Landing.
   post: false
 - type: sign
@@ -214,7 +215,7 @@ events:
   after: It's judging me now.
 - type: npc
   name: Farmhand
-  at: [40, 63]
+  at: [34, 64]
   sprite: NPC 03
   dir: down
   move: random
@@ -230,12 +231,12 @@ events:
   name: Stile
   text: A stile over the hedge bank. Somebody has carved a tally of Wingull into the top rail.
 - type: sign
-  at: [44, 56]
+  at: [44, 58]
   post: false
   name: Scarecrow
   text: It's wearing a Meridian linesman's cap. Somebody has a sense of humor.
 - type: sign
-  at: [12, 62]
+  at: [11, 80]
   post: false
   name: Lookout board
   text: 'GULLWATCH LOOKOUT
@@ -269,7 +270,7 @@ events:
   after: My birdies! Oh, well done.
 - type: event
   name: Ferry-toll booth
-  at: [13, 88]
+  at: [13, 87]
   pages:
   - trigger: action
     commands: ['THE OLD FERRY-TOLL BOOTH. Fare board: "Landing to Saltmere, 3 coppers. Landing to the Strait, 5. Return, ask the captain."', 'Under it,
@@ -282,10 +283,10 @@ events:
     commands: [ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.]
 - type: event
   name: Hale's Bramble
-  at: [35, 60]
+  at: [37, 59]
   pages:
   - trigger: action
-    commands: [HALE'S BRAMBLE. Six terraces of bramble and berry. Wenna's cousin sells tarts at the shed. The tarts are better than Wenna's. Don't tell
+    commands: [HALE'S BRAMBLE. Three terraces of bramble and berry. Wenna's cousin sells tarts at the shed. The tarts are better than Wenna's. Don't tell
         Wenna.]
 - type: event
   name: Wenna's cousin
@@ -304,7 +305,7 @@ events:
     move: fixed
     commands: ['Wenna''s cousin: Mind the brambles on the way down.']
 - type: berry
-  at: [40, 56]
+  at: [39, 56]
   berry: ORANBERRY
 - type: berry
   at: [46, 50]
@@ -313,7 +314,7 @@ events:
   at: [52, 43]
   berry: CHERIBERRY
 - type: berry
-  at: [54, 39]
+  at: [56, 39]
   berry: ORANBERRY
 - type: event
   name: The Minding Hedges
@@ -322,7 +323,7 @@ events:
   - trigger: action
     commands: ['THE MINDING HEDGES. "Mind the hedges. The hedges mind you." A maze of three turns, planted by a ferryman who missed the sea.']
 - type: item
-  at: [12, 60]
+  at: [12, 59]
   item: POTION
   hidden: true
   name: HiddenItem (hedge maze)
@@ -345,12 +346,26 @@ events:
     commands: ['Baaa. (It is rolling, very slowly, in no direction.)']
 - type: event
   name: 'Wooloo '
-  at: [50, 25]
+  at: [48, 26]
   pages:
   - graphic: {sprite: Followers/WOOLOO, dir: down}
     trigger: action
     move: random
     commands: [Baaa.]
+- type: event
+  name: 'Wooloo  '
+  at: [30, 78]
+  pages:
+  - graphic: {sprite: Followers/WOOLOO, dir: down}
+    trigger: action
+    move: random
+    commands: [Baaa. (It has rolled a long way downhill. It looks pleased about it.)]
+- type: event
+  name: Duck pond
+  at: [44, 75]
+  pages:
+  - trigger: action
+    commands: ['A duck pond with no ducks. A Ducklett is sitting on the reeds, looking as if it is waiting for some.']
 - type: item
   at: [50, 12]
   item: POKEBALL

@@ -1,7 +1,7 @@
 #===============================================================================
 # Prismfall Mega - 004 Map-event helpers, conditions, debug menu
 #-------------------------------------------------------------------------------
-# Map events for stones (design/MEGA_EVENTS.yaml) make ONE call:
+# Map events for stones (design/TRIAL_EVENTS.yaml ("Mega Evolution" maps)) make ONE call:
 #   pf_mega_stone(:ABSOLITE)                       the item jingle + "obtained"
 #   pf_mega_stone(:ABSOLITE, "A black stone...")   a line first
 # Before the Ring-Day the first stone also gets PrismfallMega::TEASER_TEXT.
@@ -17,14 +17,23 @@ module PrismfallMega
     return n
   end
 
+  # Core save data (Prismfall::SaveState#custom), so it survives saving.
+  def self.custom
+    return nil if !defined?(Prismfall) || !Prismfall.respond_to?(:state)
+    st = Prismfall.state
+    return nil if !st.respond_to?(:custom)
+    st.custom ||= {}
+    return st.custom
+  end
+
   def self.teaser_seen?
-    return false if !defined?(Prismfall) || !Prismfall.respond_to?(:state) || !Prismfall.state
-    return Prismfall.state.instance_variable_get(:@prism_mega_teaser) ? true : false
+    c = custom
+    return c ? (c[:mega_teaser] ? true : false) : false
   end
 
   def self.mark_teaser
-    return if !defined?(Prismfall) || !Prismfall.respond_to?(:state) || !Prismfall.state
-    Prismfall.state.instance_variable_set(:@prism_mega_teaser, true)
+    c = custom
+    c[:mega_teaser] = true if c
   end
 
   def self.give_stone(item, text = nil)

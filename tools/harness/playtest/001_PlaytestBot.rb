@@ -427,7 +427,7 @@ module PlayBot
       @step_frames += 1                # only frames with the map free count (cutscenes can be long)
       return wait_for_map if ![:done, :debug_install, :run_checks, :arrive, :need_map, :eval_conditions].include?(kind) &&
                              $game_map.map_id != map
-      if @step_frames > 5400
+      if @step_frames > 5400 && !(kind == :spot_all && @grind_target.to_i > 0)   # grinding has its own cap
         log("STUCK on step #{@step} #{step.inspect} at map #{$game_map.map_id} (#{$game_player.x},#{$game_player.y})")
         shot("stuck_step#{@step}")
         return next_step

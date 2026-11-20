@@ -694,6 +694,19 @@ def bamboo():
     return im, ['OO', 'OO', 'WW']
 
 
+def bellpost():
+    """the Hale Bell (1x3): a ship's bell hung from a gallows post above the cliff, a cloth tied round its clapper"""
+    im, d = canvas(1, 3)
+    d.rectangle([6, 4, 9, 46], fill=WOOD[1], outline=OUT); d.line([7, 5, 7, 45], fill=WOOD[3])
+    d.rectangle([1, 4, 14, 7], fill=WOOD[2], outline=OUT)
+    d.line([3, 8, 3, 11], fill=(80, 76, 72, 255))
+    d.polygon([(0, 20), (1, 12), (5, 11), (6, 12), (7, 20)], fill=(196, 152, 64, 255), outline=(110, 80, 40, 255))
+    d.line([1, 13, 1, 19], fill=(240, 210, 120, 255))
+    d.rectangle([2, 20, 5, 23], fill=(232, 228, 216, 255))                # the cloth on the clapper
+    d.ellipse([3, 44, 12, 47], fill=(0, 0, 0, 70))
+    return im, ['O', 'O', 'W']
+
+
 def pieces():
     """name -> (image, code rows, door): appended by rcustom (rdraw.pieces_late4)"""
     D.CODE.update(CODES)
@@ -749,6 +762,7 @@ def pieces():
     out['dl_post'] = (dye_post(), ['W'], None)
     out['sb_m'] = (stone_bridge('m'), ['D'], None); out['sb_w'] = (stone_bridge('w'), ['W'], None); out['sb_e'] = (stone_bridge('e'), ['W'], None)
     im, c = bamboo(); out['pf_bamboo'] = (im, c, None)
+    im, c = bellpost(); out['pf_bellpost'] = (im, c, None)
     for nm, col in (('r', (196, 52, 64)), ('b', (52, 84, 186)), ('y', (228, 196, 60))):
         out['df_slab_' + nm] = (slab(col), ['F'], None)
     im, c = sluice(); out['df_sluice'] = (im, c, None)

@@ -1126,6 +1126,7 @@ def build_524():
                     ('pf_p_net', 62, 56), ('pf_logbench', 68, 58), ('pf_p_lantern', 64, 50), ('gw_rack', 76, 58), ('sh_campfire', 72, 60)):
         r.near(n, x, y, on='.d', r=3)
     rng = random.Random(524)
+    CK.drapes_along(r, every=4, seed=1)
     for _ in range(W * H // 28):                                                    # silk: webs across gaps, drapes, cocoons
         nm = rng.choice(['pf_p_web', 'pf_p_web1', 'gw_drape0', 'gw_drape1', 'gw_cocoons', 'gw_cocoons', 'pf_p_strand_w', 'pf_p_strand_p'])
         x, y = rng.randrange(W), rng.randrange(H); st_ = STAMPS[nm]
@@ -1162,3 +1163,172 @@ def build_524():
 
 
 BUILD[524] = build_524
+
+
+# ====================================================================================================== 520 The Ferrymen's Mile
+def build_520():
+    """The Ferrymen's Mile (64x110, MEADOW): the lane north from Ferrow's Landing over the stile, along the chalk sea
+    cliff (Wingull posts, the Gullwatch lookout) to the Hale Bell on its post above the sea, where the Strand Road turns
+    west (the quarantine roadblock).  East of the lane Hale's Bramble climbs in three berry terraces to the picking shed;
+    west, the Minding Hedges (a three-turn maze with a hidden Potion); Juno's fenced catching clearing; the duck pond; the
+    sheepfold of drystone walls where three Wooloo keep getting out; ledges drop from the fold to the lane (the shortcut
+    home); the old ferry-toll booth; Road Stone I.  Secret: the Smuggler's Stair behind the booth (Cut), down to the
+    Ferryman's Rest on the beach under the cliff."""
+    W, H = 64, 110
+    r = Route(520, W, H, 'shore', kit={1: 'akc', 2: 'sh3', 3: 'sh3', 4: 'sh3', 'default': 'sh3'}, base='.')
+    m = r.m
+    m.ht[:, :] = 1
+    # ---- the sea under the cliff walk (south-west)
+    for y in range(80, H):
+        d = 7 + int(3 * (vnoise(0, y, 520, 9.0) - 0.5) * 2) + max(0, (y - 96) // 3)
+        for x in range(0, d + 3):
+            m.ht[y, x] = 0
+            m.cls[y, x] = ('W' if x < d - 4 else 'w') if x < d else 's'
+    CK.smooth_sea(m, 2)
+    # the Ferryman's Rest: a beach pocket under the toll booth's cliff
+    m.ht[93:102, 0:12] = 0
+    for y in range(93, 102):
+        for x in range(0, 12):
+            if m.cls[y, x] not in 'wW': m.cls[y, x] = 's'
+    # ---- Hale's Bramble: three terraces east of the lane
+    for (x0, x1, y0, y1, h) in ((36, 60, 34, 60, 2), (40, 60, 34, 52, 3), (44, 60, 34, 45, 4)):
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                if x - x0 + (y1 - y) * 0.15 > 1.5 * vnoise(x, y, 5201 + h, 4.0): m.ht[y, x] = max(m.ht[y, x], h)
+    for h in (2, 3, 4): CK.smooth_ht(m, h, 2, box=(30, 28, 64, 64))
+    road = [(16, 109), (16, 101), (19, 93), (24, 85), (22, 77), (22, 72), (27, 62), (31, 52), (28, 41), (33, 29), (31, 16), (31, 0)]
+    r.road(road, w=3.0, open_=None)
+    r.road([(22, 74), (12, 73), (0, 73.5)], w=3.0, open_=None)
+    r.exit('S', 15, 4); r.exit('N', 30, 4); r.exit('W', 72, 4)
+    for (sx, h) in ((38, 2), (42, 3), (46, 4)):
+        yy = max(y for y in range(H) if m.ht[y, sx + 1] == h)
+        CK.stair(r, sx, yy, w=2, h=h)
+    r.lane([(32, 56), (38, 62)], w=2.0, open_=None)
+    r.lane([(22, 84), (14, 84), (10, 86)], w=2.0, open_=None)                     # to the toll booth
+    r.lane([(26, 60), (17, 62)], w=2.0, open_=None)                                # into the Minding Hedges
+    r.lane([(32, 24), (44, 22), (48, 18)], w=2.0, open_=None)                      # to the sheepfold
+    CK.stair(r, 12, 92, w=3, h=1)                                                  # the Smuggler's Stair
+    CK.pond(r, 48, 72, 4.5, 2.6, c='p', rough=0.4)                                  # the duck pond
+    r.forest_band('E', 6, wobble=3.0); r.forest_band('N', 4, wobble=2.0)
+    for cx, cy_, rx, ry in ((52, 26, 4, 4), (8, 14, 6, 5), (46, 92, 7, 6), (56, 78, 4, 5), (10, 44, 5, 4), (20, 6, 5, 3),
+                            (40, 100, 4, 3), (6, 30, 4, 4), (44, 6, 5, 3)):
+        r.copse(cx, cy_, rx, ry)
+    r.finish_plan(border=0)
+    m.cls[86:92, 12:15] = np.where(m.cls[86:92, 12:15] == 'T', '.', m.cls[86:92, 12:15])
+    # the sheepfold's ledges: down to the lane, the shortcut home (one way)
+    CK.ledge(r, 36, 50, 31)
+    for y in (30, 31, 32):
+        for x in (35, 51):
+            if m.cls[y, x] in '.t': m.cls[y, x] = 'T'
+    CK.grass_fields(r, [(28, 90, 3), (32, 84, 3), (38, 70, 3.5), (24, 44, 3.5), (20, 30, 3), (40, 40, 3), (48, 50, 2.5), (14, 52, 3),
+                        (26, 104, 2.5), (54, 64, 3), (38, 16, 3), (12, 36, 2.5)])
+    CK.woods(r, CK.ELOWEN, scale=12.0, accents={'blossom': 0.02})
+    ev = old_events('520_reskin.yaml', 520)
+    tut = [{'cond': {'switch': 'CH1_K1_DONE'}, 'trigger': 'touch', 'commands': [{'if': "$game_self_switches[[520, 0, 'TUT']]", 'then': [], 'else': [
+        J('happy', "Catching tutorial! Weaken it, then throw. Don't throw the Ball AT it, throw it NEAR it."),
+        J('happy', 'I learned that the hard way. Sorry, Biscuit.'), {'script': 'pbReceiveItem(:POKEBALL, 5)'},
+        {'script': "$game_self_switches[[520, 0, 'TUT']] = true"}]}]}]
+    send = [{'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'trigger': 'touch', 'commands': [{'if': 'pfm?(:ch2_sendoff)', 'then': [], 'else': RE.SENDOFF_520}]}]
+    r.events += [dict(e, fixed=True) for e in line_events(r, 'Juno tutorial', 90, 10, 30, tut)]
+    r.events += [dict(e, fixed=True) for e in line_events(r, 'Stile send-off', 98, 8, 24, send)]
+    B = barrier_tile()
+    bar = lambda i, y: {'type': 'event', 'name': 'Accord barrier %d' % i, 'at': [3, y], 'fixed': True, 'pages': [
+        {'graphic': {'tile': B}, 'trigger': 'action', 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
+        {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'through': True, 'commands': []}]}
+    for i, y in enumerate((72, 73, 74, 75)): r.events.append(bar(i + 1, y)); m.taken[y, 3] = True
+    r.add({'type': 'event', 'name': 'Professor Larch', 'at': [19, 97], 'pages': [
+              {'commands': []}, {'cond': {'var': ['STORY_CHAPTER', 2]}, 'graphic': {'sprite': 'trainer_PROFESSOR', 'dir': 'down'}, 'commands': [
+                  {'if': 'pfm?(:ch2_sendoff)', 'then': [P('LARCH', 'neutral', 'Off you go. Lecture Two is already drafted.')], 'else': RE.SENDOFF_520}]},
+              {'cond': {'self': 'A'}, 'commands': []}]},
+          {'type': 'event', 'name': 'Accord guard', 'at': [5, 71], 'pages': [
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'down'}, 'commands': ['Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.']},
+              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+                  'Accord Guard: Hold. Quarantine order: nobody leaves the Landing without papers.',
+                  "Accord Guard: ...You've got a Badge Case. A challenger. Right. Challengers pass, that's older law than the quarantine.",
+                  'Accord Guard: "Eighteen in Concord, One in Keeping." On you go. Saltmere\'s two days west. Mind the cliff path in wind.']}]},
+          {'type': 'event', 'name': 'Accord guard (aside)', 'at': [6, 77], 'pages': [
+              {'graphic': {'sprite': 'NPC 07', 'dir': 'up'}, 'commands': ['Second Guard: Nobody past. Orders came down this morning.']},
+              {'cond': {'switch': 'CH1_ORCHARD_DONE'}, 'graphic': {'sprite': 'NPC 07', 'dir': 'right'}, 'commands': [
+                  "Second Guard: (low) That's the null one from the dock. Captain said let them through, whatever happens.", 'Accord Guard: Which captain?',
+                  "Second Guard: Didn't say. Came down from Crownhaven with a white seal on it.", '\\\\pf[ACCORD_GUARD,deadpan,sweat,Accord guard](They notice you listening.)',
+                  'Accord Guard: Lovely weather.']}]},
+          obj('The Hale Bell', (16, 70), ['THE HALE BELL: A ship\'s bell on a post above the sea cliff. The ferrymen rang it once the last boat was in.',
+              'A cloth has been tied round the clapper.', J('sad', "Dad tied that. The night they closed the strait. He said there wasn't anything left to ring for.")]),
+          talk('Hay-cart Driver', (26, 70), 'NPC 11', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
+               "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
+          sign((10, 76), 'Hale Bell fork sign', "THE HALE BELL. <- LACECLIFF WALK, Marram Down and SALTMERE (the Strand Road). ^ Windfall Row. v Ferrow's Landing."),
+          sign((18, 104), 'Road sign', "THE FERRYMEN'S MILE\nFerrow's Landing - Hale's Bramble - Windfall Row.\nMind the hedges. The hedges mind you."),
+          at(ev['Pim'], 26, 66), at(ev['Dory'], 29, 46), at(ev['Farmhand'], 34, 64), at(ev['Under the stile'], 11, 99), at(ev['Stile'], 12, 98),
+          at(ev['Scarecrow'], 44, 58), at(ev['Lookout board'], 10, 80), at(ev['Waystone'], 33, 8), at(ev['Old well'], 20, 52),
+          trainer((36, 22), 'YOUNGSTER', 'Pip', "My squad's undefeated on this lane! It's a short lane.", 'Aw, my squad lost!', d='left'),
+          trainer((25, 34), 'LASS', 'Wren', 'Birdies! Go!', 'My birdies! Oh, well done.', d='right'),
+          obj('Ferry-toll booth', (13, 87), ['THE OLD FERRY-TOLL BOOTH. Fare board: "Landing to Saltmere, 3 coppers. Landing to the Strait, 5. Return, ask the captain."',
+              'Under it, chalked: "STRAIT CLOSED." Under that, smaller: "for now"']),
+          obj('Road Stone I', (19, 107), ['ROAD STONE I. THE STRAND ROAD. "Ferrow 0." Someone has taken a rubbing of it. Many someones.']),
+          obj("Hale's Bramble", (36, 60), ["HALE'S BRAMBLE. Three terraces of bramble and berry. Wenna's cousin sells tarts at the shed. The tarts are better than Wenna's. Don't tell Wenna."]),
+          talk("Wenna's cousin", (52, 38), 'NPC 16', ["Wenna's cousin: Berries are picked by the terrace. Bottom terrace is for tourists. Top terrace is for family.",
+               "Wenna's cousin: You look like family. ...No, you look tired. Here."], again=["Wenna's cousin: Mind the brambles on the way down."]),
+          {'type': 'berry', 'at': [40, 56], 'berry': 'ORANBERRY'}, {'type': 'berry', 'at': [46, 50], 'berry': 'PECHABERRY'},
+          {'type': 'berry', 'at': [52, 43], 'berry': 'CHERIBERRY'}, {'type': 'berry', 'at': [56, 39], 'berry': 'ORANBERRY'},
+          obj('The Minding Hedges', (16, 64), ['THE MINDING HEDGES. "Mind the hedges. The hedges mind you." A maze of three turns, planted by a ferryman who missed the sea.']),
+          hidden((12, 59), 'POTION', 'HiddenItem (hedge maze)'),
+          talk('Shepherd', (46, 20), 'NPC 20', ['Shepherd: Three of my Wooloo got out again. They roll. Downhill. Always downhill.',
+               "Shepherd: If you see a Wooloo, walk it uphill. It'll be so surprised it'll follow you."]),
+          talk('Wooloo', (40, 14), 'Followers/WOOLOO', ['Baaa. (It is rolling, very slowly, in no direction.)'], move='random'),
+          talk('Wooloo ', (50, 26), 'Followers/WOOLOO', ['Baaa.'], move='random'),
+          talk('Wooloo  ', (30, 78), 'Followers/WOOLOO', ['Baaa. (It has rolled a long way downhill. It looks pleased about it.)'], move='random'),
+          obj('Duck pond', (44, 75), ['A duck pond with no ducks. A Ducklett is sitting on the reeds, looking as if it is waiting for some.']),
+          item((50, 12), 'POKEBALL'), item((8, 50), 'POTION'), hidden((8, 98), 'BIGPEARL', 'HiddenItem (Ferryman\'s Rest)'),
+          item((10, 97), 'REVIVE'), obj("The Ferryman's Rest", (9, 95), ["A rowboat hauled up in a sea cave. A name on the bow, painted out. Bootprints, small, going in and not out."]),
+          {'type': 'cut_tree', 'at': [13, 89], 'name': 'CutTree'})
+    r.seat_events(on='.dts')
+    CK.clear_around(r)
+    # the Minding Hedges: three hedge lines with alternating gaps (a three-turn maze)
+    for y, gap in ((57, (17, 18)), (61, (10, 11)), (65, (17, 18))):
+        for x in range(8, 21):
+            if gap[0] <= x <= gap[1]: continue
+            if m.free(x, y, 1, 1, on='.t'): m.stamp('nt_bush0' if (x + y) % 3 else 'nt_bush1', x, y, mark='B')
+    for x in (7, 21):
+        for y in range(57, 66):
+            if m.free(x, y, 1, 1, on='.t') and not r.road_mask[y, x]: m.stamp('nt_bush0', x, y, mark='B')
+    # Juno's catching clearing (fenced), the sheepfold's drystone walls, the bramble rows, the booth, the bell, carts
+    for y in (82, 87): m.fence(26, 34, y, gaps=((29, 30),) if y == 87 else ())
+    for (x0, x1, y) in ((38, 54, 10), (38, 54, 29)):
+        for x in range(x0, x1 + 1):
+            if abs(x - 46) <= 1 and y == 10: continue
+            if m.free(x, y, 1, 1, on='.t'): m.stamp('nr_wall_' + ('w' if x == x0 else 'e' if x == x1 else 'm'), x, y, mark='B')
+    for x in range(38, 60, 2):
+        for y in range(34, 62):
+            if m.ht[y, x] >= 2 and m.free(x, y, 2, 2, on='.t') and (y + x) % 5 == 0: m.stamp('ak_fern', x, y, mark='B')
+    r.near('gl_shed', 52, 34, on='.t', r=3)                                         # the picking shed
+    r.near('hb_shed', 11, 84, on='.d', r=2)                                         # the toll booth
+    r.near('pf_bellpost', 15, 68, on='.d', r=2)
+    r.near('pf_roadstone', 20, 106, on='.', r=2)
+    for n, x, y in (('pf_sledge', 26, 74), ('hb_crates4', 24, 40), ('hb_barrel', 36, 64), ('pf_hayrick', 40, 64)):
+        r.near(n, x, y, on='.', r=3)
+    for y in range(78, 106, 6):                                                     # Wingull posts along the cliff walk
+        xs = [x for x in range(2, 20) if m.ht[y, x] == 1 and m.cls[y, x] == '.' and m.ht[y, x - 1] == 0] if True else []
+        if xs: r.near('hb_post1', xs[0] + 1, y, on='.', r=1)
+    CK.props(r, ['ck_boulder', 'ck_pebbles', 'nt_rocks_s0', 'nt_stump', 'nt_log'], 20, box=(0, 40, W, H), clump=3, seed=7)
+    for (x, y) in ((43, 70), (53, 71), (44, 75), (52, 74)): r.near('nt_reed1', x, y, on='.', r=2)
+    CK.fringe(r, CK.FRINGE['meadow'], 160, seed=1, near_forest=5)
+    CK.fringe(r, ['nt_pine_a', 'nt_pine_b', 'nt_teal_a'], 10, box=(0, 70, 30, H), seed=2, near_forest=0)
+    CK.undergrowth(r, 220, seed=3)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.25)
+    CK.paint_extras(r)
+    CK.shore(r, wet=1, wet_noise=0.5, wrack=0.5)
+    FL = K.DECOR_SH['flowers']
+    for i, (cx_, cy_, rx, ry, ks) in enumerate(((30, 86, 4, 2, (2, 3)), (12, 30, 4, 2, (0, 4)), (40, 78, 4, 2, (5, 6)), (20, 56, 3, 2, (8, 9)),
+                                                (52, 66, 3, 2, (1, 10)), (16, 80, 3, 1.5, (2, 3)), (34, 6, 4, 1.5, (11, 12)))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in ks], p=0.7, seed=i)
+    CK.scatter_quiet(r, 12)
+    h = head(520, "The Ferrymen's Mile", field='MEADOW', bgm='Route 1',
+             connections=[{'dir': 'S', 'offset': 11, 'to': 100, 'to_offset': 28}, {'dir': 'N', 'offset': 30, 'to': 521, 'to_offset': 58},
+                          {'dir': 'W', 'offset': 72, 'to': 527, 'to_offset': 22}],
+             fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0}, tone=[4, 4, -4, 0])
+    h['walk_from'] = [[9, 97]]                                                    # the Ferryman's Rest (behind the Cut bramble)
+    r.write(h, '520_ferrymens_mile.yaml', "# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_craft.py - edit that script.\n", '/tmp/rt/520.png' if PREV else None)
+
+
+BUILD[520] = build_520

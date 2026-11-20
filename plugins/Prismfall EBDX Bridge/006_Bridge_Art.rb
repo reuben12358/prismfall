@@ -1861,6 +1861,150 @@ module PrismfallEBDX
       ]
     },
     # <<< FAIRY_TALE
+    # >>> FLOODED_DUNES
+    :FLOODED_DUNES => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_flooded_dunes_wisps",
+          :scrolling => true,
+          :speed => 1,
+          :direction => -1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 66.67,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 1
+        },
+        "img002" => {
+          :bitmap => "pf_flooded_dunes_spray",
+          :scrolling => true,
+          :speed => 2,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 89.78,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 2
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_flooded_dunes_swellA",
+          :hd => true,
+          :x => 0.44,
+          :y => 125.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:drift, :pulse],
+          :amp => 5,
+          :min => 60,
+          :max => 200,
+          :period => 210
+        },
+        {
+          :bitmap => "pf_flooded_dunes_swellB",
+          :hd => true,
+          :x => 0.44,
+          :y => 125.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:drift, :pulse],
+          :amp => 5,
+          :min => 40,
+          :max => 160,
+          :period => 170,
+          :phase => 2.4
+        },
+        {
+          :bitmap => "pf_flooded_dunes_tide",
+          :hd => true,
+          :x => 0.0,
+          :y => 123.11,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :anim => [:bob, :pulse],
+          :amp => 2.5,
+          :min => 90,
+          :max => 230,
+          :period => 180
+        },
+        {
+          :bitmap => "pf_flooded_dunes_sheen",
+          :hd => true,
+          :x => 88.44,
+          :y => 138.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 20,
+          :max => 70,
+          :period => 240
+        }
+      ],
+      :fx => [
+        {
+          :type => :streak,
+          :count => 40,
+          :shape => :rect,
+          :w => 12,
+          :h => 1,
+          :colors => [
+            [210, 225, 240],
+            [180, 200, 220]
+          ],
+          :angle => 102,
+          :speed => [7, 10],
+          :zoom => [0.6, 1.0],
+          :opacity => [110, 190],
+          :layers => [:back, :mid, :front]
+        },
+        {
+          :type => :drift,
+          :count => 14,
+          :shape => :dot,
+          :size => 2,
+          :colors => [
+            [255, 255, 255],
+            [210, 235, 250]
+          ],
+          :dir => 1,
+          :area => [0, 110, 384, 300],
+          :speed => [1.0, 2.0],
+          :sway => 10,
+          :zoom => [0.5, 0.9],
+          :opacity => [150, 230],
+          :layers => [:back, :mid, :front]
+        },
+        {
+          :type => :twinkle,
+          :count => 14,
+          :shape => :spark,
+          :size => 5,
+          :colors => [
+            [255, 255, 255],
+            [210, 240, 255]
+          ],
+          :area => [0, 130, 384, 300],
+          :speed => [2, 5],
+          :zoom => [0.5, 0.9],
+          :opacity => [160, 255],
+          :layers => [:back, :mid],
+          :blend => 1
+        }
+      ]
+    },
+    # <<< FLOODED_DUNES
     # >>> FLOWER_GARDEN
     :FLOWER_GARDEN => {
       :layers => [],
@@ -2035,6 +2179,262 @@ module PrismfallEBDX
       ]
     },
     # <<< FROZEN_LAKE
+    # >>> GLASS_DUNES
+    :GLASS_DUNES => {
+      :art_extras => {
+        "img001" => {
+          :bitmap => "pf_glass_dunes_prism",
+          :rainbow => true,
+          :speed => 2,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 88.89,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 2,
+          :opacity => 200
+        },
+        "img002" => {
+          :bitmap => "pf_glass_dunes_steam",
+          :scrolling => true,
+          :speed => 0.5,
+          :direction => 1,
+          :flat => true,
+          :ox => 0,
+          :oy => 0,
+          :x => 0,
+          :y => 111.11,
+          :zoom_x => 0.444444444,
+          :zoom_y => 0.444444444,
+          :z => 4
+        }
+      },
+      :layers => [
+        {
+          :bitmap => "pf_glass_dunes_seams",
+          :hd => true,
+          :x => 0.0,
+          :y => 119.56,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 70,
+          :max => 210,
+          :period => 95
+        },
+        {
+          :bitmap => "pf_glass_dunes_facets",
+          :hd => true,
+          :x => 9.78,
+          :y => 50.22,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 40,
+          :max => 170,
+          :period => 130,
+          :phase => 1.2
+        },
+        {
+          :bitmap => "pf_glass_dunes_pools",
+          :hd => true,
+          :x => 31.56,
+          :y => 125.78,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 20,
+          :max => 70,
+          :period => 60
+        },
+        {
+          :bitmap => "pf_glass_dunes_sun",
+          :hd => true,
+          :x => 178.22,
+          :y => 4.89,
+          :ox => 0,
+          :oy => 0,
+          :z => 1,
+          :blend => 1,
+          :anim => :pulse,
+          :min => 110,
+          :max => 190,
+          :period => 210
+        },
+        {
+          :bitmap => "pf_glass_dunes_plume",
+          :hd => true,
+          :x => 274.67,
+          :y => 262.22,
+          :ox => 32,
+          :oy => 200,
+          :z => 23,
+          :frames => 8,
+          :frame_time => 10,
+          :zoom => 1.1,
+          :phase_frames => 0,
+          :opacity => 200
+        },
+        {
+          :bitmap => "pf_glass_dunes_plume",
+          :hd => true,
+          :x => 159.56,
+          :y => 203.11,
+          :ox => 32,
+          :oy => 200,
+          :z => 23,
+          :frames => 8,
+          :frame_time => 12,
+          :zoom => 1.1,
+          :phase_frames => 31,
+          :opacity => 200
+        },
+        {
+          :bitmap => "pf_glass_dunes_plume",
+          :hd => true,
+          :x => 66.22,
+          :y => 204.0,
+          :ox => 32,
+          :oy => 200,
+          :z => 23,
+          :frames => 8,
+          :frame_time => 14,
+          :zoom => 1.1,
+          :phase_frames => 62,
+          :opacity => 200
+        },
+        {
+          :bitmap => "pf_glass_dunes_plume",
+          :hd => true,
+          :x => 190.67,
+          :y => 131.11,
+          :ox => 32,
+          :oy => 200,
+          :z => 3,
+          :frames => 8,
+          :frame_time => 16,
+          :zoom => 0.9,
+          :phase_frames => 93,
+          :opacity => 200
+        }
+      ],
+      :fx => [
+        {
+          :type => :twinkle,
+          :count => 22,
+          :shape => :spark,
+          :size => 7,
+          :colors => [
+            [255, 255, 255],
+            [200, 255, 220]
+          ],
+          :area => [0, 110, 384, 308],
+          :speed => [4, 8],
+          :zoom => [0.4, 0.9],
+          :opacity => [170, 255],
+          :layers => [:back, :mid],
+          :blend => 1
+        },
+        {
+          :type => :rise,
+          :count => 8,
+          :shape => :glow,
+          :size => 4,
+          :colors => [
+            [255, 170, 70],
+            [255, 220, 140]
+          ],
+          :area => [0, 140, 384, 308],
+          :speed => [0.3, 0.7],
+          :sway => 8,
+          :zoom => [0.3, 0.6],
+          :opacity => [140, 220],
+          :layers => [:back, :mid],
+          :blend => 1
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 18,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [269.7, 172.2, 279.7, 262.2],
+          :speed => [0.4, 0.8],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back, :mid],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 18,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [154.6, 113.1, 164.6, 203.1],
+          :speed => [0.4, 0.8],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back, :mid],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 18,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [61.2, 114.0, 71.2, 204.0],
+          :speed => [0.4, 0.8],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back, :mid],
+          :blend => 0
+        },
+        {
+          :type => :rise,
+          :count => 5,
+          :shape => :puff,
+          :size => 18,
+          :colors => [
+            [235, 235, 238],
+            [205, 210, 215]
+          ],
+          :area => [185.7, 41.1, 195.7, 131.1],
+          :speed => [0.4, 0.8],
+          :sway => 6,
+          :zoom => [0.5, 0.8],
+          :grow => 1.6,
+          :opacity => [60, 120],
+          :layers => [:back, :mid],
+          :blend => 0
+        }
+      ]
+    },
+    # <<< GLASS_DUNES
     # >>> GRAND_STAGE
     :GRAND_STAGE => {
       :art_extras => { "lightsA" => true, "spinLights" => true },

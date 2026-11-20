@@ -11336,7 +11336,7 @@ Pokemon = SYLVEON,84
 #-------------------------------
 [OCTAVE_SINGER,Lyra,60]
 LoseText = It bloomed for you. It doesn't do that for everyone.
-Pokemon = LEAFEON,88
+Pokemon = LEAFEON,87
     Name = Moss
     Moves = LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS
     Ability = LEAFGUARD
@@ -11346,7 +11346,7 @@ Pokemon = LEAFEON,88
 #-------------------------------
 [OCTAVE_SINGER,Lyra,160]
 LoseText = It bloomed for you. It doesn't do that for everyone.
-Pokemon = LEAFEON,89
+Pokemon = LEAFEON,88
     Name = Moss
     Moves = LEAFBLADE,KNOCKOFF,SWORDSDANCE,SYNTHESIS
     Ability = LEAFGUARD
@@ -11357,7 +11357,7 @@ Pokemon = LEAFEON,89
 #-------------------------------
 [OCTAVE_SINGER,Lyra,260]
 LoseText = It bloomed for you. It doesn't do that for everyone.
-Pokemon = LEAFEON,84
+Pokemon = LEAFEON,83
     Name = Moss
     Moves = LEAFBLADE,KNOCKOFF,QUICKATTACK,SYNTHESIS
     Ability = LEAFGUARD
@@ -11369,7 +11369,7 @@ Pokemon = LEAFEON,84
 #-------------------------------
 [OCTAVE_SINGER,Aria,60]
 LoseText = The tide took the note. That's all right. It brings them back.
-Pokemon = VAPOREON,88
+Pokemon = VAPOREON,87
     Name = Brine
     Moves = SCALD,ICEBEAM,WISH,PROTECT
     Ability = WATERABSORB
@@ -11379,7 +11379,7 @@ Pokemon = VAPOREON,88
 #-------------------------------
 [OCTAVE_SINGER,Aria,160]
 LoseText = The tide took the note. That's all right. It brings them back.
-Pokemon = VAPOREON,89
+Pokemon = VAPOREON,88
     Name = Brine
     Moves = SCALD,ICEBEAM,WISH,PROTECT
     Ability = WATERABSORB
@@ -11390,7 +11390,7 @@ Pokemon = VAPOREON,89
 #-------------------------------
 [OCTAVE_SINGER,Aria,260]
 LoseText = The tide took the note. That's all right. It brings them back.
-Pokemon = VAPOREON,84
+Pokemon = VAPOREON,83
     Name = Brine
     Moves = SCALD,ICEBEAM,WISH,HAZE
     Ability = WATERABSORB
@@ -11402,7 +11402,7 @@ Pokemon = VAPOREON,84
 #-------------------------------
 [OCTAVE_SINGER,Cadence,60]
 LoseText = Off the beat. Mine, not yours.
-Pokemon = JOLTEON,88
+Pokemon = JOLTEON,87
     Name = Snare
     Moves = THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE
     Ability = VOLTABSORB
@@ -11412,7 +11412,7 @@ Pokemon = JOLTEON,88
 #-------------------------------
 [OCTAVE_SINGER,Cadence,160]
 LoseText = Off the beat. Mine, not yours.
-Pokemon = JOLTEON,89
+Pokemon = JOLTEON,88
     Name = Snare
     Moves = THUNDERBOLT,SHADOWBALL,DISCHARGE,HYPERVOICE
     Ability = VOLTABSORB
@@ -11423,7 +11423,7 @@ Pokemon = JOLTEON,89
 #-------------------------------
 [OCTAVE_SINGER,Cadence,260]
 LoseText = Off the beat. Mine, not yours.
-Pokemon = JOLTEON,84
+Pokemon = JOLTEON,83
     Name = Snare
     Moves = THUNDERBOLT,SHADOWBALL,DISCHARGE,QUICKATTACK
     Ability = VOLTABSORB
@@ -11435,7 +11435,7 @@ Pokemon = JOLTEON,84
 #-------------------------------
 [OCTAVE_SINGER,Sona,60]
 LoseText = I heard that coming. I still couldn't stop it.
-Pokemon = ESPEON,88
+Pokemon = ESPEON,87
     Name = Noon
     Moves = PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND
     Ability = MAGICBOUNCE
@@ -11445,7 +11445,7 @@ Pokemon = ESPEON,88
 #-------------------------------
 [OCTAVE_SINGER,Sona,160]
 LoseText = I heard that coming. I still couldn't stop it.
-Pokemon = ESPEON,89
+Pokemon = ESPEON,88
     Name = Noon
     Moves = PSYCHIC,SHADOWBALL,HYPERVOICE,CALMMIND
     Ability = MAGICBOUNCE
@@ -11456,7 +11456,7 @@ Pokemon = ESPEON,89
 #-------------------------------
 [OCTAVE_SINGER,Sona,260]
 LoseText = I heard that coming. I still couldn't stop it.
-Pokemon = ESPEON,84
+Pokemon = ESPEON,83
     Name = Noon
     Moves = PSYCHIC,SHADOWBALL,HYPERVOICE,MORNINGSUN
     Ability = SYNCHRONIZE
@@ -11468,7 +11468,7 @@ Pokemon = ESPEON,84
 #-------------------------------
 [OCTAVE_SINGER,Noct,60]
 LoseText = ...Good night.
-Pokemon = UMBREON,88
+Pokemon = UMBREON,87
     Name = Wick
     Moves = DARKPULSE,FOULPLAY,SNARL,WISH
     Ability = INNERFOCUS
@@ -11478,7 +11478,7 @@ Pokemon = UMBREON,88
 #-------------------------------
 [OCTAVE_SINGER,Noct,160]
 LoseText = ...Good night.
-Pokemon = UMBREON,89
+Pokemon = UMBREON,88
     Name = Wick
     Moves = DARKPULSE,FOULPLAY,SNARL,WISH
     Ability = INNERFOCUS
@@ -11489,7 +11489,7 @@ Pokemon = UMBREON,89
 #-------------------------------
 [OCTAVE_SINGER,Noct,260]
 LoseText = ...Good night.
-Pokemon = UMBREON,84
+Pokemon = UMBREON,83
     Name = Wick
     Moves = DARKPULSE,FOULPLAY,SNARL,YAWN
     Ability = INNERFOCUS
@@ -11501,7 +11501,7 @@ Pokemon = UMBREON,84
 #-------------------------------
 [OCTAVE_SINGER,Forte,60]
 LoseText = Too loud? ...No. Just right, and you were louder.
-Pokemon = FLAREON,88
+Pokemon = FLAREON,87
     Name = Bellows
     Moves = FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME
     Ability = GUTS
@@ -11511,7 +11511,7 @@ Pokemon = FLAREON,88
 #-------------------------------
 [OCTAVE_SINGER,Forte,160]
 LoseText = Too loud? ...No. Just right, and you were louder.
-Pokemon = FLAREON,89
+Pokemon = FLAREON,88
     Name = Bellows
     Moves = FLAREBLITZ,SUPERPOWER,QUICKATTACK,LAVAPLUME
     Ability = GUTS
@@ -11522,7 +11522,7 @@ Pokemon = FLAREON,89
 #-------------------------------
 [OCTAVE_SINGER,Forte,260]
 LoseText = Too loud? ...No. Just right, and you were louder.
-Pokemon = FLAREON,84
+Pokemon = FLAREON,83
     Name = Bellows
     Moves = FLAREBLITZ,SUPERPOWER,QUICKATTACK,BITE
     Ability = GUTS
@@ -11534,7 +11534,7 @@ Pokemon = FLAREON,84
 #-------------------------------
 [OCTAVE_SINGER,Lento,60]
 LoseText = Slowly, slowly. You got there first anyway.
-Pokemon = GLACEON,88
+Pokemon = GLACEON,87
     Name = Hush
     Moves = ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD
     Ability = ICEBODY
@@ -11544,7 +11544,7 @@ Pokemon = GLACEON,88
 #-------------------------------
 [OCTAVE_SINGER,Lento,160]
 LoseText = Slowly, slowly. You got there first anyway.
-Pokemon = GLACEON,89
+Pokemon = GLACEON,88
     Name = Hush
     Moves = ICEBEAM,FREEZEDRY,SHADOWBALL,ICESHARD
     Ability = ICEBODY
@@ -11555,7 +11555,7 @@ Pokemon = GLACEON,89
 #-------------------------------
 [OCTAVE_SINGER,Lento,260]
 LoseText = Slowly, slowly. You got there first anyway.
-Pokemon = GLACEON,84
+Pokemon = GLACEON,83
     Name = Hush
     Moves = ICEBEAM,FREEZEDRY,SHADOWBALL,MIRRORCOAT
     Ability = ICEBODY
@@ -11567,7 +11567,7 @@ Pokemon = GLACEON,84
 #-------------------------------
 [OCTAVE_SINGER,Carol,60]
 LoseText = And they all lived. That's the whole ending.
-Pokemon = SYLVEON,88
+Pokemon = SYLVEON,87
     Name = Ribbon
     Moves = MOONBLAST,HYPERVOICE,MYSTICALFIRE,DRAININGKISS
     Ability = PIXILATE
@@ -11577,7 +11577,7 @@ Pokemon = SYLVEON,88
 #-------------------------------
 [OCTAVE_SINGER,Carol,160]
 LoseText = And they all lived. That's the whole ending.
-Pokemon = SYLVEON,89
+Pokemon = SYLVEON,88
     Name = Ribbon
     Moves = MOONBLAST,HYPERVOICE,MYSTICALFIRE,DRAININGKISS
     Ability = PIXILATE
@@ -11588,7 +11588,7 @@ Pokemon = SYLVEON,89
 #-------------------------------
 [OCTAVE_SINGER,Carol,260]
 LoseText = And they all lived. That's the whole ending.
-Pokemon = SYLVEON,84
+Pokemon = SYLVEON,83
     Name = Ribbon
     Moves = MOONBLAST,SWIFT,MYSTICALFIRE,DRAININGKISS
     Ability = CUTECHARM
@@ -11600,7 +11600,7 @@ Pokemon = SYLVEON,84
 #-------------------------------
 [OCTAVE_VESPER,Vesper,60]
 LoseText = There. That's every note we have. ...You were worth all of them.
-Pokemon = EEVEE,90
+Pokemon = EEVEE,89
     Name = Amen
     Moves = LASTRESORT,STOREDPOWER,SHADOWBALL,QUICKATTACK
     Ability = ADAPTABILITY
@@ -11621,7 +11621,7 @@ Pokemon = EEVEE,90
 #-------------------------------
 [OCTAVE_VESPER,Vesper,260]
 LoseText = There. That's every note we have. ...You were worth all of them.
-Pokemon = EEVEE,86
+Pokemon = EEVEE,85
     Name = Amen
     Moves = LASTRESORT,SWIFT,SHADOWBALL,QUICKATTACK
     Ability = ADAPTABILITY

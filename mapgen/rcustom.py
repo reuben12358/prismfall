@@ -92,6 +92,40 @@ CHALK_RAMP = [(92, 90, 104), (128, 126, 136), (162, 160, 164), (190, 188, 184), 
 DUNE_RAMP = [(112, 84, 58), (146, 116, 80), (176, 148, 102), (200, 176, 126), (220, 200, 148), (234, 218, 170)]
 
 
+SILK_TREES = [[[592, 593, 0], [600, 601, 602], [608, 609, 610], [616, 617, 618]],
+              [[1504, 1505, 1506], [1512, 1513, 1514], [1520, 1521, 1522], [1528, 1529, 1530]]]
+
+
+def silkwrap(im, seed=1):
+    """wrap a tree in silk: sagging white strands from crown to crown, a sheet caught on one side, a few cocoons; only
+    over the tree's own pixels (the lattice still reads as one canopy)"""
+    import random as _r, math as _m
+    rng = _r.Random(seed); px = im.load(); W_, H_ = im.size
+    def put(x, y, c, a):
+        x, y = int(x), int(y)
+        if 0 <= x < W_ and 0 <= y < H_ and px[x, y][3]:
+            r0, g0, b0, a0 = px[x, y]; t = a / 255.0
+            px[x, y] = (int(r0 * (1 - t) + c[0] * t), int(g0 * (1 - t) + c[1] * t), int(b0 * (1 - t) + c[2] * t), a0)
+    for k in range(5):                                     # strands
+        x0, y0 = rng.uniform(0, W_ * 0.4), rng.uniform(4, H_ * 0.55)
+        x1, y1 = rng.uniform(W_ * 0.6, W_), rng.uniform(4, H_ * 0.55)
+        sag = rng.uniform(6, 18)
+        for i in range(160):
+            t = i / 159.0; x = x0 + (x1 - x0) * t; y = y0 + (y1 - y0) * t + sag * _m.sin(_m.pi * t)
+            put(x, y, (248, 250, 255), 210); put(x, y + 1, (190, 196, 214), 120)
+    for k in range(2):                                     # a sheet of silk caught in the crown
+        cx, cy = rng.uniform(W_ * 0.2, W_ * 0.8), rng.uniform(H_ * 0.15, H_ * 0.45)
+        for y in range(int(cy), int(cy + 22)):
+            for x in range(int(cx - 8), int(cx + 8)):
+                if (x + y) % 3: put(x, y, (240, 244, 252), 110)
+    for k in range(3):                                     # cocoons
+        cx, cy = rng.uniform(8, W_ - 8), rng.uniform(H_ * 0.3, H_ * 0.62)
+        for y in range(int(cy), int(cy + 7)):
+            for x in range(int(cx - 2), int(cx + 3)): put(x, y, (236, 236, 244), 230)
+        put(cx - 2, cy + 3, (160, 164, 186), 255)
+    return im
+
+
 TALL_DYE = [('tall_r', (214, 64, 80)), ('tall_b', (72, 104, 214)), ('tall_y', (236, 198, 56))]
 
 
@@ -256,6 +290,23 @@ def main():
             sheet.paste(chalkify(tile.copy(), DUNE_RAMP if mode == 'dune' else None), ((k % 8) * 32, (k // 8) * 32))
             props[k] = (t['passages'][sid], t['priorities'][sid], t['terrain_tags'][sid] if t['terrain_tags'][sid] <= 16 else 0)
             chalk['%s:%d' % (key, sid)] = k; k += 1
+    silked = {}                                            # map builder 10: Gossamer Wood's silk-wrapped lattice trees
+    sh2s = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGBA')
+    t126s = RC.RR.tileset('rejuvenation', 126)
+    for grid in SILK_TREES:
+        h_, w_ = len(grid), len(grid[0])
+        big = Image.new('RGBA', (w_ * 32, h_ * 32), (0, 0, 0, 0))
+        for ty, row in enumerate(grid):
+            for tx, sid in enumerate(row):
+                if not sid: continue
+                i = sid - 384; big.paste(sh2s.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32)), (tx * 32, ty * 32))
+        big = silkwrap(big, seed=grid[0][0] or grid[0][1])
+        for ty, row in enumerate(grid):
+            for tx, sid in enumerate(row):
+                if not sid: continue
+                sheet.paste(big.crop((tx * 32, ty * 32, tx * 32 + 32, ty * 32 + 32)), ((k % 8) * 32, (k // 8) * 32))
+                props[k] = (t126s['passages'][sid], t126s['priorities'][sid], 0)
+                silked['silk_sh:%d' % sid] = k; k += 1
     dyed = {}                                              # map builder 10: the Dyers' Ford's madder / woad / weld fields
     sh2 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Sheridan_2.png')).convert('RGBA')
     t126 = RC.RR.tileset('rejuvenation', 126)
@@ -293,6 +344,7 @@ def main():
     out['_snow'] = {k2: base + v for k2, v in snow.items()}
     out['_chalk'] = {k2: base + v for k2, v in chalk.items()}
     out['_dyegrass'] = {k2: base + v for k2, v in dyed.items()}
+    out['_silk'] = {k2: base + v for k2, v in silked.items()}
     r4 = Image.open(os.path.join(RC.RR.GAMES['rejuvenation'], 'Graphics', 'Tilesets', 'Route 4.png')).convert('RGBA')
     for n, (c0, r0, w, h, top) in CHALK_STAMPS.items():
         lay = [[[0] * w for _ in range(h)] for _ in range(3)]

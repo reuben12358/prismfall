@@ -36,7 +36,7 @@ module PrismfallMega
   #   :map     map id (design/maps.json), :where (text), :source (quest id, Trial, event key)
   # The headless test (tools/harness/run_mega.rb) checks every entry against the Warden answers (rule R4 with the
   # Ring: a stone obtained at b badges is usable at max(b, RING_BADGES) and must not power up a type that answers
-  # the next two Wardens), against the quests that hand it out, and against design/MEGA_EVENTS.yaml.
+  # the next two Wardens), against the quests that hand it out, and against design/TRIAL_EVENTS.yaml ("Mega Evolution" maps).
   #-----------------------------------------------------------------------------
   STONES = {
     # Before the Ring-Day: "they hum and wait" (Reborn and Rejuvenation both hand out stones before the ring)

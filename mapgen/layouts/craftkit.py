@@ -45,13 +45,21 @@ for _k, _n in (('teal', 'nt_teal_a'), ('teal2', 'nt_teal_b'), ('lime', 'nt_lime'
                ('pink', 'nt_tree_pink'), ('red', 'nt_tree_red'), ('blue', 'nt_tree_blue'), ('purp', 'nt_tree_purp'),
                ('oak', 'tr_oak'), ('oak2', 'tr_oak2')):
     if _n in STAMPS: SPECIES[_k] = lat(_n)
+_SILK = K._ST.get('_silk', {})
+if _SILK:                                    # Gossamer Wood's silk-wrapped Sheridan trees (rcustom SILK_TREES)
+    def _silk_lat(tr):
+        top, bot, w = tr
+        sw = lambda t: _SILK.get('silk_sh:%d' % (t - K.RC.offset('sh') + 384), t) if t else 0
+        return ([[sw(t) for t in row] for row in top], [[sw(t) for t in row] for row in bot], 1)
+    SPECIES['silk0'] = _silk_lat(K.RMap.TREES_SH[0]); SPECIES['silk1'] = _silk_lat(K.RMap.TREES_SH[1])
 if getattr(K.RMap, 'TREES_SNOW', None):
     SPECIES['snow0'], SPECIES['snow1'] = K.RMap.TREES_SNOW[0], K.RMap.TREES_SNOW[1]
 
 # zone palettes: {species: weight}; a map lists the palettes its woods drift through
 ELOWEN = [{'sh0': 5, 'sh1': 4}, {'sh1': 4, 'teal': 3, 'teal2': 2}, {'sh0': 3, 'olive': 2, 'lime': 2}, {'sh0': 4, 'sh1': 3, 'blossom': 1}]
 COAST = [{'sh0': 5, 'teal': 3}, {'teal': 4, 'teal2': 3, 'sh1': 2}, {'sh1': 4, 'olive': 2}]
-GOSSAMER = [{'sh1': 5, 'teal2': 2}, {'sh0': 4, 'teal': 3, 'olive': 1}, {'teal': 3, 'teal2': 3, 'sh1': 2}, {'olive': 3, 'sh0': 3, 'lime': 1}]
+GOSSAMER = [{'sh1': 4, 'teal2': 2, 'silk1': 2}, {'sh0': 3, 'teal': 3, 'silk0': 3}, {'teal': 3, 'teal2': 3, 'sh1': 2}, {'silk0': 3, 'silk1': 3, 'sh0': 2},
+            {'olive': 3, 'sh0': 3, 'lime': 1}]
 
 
 def woods(r, palettes, scale=13.0, accents=None, seed=None):
@@ -481,3 +489,25 @@ def clear_around(r, radius=1):
             for dx in range(-radius, radius + 1):
                 X, Y = x + dx, y + dy
                 if m.inb(X, Y) and m.cls[Y, X] in '.tdgsuS' and not m.cliff[Y, X]: m.taken[Y, X] = True
+
+
+def drapes_along(r, every=5, seed=0, kinds=('gw_drape0', 'gw_drape1', 'gw_cocoons', 'pf_p_web')):
+    """silk hung where the woods meet a trail: a drape, a web or cocoons every few cells along the wood's edge (overhead,
+    so the player walks under them)"""
+    m = r.m; rng = random.Random(r.seed * 23 + seed); n = 0
+    walk = np.isin(m.cls, list('dgt.')) & ~m.taken
+    for y in range(1, m.H - 3):
+        for x in range(0, m.W - 2):
+            if m.cls[y, x] != 'T' or not walk[y + 1, x] or rng.random() > 1.0 / every: continue
+            k = rng.choice(kinds); st = STAMPS[k]
+            if x + st['w'] > m.W or y + st['h'] > m.H: continue
+            if k == 'pf_p_web':
+                if not m.free(x, y + 1, st['w'], st['h'], on='.'): continue
+                m.stamp(k, x, y + 1, mark=None); n += 1; continue
+            L = np.array(st['layers'])
+            for dy in range(st['h']):
+                for dx in range(st['w']):
+                    t = int(L[:, dy, dx].max())
+                    if t: m.over.append((2, x + dx, y + dy, t))
+            n += 1
+    return n
