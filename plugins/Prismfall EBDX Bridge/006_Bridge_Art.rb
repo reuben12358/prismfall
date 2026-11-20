@@ -3543,8 +3543,9 @@ module PrismfallEBDX
           :y => 80.0,
           :zoom_x => 0.444444444,
           :zoom_y => 0.444444444,
-          :z => 2
-        }
+          :z => 3
+        },
+        "img003" => { :bitmap => "pf_mountain_crags", :flat => true, :x => 0, :y => 0, :ox => 0, :oy => 0, :zoom_x => 0.444444444, :zoom_y => 0.444444444, :z => 2 }
       },
       :layers => [
         {
@@ -3554,7 +3555,7 @@ module PrismfallEBDX
           :y => 80.44,
           :ox => 13,
           :oy => 7,
-          :z => 1,
+          :z => 3,
           :anim => [:drift, :bob],
           :amp => 60,
           :period => 420

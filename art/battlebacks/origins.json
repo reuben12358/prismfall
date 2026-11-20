@@ -607,6 +607,7 @@
   "files": [
    "battlebg/field_mountain.png",
    "battlebg/field_mountain_hd.png",
+   "elements/pf_mountain_crags.png",
    "elements/pf_mountain_foam.png",
    "elements/pf_mountain_hawk.png",
    "elements/pf_mountain_mist.png",
@@ -623,7 +624,7 @@
    ],
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
-    "moving foam on the falls, spray glow, mist, circling hawk, wind"
+    "moving foam on the falls, spray glow, mist, circling hawk, wind, gorge above the falls, crag cut-out over the foam"
    ]
   ]
  },
