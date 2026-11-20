@@ -21,7 +21,7 @@ events:
 - type: exit
   at:
   - 9
-  - 22
+  - 24
   link: BW_GYM
   se: Door exit
 - type: event
@@ -128,7 +128,7 @@ events:
   name: Heddle
   at:
   - 11
-  - 10
+  - 12
   pages:
   - graphic:
       tile: 3047
@@ -145,7 +145,7 @@ events:
   name: Gym guide
   at:
   - 6
-  - 20
+  - 22
   sprite: NPC 01
   dir: right
   commands:
@@ -159,7 +159,7 @@ events:
   name: Apprentice Pim
   at:
   - 13
-  - 20
+  - 22
   sprite: NPC 05
   dir: down
   commands:
@@ -168,7 +168,7 @@ events:
   name: Apology card
   at:
   - 5
-  - 3
+  - 5
   pages:
   - commands:
     - 'A card pinned by the loom bed: "If the plank is in the wrong place, I''m so sorry. The heddle by the aisle moves it.
@@ -176,8 +176,8 @@ events:
 - type: event
   name: Apology card B
   at:
-  - 12
-  - 3
+  - 13
+  - 5
   pages:
   - commands:
     - 'A card: "The Weaving Hall is upstairs. If you fall, the nets are soft. Sorry! — T.L."'
@@ -185,19 +185,19 @@ events:
   name: Portrait
   at:
   - 8
-  - 3
+  - 5
   pages:
   - commands:
     - 'A fierce old woman at a loom. Brass plate: "Mother Loom, Warden AF 247–299. ''Twist it or lose it.''"'
 - type: item
   at:
   - 15
-  - 6
+  - 8
   item: POTION
 - type: trainer
   at:
   - 8
-  - 14
+  - 16
   sight: 2
   dir: right
   sprite: trainer_BUGCATCHER
@@ -211,7 +211,7 @@ events:
 - type: trainer
   at:
   - 11
-  - 17
+  - 19
   sight: 2
   dir: left
   sprite: trainer_LASS
@@ -226,7 +226,7 @@ events:
   name: Tamsin (foyer)
   at:
   - 10
-  - 19
+  - 21
   pages:
   - graphic:
       sprite: trainer_LASS
@@ -260,7 +260,7 @@ events:
   name: First loom
   at:
   - 4
-  - 19
+  - 21
   pages:
   - commands:
     - if: pfm_quest?(:locked_ledger) && !pfm_has?(:LEDGERKEY)
@@ -274,11 +274,11 @@ events:
   name: Stairs to the Weaving Hall
   at:
   - 15
-  - 2
+  - 4
   to:
     map: 131
     x: 12
-    y: 21
+    y: 23
     dir: up
 ---
 id: 131
@@ -300,30 +300,6 @@ metadata:
 raw: data/raw/131.npy
 tileset: 54
 events:
-- type: event
-  name: Plank A 3,5
-  at:
-  - 3
-  - 5
-  pages:
-  - graphic:
-      tile: 3015
-  - cond:
-      var:
-      - LOOM_A
-      - 1
-- type: event
-  name: Plank A 3,6
-  at:
-  - 3
-  - 6
-  pages:
-  - graphic:
-      tile: 3015
-  - cond:
-      var:
-      - LOOM_A
-      - 1
 - type: event
   name: Plank A 3,7
   at:
@@ -349,39 +325,29 @@ events:
       - LOOM_A
       - 1
 - type: event
-  name: Plank A 12,5
+  name: Plank A 3,9
   at:
-  - 12
-  - 5
+  - 3
+  - 9
   pages:
-  - {}
-  - cond:
-      var:
-      - LOOM_A
-      - 1
-    graphic:
+  - graphic:
       tile: 3015
   - cond:
       var:
       - LOOM_A
-      - 2
+      - 1
 - type: event
-  name: Plank A 12,6
+  name: Plank A 3,10
   at:
-  - 12
-  - 6
+  - 3
+  - 10
   pages:
-  - {}
-  - cond:
-      var:
-      - LOOM_A
-      - 1
-    graphic:
+  - graphic:
       tile: 3015
   - cond:
       var:
       - LOOM_A
-      - 2
+      - 1
 - type: event
   name: Plank A 12,7
   at:
@@ -417,31 +383,39 @@ events:
       - LOOM_A
       - 2
 - type: event
-  name: Plank A 21,5
+  name: Plank A 12,9
   at:
-  - 21
-  - 5
+  - 12
+  - 9
   pages:
   - {}
   - cond:
       var:
       - LOOM_A
-      - 2
+      - 1
     graphic:
       tile: 3015
+  - cond:
+      var:
+      - LOOM_A
+      - 2
 - type: event
-  name: Plank A 21,6
+  name: Plank A 12,10
   at:
-  - 21
-  - 6
+  - 12
+  - 10
   pages:
   - {}
   - cond:
       var:
       - LOOM_A
-      - 2
+      - 1
     graphic:
       tile: 3015
+  - cond:
+      var:
+      - LOOM_A
+      - 2
 - type: event
   name: Plank A 21,7
   at:
@@ -469,39 +443,31 @@ events:
     graphic:
       tile: 3015
 - type: event
-  name: Plank B 12,11
+  name: Plank A 21,9
   at:
-  - 12
-  - 11
+  - 21
+  - 9
   pages:
   - {}
   - cond:
       var:
-      - LOOM_B
-      - 1
+      - LOOM_A
+      - 2
     graphic:
       tile: 3015
-  - cond:
-      var:
-      - LOOM_B
-      - 2
 - type: event
-  name: Plank B 12,12
+  name: Plank A 21,10
   at:
-  - 12
-  - 12
+  - 21
+  - 10
   pages:
   - {}
   - cond:
       var:
-      - LOOM_B
-      - 1
+      - LOOM_A
+      - 2
     graphic:
       tile: 3015
-  - cond:
-      var:
-      - LOOM_B
-      - 2
 - type: event
   name: Plank B 12,13
   at:
@@ -520,31 +486,39 @@ events:
       - LOOM_B
       - 2
 - type: event
-  name: Plank B 21,11
+  name: Plank B 12,14
   at:
-  - 21
-  - 11
-  pages:
-  - {}
-  - cond:
-      var:
-      - LOOM_B
-      - 2
-    graphic:
-      tile: 3015
-- type: event
-  name: Plank B 21,12
-  at:
-  - 21
   - 12
+  - 14
   pages:
   - {}
   - cond:
       var:
       - LOOM_B
-      - 2
+      - 1
     graphic:
       tile: 3015
+  - cond:
+      var:
+      - LOOM_B
+      - 2
+- type: event
+  name: Plank B 12,15
+  at:
+  - 12
+  - 15
+  pages:
+  - {}
+  - cond:
+      var:
+      - LOOM_B
+      - 1
+    graphic:
+      tile: 3015
+  - cond:
+      var:
+      - LOOM_B
+      - 2
 - type: event
   name: Plank B 21,13
   at:
@@ -559,29 +533,31 @@ events:
     graphic:
       tile: 3015
 - type: event
-  name: Plank C 3,16
+  name: Plank B 21,14
   at:
-  - 3
-  - 16
+  - 21
+  - 14
   pages:
-  - graphic:
-      tile: 3015
+  - {}
   - cond:
       var:
-      - LOOM_C
-      - 1
+      - LOOM_B
+      - 2
+    graphic:
+      tile: 3015
 - type: event
-  name: Plank C 3,17
+  name: Plank B 21,15
   at:
-  - 3
-  - 17
+  - 21
+  - 15
   pages:
-  - graphic:
-      tile: 3015
+  - {}
   - cond:
       var:
-      - LOOM_C
-      - 1
+      - LOOM_B
+      - 2
+    graphic:
+      tile: 3015
 - type: event
   name: Plank C 3,18
   at:
@@ -607,39 +583,29 @@ events:
       - LOOM_C
       - 1
 - type: event
-  name: Plank C 12,16
+  name: Plank C 3,20
   at:
-  - 12
-  - 16
+  - 3
+  - 20
   pages:
-  - {}
-  - cond:
-      var:
-      - LOOM_C
-      - 1
-    graphic:
+  - graphic:
       tile: 3015
   - cond:
       var:
       - LOOM_C
-      - 2
+      - 1
 - type: event
-  name: Plank C 12,17
+  name: Plank C 3,21
   at:
-  - 12
-  - 17
+  - 3
+  - 21
   pages:
-  - {}
-  - cond:
-      var:
-      - LOOM_C
-      - 1
-    graphic:
+  - graphic:
       tile: 3015
   - cond:
       var:
       - LOOM_C
-      - 2
+      - 1
 - type: event
   name: Plank C 12,18
   at:
@@ -675,31 +641,39 @@ events:
       - LOOM_C
       - 2
 - type: event
-  name: Plank C 21,16
+  name: Plank C 12,20
   at:
-  - 21
-  - 16
+  - 12
+  - 20
   pages:
   - {}
   - cond:
       var:
       - LOOM_C
-      - 2
+      - 1
     graphic:
       tile: 3015
+  - cond:
+      var:
+      - LOOM_C
+      - 2
 - type: event
-  name: Plank C 21,17
+  name: Plank C 12,21
   at:
+  - 12
   - 21
-  - 17
   pages:
   - {}
   - cond:
       var:
       - LOOM_C
-      - 2
+      - 1
     graphic:
       tile: 3015
+  - cond:
+      var:
+      - LOOM_C
+      - 2
 - type: event
   name: Plank C 21,18
   at:
@@ -727,10 +701,36 @@ events:
     graphic:
       tile: 3015
 - type: event
+  name: Plank C 21,20
+  at:
+  - 21
+  - 20
+  pages:
+  - {}
+  - cond:
+      var:
+      - LOOM_C
+      - 2
+    graphic:
+      tile: 3015
+- type: event
+  name: Plank C 21,21
+  at:
+  - 21
+  - 21
+  pages:
+  - {}
+  - cond:
+      var:
+      - LOOM_C
+      - 2
+    graphic:
+      tile: 3015
+- type: event
   name: Red heddle
   at:
   - 1
-  - 21
+  - 23
   pages:
   - graphic:
       tile: 3019
@@ -744,7 +744,7 @@ events:
   name: Gold heddle
   at:
   - 9
-  - 21
+  - 23
   pages:
   - graphic:
       tile: 3026
@@ -758,7 +758,7 @@ events:
   name: Green heddle
   at:
   - 23
-  - 21
+  - 23
   pages:
   - graphic:
       tile: 3033
@@ -772,7 +772,7 @@ events:
   name: Back down to the gym
   at:
   - 12
-  - 22
+  - 24
   to:
     map: 130
     x: 15
@@ -782,7 +782,7 @@ events:
   name: Tamsin
   at:
   - 11
-  - 3
+  - 5
   pages:
   - graphic:
       sprite: trainer_LASS
@@ -909,7 +909,7 @@ events:
   name: Upper lofts stair
   at:
   - 12
-  - 1
+  - 3
   pages:
   - trigger: touch
     commands:
@@ -930,7 +930,7 @@ events:
 - type: trainer
   at:
   - 2
-  - 3
+  - 5
   sight: 3
   dir: right
   sprite: trainer_GENTLEMAN
@@ -945,7 +945,7 @@ events:
   name: Torn-net sign
   at:
   - 2
-  - 10
+  - 12
   pages:
   - commands:
     - 'A card on a post: "The left warp of the middle bed snapped. Sorry! Use the other two. — T.L."'
@@ -955,7 +955,7 @@ events:
   name: Apprentice Pim
   at:
   - 15
-  - 21
+  - 23
   sprite: NPC 05
   dir: down
   commands:
