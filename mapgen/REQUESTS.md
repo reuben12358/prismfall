@@ -413,3 +413,11 @@ Puzzle engineer item 14: `pfm_audience(:KEY)` is the first command of all 18 nam
 Trials: 148 / 126 / 168 built; the Legion barge berth on 146 has Brakka and the herald; the Dovetail can be boarded from
 the Ferrow berth after Chapter 1 (gangplank on the pier, 100 (34,52) -> 109 (9,14)). Not done: the Timburr gift and the
 tide-pool duel (moving to the distribution agent), 167 Mill Quay and 568 the Rehearsal (not built).
+7. **Bug, Frostwick's fly spot is stale (found in the real engine).** A private mkxp-z run of the current tree flew to all
+   six towns from the Fly screen (Velmora region 0 compiled from `PBS/town_map_prismfall.txt`, 220 points; the scene's
+   own `pbGetHealingSpot` returned the expected spot for every town). Saltmere, Ferrow's Landing, Briarwick, Ebbmouth
+   and Verdance land on a free tile. **Frostwick lands at (13, 26), boxed in behind the market stalls** with no way out:
+   `mapgen/layouts/rimewood_interiors.py` line 29 still gives 571 `HealingSpot: [570, 13, 26]`, but the rebuilt
+   Frostwick has its Poke Center door (FW_PC) at (6, 34), so the spot should be **[570, 6, 35]** (the tile below the
+   door, as in Saltmere and Briarwick). The same stale spot also sends a blacked-out player there. After you fix it,
+   `python3 -I tools/worldmap/gen_docs.py` copies it into `pbs/town_map.txt` (and 009_TownMap.rb already reads it live).

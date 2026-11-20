@@ -21,6 +21,11 @@ def P(sp, lv, ab, item, nat, moves, ev="A", only=None, hard=None, casual=None, *
 def std_iv(top):
     return 12 if top <= 23 else 18 if top <= 35 else 24 if top <= 51 else 28 if top <= 71 else 31
 
+def hard_iv(top):
+    """Hard: Standard's IV + 8 up to cap 35, perfect from cap 39 on (Reborn's gym leaders carry IV 10-31 by gym 4; flat 31
+    at Lv 11-23 beat even a prepared, capped team 59/60 in the harness)."""
+    return 20 if top <= 23 else 26 if top <= 35 else 31
+
 def casual_iv(top):
     return 4 if top <= 23 else 8 if top <= 35 else 12 if top <= 51 else 16 if top <= 71 else 20
 
@@ -54,7 +59,7 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         o = dict(m)
         if diff == 1:
             o.update(m["hard"])
-            if m["lv"] < cap and m.get("only") != "hard" and not __import__("os").environ.get("EXP_NOLV"):
+            if m["lv"] < cap and m.get("only") != "hard":
                 o["lv"] = min(cap, m["lv"] + 1)
         elif diff == 2:
             o.update(m["casual"])
@@ -94,8 +99,9 @@ def render(ttype, name, version, mons, lose, diff, cap, size_note="", mega_std=F
         elif diff == 0:
             out.append("    IV = %d" % std_iv(top))
         elif diff == 1:
-            out.append("    IV = " + (str(std_iv(top)) if __import__("os").environ.get("EXP_IV") else (TR_IV if o.get("tr") else "31")))
-            if not __import__("os").environ.get("EXP_NOEV"): out.append("    EV = " + hard_ev(EV[o["ev"]], o["lv"]))
+            hiv = hard_iv(top)
+            out.append("    IV = " + (TR_IV.replace("31", str(hiv)) if o.get("tr") else str(hiv)))
+            out.append("    EV = " + hard_ev(EV[o["ev"]], o["lv"]))
         else:
             out.append("    IV = %d" % casual_iv(top))
             out.append("    EV = 0")

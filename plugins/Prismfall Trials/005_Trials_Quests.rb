@@ -298,9 +298,12 @@ module Prismfall
     #---------------------------------------------------------------------------
     # Battles used by quest scripts
     #---------------------------------------------------------------------------
+    # field: :ID, :NONE, or [:ID, stage]
     def self.set_field(field)
       return if field.nil? || !defined?(FieldEffects)
-      setBattleRule("field", (field == :NONE) ? "none" : field)
+      id, stage = (field.is_a?(Array)) ? field : [field, nil]
+      setBattleRule("field", (id == :NONE) ? "none" : id)
+      setBattleRule("fieldstage", stage) if stage && id != :NONE
     end
 
     def self.trainer_battle(spec, field: nil, double: nil, lose_text: nil)

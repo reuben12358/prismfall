@@ -150,7 +150,7 @@ def _d7_events():
                 "A curtain of icicles, frozen solid to a silver thread that runs back down the path.",
                 {'if': 'PrismfallPuzzles.room_log(:d7_frost_loom)[:fails] >= 1 || $game_switches[%d] || $game_switches[%d]' % (S_CURTAIN[0], S_CURTAIN[2]),
                  'then': [{'script': 'pfp_hint(:d7_frost_loom)'}]}]},
-            {'cond': {'switch': [S_CURTAIN[i], True]}, 'graphic': {'tile': T52['shards']}, 'through': True}]})
+            {'cond': {'switch': S_CURTAIN[i]}, 'graphic': {'tile': T52['shards']}, 'through': True}]})
     LINE = {'left': 'the first and second curtains', 'middle': 'the second and third curtains', 'right': 'the third curtain'}
     for n, ((x, y), lines) in D7_THREADS.items():
         sc = '\n'.join('pfp_flip(%d)' % S_CURTAIN[l] for l in lines)

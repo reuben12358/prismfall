@@ -4,7 +4,7 @@ Concept: THE WEAVER WHO CUTS. A grieving ex-weaver from Lowmarsh (Fixed) who now
 flags. Ash-grey Hollow cowl and coat, one long thistle-purple sash streaming off her like a loose thread, big tailor's shears
 held point-down like a blade, a torn orange survey flag tucked at her belt, a thistle brooch. "I know where a thread will fall."
   A body : sd veteranf-gen6 (coat, high collar, a scarf in the wind) -> charcoal Hollow coat, the scarf -> purple sash
-     hood : sd pearlclanmember's hood (cloth only) -> ash-grey cowl around veteranf-gen6's own face; its embroidery -> thistles
+     hood : sd pearlclanmember's hood (cloth only) -> ash-grey cowl around veteranf-gen6's own face (embroidery painted out)
      shears: hand-drawn straight hardware (steel blades, brass pivot, black bow handle) in the ball hand
   B the cut: the same, with the shears raised open across the body (about to cut)
 """
@@ -42,7 +42,7 @@ COAT = {H('5e86ba'): C['c4'], H('3d6393'): C['c1'], H('294464'): C['c2'], H('132
 SASH = {H('ef5a3f'): C['p1'], H('e25565'): C['p2'], H('863c4f'): C['p3'], H('7c495a'): C['p3'], H('54373b'): C['p4']}
 HOOD = {H('ffffff'): C['g1'], H('f4dde4'): C['g1'], H('bc91b6'): C['g2'], H('a776a2'): C['g3'], H('6d516f'): C['g4'],
         H('613d63'): C['g5'], H('b4c0d5'): C['g2'], H('576673'): C['g4'],
-        H('d76557'): C['p2'], H('b1323c'): C['p3'], H('9c2931'): C['p4'], H('764247'): C['g5']}
+        H('d76557'): C['g3'], H('b1323c'): C['g4'], H('9c2931'): C['g4'], H('764247'): C['g5']}   # embroidery -> plain
 
 
 def hooded_head():
@@ -56,7 +56,7 @@ def hooded_head():
     b = mat.clean_orphans(b)
     pc = sd('pearlclanmember')
     face = set([H('ffd6bd'), H('dea57b'), H('9c6b52'), H('8c6c57'), H('433029'), H('5b433c'), H('414a52'), H('282830')])
-    hood = mat.keep(pc, mat.region(pc.size, [[(30, 2), (56, 2), (56, 27), (52, 30), (34, 30), (30, 27)]]))
+    hood = mat.keep(pc, mat.region(pc.size, [[(34, 2), (56, 2), (56, 27), (52, 30), (36, 30), (34, 27)]]))
     hp = hood.load()
     for y in range(hood.size[1]):
         for x in range(hood.size[0]):
@@ -65,8 +65,8 @@ def hooded_head():
     # the face opening: pearl clan rows 16-26 between the hood's sides; leave it open so her own face shows
     for y in range(15, 27):
         for x in range(36, 47):
-            if hp[x, y][3] and hp[x, y] != BLACK:
-                hp[x, y] = CLEAR
+            if hp[x, y][3] and (hp[x, y] != BLACK or y in (16, 17)):
+                hp[x, y] = CLEAR                     # incl. the hood's visor band (a black line across the brow)
     hood = mat.recolour(hood, HOOD)
     b = mat.under(b, hood, -2, -6) if False else mat.paste(b, hood, -2, -6)
     # the shadow inside the cowl where her bob used to be (gaps between face and hood)
@@ -114,7 +114,16 @@ def shears(im, hx, hy, tx, ty, open_px=3):
 def build(var='A'):
     b = hooded_head()
     b = mat.recolour(b, COAT)
-    b = mat.recolour(b, SASH)
+    b = mat.recolour(b, {H('54373b'): C['c3'], H('7c495a'): C['c2'], H('863c4f'): C['c2']},
+                     mat.region(b.size, rect=(26, 50, 56, 80)))                         # stockings -> charcoal
+    b = mat.recolour(b, SASH, mat.region(b.size, rect=(0, 21, 79, 79)))
+    # inside the cowl, right of her face: the old embroidery's black rings -> cowl shadow (the silhouette keeps its line)
+    p = b.load()
+    for y in range(0, 21):
+        for x in range(46, 56):
+            if p[x, y] == BLACK and all(p[x + dx, y + dy][3] for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                p[x, y] = C['g4']
+    b = mat.drop_specks(b, 6)
     # the ball goes; the hand closes on the shears' bow
     b = mat.recolour(b, {H('ffffff'): C['s2'], H('b1b1b9'): C['s3'], H('cec6c6'): C['s2'], H('df743f'): C['p2']},
                      mat.region(b.size, rect=(58, 32, 70, 44)))
@@ -137,7 +146,7 @@ PICK = 'A'
 REFS = [('sd:veteranf-gen6', 'Veteran F (donor class)'), ('sd:pearlclanmember', 'Pearl Clan (hood donor)'),
         ('sd:shauntal', 'Shauntal (official BW)'), ('sd:grimsley', 'Grimsley (official BW)'), ('reborn:093', 'Reborn front (Julia)')]
 DONORS = [('sd:veteranf-gen6', 'veteranf-gen6: body, face, coat, scarf -> sash'),
-          ('sd:pearlclanmember', 'pearlclanmember: hood cloth -> ash cowl, embroidery -> thistles')]
+          ('sd:pearlclanmember', 'pearlclanmember: hood cloth -> ash cowl (embroidery painted out)')]
 NOTE = ('Hand pixels: shears (two 1-px steel lines with a shadow side, brass pivot, bow handle), cowl shadow inside the hood, '
         'thistle brooch (4 px), torn survey flag (5 px).')
 

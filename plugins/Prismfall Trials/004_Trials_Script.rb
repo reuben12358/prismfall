@@ -27,6 +27,9 @@
 #   { :chase => :advance | :reset }      { :heal => true }  { :se => "name" }  { :me => "name" }
 #   { :wait => seconds }  { :run => :scene }  { :result => :symbol }  { :end => true }
 #   { :script => proc { |ctx| ... } }   escape hatch (shown as "(script)" in the doc)
+#   Commands other files add (Script::COMMANDS), e.g. the Eevee Octave (160_Octave.rb):
+#   { :octave_help => :LYRA }             record that you helped this singer (the gauntlet order)
+#   { :octave_gauntlet => true, :won => [], :lost => [] }  the Octave's chained battles
 # Conditions are Prismfall::Conditions strings; ":SELF" means this quest.
 #===============================================================================
 module Prismfall
@@ -89,6 +92,9 @@ module Prismfall
 
     module Script
       class Halt < StandardError; end
+
+      # Extra commands: COMMANDS[:key] = proc { |entry, ctx| ... } (run with Script.exec for sub-lists).
+      COMMANDS = {}
 
       # Runs a scene of quest_id. Returns ctx[:result] (or true).
       def self.run_scene(quest_id, scene)
@@ -204,6 +210,8 @@ module Prismfall
           raise Halt
         elsif e.has_key?(:script)
           e[:script].call(ctx)
+        elsif (key = COMMANDS.keys.find { |k| e.has_key?(k) })
+          COMMANDS[key].call(e, ctx)
         else
           raise ArgumentError, "Unknown script command #{e.keys.inspect} in #{qid}/#{ctx[:scene]}"
         end
