@@ -173,7 +173,12 @@ def main():
         for x in range(8, 12): h.put(MI(1049), x, y, 0)
     for y in range(12, 24):
         for x in (9, 10): h.put(MI(1049), x, y, 0)
-    loom_bed(K, h, g1.GYM_BED, 3, 16, rnd, posts=False)
+    loom_bed(K, h, g1.GYM_BED, 1, 18, rnd)
+    for x0 in (1, 17):                                  # the side bays: yarn shelves, silk bales, a dye vat
+        h.obj('shelf', x0, 2)
+    for y in (14, 18): h.obj('silk', 1, y); h.obj('silk', 18, y)
+    h.obj('vat_r', 2, 7); h.obj('vat_b', 17, 7); h.obj('silk1', 1, 7); h.obj('silk1', 18, 8)
+    h.stamp('hb_rugline', 16, 19)
     for x in (6, 12): h.obj('laundry', x, 5)
     h.obj('web', 3, 2); h.obj('web', 14, 2); h.obj('plant', 3, 5); h.obj('plant', 16, 5)
     h.obj('vat_b', 12, 8); h.obj('vat_r', 13, 8); h.obj('vat_y', 14, 8); h.obj('silk', 16, 8); h.obj('silk1', 16, 7)

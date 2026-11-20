@@ -60,7 +60,9 @@ def build(var='A'):
     s = watch_cap(s, (32, 6, 52, 15))
     # grey curls out from under the cap (the Sailor's dark hair goes grey), and on the far side too
     s = mat.recolour(s, {H('293952'): X['G'], H('4a5a83'): X['g']}, mat.region(s.size, rect=(44, 11, 54, 18)))
-    s = mat.patch(s, 32, 13, ['.gk', 'gGk', 'kgk', '.k.'], X)
+    # grey curls hanging from under the cap to the jaw (outer edge outlined, inner edge merging into the face)
+    s = mat.patch(s, 31, 13, ['.kkgg', 'kgGg.', 'kggG.', 'kGgg.', '.kgG.', 'kgGg.', 'kggk.', '.kGg.', '..kk.'], X)
+    s = mat.patch(s, 48, 13, ['ggkk.', '.gGgk', '.Gggk', '.ggGk', '.Ggk.', '.gGgk', '.kggk', '.gGk.', '.kk..'], X)
     # face: grey brows, crow's feet, gold-tooth grin
     s = mat.patch(s, 35, 15, ['GG.....GG'], X)
     s = mat.patch(s, 34, 18, ['m'], X); s = mat.patch(s, 48, 18, ['m'], X)
@@ -73,23 +75,49 @@ def build(var='A'):
                 p[x, y] = NAVY[H('c5c5e6')]
     for (x, y) in [(33, 39), (39, 39), (33, 44), (39, 44), (33, 49), (39, 49)]:
         s = mat.patch(s, x, y, ['y', 'Y'], X)
-    s = mat.patch(s, 41, 24, ['.rr.', 'rqrR', '.RR.', 'r..R'], X)
+    s = mat.patch(s, 42, 25, ['rrqr', 'RrrR', '.qR.', 'r..R'], X)
     # Lapras tattoo on the bare right forearm
     s = mat.patch(s, 51, 30, ['.b..', 'bBb.', '.bbb'], X)
     return s
 
 
+NAVY6 = {H('ffffff'): H('3e5c8c'), H('9fb5d1'): H('2c4470'), H('59738d'): H('1e2c4c'), H('253651'): H('141c30'),
+         H('4f9ad3'): H('c0402e'), H('39729c'): H('8a2a1e'), H('c5bbba'): H('2c4470')}
+TROUSER6 = {H('ffffff'): H('4a4e5c'), H('9fb5d1'): H('3a3e4a'), H('59738d'): H('262832'), H('253651'): H('1a1c24')}
+
+
 def build_b():
     s = sd('sailor-gen6')
+    cap = mat.region(s.size, rect=(26, 6, 48, 15))
+    p = s.load()
+    for y in range(6, 15):
+        for x in range(26, 48):
+            if p[x, y] in (H('ffffff'), H('9fb5d1'), H('4f9ad3'), H('39729c'), H('59738d'), H('253651')):
+                p[x, y] = X['r'] if y > 8 else X['q']
+    for y in range(9, 14):
+        for x in range(26, 48):
+            if p[x, y] in (X['r'],):
+                p[x, y] = X['r'] if x % 2 else X['R']           # knit ribs
+    for x in range(26, 48):
+        if p[x, 13] in (X['r'], X['R']):
+            p[x, 13] = X['R']
+    s = mat.recolour(s, TROUSER6, mat.region(s.size, rect=(0, 48, 80, 80)))
+    s = mat.recolour(s, NAVY6, mat.mask_not(mat.mask_or(cap, mat.region(s.size, rect=(0, 48, 80, 80)))))
+    s = mat.patch(s, 25, 13, ['..kk..', '.kggk.', 'kgGgk.', 'kggGk.', '.kGgk.', 'kgggk.', '.kgk..', '..k...'], X)
+    s = mat.patch(s, 42, 13, ['.kk..', 'kggk.', 'kgGgk', '.kggk', 'kgGk.', '.kgk.', '..k..'], X)
+    s = mat.patch(s, 33, 22, ['k....k', '.kwywk', '..kkk.'], X)
+    s = mat.patch(s, 47, 22, ['..b..', '.bBb.', 'bbbb.', '.b.b.'], X)       # the Lapras tattoo on the flexed arm
     return s
 
 
 VARIANTS = [('A', 'A: the Dovetail. A navy barrel with brass buttons under a ribbed red watch cap, grey curls poking out, gold-tooth '
-                  'grin, binoculars ready, a Lapras tattoo on the bare forearm. Sailor class body and head, re-made.')]
+                  'grin, binoculars ready, a Lapras tattoo on the bare forearm. Sailor class body and head, re-made.'),
+            ('B', 'B: "Tide\'s got a sense of humour." Double-arm flex to show off the Lapras tattoo, navy coat, red cap and '
+                  'neckerchief, gold-tooth grin. Sailor (gen 6 style) body, same treatment.')]
 PICK = 'A'
 REFS = [('sd:sailor', 'Sailor (official BW)'), ('sd:clay', 'Clay (official BW)'), ('sd:bertha', 'Bertha (official)'),
         ('reborn:093', 'Reborn front (Julia)')]
-DONORS = [('sd:sailor', 'sailor: body, binoculars, head (re-made)')]
+DONORS = [('sd:sailor', 'sailor: body, binoculars, head (re-made)'), ('sd:sailor-gen6', 'sailor-gen6: B body (flex)')]
 NOTE = 'Hand pixels: ribbed cap texture, grey curls, brows, crow\'s feet, gold-tooth grin, brass buttons, neckerchief, Lapras tattoo.'
 
 if __name__ == '__main__':

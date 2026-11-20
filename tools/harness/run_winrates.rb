@@ -129,7 +129,7 @@ module WR
     pool = (PREP ? PREPARED : POOLS)[f[:pool]]
     catches = PREP ? pool.first(f[:size] + 1).shuffle(random: rng).first(f[:size] - 1) : pool.shuffle(random: rng).first(f[:size] - 1)
     offsets = [1, 1, 2, 2, 3]   # starter at the cap; the rest a little behind it
-    catches.each_with_index { |sp, i| list << [sp, f[:cap] - offsets[i % offsets.size]] }
+    catches.each_with_index { |sp, i| list << [sp, f[:cap] - (PREP ? 0 : offsets[i % offsets.size])] }   # prepared = grinded to the cap
     party = list.map { |sp, lv| mon(sp, lv, rng) }
     TMS[f[:tms] || :none].each do |tm|
       pk = party.find { |pp| pp.compatible_with_move?(tm) && !pp.hasMove?(tm) }

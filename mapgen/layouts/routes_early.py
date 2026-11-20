@@ -426,12 +426,127 @@ def build_520():
     r.write(h, '520_ferrymens_mile.yaml', "# The Ferrymen's Mile (520). WRITTEN BY layouts/routes_early.py - edit that script.\n", '/tmp/rt/520.png' if PREV else None)
 
 
+# ====================================================================================================== 521 Windfall Row
+ORCH = ('tr_oak', 'tr_oak2', 'tr_pink')
+
+
+def orchard_rows(r, x0, y0, x1, y1, kind, gap=5, name=None, sign_at=None, skip_row=None):
+    """an orchard: rows of one species of fruit tree with grass lanes between (every tree a Headbutt tree)"""
+    m = r.m; st = STAMPS[kind]; w, h = st['w'], st['h']; rows = 0
+    m.rect(x0, y0, x1 - x0 + 1, y1 - y0 + 1, '.', only='T.t')
+    y = y0
+    while y + h - 1 <= y1:
+        rows += 1
+        if skip_row != rows:
+            x = x0 + (rows % 2)
+            while x + w - 1 <= x1:
+                if m.can_tree(kind, x, y, on='.t'): m.stamp(kind, x, y, mark='B')
+                x += w + 1
+        y += gap
+    if sign_at: r.add(sign(sign_at, name + ' sign', name))
+    return rows
+
+
+def build_521():
+    """Windfall Row (120x70, MEADOW): the farm lanes north of the Mile.  The Hale orchards (apple, pear, plum, cherry,
+    quince, medlar; Headbutt trees), the Cider Press yard, the farmhouse (R2_FARM), the duck pond, the old mill tower on
+    its rise, the Glassed Orchard gate in the hedge (R2_ORCHARD, Chapter 1), the corded forest road west to the
+    Gossamer (R2_WOOD, never opens from this side), the Thirteenth Row (secret walled garden with a sleeping Applin)"""
+    W, H = 120, 70
+    r = Route(521, W, H, 'meadow', base='.')
+    m = r.m
+    r.forest_band('N', 7, wobble=3.0); r.forest_band('W', 6, wobble=3.0)
+    for cx, cy, rx, ry in ((12, 48, 8, 7), (34, 62, 9, 5), (110, 12, 8, 6), (8, 28, 5, 6)):
+        r.copse(cx, cy, rx, ry)
+    # the Glassed Orchard hedge: woods east of x 61 in the north, the gate at (61, 22-23)
+    for y in range(8, 32):
+        for x in range(62, 70): m.cls[y, x] = 'T'
+    m.ht[34:48, 92:110] = 1                                                          # the mill rise
+    road = [(59, 69), (59, 58), (56, 48), (58, 40), (54, 32), (57, 24), (60, 22)]
+    r.road(road, w=3.0, open_=None)
+    r.road([(57, 40), (44, 34), (30, 26), (18, 14), (6, 10), (0, 10)], w=3.0, open_=None)   # the forest road (corded)
+    r.road([(58, 46), (74, 46), (90, 50), (104, 52)], w=3.0, open_=None)                     # the farm lane east
+    r.exit('S', 58, 4)
+    m.cls[9:12, 0:2] = 'd'
+    r.flatten(98, 100, 47, 1); r.crossing(98, 47, w=3, rows=3)
+    r.lane([(99, 50), (99, 49)], w=2.0, open_=None)
+    r.water(30, 50, 6, 3.5)                                                          # the duck pond
+    r.grass(thr=0.6, scale=6.0, box=(0, 0, 60, 70))
+    r.finish_plan()
+    m.cls[9:12, 0:3] = 'd'
+    # ---- the six Hale orchards
+    rows = {}
+    rows['apple'] = orchard_rows(r, 72, 8, 90, 26, 'tr_oak', name='HALE ORCHARD: APPLE ROWS', sign_at=(71, 28))
+    rows['pear'] = orchard_rows(r, 93, 18, 116, 30, 'tr_oak2', name='HALE ORCHARD: PEAR ROWS', sign_at=(92, 31))
+    rows['plum'] = orchard_rows(r, 64, 52, 86, 66, 'tr_oak2', gap=4, name='HALE ORCHARD: PLUM ROWS (12 rows)', sign_at=(63, 51))
+    rows['cherry'] = orchard_rows(r, 36, 6, 52, 20, 'tr_pink', name='HALE ORCHARD: CHERRY ROWS', sign_at=(48, 22))
+    rows['quince'] = orchard_rows(r, 88, 56, 116, 66, 'tr_oak', gap=5, name='HALE ORCHARD: QUINCE ROWS', sign_at=(88, 55))
+    rows['medlar'] = orchard_rows(r, 18, 30, 34, 42, 'tr_oak2', name='HALE ORCHARD: MEDLAR ROWS', sign_at=(20, 43))
+    # the Thirteenth Row: a walled garden behind the plum rows (a gap in the hedge at the far end)
+    m.rect(87, 58, 1, 2, '.')
+    ev = old_events('521_reskin.yaml', 521)
+    J = lambda e, t: P('JUNO', e, t)
+    cord = {'type': 'event', 'name': 'Forest-road cordon', 'at': [3, 9], 'pages': [{'graphic': {'tile': barrier_tile()}, 'trigger': 'action', 'commands': [
+        '(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)']}]}
+    r.events += [dict(cord, at=[3, y], name='Forest-road cordon %d' % (i + 1)) for i, y in enumerate((9, 10, 11))]
+    for y in (9, 10, 11): m.taken[y, 3] = True
+    r.add({'type': 'door', 'at': [0, 0], 'name': 'placeholder'} if False else None,
+          {'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 10], 'link': 'R2_WOOD', 'arrive': [1, 10, 'right']},
+          {'type': 'warp', 'name': 'To Gossamer Wood 2', 'at': [0, 9], 'to': {'map': 524, 'x': 22, 'y': 56, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To Gossamer Wood 3', 'at': [0, 11], 'to': {'map': 524, 'x': 24, 'y': 56, 'dir': 'up'}},
+          {'type': 'warp', 'name': 'To the Glassed Orchard', 'at': [61, 23], 'link': 'R2_ORCHARD', 'arrive': [60, 23, 'left']},
+          {'type': 'warp', 'name': 'To the Glassed Orchard 2', 'at': [61, 22], 'to': {'map': 522, 'x': 2, 'y': 37, 'dir': 'right'}},
+          talk('Cordon Warden', (6, 12), 'NPC 07', ["Cordon Warden: Forest road's shut. The Glasswood's across it. Nobody walks it till the Warden in Briarwick says so.",
+               "Cordon Warden: Go round by the coast like everyone else. Saltmere, then the Weavers' Road up the river. It's two days. It's a nice two days.",
+               J('sad', 'It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.'),
+               J('neutral', 'Parsnip hated the forest. Parsnip was right, as it turns out.')], d='right'),
+          sign((56, 64), 'Road sign', 'WINDFALL ROW -- <- Gossamer Wood & Briarwick (ROAD CLOSED BY ORDER OF THE ACCORD).\nOrchard law: keep what has fallen, and nothing else.'),
+          at(ev['Wim'], 46, 30), at(ev['Ada'], 76, 44), at(ev['Joss'], 22, 18),
+          trainer((84, 36), 'BUGCATCHER', 'Dell', 'My Metapod is going to evolve THIS time. Watch!', 'My Metapod was supposed to evolve this time...', d='down'),
+          trainer((104, 40), 'PICNICKER', 'Mae', 'Battle first, sandwich after! House rules.', 'You can have a sandwich anyway!', d='left'),
+          talk('Hay-cart Driver', (62, 44), 'NPC 25', ["Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.",
+               "Hay-cart Driver: Now it's all glass and I go round by Saltmere. Two days. Glass doesn't pay my horse."]),
+          at(ev['Coll (Headbutt tutor)'], 52, 50), at(ev['Wayside shrine'], 26, 22),
+          {'type': 'berry', 'at': [36, 46], 'berry': 'PECHABERRY'}, {'type': 'berry', 'at': [70, 30], 'berry': 'ORANBERRY'},
+          item((14, 36), 'POKEBALL'), item((114, 46), 'POTION'), hidden((80, 20), 'ORANBERRY', 'HiddenItem (windfall)'),
+          obj('Cider press', (101, 54), ['THE CIDER PRESS. A screw press as big as a cart, smelling of last autumn. A sign: "WINDFALLS ONLY. WE CAN TELL."']),
+          talk('Cider-maker', (98, 56), 'NPC 20', ['Cider-maker: Windfalls make the best cider. The tree already decided they were ready. Who am I to argue with a tree?'],
+               again=['Cider-maker: Cellar door? Cellar\'s for the barrels. And the barrels are for later.']),
+          obj('Cellar door', (106, 51), ['A cellar door, padlocked. Chalked on it: "NOT YET".']),
+          obj('Old mill tower', (101, 40), ['The old mill. The sails came down in the Reform and nobody put them back. The Wingull live in it now. They pay no rent.']),
+          talk('Farm stand keeper', (66, 49), 'NPC 16', ['Farm stand: Berries a copper a punnet! Apples two! Plums are free if you can reach them!']),
+          obj('Beehive wall', (40, 24), ['A drystone wall with hives set into it like windows. The Combee inside sound busy and important.']),
+          talk('Orchard hand', (82, 14), 'NPC 03', ['Orchard hand: Every tree here is a Headbutt tree, if you know how. Coll knows how. Coll knows too much about it.'], move='random'),
+          {'type': 'event', 'name': 'Scarecrow', 'at': [75, 60], 'pages': [{'graphic': {'sprite': 'Followers/SUDOWOODO', 'dir': 'down'}, 'trigger': 'action',
+                                                                             'commands': [{'script': 'pf_trial_talk(:SCARECROW)'}]}]},
+          obj('Applin (sleeping)', (90, 60), ['(A walled garden behind the thirteenth row. An Applin is asleep in the long grass, curled up like a windfall.)',
+              'It does not wake. Orchard law: keep what has fallen, and nothing else.'], trigger='action'),
+          item((92, 62), 'MIRACLESEED'),
+          obj('Thirteenth Row', (87, 57), ['The plum orchard has twelve rows on the sign. This is the thirteenth.']))
+    r.seat_events(on='.dt')
+    r.stamp('gl_cot', 47, 38, mark='B') if False else None
+    fd = m.front('gl_cot', 50, 44, 'R2_FARM', 'Farmhouse door')
+    r.events.append([e for e in m.events if e.get('link') == 'R2_FARM'][0]); m.events = []
+    m.cls[45:47, 49:52] = np.where(m.cls[45:47, 49:52] == 'B', 'B', 'd')
+    r.stamp('gt_tower', 99, 34, mark='B') if m.free(99, 34, 3, 6, on='.') else None
+    for n, x, y in (('pf_stall2', 64, 47), ('hb_barrels', 104, 55), ('hb_tubs', 94, 53), ('hb_crates4', 96, 58), ('hb_shed', 106, 56),
+                    ('pf_logbench', 34, 46), ('hb_washline', 44, 46)):
+        r.near(n, x, y, on='.d', r=3)
+    m.fence(84, 116, 54, gaps=((86, 88),)); m.fence(20, 34, 28, gaps=((26, 28),))
+    r.dress(trees=ORCH, n_trees=W * H // 200, copses=4, scatter=12)
+    r.paint(glint=0.0)
+    flowers(r, 45, 60, 6, 3, p=0.4)
+    h = head(521, 'Windfall Row', field='MEADOW', bgm='Route 2',
+             connections=[{'dir': 'S', 'offset': 58, 'to': 520, 'to_offset': 30}], tone=[6, 4, -4, 0])
+    r.write(h, '521_windfall_row.yaml', '# Windfall Row (521). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/521.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {520: build_520, 527: build_527, 528: build_528}
+BUILD = {520: build_520, 521: build_521, 527: build_527, 528: build_528}
 
 
 def main():

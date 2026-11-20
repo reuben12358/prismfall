@@ -17,8 +17,8 @@ S_ALPHA, S_BRASS, S_GAMMA, S_KNOT = 305, 306, 307, 308
 # than the Revision 14 build.  Every coordinate below is the built one.
 def _gym():
     W = 20
-    wall, stair = '###' + 'W' * 14 + '###', '###' + 'W' * 12 + 'SW' + '###'
-    fl, bed = '###' + '.' * 14 + '###', '###' + 'v' * 14 + '###'
+    wall, stair = '#' + 'W' * 18 + '#', '#' + 'W' * 14 + 'S' + 'W' * 3 + '#'      # wall to wall: no black at the screen's edge
+    fl, bed = '#' + '.' * 18 + '#', '#' + 'v' * 18 + '#'
     return ['#' * W, '#' * W, wall, wall, stair, stair] + [fl] * 4 + [bed] * 2 + [fl] * 12 + ['#########.##########']
 
 

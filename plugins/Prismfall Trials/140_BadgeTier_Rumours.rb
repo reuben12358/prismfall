@@ -40,7 +40,7 @@ Prismfall::Trials::BadgeTiers::RUMOURS.merge!({
   [544, 2] => "The Brinecut miners hear digging that isn't theirs. And the salt crystals in the deep seam have started to sparkle back.",
   [544, 3] => "A bell rings in {map} where no bell is. Living gems in the walls; the miners say don't touch, they bite.",
   [544, 4] => "A walking standing-stone in {map}. The miners swear it wasn't there last shift.",
-  [545, 2] => "A great stone snake in {map}. And tiny, angry hammering at night.",
+  [545, 2] => "A great stone snake in {map}, tiny angry hammering at night, and a stone with a red nose that always points north.",
   [545, 3] => "A cart of coal in {map} that rolls away by itself. Burning.",
   [545, 4] => "Salt-crusted boulders that walk in {map}. The miners have stopped leaving their lunch out.",
   [552, 2] => "A painter at {map} lost her brush to a dog that paints. The dyers say it does better work.",

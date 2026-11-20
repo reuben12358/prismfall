@@ -171,3 +171,7 @@ the previous files are in `passes/replaced_p3_before_hairfix/`. Only hair pixels
 - **Combined (installed, `16d_juno_hair.png`, `juno_hair_fix.py combined`, files `*_p3c`):** pass 3's hair exactly from the eye
   line (row 24) down, the step above; at the two seam rows pass-3 lines entering from below stay black and the silhouette follows
   pass 3, so nothing jumps. Changes are confined to rows 0-23. Previous set in `passes/replaced_p3q_before_combined/`.
+- **Crown closed (installed, `16e_juno_hair.png`, `juno_hair_fix.py crown`, files `*_p3k`):** the hair no longer runs into the top
+  edge: the crown gets a rounded outline at y=2 (2 px clear above) that curves down toward the left edge, steps between columns
+  filled so the line is continuous; no shift, nothing else moved. Previous set in `passes/replaced_p3c_before_crown/`.
+  Rule for future portraits: close the silhouette inside the 48-px frame; the round bubble exposes any straight cut at the top.

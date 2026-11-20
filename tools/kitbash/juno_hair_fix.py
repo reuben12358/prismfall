@@ -163,7 +163,7 @@ def main():
     print('ok')
 
 
-if __name__ == '__main__' and sys.argv[1:2] not in (['middle'], ['quarter'], ['combined']):
+if __name__ == '__main__' and sys.argv[1:2] not in (['middle'], ['quarter'], ['combined'], ['crown']):
     main()
 
 
@@ -309,3 +309,55 @@ def main_combined():
 
 if __name__ == '__main__' and sys.argv[1:2] == ['combined']:
     main_combined()
+
+
+# ---------------------------------------------------------------- close the crown inside the frame (no crop at the top)
+def crown_top(x):
+    """new top edge of the hair: flat at y=2 over the crown, rounding down toward the left edge."""
+    if x >= 14:
+        return 2
+    return 2 + int(round(0.075 * (14 - x) ** 2))
+
+
+def close_crown(im):
+    out = im.copy(); q = out.load()
+    hair_cols = set(SH) | {HI, DARK, H('5a2018'), H('963a24'), H('c8582e'), BLACK}
+    tops = {}
+    for x in range(0, 26):
+        t = crown_top(x)
+        for y in range(0, t):
+            if q[x, y] in hair_cols:
+                q[x, y] = CLEAR
+        ys = [y for y in range(t, 20) if q[x, y][3]]
+        if ys:
+            tops[x] = ys[0]
+    # outline along the new top, with the steps between columns filled so the curve is one clean line
+    for x, t in tops.items():
+        if q[x, t] in hair_cols:
+            q[x, t] = BLACK
+    for x in sorted(tops):
+        if x + 1 in tops and abs(tops[x + 1] - tops[x]) > 1:
+            a, b = (x, x + 1) if tops[x] > tops[x + 1] else (x + 1, x)
+            for y in range(tops[b] + 1, tops[a]):
+                if q[a, y] in hair_cols:
+                    q[a, y] = BLACK
+    # the outer left edge: hair pixels that now border empty space get the outline too
+    for y in range(0, 14):
+        for x in range(0, 14):
+            if q[x, y] in hair_cols and q[x, y] != BLACK:
+                if any(0 <= x + dx < 48 and 0 <= y + dy < 48 and q[x + dx, y + dy][3] == 0 for dx, dy in ((1, 0), (-1, 0), (0, -1))):
+                    q[x, y] = BLACK
+    return out
+
+
+def main_crown():
+    for e in EXPR:
+        im = Image.open(P + '/p3c_%s_48.png' % e).convert('RGBA')
+        m = close_crown(im)
+        m.save(P + '/p3k_%s_48.png' % e)
+        kb.up(m, 2).save(J + '/JUNO_%s_p3k.png' % e)
+    print('crown ok')
+
+
+if __name__ == '__main__' and sys.argv[1:2] == ['crown']:
+    main_crown()

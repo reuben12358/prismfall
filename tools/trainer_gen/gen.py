@@ -151,10 +151,10 @@ warden(1, "LEADER_DORIAN", "Dorian", 15, "GRAND_STAGE", "Bravo! Bravissimo! The 
     #    Own Tempo keeps Spinda steady. Headbutt is a Normal move at x1.3 with a 30% flinch.
     P("SPINDA", 11, "OWNTEMPO", "ORANBERRY", "ADAMANT", "TEETERDANCE,TACKLE,COPYCAT", "A",
       only="nocasual", hard={"moves": "TEETERDANCE,HEADBUTT,PSYBEAM,COPYCAT", "item": "SITRUSBERRY"}),
-    # Hard only: the costume department. Fur Coat halves physical hits (early starters are physical: bring special
-    #    moves or status); Baby-Doll Eyes also lowers Sp. Atk here. (A Chatot with Chatter / Hyper Voice OHKO'd
-    #    prepared teams at Lv 13-14 in the harness, so Dorian's voice stays in the Pageant Bout.)
-    P("FURFROU", 13, "FURCOAT", "ORANBERRY", "IMPISH", "HEADBUTT,BABYDOLLEYES,BITE,TACKLE", "BPD", only="hard"),
+    # Hard only: the understudy who shouts. Soundproof ignores the player's sound moves (and Dorian's own songs), and
+    #    its Echoed Voice is the loudest thing in the house. Glass-jawed (Def 23 base): hit it hard and early.
+    #    (Furfrou's Fur Coat + Headbutt and a Chatter Chatot both swept prepared teams at Lv 13-14 in the harness.)
+    P("WHISMUR", 13, "SOUNDPROOF", "ORANBERRY", "MODEST", "ECHOEDVOICE,ASTONISH,POUND,HOWL", "S", only="hard"),
     # 4. The soprano: Sing is x1.3 accurate here and never misses at Standing Ovation; Round and Disarming Voice keep
     #    the applause rising. A bulky HP pool to stand in the spotlight. Casual leaves her at home.
     P("JIGGLYPUFF", 11, "CUTECHARM", "ORANBERRY", "MODEST", "SING,DISARMINGVOICE,POUND,DEFENSECURL", "BS",

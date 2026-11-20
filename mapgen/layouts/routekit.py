@@ -145,7 +145,7 @@ class Route:
         m = self.m
         for x in range(x0 - 2, x1 + 3):
             if not (0 <= x < self.W): continue
-            m.ht[:y_lip + 1, x] = np.maximum(m.ht[:y_lip + 1, x], h)
+            m.ht[max(0, y_lip - 3):y_lip + 1, x] = np.maximum(m.ht[max(0, y_lip - 3):y_lip + 1, x], h)
             m.ht[y_lip + 1:y_lip + 6, x] = np.minimum(m.ht[y_lip + 1:y_lip + 6, x], h - 1)
 
     def crossing(self, x, y_lip, w=3, rows=3):

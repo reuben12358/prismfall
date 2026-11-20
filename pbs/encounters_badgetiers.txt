@@ -138,6 +138,7 @@ Cave
 Cave
     3,ONIX,17,20
     3,TINKATINK,17,20
+    3,NOSEPASS,17,20
 [545,103] # Brinecut Mine B1F - after Badge 3
 Cave
     3,CARKOL,21,24

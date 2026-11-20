@@ -1,0 +1,264 @@
+# Windfall Row (521). WRITTEN BY layouts/routes_early.py - edit that script.
+id: 521
+name: Windfall Row
+parent: 0
+bgm: Route 2
+metadata: {Outdoor: true, ShowArea: true, BattleBack: field}
+rubric: true
+yards_ok: true
+biome: route
+field: MEADOW
+tone: [6, 4, -4, 0]
+connections:
+- {dir: S, offset: 58, to: 520, to_offset: 30}
+raw: data/raw/521.npy
+tileset: 53
+events:
+- type: sign
+  name: 'HALE ORCHARD: APPLE ROWS sign'
+  at: [71, 28]
+  text: 'HALE ORCHARD: APPLE ROWS'
+  post: false
+- type: sign
+  name: 'HALE ORCHARD: PEAR ROWS sign'
+  at: [92, 31]
+  text: 'HALE ORCHARD: PEAR ROWS'
+  post: false
+- type: sign
+  name: 'HALE ORCHARD: PLUM ROWS (12 rows) sign'
+  at: [63, 51]
+  text: 'HALE ORCHARD: PLUM ROWS (12 rows)'
+  post: false
+- type: sign
+  name: 'HALE ORCHARD: CHERRY ROWS sign'
+  at: [48, 22]
+  text: 'HALE ORCHARD: CHERRY ROWS'
+  post: false
+- type: sign
+  name: 'HALE ORCHARD: QUINCE ROWS sign'
+  at: [88, 55]
+  text: 'HALE ORCHARD: QUINCE ROWS'
+  post: false
+- type: sign
+  name: 'HALE ORCHARD: MEDLAR ROWS sign'
+  at: [20, 43]
+  text: 'HALE ORCHARD: MEDLAR ROWS'
+  post: false
+- type: event
+  name: Forest-road cordon 1
+  at: [2, 9]
+  pages: &id001
+  - graphic: {tile: 18119}
+    trigger: action
+    commands: ['(Tape across the forest lane. Beyond it, a mile into the trees, something catches the light the wrong way.)']
+- type: event
+  name: Forest-road cordon 2
+  at: [2, 10]
+  pages: *id001
+- type: event
+  name: Forest-road cordon 3
+  at: [2, 11]
+  pages: *id001
+- type: warp
+  name: To Gossamer Wood
+  at: [0, 10]
+  link: R2_WOOD
+  arrive: [1, 10, right]
+- type: warp
+  name: To Gossamer Wood 2
+  at: [0, 9]
+  to: {map: 524, x: 22, y: 56, dir: up}
+- type: warp
+  name: To Gossamer Wood 3
+  at: [0, 11]
+  to: {map: 524, x: 24, y: 56, dir: up}
+- type: warp
+  name: To the Glassed Orchard
+  at: [61, 23]
+  link: R2_ORCHARD
+  arrive: [60, 23, left]
+- type: warp
+  name: To the Glassed Orchard 2
+  at: [61, 22]
+  to: {map: 522, x: 2, y: 37, dir: right}
+- type: event
+  name: Cordon Warden
+  at: [6, 11]
+  pages:
+  - graphic: {sprite: NPC 07, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Cordon Warden: Forest road''s shut. The Glasswood''s across it. Nobody walks it till the Warden in Briarwick says so.', 'Cordon Warden:
+        Go round by the coast like everyone else. Saltmere, then the Weavers'' Road up the river. It''s two days. It''s a nice two days.', '\pf[JUNO,sad]Juno:
+        It used to be four hours. Uncle Rowan and I walked it every summer with a donkey called Parsnip.', '\pf[JUNO,neutral]Juno: Parsnip hated the forest.
+        Parsnip was right, as it turns out.']
+- type: sign
+  name: Road sign
+  at: [56, 64]
+  text: 'WINDFALL ROW -- <- Gossamer Wood & Briarwick (ROAD CLOSED BY ORDER OF THE ACCORD).
+
+    Orchard law: keep what has fallen, and nothing else.'
+  post: false
+- type: trainer
+  at: [46, 30]
+  sight: 4
+  dir: down
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Wim]
+  intro: I'm going to be Warden of Briarwick!
+  after: '...Assistant Warden.'
+- type: trainer
+  at: [76, 44]
+  sight: 4
+  dir: left
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Ada]
+  intro: My Budew sneezes pollen when it's nervous. It's nervous now.
+  after: Bless you. Bless both of us.
+- type: trainer
+  at: [22, 18]
+  sight: 3
+  dir: right
+  sprite: trainer_CAMPER
+  trainer: [CAMPER, Joss]
+  intro: Trainers have to battle when their eyes meet! It's in the Accord. Probably.
+  after: The wood's just west. Mind the silk walls.
+- type: trainer
+  at: [84, 36]
+  sight: 4
+  dir: down
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Dell]
+  intro: My Metapod is going to evolve THIS time. Watch!
+  after: My Metapod was supposed to evolve this time...
+- type: trainer
+  at: [104, 40]
+  sight: 4
+  dir: left
+  sprite: trainer_PICNICKER
+  trainer: [PICNICKER, Mae]
+  intro: Battle first, sandwich after! House rules.
+  after: You can have a sandwich anyway!
+- type: event
+  name: Hay-cart Driver
+  at: [62, 44]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Hay-cart Driver: Used to take me four hours to Briarwick and back by the forest road.', 'Hay-cart Driver: Now it''s all glass and I go round
+        by Saltmere. Two days. Glass doesn''t pay my horse.']
+- type: npc
+  name: Coll (Headbutt tutor)
+  at: [52, 50]
+  sprite: NPC 03
+  dir: down
+  commands:
+  - 'Coll: Want your partner to learn to headbutt trees? Things fall out. Usually Pokémon. Once, a boot.'
+  - {script: 'pbMoveTutorChoice(:HEADBUTT)'}
+- type: sign
+  at: [26, 22]
+  post: false
+  name: Wayside shrine
+  text: A wayside shrine to the Loyal Three. Someone has tied a strand of silver silk around it. It hums, very faintly, if you hold your breath.
+- type: berry
+  at: [36, 46]
+  berry: PECHABERRY
+- type: berry
+  at: [70, 30]
+  berry: ORANBERRY
+- type: item
+  at: [14, 36]
+  item: POKEBALL
+- type: item
+  at: [114, 46]
+  item: POTION
+- type: item
+  at: [80, 20]
+  item: ORANBERRY
+  hidden: true
+  name: HiddenItem (windfall)
+- type: event
+  name: Cider press
+  at: [101, 54]
+  pages:
+  - trigger: action
+    commands: ['THE CIDER PRESS. A screw press as big as a cart, smelling of last autumn. A sign: "WINDFALLS ONLY. WE CAN TELL."']
+- type: event
+  name: Cider-maker
+  at: [98, 55]
+  pages:
+  - graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands:
+    - 'Cider-maker: Windfalls make the best cider. The tree already decided they were ready. Who am I to argue with a tree?'
+    - selfswitch: [A, true]
+  - cond: {self: A}
+    graphic: {sprite: NPC 20, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Cider-maker: Cellar door? Cellar''s for the barrels. And the barrels are for later.']
+- type: event
+  name: Cellar door
+  at: [106, 52]
+  pages:
+  - trigger: action
+    commands: ['A cellar door, padlocked. Chalked on it: "NOT YET".']
+- type: event
+  name: Old mill tower
+  at: [101, 40]
+  pages:
+  - trigger: action
+    commands: [The old mill. The sails came down in the Reform and nobody put them back. The Wingull live in it now. They pay no rent.]
+- type: event
+  name: Farm stand keeper
+  at: [66, 49]
+  pages:
+  - graphic: {sprite: NPC 16, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Farm stand: Berries a copper a punnet! Apples two! Plums are free if you can reach them!']
+- type: event
+  name: Beehive wall
+  at: [40, 24]
+  pages:
+  - trigger: action
+    commands: [A drystone wall with hives set into it like windows. The Combee inside sound busy and important.]
+- type: event
+  name: Orchard hand
+  at: [83, 14]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: random
+    commands: ['Orchard hand: Every tree here is a Headbutt tree, if you know how. Coll knows how. Coll knows too much about it.']
+- type: event
+  name: Scarecrow
+  at: [75, 59]
+  pages:
+  - graphic: {sprite: Followers/SUDOWOODO, dir: down}
+    trigger: action
+    commands:
+    - {script: 'pf_trial_talk(:SCARECROW)'}
+- type: event
+  name: Applin (sleeping)
+  at: [90, 60]
+  pages:
+  - trigger: action
+    commands: ['(A walled garden behind the thirteenth row. An Applin is asleep in the long grass, curled up like a windfall.)', 'It does not wake. Orchard
+        law: keep what has fallen, and nothing else.']
+- type: item
+  at: [91, 62]
+  item: MIRACLESEED
+- type: event
+  name: Thirteenth Row
+  at: [87, 57]
+  pages:
+  - trigger: action
+    commands: [The plum orchard has twelve rows on the sign. This is the thirteenth.]
+- type: door
+  at: [50, 44]
+  gfx: ['', 0, 2]
+  name: Farmhouse door
+  link: R2_FARM
