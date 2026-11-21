@@ -296,4 +296,166 @@ if defined?(PrismfallPuzzles)
   end
   EventHandlers.add(:on_player_step_taken, :pf_manor_chairs, proc { PFManor.step })
   EventHandlers.add(:on_enter_map, :pf_manor_enter, proc { |_old| PFManor.enter if $game_map && $game_map.map_id == 546 })
+  PrismfallPuzzles.room(:g4_190, {
+    :name => "The Switchroom",
+    :map => 190,
+    :start => [10, 13, 8],
+    :home => false,
+    :reset => { :switches => { 320 => false }, :states => { "Node 5,9" => 0, "Node 9,9" => 0, "Node 13,9" => 0 } },
+    :solved => { :switches => { 320 => true }, :states => { "Node 5,9" => 1, "Node 9,9" => 0, "Node 13,9" => 1 } },
+    :hints => ["Power runs along the wire like water down a gutter. A junction only passes it if both ends line up.", "The middle junction already lies along the wire. The other two are standing on end.", "Turn the first and the last junction once each. The lamp by the door lights."],
+  })
+  PrismfallPuzzles.room(:g4_191, {
+    :name => "The Breadboard Hall",
+    :map => 191,
+    :start => [13, 23, 8],
+    :home => false,
+    :reset => { :switches => { 324 => false }, :states => { "Node 6,15" => 0, "Node 11,10" => 0, "Node 16,15" => 0, "Node 21,10" => 0 } },
+    :solved => { :switches => { 324 => true }, :states => { "Node 6,15" => 1, "Node 11,10" => 1, "Node 16,15" => 0, "Node 21,10" => 1 } },
+    :hints => ["A tee sends power three ways. Make sure the third way's a wall, not Rook's camera.", "Go north at the generator, not east. The middle row is a straight line to the flash.", "Turn the generator's tee once, the top row's sideways junction once, and the top-right corner once."],
+  })
+  PrismfallPuzzles.room(:g4_192, {
+    :name => "The Live Wire Hall",
+    :map => 192,
+    :start => [6, 26, 8],
+    :home => false,
+    :reset => { :switches => { 321 => false, 322 => false, 323 => false }, :states => { "Node 17,16" => 0 } },
+    :solved => { :switches => { 321 => true, 322 => true, 323 => false }, :states => { "Node 17,16" => 2 } },
+    :hints => ["Latches hold. Wires don't have to. Once a lock clicks open it stays open, power or no power.", "The east board has no generator. Its power comes through the gate - from Rotom, on this side.", "Dock Rotom, call it back, cross, turn the east tee twice so it points west and north, come back, dock again, call it back, and walk through."],
+  })
+  # Gym 4 (map builder 15; mapgen/puzzles/circuit.py): the Circuit Gym's boards, generated from the proven model.
+  module PFCircuit
+    BOARDS = {
+      190 => { :source => [2, 9, 2], :cells => { [3, 9] => [:s, 10], [4, 9] => [:s, 10], [5, 9] => [:n, 5, 0, true, 2], [6, 9] => [:s, 10], [7, 9] => [:s, 10], [8, 9] => [:s, 10], [9, 9] => [:n, 5, 1, true, 2], [10, 9] => [:s, 10], [11, 9] => [:s, 10], [12, 9] => [:s, 10], [13, 9] => [:n, 5, 0, true, 2], [14, 9] => [:s, 10], [15, 9] => [:s, 10], [16, 9] => [:s, 10], [17, 9] => [:l, 8, :door190] } },
+      191 => { :source => [2, 15, 2], :cells => { [3, 15] => [:s, 10], [4, 15] => [:s, 10], [5, 15] => [:s, 10], [6, 10] => [:n, 3, 1, false, 4], [6, 11] => [:s, 5], [6, 12] => [:s, 5], [6, 13] => [:s, 5], [6, 14] => [:s, 5], [6, 15] => [:n, 7, 1, true, 4], [6, 16] => [:s, 5], [6, 17] => [:s, 5], [6, 18] => [:s, 5], [6, 19] => [:s, 5], [6, 20] => [:n, 3, 0, false, 4], [7, 10] => [:s, 10], [7, 15] => [:s, 10], [7, 20] => [:s, 10], [8, 10] => [:s, 10], [8, 15] => [:s, 10], [8, 20] => [:s, 10], [9, 10] => [:s, 10], [9, 15] => [:s, 10], [9, 20] => [:s, 10], [10, 10] => [:s, 10], [10, 15] => [:s, 10], [10, 20] => [:s, 10], [11, 10] => [:n, 5, 0, true, 2], [11, 11] => [:s, 5], [11, 12] => [:s, 5], [11, 13] => [:s, 5], [11, 14] => [:s, 5], [11, 15] => [:n, 5, 1, false, 2], [11, 16] => [:s, 5], [11, 17] => [:s, 5], [11, 18] => [:s, 5], [11, 19] => [:s, 5], [11, 20] => [:n, 5, 1, false, 2], [12, 10] => [:s, 10], [12, 15] => [:s, 10], [12, 20] => [:s, 10], [13, 10] => [:s, 10], [13, 15] => [:s, 10], [13, 20] => [:s, 10], [14, 10] => [:s, 10], [14, 15] => [:s, 10], [14, 20] => [:s, 10], [15, 10] => [:s, 10], [15, 15] => [:s, 10], [15, 20] => [:s, 10], [16, 10] => [:n, 5, 1, false, 2], [16, 11] => [:s, 5], [16, 12] => [:s, 5], [16, 13] => [:s, 5], [16, 14] => [:s, 5], [16, 15] => [:n, 5, 0, true, 2], [16, 16] => [:s, 5], [16, 17] => [:s, 5], [16, 18] => [:s, 5], [16, 19] => [:s, 5], [16, 20] => [:n, 3, 3, false, 4], [17, 10] => [:s, 10], [17, 15] => [:s, 10], [17, 20] => [:s, 10], [18, 10] => [:s, 10], [18, 15] => [:s, 10], [18, 20] => [:s, 10], [19, 10] => [:s, 10], [19, 15] => [:s, 10], [19, 20] => [:s, 10], [20, 10] => [:s, 10], [20, 15] => [:s, 10], [20, 20] => [:s, 10], [21, 5] => [:l, 4, :door191], [21, 6] => [:s, 5], [21, 7] => [:s, 5], [21, 8] => [:s, 5], [21, 9] => [:s, 5], [21, 10] => [:n, 3, 2, true, 4], [21, 11] => [:s, 5], [21, 12] => [:s, 5], [21, 13] => [:s, 5], [21, 14] => [:s, 5], [21, 15] => [:n, 7, 3, false, 4], [21, 16] => [:s, 5], [21, 17] => [:s, 5], [21, 18] => [:s, 5], [21, 19] => [:s, 5], [21, 20] => [:n, 3, 3, false, 4], [22, 15] => [:s, 10], [23, 15] => [:s, 10], [24, 15] => [:s, 10], [25, 15] => [:s, 10], [26, 15] => [:l, 8, :alarm] } },
+      192 => { :source => [2, 10, 2], :cells => { [3, 10] => [:s, 10], [4, 10] => [:n, 5, 1, false, 2], [5, 10] => [:s, 10], [6, 10] => [:s, 10], [7, 10] => [:s, 10], [8, 10] => [:n, 3, 2, false, 4], [8, 11] => [:s, 5], [8, 12] => [:s, 5], [8, 13] => [:s, 5], [8, 14] => [:s, 5], [8, 15] => [:s, 5], [8, 16] => [:b, 3, 323], [9, 16] => [:s, 10], [10, 16] => [:s, 10], [11, 16] => [:s, 10], [12, 16] => [:s, 10], [13, 16] => [:l, 10, :latch1], [14, 16] => [:s, 10], [15, 16] => [:s, 10], [16, 16] => [:s, 10], [17, 10] => [:n, 3, 1, false, 4], [17, 11] => [:s, 5], [17, 12] => [:s, 5], [17, 13] => [:s, 5], [17, 14] => [:s, 5], [17, 15] => [:s, 5], [17, 16] => [:n, 7, 0, true, 4], [18, 10] => [:s, 10], [18, 16] => [:l, 8, :alarm], [19, 10] => [:s, 10], [20, 5] => [:l, 4, :latch2], [20, 6] => [:s, 5], [20, 7] => [:s, 5], [20, 8] => [:s, 5], [20, 9] => [:s, 5], [20, 10] => [:n, 3, 3, false, 4] } },
+    }
+    LAMP_SWITCH = { :door190 => 320, :door191 => 324 }
+    LATCH_SWITCH = { :latch1 => 321, :latch2 => 322 }
+    DOCKED = 323
+    ALARMS = 320
+    DXY = { 1 => [0, -1], 2 => [1, 0], 4 => [0, 1], 8 => [-1, 0] }
+    OPP = { 1 => 4, 4 => 1, 2 => 8, 8 => 2 }
+    module_function
+    def rot(m, k)
+      (k % 4).times { m = ((m << 1) & 15) | (m >> 3) }
+      return m
+    end
+    def ev_at(x, y, prefix)
+      return $game_map.events.values.find { |e| e.x == x && e.y == y && e.name.start_with?(prefix) }
+    end
+    def masks(b)
+      out = {}
+      b[:cells].each do |(x, y), k|
+        case k[0]
+        when :s then out[[x, y]] = k[1]
+        when :l then out[[x, y]] = k[1]
+        when :b then out[[x, y]] = k[1] if $game_switches[k[2]]
+        when :n
+          e = k[3] ? ev_at(x, y, "Node") : nil
+          out[[x, y]] = rot(k[1], e ? (k[2] + PrismfallPuzzles.state_of(e)) % k[4] : k[2])
+        end
+      end
+      sx, sy, sm = b[:source]
+      out[[sx, sy]] = sm
+      return out
+    end
+    def flood(b)
+      m = masks(b)
+      sx, sy, _ = b[:source]
+      live = { [sx, sy] => true }
+      q = [[sx, sy]]
+      until q.empty?
+        x, y = q.pop
+        DXY.each do |bit, (dx, dy)|
+          next if m[[x, y]] & bit == 0
+          n = [x + dx, y + dy]
+          next if live[n] || !m[n] || m[n] & OPP[bit] == 0
+          live[n] = true
+          q.push(n)
+        end
+      end
+      return live
+    end
+    # recompute the board; returns the lit lamps.  The alarm wins: nothing latches, nodes snap back, Rotom comes home.
+    def power(mid = $game_map.map_id, quiet = false)
+      b = BOARDS[mid]
+      return [] if !b
+      live = flood(b)
+      lamps = b[:cells].select { |(x, y), k| k[0] == :l && live[[x, y]] }.map { |_p, k| k[2] }
+      if lamps.include?(:alarm)
+        show_live(b, live)
+        alarm!(mid, b) if !quiet
+        return power(mid, true)
+      end
+      LAMP_SWITCH.each { |l, sw| $game_switches[sw] = lamps.include?(l) if b[:cells].any? { |_p, k| k[0] == :l && k[2] == l } }
+      LATCH_SWITCH.each { |l, sw| $game_switches[sw] = true if lamps.include?(l) }
+      show_live(b, live)
+      return lamps
+    end
+    def show_live(b, live)
+      $game_map.events.each_value do |e|
+        next if !e.name.start_with?("Strip ") && !e.name.start_with?("Lock ")
+        PrismfallPuzzles.set_self_switch(e, "A", live[[e.x, e.y]] ? true : false)
+      end
+      $game_map.need_refresh = true
+    end
+    def alarm!(mid, b)
+      $game_screen.start_flash(Color.new(255, 255, 255, 220), 12)
+      pbSEPlay("Thunder1") rescue nil
+      pbWait(0.3) rescue nil
+      $game_variables[ALARMS] += 1 if mid == 191
+      b[:cells].each do |(x, y), k|
+        next if k[0] != :n || !k[3]
+        e = ev_at(x, y, "Node")
+        PrismfallPuzzles.set_state(e.name, 0) if e
+      end
+      $game_switches[DOCKED] = false if mid == 192
+      pbMessage(_INTL("Rotom: CHAT SAYS WRONG WIRE."))
+      pbMessage(_INTL("The flash goes off in your face. Every junction snaps back to where it started."))
+    end
+    def turn(name, n = 4)
+      PrismfallPuzzles.rotate(name, n)
+      pbSEPlay("Battle ball shake") rescue nil
+      power
+    end
+    def on_wire?
+      x, y = $game_player.x, $game_player.y
+      b = BOARDS[$game_map.map_id]
+      return b && b[:cells][[x, y]] && [:s, :l].include?(b[:cells][[x, y]][0])
+    end
+    def socket
+      if $game_switches[DOCKED]
+        if pbConfirmMessage(_INTL("Rotom is humming in the socket. Call it back?"))
+          $game_switches[DOCKED] = false
+          pbSEPlay("PC close") rescue nil
+          power
+        end
+      elsif on_wire?
+        pbMessage(_INTL("Rotom: Bzzt! Not while you're standing on the wire, genius. Step off it first."))
+      elsif pbConfirmMessage(_INTL("A drone-shaped gap in the wire. Dock Rotom here?"))
+        $game_switches[DOCKED] = true
+        pbSEPlay("PC open") rescue nil
+        lamps = power
+        pbMessage(_INTL("Rotom slots into the gap. The wire hums and the gate's latch clacks open.")) if lamps.include?(:latch1) && !lamps.include?(:latch2)
+        pbMessage(_INTL("Power runs through the open gate and all the way across the hall. Somewhere north, a heavy lock clacks open.")) if lamps.include?(:latch2)
+      end
+    end
+    # a live strip: the shock throws you back the way you came
+    def shock
+      $game_screen.start_flash(Color.new(120, 230, 255, 200), 8)
+      pbSEPlay("Paralyze1") rescue nil
+      back = { 2 => 8, 8 => 2, 4 => 6, 6 => 4 }[$game_player.direction]
+      dx, dy = { 2 => [0, 1], 8 => [0, -1], 4 => [-1, 0], 6 => [1, 0] }[back]
+      $game_player.moveto($game_player.x + dx, $game_player.y + dy) if $game_map.passable?($game_player.x + dx, $game_player.y + dy, back)
+      pbMessage(_INTL("Zap! The wire is live."))
+    end
+  end
+  def pfm_g4_power(mid = nil); return PFCircuit.power(mid || $game_map.map_id); end
+  def pfm_g4_turn(name, n = 4); return PFCircuit.turn(name, n);                end
+  def pfm_g4_socket;           return PFCircuit.socket;                          end
+  def pfm_g4_shock;            return PFCircuit.shock;                           end
+  PrismfallPuzzles.room(:g4_190)[:reset][:proc] = proc { PFCircuit.power(190, true) }
+  PrismfallPuzzles.room(:g4_191)[:reset][:proc] = proc { PFCircuit.power(191, true) }
+  PrismfallPuzzles.room(:g4_192)[:reset][:proc] = proc { PFCircuit.power(192, true) }
 end

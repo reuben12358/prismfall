@@ -154,6 +154,26 @@ PATCHES[100] = dict(PATCHES[100], **{'Woman with crate (town)': 'CRATE_WOMAN'})
 PATCHES.update({109: {'Woman with crate': 'CRATE_WOMAN'}, 528: {'Sand-sculptor': 'SCULPTOR'}, 579: {'Old drover': 'DROVER'}})
 
 
+# ---- map builder 15, 2026-11-21: the Chapter 5 Lumen maps (cells on the built 180 / 181 / 185; REQUESTS, Trials owner)
+def _lm(name):
+    """a Lumen kit piece's tile id (its first tile), read from the PF Rejuv stamps"""
+    st = json.load(open(os.path.join(HERE, 'data', 'stamps_rjc.json'))).get(name)
+    return next(st['layers'][z][0][0] for z in range(3) if st['layers'][z][0][0]) if st else None
+EVENTS[180] = EVENTS.get(180, []) + [
+    ev('Fizzbolt machine', (30, 29), 'FIZZBOLT_MACHINE'),
+    ev('Cadence (Concourse)', (73, 39), 'OCTAVE_CADENCE', 'NPC 18', condition='switch(114) && var(125) >= 13 && !quest_done(:ZE_OCTAVE_OFF_BEAT)')]
+EVENTS[181] = EVENTS.get(181, []) + [
+    ev('Cadence', (5, 12), 'OCTAVE_CADENCE', 'NPC 18'),
+    once('Lattice junction 1', (7, 4), 'quest_step(:ZE_OCTAVE_OFF_BEAT) == :junctions', 'LATTICE_JUNCTION', tile=_lm('lm_junction')),
+    once('Lattice junction 2', (21, 16), 'quest_step(:ZE_OCTAVE_OFF_BEAT) == :junctions', 'LATTICE_JUNCTION', tile=_lm('lm_junction')),
+    once('Lattice junction 3', (6, 14), 'quest_step(:ZE_OCTAVE_OFF_BEAT) == :junctions', 'LATTICE_JUNCTION', tile=_lm('lm_junction'))]
+EVENTS[185] = EVENTS.get(185, []) + [
+    ev('Helpdesk Rotom', (15, 10), 'HELPDESK_ROTOM', tile=_lm('lm_drone')),
+    ev('Records desk', (4, 7), 'DESK_RECORDS', 'NPC 14', d='up'),
+    ev('Approvals desk', (6, 7), 'DESK_APPROVALS', 'NPC 22', d='up'),
+    ev('Compliance desk', (19, 7), 'DESK_COMPLIANCE', 'NPC 27', d='up')]
+
+
 def _layers(spec):
     """the spec's own tile layers (raw specs: the .npy; Room interiors: the tiles list); None if not knowable here"""
     if spec.get('raw'):

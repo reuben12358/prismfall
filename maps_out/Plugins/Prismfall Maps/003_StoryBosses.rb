@@ -32,4 +32,35 @@ if defined?(Prismfall::Bosses)
     },
     :on_defeat  => { :message => "{1} folds its legs. The ringing of the nest softens.", :result => :calmed }
   })
+  # map 952
+  Prismfall::Bosses.register(:OVERCHARGED, {
+    :species    => :ELECTIVIRE,
+    :level      => { :CASUAL => 28, :STANDARD => 30, :HARD => 32, :default => 30 },
+    :nickname   => "Overcharged",
+    :moves      => { :CASUAL => [:THUNDERPUNCH, :LOWKICK, :QUICKATTACK, :LEER],
+                     :STANDARD => [:THUNDERPUNCH, :LOWKICK, :FIREPUNCH, :CHARGE],
+                     :HARD => [:WILDCHARGE, :LOWKICK, :FIREPUNCH, :CHARGE],
+                     :default => [:THUNDERPUNCH, :LOWKICK, :FIREPUNCH, :CHARGE] },
+    :bars       => { :CASUAL => 2, :STANDARD => 2, :HARD => 2, :default => 2 },
+    :stat_mults => { :HP => 1.15, :ATTACK => 1.1 },
+    :field      => :NEON_GRID,
+    :intro      => "The vault's Electivire unfolds, crackling white, its eyes empty!",
+    :breaks     => {
+      1 => { :message => "{1} drinks from the cracked Plate!", :stats => { :ATTACK => 1 },
+             :proc => proc { |battle, battler, state|
+               if battle.respond_to?(:pbShowCommands)
+                 c = (battle.pbShowCommands(_INTL("The cracked Plate is spitting light on the dais, an arm's length away. Rook: Don't touch it with your HANDS!"),
+                                            [_INTL("Hold the line."), _INTL("Grab the cracked Plate and run.")], false) rescue 0)
+                 if c == 1
+                   pfm_set(:live_wire, true) rescue nil
+                   battle.decision = 3
+                   next true
+                 end
+               end
+               next false if !battle.respond_to?(:change_field)
+               battle.change_field(:BLEED, "The cracked Plate screams. The vault stops being sure what it's made of!")
+             } }
+    },
+    :on_defeat  => { :message => "{1} crashes down beside the cradle, and the light goes out of it.", :result => :calmed }
+  })
 end

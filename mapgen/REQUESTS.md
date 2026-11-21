@@ -1603,3 +1603,28 @@ glass-quench assets are byte-identical. (3) The glass hook skips its crack effec
 
 **For everyone running the harness:** `run_all.rb` section 4 now also runs `tools/harness/field_checks.rb` (20 checks:
 the glass stages, sound cracks, broken glass, insulation, ricochet; the Frozen Lake thaw; the other audit changes).
+
+## From the trainer designer, round 4 results (2026-11-21)
+Win rates for Gyms 4–18, the rivals, the villains and the Festival bosses: `design/BALANCE.md` §9b (60 fights a cell,
+typical and prepared player teams, three modes); every set change and the knockouts behind it:
+`design/TRAINER_FIELD_PLAYBOOK.md` §8b. No field file was touched.
+**For the field owner / the field AI (`012_FieldEffects_TrainerPlays.rb`):**
+1. **Dragon's Den (Gym 18) is the late game's wall in every mode**, after Sigrun lost her Scarf Outrage, two of three
+   Dragon Dances, Clangorous Soul, the Life Orb and Standard Multiscale: prepared Standard teams win 50%, typical ones
+   2%, typical Casual teams 70%. Dragon x1.5 that becomes **x2 once the Den wakes** (four Dragon attacks; 17 of 24
+   logged runs woke it) is x3 with STAB on every neutral target. Proposal: awakened Dragon x1.75, or one awakening a
+   battle, so the Den stays the hardest gym without every Dragon Claw two-shotting a team at the cap.
+2. **Odessa's transition play never fires:** in 24 logged Gym 11 runs Noivern never used Sunny Day, so the
+   Stormfront never tore open into the Rainbow (the playbook's play; the WANTS hook was meant to stop the AI treating
+   the failing Sunny Day as a dead move). Worth a look at the hook's score for it.
+3. **Stormfront: Hurricane counts twice** (Flying x1.2 and the wind list x1.2 = x1.44, and it never misses); five
+   Hurricanes were 117 of 144 knockouts before round 4 moved three of them to Air Slash. Proposal: the wind bonus for
+   non-Flying wind moves only, or Flying x1.2 not stacking with it.
+4. **Corrosive Mire: Venoshock is x2 against every grounded target on top of Poison x1.5** (x3 before STAB). Fine if
+   it's meant as Ward's one signature move (Corvin's lead Amoonguss lost it).
+5. Your Mirror Glass WANTS suggestion (+8 Isenmar / −8 Ashkaar on `[:GLASS_DUNES, 2]`) is noted; the TrainerPlays file
+   sits in the field plugin, which the trainer designer was asked not to edit this round, so it waits for its owner.
+**Open trainer requests not done in round 4 (next trainer pass):** the Ch5 Gala tag (`HOLLOW_THISTLE` v1 +
+`HOLLOW_GRUNT_M` "Pallbearer" with `RIVAL_JUNO` v13 as partner; map 186 already references all three), the Ch5–7
+route trainers (580, 581, 592–595), the Directorate "Sergeant" / "Officer" fights, the Ebbmouth grunts and Teo's
+new LoseText, and the Ch7 J2 / Wick map events against the round-4 teams.

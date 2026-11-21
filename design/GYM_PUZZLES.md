@@ -44,7 +44,7 @@ Optional Mastery rooms may sit up to **two points above** their gym; they never 
 | 1 | Dorian · Saltmere (150, 154) | Normal · Grand Stage | **1** | 2 min | Walk up the aisle past three actors, pull one curtain rope, battle | The whole revolving stage → **D9 Playhouse Backstage** (optional, 4/10) |
 | 2 | Tamsin · Briarwick (130, 131) | Bug · Silkwood (doubles) | **3** | 6–10 min | (Rev 19) Web trampolines in the elder's hollow: taut webs throw you, sticky webs hold you, two Joltik flip the webs on their strands | Spools + brass Meridian wire + Granny's Knot → **Upper Lofts** (optional, 4/10 and 3/10); the linked-heddle loom idea is parked for a later dungeon |
 | 3 | Marisol · Ebbmouth | Water · Water Surface | **4** | 10–15 min | Practice lock, then ONE basin: level wheel + drifting raft (≤ 8 actions) | Tide bell × lock gate combination → Overflow Culvert Mastery (6/10) |
-| 4 | Rook · Lumen City | Electric · Neon Grid | **5** | 15 min | Rotate conduits, tees and the alarm lamp | Drone-as-wire + latches → Live Wire Hall stays, but the latch board is the Edit Bay Mastery |
+| 4 | Rook · Lumen City | Electric · Neon Grid | **5** | 15 min | Rotate conduits, tees and the alarm lamp (built, trimmed to 12 moves: map builder 15) | Drone-as-wire + latches → Live Wire Hall stays, but the latch board is the Edit Bay Mastery |
 | 5 | Sahar · Duneholt | Ground · Desert | **5** | 15–20 min | Sun-mirrors decide crust or sink; one drop is the way across | Two-floor loop of drops → Mural Gallery Mastery |
 | 6 | Corvin · Mirefen | Poison · Corrosive Mire | **6** | 20 min | Measures with unmarked flasks (3 + 5 make 4), carried across the filter steps | — |
 | 7 | Brann · Cindervault | Fire · Volcanic | **6** | 20 min | Pour, aim, quench; what you don't quench drains below | — |
@@ -743,6 +743,25 @@ Before the arena door, the **Plate cradle** (action): "The Zap Plate's cradle is
 Meridian cable runs past it into the floor, warm to the touch." The arena door needs one splice node turned onto the
 Meridian main (1 click). The drone films it, and Rook's voice comes over the PA, not his stream voice: "Rotom. Cut the feed. ...That bit's not for chat, buddy. Cut it." (Creator, 2026-11-21: "Turn it off. Rotom. Turn it *off*." stays in the Lowlight after the Shatter, per 03_CAST; script `story/24_SCRIPT_CH5.md`.)
 Rook, single battle. Badge 4 (the Arclight Badge) + TM43 Volt Switch + TM70 Flash.
+
+### The trim (map builder 15, built) — supersedes the 16-action design above where they differ
+Rating 5 for the gym: at most 12 required moves and 1 024 states a room. Model and proofs: `mapgen/puzzles/circuit.py`;
+maps `mapgen/layouts/circuit_gym.py`. One rule throughout: power floods through every pair of facing ports.
+- **190 Switchroom** (21x15): generator (2,9); I nodes (5,9) / (9,9) / (13,9) start N-S / E-W / N-S; lamp (17,9);
+  the door (10,5) opens while S320 is on. 2 moves, 8 states.
+- **191 Breadboard Hall** (27x25): nodes at x 6/11/16/21, y 10/15/20; generator feed into (6,15); door lamp = the door
+  (21,5) above (21,10); the camera ALARM (26,15) east of (21,15). Four nodes turn: the generator tee (6,15) T start 1,
+  (11,10) I start 0, (21,10) L start 2, (16,15) I start 0; the rest are soldered. Door: 3 clicks (tee +1, (11,10) +1,
+  (21,10) +1). Traps (proved): one click on (16,15) runs the middle row into the flash; the top row with the last corner
+  unturned feeds the flash through (21,15). The alarm returns every node to its start (V320 counts). 45 states.
+- **192 Live Wire Hall** (27x28): west circuit G (2,10) -> a (4,10) -> b (8,10) -> the drone socket g1 (8,16) -> the
+  gate latch L1 (13,16) in the grille fence; east circuit fed THROUGH L1 -> tee c (17,16, T start 0) -> d (17,10) -> e
+  (20,10) -> the Core door latch L2 (20,5). c's E port faces the alarm (18,16). Live strips and live open locks shock
+  (pushed back). The alarm trips the breakers: nothing latches, c snaps back, Rotom comes home. Solution: dock, recall,
+  cross, c +2, back, dock (L2 latches), recall, walk through: 6 moves, 12 states; nothing soft-locks.
+- **193 the Core**: the cold cradle (the script's lines), the splice node (S422) opens the arena barrier. 1 move.
+- **Total 2 + 3 + 6 + 1 = 12** = rating 5. Ids: S320-324 as the State table, S422 the splice; the drone is a socket
+  state (S323), not a follower. The Edit Bay Mastery (950) is not built yet.
 
 ### 950 Edit Bay — MASTERY (optional; via 191's side door; overflow ID 950 because 194–199 belong to Lumen districts)
 A 3×3 board at x = 5, 9, 13; y = 4, 8, 12. Generator west of node (0,1). **Goal: every node lit** ("B-roll needs every

@@ -41,6 +41,12 @@ module PrismfallMaps
     172 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (Mid Water)
     173 => [-6, -8, 4, 14],   # Tidelock Gym - Basins (High Water)
     174 => [-6, -8, 4, 14],   # Tidelock Gym - Warden's Pool
+    180 => [6, 4, 0, 0],   # Lumen City - The Concourse
+    181 => [-24, -28, -8, 30],   # Lumen City - The Lowlight
+    190 => [-10, -14, 6, 20],   # Circuit Gym - Switchroom
+    191 => [-10, -14, 6, 20],   # Circuit Gym - Breadboard Hall
+    192 => [-10, -14, 6, 20],   # Circuit Gym - Live Wire Hall
+    193 => [-10, -14, 6, 20],   # Circuit Gym - Core
     280 => [-6, 10, -12, 0],   # Verdance - Market Terraces
     285 => [-6, 10, -12, 0],   # Briar Hall - Upper Court
     286 => [8, 4, -10, 0],   # Briar Hall - Great Hall
@@ -78,6 +84,7 @@ module PrismfallMaps
     577 => [-6, -2, 10, 10],   # Frostwick Pass
     578 => [-12, -8, 8, 16],   # Rimewood Path
     579 => [-12, -8, 8, 16],   # The Wolfsrime
+    608 => [-40, -50, 10, 60],   # The Lowlight (Shattered)
     920 => [10, 6, 14, 10],   # The Rimed Sands
     924 => [18, 4, -10, 10],   # Ashkaar Siege Camp
     925 => [6, -4, 10, 30],   # The Steamline
@@ -85,6 +92,8 @@ module PrismfallMaps
     928 => [16, 0, -10, 0],   # Ashkaar Siege Camp - Command Pavilion
     929 => [16, 8, 0, 10],   # The Observers' Mesa
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
+    951 => [-20, -24, -10, 40],   # Meridian Spire - Service Lifts
+    952 => [-10, -20, 10, 30],   # Meridian Spire - Plate Vault
   }
 
   # per-map fog picture (spec key `fog: {name, opacity, blend, zoom, sx, sy, hue}`; files in Graphics/Fogs/)
@@ -99,6 +108,7 @@ module PrismfallMaps
     167 => ["prismfall_seamist", 0, 40, 0, 100, 1, 0],   # Ebbmouth - Mill Quay
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood
+    525 => ["prismfall_spores", 0, 70, 1, 100, 1, -1],   # Gossamer Deepwood
     541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
     544 => ["prismfall_cave", 0, 36, 1, 100, 1, 0],   # Brinecut Mine 1F
     545 => ["prismfall_cave", 0, 44, 1, 100, 1, 0],   # Brinecut Mine B1F

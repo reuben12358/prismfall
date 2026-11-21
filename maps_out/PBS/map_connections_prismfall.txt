@@ -14,6 +14,8 @@
 160,S,22,561,N,12
 # Ebbmouth (160) - Ebbmouth - Mill Quay (167)
 160,N,0,167,S,0
+# Lumen City - The Concourse (180) - Lumen City - The Lowlight (181)
+180,E,52,181,W,4
 # The Ferrymen's Mile (520) - Windfall Row (521)
 520,N,30,521,S,58
 # The Ferrymen's Mile (520) - Lacecliff Walk (527)

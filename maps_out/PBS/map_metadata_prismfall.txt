@@ -244,6 +244,63 @@ MapPosition = 0,3,7
 Name = Tidelock Gym
 MapPosition = 0,3,7
 #-------------------------------
+[180]   # Lumen City - The Concourse
+Name = Lumen City
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
+[181]   # Lumen City - The Lowlight
+Name = The Lowlight
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
+[182]   # Lumen Pokémon Center
+Name = Lumen Pokémon Center
+HealingSpot = 180,25,46
+MapPosition = 0,16,16
+#-------------------------------
+[183]   # Lumen Arcade 1F
+Name = Lumen Arcade 1F
+MapPosition = 0,16,16
+#-------------------------------
+[185]   # Meridian Spire - Lobby
+Name = Meridian Spire - Lobby
+MapPosition = 0,16,16
+#-------------------------------
+[186]   # Meridian Spire - Gala Hall
+Name = Meridian Spire - Gala Hall
+MapPosition = 0,16,16
+#-------------------------------
+[187]   # Glide Cycles
+Name = Glide Cycles
+MapPosition = 0,16,16
+#-------------------------------
+[188]   # Lumen Fossil Lab
+Name = Lumen Fossil Lab
+MapPosition = 0,16,16
+#-------------------------------
+[189]   # Lumen Apartment
+Name = Lumen Apartment
+MapPosition = 0,16,16
+#-------------------------------
+[190]   # Circuit Gym - Switchroom
+Name = Circuit Gym
+MapPosition = 0,16,16
+#-------------------------------
+[191]   # Circuit Gym - Breadboard Hall
+Name = Circuit Gym
+MapPosition = 0,16,16
+#-------------------------------
+[192]   # Circuit Gym - Live Wire Hall
+Name = Circuit Gym
+MapPosition = 0,16,16
+#-------------------------------
+[193]   # Circuit Gym - Core
+Name = Circuit Gym
+MapPosition = 0,16,16
+#-------------------------------
 [280]   # Verdance - Market Terraces
 Name = Verdance
 Outdoor = true
@@ -490,6 +547,16 @@ BattleBack = snow
 Weather = Snow,10
 MapPosition = 0,7,11
 #-------------------------------
+[582]   # Lumen West Gate
+Name = Lumen West Gate
+MapPosition = 0,14,14
+#-------------------------------
+[608]   # The Lowlight (Shattered)
+Name = The Lowlight
+Outdoor = true
+ShowArea = true
+MapPosition = 0,16,16
+#-------------------------------
 [920]   # The Rimed Sands
 Name = The Rimed Sands
 Outdoor = true
@@ -536,6 +603,14 @@ Outdoor = true
 ShowArea = true
 BattleBack = field
 MapPosition = 0,14,3
+#-------------------------------
+[951]   # Meridian Spire - Service Lifts
+Name = Meridian Spire - Service Lifts
+MapPosition = 0,16,16
+#-------------------------------
+[952]   # Meridian Spire - Plate Vault
+Name = Meridian Spire - Plate Vault
+MapPosition = 0,16,16
 #-------------------------------
 [990]   # Prismfall Test Arena
 Name = Test Arena

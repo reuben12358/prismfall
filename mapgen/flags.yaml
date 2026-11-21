@@ -23,6 +23,8 @@ variables:
   D4_CART: 516        # Brinecut Mine (map builder 13): where the cart stands (0 depot, 1 A, 2 B ladder gallery, 3 C)
   D6_TIDE_STEPS: 526  # Gullcry Caves: steps since the tide turned (0-23; pfm_tide_tick)
   D5_PORTRAIT: 521    # Thistledown gallery (map builder 14): portraits set in curtain-call order (0-4)
+  G4_ALARMS: 320      # Circuit Gym (map builder 15, the trimmed Gym 4): camera-flash alarms in the Breadboard Hall (hint tiers)
+  LUMEN_BOXES: 321    # the Lowlight blackout (181): junction boxes done, bits 1-4 (pfm_lumen_box)
 switches:
   WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
   WAR_SIDE_ISE: 606   # ... == :back_isenmar
@@ -51,6 +53,14 @@ switches:
   D5_TRAP_2: 522      # ... trapdoor 2
   D5_GALLERY: 523     # the gallery's portraits are set: its chairs slump, the dining-room door unlocks
   D5_HATCH: 524       # the attic ladder is down
+  G4_190_DOOR: 320    # Circuit Gym (map builder 15; puzzles/circuit.py): the Switchroom's door lamp lit (pfm_g4_power)
+  G4_LATCH_GATE: 321  # Live Wire Hall: the gate's latch-lock open for good
+  G4_LATCH_CORE: 322  # Live Wire Hall: the Core door's latch-lock open for good
+  G4_DRONE_DOCKED: 323  # Live Wire Hall: Rook's Rotom drone docked in the socket
+  G4_191_DOOR: 324    # the Breadboard Hall's door lamp lit (live)
+  G4_SPLICE: 422      # the Core: the splice node turned onto the Meridian main (the arena door)
+  LUMEN_BOXES_DONE: 423  # the Lowlight blackout: all four junction boxes done
+  LUMEN_BLACKOUT: 424 # the Lowlight blackout is on (Rook's floodlights pulled the Rotom out of the feed)
 # Dungeons 501-600, 5 per dungeon (DUNGEON_PUZZLES.md section 0)
   D2_COCOON1: 506     # Deepwood lantern cocoons lit
   D2_COCOON2: 507

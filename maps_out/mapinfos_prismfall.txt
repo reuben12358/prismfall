@@ -48,6 +48,19 @@
 172	170	Tidelock Gym - Basins (Mid Water)
 173	170	Tidelock Gym - Basins (High Water)
 174	170	Tidelock Gym - Warden's Pool
+180	0	Lumen City - The Concourse
+181	180	Lumen City - The Lowlight
+182	180	Lumen Pokémon Center
+183	180	Lumen Arcade 1F
+185	180	Meridian Spire - Lobby
+186	185	Meridian Spire - Gala Hall
+187	180	Glide Cycles
+188	180	Lumen Fossil Lab
+189	180	Lumen Apartment
+190	180	Circuit Gym - Switchroom
+191	190	Circuit Gym - Breadboard Hall
+192	190	Circuit Gym - Live Wire Hall
+193	190	Circuit Gym - Core
 280	0	Verdance - Market Terraces
 281	280	Verdance Pokémon Center
 282	280	Verdance Mart
@@ -90,6 +103,8 @@
 577	0	Frostwick Pass
 578	0	Rimewood Path
 579	0	The Wolfsrime
+582	180	Lumen West Gate
+608	180	The Lowlight (Shattered)
 920	0	The Rimed Sands
 924	0	Ashkaar Siege Camp
 925	0	The Steamline
@@ -97,4 +112,6 @@
 928	924	Ashkaar Siege Camp - Command Pavilion
 929	0	The Observers' Mesa
 930	0	The Bone-Carters' Camp
+951	185	Meridian Spire - Service Lifts
+952	185	Meridian Spire - Plate Vault
 990	0	Prismfall Test Arena
