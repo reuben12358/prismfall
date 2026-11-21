@@ -1,0 +1,219 @@
+# The Wolfsrime (579): the pre-map-builder-12 Rimewood Path layout, restored by map builder 14.
+# WRITTEN BY layouts/routes_early.py (build_579) - edit that script.
+id: 579
+name: The Wolfsrime
+parent: 0
+bgm: Natural Park
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: snow
+  Weather: [Snow, 10]
+  MapPosition: [0, 7, 11]
+rubric: true
+yards_ok: true
+biome: forest
+field: SILKWOOD
+tone: [-12, -8, 8, 16]
+connections: []
+walk_from:
+- [42, 86]
+- [38, 1]
+raw: data/raw/579.npy
+tileset: 52
+events:
+- type: event
+  name: Snow bank 0
+  at: [40, 87]
+  pages:
+  - trigger: touch
+    commands:
+    - if: '!pfm?(:wolfsrime_bank)'
+      then:
+      - The drove road ends at a steep bank of packed snow. It's a long way down, and nobody climbs back up it.
+      - choices: [Slide down., Stay up here.]
+        cancel: 2
+        branches:
+        - - {script: 'pfm_set(:wolfsrime_bank)'}
+          - {se: Player jump}
+          - transfer: {map: 577, x: 16, y: 4, dir: down}
+        - - move:
+              who: -1
+              route: [up]
+      else:
+      - {se: Player jump}
+      - transfer: {map: 577, x: 16, y: 4, dir: down}
+- type: event
+  name: Snow bank 1
+  at: [41, 87]
+  pages:
+  - trigger: touch
+    commands:
+    - if: '!pfm?(:wolfsrime_bank)'
+      then:
+      - The drove road ends at a steep bank of packed snow. It's a long way down, and nobody climbs back up it.
+      - choices: [Slide down., Stay up here.]
+        cancel: 2
+        branches:
+        - - {script: 'pfm_set(:wolfsrime_bank)'}
+          - {se: Player jump}
+          - transfer: {map: 577, x: 17, y: 4, dir: down}
+        - - move:
+              who: -1
+              route: [up]
+      else:
+      - {se: Player jump}
+      - transfer: {map: 577, x: 17, y: 4, dir: down}
+- type: event
+  name: Snow bank 2
+  at: [42, 87]
+  pages:
+  - trigger: touch
+    commands:
+    - if: '!pfm?(:wolfsrime_bank)'
+      then:
+      - The drove road ends at a steep bank of packed snow. It's a long way down, and nobody climbs back up it.
+      - choices: [Slide down., Stay up here.]
+        cancel: 2
+        branches:
+        - - {script: 'pfm_set(:wolfsrime_bank)'}
+          - {se: Player jump}
+          - transfer: {map: 577, x: 18, y: 4, dir: down}
+        - - move:
+              who: -1
+              route: [up]
+      else:
+      - {se: Player jump}
+      - transfer: {map: 577, x: 18, y: 4, dir: down}
+- type: event
+  name: Snow bank 3
+  at: [43, 87]
+  pages:
+  - trigger: touch
+    commands:
+    - if: '!pfm?(:wolfsrime_bank)'
+      then:
+      - The drove road ends at a steep bank of packed snow. It's a long way down, and nobody climbs back up it.
+      - choices: [Slide down., Stay up here.]
+        cancel: 2
+        branches:
+        - - {script: 'pfm_set(:wolfsrime_bank)'}
+          - {se: Player jump}
+          - transfer: {map: 577, x: 19, y: 4, dir: down}
+        - - move:
+              who: -1
+              route: [up]
+      else:
+      - {se: Player jump}
+      - transfer: {map: 577, x: 19, y: 4, dir: down}
+- type: warp
+  name: To the Rimewood 36
+  at: [36, 0]
+  to: {map: 562, x: 46, y: 26, dir: left}
+  se: null
+- type: warp
+  name: To the Rimewood 37
+  at: [37, 0]
+  to: {map: 562, x: 46, y: 26, dir: left}
+  se: null
+- type: warp
+  name: To the Rimewood 38
+  at: [38, 0]
+  to: {map: 562, x: 46, y: 26, dir: left}
+  se: null
+- type: warp
+  name: To the Rimewood 39
+  at: [39, 0]
+  to: {map: 562, x: 46, y: 26, dir: left}
+  se: null
+- type: sign
+  name: Road sign
+  at: [40, 6]
+  text: THE WOLFSRIME -- the old drove road, unkept since the North Gate road was blazed. ^ The Rimewood. v Frostwick Pass, by the snow bank (no way back
+    up). No blazes. Mind the wolves.
+  post: false
+- type: event
+  name: The hanging bell
+  at: [42, 34]
+  pages:
+  - trigger: action
+    commands:
+    - A drover's bell hangs from a birch bough, rimed white. You give it a tap.
+    - {se: Voltorb Flip tile}
+    - It rings once, small and clear. Somewhere off in the trees, something answers.
+- type: event
+  name: Cold kiln
+  at: [20, 44]
+  pages:
+  - trigger: action
+    commands: ['An old charcoal kiln, cold for years. A Snom has made itself a nest in the flue and is not leaving.']
+- type: event
+  name: Old drover
+  at: [22, 47]
+  pages:
+  - graphic: {sprite: NPC 03, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Old drover: My da drove sheep down this road to the Pass every autumn. Then they blazed the North Gate road and this one went to the wolves.',
+      'Old drover: The bank at the bottom''s the quick way to the Pass. Quick down, mind. You''ll not get back up it.']
+- type: event
+  name: Drovers' bothy
+  at: [60, 74]
+  pages:
+  - trigger: action
+    commands:
+    - The drovers' bothy. Someone has left kindling, dry, and a pot of something that was soup.
+    - You rest by the fire a while.
+    - {heal: true}
+- type: event
+  name: Old wolf trap
+  at: [56, 58]
+  pages:
+  - trigger: action
+    commands: ['An old wolf trap, rusted open. Something chewed through the chain a long time ago.']
+- type: event
+  name: Birch fork
+  at: [31, 67]
+  pages:
+  - trigger: action
+    commands: [A wolf's skull wedged high in a birch fork. Someone has put a Pecha Berry in its mouth. It looks almost cheerful.]
+- type: event
+  name: Drover's grandson
+  at: [46, 59]
+  pages:
+  - graphic: {sprite: NPC 25, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Boy: Grandda says there''s a den off the road where the wolves used to sleep. There''s a scratch on a birch where you leave the path. A
+        big one.']
+- type: event
+  name: Clawed birch
+  at: [46, 28]
+  pages:
+  - trigger: action
+    commands: ['Four long claw-scratches on a birch, old and healed over. They point off the road, into the trees.']
+- type: event
+  name: The old den
+  at: [62, 18]
+  pages:
+  - trigger: action
+    commands: ['(A hollow under a fallen giant, lined with old bones and older fur. Nothing has slept here for years except, apparently, mushrooms.)']
+- type: item
+  at: [60, 16]
+  item: SNOWBALL
+- type: item
+  at: [18, 48]
+  item: ETHER
+- type: item
+  at: [66, 72]
+  item: SUPERPOTION
+- type: item
+  at: [28, 24]
+  item: BIGMUSHROOM
+  hidden: true
+  name: HiddenItem (birch hollow)
+- type: item
+  at: [64, 20]
+  item: TINYMUSHROOM
+  hidden: true
+  name: HiddenItem (the den)

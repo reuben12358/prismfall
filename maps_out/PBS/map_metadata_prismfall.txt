@@ -481,6 +481,14 @@ BattleBack = snow
 Weather = Snow,10
 MapPosition = 0,6,11
 #-------------------------------
+[579]   # The Wolfsrime
+Name = The Wolfsrime
+Outdoor = true
+ShowArea = true
+BattleBack = snow
+Weather = Snow,10
+MapPosition = 0,7,11
+#-------------------------------
 [920]   # The Rimed Sands
 Name = The Rimed Sands
 Outdoor = true

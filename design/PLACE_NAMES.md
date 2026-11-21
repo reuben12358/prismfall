@@ -29,7 +29,7 @@ has one road name (the Strand Road, the Hoar Road) and every map along it has it
 |---|---|---|---|
 | 1 | The Strand Road | Ferrow's Landing -> Saltmere | The Ferrymen's Mile (520), Windfall Row (521) [branch], Lacecliff Walk (527), Marram Down (528) |
 | 2 | The Weavers' Road | Saltmere -> Briarwick | The Grey Saltings (541), The Dyers' Ford (552), Thistledown Lea (540), Gossamer Wood (524) |
-| 3 | The Hoar Road | Briarwick -> Ebbmouth | Spinners' Rise (566), Frostwick Pass (577), Rimewood Path (578), The Rimewood (562), Gullcry Cliffs (561), Frostflat Causeway (560) [side] |
+| 3 | The Hoar Road | Briarwick -> Ebbmouth | Spinners' Rise (566), Frostwick Pass (577), Rimewood Path (578), The Rimewood (562), Gullcry Cliffs (561), Frostflat Causeway (560) [side], The Wolfsrime (579) [side] |
 | 4 | The Lock Road | Ebbmouth -> Lumen City | The Reedholms (580), The Icecutters' Haul (592), The Icefall Locks (581), Coppice Ride (595), Wallshadow Row (594), The Arc-Lamp Mile (593) |
 | 5 | The Brass Road | Lumen City -> Duneholt | The Meridian Mainline (612), Candle Down (602), The Highwold (603), The Brass Dunes (600), The Rib Road (601), Sunbleach Flats (613) |
 | 6 | The Leach Road | Duneholt -> Mirefen | The Marrow Road (620), The Kneeling Stones (632), The Leach Canyons (621), Wormwood Lea (634), The Gutterfall (633) |
@@ -340,6 +340,7 @@ moved onto land), whose story lines are rewritten by hand (design/GEOGRAPHY_V2_S
 | 576 | Halvard's Smokehouse | Halvard's Smokehouse | kept | Borderland (Elowen/Isenmar) | 6, 12 |  |
 | 577 | - | Frostwick Pass | new | Borderland (Elowen/Isenmar) | 8, 12 | The low pass over the hoar downs into Frostwick. Both kingdoms claim it and neither keeps the toll hut. |
 | 578 | - | Rimewood Path | new | Borderland (Elowen/Isenmar) | 6, 11 | The trappers' blazed path into the frozen forest: a red axe-mark every twenty paces, and you do not leave them. |
+| 579 | - | The Wolfsrime | new | Borderland (Elowen/Isenmar) | 7, 11 | The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate road. (The first Rimewood Path layout, restored.) |
 | 580 | Route 7 | The Reedholms | renamed | Isenmar | 4, 7 | The islets ('holms') of the Ebb delta, joined by boardwalks that are re-laid every spring. |
 | 581 | Route 8 - Icefall Locks | The Icefall Locks | renamed | Borderland (Isenmar/Elowen) | 8, 7 | Where the Ebb falls off the Crownland downs into Isenmar's ice: frozen falls cut into steps and locks by Zenith's engineers, to feed the Lattice. |
 | 582 | Lumen South Gate | Lumen West Gate | replaced | Zenith | 14, 14 | Lumen's gate at the end of the Arc-Lamp Mile, facing the Crownlands. |

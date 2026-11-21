@@ -685,6 +685,8 @@ def rimewood(prev=None):
     dress_ice(m, 0.25, seed=562); reed_beds(m, 45, seed=562); drifts(m, 0.08, seed=562)
     m.seal_against([{'dir': 'N', 'offset': 12, 'to': 561, 'to_offset': 10}, {'dir': 'S', 'offset': 26, 'to': 578, 'to_offset': 36}], spans=[('S', 26, 4)],
                    keep=[tuple(e['at']) for e in m.events if e.get('type') == 'warp'])   # map builder 9
+    m.events.append({'type': 'warp', 'name': 'To the Wolfsrime', 'at': [47, 26], 'to': {'map': 579, 'x': 37, 'y': 1, 'dir': 'down'},
+                     'se': None})                                 # map builder 14: the old drove road (579), added last (no RNG shift)
     if prev: m.preview(prev, 0.5)
     m.write(562, head(562, 'The Rimewood', biome='forest', bgm='Natural Park',
                       metadata={'Outdoor': True, 'ShowArea': True, 'MapPosition': [0, 7, 20], 'BattleBack': 'snow', 'Weather': ['Snow', 30]},

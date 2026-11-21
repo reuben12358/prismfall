@@ -1470,6 +1470,8 @@ def build_577():
              tone=[-6, -2, 10, 10])
     h['metadata']['BattleBack'] = 'snow'
     h['gates'] = [{'name': 'Icium Z gully (Rock Smash)', 'from': [[31, 94]], 'sealed': [[69, 57], [68, 56], [70, 58]]}]   # map builder 12
+    r.m.events.append(obj('Snow bank', (17, 3), ['A steep bank of packed snow, scored with sled-tracks, climbs into the giant trees: the bottom of the old drove road (the Wolfsrime).',
+                                             'You could slide down it from the top. Nobody climbs up it.']))   # map builder 14, added last (no RNG shift)
     r.write(h, '577_frostwick_pass.yaml', '# Frostwick Pass (577). WRITTEN BY layouts/routes_craft.py - edit that script.\n', '/tmp/rt/577.png' if PREV else None)
 
 

@@ -411,6 +411,8 @@ North out of the Gossamer, over the hoar downs into borderland A (the Rimewood) 
 - **Fill:** the climb through hoar-crusted downs; the wind gap: gust tiles that push you back unless you move between gusts; the empty toll hut with two ledgers, one per kingdom, that disagree; a frozen tarn with an ice-fishing hole (Old Rod); avalanche fences and a snow-buried signpost in two scripts; shepherd's bothy (rest and a hot drink); trappers' drying racks; a row of snowmen built by Frostwick children; one is a Snorunt; 4 trainers: a huscarl, a forester, two sledgers; Road Stone III-b.
 - **Secret:** Behind the frozen waterfall at the tarn is the Hollow of the Handfast: love-carvings of a forester and a huscarl and a Soothe Bell. It feeds Frostwick's sidequest 'The Two Hearths'.
 
+**The Wolfsrime (579)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, 80x88 (map builder 14, user 2026-11-21): the first Rimewood Path layout, restored as the old drove road from the Rimewood's east edge (a warp at 562 (47,26)) down to Frostwick Pass, whose S end is a snow bank you slide down into the Pass (577 (16-19,4)) and never climb: a one-way shortcut back, so the way north is still Frostwick and Rimewood Path. Drovers' bothy (heal), the old den off the road (hidden path).
+
 **Rimewood Path (578)**, Borderland (Elowen/Isenmar), `:SILKWOOD`, target **80x88** (new map). 
 *Name:* The trappers' blazed path into the frozen forest: a red axe-mark every twenty paces, and you do not leave them.
 - **Landmark:** The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late.

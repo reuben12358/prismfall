@@ -1239,12 +1239,89 @@ def build_578():
     r.write(h, '578_rimewood_path.yaml', '# Rimewood Path (578). WRITTEN BY layouts/routes_early.py - edit that script.\n', '/tmp/rt/578.png' if PREV else None)
 
 
+# map builder 14 (job 2b, user 2026-11-21: "I DID KINDA LIKE rimewood path before ... could it still exist like a
+# connecting between 2 places? it looks pretty"): the pre-map-builder-12 Rimewood Path, restored as its own road.
+WOLFSRIME_TO_577 = (16, 4)            # where the snow bank drops you on Frostwick Pass (577): the nook under the giant trees
+WOLFSRIME_FROM_562 = (47, 26)         # the Rimewood's (562) east edge, below the glade sapling's path
+
+
+def build_579():
+    """The Wolfsrime (579, 80x88, SILKWOOD under snow): the old drove road from the Rimewood's east edge (N end, a warp)
+    down to Frostwick Pass (S end: a steep snow bank you can slide down but never climb, so the road is a one-way
+    shortcut back toward the Pass and Briarwick, and Frostwick and the Rimewood Path stay the way north).  The layout is
+    build_578's exactly as it stood before map builder 12 (same seed, same plan); only the events are its own."""
+    W, H = 80, 88
+    r = Route(578, W, H, 'snow', base='T', kit='shs')          # seed 578: the old look, tile for tile
+    m = r.m
+    road = [(42, 87), (44, 76), (36, 64), (40, 52), (50, 42), (44, 30), (38, 18), (38, 8), (38, 0)]
+    r.road(road, w=3.0, open_=(3, 8))
+    r.exit('S', 40, 4); r.exit('N', 36, 4)
+    for x in range(W):                                                                 # the frozen brook, west to east
+        c = 58 + 2 * (RK.vnoise(x, 0, 578, 12.0) - 0.5) * 2
+        for y in range(int(c - 1), int(c + 2)):
+            if m.cls[y, x] in 'T.t': m.cls[y, x] = 'p'
+    r.clearing(20, 46, 7, 5); r.lane([(40, 50), (24, 46)], w=2.0, open_=(1, 2))     # the drovers' old camp
+    r.clearing(60, 72, 6, 4); r.lane([(44, 74), (58, 72)], w=2.0, open_=(1, 2))     # the bothy
+    r.clearing(62, 20, 6, 5); r.lane([(44, 28), (52, 24), (58, 22)], w=1.6, open_=(1, 2))   # the old den (hidden path)
+    r.clearing(28, 26, 5, 3)
+    r.grass(thr=0.58, scale=5.0)
+    r.finish_plan(border=0)
+    import craftkit as CK
+    CK.woods(r, CK.SNOWWOOD, scale=9.0)
+    r.mid = 579
+    tx, ty = WOLFSRIME_TO_577
+    for i, x in enumerate(range(40, 44)):                    # the S end: the snow bank down to Frostwick Pass (one way)
+        r.add({'type': 'event', 'name': 'Snow bank %d' % i, 'at': [x, 87], 'fixed': True, 'pages': [{'trigger': 'touch', 'commands': [
+            {'if': '!pfm?(:wolfsrime_bank)', 'then': ["The drove road ends at a steep bank of packed snow. It's a long way down, and nobody climbs back up it.",
+                                                      {'choices': ['Slide down.', 'Stay up here.'], 'cancel': 2, 'branches': [
+                                                          [{'script': 'pfm_set(:wolfsrime_bank)'}, {'se': 'Player jump'}, {'transfer': {'map': 577, 'x': tx + i, 'y': ty, 'dir': 'down'}}],
+                                                          [{'move': {'who': -1, 'route': ['up']}}]]}],
+             'else': [{'se': 'Player jump'}, {'transfer': {'map': 577, 'x': tx + i, 'y': ty, 'dir': 'down'}}]}]}]})
+    fx, fy = WOLFSRIME_FROM_562
+    for x in range(36, 40):                                  # the N end: back to the Rimewood's east edge
+        r.add({'type': 'warp', 'name': 'To the Rimewood %d' % x, 'at': [x, 0], 'to': {'map': 562, 'x': fx - 1, 'y': fy, 'dir': 'left'}, 'se': None})
+    r.add(sign((40, 6), 'Road sign', 'THE WOLFSRIME -- the old drove road, unkept since the North Gate road was blazed. '
+                                     '^ The Rimewood. v Frostwick Pass, by the snow bank (no way back up). No blazes. Mind the wolves.'),
+          obj('The hanging bell', (42, 34), ["A drover's bell hangs from a birch bough, rimed white. You give it a tap.",
+                                             {'se': 'Voltorb Flip tile'}, "It rings once, small and clear. Somewhere off in the trees, something answers."]),
+          obj('Cold kiln', (20, 44), ["An old charcoal kiln, cold for years. A Snom has made itself a nest in the flue and is not leaving."]),
+          talk('Old drover', (22, 47), 'NPC 03', ["Old drover: My da drove sheep down this road to the Pass every autumn. Then they blazed the North Gate road and this one went to the wolves.",
+                                                   "Old drover: The bank at the bottom's the quick way to the Pass. Quick down, mind. You'll not get back up it."]),
+          obj('Drovers\' bothy', (60, 74), ["The drovers' bothy. Someone has left kindling, dry, and a pot of something that was soup.",
+                                            "You rest by the fire a while.", {'heal': True}]),
+          obj('Old wolf trap', (56, 60), ["An old wolf trap, rusted open. Something chewed through the chain a long time ago."]),
+          obj('Birch fork', (30, 70), ["A wolf's skull wedged high in a birch fork. Someone has put a Pecha Berry in its mouth. It looks almost cheerful."]),
+          talk('Drover\'s grandson', (46, 62), 'NPC 25', ["Boy: Grandda says there's a den off the road where the wolves used to sleep. There's a scratch on a birch where you leave the path. A big one."]),
+          obj('Clawed birch', (46, 28), ["Four long claw-scratches on a birch, old and healed over. They point off the road, into the trees."]),
+          obj('The old den', (62, 18), ["(A hollow under a fallen giant, lined with old bones and older fur. Nothing has slept here for years except, apparently, mushrooms.)"]),
+          item((60, 16), 'SNOWBALL'), item((18, 48), 'ETHER'), item((70, 74), 'SUPERPOTION'), hidden((28, 24), 'BIGMUSHROOM', 'HiddenItem (birch hollow)'),
+          hidden((64, 20), 'TINYMUSHROOM', 'HiddenItem (the den)'))
+    r.seat_events(on='.dtp')
+    for n, x, y in (('fw_wood', 18, 48), ('fw_rack', 24, 42), ('fw_sled', 48, 64), ('fw_wood', 50, 64), ('pf_lantern', 44, 32), ('fw_brazier', 58, 70)):
+        r.near(n, x, y, on='.td', r=3)
+    for n, x, y in (('pf_g_tree4p_ice', 8, 10), ('pf_g_tree2_ice', 64, 40), ('pf_g_tree4p_ice', 14, 66), ('pf_g_tree2_ice', 68, 4)):
+        if m.free(x, y, STAMPS[n]['w'], STAMPS[n]['h'], on='.tT'): m.stamp(n, x, y, mark='B', blend=True)
+    CK.clear_around(r)
+    CK.fringe(r, ['pine2', 'kf_tree', 'pf_g_tree2_ice', 'pine2'], 60, seed=1, near_forest=3)
+    CK.props(r, ['fw_stone', 'fw_wood', 'fw_log_m', 'fw_drift2', 'fw_drift0'], 30, box=(0, 0, W, H), clump=3, seed=7)
+    r.dress(trees=('pine2', 'kf_tree'), n_trees=W * H // 300, copses=0, scatter=10)
+    r.paint(glint=0.0)
+    CK.snow_ground_var(r, thr=0.45)
+    RW.rime_silk(m, ((30, 12), (48, 22), (34, 40), (52, 50), (26, 78))) if hasattr(RW, 'rime_silk') else None
+    RW.drifts(m, 0.3, seed=578); RW.road_tracks(m, 0.12, seed=578); RW.dress_ice(m, 0.5, seed=578); RW.reed_beds(m, 50, seed=578)
+    h = head(579, 'The Wolfsrime', field='SILKWOOD', bgm='Natural Park', weather=['Snow', 10], biome='forest', connections=[], tone=[-12, -8, 8, 16])
+    h['metadata']['BattleBack'] = 'snow'
+    h['metadata']['MapPosition'] = [0, 7, 11]
+    r.write(h, '579_wolfsrime.yaml', '# The Wolfsrime (579): the pre-map-builder-12 Rimewood Path layout, restored by map builder 14.\n'
+                                    '# WRITTEN BY layouts/routes_early.py (build_579) - edit that script.\n', '/tmp/rt/579.png' if PREV else None)
+
+
 def vn_mask(r, thr):
     from terrain import vnoise
     return np.array([[vnoise(x, y, r.seed + 9, 4.0) > thr for x in range(r.W)] for y in range(r.H)])
 
 
-BUILD = {566: build_566, 577: build_577, 578: build_578, 520: build_520, 521: build_521, 524: build_524, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
+BUILD = {566: build_566, 577: build_577, 578: build_578, 579: build_579, 520: build_520, 521: build_521, 524: build_524, 540: build_540, 541: build_541, 552: build_552, 527: build_527, 528: build_528}
 
 
 def main():

@@ -244,6 +244,14 @@ Land
 Land
     2,CRYOGONAL,25,28
     2,STANTLER,25,28
+[579,103] # The Wolfsrime - after Badge 3
+Land
+    3,SNEASEL,21,24
+    3,DELIBIRD,21,24
+[579,104] # The Wolfsrime - after Badge 4
+Land
+    2,STANTLER,25,28
+    2,BERGMITE,25,28
 [562,103] # The Rimewood - after Badge 3
 Land
     2,ABSOL,21,24

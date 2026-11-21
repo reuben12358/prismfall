@@ -15350,6 +15350,15 @@
      "to": 563,
      "link": "RIME_GLADE",
      "note": "behind a frosted sapling (Cut: HM01 comes after Badge 2)"
+    },
+    {
+     "type": "warp",
+     "at": [
+      47,
+      26
+     ],
+     "to": 579,
+     "note": "the east edge, below the glade sapling: the Wolfsrime (old drove road)"
     }
    ],
    "features": [
@@ -16986,6 +16995,15 @@
      "dir": "west",
      "to": 570,
      "note": "Frostwick East Gate"
+    },
+    {
+     "type": "arrival",
+     "at": [
+      16,
+      4
+     ],
+     "from": 579,
+     "note": "the snow bank under the giant trees (one way from the Wolfsrime)"
     }
    ],
    "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
@@ -17067,6 +17085,122 @@
     }
    ],
    "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder"
+  },
+  {
+   "act": 1,
+   "kingdom": "Borderland (Elowen/Isenmar)",
+   "kind": "route",
+   "size": [
+    80,
+    88
+   ],
+   "tileset": "Outside",
+   "bgm": "Route 2",
+   "field": "SILKWOOD",
+   "segment": 2,
+   "detail": "planned",
+   "connections_outline": [
+    "S: Frostwick (North Gate). N: the Rimewood."
+   ],
+   "key_features": [
+    "The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late.",
+    "hoar-birch outskirts thickening into ice-glazed giants",
+    "a frozen brook with a slide shortcut",
+    "charcoal burners' clearing with a kiln"
+   ],
+   "tileset_kit": "G4_OLDWOOD",
+   "border": "from the landform of this stretch (see route_plan.fill); no tree-row walls",
+   "route_plan": {
+    "road": 3,
+    "road_name": "The Hoar Road",
+    "role": "main",
+    "landmark": "The Blaze-Trees, and the Lantern Birch where trappers leave a light for whoever is late.",
+    "origin": "The trappers' blazed path into the frozen forest: a red axe-mark every twenty paces, and you do not leave them.",
+    "wild": "Snover, Cubchoo, Teddiursa, Deerling, Buneary, Swinub, Vanillite. Night: Sneasel, Snorunt, Morelull.",
+    "exits": "S: Frostwick (North Gate). N: the Rimewood.",
+    "fill": [
+     "hoar-birch outskirts thickening into ice-glazed giants",
+     "a frozen brook with a slide shortcut",
+     "charcoal burners' clearing with a kiln",
+     "trapper's lean-to (heal)",
+     "the snare line: free a caught Teddiursa (it remembers you in the Rimewood)",
+     "frozen silk curtains, brittle enough to break with Rock Smash",
+     "honey-stump hives",
+     "Frostwick woodcutters and a sledge of logs",
+     "5 trainers",
+     "the Lantern Birch (relight it at night for a reward)"
+    ],
+    "secret": "The Unblazed: at the one tree with a blue blaze, leave the path. The wood repeats until you follow the Stantler tracks, which lead to a clearing with the herd and one Stantler that will fight.",
+    "town_map": [
+     [
+      6,
+      11
+     ]
+    ]
+   },
+   "metadata": {
+    "town_map_pos": [
+     0,
+     6,
+     11
+    ]
+   },
+   "borderland": "The Rimewood",
+   "added_by": "cartographer (SPINE Rev 13)",
+   "rev14_connections": "SWAP_GYM1_GYM2.md 1A; spans of new/moved edges: map builder",
+   "id": 579,
+   "name": "The Wolfsrime",
+   "layout": "The old drove road from the Rimewood's east edge down to Frostwick Pass, left to the wolves when the North Gate road was blazed: map builder 12's predecessor of Rimewood Path, restored as its own road (user, 2026-11-21). Hoar-birch outskirts and ice-glazed giants, the frozen brook, the drovers' old camp and cold kiln, the drovers' bothy (heal), the old wolf den off the road (a clawed birch marks the way). The S end is a steep snow bank into the Pass: one way, so Frostwick and Rimewood Path stay the way north and this is a shortcut back.",
+   "connections": [
+    {
+     "type": "warp",
+     "at": [
+      37,
+      0
+     ],
+     "to": 562,
+     "note": "N end <-> the Rimewood's east edge (562 at 47,26)"
+    },
+    {
+     "type": "warp",
+     "at": [
+      41,
+      87
+     ],
+     "to": 577,
+     "note": "S end: the snow bank down into Frostwick Pass (577 at 16-19,4), one way"
+    }
+   ],
+   "features": [
+    {
+     "type": "rest_point",
+     "at": [
+      60,
+      74
+     ],
+     "name": "drovers' bothy (heal)"
+    },
+    {
+     "type": "hidden_path",
+     "at": [
+      46,
+      28
+     ],
+     "note": "a clawed birch: leave the road to the old den (hidden Tiny Mushroom)"
+    },
+    {
+     "type": "one_way",
+     "at": [
+      40,
+      87
+     ],
+     "size": [
+      4,
+      1
+     ],
+     "note": "the snow bank: slide down to the Pass, never up"
+    }
+   ]
   },
   {
    "id": 580,

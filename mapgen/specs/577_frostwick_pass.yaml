@@ -928,3 +928,10 @@ events:
     trigger: action
     move: fixed
     commands: ['Forester: The wind gap above the toll hut. Walk between the gusts or it walks you back down.']
+- type: event
+  name: Snow bank
+  at: [17, 3]
+  pages:
+  - trigger: action
+    commands: ['A steep bank of packed snow, scored with sled-tracks, climbs into the giant trees: the bottom of the old drove road (the Wolfsrime).', You
+        could slide down it from the top. Nobody climbs up it.]

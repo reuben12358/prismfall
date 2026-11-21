@@ -142,3 +142,8 @@ events:
 
     "Out on the line. Kettle''s by the fire. Sit."'
   post: false
+- type: warp
+  name: To the Wolfsrime
+  at: [47, 26]
+  to: {map: 579, x: 37, y: 1, dir: down}
+  se: null

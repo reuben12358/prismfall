@@ -77,6 +77,7 @@ module PrismfallMaps
     576 => [6, 2, -6, 0],   # Halvard's Smokehouse
     577 => [-6, -2, 10, 10],   # Frostwick Pass
     578 => [-12, -8, 8, 16],   # Rimewood Path
+    579 => [-12, -8, 8, 16],   # The Wolfsrime
     920 => [10, 6, 14, 10],   # The Rimed Sands
     924 => [18, 4, -10, 10],   # Ashkaar Siege Camp
     925 => [6, -4, 10, 30],   # The Steamline

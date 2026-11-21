@@ -286,6 +286,7 @@ module FieldEffects
     576 => :NONE,   # Halvard's Smokehouse
     577 => :SNOWY_MOUNTAIN,   # Frostwick Pass
     578 => :SILKWOOD,   # Rimewood Path
+    579 => :SILKWOOD,   # The Wolfsrime
     580 => :SNOWY_MOUNTAIN,   # The Reedholms
     581 => :SNOWY_MOUNTAIN,   # The Icefall Locks
     582 => :NONE,   # Lumen West Gate

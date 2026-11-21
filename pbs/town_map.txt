@@ -108,6 +108,7 @@ Point = 22,10,Lake Sallow
 Point = 23,10,Lake Sallow
 Point = 25,10,The Cinderhorn
 Point = 6,11,Rimewood Path
+Point = 7,11,The Wolfsrime
 Point = 8,11,The Royal Chase
 Point = 10,11,The Briarway
 Point = 11,11,Prism Falls

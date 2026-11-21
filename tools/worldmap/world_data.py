@@ -336,6 +336,18 @@ ROADS = [
             "the Lantern Birch (relight it at night for a reward)"],
       secret="The Unblazed: at the one tree with a blue blaze, leave the path. The wood repeats until you follow the "
              "Stantler tracks, which lead to a clearing with the herd and one Stantler that will fight."),
+    L(579, None, "The Wolfsrime",
+      "The old drove road from the Pass into the Rimewood, left to the wolves when Frostwick blazed the North Gate road. "
+      "(The first Rimewood Path layout, restored by map builder 14 at the user's request, 2026-11-21.)",
+      'Elowen/Isenmar', [(7, 11)], [80, 88], None, 'SILKWOOD', role='side',
+      landmark="The hanging bell on the birch, and the snow bank at the bottom that nobody climbs back up.",
+      wild="Snover, Cubchoo, Deerling, Buneary, Snom, Hoothoot, Swinub, Spinarak, Vanillite, Teddiursa. Night: Snorunt, "
+           "Hoothoot, Cubchoo, Spinarak, Morelull, Teddiursa, Snom.",
+      exits="N: the Rimewood (its east edge, a warp). S: Frostwick Pass, down the snow bank (one way).",
+      fill=["hoar-birch outskirts thickening into ice-glazed giants (the old Rimewood Path layout)",
+            "the frozen brook", "the drovers' old camp, a cold kiln with a Snom in the flue", "the drovers' bothy (heal)",
+            "an old wolf trap, a wolf's skull in a birch fork", "the hanging bell"],
+      secret="The old den: a clawed birch marks where to leave the road; the den under a fallen giant hides a Tiny Mushroom."),
     L(562, None, "The Rimewood", "Kept name: the Elowen oldwood that froze when the sea did.",
       'Elowen/Isenmar', [(5, 10), (4, 10)], [96, 110], [48, 56], 'SILKWOOD',
       landmark="The Frost Loom and the aurora clearing.",

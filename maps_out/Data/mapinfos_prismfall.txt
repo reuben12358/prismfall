@@ -89,6 +89,7 @@
 576	570	Halvard's Smokehouse
 577	0	Frostwick Pass
 578	0	Rimewood Path
+579	0	The Wolfsrime
 920	0	The Rimed Sands
 924	0	Ashkaar Siege Camp
 925	0	The Steamline

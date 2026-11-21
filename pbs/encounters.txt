@@ -525,6 +525,27 @@ LandNight
     6,DELIBIRD,16,20
     4,SWINUB,16,20
 #-------------------------------
+[579] # The Wolfsrime
+Land
+    14,SNOVER,16,20
+    14,CUBCHOO,16,20
+    12,DEERLING,16,20
+    12,BUNEARY,16,20
+    12,SNOM,16,19
+    12,HOOTHOOT,16,20
+    8,SPINARAK,16,19
+    8,VANILLITE,16,20
+    4,SWINUB,16,20
+    4,TEDDIURSA,16,20
+LandNight
+    20,SNORUNT,16,20
+    18,HOOTHOOT,16,20
+    14,CUBCHOO,16,20
+    14,SPINARAK,16,19
+    12,MORELULL,16,20
+    12,TEDDIURSA,16,20
+    10,SNOM,16,19
+#-------------------------------
 [578] # Rimewood Path
 Land
     16,SNOVER,16,20
