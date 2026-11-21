@@ -1,5 +1,15 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 24 (user, 2026-11-20 23:49 – 2026-11-21 02:33): art moves out; focus on building <<<
+- **Character art goes to an outside tool (Gemini, run by the user).** Our character-art agents are laid off and on indefinite hiatus until the user says otherwise. Don't start any character sprite or portrait work here.
+  - User verdicts: the player redo "god awful", "like someone drew it on pictionary", too stiff. Dorian "horrid", portrait "off". Tamsin's design "great", but her pixel art needs work and her portrait looks "extremely weird".
+  - Juno: her **portraits** are approved and her **overworld** "looks cool", but her **battle sprite** is choppy and needs a redo. That's also for the art handoff.
+  - Handoff pack: art/HANDOFF_GEMINI.md. The user's Gemini player concepts are in art/external/gemini/.
+- **Full playtest runs are paused** ("we know that there will be bugs so lets focus on bug bashing later"). Build content now. Keep sending real-engine "unit test" captures (stills and GIFs) of features; the user loves them.
+- **Battle placement:** the ally base gets smaller (Meadow), and on Frozen Lake it moves up and gets smaller.
+- **The Glass Dunes field "looks super sick"**, but the transition into it feels weird; redo it.
+- **The old Rimewood Path layout lives on** as its own connector map ("it looks pretty"); the new 578 stays.
+
 ## >>> REVISION 23 (user, 2026-11-20 ~16:00): one ring for Megas and Z-moves <<<
 - Z-moves join the main game, tied to the Mega Ring, Reborn/Rejuvenation-style. The ring Bastian gives after Badge 13 enables both Mega Evolution and Z-moves, still one of each per side per battle.
 - All 18 type crystals are spread from 13 badges on (finds, quests, boss drops), with the same "no counter to the next two Wardens" rule as stones.
