@@ -725,6 +725,22 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   room states.  `d5 built map` checks every zone cell's passability on the built Map546 against the grids.
   Before/after: `maps_out/previews/ch2_4_compare/546_before_after.jpg`, `547_before_after.jpg`.
 
+- **The Wolfsrime (579), job 2b** (user, 2026-11-21: "I DID KINDA LIKE rimewood path before ... could it still exist
+  like a connecting between 2 places? it looks pretty"): `routes_early.build_579` replays the pre-map-builder-12
+  `build_578` (Route seed 578, the same plan and kit calls; the old function still sits in routes_early, overridden by
+  routes_craft for 578) and writes it as 579 with its own events.  The N end is four touch warps to the Rimewood's
+  east edge (562 gains `To the Wolfsrime` at (47,26), appended after generation so 562's tiles did not move); the S end
+  is the snow bank: four touch events that slide you into Frostwick Pass at (16-19,4) (577 gains a `Snow bank` sign at
+  (17,3), also appended last) and never back up, so the road is a one-way shortcut back and Frostwick / Rimewood Path
+  stay the way north.  Its own content: road sign, hanging bell, cold kiln (a Snom in the flue), the old drover and his
+  grandson, the drovers' bothy (heal), old wolf trap, wolf skull, the clawed birch that marks the hidden path to the old
+  den (hidden Tiny Mushroom; Big Mushroom in the birch hollow; Snowball, Ether, Super Potion).  Wired into maps.json,
+  ROUTES.yaml (side path 562-579-577), PLACE_NAMES, WORLD.md, `tools/worldmap/world_data.py`, `pbs/town_map.txt`
+  (7,11), `pbs/encounters.txt` (Lv 16-20) and `encounters_badgetiers.txt` (tiers 3, 4), FIELD_DEFAULTS (SILKWOOD, 011
+  regenerated).  Preview: `maps_out/previews/ch2_4_compare/579_wolfsrime_restored.jpg` (old 578 beside 579).
+- **Job 4:** the trainer designer's nine route trainers stand at map builder 13's cells on 577 and 578 (appended after
+  generation; no tile moved).  `tools/validate_map_trainers.py`: 0 errors.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,
