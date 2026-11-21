@@ -47,6 +47,10 @@ done
 if [[ -d "$ROOT/graphics" ]]; then
   mkdir -p "$OUT/Graphics" && cp -r "$ROOT/graphics/." "$OUT/Graphics/"
 fi
+# Installed dialogue portraits (SPINE Rev 22 face window). Only Portraits/: the other art/out folders wait on approvals.
+if [[ -d "$ROOT/art/out/Graphics/Portraits" ]]; then
+  mkdir -p "$OUT/Graphics/Portraits" && cp "$ROOT"/art/out/Graphics/Portraits/*.png "$OUT/Graphics/Portraits/"
+fi
 
 # Docs
 cp "$ROOT"/design/*.md "$OUT/Design/" 2>/dev/null || true
