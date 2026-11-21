@@ -633,9 +633,11 @@ events:
         else: ['\pf[TAMSIN,shocked]Tamsin: It just... stopped. All of it.', '(The Matriarch walks out through the Veil, past them, into the wood. It doesn''t
             react to anything.)', '\pf[TAMSIN,neutral]Tamsin: Oh. Oh, that''s — thank you. I think.', '\pf[JUNO,sad]Juno: ...It didn''t look at me. They
             always look at me.']
-      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Dorian Pell, in Saltmere. He''ll call you "darling" and mean it about a third of the time.'
+      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Marisol Reyes, in Ebbmouth. North over Spinners'' Rise, through the Rimewood and over the border.
+        She''ll swear at you. It''s a compliment.'
       - '\pf[TAMSIN,happy]Tamsin: Come back, will you? I''d like to show you the room when it isn''t tangled.'
-      - '\pf[JUNO,happy]Juno: I''ve got to take the eggs to Uncle Rowan. Then Saltmere! There''s a PAGEANT! Don''t see it without me!'
+      - '\pf[JUNO,neutral]Juno: I''ve got to take the eggs to Uncle Rowan in Verdance. Forty eggs, one hatbox, no running.'
+      - '\pf[JUNO,sad]Juno: I''m going to tell him about the Pageant. About what the man said about Verdance. I want to see his face when I tell him.'
       - &id002 {script: "%w[Juno Tamsin].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n  ev.erase if ev\nend"}
       - {script: '$game_self_switches[[548, 0, ''OUTRO'']] = true'}
 - type: event
@@ -650,9 +652,11 @@ events:
       then: []
       else:
       - *id001
-      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Dorian Pell, in Saltmere. He''ll call you "darling" and mean it about a third of the time.'
+      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Marisol Reyes, in Ebbmouth. North over Spinners'' Rise, through the Rimewood and over the border.
+        She''ll swear at you. It''s a compliment.'
       - '\pf[TAMSIN,happy]Tamsin: Come back, will you? I''d like to show you the room when it isn''t tangled.'
-      - '\pf[JUNO,happy]Juno: I''ve got to take the eggs to Uncle Rowan. Then Saltmere! There''s a PAGEANT! Don''t see it without me!'
+      - '\pf[JUNO,neutral]Juno: I''ve got to take the eggs to Uncle Rowan in Verdance. Forty eggs, one hatbox, no running.'
+      - '\pf[JUNO,sad]Juno: I''m going to tell him about the Pageant. About what the man said about Verdance. I want to see his face when I tell him.'
       - *id002
       - {script: '$game_self_switches[[548, 0, ''OUTRO'']] = true'}
 - type: event
@@ -667,9 +671,11 @@ events:
       then: []
       else:
       - *id001
-      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Dorian Pell, in Saltmere. He''ll call you "darling" and mean it about a third of the time.'
+      - '\pf[TAMSIN,neutral]Tamsin: The next Warden''s Marisol Reyes, in Ebbmouth. North over Spinners'' Rise, through the Rimewood and over the border.
+        She''ll swear at you. It''s a compliment.'
       - '\pf[TAMSIN,happy]Tamsin: Come back, will you? I''d like to show you the room when it isn''t tangled.'
-      - '\pf[JUNO,happy]Juno: I''ve got to take the eggs to Uncle Rowan. Then Saltmere! There''s a PAGEANT! Don''t see it without me!'
+      - '\pf[JUNO,neutral]Juno: I''ve got to take the eggs to Uncle Rowan in Verdance. Forty eggs, one hatbox, no running.'
+      - '\pf[JUNO,sad]Juno: I''m going to tell him about the Pageant. About what the man said about Verdance. I want to see his face when I tell him.'
       - *id002
       - {script: '$game_self_switches[[548, 0, ''OUTRO'']] = true'}
 - type: event
@@ -682,7 +688,7 @@ events:
     - (At the center, a Galvantula the size of a cart, half crystal, sits on a nest of glass silk wound around something that glows faintly green beneath
       the roots.)
     - It turns eight eyes on you. Four of them are glass.
-    - boss: {id: GLASS_MATRIARCH, species: GALVANTULA, level: 16, field: BLEED}
+    - boss: {id: GLASS_MATRIARCH, species: GALVANTULA, level: 21, field: BLEED}
     - The Matriarch collapses onto the nest. The ringing drops by half. It thrashes, shedding slivers of crystal.
     - choices: [Stay with it., Put your hand on it. Make it stop.]
       cancel: 0
@@ -700,7 +706,7 @@ events:
         - The crystal falls away as dust. The grove stops ringing at once. Not one more tree turns.
         - The Matriarch stands. It is whole. Its eyes are dull as buttons. It doesn't look at you. It doesn't look at anything.
     - switch: [CH2_MATRIARCH_DONE, true]
-    - switch: [GLOAMING_DISGUISED_CELESTINE, true]
+    - switch: [GLOAMING_DISGUISED_CELESTINE, false]
     - var: [BRIARWICK_GLASSWOOD, 1]
     - (Under the nest, a sliver of green light sinks back into the roots as you watch.)
     - 'FIELD NOTES: "Something under the Hollow is holding the wood together. I think I was standing on it. — note to self: ask Tamsin where the Plate is."'

@@ -326,7 +326,7 @@ events:
       - move:
           who: Juno (arrival)
           route:
-          - graphic: [trainer_RIVAL2, 0, 4, 0]
+          - graphic: [JUNO, 0, 4, 0]
           - {opacity: 255}
           - through_on
           - left

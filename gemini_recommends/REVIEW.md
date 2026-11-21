@@ -9,6 +9,47 @@ One entry per proposal folder, newest first. Verdicts are ADOPT, ADAPT, REJECT o
 
 ---
 
+## 2026-11-21_rejuv-vs-cutin-and-pwt-anim-contract — **ADOPT, with one update**
+- The creator has since picked **B2W2's Elite Four VS sequence** over the Rejuvenation band (see `art/HANDOFF_GEMINI.md`, "trainer battle start"). Your bust and pose work carries over unchanged:
+  - Busts stay at `Graphics/EBDX/VS/<ID>.png`. **256x136 is fine;** anything up to 256x160 also works (bottom-aligned, top cropped).
+  - Opponents face left (top-right band). Players face right (bottom-left band).
+  - One-shot poses: exactly as you have them.
+- The `KESTREL`/`LARCH` charset aliases are switched on now that their packs are pushed.
+
+## 2026-11-21_map-redo-recommendations — **ADOPT (queued for the map builder)**
+- The scorecard matches what I see in the previews, and the "keep" list is right. Your seven redos become the map builder's queue in your order: 552 → 140/146/147 → 522/548 → 926/925 → 181/608 → 180/190–193 → 120.
+- The two stamp bugs (`sh_big` pine on the roof, `ak_rock2` water hole) go first, since they're cheap and fix five maps. 522/548 moving to PF Rejuv is the most important of the seven (first Bleed zone).
+- Mockups are good targets. One constraint: keep every existing warp, event coordinate and `seal_against` span, because the scripts point at them.
+
+## 2026-11-21_codex-proofread-and-critique — **ADOPT (mostly) / ADAPT / ASK**
+- **Codex build (1.1–1.3): ADOPT.**
+  - Add Ch9, Ch10 and the field audit.
+  - Drop the withdrawn Ch8 stub.
+  - Walkthrough goes to a "Guides & Reference" group at the end, with spoiler pills.
+  - Add the list/table pre-pass, `scroll-margin-top`, a search box, a working theme toggle, styled `\PN` and portrait tags, and a readable prism diagram on phones.
+- **Errata 2.1 #1–23 and 2.2 #1–20: ADOPT.** I spot-checked eight: Juno never went to Ebbmouth, the Ch9 nesting, the Lamp 47 time clash, Wick's field, Trevenant's nickname, TM19 placed twice, the missing TM items, and Torvald placed twice. All real. Canon picks where you offered a choice:
+  - AF 290 Glassfall at **23:40**.
+  - Trevenant **"Glasswood"**.
+  - Hymn line ends **"given back, as a gift is found"**.
+  - Reedholms field **:WATER_SURFACE**.
+  - Bedside Manner giver: **Corvin**.
+  - Saga of the Glass Dunes moves to **Ch19/20** with a new reward.
+- **Creative pushback:**
+  - Ch4 reorder (Teo fights you before Pella's punt appears): **ADOPT.**
+  - Ch6 Sanctuary given a real cost (Meridian keeps half the collared Drilbur): **ADOPT.**
+  - Ch7 polish: **ADOPT.**
+  - Ch9 heal and checkpoint before 264: **ADOPT.** Brann's vote: **ADOPT.** Magnus raises first, then Anja; Brann abstains if `:ch8_caldera == :shutdown`, otherwise raises last.
+  - Ch10 `:hesitate`: **ADAPT.** Heal between the three, and the extra bar applies on Hard only.
+  - Ch8 is the missing bridge: **ADOPT.** The real Ch8 script comes before Ch11.
+  - Stormfront: **ADAPT.** The first Sunny Day reads as progress ("a shaft of sun pries at the storm"), and the AI is allowed to choose it on Stormfront.
+  - Mirror Glass: **ADAPT.** Evasion and accuracy changes are normal strength; the amplification is dropped.
+  - Brick Break / Psychic Fangs / Raging Bull crack glass: **ADOPT.**
+  - Dragon's Den Amulet Coin hint NPC: **ADOPT.**
+  - Ch14 density: **ADOPT.** The War Convoy moves to early Ch15.
+  - Early teaser Z-crystals (Icium at Badge 2, etc., silent until the ring): **ASK.** The creator rubber-stamps or cuts them.
+
+---
+
 ## 2026-11-21_art-wiring-and-animated-trainers — **ADOPT (partly done) / ADAPT**
 - **Juno charsets: ADAPT.** Instead of editing about 30 map sources that say `trainer_RIVAL2`, a runtime alias (`plugins/Prismfall Core/025_CharsetAliases.rb`) swaps any event using a placeholder charset to the cast art, if that file exists. Built maps work with no rebuild. Add `KESTREL`/`LARCH`/... entries there when those packs land. `JUNO_CHARSET` (follower) changed in `mapgen/ruby` and `maps_out/Plugins`. The `story_early.py`/`gen_playhouse.py`/`gen_loomhouse.py` sources were changed too, so the next rebuild matches.
 - **`[PLAYER_A]`/`[PLAYER_B]` trainer types: ADOPT**, merged into `pbs/trainer_types.txt`.

@@ -3079,7 +3079,7 @@ events:
       then:
       - 'Hett: From the guild''s teaching chest. Old Mother Loom would''ve wanted a stranger to have it. She never trusted us with it.'
       - {script: pfm_money(2000)}
-      - {script: 'pfm_item(:TMSTRINGSHOT, 1, "TM String Shot")'}
+      - {script: 'pfm_item(:BIGROOT, 1, "Big Root")'}
       - {script: 'pfm_set(:hett_reward)'}
       - {script: 'pfm_quest_done(:locked_ledger)'}
       else:
@@ -3199,7 +3199,7 @@ events:
     - move:
         who: Juno (loft)
         route:
-        - graphic: [trainer_RIVAL2, 0, 8, 0]
+        - graphic: [JUNO, 0, 8, 0]
         - {opacity: 255}
         wait: true
     - '\pf[JUNO,neutral,,Juno (loft)]Juno: ...They can.'

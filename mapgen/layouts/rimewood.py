@@ -218,7 +218,7 @@ def route5(prev=None):
                                                        "Who authorised it? The Meridian. Who authorised the Meridian? ...Move along, please."],
               d='left')]
     E += [trainer((48, 10), 'PICNICKER', 'Sela', "Salt-flat picnic! Bring your own shade!", "Isenmar's colder than I thought.", 'down'),
-          trainer((42, 19), 'HIKER', 'Torvald', "Thirty years I've carted salt down this road! Show me something new!",
+          trainer((42, 19), 'HIKER', 'Halvor', "Thirty years I've carted salt down this road! Show me something new!",
                   "Salt in my boots, frost in my beard. Good trade.", 'up'),
           trainer((9, 21), 'LASS', 'Tilde', "Did you slide here too? Everyone slides here.", "My Swinub slid farther than me.", 'right'),
           trainer((18, 10), 'SAILOR', 'Haakon', "Sealer out of Ebbmouth! The sea's too thick to row, so I walk!",

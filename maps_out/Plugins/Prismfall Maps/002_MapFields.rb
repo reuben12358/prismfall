@@ -287,7 +287,7 @@ if defined?(FieldEffects) && FieldEffects.const_defined?(:MAP_FIELDS)
   FieldEffects::MAP_FIELDS[577] = :SNOWY_MOUNTAIN   # Frostwick Pass
   FieldEffects::MAP_FIELDS[578] = :SILKWOOD   # Rimewood Path
   FieldEffects::MAP_FIELDS[579] = :SILKWOOD   # The Wolfsrime
-  FieldEffects::MAP_FIELDS[580] = :SNOWY_MOUNTAIN   # The Reedholms
+  FieldEffects::MAP_FIELDS[580] = :WATER_SURFACE   # The Reedholms
   FieldEffects::MAP_FIELDS[581] = :SNOWY_MOUNTAIN   # The Icefall Locks
   FieldEffects::MAP_FIELDS[582] = :NONE   # Lumen West Gate
   FieldEffects::MAP_FIELDS[584] = :SCRAPYARD   # Voltaic Sluiceworks

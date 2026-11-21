@@ -326,7 +326,7 @@ MURAL 4: The beast breaking apart. The eighteen lights falling out of it like ra
 ```
 (Sahar takes a sheet of paper and a block of red wax from her satchel and rubs the third mural, the chain, very fast, with her mouth set.)
 (Received: DUNEHOLT RUBBING.) ITEM DESCRIPTION: "A wax rubbing of a chain of eighteen locks round a beast of eighteen lights. Signed in the corner, small: S.O., AF 300. And under it, smaller: AF 281."
-[portrait: SAHAR, neutral] That's the second time I've made that rubbing. I'm keeping this one.
+[portrait: SAHAR, neutral] I made two. Keep yours. I burned the first one I ever made; I'm not burning a second.
 Switch S116 CH6_OSSUARY_DONE = ON. V126 = 7.
 ```
 *(09 #7: the first concrete clue. Nobody names Arceus, the Gilded King's family, the Legend Plate or the Crown.)*

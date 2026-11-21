@@ -380,7 +380,8 @@ module PrismfallVS
       # 2.80: final screen (3-layer 3D rushing vortex tunnel + scrolling diagonal sheen + spark burst)
       if t >= 2.8
         @final.each { |k| @s[k].visible = true }
-        @s["world"].visible = @s["dim"].visible = false
+        @s["world"].visible = false
+        @s["dim"].opacity = 255            # dark backing: the cycling tunnel layers shrink to 0.6x and would show the map at the corners
         # scrolling diagonal speed sheen across both bands
         sw = Graphics.width
         sp_off = ((t - 2.8) * 340).to_i % sw

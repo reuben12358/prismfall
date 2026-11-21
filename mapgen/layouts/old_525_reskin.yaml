@@ -106,9 +106,7 @@ events:
       - {script: 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'}
       - '\pf[SHELLY,happy]Shelly: Your forest sounds like home used to, before the city got sick. Look after it?'
       - {script: 'pbReceiveItem(:SILVERPOWDER)'}
-      - {script: 'tm = GameData::Item.keys.find { |k| d = GameData::Item.get(k); d.is_TM? && d.move == :STRUGGLEBUG }
-
-          tm ? pbReceiveItem(tm) : pbMessage(_INTL("You received a TM: Struggle Bug! [item data missing]"))'}
+      - {script: 'pbReceiveItem(:BRIGHTPOWDER)'}
       - switch: [CAMEO_SHELLY_DONE, true]
       - {script: '$game_variables[123] += 1'}
       - (She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)
@@ -146,7 +144,7 @@ events:
 
           setBattleRule("canLose")
 
-          WildBattle.start(:MASQUERAIN, 14)'}
+          WildBattle.start(:MASQUERAIN, 19)'}
       - The Masquerain folds its glass wings and settles on the water. The ringing stops.
       - {script: '$game_self_switches[[525, 0, ''MASQ'']] = true'}
       - selfswitch: [A, true]

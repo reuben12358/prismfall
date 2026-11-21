@@ -87,7 +87,7 @@ events:
     - move:
         who: Juno (arrival)
         route:
-        - graphic: [trainer_RIVAL2, 0, 8, 0]
+        - graphic: [JUNO, 0, 8, 0]
         - {opacity: 255}
         wait: true
     - '\pf[JUNO,happy,sparkle,Juno (arrival)]Juno: Briarwick! Smell that? That''s mulberry and lanolin and— oh, the egg-seller''s open. I''ll find you at

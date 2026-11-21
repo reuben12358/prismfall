@@ -55,6 +55,9 @@ ACT1_SEGMENTS = {132: 2, 133: 1, 134: 2,            # Loomhouse Upper Lofts (opt
                  525: 2, 548: 2}                    # Gossamer Deepwood (Cut), Cocoonfall Hollow
 
 
+FLOOR_TOLERANCE = 2   # levels under the band's low end before the floor check warns
+
+
 def segment_from_id(mid):
     """Fallback for maps missing from maps.json (it reads `segment` first)."""
     if mid in ACT1_SEGMENTS: return ACT1_SEGMENTS[mid]
@@ -294,6 +297,13 @@ def main():
                 if lo > hi: errors.append(f"L{no} {tag}: min level {lo} > max {hi}")
                 if hi > cap and not (info and info.get("allow_over_cap")):
                     errors.append(f"L{no} {tag} {t}: {s} Lv{hi} exceeds cap {cap} (badges {eff})")
+                # segment floor (design/WORLD.md s3: band = previous cap -3 ... next cap -2); a land table
+                # well under it means the road runs backwards (Gemini review 2026-11-21: 524 had Lv 7 Caterpie)
+                if eff and eff >= 1 and ver == 0 and t.split(",")[0].startswith(("Land", "Cave", "Headbutt")) \
+                        and not (info and info.get("allow_under_floor")):
+                    floor = cap_for(eff - 1) - 3 - FLOOR_TOLERANCE
+                    if lo < floor:
+                        warns.append(f"L{no} {tag} {t}: {s} Lv{lo} under the segment floor {floor + FLOOR_TOLERANCE} (badges {eff})")
                 fl = sp[s]["flags"]
                 if any(x in fl for x in SPECIAL_FLAGS):
                     warns.append(f"L{no} {tag}: {s} is {fl}; use a static event, not a wild table")

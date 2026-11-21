@@ -65,7 +65,7 @@
 552	:PAINTER, "Ash"
 552	:PAINTER, "Morwenna"
 560	:BIRDKEEPER, "Ailsa"
-560	:HIKER, "Torvald"
+560	:HIKER, "Halvor"
 560	:LASS, "Tilde"
 560	:PICNICKER, "Sela"
 560	:SAILOR, "Haakon"

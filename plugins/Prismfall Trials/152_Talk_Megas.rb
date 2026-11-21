@@ -44,7 +44,9 @@ Prismfall::Trials::TALK.merge!({
   :WENLOW_INFIRMARY => { :board => :NADIR, :rows => [
     [:NA_BEDSIDE_MANNER, "quest_state(:SELF) == :available", :offer],
     [:NA_BEDSIDE_MANNER, "quest_step(:SELF) == :return", :return]] },
-  :CORVIN_INFIRMARY => { :rows => [[:NA_BEDSIDE_MANNER, "!quest_done(:SELF)", :corvin]] },
+  :CORVIN_INFIRMARY => { :rows => [
+    [:NA_BEDSIDE_MANNER, "quest_state(:SELF) == :available", :corvin_offer],
+    [:NA_BEDSIDE_MANNER, "quest_step(:SELF) == :return", :corvin]] },
   :WARD_BED => { :rows => [[:NA_BEDSIDE_MANNER, "quest_step(:SELF) == :beds", :bed]],
                  :idle => "Under the glass, a patient's eyes move, dreaming." },
   #--- Underveil, the Moon Market (423): Ottoline and the kennel cages -------------------------

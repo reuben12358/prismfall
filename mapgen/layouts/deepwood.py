@@ -102,8 +102,7 @@ def deepwood():
         {'commands': [{'if': 'pbItemBall(:SUPERPOTION)', 'then': ["The stump kept it dry.", {'selfswitch': ['A', True]}], 'else': []}]},
         {'cond': {'self': 'A'}}]})
     # Shelly's cameo sidequest "Lost in the Gossamer" (CAMEOS.md 1): S181 CAMEO_SHELLY_DONE, V123 CAMEO_QUESTS_DONE
-    struggle = ("tm = GameData::Item.keys.find { |k| d = GameData::Item.get(k); d.is_TM? && d.move == :STRUGGLEBUG }\n"
-                "tm ? pbReceiveItem(tm) : pbMessage(_INTL(\"You received a TM: Struggle Bug! [item data missing]\"))")
+    struggle = "pbReceiveItem(:BRIGHTPOWDER)"   # was TM Struggle Bug, which the base project has no TM for (Gemini review)
     shelly_end = [say('SHELLY', 'neutral', "You just... walked in. Where I'm from, nobody walks into the sick places and comes out the same."),
                   say('SHELLY', 'happy', "Before I go, could we have one practice battle? Doubles? I'm supposed to be good at this and I don't want to be rusty when I get home."),
                   {'script': 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'},
@@ -128,7 +127,7 @@ def deepwood():
         {'graphic': {'sprite': 'Followers/MASQUERAIN', 'dir': 'left'}, 'commands': [
             {'if': key(525, 'SHELLY'), 'then': [
                 "Its wings are panes of glass. The eye-spots are the only things on it still moving.",
-                {'script': 'setBattleRule("field", :BLEED)\nsetBattleRule("canLose")\nWildBattle.start(:MASQUERAIN, 14)'},
+                {'script': 'setBattleRule("field", :BLEED)\nsetBattleRule("canLose")\nWildBattle.start(:MASQUERAIN, 19)'},
                 "The Masquerain folds its glass wings and settles on the water. The ringing stops.", setk(525, 'MASQ'), {'selfswitch': ['A', True]}],
              'else': ["A glassed Masquerain hovers over the dew pond. It hasn't noticed you."]}]},
         {'cond': {'self': 'A'}, 'graphic': {'sprite': 'Followers/MASQUERAIN', 'dir': 'left'}, 'through': True,
@@ -244,9 +243,10 @@ def hollow():
                  "(The Matriarch walks out through the Veil, past them, into the wood. It doesn't react to anything.)",
                  say('TAMSIN', 'neutral', "Oh. Oh, that's — thank you. I think."),
                  say('JUNO', 'sad', "...It didn't look at me. They always look at me.")]},
-             say('TAMSIN', 'neutral', "The next Warden's Dorian Pell, in Saltmere. He'll call you \"darling\" and mean it about a third of the time."),
+             say('TAMSIN', 'neutral', "The next Warden's Marisol Reyes, in Ebbmouth. North over Spinners' Rise, through the Rimewood and over the border. She'll swear at you. It's a compliment."),
              say('TAMSIN', 'happy', "Come back, will you? I'd like to show you the room when it isn't tangled."),
-             say('JUNO', 'happy', "I've got to take the eggs to Uncle Rowan. Then Saltmere! There's a PAGEANT! Don't see it without me!"),
+             say('JUNO', 'neutral', "I've got to take the eggs to Uncle Rowan in Verdance. Forty eggs, one hatbox, no running."),
+             say('JUNO', 'sad', "I'm going to tell him about the Pageant. About what the man said about Verdance. I want to see his face when I tell him."),
              {'script': "%w[Juno Tamsin].each do |n|\n  ev = $game_map.events.values.find { |e| e.name == n }\n  ev.erase if ev\nend"}]
     for i, y in enumerate((14, 15, 16, 17, 18)):
         if c.walkable(4, y):
@@ -255,7 +255,7 @@ def hollow():
     boss = [
         "(At the center, a Galvantula the size of a cart, half crystal, sits on a nest of glass silk wound around something that glows faintly green beneath the roots.)",
         "It turns eight eyes on you. Four of them are glass.",
-        {'boss': {'id': 'GLASS_MATRIARCH', 'species': 'GALVANTULA', 'level': 16, 'field': 'BLEED'}},
+        {'boss': {'id': 'GLASS_MATRIARCH', 'species': 'GALVANTULA', 'level': 21, 'field': 'BLEED'}},   # segment 2 boss: cap 23 - 2
         "The Matriarch collapses onto the nest. The ringing drops by half. It thrashes, shedding slivers of crystal.",
         {'choices': ["Stay with it.", "Put your hand on it. Make it stop."], 'cancel': 0, 'branches': [
             [{'script': 'pf_choose(:ch2_matriarch, :soothe)'},
@@ -268,7 +268,7 @@ def hollow():
              "Something goes out of it, like water down a drain. Through you. To nowhere.",
              "The crystal falls away as dust. The grove stops ringing at once. Not one more tree turns.",
              "The Matriarch stands. It is whole. Its eyes are dull as buttons. It doesn't look at you. It doesn't look at anything."]]},
-        {'switch': ['CH2_MATRIARCH_DONE', True]}, {'switch': ['GLOAMING_DISGUISED_CELESTINE', True]}, {'var': ['BRIARWICK_GLASSWOOD', 1]},
+        {'switch': ['CH2_MATRIARCH_DONE', True]}, {'switch': ['GLOAMING_DISGUISED_CELESTINE', False]}, {'var': ['BRIARWICK_GLASSWOOD', 1]},
         "(Under the nest, a sliver of green light sinks back into the roots as you watch.)",
         "FIELD NOTES: \"Something under the Hollow is holding the wood together. I think I was standing on it. — note to self: ask Tamsin where the Plate is.\"",
         {'selfswitch': ['A', True]}]

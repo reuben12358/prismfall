@@ -93,7 +93,7 @@ events:
   sight: 4
   dir: up
   sprite: trainer_HIKER
-  trainer: [HIKER, Torvald]
+  trainer: [HIKER, Halvor]
   intro: Thirty years I've carted salt down this road! Show me something new!
   after: Salt in my boots, frost in my beard. Good trade.
 - type: trainer

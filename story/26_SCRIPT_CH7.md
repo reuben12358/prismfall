@@ -192,7 +192,7 @@ FIELD NOTES pop-up: "THE WEEPING FEN — BLEED. Rain falls upward here. The pool
   (No battle.)
 [else]
   [portrait: WICK, sad] I won't let you take them up into the Mandate's hands. Not tonight. Forgive me. I'm very bad at this.
-  BATTLE: HOLLOW_WICK "Wick", version 0. Field: Bleed.
+  BATTLE: HOLLOW_WICK "Wick", version 0. Field: Hollow Cathedral (the Fen outside is :BLEED; the drowned chapel is consecrated ground).
   (WIN:) [portrait: WICK, neutral] There. You've beaten an old man in a chapel. Now sit, please, my knees are worse than my Pokémon.
 (All:)
 [portrait: WICK, neutral] The Choir teaches that the Plates were a gift. Child, nobody bleeds for three hundred years from a gift.
@@ -364,7 +364,7 @@ None of these maps is built. V127 = **CH7_STEP**, V128 = **SWEETROT_TAKEN** (des
 **220 Mirefen** — arrival lines (noodle-cart cook with a Kestrel page, Mirefen woman, child with an Alolan Grimer); the Ogre graffiti (sign); **the Sweet Market** on the lowest walkway (vendor 1 with offer 1; a singing child); **vendor 2** walks up after S118 (offer 2; Wenlow's panic line from above if V128 >= 2); Trials (A Five Out of Ten, Lamps Out, the Gutter Book board); the chapter-close morning (the overpainted rings, the chalk, the ferryman, Wenlow at the lift; V127 = 7, V102 = 8).
 **221 Mirefen PC** — **vendor 3** on the steps outside (`Prismfall.checkpoint` first; the GO_SWEET_TOOTH chain if V128 >= 2); Mother Gutter's barge passing under the walkway (one-line event, a big sprite and a Muk).
 **223 Corvin Mott's Infirmary** — the front ward (NPC patients); **the Quiet Ward** top floor: forty beds (decor), named patients as events (Mister Garrod, Old Fen, the Tull twins, **Ama** by the window); **"The Quiet Ward"** (first entry; Wenlow's introductions; Corvin; V127 = 2); **the dispensary** with Juno and the ledgers: **"R.A."** → J2 (`RIVAL_JUNO` version 20 + slot) → `:ch7_ledger` (S118, V127 = 3); "Invoice" on returning from the Fen; **the roof**; **"The Ward Night"**: a lights-out tone, a Bleed Veil event across the Quiet Ward's door, Ama's bed by the window (the PC carries her out: the PC's sprite with a carried-child pose, or a fade), the stills-to-coils SE, the Veil's fade, Old Fen's wink. Sets V127 = 6.
-**648 The Weeping Fen** — Field Notes; upward rain (fog/particle); the drowned chapel; Wick with four Bereaved on straw; the talk-down check (`standing(:HOLLOW) >= 4 || choice(:ch5_lowlight_testimony) == :someone_else`) or `HOLLOW_WICK` v0 on `:BLEED`. S119, V127 = 4.
+**648 The Weeping Fen** — Field Notes; upward rain (fog/particle); the drowned chapel; Wick with four Bereaved on straw; the talk-down check (`standing(:HOLLOW) >= 4 || choice(:ch5_lowlight_testimony) == :someone_else`) or `HOLLOW_WICK` v0 on `:HOLLOW_CATHEDRAL`. S119, V127 = 4.
 **230–233 the Infirmary gym (Gym 6)** — as GYM_PUZZLES; Corvin's sign; the gym guide; Wenlow's hint lines; Corvin (233) double battle, the ace line, the REMEDY BADGE, the TM; the ferrymen teach Surf. V127 = 5.
 **644/645 Miasma Caverns** — Venam's cameo (CAMEOS.md), NA_VENAM.
 

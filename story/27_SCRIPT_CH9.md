@@ -393,7 +393,7 @@ Script: Prismfall.checkpoint     # NARRATIVE_KEYS §10: GO_PULL_THE_NAIL's check
 (A woman leans on an ore cart in the lamplight, eating an apple. Hollow grey. The top half of her face behind a half-mask, the bottom half smiling.)
 [portrait: SABLE, happy] There you are. The one who walks in. I've been dying to meet you properly. Last time you were busy standing in my glass.
 [name: Sable] You're a friend of ours. Word gets about. Wick likes you. The Ebbmouth boy owes you. I don't owe anybody anything, so I can be honest.
-[portrait: SABLE, neutral] In ten minutes, seventeen Wardens are going to vote to put a leash on Nadir. Unless somebody gives them a reason to look somewhere else.
+[portrait: SABLE, neutral] In ten minutes, sixteen Wardens at that table are going to vote to put a leash on Nadir. Unless somebody gives them a reason to look somewhere else.
 [name: Sable] The reliquary's warded. Nobody can get near it but a Warden. And you. You could walk right up to it. You could put something on it where nobody else can reach.
 (She holds out a small brass thing with a sunburst scratched off it, warm in her hand.)
 [portrait: SABLE, happy] One little nail. Pull it. Let them listen.
@@ -606,17 +606,17 @@ MOVE: Kestrel walks away across the Pit, into the shafts, and the dark takes him
   [portrait: JUNO, sad] *(not looking up)* You told me a secret once. On the breakwater. About the scanner.
   [name: Juno] I kept it. I'm good at secrets. I just don't look it.
   [portrait: JUNO, crying] I didn't know he was keeping one too. I didn't know everybody was.
-  [if :ch7_ledger == :name_him]
-    [portrait: JUNO, sad] You said his name in Mirefen and I ran away from you. I knew then. I knew in the dispensary. I just wanted one more week of not knowing.
-  [if :ch7_ledger == :reassure]
-    [portrait: JUNO, crying] You said there were loads of R.A.s. You were being kind. I know you were. I wish you hadn't been.
-  [if :ch7_ledger == :ask_corvin]
-    [portrait: JUNO, sad] Dr Mott knew. Didn't he. He treats hands. He doesn't ask whose.
-  [portrait: JUNO, crying] Don't go. Don't say anything. Just don't go.
-  (You sit down in the glass dust beside her. It doesn't cut you.)
 [else]
-  (She doesn't look up. She doesn't answer anyone. Corvin sits down a little way off, with his mask in his hands, and doesn't try to make her.)
-  [portrait: CORVIN, sad] *(to you, very low)* Leave her. Not for long. Just for now.
+  (For a long while she doesn't look up. Corvin sits down a little way off, with his mask in his hands, and doesn't try to make her talk.)
+(Every player gets Juno's answer to Chapter 7, whether or not she was trusted on the breakwater.)
+[if :ch7_ledger == :name_him]
+  [portrait: JUNO, sad] You said his name in Mirefen and I ran away from you. I knew then. I knew in the dispensary. I just wanted one more week of not knowing.
+[if :ch7_ledger == :reassure]
+  [portrait: JUNO, crying] You said there were loads of R.A.s. You were being kind. I know you were. I wish you hadn't been.
+[if :ch7_ledger == :ask_corvin]
+  [portrait: JUNO, sad] Dr Mott knew. Didn't he. He treats hands. He doesn't ask whose.
+[portrait: JUNO, crying] Don't go. Don't say anything. Just don't go.
+(You sit down in the glass dust beside her. It doesn't cut you.)
 ```
 **CHOICE `:ch9_rowan_words`** (the stretcher passes the PC on its way to the cage-lift; Rowan turns his head)
 ```
@@ -659,7 +659,7 @@ QUEST LOG: "Eighteen Roads" — Go to Verdance, as the Sovereign asked. Up the R
 (Every screen in the Center. The Velmora Gazette's night bulletin, read by a woman with a very steady voice.)
 [name: Gazette Reader] ...unmasked as the Grass Warden, Rowan Ashby of Verdance, who is in Directorate custody. The Conclave has extended the Mandate to every Lattice in the realm. In Lumen, Chairman Voss said Meridian "will carry this responsibility with the seriousness it deserves".
 [name: Gazette Reader] One unidentified member of the public was seen to enter the Bleed. Witnesses report they were unharmed.
-GAZETTE HEADLINES (the board by the door): "MOURNER IS GRASS WARDEN" · and by `:ch9_teo_sable`: "EBBMOUTH BOY PULLED FROM GLASS" or "HAMMER BOMBER STILL AT LARGE"
+GAZETTE HEADLINES (the board by the door): "MOURNER IS GRASS WARDEN" · and by `:ch9_teo_sable`: "EBBMOUTH BOY PULLED FROM GLASS" (`:save_teo`) or "WARDEN'S BROTHER LOST IN IRONREACH GLASS" (`:chase_sable`); both add "HAMMER BOMBER STILL AT LARGE" underneath
 [name: Nurse] (at the counter, quietly) The one who walked in. That was you. ...Here. Your Pokémon are fine. I checked them twice. I don't know why I checked them twice.
 ```
 *(10_CHOICES_ENDINGS §1.4: the Gazette, two headlines per chapter.)*
@@ -668,7 +668,7 @@ GAZETTE HEADLINES (the board by the door): "MOURNER IS GRASS WARDEN" · and by `
 
 ## Map 294 — the Heartgarden, Verdance, at dawn: **INTERLUDE II — "The Bride Tree"** (playable as Rowan; autorun on sleeping at 261 with V130 == 11)
 ```
-V119 INTERLUDE_ACTIVE = 2. (The party is swapped for Rowan's Warden team: Trevenant "Lily", Leavanny, Roserade, Sunflora, at K4's levels. No battles are scripted; wild encounters are off.)
+V119 INTERLUDE_ACTIVE = 2. (The party is swapped for Rowan's Warden team: Trevenant "Glasswood", Leavanny, Roserade, Sunflora, at K4's levels. No battles are scripted; wild encounters are off.)
 TEXT (white on black): Five days earlier. Verdance.
 (Dawn in the Heartgarden. Verdance's walled garden on its terraces, ordinary-beautiful, not drowning in anything yet. Bees. A watering can on the path. In the centre, at the head of a stone stair that goes down into a sunken grove, a tree in the shape of a woman: arms raised, head back, in blossom from root to crown. White and pink. The same blossoms as Juno's wreath.)
 (The player is Rowan. His right hand is bandaged. He picks up the watering can with his left.)
