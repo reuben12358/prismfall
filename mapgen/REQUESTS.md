@@ -1337,3 +1337,35 @@ D5's creeping armchairs), 525 Deepwood (the §2n spec-restore rule applies), 562
 577/578 trainers once PBS has them (cells above), the Overflow Culvert Mastery 175 (bell x gate, 6/10), Gullcry B1F 565,
 then Skaldfast 921-923 and Cinder Cape 927.
 
+
+## From map builder 14 (2026-11-21)
+**Built:** the manor kit (`mapgen/mdraw.py`, tileset 59 "PF Rejuv Manor") and **Thistledown Manor 546/547** rebuilt with
+DUNGEON_PUZZLES D5 proved (stair hall 3/10, gallery 4/10, dining room 4/10; MAPGEN 2q); **The Wolfsrime (579)**, the
+first Rimewood Path layout restored as a one-way shortcut road from the Rimewood's east edge to Frostwick Pass (job 2b);
+the nine **577/578 route trainers** placed. Previews: `maps_out/previews/ch2_4_compare/546_before_after.jpg`,
+`547_before_after.jpg`, `579_wolfsrime_restored.jpg`.
+**For the playtest (when runs resume):** 546: the front doors are at the bottom; the stair hall chair is beaten by
+stepping aside early (pass it with a clear tile between you); the portrait gallery is upstairs, west off the landing
+(diary in the parlour: the Fool, Laertes, Rosamund, the Old King = wall positions 3, 1, 4, 2; walk down past the east
+curio case and back up first, so the loose chair backs into the empty alcove); the dining room (east off the
+vestibule) unlocks when the portraits are set (`GATE ok 546`); draw both chairs out of the back-stair nook, lead each
+over a trapdoor, then pull the attic cord. Being caught = a wild Gastly / Shuppet / Duskull Lv 15 and the room resets.
+579: from 562's east edge at (47,26); the snow bank at the bottom drops you into 577 at (16-19,4) and has no way back.
+**For the trainer designer:** the 577/578 events battle your round-4 PBS entries, which are still uncommitted in
+`pbs/trainers.txt`; please commit them (validate_map_trainers: 0 errors against the working tree).
+**For the story editor:** new manor lines are mine: Fenwick in the vestibule (the chair rule), Dame Rosamund's diary
+(the curtain-call order), the gallery note, the nook card, the dining door, the hatch; the three scenes moved to the
+landing (1), the parlour (2) and the conservatory (3, "Freshly turned earth on the conservatory tiles"), Lady
+Thistledown to the parlour fire. Her finale still happens in the parlour, not the attic (the script's 547 beat): say if
+you want it moved. 579's lines (the old drover, his grandson, the bothy, the bell) are mine too.
+**For the Trials owner:** the doll quest's three buttons (546: under the dining table, the parlour fireplace, beside
+the landing clock) and the rag doll (547) are placed (keys DOLL_BUTTON / ATTIC_DOLL). `validate_badge_tiers` warns
+that [579,103] / [579,104] have no rumour in 140_BadgeTier_Rumours.rb.
+**For the cartographer:** 579 is in maps.json, ROUTES.yaml, PLACE_NAMES, WORLD.md, world_data.py and the town map
+(7,11); `tools/worldmap/gen_docs.py` has no 579 entry (warp links 562 (47,26) <-> 579 N end, 579 S end -> 577 one way).
+**Not done (next map builder, in order):** **525 Gossamer Deepwood** to the crafted standard (still the old green
+reskin; the D2 lantern-hollow events are fixed in `puzzles/dungeons.py` EVENTS at x 24-41, y 2-10, so carve round them
+or move them with the proof; mind the MAPGEN 2n spec-restore rule), **562 the Rimewood / 563 the Glade** (C; keep
+Ranger Sigurd's night-only Emolga hint on 563, 562's D7 Frost Loom at x 39-47, y 16-21, the glade warp at (47,24) and
+the new Wolfsrime warp at (47,26)), then the Overflow Culvert Mastery 175, Gullcry B1F 565, Skaldfast 921-923 and
+Cinder Cape 927.
