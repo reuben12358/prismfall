@@ -1293,3 +1293,34 @@ flood pools with a 3-slide puzzle to the Icestone) and 920's north rim (scarp, w
 Never-Melt Ice) filled. **For the playtest (Ch19 states):** the ice on 920/925 is terrain tag 12; `GATE ok` lines prove
 both prizes are shut on foot. **For the backdrop owner:** the map's glass now matches `glass_dunes.png` (dark green body,
 teal-white streaks); if you re-shoot WAR-1's stage picture, export 926's new render.
+
+## From map builder 13 (2026-11-20)
+**For the trainer designer: route trainers for 577 Frostwick Pass and 578 Rimewood Path** (ROUTES.yaml wants 4 on 577
+and 5 on 578; PBS has none, so neither map carries a trainer yet). Suggestions below; the cells are open ground on the
+built maps with 3 clear tiles round them and no event within 3, so a trainer with sight 3-4 fits as it stands. Add the
+PBS entries (stock classes, or new ones if the sprite artists want them) and tell me which you used; I'll place the
+events (field rules from FIELD_DEFAULTS: 577 `:SNOWY_MOUNTAIN`, 578 `:SILKWOOD`). Levels sit between Gym 2 (cap 19) and
+Gym 3 (cap 23), with no Electric or Grass answer to Marisol handed over (SPINE Rev 16).
+| Map | Cell | ROUTES role | Stock class | Lv | Team idea |
+|---|---|---|---|---|---|
+| 577 | (36, 82) | sledger, at the foot of the climb | TWINS (two sledgers, a double) | 17-18 | Swinub + Snom |
+| 577 | (25, 66) | forester by the avalanche fences | POKEMONRANGER_F | 18 | Deerling, Cubchoo |
+| 577 | (33, 37) | second sledger, below the wind gap | CAMPER | 18-19 | Snorunt, Swinub |
+| 577 | (37, 16) | huscarl at the Handfast Arch | BLACKBELT (or a new HUSCARL) | 19-20 | Cubchoo, Snorunt, Stantler |
+| 578 | (35, 79) | Frostwick woodcutter by the log sledge | HIKER | 18 | Teddiursa, Swinub |
+| 578 | (36, 61) | trapper at the snare line | POKEMONRANGER_M | 19 | Buneary, Cubchoo |
+| 578 | (43, 37) | charcoal burner at the kiln | CAMPER | 19 | Snover, Vanillite |
+| 578 | (37, 30) | honey-gatherer at the hives | PICNICKER | 19-20 | Teddiursa, Deerling |
+| 578 | (39, 9) | Rimewood scout at the last blaze | COOLTRAINER_F | 20-21 | Sneasel, Snover, Morelull |
+
+**Built (job 1):** the PF cave kit (`cdraw.py`, tileset 57) and **544/545 Brinecut Mine** and **564 Gullcry Caves**
+rebuilt on it (MAPGEN 2p). Brinecut is DUNGEON_PUZZLES D4 (points P1-P3 = S516-518, cart at B = S519, lake drained =
+S520, V516 = where the cart stands); Gullcry is D6 (V526 steps / S526 high tide). 545-547 moved into their own spec
+files (546/547 unchanged).
+**For the playtest:** 544 - the Cut is crossed only by the depot cart (`GATE ok 544`); ride with P1 left to the blind
+drift, crawl through under the chalk X, throw P2 in the points gallery, drop down the rib's ledge, throw P1 and ride:
+the cart stops at the ladder. 545 is dark: light the lamps; the pump only drains the lake while the cart stands at B.
+564: the caves stay the only way north; the west gallery is always open, the sand-bar crossing is a 19-step shortcut
+that floods every 24 steps (watch the gulls). The weed curtain on the east shelf is a crawlway to a grotto.
+**For the trainer designer:** the caves carry Bram, Taro and Saul (544), Gorse and Holt (545), Torvald (564), all from
+PBS; Holt and Saul are placed now.
