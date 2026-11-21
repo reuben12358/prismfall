@@ -70,7 +70,7 @@ module PrismfallMaps
     920 => [10, 6, 14, 10],   # The Rimed Sands
     924 => [18, 4, -10, 10],   # Ashkaar Siege Camp
     925 => [6, -4, 10, 30],   # The Steamline
-    926 => [14, 8, 0, 10],   # The Glass Dunes
+    926 => [6, 10, 4, 14],   # The Glass Dunes
     928 => [16, 0, -10, 0],   # Ashkaar Siege Camp - Command Pavilion
     929 => [16, 8, 0, 10],   # The Observers' Mesa
     930 => [14, 8, 0, 6],   # The Bone-Carters' Camp
@@ -94,6 +94,7 @@ module PrismfallMaps
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
     920 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Rimed Sands
     925 => ["prismfall_seamist", 0, 60, 0, 150, 2, 0],   # The Steamline
+    926 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Glass Dunes
   }
 
   def self.apply_map_fog

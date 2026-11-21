@@ -221,7 +221,7 @@ def ledge(r, x0, x1, y, chalk=False, face=None):
     """a one-way ledge across x0..x1 at row y (jump down southward).  Cells stay grass class; the tiles go on layer 2.
     face: 'chalk', 'dune' or None (earth)"""
     m = r.m; face = face or ('chalk' if chalk else None)
-    pre = {'chalk': 'lgc_', 'dune': 'lgd_'}.get(face, 'lg_')
+    pre = {'chalk': 'lgc_', 'dune': 'lgd_', 'glass': 'gdl_', 'sand': 'sdl_'}.get(face, 'lg_')   # map builder 11: no-turf dune lips
     for x in range(x0, x1 + 1):
         if not m.inb(x, y): continue
         t = P1(pre + ('w' if x == x0 else 'e' if x == x1 else 'm'))

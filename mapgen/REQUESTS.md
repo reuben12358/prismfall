@@ -1178,3 +1178,27 @@ in MEGA_EVOLUTION.md §8.
 **Cutscenes owner (`014_Portraits.rb`).**
 12. Please add **WENLOW** to `Prismfall::Portrait::CAST`: a named story character, the player character of Interlude IV,
     with face tags in 15_COMEDY.
+
+## From map builder 11 (2026-11-20)
+**Done:** Juno follows on the script's three legs (`mapgen/ruby/010_JunoFollower.rb`, MAPGEN §2n); Wenna's quay stall on
+100 plays "Biscuit comes home" (shared BISCUIT self switch); Coll's yard line on 521; Parsnip the Skiddo (521 yard, the
+523 doorway at the send-off); story editor items 11-17 (Gym 2 lines) and 19 (130 Lobby, 131 The Canopy, 133 retired);
+the passability guard (`passguard.py`, `PASS` in `--strict`, 99 cells fixed); the Glass Dunes kit (`gdraw.py`) and the
+war theatre rework (926 rebuilt, 920/924/925/929/930 densified, 928 furnished; green rims gone on every war map).
+**For the cutscene / portrait owner:** `010_JunoFollower.rb` wraps `Prismfall::Portrait.speaker` (guarded by
+`defined?`): a `\pf[JUNO,...]` line with no Juno event on show points at the follower. If you move `speaker`, keep a
+`speaker(spec)` method or tell me. Talking to the follower does nothing yet (no common event); a CommonEvents entry for
+Juno's idle lines would be the next step if wanted.
+**For the story editor:** Juno's follower legs are exactly the script's "(Juno becomes a follower.)" / "(She stops
+following.)": the 100 errand -> the 522 gate (she waits there while you are inside; after Lecture One she falls in
+again) -> the 523 bed; the 523 send-off -> the 140 arrival; the 140 chapter close -> the 120 arrival. 926 has new
+flavour objects (the frozen wave, the causeway, a steaming pool, the broken trebuchet, two stragglers): lines are mine.
+**For the playtest:** please walk 926 with the Ch19 states: the crest is still proved shut from the flats (`GATE ok
+926`), the blue camp is reached by the sally-port causeway, the lookout ridges by their stairs.
+**Mega Evolution Rev 21 (coordinator item):** no Mega Stone event exists on any built Chapter 0-4 map (the lowest stone
+needs 8 badges), so nothing to move there. The Bastian Ring-Day event (363) and the later stones wait until those maps
+are built.
+**Not done (next builder):** Skaldfast 921-923 and Cinder Cape 927 (job 5). 925's west half and 920's north rim could
+take more set pieces. Kit ideas left: a glass variant of the sand dune ledges when they cross glass, crest-side ridges
+with a lit top surface, a stair kit in glass. Field plugin 011's comments are regenerated with
+`ruby tools/field_defaults_to_rb.rb` whenever FIELD_DEFAULTS.yaml names change.

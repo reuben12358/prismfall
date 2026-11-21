@@ -546,6 +546,40 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   show the kit's grass rim). `gate_check` reads passage bits directionally, so one-way ledges count; a stepped ledge line
   leaks at every step, so story ledges run straight. Never lay a priority-0 decal over a solid prop.
 
+## 2n. Map builder 11 (2026-11-20): Juno follows, the passability guard, the Glass Dunes kit
+- **Juno as a follower** (`mapgen/ruby/010_JunoFollower.rb`, Essentials v21.1 Followers; doors already call
+  `Followers.follow_into_door`): `pfm_juno_join(:leg[, "Event"])`, `pfm_juno_part(["Event"])`, `pfm_juno?`. The leg
+  (`pfm :juno_leg`) is the record; `on_enter_map` re-syncs it (old saves), hides her in the Glassed Orchard after Lecture
+  One (`JUNO_WAITS`: the map's Juno waits at the gate), erases her stand-ins on 100/103 (`JUNO_STANDINS`), and Juno's
+  portrait bubbles point at the follower when none of her map events is on show. Legs: errand (100 lab yard -> 522 gate;
+  after Lecture One -> the 523 bed), Saltmere (523 send-off -> the 140 arrival, she runs off), Weavers' Road (140
+  chapter close -> the 120 arrival). Talking to the follower does nothing (no common event).
+- **passguard** (`mapgen/passguard.py`): Essentials' `playerPassable?` stops at the first passable priority-0 tile,
+  top layer first, so a decal over a solid tile makes it walkable. A *decoration* is a passable priority-0 sheet tile
+  that is not a walking surface (kit names: `WALK` regex; unnamed tiles: coverage < 0.9; `SURFACE_IDS`). `hits()` = cells
+  the player can walk onto only because of one; `build.py` warns `PASS` and `--strict` fails. `guard()` is the fix every
+  raw writer applies (`rkit.Map.write`, `hallkit.Hall.write(mid, event_cells)`): the decoration moves down a layer and an
+  invisible solid sheet tile (`blocker()`) goes on top, so the picture is unchanged; with no room the decal is lifted.
+- **The Glass Dunes kit** (`mapgen/gdraw.py`, appended LAST in `ndraw.pieces()`; it shifts the chalk / snow / silk /
+  dye copies after the pf part, so after any sheet change re-run every layout: ferrow_rj, briarwick_rj, dovetail,
+  ebbmouth, rimewood, saltmere_rj, saltmere_interiors, orchard, trial_interiors, early_interiors, war, routes_early,
+  `reskin.py 525`, then restore `specs/525_deepwood_cocoonfall.yaml` from git (reskin rewrites it; 548 is built by
+  `deepwood.py 548` only) and build): glass floor `gd_g*`/`gd_gc*` (layer 1 ground), the glass sheet edge `gd_floor_NN`
+  and flood water `gd_flood_NN` in the 48 autotile shapes, cliff kits **`gdc`** (glassed) and **`sdc`** (sandstone) with
+  no grass anywhere (rkit `KITS`), one-way ledges `gdl_*` / `sdl_*` (`CK.ledge(face='glass'|'sand')`), fords, steaming
+  pools, the frozen wave `gd_wave` (6x5), glass shards, rope / crack / spill decals, and war pieces (`wr_treb_broken`,
+  `wr_tower_wreck`, palisades `wr_pal_h/hb/v`, `wr_stakes`, `wr_sandbags`, torn banners, `wr_supply`, `wr_sacks`,
+  `wr_firering`, `wr_rack`, `wr_glasssled`). `python3 -I gdraw.py out.png` draws a contact sheet.
+- **War maps** (`layouts/war.py`): the green rims had two causes, both fixed for every war map: the Rejuvenation
+  road / dirt autotiles carry a grass edge, and the shore theme lays grass on layer 1 under everything. `trail()` plans
+  roads as sand (road_mask still works: ruts, causeways); `sand_seams()` re-shapes the Dirt autotile so height changes
+  don't cut it and puts sand (salt crust where hidden) under every piece. Desert edges are sealed with sandbags / stakes
+  / sacks / glass clusters (`m.SEAL`), not green bushes. Helpers: `blob`, `band`, `paint_glass`, `plan_flood` /
+  `paint_flood`, `ridge`. 926 is rebuilt (glassed crest and ridges, flood channels with one causeway, the frozen wave,
+  steaming pools, broken siege engines, both armies' lines and camps, stake lines, dune slides, two lookout stairs);
+  920/924/925/929/930 densified; 928 furnished. All map builder 10 event wiring is unchanged.
+  Before/after: `maps_out/previews/war_compare/`.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

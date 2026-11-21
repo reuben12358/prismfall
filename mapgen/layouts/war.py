@@ -34,19 +34,21 @@ FRONT = {'type': 'event', 'name': 'War front', 'at': [0, 0], 'fixed': True, 'pag
                "$game_switches[606] = (c == :back_isenmar)\n$game_switches[607] = (c == :stand_between)"}, {'wait': 60}]}]}
 
 
-def desert(W, H, mid, base='u'):
-    r = Route(mid, W, H, 'shore', kit={1: 'akd', 2: 'akd', 3: 'akd', 'default': 'akd'}, base=base)
+def desert(W, H, mid, base='u', kit='sdc'):
+    """map builder 11: plateaus use the dune cliff kits of gdraw.py (sdc sandstone, gdc glassed), never the green rim"""
+    r = Route(mid, W, H, 'shore', kit={1: kit, 2: kit, 3: kit, 'default': kit}, base=base)
+    r.m.SEAL = K.P1({920: 'wr_sandbags', 924: 'wr_stakes', 929: 'wr_sacks', 930: 'wr_sacks'}.get(mid, 'gd_shard2'))   # no green bush on a desert edge
     return r, r.m
 
 
-def dunes(r, n, seed, box=None, w=(5, 10)):
+def dunes(r, n, seed, box=None, w=(5, 10), face='sand'):
     """dune crests: one-way sand ledges (their lee faces south, you slide down them) east-west across the sand"""
     m = r.m; rng = random.Random(seed)
     x0, y0, x1, y1 = box or (2, 2, r.W - 2, r.H - 2)
     for i in range(n):
         x = int(rng.uniform(x0, x1)); y = int(rng.uniform(y0, y1)); L = int(rng.uniform(*w))
         if all(m.cls[y, xx] in 'su' and not r.road_mask[y, xx] for xx in range(x, min(r.W - 1, x + L))):
-            CK.ledge(r, x, min(r.W - 2, x + L), y, face='dune')
+            CK.ledge(r, x, min(r.W - 2, x + L), y, face=face)
 
 
 def sand_dress(r, ripple=0.42, seed=0, on='su', bones=0.01):
@@ -88,6 +90,117 @@ def decal(r, names, p, on='su', seed=0, cells=None):
             m.L[2, y, x] = rng.choice(T)
 
 
+# ---------------------------------------------------------------------------------------------- the glass kit (map builder 11)
+from terrain import NB2AUTO
+
+
+def blob(W, H, cx, cy, rx, ry, seed, rough=0.45):
+    """a ragged ellipse (bool mask)"""
+    yy, xx = np.mgrid[0:H, 0:W]
+    q = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2
+    n = np.array([[vnoise(x, y, seed, 4.0) for x in range(W)] for y in range(H)])
+    return q <= 1.0 + rough * (n - 0.5) * 2
+
+
+def band(W, H, pts, w, seed, wob=0.45):
+    """a winding band along a polyline whose width breathes with noise (flows, channels, scars)"""
+    out = np.zeros((H, W), bool)
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+        n = int(max(abs(x1 - x0), abs(y1 - y0)) * 3) + 1
+        for i in range(n + 1):
+            t = i / n; x, y = x0 + (x1 - x0) * t, y0 + (y1 - y0) * t
+            ww = w * (1 + wob * (vnoise(int(x * 2), int(y * 2), seed, 3.0) - 0.5) * 2)
+            for yy in range(int(y - ww - 1), int(y + ww + 2)):
+                for xx in range(int(x - ww - 1), int(x + ww + 2)):
+                    if 0 <= xx < W and 0 <= yy < H and (xx - x) ** 2 + (yy - y) ** 2 <= ww * ww: out[yy, xx] = True
+    return out
+
+
+def paint_glass(r, mask, cracks=0.05, rope=0.10, spill=0.04, seed=0):
+    """after paint: fused glass over the sand.  Inner cells get the glass floor on layer 1 (props may stand on it);
+    edge cells the glass sheet's edge overlay (48 shapes) on the top layer where nothing else is"""
+    m = r.m; rng = random.Random(r.seed * 7 + seed)
+    mask = mask & ~m.cliff
+    GG = [K.P1('gd_g%d' % v) for v in range(4)]; GC = [K.P1('gd_gc0'), K.P1('gd_gc1')]
+    FL = [K.P1('gd_floor_%02d' % i) for i in range(48)]
+    RP = [K.P1('gd_rope%d' % v) for v in range(3)]; CR = [K.P1('gd_crack%d' % v) for v in range(2)]
+    SP = [K.P1('gd_spill%d' % v) for v in range(2)]
+    shape = mask | m.cliff                                                # no fused rim against a cliff or a ridge side
+    for y, x in np.argwhere(mask):
+        sh = NB2AUTO[CK.nbits(shape, x, y)]
+        ground1 = m.L[1, y, x] == 0 or m.L[1, y, x] >= K.RC.VBASE           # empty, or a ground autotile (virtual id)
+        if sh == 0:
+            m.L[0, y, x] = rng.choice(GC) if rng.random() < cracks else GG[(x * 3 + y * 5 + int(vnoise(x, y, seed, 2.0) * 4)) % 4]
+            if ground1: m.L[1, y, x] = 0
+            if not m.L[2, y, x] and not m.taken[y, x] and not m.L[1, y, x]:
+                k = rng.random()
+                if k < rope * vnoise(x, y, seed + 3, 5.0) * 2: m.L[2, y, x] = rng.choice(RP)
+                elif k > 1 - spill: m.L[2, y, x] = rng.choice(SP)
+        elif not m.L[2, y, x] and ground1 and not m.taken[y, x]:
+            m.L[2, y, x] = FL[sh]
+    return mask
+
+
+def plan_flood(r, mask):
+    """plan time: flood channels are solid water (the gdraw flood tiles); keep props and events off them"""
+    m = r.m
+    for y, x in np.argwhere(mask):
+        if r.road_mask[y, x]: continue
+        m.taken[y, x] = True
+    return mask & ~r.road_mask
+
+
+def paint_flood(r, mask, steam=0.25, seed=0):
+    """after paint: turquoise flood water in its dark wet bed (48 shapes) on layer 2, steam rising off the banks"""
+    m = r.m; rng = random.Random(r.seed * 11 + seed)
+    FW = [K.P1('gd_flood_%02d' % i) for i in range(48)]; ST = [K.P1('wr_steam%d' % v) for v in range(3)]
+    for y, x in np.argwhere(mask):
+        m.L[1, y, x] = FW[NB2AUTO[CK.nbits(mask, x, y)]]; m.L[2, y, x] = 0
+    for y, x in np.argwhere(mask):
+        for dx, dy in ((0, -1), (1, 0), (-1, 0)):
+            X, Y = x + dx, y + dy
+            if m.inb(X, Y) and not mask[Y, X] and not m.L[2, Y, X] and not m.L[1, Y, X] and not m.taken[Y, X] and rng.random() < steam * 0.3:
+                m.L[2, Y, X] = rng.choice(ST)
+
+
+def trail(r, pts, w=3.0, only='su.tT'):
+    """a road over open sand: planned as a lane (so road_mask, ruts and the flood causeways know it) but painted as the
+    sand itself - every Rejuvenation road autotile has a grass rim, which has no business in a desert"""
+    m = r.m
+    before = r.road_mask.copy()
+    r.road(pts, w=w, c='d', open_=None, only=only)
+    m.cls[r.road_mask & ~before & (m.cls == 'd')] = 'u'
+
+
+def sand_seams(r):
+    """after paint: the sand (Dirt) autotile is cut by every change of height, and its edge shapes carry a grass rim.
+    Re-shape it so only water, flood and other autotiles count as a different region: plateaus, ledges and props sit
+    on one unbroken sand sheet (map builder 11: the green rims on the war maps)"""
+    m = r.m; V = K.RC.VBASE
+    L1 = m.L[1]
+    isdirt = np.zeros(L1.shape, bool)
+    for val in np.unique(L1[L1 >= V]):
+        if K.RC.vauto_name(int(val))[1] == 'Dirt': isdirt |= (L1 == val)
+    other = (L1 >= V) & ~isdirt                                              # water, sea, other autotiles: real edges
+    same = ~other & ~np.isin(m.cls, ['w', 'W'])
+    base = None
+    for y, x in np.argwhere(isdirt):
+        base = int(L1[y, x]) - (int(L1[y, x]) - V) % 48
+        m.L[1, y, x] = base + NB2AUTO[CK.nbits(same, x, y)]
+    if base is not None:                                                     # the shore theme lays grass on layer 1 under
+        L0 = m.L[0]                                                          # everything: under see-through kit pieces,
+        grassy = (L0 > 0) & (L0 < V) & ~np.isin(m.cls, ['w', 'W'])            # props and decals it showed as green rims
+        CR = [K.P1('gs_crust%d' % v) for v in range(4)]                       # (salt crust where the wind scoured it)
+        for y, x in np.argwhere(grassy):
+            n = vnoise(x, y, r.seed + 4242, 3.0)
+            m.L[0, y, x] = CR[(x * 3 + y) % 4] if n > 0.55 and isdirt[y, x] else base     # (crust only under opaque sand)
+
+
+def ridge(r, x0, x1, y0, y1, seed, h=1):
+    """a glassed (or sandstone) dune ridge: a ragged plateau east-west, smoothed so the cliff kit reads cleanly"""
+    CK.plateau(r, (x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2, (y1 - y0) / 2, h, rough=0.35, seed=seed)
+
+
 # stand-in charsets from the base project until the sprite artist draws the war classes (maps_out/trainers_needed.txt)
 SPRITE = {'ISENMAR_SOLDIER_M': 'trainer_POKEMONRANGER_M', 'ISENMAR_SOLDIER_F': 'trainer_POKEMONRANGER_F', 'ISENMAR_OFFICER': 'trainer_COOLTRAINER_M',
           'ASHKAAR_SOLDIER_M': 'trainer_BLACKBELT', 'ASHKAAR_SOLDIER_F': 'trainer_CRUSHGIRL', 'ASHKAAR_OFFICER': 'trainer_TAMER',
@@ -118,9 +231,9 @@ def build_920():
     dunes(r, 9, 920, box=(2, 20, 56, 33))
     dunes(r, 5, 921, box=(2, 3, 56, 9))
     road = [(0, 14.5), (12, 15), (24, 14), (36, 15.5), (48, 14.5), (59, 15)]
-    r.road(road, w=3.0, c='u', open_=None, only='su.tT')
-    r.road([(10, 16), (8, 24), (8, 35)], w=3.0, c='u', open_=None, only='su.tT')           # south to the Glass Dunes
-    r.lane([(30, 16), (31, 22)], w=2.0, c='u', open_=None, only='su.')
+    trail(r, road, w=3.0)
+    trail(r, [(10, 16), (8, 24), (8, 35)], w=3.0)           # south to the Glass Dunes
+    trail(r, [(30, 16), (31, 22)], w=2.0, only='su.')
     r.exit('W', 13, 4); r.exit('E', 13, 4)
     r.finish_plan(border=1)
     # the three trench-lines: a revetment column x = 18, 32, 46 from the north rim to the south dunes, one sally port each
@@ -163,8 +276,15 @@ def build_920():
         r.near(nm, x, y, on='su', r=3)
     CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 22, box=(0, 18, W, H), on='su', clump=2, seed=5)
     CK.props(r, ['dk_boulder', 'dk_pebbles'], 10, box=(0, 0, W, 12), on='su', clump=2, seed=6)
+    for nm, x, y in (('wr_supply', 5, 16), ('wr_supply', 27, 13), ('wr_sacks', 8, 13), ('wr_sacks', 30, 12), ('wr_rack', 16, 9),
+                     ('wr_rack', 34, 9), ('wr_firering', 11, 7), ('wr_firering', 40, 6), ('wr_ban_ise_t', 47, 18), ('wr_glasssled', 52, 22),
+                     ('wr_stakes', 20, 10), ('wr_stakes', 20, 19), ('wr_stakes', 34, 9), ('wr_stakes', 34, 21), ('wr_stakes', 48, 9), ('wr_stakes', 48, 19),
+                     ('wr_sandbags', 17, 12), ('wr_sandbags', 31, 13), ('wr_sandbags', 45, 12), ('gd_shard2', 55, 25), ('gd_shard0', 57, 20)):
+        r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'
     r.paint()
+    sand_seams(r)
     sand_dress(r, 0.52, seed=920, bones=0.03)
     # rime: the frozen side (west of the third line) is white with frost; trenches cut along each revetment's west face
     frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 47 + int(3 * vnoise(0, y, 9201, 4.0)))], thr=0.30)
@@ -196,8 +316,8 @@ def build_925():
     W, H = 64, 32
     r, m = desert(W, H, 925)
     dunes(r, 5, 925, box=(2, 3, 26, 28)); dunes(r, 5, 926, box=(38, 3, 62, 28))
-    r.road([(0, 14.5), (14, 15), (24, 13.5), (31, 15), (40, 16.5), (52, 15), (63, 14.5)], w=3.0, c='u', open_=None, only='su.tT')
-    r.road([(31, 16), (31, 24), (31.5, 31)], w=3.0, c='u', open_=None, only='su.tT')
+    trail(r, [(0, 14.5), (14, 15), (24, 13.5), (31, 15), (40, 16.5), (52, 15), (63, 14.5)], w=3.0)
+    trail(r, [(31, 16), (31, 24), (31.5, 31)], w=3.0)
     r.exit('W', 13, 4); r.exit('E', 13, 4); r.exit('S', 30, 4)
     r.finish_plan(border=1)
     E = [FRONT,
@@ -230,8 +350,16 @@ def build_925():
                      ('nr_colfall', 46, 26), ('pf_wagon', 42, 6)):
         r.near(nm, x, y, on='su', r=3)
     CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    for nm, x, y in (('wr_ban_ise_t', 22, 10), ('wr_ban_ash_t', 41, 10), ('wr_treb_broken', 44, 24), ('wr_glasssled', 20, 23),
+                     ('gd_pool2', 25, 20), ('gd_pool3', 36, 5), ('wr_stakes', 24, 16), ('wr_stakes', 39, 13), ('wr_sandbags', 16, 16),
+                     ('wr_pal_hb', 48, 12), ('wr_pal_hb', 49, 12), ('wr_pal_h', 50, 12), ('wr_supply', 56, 18), ('wr_sacks', 9, 16)):
+        r.near(nm, x, y, on='su', r=2)
+    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 18, box=(24, 0, 40, H), on='su', clump=2, seed=12)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'
     r.paint()
+    sand_seams(r)
+    paint_glass(r, band(W, H, [(31, 0), (30, 9), (32, 19), (31, 31)], 3.6, 92501), cracks=0.08, rope=0.12, seed=925)
     sand_dress(r, 0.35, seed=925)
     frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 27 + int(3 * vnoise(0, y, 9252, 4.0)))], thr=0.25)
     decal(r, ['wr_frost0', 'wr_frost1', 'wr_frost2'], 0.35, seed=1, cells=[(x, y) for y in range(H) for x in range(0, 28)])
@@ -265,13 +393,13 @@ def build_924():
     W, H = 56, 40
     r, m = desert(W, H, 924)
     dunes(r, 4, 924, box=(2, 2, 54, 6)); dunes(r, 4, 9241, box=(24, 33, 54, 37))
-    r.road([(0, 19.5), (12, 19.5), (24, 20), (36, 19), (48, 20), (55, 19.5)], w=3.0, c='u', open_=None, only='su.tT')
-    r.road([(20, 21), (14, 30), (8, 39)], w=3.0, c='u', open_=None, only='su.tT')
+    trail(r, [(0, 19.5), (12, 19.5), (24, 20), (36, 19), (48, 20), (55, 19.5)], w=3.0)
+    trail(r, [(20, 21), (14, 30), (8, 39)], w=3.0)
     for y0 in (10, 28):
-        r.lane([(24, y0), (50, y0)], w=2.0, c='u', open_=None, only='su.')
-    r.lane([(36, 20), (36, 14)], w=3.0, c='u', open_=None, only='su.')
+        trail(r, [(24, y0), (50, y0)], w=2.0, only='su.')
+    trail(r, [(36, 20), (36, 14)], w=3.0, only='su.')
     for cx, cy, rx, ry in ((30, 17, 4, 1.6), (44, 18, 5, 1.8), (27, 34, 4, 1.5)):          # drill yards: trodden gravel
-        m.blob(cx, cy, rx, ry, 'g', seed=cx + cy, rough=0.4, only='su')
+        pass                                                                          # (drill yards: trodden decals after paint)
     r.exit('W', 18, 4); r.exit('E', 18, 4)
     r.finish_plan(border=1)
     gates = {10: 19, 20: 20}
@@ -317,10 +445,23 @@ def build_924():
                      ('hb_barrels', 49, 27), ('sh_crates', 42, 33), ('wr_ban_ash', 31, 11), ('wr_ban_ash', 41, 11), ('hb_tubs', 30, 33)):
         r.near(nm, x, y, on='su', r=3)
     CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles'], 10, box=(0, 0, 10, H), on='su', clump=2, seed=5)
+    for x in range(24, 54):                                              # the camp's palisade, north and south, burnt in places
+        for y in (2, 37):
+            if not m.taken[y, x] and m.cls[y, x] in 'su' and not r.road_mask[y, x] and x % 9: m.stamp('wr_pal_hb' if (x + y) % 4 == 0 else 'wr_pal_h', x, y, mark='B')
+    for nm, x, y in (('wr_supply', 50, 24), ('wr_supply', 38, 33), ('wr_sacks', 48, 29), ('wr_sacks', 32, 31), ('wr_rack', 27, 21),
+                     ('wr_rack', 43, 16), ('wr_firering', 31, 28), ('wr_ban_ash_t', 9, 9), ('wr_ban_ash_t', 9, 29), ('wr_stakes', 8, 16),
+                     ('wr_stakes', 8, 23), ('wr_stakes', 18, 15), ('wr_stakes', 18, 25), ('gd_shard2', 4, 8), ('gd_shard0', 5, 31)):
+        r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'
     r.paint()
+    sand_seams(r)
+    paint_glass(r, blob(W, H, 48, 13, 5, 3, 92401) | blob(W, H, 4, 20, 4, 7, 92402) | blob(W, H, 44, 26, 3, 2, 92403),
+                cracks=0.12, rope=0.1, seed=924)                          # sand fired to glass round the dragon lines and forge
     sand_dress(r, 0.40, seed=924)
     decal(r, ['wr_ember0', 'wr_ember1', 'wr_ember2'], 0.30, on='sug', seed=2)
+    for cx, cy, rx, ry in ((30, 17, 4, 1.6), (44, 18, 5, 1.8), (27, 34, 4, 1.5)):        # drill yards: trodden sand
+        decal(r, ['wr_rut0', 'wr_rut1'], 0.7, seed=cx, cells=[(x, y) for y in range(H) for x in range(W) if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1])
     decal(r, ['wr_trench0', 'wr_trench1'], 1.0, seed=3, cells=[(x - 1, y) for x, y in works])
     decal(r, ['wr_bones0', 'wr_bones1', 'wr_rut0', 'wr_rut1'], 0.06, on='sug', seed=4)
     CK.scatter_quiet(r, 16)
@@ -348,30 +489,68 @@ def partner_page(sw, who, ver, foes, lines, win):
 
 
 def build_926():
-    """The Glass Dunes (60x48, DESERT; the battlefield of the climax, WAR-1).  Bone-white dunes across the old caravan
-    road; the wells both armies want; wrecked sleds and burnt pickets from a winter of skirmishes.  The crest (north
-    middle) is reached only from the Steamline (N, x 28-31) and drops one way to the south flats by the dune ledges; west
-    and east, glass ridges and wrecks close it.  NW: up to the Rimed Sands (920); NE: up to the Siege Camp (924); E: the
-    bone-carters' camp (930); S: the goat-path to the Observers' Mesa (929, after the battle).  On the crest in Ch19: the
-    crest singles, the partner double (Sigrun, or Marisol if you back Isenmar) and the legend (Reshiram, or Kyogre if you
-    back Ashkaar), then WAR-1."""
+    """The Glass Dunes (60x48, DESERT; the battlefield of the climax, WAR-1), rebuilt by map builder 11 to the Glass
+    Dunes / Flooded Dunes backdrops: a war-scarred desert turned to black-green glass.
+
+    The crest (north middle) is the beam scar: fused glass between two glassed ridges (W x 13-17, E x 43-47), reached
+    only from the Steamline (N, x 28-31) and left one way, down the glass lee ledge (y 14).  The flood came in from the
+    west: turquoise channels braid across the Isenmar flats, crossed only where the caravan road runs over a fused-glass
+    causeway (the choke point), steaming where they met the fire; the frozen wave stands where Isenmar's ice caught it.
+    The east is glassed: fused-glass flows pour off the crest toward the bone-carters' road, glassed dune ridges with
+    stairs up to lookouts, Ashkaar's burnt palisade and camp.  No-man's-land between: broken siege engines, the wells,
+    stake lines with one gap (the south lane), wrecked sleds sunk in glass, supply carts along the road.
+    NW warp: the Rimed Sands (920); NE warp: the Siege Camp (924); E: the bone-carters' camp (930); S: the goat-path
+    to the Observers' Mesa (929, after the battle).  Ch19 events on the crest: the crest singles, the partner double
+    and the legend, then WAR-1 (unchanged from map builder 10)."""
     W, H = 60, 48
-    r, m = desert(W, H, 926)
-    # the crest: a high dune plateau (h1) in the north middle, lee ledges along its south face
-    CREST = {x: 14 for x in range(18, 43)}                                     # (one straight lee: a stepped one leaks at every step)
-    r.road([(29.5, 0), (30, 6), (30, 12)], w=3.0, c='u', open_=None, only='su.tT')            # from the Steamline onto the crest
-    r.road([(7, 1), (9, 12), (14, 22), (24, 28), (36, 30), (48, 31), (59, 31.5)], w=3.0, c='u', open_=None, only='su.tT')   # the caravan road
-    r.road([(51, 1), (50, 12), (46, 24), (44, 30)], w=3.0, c='u', open_=None, only='su.tT')
-    r.lane([(30, 31), (30, 40), (30, 46)], w=2.0, c='u', open_=None, only='su.')
+    r, m = desert(W, H, 926, kit='gdc')
+    # ---- plan: roads first (ridges and water keep off them)
+    trail(r, [(29.5, 0), (30, 6), (30, 12)], w=3.0)                       # Steamline -> crest
+    trail(r, [(7, 1), (9, 12), (14, 22), (24, 28), (36, 30), (48, 31), (59, 31.5)], w=3.0)
+    trail(r, [(51, 1), (50, 12), (47, 22), (44, 30)], w=3.0)
+    trail(r, [(30, 31), (30, 40), (30, 46)], w=2.0, only='su.')
+    trail(r, [(16, 40.5), (10, 41), (4, 41.5)], w=2.0)                    # sally port -> the blue camp
     r.exit('N', 28, 4); r.exit('E', 30, 4)
-    # dry flood channels (wadis) cut by the Primal rain of the Thaw, gravel beds snaking down to the south
-    CK.stream(r, [(2, 20), (8, 27), (12, 35), (10, 42), (14, 47)], w=2.2, c='g', seed=1, only='su')
-    CK.stream(r, [(57, 22), (52, 28), (54, 36), (49, 42), (51, 47)], w=2.0, c='g', seed=2, only='su')
-    CK.stream(r, [(22, 33), (26, 38), (24, 44), (27, 47)], w=1.8, c='g', seed=3, only='su')
-    dunes(r, 8, 926, box=(2, 34, 56, 45)); dunes(r, 4, 9262, box=(2, 18, 14, 28)); dunes(r, 4, 9263, box=(46, 16, 57, 26))
+    # the crest's glassed side ridges (exact: they seal the crest) and the glassed dune ridges of the flats
+    def crest_sides():                                                  # ragged outer flanks, an exact sealed core
+        for x0, x1, out in ((13, 17, -1), (43, 47, 1)):
+            for y in range(0, 13):
+                for x in range(x0, x1 + 1): m.ht[y, x] = 1
+                bump = int(2.6 * vnoise(x0, y, 9267, 3.0))
+                for k in range(1, bump + 1):
+                    xx = (x0 - k) if out < 0 else (x1 + k)
+                    if 0 <= xx < W and not r.road_mask[y, xx]: m.ht[y, xx] = 1
+    crest_sides()
+    ridge(r, 16, 25, 33, 38, seed=1)                                   # the west lookout ridge (stair from the lane)
+    ridge(r, 34, 43, 36, 41, seed=2)
+    ridge(r, 51, 58, 16, 22, seed=3)                                   # the east lookout ridge (stair from the lane)
+    ridge(r, 49, 57, 38, 43, seed=4)
+    for x0, x1, y0, y1 in ((16, 25, 31, 40), (34, 43, 34, 43), (51, 58, 14, 24), (49, 57, 36, 45)):  # never over a road
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                if r.road_mask[max(0, y - 1):y + 4, max(0, x - 1):x + 2].any(): m.ht[y, x] = 0
+    for x0, x1, y0, y1 in ((16, 25, 31, 40), (34, 43, 34, 43), (51, 58, 14, 24), (49, 57, 36, 45)):
+        CK.smooth_ht(m, 1, 2, box=(x0 - 1, y0 - 1, x1 + 2, y1 + 2))
+    CK.smooth_ht(m, 1, 2, box=(8, 0, 20, 14)); CK.smooth_ht(m, 1, 2, box=(41, 0, 53, 14))
+    for x0, x1 in ((13, 17), (43, 47)):                               # (smoothing never opens the crest's sealed core)
+        for y in range(0, 13):
+            for x in range(x0, x1 + 1): m.ht[y, x] = 1
+        for x in range(x0, x1 + 1): m.ht[13:, x] = np.minimum(m.ht[13:, x], m.ht[13:, x])
+    for sx, ex, ey in ((20, 29, None), (53, 48, None)):                # a stair up each lookout ridge, a spur from the road
+        col = [y for y in range(14, H) if m.ht[y, sx + 1] == 1]
+        if not col: continue
+        lip = max(col); CK.stair(r, sx, lip, w=3)
+        foot = lip + 4
+        trail(r, [(ex, foot + 0.5), (sx + 1, foot + 0.5)], w=2.0, only='su.')
+    # the flood: braided channels across the western flats (Kyogre's sea, dragged in over the dunes)
+    flood = band(W, H, [(0, 13), (3, 15), (5, 20), (10, 24), (16, 26), (19, 30)], 1.25, 9261) | \
+            band(W, H, [(0, 26), (5, 28), (8, 33), (7, 38), (11, 43), (13, 47)], 1.35, 9262) | \
+            band(W, H, [(5, 28), (2, 34), (0, 37)], 1.0, 9263)
+    flood &= (m.ht == 0)
+    flood = plan_flood(r, flood)
+    dunes(r, 7, 9268, box=(19, 21, 47, 31), w=(4, 8)); dunes(r, 5, 9269, box=(44, 32, 58, 37), w=(4, 7))   # one-way dune slides
+    dunes(r, 4, 9270, box=(14, 41, 28, 46), w=(4, 7))
     r.finish_plan(border=1)
-    for x, y in CREST.items():                                                  # (keep the lee row and the sides free of dunes)
-        for yy in range(y, y + 2): r.road_mask[yy, x] = r.road_mask[yy, x]
     E = [FRONT,
          {'type': 'warp', 'name': 'To the Rimed Sands', 'at': [7, 1], 'link': 'WAR_RIMED_DUNES', 'arrive': [7, 2, 'down'], 'fixed': True},
          {'type': 'warp', 'name': 'To the Siege Camp', 'at': [51, 1], 'link': 'WAR_CAMP_DUNES', 'arrive': [51, 2, 'down'], 'fixed': True},
@@ -380,7 +559,14 @@ def build_926():
          obj('Caravan well ', (18, 26), ['The second well, its bucket gone, its rope cut. Someone has left a full waterskin on the rim for whoever comes next.']),
          obj("Bone-carters' banner", (40, 9), ['The bone-carters\' white banner on the crest\'s east shoulder. Under it, a tally-stick for every soldier carried off the sand. Both armies\' names.']),
          obj('Wrecked sled', (10, 18), ['An Isenmar sled-fort, overturned, its runners in the air, burnt to the iron on the eastern side.']),
-         talk('Bone-carter', (40, 37), 'NPC 27', ["Bone-carter: We carry them out. Whose they were doesn't matter. Whose they are now does: Ossaria's. Tomb-law."], d='left'),
+         obj('The frozen wave', (5, 9), ['A wave, taller than a house, standing on dry sand. It broke over the dunes at noon and the ice caught it before it landed.',
+                                         'Inside the curl the light is green. Something small and silver is frozen in it, mid-leap. A Feebas, maybe.']),
+         obj('The causeway', (13, 22), ['Where the caravan road crosses the flood the sand has run to glass a yard thick: the only dry way over the water for a mile.']),
+         obj('Steaming pool', (24, 21), ['Flood water in a basin of glass, still too hot to touch. It hisses where the edge is thinnest.']),
+         obj('Broken trebuchet', (38, 18), ['An Ashkaar trebuchet, its arm snapped clean. The far side of it has run like candle wax and set hard as green glass.']),
+         talk('Bone-carter', (40, 37) if False else (31, 35), 'NPC 27', ["Bone-carter: We carry them out. Whose they were doesn't matter. Whose they are now does: Ossaria's. Tomb-law."], d='left'),
+         talk('Ashkaar straggler', (54, 27), 'NPC 21', ["Ashkaar straggler: The palisade burnt from the inside. Our own fire. Reshiram doesn't take sides; it takes everything."], d='left'),
+         talk('Isenmar straggler', (6, 40), 'NPC 11', ["Isenmar straggler: The sea came over the dunes like it had somewhere to be. We built the trench to keep fire out. Not water."], d='right'),
          gauntlet((27, 8), 'ASHKAAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ASH', "The crest is held. By me, for now.", 'For now.', d='down'),
          gauntlet((33, 8), 'ISENMAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ASH', "One more between you and the crest.", 'Go. Look at what we did.', d='down'),
          gauntlet((27, 9), 'ASHKAAR_SOLDIER_F', 'Soldier', 1, 'WAR_SIDE_ISE', "The crest is held. By me, for now.", 'For now.', d='down'),
@@ -396,11 +582,10 @@ def build_926():
              partner_page('WAR_SIDE_ISE', 'Marisol', 19, ':ASHKAAR_OFFICER, "Captain", 1, :ASHKAAR_SOLDIER_M, "Soldier", 2',
                           ["Marisol: Kid. You came. Course you came. Stand on my left; the sea's on my right."], ["Marisol: Ha! The Ebb runs both ways, and today it ran ours."]),
              {'cond': {'self': 'A'}, 'commands': ['(The ground under the crest is humming. Something enormous is coming.)']}]},
-         {'type': 'event', 'name': 'The legend', 'at': [30, 2], 'fixed': True, 'pages': [
-             {'commands': []},
-             {'cond': {'switch': 'WAR_SIDE_ASH'}, 'trigger': 'action', 'commands': [{'call': 'legend'}] if False else []},
-         ]},
-         item((56, 44), 'FULLRESTORE'), hidden((4, 40), 'STARDUST', 'HiddenItem (dunes)'), hidden((38, 4), 'BIGNUGGET', 'HiddenItem (the crest)')]
+         {'type': 'event', 'name': 'The legend', 'at': [30, 2], 'fixed': True, 'pages': [{'commands': []}]},
+         item((56, 44) if False else (23, 34), 'FULLRESTORE'), hidden((2, 43), 'STARDUST', 'HiddenItem (dunes)'),
+         hidden((38, 4), 'BIGNUGGET', 'HiddenItem (the crest)'), item((55, 17), 'HYPERPOTION'),
+         hidden((7, 14), 'NEVERMELTICE', 'HiddenItem (behind the wave)'), item((58, 46), 'MAXREVIVE')]
     legend = [{'if': '!pfm?(:war_partner_done)', 'then': ['(The ground is shaking. Over the sea the clouds are turning the wrong way. Not yet.)'],
                'else': [{'if': 'pfm?(:war_battle_done)', 'then': ['(The glass hums underfoot, quietly. It is over.)'], 'else': [
                    {'script': "legend = (pf_choice(:war_legend) rescue nil)\nif legend != :neither\n  Prismfall::Bosses.wild_battle($game_switches[605] ? :KYOGRE_GLASS_DUNES : :RESHIRAM_GLASS_DUNES)\nend"},
@@ -413,39 +598,90 @@ def build_926():
         {'if': 'pfm?(:war_battle_done)', 'then': ['A goat-path up the sandstone to the mesa, where Meridian\'s white tents stand.', {'se': 'Door exit'},
                                                     {'transfer': {'map': 929, 'x': 17, 'y': 26, 'dir': 'up'}}],
          'else': ['A goat-path up the sandstone mesa. Meridian guards in white at the top, with brass glasses on everything. "Observers only."']}]}]})
-    rng0 = random.Random(9260)
-    for x0, x1, yend in ((15, 18, CREST[18] + 1), (43, 46, CREST[42] + 1)):            # glass ridges close the crest's sides
-        for y in range(1, yend):                                                       # (laid before anything else is seated)
-            for x in range(x0, x1):
-                if m.cls[y, x] in 'sug' and not r.road_mask[y, x]:
-                    m.stamp(rng0.choice(['cr_clear_c', 'cr_teal_c', 'cr_grey_c', 'cr_clear_c', 'cr_blue_c']), x, y, mark='B')
+    # the frozen wave and the big set pieces go down before the events are seated
+    m.stamp('gd_wave', 1, 6, mark='B')                                  # north-west, beside the Rimed Sands road
     r.add(*E)
     r.seat_events(on='su')
-    # the crest's lee: one-way dune ledges along its south face (crest -> flats), glass ridges and wrecks closing its sides
-    for x, y in CREST.items():                                                  # the crest's lee: one way down to the flats
-        m.over.append((1, x, y, K.P1('lgd_' + ('w' if x == 18 else 'e' if x == 42 else 'm')))); m.taken[y, x] = True
-        if m.cls[y, x] not in 'su': m.cls[y, x] = 'u'
-    rng = random.Random(926)
-    for nm, x, y in (('wr_sledfort', 8, 16), ('wr_sledfort2', 21, 22), ('wr_well', 35, 31), ('wr_well', 17, 24), ('wr_ban_bone', 44, 9),
-                     ('wr_bonecart', 41, 34), ('wr_bonecart', 25, 36), ('wr_picket', 47, 20), ('wr_picket', 49, 22), ('wr_ban_ash', 52, 14),
-                     ('wr_ban_ise', 6, 22), ('pf_wagon', 12, 30), ('nr_colfall', 54, 40), ('fw_sled', 4, 30), ('wr_tally', 48, 38)):
+    # the crest's lee: one way down the glass to the flats
+    for x in range(18, 43):
+        m.over.append((1, x, 14, K.P1('gdl_' + ('w' if x == 18 else 'e' if x == 42 else 'm')))); m.taken[14, x] = True
+        if m.cls[14, x] not in 'su': m.cls[14, x] = 'u'
+    for nm, x, y in (('wr_treb_broken', 37, 16), ('wr_treb_broken', 22, 16), ('wr_tower_wreck', 39, 25), ('wr_glasssled', 15, 30),
+                     ('wr_glasssled', 26, 43), ('wr_sledfort', 8, 16), ('gd_pool3', 23, 19), ('gd_pool2', 34, 20), ('gd_pool2', 10, 28),
+                     ('gd_pool3', 2, 22), ('wr_well', 35, 31), ('wr_well', 17, 24), ('wr_ban_bone', 41, 8), ('wr_ban_ise_t', 19, 16),
+                     ('wr_ban_ash_t', 41, 16), ('wr_ban_ise', 11, 30), ('wr_ban_ise', 11, 38), ('wr_ban_ash', 49, 26), ('wr_ban_ash', 56, 36),
+                     ('wr_bonecart', 32, 33), ('wr_bonecart', 27, 37), ('wr_supply', 40, 33), ('wr_supply', 52, 28), ('wr_supply', 18, 23),
+                     ('pf_wagon', 45, 34), ('wr_tally', 48, 38), ('wr_picket', 55, 30), ('nr_colfall', 54, 46), ('fw_sled', 4, 30),
+                     # the north-west: Isenmar's forward post where the wave caught them; the north-east: Ashkaar's dragon lines
+                     ('wr_sledfort2', 1, 12), ('fw_brazier', 5, 14), ('wr_ban_ise_t', 11, 9), ('cr_clear_t', 8, 6), ('cr_blue_c', 0, 4),
+                     ('wr_treb_broken', 53, 4), ('wr_picket', 50, 9), ('wr_picket', 56, 10), ('wr_picket', 58, 7), ('wr_ban_ash_t', 49, 4),
+                     ('wr_sandbags', 54, 13), ('wr_sacks', 57, 13), ('wr_rack', 52, 11)):
         r.near(nm, x, y, on='su', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 22, box=(0, 18, W, H), on='su', clump=2, seed=5)
-    CK.props(r, ['cr_clear_c', 'cr_grey_c', 'cr_clear_e', 'cr_teal_c'], 16, box=(14, 18, 46, H), on='su', clump=2, seed=6)   # glass from the skirmishes
-    CK.props(r, ['dk_pebbles', 'nt_rocks_s0'], 14, box=(0, 18, W, H), on='g', clump=2, seed=7)
+    # Isenmar's trench line on the flats (sandbags, two sally ports) and the blue camp in the south-west
+    for y in range(29, 46):
+        if y in (33, 34, 40, 41): continue
+        if not m.taken[y, 13] and m.cls[y, 13] in 'su' and not r.road_mask[y, 13]: m.stamp('wr_sandbags', 13, y, mark='B')
+    for nm, x, y in (('wr_tent_b', 2, 38), ('wr_tent_b', 6, 43), ('wr_tent_w', 9, 38), ('wr_firering', 6, 41), ('wr_rack', 10, 43),
+                     ('wr_sacks', 3, 45), ('wr_sacks', 11, 46), ('fw_brazier', 8, 36)):
+        r.near(nm, x, y, on='su', r=2)
+    # Ashkaar's burnt palisade south of the east ridge (a gate where the lookout lane runs) and the red camp
+    for x in range(48, 59):
+        if 51 <= x <= 53: continue
+        if not m.taken[26, x] and m.cls[26, x] in 'su' and not r.road_mask[26, x]: m.stamp('wr_pal_hb' if x % 3 else 'wr_pal_h', x, 26, mark='B')
+    for nm, x, y in (('wr_tent_r', 50, 41) if False else ('wr_tent_r', 49, 44), ('wr_tent_r', 54, 45) if False else ('wr_tent_r', 52, 44),
+                     ('wr_firering', 56, 44), ('wr_rack', 58, 42), ('wr_sacks', 47, 46), ('wr_picket', 57, 38)):
+        r.near(nm, x, y, on='su', r=2)
+    # stake lines across no-man's-land: one gap, where the south lane runs
+    for y, xs in ((35, range(19, 29)), (35, range(32, 34)), (40, range(32, 34))):
+        for x in xs:
+            if not m.taken[y, x] and m.cls[y, x] in 'su' and not r.road_mask[y, x] and m.ht[y, x] == 0: m.stamp('wr_stakes', x, y, mark='B')
+    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2', 'gd_shard2'], 26, box=(18, 0, 43, 14), on='su', clump=2, seed=6)   # the beam scar
+    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 28, box=(30, 14, W, H), on='su', clump=2, seed=7)
+    CK.props(r, ['gd_shard2', 'cr_teal_c', 'cr_clear_c', 'dk_pebbles'], 14, box=(0, 14, 30, H), on='su', clump=2, seed=8)
+    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 10, box=(13, 0, 18, 12), on='su', seed=9)
+    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 10, box=(43, 0, 48, 12), on='su', seed=10)
+    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles'], 8, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['wr_firering', 'wr_sacks', 'wr_rack', 'wr_stakes', 'fw_sled', 'wr_sandbags'], 12, box=(18, 20, 48, 34), on='su', clump=3, seed=11)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'                                          # (stair landings: sand, not the grass-rimmed dirt)
     r.paint()
-    sand_dress(r, 0.45, seed=926, bones=0.03)
-    frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 14)], thr=0.55)
-    decal(r, ['wr_frost0', 'wr_frost1'], 0.18, seed=1, cells=[(x, y) for y in range(H) for x in range(0, 16)])
-    decal(r, ['wr_ember0', 'wr_ember1', 'wr_ember2'], 0.18, seed=2, cells=[(x, y) for y in range(H) for x in range(44, W)])
-    CK.scatter_quiet(r, 10)
+    sand_seams(r)
+    # ---- glass: the crest's beam scar, the flows off its lee, the glassed ridges and the east
+    glass = blob(W, H, 30, 7, 12, 7.5, 92601, 0.35) | (m.ht == 1)
+    glass |= band(W, H, [(23, 15), (25, 20), (22, 25), (20, 29)], 2.0, 92602)
+    glass |= band(W, H, [(31, 15), (31, 21), (33, 26), (36, 29)], 1.9, 92603)
+    glass |= band(W, H, [(37, 15), (41, 20), (46, 25), (52, 29), (58, 31)], 2.4, 92604)
+    glass |= blob(W, H, 52, 21, 7, 5, 92605, 0.4) | blob(W, H, 45, 40, 6, 4, 92606, 0.45) | blob(W, H, 37, 22, 4, 3, 92607)
+    glass |= blob(W, H, 55, 7, 5, 4, 92608, 0.45)                       # the dragon lines, scorched to glass
+    glass &= ~flood
+    paint_flood(r, flood, steam=0.5)
+    glass = paint_glass(r, glass, cracks=0.07, rope=0.12, spill=0.05, seed=926)
+    rest = [(x, y) for y in range(H) for x in range(W) if not glass[y, x] and not flood[y, x]]
+    restset = set(rest)
+    sand_dress(r, 0.40, seed=926, bones=0.03) if False else None
+    RIP = [K.P1('wr_ripple%d' % v) for v in range(3)]; RU = [K.P1('wr_rut%d' % v) for v in range(2)]
+    rng = random.Random(9264)
+    for x, y in rest:                                                   # wind ripples on the sand that is still sand
+        if m.L[2, y, x] or m.cliff[y, x] or m.taken[y, x] or m.cls[y, x] not in 'su': continue
+        if r.road_mask[y, x]:
+            if rng.random() < 0.85: m.L[2, y, x] = RU[(x + y) % 2]
+        elif vnoise(x, y, 9265, 4.0) > 0.55 and rng.random() < 0.8: m.L[2, y, x] = RIP[(x // 3 + y) % 3]
+    frozen_ground(r, [c for c in rest if c[0] < 16 + int(3 * vnoise(0, c[1], 9266, 4.0))], thr=0.40)
+    frozen_ground(r, [c for c in rest if (c[0] - 4) ** 2 / 64.0 + (c[1] - 9) ** 2 / 49.0 < 1], thr=-1)     # rime round the wave
+    decal(r, ['wr_frost0', 'wr_frost1', 'wr_frost2'], 0.55, seed=6, cells=[c for c in rest if (c[0] - 4) ** 2 / 81.0 + (c[1] - 9) ** 2 / 64.0 < 1])
+    decal(r, ['wr_frost0', 'wr_frost1', 'wr_frost2'], 0.20, seed=1, cells=[c for c in rest if c[0] < 18])
+    decal(r, ['wr_trench0', 'wr_trench1'], 1.0, seed=3, cells=[(12, y) for y in range(29, 46) if (12, y) in restset])
+    decal(r, ['wr_ember0', 'wr_ember1', 'wr_ember2'], 0.22, seed=2, cells=[c for c in rest if c[0] > 42])
+    decal(r, ['wr_bones0', 'wr_bones1'], 0.025, seed=4, cells=rest)
+    decal(r, ['wr_steam0', 'wr_steam1', 'wr_steam2'], 0.35, seed=5,
+          cells=[(x + dx, y + dy) for (nm, x, y) in m.stamps if nm.startswith('gd_pool') for dx in range(-1, 4) for dy in (-1, 0, 2)])
+    CK.scatter_quiet(r, 6)
     h = head(926, 'The Glass Dunes', field='DESERT', bgm='Route 9', biome='desert',
              connections=[{'dir': 'N', 'offset': 0, 'to': 925, 'to_offset': 2}, {'dir': 'E', 'offset': 30, 'to': 930, 'to_offset': 15}],
-             tone=[14, 8, 0, 10])
+             tone=[6, 10, 4, 14], fog={'name': 'prismfall_seamist', 'opacity': 30, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0})
     h['metadata']['MapPosition'] = [0, 13, 15]
     h['gates'] = [{'name': 'The crest (only from the Steamline)', 'from': [[56, 31], [7, 3], [51, 3]], 'sealed': [[30, 4], [30, 6]]}]
-    r.write(h, '926_glass_dunes.yaml', '# The Glass Dunes (926). WRITTEN BY layouts/war.py (map builder 10) - edit that script.\n',
+    r.write(h, '926_glass_dunes.yaml', '# The Glass Dunes (926). WRITTEN BY layouts/war.py (map builders 10 and 11) - edit that script.\n',
             '/tmp/craft/926.png' if PREV else None)
 
 
@@ -480,6 +716,14 @@ def build_928():
     h.obj('urn', 6, 5); h.obj('urn', 17, 5)                                                     # the oath-brazier and its twin
     for x in range(4, 9): h.put(MG(1704), x, 4, 1)                                              # the cage's iron posts (back left)
     h.obj('couch_l', 18, 9); h.obj('plant', 20, 13); h.obj('plant', 3, 13)
+    # map builder 11: the pavilion furnished - pillars down the nave, war drapes, the archive of campaign maps, lanterns
+    for x in (5, 18):
+        for y in (7, 11): h.obj('pillar', x, y)
+    for x in (4, 19): h.obj('drape', x, 3)
+    h.obj('shelf', 14, 2); h.obj('shelf', 16, 2)                                                 # campaign maps in their cases
+    for x, y in ((3, 6), (20, 6), (8, 13), (15, 13)): h.obj('lantern', x, y)
+    h.obj('rug_mg', 9, 12); h.obj('urn', 21, 11); h.obj('couch_r', 18, 12) if False else None
+    h.obj('awning', 10, 3) if False else None
     spec = {'id': 928, 'name': 'Ashkaar Siege Camp - Command Pavilion', 'parent': 924, 'biome': 'interior', 'bgm': 'Route 9',
             'tone': [16, 0, -10, 0], 'metadata': {'MapPosition': [0, 14, 14]}}
     spec.update(h.write(928))
@@ -518,8 +762,8 @@ def build_929():
                 m.ht[y, x] = 1
     CK.smooth_ht(m, 1, 2)
     CK.stair(r, 16, max(y for y in range(H) if m.ht[y, 17] == 1), w=3, h=1)
-    r.lane([(17, 27), (17, 20), (17, 12), (12, 8)], w=2.0, c='u', open_=None, only='su')
-    r.lane([(17, 14), (26, 10)], w=2.0, c='u', open_=None, only='su')
+    trail(r, [(17, 27), (17, 20), (17, 12), (12, 8)], w=2.0, only='su')
+    trail(r, [(17, 14), (26, 10)], w=2.0, only='su')
     r.finish_plan(border=0)
     for y in range(H):                                                           # beyond the rim: sky-drop (the dunes far below)
         for x in range(W):
@@ -542,8 +786,12 @@ def build_929():
                      ('hb_boxes', 9, 17), ('sh_crates', 24, 19), ('hb_barrel', 13, 18), ('wr_ban_bone', 4, 10) if False else ('dk_boulder', 4, 10)):
         r.near(nm, x, y, on='su', r=3)
     CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 10, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    for nm, x, y in (('wr_supply', 25, 19), ('wr_sacks', 7, 17), ('wr_firering', 19, 16)):
+        r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'
     r.paint()
+    sand_seams(r)
     sand_dress(r, 0.50, seed=929, bones=0.02)
     ground_var(r, ['gs_crust0', 'gs_crust1', 'gs_crust2', 'gs_crust3'], 0.45, seed=1)
     decal(r, ['wr_rut0', 'wr_rut1', 'wr_bones0'], 0.05, seed=4)
@@ -566,8 +814,8 @@ def build_930():
     W, H = 44, 32
     r, m = desert(W, H, 930)
     dunes(r, 6, 930, box=(2, 2, 42, 10)); dunes(r, 5, 931, box=(2, 24, 42, 30))
-    r.road([(0, 16.5), (10, 16), (22, 15.5), (32, 17), (43, 16.5)], w=3.0, c='u', open_=None, only='su.tT')
-    m.blob(22, 18, 9, 5, 'g', seed=9301, rough=0.4, only='su')                     # the shell pavement of the old sea floor
+    trail(r, [(0, 16.5), (10, 16), (22, 15.5), (32, 17), (43, 16.5)], w=3.0)
+    pass                                                                          # (the shell pavement: crust ground after paint)
     r.exit('W', 15, 4); r.exit('E', 15, 4)
     r.finish_plan(border=1)
     E = [FRONT,
@@ -589,10 +837,15 @@ def build_930():
                      ('pf_wagon', 37, 24), ('hb_crates4', 35, 10), ('hb_tubs', 25, 24), ('fw_rack', 6, 9), ('fw_brazier', 21, 13), ('wr_bonecart', 40, 20)):
         r.near(nm, x, y, on='sug', r=3)
     CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    for nm, x, y in (('wr_supply', 38, 13), ('wr_sacks', 34, 13), ('wr_firering', 26, 15), ('wr_sacks', 9, 20), ('wr_rack', 29, 21)):
+        r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
+    m.cls[m.cls == 'd'] = 'u'
     r.paint()
+    sand_seams(r)
     sand_dress(r, 0.48, seed=930, bones=0.04)
     ground_var(r, ['gs_crust0', 'gs_crust1', 'gs_crust2', 'gs_crust3'], 0.45, seed=1)
+    ground_var(r, ['gs_crust0', 'gs_crust1', 'gs_crust2', 'gs_crust3'], -1, seed=2, cells=[(x, y) for y in range(H) for x in range(W) if ((x - 22) / 9.0) ** 2 + ((y - 18) / 5.0) ** 2 < 1])
     decal(r, ['wr_bones0', 'wr_bones1', 'wr_rut0'], 0.05, on='sug', seed=4)
     CK.scatter_quiet(r, 12)
     h = head(930, "The Bone-Carters' Camp", field='DESERT', bgm='Route 9', biome='desert', tone=[14, 8, 0, 6],

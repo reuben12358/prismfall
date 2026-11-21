@@ -946,7 +946,7 @@ events:
         cancel: 1
         branches:
         - []
-      - '\pf[LARCH,angry,anger]Larch: IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.'
+      - '\pfb[LARCH,angry,anger,Professor Larch]Larch: IT LIVES IN A TREE. IT IS ALWAYS STUCK. THAT IS ITS ENTIRE ARRANGEMENT WITH TREES.'
       - '\pf[JUNO,happy]Juno: Technically Skwovet are scansorial, so—'
       - '\pf[LARCH,angry]Larch: Juno.'
       - '\pf[JUNO,panic,sweat]Juno: Shutting up!'

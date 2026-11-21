@@ -105,6 +105,12 @@ if 'qy_lipm0' in STAMPS:
                                 (P1('rw_f2w0'), P1('rw_f2m0'), P1('rw_f2e0'))], inW=None, inE=None, l0=False,
                           alt={P1('rw_lipm0'): (P1('rw_lipm1'), 0.3), P1('rw_f1m0'): (P1('rw_f1m1'), 0.15)},
                           vines=(P1('rw_ivy0'), 0.22) if 'rw_ivy0' in STAMPS else None)
+    # map builder 11: dune cliff kits with no grass anywhere (gdraw.py): glassed dunes (gdc) and sand / sandstone (sdc)
+    for _k in ('gdc', 'sdc'):
+        if _k + '_lipm' in STAMPS:
+            KITS[_k] = dict(N=tuple(P1('%s_N%s' % (_k, e)) for e in 'wme'), W=P1(_k + '_W'), E=P1(_k + '_E'),
+                            rows=[tuple(P1('%s_%s%s' % (_k, row, e)) for e in 'wme') for row in ('lip', 'face', 'base')],
+                            inW=None, inE=None, l0=False)
 # the old flat dark-brown plank slab (Sheridan_2 544-546) once used as stairs: build.py --strict now rejects it
 OLD_SLAB = (C('sh', 544), C('sh', 545), C('sh', 546))
 

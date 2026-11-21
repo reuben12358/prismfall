@@ -1,4 +1,4 @@
-# The Glass Dunes (926). WRITTEN BY layouts/war.py (map builder 10) - edit that script.
+# The Glass Dunes (926). WRITTEN BY layouts/war.py (map builders 10 and 11) - edit that script.
 id: 926
 name: The Glass Dunes
 parent: 0
@@ -12,7 +12,8 @@ rubric: true
 yards_ok: true
 biome: desert
 field: DESERT
-tone: [14, 8, 0, 10]
+tone: [6, 10, 4, 14]
+fog: {name: prismfall_seamist, opacity: 30, blend: 0, zoom: 200, sx: 1, sy: 0}
 gates:
 - name: The crest (only from the Steamline)
   from:
@@ -207,7 +208,7 @@ events:
   post: false
 - type: event
   name: Caravan well
-  at: [36, 32]
+  at: [36, 33]
   pages:
   - trigger: action
     commands: ['A caravan well between the lines. A white ribbon on the sweep: the bone-carters'' sign. No blood at a well. Both armies keep that.']
@@ -226,23 +227,64 @@ events:
         names.']
 - type: event
   name: Wrecked sled
-  at: [10, 17]
+  at: [10, 18]
   pages:
   - trigger: action
     commands: ['An Isenmar sled-fort, overturned, its runners in the air, burnt to the iron on the eastern side.']
 - type: event
+  name: The frozen wave
+  at: [7, 9]
+  pages:
+  - trigger: action
+    commands: ['A wave, taller than a house, standing on dry sand. It broke over the dunes at noon and the ice caught it before it landed.', 'Inside the
+        curl the light is green. Something small and silver is frozen in it, mid-leap. A Feebas, maybe.']
+- type: event
+  name: The causeway
+  at: [13, 22]
+  pages:
+  - trigger: action
+    commands: ['Where the caravan road crosses the flood the sand has run to glass a yard thick: the only dry way over the water for a mile.']
+- type: event
+  name: Steaming pool
+  at: [24, 21]
+  pages:
+  - trigger: action
+    commands: ['Flood water in a basin of glass, still too hot to touch. It hisses where the edge is thinnest.']
+- type: event
+  name: Broken trebuchet
+  at: [38, 18]
+  pages:
+  - trigger: action
+    commands: ['An Ashkaar trebuchet, its arm snapped clean. The far side of it has run like candle wax and set hard as green glass.']
+- type: event
   name: Bone-carter
-  at: [40, 37]
+  at: [31, 35]
   pages:
   - graphic: {sprite: NPC 27, dir: left}
     trigger: action
     move: fixed
     commands: ['Bone-carter: We carry them out. Whose they were doesn''t matter. Whose they are now does: Ossaria''s. Tomb-law.']
+- type: event
+  name: Ashkaar straggler
+  at: [54, 27]
+  pages:
+  - graphic: {sprite: NPC 21, dir: left}
+    trigger: action
+    move: fixed
+    commands: ['Ashkaar straggler: The palisade burnt from the inside. Our own fire. Reshiram doesn''t take sides; it takes everything.']
+- type: event
+  name: Isenmar straggler
+  at: [6, 40]
+  pages:
+  - graphic: {sprite: NPC 11, dir: right}
+    trigger: action
+    move: fixed
+    commands: ['Isenmar straggler: The sea came over the dunes like it had somewhere to be. We built the trench to keep fire out. Not water.']
 - type: item
-  at: [56, 44]
+  at: [22, 35]
   item: FULLRESTORE
 - type: item
-  at: [4, 40]
+  at: [2, 43]
   item: STARDUST
   hidden: true
   name: HiddenItem (dunes)
@@ -251,3 +293,14 @@ events:
   item: BIGNUGGET
   hidden: true
   name: HiddenItem (the crest)
+- type: item
+  at: [55, 18]
+  item: HYPERPOTION
+- type: item
+  at: [7, 14]
+  item: NEVERMELTICE
+  hidden: true
+  name: HiddenItem (behind the wave)
+- type: item
+  at: [58, 46]
+  item: MAXREVIVE

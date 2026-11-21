@@ -840,6 +840,9 @@ def pieces():
     for v in range(3): out['wr_ripple%d' % v] = (ripple(v), ['V'], None)
     for v in range(2): out['wr_bones%d' % v] = (bones(v), ['V'], None)
     for v in range(2): out['wr_rut%d' % v] = (rut(v), ['V'], None)
+    # the Glass Dunes kit (map builder 11, gdraw.py): appended last, so no earlier id moves
+    import gdraw
+    out.update(gdraw.pieces())
     return out
 
 
