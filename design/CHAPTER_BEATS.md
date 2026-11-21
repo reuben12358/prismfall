@@ -78,7 +78,7 @@
 3. Juno helps restart the dampers with her seed-medicine stills; it's the last time in Act II she's luminous with purpose before Ironreach.
 4. Consequence: the Hammer is now a named enemy of the Hollow's own people, and Wick's "he wants to carry them home" lands as a schism, not a sermon. The Ward is the place the Purge goes for in Ch16, so the player already knows every bed.
 **Doesn't break:** no one dies (Wenlow's death stays in Ch16), the child stays Fixed (the Homecoming waking is unchanged), and the PC's immunity is something everyone has already seen at the Lowlight.
-**Creator's call:** this adds a scripted Bleed set piece to Mirefen (a small map state on the Quiet Ward map 234, which is the gym's optional Mastery room in GYM_PUZZLES; it would need a story version, or the ward could be a separate Infirmary interior). Yes / no / keep Ch7 as it is.
+**Creator's call:** this adds a scripted Bleed set piece to Mirefen, staged on the Infirmary's own Quiet Ward (map 223's top floor; maps.json "Quiet Ward on the highest stilts"), not the gym's Mastery room 234. `story/26_SCRIPT_CH7.md` has it written in, marked [PROPOSAL B], with the outline's roof scene printed under it as the fallback. Yes / no.
 
 ---
 

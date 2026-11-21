@@ -1454,3 +1454,15 @@ warms under the PC's hand; Juno leaves for Mirefen; Rook sits with the glass), a
 `HOLLOW_GRUNT_M`. **Items owner:** MANDATE PASS, DUNEHOLT RUBBING. Proposed badge name: **Sandglass Badge**.
 **15_COMEDY owner:** the Ch6 scene "Lecture, Archaeological" has Kestrel mention "a pit bracket last week", which is
 Ch9; the script keeps the beat with a timeline-safe line ("Things give up around them. Rivers. Plates. Me. Twice.").
+
+## From the story editor: Script ready: Ch7 "The Quiet Ward", 2026-11-21
+**`story/26_SCRIPT_CH7.md`**, with "Map events needed (Chapter 7)" at the end (the Leach Road and Mirefen aren't built).
+Counters: **V127 CH7_STEP** (0–7) and **V128 SWEETROT_TAKEN** (0–3, the GO_SWEET_TOOTH count). Key events: **J2 and
+the ledger** (223's dispensary; `:ch7_ledger`) and **the Ward Night** (223's Quiet Ward), which is CHAPTER_BEATS
+**proposal B** and waits on the creator's yes. It is written in and marked [PROPOSAL B], with the outline's roof scene
+printed under it as the fallback, so a builder can wire either: both set V127 = 6 and nothing later reads which one ran.
+Also: the first descent into Nadir at the Gutterfall (633), three Sweetrot offers (220, 220, 221 with the checkpoint),
+Wick at the Weeping Fen (648; a talk-down check), a Directorate "Escort" ambush on 621 only if `:ch6_drillsite ==
+:hollow`, and Gym 6 (233, double).
+**Trainer designer:** a Leach version of `MERIDIAN_DIRECTORATE` "Officer" (a double). **Items owner:** INVOICE (Key
+Item, flavour), Corvin's TM (Venoshock suggested). Proposed badge name: **Remedy Badge**.

@@ -354,7 +354,7 @@ Switch S116 CH6_OSSUARY_DONE = ON. V126 = 7.
 ```
 MOVE: Kestrel drops down off the skull's brow onto the sand in front of you. He's thinner. The black coat is dusty to the knee. Round his neck, under the coat, something black and lace.
 [portrait: KESTREL, neutral] I saw them. Over your shoulder. The king and the chain. I was in there before you, in the dark. I couldn't read it till you brought the lamp.
-[name: Kestrel] I've been on the Hollow's trail since Ebbmouth. They've got a cell out here. They came through Duneholt last week asking about old doors.
+[name: Kestrel] I left the lighthouse the night of the Lowlight and I've been on the Hollow's trail ever since. They've got a cell out here. They came through Duneholt last week asking about old doors.
 [portrait: KESTREL, angry] And everywhere I go there's you. In front of me. Getting there first. Leaning on things.
 [portrait: KESTREL, neutral] Fight me. I need to know if I'm getting closer.
 Script: Prismfall.rival_battle(:RIVAL_KESTREL, "Kestrel", 3)     # K3; version 30 + starter slot; field :DESERT (620)
@@ -419,7 +419,7 @@ GLINT (off the path, two tiles onto the sand; action): Something shines out ther
 "\PN,
 I found a way down! There was a ferryman on the Leach and he knew Dr Mott, and now I'm in Mirefen and it's BLUE at night, the whole marsh glows, and the noodles are the best I've ever had and Dr Mott says they'll kill me.
 I'm helping him with his seed-medicine. His ward is very quiet. I'll tell you about it when you come. I don't want to write it.
-Uncle Rowan wrote. He burned both his hands on the kettle, he says, the same night as the Lowlight. Both hands. He's made tea every morning for forty years.
+Uncle Rowan wrote. He burned his hand on the kettle, he says, the same night as the Lowlight. His right hand, all across the palm. He's made tea every morning for forty years.
 He's been "away on Warden business" every time something happens. Every time. I counted.
 I'm being silly. I know I'm being silly.
 Come to Mirefen? Bring snacks.
@@ -427,7 +427,7 @@ Come to Mirefen? Bring snacks.
 QUEST LOG: "Eighteen Roads" — Earn the sixth badge in Mirefen, down the Leach Road into Nadir.
 V126 = 9. V102 STORY_CHAPTER = 7.
 ```
-*(09 #2: the burned hands and the counting. Juno is the one doing the counting, which is what makes J2 hurt.)*
+*(09 #2: the burned hand and the counting; Corvin's ledger in Ch7 says "right palm and fingers". Juno is the one doing the counting, which is what makes J2 hurt.)*
 
 ---
 

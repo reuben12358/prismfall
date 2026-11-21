@@ -612,13 +612,13 @@ SE: a high, rising whine.
 | 2 | Wide (1 s) | The Mourner throws himself at the cradle | — |
 | 3 | Centre (2 s) | **The Shatter**: a white-violet blast; the vault inside it | Flash to white; shake 8 px; a sound like every bell in Lumen breaking at once |
 | 4 | Pull back through the rock (2.5 s) | A ring of light runs out through the cliff, down and out, toward the streets below (no streets shown) | Ring sprite expanding; then silence |
-| 5 | Fade up (1 s) | The vault: the cradle split, the Plate cracked across in it, the Mourner holding it, his gloves smoking | Smoke wisps; the light in the Plate stutters |
+| 5 | Fade up (1 s) | The vault: the cradle split, the Plate cracked across, the Mourner holding it in his right hand, that glove smoking | Smoke wisps; the light in the Plate stutters |
 ```
 [portrait: MOURNER, shocked] No — no — what did you DO?
-(The woman is gone. There's only the vault's open service door and the smell of burnt brass.)
+(He has caught the cracked Plate in his right hand. The glove on that hand is smoking. The woman is gone. There's only the vault's open service door and the smell of burnt brass.)
 (The Mourner turns and sees you. He goes still, the way he did in the Lantern Theatre.)
 [portrait: MOURNER, sad] ...You. Not you. Not here. Get out of here, child. Get OUT—
-(He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door, holding his hands away from his body. They're still smoking.)
+(He lays the cracked Plate back in its split cradle, very carefully, the way you'd put down something that's dying. Then he's gone through the service door, holding his right hand away from his body. It's still smoking.)
 [portrait: ROOK, shocked] *(behind you)* That's it. That's the Zap Plate. That's — it's broken. It's BROKEN.
 (Something huge unfolds from behind the cradle: an Electivire, swollen with the Plate's discharge, crackling white, its eyes empty. It plants itself between you and the door.)
 [portrait: ROOK, panic] That's the vault guard! That's Meridian's — look at it, it's drunk on the — get BACK—
@@ -629,7 +629,7 @@ BOSS BATTLE: "Overcharged" — ELECTIVIRE (2 bars; BOSSES.md, the segment after 
 (At the bar break the cracked Plate flares and the field breaks: battle.change_field(:BLEED, "The cracked Plate screams. The vault stops being sure what it's made of!") — the game's first scripted any → Bleed.)
 (At the bar break, an interlude prompt:)
 (The cracked Plate is spitting light on the dais, an arm's length away. The Electivire is reeling. If you had the Plate, it would have nothing to drink.)
-[portrait: ROOK, panic] Don't touch it with your HANDS! You saw him, you saw his gloves—
+[portrait: ROOK, panic] Don't touch it with your HANDS! You saw him, you saw his glove—
 > Grab the cracked Plate and run.
   (You grab it. It's the most light you've ever held. For one second it doesn't hurt. Then it's the only thing in the world.)
   Script: Prismfall.game_over(:GO_LIVE_WIRE)
@@ -815,7 +815,7 @@ TITLE CARD: II — IMPRINTS
 ---
 
 ## Notes for other teams
-- **Mysteries seeded here (09):** #2 (Rowan gives away his gala invitation; the Mourner's smoking gloves), #4 (Valen's crystal hand at the Veil; "Velmora endures", and nobody in the script remarks on the word), #8 (the Spire's plaque: the Aurelian sun tower), #9 (Lamp 47's draw spike, vague), #12 (Sable cheerful, gone before Security), #13 (Larch's fatigue lines; the Locks ledger's "draw x3"), #14 (Rook films the case glowing; Voss asks about it; Juno's "How did he know which road?"), #15 (the Prism Arena hoarding and model, "eighteen pylons"), #17 (Valen avoids the Lucent delegation), #23 (the black core that breathes), #29 (Contract 7-B). **#5 and #6 are not touched**: the Southgate prayer and window are hints only, and nobody says the Crown is cracked.
+- **Mysteries seeded here (09):** #2 (Rowan gives away his gala invitation; the Mourner's smoking right glove), #4 (Valen's crystal hand at the Veil; "Velmora endures", and nobody in the script remarks on the word), #8 (the Spire's plaque: the Aurelian sun tower), #9 (Lamp 47's draw spike, vague), #12 (Sable cheerful, gone before Security), #13 (Larch's fatigue lines; the Locks ledger's "draw x3"), #14 (Rook films the case glowing; Voss asks about it; Juno's "How did he know which road?"), #15 (the Prism Arena hoarding and model, "eighteen pylons"), #17 (Valen avoids the Lucent delegation), #23 (the black core that breathes), #29 (Contract 7-B). **#5 and #6 are not touched**: the Southgate prayer and window are hints only, and nobody says the Crown is cracked.
 - **Comedy (15_COMEDY):** Juno's pies, the scrip store, the tram stop, the vending and kiosk quests, Rook's blackout ("This is content"), "Chat Has Opinions", Larch's formal oilskin, Quent's bet. Nothing after the Gala's lights go grey; the interlude's "Edda. Of course it's Edda." is a dry line in a separate scene.
 - **Running gags:** kelp tea bag four (182); Kestrel's tea "for later" (packed in the interlude).
 - **Distribution (SPINE Rev 16):** the only Pokémon on offer are the blackout's wild Rotom (Electric/Ghost; no Ground answer to Rook) and the optional Sluiceworks Rotom. No gifts after Gym 4 (Sahar's and Corvin's answers stay locked).
