@@ -1,7 +1,7 @@
 # Script: Chapter 9 — "The Iron Conclave" (the Iron Road, Ironreach, Gym 8; K4; the Conclave; the Mourner unmasked; Interlude II)
 
 > **Final playable script** for Chapter 9, the end of Act II. It covers the Iron Road (660 the Ashmarch, 661 the Ironway, 602 Candle Down, 672 the Long Drop) down into Nadir, then Ironreach (260–263, two new rooms 264/265), the Ironreach Open and K4 in the Iron Pit (263), Kaito's gym (270–275, Gym 8), the Conclave and the attack (263/264/265), and Interlude II at the Heartgarden (294) as Rowan. None of these maps is built; the list at the end is what to build from.
-> Follows `story/26_SCRIPT_CH7.md`. **Chapter 8 has no full script yet** (`22_SCRIPT_CH8.md` holds only the withdrawn Ring-Day), so this chapter reads Ch8's outline in `05_ACT_II.md` for continuity: `:ch8_caldera`, `:ch8_lightstone`, V110, S120/S121, Brann's chestnut slip and the Dominar's herald.
+> Follows `story/26_SCRIPT_CH7.md`. Chapter 8's script is `story/29_SCRIPT_CH8.md` (it replaced the withdrawn Ring-Day in `22_SCRIPT_CH8.md`); this chapter reads its results for continuity: `:ch8_caldera`, `:ch8_lightstone`, V110, S120/S121, Brann's chestnut slip and the Dominar's herald.
 > Sources: 05_ACT_II Ch9 and Interlude II, 03_CAST (Kaito, Kestrel, Juno, Rowan, the Wardens), 09_MYSTERIES (#2, #2a, #4, #12, #16, #17, #27, #29), NARRATIVE_KEYS (`:ch9_teo_sable`, `:ch9_rowan_words`, GO_PULL_THE_NAIL), 14_WAR_AND_BLESSING (the Ch9 insert), 15_COMEDY (Ch9 "The Bracket"; running gag 3; the pit announcer), GYM_PUZZLES Gym 8, TRIALS_QUESTS (the Gutter Book, Ch9), CAMEOS (Garret), BALANCE and the trainer PBS (K4, Kaito, Sable + Brisk, the Mourner), `design/CHAPTER_BEATS.md`.
 
 ## Conventions
