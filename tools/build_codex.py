@@ -8,6 +8,8 @@ OUT = ROOT / "dist_web" / "codex.html"
 # (file, anchor, short label)
 CHAPTERS = [
     ("story/00_OVERVIEW.md", "overview", "Overview"),
+    ("design/WALKTHROUGH.md", "walkthrough", "Walkthrough"),   # chapter-by-chapter player's guide (BIGJRA style)
+    ("design/CHAPTER_BEATS.md", "chapter-beats", "Chapter beats"),
     ("story/01_WORLD_LORE.md", "world", "World & lore"),
     ("design/WORLD_MAP.md", "geography", "Geography"),   # Geography v2 (SPINE Rev 18): the layout and the war in the sands
     ("story/02_FACTIONS.md", "factions", "Factions"),
@@ -15,7 +17,11 @@ CHAPTERS = [
     ("story/04_ACT_I.md", "act-1", "Act I"),
     ("story/20_SCRIPT_CH0-2.md", "script-1", "Script: first hour"),
     ("story/21_SCRIPT_CH3.md", "script-2", "Script: Chapter 3"),
+    ("story/23_SCRIPT_CH4.md", "script-4", "Script: Chapter 4"),
+    ("story/24_SCRIPT_CH5.md", "script-5", "Script: Chapter 5"),
     ("story/05_ACT_II.md", "act-2", "Act II"),
+    ("story/25_SCRIPT_CH6.md", "script-6", "Script: Chapter 6"),
+    ("story/26_SCRIPT_CH7.md", "script-7", "Script: Chapter 7"),
     ("story/22_SCRIPT_CH8.md", "script-8", "Script: Chapter 8"),
     ("story/06_ACT_III.md", "act-3", "Act III"),
     ("story/07_ACT_IV.md", "act-4", "Act IV"),
