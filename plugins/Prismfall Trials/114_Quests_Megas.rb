@@ -35,7 +35,7 @@ tr.quest(:OS_RING_DAY, {
   :summary => "Bastian wants you in his lamp-room.",
   :steps => { :ask => "Bastian is waiting in his lamp-room in the deep seams." },
   :reward => { :items => [[:MEGARING, 1], [:AGGRONITE, 1]] },
-  :touches => "Gives the Mega Ring (Mega Evolution opens) and the Aggronite. Foreshadows the PC's splinter: the ring sings.",
+  :touches => "Gives the Mega Ring (Mega Evolution and, SPINE Rev 23, Z-moves open) and the Aggronite. Foreshadows the PC's splinter: the ring sings.",
   :scenes => {
     :ringday => [
       { :map => "The lowest gallery of the deep seams. Bastian's lamp-room: a cot, a kettle and forty years of lamps. Pip is perched on a crate; Larch sits by the door with a book she isn't reading." },
@@ -44,6 +44,7 @@ tr.quest(:OS_RING_DAY, {
       [:BASTIAN, :neutral, "A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone."],
       [:BASTIAN, :neutral, "Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint."],
       [:BASTIAN, :deadpan, "One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double."],
+      [:BASTIAN, :neutral, "And if you come by a Choir crystal, a sliver of the Crown's glass from the Glassfall, it'll answer that too: the chip and the sliver came off the same crown. One Z-move a fight, and one to a side, same as the hearts."],
       "He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.",
       [:BASTIAN, :neutral, "Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain."],
       [:BASTIAN, :deadpan, "Two old men who don't ask each other things. That's how you get to seventy-four."],
@@ -147,7 +148,7 @@ tr.quest(:EL_DOLL_WHO_WAITED, {
   :steps => { :ask => "Something knocks in the Thistledown Manor attic.",
               :buttons => "The doll's three buttons are somewhere in the manor.",
               :return => "You have all three buttons. Take them back to the attic." },
-  :reward => { :items => [[:BANETTITE, 1]] },
+  :reward => { :items => [[:BANETTITE, 1], [:GHOSTIUMZ, 1]] },
   :scenes => {
     :offer => [
       "In the attic dust sits a rag doll with a zipped mouth and no buttons for eyes. As you step closer, it turns its head toward you. Knock. Knock. Knock.",
@@ -164,6 +165,7 @@ tr.quest(:EL_DOLL_WHO_WAITED, {
     :return => [
       "You press the buttons on. The doll blinks. It looks at the attic window, at the road below, for a long time.",
       "Then it lets go of something it has held for a very long time: a grey stone drops from its stitched hands into yours.",
+      "Tucked behind its button eyes all along: a sliver of dark glass, cold as a cellar.",
       { :complete => true },
       "When you look back, it is only a doll, sitting in the sun."
     ]
@@ -205,7 +207,7 @@ tr.quest(:EL_ENCORE, {
   :unlock => "badges >= 16", :board => true, :tags => [:mega, :comedy],
   :summary => "A gilt-edged lantern: 'ONE NIGHT ONLY. THE PLAYHOUSE REQUIRES A STAR. - D.P.'",
   :steps => { :ask => "Dorian needs a star for one last show before the Festival." },
-  :reward => { :items => [[:LOPUNNITE, 1]] },
+  :reward => { :items => [[:LOPUNNITE, 1], [:NORMALIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:DORIAN, :happy, "Enter, stage left, our returning hero! Sixteen badges! Darling, you've been practically everywhere. Saltmere is so proud. I am so proud. I've had posters made."],
@@ -217,6 +219,7 @@ tr.quest(:EL_ENCORE, {
           ["Stand very still.", [[:DORIAN, :shocked, "...Avant-garde. Terrifying. The critics will call it 'a meditation'. Brilliant."]]]] },
       "The curtain rises. The house is full. For three minutes, the whole of Saltmere forgets there is a war.",
       [:DORIAN, :sad, "Lovely. Lovely. Here. My leading lady's heartstone. Her Lopunny could kick a chandelier and land on the beat. She'd want it on a stage, not in my drawer."],
+      [:DORIAN, :happy, "And for the encore of the encore: a sliver of Choir glass the Pageant used as a prop jewel for thirty years. It was real all along. Of course it was."],
       { :complete => true },
       [:DORIAN, :happy, "Bow, darling. Always bow. They remember the bow."]
     ]
@@ -261,7 +264,7 @@ tr.quest(:ZE_RETURN_TO_SENDER, {
   :steps => { :ask => "Postmaster Halloran has three dead letters for Skyreach.",
               :letters => "Deliver the three dead letters to their doors in Skyreach.",
               :return => "All three are delivered. Go back to the Postmaster." },
-  :reward => { :items => [[:PIDGEOTITE, 1]] },
+  :reward => { :items => [[:PIDGEOTITE, 1], [:ELECTRIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:POSTMASTER, :deadpan, "Three letters. No stamps. Addresses in a hand I'd call 'enthusiastic'. The Gale Post delivers everything. Eventually."],
@@ -278,6 +281,7 @@ tr.quest(:ZE_RETURN_TO_SENDER, {
     :return => [
       [:POSTMASTER, :happy, "All three! The Post thanks you. The Post also owes you a drawer."],
       [:POSTMASTER, :neutral, "In it: the heartstone the Post's first courier-bird wore. Odessa says it's wasted in a drawer. Odessa says that about most things in drawers."],
+      [:POSTMASTER, :neutral, "And a sliver of Choir glass someone posted in AF 290 and never collected. It crackles when the drawer opens. Take that too, before it shorts the franking machine."],
       { :complete => true }
     ]
   }
@@ -295,7 +299,7 @@ tr.quest(:AS_OLD_CINDER, {
   :summary => "WRIT: The war-Charizard Old Cinder will not leave the high roost. Its rider fell at the front. Bring it down, honourably.",
   :steps => { :ask => "Roost-keeper Tarn wants Old Cinder brought down from the high roost.",
               :fight => "Face Old Cinder on the high roost." },
-  :reward => { :items => [[:CHARIZARDITEX, 1]] },
+  :reward => { :items => [[:CHARIZARDITEX, 1], [:DRAGONIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:TARN, :sad, "Old Cinder's rider died on the Rimed Sands. Since then it won't come down. It won't eat. It burns anyone who climbs."],
@@ -310,6 +314,7 @@ tr.quest(:AS_OLD_CINDER, {
         :won => ["Old Cinder folds its wings and lowers its head to you, the way it must once have lowered it to its rider.",
                  "From the harness, Tarn unclips a stone as black as the Pyre Road, with a blue flame caught in it.",
                  [:TARN, :neutral, "Its war-stone. It hasn't worn it since. It wants you to have it. Don't argue with a dragon."],
+                 "Sewn into the harness strap beside the stone is a sliver of blue-black glass. A rider's keepsake from the Glassfall.",
                  { :complete => true }],
         :lost => ["Old Cinder turns its back and curls around the empty saddle again."] }
     ]
@@ -323,7 +328,7 @@ tr.quest(:AS_BRAZIER_WRIT, {
   :unlock => "badges >= 15", :board => true, :tags => [:mega, :oath],
   :summary => "WRIT OF THE BRAZIER: the Crucible keeps one heartstone for one who earns it without being born to a dragon.",
   :steps => { :ask => "Answer the brazier's question before Legate Kosk." },
-  :reward => { :items => [[:SALAMENCITE, 1]] },
+  :reward => { :items => [[:SALAMENCITE, 1], [:FIRIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:KOSK, :neutral, "The Crucible keeps a heartstone for a dragon-rider who wasn't born to a dragon. In forty years nobody has taken it."],
@@ -338,6 +343,7 @@ tr.quest(:AS_BRAZIER_WRIT, {
     :sworn => [
       [:KOSK, :neutral, "Say true, and the fire keeps you. The writ is yours."],
       "She takes a blue stone with a red heart from a niche above the brazier. It is hot enough that she hands it over in tongs.",
+      [:KOSK, :neutral, "And the brazier's own sliver. The Choir tuned it to our fire after the Glassfall. Your Warden's ring will hear it."],
       { :complete => true }
     ]
   }
@@ -395,7 +401,7 @@ tr.quest(:NA_MOON_MARKET_DOGS, {
   :steps => { :ask => "Ottoline has a job at the Barons' kennel.",
               :cages => "Open the three kennel cages behind the Moon Market.",
               :return => "The cages are open. See Ottoline." },
-  :reward => { :items => [[:HOUNDOOMINITE, 1]] },
+  :reward => { :items => [[:HOUNDOOMINITE, 1], [:DARKINIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:OTTOLINE, :neutral, "The Barons starve Houndoom for the pit fights. Starved dogs bite harder. I want the dogs out and the Barons embarrassed. Mostly the second."],
@@ -413,6 +419,7 @@ tr.quest(:NA_MOON_MARKET_DOGS, {
     :return => [
       [:OTTOLINE, :happy, "The whole market saw. The Barons will be furious for a week. Beautiful."],
       [:OTTOLINE, :neutral, "Your cut. A pit champion's heartstone. Don't sell it down here; everyone will know where you got it."],
+      "Under the kennel-master's stool, wrapped in a betting slip: a sliver of black glass. Nobody comes to claim it.",
       { :complete => true }
     ]
   }
@@ -425,7 +432,7 @@ tr.quest(:NA_MEMORY_KATA, {
   :unlock => "badges >= 17", :board => true, :tags => [:mega, :kaito],
   :summary => "CHALK: PAWN SHELF, TOP ROW. A WARDGUARD STONE. THE OWNER WANTS IT GONE TO SOMEONE WHO'LL USE IT.",
   :steps => { :ask => "Buy the Wardguard heartstone off Ottoline's pawn shelf ($20,000)." },
-  :reward => { :items => [[:LUCARIONITE, 1]] },
+  :reward => { :items => [[:LUCARIONITE, 1], [:FIGHTINIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:OTTOLINE, :neutral, "Top shelf. A Wardguard unit's ring-stone. Pawned here the winter after Marrowgate. The man who pawned it comes in every year to look at it."],
@@ -440,6 +447,7 @@ tr.quest(:NA_MEMORY_KATA, {
       { :map => "Kaito is at the bar, wraps on, a cup of something he isn't drinking." },
       [:KAITO, :neutral, "It was my unit's. Memory's mother wore it, at Marrowgate. She could feel them through the gate. So could I."],
       [:KAITO, :neutral, "It remembers for me. Now it can remember for you. Use it on someone who deserves it."],
+      "Wrapped with the stone, in the unit's old armband: a sliver of glass that hums like a struck gong.",
       { :complete => true },
       [:KAITO, :neutral, "Stand up. Again. That's the whole kata."]
     ]
@@ -482,7 +490,7 @@ tr.quest(:OS_TYRANT_HEART, {
   :summary => "TABLET: A tyrant's heart lies in the third vertebra. Dig it out whole.",
   :steps => { :ask => "Dig the tyrant's heart out of the third vertebra on the Vertebrae.",
               :return => "Take the heartstone to Curator-Elect Nasrin." },
-  :reward => { :items => [[:TYRANITARITE, 1]] },
+  :reward => { :items => [[:TYRANITARITE, 1], [:GROUNDIUMZ, 1]] },
   :scenes => {
     :offer => [
       [:NASRIN, :neutral, "A commission for a Delver, not a Sandsifter. The Vertebrae are a Tyranitar's spine, a mountain of it. The third vertebra has a heart in it."],
@@ -497,6 +505,7 @@ tr.quest(:OS_TYRANT_HEART, {
     ],
     :return => [
       [:NASRIN, :happy, "Whole! Not a crack! The Rolls thank you. The Rolls also say you keep it; we only wanted it written down."],
+      "In the spoil heap from your dig, a sliver of glass glints: Glassfall glass, tuned to the earth. The Rolls say finders keepers.",
       { :complete => true }
     ]
   }

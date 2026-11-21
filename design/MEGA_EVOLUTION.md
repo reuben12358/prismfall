@@ -65,8 +65,10 @@ break the splinter flew from. It "sulked" on every hand and went to Bastian, und
 Brann's Ch8 chestnut slip ("After the accident. Ten years back.") and Bastian's Ch14 crown story bracket it: a player can
 put the three together before Ch17 says it. Pre-Ring stones hum when the PC picks them up, and go quiet at the Ring-Day.
 
-Z-crystals stay what EEVEE_OCTAVE.md made them: slivers of Glassfall glass, each tuned by the Choir to one Imprint. The
-Z-Power Ring stays Vesper's Octave reward. Rings and crystals are separate things in the story too.
+Z-crystals stay what EEVEE_OCTAVE.md made them: slivers of Glassfall glass, each tuned by the Choir to one Imprint.
+**SPINE Rev 23: the same Warden's ring wakes them** (the chip and the sliver came off the same crown), so the player
+has one ring for both; Vesper's Z-Power Ring is no longer handed out. Crystals, their placement and the Z users:
+`design/Z_MOVES.md`.
 
 ---------------------------------------------------------------------------------------------------
 ## 2. Study: how Reborn and Rejuvenation hand out Megas
@@ -213,6 +215,8 @@ SPINE Rev 21 withdrew the Ch8 Ring-Day (7 badges); `story/22_SCRIPT_CH8.md` keep
      as if they had stopped waiting"; and "If Meridian's linesmen come down my lifts tonight, I'd like them to meet a
      ferry child with a Warden's ring."
 - **Gives:** `MEGARING` and `AGGRONITE` (Mega Aggron is pure Steel: it answers neither Ysolde nor Magnus). No Trial gong.
+  **SPINE Rev 23:** the ring also wakes Z-crystals; Bastian says so in one line ("the chip and the sliver came off the
+  same crown. One Z-move a fight, and one to a side, same as the hearts"). `design/Z_MOVES.md`.
 - **Must not say:** "reset" or "Legend Plate" (checked by `run_mega.rb`). Brann isn't in the scene, so the Light Stone
   choice doesn't touch it; his reaction is in his follow-up below.
 - **Follow-up beats:** Marchetti's raid (both sides Mega). **15 badges:** Brann's spare heartstone at the Hearthguild
@@ -354,23 +358,24 @@ exactly as designed, per the user (his set, the Volcanic prime and its eruption 
 | **Marchetti + Quent**, Ch16 tag (Factory, 71) | **Houndoom** (Marchetti, replaces Arcanine) | all | the pair's one Mega; Quent has none. |
 | **Kroll**, Ch17 Sun Court (Cave, 75) / **Quent** (alt., 75) | **Sharpedo** / **Metagross** | all | |
 | **Nyx**, Gym 16 (New Moon, double, 75) | **Absol "Omen"** (replaces Malamar) | all | Magic Bounce guards the Illusion games; Honchkrow is the Casual cut. |
-| **Celestine**, Gym 17 (Fairy Tale, double, 80) | **Mawile** (replaces Mimikyu) | all | the wolf in the storybook. Azumarill is the Casual cut. |
+| **Celestine**, Gym 17 (Fairy Tale, double, 80) | none: **a Z-move instead** (Rev 23): Mimikyu @ Mimikium Z | all | Gloaming's dusk-chapels tuned it (Z_MOVES.md §4); Mimikyu is back in the slot Mega Mawile took. Azumarill is the Casual cut. |
 | **Sigrun**, Gym 18 (Dragon's Den, 85) | **Salamence "Dreamwing"** | all | |
 | **Kestrel K8**, Festival SF (Prism Arena, 94) | **Scizor**, only with Morwen's Ring | all | `MORWEN_RING`: ring and Scizorite at battle start when `:ch18_kestrel_ring` = *give_now*; otherwise none. |
 | Kestrel K9 (fallen, 94) | none | — | he never got the ring. Genesect "Gauntlet" replaces Staraptor (Krookodile is gone from K7 on). |
 | **Juno J4**, Festival R16 (Prism Arena, 90) | **Gardevoir "Veil"** (replaces Comfey) | all | not her starter: Core swaps it to the player's generation, and most starter lines have no Mega. J7 (Ch21 partner): none. |
-| Festival R16 / QF / Final draws | Marisol **Gyarados**, Anja **Glalie**, Sigrun **Salamence**, Odessa **Pidgeot**, Celestine **Mawile**, Kaito **Lucario**, Ysolde **Sableye**/Gengar, Brann **Camerupt** (v96), Dorian **Lopunny** (the Pageant Bout's one Mega; Rook none) | all | |
+| Festival R16 / QF / Final draws | Marisol **Gyarados**, Anja **Glalie**, Sigrun **Salamence**, Odessa **Pidgeot**, Celestine (Z: Mimikyu), Kaito **Lucario**, Ysolde **Sableye**/Gengar, Brann **Camerupt** (v96), Dorian **Lopunny** (the Pageant Bout's one Mega; Rook none) | all | |
 | **Valen** (Final 96; Ruin's Last Tuning) | **Gallade** | all | |
 | **Voss** (Festival hijack, 100) | **Ampharos "Lumen"** (replaces Klinklang) | all | Meridian's lamp, "light for everyone"; Dragon resists the first four Plates. |
 | **Quent** (hijack 100, Ch21 tag 97) | **Metagross** | all | |
 | Ch21 tag foes (97) | Kroll **Sharpedo**, Marchetti **Manectric** (replaces Arcanine), Directorate Captain **Scizor** | all | one fires per side. |
-| Ruin Gyms 15–18 (v1) | as their Wardens | all | |
+| Ruin Gyms 15–18 (v1) | as their Wardens (Celestine's is her Z) | all | |
 | Cameos | Garret's v1 (ace 46) has **no** Mega now (Lucario isn't weak); v2 (100) Megas in every mode; the others unchanged (Hard-only, all past Lv 50) | | optional sidequests, not story fights |
 | The Eevee Octave | none (Z-moves) | | |
 | Wild bosses (Old Cinder 72, Old Pincer 62, the Matriarch 78) | none (wild) | | |
 
-**Counts:** 39 Standard / 39 Hard / 39 Casual trainer entries at ace 50+ hold one Mega each (run_mega.rb), plus
-Kestrel's K8 when he has Morwen's Ring; one below Lv 50 (Brann), Standard and Hard only.
+**Counts:** 36 Standard / 36 Hard / 36 Casual trainer entries at ace 50+ hold one Mega each and 3 per mode use
+Celestine's Z-move instead (run_mega.rb), plus Kestrel's K8 when he has Morwen's Ring; one below Lv 50 (Brann),
+Standard and Hard only.
 
 ### 6.3 Mega-less for story reasons (no ring by that point)
 | Fighter | Why |
@@ -408,7 +413,8 @@ Requests to other workstreams are in `mapgen/REQUESTS.md` ("From the Mega Evolut
 ---------------------------------------------------------------------------------------------------
 ## 8. Tests
 
-**Headless** (`PRISM_RUN_DIR=<run copy> PRISM_COMPILE=1 ruby tools/harness/run_mega.rb`): **64/64 passed**
+**Headless** (`PRISM_RUN_DIR=<run copy> PRISM_COMPILE=1 ruby tools/harness/run_mega.rb`): **69/69 passed** (Rev 23 adds the
+one-ring, crystal-distribution, species Z-move and crystal-teaser checks: `design/Z_MOVES.md` §5)
 (`docs/mega_test/REPORT.md`, transcript alongside). The run covers:
 - data: 47 stones + Rayquaza; every stone placed or unplaced; the Ring at 13 (Cragholm, Bastian); R4 at the new Ring
   point; 12 stones before the ring; S-tier none before 10; quest, rank and event sources; every Mega talk key placed.

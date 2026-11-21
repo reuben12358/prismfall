@@ -1,7 +1,7 @@
 # Pokémon Prismfall - Z-moves (Essentials v21.1 moves format, merged as PBS/moves_zpower.txt).
 # Owner: Prismfall Z-Power (plugins/Prismfall Z-Power, design/EEVEE_OCTAVE.md section 5). No Pokemon learns these:
 # a held Z-crystal turns a base move into one for a single turn. Power and category come from the base move at that
-# moment (Power 1 / Category here are placeholders); Accuracy 0 = never misses; no CanProtect flag = goes through
+# moment (Power 1 / Category here are placeholders; a species crystal's Z-move has its own Power); Accuracy 0 = never misses; no CanProtect flag = goes through
 # Protect for 1/4 damage. Flag ZMove lets field rules match every Z-move; CannotMetronome keeps them out of Metronome.
 #-------------------------------
 [HYDROVORTEX]
@@ -99,6 +99,150 @@ Target = NearOther
 FunctionCode = PrismfallZMove
 Flags = ZMove,CannotMetronome
 Description = The user traps the target in a charming space with its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[BREAKNECKBLITZ]
+Name = Breakneck Blitz
+Type = NORMAL
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user builds up its momentum using its Z-Power and crashes into the target at full speed. Its power comes from the move it was born from.
+#-------------------------------
+[ALLOUTPUMMELING]
+Name = All-Out Pummeling
+Type = FIGHTING
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user rams an energy orb created by its Z-Power into the target with full force. Its power comes from the move it was born from.
+#-------------------------------
+[SUPERSONICSKYSTRIKE]
+Name = Supersonic Skystrike
+Type = FLYING
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user soars up with its Z-Power and plummets toward the target at full speed. Its power comes from the move it was born from.
+#-------------------------------
+[ACIDDOWNPOUR]
+Name = Acid Downpour
+Type = POISON
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user creates a poisonous swamp using its Z-Power and sinks the target into it at full force. Its power comes from the move it was born from.
+#-------------------------------
+[TECTONICRAGE]
+Name = Tectonic Rage
+Type = GROUND
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user burrows deep into the ground with its Z-Power and slams into the target at full force. Its power comes from the move it was born from.
+#-------------------------------
+[CONTINENTALCRUSH]
+Name = Continental Crush
+Type = ROCK
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user summons a huge rock mountain using its Z-Power and drops it onto the target at full force. Its power comes from the move it was born from.
+#-------------------------------
+[SAVAGESPINOUT]
+Name = Savage Spin-Out
+Type = BUG
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user binds the target with full force with threads of silk that the user spits using its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[NEVERENDINGNIGHTMARE]
+Name = Never-Ending Nightmare
+Type = GHOST
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = Deep-seated grudges summoned by the user's Z-Power trap the target. Its power comes from the move it was born from.
+#-------------------------------
+[CORKSCREWCRASH]
+Name = Corkscrew Crash
+Type = STEEL
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user spins very fast and rams into the target with the full force of its Z-Power. Its power comes from the move it was born from.
+#-------------------------------
+[DEVASTATINGDRAKE]
+Name = Devastating Drake
+Type = DRAGON
+Category = Physical
+Power = 1
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome
+Description = The user materializes its aura using its Z-Power and attacks the target with full force. Its power comes from the move it was born from.
+#-------------------------------
+[PULVERIZINGPANCAKE]
+Name = Pulverizing Pancake
+Type = NORMAL
+Category = Physical
+Power = 210
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome,Contact
+Description = Z-Power brings out the true capabilities of the user, Snorlax. The Pokemon moves its enormous body energetically and attacks the target with full force.
+#-------------------------------
+[LETSSNUGGLEFOREVER]
+Name = Let's Snuggle Forever
+Type = FAIRY
+Category = Physical
+Power = 190
+Accuracy = 0
+TotalPP = 1
+Target = NearOther
+FunctionCode = PrismfallZMove
+Flags = ZMove,CannotMetronome,Contact
+Description = After obtaining Z-Power, the user, Mimikyu, punches the target with full force.
 #-------------------------------
 [EXTREMEEVOBOOST]
 Name = Extreme Evoboost

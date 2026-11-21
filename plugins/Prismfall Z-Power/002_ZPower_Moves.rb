@@ -29,7 +29,9 @@ module PrismfallZ
       @pp = -1
       @prism_executed = false
       if damagingMove? && base_move
-        @power    = PrismfallZ.power_for(base_move.power)
+        # A species crystal's Z-move keeps its own power (PBS); a type Z-move's comes from the base move.
+        exclusive = PrismfallZ::EXCLUSIVE.values.any? { |e| e[:zmove] == @id }
+        @power    = (exclusive && @power.to_i > 1) ? @power : PrismfallZ.power_for(base_move.power)
         @category = base_move.category
         @flags.push("Contact") if base_move.contactMove? && !@flags.include?("Contact")
       end

@@ -1,6 +1,6 @@
 # TRIAL_EVENTS.yaml - map events for the wired Trial quests and event Pokemon (Chapters 1-4), and the Eevee Octave
 # (SPINE Rev 19, Chapters 2-20: maps 145, 120, 524, 160, 167, 181, 215, 220, 240, 340, 742, 489; design/EEVEE_OCTAVE.md)
-# and Mega Evolution (SPINE Revs 20-21, design/MEGA_EVOLUTION.md sections 4-5: the Ring-Day in Cragholm at 13 badges, the stone quests, 44 stones)
+# and Mega Evolution and Z-crystals (SPINE Revs 20-21, 23; design/MEGA_EVOLUTION.md 4-5, design/Z_MOVES.md: the Ring-Day in Cragholm at 13 badges, 44 stones, 20 crystals)
 # Owner: Prismfall Trials (design/TRIALS.md). Consumer: the map builder (design/MAPGEN.md section 4 event DSL).
 # No map file was edited; place these where `near:` says and fill `at:`.
 #
@@ -306,7 +306,8 @@ maps:
        cond: {switch: CH20_VEIL_GATE_OPEN}, note: "Eevee Octave 8/8 (Crownhaven), always last: her quest opens once the other seven are helped."}
     - {name: Vesper (the gauntlet), key: VESPER_GARDEN, near: "the head of the garden; the other seven singers in a half-circle behind her once she appears", sprite: "Vesper Lindqvist in Choir white; an Eevee (Amen)", trigger: action,
        condition: "octave_ready", note: "Appears when all eight singers have been helped (the user's 'a trainer spawns in Crownhaven'). Starts the 9-bout gauntlet."}
-  # ---- Mega Evolution (SPINE Revs 20-21; design/MEGA_EVOLUTION.md). Rev 21 moved the Ring to 13 badges (Cragholm, 363)
+  # ---- Mega Evolution and Z-crystals (SPINE Revs 20-21, 23; design/MEGA_EVOLUTION.md, design/Z_MOVES.md). Rev 21 moved the Ring to 13 badges (Cragholm, 363)
+  # ---- Rev 23: the same ring wakes Z-crystals; world crystals call pf_z_crystal(:ITEM[, "line"]) (12 events).
   # ---- and re-gated or moved 11 stones (MEGA_EVOLUTION.md 5.3). Quests: plugins/Prismfall Trials/114_Quests_Megas.rb,
   # ---- talk rows 152_Talk_Megas.rb. Stones lying in the world call pf_mega_stone(:ITEM[, "line"]) (plugins/Prismfall Mega).
   154:
@@ -403,7 +404,12 @@ maps:
     name: Vane Hall
     events:
     - {name: "Mega Stone: SCIZORITE", near: "Morwen Vane's trophy case in the long gallery", sprite: "Object ball", trigger: action, condition: "badges >= 13 && !has_item(:SCIZORITE)",
-       commands: ["{script: 'pf_mega_stone(:SCIZORITE, \"A red stone on a velvet stand. The card under it, in a child's hand: MUM'S. DON'T TOUCH. - K.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+       commands: ["{script: 'pf_mega_stone(:SCIZORITE, \"A red stone on a velvet stand. The card under it is in big childish capitals: MUMS. DONT TOUCH. - K.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  384:
+    name: Lantern Hospice
+    events:
+    - {name: "Z-Crystal: MIMIKIUMZ", near: "a Pikachu-shaped rag doll on an empty cot", sprite: "Object ball", trigger: action, condition: "badges >= 13 && !has_item(:MIMIKIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:MIMIKIUMZ, \"Sewn into the belly of the rag doll, where its heart would be: a sliver of glass.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   403:
     name: Strade Works - Foundry Floor
     events:
@@ -446,6 +452,21 @@ maps:
     events:
     - {name: The Matriarch, key: CAUSEWAY_MATRIARCH, near: "on the causeway's crown by the old cairn (blocks the road at low tide)", sprite: "Followers/KANGASKHAN (large)", trigger: action, condition: "badges >= 16 && !quest_done(:IS_CAUSEWAY_MATRIARCH)",
        note: "Boss (Lv 78, 3 bars): Kangaskhanite. Put two or three small Kangaskhan 'young ones' around her as decor with the same condition."}
+  577:
+    name: Frostwick Pass
+    events:
+    - {name: "Z-Crystal: ICIUMZ", near: "the avalanche gully below the pass, behind a Rock Smash boulder", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 2 && !has_item(:ICIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:ICIUMZ, \"Under the packed snow, a sliver of glass so clear you only see it by its frost.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  605:
+    name: Static Tunnels Depths
+    events:
+    - {name: "Z-Crystal: STEELIUMZ", near: "the magnetite seam in the deepest gallery (Flash)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 4 && !has_item(:STEELIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:STEELIUMZ, \"Iron filings have grown round a sliver of grey glass like fur.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  680:
+    name: The Rootdeep
+    events:
+    - {name: "Z-Crystal: GRASSIUMZ", near: "a root-wrapped ledge on the underground river (Surf)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 8 && !has_item(:GRASSIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:GRASSIUMZ, \"A root has grown right round a sliver of green glass, as if to keep it.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   681:
     name: Prism Falls
     events:
@@ -456,6 +477,11 @@ maps:
     events:
     - {name: "Mega Stone: SCEPTILITE", near: "the mantel of the ruined hunting lodge", sprite: "Object ball", trigger: action, condition: "badges >= 8 && !has_item(:SCEPTILITE)",
        commands: ["{script: 'pf_mega_stone(:SCEPTILITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  685:
+    name: Grudgestone Quarry B1F
+    events:
+    - {name: "Z-Crystal: ROCKIUMZ", near: "the gem seam the wild Sableye feed on", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 8 && !has_item(:ROCKIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:ROCKIUMZ, \"Among the gnawed gems, one sliver of glass that nothing has dared to bite.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   701:
     name: The Hoarwood
     events:
@@ -473,6 +499,11 @@ maps:
     events:
     - {name: "Mega Stone: SLOWBRONITE", near: "a tide-pool shelf at the back of the grotto", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 10 && !has_item(:SLOWBRONITE)",
        commands: ["{script: 'pf_mega_stone(:SLOWBRONITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  726:
+    name: Cloudstair - Summit
+    events:
+    - {name: "Z-Crystal: FLYINIUMZ", near: "the wind-scoured ledge at the summit", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 10 && !has_item(:FLYINIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:FLYINIUMZ)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   732:
     name: The Tetherline
     events:
@@ -489,6 +520,21 @@ maps:
     events:
     - {name: Third vertebra, key: THIRD_VERTEBRA, near: "under the third vertebra-arch of the ridge", sprite: "none (rock tile)", trigger: action,
        condition: "quest_step(:OS_TYRANT_HEART) == :ask"}
+  780:
+    name: The Jawbone Ridge
+    events:
+    - {name: "Z-Crystal: BUGINIUMZ", near: "in the resin of a dead tree on the ridge", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 13 && !has_item(:BUGINIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:BUGINIUMZ)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  781:
+    name: Hindmoor
+    events:
+    - {name: "Z-Crystal: PSYCHIUMZ", near: "the humming standing stone on the moor", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 13 && !has_item(:PSYCHIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:PSYCHIUMZ, \"Wedged in a crack of the standing stone: a sliver of violet glass. The humming stops when you take it.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  785:
+    name: Darkglass Mine B1F
+    events:
+    - {name: "Z-Crystal: FAIRIUMZ", near: "a pink glint under the shot-out lamps", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 13 && !has_item(:FAIRIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:FAIRIUMZ)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   801:
     name: The Slag Mesa
     events:
@@ -509,11 +555,21 @@ maps:
     events:
     - {name: "Mega Stone: GARCHOMPITE", near: "a sand-sunk caravan", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 15 && !has_item(:GARCHOMPITE)",
        commands: ["{script: 'pf_mega_stone(:GARCHOMPITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  811:
+    name: The Smokestack Parade
+    events:
+    - {name: "Z-Crystal: POISONIUMZ", near: "a soot-black vent on the parade", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 14 && !has_item(:POISONIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:POISONIUMZ)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   821:
     name: The Drownings
     events:
     - {name: "Mega Stone: SWAMPERTITE", near: "a mud-bank islet in the flooded fields (Surf)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 15 && !has_item(:SWAMPERTITE)",
        commands: ["{script: 'pf_mega_stone(:SWAMPERTITE)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  822:
+    name: Under the Drownings
+    events:
+    - {name: "Z-Crystal: WATERIUMZ", near: "a drowned wayside shrine (Dive)", sprite: "none (hidden item; Itemfinder target)", trigger: action, condition: "badges >= 15 && !has_item(:WATERIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:WATERIUMZ)'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   824:
     name: Aurelia - Drowned Spires
     events:
@@ -529,6 +585,11 @@ maps:
     events:
     - {name: "Mega Stone: GALLADITE", near: "the knight's barrow", sprite: "Object ball", trigger: action, condition: "badges >= 16 && !has_item(:GALLADITE)",
        commands: ["{script: 'pf_mega_stone(:GALLADITE, \"In the knight's stone hands, where a sword should be, a stone.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
+  850:
+    name: Mothwell
+    events:
+    - {name: "Z-Crystal: SNORLIUMZ", near: "the hay barn with a Snorlax-sized dent in the bales", sprite: "Object ball", trigger: action, condition: "badges >= 16 && !has_item(:SNORLIUMZ)",
+       commands: ["{script: 'pf_z_crystal(:SNORLIUMZ, \"In the dent in the hay, warm, as if something huge had just got up: a sliver of glass.\")'}"], after: "{selfswitch: [A, true]} with an empty page 2 on self switch A"}
   864:
     name: Wyrmscar Rift
     events:

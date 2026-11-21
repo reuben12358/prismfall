@@ -11,9 +11,12 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   field: VOLCANIC | weather: None | terrain: None
   Oh! A wild Chansey appeared!
   Go! Camerupt!
-    >> sent out (player): Camerupt Lv.60 @CAMERUPTITE [SOLIDROCK]
+    >> sent out (player): Camerupt Lv.60 @CAMERUPTITE [MAGMAARMOR]
 ## FIELD CHANGE: NONE -> VOLCANIC
   Magma churns across the battlefield!
+  Camerupt's armor hardened in the magma!
+    (anim: StatUp)
+  Camerupt's Defense rose!
 
 --- Turn 1 ---
   [Camerupt 172/172 | Chansey 388/388]
@@ -26,22 +29,22 @@ Mega: the player's Camerupt (AI-controlled) on the Volcanic field
   But nothing happened!
   Camerupt used Earth Power!
   Magma erupted from below!
-    HP Chansey (foe): 388 -> 254 / 388
+    HP Chansey (foe): 388 -> 242 / 388
   (end of round)
   The volcano erupted!
-    HP Chansey (foe): 254 -> 205 / 388
+    HP Chansey (foe): 242 -> 193 / 388
   Lava rained down around the wild Chansey!
   Camerupt rode the eruption!
     (anim: StatUp)
   Camerupt's Special Attack rose!
 
 --- Turn 2 ---
-  [Camerupt 172/172 | Chansey 205/388]
+  [Camerupt 172/172 | Chansey 193/388]
   The wild Chansey used Splash!
   But nothing happened!
-  Camerupt used Rock Slide!
-  The rocks came out superheated!
-    HP Chansey (foe): 205 -> 0 / 388
+  Camerupt used Flamethrower!
+  Camerupt drew fire up from the magma!
+    HP Chansey (foe): 193 -> 0 / 388
   The wild Chansey fainted!
     xx fainted: Chansey (foe)
   Camerupt got 4741 Exp. Points!
@@ -456,8 +459,8 @@ Mega + Z: one trainer's double (Lucario @Lucarionite, Vaporeon @Waterium Z, MEGA
 RESULT: player won after 2 turn(s)
 
 
-Mega + Z: the player's side (Mega Ring + Z-Power Ring) on Water Surface
-=======================================================================
+Mega + Z: the player's side with the one ring (Mega Ring only) on Water Surface
+===============================================================================
 
 --- Battle start ---
   field: WATER_SURFACE | weather: None | terrain: None
@@ -534,6 +537,31 @@ Mega + Z: the player's side (Mega Ring + Z-Power Ring) on Water Surface
 RESULT: player won after 2 turn(s)
 
 
+Species Z-move: the player's Snorlax with the Snorlium Z
+========================================================
+
+--- Battle start ---
+  field: NONE | weather: None | terrain: None
+  Oh! A wild Chansey appeared!
+  Go! Snorlax!
+    >> sent out (player): Snorlax Lv.70 @SNORLIUMZ [IMMUNITY]
+
+--- Turn 1 ---
+  [Snorlax 325/325 | Chansey 451/451]
+  The wild Chansey used Splash!
+  But nothing happened!
+  Snorlax surrounded itself with its Z-Power!
+  Snorlax unleashed its full-force Z-Move!
+  Snorlax used Pulverizing Pancake!
+    HP Chansey (foe): 451 -> 0 / 451
+  The wild Chansey fainted!
+    xx fainted: Chansey (foe)
+  Snorlax got 5531 Exp. Points!
+  battle result code: 1
+  
+RESULT: player won after 0 turn(s)
+
+
 === 5. One Mega and one Z-move per SIDE (two foe trainers) ===
 
 Per side (LIMIT :side): two foe trainers, each with a Mega Stone and a Mega Ring
@@ -560,83 +588,55 @@ Per side (LIMIT :side): two foe trainers, each with a Mega Stone and a Mega Ring
   The opposing Lucario's Special Attack rose sharply!
   Blissey used Seismic Toss!
     HP Lucario (foe): 199 -> 99 / 199
-  The opposing Metagross used Meteor Mash!
-    HP Blissey (player): 651 -> 353 / 651
+  The opposing Metagross used Zen Headbutt!
+    HP Snorlax (player): 461 -> 384 / 461
   Snorlax used Body Slam!
-    HP Metagross (foe): 213 -> 156 / 213
+    HP Metagross (foe): 213 -> 158 / 213
   It's not very effective...
   (end of round)
     (anim: UseItem)
-    HP Blissey (player): 353 -> 393 / 651
-  Blissey restored a little HP using its Leftovers!
+    HP Snorlax (player): 384 -> 412 / 461
+  Snorlax restored a little HP using its Leftovers!
 
 --- Turn 2 ---
-  [Blissey 393/651 | Lucario 99/199 | Snorlax 461/461 | Metagross 156/213]
+  [Blissey 651/651 | Lucario 99/199 | Snorlax 412/461 | Metagross 158/213]
   The opposing Lucario used Flash Cannon!
-    HP Blissey (player): 393 -> 278 / 651
+    HP Snorlax (player): 412 -> 283 / 461
   Blissey used Seismic Toss!
     HP Lucario (foe): 99 -> 0 / 199
   The opposing Lucario fainted!
     xx fainted: Lucario (foe)
   Blissey is at the level cap (Lv. 100) and can't gain Exp. Points.
   Snorlax is at the level cap (Lv. 100) and can't gain Exp. Points.
-  The opposing Metagross used Meteor Mash!
-    HP Blissey (player): 278 -> 0 / 651
-  A critical hit!
-  Blissey fainted!
-    xx fainted: Blissey (player)
-    (anim: StatUp)
-  The opposing Metagross's Attack rose!
+  The opposing Metagross used Zen Headbutt!
+  The opposing Metagross's attack missed!
   Snorlax used Body Slam!
-    HP Metagross (foe): 156 -> 99 / 213
+    HP Metagross (foe): 158 -> 102 / 213
   It's not very effective...
   (end of round)
+    (anim: UseItem)
+    HP Snorlax (player): 283 -> 311 / 461
+  Snorlax restored a little HP using its Leftovers!
 
 --- Turn 3 ---
-  [Snorlax 461/461 | Metagross 99/213]
-  The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 461 -> 333 / 461
+  [Blissey 651/651 | Snorlax 311/461 | Metagross 102/213]
+  Blissey used Seismic Toss!
+    HP Metagross (foe): 102 -> 2 / 213
+  The opposing Metagross used Earthquake!
+    HP Blissey (player): 651 -> 507 / 651
+    HP Snorlax (player): 311 -> 265 / 461
   Snorlax used Body Slam!
-    HP Metagross (foe): 99 -> 37 / 213
+    HP Metagross (foe): 2 -> 0 / 213
   It's not very effective...
-  (end of round)
-    (anim: UseItem)
-    HP Snorlax (player): 333 -> 361 / 461
-  Snorlax restored a little HP using its Leftovers!
-
---- Turn 4 ---
-  [Snorlax 361/461 | Metagross 37/213]
-  The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 361 -> 147 / 461
-  A critical hit!
-  Snorlax flinched and couldn't move!
-  (end of round)
-    (anim: UseItem)
-    HP Snorlax (player): 147 -> 175 / 461
-  Snorlax restored a little HP using its Leftovers!
-
---- Turn 5 ---
-  [Snorlax 175/461 | Metagross 37/213]
-  The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 175 -> 37 / 461
-  Snorlax flinched and couldn't move!
-  (end of round)
-    (anim: UseItem)
-    HP Snorlax (player): 37 -> 65 / 461
-  Snorlax restored a little HP using its Leftovers!
-
---- Turn 6 ---
-  [Snorlax 65/461 | Metagross 37/213]
-  The opposing Metagross used Zen Headbutt!
-    HP Snorlax (player): 65 -> 0 / 461
-  Snorlax fainted!
-    xx fainted: Snorlax (player)
-  You have no more Pokémon that can fight!
-  You lost against Warden Kaito and Warden Magnus!
-  You gave $800 to the winner...
-  battle result code: 2
+  The opposing Metagross fainted!
+    xx fainted: Metagross (foe)
+  You defeated Warden Kaito and Warden Magnus!
+  ...
+  ...
+  You got $14,000 for winning!
+  battle result code: 1
   
-RESULT: player lost after 5 turn(s)
+RESULT: player won after 2 turn(s)
 
 
 Per side (LIMIT :trainer, Essentials' own rule): two foe trainers, each with a Mega Stone and a Mega Ring
@@ -1491,11 +1491,15 @@ RESULT: player won after 0 turn(s)
   You obtained a Steelixite!
   You put the Steelixite in your Bag's Items pocket.
   The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something.
+  You obtained an Icium Z!
+  You put the Icium Z in your Bag's Items pocket.
+  The crystal is cold, and it rings very faintly against your fingers... then it falls silent, as if listening for something.
   Bastian: Sit, sit. Flawless cut, that was. Don't tell the cavern I said so. It sulks.
-  Bastian: You'll have been wondering what my old Amber did in there, changing like that. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild cuts one for every seat since the Concordance.
+  Bastian: You'll have seen a few of those by now. Anja's Glalie. Odessa's bird. That Directorate woman's dog. My old Amber, just now. Nobody's told you properly what it is, I'd wager. Every Warden's seat has a ring. 'Mega Ring', the Accord calls it. The Hearthguild's cut one for every seat since the Concordance.
   Bastian: A gold band, and a chip of the Crown's own stone. No colour of its own, so it takes any colour you put to it. That's how it opens a heartstone.
   Bastian: Heartstones. 'Mega Stones', if you're Accord. Leave an Imprint in one kind of Pokemon long enough and it pearls. Your partner holds the stone, you wear the ring, and for one fight it carries its whole Imprint.
   Bastian: One heart at a time, mind. Two rings on the same side ring against each other. One Mega to a side, always. Remember it in a double.
+  Bastian: And if you come by a Choir crystal, a sliver of the Crown's glass from the Glassfall, it'll answer that too: the chip and the sliver came off the same crown. One Z-move a fight, and one to a side, same as the hearts.
   He unwraps an oilcloth: a plain gold band, and set in it a chip of stone with no colour at all.
   Bastian: Holloway cut this one. The forge-man in Cindervault. Ten years back. He sent it to me in a sock, with a note: 'It sulks. Keep it where nobody asks questions.' So it's been under my mountain.
   Bastian: Two old men who don't ask each other things. That's how you get to seventy-four.
@@ -1511,12 +1515,12 @@ RESULT: player won after 0 turn(s)
   You obtained an Aggronite!
   You put the Aggronite in your Bag's Items pocket.
   The other stones in your Bag are warm now, and quiet, as if they had stopped waiting.
-  Bastian: Wear it. If Meridian's linesmen come down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
+  Bastian: Wear it. If the Directorate comes down my lifts tonight, I'd like them to meet a ferry child with a Warden's ring.
   Sigrun will remember that.
   Brann: There you are! War on the doorstep and you still come by. Sit. No, not there, that's hot.
   Brann: ...That's my ring. The odd one. So old Ore finally gave it away. Ten years it sulked in his lamp-room.
-  Brann: I haven't forgotten the Light Stone, mind. Whose it should've gone to. I'm not going to talk about it. A ring doesn't care what its wearer said in a forge one bad night, so I won't either. Not today.
-  Brann: You remember Kiln, my Camerupt? The one that tried to erupt on you.
+  Brann: I haven't forgotten the Light Stone, mind. 'It's his people's,' you said. ...No. I'm not going to talk about it. The ring doesn't hold it against you, so I won't. Not today.
+  Brann: Kiln, my Camerupt. If you've met her, you remember her. She likes to erupt on people.
   Brann: Every heartstone's got a twin somewhere. Hers turned up in the slag this spring, still warm. The caldera makes them like other mountains make gravel.
   Brann: I'd give it to a Warden. You'll do better than most Wardens.
   You obtained a Cameruptite!
@@ -1609,7 +1613,10 @@ RESULT: player won after 0 turn(s)
   Legate Varra Kosk: The first honest answer in forty years.
   Legate Varra Kosk: Say true, and the fire keeps you. The writ is yours.
   She takes a blue stone with a red heart from a niche above the brazier. It is hot enough that she hands it over in tongs.
+  Legate Varra Kosk: And the brazier's own sliver. The Choir tuned it to our fire after the Glassfall. Your Warden's ring will hear it.
   The Herald strikes the gong. Your brand goes up on the Wall of the Proven.
   QUEST COMPLETE: "The Brazier Writ"
   You obtained a Salamencite!
   You put the Salamencite in your Bag's Items pocket.
+  You obtained a Firium Z!
+  You put the Firium Z in your Bag's Items pocket.

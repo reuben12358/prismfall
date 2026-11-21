@@ -15,6 +15,7 @@
 #   PRISM_STARTERS=Fire (only those starters)   PRISM_FORCE=SPECIES (the first catch is that species: "a player who
 #   found it"; a fight's own :force list does the same for every run of that fight)
 #   PRISM_FOE_NOMEGA=1 takes MEGARING from every foe (the same fight without its Mega, for comparison)
+#   PRISM_FOE_NOZ=1 swaps every foe's Z-crystal for a Life Orb (the same fight without its Z-move)
 #   G7, G10, M12, K5 and G11 (SPINE Rev 21: the first Mega fights, and K5 without one) have PREPARED pools only: run
 #   them with PRISM_PREPARED=1.
 # Writes WINRATES.md and winrates.json to PRISM_OUT (default docs/battle_captures/winrates).
@@ -159,7 +160,7 @@ module WR
           :late => [:FACADE, :ROCKSMASH, :UTURN, :SURF] }   # Surf: Volcanic's advertised answer (two quench it)
   # The team is built over the whole journey: later pools include the earlier ones (a species keeps its best weight).
   POOLS[:ch3] = POOLS[:ch1_2].merge(POOLS[:ch3]) { |_k, a, b| [a, b].max }
-  %i[g7 g10 k5 g11 m12].each { |k| POOLS[k] = POOLS[:ch4] }   # (realistic runs of the late cells fall back to Chapter 4: use PREPARED)
+  %i[g7 g10 k5 g11 m12 g17].each { |k| POOLS[k] = POOLS[:ch4] }   # (realistic runs of the late cells fall back to Chapter 4: use PREPARED)
   POOLS[:ch4] = POOLS[:ch3].merge(POOLS[:ch4]) { |_k, a, b| [a, b].max }
   # A PREPARED player (PRISM_PREPARED=1): grinds every catch to the cap, keeps its strongest moves and hunts the best
   # type answers the availability doc allows by then (rare finds included), first listed first.
@@ -176,6 +177,8 @@ module WR
     :g11 => [:MAREEP, :ELECTRIKE, :RHYHORN, :LAPRAS, :ROCKRUFF, :BLITZLE],
     # Ch12 Marchetti (10 badges): Ground, Fighting, Fire for the Directorate's dogs and Corviknight.
     :m12 => [:HIPPOPOTAS, :MAKUHITA, :RHYHORN, :LAPRAS, :HOUNDOUR, :MIENFOO],
+    # Gym 17 (16 badges): Steel and Poison for Celestine.
+    :g17 => [:BELDUM, :DRILBUR, :GRIMER, :SKORUPI, :SKARMORY, :KLINK],
     :ch3   => [:PONYTA, :NACLI, :DWEBBLE, :FLETCHLING, :SPEAROW, :DODUO, :HOOTHOOT, :LITLEO],
     :ch4   => [:EMOLGA, :MAREEP, :SHINX, :JOLTIK, :SKIDDO, :SNOVER, :DEERLING, :HERACROSS]
   }
@@ -237,6 +240,8 @@ module WR
                :pool => :m12, :bag => :late, :tms => :late, :stage => 1,
                :start => proc { setBattleRule("canLose"); setBattleRule("field", :STORMFRONT)
                                 TrainerBattle.start(:MERIDIAN_MARCHETTI, "Helene", 0) } },
+    "G17" => { :label => "Gym 17 Celestine (Fairy Tale, double; Mimikyu's Z-move)", :cap => 80, :badges => 16, :size => 6,
+               :pool => :g17, :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(17, :can_lose => true) } },
     "G11" => { :label => "Gym 11 Odessa (Stormfront, double; Mega Pidgeot)", :cap => 55, :badges => 10, :size => 6, :pool => :g11,
                :bag => :late, :tms => :late, :stage => 1, :start => proc { Prismfall.gym_battle(11, :can_lose => true) } }
   }
@@ -311,6 +316,17 @@ module WR
                        [:GRANBULL, :INTIMIDATE, :ADAMANT, [:PLAYROUGH, :CLOSECOMBAT, :FIREFANG, :THUNDERFANG]],
                        [:AMPHAROS, :STATIC, :MODEST, [:THUNDERBOLT, :DRAGONPULSE, :FOCUSBLAST, :POWERGEM]],
                        [:TALONFLAME, :FLAMEBODY, :ADAMANT, [:FLAREBLITZ, :BRAVEBIRD, :UTURN, :ROOST]]] },
+    # Gym 17 Celestine (Fairy Tale, double, 80; SPINE Rev 23: her Mimikyu's Z-move). Steel and Poison (Fire is no Steel
+    # answer here: dragonfire); Protect for the double.
+    :g17 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:SLUDGEBOMB, :EARTHPOWER, :GIGADRAIN, :PROTECT]],
+              "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:AIRSLASH, :FOCUSBLAST, :FLAMETHROWER, :PROTECT]],
+              "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:FLASHCANNON, :SURF, :ICEBEAM, :PROTECT]],
+              :team => [[:METAGROSS, :CLEARBODY, :ADAMANT, [:METEORMASH, :ZENHEADBUTT, :BULLETPUNCH, :PROTECT]],
+                        [:EXCADRILL, :MOLDBREAKER, :JOLLY, [:IRONHEAD, :EARTHQUAKE, :ROCKSLIDE, :PROTECT]],
+                        [:MUK, :STENCH, :ADAMANT, [:GUNKSHOT, :POISONJAB, :SHADOWSNEAK, :PROTECT]],
+                        [:DRAPION, :SNIPER, :JOLLY, [:CROSSPOISON, :KNOCKOFF, :EARTHQUAKE, :PROTECT]],
+                        [:SKARMORY, :STURDY, :IMPISH, [:IRONHEAD, :BRAVEBIRD, :ROOST, :PROTECT]],
+                        [:KLINKLANG, :CLEARBODY, :ADAMANT, [:GEARGRIND, :WILDCHARGE, :SHIFTGEAR, :PROTECT]]] },
     :m12 => { "Grass" => [:VENUSAUR, :OVERGROW, :MODEST, [:GIGADRAIN, :SLUDGEBOMB, :EARTHPOWER, :SLEEPPOWDER]],
               "Fire" => [:CHARIZARD, :BLAZE, :TIMID, [:FLAMETHROWER, :AIRSLASH, :DRAGONPULSE, :FOCUSBLAST]],
               "Water" => [:BLASTOISE, :TORRENT, :MODEST, [:SURF, :ICEBEAM, :DARKPULSE, :FOCUSBLAST]],
@@ -432,6 +448,10 @@ module WR
 end
 
 Harness.new_game_state
+if ENV["PRISM_FOE_NOZ"] == "1"
+  EventHandlers.add(:on_trainer_load, :winrates_foe_noz,
+    proc { |tr| tr.party.each { |pk| pk.item = :LIFEORB if pk && PrismfallZ.crystal?(pk.item_id) } if tr && tr.respond_to?(:party) })
+end
 if ENV["PRISM_FOE_NOMEGA"] == "1"
   EventHandlers.add(:on_trainer_load, :winrates_foe_nomega, proc { |tr| tr.items.delete(:MEGARING) if tr && tr.respond_to?(:items) })
 end

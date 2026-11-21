@@ -31,7 +31,7 @@ tr.quest(:CR_OCTAVE, {
   :summary => "Vesper asked you to look in on the eight singers of the Octave as your road takes you through the kingdoms.",
   :steps => { :road => "Look in on the Octave's singers as you travel: Lyra (Briarwick), Aria (Ebbmouth), Cadence (Lumen City), Sona (Duneholt), Noct (Mirefen), Forte (Cindervault), Lento (the Mirror Mere). Carol never leaves Crownhaven.",
               :garden => "All eight singers have had your help. Vesper is waiting in the Glassfall Memorial Garden in Crownhaven." },
-  :reward => { :pokemon => :CR_OCTAVE_EEVEE, :items => [[:EEVIUMZ, 1], [:ZPOWERRING, 1]] },
+  :reward => { :pokemon => :CR_OCTAVE_EEVEE, :items => [[:EEVIUMZ, 1]] },   # SPINE Rev 23: no ring; the Warden's ring wakes it
   :touches => "The gauntlet runs in the order you helped the singers (each Eeveelution uses its Z-move); S177 EEVEE_OCTAVE_DONE",
   :scenes => {
     :saltmere => [
@@ -75,7 +75,8 @@ tr.quest(:CR_OCTAVE, {
                  { :map => "The last note. Amen sits down in the grass, very pleased with itself. The singers clap, out of time, on purpose." },
                  [:VESPER, :happy, "That was every note we have. You were worth all of them."],
                  [:VESPER, :neutral, "This Eevee was born in the garden this spring. It hasn't decided anything yet. We'd like it to grow up with you."],
-                 [:VESPER, :neutral, "And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once. And my ring, so you can use it."],
+                 [:VESPER, :neutral, "And this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once."],
+                 [:VESPER, :neutral, "You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip and our glass came off the same crown."],
                  { :if => "party_has(:EEVEE)", :then => [
                      [:VESPER, :happy, "It works for Understudy too, if it's still undecided. An Eevee who knows Last Resort and holds that crystal can become everything at once, for a moment."]
                    ] },

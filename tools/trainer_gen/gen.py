@@ -546,9 +546,10 @@ warden(17, "LEADER_CELESTINE", "Celestine", 80, "FAIRY_TALE", "And so the tale t
     # pick, but the v21 AI only aims a NearOther move at foes, so it never decorated its partner in the harness).
     P("ALCREMIE", 78, "AROMAVEIL", "MAGICALSEED", "BOLD", "HELPINGHAND,DAZZLINGGLEAM,MYSTICALFIRE,RECOVER", "BS",
       casual={"item": "LEFTOVERS"}, hard={"moves": "CALMMIND,DRAININGKISS,MYSTICALFIRE,RECOVER"}),
-    # SPINE Rev 21: Mega Mawile, the wolf in the storybook (replaces Mimikyu): Intimidate, then Huge Power.
-    P("MAWILE", 78, "INTIMIDATE", "LIFEORB", "ADAMANT", "PLAYROUGH,IRONHEAD,SUCKERPUNCH,PROTECT", "HA",
-      mega="MAWILITE", hard={"moves": "PLAYROUGH,IRONHEAD,SUCKERPUNCH,SWORDSDANCE"}),
+    # SPINE Rev 23: a Z-move instead of a Mega. Gloaming's dusk-chapels still sing the whole Hymn, and they tuned this
+    # sliver of Glassfall glass for the costume-ghost of the storybook: Mimikium Z, Play Rough -> Let's Snuggle Forever
+    # (190, Fairy; Fairy x1.5 on Fairy Tale). NPCs need no ring for a crystal (design/Z_MOVES.md 4).
+    P("MIMIKYU", 78, "DISGUISE", "MIMIKIUMZ", "JOLLY", "PLAYROUGH,SHADOWCLAW,SHADOWSNEAK,SWORDSDANCE", "A"),
     # Fire is no Steel answer here (dragonfire: Fire also hits as Dragon, which Steel resists). Superpower is.
     P("AZUMARILL", 79, "HUGEPOWER", "SITRUSBERRY", "ADAMANT", "AQUAJET,PLAYROUGH,LIQUIDATION,SUPERPOWER", "HA",
       only="nocasual", hard={"moves": "AQUAJET,PLAYROUGH,SUPERPOWER,BELLYDRUM"}),

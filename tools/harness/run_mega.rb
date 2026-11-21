@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Mega Evolution - headless integration test (SPINE Revisions 20 and 21)
+# Prismfall Mega Evolution - headless integration test (SPINE Revisions 20, 21 and 23)
 #   PRISM_RUN_DIR=<private run copy> PRISM_COMPILE=1 ruby tools/harness/run_mega.rb
 # The run copy needs the Prismfall Core, Field Effects, Z-Power, Bosses, Trials and Mega plugins (symlinks to the
 # kit's plugins/ folder) and the kit's pbs/ files copied in with the package.sh names (town_map.txt left out).
@@ -13,7 +13,8 @@
 #      important fight from ace 50 has one Mega in every mode, below 50 only designed weak ones); Kestrel's K8 with
 #      Morwen's Ring (the ring and Mega Scizor at battle start)
 #   4. a Mega and a Z-move in the same battle: one trainer's double (Mega Lucario + Hydro Vortex), the player's
-#      side on Water Surface (ring + Z-Power Ring), and two trainers on one side
+#      side on Water Surface with the ONE ring (Rev 23: MEGARING wakes crystals; the old Z-Power Ring alone still
+#      works for old saves), and two trainers on one side; the Z-crystal distribution (R4) and a species Z-move
 #   5. one Mega and one Z per SIDE: two foe trainers with a Mega Stone each / a Z-crystal each, side vs trainer limit
 #   6. rules: no ring -> no Mega; wild Pokemon never Mega Evolve; a Z-crystal blocks Rayquaza's Mega
 #   7. field showpieces (Grand Stage, Volcanic, Colosseum, Frozen Lake, Crystal Cavern, Hollow Cathedral, Factory,
@@ -363,8 +364,11 @@ no_mega_ok = { [:LEADER_SIGRUN, 19] => "war partner (the player's side)", [:LEAD
 # No ring in the story (MEGA_EVOLUTION.md 6.3). Kestrel's K8 gets one at battle start only with Morwen's Ring.
 no_ring = [:RIVAL_KESTREL, :LEADER_ROWAN, :ARCHSEER_DASK, :ECHO_MORWEN, :GILDED_THEODRIC, :ASHKAAR_OFFICER, :ISENMAR_OFFICER]
 weak_ok = { :LEADER_BRANN => [0] }
+# SPINE Rev 23: designed Z users in place of a Mega, from 13 badges, with a story reason (Z_MOVES.md 4).
+z_users = [:LEADER_CELESTINE]
 rule_errors = []
 counted = Hash.new(0)
+OCTAVE_LIKE = lambda { |t| t.trainer_type.to_s.start_with?("OCTAVE") }
 GameData::Trainer.each do |t|
   next if t.trainer_type.to_s !~ important || t.trainer_type.to_s =~ /[a-z]/   # Prismfall's types only (not the base kit's)
   base = t.version % 100
@@ -384,7 +388,9 @@ GameData::Trainer.each do |t|
       rule_errors << "#{key}: has a Mega, but the story gives them no ring" if !st.empty?
       next
     end
-    if st.empty? then rule_errors << "#{key}: ace #{ace_std}, no Mega"
+    if st.empty? && !zc.empty? && z_users.include?(t.trainer_type) && ace_std >= 63 then counted[mode + 10] += 1
+    elsif !zc.empty? && !OCTAVE_LIKE.call(t) && !z_users.include?(t.trainer_type) then rule_errors << "#{key}: a Z-crystal without a story reason"
+    elsif st.empty? then rule_errors << "#{key}: ace #{ace_std}, no Mega"
     else counted[mode] += 1
     end
   elsif !st.empty?
@@ -394,7 +400,8 @@ GameData::Trainer.each do |t|
   end
 end
 check("trainers.txt: every important fight from ace #{pm::MEGA_FULL_LEVEL} Megas in all modes (#{counted[0]} Std / #{counted[1]} Hard / " \
-      "#{counted[2]} Casual); below it only designed weak Megas; one stone, a ring, no Z-crystal beside it", rule_errors.empty?,
+      "#{counted[2]} Casual) or uses a designed Z (#{counted[10]} / #{counted[11]} / #{counted[12]}); below it only designed weak Megas; " \
+      "one stone, a ring, no Z-crystal beside it", rule_errors.empty?,
       rule_errors.first(5).join("; "))
 
 # Kestrel's K8: no ring of his own; with Morwen's Ring (Ch18) the ring and the Scizorite at battle start.
@@ -426,15 +433,59 @@ check("the foe used one Mega (Lucario) and one Z-move (Hydro Vortex) in the same
       fm.length == 1 && fm[0][:species] == :LUCARIO && fz.length == 1 && fz[0][:z] == :HYDROVORTEX, "megas #{fm.length}, z #{fz.map { |z| z[:z] }}")
 check("both on turn 1 (the Mega first, before moves; the Z-move in the move phase)", fm[0] && fz[0] && fm[0][:turn] == 1 && fz[0][:turn] == 1)
 
-$bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+$bag.remove(:ZPOWERRING) while $bag.has?(:ZPOWERRING)
+$bag.add(:MEGARING) if !$bag.has?(:MEGARING)
 n0 = MEGAS.length; z0 = ZS.length
-log = wild("Mega + Z: the player's side (Mega Ring + Z-Power Ring) on Water Surface", [lucario.call, vap.call],
+log = wild("Mega + Z: the player's side with the one ring (Mega Ring only) on Water Surface", [lucario.call, vap.call],
            [mk(:SNORLAX, 70, [:BODYSLAM, :REST], :LEFTOVERS, :IMMUNITY), mk(:CHANSEY, 70, [:SOFTBOILED, :SEISMICTOSS], :EVIOLITE)],
            field: :WATER_SURFACE, double: true, seed: 9)
 pmg = MEGAS[n0..].select { |x| x[:side] == 0 }
 pz = ZS[z0..].select { |x| x[:side] == 0 }
-check("the player's side used one Mega and one Z-move in one battle", pmg.length == 1 && pz.length == 1,
-      "megas #{pmg.map { |x| x[:species] }}, z #{pz.map { |x| x[:z] }}")
+check("the one ring: with only the Mega Ring the player's side used one Mega and one Z-move in one battle",
+      pmg.length == 1 && pz.length == 1 && !$bag.has?(:ZPOWERRING), "megas #{pmg.map { |x| x[:species] }}, z #{pz.map { |x| x[:z] }}")
+$bag.remove(:MEGARING)
+$bag.add(:ZPOWERRING)
+check("save compatibility: an old save's Z-Power Ring alone still wakes crystals (not stones)", PrismfallZ.player_ring? && !pm.ring?)
+$bag.remove(:ZPOWERRING)
+check("no ring at all: no Z-Power", !PrismfallZ.player_ring?)
+$bag.add(:MEGARING)
+
+# Z-crystal distribution (SPINE Rev 23): every type crystal placed once (the Eevium Z is the Octave's), R4 at the Ring
+# point, quest / boss / map-event sources, and the teaser before the Ring.
+zc = pm::Z_CRYSTALS
+zerr = []
+type_cr = PrismfallZ::CRYSTALS.keys
+zerr << "type crystals not placed: #{(type_cr - zc.keys).inspect}" if !(type_cr - zc.keys).empty?
+zc.each do |cr, d|
+  zerr << "#{cr}: not a crystal item" if !GameData::Item.exists?(cr) || !PrismfallZ.crystal?(cr)
+  t = PrismfallZ::CRYSTALS[cr] || (ex = PrismfallZ::EXCLUSIVE[cr]) && GameData::Move.get(ex[:zmove]).type
+  usable = [d[:badges], pm::RING_BADGES].max
+  (1..horizon).each do |k|
+    n = usable + k
+    next if n > 18 || !answers[n]
+    zerr << "#{cr} (#{t}) usable at #{usable} answers Warden #{n}" if answers[n].include?(t)
+  end
+  case d[:how]
+  when :quest, :boss
+    q = tr.get(d[:source])
+    zerr << "#{cr}: #{d[:source]} doesn't reward it" if !q || !((q[:reward] || {})[:items] || []).any? { |i, _n| i == cr }
+    gate = q && q[:unlock].to_s.scan(/badges\s*>=\s*(\d+)/).flatten.map(&:to_i).max
+    zerr << "#{cr}: #{d[:source]} unlock below #{d[:badges]}" if !gate || gate < d[:badges]
+  else
+    hit = spec["maps"][d[:map]] && spec["maps"][d[:map]]["events"].find { |e| Array(e["commands"]).join =~ /pf_z_crystal\(:#{cr}\b/ }
+    if !hit then zerr << "#{cr}: no pf_z_crystal event on map #{d[:map]}"
+    elsif !(hit["condition"].to_s =~ /badges >= (\d+)/ && $1.to_i >= d[:badges]) then zerr << "#{cr}: event gate #{hit['condition']}"
+    end
+  end
+end
+check("Z-crystals: all #{type_cr.length} type crystals + #{zc.length - type_cr.length} species crystals placed once, R4 with the Ring, " \
+      "sources and gates (#{zc.count { |_c, d| d[:badges] < pm::RING_BADGES }} ring and wait before 13)", zerr.empty?, zerr.first(4).join("; "))
+snz = mk(:SNORLAX, 70, [:GIGAIMPACT, :BODYSLAM, :REST, :PROTECT], :SNORLIUMZ)
+z0 = ZS.length
+wild("Species Z-move: the player's Snorlax with the Snorlium Z", [snz], foe_wall(70))
+sz = ZS[z0..].find { |x| x[:side] == 0 }
+check("a species crystal: Snorlax's Giga Impact becomes Pulverizing Pancake (its own power)", sz && sz[:z] == :PULVERIZINGPANCAKE,
+      sz.inspect[0, 80])
 
 #-------------------------------------------------------------------------------
 section("5. One Mega and one Z-move per SIDE (two foe trainers)")
@@ -561,6 +612,10 @@ check("at 3 badges Hesper gives the Ampharosite, and it hums (no ring yet)", $ba
       TRANSCRIPT[t0..].any? { |l| l.include?("hums faintly") })
 got = pf_mega_stone(:STEELIXITE)
 check("a world stone (pf_mega_stone) is received once; a second call gives nothing", got && $bag.has?(:STEELIXITE) && !pf_mega_stone(:STEELIXITE))
+t0 = TRANSCRIPT.length
+got = pf_z_crystal(:ICIUMZ)
+check("a world Z-crystal (pf_z_crystal) before the Ring: received once, with its own teaser", got && $bag.has?(:ICIUMZ) &&
+      !pf_z_crystal(:ICIUMZ) && TRANSCRIPT[t0..].any? { |l| l.include?("rings very faintly") })
 set_badges(12)
 check("the Ring-Day is locked before Gym 13", tr.state(:OS_RING_DAY) == :locked)
 set_badges(13)

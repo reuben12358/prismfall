@@ -1202,3 +1202,41 @@ are built.
 take more set pieces. Kit ideas left: a glass variant of the sand dune ledges when they cross glass, crest-side ridges
 with a lit top surface, a stair kit in glass. Field plugin 011's comments are regenerated with
 `ruby tools/field_defaults_to_rb.rb` whenever FIELD_DEFAULTS.yaml names change.
+
+## From the Mega Evolution workstream (SPINE Revision 23: one ring for Megas and Z-moves), 2026-11-20
+Design: **`design/Z_MOVES.md`** (the one ring, the 18 type crystals and 2 species crystals, where they are, who uses
+Z-moves, tests). The Eevee Octave doc is updated (`design/EEVEE_OCTAVE.md`). No map file was edited.
+
+**Map builder**
+1. **12 Z-crystal events** in `design/TRIAL_EVENTS.yaml` ("Mega Evolution and Z-crystals"). Each is one call,
+   `{script: 'pf_z_crystal(:ITEM, "line")'}`, with `badges >= N && !has_item(:ITEM)` and self switch A, like the
+   stones. Five are back on maps whose stones moved in Rev 21: 577 Frostwick Pass (Icium Z, Rock Smash), 605 Static
+   Tunnels Depths (Steelium Z, Flash), 685 Grudgestone Quarry B1F (Rockium Z), 680 the Rootdeep (Grassium Z, Surf),
+   726 Cloudstair Summit (Flyinium Z). New: 781 Hindmoor (Psychium Z), 780 the Jawbone Ridge (Buginium Z), 785
+   Darkglass Mine B1F (Fairium Z), 384 Lantern Hospice (Mimikium Z, an item ball by a rag doll on a cot), 811 the
+   Smokestack Parade (Poisonium Z), 822 Under the Drownings (Waterium Z, Dive), 850 Mothwell (Snorlium Z, an item ball
+   in a hay barn). The other 8 crystals are quest and boss rewards (no event needed).
+2. **Vane Hall (383):** the Scizorite line no longer has apostrophes ("MUMS. DONT TOUCH. - K."), which would have
+   broken the event's single-quoted script; please use the new text if you built it.
+
+**Story editor**
+3. **The Ring-Day** (Ch14, `OS_RING_DAY`): Bastian now adds one line before he unwraps the ring: "And if you come by a
+   Choir crystal, a sliver of the Crown's glass from the Glassfall, it'll answer that too: the chip and the sliver came
+   off the same crown. One Z-move a fight, and one to a side, same as the hearts." That's the lore for "one ring".
+4. **The Eevee Octave** (`CR_OCTAVE`): the reward is the Eevee and the Eevium Z, **no ring**. Vesper's line is now "And
+   this. We sang over it together: a sliver of the Crown's glass from the Glassfall, tuned to every Imprint at once." /
+   "You won't need a cantor's ring for it. That Warden's ring of yours hears it. Its chip and our glass came off the
+   same crown." (`113_Quests_Octave.rb`; the gauntlet is unchanged.)
+5. **Eight quests now also give a crystal**, each with one new line before the reward (in `114_Quests_Megas.rb`): the
+   Doll Who Waited (Ghostium), Return to Sender (Electrium, "posted in AF 290 and never collected"), the Brazier Writ
+   (Firium, "the brazier's own sliver"), the Tyrant's Heart (Groundium), Dogs of the Moon Market (Darkinium), Old Cinder
+   (Dragonium, sewn into the harness), Dorian's encore (Normalium, the Pageant's "prop jewel" that was real all along)
+   and the Memory Kata (Fightinium, in the unit's armband). Please check the voices.
+6. **Celestine (Gym 17) uses a Z-move instead of a Mega:** Mimikyu with the Mimikium Z (Let's Snuggle Forever). The
+   story reason is Gloaming's dusk-chapels, which still sing the whole Hymn and tuned the crystal for her storybook's
+   costume-ghost. If you'd like her to say so, one line before or after the gym fits (e.g. "The dusk-chapels sang
+   over this one. Every story needs one true thing in costume."). No other NPC has a crystal reason yet.
+
+**Z-Power owner (FYI):** `PrismfallZ::RING` is now `:MEGARING` (`player_ring?`; `ZPOWERRING` still counts for old saves),
+10 type crystals and 2 species crystals are added (species Z-moves keep their PBS power), and `run_trials.rb`'s Z tests
+use the Mega Ring. `playtest/run_zpower.sh` should put `MEGARING` in the Bag instead of `ZPOWERRING` next time it runs.

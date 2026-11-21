@@ -1,4 +1,4 @@
-# EEVEE_OCTAVE — the Eevee quest (SPINE Revision 19)
+# EEVEE_OCTAVE — the Eevee quest (SPINE Revision 19; Revision 23: the reward has no ring)
 
 > User: "because we have 7 kingdoms, there should be an eevee trainer dedicated to each kingdom. fire one gets flareon,
 > water one gets vaporeon, the piltover place gets jolteon, the place with dark types gets umbreon. figure out where the
@@ -68,8 +68,10 @@ be helped on a later visit, so the order of the first seven is the player's own.
 - A loss ends the run; the party is healed (quest losses never black out) and Vesper waits to be asked again.
 - **Available:** from the moment Carol is helped (Festival week, after S155) and after, including the post-game.
 - **Reward:** an **Eevee** (Lv 70, Adaptability; knows Last Resort, Stored Power, Shadow Ball, Quick Attack; can still
-  become any Eeveelution), the **Eevium Z**, and Vesper's **Z-Power Ring** (key item) so the player can use it. If
-  Understudy is still an Eevee, Vesper points out the crystal works for it too. S177 `EEVEE_OCTAVE_DONE` is set.
+  become any Eeveelution) and the **Eevium Z**. **No ring** (SPINE Rev 23): the Warden's ring Bastian gave the PC after
+  Badge 13 wakes Z-crystals too, so Vesper says "You won't need a cantor's ring for it. That Warden's ring of yours
+  hears it. Its chip and our glass came off the same crown." If Understudy is still an Eevee, Vesper points out the
+  crystal works for it too. S177 `EEVEE_OCTAVE_DONE` is set.
   The Eighteen Shrines' "Prism" Eevee (`CR_PRISM_EEVEE`) is gone: one Eevee gift in Crownhaven, not two; that quest
   now gives the five Imprint stones.
 
@@ -123,7 +125,11 @@ quest needs, and downloaded plugin code is not run in this workspace. So Z-Power
 - Once per trainer per battle; the Z-Power is spent when the Z-move is actually unleashed (a flinch, sleep or
   disobedience keeps it). The base move pays 1 PP. Encore, Disable, Choice lock, Copycat and Last Resort see the base move.
 - Crystals are held, never used up, and can't be knocked off, stolen, swapped or flung.
-- The **player** needs the **Z-Power Ring**; NPC trainers only need the crystal. Wild Pokémon never use Z-Power.
+- The **player** needs **the one ring** (SPINE Rev 23): the Warden's ring (`MEGARING`) from Bastian after Badge 13,
+  which opens Mega Evolution too. One Mega and one Z-move per side per battle. The old **Z-Power Ring** (`ZPOWERRING`)
+  stays defined and still counts, so a save that holds it loses nothing, but nobody hands it out. NPC trainers only
+  need the crystal. Wild Pokémon never use Z-Power. The 18 type crystals and the species crystals are placed through
+  the game from 13 badges (`design/Z_MOVES.md`).
 
 ### 5.3 Choosing one
 - **Player:** choosing an eligible move in the Fight menu opens a Yes/No box: *"Unleash Vaporeon's Z-Power? (Scald becomes

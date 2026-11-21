@@ -4,6 +4,7 @@
 # Map events for stones (design/TRIAL_EVENTS.yaml ("Mega Evolution" maps)) make ONE call:
 #   pf_mega_stone(:ABSOLITE)                       the item jingle + "obtained"
 #   pf_mega_stone(:ABSOLITE, "A black stone...")   a line first
+#   pf_z_crystal(:ICIUMZ[, "line"])                 a Z-crystal (its own teaser before the Ring)
 # Before the Ring (13 badges) the first stone also gets PrismfallMega::TEASER_TEXT.
 # The Mega Ring and the quest stones come from Trials scenes
 # (plugins/Prismfall Trials/114_Quests_Megas.rb), so all dialogue lives in one place.
@@ -37,13 +38,19 @@ module PrismfallMega
     c[:mega_teaser] = true if c
   end
 
-  def self.give_stone(item, text = nil)
+  def self.give_stone(item, text = nil, crystal = false)
     item = item.to_sym
     return false if !GameData::Item.exists?(item)
-    return false if $bag.has?(item)              # each stone exists once
+    return false if $bag.has?(item)              # each stone or crystal exists once
     pbMessage(_INTL(text)) if text
     return false if !pbReceiveItem(item)
-    if !ring? && !teaser_seen?
+    if crystal
+      c = custom
+      if !ring? && !(c && c[:z_teaser])
+        pbMessage(_INTL(CRYSTAL_TEASER_TEXT))
+        c[:z_teaser] = true if c
+      end
+    elsif !ring? && !teaser_seen?
       pbMessage(_INTL(TEASER_TEXT))
       mark_teaser
     end
@@ -85,6 +92,11 @@ def pf_mega_stone(item, text = nil)
   return PrismfallMega.give_stone(item, text)
 end
 
+# Z-crystals lying in the world (SPINE Rev 23): the same one call, with the crystal's own teaser before the Ring.
+def pf_z_crystal(item, text = nil)
+  return PrismfallMega.give_stone(item, text, true)
+end
+
 if defined?(Prismfall::Conditions)
   module Prismfall
     module Conditions
@@ -99,11 +111,11 @@ end
 MenuHandlers.add(:debug_menu, :prismfall_mega_menu, {
   "name"        => _INTL("Prismfall Mega..."),
   "parent"      => :main,
-  "description" => _INTL("Mega Ring, Mega Stones, the stone distribution."),
+  "description" => _INTL("Mega Ring (it wakes Z-crystals too), Mega Stones, Z-crystals, the stone distribution."),
   "effect"      => proc {
     loop do
       cmds = [_INTL("Give the Mega Ring"), _INTL("Give every placed Mega Stone"),
-              _INTL("Show stone distribution"), _INTL("Done")]
+              _INTL("Show stone distribution"), _INTL("Give every placed Z-crystal"), _INTL("Done")]
       c = pbMessage(_INTL("Prismfall Mega ({1} stones in the Bag, ring: {2})", PrismfallMega.stones_owned,
                           PrismfallMega.ring? ? "yes" : "no"), cmds, -1)
       case c
@@ -113,6 +125,7 @@ MenuHandlers.add(:debug_menu, :prismfall_mega_menu, {
         PrismfallMega::STONES.sort_by { |_s, d| d[:badges] }.each_slice(6) do |rows|
           pbMessage(rows.map { |s, d| "#{d[:badges]}: #{GameData::Item.get(s).name} (#{d[:how]})" }.join("\n"))
         end
+      when 3 then PrismfallMega::Z_CRYSTALS.each_key { |c| $bag.add(c) if GameData::Item.exists?(c) && !$bag.has?(c) }
       else break
       end
     end

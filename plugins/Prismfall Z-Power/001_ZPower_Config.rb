@@ -1,5 +1,5 @@
 #===============================================================================
-# Prismfall Z-Power - 001 Config (SPINE Revision 19: the Eevee Octave)
+# Prismfall Z-Power - 001 Config (SPINE Revision 19: the Eevee Octave; Revision 23: one ring, 18 crystals)
 #-------------------------------------------------------------------------------
 # A small Z-move system for Essentials v21.1 + Elite Battle DX, scoped to what
 # the Eevee Octave needs (design/EEVEE_OCTAVE.md section 5):
@@ -10,8 +10,11 @@
 #     Sp. Atk, Sp. Def and Speed)
 #   * once per trainer per battle; the crystal is never used up and cannot be
 #     knocked off, stolen, swapped or flung
-#   * the player needs the Z-Power Ring (key item); NPC trainers only need the
-#     crystal on their Pokemon. Wild Pokemon never use Z-Power.
+#   * the player needs a ring: since SPINE Rev 23 that is the Warden's ring
+#     (MEGARING, from Bastian at 13 badges), the same one that opens Megas; the
+#     old Z-Power Ring still counts for saves that hold it. NPC trainers only
+#     need the crystal on their Pokemon. Wild Pokemon never use Z-Power.
+#   * one Mega and one Z-move per SIDE per battle (Prismfall Mega's Z_LIMIT)
 # Data: pbs/moves_zpower.txt (the Z-moves) and pbs/items_zpower.txt (crystals,
 # ring). Add a crystal by adding its item and one line below; nothing else.
 # Why not the Deluxe Battle Kit's Z-Power add-on: it is built on the Deluxe
@@ -19,34 +22,64 @@
 # Elite Battle DX (see design/EEVEE_OCTAVE.md section 5.1).
 #===============================================================================
 module PrismfallZ
-  RING = :ZPOWERRING
+  RING = :MEGARING            # the one ring (SPINE Rev 23): Bastian's, Ch14
+  LEGACY_RINGS = [:ZPOWERRING] # still accepted, so an old save that holds it loses nothing
+
+  def self.player_ring?
+    return false if !$bag
+    return true if $bag.has?(RING)
+    return LEGACY_RINGS.any? { |r| GameData::Item.exists?(r) && $bag.has?(r) }
+  end
 
   # Type crystal => the type it powers. Its Z-move is TYPE_ZMOVES[type].
   CRYSTALS = {
-    :WATERIUMZ   => :WATER,
-    :ELECTRIUMZ  => :ELECTRIC,
+    :NORMALIUMZ  => :NORMAL,
+    :FIGHTINIUMZ => :FIGHTING,
+    :FLYINIUMZ   => :FLYING,
+    :POISONIUMZ  => :POISON,
+    :GROUNDIUMZ  => :GROUND,
+    :ROCKIUMZ    => :ROCK,
+    :BUGINIUMZ   => :BUG,
+    :GHOSTIUMZ   => :GHOST,
+    :STEELIUMZ   => :STEEL,
     :FIRIUMZ     => :FIRE,
-    :ICIUMZ      => :ICE,
+    :WATERIUMZ   => :WATER,
     :GRASSIUMZ   => :GRASS,
+    :ELECTRIUMZ  => :ELECTRIC,
     :PSYCHIUMZ   => :PSYCHIC,
+    :ICIUMZ      => :ICE,
+    :DRAGONIUMZ  => :DRAGON,
     :DARKINIUMZ  => :DARK,
     :FAIRIUMZ    => :FAIRY
   }.freeze
 
   TYPE_ZMOVES = {
-    :WATER    => :HYDROVORTEX,
-    :ELECTRIC => :GIGAVOLTHAVOC,
+    :NORMAL   => :BREAKNECKBLITZ,
+    :FIGHTING => :ALLOUTPUMMELING,
+    :FLYING   => :SUPERSONICSKYSTRIKE,
+    :POISON   => :ACIDDOWNPOUR,
+    :GROUND   => :TECTONICRAGE,
+    :ROCK     => :CONTINENTALCRUSH,
+    :BUG      => :SAVAGESPINOUT,
+    :GHOST    => :NEVERENDINGNIGHTMARE,
+    :STEEL    => :CORKSCREWCRASH,
     :FIRE     => :INFERNOOVERDRIVE,
-    :ICE      => :SUBZEROSLAMMER,
+    :WATER    => :HYDROVORTEX,
     :GRASS    => :BLOOMDOOM,
+    :ELECTRIC => :GIGAVOLTHAVOC,
     :PSYCHIC  => :SHATTEREDPSYCHE,
+    :ICE      => :SUBZEROSLAMMER,
+    :DRAGON   => :DEVASTATINGDRAKE,
     :DARK     => :BLACKHOLEECLIPSE,
     :FAIRY    => :TWINKLETACKLE
   }.freeze
 
-  # Species-exclusive crystals: one species, one base move, one Z-move.
+  # Species-exclusive crystals: one species, one base move, one Z-move. A damaging one has its own power (its PBS
+  # Power), as in Gen 7; Velmora has both species (Snorlax: Munchlax from the start; Mimikyu from 14 badges).
   EXCLUSIVE = {
-    :EEVIUMZ => { :species => :EEVEE, :move => :LASTRESORT, :zmove => :EXTREMEEVOBOOST }
+    :EEVIUMZ   => { :species => :EEVEE,   :move => :LASTRESORT, :zmove => :EXTREMEEVOBOOST },
+    :SNORLIUMZ => { :species => :SNORLAX, :move => :GIGAIMPACT, :zmove => :PULVERIZINGPANCAKE },
+    :MIMIKIUMZ => { :species => :MIMIKYU, :move => :PLAYROUGH,  :zmove => :LETSSNUGGLEFOREVER }
   }.freeze
 
   # The animation each status Z-move shows (damaging Z-moves show their base move's).

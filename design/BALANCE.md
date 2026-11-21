@@ -121,7 +121,7 @@ Ashkaar = 7, 18 · Antumbra = 12, 14.
 | 14 | Ysolde, Hollow Cathedral, 67 | Sableye (**Std/Casual Mega**), Spiritomb *(−C)*, Dusknoir, Cofagrigus, Gengar (**Hard Mega + Perish Song**), Chandelure "Vigil" | Cofagrigus: Magical Seed | Curse / Destiny Bond re-haunt a consecrated nave |
 | 15 | Magnus, Factory, 71 | Ferrothorn, Excadrill *(−C)* (Mold Breaker), Kingambit, Klinklang "Mark One", Scizor, Metagross "Engine" (**Mega**, every mode) | Mark One: Synthetic Seed | Magnet Rise + Wild Charge restart a Scrapyard; nobody quakes |
 | 16 | Nyx, New Moon, 75, **double** | Grimmsnarl, Weavile, **Absol "Omen" (Mega**, replaces Malamar), Umbreon (Wish), Zoroark "Nobody" (slot 5, Illusion of Honchkrow), Honchkrow *(−C)* | Weavile: Magical Seed (opens the Abyss) | Night Daze ×3 → Abyss; Dark attacks snuff the Lamplight |
-| 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, **Mawile (Mega**, replaces Mimikyu), Azumarill *(−C)*, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
+| 17 | Celestine, Fairy Tale, 80, **double** | Alcremie, Mimikyu (**Z-move**: Mimikium Z, Rev 23), Azumarill *(−C)*, Tinkaton, Togekiss "Vigilant", **Sylveon "Vow"** (ace, per 03_CAST) | Alcremie: Magical Seed | Fairy attacks ×3 tame a roused Dragon's Den |
 | 18 | Sigrun, Dragon's Den, 85 | Flygon, Kommo-o, **Dragonite** *(−C)* (Multiscale; replaces Goodra), Haxorus, Dragapult, Salamence "Dreamwing" (**Mega**, every mode) | Dreamwing: Amulet Coin (status-proof in the Den) | Draco Meteor reopens a cooled Cave; Dragon attacks retake a Fairy Tale |
 
 ## 4b. Route and gym trainers (stock trainer types)
@@ -238,14 +238,19 @@ story's ring-less fighters without one, no stone beside a Z-crystal, partners an
 | Magnus, Gym 15 (71) | Metagross "Engine" | was Hard only |
 | Quent Ch17 alt. (75), hijack (100), Ch21 (97) | Metagross | Ch16 Quent: none (Marchetti's) |
 | Nyx, Gym 16 (75) | Absol "Omen" | replaces Malamar; Honchkrow is the Casual cut |
-| Celestine, Gym 17 (80) | Mawile | replaces Mimikyu; Azumarill is the Casual cut |
+| Celestine, Gym 17 (80) | **Z-move instead of a Mega** (SPINE Rev 23): Mimikyu @ Mimikium Z (Let's Snuggle Forever) | Mimikyu is back in its slot (Rev 21's Mega Mawile is gone); Azumarill is the Casual cut. Win rate (prepared Standard): 100% with the Z, 97% without (design/Z_MOVES.md §5) |
 | Sigrun, Gym 18 (85) | Salamence "Dreamwing" | was Hard only |
 | Juno J4 (90) | Gardevoir "Veil" | replaces Comfey (not the starter: Core swaps it, and most lines have no Mega); J7 (partner): none |
-| Festival draws | Marisol Gyarados, Anja Glalie, Sigrun, Odessa, Celestine, Kaito Lucario, Ysolde, Brann v96 Camerupt, Dorian Lopunny (replaces Ambipom; Rook none) | Rowan, Imre Dask: none (no ring; Imre's Rev 20 Hard Mega Sableye removed) |
+| Festival draws | Marisol Gyarados, Anja Glalie, Sigrun, Odessa, Celestine (her Z-move), Kaito Lucario, Ysolde, Brann v96 Camerupt, Dorian Lopunny (replaces Ambipom; Rook none) | Rowan, Imre Dask: none (no ring; Imre's Rev 20 Hard Mega Sableye removed) |
 | Valen (96) | Gallade | was Hard only |
 | Voss (100) | Ampharos "Lumen" | replaces Klinklang |
 | Directorate Captain (97) | Scizor | |
 | Cameo Garret | v1 (46): none now; v2 (100): Lucario on every mode | `cameos.py` |
+
+**Z-moves (SPINE Rev 23, `design/Z_MOVES.md`):** the player's one ring (the Mega Ring, after Badge 13) wakes Z-crystals
+too; NPCs need a story reason for a crystal and never hold a stone and a crystal at once. Z users: the Eevee Octave
+(unchanged) and Celestine (instead of her Mega). In `gen.py` a Z user simply holds its crystal; `run_mega.rb` allows
+it in place of a Mega only for the listed Z users.
 
 **Mega-less for story reasons** (no ring by then): the Mourner and Rowan, Kestrel before Morwen's Ring, Imre Dask,
 Morwen's Echo, Theodric, the war officers (MEGA_EVOLUTION.md §6.3).

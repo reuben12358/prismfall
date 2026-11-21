@@ -619,8 +619,9 @@ zp.zmove_ids.each do |m|
   zdata_err << "#{m}: class #{d.function_code} missing" if !Object.const_defined?("Battle::Move::#{d.function_code}")
 end
 zp.all_crystals.each { |i| zdata_err << "#{i} missing/unflagged" if !GameData::Item.exists?(i) || !GameData::Item.get(i).has_flag?("ZCrystal") }
-zdata_err << "ZPOWERRING not a key item" if !GameData::Item.exists?(:ZPOWERRING) || !GameData::Item.get(:ZPOWERRING).is_key_item?
-check("Z data: #{zp.zmove_ids.length} Z-moves (ZMove flag, no CanProtect, classes), #{zp.all_crystals.length} crystals, the Z-Power Ring",
+zdata_err << "ZPOWERRING (kept for old saves) not a key item" if !GameData::Item.exists?(:ZPOWERRING) || !GameData::Item.get(:ZPOWERRING).is_key_item?
+zdata_err << "the one ring isn't MEGARING" if zp::RING != :MEGARING
+check("Z data: #{zp.zmove_ids.length} Z-moves (ZMove flag, no CanProtect, classes), #{zp.all_crystals.length} crystals, the one ring",
       zdata_err.empty?, zdata_err.first(5).join("; "))
 pw = [[50, 100], [60, 120], [80, 160], [90, 175], [100, 180], [120, 190], [140, 200]].reject { |b, z| zp.power_for(b) == z }
 check("Gen 7 power table (50->100, 80->160, 90->175, 120->190, 140->200)", pw.empty?, pw.inspect)
@@ -636,7 +637,7 @@ end
 vap = lambda { |moves = [:SCALD, :DIVE]| v = mk(:VAPOREON, 70, moves); v.item = :WATERIUMZ; v }
 protector = mk(:SNORLAX, 60, [:PROTECT]); protector.ability = :IMMUNITY
 
-$bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+$bag.add(:MEGARING) if !$bag.has?(:MEGARING)   # the one ring (SPINE Rev 23: the Warden's ring wakes crystals)
 n0 = ZLOG.length
 log = wild_z.call("Z: player's Vaporeon (AI-controlled) with the ring vs a wild Snorlax that only Protects", [vap.call], protector,
                   field: :WATER_SURFACE)
@@ -660,11 +661,11 @@ b0 = log.battle && log.battle.battlers[0]
 check("crystals can't be knocked off or stolen (unlosableItem?) and stay held",
       b0 && b0.unlosableItem?(:WATERIUMZ) && b0.unlosableItem?(:EEVIUMZ) && !b0.unlosableItem?(:ORANBERRY) && $player.party[0].item_id == :WATERIUMZ)
 
-$bag.remove(:ZPOWERRING)
+$bag.remove(:MEGARING)
 n0 = ZLOG.length
-log = wild_z.call("Z: same battle without the Z-Power Ring", [vap.call], mk(:SNORLAX, 60, [:PROTECT]))
-check("without the Z-Power Ring the player's side never uses Z-Power", ZLOG[n0..].none? { |z| z[:side] == 0 } && log.outcome, "#{ZLOG[n0..].length} Z")
-$bag.add(:ZPOWERRING)
+log = wild_z.call("Z: same battle without the ring", [vap.call], mk(:SNORLAX, 60, [:PROTECT]))
+check("without the ring the player's side never uses Z-Power", ZLOG[n0..].none? { |z| z[:side] == 0 } && log.outcome, "#{ZLOG[n0..].length} Z")
+$bag.add(:MEGARING)
 
 menus = lambda do |answer|
   proc do |battle|
@@ -872,8 +873,9 @@ check("no healing between bouts: each bout starts with the HP the last one ended
       HP_START.length == 9 && carried && HP_START.last < $player.party.sum(&:totalhp), "start HP #{HP_START.inspect} / end #{HP_END.inspect}")
 check("gauntlet won: 'The Eevee Octave' done, S177 EEVEE_OCTAVE_DONE on", tr.done?(:CR_OCTAVE) && $game_switches[177], tr.state(:CR_OCTAVE))
 eevee = $player.party.find { |p| p.isSpecies?(:EEVEE) } || ($PokemonStorage && $PokemonStorage.boxes.flat_map { |b| b.pokemon.compact }.find { |p| p.isSpecies?(:EEVEE) })
-check("reward: an Eevee (Lv 70, Last Resort) + the Eevium Z + the Z-Power Ring", eevee && eevee.level == 70 && eevee.hasMove?(:LASTRESORT) &&
-      $bag.has?(:EEVIUMZ) && $bag.has?(:ZPOWERRING), eevee ? "#{eevee.name} Lv#{eevee.level}" : "no Eevee")
+check("reward: an Eevee (Lv 70, Last Resort) + the Eevium Z, and no separate ring (SPINE Rev 23: the Warden's ring wakes it)",
+      eevee && eevee.level == 70 && eevee.hasMove?(:LASTRESORT) && $bag.has?(:EEVIUMZ) && !$bag.has?(:ZPOWERRING),
+      eevee ? "#{eevee.name} Lv#{eevee.level}" : "no Eevee")
 check("Crownhaven points from Carol (4) + the Octave (5)", tr.points(:CROWNHAVEN) >= 9, tr.points(:CROWNHAVEN))
 # The reward in use: the player's new Eevee with the Eevium Z on the Grand Stage.
 if eevee
@@ -917,7 +919,7 @@ lg, zs = champ.call("Champions rule: Vesper's Amen vs a Lv 100 Lugia", [lugia.ca
 check("Champions rule (shipped Gen 9 Pack): Amen still opens with Extreme Evoboost although Last Resort is locked",
       zs.any? { |z| z[:side] == 1 && z[:z] == :EXTREMEEVOBOOST && z[:base] == :LASTRESORT }, zs.map { |z| z[:z] }.inspect)
 if eevee
-  $bag.add(:ZPOWERRING) if !$bag.has?(:ZPOWERRING)
+  $bag.add(:MEGARING) if !$bag.has?(:MEGARING)   # the one ring (SPINE Rev 23)
   eevee.item = :EEVIUMZ; eevee.heal
   lr = eevee.moves.index { |m| m.id == :LASTRESORT }
   eevee.moves[0], eevee.moves[lr] = eevee.moves[lr], eevee.moves[0] if lr && lr > 0   # Last Resort first in the menu

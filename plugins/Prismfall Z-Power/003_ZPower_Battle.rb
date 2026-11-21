@@ -56,7 +56,7 @@ module PrismfallZ
     return false if used?(battle, idx)
     return false if b.effects[PBEffects::Encore] > 0
     if battle.pbOwnedByPlayer?(idx)
-      return false if !$bag || !$bag.has?(RING)
+      return false if !player_ring?     # the one ring (SPINE Rev 23)
     end
     # Only one Z-move per trainer: a partner who already chose one this turn blocks it.
     key = owner_key(battle, idx)

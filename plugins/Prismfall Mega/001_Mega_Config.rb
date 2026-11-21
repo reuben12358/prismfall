@@ -18,6 +18,7 @@
 #===============================================================================
 module PrismfallMega
   RING = :MEGARING          # the base project's Mega Ring (Flags = KeyItem,MegaRing). Bastian gives it in Chapter 14.
+                            # SPINE Rev 23: the same ring wakes Z-crystals (PrismfallZ::RING is this item too).
   # The Ring beat (SPINE Revision 21, "like Reborn and Rejuvenation": Reborn's Mega-Z Ring after Badge 13 at the
   # earliest, Rejuvenation's at about 14): Cragholm, after Gym 13 (cap 63, before Gym 14). Quest OS_RING_DAY.
   RING_BADGES = 13
@@ -43,6 +44,8 @@ module PrismfallMega
   MORWEN_RING_CHOICE = [:ch18_kestrel_ring, :give_now]
   MORWEN_RING = { :trainer => :RIVAL_KESTREL, :species => :SCIZOR, :item => :SCIZORITE, :min_level => 90 }.freeze
 
+  # Shown once when the player picks up a Z-crystal before the Ring.
+  CRYSTAL_TEASER_TEXT = "The crystal is cold, and it rings very faintly against your fingers... then it falls silent, as if listening for something."
   # Shown once when the player picks up a Mega Stone before the Ring (13 badges).
   TEASER_TEXT = "The stone is warm, and it hums faintly in your hand... then goes quiet, as if it were waiting for something."
 
@@ -108,6 +111,39 @@ module PrismfallMega
     :LATIASITE     => { :badges => 18, :how => :item,   :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIASITE },
     :LATIOSITE     => { :badges => 18, :how => :item,   :map => 905, :where => "Shardfall Isles, the eon nest (post-game)", :source => :MEGA_STONE_LATIOSITE }
   }.freeze
+  #-----------------------------------------------------------------------------
+  # Z-crystal distribution (SPINE Rev 23, design/Z_MOVES.md section 3): the same keys as STONES, the same rule R4 (the
+  # crystal's type must not answer the next two Wardens when it becomes usable, at max(badges, RING_BADGES)), checked by
+  # tools/harness/run_mega.rb. The Eevium Z is the Eevee Octave's reward (Ch20) and isn't listed.
+  #-----------------------------------------------------------------------------
+  Z_CRYSTALS = {
+    # Before the Ring: they ring faintly and fall silent (CRYSTAL_TEASER_TEXT)
+    :ICIUMZ      => { :badges => 2,  :how => :hidden, :map => 577, :where => "Frostwick Pass, the avalanche gully (Rock Smash)", :source => :Z_CRYSTAL_ICIUMZ },
+    :STEELIUMZ   => { :badges => 4,  :how => :hidden, :map => 605, :where => "Static Tunnels Depths, the magnetite seam (Flash)", :source => :Z_CRYSTAL_STEELIUMZ },
+    :ROCKIUMZ    => { :badges => 8,  :how => :hidden, :map => 685, :where => "Grudgestone Quarry B1F, the gem seam", :source => :Z_CRYSTAL_ROCKIUMZ },
+    :GRASSIUMZ   => { :badges => 8,  :how => :hidden, :map => 680, :where => "The Rootdeep, a root-wrapped ledge on the underground river (Surf)", :source => :Z_CRYSTAL_GRASSIUMZ },
+    :FLYINIUMZ   => { :badges => 10, :how => :hidden, :map => 726, :where => "Cloudstair Summit, the wind-scoured ledge", :source => :Z_CRYSTAL_FLYINIUMZ },
+    # 13 badges: the Ring
+    :PSYCHIUMZ   => { :badges => 13, :how => :hidden, :map => 781, :where => "Hindmoor, the humming standing stone", :source => :Z_CRYSTAL_PSYCHIUMZ },
+    :BUGINIUMZ   => { :badges => 13, :how => :hidden, :map => 780, :where => "The Jawbone Ridge, in the resin of a dead tree", :source => :Z_CRYSTAL_BUGINIUMZ },
+    :FAIRIUMZ    => { :badges => 13, :how => :hidden, :map => 785, :where => "Darkglass Mine B1F, a pink glint under the shot-out lamps", :source => :Z_CRYSTAL_FAIRIUMZ },
+    :MIMIKIUMZ   => { :badges => 13, :how => :item,   :map => 384, :where => "Lantern Hospice, Gravenmoor: a Pikachu-shaped rag doll on an empty cot", :source => :Z_CRYSTAL_MIMIKIUMZ },
+    # 14 badges
+    :POISONIUMZ  => { :badges => 14, :how => :hidden, :map => 811, :where => "The Smokestack Parade, a soot-black vent", :source => :Z_CRYSTAL_POISONIUMZ },
+    :GHOSTIUMZ   => { :badges => 14, :how => :quest,  :map => 547, :where => "Thistledown Manor attic: the doll who waited (with the Banettite)", :source => :EL_DOLL_WHO_WAITED },
+    :ELECTRIUMZ  => { :badges => 14, :how => :quest,  :map => 325, :where => "Gale Post Hall, Skyreach: the dead-letter drawer (with the Pidgeotite)", :source => :ZE_RETURN_TO_SENDER },
+    # 15 badges
+    :FIRIUMZ     => { :badges => 15, :how => :quest,  :map => 240, :where => "The Crucible: the brazier's own sliver (with the Salamencite)", :source => :AS_BRAZIER_WRIT },
+    :GROUNDIUMZ  => { :badges => 15, :how => :quest,  :map => 360, :where => "Cragholm rack: the tyrant's heart dig (with the Tyranitarite)", :source => :OS_TYRANT_HEART },
+    :DARKINIUMZ  => { :badges => 15, :how => :quest,  :map => 423, :where => "Underveil Moon Market: the Barons' kennel (with the Houndoominite)", :source => :NA_MOON_MARKET_DOGS },
+    :DRAGONIUMZ  => { :badges => 15, :how => :boss,   :map => 248, :where => "Pyre Keep Dragon Roosts: Old Cinder's harness (with the Charizardite X)", :source => :AS_OLD_CINDER },
+    :WATERIUMZ   => { :badges => 15, :how => :hidden, :map => 822, :where => "Under the Drownings, a drowned shrine (Dive)", :source => :Z_CRYSTAL_WATERIUMZ },
+    # 16-17 badges
+    :NORMALIUMZ  => { :badges => 16, :how => :quest,  :map => 154, :where => "Pell Playhouse: Dorian's encore (with the Lopunnite)", :source => :EL_ENCORE },
+    :SNORLIUMZ   => { :badges => 16, :how => :item,   :map => 850, :where => "Mothwell, the hay barn with a Snorlax-sized dent", :source => :Z_CRYSTAL_SNORLIUMZ },
+    :FIGHTINIUMZ => { :badges => 17, :how => :quest,  :map => 260, :where => "The Last Rung, Ironreach: the Memory Kata (with the Lucarionite)", :source => :NA_MEMORY_KATA }
+  }.freeze
+
   # In the base data but not placed: their species are not in Velmora (POKEMON_AVAILABILITY.md section 4).
   UNPLACED = [:MEWTWONITEX, :MEWTWONITEY, :DIANCITE].freeze
 

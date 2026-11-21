@@ -1,7 +1,9 @@
 # Pokémon Prismfall - Z-Power items (Essentials v21.1 items format, merged as PBS/items_zpower.txt).
 # Owner: Prismfall Z-Power (design/EEVEE_OCTAVE.md section 5). The crystals are slivers of the Crown's glass from the
-# Glassfall, each tuned by the Prism Choir to one Imprint; held, they are never used up and can't be taken. The ring is
-# what lets the player's Pokemon use them (NPC trainers only need the crystal). Flag ZCrystal marks them unlosable in battle.
+# Glassfall, each tuned by the Prism Choir to one Imprint; held, they are never used up and can't be taken. SPINE Rev 23:
+# the player's Warden's ring (the base MEGARING, from Bastian at 13 badges) wakes them as it wakes heartstones; the old
+# Z-Power Ring stays defined only for saves that hold it (nobody hands it out). NPC trainers only need the crystal.
+# Flag ZCrystal marks them unlosable in battle.
 #-------------------------------
 [WATERIUMZ]
 Name = Waterium Z
@@ -67,6 +69,102 @@ Price = 0
 Flags = ZCrystal
 Description = A sliver of Glassfall glass tuned to the Fairy Imprint. Held, it turns a Fairy-type attack into a Z-Move once per battle.
 #-------------------------------
+[NORMALIUMZ]
+Name = Normalium Z
+NamePlural = Normalium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Normal Imprint. Held, it turns a Normal-type attack into a Z-Move once per battle.
+#-------------------------------
+[FIGHTINIUMZ]
+Name = Fightinium Z
+NamePlural = Fightinium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Fighting Imprint. Held, it turns a Fighting-type attack into a Z-Move once per battle.
+#-------------------------------
+[FLYINIUMZ]
+Name = Flyinium Z
+NamePlural = Flyinium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Flying Imprint. Held, it turns a Flying-type attack into a Z-Move once per battle.
+#-------------------------------
+[POISONIUMZ]
+Name = Poisonium Z
+NamePlural = Poisonium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Poison Imprint. Held, it turns a Poison-type attack into a Z-Move once per battle.
+#-------------------------------
+[GROUNDIUMZ]
+Name = Groundium Z
+NamePlural = Groundium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Ground Imprint. Held, it turns a Ground-type attack into a Z-Move once per battle.
+#-------------------------------
+[ROCKIUMZ]
+Name = Rockium Z
+NamePlural = Rockium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Rock Imprint. Held, it turns a Rock-type attack into a Z-Move once per battle.
+#-------------------------------
+[BUGINIUMZ]
+Name = Buginium Z
+NamePlural = Buginium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Bug Imprint. Held, it turns a Bug-type attack into a Z-Move once per battle.
+#-------------------------------
+[GHOSTIUMZ]
+Name = Ghostium Z
+NamePlural = Ghostium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Ghost Imprint. Held, it turns a Ghost-type attack into a Z-Move once per battle.
+#-------------------------------
+[STEELIUMZ]
+Name = Steelium Z
+NamePlural = Steelium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Steel Imprint. Held, it turns a Steel-type attack into a Z-Move once per battle.
+#-------------------------------
+[DRAGONIUMZ]
+Name = Dragonium Z
+NamePlural = Dragonium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to the Dragon Imprint. Held, it turns a Dragon-type attack into a Z-Move once per battle.
+#-------------------------------
+[SNORLIUMZ]
+Name = Snorlium Z
+NamePlural = Snorlium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to one Pokemon's own Imprint. Held by Snorlax, it turns Giga Impact into a Z-Move once per battle.
+#-------------------------------
+[MIMIKIUMZ]
+Name = Mimikium Z
+NamePlural = Mimikium Zs
+Pocket = 1
+Price = 0
+Flags = ZCrystal
+Description = A sliver of Glassfall glass tuned to one Pokemon's own Imprint. Held by Mimikyu, it turns Play Rough into a Z-Move once per battle.
+#-------------------------------
 [EEVIUMZ]
 Name = Eevium Z
 NamePlural = Eevium Zs
@@ -81,4 +179,4 @@ NamePlural = Z-Power Rings
 Pocket = 8
 Price = 0
 Flags = KeyItem,ZRing
-Description = Vesper's cantor's ring. With it, your Pokemon can draw on a held Z-Crystal and unleash a Z-Move once a battle.
+Description = An old cantor's ring of the Prism Choir. A Warden's ring does the same: with either, your Pokemon can draw on a held Z-Crystal once a battle.
