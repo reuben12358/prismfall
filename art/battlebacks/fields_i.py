@@ -717,6 +717,14 @@ BUILDERS["PRISM_ARENA"] = prism_arena
 
 
 #---------------------------------------------------------------------------------------------
+# NEW_MOON (+ Abyss, Lamplight): Rejuvenation's Starlight rooftop. Above the panel the bokeh city simply goes on
+# (quilted from the panel's city band, rows above the railing) instead of the railing and the tiled roof hanging
+# upside down at the top of the room.
+#---------------------------------------------------------------------------------------------
+PLANS["d7e72cf70f"] = Plan(band_labels(0, 46), all_wall, 1, sides=(0, 0), block=18, seed=23)
+
+
+#---------------------------------------------------------------------------------------------
 def install():
     import sys
     M.PLANS.update(PLANS)
