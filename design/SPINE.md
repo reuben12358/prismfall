@@ -8,6 +8,7 @@
 - **Full playtest runs are paused** ("we know that there will be bugs so lets focus on bug bashing later"). Build content now. Keep sending real-engine "unit test" captures (stills and GIFs) of features; the user loves them.
 - **Battle placement:** the ally base gets smaller (Meadow), and on Frozen Lake it moves up and gets smaller.
 - **The Glass Dunes field "looks super sick"**, but the transition into it feels weird; redo it.
+- **No thin chapters** (user, 03:09): "we want every chapter to be significant to some extent with either 1 or 2 key events happening each chapter." Per-chapter key events go in design/CHAPTER_BEATS.md, and side content ties into them.
 - **The old Rimewood Path layout lives on** as its own connector map ("it looks pretty"); the new 578 stays.
 
 ## >>> REVISION 23 (user, 2026-11-20 ~16:00): one ring for Megas and Z-moves <<<
