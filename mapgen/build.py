@@ -494,7 +494,7 @@ def pass_check(spec, ctx, m):
 
 def gate_check(spec, ctx, m):
     """map builder 10 (playtest round 3 item 15): a story gate must really be shut.  spec `gates`: [{name, from: [[x, y],
-    ...], sealed_edge: N/S/E/W and/or sealed: [[x, y], ...]}].  Flood-fills from each `from` cell over walkable tiles with
+    ...], sealed_edge: N/S/E/W and/or sealed: [[x, y], ...], ice_solid: true (ice counts as wall)}].  Flood-fills from each `from` cell over walkable tiles with
     every event that blocks on its FIRST page (a charset or a tile graphic, not Through) standing solid - the state before
     any switch is set - and warns if a sealed cell, or any walkable cell on the sealed edge, is reached."""
     gates = spec.get('gates')
@@ -506,8 +506,15 @@ def gate_check(spec, ctx, m):
         p0 = e.pages[0]
         if (p0.graphic.character_name or p0.graphic.tile_id) and not p0.through: solid.add((e.x, e.y))
     ok = np.array([[cell_passable(lay, ts, x, y) and (x, y) not in solid for x in range(W)] for y in range(H)])
+    ice = None
     for g in gates:
-        seen = np.zeros_like(ok); st = [tuple(p) for p in g['from'] if ok[p[1], p[0]]]
+        okg = ok
+        if g.get('ice_solid'):                      # map builder 12: a place reached only by sliding must be shut on foot
+            if ice is None:
+                tt = ts['terrain_tags']
+                ice = np.array([[any(int(lay[z, y, x]) and tt[int(lay[z, y, x])] == 12 for z in (0, 1, 2)) for x in range(W)] for y in range(H)])
+            okg = ok & ~ice
+        seen = np.zeros_like(ok); st = [tuple(p) for p in g['from'] if okg[p[1], p[0]]]
         if not st: ctx.warn(spec['id'], 'GATE "%s": no walkable start cell' % g['name']); continue
 
         def edge_ok(x, y, d):                       # directional passage bits as Essentials reads them (one-way ledges)
@@ -524,7 +531,7 @@ def gate_check(spec, ctx, m):
             seen[y, x] = True
             for dx, dy, d in ((0, 1, 2), (0, -1, 8), (1, 0, 6), (-1, 0, 4)):
                 X, Y = x + dx, y + dy
-                if 0 <= X < W and 0 <= Y < H and ok[Y, X] and not seen[Y, X] and edge_ok(x, y, d) and edge_ok(X, Y, 10 - d): st.append((X, Y))
+                if 0 <= X < W and 0 <= Y < H and okg[Y, X] and not seen[Y, X] and edge_ok(x, y, d) and edge_ok(X, Y, 10 - d): st.append((X, Y))
         cells = [tuple(c) for c in g.get('sealed', [])]
         e = g.get('sealed_edge')
         if e: cells += [(0, y) for y in range(H)] if e == 'W' else [(W - 1, y) for y in range(H)] if e == 'E' else \

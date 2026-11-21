@@ -84,10 +84,14 @@ CHALK = [('cliff_ak', 'rejuvenation', 'Route 4', list(range(440, 480)), 'chalk')
           [384 + r_ * 8 + c_ for r_ in (39, 40) for c_ in (5, 6)] + [384 + r_ * 8 + 2 for r_ in (20, 21)], 'chalk'),
          ('dune_ak', 'rejuvenation', 'Route 4', list(range(440, 480)), 'dune'),
          ('drock_ak', 'rejuvenation', 'Route 4', [384 + r_ * 8 + c_ for r_ in (17, 18, 19) for c_ in (0, 1, 2)] +
-          [384 + r_ * 8 + c_ for r_ in (39, 40) for c_ in (5, 6)] + [384 + r_ * 8 + 2 for r_ in (20, 21)], 'dune')]
+          [384 + r_ * 8 + c_ for r_ in (39, 40) for c_ in (5, 6)] + [384 + r_ * 8 + 2 for r_ in (20, 21)], 'dune'),
+         # map builder 12: the war desert's rocks with no moss at all (the dune copies keep their grass tufts for Marram Down)
+         ('srock_ak', 'rejuvenation', 'Route 4', [384 + r_ * 8 + c_ for r_ in (17, 18, 19) for c_ in (0, 1, 2)] +
+          [384 + r_ * 8 + c_ for r_ in (39, 40) for c_ in (5, 6)] + [384 + r_ * 8 + 2 for r_ in (20, 21)], 'sand')]
 # chalk rock stamps (sheet rectangles of Route 4, as in rstamps.yaml's nt_rock_big / nt_boulder / nt_pebbles)
 CHALK_STAMPS = {'ck_rock_big': (0, 17, 3, 3, 1), 'ck_boulder': (5, 39, 2, 2, 0), 'ck_pebbles': (2, 20, 1, 2, 0),
-                'dk_rock_big': (0, 17, 3, 3, 1), 'dk_boulder': (5, 39, 2, 2, 0), 'dk_pebbles': (2, 20, 1, 2, 0)}
+                'dk_rock_big': (0, 17, 3, 3, 1), 'dk_boulder': (5, 39, 2, 2, 0), 'dk_pebbles': (2, 20, 1, 2, 0),
+                'sk_rock_big': (0, 17, 3, 3, 1), 'sk_boulder': (5, 39, 2, 2, 0), 'sk_pebbles': (2, 20, 1, 2, 0)}
 CHALK_RAMP = [(92, 90, 104), (128, 126, 136), (162, 160, 164), (190, 188, 184), (214, 212, 204), (234, 232, 224)]
 DUNE_RAMP = [(112, 84, 58), (146, 116, 80), (176, 148, 102), (200, 176, 126), (220, 200, 148), (234, 218, 170)]
 
@@ -147,15 +151,16 @@ def dyegrass(im, col):
     return im
 
 
-def chalkify(im, ramp=None):
-    """recolour a cliff tile: browns / mauves -> the chalk ramp (dark crevices stay a cool grey); grass caps untouched"""
+def chalkify(im, ramp=None, greens=False):
+    """recolour a cliff tile: browns / mauves -> the chalk ramp (dark crevices stay a cool grey); grass caps untouched
+    (greens=True, map builder 12: moss and grass go to the ramp too, for the war desert)"""
     px = im.load()
     for yy in range(im.height):
         for xx in range(im.width):
             r, g, b, a = px[xx, yy]
             if not a: continue
             h, s_, v = colorsys.rgb_to_hsv(r / 255., g / 255., b / 255.)
-            if (h < 0.14 or h > 0.85) and s_ > 0.08:
+            if (h < 0.14 or h > 0.85) and s_ > 0.08 or (greens and 0.14 <= h <= 0.6 and s_ > 0.12):
                 t = max(0.0, min(0.999, (v - 0.20) / 0.50))
                 ramp_ = ramp or CHALK_RAMP
                 px[xx, yy] = ramp_[int(t * len(ramp_))] + (a,)
@@ -288,7 +293,7 @@ def main():
         t = RC.RR.tileset(game, {'Sheridan_2': 126, 'Route 4': 211}[sheetname])
         for sid in srcs:
             i = sid - 384; tile = src.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32))
-            sheet.paste(chalkify(tile.copy(), DUNE_RAMP if mode == 'dune' else None), ((k % 8) * 32, (k // 8) * 32))
+            sheet.paste(chalkify(tile.copy(), DUNE_RAMP if mode in ('dune', 'sand') else None, greens=(mode == 'sand')), ((k % 8) * 32, (k // 8) * 32))
             props[k] = (t['passages'][sid], t['priorities'][sid], t['terrain_tags'][sid] if t['terrain_tags'][sid] <= 16 else 0)
             chalk['%s:%d' % (key, sid)] = k; k += 1
     silked = {}                                            # map builder 10: Gossamer Wood's silk-wrapped lattice trees
@@ -366,7 +371,7 @@ def main():
             for dx in range(w):
                 sid = 384 + (r0 + dy) * 8 + c0 + dx; i = sid - 384
                 if r4.crop(((i % 8) * 32, (i // 8) * 32, (i % 8) * 32 + 32, (i // 8) * 32 + 32)).getbbox() is None: continue
-                lay[2 if dy < top else 1][dy][dx] = base + chalk[('drock_ak:%d' if n.startswith('dk') else 'rock_ak:%d') % sid]
+                lay[2 if dy < top else 1][dy][dx] = base + chalk[('drock_ak:%d' if n.startswith('dk') else 'srock_ak:%d' if n.startswith('sk') else 'rock_ak:%d') % sid]
         out[n] = dict(w=w, h=h, layers=lay, src=['chalk', n])
     out['_ship_dovetail'] = {'tiles': [[x, y, z, base + t] for x, y, z, t in dove if t]}
     out['_ship_moored'] = {'tiles': [[x, y, z, base + idmap[off_ship + i]] for x, y, z, i in ship]}

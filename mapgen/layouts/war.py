@@ -25,6 +25,7 @@ import routekit as RK
 from routekit import Route, trainer, npc, sign, item, hidden, talk, head
 import craftkit as CK
 from routes_early import obj, P
+import rimewood as RW
 from terrain import vnoise
 
 PREV = '--preview' in sys.argv
@@ -163,6 +164,83 @@ def paint_flood(r, mask, steam=0.25, seed=0):
                 m.L[2, Y, X] = rng.choice(ST)
 
 
+# ---------------------------------------------------------------------------------------------- map builder 12: glass that reads as glass
+def glass_dress(r, glass, sheen=0.07, sky=0.035, seed=0):
+    """after paint_glass: the polish.  Specular streaks and glints (gd_sheen*) in drifting bands, the sky reflected in
+    the open glass (gd_sky*), on inner glass cells nothing stands on"""
+    m = r.m; rng = random.Random(r.seed * 13 + seed)
+    SH = [K.P1('gd_sheen%d' % v) for v in range(4)]; SK = [K.P1('gd_sky%d' % v) for v in range(2)]
+    for y, x in np.argwhere(glass):
+        if m.L[2, y, x] or m.taken[y, x] or m.cliff[y, x] or m.L[1, y, x]: continue
+        if not all(glass[yy, xx] for yy in range(max(0, y - 1), min(r.H, y + 2)) for xx in range(max(0, x - 1), min(r.W, x + 2))): continue
+        band_ = vnoise(x + y, 0, r.seed + 31 + seed, 5.0)                    # glare runs in diagonal bands
+        q = rng.random()
+        if q < sheen * (0.4 + 1.4 * band_): m.L[2, y, x] = SH[(x + y) % 2] if rng.random() < 0.7 else SH[2 + (x % 2)]
+        elif q < sheen * 1.8 + sky * vnoise(x, y, r.seed + 37 + seed, 7.0) * 2: m.L[2, y, x] = SK[(x // 5 + y // 4) % 2]
+
+
+def glass_ledges(r, glass):
+    """the dune slides turn to glass lips where they cross glass (same one-way passage, gdl_* instead of sdl_*)"""
+    m = r.m
+    for x0, x1, y in getattr(r, 'ledges', []):
+        for x in range(x0, x1 + 1):
+            if not m.inb(x, y): continue
+            near = any(glass[yy, x] for yy in (y - 1, y, y + 1) if 0 <= yy < r.H)
+            if near: m.L[1, y, x] = K.P1('gdl_' + ('w' if x == x0 else 'e' if x == x1 else 'm'))
+
+
+def plan_ice(r, mask):
+    """plan time: a frozen flood pool (ice, terrain tag 12: you slide).  Nothing is seated on it"""
+    m = r.m
+    mask = mask & ~r.road_mask & (m.ht == 0)
+    for y, x in np.argwhere(mask): m.taken[y, x] = True
+    return mask
+
+
+def paint_ice(r, mask, stoppers=(), seed=0):
+    """after paint: the frozen flood (gd_ice_* in the 48 shapes, tag 12) on layer 2; stoppers are glass shards frozen
+    into it (solid, top layer); rime round the shore"""
+    m = r.m; rng = random.Random(r.seed * 17 + seed)
+    IC = [K.P1('gd_ice_%02d' % i) for i in range(48)]; FR = [K.P1('wr_frost%d' % v) for v in range(3)]
+    for y, x in np.argwhere(mask):
+        m.L[1, y, x] = IC[NB2AUTO[CK.nbits(mask, x, y)]]; m.L[2, y, x] = 0
+    for x, y in stoppers: m.L[2, y, x] = K.P1('gd_shard2')
+    for y, x in np.argwhere(mask):
+        for dx, dy in ((0, -1), (1, 0), (-1, 0), (0, 1)):
+            X, Y = x + dx, y + dy
+            if m.inb(X, Y) and not mask[Y, X] and not m.L[2, Y, X] and not m.L[1, Y, X] and not m.taken[Y, X] and not m.cliff[Y, X] \
+                    and rng.random() < 0.5:
+                m.L[2, Y, X] = rng.choice(FR)
+
+
+def ice_puzzle(r, mask, goal, seed=7, tries=3000):
+    """stoppers on a frozen pool so that `goal` (a land cell on the far shore, walled off on foot) takes >= 3 slides
+    from the near shore and the way back exists.  Returns the stopper cells (rimewood.slide_solve's rules)"""
+    m = r.m; rng = random.Random(seed)
+    cells = {(int(x), int(y)) for y, x in np.argwhere(mask)}
+    land = set()
+    for (x, y) in cells:
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            n = (x + dx, y + dy)
+            if n not in cells and m.inb(*n) and m.cls[n[1], n[0]] in 'su' and not m.cliff[n[1], n[0]] and (not m.taken[n[1], n[0]] or n == goal): land.add(n)
+    start = land - {goal}
+    inner = sorted(cells)
+    best = None
+    for _ in range(tries):
+        rocks = set(rng.sample(inner, min(len(inner) // 6, rng.randint(4, 9))))
+        ice = cells - rocks
+        k, _p = RW.slide_solve(ice, land, start, {goal})
+        if k is None or k < 3: continue
+        back, _q = RW.slide_solve(ice, land, {goal}, start)
+        if back is None: continue
+        sc = k * 10 - len(rocks)
+        if best is None or sc > best[0]: best = (sc, rocks, k)
+        if k >= 5: break
+    if best is None: print('  (ice_puzzle: no layout)'); return set()
+    print('  ice puzzle: %d stoppers, %d slides' % (len(best[1]), best[2]))
+    return best[1]
+
+
 def trail(r, pts, w=3.0, only='su.tT'):
     """a road over open sand: planned as a lane (so road_mask, ruts and the flood causeways know it) but painted as the
     sand itself - every Rejuvenation road autotile has a grass rim, which has no business in a desert"""
@@ -228,13 +306,29 @@ def build_920():
     holds each sally port (the gauntlet)."""
     W, H = 60, 36
     r, m = desert(W, H, 920)
+    # map builder 12: the north rim is a rime-glazed sandstone scarp (x 20-58) with Isenmar's watch line along its top,
+    # reached by one stair between the second and third trench-lines; under it the sea that came over the dunes froze
+    # in two pools you slide on (the Watch-post's Never-Melt Ice lies past the east one), with ice spires and frozen
+    # wrecks; the sled-yard keeps the north-west
+    for x in range(20, 59):
+        top = 4 + int(round(2.2 * (vnoise(x, 0, 9202, 6.0) - 0.5) * 2))
+        m.ht[:max(1, top) + 1, x] = 1
+    CK.smooth_ht(m, 1, 2, box=(18, 0, 60, 10))
     dunes(r, 9, 920, box=(2, 20, 56, 33))
-    dunes(r, 5, 921, box=(2, 3, 56, 9))
+    dunes(r, 3, 921, box=(2, 3, 18, 9))
     road = [(0, 14.5), (12, 15), (24, 14), (36, 15.5), (48, 14.5), (59, 15)]
     trail(r, road, w=3.0)
     trail(r, [(10, 16), (8, 24), (8, 35)], w=3.0)           # south to the Glass Dunes
     trail(r, [(30, 16), (31, 22)], w=2.0, only='su.')
     r.exit('W', 13, 4); r.exit('E', 13, 4)
+    pools = (blob(W, H, 25.5, 8.5, 4.5, 2.2, 92021, 0.3) | blob(W, H, 51.5, 9.0, 4.8, 2.3, 92022, 0.3)) & (m.ht == 0)
+    for y in range(H):                                                     # (never across a trench-line)
+        for x in (18, 32, 46): pools[y, x - 1:x + 2] = False
+    ISLET = [(51, 9), (52, 9)]                                              # the Never-Melt Ice on an islet in the east pool
+    for x, y in ISLET: pools[y, x] = False
+    ice = plan_ice(r, pools)
+    for x, y in ISLET: m.taken[y, x] = True
+    GOAL920 = ISLET[1]
     r.finish_plan(border=1)
     # the three trench-lines: a revetment column x = 18, 32, 46 from the north rim to the south dunes, one sally port each
     ports = {18: 14, 32: 15, 46: 14}
@@ -259,11 +353,18 @@ def build_920():
                   'Go, then. Tell them the Rimed Sands were held.', d='left'),
          gauntlet((47, 14), 'ISENMAR_OFFICER', 'Captain', 0, 'WAR_SIDE_ASH', 'Third line. Nobody has passed the third line.',
                   'Somebody has passed the third line. Mark it in the tally.', d='left'),
-         item((52, 4), 'ICEBERRY') if False else item((52, 4), 'NEVERMELTICE'), hidden((26, 30), 'STARDUST', 'HiddenItem (rimed dune)'),
+         hidden((26, 30), 'STARDUST', 'HiddenItem (rimed dune)'),
+         obj('Frozen sea', (25, 11), ['The sea came over the dunes this far. The Glaceon lines froze it where it stood: a pool of green ice with the sand still in it.']),
+         soldier((44, 2), 'Watch-post sergeant', 'NPC 28', ["Watch-post sergeant: Up here you can see Skaldfast burning and the Steamline smoking. Pick which to look at.",
+                                                            "Sergeant: The ice on the flats? Slide it. The children of Skaldfast could, before."], d='down'),
+         obj('Signal horn', (40, 2), ['A great horn of whale-bone on a frame. Blown once for the dragons, twice for the sea. Nobody has blown it twice yet.']),
          item((5, 28), 'FULLRESTORE')]
     for e in E: e.setdefault('fixed', e['type'] in ('trainer',))
+    E.append(dict(item(ISLET[0], 'NEVERMELTICE'), fixed=True))
     r.add(*E)
     r.seat_events(on='su')
+    yl = max(y for y in range(H) if m.ht[y, 39] == 1)
+    CK.stair(r, 38, yl, w=3, h=1)
     for x, y in rev:
         if not m.taken[y, x] and m.cls[y, x] in 'su': m.stamp('nr_wall_v', x, y, mark='B')
     for x, py in ports.items():                                                           # forts either side of each port
@@ -274,17 +375,24 @@ def build_920():
                      ('wr_tent_w', 50, 7), ('fw_sled', 9, 11), ('fw_wood', 12, 11), ('fw_brazier', 21, 12), ('fw_brazier', 35, 12),
                      ('fw_rack', 4, 6), ('pf_signpost', 3, 18) if False else ('fw_sled', 26, 19)):
         r.near(nm, x, y, on='su', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 22, box=(0, 18, W, H), on='su', clump=2, seed=5)
-    CK.props(r, ['dk_boulder', 'dk_pebbles'], 10, box=(0, 0, W, 12), on='su', clump=2, seed=6)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles', 'nt_deadtree'], 22, box=(0, 18, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_boulder', 'sk_pebbles'], 10, box=(0, 0, W, 12), on='su', clump=2, seed=6)
     for nm, x, y in (('wr_supply', 5, 16), ('wr_supply', 27, 13), ('wr_sacks', 8, 13), ('wr_sacks', 30, 12), ('wr_rack', 16, 9),
                      ('wr_rack', 34, 9), ('wr_firering', 11, 7), ('wr_firering', 40, 6), ('wr_ban_ise_t', 47, 18), ('wr_glasssled', 52, 22),
                      ('wr_stakes', 20, 10), ('wr_stakes', 20, 19), ('wr_stakes', 34, 9), ('wr_stakes', 34, 21), ('wr_stakes', 48, 9), ('wr_stakes', 48, 19),
                      ('wr_sandbags', 17, 12), ('wr_sandbags', 31, 13), ('wr_sandbags', 45, 12), ('gd_shard2', 55, 25), ('gd_shard0', 57, 20)):
         r.near(nm, x, y, on='su', r=2)
+    for nm, x, y in (('wr_sledfort2', 22, 1), ('wr_ban_ise', 27, 1), ('fw_brazier', 30, 2), ('wr_tent_b', 33, 0), ('wr_ban_ise', 47, 1),
+                     ('wr_sledfort', 49, 2), ('fw_rack', 53, 1), ('wr_tent_w', 55, 0), ('fw_brazier', 36, 2), ('wr_sacks', 42, 3),
+                     ('cr_clear_t', 21, 9), ('cr_blue_c', 30, 8), ('cr_clear_c', 29, 10), ('cr_blue_t', 48, 10), ('cr_clear_e', 56, 8),
+                     ('fw_boat', 23, 11), ('fw_sled', 53, 12), ('gd_shard2', 45, 7), ('cr_blue_e', 34, 9)):
+        r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
     m.cls[m.cls == 'd'] = 'u'
     r.paint()
     sand_seams(r)
+    stop = ice_puzzle(r, ice & (np.arange(W)[None, :] > 46), GOAL920, seed=9203) if GOAL920 else set()
+    paint_ice(r, ice, stop, seed=920)
     sand_dress(r, 0.52, seed=920, bones=0.03)
     # rime: the frozen side (west of the third line) is white with frost; trenches cut along each revetment's west face
     frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 47 + int(3 * vnoise(0, y, 9201, 4.0)))], thr=0.30)
@@ -299,6 +407,8 @@ def build_920():
              connections=[{'dir': 'E', 'offset': 13, 'to': 925, 'to_offset': 13}],
              tone=[10, 6, 14, 10], fog={'name': 'prismfall_seamist', 'opacity': 24, 'blend': 0, 'zoom': 200, 'sx': 1, 'sy': 0})
     h['metadata']['MapPosition'] = [0, 12, 14]
+    h['walk_from'] = [list(GOAL920)]                                          # the islet: over the ice only
+    h['gates'] = [{'name': 'The ice islet (sliding only)', 'from': [[1, 14], [58, 14], [8, 34]], 'sealed': [list(GOAL920)], 'ice_solid': True}]
     r.write(h, '920_rimed_sands.yaml', '# The Rimed Sands (920). WRITTEN BY layouts/war.py (map builder 10) - edit that script.\n',
             '/tmp/craft/920.png' if PREV else None)
 
@@ -319,6 +429,19 @@ def build_925():
     trail(r, [(0, 14.5), (14, 15), (24, 13.5), (31, 15), (40, 16.5), (52, 15), (63, 14.5)], w=3.0)
     trail(r, [(31, 16), (31, 24), (31.5, 31)], w=3.0)
     r.exit('W', 13, 4); r.exit('E', 13, 4); r.exit('S', 30, 4)
+    # map builder 12: the west half is where Kyogre's sea reached the Isenmar lines and froze: two frozen flood pools
+    # (you slide on them), ice-locked wrecks, a rime-glazed sandstone knoll with a lookout; the far spit of the south
+    # pool (the Icestone) is reached only over the ice
+    ridge(r, 3, 12, 3, 9, seed=11)                                              # the knoll (NW)
+    CK.smooth_ht(m, 1, 2, box=(0, 0, 16, 12))
+    nw = blob(W, H, 17.5, 6.0, 6.5, 3.2, 92511, 0.35) & (m.ht == 0)
+    sw = blob(W, H, 12.0, 24.5, 9.5, 3.6, 92512, 0.3) & (m.ht == 0)
+    SPIT = [(2, 23), (2, 24), (2, 25), (3, 24), (3, 25)]
+    for x, y in SPIT: sw[y, x] = False
+    for y in range(20, 30):                                                      # the spit is walled on foot: shards and ice spires
+        for x in range(0, 5):
+            if (x, y) not in SPIT and not sw[y, x] and not r.road_mask[y, x]: m.cls[y, x] = 'B'
+    ice = plan_ice(r, nw | sw)
     r.finish_plan(border=1)
     E = [FRONT,
          sign((10, 12), 'Field marker', "ISENMAR LINES -> W.  The rest is anybody's."),
@@ -333,9 +456,19 @@ def build_925():
                   "...You really are nobody's. All right.", d='right'),
          gauntlet((36, 16), 'ASHKAAR_SOLDIER_M', 'Soldier', 1, 'WAR_SIDE_MID', 'You walked out of the steam like it was a door. Show me the rest.',
                   "The steam lets you through. So will I.", d='left'),
-         hidden((33, 4), 'STARDUST', 'HiddenItem (the glass)'), item((60, 28), 'FIRESTONE'), item((3, 28), 'ICESTONE')]
+         hidden((33, 4), 'STARDUST', 'HiddenItem (the glass)'), item((60, 28), 'FIRESTONE'), dict(item((2, 24), 'ICESTONE'), fixed=True),
+         obj('Frozen flood', (14, 20), ['The sea came this far. Then the Glaceon lines came out of their trenches and the sea stopped, mid-wave, and stayed.',
+                                        'The ice is clear as a window. There are fish in it, and a boot, and the Isenmar standard, still upright.']),
+         obj('Ice-locked whaleboat', (22, 9), ['A whaleboat from Skaldfast, frozen into the flood up to its gunwales. Its oars are still out.']),
+         soldier((8, 11), 'Isenmar lookout', 'NPC 11', ["Isenmar lookout: From up here you see it all: the sea frozen on our side, the glass on theirs, and the steam where they meet."], d='down'),
+         {'type': 'berry', 'at': [5, 13], 'berry': 'ASPEARBERRY'}]
+    for e in E:
+        if e.get('type') == 'item' and e.get('item') == 'ICESTONE': m.taken[24, 2] = True
     r.add(*E)
     r.seat_events(on='su')
+    stop = ice_puzzle(r, sw & ice, (3, 24), seed=9251)
+    yk = max(y for y in range(H) if m.ht[y, 7] == 1)
+    CK.stair(r, 6, yk, w=3, h=1)
     rng = random.Random(925)
     CRY = ['cr_clear_c', 'cr_teal_c', 'cr_clear_e', 'cr_grey_c', 'cr_purple_c', 'cr_pink_c', 'cr_clear_t', 'cr_teal_e', 'cr_red_c', 'cr_blue_c']
     lanes = (5, 15, 24)                                                         # three quiet lanes through the glass belt (rows)
@@ -345,11 +478,15 @@ def build_925():
             if vnoise(x, y, 9251, 2.5) > 0.42 and rng.random() < 0.55:
                 n = rng.choice(CRY)
                 if m.free(x, y, 1, STAMPS[n]['h'], on='su'): m.stamp(n, x, y, mark='B')
-    for nm, x, y in (('fw_sled', 8, 20), ('wr_sledfort2', 4, 5), ('wr_ban_ise', 12, 9), ('fw_rack', 6, 25), ('ak_rock2', 15, 26),
+    for nm, x, y in (('wr_sledfort2', 4, 3), ('wr_ban_ise', 10, 4), ('fw_brazier', 7, 6), ('wr_tent_b', 18, 25) if False else ('fw_rack', 21, 18),
+                     ('fw_boat', 21, 8), ('cr_clear_t', 11, 10), ('cr_blue_c', 24, 5), ('cr_clear_c', 13, 3), ('cr_blue_e', 25, 7),
+                     ('cr_clear_t', 22, 22), ('cr_blue_c', 21, 27), ('cr_clear_e', 4, 21), ('cr_blue_t', 1, 27), ('fw_sled', 16, 19),
+                     ('wr_sledfort', 23, 28), ('wr_ban_ise_t', 18, 28), ('fw_wood', 14, 18), ('wr_sacks', 20, 17),
+                     ('fw_sled', 8, 17), ('wr_ban_ise', 12, 9), ('fw_rack', 6, 28), ('ak_rock2', 15, 29),
                      ('wr_picket', 50, 9), ('wr_picket', 53, 9), ('wr_picket', 56, 9), ('wr_ban_ash', 51, 20), ('wr_sledfort', 57, 24),
                      ('nr_colfall', 46, 26), ('pf_wagon', 42, 6)):
         r.near(nm, x, y, on='su', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
     for nm, x, y in (('wr_ban_ise_t', 22, 10), ('wr_ban_ash_t', 41, 10), ('wr_treb_broken', 44, 24), ('wr_glasssled', 20, 23),
                      ('gd_pool2', 25, 20), ('gd_pool3', 36, 5), ('wr_stakes', 24, 16), ('wr_stakes', 39, 13), ('wr_sandbags', 16, 16),
                      ('wr_pal_hb', 48, 12), ('wr_pal_hb', 49, 12), ('wr_pal_h', 50, 12), ('wr_supply', 56, 18), ('wr_sacks', 9, 16)):
@@ -359,10 +496,15 @@ def build_925():
     m.cls[m.cls == 'd'] = 'u'
     r.paint()
     sand_seams(r)
-    paint_glass(r, band(W, H, [(31, 0), (30, 9), (32, 19), (31, 31)], 3.6, 92501), cracks=0.08, rope=0.12, seed=925)
+    glass = paint_glass(r, band(W, H, [(31, 0), (30, 9), (32, 19), (31, 31)], 3.6, 92501) | blob(W, H, 47, 6, 5, 3, 92513, 0.45)
+                        | blob(W, H, 52, 24, 5, 3, 92514, 0.45), cracks=0.08, rope=0.10, seed=925)
+    glass_dress(r, glass, seed=925); glass_ledges(r, glass)
+    paint_ice(r, ice, stop, seed=925)
+    for y, x in np.argwhere(m.cls == 'B'):                                       # the spit's wall: shards and spires frozen in rime
+        if x < 6 and m.L[1, y, x] == 0 and m.L[2, y, x] == 0: m.L[1, y, x] = K.P1('gd_shard2')
     sand_dress(r, 0.35, seed=925)
-    frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 27 + int(3 * vnoise(0, y, 9252, 4.0)))], thr=0.25)
-    decal(r, ['wr_frost0', 'wr_frost1', 'wr_frost2'], 0.35, seed=1, cells=[(x, y) for y in range(H) for x in range(0, 28)])
+    frozen_ground(r, [(x, y) for y in range(H) for x in range(0, 27 + int(3 * vnoise(0, y, 9252, 4.0))) if not ice[y, x]], thr=0.25)
+    decal(r, ['wr_frost0', 'wr_frost1', 'wr_frost2'], 0.35, seed=1, cells=[(x, y) for y in range(H) for x in range(0, 28) if not ice[y, x]])
     decal(r, ['wr_ember0', 'wr_ember1', 'wr_ember2'], 0.40, seed=2, cells=[(x, y) for y in range(H) for x in range(37, W)])
     for y in range(H):                                                           # the steam wall over the glass belt
         for x in range(25, 39):
@@ -376,6 +518,8 @@ def build_925():
                           {'dir': 'S', 'offset': 2, 'to': 926, 'to_offset': 0}],
              tone=[6, -4, 10, 30], fog={'name': 'prismfall_seamist', 'opacity': 60, 'blend': 0, 'zoom': 150, 'sx': 2, 'sy': 0})
     h['metadata']['MapPosition'] = [0, 13, 14]
+    h['walk_from'] = [[3, 25]]                                                     # the spit: over the ice only
+    h['gates'] = [{'name': 'The Icestone spit (over the frozen flood only)', 'from': [[1, 14], [62, 14], [31, 30]], 'sealed': [[3, 24]], 'ice_solid': True}]
     r.write(h, '925_steamline.yaml', '# The Steamline (925, :BLEED). WRITTEN BY layouts/war.py (map builder 10) - edit that script.\n',
             '/tmp/craft/925.png' if PREV else None)
 
@@ -444,7 +588,7 @@ def build_924():
                      ('wr_picket', 52, 11), ('sh_campfire', 28, 26), ('fw_brazier', 33, 18), ('fw_brazier', 39, 18), ('hb_crates4', 46, 27),
                      ('hb_barrels', 49, 27), ('sh_crates', 42, 33), ('wr_ban_ash', 31, 11), ('wr_ban_ash', 41, 11), ('hb_tubs', 30, 33)):
         r.near(nm, x, y, on='su', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles'], 10, box=(0, 0, 10, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles'], 10, box=(0, 0, 10, H), on='su', clump=2, seed=5)
     for x in range(24, 54):                                              # the camp's palisade, north and south, burnt in places
         for y in (2, 37):
             if not m.taken[y, x] and m.cls[y, x] in 'su' and not r.road_mask[y, x] and x % 9: m.stamp('wr_pal_hb' if (x + y) % 4 == 0 else 'wr_pal_h', x, y, mark='B')
@@ -456,8 +600,9 @@ def build_924():
     m.cls[m.cls == 'd'] = 'u'
     r.paint()
     sand_seams(r)
-    paint_glass(r, blob(W, H, 48, 13, 5, 3, 92401) | blob(W, H, 4, 20, 4, 7, 92402) | blob(W, H, 44, 26, 3, 2, 92403),
-                cracks=0.12, rope=0.1, seed=924)                          # sand fired to glass round the dragon lines and forge
+    g924 = paint_glass(r, blob(W, H, 48, 13, 5, 3, 92401) | blob(W, H, 4, 20, 4, 7, 92402) | blob(W, H, 44, 26, 3, 2, 92403),
+                       cracks=0.12, rope=0.1, seed=924)                   # sand fired to glass round the dragon lines and forge
+    glass_dress(r, g924, seed=924); glass_ledges(r, g924)
     sand_dress(r, 0.40, seed=924)
     decal(r, ['wr_ember0', 'wr_ember1', 'wr_ember2'], 0.30, on='sug', seed=2)
     for cx, cy, rx, ry in ((30, 17, 4, 1.6), (44, 18, 5, 1.8), (27, 34, 4, 1.5)):        # drill yards: trodden sand
@@ -635,12 +780,12 @@ def build_926():
     for y, xs in ((35, range(19, 29)), (35, range(32, 34)), (40, range(32, 34))):
         for x in xs:
             if not m.taken[y, x] and m.cls[y, x] in 'su' and not r.road_mask[y, x] and m.ht[y, x] == 0: m.stamp('wr_stakes', x, y, mark='B')
-    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2', 'gd_shard2'], 26, box=(18, 0, 43, 14), on='su', clump=2, seed=6)   # the beam scar
-    CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 28, box=(30, 14, W, H), on='su', clump=2, seed=7)
-    CK.props(r, ['gd_shard2', 'cr_teal_c', 'cr_clear_c', 'dk_pebbles'], 14, box=(0, 14, 30, H), on='su', clump=2, seed=8)
+    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'gd_shard2', 'cr_clear_c'], 26, box=(18, 0, 43, 14), on='su', clump=2, seed=6)   # the beam scar
+    CK.props(r, ['gd_spire', 'gd_shard0', 'gd_shard1', 'gd_shard2', 'cr_teal_c', 'cr_clear_t'], 34, box=(18, 14, W, H), on='su', clump=2, seed=7)
+    CK.props(r, ['gd_shard2', 'cr_teal_c', 'cr_clear_c', 'sk_pebbles'], 14, box=(0, 14, 30, H), on='su', clump=2, seed=8)
     CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 10, box=(13, 0, 18, 12), on='su', seed=9)
     CK.props(r, ['gd_shard0', 'gd_shard1', 'gd_shard2'], 10, box=(43, 0, 48, 12), on='su', seed=10)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles'], 8, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles'], 8, box=(0, 0, W, H), on='su', clump=2, seed=5)
     CK.props(r, ['wr_firering', 'wr_sacks', 'wr_rack', 'wr_stakes', 'fw_sled', 'wr_sandbags'], 12, box=(18, 20, 48, 34), on='su', clump=3, seed=11)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
     m.cls[m.cls == 'd'] = 'u'                                          # (stair landings: sand, not the grass-rimmed dirt)
@@ -653,9 +798,14 @@ def build_926():
     glass |= band(W, H, [(37, 15), (41, 20), (46, 25), (52, 29), (58, 31)], 2.4, 92604)
     glass |= blob(W, H, 52, 21, 7, 5, 92605, 0.4) | blob(W, H, 45, 40, 6, 4, 92606, 0.45) | blob(W, H, 37, 22, 4, 3, 92607)
     glass |= blob(W, H, 55, 7, 5, 4, 92608, 0.45)                       # the dragon lines, scorched to glass
+    # map builder 12: the beam's splash reaches the south flats and the no-man's-land (the open sand was most of the map)
+    glass |= blob(W, H, 24, 41, 7, 3.5, 92609, 0.45) | blob(W, H, 39, 44, 7, 3, 92610, 0.45) | blob(W, H, 21, 33, 4, 2.5, 92611, 0.5)
+    glass |= band(W, H, [(30, 15), (29, 24), (30, 31), (30, 40)], 1.6, 92612) | blob(W, H, 13, 3, 4, 2.5, 92613, 0.4)
+    glass |= blob(W, H, 47, 13, 3, 2, 92614, 0.4) | blob(W, H, 4, 25, 3, 2.5, 92615, 0.5)
     glass &= ~flood
     paint_flood(r, flood, steam=0.5)
-    glass = paint_glass(r, glass, cracks=0.07, rope=0.12, spill=0.05, seed=926)
+    glass = paint_glass(r, glass, cracks=0.07, rope=0.10, spill=0.05, seed=926)
+    glass_dress(r, glass, sheen=0.08, sky=0.04, seed=926); glass_ledges(r, glass)
     rest = [(x, y) for y in range(H) for x in range(W) if not glass[y, x] and not flood[y, x]]
     restset = set(rest)
     sand_dress(r, 0.40, seed=926, bones=0.03) if False else None
@@ -783,9 +933,9 @@ def build_929():
     r.seat_events(on='su')
     for nm, x, y in (('wr_tent_w', 8, 5), ('wr_tent_w', 22, 4), ('wr_tent_w', 26, 15), ('wr_tripod', 12, 4), ('wr_tripod', 16, 4), ('wr_tripod', 20, 3),
                      ('wr_dial', 10, 12), ('wr_dial', 23, 12), ('wr_telegraph', 30, 8), ('wr_telegraph', 30, 16), ('hb_crates4', 6, 15),
-                     ('hb_boxes', 9, 17), ('sh_crates', 24, 19), ('hb_barrel', 13, 18), ('wr_ban_bone', 4, 10) if False else ('dk_boulder', 4, 10)):
+                     ('hb_boxes', 9, 17), ('sh_crates', 24, 19), ('hb_barrel', 13, 18), ('wr_ban_bone', 4, 10) if False else ('sk_boulder', 4, 10)):
         r.near(nm, x, y, on='su', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 10, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles', 'nt_deadtree'], 10, box=(0, 0, W, H), on='su', clump=2, seed=5)
     for nm, x, y in (('wr_supply', 25, 19), ('wr_sacks', 7, 17), ('wr_firering', 19, 16)):
         r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)
@@ -836,7 +986,7 @@ def build_930():
                      ('wr_tent_w', 36, 5), ('wr_bonecart', 12, 18), ('wr_bonecart', 15, 18), ('wr_bonecart', 18, 18), ('wr_well', 30, 24),
                      ('pf_wagon', 37, 24), ('hb_crates4', 35, 10), ('hb_tubs', 25, 24), ('fw_rack', 6, 9), ('fw_brazier', 21, 13), ('wr_bonecart', 40, 20)):
         r.near(nm, x, y, on='sug', r=3)
-    CK.props(r, ['dk_rock_big', 'dk_boulder', 'dk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
+    CK.props(r, ['sk_rock_big', 'sk_boulder', 'sk_pebbles', 'nt_deadtree'], 14, box=(0, 0, W, H), on='su', clump=2, seed=5)
     for nm, x, y in (('wr_supply', 38, 13), ('wr_sacks', 34, 13), ('wr_firering', 26, 15), ('wr_sacks', 9, 20), ('wr_rack', 29, 21)):
         r.near(nm, x, y, on='su', r=2)
     r.dress(trees=('nt_deadtree',), n_trees=0, copses=0, scatter=0)

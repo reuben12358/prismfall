@@ -23,9 +23,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageDraw
 from rdraw import P, OUT, WOOD, CLEAR, canvas, disc
 
-GLASS = [(12, 30, 28, 255), (30, 70, 60, 255), (40, 90, 74, 255), (58, 126, 100, 255), (88, 172, 132, 255),
-         (136, 214, 172, 255), (206, 248, 226, 255)]
-FACE = [(8, 20, 20, 255), (16, 40, 36, 255), (24, 58, 50, 255), (40, 92, 76, 255), (70, 140, 112, 255)]   # cliff faces: in shade
+GLASS = [(6, 20, 18, 255), (14, 44, 38, 255), (22, 62, 52, 255), (44, 116, 100, 255), (84, 172, 154, 255),
+         (156, 230, 212, 255), (228, 255, 248, 255)]     # map builder 12: black-green body, teal-white sheen (the backdrop's glass)
+FACE = [(4, 12, 14, 255), (10, 28, 28, 255), (18, 44, 42, 255), (44, 104, 96, 255), (120, 206, 188, 255)]   # obsidian faces in shade
 EMBER = [(110, 36, 22, 255), (204, 88, 38, 255), (255, 164, 78, 255), (255, 228, 160, 255)]
 SANDW = [(146, 124, 92, 255), (184, 162, 122, 255), (212, 194, 152, 255), (234, 222, 186, 255), (250, 244, 222, 255)]
 STRATA = [(84, 46, 42, 255), (120, 68, 54, 255), (156, 98, 72, 255), (192, 136, 100, 255), (220, 180, 140, 255)]
@@ -53,17 +53,27 @@ def nz(x, y, s):
 
 
 # ------------------------------------------------------------------ glass ground
+STREAKS = {0: [(3, 2, 12, 5), (11, 9, 5, 3)], 1: [(7, 0, 10, 4)], 2: [(12, 4, 12, 5), (4, 11, 4, 3)], 3: [(5, 1, 7, 3)],
+           4: [(9, 3, 9, 4)], 5: [(2, 8, 8, 4)]}          # per variant: (row, x0, length, brightest ramp index)
+
+
 def glass_px(x, y, seed, cracks=False):
-    """one pixel of the glass floor: dark bottle-green in big soft mottles, wind-polished teal streaks running
-    roughly east-west (as on the Glass Dunes backdrop), very few glints"""
-    m = nz((x + seed * 3) // 4, y // 3, seed) * 0.6 + nz((x + 1) // 2, (y + seed) // 2, seed + 5) * 0.4
-    c = GLASS[1] if m < 0.33 else GLASS[2]
-    row = (y + seed * 5) % 16
-    if row in (3, 10) or (row == 11 and x % 5 < 2):
-        run = nz((x + seed * 7) // 6, row, seed + 11)
-        if run > 0.45: c = GLASS[3] if run < 0.85 else GLASS[4]
-    if row == 4 and nz(x // 6, 1, seed + 11) > 0.6: c = GLASS[1]
-    if nz(x, y, seed + 7) > 0.998: c = GLASS[6]
+    """one pixel of the glass floor (map builder 12): smooth black-green, a few designed specular streaks per variant
+    (white-teal core fading to teal at the ends, a soft halo above), so neighbouring tiles scatter the glare instead of
+    printing a grid; a faint sky lift near the top; rare glints"""
+    gx, gy = x / 8.0, y / 8.0; ix, iy = int(gx), int(gy); fx, fy = gx - ix, gy - iy      # smooth mottles, period 16
+    q = lambda i, j: nz((i % 2) + seed * 3, j % 2, seed)
+    m = (q(ix, iy) * (1 - fx) + q(ix + 1, iy) * fx) * (1 - fy) + (q(ix, iy + 1) * (1 - fx) + q(ix + 1, iy + 1) * fx) * fy
+    c = mix(GLASS[1], GLASS[2], 0.25 + 0.5 * m)
+    if y < 4: c = mix(c, GLASS[3], 0.18 * (4 - y) / 4.0)
+    for row, x0, ln, top in STREAKS.get(seed, []):
+        u = x - x0
+        if 0 <= u < ln:
+            t = 1 - abs(u - (ln - 1) / 2.0) / (ln / 2.0)          # 1 in the middle, 0 at the ends
+            if y == row: c = GLASS[min(6, 3 + int(round(t * (top - 3 + 0.49))))] if t > 0.15 else GLASS[3]
+            elif y == row - 1 and t > 0.4: c = mix(c, GLASS[3], 0.5)
+            elif y == row + 1 and t > 0.6: c = mix(c, GLASS[0], 0.4)
+    if nz(x, y, seed + 7) > 0.997: c = GLASS[6]
     return c
 
 
@@ -131,6 +141,7 @@ def cliff_kit(prefix, glass):
             v = (2 if y < 20 else 1) + (1 if s > 0.7 else 0)
             if y > 34: v = max(0, v - 1)
             if (x + seed) % 7 == 0 and nz(x, y, seed + 2) > 0.4: v = 3
+            if (x + seed) % 11 == 4 and nz(x, y // 6, seed + 5) > 0.35: return FACE[4] if y % 9 else GLASS[6]   # vertical sheen
             if nz(x, y, seed + 9) > 0.997: return EMBER[2]
             return FACE[min(v, 3)]
         band = (y + int(2 * math.sin((x + seed) / 3.0))) // 3
@@ -251,29 +262,51 @@ def wave_curl():
 
 
 def shard(v):
+    """a glass shard standing out of the floor (1x2; map builder 12): a faceted crystal blade, pale light face, dark
+    facet, white edge and tip glint, a dark reflection at its foot - crystal, not a tree"""
     im, d = canvas(1, 2); r = random.Random(1200 + v)
-    pts = [(3, 31), (5 + r.randrange(2), 6 + r.randrange(4)), (8, 1 + r.randrange(3)), (11, 10 + r.randrange(4)), (13, 31)]
-    d.polygon(pts, fill=GLASS[2], outline=GLASS[0])
-    d.line([pts[1], pts[2]], fill=GLASS[5]); d.line([pts[2][0], pts[2][1] + 2, pts[2][0], 28], fill=GLASS[4])
-    d.polygon([(9, 31), (11, 18), (14, 31)], fill=GLASS[1], outline=GLASS[0])
-    P(im, 7, 9, GLASS[6]); d.ellipse([1, 29, 15, 32], fill=(0, 0, 0, 70))
+    tip = (7 + r.randrange(3), 2 + r.randrange(4))
+    lean = (-1, 2)[v]
+    L = [(3, 30), (4 + lean, 14), tip, (tip[0], 30)]
+    R = [(tip[0], 30), tip, (12 + lean, 12 + r.randrange(4)), (13, 30)]
+    d.polygon(L, fill=(200, 246, 236, 255)); d.polygon(R, fill=(80, 168, 154, 255))
+    d.line([tip, R[2], R[3]], fill=(30, 86, 80, 255)); d.line([L[0], L[1], tip], fill=(120, 200, 186, 255))
+    d.line([tip, (tip[0], 29)], fill=(232, 255, 248, 255))
+    d.line([(5 + lean, 16), (tip[0] - 1, tip[1] + 3)], fill=(240, 255, 250, 255))
+    for k in range(2):
+        y = 20 + k * 5; d.line([(5, y), (tip[0] - 1, y - 2)], fill=(196, 244, 230, 255))
+    small = [(11, 30), (12 + lean, 21), (15, 30)]
+    d.polygon(small, fill=(150, 222, 208, 255)); d.line([small[1], small[2]], fill=(30, 86, 80, 255)); P(im, 12 + lean, 22, (255, 255, 255, 255))
+    P(im, tip[0], tip[1], (255, 255, 255, 255))
+    d.ellipse([1, 29, 15, 32], fill=(0, 0, 0, 80))
     return im, ['O', 'W']
 
 
 def shard_small():
+    """a cluster of crystal points (1x1, solid; map builder 12): clear prisms with a bright lit face, a teal shade face,
+    an outline only on the shaded side and the base, white tips and a sparkle - reads as crystal, not as a pine"""
     im, d = canvas(1, 1)
-    for x0, h in ((2, 9), (6, 13), (10, 8)):
-        d.polygon([(x0, 15), (x0 + 2, 15 - h), (x0 + 4, 15)], fill=GLASS[2], outline=GLASS[0]); P(im, x0 + 2, 16 - h, GLASS[5])
+    for x0, h, w in ((0, 9, 5), (4, 14, 6), (10, 10, 5)):
+        tip = (x0 + w // 2, 15 - h)
+        d.polygon([(x0, 15), tip, (tip[0], 15)], fill=(206, 248, 238, 255))
+        d.polygon([(tip[0], 15), tip, (x0 + w, 15)], fill=(92, 178, 164, 255))
+        d.line([tip, (x0 + w, 15)], fill=(36, 96, 88, 255))
+        d.line([(tip[0], tip[1] + 1), (tip[0], 14)], fill=(255, 255, 255, 255))
+        P(im, tip[0], tip[1], (255, 255, 255, 255))
+    d.line([(0, 15), (15, 15)], fill=(36, 96, 88, 200))
+    P(im, 3, 3, (255, 255, 255, 220)); P(im, 2, 3, (220, 255, 248, 140)); P(im, 4, 3, (220, 255, 248, 140)); P(im, 3, 2, (220, 255, 248, 140))
     return im, ['W']
 
 
 def rope(v):
-    """ropy fused-glass flow texture (decal on glass): bright crescent ridges with a dark under-lip"""
-    im = Image.new('RGBA', (16, 16), CLEAR); d = ImageDraw.Draw(im); r = random.Random(1300 + v)
-    for k in range(3):
-        cx, cy = r.randrange(2, 14), 3 + k * 5
-        d.arc([cx - 6, cy - 3, cx + 6, cy + 4], 200, 340, fill=a(GLASS[4], 230))
-        d.arc([cx - 6, cy - 2, cx + 6, cy + 5], 200, 340, fill=a(GLASS[0], 200))
+    """fused-glass flow ridge (decal on glass; map builder 12): a long, nearly flat ridge with a hard specular top edge
+    and a dark under-lip, so the floor reads as poured and polished, not as water"""
+    im = Image.new('RGBA', (16, 16), CLEAR); r = random.Random(1300 + v)
+    y0 = 4 + 4 * v
+    for x in range(16):
+        y = y0 + int(round(1.2 * math.sin((x + v * 5) / 5.0)))
+        P(im, x, y, a(GLASS[5], 210)); P(im, x, y - 1, a(GLASS[3], 140)); P(im, x, y + 1, a(GLASS[0], 190))
+        if x % 6 == 2: P(im, x, y, a(GLASS[6], 240))
     return im
 
 
@@ -482,12 +515,12 @@ def sky(v):
     """the sky reflected in the glass (decal): a soft pale wash with a brighter cloud streak, mostly transparent so the
     black-green shows through at the edges"""
     im = Image.new('RGBA', (16, 16), CLEAR)
-    base = ((150, 192, 228), (182, 170, 220))[v]; cloud = ((226, 238, 250), (240, 222, 236))[v]
+    base = ((70, 170, 168), (110, 170, 200))[v]; cloud = ((200, 246, 240), (220, 236, 252))[v]
     for y in range(16):
         for x in range(16):
             d = math.hypot((x - 7.5) / 8.0, (y - 7.5) / 5.5)
             if d >= 1.0: continue
-            al = int(95 * (1 - d) ** 0.7)
+            al = int(120 * (1 - d) ** 0.6)
             c = base
             if abs((y - 6) - (x - 8) * 0.25) < 1.2 and 2 < x < 14: c, al = cloud, al + 50
             P(im, x, y, c + (min(255, al),))
@@ -532,12 +565,23 @@ def whalebone():
     P(im, 5, 27, (190, 200, 214, 255)); P(im, 9, 28, (190, 200, 214, 255))
     return im, ['O', 'W']
 
+
+def ice_px(x, y, sh):
+    """frozen flood water (map builder 12): pale blue sea-ice in broad diagonal bands, white wind streaks, a few dark
+    hairline cracks; 16-periodic so runs join"""
+    band = ((x + y) // 3) % 6
+    c = ICEW[3] if band < 2 else ICEW[2]
+    if (x * 2 + y * 5) % 16 == 0: c = ICEW[4]
+    if (y % 8 == 5 and 3 <= (x + 2 * (y // 8)) % 16 <= 9): c = ICEW[4]
+    if (x - 2 * y) % 16 == 7 and (y % 16) in (2, 3, 4, 11, 12): c = ICEW[1]
+    return c
+
 def pieces():
     import ndraw
     out = {}
-    GLASS_FACE = [GLASS[1], GLASS[2], GLASS[3], GLASS[4]]
+    GLASS_FACE = [FACE[1], FACE[2], FACE[3], FACE[4]]
     for e in 'wme':
-        out['gdl_' + e] = (ndraw.ledge(e, face=GLASS_FACE, top=SANDW), ['L'], None)
+        out['gdl_' + e] = (ndraw.ledge(e, face=GLASS_FACE, top=[GLASS[0], GLASS[3], GLASS[2], GLASS[4], GLASS[6]]), ['L'], None)   # 12: a glass lip
         out['sdl_' + e] = (ndraw.ledge(e, face=[STRATA[1], STRATA[2], STRATA[3], STRATA[4]], top=SANDW), ['L'], None)
     out['gd_ford_v'] = (ford(True), ['D'], None)
     out['gd_ford_h'] = (ford(False), ['D'], None)
@@ -574,6 +618,8 @@ def pieces():
     for v in range(2): out['gd_sky%d' % v] = (sky(v), ['V'], None)
     im, c = spire(); out['gd_spire'] = (im, c, None)
     im, c = whalebone(); out['pf_whalebone'] = (im, c, None)
+    tex_ice = lambda x, y, sh: ice_px(x, y, sh)
+    for n, im in edge_shapes('gd_ice', ICEW[2], ICEW[4], ICEW[3], ICEW[0], 41, tex_ice, amp=1.8).items(): out[n] = (im, ['I'], None)
     return out
 
 

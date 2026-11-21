@@ -14,14 +14,24 @@ biome: bleed
 field: BLEED
 tone: [6, -4, 10, 30]
 fog: {name: prismfall_seamist, opacity: 60, blend: 0, zoom: 150, sx: 2, sy: 0}
+walk_from:
+- [3, 25]
+- [1, 15]
+- [62, 15]
+- [32, 30]
+gates:
+- name: The Icestone spit (over the frozen flood only)
+  from:
+  - [1, 14]
+  - [62, 14]
+  - [31, 30]
+  sealed:
+  - [3, 24]
+  ice_solid: true
 connections:
 - {dir: W, offset: 13, to: 920, to_offset: 13}
 - {dir: E, offset: 13, to: 924, to_offset: 18}
 - {dir: S, offset: 2, to: 926, to_offset: 0}
-walk_from:
-- [1, 15]
-- [62, 15]
-- [32, 30]
 raw: data/raw/925.npy
 tileset: 56
 events:
@@ -43,6 +53,9 @@ events:
   intro: You walked out of the steam like it was a door. Show me the rest.
   after: The steam lets you through. So will I.
   cond: {switch: WAR_SIDE_MID}
+- type: item
+  at: [2, 24]
+  item: ICESTONE
 - type: event
   name: War front
   at: [0, 0]
@@ -59,7 +72,7 @@ events:
     - {wait: 60}
 - type: sign
   name: Field marker
-  at: [10, 12]
+  at: [10, 13]
   text: ISENMAR LINES -> W.  The rest is anybody's.
   post: false
 - type: sign
@@ -110,6 +123,27 @@ events:
 - type: item
   at: [60, 28]
   item: FIRESTONE
-- type: item
-  at: [3, 28]
-  item: ICESTONE
+- type: event
+  name: Frozen flood
+  at: [14, 20]
+  pages:
+  - trigger: action
+    commands: ['The sea came this far. Then the Glaceon lines came out of their trenches and the sea stopped, mid-wave, and stayed.', 'The ice is clear
+        as a window. There are fish in it, and a boot, and the Isenmar standard, still upright.']
+- type: event
+  name: Ice-locked whaleboat
+  at: [21, 9]
+  pages:
+  - trigger: action
+    commands: ['A whaleboat from Skaldfast, frozen into the flood up to its gunwales. Its oars are still out.']
+- type: event
+  name: Isenmar lookout
+  at: [8, 13]
+  pages:
+  - graphic: {sprite: NPC 11, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Isenmar lookout: From up here you see it all: the sea frozen on our side, the glass on theirs, and the steam where they meet.']
+- type: berry
+  at: [5, 13]
+  berry: ASPEARBERRY

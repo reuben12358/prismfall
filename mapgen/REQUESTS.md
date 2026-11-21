@@ -1285,3 +1285,10 @@ maps carry none. Add them to PBS and tell the map builder where they belong (578
 **Not done (next map builder, worst first):** Tidelock Gym 170-174 (stock tiles; GYM_PUZZLES' trimmed design), the caves
 544/545/564 (stock Rock Cave: needs a PF cave sheet built like tileset 54, or caves drawn from the `shs` cliff kit on a dark
 floor), Thistledown Manor 546/547 (stock mansion), 525 Deepwood, 566 Spinners' Rise.
+
+**Job 3 (the Glass Dunes look, map builder 12):** glass redrawn (black-green, specular streaks, sky in the polish, crystal
+shards and spires; MAPGEN 2o), dune slides become glass lips on glass, 926's open sand glassed, 925's west half (frozen
+flood pools with a 3-slide puzzle to the Icestone) and 920's north rim (scarp, watch line, a 4-slide ice islet with the
+Never-Melt Ice) filled. **For the playtest (Ch19 states):** the ice on 920/925 is terrain tag 12; `GATE ok` lines prove
+both prizes are shut on foot. **For the backdrop owner:** the map's glass now matches `glass_dunes.png` (dark green body,
+teal-white streaks); if you re-shoot WAR-1's stage picture, export 926's new render.

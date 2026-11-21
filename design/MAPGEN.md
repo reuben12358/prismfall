@@ -615,6 +615,21 @@ a PF cave sheet, see below); 546/547; 525; 566. Before/after: `maps_out/previews
   `CK.undergrowth` no longer stamps on cliff faces. **`mapgen/relayout.sh [--strict]`** runs the whole post-sheet-change
   order (rcustom, rcompose, rstamps, every layout, `reskin.py 525` + the 525 spec restore, build). Then re-run
   `rimewood.py 562` and build again when 561's edge moved (562 seals its N edge against the built 561).
+- **The Glass Dunes look (job 3):** `gdraw.py` glass redrawn in place (same piece names, so the war layouts kept their
+  plans): black-green body (`GLASS`, `FACE`), smooth floor with designed specular streaks per variant (`STREAKS`) instead
+  of a dashed grid, flat flow ridges (`gd_rope*`) instead of swampy arcs, crystal shards (`gd_shard0-2`: lit face, shade
+  face, white edge, no dark outline) and the 2x3 `gd_spire`, obsidian cliff faces with vertical sheen, a glass lip on
+  `gdl_*`. New: `gd_sheen0-3` (glare streaks and glints), `gd_sky0-1` (sky in the polish), `gd_ice_00..47` (frozen
+  flood, terrain tag 12, the 48 autotile shapes). `war.py`: `glass_dress()` (sheen and sky on inner glass),
+  `glass_ledges()` (dune slides turn to `gdl_*` where they cross glass), `plan_ice` / `paint_ice` / `ice_puzzle()`
+  (frozen pools with shard stoppers, solved by `rimewood.slide_solve`). 926: glass spread over the south flats and
+  no-man's-land, spires and crystals among the shards. 925 west half: the frozen flood (two pools; the Icestone spit is
+  reached only over the ice, 3 slides), the rime knoll with a lookout and stair, an ice-locked whaleboat, wrecks, ice
+  spires. 920 north rim: a sandstone scarp (x 20-58) with the Isenmar watch line on top (one stair, between the second
+  and third trench-lines, so the gauntlet can't be skirted), two frozen pools under it, the Never-Melt Ice on an islet
+  (4 slides). War maps use `sk_*` rocks (rcustom `srock_ak`, mode `sand`: no moss); the `dk_*` copies keep their tufts
+  for Marram Down. `gates:` entries take `ice_solid: true` (ice counts as wall: a place reached only by sliding).
+  Before/after: `maps_out/previews/war_compare/*_mb12.jpg`.
 - **Lesson:** a band of class `T` thinner than the 3x2 tree footprint leaves walkable gaps (and lattice canopies can close a
   lane next to a wood). Where a wall matters (a gate, a trail maze), fill unpainted `T` cells with a solid snowy shrub
   (10371/10551) and prove it with `gates:`.

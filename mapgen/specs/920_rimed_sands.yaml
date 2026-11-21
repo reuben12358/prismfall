@@ -15,11 +15,21 @@ biome: desert
 field: DESERT
 tone: [10, 6, 14, 10]
 fog: {name: prismfall_seamist, opacity: 24, blend: 0, zoom: 200, sx: 1, sy: 0}
-connections:
-- {dir: E, offset: 13, to: 925, to_offset: 13}
 walk_from:
+- [52, 9]
 - [1, 15]
 - [58, 15]
+gates:
+- name: The ice islet (sliding only)
+  from:
+  - [1, 14]
+  - [58, 14]
+  - [8, 34]
+  sealed:
+  - [52, 9]
+  ice_solid: true
+connections:
+- {dir: E, offset: 13, to: 925, to_offset: 13}
 raw: data/raw/920.npy
 tileset: 56
 events:
@@ -69,6 +79,9 @@ events:
   intro: Third line. Nobody has passed the third line.
   after: Somebody has passed the third line. Mark it in the tally.
   cond: {switch: WAR_SIDE_ASH}
+- type: item
+  at: [51, 9]
+  item: NEVERMELTICE
 - type: sign
   name: Road sign
   at: [3, 12]
@@ -118,13 +131,31 @@ events:
   - trigger: action
     commands: ['A trench cut in sand and frozen hard, its walls glazed white. Someone has carved a tally of days into the ice. It is a long tally.']
 - type: item
-  at: [52, 4]
-  item: NEVERMELTICE
-- type: item
   at: [26, 30]
   item: STARDUST
   hidden: true
   name: HiddenItem (rimed dune)
+- type: event
+  name: Frozen sea
+  at: [25, 11]
+  pages:
+  - trigger: action
+    commands: ['The sea came over the dunes this far. The Glaceon lines froze it where it stood: a pool of green ice with the sand still in it.']
+- type: event
+  name: Watch-post sergeant
+  at: [44, 2]
+  pages:
+  - graphic: {sprite: NPC 28, dir: down}
+    trigger: action
+    move: fixed
+    commands: ['Watch-post sergeant: Up here you can see Skaldfast burning and the Steamline smoking. Pick which to look at.', 'Sergeant: The ice on the
+        flats? Slide it. The children of Skaldfast could, before.']
+- type: event
+  name: Signal horn
+  at: [40, 2]
+  pages:
+  - trigger: action
+    commands: ['A great horn of whale-bone on a frame. Blown once for the dragons, twice for the sea. Nobody has blown it twice yet.']
 - type: item
   at: [5, 28]
   item: FULLRESTORE
