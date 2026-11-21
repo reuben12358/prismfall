@@ -1127,8 +1127,8 @@ y22  #.............@...A.........#   @ (14,22) · A apprentice "Hiro" (18,22)
 - Builder: verify with the BFS (boulders + pursuers; small grid).
 
 ### 274 The Pit — arena (21×17)
-Kaito: **tag battle** with Kestrel (K4 arc), or a single battle on Standard (story team confirms). Badge 8 + TM31 Brick
-Break.
+Kaito, **single battle** (story editor, 2026-11-21: Kestrel's tag battle is the Conclave's Sable + Brisk fight, not the gym;
+Core `GYMS` and BALANCE agree; `story/27_SCRIPT_CH9.md`). Badge 8 (the Promise Badge, proposed) + TM31 Brick Break.
 
 ### 275 Marrowgate Door — MASTERY (optional, 21×15; side door in 273)
 - A sealed iron gate with three plates. Knocking sounds play from behind it (SE loop), and Lucario's aura flickers on the
@@ -1204,7 +1204,8 @@ overgrown already; watering it collapses it, but it also feeds P1." 3 both solut
 - Sun lamps (decor) and the glass roof.
 
 ### 293 Warden Arena (21×17)
-Juno (J3), **double battle**. Field `:FLOWER_GARDEN` at stage `1 + min(V345, 4)`. Badge 9 + TM53 Energy Ball. Juno,
+Juno (J3), **single battle** (story editor, 2026-11-21: the doubles are Gyms 2, 6, 11, 16, 17 in Core `GYMS` and BALANCE;
+`story/28_SCRIPT_CH10.md`). Field `:FLOWER_GARDEN` at stage `1 + min(V345, 4)`. Badge 9 + TM53 Energy Ball. Juno,
 if the stage is 4+: "You let it grow? For me? ...That's either kind or tactical and I'm too nervous to ask which."
 
 ### 297 The Bride Bower — MASTERY (optional, 21×15; gate in 292, open after S346)

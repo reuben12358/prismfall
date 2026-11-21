@@ -140,7 +140,7 @@
 
 **Arrival.** Ironreach is Nadir's pit-fighting quarter, carved into Aurel-era mine shafts. The Fist Plate makes everyone strong, and arguments are settled in chalk circles. It's loud, sweaty and honest. Warden **Kaito Ren** (ex-Wardguard captain, laconic, wrapped hands) is the only former Accord soldier Nadir trusts.
 - **The Conclave.** Sovereign Valen has called a rare **Accord Conclave** here, the first held in Nadir in a century, to vote on extending the Mandate realm-wide. Every available Warden is present.
-  - **Introductions/reunions:** Dorian, Tamsin, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno), and **Odessa Gale** herself, who delivers **Fly** in person from a skiff she lands on the Pit's rim ("Courier's privilege").
+  - **Introductions/reunions:** Dorian, Tamsin, Marisol, Rook, Sahar, Corvin, Brann, Sigrun, Rowan (who embraces Juno; his right hand is bandaged, "Kettle", and his ring finger is bare, "Being sized"), and **Odessa Gale** herself, who delivers **Fly** in person from a skiff she lands on the Pit's rim ("Courier's privilege").
   - **First sightings** (Revision 5: these Wardens must be met before the Festival):
     - **Ysolde Ashgrave**, veiled, watches Kestrel across the Pit and leaves before he sees her.
     - **Nyx Calloway** is "slumming it" in the observers' gallery and buys the PC a drink they're too young for.
@@ -162,7 +162,7 @@
 2. **Partner battle: PC + Kestrel vs Sable + Hammer Captain Brisk.** Sable escapes into the shafts.
 3. The PC pushes up to the Pit's upper ring and finds **the Mourner** standing over the reliquary. He's not planting the charge; he's trying to *disarm* it. But the player doesn't know that yet.
 4. **The Mourner battle** (`HOLLOW_MOURNER`). **Boss: Trevenant** (multi-bar), with a Shiftry and Cacturne escort. The Mourner fights *defensively*. He keeps saying "Not now — you don't understand — get BACK."
-5. **The partial Shatter.** The charge goes off anyway, and half the Fist Plate's Imprint bursts. The field in the reliquary chamber flips to `:BLEED`. Glass races across the stone toward the gallery, where **Juno** is shielding a child.
+5. **The partial Shatter.** The charge goes off anyway, and half the Fist Plate's Imprint bursts. The field in the reliquary chamber flips to `:BLEED`. Glass races across the stone toward the gallery, where **Juno** is shielding a child (Nell, the Open's chalk-girl, met at the bracket).
 6. **The Mourner throws himself in the way.** His Trevenant's roots tear up through the floor to wall off the glass, and his mask takes the burst and **cracks in half**.
 7. Juno, three meters away: "...Uncle Rowan?"
 8. Rowan, bleeding and half-glassed at the shoulder: *"Juno. Don't look at me like that. Look at the flowers. Look at what they're standing on."*
@@ -199,10 +199,10 @@ He leaves. Brann, at his elbow, looks back at the PC with an expression of pure 
 **Game over `GO_PULL_THE_NAIL` "Pull the Nail".** Available only if Hollow Standing is high. Before the attack, Sable approaches the PC in the shafts: "You can walk in the Bleed. You could plant it where no one else can reach." Accepting leads to the Shatter in full, and Juno is Fixed. Foreshadowing: Wick's Ch7 line ("he wants to carry them home") and Sable's broadcast. *Epitaph: "You pulled the nail. The whole house came down."*
 
 **INTERLUDE II — "The Bride Tree"** (playable as **Rowan**, as a flashback that plays *after* the unmasking).
-- The dawn before the Conclave. Verdance's Heartgarden. The player controls Rowan as he waters the **Bride Tree**.
+- Five days before the Conclave (the Root Road takes that long). Verdance's Heartgarden. The player controls Rowan as he waters the **Bride Tree**.
 - Gentle walk-and-talk with the tree, which is Elin: "The roses are coming in again. They don't stop, love. They never stop."
 - Mini-scene: he shows the healed Phantump from Ch1, now a Trevenant, the bark mask, and the lily he picks from her branches every time.
 - Before the mask, he twists off his Warden's ring and seals it into an envelope with his Warden's testament, addressed to the Sovereign, and leaves it for the Gale Post. ("A mask can't hide a Warden's ring.") This is how the ring and the seat reach Juno in Ch10, and why the Mourner never Mega Evolves.
-- It ends with him putting on the mask: "One more. Then I'll find the other way. I promise."
+- It ends with him folding the mask into his coat, lily-side in: "One more. Then I'll find the other way. I promise." (He walks into the Conclave unmasked, as the Grass Warden, and puts the mask on at Ironreach. Script: `story/27_SCRIPT_CH9.md`.)
 
 **END OF ACT II.** Title card: *III — Fault Lines.*

@@ -20,7 +20,7 @@
 - **Branch maps by Standing:** 698 **Hollow Sanctuary** (high Hollow) or 699 **Meridian Black Site** (high Meridian).
 
 **Branch scene on the Lift Road:**
-- **High Hollow Standing:** Brother Wick's runner leads the PC to the **Hollow Sanctuary** in Grudgestone Quarry. The leaderless faithful are in hiding. Wick teaches the **missing verse of the Hymn** early (Key Item fragment), and Thistle asks the PC to carry a letter to Rowan's jailers.
+- **High Hollow Standing:** Brother Wick's runner leads the PC to the **Hollow Sanctuary** in Grudgestone Quarry. The leaderless faithful are in hiding. Wick teaches the **missing verse of the Hymn** early (Key Item fragment), and gives the PC a letter for Rowan's jailers (WICK'S LETTER, delivered in Ch13). Thistle is in custody since Lumen (Ch5); her people speak for her.
 - **High Meridian Standing:** Calla Wren invites the PC to tour the **Meridian Black Site**, "a Fellowship privilege". It holds **Project NULL**: a Type: Null in a containment cradle that reacts to the PC exactly the way the badge case does. Quent: "It's *modeled* on something. We're not allowed to say what." The PC can leave with the Type: Null (Bond event). It's an unsettling gift.
 - **Neither:** a short scene of refugees climbing the Lift Road from Nadir with everything they own.
 
@@ -33,14 +33,14 @@
   3. **Rowan's sealed Warden's testament**, opened by Valen, names **Juno Hale** heir. His Warden's ring is sealed in with it (Interlude II); Valen puts it in her hand.
 - **Valen** presides from the Heartgarden steps. Juno is terrified. "I didn't want this seat. I wanted *him* in it."
 - **Tamsin** has come up from Briarwick to stand with Juno, the first small-town Warden to join what the press is calling the **Greenward**.
-  - If `:ch2_tamsin` was "keep secret", Thistle's cell appears to heckle Tamsin ("You *knew*"), and the PC must defuse it.
+  - If `:ch2_tamsin` was "keep secret", Thistle's people (Lowmarsh weavers; Thistle herself is in custody since Ch5) heckle Tamsin ("You *knew*"), and the PC must defuse it.
 
 **The Bride Tree.**
 - In the Heartgarden stands the **Bride Tree**, a flowering tree in a woman's shape, arms raised, in permanent blossom. Juno tells the PC the truth: it's her Aunt Elin, Fixed in AF 288. Rowan watered her every dawn.
 - Juno: "Sometimes I think she's listening. Isn't that stupid?"
 - If the PC carries **Venam's Testimony** (cameo sidequest, Ch7), they can play it for her under the tree: *"I could hear everything. Everyone who sat with me."* Juno sits down in the petals and talks to her aunt for the first time in years. (This sets up the Good ending's waking. Without it, Corvin's Ch7 line carries the same idea, more quietly.)
 
-**Juno's Warden trial (set piece).** A Warden is confirmed when the Plate *accepts* them. Juno must walk to the Meadow Plate at the Bride Tree's roots, in the **Bride Grove** (708). The grove is choked with bloom and Bleed-adjacent, so the PC must clear the way inside the Veil, then guide Juno along the one safe path.
+**Juno's Warden trial (set piece).** A Warden is confirmed when the Plate *accepts* them. Juno must walk to the Meadow Plate at the Bride Tree's roots, in the **Bride Grove** (708), the sunken grove at the foot of the stone stair under the Bride Tree, where the Plate lies in the roots in plain sight. Since Rowan fell it is choked with bloom and Bleed-adjacent, so the PC must clear the way inside the Veil, then guide Juno along the one safe path.
 - **Ogerpon:** in the Grove the PC meets the "**Gossamer Ogre**", Ogerpon in its mask. It has been **guarding the Bride Tree** since AF 288, which is why nothing ever got close enough to harm Elin.
 - **Boss battle, "The Loyal Three"** (multi-bar, a triple-boss sequence). **Okidogi, Munkidori and Fezandipiti** come for the Plate. Their collars glow with poison (Sweetrot-pink), and they're thralls of something in the Lightless Deep. (Pecharunt seed. Their eyes are the same blissful blank as Corvin's addicts.)
 - **CHOICE `:ch10_ogre`:** the Three present themselves as the heroes of the shrine story, and the Ogre roars at the PC.

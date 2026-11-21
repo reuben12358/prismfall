@@ -1628,3 +1628,67 @@ typical and prepared player teams, three modes); every set change and the knocko
 `HOLLOW_GRUNT_M` "Pallbearer" with `RIVAL_JUNO` v13 as partner; map 186 already references all three), the Ch5–7
 route trainers (580, 581, 592–595), the Directorate "Sergeant" / "Officer" fights, the Ebbmouth grunts and Teo's
 new LoseText, and the Ch7 J2 / Wick map events against the round-4 teams.
+
+## From the story editor: Script ready: Ch9 "The Iron Conclave", 2026-11-21
+**`story/27_SCRIPT_CH9.md`**, with "Map events needed (Chapter 9)" at the end (the Iron Road and Ironreach aren't built).
+Counter: **V130 CH9_STEP** (0–12; design/FLAGS.md). V129 is held for Chapter 8's script, which **doesn't exist yet**
+(`22_SCRIPT_CH8.md` is only the withdrawn Ring-Day; this chapter reads Ch8's outline for its flags).
+- **Key events (CHAPTER_BEATS):** **the Mourner unmasked** on **264 the Reliquary [NEW map, ~25×19, the Iron Pit's
+  upper ring]**: the boss `Prismfall::Bosses.trainer_battle(:HOLLOW_MOURNER, "Mourner", 0, boss: :MOURNER_TREVENANT, species: :TREVENANT)`,
+  cutscene **IR-1** (5 shots, ~8 s, storyboard in the script), a root-wall event, the two mask halves; and
+  **`:ch9_teo_sable`** on the same map (Teo under fallen scaffolding inside the Bleed; Sable at a Meridian service lift).
+- **263 the Iron Pit** carries most of the chapter: the Conclave roll-call (eighteen Warden events, branch lines by
+  `:ch2_tamsin` and `:ch8_caldera`), free-roam Warden lines, the Open's bracket slate with **Nell the chalk-girl** (she's
+  the child Juno shields in the Shatter), three pit-fighters and **K4** (`RIVAL_KESTREL` 40 + slot), "The Vote", the
+  **tag battle** (PC + Kestrel vs `HOLLOW_SABLE` 0 + `HOLLOW_ADMIN,Brisk` 0) and a scripted rockfall on the gallery
+  stair, the aftermath (Marchetti, Kestrel, Juno, `:ch9_rowan_words`) and Valen's "Come to Verdance".
+- **265 the Old Aurel Shafts [NEW map, ~40×30]** between the gym and the galleries: Teo glimpsed in a porter's coat,
+  and Sable's GO_PULL_THE_NAIL offer (only if `standing(:HOLLOW) >= 4`; `Prismfall.checkpoint` first). Garret's cameo
+  lives here after S123.
+- **Gym 8 is a single battle** (GYM_PUZZLES 274 said "tag with Kestrel, or single"; fixed). Odessa hands over **HM02 Fly**
+  at the gym door after the badge.
+- **Interlude II** (Rowan) on **294 the Heartgarden**, normal state, from the bed in 261 (V119 = 2).
+**Trainer designer:** `HOLLOW_SABLE` **version 1** [NEW] (the chase branch: one Drapion, Lv 43, field `:CAVE`; LoseText
+"Keep it, then. It only plays one song."); the Open's three pit-fighters (in the script's list); route trainers on
+660/661/672. **Two LoseText fixes are made in your files' working tree but not committed**, because `pbs/trainers.txt` and
+`tools/trainer_gen/gen.py` both carry your in-progress work: `RIVAL_KESTREL` 40–42 (+Hard/Casual) "It wasn't her..." (it
+gave the unmasking away before it happens) → **"Keep the title. I'm not here for a title."**; `HOLLOW_MOURNER` 0/100/200
+"...Juno. Don't look at me like that." (Rowan's unmasked line, said while masked) → **"Not now - you don't understand - get
+BACK!"**. Please keep both when you commit, or regenerate from gen.py, which has them.
+**BOSSES.md:** `:MOURNER_TREVENANT` still needs its config (suggested in the script). **Items owner:** COMM-DEVICE (Key
+Item, the chase branch only), OPEN CHAMPION'S CHALK (flavour). **Cutscenes owner:** IR-1 "The Partial Shatter".
+Proposed badge name: **Promise Badge**.
+
+## From the story editor: Script ready: Ch10 "The Seat That Blooms", 2026-11-21
+**`story/28_SCRIPT_CH10.md`**, "Map events needed (Chapter 10)" at the end. Counter: **V131 CH10_STEP** (0–12).
+- **Key events:** **Juno becomes Warden** and **the Loyal Three / the Ogre** (`:ch10_ogre`, GO_LOYAL), both on **708 the
+  Bride Grove**, which the script places as the sunken grove at the foot of a stone stair under the Bride Tree on 294
+  (the Plate lies in its roots). It needs a **safe-path puzzle** (the puzzle engineer: the bloom parts where the PC walks
+  and stays parted only through six root-nodes; Juno follows as a follower), Ogerpon in its root-hollow, three Loyal Three
+  sprites with glowing collars, and the "bloom lies down" effect when the Plate accepts Juno (S125, V106 = 2).
+- **294 the Heartgarden:** "Three Claimants" (Valen reads Rowan's testament; Maelis, Prince Caedmon, a Meridian delegate,
+  Thornguard, the press), Tamsin and the "Greenward", the Lowmarsh weavers' heckle only on `:ch2_tamsin == :keep_secret`,
+  Juno at the Bride Tree (a Venam branch on S182), "Little Gardener" after the gym, `:ch10_succession_stance`, and the
+  night close at the potting shed (paper pages that bloom).
+- **680 the Lift Road branch** by Standing: **699 Black Site** (Calla, Quent, Type: Null, `:ch10_null`), else **698 the
+  Hollow Sanctuary** via Grudgestone Quarry 684 (Wick: HYMN FRAGMENT, WICK'S LETTER), else refugees on the lift. Then
+  Kestrel with a sunburst envelope at the Lift's top station.
+- **Gym 9 (J3) is a single battle** (GYM_PUZZLES 293 said double; Core `GYMS` and BALANCE say single; fixed). Field
+  stage `1 + min(V345, 4)` via `setBattleRule("fieldStage", n)` before `gym_battle`.
+- **682 the Royal Chase** (S126): the Queen alone in her private garden (a key clue, not comedy), then "The Royal We" at
+  the gate once a Scatterbug is caught there.
+- Every Pokémon Center door from Act III gets the Mandate scanner arch ("PRIORITY GUEST"; SUSPENDED after Ch12).
+**Trainer designer:** `PARTNER_OGRE` [NEW] (Ogerpon Teal Mask Lv 48, one Pokémon, AI partner). **BOSSES.md:**
+`:LOYAL_THREE` [NEW] (Okidogi → Munkidori → Fezandipiti, Lv 46–48, 2 bars each Standard; +1 bar each without the Ogre;
+field Bleed; they flee, no catch). **Items owner:** HYMN FRAGMENT, WICK'S LETTER (Key Items). **Distribution owner:**
+the Echo Coliseum (688) has a Bleed-touched Timburr at Lv 42 (Gym 8 is behind the player); swap it if it breaks Rev 16.
+**Cartographer:** the Lift's top station sits on Lanternroot's (690) edge. Proposed badge name: **Meadow Badge** (already
+in `LEADER_JUNO`'s LoseText).
+
+## From the story editor: bible fixes found while writing Ch9–10, 2026-11-21
+- **Thistle** is in custody from Ch5 (`24_SCRIPT_CH5.md`), but 06_ACT_III had her heckling Tamsin and handing over a
+  letter in Ch10. Now her people heckle, and the letter is Wick's (06_ACT_III).
+- **Interlude II** ended with Rowan putting the mask on in Verdance, but he attends the Conclave unmasked; he now packs it,
+  five days before (05_ACT_II).
+- **GYM_PUZZLES:** Gym 8 and Gym 9 are single battles (above).
+- **09_MYSTERIES #2:** Wick's "carry them home" is Ch7, not Ch8; the Conclave's bandage and bare ring finger are added.
