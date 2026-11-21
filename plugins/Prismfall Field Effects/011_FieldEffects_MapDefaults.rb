@@ -19,8 +19,8 @@ module FieldEffects
     123 => :SILKWOOD,   # Weavers' Guildhall
     124 => :NONE,   # Treetop House
     125 => :NONE,   # Cutter's House
-    130 => :SILKWOOD,   # Loomhouse Gym - Foyer
-    131 => :SILKWOOD,   # Loomhouse Gym - Weaving Hall
+    130 => :SILKWOOD,   # Loomhouse Gym - Lobby
+    131 => :SILKWOOD,   # Loomhouse Gym - The Canopy
     132 => :SILKWOOD,   # Loomhouse Gym - Canopy Lofts
     133 => :SILKWOOD,   # Loomhouse Gym - The Spindle
     140 => :BEACH,   # Saltmere - Promenade & Market
