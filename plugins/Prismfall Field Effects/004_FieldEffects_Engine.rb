@@ -651,7 +651,7 @@ module FieldEffects
 
   def self.check_move_transitions(battle, user, targets, move)
     st = self.raw_state(battle)
-    return if !st || st[:changing]
+    return if !st || st[:changing] || self.lingering?(battle)
     self.transitions(battle).each_with_index do |rule, i|
       next if !self.move_trigger?(rule)
       next if user.lastMoveFailed && !rule[:even_if_failed]
@@ -664,7 +664,7 @@ module FieldEffects
 
   def self.check_env_transitions(battle, kind, id)
     st = self.raw_state(battle)
-    return if !st || st[:changing]
+    return if !st || st[:changing] || self.lingering?(battle)
     self.transitions(battle).each_with_index do |rule, i|
       next if !rule[kind] || !rule[kind].include?(id)
       return if self.count_transition(battle, rule, i)
@@ -688,6 +688,86 @@ module FieldEffects
   def self.failed_move_transitions(battle, user, move)
     return if !self.active?(battle) || !move
     self.check_move_transitions(battle, user, [], move)
+  end
+
+  #=============================================================================
+  # When a move changes the field: the moment it lands (FIELD_API §5)
+  #-----------------------------------------------------------------------------
+  # A move's transitions are checked once per use, as soon as it has landed:
+  #   * a single-hit damaging move: right after its damage and the hit messages
+  #     ("It's super effective!"), before its secondary effects (pbRecordDamageLost
+  #     of the last target hit; 005);
+  #   * anything else (multi-hit moves after their last hit, status moves, moves
+  #     whose hits all missed): at the start of the after-move effects.
+  # If that changes the field (or its stage), the old field LINGERS for the rest
+  # of that move: its secondary effects, the old field's :added_effects,
+  # :move_stat_boosts and :after_move hooks resolve exactly as they did when the
+  # change came last; the battle reads as the new field once the after-move
+  # effects are done (Life Orb, Eject Button, switching... see the new field).
+  # No other transition fires while the old field lingers; a real change_field
+  # (a boss phase...) ends it.
+  #=============================================================================
+  # Per move use (a stack: a move can call another, e.g. Metronome).
+  def self.move_use(battle)
+    list = battle.instance_variable_get(:@fe_move_uses)
+    return (list) ? list.last : nil
+  end
+
+  def self.push_move_use(battle)
+    list = battle.instance_variable_get(:@fe_move_uses)
+    list = battle.instance_variable_set(:@fe_move_uses, []) if !list
+    ctx = { :landed => false, :hit => nil }
+    list.push(ctx)
+    return ctx
+  end
+
+  def self.pop_move_use(battle, ctx)
+    list = battle.instance_variable_get(:@fe_move_uses)
+    i = (list) ? list.rindex { |c| c.equal?(ctx) } : nil
+    list.delete_at(i) if i
+    self.end_linger(battle, ctx)
+  end
+
+  def self.lingering?(battle)
+    return !battle.instance_variable_get(:@fe_linger).nil?
+  end
+
+  # Ends the old field's linger (only one started by this move use, if given).
+  def self.end_linger(battle, ctx = nil)
+    lg = battle.instance_variable_get(:@fe_linger)
+    return if !lg
+    return if ctx && lg[:use] && !lg[:use].equal?(ctx)
+    battle.instance_variable_set(:@fe_linger, nil)
+  end
+
+  # Called after each target's hit is recorded (Battle::Move#pbRecordDamageLost).
+  def self.hit_recorded(battle, user, target, move)
+    ctx = self.move_use(battle)
+    return if !ctx || ctx[:landed] || !ctx[:hit]
+    hmove, huser, htargets = ctx[:hit]
+    return if !hmove.equal?(move) || !huser.equal?(user)
+    return if move.multiHitMove? || move.pbRepeatHit? || user.effects[PBEffects::ParentalBond] > 0
+    last = htargets.reverse.find { |b| b && !b.damageState.unaffected }
+    return if !last.equal?(target)
+    self.move_landed(battle, user, htargets, move)
+  end
+
+  # Checks the move's transitions (once per move use); on a change the old field lingers.
+  def self.move_landed(battle, user, targets, move)
+    ctx = self.move_use(battle)
+    return if ctx && ctx[:landed]
+    ctx[:landed] = true if ctx
+    return if !self.active?(battle) || self.lingering?(battle)
+    old_id = battle.instance_variable_get(:@field_effect)
+    real = battle.instance_variable_get(:@fe_state)
+    return if !real
+    snap = real.dup
+    snap[:counters] = real[:counters].dup
+    self.check_move_transitions(battle, user, targets, move)
+    now = battle.instance_variable_get(:@fe_state)
+    changed = battle.instance_variable_get(:@field_effect) != old_id || !now.equal?(real) ||
+              now[:stage] != snap[:stage]
+    battle.instance_variable_set(:@fe_linger, { :id => old_id, :state => snap, :use => ctx }) if changed
   end
 
   #=============================================================================
@@ -758,6 +838,15 @@ module FieldEffects
   # After a move is used
   #=============================================================================
   def self.after_move(battle, user, targets, move, num_hits)
+    # Transitions first (no-op if the move already changed the field when it landed); a changed field lingers
+    # until the end of this method, so the effects below are the old field's, exactly as before the change.
+    self.move_landed(battle, user, targets, move)
+    self.after_move_effects(battle, user, targets, move, num_hits)
+  ensure
+    self.end_linger(battle, self.move_use(battle))
+  end
+
+  def self.after_move_effects(battle, user, targets, move, num_hits)
     return if !self.active?(battle)
     type = move.calcType
     charging = user.effects[PBEffects::TwoTurnAttack]
@@ -784,7 +873,6 @@ module FieldEffects
     self.hooks(battle, :after_move).each do |h|
       self.safe_call(h, battle, user, targets, move, num_hits)
     end
-    self.check_move_transitions(battle, user, targets, move)
   end
 
   #=============================================================================

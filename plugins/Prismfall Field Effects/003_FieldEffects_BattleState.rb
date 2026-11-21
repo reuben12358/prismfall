@@ -191,8 +191,17 @@ end
 # Battle
 #===============================================================================
 class Battle
-  attr_reader :field_effect
-  attr_reader :fe_state
+  # The battle's field and its state. While the move that changed the field is still resolving (its secondary
+  # effects, the old field's after-move effects: FieldEffects.move_landed), both still read as the old field.
+  def field_effect
+    return @fe_linger[:id] if @fe_linger
+    return @field_effect
+  end
+
+  def fe_state
+    return @fe_linger[:state] if @fe_linger
+    return @fe_state
+  end
 
   alias prismfall_fe_initialize initialize
   def initialize(*args)
@@ -210,7 +219,7 @@ class Battle
   end
 
   def field_stage
-    return @fe_state[:stage]
+    return fe_state[:stage]
   end
 
   # LOCKED API. Changes the field mid-battle. Returns true if it changed.
@@ -224,6 +233,7 @@ class Battle
       FieldEffects.log("change_field: :#{new_id} is not registered; it will have no effects.")
     end
     old_id = @field_effect
+    @fe_linger = nil                       # a real change ends any old field still settling
     @fe_state[:changing] = true
     begin
       (@fe_history ||= []).push(old_id) if old_id != FieldEffects::NONE
@@ -249,8 +259,11 @@ class Battle
   # Changes the current field's stage (see :stages). Returns true if it changed.
   def set_field_stage(new_stage, message = nil)
     return false if @field_effect == FieldEffects::NONE
+    # The old field is settling after a move replaced it: its stage can't change any more.
+    return false if @fe_linger && @fe_linger[:id] != @field_effect
     new_stage = new_stage.to_i.clamp(1, FieldEffects.max_stage(@field_effect))
     return false if new_stage == @fe_state[:stage]
+    @fe_linger = nil
     old_stage = @fe_state[:stage]
     @fe_state[:stage] = new_stage
     @fe_state[:counters] = {}

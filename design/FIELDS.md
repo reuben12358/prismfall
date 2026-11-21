@@ -28,6 +28,8 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
 ## Transition map
 
 `A → B (trigger)`. "×n" = that many uses. Stage changes inside one field are listed in its section.
+A move changes the field the moment it lands (right after its damage); the rest of that move, its secondary
+effects and the old field's after-move effects, still play out as on the old field (FIELD_API §5).
 
 | From | To |
 |---|---|

@@ -98,6 +98,17 @@ class Battle::Move
   end
 
   #-----------------------------------------------------------------------------
+  # A move-triggered field change fires the moment the move lands: right after
+  # the last target's hit is recorded (after the damage and the hit messages,
+  # before the move's secondary effects). See FieldEffects.move_landed.
+  #-----------------------------------------------------------------------------
+  alias prismfall_fe_pbRecordDamageLost pbRecordDamageLost
+  def pbRecordDamageLost(user, target)
+    prismfall_fe_pbRecordDamageLost(user, target)
+    FieldEffects.hit_recorded(@battle, user, target, self)
+  end
+
+  #-----------------------------------------------------------------------------
   # Additional effect chance of the move's own secondary effect
   #-----------------------------------------------------------------------------
   alias prismfall_fe_pbAdditionalEffectChance pbAdditionalEffectChance

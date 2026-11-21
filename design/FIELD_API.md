@@ -284,6 +284,17 @@ progress actually went down. e.g. Frozen Lake: `{ :id => :crack, :types => [:FIR
 `:message` — shown on change (`nil` ⇒ the new field's intro); **no placeholders** in transition messages.
 Only the first completed transition per event fires.
 
+**When a move changes the field.** A move's transitions are checked once per use, the moment it lands: a single-hit
+damaging move right after its damage and hit messages ("It's super effective!"), before its secondary effects; a
+multi-hit move after its last hit; status moves, and moves whose hits all missed, when their own effect is done. So the
+change (the room transition and its message) follows the hit directly. The rest of that move still resolves on the
+field it was used on (the old field *lingers*): its secondary effects, the old field's `:added_effects`,
+`:move_stat_boosts` and `:after_move` hooks, with `battle.field_effect`, `FieldEffects.stage`/`state` reading the old
+field. E.g. Blue Flare on Flooded Dunes: hit -> glassing -> "The white fire flashed the floodwater into scalding steam!"
+-> accuracy drop. The new field takes over after the after-move effects (Life Orb, Eject Button, switching see it). No
+other transition fires while the old field lingers; a real `change_field` (a boss phase) ends it. A hook that used to
+predict a transition (`count + 1 >= uses`) runs after it now: put the line in the rule's `:message` instead.
+
 ```ruby
 :transitions => [
   { :moves => [:SURF, :MUDDYWATER, :WATERSPOUT], :to => :ASHEN_WASTE, :uses => 2,
@@ -365,7 +376,7 @@ All procs are wrapped: an exception is logged (and re-raised only in Debug mode)
 | `:damage` | `\|battle, user, target, move, type, mults, ai\|` | edit `mults[:power_multiplier/:attack_multiplier/:defense_multiplier/:final_damage_multiplier]`. **Called by the AI too (`ai == true`): no messages/side effects when ai** |
 | `:effectiveness` | `\|battle, move, move_type, def_type, user, target, eff\|` | return new Float for one matchup (move may be nil) |
 | `:accuracy` | `\|battle, user, target, move, type, mods\|` | edit `mods[:base_accuracy/:accuracy_multiplier/:evasion_multiplier/...]` |
-| `:after_move` | `\|battle, user, targets, move, num_hits\|` | after a move's hits, before transitions |
+| `:after_move` | `\|battle, user, targets, move, num_hits\|` | after a move's hits and its transitions (§5: if the move just changed the field, on the old field) |
 | `:block_move` | `\|battle, user, move\|` | return String (fail message) or true to make the move fail |
 | `:speed` | `\|battle, battler, mult\|` | return new multiplier (**don't call `battler.pbSpeed` inside**) |
 | `:ai_score` | `\|score, aimove, aiuser, ai, battle\|` | return adjusted AI move score |

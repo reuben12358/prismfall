@@ -41,10 +41,6 @@ FieldEffects.register(:GLASS_DUNES, (lambda do
                                                        :message => "Flying glass caught {1}!" })
         b.pbFaint if b.fainted?
       end
-      if on_field.call(battle)
-        count, uses = FieldEffects.transition_progress(battle, :shatter) || [0, 3]
-        battle.pbDisplay(FieldEffects.format("The glass dunes broke apart!")) if count + 1 >= uses
-      end
     end
     next if !on_field.call(battle)
     # Beam clash bookkeeping: which side landed a great Water / Fire beam this round
@@ -149,7 +145,8 @@ FieldEffects.register(:GLASS_DUNES, (lambda do
         :message => "The flood-sea broke back in over the glass dunes!" },
       { :id => :shatter, :moves => shatter, :category => :damaging, :uses => 3,
         :to => proc { |battle| [:Rain, :HeavyRain].include?(battle.pbWeather) ? :FLOODED_DUNES : :DESERT },
-        :progress_message => "Cracks are spreading through the glass... ({1} more)" },
+        :progress_message => "Cracks are spreading through the glass... ({1} more)",
+        :message => "The glass dunes broke apart!" },
       { :types => [:FIRE], :category => :damaging, :rewind => :shatter,
         :message => "The heat annealed the cracks in the glass!" },
       { :id => :clash, :check => clash, :to => :BLEED, :uses => 2,

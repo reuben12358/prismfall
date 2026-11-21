@@ -10,16 +10,33 @@ class Battle::Battler
   # transitions for moves that fail before their hits (pbMoveFailed? etc.).
   def pbUseMove(choice, specialUsage = false)
     FieldEffects.begin_move_use(@battle)
+    use = FieldEffects.push_move_use(@battle)
     outer_done = @fe_after_move_done
     @fe_after_move_done = false
     weather = FieldEffects.weather_as_for(@battle, self, choice[2])
     FieldEffects.with_weather_as(self, weather) { prismfall_fe_pbUseMove(choice, specialUsage) }
     mv = choice[2]
-    if !@fe_after_move_done && @lastMoveFailed && mv && @lastMoveUsed == mv.id
+    if !@fe_after_move_done && !use[:landed] && @lastMoveFailed && mv && @lastMoveUsed == mv.id
       FieldEffects.failed_move_transitions(@battle, self, mv)
     end
   ensure
+    FieldEffects.pop_move_use(@battle, use) if use
     @fe_after_move_done = outer_done
+  end
+
+  # Remembers the move, user and targets of the hit being processed, so the move's
+  # field change can fire as soon as its damage lands (FieldEffects.hit_recorded).
+  alias prismfall_fe_pbProcessMoveHit pbProcessMoveHit
+  def pbProcessMoveHit(move, user, targets, hitNum, skipAccuracyCheck)
+    use = FieldEffects.move_use(@battle)
+    return prismfall_fe_pbProcessMoveHit(move, user, targets, hitNum, skipAccuracyCheck) if !use
+    outer = use[:hit]
+    use[:hit] = [move, user, targets]
+    begin
+      return prismfall_fe_pbProcessMoveHit(move, user, targets, hitNum, skipAccuracyCheck)
+    ensure
+      use[:hit] = outer
+    end
   end
 
   # Weather a :weather_as rule lends to this battler's current move.
@@ -62,8 +79,10 @@ class Battle::Battler
   end
 
   #-----------------------------------------------------------------------------
-  # Stat boosts on use, after_move hooks, move-triggered transitions. Runs
-  # before the original so U-turn/Eject Button switching can't change "user".
+  # Move-triggered transitions (if the move didn't already change the field when
+  # it landed), then stat boosts on use and after_move hooks (on the old field if
+  # it just changed). Runs before the original so U-turn/Eject Button switching
+  # can't change "user"; the original's effects see the new field.
   #-----------------------------------------------------------------------------
   alias prismfall_fe_pbEffectsAfterMove pbEffectsAfterMove
   def pbEffectsAfterMove(user, targets, move, numHits)
