@@ -153,11 +153,49 @@ def d7_unique():
     return ok, ['%s d7_frost_loom: unique answer over Z2: %r' % ('ok  ' if ok else 'FAIL', sols)]
 
 
+# ---- D4 Brinecut Mine 1F (544): points and brine (map builder 13; layouts/caves.py) ------------------------------------
+# The cart runs where the points send it: P1 left -> A (the blind drift); P1 right + P2 left -> D (the buffer: BUMP, back
+# to the depot); P2 right + P3 left -> B (the ladder gallery); P3 right -> C (the Thistledown adit).  On foot: the depot is
+# sealed from everything north of the Cut (GATE ok 544); A -> the crawlway -> the points gallery (P2, P3, and B) -> the
+# rib's ledge -> the depot; C -> the east ledge -> the depot.  Walking is free, so a state is (P1, P2, P3, where you are)
+# and the moves are lever throws and rides.  Goal: the cart parked at B (it holds B1F's pump lever down).
+S_POINTS = (516, 517, 518); S_CART_B = 519; S_LAKE = 520; V_CART = 516
+D4_FOOT = {'depot': {'depot'}, 'A': {'A', 'U', 'depot'}, 'U': {'A', 'U', 'depot'}, 'B': {'A', 'U', 'depot'}, 'C': {'C', 'depot'}}
+
+
+def d4(crawl=True):
+    def end(p1, p2, p3): return 'A' if not p1 else 'depot' if not p2 else 'B' if not p3 else 'C'
+    def actions(v):
+        p1, p2, p3, at = v; out = []
+        can = D4_FOOT[at] if crawl else ({at, 'depot'} | ({'U'} if at in ('U', 'B') else set()))
+        if 'depot' in can:
+            out.append(('P1', (1 - p1, p2, p3, 'depot')))
+            out.append(('ride', (p1, p2, p3, end(p1, p2, p3))))
+        if 'U' in can:
+            out.append(('P2', (p1, 1 - p2, p3, 'U')))
+            out.append(('P3', (p1, p2, 1 - p3, 'U')))
+        return out
+    name = 'd4_points (544)' if crawl else 'd4_points (544) without the crawlway'
+    return machine(name, (0, 0, 0, 'depot'), actions, lambda v: v[3] == 'B', moves=4 if crawl else None, rating=3 if crawl else None)
+
+
+def d4_needs_crawl():
+    ok, lines = d4(crawl=False)
+    if ok: return False, ['FAIL d4_points (544): solvable without the crawlway (the hidden passage should be required)']
+    return True, ['  proved: unsolvable without the crawlway (the hidden passage)']
+
+
 CHECKS = ([(frost_model, dict(moves=2, rating=3, without={'the right thread': ['right thread']}))] if os.path.exists(MAP562) else []) + \
          ([(silk_model, dict(moves=2, rating=2, without={'post alpha': ['post alpha'], 'post beta': ['post beta']}))] if os.path.exists(MAP525) else [])
-EXTRA = [d1, d2, d3, d7_unique]
+EXTRA = [d1, d2, d3, d7_unique, d4, d4_needs_crawl]
 
 ROOMS = {
+    'd4_points': dict(name='The Brinecut points', map=544, home=False,
+                      reset=dict(switches={516: False, 517: False, 518: False, 519: False}, vars={516: 0}),
+                      solved=dict(switches={516: True, 517: True, 518: False, 519: True}, vars={516: 2}),
+                      hints=["The carts go where the points send them. P1 is by the depot; P2 and P3 are thrown from up in the points gallery.",
+                             "Nobody walks the Cut. Ride to the blind drift first: the old miners left a crawlway out of it, under the chalk X.",
+                             "Ride to the drift, crawl through to the points gallery, throw P2. Then go back down, throw P1 east and ride: the cart stops at the ladder."]),
     'd1_chime': dict(name='The Chime Rows', map=522, reset=dict(vars={V_CHIME: 0}), home=False, solved=dict(vars={V_CHIME: 3}),
                      hints=["The chime post by the gate plays a little phrase. The cracked trees each ring one note of it.",
                             "Low, middle, high. Walk past the cracked trees in that order; a wrong note starts the phrase over.",

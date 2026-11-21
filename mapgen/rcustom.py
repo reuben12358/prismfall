@@ -333,6 +333,10 @@ def main():
         sheet.paste(dyegrass(tile, col), ((k % 8) * 32, (k // 8) * 32))
         props[k] = (t126['passages'][390], t126['priorities'][390], t126['terrain_tags'][390] if t126['terrain_tags'][390] <= 16 else 0)
         dyed[name] = k; k += 1
+    k0 = k
+    import cdraw                                           # map builder 13: the cave kit (tileset 57), after everything
+    k = draw_in(cdraw.pieces(), k, dedup=True)
+    print('cave kit tiles', k - k0)
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},

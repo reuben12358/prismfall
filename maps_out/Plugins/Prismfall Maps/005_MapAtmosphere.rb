@@ -51,11 +51,14 @@ module PrismfallMaps
     528 => [8, 4, -8, 0],   # Marram Down
     540 => [6, 4, -2, 0],   # Thistledown Lea
     541 => [0, 0, 4, 18],   # The Grey Saltings
+    544 => [-8, -10, -4, 10],   # Brinecut Mine 1F
+    545 => [-14, -12, -2, 20],   # Brinecut Mine B1F
     552 => [6, 4, -2, 0],   # The Dyers' Ford
     560 => [-6, -2, 10, 10],   # Frostflat Causeway
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs
     562 => [-10, -4, 14, 16],   # The Rimewood
     563 => [-6, -2, 16, 12],   # Rimewood Glade
+    564 => [-12, -6, 6, 16],   # Gullcry Caves
     566 => [0, 0, 4, 6],   # Spinners' Rise
     568 => [-10, -22, 20, 60],   # The Rehearsal
     570 => [-8, -4, 12, 12],   # Frostwick
@@ -89,7 +92,10 @@ module PrismfallMaps
     520 => ["prismfall_seamist", 0, 30, 0, 200, 1, 0],   # The Ferrymen's Mile
     524 => ["prismfall_spores", 0, 40, 1, 100, 1, -1],   # Gossamer Wood
     541 => ["prismfall_seamist", 0, 40, 0, 200, 1, 0],   # The Grey Saltings
+    544 => ["prismfall_cave", 0, 36, 1, 100, 1, 0],   # Brinecut Mine 1F
+    545 => ["prismfall_cave", 0, 44, 1, 100, 1, 0],   # Brinecut Mine B1F
     562 => ["prismfall_spores", 0, 30, 1, 100, 1, 1],   # The Rimewood
+    564 => ["prismfall_seamist", 0, 34, 1, 100, 1, 0],   # Gullcry Caves
     568 => ["prismfall_seamist", 0, 50, 0, 100, 1, 0],   # The Rehearsal
     570 => ["prismfall_seamist", 0, 30, 0, 100, 1, 0],   # Frostwick
     920 => ["prismfall_seamist", 0, 24, 0, 200, 1, 0],   # The Rimed Sands

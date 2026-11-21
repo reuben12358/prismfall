@@ -639,6 +639,47 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   lane next to a wood). Where a wall matters (a gate, a trail maze), fill unpainted `T` cells with a solid snowy shrub
   (10371/10551) and prove it with `gates:`.
 
+## 2p. Map builder 13 (2026-11-20): the PF cave kit, Brinecut Mine and Gullcry Caves rebuilt
+- **Cave kit** (`mapgen/cdraw.py`, appended by rcustom AFTER every earlier block, so no earlier id moved; the pf part
+  grew to `CUSTOM_ROWS = 900`). Three rock palettes, each a full kit: **S** salt (bedded rock salt, rose beds,
+  Brinecut), **L** slate (wet laminated slate with barnacles and weed, Gullcry), **E** earth (columnar brown rock, for
+  later caves). Per palette: wall kit `<p>_N/W/E/lip/face/base/in*` (rkit KITS `cvS` / `cvL` / `cvE`, N rims solid),
+  floors `<p>_f0-3`, soft floor patches `<p>_floorpatch_00..47` (salt crust / wet shingle / dust), decals, the
+  rock MASS in four darkness tiers `<p>_m0-3a/b` (darkness edges), `<p>_mP` (mass art on a passable tile: crawlways),
+  ledges `<p>l_*`, rock-cut stairs `<p>_stair*`, rocks, a stalagmite, rubble. Shared: shaft `cv_hole`, wall ladder
+  `cv_ladder`, crystals (`cv_xsalt` halite, `cv_xblue*`, `cv_xsea*`, `cv_xrose2`), glow fungus, mine props (rails,
+  trestles over a chasm `cv_tres_*`, points plates, buffer, carts, levers, pit-prop frame, posts, lamps lit/unlit, wall
+  lamps, tools, salt blocks, the brine pump), sea-cave props (barnacled rock, kelp, wrack, gull nest, guano, driftwood,
+  the light shaft `cv_shaft`, the tide-mark rock, `cv_flood` / `cv_bar`), the chasm `cv_pit*`. Event charsets
+  (`mapgen/charsets.py` -> `graphics/Characters/`): `pf_cave_rock_S/L/E` (Rock Smash, pbSmashEvent rows),
+  `pf_cave_boulder_S/L/E` (Strength), `pf_minecart`. `rock_smash` events take `sprite:`; previews now draw project
+  charsets. `python3 -I cdraw.py out.png` draws the contact sheet.
+- **Tileset 57 "PF Rejuv Cave"** (shares the PF Rejuv sheet): derived autotiles `Salt Lake` (glowing brine in salt
+  crust), `Sea Cave` (dark teal sea in wet slate), `Cave Pool`, plus Sea deep and the waterfalls.
+- **`layouts/cavekit.py`** (`Cave(RMap)`): rock mass everywhere, rooms carved with `box` / `room` / `gallery`; heights
+  PIT 0 (chasm), FLOOR 1, TER 2, MASS 6; rkit.cliffs draws every height change (mass walls, terrace faces, chasm walls);
+  `rails()` lays orthogonal track (rails on floor, trestles over pits, points at junctions) and `Cave.path()` gives the
+  ride string; `crawl()` (hidden passages), `ledge()`, `stairs()`; mass darkens with distance; wall-foot shadows.
+  **`layouts/caves.py`** writes 544, 545, 564 (in relayout.sh). 545-547 moved out of `544_brinecut_mine.yaml`
+  (545 is generated; 546/547 are now `specs/546_thistledown_manor.yaml`, unchanged).
+- **544 Brinecut Mine 1F (D4 "points and brine", proved 4 moves / 22 states, rating 3; unsolvable without the
+  crawlway):** the depot hall (Salt Miner Ebb: TM98; P1; the salt-cart siding), the Cut (an open stope crossed only by
+  the cart on trestles: `GATE ok`), drift A (Hard Stone; the chalk-X crawlway = the hidden passage), the points
+  gallery (P2, P3; Black Belt Taro) and the ladder gallery (the shaft to B1F), C (Black Belt Saul) and the Thistledown
+  adit with its one-way east ledge back to the depot, the rib ledge from the points gallery. Runtime
+  `pfm_cart_ride` (`mapgen/ruby/011_Caves.rb`): the cart and player ride the track; D bumps and rolls back; V516 = where
+  the cart stands, S519 = parked at B. Trainers Bram, Taro, Saul (all in PBS).
+- **545 B1F (dark, `DarkMap`):** five unlit miners' lamps (`pfm_light_lamp`: each widens the darkness circle,
+  `pfm_cave_light` from the map's parallel event); the glowing salt lake; the brine pump drains it only with the cart
+  parked at B (S519 -> S520) and a salt causeway rises to the amber islet (`GATE ok`: shut before); Old Amber, hidden
+  Nugget, Hikers Gorse and Holt.
+- **564 Gullcry Caves (D6 "the tide counts your steps"):** slate sea caves on the 561 cliff path (the caves stay the
+  only way north). Tide clock `pfm_tide_tick` (step hook: V526 steps, S526 high tide every 24 steps; gull cries in the
+  last three; the surge carries you off a flooded bar to dry rock). The always-open way runs up the west gallery
+  (stairs) and the north chamber; the basin crossing is a 19-bar shortcut (start it on the turn), TEACH is a 7-bar
+  inlet to the Pearl alcove; the gull roost tells how near the turn is; the tide-mark rock changes colour. Hidden
+  passage: the weed curtain off the east shelf to a grotto (Revive). Light shafts from blowholes; Hiker Torvald.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,
@@ -788,7 +829,7 @@ above the mat facing up, and leave onto the door tile, where the door animates y
     Ebbmouth's east edge stays closed with trees until 580 exists.
 - The River Ebb's day/night current flip in town is not done; the Outside tileset has no current autotiles. Gym 3 uses
   event-driven currents instead.
-- The mine and Gullcry Caves share the base project's Rock Cave template, so they look alike: [TODO art].
+- (Fixed by map builder 13: the mine and Gullcry Caves are on the PF cave kit, tileset 57.)
 - Deviation from maps.json: The Grey Saltings's north edge joins Thistledown Lea's **south** edge at x=2–9. maps.json paired 540-west with
   541-north, which isn't a legal Essentials edge pair.
 - Story items without item data (Meridian badge case, Fellowship card, Gilded King page, Granny Loom's shuttle) are text

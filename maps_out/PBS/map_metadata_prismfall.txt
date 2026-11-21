@@ -358,6 +358,7 @@ BattleBack = cave1
 Name = Brinecut Mine
 MapPosition = 0,8,16
 BattleBack = cave1
+DarkMap = true
 #-------------------------------
 [546]   # Thistledown Manor
 Name = Thistledown Manor

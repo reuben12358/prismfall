@@ -111,6 +111,15 @@ if 'qy_lipm0' in STAMPS:
             KITS[_k] = dict(N=tuple(P1('%s_N%s' % (_k, e)) for e in 'wme'), W=P1(_k + '_W'), E=P1(_k + '_E'),
                             rows=[tuple(P1('%s_%s%s' % (_k, row, e)) for e in 'wme') for row in ('lip', 'face', 'base')],
                             inW=None, inE=None, l0=False)
+    # map builder 13: the cave kits (cdraw.py): salt (Brinecut), slate (Gullcry), earth - rock walls with lit lips,
+    # columnar faces and a shaded foot; mass walls and terraces share them (the lip shows the ground above)
+    for _p in 'SLET':
+        if _p + '_lipm' in STAMPS:
+            KITS['cv' + _p] = dict(N=tuple(P1('%s_N%s' % (_p, e)) for e in 'wme'), W=P1(_p + '_W'), E=P1(_p + '_E'),
+                                   rows=[tuple(P1('%s_%s%s' % (_p, row, e)) for e in 'wme') for row in ('lip', 'face', 'base')],
+                                   inW=(P1(_p + '_inW0'), P1(_p + '_inW1')), inE=(P1(_p + '_inE0'), P1(_p + '_inE1')), l0=False,
+                                   alt={P1(_p + '_facem'): (P1(_p + '_facem1'), 0.35), P1(_p + '_lipm'): (P1(_p + '_lipm1'), 0.35),
+                                        P1(_p + '_basem'): (P1(_p + '_facem2'), 0.0)})
 # the old flat dark-brown plank slab (Sheridan_2 544-546) once used as stairs: build.py --strict now rejects it
 OLD_SLAB = (C('sh', 544), C('sh', 545), C('sh', 546))
 

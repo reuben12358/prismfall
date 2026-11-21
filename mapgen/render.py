@@ -93,6 +93,8 @@ def charframe(name, hue, direction, pattern):
     if key in _CHARS:
         return _CHARS[key]
     p = os.path.join(GFX, 'Characters', name + '.png')
+    own = os.path.join(os.path.dirname(HERE), 'graphics', 'Characters', name + '.png')   # map builder 13: project charsets
+    if not os.path.exists(p) and os.path.exists(own): p = own
     im = None
     if os.path.exists(p):
         sh = Image.open(p).convert('RGBA')

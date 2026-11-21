@@ -33,7 +33,7 @@ PARTS = [('gl', 'rejuvenation', 62, 'Goldenleaf Forrest'),
          ('rb4', 'reborn', 43, 'Route4'),
          ('ap', 'rejuvenation', 2, 'Aevium Past'),
          ('pf', None, None, None)]          # Prismfall custom pieces (rj_custom.png, built by rcustom.py)
-CUSTOM_ROWS = 800          # the pf part is the last part, so growing it moves no id (builder 7: 300 -> 400; builder 8: -> 800)
+CUSTOM_ROWS = 900          # the pf part is the last part, so growing it moves no id (builder 7: 300 -> 400; builder 8: -> 800)
 
 # every autotile any PF Rejuv tileset may use: (game, source tileset whose passages it takes, source name)
 AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'), ('rejuvenation', 127, 'Dirt'),
@@ -48,7 +48,9 @@ AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'),
          ('rejuvenation', 2, 'White path2'), ('rejuvenation', 7, 'Sand shore'),
          ('rejuvenation', 2, 'Hoenn Sea'), ('rejuvenation', 7, 'Dirt Route 5'), ('rejuvenation', 2, 'Still water - Copy'),
          ('pf', 62, 'Gravel Spring'), ('pf', 95, 'Packed Snow'), ('pf', 43, 'Frozen Pond'),
-         ('pf', 75, 'Saltmere Cobbles'), ('pf', None, 'Saltmere Flags')]          # map builder 8 (tileset 55)
+         ('pf', 75, 'Saltmere Cobbles'), ('pf', None, 'Saltmere Flags'),           # map builder 8 (tileset 55)
+         ('pf', 43, 'Salt Lake'), ('pf', 43, 'Sea Cave'), ('pf', 43, 'Cave Pool'),   # map builder 13 (tileset 57)
+         ('pf', 43, 'Lock Water')]                                                     # map builder 13 (tileset 58, Gym 3)
 
 
 def _ice(x, y):
@@ -85,6 +87,25 @@ DERIVED['Saltmere Cobbles'] = ('rejuvenation', 'CobblestoneGrass',
 DERIVED['Saltmere Flags'] = ('rejuvenation', 'Brick path',
                              {(216, 224, 224): (212, 196, 166), (224, 232, 232): (226, 214, 186), (192, 200, 208): (188, 170, 140),
                               (168, 184, 200): (150, 132, 108)}, {})
+# map builder 13: cave water, all three from Reborn's Still water grey (a stone-rimmed pool):
+#  - Salt Lake: Brinecut's brine, pale glowing turquoise in a rim of salt crust (rose-white), on the mine floor
+#  - Sea Cave: Gullcry's sea water, dark teal in a rim of wet slate, on shingle
+#  - Cave Pool: still water in warm brown rock
+_SWG = {'water': (96, 160, 216), 'deep': (48, 96, 160), 'r0': (63, 66, 80), 'r1': (92, 94, 102), 'r2': (120, 121, 130),
+        'r3': (155, 156, 166), 'r4': (183, 185, 195), 'green': (66, 138, 77)}
+def _cave_water(water, deep, r0, r1, r2, r3, r4, ground):
+    return {_SWG['water']: water, _SWG['deep']: deep, _SWG['r0']: r0, _SWG['r1']: r1, _SWG['r2']: r2, _SWG['r3']: r3,
+            _SWG['r4']: r4, _SWG['green']: ground}
+DERIVED['Salt Lake'] = ('reborn', 'Still water grey', _cave_water((150, 222, 214), (96, 184, 188), (150, 112, 124), (196, 176, 184),
+                        (222, 210, 212), (238, 232, 230), (250, 246, 242), (142, 130, 120)), {'tag': 6})
+DERIVED['Sea Cave'] = ('reborn', 'Still water grey', _cave_water((48, 116, 128), (30, 82, 98), (28, 34, 50), (48, 58, 78),
+                       (72, 86, 108), (100, 116, 138), (134, 150, 170), (98, 98, 98)), {'tag': 7})
+DERIVED['Cave Pool'] = ('reborn', 'Still water grey', _cave_water((70, 120, 150), (40, 76, 108), (58, 38, 34), (90, 62, 48),
+                        (122, 88, 64), (154, 118, 84), (186, 152, 108), (128, 102, 78)), {'tag': 6})
+# Lock Water: the Tidelock Gym's basins - the Ebb's black-blue river water in a rim of Ebbmouth's grey-blue quay stone;
+# solid and not surfable (terrain tag 0): the basins are crossed by raft, never by Surf
+DERIVED['Lock Water'] = ('reborn', 'Still water grey', _cave_water((40, 74, 108), (26, 52, 84), (52, 56, 70), (66, 70, 84),
+                         (92, 98, 114), (116, 122, 138), (146, 152, 166), (92, 98, 114)), {'tag': 0, 'pas': 15})
 VBASE = 100000
 # v21.1 terrain tags for water autotiles these games leave at 0 (they script surfing differently): 5 DeepWater,
 # 6 StillWater, 7 Water, 8 Waterfall, 9 WaterfallCrest.  Fishing and surfing need them.
@@ -113,6 +134,12 @@ TILESETS = {
     56: ('PF Rejuv Shore', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore'),
                             ('rejuvenation', 'Sea(Grass)'), ('rejuvenation', 'DirtDark'), ('pf', 'Gravel Spring'),
                             ('rejuvenation', 'Dirt')]),
+    # map builder 13: caves (Brinecut Mine 544/545, Gullcry Caves 564): the cave kit (cdraw.py) and cave water
+    57: ('PF Rejuv Cave', [('pf', 'Salt Lake'), ('pf', 'Sea Cave'), ('pf', 'Cave Pool'), ('rejuvenation', 'Sea deep'),
+                           ('rejuvenation', 'Waterfall'), ('rejuvenation', 'Waterfall crest'), ('rejuvenation', 'Waterfall bottom')]),
+    # map builder 13: the Tidelock Gym (Gym 3, 170-174): the timber lock hall kit (cdraw 'T'), lock water, the river
+    58: ('PF Rejuv Locks', [('pf', 'Lock Water'), ('rejuvenation', 'Sea deep'), ('pf', 'Sea Cave'), ('rejuvenation', 'Waterfall'),
+                            ('rejuvenation', 'Waterfall crest'), ('rejuvenation', 'Waterfall bottom'), ('pf', 'Cave Pool')]),
     55: ('PF Rejuv City', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore_2'),
                            ('pf', 'Saltmere Cobbles'), ('pf', 'Saltmere Flags'), ('rejuvenation', 'DirtDark'),
                            ('pf', 'Gravel Spring')]),

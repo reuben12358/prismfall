@@ -66,6 +66,14 @@ if defined?(PrismfallPuzzles)
     :reset => { :vars => { 312 => 0 } },
     :hints => ["The crank turns the floor, and whoever is leaning on it.", "You don't have to walk to the far side. Ride there.", "Stand left of the crank and turn it three times: you ride from west round to south. Then walk east and up the right-hand corridor."],
   })
+  PrismfallPuzzles.room(:d4_points, {
+    :name => "The Brinecut points",
+    :map => 544,
+    :home => false,
+    :reset => { :switches => { 516 => false, 517 => false, 518 => false, 519 => false }, :vars => { 516 => 0 } },
+    :solved => { :switches => { 516 => true, 517 => true, 518 => false, 519 => true }, :vars => { 516 => 2 } },
+    :hints => ["The carts go where the points send them. P1 is by the depot; P2 and P3 are thrown from up in the points gallery.", "Nobody walks the Cut. Ride to the blind drift first: the old miners left a crawlway out of it, under the chalk X.", "Ride to the drift, crawl through to the points gallery, throw P2. Then go back down, throw P1 east and ride: the cart stops at the ladder."],
+  })
   PrismfallPuzzles.room(:d1_chime, {
     :name => "The Chime Rows",
     :map => 522,

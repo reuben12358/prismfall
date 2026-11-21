@@ -6,7 +6,8 @@
                         so the Rock Smash animation plays through them.
 
     python3 -I mapgen/charsets.py"""
-import os, random
+import os, random, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -73,5 +74,86 @@ def rime_curtain():
     p = os.path.join(OUT, 'pf_rime_curtain.png'); sheet.save(p); print('wrote', p)
 
 
+# ------------------------------------------------------------------ map builder 13: cave event charsets (cdraw palettes)
+def _frame_from16(im16, dy=0):
+    """a 16x16 logical piece doubled into the bottom of a 32x48 frame"""
+    fr = Image.new('RGBA', (FW, FH), (0, 0, 0, 0))
+    big = im16.resize((32, 32), Image.NEAREST)
+    fr.alpha_composite(big, (0, FH - 32 - dy))
+    return fr
+
+
+def cave_rock(p):
+    """Rock Smash rock (rows follow pbSmashEvent: whole, cracked, shattering, rubble)"""
+    import cdraw
+    pal = cdraw.PAL[p]['rock']
+    sheet = Image.new('RGBA', (FW * 4, FH * 4), (0, 0, 0, 0))
+    for row in range(4):
+        base = cdraw.rock1(p, 0)
+        if row >= 1:                                         # a crack runs down the face
+            for i in range(9):
+                x = 6 + (i % 3 == 1) - (i % 4 == 3); y = 5 + i
+                if base.getpixel((x, y))[3]: base.putpixel((x, y), pal[0] + (255,))
+                if row >= 2 and base.getpixel((x + 3, y))[3] and i % 2: base.putpixel((x + 3, y), pal[0] + (255,))
+        if row == 2:                                         # flying chips
+            for (x, y) in ((2, 4), (13, 3), (1, 9), (14, 8)): base.putpixel((x, y), pal[3] + (255,))
+        if row == 3:
+            base = cdraw.rubble(p, 1)
+        for col in range(4):
+            sheet.paste(_frame_from16(base), (col * FW, row * FH))
+    os.makedirs(OUT, exist_ok=True)
+    pth = os.path.join(OUT, 'pf_cave_rock_%s.png' % p); sheet.save(pth); print('wrote', pth)
+
+
+def cave_boulder(p):
+    """Strength boulder: a big rounded block of the cave's rock, the same in every frame"""
+    import cdraw
+    pal = cdraw.PAL[p]['rock']
+    im = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+    for y in range(16):
+        for x in range(16):
+            dx, dy = (x + 0.5 - 8) / 7.2, (y + 0.5 - 8.5) / 6.6
+            d = dx * dx + dy * dy
+            if d > 1: continue
+            if d > 0.8: c = pal[0]
+            else:
+                l = -(dx + dy * 1.1) * 1.4 + 2.8 + (cdraw.nz(x, y, 11) - 0.5) * 0.5
+                c = pal[int(max(1, min(5, round(l))))]
+            im.putpixel((x, y), c[:3] + (255,))
+    for x in range(4, 9): im.putpixel((x, 6 + (x % 2)), pal[1][:3] + (255,))      # a seam
+    sheet = Image.new('RGBA', (FW * 4, FH * 4), (0, 0, 0, 0))
+    for row in range(4):
+        for col in range(4): sheet.paste(_frame_from16(im), (col * FW, row * FH))
+    pth = os.path.join(OUT, 'pf_cave_boulder_%s.png' % p); sheet.save(pth); print('wrote', pth)
+
+
+def minecart():
+    """the Brinecut minecart: rows down / left / right / up, wheels turning across the four frames"""
+    import cdraw
+    sheet = Image.new('RGBA', (FW * 4, FH * 4), (0, 0, 0, 0))
+    for row in range(4):
+        for col in range(4):
+            im = cdraw.cart(False)
+            if row in (1, 2):                                   # side view: longer body, wheel spokes turn
+                im = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+                for y in range(5, 12):
+                    for x in range(1, 15):
+                        c = cdraw.IRON[2] if y == 5 else cdraw.IRON[1] if y < 11 else cdraw.IRON[0]
+                        if x in (1, 14): c = cdraw.IRON[0]
+                        im.putpixel((x, y), c)
+                for wx in (4, 11):
+                    for dy in (-1, 0, 1):
+                        for dx in (-1, 0, 1): im.putpixel((wx + dx, 13 + dy), cdraw.IRON[0])
+                    sx, sy = [(1, 0), (0, 1), (-1, 0), (0, -1)][col]
+                    im.putpixel((wx + sx, 13 + sy), cdraw.IRON[3])
+            elif col % 2:
+                for x in (4, 11): im.putpixel((x, 14), cdraw.IRON[3])
+            sheet.paste(_frame_from16(im, dy=2), (col * FW, row * FH))
+    pth = os.path.join(OUT, 'pf_minecart.png'); sheet.save(pth); print('wrote', pth)
+
+
 if __name__ == '__main__':
     rime_curtain()
+    for _p in 'SLE':
+        cave_rock(_p); cave_boulder(_p)
+    minecart()
