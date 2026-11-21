@@ -75,6 +75,7 @@ module PrismfallEBDX
       sprites = scene.sprites
       fade = nil
       trans = LIVE_TRANSITIONS ? PrismfallEBDX.transition_for(old_id, PrismfallEBDX.current_field(battle)) : nil
+      trans = PrismfallEBDX.staged_fallback(trans)        # staged transitions need the EBDX room
       trans = [255, 255, 255] if trans.is_a?(Symbol)   # EBDX animations don't exist here
       if trans.is_a?(Array) && scene.respond_to?(:viewport) && scene.viewport
         fade = Sprite.new(scene.viewport)

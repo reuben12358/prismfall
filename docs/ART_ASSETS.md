@@ -166,6 +166,11 @@ FACTORY→SCRAPYARD, and FLOWER_GARDEN stages 1–5.
   should stay behind a painted object needs a cut-out of that object above it (MOUNTAIN: `pf_mountain_crags`
   over the foam strip).
 - With a `*_night` room, any `:art_extras` or `:layers` element that has a `<bitmap>_night.png` uses it.
+- **Field changes can play in the room.** `STAGED_TRANSITIONS` (Bridge 001) replaces EBDX's flat colour fade for a
+  pair of fields whose rooms share a layout: `art/battlebacks/transitions.py` cuts the new room into reveal bands by
+  arrival time from an impact point (plus heat-rim and crackle images per band) into
+  `Graphics/EBDX/Battlebacks/transitions/<name>/`, and `008_Bridge_Transitions.rb` plays them as room layers.
+  Rebuild the bands whenever the new room changes (`build_backdrops.py GLASS_DUNES` does it for the glass quench).
 - Trainer intro backgrounds are a separate EBDX feature (`Graphics/EBDX/Transitions/`). They aren't needed for fields.
 
 ## 5. Asset checklist

@@ -48,6 +48,9 @@ def main(argv):
     write_ruby(profiles, prev)
     json.dump(origins, open(ORIGINS, "w"), indent=1, sort_keys=True)
     write_credits(origins)
+    if "GLASS_DUNES" in want:
+        import transitions          # the staged flood/desert -> glass transition is cut from the glass room
+        transitions.build()
 
 
 CREDITS = os.path.join(ROOT, "docs", "CREDITS.md")

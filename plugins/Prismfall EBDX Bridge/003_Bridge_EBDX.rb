@@ -50,7 +50,12 @@ module PrismfallEBDX
       return if !data
       room.prismfall_overlay_specs = nil   # a new field restarts any borrowing overlay
       trans = LIVE_TRANSITIONS ? PrismfallEBDX.transition_for(old_id, id) : nil
-      if trans.is_a?(Symbol)
+      if PrismfallEBDX.staged?(trans)
+        # in-room staged transition; false = its art doesn't fit this room: plain fade through its fallback colour
+        if !room.prismfall_staged(data, trans, PrismfallEBDX.impact_side(battle))
+          room.reconfigure(data, PrismfallEBDX.to_color(PrismfallEBDX.staged_fallback(trans)))
+        end
+      elsif trans.is_a?(Symbol)
         room.reconfigure(data, trans)
         room.configure                      # no-op if the animation already applied it
       elsif trans.is_a?(Array)
@@ -379,7 +384,7 @@ if defined?(BattleSceneRoom) && defined?(EliteBattle)
             spr.ex = l[:base_x] + ((s[:amp] || 6) * Math.sin(w))
           end
         end
-        spr.opacity = o
+        spr.opacity = @pf_fade ? o * @pf_fade : o   # @pf_fade: staged transitions fade whole layer sets
         if l[:frames] > 1
           f = (t / (s[:frame_time] || 8).to_f).to_i % l[:frames]
           spr.src_rect.x = f * l[:fw]

@@ -11,6 +11,8 @@
 #                                  camera sweep, send-out) through the hold, to Captures/bd_<shot>/
 #   BD_OUTDOOR=1                   treat the map as outdoor (EBDX day/night tint + *_night rooms)
 #   BD_CAMLOG=1                    log the room camera (bg x/y/zoom) per frame to Captures/camlog_<shot>.tsv
+#   BD_IMPACT=player               BD_TRANSITIONS: pretend the foe used the last move (staged transitions then
+#                                  start at the player's base instead of the foe's)
 # Output: Captures/backdrops/<field>[_s<stage>][_<time>].png (+ _clean = no databoxes)
 #===============================================================================
 module BackdropStills
@@ -129,6 +131,7 @@ module BackdropStills
     DemoRun.every = 2
     90.times { scene.pbUpdate }
     @chain[1..].each do |id, st|
+      battle.lastMoveUser = 1 if ENV["BD_IMPACT"] == "player" && battle.respond_to?(:lastMoveUser=)
       if battle.field_effect == id
         battle.set_field_stage(st)
       else

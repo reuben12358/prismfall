@@ -47,6 +47,19 @@ sky; the barrier continued in perspective), NEW_MOON (all stages: city lights in
 `make_contact_sheet.py --suffix _wide`). Both contact sheets were shot with the battlers' feet on their bases
 (`007_Bridge_Placement.rb`), the player bases 1.5x the foe's and the ally's point raised (see
 `../placement/README.md`, item 5).
+Glass transition v2 (Nov 21): FLOODED_DUNES/DESERT -> GLASS_DUNES no longer use EBDX's colour fade (a flat mint
+card over the whole room for 8 frames, the Pokemon floating on nothing, then the whole glass room - glints, plumes,
+glow layers - popping in at once, ~0.27 s in all). It plays in the room now (`008_Bridge_Transitions.rb`, assets from
+`art/battlebacks/transitions.py`): a white-hot impact glow and heat ring at the base opposite the last move's user,
+the glass revealed band by band from there (fastest along the old flood water, the sky last as rising haze) under a
+white-hot edge that cools through orange, steam where the front crosses water, a crackle of light through the new
+glass, then the room rebuilt under the finished reveal and its own layers faded in (~2 s; the battlers stay on top).
+`glass_transition_v2_before.gif` / `_after.gif` (half speed, captioned with time and phase from the field change),
+`glass_transition_v2_blueflare.gif` (a real battle: Reshiram's Blue Flare), `glass_transition_v2_keys.png` (before,
+after from the foe's / the player's base, desert -> glass, Blue Flare, aligned at t = 0). `BD_IMPACT=player` makes a
+`BD_TRANSITIONS` chain start at the player's base; `make_ab_gif.py` builds the captioned GIFs and the strip. Other
+field changes still use the colour fade (checked: DESERT -> FLOODED, GLASS -> FLOODED, VOLCANIC -> ASHEN, MEADOW ->
+WILDFIRE).
 Doubles: `double_prism_arena.png`,
 `double_silkwood.png` (`BD_DOUBLE=1`). Night: `*_night.png` (`BD_TIME=night`).
 
