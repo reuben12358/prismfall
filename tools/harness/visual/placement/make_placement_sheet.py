@@ -2,6 +2,7 @@
 """Before/after sheet and battle-start GIF from the placement probe (003_PlacementProbe.rb).
 
   python3 -I make_placement_sheet.py sheet <before_dir> <after_dir> <out.png> [case ...]
+  python3 -I make_placement_sheet.py ally <before_dir> <after_dir> <out.png> case ...
   python3 -I make_placement_sheet.py gif <intro_dir> <frames_subdir> <out_base> [frame_ms=66] [last_frame]
 
 Marks drawn on the real-engine frames (never retouched otherwise):
@@ -13,11 +14,15 @@ import csv, os, sys
 from PIL import Image, ImageDraw
 
 S = 2.25
-FOE, PLAYER = (234, 152), (116, 252)                     # room px (PBS/EBDX/metrics.txt BATTLERPOS)
-DEFAULT_BASES = [(526.5, 342.0, 116, 25), (261.0, 567.0, 232, 50)]   # HD centre, rx, ry (bblib FOE / PLAYER)
-# painted bases that are not the default ones: (dir tag, case prefix) -> [foe, player] (None = no base)
+FOE, PLAYER = (234, 152), (116, 244)                     # room px: EBDX BATTLERPOS, player raised by the Bridge
+# painted bases, HD centre, rx, ry (bblib FOE / PLAYER): "before"/"v1" = player base 2x the foe's at EBDX's point,
+# "after" = 1.5x (bblib.PLAYER_SCALE) at the raised point
+OLD_BASES = [(526.5, 342.0, 116, 25), (261.0, 567.0, 232, 50)]
+NEW_BASES = [(526.5, 342.0, 116, 25), (261.0, 549.0, 174, 37.5)]
+# rooms whose bases differ: (dir tag, case prefix) -> [foe, player] (None = no base)
 BASES = {("before", "meadow"): [(492.0, 325.0, 118, 26), None],
-         ("after", "meadow"): [(526.0, 343.0, 116, 26), (260.0, 568.0, 232, 54)]}
+         ("v1", "meadow"): [(526.0, 343.0, 116, 26), (260.0, 568.0, 232, 54)],
+         ("after", "meadow"): [(526.0, 343.0, 116, 26), (261.0, 548.0, 175, 39)]}
 CYAN, RED, YELLOW = (60, 230, 255), (255, 40, 40), (255, 230, 40)
 
 
@@ -40,7 +45,7 @@ def bases_for(tag, case):
     for (t, pre), b in BASES.items():
         if t == tag and case.startswith(pre + "__"):
             return b
-    return DEFAULT_BASES
+    return NEW_BASES if tag == "after" else OLD_BASES
 
 
 def mark(im, rows, case, view, tag, ox=0, oy=0, sc=1.0):
@@ -88,9 +93,8 @@ def sheet(bdir, adir, out, cases):
                    "(1/2).", fill=(235, 235, 235))
     d.text((6, 20), "cyan = base painted in the room   red + = where EBDX stands the battler   yellow = sprite's "
                     "lowest opaque row (its feet) in that frame", fill=(235, 235, 235))
-    d.text((6, 36), "BEFORE: EBDX's own species metrics (feet 2..26 px off the anchor), MEADOW's patch off the anchor, "
-                    "no player patch. AFTER: Bridge grounding (foe feet 16 px in front of the base centre, player's on it, "
-                    "floaters 20 px above that line), bases moved.",
+    d.text((6, 36), "BEFORE: EBDX's species metrics, MEADOW's patch off the anchor, player base 2x the foe's. AFTER: Bridge "
+                    "grounding (foe feet 16 px in front of the centre, floaters 20 px up), bases moved, player base 1.5x.",
            fill=(200, 200, 200))
     y = head
     for c in cases:
@@ -115,6 +119,41 @@ def sheet(bdir, adir, out, cases):
             d.text((x + 4, y + lab + 2), tag.upper() + " - send-out", fill=(255, 255, 255))
             x += sw + 4
         y += mh + lab + 6
+    img.save(out, optimize=True)
+    print(out, img.size, len(cases), "rooms")
+
+
+def ally(bdir, adir, out, cases):
+    """Ally before/after: per room, the send-out pull-back and the battle camera (whole frames, 1/2), before ("v1":
+    2x player base, EBDX's point) and after."""
+    B, A = load(bdir), load(adir)
+    sw, sh = 256, 192
+    lab, head = 16, 44
+    W = 4 * (sw + 4)
+    img = Image.new("RGB", (W, head + len(cases) * (sh + lab + 6)), (14, 14, 18))
+    d = ImageDraw.Draw(img)
+    d.text((6, 4), "Ally placement - real engine. Send-out pull-back and battle camera (1/2), BEFORE / AFTER.", fill=(235, 235, 235))
+    d.text((6, 20), "BEFORE: player base 2x the foe base at EBDX's point (116,252). AFTER: 1.5x, point raised 8 room px, "
+                    "feet just in front of its centre.  cyan = painted base, red + = anchor, yellow = feet",
+           fill=(200, 200, 200))
+    y = head
+    for c in cases:
+        foe, pl = c.split("__")[1:]
+        d.text((6, y + 2), "%s   player %s / foe %s" % (c.split("__")[0].upper(), pl.upper(), foe.upper()),
+               fill=(255, 220, 120))
+        x = 0
+        for view in ("sendout", "main"):
+            for tag, rows, dd in (("v1", B, bdir), ("after", A, adir)):
+                p = os.path.join(dd, "%s_%s_clean.png" % (c, view))
+                if os.path.exists(p):
+                    im = Image.open(p).convert("RGB")
+                    im = im.resize((sw, sh), Image.LANCZOS)
+                    mark(im, rows, c, view, tag, sc=0.5)
+                    img.paste(im, (x, y + lab))
+                d.text((x + 4, y + lab + 2), ("BEFORE" if tag == "v1" else "AFTER") +
+                       (" - pull-back" if view == "sendout" else " - battle camera"), fill=(255, 255, 255))
+                x += sw + 4
+        y += sh + lab + 6
     img.save(out, optimize=True)
     print(out, img.size, len(cases), "rooms")
 
@@ -155,6 +194,8 @@ def gif(idir, sub, out, ms=66, last=None):
 if __name__ == "__main__":
     if sys.argv[1] == "sheet":
         sheet(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
+    elif sys.argv[1] == "ally":
+        ally(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
     else:
         gif(sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 66,
             int(sys.argv[6]) if len(sys.argv) > 6 else None)

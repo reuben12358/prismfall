@@ -10,13 +10,13 @@ MEADOW  Magiscarf's panel is pasted at (110,150) so its worn grass ellipse ends 
         meadow_bases() moves the worn patch onto the foe point (its own pixels and outline, shifted by whole art
         pixels; the ground it leaves is refilled from the same rows just left of it, so the hills' tufted edge
         and the grass bands run on; its mirror image in the right margin goes too) and lays the same patch, drawn
-        twice as big (the floor's 4 px art pixels), under the player.
+        1.5x as big (bblib.PLAYER_SCALE), under the player.
 
 Everything here runs on the HD canvas right after the panel is extended (to_hd) and never above the panel's
 horizon, so the painted margins above the panels are untouched.
 """
 import numpy as np
-from bblib import FOE, PLAYER, arr, img
+from bblib import FOE, PLAYER, PLAYER_SCALE, arr, img
 
 # measured on the day panel at ORIGIN (110,150): core of the worn patch x 388..595, y 302..347
 MEADOW_CORE = (168, 203, 116)        # the worn patch
@@ -37,6 +37,14 @@ def keep_bare(room, before):
     a, b = arr(room), arr(before)
     a[BARE[0]] = b[BARE[0]]
     return img(a)
+
+
+def _up(a):
+    """Nearest-neighbour PLAYER_SCALE enlargement of a mask or an RGBA block."""
+    h, w = a.shape[:2]
+    ys = (np.arange(int(round(h * PLAYER_SCALE))) / PLAYER_SCALE).astype(int).clip(0, h - 1)
+    xs = (np.arange(int(round(w * PLAYER_SCALE))) / PLAYER_SCALE).astype(int).clip(0, w - 1)
+    return a[ys][:, xs]
 
 
 def _material(a, box):
@@ -81,20 +89,20 @@ def meadow_bases(*rooms):
     new = np.zeros_like(old); new[sy:, sx:] = old[:-sy, :-sx]
     clear = old & ~new
     mir &= ~new
-    # player patch: the same patch at twice the size on the floor's 4 px grid, centred on PLAYER
+    # player patch: the same patch PLAYER_SCALE times bigger (bblib: 1.5x = 3 px art pixels), centred on PLAYER
     ys, xs = np.nonzero(old)
     bx0, by0 = xs.min() // 2 * 2, ys.min() // 2 * 2
     bx1, by1 = xs.max() // 2 * 2 + 2, ys.max() // 2 * 2 + 2
-    pmask = np.repeat(np.repeat(old[by0:by1, bx0:bx1], 2, 0), 2, 1)
+    pmask = _up(old[by0:by1, bx0:bx1])
     ph, pw = pmask.shape
-    px0 = int(round(PLAYER[0] - pw / 2.0)) // 4 * 4
-    py0 = int(round(PLAYER[1] - ph / 2.0)) // 4 * 4
+    px0 = int(round(PLAYER[0] - pw / 2.0))
+    py0 = int(round(PLAYER[1] - ph / 2.0))
     # the worn cores (no wildflowers on them: keep_bare)
     core = np.all(a0[..., :3].astype(np.int32) == MEADOW_CORE, -1) & old
     BARE.clear()
     BARE.append(np.zeros_like(old)); BARE[0][sy:, sx:] = core[:-sy, :-sx]
     pc = np.zeros_like(old)
-    pc[py0:py0 + ph, px0:px0 + pw] = np.repeat(np.repeat(core[by0:by1, bx0:bx1], 2, 0), 2, 1)
+    pc[py0:py0 + ph, px0:px0 + pw] = _up(core[by0:by1, bx0:bx1])
     BARE[0] |= pc
     out = []
     for room in rooms:
@@ -106,7 +114,7 @@ def meadow_bases(*rooms):
         b[yy, xx] = a[yy + MEADOW_FILL_DY, xx]                          #    and its mirror beside the panel
         yy, xx = np.nonzero(new)
         b[yy, xx] = a[yy - sy, xx - sx]                                 # 2. the patch, on the foe point
-        big = np.repeat(np.repeat(a[by0:by1, bx0:bx1], 2, 0), 2, 1)     # 3. the player's patch, 2x
+        big = _up(a[by0:by1, bx0:bx1])                                  # 3. the player's patch, bigger
         reg = b[py0:py0 + ph, px0:px0 + pw]
         reg[pmask] = big[pmask]
         out.append(img(b))

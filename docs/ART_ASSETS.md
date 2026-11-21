@@ -58,11 +58,13 @@ Each field's art lives in `Graphics/EBDX/Battlebacks/` and uses the field defini
 
 | Battle type | Player side | Foe side |
 |---|---|---|
-| Single | ~(116, 252) | ~(234, 152) |
+| Single | ~(116, 244) in Prismfall rooms (EBDX's 116,252 raised by the Bridge) | ~(234, 152) |
 | Double | (92, 240) and (192, 262) | (256, 164) and (198, 152) |
 
 Paint platforms or clearings around those points: centre them there. The Bridge puts every battler's feet on
 the point (`007_Bridge_Placement.rb`; floating species hover 20 px above it), so an off-centre base shows.
+Size the player base 1.5x the foe base (`bblib.PLAYER_SCALE`; HD foe 116x25 radii -> player 174x37.5): the send-out
+pull-back shows it whole.
 Every field also gets **particle FX** drawn by the bridge. It generates the shapes itself, so no art is needed.
 Battle weather (rain, sun, sand, hail, fog) comes from EBDX's own weather layers.
 

@@ -171,7 +171,7 @@ def factory_scene(wrecked):
         hd.alpha_composite(g, (430 - g.width // 2, floor_top + 40))
     steel_platform(hd, FOE, 116, 25, rust=0.0 if not wrecked else 0.8, hazard=not wrecked,
                    plate=(120, 128, 140) if not wrecked else (110, 90, 72), side=(64, 68, 80) if not wrecked else (60, 46, 36))
-    steel_platform(hd, PLAYER, 232, 50, rust=0.0 if not wrecked else 0.8, hazard=not wrecked, thick=14,
+    steel_platform(hd, PLAYER, *pb(116, 25), rust=0.0 if not wrecked else 0.8, hazard=not wrecked, thick=14,
                    plate=(120, 128, 140) if not wrecked else (110, 90, 72), side=(64, 68, 80) if not wrecked else (60, 46, 36))
     if wrecked:
         hd = grade(hd, mul=(0.92, 0.84, 0.8), sat=0.85)
@@ -323,7 +323,7 @@ def grand_stage():
     for x in range(40, 864, 54):
         d.chord([x - 10, 640, x + 10, 656], 180, 360, fill=C((255, 230, 150)), outline=C((80, 50, 20)))
     platform(hd, FOE, 116, 25, (170, 40, 50), (100, 20, 30), outline=(40, 8, 12), rim=(255, 210, 110))
-    platform(hd, PLAYER, 232, 50, (170, 40, 50), (100, 20, 30), outline=(40, 8, 12), thick=12, rim=(255, 210, 110))
+    platform(hd, PLAYER, *pb(116, 25), (170, 40, 50), (100, 20, 30), outline=(40, 8, 12), thick=12, rim=(255, 210, 110))
     save_room("field_grand_stage", hd)
     lamps = np.zeros((693, 864), np.float32)
     for x in range(40, 864, 54):
@@ -390,7 +390,7 @@ def neon_grid():
     sk = arr(skyl)
     sk[..., 3] *= (arr(hd)[..., 2] < 60) & (arr(hd)[..., 0] < 40)
     hd.alpha_composite(img(sk))
-    for (c, rx, ry, thick) in ((FOE, 118, 26, 8), (PLAYER, 236, 52, 14)):
+    for (c, rx, ry, thick) in ((FOE, 118, 26, 8), (PLAYER, *pb(118, 26), 14)):
         platform(hd, c, rx, ry, (24, 30, 50), (14, 16, 30), outline=(80, 240, 255), thick=thick)
         d = ImageDraw.Draw(hd)
         d.ellipse([c[0] - rx * 0.8, c[1] - ry * 0.8, c[0] + rx * 0.8, c[1] + ry * 0.8], outline=C((80, 240, 255)))
@@ -467,7 +467,7 @@ def hollow_cathedral():
         d.rectangle([xs - 4, y, xs + w + 4, y + 8 + row * 3], fill=C((40, 26, 30)), outline=C((14, 8, 10)))
         d.line([xs + 2, y - 16 - row * 4, xs + w - 2, y - 16 - row * 4], fill=C((86, 60, 66)))
     platform(hd, FOE, 116, 25, (70, 62, 90), (40, 34, 56), outline=(12, 10, 20))
-    platform(hd, PLAYER, 232, 50, (70, 62, 90), (40, 34, 56), outline=(12, 10, 20), thick=12)
+    platform(hd, PLAYER, *pb(116, 25), (70, 62, 90), (40, 34, 56), outline=(12, 10, 20), thick=12)
     save_room("field_hollow_cathedral", hd)
     glass = mask_from(rw, lambda r, g, b: (r + g + b > 120) & ~((r < 20) & (g < 20)))
     gl = blank(); gl.alpha_composite(glow_from_mask(glass, (200, 160, 255), radius=10, gain=1.2, size=rw.size),
@@ -514,7 +514,7 @@ def new_moon():
     fl, _ = ground_plane(HD, roof + 20, (36, 30, 50), (16, 12, 26), seed=142, grain=6)
     hd.alpha_composite(fl)
     platform(hd, FOE, 116, 25, (40, 34, 56), (22, 18, 32), outline=(150, 110, 230))
-    platform(hd, PLAYER, 232, 50, (40, 34, 56), (22, 18, 32), outline=(150, 110, 230), thick=12)
+    platform(hd, PLAYER, *pb(116, 25), (40, 34, 56), (22, 18, 32), outline=(150, 110, 230), thick=12)
     save_room("field_new_moon", hd)
     wm = np.zeros((693, 864), np.float32)
     for (x, y) in wins:
@@ -590,7 +590,7 @@ def mindscape():
     paste(hd, st.rotate(90, expand=True), 690, 150, "topleft")
     dr = door()
     paste(hd, dr, 640, 300, "bottom")
-    for c, rx, ry, t in ((FOE, 116, 25, 6), (PLAYER, 232, 50, 10)):
+    for c, rx, ry, t in ((FOE, 116, 25, 6), (PLAYER, *pb(116, 25), 10)):
         platform(hd, c, rx, ry, (250, 236, 255), (200, 170, 230), outline=(140, 90, 190), thick=t)
         d = ImageDraw.Draw(hd)
         for k, f in enumerate((0.85, 0.6, 0.35)):
@@ -712,7 +712,7 @@ def prism_arena():
         d.line([x, y - ph / 2, x, 140], fill=C((180, 160, 110)))
         d.rectangle([x - pw / 2, y - ph / 2, x + pw / 2, y + ph / 2], fill=C(PLATE_COLS[i]), outline=C((40, 30, 20)))
         d.rectangle([x - pw / 2 + 3, y - ph / 2 + 3, x + pw / 2 - 3, y + ph / 2 - 3], outline=C(lighter(PLATE_COLS[i], 0.5)))
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 14)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 14)):
         platform(hd, c, rx, ry, (240, 236, 250), (180, 176, 200), outline=(120, 100, 60), thick=t, rim=(255, 220, 120))
     save_room("field_prism_arena", hd)
     pm = np.zeros((693, 864), np.float32)
@@ -772,7 +772,7 @@ def bleed():
         ImageDraw.Draw(hd).polygon(pts, outline=C((255, 255, 255)))
         shards.append(pts)
     platform(hd, FOE, 116, 25, (40, 10, 20), (20, 4, 10), outline=(255, 40, 70))
-    platform(hd, PLAYER, 232, 50, (40, 10, 20), (20, 4, 10), outline=(255, 40, 70), thick=12)
+    platform(hd, PLAYER, *pb(116, 25), (40, 10, 20), (20, 4, 10), outline=(255, 40, 70), thick=12)
     save_room("field_bleed", hd)
     # glitch slices that flicker in and out
     layers = []

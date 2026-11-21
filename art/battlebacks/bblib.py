@@ -18,9 +18,21 @@ HD = (864, 693)
 VIEW = (158.5, 149.5)            # HD coords of the screen's top-left at the default camera
 VIEW_W, VIEW_H = 512, 384
 FOE = (526.5, 342.0)             # HD ground point of the foe (room 234,152)
-PLAYER = (261.0, 567.0)          # HD ground point of the player (room 116,252)
+PLAYER = (261.0, 549.0)          # HD ground point of the player (room 116,244): EBDX's 116,252 raised 8 room px by
+                                 # the Bridge (007_Bridge_Placement.rb) in Prismfall rooms, so the ally stands
+                                 # in the scene, not out at the screen edge
 FOE_D = [(576.0, 369.0), (445.5, 342.0)]     # doubles (room 256,164 / 198,152)
 PLAYER_D = [(207.0, 540.0), (432.0, 589.5)]  # doubles (room 92,240 / 192,262)
+# Player base = the foe base drawn PLAYER_SCALE times bigger (it is nearer the camera). Rejuvenation draws its player
+# base 1.77x as wide as the enemy base, but only the far half of it ever shows (a 64 px strip at the screen bottom),
+# ~1.6x the enemy base's area on screen. EBDX's send-out pull-back shows ours whole, so 2x (4x the area) read as a
+# huge disc with the ally lunging out of it; 1.5x (2.25x the area) keeps it clearly nearer than the foe's.
+PLAYER_SCALE = 1.5
+
+
+def pb(rx, ry):
+    """Player-base radii for a foe base of rx, ry."""
+    return rx * PLAYER_SCALE, ry * PLAYER_SCALE
 # Vanilla Essentials/Reborn/Rejuvenation layout (512x384 screen): foe base centre (384,176).
 # Placing a vanilla bg at this HD origin puts its foe point exactly on the EBDX foe point.
 VANILLA_ORIGIN = (142, 166)
@@ -334,8 +346,9 @@ def preview(hd, path, show_view=True, pokemon=True):
     return v
 
 
-def place_player_base_scaled(canvas, foe_base, scale=2, at=PLAYER, dy=0):
-    """Player platform = the foe platform drawn nearer (scaled up, nearest neighbour)."""
+def place_player_base_scaled(canvas, foe_base, scale=None, at=PLAYER, dy=0):
+    """Player platform = the foe platform drawn nearer (scaled up PLAYER_SCALE, nearest neighbour)."""
+    scale = PLAYER_SCALE if scale is None else scale
     b = ellipse_crop(foe_base)
-    b = b.resize((b.width * scale, b.height * scale), Image.NEAREST)
+    b = b.resize((int(round(b.width * scale)), int(round(b.height * scale))), Image.NEAREST)
     canvas.alpha_composite(b, (int(round(at[0] - b.width / 2)), int(round(at[1] - b.height / 2 + dy))))

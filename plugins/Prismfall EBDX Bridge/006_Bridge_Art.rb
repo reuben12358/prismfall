@@ -943,7 +943,7 @@ module PrismfallEBDX
         {
           :bitmap => "pf_corrosive_mire_sludgeglow",
           :hd => true,
-          :x => 17.33,
+          :x => 29.33,
           :y => 114.67,
           :ox => 0,
           :oy => 0,
@@ -1380,7 +1380,7 @@ module PrismfallEBDX
             {
               :bitmap => "pf_dragons_den_wyrmfire_magma",
               :hd => true,
-              :x => 2.67,
+              :x => 28.0,
               :y => 70.22,
               :ox => 0,
               :oy => 0,
@@ -2229,7 +2229,7 @@ module PrismfallEBDX
         {
           :bitmap => "pf_glass_dunes_facets",
           :hd => true,
-          :x => 9.78,
+          :x => 31.11,
           :y => 100.89,
           :ox => 0,
           :oy => 0,

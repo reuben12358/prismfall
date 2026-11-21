@@ -28,7 +28,7 @@ def vanilla(game, name, base=None, player_base="scaled", origin=O, mirror=False,
 
 def plat_pair(hd, top, side, **kw):
     platform(hd, FOE, 118, 26, top, side, **kw)
-    platform(hd, PLAYER, 236, 52, top, side, thick=12, **kw)
+    platform(hd, PLAYER, *pb(118, 26), top, side, thick=12, **kw)
 
 
 #---------------------------------------------------------------------------------------------
@@ -223,8 +223,8 @@ def dragons_den():
     paste(hd, rib, 820, 470, "bottom")
     platform(hd, FOE, 116, 25, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16))
     ring_stones(hd, FOE, 116, 25, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=26, size=(5, 8), seed=4)
-    platform(hd, PLAYER, 232, 50, (70, 40, 66), (40, 22, 40), outline=(14, 6, 16), thick=12)
-    ring_stones(hd, PLAYER, 232, 50, [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=34, size=(8, 13), seed=9)
+    platform(hd, PLAYER, *pb(116, 25), (70, 40, 66), (40, 22, 40), outline=(14, 6, 16), thick=12)
+    ring_stones(hd, PLAYER, *pb(116, 25), [(232, 182, 60), (255, 230, 130), (190, 130, 40)], n=30, size=(7, 12), seed=9)
     save_room("field_dragons_den", hd)
     gold = mask_from(hd, lambda r, g, b: (r > 225) & (g > 170) & (b < 120))
     layers = [

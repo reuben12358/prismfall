@@ -12,6 +12,7 @@
 #                     Captures/placement/intro.tsv: per dumped frame, the room camera and both battlers
 #   PP_WAIT=150       frames to run before the MAIN shot
 #   PP_GROUND=0       turn the Bridge's sprite grounding off (EBDX's own species metrics: "before" shots)
+#   PP_FOOT=16,-2 PP_RAISE=0   an earlier FOOT_LINE / PLAYER_RAISE (with PP_GRAPHICS = that version's rooms)
 # Output: Captures/placement/<case>_<view>.png (+ _clean without databoxes), Captures/placement/probe.tsv
 #===============================================================================
 module PlacementProbe
@@ -180,6 +181,16 @@ if ENV["DEMO_PLAN"].to_s == "placement"
   if ENV["PP_GROUND"] == "0" && defined?(PrismfallEBDX::GROUND_SPRITES)
     PrismfallEBDX.send(:remove_const, :GROUND_SPRITES)
     PrismfallEBDX.const_set(:GROUND_SPRITES, false)
+  end
+  # PP_FOOT="16,-2" / PP_RAISE=0: an earlier foot line / player point, for "before" shots of the Bridge's own tuning
+  if ENV["PP_FOOT"] && defined?(PrismfallEBDX::FOOT_LINE)
+    f, b = ENV["PP_FOOT"].split(",").map(&:to_i)
+    PrismfallEBDX::FOOT_LINE[:front] = f
+    PrismfallEBDX::FOOT_LINE[:back] = b
+  end
+  if ENV["PP_RAISE"] && defined?(PrismfallEBDX::PLAYER_RAISE)
+    PrismfallEBDX.send(:remove_const, :PLAYER_RAISE)
+    PrismfallEBDX.const_set(:PLAYER_RAISE, ENV["PP_RAISE"].to_i)
   end
 
   class << DemoRun

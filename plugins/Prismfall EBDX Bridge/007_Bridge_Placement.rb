@@ -26,17 +26,27 @@
 #              drawn at 1x and the player at 2x at the battle camera). Foe +16:
 #              its feet a little in front of the base centre (the foe base is
 #              25 px deep each way at the battle camera), as a creature standing
-#              on a disc seen from above shows its front feet.
+#              on a disc seen from above shows its front feet. Player +2: just
+#              in front of its (1.5x) base's centre.
 #   HOVER      bitmap px above the foot line for floating species
 #   FLOATING   species => true/false, wins over the automatic rule
 #              (EBDX BattlerAltitude > 0, or Levitate for species EBDX has no
 #              metrics for, e.g. the Gen 9 pack's statics)
 #   FOOT_TWEAK species => [front_dy, back_dy], extra hand tweak in bitmap px
+#
+# The ally's spot. EBDX stands the single-battle player Pokemon at room
+# (116,252), 33 px below the bottom of the screen at the battle camera; with
+# its feet on that point a small ally (Joltik, Bidoof, the starters) showed only
+# 69-79% of itself. In Prismfall rooms (whose bases art/battlebacks paints
+# around bblib.PLAYER) the point is raised PLAYER_RAISE room px: 18 px at the
+# battle camera (84-94% shown), and at the send-out pull-back the ally stands a
+# little further into the scene. EBDX's stock rooms keep their own point.
 #===============================================================================
 module PrismfallEBDX
   GROUND_SPRITES = true
-  FOOT_LINE      = { :front => 16, :back => -2 }
+  FOOT_LINE      = { :front => 16, :back => 2 }
   HOVER          = 20
+  PLAYER_RAISE   = 8          # room px (EBDX's player point 116,252 -> 116,244 in Prismfall rooms)
   # EBDX gives these an altitude for their animation (a hop, a bounce), but they stand.
   FLOATING = {
     :SKITTY => false, :POLITOED => false, :GROVYLE => false, :KABUTO => false, :FERROTHORN => false,
@@ -130,6 +140,21 @@ if defined?(DynamicPokemonSprite) && defined?(EliteBattle)
       @sprite.ox = @ox
       @sprite.oy = @oy
       formatShadow
+    end
+  end
+
+  class BattleSceneRoom
+    # Prismfall rooms (art named field_*) paint the player's base at the raised point (see PLAYER_RAISE).
+    alias prismfall_place_adjustMetrics adjustMetrics unless method_defined?(:prismfall_place_adjustMetrics)
+    def adjustMetrics
+      prismfall_place_adjustMetrics
+      return if !PrismfallEBDX::GROUND_SPRITES || PrismfallEBDX::PLAYER_RAISE == 0
+      return if !@data.is_a?(Hash) || !@data["prismfall_field"] || !@data["backdrop"].to_s.start_with?("field_")
+      return if !@battle || @battle.pbMaxSize > 1
+      b = @sprites["battler0"]
+      b.ey -= PrismfallEBDX::PLAYER_RAISE if b && b.ey
+    rescue StandardError => e
+      PrismfallEBDX.log_error("BattleSceneRoom#adjustMetrics", e)
     end
   end
 

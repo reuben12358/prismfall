@@ -131,7 +131,7 @@ def flooded_dunes():
     fa[foam] = [236, 244, 244, 255]
     hd = img(fa)
     # sandbar platforms: wet sand with a foam ring
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 14)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 14)):
         platform(hd, c, rx, ry, (214, 208, 190), (120, 112, 98), outline=(60, 56, 50), thick=t,
                  speckle=([(170, 164, 146), (236, 232, 220)], int(rx * 1.4)))
         ImageDraw.Draw(hd).arc([c[0] - rx - 4, c[1] - ry - 2, c[0] + rx + 4, c[1] + ry + t + 4], 0, 180,
@@ -256,7 +256,7 @@ def glass_dunes():
     # the breaking wave set in glass, between the mesa and the foe
     wv = glass_wave()
     paste(hd, wv, 300, 342, "topleft") if False else hd.alpha_composite(wv, (296, 342 - wv.height))
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 14)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 14)):
         platform(hd, c, rx, ry, (20, 62, 46), (8, 26, 20), outline=(150, 230, 190), thick=t, highlight=True)
         dd = ImageDraw.Draw(hd)
         dd.arc([c[0] - rx * 0.8, c[1] - ry * 0.8, c[0] + rx * 0.8, c[1] + ry * 0.8], 200, 330,

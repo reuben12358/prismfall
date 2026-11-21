@@ -39,11 +39,11 @@ def silkwood():
     hd = vanilla("rejuvenation", "Forest", base=False)
     hd = grade(hd, mul=(1.0, 1.02, 0.9), sat=1.05)
     stump_platform(hd, FOE, 116, 25)
-    stump_platform(hd, PLAYER, 232, 50, thick=24)
+    stump_platform(hd, PLAYER, *pb(116, 25), thick=20)
     hd = blend(hd, vgradient(HD, [(0, (255, 220, 120, 70)), (0.45, (200, 230, 120, 0)), (1, (20, 40, 20, 60))]),
                "softlight")
     silk_wrap(hd, FOE, 120, 26, seed=1)
-    silk_wrap(hd, PLAYER, 240, 52, seed=2, n=14)
+    silk_wrap(hd, PLAYER, *pb(120, 26), seed=2, n=12)
     webs = blank()
     dew = []
     for (cx, cy, sz, seed) in ((250, 200, 180, 1), (700, 190, 200, 2), (470, 160, 90, 3), (120, 470, 240, 4),
@@ -143,7 +143,7 @@ def flower_garden():
             cols = [(255, 150, 200), (255, 240, 120), (190, 150, 255), (255, 255, 255), (255, 120, 120)]
             n = {3: 18, 4: 26, 5: 34}[st]
             ring_stones(hd, FOE, 120, 26, cols, n=n, size=(5, 8), seed=st, outline=(60, 40, 50))
-            ring_stones(hd, PLAYER, 240, 52, cols, n=n + 10, size=(8, 13), seed=st + 10, outline=(60, 40, 50))
+            ring_stones(hd, PLAYER, *pb(120, 26), cols, n=n + 6, size=(7, 12), seed=st + 10, outline=(60, 40, 50))
         if st == 5:
             bloom = big_bloom(78)
             paste(hd, bloom, 610, 330, "bottom")
@@ -436,7 +436,7 @@ def stormfront():
     d.rectangle([mx - 60, 80, mx + 60, 88], fill=C((84, 62, 46)), outline=C((24, 16, 10)))
     plat = (120, 126, 136)
     plat_pair(hd, plat, (70, 74, 84), outline=(24, 26, 30))
-    for (cx, cy, rx, ry) in ((FOE[0], FOE[1], 118, 26), (PLAYER[0], PLAYER[1], 236, 52)):
+    for (cx, cy, rx, ry) in ((FOE[0], FOE[1], 118, 26), (PLAYER[0], PLAYER[1], *pb(118, 26))):
         for k in range(8):
             a = k / 8 * 2 * math.pi
             d.ellipse([cx + math.cos(a) * rx * 0.8 - 2, cy + math.sin(a) * ry * 0.8 - 1,

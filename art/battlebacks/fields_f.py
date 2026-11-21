@@ -204,7 +204,7 @@ def new_moon():
     skym = (src[..., 2] > src[..., 0]) & (src[..., :3].sum(-1) < 330) & (np.arange(693)[:, None] < 270)   # behind the towers
     sa = arr(sky); sa[..., 3] *= skym
     hd.alpha_composite(img(sa))
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 12)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 12)):
         platform(hd, c, rx, ry, (40, 34, 56), (22, 18, 32), outline=(150, 110, 230), thick=t)
     fields_c.save_room("field_new_moon", hd)
     layers = [layer(F, "corona", soft_glow(moon_c, moon_r * 2.2, (160, 110, 255), alpha=150), z=1, blend=1,
@@ -243,7 +243,7 @@ def inverse():
         e[cut:, x, 3] = 0
         e[max(cut - 3, 0):cut, x, :3] = [30, 10, 50]
     hd.alpha_composite(img(e), (0, 150))
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 12)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 12)):
         platform(hd, c, rx, ry, (26, 20, 40), (60, 40, 90), outline=(255, 255, 255), thick=t, highlight=False)
     fields_c.save_room("field_inverse", hd)
     layers = []
@@ -295,7 +295,7 @@ def prism_arena():
         d.rectangle([x - pw / 2, y - ph / 2, x + pw / 2, y + ph / 2], fill=C(fields_c.PLATE_COLS[i]), outline=C((40, 30, 20)))
         d.rectangle([x - pw / 2 + 3, y - ph / 2 + 3, x + pw / 2 - 3, y + ph / 2 - 3],
                     outline=C(lighter(fields_c.PLATE_COLS[i], 0.5)))
-    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, 232, 50, 14)):
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 14)):
         platform(hd, c, rx, ry, (244, 240, 252), (184, 180, 204), outline=(120, 100, 60), thick=t, rim=(255, 220, 120))
     fields_c.save_room("field_prism_arena", hd)
     pm = np.zeros((693, 864), np.float32)

@@ -45,7 +45,8 @@ carried round the arc), HOLLOW_CATHEDRAL (+Consecrated) (window, pillars, banner
 sky; the barrier continued in perspective), NEW_MOON (all stages: city lights instead of the hanging railing).
 `contact_sheet_pullback.png`: every room at the SENDOUT camera (`BD_VECTORS=1`, the `_wide` shots;
 `make_contact_sheet.py --suffix _wide`). Both contact sheets were shot with the battlers' feet on their bases
-(`007_Bridge_Placement.rb`).
+(`007_Bridge_Placement.rb`), the player bases 1.5x the foe's and the ally's point raised (see
+`../placement/README.md`, item 5).
 Doubles: `double_prism_arena.png`,
 `double_silkwood.png` (`BD_DOUBLE=1`). Night: `*_night.png` (`BD_TIME=night`).
 

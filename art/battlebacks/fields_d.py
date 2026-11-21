@@ -269,7 +269,7 @@ def new_moon_abyss():
     a[..., :3] = np.where(em, np.array([34, 22, 58]), a[..., :3])
     hd = img(a)
     platform(hd, FOE, 116, 25, (10, 8, 16), (6, 4, 10), outline=(70, 40, 120))
-    platform(hd, PLAYER, 232, 50, (10, 8, 16), (6, 4, 10), outline=(70, 40, 120), thick=12)
+    platform(hd, PLAYER, *pb(116, 25), (10, 8, 16), (6, 4, 10), outline=(70, 40, 120), thick=12)
     save_room("field_new_moon_abyss", hd)
     layers = [layer(F, "rim", soft_glow(FOE, 160, (90, 50, 170), alpha=90, squash=0.3), z=1, blend=1,
                     anim=S("pulse"), min=20, max=90, period=180)]
