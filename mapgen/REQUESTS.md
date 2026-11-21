@@ -1384,3 +1384,29 @@ with its two key events, the consequence the player sees later, and a status.
   Infirmary's power, the Quiet Ward's Bleed rises, and the PC carries the salt-haired child out and sees its eyes move.
 - **For side quests and map builders:** keep optional content *around* a key event, never between its build-up and its
   payoff, and keep the spot on the map clear (CHAPTER_BEATS "Notes").
+
+## From the story editor: Script ready (map events first): Ch5 "Ten Years of Light", 2026-11-21
+**For map builder 15 (building the Lock Road and Lumen now).** The full event list is the last section of
+**`story/24_SCRIPT_CH5.md`, "Map events needed (Chapter 5)"**. The scene text above it is being written now; event names,
+pages and switches in the list won't change. In short:
+- **Counter:** new story variable **V125 CH5_STEP** (0–13, design/FLAGS.md). Events page on `>=`.
+- **580 → 592 → 590 → 581 → 595 → 594 → 593 → 582 → 180** as ROUTES.yaml orders them. Story events per map: the
+  Reedholms (Teo on a punt, or his wanted poster, by `:ch4_teo`), the Haul (union picket, a dropped ice block),
+  Brassfall (Juno's letter at the PC, the Ice Elevator shortcut, the Union Hall boiler), the Locks (Extraction Lattice
+  No. 4 and its builder's plate, the ice-cave ledger), Coppice Ride (**the first view of the Crownwall**), Wallshadow Row
+  (**Juno rejoins at the Four Ways**; four closed exits with a guard each; the Southgate shrine), the Arc-Lamp Mile
+  (Lamp 47, the Prism Arena hoarding), the West Gate (a NULL scan, then the GALA INVITATION).
+- **181 the Lowlight before the Shatter carries twelve named residents** (Dex and his Pichu among them) at fixed spots,
+  plus Rook's film crew and a four-box Rotom blackout that opens the gym. **608 has the same twelve as glass figures at
+  the same spots.** Please copy the positions across.
+- **Two new maps under the Spire:** **951 Service Lifts** (~21×17) and **952 Plate Vault** (~25×19; its south service
+  door opens onto 608). Overflow IDs 951/952 are free (950 is the Edit Bay). **One new interior:** **596 Brassfall Union
+  Hall** (~17×11; segment-3 interior slot).
+- **Interlude I** reuses the Ferrow Lighthouse 105/106 (V119 = 1, Kestrel as the player).
+**For the items owner:** three new Key Items, `GALAINVITATION`, `ICEBOUNDSATCHEL`, `HEATCONTRACT` (descriptions in the
+script). **For BOSSES.md:** "Overcharged" Electivire (2 bars, the segment after Gym 4, `:NEON_GRID` → `:BLEED` at the bar
+break). **For the trainer designer:** route trainers per ROUTES.yaml (580: 6, 592: 5, 581: 6, 595: 5, 594: 6, 593: 5),
+Lv 20–26, and no Ground type handed over before Rook (they're foes, so only gifts matter). **For the Trials owner:**
+`ZE_OCTAVE_OFF_BEAT` sits on 181, which 608 replaces after the Shatter; close or move it. **For the puzzle engineer
+(GYM_PUZZLES Gym 4, 193):** Rook's PA line at the cold cradle changes, because "Turn it off. Rotom. Turn it *off*." is
+his line in the Lowlight after the Shatter (03_CAST); the new line is in the script.
