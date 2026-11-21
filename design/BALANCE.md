@@ -430,6 +430,48 @@ Eevee Octave gauntlet (Lv 87 / 89) 9 of 10 Standard and 8 of 10 Hard with planne
 legendaries Reshiram 7/8 Standard, 5/8 Hard; Kyogre 5/8 Standard, 0/8 Hard (a counter-team fight); war partner doubles
 6/8 (Isenmar) and 8/8 (Ashkaar) on Standard. Details: TRAINER_FIELD_PLAYBOOK.md §6.
 
+## 9c. Field logic audit (SPINE Rev 24): win-rate deltas
+
+The field changes of `design/FIELD_LOGIC_AUDIT.md`, measured before and after with the same seeds and the same
+`pbs/trainers.txt` (two private run copies, one with the old field files). Standard only.
+
+**Round-4 cells** (`run_winrates.rb` / `winrates_r4.rb`, 10 fights per starter, 30 a cell):
+
+| Fight (field change) | Typical before -> after | Prepared before -> after |
+|---|---|---|
+| G4 Rook (Neon Grid: no Pulse x1.5) | 12/30 -> 12/30 | 30/30 -> 30/30 |
+| G10 Anja (Frozen Lake: sun thaws over 3 rounds) | 3/30 -> 3/30 | 19/30 -> 19/30 |
+| G13 Bastian (Crystal Cavern: no sun / rain / hail) | 8/30 -> 8/30 | 30/30 -> 30/30 |
+| G15 Magnus (Factory: no sun) | 5/30 -> 5/30 | 26/30 -> 26/30 |
+| M14 Marchetti (Dark Crystal: no sun / rain / hail, no sunlight relight) | 8/30 -> 8/30 | 27/30 -> 27/30 |
+
+No change at all: these teams don't bring weather or Pulse moves. So three **weather teams** were run against the
+gyms whose weather rule changed (a hand-built six at the cap that brings the weather the old rule rewarded, 12 fights,
+Hyper Potions; `tools/harness/run_weather_cells.rb`):
+
+| Fight | Team | Before -> after | Field sequences after |
+|---|---|---|---|
+| G10 Anja | Drought Torkoal, Arcanine, Lucario, Magnezone, Chlorophyll Venusaur, Heracross | 3/12 -> 4/12 | 7x lake -> water -> lake, 4x lake -> water, 1x lake (was: melted at once every time) |
+| G13 Bastian | Drizzle Pelipper, Swift Swim Kingdra and Ludicolo, Swampert, Lucario, Ferrothorn | 12/12 -> 12/12 | rain now fails; the team wins on Water / Fighting / Steel coverage alone |
+| G15 Magnus | Drought Torkoal, Arcanine, Chandelure, Chlorophyll Venusaur, Garchomp, Gyarados | 12/12 -> 9/12 | sun now fails in the foundry; Fire x1.2 from the crucibles still helps |
+
+Gym 10 is unchanged in practice (melting the lake at once used to hand Anja's Walrein open water as often as it
+helped the sun team). Gym 15 loses its easiest answer: a dedicated sun team drops from 12/12 to 9/12; the prepared
+cell is unchanged (26/30). No re-tune proposed.
+
+**The war on 926** (the trainer designer's `run_late.rb`, a well-built Lv 85 six, 8 runs; singles 4):
+
+| Fight | Before -> after | What the Glass Dunes did after |
+|---|---|---|
+| Reshiram (`RESHIRAM_GLASS_DUNES`) | 7/8 -> 7/8 | 3 of 8 cooled into Mirror Glass under the storm's rain; one was reheated by Reshiram's fire |
+| Kyogre (`KYOGRE_GLASS_DUNES`) | 5/8 -> 5/8 | no glass (Kyogre's side) |
+| Partner double vs Isenmar | 6/8 -> 6/8 | no glass |
+| Partner double vs Ashkaar | 8/8 -> 8/8 | glass in 5 of 8; 2 re-flooded by Marisol's side (was: 1 cracked back to sand) |
+| Singles 920 / 924 / 925 / 926 (12 trainers) | all 4/4 -> 4/4 | unchanged sequences |
+
+No war fight changed its result; the cooling shows up only where the Fire side stops using Fire (Reshiram in its own
+storm), which is the point of it.
+
 ## Intentional non-learnable moves (validator allowlist)
 
 Rows here are read by `tools/validate_trainers.py`: `| TYPE,Name,Version | SPECIES | MOVE or ABILITY | reason |`.

@@ -19,7 +19,7 @@ FieldEffects.register(:FACTORY, (lambda do
                        "Damaging Fire moves may soften a Steel target's plating (30%, Defense -1). Metal Sound and Screech never miss.",
                        "Shift Gear also +1 Defense; Autotomize, Iron Defense and Metal Sound work one stage better; Magnet Rise +1 Speed and lasts 3 turns longer.",
                        "On entry: Light Metal +1 Speed, Heavy Metal +1 Defense, Download +1 Speed (it syncs with the line).",
-                       "Nothing can be frozen near the crucibles. Indoors: Rain, Sandstorm and Hail can't start. Sun +2 turns, Electric Terrain +2.",
+                       "Nothing can be frozen near the crucibles. Indoors: no weather can start (the crucibles' heat is what powers Fire here). Electric Terrain +2.",
                        "An explosion (Explosion, Self-Destruct, Misty Explosion, Mind Blown) wrecks it at once; 3 quakes bring the catwalks down. Either leaves a Scrapyard.",
                        "Synthetic Seed: +1 Attack and +1 Speed."],
     :nature_power  => :GEARGRIND,
@@ -64,9 +64,8 @@ FieldEffects.register(:FACTORY, (lambda do
     :end_of_round  => [
       { :battlers => { :status => [:FROZEN] }, :cure_status => true, :message => "The crucibles' heat thawed {1} out!" }
     ],
-    :weather       => { :block => [:Rain, :Sandstorm, :Hail],
-                        :block_message => "The foundry roof shuts out the weather!",
-                        :extend => { :Sun => 2 } },
+    :weather       => { :block => [:Sun, :Rain, :Sandstorm, :Hail],
+                        :block_message => "The foundry roof shuts out the weather!" },
     :terrain       => { :extend => { :Electric => 2 } },
     :transitions   => [
       { :moves => [:EXPLOSION, :SELFDESTRUCT, :MISTYEXPLOSION, :MINDBLOWN], :to => :SCRAPYARD,

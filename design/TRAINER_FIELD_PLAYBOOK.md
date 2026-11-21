@@ -180,8 +180,10 @@ Hippopotas, Sandaconda, Krokorok, Claydol "Effigy".
   (it triggers when the Water move lands) and two of Krokorok's Fire Fangs each bake it back to dunes.
 - **Counterplay.** Grass, with rain timed after Hippopotas and Sandaconda are down. Water is ×0.8 here.
 - She makes no cross-field change herself. A player's two searing moves (Overheat, Eruption...) fuse her dunes into the
-  **Glass Dunes** (Fire ×1.2, no sand, no Dig), and her quakes shatter the glass back into her Desert in three (her
-  `[:DESERT, 1] => 22` want rewards that); the sea-storm (heavy rain) is the only way to the flood.
+  **Glass Dunes** (Fire ×1.2, no sand, no Dig), and her quakes crack the glass back into her Desert in three (her
+  `[:DESERT, 1] => 22` want rewards that; each crack also leaves broken glass on the player's side, and the player's
+  Fire anneals a crack; Effigy's Rapid Spin sweeps the broken glass off her side); the sea-storm (heavy rain) is the
+  only way to the flood. Left four rounds without Fire the glass cools into Mirror Glass (Rev 24).
 
 ### Gym 6: Corvin — Corrosive Mire, double battle (35)
 - **Doubles (Round 2).** Lead Weezing + Amoonguss. Weezing's Heat Wave hits both foes (and each use scorches grounded
@@ -244,6 +246,9 @@ Alolan Ninetales, Cloyster, Beartic, Walrein, Avalugg, Mamoswine "Matriarch".
   Each of her Ice attacks refreezes one crack, and Blizzard / Freeze-Dry refreeze open water in three.
 - **Counterplay.** Fighting and Steel rather than Fire; Electric and Grass once it is water.
 - Matriarch uses High Horsepower instead of Earthquake: quakes lay Spikes on both sides here and fail on open water.
+- **Rev 24 field audit:** sunlight no longer melts the lake at once. Three rounds of sun thaw it (each of her Ice
+  attacks sets the thaw back a round, and Ninetales's Snow Warning ends the sun), so a Drought or Sunny Day player
+  has to hold the sky for three rounds; only Desolate Land melts it at once. Win rates: `BALANCE.md` §9c.
 
 ### Gym 11: Odessa — Stormfront, double battle (55)
 - **Doubles (Round 2).** Lead Pelipper + Noivern: Pelipper's Tailwind (6 turns here) and **Wide Guard** against the
@@ -283,6 +288,9 @@ Carbink, Alolan Golem, Aurorus, Dusk Lycanroc, Rhyperior, Gigalith "Geode".
 - **Answer to the flip.** One Dark Pulse darkens the cavern. Two light moves relight it (Carbink, Aurorus, Geode).
 - **Counterplay.** Water, Grass, Fighting, Steel; darken the cave to strip the light boosts.
 - Geode lost Sand Stream: a sandstorm blots out his own crystals.
+- **Rev 24 field audit:** the caverns are underground, so Sun, Rain and Hail can't start here (as in the Cave):
+  Water and Grass answers don't get their weather, and Dark Crystal can no longer be relit by sunlight (two light
+  moves still do). Win rates: `BALANCE.md` §9c.
 
 ### Gym 14: Ysolde — Hollow Cathedral (67)
 Sableye, Spiritomb, Dusknoir, Cofagrigus, Gengar, Chandelure "Vigil".
@@ -306,6 +314,8 @@ Ferrothorn, Excadrill, Kingambit, Klinklang "Mark One", Scizor, Metagross "Engin
   effective on Steel.
 - Nobody on his team quakes or explodes any more (Excadrill and Engine did), and Excadrill is Mold Breaker: Sand
   Rush could never work indoors.
+- **Rev 24 field audit:** indoors means no weather at all now: a player's Drought or Sunny Day fails here (the
+  crucibles' Fire ×1.2 is still there for Fire answers). Win rates: `BALANCE.md` §9c.
 
 ### Gym 16: Nyx — New Moon, double battle (75)
 - **Doubles (Round 2).** The illusion double: Grimmsnarl's Prankster screens beside Weavile's Fake Out; Umbreon's
@@ -418,8 +428,8 @@ All Standard / Hard / Casual; fields from `FIELD_DEFAULTS.yaml` `exceptions.trai
 | Ch19 war, Isenmar trench-line (`ISENMAR_SOLDIER_M/F` 0, `ISENMAR_OFFICER` 0), the Rimed Sands 920 | Desert | Mamoswine, Seismitoad *(−C)*; Pelipper, Ludicolo *(−C)*; Captain: Politoed, Ludicolo, Mamoswine *(−C)*, Lapras | **The sea comes to the sand.** On the dunes Ice is ×0.75 and Water ×0.8, so they open with Drizzle or Rain Dance: rain soaks the dunes into the Superbloom (the nerfs lift, Ludicolo's Grass ×1.5) and Swift Swim runs. Mamoswine and Seismitoad are Ground types that hide in the sand (special ×0.67) | Take the sky back (sun, sand, or two Fire attacks bake the bloom away); KO the setter; Water Absorb / Storm Drain |
 | Ch19 war, Siege Camp earthworks (`ASHKAAR_SOLDIER_M/F` 0, `ASHKAAR_OFFICER` 0), 924 | Cinderglass | Magcargo, Druddigon *(−C)*; Ninetales, Flygon *(−C)*; Captain: Torkoal, Coalossal, Arcanine *(−C)*, Garchomp | Magma Armor, Steam Engine every turn; Stone Edge ×1.3 ×1.3 on obsidian; Lava Plume ×3 re-melts it to Volcanic | Water and Ground; three floods fill the glass into a lake |
 | Ch19 war, the Steamline 925 (stand between: `ASHKAAR_SOLDIER_M` 1, `ISENMAR_SOLDIER_M` 1) | Bleed (borrows only the war's fields) | Camerupt, Tyrantrum *(−C)*; Walrein, Gastrodon *(−C)* | Every 3 rounds the Steamline borrows Volcanic, Cinderglass, Frozen Lake, Desert, the flood or the glass; off-type attacks are ×1.2 (Rock Slide, Earthquake, Earth Power, Clear Smog), so both soldiers carry coverage | Read the borrowed field each third round and switch to it |
-| Ch19 war, the Glass Dunes 926 crest (`ASHKAAR_SOLDIER_F` 1, `ISENMAR_SOLDIER_F` 1) | Desert → glass / bloom | Talonflame, Turtonator *(−C)*; Politoed, Kingdra *(−C)* | Ashkaar makes **glass**: Turtonator's two Overheats are the two searing moves, then it draws 1/16 a turn from the glass and Flash Cannon refracts ×1.3. Isenmar makes **rain**: Drizzle soaks the dunes into the Superbloom for Swift Swim Kingdra; on glass its Ice Beam cracks the crust and Hydro Pump is a flood | The weather decides the dunes: bring your own; Protect through the Overheats |
-| Ch19 war, Glass Dunes **partner double** (backing Isenmar): Marisol (`LEADER_MARISOL` 19) beside you vs `ASHKAAR_OFFICER` 1 + `ASHKAAR_SOLDIER_M` 2 | Desert → Glass Dunes | Captain: Torkoal, Coalossal *(−C)*, Arcanine (Intimidate), Garchomp; Soldier: Charizard, Haxorus *(−C)*, **+Hard** Ninetales (a second Drought) | **The glass plan.** Drought (7 turns on the dunes) + Eruption (spread, searing, Fire ×1.2 ×1.5 sun); Charizard's Overheat is the second searing move and the dunes fuse to glass: Fire types heal 1/16 a turn there, Coalossal enters at +1 Speed and Tar Shot sets up the next Eruption; Solar Power is free on the sand and Solar Beam is ×1.5 there, ×1.3 off the glass. No quakes in the line (they would crack its own glass) | Marisol's Drizzle takes the sky (rain halves the Fire); Wide Guard, Protect; KO Torkoal before the second searing move; on glass, quakes and big Ice moves crack it (three in the rain → the flood) |
+| Ch19 war, the Glass Dunes 926 crest (`ASHKAAR_SOLDIER_F` 1, `ISENMAR_SOLDIER_F` 1) | Desert → glass / bloom | Talonflame, Turtonator *(−C)*; Politoed, Kingdra *(−C)* | Ashkaar makes **glass**: Turtonator's two Overheats are the two searing moves, then it draws 1/16 a turn from the glass and Flash Cannon refracts ×1.3. Isenmar makes **rain**: Drizzle soaks the dunes into the Superbloom for Swift Swim Kingdra; on hot glass its Ice Beam cracks the crust and Hydro Pump is a flood, and rain cools the glass into Mirror Glass in two rounds, where Ice Beam ricochets ×1.5 (Rev 24) | The weather decides the dunes: bring your own; Protect through the Overheats; Electric is ×0.8 on glass (it insulates) |
+| Ch19 war, Glass Dunes **partner double** (backing Isenmar): Marisol (`LEADER_MARISOL` 19) beside you vs `ASHKAAR_OFFICER` 1 + `ASHKAAR_SOLDIER_M` 2 | Desert → Glass Dunes | Captain: Torkoal, Coalossal *(−C)*, Arcanine (Intimidate), Garchomp; Soldier: Charizard, Haxorus *(−C)*, **+Hard** Ninetales (a second Drought) | **The glass plan.** Drought (7 turns on the dunes) + Eruption (spread, searing, Fire ×1.2 ×1.5 sun); Charizard's Overheat is the second searing move and the dunes fuse to glass: Fire types heal 1/16 a turn there, Coalossal enters at +1 Speed and Tar Shot sets up the next Eruption; Solar Power is free on the sand and Solar Beam is ×1.5 there, ×1.3 off the glass. No quakes in the line (they would crack its own glass) | Marisol's Drizzle takes the sky (rain halves the Fire); Wide Guard, Protect; KO Torkoal before the second searing move; on glass, quakes, damaging sound moves and (while it's hot) big Ice moves crack it (three in the rain → the flood; each crack leaves broken glass on their side), and in rain it cools into Mirror Glass unless their Fire keeps it hot (Rev 24) |
 | Ch19 war, Glass Dunes **partner double** (backing Ashkaar): Sigrun (`LEADER_SIGRUN` 19) beside you vs `ISENMAR_OFFICER` 1 + `ISENMAR_SOLDIER_M` 2 | Desert → Superbloom (→ the flood once Kyogre is in) | Captain: Pelipper, Kingdra *(−C)*, Lapras, Arctovish; Soldier: Mamoswine, Seismitoad *(−C)*, **+Hard** Cloyster | **The sea plan.** Pelipper's Drizzle and Tailwind: rain soaks the dunes (Superbloom: the Water and Ice nerfs lift, Ground still ×1.2) and holds Kyogre's flood in. Kingdra's Swift Swim on top of Tailwind; Arctovish's Fishious Rend doubles when it moves first, which in rain + Tailwind is always. Mamoswine leads beside the bird so its Earthquake spares it; Lapras's Freeze-Dry ×3 freezes the flood into a Frozen Lake, Isenmar's second ground | Sigrun's dragons resist Water; Heat Wave and two Fire attacks bake the bloom back to sand; KO Pelipper first |
 | Stand between: Sigrun beside you vs `ISENMAR_OFFICER` 1 + `ASHKAAR_OFFICER` 1 | Desert, both ways at once | the two Captains above | A weather war on the other side of the field: Drizzle against Drought, bloom against glass. Whoever sets weather last owns the dunes | Pick the side of the weather war that suits your team and help it win |
 
@@ -433,7 +443,7 @@ Frozen Lake (+16), a Superbloom a little (+8), never the glass (−20); Ashkaar 
 
 | The legendary (Prismfall Bosses `106_Boss_WarLegends.rb`) | Field | Bars | Plan | Counterplay |
 |---|---|---|---|---|
-| **Reshiram** `:RESHIRAM_GLASS_DUNES` (default; Lv 85, Calm, HP/Sp. Def EVs, HP ×1.35 on Standard) | Desert → (break 1) the flood-sea in a storm → Blue Flare glasses it | 2 / 3 / 3 | Bar 1 has no searing move (the sand stays sand until the sea comes); break 1 brings the flood and the rain and teaches **Blue Flare** (white fire glasses the flood in one, even rain-halved); break 2 teaches Fusion Flare | Water / Rock / Dragon; hit hard during the storm's rain (Fire halved); on the glass, quakes crack it back to sand |
+| **Reshiram** `:RESHIRAM_GLASS_DUNES` (default; Lv 85, Calm, HP/Sp. Def EVs, HP ×1.35 on Standard) | Desert → (break 1) the flood-sea in a storm → Blue Flare glasses it | 2 / 3 / 3 | Bar 1 has no searing move (the sand stays sand until the sea comes); break 1 brings the flood and the rain and teaches **Blue Flare** (white fire glasses the flood in one, even rain-halved); break 2 teaches Fusion Flare | Water / Rock / Dragon; hit hard during the storm's rain (Fire halved); on the glass, quakes and sound moves crack it back to sand; the storm's rain cools it into Mirror Glass until Reshiram's next Fire move (Rev 24: 3 of 8 harness runs) |
 | **Kyogre** `:KYOGRE_GLASS_DUNES` (backing Ashkaar; Lv 85, Calm, HP/Sp. Def EVs) | Desert → Drizzle's Superbloom → (break 1) the flood-sea, the rain passes | 2 / 3 / 3 | Surf in rain on the bloom; break 1: the sea comes in, **the rain blows over** (no rain × flood stacking), Origin Pulse and Calm Mind arrive; break 2: the sea armours it (+1 Def / Sp. Def; Hard also +1 Sp. Atk). **No Primal form in the fight**: Primordial Sea over the flood is ×1.95 before STAB and one-shot everything neutral | Grass (×1.5 in the bloom), Electric (×1.3 against it in the flood), Storm Drain / Water Absorb; the tide drains the flood if nobody feeds it Water attacks |
 
 Harness (`/home/claude/work/trainers2/run_late.rb`, a well-built Lv 85 six with Full Restores, AI-piloted, 8 runs each):

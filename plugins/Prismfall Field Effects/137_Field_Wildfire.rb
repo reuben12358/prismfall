@@ -4,8 +4,8 @@
 # Field, told from the fire-users' side: fire Pokemon draw the blaze into their
 # attacks, winds fan it, every fire attack can spread it around the foes.
 #   Stage 1 Wildfire: it burns down to embers after 4 rounds unless fire
-#                     attacks keep feeding it; water, rain, sand or a strong
-#                     gust put it out sooner.
+#                     attacks keep feeding it; water, rain or sand put it
+#                     out sooner (wind only fans it).
 #   Stage 2 Embers:   smouldering coals and fertile ash - fire still flares,
 #                     ghosts thicken in the smoke, pioneer plants take root.
 #                     Big fire or sun re-ignite it; rain, Grassy Terrain or
@@ -16,7 +16,6 @@ FieldEffects.register(:WILDFIRE, (lambda do
   winds   = [:GUST, :TWISTER, :AIRCUTTER, :HURRICANE, :RAZORWIND, :HEATWAVE, :BLEAKWINDSTORM, :AIRSLASH]
   douse   = [:SURF, :MUDDYWATER, :HYDROPUMP, :WATERSPOUT, :WATERPLEDGE, :SPARKLINGARIA, :WAVECRASH, :SANDTOMB,
              :WATERSPORT, :MUDSPORT]
-  gusts   = [:DEFOG, :WHIRLWIND, :TAILWIND]
   big_fire = [:ERUPTION, :LAVAPLUME, :HEATWAVE, :FIREBLAST, :INFERNO, :OVERHEAT, :BLASTBURN, :FIREPLEDGE,
               :FLAREBLITZ, :BURNUP, :MAGMASTORM, :FUSIONFLARE, :BLUEFLARE]
   regrow  = [:GROWTH, :INGRAIN, :GRASSPLEDGE, :FLORALHEALING, :ROTOTILLER, :LEECHSEED]
@@ -49,7 +48,7 @@ FieldEffects.register(:WILDFIRE, (lambda do
                        "Spreading: a damaging Fire attack may spread the fire around the user's foes (30%: a 3-turn sea of fire on their side).",
                        "Will-O-Wisp never misses; Smokescreen drops accuracy one stage more. Nothing can be frozen.",
                        "Fuel: it burns down to Embers after 4 rounds; each damaging Fire attack feeds it a round (max 5).",
-                       "Put out sooner: 2 douses (Surf, Muddy Water, Hydro Pump, Water Spout, Sand Tomb, Water/Mud Sport...), Defog, Whirlwind or Tailwind, rain or a sandstorm -> Embers.",
+                       "Put out sooner: 2 douses (Surf, Muddy Water, Hydro Pump, Water Spout, Sand Tomb, Water/Mud Sport...), rain or a sandstorm -> Embers. Wind fans it, it never blows it out.",
                        "Embers (stage 2): Fire, Ground, Grass and Ghost x1.2 (coals, ash, pioneer shoots, smoke wraiths); Flare Boost active; wind moves whirl ash (30% accuracy -1); Grass types take root in the fertile ash (1/16 HP a turn); Growth also +1 Sp. Atk.",
                        "Embers: 2 big fire moves or sunlight -> Wildfire again. Rain, Grassy Terrain, or 2 growing moves (Growth, Ingrain, Grass Pledge, Rototiller...) -> Meadow (life returns).",
                        "Elemental Seed: +1 Attack, +1 Sp. Atk and Flash Fire, but the holder is burned."],
@@ -98,7 +97,6 @@ FieldEffects.register(:WILDFIRE, (lambda do
       { :moves => douse, :stage => 2, :uses => 2, :even_if_failed => true,
         :progress_message => "Steam hisses as the flames die back... ({1} more)",
         :message => "The wildfire was beaten down to smouldering embers!" },
-      { :moves => gusts, :stage => 2, :even_if_failed => true, :message => "The gale blew the flames down to embers!" },
       { :weather => [:Rain, :HeavyRain, :Sandstorm], :stage => 2, :message => "The flames died down to glowing embers!" }
     ],
     :seed => { :item => :ELEMENTALSEED, :status => :BURN, :stats => { :ATTACK => 1, :SPECIAL_ATTACK => 1 },

@@ -82,7 +82,7 @@ FieldEffects.register(:FLOODED_DUNES, (lambda do
                        "Mud: damaging Ground moves also hit as Water. Mud Shot, Mud Bomb, Mud-Slap, Muddy Water, Whirlpool and Sand Tomb x1.5 (Whirlpool and Sand Tomb more accurate). Physical Ground moves may churn quicksand round a grounded target (30%: Speed -1).",
                        "Wave Crash, Dive, Aqua Step, Flip Turn x1.3; Surf, Surging Strikes x1.2. Spikes, Toxic Spikes and Stealth Rock sink without a trace.",
                        "Wading: grounded Pokemon that aren't Water or Ground type move at x0.75 Speed (Swift Swim, Surge Surfer and Turboblaze aren't slowed). Swift Swim, Torrent, Rain Dish, Hydration and Dry Skin act as if it were raining.",
-                       "Grounded Pokemon can't be burned, and the cold water soothes old burns. Water Absorb and Storm Drain drink in the flood (1/16 HP). Water Compaction +1 Def and +1 Sp. Def, Steam Engine +1 Speed on entry.",
+                       "Grounded Pokemon can't be burned, and the cold water soothes old burns. Water Absorb and Storm Drain drink in the flood (1/16 HP). Water Compaction +1 Def and +1 Sp. Def on entry.",
                        "Rain lasts 3 turns longer; sandstorms can't blow over the water.",
                        "The tide: the flood drains into the sand after 5 rounds unless it rains; each damaging Water attack feeds it a round (max 6); sun drains it twice as fast. Drained, it leaves the Desert's Superbloom.",
                        "Blue Flare or Fusion Flare (or 2 other searing moves) fuse the wet sand into the Glass Dunes - even when heavy rain snuffs the flame. 3 big Ice moves freeze the flood into a Frozen Lake.",
@@ -130,9 +130,7 @@ FieldEffects.register(:FLOODED_DUNES, (lambda do
     ],
     :on_entry      => [
       { :battlers => { :abilities => [:WATERCOMPACTION] }, :stats => { :DEFENSE => 1, :SPECIAL_DEFENSE => 1 },
-        :message => "{1} packed the wet sand tight around itself!" },
-      { :battlers => { :abilities => [:STEAMENGINE] }, :stats => { :SPEED => 1 },
-        :message => "{1} drew steam from the floodwater!" }
+        :message => "{1} packed the wet sand tight around itself!" }
     ],
     :end_of_round  => [
       { :battlers => { :grounded => true, :status => [:BURN] }, :cure_status => true,

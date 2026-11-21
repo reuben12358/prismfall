@@ -3,7 +3,8 @@
 # Also what CORROSIVE_MIRE becomes when its gas burns off and what a SCRAPYARD
 # becomes when its chemicals leach out. Grime-dwellers thrive: sludge carries
 # strange afflictions, hazards splinter into Imprint shards, tough weeds whip.
-# Life (Grassy Terrain) -> FLOWER_GARDEN; Purify x2 -> MEADOW.
+# Life returns as grass first: Grassy Terrain or Purify x2 -> MEADOW (Rev 24
+# audit: it was Grassy Terrain -> FLOWER_GARDEN, a tended garden out of slag).
 # Family: Telluric.
 # (Helpers inside the lambda so they don't leak into TOPLEVEL_BINDING.)
 #===============================================================================
@@ -24,7 +25,7 @@ FieldEffects.register(:WASTELAND, (lambda do
                        "Synthesis, Morning Sun and Moonlight fail under the jaundiced sky.",
                        "Hazards splinter: Stealth Rock adds an Imprint shard of a random type (1/16, scaled by that type); Toxic Spikes also eat into grounded Pokemon (1/16 Poison-scaled). Heavy-Duty Boots protect.",
                        "Sandstorm lasts 3 turns longer.",
-                       "Grassy Terrain -> Flower Garden (life returns). 2 Purify (they count even if they fail) -> Meadow.",
+                       "Life returns: Grassy Terrain, or 2 Purify (they count even if they fail) -> Meadow.",
                        "Telluric Seed: +1 Attack and +1 Sp. Atk, but the holder is badly poisoned (great on Poison types and Poison Heal)."],
     :nature_power  => :GUNKSHOT,
     :camouflage    => :POISON,
@@ -76,8 +77,8 @@ FieldEffects.register(:WASTELAND, (lambda do
     ],
     :weather       => { :extend => { :Sandstorm => 3 } },
     :transitions   => [
-      { :terrain => [:Grassy], :to => :FLOWER_GARDEN,
-        :message => "Life took root in the blighted soil! Buds push up through the slag!" },
+      { :terrain => [:Grassy], :to => :MEADOW,
+        :message => "Grass took root in the blighted soil and spread across the slag! Life returns!" },
       { :moves => [:PURIFY], :even_if_failed => true, :to => :MEADOW, :uses => 2,
         :progress_message => "The blight is lifting... ({1} more)",
         :message => "The blight lifted! Grass ripples across land that can breathe again!" }

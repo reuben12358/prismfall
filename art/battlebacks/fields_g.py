@@ -9,6 +9,7 @@ from props import *
 from rubygen import S
 from fields_a import REJ, REB, DES, EBDX, OWN, O
 from fields_f import AVEON, art, sheet_layer
+from fields_d import with_stages
 
 SEA_HORIZON = 232      # HD y where the far sea meets the low sky (in the valley gap)
 
@@ -316,4 +317,117 @@ def glass_dunes():
                               "hue-cycling prismatic shimmer band (EBDX rainbow layer), steam strip"]]}
 
 
-BUILDERS = {"FLOODED_DUNES": flooded_dunes, "GLASS_DUNES": glass_dunes}
+#---------------------------------------------------------------------------------------------
+# GLASS_DUNES stage 2: Mirror Glass (SPINE Rev 24). The same glassed dunes after the heat has gone out of them: the
+# steam has cleared, the glass is clear and cool, and every dune face is a mirror of the sky (Reborn's Mirror Arena).
+#---------------------------------------------------------------------------------------------
+def glass_mirror():
+    F = "glass_dunes_mirror"
+    hd = _bare()
+    m = _masks(hd)
+    a = arr(hd)
+    lum = _lum(a)
+    out = a.copy()
+    ys, xs = m["ys"], m["xs"]
+    H0 = float(SEA_HORIZON)
+    # one cool clear sky, deep azure at the zenith, pale at the horizon; reflected in the glass by elevation
+    zen, hor = np.array([46, 104, 178], np.float32), np.array([200, 232, 246], np.float32)
+    v_sky = np.clip((H0 - ys) / H0, 0, 1)                          # 0 at the horizon, 1 at the top
+    v_land = np.clip((ys - H0) / (693.0 - H0), 0, 1) ** 0.8        # the glass at your feet reflects the high sky
+    v = np.where(ys < H0, v_sky, v_land)
+    skycol = hor * (1 - v[..., None]) + zen * v[..., None]
+    # thin high cirrus streaks (and, fainter, their mirror images in the glass)
+    cn = noise((40, 160), 5, 851, 3)
+    cn = np.asarray(Image.fromarray((cn * 255).astype(np.uint8)).resize((864, 693), Image.BICUBIC), np.float32) / 255
+    band = np.exp(-((v - 0.5) / 0.16) ** 2)
+    cloud = np.round(np.clip((cn - 0.6) / 0.2, 0, 1) * band * 3) / 3
+    cloud = np.where(ys < H0, cloud, cloud * 0.45)
+    skycol = skycol * (1 - cloud[..., None] * 0.7) + np.array([250, 252, 255], np.float32) * cloud[..., None] * 0.7
+    out[..., :3] = np.where(m["sky"][..., None], skycol, out[..., :3])
+    # the glass: clear green glass (lighter than the hot glass, no smoke in it) with the sky mirrored in every face;
+    # the dune shading still reads, and the ridges catch the light
+    land = m["sand"] | m["water"]
+    shade = np.clip((lum - 0.12) / 0.78, 0, 1)
+    body = _ramp(shade ** 1.15, [(0.0, (6, 34, 30)), (0.3, (26, 92, 80)), (0.55, (66, 158, 136)), (0.8, (156, 222, 204)),
+                                 (1.0, (236, 255, 250))])
+    glass = body * 0.55 + skycol * (0.35 + 0.25 * shade[..., None])
+    glass = np.round(np.clip(glass, 0, 255) / 8) * 8
+    spec = (shade > 0.86)
+    glass = np.where(spec[..., None], np.array([240, 252, 255], np.float32), glass)
+    out[..., :3] = np.where(land[..., None], glass, out[..., :3])
+    # the flood that was glassed: frozen swell ridges show as bright mirror lines
+    ridge = (np.sin(xs / 23.0 + np.sin(ys / 9.0) * 1.6 + ys * 0.9) > 0.86) & m["water"]
+    out[..., :3] = np.where(ridge[..., None], np.array([214, 240, 252], np.float32), out[..., :3])
+    rim = _shore_band(m["water"], 3) & m["sand"]
+    out[..., :3] = np.where(rim[..., None], np.array([170, 220, 236], np.float32), out[..., :3])
+    # the old boiling pools are still now: dark mirror ponds with a bright rim
+    nn = noise(HD, 6, 831, 2)
+    deep = np.zeros(m["water"].shape, bool)
+    for (cx, cy, rx, ry) in ((430, 300, 46, 9), (612, 418, 62, 13), (360, 470, 74, 16), (630, 606, 90, 19),
+                             (150, 470, 70, 15)):
+        deep |= (((xs - cx) / rx) ** 2 + ((ys - cy) / ry) ** 2 + (nn - 0.5) * 0.5) < 1.0
+    deep &= m["water"]
+    pond = skycol * 0.92 + np.array([0, 8, 10], np.float32)
+    out[..., :3] = np.where(deep[..., None], pond, out[..., :3])
+    inner = ndi.binary_erosion(deep, iterations=4)
+    streak = inner & (np.sin(ys * 1.7 + xs * 0.05) > 0.97) & (noise(HD, 14, 853, 1) > 0.55)
+    out[..., :3] = np.where(streak[..., None], np.array([250, 254, 255], np.float32), out[..., :3])
+    pr = _shore_band(deep, 2) & ~deep
+    out[..., :3] = np.where(pr[..., None], np.array([236, 250, 255], np.float32), out[..., :3])
+    # scorched rock gone cold and blue-grey; the glass cacti clear as ice
+    rock_rgb = _ramp(lum, [(0.1, (14, 18, 26)), (0.4, (52, 60, 74)), (0.7, (98, 110, 124)), (1.0, (168, 184, 196))])
+    out[..., :3] = np.where(m["rock"][..., None], rock_rgb, out[..., :3])
+    cac = _ramp(lum, [(0.0, (20, 60, 70)), (0.4, (70, 150, 170)), (0.7, (150, 220, 232)), (1.0, (240, 255, 255))])
+    out[..., :3] = np.where(m["cactus"][..., None], cac, out[..., :3])
+    hd = img(out)
+    # the wave set in glass, now clear
+    wv = glass_wave()
+    wa = arr(wv)
+    wl = _lum(wa)
+    wa[..., :3] = _ramp(wl, [(0.0, (14, 40, 60)), (0.3, (70, 150, 180)), (0.6, (160, 222, 240)), (1.0, (250, 255, 255))])
+    hd.alpha_composite(img(wa), (296, 342 - wv.height))
+    # mirror platforms: sky-blue discs with a white rim and a sun glint
+    for c, rx, ry, t in ((FOE, 116, 25, 8), (PLAYER, *pb(116, 25), 14)):
+        platform(hd, c, rx, ry, (150, 200, 230), (60, 100, 140), outline=(236, 250, 255), thick=t, highlight=True)
+        dd = ImageDraw.Draw(hd)
+        dd.arc([c[0] - rx * 0.8, c[1] - ry * 0.8, c[0] + rx * 0.8, c[1] + ry * 0.8], 200, 330,
+               fill=(255, 255, 255, 255), width=2)
+        dd.arc([c[0] - rx * 0.55, c[1] - ry * 0.55, c[0] + rx * 0.55, c[1] + ry * 0.55], 20, 70,
+               fill=(255, 255, 255, 200), width=2)
+    hd = blend(hd, vgradient(HD, [(0, (170, 210, 255, 50)), (0.5, (220, 240, 255, 20)), (1, (40, 80, 120, 40))]),
+               "softlight")
+    fields_a.save_room("field_glass_dunes_mirror", hd)
+    # --- animated layers: facets that flash, a sheen that sweeps the dunes, the sun and its reflection
+    facet = mask_from(hd, lambda r, g, b: (r > 225) & (g > 240) & (b > 245))
+    sheen = np.zeros(m["sand"].shape, np.float32)
+    diag = (xs * 0.55 + ys)
+    sheen[(np.abs(diag - 620) < 26) & land] = 1.0
+    sheen[(np.abs(diag - 680) < 9) & land] = 1.0
+    layers = [layer(F, "facets", glow_from_mask(facet, (255, 255, 255), radius=3, gain=1.3, core=0.6), z=1, blend=1,
+                    anim=S("pulse"), min=40, max=190, period=110),
+              layer(F, "sheen", glow_from_mask(sheen, (235, 248, 255), radius=10, gain=0.8, core=0.25), z=1, blend=1,
+                    anim=[S("drift"), S("pulse")], amp=60, min=20, max=110, period=300),
+              layer(F, "ponds", glow_from_mask(deep.astype(np.float32), (200, 235, 255), radius=4, gain=0.4, core=0.08),
+                    z=1, blend=1, anim=S("pulse"), min=15, max=60, period=170),
+              layer(F, "sun", soft_glow((560, 150), 170, (255, 255, 255), alpha=170), z=1, blend=1, anim=S("pulse"),
+                    min=110, max=180, period=240),
+              layer(F, "sunglint", soft_glow((560, 430), 120, (255, 255, 255), alpha=120, squash=0.35), z=1, blend=1,
+                    anim=S("pulse"), min=50, max=130, period=240, phase=1.0)]
+    extras = {"img001": {S("bitmap"): "pf_glass_dunes_prism", S("rainbow"): True, S("speed"): 2, S("flat"): True,
+                         S("ox"): 0, S("oy"): 0, S("x"): 0, S("y"): round(200 / 2.25, 2), S("zoom_x"): INV,
+                         S("zoom_y"): INV, S("z"): 2, S("opacity"): 110},
+              "img002": strip(F, "cirrus", fog_strip(864, 80, (250, 252, 255), seed=852, scale=30, density=0.42,
+                                                     alpha=70), 70, speed=0.3, direction=1, z=1)}
+    fx = [P(type=":twinkle", count=34, shape=":spark", size=7, colors=[[255, 255, 255], [215, 240, 255]],
+            area=[0, 110, 384, 308], speed=[3, 7], zoom=[0.4, 1.0], opacity=[180, 255], layers=[":back", ":mid"],
+            blend=1),
+          P(type=":twinkle", count=10, shape=":spark", size=5, colors=[[255, 230, 250], [210, 255, 235], [220, 230, 255]],
+            area=[0, 130, 384, 308], speed=[2, 5], zoom=[0.4, 0.8], opacity=[140, 220], layers=[":back"], blend=1)]
+    return {"profile": {S("art_extras"): extras, S("layers"): layers, S("fx"): fx},
+            "note": "Mirror Glass: the same glassed dunes after the heat has gone - clear glass mirroring a cool sky "
+                    "and its clouds (by elevation), still mirror ponds where the pools boiled, clear glass cacti and "
+                    "wave, mirror platforms; facet flashes, a sweeping sheen, the sun and its glint, drifting cirrus; "
+                    "no steam"}
+
+
+BUILDERS = {"FLOODED_DUNES": flooded_dunes, "GLASS_DUNES": with_stages(glass_dunes, {2: glass_mirror})}

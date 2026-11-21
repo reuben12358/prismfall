@@ -2,8 +2,10 @@
 # UNDERWATER - Beneath the waves (Dive from WATER_SURFACE, sea-floor ruins).
 # Water Pokemon are in their element; sound carries for miles, current spreads
 # through everything, silt churns into ground attacks. Fire can't burn here.
-# Surfacing moves return to WATER_SURFACE; sludge drives everyone up into a
-# CORROSIVE_MIRE. Family: Elemental.
+# Surfacing moves (Dive, Fly, Bounce) return to WATER_SURFACE. Family: Elemental.
+# (SPINE Rev 24 audit: Sky Drop fails here, so it no longer also surfaces the
+# battle; the Sludge Wave -> CORROSIVE_MIRE change is gone: a polluted deep sea
+# doesn't become a surface swamp.)
 #===============================================================================
 FieldEffects.register(:UNDERWATER, {
   :name          => "Underwater",
@@ -15,10 +17,10 @@ FieldEffects.register(:UNDERWATER, {
                      "Ground attacks churn up the seabed and also hit as Water.",
                      "Physical non-Water attacks from non-Water Pokemon x0.5 (Swift Swim and Steelworker swimmers are exempt).",
                      "Anchor Shot x2; Dive, Water Pulse, Whirlpool, Jet Punch x1.5; Octazooka x1.3 (its ink always clouds); Crabhammer, Liquidation x1.2. Whirlpool may spin the target into confusion.",
-                     "Fire moves fizzle. Fly, Bounce, Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.",
+                     "Fire moves fizzle. Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.",
                      "Non-Water Pokemon move at half Speed. Torrent, Swift Swim (x2 Speed) and Hydration act as if it were raining.",
                      "No weather or terrain reaches the depths. Water Absorb and Dry Skin drink in the sea (1/16 HP).",
-                     "Dive, Bounce, Fly or Sky Drop -> back to the Water Surface (surfacing is not a transform strike). 2 Sludge Waves -> Corrosive Mire.",
+                     "Dive, Fly or Bounce burst up to the surface -> back to the Water Surface (surfacing is not a transform strike).",
                      "Elemental Seed: +1 Speed and Aqua Ring, and the holder adapts to the deep (becomes pure Water type)."],
   :nature_power  => :WATERPULSE,
   :camouflage    => :WATER,
@@ -78,11 +80,8 @@ FieldEffects.register(:UNDERWATER, {
     # can't be looped for x1.3 both ways. Dive surfaces on the turn it strikes (Reborn): one Dive, one change.
     { :moves => [:DIVE], :even_if_failed => true, :strike_turn => true, :boost => false, :to => :WATER_SURFACE,
       :message => "The battle burst back up to the surface!" },
-    { :moves => [:BOUNCE, :FLY, :SKYDROP], :even_if_failed => true, :boost => false, :to => :WATER_SURFACE,
-      :message => "The battle burst back up to the surface!" },
-    { :moves => [:SLUDGEWAVE], :to => :CORROSIVE_MIRE, :uses => 2,
-      :progress_message => "A toxic cloud is spreading through the water... ({1} more)",
-      :message => "The water turned black with toxins! The battle surfaced into a bubbling mire!" }
+    { :moves => [:BOUNCE, :FLY], :even_if_failed => true, :boost => false, :to => :WATER_SURFACE,
+      :message => "The battle burst back up to the surface!" }
   ],
   :seed => { :item => :ELEMENTALSEED, :stats => { :SPEED => 1 }, :effects => [:aqua_ring],
              :message => "{1}'s {2} released a shimmering bubble of air around it!",

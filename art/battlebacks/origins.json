@@ -403,7 +403,15 @@
   "files": [
    "battlebg/field_glass_dunes.png",
    "battlebg/field_glass_dunes_hd.png",
+   "battlebg/field_glass_dunes_mirror.png",
+   "battlebg/field_glass_dunes_mirror_hd.png",
    "elements/pf_glass_dunes_facets.png",
+   "elements/pf_glass_dunes_mirror_cirrus.png",
+   "elements/pf_glass_dunes_mirror_facets.png",
+   "elements/pf_glass_dunes_mirror_ponds.png",
+   "elements/pf_glass_dunes_mirror_sheen.png",
+   "elements/pf_glass_dunes_mirror_sun.png",
+   "elements/pf_glass_dunes_mirror_sunglint.png",
    "elements/pf_glass_dunes_plume.png",
    "elements/pf_glass_dunes_pools.png",
    "elements/pf_glass_dunes_prism.png",
@@ -419,6 +427,10 @@
    [
     "Prismfall (procedural, art/battlebacks/*.py)",
     "glassed flood ridges, boiling pools, amber cooling seams, breaking wave set in glass, glass cacti and platforms, steam plumes (8-cell sheets), facet glints, white-fire sun, hue-cycling prismatic shimmer band (EBDX rainbow layer), steam strip"
+   ],
+   [
+    "stage 2",
+    "Mirror Glass: the same glassed dunes after the heat has gone - clear glass mirroring a cool sky and its clouds (by elevation), still mirror ponds where the pools boiled, clear glass cacti and wave, mirror platforms; facet flashes, a sweeping sheen, the sun and its glint, drifting cirrus; no steam"
    ]
   ]
  },

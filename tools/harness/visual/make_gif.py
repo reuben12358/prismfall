@@ -45,10 +45,10 @@ def wrap(text, fnt, width, draw):
     return lines
 
 
-def captioned(frame, title, note=None):
+def captioned(frame, title, note=None, caption=None):
     w, h = frame.size
     tmp = ImageDraw.Draw(frame)
-    cap_lines = wrap(CAPTION, F_SMALL, w - 12, tmp)
+    cap_lines = wrap(caption or CAPTION, F_SMALL, w - 12, tmp)
     title_lines = wrap(title, F_TITLE, w - 12, tmp)
     note_lines = wrap(note, F_TITLE, w - 12, tmp) if note else []
     bar = 8 + 16 * len(title_lines) + 13 * len(cap_lines) + 16 * len(note_lines) + 4
@@ -78,6 +78,7 @@ def main():
     ap.add_argument("--colors", type=int, default=128)
     ap.add_argument("--ms", type=int, default=100, help="ms per GIF frame (step 2 at 100 ms = real time)")
     ap.add_argument("--key", action="append", default=[], help='IDX:caption')
+    ap.add_argument("--caption", default=None, help="replaces the engine caption line (e.g. scripted moves, not AI vs AI)")
     a = ap.parse_args()
 
     files = sorted(glob.glob(os.path.join(a.frames, "f*.bmp")))
@@ -94,7 +95,7 @@ def main():
             frames.append(card)
             durations.append(900)
         for f in files[st:min(en, len(files)):a.step]:
-            frames.append(captioned(Image.open(f).convert("RGB"), a.title))
+            frames.append(captioned(Image.open(f).convert("RGB"), a.title, caption=a.caption))
             durations.append(a.ms)
     # One shared palette (built from a sample of the frames) keeps colours stable between frames,
     # so the GIF encoder only stores the changed region of each frame.
@@ -113,7 +114,7 @@ def main():
         idx, note = k.split(":", 1)
         idx = int(idx)
         png = "%s_key_f%05d.png" % (a.out_prefix, idx)
-        captioned(Image.open(files[idx]).convert("RGB"), a.title + "  (engine frame %d)" % idx, note).save(png)
+        captioned(Image.open(files[idx]).convert("RGB"), a.title + "  (engine frame %d)" % idx, note, a.caption).save(png)
         print("wrote", png)
 
 

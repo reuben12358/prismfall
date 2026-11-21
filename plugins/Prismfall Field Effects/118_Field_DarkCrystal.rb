@@ -1,7 +1,8 @@
 #===============================================================================
 # DARK_CRYSTAL - CRYSTAL_CAVERN with its light dead: the same geode, crystals
 # gone obsidian-violet. Creatures of the dark hunt by feel and hide in it;
-# light pierces it and two bright moves (or sunlight) rekindle the crystals.
+# light pierces it and two bright moves rekindle the crystals. Underground: no sun,
+# rain or hail (SPINE Rev 24 audit: sunlight used to rekindle it from a cave).
 # Also used for Darkglass Mine / Lightless Deep. Family: Magical.
 #===============================================================================
 FieldEffects.register(:DARK_CRYSTAL, (lambda do
@@ -20,7 +21,8 @@ FieldEffects.register(:DARK_CRYSTAL, (lambda do
                        "Damaging moves from Pokemon that aren't Dark, Ghost or Rock are x0.9 accurate (Keen Eye, Illuminate, Mind's Eye, No Guard see fine). Illuminate +1 accuracy on entry.",
                        "Dark and Ghost contact moves: +1 critical-hit stage. Flash drops accuracy one stage more. Solar Beam and Solar Blade fail (no light to gather).",
                        "Prism Armor Pokemon take x0.75 from every hit.",
-                       "2 light moves (Flash, Tail Glow and Light of Ruin count too), or sunlight -> Crystal Cavern. An explosion or 3 quakes -> Cave.",
+                       "Underground: Sun, Rain and Hail can't start.",
+                       "2 light moves (Flash, Tail Glow and Light of Ruin count too) -> Crystal Cavern. An explosion or 3 quakes -> Cave.",
                        "Magical Seed: +1 Attack, +1 Sp. Atk."],
     :nature_power  => :DARKPULSE,
     :camouflage    => :DARK,
@@ -50,6 +52,8 @@ FieldEffects.register(:DARK_CRYSTAL, (lambda do
       { :moves => [:FLASH], :target_stats => { :ACCURACY => -1 }, :message => "The sudden flash was blinding in the dark!" }
     ],
     :move_fails    => [{ :moves => [:SOLARBEAM, :SOLARBLADE], :message => "There's no light here for {1} to gather!" }],
+    :weather       => { :block => [:Sun, :Rain, :Hail],
+                        :block_message => "There's no sky down here - the weather can't reach the cavern!" },
     :on_entry      => [
       { :battlers => { :abilities => [:ILLUMINATE] }, :stats => { :ACCURACY => 1 },
         :message => "{1} lit up the darkness around it!" }
@@ -58,7 +62,6 @@ FieldEffects.register(:DARK_CRYSTAL, (lambda do
       { :moves => lights + [:FLASH, :TAILGLOW, :LIGHTOFRUIN], :even_if_failed => true, :uses => 2, :to => :CRYSTAL_CAVERN,
         :progress_message => "A faint glow stirs within the crystals... ({1} more)",
         :message => "Light flooded the crystals! The cavern glitters once more!" },
-      { :weather => [:Sun, :HarshSun], :to => :CRYSTAL_CAVERN, :message => "Sunlight rekindled the crystals!" },
       { :moves => [:EXPLOSION, :SELFDESTRUCT, :MISTYEXPLOSION], :to => :CAVE,
         :message => "The blast shattered the dead crystals!" },
       { :moves => [:EARTHQUAKE, :MAGNITUDE, :BULLDOZE, :FISSURE], :uses => 3, :to => :CAVE,

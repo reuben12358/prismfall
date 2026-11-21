@@ -6,8 +6,12 @@
 #     plugins/~Prismfall Base Fixes/003_Gen9_PsychoShift.rb, which boot.rb loads first like the game does).
 #   * The Dive loop: Water Surface <-> Underwater. Diving down is a transform strike (x1.3) and moves the battle on the
 #     turn Dive strikes; surfacing is not a strike. One Dive = one field change.
+#   * Field logic (SPINE Rev 24, tools/harness/field_checks.rb): the Glass Dunes' Hot Glass / Mirror Glass stages,
+#     sound cracks, broken glass as an entry hazard, insulation; the Frozen Lake thaw and the other audit changes.
 # Every check returns { :name, :ok, :detail, :log }; exceptions land in the log's errors (run_all counts them).
 #===============================================================================
+load File.join(HARNESS_DIR, "field_checks.rb")
+
 module Harness
   module Regressions
     def self.foe_hits(log)
@@ -89,7 +93,7 @@ module Harness
 
     def self.run
       Harness.set_badges(18)
-      [psycho_shift(:BURN), psycho_shift(:PARALYSIS), psycho_shift(nil)] + dive_checks
+      [psycho_shift(:BURN), psycho_shift(:PARALYSIS), psycho_shift(nil)] + dive_checks + FieldChecks.run
     end
   end
 end

@@ -20,7 +20,7 @@ FieldEffects.register(:WATER_SURFACE, (lambda do
                        "Grounded non-Water Pokemon wade at x0.75 Speed. Water attacks may sweep grounded non-Water targets along (Speed -1).",
                        "The cool water soothes grounded Pokemon's burns. Water Absorb sips 1/16 HP a turn. Water Compaction +1 Def, Propeller Tail +1 Speed on entry.",
                        "Rain lasts 3 turns longer, Misty Terrain 2 turns longer. Grassy Terrain can't take root.",
-                       "Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.",
+                       "Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Acid Spray) poison the water -> Corrosive Mire.",
                        "Elemental Seed: +1 Speed and Aqua Ring."],
     :nature_power  => :WHIRLPOOL,
     :camouflage    => :WATER,
@@ -78,7 +78,7 @@ FieldEffects.register(:WATER_SURFACE, (lambda do
       { :moves => big_ice, :category => :damaging, :to => :FROZEN_LAKE, :uses => 3,
         :progress_message => "Ice is spreading across the water... ({1} more)",
         :message => "The water froze solid! The battle is on the ice now!" },
-      { :moves => [:SLUDGEWAVE, :TOXIC, :ACIDSPRAY], :to => :CORROSIVE_MIRE, :uses => 2, :even_if_failed => true,
+      { :moves => [:SLUDGEWAVE, :ACIDSPRAY], :to => :CORROSIVE_MIRE, :uses => 2, :even_if_failed => true,
         :progress_message => "Sludge is spreading through the water... ({1} more)",
         :message => "The water turned to bubbling toxic murk!" }
     ],

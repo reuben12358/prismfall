@@ -2433,7 +2433,150 @@ module PrismfallEBDX
           :layers => [:back, :mid],
           :blend => 0
         }
-      ]
+      ],
+      :stages => {
+        2 => {
+          :art_extras => {
+            "img001" => {
+              :bitmap => "pf_glass_dunes_prism",
+              :rainbow => true,
+              :speed => 2,
+              :flat => true,
+              :ox => 0,
+              :oy => 0,
+              :x => 0,
+              :y => 88.89,
+              :zoom_x => 0.444444444,
+              :zoom_y => 0.444444444,
+              :z => 2,
+              :opacity => 110
+            },
+            "img002" => {
+              :bitmap => "pf_glass_dunes_mirror_cirrus",
+              :scrolling => true,
+              :speed => 0.3,
+              :direction => 1,
+              :flat => true,
+              :ox => 0,
+              :oy => 0,
+              :x => 0,
+              :y => 31.11,
+              :zoom_x => 0.444444444,
+              :zoom_y => 0.444444444,
+              :z => 1
+            }
+          },
+          :layers => [
+            {
+              :bitmap => "pf_glass_dunes_mirror_facets",
+              :hd => true,
+              :x => 23.56,
+              :y => 73.78,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 40,
+              :max => 190,
+              :period => 110
+            },
+            {
+              :bitmap => "pf_glass_dunes_mirror_sheen",
+              :hd => true,
+              :x => 0.0,
+              :y => 82.67,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => [:drift, :pulse],
+              :amp => 60,
+              :min => 20,
+              :max => 110,
+              :period => 300
+            },
+            {
+              :bitmap => "pf_glass_dunes_mirror_ponds",
+              :hd => true,
+              :x => 32.44,
+              :y => 126.22,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 15,
+              :max => 60,
+              :period => 170
+            },
+            {
+              :bitmap => "pf_glass_dunes_mirror_sun",
+              :hd => true,
+              :x => 189.33,
+              :y => 7.11,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 110,
+              :max => 180,
+              :period => 240
+            },
+            {
+              :bitmap => "pf_glass_dunes_mirror_sunglint",
+              :hd => true,
+              :x => 208.89,
+              :y => 176.89,
+              :ox => 0,
+              :oy => 0,
+              :z => 1,
+              :blend => 1,
+              :anim => :pulse,
+              :min => 50,
+              :max => 130,
+              :period => 240,
+              :phase => 1.0
+            }
+          ],
+          :fx => [
+            {
+              :type => :twinkle,
+              :count => 34,
+              :shape => :spark,
+              :size => 7,
+              :colors => [
+                [255, 255, 255],
+                [215, 240, 255]
+              ],
+              :area => [0, 110, 384, 308],
+              :speed => [3, 7],
+              :zoom => [0.4, 1.0],
+              :opacity => [180, 255],
+              :layers => [:back, :mid],
+              :blend => 1
+            },
+            {
+              :type => :twinkle,
+              :count => 10,
+              :shape => :spark,
+              :size => 5,
+              :colors => [
+                [255, 230, 250],
+                [210, 255, 235],
+                [220, 230, 255]
+              ],
+              :area => [0, 130, 384, 308],
+              :speed => [2, 5],
+              :zoom => [0.4, 0.8],
+              :opacity => [140, 220],
+              :layers => [:back],
+              :blend => 1
+            }
+          ]
+        }
+      }
     },
     # <<< GLASS_DUNES
     # >>> GRAND_STAGE

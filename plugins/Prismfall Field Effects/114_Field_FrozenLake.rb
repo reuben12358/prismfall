@@ -3,7 +3,8 @@
 # lake ice under the aurora. Skaters glide and build speed, boulders freeze
 # solid, quakes splinter the surface into jagged spikes. Heat and heavy blows
 # crack it (ice attacks refreeze the cracks); when it gives way the battle
-# drops into the water (WATER_SURFACE). Sunlight melts it.
+# drops into the water (WATER_SURFACE). Three rounds of sunlight thaw it
+# (Rev 24 audit: it used to melt at once, though the ice is too thick to Dig).
 # "Ice remembers. Every crack. Every weight." - Anja Sorrel
 # Family: Elemental.
 #===============================================================================
@@ -18,14 +19,15 @@ FieldEffects.register(:FROZEN_LAKE, (lambda do
     :backdrop      => "field_frozen_lake",
     :family        => :elemental,
     :intro_message => "The battle is taking place on a frozen lake!",
-    :description   => "Skaters glide and build speed, boulders freeze, quakes splinter the ice into spikes. Fire, quakes and heavy blows crack it; ice attacks refreeze it; sunlight melts it.",
+    :description   => "Skaters glide and build speed, boulders freeze, quakes splinter the ice into spikes. Fire, quakes and heavy blows crack it; ice attacks refreeze it; a few rounds of sunlight thaw it.",
     :notes         => ["Ice x1.5. Rock moves freeze into ice boulders (also Ice).",
                        "Skating: Rapid Spin, Rollout, Ice Ball x1.5; Triple Axel, Ice Spinner, Spin Out, Aqua Step, Chilling Water x1.3.",
                        "Sliding: grounded users of priority strikes, Ice Shard, Rollout, Ice Ball, Steamroller, Spin Out, Ice Spinner, Lunge or Defense Curl gain +1 Speed.",
                        "Icy Wind and Glaciate drop Speed one stage more. Slush Rush, Snow Cloak and Ice Body work without hail; Ice Scales and Thick Fat +1 Def on entry.",
                        "Quakes splinter the ice: Earthquake, Magnitude, Bulldoze, Fissure and Stomping Tantrum lay a layer of Spikes on both sides.",
                        "Dig fails (the ice is far too thick). Hail lasts 3 turns longer; Aurora Veil works without hail. Grassy Terrain can't take root.",
-                       "Cracking: 3 hits from any mix of damaging Fire moves, quakes and heavy blows (High Horsepower, Heavy Slam, Body Press, Headlong Rush, Heat Crash) -> Water Surface. Each damaging Ice move refreezes one crack. Sunlight melts it at once.",
+                       "Cracking: 3 hits from any mix of damaging Fire moves, quakes and heavy blows (High Horsepower, Heavy Slam, Body Press, Headlong Rush, Heat Crash) -> Water Surface. Each damaging Ice move refreezes one crack.",
+                       "Thaw: 3 rounds of sunlight melt the lake (each damaging Ice move refreezes one round's thaw); the harsh sun of Desolate Land melts it at once.",
                        "Elemental Seed: +2 Speed - but the holder skates straight across the jagged ice (1/8 HP)."],
     :nature_power  => :ICEBEAM,
     :camouflage    => :ICE,
@@ -77,11 +79,14 @@ FieldEffects.register(:FROZEN_LAKE, (lambda do
         :to => :WATER_SURFACE, :uses => 3,
         :progress_message => "The lake ice groaned and cracked! ({1} more)",
         :message => "The ice gave way! The battle plunged into the freezing lake!" },
-      # Ice attacks refreeze the cracks (rewinds the crack meter by one)
-      { :types => [:ICE], :category => :damaging, :rewind => :crack,
+      # Ice attacks refreeze the cracks and the thaw (rewind each meter by one)
+      { :types => [:ICE], :category => :damaging, :rewind => [:crack, :thaw],
         :message => "The cold sealed the cracks in the ice!" },
-      { :weather => [:Sun, :HarshSun], :to => :WATER_SURFACE,
-        :message => "The sunlight melted the lake ice into open water!" }
+      { :id => :thaw, :check => proc { |battle| battle.pbWeather == :Sun }, :to => :WATER_SURFACE, :uses => 3,
+        :progress_message => "The sun is softening the lake ice... ({1} more)",
+        :message => "The sunlight melted the lake ice into open water!" },
+      { :weather => [:HarshSun], :to => :WATER_SURFACE,
+        :message => "The blazing sun melted the lake ice into open water!" }
     ],
     :seed => { :item => :ELEMENTALSEED, :stats => { :SPEED => 2 }, :damage => 1/8r,
                :message => "{1}'s {2} sent it skating at full speed - straight across the jagged ice!" }

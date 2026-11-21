@@ -29,6 +29,7 @@ FieldEffects.register(:CRYSTAL_CAVERN, (lambda do
                        "Light moves refract into dazzling beams (x1.5): Power Gem, Diamond Storm, Flash Cannon, Dazzling Gleam, Aurora Beam, Luster Purge, Mist Ball, Moongeist Beam, Prismatic Laser, Meteor Beam, Lumina Crash, Ancient Power...",
                        "Ancient Power's stat boost is twice as likely. Flash drops accuracy one stage more; Rock Polish also +1 Sp. Atk.",
                        "Reflect, Light Screen and Aurora Veil last 2 turns longer; Aurora Veil works without hail. Prism Armor Pokemon take x0.75 from every hit.",
+                       "Underground: Sun, Rain and Hail can't start (cave dust still can: a sandstorm smothers the light).",
                        "Dark Pulse, Night Daze, Dark Void, Fiery Wrath or a sandstorm -> Dark Crystal Cavern. An explosion, or 3 quakes -> Cave (the crystals shatter).",
                        "Magical Seed: +1 Sp. Atk and a Light Screen for its side."],
     :nature_power  => :POWERGEM,
@@ -64,6 +65,8 @@ FieldEffects.register(:CRYSTAL_CAVERN, (lambda do
                            :LIGHTSCREEN => [2, "The crystals mirrored the barrier, strengthening it!"],
                            :AURORAVEIL => [2, "The crystals mirrored the barrier, strengthening it!"] },
     :weather_as    => [{ :moves => [:AURORAVEIL], :as => :Hail }],
+    :weather       => { :block => [:Sun, :Rain, :Hail],
+                        :block_message => "There's no sky down here - the weather can't reach the cavern!" },
     :on_entry      => [
       { :battlers => { :not_items => [:HEAVYDUTYBOOTS],
                        :condition => proc { |battle, b| b.pbOwnSide.effects[PBEffects::StealthRock] } },

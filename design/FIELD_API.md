@@ -324,6 +324,10 @@ effects for several seeds; seeds without an entry do nothing on that field.
 **replaces** the listed top-level keys (shallow merge: a stage's `:type_mods` replaces the base `:type_mods` entirely).
 A stage may override any key except `:stages`/`:borrow` (e.g. its own `:backdrop`, `:transitions`, `:intro_message`).
 Change stage via a transition (`:stage`/`:stage_delta`) or `battle.set_field_stage(n, msg)`.
+A stage change clears every transition counter (`FieldEffects.state` is kept). A field whose progress must survive its
+own stage change (the Glass Dunes: its cracks, flood and beam-clash progress carry from Hot Glass to Mirror Glass and
+back) changes the stage itself from a hook and restores the counters by transition `:id` (`140_Field_GlassDunes.rb`,
+`to_stage`).
 `battle.field_stage` / `FieldEffects.stage(battle)` read it; `battle.field_effect` stays the same ID.
 ```ruby
 FieldEffects.register(:FLOWER_GARDEN, {

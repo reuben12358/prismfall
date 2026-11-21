@@ -42,7 +42,7 @@ FieldEffects.register(:NEON_GRID, (lambda do
     :family        => :synthetic,
     :intro_message => "Neon circuitry hums beneath your feet!",
     :description   => "Electric Pokemon draw power from live circuitry; water and steel conduct; nobody can doze off. Quakes, mud or floods black it out.",
-    :notes         => ["Electric x1.5, Steel x1.2. Pulse moves x1.5; neon light moves (Dazzling Gleam, Flash Cannon, Luster Purge...) x1.3.",
+    :notes         => ["Electric x1.5, Steel x1.2. Neon light moves (Dazzling Gleam, Flash Cannon, Luster Purge...) x1.3.",
                        "Conductors: Gear Grind, Magnet Bomb, Gyro Ball, Flash Cannon, Steel Beam, Surf and Muddy Water also hit as Electric.",
                        "Rising Voltage, Magnet Bomb x1.5; Discharge, Parabolic Charge, Zing Zap, Plasma Fists, Electro Drift, Overdrive x1.3.",
                        "Damaging Water moves carry the grid's current (30% paralysis). Zap Cannon has 80% accuracy; Thunder x1.2.",
@@ -65,7 +65,6 @@ FieldEffects.register(:NEON_GRID, (lambda do
                         :OVERDRIVE     => "The arena speakers boomed with {1}'s riff!",
                         :MAGNETBOMB    => "The grid's magnetism guided the bomb home!" },
     :damage_mods   => [
-      { :flags => ["Pulse"], :category => :damaging, :mult => 1.5, :message => "The circuitry amplified {2}!" },
       { :moves => lights, :mult => 1.3, :message => "The neon light intensified {2}!" }
     ],
     :extra_types   => [conductors],

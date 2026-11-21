@@ -1,9 +1,11 @@
-# Prismfall Fields (v1.1, Revision 10 redesign)
+# Prismfall Fields (v1.1, Revision 10 redesign; Revision 24 logic audit)
 
 Player-facing reference for all 35 battle fields. The per-field sections are generated from the field files
 (`plugins/Prismfall Field Effects/1xx_Field_*.rb`: `:description`, `:notes`, transitions, seed), so they match what
 the in-game **Field Notes** show. DSL: `FIELD_API.md`. Research behind the redesign: `FIELD_RESEARCH.md`.
-Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
+Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`. Why each rule and transition is there
+(and what the Revision 24 audit changed): `FIELD_LOGIC_AUDIT.md`. Regenerate the per-field sections with
+`ruby tools/gen_fields_md.rb` (`--check` reports if they're stale).
 
 ## What changed in the redesign
 
@@ -22,8 +24,15 @@ Map defaults: `FIELD_DEFAULTS.yaml`. Backdrop keys: `FIELD_BACKDROPS_NEEDED.md`.
   Glass Dunes; the Steamline (925) is the Bleed, echoing only the war's fields.
 - **Stages** on Grand Stage (applause), Neon Grid (Blackout), Desert (Superbloom), Colosseum (Frenzy), Mindscape
   (Nightmare), Hollow Cathedral (Consecrated), New Moon (Abyss, Lamplight), Dragon's Den (Awakened), Cave (cracked
-  ceiling), Wildfire (Embers) and Flower Garden (5 growth stages).
+  ceiling), Wildfire (Embers), Glass Dunes (Hot Glass, Mirror Glass) and Flower Garden (5 growth stages).
 - **Every battle has a field**: see the end of this file.
+- **Revision 24: every rule has a reason a player could guess** (`FIELD_LOGIC_AUDIT.md`). The **Glass Dunes** got
+  two stages: **Hot Glass** cools into **Mirror Glass** (Reborn's Mirror Arena) after 4 rounds without Fire, and Fire
+  reheats it; sound cracks glass, broken glass stays on the ground as an entry hazard, and glass doesn't conduct.
+  Elsewhere: the Frozen Lake thaws over 3 rounds of sun instead of at once; caverns have no sky (no sun, rain or
+  hail in the Crystal and Dark Crystal Caverns); the Factory shuts out the sun too; wind no longer blows a Wildfire
+  out; Sky Drop no longer surfaces an underwater battle; the Wasteland greens into a Meadow; the Neon Grid lost its
+  Pulse-move boost and the Flooded Dunes their Steam Engine boost.
 
 ## Transition map
 
@@ -36,25 +45,25 @@ effects and the old field's after-move effects, still play out as on the old fie
 | Silkwood | Wildfire (Fire moves ×3, ×2 in sun) |
 | Meadow | Wildfire (Fire ×2, ×1 in sun); Flower Garden (Grassy Terrain, growth moves ×2) |
 | Flower Garden (stage 5) | Wildfire (Fire ×2) |
-| Wildfire | Embers stage (burns out after 4 rounds unless fed; water, wind, rain); Embers → Meadow (rain, Grassy Terrain, growth moves ×2) or back to Wildfire (big Fire moves ×2, sun) |
+| Wildfire | Embers stage (burns out after 4 rounds unless fed; water, sand, rain; wind only fans it); Embers → Meadow (rain, Grassy Terrain, growth moves ×2) or back to Wildfire (big Fire moves ×2, sun) |
 | Volcanic | Cinderglass (big Water or Ice moves ×2, rain, sandstorm) |
 | Cinderglass | Volcanic (eruption moves ×3); Water Surface (big Water moves ×3, heavy rain) |
 | Desert | Superbloom stage (rain, Water moves ×3); Flooded Dunes (heavy rain, Origin Pulse; from the Superbloom also Water moves ×3); Glass Dunes (hottest Fire moves ×2) |
 | Flooded Dunes | Glass Dunes (Blue Flare / Fusion Flare, or searing moves ×2, even snuffed by heavy rain); Frozen Lake (big Ice moves ×3); Desert Superbloom (the tide drains: 5 rounds without rain or Water attacks, faster in sun) |
-| Glass Dunes | Flooded Dunes (heavy rain, Origin Pulse ×2, floods ×3); Desert (3 shatters: quakes, heavy stomps, big Ice moves; Fire anneals a crack) or Flooded Dunes if it's raining; the Bleed (2 beam clashes) |
+| Glass Dunes | Mirror Glass stage (4 rounds without Fire; a Fire move reheats it); Flooded Dunes (heavy rain, Origin Pulse ×2, floods ×3); Desert (3 cracks: quakes, heavy blows, damaging sound moves, big Ice moves on Hot Glass; Fire anneals a crack) or Flooded Dunes if it's raining; the Bleed (2 beam clashes) |
 | Cave | Crystal Cavern (Power Gem, Diamond Storm ×2); Volcanic (eruption moves ×2); Dragon's Den (Draco Meteor, dragon moves ×2) |
 | Mountain | Snowy Mountain (hail, blizzard moves ×2); Volcanic (eruption moves ×2) |
 | Snowy Mountain | Mountain (sun, big Fire moves ×2); Volcanic (Eruption, Magma Storm ×2) |
 | Beach | Water Surface (tide: big Water moves ×3, heavy rain) |
-| Water Surface | Underwater (Dive, Gravity); Frozen Lake (big Ice moves ×3); Corrosive Mire (Sludge Wave, Toxic, Acid Spray ×2) |
-| Underwater | Water Surface (Dive, Fly, Bounce, Sky Drop); Corrosive Mire (Sludge Wave ×2) |
-| Frozen Lake | Water Surface (Fire or quake hits ×3, sun; Ice moves refreeze) |
+| Water Surface | Underwater (Dive, Gravity); Frozen Lake (big Ice moves ×3); Corrosive Mire (Sludge Wave, Acid Spray ×2) |
+| Underwater | Water Surface (Dive, Fly, Bounce) |
+| Frozen Lake | Water Surface (Fire, quake or heavy hits ×3; 3 rounds of sun; harsh sun at once; Ice moves refreeze) |
 | Corrosive Mire | Water Surface (Misty Terrain, Purify ×2); Wasteland (Fire ×2) |
-| Wasteland | Meadow (Purify ×2); Flower Garden (Grassy Terrain) |
+| Wasteland | Meadow (Grassy Terrain, Purify ×2) |
 | Stormfront | Rainbow (Sunny Day ×2) |
 | Rainbow | the field it came from, else Meadow (sandstorm, hail, Defog) |
 | Crystal Cavern | Dark Crystal (Dark Pulse-style moves, sandstorm); Cave (explosions, quakes ×3) |
-| Dark Crystal | Crystal Cavern (light moves ×2, sun); Cave (explosions, quakes ×3) |
+| Dark Crystal | Crystal Cavern (light moves ×2); Cave (explosions, quakes ×3) |
 | Factory | Scrapyard (explosions, quakes ×3) |
 | Scrapyard | Factory (Electric charging moves ×3); Wasteland (acid moves ×2) |
 | Colosseum | Frenzy stage (knockouts); Cave (quakes ×3: the arena floor gives way) |
@@ -64,7 +73,7 @@ effects and the old field's after-move effects, still play out as on the old fie
 | Hollow Cathedral | Consecrated stage (holy moves ×3); Inverse (Topsy-Turvy, Boomburst/Shadow Force ×2) |
 | Inverse | the field it came from, else Mindscape (Topsy-Turvy) |
 | The Bleed, Prism Arena | none (they borrow other fields' effects in rotation; on the Steamline and the Glass Dunes the Bleed only echoes the war's fields) |
-| Grand Stage, Neon Grid, New Moon, Stormfront* | stage changes only (*Stormfront also → Rainbow) |
+| Grand Stage, Neon Grid, New Moon | stage changes only |
 
 ## Silkwood (`:SILKWOOD`)
 
@@ -141,14 +150,14 @@ Swimmers ride the currents, electricity races across the surface and flames hiss
 - Grounded non-Water Pokemon wade at x0.75 Speed. Water attacks may sweep grounded non-Water targets along (Speed -1).
 - The cool water soothes grounded Pokemon's burns. Water Absorb sips 1/16 HP a turn. Water Compaction +1 Def, Propeller Tail +1 Speed on entry.
 - Rain lasts 3 turns longer, Misty Terrain 2 turns longer. Grassy Terrain can't take root.
-- Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Toxic + Sludge Wave) -> Corrosive Mire.
+- Dive (on the turn it strikes) or Gravity -> Underwater. 3 big ice moves -> Frozen Lake. 2 Sludge Waves (or Acid Spray) poison the water -> Corrosive Mire.
 - Elemental Seed: +1 Speed and Aqua Ring.
 
 **Changes:**
 - DIVE → **Underwater**
 - GRAVITY → **Underwater**
 - BLIZZARD, SHEERCOLD, GLACIATE, ICEBEAM, FREEZEDRY x3 → **Frozen Lake**
-- SLUDGEWAVE, TOXIC, ACIDSPRAY x2 → **Corrosive Mire**
+- SLUDGEWAVE, ACIDSPRAY x2 (even if they fail) → **Corrosive Mire**
 
 **Seed (ELEMENTALSEED):** SPEED +1; effects: aqua_ring.
 
@@ -164,15 +173,15 @@ The deep belongs to swimmers: Water and Electric surge, sound carries, silt join
 - Ground attacks churn up the seabed and also hit as Water.
 - Physical non-Water attacks from non-Water Pokemon x0.5 (Swift Swim and Steelworker swimmers are exempt).
 - Anchor Shot x2; Dive, Water Pulse, Whirlpool, Jet Punch x1.5; Octazooka x1.3 (its ink always clouds); Crabhammer, Liquidation x1.2. Whirlpool may spin the target into confusion.
-- Fire moves fizzle. Fly, Bounce, Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.
+- Fire moves fizzle. Sky Drop and every entry hazard fail. Nothing can be burned; burns wash away on entry.
 - Non-Water Pokemon move at half Speed. Torrent, Swift Swim (x2 Speed) and Hydration act as if it were raining.
 - No weather or terrain reaches the depths. Water Absorb and Dry Skin drink in the sea (1/16 HP).
-- Dive, Bounce, Fly or Sky Drop -> back to the Water Surface (surfacing is not a transform strike). 2 Sludge Waves -> Corrosive Mire.
+- Dive, Fly or Bounce burst up to the surface -> back to the Water Surface (surfacing is not a transform strike).
 - Elemental Seed: +1 Speed and Aqua Ring, and the holder adapts to the deep (becomes pure Water type).
 
 **Changes:**
-- DIVE, BOUNCE, FLY, SKYDROP → **Water Surface**
-- SLUDGEWAVE x2 → **Corrosive Mire**
+- DIVE → **Water Surface**
+- BOUNCE, FLY → **Water Surface**
 
 **Seed (ELEMENTALSEED):** SPEED +1; effects: aqua_ring; special effect.
 
@@ -184,7 +193,7 @@ The deep belongs to swimmers: Water and Electric surge, sound carries, silt join
 
 Electric Pokemon draw power from live circuitry; water and steel conduct; nobody can doze off. Quakes, mud or floods black it out.
 
-- Electric x1.5, Steel x1.2. Pulse moves x1.5; neon light moves (Dazzling Gleam, Flash Cannon, Luster Purge...) x1.3.
+- Electric x1.5, Steel x1.2. Neon light moves (Dazzling Gleam, Flash Cannon, Luster Purge...) x1.3.
 - Conductors: Gear Grind, Magnet Bomb, Gyro Ball, Flash Cannon, Steel Beam, Surf and Muddy Water also hit as Electric.
 - Rising Voltage, Magnet Bomb x1.5; Discharge, Parabolic Charge, Zing Zap, Plasma Fists, Electro Drift, Overdrive x1.3.
 - Damaging Water moves carry the grid's current (30% paralysis). Zap Cannon has 80% accuracy; Thunder x1.2.
@@ -261,7 +270,7 @@ Poison Pokemon weaponise the mire: venom laces mud and water, toxins eat through
 
 **Changes:**
 - terrain Misty → **Water Surface**
-- PURIFY x2 → **Water Surface**
+- PURIFY x2 (even if they fail) → **Water Surface**
 - FIRE-type moves x2 → **Wasteland**
 
 **Seed (SYNTHETICSEED):** ATTACK +1, SPECIAL_ATTACK +1; status: POISON.
@@ -287,7 +296,7 @@ Fire Pokemon draw on the magma; winds carry embers; quakes prime eruptions. Wate
 - Elemental Seed: +1 Attack, +1 Sp. Atk, +1 Speed, but the holder is burned.
 
 **Changes:**
-- SURF, MUDDYWATER, WATERSPOUT, HYDROPUMP, WATERPLEDGE +7 more x2 → **Cinderglass**
+- SURF, MUDDYWATER, WATERSPOUT, HYDROPUMP, WATERPLEDGE +7 more x2 (even if they fail) → **Cinderglass**
 - weather Rain/HeavyRain → **Cinderglass**
 - weather Sandstorm → **Cinderglass**
 
@@ -314,7 +323,7 @@ A quenched volcano of obsidian, steam and geysers. Swimmers and fire Pokemon rid
 
 **Changes:**
 - ERUPTION, LAVAPLUME, MAGMASTORM, FIREPLEDGE, INFERNO +4 more x3 → **Volcanic Field**
-- SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, SPARKLINGARIA +3 more x3 → **Water Surface**
+- SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, SPARKLINGARIA +3 more x3 (even if they fail) → **Water Surface**
 - weather HeavyRain → **Water Surface**
 
 **Seed (ELEMENTALSEED):** SPEED +1, EVASION +1, ACCURACY -1.
@@ -456,7 +465,7 @@ Grows in 5 stages from tending, sun, rain and Grass attacks; Grass, Bug and (lat
 
 > The battle is taking place on a frozen lake!
 
-Skaters glide and build speed, boulders freeze, quakes splinter the ice into spikes. Fire, quakes and heavy blows crack it; ice attacks refreeze it; sunlight melts it.
+Skaters glide and build speed, boulders freeze, quakes splinter the ice into spikes. Fire, quakes and heavy blows crack it; ice attacks refreeze it; a few rounds of sunlight thaw it.
 
 - Ice x1.5. Rock moves freeze into ice boulders (also Ice).
 - Skating: Rapid Spin, Rollout, Ice Ball x1.5; Triple Axel, Ice Spinner, Spin Out, Aqua Step, Chilling Water x1.3.
@@ -464,13 +473,15 @@ Skaters glide and build speed, boulders freeze, quakes splinter the ice into spi
 - Icy Wind and Glaciate drop Speed one stage more. Slush Rush, Snow Cloak and Ice Body work without hail; Ice Scales and Thick Fat +1 Def on entry.
 - Quakes splinter the ice: Earthquake, Magnitude, Bulldoze, Fissure and Stomping Tantrum lay a layer of Spikes on both sides.
 - Dig fails (the ice is far too thick). Hail lasts 3 turns longer; Aurora Veil works without hail. Grassy Terrain can't take root.
-- Cracking: 3 hits from any mix of damaging Fire moves, quakes and heavy blows (High Horsepower, Heavy Slam, Body Press, Headlong Rush, Heat Crash) -> Water Surface. Each damaging Ice move refreezes one crack. Sunlight melts it at once.
+- Cracking: 3 hits from any mix of damaging Fire moves, quakes and heavy blows (High Horsepower, Heavy Slam, Body Press, Headlong Rush, Heat Crash) -> Water Surface. Each damaging Ice move refreezes one crack.
+- Thaw: 3 rounds of sunlight melt the lake (each damaging Ice move refreezes one round's thaw); the harsh sun of Desolate Land melts it at once.
 - Elemental Seed: +2 Speed - but the holder skates straight across the jagged ice (1/8 HP).
 
 **Changes:**
 - a field-specific move condition (see notes) x3 → **Water Surface**
 - ICE-type moves → rewinds progress
-- weather Sun/HarshSun → **Water Surface**
+- 3 rounds of sunlight (each damaging Ice move refreezes one) → **Water Surface**
+- weather HarshSun → **Water Surface**
 
 **Seed (ELEMENTALSEED):** SPEED +2.
 
@@ -493,7 +504,7 @@ Fliers ride the gale, wind and Electric moves surge, Tailwind lingers and hazard
 - Elemental Seed: +1 Speed and Charge.
 
 **Changes:**
-- SUNNYDAY x2 → **Rainbow**
+- SUNNYDAY x2 (even if they fail) → **Rainbow**
 
 **Seed (ELEMENTALSEED):** SPEED +1; effects: charge.
 
@@ -541,11 +552,12 @@ The crystals' glow cycles Fire > Water > Grass > Psychic each round: Rock moves 
 - Light moves refract into dazzling beams (x1.5): Power Gem, Diamond Storm, Flash Cannon, Dazzling Gleam, Aurora Beam, Luster Purge, Mist Ball, Moongeist Beam, Prismatic Laser, Meteor Beam, Lumina Crash, Ancient Power...
 - Ancient Power's stat boost is twice as likely. Flash drops accuracy one stage more; Rock Polish also +1 Sp. Atk.
 - Reflect, Light Screen and Aurora Veil last 2 turns longer; Aurora Veil works without hail. Prism Armor Pokemon take x0.75 from every hit.
+- Underground: Sun, Rain and Hail can't start (cave dust still can: a sandstorm smothers the light).
 - Dark Pulse, Night Daze, Dark Void, Fiery Wrath or a sandstorm -> Dark Crystal Cavern. An explosion, or 3 quakes -> Cave (the crystals shatter).
 - Magical Seed: +1 Sp. Atk and a Light Screen for its side.
 
 **Changes:**
-- DARKPULSE, NIGHTDAZE, DARKVOID, FIERYWRATH → **Dark Crystal Cavern**
+- DARKPULSE, NIGHTDAZE, DARKVOID, FIERYWRATH (even if they fail) → **Dark Crystal Cavern**
 - weather Sandstorm → **Dark Crystal Cavern**
 - EXPLOSION, SELFDESTRUCT, MISTYEXPLOSION → **Cave**
 - EARTHQUAKE, MAGNITUDE, BULLDOZE, FISSURE x3 → **Cave**
@@ -566,12 +578,12 @@ Creatures of the dark hunt by feel and hide in it; obsidian edges cut. Most Poke
 - Damaging moves from Pokemon that aren't Dark, Ghost or Rock are x0.9 accurate (Keen Eye, Illuminate, Mind's Eye, No Guard see fine). Illuminate +1 accuracy on entry.
 - Dark and Ghost contact moves: +1 critical-hit stage. Flash drops accuracy one stage more. Solar Beam and Solar Blade fail (no light to gather).
 - Prism Armor Pokemon take x0.75 from every hit.
-- 2 light moves (Flash, Tail Glow and Light of Ruin count too), or sunlight -> Crystal Cavern. An explosion or 3 quakes -> Cave.
+- Underground: Sun, Rain and Hail can't start.
+- 2 light moves (Flash, Tail Glow and Light of Ruin count too) -> Crystal Cavern. An explosion or 3 quakes -> Cave.
 - Magical Seed: +1 Attack, +1 Sp. Atk.
 
 **Changes:**
-- AURORABEAM, SIGNALBEAM, FLASHCANNON, LUSTERPURGE, MISTBALL +15 more x2 → **Crystal Cavern**
-- weather Sun/HarshSun → **Crystal Cavern**
+- AURORABEAM, SIGNALBEAM, FLASHCANNON, LUSTERPURGE, MISTBALL +15 more x2 (even if they fail) → **Crystal Cavern**
 - EXPLOSION, SELFDESTRUCT, MISTYEXPLOSION → **Cave**
 - EARTHQUAKE, MAGNITUDE, BULLDOZE, FISSURE x3 → **Cave**
 
@@ -605,7 +617,7 @@ Ghosts gather in the gloom and the veil is thin (Ghost and Normal hit each other
   - TOPSYTURVY → **Inverse Field**
   - BOOMBURST, SHADOWFORCE, HYPERSPACEFURY, HYPERSPACEHOLE x2 → **Inverse Field**
 
-**Seed (MAGICALSEED):** SPECIAL_DEFENSE +1; adds GHOST type.
+**Seed (MAGICALSEED):** SPECIAL_DEFENSE +1; becomes part GHOST type.
 
 ## Factory (`:FACTORY`)
 
@@ -620,7 +632,7 @@ Steel Pokemon mesh with the machinery: gears, hammers and rollers ring out, meta
 - Damaging Fire moves may soften a Steel target's plating (30%, Defense -1). Metal Sound and Screech never miss.
 - Shift Gear also +1 Defense; Autotomize, Iron Defense and Metal Sound work one stage better; Magnet Rise +1 Speed and lasts 3 turns longer.
 - On entry: Light Metal +1 Speed, Heavy Metal +1 Defense, Download +1 Speed (it syncs with the line).
-- Nothing can be frozen near the crucibles. Indoors: Rain, Sandstorm and Hail can't start. Sun +2 turns, Electric Terrain +2.
+- Nothing can be frozen near the crucibles. Indoors: no weather can start (the crucibles' heat is what powers Fire here). Electric Terrain +2.
 - An explosion (Explosion, Self-Destruct, Misty Explosion, Mind Blown) wrecks it at once; 3 quakes bring the catwalks down. Either leaves a Scrapyard.
 - Synthetic Seed: +1 Attack and +1 Speed.
 
@@ -648,8 +660,8 @@ Scavengers thrive: junk is ammunition, oil burns, cables spark and rust leaves S
 - Synthetic Seed: +1 Defense, +1 Sp. Def, but the bolted-on scrap is heavy (-1 Speed).
 
 **Changes:**
-- CHARGE, DISCHARGE, PARABOLICCHARGE, WILDCHARGE, CHARGEBEAM +6 more x3 → **Factory**
-- ACIDSPRAY, SLUDGEWAVE, CORROSIVEGAS, ACIDARMOR, ACID x2 → **Wasteland**
+- CHARGE, DISCHARGE, PARABOLICCHARGE, WILDCHARGE, CHARGEBEAM +6 more x3 (even if they fail) → **Factory**
+- ACIDSPRAY, SLUDGEWAVE, CORROSIVEGAS, ACIDARMOR, ACID x2 (even if they fail) → **Wasteland**
 
 **Seed (SYNTHETICSEED):** DEFENSE +1, SPECIAL_DEFENSE +1, SPEED -1.
 
@@ -876,12 +888,12 @@ Bleed-scarred badlands where grime-dwellers thrive: sludge carries strange affli
 - Synthesis, Morning Sun and Moonlight fail under the jaundiced sky.
 - Hazards splinter: Stealth Rock adds an Imprint shard of a random type (1/16, scaled by that type); Toxic Spikes also eat into grounded Pokemon (1/16 Poison-scaled). Heavy-Duty Boots protect.
 - Sandstorm lasts 3 turns longer.
-- Grassy Terrain -> Flower Garden (life returns). 2 Purify (they count even if they fail) -> Meadow.
+- Life returns: Grassy Terrain, or 2 Purify (they count even if they fail) -> Meadow.
 - Telluric Seed: +1 Attack and +1 Sp. Atk, but the holder is badly poisoned (great on Poison types and Poison Heal).
 
 **Changes:**
-- terrain Grassy → **Flower Garden**
-- PURIFY x2 → **Meadow**
+- terrain Grassy → **Meadow**
+- PURIFY x2 (even if they fail) → **Meadow**
 
 **Seed (TELLURICSEED):** ATTACK +1, SPECIAL_ATTACK +1; status: TOXIC.
 
@@ -914,7 +926,7 @@ Fire Pokemon draw the blaze into their attacks, winds fan it and every fire atta
 - Spreading: a damaging Fire attack may spread the fire around the user's foes (30%: a 3-turn sea of fire on their side).
 - Will-O-Wisp never misses; Smokescreen drops accuracy one stage more. Nothing can be frozen.
 - Fuel: it burns down to Embers after 4 rounds; each damaging Fire attack feeds it a round (max 5).
-- Put out sooner: 2 douses (Surf, Muddy Water, Hydro Pump, Water Spout, Sand Tomb, Water/Mud Sport...), Defog, Whirlwind or Tailwind, rain or a sandstorm -> Embers.
+- Put out sooner: 2 douses (Surf, Muddy Water, Hydro Pump, Water Spout, Sand Tomb, Water/Mud Sport...), rain or a sandstorm -> Embers. Wind fans it, it never blows it out.
 - Embers (stage 2): Fire, Ground, Grass and Ghost x1.2 (coals, ash, pioneer shoots, smoke wraiths); Flare Boost active; wind moves whirl ash (30% accuracy -1); Grass types take root in the fertile ash (1/16 HP a turn); Growth also +1 Sp. Atk.
 - Embers: 2 big fire moves or sunlight -> Wildfire again. Rain, Grassy Terrain, or 2 growing moves (Growth, Ingrain, Grass Pledge, Rototiller...) -> Meadow (life returns).
 - Elemental Seed: +1 Attack, +1 Sp. Atk and Flash Fire, but the holder is burned.
@@ -922,14 +934,13 @@ Fire Pokemon draw the blaze into their attacks, winds fan it and every fire atta
 **Changes:**
 - a field condition (see notes) → stage 2
 - SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, WATERPLEDGE +5 more x2 → stage 2
-- DEFOG, WHIRLWIND, TAILWIND → stage 2
 - weather Rain/HeavyRain/Sandstorm → stage 2
 - *Stage 2* (`field_wildfire_embers`): Embers: smouldering coals and fertile ash. Fire still flares, ghosts thicken in the smoke and pioneer plants take root. Fire can re-ignite it; rain and growth bring the land back.
   - ERUPTION, LAVAPLUME, HEATWAVE, FIREBLAST, INFERNO +8 more x2 → stage 1
   - weather Sun/HarshSun → stage 1
   - weather Rain/HeavyRain → **Meadow**
   - terrain Grassy → **Meadow**
-  - GROWTH, INGRAIN, GRASSPLEDGE, FLORALHEALING, ROTOTILLER +1 more x2 → **Meadow**
+  - GROWTH, INGRAIN, GRASSPLEDGE, FLORALHEALING, ROTOTILLER +1 more x2 (even if they fail) → **Meadow**
 
 **Seed (ELEMENTALSEED):** ATTACK +1, SPECIAL_ATTACK +1; effects: flash_fire; status: BURN.
 
@@ -955,9 +966,10 @@ Elowen's open countryside: grazers stampede, bugs and birds work the wildflowers
 - FIRE-type moves x2 → **Wildfire**
 - FIRE-type moves, in Sun/HarshSun → **Wildfire**
 - terrain Grassy → **Flower Garden**
-- GROWTH, ROTOTILLER, FLOWERSHIELD, FLORALHEALING, AROMATHERAPY +2 more x2 → **Flower Garden**
+- GROWTH, ROTOTILLER, FLOWERSHIELD, FLORALHEALING, AROMATHERAPY +2 more x2 (even if they fail) → **Flower Garden**
 
 **Seed (TELLURICSEED):** EVASION +1; effects: ingrain.
+
 ## Flooded Dunes (`:FLOODED_DUNES`)
 
 *Elemental field. Backdrop `field_flooded_dunes`. Nature Power: MUDDYWATER. Natural type: WATER.*
@@ -972,7 +984,7 @@ Kyogre's flood-sea over the Bone Sands: swimmers ride it between the dune crests
 - Mud: damaging Ground moves also hit as Water. Mud Shot, Mud Bomb, Mud-Slap, Muddy Water, Whirlpool and Sand Tomb x1.5 (Whirlpool and Sand Tomb more accurate). Physical Ground moves may churn quicksand round a grounded target (30%: Speed -1).
 - Wave Crash, Dive, Aqua Step, Flip Turn x1.3; Surf, Surging Strikes x1.2. Spikes, Toxic Spikes and Stealth Rock sink without a trace.
 - Wading: grounded Pokemon that aren't Water or Ground type move at x0.75 Speed (Swift Swim, Surge Surfer and Turboblaze aren't slowed). Swift Swim, Torrent, Rain Dish, Hydration and Dry Skin act as if it were raining.
-- Grounded Pokemon can't be burned, and the cold water soothes old burns. Water Absorb and Storm Drain drink in the flood (1/16 HP). Water Compaction +1 Def and +1 Sp. Def, Steam Engine +1 Speed on entry.
+- Grounded Pokemon can't be burned, and the cold water soothes old burns. Water Absorb and Storm Drain drink in the flood (1/16 HP). Water Compaction +1 Def and +1 Sp. Def on entry.
 - Rain lasts 3 turns longer; sandstorms can't blow over the water.
 - The tide: the flood drains into the sand after 5 rounds unless it rains; each damaging Water attack feeds it a round (max 6); sun drains it twice as fast. Drained, it leaves the Desert's Superbloom.
 - Blue Flare or Fusion Flare (or 2 other searing moves) fuse the wet sand into the Glass Dunes - even when heavy rain snuffs the flame. 3 big Ice moves freeze the flood into a Frozen Lake.
@@ -982,7 +994,7 @@ Kyogre's flood-sea over the Bone Sands: swimmers ride it between the dune crests
 - BLUEFLARE, FUSIONFLARE (even if they fail) → **Glass Dunes**
 - ERUPTION, BLASTBURN, MAGMASTORM, BURNUP, OVERHEAT +2 more x2 (even if they fail) → **Glass Dunes**
 - BLIZZARD, SHEERCOLD, GLACIATE, ICEBEAM, FREEZEDRY +2 more x3 → **Frozen Lake**
-- the tide runs out (hook: 5 rounds, rain holds it, Water attacks feed it, sun x2) → **Desert** stage 2 (Superbloom)
+- the tide runs out (5 rounds; rain holds it, Water attacks feed it, sun x2) → **Desert** stage 2 (Superbloom)
 
 **Seed (ELEMENTALSEED):** SPEED +1; becomes part WATER type.
 
@@ -992,15 +1004,19 @@ Kyogre's flood-sea over the Bone Sands: swimmers ride it between the dune crests
 
 > The dunes have fused into glass! Steam rises from every hollow!
 
-Steam-glass over the Bone Sands: the heat in the glass feeds fire and boils any water into scalding steam, light refracts, and the brittle crust shatters under quakes and sudden cold. Both Imprints that made it are still inside.
+The glass the white fire made of the Bone Sands. Hot Glass holds the fire's heat for a long time: it feeds fire, flashes water to steam and bends light. Left alone it cools into Mirror Glass, where beams ricochet and reflections strike back. Both are brittle: quakes, heavy blows and loud sound crack them.
 
-- Fire x1.2 (the white fire's heat is still in the glass). Ice x0.8 - but big Ice moves crack it (below). Nothing can be frozen.
-- Water boils on the hot glass: damaging Water moves may burn a grounded target (20%). Scald and Steam Eruption x1.3 and burn more often.
-- Refraction: Aurora Beam, Charge Beam, Dazzling Gleam, Flash Cannon, Luster Purge, Mirror Shot, Photon Geyser, Power Gem, Prismatic Laser, Signal Beam, Solar Beam x1.3. Mirror Shot x1.5 and always lowers accuracy.
-- Mirror-dark glass: Mirror Coat strikes back x1.25; Reflect and Light Screen last 3 turns longer. Mirror Armor +1 Def, Prism Armor +1 Sp. Def on entry.
-- Shattering: quakes, heavy stomps, Rock Smash (x2) and big Ice moves (thermal shock) crack the crust - shards hit each grounded foe of the user (1/16, Rock-scaled; Heavy-Duty Boots protect). 3 shatters break the glass apart: back to the Desert, or into the Flooded Dunes if it's raining. Each damaging Fire move anneals one crack.
-- No sand left: Dig fails, Sand Tomb whips up glass grit (Rock type, x1.2), sandstorms and hail can't form, Grassy Terrain can't take root. Sun lasts 2 turns longer.
-- Fire types draw warmth from the glass (1/16 HP a turn). Turboblaze users' Fire moves x1.2 more (the glass rings with the white fire that made it). Steam Engine +1 Speed on entry.
+- Hot Glass (stage 1): Fire x1.2 (the white fire's heat stays in the glass). Ice x0.8. Nothing can be frozen. Fire types draw warmth from the glass (1/16 HP a turn); Turboblaze users' Fire moves x1.2 more; Steam Engine +1 Speed on entry.
+- Hot Glass: water flashes to steam on it - damaging Water moves may burn a grounded target (20%); Scald and Steam Eruption x1.3 and burn more often.
+- Hot Glass: light bends through the heat - Aurora Beam, Charge Beam, Dazzling Gleam, Flash Cannon, Luster Purge, Photon Geyser, Power Gem, Prismatic Laser, Signal Beam, Solar Beam x1.3. No hail can form; Sun lasts 2 turns longer.
+- Cooling: after 4 rounds without a damaging Fire move the glass cools into Mirror Glass (sunlight keeps it hot; rain cools it twice as fast). A damaging Fire move reheats Mirror Glass.
+- Mirror Glass (stage 2): the steam clears and every dune is a mirror. Beams and light (the moves above plus Psybeam, Ice Beam, Hyper Beam, Moongeist Beam, Meteor Beam and Lumina Crash) ricochet: x1.5, and they never miss.
+- Mirror Glass: Double Team and Minimize raise evasion one stage more (the mirror images multiply); Flash, Kinesis, Sand Attack and Smokescreen drop accuracy one stage more (the glare). Counter, Mirror Coat, Metal Burst and Comeuppance strike back x1.5.
+- Mirror Glass: Reflect, Light Screen and Aurora Veil last 3 turns longer, and Aurora Veil works without hail. Mirror Armor +1 Def, Prism Armor +1 Sp. Def on entry. Hail can fall on the cool glass.
+- Both: Mirror Shot x1.5 and always lowers accuracy. Glass doesn't conduct: Electric moves x0.8 against grounded targets, and Electric Terrain can't form. No sand left: Dig fails, Sand Tomb whips up glass grit (Rock type, x1.2), no sandstorm, nothing takes root.
+- Cracking: quakes and heavy blows (Earthquake, Bulldoze, Heavy Slam, High Horsepower, Rock Smash x2, Explosion...), damaging sound moves (the Choir tunes glass by singing to it; a loud enough voice breaks it) and, on Hot Glass, big Ice moves (thermal shock). Shards hit the user's grounded foes (1/16, Rock-scaled) and stay on the ground on their side.
+- Broken glass: a grounded Pokemon switching in on that side takes 1/16 (Rock-scaled; Heavy-Duty Boots protect). Rapid Spin, Mortal Spin, Defog and Tidy Up sweep it away. It's gone when the glass breaks or floods.
+- 3 cracks break the glass apart: back to the Desert, or into the Flooded Dunes if it's raining. Each damaging Fire move anneals one crack; cooling doesn't mend them.
 - The sea returns: heavy rain, 2 Origin Pulses or 3 floods (Surf, Hydro Pump, Water Spout, Muddy Water...) -> Flooded Dunes.
 - Beam clash: in 2 rounds where opposing sides both land a great Water beam (Origin Pulse, Water Spout, Hydro Cannon, Hydro Pump, Steam Eruption) and a great Fire beam (Blue Flare, Fusion Flare, Blast Burn, Eruption, V-create, Overheat), the Imprints tear open -> the Bleed.
 - Telluric Seed: +2 Defense (a glass carapace), but -1 Sp. Def (light passes straight through).
@@ -1009,9 +1025,17 @@ Steam-glass over the Bone Sands: the heat in the glass feeds fire and boils any 
 - weather HeavyRain → **Flooded Dunes**
 - ORIGINPULSE x2 → **Flooded Dunes**
 - SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, WAVECRASH +2 more x3 (even if they fail) → **Flooded Dunes**
-- EARTHQUAKE, MAGNITUDE, BULLDOZE, FISSURE, PRECIPICEBLADES +16 more x3 → **Desert** (in rain: **Flooded Dunes**)
-- FIRE-type damaging moves rewind the shatter count by 1
-- beam clash x2 (check) → **The Bleed**
+- cracks: quakes, heavy blows, damaging sound moves (and big Ice moves on Hot Glass) x3 → **Desert** (in rain: **Flooded Dunes**)
+- beam clash x2 → **The Bleed**
+- 4 rounds without a damaging Fire move (sun holds the heat, rain cools it twice as fast) → stage 2 (Mirror Glass)
+- damaging FIRE-type moves anneal one crack
+- *Stage 2* (`field_glass_dunes_mirror`): Mirror Glass: the glass has cooled and the steam is gone. Beams ricochet, mirror images multiply, glare blinds and reflections strike back harder. Fire reheats it.
+  - weather HeavyRain → **Flooded Dunes**
+  - ORIGINPULSE x2 → **Flooded Dunes**
+  - SURF, MUDDYWATER, HYDROPUMP, WATERSPOUT, WAVECRASH +2 more x3 (even if they fail) → **Flooded Dunes**
+  - cracks: quakes, heavy blows, damaging sound moves (and big Ice moves on Hot Glass) x3 → **Desert** (in rain: **Flooded Dunes**)
+  - beam clash x2 → **The Bleed**
+  - a damaging FIRE-type move → stage 1 (Hot Glass), and anneals one crack
 
 **Seed (TELLURICSEED):** DEFENSE +2, SPECIAL_DEFENSE -1.
 

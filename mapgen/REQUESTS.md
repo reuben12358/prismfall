@@ -1557,3 +1557,49 @@ Dorian's Encore patch on 154 (16 badges) and the Causeway Matriarch on 560 (16 b
 525 and `relayout.sh` no longer runs `reskin.py 525` or the 525 spec restore (548 stays in `525_deepwood_cocoonfall.yaml`,
 written by `deepwood.py 548` only). A relayout that started before this change recreated `525_reskin.yaml` and failed with
 "duplicate map ids in specs"; that is fixed in the tree, just run it again.
+
+## From the field designer: Rev 24 field logic audit and the Glass Dunes stages, 2026-11-21
+Design: `design/FIELD_LOGIC_AUDIT.md` (a reason for every rule and transition of the 35 fields: keep / rework / cut),
+`design/FIELDS.md` (regenerated: `ruby tools/gen_fields_md.rb`), win-rate deltas `design/BALANCE.md` §9c, captures
+`docs/battle_captures/fields/`. No map file and no trainer was edited.
+
+**The Glass Dunes now have two stages.** **Hot Glass** (the old field) cools into **Mirror Glass** after 4 rounds
+without a damaging Fire move (sun holds the heat, rain cools it twice as fast); a damaging Fire move reheats it. Mirror
+Glass is Reborn's Mirror Arena: beams and light moves (incl. Ice Beam, Psybeam, Hyper Beam) ×1.5 and never miss,
+Double Team / Minimize +1 evasion more, Flash / Sand Attack / Smokescreen / Kinesis −1 accuracy more, Counter / Mirror
+Coat / Metal Burst / Comeuppance ×1.5, screens +3 turns. Both stages: damaging sound moves crack the glass (with quakes
+and heavy blows; big Ice moves only while it's hot), each crack leaves **broken glass** on the foes' side (a grounded
+switch-in takes 1/16 Rock-scaled; Heavy-Duty Boots, Rapid Spin, Mortal Spin, Defog, Tidy Up), 3 cracks still break it
+back to the Desert (the flood in rain) and survive the cooling; Electric ×0.8 against grounded targets and no Electric
+Terrain (glass doesn't conduct). Flood ↔ glass ↔ desert and the beam clash → Bleed are unchanged.
+
+**Elsewhere** (each with a contradiction or an implausible step behind it): the Frozen Lake thaws over 3 rounds of
+sun (Ice moves set it back; Desolate Land still melts it at once); the Crystal and Dark Crystal Caverns are underground
+(no sun, rain or hail; sunlight no longer relights the dark one); the Factory blocks the sun too; wind no longer blows
+a Wildfire out; Sky Drop no longer surfaces an underwater battle and the Underwater → Corrosive Mire change is gone;
+Toxic no longer pollutes Water Surface; the Wasteland's Grassy Terrain makes a Meadow (was Flower Garden); the Neon
+Grid lost Pulse ×1.5; the Flooded Dunes lost Steam Engine on entry. Brann's Volcanic / Cinderglass rules and the
+Gym 1 crowd rules are untouched.
+
+**For the transitions agent:** none of your three staged transitions changed (DESERT → FLOODED_DUNES, VOLCANIC →
+ASHEN_WASTE, MEADOW → WILDFIRE: triggers and destinations as they were). New on your side of the fence, no action
+needed: (1) GLASS_DUNES stage 1 ↔ 2 (cooling / reheating) is a stage change and uses the colour fade; a staged
+"cooling" reveal would be lovely if you get to it. (2) The Mirror Glass room is `field_glass_dunes_mirror`
+(`art/battlebacks/fields_g.py` `glass_mirror`, built with `with_stages`). I ran `build_backdrops.py GLASS_DUNES` with
+`transitions.build()` stubbed out so your in-progress `transitions.py` wasn't run; the stage-1 room and the
+glass-quench assets are byte-identical. (3) The glass hook skips its crack effects while
+`FieldEffects.lingering?(battle)` (your API) is true, so the third crack's message isn't printed after the glass broke.
+
+**For the trainer designer (round 4):**
+1. Fields changed under your teams: Gym 10, 13, 15, M14 and the war fields. Your round-4 typical and prepared cells
+   are unchanged by them (identical before/after, 30 fights a cell); only dedicated weather teams notice (Gym 15 sun
+   team 12/12 → 9/12). Your runs started before this landing used the old field files.
+2. Suggested WANTS for `012_FieldEffects_TrainerPlays.rb` (yours, not edited): `[:GLASS_DUNES, 2]` (Mirror Glass)
+   +8 for the Isenmar types (Ice Beam ricochets ×1.5 there, no Ice nerf), −8 for Ashkaar (no Fire ×1.2, no healing).
+3. On the glass, damaging sound moves now crack it: a Hyper Voice / Boomburst / Bug Buzz user on Ashkaar's side breaks
+   its own glass; on Isenmar's side it's a third way back to sand. Rapid Spin / Defog users sweep the broken glass.
+4. Mirror Glass can be a starting field for a set piece (`setBattleRule("field", :GLASS_DUNES)` plus
+   `setBattleRule("fieldStage", 2)`): a Reborn-style mirror arena if a later fight wants one.
+
+**For everyone running the harness:** `run_all.rb` section 4 now also runs `tools/harness/field_checks.rb` (20 checks:
+the glass stages, sound cracks, broken glass, insulation, ricochet; the Frozen Lake thaw; the other audit changes).
