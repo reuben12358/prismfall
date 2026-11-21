@@ -29,6 +29,21 @@ Portrait expressions the scripts call: `neutral, happy, sad, angry, surprised, s
 
 There's a working example of every format in `templates/`. Copy their canvas size and placement exactly.
 
+## NEW (2026-11-21): trainer battle start, the creator's direction
+The creator wants **Rejuvenation's "player vs Eizen" VS screen** and **B2W2 PWT-style animated trainer intros (Lance is the model)**. The engine side is built and captured: `docs/battle_captures/intro/juno_vs_intro.gif`, `dorian_vs_intro.gif`, `vs_intro_keys.png`. Until the art below exists, the busts are the 96x96 dialogue portraits at 1.5x.
+
+**1. VS bust** (one per main cast member and both players): `Graphics/EBDX/VS/<ID>.png`, where `<ID>` is the portrait ID (`JUNO`, `DORIAN`, `PLAYER_A`, ...).
+- **256x136** file, 128x68 native doubled (the size of one half of the VS band).
+- Big chest-up bust, cropped by the frame edges like Rejuvenation's (face about 60% of the height, shoulders and a hand or prop in shot, e.g. a Poké Ball, Dorian's cane or hat, Tamsin's needle).
+- Players face **right** (toward the seam). Opponents face **left**.
+- Transparent background: the coloured speed-line panel is drawn behind it by the game.
+
+**2. One-shot intro pose:** `Graphics/Trainers/<TRAINERTYPE>.png`, the same 160x160-per-frame horizontal strip as now.
+- The strip plays **once** at battle start (~1.6 s, camera pushed in on the trainer) and **holds its last frame** for the rest of the battle.
+- It is **not a loop**. Frame 0 = a neutral stance. The middle frames = one big readable action, e.g. Lance sweeping his cape out and thrusting his arm forward, Dorian doffing his hat with a flourish, Juno twirling her bouquet up, Tamsin snapping her shawl open like wings. The last frame = the hero pose, which is also what shows during the battle.
+- **16–24 frames.** Movement should be big enough to read at 1x: whole-arm and cape swings, not 1–2 px wiggles.
+- The current Juno, Dorian and Tamsin strips are seamless loops with tiny motion. In the capture they barely register, so each needs a pose pass.
+
 ## Queue, in priority order
 1. **Juno: new battle sprite** (`RIVAL_JUNO.png`; `LEADER_JUNO.png` for her Warden look). Match her approved portraits and overworld. Send for approval first; the creator will judge the rest by it.
 2. **Player A (boy) and Player B (girl):** a battle front, a 5-frame back sprite, an overworld sheet and portraits for each. The creator's Gemini concepts are the direction.
