@@ -1,5 +1,11 @@
 # PROJECT SPINE — "Pokémon Prismfall" (working title)
 
+## >>> REVISION 23 (user, 2026-11-20 ~16:00): one ring for Megas and Z-moves <<<
+- Z-moves join the main game, tied to the Mega Ring, Reborn/Rejuvenation-style. The ring Bastian gives after Badge 13 enables both Mega Evolution and Z-moves, still one of each per side per battle.
+- All 18 type crystals are spread from 13 badges on (finds, quests, boss drops), with the same "no counter to the next two Wardens" rule as stones.
+- The Eevee Octave's reward becomes the Eevee plus the Eevium Z, with no separate ring.
+- Some late fights may use a Z instead of a Mega where the story fits.
+
 ## >>> REVISION 22 (user, 2026-11-20 10:10 and 11:11): portraits and speech bubbles <<<
 User: "i dont think we need a portrait for every conversation" / "the speech bubble thing only needs to exist for like special scenes for like dramatic effect (usually comic relief)" / "portrait for main cast (like desolation) doesnt sound like a bad idea".
 - **Main-cast portraits, Desolation-style:** a framed 96x96 square face beside the message box (Desolation uses Essentials' face window at 96x96, on the left of the box). This is the default for the story cast whenever they talk, but only once that character has real portrait art. Until then they get a name box.
