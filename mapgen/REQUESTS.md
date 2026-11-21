@@ -1324,3 +1324,16 @@ the cart stops at the ladder. 545 is dark: light the lamps; the pump only drains
 that floods every 24 steps (watch the gulls). The weed curtain on the east shelf is a crawlway to a grotto.
 **For the trainer designer:** the caves carry Bram, Taro and Saul (544), Gorse and Holt (545), Torvald (564), all from
 PBS; Holt and Saul are placed now.
+**Job 2 (Gym 3):** the Tidelock Gym 170-174 is trimmed as GYM_PUZZLES asked (practice lock + one basin, 8 moves, rating
+4; proofs in `mapgen/puzzles/tidelock.py`) and rebuilt on tileset 58 in a timber lock-hall kit that matches Ebbmouth
+(MAPGEN 2p, GYM_PUZZLES Gym 3 "The trim"). Gunnar, Ingrid, Leif, Oskar, Bjorn and Marisol (badge via
+`pfm_gym(:LEADER_MARISOL)`, TM03) are all in place. **For the playtest:** the Lock Hall door always opens on low water;
+shut the basin gate from the west pier at mid water, raise to high (the raft parks at the island), lower to mid, cross,
+turn wheel C and ride the Race. **For the story editor:** the Warden's Pool has a Meridian intake bolted into the lock
+wall (one sign line, mine).
+**Not done (next map builder, in order):** Thistledown Manor 546/547 (still the stock mansion palette; a manor set is
+the next job: tileset 54's Rejuvenation interiors or the Rejuvenation Haunted Mansion / Chrisola Mansion sheets, plus
+D5's creeping armchairs), 525 Deepwood (the §2n spec-restore rule applies), 562/563 the Rimewood and Glade, the
+577/578 trainers once PBS has them (cells above), the Overflow Culvert Mastery 175 (bell x gate, 6/10), Gullcry B1F 565,
+then Skaldfast 921-923 and Cinder Cape 927.
+
