@@ -155,7 +155,14 @@ FACTORY→SCRAPYARD, and FLOWER_GARDEN stages 1–5.
   cut-out of the room (`pf_<field>_front`) at z 1 above both. MEADOW and STORMFRONT work this way.
 - **Don't mirror scenery above the horizon.** The top margin of an extended room is on screen whenever EBDX's camera
   pulls back (intro, send-out). Continue the sky there (`skies.extend_with_sky`) or paint what belongs above the
-  frame (MEADOW: the oak's crown), never an upside-down copy of the source.
+  frame (MEADOW: the oak's crown), never an upside-down copy of the source. For a new panel, add a plan to
+  `art/battlebacks/fields_i.py` (keyed by the md5 of the panel's pixels): it paints the top margin and the side
+  margins' upper rows from the panel's own pixels (`margins.py`: patch quilting with a material layout, patches
+  copied, never flipped), or repeats a built structure upright, or continues a gradient sky. The opening close-up
+  (ENEMY camera) also shows ~45 px past the panel's right edge; the send-out pull-back shows HD x 4..668, y 23..633.
+- **Layers over the room bitmap cross everything painted in it.** A full-width scrolling strip (foam, mist) that
+  should stay behind a painted object needs a cut-out of that object above it (MOUNTAIN: `pf_mountain_crags`
+  over the foam strip).
 - With a `*_night` room, any `:art_extras` or `:layers` element that has a `<bitmap>_night.png` uses it.
 - Trainer intro backgrounds are a separate EBDX feature (`Graphics/EBDX/Transitions/`). They aren't needed for fields.
 

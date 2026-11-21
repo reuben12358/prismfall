@@ -10,6 +10,7 @@ Rebuild:
 python3 -I art/battlebacks/build_backdrops.py            # art -> graphics/EBDX/Battlebacks + 006_Bridge_Art.rb
 bash tools/harness/visual/backdrops/run_backdrop_stills.sh   # BD_FIELDS=VOLCANIC,NEW_MOON:3  BD_VECTORS=1  BD_TIME=night
 python3 -I tools/harness/visual/backdrops/make_contact_sheet.py <shots> docs/battle_captures/backdrops/contact_sheet.png --cols 6
+python3 -I tools/harness/visual/backdrops/make_contact_sheet.py <shots> docs/battle_captures/backdrops/contact_sheet_pullback.png --cols 6 --suffix _wide   # needs BD_VECTORS=1
 ```
 Live transitions (`transition_*.gif`, half speed, with `_keys.png` strips): Volcanic -> Cinderglass and
 Meadow -> Wildfire -> Embers, driven by the field plugin's own `Battle#change_field` / `#set_field_stage`
@@ -30,6 +31,21 @@ SENDOUT framings, before, after, and after at night on an outdoor map. `meadow_b
 first 6.4 s of a MEADOW battle, every 2nd engine frame, half speed (`BD_INTRO=1` dumps every frame;
 `BD_CAMLOG=1` logs the room camera and the parallax layer per frame; `BD_OUTDOOR=1` makes the map outdoor so
 `*_night` rooms and EBDX's day/night tint apply).
+Margins (Nov 20, round 5): every vanilla panel's surroundings were mirror images of it, so EBDX's send-out pull-back
+and opening close-up showed upside-down crags, canopies, arcades and railings above the panels and "butterfly"
+rocks at their sides. Those regions are now painted from each panel's own pixels at its own art-pixel size
+(`art/battlebacks/margins.py`: patch quilting steered by a material layout, never flipped; per-panel plans in
+`fields_i.py`, installed over every builder by `build_backdrops.py`), only above the panel and beside its upper
+rows. MOUNTAIN (falls between two crag walls; a crag cut-out now hides the foam streaks that crossed both crags),
+CAVE (+cracked), SNOWY_MOUNTAIN, CRYSTAL_CAVERN, DARK_CRYSTAL, DRAGONS_DEN (+Wyrmfire), VOLCANIC, ASHEN_WASTE (the
+wall goes on; crystals, lava and tunnel mouths are never copied), FAIRY_TALE, SILKWOOD, WILDFIRE (+Embers),
+WASTELAND (canopy), BEACH, STORMFRONT (clouds), UNDERWATER, FROZEN_LAKE, WATER_SURFACE (top row deepens to the
+zenith), COLOSSEUM (+Frenzy), FLOWER_GARDEN 1-5, NEON_GRID (+Blackout) (structures repeat upright), RAINBOW (bands
+carried round the arc), HOLLOW_CATHEDRAL (+Consecrated) (window, pillars, banner rod, crown), PRISM_ARENA (night
+sky; the barrier continued in perspective), NEW_MOON (all stages: city lights instead of the hanging railing).
+`contact_sheet_pullback.png`: every room at the SENDOUT camera (`BD_VECTORS=1`, the `_wide` shots;
+`make_contact_sheet.py --suffix _wide`). Both contact sheets were shot with the battlers' feet on their bases
+(`007_Bridge_Placement.rb`).
 Doubles: `double_prism_arena.png`,
 `double_silkwood.png` (`BD_DOUBLE=1`). Night: `*_night.png` (`BD_TIME=night`).
 
