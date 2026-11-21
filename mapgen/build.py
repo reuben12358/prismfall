@@ -465,7 +465,7 @@ def material_check(spec, ctx, layers, tileset_id):
 # cliff and quay "stairs".  Stairs are now real steps (tdraw st_stair_* / tb_stair_*, rdraw fw_stair_*); the slab must
 # never come back on a PF Rejuv map.
 OLD_SLAB = {4992, 4993, 4994}
-PF_REJUV_TILESETS = (50, 51, 52, 53, 55, 56, 57, 58)
+PF_REJUV_TILESETS = (50, 51, 52, 53, 55, 56, 57, 58, 59)
 
 
 def slab_check(spec, ctx, layers, tileset_id):

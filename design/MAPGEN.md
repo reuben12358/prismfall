@@ -692,6 +692,39 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
   moves, rating 4). Marisol's event uses `pfm_gym(:LEADER_MARISOL)` like Gyms 1 and 2 (badge, TM03, the quay line).
   Switch / variable names for D4, D6 and Gym 3 are in `flags.yaml`.
 
+## 2q. Map builder 14 (2026-11-21): the manor kit, Thistledown Manor 546/547 rebuilt with D5
+- **Manor kit** (`mapgen/mdraw.py`, appended by rcustom AFTER the cave kit, so no earlier id moved; the pf part grew to
+  `CUSTOM_ROWS = 1000`, 358 tiles).  Wall kits on the Cave machinery (rkit KITS `cvF` foyer sage damask over oak,
+  `cvH` gallery crimson damask over walnut with a gilt picture rail, `cvN` dining teal stripe, `cvP` parlour rose
+  floral over cream panels, `cvG` conservatory night glass in white glazing bars on a stone plinth, `cvA` attic boards
+  and rafter feet, `cvB` the landing's gallery front: handrail and balusters over a panelled front, for TER cliffs).
+  Every wall is cornice / paper / dado / raised wainscot / skirting in the three kit rows.  Floors `<p>_f0-3`
+  (checker marble, walnut and oak basket-weave parquet, dark boards, encaustic tiles, dusty deal).  Rugs (9-slice,
+  walkable, medallion centre) `mn_rug{R,B,G}_*`; armchairs (4 facings, green/red), dust sheets (chair, tall, sofa,
+  table, piano), portraits K/Q/L/F/X with crooked twins, the company portrait, curtained windows, sconces, candelabra,
+  chandelier (overhead), fireplace, bookcases, grandfather clock, armour, bust, curio cases and plinths, the dining
+  table 9-slice with plates and candelabra, dining chairs, sideboard, china cabinet, trapdoor, attic hatch and ladder,
+  grand-stair treads with a runner, newel, sofas, tea table, piano, harp, gramophone, globe, palms, fern, orchid,
+  troughs and the prop grave, fountain, iron bench, ivy, broken pane, decals (dust, webs, moonlight, leaves, shards,
+  soil, footprints, wax, petals), coat and umbrella stands, console, statue, trunks, hatboxes, dummy, rocking horse,
+  mirror, costume rail, scenery flats, oculus, footlights, a door.  `python3 -I mdraw.py out.png` draws the sheet.
+  Charset `graphics/Characters/pf_armchair.png` (charsets.py: four facings, a little hop and two pin-prick eyes).
+- **Tileset 59 "PF Rejuv Manor"** (the PF Rejuv sheet; autotiles Cave Pool, Sea deep).
+- **`layouts/manor.py`** (in relayout.sh): `Manor(Cave)` carves the rooms, then `reskin()` swaps each wall piece to its
+  nearest room's palette and repaints each room's floor; furniture goes on after paint (`late`), a piece over a rug
+  moves up a layer so the rug shows under it, and no shade or dust decal is left over furniture.  546 (56x40):
+  vestibule, stair hall, conservatory, parlour, dining room; upstairs the landing, the portrait gallery and the green
+  room.  547 (24x16): the attic.  Every old event is kept (the three scenes moved to the landing / parlour /
+  conservatory, Lady Thistledown to the parlour fire), plus Fenwick, the diary, the gallery note, the nook card, the
+  dining-room door (locked until the portraits are set: `GATE ok 546`) and the doll quest's buttons and rag doll
+  (TRIAL_EVENTS 546/547).  Field HOLLOW_CATHEDRAL, a night tone instead of DarkMap.
+- **D5, as built** (`mapgen/puzzles/manor.py`: the zone grids the layout carves round, the proofs, and the generated
+  runtime `PFManor` / `pfm_portrait` / `pfm_manor_hatch` in 007_PuzzleRooms.rb, on `PrismfallPuzzles.pursue(:creep)`):
+  TEACH the stair hall (rating 3), TWIST the portrait gallery (4), COMBINE the dining room (4); see DUNGEON_PUZZLES D5.
+  The proofs are exhaustive step-level searches; "moves" = portrait / cord actions + lure runs, "states" = chair and
+  room states.  `d5 built map` checks every zone cell's passability on the built Map546 against the grids.
+  Before/after: `maps_out/previews/ch2_4_compare/546_before_after.jpg`, `547_before_after.jpg`.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

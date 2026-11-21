@@ -337,6 +337,10 @@ def main():
     import cdraw                                           # map builder 13: the cave kit (tileset 57), after everything
     k = draw_in(cdraw.pieces(), k, dedup=True)
     print('cave kit tiles', k - k0)
+    k0 = k
+    import mdraw                                           # map builder 14: the manor kit (tileset 59), after the cave kit
+    k = draw_in(mdraw.pieces(), k, dedup=True)
+    print('manor kit tiles', k - k0)
     if k > RC.CUSTOM_ROWS * 8: raise SystemExit('custom part too small: %d tiles' % k)
     sheet.save(os.path.join(HERE, 'data', 'rj_custom.png'))
     json.dump({'props': {str(k): v for k, v in props.items()}, 'map33': {str(k): v for k, v in idmap.items()},

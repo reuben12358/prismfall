@@ -113,7 +113,7 @@ if 'qy_lipm0' in STAMPS:
                             inW=None, inE=None, l0=False)
     # map builder 13: the cave kits (cdraw.py): salt (Brinecut), slate (Gullcry), earth - rock walls with lit lips,
     # columnar faces and a shaded foot; mass walls and terraces share them (the lip shows the ground above)
-    for _p in 'SLET':
+    for _p in 'SLETFHNPGAB':                 # map builder 14: + the manor kits (mdraw.py)
         if _p + '_lipm' in STAMPS:
             KITS['cv' + _p] = dict(N=tuple(P1('%s_N%s' % (_p, e)) for e in 'wme'), W=P1(_p + '_W'), E=P1(_p + '_E'),
                                    rows=[tuple(P1('%s_%s%s' % (_p, row, e)) for e in 'wme') for row in ('lip', 'face', 'base')],

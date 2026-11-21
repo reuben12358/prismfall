@@ -33,7 +33,7 @@ PARTS = [('gl', 'rejuvenation', 62, 'Goldenleaf Forrest'),
          ('rb4', 'reborn', 43, 'Route4'),
          ('ap', 'rejuvenation', 2, 'Aevium Past'),
          ('pf', None, None, None)]          # Prismfall custom pieces (rj_custom.png, built by rcustom.py)
-CUSTOM_ROWS = 900          # the pf part is the last part, so growing it moves no id (builder 7: 300 -> 400; builder 8: -> 800)
+CUSTOM_ROWS = 1000         # the pf part is the last part, so growing it moves no id (builder 7: 300 -> 400; builder 8: -> 800)
 
 # every autotile any PF Rejuv tileset may use: (game, source tileset whose passages it takes, source name)
 AUTOS = [('rejuvenation', 126, 'Sea(Grass)'), ('rejuvenation', 126, 'DirtDark'), ('rejuvenation', 127, 'Dirt'),
@@ -140,6 +140,8 @@ TILESETS = {
     # map builder 13: the Tidelock Gym (Gym 3, 170-174): the timber lock hall kit (cdraw 'T'), lock water, the river
     58: ('PF Rejuv Locks', [('pf', 'Lock Water'), ('rejuvenation', 'Sea deep'), ('pf', 'Sea Cave'), ('rejuvenation', 'Waterfall'),
                             ('rejuvenation', 'Waterfall crest'), ('rejuvenation', 'Waterfall bottom'), ('pf', 'Cave Pool')]),
+    # map builder 14: Thistledown Manor (546/547): the manor kit (mdraw.py) - walls, floors, furniture; no water
+    59: ('PF Rejuv Manor', [('pf', 'Cave Pool'), ('rejuvenation', 'Sea deep')]),
     55: ('PF Rejuv City', [('rejuvenation', 'Ocean'), ('rejuvenation', 'Sea deep'), ('rejuvenation', 'Sand shore_2'),
                            ('pf', 'Saltmere Cobbles'), ('pf', 'Saltmere Flags'), ('rejuvenation', 'DirtDark'),
                            ('pf', 'Gravel Spring')]),

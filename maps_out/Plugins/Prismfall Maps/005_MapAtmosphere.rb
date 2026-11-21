@@ -58,6 +58,8 @@ module PrismfallMaps
     541 => [0, 0, 4, 18],   # The Grey Saltings
     544 => [-8, -10, -4, 10],   # Brinecut Mine 1F
     545 => [-14, -12, -2, 20],   # Brinecut Mine B1F
+    546 => [-26, -30, -2, 34],   # Thistledown Manor
+    547 => [-26, -30, -2, 34],   # Thistledown Manor - Attic
     552 => [6, 4, -2, 0],   # The Dyers' Ford
     560 => [-6, -2, 10, 10],   # Frostflat Causeway
     561 => [-10, -6, 6, 20],   # Gullcry Cliffs

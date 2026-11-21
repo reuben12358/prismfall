@@ -362,12 +362,10 @@ DarkMap = true
 #-------------------------------
 [546]   # Thistledown Manor
 Name = Thistledown Manor
-DarkMap = true
 MapPosition = 0,9,14
 #-------------------------------
 [547]   # Thistledown Manor - Attic
 Name = Thistledown Manor - Attic
-DarkMap = true
 MapPosition = 0,9,14
 #-------------------------------
 [552]   # The Dyers' Ford

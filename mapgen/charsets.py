@@ -152,8 +152,32 @@ def minecart():
     pth = os.path.join(OUT, 'pf_minecart.png'); sheet.save(pth); print('wrote', pth)
 
 
+def armchair():
+    """pf_armchair.png: Thistledown's creeping armchair (D5).  Rows down / left / right / up (it turns to face where it
+    shuffles); the four frames are a little hop with a ghostly shimmer, for the step it takes when your back is turned"""
+    import mdraw
+    sheet = Image.new('RGBA', (FW * 4, FW * 4), (0, 0, 0, 0))
+    for row, f in enumerate(('down', 'left', 'right', 'up')):
+        base = mdraw.armchair(mdraw.VELG, f).resize((32, 32), Image.NEAREST)
+        for k in range(4):
+            fr = Image.new('RGBA', (FW, FW), (0, 0, 0, 0))
+            hop = (0, 2, 0, 1)[k]
+            glow = Image.new('RGBA', (FW, FW), (0, 0, 0, 0))
+            for y in range(FW):
+                for x in range(FW):
+                    if (x - 15.5) ** 2 / 200 + (y - 26) ** 2 / 30 < 1: glow.putpixel((x, y), (150, 110, 210, 40 + 20 * (k % 2)))
+            fr.alpha_composite(glow)
+            fr.alpha_composite(base, (0, -hop))
+            if f != 'up':                                    # two pin-prick eyes in the button-back
+                for ex in (12, 19):
+                    fr.putpixel((ex if f == 'down' else ex + (-3 if f == 'left' else 3), 7 - hop), (220, 200, 255, 230))
+            sheet.alpha_composite(fr, (k * FW, row * FW))
+    sheet.save(os.path.join(OUT, 'pf_armchair.png'))
+
+
 if __name__ == '__main__':
     rime_curtain()
     for _p in 'SLE':
         cave_rock(_p); cave_boulder(_p)
     minecart()
+    armchair()

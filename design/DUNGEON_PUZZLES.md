@@ -43,7 +43,7 @@ puzzle part only.
 | D2 Gossamer Wood + Deepwood — one-way silk, lantern cocoons | 524, 525 | Ch3: before / after Gym 2 | **2** | 5 min | **525 built and proven** on the built map (2 posts, 5 states; unsolvable without either post); the 524 teach/twist curtains are a request to the map builder (524 is being rebuilt) |
 | D3 Cocoonfall Hollow — crystal-silk anchors | 548 | after Gym 2 | **2** | 5 min | proven; **design fix:** start with TWO bridges taut (a, b). The spec's start (one taut) let anchor 2 tighten all three in one pull, so the parity lesson never happened |
 | D4 Brinecut Mine — points and brine | 544, 545 | Ch3 road (after Gym 1) | **3** | 10 min | spec |
-| D5 Thistledown Manor — don't turn your back | 546, 547 | Ch3 road, cap 19 | **3** | 10 min | spec (runtime: `pfp_pursue(name, :creep)`) |
+| D5 Thistledown Manor — don't turn your back | 546, 547 | Ch3 road, cap 19 | **3–4** (stair hall 3, gallery 4, dining room 4; optional, so ≤ Gym 2 + 2) | 10 min | **built and proven** (map builder 14, below) |
 | D6 Gullcry Caves — the tide counts your steps | 564, 565 | Act I | **4** | 15 min | spec (runtime: `pfp_step_clock`) |
 | D7 The Rimewood + Glade — frost loom, ice slide | 562, 563 | before Gym 3 | **3** | 10 min | **Frost Loom built and proven** on the built map (2 pulls, 8 states, unique over Z2, unsolvable without the right thread); the Glade slide is the map builder's (562's Hoar Pond slide is built) |
 | D8 The Rehearsal — between the frames | 568 | bonus | **4** | 15 min | spec |
@@ -171,6 +171,25 @@ Watched, they freeze. A chair that reaches you starts a ghost battle (Channeler)
   offers GO-03 or the Spell Tag + Litwick (S176).
 - **State:** S521 / S522 = trapdoors used. Chair positions reset on leaving the room.
 - **Reward:** Cleanse Tag (existing), Spell Tag, Litwick; Greavard in the attic (existing).
+- **As built (2026-11-21, map builder 14, `mapgen/puzzles/manor.py`; the grids are the map):**
+  - The rule exactly as the runtime plays it: after each step, a chair strictly behind you and more than one tile away
+    steps toward you (longer axis first, never through furniture, a chair or you); then a chair on an unused trapdoor
+    drops into the cellar; then a chair next to you catches you (a wild Gastly / Shuppet / Duskull Lv 15 pours out of
+    the stuffing), the room resets (chairs home, portraits crooked) and you wake at the room's door.  Walking out of a
+    room resets it too.  Setting a portrait or pulling the cord turns you to the wall: the chairs creep once.
+  - **TEACH, the stair hall** (10x7, one chair): sidestep early, while it is far, and pass it with a clear tile between
+    you; walking straight up from either arch cell is caught (proved).  2 moves, 44 states, rating 3.  Fenwick says so.
+  - **TWIST, the portrait gallery** (16x5, upstairs off the landing, two chairs): the curtain-call order from Dame
+    Rosamund's diary (the Fool, Laertes, Rosamund, the Old King = wall positions 3, 1, 4, 2).  One chair sits in the
+    west alcove under its curio case and cannot climb out while you are north of it; the other is wedged between the
+    cases.  Walk down past the east case and back up: it follows you round into the empty east alcove.  Proved: 6 moves,
+    173 states, rating 4; unsolvable with the alcove filled; setting the portraits from the wall alone is caught.
+    Solved: S523, the chairs slump, the dining-room door unlocks.
+  - **COMBINE, the dining room** (two chairs in the back-stair nook under the attic hatch, two trapdoors; the boards
+    hold you, not an armchair): step back and in to draw them out, lead each over a trapdoor, then pull the cord (it
+    turns your back on the room).  Proved: 3 moves, 250 states, rating 4; unsolvable without either trapdoor.
+  - State: S521 / S522 trapdoors used (each drops one chair, then jams), S523 gallery solved, S524 ladder down,
+    V521 portraits in order.  Every chair is still once THISTLEDOWN_CLEARED (S176) is on.
 
 ## D6 Gullcry Caves (564 1F 40×40, 565 B1F 32×30, `:CAVE`) — "the tide counts your steps"
 **Rule:** the sea breathes in and out. The tide toggles every **24 steps** (step hook; V526 = steps, S526 = high tide).

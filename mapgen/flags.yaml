@@ -22,6 +22,7 @@ variables:
   G3_PRACTICE_RAFT: 316  # Tidelock Lock Hall practice raft slot 0-6 (4 = against the pier)
   D4_CART: 516        # Brinecut Mine (map builder 13): where the cart stands (0 depot, 1 A, 2 B ladder gallery, 3 C)
   D6_TIDE_STEPS: 526  # Gullcry Caves: steps since the tide turned (0-23; pfm_tide_tick)
+  D5_PORTRAIT: 521    # Thistledown gallery (map builder 14): portraits set in curtain-call order (0-4)
 switches:
   WAR_SIDE_ASH: 605   # the war maps (map builder 10): pf_choice(:war_climax) == :back_ashkaar (set by each war map's front event)
   WAR_SIDE_ISE: 606   # ... == :back_isenmar
@@ -46,6 +47,10 @@ switches:
   D4_CART_AT_B: 519   # the cart parked at B (holds B1F's pump lever down)
   D4_LAKE_DRAINED: 520 # B1F salt lake drained to its causeway
   D6_HIGH_TIDE: 526   # Gullcry Caves high tide (the sand bars are under water)
+  D5_TRAP_1: 521      # Thistledown dining room: trapdoor 1 has dropped an armchair (then jams shut)
+  D5_TRAP_2: 522      # ... trapdoor 2
+  D5_GALLERY: 523     # the gallery's portraits are set: its chairs slump, the dining-room door unlocks
+  D5_HATCH: 524       # the attic ladder is down
 # Dungeons 501-600, 5 per dungeon (DUNGEON_PUZZLES.md section 0)
   D2_COCOON1: 506     # Deepwood lantern cocoons lit
   D2_COCOON2: 507

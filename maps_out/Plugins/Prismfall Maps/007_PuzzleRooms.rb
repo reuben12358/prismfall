@@ -166,4 +166,134 @@ if defined?(PrismfallPuzzles)
     :solved => { :switches => { 316 => true }, :vars => { 315 => 1 } },
     :hints => ["Same rules as the practice lock. High water takes the raft inland; low water winds it home.", "Ma shuts the gate when she wants a boat to stop halfway: at the island.", "Raise to mid, cross the raft to the west pier and shut the gate. Raise to high: the raft parks at the island. Lower to mid, cross to the island, turn wheel C to high and ride the Race north."],
   })
+  PrismfallPuzzles.room(:d5_gallery, {
+    :name => "The portrait gallery",
+    :map => 546,
+    :home => false,
+    :reset => { :vars => { 521 => 0 } },
+    :solved => { :switches => { 523 => true }, :vars => { 521 => 4 } },
+    :hints => ["The company bowed in order of billing, smallest part first. Dame Rosamund's diary says who was who.", "A chair can't climb out of an alcove while you stand north of it. One of the two alcoves is empty.", "Walk down past the east case and back up: the loose chair follows you round into the empty alcove. Then straighten the Fool, Laertes, Dame Rosamund and the Old King."],
+  })
+  PrismfallPuzzles.room(:d5_dining, {
+    :name => "The dining room",
+    :map => 546,
+    :home => false,
+    :reset => { :switches => { 521 => false, 522 => false } },
+    :solved => { :switches => { 524 => true } },
+    :hints => ["Pulling the attic cord means turning your back on the room.", "The trapdoors hold you. They won't hold an armchair.", "Step back from the nook and in again to draw the chairs out, then walk so each one has to cross a trapdoor to follow you."],
+  })
+  # D5 Thistledown Manor (546): the creeping armchairs (GENERATED from mapgen/puzzles/manor.py, the grids the proofs run on)
+  module PFManor
+    ZONE   = { "26,21" => "f", "25,23" => "f", "26,24" => "f", "29,23" => "f", "31,20" => "f", "29,20" => "f", "29,26" => "f", "31,23" => "f", "28,18" => "f", "28,21" => "f", "27,19" => "f", "30,18" => "f", "27,25" => "f", "28,24" => "f", "30,21" => "f", "27,22" => "f", "30,24" => "f", "33,23" => "f", "32,21" => "f", "25,19" => "f", "33,20" => "f", "24,23" => "f", "26,20" => "f", "25,22" => "f", "24,20" => "f", "32,24" => "f", "26,23" => "f", "25,25" => "f", "29,19" => "f", "29,25" => "f", "29,22" => "f", "31,19" => "f", "31,25" => "f", "31,22" => "f", "27,18" => "f", "28,23" => "f", "27,21" => "f", "28,20" => "f", "28,26" => "f", "30,23" => "f", "27,24" => "f", "32,20" => "f", "30,20" => "f", "33,19" => "f", "32,23" => "f", "25,21" => "f", "24,19" => "f", "33,22" => "f", "24,25" => "f", "25,24" => "f", "24,22" => "f", "26,19" => "f", "29,18" => "f", "26,25" => "f", "33,25" => "f", "26,22" => "f", "29,21" => "f", "29,24" => "f", "31,21" => "f", "31,24" => "f", "27,20" => "f", "28,19" => "f", "27,23" => "f", "28,22" => "f", "30,19" => "f", "30,25" => "f", "32,22" => "f", "28,25" => "f", "30,22" => "f", "33,21" => "f", "32,19" => "f", "32,25" => "f", "33,24" => "f", "24,21" => "f", "25,20" => "f", "24,24" => "f", "6,12" => "g", "4,9" => "g", "12,10" => "g", "4,12" => "g", "3,10" => "g", "17,9" => "g", "14,10" => "g", "5,13" => "g", "3,13" => "g", "5,10" => "g", "8,9" => "g", "19,9" => "g", "17,12" => "g", "14,13" => "g", "8,12" => "g", "10,9" => "g", "9,11" => "g", "11,11" => "g", "16,10" => "g", "6,11" => "g", "16,13" => "g", "7,10" => "g", "18,10" => "g", "7,13" => "g", "18,13" => "g", "12,9" => "g", "18,11" => "g", "12,12" => "g", "3,9" => "g", "14,9" => "g", "3,12" => "g", "5,9" => "g", "4,11" => "g", "17,11" => "g", "14,12" => "g", "5,12" => "g", "8,11" => "g", "9,10" => "g", "10,11" => "g", "11,10" => "g", "16,9" => "g", "13,10" => "g", "15,13" => "g", "16,12" => "g", "7,9" => "g", "18,9" => "g", "15,10" => "g", "6,13" => "g", "7,12" => "g", "6,10" => "g", "18,12" => "g", "13,13" => "g", "12,11" => "g", "3,11" => "g", "4,10" => "g", "5,11" => "g", "4,13" => "g", "9,9" => "g", "17,10" => "g", "17,13" => "g", "11,9" => "g", "8,10" => "g", "10,13" => "g", "8,13" => "g", "10,10" => "g", "13,9" => "g", "12,13" => "g", "15,9" => "g", "7,11" => "g", "6,9" => "g", "16,11" => "g", "43,31" => "d", "46,30" => "d", "48,27" => "d", "46,27" => "d", "49,26" => "d", "48,30" => "d", "41,31" => "d", "49,29" => "d", "53,29" => "d", "45,31" => "d", "47,28" => "d", "47,31" => "d", "50,30" => "d", "52,27" => "d", "50,27" => "d", "41,30" => "d", "51,28" => "d", "52,30" => "d", "43,30" => "d", "51,31" => "d", "49,25" => "d", "49,28" => "d", "46,29" => "d", "49,31" => "d", "48,29" => "d", "40,31" => "d", "53,28" => "d", "45,30" => "d", "47,27" => "d", "53,31" => "d", "47,30" => "d", "52,31" => "d", "51,27" => "d", "50,29" => "d", "51,30" => "d", "42,31" => "d", "52,29" => "d", "44,31" => "d", "46,28" => "d", "49,24" => "d", "49,30" => "d", "48,28" => "d", "46,31" => "d", "49,27" => "d", "40,30" => "d", "48,31" => "d", "53,27" => "d", "39,31" => "d", "53,30" => "d", "47,29" => "d", "50,28" => "d", "51,29" => "d", "42,30" => "d", "52,28" => "d", "50,31" => "d", "44,30" => "d" }
+    HOME   = { "Armchair f1" => [28, 21], "Armchair g1" => [12, 12], "Armchair g2" => [10, 13], "Armchair d1" => [49, 25], "Armchair d2" => [49, 26] }
+    START  = { "f" => [28, 26, 8], "g" => [19, 9, 4], "d" => [39, 31, 6] }
+    TRAPS  = [[49, 28], [49, 30]]
+    ORDER  = [3, 1, 4, 2]
+    module_function
+    def zone_at(x, y);  return ZONE["#{x},#{y}"]; end
+    def live?(z)
+      return false if !z || $game_switches[176]
+      return false if z == "g" && $game_switches[523]
+      return false if z == "d" && $game_switches[524]
+      return true
+    end
+    def chairs(z)
+      return $game_map.events.values.select { |e| e.name.start_with?("Armchair #{z}") && e.character_name != "" }.sort_by { |e| e.name }
+    end
+    # after every step on 546 (and after a portrait or the cord): leaving a room resets it; in a live room the chairs creep
+    def step(acted = false)
+      return if !$game_map || $game_map.map_id != 546
+      pl = $game_player
+      z = zone_at(pl.x, pl.y)
+      reset_room(@zone) if !acted && @zone && @zone != z
+      @zone = z
+      return if !live?(z)
+      cs = chairs(z)
+      cs.each { |ev| PrismfallPuzzles.pursue(ev, :creep) }
+      if z == "d"
+        cs.each do |ev|
+          TRAPS.each_with_index do |t, i|
+            next if ev.x != t[0] || ev.y != t[1] || $game_switches[521 + i]
+            $game_switches[521 + i] = true
+            $game_self_switches[[546, ev.id, "A"]] = true
+            ev.refresh
+            pbSEPlay("Battle damage weak", 90) rescue nil
+            pbMessage(_INTL("CRASH! The trapdoor gives under the armchair, and it drops into the wine cellar. The lid slams shut and jams."))
+          end
+        end
+        $game_map.need_refresh = true
+      end
+      if chairs(z).any? { |ev| (ev.x - pl.x).abs + (ev.y - pl.y).abs <= 1 }
+        caught(z)
+        return true
+      end
+      return false
+    end
+    def caught(z)
+      pbSEPlay("Exclaim", 100) rescue nil
+      pbMessage(_INTL("The armchair lunges! Its cushion splits, and something pours out of the stuffing!"))
+      sp = [[:GASTLY, 15], [:SHUPPET, 15], [:DUSKULL, 15]][rand(3)]
+      WildBattle.start(sp[0], sp[1])
+      return if $game_map.map_id != 546
+      pbFadeOutIn {
+        reset_room(z)
+        s = START[z]
+        $game_player.moveto(s[0], s[1])
+        $game_player.direction = s[2]
+        $game_player.straighten
+        $game_map.need_refresh = true
+      }
+      @zone = z
+      pbMessage(_INTL("...You come to by the door. Every chair is back where it started, as if nothing happened."))
+    end
+    def reset_room(z)
+      return if !z
+      chairs(z).each { |ev| h = HOME[ev.name]; next if !h; ev.moveto(h[0], h[1]); ev.direction = 2 }
+      $game_variables[521] = 0 if z == "g" && !$game_switches[523]
+      $game_map.need_refresh = true
+    end
+    def enter
+      @zone = nil
+      $game_variables[521] = 0 if !$game_switches[523]
+    end
+  end
+  # a portrait in the gallery: straighten it (the curtain-call order), then the chairs creep: your back is to the room
+  def pfm_portrait(k)
+    if $game_switches[523]
+      pbMessage(_INTL("The portrait hangs straight. The painted eyes look pleased with you."))
+      return
+    end
+    v = $game_variables[521]
+    if PFManor::ORDER[v] == k
+      $game_variables[521] = v + 1
+      pbSEPlay("Door slide", 70, 120) rescue nil
+      pbMessage(_INTL("You straighten the portrait. It stays put."))
+    else
+      $game_variables[521] = 0
+      pbSEPlay("Battle damage weak", 70) rescue nil
+      pbMessage(_INTL("The moment you touch it, every portrait on the wall swings crooked again. Somewhere, a woman tuts."))
+    end
+    $game_map.need_refresh = true
+    $game_player.turn_up
+    return if PFManor.step(true)
+    if $game_variables[521] >= 4
+      $game_switches[523] = true
+      $game_map.need_refresh = true
+      pbSEPlay("Mining reveal") rescue nil
+      pbMessage(_INTL("The whole company hangs straight at last. The armchairs sag, ordinary furniture again."))
+      pbMessage(_INTL("Far below, in the vestibule, a key turns in the dining-room door."))
+    end
+  end
+  # the attic cord in the back-stair nook: pulling it turns your back on the dining room (the event's next page climbs)
+  def pfm_manor_hatch
+    return if !pbConfirmMessage(_INTL("A cord hangs from a hatch in the ceiling. Pull it?"))
+    $game_player.turn_up
+    return if PFManor.step(true)
+    $game_switches[524] = true
+    $game_map.need_refresh = true
+    pbSEPlay("Door open") rescue nil
+    pbMessage(_INTL("The hatch drops open and a folding ladder clatters down into the nook."))
+  end
+  EventHandlers.add(:on_player_step_taken, :pf_manor_chairs, proc { PFManor.step })
+  EventHandlers.add(:on_enter_map, :pf_manor_enter, proc { |_old| PFManor.enter if $game_map && $game_map.map_id == 546 })
 end
