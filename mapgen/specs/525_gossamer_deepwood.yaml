@@ -1,0 +1,223 @@
+# Gossamer Deepwood (525). WRITTEN BY layouts/routes_craft.py (map builder 16) - edit that script.
+# The D2 lantern hollow events are laid over it by puzzles/dungeons.py (EVENTS[525]).
+id: 525
+name: Gossamer Deepwood
+parent: 524
+bgm: Route 3
+metadata:
+  Outdoor: true
+  ShowArea: true
+  BattleBack: forest
+  MapPosition: [0, 13, 23]
+rubric: true
+yards_ok: true
+biome: forest
+field: SILKWOOD
+tone: [-40, -24, -30, 40]
+fog: {name: prismfall_spores, opacity: 70, blend: 1, zoom: 100, sx: 1, sy: -1}
+walk_from:
+- [1, 18]
+- [1, 18]
+connections: []
+raw: data/raw/525.npy
+tileset: 53
+events:
+- type: warp
+  name: To Gossamer Wood
+  at: [0, 18]
+  link: WOOD_DEEP
+  arrive: [1, 18, right]
+- type: warp
+  name: To Gossamer Wood b
+  at: [0, 17]
+  to: {map: 524, x: 88, y: 48, dir: left}
+- type: warp
+  name: To Gossamer Wood c
+  at: [0, 19]
+  to: {map: 524, x: 88, y: 48, dir: left}
+- type: warp
+  name: To Cocoonfall Hollow
+  at: [43, 20]
+  link: DEEP_COCOON
+  arrive: [42, 20, left]
+- type: event
+  name: Crystal silk
+  at: [41, 20]
+  pages:
+  - graphic: {sprite: pf_silk_curtain, dir: left}
+    dir_fix: true
+    commands:
+    - if: pf_choice(:ch2_tamsin)
+      then:
+      - You hold up Mother Loom's shuttle. The crystal silk unpicks itself, thread by thread, and lets you through.
+      - {script: '$game_self_switches[[548, 0, ''ESCORT'']] = true'}
+      - selfswitch: [A, true]
+      else: ['Silk turned to glass, hard as a pane. Something beyond it is ringing. Tamsin might know how to open it.']
+  - cond: {self: A}
+    through: true
+- type: event
+  name: Shelly
+  at: [15, 26]
+  pages:
+  - graphic: {sprite: NPC 11, dir: left}
+    commands:
+    - if: $game_self_switches[[525, 0, 'MASQ']]
+      then:
+      - '\pf[SHELLY,neutral]Shelly: You just... walked in. Where I''m from, nobody walks into the sick places and comes out the same.'
+      - '\pf[SHELLY,happy]Shelly: Before I go, could we have one practice battle? Doubles? I''m supposed to be good at this and I don''t want to be rusty
+        when I get home.'
+      - {script: 'Prismfall.cameo_battle(:FESTIVAL_SHELLY, "Shelly", 1, double: true, field: :SILKWOOD)'}
+      - '\pf[SHELLY,happy]Shelly: Your forest sounds like home used to, before the city got sick. Look after it?'
+      - {script: 'pbReceiveItem(:SILVERPOWDER)'}
+      - {script: 'tm = GameData::Item.keys.find { |k| d = GameData::Item.get(k); d.is_TM? && d.move == :STRUGGLEBUG }
+
+          tm ? pbReceiveItem(tm) : pbMessage(_INTL("You received a TM: Struggle Bug! [item data missing]"))'}
+      - switch: [CAMEO_SHELLY_DONE, true]
+      - {script: '$game_variables[123] += 1'}
+      - (She steps into the pond's reflection and is gone. One pink ribbon floats on the water.)
+      - selfswitch: [A, true]
+      else:
+      - if: $game_self_switches[[525, 0, 'SHELLY']]
+        then: ['\pf[SHELLY,sad]Shelly: The pond''s behind that shimmer. I can''t go near it. You can, can''t you?']
+        else:
+        - (A pink-haired girl is crouched in front of a Caterpie, bowing to it.)
+        - '\pf[SHELLY,panic]Shelly: I''m so sorry, was this your leaf? I didn''t know it was your leaf.'
+        - '\pf[SHELLY,shocked,sweat]Shelly: Oh! A person! Um. Hello. Is this— this isn''t the Rhodochrine Jungle, is it.'
+        - '\pf[SHELLY,sad]Shelly: I looked into a pond at home and then I was looking OUT of this one. That was three days ago. The paths keep re-weaving.'
+        - choices: [I'll help you get back.]
+          cancel: 1
+          branches:
+          - - '\pf[SHELLY,happy]Shelly: Really? You don''t have to. I mean please do. I mean thank you.'
+            - {script: '$game_self_switches[[525, 0, ''SHELLY'']] = true'}
+  - cond: {self: A}
+- type: npc
+  name: Caterpie
+  at: [16, 25]
+  sprite: Followers/CATERPIE
+  dir: right
+  text: The Caterpie is very solemnly eating its leaf. It has accepted the apology.
+- type: event
+  name: Glassed Masquerain
+  at: [23, 34]
+  pages:
+  - graphic: {sprite: Followers/MASQUERAIN, dir: left}
+    commands:
+    - if: $game_self_switches[[525, 0, 'SHELLY']]
+      then:
+      - Its wings are panes of glass. The eye-spots are the only things on it still moving.
+      - {script: 'setBattleRule("field", :BLEED)
+
+          setBattleRule("canLose")
+
+          WildBattle.start(:MASQUERAIN, 14)'}
+      - The Masquerain folds its glass wings and settles on the water. The ringing stops.
+      - {script: '$game_self_switches[[525, 0, ''MASQ'']] = true'}
+      - selfswitch: [A, true]
+      else: [A glassed Masquerain hovers over the dew pond. It hasn't noticed you.]
+  - cond: {self: A}
+    graphic: {sprite: Followers/MASQUERAIN, dir: left}
+    through: true
+    commands: ['It rests on the water, calm.']
+- type: trainer
+  at: [31, 7]
+  sight: 4
+  dir: left
+  sprite: trainer_BUGCATCHER
+  trainer: [BUGCATCHER, Linden]
+  intro: Deepwood's my secret spot! How'd you get past the big tree?
+  after: The pond glows at night. Don't tell anyone.
+- type: item
+  at: [35, 5]
+  item: SILVERPOWDER
+- type: event
+  name: HiddenItem
+  at: [40, 31]
+  pages:
+  - commands:
+    - if: pbItemBall(:SUPERPOTION)
+      then:
+      - The stump kept it dry.
+      - selfswitch: [A, true]
+      else: []
+  - cond: {self: A}
+- type: trainer
+  at: [26, 20]
+  sight: 4
+  dir: left
+  sprite: trainer_POKEMANIAC
+  trainer: [POKEMANIAC, Ferris]
+  intro: The bugs in here have gone STRANGE and I love them!
+  after: That one hummed. Did you hear it hum?
+- type: trainer
+  at: [34, 29]
+  sight: 4
+  dir: up
+  sprite: trainer_POKEMONRANGER_F
+  trainer: [POKEMONRANGER_F, Sorrel]
+  intro: Rangers patrol here since the silk went strange. Let's see your team.
+  after: Leave the webs as you found them, please.
+- type: item
+  at: [3, 5]
+  item: GREATBALL
+- type: item
+  at: [16, 6]
+  item: ETHER
+- type: item
+  at: [5, 29]
+  item: TINYMUSHROOM
+  hidden: true
+  name: HiddenItem (fern bank)
+- type: sign
+  name: Deepwood marker
+  at: [2, 16]
+  text: 'THE DEEPWOOD. Past here the silk is old and the trees remember it. Weavers: one cocoon in three. Always leave two.'
+  post: false
+- type: event
+  name: The Weft Brook
+  at: [10, 16]
+  pages:
+  - trigger: action
+    commands: [The Weft Brook comes off the upper wood in a white fall. Weavers rinsed their silk under it for a hundred years; the stones are still smooth
+        with it.]
+- type: event
+  name: Old weavers' camp
+  at: [10, 8]
+  pages:
+  - trigger: action
+    commands: [Racks and spools left to rot under the elder. The weavers stopped coming up here when the silk started to ring.]
+- type: event
+  name: Ring of caps
+  at: [15, 5]
+  pages:
+  - trigger: action
+    commands: ['A ring of pale caps. At night, they say, it glows and the Morelull dance. A Joltik is asleep in the middle of it.']
+- type: event
+  name: The Moth Tree
+  at: [31, 24]
+  pages:
+  - trigger: action
+    commands: ['THE MOTH TREE. Its bark is wrapped in dyed silk to the first branch: rose, saffron and woad, faded to ghosts.', Old silk-moth nests hang
+        in its forks.]
+- type: event
+  name: Glass gravel
+  at: [37, 22]
+  pages:
+  - trigger: action
+    commands: ['The ground crunches. It is not gravel: it is the forest floor, glassed in grains, still warm.']
+- type: event
+  name: Ranger Fenn
+  at: [40, 34]
+  pages:
+  - graphic: {sprite: NPC 19, dir: left}
+    trigger: action
+    move: fixed
+    commands:
+    - 'Ranger Fenn: Sorrel and I keep the camp. The glass has crept three trees east since spring.'
+    - 'Ranger Fenn: Rest if you need. The fire''s honest.'
+    - {heal: true}
+- type: event
+  name: Rangers' log
+  at: [32, 33]
+  pages:
+  - trigger: action
+    commands: ['RANGERS'' LOG. Glass at the Moth Tree: none. Glass at the camp: none. Glass at the Hollow: ringing. Do not touch the crystal silk.']

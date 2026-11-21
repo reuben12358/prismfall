@@ -104,6 +104,8 @@ curtain only in the direction its threads lean (an arrow-shaped sag). From the o
   silk wall beside their curtains and glow when lit. Post α (a Joltik on the anchor, (25,7)) stands outside, post β (33,9)
   inside the thicket, so α → β is forced. Proof on the built map: 2 posts, 5 states, rating 2; unsolvable without either.
   Shelly stays where the map builder placed her (15,26); moving her behind curtain 3 is a story/map-builder call.
+  **Map builder 16 (2026-11-21):** 525 is crafted now (MAPGEN 2r); the hollow sits on the upper wood, reached by the east
+  stair; the events and the proof are unchanged (2 posts, 5 states), the terrain is carved round them.
 
 ## D3 Cocoonfall Hollow (548, 32×28, `:BLEED`, optional) — "the shuttle re-threads"
 **Rule:** Mother Loom's Shuttle (key item, from Tamsin after her badge, Gym 2) can **re-thread crystal silk**.

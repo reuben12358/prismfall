@@ -1550,3 +1550,10 @@ Dorian's Encore patch on 154 (16 badges) and the Causeway Matriarch on 560 (16 b
   (GYM_PUZZLES now matches); "Turn it off" stays in the Lowlight (608).
 - **Badge names (final):** Tideturn (3), Arclight (4), Sandglass (5), Remedy (6). They aren't in PBS; use them in the
   badge-award messages. Record: `design/CHAPTER_BEATS.md`, "Creator decisions (2026-11-21)".
+
+## From map builder 16 (2026-11-21, in progress)
+**For map builder 15 (and anyone running relayout):** 525 Gossamer Deepwood is now built by `routes_early.py`
+(`routes_craft.build_525`, spec `specs/525_gossamer_deepwood.yaml`); `specs/525_reskin.yaml` is gone, `reskin.py` skips
+525 and `relayout.sh` no longer runs `reskin.py 525` or the 525 spec restore (548 stays in `525_deepwood_cocoonfall.yaml`,
+written by `deepwood.py 548` only). A relayout that started before this change recreated `525_reskin.yaml` and failed with
+"duplicate map ids in specs"; that is fixed in the tree, just run it again.

@@ -741,6 +741,23 @@ a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/
 - **Job 4:** the trainer designer's nine route trainers stand at map builder 13's cells on 577 and 578 (appended after
   generation; no tile moved).  `tools/validate_map_trainers.py`: 0 errors.
 
+## 2r. Map builder 16 (2026-11-21): the Deepwood crafted
+- **525 Gossamer Deepwood** (`routes_craft.build_525`, spec `specs/525_gossamer_deepwood.yaml`; the reskin is retired:
+  `reskin.py` skips 525, `relayout.sh` no longer runs it, and **the 525 spec-restore rule is gone** (`525_deepwood_cocoonfall.yaml`
+  holds 548 only and nothing but `deepwood.py 548` writes it).  The old spec's events are read from
+  `layouts/old_525_reskin.yaml`.  Same size (44x40), warps (WOOD_DEEP (0,17-19), DEEP_COCOON (43,20)), trainers and Shelly's
+  quest.  The upper wood (h1) runs across the north: the Weft Brook drops off it as a three-row waterfall beside the west
+  stair (the weavers' camp under the Deepwood elder: spools and racks left to rot, a ring of glowing caps, the Great Ball
+  over the stepping stones); the east stair climbs to the D2 lantern hollow, whose thicket, island (with its glowing pool)
+  and outer glade are carved exactly round `puzzles/dungeons.py`'s fixed events (`MUST_SOLID` cells are proved solid
+  after paint by `solid_at`).  Below: the trail over a plank bridge, the Moth Tree (Trials MOTH_NESTS), the glassed east
+  (blue/violet crowns via `CK.woods(pick=)`, crystals and gravel at the crystal-silk mouth, now a true one-tile mouth),
+  Shelly's dew pond with reeds and the Veil round the Masquerain's gravel pocket, the Rangers' camp (Ranger Fenn heals; the
+  big stump keeps the hidden Super Potion).  Before/after: `maps_out/previews/ch2_4_compare/525_before_after.jpg`.
+- **Kit:** `CK.woods(..., pick=f)` (a palette by place); **`CK.infill(r, palettes)`** after `r.paint()`: packs every class-T
+  cell the staggered lattice could not fit (ragged edges, two-row bands) with a lattice tree, a 2x2 shrub or a 1x1 bush,
+  so no forest cell is a walkable gap.  `DECOR_SH['flowers']` 11 and 12 are SOLID bushes: never use them as floor dressing.
+
 ## 2j. Puzzle interiors: tileset 54, the puzzle runtime and the solver (puzzle engineer)
 - **Tileset 54 "PF Rejuv Halls"** (`compose_halls.py`; offsets in `data/halls.json`): only the sheet rows that Rejuvenation's
   own Sensei's House / Goldenleaf interiors (`Multi-Interiors`) and Goldenleaf Theatre / Backstage (`Multi-Gym Interior`) use,

@@ -317,9 +317,10 @@ BattleBack = forest
 #-------------------------------
 [525]   # Gossamer Deepwood
 Name = Gossamer Deepwood
+Outdoor = true
 ShowArea = true
-MapPosition = 0,12,14
 BattleBack = forest
+MapPosition = 0,12,14
 #-------------------------------
 [527]   # Lacecliff Walk
 Name = Lacecliff Walk

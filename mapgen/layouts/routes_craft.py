@@ -1175,6 +1175,251 @@ def build_524():
 BUILD[524] = build_524
 
 
+# ====================================================================================================== 525 Gossamer Deepwood
+GLASSWOOD = {'blue': 3, 'purp': 2, 'teal2': 2, 'silk1': 1}                  # the glassed east: blue and violet crowns, silk
+DEEP = [{'silk0': 3, 'silk1': 3, 'sh1': 2}, {'teal2': 3, 'sh1': 3, 'silk1': 2}, {'sh0': 3, 'teal': 2, 'silk0': 3}, {'olive': 2, 'sh1': 3, 'teal2': 2}]
+
+
+def solid_at(m, cells, kinds=('nt_bush0', 'nt_bush1')):
+    """after painting: every cell in `cells` must stand solid; a walkable one gets a solid bush (the D2 hollow's walls)"""
+    import render as R, build as B
+    ts = R.tilesets()[m.tid]
+    for i, (x, y) in enumerate(cells):
+        Lr = RC.resolve(m.L[:, y:y + 1, x:x + 1], m.tid)
+        if B.cell_passable(Lr, ts, 0, 0):
+            t = int(np.array(STAMPS[kinds[i % len(kinds)]]['layers']).max())
+            z = 2 if m.L[1, y, x] else 1
+            m.L[z, y, x] = t
+
+
+def build_525():
+    """Gossamer Deepwood (44x40, SILKWOOD; map builder 16, replacing the reskin): past the Cut tree the Gossamer gets old
+    and dark.  The upper wood (h1) runs across the north, its south face broken by a waterfall where the Weft Brook drops
+    off the old weavers' camp (racks and spools left to rot, the Deepwood elder, a ring of glowing caps), and by two
+    stairs.  Under the face the trail runs east over the brook (a plank bridge) towards the glass: east of the Moth
+    Tree the crowns turn blue and violet, crystals push through gravel, and the crystal silk shuts the Hollow's mouth.
+    Up the east stair, the lantern hollow (D2, puzzles/dungeons.py; its walls, curtains, cocoons and posts are fixed at
+    x 24-41, y 2-10): the thicket and the island are walled by silk, old trunks and the upper wood's east crag.  South:
+    Shelly's dew pond, its lilies and reeds, and the shimmer of a small Veil round the glassed Masquerain's pocket.
+    South-east: the Rangers' camp in a ring of stumps (Sorrel), the old stump that kept a Super Potion dry."""
+    import puzzles.dungeons as DG
+    W, H = 44, 40
+    r = Route(525, W, H, 'forest', base='T')
+    m = r.m
+    rng = random.Random(525)
+    # ---------------------------------------------------------------- heights: the upper wood across the north
+    def lip(x):
+        if x <= 21: return 11 + (1 if 9 <= x <= 12 else 0)
+        if x <= 36: return 13
+        if x <= 40: return 10
+        return -1
+    for x in range(W):
+        if lip(x) >= 0: m.ht[:lip(x) + 1, x] = 1
+    # ---------------------------------------------------------------- the D2 lantern hollow (fixed by the proof)
+    THICKET = [(x, y) for x in range(30, 37) for y in range(7, 10)]
+    ISLAND = [(x, y) for x in range(31, 40) for y in range(1, 6)]
+    WALLS = set(DG.D2_WALLS) | {c for c, _ in DG.D2_CURTAINS.values()} | {DG.D2_EXIT[0]} | set(DG.D2_COCOONS.values())
+    POSTS = [p for p, _ in DG.D2_POSTS.values()]
+    MUST_SOLID = [(30, 1), (30, 2), (30, 3)] + [(x, 0) for x in range(29, 42)] + [(x, 10) for x in range(33, 37)] + \
+                 [(x, y) for x in range(38, 41) for y in range(7, 10)]
+    for x, y in THICKET + ISLAND: m.cls[y, x] = '.'
+    POOL = [(x, y) for x in range(37, 40) for y in range(1, 4)]                 # the island's glowing pool ("the pond glows at night")
+    for x, y in POOL: m.cls[y, x] = 'w'
+    for x, y in WALLS | set(MUST_SOLID): m.cls[y, x] = 'T'
+    # ---------------------------------------------------------------- the trail (h0) and the brook
+    r.road([(0, 18), (5, 18), (10, 18.5), (16, 19), (22, 19), (28, 19.5), (33, 20), (38, 20), (41, 20)], w=3.0, open_=(1, 2))
+    r.exit('W', 17, 3)
+    BROOK_TOP = [(6, 0), (5.5, 4), (6.5, 7), (7, 9.5)]
+    BROOK = [(7, 14), (8, 16), (9, 18), (9, 22), (10, 26), (11, 30)]
+    CK.stream(r, BROOK_TOP, w=2.6, only='T.t')
+    CK.stream(r, BROOK, w=2.8, only='T.td')
+    CK.pond(r, 11, 32.5, 5.5, 3.2)                                                # Shelly's dew pond
+    # ---------------------------------------------------------------- side ways
+    r.lane([(19, 20), (17.5, 24), (16, 27)], w=2.0, open_=(0, 1))               # down to the dew pond
+    r.clearing(15.5, 27.5, 4.0, 2.4)
+    r.lane([(17, 28), (18.5, 31), (21, 34)], w=1.6, open_=None)               # through the shimmer to the Masquerain
+    r.clearing(23, 34.5, 3.2, 2.3)
+    for x, y in [(x, y) for y in range(31, 38) for x in range(19, 28)]:
+        if m.cls[y, x] == '.' and ((x - 23) / 3.8) ** 2 + ((y - 34.5) / 2.8) ** 2 <= 1.05: m.cls[y, x] = 'g'   # glassed gravel
+    r.lane([(31, 21), (32.5, 25), (34.5, 28.5), (36, 31)], w=2.0, open_=(0, 1))  # the Rangers' camp
+    r.clearing(36.5, 32.5, 5.5, 3.4)
+    r.lane([(5, 19), (4, 24), (5, 28)], w=1.6, c='.', open_=(0, 1))             # the west fern bank (the brook's west bank)
+    r.clearing(4.5, 29, 2.6, 2.0)
+    # ---------------------------------------------------------------- the upper wood (h1)
+    r.lane([(15, 9.5), (12, 8), (9, 6)], w=2.0, c='.', open_=(0, 1), only='T.t')   # the weavers' camp
+    r.lane([(15, 14), (15, 18)], w=3.0, c='d', open_=None, only='T.t')                   # the west stair's foot to the trail
+    r.clearing(12.5, 6.0, 3.6, 2.2)
+    for x, y in [(x, y) for x in range(2, 5) for y in range(3, 9)]:
+        if ((x - 3) / 1.8) ** 2 + ((y - 5.5) / 3.0) ** 2 <= 1.0: m.cls[y, x] = '.'   # the Great Ball nook over the stones
+    OUT = {(x, y) for x in range(22, 29) for y in range(6, 11)}                 # the hollow's outer glade (outside the silk)
+    OUT |= {(x, y) for x in range(23, 26) for y in range(10, 13)} | {(x, y) for x in range(24, 33) for y in (11, 12)}
+    OUT |= {(x, y) for x in range(27, 30) for y in range(3, 7)}
+    OUT -= {(22, 6), (22, 10), (28, 10)}
+    for x, y in OUT:
+        if (x, y) not in WALLS and (x, y) not in MUST_SOLID: m.cls[y, x] = '.'
+    for x, y in WALLS | set(MUST_SOLID): m.cls[y, x] = 'T'
+    # the crystal-silk mouth: one tile wide (x 41-43, row 20)
+    for x in range(40, 44):
+        for y in range(16, 25):
+            if y != 20 and x >= 41: m.cls[y, x] = 'T'
+        m.cls[20, x] = 'd'
+    # ---------------------------------------------------------------- encounter grass, then the plan's cliffs and stairs
+    CK.grass_fields(r, [(13, 22, 2.2), (24, 23, 2.4), (22, 28, 1.8), (30, 30, 1.8), (36, 24, 1.8), (14, 5, 1.4)])
+    r.finish_plan(border=0)
+    r.flatten(6, 8, 11, 1)
+    for x in range(6, 9):
+        for y in range(11, 14): m.cls[y, x] = '.'
+    CK.waterfall(r, 6, 8, 11)
+    CK.stair(r, 14, 11, w=3, h=1)
+    CK.stair(r, 23, 13, w=3, h=1)
+    for x in range(14, 17): m.cls[9:11, x] = '.'
+    for x in range(23, 26): m.cls[11:13, x] = '.'
+    BRIDGE = [(x, y) for y in range(17, 21) for x in range(6, 12) if m.cls[y, x] in 'wW']
+    for x, y in BRIDGE: r.plank_bridge(x, y, x, y)
+    CK.stones(r, [(x, 6) for x in range(4, 9) if m.cls[6, x] == 'w'])
+    for x, y in THICKET + ISLAND + list(OUT) + POSTS + list(WALLS): m.taken[y, x] = True
+    for x, y in POOL: m.taken[y, x] = False
+    # ---------------------------------------------------------------- woods: the Gossamer's old silk trees, glassed in the east
+    def zone(x, y):
+        edge = 33 + 3 * math.sin(y / 4.5) + 4 * (vnoise(x, y, 5253, 5.0) - 0.5)
+        return GLASSWOOD if x > edge else None
+    CK.woods(r, DEEP, scale=8.0, pick=zone, accents={'pink': 0.006})
+    # ---------------------------------------------------------------- events
+    ev = old_events('525_reskin.yaml', 525)
+    shelly, cat, masq = ev['Shelly'], ev['Caterpie'], ev['Glassed Masquerain']
+    silk = ev['Crystal silk']
+    E = [{'type': 'warp', 'name': 'To Gossamer Wood', 'at': [0, 18], 'link': 'WOOD_DEEP', 'arrive': [1, 18, 'right'], 'fixed': True},
+         {'type': 'warp', 'name': 'To Gossamer Wood b', 'at': [0, 17], 'to': {'map': 524, 'x': 88, 'y': 48, 'dir': 'left'}, 'fixed': True},
+         {'type': 'warp', 'name': 'To Gossamer Wood c', 'at': [0, 19], 'to': {'map': 524, 'x': 88, 'y': 48, 'dir': 'left'}, 'fixed': True},
+         {'type': 'warp', 'name': 'To Cocoonfall Hollow', 'at': [43, 20], 'link': 'DEEP_COCOON', 'arrive': [42, 20, 'left'], 'fixed': True},
+         dict(at(silk, 41, 20), fixed=True),
+         dict(at(shelly, 15, 26), fixed=True), dict(at(cat, 16, 25), fixed=True), dict(at(masq, 23, 34), fixed=True),
+         trainer((26, 20), 'POKEMANIAC', 'Ferris', 'The bugs in here have gone STRANGE and I love them!', 'That one hummed. Did you hear it hum?', d='left'),
+         dict(trainer((31, 7), 'BUGCATCHER', 'Linden', "Deepwood's my secret spot! How'd you get past the big tree?", "The pond glows at night. Don't tell anyone.", d='left'), fixed=True),
+         trainer((34, 29), 'POKEMONRANGER_F', 'Sorrel', "Rangers patrol here since the silk went strange. Let's see your team.", 'Leave the webs as you found them, please.', d='up'),
+         dict(item((35, 5), 'SILVERPOWDER'), fixed=True),
+         item((3, 5), 'GREATBALL'), item((18, 7), 'ETHER'),
+         {'type': 'event', 'name': 'HiddenItem', 'at': [40, 31], 'fixed': True, 'pages': ev['HiddenItem']['pages']},
+         hidden((5, 29), 'TINYMUSHROOM', 'HiddenItem (fern bank)'),
+         sign((2, 16), 'Deepwood marker', 'THE DEEPWOOD. Past here the silk is old and the trees remember it. Weavers: one cocoon in three. Always leave two.'),
+         obj('The Weft Brook', (10, 14), ['The Weft Brook comes off the upper wood in a white fall. Weavers rinsed their silk under it for a hundred years; the stones are still smooth with it.']),
+         obj('Old weavers\' camp', (10, 8), ["Racks and spools left to rot under the elder. The weavers stopped coming up here when the silk started to ring."]),
+         obj('Ring of caps', (15, 4), ['A ring of pale caps. At night, they say, it glows and the Morelull dance. A Joltik is asleep in the middle of it.']),
+         obj('The Moth Tree', (29, 25), ['THE MOTH TREE. Its bark is wrapped in dyed silk to the first branch: rose, saffron and woad, faded to ghosts.',
+                                         'Old silk-moth nests hang in its forks.']),
+         obj('Glass gravel', (37, 22), ['The ground crunches. It is not gravel: it is the forest floor, glassed in grains, still warm.']),
+         talk('Ranger Fenn', (40, 34), 'NPC 19', ['Ranger Fenn: Sorrel and I keep the camp. The glass has crept three trees east since spring.',
+                                                  "Ranger Fenn: Rest if you need. The fire's honest.", {'heal': True}], d='left'),
+         obj("Rangers' log", (32, 33), ["RANGERS' LOG. Glass at the Moth Tree: none. Glass at the camp: none. Glass at the Hollow: ringing. Do not touch the crystal silk."])]
+    r.add(*E)
+    r.seat_events(on='.dtg')
+    # ---------------------------------------------------------------- set pieces
+    for nm, x, y in (('pf_g_tree2', 12, 0), ('pf_g_tree2', 26, 21), ('pf_g_tree2', 0, 33)):
+        if m.free(x, y, STAMPS[nm]['w'], STAMPS[nm]['h'], on='.tT'): m.stamp(nm, x, y, mark='B', blend=True)
+        else: m.near(nm, x, y, on='.tT', r=3)
+    def put(n, x, y, on='.dt'):
+        st = STAMPS[n]
+        if m.free(x, y, st['w'], st['h'], on=on): m.stamp(n, x, y); return True
+        print('  (525: %s does not fit at %d,%d)' % (n, x, y)); return False
+    put('gw_rack', 16, 7, on='.tT'); put('gw_spool', 9, 4, on='.tT'); put('gw_spool', 17, 5, on='.tT')    # the weavers' camp, left to rot
+    put('nt_log', 9, 8, on='.tT')
+    put('nt_stump_big', 39, 27, on='.tT')                                        # the old stump that kept the potion dry
+    put('sh_campfire', 34, 31); put('pf_logbench', 35, 34); put('pf_lantern', 41, 33, on='.dtT'); put('gw_rack', 37, 35, on='.dtT')
+    put('nt_stump', 32, 30, on='.dtT')
+    for n, x, y in (('nt_hollow', 1, 22), ('nt_log', 20, 22), ('nt_stump_big', 12, 26), ('nt_deadtree', 36, 22), ('pf_p_lantern', 22, 8),
+                    ('nt_birch_h2', 26, 22), ('nt_boulder', 2, 26), ('nt_stump', 17, 30)):
+        near_flat(r, n, x, y, on='.t', rad=3)
+    for n, x, y in (('nt_reed0', 6, 30), ('nt_reed1', 7, 34), ('nt_reed0', 15, 30), ('nt_reed1', 16, 33), ('nt_reed0', 9, 35), ('nt_reed1', 12, 35),
+                    ('nt_reed0', 38, 3), ('nt_reed1', 37, 1)):
+        r.near(n, x, y, on='w', r=2)
+    CK.clear_around(r)
+    # the glass: crystals and shards east of the Moth Tree, and round the Masquerain's pocket
+    CRY = ['cr_teal_t', 'cr_blue_e', 'cr_clear_t', 'cr_purple_t', 'cr_clear_e', 'cr_teal_c', 'cr_blue_c', 'gd_shard0', 'gd_shard1', 'gd_shard2']
+    for _ in range(140):
+        x, y = rng.randrange(28, W), rng.randrange(12, H)
+        if zone(x, y) is None and not (19 <= x <= 27 and 30 <= y <= 38): continue
+        n = rng.choice(CRY); st = STAMPS[n]
+        if m.free(x, y, st['w'], st['h'], on='.g') and not r.road_mask[max(0, y - 1):y + st['h'] + 1, max(0, x - 1):x + st['w'] + 1].any():
+            m.stamp(n, x, y)
+    for n, x, y in (('cr_teal_t', 35, 17), ('cr_clear_e', 37, 17), ('cr_blue_e', 40, 18), ('cr_purple_t', 39, 22), ('cr_teal_c', 36, 22),
+                    ('cr_clear_t', 41, 22), ('gd_shard1', 34, 22), ('cr_blue_c', 38, 17), ('gd_spire', 41, 15), ('cr_teal_t', 33, 23)):
+        st = STAMPS[n]
+        if m.free(x, y, st['w'], st['h'], on='.gtT'): m.stamp(n, x, y)
+    for _ in range(40):
+        x, y = rng.randrange(18, 28), rng.randrange(30, 39)
+        n = rng.choice(CRY); st = STAMPS[n]
+        if m.free(x, y, st['w'], st['h'], on='.g'): m.stamp(n, x, y)
+    # silk: drapes and webs where the wood meets the ways, cocoons, webs across the hollow's glade
+    CK.drapes_along(r, every=3, seed=2)
+    for _ in range(W * H // 22):
+        nm = rng.choice(['pf_p_web', 'pf_p_web1', 'gw_cocoons', 'gw_cocoons', 'pf_p_strand_w', 'pf_p_strand_p', 'gw_drape0', 'gw_drape1'])
+        x, y = rng.randrange(W), rng.randrange(H); st_ = STAMPS[nm]
+        if nm.startswith('gw_drape') or nm == 'gw_cocoons':
+            if y + st_['h'] < H and (m.cls[y, x:x + st_['w']] == 'T').all() and m.free(x, y + 1, st_['w'], st_['h'] - 1, on='.dt'):
+                m.stamp(nm, x, y, mark=None)
+        elif m.free(x, y, st_['w'], st_['h'], on='.'): m.stamp(nm, x, y, mark=None)
+    CK.fringe(r, ['nt_dark_sh', 'nt_teal_b', 'nt_dpine_sh', 'nt_olive', 'nt_conifer'], 60, box=(0, 0, 31, H), seed=1, near_forest=3)
+    CK.fringe(r, ['nt_tree_blue', 'nt_pine_blue', 'nt_tree_purp', 'nt_pine_purp'], 18, box=(31, 12, W, H), seed=2, near_forest=3)
+    CK.undergrowth(r, 120, kinds=('nt_fern0', 'nt_fern1', 'nt_bush0', 'nt_bush1', 'ak_fern', 'nt_shrub0', 'nt_fern0'), seed=3)
+    CK.props(r, ['nt_log', 'nt_stump', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_boulder', 'nt_birch_h'], 18, box=(0, 12, 31, H), clump=3, seed=7)
+    CK.earth(r, [(38.5, 21, 3.2, 2.2), (36, 24, 1.8, 1.4)], c='g', on='.t')                     # the glassed ground at the mouth
+    FL = K.DECOR_SH['flowers']
+    for i, (cx_, cy_, rx, ry, ks) in enumerate(((33, 3, 3, 1.6, (2, 6)), (13, 5, 2.5, 1.5, (4, 6)), (16, 27, 3, 1.5, (2, 4)), (26, 9, 2, 1.2, (6,)),
+                                                (4, 29, 2, 1.5, (2,)), (33, 8, 2.5, 1, (4,)))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in ks], p=0.5, seed=i)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.0)
+    CK.infill(r, DEEP, pick=zone)
+    CK.paint_extras(r)
+    # ---------------------------------------------------------------- after paint: lilies on the dew pond, glow, caps, light shafts, the veil
+    LILY = int(np.array(STAMPS['nt_lily']['layers'])[1].max()) if np.array(STAMPS['nt_lily']['layers'])[1].max() else 0
+    FUNG = [int(np.array(STAMPS['cv_fung%d' % i]['layers']).max()) for i in (0, 1)]
+    for (cx, cy, rad) in ((15, 4, 2.2), (6, 29, 1.6), (12, 26, 1.4), (27, 5, 1.5)):        # rings of glowing caps
+        for k in range(10):
+            a = k * 0.63; x, y = int(round(cx + math.cos(a) * rad)), int(round(cy + math.sin(a) * rad * 0.7))
+            if m.inb(x, y) and m.cls[y, x] in '.t' and not m.taken[y, x] and m.L[1, y, x] == 0 and m.L[2, y, x] == 0: m.L[2, y, x] = FUNG[k % 2]
+    VEIL = [int(np.array(STAMPS['bl_veil%d' % i]['layers']).max()) for i in (0, 1)]
+    for y in range(31, 38):
+        for x in range(18, 22):
+            if m.cls[y, x] in '.gd' and m.L[2, y, x] == 0 and (x == 19 or (x == 20 and y % 2) or (x in (18, 21) and (x + y) % 3 == 0)):
+                m.L[2, y, x] = VEIL[(x + y) % 2]
+    for (x, y) in ((22, 4), (33, 2), (14, 26), (35, 30), (8, 21), (25, 16)):              # light shafts through the canopy
+        st = STAMPS['cv_shaft']; L = np.array(st['layers'])
+        for dy in range(st['h']):
+            for dx in range(st['w']):
+                t = int(L[:, dy, dx].max())
+                if t and m.inb(x + dx, y + dy) and m.L[2, y + dy, x + dx] == 0: m.L[2, y + dy, x + dx] = t
+    solid_at(m, MUST_SOLID)
+    # the hollow's floors: tufts, clover, pale flowers and caps (walkable), webs overhead between the trunks
+    from rkit import TUFTS, CLOVER
+    evc = {tuple(e['at']) for e in r.events} | set(POSTS) | set(WALLS)
+    for x, y in THICKET + ISLAND + sorted(OUT):
+        if (x, y) in evc or m.cls[y, x] not in '.t' or m.L[1, y, x] or m.L[2, y, x]: continue
+        k = rng.random()
+        if k < 0.22: m.L[1, y, x] = rng.choice(TUFTS + CLOVER)
+        elif k < 0.32: m.L[1, y, x] = rng.choice([FL[2], FL[6], FL[4]])     # (FL 11 and 12 are solid bushes)
+        elif k < 0.37: m.L[2, y, x] = FUNG[rng.randrange(2)]
+    for x, y in ((31, 1), (36, 4), (32, 7), (22, 6), (26, 3)):
+        st = STAMPS['pf_p_web']; L = np.array(st['layers'])
+        for dy in range(st['h']):
+            for dx in range(st['w']):
+                t = int(L[:, dy, dx].max())
+                if t and m.inb(x + dx, y + dy) and m.L[2, y + dy, x + dx] == 0: m.L[2, y + dy, x + dx] = t
+    CK.scatter_quiet(r, 18)
+    h = head(525, 'Gossamer Deepwood', field='SILKWOOD', bgm='Route 3', biome='forest', connections=[], tone=[-40, -24, -30, 40],
+             fog={'name': 'prismfall_spores', 'opacity': 70, 'blend': 1, 'zoom': 100, 'sx': 1, 'sy': -1})
+    h['parent'] = 524
+    h['metadata'].update({'MapPosition': [0, 13, 23], 'BattleBack': 'forest'})
+    h['metadata'].pop('Outdoor', None) if False else None
+    h['walk_from'] = [[1, 18]]
+    r.write(h, '525_gossamer_deepwood.yaml', '# Gossamer Deepwood (525). WRITTEN BY layouts/routes_craft.py (map builder 16) - edit that script.\n'
+                                             '# The D2 lantern hollow events are laid over it by puzzles/dungeons.py (EVENTS[525]).\n',
+            '/tmp/mb16/525.png' if PREV else None)
+
+
+BUILD[525] = build_525
+
+
 # ====================================================================================================== 520 The Ferrymen's Mile
 def build_520():
     """The Ferrymen's Mile (64x110, MEADOW): the lane north from Ferrow's Landing over the stile, along the chalk sea

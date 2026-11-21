@@ -69,10 +69,11 @@ GOSSAMER = [{'sh1': 4, 'teal2': 2, 'silk1': 2}, {'sh0': 3, 'teal': 3, 'silk0': 3
             {'olive': 3, 'sh0': 3, 'lime': 1}]
 
 
-def woods(r, palettes, scale=13.0, accents=None, seed=None):
+def woods(r, palettes, scale=13.0, accents=None, seed=None, pick=None):
     """replace the map's lattice painter: the staggered tree lattice, each tree's species drawn from the palette of the
     noise zone it stands in (species drift in patches like Rejuvenation's woods); `accents` = {species: p} sprinkles a
-    rare colour (a red maple, a blossom) anywhere"""
+    rare colour (a red maple, a blossom) anywhere.  pick(x, y) -> a palette dict or None (map builder 16): a palette
+    by place (the Deepwood's glassed east), None falls back to the noise zones"""
     m = r.m; s = (r.seed if seed is None else seed) + 1313
     rng = random.Random(s)
     def paint_forest(trees=None, mask=None, vstep=2):
@@ -86,7 +87,7 @@ def woods(r, palettes, scale=13.0, accents=None, seed=None):
                 if not all(msk[y, x] for x, y in foot if m.inb(x, y)): continue
                 if not any(m.inb(x, y) for x, y in foot): continue
                 z = vnoise(tx, ty, s, scale)
-                pal = palettes[min(len(palettes) - 1, int(z * len(palettes) * 0.999))]
+                pal = (pick(tx + 1, ty + nt + 1) if pick else None) or palettes[min(len(palettes) - 1, int(z * len(palettes) * 0.999))]
                 if accents and rng.random() < sum(accents.values()):
                     sp = rng.choices(list(accents), list(accents.values()))[0]
                 else:
@@ -564,3 +565,48 @@ def snow_ground_var(r, thr=0.5, seed=0):
         for x in range(m.W):
             if m.L[0, y, x] in base and vnoise(x, y, r.seed + 4440 + seed, 5.0) > thr:
                 m.L[0, y, x] = G[int(vnoise(x, y, r.seed + 4441 + seed, 2.5) * 3.999)]
+
+
+def infill(r, palettes, pick=None, scale=10.0, seed=0, bushes=('nt_bush0', 'nt_bush1'), shrubs=('nt_shrub0', 'nt_shrub1')):
+    """after r.paint() (map builder 16): the staggered lattice leaves forest cells it could not fit a whole tree on
+    (ragged edges, narrow bands: walkable gaps under the canopy).  Pack them greedily, top to bottom: a lattice tree
+    of the zone's species where a 3x2 foot fits, else a 2x2 shrub, else a 1x1 bush, so every class-T cell is solid"""
+    m = r.m; rng = random.Random(r.seed * 31 + seed); s = r.seed + 1313
+    hole = (m.cls == 'T') & ~m.taken & (m.L[1] == 0) & ~m.cliff
+    placed = 0
+    for y in range(m.H):
+        for x in range(m.W):
+            if not hole[y, x]: continue
+            done = False
+            for ox in (0, -1, -2):
+                tx = x + ox
+                foot = [(tx + dx, y + dy) for dx in range(3) for dy in range(2)]
+                if not all(m.inb(fx, fy) and hole[fy, fx] for fx, fy in foot): continue
+                z = vnoise(tx, y, s, scale)
+                pal = (pick(tx + 1, y + 1) if pick else None) or palettes[min(len(palettes) - 1, int(z * len(palettes) * 0.999))]
+                top, bot, _ = SPECIES[rng.choices(list(pal), list(pal.values()))[0]]
+                for dy in range(2):
+                    for dx in range(3):
+                        X, Y = tx + dx, y - 2 + dy
+                        if m.inb(X, Y) and top[dy][dx] and m.L[2, Y, X] == 0: m.L[2, Y, X] = top[dy][dx]
+                for dy in range(2):
+                    for dx in range(3):
+                        X, Y = tx + dx, y + dy
+                        if bot[dy][dx]: m.L[1, Y, X] = bot[dy][dx]
+                        m.taken[Y, X] = True; hole[Y, X] = False
+                done = True; placed += 1; break
+            if done: continue
+            for ox in (0, -1):
+                if all(m.inb(x + ox + dx, y + dy) and hole[y + dy, x + ox + dx] for dx in range(2) for dy in range(2)):
+                    L = np.array(STAMPS[rng.choice(shrubs)]['layers'])
+                    for dy in range(2):
+                        for dx in range(2):
+                            X, Y = x + ox + dx, y + dy
+                            for zz in (1, 2):
+                                if L[zz, dy, dx]: m.L[zz if zz == 1 or m.L[2, Y, X] == 0 else 1, Y, X] = int(L[zz, dy, dx])
+                            m.taken[Y, X] = True; hole[Y, X] = False
+                    done = True; placed += 1; break
+            if done: continue
+            m.L[1, y, x] = int(np.array(STAMPS[rng.choice(bushes)]['layers']).max()); m.taken[y, x] = True; hole[y, x] = False
+            placed += 1
+    return placed

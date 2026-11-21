@@ -8,6 +8,5 @@ python3 -I rcustom.py && python3 -I rcompose.py && python3 -I rstamps.py
 for s in ferrow_rj briarwick_rj dovetail ebbmouth saltmere_rj saltmere_interiors orchard trial_interiors early_interiors war routes_early rimewood caves tidelock manor; do
   echo "== layouts/$s.py"; python3 -I layouts/$s.py > /tmp/relayout_$s.log 2>&1 || { tail -20 /tmp/relayout_$s.log; exit 1; }
 done
-python3 -I layouts/reskin.py 525 > /tmp/relayout_reskin.log 2>&1
-git checkout -- specs/525_deepwood_cocoonfall.yaml       # reskin rewrites it; 548 is written by deepwood.py 548 alone
+# 525 is built by routes_early (routes_craft.build_525, map builder 16): no reskin, no spec restore any more
 python3 -I build.py "$@"
