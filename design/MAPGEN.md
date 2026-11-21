@@ -553,7 +553,10 @@ are 16-px sheets with a baked checker background that needs keying). Gym and dun
   One (`JUNO_WAITS`: the map's Juno waits at the gate), erases her stand-ins on 100/103 (`JUNO_STANDINS`), and Juno's
   portrait bubbles point at the follower when none of her map events is on show. Legs: errand (100 lab yard -> 522 gate;
   after Lecture One -> the 523 bed), Saltmere (523 send-off -> the 140 arrival, she runs off), Weavers' Road (140
-  chapter close -> the 120 arrival). Talking to the follower does nothing (no common event).
+  chapter close -> the 120 arrival). **Talking to her** (map builder 12): `FollowerData#interact` is wrapped for Juno (no
+  common event needed): she turns to you and `pfm_juno_talk` says the next line for the map (`JUNO_TALK`, 2-3 per map on
+  all three legs, `JUNO_TALK_SAME` shares Saltmere's / the mine's / the manor's floors, the Weavers' Road leg has its own
+  Saltmere lines after the Pageant), every fourth talk a time-of-day line (`JUNO_TALK_TIME`), elsewhere `JUNO_TALK_ANY`.
 - **passguard** (`mapgen/passguard.py`): Essentials' `playerPassable?` stops at the first passable priority-0 tile,
   top layer first, so a decal over a solid tile makes it walkable. A *decoration* is a passable priority-0 sheet tile
   that is not a walking surface (kit names: `WALK` regex; unnamed tiles: coverage < 0.9; `SURFACE_IDS`). `hits()` = cells
