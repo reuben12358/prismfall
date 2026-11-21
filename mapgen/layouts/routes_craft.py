@@ -2018,3 +2018,177 @@ def build_561():
 
 
 BUILD[561] = build_561
+
+
+# ====================================================================================================== 566 Spinners' Rise
+def build_566():
+    """Spinners' Rise (80x120, MEADOW; map builder 12 recraft of map builder 9's routekit leg): the switchback drove road
+    from Briarwick's forest edge up four ragged fell terraces to the open top, the woods thinning to heather and stone as
+    you climb.  The cold spring rises under the summit crag, runs down through the stone sheep-wash and falls off the
+    second terrace (the Shearing Cave lies behind that fall, reached over its stepping stones); sheepfolds of drystone
+    walls on every level; the shepherds' hamlet on its shelf; the Fleece Cross; the hill-fort ring of standing stones on
+    the summit; one-way drove-slides (grass ledges) let you come down fast where the road switches back; the first
+    hoar near the top; the Ram Race and its finish line below the cross (map builder 9's events, unchanged)."""
+    W, H = 80, 120
+    r = Route(566, W, H, 'meadow', base='.')
+    m = r.m
+    lips = [(97, 1), (73, 2), (47, 3), (23, 4)]
+    r.terraces(lips, wobble=4.5, scale=8.0)
+    CK.plateau(r, 14, 40, 9, 5, 4, rough=0.4, seed=1)                            # the summit crag over the spring (W)
+    CK.plateau(r, 68, 52, 7, 4, 3, rough=0.4, seed=2)                            # a tor on the third level (E)
+    for h_ in (1, 2, 3, 4): CK.smooth_ht(m, h_, 3)
+    r.forest_band('S', 24, wobble=6.0); r.forest_band('W', 6, wobble=4.0); r.forest_band('E', 6, wobble=4.0)
+    for cx, cy, rx, ry in ((22, 80, 5, 3), (62, 64, 4, 3), (12, 92, 5, 4), (70, 104, 5, 4), (30, 30, 3, 2)):
+        r.copse(cx, cy, rx, ry)
+    road = [(39, 119), (40, 108), (26, 100), (24, 88), (46, 82), (58, 74), (52, 62), (30, 56), (26, 44), (44, 36), (56, 28), (48, 14), (44, 0)]
+    r.road(road, w=3.0, open_=(2, 5))
+    r.exit('S', 38, 4); r.exit('N', 42, 4)
+    stairs = []
+    for yl, h_ in lips:
+        xs = [x for x in range(W) if r.road_mask[yl, x]]
+        if xs: stairs.append((min(xs) + max(0, (len(xs) - 3) // 2), yl, h_))
+    r.clearing(64, 89, 13, 6); r.lane([(46, 84), (58, 92)], w=2.0)              # the shepherds' hamlet (three cottages)
+    r.clearing(40, 9, 9, 6)                                                       # the hill-fort ring on the summit
+    # the cold spring under the crag, the sheep-wash pool, the stream down over the second lip (the Shearing fall)
+    CK.stream(r, [(20, 46), (19, 52), (18, 58), (16, 64), (14, 70), (12, 76), (9, 84), (6, 92)], w=1.8, seed=1, only='T.t')
+    CK.pond(r, 18, 59, 3.5, 2.0, seed=2)
+    r.lane([(30, 58), (22, 60)], w=2.0)
+    FALL = None                                                                   # the Shearing fall: where the stream leaves level 2
+    for x in range(6, 22):
+        for y in range(55, 90):
+            if m.cls[y, x] == 'w' and m.ht[y, x] == 2 and m.ht[y + 1, x] < 2: FALL = (x, y); break
+        if FALL: break
+    if FALL:
+        fx, fy = FALL
+        for y in range(fy - 3, fy + 8):                                           # a straight two-wide run over the lip
+            for x in range(fx - 2, fx + 4):
+                if m.cls[y, x] == 'w': m.cls[y, x] = '.'
+            m.cls[y, fx] = m.cls[y, fx + 1] = 'w'
+        for y in range(fy, fy + 4): m.cls[y, fx] = m.cls[y, fx + 1] = '.'
+    for cx, cy, rx, ry in ((44, 66, 3.5, 2.2), (60, 56, 3, 2), (34, 84, 3, 2), (70, 78, 3, 2), (58, 12, 3, 2), (24, 6, 3, 2), (66, 26, 3, 2.5),
+                           (8, 30, 3, 3), (50, 104, 3, 2)):
+        r.copse(cx, cy, rx, ry)
+    r.finish_plan(border=0)
+    for sx, yl, h_ in stairs: CK.stair(r, sx, yl, w=3, h=h_)
+    if FALL:
+        CK.waterfall(r, fx, fx + 1, fy)
+        CK.stones(r, [(fx, fy + 5), (fx + 1, fy + 6)] if m.cls[fy + 6, fx + 1] == 'w' else [(fx, fy + 5)])
+    # drove-slides: one-way grass ledges across the open fell where the road doubles back
+    for x0, x1, y in ((30, 40, 66), (46, 56, 42), (60, 70, 82), (28, 36, 92)):
+        if all(m.ht[y, x] == m.ht[y, x0] and m.cls[y, x] in '.t' and not r.road_mask[y - 1:y + 2, x].any() for x in range(x0, x1 + 1)):
+            CK.ledge(r, x0, x1, y)
+    CK.grass_fields(r, [(32, 104, 4), (54, 98, 3.5), (16, 84, 3), (40, 74, 4), (64, 72, 3), (40, 60, 3.5), (60, 46, 3), (30, 40, 3),
+                        (58, 20, 3.5), (26, 16, 3), (70, 34, 3)])
+    CK.woods(r, CK.ELOWEN, scale=12.0, accents={'blossom': 0.01})
+    for n, x, y in (('gl_cot', 52, 82), ('sh_small', 62, 83), ('sh_cot', 68, 83)):           # the hamlet's three cottages
+        at = CK.seat(r, n, x, y, radius=6)
+        if not at: print('  (566: no room for cottage %s at %d,%d)' % (n, x, y))
+    J = lambda e, t: P('JUNO', e, t)
+    rr_y = 33
+    r.add(sign((42, 112), 'Road sign', "SPINNERS' RISE -- The Hoar Road. v Briarwick (North Gate) - ^ Frostwick Pass. The drove road: sheep have right of way. Sheep know it."),
+          obj('The Fleece Cross', (50, 34), ['THE FLEECE CROSS. A market cross from the old wool fairs, hung with yarn tied by every spinner who ever sold here.',
+              'The newest ribbon is dyed with all three of the Ford\'s colours. It is still wet.']),
+          talk('Ribbon-tier', (52, 36), 'NPC 27', ['Ribbon-tier: Tie one for the road. The cross remembers who passed. The tax-man does too, but the cross is kinder.']),
+          talk('Shepherd', (60, 92), 'NPC 20', ['Shepherd: The hamlet sleeps anyone the fell catches out. Third cottage, door\'s never locked. Mind the dog. The dog is a Lillipup and it is in charge.']),
+          obj('Third cottage', (71, 89), ['The third cottage. The door is never locked. A fire is laid, a kettle on the hob, and a Lillipup asleep across the threshold, in charge.',
+              '(You rest a while. The Lillipup permits it.)', {'heal': True}]),
+          {'type': 'event', 'name': 'Shepherd boy', 'at': [56, 76], 'pages': [
+              {'graphic': {'sprite': 'NPC 05', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  {'if': '$game_variables[603] == 2', 'then': ["Shepherd boy: You beat a Skiddo up the Rise. Nobody beats a Skiddo up the Rise. ...Again sometime?"],
+                   'else': ['Shepherd boy: Race you to the Fleece Cross! My Skiddo knows every rock!',
+                            {'choices': ['Race him!', 'Not now.'], 'cancel': 1, 'branches': [
+                                [{'script': '$game_variables[603] = 1\n$game_variables[604] = $stats.distance_walked'},
+                                 '(He is gone in a scatter of gravel. Up the drove road to the cross -- go!)', {'selfswitch': ['A', True]}],
+                                ['Shepherd boy: Scared of a Skiddo? Fair. He headbutts.']]}]}]},
+              {'cond': {'self': 'A'}, 'commands': []}]},
+          talk('Skiddo', (57, 77), 'Followers/SKIDDO', ['(It bleats, very pleased with itself.)'], move='random'),
+          {'type': 'event', 'name': 'Shepherd boy at the cross', 'at': [53, 35], 'pages': [
+              {'commands': []},
+              {'cond': {'var': ['ROAD_RAMRACE', 2]}, 'graphic': {'sprite': 'NPC 05', 'dir': 'down'}, 'trigger': 'action', 'commands': [
+                  {'if': '$game_variables[603] >= 3', 'then': ["Shepherd boy: Been here ages. Ages! ...Again? Meet me at the hamlet.",
+                                                             {'script': '$game_variables[603] = 0'}],
+                   'else': ['Shepherd boy: You got here first. On FOOT. Skiddo is very upset with me.']}]}]},
+          obj('Sheep-wash', (20, 58), ['A stone sheep-wash fed by a cold spring. The water comes out of the hill already freezing.']),
+          obj('Hill-fort ring', (40, 6), ['A ring of old earthworks on the summit. From here the Gossamer is a grey-green sea, and beyond it, the real one.']),
+          obj('Road Stone III', (40, 116), ['ROAD STONE III. THE HOAR ROAD. "Briarwick 0, Frostwick 2." The frost has started at the top of the stone.']),
+          obj('Waterfall at the sheep-wash', (14, 58), ['Behind the little fall at the sheep-wash, the rock goes back further than it should. The shepherds say nothing. Shepherds never do.']),
+          item((16, 61), 'SOFTSAND'), talk('Wooloo (lost lamb)', (13, 60), 'Followers/WOOLOO', ['(A Wooloo lamb, hidden in the cave with the best fleece. It looks at you as if you might be its shepherd.)']),
+          item((60, 92), 'POTION'), item((24, 40), 'SUPERPOTION'), item((70, 20), 'REPEL'), hidden((36, 10), 'STARDUST', 'HiddenItem (hill fort)'),
+          {'type': 'berry', 'at': [64, 94], 'berry': 'ASPEARBERRY'})
+    r.seat_events(on='.dt')
+    CK.clear_around(r)
+    # the Ram Race: a finish line across the drove road below the Fleece Cross; the limit is the shortest walk plus slack
+    from collections import deque
+    bx, by = [e['at'] for e in r.events if e.get('name') == 'Shepherd boy'][0]
+    D = np.full((H, W), -1); D[by, bx] = 0; q = deque([(bx, by)])
+    while q:
+        x, y = q.popleft()
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            X, Y = x + dx, y + dy
+            if m.inb(X, Y) and D[Y, X] < 0 and m.cls[Y, X] in '.dt' and not m.cliff[Y, X]:
+                D[Y, X] = D[y, x] + 1; q.append((X, Y))
+    fin = [x for x in range(36, 62) if m.cls[rr_y, x] in 'dg']
+    best = min([D[rr_y, x] for x in fin if D[rr_y, x] > 0] or [60])
+    limit = int(best * 1.12) + 6
+    fin_scr = ("if $game_variables[603] == 1\n"
+               "  steps = $stats.distance_walked - $game_variables[604]\n"
+               "  ev = $game_map.events.values.find { |e| e.name == 'Shepherd boy' }\n"
+               "  $game_self_switches[[566, ev.id, 'A']] = false if ev\n"
+               "  if steps <= %d\n"
+               "    $game_variables[603] = 2\n"
+               "    pbMessage(_INTL('You reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n"
+               "    pbMessage(_INTL('Shepherd boy: ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n"
+               "    pbReceiveItem(:QUICKCLAW)\n"
+               "    pfm_set(:ram_race_won) rescue nil\n"
+               "  else\n"
+               "    $game_variables[603] = 3\n"
+               "    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind his head, pretending he has been there for hours.'))\n"
+               "  end\n"
+               "  $game_map.need_refresh = true\n"
+               "end" % limit)
+    for i, x in enumerate(fin):
+        r.events.append({'type': 'event', 'name': 'Ram Race finish %d' % (i + 1), 'at': [x, rr_y], 'pages': [
+            {'trigger': 'touch', 'through': True, 'commands': [{'script': fin_scr}]}]})
+        m.taken[rr_y, x] = True
+    print('  566 Ram Race: shortest walk %d steps, limit %d' % (best, limit))
+    r.near('pf_fleececross', 49, 30, on='.t', r=3)
+    m.fence(52, 78, 96, gaps=((60, 62),))
+    for i, (cx, cy) in enumerate(((40, 3), (34, 5), (46, 5), (32, 10), (48, 10), (35, 14), (45, 14), (40, 16))):   # the hill-fort ring
+        near_flat(r, 'fw_stone' if i % 2 else 'pf_roadstone', cx, cy, on='.t', rad=1)
+    for (x0, y0, w_, h_) in ((54, 104, 9, 5), (14, 70 - 8, 7, 4), (60, 36, 8, 5), (22, 22, 7, 4)):       # sheepfolds of drystone
+        for x in range(x0, x0 + w_):
+            for y in (y0, y0 + h_):
+                if x != x0 + w_ // 2 or y == y0:
+                    if m.free(x, y, 1, 1, on='.t') and not m.cliff[y, x] and not r.road_mask[y, x]:
+                        m.stamp('nr_wall_' + ('w' if x == x0 else 'e' if x == x0 + w_ - 1 else 'm'), x, y, mark='B')
+        for y in range(y0 + 1, y0 + h_):
+            for x in (x0, x0 + w_ - 1):
+                if m.free(x, y, 1, 1, on='.t') and not m.cliff[y, x] and not r.road_mask[y, x]: m.stamp('nr_wall_v', x, y, mark='B')
+    for n, x, y in (('pf_hayrick', 58, 100), ('pf_logbench', 56, 92), ('sh_campfire', 63, 94) if False else ('pf_well', 60, 86),
+                    ('pf_wagon', 47, 90), ('pf_shrine', 50, 30), ('pf_hayrick', 66, 40), ('nt_stonering', 24, 26)):
+        near_flat(r, n, x, y, on='.t', rad=3)
+    CK.fringe(r, CK.FRINGE['meadow'], 220, seed=1, near_forest=6)
+    CK.fringe(r, ['nt_pine_sh', 'nt_dpine_sh', 'tr_pine', 'nt_round_sh'], 70, box=(0, 0, W, 100), seed=2, near_forest=0)
+    CK.undergrowth(r, 260, seed=3)
+    CK.props(r, ['nt_boulder', 'nt_rocks_s0', 'nt_rocks_s1', 'nt_rock_big', 'nt_stump'], 40, box=(0, 0, W, 70), clump=3, seed=7)
+    CK.props(r, ['nt_log', 'nt_stump', 'nt_rocks_s1'], 16, box=(0, 70, W, H), clump=2, seed=8)
+    r.dress(trees=('tr_oak',), n_trees=0, copses=0, scatter=0)
+    r.paint(glint=0.0)
+    CK.paint_extras(r)
+    FL = K.DECOR_SH['flowers']
+    for i, (cx_, cy_, rx, ry, ks) in enumerate(((50, 70, 6, 2, (2, 6)), (24, 50, 5, 2, (8, 9)), (62, 30, 5, 2, (0, 4)), (36, 96, 6, 3, (1, 5)),
+                                                (68, 58, 4, 2, (6, 7)), (30, 22, 5, 2, (10, 11)))):
+        CK.meadow(r, cx_, cy_, rx, ry, tiles=[FL[k] for k in ks], p=0.7, seed=i)
+    for y in range(0, 26):                                                       # the first hoar on the summit grass
+        for x in range(W):
+            if m.cls[y, x] == '.' and m.L[1, y, x] == 0 and m.L[2, y, x] == 0 and r.rng.random() < 0.20 * (1 - y / 26.0):
+                m.L[1, y, x] = r.rng.choice([K.STAMPS['fw_drift0']['layers'][1][0][0], K.STAMPS['fw_drift1']['layers'][1][0][0]])
+    CK.shore(r, wet=0, wrack=0, shallows=0.05, kelp=0.0, chalk_rocks=False)
+    CK.scatter_quiet(r, 20)
+    h = head(566, "Spinners' Rise", field='MEADOW', bgm='Route 3',
+             connections=[{'dir': 'S', 'offset': 38, 'to': 120, 'to_offset': 52}, {'dir': 'N', 'offset': 42, 'to': 577, 'to_offset': 30}], tone=[0, 0, 4, 6])
+    r.write(h, '566_spinners_rise.yaml', "# Spinners' Rise (566). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.\n",
+            '/tmp/craft/566.png' if PREV else None)
+
+
+BUILD[566] = build_566

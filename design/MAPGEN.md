@@ -589,12 +589,12 @@ A = that standard, F = stock FRLG tiles or bare). Ch3: 541 Grey Saltings B, 544/
 template), 542 Brinewife's Rest C, 552 Dyers' Ford B- (the three dye bands are ruler-straight), 540 Thistledown Lea B,
 546/547 Thistledown Manor **D** (stock mansion tileset), 524 Gossamer Wood B-, 526 C, 120 Briarwick B, 121-126 C+, Loomhouse
 130-134 B- (puzzle engineer), 525 Gossamer Deepwood **D** (the old reskin: flat lattice and boxy lanes), 548 Cocoonfall B-.
-Ch4: 566 Spinners' Rise C- (routekit: repeated straight terrace bands, noise grass), 577 Frostwick Pass C+, 570 Frostwick B,
+Ch4: **566 Spinners' Rise C- -> B-** (was routekit: repeated straight terrace bands, noise grass), 577 Frostwick Pass C+, 570 Frostwick B,
 571-576 C+, **578 Rimewood Path D -> B**, 562 The Rimewood C, 563 Glade C, **561 Gullcry Cliffs D -> B-**, 564 Gullcry Caves
 **F** (stock Rock Cave), 565 not built, 560 Causeway C+, 568 Rehearsal B-, 160 Ebbmouth B, 167 Mill Quay B-, 161-165/168 C,
 **170-174 Tidelock Gym F** (stock Harbour/Gym tiles, bare grey basins; GYM_PUZZLES also wants its puzzle trimmed and rebuilt).
 Ch5 (580-595, Lumen 180-193, Gym 4) is not built. Worst left, in order: Tidelock Gym; the three caves (544, 545, 564; they need
-a PF cave sheet, see below); 546/547; 525; 566. Before/after: `maps_out/previews/ch2_4_compare/`.
+a PF cave sheet, see below); 546/547; 525; 562/563 (C). Before/after: `maps_out/previews/ch2_4_compare/`.
 - **578 Rimewood Path** (`routes_craft.build_578`): three snow terraces with stairs, the Long Ice (the Hoar Brook frozen
   straight under the crag: step on by the stair and slide west to the frozen fall and the charcoal burners; an ice-block
   stopper drops the lower row at the snare nook), the Silk-fall glade behind a **frozen silk curtain** (Rock Smash:
@@ -608,6 +608,11 @@ a PF cave sheet, see below); 546/547; 525; 566. Before/after: `maps_out/previews
   north, both cave mouths re-seated at the crag feet (564's arrivals follow the links), the Gannet Stair to the isolated
   rookery cove (Cramorant: Big Pearl), Kestrel (K2) in a one-tile gap between two tors. Connections and offsets unchanged
   (N x 10-13 -> 160, S x 10-13 -> 562). Trial anchors for Old Asta and the egg ledge moved in `trial_overlay.py`.
+- **566 Spinners' Rise** (`routes_craft.build_566`; routes_early's version is no longer dispatched): ragged fell
+  terraces with stairs, the summit crag and an east tor, the cold spring -> sheep-wash pool -> the Shearing fall (a real
+  two-wide waterfall off level 2, stepping stones at its foot), drystone sheepfolds, the hill-fort ring of standing
+  stones, drove-slides (one-way ledges) where the road doubles back, denser woods and fringe. Every map builder 9 event
+  and the Ram Race (finish line, step limit) are unchanged.
 - **577**: the Icium Z (SPINE Rev 23) in an avalanche gully in the east wood behind a Rock Smash boulder (event from
   `trial_overlay.py` EVENTS[577], gate-proved).
 - **Kit:** `gdraw.pieces()` gained (at its end) `lgs_w/m/e` snow ledges (`CK.ledge(face='snow')`), `gd_sheen0-3`,

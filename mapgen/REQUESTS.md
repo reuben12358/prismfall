@@ -1284,7 +1284,8 @@ maps carry none. Add them to PBS and tell the map builder where they belong (578
 **For the distribution agent:** 578's Stantler stag is `WildBattle.start(:STANTLER, 19)` once (self switch A).
 **Not done (next map builder, worst first):** Tidelock Gym 170-174 (stock tiles; GYM_PUZZLES' trimmed design), the caves
 544/545/564 (stock Rock Cave: needs a PF cave sheet built like tileset 54, or caves drawn from the `shs` cliff kit on a dark
-floor), Thistledown Manor 546/547 (stock mansion), 525 Deepwood, 566 Spinners' Rise.
+floor), Thistledown Manor 546/547 (stock mansion), 525 Deepwood, 562/563 the Rimewood and Glade. 566 Spinners' Rise was
+recrafted after job 3 (Ram Race unchanged: shortest walk 60 steps, limit 73).
 
 **Job 3 (the Glass Dunes look, map builder 12):** glass redrawn (black-green, specular streaks, sky in the polish, crystal
 shards and spires; MAPGEN 2o), dune slides become glass lips on glass, 926's open sand glassed, 925's west half (frozen

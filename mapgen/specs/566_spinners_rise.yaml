@@ -1,4 +1,4 @@
-# Spinners' Rise (566). WRITTEN BY layouts/routes_early.py - edit that script.
+# Spinners' Rise (566). WRITTEN BY layouts/routes_craft.py (map builder 12) - edit that script.
 id: 566
 name: Spinners' Rise
 parent: 0
@@ -49,7 +49,7 @@ events:
         is in charge.']
 - type: event
   name: Third cottage
-  at: [71, 90]
+  at: [71, 91]
   pages:
   - trigger: action
     commands:
@@ -58,7 +58,7 @@ events:
     - {heal: true}
 - type: event
   name: Shepherd boy
-  at: [56, 77]
+  at: [56, 78]
   pages:
   - graphic: {sprite: NPC 05, dir: down}
     trigger: action
@@ -80,7 +80,7 @@ events:
     commands: []
 - type: event
   name: Skiddo
-  at: [57, 77]
+  at: [57, 78]
   pages:
   - graphic: {sprite: Followers/SKIDDO, dir: down}
     trigger: action
@@ -126,7 +126,7 @@ events:
   - trigger: action
     commands: ['Behind the little fall at the sheep-wash, the rock goes back further than it should. The shepherds say nothing. Shepherds never do.']
 - type: item
-  at: [15, 62]
+  at: [15, 61]
   item: SOFTSAND
 - type: event
   name: Wooloo (lost lamb)
@@ -143,7 +143,7 @@ events:
   at: [24, 40]
   item: SUPERPOTION
 - type: item
-  at: [70, 18]
+  at: [70, 20]
   item: REPEL
 - type: item
   at: [36, 10]
@@ -151,7 +151,7 @@ events:
   hidden: true
   name: HiddenItem (hill fort)
 - type: berry
-  at: [64, 94]
+  at: [64, 93]
   berry: ASPEARBERRY
 - type: event
   name: Ram Race finish 1
@@ -161,7 +161,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -174,7 +174,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -187,7 +187,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -200,7 +200,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -213,7 +213,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -226,7 +226,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
@@ -239,7 +239,7 @@ events:
     through: true
     commands:
     - {script: "if $game_variables[603] == 1\n  steps = $stats.distance_walked - $game_variables[604]\n  ev = $game_map.events.values.find { |e| e.name\
-        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 114\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
+        \ == 'Shepherd boy' }\n  $game_self_switches[[566, ev.id, 'A']] = false if ev\n  if steps <= 73\n    $game_variables[603] = 2\n    pbMessage(_INTL('You\
         \ reach the Fleece Cross first! A moment later the Skiddo skids up in a spray of gravel, and the boy stares.'))\n    pbMessage(_INTL('Shepherd boy:\
         \ ...You took the drove road. Nobody takes the drove road. Here, you won it fair.'))\n    pbReceiveItem(:QUICKCLAW)\n    pfm_set(:ram_race_won)\
         \ rescue nil\n  else\n    $game_variables[603] = 3\n    pbMessage(_INTL('The boy is already at the cross, lying in the grass with his hands behind\
